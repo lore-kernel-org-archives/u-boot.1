@@ -4,103 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03DAAC4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 13:19:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73EF6C4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 13:19:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 388EF886E9;
-	Thu,  2 May 2024 15:18:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 59D3888BEB;
+	Thu,  2 May 2024 15:18:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FoMFr8Q7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eFVZf4Sd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C51B983333; Thu,  2 May 2024 13:10:21 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 0BF5888C35; Thu,  2 May 2024 13:11:02 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 142E588BFF
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 13:10:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4872B88C26
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 13:10:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-a5878caeb9eso957405866b.1
- for <u-boot@lists.denx.de>; Thu, 02 May 2024 04:10:19 -0700 (PDT)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a58fc650f8fso532604566b.1
+ for <u-boot@lists.denx.de>; Thu, 02 May 2024 04:10:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1714648218; x=1715253018; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SvydH626qJBXxsMHYnMtHSCVm7xjB3S3SLe38m1hZQk=;
- b=FoMFr8Q7cPCVEUyDOuhwuLHT+8b5oT/R41BNH+gCJ/ZYiYCJwvEfa0ncWbLs7+uZeL
- ckpmsyhI3g0Vse2vbTDGtByc66Tj/CHxIkOeBSI4d8qcwCfsUT7K1rrZz9AlNbdPgEb7
- MwWhPlmSSHzq3H5bqJxANCvMBpzOMpyC++1g8yi3hrdl+0g5VO4iEdL4zmRSMn0Y83dM
- nocybx48f7/J6BRIbvEzVGE9dVXovFopX2wfcfGtFhdvxGe3lSX5jvTTv/HvNhoT/LYN
- giA4NUtn0JkB0OtYHj8NygSlhBgMy5hubv3zzpuQkOKpQRSLT6GnaLWOH2DAoWQWZ1FZ
- 0xPw==
+ d=gmail.com; s=20230601; t=1714648259; x=1715253059; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=drTZED9xwYHV9TnpTl8A2VXXEZmWOkK76ClyvVcfEk4=;
+ b=eFVZf4SdQwzVDb16yLaap5d3BswSpo4RFKGbO0doySRMWCxTkzXpw0vMrr1IMTuWWg
+ RKtwHQb0l0xNSqOTSC3BAhi+wp5zDx/VOpE5shd7XpqWcJeIhk5pYhfp64pw1WhiIXaw
+ 6JEkLlv8FXWDjqdlmF5AjbzYSHKVURsrkLDABhRK8gD39AQfGQofnEiK0WveTTrFtJ37
+ FHAORIKqGz8XndK/htS+6Jf8g0Fu4CynkUAMu0IVXIkfe75fv/xwgUHJf+cGZxBABtuv
+ GaGlVO/p9nLyFmUoZJ/9BrhnshRmawXGJnkaygyhj81rnfzRF3xYgH+kNqe49VbHMrA/
+ SstQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714648218; x=1715253018;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=SvydH626qJBXxsMHYnMtHSCVm7xjB3S3SLe38m1hZQk=;
- b=lJty3FqR10mDN+VF2BF8amGeNfFozh0+qusjm523/ecpjvfQ8XQUQrnA6rR3foZCEa
- aDDDUEo895F2wUHbvagRDeeOOrVWM6up87reNtHQUbf4DtH8zYhiVlFdnCmHWibgyIvX
- WHr+Rr8UmFrseoMIlNaTFED9yls/ZnbDaQGtMZT+n8T27wTpz47hIRPjiUmF+U5xF549
- tuPm+A+znSoD6qkhFKEABuB4Q5kzrTPUolRsbeyjNgyefAbM4hIcceeGke8OZdyQFM1f
- CgPjLz7SEgUbqgAzVKa6s9QvObXHgo7iFush2z9QRcPsB219IpIa0SnE4Zkef5Ch7xF3
- oJAQ==
-X-Gm-Message-State: AOJu0YzQZyN6h3KUWOnGrMcVbiU+rFqACRwIsxAaSsy3oIbkcb41yeeA
- KiCXslNktYuWG5k4hQGZOHAe3un14HJERWWL9fKdb1VFMaKKxiAhiQnMtdwKRAugruoBbiTt+MV
- 9e2u4wUfke2cUR4cK/neQyXzfAlc=
-X-Google-Smtp-Source: AGHT+IEFHVB5BybaNvK1tHxYZhQGXCby+bEgVA044yPRi6TYFTNuezQdPc1KNHPpk0yiunc/CfXc/U9OaUpHVxnoggw=
-X-Received: by 2002:a50:d741:0:b0:568:7c01:a4a2 with SMTP id
- i1-20020a50d741000000b005687c01a4a2mr3830916edj.13.1714648218110; Thu, 02 May
- 2024 04:10:18 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1714648259; x=1715253059;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=drTZED9xwYHV9TnpTl8A2VXXEZmWOkK76ClyvVcfEk4=;
+ b=fDKWGBZQuvgUqw6FUCDOeZWf2kNrnF47aW6cenGIwTNgwd5mPin+chVBwlbX0us+wP
+ 4AjveHoSTvDGSQw+HLotfYvSRUjWrDywvtxT5rL/1LX74a32hNaTTpFQfCMuOcFENBVZ
+ A4qGxfgKlVYyD3zdWxZwPYl7OfgSg3cwqOwASZEXSoYeqwJMJUFlQRggUvnXsJtrzGEE
+ 9j9RA16m9K+mgevPTu3Q3od9RThH7qpimZT9r1NAhhB6ulafZ/n3s16Yi5CSThvQ0nvO
+ bUZs1PM3vuxhSCUsL78wupB4qBlK1o4oXO0+1B8lMv64u/qxaiy9C6Xix0XJmW025b8D
+ MNyQ==
+X-Gm-Message-State: AOJu0YyM0ZQbESGNtnYuP34r6Zgt2SSNFYsTKJ2pIAd6S/HGWFYg4lO4
+ SybXVC5ADfFz6G2tTNNDfFYucdVBEH2h8dBPK2NodTNjmjktHhEuDIFD8fh9T/KNTt4Dz/4sR+3
+ O7qTrd246qLSVq0Fukox1tnrkLgA=
+X-Google-Smtp-Source: AGHT+IGNC1psidkEemAz0jnYcye4gV8/BQMUCHTeAAZei0i48PjaafuVOBarXji1DhfGWy5wA+gUehbAy7Mn9Nd7wX8=
+X-Received: by 2002:a50:d716:0:b0:572:a4eb:6682 with SMTP id
+ t22-20020a50d716000000b00572a4eb6682mr3464307edi.30.1714648258492; Thu, 02
+ May 2024 04:10:58 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240502013138.2383421-1-trini@konsulko.com>
- <20240502013138.2383421-33-trini@konsulko.com>
-In-Reply-To: <20240502013138.2383421-33-trini@konsulko.com>
+ <20240502013138.2383421-42-trini@konsulko.com>
+In-Reply-To: <20240502013138.2383421-42-trini@konsulko.com>
 From: Peter Robinson <pbrobinson@gmail.com>
-Date: Thu, 2 May 2024 12:10:06 +0100
-Message-ID: <CALeDE9OfFYJrbgkQL9O_zCKTQW6SBmNODNj-E=1zOGP8iJFa1Q@mail.gmail.com>
-Subject: Re: [PATCH 33/81] gpio: Remove <common.h> and add needed includes
+Date: Thu, 2 May 2024 12:10:47 +0100
+Message-ID: <CALeDE9OGhyEf2VCbj4e+2-kYQon66ePR+9gmVRfYDAyG2Wx-+Q@mail.gmail.com>
+Subject: Re: [PATCH 42/81] mmc: Remove <common.h> and add needed includes
 To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Matthias Brugger <mbrugger@suse.com>, 
- Alex Nemirovsky <alex.nemirovsky@cortina-access.com>,
- Ryan Chen <ryan_chen@aspeedtech.com>, 
+Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Ryan Chen <ryan_chen@aspeedtech.com>, 
  Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
  Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
- Joel Stanley <joel@jms.id.au>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
+ Joel Stanley <joel@jms.id.au>, Matthias Brugger <mbrugger@suse.com>, 
+ Thomas Fitzsimmons <fitzsim@fitzsim.org>,
+ Alex Nemirovsky <alex.nemirovsky@cortina-access.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Caleb Connolly <caleb.connolly@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Tianrui Wei <tianrui-wei@outlook.com>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Dai Okamura <okamura.dai@socionext.com>, 
- Michal Simek <michal.simek@amd.com>,
  Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, 
- Gregory CLEMENT <gregory.clement@bootlin.com>,
- Lars Povlsen <lars.povlsen@microchip.com>, 
- Horatiu Vultur <horatiu.vultur@microchip.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
- Stefan Roese <sr@denx.de>, Stephan Gerhold <stephan@gerhold.net>, 
- Linus Walleij <linus.walleij@linaro.org>, Stefan Bosch <stefan_b@posteo.net>, 
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, Michael Walle <michael@walle.cc>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Thierry Reding <treding@nvidia.com>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Sean Anderson <seanga2@gmail.com>, 
- Andre Przywara <andre.przywara@arm.com>, Qu Wenruo <wqu@suse.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Heiko Schocher <hs@denx.de>,
- Peng Fan <peng.fan@nxp.com>, Bin Meng <bmeng.cn@gmail.com>,
- Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>, 
- Jim Liu <jim.t90615@gmail.com>, Nishanth Menon <nm@ti.com>,
- Samuel Holland <samuel@sholland.org>, Sam Edwards <CFSworks@gmail.com>
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, 
+ Dai Okamura <okamura.dai@socionext.com>, Stefan Roese <sr@denx.de>, 
+ Michal Simek <michal.simek@amd.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Thu, 02 May 2024 15:17:58 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -126,891 +120,878 @@ On Thu, 2 May 2024 at 02:32, Tom Rini <trini@konsulko.com> wrote:
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 
-Looks fine to me.
+Looks good.
 
 > ---
+> Cc: Peng Fan <peng.fan@nxp.com>
+> Cc: Jaehoon Chung <jh80.chung@samsung.com>
 > Cc: Tom Rini <trini@konsulko.com>
-> Cc: Matthias Brugger <mbrugger@suse.com>
-> Cc: Peter Robinson <pbrobinson@gmail.com>
-> Cc: Alex Nemirovsky <alex.nemirovsky@cortina-access.com>
 > Cc: Ryan Chen <ryan_chen@aspeedtech.com>
 > Cc: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
 > Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>
 > Cc: Joel Stanley <joel@jms.id.au>
-> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> Cc: Kunihiko Hayashi <hayashi.kunihiko@socionext.com>
-> Cc: Dai Okamura <okamura.dai@socionext.com>
-> Cc: Michal Simek <michal.simek@amd.com>
-> Cc: Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>
-> Cc: Gregory CLEMENT <gregory.clement@bootlin.com>
-> Cc: Lars Povlsen <lars.povlsen@microchip.com>
-> Cc: Horatiu Vultur <horatiu.vultur@microchip.com>
-> Cc: Caleb Connolly <caleb.connolly@linaro.org>
+> Cc: Matthias Brugger <mbrugger@suse.com>
+> Cc: Peter Robinson <pbrobinson@gmail.com>
+> Cc: Thomas Fitzsimmons <fitzsim@fitzsim.org>
+> Cc: Alex Nemirovsky <alex.nemirovsky@cortina-access.com>
+> Cc: Masahisa Kojima <kojima.masahisa@socionext.com>
 > Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> Cc: Sumit Garg <sumit.garg@linaro.org>
-> Cc: Stefan Roese <sr@denx.de>
-> Cc: Stephan Gerhold <stephan@gerhold.net>
-> Cc: Linus Walleij <linus.walleij@linaro.org>
-> Cc: Stefan Bosch <stefan_b@posteo.net>
 > Cc: Simon Glass <sjg@chromium.org>
+> Cc: Caleb Connolly <caleb.connolly@linaro.org>
+> Cc: Sumit Garg <sumit.garg@linaro.org>
+> Cc: Ryder Lee <ryder.lee@mediatek.com>
+> Cc: Weijie Gao <weijie.gao@mediatek.com>
+> Cc: Chunfeng Yun <chunfeng.yun@mediatek.com>
+> Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
+> Cc: Tianrui Wei <tianrui-wei@outlook.com>
 > Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
 > Cc: Kever Yang <kever.yang@rock-chips.com>
-> Cc: Michael Walle <michael@walle.cc>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> Cc: Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>
 > Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > Cc: Thierry Reding <treding@nvidia.com>
 > Cc: Svyatoslav Ryhel <clamor95@gmail.com>
-> Cc: Sean Anderson <seanga2@gmail.com>
-> Cc: Andre Przywara <andre.przywara@arm.com>
-> Cc: Qu Wenruo <wqu@suse.com>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Heiko Schocher <hs@denx.de>
-> Cc: Peng Fan <peng.fan@nxp.com>
-> Cc: Bin Meng <bmeng.cn@gmail.com>
-> Cc: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
-> Cc: Jim Liu <jim.t90615@gmail.com>
-> Cc: Nishanth Menon <nm@ti.com>
-> Cc: Samuel Holland <samuel@sholland.org>
-> Cc: Sam Edwards <CFSworks@gmail.com>
+> Cc: Kunihiko Hayashi <hayashi.kunihiko@socionext.com>
+> Cc: Dai Okamura <okamura.dai@socionext.com>
+> Cc: Stefan Roese <sr@denx.de>
+> Cc: Michal Simek <michal.simek@amd.com>
 > ---
->  drivers/gpio/74x164_gpio.c          | 1 -
->  drivers/gpio/altera_pio.c           | 1 -
->  drivers/gpio/at91_gpio.c            | 1 -
->  drivers/gpio/atmel_pio4.c           | 1 -
->  drivers/gpio/axp_gpio.c             | 1 -
->  drivers/gpio/bcm2835_gpio.c         | 1 -
->  drivers/gpio/bcm6345_gpio.c         | 1 -
->  drivers/gpio/cortina_gpio.c         | 1 -
->  drivers/gpio/da8xx_gpio.c           | 1 -
->  drivers/gpio/ftgpio010.c            | 1 -
->  drivers/gpio/gpio-aspeed.c          | 1 -
->  drivers/gpio/gpio-fxl6408.c         | 1 -
->  drivers/gpio/gpio-rcar.c            | 1 -
->  drivers/gpio/gpio-rza1.c            | 1 -
->  drivers/gpio/gpio-uclass.c          | 1 -
->  drivers/gpio/gpio-uniphier.c        | 1 -
->  drivers/gpio/gpio_slg7xl45106.c     | 1 -
->  drivers/gpio/hi6220_gpio.c          | 1 -
->  drivers/gpio/hsdk-creg-gpio.c       | 1 -
->  drivers/gpio/imx_rgpio2p.c          | 1 -
->  drivers/gpio/intel_broadwell_gpio.c | 1 -
->  drivers/gpio/intel_gpio.c           | 1 -
->  drivers/gpio/intel_ich6_gpio.c      | 1 -
->  drivers/gpio/iproc_gpio.c           | 1 -
->  drivers/gpio/kw_gpio.c              | 1 -
->  drivers/gpio/lpc32xx_gpio.c         | 1 -
->  drivers/gpio/max7320_gpio.c         | 1 -
->  drivers/gpio/mcp230xx_gpio.c        | 1 -
->  drivers/gpio/mpc83xx_spisel_boot.c  | 1 -
->  drivers/gpio/mpc8xx_gpio.c          | 1 -
->  drivers/gpio/mpc8xxx_gpio.c         | 1 -
->  drivers/gpio/mscc_sgpio.c           | 1 -
->  drivers/gpio/msm_gpio.c             | 1 -
->  drivers/gpio/mt7621_gpio.c          | 1 -
->  drivers/gpio/mvebu_gpio.c           | 1 -
->  drivers/gpio/mxc_gpio.c             | 1 -
->  drivers/gpio/mxs_gpio.c             | 1 -
->  drivers/gpio/nmk_gpio.c             | 1 -
->  drivers/gpio/npcm_gpio.c            | 1 -
->  drivers/gpio/nx_gpio.c              | 1 -
->  drivers/gpio/omap_gpio.c            | 1 -
->  drivers/gpio/pca953x.c              | 3 ++-
->  drivers/gpio/pca953x_gpio.c         | 1 -
->  drivers/gpio/pcf8575_gpio.c         | 1 -
->  drivers/gpio/pic32_gpio.c           | 1 -
->  drivers/gpio/qcom_pmic_gpio.c       | 1 -
->  drivers/gpio/qe_gpio.c              | 1 -
->  drivers/gpio/rk_gpio.c              | 1 -
->  drivers/gpio/s5p_gpio.c             | 1 -
->  drivers/gpio/sandbox.c              | 1 -
->  drivers/gpio/sandbox_test.c         | 1 -
->  drivers/gpio/sh_pfc.c               | 1 -
->  drivers/gpio/sifive-gpio.c          | 1 -
->  drivers/gpio/sl28cpld-gpio.c        | 1 -
->  drivers/gpio/stm32_gpio.c           | 1 -
->  drivers/gpio/sunxi_gpio.c           | 1 -
->  drivers/gpio/tca642x.c              | 2 +-
->  drivers/gpio/tegra186_gpio.c        | 1 -
->  drivers/gpio/tegra_gpio.c           | 1 -
->  drivers/gpio/vybrid_gpio.c          | 1 -
->  drivers/gpio/xilinx_gpio.c          | 1 -
->  drivers/gpio/zynq_gpio.c            | 1 -
->  drivers/gpio/zynqmp_gpio_modepin.c  | 1 -
->  63 files changed, 3 insertions(+), 63 deletions(-)
+>  drivers/mmc/am654_sdhci.c     | 1 -
+>  drivers/mmc/arm_pl180_mmci.c  | 1 -
+>  drivers/mmc/aspeed_sdhci.c    | 1 -
+>  drivers/mmc/atmel_sdhci.c     | 1 -
+>  drivers/mmc/bcm2835_sdhci.c   | 1 -
+>  drivers/mmc/bcm2835_sdhost.c  | 1 -
+>  drivers/mmc/bcmstb_sdhci.c    | 1 -
+>  drivers/mmc/ca_dw_mmc.c       | 1 -
+>  drivers/mmc/davinci_mmc.c     | 1 -
+>  drivers/mmc/dw_mmc.c          | 1 -
+>  drivers/mmc/exynos_dw_mmc.c   | 1 -
+>  drivers/mmc/f_sdh30.c         | 1 -
+>  drivers/mmc/fsl_esdhc.c       | 1 -
+>  drivers/mmc/fsl_esdhc_imx.c   | 1 -
+>  drivers/mmc/fsl_esdhc_spl.c   | 2 +-
+>  drivers/mmc/ftsdc010_mci.c    | 1 -
+>  drivers/mmc/gen_atmel_mci.c   | 2 +-
+>  drivers/mmc/hi6220_dw_mmc.c   | 1 -
+>  drivers/mmc/iproc_sdhci.c     | 1 -
+>  drivers/mmc/jz_mmc.c          | 1 -
+>  drivers/mmc/kona_sdhci.c      | 1 -
+>  drivers/mmc/meson_gx_mmc.c    | 1 -
+>  drivers/mmc/mmc-pwrseq.c      | 1 -
+>  drivers/mmc/mmc-uclass.c      | 1 -
+>  drivers/mmc/mmc.c             | 3 ++-
+>  drivers/mmc/mmc_boot.c        | 1 -
+>  drivers/mmc/mmc_bootdev.c     | 1 -
+>  drivers/mmc/mmc_legacy.c      | 1 -
+>  drivers/mmc/mmc_spi.c         | 1 -
+>  drivers/mmc/mmc_write.c       | 1 -
+>  drivers/mmc/msm_sdhci.c       | 1 -
+>  drivers/mmc/mtk-sd.c          | 1 -
+>  drivers/mmc/mv_sdhci.c        | 1 -
+>  drivers/mmc/mvebu_mmc.c       | 1 -
+>  drivers/mmc/mxcmmc.c          | 1 -
+>  drivers/mmc/mxsmmc.c          | 1 -
+>  drivers/mmc/nexell_dw_mmc.c   | 1 -
+>  drivers/mmc/npcm_sdhci.c      | 1 -
+>  drivers/mmc/omap_hsmmc.c      | 1 -
+>  drivers/mmc/owl_mmc.c         | 1 -
+>  drivers/mmc/pci_mmc.c         | 1 -
+>  drivers/mmc/piton_mmc.c       | 1 -
+>  drivers/mmc/rockchip_dw_mmc.c | 1 -
+>  drivers/mmc/rockchip_sdhci.c  | 1 -
+>  drivers/mmc/rpmb.c            | 1 -
+>  drivers/mmc/s5p_sdhci.c       | 1 -
+>  drivers/mmc/sandbox_mmc.c     | 1 -
+>  drivers/mmc/sdhci-adma.c      | 1 -
+>  drivers/mmc/sdhci-cadence.c   | 1 -
+>  drivers/mmc/sdhci.c           | 2 +-
+>  drivers/mmc/sh_mmcif.c        | 1 -
+>  drivers/mmc/snps_dw_mmc.c     | 1 -
+>  drivers/mmc/socfpga_dw_mmc.c  | 1 -
+>  drivers/mmc/sti_sdhci.c       | 1 -
+>  drivers/mmc/stm32_sdmmc2.c    | 1 -
+>  drivers/mmc/sunxi_mmc.c       | 1 -
+>  drivers/mmc/tangier_sdhci.c   | 1 -
+>  drivers/mmc/tegra_mmc.c       | 1 -
+>  drivers/mmc/tmio-common.c     | 1 -
+>  drivers/mmc/uniphier-sd.c     | 1 -
+>  drivers/mmc/xenon_sdhci.c     | 1 -
+>  drivers/mmc/zynq_sdhci.c      | 1 -
+>  62 files changed, 5 insertions(+), 62 deletions(-)
 >
-> diff --git a/drivers/gpio/74x164_gpio.c b/drivers/gpio/74x164_gpio.c
-> index 7a7cfe86114b..331428ccdb9a 100644
-> --- a/drivers/gpio/74x164_gpio.c
-> +++ b/drivers/gpio/74x164_gpio.c
-> @@ -8,7 +8,6 @@
+> diff --git a/drivers/mmc/am654_sdhci.c b/drivers/mmc/am654_sdhci.c
+> index ffb461c2f6c1..48fac7a11b48 100644
+> --- a/drivers/mmc/am654_sdhci.c
+> +++ b/drivers/mmc/am654_sdhci.c
+> @@ -6,7 +6,6 @@
+>   */
+>
+>  #include <clk.h>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <malloc.h>
+>  #include <mmc.h>
+> diff --git a/drivers/mmc/arm_pl180_mmci.c b/drivers/mmc/arm_pl180_mmci.c
+> index cecc7ad783d0..f00b0ff0dc95 100644
+> --- a/drivers/mmc/arm_pl180_mmci.c
+> +++ b/drivers/mmc/arm_pl180_mmci.c
+> @@ -11,7 +11,6 @@
+>
+>  /* #define DEBUG */
+>
+> -#include "common.h"
+>  #include <clk.h>
+>  #include <errno.h>
+>  #include <log.h>
+> diff --git a/drivers/mmc/aspeed_sdhci.c b/drivers/mmc/aspeed_sdhci.c
+> index c9626c6beb8f..87a6f66ebb37 100644
+> --- a/drivers/mmc/aspeed_sdhci.c
+> +++ b/drivers/mmc/aspeed_sdhci.c
+> @@ -4,7 +4,6 @@
+>   * Eddie James <eajames@linux.ibm.com>
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <dm.h>
+>  #include <malloc.h>
+> diff --git a/drivers/mmc/atmel_sdhci.c b/drivers/mmc/atmel_sdhci.c
+> index d92bad97b71e..0b265196f025 100644
+> --- a/drivers/mmc/atmel_sdhci.c
+> +++ b/drivers/mmc/atmel_sdhci.c
+> @@ -4,7 +4,6 @@
+>   *                   Wenyou.Yang <wenyou.yang@atmel.com>
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <dm.h>
+>  #include <malloc.h>
+> diff --git a/drivers/mmc/bcm2835_sdhci.c b/drivers/mmc/bcm2835_sdhci.c
+> index 5e48394fd0fb..598a51d914a9 100644
+> --- a/drivers/mmc/bcm2835_sdhci.c
+> +++ b/drivers/mmc/bcm2835_sdhci.c
+> @@ -36,7 +36,6 @@
+>   * Inspired by sdhci-pci.c, by Pierre Ossman
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <log.h>
+>  #include <malloc.h>
+> diff --git a/drivers/mmc/bcm2835_sdhost.c b/drivers/mmc/bcm2835_sdhost.c
+> index 5c23c03d10d7..720127468d37 100644
+> --- a/drivers/mmc/bcm2835_sdhost.c
+> +++ b/drivers/mmc/bcm2835_sdhost.c
+> @@ -30,7 +30,6 @@
+>   *  sdhci.c and sdhci-pci.c by Pierre Ossman
+>   */
+>  #include <clk.h>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <mmc.h>
+>  #include <asm/arch/msg.h>
+> diff --git a/drivers/mmc/bcmstb_sdhci.c b/drivers/mmc/bcmstb_sdhci.c
+> index 49846adcf547..7bddbebb1622 100644
+> --- a/drivers/mmc/bcmstb_sdhci.c
+> +++ b/drivers/mmc/bcmstb_sdhci.c
+> @@ -6,7 +6,6 @@
+>   * Author: Thomas Fitzsimmons <fitzsim@fitzsim.org>
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <mach/sdhci.h>
+>  #include <malloc.h>
+> diff --git a/drivers/mmc/ca_dw_mmc.c b/drivers/mmc/ca_dw_mmc.c
+> index a17ed8c11cbe..54a2ba4795e3 100644
+> --- a/drivers/mmc/ca_dw_mmc.c
+> +++ b/drivers/mmc/ca_dw_mmc.c
+> @@ -4,7 +4,6 @@
+>   * Arthur Li <arthur.li@cortina-access.com>
+>   */
+>
+> -#include <common.h>
+>  #include <dwmmc.h>
+>  #include <fdtdec.h>
+>  #include <asm/global_data.h>
+> diff --git a/drivers/mmc/davinci_mmc.c b/drivers/mmc/davinci_mmc.c
+> index 3a3d23aec00a..5107fcd83625 100644
+> --- a/drivers/mmc/davinci_mmc.c
+> +++ b/drivers/mmc/davinci_mmc.c
+> @@ -6,7 +6,6 @@
+>   */
+>
+>  #include <config.h>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <errno.h>
+>  #include <mmc.h>
+> diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
+> index e1036641452a..e6107c770fe3 100644
+> --- a/drivers/mmc/dw_mmc.c
+> +++ b/drivers/mmc/dw_mmc.c
+> @@ -6,7 +6,6 @@
+>   */
+>
+>  #include <bouncebuf.h>
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <errno.h>
+>  #include <log.h>
+> diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
+> index 2f849c43b129..a51f762988da 100644
+> --- a/drivers/mmc/exynos_dw_mmc.c
+> +++ b/drivers/mmc/exynos_dw_mmc.c
+> @@ -4,7 +4,6 @@
+>   * Jaehoon Chung <jh80.chung@samsung.com>
+>   */
+>
+> -#include <common.h>
+>  #include <dwmmc.h>
+>  #include <fdtdec.h>
+>  #include <asm/global_data.h>
+> diff --git a/drivers/mmc/f_sdh30.c b/drivers/mmc/f_sdh30.c
+> index 3d587a464d50..f47cf8485216 100644
+> --- a/drivers/mmc/f_sdh30.c
+> +++ b/drivers/mmc/f_sdh30.c
+> @@ -5,7 +5,6 @@
+>   * Copyright 2021 Socionext, Inc.
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <dm.h>
+>  #include <malloc.h>
+> diff --git a/drivers/mmc/fsl_esdhc.c b/drivers/mmc/fsl_esdhc.c
+> index 5ac1c6a0e9e1..0c66980b6218 100644
+> --- a/drivers/mmc/fsl_esdhc.c
+> +++ b/drivers/mmc/fsl_esdhc.c
+> @@ -10,7 +10,6 @@
+>   */
+>
+>  #include <config.h>
+> -#include <common.h>
+>  #include <command.h>
+>  #include <cpu_func.h>
+>  #include <errno.h>
+> diff --git a/drivers/mmc/fsl_esdhc_imx.c b/drivers/mmc/fsl_esdhc_imx.c
+> index 8b2ef9391f3e..a9b8d7dd67f3 100644
+> --- a/drivers/mmc/fsl_esdhc_imx.c
+> +++ b/drivers/mmc/fsl_esdhc_imx.c
+> @@ -11,7 +11,6 @@
+>   */
+>
+>  #include <config.h>
+> -#include <common.h>
+>  #include <command.h>
+>  #include <clk.h>
+>  #include <cpu_func.h>
+> diff --git a/drivers/mmc/fsl_esdhc_spl.c b/drivers/mmc/fsl_esdhc_spl.c
+> index 6d7c0cff22a5..1a11258be4de 100644
+> --- a/drivers/mmc/fsl_esdhc_spl.c
+> +++ b/drivers/mmc/fsl_esdhc_spl.c
+> @@ -3,7 +3,7 @@
+>   * Copyright 2013 Freescale Semiconductor, Inc.
+>   */
+>
+> -#include <common.h>
+> +#include <config.h>
+>  #include <cpu_func.h>
+>  #include <hang.h>
+>  #include <mmc.h>
+> diff --git a/drivers/mmc/ftsdc010_mci.c b/drivers/mmc/ftsdc010_mci.c
+> index cabb747fbbdb..11e44264e47d 100644
+> --- a/drivers/mmc/ftsdc010_mci.c
+> +++ b/drivers/mmc/ftsdc010_mci.c
+> @@ -9,7 +9,6 @@
+>   * Author: Rick Chen (rick@andestech.com)
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <log.h>
+>  #include <malloc.h>
+> diff --git a/drivers/mmc/gen_atmel_mci.c b/drivers/mmc/gen_atmel_mci.c
+> index 3ee99558f6f9..6a531fa09615 100644
+> --- a/drivers/mmc/gen_atmel_mci.c
+> +++ b/drivers/mmc/gen_atmel_mci.c
+> @@ -8,7 +8,7 @@
+>   * Copyright (C) 2004-2006 Atmel Corporation
+>   */
+>
+> -#include <common.h>
+> +#include <config.h>
+>  #include <clk.h>
+>  #include <display_options.h>
+>  #include <dm.h>
+> diff --git a/drivers/mmc/hi6220_dw_mmc.c b/drivers/mmc/hi6220_dw_mmc.c
+> index dc0210402bd2..c68a9157bfcc 100644
+> --- a/drivers/mmc/hi6220_dw_mmc.c
+> +++ b/drivers/mmc/hi6220_dw_mmc.c
+> @@ -4,7 +4,6 @@
+>   * peter.griffin <peter.griffin@linaro.org>
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <dm.h>
+>  #include <dwmmc.h>
+> diff --git a/drivers/mmc/iproc_sdhci.c b/drivers/mmc/iproc_sdhci.c
+> index 11d86ad658f9..7ab74ff117a6 100644
+> --- a/drivers/mmc/iproc_sdhci.c
+> +++ b/drivers/mmc/iproc_sdhci.c
+> @@ -4,7 +4,6 @@
 >   *
 >   */
 >
 > -#include <common.h>
->  #include <errno.h>
->  #include <dm.h>
->  #include <fdtdec.h>
-> diff --git a/drivers/gpio/altera_pio.c b/drivers/gpio/altera_pio.c
-> index edc5a8093b0c..7ba1595e4ae3 100644
-> --- a/drivers/gpio/altera_pio.c
-> +++ b/drivers/gpio/altera_pio.c
-> @@ -4,7 +4,6 @@
->   * Copyright (C) 2011  Missing Link Electronics
->   *                     Joachim Foerster <joachim@missinglinkelectronics.=
-com>
->   */
-> -#include <common.h>
 >  #include <dm.h>
 >  #include <errno.h>
 >  #include <malloc.h>
-> diff --git a/drivers/gpio/at91_gpio.c b/drivers/gpio/at91_gpio.c
-> index f80f4afd24ff..50a698159075 100644
-> --- a/drivers/gpio/at91_gpio.c
-> +++ b/drivers/gpio/at91_gpio.c
+> diff --git a/drivers/mmc/jz_mmc.c b/drivers/mmc/jz_mmc.c
+> index 61e48ee0f62d..fc10bb256a4d 100644
+> --- a/drivers/mmc/jz_mmc.c
+> +++ b/drivers/mmc/jz_mmc.c
+> @@ -6,7 +6,6 @@
+>   * Author: Paul Burton <paul.burton@imgtec.com>
+>   */
+>
+> -#include <common.h>
+>  #include <malloc.h>
+>  #include <mmc.h>
+>  #include <asm/global_data.h>
+> diff --git a/drivers/mmc/kona_sdhci.c b/drivers/mmc/kona_sdhci.c
+> index 2bbe673b9129..83f141226325 100644
+> --- a/drivers/mmc/kona_sdhci.c
+> +++ b/drivers/mmc/kona_sdhci.c
+> @@ -3,7 +3,6 @@
+>   * Copyright 2013 Broadcom Corporation.
+>   */
+>
+> -#include <common.h>
+>  #include <malloc.h>
+>  #include <sdhci.h>
+>  #include <linux/delay.h>
+> diff --git a/drivers/mmc/meson_gx_mmc.c b/drivers/mmc/meson_gx_mmc.c
+> index 0825c0a2a838..5852b24c6d2a 100644
+> --- a/drivers/mmc/meson_gx_mmc.c
+> +++ b/drivers/mmc/meson_gx_mmc.c
+> @@ -3,7 +3,6 @@
+>   * (C) Copyright 2016 Carlo Caione <carlo@caione.org>
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <cpu_func.h>
+>  #include <dm.h>
+> diff --git a/drivers/mmc/mmc-pwrseq.c b/drivers/mmc/mmc-pwrseq.c
+> index 2539f61323d1..a1c9624a2225 100644
+> --- a/drivers/mmc/mmc-pwrseq.c
+> +++ b/drivers/mmc/mmc-pwrseq.c
+> @@ -4,7 +4,6 @@
+>   * Jaehoon Chung <jh80.chung@samsung.com>
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <mmc.h>
+>  #include <pwrseq.h>
+> diff --git a/drivers/mmc/mmc-uclass.c b/drivers/mmc/mmc-uclass.c
+> index 0685b86af464..da6a39b7d990 100644
+> --- a/drivers/mmc/mmc-uclass.c
+> +++ b/drivers/mmc/mmc-uclass.c
+> @@ -7,7 +7,6 @@
+>
+>  #define LOG_CATEGORY UCLASS_MMC
+>
+> -#include <common.h>
+>  #include <bootdev.h>
+>  #include <log.h>
+>  #include <mmc.h>
+> diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+> index 4543d94c7205..b18dc331f785 100644
+> --- a/drivers/mmc/mmc.c
+> +++ b/drivers/mmc/mmc.c
 > @@ -8,7 +8,6 @@
 >   */
 >
 >  #include <config.h>
 > -#include <common.h>
->  #include <clk.h>
+>  #include <blk.h>
+>  #include <command.h>
 >  #include <dm.h>
+> @@ -17,6 +16,7 @@
+>  #include <errno.h>
+>  #include <mmc.h>
+>  #include <part.h>
+> +#include <time.h>
+>  #include <linux/bitops.h>
+>  #include <linux/delay.h>
+>  #include <linux/printk.h>
+> @@ -24,6 +24,7 @@
 >  #include <malloc.h>
-> diff --git a/drivers/gpio/atmel_pio4.c b/drivers/gpio/atmel_pio4.c
-> index be1dd752bf76..65d064b46dfb 100644
-> --- a/drivers/gpio/atmel_pio4.c
-> +++ b/drivers/gpio/atmel_pio4.c
-> @@ -5,7 +5,6 @@
->   * Copyright (C) 2015 Atmel Corporation
->   *              Wenyou.Yang <wenyou.yang@atmel.com>
->   */
-> -#include <common.h>
->  #include <clk.h>
->  #include <dm.h>
->  #include <fdtdec.h>
-> diff --git a/drivers/gpio/axp_gpio.c b/drivers/gpio/axp_gpio.c
-> index af6631697f58..6e632c8fc730 100644
-> --- a/drivers/gpio/axp_gpio.c
-> +++ b/drivers/gpio/axp_gpio.c
-> @@ -5,7 +5,6 @@
->   * X-Powers AXP Power Management ICs gpio driver
->   */
+>  #include <memalign.h>
+>  #include <linux/list.h>
+> +#include <linux/printk.h>
+>  #include <div64.h>
+>  #include "mmc_private.h"
 >
-> -#include <common.h>
->  #include <asm/arch/pmic_bus.h>
->  #include <asm/gpio.h>
->  #include <axp_pmic.h>
-> diff --git a/drivers/gpio/bcm2835_gpio.c b/drivers/gpio/bcm2835_gpio.c
-> index 704a6fa71210..ccf84fdae11f 100644
-> --- a/drivers/gpio/bcm2835_gpio.c
-> +++ b/drivers/gpio/bcm2835_gpio.c
+> diff --git a/drivers/mmc/mmc_boot.c b/drivers/mmc/mmc_boot.c
+> index 0a74b1fb776a..367c957b5181 100644
+> --- a/drivers/mmc/mmc_boot.c
+> +++ b/drivers/mmc/mmc_boot.c
 > @@ -4,7 +4,6 @@
->   * <vikram186@gmail.com>
+>   * Written by Amar <amarendra.xt@samsung.com>
 >   */
 >
 > -#include <common.h>
->  #include <dm.h>
->  #include <dm/pinctrl.h>
->  #include <errno.h>
-> diff --git a/drivers/gpio/bcm6345_gpio.c b/drivers/gpio/bcm6345_gpio.c
-> index e031f71a784d..e76c84e806ad 100644
-> --- a/drivers/gpio/bcm6345_gpio.c
-> +++ b/drivers/gpio/bcm6345_gpio.c
-> @@ -7,7 +7,6 @@
->   *     Copyright (C) 2008-2011 Florian Fainelli <florian@openwrt.org>
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <asm/gpio.h>
-> diff --git a/drivers/gpio/cortina_gpio.c b/drivers/gpio/cortina_gpio.c
-> index 72ef523be960..e0ea14cce696 100644
-> --- a/drivers/gpio/cortina_gpio.c
-> +++ b/drivers/gpio/cortina_gpio.c
-> @@ -5,7 +5,6 @@
->   * GPIO Driver for Cortina Access CAxxxx Line of SoCs
->   */
->
-> -#include <common.h>
->  #include <dm.h>
 >  #include <log.h>
->  #include <asm/io.h>
-> diff --git a/drivers/gpio/da8xx_gpio.c b/drivers/gpio/da8xx_gpio.c
-> index b310f2dbf651..1ccb9e69f158 100644
-> --- a/drivers/gpio/da8xx_gpio.c
-> +++ b/drivers/gpio/da8xx_gpio.c
+>  #include <mmc.h>
+>  #include "mmc_private.h"
+> diff --git a/drivers/mmc/mmc_bootdev.c b/drivers/mmc/mmc_bootdev.c
+> index 55ecead2ddf9..5a1688b75d09 100644
+> --- a/drivers/mmc/mmc_bootdev.c
+> +++ b/drivers/mmc/mmc_bootdev.c
 > @@ -6,7 +6,6 @@
->   * Laurence Withers <lwithers@guralp.com>
+>   * Written by Simon Glass <sjg@chromium.org>
 >   */
 >
 > -#include <common.h>
+>  #include <bootdev.h>
 >  #include <dm.h>
->  #include <fdtdec.h>
+>  #include <mmc.h>
+> diff --git a/drivers/mmc/mmc_legacy.c b/drivers/mmc/mmc_legacy.c
+> index a101ee43fde5..a87d2276c1b8 100644
+> --- a/drivers/mmc/mmc_legacy.c
+> +++ b/drivers/mmc/mmc_legacy.c
+> @@ -5,7 +5,6 @@
+>   * Written by Simon Glass <sjg@chromium.org>
+>   */
+>
+> -#include <common.h>
+>  #include <log.h>
 >  #include <malloc.h>
-> diff --git a/drivers/gpio/ftgpio010.c b/drivers/gpio/ftgpio010.c
-> index 6c091d4fd874..4cb550a540c6 100644
-> --- a/drivers/gpio/ftgpio010.c
-> +++ b/drivers/gpio/ftgpio010.c
-> @@ -3,7 +3,6 @@
->   * Faraday Technology's FTGPIO010 controller.
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <asm/io.h>
->  #include <asm/gpio.h>
-> diff --git a/drivers/gpio/gpio-aspeed.c b/drivers/gpio/gpio-aspeed.c
-> index 1c3d18796b3a..c5608f4a9dfc 100644
-> --- a/drivers/gpio/gpio-aspeed.c
-> +++ b/drivers/gpio/gpio-aspeed.c
+>  #include <mmc.h>
+> diff --git a/drivers/mmc/mmc_spi.c b/drivers/mmc/mmc_spi.c
+> index bcea800e5f61..675e642efd08 100644
+> --- a/drivers/mmc/mmc_spi.c
+> +++ b/drivers/mmc/mmc_spi.c
 > @@ -6,7 +6,6 @@
 >   *
->   * Implementation extracted from the Linux kernel and adapted for u-boot=
-.
+>   * Licensed under the GPL-2 or later.
 >   */
 > -#include <common.h>
->  #include <asm/io.h>
->  #include <asm/gpio.h>
+>  #include <errno.h>
+>  #include <log.h>
+>  #include <malloc.h>
+> diff --git a/drivers/mmc/mmc_write.c b/drivers/mmc/mmc_write.c
+> index a6f93380dd09..c023d15e52a8 100644
+> --- a/drivers/mmc/mmc_write.c
+> +++ b/drivers/mmc/mmc_write.c
+> @@ -7,7 +7,6 @@
+>   */
 >
-> diff --git a/drivers/gpio/gpio-fxl6408.c b/drivers/gpio/gpio-fxl6408.c
-> index ca7aa14eeb23..c8d2dff5f7bf 100644
-> --- a/drivers/gpio/gpio-fxl6408.c
-> +++ b/drivers/gpio/gpio-fxl6408.c
-> @@ -37,7 +37,6 @@
->
->  #include <asm-generic/gpio.h>
->  #include <asm/global_data.h>
+>  #include <config.h>
 > -#include <common.h>
+>  #include <blk.h>
 >  #include <dm.h>
->  #include <dm/device_compat.h>
->  #include <dt-bindings/gpio/gpio.h>
-> diff --git a/drivers/gpio/gpio-rcar.c b/drivers/gpio/gpio-rcar.c
-> index 707785012322..d1a399388095 100644
-> --- a/drivers/gpio/gpio-rcar.c
-> +++ b/drivers/gpio/gpio-rcar.c
-> @@ -3,7 +3,6 @@
->   * Copyright (C) 2017 Marek Vasut <marek.vasut@gmail.com>
+>  #include <part.h>
+> diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
+> index 5e9d66526a83..4ce0de6c47d8 100644
+> --- a/drivers/mmc/msm_sdhci.c
+> +++ b/drivers/mmc/msm_sdhci.c
+> @@ -7,7 +7,6 @@
+>   * Based on Linux driver
 >   */
 >
 > -#include <common.h>
 >  #include <clk.h>
 >  #include <dm.h>
 >  #include <malloc.h>
-> diff --git a/drivers/gpio/gpio-rza1.c b/drivers/gpio/gpio-rza1.c
-> index f14be871e8d0..8c3fe61b25f6 100644
-> --- a/drivers/gpio/gpio-rza1.c
-> +++ b/drivers/gpio/gpio-rza1.c
+> diff --git a/drivers/mmc/mtk-sd.c b/drivers/mmc/mtk-sd.c
+> index 4bd66ecf93ad..3a9258255a78 100644
+> --- a/drivers/mmc/mtk-sd.c
+> +++ b/drivers/mmc/mtk-sd.c
+> @@ -7,7 +7,6 @@
+>   */
+>
+>  #include <clk.h>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <mmc.h>
+>  #include <errno.h>
+> diff --git a/drivers/mmc/mv_sdhci.c b/drivers/mmc/mv_sdhci.c
+> index dbdd671c88bc..2da5334c21f1 100644
+> --- a/drivers/mmc/mv_sdhci.c
+> +++ b/drivers/mmc/mv_sdhci.c
 > @@ -3,7 +3,6 @@
->   * Copyright (C) 2019 Marek Vasut <marek.vasut@gmail.com>
+>   * Marvell SD Host Controller Interface
 >   */
 >
 > -#include <common.h>
->  #include <clk.h>
 >  #include <dm.h>
->  #include <errno.h>
-> diff --git a/drivers/gpio/gpio-uclass.c b/drivers/gpio/gpio-uclass.c
-> index 4234cd912c9f..92ce68dd4a13 100644
-> --- a/drivers/gpio/gpio-uclass.c
-> +++ b/drivers/gpio/gpio-uclass.c
-> @@ -5,7 +5,6 @@
+>  #include <malloc.h>
+>  #include <sdhci.h>
+> diff --git a/drivers/mmc/mvebu_mmc.c b/drivers/mmc/mvebu_mmc.c
+> index fea55c61ed7d..5af1953cd148 100644
+> --- a/drivers/mmc/mvebu_mmc.c
+> +++ b/drivers/mmc/mvebu_mmc.c
+> @@ -7,7 +7,6 @@
+>   * Written-by: Maen Suleiman, Gerald Kerma
+>   */
 >
->  #define LOG_CATEGORY   UCLASS_GPIO
+> -#include <common.h>
+>  #include <errno.h>
+>  #include <log.h>
+>  #include <malloc.h>
+> diff --git a/drivers/mmc/mxcmmc.c b/drivers/mmc/mxcmmc.c
+> index 0057273a2a76..1acea6f820b4 100644
+> --- a/drivers/mmc/mxcmmc.c
+> +++ b/drivers/mmc/mxcmmc.c
+> @@ -17,7 +17,6 @@
+>   */
+>
+>  #include <config.h>
+> -#include <common.h>
+>  #include <command.h>
+>  #include <mmc.h>
+>  #include <part.h>
+> diff --git a/drivers/mmc/mxsmmc.c b/drivers/mmc/mxsmmc.c
+> index 35a8e21058ed..95390a5be7e5 100644
+> --- a/drivers/mmc/mxsmmc.c
+> +++ b/drivers/mmc/mxsmmc.c
+> @@ -20,7 +20,6 @@
+>   * Kyle Harris, Nexus Technologies, Inc. kharris@nexus-tech.net
+>   */
+>
+> -#include <common.h>
+>  #include <log.h>
+>  #include <malloc.h>
+>  #include <mmc.h>
+> diff --git a/drivers/mmc/nexell_dw_mmc.c b/drivers/mmc/nexell_dw_mmc.c
+> index 2723e4887cf7..2e1ce54c7d50 100644
+> --- a/drivers/mmc/nexell_dw_mmc.c
+> +++ b/drivers/mmc/nexell_dw_mmc.c
+> @@ -6,7 +6,6 @@
+>   * (C) Copyright 2019 Stefan Bosch <stefan_b@posteo.net>
+>   */
 >
 > -#include <common.h>
 >  #include <dm.h>
 >  #include <dt-structs.h>
->  #include <log.h>
-> diff --git a/drivers/gpio/gpio-uniphier.c b/drivers/gpio/gpio-uniphier.c
-> index 61c705b5ac56..033fb4b60ee6 100644
-> --- a/drivers/gpio/gpio-uniphier.c
-> +++ b/drivers/gpio/gpio-uniphier.c
-> @@ -4,7 +4,6 @@
->   *   Author: Masahiro Yamada <yamada.masahiro@socionext.com>
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <linux/bitops.h>
->  #include <linux/io.h>
-> diff --git a/drivers/gpio/gpio_slg7xl45106.c b/drivers/gpio/gpio_slg7xl45=
-106.c
-> index 4ad06c18b4bd..a7c9ff53af7d 100644
-> --- a/drivers/gpio/gpio_slg7xl45106.c
-> +++ b/drivers/gpio/gpio_slg7xl45106.c
-> @@ -5,7 +5,6 @@
->   * Copyright (C) 2021 Xilinx, Inc.
->   */
->
-> -#include <common.h>
->  #include <errno.h>
->  #include <asm/io.h>
->  #include <asm/gpio.h>
-> diff --git a/drivers/gpio/hi6220_gpio.c b/drivers/gpio/hi6220_gpio.c
-> index e287c31b93fc..7ceb5f424c9d 100644
-> --- a/drivers/gpio/hi6220_gpio.c
-> +++ b/drivers/gpio/hi6220_gpio.c
-> @@ -4,7 +4,6 @@
->   * Peter Griffin <peter.griffin@linaro.org>
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <asm/gpio.h>
->  #include <asm/io.h>
-> diff --git a/drivers/gpio/hsdk-creg-gpio.c b/drivers/gpio/hsdk-creg-gpio.=
-c
-> index 66f8441840b5..734b31d3dc17 100644
-> --- a/drivers/gpio/hsdk-creg-gpio.c
-> +++ b/drivers/gpio/hsdk-creg-gpio.c
-> @@ -12,7 +12,6 @@
->  #include <log.h>
->  #include <asm-generic/gpio.h>
->  #include <asm/io.h>
-> -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <linux/bitops.h>
-> diff --git a/drivers/gpio/imx_rgpio2p.c b/drivers/gpio/imx_rgpio2p.c
-> index 3227a8d5b574..fc1d418315c5 100644
-> --- a/drivers/gpio/imx_rgpio2p.c
-> +++ b/drivers/gpio/imx_rgpio2p.c
-> @@ -5,7 +5,6 @@
->   * RGPIO2P driver for the Freescale i.MX7ULP.
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <fdtdec.h>
-> diff --git a/drivers/gpio/intel_broadwell_gpio.c b/drivers/gpio/intel_bro=
-adwell_gpio.c
-> index 20af35de2cf5..53ed0a3eed06 100644
-> --- a/drivers/gpio/intel_broadwell_gpio.c
-> +++ b/drivers/gpio/intel_broadwell_gpio.c
-> @@ -3,7 +3,6 @@
->   * Copyright (c) 2012 The Chromium OS Authors.
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <fdtdec.h>
-> diff --git a/drivers/gpio/intel_gpio.c b/drivers/gpio/intel_gpio.c
-> index 4a3ec6d63502..0ab6e8a90bcb 100644
-> --- a/drivers/gpio/intel_gpio.c
-> +++ b/drivers/gpio/intel_gpio.c
-> @@ -5,7 +5,6 @@
->
->  #define LOG_CATEGORY   UCLASS_GPIO
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <fdtdec.h>
-> diff --git a/drivers/gpio/intel_ich6_gpio.c b/drivers/gpio/intel_ich6_gpi=
-o.c
-> index 2ed0d0bea9a5..096bc3b05bb7 100644
-> --- a/drivers/gpio/intel_ich6_gpio.c
-> +++ b/drivers/gpio/intel_ich6_gpio.c
-> @@ -28,7 +28,6 @@
->
->  #define LOG_CATEGORY   UCLASS_GPIO
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <fdtdec.h>
-> diff --git a/drivers/gpio/iproc_gpio.c b/drivers/gpio/iproc_gpio.c
-> index 7187d3257b90..8688f12e43c7 100644
-> --- a/drivers/gpio/iproc_gpio.c
-> +++ b/drivers/gpio/iproc_gpio.c
-> @@ -3,7 +3,6 @@
->   * Copyright (C) 2020 Broadcom
->   */
->
-> -#include <common.h>
->  #include <errno.h>
->  #include <asm/gpio.h>
->  #include <asm/io.h>
-> diff --git a/drivers/gpio/kw_gpio.c b/drivers/gpio/kw_gpio.c
-> index a15769793f17..e183f5594b51 100644
-> --- a/drivers/gpio/kw_gpio.c
-> +++ b/drivers/gpio/kw_gpio.c
-> @@ -12,7 +12,6 @@
->   * Dieter Kiermaier dk-arm-linux@gmx.de
->   */
->
-> -#include <common.h>
->  #include <linux/bitops.h>
->  #include <asm/io.h>
->  #include <asm/arch/soc.h>
-> diff --git a/drivers/gpio/lpc32xx_gpio.c b/drivers/gpio/lpc32xx_gpio.c
-> index de66c765d11e..2b537e007ba9 100644
-> --- a/drivers/gpio/lpc32xx_gpio.c
-> +++ b/drivers/gpio/lpc32xx_gpio.c
-> @@ -6,7 +6,6 @@
->   * Written-by: Albert ARIBAUD <albert.aribaud@3adev.fr>
->   */
->
-> -#include <common.h>
->  #include <asm/io.h>
->  #include <asm/arch-lpc32xx/cpu.h>
->  #include <asm/arch-lpc32xx/gpio.h>
-> diff --git a/drivers/gpio/max7320_gpio.c b/drivers/gpio/max7320_gpio.c
-> index 647aed907b4c..f733cc924e56 100644
-> --- a/drivers/gpio/max7320_gpio.c
-> +++ b/drivers/gpio/max7320_gpio.c
-> @@ -7,7 +7,6 @@
->   *
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <i2c.h>
->  #include <asm-generic/gpio.h>
-> diff --git a/drivers/gpio/mcp230xx_gpio.c b/drivers/gpio/mcp230xx_gpio.c
-> index df99fde56602..42e7fe9d474c 100644
-> --- a/drivers/gpio/mcp230xx_gpio.c
-> +++ b/drivers/gpio/mcp230xx_gpio.c
-> @@ -7,7 +7,6 @@
->
->  #define LOG_CATEGORY UCLASS_GPIO
->
-> -#include <common.h>
->  #include <errno.h>
->  #include <dm.h>
->  #include <i2c.h>
-> diff --git a/drivers/gpio/mpc83xx_spisel_boot.c b/drivers/gpio/mpc83xx_sp=
-isel_boot.c
-> index fd26a36a0f94..2be8c73ae3d7 100644
-> --- a/drivers/gpio/mpc83xx_spisel_boot.c
-> +++ b/drivers/gpio/mpc83xx_spisel_boot.c
-> @@ -5,7 +5,6 @@
->   * GPIO driver to set/clear SPISEL_BOOT pin on mpc83xx.
->   */
->
-> -#include <common.h>
->  #include <log.h>
->  #include <dm.h>
->  #include <mapmem.h>
-> diff --git a/drivers/gpio/mpc8xx_gpio.c b/drivers/gpio/mpc8xx_gpio.c
-> index 2f6534653313..e2b12f8b56c7 100644
-> --- a/drivers/gpio/mpc8xx_gpio.c
-> +++ b/drivers/gpio/mpc8xx_gpio.c
-> @@ -10,7 +10,6 @@
->   * Copyright 2010 eXMeritus, A Boeing Company
->   */
->
-> -#include <common.h>
->  #include <asm/io.h>
->  #include <dm.h>
->  #include <mapmem.h>
-> diff --git a/drivers/gpio/mpc8xxx_gpio.c b/drivers/gpio/mpc8xxx_gpio.c
-> index f7ffd8926ade..e9bd38f162c1 100644
-> --- a/drivers/gpio/mpc8xxx_gpio.c
-> +++ b/drivers/gpio/mpc8xxx_gpio.c
-> @@ -9,7 +9,6 @@
->   * Copyright 2020-2021 NXP
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <mapmem.h>
->  #include <asm/gpio.h>
-> diff --git a/drivers/gpio/mscc_sgpio.c b/drivers/gpio/mscc_sgpio.c
-> index c97e44005ee1..5a40304f1f93 100644
-> --- a/drivers/gpio/mscc_sgpio.c
-> +++ b/drivers/gpio/mscc_sgpio.c
-> @@ -7,7 +7,6 @@
->   * Copyright (c) 2018 Microsemi Corporation
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <log.h>
->  #include <asm/gpio.h>
-> diff --git a/drivers/gpio/msm_gpio.c b/drivers/gpio/msm_gpio.c
-> index f5d9ab54e817..2fb266f12854 100644
-> --- a/drivers/gpio/msm_gpio.c
-> +++ b/drivers/gpio/msm_gpio.c
-> @@ -5,7 +5,6 @@
->   * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <asm/global_data.h>
-> diff --git a/drivers/gpio/mt7621_gpio.c b/drivers/gpio/mt7621_gpio.c
-> index 43bb4df4da72..63a202310a5e 100644
-> --- a/drivers/gpio/mt7621_gpio.c
-> +++ b/drivers/gpio/mt7621_gpio.c
-> @@ -7,7 +7,6 @@
->   *   Copyright (C) 2013 John Crispin <blogic@openwrt.org>
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <fdtdec.h>
-> diff --git a/drivers/gpio/mvebu_gpio.c b/drivers/gpio/mvebu_gpio.c
-> index f706a6dfa4fe..0d82380dde4a 100644
-> --- a/drivers/gpio/mvebu_gpio.c
-> +++ b/drivers/gpio/mvebu_gpio.c
-> @@ -3,7 +3,6 @@
->   * Copyright (C) 2016 Stefan Roese <sr@denx.de>
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <dm/pinctrl.h>
->  #include <asm/gpio.h>
-> diff --git a/drivers/gpio/mxc_gpio.c b/drivers/gpio/mxc_gpio.c
-> index 1dec4e35e0a7..cac6b32b2796 100644
-> --- a/drivers/gpio/mxc_gpio.c
-> +++ b/drivers/gpio/mxc_gpio.c
-> @@ -6,7 +6,6 @@
->   * Copyright (C) 2011
->   * Stefano Babic, DENX Software Engineering, <sbabic@denx.de>
->   */
-> -#include <common.h>
->  #include <errno.h>
->  #include <dm.h>
->  #include <malloc.h>
-> diff --git a/drivers/gpio/mxs_gpio.c b/drivers/gpio/mxs_gpio.c
-> index 1356f89ac2f0..80910c9ec4c2 100644
-> --- a/drivers/gpio/mxs_gpio.c
-> +++ b/drivers/gpio/mxs_gpio.c
-> @@ -6,7 +6,6 @@
->   * on behalf of DENX Software Engineering GmbH
->   */
->
-> -#include <common.h>
->  #include <log.h>
->  #include <malloc.h>
->  #include <asm/global_data.h>
-> diff --git a/drivers/gpio/nmk_gpio.c b/drivers/gpio/nmk_gpio.c
-> index e1bb41b196cc..c2716e717632 100644
-> --- a/drivers/gpio/nmk_gpio.c
-> +++ b/drivers/gpio/nmk_gpio.c
-> @@ -1,7 +1,6 @@
->  // SPDX-License-Identifier: GPL-2.0+
->  /* Copyright (C) 2019 Stephan Gerhold */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <asm/gpio.h>
->  #include <asm/io.h>
-> diff --git a/drivers/gpio/npcm_gpio.c b/drivers/gpio/npcm_gpio.c
-> index 98e5dc79c1cc..da3b3ffbc92f 100644
-> --- a/drivers/gpio/npcm_gpio.c
-> +++ b/drivers/gpio/npcm_gpio.c
+>  #include <dwmmc.h>
+> diff --git a/drivers/mmc/npcm_sdhci.c b/drivers/mmc/npcm_sdhci.c
+> index d63521d6855f..dff4732ea06f 100644
+> --- a/drivers/mmc/npcm_sdhci.c
+> +++ b/drivers/mmc/npcm_sdhci.c
 > @@ -3,7 +3,6 @@
 >   * Copyright (c) 2022 Nuvoton Technology Corp.
 >   */
 >
 > -#include <common.h>
 >  #include <dm.h>
+>  #include <sdhci.h>
+>  #include <clk.h>
+> diff --git a/drivers/mmc/omap_hsmmc.c b/drivers/mmc/omap_hsmmc.c
+> index 118d9cd16fdb..2b7f9fc9a205 100644
+> --- a/drivers/mmc/omap_hsmmc.c
+> +++ b/drivers/mmc/omap_hsmmc.c
+> @@ -23,7 +23,6 @@
+>   */
+>
+>  #include <config.h>
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <log.h>
+>  #include <malloc.h>
+> diff --git a/drivers/mmc/owl_mmc.c b/drivers/mmc/owl_mmc.c
+> index e84171a661a7..bd4906f58e74 100644
+> --- a/drivers/mmc/owl_mmc.c
+> +++ b/drivers/mmc/owl_mmc.c
+> @@ -11,7 +11,6 @@
+>   * channel, and those special bits used in this driver is picked from vendor
+>   * source exclusively for MMC/SD.
+>   */
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <cpu_func.h>
+>  #include <dm.h>
+> diff --git a/drivers/mmc/pci_mmc.c b/drivers/mmc/pci_mmc.c
+> index 4d163ccba041..d446c55f72b2 100644
+> --- a/drivers/mmc/pci_mmc.c
+> +++ b/drivers/mmc/pci_mmc.c
+> @@ -4,7 +4,6 @@
+>   * Copyright (C) 2014, Bin Meng <bmeng.cn@gmail.com>
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <errno.h>
+>  #include <log.h>
+> diff --git a/drivers/mmc/piton_mmc.c b/drivers/mmc/piton_mmc.c
+> index a330bbf8cbe2..fed1f8416088 100644
+> --- a/drivers/mmc/piton_mmc.c
+> +++ b/drivers/mmc/piton_mmc.c
+> @@ -11,7 +11,6 @@
+>
 >  #include <asm/gpio.h>
->  #include <linux/io.h>
-> diff --git a/drivers/gpio/nx_gpio.c b/drivers/gpio/nx_gpio.c
-> index e2565d709535..741b2ff7f177 100644
-> --- a/drivers/gpio/nx_gpio.c
-> +++ b/drivers/gpio/nx_gpio.c
-> @@ -4,7 +4,6 @@
->   * DeokJin, Lee <truevirtue@nexell.co.kr>
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <malloc.h>
-> diff --git a/drivers/gpio/omap_gpio.c b/drivers/gpio/omap_gpio.c
-> index 50c4f75ddf5d..1aceafcdf581 100644
-> --- a/drivers/gpio/omap_gpio.c
-> +++ b/drivers/gpio/omap_gpio.c
-> @@ -17,7 +17,6 @@
->   * Copyright (C) 2003-2005 Nokia Corporation
->   * Written by Juha Yrj=C3=B6l=C3=A4 <juha.yrjola@nokia.com>
->   */
-> -#include <common.h>
->  #include <dm.h>
->  #include <fdtdec.h>
->  #include <asm/global_data.h>
-> diff --git a/drivers/gpio/pca953x.c b/drivers/gpio/pca953x.c
-> index b5ed35256ee7..fc4dcf9f9861 100644
-> --- a/drivers/gpio/pca953x.c
-> +++ b/drivers/gpio/pca953x.c
-> @@ -8,10 +8,11 @@
->   * pca9539, etc)
->   */
->
-> -#include <common.h>
-> +#include <config.h>
->  #include <command.h>
->  #include <i2c.h>
->  #include <pca953x.h>
-> +#include <vsprintf.h>
->
->  /* Default to an address that hopefully won't corrupt other i2c devices =
-*/
->  #ifndef CFG_SYS_I2C_PCA953X_ADDR
-> diff --git a/drivers/gpio/pca953x_gpio.c b/drivers/gpio/pca953x_gpio.c
-> index b0c66d18317e..80ebaadb3e43 100644
-> --- a/drivers/gpio/pca953x_gpio.c
-> +++ b/drivers/gpio/pca953x_gpio.c
-> @@ -18,7 +18,6 @@
->   * 2. Support Polarity Inversion
->   */
->
-> -#include <common.h>
->  #include <errno.h>
->  #include <dm.h>
->  #include <fdtdec.h>
-> diff --git a/drivers/gpio/pcf8575_gpio.c b/drivers/gpio/pcf8575_gpio.c
-> index f38e215c4d6e..10ae86ec5d45 100644
-> --- a/drivers/gpio/pcf8575_gpio.c
-> +++ b/drivers/gpio/pcf8575_gpio.c
-> @@ -17,7 +17,6 @@
->   *
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <i2c.h>
->  #include <log.h>
-> diff --git a/drivers/gpio/pic32_gpio.c b/drivers/gpio/pic32_gpio.c
-> index 975a2af3ccb8..d8edfefb2d75 100644
-> --- a/drivers/gpio/pic32_gpio.c
-> +++ b/drivers/gpio/pic32_gpio.c
-> @@ -4,7 +4,6 @@
->   * Purna Chandra Mandal <purna.mandal@microchip.com>
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <malloc.h>
-> diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.=
-c
-> index 0dd3434e9e04..80fee841ee3f 100644
-> --- a/drivers/gpio/qcom_pmic_gpio.c
-> +++ b/drivers/gpio/qcom_pmic_gpio.c
-> @@ -5,7 +5,6 @@
->   * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <dm/device-internal.h>
->  #include <dm/lists.h>
-> diff --git a/drivers/gpio/qe_gpio.c b/drivers/gpio/qe_gpio.c
-> index 16e8d1eae6ed..ac6e68299e07 100644
-> --- a/drivers/gpio/qe_gpio.c
-> +++ b/drivers/gpio/qe_gpio.c
-> @@ -4,7 +4,6 @@
->   * Christophe Leroy <christophe.leroy@csgroup.eu>
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <mapmem.h>
->  #include <asm/gpio.h>
-> diff --git a/drivers/gpio/rk_gpio.c b/drivers/gpio/rk_gpio.c
-> index 2e901ac5c734..24ba12dd820e 100644
-> --- a/drivers/gpio/rk_gpio.c
-> +++ b/drivers/gpio/rk_gpio.c
-> @@ -6,7 +6,6 @@
->   * Peter, Software Engineering, <superpeter.cai@gmail.com>.
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <syscon.h>
->  #include <linux/errno.h>
-> diff --git a/drivers/gpio/s5p_gpio.c b/drivers/gpio/s5p_gpio.c
-> index 06ed585f3d64..83e65aa4aec4 100644
-> --- a/drivers/gpio/s5p_gpio.c
-> +++ b/drivers/gpio/s5p_gpio.c
-> @@ -4,7 +4,6 @@
->   * Minkyu Kang <mk7.kang@samsung.com>
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <fdtdec.h>
-> diff --git a/drivers/gpio/sandbox.c b/drivers/gpio/sandbox.c
-> index 305f9a6ff62f..f5be27814438 100644
-> --- a/drivers/gpio/sandbox.c
-> +++ b/drivers/gpio/sandbox.c
-> @@ -3,7 +3,6 @@
->   * Copyright (c) 2011 The Chromium OS Authors.
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <fdtdec.h>
->  #include <log.h>
-> diff --git a/drivers/gpio/sandbox_test.c b/drivers/gpio/sandbox_test.c
-> index c76e19974196..4699a976252c 100644
-> --- a/drivers/gpio/sandbox_test.c
-> +++ b/drivers/gpio/sandbox_test.c
-> @@ -5,7 +5,6 @@
->   * Copyright 2021 Google LLC
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <asm-generic/gpio.h>
->
-> diff --git a/drivers/gpio/sh_pfc.c b/drivers/gpio/sh_pfc.c
-> index 2495d6c1c154..9f6051c1c4d3 100644
-> --- a/drivers/gpio/sh_pfc.c
-> +++ b/drivers/gpio/sh_pfc.c
-> @@ -9,7 +9,6 @@
->   * for more details.
->   */
->
-> -#include <common.h>
->  #include <log.h>
->  #include <malloc.h>
->  #include <asm/bitops.h>
-> diff --git a/drivers/gpio/sifive-gpio.c b/drivers/gpio/sifive-gpio.c
-> index 151f484e8fd1..90f59120ecd0 100644
-> --- a/drivers/gpio/sifive-gpio.c
-> +++ b/drivers/gpio/sifive-gpio.c
-> @@ -5,7 +5,6 @@
->   * Copyright (C) 2019 SiFive, Inc.
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <asm/arch/gpio.h>
 >  #include <asm/io.h>
-> diff --git a/drivers/gpio/sl28cpld-gpio.c b/drivers/gpio/sl28cpld-gpio.c
-> index 700fc3df298c..e85f9260ec39 100644
-> --- a/drivers/gpio/sl28cpld-gpio.c
-> +++ b/drivers/gpio/sl28cpld-gpio.c
-> @@ -5,7 +5,6 @@
->   * Copyright (c) 2021 Michael Walle <michael@walle.cc>
->   */
->
 > -#include <common.h>
+>  #include <div64.h>
 >  #include <dm.h>
->  #include <asm/gpio.h>
->  #include <sl28cpld.h>
-> diff --git a/drivers/gpio/stm32_gpio.c b/drivers/gpio/stm32_gpio.c
-> index 7a2ca91c7692..b8eb55465d3c 100644
-> --- a/drivers/gpio/stm32_gpio.c
-> +++ b/drivers/gpio/stm32_gpio.c
-> @@ -6,7 +6,6 @@
->
->  #define LOG_CATEGORY UCLASS_GPIO
+>  #include <errno.h>
+> diff --git a/drivers/mmc/rockchip_dw_mmc.c b/drivers/mmc/rockchip_dw_mmc.c
+> index ad4529d6afa8..1a10b7057a47 100644
+> --- a/drivers/mmc/rockchip_dw_mmc.c
+> +++ b/drivers/mmc/rockchip_dw_mmc.c
+> @@ -3,7 +3,6 @@
+>   * Copyright (c) 2013 Google, Inc
+>   */
 >
 > -#include <common.h>
 >  #include <clk.h>
 >  #include <dm.h>
->  #include <fdtdec.h>
-> diff --git a/drivers/gpio/sunxi_gpio.c b/drivers/gpio/sunxi_gpio.c
-> index e4463a223f7b..5e86474d3dbb 100644
-> --- a/drivers/gpio/sunxi_gpio.c
-> +++ b/drivers/gpio/sunxi_gpio.c
-> @@ -9,7 +9,6 @@
->   * Tom Cubie <tangliang@allwinnertech.com>
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <fdtdec.h>
-> diff --git a/drivers/gpio/tca642x.c b/drivers/gpio/tca642x.c
-> index b07496e6e49c..1d45b5007461 100644
-> --- a/drivers/gpio/tca642x.c
-> +++ b/drivers/gpio/tca642x.c
-> @@ -20,7 +20,7 @@
->   * MA 02111-1307 USA
->   */
->
-> -#include <common.h>
-> +#include <config.h>
->  #include <command.h>
->  #include <i2c.h>
->  #include <tca642x.h>
-> diff --git a/drivers/gpio/tegra186_gpio.c b/drivers/gpio/tegra186_gpio.c
-> index 94a20d143e10..01b8245c8d5b 100644
-> --- a/drivers/gpio/tegra186_gpio.c
-> +++ b/drivers/gpio/tegra186_gpio.c
-> @@ -4,7 +4,6 @@
->   * (based on tegra_gpio.c)
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <malloc.h>
->  #include <errno.h>
-> diff --git a/drivers/gpio/tegra_gpio.c b/drivers/gpio/tegra_gpio.c
-> index 55105f2802c3..0c40d36c41e2 100644
-> --- a/drivers/gpio/tegra_gpio.c
-> +++ b/drivers/gpio/tegra_gpio.c
-> @@ -10,7 +10,6 @@
->   * Tom Warren (twarren@nvidia.com)
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <log.h>
->  #include <malloc.h>
-> diff --git a/drivers/gpio/vybrid_gpio.c b/drivers/gpio/vybrid_gpio.c
-> index 339392dcd35a..5b4bba96da70 100644
-> --- a/drivers/gpio/vybrid_gpio.c
-> +++ b/drivers/gpio/vybrid_gpio.c
-> @@ -4,7 +4,6 @@
->   * Bhuvanchandra DV, Toradex, Inc.
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <fdtdec.h>
-> diff --git a/drivers/gpio/xilinx_gpio.c b/drivers/gpio/xilinx_gpio.c
-> index fa8d630b4658..c0a92378b035 100644
-> --- a/drivers/gpio/xilinx_gpio.c
-> +++ b/drivers/gpio/xilinx_gpio.c
-> @@ -3,7 +3,6 @@
->   * Copyright (c) 2013 - 2018 Xilinx, Michal Simek
->   */
->
-> -#include <common.h>
->  #include <errno.h>
->  #include <log.h>
->  #include <malloc.h>
-> diff --git a/drivers/gpio/zynq_gpio.c b/drivers/gpio/zynq_gpio.c
-> index 71a56127c0aa..7db58c70663e 100644
-> --- a/drivers/gpio/zynq_gpio.c
-> +++ b/drivers/gpio/zynq_gpio.c
-> @@ -8,7 +8,6 @@
->   * Copyright (C) 2009 - 2014 Xilinx, Inc.
->   */
->
-> -#include <common.h>
->  #include <asm/gpio.h>
->  #include <asm/io.h>
->  #include <linux/bitops.h>
-> diff --git a/drivers/gpio/zynqmp_gpio_modepin.c b/drivers/gpio/zynqmp_gpi=
-o_modepin.c
-> index e9565ff5430e..8aaffaf37b3d 100644
-> --- a/drivers/gpio/zynqmp_gpio_modepin.c
-> +++ b/drivers/gpio/zynqmp_gpio_modepin.c
+>  #include <dt-structs.h>
+> diff --git a/drivers/mmc/rockchip_sdhci.c b/drivers/mmc/rockchip_sdhci.c
+> index c889c7bc9855..35667b86b50b 100644
+> --- a/drivers/mmc/rockchip_sdhci.c
+> +++ b/drivers/mmc/rockchip_sdhci.c
 > @@ -5,7 +5,6 @@
->   * Copyright (C) 2021 Xilinx, Inc.
+>   * Rockchip SD Host Controller Interface
 >   */
 >
 > -#include <common.h>
+>  #include <clk.h>
+>  #include <dm.h>
+>  #include <dm/ofnode.h>
+> diff --git a/drivers/mmc/rpmb.c b/drivers/mmc/rpmb.c
+> index b68d98573c9a..0658ce22cf13 100644
+> --- a/drivers/mmc/rpmb.c
+> +++ b/drivers/mmc/rpmb.c
+> @@ -8,7 +8,6 @@
+>   */
+>
+>  #include <config.h>
+> -#include <common.h>
+>  #include <log.h>
+>  #include <memalign.h>
+>  #include <mmc.h>
+> diff --git a/drivers/mmc/s5p_sdhci.c b/drivers/mmc/s5p_sdhci.c
+> index 3b74feae68c7..80dbb38c9b36 100644
+> --- a/drivers/mmc/s5p_sdhci.c
+> +++ b/drivers/mmc/s5p_sdhci.c
+> @@ -4,7 +4,6 @@
+>   * Jaehoon Chung <jh80.chung@samsung.com>
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <log.h>
+>  #include <malloc.h>
+> diff --git a/drivers/mmc/sandbox_mmc.c b/drivers/mmc/sandbox_mmc.c
+> index 0ba7940a4dbf..a24520f2e78c 100644
+> --- a/drivers/mmc/sandbox_mmc.c
+> +++ b/drivers/mmc/sandbox_mmc.c
+> @@ -4,7 +4,6 @@
+>   * Written by Simon Glass <sjg@chromium.org>
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
 >  #include <errno.h>
->  #include <asm/io.h>
->  #include <asm/gpio.h>
+>  #include <fdtdec.h>
+> diff --git a/drivers/mmc/sdhci-adma.c b/drivers/mmc/sdhci-adma.c
+> index 283ba956deb9..fdb189d71a64 100644
+> --- a/drivers/mmc/sdhci-adma.c
+> +++ b/drivers/mmc/sdhci-adma.c
+> @@ -3,7 +3,6 @@
+>   * SDHCI ADMA2 helper functions.
+>   */
+>
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <sdhci.h>
+>  #include <malloc.h>
+> diff --git a/drivers/mmc/sdhci-cadence.c b/drivers/mmc/sdhci-cadence.c
+> index 0570dbca00d7..07ec35a04635 100644
+> --- a/drivers/mmc/sdhci-cadence.c
+> +++ b/drivers/mmc/sdhci-cadence.c
+> @@ -4,7 +4,6 @@
+>   *   Author: Masahiro Yamada <yamada.masahiro@socionext.com>
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <asm/global_data.h>
+>  #include <dm/device_compat.h>
+> diff --git a/drivers/mmc/sdhci.c b/drivers/mmc/sdhci.c
+> index d06f2c02bb7b..560b7e889c77 100644
+> --- a/drivers/mmc/sdhci.c
+> +++ b/drivers/mmc/sdhci.c
+> @@ -7,7 +7,6 @@
+>   * Murray.Jensen@cmst.csiro.au, 27-Jan-01.
+>   */
+>
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <dm.h>
+>  #include <errno.h>
+> @@ -15,6 +14,7 @@
+>  #include <malloc.h>
+>  #include <mmc.h>
+>  #include <sdhci.h>
+> +#include <time.h>
+>  #include <asm/cache.h>
+>  #include <linux/bitops.h>
+>  #include <linux/delay.h>
+> diff --git a/drivers/mmc/sh_mmcif.c b/drivers/mmc/sh_mmcif.c
+> index 76dc1c68b821..06a30d5efb81 100644
+> --- a/drivers/mmc/sh_mmcif.c
+> +++ b/drivers/mmc/sh_mmcif.c
+> @@ -6,7 +6,6 @@
+>   */
+>
+>  #include <config.h>
+> -#include <common.h>
+>  #include <log.h>
+>  #include <watchdog.h>
+>  #include <command.h>
+> diff --git a/drivers/mmc/snps_dw_mmc.c b/drivers/mmc/snps_dw_mmc.c
+> index 0134399e3934..9bdbe5070b1d 100644
+> --- a/drivers/mmc/snps_dw_mmc.c
+> +++ b/drivers/mmc/snps_dw_mmc.c
+> @@ -7,7 +7,6 @@
+>   * Author: Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <dm.h>
+>  #include <dwmmc.h>
+> diff --git a/drivers/mmc/socfpga_dw_mmc.c b/drivers/mmc/socfpga_dw_mmc.c
+> index 387cb8b6b50a..f738019b8357 100644
+> --- a/drivers/mmc/socfpga_dw_mmc.c
+> +++ b/drivers/mmc/socfpga_dw_mmc.c
+> @@ -3,7 +3,6 @@
+>   * (C) Copyright 2013 Altera Corporation <www.altera.com>
+>   */
+>
+> -#include <common.h>
+>  #include <log.h>
+>  #include <asm/arch/clock_manager.h>
+>  #include <asm/arch/secure_reg_helper.h>
+> diff --git a/drivers/mmc/sti_sdhci.c b/drivers/mmc/sti_sdhci.c
+> index 23a1dd43c9b2..91018b7e21af 100644
+> --- a/drivers/mmc/sti_sdhci.c
+> +++ b/drivers/mmc/sti_sdhci.c
+> @@ -4,7 +4,6 @@
+>   * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <log.h>
+>  #include <mmc.h>
+> diff --git a/drivers/mmc/stm32_sdmmc2.c b/drivers/mmc/stm32_sdmmc2.c
+> index 39ae79ba1293..9483fb57daf8 100644
+> --- a/drivers/mmc/stm32_sdmmc2.c
+> +++ b/drivers/mmc/stm32_sdmmc2.c
+> @@ -6,7 +6,6 @@
+>
+>  #define LOG_CATEGORY UCLASS_MMC
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <cpu_func.h>
+>  #include <dm.h>
+> diff --git a/drivers/mmc/sunxi_mmc.c b/drivers/mmc/sunxi_mmc.c
+> index 714706d2411b..0b56d1405bee 100644
+> --- a/drivers/mmc/sunxi_mmc.c
+> +++ b/drivers/mmc/sunxi_mmc.c
+> @@ -13,7 +13,6 @@
+>   * proper DM_MMC implementation at the end.
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <errno.h>
+>  #include <log.h>
+> diff --git a/drivers/mmc/tangier_sdhci.c b/drivers/mmc/tangier_sdhci.c
+> index 115642733243..ae65c310b685 100644
+> --- a/drivers/mmc/tangier_sdhci.c
+> +++ b/drivers/mmc/tangier_sdhci.c
+> @@ -2,7 +2,6 @@
+>  /*
+>   * Copyright (c) 2017 Intel Corporation
+>   */
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <dm/device.h>
+>  #include <linux/io.h>
+> diff --git a/drivers/mmc/tegra_mmc.c b/drivers/mmc/tegra_mmc.c
+> index c01fb3d01657..5ed7f01d3f36 100644
+> --- a/drivers/mmc/tegra_mmc.c
+> +++ b/drivers/mmc/tegra_mmc.c
+> @@ -7,7 +7,6 @@
+>   */
+>
+>  #include <bouncebuf.h>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <errno.h>
+>  #include <log.h>
+> diff --git a/drivers/mmc/tmio-common.c b/drivers/mmc/tmio-common.c
+> index 719c4830bc30..0b396122b464 100644
+> --- a/drivers/mmc/tmio-common.c
+> +++ b/drivers/mmc/tmio-common.c
+> @@ -4,7 +4,6 @@
+>   *   Author: Masahiro Yamada <yamada.masahiro@socionext.com>
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <cpu_func.h>
+>  #include <fdtdec.h>
+> diff --git a/drivers/mmc/uniphier-sd.c b/drivers/mmc/uniphier-sd.c
+> index 8cde4308aaed..5b3650d52eea 100644
+> --- a/drivers/mmc/uniphier-sd.c
+> +++ b/drivers/mmc/uniphier-sd.c
+> @@ -4,7 +4,6 @@
+>   *   Author: Masahiro Yamada <yamada.masahiro@socionext.com>
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <fdtdec.h>
+>  #include <malloc.h>
+> diff --git a/drivers/mmc/xenon_sdhci.c b/drivers/mmc/xenon_sdhci.c
+> index 27dbe0404e04..0e4902fab77c 100644
+> --- a/drivers/mmc/xenon_sdhci.c
+> +++ b/drivers/mmc/xenon_sdhci.c
+> @@ -14,7 +14,6 @@
+>   * Stefan Roese <sr@denx.de>
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <fdtdec.h>
+>  #include <asm/global_data.h>
+> diff --git a/drivers/mmc/zynq_sdhci.c b/drivers/mmc/zynq_sdhci.c
+> index 935540d17194..898be5a0913a 100644
+> --- a/drivers/mmc/zynq_sdhci.c
+> +++ b/drivers/mmc/zynq_sdhci.c
+> @@ -7,7 +7,6 @@
+>   */
+>
+>  #include <clk.h>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <fdtdec.h>
+>  #include <linux/delay.h>
 > --
 > 2.34.1
 >
