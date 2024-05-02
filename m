@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 035F4C4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 12:26:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5B29C4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 12:45:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52B0288CCE;
-	Thu,  2 May 2024 14:26:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 23BEB88153;
+	Thu,  2 May 2024 14:45:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ngEL+8mP";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QuqgTuBq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21C1F88CA4; Thu,  2 May 2024 14:26:23 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 2A9FC881EA; Thu,  2 May 2024 14:45:56 +0200 (CEST)
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2518B88CCE
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 14:26:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C19F8812F
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 14:45:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=oliver.graute@gmail.com
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-41dc9c83e57so4787435e9.0
- for <u-boot@lists.denx.de>; Thu, 02 May 2024 05:26:21 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-5f77640a4dcso36110a12.3
+ for <u-boot@lists.denx.de>; Thu, 02 May 2024 05:45:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1714652780; x=1715257580; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:date:from:from:to:cc
- :subject:date:message-id:reply-to;
- bh=S8v4BGVYdqbvFvvYn3X4jkTPd1Jd5fLG/VipTkBjHGg=;
- b=ngEL+8mP2ei6r/hZNaDhFbzk9BL/FHLKtjsU0J+7Q27yaFXE2m1sb87zguED/h9liL
- NJB0ZDpiIQzHlma+nfFJInICwMz2dhjW/xsb1CjhURIuFT3kiE5mnISzLd02WxeVB+pQ
- VGNsQmMSQJGoOHy5UQ5oQYxepukX378urD7ev73mzSX68Nh5hplNlIJwAXfv1Tr2Tfgn
- ZmUB149vTWNVNZSdTCl/0WwmLrqMO9rQJLDCnAQcjLO007iGKmy3d0PMepGspS9A5qc3
- i2yB6iyWQJ11MQ6HvVhzx5WGUuGM2xScKkLqFlu2c7IkdiUOYg+YEizsfN69M9XhafVG
- /czQ==
+ d=gmail.com; s=20230601; t=1714653952; x=1715258752; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=B1WJlBUuLlWIfN8udr1JoNQQcA6NfFjPcO5Jux4wu7o=;
+ b=QuqgTuBqbhGeRrvz9sxB9PJG+8pKbppF9imnnak7UlmQ9oZKIGWHKR1vwuKQk+kYDc
+ B0SVRAjO4vG8TGkKyJqM+PQnt24jwjYXmfxrAOIAhXH6EqJ4xezhwgoPNMAxgGtq4ENU
+ RAjZgiDI9N2kPt/HMynaJx34Uro3PqFCLaGALzY5a8FpXrKN8o5tR0Q8Jz/3edq+A9qp
+ nF4kT9GDrAYZQHkhI+4TVQC2EfMcc8b7bPcBGDWMMBfFgN//RfSyfNYvH5uPurnwJWba
+ 5eUBX7q45kmiNkJWMZXpq6o/z3S40YHRKuIL8I4i60rRDBGxGtTAxY9NGTtB50hxM7tg
+ PoGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714652780; x=1715257580;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:date:from
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=S8v4BGVYdqbvFvvYn3X4jkTPd1Jd5fLG/VipTkBjHGg=;
- b=mxiNPVF0yao5hJ0q13CdEYHSc9IaH3yJQZFS+e4ZAzachA3e6MkTgw3O1nbT8cQTBV
- r4GQ7ZABqNvxGmfcPolU/e2fv/GZIjJqVEQfDkdNiyUFxMOAtHYGrHyNz1sXLberl6Ux
- 0+L190K6E4CCpTr3MXZdFh6C4oFK9iV53Z6hggzlN3HaBSq3HwFeJ8loVCidmuQdBqpP
- vCnkDs0eB5/a08MilLszU1XDUi0nWOuGjvZRLGZaWnaV1QmcnB2/kaPHWMHn2Wq3B0Xi
- +6ZBXkjAsTkkGasFIjrSTSf065nzWnwkI+JvVYqUV4x9vAFYwcdWhKVggJ0jGKAB7V1S
- 2Grw==
-X-Gm-Message-State: AOJu0Yx7yKmhDp0MPV+Rhh+tEiULlDObjDZ2oG3ZJwQVvZR7UGlqmtuO
- tX3xsinqpOajFzeYJ9VOMywW+F3u6cN8jNYPhMQ9BGESKjYOztEFEzEBBhSn
-X-Google-Smtp-Source: AGHT+IHaDtfATyEoU2pzgJt1HtQvi5NPuxWO5JqhgDmItEMFWxzsx2FVVKhyHiQkpa3kWbRJbxew5g==
-X-Received: by 2002:a05:600c:3c9e:b0:418:3ea8:46c0 with SMTP id
- bg30-20020a05600c3c9e00b004183ea846c0mr2244155wmb.13.1714652780441; 
- Thu, 02 May 2024 05:26:20 -0700 (PDT)
-Received: from localhost ([217.151.144.138]) by smtp.gmail.com with ESMTPSA id
- k5-20020a05600c1c8500b0041bab13cd74sm1811366wms.17.2024.05.02.05.26.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 May 2024 05:26:20 -0700 (PDT)
-From: Oliver Graute <oliver.graute@gmail.com>
-X-Google-Original-From: Oliver Graute <oliver.graute@kococonnector.com>
-Date: Thu, 2 May 2024 14:15:33 +0200
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- George McCollister <george.mccollister@gmail.com>
-Subject: Re: [PATCH 013/149] board: advantech: Remove <common.h> and add
- needed includes
-Message-ID: <ZjOD5Yu00gDz+UnU@graute-think>
-Mail-Followup-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- George McCollister <george.mccollister@gmail.com>
-References: <20240501024316.1767971-1-trini@konsulko.com>
- <20240501024316.1767971-13-trini@konsulko.com>
+ d=1e100.net; s=20230601; t=1714653952; x=1715258752;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=B1WJlBUuLlWIfN8udr1JoNQQcA6NfFjPcO5Jux4wu7o=;
+ b=lES8iNmvz9GsoN61fax3fKKcfGw84DOPMu23khp0v8JfMvmjoitELNTQCqKiw6UpBL
+ gPcuNIHU869q3UEHgsKr9F2giEGfBdNijbP3LG2t+P2c9acxZQCR4hOv8VZaAEjH4ghc
+ ckIRHmCUpkL0yqQzE0vRcDu2mQ7AWUFd1lkAix5ijfMMro9A0Vy/Ypft7Zek/3WrKbVu
+ maAv7agn9tr5mvw2ENXbkfEr2YAcOskqTLWeqY11cdDsWmvMUR1zwSCjAbrpeCY2h0kC
+ +RaaU+BTn7sQZu89jO5W8hh5jFnWJ+wwTLFkSMdQzdLZjg8q0mxWZ3Yzhx9+pIPM3v4R
+ 45ww==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXFitzvqyCu0JDkoUcU2JNfkxwvCAwCFeuuEuzQbRlkxHI2w3TQgEmjsdRJkMiBV6viwwvezdo3U5UX7SrPV7DFOfmrcw==
+X-Gm-Message-State: AOJu0YxZMojXIubzrgiiGtmU4iq4sgQSonP+AQMf7seDWs7+TSEN3rKh
+ QP101fA58rJOmabXMw39pXSkBRkYDgkEmTfY+vOYtA9vH7P6UarfFuBg9ZQq4QxA9w22IjEluvQ
+ TIfWm8eE4CYR+YlvXjgmTVHZSzZo=
+X-Google-Smtp-Source: AGHT+IEGFAYfaock4HPO6SQiSCBFKUwTq2WfN99NcUPypx3wgjHt/QRaeSuu3zZsP4pBWHQgmOMxExnQm6Scu5Q/BIc=
+X-Received: by 2002:a05:6a21:621:b0:1af:6230:e693 with SMTP id
+ ll33-20020a056a21062100b001af6230e693mr6130029pzb.0.1714653952524; Thu, 02
+ May 2024 05:45:52 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240501024316.1767971-13-trini@konsulko.com>
+References: <CAOMZO5BeK7QyqEZisSVX=fs9jmq98gjnf_n0FrRJrR92pThrGQ@mail.gmail.com>
+ <b1733528-3c33-a52c-f239-dbe39c69d586@denx.de>
+In-Reply-To: <b1733528-3c33-a52c-f239-dbe39c69d586@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 2 May 2024 09:45:39 -0300
+Message-ID: <CAOMZO5De9dRiScGEv+TOHZexXQZjNs9JmgX+qCLNZeEaox5yYg@mail.gmail.com>
+Subject: Re: imx8mn: bootcount does not increment
+To: hs@denx.de
+Cc: Marek Vasut <marex@denx.de>, Tim Harvey <tharvey@gateworks.com>,
+ Adam Ford <aford173@gmail.com>, 
+ U-Boot-Denx <u-boot@lists.denx.de>, Peng Fan <peng.fan@nxp.com>,
+ Ye Li <ye.li@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,113 +93,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 30/04/24, Tom Rini wrote:
-> Remove <common.h> from this board vendor directory and when needed
-> add missing include files directly.
-> 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
-> Cc: Oliver Graute <oliver.graute@kococonnector.com>
-> Cc: George McCollister <george.mccollister@gmail.com>
-> ---
->  board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c       | 1 -
->  board/advantech/imx8mp_rsb3720a1/spl.c                    | 2 +-
->  board/advantech/imx8qm_dmsse20_a1/imx8qm_dmsse20_a1.c     | 1 -
->  board/advantech/imx8qm_dmsse20_a1/spl.c                   | 2 +-
->  board/advantech/imx8qm_rom7720_a1/imx8qm_rom7720_a1.c     | 1 -
->  board/advantech/imx8qm_rom7720_a1/spl.c                   | 2 +-
->  board/advantech/som-db5800-som-6867/som-db5800-som-6867.c | 1 -
->  7 files changed, 3 insertions(+), 7 deletions(-)
-> 
-> diff --git a/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c b/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
-> index d87fe3606f6a..070933fb54b2 100644
-> --- a/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
-> +++ b/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
-> @@ -4,7 +4,6 @@
->   * Copyright 2022 Linaro
->   */
->  
-> -#include <common.h>
->  #include <dwc3-uboot.h>
->  #include <efi.h>
->  #include <efi_loader.h>
-> diff --git a/board/advantech/imx8mp_rsb3720a1/spl.c b/board/advantech/imx8mp_rsb3720a1/spl.c
-> index f4257bc993d6..1f7c1f25adcf 100644
-> --- a/board/advantech/imx8mp_rsb3720a1/spl.c
-> +++ b/board/advantech/imx8mp_rsb3720a1/spl.c
-> @@ -4,7 +4,7 @@
->   * Copyright 2022 Linaro
->   */
->  
-> -#include <common.h>
-> +#include <config.h>
->  #include <command.h>
->  #include <cpu_func.h>
->  #include <errno.h>
-> diff --git a/board/advantech/imx8qm_dmsse20_a1/imx8qm_dmsse20_a1.c b/board/advantech/imx8qm_dmsse20_a1/imx8qm_dmsse20_a1.c
-> index 56b7bdb57c94..50b35db5f6cf 100644
-> --- a/board/advantech/imx8qm_dmsse20_a1/imx8qm_dmsse20_a1.c
-> +++ b/board/advantech/imx8qm_dmsse20_a1/imx8qm_dmsse20_a1.c
-> @@ -4,7 +4,6 @@
->   * Copyright 2019-2023 Kococonnector GmbH
->   */
->  
-> -#include <common.h>
->  #include <errno.h>
->  #include <linux/libfdt.h>
->  #include <asm/io.h>
-> diff --git a/board/advantech/imx8qm_dmsse20_a1/spl.c b/board/advantech/imx8qm_dmsse20_a1/spl.c
-> index e8959ede51d9..93cf07440026 100644
-> --- a/board/advantech/imx8qm_dmsse20_a1/spl.c
-> +++ b/board/advantech/imx8qm_dmsse20_a1/spl.c
-> @@ -3,7 +3,7 @@
->   * Copyright 2017-2018 NXP
->   * Copyright 2019-2023 Kococonnector GmbH
->   */
-> -#include <common.h>
-> +#include <config.h>
->  #include <dm.h>
->  #include <spl.h>
->  #include <init.h>
-> diff --git a/board/advantech/imx8qm_rom7720_a1/imx8qm_rom7720_a1.c b/board/advantech/imx8qm_rom7720_a1/imx8qm_rom7720_a1.c
-> index 7f766a688bb5..3def182f2967 100644
-> --- a/board/advantech/imx8qm_rom7720_a1/imx8qm_rom7720_a1.c
-> +++ b/board/advantech/imx8qm_rom7720_a1/imx8qm_rom7720_a1.c
-> @@ -4,7 +4,6 @@
->   * Copyright (C) 2019 Oliver Graute <oliver.graute@kococonnector.com>
->   */
->  
-> -#include <common.h>
->  #include <cpu_func.h>
->  #include <env.h>
->  #include <errno.h>
-> diff --git a/board/advantech/imx8qm_rom7720_a1/spl.c b/board/advantech/imx8qm_rom7720_a1/spl.c
-> index d32400101fc9..5863e335a8bc 100644
-> --- a/board/advantech/imx8qm_rom7720_a1/spl.c
-> +++ b/board/advantech/imx8qm_rom7720_a1/spl.c
-> @@ -2,7 +2,7 @@
->  /*
->   * Copyright 2017-2018 NXP
->   */
-> -#include <common.h>
-> +#include <config.h>
->  #include <dm.h>
->  #include <image.h>
->  #include <init.h>
-> diff --git a/board/advantech/som-db5800-som-6867/som-db5800-som-6867.c b/board/advantech/som-db5800-som-6867/som-db5800-som-6867.c
-> index 8499fc541fa7..9bbd5fd291aa 100644
-> --- a/board/advantech/som-db5800-som-6867/som-db5800-som-6867.c
-> +++ b/board/advantech/som-db5800-som-6867/som-db5800-som-6867.c
-> @@ -4,7 +4,6 @@
->   * Copyright (C) 2016 George McCollister <george.mccollister@gmail.com>
->   */
->  
-> -#include <common.h>
->  #include <init.h>
->  #include <asm/fsp1/fsp_support.h>
->  
-> -- 
-> 2.34.1
-> 
-Acked-by: Oliver Graute <oliver.graute@kococonnector.com>
+Hi Heiko,
+
+On Fri, Apr 26, 2024 at 12:40=E2=80=AFAM Heiko Schocher <hs@denx.de> wrote:
+
+> No chance for a bootcounter in a register?
+
+Yes, this is a better approach. I changed it to:
+
+CONFIG_BOOTCOUNT_LIMIT=3Dy
+CONFIG_SYS_BOOTCOUNT_MAGIC=3D0xB0C40000
+CONFIG_SYS_BOOTCOUNT_ADDR=3D0x30370090
+CONFIG_SYS_BOOTCOUNT_SINGLEWORD=3Dy
+
+and now bootcount increments.
+
+Thanks,
+
+Fabio Estevam
