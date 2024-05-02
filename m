@@ -4,109 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E64A1C4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 14:52:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF628C4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 15:01:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28C998839F;
-	Thu,  2 May 2024 16:52:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 383B68838E;
+	Thu,  2 May 2024 17:01:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MCl1gDHs";
+	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="F9WGoM2j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D7928838E; Thu,  2 May 2024 16:51:33 +0200 (CEST)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id 4424E883BE; Thu,  2 May 2024 17:01:04 +0200 (CEST)
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EE96883BA
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 16:51:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E02588377
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 17:01:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-437a660c94fso49964301cf.1
- for <u-boot@lists.denx.de>; Thu, 02 May 2024 07:51:29 -0700 (PDT)
+ spf=pass smtp.mailfrom=robert.marko@sartura.hr
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-53fa455cd94so6196974a12.2
+ for <u-boot@lists.denx.de>; Thu, 02 May 2024 08:01:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714661488; x=1715266288; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=wGQMi7jE0YvzucN/vY7Edusv5y4r3SPIyceXRPlHzy8=;
- b=MCl1gDHs4FsPl1IBzyHf+fUotJrvtmHc+Aa9o7o801DDfO0LNPSbyLVqUsJ2a0ZS01
- YBbAQvcKxGfuIFYL9LfXEDMf5En0BKp3HRJIrexkw3F+JWo7XQ1bs0h/2+4W7nzUFwQx
- NzmISFbZPe378LasYBewb3n+xYYHbwRX1JHI0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714661488; x=1715266288;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=sartura.hr; s=sartura; t=1714662060; x=1715266860; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wGQMi7jE0YvzucN/vY7Edusv5y4r3SPIyceXRPlHzy8=;
- b=fR9qW1Vq8gSlhyE9GOC0TbPXySJlyfYKb3BmgrfWxuAPe2cRuIpG0/+nMSW9sijDL0
- boqmF9ntuGXKpMNgv21kNIO7+HrJLpvwTO4gAFYOwVdOxUDJrnrwY+kH8fQ/fKyoD9Hs
- nU8KriVJh069jbRUojINwEVlRfk6p5LQU4yD0G15Lgmp07Vd27GHK40zMr6+fhGVT0M4
- M+3j4pejM+4iGxUW8V2RuwHBsRMDtZPaH/vpqtrDOOlTtYsdBLa8Fttl7HJxSbLylO7e
- IqniDhiWuGKJgtN7ESTKxx18Vs3lKfuJ1VVI8P9GRLhwAGlnwBLr5wk9uMneiE2MesWN
- FyKA==
-X-Gm-Message-State: AOJu0YwgoRPDtz8jrcyeSVJxAoRY3y08b3lX6kZAoaODHyDyJ6M4A9Sa
- V/rsY5eTsLx50Z31kROyl+/jPBw/YHo642+PWkfUMALkjI/ov8H5tAtlMirFz0g40vjiiMbCC4Y
- tK1UswJjg
-X-Google-Smtp-Source: AGHT+IFKE5Utm49AGZ0WahxcvfTQuJcLuU8K24AamH478PNSJ4zeYcGhzkKCTYf9Zdqu3HfsYKydJA==
-X-Received: by 2002:a05:622a:11c9:b0:43a:d84e:442b with SMTP id
- n9-20020a05622a11c900b0043ad84e442bmr2737703qtk.5.1714661488110; 
- Thu, 02 May 2024 07:51:28 -0700 (PDT)
-Received: from bill-the-cat ([187.144.98.216])
- by smtp.gmail.com with ESMTPSA id
- ec21-20020a05622a5b9500b00436e5e47969sm540707qtb.54.2024.05.02.07.51.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 May 2024 07:51:27 -0700 (PDT)
-Date: Thu, 2 May 2024 08:51:21 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Lukasz Majewski <lukma@denx.de>, Eddie Cai <eddie.cai.linux@gmail.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>,
- Michal Simek <michal.simek@amd.com>, Bin Meng <bmeng.cn@gmail.com>,
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Stephan Gerhold <stephan@gerhold.net>,
- Linus Walleij <linus.walleij@linaro.org>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Nishanth Menon <nm@ti.com>,
- Igor Prusov <ivprusov@salutedevices.com>,
- Roger Quadros <rogerq@kernel.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Jonas Karlman <jonas@kwiboo.se>, Jagan Teki <jagan@amarulasolutions.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Peter Korsgaard <peter@korsgaard.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Alexey Romanov <avromanov@salutedevices.com>,
- Sean Anderson <seanga2@gmail.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Teik Heng Chong <teik.heng.chong@intel.com>,
- Tim Harvey <tharvey@gateworks.com>, Mathieu Othacehe <othacehe@gnu.org>,
- Fabio Estevam <festevam@gmail.com>, Johan Jonker <jbx6244@gmail.com>,
- Xavier Drudis Ferran <xdrudis@tinet.cat>,
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sam Edwards <cfsworks@gmail.com>, Andre Przywara <andre.przywara@arm.com>
-Subject: Re: [PATCH 73/81] usb: Remove <common.h> and add needed includes
-Message-ID: <20240502145121.GW1054907@bill-the-cat>
-References: <20240502013138.2383421-1-trini@konsulko.com>
- <20240502013138.2383421-73-trini@konsulko.com>
- <87o79o4q63.fsf@baylibre.com>
+ bh=lOcG+5zlbj1MZP/PpZLb4v9LHSmxyu8q8dlGUob3fR0=;
+ b=F9WGoM2jkgcuJmyxkRAMEXGO4gLXvxzIeQZ9u+Aqhx0gxQz8TQI0PimKuIBbb6SG0h
+ esqFYl0aTD2NPQcWGQNVtZAleJo829CX7DXU777N/Qcej9HioIBX5yO21njtASRAWcL0
+ zIOd1dEYVqnl2NPKxy+g9cWuHtuG0xI0wQK1b1PojKWJ09g1r8k6iT6/9L594iQUtGYr
+ 1fISIydazK2CPNRTKmvN0v3Y1P7G9mFEjA0w8R7BzuVf0Q4UNeNv8ApEFQBfHU3teS6d
+ xeuJT9+IaxOYPoPVfl0yZrXNVgqP9Pe5goDxJui2cbLDaSkKM67TqRLHehoyGyBCQgLc
+ hSbg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714662060; x=1715266860;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lOcG+5zlbj1MZP/PpZLb4v9LHSmxyu8q8dlGUob3fR0=;
+ b=IuzGegDDtnSuwSaEXYzOEhXh51w9+rhzFoY8lXs7onvmcrSIqj3Kfij8JCwd1EbLSw
+ ZI2Yharxnh8L7KF0+Rf4xl9maYgt3WmZ8dhX6f5afHXlh8EPKUraNKYLpbJyDsC7sLNp
+ hTxY8JCG71csmK9b2/lPeVIiqmPW1Ww9q9MwmUPITqsMozItNo1ik4x2ca3vlCr3Q1F3
+ M1+wnv82npbz2Lxa1v0JsTEkWpBn/qXxEnax2OCAJzTzcwkI9q7a1A57vI+HtBcs0kMI
+ h4iwNZSMBI9/TQX5sFgcWVXLXM0/OxRu+V6bOY9tsLfeGZ+EPU2eR58f7wEEiIBQuJE0
+ yxYA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXMHB4SlKuV6AxGAzSgnpTruy0OnRz72yueqf5hwWtRoX1Ten0Szm0k/vg7pGsjp/tHBd6qw57t4cb9XFoo8igfeabSFA==
+X-Gm-Message-State: AOJu0Ywot6HfKJNZn5Lm3upXjfiOp6X2YxCjUnTn5AOXOFklqQpXgjA7
+ sDELwLzH8rp5pFTAoSqaV7Fi8a3CmmvetDsWM3By249LaxYsyNC6pK1yEPzSkf+tDUNQygo9bHQ
+ 2n7ItZsiINJWRTkSAsif8teW1Yy8pQ3YPfkB5ag==
+X-Google-Smtp-Source: AGHT+IEqFFWkuZ6G01w6Ur90qBuoXAENRhYu5PmYqQlog5Q17dAdDtmHvAx1YkNh67udTFvn82ihCHtYdya4h38dU4I=
+X-Received: by 2002:a17:90a:9918:b0:2ab:e45a:a27d with SMTP id
+ b24-20020a17090a991800b002abe45aa27dmr2368000pjp.39.1714662059527; Thu, 02
+ May 2024 08:00:59 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="On/n5sT3j9kS5TIn"
-Content-Disposition: inline
-In-Reply-To: <87o79o4q63.fsf@baylibre.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Thu, 02 May 2024 16:52:03 +0200
+References: <20240502-msm8916-hs-usb-clocks-v1-0-eeccf483b68d@samcday.com>
+ <526f5a87-24e6-4147-a29b-ee4e74c6abde@linaro.org>
+In-Reply-To: <526f5a87-24e6-4147-a29b-ee4e74c6abde@linaro.org>
+From: Robert Marko <robert.marko@sartura.hr>
+Date: Thu, 2 May 2024 17:00:48 +0200
+Message-ID: <CA+HBbNHQmRzovOaGEBhkJHt=YkSLvu-Nrt4027Z5uOjohTt+VA@mail.gmail.com>
+Subject: Re: [PATCH 0/2] qcom: ehci: enable core + iface clocks
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Sam Day <me@samcday.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,89 +90,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---On/n5sT3j9kS5TIn
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, May 02, 2024 at 09:40:52AM +0200, Mattijs Korpershoek wrote:
-> Hi Tom,
->=20
-> Thank you for the patch
->=20
-> On mer., mai 01, 2024 at 19:31, Tom Rini <trini@konsulko.com> wrote:
->=20
-> > Remove <common.h> from this driver directory and when needed
-> > add missing include files directly.
+On Thu, May 2, 2024 at 3:41=E2=80=AFPM Caleb Connolly <caleb.connolly@linar=
+o.org> wrote:
+>
+> Hi Sam,
+>
+> On 02/05/2024 15:16, Sam Day wrote:
+> > These clocks are mandatory, as can be seen in msm_hsusb driver in the
+> > Linux kernel.
 > >
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
->=20
-> [...]
->=20
-> > diff --git a/drivers/usb/host/xhci-rcar.c b/drivers/usb/host/xhci-rcar.c
-> > index fedcf7869295..38c5928faed5 100644
-> > --- a/drivers/usb/host/xhci-rcar.c
-> > +++ b/drivers/usb/host/xhci-rcar.c
-> > @@ -5,7 +5,6 @@
-> >   * Renesas RCar USB HOST xHCI Controller
-> >   */
-> > =20
-> > -#include <common.h>
-> >  #include <clk.h>
-> >  #include <dm.h>
-> >  #include <fdtdec.h>
-> > diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
-> > index 910c5f3352b8..1360a5940fa0 100644
-> > --- a/drivers/usb/host/xhci-ring.c
-> > +++ b/drivers/usb/host/xhci-ring.c
-> > @@ -13,7 +13,6 @@
-> >   *	    Vikas Sajjan <vikas.sajjan@samsung.com>
-> >   */
-> > =20
-> > -#include <common.h>
->=20
-> This generates the following build warning with
-> khadas-vim3_android_defconfig:
->=20
-> drivers/usb/host/xhci-ring.c: In function 'xhci_wait_for_event':
-> drivers/usb/host/xhci-ring.c:464:28: warning: implicit declaration of fun=
-ction 'get_timer'; did you mean 'get_mem'? [-Wimplicit-function-declaration]
->   464 |         unsigned long ts =3D get_timer(0);
->       |                            ^~~~~~~~~
->       |                            get_mem
->=20
-> Adding: "#include <time.h>" fixes the warning.
->=20
-> With the above fix included:
->=20
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> > The appropriate HS_USB AHB/SYSTEM clocks were added to gcc_apq8016.
+> >
+> > Technically there's other adjacent SoC families that can use the
+> > msm_hsusb driver with different clocks, but only msm8916/apq8016 are
+> > currently making use of it so I think this change shouldn't break
+> > anything elsewhere.
+>
+> Thanks for the patches. I have a feeling this might break IPQ4019, you
+> might need to stub the clks there (cc Robert).
 
-Did you have the full series applied? I don't see the warning here (nor
-in CI) and I suspect that:
-https://patchwork.ozlabs.org/project/uboot/patch/20240502013138.2383421-9-t=
-rini@konsulko.com/
-is what resolves this warning.
+Hi,
+IPQ4019 does not use ehci-msm, but rather DWC3 so it should be fine.
+
+Regards,
+Robert
+>
+> Seems like the To: and Cc: addresses aren't all quite right still.
+> >
+> > Signed-off-by: Sam Day <me@samcday.com>
+> > ---
+> > Sam Day (2):
+> >        clk/qcom: apq8016: add support for USB_HS clocks
+> >        ehci: msm: bring up iface + core clocks
+> >
+> >   drivers/clk/qcom/clock-apq8016.c | 31 +++++++++++++++++++++++++++++++
+> >   drivers/usb/host/ehci-msm.c      | 37 +++++++++++++++++++++++++++++++=
+++++--
+> >   2 files changed, 66 insertions(+), 2 deletions(-)
+> > ---
+> > base-commit: ff0de1f0557ed7d2dab47ba976a37347a1fdc432
+> > change-id: 20240502-msm8916-hs-usb-clocks-34bc22b03f3d
+> >
+> > Best regards,
+>
+> --
+> // Caleb (they/them)
+
+
 
 --=20
-Tom
-
---On/n5sT3j9kS5TIn
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYzqGkACgkQFHw5/5Y0
-tywsYwv/dLD+OFFzUcv7xPQktGEKgWkTK1bD1NiTL3d5pHX5JmPyj3rUg0xHMvNH
-8U/8dGn5daxhKCc6c7HAvZj+mrTxazgbYsZqxjbaCeVFy6wF2mS7533+zkntXjyg
-9npkKGZBcgeXhj019PUEhlZMfNFWOjQi3Cr4uyL6+B0IG1WORln8B5F2gVk0pfjB
-SB4j9VgE2gDZ2wghc0MGDhOhoWGUxgNw+i6LWsfH1HdhULqmARKFxiV7Kb6kDML5
-ljuh89p/D1d56xSTneEZHPvET+7US/X2cjknFyUygmvQHFWeEj39BrYSnod5IJUM
-W66wrXUHIFTJ2AzcffAzejj3zVh5we8Ut/u13wKv1zGN6Ga/X8MiSeCBabTEMxBa
-6RL7DbBwD2Z8FXHlNEEzNcq/uUds6Z8RriBzjB2Du93tRVWyjULyKVVLoiAKkZvC
-WmEAvXlSRvH+tIhf29gSY4Xt7TaGAwj/MKtore10YLh+LS233FFDxow6OQPYXz/I
-EcNsfGGE
-=6LE8
------END PGP SIGNATURE-----
-
---On/n5sT3j9kS5TIn--
+Robert Marko
+Staff Embedded Linux Engineer
+Sartura Ltd.
+Lendavska ulica 16a
+10000 Zagreb, Croatia
+Email: robert.marko@sartura.hr
+Web: www.sartura.hr
