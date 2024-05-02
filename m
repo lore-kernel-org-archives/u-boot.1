@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FD5AC4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:38:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B0DCC4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:38:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46FC088C8B;
-	Thu,  2 May 2024 03:33:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6867388BEF;
+	Thu,  2 May 2024 03:33:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="P0nhzqei";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gcaxBxxd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6BEF788BEF; Thu,  2 May 2024 03:33:08 +0200 (CEST)
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
- [IPv6:2607:f8b0:4864:20::b29])
+ id 670A088C64; Thu,  2 May 2024 03:33:13 +0200 (CEST)
+Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
+ [IPv6:2607:f8b0:4864:20::82e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAE9488C8D
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:33:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D46D88BEF
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:33:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb29.google.com with SMTP id
- 3f1490d57ef6-dc6dcd9124bso7443474276.1
- for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:33:05 -0700 (PDT)
+Received: by mail-qt1-x82e.google.com with SMTP id
+ d75a77b69052e-43a14bce92dso48042541cf.0
+ for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:33:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714613584; x=1715218384; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714613590; x=1715218390; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yGytr+Qks/+nskVxySdnsb/VNo2eKrUVjw5NkvMxnR0=;
- b=P0nhzqeiyx0HX3yyQhfmD/f/i1a+JFaaQ8qbcK5AikANaGDx7zW1OBX2sV8QB4N+s7
- 6QwvzehxY5ygR6DFWIsSlzFrUubctsEEGb5YC6ywgTnXeFZAkVHkCJOouRmPUJYTVlhU
- tTMd/wWwmJgHSYZqPGFJ6AVJFb+kI4RKi4BJY=
+ bh=TNx9S1yKskQeKTOeSZfT/bW4jhGP3MHnSCFF8zUST5c=;
+ b=gcaxBxxdU5xRvNsC1FA890Z+2+gCG3qqrkJDKyUr38Du1big9bXs2Y7bBv5KJFFY0i
+ s9Vtq/6ufngZR1LUTZHYrKJS0zDW2FaVJxumrQhQCwHT1bopsTnxO3LkntJ4VLCe1ArX
+ QjPB9ps1j3MS4GJ/jZ5E/2Kq/FdHYcOHuIYEQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714613584; x=1715218384;
+ d=1e100.net; s=20230601; t=1714613590; x=1715218390;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yGytr+Qks/+nskVxySdnsb/VNo2eKrUVjw5NkvMxnR0=;
- b=aOkuzN4jaweuxQ44BORXYyvTUJmV9pagqZJry7ij4BI0FKdvech+bMXhnvpUy6u0Tu
- knVHkLcYGiheXEriELOYuPwznFxJfjNIek0t8fbOsqvhCzv+GUmbav3yxSki76JMH9mK
- MZuYHfacehjeU1xirARgJYpLJ1oTSDwsBZnjqB2PsbLbmwiwofoWW6wtoLD+/IBdmae2
- nTvZylm5ncEgXDndXbQGNB6Wv7ZhJtAUAA3HgB7SoVKLBCtDtlmFbAQAP5bC4bfP5edn
- fGgdVCnRJwyHhGny/+rjQV9y4k0ZO4t5/3ixIbbkouUlzEVcX04ZmyiQrn4Ff2BnTsRl
- TJsA==
-X-Gm-Message-State: AOJu0YwQGhgxuTvw62C3y2lJu4tr15FCMCsY4PB02RIWyBOTj+3dmv8G
- dC02UDwWskkdVzeta3syRdsZM4cYUYhKbWJ99I3FgM4MpwkCjZaO3NmfQsokZrQyyVbY5ogOAmH
- pu9D9GGzL
-X-Google-Smtp-Source: AGHT+IHyKljwtZ1e9SqTQ/pJCriECKxS7WyYUkBvKTwCQNT1zn4QEIw1rRyrbHebeIibuFKwo/Zlzw==
-X-Received: by 2002:a25:d084:0:b0:dcb:ad22:1b1 with SMTP id
- h126-20020a25d084000000b00dcbad2201b1mr4335367ybg.3.1714613584510; 
- Wed, 01 May 2024 18:33:04 -0700 (PDT)
+ bh=TNx9S1yKskQeKTOeSZfT/bW4jhGP3MHnSCFF8zUST5c=;
+ b=ikzfYytO6Q9aJ+BOPf6mR9lrtTMRb9N+r7bmVtOn2KytFhDUqSYp5BnJLBQGQNKjbR
+ 529ptgg1bCYtNeRW4VpnLfbFpqGz6ECZhjBd7BOTOFx9DV3kmkE0omqCpwb0ppBSLJHF
+ 1au23/pHZPrsnxSW+1s7WlbyvM9Jq32ghldpir9khVR5N547e3ukHQnCJoDocqnQguZR
+ 5jaz8qUn6JFLMmtZC+wYZT9q6yXBcdRwl4g3GP7rIurfDiRZmjaqdi8L7mwW2wF1p2Gq
+ wnWC3I4LM86U1SVpNhN6+Z7+203WvgOE5NXQ385tJMaka18Yel6EA0vhucxJdZJDqBnV
+ luAw==
+X-Gm-Message-State: AOJu0YxAdWHu4rfl5PWxs3k/IAImDbX1mms/WvrjhDH8MINnhpkrysRg
+ t7tCYLAZ6FQ82I/j+3iOIJBgItl13MXpzo5pB7UBM3Vf9Tf+X9Q72tb3JqdMAEh2AGlvmzJkruQ
+ bhVUs1qFP
+X-Google-Smtp-Source: AGHT+IG2FZiPMSB3D7T/kPsJ/M0VKMunyM05xT43fKfIG/InZGcDif+NRFTVsSiJbHewMQe9nUU35g==
+X-Received: by 2002:a05:622a:64e:b0:436:5f58:84d5 with SMTP id
+ a14-20020a05622a064e00b004365f5884d5mr608886qtb.21.1714613589750; 
+ Wed, 01 May 2024 18:33:09 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.33.03
+ c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.33.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 May 2024 18:33:04 -0700 (PDT)
+ Wed, 01 May 2024 18:33:09 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>,
-	Bin Meng <bmeng.cn@gmail.com>
-Subject: [PATCH 47/81] pch: Remove <common.h> and add needed includes
-Date: Wed,  1 May 2024 19:31:04 -0600
-Message-Id: <20240502013138.2383421-47-trini@konsulko.com>
+Cc: Ramon Fried <rfried.dev@gmail.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH 49/81] pci_endpoint: Remove <common.h> and add needed includes
+Date: Wed,  1 May 2024 19:31:06 -0600
+Message-Id: <20240502013138.2383421-49-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240502013138.2383421-1-trini@konsulko.com>
 References: <20240502013138.2383421-1-trini@konsulko.com>
@@ -95,64 +95,51 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
+Cc: Ramon Fried <rfried.dev@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>
-Cc: Bin Meng <bmeng.cn@gmail.com>
 ---
- drivers/pch/pch-uclass.c  | 1 -
- drivers/pch/pch7.c        | 1 -
- drivers/pch/pch9.c        | 1 -
- drivers/pch/sandbox_pch.c | 1 -
- 4 files changed, 4 deletions(-)
+ drivers/pci_endpoint/pci_ep-uclass.c   | 1 -
+ drivers/pci_endpoint/pcie-cadence-ep.c | 1 -
+ drivers/pci_endpoint/sandbox-pci_ep.c  | 1 -
+ 3 files changed, 3 deletions(-)
 
-diff --git a/drivers/pch/pch-uclass.c b/drivers/pch/pch-uclass.c
-index af028f9cecad..9af247580042 100644
---- a/drivers/pch/pch-uclass.c
-+++ b/drivers/pch/pch-uclass.c
-@@ -6,7 +6,6 @@
+diff --git a/drivers/pci_endpoint/pci_ep-uclass.c b/drivers/pci_endpoint/pci_ep-uclass.c
+index 6ee4cfbdb4a8..902d1a51eaa3 100644
+--- a/drivers/pci_endpoint/pci_ep-uclass.c
++++ b/drivers/pci_endpoint/pci_ep-uclass.c
+@@ -11,7 +11,6 @@
  
- #define LOG_CATEGORY UCLASS_PCH
+ #define LOG_CATEGORY UCLASS_PCI_EP
  
 -#include <common.h>
  #include <dm.h>
- #include <pch.h>
- 
-diff --git a/drivers/pch/pch7.c b/drivers/pch/pch7.c
-index 5fb35a19effe..4ef82a77e270 100644
---- a/drivers/pch/pch7.c
-+++ b/drivers/pch/pch7.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2014 Google, Inc
+ #include <errno.h>
+ #include <asm/global_data.h>
+diff --git a/drivers/pci_endpoint/pcie-cadence-ep.c b/drivers/pci_endpoint/pcie-cadence-ep.c
+index d58c64982b27..e02ea14e4e4a 100644
+--- a/drivers/pci_endpoint/pcie-cadence-ep.c
++++ b/drivers/pci_endpoint/pcie-cadence-ep.c
+@@ -4,7 +4,6 @@
+  * Written by Ramon Fried <ramon.fried@gmail.com>
   */
  
 -#include <common.h>
  #include <dm.h>
- #include <log.h>
- #include <pch.h>
-diff --git a/drivers/pch/pch9.c b/drivers/pch/pch9.c
-index 3137eb2c28f5..24b0465efde4 100644
---- a/drivers/pch/pch9.c
-+++ b/drivers/pch/pch9.c
-@@ -5,7 +5,6 @@
- 
- #define LOG_CATEGORY	UCLASS_PCH
- 
--#include <common.h>
- #include <dm.h>
- #include <log.h>
- #include <pch.h>
-diff --git a/drivers/pch/sandbox_pch.c b/drivers/pch/sandbox_pch.c
-index 37c368954b45..aa82dca560f1 100644
---- a/drivers/pch/sandbox_pch.c
-+++ b/drivers/pch/sandbox_pch.c
+ #include <errno.h>
+ #include <pci_ep.h>
+diff --git a/drivers/pci_endpoint/sandbox-pci_ep.c b/drivers/pci_endpoint/sandbox-pci_ep.c
+index de148cddb91e..aa623fa357d5 100644
+--- a/drivers/pci_endpoint/sandbox-pci_ep.c
++++ b/drivers/pci_endpoint/sandbox-pci_ep.c
 @@ -3,7 +3,6 @@
-  * Copyright 2018 Google LLC
+  * Copyright (c) 2019 Ramon Fried <ramon.fried@gmail.com>
   */
  
 -#include <common.h>
  #include <dm.h>
- #include <pch.h>
- 
+ #include <errno.h>
+ #include <pci.h>
 -- 
 2.34.1
 
