@@ -4,112 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 830D2C4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:43:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A58B3C4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:43:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE1B088D21;
-	Thu,  2 May 2024 03:34:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2A1F388D27;
+	Thu,  2 May 2024 03:34:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mlZair7d";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="j6inI+yw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C58D88C2A; Thu,  2 May 2024 03:32:17 +0200 (CEST)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
+ id B9F5288C62; Thu,  2 May 2024 03:32:36 +0200 (CEST)
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
+ [IPv6:2607:f8b0:4864:20::72e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B3E288C2C
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:32:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F53588C69
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:32:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-de603e3072dso3907979276.1
- for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:32:12 -0700 (PDT)
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-790eedf44faso322010485a.3
+ for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:32:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714613530; x=1715218330; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714613552; x=1715218352; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Bne2E+NSPRlloD3Z/gd+W9/1OXAXkV8PSfwyvb8F5oA=;
- b=mlZair7dqnFTBL+WmyguhMeY6rSUxrQiWhDQ1CsvPgbgfxwyayhmqVhb8c7jhF576I
- TooH69sw4lC4gS6jz6aH2xq7xGfQSkwNXMInKVvpSeCEQH/T9n0wRFWhTDj0P5C1P0OP
- eYgSEMWCRI9wpPN+IXj6HvgYVQGn9j1uCa+IU=
+ bh=6/iCYd+6f1phOCaE6evWE97fVyRtmhaSh+sItDUuZ4k=;
+ b=j6inI+yw/iBvbocn2ocW/2CmKDxsOJR6poe1WoyeIfyrsSl4konBHpIL3n+XhlCrUq
+ BJcI4F3pRssUHswxxm+4LRki+/M3eud888SG7sVSxHajc3x3ZRwZbkd+WS/EjD6se0CN
+ UCjC5cO5zDA2A+Wlsl9RofxBKIvyGNMkFMp1Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714613530; x=1715218330;
+ d=1e100.net; s=20230601; t=1714613552; x=1715218352;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Bne2E+NSPRlloD3Z/gd+W9/1OXAXkV8PSfwyvb8F5oA=;
- b=eQYomv1giIiXk4ra9bn3KMGmMgLZMy7B1c1hrlQ2JyK4l+VZV9WlTEcNXD65w5qdr1
- bN82zVQ5AU5MXqll6MaFMGjb2L3jolFHuBBWl2iGsxCB780F7bdEcEIm+kcgS6VN9+bz
- vT8+Cuw0mOHLykiz5RrxjOQkJScwBuOt0qYgjxxLCtO5YdnYew9Nsl7UPrQrKvFeaSHR
- f5aKqetqrMO8kZ2HEX0lVPuXtEU1bnhc6Q9HBMHivMmxOd8m0PIy4xYasC9nGVdtaJ2A
- wlq9Kv+zDah5T459omtZy8vYSSRP4CZdBe7ED4FlqBuL8RvlXR9Hjlobv1k/FPhybfJQ
- Kx1g==
-X-Gm-Message-State: AOJu0Yz4qm9SYoxrzzOq7zeW1SVKSznP72qATM7+Lokwpj8RMXAExuxD
- C2h0roB9yTW/d6dnn1FjLL15gNbs2iJeSHupGftHbNddHCx0rtED6J9xdjkBYJszleyqq4AlGAM
- 4xx1eW21C
-X-Google-Smtp-Source: AGHT+IF74H+BtSLf6FxNydDhih0yEUHfsNVIexO1dL5SD7fwccph3EPUXSvpnIn5pcipDRjc9Wuh9g==
-X-Received: by 2002:a25:8403:0:b0:dcc:45c0:f3ab with SMTP id
- u3-20020a258403000000b00dcc45c0f3abmr4735083ybk.29.1714613530183; 
- Wed, 01 May 2024 18:32:10 -0700 (PDT)
+ bh=6/iCYd+6f1phOCaE6evWE97fVyRtmhaSh+sItDUuZ4k=;
+ b=BC51HacmGW6G/TcdK+MLB4Z7ehOfdl9m4gdrtQ7cHm381oH3VuDhtlyhcKaUJT4n5j
+ kavAI79uPQ21E/qTnvug7O8Qim26q9U6hDasu1Dx64RifUvM6bTqn7Yq0FVNb3XXm9Xt
+ mcTbdB7Fe8ZGlY7F3Dwvhz0ATujFIpx/BE5rr65GhfYZeMj0GdKr5thCXm6CmCB1yphm
+ DxMN/RuphMSpbTefug8woDk84/EvKT/t0FZhbPfsrjN6raRCi0IRtj4lSqPFnoGcTZYe
+ e7hWWTc8ilIPt+C40n01lJqqhLlcuU6XDFqbKc+y5Pj4UaswaSuwcVcFcZK5fRwbPboR
+ 35Sg==
+X-Gm-Message-State: AOJu0YxEOvcx0e+HVmfSHdeMtgXDnIuwEyGG3DpnRdcQMcAhYjnguOS4
+ qeLeZn6Suiv0N/mG+tPd6GeyuGwZkz9YtTS4W4q9hTo1jdZnt2g+w4ay/5m3OwGaAilnyX5tfz3
+ 2liWriUdh
+X-Google-Smtp-Source: AGHT+IGO0Az2Q56TvhJq+uXGYl4rp5/7E7egNJfc9XrMh+pLk0b6cmIzoDeA3Dj+/hX4EiXAGz4UJw==
+X-Received: by 2002:a05:622a:38f:b0:43a:bd5b:3ff1 with SMTP id
+ j15-20020a05622a038f00b0043abd5b3ff1mr5228769qtx.63.1714613552003; 
+ Wed, 01 May 2024 18:32:32 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.32.05
+ c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.32.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 May 2024 18:32:09 -0700 (PDT)
+ Wed, 01 May 2024 18:32:31 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+Cc: Matthias Brugger <mbrugger@suse.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Alex Nemirovsky <alex.nemirovsky@cortina-access.com>,
  Ryan Chen <ryan_chen@aspeedtech.com>,
  Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
  Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
- Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
- Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
- Liviu Dudau <liviu.dudau@foss.arm.com>, Ryder Lee <ryder.lee@mediatek.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Mario Six <mario.six@gdsys.cc>,
- Stefan Roese <sr@denx.de>,
- Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
  Dai Okamura <okamura.dai@socionext.com>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Igor Prusov <ivprusov@salutedevices.com>,
- Stefan Bosch <stefan_b@posteo.net>, Francois Berder <fberder@outlook.fr>,
- Johan Jonker <jbx6244@gmail.com>, Minkyu Kang <mk7.kang@samsung.com>,
- Chanho Park <chanho61.park@samsung.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Konrad Dybcio <konrad.dybcio@linaro.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Torsten Duwe <duwe@suse.de>, Hal Feng <hal.feng@starfivetech.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Xingyu Wu <xingyu.wu@starfivetech.com>,
- Hoegeun Kwon <hoegeun.kwon@samsung.com>, Vishal Mahaveer <vishalm@ti.com>,
- Nishanth Menon <nm@ti.com>, Bryan Brattlof <bb@ti.com>,
- Hari Nagalla <hnagalla@ti.com>, Apurva Nandan <a-nandan@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, Udit Kumar <u-kumar1@ti.com>
-Subject: [PATCH 19/81] clk: Remove <common.h> and add needed includes
-Date: Wed,  1 May 2024 19:30:36 -0600
-Message-Id: <20240502013138.2383421-19-trini@konsulko.com>
+ Michal Simek <michal.simek@amd.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Gregory CLEMENT <gregory.clement@bootlin.com>,
+ Lars Povlsen <lars.povlsen@microchip.com>,
+ Horatiu Vultur <horatiu.vultur@microchip.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Stefan Roese <sr@denx.de>,
+ Stephan Gerhold <stephan@gerhold.net>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ Stefan Bosch <stefan_b@posteo.net>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Michael Walle <michael@walle.cc>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Sean Anderson <seanga2@gmail.com>, Andre Przywara <andre.przywara@arm.com>,
+ Qu Wenruo <wqu@suse.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heiko Schocher <hs@denx.de>, Peng Fan <peng.fan@nxp.com>,
+ Bin Meng <bmeng.cn@gmail.com>,
+ Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>,
+ Jim Liu <jim.t90615@gmail.com>, Nishanth Menon <nm@ti.com>,
+ Samuel Holland <samuel@sholland.org>, Sam Edwards <CFSworks@gmail.com>
+Subject: [PATCH 33/81] gpio: Remove <common.h> and add needed includes
+Date: Wed,  1 May 2024 19:30:50 -0600
+Message-Id: <20240502013138.2383421-33-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240502013138.2383421-1-trini@konsulko.com>
 References: <20240502013138.2383421-1-trini@konsulko.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 02 May 2024 03:34:44 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -133,1998 +128,878 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Lukasz Majewski <lukma@denx.de>
-Cc: Sean Anderson <seanga2@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>
+Cc: Matthias Brugger <mbrugger@suse.com>
+Cc: Peter Robinson <pbrobinson@gmail.com>
+Cc: Alex Nemirovsky <alex.nemirovsky@cortina-access.com>
 Cc: Ryan Chen <ryan_chen@aspeedtech.com>
 Cc: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
 Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>
 Cc: Joel Stanley <joel@jms.id.au>
-Cc: Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Michal Simek <michal.simek@amd.com>
-Cc: Liviu Dudau <liviu.dudau@foss.arm.com>
-Cc: Ryder Lee <ryder.lee@mediatek.com>
-Cc: Weijie Gao <weijie.gao@mediatek.com>
-Cc: Chunfeng Yun <chunfeng.yun@mediatek.com>
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Mario Six <mario.six@gdsys.cc>
-Cc: Stefan Roese <sr@denx.de>
-Cc: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Sumit Garg <sumit.garg@linaro.org>
-Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
-Cc: Kever Yang <kever.yang@rock-chips.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>
-Cc: Andre Przywara <andre.przywara@arm.com>
-Cc: Thierry Reding <treding@nvidia.com>
-Cc: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: Kunihiko Hayashi <hayashi.kunihiko@socionext.com>
 Cc: Dai Okamura <okamura.dai@socionext.com>
-Cc: Eugen Hristev <eugen.hristev@collabora.com>
-Cc: Igor Prusov <ivprusov@salutedevices.com>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>
+Cc: Gregory CLEMENT <gregory.clement@bootlin.com>
+Cc: Lars Povlsen <lars.povlsen@microchip.com>
+Cc: Horatiu Vultur <horatiu.vultur@microchip.com>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Sumit Garg <sumit.garg@linaro.org>
+Cc: Stefan Roese <sr@denx.de>
+Cc: Stephan Gerhold <stephan@gerhold.net>
+Cc: Linus Walleij <linus.walleij@linaro.org>
 Cc: Stefan Bosch <stefan_b@posteo.net>
-Cc: Francois Berder <fberder@outlook.fr>
-Cc: Johan Jonker <jbx6244@gmail.com>
-Cc: Minkyu Kang <mk7.kang@samsung.com>
-Cc: Chanho Park <chanho61.park@samsung.com>
-Cc: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Konrad Dybcio <konrad.dybcio@linaro.org>
-Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Cc: Torsten Duwe <duwe@suse.de>
-Cc: Hal Feng <hal.feng@starfivetech.com>
-Cc: Leo Yu-Chi Liang <ycliang@andestech.com>
-Cc: Xingyu Wu <xingyu.wu@starfivetech.com>
-Cc: Hoegeun Kwon <hoegeun.kwon@samsung.com>
-Cc: Vishal Mahaveer <vishalm@ti.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
+Cc: Kever Yang <kever.yang@rock-chips.com>
+Cc: Michael Walle <michael@walle.cc>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Thierry Reding <treding@nvidia.com>
+Cc: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Sean Anderson <seanga2@gmail.com>
+Cc: Andre Przywara <andre.przywara@arm.com>
+Cc: Qu Wenruo <wqu@suse.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Heiko Schocher <hs@denx.de>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>
+Cc: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
+Cc: Jim Liu <jim.t90615@gmail.com>
 Cc: Nishanth Menon <nm@ti.com>
-Cc: Bryan Brattlof <bb@ti.com>
-Cc: Hari Nagalla <hnagalla@ti.com>
-Cc: Apurva Nandan <a-nandan@ti.com>
-Cc: Neha Malcom Francis <n-francis@ti.com>
-Cc: Udit Kumar <u-kumar1@ti.com>
+Cc: Samuel Holland <samuel@sholland.org>
+Cc: Sam Edwards <CFSworks@gmail.com>
 ---
- drivers/clk/altera/clk-agilex.c          | 1 -
- drivers/clk/altera/clk-arria10.c         | 1 -
- drivers/clk/altera/clk-mem-n5x.c         | 1 -
- drivers/clk/altera/clk-n5x.c             | 1 -
- drivers/clk/aspeed/clk_ast2500.c         | 1 -
- drivers/clk/aspeed/clk_ast2600.c         | 1 -
- drivers/clk/at91/clk-generic.c           | 1 -
- drivers/clk/at91/clk-main.c              | 1 -
- drivers/clk/at91/clk-master.c            | 1 -
- drivers/clk/at91/clk-peripheral.c        | 1 -
- drivers/clk/at91/clk-programmable.c      | 1 -
- drivers/clk/at91/clk-sam9x60-pll.c       | 1 -
- drivers/clk/at91/clk-system.c            | 1 -
- drivers/clk/at91/clk-utmi.c              | 1 -
- drivers/clk/at91/compat.c                | 2 +-
- drivers/clk/at91/pmc.c                   | 1 -
- drivers/clk/at91/sam9x60.c               | 1 -
- drivers/clk/at91/sama7g5.c               | 1 -
- drivers/clk/at91/sckc.c                  | 1 -
- drivers/clk/clk-cdce9xx.c                | 1 -
- drivers/clk/clk-composite.c              | 1 -
- drivers/clk/clk-divider.c                | 1 -
- drivers/clk/clk-fixed-factor.c           | 1 -
- drivers/clk/clk-gate.c                   | 1 -
- drivers/clk/clk-hsdk-cgu.c               | 1 -
- drivers/clk/clk-mux.c                    | 1 -
- drivers/clk/clk-uclass.c                 | 1 -
- drivers/clk/clk-xlnx-clock-wizard.c      | 1 -
- drivers/clk/clk.c                        | 1 -
- drivers/clk/clk_bcm6345.c                | 1 -
- drivers/clk/clk_boston.c                 | 1 -
- drivers/clk/clk_fixed_factor.c           | 1 -
- drivers/clk/clk_fixed_rate.c             | 1 -
- drivers/clk/clk_k210.c                   | 1 -
- drivers/clk/clk_pic32.c                  | 1 -
- drivers/clk/clk_sandbox.c                | 1 -
- drivers/clk/clk_sandbox_ccf.c            | 1 -
- drivers/clk/clk_sandbox_test.c           | 1 -
- drivers/clk/clk_scmi.c                   | 1 -
- drivers/clk/clk_versaclock.c             | 1 -
- drivers/clk/clk_versal.c                 | 1 -
- drivers/clk/clk_vexpress_osc.c           | 1 -
- drivers/clk/clk_zynq.c                   | 1 -
- drivers/clk/clk_zynqmp.c                 | 1 -
- drivers/clk/exynos/clk-exynos7420.c      | 1 -
- drivers/clk/ics8n3qv01.c                 | 1 -
- drivers/clk/imx/clk-composite-8m.c       | 1 -
- drivers/clk/imx/clk-composite-93.c       | 1 -
- drivers/clk/imx/clk-fracn-gppll.c        | 1 -
- drivers/clk/imx/clk-gate-93.c            | 1 -
- drivers/clk/imx/clk-gate2.c              | 1 -
- drivers/clk/imx/clk-imx6q.c              | 1 -
- drivers/clk/imx/clk-imx8.c               | 1 -
- drivers/clk/imx/clk-imx8mm.c             | 1 -
- drivers/clk/imx/clk-imx8mn.c             | 1 -
- drivers/clk/imx/clk-imx8mp.c             | 1 -
- drivers/clk/imx/clk-imx8mq.c             | 1 -
- drivers/clk/imx/clk-imx8qm.c             | 1 -
- drivers/clk/imx/clk-imx8qxp.c            | 1 -
- drivers/clk/imx/clk-imx93.c              | 1 -
- drivers/clk/imx/clk-imxrt1020.c          | 1 -
- drivers/clk/imx/clk-imxrt1050.c          | 1 -
- drivers/clk/imx/clk-imxrt1170.c          | 1 -
- drivers/clk/imx/clk-pfd.c                | 1 -
- drivers/clk/imx/clk-pll14xx.c            | 1 -
- drivers/clk/imx/clk-pllv3.c              | 1 -
- drivers/clk/intel/clk_intel.c            | 1 -
- drivers/clk/mediatek/clk-mt7622.c        | 1 -
- drivers/clk/mediatek/clk-mt7623.c        | 1 -
- drivers/clk/mediatek/clk-mt7629.c        | 1 -
- drivers/clk/mediatek/clk-mt8183.c        | 1 -
- drivers/clk/mediatek/clk-mt8512.c        | 1 -
- drivers/clk/mediatek/clk-mt8516.c        | 1 -
- drivers/clk/mediatek/clk-mt8518.c        | 1 -
- drivers/clk/mediatek/clk-mtk.c           | 1 -
- drivers/clk/meson/a1.c                   | 1 -
- drivers/clk/meson/axg-ao.c               | 1 -
- drivers/clk/meson/axg.c                  | 1 -
- drivers/clk/meson/g12a-ao.c              | 1 -
- drivers/clk/meson/g12a.c                 | 1 -
- drivers/clk/meson/gxbb.c                 | 1 -
- drivers/clk/microchip/mpfs_clk.c         | 1 -
- drivers/clk/microchip/mpfs_clk_cfg.c     | 1 -
- drivers/clk/microchip/mpfs_clk_msspll.c  | 1 -
- drivers/clk/microchip/mpfs_clk_periph.c  | 1 -
- drivers/clk/mpc83xx_clk.c                | 1 -
- drivers/clk/mtmips/clk-mt7628.c          | 1 -
- drivers/clk/mvebu/armada-37xx-periph.c   | 1 -
- drivers/clk/mvebu/armada-37xx-tbg.c      | 1 -
- drivers/clk/owl/clk_owl.c                | 1 -
- drivers/clk/qcom/clock-apq8016.c         | 1 -
- drivers/clk/qcom/clock-apq8096.c         | 1 -
- drivers/clk/qcom/clock-ipq4019.c         | 1 -
- drivers/clk/qcom/clock-qcom.c            | 1 -
- drivers/clk/qcom/clock-qcs404.c          | 1 -
- drivers/clk/qcom/clock-sdm845.c          | 1 -
- drivers/clk/rockchip/clk_pll.c           | 1 -
- drivers/clk/rockchip/clk_px30.c          | 1 -
- drivers/clk/rockchip/clk_rk3036.c        | 1 -
- drivers/clk/rockchip/clk_rk3066.c        | 1 -
- drivers/clk/rockchip/clk_rk3128.c        | 1 -
- drivers/clk/rockchip/clk_rk3188.c        | 1 -
- drivers/clk/rockchip/clk_rk322x.c        | 1 -
- drivers/clk/rockchip/clk_rk3288.c        | 1 -
- drivers/clk/rockchip/clk_rk3308.c        | 1 -
- drivers/clk/rockchip/clk_rk3328.c        | 1 -
- drivers/clk/rockchip/clk_rk3368.c        | 1 -
- drivers/clk/rockchip/clk_rk3399.c        | 1 -
- drivers/clk/rockchip/clk_rk3568.c        | 1 -
- drivers/clk/rockchip/clk_rk3588.c        | 1 -
- drivers/clk/rockchip/clk_rv1108.c        | 1 -
- drivers/clk/rockchip/clk_rv1126.c        | 1 -
- drivers/clk/sifive/sifive-prci.c         | 1 -
- drivers/clk/starfive/clk-jh7110-pll.c    | 1 -
- drivers/clk/starfive/clk-jh7110.c        | 1 -
- drivers/clk/stm32/clk-stm32-core.c       | 1 -
- drivers/clk/stm32/clk-stm32f.c           | 1 -
- drivers/clk/stm32/clk-stm32h7.c          | 1 -
- drivers/clk/stm32/clk-stm32mp1.c         | 1 -
- drivers/clk/stm32/clk-stm32mp13.c        | 1 -
- drivers/clk/sunxi/clk_a10.c              | 1 -
- drivers/clk/sunxi/clk_a10s.c             | 1 -
- drivers/clk/sunxi/clk_a23.c              | 1 -
- drivers/clk/sunxi/clk_a31.c              | 1 -
- drivers/clk/sunxi/clk_a64.c              | 1 -
- drivers/clk/sunxi/clk_a80.c              | 1 -
- drivers/clk/sunxi/clk_a83t.c             | 1 -
- drivers/clk/sunxi/clk_d1.c               | 1 -
- drivers/clk/sunxi/clk_f1c100s.c          | 1 -
- drivers/clk/sunxi/clk_h3.c               | 1 -
- drivers/clk/sunxi/clk_h6.c               | 1 -
- drivers/clk/sunxi/clk_h616.c             | 1 -
- drivers/clk/sunxi/clk_r40.c              | 1 -
- drivers/clk/sunxi/clk_sunxi.c            | 1 -
- drivers/clk/sunxi/clk_v3s.c              | 1 -
- drivers/clk/tegra/tegra-car-clk.c        | 1 -
- drivers/clk/tegra/tegra186-clk.c         | 1 -
- drivers/clk/ti/clk-am3-dpll-x2.c         | 1 -
- drivers/clk/ti/clk-am3-dpll.c            | 1 -
- drivers/clk/ti/clk-ctrl.c                | 1 -
- drivers/clk/ti/clk-divider.c             | 1 -
- drivers/clk/ti/clk-gate.c                | 1 -
- drivers/clk/ti/clk-k3-pll.c              | 1 -
- drivers/clk/ti/clk-k3.c                  | 1 -
- drivers/clk/ti/clk-mux.c                 | 1 -
- drivers/clk/ti/clk-sci.c                 | 1 -
- drivers/clk/ti/clk.c                     | 1 -
- drivers/clk/ti/omap4-cm.c                | 1 -
- drivers/clk/uniphier/clk-uniphier-core.c | 1 -
- 149 files changed, 1 insertion(+), 149 deletions(-)
+ drivers/gpio/74x164_gpio.c          | 1 -
+ drivers/gpio/altera_pio.c           | 1 -
+ drivers/gpio/at91_gpio.c            | 1 -
+ drivers/gpio/atmel_pio4.c           | 1 -
+ drivers/gpio/axp_gpio.c             | 1 -
+ drivers/gpio/bcm2835_gpio.c         | 1 -
+ drivers/gpio/bcm6345_gpio.c         | 1 -
+ drivers/gpio/cortina_gpio.c         | 1 -
+ drivers/gpio/da8xx_gpio.c           | 1 -
+ drivers/gpio/ftgpio010.c            | 1 -
+ drivers/gpio/gpio-aspeed.c          | 1 -
+ drivers/gpio/gpio-fxl6408.c         | 1 -
+ drivers/gpio/gpio-rcar.c            | 1 -
+ drivers/gpio/gpio-rza1.c            | 1 -
+ drivers/gpio/gpio-uclass.c          | 1 -
+ drivers/gpio/gpio-uniphier.c        | 1 -
+ drivers/gpio/gpio_slg7xl45106.c     | 1 -
+ drivers/gpio/hi6220_gpio.c          | 1 -
+ drivers/gpio/hsdk-creg-gpio.c       | 1 -
+ drivers/gpio/imx_rgpio2p.c          | 1 -
+ drivers/gpio/intel_broadwell_gpio.c | 1 -
+ drivers/gpio/intel_gpio.c           | 1 -
+ drivers/gpio/intel_ich6_gpio.c      | 1 -
+ drivers/gpio/iproc_gpio.c           | 1 -
+ drivers/gpio/kw_gpio.c              | 1 -
+ drivers/gpio/lpc32xx_gpio.c         | 1 -
+ drivers/gpio/max7320_gpio.c         | 1 -
+ drivers/gpio/mcp230xx_gpio.c        | 1 -
+ drivers/gpio/mpc83xx_spisel_boot.c  | 1 -
+ drivers/gpio/mpc8xx_gpio.c          | 1 -
+ drivers/gpio/mpc8xxx_gpio.c         | 1 -
+ drivers/gpio/mscc_sgpio.c           | 1 -
+ drivers/gpio/msm_gpio.c             | 1 -
+ drivers/gpio/mt7621_gpio.c          | 1 -
+ drivers/gpio/mvebu_gpio.c           | 1 -
+ drivers/gpio/mxc_gpio.c             | 1 -
+ drivers/gpio/mxs_gpio.c             | 1 -
+ drivers/gpio/nmk_gpio.c             | 1 -
+ drivers/gpio/npcm_gpio.c            | 1 -
+ drivers/gpio/nx_gpio.c              | 1 -
+ drivers/gpio/omap_gpio.c            | 1 -
+ drivers/gpio/pca953x.c              | 3 ++-
+ drivers/gpio/pca953x_gpio.c         | 1 -
+ drivers/gpio/pcf8575_gpio.c         | 1 -
+ drivers/gpio/pic32_gpio.c           | 1 -
+ drivers/gpio/qcom_pmic_gpio.c       | 1 -
+ drivers/gpio/qe_gpio.c              | 1 -
+ drivers/gpio/rk_gpio.c              | 1 -
+ drivers/gpio/s5p_gpio.c             | 1 -
+ drivers/gpio/sandbox.c              | 1 -
+ drivers/gpio/sandbox_test.c         | 1 -
+ drivers/gpio/sh_pfc.c               | 1 -
+ drivers/gpio/sifive-gpio.c          | 1 -
+ drivers/gpio/sl28cpld-gpio.c        | 1 -
+ drivers/gpio/stm32_gpio.c           | 1 -
+ drivers/gpio/sunxi_gpio.c           | 1 -
+ drivers/gpio/tca642x.c              | 2 +-
+ drivers/gpio/tegra186_gpio.c        | 1 -
+ drivers/gpio/tegra_gpio.c           | 1 -
+ drivers/gpio/vybrid_gpio.c          | 1 -
+ drivers/gpio/xilinx_gpio.c          | 1 -
+ drivers/gpio/zynq_gpio.c            | 1 -
+ drivers/gpio/zynqmp_gpio_modepin.c  | 1 -
+ 63 files changed, 3 insertions(+), 63 deletions(-)
 
-diff --git a/drivers/clk/altera/clk-agilex.c b/drivers/clk/altera/clk-agilex.c
-index cca6d6741221..bdc7be0fb5d3 100644
---- a/drivers/clk/altera/clk-agilex.c
-+++ b/drivers/clk/altera/clk-agilex.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2019 Intel Corporation <www.intel.com>
-  */
- 
--#include <common.h>
- #include <log.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
-diff --git a/drivers/clk/altera/clk-arria10.c b/drivers/clk/altera/clk-arria10.c
-index 578597a16e81..1840f73beeec 100644
---- a/drivers/clk/altera/clk-arria10.c
-+++ b/drivers/clk/altera/clk-arria10.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2018 Marek Vasut <marex@denx.de>
-  */
- 
--#include <common.h>
- #include <malloc.h>
- #include <asm/io.h>
- #include <clk-uclass.h>
-diff --git a/drivers/clk/altera/clk-mem-n5x.c b/drivers/clk/altera/clk-mem-n5x.c
-index 9bbe2cd0ca70..b75f52d203b2 100644
---- a/drivers/clk/altera/clk-mem-n5x.c
-+++ b/drivers/clk/altera/clk-mem-n5x.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2020-2022 Intel Corporation <www.intel.com>
-  */
- 
--#include <common.h>
- #include <asm/arch/clock_manager.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
-diff --git a/drivers/clk/altera/clk-n5x.c b/drivers/clk/altera/clk-n5x.c
-index 3fa19e05c47e..3e256101a947 100644
---- a/drivers/clk/altera/clk-n5x.c
-+++ b/drivers/clk/altera/clk-n5x.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2020-2022 Intel Corporation <www.intel.com>
-  */
- 
--#include <common.h>
- #include <asm/arch/clock_manager.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
-diff --git a/drivers/clk/aspeed/clk_ast2500.c b/drivers/clk/aspeed/clk_ast2500.c
-index dc446ce9fb7d..a330dcda4dcb 100644
---- a/drivers/clk/aspeed/clk_ast2500.c
-+++ b/drivers/clk/aspeed/clk_ast2500.c
-@@ -3,7 +3,6 @@
-  * (C) Copyright 2016 Google, Inc
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <log.h>
-diff --git a/drivers/clk/aspeed/clk_ast2600.c b/drivers/clk/aspeed/clk_ast2600.c
-index a15909329bbd..535010b79414 100644
---- a/drivers/clk/aspeed/clk_ast2600.c
-+++ b/drivers/clk/aspeed/clk_ast2600.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) ASPEED Technology Inc.
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <asm/io.h>
-diff --git a/drivers/clk/at91/clk-generic.c b/drivers/clk/at91/clk-generic.c
-index 87738b7b5bff..c410cd2b5052 100644
---- a/drivers/clk/at91/clk-generic.c
-+++ b/drivers/clk/at91/clk-generic.c
+diff --git a/drivers/gpio/74x164_gpio.c b/drivers/gpio/74x164_gpio.c
+index 7a7cfe86114b..331428ccdb9a 100644
+--- a/drivers/gpio/74x164_gpio.c
++++ b/drivers/gpio/74x164_gpio.c
 @@ -8,7 +8,6 @@
   *
-  * Based on drivers/clk/at91/clk-generated.c from Linux.
-  */
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <linux/io.h>
-diff --git a/drivers/clk/at91/clk-main.c b/drivers/clk/at91/clk-main.c
-index 025c7a7aa26d..09daae97676d 100644
---- a/drivers/clk/at91/clk-main.c
-+++ b/drivers/clk/at91/clk-main.c
-@@ -10,7 +10,6 @@
   */
  
- #include <asm/processor.h>
 -#include <common.h>
- #include <clk-uclass.h>
+ #include <errno.h>
  #include <dm.h>
- #include <linux/clk-provider.h>
-diff --git a/drivers/clk/at91/clk-master.c b/drivers/clk/at91/clk-master.c
-index aec0bca7b3cb..d28775d64d33 100644
---- a/drivers/clk/at91/clk-master.c
-+++ b/drivers/clk/at91/clk-master.c
-@@ -11,7 +11,6 @@
- 
- #include <asm/processor.h>
- #include <clk-uclass.h>
+ #include <fdtdec.h>
+diff --git a/drivers/gpio/altera_pio.c b/drivers/gpio/altera_pio.c
+index edc5a8093b0c..7ba1595e4ae3 100644
+--- a/drivers/gpio/altera_pio.c
++++ b/drivers/gpio/altera_pio.c
+@@ -4,7 +4,6 @@
+  * Copyright (C) 2011  Missing Link Electronics
+  *                     Joachim Foerster <joachim@missinglinkelectronics.com>
+  */
 -#include <common.h>
- #include <div64.h>
  #include <dm.h>
- #include <linux/clk-provider.h>
-diff --git a/drivers/clk/at91/clk-peripheral.c b/drivers/clk/at91/clk-peripheral.c
-index 52cbc520cef4..08d7e7dddc9e 100644
---- a/drivers/clk/at91/clk-peripheral.c
-+++ b/drivers/clk/at91/clk-peripheral.c
+ #include <errno.h>
+ #include <malloc.h>
+diff --git a/drivers/gpio/at91_gpio.c b/drivers/gpio/at91_gpio.c
+index f80f4afd24ff..50a698159075 100644
+--- a/drivers/gpio/at91_gpio.c
++++ b/drivers/gpio/at91_gpio.c
 @@ -8,7 +8,6 @@
-  *
-  * Based on drivers/clk/at91/clk-peripheral.c from Linux.
-  */
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <linux/io.h>
-diff --git a/drivers/clk/at91/clk-programmable.c b/drivers/clk/at91/clk-programmable.c
-index 868de4b1774b..d0b14656c4d6 100644
---- a/drivers/clk/at91/clk-programmable.c
-+++ b/drivers/clk/at91/clk-programmable.c
-@@ -8,7 +8,6 @@
-  *
-  * Based on drivers/clk/at91/clk-programmable.c from Linux.
-  */
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <linux/clk-provider.h>
-diff --git a/drivers/clk/at91/clk-sam9x60-pll.c b/drivers/clk/at91/clk-sam9x60-pll.c
-index 383f79cfbaf5..a30035eb8ce9 100644
---- a/drivers/clk/at91/clk-sam9x60-pll.c
-+++ b/drivers/clk/at91/clk-sam9x60-pll.c
-@@ -11,7 +11,6 @@
   */
  
- #include <asm/processor.h>
+ #include <config.h>
 -#include <common.h>
- #include <clk-uclass.h>
- #include <div64.h>
+ #include <clk.h>
  #include <dm.h>
-diff --git a/drivers/clk/at91/clk-system.c b/drivers/clk/at91/clk-system.c
-index 82f79e74a190..3545b0b24bd7 100644
---- a/drivers/clk/at91/clk-system.c
-+++ b/drivers/clk/at91/clk-system.c
-@@ -9,7 +9,6 @@
-  * Based on drivers/clk/at91/clk-system.c from Linux.
-  */
- #include <asm/processor.h>
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <linux/io.h>
-diff --git a/drivers/clk/at91/clk-utmi.c b/drivers/clk/at91/clk-utmi.c
-index 7c8bcfb51dba..84784ae41ce8 100644
---- a/drivers/clk/at91/clk-utmi.c
-+++ b/drivers/clk/at91/clk-utmi.c
-@@ -9,7 +9,6 @@
-  * Based on drivers/clk/at91/clk-utmi.c from Linux.
-  */
- #include <asm/processor.h>
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <linux/clk-provider.h>
-diff --git a/drivers/clk/at91/compat.c b/drivers/clk/at91/compat.c
-index ee67093c6073..1d738f160b6e 100644
---- a/drivers/clk/at91/compat.c
-+++ b/drivers/clk/at91/compat.c
-@@ -6,7 +6,7 @@
-  *
-  * Author: Claudiu Beznea <claudiu.beznea@microchip.com>
+ #include <malloc.h>
+diff --git a/drivers/gpio/atmel_pio4.c b/drivers/gpio/atmel_pio4.c
+index be1dd752bf76..65d064b46dfb 100644
+--- a/drivers/gpio/atmel_pio4.c
++++ b/drivers/gpio/atmel_pio4.c
+@@ -5,7 +5,6 @@
+  * Copyright (C) 2015 Atmel Corporation
+  *		 Wenyou.Yang <wenyou.yang@atmel.com>
   */
 -#include <common.h>
-+#include <config.h>
- #include <clk-uclass.h>
+ #include <clk.h>
  #include <dm.h>
- #include <asm/global_data.h>
-diff --git a/drivers/clk/at91/pmc.c b/drivers/clk/at91/pmc.c
-index 87d2069d89ce..aa4bc8fa47ad 100644
---- a/drivers/clk/at91/pmc.c
-+++ b/drivers/clk/at91/pmc.c
+ #include <fdtdec.h>
+diff --git a/drivers/gpio/axp_gpio.c b/drivers/gpio/axp_gpio.c
+index af6631697f58..6e632c8fc730 100644
+--- a/drivers/gpio/axp_gpio.c
++++ b/drivers/gpio/axp_gpio.c
+@@ -5,7 +5,6 @@
+  * X-Powers AXP Power Management ICs gpio driver
+  */
+ 
+-#include <common.h>
+ #include <asm/arch/pmic_bus.h>
+ #include <asm/gpio.h>
+ #include <axp_pmic.h>
+diff --git a/drivers/gpio/bcm2835_gpio.c b/drivers/gpio/bcm2835_gpio.c
+index 704a6fa71210..ccf84fdae11f 100644
+--- a/drivers/gpio/bcm2835_gpio.c
++++ b/drivers/gpio/bcm2835_gpio.c
 @@ -4,7 +4,6 @@
-  *               Wenyou.Yang <wenyou.yang@atmel.com>
+  * <vikram186@gmail.com>
   */
  
 -#include <common.h>
- #include <asm/io.h>
- #include <clk-uclass.h>
- #include <linux/clk-provider.h>
-diff --git a/drivers/clk/at91/sam9x60.c b/drivers/clk/at91/sam9x60.c
-index d858c860f696..b7d64bdbb3d4 100644
---- a/drivers/clk/at91/sam9x60.c
-+++ b/drivers/clk/at91/sam9x60.c
+ #include <dm.h>
+ #include <dm/pinctrl.h>
+ #include <errno.h>
+diff --git a/drivers/gpio/bcm6345_gpio.c b/drivers/gpio/bcm6345_gpio.c
+index e031f71a784d..e76c84e806ad 100644
+--- a/drivers/gpio/bcm6345_gpio.c
++++ b/drivers/gpio/bcm6345_gpio.c
 @@ -7,7 +7,6 @@
-  * Based on sam9x60.c on Linux.
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <dt-bindings/clk/at91.h>
-diff --git a/drivers/clk/at91/sama7g5.c b/drivers/clk/at91/sama7g5.c
-index 3e62fb1f58d3..63b2c6474679 100644
---- a/drivers/clk/at91/sama7g5.c
-+++ b/drivers/clk/at91/sama7g5.c
-@@ -9,7 +9,6 @@
-  * Based on drivers/clk/at91/sama7g5.c from Linux.
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <dt-bindings/clk/at91.h>
-diff --git a/drivers/clk/at91/sckc.c b/drivers/clk/at91/sckc.c
-index 43136ab2e349..6d6f12578db7 100644
---- a/drivers/clk/at91/sckc.c
-+++ b/drivers/clk/at91/sckc.c
-@@ -7,7 +7,6 @@
-  * Author: Claudiu Beznea <claudiu.beznea@microchip.com>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <dt-bindings/clk/at91.h>
-diff --git a/drivers/clk/clk-cdce9xx.c b/drivers/clk/clk-cdce9xx.c
-index b8700f517fc9..e5f74e714d54 100644
---- a/drivers/clk/clk-cdce9xx.c
-+++ b/drivers/clk/clk-cdce9xx.c
-@@ -8,7 +8,6 @@
-  * Based on Linux kernel clk-cdce925.c.
+  *	Copyright (C) 2008-2011 Florian Fainelli <florian@openwrt.org>
   */
  
 -#include <common.h>
  #include <dm.h>
  #include <errno.h>
- #include <clk-uclass.h>
-diff --git a/drivers/clk/clk-composite.c b/drivers/clk/clk-composite.c
-index d2e5a1ae401d..199ca6eaa370 100644
---- a/drivers/clk/clk-composite.c
-+++ b/drivers/clk/clk-composite.c
+ #include <asm/gpio.h>
+diff --git a/drivers/gpio/cortina_gpio.c b/drivers/gpio/cortina_gpio.c
+index 72ef523be960..e0ea14cce696 100644
+--- a/drivers/gpio/cortina_gpio.c
++++ b/drivers/gpio/cortina_gpio.c
+@@ -5,7 +5,6 @@
+  * GPIO Driver for Cortina Access CAxxxx Line of SoCs
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <log.h>
+ #include <asm/io.h>
+diff --git a/drivers/gpio/da8xx_gpio.c b/drivers/gpio/da8xx_gpio.c
+index b310f2dbf651..1ccb9e69f158 100644
+--- a/drivers/gpio/da8xx_gpio.c
++++ b/drivers/gpio/da8xx_gpio.c
 @@ -6,7 +6,6 @@
- 
- #define LOG_CATEGORY UCLASS_CLK
- 
--#include <common.h>
- #include <clk.h>
- #include <clk-uclass.h>
- #include <log.h>
-diff --git a/drivers/clk/clk-divider.c b/drivers/clk/clk-divider.c
-index 2ad682b8fe2c..aa210e3d15fd 100644
---- a/drivers/clk/clk-divider.c
-+++ b/drivers/clk/clk-divider.c
-@@ -11,7 +11,6 @@
- 
- #define LOG_CATEGORY UCLASS_CLK
- 
--#include <common.h>
- #include <asm/io.h>
- #include <malloc.h>
- #include <clk-uclass.h>
-diff --git a/drivers/clk/clk-fixed-factor.c b/drivers/clk/clk-fixed-factor.c
-index 2a446788e191..068798cf9b05 100644
---- a/drivers/clk/clk-fixed-factor.c
-+++ b/drivers/clk/clk-fixed-factor.c
-@@ -8,7 +8,6 @@
- 
- #define LOG_CATEGORY UCLASS_CLK
- 
--#include <common.h>
- #include <clk.h>
- #include <clk-uclass.h>
- #include <div64.h>
-diff --git a/drivers/clk/clk-gate.c b/drivers/clk/clk-gate.c
-index cfd90b717e73..bf1c6a93b468 100644
---- a/drivers/clk/clk-gate.c
-+++ b/drivers/clk/clk-gate.c
-@@ -9,7 +9,6 @@
- 
- #define LOG_CATEGORY UCLASS_CLK
- 
--#include <common.h>
- #include <clk.h>
- #include <log.h>
- #include <clk-uclass.h>
-diff --git a/drivers/clk/clk-hsdk-cgu.c b/drivers/clk/clk-hsdk-cgu.c
-index 85074f1b86e8..53655059279e 100644
---- a/drivers/clk/clk-hsdk-cgu.c
-+++ b/drivers/clk/clk-hsdk-cgu.c
-@@ -9,7 +9,6 @@
-  * warranty of any kind, whether express or implied.
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <div64.h>
- #include <dm.h>
-diff --git a/drivers/clk/clk-mux.c b/drivers/clk/clk-mux.c
-index f410518461e9..39e01c3fbc61 100644
---- a/drivers/clk/clk-mux.c
-+++ b/drivers/clk/clk-mux.c
-@@ -23,7 +23,6 @@
- 
- #define LOG_CATEGORY UCLASS_CLK
- 
--#include <common.h>
- #include <clk.h>
- #include <clk-uclass.h>
- #include <log.h>
-diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-index ed6e60bc4841..4c832f1a5307 100644
---- a/drivers/clk/clk-uclass.c
-+++ b/drivers/clk/clk-uclass.c
-@@ -8,7 +8,6 @@
- 
- #define LOG_CATEGORY UCLASS_CLK
- 
--#include <common.h>
- #include <clk.h>
- #include <clk-uclass.h>
- #include <dm.h>
-diff --git a/drivers/clk/clk-xlnx-clock-wizard.c b/drivers/clk/clk-xlnx-clock-wizard.c
-index a10a843f11f9..4a3f50c638b1 100644
---- a/drivers/clk/clk-xlnx-clock-wizard.c
-+++ b/drivers/clk/clk-xlnx-clock-wizard.c
-@@ -7,7 +7,6 @@
-  * Author: Zhengxun Li <zhengxunli@mxic.com.tw>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <div64.h>
-diff --git a/drivers/clk/clk.c b/drivers/clk/clk.c
-index 6ede1b4d4dcc..b8c2e8d531b9 100644
---- a/drivers/clk/clk.c
-+++ b/drivers/clk/clk.c
-@@ -6,7 +6,6 @@
- 
- #define LOG_CATEGORY UCLASS_CLK
- 
--#include <common.h>
- #include <clk.h>
- #include <clk-uclass.h>
- #include <log.h>
-diff --git a/drivers/clk/clk_bcm6345.c b/drivers/clk/clk_bcm6345.c
-index 8c22ed2f43d4..0b41872b7192 100644
---- a/drivers/clk/clk_bcm6345.c
-+++ b/drivers/clk/clk_bcm6345.c
-@@ -6,7 +6,6 @@
-  *	Copyright (C) 2008 Maxime Bizon <mbizon@freebox.fr>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/clk/clk_boston.c b/drivers/clk/clk_boston.c
-index 4bcf91175512..030ff7cc58ec 100644
---- a/drivers/clk/clk_boston.c
-+++ b/drivers/clk/clk_boston.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2016 Imagination Technologies
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <dt-bindings/clock/boston-clock.h>
-diff --git a/drivers/clk/clk_fixed_factor.c b/drivers/clk/clk_fixed_factor.c
-index 6c1139e5c519..1d740cf49f62 100644
---- a/drivers/clk/clk_fixed_factor.c
-+++ b/drivers/clk/clk_fixed_factor.c
-@@ -7,7 +7,6 @@
- 
- #define LOG_CATEGORY UCLASS_CLK
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <div64.h>
- #include <dm.h>
-diff --git a/drivers/clk/clk_fixed_rate.c b/drivers/clk/clk_fixed_rate.c
-index b5e78c70559e..d1da05cc18a5 100644
---- a/drivers/clk/clk_fixed_rate.c
-+++ b/drivers/clk/clk_fixed_rate.c
-@@ -5,7 +5,6 @@
- 
- #define LOG_CATEGORY UCLASS_CLK
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <log.h>
-diff --git a/drivers/clk/clk_k210.c b/drivers/clk/clk_k210.c
-index 7432ae8f0642..d1a6cde8f0f8 100644
---- a/drivers/clk/clk_k210.c
-+++ b/drivers/clk/clk_k210.c
-@@ -4,7 +4,6 @@
-  */
- #define LOG_CATEGORY UCLASS_CLK
- 
--#include <common.h>
- #include <clk.h>
- #include <clk-uclass.h>
- #include <div64.h>
-diff --git a/drivers/clk/clk_pic32.c b/drivers/clk/clk_pic32.c
-index a77d0e7419c9..885aa8345165 100644
---- a/drivers/clk/clk_pic32.c
-+++ b/drivers/clk/clk_pic32.c
-@@ -4,7 +4,6 @@
-  *
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <div64.h>
-diff --git a/drivers/clk/clk_sandbox.c b/drivers/clk/clk_sandbox.c
-index 73d943f9e092..8dd77f18d901 100644
---- a/drivers/clk/clk_sandbox.c
-+++ b/drivers/clk/clk_sandbox.c
-@@ -3,7 +3,6 @@
-  * (C) Copyright 2015 Google, Inc
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/clk/clk_sandbox_ccf.c b/drivers/clk/clk_sandbox_ccf.c
-index 38184e27aa4f..f96a15c30b3a 100644
---- a/drivers/clk/clk_sandbox_ccf.c
-+++ b/drivers/clk/clk_sandbox_ccf.c
-@@ -6,7 +6,6 @@
-  * Common Clock Framework [CCF] driver for Sandbox
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <clk.h>
- #include <malloc.h>
-diff --git a/drivers/clk/clk_sandbox_test.c b/drivers/clk/clk_sandbox_test.c
-index c224dc1d2cb9..87350212775c 100644
---- a/drivers/clk/clk_sandbox_test.c
-+++ b/drivers/clk/clk_sandbox_test.c
-@@ -3,7 +3,6 @@
-  * Copyright (c) 2016, NVIDIA CORPORATION.
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <clk.h>
- #include <malloc.h>
-diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
-index 34a49363a51a..e42d2032d45e 100644
---- a/drivers/clk/clk_scmi.c
-+++ b/drivers/clk/clk_scmi.c
-@@ -5,7 +5,6 @@
- 
- #define LOG_CATEGORY UCLASS_CLK
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <scmi_agent.h>
-diff --git a/drivers/clk/clk_versaclock.c b/drivers/clk/clk_versaclock.c
-index bbe722560329..9ccaf13d2420 100644
---- a/drivers/clk/clk_versaclock.c
-+++ b/drivers/clk/clk_versaclock.c
-@@ -5,7 +5,6 @@
-  * Derived from code Copyright (C) 2017 Marek Vasut <marek.vasut@gmail.com>
-  */
- 
--#include <common.h>
- #include <clk.h>
- #include <clk-uclass.h>
- #include <dm.h>
-diff --git a/drivers/clk/clk_versal.c b/drivers/clk/clk_versal.c
-index 42ab032bf7e7..35ee56d0693d 100644
---- a/drivers/clk/clk_versal.c
-+++ b/drivers/clk/clk_versal.c
-@@ -4,7 +4,6 @@
-  * Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com>>
-  */
- 
--#include <common.h>
- #include <log.h>
- #include <asm/cache.h>
- #include <asm/ptrace.h>
-diff --git a/drivers/clk/clk_vexpress_osc.c b/drivers/clk/clk_vexpress_osc.c
-index 3b1e0208d47e..2e0e7bbe68ff 100644
---- a/drivers/clk/clk_vexpress_osc.c
-+++ b/drivers/clk/clk_vexpress_osc.c
-@@ -5,7 +5,6 @@
-  *
-  */
- #define DEBUG
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <log.h>
-diff --git a/drivers/clk/clk_zynq.c b/drivers/clk/clk_zynq.c
-index e3cefe2e0c72..b62b4646f4e5 100644
---- a/drivers/clk/clk_zynq.c
-+++ b/drivers/clk/clk_zynq.c
-@@ -7,7 +7,6 @@
-  * Copyright (C) 2013 Xilinx, Inc. All rights reserved.
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <log.h>
-diff --git a/drivers/clk/clk_zynqmp.c b/drivers/clk/clk_zynqmp.c
-index e23f7da3f929..599992661484 100644
---- a/drivers/clk/clk_zynqmp.c
-+++ b/drivers/clk/clk_zynqmp.c
-@@ -5,7 +5,6 @@
-  * Copyright (C) 2016 Xilinx, Inc.
-  */
- 
--#include <common.h>
- #include <log.h>
- #include <malloc.h>
- #include <dm/device_compat.h>
-diff --git a/drivers/clk/exynos/clk-exynos7420.c b/drivers/clk/exynos/clk-exynos7420.c
-index 9caa932e12fb..3aa751bf4e42 100644
---- a/drivers/clk/exynos/clk-exynos7420.c
-+++ b/drivers/clk/exynos/clk-exynos7420.c
-@@ -5,7 +5,6 @@
-  * Thomas Abraham <thomas.ab@samsung.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <clk-uclass.h>
-diff --git a/drivers/clk/ics8n3qv01.c b/drivers/clk/ics8n3qv01.c
-index 33fb6ed0c7a4..9c61a84ea61f 100644
---- a/drivers/clk/ics8n3qv01.c
-+++ b/drivers/clk/ics8n3qv01.c
-@@ -9,7 +9,6 @@
-  * Dirk Eibach,  Guntermann & Drunck GmbH, eibach@gdsys.de
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <clk-uclass.h>
- #include <i2c.h>
-diff --git a/drivers/clk/imx/clk-composite-8m.c b/drivers/clk/imx/clk-composite-8m.c
-index 494156751dae..45f1bcaea288 100644
---- a/drivers/clk/imx/clk-composite-8m.c
-+++ b/drivers/clk/imx/clk-composite-8m.c
-@@ -3,7 +3,6 @@
-  * Copyright 2019 NXP
-  */
- 
--#include <common.h>
- #include <log.h>
- #include <asm/io.h>
- #include <malloc.h>
-diff --git a/drivers/clk/imx/clk-composite-93.c b/drivers/clk/imx/clk-composite-93.c
-index 6d71c0c03ffe..2cf20be2ccae 100644
---- a/drivers/clk/imx/clk-composite-93.c
-+++ b/drivers/clk/imx/clk-composite-93.c
-@@ -4,7 +4,6 @@
-  *
-  * Peng Fan <peng.fan@nxp.com>
-  */
--#include <common.h>
- #include <log.h>
- #include <asm/io.h>
- #include <malloc.h>
-diff --git a/drivers/clk/imx/clk-fracn-gppll.c b/drivers/clk/imx/clk-fracn-gppll.c
-index 9228f279e27d..8f42a5cb1b72 100644
---- a/drivers/clk/imx/clk-fracn-gppll.c
-+++ b/drivers/clk/imx/clk-fracn-gppll.c
-@@ -3,7 +3,6 @@
-  * Copyright 2021 NXP
-  */
- 
--#include <common.h>
- #include <asm/io.h>
- #include <malloc.h>
- #include <clk-uclass.h>
-diff --git a/drivers/clk/imx/clk-gate-93.c b/drivers/clk/imx/clk-gate-93.c
-index bc8574137137..d7f2640fbb7c 100644
---- a/drivers/clk/imx/clk-gate-93.c
-+++ b/drivers/clk/imx/clk-gate-93.c
-@@ -5,7 +5,6 @@
-  * Peng Fan <peng.fan@nxp.com>
-  */
- 
--#include <common.h>
- #include <asm/io.h>
- #include <malloc.h>
- #include <clk-uclass.h>
-diff --git a/drivers/clk/imx/clk-gate2.c b/drivers/clk/imx/clk-gate2.c
-index da2723023778..65fa6b5b139f 100644
---- a/drivers/clk/imx/clk-gate2.c
-+++ b/drivers/clk/imx/clk-gate2.c
-@@ -14,7 +14,6 @@
-  *
-  */
- 
--#include <common.h>
- #include <asm/io.h>
- #include <malloc.h>
- #include <clk-uclass.h>
-diff --git a/drivers/clk/imx/clk-imx6q.c b/drivers/clk/imx/clk-imx6q.c
-index 67825af89b81..ba9923d8f6fa 100644
---- a/drivers/clk/imx/clk-imx6q.c
-+++ b/drivers/clk/imx/clk-imx6q.c
-@@ -4,7 +4,6 @@
-  * Lukasz Majewski, DENX Software Engineering, lukma@denx.de
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <log.h>
-diff --git a/drivers/clk/imx/clk-imx8.c b/drivers/clk/imx/clk-imx8.c
-index d39b87b2e245..96cf5fece75f 100644
---- a/drivers/clk/imx/clk-imx8.c
-+++ b/drivers/clk/imx/clk-imx8.c
-@@ -4,7 +4,6 @@
-  * Peng Fan <peng.fan@nxp.com>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <log.h>
-diff --git a/drivers/clk/imx/clk-imx8mm.c b/drivers/clk/imx/clk-imx8mm.c
-index 1a00dd1d287b..70e2e53bdea5 100644
---- a/drivers/clk/imx/clk-imx8mm.c
-+++ b/drivers/clk/imx/clk-imx8mm.c
-@@ -4,7 +4,6 @@
-  * Peng Fan <peng.fan@nxp.com>
-  */
- 
--#include <common.h>
- #include <clk.h>
- #include <clk-uclass.h>
- #include <dm.h>
-diff --git a/drivers/clk/imx/clk-imx8mn.c b/drivers/clk/imx/clk-imx8mn.c
-index 457acb8a401e..ed9e16d7c180 100644
---- a/drivers/clk/imx/clk-imx8mn.c
-+++ b/drivers/clk/imx/clk-imx8mn.c
-@@ -4,7 +4,6 @@
-  * Peng Fan <peng.fan@nxp.com>
-  */
- 
--#include <common.h>
- #include <clk.h>
- #include <clk-uclass.h>
- #include <dm.h>
-diff --git a/drivers/clk/imx/clk-imx8mp.c b/drivers/clk/imx/clk-imx8mp.c
-index 7dfc829df2c4..1f498b6ba4ea 100644
---- a/drivers/clk/imx/clk-imx8mp.c
-+++ b/drivers/clk/imx/clk-imx8mp.c
-@@ -4,7 +4,6 @@
-  * Peng Fan <peng.fan@nxp.com>
-  */
- 
--#include <common.h>
- #include <clk.h>
- #include <clk-uclass.h>
- #include <dm.h>
-diff --git a/drivers/clk/imx/clk-imx8mq.c b/drivers/clk/imx/clk-imx8mq.c
-index cf197df96dbb..ed4acd79ef74 100644
---- a/drivers/clk/imx/clk-imx8mq.c
-+++ b/drivers/clk/imx/clk-imx8mq.c
-@@ -5,7 +5,6 @@
-  * Peng Fan <peng.fan@nxp.com>
-  */
- 
--#include <common.h>
- #include <clk.h>
- #include <clk-uclass.h>
- #include <dm.h>
-diff --git a/drivers/clk/imx/clk-imx8qm.c b/drivers/clk/imx/clk-imx8qm.c
-index 01e33de9d63f..62fed7e3e32c 100644
---- a/drivers/clk/imx/clk-imx8qm.c
-+++ b/drivers/clk/imx/clk-imx8qm.c
-@@ -4,7 +4,6 @@
-  * Peng Fan <peng.fan@nxp.com>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <log.h>
-diff --git a/drivers/clk/imx/clk-imx8qxp.c b/drivers/clk/imx/clk-imx8qxp.c
-index d900d4cd5286..18bdc08971bf 100644
---- a/drivers/clk/imx/clk-imx8qxp.c
-+++ b/drivers/clk/imx/clk-imx8qxp.c
-@@ -4,7 +4,6 @@
-  * Peng Fan <peng.fan@nxp.com>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <log.h>
-diff --git a/drivers/clk/imx/clk-imx93.c b/drivers/clk/imx/clk-imx93.c
-index f0cb797d9750..ede36c412bff 100644
---- a/drivers/clk/imx/clk-imx93.c
-+++ b/drivers/clk/imx/clk-imx93.c
-@@ -3,7 +3,6 @@
-  * Copyright 2021 NXP.
-  */
- 
--#include <common.h>
- #include <clk.h>
- #include <clk-uclass.h>
- #include <dm.h>
-diff --git a/drivers/clk/imx/clk-imxrt1020.c b/drivers/clk/imx/clk-imxrt1020.c
-index dc91ac5adbf1..c80b02975aad 100644
---- a/drivers/clk/imx/clk-imxrt1020.c
-+++ b/drivers/clk/imx/clk-imxrt1020.c
-@@ -4,7 +4,6 @@
-  * Author(s): Giulio Benetti <giulio.benetti@benettiengineering.com>
-  */
- 
--#include <common.h>
- #include <clk.h>
- #include <clk-uclass.h>
- #include <dm.h>
-diff --git a/drivers/clk/imx/clk-imxrt1050.c b/drivers/clk/imx/clk-imxrt1050.c
-index d40635d17a4a..754f39484275 100644
---- a/drivers/clk/imx/clk-imxrt1050.c
-+++ b/drivers/clk/imx/clk-imxrt1050.c
-@@ -4,7 +4,6 @@
-  * Author(s): Giulio Benetti <giulio.benetti@benettiengineering.com>
-  */
- 
--#include <common.h>
- #include <clk.h>
- #include <clk-uclass.h>
- #include <dm.h>
-diff --git a/drivers/clk/imx/clk-imxrt1170.c b/drivers/clk/imx/clk-imxrt1170.c
-index 077dd1bf02d3..20b9dc315001 100644
---- a/drivers/clk/imx/clk-imxrt1170.c
-+++ b/drivers/clk/imx/clk-imxrt1170.c
-@@ -4,7 +4,6 @@
-  * Author(s): Jesse Taube <Mr.Bossman075@gmail.com>
-  */
- 
--#include <common.h>
- #include <clk.h>
- #include <clk-uclass.h>
- #include <dm.h>
-diff --git a/drivers/clk/imx/clk-pfd.c b/drivers/clk/imx/clk-pfd.c
-index b8be3167c4cd..378cdff072fe 100644
---- a/drivers/clk/imx/clk-pfd.c
-+++ b/drivers/clk/imx/clk-pfd.c
-@@ -14,7 +14,6 @@
-  * http://www.gnu.org/copyleft/gpl.html
-  */
- 
--#include <common.h>
- #include <asm/io.h>
- #include <malloc.h>
- #include <clk-uclass.h>
-diff --git a/drivers/clk/imx/clk-pll14xx.c b/drivers/clk/imx/clk-pll14xx.c
-index 1cb685ee9abd..3911e0339056 100644
---- a/drivers/clk/imx/clk-pll14xx.c
-+++ b/drivers/clk/imx/clk-pll14xx.c
-@@ -5,7 +5,6 @@
-  * Peng Fan <peng.fan@nxp.com>
-  */
- 
--#include <common.h>
- #include <asm/io.h>
- #include <malloc.h>
- #include <clk-uclass.h>
-diff --git a/drivers/clk/imx/clk-pllv3.c b/drivers/clk/imx/clk-pllv3.c
-index fad306aeed23..c6692f2f9f5a 100644
---- a/drivers/clk/imx/clk-pllv3.c
-+++ b/drivers/clk/imx/clk-pllv3.c
-@@ -4,7 +4,6 @@
-  * Lukasz Majewski, DENX Software Engineering, lukma@denx.de
-  */
- 
--#include <common.h>
- #include <asm/io.h>
- #include <div64.h>
- #include <malloc.h>
-diff --git a/drivers/clk/intel/clk_intel.c b/drivers/clk/intel/clk_intel.c
-index 46ccbb1d834d..a677a7caac7c 100644
---- a/drivers/clk/intel/clk_intel.c
-+++ b/drivers/clk/intel/clk_intel.c
-@@ -4,7 +4,6 @@
-  * Written by Simon Glass <sjg@chromium.org>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <clk-uclass.h>
- #include <dt-bindings/clock/intel-clock.h>
-diff --git a/drivers/clk/mediatek/clk-mt7622.c b/drivers/clk/mediatek/clk-mt7622.c
-index 259ea335959c..2beb63030f22 100644
---- a/drivers/clk/mediatek/clk-mt7622.c
-+++ b/drivers/clk/mediatek/clk-mt7622.c
-@@ -6,7 +6,6 @@
-  * Author: Ryder Lee <ryder.lee@mediatek.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <log.h>
- #include <asm/arch-mediatek/reset.h>
-diff --git a/drivers/clk/mediatek/clk-mt7623.c b/drivers/clk/mediatek/clk-mt7623.c
-index 0c7411ee814d..5072c9983c11 100644
---- a/drivers/clk/mediatek/clk-mt7623.c
-+++ b/drivers/clk/mediatek/clk-mt7623.c
-@@ -6,7 +6,6 @@
-  * Author: Ryder Lee <ryder.lee@mediatek.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <log.h>
- #include <asm/arch-mediatek/reset.h>
-diff --git a/drivers/clk/mediatek/clk-mt7629.c b/drivers/clk/mediatek/clk-mt7629.c
-index 31b6fa02251a..0c796a1788aa 100644
---- a/drivers/clk/mediatek/clk-mt7629.c
-+++ b/drivers/clk/mediatek/clk-mt7629.c
-@@ -6,7 +6,6 @@
-  * Author: Ryder Lee <ryder.lee@mediatek.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <log.h>
- #include <asm/arch-mediatek/reset.h>
-diff --git a/drivers/clk/mediatek/clk-mt8183.c b/drivers/clk/mediatek/clk-mt8183.c
-index 17e653a1f00a..9612a62e56a7 100644
---- a/drivers/clk/mediatek/clk-mt8183.c
-+++ b/drivers/clk/mediatek/clk-mt8183.c
-@@ -8,7 +8,6 @@
-  * Author: Weiyi Lu <weiyi.lu@mediatek.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <asm/io.h>
- #include <dt-bindings/clock/mt8183-clk.h>
-diff --git a/drivers/clk/mediatek/clk-mt8512.c b/drivers/clk/mediatek/clk-mt8512.c
-index 193e069cb053..ab2706734428 100644
---- a/drivers/clk/mediatek/clk-mt8512.c
-+++ b/drivers/clk/mediatek/clk-mt8512.c
-@@ -6,7 +6,6 @@
-  * Author: Chen Zhong <chen.zhong@mediatek.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <asm/io.h>
- #include <dt-bindings/clock/mt8512-clk.h>
-diff --git a/drivers/clk/mediatek/clk-mt8516.c b/drivers/clk/mediatek/clk-mt8516.c
-index 29f70620e09d..623f88499f1b 100644
---- a/drivers/clk/mediatek/clk-mt8516.c
-+++ b/drivers/clk/mediatek/clk-mt8516.c
-@@ -6,7 +6,6 @@
-  * Author: Fabien Parent <fparent@baylibre.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <asm/io.h>
- #include <dt-bindings/clock/mt8516-clk.h>
-diff --git a/drivers/clk/mediatek/clk-mt8518.c b/drivers/clk/mediatek/clk-mt8518.c
-index 238651483726..ba8cc584d46f 100644
---- a/drivers/clk/mediatek/clk-mt8518.c
-+++ b/drivers/clk/mediatek/clk-mt8518.c
-@@ -6,7 +6,6 @@
-  * Author: Chen Zhong <chen.zhong@mediatek.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <asm/io.h>
- #include <dt-bindings/clock/mt8518-clk.h>
-diff --git a/drivers/clk/mediatek/clk-mtk.c b/drivers/clk/mediatek/clk-mtk.c
-index 4303300d3a8d..d2c45be30dec 100644
---- a/drivers/clk/mediatek/clk-mtk.c
-+++ b/drivers/clk/mediatek/clk-mtk.c
-@@ -6,7 +6,6 @@
-  * Author: Ryder Lee <ryder.lee@mediatek.com>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <div64.h>
- #include <dm.h>
-diff --git a/drivers/clk/meson/a1.c b/drivers/clk/meson/a1.c
-index 5220a337a8bb..a1b8d7914910 100644
---- a/drivers/clk/meson/a1.c
-+++ b/drivers/clk/meson/a1.c
-@@ -4,7 +4,6 @@
-  * Author: Igor Prusov <ivprusov@salutedevices.com>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <regmap.h>
-diff --git a/drivers/clk/meson/axg-ao.c b/drivers/clk/meson/axg-ao.c
-index 311ffc1cca9a..6ccf52127b02 100644
---- a/drivers/clk/meson/axg-ao.c
-+++ b/drivers/clk/meson/axg-ao.c
-@@ -1,6 +1,5 @@
- // SPDX-License-Identifier: GPL-2.0+
- 
--#include <common.h>
- #include <log.h>
- #include <asm/io.h>
- #include <clk-uclass.h>
-diff --git a/drivers/clk/meson/axg.c b/drivers/clk/meson/axg.c
-index d6da59d269b0..c421a622a587 100644
---- a/drivers/clk/meson/axg.c
-+++ b/drivers/clk/meson/axg.c
-@@ -5,7 +5,6 @@
-  * Author: Neil Armstrong <narmstrong@baylibre.com>
-  */
- 
--#include <common.h>
- #include <log.h>
- #include <asm/arch/clock-axg.h>
- #include <asm/io.h>
-diff --git a/drivers/clk/meson/g12a-ao.c b/drivers/clk/meson/g12a-ao.c
-index 1a855a68966e..61d489c6e1c8 100644
---- a/drivers/clk/meson/g12a-ao.c
-+++ b/drivers/clk/meson/g12a-ao.c
-@@ -1,6 +1,5 @@
- // SPDX-License-Identifier: GPL-2.0+
- 
--#include <common.h>
- #include <log.h>
- #include <asm/io.h>
- #include <clk-uclass.h>
-diff --git a/drivers/clk/meson/g12a.c b/drivers/clk/meson/g12a.c
-index e4fed8ddfb27..5d7faaa3eabf 100644
---- a/drivers/clk/meson/g12a.c
-+++ b/drivers/clk/meson/g12a.c
-@@ -5,7 +5,6 @@
-  * Author: Neil Armstrong <narmstrong@baylibre.com>
-  */
- 
--#include <common.h>
- #include <log.h>
- #include <asm/arch/clock-g12a.h>
- #include <asm/io.h>
-diff --git a/drivers/clk/meson/gxbb.c b/drivers/clk/meson/gxbb.c
-index e379540deee7..72ad4fd0e85f 100644
---- a/drivers/clk/meson/gxbb.c
-+++ b/drivers/clk/meson/gxbb.c
-@@ -5,7 +5,6 @@
-  * Author: Neil Armstrong <narmstrong@baylibre.com>
-  */
- 
--#include <common.h>
- #include <log.h>
- #include <asm/arch/clock-gx.h>
- #include <asm/io.h>
-diff --git a/drivers/clk/microchip/mpfs_clk.c b/drivers/clk/microchip/mpfs_clk.c
-index 08f8bfcecbed..0a82777ff74d 100644
---- a/drivers/clk/microchip/mpfs_clk.c
-+++ b/drivers/clk/microchip/mpfs_clk.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2020 Microchip Technology Inc.
-  * Padmarao Begari <padmarao.begari@microchip.com>
-  */
--#include <common.h>
- #include <clk.h>
- #include <clk-uclass.h>
- #include <dm.h>
-diff --git a/drivers/clk/microchip/mpfs_clk_cfg.c b/drivers/clk/microchip/mpfs_clk_cfg.c
-index 5739fd66e8df..5e8fb9952895 100644
---- a/drivers/clk/microchip/mpfs_clk_cfg.c
-+++ b/drivers/clk/microchip/mpfs_clk_cfg.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2020 Microchip Technology Inc.
-  * Padmarao Begari <padmarao.begari@microchip.com>
-  */
--#include <common.h>
- #include <clk.h>
- #include <clk-uclass.h>
- #include <asm/io.h>
-diff --git a/drivers/clk/microchip/mpfs_clk_msspll.c b/drivers/clk/microchip/mpfs_clk_msspll.c
-index f37c0d86047c..d0e7b1ff844f 100644
---- a/drivers/clk/microchip/mpfs_clk_msspll.c
-+++ b/drivers/clk/microchip/mpfs_clk_msspll.c
-@@ -2,7 +2,6 @@
- /*
-  * Copyright (C) 2022 Microchip Technology Inc.
-  */
--#include <common.h>
- #include <clk.h>
- #include <clk-uclass.h>
- #include <asm/io.h>
-diff --git a/drivers/clk/microchip/mpfs_clk_periph.c b/drivers/clk/microchip/mpfs_clk_periph.c
-index ddeccb914575..41c6df4fb979 100644
---- a/drivers/clk/microchip/mpfs_clk_periph.c
-+++ b/drivers/clk/microchip/mpfs_clk_periph.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2020 Microchip Technology Inc.
-  * Padmarao Begari <padmarao.begari@microchip.com>
-  */
--#include <common.h>
- #include <clk.h>
- #include <clk-uclass.h>
- #include <asm/io.h>
-diff --git a/drivers/clk/mpc83xx_clk.c b/drivers/clk/mpc83xx_clk.c
-index cc734450ef00..a29ad0d7a68d 100644
---- a/drivers/clk/mpc83xx_clk.c
-+++ b/drivers/clk/mpc83xx_clk.c
-@@ -4,7 +4,6 @@
-  * Mario Six, Guntermann & Drunck GmbH, mario.six@gdsys.cc
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <clock_legacy.h>
- #include <command.h>
-diff --git a/drivers/clk/mtmips/clk-mt7628.c b/drivers/clk/mtmips/clk-mt7628.c
-index 4d3ac847d1d5..2e263fb2cd28 100644
---- a/drivers/clk/mtmips/clk-mt7628.c
-+++ b/drivers/clk/mtmips/clk-mt7628.c
-@@ -5,7 +5,6 @@
-  * Author: Weijie Gao <weijie.gao@mediatek.com>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <dt-bindings/clock/mt7628-clk.h>
-diff --git a/drivers/clk/mvebu/armada-37xx-periph.c b/drivers/clk/mvebu/armada-37xx-periph.c
-index f5c9bd735c13..30330393f760 100644
---- a/drivers/clk/mvebu/armada-37xx-periph.c
-+++ b/drivers/clk/mvebu/armada-37xx-periph.c
-@@ -8,7 +8,6 @@
-  *   Gregory CLEMENT <gregory.clement@free-electrons.com>
-  */
- 
--#include <common.h>
- #include <malloc.h>
- #include <clk-uclass.h>
- #include <clk.h>
-diff --git a/drivers/clk/mvebu/armada-37xx-tbg.c b/drivers/clk/mvebu/armada-37xx-tbg.c
-index 846a73cd6b36..c1bab84c070e 100644
---- a/drivers/clk/mvebu/armada-37xx-tbg.c
-+++ b/drivers/clk/mvebu/armada-37xx-tbg.c
-@@ -8,7 +8,6 @@
-  *   Gregory CLEMENT <gregory.clement@free-electrons.com>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <clk.h>
- #include <dm.h>
-diff --git a/drivers/clk/owl/clk_owl.c b/drivers/clk/owl/clk_owl.c
-index 678fdd5a4540..513112c1146c 100644
---- a/drivers/clk/owl/clk_owl.c
-+++ b/drivers/clk/owl/clk_owl.c
-@@ -6,7 +6,6 @@
-  * Copyright (C) 2018 Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include "clk_owl.h"
- #include <asm/io.h>
-diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
-index d3b63b9c1ac5..41fe4d896a7c 100644
---- a/drivers/clk/qcom/clock-apq8016.c
-+++ b/drivers/clk/qcom/clock-apq8016.c
-@@ -7,7 +7,6 @@
-  * Based on Little Kernel driver, simplified
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/clk/qcom/clock-apq8096.c b/drivers/clk/qcom/clock-apq8096.c
-index 479f9771a464..c77d69128b00 100644
---- a/drivers/clk/qcom/clock-apq8096.c
-+++ b/drivers/clk/qcom/clock-apq8096.c
-@@ -7,7 +7,6 @@
-  * Based on Little Kernel driver, simplified
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/clk/qcom/clock-ipq4019.c b/drivers/clk/qcom/clock-ipq4019.c
-index 72f235eab212..0e6d93b3d7c2 100644
---- a/drivers/clk/qcom/clock-ipq4019.c
-+++ b/drivers/clk/qcom/clock-ipq4019.c
-@@ -9,7 +9,6 @@
-  */
- 
- #include <clk-uclass.h>
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <dt-bindings/clock/qcom,gcc-ipq4019.h>
-diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/clock-qcom.c
-index 05e5ab7d094b..3a9cf2a231f2 100644
---- a/drivers/clk/qcom/clock-qcom.c
-+++ b/drivers/clk/qcom/clock-qcom.c
-@@ -12,7 +12,6 @@
-  * Based on Little Kernel driver, simplified
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <dm/device-internal.h>
-diff --git a/drivers/clk/qcom/clock-qcs404.c b/drivers/clk/qcom/clock-qcs404.c
-index 8a897a52bc00..70a1f648e585 100644
---- a/drivers/clk/qcom/clock-qcs404.c
-+++ b/drivers/clk/qcom/clock-qcs404.c
-@@ -5,7 +5,6 @@
-  * (C) Copyright 2022 Sumit Garg <sumit.garg@linaro.org>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/clk/qcom/clock-sdm845.c b/drivers/clk/qcom/clock-sdm845.c
-index 782df7da8444..f41f8c9e8dee 100644
---- a/drivers/clk/qcom/clock-sdm845.c
-+++ b/drivers/clk/qcom/clock-sdm845.c
-@@ -8,7 +8,6 @@
-  * Based on Little Kernel driver, simplified
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <linux/delay.h>
-diff --git a/drivers/clk/rockchip/clk_pll.c b/drivers/clk/rockchip/clk_pll.c
-index 66f8bb166955..44c6f14618d2 100644
---- a/drivers/clk/rockchip/clk_pll.c
-+++ b/drivers/clk/rockchip/clk_pll.c
-@@ -2,7 +2,6 @@
- /*
-  * (C) Copyright 2018-2019 Rockchip Electronics Co., Ltd
-  */
-- #include <common.h>
- #include <bitfield.h>
- #include <clk-uclass.h>
- #include <dm.h>
-diff --git a/drivers/clk/rockchip/clk_px30.c b/drivers/clk/rockchip/clk_px30.c
-index 2875c152b20d..d7825c66493e 100644
---- a/drivers/clk/rockchip/clk_px30.c
-+++ b/drivers/clk/rockchip/clk_px30.c
-@@ -3,7 +3,6 @@
-  * (C) Copyright 2017 Rockchip Electronics Co., Ltd
-  */
- 
--#include <common.h>
- #include <bitfield.h>
- #include <clk-uclass.h>
- #include <dm.h>
-diff --git a/drivers/clk/rockchip/clk_rk3036.c b/drivers/clk/rockchip/clk_rk3036.c
-index 6238b14c29e1..274428f2b4bd 100644
---- a/drivers/clk/rockchip/clk_rk3036.c
-+++ b/drivers/clk/rockchip/clk_rk3036.c
-@@ -3,7 +3,6 @@
-  * (C) Copyright 2015 Google, Inc
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/clk/rockchip/clk_rk3066.c b/drivers/clk/rockchip/clk_rk3066.c
-index f83335df6db6..f7dea7859f74 100644
---- a/drivers/clk/rockchip/clk_rk3066.c
-+++ b/drivers/clk/rockchip/clk_rk3066.c
-@@ -5,7 +5,6 @@
-  */
- 
- #include <bitfield.h>
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <dt-structs.h>
-diff --git a/drivers/clk/rockchip/clk_rk3128.c b/drivers/clk/rockchip/clk_rk3128.c
-index 182754e7052d..a07285593b55 100644
---- a/drivers/clk/rockchip/clk_rk3128.c
-+++ b/drivers/clk/rockchip/clk_rk3128.c
-@@ -3,7 +3,6 @@
-  * (C) Copyright 2017 Rockchip Electronics Co., Ltd
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/clk/rockchip/clk_rk3188.c b/drivers/clk/rockchip/clk_rk3188.c
-index f98b46a0f73b..f569a100f22b 100644
---- a/drivers/clk/rockchip/clk_rk3188.c
-+++ b/drivers/clk/rockchip/clk_rk3188.c
-@@ -4,7 +4,6 @@
-  * (C) Copyright 2016 Heiko Stuebner <heiko@sntech.de>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <dt-structs.h>
-diff --git a/drivers/clk/rockchip/clk_rk322x.c b/drivers/clk/rockchip/clk_rk322x.c
-index 9371c4f63a48..9b71fd863bad 100644
---- a/drivers/clk/rockchip/clk_rk322x.c
-+++ b/drivers/clk/rockchip/clk_rk322x.c
-@@ -3,7 +3,6 @@
-  * (C) Copyright 2017 Rockchip Electronics Co., Ltd
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/clk/rockchip/clk_rk3288.c b/drivers/clk/rockchip/clk_rk3288.c
-index 0b7eefad15f1..432a79291c8a 100644
---- a/drivers/clk/rockchip/clk_rk3288.c
-+++ b/drivers/clk/rockchip/clk_rk3288.c
-@@ -3,7 +3,6 @@
-  * (C) Copyright 2015 Google, Inc
-  */
- 
--#include <common.h>
- #include <bitfield.h>
- #include <clk-uclass.h>
- #include <div64.h>
-diff --git a/drivers/clk/rockchip/clk_rk3308.c b/drivers/clk/rockchip/clk_rk3308.c
-index 861648321d40..e73bb6790af2 100644
---- a/drivers/clk/rockchip/clk_rk3308.c
-+++ b/drivers/clk/rockchip/clk_rk3308.c
-@@ -2,7 +2,6 @@
- /*
-  * (C) Copyright 2017-2019 Rockchip Electronics Co., Ltd
-  */
--#include <common.h>
- #include <bitfield.h>
- #include <clk-uclass.h>
- #include <dm.h>
-diff --git a/drivers/clk/rockchip/clk_rk3328.c b/drivers/clk/rockchip/clk_rk3328.c
-index 87075ec71340..4b94d6364d13 100644
---- a/drivers/clk/rockchip/clk_rk3328.c
-+++ b/drivers/clk/rockchip/clk_rk3328.c
-@@ -3,7 +3,6 @@
-  * (C) Copyright 2017 Rockchip Electronics Co., Ltd
-  */
- 
--#include <common.h>
- #include <bitfield.h>
- #include <clk-uclass.h>
- #include <dm.h>
-diff --git a/drivers/clk/rockchip/clk_rk3368.c b/drivers/clk/rockchip/clk_rk3368.c
-index 1c5dfaa3800b..d89439805215 100644
---- a/drivers/clk/rockchip/clk_rk3368.c
-+++ b/drivers/clk/rockchip/clk_rk3368.c
-@@ -5,7 +5,6 @@
-  * (C) Copyright 2017 Theobroma Systems Design und Consulting GmbH
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <dt-structs.h>
-diff --git a/drivers/clk/rockchip/clk_rk3399.c b/drivers/clk/rockchip/clk_rk3399.c
-index 80f65a237e8e..cc414c38432c 100644
---- a/drivers/clk/rockchip/clk_rk3399.c
-+++ b/drivers/clk/rockchip/clk_rk3399.c
-@@ -4,7 +4,6 @@
-  * (C) 2017 Theobroma Systems Design und Consulting GmbH
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <dt-structs.h>
-diff --git a/drivers/clk/rockchip/clk_rk3568.c b/drivers/clk/rockchip/clk_rk3568.c
-index 24eeca8bf265..35563509d617 100644
---- a/drivers/clk/rockchip/clk_rk3568.c
-+++ b/drivers/clk/rockchip/clk_rk3568.c
-@@ -4,7 +4,6 @@
-  * Author: Elaine Zhang <zhangqing@rock-chips.com>
-  */
- 
--#include <common.h>
- #include <bitfield.h>
- #include <clk-uclass.h>
- #include <dm.h>
-diff --git a/drivers/clk/rockchip/clk_rk3588.c b/drivers/clk/rockchip/clk_rk3588.c
-index 4c611a390499..ceae08a19aa5 100644
---- a/drivers/clk/rockchip/clk_rk3588.c
-+++ b/drivers/clk/rockchip/clk_rk3588.c
-@@ -4,7 +4,6 @@
-  * Author: Elaine Zhang <zhangqing@rock-chips.com>
-  */
- 
--#include <common.h>
- #include <bitfield.h>
- #include <clk-uclass.h>
- #include <dm.h>
-diff --git a/drivers/clk/rockchip/clk_rv1108.c b/drivers/clk/rockchip/clk_rv1108.c
-index fc442f7eebe2..75202a66aa68 100644
---- a/drivers/clk/rockchip/clk_rv1108.c
-+++ b/drivers/clk/rockchip/clk_rv1108.c
-@@ -4,7 +4,6 @@
-  * Author: Andy Yan <andy.yan@rock-chips.com>
-  */
- 
--#include <common.h>
- #include <bitfield.h>
- #include <clk-uclass.h>
- #include <dm.h>
-diff --git a/drivers/clk/rockchip/clk_rv1126.c b/drivers/clk/rockchip/clk_rv1126.c
-index cfdfcbdb0f4c..aeeea9569147 100644
---- a/drivers/clk/rockchip/clk_rv1126.c
-+++ b/drivers/clk/rockchip/clk_rv1126.c
-@@ -5,7 +5,6 @@
-  * Author: Finley Xiao <finley.xiao@rock-chips.com>
-  */
- 
--#include <common.h>
- #include <bitfield.h>
- #include <clk-uclass.h>
- #include <dm.h>
-diff --git a/drivers/clk/sifive/sifive-prci.c b/drivers/clk/sifive/sifive-prci.c
-index c8fb60029070..5ea860628006 100644
---- a/drivers/clk/sifive/sifive-prci.c
-+++ b/drivers/clk/sifive/sifive-prci.c
-@@ -22,7 +22,6 @@
-  * https://github.com/riscv/riscv-linux/commit/999529edf517ed75b56659d456d221b2ee56bb60
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <clk.h>
- #include <dm.h>
-diff --git a/drivers/clk/starfive/clk-jh7110-pll.c b/drivers/clk/starfive/clk-jh7110-pll.c
-index 1568a1f4cd91..581035842fc3 100644
---- a/drivers/clk/starfive/clk-jh7110-pll.c
-+++ b/drivers/clk/starfive/clk-jh7110-pll.c
-@@ -6,7 +6,6 @@
-  *		Xingyu Wu <xingyu.wu@starfivetech.com>
-  */
- 
--#include <common.h>
- #include <asm/io.h>
- #include <malloc.h>
- #include <clk-uclass.h>
-diff --git a/drivers/clk/starfive/clk-jh7110.c b/drivers/clk/starfive/clk-jh7110.c
-index a38694809a00..191da75d7ba2 100644
---- a/drivers/clk/starfive/clk-jh7110.c
-+++ b/drivers/clk/starfive/clk-jh7110.c
-@@ -6,7 +6,6 @@
-  *		Xingyu Wu <xingyu.wu@starfivetech.com>
-  */
- 
--#include <common.h>
- #include <clk.h>
- #include <clk-uclass.h>
- #include <dm.h>
-diff --git a/drivers/clk/stm32/clk-stm32-core.c b/drivers/clk/stm32/clk-stm32-core.c
-index 37e996e78f96..cad07cc952e7 100644
---- a/drivers/clk/stm32/clk-stm32-core.c
-+++ b/drivers/clk/stm32/clk-stm32-core.c
-@@ -6,7 +6,6 @@
- 
- #define LOG_CATEGORY UCLASS_CLK
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <log.h>
-diff --git a/drivers/clk/stm32/clk-stm32f.c b/drivers/clk/stm32/clk-stm32f.c
-index d68c75ed2013..fceb3c44b94e 100644
---- a/drivers/clk/stm32/clk-stm32f.c
-+++ b/drivers/clk/stm32/clk-stm32f.c
-@@ -6,7 +6,6 @@
- 
- #define LOG_CATEGORY UCLASS_CLK
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <log.h>
-diff --git a/drivers/clk/stm32/clk-stm32h7.c b/drivers/clk/stm32/clk-stm32h7.c
-index d440c28eb485..a554eda504de 100644
---- a/drivers/clk/stm32/clk-stm32h7.c
-+++ b/drivers/clk/stm32/clk-stm32h7.c
-@@ -6,7 +6,6 @@
- 
- #define LOG_CATEGORY UCLASS_CLK
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <log.h>
-diff --git a/drivers/clk/stm32/clk-stm32mp1.c b/drivers/clk/stm32/clk-stm32mp1.c
-index 6f000c8e4448..204ac170531d 100644
---- a/drivers/clk/stm32/clk-stm32mp1.c
-+++ b/drivers/clk/stm32/clk-stm32mp1.c
-@@ -5,7 +5,6 @@
- 
- #define LOG_CATEGORY UCLASS_CLK
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <div64.h>
- #include <dm.h>
-diff --git a/drivers/clk/stm32/clk-stm32mp13.c b/drivers/clk/stm32/clk-stm32mp13.c
-index 5174ae53a1a2..362dba102521 100644
---- a/drivers/clk/stm32/clk-stm32mp13.c
-+++ b/drivers/clk/stm32/clk-stm32mp13.c
-@@ -7,7 +7,6 @@
- #define LOG_CATEGORY UCLASS_CLK
- 
- #include <clk-uclass.h>
--#include <common.h>
- #include <dm.h>
- #include <log.h>
- #include <asm/io.h>
-diff --git a/drivers/clk/sunxi/clk_a10.c b/drivers/clk/sunxi/clk_a10.c
-index f27306fe33b3..19fe248044b4 100644
---- a/drivers/clk/sunxi/clk_a10.c
-+++ b/drivers/clk/sunxi/clk_a10.c
-@@ -4,7 +4,6 @@
-  * Author: Jagan Teki <jagan@amarulasolutions.com>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/clk/sunxi/clk_a10s.c b/drivers/clk/sunxi/clk_a10s.c
-index 16ac589bb2bf..f771369c9423 100644
---- a/drivers/clk/sunxi/clk_a10s.c
-+++ b/drivers/clk/sunxi/clk_a10s.c
-@@ -4,7 +4,6 @@
-  * Author: Jagan Teki <jagan@amarulasolutions.com>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/clk/sunxi/clk_a23.c b/drivers/clk/sunxi/clk_a23.c
-index 45d5ba75bf51..fdee4347e991 100644
---- a/drivers/clk/sunxi/clk_a23.c
-+++ b/drivers/clk/sunxi/clk_a23.c
-@@ -4,7 +4,6 @@
-  * Author: Jagan Teki <jagan@amarulasolutions.com>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/clk/sunxi/clk_a31.c b/drivers/clk/sunxi/clk_a31.c
-index 6ca800050ed0..04f76a7c2a38 100644
---- a/drivers/clk/sunxi/clk_a31.c
-+++ b/drivers/clk/sunxi/clk_a31.c
-@@ -4,7 +4,6 @@
-  * Author: Jagan Teki <jagan@amarulasolutions.com>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/clk/sunxi/clk_a64.c b/drivers/clk/sunxi/clk_a64.c
-index fd26cd4f5d66..f1b01d25ddd4 100644
---- a/drivers/clk/sunxi/clk_a64.c
-+++ b/drivers/clk/sunxi/clk_a64.c
-@@ -4,7 +4,6 @@
-  * Author: Jagan Teki <jagan@amarulasolutions.com>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/clk/sunxi/clk_a80.c b/drivers/clk/sunxi/clk_a80.c
-index c5834f44103f..6751af8a8031 100644
---- a/drivers/clk/sunxi/clk_a80.c
-+++ b/drivers/clk/sunxi/clk_a80.c
-@@ -4,7 +4,6 @@
-  * Author: Jagan Teki <jagan@amarulasolutions.com>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/clk/sunxi/clk_a83t.c b/drivers/clk/sunxi/clk_a83t.c
-index 760d98cd620c..d8621a3e64cc 100644
---- a/drivers/clk/sunxi/clk_a83t.c
-+++ b/drivers/clk/sunxi/clk_a83t.c
-@@ -4,7 +4,6 @@
-  * Author: Jagan Teki <jagan@amarulasolutions.com>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/clk/sunxi/clk_d1.c b/drivers/clk/sunxi/clk_d1.c
-index 9dae761de83c..b990a1185948 100644
---- a/drivers/clk/sunxi/clk_d1.c
-+++ b/drivers/clk/sunxi/clk_d1.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2021 Samuel Holland <samuel@sholland.org>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/clk/sunxi/clk_f1c100s.c b/drivers/clk/sunxi/clk_f1c100s.c
-index 7b4c3ce51765..e22956992014 100644
---- a/drivers/clk/sunxi/clk_f1c100s.c
-+++ b/drivers/clk/sunxi/clk_f1c100s.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2019 George Hilliard <thirtythreeforty@gmail.com>.
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/clk/sunxi/clk_h3.c b/drivers/clk/sunxi/clk_h3.c
-index 32bc95fccca4..ce55caeb1573 100644
---- a/drivers/clk/sunxi/clk_h3.c
-+++ b/drivers/clk/sunxi/clk_h3.c
-@@ -4,7 +4,6 @@
-  * Author: Jagan Teki <jagan@amarulasolutions.com>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/clk/sunxi/clk_h6.c b/drivers/clk/sunxi/clk_h6.c
-index 071fd581003d..1b7bd9dea2f8 100644
---- a/drivers/clk/sunxi/clk_h6.c
-+++ b/drivers/clk/sunxi/clk_h6.c
-@@ -4,7 +4,6 @@
-  * Author: Jagan Teki <jagan@amarulasolutions.com>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/clk/sunxi/clk_h616.c b/drivers/clk/sunxi/clk_h616.c
-index 113dcff28515..b1e999e18c14 100644
---- a/drivers/clk/sunxi/clk_h616.c
-+++ b/drivers/clk/sunxi/clk_h616.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2021 Jernej Skrabec <jernej.skrabec@siol.net>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/clk/sunxi/clk_r40.c b/drivers/clk/sunxi/clk_r40.c
-index 0fef6f3566d5..721debdae238 100644
---- a/drivers/clk/sunxi/clk_r40.c
-+++ b/drivers/clk/sunxi/clk_r40.c
-@@ -4,7 +4,6 @@
-  * Author: Jagan Teki <jagan@amarulasolutions.com>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/clk/sunxi/clk_sunxi.c b/drivers/clk/sunxi/clk_sunxi.c
-index 1782cffc404a..2ef4f45dacf5 100644
---- a/drivers/clk/sunxi/clk_sunxi.c
-+++ b/drivers/clk/sunxi/clk_sunxi.c
-@@ -4,7 +4,6 @@
-  * Author: Jagan Teki <jagan@amarulasolutions.com>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/clk/sunxi/clk_v3s.c b/drivers/clk/sunxi/clk_v3s.c
-index 6524c13540e0..85410e282e85 100644
---- a/drivers/clk/sunxi/clk_v3s.c
-+++ b/drivers/clk/sunxi/clk_v3s.c
-@@ -4,7 +4,6 @@
-  * Author: Jagan Teki <jagan@amarulasolutions.com>
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/clk/tegra/tegra-car-clk.c b/drivers/clk/tegra/tegra-car-clk.c
-index c5214b9b3e2e..1d61f8dc378d 100644
---- a/drivers/clk/tegra/tegra-car-clk.c
-+++ b/drivers/clk/tegra/tegra-car-clk.c
-@@ -3,7 +3,6 @@
-  * Copyright (c) 2016, NVIDIA CORPORATION.
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <log.h>
-diff --git a/drivers/clk/tegra/tegra186-clk.c b/drivers/clk/tegra/tegra186-clk.c
-index 5a98a3f3f0e6..ec52326c3b36 100644
---- a/drivers/clk/tegra/tegra186-clk.c
-+++ b/drivers/clk/tegra/tegra186-clk.c
-@@ -3,7 +3,6 @@
-  * Copyright (c) 2016, NVIDIA CORPORATION.
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <log.h>
-diff --git a/drivers/clk/ti/clk-am3-dpll-x2.c b/drivers/clk/ti/clk-am3-dpll-x2.c
-index 3cf279d6a3a9..1b0b9818cdd4 100644
---- a/drivers/clk/ti/clk-am3-dpll-x2.c
-+++ b/drivers/clk/ti/clk-am3-dpll-x2.c
-@@ -7,7 +7,6 @@
-  * Loosely based on Linux kernel drivers/clk/ti/dpll.c
-  */
- 
--#include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
- #include <dm/device_compat.h>
-diff --git a/drivers/clk/ti/clk-am3-dpll.c b/drivers/clk/ti/clk-am3-dpll.c
-index 398a011a5cea..21ec01f8dd9a 100644
---- a/drivers/clk/ti/clk-am3-dpll.c
-+++ b/drivers/clk/ti/clk-am3-dpll.c
-@@ -7,7 +7,6 @@
-  * Loosely based on Linux kernel drivers/clk/ti/dpll.c
-  */
- 
--#include <common.h>
- #include <clk.h>
- #include <clk-uclass.h>
- #include <div64.h>
-diff --git a/drivers/clk/ti/clk-ctrl.c b/drivers/clk/ti/clk-ctrl.c
-index 8926e57ebc84..c5c97dc35c4d 100644
---- a/drivers/clk/ti/clk-ctrl.c
-+++ b/drivers/clk/ti/clk-ctrl.c
-@@ -5,7 +5,6 @@
-  * Copyright (C) 2020 Dario Binacchi <dariobin@libero.it>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <dm/device_compat.h>
- #include <clk-uclass.h>
-diff --git a/drivers/clk/ti/clk-divider.c b/drivers/clk/ti/clk-divider.c
-index 15941f17811a..40a742d7fdc4 100644
---- a/drivers/clk/ti/clk-divider.c
-+++ b/drivers/clk/ti/clk-divider.c
-@@ -7,7 +7,6 @@
-  * Loosely based on Linux kernel drivers/clk/ti/divider.c
-  */
- 
--#include <common.h>
- #include <clk.h>
- #include <clk-uclass.h>
- #include <div64.h>
-diff --git a/drivers/clk/ti/clk-gate.c b/drivers/clk/ti/clk-gate.c
-index eb15f6243f20..873ceb8a2ab7 100644
---- a/drivers/clk/ti/clk-gate.c
-+++ b/drivers/clk/ti/clk-gate.c
-@@ -7,7 +7,6 @@
-  * Loosely based on Linux kernel drivers/clk/ti/gate.c
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <dm/device_compat.h>
- #include <clk-uclass.h>
-diff --git a/drivers/clk/ti/clk-k3-pll.c b/drivers/clk/ti/clk-k3-pll.c
-index 8323e6e6919c..b3a1b4cedb78 100644
---- a/drivers/clk/ti/clk-k3-pll.c
-+++ b/drivers/clk/ti/clk-k3-pll.c
-@@ -6,7 +6,6 @@
-  *	Tero Kristo <t-kristo@ti.com>
-  */
- 
--#include <common.h>
- #include <asm/io.h>
- #include <dm.h>
- #include <div64.h>
-diff --git a/drivers/clk/ti/clk-k3.c b/drivers/clk/ti/clk-k3.c
-index 7aa162c2f702..41e5022ea0cd 100644
---- a/drivers/clk/ti/clk-k3.c
-+++ b/drivers/clk/ti/clk-k3.c
-@@ -6,7 +6,6 @@
-  *	Tero Kristo <t-kristo@ti.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <soc.h>
-diff --git a/drivers/clk/ti/clk-mux.c b/drivers/clk/ti/clk-mux.c
-index 215241b16135..db5393414318 100644
---- a/drivers/clk/ti/clk-mux.c
-+++ b/drivers/clk/ti/clk-mux.c
-@@ -7,7 +7,6 @@
-  * Based on Linux kernel drivers/clk/ti/mux.c
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <dm/device_compat.h>
- #include <clk-uclass.h>
-diff --git a/drivers/clk/ti/clk-sci.c b/drivers/clk/ti/clk-sci.c
-index 9e5760d33544..e374bd3bcc20 100644
---- a/drivers/clk/ti/clk-sci.c
-+++ b/drivers/clk/ti/clk-sci.c
-@@ -8,7 +8,6 @@
-  * Loosely based on Linux kernel sci-clk.c...
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <clk-uclass.h>
-diff --git a/drivers/clk/ti/clk.c b/drivers/clk/ti/clk.c
-index 6e5cc90f0f8c..28cd15128819 100644
---- a/drivers/clk/ti/clk.c
-+++ b/drivers/clk/ti/clk.c
-@@ -5,7 +5,6 @@
-  * Copyright (C) 2020 Dario Binacchi <dariobin@libero.it>
+  * Laurence Withers <lwithers@guralp.com>
   */
  
 -#include <common.h>
  #include <dm.h>
  #include <fdtdec.h>
- #include <regmap.h>
-diff --git a/drivers/clk/ti/omap4-cm.c b/drivers/clk/ti/omap4-cm.c
-index 3cdc9b28887d..a30ce9d09d27 100644
---- a/drivers/clk/ti/omap4-cm.c
-+++ b/drivers/clk/ti/omap4-cm.c
-@@ -5,7 +5,6 @@
-  * Copyright (C) 2020 Dario Binacchi <dariobin@libero.it>
+ #include <malloc.h>
+diff --git a/drivers/gpio/ftgpio010.c b/drivers/gpio/ftgpio010.c
+index 6c091d4fd874..4cb550a540c6 100644
+--- a/drivers/gpio/ftgpio010.c
++++ b/drivers/gpio/ftgpio010.c
+@@ -3,7 +3,6 @@
+  * Faraday Technology's FTGPIO010 controller.
   */
  
 -#include <common.h>
  #include <dm.h>
- #include <dm/lists.h>
+ #include <asm/io.h>
+ #include <asm/gpio.h>
+diff --git a/drivers/gpio/gpio-aspeed.c b/drivers/gpio/gpio-aspeed.c
+index 1c3d18796b3a..c5608f4a9dfc 100644
+--- a/drivers/gpio/gpio-aspeed.c
++++ b/drivers/gpio/gpio-aspeed.c
+@@ -6,7 +6,6 @@
+  *
+  * Implementation extracted from the Linux kernel and adapted for u-boot.
+  */
+-#include <common.h>
+ #include <asm/io.h>
+ #include <asm/gpio.h>
  
-diff --git a/drivers/clk/uniphier/clk-uniphier-core.c b/drivers/clk/uniphier/clk-uniphier-core.c
-index c31e59641d93..33369c93916b 100644
---- a/drivers/clk/uniphier/clk-uniphier-core.c
-+++ b/drivers/clk/uniphier/clk-uniphier-core.c
+diff --git a/drivers/gpio/gpio-fxl6408.c b/drivers/gpio/gpio-fxl6408.c
+index ca7aa14eeb23..c8d2dff5f7bf 100644
+--- a/drivers/gpio/gpio-fxl6408.c
++++ b/drivers/gpio/gpio-fxl6408.c
+@@ -37,7 +37,6 @@
+ 
+ #include <asm-generic/gpio.h>
+ #include <asm/global_data.h>
+-#include <common.h>
+ #include <dm.h>
+ #include <dm/device_compat.h>
+ #include <dt-bindings/gpio/gpio.h>
+diff --git a/drivers/gpio/gpio-rcar.c b/drivers/gpio/gpio-rcar.c
+index 707785012322..d1a399388095 100644
+--- a/drivers/gpio/gpio-rcar.c
++++ b/drivers/gpio/gpio-rcar.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2017 Marek Vasut <marek.vasut@gmail.com>
+  */
+ 
+-#include <common.h>
+ #include <clk.h>
+ #include <dm.h>
+ #include <malloc.h>
+diff --git a/drivers/gpio/gpio-rza1.c b/drivers/gpio/gpio-rza1.c
+index f14be871e8d0..8c3fe61b25f6 100644
+--- a/drivers/gpio/gpio-rza1.c
++++ b/drivers/gpio/gpio-rza1.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2019 Marek Vasut <marek.vasut@gmail.com>
+  */
+ 
+-#include <common.h>
+ #include <clk.h>
+ #include <dm.h>
+ #include <errno.h>
+diff --git a/drivers/gpio/gpio-uclass.c b/drivers/gpio/gpio-uclass.c
+index 4234cd912c9f..92ce68dd4a13 100644
+--- a/drivers/gpio/gpio-uclass.c
++++ b/drivers/gpio/gpio-uclass.c
+@@ -5,7 +5,6 @@
+ 
+ #define LOG_CATEGORY	UCLASS_GPIO
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <dt-structs.h>
+ #include <log.h>
+diff --git a/drivers/gpio/gpio-uniphier.c b/drivers/gpio/gpio-uniphier.c
+index 61c705b5ac56..033fb4b60ee6 100644
+--- a/drivers/gpio/gpio-uniphier.c
++++ b/drivers/gpio/gpio-uniphier.c
 @@ -4,7 +4,6 @@
   *   Author: Masahiro Yamada <yamada.masahiro@socionext.com>
   */
  
 -#include <common.h>
- #include <clk-uclass.h>
  #include <dm.h>
- #include <dm/device_compat.h>
+ #include <linux/bitops.h>
+ #include <linux/io.h>
+diff --git a/drivers/gpio/gpio_slg7xl45106.c b/drivers/gpio/gpio_slg7xl45106.c
+index 4ad06c18b4bd..a7c9ff53af7d 100644
+--- a/drivers/gpio/gpio_slg7xl45106.c
++++ b/drivers/gpio/gpio_slg7xl45106.c
+@@ -5,7 +5,6 @@
+  * Copyright (C) 2021 Xilinx, Inc.
+  */
+ 
+-#include <common.h>
+ #include <errno.h>
+ #include <asm/io.h>
+ #include <asm/gpio.h>
+diff --git a/drivers/gpio/hi6220_gpio.c b/drivers/gpio/hi6220_gpio.c
+index e287c31b93fc..7ceb5f424c9d 100644
+--- a/drivers/gpio/hi6220_gpio.c
++++ b/drivers/gpio/hi6220_gpio.c
+@@ -4,7 +4,6 @@
+  * Peter Griffin <peter.griffin@linaro.org>
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <asm/gpio.h>
+ #include <asm/io.h>
+diff --git a/drivers/gpio/hsdk-creg-gpio.c b/drivers/gpio/hsdk-creg-gpio.c
+index 66f8441840b5..734b31d3dc17 100644
+--- a/drivers/gpio/hsdk-creg-gpio.c
++++ b/drivers/gpio/hsdk-creg-gpio.c
+@@ -12,7 +12,6 @@
+ #include <log.h>
+ #include <asm-generic/gpio.h>
+ #include <asm/io.h>
+-#include <common.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <linux/bitops.h>
+diff --git a/drivers/gpio/imx_rgpio2p.c b/drivers/gpio/imx_rgpio2p.c
+index 3227a8d5b574..fc1d418315c5 100644
+--- a/drivers/gpio/imx_rgpio2p.c
++++ b/drivers/gpio/imx_rgpio2p.c
+@@ -5,7 +5,6 @@
+  * RGPIO2P driver for the Freescale i.MX7ULP.
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <fdtdec.h>
+diff --git a/drivers/gpio/intel_broadwell_gpio.c b/drivers/gpio/intel_broadwell_gpio.c
+index 20af35de2cf5..53ed0a3eed06 100644
+--- a/drivers/gpio/intel_broadwell_gpio.c
++++ b/drivers/gpio/intel_broadwell_gpio.c
+@@ -3,7 +3,6 @@
+  * Copyright (c) 2012 The Chromium OS Authors.
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <fdtdec.h>
+diff --git a/drivers/gpio/intel_gpio.c b/drivers/gpio/intel_gpio.c
+index 4a3ec6d63502..0ab6e8a90bcb 100644
+--- a/drivers/gpio/intel_gpio.c
++++ b/drivers/gpio/intel_gpio.c
+@@ -5,7 +5,6 @@
+ 
+ #define LOG_CATEGORY	UCLASS_GPIO
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <fdtdec.h>
+diff --git a/drivers/gpio/intel_ich6_gpio.c b/drivers/gpio/intel_ich6_gpio.c
+index 2ed0d0bea9a5..096bc3b05bb7 100644
+--- a/drivers/gpio/intel_ich6_gpio.c
++++ b/drivers/gpio/intel_ich6_gpio.c
+@@ -28,7 +28,6 @@
+ 
+ #define LOG_CATEGORY	UCLASS_GPIO
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <fdtdec.h>
+diff --git a/drivers/gpio/iproc_gpio.c b/drivers/gpio/iproc_gpio.c
+index 7187d3257b90..8688f12e43c7 100644
+--- a/drivers/gpio/iproc_gpio.c
++++ b/drivers/gpio/iproc_gpio.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2020 Broadcom
+  */
+ 
+-#include <common.h>
+ #include <errno.h>
+ #include <asm/gpio.h>
+ #include <asm/io.h>
+diff --git a/drivers/gpio/kw_gpio.c b/drivers/gpio/kw_gpio.c
+index a15769793f17..e183f5594b51 100644
+--- a/drivers/gpio/kw_gpio.c
++++ b/drivers/gpio/kw_gpio.c
+@@ -12,7 +12,6 @@
+  * Dieter Kiermaier dk-arm-linux@gmx.de
+  */
+ 
+-#include <common.h>
+ #include <linux/bitops.h>
+ #include <asm/io.h>
+ #include <asm/arch/soc.h>
+diff --git a/drivers/gpio/lpc32xx_gpio.c b/drivers/gpio/lpc32xx_gpio.c
+index de66c765d11e..2b537e007ba9 100644
+--- a/drivers/gpio/lpc32xx_gpio.c
++++ b/drivers/gpio/lpc32xx_gpio.c
+@@ -6,7 +6,6 @@
+  * Written-by: Albert ARIBAUD <albert.aribaud@3adev.fr>
+  */
+ 
+-#include <common.h>
+ #include <asm/io.h>
+ #include <asm/arch-lpc32xx/cpu.h>
+ #include <asm/arch-lpc32xx/gpio.h>
+diff --git a/drivers/gpio/max7320_gpio.c b/drivers/gpio/max7320_gpio.c
+index 647aed907b4c..f733cc924e56 100644
+--- a/drivers/gpio/max7320_gpio.c
++++ b/drivers/gpio/max7320_gpio.c
+@@ -7,7 +7,6 @@
+  *
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <i2c.h>
+ #include <asm-generic/gpio.h>
+diff --git a/drivers/gpio/mcp230xx_gpio.c b/drivers/gpio/mcp230xx_gpio.c
+index df99fde56602..42e7fe9d474c 100644
+--- a/drivers/gpio/mcp230xx_gpio.c
++++ b/drivers/gpio/mcp230xx_gpio.c
+@@ -7,7 +7,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_GPIO
+ 
+-#include <common.h>
+ #include <errno.h>
+ #include <dm.h>
+ #include <i2c.h>
+diff --git a/drivers/gpio/mpc83xx_spisel_boot.c b/drivers/gpio/mpc83xx_spisel_boot.c
+index fd26a36a0f94..2be8c73ae3d7 100644
+--- a/drivers/gpio/mpc83xx_spisel_boot.c
++++ b/drivers/gpio/mpc83xx_spisel_boot.c
+@@ -5,7 +5,6 @@
+  * GPIO driver to set/clear SPISEL_BOOT pin on mpc83xx.
+  */
+ 
+-#include <common.h>
+ #include <log.h>
+ #include <dm.h>
+ #include <mapmem.h>
+diff --git a/drivers/gpio/mpc8xx_gpio.c b/drivers/gpio/mpc8xx_gpio.c
+index 2f6534653313..e2b12f8b56c7 100644
+--- a/drivers/gpio/mpc8xx_gpio.c
++++ b/drivers/gpio/mpc8xx_gpio.c
+@@ -10,7 +10,6 @@
+  * Copyright 2010 eXMeritus, A Boeing Company
+  */
+ 
+-#include <common.h>
+ #include <asm/io.h>
+ #include <dm.h>
+ #include <mapmem.h>
+diff --git a/drivers/gpio/mpc8xxx_gpio.c b/drivers/gpio/mpc8xxx_gpio.c
+index f7ffd8926ade..e9bd38f162c1 100644
+--- a/drivers/gpio/mpc8xxx_gpio.c
++++ b/drivers/gpio/mpc8xxx_gpio.c
+@@ -9,7 +9,6 @@
+  * Copyright 2020-2021 NXP
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <mapmem.h>
+ #include <asm/gpio.h>
+diff --git a/drivers/gpio/mscc_sgpio.c b/drivers/gpio/mscc_sgpio.c
+index c97e44005ee1..5a40304f1f93 100644
+--- a/drivers/gpio/mscc_sgpio.c
++++ b/drivers/gpio/mscc_sgpio.c
+@@ -7,7 +7,6 @@
+  * Copyright (c) 2018 Microsemi Corporation
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <log.h>
+ #include <asm/gpio.h>
+diff --git a/drivers/gpio/msm_gpio.c b/drivers/gpio/msm_gpio.c
+index f5d9ab54e817..2fb266f12854 100644
+--- a/drivers/gpio/msm_gpio.c
++++ b/drivers/gpio/msm_gpio.c
+@@ -5,7 +5,6 @@
+  * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <asm/global_data.h>
+diff --git a/drivers/gpio/mt7621_gpio.c b/drivers/gpio/mt7621_gpio.c
+index 43bb4df4da72..63a202310a5e 100644
+--- a/drivers/gpio/mt7621_gpio.c
++++ b/drivers/gpio/mt7621_gpio.c
+@@ -7,7 +7,6 @@
+  *   Copyright (C) 2013 John Crispin <blogic@openwrt.org>
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <fdtdec.h>
+diff --git a/drivers/gpio/mvebu_gpio.c b/drivers/gpio/mvebu_gpio.c
+index f706a6dfa4fe..0d82380dde4a 100644
+--- a/drivers/gpio/mvebu_gpio.c
++++ b/drivers/gpio/mvebu_gpio.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2016 Stefan Roese <sr@denx.de>
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <dm/pinctrl.h>
+ #include <asm/gpio.h>
+diff --git a/drivers/gpio/mxc_gpio.c b/drivers/gpio/mxc_gpio.c
+index 1dec4e35e0a7..cac6b32b2796 100644
+--- a/drivers/gpio/mxc_gpio.c
++++ b/drivers/gpio/mxc_gpio.c
+@@ -6,7 +6,6 @@
+  * Copyright (C) 2011
+  * Stefano Babic, DENX Software Engineering, <sbabic@denx.de>
+  */
+-#include <common.h>
+ #include <errno.h>
+ #include <dm.h>
+ #include <malloc.h>
+diff --git a/drivers/gpio/mxs_gpio.c b/drivers/gpio/mxs_gpio.c
+index 1356f89ac2f0..80910c9ec4c2 100644
+--- a/drivers/gpio/mxs_gpio.c
++++ b/drivers/gpio/mxs_gpio.c
+@@ -6,7 +6,6 @@
+  * on behalf of DENX Software Engineering GmbH
+  */
+ 
+-#include <common.h>
+ #include <log.h>
+ #include <malloc.h>
+ #include <asm/global_data.h>
+diff --git a/drivers/gpio/nmk_gpio.c b/drivers/gpio/nmk_gpio.c
+index e1bb41b196cc..c2716e717632 100644
+--- a/drivers/gpio/nmk_gpio.c
++++ b/drivers/gpio/nmk_gpio.c
+@@ -1,7 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ /* Copyright (C) 2019 Stephan Gerhold */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <asm/gpio.h>
+ #include <asm/io.h>
+diff --git a/drivers/gpio/npcm_gpio.c b/drivers/gpio/npcm_gpio.c
+index 98e5dc79c1cc..da3b3ffbc92f 100644
+--- a/drivers/gpio/npcm_gpio.c
++++ b/drivers/gpio/npcm_gpio.c
+@@ -3,7 +3,6 @@
+  * Copyright (c) 2022 Nuvoton Technology Corp.
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <asm/gpio.h>
+ #include <linux/io.h>
+diff --git a/drivers/gpio/nx_gpio.c b/drivers/gpio/nx_gpio.c
+index e2565d709535..741b2ff7f177 100644
+--- a/drivers/gpio/nx_gpio.c
++++ b/drivers/gpio/nx_gpio.c
+@@ -4,7 +4,6 @@
+  * DeokJin, Lee <truevirtue@nexell.co.kr>
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <malloc.h>
+diff --git a/drivers/gpio/omap_gpio.c b/drivers/gpio/omap_gpio.c
+index 50c4f75ddf5d..1aceafcdf581 100644
+--- a/drivers/gpio/omap_gpio.c
++++ b/drivers/gpio/omap_gpio.c
+@@ -17,7 +17,6 @@
+  * Copyright (C) 2003-2005 Nokia Corporation
+  * Written by Juha Yrjölä <juha.yrjola@nokia.com>
+  */
+-#include <common.h>
+ #include <dm.h>
+ #include <fdtdec.h>
+ #include <asm/global_data.h>
+diff --git a/drivers/gpio/pca953x.c b/drivers/gpio/pca953x.c
+index b5ed35256ee7..fc4dcf9f9861 100644
+--- a/drivers/gpio/pca953x.c
++++ b/drivers/gpio/pca953x.c
+@@ -8,10 +8,11 @@
+  * pca9539, etc)
+  */
+ 
+-#include <common.h>
++#include <config.h>
+ #include <command.h>
+ #include <i2c.h>
+ #include <pca953x.h>
++#include <vsprintf.h>
+ 
+ /* Default to an address that hopefully won't corrupt other i2c devices */
+ #ifndef CFG_SYS_I2C_PCA953X_ADDR
+diff --git a/drivers/gpio/pca953x_gpio.c b/drivers/gpio/pca953x_gpio.c
+index b0c66d18317e..80ebaadb3e43 100644
+--- a/drivers/gpio/pca953x_gpio.c
++++ b/drivers/gpio/pca953x_gpio.c
+@@ -18,7 +18,6 @@
+  * 2. Support Polarity Inversion
+  */
+ 
+-#include <common.h>
+ #include <errno.h>
+ #include <dm.h>
+ #include <fdtdec.h>
+diff --git a/drivers/gpio/pcf8575_gpio.c b/drivers/gpio/pcf8575_gpio.c
+index f38e215c4d6e..10ae86ec5d45 100644
+--- a/drivers/gpio/pcf8575_gpio.c
++++ b/drivers/gpio/pcf8575_gpio.c
+@@ -17,7 +17,6 @@
+  *
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <i2c.h>
+ #include <log.h>
+diff --git a/drivers/gpio/pic32_gpio.c b/drivers/gpio/pic32_gpio.c
+index 975a2af3ccb8..d8edfefb2d75 100644
+--- a/drivers/gpio/pic32_gpio.c
++++ b/drivers/gpio/pic32_gpio.c
+@@ -4,7 +4,6 @@
+  * Purna Chandra Mandal <purna.mandal@microchip.com>
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <malloc.h>
+diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.c
+index 0dd3434e9e04..80fee841ee3f 100644
+--- a/drivers/gpio/qcom_pmic_gpio.c
++++ b/drivers/gpio/qcom_pmic_gpio.c
+@@ -5,7 +5,6 @@
+  * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <dm/device-internal.h>
+ #include <dm/lists.h>
+diff --git a/drivers/gpio/qe_gpio.c b/drivers/gpio/qe_gpio.c
+index 16e8d1eae6ed..ac6e68299e07 100644
+--- a/drivers/gpio/qe_gpio.c
++++ b/drivers/gpio/qe_gpio.c
+@@ -4,7 +4,6 @@
+  * Christophe Leroy <christophe.leroy@csgroup.eu>
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <mapmem.h>
+ #include <asm/gpio.h>
+diff --git a/drivers/gpio/rk_gpio.c b/drivers/gpio/rk_gpio.c
+index 2e901ac5c734..24ba12dd820e 100644
+--- a/drivers/gpio/rk_gpio.c
++++ b/drivers/gpio/rk_gpio.c
+@@ -6,7 +6,6 @@
+  * Peter, Software Engineering, <superpeter.cai@gmail.com>.
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <syscon.h>
+ #include <linux/errno.h>
+diff --git a/drivers/gpio/s5p_gpio.c b/drivers/gpio/s5p_gpio.c
+index 06ed585f3d64..83e65aa4aec4 100644
+--- a/drivers/gpio/s5p_gpio.c
++++ b/drivers/gpio/s5p_gpio.c
+@@ -4,7 +4,6 @@
+  * Minkyu Kang <mk7.kang@samsung.com>
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <fdtdec.h>
+diff --git a/drivers/gpio/sandbox.c b/drivers/gpio/sandbox.c
+index 305f9a6ff62f..f5be27814438 100644
+--- a/drivers/gpio/sandbox.c
++++ b/drivers/gpio/sandbox.c
+@@ -3,7 +3,6 @@
+  * Copyright (c) 2011 The Chromium OS Authors.
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <fdtdec.h>
+ #include <log.h>
+diff --git a/drivers/gpio/sandbox_test.c b/drivers/gpio/sandbox_test.c
+index c76e19974196..4699a976252c 100644
+--- a/drivers/gpio/sandbox_test.c
++++ b/drivers/gpio/sandbox_test.c
+@@ -5,7 +5,6 @@
+  * Copyright 2021 Google LLC
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <asm-generic/gpio.h>
+ 
+diff --git a/drivers/gpio/sh_pfc.c b/drivers/gpio/sh_pfc.c
+index 2495d6c1c154..9f6051c1c4d3 100644
+--- a/drivers/gpio/sh_pfc.c
++++ b/drivers/gpio/sh_pfc.c
+@@ -9,7 +9,6 @@
+  * for more details.
+  */
+ 
+-#include <common.h>
+ #include <log.h>
+ #include <malloc.h>
+ #include <asm/bitops.h>
+diff --git a/drivers/gpio/sifive-gpio.c b/drivers/gpio/sifive-gpio.c
+index 151f484e8fd1..90f59120ecd0 100644
+--- a/drivers/gpio/sifive-gpio.c
++++ b/drivers/gpio/sifive-gpio.c
+@@ -5,7 +5,6 @@
+  * Copyright (C) 2019 SiFive, Inc.
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <asm/arch/gpio.h>
+ #include <asm/io.h>
+diff --git a/drivers/gpio/sl28cpld-gpio.c b/drivers/gpio/sl28cpld-gpio.c
+index 700fc3df298c..e85f9260ec39 100644
+--- a/drivers/gpio/sl28cpld-gpio.c
++++ b/drivers/gpio/sl28cpld-gpio.c
+@@ -5,7 +5,6 @@
+  * Copyright (c) 2021 Michael Walle <michael@walle.cc>
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <asm/gpio.h>
+ #include <sl28cpld.h>
+diff --git a/drivers/gpio/stm32_gpio.c b/drivers/gpio/stm32_gpio.c
+index 7a2ca91c7692..b8eb55465d3c 100644
+--- a/drivers/gpio/stm32_gpio.c
++++ b/drivers/gpio/stm32_gpio.c
+@@ -6,7 +6,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_GPIO
+ 
+-#include <common.h>
+ #include <clk.h>
+ #include <dm.h>
+ #include <fdtdec.h>
+diff --git a/drivers/gpio/sunxi_gpio.c b/drivers/gpio/sunxi_gpio.c
+index e4463a223f7b..5e86474d3dbb 100644
+--- a/drivers/gpio/sunxi_gpio.c
++++ b/drivers/gpio/sunxi_gpio.c
+@@ -9,7 +9,6 @@
+  * Tom Cubie <tangliang@allwinnertech.com>
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <fdtdec.h>
+diff --git a/drivers/gpio/tca642x.c b/drivers/gpio/tca642x.c
+index b07496e6e49c..1d45b5007461 100644
+--- a/drivers/gpio/tca642x.c
++++ b/drivers/gpio/tca642x.c
+@@ -20,7 +20,7 @@
+  * MA 02111-1307 USA
+  */
+ 
+-#include <common.h>
++#include <config.h>
+ #include <command.h>
+ #include <i2c.h>
+ #include <tca642x.h>
+diff --git a/drivers/gpio/tegra186_gpio.c b/drivers/gpio/tegra186_gpio.c
+index 94a20d143e10..01b8245c8d5b 100644
+--- a/drivers/gpio/tegra186_gpio.c
++++ b/drivers/gpio/tegra186_gpio.c
+@@ -4,7 +4,6 @@
+  * (based on tegra_gpio.c)
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <malloc.h>
+ #include <errno.h>
+diff --git a/drivers/gpio/tegra_gpio.c b/drivers/gpio/tegra_gpio.c
+index 55105f2802c3..0c40d36c41e2 100644
+--- a/drivers/gpio/tegra_gpio.c
++++ b/drivers/gpio/tegra_gpio.c
+@@ -10,7 +10,6 @@
+  * Tom Warren (twarren@nvidia.com)
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <log.h>
+ #include <malloc.h>
+diff --git a/drivers/gpio/vybrid_gpio.c b/drivers/gpio/vybrid_gpio.c
+index 339392dcd35a..5b4bba96da70 100644
+--- a/drivers/gpio/vybrid_gpio.c
++++ b/drivers/gpio/vybrid_gpio.c
+@@ -4,7 +4,6 @@
+  * Bhuvanchandra DV, Toradex, Inc.
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <fdtdec.h>
+diff --git a/drivers/gpio/xilinx_gpio.c b/drivers/gpio/xilinx_gpio.c
+index fa8d630b4658..c0a92378b035 100644
+--- a/drivers/gpio/xilinx_gpio.c
++++ b/drivers/gpio/xilinx_gpio.c
+@@ -3,7 +3,6 @@
+  * Copyright (c) 2013 - 2018 Xilinx, Michal Simek
+  */
+ 
+-#include <common.h>
+ #include <errno.h>
+ #include <log.h>
+ #include <malloc.h>
+diff --git a/drivers/gpio/zynq_gpio.c b/drivers/gpio/zynq_gpio.c
+index 71a56127c0aa..7db58c70663e 100644
+--- a/drivers/gpio/zynq_gpio.c
++++ b/drivers/gpio/zynq_gpio.c
+@@ -8,7 +8,6 @@
+  * Copyright (C) 2009 - 2014 Xilinx, Inc.
+  */
+ 
+-#include <common.h>
+ #include <asm/gpio.h>
+ #include <asm/io.h>
+ #include <linux/bitops.h>
+diff --git a/drivers/gpio/zynqmp_gpio_modepin.c b/drivers/gpio/zynqmp_gpio_modepin.c
+index e9565ff5430e..8aaffaf37b3d 100644
+--- a/drivers/gpio/zynqmp_gpio_modepin.c
++++ b/drivers/gpio/zynqmp_gpio_modepin.c
+@@ -5,7 +5,6 @@
+  * Copyright (C) 2021 Xilinx, Inc.
+  */
+ 
+-#include <common.h>
+ #include <errno.h>
+ #include <asm/io.h>
+ #include <asm/gpio.h>
 -- 
 2.34.1
 
