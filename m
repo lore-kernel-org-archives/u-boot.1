@@ -4,78 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DB41C4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:33:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5868C4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:33:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCB8B88C0C;
-	Thu,  2 May 2024 03:32:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 88C0488C06;
+	Thu,  2 May 2024 03:32:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="c+oCEe96";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="t1rIeFcS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 969B588C01; Thu,  2 May 2024 03:31:57 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id 55A3D88C01; Thu,  2 May 2024 03:31:58 +0200 (CEST)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D35888B98
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:31:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0FE9E88BF7
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:31:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-61e04fcf813so9418077b3.3
- for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:31:54 -0700 (PDT)
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-43969307359so46359161cf.2
+ for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:31:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714613513; x=1715218313; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714613514; x=1715218314; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1UFRqozu29SY3vFEA3Ua9Qs7FT+LyKdeEt8vkFM4HKo=;
- b=c+oCEe96d2XrzIrY2tyQwEvwoUNCC+Af1kP+Zr9q6LHpseFhTQ8hvmy1nHPDoKtHhr
- B/w4z2c8qmaVRfbE/YTzB8blRUdbSLsogFpK9HM/fmi6LC4JZyUd6Ks5rBVvOe7Cs0bS
- KAJuWsKo1rmiNajyHTZUEA7pWmY7t5O+w3l9c=
+ bh=7xfWIb5g9G96nSi3jm7VDeQikpMElDpYy1inRxdrZEQ=;
+ b=t1rIeFcS97fHCOAVZl3wqJNw7dBD+NwRh8tKpvh+nj21q+v0C2Y8QCf/hlJTaAoQ9B
+ QFvz6AiKCCWpfDngnDi0x5QwpCHbp0kNBho7GQOs0a4K9FfD7ORc84WlggUdLFOorrej
+ Dd1iQAKMFudru8Ho/OnyMiRBxhvmO9PyMSDuI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714613513; x=1715218313;
+ d=1e100.net; s=20230601; t=1714613514; x=1715218314;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1UFRqozu29SY3vFEA3Ua9Qs7FT+LyKdeEt8vkFM4HKo=;
- b=ZPyZIWkmIBSBdZCLQRme2Mqd084ZDyQBXXcvBnVmaW2oy1OvwvG6E54Sum+1b8HQs8
- Tbw3bLicy9ygsDqo6x5ABVxsr50qPHkaHMEyqWfaLHVOPe9Qc7haSWW571qRJh2DlsT6
- 0Zd51vIEF/iYZ542C0snS4Ugq4KyKfwA63QehGnTZtE5M9w6FIxIHVEPGPYLxvFVe3mF
- ECknuPJrKtN8fGqidOmj6Iws7S5hWbUJxavmQAu7/l5kJ6U0JKBoUxz5pQOYP3s0kD50
- MF8FHF3fXN2BNhfRxq6oo7VXpknJuBRg3Qo6PeoRmIRkwxGcGTV6exQaYMr+n46yIaiL
- 5yNQ==
-X-Gm-Message-State: AOJu0YxlTFLAs8dmZBApEr5svqMkCnZJvasV6xpfZ35iY2FYg1cTUvuu
- RKiVdwUg8eF/ZuteBsKg8I3R6bp2xn7Xt0JRIDWq7NOlWpqU0TkKnojfY3Vg8qJRiSvVwYGb6gk
- 9qdkYjrXQ
-X-Google-Smtp-Source: AGHT+IHJ3bkyRc6DOm6Vi+0GPeqPguYFzp55SiLx8MMKFNtSw1tYTHba9wh6wtoVYgFvGyvQQAj3ZA==
-X-Received: by 2002:a05:690c:3811:b0:615:3996:5c86 with SMTP id
- jx17-20020a05690c381100b0061539965c86mr5144199ywb.21.1714613512787; 
- Wed, 01 May 2024 18:31:52 -0700 (PDT)
+ bh=7xfWIb5g9G96nSi3jm7VDeQikpMElDpYy1inRxdrZEQ=;
+ b=g8QST36jUIzSGLN9W1IxAdKHRWuZtknXp+KQKL8dfVjLppkGHWuKZigEFKYWcmBQsw
+ /OMkG1wopq0wXKR5gGc9W/RpKHHGqx6u/aZ0U37HdR+0DQfCyp6XgorOkoAfkaYz3/6s
+ 3dSXMFkxw6mVvCz9rcjuUzafPM7kxDTkLD6Ww4Bnm1wteIRHpSZUtD6S4YiAhQxeSImK
+ 9a3lvEu+gxdE3oS8MCezcNrOfGNC9YtOHNl7/cH5VIi97vCCDckVzQv/rBrRZDic2WYo
+ xWUCrcvgoFJet10xTW50ws11sz/zG1p8AzQ8i/karmA0Q1HXApsDowGfwssuu1o/c0WM
+ 8hGQ==
+X-Gm-Message-State: AOJu0YyEjLueWe8qUn6gTI6L85GD0bL6AIkb6QLsmAJVC2WHcGYIKwrk
+ UEZCO04QH0H4FiT+0TNIaRErACls9kbaBtPVKj5njG3bRa4T0e/a0R4hB7U5CQQ/lcfFwh/OH1K
+ EDQTIsHC5
+X-Google-Smtp-Source: AGHT+IGfkeaipQFRGBFEEjGcoZE2sBx4NWsykQDzL/Za72XUZsRFuEE/D4ZhP4Sc2nry8JMI7LqvxA==
+X-Received: by 2002:a05:622a:1827:b0:43b:1561:6c45 with SMTP id
+ t39-20020a05622a182700b0043b15616c45mr4881715qtc.11.1714613514560; 
+ Wed, 01 May 2024 18:31:54 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.31.51
+ c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.31.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 May 2024 18:31:52 -0700 (PDT)
+ Wed, 01 May 2024 18:31:54 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Jonas Karlman <jonas@kwiboo.se>, Luca Ellero <l.ellero@asem.it>,
- Haibo Chen <haibo.chen@nxp.com>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH 10/81] adc: Remove <common.h> and add needed includes
-Date: Wed,  1 May 2024 19:30:27 -0600
-Message-Id: <20240502013138.2383421-10-trini@konsulko.com>
+Cc: Stefan Roese <sr@denx.de>, Samuel Holland <samuel@sholland.org>,
+ Sam Edwards <CFSworks@gmail.com>, Andre Przywara <andre.przywara@arm.com>,
+ Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>,
+ Johan Jonker <jbx6244@gmail.com>, Bin Meng <bmeng@tinylab.org>,
+ Tony Dinh <mibodhi@gmail.com>, Michal Simek <michal.simek@amd.com>
+Subject: [PATCH 11/81] ata: Remove <common.h> and add needed includes
+Date: Wed,  1 May 2024 19:30:28 -0600
+Message-Id: <20240502013138.2383421-11-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240502013138.2383421-1-trini@konsulko.com>
 References: <20240502013138.2383421-1-trini@konsulko.com>
@@ -103,124 +99,226 @@ add missing include files directly.
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Tom Rini <trini@konsulko.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Stefan Roese <sr@denx.de>
+Cc: Samuel Holland <samuel@sholland.org>
+Cc: Sam Edwards <CFSworks@gmail.com>
+Cc: Andre Przywara <andre.przywara@arm.com>
 Cc: Simon Glass <sjg@chromium.org>
-Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
-Cc: Kever Yang <kever.yang@rock-chips.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
 Cc: Jonas Karlman <jonas@kwiboo.se>
-Cc: Luca Ellero <l.ellero@asem.it>
-Cc: Haibo Chen <haibo.chen@nxp.com>
-Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 Cc: Johan Jonker <jbx6244@gmail.com>
+Cc: Bin Meng <bmeng@tinylab.org>
+Cc: Tony Dinh <mibodhi@gmail.com>
+Cc: Michal Simek <michal.simek@amd.com>
 ---
- drivers/adc/adc-uclass.c      | 1 -
- drivers/adc/exynos-adc.c      | 1 -
- drivers/adc/imx93-adc.c       | 1 -
- drivers/adc/meson-saradc.c    | 1 -
- drivers/adc/rockchip-saradc.c | 1 -
- drivers/adc/sandbox.c         | 1 -
- drivers/adc/stm32-adc-core.c  | 1 -
- drivers/adc/stm32-adc.c       | 1 -
- 8 files changed, 8 deletions(-)
+ drivers/ata/ahci-pci.c     | 1 -
+ drivers/ata/ahci-uclass.c  | 1 -
+ drivers/ata/ahci.c         | 2 +-
+ drivers/ata/ahci_mvebu.c   | 1 -
+ drivers/ata/ahci_sunxi.c   | 1 -
+ drivers/ata/dwc_ahci.c     | 1 -
+ drivers/ata/dwc_ahsata.c   | 1 -
+ drivers/ata/fsl_sata.c     | 1 -
+ drivers/ata/libata.c       | 2 +-
+ drivers/ata/mtk_ahci.c     | 1 -
+ drivers/ata/sata.c         | 1 -
+ drivers/ata/sata_bootdev.c | 1 -
+ drivers/ata/sata_ceva.c    | 1 -
+ drivers/ata/sata_mv.c      | 2 +-
+ drivers/ata/sata_sil.c     | 1 -
+ 15 files changed, 3 insertions(+), 15 deletions(-)
 
-diff --git a/drivers/adc/adc-uclass.c b/drivers/adc/adc-uclass.c
-index 1b35bf22014f..16600be821c9 100644
---- a/drivers/adc/adc-uclass.c
-+++ b/drivers/adc/adc-uclass.c
-@@ -6,7 +6,6 @@
- 
- #define LOG_CATEGORY UCLASS_ADC
- 
--#include <common.h>
- #include <errno.h>
- #include <div64.h>
- #include <dm.h>
-diff --git a/drivers/adc/exynos-adc.c b/drivers/adc/exynos-adc.c
-index 2bda733af90d..ecc564cd219a 100644
---- a/drivers/adc/exynos-adc.c
-+++ b/drivers/adc/exynos-adc.c
+diff --git a/drivers/ata/ahci-pci.c b/drivers/ata/ahci-pci.c
+index 5356b9d83d34..f2102aaa6353 100644
+--- a/drivers/ata/ahci-pci.c
++++ b/drivers/ata/ahci-pci.c
 @@ -3,7 +3,6 @@
-  * Copyright (C) 2015 Samsung Electronics
-  * Przemyslaw Marczak <p.marczak@samsung.com>
+  * Copyright (C) 2017, Bin Meng <bmeng.cn@gmail.com>
   */
+ 
 -#include <common.h>
- #include <errno.h>
+ #include <ahci.h>
+ #include <scsi.h>
  #include <dm.h>
- #include <adc.h>
-diff --git a/drivers/adc/imx93-adc.c b/drivers/adc/imx93-adc.c
-index 41d04e0426cd..f593fb6447b3 100644
---- a/drivers/adc/imx93-adc.c
-+++ b/drivers/adc/imx93-adc.c
+diff --git a/drivers/ata/ahci-uclass.c b/drivers/ata/ahci-uclass.c
+index d398b50b9a1e..7affb3f1ec79 100644
+--- a/drivers/ata/ahci-uclass.c
++++ b/drivers/ata/ahci-uclass.c
 @@ -6,7 +6,6 @@
-  * Originally based on NXP linux-imx kernel v5.15 drivers/iio/adc/imx93_adc.c
+ 
+ #define LOG_CATEGORY UCLASS_AHCI
+ 
+-#include <common.h>
+ #include <ahci.h>
+ #include <dm.h>
+ 
+diff --git a/drivers/ata/ahci.c b/drivers/ata/ahci.c
+index 04ddc3394648..ac869296d525 100644
+--- a/drivers/ata/ahci.c
++++ b/drivers/ata/ahci.c
+@@ -8,10 +8,10 @@
+  *
+  * This driver provides a SCSI interface to SATA.
+  */
+-#include <common.h>
+ #include <blk.h>
+ #include <cpu_func.h>
+ #include <log.h>
++#include <time.h>
+ #include <linux/bitops.h>
+ #include <linux/delay.h>
+ 
+diff --git a/drivers/ata/ahci_mvebu.c b/drivers/ata/ahci_mvebu.c
+index f05150d61ddf..f6e2d6bee45b 100644
+--- a/drivers/ata/ahci_mvebu.c
++++ b/drivers/ata/ahci_mvebu.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2016 Stefan Roese <sr@denx.de>
   */
  
 -#include <common.h>
- #include <errno.h>
+ #include <ahci.h>
  #include <dm.h>
- #include <linux/bitfield.h>
-diff --git a/drivers/adc/meson-saradc.c b/drivers/adc/meson-saradc.c
-index c15c7fea47fe..60e348968fb5 100644
---- a/drivers/adc/meson-saradc.c
-+++ b/drivers/adc/meson-saradc.c
-@@ -7,7 +7,6 @@
-  * Amlogic Meson Successive Approximation Register (SAR) A/D Converter
+ #include <log.h>
+diff --git a/drivers/ata/ahci_sunxi.c b/drivers/ata/ahci_sunxi.c
+index 9064774e6614..6cf5cee055e7 100644
+--- a/drivers/ata/ahci_sunxi.c
++++ b/drivers/ata/ahci_sunxi.c
+@@ -1,4 +1,3 @@
+-#include <common.h>
+ #include <ahci.h>
+ #include <dm.h>
+ #include <log.h>
+diff --git a/drivers/ata/dwc_ahci.c b/drivers/ata/dwc_ahci.c
+index 15fd3e365b2b..b480cde4465b 100644
+--- a/drivers/ata/dwc_ahci.c
++++ b/drivers/ata/dwc_ahci.c
+@@ -8,7 +8,6 @@
+  * Author: Mugunthan V N <mugunthanvnm@ti.com>
   */
  
 -#include <common.h>
- #include <adc.h>
- #include <clk.h>
  #include <dm.h>
-diff --git a/drivers/adc/rockchip-saradc.c b/drivers/adc/rockchip-saradc.c
-index 10ded1b088f3..f6832ab30731 100644
---- a/drivers/adc/rockchip-saradc.c
-+++ b/drivers/adc/rockchip-saradc.c
+ #include <ahci.h>
+ #include <scsi.h>
+diff --git a/drivers/ata/dwc_ahsata.c b/drivers/ata/dwc_ahsata.c
+index b4d4e39c9b3b..a29d641343ed 100644
+--- a/drivers/ata/dwc_ahsata.c
++++ b/drivers/ata/dwc_ahsata.c
+@@ -4,7 +4,6 @@
+  * Terry Lv <r65388@freescale.com>
+  */
+ 
+-#include <common.h>
+ #include <ahci.h>
+ #include <blk.h>
+ #include <cpu_func.h>
+diff --git a/drivers/ata/fsl_sata.c b/drivers/ata/fsl_sata.c
+index 969bc191f8e8..4990148388b6 100644
+--- a/drivers/ata/fsl_sata.c
++++ b/drivers/ata/fsl_sata.c
 @@ -5,7 +5,6 @@
-  * Rockchip SARADC driver for U-Boot
+  * Author: Dave Liu <daveliu@freescale.com>
   */
  
 -#include <common.h>
- #include <adc.h>
- #include <clk.h>
+ #include <ahci.h>
+ #include <blk.h>
+ #include <command.h>
+diff --git a/drivers/ata/libata.c b/drivers/ata/libata.c
+index 47e2c5c1cc40..ef659cb1728a 100644
+--- a/drivers/ata/libata.c
++++ b/drivers/ata/libata.c
+@@ -5,9 +5,9 @@
+  *		port from the libata of linux kernel
+  */
+ 
+-#include <common.h>
+ #include <compiler.h>
+ #include <libata.h>
++#include <stdio.h>
+ 
+ u64 ata_id_n_sectors(u16 *id)
+ {
+diff --git a/drivers/ata/mtk_ahci.c b/drivers/ata/mtk_ahci.c
+index 2c5227df306b..53aabee0a5e6 100644
+--- a/drivers/ata/mtk_ahci.c
++++ b/drivers/ata/mtk_ahci.c
+@@ -8,7 +8,6 @@
+  * Author: Frank Wunderlich <frank-w@public-files.de>
+  */
+ 
+-#include <common.h>
+ #include <ahci.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+diff --git a/drivers/ata/sata.c b/drivers/ata/sata.c
+index 784d9bbeacb4..84437d3d346b 100644
+--- a/drivers/ata/sata.c
++++ b/drivers/ata/sata.c
+@@ -9,7 +9,6 @@
+  *		Dave Liu <daveliu@freescale.com>
+  */
+ 
+-#include <common.h>
+ #include <ahci.h>
+ #include <blk.h>
  #include <dm.h>
-diff --git a/drivers/adc/sandbox.c b/drivers/adc/sandbox.c
-index 43cad34ffebf..24d4af63bd9b 100644
---- a/drivers/adc/sandbox.c
-+++ b/drivers/adc/sandbox.c
+diff --git a/drivers/ata/sata_bootdev.c b/drivers/ata/sata_bootdev.c
+index f638493ce04f..a5ca6f6fd5bb 100644
+--- a/drivers/ata/sata_bootdev.c
++++ b/drivers/ata/sata_bootdev.c
+@@ -5,7 +5,6 @@
+  * Copyright 2023 Tony Dinh <mibodhi@gmail.com>
+  */
+ 
+-#include <common.h>
+ #include <ahci.h>
+ #include <bootdev.h>
+ #include <dm.h>
+diff --git a/drivers/ata/sata_ceva.c b/drivers/ata/sata_ceva.c
+index 7769d4f99efd..a81b3165992a 100644
+--- a/drivers/ata/sata_ceva.c
++++ b/drivers/ata/sata_ceva.c
 @@ -3,7 +3,6 @@
-  * Copyright (C) 2015 Samsung Electronics
-  * Przemyslaw Marczak <p.marczak@samsung.com>
+  * (C) Copyright 2015 - 2016 Xilinx, Inc.
+  * Michal Simek <michal.simek@amd.com>
   */
 -#include <common.h>
- #include <errno.h>
  #include <dm.h>
- #include <adc.h>
-diff --git a/drivers/adc/stm32-adc-core.c b/drivers/adc/stm32-adc-core.c
-index 6c176961f17a..af340b8b273b 100644
---- a/drivers/adc/stm32-adc-core.c
-+++ b/drivers/adc/stm32-adc-core.c
-@@ -6,7 +6,6 @@
-  * Originally based on the Linux kernel v4.18 drivers/iio/adc/stm32-adc-core.c.
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <asm/io.h>
- #include <dm/device_compat.h>
-diff --git a/drivers/adc/stm32-adc.c b/drivers/adc/stm32-adc.c
-index 1fba707c6f7d..d50f00f1233e 100644
---- a/drivers/adc/stm32-adc.c
-+++ b/drivers/adc/stm32-adc.c
-@@ -6,7 +6,6 @@
-  * Originally based on the Linux kernel v4.18 drivers/iio/adc/stm32-adc.c.
+ #include <ahci.h>
+ #include <generic-phy.h>
+diff --git a/drivers/ata/sata_mv.c b/drivers/ata/sata_mv.c
+index 94d7369351a3..ac78760a33eb 100644
+--- a/drivers/ata/sata_mv.c
++++ b/drivers/ata/sata_mv.c
+@@ -31,7 +31,6 @@
+  * No port multiplier support
   */
  
 -#include <common.h>
- #include <adc.h>
+ #include <ahci.h>
+ #include <blk.h>
+ #include <bootdev.h>
+@@ -46,6 +45,7 @@
+ #include <libata.h>
+ #include <malloc.h>
+ #include <sata.h>
++#include <time.h>
+ #include <linux/bitops.h>
+ #include <linux/delay.h>
+ #include <linux/errno.h>
+diff --git a/drivers/ata/sata_sil.c b/drivers/ata/sata_sil.c
+index 43a91a79120a..5b80f6249d76 100644
+--- a/drivers/ata/sata_sil.c
++++ b/drivers/ata/sata_sil.c
+@@ -5,7 +5,6 @@
+  * Author: Tang Yuantian <b29983@freescale.com>
+  */
+ 
+-#include <common.h>
+ #include <blk.h>
+ #include <cpu_func.h>
  #include <dm.h>
- #include <asm/io.h>
 -- 
 2.34.1
 
