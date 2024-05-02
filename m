@@ -4,85 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DD91C4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:41:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E625C4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:41:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE2A488CEF;
-	Thu,  2 May 2024 03:33:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AA01788CD8;
+	Thu,  2 May 2024 03:34:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gm4GqdyJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gcU2oEq1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8887488CC3; Thu,  2 May 2024 03:33:58 +0200 (CEST)
-Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
- [IPv6:2607:f8b0:4864:20::82d])
+ id 7A74E88CDB; Thu,  2 May 2024 03:34:00 +0200 (CEST)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89BAD88CA2
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:33:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DFDAB88CC5
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:33:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82d.google.com with SMTP id
- d75a77b69052e-43b06b803c4so19625941cf.1
- for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:33:55 -0700 (PDT)
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-436ee76c3b8so57815621cf.1
+ for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:33:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714613634; x=1715218434; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714613635; x=1715218435; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tI/FqGqZIfoflFdVs1RvI4uyTjujBL3ixgGEvV2K9wY=;
- b=gm4GqdyJJXBtXBqfVg0YDUVW+Resm903tw/HloBUl2gIfv4Y9xH1Ut9lXoCoKwh2Lz
- JElGZtBApEFXZBrZeTwsjmcmq2iJSkmspjY2ayNIbFZIlFmszvb24bnY3hvodsX0ABY6
- pGKvX+N/bgEzXPxbNPGnf99fiJpl7vV9Avoag=
+ bh=HwEHoAcp0NbWdvOeMwvrqn8ZVnezIAO9mStcQDWWVHM=;
+ b=gcU2oEq1MNc9vwbMcTV82vd3JEWeYhtnT4mndF9Seu+8JB21DoAprnXNssSTVpkqHZ
+ OB7XofG+76VUKYyKLqokAr2NIMp0B5GtOPJ4LTU5rRIPHijfn9yezYM5jh7tb/KgcLzX
+ vZsTpP6vDDZYrlAk56WeOYhcTCDa9KcxlcOBY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714613634; x=1715218434;
+ d=1e100.net; s=20230601; t=1714613635; x=1715218435;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tI/FqGqZIfoflFdVs1RvI4uyTjujBL3ixgGEvV2K9wY=;
- b=WHn4dV7nwBU2wDz7275/PkNWI1DpoIC0bwMnM8cB+NDmU2cXpgWAJedj8hUkMJFzYd
- IJNCG6ZoqPwdssDt/9sRirheq9bDvQa3jpULh/X51iSU9uDbYA2THH5TFHN5zYUknhMH
- xj4BqxTxre6uGxkLXQJt8N9iB8a4hlKDUjiviUJA6TYYcto7ytrYCtsyKQFtM7CHwZ/e
- WITxfDmFBltUnTMPtBGOYYG8DeRRMSUIEkUUALePPAf3d2L+JlXxGMQzjfnnYQBaZslZ
- p764dUYlUVKP9SMjiWvufHv3FLDsZvWzz7F2bfii6/w1WH/cIBSLjJd1Xi7cQwntJ3vm
- Kz8g==
-X-Gm-Message-State: AOJu0YyxHICfxHIJS6J5SA5HWrKYL37AWqrcCcnonVGXNlv/v8q0WBMo
- BbomIvnlAXic7a7xW+rAWOf0wQDv/Rb8gDBP176vyCNcTwMxPMGBlqkC7aUOQhDD+wp9ZPIT9fo
- xNadFqgDK
-X-Google-Smtp-Source: AGHT+IFc0lR/+7kYoeA0AIvUnRYPk/LAyiR4PuJSMqGcRCzacfvTvKbsAvJzOGck7vYrEZCgpxcniQ==
-X-Received: by 2002:a05:622a:4e8c:b0:436:865f:323e with SMTP id
- dj12-20020a05622a4e8c00b00436865f323emr4822268qtb.24.1714613634263; 
- Wed, 01 May 2024 18:33:54 -0700 (PDT)
+ bh=HwEHoAcp0NbWdvOeMwvrqn8ZVnezIAO9mStcQDWWVHM=;
+ b=JWmorA5Re9NA3mf86cXzlgmiTIYLCx/i8QlxhBYxSHBpNVv80FepKtZbrVoa7COUm5
+ l31XVKpZRLb4ioZJCXP6vgn8jbCuET1PIYvxo4Je9IABTSTAP3KsayxH8V5yS934ERGA
+ FiIQXtPL8/XuPpvMiphtcua7+2Za0NAGxrmS4Mv9rAOFH+VE3wd0fP1spbQqQB5N//2h
+ FN+DGcQzz0kZRr10uWz0KP05nzESL0HpycJFZGVzrzUlwtn/xbJQ+8Brrimk3CzVpAHO
+ XsS2G1H9Dni++iSltMQ0Fmdw5O4ISYqI+zwBWOU3cNzIpludqeliv0dZanKyUw3jxG/t
+ mA5w==
+X-Gm-Message-State: AOJu0YwIpJviXGvgASHy/giB043PHJ48dVj5cUoLM5/TPu8JcSbLbZTX
+ xDt9uWX6s1n2HuqD/xchRGHmMV1LtAsi5u2RSRLcuvGsWOjtW5JYnFssHiiCpYoGFRtoJKGPbhe
+ CfJZPzoC1
+X-Google-Smtp-Source: AGHT+IG4yyyWqwa+ZUCnhICJMbVzoWSqRZ9GJ0XfuNT1DeyYdlxiPDV21u9j1lout97mrLyJmoYrNA==
+X-Received: by 2002:a05:622a:11c5:b0:43a:dede:73b8 with SMTP id
+ n5-20020a05622a11c500b0043adede73b8mr5093113qtk.57.1714613635653; 
+ Wed, 01 May 2024 18:33:55 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.33.52
+ c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.33.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 May 2024 18:33:53 -0700 (PDT)
+ Wed, 01 May 2024 18:33:55 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Michal Simek <michal.simek@amd.com>, Mario Six <mario.six@gdsys.cc>,
- Weijie Gao <weijie.gao@mediatek.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@intel.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Max Filippov <jcmvbkbc@gmail.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Bin Meng <bmeng.cn@gmail.com>
-Subject: [PATCH 68/81] sysreset: Remove <common.h> and add needed includes
-Date: Wed,  1 May 2024 19:31:25 -0600
-Message-Id: <20240502013138.2383421-68-trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>,
+ Peng Fan <peng.fan@nxp.com>, Fabio Estevam <festevam@denx.de>,
+ Marek Vasut <marex@denx.de>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, Ye Li <ye.li@nxp.com>,
+ Benjamin Hahn <B.Hahn@phytec.de>
+Subject: [PATCH 69/81] thermal: Remove <common.h> and add needed includes
+Date: Wed,  1 May 2024 19:31:26 -0600
+Message-Id: <20240502013138.2383421-69-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240502013138.2383421-1-trini@konsulko.com>
 References: <20240502013138.2383421-1-trini@konsulko.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,299 +99,82 @@ add missing include files directly.
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Tom Rini <trini@konsulko.com>
-Cc: Michal Simek <michal.simek@amd.com>
-Cc: Mario Six <mario.six@gdsys.cc>
-Cc: Weijie Gao <weijie.gao@mediatek.com>
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
 Cc: Simon Glass <sjg@chromium.org>
-Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
-Cc: Kever Yang <kever.yang@rock-chips.com>
-Cc: Rick Chen <rick@andestech.com>
-Cc: Leo <ycliang@andestech.com>
+Cc: Stefano Babic <sbabic@denx.de>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Fabio Estevam <festevam@denx.de>
 Cc: Marek Vasut <marex@denx.de>
-Cc: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
-Cc: Tien Fong Chee <tien.fong.chee@intel.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Max Filippov <jcmvbkbc@gmail.com>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>
+Cc: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
+Cc: Ye Li <ye.li@nxp.com>
+Cc: Benjamin Hahn <B.Hahn@phytec.de>
 ---
- drivers/sysreset/poweroff_gpio.c          | 1 -
- drivers/sysreset/sysreset-ti-sci.c        | 1 -
- drivers/sysreset/sysreset-uclass.c        | 1 -
- drivers/sysreset/sysreset_ast.c           | 1 -
- drivers/sysreset/sysreset_at91.c          | 1 -
- drivers/sysreset/sysreset_gpio.c          | 1 -
- drivers/sysreset/sysreset_microblaze.c    | 1 -
- drivers/sysreset/sysreset_mpc83xx.c       | 1 -
- drivers/sysreset/sysreset_octeon.c        | 1 -
- drivers/sysreset/sysreset_psci.c          | 1 -
- drivers/sysreset/sysreset_resetctl.c      | 1 -
- drivers/sysreset/sysreset_rockchip.c      | 1 -
- drivers/sysreset/sysreset_sandbox.c       | 1 -
- drivers/sysreset/sysreset_sbi.c           | 1 -
- drivers/sysreset/sysreset_socfpga.c       | 1 -
- drivers/sysreset/sysreset_socfpga_soc64.c | 1 -
- drivers/sysreset/sysreset_sti.c           | 1 -
- drivers/sysreset/sysreset_syscon.c        | 1 -
- drivers/sysreset/sysreset_watchdog.c      | 1 -
- drivers/sysreset/sysreset_x86.c           | 1 -
- drivers/sysreset/sysreset_xtfpga.c        | 2 +-
- 21 files changed, 1 insertion(+), 21 deletions(-)
+ drivers/thermal/imx_scu_thermal.c | 1 -
+ drivers/thermal/imx_thermal.c     | 1 -
+ drivers/thermal/imx_tmu.c         | 1 -
+ drivers/thermal/thermal-uclass.c  | 1 -
+ drivers/thermal/thermal_sandbox.c | 1 -
+ 5 files changed, 5 deletions(-)
 
-diff --git a/drivers/sysreset/poweroff_gpio.c b/drivers/sysreset/poweroff_gpio.c
-index ad04e4b1a85e..d9220024f470 100644
---- a/drivers/sysreset/poweroff_gpio.c
-+++ b/drivers/sysreset/poweroff_gpio.c
-@@ -11,7 +11,6 @@
-  * Copyright (C) 2012 Jamie Lentin
+diff --git a/drivers/thermal/imx_scu_thermal.c b/drivers/thermal/imx_scu_thermal.c
+index 3ec131cbc6e1..fc2b0e227b29 100644
+--- a/drivers/thermal/imx_scu_thermal.c
++++ b/drivers/thermal/imx_scu_thermal.c
+@@ -4,7 +4,6 @@
   */
  
+ #include <config.h>
 -#include <common.h>
  #include <dm.h>
  #include <errno.h>
  #include <log.h>
-diff --git a/drivers/sysreset/sysreset-ti-sci.c b/drivers/sysreset/sysreset-ti-sci.c
-index 0de132633a8d..451fc5de7357 100644
---- a/drivers/sysreset/sysreset-ti-sci.c
-+++ b/drivers/sysreset/sysreset-ti-sci.c
+diff --git a/drivers/thermal/imx_thermal.c b/drivers/thermal/imx_thermal.c
+index 2f6343e7a180..ea1fcc3dcb29 100644
+--- a/drivers/thermal/imx_thermal.c
++++ b/drivers/thermal/imx_thermal.c
 @@ -6,7 +6,6 @@
-  *	Andreas Dannenberg <dannenberg@ti.com>
   */
  
+ #include <config.h>
 -#include <common.h>
- #include <dm.h>
- #include <errno.h>
+ #include <div64.h>
+ #include <fuse.h>
  #include <log.h>
-diff --git a/drivers/sysreset/sysreset-uclass.c b/drivers/sysreset/sysreset-uclass.c
-index 6151b5fe03e4..0abb4042e0f2 100644
---- a/drivers/sysreset/sysreset-uclass.c
-+++ b/drivers/sysreset/sysreset-uclass.c
-@@ -6,7 +6,6 @@
- 
- #define LOG_CATEGORY UCLASS_SYSRESET
- 
--#include <common.h>
- #include <command.h>
- #include <cpu_func.h>
- #include <dm.h>
-diff --git a/drivers/sysreset/sysreset_ast.c b/drivers/sysreset/sysreset_ast.c
-index 92fad96871bd..ef09440bbeff 100644
---- a/drivers/sysreset/sysreset_ast.c
-+++ b/drivers/sysreset/sysreset_ast.c
-@@ -3,7 +3,6 @@
-  * (C) Copyright 2016 Google, Inc
+diff --git a/drivers/thermal/imx_tmu.c b/drivers/thermal/imx_tmu.c
+index ea6c8329c0a6..70d002aee25b 100644
+--- a/drivers/thermal/imx_tmu.c
++++ b/drivers/thermal/imx_tmu.c
+@@ -5,7 +5,6 @@
   */
  
+ #include <config.h>
 -#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <log.h>
-diff --git a/drivers/sysreset/sysreset_at91.c b/drivers/sysreset/sysreset_at91.c
-index fc85f31ebf01..457042c7aae9 100644
---- a/drivers/sysreset/sysreset_at91.c
-+++ b/drivers/sysreset/sysreset_at91.c
-@@ -7,7 +7,6 @@
+ #include <asm/global_data.h>
  #include <asm/io.h>
- #include <asm/arch/at91_rstc.h>
- #include <clk.h>
--#include <common.h>
- #include <cpu_func.h>
- #include <dm.h>
- #include <dm/device_compat.h>
-diff --git a/drivers/sysreset/sysreset_gpio.c b/drivers/sysreset/sysreset_gpio.c
-index de42b5935424..47018844a51a 100644
---- a/drivers/sysreset/sysreset_gpio.c
-+++ b/drivers/sysreset/sysreset_gpio.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2018 Xilinx, Inc. - Michal Simek
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <log.h>
-diff --git a/drivers/sysreset/sysreset_microblaze.c b/drivers/sysreset/sysreset_microblaze.c
-index 83a7f77ac41f..b81d82f046bd 100644
---- a/drivers/sysreset/sysreset_microblaze.c
-+++ b/drivers/sysreset/sysreset_microblaze.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2018 Xilinx, Inc. - Michal Simek
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <sysreset.h>
-diff --git a/drivers/sysreset/sysreset_mpc83xx.c b/drivers/sysreset/sysreset_mpc83xx.c
-index ca48328f7b58..dca49299f777 100644
---- a/drivers/sysreset/sysreset_mpc83xx.c
-+++ b/drivers/sysreset/sysreset_mpc83xx.c
-@@ -4,7 +4,6 @@
-  * Mario Six, Guntermann & Drunck GmbH, mario.six@gdsys.cc
-  */
- 
--#include <common.h>
- #include <command.h>
- #include <dm.h>
- #include <log.h>
-diff --git a/drivers/sysreset/sysreset_octeon.c b/drivers/sysreset/sysreset_octeon.c
-index ebdea6ab66ed..c16223720e5a 100644
---- a/drivers/sysreset/sysreset_octeon.c
-+++ b/drivers/sysreset/sysreset_octeon.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2020 Stefan Roese <sr@denx.de>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <sysreset.h>
-diff --git a/drivers/sysreset/sysreset_psci.c b/drivers/sysreset/sysreset_psci.c
-index aa09d0b88271..89b4f2dcaec4 100644
---- a/drivers/sysreset/sysreset_psci.c
-+++ b/drivers/sysreset/sysreset_psci.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2017 Masahiro Yamada <yamada.masahiro@socionext.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <sysreset.h>
- #include <linux/errno.h>
-diff --git a/drivers/sysreset/sysreset_resetctl.c b/drivers/sysreset/sysreset_resetctl.c
-index 25bd5c9a7ff2..fbe3999b9605 100644
---- a/drivers/sysreset/sysreset_resetctl.c
-+++ b/drivers/sysreset/sysreset_resetctl.c
+ #include <asm/arch/clock.h>
+diff --git a/drivers/thermal/thermal-uclass.c b/drivers/thermal/thermal-uclass.c
+index 700df8af2549..f0fe912e3131 100644
+--- a/drivers/thermal/thermal-uclass.c
++++ b/drivers/thermal/thermal-uclass.c
 @@ -5,7 +5,6 @@
-  * Author:  Weijie Gao <weijie.gao@mediatek.com>
-  */
+ 
+ #define LOG_CATEGORY UCLASS_THERMAL
  
 -#include <common.h>
  #include <dm.h>
+ #include <thermal.h>
  #include <errno.h>
- #include <sysreset.h>
-diff --git a/drivers/sysreset/sysreset_rockchip.c b/drivers/sysreset/sysreset_rockchip.c
-index f353f9b4c79d..00308f9a33b7 100644
---- a/drivers/sysreset/sysreset_rockchip.c
-+++ b/drivers/sysreset/sysreset_rockchip.c
-@@ -3,7 +3,6 @@
-  * (C) Copyright 2017 Rockchip Electronics Co., Ltd
+diff --git a/drivers/thermal/thermal_sandbox.c b/drivers/thermal/thermal_sandbox.c
+index 7dc0d108b8ca..9af0d0247cbd 100644
+--- a/drivers/thermal/thermal_sandbox.c
++++ b/drivers/thermal/thermal_sandbox.c
+@@ -6,7 +6,6 @@
+  * Sandbox driver for the thermal uclass.
   */
  
 -#include <common.h>
  #include <dm.h>
- #include <errno.h>
- #include <sysreset.h>
-diff --git a/drivers/sysreset/sysreset_sandbox.c b/drivers/sysreset/sysreset_sandbox.c
-index c12eda81d03e..93179f90bbb8 100644
---- a/drivers/sysreset/sysreset_sandbox.c
-+++ b/drivers/sysreset/sysreset_sandbox.c
-@@ -4,7 +4,6 @@
-  * Written by Simon Glass <sjg@chromium.org>
-  */
+ #include <thermal.h>
  
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <sysreset.h>
-diff --git a/drivers/sysreset/sysreset_sbi.c b/drivers/sysreset/sysreset_sbi.c
-index 5e8090d62bfc..458191206b2c 100644
---- a/drivers/sysreset/sysreset_sbi.c
-+++ b/drivers/sysreset/sysreset_sbi.c
-@@ -3,7 +3,6 @@
-  * Copyright 2021, Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <log.h>
-diff --git a/drivers/sysreset/sysreset_socfpga.c b/drivers/sysreset/sysreset_socfpga.c
-index 9b62dd5eab09..a07b0f4fd553 100644
---- a/drivers/sysreset/sysreset_socfpga.c
-+++ b/drivers/sysreset/sysreset_socfpga.c
-@@ -4,7 +4,6 @@
-  * Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <sysreset.h>
-diff --git a/drivers/sysreset/sysreset_socfpga_soc64.c b/drivers/sysreset/sysreset_socfpga_soc64.c
-index 9837aadf64b6..6f44792abb00 100644
---- a/drivers/sysreset/sysreset_socfpga_soc64.c
-+++ b/drivers/sysreset/sysreset_socfpga_soc64.c
-@@ -4,7 +4,6 @@
-  * Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <sysreset.h>
-diff --git a/drivers/sysreset/sysreset_sti.c b/drivers/sysreset/sysreset_sti.c
-index edd90aab061d..110b7e23afa1 100644
---- a/drivers/sysreset/sysreset_sti.c
-+++ b/drivers/sysreset/sysreset_sti.c
-@@ -4,7 +4,6 @@
-  * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <regmap.h>
- #include <syscon.h>
-diff --git a/drivers/sysreset/sysreset_syscon.c b/drivers/sysreset/sysreset_syscon.c
-index e468dac0e902..57144fa1e3bb 100644
---- a/drivers/sysreset/sysreset_syscon.c
-+++ b/drivers/sysreset/sysreset_syscon.c
-@@ -7,7 +7,6 @@
-  *	Author: Feng Kan <fkan@apm.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <regmap.h>
-diff --git a/drivers/sysreset/sysreset_watchdog.c b/drivers/sysreset/sysreset_watchdog.c
-index 6db5aa75b541..49c061e08803 100644
---- a/drivers/sysreset/sysreset_watchdog.c
-+++ b/drivers/sysreset/sysreset_watchdog.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2017 Álvaro Fernández Rojas <noltari@gmail.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <dm/device-internal.h>
- #include <errno.h>
-diff --git a/drivers/sysreset/sysreset_x86.c b/drivers/sysreset/sysreset_x86.c
-index dc772b5ff9e3..c2f28c65280f 100644
---- a/drivers/sysreset/sysreset_x86.c
-+++ b/drivers/sysreset/sysreset_x86.c
-@@ -5,7 +5,6 @@
-  * Generic reset driver for x86 processor
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <efi_loader.h>
- #include <pch.h>
-diff --git a/drivers/sysreset/sysreset_xtfpga.c b/drivers/sysreset/sysreset_xtfpga.c
-index 84fbc79016a0..ab71ea11a0b2 100644
---- a/drivers/sysreset/sysreset_xtfpga.c
-+++ b/drivers/sysreset/sysreset_xtfpga.c
-@@ -5,7 +5,7 @@
-  * (C) Copyright 2016 Cadence Design Systems Inc.
-  */
- 
--#include <common.h>
-+#include <config.h>
- #include <dm.h>
- #include <errno.h>
- #include <sysreset.h>
 -- 
 2.34.1
 
