@@ -4,70 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C56DC4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:34:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70435C4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:35:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E096088C3B;
-	Thu,  2 May 2024 03:32:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6B3D688C45;
+	Thu,  2 May 2024 03:32:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YpxDYorE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Joln6AVF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93DE288C37; Thu,  2 May 2024 03:32:15 +0200 (CEST)
+ id 05FB488C41; Thu,  2 May 2024 03:32:18 +0200 (CEST)
 Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
  [IPv6:2607:f8b0:4864:20::830])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5038D88C09
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:32:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE29588C33
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:32:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-qt1-x830.google.com with SMTP id
- d75a77b69052e-434d0a63151so44108861cf.3
- for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:32:13 -0700 (PDT)
+ d75a77b69052e-43ca9047bd2so2677081cf.1
+ for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:32:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714613532; x=1715218332; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714613533; x=1715218333; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ypGq2VE4anqM1zIyL+UA+bTJ4O+5nMfIHWHc9HOQ5AY=;
- b=YpxDYorE2lUDpRhSGoZAgQHzmKbasCsGFD5UgKFJewjJhaCIjd3g99QNwqgDEEFP/k
- N8GSHvXalgH7TjjQjAdsZjZZOLfe97qLuFYhypLhNBbCMj4Je4Dw0dAXvo/5AedMUAXQ
- 9Zbn8AAujfx4VAw9eU6qpd+Q5IyjYFLpjkhfs=
+ bh=Wfcyb8JsrGIkvSSRPO2MuNqbiuPyHUzyNimH/tuOsak=;
+ b=Joln6AVF10zBWXnzM3NfiJQ3KlOVF4iHXstFlORX3e84conr0qBQ9t69LBjeiQ0pwv
+ J2iq0CXxj1awRKGuiGSfcnifg8XQyT2v8U2XvoowbePQ9e2TAL5VOgw9hZj3/CN2cCeo
+ DoNdd7QrOYb4Pnwq/9J6fRmsBNbwXQdf5Rke4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714613532; x=1715218332;
+ d=1e100.net; s=20230601; t=1714613533; x=1715218333;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ypGq2VE4anqM1zIyL+UA+bTJ4O+5nMfIHWHc9HOQ5AY=;
- b=GeMCxjTopF0pFis5j4/Z4ghcBFFojbHfrobMqq+JOuZCkaFFGNl3vCqzwdMuTinBzK
- h4pDlCbfd9fBXZSC1rEOeqAqPdIWQRH1szVdCKFoaQRP/ZN1sSYv8xP9XVpL0ngqa/FU
- yo/B2/7q4A4fD0tTenm001HkCl/dYb8bFqSXszhDBFMbmbfH2Vu6WzFumGk2ln8u/3kJ
- 0H1vqlc52Ysgvkit6cEv1Guq5gr+GOKMf+/gBSN0mm1LBmpLY2O1XTGDaReoZdoxACLA
- fZd+WOQq+RGYcrnPHZTLBNY/M1OQt4WlO3qY8p/zumMSF/9V7z/gaC1zozXg5ehJIjTf
- xMFg==
-X-Gm-Message-State: AOJu0YwwPrIw2Yta6xDKXwFSVUNbSRxfQTgMZOkt/uXqK1RGrLCVduy7
- PYHMV7iGsHOPPXeAHI+YSGtEBC9pXlkXrwN/OFR3FffYETuJvL6ro+La90NHZkTviclpwHMb7Ku
- cCkbEaT1P
-X-Google-Smtp-Source: AGHT+IGsI9P8MeGCAQcRb0L1o7XypOQcuF6LVqm25ry3QUPhQTT4x7IEj7gg3J+olyGne2J+GHFY0g==
-X-Received: by 2002:ac8:598d:0:b0:43a:db38:5cb4 with SMTP id
- e13-20020ac8598d000000b0043adb385cb4mr4149117qte.18.1714613531746; 
- Wed, 01 May 2024 18:32:11 -0700 (PDT)
+ bh=Wfcyb8JsrGIkvSSRPO2MuNqbiuPyHUzyNimH/tuOsak=;
+ b=LrB/oHXsDk/cg2Tw/5K8iIkNRJ+MOnEco6pz/hY1B2L65u1rww8ZgFfrYXpLL6rL/F
+ uLItzao5QdmSB/OLL+lGwvfbGh2n6kL1K2cfkLehHdR3Gqf6NcfMq7rNTCH5NfJG4tfh
+ Jsyk8oOd4e6wHwxJcjczeeVvgNW9rV/0nhdNjKrEZEQTUlV85mZwmh+jXx7Dvw8pQ4ZF
+ nDDywudZaxYIrS1vKGzFxiC9Fo5KzIsJsDEAM5Iu1wfO8WksNR6p/AbpP92e7k710dUb
+ N02Gia71pMcXh9NqItfNGETG+llLDu96Z+YQlNOFMRBfh66K3ofa6jVNp904O8CcJ1VD
+ /++Q==
+X-Gm-Message-State: AOJu0YyyXkRZvZmxUDou3tGEeDNVJNHhqbg2kN79UklLZjaw+lybR0jq
+ vIli4AHBgzpvSy/VUqYLBCCSk3pZHJBW9Pr6G/O8MPyuS/hEB/6D381b1fNdVLp3S82Ogz4I8bo
+ A+7cHrOHv
+X-Google-Smtp-Source: AGHT+IFKzWy2sUITSHObM/FOxCyCU0wgEPiDve+OdGeN3reebxUzDGS9+oMLLnGALSWlq1Nax6sqQA==
+X-Received: by 2002:a05:622a:5e0f:b0:437:9f6e:8296 with SMTP id
+ eq15-20020a05622a5e0f00b004379f6e8296mr2837717qtb.12.1714613533493; 
+ Wed, 01 May 2024 18:32:13 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.32.10
+ c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.32.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 May 2024 18:32:10 -0700 (PDT)
+ Wed, 01 May 2024 18:32:13 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>
-Subject: [PATCH 20/81] core: Remove <common.h> and add needed includes
-Date: Wed,  1 May 2024 19:30:37 -0600
-Message-Id: <20240502013138.2383421-20-trini@konsulko.com>
+Cc: Eugen Hristev <eugen.hristev@collabora.com>,
+ Simon Glass <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
+ Stefano Babic <sbabic@denx.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sean Anderson <seanga2@gmail.com>,
+ Conor Dooley <conor.dooley@microchip.com>
+Subject: [PATCH 21/81] cpu: Remove <common.h> and add needed includes
+Date: Wed,  1 May 2024 19:30:38 -0600
+Message-Id: <20240502013138.2383421-21-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240502013138.2383421-1-trini@konsulko.com>
 References: <20240502013138.2383421-1-trini@konsulko.com>
@@ -94,273 +100,124 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Simon Glass <sjg@chromium.org>
+Cc: Eugen Hristev <eugen.hristev@collabora.com>
 Cc: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Mario Six <mario.six@gdsys.cc>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Stefano Babic <sbabic@denx.de>
+Cc: Bin Meng <bmeng.cn@gmail.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Sean Anderson <seanga2@gmail.com>
+Cc: Conor Dooley <conor.dooley@microchip.com>
 ---
- drivers/core/acpi.c          | 1 -
- drivers/core/device-remove.c | 1 -
- drivers/core/device.c        | 2 +-
- drivers/core/devres.c        | 1 -
- drivers/core/dump.c          | 1 -
- drivers/core/fdtaddr.c       | 1 -
- drivers/core/lists.c         | 1 -
- drivers/core/of_access.c     | 1 -
- drivers/core/of_addr.c       | 1 -
- drivers/core/of_extra.c      | 1 -
- drivers/core/ofnode.c        | 1 -
- drivers/core/read.c          | 1 -
- drivers/core/read_extra.c    | 1 -
- drivers/core/regmap.c        | 1 -
- drivers/core/root.c          | 1 -
- drivers/core/simple-bus.c    | 1 -
- drivers/core/simple-pm-bus.c | 1 -
- drivers/core/syscon-uclass.c | 1 -
- drivers/core/uclass.c        | 1 -
- drivers/core/util.c          | 1 -
- 20 files changed, 1 insertion(+), 20 deletions(-)
+ drivers/cpu/at91_cpu.c       | 1 -
+ drivers/cpu/bmips_cpu.c      | 1 -
+ drivers/cpu/cpu-uclass.c     | 1 -
+ drivers/cpu/cpu_sandbox.c    | 1 -
+ drivers/cpu/imx8_cpu.c       | 1 -
+ drivers/cpu/microblaze_cpu.c | 1 -
+ drivers/cpu/mpc83xx_cpu.c    | 1 -
+ drivers/cpu/riscv_cpu.c      | 1 -
+ 8 files changed, 8 deletions(-)
 
-diff --git a/drivers/core/acpi.c b/drivers/core/acpi.c
-index 0ebd288ab420..9f7842289218 100644
---- a/drivers/core/acpi.c
-+++ b/drivers/core/acpi.c
-@@ -8,7 +8,6 @@
- 
- #define LOG_CATEOGRY	LOGC_ACPI
+diff --git a/drivers/cpu/at91_cpu.c b/drivers/cpu/at91_cpu.c
+index 34a3f61c7e95..b45cc6ca1a9a 100644
+--- a/drivers/cpu/at91_cpu.c
++++ b/drivers/cpu/at91_cpu.c
+@@ -5,7 +5,6 @@
+  * Author: Claudiu Beznea <claudiu.beznea@microchip.com>
+  */
  
 -#include <common.h>
+ #include <cpu.h>
+ #include <dm.h>
+ #include <div64.h>
+diff --git a/drivers/cpu/bmips_cpu.c b/drivers/cpu/bmips_cpu.c
+index 3dd04fa88581..db624ee47fb0 100644
+--- a/drivers/cpu/bmips_cpu.c
++++ b/drivers/cpu/bmips_cpu.c
+@@ -7,7 +7,6 @@
+  *	Copyright (C) 2009 Florian Fainelli <florian@openwrt.org>
+  */
+ 
+-#include <common.h>
+ #include <cpu.h>
  #include <display_options.h>
  #include <dm.h>
- #include <log.h>
-diff --git a/drivers/core/device-remove.c b/drivers/core/device-remove.c
-index a86b9325dd8d..437080ed7780 100644
---- a/drivers/core/device-remove.c
-+++ b/drivers/core/device-remove.c
-@@ -10,7 +10,6 @@
+diff --git a/drivers/cpu/cpu-uclass.c b/drivers/cpu/cpu-uclass.c
+index 9772578968ba..16f8f2e52194 100644
+--- a/drivers/cpu/cpu-uclass.c
++++ b/drivers/cpu/cpu-uclass.c
+@@ -6,7 +6,6 @@
  
- #define LOG_CATEGORY	LOGC_DM
+ #define LOG_CATEGORY UCLASS_CPU
  
 -#include <common.h>
+ #include <cpu.h>
+ #include <dm.h>
  #include <errno.h>
- #include <log.h>
- #include <malloc.h>
-diff --git a/drivers/core/device.c b/drivers/core/device.c
-index bf7f261cbce0..18e2bd02dd56 100644
---- a/drivers/core/device.c
-+++ b/drivers/core/device.c
-@@ -8,8 +8,8 @@
-  * Pavel Herrmann <morpheus.ibis@gmail.com>
+diff --git a/drivers/cpu/cpu_sandbox.c b/drivers/cpu/cpu_sandbox.c
+index 2e871fe313c1..e65e1bdc51bf 100644
+--- a/drivers/cpu/cpu_sandbox.c
++++ b/drivers/cpu/cpu_sandbox.c
+@@ -4,7 +4,6 @@
+  * Mario Six, Guntermann & Drunck GmbH, mario.six@gdsys.cc
   */
  
 -#include <common.h>
- #include <cpu_func.h>
-+#include <errno.h>
- #include <event.h>
- #include <log.h>
- #include <asm/global_data.h>
-diff --git a/drivers/core/devres.c b/drivers/core/devres.c
-index 78914bdf7f21..8df08b91021c 100644
---- a/drivers/core/devres.c
-+++ b/drivers/core/devres.c
-@@ -9,7 +9,6 @@
+ #include <dm.h>
+ #include <cpu.h>
  
- #define LOG_CATEGORY LOGC_DEVRES
- 
--#include <common.h>
- #include <log.h>
- #include <malloc.h>
- #include <linux/compat.h>
-diff --git a/drivers/core/dump.c b/drivers/core/dump.c
-index 841124830ee7..5ec30d5b3c1a 100644
---- a/drivers/core/dump.c
-+++ b/drivers/core/dump.c
+diff --git a/drivers/cpu/imx8_cpu.c b/drivers/cpu/imx8_cpu.c
+index 98ff95f5ff5c..4781a565547a 100644
+--- a/drivers/cpu/imx8_cpu.c
++++ b/drivers/cpu/imx8_cpu.c
 @@ -3,7 +3,6 @@
-  * Copyright (c) 2015 Google, Inc
+  * Copyright 2019 NXP
   */
  
 -#include <common.h>
+ #include <cpu.h>
  #include <dm.h>
- #include <malloc.h>
- #include <mapmem.h>
-diff --git a/drivers/core/fdtaddr.c b/drivers/core/fdtaddr.c
-index 5f27d2511485..6be8ea0c0a9c 100644
---- a/drivers/core/fdtaddr.c
-+++ b/drivers/core/fdtaddr.c
-@@ -8,7 +8,6 @@
-  * Pavel Herrmann <morpheus.ibis@gmail.com>
+ #include <thermal.h>
+diff --git a/drivers/cpu/microblaze_cpu.c b/drivers/cpu/microblaze_cpu.c
+index a229f6913b07..4e24ada40022 100644
+--- a/drivers/cpu/microblaze_cpu.c
++++ b/drivers/cpu/microblaze_cpu.c
+@@ -2,7 +2,6 @@
+ /*
+  * Copyright (C) 2022, Ovidiu Panait <ovpanait@gmail.com>
   */
- 
 -#include <common.h>
+ #include <cpu.h>
  #include <dm.h>
- #include <fdt_support.h>
- #include <log.h>
-diff --git a/drivers/core/lists.c b/drivers/core/lists.c
-index 8034a8f48d99..2839a9b73718 100644
---- a/drivers/core/lists.c
-+++ b/drivers/core/lists.c
-@@ -8,7 +8,6 @@
- 
- #define LOG_CATEGORY LOGC_DM
- 
--#include <common.h>
- #include <errno.h>
- #include <log.h>
- #include <dm/device.h>
-diff --git a/drivers/core/of_access.c b/drivers/core/of_access.c
-index c8db743f5298..41f2e09b9c27 100644
---- a/drivers/core/of_access.c
-+++ b/drivers/core/of_access.c
-@@ -19,7 +19,6 @@
-  * Linux version.
-  */
- 
--#include <common.h>
- #include <log.h>
- #include <malloc.h>
- #include <asm/global_data.h>
-diff --git a/drivers/core/of_addr.c b/drivers/core/of_addr.c
-index b3b3d7ccdd56..d7913ab3d2fd 100644
---- a/drivers/core/of_addr.c
-+++ b/drivers/core/of_addr.c
-@@ -6,7 +6,6 @@
-  * Copyright (c) 2017 Google, Inc
-  */
- 
--#include <common.h>
- #include <log.h>
- #include <linux/bug.h>
- #include <linux/libfdt.h>
-diff --git a/drivers/core/of_extra.c b/drivers/core/of_extra.c
-index 59ce9174ad07..a3ebe9e9c245 100644
---- a/drivers/core/of_extra.c
-+++ b/drivers/core/of_extra.c
+ #include <asm/cpuinfo.h>
+diff --git a/drivers/cpu/mpc83xx_cpu.c b/drivers/cpu/mpc83xx_cpu.c
+index e451c11116ab..9a7b5fd7c423 100644
+--- a/drivers/cpu/mpc83xx_cpu.c
++++ b/drivers/cpu/mpc83xx_cpu.c
 @@ -4,7 +4,6 @@
-  * Written by Simon Glass <sjg@chromium.org>
+  * Mario Six, Guntermann & Drunck GmbH, mario.six@gdsys.cc
   */
  
 -#include <common.h>
- #include <log.h>
- #include <linux/libfdt.h>
- #include <dm/of_access.h>
-diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-index 21a233f90f0b..9a5eaaa4d134 100644
---- a/drivers/core/ofnode.c
-+++ b/drivers/core/ofnode.c
-@@ -6,7 +6,6 @@
- 
- #define LOG_CATEGORY	LOGC_DT
- 
--#include <common.h>
- #include <dm.h>
- #include <fdtdec.h>
- #include <fdt_support.h>
-diff --git a/drivers/core/read.c b/drivers/core/read.c
-index 1a4a95cddea3..55c19f335ae1 100644
---- a/drivers/core/read.c
-+++ b/drivers/core/read.c
-@@ -4,7 +4,6 @@
-  * Written by Simon Glass <sjg@chromium.org>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <dm/of_access.h>
- #include <mapmem.h>
-diff --git a/drivers/core/read_extra.c b/drivers/core/read_extra.c
-index 513834882783..5a0153a46610 100644
---- a/drivers/core/read_extra.c
-+++ b/drivers/core/read_extra.c
-@@ -4,7 +4,6 @@
-  * Written by Simon Glass <sjg@chromium.org>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <dm/of_addr.h>
- #include <dm/read.h>
-diff --git a/drivers/core/regmap.c b/drivers/core/regmap.c
-index dd32328098c4..7ff7834bdf08 100644
---- a/drivers/core/regmap.c
-+++ b/drivers/core/regmap.c
-@@ -6,7 +6,6 @@
- 
- #define LOG_CATEGORY	LOGC_DM
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <log.h>
-diff --git a/drivers/core/root.c b/drivers/core/root.c
-index d4ae652bcfb1..4bfd08f48130 100644
---- a/drivers/core/root.c
-+++ b/drivers/core/root.c
-@@ -8,7 +8,6 @@
- 
- #define LOG_CATEGORY UCLASS_ROOT
- 
--#include <common.h>
- #include <errno.h>
- #include <fdtdec.h>
- #include <log.h>
-diff --git a/drivers/core/simple-bus.c b/drivers/core/simple-bus.c
-index 6022e7514e0e..f402bb5d6748 100644
---- a/drivers/core/simple-bus.c
-+++ b/drivers/core/simple-bus.c
-@@ -5,7 +5,6 @@
- 
- #define LOG_CATEGORY UCLASS_SIMPLE_BUS
- 
--#include <common.h>
- #include <asm/global_data.h>
- #include <dm.h>
- #include <dm/simple_bus.h>
-diff --git a/drivers/core/simple-pm-bus.c b/drivers/core/simple-pm-bus.c
-index 1bb0d86e289d..f38372ec60bc 100644
---- a/drivers/core/simple-pm-bus.c
-+++ b/drivers/core/simple-pm-bus.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2020 Sean Anderson <seanga2@gmail.com>
-  */
- 
--#include <common.h>
+ #include <bitfield.h>
  #include <clk.h>
- #include <dm.h>
- 
-diff --git a/drivers/core/syscon-uclass.c b/drivers/core/syscon-uclass.c
-index a47b8bd3c017..f0e69d7216b3 100644
---- a/drivers/core/syscon-uclass.c
-+++ b/drivers/core/syscon-uclass.c
-@@ -6,7 +6,6 @@
- 
- #define LOG_CATEGORY UCLASS_SYSCON
- 
--#include <common.h>
- #include <log.h>
- #include <syscon.h>
- #include <dm.h>
-diff --git a/drivers/core/uclass.c b/drivers/core/uclass.c
-index e46d5717aa62..762536eebc6e 100644
---- a/drivers/core/uclass.c
-+++ b/drivers/core/uclass.c
-@@ -8,7 +8,6 @@
- 
- #define LOG_CATEGORY LOGC_DM
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <log.h>
-diff --git a/drivers/core/util.c b/drivers/core/util.c
-index 81497df85ffd..108a3bc4dac1 100644
---- a/drivers/core/util.c
-+++ b/drivers/core/util.c
-@@ -3,7 +3,6 @@
-  * Copyright (c) 2013 Google, Inc
+ #include <cpu.h>
+diff --git a/drivers/cpu/riscv_cpu.c b/drivers/cpu/riscv_cpu.c
+index 9b1950efe05e..4f2958a23cee 100644
+--- a/drivers/cpu/riscv_cpu.c
++++ b/drivers/cpu/riscv_cpu.c
+@@ -5,7 +5,6 @@
   */
  
+ #include <clk.h>
 -#include <common.h>
- #include <dm/device.h>
- #include <dm/ofnode.h>
- #include <dm/read.h>
+ #include <cpu.h>
+ #include <dm.h>
+ #include <errno.h>
 -- 
 2.34.1
 
