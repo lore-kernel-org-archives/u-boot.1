@@ -4,76 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AACB7C4345F
-	for <u-boot@archiver.kernel.org>; Fri,  3 May 2024 22:22:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A5A1C4345F
+	for <u-boot@archiver.kernel.org>; Fri,  3 May 2024 22:22:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFCD3881A9;
-	Sat,  4 May 2024 00:21:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 69990884E6;
+	Sat,  4 May 2024 00:22:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oVPc3vzR";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="duMbiruQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5FB3E8818B; Sat,  4 May 2024 00:21:54 +0200 (CEST)
-Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
- [IPv6:2607:f8b0:4864:20::833])
+ id C4639881C8; Sat,  4 May 2024 00:20:54 +0200 (CEST)
+Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
+ [IPv6:2607:f8b0:4864:20::72d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87C48884F9
- for <u-boot@lists.denx.de>; Sat,  4 May 2024 00:21:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A5E56881A1
+ for <u-boot@lists.denx.de>; Sat,  4 May 2024 00:20:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x833.google.com with SMTP id
- d75a77b69052e-439dfa27003so621181cf.2
- for <u-boot@lists.denx.de>; Fri, 03 May 2024 15:21:51 -0700 (PDT)
+Received: by mail-qk1-x72d.google.com with SMTP id
+ af79cd13be357-78ef9ce897bso6461885a.0
+ for <u-boot@lists.denx.de>; Fri, 03 May 2024 15:20:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714774910; x=1715379710; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714774850; x=1715379650; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=e7CkVZilGofsfPXkEkLEiHImKt0Vq6/jtH5I5VywEno=;
- b=oVPc3vzR9bErh9znTbiiWuQL89KCgiqwHFMdNQIKAI/kw+V/1Eo13YU3RRK/wd9QRc
- gtyllMEVwZvHgioW0DMQuvPC9Ud0JOr2jCNI/A96sJloHS3bVPS0o++7SCxGr8PbNz6d
- 3Tmpg4xwsnIi0XM0faAuBjEy3pSHGfJFKzyrM=
+ bh=UuMyIQ+PhdtZzrHSUis3C2vN1q9nJo0xEccP5gmjQak=;
+ b=duMbiruQwD63dhIDt28xXtmfvLxHa/CtRaLJyvXBzFauBHbcqAH40G/ChEuRbX2syU
+ PNq9bVsvLNAXYSaqQU80tOZrOpDHQ6+dgunb0XJSRUALw2Tp+Qx4QTFmA2qU1YcCO1/Q
+ TEhHj9Ok2JDO2mCELxd+yOo7z29QTVA2V0PAo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714774910; x=1715379710;
+ d=1e100.net; s=20230601; t=1714774850; x=1715379650;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=e7CkVZilGofsfPXkEkLEiHImKt0Vq6/jtH5I5VywEno=;
- b=o/ZAZvn9gYWk8T9EhZU+fxZ35ZEVgq2EDVUFOedQRtRxjBkv2Qgt0TWzCAT/HpbLCD
- Ih3OPx7HgtfZLG4r7ayKt1yDTxgonmS+xk1+Ck4MqaCNpus9tbVYmC9EGVnPqK8Orz7A
- s3oOzI0iNkPbeaS9cAgyudyZTGDeAmdFC8s6WkbU6iJr8WKaAv1mpdeRofVxVRujTHKu
- KvUxLbb45eLoVxNxPk9LRvXiTwdjZ8tTKqgyr12Kuf/UuxMCP7fEDXZ69xqPeXptIyt+
- Xg7x16bu6Y/GZec5jq0ugM14X1mAs8C7yAVVtCSwhtVtD1KtRbBs2yWWqZ+XZW9W5/dB
- KIZQ==
-X-Gm-Message-State: AOJu0Yz+pYoEQt6HxmzSSFx3jUgoiqCcfk0o0yVhrDJEdAmrAGzNMK8P
- fmJXx7Ed6mGg01pU1GkhXWFPhHhsOJnSVi/W98pZ473KAdclKhDSfL9MlJ9hGpw=
-X-Google-Smtp-Source: AGHT+IHVRAKLZSXNnsqvrsP3Z0mGRcExrm1k1yOlPCh+ctMq2l4pNiE5T1TsPcOa8w3f2YFg3zzYbA==
-X-Received: by 2002:ac8:5a83:0:b0:43c:56c6:b489 with SMTP id
- c3-20020ac85a83000000b0043c56c6b489mr4269107qtc.59.1714774910242; 
- Fri, 03 May 2024 15:21:50 -0700 (PDT)
+ bh=UuMyIQ+PhdtZzrHSUis3C2vN1q9nJo0xEccP5gmjQak=;
+ b=Djcwh/LSNcSqDPvgU3IlrAhq9Q5ZB7DcG3wgdYxPeEWpsUNueynhTCr/hK+FaJNjiD
+ WoN4ejH1yXVL52jE7eJKS+a5OeqNPCeulOo/T6l38ja5CctzrWK6tV0VckUQFvogjNkt
+ 1YI2kjTFfVPgvUop+SAaVKoUsZOzDu3EkpgbyAa5+E95lEDz5BNEHKBGt5pnyY5PIU08
+ wSTVSXcRXaNA73zhEOVgB/OflZHrIgOlbDg/woMngqaeAD+HEEFwYviifYhppFEz6qiN
+ VeuAvDJ2zUXykNa2j6MhohcSnrm9TCEtqXVBQ7IMW6V3LoL+I0qdQdRMRjDRyPTJp8Sy
+ 4NwQ==
+X-Gm-Message-State: AOJu0YwxXrAOvSCcIZ2V4nwp2uMZaSgO2zajoDQwnvHTyGC3oPWMlh6v
+ fZXChMKQskw7jpQzyRxtmupGJCCGsmybOk6NGtF5ito74vy65O+cFNU3AdkIrdU=
+X-Google-Smtp-Source: AGHT+IHxChlUF/VpHExtI4TXVRfet+DFDxMalHnNerd+zbXE+sgTKOEHkBnZv3ZZd2Hh2z7QBLGAJw==
+X-Received: by 2002:a05:620a:56c1:b0:78e:d2a8:b4de with SMTP id
+ wh1-20020a05620a56c100b0078ed2a8b4demr3801849qkn.20.1714774850451; 
+ Fri, 03 May 2024 15:20:50 -0700 (PDT)
 Received: from bill-the-cat ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- cd14-20020a05622a418e00b0043791f7d831sm2002204qtb.63.2024.05.03.15.21.49
+ wx56-20020a05620a5a7800b00790629248d4sm1588219qkn.110.2024.05.03.15.20.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 May 2024 15:21:49 -0700 (PDT)
-Date: Fri, 3 May 2024 16:21:47 -0600
+ Fri, 03 May 2024 15:20:49 -0700 (PDT)
+Date: Fri, 3 May 2024 16:20:42 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Judith Mendez <jm@ti.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] configs: am62x_evm_r5: Increase size of malloc_simple
- heap after relocation
-Message-ID: <20240503222147.GK2568172@bill-the-cat>
-References: <20240429214936.15187-1-jm@ti.com>
+To: Greg Malysa <greg.malysa@timesys.com>
+Cc: u-boot@lists.denx.de, Matthew McClintock <Matthew.Mcclintock@analog.com>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Alexey Brodkin <alexey.brodkin@synopsys.com>,
+ Alison Wang <alison.wang@nxp.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andre Przywara <andre.przywara@arm.com>, Andrew Davis <afd@ti.com>,
+ Andy Fleming <afleming@gmail.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Bin Meng <bmeng@tinylab.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ =?iso-8859-1?B?Q3Pza+Fz?= Bence <csokas.bence@prolan.hu>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ian Roberts <ian.roberts@timesys.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Kuan Lim Lee <kuanlim.lee@starfivetech.com>,
+ Linus Walleij <linus.walleij@linaro.org>, Lukasz Majewski <lukma@denx.de>,
+ Manorit Chawdhry <m-chawdhry@ti.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Marek Vasut <marex@denx.de>, Mario Six <mario.six@gdsys.cc>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Simek <monstr@monstr.eu>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Rick Chen <rick@andestech.com>, Sam Protsenko <semen.protsenko@linaro.org>,
+ Samuel Holland <samuel@sholland.org>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <sr@denx.de>, Sumit Garg <sumit.garg@linaro.org>,
+ Thomas Chou <thomas@wytron.com.tw>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Wolfgang Denk <wd@denx.de>, Yang Xiwen <forbidden405@outlook.com>,
+ Yu Chien Peter Lin <peterlin@andestech.com>
+Subject: Re: [PATCH v2 0/4] arm: Add Analog Devices SC5xx Machine Type
+Message-ID: <20240503222042.GA2568172@bill-the-cat>
+References: <20240425000515.21896-1-greg.malysa@timesys.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3rEWUCmWf3K8gvoI"
+ protocol="application/pgp-signature"; boundary="cGQnkO1b8RgbQWGP"
 Content-Disposition: inline
-In-Reply-To: <20240429214936.15187-1-jm@ti.com>
+In-Reply-To: <20240425000515.21896-1-greg.malysa@timesys.com>
 X-Clacks-Overhead: GNU Terry Pratchett
+X-Mailman-Approved-At: Sat, 04 May 2024 00:22:10 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,43 +129,58 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---3rEWUCmWf3K8gvoI
+--cGQnkO1b8RgbQWGP
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Apr 29, 2024 at 04:49:36PM -0500, Judith Mendez wrote:
+On Wed, Apr 24, 2024 at 08:03:59PM -0400, Greg Malysa wrote:
 
-> On AM62x SK we can see a boot failure with signature "alloc space
-> exhausted", so fix by increasing size of SPL_STACK_R_MALLOC_SIMPLE_LEN.
+> This series adds support for the ADI SC5xx machine type and includes two
+> core drivers that are required for being able to boot any board--a UART
+> driver, the gptimer driver which is used as a clock reference (CNTVCNT
+> is not supported on the armv7 sc5xx SoCs) and the clock tree driver. Our
+> corresponding Linux support relies on u-boot configuring the clocks
+> correctly before booting, so it is not possible to boot any board
+> without the CGU/CDU configuration happening here. There are also no
+> board files, device trees, or defconfigs included here, but some common
+> definitions that will be used to build board files currently are. The
+> sc5xx SoCs themselves include many armv7 families (sc57x, sc58x, and
+> sc594) all using an ARM Cortex-A5, and one armv8 family (sc598) indended
+> to be a drop-in replacement for the SC594 in terms of peripherals, with
+> a Cortex-A55 instead.
 >=20
-> Fixes: 128f81290b ("arm: dts: k3: binman: am625: add support for signing =
-TIFSSTUB Images")
-> Signed-off-by: Judith Mendez <jm@ti.com>
-> Tested-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
-> Reviewed-by: Bryan Brattlof <bb@ti.com>
+> Some of the configuration code in dmcinit and clkinit is quite scary and
+> causes a lot of checkpatch violations. It is modified from code
+> initially provided by ADI, but it has not been fully rewritten. There's
+> a question of how important it is to clean up this code--it has some
+> quality violations, but it has been in use (including in production) for
+> over two years and is known to work for performing the low level SoC
+> initialization, while a rewrite might introduce timing or sequence bugs
+> that could take a significant amount of time to detect in the future.
 
-Applied to u-boot/master, thanks!
+I gave the series a cursory look, and CI is also happy. I will put this
+in to the -next branch sometime soon after it opens, thanks.
 
 --=20
 Tom
 
---3rEWUCmWf3K8gvoI
+--cGQnkO1b8RgbQWGP
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY1Y3sACgkQFHw5/5Y0
-tyzEYwv/b7tSxQCMqW9gezl+P+/dxTdX+l7msJZSVvZI/BSrFifjyPuhQFJbOG3X
-I+O29P4cTpu+3KW/pjEyBaS7UjzP6mNbz9z3Kg1htYWtP4r09kpRWDSywSoPo+st
-AvwKHdUOUg/MJweBK70KSn3MT4b5tVQW6RHuONTqaSK+RLlsbI8A2buVbeVEznb1
-ToiM78pqTD/c2J1Y2y1IoPPJBWgZNyBJYvyM/dPqubsQDXafZQjODRrJBTO5lm/0
-dK2dylwdYoAGG7FW5mEgmNmoystDt0dzPZoaHjp97jWleeOczwBOOsGtAWtr3DPq
-oRXBXSJ0tBgpMFMZ4RBFAN+K4eRAigokVf79Uf2MvXTkd2fbPaMWLIT8wYLGXrtg
-PLO387J9zJZvpwyxc2psZCqONE7MdPvJSWvJ5bqVbo2zNeZ3tLzgMQLti0rHoidh
-SWaV3RTHtGHOIw8xkxTu91tMmhrLnhI+ziUhNCiyI10TlFzbL8FkoVwRHM5ESKK0
-31P2Re/3
-=+vSZ
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY1Yy8ACgkQFHw5/5Y0
+tywtIAv+NuIzqnRLCud1MPFD9xGvMtm+dPGmvsevK/oUR+lKP2bIBYfC2Vd8uQgP
+SCOGSMfBFtSRo/D+h6ce+mBx9EB9rtX20ELe+R6wx/q60rs6werzQpM8BsPJGBua
+7sWtvFIXeG57YR7IOXbCgnYW1L3DHKX06yJPNqkFx/XfE9adWUimb2qNMdl+b+QS
+ycg3/yBykFrQo4isSk8Wf8hwiG14q+6X7PTomMv7tRHQaD8iWsDrxX0RppTVtCaQ
+FX8fSAPi/Bd845asfy971KC5Xa7BK0rLtwIMf5rqKGZGRHWn5B5VvsA8ww0E3tQg
+DrsSTvlDa0MbJv2sbP+Zs/mRkvlCHWE8NGMX0YMZVEuqF2kq2Otob8DkJwR07L11
+ShUykSLbSjoiyMBNCUhQcGGY1ecmgXBzFHK1NdxdyvxK60ze0MHZzbHRJdEJ6eVj
+T21NHCVJPCUgMvyHYJLFcKbEBUhhw1y893Iwbd9m0rRH2n6DxeA2CdOYZdY/kx3I
+wJmzOhJH
+=H5Xc
 -----END PGP SIGNATURE-----
 
---3rEWUCmWf3K8gvoI--
+--cGQnkO1b8RgbQWGP--
