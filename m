@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61DB8C4345F
-	for <u-boot@archiver.kernel.org>; Fri,  3 May 2024 09:00:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 608F2C4345F
+	for <u-boot@archiver.kernel.org>; Fri,  3 May 2024 09:01:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB1008827A;
-	Fri,  3 May 2024 11:00:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3CBE588C0C;
+	Fri,  3 May 2024 11:00:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="k3PoHvH3";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="rz5Acqn8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DFFF882C9; Fri,  3 May 2024 11:00:51 +0200 (CEST)
+ id CB96488C07; Fri,  3 May 2024 11:00:57 +0200 (CEST)
 Received: from smtp-relay-internal-0.canonical.com
  (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B4568823D
- for <u-boot@lists.denx.de>; Fri,  3 May 2024 11:00:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E3D308823D
+ for <u-boot@lists.denx.de>; Fri,  3 May 2024 11:00:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71])
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 15430411AB
- for <u-boot@lists.denx.de>; Fri,  3 May 2024 09:00:46 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id B92753F29F
+ for <u-boot@lists.denx.de>; Fri,  3 May 2024 09:00:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1714726846;
- bh=uQdBVXmBga5IL1T8lz1cmu3bW04Ykzi7YQyC8mmqYwg=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=k3PoHvH35kFhoU5reioe5aU+zaksKRPgI6pymfe+qYcQWN3L6vR9Dny8/BAzC2cBk
- SYAXyjUnoOR6aVbNGOoDsT/PHchLgOHBOAZElORqprdVB+pW2eOQrgM8dxEC2TGETy
- cY9k6Dc78cD7X1aFN4DDwJJYYPCVHlmgjPf+nRh7Ipq0qqug5vGGiJGkVAKBVpY+/3
- 36+NB/5sH1Xr6ud2IAEAk1IvEU4Uma+FjkCxSxo8B/mep5TXYUmPpSbrTM3VpboI0d
- 8EFjTUVuot+/4dRjQKfWyukf/pRwMcAbQ32IccUWQG03g6dmsr2cLeD9TmKcikSOVQ
- gnCKzmIHCw97Q==
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-34dc6410028so1562769f8f.0
- for <u-boot@lists.denx.de>; Fri, 03 May 2024 02:00:46 -0700 (PDT)
+ s=20210705; t=1714726854;
+ bh=j+2mSTl9nsYuEP1cItsvboXCsAue6JnxxElx8ZfT7iw=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=rz5Acqn8e93V9hDEfrU/ggnHl7fEOcKbVCnA3T7rCNVlhsfZeCYkej/s71ezthsmw
+ Z/X5XxxyaKhmidO3vFt6yUdOiXW8ad8FLhu/yWx4ZkgSsIPjeE+d/sdoK1/Oy6xSzW
+ qaPGvWAKNnTFbUvoDL4hW+gRr1IX1O2dBauwvWyzVr20+RykEqJnSmJDdlA6NgwC46
+ AdI7ZDwqApkREyNpDA5watnelbLQLoOtxMo/Ms96kYVO6w9CIh7q4UY0Fi70nlfoBq
+ GVnr+7qmHsPJgdBXNq6qSH1OavzjvtHffE9XWACRKvxuD7vL5BFxZqX8aJaV1Plmqc
+ U5V+kjnwh0FBw==
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-346c08df987so1290277f8f.0
+ for <u-boot@lists.denx.de>; Fri, 03 May 2024 02:00:54 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714726845; x=1715331645;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=uQdBVXmBga5IL1T8lz1cmu3bW04Ykzi7YQyC8mmqYwg=;
- b=BLRZQukpEJtuPoYVAgHh8NSwIb1aoXC2lpSJLk8QKZWot7+gMI+bEIfryVOBcCTs2A
- c6UNWWO+kKdo2ncfTZTsPP7bIPkyLjzZz6vIzFPqPvGczkiP7ZckS05pHMPF8vP+xUwY
- cDlNVXbgq7chRQ5vIJJ0LrIbWjU+efV51K09urSYnfwpY6QPIg0N/InT4Rh2mlcxLyVN
- pihoxz+8mJ5pMn1x1sQyMHKxLsQiY65eYGtTGtGzzQAy00n8X2hOetjtkUB4c5LV03Db
- 5zN6Lk/AuOSR0KRtZMeo/uSStuzt1F0ko3N2N96gFtdFfS+YRUlaaEUjGOxezPr8djVU
- ONNg==
+ d=1e100.net; s=20230601; t=1714726847; x=1715331647;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=j+2mSTl9nsYuEP1cItsvboXCsAue6JnxxElx8ZfT7iw=;
+ b=pBsbmlhuk5cJtIdEpiQQ1DPwScDkTI4rw6T9236xGAgaJowp7mJZfzdMdvL1Hjjxx/
+ 3mwgQ5gZqSYSLrnRQEFAm8DsHTFJnGC38FYxRBKlgJejIMhwiKMeCS1+CgCqCh4Ci5bO
+ LYk+QnuI59yiutdKpw++KASoHAKmn4vDxFQj4kL0o5EItH1LiOCtYmHstB4H9Qktwoz/
+ dFqNIJ8Z0KRqhaAb3nI6g4d33Yw/8g8bi6anlKLP17I25FhXENTQ30T60RlFXjI1bSMo
+ dUkbazeUiiPFdHloDfHG5uDpfj+JIZfRGm1U0YZJwqqIPJ5so5POUOskQxRkExuCklYd
+ sY/w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUaipUlyV5biWFFFA3bYM0ynELFHs2f8uwfnyztbxcDsDjf0XRilNKaGSlz8FKsUJFcuJXgjWmfFGs02ofSdN28oJMm5A==
-X-Gm-Message-State: AOJu0YzghkQPtua2KhP+KnS9DhZmTOGLdbjJ1LDGqgVzYbBxEbrvU7jr
- DwnAVSf8fdRCEsmk0LcBpo6TLjme35DnVtI2KF3Rmz0U57uKL0PxbPiJzeO5ANWvSb2zP6Netaf
- ZrdOnD2/crzUYUZPPasDtE2RJsntjthcrVlg0k1v8OdqoMq7w90XnPWIB7vsQIgRtF/fhjzV4De
- I=
-X-Received: by 2002:a5d:570e:0:b0:34d:a75:3a44 with SMTP id
- a14-20020a5d570e000000b0034d0a753a44mr1526191wrv.54.1714726845366; 
- Fri, 03 May 2024 02:00:45 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGkr9PILUqKOl8Epq5Rv1+1xVBiQBrrTrDiL5XEwx+bW5/zwUhSowNc+6M3IHrEkT6KHuvVCA==
-X-Received: by 2002:a5d:570e:0:b0:34d:a75:3a44 with SMTP id
- a14-20020a5d570e000000b0034d0a753a44mr1526158wrv.54.1714726844956; 
- Fri, 03 May 2024 02:00:44 -0700 (PDT)
+ AJvYcCVRFg9Qls7oC8MITk5a4aUh4dgRhUTsltDSMNLkoa7uSX/XqRGInM9f2iPF9rDNfocccqfrWNCpq3drwjaSmNo4Or1qLQ==
+X-Gm-Message-State: AOJu0Yy+a9ar7Z/POZy0kFHc6zVULSxvGEnpWqUHImO8Q+pPy9v0SMN0
+ ApPBJGzlxHaKJr2/s1muTdZ81JKZgcROAfWGnbiM4zxoGs/eussYUbyETKEsyiDH5XUrW4gNjOp
+ pw2jD/Mi5vGFl8OVuaIYucXE/QKepf+7Tht6wdwS1tPLomFpf6kzc62ZD+S9HVP4QBcU=
+X-Received: by 2002:adf:eece:0:b0:34d:a0b4:d122 with SMTP id
+ a14-20020adfeece000000b0034da0b4d122mr1925316wrp.30.1714726847323; 
+ Fri, 03 May 2024 02:00:47 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFYmaMsVpjKtd4VMl6pAShxxtzEY70MfCvjnLGuzUpJPaTGCOTUWW7HEy6AeJxrKO49CE4N2Q==
+X-Received: by 2002:adf:eece:0:b0:34d:a0b4:d122 with SMTP id
+ a14-20020adfeece000000b0034da0b4d122mr1925284wrp.30.1714726846886; 
+ Fri, 03 May 2024 02:00:46 -0700 (PDT)
 Received: from workstation5.fritz.box
  (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
  by smtp.gmail.com with ESMTPSA id
- bf9-20020a0560001cc900b00341b451a31asm3247313wrb.36.2024.05.03.02.00.44
+ bf9-20020a0560001cc900b00341b451a31asm3247313wrb.36.2024.05.03.02.00.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 May 2024 02:00:44 -0700 (PDT)
+ Fri, 03 May 2024 02:00:46 -0700 (PDT)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Minda Chen <minda.chen@starfivetech.com>,
  Hal Feng <hal.feng@starfivetech.com>, Rick Chen <rick@andestech.com>,
@@ -90,10 +90,12 @@ Cc: Aurelien Jarno <aurelien@aurel32.net>,
  Mason Huo <mason.huo@starfivetech.com>, E Shattow <lucent@gmail.com>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 0/4] board: starfive: add Milk-V Mars CM support
-Date: Fri,  3 May 2024 10:59:59 +0200
-Message-ID: <20240503090011.37849-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 2/4] board: add support for Milk-V Mars CM
+Date: Fri,  3 May 2024 11:00:01 +0200
+Message-ID: <20240503090011.37849-3-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240503090011.37849-1-heinrich.schuchardt@canonical.com>
+References: <20240503090011.37849-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -112,43 +114,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With this series the Milk-V Mars CM board can be booted.
+We already support the VisionFive 2 and the Milk-V Mars board by
+patching the VisionFive 2 device tree. With this patch the same
+is done for the Milk-V Mars CM.
 
-NVMe, SD-card, Ethernet, UART are working but not USB.
-
-The first series Milk-V Mars CM Lite board (the version without eMMC)
-uses incorrect series numbers indicating eMMC presence. For these
-CONFIG_STARFIVE_NO_EMMC=y must be set to indicate that eMMC is not
-present.
-
-Thanks to E. Shattow for all the helpful discussions.
-He figured out what needed to be patched in the device-tree.
-
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
 v2:
-	fix typos in get_mmc_size_from_eeprom() description
 	rename spl_fdt_fixup_marc() to spl_fdt_fixup_mars_cm()
 	rename device-trees for Mars CM and Mars CM Lite
 	change model and compatible properties
-	refer to tio as tool for booting via UART
-	describe how to update serial number
+---
+ board/starfive/visionfive2/spl.c              | 28 ++++++++++++++++++-
+ .../visionfive2/starfive_visionfive2.c        | 11 +++++++-
+ 2 files changed, 37 insertions(+), 2 deletions(-)
 
-Heinrich Schuchardt (4):
-  board: starfive: function to read eMMC size
-  board: add support for Milk-V Mars CM
-  doc: Milk-V Mars CM and Milk-V Mars CM Lite
-  configs: visionfive2: enable SPL_YMODEM_SUPPORT
-
- arch/riscv/include/asm/arch-jh7110/eeprom.h   |   7 +
- board/starfive/visionfive2/Kconfig            |   9 +
- board/starfive/visionfive2/spl.c              |  28 ++-
- .../visionfive2/starfive_visionfive2.c        |  11 +-
- .../visionfive2/visionfive2-i2c-eeprom.c      |  18 ++
- configs/starfive_visionfive2_defconfig        |   1 +
- doc/board/starfive/index.rst                  |   1 +
- doc/board/starfive/milk-v_mars_cm.rst         | 183 ++++++++++++++++++
- 8 files changed, 256 insertions(+), 2 deletions(-)
- create mode 100644 doc/board/starfive/milk-v_mars_cm.rst
-
+diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfive2/spl.c
+index ca61b5be227..b555189556a 100644
+--- a/board/starfive/visionfive2/spl.c
++++ b/board/starfive/visionfive2/spl.c
+@@ -129,6 +129,30 @@ void spl_fdt_fixup_mars(void *fdt)
+ 	}
+ }
+ 
++void spl_fdt_fixup_mars_cm(void *fdt)
++{
++	const char *compat;
++	const char *model;
++
++	spl_fdt_fixup_mars(fdt);
++
++	if (!get_mmc_size_from_eeprom()) {
++		int offset;
++
++		model = "Milk-V Mars CM Lite";
++		compat = "milkv,mars-cm-lite\0starfive,jh7110";
++
++		offset = fdt_path_offset(fdt, "/soc/pinctrl/mmc0-pins/mmc0-pins-rest");
++		/* GPIOMUX(22, GPOUT_SYS_SDIO0_RST, GPOEN_ENABLE, GPI_NONE) */
++		fdt_setprop_u32(fdt, offset, "pinmux", 0xff130016);
++	} else {
++		model = "Milk-V Mars CM";
++		compat = "milkv,mars-cm\0starfive,jh7110";
++	}
++	fdt_setprop(fdt, fdt_path_offset(fdt, "/"), "compatible", compat, sizeof(compat));
++	fdt_setprop_string(fdt, fdt_path_offset(fdt, "/"), "model", model);
++}
++
+ void spl_fdt_fixup_version_a(void *fdt)
+ {
+ 	static const char compat[] = "starfive,visionfive-2-v1.2a\0starfive,jh7110";
+@@ -236,7 +260,9 @@ void spl_perform_fixups(struct spl_image_info *spl_image)
+ 		pr_err("Can't read EEPROM\n");
+ 		return;
+ 	}
+-	if (!strncmp(product_id, "MARS", 4)) {
++	if (!strncmp(product_id, "MARC", 4)) {
++		spl_fdt_fixup_mars_cm(spl_image->fdt_addr);
++	} else if (!strncmp(product_id, "MARS", 4)) {
+ 		spl_fdt_fixup_mars(spl_image->fdt_addr);
+ 	} else if (!strncmp(product_id, "VF7110", 6)) {
+ 		version = get_pcb_revision_from_eeprom();
+diff --git a/board/starfive/visionfive2/starfive_visionfive2.c b/board/starfive/visionfive2/starfive_visionfive2.c
+index a86bca533b2..6be53489626 100644
+--- a/board/starfive/visionfive2/starfive_visionfive2.c
++++ b/board/starfive/visionfive2/starfive_visionfive2.c
+@@ -19,6 +19,10 @@ DECLARE_GLOBAL_DATA_PTR;
+ #define JH7110_L2_PREFETCHER_HART_OFFSET	0x2000
+ #define FDTFILE_MILK_V_MARS \
+ 	"starfive/jh7110-milkv-mars.dtb"
++#define FDTFILE_MILK_V_MARS_CM \
++	"starfive/jh7110-milkv-mars-cm.dtb"
++#define FDTFILE_MILK_V_MARS_CM_LITE \
++	"starfive/jh7110-milkv-mars-cm-lite.dtb"
+ #define FDTFILE_VISIONFIVE2_1_2A \
+ 	"starfive/jh7110-starfive-visionfive-2-v1.2a.dtb"
+ #define FDTFILE_VISIONFIVE2_1_3B \
+@@ -61,7 +65,12 @@ static void set_fdtfile(void)
+ 		log_err("Can't read EEPROM\n");
+ 		return;
+ 	}
+-	if (!strncmp(product_id, "MARS", 4)) {
++	if (!strncmp(product_id, "MARC", 4)) {
++		if (get_mmc_size_from_eeprom())
++			fdtfile = FDTFILE_MILK_V_MARS_CM;
++		else
++			fdtfile = FDTFILE_MILK_V_MARS_CM_LITE;
++	} else if (!strncmp(product_id, "MARS", 4)) {
+ 		fdtfile = FDTFILE_MILK_V_MARS;
+ 	} else if (!strncmp(product_id, "VF7110", 6)) {
+ 		version = get_pcb_revision_from_eeprom();
 -- 
 2.43.0
 
