@@ -4,40 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02EC4C4345F
-	for <u-boot@archiver.kernel.org>; Fri,  3 May 2024 01:05:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7043C4345F
+	for <u-boot@archiver.kernel.org>; Fri,  3 May 2024 01:06:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2483B88BB9;
-	Fri,  3 May 2024 03:05:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B3BD088BF5;
+	Fri,  3 May 2024 03:05:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1714698352;
-	bh=kw52sS47d9n7tBHDa2WHAr8qVvjMHGYVrnssL16RLAI=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=HyErJQqCJ/CVJVBn94rSyH96/poBXmdf9dXQCy/ydgZyX2XOGFnRXqDskwBUtXFGD
-	 60/y7k/t4vLnLgvtYEnl/IbbpRcLHj5JUmHEGjk+0CsWAx+iBufNAuuwyaKSJdttG3
-	 czOcg5eAV8gmptgnHOEGI01+WTGIiRCEpox1Kuw68ehaWMKXH6GPOMGlXZhYYDiYSg
-	 iRiWLC8CvaTMlj8mtWn3qkAmODZOJAn6b3KrM6ocXp1/L7E8Xqvm5tK5/iyqhK0A37
-	 Wu+DiIvTGPqf9/6khnwypZoIFqmiejYd+tp5iZgEzSMb/aUyZDYfEYzX/TiEd0JInd
-	 DLGnZZ+z8ObuQ==
+	s=phobos-20191101; t=1714698353;
+	bh=GwbxQc0OvB977LJm2JMw8iiGgoj200lT/DtN27KkjYA=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=psseJpGOebRoY61c/C/ujjXXetk82WI6E1SAjbHwVOxh3uBt7TjJTHrOmnjjDoFqs
+	 Cg8pEmXVuWxKyCJygbjiNmnTozaZJPD82kWRAzmnmLi9gZ/95a7gXQjM+WGs67wK/U
+	 O8VXlVdqTrwVvjBstE4eNJ5EyWTAryvMFPP06GiHULC1Ip4cc515cOdJFlNSKr7B8m
+	 IaetsauHf5VImLf4vwWCxIRjnSAQaHOwi3Mddio1C3QNGIE/XQDmeiVJI6w4Tjoyby
+	 fUYo2zcC42SQqZCBlVRhfYns9/VxEH2IL/3elI6LaOWzXIWWARsWKEC2vxWxnop2Ug
+	 il6RUlR4gbunw==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 9E8BE88BAF;
- Fri,  3 May 2024 03:05:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 39CDA88282;
+ Fri,  3 May 2024 03:05:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1714698351;
- bh=kw52sS47d9n7tBHDa2WHAr8qVvjMHGYVrnssL16RLAI=;
- h=From:To:Cc:Subject:Date:From;
- b=dfNh7Ggur20MV9GR/oJNq7Wf5Ext85LEqIUnW+KVYnVazfzpQIkiDIz6djQeiZfHq
- 2YXhlbKvj6rFodqSOWCiV1BIcLOa11TR3ikkTXV6msLSuwdtyN3M9pwv2ZSgfcBkuX
- tD2Agh+0PNT+3TRigGXaVmtCgkvUvuL3o7L2y3ZJ3RvgCTnbAbeVlH4E9Pk9lG4L++
- BLRETK6+FXL4PQE5O6BiEqUx8C9TcgMgq0WERJXda6piJZHYg2sjLmU3yxrFOmXP9G
- G6/qvgEVDXwlE0zx5FfEHvIhT07cIUGHyxeiepenH4uK8/0xJni9vbkY11nyzY4+S4
- m1yFihXmkY6CQ==
+ bh=GwbxQc0OvB977LJm2JMw8iiGgoj200lT/DtN27KkjYA=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=JuA1E3W3kfxCkSN6njqSo4/HwQCrZ6O95ordiIBKSnVjGGQYkT8qDXzJ9u4eBntHl
+ u+QzsXS9Ut9pnuN1CFg+P3z16QHwKoebXLYqESGUJVYN0TqNiLDYsnvRsJ/wErtGeZ
+ t2MGWQ9LiiT4Sz/G2nV8ObE5TdnGadAQsTjZWcgSFKGaftXkYgdvGhhm1Xt75PaNC7
+ NUi8KjrNosSGJJ2+WJDcmza71Cr5jPebw5YHxI9OWDV9mBeI+oEqFTmBO0ZOVBPJRo
+ iJVR+H/XIbCs2GGqqRAfH6B9CQ0t8LuffohwtdG3Ecd/zGZ5QS1ifU5qhAzpVlhDZD
+ rolTL20h3fitQ==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: anton.gres@ifm.com, ch@denx.de, Marek Vasut <marex@denx.de>,
@@ -54,11 +55,13 @@ Cc: anton.gres@ifm.com, ch@denx.de, Marek Vasut <marex@denx.de>,
  Stefan Eichenberger <stefan.eichenberger@toradex.com>,
  Stefano Babic <sbabic@denx.de>, Tim Harvey <tharvey@gateworks.com>,
  Tom Rini <trini@konsulko.com>, kernel@puri.sm, u-boot@dh-electronics.com
-Subject: [PATCH v2 1/4] binman: Add nxp_imx8mcst etype for i.MX8M flash.bin
- signing
-Date: Fri,  3 May 2024 03:05:09 +0200
-Message-ID: <20240503010518.263458-1-marex@denx.de>
+Subject: [PATCH v2 2/4] ARM: dts: imx: Introduce SPL and FIT labels to i.MX8M
+ DTs binman nodes
+Date: Fri,  3 May 2024 03:05:10 +0200
+Message-ID: <20240503010518.263458-2-marex@denx.de>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240503010518.263458-1-marex@denx.de>
+References: <20240503010518.263458-1-marex@denx.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -77,14 +80,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add new binman etype which allows signing both the SPL and fitImage sections
-of i.MX8M flash.bin using CST. There are multiple DT properties which govern
-the signing process, nxp,loader-address is the only mandatory one which sets
-the SPL signature start address without the imx8mimage header, this should be
-SPL text base. The key material can be configured using optional DT properties
-nxp,srk-table, nxp,csf-crt, nxp,img-crt, all of which default the key material
-names generated by CST tool scripts. The nxp,unlock property can be used to
-unlock CAAM access in SPL section.
+Add binman_imx_spl and binman_imx_fit labels to nxp-imx8mimage {} and fit {}
+nodes respectively, so they can be referened in board DTs no matter how deep
+in the top level binman image description they are. Update current board DTs
+to use those labels.
 
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
@@ -107,241 +106,322 @@ Cc: kernel@puri.sm
 Cc: u-boot@dh-electronics.com
 Cc: u-boot@lists.denx.de
 ---
-V2: - Use configparser module for generating the configuration INI file
-    - Use config template as an input, parse it, modify only keys of interest
-    - Pull magic values into top level variables
-    - Rename nxp,csf-key and nxp,img-key to nxp,csf-crt and nxp,img-crt
-    - Return unmodified data if signing unrecognized (non-SPL/non-FIT) section
+V2: New patch
 ---
- tools/binman/btool/cst.py          |  48 +++++++++
- tools/binman/etype/nxp_imx8mcst.py | 163 +++++++++++++++++++++++++++++
- 2 files changed, 211 insertions(+)
- create mode 100644 tools/binman/btool/cst.py
- create mode 100644 tools/binman/etype/nxp_imx8mcst.py
+ arch/arm/dts/imx8mm-u-boot.dtsi               |   4 +-
+ .../dts/imx8mm-verdin-wifi-dev-u-boot.dtsi    |   8 +-
+ arch/arm/dts/imx8mn-u-boot.dtsi               |   4 +-
+ arch/arm/dts/imx8mp-dhcom-u-boot.dtsi         | 124 +++++++++---------
+ arch/arm/dts/imx8mp-rsb3720-a1-u-boot.dtsi    |  26 ++--
+ arch/arm/dts/imx8mp-u-boot.dtsi               |   4 +-
+ arch/arm/dts/imx8mq-librem5-r4-u-boot.dtsi    |  10 +-
+ arch/arm/dts/imx8mq-u-boot.dtsi               |   4 +-
+ 8 files changed, 84 insertions(+), 100 deletions(-)
 
-diff --git a/tools/binman/btool/cst.py b/tools/binman/btool/cst.py
-new file mode 100644
-index 00000000000..30e78bdbbd9
---- /dev/null
-+++ b/tools/binman/btool/cst.py
-@@ -0,0 +1,48 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright 2024 Marek Vasut <marex@denx.de>
-+#
-+"""Bintool implementation for cst"""
+diff --git a/arch/arm/dts/imx8mm-u-boot.dtsi b/arch/arm/dts/imx8mm-u-boot.dtsi
+index 6ab8f66256e..b9b1193823a 100644
+--- a/arch/arm/dts/imx8mm-u-boot.dtsi
++++ b/arch/arm/dts/imx8mm-u-boot.dtsi
+@@ -54,7 +54,7 @@
+ 		};
+ #endif
+ 
+-		nxp-imx8mimage {
++		binman_imx_spl: nxp-imx8mimage {
+ 			filename = "u-boot-spl-mkimage.bin";
+ 			nxp,boot-from = "sd";
+ 			nxp,rom-version = <1>;
+@@ -98,7 +98,7 @@
+ 			};
+ 		};
+ 
+-		fit {
++		binman_imx_fit: fit {
+ 			description = "Configuration to load ATF before U-Boot";
+ #ifndef CONFIG_IMX_HAB
+ 			fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
+diff --git a/arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi b/arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi
+index 90183aff8bc..183de46f66a 100644
+--- a/arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi
++++ b/arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi
+@@ -35,12 +35,8 @@
+ 	bootph-pre-ram;
+ };
+ 
+-&binman {
+-	section {
+-		fit {
+-			offset = <0x5fc00>;
+-		};
+-	};
++&binman_imx_fit {
++	offset = <0x5fc00>;
+ };
+ 
+ &gpio1 {
+diff --git a/arch/arm/dts/imx8mn-u-boot.dtsi b/arch/arm/dts/imx8mn-u-boot.dtsi
+index ba9967dbe4a..c9fb33cfb73 100644
+--- a/arch/arm/dts/imx8mn-u-boot.dtsi
++++ b/arch/arm/dts/imx8mn-u-boot.dtsi
+@@ -103,7 +103,7 @@
+ 		};
+ #endif
+ 
+-		nxp-imx8mimage {
++		binman_imx_spl: nxp-imx8mimage {
+ 			filename = "u-boot-spl-mkimage.bin";
+ 			nxp,boot-from = "sd";
+ 			nxp,rom-version = <2>;
+@@ -169,7 +169,7 @@
+ 			};
+ 		};
+ 
+-		fit {
++		binman_imx_fit: fit {
+ 			description = "Configuration to load ATF before U-Boot";
+ #ifndef CONFIG_IMX_HAB
+ 			fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
+diff --git a/arch/arm/dts/imx8mp-dhcom-u-boot.dtsi b/arch/arm/dts/imx8mp-dhcom-u-boot.dtsi
+index cb37e28f28f..c065fb82994 100644
+--- a/arch/arm/dts/imx8mp-dhcom-u-boot.dtsi
++++ b/arch/arm/dts/imx8mp-dhcom-u-boot.dtsi
+@@ -135,73 +135,69 @@
+ 	bootph-pre-ram;
+ };
+ 
+-&binman {
+-	section {
+-		fit {
+-			images {
+-				fdt-dto-imx8mp-dhcom-som-overlay-eth1xfast {
+-					description = "imx8mp-dhcom-som-overlay-eth1xfast";
+-					type = "flat_dt";
+-					compression = "none";
+-
+-					blob-ext {
+-						filename = "imx8mp-dhcom-som-overlay-eth1xfast.dtbo";
+-					};
+-				};
+-
+-				fdt-dto-imx8mp-dhcom-som-overlay-eth2xfast {
+-					description = "imx8mp-dhcom-som-overlay-eth2xfast";
+-					type = "flat_dt";
+-					compression = "none";
+-
+-					blob-ext {
+-						filename = "imx8mp-dhcom-som-overlay-eth2xfast.dtbo";
+-					};
+-				};
+-
+-				fdt-dto-imx8mp-dhcom-pdk-overlay-eth2xfast {
+-					description = "imx8mp-dhcom-pdk-overlay-eth2xfast";
+-					type = "flat_dt";
+-					compression = "none";
+-
+-					blob-ext {
+-						filename = "imx8mp-dhcom-pdk-overlay-eth2xfast.dtbo";
+-					};
+-				};
+-
+-				fdt-dto-imx8mp-dhcom-som-overlay-rev100 {
+-					description = "imx8mp-dhcom-som-overlay-rev100";
+-					type = "flat_dt";
+-					compression = "none";
+-
+-					blob-ext {
+-						filename = "imx8mp-dhcom-som-overlay-rev100.dtbo";
+-					};
+-				};
+-
+-				fdt-dto-imx8mp-dhcom-pdk3-overlay-rev100 {
+-					description = "imx8mp-dhcom-pdk3-overlay-rev100";
+-					type = "flat_dt";
+-					compression = "none";
+-
+-					blob-ext {
+-						filename = "imx8mp-dhcom-pdk3-overlay-rev100.dtbo";
+-					};
+-				};
++&binman_imx_fit {
++	images {
++		fdt-dto-imx8mp-dhcom-som-overlay-eth1xfast {
++			description = "imx8mp-dhcom-som-overlay-eth1xfast";
++			type = "flat_dt";
++			compression = "none";
 +
-+import re
++			blob-ext {
++				filename = "imx8mp-dhcom-som-overlay-eth1xfast.dtbo";
+ 			};
++		};
 +
-+from binman import bintool
++		fdt-dto-imx8mp-dhcom-som-overlay-eth2xfast {
++			description = "imx8mp-dhcom-som-overlay-eth2xfast";
++			type = "flat_dt";
++			compression = "none";
 +
-+class Bintoolcst(bintool.Bintool):
-+    """Image generation for U-Boot
++			blob-ext {
++				filename = "imx8mp-dhcom-som-overlay-eth2xfast.dtbo";
++			};
++		};
 +
-+    This bintool supports running `cst` with some basic parameters as
-+    needed by binman.
-+    """
-+    def __init__(self, name):
-+        super().__init__(name, 'Sign NXP i.MX image')
++		fdt-dto-imx8mp-dhcom-pdk-overlay-eth2xfast {
++			description = "imx8mp-dhcom-pdk-overlay-eth2xfast";
++			type = "flat_dt";
++			compression = "none";
 +
-+    # pylint: disable=R0913
-+    def run(self, output_fname=None):
-+        """Run cst
++			blob-ext {
++				filename = "imx8mp-dhcom-pdk-overlay-eth2xfast.dtbo";
++			};
++		};
+ 
+-			configurations {
+-				default = "@config-DEFAULT-SEQ";
+-
+-				@config-SEQ {
+-					fdt = "fdt-1",
+-					      "fdt-dto-imx8mp-dhcom-som-overlay-eth1xfast",
+-					      "fdt-dto-imx8mp-dhcom-som-overlay-eth2xfast",
+-					      "fdt-dto-imx8mp-dhcom-pdk-overlay-eth2xfast",
+-					      "fdt-dto-imx8mp-dhcom-som-overlay-rev100",
+-					      "fdt-dto-imx8mp-dhcom-pdk3-overlay-rev100";
+-				};
++		fdt-dto-imx8mp-dhcom-som-overlay-rev100 {
++			description = "imx8mp-dhcom-som-overlay-rev100";
++			type = "flat_dt";
++			compression = "none";
 +
-+        Args:
-+            output_fname: Output filename to write to
-+        """
-+        args = []
-+        if output_fname:
-+            args += ['-o', output_fname]
-+        return self.run_cmd(*args)
++			blob-ext {
++				filename = "imx8mp-dhcom-som-overlay-rev100.dtbo";
++			};
++		};
 +
-+    def fetch(self, method):
-+        """Fetch handler for cst
++		fdt-dto-imx8mp-dhcom-pdk3-overlay-rev100 {
++			description = "imx8mp-dhcom-pdk3-overlay-rev100";
++			type = "flat_dt";
++			compression = "none";
 +
-+        This installs cst using the apt utility.
++			blob-ext {
++				filename = "imx8mp-dhcom-pdk3-overlay-rev100.dtbo";
+ 			};
+ 		};
+ 	};
 +
-+        Args:
-+            method (FETCH_...): Method to use
++	configurations {
++		default = "@config-DEFAULT-SEQ";
 +
-+        Returns:
-+            True if the file was fetched and now installed, None if a method
-+            other than FETCH_BIN was requested
++		@config-SEQ {
++			fdt = "fdt-1",
++			      "fdt-dto-imx8mp-dhcom-som-overlay-eth1xfast",
++			      "fdt-dto-imx8mp-dhcom-som-overlay-eth2xfast",
++			      "fdt-dto-imx8mp-dhcom-pdk-overlay-eth2xfast",
++			      "fdt-dto-imx8mp-dhcom-som-overlay-rev100",
++			      "fdt-dto-imx8mp-dhcom-pdk3-overlay-rev100";
++		};
++	};
+ };
+diff --git a/arch/arm/dts/imx8mp-rsb3720-a1-u-boot.dtsi b/arch/arm/dts/imx8mp-rsb3720-a1-u-boot.dtsi
+index aff5dcf615d..21eff6d6ad4 100644
+--- a/arch/arm/dts/imx8mp-rsb3720-a1-u-boot.dtsi
++++ b/arch/arm/dts/imx8mp-rsb3720-a1-u-boot.dtsi
+@@ -135,21 +135,17 @@
+ 	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_400M>;
+ };
+ 
+-&binman {
+-	section {
+-		fit {
+-			images {
+-				fip {
+-					description = "Trusted Firmware FIP";
+-					type = "firmware";
+-					arch = "arm64";
+-					compression = "none";
+-					load = <0x40310000>;
+-
+-					fip_blob: blob-ext{
+-						filename = "fip.bin";
+-					};
+-				};
++&binman_imx_fit {
++	images {
++		fip {
++			description = "Trusted Firmware FIP";
++			type = "firmware";
++			arch = "arm64";
++			compression = "none";
++			load = <0x40310000>;
 +
-+        Raises:
-+            Valuerror: Fetching could not be completed
-+        """
-+        if method != bintool.FETCH_BIN:
-+            return None
-+        return self.apt_install('imx-code-signing-tool')
-diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/nxp_imx8mcst.py
-new file mode 100644
-index 00000000000..132127ad482
---- /dev/null
-+++ b/tools/binman/etype/nxp_imx8mcst.py
-@@ -0,0 +1,163 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright 2023-2024 Marek Vasut <marex@denx.de>
-+# Written with much help from Simon Glass <sjg@chromium.org>
-+#
-+# Entry-type module for generating the i.MX8M code signing tool
-+# input configuration file and invocation of cst on generated
-+# input configuration file and input data to be signed.
-+#
-+
-+import configparser
-+import struct
-+
-+from collections import OrderedDict
-+
-+from binman.entry import Entry
-+from binman.etype.mkimage import Entry_mkimage
-+from binman.etype.section import Entry_section
-+from binman import elf
-+from dtoc import fdt_util
-+from u_boot_pylib import tools
-+
-+MAGIC_NXP_IMX_IVT = 0x412000d1
-+MAGIC_FITIMAGE    = 0xedfe0dd0
-+
-+csf_config_template = """
-+[Header]
-+  Version = 4.3
-+  Hash Algorithm = sha256
-+  Engine = CAAM
-+  Engine Configuration = 0
-+  Certificate Format = X509
-+  Signature Format = CMS
-+
-+[Install SRK]
-+  File = "SRK_1_2_3_4_table.bin"
-+  Source index = 0
-+
-+[Install CSFK]
-+  File = "CSF1_1_sha256_4096_65537_v3_usr_crt.pem"
-+
-+[Authenticate CSF]
-+
-+[Unlock]
-+  Engine = CAAM
-+  Features = MID
-+
-+[Install Key]
-+  Verification index = 0
-+  Target Index = 2
-+  File = "IMG1_1_sha256_4096_65537_v3_usr_crt.pem"
-+
-+[Authenticate Data]
-+  Verification index = 2
-+  Blocks = 0x1234 0x78 0xabcd "data.bin"
-+"""
-+
-+class Entry_nxp_imx8mcst(Entry_mkimage):
-+    """NXP i.MX8M CST .cfg file generator and cst invoker
-+
-+    Properties / Entry arguments:
-+        - nxp,loader-address - loader address (SPL text base)
-+    """
-+
-+    def __init__(self, section, etype, node):
-+        super().__init__(section, etype, node)
-+        self.required_props = ['nxp,loader-address']
-+
-+    def ReadNode(self):
-+        super().ReadNode()
-+        self.loader_address = fdt_util.GetInt(self._node, 'nxp,loader-address')
-+        self.srk_table = fdt_util.GetString(self._node, 'nxp,srk-table', 'SRK_1_2_3_4_table.bin')
-+        self.csf_crt = fdt_util.GetString(self._node, 'nxp,csf-crt', 'CSF1_1_sha256_4096_65537_v3_usr_crt.pem')
-+        self.img_crt = fdt_util.GetString(self._node, 'nxp,img-crt', 'IMG1_1_sha256_4096_65537_v3_usr_crt.pem')
-+        self.unlock = fdt_util.GetBool(self._node, 'nxp,unlock')
-+        self.ReadEntries()
-+
-+    def BuildSectionData(self, required):
-+        data, input_fname, uniq = self.collect_contents_to_file(
-+            self._entries.values(), 'input')
-+
-+        # Parse the input data and figure out what it is that is being signed.
-+        # - If it is mkimage'd imx8mimage, then extract to be signed data size
-+        #   from imx8mimage header, and calculate CSF blob offset right past
-+        #   the SPL from this information.
-+        # - If it is fitImage, then pad the image to 4k, add generated IVT and
-+        #   sign the whole payload, then append CSF blob at the end right past
-+        #   the IVT.
-+        signtype = struct.unpack('<I', data[:4])[0]
-+        signbase = self.loader_address
-+        signsize = 0
-+        if signtype == MAGIC_NXP_IMX_IVT: # SPL/imx8mimage
-+            # Sign the payload including imx8mimage header
-+            # (extra 0x40 bytes before the payload)
-+            signbase -= 0x40
-+            signsize = struct.unpack('<I', data[24:28])[0] - signbase
-+            # Remove mkimage generated padding from the end of data
-+            data = data[:signsize]
-+        elif signtype == MAGIC_FITIMAGE: # fitImage
-+            # Align fitImage to 4k
-+            signsize = tools.align(len(data), 0x1000)
-+            data += tools.get_bytes(0, signsize - len(data))
-+            # Add generated IVT
-+            data += struct.pack('<I', MAGIC_NXP_IMX_IVT)
-+            data += struct.pack('<I', signbase + signsize) # IVT base
-+            data += struct.pack('<I', 0)
-+            data += struct.pack('<I', 0)
-+            data += struct.pack('<I', 0)
-+            data += struct.pack('<I', signbase + signsize) # IVT base
-+            data += struct.pack('<I', signbase + signsize + 0x20) # CSF base
-+            data += struct.pack('<I', 0)
-+        else:
-+            # Unknown section type, pass input data through.
-+            return data
-+
-+        # Write out customized data to be signed
-+        output_dname = tools.get_output_filename(f'nxp.cst-input-data.{uniq}')
-+        tools.write_file(output_dname, data)
-+
-+        # Generate CST configuration file used to sign payload
-+        cfg_fname = tools.get_output_filename('nxp.csf-config-txt.%s' % uniq)
-+        config = configparser.ConfigParser()
-+        # Do not make key names lowercase
-+        config.optionxform = str
-+        # Load configuration template and modify keys of interest
-+        config.read_string(csf_config_template)
-+        config['Install SRK']['File'] = '"' + self.srk_table + '"'
-+        config['Install CSFK']['File'] = '"' + self.csf_crt + '"'
-+        config['Install Key']['File'] = '"' + self.img_crt + '"'
-+        config['Authenticate Data']['Blocks'] = hex(signbase) + ' 0 ' + hex(len(data)) + ' "' + str(output_dname) + '"'
-+        if not self.unlock:
-+            config.remove_section('Unlock')
-+        with open(cfg_fname, 'w') as cfgf:
-+            config.write(cfgf)
-+
-+        output_fname = tools.get_output_filename(f'nxp.csf-output-blob.{uniq}')
-+        args = ['-i', cfg_fname, '-o', output_fname]
-+        if self.cst.run_cmd(*args) is not None:
-+            outdata = tools.read_file(output_fname)
-+            return data + outdata
-+        else:
-+            # Bintool is missing; just use the input data as the output
-+            self.record_missing_bintool(self.cst)
-+            return data
-+
-+    def SetImagePos(self, image_pos):
-+        # Customized SoC specific SetImagePos which skips the mkimage etype
-+        # implementation and removes the 0x48 offset introduced there. That
-+        # offset is only used for uImage/fitImage, which is not the case in
-+        # here.
-+        upto = 0x00
-+        for entry in super().GetEntries().values():
-+            entry.SetOffsetSize(upto, None)
-+
-+            # Give up if any entries lack a size
-+            if entry.size is None:
-+                return
-+            upto += entry.size
-+
-+        Entry_section.SetImagePos(self, image_pos)
-+
-+    def AddBintools(self, btools):
-+        super().AddBintools(btools)
-+        self.cst = self.AddBintool(btools, 'cst')
++			fip_blob: blob-ext{
++				filename = "fip.bin";
+ 			};
+ 		};
+ 	};
+diff --git a/arch/arm/dts/imx8mp-u-boot.dtsi b/arch/arm/dts/imx8mp-u-boot.dtsi
+index c4c1a177102..8b5ac3faf1c 100644
+--- a/arch/arm/dts/imx8mp-u-boot.dtsi
++++ b/arch/arm/dts/imx8mp-u-boot.dtsi
+@@ -86,7 +86,7 @@
+ 	section {
+ 		pad-byte = <0x00>;
+ 
+-		nxp-imx8mimage {
++		binman_imx_spl: nxp-imx8mimage {
+ 			filename = "u-boot-spl-mkimage.bin";
+ 			nxp,boot-from = "sd";
+ 			nxp,rom-version = <2>;
+@@ -129,7 +129,7 @@
+ 			};
+ 		};
+ 
+-		fit {
++		binman_imx_fit: fit {
+ 			description = "Configuration to load ATF before U-Boot";
+ #ifndef CONFIG_IMX_HAB
+ 			fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
+diff --git a/arch/arm/dts/imx8mq-librem5-r4-u-boot.dtsi b/arch/arm/dts/imx8mq-librem5-r4-u-boot.dtsi
+index 1a4568dac65..98da015a444 100644
+--- a/arch/arm/dts/imx8mq-librem5-r4-u-boot.dtsi
++++ b/arch/arm/dts/imx8mq-librem5-r4-u-boot.dtsi
+@@ -10,14 +10,10 @@
+ 	bootph-pre-ram;
+ };
+ 
+-&binman {
++&binman_imx_spl {
+ 	section {
+-		nxp-imx8mimage {
+-			section {
+-				signed-hdmi-imx8m {
+-					filename = "signed_dp_imx8m.bin";
+-				};
+-			};
++		signed-hdmi-imx8m {
++			filename = "signed_dp_imx8m.bin";
+ 		};
+ 	};
+ };
+diff --git a/arch/arm/dts/imx8mq-u-boot.dtsi b/arch/arm/dts/imx8mq-u-boot.dtsi
+index 48dbe94f0c4..72da674d245 100644
+--- a/arch/arm/dts/imx8mq-u-boot.dtsi
++++ b/arch/arm/dts/imx8mq-u-boot.dtsi
+@@ -38,7 +38,7 @@
+ 	section {
+ 		pad-byte = <0x00>;
+ 
+-		nxp-imx8mimage {
++		binman_imx_spl: nxp-imx8mimage {
+ 			filename = "u-boot-spl-mkimage.bin";
+ 			nxp,boot-from = "sd";
+ 			nxp,rom-version = <1>;
+@@ -87,7 +87,7 @@
+ 			};
+ 		};
+ 
+-		fit {
++		binman_imx_fit: fit {
+ 			description = "Configuration to load ATF before U-Boot";
+ #ifndef CONFIG_IMX_HAB
+ 			fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
 -- 
 2.43.0
 
