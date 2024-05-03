@@ -4,74 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 902E1C4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 21:41:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02EC4C4345F
+	for <u-boot@archiver.kernel.org>; Fri,  3 May 2024 01:05:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C32AF8829B;
-	Thu,  2 May 2024 23:41:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2483B88BB9;
+	Fri,  3 May 2024 03:05:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WpFDBtmh";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 5901388279; Thu,  2 May 2024 23:41:07 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1714698352;
+	bh=kw52sS47d9n7tBHDa2WHAr8qVvjMHGYVrnssL16RLAI=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=HyErJQqCJ/CVJVBn94rSyH96/poBXmdf9dXQCy/ydgZyX2XOGFnRXqDskwBUtXFGD
+	 60/y7k/t4vLnLgvtYEnl/IbbpRcLHj5JUmHEGjk+0CsWAx+iBufNAuuwyaKSJdttG3
+	 czOcg5eAV8gmptgnHOEGI01+WTGIiRCEpox1Kuw68ehaWMKXH6GPOMGlXZhYYDiYSg
+	 iRiWLC8CvaTMlj8mtWn3qkAmODZOJAn6b3KrM6ocXp1/L7E8Xqvm5tK5/iyqhK0A37
+	 Wu+DiIvTGPqf9/6khnwypZoIFqmiejYd+tp5iZgEzSMb/aUyZDYfEYzX/TiEd0JInd
+	 DLGnZZ+z8ObuQ==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D4538829B
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 23:41:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=macroalpha82@gmail.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-6ee35146ac5so2640667a34.0
- for <u-boot@lists.denx.de>; Thu, 02 May 2024 14:41:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1714686063; x=1715290863; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Di8yD7lCuIf+VfSUdLHvrM6MZuim9Hce2sCwzD6MR8s=;
- b=WpFDBtmhmn9kiEgBiRINXZdz1T1GR+9Uaqq880bhX9uO/4nOgSbYVy93kFTj7IIMZE
- 2LC4Xb3Wo9Fwse7mmV9JR9Dfvy5kV4gQewnEFlE95FB5ILCWXUPkVgcBhc7sECVZaqn9
- qp5by6meIwWkpTm3cCbrMmz9XsevJp8bTE128tYM5N/d2jbVwJtXa527+lTB9+aEhGWG
- 38+6jzEZE3BOAcZwkJyHpkGKoMZsTfFvpNTJfAABwBUsrzV7NiIrQCW04M1HdOvvnBfU
- dQs8WRZPkuJjkjbAJajpPZfzKi+o709y9rakdp2dZeOLy7iZNfqZBMUW3g/4r75PhBly
- DEqw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714686063; x=1715290863;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Di8yD7lCuIf+VfSUdLHvrM6MZuim9Hce2sCwzD6MR8s=;
- b=bfrnNorpWHK5rmEuvKI+UNK0UH23nTdYtwkZR3qBi3vm9tN+Y17pgmDQ6vJ3RDO2ro
- ikXCo/9Wa0RAGTxt1nSAcY9e3L03najzBBYNnVEDV6w3aDISu9R05cd7K6hb9M22s7n1
- k8PeHDDnrdOe4tRs98r0xmx6W/rb1/EJhwW6akFuWpmXJhNf4fOMz7PjtA25vGKc47Be
- f/fw2k7UfsoKq8zmuXJs2frLuIqxrhNLKFVUsGCJEWggZRrlDMRaP5XLWaSXjzkfjtFb
- BiMof7S6tMu5SiWtwM4Df5he5BZ3p1QGrGuNldz4e/ahmoHxOjVeYlqWHX5XIzGnM5Sl
- AhkQ==
-X-Gm-Message-State: AOJu0YwiecfeNw2WVPmWfDjzhnyX8oqF9fqquusgLrbkPp/pzgaNzVN3
- IksehKp3MuZEXmehbCugk7ULQnigTJ3W6kOwKmR2IwdKJ3XtaAeoLV5STQ==
-X-Google-Smtp-Source: AGHT+IGXZJ1JNspZOGNyqbFqILMQmYt0e9gEvt6pAMRus6lI5S537kQJFQsj+6ehglU1+Ra0QD1HFg==
-X-Received: by 2002:a05:6830:1042:b0:6ee:169c:93d0 with SMTP id
- b2-20020a056830104200b006ee169c93d0mr1292104otp.14.1714686063414; 
- Thu, 02 May 2024 14:41:03 -0700 (PDT)
-Received: from localhost.localdomain ([75.28.21.198])
- by smtp.gmail.com with ESMTPSA id
- j5-20020a056830270500b006ee5c675e42sm356566otu.49.2024.05.02.14.41.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 May 2024 14:41:03 -0700 (PDT)
-From: Chris Morgan <macroalpha82@gmail.com>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 9E8BE88BAF;
+ Fri,  3 May 2024 03:05:49 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1714698351;
+ bh=kw52sS47d9n7tBHDa2WHAr8qVvjMHGYVrnssL16RLAI=;
+ h=From:To:Cc:Subject:Date:From;
+ b=dfNh7Ggur20MV9GR/oJNq7Wf5Ext85LEqIUnW+KVYnVazfzpQIkiDIz6djQeiZfHq
+ 2YXhlbKvj6rFodqSOWCiV1BIcLOa11TR3ikkTXV6msLSuwdtyN3M9pwv2ZSgfcBkuX
+ tD2Agh+0PNT+3TRigGXaVmtCgkvUvuL3o7L2y3ZJ3RvgCTnbAbeVlH4E9Pk9lG4L++
+ BLRETK6+FXL4PQE5O6BiEqUx8C9TcgMgq0WERJXda6piJZHYg2sjLmU3yxrFOmXP9G
+ G6/qvgEVDXwlE0zx5FfEHvIhT07cIUGHyxeiepenH4uK8/0xJni9vbkY11nyzY4+S4
+ m1yFihXmkY6CQ==
+From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
-Cc: jagan@edgeble.ai, jonas@kwiboo.se, trini@konsulko.com,
- kever.yang@rock-chips.com, philipp.tomsich@vrull.eu, sjg@chromium.org,
- Chris Morgan <macromorgan@hotmail.com>
-Subject: [PATCH V3] board: rockchip: add Powkiddy X55
-Date: Thu,  2 May 2024 16:40:57 -0500
-Message-Id: <20240502214057.1092773-1-macroalpha82@gmail.com>
-X-Mailer: git-send-email 2.34.1
+Cc: anton.gres@ifm.com, ch@denx.de, Marek Vasut <marex@denx.de>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Adam Ford <aford173@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Angus Ainslie <angus@akkea.ca>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Simon Glass <sjg@chromium.org>,
+ Stefan Eichenberger <stefan.eichenberger@toradex.com>,
+ Stefano Babic <sbabic@denx.de>, Tim Harvey <tharvey@gateworks.com>,
+ Tom Rini <trini@konsulko.com>, kernel@puri.sm, u-boot@dh-electronics.com
+Subject: [PATCH v2 1/4] binman: Add nxp_imx8mcst etype for i.MX8M flash.bin
+ signing
+Date: Fri,  3 May 2024 03:05:09 +0200
+Message-ID: <20240503010518.263458-1-marex@denx.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -90,266 +77,271 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Chris Morgan <macromorgan@hotmail.com>
+Add new binman etype which allows signing both the SPL and fitImage sections
+of i.MX8M flash.bin using CST. There are multiple DT properties which govern
+the signing process, nxp,loader-address is the only mandatory one which sets
+the SPL signature start address without the imx8mimage header, this should be
+SPL text base. The key material can be configured using optional DT properties
+nxp,srk-table, nxp,csf-crt, nxp,img-crt, all of which default the key material
+names generated by CST tool scripts. The nxp,unlock property can be used to
+unlock CAAM access in SPL section.
 
-The Powkiddy X55 is a Rockchip RK3566 based handheld gaming device.
-UART, ADC, eMMC, and SDMMC are tested to work in U-Boot and this
-successfully boots mainline Linux.
-
-Kernel commit:
-e99adc97e21a ("arm64: dts: rockchip: Add Powkiddy X55")
-
-Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
+Signed-off-by: Marek Vasut <marex@denx.de>
 ---
-
-Changes since V2:
- - Refactored to use the upstream device tree from Linux.
- - Removed logic for handling the adc button and instead simply try to
-   boot from sdmmc0 as a valid target first.
-
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Adam Ford <aford173@gmail.com>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Cc: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
+Cc: Angus Ainslie <angus@akkea.ca>
+Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
+Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Stefan Eichenberger <stefan.eichenberger@toradex.com>
+Cc: Stefano Babic <sbabic@denx.de>
+Cc: Tim Harvey <tharvey@gateworks.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: kernel@puri.sm
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
 ---
- arch/arm/dts/rk3566-powkiddy-x55-u-boot.dtsi |  9 +++
- arch/arm/mach-rockchip/rk3568/Kconfig        |  6 ++
- board/powkiddy/x55/Kconfig                   | 15 +++++
- board/powkiddy/x55/MAINTAINERS               |  7 +++
- board/powkiddy/x55/Makefile                  |  6 ++
- board/powkiddy/x55/x55.c                     | 39 +++++++++++++
- configs/powkiddy-x55-rk3566_defconfig        | 59 ++++++++++++++++++++
- doc/board/rockchip/rockchip.rst              |  1 +
- include/configs/powkiddy-x55-rk3566.h        | 12 ++++
- 9 files changed, 154 insertions(+)
- create mode 100644 arch/arm/dts/rk3566-powkiddy-x55-u-boot.dtsi
- create mode 100644 board/powkiddy/x55/Kconfig
- create mode 100644 board/powkiddy/x55/MAINTAINERS
- create mode 100644 board/powkiddy/x55/Makefile
- create mode 100644 board/powkiddy/x55/x55.c
- create mode 100644 configs/powkiddy-x55-rk3566_defconfig
- create mode 100644 include/configs/powkiddy-x55-rk3566.h
+V2: - Use configparser module for generating the configuration INI file
+    - Use config template as an input, parse it, modify only keys of interest
+    - Pull magic values into top level variables
+    - Rename nxp,csf-key and nxp,img-key to nxp,csf-crt and nxp,img-crt
+    - Return unmodified data if signing unrecognized (non-SPL/non-FIT) section
+---
+ tools/binman/btool/cst.py          |  48 +++++++++
+ tools/binman/etype/nxp_imx8mcst.py | 163 +++++++++++++++++++++++++++++
+ 2 files changed, 211 insertions(+)
+ create mode 100644 tools/binman/btool/cst.py
+ create mode 100644 tools/binman/etype/nxp_imx8mcst.py
 
-diff --git a/arch/arm/dts/rk3566-powkiddy-x55-u-boot.dtsi b/arch/arm/dts/rk3566-powkiddy-x55-u-boot.dtsi
+diff --git a/tools/binman/btool/cst.py b/tools/binman/btool/cst.py
 new file mode 100644
-index 0000000000..c440201ec7
+index 00000000000..30e78bdbbd9
 --- /dev/null
-+++ b/arch/arm/dts/rk3566-powkiddy-x55-u-boot.dtsi
-@@ -0,0 +1,9 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include "rk356x-u-boot.dtsi"
-+
-+/ {
-+	chosen {
-+		u-boot,spl-boot-order = &sdmmc0, &sdmmc1, &sdhci;
-+	};
-+};
-diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
-index af537d912a..014ebf9f0b 100644
---- a/arch/arm/mach-rockchip/rk3568/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3568/Kconfig
-@@ -22,6 +22,11 @@ config TARGET_ODROID_M1_RK3568
- 	help
- 	  Hardkernel ODROID-M1 single board computer with a RK3568B2 SoC.
- 
-+config TARGET_POWKIDDY_X55_RK3566
-+	bool "Powkiddy X55"
-+	help
-+	  Powkiddy X55 handheld gaming console with an RK3566 SoC.
-+
- config TARGET_QUARTZ64_RK3566
- 	bool "Pine64 Quartz64"
- 	help
-@@ -48,5 +53,6 @@ source "board/rockchip/evb_rk3568/Kconfig"
- source "board/anbernic/rgxx3_rk3566/Kconfig"
- source "board/hardkernel/odroid_m1/Kconfig"
- source "board/pine64/quartz64_rk3566/Kconfig"
-+source "board/powkiddy/x55/Kconfig"
- 
- endif
-diff --git a/board/powkiddy/x55/Kconfig b/board/powkiddy/x55/Kconfig
-new file mode 100644
-index 0000000000..a7b3ed4d0d
---- /dev/null
-+++ b/board/powkiddy/x55/Kconfig
-@@ -0,0 +1,15 @@
-+if TARGET_POWKIDDY_X55_RK3566
-+
-+config SYS_BOARD
-+	default "x55"
-+
-+config SYS_VENDOR
-+	default "powkiddy"
-+
-+config SYS_CONFIG_NAME
-+	default "powkiddy-x55-rk3566"
-+
-+config BOARD_SPECIFIC_OPTIONS
-+	def_bool y
-+
-+endif
-diff --git a/board/powkiddy/x55/MAINTAINERS b/board/powkiddy/x55/MAINTAINERS
-new file mode 100644
-index 0000000000..01ae8da19d
---- /dev/null
-+++ b/board/powkiddy/x55/MAINTAINERS
-@@ -0,0 +1,7 @@
-+X55
-+M:	Chris Morgan <macromorgan@hotmail.com>
-+S:	Maintained
-+F:	board/powkiddy/x55
-+F:	include/configs/powkiddy-x55-rk3566.h
-+F:	configs/powkiddy-x55-rk3566_defconfig
-+F:	arch/arm/dts/rk3566-powkiddy-x55-u-boot.dtsi
-diff --git a/board/powkiddy/x55/Makefile b/board/powkiddy/x55/Makefile
-new file mode 100644
-index 0000000000..55c8c16aa1
---- /dev/null
-+++ b/board/powkiddy/x55/Makefile
-@@ -0,0 +1,6 @@
-+# SPDX-License-Identifier:     GPL-2.0+
++++ b/tools/binman/btool/cst.py
+@@ -0,0 +1,48 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright 2024 Marek Vasut <marex@denx.de>
 +#
-+# Copyright (c) 2023 Chris Morgan <macromorgan@hotmail.com>
++"""Bintool implementation for cst"""
++
++import re
++
++from binman import bintool
++
++class Bintoolcst(bintool.Bintool):
++    """Image generation for U-Boot
++
++    This bintool supports running `cst` with some basic parameters as
++    needed by binman.
++    """
++    def __init__(self, name):
++        super().__init__(name, 'Sign NXP i.MX image')
++
++    # pylint: disable=R0913
++    def run(self, output_fname=None):
++        """Run cst
++
++        Args:
++            output_fname: Output filename to write to
++        """
++        args = []
++        if output_fname:
++            args += ['-o', output_fname]
++        return self.run_cmd(*args)
++
++    def fetch(self, method):
++        """Fetch handler for cst
++
++        This installs cst using the apt utility.
++
++        Args:
++            method (FETCH_...): Method to use
++
++        Returns:
++            True if the file was fetched and now installed, None if a method
++            other than FETCH_BIN was requested
++
++        Raises:
++            Valuerror: Fetching could not be completed
++        """
++        if method != bintool.FETCH_BIN:
++            return None
++        return self.apt_install('imx-code-signing-tool')
+diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/nxp_imx8mcst.py
+new file mode 100644
+index 00000000000..132127ad482
+--- /dev/null
++++ b/tools/binman/etype/nxp_imx8mcst.py
+@@ -0,0 +1,163 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright 2023-2024 Marek Vasut <marex@denx.de>
++# Written with much help from Simon Glass <sjg@chromium.org>
++#
++# Entry-type module for generating the i.MX8M code signing tool
++# input configuration file and invocation of cst on generated
++# input configuration file and input data to be signed.
 +#
 +
-+obj-y += x55.o
-diff --git a/board/powkiddy/x55/x55.c b/board/powkiddy/x55/x55.c
-new file mode 100644
-index 0000000000..b2703e6382
---- /dev/null
-+++ b/board/powkiddy/x55/x55.c
-@@ -0,0 +1,39 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2023 Chris Morgan <macromorgan@hotmail.com>
-+ */
++import configparser
++import struct
 +
-+#include <asm/io.h>
++from collections import OrderedDict
 +
-+#define GPIO4_BASE		0xfe770000
-+#define GPIO_SWPORT_DR_L	0x0000
-+#define GPIO_SWPORT_DDR_L	0x0008
-+#define GPIO_B4			BIT(12)
-+#define GPIO_B5			BIT(13)
-+#define GPIO_B6			BIT(14)
++from binman.entry import Entry
++from binman.etype.mkimage import Entry_mkimage
++from binman.etype.section import Entry_section
++from binman import elf
++from dtoc import fdt_util
++from u_boot_pylib import tools
 +
-+#define GPIO_WRITEMASK(bits)	((bits) << 16)
++MAGIC_NXP_IMX_IVT = 0x412000d1
++MAGIC_FITIMAGE    = 0xedfe0dd0
 +
-+/*
-+ * Start LED very early so user knows device is on. Set color
-+ * to red.
-+ */
-+void spl_board_init(void)
-+{
-+	/* Set GPIO4_B4, GPIO4_B5, and GPIO4_B6 to output. */
-+	writel(GPIO_WRITEMASK(GPIO_B6 | GPIO_B5 | GPIO_B4) | \
-+	       (GPIO_B6 | GPIO_B5 | GPIO_B4),
-+	       (GPIO4_BASE + GPIO_SWPORT_DDR_L));
-+	/* Set GPIO4_B5 and GPIO4_B6 to 0 and GPIO4_B4 to 1. */
-+	writel(GPIO_WRITEMASK(GPIO_B6 | GPIO_B5 | GPIO_B4) | GPIO_B4,
-+	       (GPIO4_BASE + GPIO_SWPORT_DR_L));
-+}
++csf_config_template = """
++[Header]
++  Version = 4.3
++  Hash Algorithm = sha256
++  Engine = CAAM
++  Engine Configuration = 0
++  Certificate Format = X509
++  Signature Format = CMS
 +
-+int rk_board_late_init(void)
-+{
-+	/* Turn off red LED and turn on orange LED. */
-+	writel(GPIO_WRITEMASK(GPIO_B6 | GPIO_B5 | GPIO_B4) | GPIO_B6,
-+	       (GPIO4_BASE + GPIO_SWPORT_DR_L));
++[Install SRK]
++  File = "SRK_1_2_3_4_table.bin"
++  Source index = 0
 +
-+	return 0;
-+}
-diff --git a/configs/powkiddy-x55-rk3566_defconfig b/configs/powkiddy-x55-rk3566_defconfig
-new file mode 100644
-index 0000000000..db996fd570
---- /dev/null
-+++ b/configs/powkiddy-x55-rk3566_defconfig
-@@ -0,0 +1,59 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-powkiddy-x55"
-+CONFIG_ROCKCHIP_RK3568=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_DEBUG_UART_BASE=0xFE660000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_SYS_LOAD_ADDR=0xc00800
-+CONFIG_DEBUG_UART=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-powkiddy-x55.dtb"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_SPL_MAX_SIZE=0x40000
-+CONFIG_SPL_PAD_TO=0x7f8000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_ATF=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_PMIC=y
-+CONFIG_CMD_REGULATOR=y
-+# CONFIG_SPL_DOS_PARTITION is not set
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_LIVE=y
-+CONFIG_OF_UPSTREAM=y
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+CONFIG_SPL_REGMAP=y
-+CONFIG_SPL_SYSCON=y
-+CONFIG_SPL_CLK=y
-+CONFIG_ROCKCHIP_GPIO=y
-+CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_MISC=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_DM_PMIC=y
-+CONFIG_PMIC_RK8XX=y
-+CONFIG_REGULATOR_RK8XX=y
-+CONFIG_PWM_ROCKCHIP=y
-+CONFIG_SPL_RAM=y
-+CONFIG_BAUDRATE=1500000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_SYSRESET=y
-+CONFIG_ERRNO_STR=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index 9a726e9cde..924a8d0886 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -104,6 +104,7 @@ List of mainline supported Rockchip boards:
-      - Pine64 SOQuartz on Blade (soquartz-blade-rk3566)
-      - Pine64 SOQuartz on CM4-IO (soquartz-cm4-rk3566)
-      - Pine64 SOQuartz on Model A (soquartz-model-a-rk3566)
-+     - Powkiddy X55 (powkiddy-x55-rk3566)
-      - Radxa CM3 IO Board (radxa-cm3-io-rk3566)
- 
- * rk3568
-diff --git a/include/configs/powkiddy-x55-rk3566.h b/include/configs/powkiddy-x55-rk3566.h
-new file mode 100644
-index 0000000000..4b25c6a877
---- /dev/null
-+++ b/include/configs/powkiddy-x55-rk3566.h
-@@ -0,0 +1,12 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
++[Install CSFK]
++  File = "CSF1_1_sha256_4096_65537_v3_usr_crt.pem"
 +
-+#ifndef __POWKIDDY_X55_RK3566_H
-+#define __POWKIDDY_X55_RK3566_H
++[Authenticate CSF]
 +
-+#include <configs/rk3568_common.h>
++[Unlock]
++  Engine = CAAM
++  Features = MID
 +
-+#define ROCKCHIP_DEVICE_SETTINGS \
-+			"stdout=serial,vidconsole\0" \
-+			"stderr=serial,vidconsole\0"
++[Install Key]
++  Verification index = 0
++  Target Index = 2
++  File = "IMG1_1_sha256_4096_65537_v3_usr_crt.pem"
 +
-+#endif
++[Authenticate Data]
++  Verification index = 2
++  Blocks = 0x1234 0x78 0xabcd "data.bin"
++"""
++
++class Entry_nxp_imx8mcst(Entry_mkimage):
++    """NXP i.MX8M CST .cfg file generator and cst invoker
++
++    Properties / Entry arguments:
++        - nxp,loader-address - loader address (SPL text base)
++    """
++
++    def __init__(self, section, etype, node):
++        super().__init__(section, etype, node)
++        self.required_props = ['nxp,loader-address']
++
++    def ReadNode(self):
++        super().ReadNode()
++        self.loader_address = fdt_util.GetInt(self._node, 'nxp,loader-address')
++        self.srk_table = fdt_util.GetString(self._node, 'nxp,srk-table', 'SRK_1_2_3_4_table.bin')
++        self.csf_crt = fdt_util.GetString(self._node, 'nxp,csf-crt', 'CSF1_1_sha256_4096_65537_v3_usr_crt.pem')
++        self.img_crt = fdt_util.GetString(self._node, 'nxp,img-crt', 'IMG1_1_sha256_4096_65537_v3_usr_crt.pem')
++        self.unlock = fdt_util.GetBool(self._node, 'nxp,unlock')
++        self.ReadEntries()
++
++    def BuildSectionData(self, required):
++        data, input_fname, uniq = self.collect_contents_to_file(
++            self._entries.values(), 'input')
++
++        # Parse the input data and figure out what it is that is being signed.
++        # - If it is mkimage'd imx8mimage, then extract to be signed data size
++        #   from imx8mimage header, and calculate CSF blob offset right past
++        #   the SPL from this information.
++        # - If it is fitImage, then pad the image to 4k, add generated IVT and
++        #   sign the whole payload, then append CSF blob at the end right past
++        #   the IVT.
++        signtype = struct.unpack('<I', data[:4])[0]
++        signbase = self.loader_address
++        signsize = 0
++        if signtype == MAGIC_NXP_IMX_IVT: # SPL/imx8mimage
++            # Sign the payload including imx8mimage header
++            # (extra 0x40 bytes before the payload)
++            signbase -= 0x40
++            signsize = struct.unpack('<I', data[24:28])[0] - signbase
++            # Remove mkimage generated padding from the end of data
++            data = data[:signsize]
++        elif signtype == MAGIC_FITIMAGE: # fitImage
++            # Align fitImage to 4k
++            signsize = tools.align(len(data), 0x1000)
++            data += tools.get_bytes(0, signsize - len(data))
++            # Add generated IVT
++            data += struct.pack('<I', MAGIC_NXP_IMX_IVT)
++            data += struct.pack('<I', signbase + signsize) # IVT base
++            data += struct.pack('<I', 0)
++            data += struct.pack('<I', 0)
++            data += struct.pack('<I', 0)
++            data += struct.pack('<I', signbase + signsize) # IVT base
++            data += struct.pack('<I', signbase + signsize + 0x20) # CSF base
++            data += struct.pack('<I', 0)
++        else:
++            # Unknown section type, pass input data through.
++            return data
++
++        # Write out customized data to be signed
++        output_dname = tools.get_output_filename(f'nxp.cst-input-data.{uniq}')
++        tools.write_file(output_dname, data)
++
++        # Generate CST configuration file used to sign payload
++        cfg_fname = tools.get_output_filename('nxp.csf-config-txt.%s' % uniq)
++        config = configparser.ConfigParser()
++        # Do not make key names lowercase
++        config.optionxform = str
++        # Load configuration template and modify keys of interest
++        config.read_string(csf_config_template)
++        config['Install SRK']['File'] = '"' + self.srk_table + '"'
++        config['Install CSFK']['File'] = '"' + self.csf_crt + '"'
++        config['Install Key']['File'] = '"' + self.img_crt + '"'
++        config['Authenticate Data']['Blocks'] = hex(signbase) + ' 0 ' + hex(len(data)) + ' "' + str(output_dname) + '"'
++        if not self.unlock:
++            config.remove_section('Unlock')
++        with open(cfg_fname, 'w') as cfgf:
++            config.write(cfgf)
++
++        output_fname = tools.get_output_filename(f'nxp.csf-output-blob.{uniq}')
++        args = ['-i', cfg_fname, '-o', output_fname]
++        if self.cst.run_cmd(*args) is not None:
++            outdata = tools.read_file(output_fname)
++            return data + outdata
++        else:
++            # Bintool is missing; just use the input data as the output
++            self.record_missing_bintool(self.cst)
++            return data
++
++    def SetImagePos(self, image_pos):
++        # Customized SoC specific SetImagePos which skips the mkimage etype
++        # implementation and removes the 0x48 offset introduced there. That
++        # offset is only used for uImage/fitImage, which is not the case in
++        # here.
++        upto = 0x00
++        for entry in super().GetEntries().values():
++            entry.SetOffsetSize(upto, None)
++
++            # Give up if any entries lack a size
++            if entry.size is None:
++                return
++            upto += entry.size
++
++        Entry_section.SetImagePos(self, image_pos)
++
++    def AddBintools(self, btools):
++        super().AddBintools(btools)
++        self.cst = self.AddBintool(btools, 'cst')
 -- 
-2.34.1
+2.43.0
 
