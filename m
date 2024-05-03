@@ -4,67 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D460C4345F
-	for <u-boot@archiver.kernel.org>; Fri,  3 May 2024 14:49:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC6EFC4345F
+	for <u-boot@archiver.kernel.org>; Fri,  3 May 2024 15:20:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2E5D88125;
-	Fri,  3 May 2024 16:49:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 1E848882B1;
+	Fri,  3 May 2024 17:20:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xH0XXLDn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qYzvkGCp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C2EF882D7; Fri,  3 May 2024 16:49:40 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E7D6A882D7; Fri,  3 May 2024 17:20:10 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CB5D880F8
- for <u-boot@lists.denx.de>; Fri,  3 May 2024 16:49:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 101BB882A7
+ for <u-boot@lists.denx.de>; Fri,  3 May 2024 17:20:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 443EnZWj058255;
- Fri, 3 May 2024 09:49:35 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1714747775;
- bh=P5lF3t2QEhFmDpEYIm7emkjCPBk1XtMMdA1T52iLGB4=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=xH0XXLDnIjNcW4grW4n+KpZBFIQAiN4bag8iChy92bhDM5H1LF+MFrmLyMlcjlf8t
- eaGtsB0fJPOS75GXyzkiQmBXv9naA4R6BRelx2jXXqi8OGlB9b3/7W1zC1Qr9z1i9U
- OLh6rxghlchfgVGKeaqDrbX+0bij0Tlssz48QDY8=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 443EnZMj031807
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 3 May 2024 09:49:35 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 3
- May 2024 09:49:35 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 3 May 2024 09:49:35 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 443EnZ8q063408;
- Fri, 3 May 2024 09:49:35 -0500
-Date: Fri, 3 May 2024 09:49:35 -0500
-From: Bryan Brattlof <bb@ti.com>
-To: Dhruva Gole <d-gole@ti.com>
-CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Nitin Yadav
- <n-yadav@ti.com>, <nm@ti.com>, <vigneshr@ti.com>
-Subject: Re: [PATCH 1/2] arm: dts: add U-Boot dtbs for the am625-lp-sk
-Message-ID: <20240503144935.odc6en5mpxd4txa6@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20240429-am62q-wip-v1-0-927fd2e0a53b@ti.com>
- <20240429-am62q-wip-v1-1-927fd2e0a53b@ti.com>
- <20240503052826.gd4omfui7kdkibjw@dhruva>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a599c55055dso95123666b.0
+ for <u-boot@lists.denx.de>; Fri, 03 May 2024 08:20:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1714749607; x=1715354407; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=6Y42fwSjksQRwDGFraYnUZDma/DZsRCxPs9jYWEMwxU=;
+ b=qYzvkGCp3L4iL5YTUBqV5q96PvqeqmCA6xP2gSZoZatWCABabpbAiWDhoHeOh2L5/z
+ Xo90Cm0CQA12mDHMeUbz5yXKgd5s5Y6Ygr2Ij1tMZLtYbRT+Ai5k5pobJxpB9omgX6jJ
+ 6/RR2YIiFET1du6RRy8zyRMNDRuPK+ohJ8gMEloQ2DEiiAYXlu4grKr7/51btMdMIYIl
+ u3SnwbnFrQmMaL1msKB81ggNZ52MMIYR2lIPV0HFxsxIVTL6GmNwAaCLkw6V2TsU8oaE
+ rdP8nWFFjV1w621pvlytfB6WCMI7jv4BxOagOM5Jk45KM9DATWqniabW6FRRx157KQID
+ Zt2Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714749607; x=1715354407;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6Y42fwSjksQRwDGFraYnUZDma/DZsRCxPs9jYWEMwxU=;
+ b=G8eQDL8tOmwNOABH/paFuchrrVV5SPE+EQlOkhaTXl3tT4IlYC852JZjXRZLq6XS+m
+ 3m1JI0wJmArGu2vUCLg1FrW9qNLjN5HTtmTms1ZF4bx6xgdgiL/kJOcg0/JpoAojq8w3
+ goY+I++SahhCBI1ysEAKPKAaxNBKMbbhsJdpTPR3k/PNrE+hnNvhi3lMMNBGzu14zeRR
+ ksiUUg51gw7JnbJrbTCLY6TIG9OF4e4mgzoxrUsEwvByYGPrFYsh4oLaB638Aj+vYH0a
+ NIbVumPE+iUhMlr3U7HgDLnwgpJx0A2ISspbt7WVR2oI5wSxH6q31WRtzisFQpHv4ZVt
+ a7tA==
+X-Gm-Message-State: AOJu0YxFqvujs7yeQOVVrQNP1jlCHqe3V/Whbok4QbJZ5GoqDVA38lfl
+ BkJeFlT2twB78xFHwtAKRt5WtV6dijEZdR5vJaKmUkGiiPRkVoOD8u+JC5AgkMg=
+X-Google-Smtp-Source: AGHT+IFy59H1HeMSDqveDTEMVqXz45m4iDPKPkh18uVhEnBiB9uBIPFSKUOnv0ZZ53u9r/Yj30zSbQ==
+X-Received: by 2002:a17:906:158c:b0:a55:b25d:9c9e with SMTP id
+ k12-20020a170906158c00b00a55b25d9c9emr1603412ejd.74.1714749607469; 
+ Fri, 03 May 2024 08:20:07 -0700 (PDT)
+Received: from cymric.caleb.rex.connolly.tech ([2a02:8109:aa0d:be00::11db])
+ by smtp.gmail.com with ESMTPSA id
+ z21-20020a170906715500b00a599c8b6531sm309609ejj.178.2024.05.03.08.20.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 03 May 2024 08:20:06 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+To: Brandon Maier <brandon.maier@collins.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Joao Marcos Costa <jmcosta944@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH] scripts: gen_compile_commands: fix invalid escape sequence
+ warning
+Date: Fri,  3 May 2024 17:18:36 +0200
+Message-ID: <20240503152000.2819669-1-caleb.connolly@linaro.org>
+X-Mailer: git-send-email 2.45.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <20240503052826.gd4omfui7kdkibjw@dhruva>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,71 +91,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On May  3, 2024 thus sayeth Dhruva Gole:
-> On Apr 30, 2024 at 14:57:45 -0500, Bryan Brattlof wrote:
-> > From: Nitin Yadav <n-yadav@ti.com>
-> > 
-> > Add the U-Boot device tree overrides for the am62x-lp-sk reference
-> > board.
-> > 
-> > Signed-off-by: Nitin Yadav <n-yadav@ti.com>
-> > Signed-off-by: Bryan Brattlof <bb@ti.com>
-> > ---
-> >  arch/arm/dts/k3-am62-lp-sk-binman.dtsi   |   21 +
-> >  arch/arm/dts/k3-am62-lp-sk-u-boot.dtsi   |   17 +
-> >  arch/arm/dts/k3-am62-lp4-50-800-800.dtsi | 2190 ++++++++++++++++++++++++++++++
-> >  arch/arm/dts/k3-am62-r5-lp-sk.dts        |   82 ++
-> >  4 files changed, 2310 insertions(+)
-> > 
-> > diff --git a/arch/arm/dts/k3-am62-lp-sk-binman.dtsi b/arch/arm/dts/k3-am62-lp-sk-binman.dtsi
-> > new file mode 100644
-> > index 0000000000000..de425a4b54f81
-> > --- /dev/null
-> > +++ b/arch/arm/dts/k3-am62-lp-sk-binman.dtsi
-> > @@ -0,0 +1,21 @@
-> > +// SPDX-License-Identifier: GPL-2.0
-> > +/*
-> > + * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-> 
-> Can make this 2024, here and everywhere else.
-> 
-> > + */
-> > +
-> > +#include "k3-binman.dtsi"
-> > +#include "k3-am625-sk-binman.dtsi"
-> > +
-> > +#ifdef CONFIG_TARGET_AM625_A53_EVM
-> > +
-> > +#define SPL_AM62_LP_SK_DTB "spl/dts/ti/k3-am62-lp-sk.dtb"
-> > +
-> > +&spl_am625_sk_dtb {
-> > +	filename = SPL_AM62_LP_SK_DTB;
-> > +};
-> > +
-> > +&spl_am625_sk_dtb_unsigned {
-> > +	filename = SPL_AM62_LP_SK_DTB;
-> > +};
-> > +
-> > +#endif
-> > diff --git a/arch/arm/dts/k3-am62-lp-sk-u-boot.dtsi b/arch/arm/dts/k3-am62-lp-sk-u-boot.dtsi
-> > new file mode 100644
-> > index 0000000000000..08f572446657e
-> > --- /dev/null
-> > +++ b/arch/arm/dts/k3-am62-lp-sk-u-boot.dtsi
-> > @@ -0,0 +1,17 @@
-> > +// SPDX-License-Identifier: GPL-2.0
-> > +/*
-> > + * AM62x LP SK dts file for SPLs
-> > + * Copyright (C) 2021-2023 Texas Instruments Incorporated - https://www.ti.com/
-> 
-> 2024 ^^
-> 
-> [...]
-> 
-> With that fixed,
-> Reviewed-by: Dhruva Gole <d-gole@ti.com>
-> 
+Since Python 3.12 unrecognised escape sequences trigger a SyntaxWarning.
+Convert the '\#' string to a raw string so the backslash is correctly
+used as a literal.
 
-Okay I'll get that fixed for v2
+Ported from Linux commit dae4a0171e25 ("gen_compile_commands: fix invalid
+escape sequence warning").
 
-~Bryan
+This updates the script to be in-line with Linux 6.9-rc6.
+
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+---
+ scripts/gen_compile_commands.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/scripts/gen_compile_commands.py b/scripts/gen_compile_commands.py
+index fec513e55474..e746adddd929 100755
+--- a/scripts/gen_compile_commands.py
++++ b/scripts/gen_compile_commands.py
+@@ -171,9 +171,9 @@ def process_line(root_directory, command_prefix, file_path):
+     # The .cmd files are intended to be included directly by Make, so they
+     # escape the pound sign '#', either as '\#' or '$(pound)' (depending on the
+     # kernel version). The compile_commands.json file is not interepreted
+     # by Make, so this code replaces the escaped version with '#'.
+-    prefix = command_prefix.replace('\#', '#').replace('$(pound)', '#')
++    prefix = command_prefix.replace(r'\#', '#').replace('$(pound)', '#')
+ 
+     # Return the canonical path, eliminating any symbolic links encountered in the path.
+     abs_path = os.path.realpath(os.path.join(root_directory, file_path))
+     if not os.path.exists(abs_path):
+-- 
+2.45.0
+
