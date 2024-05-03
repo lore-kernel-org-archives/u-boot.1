@@ -4,117 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 473B0C4345F
-	for <u-boot@archiver.kernel.org>; Fri,  3 May 2024 02:30:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0F4DC4345F
+	for <u-boot@archiver.kernel.org>; Fri,  3 May 2024 02:32:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 822A788374;
-	Fri,  3 May 2024 04:30:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6901288451;
+	Fri,  3 May 2024 04:32:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="mj/RMMEC";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="h3CZ9P+i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E46288302; Fri,  3 May 2024 04:30:19 +0200 (CEST)
+ id 563A588B30; Fri,  3 May 2024 04:31:29 +0200 (CEST)
 Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5D4188BC4
- for <u-boot@lists.denx.de>; Fri,  3 May 2024 04:30:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D0D5688374
+ for <u-boot@lists.denx.de>; Fri,  3 May 2024 04:31:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p2.samsung.com (unknown [182.195.41.46])
+Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
  by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20240503022954epoutp045dae6a52d5bfdff330c60ff840343c85~L2ab4yhfg0495204952epoutp04X
- for <u-boot@lists.denx.de>; Fri,  3 May 2024 02:29:54 +0000 (GMT)
+ 20240503023123epoutp0459f233b21a06bc8f69d765cce75ab31f~L2bvOCZ6t0937209372epoutp04l;
+ Fri,  3 May 2024 02:31:23 +0000 (GMT)
 DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20240503022954epoutp045dae6a52d5bfdff330c60ff840343c85~L2ab4yhfg0495204952epoutp04X
+ 20240503023123epoutp0459f233b21a06bc8f69d765cce75ab31f~L2bvOCZ6t0937209372epoutp04l
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1714703394;
- bh=fLA5kKUYdzRTXvvdr86QZmkZMegwgHqCy4oh5yi8NI4=;
+ s=mail20170921; t=1714703483;
+ bh=MS+e2eF4CcD6A6G3EIQj/5yfnTbsajp/n/W4qSxSE1U=;
  h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=mj/RMMECKFVfZip//LeqANRgQ/8V1ipjKdMcPFcp8Fw5BTsCfpuuQmpieNYNzvEFI
- K7zemwflrgPLUOnDuU3EUQ1QNJqHTn1IxZrVj/ff3n8ULZkWDXh4PVsJuIMRJBnGrf
- wI9JTY/oVH3OsugDJD5ORkzgmeFECzfxqDo22CFI=
-Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTP id
- 20240503022954epcas1p1097db7ed028de954611f971661b1b64b~L2abp1ATE1872118721epcas1p1v;
- Fri,  3 May 2024 02:29:54 +0000 (GMT)
-Received: from epsmges1p1.samsung.com (unknown [182.195.36.133]) by
- epsnrtp2.localdomain (Postfix) with ESMTP id 4VVvsF0g2nz4x9Pw; Fri,  3 May
- 2024 02:29:53 +0000 (GMT)
+ b=h3CZ9P+ii4PG4JYhaxUvJne1ieTNYfXkDhiobVJAtFB0/fA8ilMMe3URw1o5aKyia
+ axQSB6BDprWrTk1ulsr/HjOZq+x0EN2Mj1aZPn44iX70FsWCbf92nH+AU4OzJt5hsk
+ dH9CwjI5qebd+SocKAhpO3LZsW3Tlx7GmMj5f5SM=
+Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
+ epcas1p3.samsung.com (KnoxPortal) with ESMTP id
+ 20240503023123epcas1p373b0b173607f1484472e3881e697cde2~L2bu-7yul0421304213epcas1p3i;
+ Fri,  3 May 2024 02:31:23 +0000 (GMT)
+Received: from epsmges1p1.samsung.com (unknown [182.195.38.237]) by
+ epsnrtp4.localdomain (Postfix) with ESMTP id 4VVvty3cgbz4x9Pq; Fri,  3 May
+ 2024 02:31:22 +0000 (GMT)
 Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
  epsmges1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- E1.A3.09662.02C44366; Fri,  3 May 2024 11:29:52 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTPA id
- 20240503022952epcas1p4009ad5eb33a9462bf8ff876795125d5b~L2aZ0DIiy1549315493epcas1p4k;
- Fri,  3 May 2024 02:29:52 +0000 (GMT)
-Received: from epsmgmc1p1new.samsung.com (unknown [182.195.42.40]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20240503022952epsmtrp16d998439331d8174487ff929b5ce8575~L2aZzO37b2340423404epsmtrp1W;
- Fri,  3 May 2024 02:29:52 +0000 (GMT)
-X-AuditID: b6c32a35-2b3fa700000025be-50-66344c20626a
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgmc1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 21.D4.09238.F1C44366; Fri,  3 May 2024 11:29:51 +0900 (KST)
-Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip1.samsung.com
+ B8.14.09662.A7C44366; Fri,  3 May 2024 11:31:22 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ epcas1p1.samsung.com (KnoxPortal) with ESMTPA id
+ 20240503023121epcas1p1e620c0a0a9791c00705ba384d6cc56b4~L2btefDsE0356903569epcas1p11;
+ Fri,  3 May 2024 02:31:21 +0000 (GMT)
+Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20240503023121epsmtrp2f5499126fd1526fda6acfaf258227db9~L2btdLfn62863928639epsmtrp2d;
+ Fri,  3 May 2024 02:31:21 +0000 (GMT)
+X-AuditID: b6c32a35-2b3fa700000025be-5a-66344c7a0d54
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ CA.3C.19234.97C44366; Fri,  3 May 2024 11:31:21 +0900 (KST)
+Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
  (KnoxPortal) with ESMTPA id
- 20240503022951epsmtip1498b60fef421842790b5016b326b4e7f~L2aZnX4gk2448324483epsmtip1b;
- Fri,  3 May 2024 02:29:51 +0000 (GMT)
+ 20240503023121epsmtip2f466715dc6744edd06ba14d4743d5790~L2bs9aEk12447624476epsmtip25;
+ Fri,  3 May 2024 02:31:21 +0000 (GMT)
 From: "Jaehoon Chung" <jh80.chung@samsung.com>
 To: "'Tom Rini'" <trini@konsulko.com>, <u-boot@lists.denx.de>
-Cc: "'Weijie Gao'" <weijie.gao@mediatek.com>, "'GSS_MTK_Uboot_upstream'"
- <GSS_MTK_Uboot_upstream@mediatek.com>, "'Peng Fan'" <peng.fan@nxp.com>
-In-Reply-To: <20240502013138.2383421-1-trini@konsulko.com>
-Subject: RE: [PATCH 01/81] mmc: Migrate MMC_SUPPORTS_TUNING to Kconfig
-Date: Fri, 3 May 2024 11:29:51 +0900
-Message-ID: <0cfe01da9d01$c6e33c80$54a9b580$@samsung.com>
+Cc: "'Peng Fan'" <peng.fan@nxp.com>, "'Ryan Chen'"
+ <ryan_chen@aspeedtech.com>, "'Chia-Wei Wang'" <chiawei_wang@aspeedtech.com>,
+ "'Aspeed BMC SW team'" <BMC-SW@aspeedtech.com>, "'Joel Stanley'"
+ <joel@jms.id.au>, "'Matthias Brugger'" <mbrugger@suse.com>, "'Peter
+ Robinson'" <pbrobinson@gmail.com>, "'Thomas Fitzsimmons'"
+ <fitzsim@fitzsim.org>, "'Alex Nemirovsky'"
+ <alex.nemirovsky@cortina-access.com>, "'Masahisa Kojima'"
+ <kojima.masahisa@socionext.com>, "'Neil Armstrong'"
+ <neil.armstrong@linaro.org>, "'Simon Glass'" <sjg@chromium.org>, "'Caleb
+ Connolly'" <caleb.connolly@linaro.org>, "'Sumit Garg'"
+ <sumit.garg@linaro.org>, "'Ryder Lee'" <ryder.lee@mediatek.com>, "'Weijie
+ Gao'" <weijie.gao@mediatek.com>, "'Chunfeng Yun'"
+ <chunfeng.yun@mediatek.com>, "'GSS_MTK_Uboot_upstream'"
+ <GSS_MTK_Uboot_upstream@mediatek.com>, "'Tianrui Wei'"
+ <tianrui-wei@outlook.com>, "'Philipp Tomsich'" <philipp.tomsich@vrull.eu>,
+ "'Kever	Yang'" <kever.yang@rock-chips.com>, "'Nobuhiro Iwamatsu'"
+ <iwamatsu@nigauri.org>, "'Marek Vasut'" <marek.vasut+renesas@mailbox.org>,
+ "'Eugeniy Paltsev'" <Eugeniy.Paltsev@synopsys.com>, "'Patrice Chotard'"
+ <patrice.chotard@foss.st.com>, "'Patrick Delaunay'"
+ <patrick.delaunay@foss.st.com>, "'Thierry Reding'" <treding@nvidia.com>,
+ "'Svyatoslav Ryhel'" <clamor95@gmail.com>, "'Kunihiko Hayashi'"
+ <hayashi.kunihiko@socionext.com>, "'Dai Okamura'"
+ <okamura.dai@socionext.com>, "'Stefan Roese'" <sr@denx.de>, "'Michal Simek'"
+ <michal.simek@amd.com>
+In-Reply-To: <20240502013138.2383421-42-trini@konsulko.com>
+Subject: RE: [PATCH 42/81] mmc: Remove <common.h> and add needed includes
+Date: Fri, 3 May 2024 11:31:21 +0900
+Message-ID: <0cff01da9d01$fc5aace0$f51006a0$@samsung.com>
 X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQGwoKaIExPajO/gZphEj9uH2EwYrwHFBUoMscqZw4A=
+Thread-Index: AQHFBUoMnM/fPDX8QHG447vZHFEIDgKCSqq1Aq4u2j6xhnWC4A==
 Content-Language: ko
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrBKsWRmVeSWpSXmKPExsWy7bCmvq6Cj0mawZ2DlharFzUwW/xY9YXV
- YuqkzewWb/d2sls0vDjN7MDq8erAKnaPs3d2MHq0nNzP4rHx3Q6mAJaobJuM1MSU1CKF1Lzk
- /JTMvHRbJe/geOd4UzMDQ11DSwtzJYW8xNxUWyUXnwBdt8wcoMVKCmWJOaVAoYDE4mIlfTub
- ovzSklSFjPziElul1IKUnALTAr3ixNzi0rx0vbzUEitDAwMjU6DChOyMtedPsBcs62es6H60
- hL2BcUJpFyMnh4SAicSe92vYuhi5OIQEdjBKPG6exArhfGKUODnpCiOE841RouXnSjaYlp/v
- jzGB2EICexklXrzjhyh6ySjRf+YtC0iCTUBP4v+ihcwgtoiArcS+uX/ZQYqYBSYySvxZ/xBo
- LAcHp4CVRGerGkiNsICbxMpVvWC9LAIqEksOvwFbxitgKdFyZBcrxGIFiZ9Pl7FCzLSSOLPh
- BTuIzSwgIjG7s40ZZL6EwC12iY5VK8DmSwi4SDzpToXoFZZ4dXwLO4QtJfGyv40dor6ZUWLp
- koOsEE4Po8S/hutQbxpL7F86mQlkELOApsT6XfoQy/gk3n3tYYWYzyvR0SYEUa0icen1SyaY
- +Xef/Ie62UPiVNdyaJD2MkocmbmTaQKj/Cwkd89C2LCAkWkVo1hqQXFuemqxYYEhPC6T83M3
- MYKTnJbpDsaJbz/oHWJk4mA8xCjBwawkwqs92ThNiDclsbIqtSg/vqg0J7X4EKMpMCQnMkuJ
- JucD02xeSbyhiaWBiZmRsYmFoZmhkjjvmStlqUIC6YklqdmpqQWpRTB9TBycUg1MXK/U8rjv
- cF78+XRVhuPKJ5u//PU5yDNNyeisHp/Xmg0TXx8ND5RdF+c0N9ktXZ/ns6egvJWr1butdx+K
- tsftvfPL4OYprcN23xj/LTfbP23SHPb9H1u25TH9flV+7tnngDUcJRPPhz8qMf4/b912zv+e
- Txrkf/PyK9l6WoUe69980JYn78FXpoVSzyeZC8TlPZy6QIThm55zom2VsOPck7NSksuMm8SE
- /pfe2K4op6VU8HFm/pXYN4cfcZr82ubaYZ3k4nvqMSO3pILBqqn7ZbVuZhQcyCr7ZXNWO9+p
- 2+GHJ4eZf5pGXGWYaCLrmwncaSv+LT1yc03rWRa2mpbv9emiQUoaVRXe81wmzz+kxFKckWio
- xVxUnAgA9XWURvsDAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrLLMWRmVeSWpSXmKPExsWy7bCSnK68j0mawZVDNharFzUwW/xY9YXV
- YuqkzewWb/d2sls0vDjN7MDq8erAKnaPs3d2MHq0nNzP4rHx3Q6mAJYoLpuU1JzMstQifbsE
- roy150+wFyzrZ6zofrSEvYFxQmkXIyeHhICJxM/3x5i6GLk4hAR2M0qsevCQCSIhJfH56VS2
- LkYOIFtY4vDhYoia54wSC+5sZwepYRPQk/i/aCEziC0iYC9xuKuTDaSIWWAyo8Sk/9MYQRJC
- At2MEu8+O4EM4hSwkuhsVQMJCwu4Saxc1csCYrMIqEgsOfyGDcTmFbCUaDmyixXiBgWJn0+X
- sULMt5I4s+EF2F5mARGJ2Z1tzBMYBWYhcRcwMq5ilEwtKM5Nz002LDDMSy3XK07MLS7NS9dL
- zs/dxAgOUS2NHYz35v/TO8TIxMF4iFGCg1lJhFd7snGaEG9KYmVValF+fFFpTmrxIUZpDhYl
- cV7DGbNThATSE0tSs1NTC1KLYLJMHJxSDUx8mpLSD1lN7s5Rf7M7RrQp8t6+nVF6DhbnLs02
- l/gw44dW+6vVofmGcRtDPv3/MvN5iegyWd18F/al62umCHHP2ZRx7HuNuTPDffnFGt2XX8RO
- /e27/WyLWDM/H4tB9c3r3TN3Jm/9+377I9Y7X00UVeTcQozfuuS+f738z7VH5/yjz5cy7Xg5
- J6ZK/k7oM9FgraCyF5ueWr2d+v22zte9d+92Zt4+mnIx1S9Jyn171br1a+LXMvxbuO7Rj4kS
- YsJ3KqaFBTw54aU6+cXFh7Me1Zm3uhzgnvypa/HVTvtFf0Ln6/THCydunmtSy3H0QIitknho
- 8ea5s3i51hzd8uNsSgeLxJ5LX9Qn3fQ7VTfxuBJLcUaioRZzUXEiABM/nt/AAgAA
-X-CMS-MailID: 20240503022952epcas1p4009ad5eb33a9462bf8ff876795125d5b
+X-Brightmail-Tracker: H4sIAAAAAAAAA01Ta1BUZRju23P2nAO5dALMD/rhemSmARNYLu4HAilpc/LSkDXWpA1scOS2
+ 7K57lkswY1sICXJnEAfUgEDkkiTiuquyEMyEXJLrgCkrqICCgYRmIEPEumj9e57ne973eef9
+ 5qUw23rSkYpUaDi1QiZnCGtc1+rstjlxj9ch95ratWhkLItE3YsmIeo4qhOgU8YbOPreeBpH
+ zdmZAB2rPCVE+hEjjmrKtBhqvfkdQNPJPFrsXsKQrnCBQDk/FWMopWqYQCX5Y0LU2NYrRI8N
+ twCanb+AoYX2xyTKqxsk0fnqWgLNVz8VouNVSWiwPJ9AA3cXMPSsQQdQ+/lZATpvzCJQbnI6
+ gW4v2qCCvIskmm5MI5H2YSe2jWFT+pYINt00QrLF2l6cHUpWs2eKruNsXVUZyY5nXyJZQ5GJ
+ ZHv//BVjp5qrSXZ48BrB/jasB6yh2Chgj7Y34Wxz/g0hm5k8QwSt+yLaL4KThXFqMacIVYZF
+ KsL9md2fBL8f7L3FXbJZ4oOkjFghi+H8mR17gjZ/EClf2SAjjpPJY1ekIBnPM24BfmplrIYT
+ Ryh5jT/DqcLkKm+VKy+L4WMV4a4KTuMrcXf38F4xhkRHmLIaCJXBBBJMpSahFpToQDqwoiDt
+ BWeaj2HpwJqypfUAai9mrpI5AOeN9wWvSHP9wKuSvqv3ccuDAcD2tMurZBLA5z3XXrgI2hUu
+ l5ViZmxP+0Pj6SXSbMLo+6/D3rZRIh1QlBW9FZ4742v22NEfwupsA2aWcdoJflsnNcsi2gfO
+ l+etBovhwvhZoaVlIHzY1CEwY4y2h8VpqZjF88wK9t2zsuAd0HArZVW3g1NtDaQFO8InM42E
+ eRxIJwNYUf6L0EIyAPxHO0RYXJ6wqSJfYB4Io51h3RU3S5gNnPkrQ2iWIS2Cx1JtLW4n2Pdo
+ UvCyv2lsWWjBLJzoGCYt+zEC2NU/gOWA9UX/m7vov4QSIKgGb3EqPiac4yUqyavPDFXG1IMX
+ x+PirQe507OuLUBAgRYAKYyxF23K9zxkKwqTfZ3IqZXB6lg5x7cA75VF5mKOa0OVK9en0ARL
+ vHzcvbZ4eHohyRYJs07UNRDH2dLhMg0XzXEqTv2yTkBZOWoFqi+pewm/j+86kKBZOkKcPOGw
+ oWRupHz71YqTfv479El4qetO27kkKuCSrmTvvst78YOTORvCvKTLVMjN+cM245P2axbffjfT
+ 5sfPAwMLW+IzOn9w2siPdnzlMDsqfeAQL+/8443F1P7bSe996vFz4Yk7NddF72zd1cNu98lU
+ R7nX4r1WqHJjdAUz9Nz5wBIfN+qoVReOeuoL95cb43e2Tnl/VrB78G8wud7lI/GDpONPpT37
+ QnKh1rPy4zsBs7eKKMD07rd2njLEPBkbnpjmoiakE4ELUYlNcpvXpHdrZ/iDXVfSCuZjq84d
+ 2aZcI/6m/+wmhcthY7vdm3G+04e55u4LQ48YnI+QSVwwNS/7F0sthrfFBAAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrMIsWRmVeSWpSXmKPExsWy7bCSvG6lj0mawbzN2hb3n/SxW5z/fZfV
+ 4lTLNiaLOfvOsVi075vLYnGgv5fRomP5HFaLHff3sVisXtTAbHH4RhOjxdvmYovf5/8yW2yb
+ /pPNYsLa2cwWrSvvsFksmPyE1WLv8YusFu933mK0+PBjI7PFz5Pv2S0mrb/GbrFu1Ro2ix+r
+ vrBadK+stri2ZDKbxZWHP5ktvm3Zxmhxct0HJot1+/rYLCY2d7FZ3P7NZzF10mZ2i7d7O9kt
+ Gl6cZnZQ8mi99JfNo+vufXaP2Q0XWTyuNxd5zJt1gsVj/cpF7B5P+7eye+ycdZfd4+LHY8we
+ rw6sYve4c20Pm8fZOzsYPXbO3sfk0XJyP4vHgcnnWD16m9+xBYhHcdmkpOZklqUW6dslcGXc
+ 7dvCVrDzLmPF3YV3WRsYF2xj7GLk5JAQMJG4tPsxSxcjF4eQwHZGicsLrzFDJKQkPj+dytbF
+ yAFkC0scPlwMUfOcUeLdt29gzWwCehL/Fy0EqxcRsJc43NXJBlLELPCZW+L1gkdQU3cxSpzu
+ ncMCMolTwFpixTwrkAZhAU+JVf07mUHCLAIqEo3rzUHCvAKWEj+WTII6TkHi59NlrBDznSRe
+ 7D/FBGIzC4hIzO5sY57AKDALibuAkXEVo2hqQXFuem5ygaFecWJucWleul5yfu4mRnC60Ara
+ wbhs/V+9Q4xMHIyHGCU4mJVEeLUnG6cJ8aYkVlalFuXHF5XmpBYfYpTmYFES51XO6UwREkhP
+ LEnNTk0tSC2CyTJxcEo1MAVO8p381Njt1fwpv1K4F35P9ffz3vTr7NE3uQmtm6S8kldwz/h3
+ JHTtpLluVjuKVn+2DpOv7jjFM2EOD+c55u2yqf94l0pwyZuKSN9qsuSwuRVz3inDcrfAxUfz
+ WVbW75rt6VMSJDpBcwlbd8wU97Utj+4/m7QofHqHUJKzywLmD2b8LydW+ElN6FuhFr1kiuV8
+ Ke1SPmPFo6fyPoT3q23wOF+1wyIwX9og9Z5xypNe/ps3PxS/Vty/POPY/p/b1j9gqNvWf7/3
+ XJxKU5eu+Xruj3rFzxKa9I7P/FXGIKhb8OzDIpP7D04bKX39t/2LyV6OjV9rRZcoefgq5TiF
+ x2a9efNVqHeXmPaEQ9fbTZRYijMSDbWYi4oTAXICdZmGAwAA
+X-CMS-MailID: 20240503023121epcas1p1e620c0a0a9791c00705ba384d6cc56b4
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
 CMS-TYPE: 101P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20240502013146epcas1p3dce70115dbffcbd41eb7f657d6188d2e
-References: <CGME20240502013146epcas1p3dce70115dbffcbd41eb7f657d6188d2e@epcas1p3.samsung.com>
- <20240502013138.2383421-1-trini@konsulko.com>
+X-CMS-RootMailID: 20240502013256epcas1p2193bd08d0a5e52094b36e8824d38f0b9
+References: <20240502013138.2383421-1-trini@konsulko.com>
+ <CGME20240502013256epcas1p2193bd08d0a5e52094b36e8824d38f0b9@epcas1p2.samsung.com>
+ <20240502013138.2383421-42-trini@konsulko.com>
+X-Mailman-Approved-At: Fri, 03 May 2024 04:32:19 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,17 +166,27 @@ X-Virus-Status: Clean
 
 > -----Original Message-----
 > From: Tom Rini <trini@konsulko.com>
-> Sent: Thursday, May 2, 2024 10:30 AM
+> Sent: Thursday, May 2, 2024 10:31 AM
 > To: u-boot@lists.denx.de
-> Cc: Weijie Gao <weijie.gao@mediatek.com>; GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>;
-> Peng Fan <peng.fan@nxp.com>; Jaehoon Chung <jh80.chung@samsung.com>
-> Subject: [PATCH 01/81] mmc: Migrate MMC_SUPPORTS_TUNING to Kconfig
+> Cc: Peng Fan <peng.fan@nxp.com>; Jaehoon Chung <jh80.chung@samsung.com>; Ryan Chen
+> <ryan_chen@aspeedtech.com>; Chia-Wei Wang <chiawei_wang@aspeedtech.com>; Aspeed BMC SW team <BMC-
+> SW@aspeedtech.com>; Joel Stanley <joel@jms.id.au>; Matthias Brugger <mbrugger@suse.com>; Peter
+> Robinson <pbrobinson@gmail.com>; Thomas Fitzsimmons <fitzsim@fitzsim.org>; Alex Nemirovsky
+> <alex.nemirovsky@cortina-access.com>; Masahisa Kojima <kojima.masahisa@socionext.com>; Neil Armstrong
+> <neil.armstrong@linaro.org>; Simon Glass <sjg@chromium.org>; Caleb Connolly
+> <caleb.connolly@linaro.org>; Sumit Garg <sumit.garg@linaro.org>; Ryder Lee <ryder.lee@mediatek.com>;
+> Weijie Gao <weijie.gao@mediatek.com>; Chunfeng Yun <chunfeng.yun@mediatek.com>; GSS_MTK_Uboot_upstream
+> <GSS_MTK_Uboot_upstream@mediatek.com>; Tianrui Wei <tianrui-wei@outlook.com>; Philipp Tomsich
+> <philipp.tomsich@vrull.eu>; Kever Yang <kever.yang@rock-chips.com>; Nobuhiro Iwamatsu
+> <iwamatsu@nigauri.org>; Marek Vasut <marek.vasut+renesas@mailbox.org>; Eugeniy Paltsev
+> <Eugeniy.Paltsev@synopsys.com>; Patrice Chotard <patrice.chotard@foss.st.com>; Patrick Delaunay
+> <patrick.delaunay@foss.st.com>; Thierry Reding <treding@nvidia.com>; Svyatoslav Ryhel
+> <clamor95@gmail.com>; Kunihiko Hayashi <hayashi.kunihiko@socionext.com>; Dai Okamura
+> <okamura.dai@socionext.com>; Stefan Roese <sr@denx.de>; Michal Simek <michal.simek@amd.com>
+> Subject: [PATCH 42/81] mmc: Remove <common.h> and add needed includes
 >
-> The constraints on the MMC_SUPPORTS_TUNING symbol can easily be
-> expressed in Kconfig (with the addition of SPL_MMC_SUPPORTS_TUNING).
-> Furthermore, in order to remove <common.h> from the MMC subsystem, the
-> way this symbol is used today needs to be changed in order to continue
-> functioning.
+> Remove <common.h> from this driver directory and when needed
+> add missing include files directly.
 >
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 
@@ -155,474 +196,877 @@ Best Regards,
 Jaehoon Chung
 
 > ---
-> Cc: Weijie Gao <weijie.gao@mediatek.com>
-> Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
 > Cc: Peng Fan <peng.fan@nxp.com>
 > Cc: Jaehoon Chung <jh80.chung@samsung.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Ryan Chen <ryan_chen@aspeedtech.com>
+> Cc: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
+> Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>
+> Cc: Joel Stanley <joel@jms.id.au>
+> Cc: Matthias Brugger <mbrugger@suse.com>
+> Cc: Peter Robinson <pbrobinson@gmail.com>
+> Cc: Thomas Fitzsimmons <fitzsim@fitzsim.org>
+> Cc: Alex Nemirovsky <alex.nemirovsky@cortina-access.com>
+> Cc: Masahisa Kojima <kojima.masahisa@socionext.com>
+> Cc: Neil Armstrong <neil.armstrong@linaro.org>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Caleb Connolly <caleb.connolly@linaro.org>
+> Cc: Sumit Garg <sumit.garg@linaro.org>
+> Cc: Ryder Lee <ryder.lee@mediatek.com>
+> Cc: Weijie Gao <weijie.gao@mediatek.com>
+> Cc: Chunfeng Yun <chunfeng.yun@mediatek.com>
+> Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
+> Cc: Tianrui Wei <tianrui-wei@outlook.com>
+> Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
+> Cc: Kever Yang <kever.yang@rock-chips.com>
+> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> Cc: Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Thierry Reding <treding@nvidia.com>
+> Cc: Svyatoslav Ryhel <clamor95@gmail.com>
+> Cc: Kunihiko Hayashi <hayashi.kunihiko@socionext.com>
+> Cc: Dai Okamura <okamura.dai@socionext.com>
+> Cc: Stefan Roese <sr@denx.de>
+> Cc: Michal Simek <michal.simek@amd.com>
 > ---
->  arch/arm/mach-mediatek/Kconfig     |  1 +
->  arch/mips/mach-mtmips/Kconfig      |  1 +
->  drivers/mmc/Kconfig                | 11 +++++++++++
->  drivers/mmc/am654_sdhci.c          |  6 +++---
->  drivers/mmc/fsl_esdhc.c            |  4 ++--
->  drivers/mmc/fsl_esdhc_imx.c        |  8 ++++----
->  drivers/mmc/mmc-uclass.c           |  2 +-
->  drivers/mmc/mmc.c                  | 12 ++++++------
->  drivers/mmc/mtk-sd.c               |  4 ++--
->  drivers/mmc/octeontx_hsmmc.c       | 12 ++++++------
->  drivers/mmc/omap_hsmmc.c           |  4 ++--
->  drivers/mmc/sdhci-cadence.c        |  2 +-
->  drivers/mmc/sdhci.c                |  4 ++--
->  include/configs/mt7621.h           |  3 ---
->  include/configs/mt7623.h           |  3 ---
->  include/configs/octeontx2_common.h |  5 -----
->  include/mmc.h                      |  9 +--------
->  17 files changed, 43 insertions(+), 48 deletions(-)
+>  drivers/mmc/am654_sdhci.c     | 1 -
+>  drivers/mmc/arm_pl180_mmci.c  | 1 -
+>  drivers/mmc/aspeed_sdhci.c    | 1 -
+>  drivers/mmc/atmel_sdhci.c     | 1 -
+>  drivers/mmc/bcm2835_sdhci.c   | 1 -
+>  drivers/mmc/bcm2835_sdhost.c  | 1 -
+>  drivers/mmc/bcmstb_sdhci.c    | 1 -
+>  drivers/mmc/ca_dw_mmc.c       | 1 -
+>  drivers/mmc/davinci_mmc.c     | 1 -
+>  drivers/mmc/dw_mmc.c          | 1 -
+>  drivers/mmc/exynos_dw_mmc.c   | 1 -
+>  drivers/mmc/f_sdh30.c         | 1 -
+>  drivers/mmc/fsl_esdhc.c       | 1 -
+>  drivers/mmc/fsl_esdhc_imx.c   | 1 -
+>  drivers/mmc/fsl_esdhc_spl.c   | 2 +-
+>  drivers/mmc/ftsdc010_mci.c    | 1 -
+>  drivers/mmc/gen_atmel_mci.c   | 2 +-
+>  drivers/mmc/hi6220_dw_mmc.c   | 1 -
+>  drivers/mmc/iproc_sdhci.c     | 1 -
+>  drivers/mmc/jz_mmc.c          | 1 -
+>  drivers/mmc/kona_sdhci.c      | 1 -
+>  drivers/mmc/meson_gx_mmc.c    | 1 -
+>  drivers/mmc/mmc-pwrseq.c      | 1 -
+>  drivers/mmc/mmc-uclass.c      | 1 -
+>  drivers/mmc/mmc.c             | 3 ++-
+>  drivers/mmc/mmc_boot.c        | 1 -
+>  drivers/mmc/mmc_bootdev.c     | 1 -
+>  drivers/mmc/mmc_legacy.c      | 1 -
+>  drivers/mmc/mmc_spi.c         | 1 -
+>  drivers/mmc/mmc_write.c       | 1 -
+>  drivers/mmc/msm_sdhci.c       | 1 -
+>  drivers/mmc/mtk-sd.c          | 1 -
+>  drivers/mmc/mv_sdhci.c        | 1 -
+>  drivers/mmc/mvebu_mmc.c       | 1 -
+>  drivers/mmc/mxcmmc.c          | 1 -
+>  drivers/mmc/mxsmmc.c          | 1 -
+>  drivers/mmc/nexell_dw_mmc.c   | 1 -
+>  drivers/mmc/npcm_sdhci.c      | 1 -
+>  drivers/mmc/omap_hsmmc.c      | 1 -
+>  drivers/mmc/owl_mmc.c         | 1 -
+>  drivers/mmc/pci_mmc.c         | 1 -
+>  drivers/mmc/piton_mmc.c       | 1 -
+>  drivers/mmc/rockchip_dw_mmc.c | 1 -
+>  drivers/mmc/rockchip_sdhci.c  | 1 -
+>  drivers/mmc/rpmb.c            | 1 -
+>  drivers/mmc/s5p_sdhci.c       | 1 -
+>  drivers/mmc/sandbox_mmc.c     | 1 -
+>  drivers/mmc/sdhci-adma.c      | 1 -
+>  drivers/mmc/sdhci-cadence.c   | 1 -
+>  drivers/mmc/sdhci.c           | 2 +-
+>  drivers/mmc/sh_mmcif.c        | 1 -
+>  drivers/mmc/snps_dw_mmc.c     | 1 -
+>  drivers/mmc/socfpga_dw_mmc.c  | 1 -
+>  drivers/mmc/sti_sdhci.c       | 1 -
+>  drivers/mmc/stm32_sdmmc2.c    | 1 -
+>  drivers/mmc/sunxi_mmc.c       | 1 -
+>  drivers/mmc/tangier_sdhci.c   | 1 -
+>  drivers/mmc/tegra_mmc.c       | 1 -
+>  drivers/mmc/tmio-common.c     | 1 -
+>  drivers/mmc/uniphier-sd.c     | 1 -
+>  drivers/mmc/xenon_sdhci.c     | 1 -
+>  drivers/mmc/zynq_sdhci.c      | 1 -
+>  62 files changed, 5 insertions(+), 62 deletions(-)
 >
-> diff --git a/arch/arm/mach-mediatek/Kconfig b/arch/arm/mach-mediatek/Kconfig
-> index 82018bd9d3e3..ff1fdee5c8da 100644
-> --- a/arch/arm/mach-mediatek/Kconfig
-> +++ b/arch/arm/mach-mediatek/Kconfig
-> @@ -23,6 +23,7 @@ config TARGET_MT7622
->  config TARGET_MT7623
->  	bool "MediaTek MT7623 SoC"
->  	select CPU_V7A
-> +	select MMC_SUPPORTS_TUNING
->  	help
->  	  The MediaTek MT7623 is a ARM-based SoC with a quad-core Cortex-A7
->  	  including NEON and GPU, Mali-450 graphics, several DDR3 options,
-> diff --git a/arch/mips/mach-mtmips/Kconfig b/arch/mips/mach-mtmips/Kconfig
-> index 15b2792e619b..3fcd0b8465b4 100644
-> --- a/arch/mips/mach-mtmips/Kconfig
-> +++ b/arch/mips/mach-mtmips/Kconfig
-> @@ -80,6 +80,7 @@ config SOC_MT7621
->  	bool "MT7621"
->  	select MIPS_CM
->  	select MIPS_L2_CACHE
-> +	select MMC_SUPPORTS_TUNING
->  	select SYS_CACHE_SHIFT_5
->  	select SYS_MIPS_CACHE_INIT_RAM_LOAD
->  	select PINCTRL_MT7621
-> diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
-> index 549634891a36..d0944793c92d 100644
-> --- a/drivers/mmc/Kconfig
-> +++ b/drivers/mmc/Kconfig
-> @@ -147,9 +147,16 @@ config SPL_MMC_IO_VOLTAGE
->  	  support. For eMMC this not mandatory, but not enabling this option may
->  	  prevent the driver of using the faster modes.
->
-> +config MMC_SUPPORTS_TUNING
-> +	bool
-> +
-> +config SPL_MMC_SUPPORTS_TUNING
-> +	bool
-> +
->  config MMC_UHS_SUPPORT
->  	bool "enable UHS support"
->  	depends on MMC_IO_VOLTAGE
-> +	select MMC_SUPPORTS_TUNING
->  	help
->  	  The Ultra High Speed (UHS) bus is available on some SDHC and SDXC
->  	  cards. The IO voltage must be switchable from 3.3v to 1.8v. The bus
-> @@ -158,6 +165,7 @@ config MMC_UHS_SUPPORT
->  config SPL_MMC_UHS_SUPPORT
->  	bool "enable UHS support in SPL"
->  	depends on SPL_MMC_IO_VOLTAGE
-> +	select SPL_MMC_SUPPORTS_TUNING
->  	help
->  	  The Ultra High Speed (UHS) bus is available on some SDHC and SDXC
->  	  cards. The IO voltage must be switchable from 3.3v to 1.8v. The bus
-> @@ -193,6 +201,7 @@ config SPL_MMC_HS400_SUPPORT
->
->  config MMC_HS200_SUPPORT
->  	bool "enable HS200 support"
-> +	select MMC_SUPPORTS_TUNING
->  	help
->  	  The HS200 mode is support by some eMMC. The bus frequency is up to
->  	  200MHz. This mode requires tuning the IO.
-> @@ -200,6 +209,7 @@ config MMC_HS200_SUPPORT
->  config SPL_MMC_HS200_SUPPORT
->  	bool "enable HS200 support in SPL"
->  	depends on SPL_MMC
-> +	select SPL_MMC_SUPPORTS_TUNING
->  	help
->  	  The HS200 mode is support by some eMMC. The bus frequency is up to
->  	  200MHz. This mode requires tuning the IO.
-> @@ -347,6 +357,7 @@ config MMC_OCTEONTX
->  	bool "Marvell Octeon Multimedia Card Interface support"
->  	depends on (ARCH_OCTEON || ARCH_OCTEONTX || ARCH_OCTEONTX2)
->  	depends on DM_MMC
-> +	select MMC_SUPPORTS_TUNING if ARCH_OCTEONTX2
->  	help
->  	  This selects the Octeon Multimedia card Interface.
->  	  If you have an OcteonTX/TX2 or MIPS Octeon board with a
 > diff --git a/drivers/mmc/am654_sdhci.c b/drivers/mmc/am654_sdhci.c
-> index fadab7d40bb7..ffb461c2f6c1 100644
+> index ffb461c2f6c1..48fac7a11b48 100644
 > --- a/drivers/mmc/am654_sdhci.c
 > +++ b/drivers/mmc/am654_sdhci.c
-> @@ -397,7 +397,7 @@ static void am654_sdhci_write_b(struct sdhci_host *host, u8 val, int reg)
+> @@ -6,7 +6,6 @@
+>   */
 >
->  	writeb(val, host->ioaddr + reg);
->  }
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  #define ITAPDLY_LENGTH 32
->  #define ITAPDLY_LAST_INDEX (ITAPDLY_LENGTH - 1)
+>  #include <clk.h>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <malloc.h>
+>  #include <mmc.h>
+> diff --git a/drivers/mmc/arm_pl180_mmci.c b/drivers/mmc/arm_pl180_mmci.c
+> index cecc7ad783d0..f00b0ff0dc95 100644
+> --- a/drivers/mmc/arm_pl180_mmci.c
+> +++ b/drivers/mmc/arm_pl180_mmci.c
+> @@ -11,7 +11,6 @@
 >
-> @@ -500,7 +500,7 @@ static int am654_sdhci_execute_tuning(struct mmc *mmc, u8 opcode)
->  }
->  #endif
->  const struct sdhci_ops am654_sdhci_ops = {
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  	.platform_execute_tuning = am654_sdhci_execute_tuning,
->  #endif
->  	.deferred_probe		= am654_sdhci_deferred_probe,
-> @@ -560,7 +560,7 @@ static int j721e_4bit_sdhci_set_ios_post(struct sdhci_host *host)
->  }
+>  /* #define DEBUG */
 >
->  const struct sdhci_ops j721e_4bit_sdhci_ops = {
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  	.platform_execute_tuning = am654_sdhci_execute_tuning,
->  #endif
->  	.deferred_probe		= am654_sdhci_deferred_probe,
+> -#include "common.h"
+>  #include <clk.h>
+>  #include <errno.h>
+>  #include <log.h>
+> diff --git a/drivers/mmc/aspeed_sdhci.c b/drivers/mmc/aspeed_sdhci.c
+> index c9626c6beb8f..87a6f66ebb37 100644
+> --- a/drivers/mmc/aspeed_sdhci.c
+> +++ b/drivers/mmc/aspeed_sdhci.c
+> @@ -4,7 +4,6 @@
+>   * Eddie James <eajames@linux.ibm.com>
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <dm.h>
+>  #include <malloc.h>
+> diff --git a/drivers/mmc/atmel_sdhci.c b/drivers/mmc/atmel_sdhci.c
+> index d92bad97b71e..0b265196f025 100644
+> --- a/drivers/mmc/atmel_sdhci.c
+> +++ b/drivers/mmc/atmel_sdhci.c
+> @@ -4,7 +4,6 @@
+>   *		      Wenyou.Yang <wenyou.yang@atmel.com>
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <dm.h>
+>  #include <malloc.h>
+> diff --git a/drivers/mmc/bcm2835_sdhci.c b/drivers/mmc/bcm2835_sdhci.c
+> index 5e48394fd0fb..598a51d914a9 100644
+> --- a/drivers/mmc/bcm2835_sdhci.c
+> +++ b/drivers/mmc/bcm2835_sdhci.c
+> @@ -36,7 +36,6 @@
+>   * Inspired by sdhci-pci.c, by Pierre Ossman
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <log.h>
+>  #include <malloc.h>
+> diff --git a/drivers/mmc/bcm2835_sdhost.c b/drivers/mmc/bcm2835_sdhost.c
+> index 5c23c03d10d7..720127468d37 100644
+> --- a/drivers/mmc/bcm2835_sdhost.c
+> +++ b/drivers/mmc/bcm2835_sdhost.c
+> @@ -30,7 +30,6 @@
+>   *  sdhci.c and sdhci-pci.c by Pierre Ossman
+>   */
+>  #include <clk.h>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <mmc.h>
+>  #include <asm/arch/msg.h>
+> diff --git a/drivers/mmc/bcmstb_sdhci.c b/drivers/mmc/bcmstb_sdhci.c
+> index 49846adcf547..7bddbebb1622 100644
+> --- a/drivers/mmc/bcmstb_sdhci.c
+> +++ b/drivers/mmc/bcmstb_sdhci.c
+> @@ -6,7 +6,6 @@
+>   * Author: Thomas Fitzsimmons <fitzsim@fitzsim.org>
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <mach/sdhci.h>
+>  #include <malloc.h>
+> diff --git a/drivers/mmc/ca_dw_mmc.c b/drivers/mmc/ca_dw_mmc.c
+> index a17ed8c11cbe..54a2ba4795e3 100644
+> --- a/drivers/mmc/ca_dw_mmc.c
+> +++ b/drivers/mmc/ca_dw_mmc.c
+> @@ -4,7 +4,6 @@
+>   * Arthur Li <arthur.li@cortina-access.com>
+>   */
+>
+> -#include <common.h>
+>  #include <dwmmc.h>
+>  #include <fdtdec.h>
+>  #include <asm/global_data.h>
+> diff --git a/drivers/mmc/davinci_mmc.c b/drivers/mmc/davinci_mmc.c
+> index 3a3d23aec00a..5107fcd83625 100644
+> --- a/drivers/mmc/davinci_mmc.c
+> +++ b/drivers/mmc/davinci_mmc.c
+> @@ -6,7 +6,6 @@
+>   */
+>
+>  #include <config.h>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <errno.h>
+>  #include <mmc.h>
+> diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
+> index e1036641452a..e6107c770fe3 100644
+> --- a/drivers/mmc/dw_mmc.c
+> +++ b/drivers/mmc/dw_mmc.c
+> @@ -6,7 +6,6 @@
+>   */
+>
+>  #include <bouncebuf.h>
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <errno.h>
+>  #include <log.h>
+> diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
+> index 2f849c43b129..a51f762988da 100644
+> --- a/drivers/mmc/exynos_dw_mmc.c
+> +++ b/drivers/mmc/exynos_dw_mmc.c
+> @@ -4,7 +4,6 @@
+>   * Jaehoon Chung <jh80.chung@samsung.com>
+>   */
+>
+> -#include <common.h>
+>  #include <dwmmc.h>
+>  #include <fdtdec.h>
+>  #include <asm/global_data.h>
+> diff --git a/drivers/mmc/f_sdh30.c b/drivers/mmc/f_sdh30.c
+> index 3d587a464d50..f47cf8485216 100644
+> --- a/drivers/mmc/f_sdh30.c
+> +++ b/drivers/mmc/f_sdh30.c
+> @@ -5,7 +5,6 @@
+>   * Copyright 2021 Socionext, Inc.
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <dm.h>
+>  #include <malloc.h>
 > diff --git a/drivers/mmc/fsl_esdhc.c b/drivers/mmc/fsl_esdhc.c
-> index 595d88bd5625..5ac1c6a0e9e1 100644
+> index 5ac1c6a0e9e1..0c66980b6218 100644
 > --- a/drivers/mmc/fsl_esdhc.c
 > +++ b/drivers/mmc/fsl_esdhc.c
-> @@ -1102,7 +1102,7 @@ static int fsl_esdhc_reinit(struct udevice *dev)
->  	return esdhc_init_common(priv, &plat->mmc);
->  }
+> @@ -10,7 +10,6 @@
+>   */
 >
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  static int fsl_esdhc_execute_tuning(struct udevice *dev, uint32_t opcode)
->  {
->  	struct fsl_esdhc_plat *plat = dev_get_plat(dev);
-> @@ -1175,7 +1175,7 @@ static const struct dm_mmc_ops fsl_esdhc_ops = {
->  	.get_cd		= fsl_esdhc_get_cd,
->  	.send_cmd	= fsl_esdhc_send_cmd,
->  	.set_ios	= fsl_esdhc_set_ios,
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  	.execute_tuning = fsl_esdhc_execute_tuning,
->  #endif
->  	.reinit = fsl_esdhc_reinit,
+>  #include <config.h>
+> -#include <common.h>
+>  #include <command.h>
+>  #include <cpu_func.h>
+>  #include <errno.h>
 > diff --git a/drivers/mmc/fsl_esdhc_imx.c b/drivers/mmc/fsl_esdhc_imx.c
-> index b74c01400205..8b2ef9391f3e 100644
+> index 8b2ef9391f3e..a9b8d7dd67f3 100644
 > --- a/drivers/mmc/fsl_esdhc_imx.c
 > +++ b/drivers/mmc/fsl_esdhc_imx.c
-> @@ -635,7 +635,7 @@ static void set_sysctl(struct fsl_esdhc_priv *priv, struct mmc *mmc, uint clock)
->  	priv->clock = clock;
->  }
+> @@ -11,7 +11,6 @@
+>   */
 >
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  static int esdhc_change_pinstate(struct udevice *dev)
->  {
->  	struct fsl_esdhc_priv *priv = dev_get_priv(dev);
-> @@ -913,7 +913,7 @@ static int esdhc_set_ios_common(struct fsl_esdhc_priv *priv, struct mmc *mmc)
->  	int ret __maybe_unused;
->  	u32 clock;
+>  #include <config.h>
+> -#include <common.h>
+>  #include <command.h>
+>  #include <clk.h>
+>  #include <cpu_func.h>
+> diff --git a/drivers/mmc/fsl_esdhc_spl.c b/drivers/mmc/fsl_esdhc_spl.c
+> index 6d7c0cff22a5..1a11258be4de 100644
+> --- a/drivers/mmc/fsl_esdhc_spl.c
+> +++ b/drivers/mmc/fsl_esdhc_spl.c
+> @@ -3,7 +3,7 @@
+>   * Copyright 2013 Freescale Semiconductor, Inc.
+>   */
 >
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  	/*
->  	 * call esdhc_set_timing() before update the clock rate,
->  	 * This is because current we support DDR and SDR mode,
-> @@ -951,7 +951,7 @@ static int esdhc_set_ios_common(struct fsl_esdhc_priv *priv, struct mmc *mmc)
->  			esdhc_setbits32(&regs->sysctl, SYSCTL_PEREN | SYSCTL_CKEN);
->  	}
+> -#include <common.h>
+> +#include <config.h>
+>  #include <cpu_func.h>
+>  #include <hang.h>
+>  #include <mmc.h>
+> diff --git a/drivers/mmc/ftsdc010_mci.c b/drivers/mmc/ftsdc010_mci.c
+> index cabb747fbbdb..11e44264e47d 100644
+> --- a/drivers/mmc/ftsdc010_mci.c
+> +++ b/drivers/mmc/ftsdc010_mci.c
+> @@ -9,7 +9,6 @@
+>   * Author: Rick Chen (rick@andestech.com)
+>   */
 >
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  	/*
->  	 * For HS400/HS400ES mode, make sure set the strobe dll in the
->  	 * target clock rate. So call esdhc_set_strobe_dll() after the
-> @@ -1618,7 +1618,7 @@ static const struct dm_mmc_ops fsl_esdhc_ops = {
->  	.get_cd		= fsl_esdhc_get_cd,
->  	.send_cmd	= fsl_esdhc_send_cmd,
->  	.set_ios	= fsl_esdhc_set_ios,
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  	.execute_tuning	= fsl_esdhc_execute_tuning,
->  #endif
->  #if CONFIG_IS_ENABLED(MMC_HS400_ES_SUPPORT)
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <log.h>
+>  #include <malloc.h>
+> diff --git a/drivers/mmc/gen_atmel_mci.c b/drivers/mmc/gen_atmel_mci.c
+> index 3ee99558f6f9..6a531fa09615 100644
+> --- a/drivers/mmc/gen_atmel_mci.c
+> +++ b/drivers/mmc/gen_atmel_mci.c
+> @@ -8,7 +8,7 @@
+>   * Copyright (C) 2004-2006 Atmel Corporation
+>   */
+>
+> -#include <common.h>
+> +#include <config.h>
+>  #include <clk.h>
+>  #include <display_options.h>
+>  #include <dm.h>
+> diff --git a/drivers/mmc/hi6220_dw_mmc.c b/drivers/mmc/hi6220_dw_mmc.c
+> index dc0210402bd2..c68a9157bfcc 100644
+> --- a/drivers/mmc/hi6220_dw_mmc.c
+> +++ b/drivers/mmc/hi6220_dw_mmc.c
+> @@ -4,7 +4,6 @@
+>   * peter.griffin <peter.griffin@linaro.org>
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <dm.h>
+>  #include <dwmmc.h>
+> diff --git a/drivers/mmc/iproc_sdhci.c b/drivers/mmc/iproc_sdhci.c
+> index 11d86ad658f9..7ab74ff117a6 100644
+> --- a/drivers/mmc/iproc_sdhci.c
+> +++ b/drivers/mmc/iproc_sdhci.c
+> @@ -4,7 +4,6 @@
+>   *
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <errno.h>
+>  #include <malloc.h>
+> diff --git a/drivers/mmc/jz_mmc.c b/drivers/mmc/jz_mmc.c
+> index 61e48ee0f62d..fc10bb256a4d 100644
+> --- a/drivers/mmc/jz_mmc.c
+> +++ b/drivers/mmc/jz_mmc.c
+> @@ -6,7 +6,6 @@
+>   * Author: Paul Burton <paul.burton@imgtec.com>
+>   */
+>
+> -#include <common.h>
+>  #include <malloc.h>
+>  #include <mmc.h>
+>  #include <asm/global_data.h>
+> diff --git a/drivers/mmc/kona_sdhci.c b/drivers/mmc/kona_sdhci.c
+> index 2bbe673b9129..83f141226325 100644
+> --- a/drivers/mmc/kona_sdhci.c
+> +++ b/drivers/mmc/kona_sdhci.c
+> @@ -3,7 +3,6 @@
+>   * Copyright 2013 Broadcom Corporation.
+>   */
+>
+> -#include <common.h>
+>  #include <malloc.h>
+>  #include <sdhci.h>
+>  #include <linux/delay.h>
+> diff --git a/drivers/mmc/meson_gx_mmc.c b/drivers/mmc/meson_gx_mmc.c
+> index 0825c0a2a838..5852b24c6d2a 100644
+> --- a/drivers/mmc/meson_gx_mmc.c
+> +++ b/drivers/mmc/meson_gx_mmc.c
+> @@ -3,7 +3,6 @@
+>   * (C) Copyright 2016 Carlo Caione <carlo@caione.org>
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <cpu_func.h>
+>  #include <dm.h>
+> diff --git a/drivers/mmc/mmc-pwrseq.c b/drivers/mmc/mmc-pwrseq.c
+> index 2539f61323d1..a1c9624a2225 100644
+> --- a/drivers/mmc/mmc-pwrseq.c
+> +++ b/drivers/mmc/mmc-pwrseq.c
+> @@ -4,7 +4,6 @@
+>   * Jaehoon Chung <jh80.chung@samsung.com>
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <mmc.h>
+>  #include <pwrseq.h>
 > diff --git a/drivers/mmc/mmc-uclass.c b/drivers/mmc/mmc-uclass.c
-> index 24170c59ecc1..0685b86af464 100644
+> index 0685b86af464..da6a39b7d990 100644
 > --- a/drivers/mmc/mmc-uclass.c
 > +++ b/drivers/mmc/mmc-uclass.c
-> @@ -112,7 +112,7 @@ int mmc_getcd(struct mmc *mmc)
->  	return dm_mmc_get_cd(mmc->dev);
->  }
+> @@ -7,7 +7,6 @@
 >
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  static int dm_mmc_execute_tuning(struct udevice *dev, uint opcode)
->  {
->  	struct dm_mmc_ops *ops = mmc_get_ops(dev);
+>  #define LOG_CATEGORY UCLASS_MMC
+>
+> -#include <common.h>
+>  #include <bootdev.h>
+>  #include <log.h>
+>  #include <mmc.h>
 > diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
-> index 7b068c71ff37..4543d94c7205 100644
+> index 4543d94c7205..b18dc331f785 100644
 > --- a/drivers/mmc/mmc.c
 > +++ b/drivers/mmc/mmc.c
-> @@ -329,7 +329,7 @@ int mmc_set_blocklen(struct mmc *mmc, int len)
->  				   MMC_QUIRK_RETRY_SET_BLOCKLEN, 4);
->  }
+> @@ -8,7 +8,6 @@
+>   */
 >
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  static const u8 tuning_blk_pattern_4bit[] = {
->  	0xff, 0x0f, 0xff, 0x00, 0xff, 0xcc, 0xc3, 0xcc,
->  	0xc3, 0x3c, 0xcc, 0xff, 0xfe, 0xff, 0xfe, 0xef,
-> @@ -1621,7 +1621,7 @@ static inline int bus_width(uint cap)
->  }
+>  #include <config.h>
+> -#include <common.h>
+>  #include <blk.h>
+>  #include <command.h>
+>  #include <dm.h>
+> @@ -17,6 +16,7 @@
+>  #include <errno.h>
+>  #include <mmc.h>
+>  #include <part.h>
+> +#include <time.h>
+>  #include <linux/bitops.h>
+>  #include <linux/delay.h>
+>  #include <linux/printk.h>
+> @@ -24,6 +24,7 @@
+>  #include <malloc.h>
+>  #include <memalign.h>
+>  #include <linux/list.h>
+> +#include <linux/printk.h>
+>  #include <div64.h>
+>  #include "mmc_private.h"
 >
->  #if !CONFIG_IS_ENABLED(DM_MMC)
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  static int mmc_execute_tuning(struct mmc *mmc, uint opcode)
->  {
->  	return -ENOTSUPP;
-> @@ -1702,7 +1702,7 @@ void mmc_dump_capabilities(const char *text, uint caps)
->  struct mode_width_tuning {
->  	enum bus_mode mode;
->  	uint widths;
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  	uint tuning;
->  #endif
->  };
-> @@ -1743,7 +1743,7 @@ static inline int mmc_set_signal_voltage(struct mmc *mmc, uint signal_voltage)
->  #if !CONFIG_IS_ENABLED(MMC_TINY)
->  static const struct mode_width_tuning sd_modes_by_pref[] = {
->  #if CONFIG_IS_ENABLED(MMC_UHS_SUPPORT)
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  	{
->  		.mode = UHS_SDR104,
->  		.widths = MMC_MODE_4BIT | MMC_MODE_1BIT,
-> @@ -1846,7 +1846,7 @@ static int sd_select_mode_and_width(struct mmc *mmc, uint card_caps)
->  				mmc_set_clock(mmc, mmc->tran_speed,
->  						MMC_CLK_ENABLE);
+> diff --git a/drivers/mmc/mmc_boot.c b/drivers/mmc/mmc_boot.c
+> index 0a74b1fb776a..367c957b5181 100644
+> --- a/drivers/mmc/mmc_boot.c
+> +++ b/drivers/mmc/mmc_boot.c
+> @@ -4,7 +4,6 @@
+>   * Written by Amar <amarendra.xt@samsung.com>
+>   */
 >
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  				/* execute tuning if needed */
->  				if (mwt->tuning && !mmc_host_is_spi(mmc)) {
->  					err = mmc_execute_tuning(mmc,
-> @@ -2224,7 +2224,7 @@ static int mmc_select_mode_and_width(struct mmc *mmc, uint card_caps)
->  				mmc_select_mode(mmc, mwt->mode);
->  				mmc_set_clock(mmc, mmc->tran_speed,
->  					      MMC_CLK_ENABLE);
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
+> -#include <common.h>
+>  #include <log.h>
+>  #include <mmc.h>
+>  #include "mmc_private.h"
+> diff --git a/drivers/mmc/mmc_bootdev.c b/drivers/mmc/mmc_bootdev.c
+> index 55ecead2ddf9..5a1688b75d09 100644
+> --- a/drivers/mmc/mmc_bootdev.c
+> +++ b/drivers/mmc/mmc_bootdev.c
+> @@ -6,7 +6,6 @@
+>   * Written by Simon Glass <sjg@chromium.org>
+>   */
 >
->  				/* execute tuning if needed */
->  				if (mwt->tuning) {
+> -#include <common.h>
+>  #include <bootdev.h>
+>  #include <dm.h>
+>  #include <mmc.h>
+> diff --git a/drivers/mmc/mmc_legacy.c b/drivers/mmc/mmc_legacy.c
+> index a101ee43fde5..a87d2276c1b8 100644
+> --- a/drivers/mmc/mmc_legacy.c
+> +++ b/drivers/mmc/mmc_legacy.c
+> @@ -5,7 +5,6 @@
+>   * Written by Simon Glass <sjg@chromium.org>
+>   */
+>
+> -#include <common.h>
+>  #include <log.h>
+>  #include <malloc.h>
+>  #include <mmc.h>
+> diff --git a/drivers/mmc/mmc_spi.c b/drivers/mmc/mmc_spi.c
+> index bcea800e5f61..675e642efd08 100644
+> --- a/drivers/mmc/mmc_spi.c
+> +++ b/drivers/mmc/mmc_spi.c
+> @@ -6,7 +6,6 @@
+>   *
+>   * Licensed under the GPL-2 or later.
+>   */
+> -#include <common.h>
+>  #include <errno.h>
+>  #include <log.h>
+>  #include <malloc.h>
+> diff --git a/drivers/mmc/mmc_write.c b/drivers/mmc/mmc_write.c
+> index a6f93380dd09..c023d15e52a8 100644
+> --- a/drivers/mmc/mmc_write.c
+> +++ b/drivers/mmc/mmc_write.c
+> @@ -7,7 +7,6 @@
+>   */
+>
+>  #include <config.h>
+> -#include <common.h>
+>  #include <blk.h>
+>  #include <dm.h>
+>  #include <part.h>
+> diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
+> index 5e9d66526a83..4ce0de6c47d8 100644
+> --- a/drivers/mmc/msm_sdhci.c
+> +++ b/drivers/mmc/msm_sdhci.c
+> @@ -7,7 +7,6 @@
+>   * Based on Linux driver
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <dm.h>
+>  #include <malloc.h>
 > diff --git a/drivers/mmc/mtk-sd.c b/drivers/mmc/mtk-sd.c
-> index 296aaee73318..4bd66ecf93ad 100644
+> index 4bd66ecf93ad..3a9258255a78 100644
 > --- a/drivers/mmc/mtk-sd.c
 > +++ b/drivers/mmc/mtk-sd.c
-> @@ -1011,7 +1011,7 @@ static int msdc_ops_get_wp(struct udevice *dev)
->  #endif
->  }
+> @@ -7,7 +7,6 @@
+>   */
 >
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  static u32 test_delay_bit(u32 delay, u32 bit)
->  {
->  	bit %= PAD_DELAY_MAX;
-> @@ -1760,7 +1760,7 @@ static const struct dm_mmc_ops msdc_ops = {
->  	.set_ios = msdc_ops_set_ios,
->  	.get_cd = msdc_ops_get_cd,
->  	.get_wp = msdc_ops_get_wp,
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  	.execute_tuning = msdc_execute_tuning,
->  #endif
->  	.wait_dat0 = msdc_ops_wait_dat0,
-> diff --git a/drivers/mmc/octeontx_hsmmc.c b/drivers/mmc/octeontx_hsmmc.c
-> index 7f9c4f4d36d4..3b5e12217325 100644
-> --- a/drivers/mmc/octeontx_hsmmc.c
-> +++ b/drivers/mmc/octeontx_hsmmc.c
-> @@ -794,7 +794,7 @@ octeontx_mmc_get_cr_mods(struct mmc *mmc, const struct mmc_cmd *cmd,
->  	u8 desired_ctype = 0;
+>  #include <clk.h>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <mmc.h>
+>  #include <errno.h>
+> diff --git a/drivers/mmc/mv_sdhci.c b/drivers/mmc/mv_sdhci.c
+> index dbdd671c88bc..2da5334c21f1 100644
+> --- a/drivers/mmc/mv_sdhci.c
+> +++ b/drivers/mmc/mv_sdhci.c
+> @@ -3,7 +3,6 @@
+>   * Marvell SD Host Controller Interface
+>   */
 >
->  	if (IS_MMC(mmc)) {
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  		if (cmd->cmdidx == MMC_CMD_SEND_TUNING_BLOCK_HS200) {
->  			if (cmd->resp_type == MMC_RSP_R1)
->  				cr.rtype_xor = 1;
-> @@ -1631,7 +1631,7 @@ static int octeontx_mmc_dev_send_cmd(struct udevice *dev, struct mmc_cmd *cmd,
->  	return octeontx_mmc_send_cmd(dev_to_mmc(dev), cmd, data);
->  }
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <malloc.h>
+>  #include <sdhci.h>
+> diff --git a/drivers/mmc/mvebu_mmc.c b/drivers/mmc/mvebu_mmc.c
+> index fea55c61ed7d..5af1953cd148 100644
+> --- a/drivers/mmc/mvebu_mmc.c
+> +++ b/drivers/mmc/mvebu_mmc.c
+> @@ -7,7 +7,6 @@
+>   * Written-by: Maen Suleiman, Gerald Kerma
+>   */
 >
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  static int octeontx_mmc_test_cmd(struct mmc *mmc, u32 opcode, int *statp)
->  {
->  	struct mmc_cmd cmd;
-> @@ -2421,12 +2421,12 @@ static int octeontx_mmc_execute_tuning(struct udevice *dev, u32 opcode)
+> -#include <common.h>
+>  #include <errno.h>
+>  #include <log.h>
+>  #include <malloc.h>
+> diff --git a/drivers/mmc/mxcmmc.c b/drivers/mmc/mxcmmc.c
+> index 0057273a2a76..1acea6f820b4 100644
+> --- a/drivers/mmc/mxcmmc.c
+> +++ b/drivers/mmc/mxcmmc.c
+> @@ -17,7 +17,6 @@
+>   */
 >
->  	return 0;
->  }
-> -#else /* MMC_SUPPORTS_TUNING */
-> +#else /* CONFIG_MMC_SUPPORTS_TUNING */
->  static void octeontx_mmc_set_emm_timing(struct mmc *mmc,
->  					union mio_emm_timing emm_timing)
->  {
->  }
-> -#endif /* MMC_SUPPORTS_TUNING */
-> +#endif /* CONFIG_MMC_SUPPORTS_TUNING */
+>  #include <config.h>
+> -#include <common.h>
+>  #include <command.h>
+>  #include <mmc.h>
+>  #include <part.h>
+> diff --git a/drivers/mmc/mxsmmc.c b/drivers/mmc/mxsmmc.c
+> index 35a8e21058ed..95390a5be7e5 100644
+> --- a/drivers/mmc/mxsmmc.c
+> +++ b/drivers/mmc/mxsmmc.c
+> @@ -20,7 +20,6 @@
+>   * Kyle Harris, Nexus Technologies, Inc. kharris@nexus-tech.net
+>   */
 >
->  /**
->   * Calculate the clock period with rounding up
-> @@ -2573,7 +2573,7 @@ static int octeontx_mmc_set_ios(struct udevice *dev)
+> -#include <common.h>
+>  #include <log.h>
+>  #include <malloc.h>
+>  #include <mmc.h>
+> diff --git a/drivers/mmc/nexell_dw_mmc.c b/drivers/mmc/nexell_dw_mmc.c
+> index 2723e4887cf7..2e1ce54c7d50 100644
+> --- a/drivers/mmc/nexell_dw_mmc.c
+> +++ b/drivers/mmc/nexell_dw_mmc.c
+> @@ -6,7 +6,6 @@
+>   * (C) Copyright 2019 Stefan Bosch <stefan_b@posteo.net>
+>   */
 >
->  	err = octeontx_mmc_configure_delay(mmc);
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <dt-structs.h>
+>  #include <dwmmc.h>
+> diff --git a/drivers/mmc/npcm_sdhci.c b/drivers/mmc/npcm_sdhci.c
+> index d63521d6855f..dff4732ea06f 100644
+> --- a/drivers/mmc/npcm_sdhci.c
+> +++ b/drivers/mmc/npcm_sdhci.c
+> @@ -3,7 +3,6 @@
+>   * Copyright (c) 2022 Nuvoton Technology Corp.
+>   */
 >
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  	if (!err && mmc->selected_mode == MMC_HS_400 && !slot->hs400_tuned) {
->  		debug("%s: Tuning HS400 mode\n", __func__);
->  		err = octeontx_tune_hs400(mmc);
-> @@ -3776,7 +3776,7 @@ static const struct dm_mmc_ops octeontx_hsmmc_ops = {
->  	.set_ios = octeontx_mmc_set_ios,
->  	.get_cd = octeontx_mmc_get_cd,
->  	.get_wp = octeontx_mmc_get_wp,
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  	.execute_tuning = octeontx_mmc_execute_tuning,
->  #endif
->  };
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <sdhci.h>
+>  #include <clk.h>
 > diff --git a/drivers/mmc/omap_hsmmc.c b/drivers/mmc/omap_hsmmc.c
-> index 99f21b2c546a..118d9cd16fdb 100644
+> index 118d9cd16fdb..2b7f9fc9a205 100644
 > --- a/drivers/mmc/omap_hsmmc.c
 > +++ b/drivers/mmc/omap_hsmmc.c
-> @@ -577,7 +577,7 @@ static uint32_t omap_hsmmc_set_capabilities(struct mmc *mmc)
->  	return val;
->  }
+> @@ -23,7 +23,6 @@
+>   */
 >
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  static void omap_hsmmc_disable_tuning(struct mmc *mmc)
->  {
->  	struct hsmmc *mmc_base;
-> @@ -1518,7 +1518,7 @@ static const struct dm_mmc_ops omap_hsmmc_ops = {
->  	.get_cd		= omap_hsmmc_getcd,
->  	.get_wp		= omap_hsmmc_getwp,
->  #endif
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  	.execute_tuning = omap_hsmmc_execute_tuning,
->  #endif
->  	.wait_dat0	= omap_hsmmc_wait_dat0,
+>  #include <config.h>
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <log.h>
+>  #include <malloc.h>
+> diff --git a/drivers/mmc/owl_mmc.c b/drivers/mmc/owl_mmc.c
+> index e84171a661a7..bd4906f58e74 100644
+> --- a/drivers/mmc/owl_mmc.c
+> +++ b/drivers/mmc/owl_mmc.c
+> @@ -11,7 +11,6 @@
+>   * channel, and those special bits used in this driver is picked from vendor
+>   * source exclusively for MMC/SD.
+>   */
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <cpu_func.h>
+>  #include <dm.h>
+> diff --git a/drivers/mmc/pci_mmc.c b/drivers/mmc/pci_mmc.c
+> index 4d163ccba041..d446c55f72b2 100644
+> --- a/drivers/mmc/pci_mmc.c
+> +++ b/drivers/mmc/pci_mmc.c
+> @@ -4,7 +4,6 @@
+>   * Copyright (C) 2014, Bin Meng <bmeng.cn@gmail.com>
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <errno.h>
+>  #include <log.h>
+> diff --git a/drivers/mmc/piton_mmc.c b/drivers/mmc/piton_mmc.c
+> index a330bbf8cbe2..fed1f8416088 100644
+> --- a/drivers/mmc/piton_mmc.c
+> +++ b/drivers/mmc/piton_mmc.c
+> @@ -11,7 +11,6 @@
+>
+>  #include <asm/gpio.h>
+>  #include <asm/io.h>
+> -#include <common.h>
+>  #include <div64.h>
+>  #include <dm.h>
+>  #include <errno.h>
+> diff --git a/drivers/mmc/rockchip_dw_mmc.c b/drivers/mmc/rockchip_dw_mmc.c
+> index ad4529d6afa8..1a10b7057a47 100644
+> --- a/drivers/mmc/rockchip_dw_mmc.c
+> +++ b/drivers/mmc/rockchip_dw_mmc.c
+> @@ -3,7 +3,6 @@
+>   * Copyright (c) 2013 Google, Inc
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <dm.h>
+>  #include <dt-structs.h>
+> diff --git a/drivers/mmc/rockchip_sdhci.c b/drivers/mmc/rockchip_sdhci.c
+> index c889c7bc9855..35667b86b50b 100644
+> --- a/drivers/mmc/rockchip_sdhci.c
+> +++ b/drivers/mmc/rockchip_sdhci.c
+> @@ -5,7 +5,6 @@
+>   * Rockchip SD Host Controller Interface
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <dm.h>
+>  #include <dm/ofnode.h>
+> diff --git a/drivers/mmc/rpmb.c b/drivers/mmc/rpmb.c
+> index b68d98573c9a..0658ce22cf13 100644
+> --- a/drivers/mmc/rpmb.c
+> +++ b/drivers/mmc/rpmb.c
+> @@ -8,7 +8,6 @@
+>   */
+>
+>  #include <config.h>
+> -#include <common.h>
+>  #include <log.h>
+>  #include <memalign.h>
+>  #include <mmc.h>
+> diff --git a/drivers/mmc/s5p_sdhci.c b/drivers/mmc/s5p_sdhci.c
+> index 3b74feae68c7..80dbb38c9b36 100644
+> --- a/drivers/mmc/s5p_sdhci.c
+> +++ b/drivers/mmc/s5p_sdhci.c
+> @@ -4,7 +4,6 @@
+>   * Jaehoon Chung <jh80.chung@samsung.com>
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <log.h>
+>  #include <malloc.h>
+> diff --git a/drivers/mmc/sandbox_mmc.c b/drivers/mmc/sandbox_mmc.c
+> index 0ba7940a4dbf..a24520f2e78c 100644
+> --- a/drivers/mmc/sandbox_mmc.c
+> +++ b/drivers/mmc/sandbox_mmc.c
+> @@ -4,7 +4,6 @@
+>   * Written by Simon Glass <sjg@chromium.org>
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <errno.h>
+>  #include <fdtdec.h>
+> diff --git a/drivers/mmc/sdhci-adma.c b/drivers/mmc/sdhci-adma.c
+> index 283ba956deb9..fdb189d71a64 100644
+> --- a/drivers/mmc/sdhci-adma.c
+> +++ b/drivers/mmc/sdhci-adma.c
+> @@ -3,7 +3,6 @@
+>   * SDHCI ADMA2 helper functions.
+>   */
+>
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <sdhci.h>
+>  #include <malloc.h>
 > diff --git a/drivers/mmc/sdhci-cadence.c b/drivers/mmc/sdhci-cadence.c
-> index c0a9f60b1496..0570dbca00d7 100644
+> index 0570dbca00d7..07ec35a04635 100644
 > --- a/drivers/mmc/sdhci-cadence.c
 > +++ b/drivers/mmc/sdhci-cadence.c
-> @@ -274,7 +274,7 @@ static int sdhci_cdns_probe(struct udevice *dev)
->  	host->ops = &sdhci_cdns_ops;
->  	host->quirks |= SDHCI_QUIRK_WAIT_SEND_CMD;
->  	sdhci_cdns_mmc_ops = sdhci_ops;
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  	sdhci_cdns_mmc_ops.execute_tuning = sdhci_cdns_execute_tuning;
->  #endif
+> @@ -4,7 +4,6 @@
+>   *   Author: Masahiro Yamada <yamada.masahiro@socionext.com>
+>   */
 >
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <asm/global_data.h>
+>  #include <dm/device_compat.h>
 > diff --git a/drivers/mmc/sdhci.c b/drivers/mmc/sdhci.c
-> index af654ea8d13c..d06f2c02bb7b 100644
+> index d06f2c02bb7b..560b7e889c77 100644
 > --- a/drivers/mmc/sdhci.c
 > +++ b/drivers/mmc/sdhci.c
-> @@ -351,7 +351,7 @@ static int sdhci_send_command(struct mmc *mmc, struct mmc_cmd *cmd,
->  		return -ECOMM;
->  }
+> @@ -7,7 +7,6 @@
+>   * Murray.Jensen@cmst.csiro.au, 27-Jan-01.
+>   */
 >
-> -#if defined(CONFIG_DM_MMC) && defined(MMC_SUPPORTS_TUNING)
-> +#if defined(CONFIG_DM_MMC) && CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  static int sdhci_execute_tuning(struct udevice *dev, uint opcode)
->  {
->  	int err;
-> @@ -848,7 +848,7 @@ const struct dm_mmc_ops sdhci_ops = {
->  	.set_ios	= sdhci_set_ios,
->  	.get_cd		= sdhci_get_cd,
->  	.deferred_probe	= sdhci_deferred_probe,
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  	.execute_tuning	= sdhci_execute_tuning,
->  #endif
->  	.wait_dat0	= sdhci_wait_dat0,
-> diff --git a/include/configs/mt7621.h b/include/configs/mt7621.h
-> index bf2bc2d45c09..e6dba7071950 100644
-> --- a/include/configs/mt7621.h
-> +++ b/include/configs/mt7621.h
-> @@ -14,9 +14,6 @@
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <dm.h>
+>  #include <errno.h>
+> @@ -15,6 +14,7 @@
+>  #include <malloc.h>
+>  #include <mmc.h>
+>  #include <sdhci.h>
+> +#include <time.h>
+>  #include <asm/cache.h>
+>  #include <linux/bitops.h>
+>  #include <linux/delay.h>
+> diff --git a/drivers/mmc/sh_mmcif.c b/drivers/mmc/sh_mmcif.c
+> index 76dc1c68b821..06a30d5efb81 100644
+> --- a/drivers/mmc/sh_mmcif.c
+> +++ b/drivers/mmc/sh_mmcif.c
+> @@ -6,7 +6,6 @@
+>   */
 >
->  #define CFG_SYS_INIT_SP_OFFSET		0x800000
+>  #include <config.h>
+> -#include <common.h>
+>  #include <log.h>
+>  #include <watchdog.h>
+>  #include <command.h>
+> diff --git a/drivers/mmc/snps_dw_mmc.c b/drivers/mmc/snps_dw_mmc.c
+> index 0134399e3934..9bdbe5070b1d 100644
+> --- a/drivers/mmc/snps_dw_mmc.c
+> +++ b/drivers/mmc/snps_dw_mmc.c
+> @@ -7,7 +7,6 @@
+>   * Author: Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>
+>   */
 >
-> -/* MMC */
-> -#define MMC_SUPPORTS_TUNING
-> -
->  /* Serial SPL */
->  #if defined(CONFIG_SPL_BUILD) && defined(CONFIG_SPL_SERIAL)
->  #define CFG_SYS_NS16550_CLK		50000000
-> diff --git a/include/configs/mt7623.h b/include/configs/mt7623.h
-> index fca234a1dc71..6f42cd32d80f 100644
-> --- a/include/configs/mt7623.h
-> +++ b/include/configs/mt7623.h
-> @@ -11,9 +11,6 @@
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <dm.h>
+>  #include <dwmmc.h>
+> diff --git a/drivers/mmc/socfpga_dw_mmc.c b/drivers/mmc/socfpga_dw_mmc.c
+> index 387cb8b6b50a..f738019b8357 100644
+> --- a/drivers/mmc/socfpga_dw_mmc.c
+> +++ b/drivers/mmc/socfpga_dw_mmc.c
+> @@ -3,7 +3,6 @@
+>   * (C) Copyright 2013 Altera Corporation <https://protect2.fireeye.com/v1/url?k=02245fbf-5dbf6742-
+> 0225d4f0-000babff317b-71f0095a955d1189&q=1&e=fd8eb5c0-5453-48c2-94b4-
+> 6557ecb5f94f&u=http%3A%2F%2Fwww.altera.com%2F>
+>   */
 >
->  #include <linux/sizes.h>
+> -#include <common.h>
+>  #include <log.h>
+>  #include <asm/arch/clock_manager.h>
+>  #include <asm/arch/secure_reg_helper.h>
+> diff --git a/drivers/mmc/sti_sdhci.c b/drivers/mmc/sti_sdhci.c
+> index 23a1dd43c9b2..91018b7e21af 100644
+> --- a/drivers/mmc/sti_sdhci.c
+> +++ b/drivers/mmc/sti_sdhci.c
+> @@ -4,7 +4,6 @@
+>   * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
+>   */
 >
-> -/* MMC */
-> -#define MMC_SUPPORTS_TUNING
-> -
->  /* DRAM */
->  #define CFG_SYS_SDRAM_BASE		0x80000000
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <log.h>
+>  #include <mmc.h>
+> diff --git a/drivers/mmc/stm32_sdmmc2.c b/drivers/mmc/stm32_sdmmc2.c
+> index 39ae79ba1293..9483fb57daf8 100644
+> --- a/drivers/mmc/stm32_sdmmc2.c
+> +++ b/drivers/mmc/stm32_sdmmc2.c
+> @@ -6,7 +6,6 @@
 >
-> diff --git a/include/configs/octeontx2_common.h b/include/configs/octeontx2_common.h
-> index c4db38562d83..f415dffddbea 100644
-> --- a/include/configs/octeontx2_common.h
-> +++ b/include/configs/octeontx2_common.h
-> @@ -19,9 +19,4 @@
->  					"loadaddr=20080000\0"	\
->  					"ethrotate=yes\0"
+>  #define LOG_CATEGORY UCLASS_MMC
 >
-> -#if defined(CONFIG_MMC_OCTEONTX)
-> -#define MMC_SUPPORTS_TUNING
-> -/** EMMC specific defines */
-> -#endif
-> -
->  #endif /* __OCTEONTX2_COMMON_H__ */
-> diff --git a/include/mmc.h b/include/mmc.h
-> index 4b8327f1f93b..7f1900363b91 100644
-> --- a/include/mmc.h
-> +++ b/include/mmc.h
-> @@ -18,13 +18,6 @@
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <cpu_func.h>
+>  #include <dm.h>
+> diff --git a/drivers/mmc/sunxi_mmc.c b/drivers/mmc/sunxi_mmc.c
+> index 714706d2411b..0b56d1405bee 100644
+> --- a/drivers/mmc/sunxi_mmc.c
+> +++ b/drivers/mmc/sunxi_mmc.c
+> @@ -13,7 +13,6 @@
+>   * proper DM_MMC implementation at the end.
+>   */
 >
->  struct bd_info;
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <errno.h>
+>  #include <log.h>
+> diff --git a/drivers/mmc/tangier_sdhci.c b/drivers/mmc/tangier_sdhci.c
+> index 115642733243..ae65c310b685 100644
+> --- a/drivers/mmc/tangier_sdhci.c
+> +++ b/drivers/mmc/tangier_sdhci.c
+> @@ -2,7 +2,6 @@
+>  /*
+>   * Copyright (c) 2017 Intel Corporation
+>   */
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <dm/device.h>
+>  #include <linux/io.h>
+> diff --git a/drivers/mmc/tegra_mmc.c b/drivers/mmc/tegra_mmc.c
+> index c01fb3d01657..5ed7f01d3f36 100644
+> --- a/drivers/mmc/tegra_mmc.c
+> +++ b/drivers/mmc/tegra_mmc.c
+> @@ -7,7 +7,6 @@
+>   */
 >
-> -#if CONFIG_IS_ENABLED(MMC_HS200_SUPPORT)
-> -#define MMC_SUPPORTS_TUNING
-> -#endif
-> -#if CONFIG_IS_ENABLED(MMC_UHS_SUPPORT)
-> -#define MMC_SUPPORTS_TUNING
-> -#endif
-> -
->  /* SD/MMC version bits; 8 flags, 8 major, 8 minor, 8 change */
->  #define SD_VERSION_SD	(1U << 31)
->  #define MMC_VERSION_MMC	(1U << 30)
-> @@ -485,7 +478,7 @@ struct dm_mmc_ops {
->  	 */
->  	int (*get_wp)(struct udevice *dev);
+>  #include <bouncebuf.h>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <errno.h>
+>  #include <log.h>
+> diff --git a/drivers/mmc/tmio-common.c b/drivers/mmc/tmio-common.c
+> index 719c4830bc30..0b396122b464 100644
+> --- a/drivers/mmc/tmio-common.c
+> +++ b/drivers/mmc/tmio-common.c
+> @@ -4,7 +4,6 @@
+>   *   Author: Masahiro Yamada <yamada.masahiro@socionext.com>
+>   */
 >
-> -#ifdef MMC_SUPPORTS_TUNING
-> +#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
->  	/**
->  	 * execute_tuning() - Start the tuning process
->  	 *
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <cpu_func.h>
+>  #include <fdtdec.h>
+> diff --git a/drivers/mmc/uniphier-sd.c b/drivers/mmc/uniphier-sd.c
+> index 8cde4308aaed..5b3650d52eea 100644
+> --- a/drivers/mmc/uniphier-sd.c
+> +++ b/drivers/mmc/uniphier-sd.c
+> @@ -4,7 +4,6 @@
+>   *   Author: Masahiro Yamada <yamada.masahiro@socionext.com>
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <fdtdec.h>
+>  #include <malloc.h>
+> diff --git a/drivers/mmc/xenon_sdhci.c b/drivers/mmc/xenon_sdhci.c
+> index 27dbe0404e04..0e4902fab77c 100644
+> --- a/drivers/mmc/xenon_sdhci.c
+> +++ b/drivers/mmc/xenon_sdhci.c
+> @@ -14,7 +14,6 @@
+>   * Stefan Roese <sr@denx.de>
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <fdtdec.h>
+>  #include <asm/global_data.h>
+> diff --git a/drivers/mmc/zynq_sdhci.c b/drivers/mmc/zynq_sdhci.c
+> index 935540d17194..898be5a0913a 100644
+> --- a/drivers/mmc/zynq_sdhci.c
+> +++ b/drivers/mmc/zynq_sdhci.c
+> @@ -7,7 +7,6 @@
+>   */
+>
+>  #include <clk.h>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <fdtdec.h>
+>  #include <linux/delay.h>
 > --
 > 2.34.1
 
