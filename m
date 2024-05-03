@@ -4,86 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4431BC4345F
-	for <u-boot@archiver.kernel.org>; Fri,  3 May 2024 22:22:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A939C4345F
+	for <u-boot@archiver.kernel.org>; Fri,  3 May 2024 22:22:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4AEA38826D;
-	Sat,  4 May 2024 00:21:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CF156884C8;
+	Sat,  4 May 2024 00:21:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T5I5ZuHc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bqnaTaXy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E788F883E2; Sat,  4 May 2024 00:21:41 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id ED14A88206; Sat,  4 May 2024 00:21:42 +0200 (CEST)
+Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
+ [IPv6:2607:f8b0:4864:20::b2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 218BF8826D
- for <u-boot@lists.denx.de>; Sat,  4 May 2024 00:21:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A57CB884CC
+ for <u-boot@lists.denx.de>; Sat,  4 May 2024 00:21:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-69b7d2de292so947766d6.2
- for <u-boot@lists.denx.de>; Fri, 03 May 2024 15:21:39 -0700 (PDT)
+Received: by mail-yb1-xb2e.google.com with SMTP id
+ 3f1490d57ef6-de604ca3cfcso173422276.3
+ for <u-boot@lists.denx.de>; Fri, 03 May 2024 15:21:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714774898; x=1715379698; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qLlqjA1I/MJVnolXDYOkfDXtn1my0LNZXEDwRItsnRo=;
- b=T5I5ZuHc4TYQp03brlzDTkLrrR2siAeNidK/iH7i8KZvau1jTInIgLQgKdaRYzPLsh
- 0mdXm9Om1rk4aQ0cT8GYqmLl3avB9jp0TyD57EzDwUNq1COvJmJXTN2+9MNZd9rNf5uq
- HiTsNte/UDkc1ftAThDM1AhPPP8+YqYOcOq9M=
+ d=konsulko.com; s=google; t=1714774899; x=1715379699; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=hI5yov+wKUpAzInmmlnJCAfCHNrpt4HlEGTArkqFCaY=;
+ b=bqnaTaXyZqiG/4kYJ0FlYH4qVEqTy/I3nsdPTLQCo8B4gyOFUbivYz11K+2KcFW0fu
+ UpcCLoecJfwuuXedWlUuhoT4CJ6Qn0909dt9WVguVJZT5j9OzHabQXVWtMttKdb9E/+P
+ iKQgNQYliXkKavcxxY4QBJhy0gpCRl5aDvFVY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714774898; x=1715379698;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qLlqjA1I/MJVnolXDYOkfDXtn1my0LNZXEDwRItsnRo=;
- b=Swt8ajHnoy5cP4vDiE/Z3Fyvw4oU+28BIYftr4zOemMqu5IwLJgmp2MImqcsP6vbvF
- PGajPazOvSRooyawb9hqWwEHagls7KCcc6dnColveq9jAn6SE1LAkEQUpwAFgl1qmmHS
- i4BbMuSckivcSScJPQ5rHUthaFjUgx6w67LIHIS/QdaQObh8vO+XHcDVLuLnDekgpBNk
- Y6MFwoq9O6YXvpFz1MCtzGNoFA2RgnCgXgeRAtwZpyr9f0QUH9nQzfiB2T6TCZj0AOKA
- sWOdpQ5E++m/hNSLuPskpo61RCzs+D6Un6Vy7ePqaD0C+W1YazXPHmWo50tbHq0mN7n+
- TbOQ==
-X-Gm-Message-State: AOJu0YwMRtukfDZaATWZIxSct/RdYojZa50uYaFZ8GWhpBrCNF6LNgeQ
- inbjJzEpXcavTPqHIHsUDjsldtak9hPOSXRe/OvSemk+Qf4TbbOzt0Y5xM3rVGM=
-X-Google-Smtp-Source: AGHT+IH0bmDh7/zFShaY+/gGwQRWROrgjFU+mwvIfu6CPlgQNyHO8wU3XQUVXGhS9hEHVVhamQQKJw==
-X-Received: by 2002:a05:6214:1d2a:b0:6a0:99c1:5427 with SMTP id
- f10-20020a0562141d2a00b006a099c15427mr4508266qvd.3.1714774897867; 
- Fri, 03 May 2024 15:21:37 -0700 (PDT)
-Received: from [127.0.1.1] ([187.144.98.216]) by smtp.gmail.com with ESMTPSA id
- qb17-20020ad44711000000b006a0e585dc77sm1557152qvb.70.2024.05.03.15.21.35
+ d=1e100.net; s=20230601; t=1714774899; x=1715379699;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hI5yov+wKUpAzInmmlnJCAfCHNrpt4HlEGTArkqFCaY=;
+ b=u4AqE94avllbPLmCJs7XXy3PdFpsWpQGfaP7eCNCf8hs01HAzNLU7qQGXpPAQVA5Ud
+ 1sWkOOHyD2NnpQllahanmwuyPdoI4bAvSl9mC9uS55XFcFlJp30bvPMXAyfjrO8WTzuG
+ Fq0fDN1L1yhHI6wWtk9TDQM0iWVnJOVYXJCOaqXdtBM0SRi4yIuQ9w4n29xbfrXRZ9Rx
+ 53POFG6LjoucnrB2IZnOk84JluJYtIbd0TZ5hHxrM6jKRxCNwL1OTHUX1vRmmOGJaUdg
+ 8own9HBRR6JL5isWhTG+J7W6qZ9dmmwHH4schwasqh46DahOzFzJG8V5Ki/RG/dPQcbP
+ Jsvg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVvB5C9Y5s6OEbcHcaP5IVQok/OtDIyMzPuTjKvXzTJzqyeEX2XOV/8vSSxxogtVgK1mAcH3n15yDXYoKIFso61vtdRgQ==
+X-Gm-Message-State: AOJu0YzI9pjguFS27tdfvNCvlWNaJp9xvo+BABgUJwO5OMqtKo9nvMMX
+ larss9PSj5+bCMlweYM8sOT2+7dmqTHr56TVh9zrnNjEQmjcd1erUUvR2LdlbRc=
+X-Google-Smtp-Source: AGHT+IGR+wev+f+OYbZIa3x5ZNq0i55kcMxDBgRBFO3hmuiHlUr4LbeaopAX8p5Rf538G9XGZtLaHQ==
+X-Received: by 2002:a25:8284:0:b0:de8:4cfb:a14e with SMTP id
+ r4-20020a258284000000b00de84cfba14emr4597860ybk.46.1714774899461; 
+ Fri, 03 May 2024 15:21:39 -0700 (PDT)
+Received: from bill-the-cat ([187.144.98.216])
+ by smtp.gmail.com with ESMTPSA id
+ fv14-20020a05622a4a0e00b0043936ed09bfsm2017151qtb.27.2024.05.03.15.21.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 May 2024 15:21:37 -0700 (PDT)
+ Fri, 03 May 2024 15:21:38 -0700 (PDT)
+Date: Fri, 3 May 2024 16:21:36 -0600
 From: Tom Rini <trini@konsulko.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>, 
- William Zhang <william.zhang@broadcom.com>
-Cc: dan.beygelman@broadcom.com, philippe.reynes@softathome.com, 
- kursad.oney@broadcom.com, anand.gore@broadcom.com, 
- Simon Glass <sjg@chromium.org>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Kever Yang <kever.yang@rock-chips.com>, Sumit Garg <sumit.garg@linaro.org>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Manorit Chawdhry <m-chawdhry@ti.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240503052344.195819-1-william.zhang@broadcom.com>
-References: <20240503052344.195819-1-william.zhang@broadcom.com>
-Subject: Re: [PATCH] MAINTAINERS: update Broadcom BCMBCA maintainer
-Message-Id: <171477489587.2575911.5155575571607366606.b4-ty@konsulko.com>
-Date: Fri, 03 May 2024 16:21:35 -0600
+To: Jim Liu <jim.t90615@gmail.com>
+Cc: YSCHU@nuvoton.com, KWLIU@nuvoton.com, JJLIU0@nuvoton.com,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v1 3/3] board: arbel: Limit the dram effective size to
+ bank0 maximal size
+Message-ID: <20240503222136.GI2568172@bill-the-cat>
+References: <20240423072210.1926141-1-JJLIU0@nuvoton.com>
+ <20240423072210.1926141-4-JJLIU0@nuvoton.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="vAAy4LH3Qnti5JIO"
+Content-Disposition: inline
+In-Reply-To: <20240423072210.1926141-4-JJLIU0@nuvoton.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,16 +94,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 02 May 2024 22:23:43 -0700, William Zhang wrote:
 
-> Joel is no longer with Broadcom. Remove his email from bcmbca maintainer
-> list and replace him with myself for stack protection maintainer.
-> 
-> 
+--vAAy4LH3Qnti5JIO
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Apr 23, 2024 at 03:22:10PM +0800, Jim Liu wrote:
+
+> For 4GB dram size, the dram is divided into 2 banks and
+> the address space of these 2 banks are not concatenated.
+> Limit the gd->ram_top to not exceed bank0 top to prevent
+> accessing invalid memory region.
+>=20
+> Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
 
 Applied to u-boot/master, thanks!
 
--- 
+--=20
 Tom
 
+--vAAy4LH3Qnti5JIO
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY1Y3AACgkQFHw5/5Y0
+tyy+Ygv/V97d0xcGYuiPY0sNJ2BXWntAFpEajRbDD04f0LjwH7DwVTnce7VGhTYC
+D5L3ijqwo3GXQph1jrx4dmE1s2XirZLAcFLZ27xmDi8k0d9SOolOeDfmaD1uR1rB
+6xLBoJbrmjztkiVtMvqI3uVd3nWbvYoyI1mO6wCX+eXx8jidTS1SpmY/lGkRqVkI
+BlHAm+1vU5emLFkRGkogJW6dHdPMm+TQjb7+G9NW7tUap8In9OIXfjMlV7g1qFCN
+pfZLx7nsv4OkQfqTrkM9IttFLFu9p1dbzEH6mLczpbajid/zQ0f5D8vAzfz6vvnU
+9lgXBts3ESW0neBLnok8kumdXZzNvPNBhTBKtUEpA4B7auw3IuVdwF6v5rx3mvii
+DZnn82s1uRW2o9qCIu/X9FFEyWCieGEsYu7IaflZzk/6ceCCSX4i9kqAKOltkUJn
+eDQre6+OIH073Tr2VQMFckAmKQwI72OfFukaoRPLuP0w65n3jds8qRUe3igbRVY2
+jlNz4TiM
+=ha7h
+-----END PGP SIGNATURE-----
+
+--vAAy4LH3Qnti5JIO--
