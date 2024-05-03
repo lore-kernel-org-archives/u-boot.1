@@ -4,83 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 417D3C10F16
-	for <u-boot@archiver.kernel.org>; Fri,  3 May 2024 21:52:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E145C4345F
+	for <u-boot@archiver.kernel.org>; Fri,  3 May 2024 22:21:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB0F387F8D;
-	Fri,  3 May 2024 23:52:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 89FEA87F6E;
+	Sat,  4 May 2024 00:21:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BxWkxwR2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F50GKwyl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4360888251; Fri,  3 May 2024 23:52:24 +0200 (CEST)
-Received: from mail-vk1-xa31.google.com (mail-vk1-xa31.google.com
- [IPv6:2607:f8b0:4864:20::a31])
+ id D99BF8818B; Sat,  4 May 2024 00:21:01 +0200 (CEST)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2D4028820E
- for <u-boot@lists.denx.de>; Fri,  3 May 2024 23:52:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C87A3807EC
+ for <u-boot@lists.denx.de>; Sat,  4 May 2024 00:20:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-vk1-xa31.google.com with SMTP id
- 71dfb90a1353d-4df295192b7so73947e0c.1
- for <u-boot@lists.denx.de>; Fri, 03 May 2024 14:52:22 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-3c84bb69c6fso62030b6e.3
+ for <u-boot@lists.denx.de>; Fri, 03 May 2024 15:20:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1714773141; x=1715377941; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NYkEOOW1gdIe9YmqPnOomFIi/yYZ2hTmSVjs8mA2Kp0=;
- b=BxWkxwR2CTpst2NOyz0VDW7+YGOdonKP5EiYTZA8+RIusK4QvIH8vZZAPjJiPlm3eq
- RQm/hbn8v5tLAVWA/I0MZVjUkLC2Hw4jegZ0vlyRv2YovEEwrK0o0JmnAUnEkAHq7iLh
- y08+2toeDp9OjflRg8ta1jrOg2oSqrHb9BOQqkHeQjt8+2eQ4GiowaVEAy9ahQ+62oZN
- 40zoAA6AA5WZaeAotxUaCX9Iyn6Qnv/ECxfqRl6a17okQjaQwYB/GhMI0VpkHrgDCQAB
- fhsGJJsSy29wA6emhcaf4Gj9uOrZ5cvAZD7+urEFtVzAOT2zveq95xyr39TZBmhkjPk1
- ZjtQ==
+ d=konsulko.com; s=google; t=1714774858; x=1715379658; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=vy7MBYvs/U9h5xTwRTcJopYqRALAcwMNxYKW19grDOg=;
+ b=F50GKwylD5q6V2uhW4QBX3mkwDYWP8sqTSrvQB6wDoiVO5ijdwEqf+kkO4juANfIVg
+ KnB2ShB7G78ztiQcklUnAr0h/3tQmEayYS5BEssSkNtCK8xG02oEzW9WzfKBAxft8Sg+
+ EnZdjXbPGEL88EizEnxZAzDE4MPpP/lDIJA0Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714773141; x=1715377941;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=NYkEOOW1gdIe9YmqPnOomFIi/yYZ2hTmSVjs8mA2Kp0=;
- b=GT5lDXlZms4/SZA7PhB1cRdrlIm4n5Yu1rGgkQRmqDw5wBgBodYiHxlJGkCz7ab+jx
- OrGh4yfYt3zfZxRUlS2avCxbbTnrHFx8o4WVYpnZk3rb4bJC8TCHlgqaLnwuYQH90ioh
- swYzMWWfLqBmDMmxnlxuhoI5RDZyT5Xm1BafmCys9R1dYXfGORNWbQ8SoaeY6mC/Fd7F
- 9ajskzX2EO3qmhdFIjgCr8D/82YAvqIKhL7CnLrqsq8v9sdVX1qXQdEIuStU7eBZUfD1
- WNrNy+fChq2qDEHl4zZgouZ+NoP2Bxx1HpaO5ytlJ9rwRe1CJMxxSsbOPvT+P7YOxrP+
- OJ2A==
+ d=1e100.net; s=20230601; t=1714774858; x=1715379658;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vy7MBYvs/U9h5xTwRTcJopYqRALAcwMNxYKW19grDOg=;
+ b=u6z8P0YxOafgSko9nvjIhoB/j2DZbDDunxpKNtO5y6PKVRcZ1QPe0hnnIvwE+uO1Lm
+ rF/Bf7nKK/lJ4SMUDwWnVeNOs75xmKe2IhtKkC2WQFbZFdXZQvXu9+dSQZKQu0HwCgxO
+ u/AbfkJStfJKDbRKxvKAiI35UPwZB91JVc8XZkPPJM5U6bdgCHOw2PCwLVkC5rNgP3d3
+ XnKJtlVrPV69DWxjqioVmWXHlMdYnrU9PsC3MUdQJhhkIW5QytIJ4H1u8EwicsgTL7EV
+ 3IiQcErbggRWibFkDpDMZh8EoYTUa745Dq/Wbif1Dec9LAkVKp/Tm4q1STUTx9SyDgA2
+ e3KQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUjjt4zQWy2cwfoixc/by66W8Egad8wUX04DPFFchTX06FhKTct+8jbl27z++IS1VjlaQOlVworugBGnrjr+BPC/+NtJA==
-X-Gm-Message-State: AOJu0YzKOhCUk7mpdzYhnMjzBLqegooIiOYrC1yna7TAMM8r6NCsiJAG
- JtazWgKlqFFrsmtzdxysOpNnioNmXeyLo1nX07GyMB3S8HBOl/QdtKlMLUNL1mGTAK6P29TfY7F
- e+mgQgkfR3GffRrRW4vocoQIInzI=
-X-Google-Smtp-Source: AGHT+IH3kwpT9JjHctsks4Yuj5rtueWvgVfQ/Ga9099q4zKiEtJy2UjsX4JXcS3C6ooZB2RsqU4gYt5GI5mmbD2W4jM=
-X-Received: by 2002:a05:6122:2094:b0:4d4:1fe2:c398 with SMTP id
- i20-20020a056122209400b004d41fe2c398mr4089804vkd.2.1714773140976; Fri, 03 May
- 2024 14:52:20 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240503090011.37849-1-heinrich.schuchardt@canonical.com>
- <20240503090011.37849-5-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240503090011.37849-5-heinrich.schuchardt@canonical.com>
-From: E Shattow <lucent@gmail.com>
-Date: Fri, 3 May 2024 14:52:10 -0700
-Message-ID: <CANV2PTPB34__WpAOeC3zSkV_ZsgmXhtOUOQMXWVT16xGWO9+Kg@mail.gmail.com>
-Subject: Re: [PATCH v2 4/4] configs: visionfive2: enable SPL_YMODEM_SUPPORT
+ AJvYcCVisxpD0SHcsUe4hZ4xpnYPIhTzjTcwxSl7qKxIr7tw1mkRLtdWk8Bj7gdHeSenzfS6VLZnUmd/yy5C3ld5NIQzL6ESTw==
+X-Gm-Message-State: AOJu0Yxxv4G/Uil6u9AWhABSK4GqdsKboC9SANrwXn7teLOdGBK1F/rZ
+ nFQyikQcKDMUKzxdJuM/NtGhH3F+9nArslj6YZ4bhNcxU79cT7wvJk8IgejFrUM=
+X-Google-Smtp-Source: AGHT+IFsoKyj8KJm4a47/lfht4qizwnqD/WJm5RNd7P5coahMgztD6rI+xleC4hPd0bzMn2G/HSw+A==
+X-Received: by 2002:a05:6808:13d4:b0:3c8:6543:584b with SMTP id
+ d20-20020a05680813d400b003c86543584bmr5667583oiw.54.1714774858532; 
+ Fri, 03 May 2024 15:20:58 -0700 (PDT)
+Received: from bill-the-cat ([187.144.98.216])
+ by smtp.gmail.com with ESMTPSA id
+ p12-20020a0cf68c000000b006a0d6240449sm1550866qvn.129.2024.05.03.15.20.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 03 May 2024 15:20:57 -0700 (PDT)
+Date: Fri, 3 May 2024 16:20:54 -0600
+From: Tom Rini <trini@konsulko.com>
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>, 
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
- Aurelien Jarno <aurelien@aurel32.net>,
- Lukasz Tekieli <tekieli.lukasz@gmail.com>, 
- Lukas Funke <lukas.funke@weidmueller.com>, Shiji Yang <yangshiji66@outlook.com>,
- Shengyu Qu <wiagn233@outlook.com>, Michal Simek <michal.simek@amd.com>, 
- Seung-Woo Kim <sw0312.kim@samsung.com>, Mason Huo <mason.huo@starfivetech.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/2] event: typo arguemnts
+Message-ID: <20240503222054.GB2568172@bill-the-cat>
+References: <20240419113746.73110-1-heinrich.schuchardt@canonical.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="FJTUrWXrcGLdqxj+"
+Content-Disposition: inline
+In-Reply-To: <20240419113746.73110-1-heinrich.schuchardt@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,38 +91,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, May 3, 2024 at 2:01=E2=80=AFAM Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> We can use U-Boot for recovering JH7110 based boards via UART
-> if CONFIG_SPL_YMODEM_SUPPORT=3Dy.
->
-> * Send u-boot-spl.normal.out via XMODEM.
-> * Send u-boot.itb via YMODEM.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
-> v2:
->         no change
-> ---
->  configs/starfive_visionfive2_defconfig | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_vi=
-sionfive2_defconfig
-> index 3bbd1dbd67c..174ac24dc74 100644
-> --- a/configs/starfive_visionfive2_defconfig
-> +++ b/configs/starfive_visionfive2_defconfig
-> @@ -62,6 +62,7 @@ CONFIG_SPL_I2C=3Dy
->  CONFIG_SPL_DM_SPI_FLASH=3Dy
->  CONFIG_SPL_DM_RESET=3Dy
->  CONFIG_SPL_SPI_LOAD=3Dy
-> +CONFIG_SPL_YMODEM_SUPPORT=3Dy
->  CONFIG_SYS_PROMPT=3D"StarFive # "
->  CONFIG_CMD_EEPROM=3Dy
->  CONFIG_SYS_EEPROM_SIZE=3D512
-> --
-> 2.43.0
->
 
-Reviewed-by: E. Shattow <lucent@gmail.com>
+--FJTUrWXrcGLdqxj+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Apr 19, 2024 at 01:37:45PM +0200, Heinrich Schuchardt wrote:
+
+> %s/arguemnts/arguments/
+>=20
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--FJTUrWXrcGLdqxj+
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY1Y0YACgkQFHw5/5Y0
+tywDCAwAiciOPpO3y/Lt2NohbbC1w+CfD6JbqWjTCBZeSoufvRomsfn0bfjQlNoF
+MaAfSaPYfqqTYGB2k+YbedZSp/BzPn7an3ZqQEIZHQyCQ33wSC+WiEJcXGUQphAJ
+HmQRxnjWluoL2a4N+kj+EDRs6Ndjxae6CE3QiPpoQ63qqaxXHVbjvWgre7T2R2qm
+hrKSksaEeYNNhveKlEn43WkfFNyKtXxCeAg9olkgN8O2XkgllgCyAGiSf2rSeIw3
+8qSkjtHeXzD03qk3QlWs+NNtYaw6jzogOXkdt68KyVXp8PB1C6JKPVvCd/Cg55yO
+9KEr2Gem/RXUHzaj3wLZInulwGWW9QR9QHjFDhU1PVUrZUhGqmermvulS4jv0dNf
+aVDJYTclBEOGbp4fyeyELGd/YFvAmxkKs9O7TNFDbIdTk3QXyxD9dLw/tam8UBhd
+42l1QGoJ7nbBOaXNEHWNneGEhN842wym59phOBAaCzgQNQoYW+oOIO//yxCTOm3B
+UuVuj5JA
+=OjZi
+-----END PGP SIGNATURE-----
+
+--FJTUrWXrcGLdqxj+--
