@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF9BEC4345F
-	for <u-boot@archiver.kernel.org>; Fri,  3 May 2024 05:28:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BA5BC4345F
+	for <u-boot@archiver.kernel.org>; Fri,  3 May 2024 05:30:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A92E88A3F;
-	Fri,  3 May 2024 07:28:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EEEA2884F3;
+	Fri,  3 May 2024 07:30:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="lWU9iA/Z";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hJtz3YDU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29050884F3; Fri,  3 May 2024 07:28:34 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 5ECA08831B; Fri,  3 May 2024 07:30:36 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57B7388A92
- for <u-boot@lists.denx.de>; Fri,  3 May 2024 07:28:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 62C8588261
+ for <u-boot@lists.denx.de>; Fri,  3 May 2024 07:30:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4435SSB3013208;
- Fri, 3 May 2024 00:28:28 -0500
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4435UWQj046931;
+ Fri, 3 May 2024 00:30:32 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1714714108;
- bh=32BvKP7w8ndAzSOMUOWMG77MHra+OUTFActOadpp1Ko=;
+ s=ti-com-17Q1; t=1714714232;
+ bh=l+2ggDdyxIn+LeqdBh2+omqUdFlMTwx+Z1kAghHT3WI=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=lWU9iA/ZgZ8viN+bOrpZcuMEyUYfWKjiRaKNWO7Km0ibM0TEHmLPmuGThVtR6tJ3S
- yuLGoxB807pUoxzdKHk0wD4+AzltgdOSmRIm1lAFwneitIDLh2sHjjOoE28fhfapxm
- 6hnPRDKRNDkAPAahuN29yOvitz7a263q2iZzWYxc=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4435SSAt009659
+ b=hJtz3YDUK674stJW/Wh6nHt2t0T73XAKHeqSsqgQntAuLVxIQrQfltpvRpuZO+Mw0
+ C9QHQGGbfVonDWqZ8WZnNIvz4RUr1r5Nl5jeUe1X2bUPFYtBHQpdtcfrFNYxOdN16q
+ PQ8LvQw3DXy2BSF5yMh9TXwhiNnHvVDDWqf5digs=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4435UWFC130046
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 3 May 2024 00:28:28 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 3 May 2024 00:30:32 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 3
- May 2024 00:28:28 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ May 2024 00:30:32 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 3 May 2024 00:28:28 -0500
+ Frontend Transport; Fri, 3 May 2024 00:30:32 -0500
 Received: from localhost (dhruva.dhcp.ti.com [172.24.227.68])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4435SRhI041491;
- Fri, 3 May 2024 00:28:27 -0500
-Date: Fri, 3 May 2024 10:58:26 +0530
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4435UVKU037294;
+ Fri, 3 May 2024 00:30:32 -0500
+Date: Fri, 3 May 2024 11:00:31 +0530
 From: Dhruva Gole <d-gole@ti.com>
 To: Bryan Brattlof <bb@ti.com>
 CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Nitin Yadav
- <n-yadav@ti.com>, <nm@ti.com>, <vigneshr@ti.com>
-Subject: Re: [PATCH 1/2] arm: dts: add U-Boot dtbs for the am625-lp-sk
-Message-ID: <20240503052826.gd4omfui7kdkibjw@dhruva>
+ <n-yadav@ti.com>
+Subject: Re: [PATCH 2/2] configs: add defconfigs for the am625-lp-sk
+Message-ID: <20240503053031.sqg2esmbgfvkunco@dhruva>
 References: <20240429-am62q-wip-v1-0-927fd2e0a53b@ti.com>
- <20240429-am62q-wip-v1-1-927fd2e0a53b@ti.com>
+ <20240429-am62q-wip-v1-2-927fd2e0a53b@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20240429-am62q-wip-v1-1-927fd2e0a53b@ti.com>
+In-Reply-To: <20240429-am62q-wip-v1-2-927fd2e0a53b@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -79,67 +79,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Apr 30, 2024 at 14:57:45 -0500, Bryan Brattlof wrote:
-> From: Nitin Yadav <n-yadav@ti.com>
+On Apr 30, 2024 at 14:57:46 -0500, Bryan Brattlof wrote:
+> The am62x-lp-sk is a package and reference board spin of the am62x-sk to
+> showcase the low-power features of the am62x SoC family. Because it so
+> closely resembles the am62x-sk board, us the preprocessor to inherit its
+
+s/us/use
+
+> configuration making the needed changes for this board.
 > 
-> Add the U-Boot device tree overrides for the am62x-lp-sk reference
-> board.
-> 
-> Signed-off-by: Nitin Yadav <n-yadav@ti.com>
 > Signed-off-by: Bryan Brattlof <bb@ti.com>
 > ---
->  arch/arm/dts/k3-am62-lp-sk-binman.dtsi   |   21 +
->  arch/arm/dts/k3-am62-lp-sk-u-boot.dtsi   |   17 +
->  arch/arm/dts/k3-am62-lp4-50-800-800.dtsi | 2190 ++++++++++++++++++++++++++++++
->  arch/arm/dts/k3-am62-r5-lp-sk.dts        |   82 ++
->  4 files changed, 2310 insertions(+)
+>  configs/am62x_lp_sk_a53_defconfig | 3 +++
+>  configs/am62x_lp_sk_r5_defconfig  | 2 ++
+>  2 files changed, 5 insertions(+)
 > 
-> diff --git a/arch/arm/dts/k3-am62-lp-sk-binman.dtsi b/arch/arm/dts/k3-am62-lp-sk-binman.dtsi
+> diff --git a/configs/am62x_lp_sk_a53_defconfig b/configs/am62x_lp_sk_a53_defconfig
 > new file mode 100644
-> index 0000000000000..de425a4b54f81
+> index 0000000000000..904b2142b2f53
 > --- /dev/null
-> +++ b/arch/arm/dts/k3-am62-lp-sk-binman.dtsi
-> @@ -0,0 +1,21 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-
-Can make this 2024, here and everywhere else.
-
-> + */
-> +
-> +#include "k3-binman.dtsi"
-> +#include "k3-am625-sk-binman.dtsi"
-> +
-> +#ifdef CONFIG_TARGET_AM625_A53_EVM
-> +
-> +#define SPL_AM62_LP_SK_DTB "spl/dts/ti/k3-am62-lp-sk.dtb"
-> +
-> +&spl_am625_sk_dtb {
-> +	filename = SPL_AM62_LP_SK_DTB;
-> +};
-> +
-> +&spl_am625_sk_dtb_unsigned {
-> +	filename = SPL_AM62_LP_SK_DTB;
-> +};
-> +
-> +#endif
-> diff --git a/arch/arm/dts/k3-am62-lp-sk-u-boot.dtsi b/arch/arm/dts/k3-am62-lp-sk-u-boot.dtsi
+> +++ b/configs/am62x_lp_sk_a53_defconfig
+> @@ -0,0 +1,3 @@
+> +#include <configs/am62x_evm_a53_defconfig>
+> +CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am62-lp-sk"
+> +CONFIG_OF_UPSTREAM=y
+> diff --git a/configs/am62x_lp_sk_r5_defconfig b/configs/am62x_lp_sk_r5_defconfig
 > new file mode 100644
-> index 0000000000000..08f572446657e
+> index 0000000000000..93b3922e6fec5
 > --- /dev/null
-> +++ b/arch/arm/dts/k3-am62-lp-sk-u-boot.dtsi
-> @@ -0,0 +1,17 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * AM62x LP SK dts file for SPLs
-> + * Copyright (C) 2021-2023 Texas Instruments Incorporated - https://www.ti.com/
+> +++ b/configs/am62x_lp_sk_r5_defconfig
+> @@ -0,0 +1,2 @@
+> +#include <configs/am62x_evm_r5_defconfig>
+> +CONFIG_DEFAULT_DEVICE_TREE="k3-am62-r5-lp-sk"
 
-2024 ^^
-
-[...]
-
-With that fixed,
 Reviewed-by: Dhruva Gole <d-gole@ti.com>
 
 -- 
