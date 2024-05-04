@@ -4,97 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4BF3C4345F
-	for <u-boot@archiver.kernel.org>; Sat,  4 May 2024 17:07:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4111CC4345F
+	for <u-boot@archiver.kernel.org>; Sat,  4 May 2024 18:39:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A120B884BB;
-	Sat,  4 May 2024 19:07:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 64E06883D8;
+	Sat,  4 May 2024 20:39:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SnoEAgWK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="l2WxXfC0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A3EB884BD; Sat,  4 May 2024 19:06:06 +0200 (CEST)
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
- [IPv6:2607:f8b0:4864:20::436])
+ id 43DD988501; Sat,  4 May 2024 19:10:09 +0200 (CEST)
+Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
+ [IPv6:2607:f8b0:4864:20::b34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63909884B8
- for <u-boot@lists.denx.de>; Sat,  4 May 2024 19:06:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 313D088501
+ for <u-boot@lists.denx.de>; Sat,  4 May 2024 19:10:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=liujianfeng1994@gmail.com
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-6f3e3d789cdso620048b3a.1
- for <u-boot@lists.denx.de>; Sat, 04 May 2024 10:06:03 -0700 (PDT)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-yb1-xb34.google.com with SMTP id
+ 3f1490d57ef6-de462979e00so746846276.3
+ for <u-boot@lists.denx.de>; Sat, 04 May 2024 10:10:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1714842361; x=1715447161; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=YkFPrPmQWTVr1eion9+WOgRwDOJ4OO48NiNnIGGe0Lw=;
- b=SnoEAgWKLW6YCeKivQG3ot5BG5Ul3X6UG77eqXQfypqZSwukVqMwJlkq2tqfkSt08G
- +59GIzhahB7T8eN30ufP0fPdmfzhPy6drr/2JWxgLUau5gYcPFrBlYcX8gmGGClMozrL
- EZa/AV5evAGPDWVtWOp5BYgJMBxsjuLXaJzfpLlQ8AVsLrW/avGWwhdIzQeTsxBleCzi
- ICl1yMaIj35CNR0+oCCc9CYC8shTDU//L93403X1vSUthLaparoslygwDGB8HWswVIvA
- zEBN7OgC/xEnxYHIBVDp8HxJ5sXYWPGrHv11Lu0U2rdEKTg9yMfXAAN/3m+sFsofiZPO
- d+Eg==
+ d=gmail.com; s=20230601; t=1714842604; x=1715447404; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hKuIvz1fcS04p7Xua/Z3XdTs2HWP4h7yYXO2bA8hpBY=;
+ b=l2WxXfC0Efw7zOYzWcXSqTb9dA022QqD1TTzQQbPy21TB7L5mwUqHTonII/nA2WYGp
+ CmlXpI/Z1pPWBR4sXII9tG4OXwJJP8t+YJzwF+D20JKr2BnwWRrFqVEECAsvwXjrv3QT
+ rk+SiRgy8O35xqzX05A5Bjes4PPj3xaqM2iKUUD2hJCQ2opU4SYI9MOIfjIK22eKphe+
+ 2kjGfyjTwok2NOm4GR3c5RC/DuCgDg+7tjfPDpEDDAJd+SeDnjA3ukJqdqt0/FEyWYEI
+ u7M9kodsSTJyaOMNhRo3RuTtHNYMMqQtTxo97JFucIscVaRWqIQeSqoZWgtnJIGjrPqG
+ ij6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714842361; x=1715447161;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=YkFPrPmQWTVr1eion9+WOgRwDOJ4OO48NiNnIGGe0Lw=;
- b=EcqTXumxQg8jTxtDak/l+Yql8QrhZZClEIaJEtXZ3WpjzFxWgMqmSem41Fd427mpQm
- oWXrsth3orAA2hSOxOl1O0kg49WY2+BrUgjDkO3okJGdcCRaR5xLrF2yJpDUpOHAHknW
- cXJdIkcuT2d6KS2zldfE1KdNpS0H++ZdHnHWwz4G5YID+M4LEkJkp2sTS5HKF7fE2PQs
- Z+cD2/rL/XXPlhoRyi008q8shMRGcWJl6ciiCXv9iRtwPRELf6YjUR4ZF/ZzO+fQQrBG
- VDGluyfpkL9zRNi2TiE1zmKNK7DuiN0v7oMs3a4ahn3lDXpgwg7+De1tDhwtOXO5XH88
- XrKw==
-X-Gm-Message-State: AOJu0Yx8DVCoaGfUqs5M6TXL5pyRmbxVXRwCHwNCALWOnyNxsZ7csksp
- OcFSsWvNPLw5GvsajDK8IxRojpmerMRs056v/M79YxcAWpmjx8EG+lbIrV/He8Q=
-X-Google-Smtp-Source: AGHT+IHEAphKHjZEkSQlSvz5cWvf1dnGcpkW0E9LYxM8CmCAY5FdOkCi4SlplTKPh/hYJRVxWb5kAA==
-X-Received: by 2002:a05:6a20:dc95:b0:1aa:2285:2cd0 with SMTP id
- ky21-20020a056a20dc9500b001aa22852cd0mr6140103pzb.23.1714842361253; 
- Sat, 04 May 2024 10:06:01 -0700 (PDT)
-Received: from localhost.localdomain ([221.220.133.99])
- by smtp.gmail.com with ESMTPSA id
- l13-20020a056a00140d00b006e8f75d3b07sm4954967pfu.181.2024.05.04.10.05.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 May 2024 10:06:00 -0700 (PDT)
-From: Jianfeng Liu <liujianfeng1994@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Jianfeng Liu <liujianfeng1994@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christopher Obbard <chris.obbard@collabora.com>,
- Elon Zhang <zhangzj@rock-chips.com>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Jagan Teki <jagan@edgeble.ai>,
- John Clark <inindev@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Massimo Pegorer <massimo.pegorer+oss@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michal Simek <michal.simek@amd.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
- Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
- Tianling Shen <cnsztl@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
- Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>,
- Weizhao Ouyang <weizhao.ouyang@arm.com>
-Subject: [PATCH] board: rockchip: add ArmSoM Sige7 Rk3588 board
-Date: Sun,  5 May 2024 01:05:37 +0800
-Message-Id: <20240504170537.376538-1-liujianfeng1994@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1714842604; x=1715447404;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=hKuIvz1fcS04p7Xua/Z3XdTs2HWP4h7yYXO2bA8hpBY=;
+ b=as8RjCDxVWEzSPZF/IXBFykgHg1tWTAjSLQqN3u+4AiQKnNA59UUy6+92k6Tcfs39n
+ rsEsXUWwz5JR+o/W72lw495dejdceVS2bzuC8oXRrcziTwDZgyWWZzrg6nd/dmopzRxe
+ m8/H1rEHp2ZodTfx63S568IbGtQZxaC58pAspwSRLb7Wp7QKP57K/COA+sZVQg6GKdfN
+ kAk8q5fCFeRrESuRQr1gUFAHkjI2E5uhTcB1j9aXH2TRWB7iGyf1Pex17ePXCWJlIEmJ
+ W/o5WlX/V6MJN1keQAfoF5pUVWfc1su3enfb0cTln6iIZzWObgLu0CDWmyByiLQIdtcQ
+ jWPw==
+X-Gm-Message-State: AOJu0YzfkrUpNEpLiyMrWIs9J778Ihrqu4NfGMlE/5jsXchTCr86dyh3
+ SArWVa9jhQRgQ/6m/eDFjDo4D/bnYzoe4kHiWAGNEHaflWxGqvPyPS4yNAyKZDxCnxO69nVrP3P
+ THtW8q6WX96ipamvCl4xdUcMvQ6c=
+X-Google-Smtp-Source: AGHT+IG5TIkGpabu3clKRzoZDbcO3JqLHAiO5hz8xFi9+AT4YNVDB7F4HFJd6N49o7eGpOYDZ7FVS5tVVqJwWyvcyZY=
+X-Received: by 2002:a05:6902:cc2:b0:dbd:be40:2191 with SMTP id
+ cq2-20020a0569020cc200b00dbdbe402191mr7287730ybb.42.1714842603798; Sat, 04
+ May 2024 10:10:03 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 04 May 2024 19:07:28 +0200
+References: <20240502013138.2383421-1-trini@konsulko.com>
+ <20240502013138.2383421-73-trini@konsulko.com>
+In-Reply-To: <20240502013138.2383421-73-trini@konsulko.com>
+From: E Shattow <lucent@gmail.com>
+Date: Sat, 4 May 2024 10:09:52 -0700
+Message-ID: <CANV2PTNaCHaWwaYOpoDYiLodZc-Jh_XaHFcQ62Og9bakzthYFg@mail.gmail.com>
+Subject: Re: [PATCH 73/81] usb: Remove <common.h> and add needed includes
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Eddie Cai <eddie.cai.linux@gmail.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Michal Simek <michal.simek@amd.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Stephan Gerhold <stephan@gerhold.net>,
+ Linus Walleij <linus.walleij@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Nishanth Menon <nm@ti.com>, Igor Prusov <ivprusov@salutedevices.com>, 
+ Roger Quadros <rogerq@kernel.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Jagan Teki <jagan@amarulasolutions.com>, 
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Peter Korsgaard <peter@korsgaard.com>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
+ Alexey Romanov <avromanov@salutedevices.com>, Sean Anderson <seanga2@gmail.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Teik Heng Chong <teik.heng.chong@intel.com>, 
+ Tim Harvey <tharvey@gateworks.com>, Mathieu Othacehe <othacehe@gnu.org>, 
+ Fabio Estevam <festevam@gmail.com>, Johan Jonker <jbx6244@gmail.com>, 
+ Xavier Drudis Ferran <xdrudis@tinet.cat>,
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Sam Edwards <cfsworks@gmail.com>, Andre Przywara <andre.przywara@arm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sat, 04 May 2024 20:39:48 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,1034 +116,1689 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ArmSoM Sige7 is a Rockchip RK3588 based SBC (Single Board Computer) by
-ArmSoM.
+On Wed, May 1, 2024 at 7:00=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
+>
+> Remove <common.h> from this driver directory and when needed
+> add missing include files directly.
+>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> Cc: Marek Vasut <marex@denx.de>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Neil Armstrong <neil.armstrong@linaro.org>
+> Cc: Lukasz Majewski <lukma@denx.de>
+> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Cc: Eddie Cai <eddie.cai.linux@gmail.com>
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Caleb Connolly <caleb.connolly@linaro.org>
+> Cc: Sumit Garg <sumit.garg@linaro.org>
+> Cc: Michal Simek <michal.simek@amd.com>
+> Cc: Bin Meng <bmeng.cn@gmail.com>
+> Cc: Ryder Lee <ryder.lee@mediatek.com>
+> Cc: Weijie Gao <weijie.gao@mediatek.com>
+> Cc: Chunfeng Yun <chunfeng.yun@mediatek.com>
+> Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
+> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+> Cc: Stephan Gerhold <stephan@gerhold.net>
+> Cc: Linus Walleij <linus.walleij@linaro.org>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
+> Cc: Kever Yang <kever.yang@rock-chips.com>
+> Cc: Nishanth Menon <nm@ti.com>
+> Cc: Igor Prusov <ivprusov@salutedevices.com>
+> Cc: Roger Quadros <rogerq@kernel.org>
+> Cc: Svyatoslav Ryhel <clamor95@gmail.com>
+> Cc: Jonas Karlman <jonas@kwiboo.se>
+> Cc: Jagan Teki <jagan@amarulasolutions.com>
+> Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+> Cc: Peter Korsgaard <peter@korsgaard.com>
+> Cc: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+> Cc: Alexey Romanov <avromanov@salutedevices.com>
+> Cc: Sean Anderson <seanga2@gmail.com>
+> Cc: Miquel Raynal <miquel.raynal@bootlin.com>
+> Cc: Teik Heng Chong <teik.heng.chong@intel.com>
+> Cc: Tim Harvey <tharvey@gateworks.com>
+> Cc: Mathieu Othacehe <othacehe@gnu.org>
+> Cc: Fabio Estevam <festevam@gmail.com>
+> Cc: Johan Jonker <jbx6244@gmail.com>
+> Cc: Xavier Drudis Ferran <xdrudis@tinet.cat>
+> Cc: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Sam Edwards <cfsworks@gmail.com>
+> Cc: Andre Przywara <andre.przywara@arm.com>
+> ---
+>  drivers/usb/cdns3/cdns3-ti.c               | 1 -
+>  drivers/usb/cdns3/core.c                   | 1 -
+>  drivers/usb/common/common.c                | 1 -
+>  drivers/usb/common/fsl-dt-fixup.c          | 1 -
+>  drivers/usb/common/fsl-errata.c            | 1 -
+>  drivers/usb/dwc3/core.c                    | 1 -
+>  drivers/usb/dwc3/dwc3-generic.c            | 1 -
+>  drivers/usb/dwc3/dwc3-layerscape.c         | 1 -
+>  drivers/usb/dwc3/dwc3-meson-g12a.c         | 1 -
+>  drivers/usb/dwc3/dwc3-meson-gxl.c          | 1 -
+>  drivers/usb/dwc3/dwc3-omap.c               | 1 -
+>  drivers/usb/dwc3/ep0.c                     | 1 -
+>  drivers/usb/dwc3/gadget.c                  | 1 -
+>  drivers/usb/dwc3/samsung_usb_phy.c         | 2 +-
+>  drivers/usb/dwc3/ti_usb_phy.c              | 1 -
+>  drivers/usb/emul/sandbox_flash.c           | 1 -
+>  drivers/usb/emul/sandbox_hub.c             | 1 -
+>  drivers/usb/emul/sandbox_keyb.c            | 1 -
+>  drivers/usb/emul/usb-emul-uclass.c         | 1 -
+>  drivers/usb/eth/asix.c                     | 1 -
+>  drivers/usb/eth/asix88179.c                | 1 -
+>  drivers/usb/eth/mcs7830.c                  | 1 -
+>  drivers/usb/eth/r8152.c                    | 1 -
+>  drivers/usb/eth/r8152_fw.c                 | 1 -
+>  drivers/usb/eth/smsc95xx.c                 | 1 -
+>  drivers/usb/eth/usb_ether.c                | 1 -
+>  drivers/usb/gadget/at91_udc.c              | 1 -
+>  drivers/usb/gadget/atmel_usba_udc.c        | 1 -
+>  drivers/usb/gadget/bcm_udc_otg_phy.c       | 1 -
+>  drivers/usb/gadget/ci_udc.c                | 1 -
+>  drivers/usb/gadget/config.c                | 1 -
+>  drivers/usb/gadget/dwc2_udc_otg.c          | 1 -
+>  drivers/usb/gadget/dwc2_udc_otg_phy.c      | 1 -
+>  drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c | 1 -
+>  drivers/usb/gadget/ep0.c                   | 1 -
+>  drivers/usb/gadget/epautoconf.c            | 1 -
+>  drivers/usb/gadget/ether.c                 | 1 -
+>  drivers/usb/gadget/f_acm.c                 | 1 -
+>  drivers/usb/gadget/f_dfu.c                 | 1 -
+>  drivers/usb/gadget/f_fastboot.c            | 1 -
+>  drivers/usb/gadget/f_mass_storage.c        | 1 -
+>  drivers/usb/gadget/f_rockusb.c             | 1 -
+>  drivers/usb/gadget/f_sdp.c                 | 1 -
+>  drivers/usb/gadget/f_thor.c                | 1 -
+>  drivers/usb/gadget/g_dnl.c                 | 1 -
+>  drivers/usb/gadget/max3420_udc.c           | 1 -
+>  drivers/usb/gadget/rndis.c                 | 1 -
+>  drivers/usb/gadget/udc/udc-core.c          | 1 -
+>  drivers/usb/gadget/udc/udc-uclass.c        | 1 -
+>  drivers/usb/gadget/usbstring.c             | 1 -
+>  drivers/usb/host/dwc2.c                    | 1 -
+>  drivers/usb/host/dwc3-of-simple.c          | 1 -
+>  drivers/usb/host/dwc3-sti-glue.c           | 1 -
+>  drivers/usb/host/ehci-atmel.c              | 1 -
+>  drivers/usb/host/ehci-exynos.c             | 1 -
+>  drivers/usb/host/ehci-fsl.c                | 1 -
+>  drivers/usb/host/ehci-generic.c            | 1 -
+>  drivers/usb/host/ehci-hcd.c                | 1 -
+>  drivers/usb/host/ehci-marvell.c            | 1 -
+>  drivers/usb/host/ehci-msm.c                | 1 -
+>  drivers/usb/host/ehci-mx5.c                | 1 -
+>  drivers/usb/host/ehci-mx6.c                | 1 -
+>  drivers/usb/host/ehci-mxs.c                | 1 -
+>  drivers/usb/host/ehci-npcm.c               | 1 -
+>  drivers/usb/host/ehci-omap.c               | 2 +-
+>  drivers/usb/host/ehci-pci.c                | 1 -
+>  drivers/usb/host/ehci-tegra.c              | 1 -
+>  drivers/usb/host/ehci-vf.c                 | 1 -
+>  drivers/usb/host/ehci-zynq.c               | 1 -
+>  drivers/usb/host/ohci-at91.c               | 1 -
+>  drivers/usb/host/ohci-da8xx.c              | 1 -
+>  drivers/usb/host/ohci-generic.c            | 1 -
+>  drivers/usb/host/ohci-hcd.c                | 2 +-
+>  drivers/usb/host/ohci-lpc32xx.c            | 1 -
+>  drivers/usb/host/ohci-npcm.c               | 1 -
+>  drivers/usb/host/ohci-pci.c                | 1 -
+>  drivers/usb/host/r8a66597-hcd.c            | 1 -
+>  drivers/usb/host/usb-sandbox.c             | 1 -
+>  drivers/usb/host/usb-uclass.c              | 1 -
+>  drivers/usb/host/usb_bootdev.c             | 1 -
+>  drivers/usb/host/xhci-brcm.c               | 1 -
+>  drivers/usb/host/xhci-dwc3.c               | 1 -
+>  drivers/usb/host/xhci-exynos5.c            | 1 -
+>  drivers/usb/host/xhci-fsl.c                | 1 -
+>  drivers/usb/host/xhci-mem.c                | 1 -
+>  drivers/usb/host/xhci-mtk.c                | 1 -
+>  drivers/usb/host/xhci-mvebu.c              | 1 -
+>  drivers/usb/host/xhci-omap.c               | 1 -
+>  drivers/usb/host/xhci-pci.c                | 1 -
+>  drivers/usb/host/xhci-rcar.c               | 1 -
+>  drivers/usb/host/xhci-ring.c               | 1 -
+>  drivers/usb/host/xhci.c                    | 1 -
+>  drivers/usb/isp1760/isp1760-hcd.c          | 1 -
+>  drivers/usb/isp1760/isp1760-if.c           | 1 -
+>  drivers/usb/isp1760/isp1760-uboot.c        | 1 -
+>  drivers/usb/mtu3/mtu3_plat.c               | 1 -
+>  drivers/usb/musb-new/am35x.c               | 1 -
+>  drivers/usb/musb-new/da8xx.c               | 1 -
+>  drivers/usb/musb-new/mt85xx.c              | 1 -
+>  drivers/usb/musb-new/musb_core.c           | 1 -
+>  drivers/usb/musb-new/musb_dsps.c           | 1 -
+>  drivers/usb/musb-new/musb_gadget.c         | 1 -
+>  drivers/usb/musb-new/musb_gadget_ep0.c     | 1 -
+>  drivers/usb/musb-new/musb_host.c           | 1 -
+>  drivers/usb/musb-new/musb_uboot.c          | 1 -
+>  drivers/usb/musb-new/omap2430.c            | 1 -
+>  drivers/usb/musb-new/pic32.c               | 1 -
+>  drivers/usb/musb-new/sunxi.c               | 1 -
+>  drivers/usb/musb-new/ti-musb.c             | 1 -
+>  drivers/usb/musb-new/ux500.c               | 1 -
+>  drivers/usb/musb/am35x.c                   | 1 -
+>  drivers/usb/musb/musb_core.c               | 1 -
+>  drivers/usb/musb/musb_hcd.c                | 1 -
+>  drivers/usb/musb/musb_udc.c                | 1 -
+>  drivers/usb/phy/rockchip_usb2_phy.c        | 1 -
+>  drivers/usb/ulpi/omap-ulpi-viewport.c      | 1 -
+>  drivers/usb/ulpi/ulpi-viewport.c           | 1 -
+>  drivers/usb/ulpi/ulpi.c                    | 1 -
+>  118 files changed, 3 insertions(+), 118 deletions(-)
+>
+> diff --git a/drivers/usb/cdns3/cdns3-ti.c b/drivers/usb/cdns3/cdns3-ti.c
+> index 2e44aadea47b..ac072260c30a 100644
+> --- a/drivers/usb/cdns3/cdns3-ti.c
+> +++ b/drivers/usb/cdns3/cdns3-ti.c
+> @@ -5,7 +5,6 @@
+>   * Copyright (C) 2019 Texas Instruments Incorporated - https://www.ti.co=
+m
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <dm.h>
+>  #include <dm/device_compat.h>
+> diff --git a/drivers/usb/cdns3/core.c b/drivers/usb/cdns3/core.c
+> index 12a741c6ea7c..b4e931646b88 100644
+> --- a/drivers/usb/cdns3/core.c
+> +++ b/drivers/usb/cdns3/core.c
+> @@ -11,7 +11,6 @@
+>   *         Roger Quadros <rogerq@ti.com>
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <log.h>
+>  #include <dm/device-internal.h>
+> diff --git a/drivers/usb/common/common.c b/drivers/usb/common/common.c
+> index 7137a569d97c..13e9a61072a9 100644
+> --- a/drivers/usb/common/common.c
+> +++ b/drivers/usb/common/common.c
+> @@ -6,7 +6,6 @@
+>   *     Texas Instruments Incorporated, <www.ti.com>
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <asm/global_data.h>
+>  #include <linux/printk.h>
+> diff --git a/drivers/usb/common/fsl-dt-fixup.c b/drivers/usb/common/fsl-d=
+t-fixup.c
+> index 00b8cd368b1a..6a68bd76c274 100644
+> --- a/drivers/usb/common/fsl-dt-fixup.c
+> +++ b/drivers/usb/common/fsl-dt-fixup.c
+> @@ -7,7 +7,6 @@
+>   * Author: Tor Krill tor@excito.com
+>   */
+>
+> -#include <common.h>
+>  #include <log.h>
+>  #include <usb.h>
+>  #include <asm/io.h>
+> diff --git a/drivers/usb/common/fsl-errata.c b/drivers/usb/common/fsl-err=
+ata.c
+> index 9eb1d2306725..89ae73f2ba48 100644
+> --- a/drivers/usb/common/fsl-errata.c
+> +++ b/drivers/usb/common/fsl-errata.c
+> @@ -5,7 +5,6 @@
+>   * Copyright 2013 Freescale Semiconductor, Inc.
+>   */
+>
+> -#include <common.h>
+>  #include <hwconfig.h>
+>  #include <fsl_errata.h>
+>  #include<fsl_usb.h>
+> diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
+> index 96e850b7170f..c443d56746dd 100644
+> --- a/drivers/usb/dwc3/core.c
+> +++ b/drivers/usb/dwc3/core.c
+> @@ -13,7 +13,6 @@
+>   * commit cd72f890d2 : usb: dwc3: core: enable phy suspend quirk on non-=
+FPGA
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <cpu_func.h>
+>  #include <malloc.h>
+> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-gene=
+ric.c
+> index 7a00529a2a8e..8db678eb85d4 100644
+> --- a/drivers/usb/dwc3/dwc3-generic.c
+> +++ b/drivers/usb/dwc3/dwc3-generic.c
+> @@ -7,7 +7,6 @@
+>   * Based on dwc3-omap.c.
+>   */
+>
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <log.h>
+>  #include <dm.h>
+> diff --git a/drivers/usb/dwc3/dwc3-layerscape.c b/drivers/usb/dwc3/dwc3-l=
+ayerscape.c
+> index c32df2396d74..ff83bf71e898 100644
+> --- a/drivers/usb/dwc3/dwc3-layerscape.c
+> +++ b/drivers/usb/dwc3/dwc3-layerscape.c
+> @@ -7,7 +7,6 @@
+>   * Based on dwc3-generic.c.
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <dm/device_compat.h>
+>  #include <dm/device-internal.h>
+> diff --git a/drivers/usb/dwc3/dwc3-meson-g12a.c b/drivers/usb/dwc3/dwc3-m=
+eson-g12a.c
+> index 1a3e9350c46d..21e4f637bb15 100644
+> --- a/drivers/usb/dwc3/dwc3-meson-g12a.c
+> +++ b/drivers/usb/dwc3/dwc3-meson-g12a.c
+> @@ -6,7 +6,6 @@
+>   * Author: Neil Armstrong <narmstrong@baylibre.com>
+>   */
+>
+> -#include <common.h>
+>  #include <log.h>
+>  #include <dm.h>
+>  #include <dm/device-internal.h>
+> diff --git a/drivers/usb/dwc3/dwc3-meson-gxl.c b/drivers/usb/dwc3/dwc3-me=
+son-gxl.c
+> index 2ce915701a85..3e693c5ff310 100644
+> --- a/drivers/usb/dwc3/dwc3-meson-gxl.c
+> +++ b/drivers/usb/dwc3/dwc3-meson-gxl.c
+> @@ -7,7 +7,6 @@
+>   */
+>
+>  #define DEBUG
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <dm/device-internal.h>
+>  #include <dm/lists.h>
+> diff --git a/drivers/usb/dwc3/dwc3-omap.c b/drivers/usb/dwc3/dwc3-omap.c
+> index 53c4d4826b45..4b219c35eb35 100644
+> --- a/drivers/usb/dwc3/dwc3-omap.c
+> +++ b/drivers/usb/dwc3/dwc3-omap.c
+> @@ -13,7 +13,6 @@
+>   * commit 7ee2566ff5 : usb: dwc3: dwc3-omap: get rid of ->prepare()/->co=
+mplete()
+>   */
+>
+> -#include <common.h>
+>  #include <malloc.h>
+>  #include <asm/io.h>
+>  #include <dm.h>
+> diff --git a/drivers/usb/dwc3/ep0.c b/drivers/usb/dwc3/ep0.c
+> index 1133cf82b1ae..117d38a0340b 100644
+> --- a/drivers/usb/dwc3/ep0.c
+> +++ b/drivers/usb/dwc3/ep0.c
+> @@ -12,7 +12,6 @@
+>   *
+>   * commit c00552ebaf : Merge 3.18-rc7 into usb-next
+>   */
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <dm.h>
+>  #include <dm/device_compat.h>
+> diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
+> index 406d36ceafe4..4de007cb0c38 100644
+> --- a/drivers/usb/dwc3/gadget.c
+> +++ b/drivers/usb/dwc3/gadget.c
+> @@ -13,7 +13,6 @@
+>   * commit 8e74475b0e : usb: dwc3: gadget: use udc-core's reset notifier
+>   */
+>
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <log.h>
+>  #include <malloc.h>
+> diff --git a/drivers/usb/dwc3/samsung_usb_phy.c b/drivers/usb/dwc3/samsun=
+g_usb_phy.c
+> index abbd41368901..0a7713081636 100644
+> --- a/drivers/usb/dwc3/samsung_usb_phy.c
+> +++ b/drivers/usb/dwc3/samsung_usb_phy.c
+> @@ -7,7 +7,7 @@
+>   * Author: Joonyoung Shim <jy0922.shim@samsung.com>
+>   */
+>
+> -#include <common.h>
+> +#include <asm/io.h>
+>  #include <asm/arch/power.h>
+>  #include <asm/arch/xhci-exynos.h>
+>  #include <linux/delay.h>
+> diff --git a/drivers/usb/dwc3/ti_usb_phy.c b/drivers/usb/dwc3/ti_usb_phy.=
+c
+> index 8ae130860f79..f0ecdea958ae 100644
+> --- a/drivers/usb/dwc3/ti_usb_phy.c
+> +++ b/drivers/usb/dwc3/ti_usb_phy.c
+> @@ -16,7 +16,6 @@
+>   * and remove" for phy-omap-usb2.c
+>   */
+>
+> -#include <common.h>
+>  #include <malloc.h>
+>  #include <ti-usb-phy-uboot.h>
+>  #include <dm/device_compat.h>
+> diff --git a/drivers/usb/emul/sandbox_flash.c b/drivers/usb/emul/sandbox_=
+flash.c
+> index 7c5c1ab3de73..24420e3d51e1 100644
+> --- a/drivers/usb/emul/sandbox_flash.c
+> +++ b/drivers/usb/emul/sandbox_flash.c
+> @@ -6,7 +6,6 @@
+>
+>  #define LOG_CATEGORY   UCLASS_USB
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <log.h>
+>  #include <malloc.h>
+> diff --git a/drivers/usb/emul/sandbox_hub.c b/drivers/usb/emul/sandbox_hu=
+b.c
+> index 084cc16cc683..3b3e59f978f7 100644
+> --- a/drivers/usb/emul/sandbox_hub.c
+> +++ b/drivers/usb/emul/sandbox_hub.c
+> @@ -4,7 +4,6 @@
+>   * Written by Simon Glass <sjg@chromium.org>
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <log.h>
+>  #include <usb.h>
+> diff --git a/drivers/usb/emul/sandbox_keyb.c b/drivers/usb/emul/sandbox_k=
+eyb.c
+> index 5ec1e98e4ed4..db769883ba3b 100644
+> --- a/drivers/usb/emul/sandbox_keyb.c
+> +++ b/drivers/usb/emul/sandbox_keyb.c
+> @@ -4,7 +4,6 @@
+>   * Written by Simon Glass <sjg@chromium.org>
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <log.h>
+>  #include <os.h>
+> diff --git a/drivers/usb/emul/usb-emul-uclass.c b/drivers/usb/emul/usb-em=
+ul-uclass.c
+> index b31dc950e3ab..cdc18d6cbb97 100644
+> --- a/drivers/usb/emul/usb-emul-uclass.c
+> +++ b/drivers/usb/emul/usb-emul-uclass.c
+> @@ -6,7 +6,6 @@
+>
+>  #define LOG_CATEGORY UCLASS_USB_EMUL
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <log.h>
+>  #include <usb.h>
+> diff --git a/drivers/usb/eth/asix.c b/drivers/usb/eth/asix.c
+> index 26dd312b7d06..c5a01ec922be 100644
+> --- a/drivers/usb/eth/asix.c
+> +++ b/drivers/usb/eth/asix.c
+> @@ -5,7 +5,6 @@
+>   * Patched for AX88772B by Antmicro Ltd <www.antmicro.com>
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <log.h>
+>  #include <net.h>
+> diff --git a/drivers/usb/eth/asix88179.c b/drivers/usb/eth/asix88179.c
+> index 2e737e606685..7bfd285b3aa4 100644
+> --- a/drivers/usb/eth/asix88179.c
+> +++ b/drivers/usb/eth/asix88179.c
+> @@ -5,7 +5,6 @@
+>   * from the Linux AX88179_178a driver
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <log.h>
+>  #include <usb.h>
+> diff --git a/drivers/usb/eth/mcs7830.c b/drivers/usb/eth/mcs7830.c
+> index d94204f22d5f..199fb7a5d08e 100644
+> --- a/drivers/usb/eth/mcs7830.c
+> +++ b/drivers/usb/eth/mcs7830.c
+> @@ -9,7 +9,6 @@
+>   * MOSCHIP MCS7830 based (7730/7830/7832) USB 2.0 Ethernet Devices
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <errno.h>
+>  #include <log.h>
+> diff --git a/drivers/usb/eth/r8152.c b/drivers/usb/eth/r8152.c
+> index 3c866f4f1e2d..e3f20e08c33c 100644
+> --- a/drivers/usb/eth/r8152.c
+> +++ b/drivers/usb/eth/r8152.c
+> @@ -4,7 +4,6 @@
+>   *
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <errno.h>
+>  #include <log.h>
+> diff --git a/drivers/usb/eth/r8152_fw.c b/drivers/usb/eth/r8152_fw.c
+> index a41abed3069a..3159f3010602 100644
+> --- a/drivers/usb/eth/r8152_fw.c
+> +++ b/drivers/usb/eth/r8152_fw.c
+> @@ -3,7 +3,6 @@
+>   * Copyright (c) 2015 Realtek Semiconductor Corp. All rights reserved.
+>   *
+>    */
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <errno.h>
+>  #include <linux/bitops.h>
+> diff --git a/drivers/usb/eth/smsc95xx.c b/drivers/usb/eth/smsc95xx.c
+> index de6586e62639..b4fcb2c2bb0d 100644
+> --- a/drivers/usb/eth/smsc95xx.c
+> +++ b/drivers/usb/eth/smsc95xx.c
+> @@ -6,7 +6,6 @@
+>   * Copyright (C) 2007-2008 SMSC (Steve Glendinning)
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <errno.h>
+>  #include <log.h>
+> diff --git a/drivers/usb/eth/usb_ether.c b/drivers/usb/eth/usb_ether.c
+> index 2e9af54fd63d..8bba3e0974e6 100644
+> --- a/drivers/usb/eth/usb_ether.c
+> +++ b/drivers/usb/eth/usb_ether.c
+> @@ -3,7 +3,6 @@
+>   * Copyright (c) 2011 The Chromium OS Authors.
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <errno.h>
+>  #include <log.h>
+> diff --git a/drivers/usb/gadget/at91_udc.c b/drivers/usb/gadget/at91_udc.=
+c
+> index e573a03477b9..86b2cbf3f6ae 100644
+> --- a/drivers/usb/gadget/at91_udc.c
+> +++ b/drivers/usb/gadget/at91_udc.c
+> @@ -13,7 +13,6 @@
+>  #undef VERBOSE_DEBUG
+>  #undef PACKET_TRACE
+>
+> -#include <common.h>
+>  #include <dm/devres.h>
+>  #include <linux/bug.h>
+>  #include <linux/err.h>
+> diff --git a/drivers/usb/gadget/atmel_usba_udc.c b/drivers/usb/gadget/atm=
+el_usba_udc.c
+> index 4c420747b0b6..f99553df8d49 100644
+> --- a/drivers/usb/gadget/atmel_usba_udc.c
+> +++ b/drivers/usb/gadget/atmel_usba_udc.c
+> @@ -7,7 +7,6 @@
+>   *                        Bo Shen <voice.shen@atmel.com>
+>   */
+>
+> -#include <common.h>
+>  #include <linux/bitops.h>
+>  #include <linux/errno.h>
+>  #include <asm/gpio.h>
+> diff --git a/drivers/usb/gadget/bcm_udc_otg_phy.c b/drivers/usb/gadget/bc=
+m_udc_otg_phy.c
+> index c89cd57c253d..9875191091cc 100644
+> --- a/drivers/usb/gadget/bcm_udc_otg_phy.c
+> +++ b/drivers/usb/gadget/bcm_udc_otg_phy.c
+> @@ -4,7 +4,6 @@
+>   */
+>
+>  #include <config.h>
+> -#include <common.h>
+>  #include <asm/io.h>
+>  #include <asm/arch/sysmap.h>
+>  #include <asm/kona-common/clk.h>
+> diff --git a/drivers/usb/gadget/ci_udc.c b/drivers/usb/gadget/ci_udc.c
+> index 750d47148798..bbe03cfff1fb 100644
+> --- a/drivers/usb/gadget/ci_udc.c
+> +++ b/drivers/usb/gadget/ci_udc.c
+> @@ -7,7 +7,6 @@
+>   * Murray.Jensen@cmst.csiro.au, 27-Jan-01.
+>   */
+>
+> -#include <common.h>
+>  #include <command.h>
+>  #include <config.h>
+>  #include <cpu_func.h>
+> diff --git a/drivers/usb/gadget/config.c b/drivers/usb/gadget/config.c
+> index e96782644f31..1363ef9e73df 100644
+> --- a/drivers/usb/gadget/config.c
+> +++ b/drivers/usb/gadget/config.c
+> @@ -8,7 +8,6 @@
+>   *                      Remy Bohmer <linux@bohmer.net>
+>   */
+>
+> -#include <common.h>
+>  #include <asm/unaligned.h>
+>  #include <linux/errno.h>
+>  #include <linux/list.h>
+> diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_=
+udc_otg.c
+> index 27082f5152cb..6bd395a6235a 100644
+> --- a/drivers/usb/gadget/dwc2_udc_otg.c
+> +++ b/drivers/usb/gadget/dwc2_udc_otg.c
+> @@ -17,7 +17,6 @@
+>   * Lukasz Majewski <l.majewski@samsumg.com>
+>   */
+>  #undef DEBUG
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <dm.h>
+>  #include <generic-phy.h>
+> diff --git a/drivers/usb/gadget/dwc2_udc_otg_phy.c b/drivers/usb/gadget/d=
+wc2_udc_otg_phy.c
+> index 7f8e9564b9e5..c7eea7b34421 100644
+> --- a/drivers/usb/gadget/dwc2_udc_otg_phy.c
+> +++ b/drivers/usb/gadget/dwc2_udc_otg_phy.c
+> @@ -17,7 +17,6 @@
+>   * Lukasz Majewski <l.majewski@samsumg.com>
+>   */
+>
+> -#include <common.h>
+>  #include <linux/delay.h>
+>  #include <linux/errno.h>
+>  #include <linux/list.h>
+> diff --git a/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c b/drivers/usb/gad=
+get/dwc2_udc_otg_xfer_dma.c
+> index 1c34b753511d..16b2a03f9e4b 100644
+> --- a/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
+> +++ b/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
+> @@ -17,7 +17,6 @@
+>   * Lukasz Majewski <l.majewski@samsumg.com>
+>   */
+>
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <log.h>
+>  #include <linux/bug.h>
+> diff --git a/drivers/usb/gadget/ep0.c b/drivers/usb/gadget/ep0.c
+> index c256cc31fbd2..9d08640ff23a 100644
+> --- a/drivers/usb/gadget/ep0.c
+> +++ b/drivers/usb/gadget/ep0.c
+> @@ -36,7 +36,6 @@
+>   * XXX
+>   */
+>
+> -#include <common.h>
+>  #include <serial.h>
+>  #include <usbdevice.h>
+>
+> diff --git a/drivers/usb/gadget/epautoconf.c b/drivers/usb/gadget/epautoc=
+onf.c
+> index bb0d2971d06b..0a70035ce04b 100644
+> --- a/drivers/usb/gadget/epautoconf.c
+> +++ b/drivers/usb/gadget/epautoconf.c
+> @@ -8,7 +8,6 @@
+>   *                      Remy Bohmer <linux@bohmer.net>
+>   */
+>
+> -#include <common.h>
+>  #include <linux/usb/ch9.h>
+>  #include <linux/errno.h>
+>  #include <linux/usb/gadget.h>
+> diff --git a/drivers/usb/gadget/ether.c b/drivers/usb/gadget/ether.c
+> index 36618f0bdf36..b8b29d399b13 100644
+> --- a/drivers/usb/gadget/ether.c
+> +++ b/drivers/usb/gadget/ether.c
+> @@ -7,7 +7,6 @@
+>   * Copyright (C) 2008 Nokia Corporation
+>   */
+>
+> -#include <common.h>
+>  #include <console.h>
+>  #include <env.h>
+>  #include <log.h>
+> diff --git a/drivers/usb/gadget/f_acm.c b/drivers/usb/gadget/f_acm.c
+> index ba216128ab27..f18c6a0a7611 100644
+> --- a/drivers/usb/gadget/f_acm.c
+> +++ b/drivers/usb/gadget/f_acm.c
+> @@ -10,7 +10,6 @@
+>   */
+>
+>  #include <circbuf.h>
+> -#include <common.h>
+>  #include <console.h>
+>  #include <errno.h>
+>  #include <g_dnl.h>
+> diff --git a/drivers/usb/gadget/f_dfu.c b/drivers/usb/gadget/f_dfu.c
+> index 44877df4ec6b..ca8b36e077bc 100644
+> --- a/drivers/usb/gadget/f_dfu.c
+> +++ b/drivers/usb/gadget/f_dfu.c
+> @@ -16,7 +16,6 @@
+>
+>  #include <env.h>
+>  #include <errno.h>
+> -#include <common.h>
+>  #include <log.h>
+>  #include <malloc.h>
+>
+> diff --git a/drivers/usb/gadget/f_fastboot.c b/drivers/usb/gadget/f_fastb=
+oot.c
+> index 09e740cc9622..8df0e3f331d1 100644
+> --- a/drivers/usb/gadget/f_fastboot.c
+> +++ b/drivers/usb/gadget/f_fastboot.c
+> @@ -11,7 +11,6 @@
+>   */
+>  #include <command.h>
+>  #include <config.h>
+> -#include <common.h>
+>  #include <env.h>
+>  #include <errno.h>
+>  #include <fastboot.h>
+> diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f_m=
+ass_storage.c
+> index ef90c7ec7fb5..89a96dbb7a74 100644
+> --- a/drivers/usb/gadget/f_mass_storage.c
+> +++ b/drivers/usb/gadget/f_mass_storage.c
+> @@ -244,7 +244,6 @@
+>  #include <hexdump.h>
+>  #include <log.h>
+>  #include <malloc.h>
+> -#include <common.h>
+>  #include <console.h>
+>  #include <g_dnl.h>
+>  #include <dm/devres.h>
+> diff --git a/drivers/usb/gadget/f_rockusb.c b/drivers/usb/gadget/f_rockus=
+b.c
+> index 98a7ffa2a752..d679cdae97c8 100644
+> --- a/drivers/usb/gadget/f_rockusb.c
+> +++ b/drivers/usb/gadget/f_rockusb.c
+> @@ -6,7 +6,6 @@
+>   */
+>  #include <command.h>
+>  #include <config.h>
+> -#include <common.h>
+>  #include <env.h>
+>  #include <errno.h>
+>  #include <log.h>
+> diff --git a/drivers/usb/gadget/f_sdp.c b/drivers/usb/gadget/f_sdp.c
+> index ca2760c00d0d..89496917a61f 100644
+> --- a/drivers/usb/gadget/f_sdp.c
+> +++ b/drivers/usb/gadget/f_sdp.c
+> @@ -17,7 +17,6 @@
+>   */
+>
+>  #include <errno.h>
+> -#include <common.h>
+>  #include <console.h>
+>  #include <env.h>
+>  #include <log.h>
+> diff --git a/drivers/usb/gadget/f_thor.c b/drivers/usb/gadget/f_thor.c
+> index 0e7529dcdbb6..543721183480 100644
+> --- a/drivers/usb/gadget/f_thor.c
+> +++ b/drivers/usb/gadget/f_thor.c
+> @@ -15,7 +15,6 @@
+>   */
+>
+>  #include <command.h>
+> -#include <common.h>
+>  #include <console.h>
+>  #include <dm.h>
+>  #include <errno.h>
+> diff --git a/drivers/usb/gadget/g_dnl.c b/drivers/usb/gadget/g_dnl.c
+> index afb7b74f3057..b5b5f5d8c118 100644
+> --- a/drivers/usb/gadget/g_dnl.c
+> +++ b/drivers/usb/gadget/g_dnl.c
+> @@ -6,7 +6,6 @@
+>   * Lukasz Majewski  <l.majewski@samsung.com>
+>   */
+>
+> -#include <common.h>
+>  #include <log.h>
+>  #include <malloc.h>
+>
+> diff --git a/drivers/usb/gadget/max3420_udc.c b/drivers/usb/gadget/max342=
+0_udc.c
+> index fa655c98dcc5..5a227c0ffd99 100644
+> --- a/drivers/usb/gadget/max3420_udc.c
+> +++ b/drivers/usb/gadget/max3420_udc.c
+> @@ -1,6 +1,5 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>
+> -#include <common.h>
+>  #include <linux/errno.h>
+>  #include <linux/delay.h>
+>  #include <asm/gpio.h>
+> diff --git a/drivers/usb/gadget/rndis.c b/drivers/usb/gadget/rndis.c
+> index e7276ccd37a3..5e6e5a054ca7 100644
+> --- a/drivers/usb/gadget/rndis.c
+> +++ b/drivers/usb/gadget/rndis.c
+> @@ -18,7 +18,6 @@
+>   *             updates to merge with Linux 2.6, better match RNDIS spec
+>   */
+>
+> -#include <common.h>
+>  #include <log.h>
+>  #include <net.h>
+>  #include <malloc.h>
+> diff --git a/drivers/usb/gadget/udc/udc-core.c b/drivers/usb/gadget/udc/u=
+dc-core.c
+> index ba658d922966..6bb419ae2abc 100644
+> --- a/drivers/usb/gadget/udc/udc-core.c
+> +++ b/drivers/usb/gadget/udc/udc-core.c
+> @@ -19,7 +19,6 @@
+>  #include <malloc.h>
+>  #include <asm/cache.h>
+>  #include <linux/dma-mapping.h>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <dm/device-internal.h>
+>  #include <linux/usb/ch9.h>
+> diff --git a/drivers/usb/gadget/udc/udc-uclass.c b/drivers/usb/gadget/udc=
+/udc-uclass.c
+> index 30ee1cab0668..5dc23a55bb58 100644
+> --- a/drivers/usb/gadget/udc/udc-uclass.c
+> +++ b/drivers/usb/gadget/udc/udc-uclass.c
+> @@ -6,7 +6,6 @@
+>
+>  #define LOG_CATEGORY UCLASS_USB_GADGET_GENERIC
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <dm/device-internal.h>
+>  #include <linux/printk.h>
+> diff --git a/drivers/usb/gadget/usbstring.c b/drivers/usb/gadget/usbstrin=
+g.c
+> index e2464ad923f8..4617a95bd0a7 100644
+> --- a/drivers/usb/gadget/usbstring.c
+> +++ b/drivers/usb/gadget/usbstring.c
+> @@ -6,7 +6,6 @@
+>   *                      Remy Bohmer <linux@bohmer.net>
+>   */
+>
+> -#include <common.h>
+>  #include <linux/errno.h>
+>  #include <linux/usb/ch9.h>
+>  #include <linux/usb/gadget.h>
+> diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c
+> index 637eb2dd06f5..a9dbb85f4e6c 100644
+> --- a/drivers/usb/host/dwc2.c
+> +++ b/drivers/usb/host/dwc2.c
+> @@ -4,7 +4,6 @@
+>   * Copyright (C) 2014 Marek Vasut <marex@denx.de>
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <cpu_func.h>
+>  #include <dm.h>
+> diff --git a/drivers/usb/host/dwc3-of-simple.c b/drivers/usb/host/dwc3-of=
+-simple.c
+> index f9df59d2e5d7..d52e7d22d1a7 100644
+> --- a/drivers/usb/host/dwc3-of-simple.c
+> +++ b/drivers/usb/host/dwc3-of-simple.c
+> @@ -10,7 +10,6 @@
+>   * Author: Neil Armstrong <narmstron@baylibre.com>
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <reset.h>
+>  #include <clk.h>
+> diff --git a/drivers/usb/host/dwc3-sti-glue.c b/drivers/usb/host/dwc3-sti=
+-glue.c
+> index 4a3ab6111276..3e6834e38e38 100644
+> --- a/drivers/usb/host/dwc3-sti-glue.c
+> +++ b/drivers/usb/host/dwc3-sti-glue.c
+> @@ -6,7 +6,6 @@
+>   * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicro=
+electronics.
+>   */
+>
+> -#include <common.h>
+>  #include <log.h>
+>  #include <asm/global_data.h>
+>  #include <asm/io.h>
+> diff --git a/drivers/usb/host/ehci-atmel.c b/drivers/usb/host/ehci-atmel.=
+c
+> index c6d50fd4551a..ee751224463a 100644
+> --- a/drivers/usb/host/ehci-atmel.c
+> +++ b/drivers/usb/host/ehci-atmel.c
+> @@ -5,7 +5,6 @@
+>   * Written-by: Bo Shen <voice.shen@atmel.com>
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <dm.h>
+>  #include <log.h>
+> diff --git a/drivers/usb/host/ehci-exynos.c b/drivers/usb/host/ehci-exyno=
+s.c
+> index c1cdd4b0889a..1e4a5a0b6f6c 100644
+> --- a/drivers/usb/host/ehci-exynos.c
+> +++ b/drivers/usb/host/ehci-exynos.c
+> @@ -6,7 +6,6 @@
+>   *     Vivek Gautam <gautam.vivek@samsung.com>
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <fdtdec.h>
+>  #include <log.h>
+> diff --git a/drivers/usb/host/ehci-fsl.c b/drivers/usb/host/ehci-fsl.c
+> index 0569dd54fff9..ee3eb065b142 100644
+> --- a/drivers/usb/host/ehci-fsl.c
+> +++ b/drivers/usb/host/ehci-fsl.c
+> @@ -7,7 +7,6 @@
+>   * Author: Tor Krill tor@excito.com
+>   */
+>
+> -#include <common.h>
+>  #include <env.h>
+>  #include <log.h>
+>  #include <pci.h>
+> diff --git a/drivers/usb/host/ehci-generic.c b/drivers/usb/host/ehci-gene=
+ric.c
+> index 936e30438d9f..23c3ed25554f 100644
+> --- a/drivers/usb/host/ehci-generic.c
+> +++ b/drivers/usb/host/ehci-generic.c
+> @@ -3,7 +3,6 @@
+>   * Copyright (C) 2015 Alexey Brodkin <abrodkin@synopsys.com>
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <log.h>
+>  #include <dm/device_compat.h>
+> diff --git a/drivers/usb/host/ehci-hcd.c b/drivers/usb/host/ehci-hcd.c
+> index 9839aa17492d..7d5519c65a9e 100644
+> --- a/drivers/usb/host/ehci-hcd.c
+> +++ b/drivers/usb/host/ehci-hcd.c
+> @@ -6,7 +6,6 @@
+>   *
+>   * All rights reserved.
+>   */
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <dm.h>
+>  #include <errno.h>
+> diff --git a/drivers/usb/host/ehci-marvell.c b/drivers/usb/host/ehci-marv=
+ell.c
+> index 6093c8fb0b68..ca0ab57d49c2 100644
+> --- a/drivers/usb/host/ehci-marvell.c
+> +++ b/drivers/usb/host/ehci-marvell.c
+> @@ -5,7 +5,6 @@
+>   * Written-by: Prafulla Wadaskar <prafulla@marvell.com>
+>   */
+>
+> -#include <common.h>
+>  #include <log.h>
+>  #include <asm/global_data.h>
+>  #include <asm/io.h>
+> diff --git a/drivers/usb/host/ehci-msm.c b/drivers/usb/host/ehci-msm.c
+> index 98fe7bc3bcb1..a081f71b187d 100644
+> --- a/drivers/usb/host/ehci-msm.c
+> +++ b/drivers/usb/host/ehci-msm.c
+> @@ -7,7 +7,6 @@
+>   * Based on Linux driver
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <dm/lists.h>
+>  #include <errno.h>
+> diff --git a/drivers/usb/host/ehci-mx5.c b/drivers/usb/host/ehci-mx5.c
+> index c11279867c7c..fb912654097e 100644
+> --- a/drivers/usb/host/ehci-mx5.c
+> +++ b/drivers/usb/host/ehci-mx5.c
+> @@ -4,7 +4,6 @@
+>   * Copyright (C) 2010 Freescale Semiconductor, Inc.
+>   */
+>
+> -#include <common.h>
+>  #include <log.h>
+>  #include <usb.h>
+>  #include <errno.h>
+> diff --git a/drivers/usb/host/ehci-mx6.c b/drivers/usb/host/ehci-mx6.c
+> index a35fcca43a23..31cd8a50f4a2 100644
+> --- a/drivers/usb/host/ehci-mx6.c
+> +++ b/drivers/usb/host/ehci-mx6.c
+> @@ -4,7 +4,6 @@
+>   * Copyright (C) 2010 Freescale Semiconductor, Inc.
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <log.h>
+>  #include <usb.h>
+> diff --git a/drivers/usb/host/ehci-mxs.c b/drivers/usb/host/ehci-mxs.c
+> index ddf7cc2d00a7..95af5c9254cb 100644
+> --- a/drivers/usb/host/ehci-mxs.c
+> +++ b/drivers/usb/host/ehci-mxs.c
+> @@ -6,7 +6,6 @@
+>   * on behalf of DENX Software Engineering GmbH
+>   */
+>
+> -#include <common.h>
+>  #include <asm/io.h>
+>  #include <asm/arch/imx-regs.h>
+>  #include <errno.h>
+> diff --git a/drivers/usb/host/ehci-npcm.c b/drivers/usb/host/ehci-npcm.c
+> index 357a5614edb7..d2a9965b4b4f 100644
+> --- a/drivers/usb/host/ehci-npcm.c
+> +++ b/drivers/usb/host/ehci-npcm.c
+> @@ -3,7 +3,6 @@
+>   * Copyright (c) 2021 Nuvoton Technology Corp.
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <generic-phy.h>
+>  #include <reset.h>
+> diff --git a/drivers/usb/host/ehci-omap.c b/drivers/usb/host/ehci-omap.c
+> index 765336a3c42b..a95fcad02131 100644
+> --- a/drivers/usb/host/ehci-omap.c
+> +++ b/drivers/usb/host/ehci-omap.c
+> @@ -10,8 +10,8 @@
+>   *
+>   */
+>
+> -#include <common.h>
+>  #include <log.h>
+> +#include <time.h>
+>  #include <usb.h>
+>  #include <linux/delay.h>
+>  #include <usb/ulpi.h>
+> diff --git a/drivers/usb/host/ehci-pci.c b/drivers/usb/host/ehci-pci.c
+> index e98ab312618d..572686580cd5 100644
+> --- a/drivers/usb/host/ehci-pci.c
+> +++ b/drivers/usb/host/ehci-pci.c
+> @@ -4,7 +4,6 @@
+>   * All rights reserved.
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <errno.h>
+>  #include <init.h>
+> diff --git a/drivers/usb/host/ehci-tegra.c b/drivers/usb/host/ehci-tegra.=
+c
+> index 2cf16256703d..343893b9f19a 100644
+> --- a/drivers/usb/host/ehci-tegra.c
+> +++ b/drivers/usb/host/ehci-tegra.c
+> @@ -5,7 +5,6 @@
+>   * Copyright (c) 2013 Lucas Stach
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <log.h>
+>  #include <linux/delay.h>
+> diff --git a/drivers/usb/host/ehci-vf.c b/drivers/usb/host/ehci-vf.c
+> index 648e136447d9..5afe28ea3033 100644
+> --- a/drivers/usb/host/ehci-vf.c
+> +++ b/drivers/usb/host/ehci-vf.c
+> @@ -6,7 +6,6 @@
+>   * Based on ehci-mx6 driver
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <log.h>
+>  #include <usb.h>
+> diff --git a/drivers/usb/host/ehci-zynq.c b/drivers/usb/host/ehci-zynq.c
+> index f7e458cb15a2..dfaff5c60f4e 100644
+> --- a/drivers/usb/host/ehci-zynq.c
+> +++ b/drivers/usb/host/ehci-zynq.c
+> @@ -5,7 +5,6 @@
+>   * USB Low level initialization(Specific to zynq)
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <usb.h>
+>  #include <asm/arch/hardware.h>
+> diff --git a/drivers/usb/host/ohci-at91.c b/drivers/usb/host/ohci-at91.c
+> index 9b955c1bd678..b170f26e6c6a 100644
+> --- a/drivers/usb/host/ohci-at91.c
+> +++ b/drivers/usb/host/ohci-at91.c
+> @@ -4,7 +4,6 @@
+>   * DENX Software Engineering <mk@denx.de>
+>   */
+>
+> -#include <common.h>
+>  #include <asm/arch/clk.h>
+>
+>  int usb_cpu_init(void)
+> diff --git a/drivers/usb/host/ohci-da8xx.c b/drivers/usb/host/ohci-da8xx.=
+c
+> index d3d73d238442..d321d147c2f9 100644
+> --- a/drivers/usb/host/ohci-da8xx.c
+> +++ b/drivers/usb/host/ohci-da8xx.c
+> @@ -3,7 +3,6 @@
+>   * Copyright (C) 2012 Sughosh Ganu <urwithsughosh@gmail.com>
+>   */
+>
+> -#include <common.h>
+>  #include <malloc.h>
+>  #include <asm/io.h>
+>  #include <clk.h>
+> diff --git a/drivers/usb/host/ohci-generic.c b/drivers/usb/host/ohci-gene=
+ric.c
+> index ceed1911a95a..f1325cd49534 100644
+> --- a/drivers/usb/host/ohci-generic.c
+> +++ b/drivers/usb/host/ohci-generic.c
+> @@ -3,7 +3,6 @@
+>   * Copyright (C) 2015 Alexey Brodkin <abrodkin@synopsys.com>
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <dm.h>
+>  #include <log.h>
+> diff --git a/drivers/usb/host/ohci-hcd.c b/drivers/usb/host/ohci-hcd.c
+> index 3f4418198ccd..c020d13c43d2 100644
+> --- a/drivers/usb/host/ohci-hcd.c
+> +++ b/drivers/usb/host/ohci-hcd.c
+> @@ -27,7 +27,7 @@
+>   *     to activate workaround for bug #41 or this driver will NOT work!
+>   */
+>
+> -#include <common.h>
+> +#include <config.h>
+>  #include <cpu_func.h>
+>  #include <asm/byteorder.h>
+>  #include <dm.h>
+> diff --git a/drivers/usb/host/ohci-lpc32xx.c b/drivers/usb/host/ohci-lpc3=
+2xx.c
+> index a04b2961b961..ed04cae7afed 100644
+> --- a/drivers/usb/host/ohci-lpc32xx.c
+> +++ b/drivers/usb/host/ohci-lpc32xx.c
+> @@ -7,7 +7,6 @@
+>   * Copyright (c) 2015 Tyco Fire Protection Products.
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <errno.h>
+>  #include <init.h>
+> diff --git a/drivers/usb/host/ohci-npcm.c b/drivers/usb/host/ohci-npcm.c
+> index 9e1d52988099..ffeb6bc206a8 100644
+> --- a/drivers/usb/host/ohci-npcm.c
+> +++ b/drivers/usb/host/ohci-npcm.c
+> @@ -3,7 +3,6 @@
+>   * Copyright (c) 2021 Nuvoton Technology Corp.
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <generic-phy.h>
+>  #include <reset.h>
+> diff --git a/drivers/usb/host/ohci-pci.c b/drivers/usb/host/ohci-pci.c
+> index f061aec28966..f10f10924205 100644
+> --- a/drivers/usb/host/ohci-pci.c
+> +++ b/drivers/usb/host/ohci-pci.c
+> @@ -5,7 +5,6 @@
+>   *
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <errno.h>
+>  #include <pci.h>
+> diff --git a/drivers/usb/host/r8a66597-hcd.c b/drivers/usb/host/r8a66597-=
+hcd.c
+> index 3ccbc16da379..f0b18bffba41 100644
+> --- a/drivers/usb/host/r8a66597-hcd.c
+> +++ b/drivers/usb/host/r8a66597-hcd.c
+> @@ -5,7 +5,6 @@
+>   * Copyright (C) 2008  Yoshihiro Shimoda <shimoda.yoshihiro@renesas.com>
+>   */
+>
+> -#include <common.h>
+>  #include <console.h>
+>  #include <dm.h>
+>  #include <log.h>
+> diff --git a/drivers/usb/host/usb-sandbox.c b/drivers/usb/host/usb-sandbo=
+x.c
+> index 3d4f8d653b5d..e26f0b292ed5 100644
+> --- a/drivers/usb/host/usb-sandbox.c
+> +++ b/drivers/usb/host/usb-sandbox.c
+> @@ -4,7 +4,6 @@
+>   * Written by Simon Glass <sjg@chromium.org>
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <log.h>
+>  #include <usb.h>
+> diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclass.=
+c
+> index a1cd0ad2d669..cd3a07e4c374 100644
+> --- a/drivers/usb/host/usb-uclass.c
+> +++ b/drivers/usb/host/usb-uclass.c
+> @@ -8,7 +8,6 @@
+>
+>  #define LOG_CATEGORY UCLASS_USB
+>
+> -#include <common.h>
+>  #include <bootdev.h>
+>  #include <dm.h>
+>  #include <errno.h>
+> diff --git a/drivers/usb/host/usb_bootdev.c b/drivers/usb/host/usb_bootde=
+v.c
+> index 7fa1c601dff5..362b46dc466e 100644
+> --- a/drivers/usb/host/usb_bootdev.c
+> +++ b/drivers/usb/host/usb_bootdev.c
+> @@ -6,7 +6,6 @@
+>   * Written by Simon Glass <sjg@chromium.org>
+>   */
+>
+> -#include <common.h>
+>  #include <bootdev.h>
+>  #include <dm.h>
+>  #include <usb.h>
+> diff --git a/drivers/usb/host/xhci-brcm.c b/drivers/usb/host/xhci-brcm.c
+> index fe17924028cd..2ffad148dea6 100644
+> --- a/drivers/usb/host/xhci-brcm.c
+> +++ b/drivers/usb/host/xhci-brcm.c
+> @@ -3,7 +3,6 @@
+>   * Copyright (C) 2019 Broadcom.
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <fdtdec.h>
+>  #include <usb.h>
+> diff --git a/drivers/usb/host/xhci-dwc3.c b/drivers/usb/host/xhci-dwc3.c
+> index 6cebe1cc30cb..e3e0ceff43e6 100644
+> --- a/drivers/usb/host/xhci-dwc3.c
+> +++ b/drivers/usb/host/xhci-dwc3.c
+> @@ -8,7 +8,6 @@
+>   */
+>
+>  #include <clk.h>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <generic-phy.h>
+>  #include <log.h>
+> diff --git a/drivers/usb/host/xhci-exynos5.c b/drivers/usb/host/xhci-exyn=
+os5.c
+> index 270be934e7fc..6a2d422c4b8e 100644
+> --- a/drivers/usb/host/xhci-exynos5.c
+> +++ b/drivers/usb/host/xhci-exynos5.c
+> @@ -12,7 +12,6 @@
+>   * exynos5 specific PHY-init sequence.
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <fdtdec.h>
+>  #include <log.h>
+> diff --git a/drivers/usb/host/xhci-fsl.c b/drivers/usb/host/xhci-fsl.c
+> index e67e09e31e4a..3484ae1d21ee 100644
+> --- a/drivers/usb/host/xhci-fsl.c
+> +++ b/drivers/usb/host/xhci-fsl.c
+> @@ -7,7 +7,6 @@
+>   * Author: Ramneek Mehresh<ramneek.mehresh@freescale.com>
+>   */
+>
+> -#include <common.h>
+>  #include <log.h>
+>  #include <usb.h>
+>  #include <linux/errno.h>
+> diff --git a/drivers/usb/host/xhci-mem.c b/drivers/usb/host/xhci-mem.c
+> index 72b753062650..045b0fba8128 100644
+> --- a/drivers/usb/host/xhci-mem.c
+> +++ b/drivers/usb/host/xhci-mem.c
+> @@ -13,7 +13,6 @@
+>   *         Vikas Sajjan <vikas.sajjan@samsung.com>
+>   */
+>
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <dm.h>
+>  #include <log.h>
+> diff --git a/drivers/usb/host/xhci-mtk.c b/drivers/usb/host/xhci-mtk.c
+> index 63dfb793c6bd..7e288f0575b6 100644
+> --- a/drivers/usb/host/xhci-mtk.c
+> +++ b/drivers/usb/host/xhci-mtk.c
+> @@ -5,7 +5,6 @@
+>   */
+>
+>  #include <clk.h>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <dm/device_compat.h>
+>  #include <dm/devres.h>
+> diff --git a/drivers/usb/host/xhci-mvebu.c b/drivers/usb/host/xhci-mvebu.=
+c
+> index 46b89de85d1e..1338b1021c64 100644
+> --- a/drivers/usb/host/xhci-mvebu.c
+> +++ b/drivers/usb/host/xhci-mvebu.c
+> @@ -5,7 +5,6 @@
+>   * MVEBU USB HOST xHCI Controller
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <fdtdec.h>
+>  #include <log.h>
+> diff --git a/drivers/usb/host/xhci-omap.c b/drivers/usb/host/xhci-omap.c
+> index 501129d769a2..66da94c07098 100644
+> --- a/drivers/usb/host/xhci-omap.c
+> +++ b/drivers/usb/host/xhci-omap.c
+> @@ -8,7 +8,6 @@
+>   * Author: Dan Murphy <dmurphy@ti.com>
+>   */
+>
+> -#include <common.h>
+>  #include <log.h>
+>  #include <usb.h>
+>  #include <linux/errno.h>
+> diff --git a/drivers/usb/host/xhci-pci.c b/drivers/usb/host/xhci-pci.c
+> index 11f1c02000af..f6972af7963d 100644
+> --- a/drivers/usb/host/xhci-pci.c
+> +++ b/drivers/usb/host/xhci-pci.c
+> @@ -5,7 +5,6 @@
+>   * All rights reserved.
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <dm/device_compat.h>
+>  #include <init.h>
+> diff --git a/drivers/usb/host/xhci-rcar.c b/drivers/usb/host/xhci-rcar.c
+> index fedcf7869295..38c5928faed5 100644
+> --- a/drivers/usb/host/xhci-rcar.c
+> +++ b/drivers/usb/host/xhci-rcar.c
+> @@ -5,7 +5,6 @@
+>   * Renesas RCar USB HOST xHCI Controller
+>   */
+>
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <dm.h>
+>  #include <fdtdec.h>
+> diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
+> index 910c5f3352b8..1360a5940fa0 100644
+> --- a/drivers/usb/host/xhci-ring.c
+> +++ b/drivers/usb/host/xhci-ring.c
+> @@ -13,7 +13,6 @@
+>   *         Vikas Sajjan <vikas.sajjan@samsung.com>
+>   */
+>
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <log.h>
+>  #include <asm/byteorder.h>
+> diff --git a/drivers/usb/host/xhci.c b/drivers/usb/host/xhci.c
+> index 741e186ee05b..d30725d3fcaa 100644
+> --- a/drivers/usb/host/xhci.c
+> +++ b/drivers/usb/host/xhci.c
+> @@ -19,7 +19,6 @@
+>   * The quirk devices support hasn't been given yet.
+>   */
+>
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <dm.h>
+>  #include <dm/device_compat.h>
+> diff --git a/drivers/usb/isp1760/isp1760-hcd.c b/drivers/usb/isp1760/isp1=
+760-hcd.c
+> index a6c4d97aee3f..96c483fb9afa 100644
+> --- a/drivers/usb/isp1760/isp1760-hcd.c
+> +++ b/drivers/usb/isp1760/isp1760-hcd.c
+> @@ -7,7 +7,6 @@
+>   */
+>
+>  #include <hexdump.h>
+> -#include <common.h>
+>  #include <asm/cache.h>
+>  #include <cpu_func.h>
+>  #include <dm.h>
+> diff --git a/drivers/usb/isp1760/isp1760-if.c b/drivers/usb/isp1760/isp17=
+60-if.c
+> index c96ab459f93e..54246b49d5fe 100644
+> --- a/drivers/usb/isp1760/isp1760-if.c
+> +++ b/drivers/usb/isp1760/isp1760-if.c
+> @@ -6,7 +6,6 @@
+>   * (c) 2007 Sebastian Siewior <bigeasy@linutronix.de>
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <dm/device-internal.h>
+>  #include <dm/device_compat.h>
+> diff --git a/drivers/usb/isp1760/isp1760-uboot.c b/drivers/usb/isp1760/is=
+p1760-uboot.c
+> index 203500a4cb7f..8dcb7768a2c2 100644
+> --- a/drivers/usb/isp1760/isp1760-uboot.c
+> +++ b/drivers/usb/isp1760/isp1760-uboot.c
+> @@ -6,7 +6,6 @@
+>   *
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <dm/device-internal.h>
+>  #include <dm/device_compat.h>
+> diff --git a/drivers/usb/mtu3/mtu3_plat.c b/drivers/usb/mtu3/mtu3_plat.c
+> index b1b22b9357ce..ca86b58dfcd7 100644
+> --- a/drivers/usb/mtu3/mtu3_plat.c
+> +++ b/drivers/usb/mtu3/mtu3_plat.c
+> @@ -5,7 +5,6 @@
+>   * Author: Chunfeng Yun <chunfeng.yun@mediatek.com>
+>   */
+>
+> -#include <common.h>
+>  #include <dm/lists.h>
+>  #include <linux/iopoll.h>
+>
+> diff --git a/drivers/usb/musb-new/am35x.c b/drivers/usb/musb-new/am35x.c
+> index 0a52e09e19f1..42bc816e4f1e 100644
+> --- a/drivers/usb/musb-new/am35x.c
+> +++ b/drivers/usb/musb-new/am35x.c
+> @@ -24,7 +24,6 @@
+>
+>  #include <plat/usb.h>
+>  #else
+> -#include <common.h>
+>  #include <asm/omap_musb.h>
+>  #include <linux/bug.h>
+>  #include <linux/delay.h>
+> diff --git a/drivers/usb/musb-new/da8xx.c b/drivers/usb/musb-new/da8xx.c
+> index 68fc0c36146d..7caf03cc2e14 100644
+> --- a/drivers/usb/musb-new/da8xx.c
+> +++ b/drivers/usb/musb-new/da8xx.c
+> @@ -13,7 +13,6 @@
+>   *
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <log.h>
+>  #include <dm/device-internal.h>
+> diff --git a/drivers/usb/musb-new/mt85xx.c b/drivers/usb/musb-new/mt85xx.=
+c
+> index 1e632dca0462..14b28bbae6b1 100644
+> --- a/drivers/usb/musb-new/mt85xx.c
+> +++ b/drivers/usb/musb-new/mt85xx.c
+> @@ -9,7 +9,6 @@
+>   *
+>   * This file is part of the Inventra Controller Driver for Linux.
+>   */
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <dm.h>
+>  #include <dm/device_compat.h>
+> diff --git a/drivers/usb/musb-new/musb_core.c b/drivers/usb/musb-new/musb=
+_core.c
+> index 00da554982fe..257e7685cfa3 100644
+> --- a/drivers/usb/musb-new/musb_core.c
+> +++ b/drivers/usb/musb-new/musb_core.c
+> @@ -79,7 +79,6 @@
+>  #include <linux/platform_device.h>
+>  #include <linux/io.h>
+>  #else
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <dm/device_compat.h>
+>  #include <usb.h>
+> diff --git a/drivers/usb/musb-new/musb_dsps.c b/drivers/usb/musb-new/musb=
+_dsps.c
+> index a8ff7434c9f7..b73f3531ce24 100644
+> --- a/drivers/usb/musb-new/musb_dsps.c
+> +++ b/drivers/usb/musb-new/musb_dsps.c
+> @@ -31,7 +31,6 @@
+>
+>  #include <plat/usb.h>
+>  #else
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <dm/device_compat.h>
+>  #include <asm/omap_musb.h>
+> diff --git a/drivers/usb/musb-new/musb_gadget.c b/drivers/usb/musb-new/mu=
+sb_gadget.c
+> index c6083963ede9..29e225aa0f11 100644
+> --- a/drivers/usb/musb-new/musb_gadget.c
+> +++ b/drivers/usb/musb-new/musb_gadget.c
+> @@ -22,7 +22,6 @@
+>  #include <linux/dma-mapping.h>
+>  #include <linux/slab.h>
+>  #else
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <dm/device_compat.h>
+>  #include <linux/bug.h>
+> diff --git a/drivers/usb/musb-new/musb_gadget_ep0.c b/drivers/usb/musb-ne=
+w/musb_gadget_ep0.c
+> index 55ce8de99bb1..63eee31a6b3e 100644
+> --- a/drivers/usb/musb-new/musb_gadget_ep0.c
+> +++ b/drivers/usb/musb-new/musb_gadget_ep0.c
+> @@ -18,7 +18,6 @@
+>  #include <linux/device.h>
+>  #include <linux/interrupt.h>
+>  #else
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <dm/device_compat.h>
+>  #include <linux/printk.h>
+> diff --git a/drivers/usb/musb-new/musb_host.c b/drivers/usb/musb-new/musb=
+_host.c
+> index e5905d90d66f..2f2fc7c1359b 100644
+> --- a/drivers/usb/musb-new/musb_host.c
+> +++ b/drivers/usb/musb-new/musb_host.c
+> @@ -21,7 +21,6 @@
+>  #include <linux/list.h>
+>  #include <linux/dma-mapping.h>
+>  #else
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <dm/device_compat.h>
+>  #include <usb.h>
+> diff --git a/drivers/usb/musb-new/musb_uboot.c b/drivers/usb/musb-new/mus=
+b_uboot.c
+> index 7cea9a2ed65c..43ab3245e5c3 100644
+> --- a/drivers/usb/musb-new/musb_uboot.c
+> +++ b/drivers/usb/musb-new/musb_uboot.c
+> @@ -1,4 +1,3 @@
+> -#include <common.h>
+>  #include <console.h>
+>  #include <dm.h>
+>  #include <malloc.h>
+> diff --git a/drivers/usb/musb-new/omap2430.c b/drivers/usb/musb-new/omap2=
+430.c
+> index 308eff832c9e..c8dd73050b29 100644
+> --- a/drivers/usb/musb-new/omap2430.c
+> +++ b/drivers/usb/musb-new/omap2430.c
+> @@ -8,7 +8,6 @@
+>   *
+>   * This file is part of the Inventra Controller Driver for Linux.
+>   */
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <log.h>
+>  #include <serial.h>
+> diff --git a/drivers/usb/musb-new/pic32.c b/drivers/usb/musb-new/pic32.c
+> index 4ed5e6e90c6c..0b25e5893b3c 100644
+> --- a/drivers/usb/musb-new/pic32.c
+> +++ b/drivers/usb/musb-new/pic32.c
+> @@ -9,7 +9,6 @@
+>   * Based on the dsps "glue layer" code.
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <asm/global_data.h>
+>  #include <dm/device_compat.h>
+> diff --git a/drivers/usb/musb-new/sunxi.c b/drivers/usb/musb-new/sunxi.c
+> index 778b01b22ea7..b577ba418780 100644
+> --- a/drivers/usb/musb-new/sunxi.c
+> +++ b/drivers/usb/musb-new/sunxi.c
+> @@ -15,7 +15,6 @@
+>   *
+>   * This file is part of the Inventra Controller Driver for Linux.
+>   */
+> -#include <common.h>
+>  #include <clk.h>
+>  #include <dm.h>
+>  #include <generic-phy.h>
+> diff --git a/drivers/usb/musb-new/ti-musb.c b/drivers/usb/musb-new/ti-mus=
+b.c
+> index ed5e5194d8c9..76e8b88369e3 100644
+> --- a/drivers/usb/musb-new/ti-musb.c
+> +++ b/drivers/usb/musb-new/ti-musb.c
+> @@ -5,7 +5,6 @@
+>   * (C) Copyright 2016
+>   *     Texas Instruments Incorporated, <www.ti.com>
+>   */
+> -#include <common.h>
+>  #include <command.h>
+>  #include <console.h>
+>  #include <dm.h>
+> diff --git a/drivers/usb/musb-new/ux500.c b/drivers/usb/musb-new/ux500.c
+> index 57c7d5630d37..6b4ef3c85782 100644
+> --- a/drivers/usb/musb-new/ux500.c
+> +++ b/drivers/usb/musb-new/ux500.c
+> @@ -1,7 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /* Copyright (C) 2019 Stephan Gerhold */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <generic-phy.h>
+>  #include <dm/device_compat.h>
+> diff --git a/drivers/usb/musb/am35x.c b/drivers/usb/musb/am35x.c
+> index f945f1f5e2c5..2c23043d40e9 100644
+> --- a/drivers/usb/musb/am35x.c
+> +++ b/drivers/usb/musb/am35x.c
+> @@ -9,7 +9,6 @@
+>   * Copyright (c) 2010 Texas Instruments Incorporated
+>   */
+>
+> -#include <common.h>
+>  #include <linux/delay.h>
+>
+>  #include "am35x.h"
+> diff --git a/drivers/usb/musb/musb_core.c b/drivers/usb/musb/musb_core.c
+> index 9651f074a49d..260552e4dbd4 100644
+> --- a/drivers/usb/musb/musb_core.c
+> +++ b/drivers/usb/musb/musb_core.c
+> @@ -8,7 +8,6 @@
+>   * Author: Thomas Abraham t-abraham@ti.com, Texas Instruments
+>   */
+>
+> -#include <common.h>
+>  #include <linux/bitops.h>
+>
+>  #include "musb_core.h"
+> diff --git a/drivers/usb/musb/musb_hcd.c b/drivers/usb/musb/musb_hcd.c
+> index 4676cabae0aa..c95c6a482812 100644
+> --- a/drivers/usb/musb/musb_hcd.c
+> +++ b/drivers/usb/musb/musb_hcd.c
+> @@ -7,7 +7,6 @@
+>   * Author: Thomas Abraham t-abraham@ti.com, Texas Instruments
+>   */
+>
+> -#include <common.h>
+>  #include <log.h>
+>  #include <usb.h>
+>  #include <linux/delay.h>
+> diff --git a/drivers/usb/musb/musb_udc.c b/drivers/usb/musb/musb_udc.c
+> index 2ffcb7caaad7..696855ee3a61 100644
+> --- a/drivers/usb/musb/musb_udc.c
+> +++ b/drivers/usb/musb/musb_udc.c
+> @@ -37,7 +37,6 @@
+>   * ---------------------------------------------------------------------=
+----
+>   */
+>
+> -#include <common.h>
+>  #include <hang.h>
+>  #include <serial.h>
+>  #include <usbdevice.h>
+> diff --git a/drivers/usb/phy/rockchip_usb2_phy.c b/drivers/usb/phy/rockch=
+ip_usb2_phy.c
+> index c46ad86d3d65..9ec5b2d172b8 100644
+> --- a/drivers/usb/phy/rockchip_usb2_phy.c
+> +++ b/drivers/usb/phy/rockchip_usb2_phy.c
+> @@ -3,7 +3,6 @@
+>   * Copyright 2016 Rockchip Electronics Co., Ltd
+>   */
+>
+> -#include <common.h>
+>  #include <hang.h>
+>  #include <log.h>
+>  #include <asm/global_data.h>
+> diff --git a/drivers/usb/ulpi/omap-ulpi-viewport.c b/drivers/usb/ulpi/oma=
+p-ulpi-viewport.c
+> index 1b01cd4c559f..6f0c3eb154ee 100644
+> --- a/drivers/usb/ulpi/omap-ulpi-viewport.c
+> +++ b/drivers/usb/ulpi/omap-ulpi-viewport.c
+> @@ -7,7 +7,6 @@
+>   * Author: Govindraj R <govindraj.raja@ti.com>
+>   */
+>
+> -#include <common.h>
+>  #include <log.h>
+>  #include <asm/io.h>
+>  #include <linux/delay.h>
+> diff --git a/drivers/usb/ulpi/ulpi-viewport.c b/drivers/usb/ulpi/ulpi-vie=
+wport.c
+> index 55a62808384d..bac20a02f018 100644
+> --- a/drivers/usb/ulpi/ulpi-viewport.c
+> +++ b/drivers/usb/ulpi/ulpi-viewport.c
+> @@ -13,7 +13,6 @@
+>   * Copyright (C) 2011 Google, Inc.
+>   */
+>
+> -#include <common.h>
+>  #include <asm/io.h>
+>  #include <linux/delay.h>
+>  #include <usb/ulpi.h>
+> diff --git a/drivers/usb/ulpi/ulpi.c b/drivers/usb/ulpi/ulpi.c
+> index b5d2c2c2d1c3..128adcbde134 100644
+> --- a/drivers/usb/ulpi/ulpi.c
+> +++ b/drivers/usb/ulpi/ulpi.c
+> @@ -19,7 +19,6 @@
+>   *   Freescale Semiconductors
+>   */
+>
+> -#include <common.h>
+>  #include <exports.h>
+>  #include <log.h>
+>  #include <linux/delay.h>
+> --
+> 2.34.1
+>
 
-There are two variants depending on the DRAM size : 8G and 16G.
+There is a warning for RISC-V maybe to do with having only the generic
+find_next_zero_bit and not an optimized one in
+arch/riscv/include/asm/bitops.h:
 
-Specification:
+  CC      drivers/usb/cdns3/gadget.o
+In file included from drivers/usb/cdns3/gadget.c:70:
+include/linux/bitmap.h: In function =E2=80=98bitmap_find_next_zero_area=E2=
+=80=99:
+include/linux/bitmap.h:170:17: warning: implicit declaration of
+function =E2=80=98find_next_zero_bit=E2=80=99; did you mean =E2=80=98find_n=
+ext_bit=E2=80=99?
+[-Wimplicit-function-declaration]
+  170 |         index =3D find_next_zero_bit(map, size, start);
+      |                 ^~~~~~~~~~~~~~~~~~
+      |                 find_next_bit
+  CC      drivers/usb/cdns3/ep0.o
+In file included from include/linux/usb/composite.h:26,
+                 from drivers/usb/cdns3/ep0.c:19:
+include/linux/bitmap.h: In function =E2=80=98bitmap_find_next_zero_area=E2=
+=80=99:
+include/linux/bitmap.h:170:17: warning: implicit declaration of
+function =E2=80=98find_next_zero_bit=E2=80=99; did you mean =E2=80=98find_n=
+ext_bit=E2=80=99?
+[-Wimplicit-function-declaration]
+  170 |         index =3D find_next_zero_bit(map, size, start);
+      |                 ^~~~~~~~~~~~~~~~~~
+      |                 find_next_bit
+  CC      drivers/usb/cdns3/host.o
 
-    Rockchip Rk3588 SoC
-    4x ARM Cortex-A76, 4x ARM Cortex-A55
-    8/16GB memory LPDDR4x
-    Mali G610MC4 GPU
-    2x MIPI CSI 2 multiple lanes connector
-    64GB/128GB on board eMMC
-    uSD slot
-    1x USB 2.0 Type-A, 1x USB 3.0 Type-A, 1x USB 3.0 Type-C
-    1x HDMI 2.1 output
-    2x 2.5 Gbps Ethernet port
-    40-pin IO header including UART, SPI and I2C
-    USB PD over USB Type-C
-    Size: 92mm x 62mm
-
-Kernel commit:
-81c828a67c78 (arm64: dts: rockchip: Add ArmSom Sige7 board)
-
-Note that these commits:
-- e18e5e8188f2 (arm64: dts: rockchip: add USBDP phys on rk3588)
-- 6fca4edb93d3 (arm64: dts: rockchip: Add rk3588 GPU node)
-are not synced to u-boot, so I remove usb3 drd nodes and gpu from kernel
-devicetree.
-
-Signed-off-by: Jianfeng Liu <liujianfeng1994@gmail.com>
----
-
- MAINTAINERS                                  |   1 +
- arch/arm/dts/Makefile                        |   1 +
- arch/arm/dts/rk3588-armsom-sige7-u-boot.dtsi |  31 +
- arch/arm/dts/rk3588-armsom-sige7.dts         | 691 +++++++++++++++++++
- arch/arm/mach-rockchip/rk3588/Kconfig        |  26 +
- board/armsom/sige7-rk3588/Kconfig            |  12 +
- board/armsom/sige7-rk3588/MAINTAINERS        |   8 +
- configs/sige7-rk3588_defconfig               | 104 +++
- doc/board/rockchip/rockchip.rst              |   1 +
- include/configs/sige7-rk3588.h               |  15 +
- 10 files changed, 890 insertions(+)
- create mode 100644 arch/arm/dts/rk3588-armsom-sige7-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3588-armsom-sige7.dts
- create mode 100644 board/armsom/sige7-rk3588/Kconfig
- create mode 100644 board/armsom/sige7-rk3588/MAINTAINERS
- create mode 100644 configs/sige7-rk3588_defconfig
- create mode 100644 include/configs/sige7-rk3588.h
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 7a3b4d3712..52367bf38c 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -532,6 +532,7 @@ F:	arch/arm/dts/rv11*
- F:	arch/arm/include/asm/arch-rockchip/
- F:	arch/arm/mach-rockchip/
- F:	board/amarula/vyasa-rk3288/
-+F:	board/armsom/sige7-rk3588/
- F:	board/anbernic/rgxx3_rk3566/
- F:	board/chipspark/popmetal_rk3288
- F:	board/engicam/px30_core/
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index c9f1b25ad6..040238dede 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -166,6 +166,7 @@ dtb-$(CONFIG_ROCKCHIP_RK3568) += \
- 	rk3568-rock-3a.dtb
- 
- dtb-$(CONFIG_ROCKCHIP_RK3588) += \
-+	rk3588-armsom-sige7.dtb \
- 	rk3588s-coolpi-4b.dtb \
- 	rk3588-coolpi-cm5-evb.dtb \
- 	rk3588-edgeble-neu6a-io.dtb \
-diff --git a/arch/arm/dts/rk3588-armsom-sige7-u-boot.dtsi b/arch/arm/dts/rk3588-armsom-sige7-u-boot.dtsi
-new file mode 100644
-index 0000000000..b9196ba5f5
---- /dev/null
-+++ b/arch/arm/dts/rk3588-armsom-sige7-u-boot.dtsi
-@@ -0,0 +1,31 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright (c) 2024 ArmSoM Technology Co., Ltd.
-+ */
-+
-+#include "rk3588-u-boot.dtsi"
-+
-+&sdhci {
-+	cap-mmc-highspeed;
-+	mmc-hs200-1_8v;
-+};
-+
-+&u2phy1 {
-+	status = "okay";
-+};
-+
-+&u2phy1_otg {
-+	status = "okay";
-+};
-+
-+&usbdp_phy1 {
-+	status = "okay";
-+};
-+
-+&usbdp_phy1_u3 {
-+	status = "okay";
-+};
-+
-+&usb_host1_xhci {
-+	status = "okay";
-+};
-diff --git a/arch/arm/dts/rk3588-armsom-sige7.dts b/arch/arm/dts/rk3588-armsom-sige7.dts
-new file mode 100644
-index 0000000000..c7b46536ec
---- /dev/null
-+++ b/arch/arm/dts/rk3588-armsom-sige7.dts
-@@ -0,0 +1,691 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+/dts-v1/;
-+
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/leds/common.h>
-+#include "rk3588.dtsi"
-+
-+/ {
-+	model = "ArmSoM Sige7";
-+	compatible = "armsom,sige7", "rockchip,rk3588";
-+
-+	aliases {
-+		mmc0 = &sdhci;
-+		mmc1 = &sdmmc;
-+	};
-+
-+	chosen {
-+		stdout-path = "serial2:1500000n8";
-+	};
-+
-+	analog-sound {
-+		compatible = "audio-graph-card";
-+		dais = <&i2s0_8ch_p0>;
-+		label = "rk3588-es8316";
-+		hp-det-gpio = <&gpio1 RK_PD5 GPIO_ACTIVE_HIGH>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&hp_detect>;
-+		routing = "MIC2", "Mic Jack",
-+			  "Headphones", "HPOL",
-+			  "Headphones", "HPOR";
-+		widgets = "Microphone", "Mic Jack",
-+			  "Headphone", "Headphones";
-+	};
-+
-+	leds {
-+		compatible = "gpio-leds";
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&led_rgb_g>;
-+
-+		led_green: led-0 {
-+			color = <LED_COLOR_ID_GREEN>;
-+			function = LED_FUNCTION_STATUS;
-+			gpios = <&gpio0 RK_PB7 GPIO_ACTIVE_HIGH>;
-+			linux,default-trigger = "heartbeat";
-+		};
-+
-+		led_red: led-1 {
-+			color = <LED_COLOR_ID_RED>;
-+			function = LED_FUNCTION_STATUS;
-+			gpios = <&gpio4 RK_PC5 GPIO_ACTIVE_HIGH>;
-+			linux,default-trigger = "none";
-+		};
-+	};
-+
-+	fan: pwm-fan {
-+		compatible = "pwm-fan";
-+		cooling-levels = <0 95 145 195 255>;
-+		fan-supply = <&vcc5v0_sys>;
-+		pwms = <&pwm1 0 50000 0>;
-+		#cooling-cells = <2>;
-+	};
-+
-+	vcc3v3_pcie2x1l2: vcc3v3-pcie2x1l2-regulator {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc3v3_pcie2x1l2";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		startup-delay-us = <5000>;
-+		vin-supply = <&vcc_3v3_s3>;
-+	};
-+
-+	vcc3v3_pcie30: vcc3v3-pcie30-regulator {
-+		compatible = "regulator-fixed";
-+		enable-active-high;
-+		gpios = <&gpio1 RK_PA4 GPIO_ACTIVE_HIGH>;
-+		regulator-name = "vcc3v3_pcie30";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		startup-delay-us = <5000>;
-+		vin-supply = <&vcc5v0_sys>;
-+	};
-+
-+	vcc5v0_host: vcc5v0-host-regulator {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc5v0_host";
-+		regulator-boot-on;
-+		regulator-always-on;
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+		enable-active-high;
-+		gpio = <&gpio4 RK_PB0 GPIO_ACTIVE_HIGH>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&vcc5v0_host_en>;
-+		vin-supply = <&vcc5v0_sys>;
-+	};
-+
-+	vcc5v0_sys: vcc5v0-sys-regulator {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc5v0_sys";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+	};
-+
-+	vcc_1v1_nldo_s3: vcc-1v1-nldo-s3-regulator {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc_1v1_nldo_s3";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <1100000>;
-+		regulator-max-microvolt = <1100000>;
-+		vin-supply = <&vcc5v0_sys>;
-+	};
-+};
-+
-+&combphy0_ps {
-+	status = "okay";
-+};
-+
-+&combphy1_ps {
-+	status = "okay";
-+};
-+
-+&combphy2_psu {
-+	status = "okay";
-+};
-+
-+&cpu_b0 {
-+	cpu-supply = <&vdd_cpu_big0_s0>;
-+};
-+
-+&cpu_b1 {
-+	cpu-supply = <&vdd_cpu_big0_s0>;
-+};
-+
-+&cpu_b2 {
-+	cpu-supply = <&vdd_cpu_big1_s0>;
-+};
-+
-+&cpu_b3 {
-+	cpu-supply = <&vdd_cpu_big1_s0>;
-+};
-+
-+&cpu_l0 {
-+	cpu-supply = <&vdd_cpu_lit_s0>;
-+};
-+
-+&cpu_l1 {
-+	cpu-supply = <&vdd_cpu_lit_s0>;
-+};
-+
-+&cpu_l2 {
-+	cpu-supply = <&vdd_cpu_lit_s0>;
-+};
-+
-+&cpu_l3 {
-+	cpu-supply = <&vdd_cpu_lit_s0>;
-+};
-+
-+&i2c0 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&i2c0m2_xfer>;
-+	status = "okay";
-+
-+	vdd_cpu_big0_s0: regulator@42 {
-+		compatible = "rockchip,rk8602";
-+		reg = <0x42>;
-+		fcs,suspend-voltage-selector = <1>;
-+		regulator-name = "vdd_cpu_big0_s0";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <550000>;
-+		regulator-max-microvolt = <1050000>;
-+		regulator-ramp-delay = <2300>;
-+		vin-supply = <&vcc5v0_sys>;
-+
-+		regulator-state-mem {
-+			regulator-off-in-suspend;
-+		};
-+	};
-+
-+	vdd_cpu_big1_s0: regulator@43 {
-+		compatible = "rockchip,rk8603", "rockchip,rk8602";
-+		reg = <0x43>;
-+		fcs,suspend-voltage-selector = <1>;
-+		regulator-name = "vdd_cpu_big1_s0";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <550000>;
-+		regulator-max-microvolt = <1050000>;
-+		regulator-ramp-delay = <2300>;
-+		vin-supply = <&vcc5v0_sys>;
-+
-+		regulator-state-mem {
-+			regulator-off-in-suspend;
-+		};
-+	};
-+};
-+
-+&i2c6 {
-+	status = "okay";
-+
-+	hym8563: rtc@51 {
-+		compatible = "haoyu,hym8563";
-+		reg = <0x51>;
-+		interrupt-parent = <&gpio0>;
-+		interrupts = <RK_PB0 IRQ_TYPE_LEVEL_LOW>;
-+		#clock-cells = <0>;
-+		clock-output-names = "hym8563";
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&hym8563_int>;
-+		wakeup-source;
-+	};
-+};
-+
-+&i2c7 {
-+	status = "okay";
-+
-+	es8316: audio-codec@11 {
-+		compatible = "everest,es8316";
-+		reg = <0x11>;
-+		assigned-clocks = <&cru I2S0_8CH_MCLKOUT>;
-+		assigned-clock-rates = <12288000>;
-+		clocks = <&cru I2S0_8CH_MCLKOUT>;
-+		clock-names = "mclk";
-+		#sound-dai-cells = <0>;
-+
-+		port {
-+			es8316_p0_0: endpoint {
-+				remote-endpoint = <&i2s0_8ch_p0_0>;
-+			};
-+		};
-+	};
-+};
-+
-+&i2s0_8ch {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&i2s0_lrck
-+		     &i2s0_mclk
-+		     &i2s0_sclk
-+		     &i2s0_sdi0
-+		     &i2s0_sdo0>;
-+	status = "okay";
-+
-+	i2s0_8ch_p0: port {
-+		i2s0_8ch_p0_0: endpoint {
-+			dai-format = "i2s";
-+			mclk-fs = <256>;
-+			remote-endpoint = <&es8316_p0_0>;
-+		};
-+	};
-+};
-+
-+/* phy1 - right ethernet port */
-+&pcie2x1l0 {
-+	reset-gpios = <&gpio4 RK_PA5 GPIO_ACTIVE_HIGH>;
-+	status = "okay";
-+};
-+
-+/* phy2 - WiFi */
-+&pcie2x1l1 {
-+	reset-gpios = <&gpio3 RK_PD4 GPIO_ACTIVE_HIGH>;
-+	status = "okay";
-+};
-+
-+/* phy0 - left ethernet port */
-+&pcie2x1l2 {
-+	reset-gpios = <&gpio3 RK_PB0 GPIO_ACTIVE_HIGH>;
-+	status = "okay";
-+};
-+
-+&pcie30phy {
-+	status = "okay";
-+};
-+
-+&pcie3x4 {
-+	reset-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
-+	vpcie3v3-supply = <&vcc3v3_pcie30>;
-+	status = "okay";
-+};
-+
-+&pinctrl {
-+	hym8563 {
-+		hym8563_int: hym8563-int {
-+			rockchip,pins = <0 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+
-+	leds {
-+		led_rgb_g: led-rgb-g {
-+			rockchip,pins = <0 RK_PB7 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+		led_rgb_r: led-rgb-r {
-+			rockchip,pins = <0 RK_PB7 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+
-+	sound {
-+		hp_detect: hp-detect {
-+			rockchip,pins = <1 RK_PD5 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+
-+	usb {
-+		vcc5v0_host_en: vcc5v0-host-en {
-+			rockchip,pins = <4 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+};
-+
-+&pwm1 {
-+	status = "okay";
-+};
-+
-+&saradc {
-+	vref-supply = <&avcc_1v8_s0>;
-+	status = "okay";
-+};
-+
-+&sdhci {
-+	bus-width = <8>;
-+	no-sdio;
-+	no-sd;
-+	non-removable;
-+	mmc-hs200-1_8v;
-+	status = "okay";
-+};
-+
-+&sdmmc {
-+	bus-width = <4>;
-+	cap-mmc-highspeed;
-+	cap-sd-highspeed;
-+	disable-wp;
-+	max-frequency = <200000000>;
-+	no-sdio;
-+	no-mmc;
-+	sd-uhs-sdr104;
-+	vmmc-supply = <&vcc_3v3_s3>;
-+	vqmmc-supply = <&vccio_sd_s0>;
-+	status = "okay";
-+};
-+
-+&spi2 {
-+	assigned-clocks = <&cru CLK_SPI2>;
-+	assigned-clock-rates = <200000000>;
-+	num-cs = <1>;
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&spi2m2_cs0 &spi2m2_pins>;
-+	status = "okay";
-+
-+	pmic@0 {
-+		compatible = "rockchip,rk806";
-+		spi-max-frequency = <1000000>;
-+		reg = <0x0>;
-+
-+		interrupt-parent = <&gpio0>;
-+		interrupts = <7 IRQ_TYPE_LEVEL_LOW>;
-+
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&pmic_pins>, <&rk806_dvs1_null>,
-+			    <&rk806_dvs2_null>, <&rk806_dvs3_null>;
-+
-+		system-power-controller;
-+
-+		vcc1-supply = <&vcc5v0_sys>;
-+		vcc2-supply = <&vcc5v0_sys>;
-+		vcc3-supply = <&vcc5v0_sys>;
-+		vcc4-supply = <&vcc5v0_sys>;
-+		vcc5-supply = <&vcc5v0_sys>;
-+		vcc6-supply = <&vcc5v0_sys>;
-+		vcc7-supply = <&vcc5v0_sys>;
-+		vcc8-supply = <&vcc5v0_sys>;
-+		vcc9-supply = <&vcc5v0_sys>;
-+		vcc10-supply = <&vcc5v0_sys>;
-+		vcc11-supply = <&vcc_2v0_pldo_s3>;
-+		vcc12-supply = <&vcc5v0_sys>;
-+		vcc13-supply = <&vcc_1v1_nldo_s3>;
-+		vcc14-supply = <&vcc_1v1_nldo_s3>;
-+		vcca-supply = <&vcc5v0_sys>;
-+
-+		rk806_dvs1_null: dvs1-null-pins {
-+			pins = "gpio_pwrctrl1";
-+			function = "pin_fun0";
-+		};
-+
-+		rk806_dvs2_null: dvs2-null-pins {
-+			pins = "gpio_pwrctrl2";
-+			function = "pin_fun0";
-+		};
-+
-+		rk806_dvs3_null: dvs3-null-pins {
-+			pins = "gpio_pwrctrl3";
-+			function = "pin_fun0";
-+		};
-+
-+		regulators {
-+			vdd_gpu_s0: vdd_gpu_mem_s0: dcdc-reg1 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <550000>;
-+				regulator-max-microvolt = <950000>;
-+				regulator-ramp-delay = <12500>;
-+				regulator-name = "vdd_gpu_s0";
-+				regulator-enable-ramp-delay = <400>;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vdd_cpu_lit_s0: vdd_cpu_lit_mem_s0: dcdc-reg2 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <550000>;
-+				regulator-max-microvolt = <950000>;
-+				regulator-ramp-delay = <12500>;
-+				regulator-name = "vdd_cpu_lit_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vdd_log_s0: dcdc-reg3 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <675000>;
-+				regulator-max-microvolt = <750000>;
-+				regulator-ramp-delay = <12500>;
-+				regulator-name = "vdd_log_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+					regulator-suspend-microvolt = <750000>;
-+				};
-+			};
-+
-+			vdd_vdenc_s0: vdd_vdenc_mem_s0: dcdc-reg4 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <550000>;
-+				regulator-max-microvolt = <950000>;
-+				regulator-ramp-delay = <12500>;
-+				regulator-name = "vdd_vdenc_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vdd_ddr_s0: dcdc-reg5 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <675000>;
-+				regulator-max-microvolt = <900000>;
-+				regulator-ramp-delay = <12500>;
-+				regulator-name = "vdd_ddr_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+					regulator-suspend-microvolt = <850000>;
-+				};
-+			};
-+
-+			vdd2_ddr_s3: dcdc-reg6 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-name = "vdd2_ddr_s3";
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+				};
-+			};
-+
-+			vcc_2v0_pldo_s3: dcdc-reg7 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <2000000>;
-+				regulator-max-microvolt = <2000000>;
-+				regulator-ramp-delay = <12500>;
-+				regulator-name = "vdd_2v0_pldo_s3";
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+					regulator-suspend-microvolt = <2000000>;
-+				};
-+			};
-+
-+			vcc_3v3_s3: dcdc-reg8 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <3300000>;
-+				regulator-max-microvolt = <3300000>;
-+				regulator-name = "vcc_3v3_s3";
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+					regulator-suspend-microvolt = <3300000>;
-+				};
-+			};
-+
-+			vddq_ddr_s0: dcdc-reg9 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-name = "vddq_ddr_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vcc_1v8_s3: dcdc-reg10 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <1800000>;
-+				regulator-name = "vcc_1v8_s3";
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+					regulator-suspend-microvolt = <1800000>;
-+				};
-+			};
-+
-+			avcc_1v8_s0: pldo-reg1 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <1800000>;
-+				regulator-name = "avcc_1v8_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vcc_1v8_s0: pldo-reg2 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <1800000>;
-+				regulator-name = "vcc_1v8_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+					regulator-suspend-microvolt = <1800000>;
-+				};
-+			};
-+
-+			avdd_1v2_s0: pldo-reg3 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <1200000>;
-+				regulator-max-microvolt = <1200000>;
-+				regulator-name = "avdd_1v2_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vcc_3v3_s0: pldo-reg4 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <3300000>;
-+				regulator-max-microvolt = <3300000>;
-+				regulator-ramp-delay = <12500>;
-+				regulator-name = "vcc_3v3_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vccio_sd_s0: pldo-reg5 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <3300000>;
-+				regulator-ramp-delay = <12500>;
-+				regulator-name = "vccio_sd_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			pldo6_s3: pldo-reg6 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <1800000>;
-+				regulator-name = "pldo6_s3";
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+					regulator-suspend-microvolt = <1800000>;
-+				};
-+			};
-+
-+			vdd_0v75_s3: nldo-reg1 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <750000>;
-+				regulator-max-microvolt = <750000>;
-+				regulator-name = "vdd_0v75_s3";
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+					regulator-suspend-microvolt = <750000>;
-+				};
-+			};
-+
-+			vdd_ddr_pll_s0: nldo-reg2 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <850000>;
-+				regulator-max-microvolt = <850000>;
-+				regulator-name = "vdd_ddr_pll_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+					regulator-suspend-microvolt = <850000>;
-+				};
-+			};
-+
-+			avdd_0v75_s0: nldo-reg3 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <750000>;
-+				regulator-max-microvolt = <750000>;
-+				regulator-name = "avdd_0v75_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vdd_0v85_s0: nldo-reg4 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <850000>;
-+				regulator-max-microvolt = <850000>;
-+				regulator-name = "vdd_0v85_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vdd_0v75_s0: nldo-reg5 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <750000>;
-+				regulator-max-microvolt = <750000>;
-+				regulator-name = "vdd_0v75_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+		};
-+	};
-+};
-+
-+&u2phy3 {
-+	status = "okay";
-+};
-+
-+&u2phy3_host {
-+	phy-supply = <&vcc5v0_host>;
-+	status = "okay";
-+};
-+
-+&uart2 {
-+	pinctrl-0 = <&uart2m0_xfer>;
-+	status = "okay";
-+};
-+
-+&usb_host1_ehci {
-+	status = "okay";
-+};
-+
-+&usb_host1_ohci {
-+	status = "okay";
-+};
-diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
-index 39049ab35a..4c14b0be1e 100644
---- a/arch/arm/mach-rockchip/rk3588/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3588/Kconfig
-@@ -152,6 +152,31 @@ config TARGET_ROCK5B_RK3588
- 	  USB PD over USB Type-C
- 	  Size: 100mm x 72mm (Pico-ITX form factor)
- 
-+config TARGET_SIGE7_RK3588
-+	bool "ArmSoM Sige7 RK3588 board"
-+	select BOARD_LATE_INIT
-+	help
-+	  ArmSoM Sige7 is a Rockchip RK3588 based SBC (Single Board Computer)
-+	  by ArmSoM.
-+
-+	  There are two variants depending on the DRAM size : 8G and 16G.
-+
-+	  Specification:
-+
-+	  Rockchip Rk3588 SoC
-+	  4x ARM Cortex-A76, 4x ARM Cortex-A55
-+	  8/16GB memory LPDDR4x
-+	  Mali G610MC4 GPU
-+	  2x MIPI CSI 2 multiple lanes connector
-+	  64GB/128GB on board eMMC
-+	  uSD slot
-+	  1x USB 2.0 Type-A, 1x USB 3.0 Type-A, 1x USB 3.0 Type-C
-+	  1x HDMI 2.1 output
-+	  2x 2.5 Gbps Ethernet port
-+	  40-pin IO header including UART, SPI and I2C
-+	  USB PD over USB Type-C
-+	  Size: 92mm x 62mm
-+
- config TARGET_QUARTZPRO64_RK3588
- 	bool "Pine64 QuartzPro64 RK3588 board"
- 	select BOARD_LATE_INIT
-@@ -221,6 +246,7 @@ config ROCKCHIP_COMMON_STACK_ADDR
- config TEXT_BASE
- 	default 0x00a00000
- 
-+source "board/armsom/sige7-rk3588/Kconfig"
- source "board/edgeble/neural-compute-module-6/Kconfig"
- source "board/friendlyelec/nanopc-t6-rk3588/Kconfig"
- source "board/pine64/quartzpro64-rk3588/Kconfig"
-diff --git a/board/armsom/sige7-rk3588/Kconfig b/board/armsom/sige7-rk3588/Kconfig
-new file mode 100644
-index 0000000000..793985f531
---- /dev/null
-+++ b/board/armsom/sige7-rk3588/Kconfig
-@@ -0,0 +1,12 @@
-+if TARGET_SIGE7_RK3588
-+
-+config SYS_BOARD
-+	default "sige7-rk3588"
-+
-+config SYS_VENDOR
-+	default "armsom"
-+
-+config SYS_CONFIG_NAME
-+	default "sige7-rk3588"
-+
-+endif
-diff --git a/board/armsom/sige7-rk3588/MAINTAINERS b/board/armsom/sige7-rk3588/MAINTAINERS
-new file mode 100644
-index 0000000000..0b84946284
---- /dev/null
-+++ b/board/armsom/sige7-rk3588/MAINTAINERS
-@@ -0,0 +1,8 @@
-+SIGE7-RK3588
-+M:	Jianfeng Liu <liujianfeng1994@gmail.com>
-+S:	Maintained
-+F:	board/armsom/sige7-rk3588
-+F:	include/configs/sige7-rk3588.h
-+F:	configs/sige7-rk3588_defconfig
-+F:	arch/arm/dts/rk3588-armsom-sige7.dts
-+F:	arch/arm/dts/rk3588-armsom-sige7-u-boot.dtsi
-diff --git a/configs/sige7-rk3588_defconfig b/configs/sige7-rk3588_defconfig
-new file mode 100644
-index 0000000000..76fcd2878c
---- /dev/null
-+++ b/configs/sige7-rk3588_defconfig
-@@ -0,0 +1,104 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_SYS_HAS_NONCACHED_MEMORY=y
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_SF_DEFAULT_SPEED=24000000
-+CONFIG_SF_DEFAULT_MODE=0x2000
-+CONFIG_DEFAULT_DEVICE_TREE="rk3588-armsom-sige7"
-+CONFIG_ROCKCHIP_RK3588=y
-+CONFIG_ROCKCHIP_SPI_IMAGE=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_TARGET_SIGE7_RK3588=y
-+CONFIG_DEBUG_UART_BASE=0xFEB50000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_SPL_SPI_FLASH_SUPPORT=y
-+CONFIG_SPL_SPI=y
-+CONFIG_SYS_LOAD_ADDR=0xc00800
-+CONFIG_PCI=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_AHCI=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-armsom-sige7.dtb"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_SPL_MAX_SIZE=0x40000
-+CONFIG_SPL_PAD_TO=0x7f8000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_SPI_LOAD=y
-+CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
-+CONFIG_SPL_ATF=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_ROCKUSB=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_REGULATOR=y
-+# CONFIG_SPL_DOS_PARTITION is not set
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_LIVE=y
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+CONFIG_SPL_REGMAP=y
-+CONFIG_SPL_SYSCON=y
-+CONFIG_AHCI_PCI=y
-+CONFIG_DWC_AHCI=y
-+CONFIG_SPL_CLK=y
-+# CONFIG_USB_FUNCTION_FASTBOOT is not set
-+CONFIG_ROCKCHIP_GPIO=y
-+CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_MISC=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_SF_DEFAULT_BUS=5
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPI_FLASH_MACRONIX=y
-+CONFIG_SPI_FLASH_XTX=y
-+CONFIG_PHYLIB=y
-+CONFIG_RTL8169=y
-+CONFIG_NVME_PCI=y
-+CONFIG_PCIE_DW_ROCKCHIP=y
-+CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-+CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-+CONFIG_PHY_ROCKCHIP_USBDP=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_PWM_ROCKCHIP=y
-+CONFIG_SPL_RAM=y
-+CONFIG_SCSI=y
-+CONFIG_BAUDRATE=1500000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_ROCKCHIP_SFC=y
-+CONFIG_SYSRESET=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_OHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_SPL_USB_DWC3_GENERIC=y
-+CONFIG_USB_HOST_ETHER=y
-+CONFIG_USB_ETHER_ASIX=y
-+CONFIG_USB_ETHER_ASIX88179=y
-+CONFIG_USB_ETHER_LAN75XX=y
-+CONFIG_USB_ETHER_LAN78XX=y
-+CONFIG_USB_ETHER_MCS7830=y
-+CONFIG_USB_ETHER_RTL8152=y
-+CONFIG_USB_ETHER_SMSC95XX=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-+CONFIG_USB_FUNCTION_ROCKUSB=y
-+CONFIG_ERRNO_STR=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index 9a726e9cde..6b826b3288 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -118,6 +118,7 @@ List of mainline supported Rockchip boards:
-      - Radxa ROCK 3 Model A (rock-3a-rk3568)
- 
- * rk3588
-+     - ArmSoM Sige7 (sige7-rk3588)
-      - Rockchip EVB (evb-rk3588)
-      - Edgeble Neural Compute Module 6A SoM - Neu6a (neu6a-io-rk3588)
-      - Edgeble Neural Compute Module 6B SoM - Neu6b (neu6b-io-rk3588)
-diff --git a/include/configs/sige7-rk3588.h b/include/configs/sige7-rk3588.h
-new file mode 100644
-index 0000000000..fd08da568b
---- /dev/null
-+++ b/include/configs/sige7-rk3588.h
-@@ -0,0 +1,15 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (c) 2024 ArmSoM Technology Co., Ltd.
-+ */
-+
-+#ifndef __SIGE7_RK3588_H
-+#define __SIGE7_RK3588_H
-+
-+#define ROCKCHIP_DEVICE_SETTINGS \
-+		"stdout=serial,vidconsole\0" \
-+		"stderr=serial,vidconsole\0"
-+
-+#include <configs/rk3588_common.h>
-+
-+#endif /* __SIGE7_RK3588_H */
--- 
-2.34.1
-
+I would guess that for architectures that have optimized versions
+there is no implicit declaration. This was HEAD (2f1e76bc) with patch
+series 405474 "Add Starfive JH7110 Cadence USB driver" applied and
+starfive_visionfive2_defconfig.  -E
