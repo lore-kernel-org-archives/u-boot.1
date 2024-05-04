@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37FBFC4345F
-	for <u-boot@archiver.kernel.org>; Sat,  4 May 2024 19:45:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAE92C4345F
+	for <u-boot@archiver.kernel.org>; Sat,  4 May 2024 19:45:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B52E8853F;
-	Sat,  4 May 2024 21:45:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2663488137;
+	Sat,  4 May 2024 21:45:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="UISH4Z4u";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="WVoaFNd1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F5FD8853F; Sat,  4 May 2024 21:45:16 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ id 7984B88137; Sat,  4 May 2024 21:45:18 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ECDB78804B
+ by phobos.denx.de (Postfix) with ESMTPS id 3123288535
  for <u-boot@lists.denx.de>; Sat,  4 May 2024 21:45:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
@@ -28,29 +28,19 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1714851863; bh=nnDj4TcKgWq1AGPn6yaRQlkk17j9xHR7fDpiFSeNl74=;
- b=UISH4Z4uUGOUoOqqROtpJDkAKdVbN/ZtcJvDsojTn3Ni6QAgIiOFs1eO11/73EbbiXoHjHwfN
- 48lM4W+CqS5VlZEW4XzmleqnZL5010o5bN7q6tFY3PRP46c3juY90bEyQx+M/HAw3hM8b4SpYN9
- UIGwONLMEKc9u6KTCh2P/TPYNosW8itwHKCTsDuU6ZIfHeFpreNL4ISN8XoNKpHu6cAWGYTZKoj
- lOm9xgAnJZUWrwNzcKtkJJlRn2pNPtyfstzI72IlFLN2nI0E/WdPDUxQKU8YsdSzMl1MaMdyU1M
- xTTCpHJAjtF6o0Zr9wyL9uF+JQQrvEpH9oSmkMBUUamQ==
+ t=1714851897; bh=Gt/xjKg5U0JD9KC2xvA/Y9hxzZRHlcmW6cfe6lpzi9A=;
+ b=WVoaFNd1wuZZ5ZJb9gdO/MBHODtzhRTWzoOSw0CZM/zmYXMaHg9FIYSNL3GbDIJhflIzXrfHY
+ Z0Jkt5gq1be9TBA6bZZ8smP7C530MzDDaTlltEoflDDpj6k0OyfT7usGK+EFxzx6/GcY+p10TZe
+ hQhNWY7jt0HGXN+DLVIH8WLIdBtQd3/1B6SWHlgjJ3LY6o6BwgGdyPC4KUr/RiPCAHcBxNlVQTB
+ ppA/bXbbuoj6Zen1TJ0KLjXetB7G5IzmrATeaeeq0zs0dLIIFS/Z8gG26vGQBj9911zQbD9SvN+
+ 5lDZFuM6tPu0o5XWcQri5MRpbty5WX+0WXd+4EwHRB5Q==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Andy Yan
- <andy.yan@rock-chips.com>, Manivannan Sadhasivam
- <manivannan.sadhasivam@linaro.org>, Nick Xie <nick@khadas.com>, Jagan Teki
- <jagan@amarulasolutions.com>, Deepak Das <deepakdas.linux@gmail.com>,
- Alexandre Vicenzi <linux@alxd.me>, Xiaobo Tian <peterwillcn@gmail.com>,
- Peter Robinson <pbrobinson@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>, Klaus Goger
- <klaus.goger@theobroma-systems.com>, Levin Du <djw@t-chip.com.cn>, Suniel
- Mahesh <sunil@amarulasolutions.com>, FUKAUMI Naoki <naoki@radxa.com>,
- Christopher Obbard <chris.obbard@collabora.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH 05/16] rockchip: rk3399: Migrate to OF_UPSTREAM
-Date: Sat,  4 May 2024 19:42:57 +0000
-Message-ID: <20240504194346.2462489-6-jonas@kwiboo.se>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH 10/16] phy: rockchip: usbdp: Find phy-id from the io address
+Date: Sat,  4 May 2024 19:43:02 +0000
+Message-ID: <20240504194346.2462489-11-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240504194346.2462489-1-jonas@kwiboo.se>
 References: <20240504194346.2462489-1-jonas@kwiboo.se>
@@ -61,8 +51,8 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 663690152b8e4dad13276da7
+ 149.28.215.223
+X-ForwardEmail-ID: 663690352b8e4dad13276e13
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,479 +69,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-All RK3399 boards has now been synced to Linux kernel v6.8 DTs and can
-migrate to use OF_UPSTREAM.
+The upstream Linux kernel driver find the phy-id from the io address.
 
-Migrate RK3399 boards that exists in Linux v6.8 to use OF_UPSTREAM.
+Change to use a similar method as the U-Boot inno-usb2 phy driver and
+the Linux kernel driver to set correct phy-id.
 
-Following target is not migrated to use OF_UPSTREAM:
-- nanopi-m4-2gb-rk3399: DDR3 variant of nanopi-m4-rk3399 (LPDDR3)
+This is based on the linux-phy next commit 2f70bbddeb45 ("phy: rockchip:
+add usbdp combo phy driver").
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/dts/Makefile                        | 31 --------------------
- arch/arm/mach-rockchip/Kconfig               |  1 +
- configs/chromebook_bob_defconfig             |  2 +-
- configs/chromebook_kevin_defconfig           |  2 +-
- configs/eaidk-610-rk3399_defconfig           |  2 +-
- configs/evb-rk3399_defconfig                 |  2 +-
- configs/ficus-rk3399_defconfig               |  2 +-
- configs/firefly-rk3399_defconfig             |  2 +-
- configs/khadas-edge-captain-rk3399_defconfig |  2 +-
- configs/khadas-edge-rk3399_defconfig         |  2 +-
- configs/khadas-edge-v-rk3399_defconfig       |  2 +-
- configs/leez-rk3399_defconfig                |  2 +-
- configs/nanopc-t4-rk3399_defconfig           |  2 +-
- configs/nanopi-m4-2gb-rk3399_defconfig       |  1 +
- configs/nanopi-m4-rk3399_defconfig           |  2 +-
- configs/nanopi-m4b-rk3399_defconfig          |  2 +-
- configs/nanopi-neo4-rk3399_defconfig         |  2 +-
- configs/nanopi-r4s-rk3399_defconfig          |  2 +-
- configs/orangepi-rk3399_defconfig            |  2 +-
- configs/pinebook-pro-rk3399_defconfig        |  2 +-
- configs/pinephone-pro-rk3399_defconfig       |  2 +-
- configs/puma-rk3399_defconfig                |  2 +-
- configs/roc-pc-mezzanine-rk3399_defconfig    |  2 +-
- configs/roc-pc-rk3399_defconfig              |  2 +-
- configs/rock-4c-plus-rk3399_defconfig        |  2 +-
- configs/rock-4se-rk3399_defconfig            |  2 +-
- configs/rock-pi-4-rk3399_defconfig           |  2 +-
- configs/rock-pi-4c-rk3399_defconfig          |  2 +-
- configs/rock-pi-n10-rk3399pro_defconfig      |  2 +-
- configs/rock960-rk3399_defconfig             |  2 +-
- configs/rockpro64-rk3399_defconfig           |  2 +-
- 31 files changed, 30 insertions(+), 59 deletions(-)
+ drivers/phy/rockchip/phy-rockchip-usbdp.c | 39 ++++++++++++++++++++---
+ 1 file changed, 34 insertions(+), 5 deletions(-)
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index b7ada58695be..7a65d98635ae 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -98,37 +98,6 @@ dtb-$(CONFIG_ROCKCHIP_RK3368) += \
- 	rk3368-geekbox.dtb \
- 	rk3368-px5-evb.dtb \
+diff --git a/drivers/phy/rockchip/phy-rockchip-usbdp.c b/drivers/phy/rockchip/phy-rockchip-usbdp.c
+index baf92529348c..8e5821069757 100644
+--- a/drivers/phy/rockchip/phy-rockchip-usbdp.c
++++ b/drivers/phy/rockchip/phy-rockchip-usbdp.c
+@@ -74,6 +74,8 @@ struct udphy_grf_cfg {
+ struct rockchip_udphy;
  
--dtb-$(CONFIG_ROCKCHIP_RK3399) += \
--	rk3399-evb.dtb \
--	rk3399-eaidk-610.dtb \
--	rk3399-ficus.dtb \
--	rk3399-firefly.dtb \
--	rk3399-gru-bob.dtb \
--	rk3399-gru-kevin.dtb \
--	rk3399-khadas-edge.dtb \
--	rk3399-khadas-edge-captain.dtb \
--	rk3399-khadas-edge-v.dtb \
--	rk3399-leez-p710.dtb \
--	rk3399-nanopc-t4.dtb \
--	rk3399-nanopi-m4.dtb \
--	rk3399-nanopi-m4-2gb.dtb \
--	rk3399-nanopi-m4b.dtb \
--	rk3399-nanopi-neo4.dtb \
--	rk3399-nanopi-r4s.dtb \
--	rk3399-orangepi.dtb \
--	rk3399-pinebook-pro.dtb \
--	rk3399-pinephone-pro.dtb \
--	rk3399-puma-haikou.dtb \
--	rk3399-roc-pc.dtb \
--	rk3399-roc-pc-mezzanine.dtb \
--	rk3399-rock-4c-plus.dtb \
--	rk3399-rock-4se.dtb \
--	rk3399-rock-pi-4a.dtb \
--	rk3399-rock-pi-4c.dtb \
--	rk3399-rock960.dtb \
--	rk3399-rockpro64.dtb \
--	rk3399pro-rock-pi-n10.dtb
--
- dtb-$(CONFIG_ROCKCHIP_RK3568) += \
- 	rk3566-anbernic-rgxx3.dtb \
- 	rk3566-pinetab2-v0.1.dtb \
-diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index a492b0885c03..a2c81489452e 100644
---- a/arch/arm/mach-rockchip/Kconfig
-+++ b/arch/arm/mach-rockchip/Kconfig
-@@ -272,6 +272,7 @@ config ROCKCHIP_RK3399
- 	imply MISC_INIT_R
- 	imply OF_LIBFDT_OVERLAY
- 	imply OF_LIVE
-+	imply OF_UPSTREAM
- 	imply PARTITION_TYPE_GUID
- 	imply PHY_GIGE if GMAC_ROCKCHIP
- 	imply PRE_CONSOLE_BUFFER
-diff --git a/configs/chromebook_bob_defconfig b/configs/chromebook_bob_defconfig
-index 9e15d9e3b8f6..acfe3934104f 100644
---- a/configs/chromebook_bob_defconfig
-+++ b/configs/chromebook_bob_defconfig
-@@ -9,7 +9,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
- CONFIG_SF_DEFAULT_SPEED=20000000
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-gru-bob"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-gru-bob"
- CONFIG_SPL_TEXT_BASE=0xff8c2000
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
-diff --git a/configs/chromebook_kevin_defconfig b/configs/chromebook_kevin_defconfig
-index a79703c0a138..95fdb418d82b 100644
---- a/configs/chromebook_kevin_defconfig
-+++ b/configs/chromebook_kevin_defconfig
-@@ -9,7 +9,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
- CONFIG_SF_DEFAULT_SPEED=20000000
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-gru-kevin"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-gru-kevin"
- CONFIG_SPL_TEXT_BASE=0xff8c2000
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
-diff --git a/configs/eaidk-610-rk3399_defconfig b/configs/eaidk-610-rk3399_defconfig
-index d9cde9ecced5..aedb4570ef8a 100644
---- a/configs/eaidk-610-rk3399_defconfig
-+++ b/configs/eaidk-610-rk3399_defconfig
-@@ -4,7 +4,7 @@ CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-eaidk-610"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-eaidk-610"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_EVB_RK3399=y
-diff --git a/configs/evb-rk3399_defconfig b/configs/evb-rk3399_defconfig
-index 334259f73eb2..756d6952de1f 100644
---- a/configs/evb-rk3399_defconfig
-+++ b/configs/evb-rk3399_defconfig
-@@ -5,7 +5,7 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_SF_DEFAULT_SPEED=20000000
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-evb"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-evb"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_EVB_RK3399=y
-diff --git a/configs/ficus-rk3399_defconfig b/configs/ficus-rk3399_defconfig
-index 0d97b7ecb3c7..dce8093376d6 100644
---- a/configs/ficus-rk3399_defconfig
-+++ b/configs/ficus-rk3399_defconfig
-@@ -4,7 +4,7 @@ CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_SF_DEFAULT_SPEED=20000000
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-ficus"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-ficus"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_ROCK960_RK3399=y
-diff --git a/configs/firefly-rk3399_defconfig b/configs/firefly-rk3399_defconfig
-index 9c94ac2f3012..edacef29edfc 100644
---- a/configs/firefly-rk3399_defconfig
-+++ b/configs/firefly-rk3399_defconfig
-@@ -5,7 +5,7 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_SF_DEFAULT_SPEED=20000000
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-firefly"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-firefly"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_EVB_RK3399=y
-diff --git a/configs/khadas-edge-captain-rk3399_defconfig b/configs/khadas-edge-captain-rk3399_defconfig
-index 67086d9f2fc2..60d4770cb0e4 100644
---- a/configs/khadas-edge-captain-rk3399_defconfig
-+++ b/configs/khadas-edge-captain-rk3399_defconfig
-@@ -5,7 +5,7 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_SF_DEFAULT_SPEED=10000000
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-khadas-edge-captain"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-khadas-edge-captain"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
-diff --git a/configs/khadas-edge-rk3399_defconfig b/configs/khadas-edge-rk3399_defconfig
-index f752731dec01..1321ca1ea59e 100644
---- a/configs/khadas-edge-rk3399_defconfig
-+++ b/configs/khadas-edge-rk3399_defconfig
-@@ -5,7 +5,7 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_SF_DEFAULT_SPEED=10000000
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-khadas-edge"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-khadas-edge"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
-diff --git a/configs/khadas-edge-v-rk3399_defconfig b/configs/khadas-edge-v-rk3399_defconfig
-index cb05a47f812b..3898142c5c7c 100644
---- a/configs/khadas-edge-v-rk3399_defconfig
-+++ b/configs/khadas-edge-v-rk3399_defconfig
-@@ -5,7 +5,7 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_SF_DEFAULT_SPEED=10000000
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-khadas-edge-v"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-khadas-edge-v"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
-diff --git a/configs/leez-rk3399_defconfig b/configs/leez-rk3399_defconfig
-index 903125aa5c1d..ea96e1ef758f 100644
---- a/configs/leez-rk3399_defconfig
-+++ b/configs/leez-rk3399_defconfig
-@@ -4,7 +4,7 @@ CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-leez-p710"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-leez-p710"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_EVB_RK3399=y
-diff --git a/configs/nanopc-t4-rk3399_defconfig b/configs/nanopc-t4-rk3399_defconfig
-index 3e89f3dcabd0..c63f4c076d55 100644
---- a/configs/nanopc-t4-rk3399_defconfig
-+++ b/configs/nanopc-t4-rk3399_defconfig
-@@ -5,7 +5,7 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-nanopc-t4"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-nanopc-t4"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_EVB_RK3399=y
-diff --git a/configs/nanopi-m4-2gb-rk3399_defconfig b/configs/nanopi-m4-2gb-rk3399_defconfig
-index 10bd9fba5388..08c21ee6e5d2 100644
---- a/configs/nanopi-m4-2gb-rk3399_defconfig
-+++ b/configs/nanopi-m4-2gb-rk3399_defconfig
-@@ -30,6 +30,7 @@ CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_SPL_OF_CONTROL=y
-+# CONFIG_OF_UPSTREAM is not set
- CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-diff --git a/configs/nanopi-m4-rk3399_defconfig b/configs/nanopi-m4-rk3399_defconfig
-index f5305549716c..ad01431cc3ae 100644
---- a/configs/nanopi-m4-rk3399_defconfig
-+++ b/configs/nanopi-m4-rk3399_defconfig
-@@ -5,7 +5,7 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-nanopi-m4"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-nanopi-m4"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_EVB_RK3399=y
-diff --git a/configs/nanopi-m4b-rk3399_defconfig b/configs/nanopi-m4b-rk3399_defconfig
-index 70de7e0a6d7f..34f892d5d3c1 100644
---- a/configs/nanopi-m4b-rk3399_defconfig
-+++ b/configs/nanopi-m4b-rk3399_defconfig
-@@ -5,7 +5,7 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-nanopi-m4b"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-nanopi-m4b"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_EVB_RK3399=y
-diff --git a/configs/nanopi-neo4-rk3399_defconfig b/configs/nanopi-neo4-rk3399_defconfig
-index 7f936636d419..f38235489ff7 100644
---- a/configs/nanopi-neo4-rk3399_defconfig
-+++ b/configs/nanopi-neo4-rk3399_defconfig
-@@ -5,7 +5,7 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-nanopi-neo4"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-nanopi-neo4"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_EVB_RK3399=y
-diff --git a/configs/nanopi-r4s-rk3399_defconfig b/configs/nanopi-r4s-rk3399_defconfig
-index ef74628fb284..ada04b46cb16 100644
---- a/configs/nanopi-r4s-rk3399_defconfig
-+++ b/configs/nanopi-r4s-rk3399_defconfig
-@@ -5,7 +5,7 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-nanopi-r4s"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-nanopi-r4s"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_EVB_RK3399=y
-diff --git a/configs/orangepi-rk3399_defconfig b/configs/orangepi-rk3399_defconfig
-index 2d0c9b77e584..5dfbdeaf17f5 100644
---- a/configs/orangepi-rk3399_defconfig
-+++ b/configs/orangepi-rk3399_defconfig
-@@ -5,7 +5,7 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-orangepi"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-orangepi"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_EVB_RK3399=y
-diff --git a/configs/pinebook-pro-rk3399_defconfig b/configs/pinebook-pro-rk3399_defconfig
-index 8ac6ddd49dea..5d3e32f9108e 100644
---- a/configs/pinebook-pro-rk3399_defconfig
-+++ b/configs/pinebook-pro-rk3399_defconfig
-@@ -7,7 +7,7 @@ CONFIG_NR_DRAM_BANKS=1
- CONFIG_SF_DEFAULT_SPEED=10000000
- CONFIG_ENV_SIZE=0x8000
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-pinebook-pro"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-pinebook-pro"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
-diff --git a/configs/pinephone-pro-rk3399_defconfig b/configs/pinephone-pro-rk3399_defconfig
-index 1bb7b35a255c..0eade88068f4 100644
---- a/configs/pinephone-pro-rk3399_defconfig
-+++ b/configs/pinephone-pro-rk3399_defconfig
-@@ -6,7 +6,7 @@ CONFIG_NR_DRAM_BANKS=1
- CONFIG_SF_DEFAULT_SPEED=10000000
- CONFIG_ENV_SIZE=0x8000
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-pinephone-pro"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-pinephone-pro"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
-diff --git a/configs/puma-rk3399_defconfig b/configs/puma-rk3399_defconfig
-index 5edba19e6ce8..34a0b575991e 100644
---- a/configs/puma-rk3399_defconfig
-+++ b/configs/puma-rk3399_defconfig
-@@ -7,7 +7,7 @@ CONFIG_NR_DRAM_BANKS=1
- CONFIG_SF_DEFAULT_SPEED=20000000
- CONFIG_ENV_SIZE=0x3000
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-puma-haikou"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-puma-haikou"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_BOOT_MODE_REG=0x0
-diff --git a/configs/roc-pc-mezzanine-rk3399_defconfig b/configs/roc-pc-mezzanine-rk3399_defconfig
-index 8141f803cf3b..a57899bfdfa0 100644
---- a/configs/roc-pc-mezzanine-rk3399_defconfig
-+++ b/configs/roc-pc-mezzanine-rk3399_defconfig
-@@ -8,7 +8,7 @@ CONFIG_SF_DEFAULT_SPEED=30000000
- CONFIG_ENV_SIZE=0x8000
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_ENV_SECT_SIZE=0x1000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-roc-pc-mezzanine"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-roc-pc-mezzanine"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
-diff --git a/configs/roc-pc-rk3399_defconfig b/configs/roc-pc-rk3399_defconfig
-index b8adf430e9ea..b45f0e0a8994 100644
---- a/configs/roc-pc-rk3399_defconfig
-+++ b/configs/roc-pc-rk3399_defconfig
-@@ -8,7 +8,7 @@ CONFIG_SF_DEFAULT_SPEED=30000000
- CONFIG_ENV_SIZE=0x8000
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_ENV_SECT_SIZE=0x1000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-roc-pc"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-roc-pc"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
-diff --git a/configs/rock-4c-plus-rk3399_defconfig b/configs/rock-4c-plus-rk3399_defconfig
-index e97fde17acc2..80dc44986e71 100644
---- a/configs/rock-4c-plus-rk3399_defconfig
-+++ b/configs/rock-4c-plus-rk3399_defconfig
-@@ -5,7 +5,7 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_SF_DEFAULT_SPEED=10000000
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-rock-4c-plus"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-rock-4c-plus"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
-diff --git a/configs/rock-4se-rk3399_defconfig b/configs/rock-4se-rk3399_defconfig
-index 13f5f84b9836..f52d4bf9913b 100644
---- a/configs/rock-4se-rk3399_defconfig
-+++ b/configs/rock-4se-rk3399_defconfig
-@@ -5,7 +5,7 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_SF_DEFAULT_SPEED=10000000
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-rock-4se"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-rock-4se"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
-diff --git a/configs/rock-pi-4-rk3399_defconfig b/configs/rock-pi-4-rk3399_defconfig
-index d474d91053c1..e71c4588b942 100644
---- a/configs/rock-pi-4-rk3399_defconfig
-+++ b/configs/rock-pi-4-rk3399_defconfig
-@@ -5,7 +5,7 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_SF_DEFAULT_SPEED=10000000
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-rock-pi-4a"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-rock-pi-4a"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
-diff --git a/configs/rock-pi-4c-rk3399_defconfig b/configs/rock-pi-4c-rk3399_defconfig
-index 50c6755246f2..14373933a34f 100644
---- a/configs/rock-pi-4c-rk3399_defconfig
-+++ b/configs/rock-pi-4c-rk3399_defconfig
-@@ -5,7 +5,7 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_SF_DEFAULT_SPEED=10000000
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-rock-pi-4c"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-rock-pi-4c"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
-diff --git a/configs/rock-pi-n10-rk3399pro_defconfig b/configs/rock-pi-n10-rk3399pro_defconfig
-index 6d93b9e58003..ec995a54a0ee 100644
---- a/configs/rock-pi-n10-rk3399pro_defconfig
-+++ b/configs/rock-pi-n10-rk3399pro_defconfig
-@@ -4,7 +4,7 @@ CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399pro-rock-pi-n10"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399pro-rock-pi-n10"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_EVB_RK3399=y
-diff --git a/configs/rock960-rk3399_defconfig b/configs/rock960-rk3399_defconfig
-index 3ea872a2ca3e..8fff3ed17c24 100644
---- a/configs/rock960-rk3399_defconfig
-+++ b/configs/rock960-rk3399_defconfig
-@@ -3,7 +3,7 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-rock960"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-rock960"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_ROCK960_RK3399=y
-diff --git a/configs/rockpro64-rk3399_defconfig b/configs/rockpro64-rk3399_defconfig
-index 4e1af37a1559..fc0804a0b80d 100644
---- a/configs/rockpro64-rk3399_defconfig
-+++ b/configs/rockpro64-rk3399_defconfig
-@@ -7,7 +7,7 @@ CONFIG_NR_DRAM_BANKS=1
- CONFIG_SF_DEFAULT_SPEED=10000000
- CONFIG_ENV_SIZE=0x8000
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3399-rockpro64"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-rockpro64"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
+ struct rockchip_udphy_cfg {
++	unsigned int num_phys;
++	unsigned int phy_ids[2];
+ 	/* resets to be requested */
+ 	const char * const *rst_list;
+ 	int num_rsts;
+@@ -640,17 +642,25 @@ int rockchip_u3phy_uboot_init(void)
+ 
+ static int rockchip_udphy_probe(struct udevice *dev)
+ {
+-	const struct device_node *np = ofnode_to_np(dev_ofnode(dev));
+ 	struct rockchip_udphy *udphy = dev_get_priv(dev);
+ 	const struct rockchip_udphy_cfg *phy_cfgs;
++	unsigned int reg;
+ 	int id, ret;
+ 
+ 	udphy->dev = dev;
+ 
+-	id = of_alias_get_id(np, "usbdp");
+-	if (id < 0)
+-		id = 0;
+-	udphy->id = id;
++	ret = ofnode_read_u32_index(dev_ofnode(dev), "reg", 0, &reg);
++	if (ret) {
++		dev_err(dev, "failed to read reg[0] property\n");
++		return ret;
++	}
++	if (reg == 0 && dev_read_addr_cells(dev) == 2) {
++		ret = ofnode_read_u32_index(dev_ofnode(dev), "reg", 1, &reg);
++		if (ret) {
++			dev_err(dev, "failed to read reg[1] property\n");
++			return ret;
++		}
++	}
+ 
+ 	phy_cfgs = (const struct rockchip_udphy_cfg *)dev_get_driver_data(dev);
+ 	if (!phy_cfgs) {
+@@ -659,6 +669,20 @@ static int rockchip_udphy_probe(struct udevice *dev)
+ 	}
+ 	udphy->cfgs = phy_cfgs;
+ 
++	/* find the phy-id from the io address */
++	udphy->id = -ENODEV;
++	for (id = 0; id < udphy->cfgs->num_phys; id++) {
++		if (reg == udphy->cfgs->phy_ids[id]) {
++			udphy->id = id;
++			break;
++		}
++	}
++
++	if (udphy->id < 0) {
++		dev_err(dev, "no matching device found\n");
++		return -ENODEV;
++	}
++
+ 	ret = regmap_init_mem(dev_ofnode(dev), &udphy->pma_regmap);
+ 	if (ret)
+ 		return ret;
+@@ -838,6 +862,11 @@ static const char * const rk3588_udphy_rst_l[] = {
+ };
+ 
+ static const struct rockchip_udphy_cfg rk3588_udphy_cfgs = {
++	.num_phys = 2,
++	.phy_ids = {
++		0xfed80000,
++		0xfed90000,
++	},
+ 	.num_rsts = ARRAY_SIZE(rk3588_udphy_rst_l),
+ 	.rst_list = rk3588_udphy_rst_l,
+ 	.grfcfg	= {
 -- 
 2.43.2
 
