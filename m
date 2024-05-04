@@ -4,114 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A5A1C4345F
-	for <u-boot@archiver.kernel.org>; Fri,  3 May 2024 22:22:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C78BDC4345F
+	for <u-boot@archiver.kernel.org>; Sat,  4 May 2024 15:04:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69990884E6;
-	Sat,  4 May 2024 00:22:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BE69288586;
+	Sat,  4 May 2024 17:04:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="duMbiruQ";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4639881C8; Sat,  4 May 2024 00:20:54 +0200 (CEST)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D713B8857D; Sat,  4 May 2024 17:04:14 +0200 (CEST)
+Received: from CHN02-BJS-obe.outbound.protection.partner.outlook.cn
+ (mail-bjschn02on20709.outbound.protection.partner.outlook.cn
+ [IPv6:2406:e500:4440:2::709])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5E56881A1
- for <u-boot@lists.denx.de>; Sat,  4 May 2024 00:20:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 509708857D
+ for <u-boot@lists.denx.de>; Sat,  4 May 2024 17:04:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-78ef9ce897bso6461885a.0
- for <u-boot@lists.denx.de>; Fri, 03 May 2024 15:20:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714774850; x=1715379650; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=UuMyIQ+PhdtZzrHSUis3C2vN1q9nJo0xEccP5gmjQak=;
- b=duMbiruQwD63dhIDt28xXtmfvLxHa/CtRaLJyvXBzFauBHbcqAH40G/ChEuRbX2syU
- PNq9bVsvLNAXYSaqQU80tOZrOpDHQ6+dgunb0XJSRUALw2Tp+Qx4QTFmA2qU1YcCO1/Q
- TEhHj9Ok2JDO2mCELxd+yOo7z29QTVA2V0PAo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714774850; x=1715379650;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UuMyIQ+PhdtZzrHSUis3C2vN1q9nJo0xEccP5gmjQak=;
- b=Djcwh/LSNcSqDPvgU3IlrAhq9Q5ZB7DcG3wgdYxPeEWpsUNueynhTCr/hK+FaJNjiD
- WoN4ejH1yXVL52jE7eJKS+a5OeqNPCeulOo/T6l38ja5CctzrWK6tV0VckUQFvogjNkt
- 1YI2kjTFfVPgvUop+SAaVKoUsZOzDu3EkpgbyAa5+E95lEDz5BNEHKBGt5pnyY5PIU08
- wSTVSXcRXaNA73zhEOVgB/OflZHrIgOlbDg/woMngqaeAD+HEEFwYviifYhppFEz6qiN
- VeuAvDJ2zUXykNa2j6MhohcSnrm9TCEtqXVBQ7IMW6V3LoL+I0qdQdRMRjDRyPTJp8Sy
- 4NwQ==
-X-Gm-Message-State: AOJu0YwxXrAOvSCcIZ2V4nwp2uMZaSgO2zajoDQwnvHTyGC3oPWMlh6v
- fZXChMKQskw7jpQzyRxtmupGJCCGsmybOk6NGtF5ito74vy65O+cFNU3AdkIrdU=
-X-Google-Smtp-Source: AGHT+IHxChlUF/VpHExtI4TXVRfet+DFDxMalHnNerd+zbXE+sgTKOEHkBnZv3ZZd2Hh2z7QBLGAJw==
-X-Received: by 2002:a05:620a:56c1:b0:78e:d2a8:b4de with SMTP id
- wh1-20020a05620a56c100b0078ed2a8b4demr3801849qkn.20.1714774850451; 
- Fri, 03 May 2024 15:20:50 -0700 (PDT)
-Received: from bill-the-cat ([187.144.98.216])
- by smtp.gmail.com with ESMTPSA id
- wx56-20020a05620a5a7800b00790629248d4sm1588219qkn.110.2024.05.03.15.20.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 May 2024 15:20:49 -0700 (PDT)
-Date: Fri, 3 May 2024 16:20:42 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Greg Malysa <greg.malysa@timesys.com>
-Cc: u-boot@lists.denx.de, Matthew McClintock <Matthew.Mcclintock@analog.com>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Alexey Brodkin <alexey.brodkin@synopsys.com>,
- Alison Wang <alison.wang@nxp.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Andre Przywara <andre.przywara@arm.com>, Andrew Davis <afd@ti.com>,
- Andy Fleming <afleming@gmail.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Bin Meng <bmeng.cn@gmail.com>, Bin Meng <bmeng@tinylab.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- =?iso-8859-1?B?Q3Pza+Fz?= Bence <csokas.bence@prolan.hu>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ian Roberts <ian.roberts@timesys.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Kuan Lim Lee <kuanlim.lee@starfivetech.com>,
- Linus Walleij <linus.walleij@linaro.org>, Lukasz Majewski <lukma@denx.de>,
- Manorit Chawdhry <m-chawdhry@ti.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Marek Vasut <marex@denx.de>, Mario Six <mario.six@gdsys.cc>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michal Simek <monstr@monstr.eu>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Priyanka Jain <priyanka.jain@nxp.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Rick Chen <rick@andestech.com>, Sam Protsenko <semen.protsenko@linaro.org>,
- Samuel Holland <samuel@sholland.org>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>, Sumit Garg <sumit.garg@linaro.org>,
- Thomas Chou <thomas@wytron.com.tw>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Wolfgang Denk <wd@denx.de>, Yang Xiwen <forbidden405@outlook.com>,
- Yu Chien Peter Lin <peterlin@andestech.com>
-Subject: Re: [PATCH v2 0/4] arm: Add Analog Devices SC5xx Machine Type
-Message-ID: <20240503222042.GA2568172@bill-the-cat>
-References: <20240425000515.21896-1-greg.malysa@timesys.com>
+ spf=pass smtp.mailfrom=minda.chen@starfivetech.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=clVd4wHBR7+M4oNCm/H+suHqo9PDZx7azlc/jez82dV9/krdNnLJp52lEnI4GeNKTRAvayayCo/fIeiOK9HMnyTnu2MIQIQxbePz1LhSKWYy9etl4jQKd2w1RmCSK/POYSsHU9q0fM81Ztan5gD3/nWCp64NKGktd92l9YQdMHXK/K6uaz71usFU3Yx7NGYtoXWTdMgGxa2RWkAZzxj0KTdCJVs8jKZWEnPrNtTd8u8Om9DhHPJ+9nwxQ4+RlprbC+fDFjgdFvCqoxp6n2m5ibib+yvI6o9AO8iTdUJ/sN4bYLIfHFQrA9FgLbrTY/J7P56mQQ44f8fAghNvFbqurw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=QL6JadR89Mf0Fl0Jhf4XY3ZopiZPl2W97gcA4UnpHWU=;
+ b=DA7VNa/6eUT75cilmC3ZZSR0FahBp9GW6T5eu8SrF0fhiP13kpFc/+uqfDI4I9mcUuYEob4DC3lF0s3jvoHVHO/nuWeKwuXHC/NU7viUtzkhvgB41vUWbCtc2GLb+KTCNHhuRkOgMWEs3dqdhhHiAUycMqCo1c1+BwHMSW0GvtVFZM1LpBkVda977dTY5403QrcOATBle/Ls2+GGg1DqvRjacBXyTtq+JDDarTdBgMtdCD5zxPKOT4Ye9Wqt2kOWwA5MsuH0T1faspViBcJGJrofIBH5V7k58KfSp5lm2eYU71NVm4h4FaE/wAXdqx8NHNW0oK1Nc6IKnQyesjwrRA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=starfivetech.com; dmarc=pass action=none
+ header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=starfivetech.com;
+Received: from BJXPR01MB0855.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c211:18::12) by BJXPR01MB0839.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c211:1a::12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.54; Sat, 4 May
+ 2024 15:04:07 +0000
+Received: from BJXPR01MB0855.CHNPR01.prod.partner.outlook.cn
+ ([fe80::3e54:57b5:e3e3:7f09]) by
+ BJXPR01MB0855.CHNPR01.prod.partner.outlook.cn ([fe80::3e54:57b5:e3e3:7f09%6])
+ with mapi id 15.20.7472.044; Sat, 4 May 2024 15:04:07 +0000
+From: Minda Chen <minda.chen@starfivetech.com>
+To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Roger Quadros <rogerq@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Alexey Romanov <avromanov@salutedevices.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
+ Nishanth Menon <nm@ti.com>, Rick Chen <rick@andestech.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, Minda Chen <minda.chen@starfivetech.com>
+Subject: [PATCH v1 0/7] Add Starfive JH7110 Cadence USB driver
+Date: Sat,  4 May 2024 23:03:51 +0800
+Message-Id: <20240504150358.19600-1-minda.chen@starfivetech.com>
+X-Mailer: git-send-email 2.17.1
+Content-Type: text/plain
+X-ClientProxiedBy: ZQ0PR01CA0005.CHNPR01.prod.partner.outlook.cn (10.2.0.75)
+ To BJXPR01MB0855.CHNPR01.prod.partner.outlook.cn (10.43.36.12)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="cGQnkO1b8RgbQWGP"
-Content-Disposition: inline
-In-Reply-To: <20240425000515.21896-1-greg.malysa@timesys.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Sat, 04 May 2024 00:22:10 +0200
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BJXPR01MB0855:EE_|BJXPR01MB0839:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8afd4c98-4450-4f89-2c78-08dc6c4b71ea
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: W7EGVqCVOTq8wYk6k07q7d6HRJqpSE6oFF6foH67wVykIszC5GsHyjsCsrkZtX5XTSobgf8UJrt+YP0c5aDJKRvUPJk80lEVfKmCj76e9k/3eRja68hoPAw0zvQUdwApW9CWUo+VZEcVGDbOHQyTpz0jiR1l4NYO9FJM5shqB3nBh0dpMgmMpxAAlarm06DRvLcHA3NKvlINcESZZ84XMSOCJiZlGsGah1++u2/7i+jdiTp065ABDO3/gS4e0LUZJrQwPF72WxyrLP3jBzu4SThx+ArkAN5G4n1/lYLpyOikuWo0gEqCZfxE+SJ8W0GHGgEYDdZCa9KQ/zR6Bir+br3BzDLnEQ3AOAN0QbYB4ebdLvfbY0oQ0PG6K2W/VoRYoMvC/RBFzXAQj7C1YSaomsz9Nmi8OiWt70f9vHbrp531c+LW9cRxZfXur435j8ci+acWqaL1TAXeg6UTuqbB0llc2E1WM/N+dCyvXwZg5r9oDI3dSm49rmM5fzJUpGkYtWrA6zlj259pciuLfn6b/FQc2oLwz160DEFfK7vW7aOwPcy6EaMuvHh8MtlFaJ4qfirdFqx+XlBgtfQKAPf1i5PtuQBusvvKH6GoxfbZYVX7MmJJuX5J26ZUj3QUDzK0tJvrBi/j6/ye3Y+lZYTqlg==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BJXPR01MB0855.CHNPR01.prod.partner.outlook.cn; PTR:;
+ CAT:NONE;
+ SFS:(13230031)(1800799015)(52116005)(366007)(41320700004)(7416005)(38350700005)(921011);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?5Y6egohllEVkabRujQfJscrqDmt7nWhuQCkdy3mZiqdtTqn/XbVp17Rkhe5G?=
+ =?us-ascii?Q?z0gt2NjqAImK0IuMe4c/w9ZKgiZNr1gKsqrmZxqRIkfEiYZXnB7fgL236SKP?=
+ =?us-ascii?Q?u84rVkfjUreQkz82LjyA5oST5U5wunfOC3TquL5/5dFa9pmiZRd1iETraIaE?=
+ =?us-ascii?Q?PoCcp2XT37A9MQHuTkRBmv7gx9QRWOIVODh0RGqy6wAPNZT3327t5lbpEiKJ?=
+ =?us-ascii?Q?KDDfk+aKKfLR+H4tYl5FL83UuJlqdi82ke8spG4xPNfCLM2yoWLY/v8Boh6A?=
+ =?us-ascii?Q?ndkbdLZ+p9HPdSHrHh5fT7vYLEwBD7VCT6N1bl+xGHdyKhOzjTwV0fjkpKDt?=
+ =?us-ascii?Q?3RVe3oepLOGHJmfRhe02iLpltTdT03nf08IddwQg6qrRFYeu9Bac7EtPO6YD?=
+ =?us-ascii?Q?9vJdatKQ8Kg433lOBoDEdSS1K67MtJvn4vKuc9GMyKWTGpoJywRl7bQMuYmy?=
+ =?us-ascii?Q?JEc6mQxQ9YF5JV4WeuDvprFWumWSsQsHphN0Rf9sAC03q4EVUWZ5VogXnqrW?=
+ =?us-ascii?Q?wZvQYnfXN9btFaGvTlKvQkJzPRPjv3Awzrl3gKaUFZyU4pMGJdJaskMf/g1E?=
+ =?us-ascii?Q?DiegGvFo4hPyXRI3JAAulhlZKG8pOqEHWiFRtyWQfIDh6aSjQSdsEM3ZerTq?=
+ =?us-ascii?Q?AFKbXKwI5FDmNKmMaeACBWs6oSZh/PFPPRHtReVyI+jbxp+tVr6gNEZlntUT?=
+ =?us-ascii?Q?g07sfex/+3tx5uAYFovJgcAfKaTwWyu1pklVHskzArQelOUc/waV/YbvO1+C?=
+ =?us-ascii?Q?qHgyJciisefjR115skOTi615FNmAZt41VHrirDzJX4x31WCJDtkaz7ikyYmu?=
+ =?us-ascii?Q?cAvdds8Vmg7VoLeD7qHtRanE4bg972XKPAtWlT7FbbLqqdqqIkQa44vHnCna?=
+ =?us-ascii?Q?yXXpEQJ/SYr+KoT6UeVQ5eKUfWspDVSTgtMPypHsJExKspEsc8efNUEUfGGI?=
+ =?us-ascii?Q?jNLKgcDu096LxNfBN2LwgCUY5RQbEQdTLghGjZXOFW1ZTJcKbyPsYHjNPLqI?=
+ =?us-ascii?Q?6DgbltWWzlN4zBguBHUuAXorcgp6Aq2Y70YXbEBDv4ElPFDgPy2ugeGC/z6N?=
+ =?us-ascii?Q?4b/tP8aVp+flLaw7J8nhrDF6UuKy2sRQBOuKYXJE4WisFmb6SnShC90cx7uF?=
+ =?us-ascii?Q?ldVGz39NHuYwHx0bhBnx6cHXUVQXRoANeqK9YEXtyDh7PvkGZ0XfNdYt+gQu?=
+ =?us-ascii?Q?SuLa7UX2Tir6OvS9jm3VcQ84yLHNBKZcdsOFgy0383k17R5Xuj0OeltENfhG?=
+ =?us-ascii?Q?B2swH3KGGXYoBLXuVG4IYuRuVyNNZJH1UL8xP1XEiZKBTg5aHwaV7Lc6+rSC?=
+ =?us-ascii?Q?Dmiy3z+zYMIdsHfyW4/qOOtGxSqlyQZNsk5w+B6wQhyYTE5nVQ7NmLEubl4V?=
+ =?us-ascii?Q?fsKfYqnT3c/kSm8P4AfgtxZ8n099FdptTaTurzY9w7YhK4vwf5VNo5nsDLqH?=
+ =?us-ascii?Q?J1usxwl9q3tljOz//xVDjuiVk8sm9xYhD3cTpzvYJ8ru85UedYaRMvolzcxr?=
+ =?us-ascii?Q?VrvulnhQ7/s0i+NLIuFiwEEESm0iUHq9EM7b9bDi3iyPIEoorPF6kV7Vhov0?=
+ =?us-ascii?Q?l8xKupwfN61BJKC9Dic8RrBpUdX0FGbRw+JEi9EICQMoo99FEqyoWvGRfEee?=
+ =?us-ascii?Q?Kg=3D=3D?=
+X-OriginatorOrg: starfivetech.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8afd4c98-4450-4f89-2c78-08dc6c4b71ea
+X-MS-Exchange-CrossTenant-AuthSource: BJXPR01MB0855.CHNPR01.prod.partner.outlook.cn
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 May 2024 15:04:07.0739 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: +usgqD9uzK4Sg2p54B6KvLUIl9oid/yVIFLz8VIPPt/EED4LRxbZUZAIkDvX+TO4bIn+GA/Rtojz+RTZtxDU2G8dOdfAGgFp2OlER+Unyu0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BJXPR01MB0839
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,59 +129,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add Starfive JH7110 Cadence USB driver and related PHY driver.
+So the codes can be used in visionfive2 and milkv 7110 board.
 
---cGQnkO1b8RgbQWGP
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The driver is almost the same with kernel driver.
 
-On Wed, Apr 24, 2024 at 08:03:59PM -0400, Greg Malysa wrote:
+patch1: Add set phy mode function in cdns3 core driver
+        which is used by Starfive.
 
-> This series adds support for the ADI SC5xx machine type and includes two
-> core drivers that are required for being able to boot any board--a UART
-> driver, the gptimer driver which is used as a clock reference (CNTVCNT
-> is not supported on the armv7 sc5xx SoCs) and the clock tree driver. Our
-> corresponding Linux support relies on u-boot configuring the clocks
-> correctly before booting, so it is not possible to boot any board
-> without the CGU/CDU configuration happening here. There are also no
-> board files, device trees, or defconfigs included here, but some common
-> definitions that will be used to build board files currently are. The
-> sc5xx SoCs themselves include many armv7 families (sc57x, sc58x, and
-> sc594) all using an ARM Cortex-A5, and one armv8 family (sc598) indended
-> to be a drop-in replacement for the SC594 in terms of peripherals, with
-> a Cortex-A55 instead.
->=20
-> Some of the configuration code in dmcinit and clkinit is quite scary and
-> causes a lot of checkpatch violations. It is modified from code
-> initially provided by ADI, but it has not been fully rewritten. There's
-> a question of how important it is to clean up this code--it has some
-> quality violations, but it has been in use (including in production) for
-> over two years and is known to work for performing the low level SoC
-> initialization, while a rewrite might introduce timing or sequence bugs
-> that could take a significant amount of time to detect in the future.
+patch2-3: USB and PCIe 2.0 (usb 3.0) PHY drivier
+patch4: Cadence USB wrapper driver.
+patch5-7 dts, config and maintainers update.
 
-I gave the series a cursory look, and CI is also happy. I will put this
-in to the -next branch sometime soon after it opens, thanks.
+Minda Chen (7):
+  usb: cdns3: Set USB PHY mode in cdns3_probe()
+  phy: starfive: Add Starfive JH7110 USB 2.0 PHY driver
+  phy: starfive: Add Starfive JH7110 PCIe 2.0 PHY driver
+  usb: cdns: starfive: Add cdns USB driver
+  configs: starfive: Add visionfive2 cadence USB configuration
+  dts: starfive: Add JH7110 Cadence USB dts node
+  MAINTAINERS: Update Starfive visionfive2 maintain files.
 
---=20
-Tom
+ .../dts/jh7110-starfive-visionfive-2.dtsi     |   5 +
+ arch/riscv/dts/jh7110.dtsi                    |  52 +++++
+ board/starfive/visionfive2/MAINTAINERS        |   2 +
+ configs/starfive_visionfive2_defconfig        |   9 +
+ drivers/phy/Kconfig                           |   1 +
+ drivers/phy/Makefile                          |   1 +
+ drivers/phy/starfive/Kconfig                  |  19 ++
+ drivers/phy/starfive/Makefile                 |   7 +
+ drivers/phy/starfive/phy-jh7110-pcie.c        | 211 ++++++++++++++++++
+ drivers/phy/starfive/phy-jh7110-usb2.c        | 135 +++++++++++
+ drivers/usb/cdns3/Kconfig                     |   7 +
+ drivers/usb/cdns3/Makefile                    |   2 +
+ drivers/usb/cdns3/cdns3-starfive.c            | 184 +++++++++++++++
+ drivers/usb/cdns3/core.c                      |  17 ++
+ 14 files changed, 652 insertions(+)
+ create mode 100644 drivers/phy/starfive/Kconfig
+ create mode 100644 drivers/phy/starfive/Makefile
+ create mode 100644 drivers/phy/starfive/phy-jh7110-pcie.c
+ create mode 100644 drivers/phy/starfive/phy-jh7110-usb2.c
+ create mode 100644 drivers/usb/cdns3/cdns3-starfive.c
 
---cGQnkO1b8RgbQWGP
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
+base-commit: 174ac987655c888017c82df1883c0c2ea0dc2495
+-- 
+2.17.1
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY1Yy8ACgkQFHw5/5Y0
-tywtIAv+NuIzqnRLCud1MPFD9xGvMtm+dPGmvsevK/oUR+lKP2bIBYfC2Vd8uQgP
-SCOGSMfBFtSRo/D+h6ce+mBx9EB9rtX20ELe+R6wx/q60rs6werzQpM8BsPJGBua
-7sWtvFIXeG57YR7IOXbCgnYW1L3DHKX06yJPNqkFx/XfE9adWUimb2qNMdl+b+QS
-ycg3/yBykFrQo4isSk8Wf8hwiG14q+6X7PTomMv7tRHQaD8iWsDrxX0RppTVtCaQ
-FX8fSAPi/Bd845asfy971KC5Xa7BK0rLtwIMf5rqKGZGRHWn5B5VvsA8ww0E3tQg
-DrsSTvlDa0MbJv2sbP+Zs/mRkvlCHWE8NGMX0YMZVEuqF2kq2Otob8DkJwR07L11
-ShUykSLbSjoiyMBNCUhQcGGY1ecmgXBzFHK1NdxdyvxK60ze0MHZzbHRJdEJ6eVj
-T21NHCVJPCUgMvyHYJLFcKbEBUhhw1y893Iwbd9m0rRH2n6DxeA2CdOYZdY/kx3I
-wJmzOhJH
-=H5Xc
------END PGP SIGNATURE-----
-
---cGQnkO1b8RgbQWGP--
