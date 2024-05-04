@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0C9BC4345F
-	for <u-boot@archiver.kernel.org>; Sat,  4 May 2024 19:46:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 693FDC4345F
+	for <u-boot@archiver.kernel.org>; Sat,  4 May 2024 19:46:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D39988596;
-	Sat,  4 May 2024 21:45:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F2CC9885BC;
+	Sat,  4 May 2024 21:45:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ZZP5MlcI";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="cz2Fs4Jr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6CF6885A3; Sat,  4 May 2024 21:45:27 +0200 (CEST)
+ id 7926F88599; Sat,  4 May 2024 21:45:32 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 779AE88596
- for <u-boot@lists.denx.de>; Sat,  4 May 2024 21:45:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C92B885B3
+ for <u-boot@lists.denx.de>; Sat,  4 May 2024 21:45:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,20 +28,22 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1714851902; bh=Fgg2sVJIOtg+BeI/kS2JyyBosITnGfZNVAXaG6x6uns=;
- b=ZZP5MlcIgOM4apcxiwVz5UisKt9nNcBbpcv08pNlrzrqniyRggMIsT2rSnJFtBmJhMg+wdnd7
- rfhromVh0OT9adgNrhaGT430Vnxnw5fDS427slD3OfVGpHC4heNPSz0YqGrgw+o8H6IjdximoSz
- ThBqcDft0tudC8Sso8a415JMukmMBt0Xx17+h3GbEZKLA09RY0iYTD1KTeu6D6OT6BEmFNUn/Nr
- GaM8PyFtraSC2L0a7nbxw25CEskzVifmIGLGcsMcuiWZJcHsk7cwgqL2Ujg/ZqTk/MCDNOlI+55
- 2cu5/EtqRaALe2QJQRqMpwmnq2uHwQq6rKPe2vmDqVBA==
+ t=1714851910; bh=CGmG9abM7MFD4Pqj5HRyVNnPGjenrGtRx1XrfIX7S/s=;
+ b=cz2Fs4JrQw6hEIcLifYbhFVb15GUaIWii+l+1NOX+MukZvHoKqQSlzC44S7Xd3bhuCOCoPOwG
+ /88jsYhhi0LthkCGTusZIyqeWhZ6qtNUOiLXmk12Ta2k8GHuoJ6W4jQ4RnAoTSB6YvCwYa5OEj3
+ AXmSaUvR0cC58IKk9bHV13/pg6ORudFWiGug4j0IPIt1JQz1jhykxRSdrQpzJT6NdPbzKu+Ty87
+ JfSIQOnpQ6yxwhybYRpecFoK3GLX9/INHvjZkUJetbjhsk7tMNNcyg0UVBeNbvODTjvzoEM0buq
+ rPQ1VHsTt3AGuqACpwIvDPnlnwmwp1apPp4qt2rK4Elg==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 12/16] phy: rockchip: usbdp: Adopt driver to work with
- upstream DT
-Date: Sat,  4 May 2024 19:43:04 +0000
-Message-ID: <20240504194346.2462489-13-jonas@kwiboo.se>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>, Jonas Karlman
+ <jonas@kwiboo.se>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH 13/16] rockchip: rk3588-rock-5b: Drop usb-typec node from
+ u-boot.dtsi
+Date: Sat,  4 May 2024 19:43:05 +0000
+Message-ID: <20240504194346.2462489-14-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240504194346.2462489-1-jonas@kwiboo.se>
 References: <20240504194346.2462489-1-jonas@kwiboo.se>
@@ -53,7 +55,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 6636903d2b8e4dad13276e3b
+X-ForwardEmail-ID: 663690412b8e4dad13276e57
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,136 +72,160 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The upstream DT binding added in linux-phy next commit a75d8056e9fe
-("dt-bindings: phy: add rockchip usbdp combo phy document") does not
-define subnodes for the type of PHY, instead it is expected that phandle
-args are used for setting the type of the PHY.
+The usb-typec related nodes and props added in the board u-boot.dtsi
+file has not yet landed in upstream Linux kernel DT, and they are not
+needed for U-Boot to use the USB Type-C port in peripheral mode.
 
-  phys = <&usbdp_phy0 PHY_TYPE_USB3>
-
-Adopt the usbdp phy driver to work with upstream DT binding targeted for
-Linux kernel v6.10.
+Remove superfluous usb-typec related nodes and props and replace them
+with a simple dr_mode and maximum-speed prop to cleanup the board
+u-boot.dtsi file.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- drivers/phy/rockchip/phy-rockchip-usbdp.c | 63 ++++++-----------------
- 1 file changed, 17 insertions(+), 46 deletions(-)
+ arch/arm/dts/rk3588-rock-5b-u-boot.dtsi | 106 +-----------------------
+ 1 file changed, 2 insertions(+), 104 deletions(-)
 
-diff --git a/drivers/phy/rockchip/phy-rockchip-usbdp.c b/drivers/phy/rockchip/phy-rockchip-usbdp.c
-index bf0fb6d8288f..18e76402799b 100644
---- a/drivers/phy/rockchip/phy-rockchip-usbdp.c
-+++ b/drivers/phy/rockchip/phy-rockchip-usbdp.c
-@@ -21,7 +21,7 @@
- #include <reset.h>
- #include <syscon.h>
- #include <asm/arch-rockchip/clock.h>
--
-+#include <dt-bindings/phy/phy.h>
- #include <linux/usb/phy-rockchip-usbdp.h>
+diff --git a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+index d6020ca790f6..69914f4ce183 100644
+--- a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
++++ b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+@@ -4,32 +4,12 @@
+  */
  
- #define BIT_WRITEABLE_SHIFT	16
-@@ -585,10 +585,21 @@ static int udphy_power_off(struct rockchip_udphy *udphy, u8 mode)
- 	return 0;
- }
- 
-+static int rockchip_u3phy_of_xlate(struct phy *phy,
-+				   struct ofnode_phandle_args *args)
-+{
-+	if (args->args_count == 0)
-+		return -EINVAL;
-+
-+	if (args->args[0] != PHY_TYPE_USB3)
-+		return -EINVAL;
-+
-+	return 0;
-+}
-+
- static int rockchip_u3phy_init(struct phy *phy)
- {
--	struct udevice *parent = phy->dev->parent;
--	struct rockchip_udphy *udphy = dev_get_priv(parent);
-+	struct rockchip_udphy *udphy = dev_get_priv(phy->dev);
- 
- 	/* DP only or high-speed, disable U3 port */
- 	if (!(udphy->mode & UDPHY_MODE_USB) || udphy->hs) {
-@@ -601,8 +612,7 @@ static int rockchip_u3phy_init(struct phy *phy)
- 
- static int rockchip_u3phy_exit(struct phy *phy)
- {
--	struct udevice *parent = phy->dev->parent;
--	struct rockchip_udphy *udphy = dev_get_priv(parent);
-+	struct rockchip_udphy *udphy = dev_get_priv(phy->dev);
- 
- 	/* DP only or high-speed */
- 	if (!(udphy->mode & UDPHY_MODE_USB) || udphy->hs)
-@@ -612,6 +622,7 @@ static int rockchip_u3phy_exit(struct phy *phy)
- }
- 
- static const struct phy_ops rockchip_u3phy_ops = {
-+	.of_xlate	= rockchip_u3phy_of_xlate,
- 	.init		= rockchip_u3phy_init,
- 	.exit		= rockchip_u3phy_exit,
- };
-@@ -671,40 +682,6 @@ static int rockchip_udphy_probe(struct udevice *dev)
- 	return 0;
- }
- 
--static int rockchip_udphy_bind(struct udevice *parent)
--{
--	struct udevice *child;
--	ofnode subnode;
--	const char *node_name;
--	int ret;
+ #include "rk3588-u-boot.dtsi"
+-#include <dt-bindings/usb/pd.h>
 -
--	dev_for_each_subnode(subnode, parent) {
--		if (!ofnode_valid(subnode)) {
--			printf("%s: no subnode for %s", __func__, parent->name);
--			return -ENXIO;
--		}
--
--		node_name = ofnode_get_name(subnode);
--		debug("%s: subnode %s\n", __func__, node_name);
--
--		/* if there is no match, continue */
--		if (strcasecmp(node_name, "usb3-port"))
--			continue;
--
--		/* node name is usb3-port */
--		ret = device_bind_driver_to_node(parent,
--						 "rockchip_udphy_u3_port",
--						 node_name, subnode, &child);
--		if (ret) {
--			printf("%s: '%s' cannot bind its driver\n",
--			       __func__, node_name);
--			return ret;
--		}
--	}
--
--	return 0;
--}
--
- static int rk3588_udphy_refclk_set(struct rockchip_udphy *udphy)
- {
- 	/* configure phy reference clock */
-@@ -869,17 +846,11 @@ static const struct udevice_id rockchip_udphy_dt_match[] = {
- 	{ /* sentinel */ }
+-/ {
+-	vcc12v_dcin: vcc12v-dcin-regulator {
+-		compatible = "regulator-fixed";
+-		regulator-name = "vcc12v_dcin";
+-		regulator-always-on;
+-		regulator-boot-on;
+-		regulator-min-microvolt = <12000000>;
+-		regulator-max-microvolt = <12000000>;
+-	};
+-};
+ 
+ &fspim2_pins {
+ 	bootph-pre-ram;
+ 	bootph-some-ram;
  };
  
--U_BOOT_DRIVER(rockchip_udphy_u3_port) = {
--	.name		= "rockchip_udphy_u3_port",
--	.id		= UCLASS_PHY,
--	.ops		= &rockchip_u3phy_ops,
+-&pinctrl {
+-	usb {
+-		usbc0_int: usbc0-int {
+-			rockchip,pins = <3 RK_PB4 RK_FUNC_GPIO &pcfg_pull_none>;
+-		};
+-	};
 -};
 -
- U_BOOT_DRIVER(rockchip_udphy) = {
- 	.name		= "rockchip_udphy",
- 	.id		= UCLASS_PHY,
- 	.of_match	= rockchip_udphy_dt_match,
- 	.probe		= rockchip_udphy_probe,
--	.bind		= rockchip_udphy_bind,
-+	.ops		= &rockchip_u3phy_ops,
- 	.priv_auto	= sizeof(struct rockchip_udphy),
+ &sdhci {
+ 	cap-mmc-highspeed;
+ 	mmc-hs200-1_8v;
+@@ -76,26 +56,7 @@
  };
+ 
+ &usbdp_phy0 {
+-	orientation-switch;
+-	mode-switch;
+-	sbu1-dc-gpios = <&gpio4 RK_PA6 GPIO_ACTIVE_HIGH>;
+-	sbu2-dc-gpios = <&gpio4 RK_PA7 GPIO_ACTIVE_HIGH>;
+ 	status = "okay";
+-
+-	port {
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-
+-		usbdp_phy0_typec_ss: endpoint@0 {
+-			reg = <0>;
+-			remote-endpoint = <&usbc0_ss>;
+-		};
+-
+-		usbdp_phy0_typec_sbu: endpoint@1 {
+-			reg = <1>;
+-			remote-endpoint = <&usbc0_sbu>;
+-		};
+-	};
+ };
+ 
+ &usbdp_phy0_u3 {
+@@ -103,74 +64,11 @@
+ };
+ 
+ &usb_host0_xhci {
+-	usb-role-switch;
++	dr_mode = "peripheral";
++	maximum-speed = "high-speed";
+ 	status = "okay";
+-
+-	port {
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-
+-		usb_host0_xhci_drd_sw: endpoint {
+-			remote-endpoint = <&usbc0_hs>;
+-		};
+-	};
+ };
+ 
+ &usb_host1_xhci {
+ 	status = "okay";
+ };
+-
+-&i2c4 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&i2c4m1_xfer>;
+-	status = "okay";
+-
+-	usbc0: usb-typec@22 {
+-		compatible = "fcs,fusb302";
+-		reg = <0x22>;
+-		interrupt-parent = <&gpio3>;
+-		interrupts = <RK_PB4 IRQ_TYPE_LEVEL_LOW>;
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&usbc0_int>;
+-		vbus-supply = <&vcc12v_dcin>;
+-		status = "okay";
+-
+-		usb_con: connector {
+-			compatible = "usb-c-connector";
+-			label = "USB-C";
+-			data-role = "dual";
+-			power-role = "sink";
+-			try-power-role = "sink";
+-			op-sink-microwatt = <1000000>;
+-			sink-pdos =
+-				<PDO_FIXED(5000, 3000, PDO_FIXED_USB_COMM)>,
+-				<PDO_VAR(5000, 20000, 5000)>;
+-
+-			ports {
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-
+-				port@0 {
+-					reg = <0>;
+-					usbc0_hs: endpoint {
+-						remote-endpoint = <&usb_host0_xhci_drd_sw>;
+-					};
+-				};
+-
+-				port@1 {
+-					reg = <1>;
+-					usbc0_ss: endpoint {
+-						remote-endpoint = <&usbdp_phy0_typec_ss>;
+-					};
+-				};
+-
+-				port@2 {
+-					reg = <2>;
+-					usbc0_sbu: endpoint {
+-						remote-endpoint = <&usbdp_phy0_typec_sbu>;
+-					};
+-				};
+-			};
+-		};
+-	};
+-};
 -- 
 2.43.2
 
