@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAE92C4345F
-	for <u-boot@archiver.kernel.org>; Sat,  4 May 2024 19:45:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDF11C4345F
+	for <u-boot@archiver.kernel.org>; Sat,  4 May 2024 19:45:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2663488137;
-	Sat,  4 May 2024 21:45:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9552588263;
+	Sat,  4 May 2024 21:45:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="WVoaFNd1";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="CmMLoxYV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7984B88137; Sat,  4 May 2024 21:45:18 +0200 (CEST)
+ id B77538858F; Sat,  4 May 2024 21:45:25 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3123288535
- for <u-boot@lists.denx.de>; Sat,  4 May 2024 21:45:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BC8DF88585
+ for <u-boot@lists.denx.de>; Sat,  4 May 2024 21:45:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,19 +28,19 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1714851897; bh=Gt/xjKg5U0JD9KC2xvA/Y9hxzZRHlcmW6cfe6lpzi9A=;
- b=WVoaFNd1wuZZ5ZJb9gdO/MBHODtzhRTWzoOSw0CZM/zmYXMaHg9FIYSNL3GbDIJhflIzXrfHY
- Z0Jkt5gq1be9TBA6bZZ8smP7C530MzDDaTlltEoflDDpj6k0OyfT7usGK+EFxzx6/GcY+p10TZe
- hQhNWY7jt0HGXN+DLVIH8WLIdBtQd3/1B6SWHlgjJ3LY6o6BwgGdyPC4KUr/RiPCAHcBxNlVQTB
- ppA/bXbbuoj6Zen1TJ0KLjXetB7G5IzmrATeaeeq0zs0dLIIFS/Z8gG26vGQBj9911zQbD9SvN+
- 5lDZFuM6tPu0o5XWcQri5MRpbty5WX+0WXd+4EwHRB5Q==
+ t=1714851902; bh=PnhaPssvZvX2ylcTg4dwVrrBfz/imUU/pkTApsA9b9s=;
+ b=CmMLoxYV/UZxruTp8x8i+7zAMNQHiCpLsTyPC2B6BUaiUTDLspFjOD0jLwicICQNn9XlcYQvk
+ gfHCcHZLwW45o6ylMbgcj7/pJDFJGjDx+OxP130qF1O8lQO+F0cXLyo5Y+edsJ5WcqsYkpmtEyU
+ WXlqUxIe7OTxOLeUPiJyItV4FypsRfGsLTqNjdp6Zzeh36768Bl1gOEa/+Bl3kabzwHgyG7wYZU
+ qIqHW7frl36IcTyaHYcXV3hn2q88j0UiclhuOJmlAlf8FwTUUEUur1ZzWmwxGrIKk0mGnISKweF
+ KkUSzVhN+UXPReQzDkb4vc3f3yiIyVboOBqjwYLOQMPA==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 10/16] phy: rockchip: usbdp: Find phy-id from the io address
-Date: Sat,  4 May 2024 19:43:02 +0000
-Message-ID: <20240504194346.2462489-11-jonas@kwiboo.se>
+Subject: [PATCH 11/16] phy: rockchip: usbdp: Drop rockchip_u3phy_uboot_init()
+Date: Sat,  4 May 2024 19:43:03 +0000
+Message-ID: <20240504194346.2462489-12-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240504194346.2462489-1-jonas@kwiboo.se>
 References: <20240504194346.2462489-1-jonas@kwiboo.se>
@@ -52,7 +52,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 663690352b8e4dad13276e13
+X-ForwardEmail-ID: 663690392b8e4dad13276e29
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,96 +69,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The upstream Linux kernel driver find the phy-id from the io address.
-
-Change to use a similar method as the U-Boot inno-usb2 phy driver and
-the Linux kernel driver to set correct phy-id.
-
-This is based on the linux-phy next commit 2f70bbddeb45 ("phy: rockchip:
-add usbdp combo phy driver").
+Remove the rockchip_u3phy_uboot_init() function, it has no caller and is
+not needed with proper driver model use.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- drivers/phy/rockchip/phy-rockchip-usbdp.c | 39 ++++++++++++++++++++---
- 1 file changed, 34 insertions(+), 5 deletions(-)
+ drivers/phy/rockchip/phy-rockchip-usbdp.c | 24 -----------------------
+ 1 file changed, 24 deletions(-)
 
 diff --git a/drivers/phy/rockchip/phy-rockchip-usbdp.c b/drivers/phy/rockchip/phy-rockchip-usbdp.c
-index baf92529348c..8e5821069757 100644
+index 8e5821069757..bf0fb6d8288f 100644
 --- a/drivers/phy/rockchip/phy-rockchip-usbdp.c
 +++ b/drivers/phy/rockchip/phy-rockchip-usbdp.c
-@@ -74,6 +74,8 @@ struct udphy_grf_cfg {
- struct rockchip_udphy;
- 
- struct rockchip_udphy_cfg {
-+	unsigned int num_phys;
-+	unsigned int phy_ids[2];
- 	/* resets to be requested */
- 	const char * const *rst_list;
- 	int num_rsts;
-@@ -640,17 +642,25 @@ int rockchip_u3phy_uboot_init(void)
- 
- static int rockchip_udphy_probe(struct udevice *dev)
- {
--	const struct device_node *np = ofnode_to_np(dev_ofnode(dev));
- 	struct rockchip_udphy *udphy = dev_get_priv(dev);
- 	const struct rockchip_udphy_cfg *phy_cfgs;
-+	unsigned int reg;
- 	int id, ret;
- 
- 	udphy->dev = dev;
- 
--	id = of_alias_get_id(np, "usbdp");
--	if (id < 0)
--		id = 0;
--	udphy->id = id;
-+	ret = ofnode_read_u32_index(dev_ofnode(dev), "reg", 0, &reg);
-+	if (ret) {
-+		dev_err(dev, "failed to read reg[0] property\n");
-+		return ret;
-+	}
-+	if (reg == 0 && dev_read_addr_cells(dev) == 2) {
-+		ret = ofnode_read_u32_index(dev_ofnode(dev), "reg", 1, &reg);
-+		if (ret) {
-+			dev_err(dev, "failed to read reg[1] property\n");
-+			return ret;
-+		}
-+	}
- 
- 	phy_cfgs = (const struct rockchip_udphy_cfg *)dev_get_driver_data(dev);
- 	if (!phy_cfgs) {
-@@ -659,6 +669,20 @@ static int rockchip_udphy_probe(struct udevice *dev)
- 	}
- 	udphy->cfgs = phy_cfgs;
- 
-+	/* find the phy-id from the io address */
-+	udphy->id = -ENODEV;
-+	for (id = 0; id < udphy->cfgs->num_phys; id++) {
-+		if (reg == udphy->cfgs->phy_ids[id]) {
-+			udphy->id = id;
-+			break;
-+		}
-+	}
-+
-+	if (udphy->id < 0) {
-+		dev_err(dev, "no matching device found\n");
-+		return -ENODEV;
-+	}
-+
- 	ret = regmap_init_mem(dev_ofnode(dev), &udphy->pma_regmap);
- 	if (ret)
- 		return ret;
-@@ -838,6 +862,11 @@ static const char * const rk3588_udphy_rst_l[] = {
+@@ -616,30 +616,6 @@ static const struct phy_ops rockchip_u3phy_ops = {
+ 	.exit		= rockchip_u3phy_exit,
  };
  
- static const struct rockchip_udphy_cfg rk3588_udphy_cfgs = {
-+	.num_phys = 2,
-+	.phy_ids = {
-+		0xfed80000,
-+		0xfed90000,
-+	},
- 	.num_rsts = ARRAY_SIZE(rk3588_udphy_rst_l),
- 	.rst_list = rk3588_udphy_rst_l,
- 	.grfcfg	= {
+-int rockchip_u3phy_uboot_init(void)
+-{
+-	struct udevice *udev;
+-	struct rockchip_udphy *udphy;
+-	int ret;
+-
+-	ret = uclass_get_device_by_driver(UCLASS_PHY,
+-					  DM_DRIVER_GET(rockchip_udphy_u3_port),
+-					  &udev);
+-	if (ret) {
+-		pr_err("%s: get u3-port failed: %d\n", __func__, ret);
+-		return ret;
+-	}
+-
+-	/* DP only or high-speed, disable U3 port */
+-	udphy = dev_get_priv(udev->parent);
+-	if (!(udphy->mode & UDPHY_MODE_USB) || udphy->hs) {
+-		udphy_u3_port_disable(udphy, true);
+-		return 0;
+-	}
+-
+-	return udphy_power_on(udphy, UDPHY_MODE_USB);
+-}
+-
+ static int rockchip_udphy_probe(struct udevice *dev)
+ {
+ 	struct rockchip_udphy *udphy = dev_get_priv(dev);
 -- 
 2.43.2
 
