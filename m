@@ -4,118 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9E89C4345F
-	for <u-boot@archiver.kernel.org>; Sat,  4 May 2024 15:05:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4BF3C4345F
+	for <u-boot@archiver.kernel.org>; Sat,  4 May 2024 17:07:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54F9A885D8;
-	Sat,  4 May 2024 17:04:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
+	by phobos.denx.de (Postfix) with ESMTP id A120B884BB;
+	Sat,  4 May 2024 19:07:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A9C6885B8; Sat,  4 May 2024 17:04:21 +0200 (CEST)
-Received: from CHN02-BJS-obe.outbound.protection.partner.outlook.cn
- (mail-bjschn02on20709.outbound.protection.partner.outlook.cn
- [IPv6:2406:e500:4440:2::709])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61766885C4
- for <u-boot@lists.denx.de>; Sat,  4 May 2024 17:04:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=minda.chen@starfivetech.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=kW7P53DDMRc5N6yLLstaqtM6TQlKRXzMAs4zcONUSMExKMuUjQWWYcrTh2TVmVAHLXrSPAboHeLbH+Yl5AVeVyn2Ovkk5DJ9W47CCJ+t5dhUDQhcR4J3D8ryE3dHLkaycfdOE+jx3odRBv9las6kunw4ATLflTFjPca5ozW5dFbWeGxWRsc6NvPC1/yE9XqpY/F3IxDSGKSHZhzSqt73wsptMNWmUmaThg5lP/mPgtRfW5fz48mjdNP7OR/T4Ug0IJPmYao6evUiO6qLt2VbK5yBcdss5/s0IPxV+T2D1SDAgwE84Q6hzqvzPLMxh68/6ML3jUVVHJYaH+f2EAVjRg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=AUB6u4H8sS65hR5rtTeD/CYxFcbs7XwaNrPbhpQkcac=;
- b=bhEZtO7M08/V0wGFXtR039KLuVpmZsgA4Yt2UEWPJh43Jw2diSvWvWlEWpRboA0LUqIHyu+k+Pvn3z4SPjmNs4fKx2a3t6k/IK+vTGtMN4De78O4LR4VOqc6IfACGAZz5lAde7WOsfekj5UToBt6dzR8Xar9UMR32xu1s/S+pB+COVeIdQau+ZB/Pfaqx+zu6hipRW1sXGx2n+kgYjS7Wkw9FcYhhMmsTZ1lB8beNXXOeWVx/e86FjkI+NVgkDxhSyGvwHeRYecQA/Sc1fFxoSxdt2j5Tpe39M4hKzoxj5KDVDH22KvwA01fg7k5yFAwhK5q8+MVD04HCbcgjN5Lzg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=starfivetech.com; dmarc=pass action=none
- header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=starfivetech.com;
-Received: from BJXPR01MB0855.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c211:18::12) by BJXPR01MB0839.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c211:1a::12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.54; Sat, 4 May
- 2024 15:04:14 +0000
-Received: from BJXPR01MB0855.CHNPR01.prod.partner.outlook.cn
- ([fe80::3e54:57b5:e3e3:7f09]) by
- BJXPR01MB0855.CHNPR01.prod.partner.outlook.cn ([fe80::3e54:57b5:e3e3:7f09%6])
- with mapi id 15.20.7472.044; Sat, 4 May 2024 15:04:14 +0000
-From: Minda Chen <minda.chen@starfivetech.com>
-To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Roger Quadros <rogerq@kernel.org>,
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SnoEAgWK";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 4A3EB884BD; Sat,  4 May 2024 19:06:06 +0200 (CEST)
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
+ [IPv6:2607:f8b0:4864:20::436])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 63909884B8
+ for <u-boot@lists.denx.de>; Sat,  4 May 2024 19:06:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=liujianfeng1994@gmail.com
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-6f3e3d789cdso620048b3a.1
+ for <u-boot@lists.denx.de>; Sat, 04 May 2024 10:06:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1714842361; x=1715447161; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=YkFPrPmQWTVr1eion9+WOgRwDOJ4OO48NiNnIGGe0Lw=;
+ b=SnoEAgWKLW6YCeKivQG3ot5BG5Ul3X6UG77eqXQfypqZSwukVqMwJlkq2tqfkSt08G
+ +59GIzhahB7T8eN30ufP0fPdmfzhPy6drr/2JWxgLUau5gYcPFrBlYcX8gmGGClMozrL
+ EZa/AV5evAGPDWVtWOp5BYgJMBxsjuLXaJzfpLlQ8AVsLrW/avGWwhdIzQeTsxBleCzi
+ ICl1yMaIj35CNR0+oCCc9CYC8shTDU//L93403X1vSUthLaparoslygwDGB8HWswVIvA
+ zEBN7OgC/xEnxYHIBVDp8HxJ5sXYWPGrHv11Lu0U2rdEKTg9yMfXAAN/3m+sFsofiZPO
+ d+Eg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714842361; x=1715447161;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=YkFPrPmQWTVr1eion9+WOgRwDOJ4OO48NiNnIGGe0Lw=;
+ b=EcqTXumxQg8jTxtDak/l+Yql8QrhZZClEIaJEtXZ3WpjzFxWgMqmSem41Fd427mpQm
+ oWXrsth3orAA2hSOxOl1O0kg49WY2+BrUgjDkO3okJGdcCRaR5xLrF2yJpDUpOHAHknW
+ cXJdIkcuT2d6KS2zldfE1KdNpS0H++ZdHnHWwz4G5YID+M4LEkJkp2sTS5HKF7fE2PQs
+ Z+cD2/rL/XXPlhoRyi008q8shMRGcWJl6ciiCXv9iRtwPRELf6YjUR4ZF/ZzO+fQQrBG
+ VDGluyfpkL9zRNi2TiE1zmKNK7DuiN0v7oMs3a4ahn3lDXpgwg7+De1tDhwtOXO5XH88
+ XrKw==
+X-Gm-Message-State: AOJu0Yx8DVCoaGfUqs5M6TXL5pyRmbxVXRwCHwNCALWOnyNxsZ7csksp
+ OcFSsWvNPLw5GvsajDK8IxRojpmerMRs056v/M79YxcAWpmjx8EG+lbIrV/He8Q=
+X-Google-Smtp-Source: AGHT+IHEAphKHjZEkSQlSvz5cWvf1dnGcpkW0E9LYxM8CmCAY5FdOkCi4SlplTKPh/hYJRVxWb5kAA==
+X-Received: by 2002:a05:6a20:dc95:b0:1aa:2285:2cd0 with SMTP id
+ ky21-20020a056a20dc9500b001aa22852cd0mr6140103pzb.23.1714842361253; 
+ Sat, 04 May 2024 10:06:01 -0700 (PDT)
+Received: from localhost.localdomain ([221.220.133.99])
+ by smtp.gmail.com with ESMTPSA id
+ l13-20020a056a00140d00b006e8f75d3b07sm4954967pfu.181.2024.05.04.10.05.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 04 May 2024 10:06:00 -0700 (PDT)
+From: Jianfeng Liu <liujianfeng1994@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Jianfeng Liu <liujianfeng1994@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christopher Obbard <chris.obbard@collabora.com>,
+ Elon Zhang <zhangzj@rock-chips.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jagan Teki <jagan@edgeble.ai>,
+ John Clark <inindev@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Massimo Pegorer <massimo.pegorer+oss@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Simek <michal.simek@amd.com>,
  Neil Armstrong <neil.armstrong@linaro.org>,
- Alexey Romanov <avromanov@salutedevices.com>,
- Sumit Garg <sumit.garg@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
- Nishanth Menon <nm@ti.com>, Rick Chen <rick@andestech.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, Minda Chen <minda.chen@starfivetech.com>
-Subject: [PATCH v1 7/7] MAINTAINERS: Update Starfive visionfive2 maintain
- files.
-Date: Sat,  4 May 2024 23:03:58 +0800
-Message-Id: <20240504150358.19600-8-minda.chen@starfivetech.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20240504150358.19600-1-minda.chen@starfivetech.com>
-References: <20240504150358.19600-1-minda.chen@starfivetech.com>
-Content-Type: text/plain
-X-ClientProxiedBy: ZQ0PR01CA0005.CHNPR01.prod.partner.outlook.cn (10.2.0.75)
- To BJXPR01MB0855.CHNPR01.prod.partner.outlook.cn (10.43.36.12)
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Tianling Shen <cnsztl@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
+ Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>,
+ Weizhao Ouyang <weizhao.ouyang@arm.com>
+Subject: [PATCH] board: rockchip: add ArmSoM Sige7 Rk3588 board
+Date: Sun,  5 May 2024 01:05:37 +0800
+Message-Id: <20240504170537.376538-1-liujianfeng1994@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BJXPR01MB0855:EE_|BJXPR01MB0839:EE_
-X-MS-Office365-Filtering-Correlation-Id: b57b491b-130f-4f00-20d4-08dc6c4b7681
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: pckXuLxf9toLIysRHxkbx/HoMjqfK20ab0s1svVnb5s76x86f4JRjYfldm+e6631C0mLWCOgEgLx9+PePYAUhqXthAdXPTUloIs+ErwH16bnQCDY8XUs2wFoaZwDJc1507+Q2yhctJwDEZf2uPQJn+INKSKeAD/B/AfHKxLZVx47SDOlJX8FDPBM2Ug/BNGuRqJbaECnhDdyrR3iNGEHMNHe+PF5X50unhAtcmvpvugEHWwgbP4P1uZuEHNNxVgQmZEVR321EgS+BoKkPDnzFs1qs0/SPN9y0nPNWb5zS5wJwoLU9Qtmww0Cl5ufEBTM28cnMJ9HOKR4PRF5BJY1bzrgquvbws/YCH23SZ77YOPY5iqDEBnVFRLsU2BLfkPXtuxaKR6sQFxrzoTitUYD7M9/URfg/2c1Adu/2SWqbuVbX3Wo99bncE6Xr50/vRJ1NYfkC9Lcgt6TQPZOdstTUq6sRaoi8x3fzihFkQU1grrIyEhN4U7fciYS9XxmJTR2t1ezujneys3C1A1ToSXplKiwlLpv0hgec9xNoLQPtPnX00beLhdvuq/Ce88ztaGbhWel+pnygwaFI0dLUGMtfh/zOjAkywCX2gbFaYsRhg3vg64zgY3weVfAS7409qMaN5cSMYmTv/OwFVxgFCr/Hg==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BJXPR01MB0855.CHNPR01.prod.partner.outlook.cn; PTR:;
- CAT:NONE;
- SFS:(13230031)(1800799015)(52116005)(366007)(41320700004)(7416005)(38350700005)(921011);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?uXpC9XGecSAQEA4i9HaWJvWsdgjkN929a+YEVxy+V7koknNoPjvAztZ8XyF8?=
- =?us-ascii?Q?3N7D6TDV/z6GuLrXmkYkkwqIAT9c+b3BW/t8qDndGDUG670n/F30oIeuvgYf?=
- =?us-ascii?Q?LD4BxjOa/rQxtbihiJJlU7TfbADhpWHxo/zoOFBK2PhqdgoJ2EEMvcf9FXwM?=
- =?us-ascii?Q?7CIAfO8JvGd6D8zrXNROWMwXenfftKKAGTlmy6L7UXhVMPm1xzCM2qqcWIkZ?=
- =?us-ascii?Q?/RmXkEna6emYCASngxnevzfaTqfi+2bIaOD8t4yAK2oUm28LfabRinLH9z31?=
- =?us-ascii?Q?l7S6C6soKdUbLTjMgWhaVN2xjGBpoqXWsUvsJkiBmQ7etAyR5sgsIZbazzv5?=
- =?us-ascii?Q?0JuUaG84L3l9XJ+zM1yx8eK7awTOP/ErvMASJrsRUJDUAY0vfDcQYirKaZPl?=
- =?us-ascii?Q?HOn1GZNaoC7J0qbsP65myDXvmkKk+l9vaoYAATxOa5KkxIgauh9RbTq6z3/S?=
- =?us-ascii?Q?KaJlj7K3V2wkqC/ED3izFXF4M/UWUNB1PexdL3CxLHneyvCTBQ5Ri72mJVXJ?=
- =?us-ascii?Q?97W/rRTOMwgbDZcVWyzg3tE1dOeJQLQQsbqxerDIbP/sMxpM5lH0wCRpCwzO?=
- =?us-ascii?Q?dEgUt5c1GNqN/JtPL4VOS3/WuVeIkTIVvZ7b3A1aYf83QOqU4z8BtxswdgPk?=
- =?us-ascii?Q?BVhzxjVCOVI6BPvbsAuoxtbB6FUoGmNKOjkTz7HbVcLv19locRW/Unjv4Thg?=
- =?us-ascii?Q?8D/K443YzlCRYKWWRSKuI33FIhyOhWmD+y6fRmnxRXjEFsU9WAjUUECOu1AC?=
- =?us-ascii?Q?wJ78dkPZs1k7XgfxOFvtNV+9oXznM3ZTHobAA2mU3LMFUhvi5/H5dfWQJZty?=
- =?us-ascii?Q?NmJtNpgPi+982UdMT124AoW+e46R4lhbsNdDvTQOtMexlAZovVdthSkB/NZc?=
- =?us-ascii?Q?RMev8U3IUa5AUsHD4o+UkqVmJTaILtb9XT7F68hLPiU88lTuaEh7/jSN1VJV?=
- =?us-ascii?Q?dMvZj7adCdTfI5KHrRccbemLU3HPl5b47PXGZOHoHoThI54ag3YNZpUIBjTz?=
- =?us-ascii?Q?UxMFFF1GqxNOjYgvtfWYNq6Z9l57lBIw9O+lk/hmrfqFgL0NxnGuUtTLdU3e?=
- =?us-ascii?Q?ca0VOyPyorBSnYGv2I9khep47ZPmjO4HF4gyD3Qnl+BQWF0C698dsI3dZMRS?=
- =?us-ascii?Q?iZXrbDnGIPGfBgAtU65fNJanBBINMjuWLWejI7IggeLbIdEISl2kkZ/KaOO3?=
- =?us-ascii?Q?7msFVssTcukrqzFMPYuo5yO0ijsV3gvm0eurDRhJj4j4g4QwEplcEPWfCECq?=
- =?us-ascii?Q?BpORBBvJ0/rP+Y7U8BdIeCkneNjQJhpGR+m/e+VumUI5BIlHW1OV349s3PXw?=
- =?us-ascii?Q?RahgaLI3hODcJN/eSJf/j26e/5EzqtW5Mlw60DOy1McFlf30VJ1ATqzP2btH?=
- =?us-ascii?Q?aTNNRkXatdTknB0fZW4W50ZRyXxstgPA/xArTCpSZcbd7ygZ+LOnRv46LWDr?=
- =?us-ascii?Q?OOGP1TJzSZiVcp9h5Ot1JpL002B8l23pinaA0CEl6tqzs11KX4iHPVQlfl5B?=
- =?us-ascii?Q?kvJ2zahZRKysTqGG1hzfVGxNZ1QrgdyyFpD/4QPTM1uQUKQP3Rk2iQm/sPYh?=
- =?us-ascii?Q?Q8BWgkILeNxdpwXEsw1fkMpjgN9Bd1ZytvXmqJJB6SF8YYf6wuA1PC7mAVsi?=
- =?us-ascii?Q?cQ=3D=3D?=
-X-OriginatorOrg: starfivetech.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b57b491b-130f-4f00-20d4-08dc6c4b7681
-X-MS-Exchange-CrossTenant-AuthSource: BJXPR01MB0855.CHNPR01.prod.partner.outlook.cn
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 May 2024 15:04:14.7696 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: uH34ocYVJ3a7CKUcD/51ogVkmHdNZr1z1gIOzn6ZwaU5ZmG8636xsbB9KgELc276YpO79gN1ktWex9iB+vj/nwP6aydA8SXm8CTd8tbmvKM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BJXPR01MB0839
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 04 May 2024 19:07:28 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,23 +111,1034 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add USB related files to Starfive visionfive2 MAINTAINERS.
+ArmSoM Sige7 is a Rockchip RK3588 based SBC (Single Board Computer) by
+ArmSoM.
 
-Signed-off-by: Minda Chen <minda.chen@starfivetech.com>
+There are two variants depending on the DRAM size : 8G and 16G.
+
+Specification:
+
+    Rockchip Rk3588 SoC
+    4x ARM Cortex-A76, 4x ARM Cortex-A55
+    8/16GB memory LPDDR4x
+    Mali G610MC4 GPU
+    2x MIPI CSI 2 multiple lanes connector
+    64GB/128GB on board eMMC
+    uSD slot
+    1x USB 2.0 Type-A, 1x USB 3.0 Type-A, 1x USB 3.0 Type-C
+    1x HDMI 2.1 output
+    2x 2.5 Gbps Ethernet port
+    40-pin IO header including UART, SPI and I2C
+    USB PD over USB Type-C
+    Size: 92mm x 62mm
+
+Kernel commit:
+81c828a67c78 (arm64: dts: rockchip: Add ArmSom Sige7 board)
+
+Note that these commits:
+- e18e5e8188f2 (arm64: dts: rockchip: add USBDP phys on rk3588)
+- 6fca4edb93d3 (arm64: dts: rockchip: Add rk3588 GPU node)
+are not synced to u-boot, so I remove usb3 drd nodes and gpu from kernel
+devicetree.
+
+Signed-off-by: Jianfeng Liu <liujianfeng1994@gmail.com>
 ---
- board/starfive/visionfive2/MAINTAINERS | 2 ++
- 1 file changed, 2 insertions(+)
 
-diff --git a/board/starfive/visionfive2/MAINTAINERS b/board/starfive/visionfive2/MAINTAINERS
-index d7f638f9b4..1faf83f581 100644
---- a/board/starfive/visionfive2/MAINTAINERS
-+++ b/board/starfive/visionfive2/MAINTAINERS
-@@ -6,3 +6,5 @@ F:	board/starfive/visionfive2/
- F:	include/configs/starfive-visionfive2.h
- F:	configs/starfive_visionfive2_defconfig
- F:	drivers/pci/pcie_starfive_jh7110.c
-+F:	drivers/phy/starfive/
-+F:	drivers/usb/cdns3/cdns3-starfive.c
+ MAINTAINERS                                  |   1 +
+ arch/arm/dts/Makefile                        |   1 +
+ arch/arm/dts/rk3588-armsom-sige7-u-boot.dtsi |  31 +
+ arch/arm/dts/rk3588-armsom-sige7.dts         | 691 +++++++++++++++++++
+ arch/arm/mach-rockchip/rk3588/Kconfig        |  26 +
+ board/armsom/sige7-rk3588/Kconfig            |  12 +
+ board/armsom/sige7-rk3588/MAINTAINERS        |   8 +
+ configs/sige7-rk3588_defconfig               | 104 +++
+ doc/board/rockchip/rockchip.rst              |   1 +
+ include/configs/sige7-rk3588.h               |  15 +
+ 10 files changed, 890 insertions(+)
+ create mode 100644 arch/arm/dts/rk3588-armsom-sige7-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3588-armsom-sige7.dts
+ create mode 100644 board/armsom/sige7-rk3588/Kconfig
+ create mode 100644 board/armsom/sige7-rk3588/MAINTAINERS
+ create mode 100644 configs/sige7-rk3588_defconfig
+ create mode 100644 include/configs/sige7-rk3588.h
+
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 7a3b4d3712..52367bf38c 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -532,6 +532,7 @@ F:	arch/arm/dts/rv11*
+ F:	arch/arm/include/asm/arch-rockchip/
+ F:	arch/arm/mach-rockchip/
+ F:	board/amarula/vyasa-rk3288/
++F:	board/armsom/sige7-rk3588/
+ F:	board/anbernic/rgxx3_rk3566/
+ F:	board/chipspark/popmetal_rk3288
+ F:	board/engicam/px30_core/
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index c9f1b25ad6..040238dede 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -166,6 +166,7 @@ dtb-$(CONFIG_ROCKCHIP_RK3568) += \
+ 	rk3568-rock-3a.dtb
+ 
+ dtb-$(CONFIG_ROCKCHIP_RK3588) += \
++	rk3588-armsom-sige7.dtb \
+ 	rk3588s-coolpi-4b.dtb \
+ 	rk3588-coolpi-cm5-evb.dtb \
+ 	rk3588-edgeble-neu6a-io.dtb \
+diff --git a/arch/arm/dts/rk3588-armsom-sige7-u-boot.dtsi b/arch/arm/dts/rk3588-armsom-sige7-u-boot.dtsi
+new file mode 100644
+index 0000000000..b9196ba5f5
+--- /dev/null
++++ b/arch/arm/dts/rk3588-armsom-sige7-u-boot.dtsi
+@@ -0,0 +1,31 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2024 ArmSoM Technology Co., Ltd.
++ */
++
++#include "rk3588-u-boot.dtsi"
++
++&sdhci {
++	cap-mmc-highspeed;
++	mmc-hs200-1_8v;
++};
++
++&u2phy1 {
++	status = "okay";
++};
++
++&u2phy1_otg {
++	status = "okay";
++};
++
++&usbdp_phy1 {
++	status = "okay";
++};
++
++&usbdp_phy1_u3 {
++	status = "okay";
++};
++
++&usb_host1_xhci {
++	status = "okay";
++};
+diff --git a/arch/arm/dts/rk3588-armsom-sige7.dts b/arch/arm/dts/rk3588-armsom-sige7.dts
+new file mode 100644
+index 0000000000..c7b46536ec
+--- /dev/null
++++ b/arch/arm/dts/rk3588-armsom-sige7.dts
+@@ -0,0 +1,691 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++
++/dts-v1/;
++
++#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/leds/common.h>
++#include "rk3588.dtsi"
++
++/ {
++	model = "ArmSoM Sige7";
++	compatible = "armsom,sige7", "rockchip,rk3588";
++
++	aliases {
++		mmc0 = &sdhci;
++		mmc1 = &sdmmc;
++	};
++
++	chosen {
++		stdout-path = "serial2:1500000n8";
++	};
++
++	analog-sound {
++		compatible = "audio-graph-card";
++		dais = <&i2s0_8ch_p0>;
++		label = "rk3588-es8316";
++		hp-det-gpio = <&gpio1 RK_PD5 GPIO_ACTIVE_HIGH>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&hp_detect>;
++		routing = "MIC2", "Mic Jack",
++			  "Headphones", "HPOL",
++			  "Headphones", "HPOR";
++		widgets = "Microphone", "Mic Jack",
++			  "Headphone", "Headphones";
++	};
++
++	leds {
++		compatible = "gpio-leds";
++		pinctrl-names = "default";
++		pinctrl-0 = <&led_rgb_g>;
++
++		led_green: led-0 {
++			color = <LED_COLOR_ID_GREEN>;
++			function = LED_FUNCTION_STATUS;
++			gpios = <&gpio0 RK_PB7 GPIO_ACTIVE_HIGH>;
++			linux,default-trigger = "heartbeat";
++		};
++
++		led_red: led-1 {
++			color = <LED_COLOR_ID_RED>;
++			function = LED_FUNCTION_STATUS;
++			gpios = <&gpio4 RK_PC5 GPIO_ACTIVE_HIGH>;
++			linux,default-trigger = "none";
++		};
++	};
++
++	fan: pwm-fan {
++		compatible = "pwm-fan";
++		cooling-levels = <0 95 145 195 255>;
++		fan-supply = <&vcc5v0_sys>;
++		pwms = <&pwm1 0 50000 0>;
++		#cooling-cells = <2>;
++	};
++
++	vcc3v3_pcie2x1l2: vcc3v3-pcie2x1l2-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc3v3_pcie2x1l2";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		startup-delay-us = <5000>;
++		vin-supply = <&vcc_3v3_s3>;
++	};
++
++	vcc3v3_pcie30: vcc3v3-pcie30-regulator {
++		compatible = "regulator-fixed";
++		enable-active-high;
++		gpios = <&gpio1 RK_PA4 GPIO_ACTIVE_HIGH>;
++		regulator-name = "vcc3v3_pcie30";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		startup-delay-us = <5000>;
++		vin-supply = <&vcc5v0_sys>;
++	};
++
++	vcc5v0_host: vcc5v0-host-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc5v0_host";
++		regulator-boot-on;
++		regulator-always-on;
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		enable-active-high;
++		gpio = <&gpio4 RK_PB0 GPIO_ACTIVE_HIGH>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&vcc5v0_host_en>;
++		vin-supply = <&vcc5v0_sys>;
++	};
++
++	vcc5v0_sys: vcc5v0-sys-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc5v0_sys";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++	};
++
++	vcc_1v1_nldo_s3: vcc-1v1-nldo-s3-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc_1v1_nldo_s3";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <1100000>;
++		regulator-max-microvolt = <1100000>;
++		vin-supply = <&vcc5v0_sys>;
++	};
++};
++
++&combphy0_ps {
++	status = "okay";
++};
++
++&combphy1_ps {
++	status = "okay";
++};
++
++&combphy2_psu {
++	status = "okay";
++};
++
++&cpu_b0 {
++	cpu-supply = <&vdd_cpu_big0_s0>;
++};
++
++&cpu_b1 {
++	cpu-supply = <&vdd_cpu_big0_s0>;
++};
++
++&cpu_b2 {
++	cpu-supply = <&vdd_cpu_big1_s0>;
++};
++
++&cpu_b3 {
++	cpu-supply = <&vdd_cpu_big1_s0>;
++};
++
++&cpu_l0 {
++	cpu-supply = <&vdd_cpu_lit_s0>;
++};
++
++&cpu_l1 {
++	cpu-supply = <&vdd_cpu_lit_s0>;
++};
++
++&cpu_l2 {
++	cpu-supply = <&vdd_cpu_lit_s0>;
++};
++
++&cpu_l3 {
++	cpu-supply = <&vdd_cpu_lit_s0>;
++};
++
++&i2c0 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&i2c0m2_xfer>;
++	status = "okay";
++
++	vdd_cpu_big0_s0: regulator@42 {
++		compatible = "rockchip,rk8602";
++		reg = <0x42>;
++		fcs,suspend-voltage-selector = <1>;
++		regulator-name = "vdd_cpu_big0_s0";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <550000>;
++		regulator-max-microvolt = <1050000>;
++		regulator-ramp-delay = <2300>;
++		vin-supply = <&vcc5v0_sys>;
++
++		regulator-state-mem {
++			regulator-off-in-suspend;
++		};
++	};
++
++	vdd_cpu_big1_s0: regulator@43 {
++		compatible = "rockchip,rk8603", "rockchip,rk8602";
++		reg = <0x43>;
++		fcs,suspend-voltage-selector = <1>;
++		regulator-name = "vdd_cpu_big1_s0";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <550000>;
++		regulator-max-microvolt = <1050000>;
++		regulator-ramp-delay = <2300>;
++		vin-supply = <&vcc5v0_sys>;
++
++		regulator-state-mem {
++			regulator-off-in-suspend;
++		};
++	};
++};
++
++&i2c6 {
++	status = "okay";
++
++	hym8563: rtc@51 {
++		compatible = "haoyu,hym8563";
++		reg = <0x51>;
++		interrupt-parent = <&gpio0>;
++		interrupts = <RK_PB0 IRQ_TYPE_LEVEL_LOW>;
++		#clock-cells = <0>;
++		clock-output-names = "hym8563";
++		pinctrl-names = "default";
++		pinctrl-0 = <&hym8563_int>;
++		wakeup-source;
++	};
++};
++
++&i2c7 {
++	status = "okay";
++
++	es8316: audio-codec@11 {
++		compatible = "everest,es8316";
++		reg = <0x11>;
++		assigned-clocks = <&cru I2S0_8CH_MCLKOUT>;
++		assigned-clock-rates = <12288000>;
++		clocks = <&cru I2S0_8CH_MCLKOUT>;
++		clock-names = "mclk";
++		#sound-dai-cells = <0>;
++
++		port {
++			es8316_p0_0: endpoint {
++				remote-endpoint = <&i2s0_8ch_p0_0>;
++			};
++		};
++	};
++};
++
++&i2s0_8ch {
++	pinctrl-names = "default";
++	pinctrl-0 = <&i2s0_lrck
++		     &i2s0_mclk
++		     &i2s0_sclk
++		     &i2s0_sdi0
++		     &i2s0_sdo0>;
++	status = "okay";
++
++	i2s0_8ch_p0: port {
++		i2s0_8ch_p0_0: endpoint {
++			dai-format = "i2s";
++			mclk-fs = <256>;
++			remote-endpoint = <&es8316_p0_0>;
++		};
++	};
++};
++
++/* phy1 - right ethernet port */
++&pcie2x1l0 {
++	reset-gpios = <&gpio4 RK_PA5 GPIO_ACTIVE_HIGH>;
++	status = "okay";
++};
++
++/* phy2 - WiFi */
++&pcie2x1l1 {
++	reset-gpios = <&gpio3 RK_PD4 GPIO_ACTIVE_HIGH>;
++	status = "okay";
++};
++
++/* phy0 - left ethernet port */
++&pcie2x1l2 {
++	reset-gpios = <&gpio3 RK_PB0 GPIO_ACTIVE_HIGH>;
++	status = "okay";
++};
++
++&pcie30phy {
++	status = "okay";
++};
++
++&pcie3x4 {
++	reset-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
++	vpcie3v3-supply = <&vcc3v3_pcie30>;
++	status = "okay";
++};
++
++&pinctrl {
++	hym8563 {
++		hym8563_int: hym8563-int {
++			rockchip,pins = <0 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++
++	leds {
++		led_rgb_g: led-rgb-g {
++			rockchip,pins = <0 RK_PB7 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++		led_rgb_r: led-rgb-r {
++			rockchip,pins = <0 RK_PB7 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++
++	sound {
++		hp_detect: hp-detect {
++			rockchip,pins = <1 RK_PD5 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++
++	usb {
++		vcc5v0_host_en: vcc5v0-host-en {
++			rockchip,pins = <4 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++};
++
++&pwm1 {
++	status = "okay";
++};
++
++&saradc {
++	vref-supply = <&avcc_1v8_s0>;
++	status = "okay";
++};
++
++&sdhci {
++	bus-width = <8>;
++	no-sdio;
++	no-sd;
++	non-removable;
++	mmc-hs200-1_8v;
++	status = "okay";
++};
++
++&sdmmc {
++	bus-width = <4>;
++	cap-mmc-highspeed;
++	cap-sd-highspeed;
++	disable-wp;
++	max-frequency = <200000000>;
++	no-sdio;
++	no-mmc;
++	sd-uhs-sdr104;
++	vmmc-supply = <&vcc_3v3_s3>;
++	vqmmc-supply = <&vccio_sd_s0>;
++	status = "okay";
++};
++
++&spi2 {
++	assigned-clocks = <&cru CLK_SPI2>;
++	assigned-clock-rates = <200000000>;
++	num-cs = <1>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&spi2m2_cs0 &spi2m2_pins>;
++	status = "okay";
++
++	pmic@0 {
++		compatible = "rockchip,rk806";
++		spi-max-frequency = <1000000>;
++		reg = <0x0>;
++
++		interrupt-parent = <&gpio0>;
++		interrupts = <7 IRQ_TYPE_LEVEL_LOW>;
++
++		gpio-controller;
++		#gpio-cells = <2>;
++
++		pinctrl-names = "default";
++		pinctrl-0 = <&pmic_pins>, <&rk806_dvs1_null>,
++			    <&rk806_dvs2_null>, <&rk806_dvs3_null>;
++
++		system-power-controller;
++
++		vcc1-supply = <&vcc5v0_sys>;
++		vcc2-supply = <&vcc5v0_sys>;
++		vcc3-supply = <&vcc5v0_sys>;
++		vcc4-supply = <&vcc5v0_sys>;
++		vcc5-supply = <&vcc5v0_sys>;
++		vcc6-supply = <&vcc5v0_sys>;
++		vcc7-supply = <&vcc5v0_sys>;
++		vcc8-supply = <&vcc5v0_sys>;
++		vcc9-supply = <&vcc5v0_sys>;
++		vcc10-supply = <&vcc5v0_sys>;
++		vcc11-supply = <&vcc_2v0_pldo_s3>;
++		vcc12-supply = <&vcc5v0_sys>;
++		vcc13-supply = <&vcc_1v1_nldo_s3>;
++		vcc14-supply = <&vcc_1v1_nldo_s3>;
++		vcca-supply = <&vcc5v0_sys>;
++
++		rk806_dvs1_null: dvs1-null-pins {
++			pins = "gpio_pwrctrl1";
++			function = "pin_fun0";
++		};
++
++		rk806_dvs2_null: dvs2-null-pins {
++			pins = "gpio_pwrctrl2";
++			function = "pin_fun0";
++		};
++
++		rk806_dvs3_null: dvs3-null-pins {
++			pins = "gpio_pwrctrl3";
++			function = "pin_fun0";
++		};
++
++		regulators {
++			vdd_gpu_s0: vdd_gpu_mem_s0: dcdc-reg1 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <550000>;
++				regulator-max-microvolt = <950000>;
++				regulator-ramp-delay = <12500>;
++				regulator-name = "vdd_gpu_s0";
++				regulator-enable-ramp-delay = <400>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdd_cpu_lit_s0: vdd_cpu_lit_mem_s0: dcdc-reg2 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <550000>;
++				regulator-max-microvolt = <950000>;
++				regulator-ramp-delay = <12500>;
++				regulator-name = "vdd_cpu_lit_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdd_log_s0: dcdc-reg3 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <675000>;
++				regulator-max-microvolt = <750000>;
++				regulator-ramp-delay = <12500>;
++				regulator-name = "vdd_log_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++					regulator-suspend-microvolt = <750000>;
++				};
++			};
++
++			vdd_vdenc_s0: vdd_vdenc_mem_s0: dcdc-reg4 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <550000>;
++				regulator-max-microvolt = <950000>;
++				regulator-ramp-delay = <12500>;
++				regulator-name = "vdd_vdenc_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdd_ddr_s0: dcdc-reg5 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <675000>;
++				regulator-max-microvolt = <900000>;
++				regulator-ramp-delay = <12500>;
++				regulator-name = "vdd_ddr_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++					regulator-suspend-microvolt = <850000>;
++				};
++			};
++
++			vdd2_ddr_s3: dcdc-reg6 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-name = "vdd2_ddr_s3";
++
++				regulator-state-mem {
++					regulator-on-in-suspend;
++				};
++			};
++
++			vcc_2v0_pldo_s3: dcdc-reg7 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <2000000>;
++				regulator-max-microvolt = <2000000>;
++				regulator-ramp-delay = <12500>;
++				regulator-name = "vdd_2v0_pldo_s3";
++
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <2000000>;
++				};
++			};
++
++			vcc_3v3_s3: dcdc-reg8 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <3300000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-name = "vcc_3v3_s3";
++
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <3300000>;
++				};
++			};
++
++			vddq_ddr_s0: dcdc-reg9 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-name = "vddq_ddr_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vcc_1v8_s3: dcdc-reg10 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++				regulator-name = "vcc_1v8_s3";
++
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <1800000>;
++				};
++			};
++
++			avcc_1v8_s0: pldo-reg1 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++				regulator-name = "avcc_1v8_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vcc_1v8_s0: pldo-reg2 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++				regulator-name = "vcc_1v8_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++					regulator-suspend-microvolt = <1800000>;
++				};
++			};
++
++			avdd_1v2_s0: pldo-reg3 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1200000>;
++				regulator-max-microvolt = <1200000>;
++				regulator-name = "avdd_1v2_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vcc_3v3_s0: pldo-reg4 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <3300000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-ramp-delay = <12500>;
++				regulator-name = "vcc_3v3_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vccio_sd_s0: pldo-reg5 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-ramp-delay = <12500>;
++				regulator-name = "vccio_sd_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			pldo6_s3: pldo-reg6 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++				regulator-name = "pldo6_s3";
++
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <1800000>;
++				};
++			};
++
++			vdd_0v75_s3: nldo-reg1 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <750000>;
++				regulator-max-microvolt = <750000>;
++				regulator-name = "vdd_0v75_s3";
++
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <750000>;
++				};
++			};
++
++			vdd_ddr_pll_s0: nldo-reg2 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <850000>;
++				regulator-max-microvolt = <850000>;
++				regulator-name = "vdd_ddr_pll_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++					regulator-suspend-microvolt = <850000>;
++				};
++			};
++
++			avdd_0v75_s0: nldo-reg3 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <750000>;
++				regulator-max-microvolt = <750000>;
++				regulator-name = "avdd_0v75_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdd_0v85_s0: nldo-reg4 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <850000>;
++				regulator-max-microvolt = <850000>;
++				regulator-name = "vdd_0v85_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdd_0v75_s0: nldo-reg5 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <750000>;
++				regulator-max-microvolt = <750000>;
++				regulator-name = "vdd_0v75_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++		};
++	};
++};
++
++&u2phy3 {
++	status = "okay";
++};
++
++&u2phy3_host {
++	phy-supply = <&vcc5v0_host>;
++	status = "okay";
++};
++
++&uart2 {
++	pinctrl-0 = <&uart2m0_xfer>;
++	status = "okay";
++};
++
++&usb_host1_ehci {
++	status = "okay";
++};
++
++&usb_host1_ohci {
++	status = "okay";
++};
+diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
+index 39049ab35a..4c14b0be1e 100644
+--- a/arch/arm/mach-rockchip/rk3588/Kconfig
++++ b/arch/arm/mach-rockchip/rk3588/Kconfig
+@@ -152,6 +152,31 @@ config TARGET_ROCK5B_RK3588
+ 	  USB PD over USB Type-C
+ 	  Size: 100mm x 72mm (Pico-ITX form factor)
+ 
++config TARGET_SIGE7_RK3588
++	bool "ArmSoM Sige7 RK3588 board"
++	select BOARD_LATE_INIT
++	help
++	  ArmSoM Sige7 is a Rockchip RK3588 based SBC (Single Board Computer)
++	  by ArmSoM.
++
++	  There are two variants depending on the DRAM size : 8G and 16G.
++
++	  Specification:
++
++	  Rockchip Rk3588 SoC
++	  4x ARM Cortex-A76, 4x ARM Cortex-A55
++	  8/16GB memory LPDDR4x
++	  Mali G610MC4 GPU
++	  2x MIPI CSI 2 multiple lanes connector
++	  64GB/128GB on board eMMC
++	  uSD slot
++	  1x USB 2.0 Type-A, 1x USB 3.0 Type-A, 1x USB 3.0 Type-C
++	  1x HDMI 2.1 output
++	  2x 2.5 Gbps Ethernet port
++	  40-pin IO header including UART, SPI and I2C
++	  USB PD over USB Type-C
++	  Size: 92mm x 62mm
++
+ config TARGET_QUARTZPRO64_RK3588
+ 	bool "Pine64 QuartzPro64 RK3588 board"
+ 	select BOARD_LATE_INIT
+@@ -221,6 +246,7 @@ config ROCKCHIP_COMMON_STACK_ADDR
+ config TEXT_BASE
+ 	default 0x00a00000
+ 
++source "board/armsom/sige7-rk3588/Kconfig"
+ source "board/edgeble/neural-compute-module-6/Kconfig"
+ source "board/friendlyelec/nanopc-t6-rk3588/Kconfig"
+ source "board/pine64/quartzpro64-rk3588/Kconfig"
+diff --git a/board/armsom/sige7-rk3588/Kconfig b/board/armsom/sige7-rk3588/Kconfig
+new file mode 100644
+index 0000000000..793985f531
+--- /dev/null
++++ b/board/armsom/sige7-rk3588/Kconfig
+@@ -0,0 +1,12 @@
++if TARGET_SIGE7_RK3588
++
++config SYS_BOARD
++	default "sige7-rk3588"
++
++config SYS_VENDOR
++	default "armsom"
++
++config SYS_CONFIG_NAME
++	default "sige7-rk3588"
++
++endif
+diff --git a/board/armsom/sige7-rk3588/MAINTAINERS b/board/armsom/sige7-rk3588/MAINTAINERS
+new file mode 100644
+index 0000000000..0b84946284
+--- /dev/null
++++ b/board/armsom/sige7-rk3588/MAINTAINERS
+@@ -0,0 +1,8 @@
++SIGE7-RK3588
++M:	Jianfeng Liu <liujianfeng1994@gmail.com>
++S:	Maintained
++F:	board/armsom/sige7-rk3588
++F:	include/configs/sige7-rk3588.h
++F:	configs/sige7-rk3588_defconfig
++F:	arch/arm/dts/rk3588-armsom-sige7.dts
++F:	arch/arm/dts/rk3588-armsom-sige7-u-boot.dtsi
+diff --git a/configs/sige7-rk3588_defconfig b/configs/sige7-rk3588_defconfig
+new file mode 100644
+index 0000000000..76fcd2878c
+--- /dev/null
++++ b/configs/sige7-rk3588_defconfig
+@@ -0,0 +1,104 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_SYS_HAS_NONCACHED_MEMORY=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_SF_DEFAULT_SPEED=24000000
++CONFIG_SF_DEFAULT_MODE=0x2000
++CONFIG_DEFAULT_DEVICE_TREE="rk3588-armsom-sige7"
++CONFIG_ROCKCHIP_RK3588=y
++CONFIG_ROCKCHIP_SPI_IMAGE=y
++CONFIG_SPL_SERIAL=y
++CONFIG_TARGET_SIGE7_RK3588=y
++CONFIG_DEBUG_UART_BASE=0xFEB50000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_PCI=y
++CONFIG_DEBUG_UART=y
++CONFIG_AHCI=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-armsom-sige7.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_MAX_SIZE=0x40000
++CONFIG_SPL_PAD_TO=0x7f8000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
++CONFIG_SPL_ATF=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_ROCKUSB=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_AHCI_PCI=y
++CONFIG_DWC_AHCI=y
++CONFIG_SPL_CLK=y
++# CONFIG_USB_FUNCTION_FASTBOOT is not set
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_MISC=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_SF_DEFAULT_BUS=5
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_SPI_FLASH_XTX=y
++CONFIG_PHYLIB=y
++CONFIG_RTL8169=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_DW_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
++CONFIG_PHY_ROCKCHIP_USBDP=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_PWM_ROCKCHIP=y
++CONFIG_SPL_RAM=y
++CONFIG_SCSI=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_ROCKCHIP_SFC=y
++CONFIG_SYSRESET=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_SPL_USB_DWC3_GENERIC=y
++CONFIG_USB_HOST_ETHER=y
++CONFIG_USB_ETHER_ASIX=y
++CONFIG_USB_ETHER_ASIX88179=y
++CONFIG_USB_ETHER_LAN75XX=y
++CONFIG_USB_ETHER_LAN78XX=y
++CONFIG_USB_ETHER_MCS7830=y
++CONFIG_USB_ETHER_RTL8152=y
++CONFIG_USB_ETHER_SMSC95XX=y
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_USB_FUNCTION_ROCKUSB=y
++CONFIG_ERRNO_STR=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index 9a726e9cde..6b826b3288 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -118,6 +118,7 @@ List of mainline supported Rockchip boards:
+      - Radxa ROCK 3 Model A (rock-3a-rk3568)
+ 
+ * rk3588
++     - ArmSoM Sige7 (sige7-rk3588)
+      - Rockchip EVB (evb-rk3588)
+      - Edgeble Neural Compute Module 6A SoM - Neu6a (neu6a-io-rk3588)
+      - Edgeble Neural Compute Module 6B SoM - Neu6b (neu6b-io-rk3588)
+diff --git a/include/configs/sige7-rk3588.h b/include/configs/sige7-rk3588.h
+new file mode 100644
+index 0000000000..fd08da568b
+--- /dev/null
++++ b/include/configs/sige7-rk3588.h
+@@ -0,0 +1,15 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (c) 2024 ArmSoM Technology Co., Ltd.
++ */
++
++#ifndef __SIGE7_RK3588_H
++#define __SIGE7_RK3588_H
++
++#define ROCKCHIP_DEVICE_SETTINGS \
++		"stdout=serial,vidconsole\0" \
++		"stderr=serial,vidconsole\0"
++
++#include <configs/rk3588_common.h>
++
++#endif /* __SIGE7_RK3588_H */
 -- 
-2.17.1
+2.34.1
 
