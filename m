@@ -4,110 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3504FC4345F
-	for <u-boot@archiver.kernel.org>; Sat,  4 May 2024 18:40:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAD1FC4345F
+	for <u-boot@archiver.kernel.org>; Sat,  4 May 2024 19:44:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D73B3884D2;
-	Sat,  4 May 2024 20:39:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B301D881BF;
+	Sat,  4 May 2024 21:44:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MaRjkX5f";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="VXoiY3i2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1266A880FC; Sat,  4 May 2024 20:34:12 +0200 (CEST)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9F0F888231; Sat,  4 May 2024 21:44:10 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D86A8838B
- for <u-boot@lists.denx.de>; Sat,  4 May 2024 20:34:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8449F88137
+ for <u-boot@lists.denx.de>; Sat,  4 May 2024 21:44:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-3c844b6edbbso388378b6e.1
- for <u-boot@lists.denx.de>; Sat, 04 May 2024 11:34:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714847643; x=1715452443; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=D0XZMUppdTDmYGPe6qJOAn6w9/3PIRoRn5JbmJkT/wE=;
- b=MaRjkX5f/rlvnDmOw2iIyX7wwvDOlXFohphMeIgO87CQJSR2HwZlq721Os1zoRAJrm
- iSdokUKdrql8SWR9wYsIL0XIar+Cw7wnP6CmINkgEZeapFAeYFpFfShHqBkSh4Ya54IV
- 1x8g7jRQtbevk/LDKKNASYcoyULBTLSxaXNC8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714847643; x=1715452443;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=D0XZMUppdTDmYGPe6qJOAn6w9/3PIRoRn5JbmJkT/wE=;
- b=Mc0+8yHUR/botrCcoCx0v6v4+BBRd9tcvFPuxmvK1JAc8BA9RRHzXt1VA3JkeBEdQF
- iWdLj+YYfGQqp72pJhJ1xfk42WQNfPi3am4mPKXuVmYG3zM7ORoS5NWYIQntcDt1G+XH
- Nh9tF9XQSJ9AmmRrcRL1g+cCh1/sdpxIQLBi6wHGA9MBCFF4drKqhE2tq7A4WdIw+HVD
- f4VzVJxtTo43b9If+/avYRjoqKpJ5Ch06zszjgzVFjYnJkSWV4TqcxM8ZCq/qO+2zO82
- JVI5lh3kVUhYIMONr6Zzj60gVmjI5BswfQP69Ct6g1dz3OWNldZpJmBj7CA+dJN+sAfV
- CJlA==
-X-Gm-Message-State: AOJu0Yz9YM/GzxFp8XoBNdiUGxEfY6ISoo/MCAKVyb+M8i077hI3tfTy
- XwWoyhL8uXGHRVz7F/i1tipfhH0gGtURUJaLUHi20QZr5Z/z2wt/pZtN1aHhIdE=
-X-Google-Smtp-Source: AGHT+IGa09D7yoPxlIdP/SaO+FfyDmd299PDMZtH1OBfKQ0soXcDgqOP3BJuBLe0nFcskUzcemVMig==
-X-Received: by 2002:a05:6808:8e9:b0:3c7:c12:e2fb with SMTP id
- d9-20020a05680808e900b003c70c12e2fbmr6395141oic.56.1714847642411; 
- Sat, 04 May 2024 11:34:02 -0700 (PDT)
-Received: from bill-the-cat ([187.144.98.216])
- by smtp.gmail.com with ESMTPSA id
- q18-20020a0ce9d2000000b006a0f57819a7sm2360151qvo.37.2024.05.04.11.33.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 May 2024 11:34:01 -0700 (PDT)
-Date: Sat, 4 May 2024 12:33:54 -0600
-From: Tom Rini <trini@konsulko.com>
-To: E Shattow <lucent@gmail.com>
-Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Eddie Cai <eddie.cai.linux@gmail.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>,
- Michal Simek <michal.simek@amd.com>, Bin Meng <bmeng.cn@gmail.com>,
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Stephan Gerhold <stephan@gerhold.net>,
- Linus Walleij <linus.walleij@linaro.org>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Nishanth Menon <nm@ti.com>,
- Igor Prusov <ivprusov@salutedevices.com>,
- Roger Quadros <rogerq@kernel.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Jonas Karlman <jonas@kwiboo.se>, Jagan Teki <jagan@amarulasolutions.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Peter Korsgaard <peter@korsgaard.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Alexey Romanov <avromanov@salutedevices.com>,
- Sean Anderson <seanga2@gmail.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Teik Heng Chong <teik.heng.chong@intel.com>,
- Tim Harvey <tharvey@gateworks.com>, Mathieu Othacehe <othacehe@gnu.org>,
- Fabio Estevam <festevam@gmail.com>, Johan Jonker <jbx6244@gmail.com>,
- Xavier Drudis Ferran <xdrudis@tinet.cat>,
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sam Edwards <cfsworks@gmail.com>, Andre Przywara <andre.przywara@arm.com>
-Subject: Re: [PATCH 73/81] usb: Remove <common.h> and add needed includes
-Message-ID: <20240504183354.GL2568172@bill-the-cat>
-References: <20240502013138.2383421-1-trini@konsulko.com>
- <20240502013138.2383421-73-trini@konsulko.com>
- <CANV2PTNaCHaWwaYOpoDYiLodZc-Jh_XaHFcQ62Og9bakzthYFg@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=fdac=MI=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1714851835;
+ bh=DqVVU2H3Gb2+bU5uj7CVq4VHu/WUjRJC64vBfQYIZFg=;
+ b=VXoiY3i25bwocG3hCJpCKHY/QXcXS6LCgmvBZOBVj5Jlnza6UoIZ9ffQlekYinSJMn4ST/uUZ
+ TCzkzgJfqE8MAuUkZhYazJ1YUuZGqHCZR5QBXRZMgX87JaWwFX7lxLj9pBQpCVRG71co6nx1UbE
+ w0MxRNolyXzE4sznpU7cjirHaqfavsyPOb1lHgUfmyCzHz8udXsAE+Rzq1lzPHDTKkIhO0t7Iq7
+ ouFDJPAnDAUX6v6v2ksi4vkBxT17OZlEQuFjGQ7PQWyTF9OsszEqb5f/K00R94DdX6qJMQTUWOi
+ 9KLlaOr/bbxcZV/c9I0aeMOZMqbPTn3zIRPlg9/kNYAg==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH 00/16] rockchip: Migrate RK3308, RK3328,
+ RK356x and RK3588 to OF_UPSTREAM
+Date: Sat,  4 May 2024 19:42:52 +0000
+Message-ID: <20240504194346.2462489-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.43.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="RQWwyTXcCaPj0D5I"
-Content-Disposition: inline
-In-Reply-To: <CANV2PTNaCHaWwaYOpoDYiLodZc-Jh_XaHFcQ62Og9bakzthYFg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Sat, 04 May 2024 20:39:48 +0200
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 66368ff92b8e4dad13276d44
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,1724 +68,362 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series migrate RK3308, RK3328, RK356x and RK3588 boards that exists
+in Linux kernel v6.8 to use OF_UPSTREAM.
 
---RQWwyTXcCaPj0D5I
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The usbdp phy driver is also updated to work with the DT binding that
+is targeted for v6.10.
 
-On Sat, May 04, 2024 at 10:09:52AM -0700, E Shattow wrote:
-> On Wed, May 1, 2024 at 7:00=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
-e:
-> >
-> > Remove <common.h> from this driver directory and when needed
-> > add missing include files directly.
-> >
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> > Cc: Marek Vasut <marex@denx.de>
-> > Cc: Tom Rini <trini@konsulko.com>
-> > Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> > Cc: Lukasz Majewski <lukma@denx.de>
-> > Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> > Cc: Eddie Cai <eddie.cai.linux@gmail.com>
-> > Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> > Cc: Caleb Connolly <caleb.connolly@linaro.org>
-> > Cc: Sumit Garg <sumit.garg@linaro.org>
-> > Cc: Michal Simek <michal.simek@amd.com>
-> > Cc: Bin Meng <bmeng.cn@gmail.com>
-> > Cc: Ryder Lee <ryder.lee@mediatek.com>
-> > Cc: Weijie Gao <weijie.gao@mediatek.com>
-> > Cc: Chunfeng Yun <chunfeng.yun@mediatek.com>
-> > Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-> > Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> > Cc: Stephan Gerhold <stephan@gerhold.net>
-> > Cc: Linus Walleij <linus.walleij@linaro.org>
-> > Cc: Simon Glass <sjg@chromium.org>
-> > Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
-> > Cc: Kever Yang <kever.yang@rock-chips.com>
-> > Cc: Nishanth Menon <nm@ti.com>
-> > Cc: Igor Prusov <ivprusov@salutedevices.com>
-> > Cc: Roger Quadros <rogerq@kernel.org>
-> > Cc: Svyatoslav Ryhel <clamor95@gmail.com>
-> > Cc: Jonas Karlman <jonas@kwiboo.se>
-> > Cc: Jagan Teki <jagan@amarulasolutions.com>
-> > Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-> > Cc: Peter Korsgaard <peter@korsgaard.com>
-> > Cc: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-> > Cc: Alexey Romanov <avromanov@salutedevices.com>
-> > Cc: Sean Anderson <seanga2@gmail.com>
-> > Cc: Miquel Raynal <miquel.raynal@bootlin.com>
-> > Cc: Teik Heng Chong <teik.heng.chong@intel.com>
-> > Cc: Tim Harvey <tharvey@gateworks.com>
-> > Cc: Mathieu Othacehe <othacehe@gnu.org>
-> > Cc: Fabio Estevam <festevam@gmail.com>
-> > Cc: Johan Jonker <jbx6244@gmail.com>
-> > Cc: Xavier Drudis Ferran <xdrudis@tinet.cat>
-> > Cc: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
-> > Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> > Cc: Sam Edwards <cfsworks@gmail.com>
-> > Cc: Andre Przywara <andre.przywara@arm.com>
-> > ---
-> >  drivers/usb/cdns3/cdns3-ti.c               | 1 -
-> >  drivers/usb/cdns3/core.c                   | 1 -
-> >  drivers/usb/common/common.c                | 1 -
-> >  drivers/usb/common/fsl-dt-fixup.c          | 1 -
-> >  drivers/usb/common/fsl-errata.c            | 1 -
-> >  drivers/usb/dwc3/core.c                    | 1 -
-> >  drivers/usb/dwc3/dwc3-generic.c            | 1 -
-> >  drivers/usb/dwc3/dwc3-layerscape.c         | 1 -
-> >  drivers/usb/dwc3/dwc3-meson-g12a.c         | 1 -
-> >  drivers/usb/dwc3/dwc3-meson-gxl.c          | 1 -
-> >  drivers/usb/dwc3/dwc3-omap.c               | 1 -
-> >  drivers/usb/dwc3/ep0.c                     | 1 -
-> >  drivers/usb/dwc3/gadget.c                  | 1 -
-> >  drivers/usb/dwc3/samsung_usb_phy.c         | 2 +-
-> >  drivers/usb/dwc3/ti_usb_phy.c              | 1 -
-> >  drivers/usb/emul/sandbox_flash.c           | 1 -
-> >  drivers/usb/emul/sandbox_hub.c             | 1 -
-> >  drivers/usb/emul/sandbox_keyb.c            | 1 -
-> >  drivers/usb/emul/usb-emul-uclass.c         | 1 -
-> >  drivers/usb/eth/asix.c                     | 1 -
-> >  drivers/usb/eth/asix88179.c                | 1 -
-> >  drivers/usb/eth/mcs7830.c                  | 1 -
-> >  drivers/usb/eth/r8152.c                    | 1 -
-> >  drivers/usb/eth/r8152_fw.c                 | 1 -
-> >  drivers/usb/eth/smsc95xx.c                 | 1 -
-> >  drivers/usb/eth/usb_ether.c                | 1 -
-> >  drivers/usb/gadget/at91_udc.c              | 1 -
-> >  drivers/usb/gadget/atmel_usba_udc.c        | 1 -
-> >  drivers/usb/gadget/bcm_udc_otg_phy.c       | 1 -
-> >  drivers/usb/gadget/ci_udc.c                | 1 -
-> >  drivers/usb/gadget/config.c                | 1 -
-> >  drivers/usb/gadget/dwc2_udc_otg.c          | 1 -
-> >  drivers/usb/gadget/dwc2_udc_otg_phy.c      | 1 -
-> >  drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c | 1 -
-> >  drivers/usb/gadget/ep0.c                   | 1 -
-> >  drivers/usb/gadget/epautoconf.c            | 1 -
-> >  drivers/usb/gadget/ether.c                 | 1 -
-> >  drivers/usb/gadget/f_acm.c                 | 1 -
-> >  drivers/usb/gadget/f_dfu.c                 | 1 -
-> >  drivers/usb/gadget/f_fastboot.c            | 1 -
-> >  drivers/usb/gadget/f_mass_storage.c        | 1 -
-> >  drivers/usb/gadget/f_rockusb.c             | 1 -
-> >  drivers/usb/gadget/f_sdp.c                 | 1 -
-> >  drivers/usb/gadget/f_thor.c                | 1 -
-> >  drivers/usb/gadget/g_dnl.c                 | 1 -
-> >  drivers/usb/gadget/max3420_udc.c           | 1 -
-> >  drivers/usb/gadget/rndis.c                 | 1 -
-> >  drivers/usb/gadget/udc/udc-core.c          | 1 -
-> >  drivers/usb/gadget/udc/udc-uclass.c        | 1 -
-> >  drivers/usb/gadget/usbstring.c             | 1 -
-> >  drivers/usb/host/dwc2.c                    | 1 -
-> >  drivers/usb/host/dwc3-of-simple.c          | 1 -
-> >  drivers/usb/host/dwc3-sti-glue.c           | 1 -
-> >  drivers/usb/host/ehci-atmel.c              | 1 -
-> >  drivers/usb/host/ehci-exynos.c             | 1 -
-> >  drivers/usb/host/ehci-fsl.c                | 1 -
-> >  drivers/usb/host/ehci-generic.c            | 1 -
-> >  drivers/usb/host/ehci-hcd.c                | 1 -
-> >  drivers/usb/host/ehci-marvell.c            | 1 -
-> >  drivers/usb/host/ehci-msm.c                | 1 -
-> >  drivers/usb/host/ehci-mx5.c                | 1 -
-> >  drivers/usb/host/ehci-mx6.c                | 1 -
-> >  drivers/usb/host/ehci-mxs.c                | 1 -
-> >  drivers/usb/host/ehci-npcm.c               | 1 -
-> >  drivers/usb/host/ehci-omap.c               | 2 +-
-> >  drivers/usb/host/ehci-pci.c                | 1 -
-> >  drivers/usb/host/ehci-tegra.c              | 1 -
-> >  drivers/usb/host/ehci-vf.c                 | 1 -
-> >  drivers/usb/host/ehci-zynq.c               | 1 -
-> >  drivers/usb/host/ohci-at91.c               | 1 -
-> >  drivers/usb/host/ohci-da8xx.c              | 1 -
-> >  drivers/usb/host/ohci-generic.c            | 1 -
-> >  drivers/usb/host/ohci-hcd.c                | 2 +-
-> >  drivers/usb/host/ohci-lpc32xx.c            | 1 -
-> >  drivers/usb/host/ohci-npcm.c               | 1 -
-> >  drivers/usb/host/ohci-pci.c                | 1 -
-> >  drivers/usb/host/r8a66597-hcd.c            | 1 -
-> >  drivers/usb/host/usb-sandbox.c             | 1 -
-> >  drivers/usb/host/usb-uclass.c              | 1 -
-> >  drivers/usb/host/usb_bootdev.c             | 1 -
-> >  drivers/usb/host/xhci-brcm.c               | 1 -
-> >  drivers/usb/host/xhci-dwc3.c               | 1 -
-> >  drivers/usb/host/xhci-exynos5.c            | 1 -
-> >  drivers/usb/host/xhci-fsl.c                | 1 -
-> >  drivers/usb/host/xhci-mem.c                | 1 -
-> >  drivers/usb/host/xhci-mtk.c                | 1 -
-> >  drivers/usb/host/xhci-mvebu.c              | 1 -
-> >  drivers/usb/host/xhci-omap.c               | 1 -
-> >  drivers/usb/host/xhci-pci.c                | 1 -
-> >  drivers/usb/host/xhci-rcar.c               | 1 -
-> >  drivers/usb/host/xhci-ring.c               | 1 -
-> >  drivers/usb/host/xhci.c                    | 1 -
-> >  drivers/usb/isp1760/isp1760-hcd.c          | 1 -
-> >  drivers/usb/isp1760/isp1760-if.c           | 1 -
-> >  drivers/usb/isp1760/isp1760-uboot.c        | 1 -
-> >  drivers/usb/mtu3/mtu3_plat.c               | 1 -
-> >  drivers/usb/musb-new/am35x.c               | 1 -
-> >  drivers/usb/musb-new/da8xx.c               | 1 -
-> >  drivers/usb/musb-new/mt85xx.c              | 1 -
-> >  drivers/usb/musb-new/musb_core.c           | 1 -
-> >  drivers/usb/musb-new/musb_dsps.c           | 1 -
-> >  drivers/usb/musb-new/musb_gadget.c         | 1 -
-> >  drivers/usb/musb-new/musb_gadget_ep0.c     | 1 -
-> >  drivers/usb/musb-new/musb_host.c           | 1 -
-> >  drivers/usb/musb-new/musb_uboot.c          | 1 -
-> >  drivers/usb/musb-new/omap2430.c            | 1 -
-> >  drivers/usb/musb-new/pic32.c               | 1 -
-> >  drivers/usb/musb-new/sunxi.c               | 1 -
-> >  drivers/usb/musb-new/ti-musb.c             | 1 -
-> >  drivers/usb/musb-new/ux500.c               | 1 -
-> >  drivers/usb/musb/am35x.c                   | 1 -
-> >  drivers/usb/musb/musb_core.c               | 1 -
-> >  drivers/usb/musb/musb_hcd.c                | 1 -
-> >  drivers/usb/musb/musb_udc.c                | 1 -
-> >  drivers/usb/phy/rockchip_usb2_phy.c        | 1 -
-> >  drivers/usb/ulpi/omap-ulpi-viewport.c      | 1 -
-> >  drivers/usb/ulpi/ulpi-viewport.c           | 1 -
-> >  drivers/usb/ulpi/ulpi.c                    | 1 -
-> >  118 files changed, 3 insertions(+), 118 deletions(-)
-> >
-> > diff --git a/drivers/usb/cdns3/cdns3-ti.c b/drivers/usb/cdns3/cdns3-ti.c
-> > index 2e44aadea47b..ac072260c30a 100644
-> > --- a/drivers/usb/cdns3/cdns3-ti.c
-> > +++ b/drivers/usb/cdns3/cdns3-ti.c
-> > @@ -5,7 +5,6 @@
-> >   * Copyright (C) 2019 Texas Instruments Incorporated - https://www.ti.=
-com
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <clk.h>
-> >  #include <dm.h>
-> >  #include <dm/device_compat.h>
-> > diff --git a/drivers/usb/cdns3/core.c b/drivers/usb/cdns3/core.c
-> > index 12a741c6ea7c..b4e931646b88 100644
-> > --- a/drivers/usb/cdns3/core.c
-> > +++ b/drivers/usb/cdns3/core.c
-> > @@ -11,7 +11,6 @@
-> >   *         Roger Quadros <rogerq@ti.com>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <log.h>
-> >  #include <dm/device-internal.h>
-> > diff --git a/drivers/usb/common/common.c b/drivers/usb/common/common.c
-> > index 7137a569d97c..13e9a61072a9 100644
-> > --- a/drivers/usb/common/common.c
-> > +++ b/drivers/usb/common/common.c
-> > @@ -6,7 +6,6 @@
-> >   *     Texas Instruments Incorporated, <www.ti.com>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <asm/global_data.h>
-> >  #include <linux/printk.h>
-> > diff --git a/drivers/usb/common/fsl-dt-fixup.c b/drivers/usb/common/fsl=
--dt-fixup.c
-> > index 00b8cd368b1a..6a68bd76c274 100644
-> > --- a/drivers/usb/common/fsl-dt-fixup.c
-> > +++ b/drivers/usb/common/fsl-dt-fixup.c
-> > @@ -7,7 +7,6 @@
-> >   * Author: Tor Krill tor@excito.com
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <log.h>
-> >  #include <usb.h>
-> >  #include <asm/io.h>
-> > diff --git a/drivers/usb/common/fsl-errata.c b/drivers/usb/common/fsl-e=
-rrata.c
-> > index 9eb1d2306725..89ae73f2ba48 100644
-> > --- a/drivers/usb/common/fsl-errata.c
-> > +++ b/drivers/usb/common/fsl-errata.c
-> > @@ -5,7 +5,6 @@
-> >   * Copyright 2013 Freescale Semiconductor, Inc.
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <hwconfig.h>
-> >  #include <fsl_errata.h>
-> >  #include<fsl_usb.h>
-> > diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-> > index 96e850b7170f..c443d56746dd 100644
-> > --- a/drivers/usb/dwc3/core.c
-> > +++ b/drivers/usb/dwc3/core.c
-> > @@ -13,7 +13,6 @@
-> >   * commit cd72f890d2 : usb: dwc3: core: enable phy suspend quirk on no=
-n-FPGA
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <clk.h>
-> >  #include <cpu_func.h>
-> >  #include <malloc.h>
-> > diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-ge=
-neric.c
-> > index 7a00529a2a8e..8db678eb85d4 100644
-> > --- a/drivers/usb/dwc3/dwc3-generic.c
-> > +++ b/drivers/usb/dwc3/dwc3-generic.c
-> > @@ -7,7 +7,6 @@
-> >   * Based on dwc3-omap.c.
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <cpu_func.h>
-> >  #include <log.h>
-> >  #include <dm.h>
-> > diff --git a/drivers/usb/dwc3/dwc3-layerscape.c b/drivers/usb/dwc3/dwc3=
--layerscape.c
-> > index c32df2396d74..ff83bf71e898 100644
-> > --- a/drivers/usb/dwc3/dwc3-layerscape.c
-> > +++ b/drivers/usb/dwc3/dwc3-layerscape.c
-> > @@ -7,7 +7,6 @@
-> >   * Based on dwc3-generic.c.
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <dm/device_compat.h>
-> >  #include <dm/device-internal.h>
-> > diff --git a/drivers/usb/dwc3/dwc3-meson-g12a.c b/drivers/usb/dwc3/dwc3=
--meson-g12a.c
-> > index 1a3e9350c46d..21e4f637bb15 100644
-> > --- a/drivers/usb/dwc3/dwc3-meson-g12a.c
-> > +++ b/drivers/usb/dwc3/dwc3-meson-g12a.c
-> > @@ -6,7 +6,6 @@
-> >   * Author: Neil Armstrong <narmstrong@baylibre.com>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <log.h>
-> >  #include <dm.h>
-> >  #include <dm/device-internal.h>
-> > diff --git a/drivers/usb/dwc3/dwc3-meson-gxl.c b/drivers/usb/dwc3/dwc3-=
-meson-gxl.c
-> > index 2ce915701a85..3e693c5ff310 100644
-> > --- a/drivers/usb/dwc3/dwc3-meson-gxl.c
-> > +++ b/drivers/usb/dwc3/dwc3-meson-gxl.c
-> > @@ -7,7 +7,6 @@
-> >   */
-> >
-> >  #define DEBUG
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <dm/device-internal.h>
-> >  #include <dm/lists.h>
-> > diff --git a/drivers/usb/dwc3/dwc3-omap.c b/drivers/usb/dwc3/dwc3-omap.c
-> > index 53c4d4826b45..4b219c35eb35 100644
-> > --- a/drivers/usb/dwc3/dwc3-omap.c
-> > +++ b/drivers/usb/dwc3/dwc3-omap.c
-> > @@ -13,7 +13,6 @@
-> >   * commit 7ee2566ff5 : usb: dwc3: dwc3-omap: get rid of ->prepare()/->=
-complete()
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <malloc.h>
-> >  #include <asm/io.h>
-> >  #include <dm.h>
-> > diff --git a/drivers/usb/dwc3/ep0.c b/drivers/usb/dwc3/ep0.c
-> > index 1133cf82b1ae..117d38a0340b 100644
-> > --- a/drivers/usb/dwc3/ep0.c
-> > +++ b/drivers/usb/dwc3/ep0.c
-> > @@ -12,7 +12,6 @@
-> >   *
-> >   * commit c00552ebaf : Merge 3.18-rc7 into usb-next
-> >   */
-> > -#include <common.h>
-> >  #include <cpu_func.h>
-> >  #include <dm.h>
-> >  #include <dm/device_compat.h>
-> > diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
-> > index 406d36ceafe4..4de007cb0c38 100644
-> > --- a/drivers/usb/dwc3/gadget.c
-> > +++ b/drivers/usb/dwc3/gadget.c
-> > @@ -13,7 +13,6 @@
-> >   * commit 8e74475b0e : usb: dwc3: gadget: use udc-core's reset notifier
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <cpu_func.h>
-> >  #include <log.h>
-> >  #include <malloc.h>
-> > diff --git a/drivers/usb/dwc3/samsung_usb_phy.c b/drivers/usb/dwc3/sams=
-ung_usb_phy.c
-> > index abbd41368901..0a7713081636 100644
-> > --- a/drivers/usb/dwc3/samsung_usb_phy.c
-> > +++ b/drivers/usb/dwc3/samsung_usb_phy.c
-> > @@ -7,7 +7,7 @@
-> >   * Author: Joonyoung Shim <jy0922.shim@samsung.com>
-> >   */
-> >
-> > -#include <common.h>
-> > +#include <asm/io.h>
-> >  #include <asm/arch/power.h>
-> >  #include <asm/arch/xhci-exynos.h>
-> >  #include <linux/delay.h>
-> > diff --git a/drivers/usb/dwc3/ti_usb_phy.c b/drivers/usb/dwc3/ti_usb_ph=
-y.c
-> > index 8ae130860f79..f0ecdea958ae 100644
-> > --- a/drivers/usb/dwc3/ti_usb_phy.c
-> > +++ b/drivers/usb/dwc3/ti_usb_phy.c
-> > @@ -16,7 +16,6 @@
-> >   * and remove" for phy-omap-usb2.c
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <malloc.h>
-> >  #include <ti-usb-phy-uboot.h>
-> >  #include <dm/device_compat.h>
-> > diff --git a/drivers/usb/emul/sandbox_flash.c b/drivers/usb/emul/sandbo=
-x_flash.c
-> > index 7c5c1ab3de73..24420e3d51e1 100644
-> > --- a/drivers/usb/emul/sandbox_flash.c
-> > +++ b/drivers/usb/emul/sandbox_flash.c
-> > @@ -6,7 +6,6 @@
-> >
-> >  #define LOG_CATEGORY   UCLASS_USB
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <log.h>
-> >  #include <malloc.h>
-> > diff --git a/drivers/usb/emul/sandbox_hub.c b/drivers/usb/emul/sandbox_=
-hub.c
-> > index 084cc16cc683..3b3e59f978f7 100644
-> > --- a/drivers/usb/emul/sandbox_hub.c
-> > +++ b/drivers/usb/emul/sandbox_hub.c
-> > @@ -4,7 +4,6 @@
-> >   * Written by Simon Glass <sjg@chromium.org>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <log.h>
-> >  #include <usb.h>
-> > diff --git a/drivers/usb/emul/sandbox_keyb.c b/drivers/usb/emul/sandbox=
-_keyb.c
-> > index 5ec1e98e4ed4..db769883ba3b 100644
-> > --- a/drivers/usb/emul/sandbox_keyb.c
-> > +++ b/drivers/usb/emul/sandbox_keyb.c
-> > @@ -4,7 +4,6 @@
-> >   * Written by Simon Glass <sjg@chromium.org>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <log.h>
-> >  #include <os.h>
-> > diff --git a/drivers/usb/emul/usb-emul-uclass.c b/drivers/usb/emul/usb-=
-emul-uclass.c
-> > index b31dc950e3ab..cdc18d6cbb97 100644
-> > --- a/drivers/usb/emul/usb-emul-uclass.c
-> > +++ b/drivers/usb/emul/usb-emul-uclass.c
-> > @@ -6,7 +6,6 @@
-> >
-> >  #define LOG_CATEGORY UCLASS_USB_EMUL
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <log.h>
-> >  #include <usb.h>
-> > diff --git a/drivers/usb/eth/asix.c b/drivers/usb/eth/asix.c
-> > index 26dd312b7d06..c5a01ec922be 100644
-> > --- a/drivers/usb/eth/asix.c
-> > +++ b/drivers/usb/eth/asix.c
-> > @@ -5,7 +5,6 @@
-> >   * Patched for AX88772B by Antmicro Ltd <www.antmicro.com>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <log.h>
-> >  #include <net.h>
-> > diff --git a/drivers/usb/eth/asix88179.c b/drivers/usb/eth/asix88179.c
-> > index 2e737e606685..7bfd285b3aa4 100644
-> > --- a/drivers/usb/eth/asix88179.c
-> > +++ b/drivers/usb/eth/asix88179.c
-> > @@ -5,7 +5,6 @@
-> >   * from the Linux AX88179_178a driver
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <log.h>
-> >  #include <usb.h>
-> > diff --git a/drivers/usb/eth/mcs7830.c b/drivers/usb/eth/mcs7830.c
-> > index d94204f22d5f..199fb7a5d08e 100644
-> > --- a/drivers/usb/eth/mcs7830.c
-> > +++ b/drivers/usb/eth/mcs7830.c
-> > @@ -9,7 +9,6 @@
-> >   * MOSCHIP MCS7830 based (7730/7830/7832) USB 2.0 Ethernet Devices
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <errno.h>
-> >  #include <log.h>
-> > diff --git a/drivers/usb/eth/r8152.c b/drivers/usb/eth/r8152.c
-> > index 3c866f4f1e2d..e3f20e08c33c 100644
-> > --- a/drivers/usb/eth/r8152.c
-> > +++ b/drivers/usb/eth/r8152.c
-> > @@ -4,7 +4,6 @@
-> >   *
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <errno.h>
-> >  #include <log.h>
-> > diff --git a/drivers/usb/eth/r8152_fw.c b/drivers/usb/eth/r8152_fw.c
-> > index a41abed3069a..3159f3010602 100644
-> > --- a/drivers/usb/eth/r8152_fw.c
-> > +++ b/drivers/usb/eth/r8152_fw.c
-> > @@ -3,7 +3,6 @@
-> >   * Copyright (c) 2015 Realtek Semiconductor Corp. All rights reserved.
-> >   *
-> >    */
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <errno.h>
-> >  #include <linux/bitops.h>
-> > diff --git a/drivers/usb/eth/smsc95xx.c b/drivers/usb/eth/smsc95xx.c
-> > index de6586e62639..b4fcb2c2bb0d 100644
-> > --- a/drivers/usb/eth/smsc95xx.c
-> > +++ b/drivers/usb/eth/smsc95xx.c
-> > @@ -6,7 +6,6 @@
-> >   * Copyright (C) 2007-2008 SMSC (Steve Glendinning)
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <errno.h>
-> >  #include <log.h>
-> > diff --git a/drivers/usb/eth/usb_ether.c b/drivers/usb/eth/usb_ether.c
-> > index 2e9af54fd63d..8bba3e0974e6 100644
-> > --- a/drivers/usb/eth/usb_ether.c
-> > +++ b/drivers/usb/eth/usb_ether.c
-> > @@ -3,7 +3,6 @@
-> >   * Copyright (c) 2011 The Chromium OS Authors.
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <errno.h>
-> >  #include <log.h>
-> > diff --git a/drivers/usb/gadget/at91_udc.c b/drivers/usb/gadget/at91_ud=
-c.c
-> > index e573a03477b9..86b2cbf3f6ae 100644
-> > --- a/drivers/usb/gadget/at91_udc.c
-> > +++ b/drivers/usb/gadget/at91_udc.c
-> > @@ -13,7 +13,6 @@
-> >  #undef VERBOSE_DEBUG
-> >  #undef PACKET_TRACE
-> >
-> > -#include <common.h>
-> >  #include <dm/devres.h>
-> >  #include <linux/bug.h>
-> >  #include <linux/err.h>
-> > diff --git a/drivers/usb/gadget/atmel_usba_udc.c b/drivers/usb/gadget/a=
-tmel_usba_udc.c
-> > index 4c420747b0b6..f99553df8d49 100644
-> > --- a/drivers/usb/gadget/atmel_usba_udc.c
-> > +++ b/drivers/usb/gadget/atmel_usba_udc.c
-> > @@ -7,7 +7,6 @@
-> >   *                        Bo Shen <voice.shen@atmel.com>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <linux/bitops.h>
-> >  #include <linux/errno.h>
-> >  #include <asm/gpio.h>
-> > diff --git a/drivers/usb/gadget/bcm_udc_otg_phy.c b/drivers/usb/gadget/=
-bcm_udc_otg_phy.c
-> > index c89cd57c253d..9875191091cc 100644
-> > --- a/drivers/usb/gadget/bcm_udc_otg_phy.c
-> > +++ b/drivers/usb/gadget/bcm_udc_otg_phy.c
-> > @@ -4,7 +4,6 @@
-> >   */
-> >
-> >  #include <config.h>
-> > -#include <common.h>
-> >  #include <asm/io.h>
-> >  #include <asm/arch/sysmap.h>
-> >  #include <asm/kona-common/clk.h>
-> > diff --git a/drivers/usb/gadget/ci_udc.c b/drivers/usb/gadget/ci_udc.c
-> > index 750d47148798..bbe03cfff1fb 100644
-> > --- a/drivers/usb/gadget/ci_udc.c
-> > +++ b/drivers/usb/gadget/ci_udc.c
-> > @@ -7,7 +7,6 @@
-> >   * Murray.Jensen@cmst.csiro.au, 27-Jan-01.
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <command.h>
-> >  #include <config.h>
-> >  #include <cpu_func.h>
-> > diff --git a/drivers/usb/gadget/config.c b/drivers/usb/gadget/config.c
-> > index e96782644f31..1363ef9e73df 100644
-> > --- a/drivers/usb/gadget/config.c
-> > +++ b/drivers/usb/gadget/config.c
-> > @@ -8,7 +8,6 @@
-> >   *                      Remy Bohmer <linux@bohmer.net>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <asm/unaligned.h>
-> >  #include <linux/errno.h>
-> >  #include <linux/list.h>
-> > diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc=
-2_udc_otg.c
-> > index 27082f5152cb..6bd395a6235a 100644
-> > --- a/drivers/usb/gadget/dwc2_udc_otg.c
-> > +++ b/drivers/usb/gadget/dwc2_udc_otg.c
-> > @@ -17,7 +17,6 @@
-> >   * Lukasz Majewski <l.majewski@samsumg.com>
-> >   */
-> >  #undef DEBUG
-> > -#include <common.h>
-> >  #include <clk.h>
-> >  #include <dm.h>
-> >  #include <generic-phy.h>
-> > diff --git a/drivers/usb/gadget/dwc2_udc_otg_phy.c b/drivers/usb/gadget=
-/dwc2_udc_otg_phy.c
-> > index 7f8e9564b9e5..c7eea7b34421 100644
-> > --- a/drivers/usb/gadget/dwc2_udc_otg_phy.c
-> > +++ b/drivers/usb/gadget/dwc2_udc_otg_phy.c
-> > @@ -17,7 +17,6 @@
-> >   * Lukasz Majewski <l.majewski@samsumg.com>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <linux/delay.h>
-> >  #include <linux/errno.h>
-> >  #include <linux/list.h>
-> > diff --git a/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c b/drivers/usb/g=
-adget/dwc2_udc_otg_xfer_dma.c
-> > index 1c34b753511d..16b2a03f9e4b 100644
-> > --- a/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
-> > +++ b/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
-> > @@ -17,7 +17,6 @@
-> >   * Lukasz Majewski <l.majewski@samsumg.com>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <cpu_func.h>
-> >  #include <log.h>
-> >  #include <linux/bug.h>
-> > diff --git a/drivers/usb/gadget/ep0.c b/drivers/usb/gadget/ep0.c
-> > index c256cc31fbd2..9d08640ff23a 100644
-> > --- a/drivers/usb/gadget/ep0.c
-> > +++ b/drivers/usb/gadget/ep0.c
-> > @@ -36,7 +36,6 @@
-> >   * XXX
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <serial.h>
-> >  #include <usbdevice.h>
-> >
-> > diff --git a/drivers/usb/gadget/epautoconf.c b/drivers/usb/gadget/epaut=
-oconf.c
-> > index bb0d2971d06b..0a70035ce04b 100644
-> > --- a/drivers/usb/gadget/epautoconf.c
-> > +++ b/drivers/usb/gadget/epautoconf.c
-> > @@ -8,7 +8,6 @@
-> >   *                      Remy Bohmer <linux@bohmer.net>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <linux/usb/ch9.h>
-> >  #include <linux/errno.h>
-> >  #include <linux/usb/gadget.h>
-> > diff --git a/drivers/usb/gadget/ether.c b/drivers/usb/gadget/ether.c
-> > index 36618f0bdf36..b8b29d399b13 100644
-> > --- a/drivers/usb/gadget/ether.c
-> > +++ b/drivers/usb/gadget/ether.c
-> > @@ -7,7 +7,6 @@
-> >   * Copyright (C) 2008 Nokia Corporation
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <console.h>
-> >  #include <env.h>
-> >  #include <log.h>
-> > diff --git a/drivers/usb/gadget/f_acm.c b/drivers/usb/gadget/f_acm.c
-> > index ba216128ab27..f18c6a0a7611 100644
-> > --- a/drivers/usb/gadget/f_acm.c
-> > +++ b/drivers/usb/gadget/f_acm.c
-> > @@ -10,7 +10,6 @@
-> >   */
-> >
-> >  #include <circbuf.h>
-> > -#include <common.h>
-> >  #include <console.h>
-> >  #include <errno.h>
-> >  #include <g_dnl.h>
-> > diff --git a/drivers/usb/gadget/f_dfu.c b/drivers/usb/gadget/f_dfu.c
-> > index 44877df4ec6b..ca8b36e077bc 100644
-> > --- a/drivers/usb/gadget/f_dfu.c
-> > +++ b/drivers/usb/gadget/f_dfu.c
-> > @@ -16,7 +16,6 @@
-> >
-> >  #include <env.h>
-> >  #include <errno.h>
-> > -#include <common.h>
-> >  #include <log.h>
-> >  #include <malloc.h>
-> >
-> > diff --git a/drivers/usb/gadget/f_fastboot.c b/drivers/usb/gadget/f_fas=
-tboot.c
-> > index 09e740cc9622..8df0e3f331d1 100644
-> > --- a/drivers/usb/gadget/f_fastboot.c
-> > +++ b/drivers/usb/gadget/f_fastboot.c
-> > @@ -11,7 +11,6 @@
-> >   */
-> >  #include <command.h>
-> >  #include <config.h>
-> > -#include <common.h>
-> >  #include <env.h>
-> >  #include <errno.h>
-> >  #include <fastboot.h>
-> > diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f=
-_mass_storage.c
-> > index ef90c7ec7fb5..89a96dbb7a74 100644
-> > --- a/drivers/usb/gadget/f_mass_storage.c
-> > +++ b/drivers/usb/gadget/f_mass_storage.c
-> > @@ -244,7 +244,6 @@
-> >  #include <hexdump.h>
-> >  #include <log.h>
-> >  #include <malloc.h>
-> > -#include <common.h>
-> >  #include <console.h>
-> >  #include <g_dnl.h>
-> >  #include <dm/devres.h>
-> > diff --git a/drivers/usb/gadget/f_rockusb.c b/drivers/usb/gadget/f_rock=
-usb.c
-> > index 98a7ffa2a752..d679cdae97c8 100644
-> > --- a/drivers/usb/gadget/f_rockusb.c
-> > +++ b/drivers/usb/gadget/f_rockusb.c
-> > @@ -6,7 +6,6 @@
-> >   */
-> >  #include <command.h>
-> >  #include <config.h>
-> > -#include <common.h>
-> >  #include <env.h>
-> >  #include <errno.h>
-> >  #include <log.h>
-> > diff --git a/drivers/usb/gadget/f_sdp.c b/drivers/usb/gadget/f_sdp.c
-> > index ca2760c00d0d..89496917a61f 100644
-> > --- a/drivers/usb/gadget/f_sdp.c
-> > +++ b/drivers/usb/gadget/f_sdp.c
-> > @@ -17,7 +17,6 @@
-> >   */
-> >
-> >  #include <errno.h>
-> > -#include <common.h>
-> >  #include <console.h>
-> >  #include <env.h>
-> >  #include <log.h>
-> > diff --git a/drivers/usb/gadget/f_thor.c b/drivers/usb/gadget/f_thor.c
-> > index 0e7529dcdbb6..543721183480 100644
-> > --- a/drivers/usb/gadget/f_thor.c
-> > +++ b/drivers/usb/gadget/f_thor.c
-> > @@ -15,7 +15,6 @@
-> >   */
-> >
-> >  #include <command.h>
-> > -#include <common.h>
-> >  #include <console.h>
-> >  #include <dm.h>
-> >  #include <errno.h>
-> > diff --git a/drivers/usb/gadget/g_dnl.c b/drivers/usb/gadget/g_dnl.c
-> > index afb7b74f3057..b5b5f5d8c118 100644
-> > --- a/drivers/usb/gadget/g_dnl.c
-> > +++ b/drivers/usb/gadget/g_dnl.c
-> > @@ -6,7 +6,6 @@
-> >   * Lukasz Majewski  <l.majewski@samsung.com>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <log.h>
-> >  #include <malloc.h>
-> >
-> > diff --git a/drivers/usb/gadget/max3420_udc.c b/drivers/usb/gadget/max3=
-420_udc.c
-> > index fa655c98dcc5..5a227c0ffd99 100644
-> > --- a/drivers/usb/gadget/max3420_udc.c
-> > +++ b/drivers/usb/gadget/max3420_udc.c
-> > @@ -1,6 +1,5 @@
-> >  // SPDX-License-Identifier: GPL-2.0+
-> >
-> > -#include <common.h>
-> >  #include <linux/errno.h>
-> >  #include <linux/delay.h>
-> >  #include <asm/gpio.h>
-> > diff --git a/drivers/usb/gadget/rndis.c b/drivers/usb/gadget/rndis.c
-> > index e7276ccd37a3..5e6e5a054ca7 100644
-> > --- a/drivers/usb/gadget/rndis.c
-> > +++ b/drivers/usb/gadget/rndis.c
-> > @@ -18,7 +18,6 @@
-> >   *             updates to merge with Linux 2.6, better match RNDIS spec
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <log.h>
-> >  #include <net.h>
-> >  #include <malloc.h>
-> > diff --git a/drivers/usb/gadget/udc/udc-core.c b/drivers/usb/gadget/udc=
-/udc-core.c
-> > index ba658d922966..6bb419ae2abc 100644
-> > --- a/drivers/usb/gadget/udc/udc-core.c
-> > +++ b/drivers/usb/gadget/udc/udc-core.c
-> > @@ -19,7 +19,6 @@
-> >  #include <malloc.h>
-> >  #include <asm/cache.h>
-> >  #include <linux/dma-mapping.h>
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <dm/device-internal.h>
-> >  #include <linux/usb/ch9.h>
-> > diff --git a/drivers/usb/gadget/udc/udc-uclass.c b/drivers/usb/gadget/u=
-dc/udc-uclass.c
-> > index 30ee1cab0668..5dc23a55bb58 100644
-> > --- a/drivers/usb/gadget/udc/udc-uclass.c
-> > +++ b/drivers/usb/gadget/udc/udc-uclass.c
-> > @@ -6,7 +6,6 @@
-> >
-> >  #define LOG_CATEGORY UCLASS_USB_GADGET_GENERIC
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <dm/device-internal.h>
-> >  #include <linux/printk.h>
-> > diff --git a/drivers/usb/gadget/usbstring.c b/drivers/usb/gadget/usbstr=
-ing.c
-> > index e2464ad923f8..4617a95bd0a7 100644
-> > --- a/drivers/usb/gadget/usbstring.c
-> > +++ b/drivers/usb/gadget/usbstring.c
-> > @@ -6,7 +6,6 @@
-> >   *                      Remy Bohmer <linux@bohmer.net>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <linux/errno.h>
-> >  #include <linux/usb/ch9.h>
-> >  #include <linux/usb/gadget.h>
-> > diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c
-> > index 637eb2dd06f5..a9dbb85f4e6c 100644
-> > --- a/drivers/usb/host/dwc2.c
-> > +++ b/drivers/usb/host/dwc2.c
-> > @@ -4,7 +4,6 @@
-> >   * Copyright (C) 2014 Marek Vasut <marex@denx.de>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <clk.h>
-> >  #include <cpu_func.h>
-> >  #include <dm.h>
-> > diff --git a/drivers/usb/host/dwc3-of-simple.c b/drivers/usb/host/dwc3-=
-of-simple.c
-> > index f9df59d2e5d7..d52e7d22d1a7 100644
-> > --- a/drivers/usb/host/dwc3-of-simple.c
-> > +++ b/drivers/usb/host/dwc3-of-simple.c
-> > @@ -10,7 +10,6 @@
-> >   * Author: Neil Armstrong <narmstron@baylibre.com>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <reset.h>
-> >  #include <clk.h>
-> > diff --git a/drivers/usb/host/dwc3-sti-glue.c b/drivers/usb/host/dwc3-s=
-ti-glue.c
-> > index 4a3ab6111276..3e6834e38e38 100644
-> > --- a/drivers/usb/host/dwc3-sti-glue.c
-> > +++ b/drivers/usb/host/dwc3-sti-glue.c
-> > @@ -6,7 +6,6 @@
-> >   * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMic=
-roelectronics.
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <log.h>
-> >  #include <asm/global_data.h>
-> >  #include <asm/io.h>
-> > diff --git a/drivers/usb/host/ehci-atmel.c b/drivers/usb/host/ehci-atme=
-l.c
-> > index c6d50fd4551a..ee751224463a 100644
-> > --- a/drivers/usb/host/ehci-atmel.c
-> > +++ b/drivers/usb/host/ehci-atmel.c
-> > @@ -5,7 +5,6 @@
-> >   * Written-by: Bo Shen <voice.shen@atmel.com>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <clk.h>
-> >  #include <dm.h>
-> >  #include <log.h>
-> > diff --git a/drivers/usb/host/ehci-exynos.c b/drivers/usb/host/ehci-exy=
-nos.c
-> > index c1cdd4b0889a..1e4a5a0b6f6c 100644
-> > --- a/drivers/usb/host/ehci-exynos.c
-> > +++ b/drivers/usb/host/ehci-exynos.c
-> > @@ -6,7 +6,6 @@
-> >   *     Vivek Gautam <gautam.vivek@samsung.com>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <fdtdec.h>
-> >  #include <log.h>
-> > diff --git a/drivers/usb/host/ehci-fsl.c b/drivers/usb/host/ehci-fsl.c
-> > index 0569dd54fff9..ee3eb065b142 100644
-> > --- a/drivers/usb/host/ehci-fsl.c
-> > +++ b/drivers/usb/host/ehci-fsl.c
-> > @@ -7,7 +7,6 @@
-> >   * Author: Tor Krill tor@excito.com
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <env.h>
-> >  #include <log.h>
-> >  #include <pci.h>
-> > diff --git a/drivers/usb/host/ehci-generic.c b/drivers/usb/host/ehci-ge=
-neric.c
-> > index 936e30438d9f..23c3ed25554f 100644
-> > --- a/drivers/usb/host/ehci-generic.c
-> > +++ b/drivers/usb/host/ehci-generic.c
-> > @@ -3,7 +3,6 @@
-> >   * Copyright (C) 2015 Alexey Brodkin <abrodkin@synopsys.com>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <clk.h>
-> >  #include <log.h>
-> >  #include <dm/device_compat.h>
-> > diff --git a/drivers/usb/host/ehci-hcd.c b/drivers/usb/host/ehci-hcd.c
-> > index 9839aa17492d..7d5519c65a9e 100644
-> > --- a/drivers/usb/host/ehci-hcd.c
-> > +++ b/drivers/usb/host/ehci-hcd.c
-> > @@ -6,7 +6,6 @@
-> >   *
-> >   * All rights reserved.
-> >   */
-> > -#include <common.h>
-> >  #include <cpu_func.h>
-> >  #include <dm.h>
-> >  #include <errno.h>
-> > diff --git a/drivers/usb/host/ehci-marvell.c b/drivers/usb/host/ehci-ma=
-rvell.c
-> > index 6093c8fb0b68..ca0ab57d49c2 100644
-> > --- a/drivers/usb/host/ehci-marvell.c
-> > +++ b/drivers/usb/host/ehci-marvell.c
-> > @@ -5,7 +5,6 @@
-> >   * Written-by: Prafulla Wadaskar <prafulla@marvell.com>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <log.h>
-> >  #include <asm/global_data.h>
-> >  #include <asm/io.h>
-> > diff --git a/drivers/usb/host/ehci-msm.c b/drivers/usb/host/ehci-msm.c
-> > index 98fe7bc3bcb1..a081f71b187d 100644
-> > --- a/drivers/usb/host/ehci-msm.c
-> > +++ b/drivers/usb/host/ehci-msm.c
-> > @@ -7,7 +7,6 @@
-> >   * Based on Linux driver
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <dm/lists.h>
-> >  #include <errno.h>
-> > diff --git a/drivers/usb/host/ehci-mx5.c b/drivers/usb/host/ehci-mx5.c
-> > index c11279867c7c..fb912654097e 100644
-> > --- a/drivers/usb/host/ehci-mx5.c
-> > +++ b/drivers/usb/host/ehci-mx5.c
-> > @@ -4,7 +4,6 @@
-> >   * Copyright (C) 2010 Freescale Semiconductor, Inc.
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <log.h>
-> >  #include <usb.h>
-> >  #include <errno.h>
-> > diff --git a/drivers/usb/host/ehci-mx6.c b/drivers/usb/host/ehci-mx6.c
-> > index a35fcca43a23..31cd8a50f4a2 100644
-> > --- a/drivers/usb/host/ehci-mx6.c
-> > +++ b/drivers/usb/host/ehci-mx6.c
-> > @@ -4,7 +4,6 @@
-> >   * Copyright (C) 2010 Freescale Semiconductor, Inc.
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <clk.h>
-> >  #include <log.h>
-> >  #include <usb.h>
-> > diff --git a/drivers/usb/host/ehci-mxs.c b/drivers/usb/host/ehci-mxs.c
-> > index ddf7cc2d00a7..95af5c9254cb 100644
-> > --- a/drivers/usb/host/ehci-mxs.c
-> > +++ b/drivers/usb/host/ehci-mxs.c
-> > @@ -6,7 +6,6 @@
-> >   * on behalf of DENX Software Engineering GmbH
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <asm/io.h>
-> >  #include <asm/arch/imx-regs.h>
-> >  #include <errno.h>
-> > diff --git a/drivers/usb/host/ehci-npcm.c b/drivers/usb/host/ehci-npcm.c
-> > index 357a5614edb7..d2a9965b4b4f 100644
-> > --- a/drivers/usb/host/ehci-npcm.c
-> > +++ b/drivers/usb/host/ehci-npcm.c
-> > @@ -3,7 +3,6 @@
-> >   * Copyright (c) 2021 Nuvoton Technology Corp.
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <generic-phy.h>
-> >  #include <reset.h>
-> > diff --git a/drivers/usb/host/ehci-omap.c b/drivers/usb/host/ehci-omap.c
-> > index 765336a3c42b..a95fcad02131 100644
-> > --- a/drivers/usb/host/ehci-omap.c
-> > +++ b/drivers/usb/host/ehci-omap.c
-> > @@ -10,8 +10,8 @@
-> >   *
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <log.h>
-> > +#include <time.h>
-> >  #include <usb.h>
-> >  #include <linux/delay.h>
-> >  #include <usb/ulpi.h>
-> > diff --git a/drivers/usb/host/ehci-pci.c b/drivers/usb/host/ehci-pci.c
-> > index e98ab312618d..572686580cd5 100644
-> > --- a/drivers/usb/host/ehci-pci.c
-> > +++ b/drivers/usb/host/ehci-pci.c
-> > @@ -4,7 +4,6 @@
-> >   * All rights reserved.
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <errno.h>
-> >  #include <init.h>
-> > diff --git a/drivers/usb/host/ehci-tegra.c b/drivers/usb/host/ehci-tegr=
-a.c
-> > index 2cf16256703d..343893b9f19a 100644
-> > --- a/drivers/usb/host/ehci-tegra.c
-> > +++ b/drivers/usb/host/ehci-tegra.c
-> > @@ -5,7 +5,6 @@
-> >   * Copyright (c) 2013 Lucas Stach
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <log.h>
-> >  #include <linux/delay.h>
-> > diff --git a/drivers/usb/host/ehci-vf.c b/drivers/usb/host/ehci-vf.c
-> > index 648e136447d9..5afe28ea3033 100644
-> > --- a/drivers/usb/host/ehci-vf.c
-> > +++ b/drivers/usb/host/ehci-vf.c
-> > @@ -6,7 +6,6 @@
-> >   * Based on ehci-mx6 driver
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <log.h>
-> >  #include <usb.h>
-> > diff --git a/drivers/usb/host/ehci-zynq.c b/drivers/usb/host/ehci-zynq.c
-> > index f7e458cb15a2..dfaff5c60f4e 100644
-> > --- a/drivers/usb/host/ehci-zynq.c
-> > +++ b/drivers/usb/host/ehci-zynq.c
-> > @@ -5,7 +5,6 @@
-> >   * USB Low level initialization(Specific to zynq)
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <usb.h>
-> >  #include <asm/arch/hardware.h>
-> > diff --git a/drivers/usb/host/ohci-at91.c b/drivers/usb/host/ohci-at91.c
-> > index 9b955c1bd678..b170f26e6c6a 100644
-> > --- a/drivers/usb/host/ohci-at91.c
-> > +++ b/drivers/usb/host/ohci-at91.c
-> > @@ -4,7 +4,6 @@
-> >   * DENX Software Engineering <mk@denx.de>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <asm/arch/clk.h>
-> >
-> >  int usb_cpu_init(void)
-> > diff --git a/drivers/usb/host/ohci-da8xx.c b/drivers/usb/host/ohci-da8x=
-x.c
-> > index d3d73d238442..d321d147c2f9 100644
-> > --- a/drivers/usb/host/ohci-da8xx.c
-> > +++ b/drivers/usb/host/ohci-da8xx.c
-> > @@ -3,7 +3,6 @@
-> >   * Copyright (C) 2012 Sughosh Ganu <urwithsughosh@gmail.com>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <malloc.h>
-> >  #include <asm/io.h>
-> >  #include <clk.h>
-> > diff --git a/drivers/usb/host/ohci-generic.c b/drivers/usb/host/ohci-ge=
-neric.c
-> > index ceed1911a95a..f1325cd49534 100644
-> > --- a/drivers/usb/host/ohci-generic.c
-> > +++ b/drivers/usb/host/ohci-generic.c
-> > @@ -3,7 +3,6 @@
-> >   * Copyright (C) 2015 Alexey Brodkin <abrodkin@synopsys.com>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <clk.h>
-> >  #include <dm.h>
-> >  #include <log.h>
-> > diff --git a/drivers/usb/host/ohci-hcd.c b/drivers/usb/host/ohci-hcd.c
-> > index 3f4418198ccd..c020d13c43d2 100644
-> > --- a/drivers/usb/host/ohci-hcd.c
-> > +++ b/drivers/usb/host/ohci-hcd.c
-> > @@ -27,7 +27,7 @@
-> >   *     to activate workaround for bug #41 or this driver will NOT work!
-> >   */
-> >
-> > -#include <common.h>
-> > +#include <config.h>
-> >  #include <cpu_func.h>
-> >  #include <asm/byteorder.h>
-> >  #include <dm.h>
-> > diff --git a/drivers/usb/host/ohci-lpc32xx.c b/drivers/usb/host/ohci-lp=
-c32xx.c
-> > index a04b2961b961..ed04cae7afed 100644
-> > --- a/drivers/usb/host/ohci-lpc32xx.c
-> > +++ b/drivers/usb/host/ohci-lpc32xx.c
-> > @@ -7,7 +7,6 @@
-> >   * Copyright (c) 2015 Tyco Fire Protection Products.
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <errno.h>
-> >  #include <init.h>
-> > diff --git a/drivers/usb/host/ohci-npcm.c b/drivers/usb/host/ohci-npcm.c
-> > index 9e1d52988099..ffeb6bc206a8 100644
-> > --- a/drivers/usb/host/ohci-npcm.c
-> > +++ b/drivers/usb/host/ohci-npcm.c
-> > @@ -3,7 +3,6 @@
-> >   * Copyright (c) 2021 Nuvoton Technology Corp.
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <generic-phy.h>
-> >  #include <reset.h>
-> > diff --git a/drivers/usb/host/ohci-pci.c b/drivers/usb/host/ohci-pci.c
-> > index f061aec28966..f10f10924205 100644
-> > --- a/drivers/usb/host/ohci-pci.c
-> > +++ b/drivers/usb/host/ohci-pci.c
-> > @@ -5,7 +5,6 @@
-> >   *
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <errno.h>
-> >  #include <pci.h>
-> > diff --git a/drivers/usb/host/r8a66597-hcd.c b/drivers/usb/host/r8a6659=
-7-hcd.c
-> > index 3ccbc16da379..f0b18bffba41 100644
-> > --- a/drivers/usb/host/r8a66597-hcd.c
-> > +++ b/drivers/usb/host/r8a66597-hcd.c
-> > @@ -5,7 +5,6 @@
-> >   * Copyright (C) 2008  Yoshihiro Shimoda <shimoda.yoshihiro@renesas.co=
-m>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <console.h>
-> >  #include <dm.h>
-> >  #include <log.h>
-> > diff --git a/drivers/usb/host/usb-sandbox.c b/drivers/usb/host/usb-sand=
-box.c
-> > index 3d4f8d653b5d..e26f0b292ed5 100644
-> > --- a/drivers/usb/host/usb-sandbox.c
-> > +++ b/drivers/usb/host/usb-sandbox.c
-> > @@ -4,7 +4,6 @@
-> >   * Written by Simon Glass <sjg@chromium.org>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <log.h>
-> >  #include <usb.h>
-> > diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclas=
-s.c
-> > index a1cd0ad2d669..cd3a07e4c374 100644
-> > --- a/drivers/usb/host/usb-uclass.c
-> > +++ b/drivers/usb/host/usb-uclass.c
-> > @@ -8,7 +8,6 @@
-> >
-> >  #define LOG_CATEGORY UCLASS_USB
-> >
-> > -#include <common.h>
-> >  #include <bootdev.h>
-> >  #include <dm.h>
-> >  #include <errno.h>
-> > diff --git a/drivers/usb/host/usb_bootdev.c b/drivers/usb/host/usb_boot=
-dev.c
-> > index 7fa1c601dff5..362b46dc466e 100644
-> > --- a/drivers/usb/host/usb_bootdev.c
-> > +++ b/drivers/usb/host/usb_bootdev.c
-> > @@ -6,7 +6,6 @@
-> >   * Written by Simon Glass <sjg@chromium.org>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <bootdev.h>
-> >  #include <dm.h>
-> >  #include <usb.h>
-> > diff --git a/drivers/usb/host/xhci-brcm.c b/drivers/usb/host/xhci-brcm.c
-> > index fe17924028cd..2ffad148dea6 100644
-> > --- a/drivers/usb/host/xhci-brcm.c
-> > +++ b/drivers/usb/host/xhci-brcm.c
-> > @@ -3,7 +3,6 @@
-> >   * Copyright (C) 2019 Broadcom.
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <fdtdec.h>
-> >  #include <usb.h>
-> > diff --git a/drivers/usb/host/xhci-dwc3.c b/drivers/usb/host/xhci-dwc3.c
-> > index 6cebe1cc30cb..e3e0ceff43e6 100644
-> > --- a/drivers/usb/host/xhci-dwc3.c
-> > +++ b/drivers/usb/host/xhci-dwc3.c
-> > @@ -8,7 +8,6 @@
-> >   */
-> >
-> >  #include <clk.h>
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <generic-phy.h>
-> >  #include <log.h>
-> > diff --git a/drivers/usb/host/xhci-exynos5.c b/drivers/usb/host/xhci-ex=
-ynos5.c
-> > index 270be934e7fc..6a2d422c4b8e 100644
-> > --- a/drivers/usb/host/xhci-exynos5.c
-> > +++ b/drivers/usb/host/xhci-exynos5.c
-> > @@ -12,7 +12,6 @@
-> >   * exynos5 specific PHY-init sequence.
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <fdtdec.h>
-> >  #include <log.h>
-> > diff --git a/drivers/usb/host/xhci-fsl.c b/drivers/usb/host/xhci-fsl.c
-> > index e67e09e31e4a..3484ae1d21ee 100644
-> > --- a/drivers/usb/host/xhci-fsl.c
-> > +++ b/drivers/usb/host/xhci-fsl.c
-> > @@ -7,7 +7,6 @@
-> >   * Author: Ramneek Mehresh<ramneek.mehresh@freescale.com>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <log.h>
-> >  #include <usb.h>
-> >  #include <linux/errno.h>
-> > diff --git a/drivers/usb/host/xhci-mem.c b/drivers/usb/host/xhci-mem.c
-> > index 72b753062650..045b0fba8128 100644
-> > --- a/drivers/usb/host/xhci-mem.c
-> > +++ b/drivers/usb/host/xhci-mem.c
-> > @@ -13,7 +13,6 @@
-> >   *         Vikas Sajjan <vikas.sajjan@samsung.com>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <cpu_func.h>
-> >  #include <dm.h>
-> >  #include <log.h>
-> > diff --git a/drivers/usb/host/xhci-mtk.c b/drivers/usb/host/xhci-mtk.c
-> > index 63dfb793c6bd..7e288f0575b6 100644
-> > --- a/drivers/usb/host/xhci-mtk.c
-> > +++ b/drivers/usb/host/xhci-mtk.c
-> > @@ -5,7 +5,6 @@
-> >   */
-> >
-> >  #include <clk.h>
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <dm/device_compat.h>
-> >  #include <dm/devres.h>
-> > diff --git a/drivers/usb/host/xhci-mvebu.c b/drivers/usb/host/xhci-mveb=
-u.c
-> > index 46b89de85d1e..1338b1021c64 100644
-> > --- a/drivers/usb/host/xhci-mvebu.c
-> > +++ b/drivers/usb/host/xhci-mvebu.c
-> > @@ -5,7 +5,6 @@
-> >   * MVEBU USB HOST xHCI Controller
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <fdtdec.h>
-> >  #include <log.h>
-> > diff --git a/drivers/usb/host/xhci-omap.c b/drivers/usb/host/xhci-omap.c
-> > index 501129d769a2..66da94c07098 100644
-> > --- a/drivers/usb/host/xhci-omap.c
-> > +++ b/drivers/usb/host/xhci-omap.c
-> > @@ -8,7 +8,6 @@
-> >   * Author: Dan Murphy <dmurphy@ti.com>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <log.h>
-> >  #include <usb.h>
-> >  #include <linux/errno.h>
-> > diff --git a/drivers/usb/host/xhci-pci.c b/drivers/usb/host/xhci-pci.c
-> > index 11f1c02000af..f6972af7963d 100644
-> > --- a/drivers/usb/host/xhci-pci.c
-> > +++ b/drivers/usb/host/xhci-pci.c
-> > @@ -5,7 +5,6 @@
-> >   * All rights reserved.
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <dm/device_compat.h>
-> >  #include <init.h>
-> > diff --git a/drivers/usb/host/xhci-rcar.c b/drivers/usb/host/xhci-rcar.c
-> > index fedcf7869295..38c5928faed5 100644
-> > --- a/drivers/usb/host/xhci-rcar.c
-> > +++ b/drivers/usb/host/xhci-rcar.c
-> > @@ -5,7 +5,6 @@
-> >   * Renesas RCar USB HOST xHCI Controller
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <clk.h>
-> >  #include <dm.h>
-> >  #include <fdtdec.h>
-> > diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
-> > index 910c5f3352b8..1360a5940fa0 100644
-> > --- a/drivers/usb/host/xhci-ring.c
-> > +++ b/drivers/usb/host/xhci-ring.c
-> > @@ -13,7 +13,6 @@
-> >   *         Vikas Sajjan <vikas.sajjan@samsung.com>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <cpu_func.h>
-> >  #include <log.h>
-> >  #include <asm/byteorder.h>
-> > diff --git a/drivers/usb/host/xhci.c b/drivers/usb/host/xhci.c
-> > index 741e186ee05b..d30725d3fcaa 100644
-> > --- a/drivers/usb/host/xhci.c
-> > +++ b/drivers/usb/host/xhci.c
-> > @@ -19,7 +19,6 @@
-> >   * The quirk devices support hasn't been given yet.
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <cpu_func.h>
-> >  #include <dm.h>
-> >  #include <dm/device_compat.h>
-> > diff --git a/drivers/usb/isp1760/isp1760-hcd.c b/drivers/usb/isp1760/is=
-p1760-hcd.c
-> > index a6c4d97aee3f..96c483fb9afa 100644
-> > --- a/drivers/usb/isp1760/isp1760-hcd.c
-> > +++ b/drivers/usb/isp1760/isp1760-hcd.c
-> > @@ -7,7 +7,6 @@
-> >   */
-> >
-> >  #include <hexdump.h>
-> > -#include <common.h>
-> >  #include <asm/cache.h>
-> >  #include <cpu_func.h>
-> >  #include <dm.h>
-> > diff --git a/drivers/usb/isp1760/isp1760-if.c b/drivers/usb/isp1760/isp=
-1760-if.c
-> > index c96ab459f93e..54246b49d5fe 100644
-> > --- a/drivers/usb/isp1760/isp1760-if.c
-> > +++ b/drivers/usb/isp1760/isp1760-if.c
-> > @@ -6,7 +6,6 @@
-> >   * (c) 2007 Sebastian Siewior <bigeasy@linutronix.de>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <dm/device-internal.h>
-> >  #include <dm/device_compat.h>
-> > diff --git a/drivers/usb/isp1760/isp1760-uboot.c b/drivers/usb/isp1760/=
-isp1760-uboot.c
-> > index 203500a4cb7f..8dcb7768a2c2 100644
-> > --- a/drivers/usb/isp1760/isp1760-uboot.c
-> > +++ b/drivers/usb/isp1760/isp1760-uboot.c
-> > @@ -6,7 +6,6 @@
-> >   *
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <dm/device-internal.h>
-> >  #include <dm/device_compat.h>
-> > diff --git a/drivers/usb/mtu3/mtu3_plat.c b/drivers/usb/mtu3/mtu3_plat.c
-> > index b1b22b9357ce..ca86b58dfcd7 100644
-> > --- a/drivers/usb/mtu3/mtu3_plat.c
-> > +++ b/drivers/usb/mtu3/mtu3_plat.c
-> > @@ -5,7 +5,6 @@
-> >   * Author: Chunfeng Yun <chunfeng.yun@mediatek.com>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm/lists.h>
-> >  #include <linux/iopoll.h>
-> >
-> > diff --git a/drivers/usb/musb-new/am35x.c b/drivers/usb/musb-new/am35x.c
-> > index 0a52e09e19f1..42bc816e4f1e 100644
-> > --- a/drivers/usb/musb-new/am35x.c
-> > +++ b/drivers/usb/musb-new/am35x.c
-> > @@ -24,7 +24,6 @@
-> >
-> >  #include <plat/usb.h>
-> >  #else
-> > -#include <common.h>
-> >  #include <asm/omap_musb.h>
-> >  #include <linux/bug.h>
-> >  #include <linux/delay.h>
-> > diff --git a/drivers/usb/musb-new/da8xx.c b/drivers/usb/musb-new/da8xx.c
-> > index 68fc0c36146d..7caf03cc2e14 100644
-> > --- a/drivers/usb/musb-new/da8xx.c
-> > +++ b/drivers/usb/musb-new/da8xx.c
-> > @@ -13,7 +13,6 @@
-> >   *
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <log.h>
-> >  #include <dm/device-internal.h>
-> > diff --git a/drivers/usb/musb-new/mt85xx.c b/drivers/usb/musb-new/mt85x=
-x.c
-> > index 1e632dca0462..14b28bbae6b1 100644
-> > --- a/drivers/usb/musb-new/mt85xx.c
-> > +++ b/drivers/usb/musb-new/mt85xx.c
-> > @@ -9,7 +9,6 @@
-> >   *
-> >   * This file is part of the Inventra Controller Driver for Linux.
-> >   */
-> > -#include <common.h>
-> >  #include <clk.h>
-> >  #include <dm.h>
-> >  #include <dm/device_compat.h>
-> > diff --git a/drivers/usb/musb-new/musb_core.c b/drivers/usb/musb-new/mu=
-sb_core.c
-> > index 00da554982fe..257e7685cfa3 100644
-> > --- a/drivers/usb/musb-new/musb_core.c
-> > +++ b/drivers/usb/musb-new/musb_core.c
-> > @@ -79,7 +79,6 @@
-> >  #include <linux/platform_device.h>
-> >  #include <linux/io.h>
-> >  #else
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <dm/device_compat.h>
-> >  #include <usb.h>
-> > diff --git a/drivers/usb/musb-new/musb_dsps.c b/drivers/usb/musb-new/mu=
-sb_dsps.c
-> > index a8ff7434c9f7..b73f3531ce24 100644
-> > --- a/drivers/usb/musb-new/musb_dsps.c
-> > +++ b/drivers/usb/musb-new/musb_dsps.c
-> > @@ -31,7 +31,6 @@
-> >
-> >  #include <plat/usb.h>
-> >  #else
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <dm/device_compat.h>
-> >  #include <asm/omap_musb.h>
-> > diff --git a/drivers/usb/musb-new/musb_gadget.c b/drivers/usb/musb-new/=
-musb_gadget.c
-> > index c6083963ede9..29e225aa0f11 100644
-> > --- a/drivers/usb/musb-new/musb_gadget.c
-> > +++ b/drivers/usb/musb-new/musb_gadget.c
-> > @@ -22,7 +22,6 @@
-> >  #include <linux/dma-mapping.h>
-> >  #include <linux/slab.h>
-> >  #else
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <dm/device_compat.h>
-> >  #include <linux/bug.h>
-> > diff --git a/drivers/usb/musb-new/musb_gadget_ep0.c b/drivers/usb/musb-=
-new/musb_gadget_ep0.c
-> > index 55ce8de99bb1..63eee31a6b3e 100644
-> > --- a/drivers/usb/musb-new/musb_gadget_ep0.c
-> > +++ b/drivers/usb/musb-new/musb_gadget_ep0.c
-> > @@ -18,7 +18,6 @@
-> >  #include <linux/device.h>
-> >  #include <linux/interrupt.h>
-> >  #else
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <dm/device_compat.h>
-> >  #include <linux/printk.h>
-> > diff --git a/drivers/usb/musb-new/musb_host.c b/drivers/usb/musb-new/mu=
-sb_host.c
-> > index e5905d90d66f..2f2fc7c1359b 100644
-> > --- a/drivers/usb/musb-new/musb_host.c
-> > +++ b/drivers/usb/musb-new/musb_host.c
-> > @@ -21,7 +21,6 @@
-> >  #include <linux/list.h>
-> >  #include <linux/dma-mapping.h>
-> >  #else
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <dm/device_compat.h>
-> >  #include <usb.h>
-> > diff --git a/drivers/usb/musb-new/musb_uboot.c b/drivers/usb/musb-new/m=
-usb_uboot.c
-> > index 7cea9a2ed65c..43ab3245e5c3 100644
-> > --- a/drivers/usb/musb-new/musb_uboot.c
-> > +++ b/drivers/usb/musb-new/musb_uboot.c
-> > @@ -1,4 +1,3 @@
-> > -#include <common.h>
-> >  #include <console.h>
-> >  #include <dm.h>
-> >  #include <malloc.h>
-> > diff --git a/drivers/usb/musb-new/omap2430.c b/drivers/usb/musb-new/oma=
-p2430.c
-> > index 308eff832c9e..c8dd73050b29 100644
-> > --- a/drivers/usb/musb-new/omap2430.c
-> > +++ b/drivers/usb/musb-new/omap2430.c
-> > @@ -8,7 +8,6 @@
-> >   *
-> >   * This file is part of the Inventra Controller Driver for Linux.
-> >   */
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <log.h>
-> >  #include <serial.h>
-> > diff --git a/drivers/usb/musb-new/pic32.c b/drivers/usb/musb-new/pic32.c
-> > index 4ed5e6e90c6c..0b25e5893b3c 100644
-> > --- a/drivers/usb/musb-new/pic32.c
-> > +++ b/drivers/usb/musb-new/pic32.c
-> > @@ -9,7 +9,6 @@
-> >   * Based on the dsps "glue layer" code.
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <asm/global_data.h>
-> >  #include <dm/device_compat.h>
-> > diff --git a/drivers/usb/musb-new/sunxi.c b/drivers/usb/musb-new/sunxi.c
-> > index 778b01b22ea7..b577ba418780 100644
-> > --- a/drivers/usb/musb-new/sunxi.c
-> > +++ b/drivers/usb/musb-new/sunxi.c
-> > @@ -15,7 +15,6 @@
-> >   *
-> >   * This file is part of the Inventra Controller Driver for Linux.
-> >   */
-> > -#include <common.h>
-> >  #include <clk.h>
-> >  #include <dm.h>
-> >  #include <generic-phy.h>
-> > diff --git a/drivers/usb/musb-new/ti-musb.c b/drivers/usb/musb-new/ti-m=
-usb.c
-> > index ed5e5194d8c9..76e8b88369e3 100644
-> > --- a/drivers/usb/musb-new/ti-musb.c
-> > +++ b/drivers/usb/musb-new/ti-musb.c
-> > @@ -5,7 +5,6 @@
-> >   * (C) Copyright 2016
-> >   *     Texas Instruments Incorporated, <www.ti.com>
-> >   */
-> > -#include <common.h>
-> >  #include <command.h>
-> >  #include <console.h>
-> >  #include <dm.h>
-> > diff --git a/drivers/usb/musb-new/ux500.c b/drivers/usb/musb-new/ux500.c
-> > index 57c7d5630d37..6b4ef3c85782 100644
-> > --- a/drivers/usb/musb-new/ux500.c
-> > +++ b/drivers/usb/musb-new/ux500.c
-> > @@ -1,7 +1,6 @@
-> >  // SPDX-License-Identifier: GPL-2.0+
-> >  /* Copyright (C) 2019 Stephan Gerhold */
-> >
-> > -#include <common.h>
-> >  #include <dm.h>
-> >  #include <generic-phy.h>
-> >  #include <dm/device_compat.h>
-> > diff --git a/drivers/usb/musb/am35x.c b/drivers/usb/musb/am35x.c
-> > index f945f1f5e2c5..2c23043d40e9 100644
-> > --- a/drivers/usb/musb/am35x.c
-> > +++ b/drivers/usb/musb/am35x.c
-> > @@ -9,7 +9,6 @@
-> >   * Copyright (c) 2010 Texas Instruments Incorporated
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <linux/delay.h>
-> >
-> >  #include "am35x.h"
-> > diff --git a/drivers/usb/musb/musb_core.c b/drivers/usb/musb/musb_core.c
-> > index 9651f074a49d..260552e4dbd4 100644
-> > --- a/drivers/usb/musb/musb_core.c
-> > +++ b/drivers/usb/musb/musb_core.c
-> > @@ -8,7 +8,6 @@
-> >   * Author: Thomas Abraham t-abraham@ti.com, Texas Instruments
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <linux/bitops.h>
-> >
-> >  #include "musb_core.h"
-> > diff --git a/drivers/usb/musb/musb_hcd.c b/drivers/usb/musb/musb_hcd.c
-> > index 4676cabae0aa..c95c6a482812 100644
-> > --- a/drivers/usb/musb/musb_hcd.c
-> > +++ b/drivers/usb/musb/musb_hcd.c
-> > @@ -7,7 +7,6 @@
-> >   * Author: Thomas Abraham t-abraham@ti.com, Texas Instruments
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <log.h>
-> >  #include <usb.h>
-> >  #include <linux/delay.h>
-> > diff --git a/drivers/usb/musb/musb_udc.c b/drivers/usb/musb/musb_udc.c
-> > index 2ffcb7caaad7..696855ee3a61 100644
-> > --- a/drivers/usb/musb/musb_udc.c
-> > +++ b/drivers/usb/musb/musb_udc.c
-> > @@ -37,7 +37,6 @@
-> >   * -------------------------------------------------------------------=
-------
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <hang.h>
-> >  #include <serial.h>
-> >  #include <usbdevice.h>
-> > diff --git a/drivers/usb/phy/rockchip_usb2_phy.c b/drivers/usb/phy/rock=
-chip_usb2_phy.c
-> > index c46ad86d3d65..9ec5b2d172b8 100644
-> > --- a/drivers/usb/phy/rockchip_usb2_phy.c
-> > +++ b/drivers/usb/phy/rockchip_usb2_phy.c
-> > @@ -3,7 +3,6 @@
-> >   * Copyright 2016 Rockchip Electronics Co., Ltd
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <hang.h>
-> >  #include <log.h>
-> >  #include <asm/global_data.h>
-> > diff --git a/drivers/usb/ulpi/omap-ulpi-viewport.c b/drivers/usb/ulpi/o=
-map-ulpi-viewport.c
-> > index 1b01cd4c559f..6f0c3eb154ee 100644
-> > --- a/drivers/usb/ulpi/omap-ulpi-viewport.c
-> > +++ b/drivers/usb/ulpi/omap-ulpi-viewport.c
-> > @@ -7,7 +7,6 @@
-> >   * Author: Govindraj R <govindraj.raja@ti.com>
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <log.h>
-> >  #include <asm/io.h>
-> >  #include <linux/delay.h>
-> > diff --git a/drivers/usb/ulpi/ulpi-viewport.c b/drivers/usb/ulpi/ulpi-v=
-iewport.c
-> > index 55a62808384d..bac20a02f018 100644
-> > --- a/drivers/usb/ulpi/ulpi-viewport.c
-> > +++ b/drivers/usb/ulpi/ulpi-viewport.c
-> > @@ -13,7 +13,6 @@
-> >   * Copyright (C) 2011 Google, Inc.
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <asm/io.h>
-> >  #include <linux/delay.h>
-> >  #include <usb/ulpi.h>
-> > diff --git a/drivers/usb/ulpi/ulpi.c b/drivers/usb/ulpi/ulpi.c
-> > index b5d2c2c2d1c3..128adcbde134 100644
-> > --- a/drivers/usb/ulpi/ulpi.c
-> > +++ b/drivers/usb/ulpi/ulpi.c
-> > @@ -19,7 +19,6 @@
-> >   *   Freescale Semiconductors
-> >   */
-> >
-> > -#include <common.h>
-> >  #include <exports.h>
-> >  #include <log.h>
-> >  #include <linux/delay.h>
-> > --
-> > 2.34.1
-> >
->=20
-> There is a warning for RISC-V maybe to do with having only the generic
-> find_next_zero_bit and not an optimized one in
-> arch/riscv/include/asm/bitops.h:
->=20
->   CC      drivers/usb/cdns3/gadget.o
-> In file included from drivers/usb/cdns3/gadget.c:70:
-> include/linux/bitmap.h: In function =E2=80=98bitmap_find_next_zero_area=
-=E2=80=99:
-> include/linux/bitmap.h:170:17: warning: implicit declaration of
-> function =E2=80=98find_next_zero_bit=E2=80=99; did you mean =E2=80=98find=
-_next_bit=E2=80=99?
-> [-Wimplicit-function-declaration]
->   170 |         index =3D find_next_zero_bit(map, size, start);
->       |                 ^~~~~~~~~~~~~~~~~~
->       |                 find_next_bit
->   CC      drivers/usb/cdns3/ep0.o
-> In file included from include/linux/usb/composite.h:26,
->                  from drivers/usb/cdns3/ep0.c:19:
-> include/linux/bitmap.h: In function =E2=80=98bitmap_find_next_zero_area=
-=E2=80=99:
-> include/linux/bitmap.h:170:17: warning: implicit declaration of
-> function =E2=80=98find_next_zero_bit=E2=80=99; did you mean =E2=80=98find=
-_next_bit=E2=80=99?
-> [-Wimplicit-function-declaration]
->   170 |         index =3D find_next_zero_bit(map, size, start);
->       |                 ^~~~~~~~~~~~~~~~~~
->       |                 find_next_bit
->   CC      drivers/usb/cdns3/host.o
->=20
-> I would guess that for architectures that have optimized versions
-> there is no implicit declaration. This was HEAD (2f1e76bc) with patch
-> series 405474 "Add Starfive JH7110 Cadence USB driver" applied and
-> starfive_visionfive2_defconfig.  -E
+And the usb3 related nodes currently part of the SoC u-boot.dtsi is 
+updated to match the soc/board DT that is targeted for v6.10 in order to
+avoid breaking changes in future when dts/upstream gets updated.
 
-I suspect you missed one of the earlier series, all platforms compile
-without warnings in the end.
+Following targets has not been migrated to use OF_UPSTREAM:
+- anbernic-rgxx3-rk3566: Multi device target
+- generic-rk3568: Generic target only meant for U-Boot use
+- generic-rk3588: Generic target only meant for U-Boot use
+- nanopi-m4-2gb-rk3399: DDR3 variant of nanopi-m4-rk3399 (LPDDR3)
+- pinetab2-rk3566: Merged in v6.9-rc1
+- toybrick-rk3588: Merged in v6.9-rc1
 
---=20
-Tom
+This series depends on the following series:
+- rockchip: rk3399: Fix loading FIT from SD-card when booting from eMMC [1]
+- rockchip: rk3399: Sync DT with v6.8 and update defconfigs [2]
 
---RQWwyTXcCaPj0D5I
-Content-Type: application/pgp-signature; name="signature.asc"
+A copy of this series and its depends can also be found at [3].
 
------BEGIN PGP SIGNATURE-----
+[1] https://patchwork.ozlabs.org/cover/1929673/
+[2] https://patchwork.ozlabs.org/cover/1930271/
+[3] https://github.com/Kwiboo/u-boot-rockchip/commits/rk3xxx-of-upstream-v1
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY2f44ACgkQFHw5/5Y0
-tywf0gv/WpgTTsw9R33aKFPNJ68mRRaNj7ezVbjh4uj4qtsznzpnc+HOD/zDErDD
-zmeAjJNaym8Ewt7jnbmF8pv5h4SOokLFMElCTJeWBbvyefjQ4qMXgo/QES1OHrFI
-Ac7CVxYZlEZACkkHv1uZHgYL/Kqv3QQ2utFX7BHvx3oB63AtZ0woCfhMgIIOXOTx
-7n2sTZF7w/lKiZ0ynWDnSJJzz9SGu+upg2cIZZEO5j+XfwS/J3vIfe5z7557BGja
-NDgrip3wdnn9DFmJ49F8ZqmfQZly9BWlvCvVDbZASys/WxI/hWHOSlgta7nKkPUQ
-FiIWFQpa3QymWloV2WCtuajmaoVkEPm36rRIK3PM5sG++Ioxva5+7KZj4ADYiFex
-9uno4/spksuL4+53taomyCzMxiRm2K2d9Ikh67WdCf/2u2C3ukiixcU1x/guvbGH
-OzQhPxETRAqa8pJAloo8NA7sz9Y8H+NZdBcOqgdkIbEEHMCCpOUvPF7daLPIFZfp
-X42VyuZc
-=lxhD
------END PGP SIGNATURE-----
+Jonas Karlman (16):
+  rockchip: rk3308: Migrate to OF_UPSTREAM
+  rockchip: rk3308: Remove redundant device tree files
+  rockchip: rk3328: Migrate to OF_UPSTREAM
+  rockchip: rk3328: Remove redundant device tree files
+  rockchip: rk3399: Migrate to OF_UPSTREAM
+  rockchip: rk3399: Remove redundant device tree files
+  rockchip: rk356x: Add rk3568-u-boot.dtsi
+  rockchip: rk356x: Migrate to OF_UPSTREAM
+  rockchip: rk356x: Remove redundant device tree files
+  phy: rockchip: usbdp: Find phy-id from the io address
+  phy: rockchip: usbdp: Drop rockchip_u3phy_uboot_init()
+  phy: rockchip: usbdp: Adopt driver to work with upstream DT
+  rockchip: rk3588-rock-5b: Drop usb-typec node from u-boot.dtsi
+  rockchip: rk3588: Update USB3 related nodes in u-boot.dtsi
+  rockchip: rk3588: Migrate to OF_UPSTREAM
+  rockchip: rk3588: Remove redundant device tree files
 
---RQWwyTXcCaPj0D5I--
+ arch/arm/dts/Makefile                         |   84 -
+ arch/arm/dts/rk3308-evb.dts                   |  230 --
+ arch/arm/dts/rk3308-roc-cc.dts                |  190 -
+ arch/arm/dts/rk3308-rock-pi-s.dts             |  314 --
+ arch/arm/dts/rk3308.dtsi                      | 1888 ---------
+ arch/arm/dts/rk3328-evb.dts                   |  289 --
+ arch/arm/dts/rk3328-nanopi-r2c-plus.dts       |   33 -
+ arch/arm/dts/rk3328-nanopi-r2c.dts            |   40 -
+ arch/arm/dts/rk3328-nanopi-r2s.dts            |  410 --
+ arch/arm/dts/rk3328-orangepi-r1-plus-lts.dts  |   42 -
+ arch/arm/dts/rk3328-orangepi-r1-plus.dts      |  374 --
+ arch/arm/dts/rk3328-roc-cc.dts                |  384 --
+ arch/arm/dts/rk3328-rock-pi-e.dts             |  445 ---
+ arch/arm/dts/rk3328-rock64.dts                |  394 --
+ arch/arm/dts/rk3328.dtsi                      | 1944 ----------
+ arch/arm/dts/rk3399-eaidk-610.dts             |  940 -----
+ arch/arm/dts/rk3399-evb.dts                   |  485 ---
+ arch/arm/dts/rk3399-ficus.dts                 |  174 -
+ arch/arm/dts/rk3399-firefly.dts               |  944 -----
+ arch/arm/dts/rk3399-gru-bob.dts               |   95 -
+ arch/arm/dts/rk3399-gru-chromebook.dtsi       |  590 ---
+ arch/arm/dts/rk3399-gru-kevin.dts             |  328 --
+ arch/arm/dts/rk3399-gru.dtsi                  |  865 -----
+ arch/arm/dts/rk3399-khadas-edge-captain.dts   |   31 -
+ arch/arm/dts/rk3399-khadas-edge-v.dts         |   31 -
+ arch/arm/dts/rk3399-khadas-edge.dts           |   13 -
+ arch/arm/dts/rk3399-khadas-edge.dtsi          |  837 ----
+ arch/arm/dts/rk3399-leez-p710.dts             |  653 ----
+ arch/arm/dts/rk3399-nanopc-t4.dts             |  137 -
+ arch/arm/dts/rk3399-nanopi-m4.dts             |   66 -
+ arch/arm/dts/rk3399-nanopi-m4b.dts            |   52 -
+ arch/arm/dts/rk3399-nanopi-neo4.dts           |   50 -
+ arch/arm/dts/rk3399-nanopi-r4s.dts            |  133 -
+ arch/arm/dts/rk3399-nanopi4.dtsi              |  762 ----
+ arch/arm/dts/rk3399-op1-opp.dtsi              |  166 -
+ arch/arm/dts/rk3399-opp.dtsi                  |  133 -
+ arch/arm/dts/rk3399-orangepi.dts              |  896 -----
+ arch/arm/dts/rk3399-pinebook-pro.dts          | 1111 ------
+ arch/arm/dts/rk3399-pinephone-pro.dts         |  621 ---
+ arch/arm/dts/rk3399-puma-haikou.dts           |  306 --
+ arch/arm/dts/rk3399-puma.dtsi                 |  532 ---
+ arch/arm/dts/rk3399-roc-pc-mezzanine.dts      |  111 -
+ arch/arm/dts/rk3399-roc-pc.dts                |   12 -
+ arch/arm/dts/rk3399-roc-pc.dtsi               |  844 ----
+ arch/arm/dts/rk3399-rock-4c-plus.dts          |  709 ----
+ arch/arm/dts/rk3399-rock-4se.dts              |   65 -
+ arch/arm/dts/rk3399-rock-pi-4.dtsi            |  792 ----
+ arch/arm/dts/rk3399-rock-pi-4a.dts            |   24 -
+ arch/arm/dts/rk3399-rock-pi-4c.dts            |   80 -
+ arch/arm/dts/rk3399-rock960.dts               |  156 -
+ arch/arm/dts/rk3399-rock960.dtsi              |  673 ----
+ arch/arm/dts/rk3399-rockpro64.dts             |   30 -
+ arch/arm/dts/rk3399-rockpro64.dtsi            |  956 -----
+ arch/arm/dts/rk3399-t-opp.dtsi                |  114 -
+ arch/arm/dts/rk3399.dtsi                      | 2945 --------------
+ arch/arm/dts/rk3399pro-rock-pi-n10.dts        |   22 -
+ arch/arm/dts/rk3399pro-vmarc-som.dtsi         |  477 ---
+ arch/arm/dts/rk3399pro.dtsi                   |   22 -
+ arch/arm/dts/rk3566-anbernic-rgxx3.dtsi       |  788 ----
+ arch/arm/dts/rk3566-quartz64-a.dts            |  838 ----
+ arch/arm/dts/rk3566-quartz64-b.dts            |  737 ----
+ arch/arm/dts/rk3566-radxa-cm3-io.dts          |  281 --
+ arch/arm/dts/rk3566-radxa-cm3.dtsi            |  425 --
+ arch/arm/dts/rk3566-soquartz-blade.dts        |  198 -
+ arch/arm/dts/rk3566-soquartz-cm4.dts          |  196 -
+ arch/arm/dts/rk3566-soquartz-model-a.dts      |  236 --
+ arch/arm/dts/rk3566-soquartz.dtsi             |  684 ----
+ arch/arm/dts/rk3566.dtsi                      |   35 -
+ arch/arm/dts/rk3568-bpi-r2-pro.dts            |  852 ----
+ arch/arm/dts/rk3568-evb.dts                   |  689 ----
+ arch/arm/dts/rk3568-lubancat-2.dts            |  730 ----
+ arch/arm/dts/rk3568-nanopi-r5c.dts            |  112 -
+ arch/arm/dts/rk3568-nanopi-r5s.dts            |  136 -
+ arch/arm/dts/rk3568-nanopi-r5s.dtsi           |  587 ---
+ arch/arm/dts/rk3568-odroid-m1.dts             |  741 ----
+ arch/arm/dts/rk3568-pinctrl.dtsi              | 3214 ---------------
+ arch/arm/dts/rk3568-radxa-cm3i.dtsi           |  412 --
+ arch/arm/dts/rk3568-radxa-e25.dts             |  236 --
+ arch/arm/dts/rk3568-rock-3a.dts               |  859 ----
+ arch/arm/dts/rk3568-u-boot.dtsi               |    3 +
+ arch/arm/dts/rk3568.dtsi                      |  267 --
+ arch/arm/dts/rk356x.dtsi                      | 1886 ---------
+ arch/arm/dts/rk3588-coolpi-cm5-evb.dts        |  216 --
+ arch/arm/dts/rk3588-coolpi-cm5.dtsi           |  649 ----
+ arch/arm/dts/rk3588-edgeble-neu6a-io.dts      |   23 -
+ arch/arm/dts/rk3588-edgeble-neu6a.dtsi        |   31 -
+ arch/arm/dts/rk3588-edgeble-neu6b-io.dts      |   89 -
+ arch/arm/dts/rk3588-edgeble-neu6b.dtsi        |  389 --
+ arch/arm/dts/rk3588-evb1-v10.dts              | 1080 ------
+ arch/arm/dts/rk3588-generic-u-boot.dtsi       |    4 -
+ arch/arm/dts/rk3588-jaguar.dts                |  803 ----
+ arch/arm/dts/rk3588-nanopc-t6.dts             |  916 -----
+ arch/arm/dts/rk3588-orangepi-5-plus.dts       |  847 ----
+ arch/arm/dts/rk3588-pinctrl.dtsi              |  516 ---
+ arch/arm/dts/rk3588-quartzpro64.dts           | 1137 ------
+ arch/arm/dts/rk3588-rock-5b-u-boot.dtsi       |  115 +-
+ arch/arm/dts/rk3588-rock-5b.dts               |  776 ----
+ arch/arm/dts/rk3588-turing-rk1.dts            |   21 -
+ arch/arm/dts/rk3588-turing-rk1.dtsi           |  612 ---
+ arch/arm/dts/rk3588-u-boot.dtsi               |   36 +-
+ arch/arm/dts/rk3588.dtsi                      |  341 --
+ arch/arm/dts/rk3588j.dtsi                     |    7 -
+ arch/arm/dts/rk3588s-coolpi-4b.dts            |  812 ----
+ arch/arm/dts/rk3588s-orangepi-5.dts           |  667 ----
+ arch/arm/dts/rk3588s-pinctrl.dtsi             | 3447 -----------------
+ arch/arm/dts/rk3588s-rock-5a.dts              |  744 ----
+ arch/arm/dts/rk3588s-u-boot.dtsi              |   34 +-
+ arch/arm/dts/rk3588s.dtsi                     | 2485 ------------
+ arch/arm/mach-rockchip/Kconfig                |    5 +
+ configs/anbernic-rgxx3-rk3566_defconfig       |    1 +
+ configs/bpi-r2-pro-rk3568_defconfig           |    2 +-
+ configs/chromebook_bob_defconfig              |    2 +-
+ configs/chromebook_kevin_defconfig            |    2 +-
+ configs/coolpi-4b-rk3588s_defconfig           |    2 +-
+ configs/coolpi-cm5-evb-rk3588_defconfig       |    2 +-
+ configs/eaidk-610-rk3399_defconfig            |    2 +-
+ configs/evb-rk3308_defconfig                  |    2 +-
+ configs/evb-rk3328_defconfig                  |    2 +-
+ configs/evb-rk3399_defconfig                  |    2 +-
+ configs/evb-rk3568_defconfig                  |    4 +-
+ configs/evb-rk3588_defconfig                  |    2 +-
+ configs/ficus-rk3399_defconfig                |    2 +-
+ configs/firefly-rk3399_defconfig              |    2 +-
+ configs/generic-rk3568_defconfig              |    1 +
+ configs/generic-rk3588_defconfig              |    1 +
+ configs/jaguar-rk3588_defconfig               |    2 +-
+ configs/khadas-edge-captain-rk3399_defconfig  |    2 +-
+ configs/khadas-edge-rk3399_defconfig          |    2 +-
+ configs/khadas-edge-v-rk3399_defconfig        |    2 +-
+ configs/leez-rk3399_defconfig                 |    2 +-
+ configs/lubancat-2-rk3568_defconfig           |    2 +-
+ configs/nanopc-t4-rk3399_defconfig            |    2 +-
+ configs/nanopc-t6-rk3588_defconfig            |    2 +-
+ configs/nanopi-m4-2gb-rk3399_defconfig        |    1 +
+ configs/nanopi-m4-rk3399_defconfig            |    2 +-
+ configs/nanopi-m4b-rk3399_defconfig           |    2 +-
+ configs/nanopi-neo4-rk3399_defconfig          |    2 +-
+ configs/nanopi-r2c-plus-rk3328_defconfig      |    2 +-
+ configs/nanopi-r2c-rk3328_defconfig           |    2 +-
+ configs/nanopi-r2s-rk3328_defconfig           |    2 +-
+ configs/nanopi-r4s-rk3399_defconfig           |    2 +-
+ configs/nanopi-r5c-rk3568_defconfig           |    2 +-
+ configs/nanopi-r5s-rk3568_defconfig           |    2 +-
+ configs/neu6a-io-rk3588_defconfig             |    2 +-
+ configs/neu6b-io-rk3588_defconfig             |    2 +-
+ configs/odroid-m1-rk3568_defconfig            |    2 +-
+ configs/orangepi-5-plus-rk3588_defconfig      |    2 +-
+ configs/orangepi-5-rk3588s_defconfig          |    2 +-
+ configs/orangepi-r1-plus-lts-rk3328_defconfig |    2 +-
+ configs/orangepi-r1-plus-rk3328_defconfig     |    2 +-
+ configs/orangepi-rk3399_defconfig             |    2 +-
+ configs/pinebook-pro-rk3399_defconfig         |    2 +-
+ configs/pinephone-pro-rk3399_defconfig        |    2 +-
+ configs/pinetab2-rk3566_defconfig             |    1 +
+ configs/puma-rk3399_defconfig                 |    2 +-
+ configs/quartz64-a-rk3566_defconfig           |    2 +-
+ configs/quartz64-b-rk3566_defconfig           |    2 +-
+ configs/quartzpro64-rk3588_defconfig          |    2 +-
+ configs/radxa-cm3-io-rk3566_defconfig         |    2 +-
+ configs/radxa-e25-rk3568_defconfig            |    2 +-
+ configs/roc-cc-rk3308_defconfig               |    2 +-
+ configs/roc-cc-rk3328_defconfig               |    2 +-
+ configs/roc-pc-mezzanine-rk3399_defconfig     |    2 +-
+ configs/roc-pc-rk3399_defconfig               |    2 +-
+ configs/rock-3a-rk3568_defconfig              |    2 +-
+ configs/rock-4c-plus-rk3399_defconfig         |    2 +-
+ configs/rock-4se-rk3399_defconfig             |    2 +-
+ configs/rock-pi-4-rk3399_defconfig            |    2 +-
+ configs/rock-pi-4c-rk3399_defconfig           |    2 +-
+ configs/rock-pi-e-rk3328_defconfig            |    2 +-
+ configs/rock-pi-n10-rk3399pro_defconfig       |    2 +-
+ configs/rock-pi-s-rk3308_defconfig            |    2 +-
+ configs/rock5a-rk3588s_defconfig              |    2 +-
+ configs/rock5b-rk3588_defconfig               |    2 +-
+ configs/rock64-rk3328_defconfig               |    2 +-
+ configs/rock960-rk3399_defconfig              |    2 +-
+ configs/rockpro64-rk3399_defconfig            |    2 +-
+ configs/soquartz-blade-rk3566_defconfig       |    2 +-
+ configs/soquartz-cm4-rk3566_defconfig         |    2 +-
+ configs/soquartz-model-a-rk3566_defconfig     |    2 +-
+ configs/toybrick-rk3588_defconfig             |    1 +
+ configs/turing-rk1-rk3588_defconfig           |    2 +-
+ .../clock/rockchip,rk3399-dmc.txt             |   42 -
+ drivers/phy/rockchip/phy-rockchip-usbdp.c     |  126 +-
+ include/dt-bindings/clock/rk3308-cru.h        |  387 --
+ include/dt-bindings/clock/rk3328-cru.h        |  393 --
+ include/dt-bindings/clock/rk3399-cru.h        |  751 ----
+ include/dt-bindings/clock/rk3568-cru.h        |  926 -----
+ .../dt-bindings/clock/rockchip,rk3588-cru.h   |  766 ----
+ include/dt-bindings/power/rk3328-power.h      |   19 -
+ include/dt-bindings/power/rk3399-power.h      |   53 -
+ include/dt-bindings/power/rk3568-power.h      |   32 -
+ include/dt-bindings/power/rk3588-power.h      |   69 -
+ .../dt-bindings/reset/rockchip,rk3588-cru.h   |  754 ----
+ 194 files changed, 161 insertions(+), 62287 deletions(-)
+ delete mode 100644 arch/arm/dts/rk3308-evb.dts
+ delete mode 100644 arch/arm/dts/rk3308-roc-cc.dts
+ delete mode 100644 arch/arm/dts/rk3308-rock-pi-s.dts
+ delete mode 100644 arch/arm/dts/rk3308.dtsi
+ delete mode 100644 arch/arm/dts/rk3328-evb.dts
+ delete mode 100644 arch/arm/dts/rk3328-nanopi-r2c-plus.dts
+ delete mode 100644 arch/arm/dts/rk3328-nanopi-r2c.dts
+ delete mode 100644 arch/arm/dts/rk3328-nanopi-r2s.dts
+ delete mode 100644 arch/arm/dts/rk3328-orangepi-r1-plus-lts.dts
+ delete mode 100644 arch/arm/dts/rk3328-orangepi-r1-plus.dts
+ delete mode 100644 arch/arm/dts/rk3328-roc-cc.dts
+ delete mode 100644 arch/arm/dts/rk3328-rock-pi-e.dts
+ delete mode 100644 arch/arm/dts/rk3328-rock64.dts
+ delete mode 100644 arch/arm/dts/rk3328.dtsi
+ delete mode 100644 arch/arm/dts/rk3399-eaidk-610.dts
+ delete mode 100644 arch/arm/dts/rk3399-evb.dts
+ delete mode 100644 arch/arm/dts/rk3399-ficus.dts
+ delete mode 100644 arch/arm/dts/rk3399-firefly.dts
+ delete mode 100644 arch/arm/dts/rk3399-gru-bob.dts
+ delete mode 100644 arch/arm/dts/rk3399-gru-chromebook.dtsi
+ delete mode 100644 arch/arm/dts/rk3399-gru-kevin.dts
+ delete mode 100644 arch/arm/dts/rk3399-gru.dtsi
+ delete mode 100644 arch/arm/dts/rk3399-khadas-edge-captain.dts
+ delete mode 100644 arch/arm/dts/rk3399-khadas-edge-v.dts
+ delete mode 100644 arch/arm/dts/rk3399-khadas-edge.dts
+ delete mode 100644 arch/arm/dts/rk3399-khadas-edge.dtsi
+ delete mode 100644 arch/arm/dts/rk3399-leez-p710.dts
+ delete mode 100644 arch/arm/dts/rk3399-nanopc-t4.dts
+ delete mode 100644 arch/arm/dts/rk3399-nanopi-m4.dts
+ delete mode 100644 arch/arm/dts/rk3399-nanopi-m4b.dts
+ delete mode 100644 arch/arm/dts/rk3399-nanopi-neo4.dts
+ delete mode 100644 arch/arm/dts/rk3399-nanopi-r4s.dts
+ delete mode 100644 arch/arm/dts/rk3399-nanopi4.dtsi
+ delete mode 100644 arch/arm/dts/rk3399-op1-opp.dtsi
+ delete mode 100644 arch/arm/dts/rk3399-opp.dtsi
+ delete mode 100644 arch/arm/dts/rk3399-orangepi.dts
+ delete mode 100644 arch/arm/dts/rk3399-pinebook-pro.dts
+ delete mode 100644 arch/arm/dts/rk3399-pinephone-pro.dts
+ delete mode 100644 arch/arm/dts/rk3399-puma-haikou.dts
+ delete mode 100644 arch/arm/dts/rk3399-puma.dtsi
+ delete mode 100644 arch/arm/dts/rk3399-roc-pc-mezzanine.dts
+ delete mode 100644 arch/arm/dts/rk3399-roc-pc.dts
+ delete mode 100644 arch/arm/dts/rk3399-roc-pc.dtsi
+ delete mode 100644 arch/arm/dts/rk3399-rock-4c-plus.dts
+ delete mode 100644 arch/arm/dts/rk3399-rock-4se.dts
+ delete mode 100644 arch/arm/dts/rk3399-rock-pi-4.dtsi
+ delete mode 100644 arch/arm/dts/rk3399-rock-pi-4a.dts
+ delete mode 100644 arch/arm/dts/rk3399-rock-pi-4c.dts
+ delete mode 100644 arch/arm/dts/rk3399-rock960.dts
+ delete mode 100644 arch/arm/dts/rk3399-rock960.dtsi
+ delete mode 100644 arch/arm/dts/rk3399-rockpro64.dts
+ delete mode 100644 arch/arm/dts/rk3399-rockpro64.dtsi
+ delete mode 100644 arch/arm/dts/rk3399-t-opp.dtsi
+ delete mode 100644 arch/arm/dts/rk3399.dtsi
+ delete mode 100644 arch/arm/dts/rk3399pro-rock-pi-n10.dts
+ delete mode 100644 arch/arm/dts/rk3399pro-vmarc-som.dtsi
+ delete mode 100644 arch/arm/dts/rk3399pro.dtsi
+ delete mode 100644 arch/arm/dts/rk3566-anbernic-rgxx3.dtsi
+ delete mode 100644 arch/arm/dts/rk3566-quartz64-a.dts
+ delete mode 100644 arch/arm/dts/rk3566-quartz64-b.dts
+ delete mode 100644 arch/arm/dts/rk3566-radxa-cm3-io.dts
+ delete mode 100644 arch/arm/dts/rk3566-radxa-cm3.dtsi
+ delete mode 100644 arch/arm/dts/rk3566-soquartz-blade.dts
+ delete mode 100644 arch/arm/dts/rk3566-soquartz-cm4.dts
+ delete mode 100644 arch/arm/dts/rk3566-soquartz-model-a.dts
+ delete mode 100644 arch/arm/dts/rk3566-soquartz.dtsi
+ delete mode 100644 arch/arm/dts/rk3566.dtsi
+ delete mode 100644 arch/arm/dts/rk3568-bpi-r2-pro.dts
+ delete mode 100644 arch/arm/dts/rk3568-evb.dts
+ delete mode 100644 arch/arm/dts/rk3568-lubancat-2.dts
+ delete mode 100644 arch/arm/dts/rk3568-nanopi-r5c.dts
+ delete mode 100644 arch/arm/dts/rk3568-nanopi-r5s.dts
+ delete mode 100644 arch/arm/dts/rk3568-nanopi-r5s.dtsi
+ delete mode 100644 arch/arm/dts/rk3568-odroid-m1.dts
+ delete mode 100644 arch/arm/dts/rk3568-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/rk3568-radxa-cm3i.dtsi
+ delete mode 100644 arch/arm/dts/rk3568-radxa-e25.dts
+ delete mode 100644 arch/arm/dts/rk3568-rock-3a.dts
+ create mode 100644 arch/arm/dts/rk3568-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/rk3568.dtsi
+ delete mode 100644 arch/arm/dts/rk356x.dtsi
+ delete mode 100644 arch/arm/dts/rk3588-coolpi-cm5-evb.dts
+ delete mode 100644 arch/arm/dts/rk3588-coolpi-cm5.dtsi
+ delete mode 100644 arch/arm/dts/rk3588-edgeble-neu6a-io.dts
+ delete mode 100644 arch/arm/dts/rk3588-edgeble-neu6a.dtsi
+ delete mode 100644 arch/arm/dts/rk3588-edgeble-neu6b-io.dts
+ delete mode 100644 arch/arm/dts/rk3588-edgeble-neu6b.dtsi
+ delete mode 100644 arch/arm/dts/rk3588-evb1-v10.dts
+ delete mode 100644 arch/arm/dts/rk3588-jaguar.dts
+ delete mode 100644 arch/arm/dts/rk3588-nanopc-t6.dts
+ delete mode 100644 arch/arm/dts/rk3588-orangepi-5-plus.dts
+ delete mode 100644 arch/arm/dts/rk3588-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/rk3588-quartzpro64.dts
+ delete mode 100644 arch/arm/dts/rk3588-rock-5b.dts
+ delete mode 100644 arch/arm/dts/rk3588-turing-rk1.dts
+ delete mode 100644 arch/arm/dts/rk3588-turing-rk1.dtsi
+ delete mode 100644 arch/arm/dts/rk3588.dtsi
+ delete mode 100644 arch/arm/dts/rk3588j.dtsi
+ delete mode 100644 arch/arm/dts/rk3588s-coolpi-4b.dts
+ delete mode 100644 arch/arm/dts/rk3588s-orangepi-5.dts
+ delete mode 100644 arch/arm/dts/rk3588s-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/rk3588s-rock-5a.dts
+ delete mode 100644 arch/arm/dts/rk3588s.dtsi
+ delete mode 100644 doc/device-tree-bindings/clock/rockchip,rk3399-dmc.txt
+ delete mode 100644 include/dt-bindings/clock/rk3308-cru.h
+ delete mode 100644 include/dt-bindings/clock/rk3328-cru.h
+ delete mode 100644 include/dt-bindings/clock/rk3399-cru.h
+ delete mode 100644 include/dt-bindings/clock/rk3568-cru.h
+ delete mode 100644 include/dt-bindings/clock/rockchip,rk3588-cru.h
+ delete mode 100644 include/dt-bindings/power/rk3328-power.h
+ delete mode 100644 include/dt-bindings/power/rk3399-power.h
+ delete mode 100644 include/dt-bindings/power/rk3568-power.h
+ delete mode 100644 include/dt-bindings/power/rk3588-power.h
+ delete mode 100644 include/dt-bindings/reset/rockchip,rk3588-cru.h
+
+-- 
+2.43.2
+
