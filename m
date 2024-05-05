@@ -4,74 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C4A6C4345F
-	for <u-boot@archiver.kernel.org>; Sun,  5 May 2024 19:11:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9291DC4345F
+	for <u-boot@archiver.kernel.org>; Sun,  5 May 2024 19:12:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 679D2885E3;
-	Sun,  5 May 2024 21:11:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D398E88622;
+	Sun,  5 May 2024 21:12:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Hj+cebKM";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ADvPxmSM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E4F3885F7; Sun,  5 May 2024 21:11:48 +0200 (CEST)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id D3C4888625; Sun,  5 May 2024 21:12:39 +0200 (CEST)
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [IPv6:2607:f8b0:4864:20::102a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99ACB885D8
- for <u-boot@lists.denx.de>; Sun,  5 May 2024 21:11:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AF2668860E
+ for <u-boot@lists.denx.de>; Sun,  5 May 2024 21:12:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1ec400f9afdso3612415ad.0
- for <u-boot@lists.denx.de>; Sun, 05 May 2024 12:11:45 -0700 (PDT)
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-2b432d0252cso366755a91.2
+ for <u-boot@lists.denx.de>; Sun, 05 May 2024 12:12:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1714936304; x=1715541104; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=FqtJUuzS/MSlpoqA2jv/EJ8vm7DAT0Ni1FWWLmFGQvY=;
- b=Hj+cebKM0vq8YDKUODhrzCml5nodpn5QqdvyhMq6WGnrIbCu0DM8Hk2m4igdzM+CJD
- De/5MurBNxxp+fRf+kYrRfBTiFACflns6FfpGcUCKDaouvIq5Qbt8T8Qh6X46BSnIb4H
- cejQ6f/q5uaKN3oCi7p8eMINrZ46hSXjUKCfAK9JZ/QBsZw9AeFNt2niQC0DkXln+JLx
- Am04cOd1No5kOxdrzJYaLqL4XQcIO/9nuS7jz3rYRiXw2/s0FqYeu3qZWOJbKY0Zwx24
- 7Fthpw9PcY68Fu5DcelDphqWS+uPkXzhOWAV7VrxS9cvx/vHZyr9H9ltgP1l2QPLoheX
- E+1Q==
+ d=gmail.com; s=20230601; t=1714936356; x=1715541156; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gxBAx+Ys9tLw6C6ziLVyWRJpbKXUQT9rpmD06o20rdg=;
+ b=ADvPxmSMODhcDHYDqwuIXwAi5vbWGQOgcNaXlIYeZL8r2vmcRTIhvWCTeKLXrjM4SB
+ dZ09ZRsmMyt35hV5ckaHBhF9wlEUewNbdHyRZjL15A3A4RZuq8mp9r2fynlnFaMnRBWt
+ mUXCCK900gXf9BevatHzu2WQ3qzcofh7/mosySBI7gjI3GekG9u9c7ktaOpONcGqLFSV
+ 9gVe6hj7R6IIDOUGravVr9LLkSdLhiQRee9L+VklhXHLKsilMFauYjjmznUavTnonMif
+ zUQFzZoKOa8nfHBE0uJou6V6pA17rklhP6EzBwssZcAuKjHE285ziNBCVHbIodqmMO/5
+ xkfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714936304; x=1715541104;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=FqtJUuzS/MSlpoqA2jv/EJ8vm7DAT0Ni1FWWLmFGQvY=;
- b=NYRTUNgy+U8Nx30qUPXDeIBMb5yeGcvulqAosHLuw6Jxll+B6a18Pji5Lzu/ELsP9/
- qXAIngYly9Hlj8cmvimjUPjfcuzW+Lz/aQ9EsGP9n/tQYguGBElM4BxFcv8JwBz674QM
- deSoZX9RY0GujVBhJYtTu/WhVL/dHfEygAwCiHBtdMZUYmKNxwkgGd+Iqzpu+/RngTr0
- R/uYJ2bXy+W8dilb1AikvrtCzijnG7/zqtCUkBlO06MFepg37iQhPOGd9iipI1TXigAw
- nq1SXi9EPLMUqaJMx/E7XIs7jZLhwS8NO6qnxfDY8QHmrTixdHRnhPlq+ro1SRevvEBz
- x9fg==
-X-Gm-Message-State: AOJu0YwpoAprW9Cw8Hw2wN2VNjKE+INGImfinxN26qGC2vZ01rdE9uju
- X8vAgovMWOtk0UMZQGbo2rmgp6bCmqcFe8PPFGE1WkaHEKXW3Txc
-X-Google-Smtp-Source: AGHT+IEz208nxOKRqzhyb4xUNYTcvGcxafAW+Kz/opyGVKaYKo1Hq/C6GlBjAxRyhhbWtoipIlWrjg==
-X-Received: by 2002:a05:6a20:96d2:b0:1af:667b:44ff with SMTP id
- hq18-20020a056a2096d200b001af667b44ffmr9123780pzc.0.1714936303781; 
- Sun, 05 May 2024 12:11:43 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:901f:c82:3f15:83a9])
- by smtp.gmail.com with ESMTPSA id
- x22-20020a62fb16000000b006e567c81d14sm6323751pfm.43.2024.05.05.12.11.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 05 May 2024 12:11:43 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: [GIT PULL] Please pull u-boot-imx-master-20240505
-Date: Sun,  5 May 2024 16:11:39 -0300
-Message-Id: <20240505191139.3024264-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1714936356; x=1715541156;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=gxBAx+Ys9tLw6C6ziLVyWRJpbKXUQT9rpmD06o20rdg=;
+ b=nScfQAPynQm79mxB5IhdH3JGjC45/HAz2Pl+waFMry7NWyRomlZe3CoRIUqEzik+po
+ 6crqzvmU15F2dmWDdLiCRhqueYnp+xbZC2+s8Ohgx6Ngs4P0Oifn9KcLKNep5LExjP+n
+ nnHlPknRSnNSc8OYD9Z/dXlV5kz/WsvlKOzTsZr+IAcYTdLg+gEjuHIPnqwCqAmIDHcZ
+ oxtpXdAkda1Tx9NeC1uM1MPZTqDviNxVlFsMIu26LIxEhhgegcbw6wJNeucgjTRldHy/
+ 3S6cMmyliDaPM4yaZ6W35Gsdj2wGXrzmXdIUSvPcYFWiGKODHPsRMgtNNsFSis6SJNLT
+ S/3Q==
+X-Gm-Message-State: AOJu0Yw6sOm+3ERRpd5CNAOiKtgAX8o6ToAg1AS7n0Tbwqp0j+K4AGPZ
+ Rz+qM+jbefF/3oEzuYiz7gA0mYf/haYFukSvdQBy9tZxSeCrVqOyOBFnLWb+Anj4JJ7Wh7DXVN+
+ vE4UHu3Rxpk+3USSoZ1MuNFWiP1Q=
+X-Google-Smtp-Source: AGHT+IE2gnTRZH/x7/0LsAzSfNApafuXO51yKm8CGmCEQbEQRbYP6bk5/YZEGGCJLbCt/oyNzugDQyq/QV+riiafuxc=
+X-Received: by 2002:a17:902:f689:b0:1dd:b54c:df51 with SMTP id
+ l9-20020a170902f68900b001ddb54cdf51mr11148742plg.4.1714936356125; Sun, 05 May
+ 2024 12:12:36 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240425230314.497203-1-marex@denx.de>
+In-Reply-To: <20240425230314.497203-1-marex@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sun, 5 May 2024 16:12:24 -0300
+Message-ID: <CAOMZO5A4kVgxpYjbJ6YZXrK7KnN4zQEgf54U3UMUq3Lhr-zzZQ@mail.gmail.com>
+Subject: Re: [PATCH 1/3] rng: Introduce SPL_DM_RNG
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Angelo Dureghello <angelo@kernel-space.org>, 
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Gaurav Jain <gaurav.jain@nxp.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Michal Simek <michal.simek@amd.com>, 
+ Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tim Harvey <tharvey@gateworks.com>, 
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,48 +94,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Thu, Apr 25, 2024 at 8:03=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+>
+> Add SPL variant of DM_RNG so that the DM_RNG can be disabled in SPL
+> if necessary. This may be necessary due to e.g. size constraints of
+> the SPL.
+>
+> Signed-off-by: Marek Vasut <marex@denx.de>
 
-Please pull from u-boot-imx/master, thanks.
-The following changes since commit 2f1e76bcfee75b9f99ade63002c05ffaaec86afb:
-
-  Merge branch '2024-05-02-assorted-updates' (2024-05-03 16:18:51 -0600)
-
-are available in the Git repository at:
-
-  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20240505
-
-for you to fetch changes up to cecb5fbb42c8b3de3d5a7df40bc01d1fdf4731d3:
-
-  crypto/fsl: Differentiate between CAAM and DCP in Kconfig entry (2024-05-05 11:21:39 -0300)
-
-u-boot-imx-master-20240505
---------------------------
-
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/20614
-
-- Add SPL variant of DM_RNG so that the DM_RNG can be disabled in SPL
-if necessary. This may be necessary due to e.g. size constraints of
-the SPL.
-- dd SPL variant of SPL_FSL_CAAM_RNG so that the SPL_FSL_CAAM_RNG can
-be disabled in SPL if necessary. This may be necessary due to e.g.
-size constraints of the SPL.
-- Differentiate between CAAM and DCP in Kconfig entry.
-----------------------------------------------------------------
-Marek Vasut (3):
-      rng: Introduce SPL_DM_RNG
-      crypto/fsl: Introduce SPL_FSL_CAAM_RNG
-      crypto/fsl: Differentiate between CAAM and DCP in Kconfig entry
-
- boot/pxe_utils.c            |  4 +---
- boot/vbe_request.c          |  2 +-
- drivers/Makefile            |  2 +-
- drivers/crypto/fsl/Kconfig  | 11 +++++++++--
- drivers/crypto/fsl/Makefile |  2 +-
- drivers/crypto/fsl/jr.c     |  4 ++--
- drivers/rng/Kconfig         |  7 +++++++
- drivers/rng/Makefile        |  2 +-
- lib/uuid.c                  |  2 +-
- net/net_rand.h              |  2 +-
- test/dm/Makefile            |  2 +-
- 11 files changed, 26 insertions(+), 14 deletions(-)
+Applied all, thanks.
