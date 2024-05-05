@@ -4,69 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93C9FC4345F
-	for <u-boot@archiver.kernel.org>; Sun,  5 May 2024 09:40:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C4A6C4345F
+	for <u-boot@archiver.kernel.org>; Sun,  5 May 2024 19:11:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3DC488069;
-	Sun,  5 May 2024 11:40:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=yadro.com
+	by phobos.denx.de (Postfix) with ESMTP id 679D2885E3;
+	Sun,  5 May 2024 21:11:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=yadro.com header.i=@yadro.com header.b="wIZhZCRM";
-	dkim=pass (2048-bit key; unprotected) header.d=yadro.com header.i=@yadro.com header.b="PpfJT/av";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Hj+cebKM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7075688093; Sun,  5 May 2024 11:40:06 +0200 (CEST)
-Received: from mta-04.yadro.com (mta-04.yadro.com [89.207.88.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4E4F3885F7; Sun,  5 May 2024 21:11:48 +0200 (CEST)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1CE4588013
- for <u-boot@lists.denx.de>; Sun,  5 May 2024 11:40:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 99ACB885D8
+ for <u-boot@lists.denx.de>; Sun,  5 May 2024 21:11:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=yadro.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=v.v.mitrofanov@yadro.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com A743FC0003
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yadro.com; s=mta-04;
- t=1714902002; bh=8SmgDuciKR7sE3t0Q4NMTpXlMtqKd395jjHJxkiyUwE=;
- h=From:To:Subject:Date:Message-ID:Content-Type:MIME-Version:From;
- b=wIZhZCRMNSFWLsXbj8/3tXxq8X5JxR8nZUcuiHWnQGohPu0PL5Ca7EKoWc4tS9L5T
- VzvAh5QXLZyRFd2pZCwutJiK2HPGFAJ1FzEdYH9pgyPQVRS9veRiFqCOYOwAE4qu9a
- NStCK74jnafd3TnzYrd0DDq1hqzqrdD8r2JCSznExYWyYO2Ss+mPp7rtNHSFFHiZYz
- j9eXhVzZD5liaNZ+nwVLApDSdTYs8m48k+69ST/RANYujdzisOlheIRVzoUr0U53U/
- Ooz3NROQznOXGHToTvBo4qJhkP6owWJUFlGP4HEhMnrXIpNBraUlJINTnTJcjEnZgj
- Prusvm+m0YiVg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yadro.com; s=mta-03;
- t=1714902002; bh=8SmgDuciKR7sE3t0Q4NMTpXlMtqKd395jjHJxkiyUwE=;
- h=From:To:Subject:Date:Message-ID:Content-Type:MIME-Version:From;
- b=PpfJT/avt/ZJIf3Ruu1C+3pcWrOY5BZzTPpyr84yzDV6qkTZZReh08CJDy/JLcF06
- NdibQcagpZfvxAy0XGLDc38nYeLT63tjxTyaX3Hnek4A/kb6i0+6/sKMQDQbDO+EMq
- nby4OYHW+obcVX+42dP1Osx9d4KgH45yRkJjIBbq2J7PVc2eiamKDNexadro2Bol/W
- irrEKSNlt9S+fLRexg9HADA/p1l4IAOftlVTalAbgbJL2ZymtZFb1FoftHoWW1VhtF
- vxZ43vVxoRgkyRaGFtt7jviX1X/7KqHUCQuHCFY1aM+ax7M7mXeoFlVfcKudCLDFbU
- 6Gv9w+MbL7d9w==
-From: "Vyacheslav V. Mitrofanov" <v.v.mitrofanov@yadro.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "seanedmond@linux.microsoft.com" <seanedmond@linux.microsoft.com>
-CC: "trini@konsulko.com" <trini@konsulko.com>, "joe.hershberger@ni.com"
- <joe.hershberger@ni.com>, "rfried.dev@gmail.com" <rfried.dev@gmail.com>,
- "saproj@gmail.com" <saproj@gmail.com>, "seanedmond@microsoft.com"
- <seanedmond@microsoft.com>
-Subject: Re: [PATCH] Fix neighbor discovery ethernet address saving
-Thread-Topic: [PATCH] Fix neighbor discovery ethernet address saving
-Thread-Index: AQHammY8edxoSjJSfEa2TmoN/0kXxLGIOU4A
-Date: Sun, 5 May 2024 09:40:01 +0000
-Message-ID: <2c8ff0fe4c082799118bbf13de7b2f6558493334.camel@yadro.com>
-References: <20240429185116.2287092-1-seanedmond@linux.microsoft.com>
-In-Reply-To: <20240429185116.2287092-1-seanedmond@linux.microsoft.com>
-Accept-Language: en-UM, en-150, ru-RU, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <A1C2EDF0555C514CA50CAE1A97627BEB@yadro.com>
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1ec400f9afdso3612415ad.0
+ for <u-boot@lists.denx.de>; Sun, 05 May 2024 12:11:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1714936304; x=1715541104; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=FqtJUuzS/MSlpoqA2jv/EJ8vm7DAT0Ni1FWWLmFGQvY=;
+ b=Hj+cebKM0vq8YDKUODhrzCml5nodpn5QqdvyhMq6WGnrIbCu0DM8Hk2m4igdzM+CJD
+ De/5MurBNxxp+fRf+kYrRfBTiFACflns6FfpGcUCKDaouvIq5Qbt8T8Qh6X46BSnIb4H
+ cejQ6f/q5uaKN3oCi7p8eMINrZ46hSXjUKCfAK9JZ/QBsZw9AeFNt2niQC0DkXln+JLx
+ Am04cOd1No5kOxdrzJYaLqL4XQcIO/9nuS7jz3rYRiXw2/s0FqYeu3qZWOJbKY0Zwx24
+ 7Fthpw9PcY68Fu5DcelDphqWS+uPkXzhOWAV7VrxS9cvx/vHZyr9H9ltgP1l2QPLoheX
+ E+1Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714936304; x=1715541104;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=FqtJUuzS/MSlpoqA2jv/EJ8vm7DAT0Ni1FWWLmFGQvY=;
+ b=NYRTUNgy+U8Nx30qUPXDeIBMb5yeGcvulqAosHLuw6Jxll+B6a18Pji5Lzu/ELsP9/
+ qXAIngYly9Hlj8cmvimjUPjfcuzW+Lz/aQ9EsGP9n/tQYguGBElM4BxFcv8JwBz674QM
+ deSoZX9RY0GujVBhJYtTu/WhVL/dHfEygAwCiHBtdMZUYmKNxwkgGd+Iqzpu+/RngTr0
+ R/uYJ2bXy+W8dilb1AikvrtCzijnG7/zqtCUkBlO06MFepg37iQhPOGd9iipI1TXigAw
+ nq1SXi9EPLMUqaJMx/E7XIs7jZLhwS8NO6qnxfDY8QHmrTixdHRnhPlq+ro1SRevvEBz
+ x9fg==
+X-Gm-Message-State: AOJu0YwpoAprW9Cw8Hw2wN2VNjKE+INGImfinxN26qGC2vZ01rdE9uju
+ X8vAgovMWOtk0UMZQGbo2rmgp6bCmqcFe8PPFGE1WkaHEKXW3Txc
+X-Google-Smtp-Source: AGHT+IEz208nxOKRqzhyb4xUNYTcvGcxafAW+Kz/opyGVKaYKo1Hq/C6GlBjAxRyhhbWtoipIlWrjg==
+X-Received: by 2002:a05:6a20:96d2:b0:1af:667b:44ff with SMTP id
+ hq18-20020a056a2096d200b001af667b44ffmr9123780pzc.0.1714936303781; 
+ Sun, 05 May 2024 12:11:43 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:901f:c82:3f15:83a9])
+ by smtp.gmail.com with ESMTPSA id
+ x22-20020a62fb16000000b006e567c81d14sm6323751pfm.43.2024.05.05.12.11.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 05 May 2024 12:11:43 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] Please pull u-boot-imx-master-20240505
+Date: Sun,  5 May 2024 16:11:39 -0300
+Message-Id: <20240505191139.3024264-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,35 +88,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-T24gTW9uLCAyMDI0LTA0LTI5IGF0IDExOjUxIC0wNzAwLCBzZWFuZWRtb25kQGxpbnV4Lm1pY3Jv
-c29mdC5jb20Kd3JvdGU6Cj4gc29jQHlhZHJvLmNvbTxtYWlsdG86c29jQHlhZHJvLmNvbT4KPiAK
-PiBGcm9tOiBTZWFuIEVkbW9uZCA8c2VhbmVkbW9uZEBtaWNyb3NvZnQuY29tPgo+IAo+IFdoZW4g
-YSBzdWNjZXNzZnVsIG5laWdoYm9yIGFkdmVydGlzZW1lbnQgaXMgcmVjZWl2ZWQsIHRoZSBldGhl
-cm5ldAo+IGFkZHJlc3Mgc2hvdWxkIGJlIHNhdmVkIGZvciBsYXRlciB1c2UgdG8gYXZvaWQgaGF2
-aW5nIHRvIHJlZG8gdGhlCj4gbmVpZ2hib3IgZGlzY292ZXJ5IHByb2Nlc3MuCj4gCj4gRm9yIGV4
-YW1wbGUsIHdpdGggVEZUUCB0aGUgYWRkcmVzcyBzaG91bGQgZ2V0IHNhdmVkIGludG8KPiAibmV0
-X3NlcnZlcl9ldGhhZGRyIi7CoCBUaGlzIGlzIGJlaW5nIGRvbmUgY29ycmVjdGx5IHdpdGggQVJQ
-IGZvcgo+IElQdjQsCj4gYnV0IG5vdCBmb3IgbmVpZ2hib3IgZGlzY292ZXJ5IHdpdGggSVB2Ni4K
-PiAKPiBTaWduZWQtb2ZmLWJ5OiBTZWFuIEVkbW9uZCA8c2VhbmVkbW9uZEBtaWNyb3NvZnQuY29t
-Pgo+IC0tLQo+IMKgbmV0L25kaXNjLmMgfCA0ICsrLS0KPiDCoDEgZmlsZSBjaGFuZ2VkLCAyIGlu
-c2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCj4gCj4gZGlmZiAtLWdpdCBhL25ldC9uZGlzYy5j
-IGIvbmV0L25kaXNjLmMKPiBpbmRleCBkMWNlYzA2MDFjOC4uNTA1NTE1ZjJkOTUgMTAwNjQ0Cj4g
-LS0tIGEvbmV0L25kaXNjLmMKPiArKysgYi9uZXQvbmRpc2MuYwo+IEBAIC00NjEsOCArNDYxLDgg
-QEAgaW50IG5kaXNjX3JlY2VpdmUoc3RydWN0IGV0aGVybmV0X2hkciAqZXQsIHN0cnVjdAo+IGlw
-Nl9oZHIgKmlwNiwgaW50IGxlbikKPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgIG5kaXNjX2V4dHJhY3RfZW5ldGFkZHIobmRpc2MsCj4gbmVpZ2hfZXRoX2Fk
-ZHIpOwo+IAo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
-Lyogc2F2ZSBhZGRyZXNzIGZvciBsYXRlciB1c2UgKi8KPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaWYgKCFuZXRfbmRfcGFja2V0X21hYykKPiAtwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIG5l
-dF9uZF9wYWNrZXRfbWFjID0gbmVpZ2hfZXRoX2FkZHI7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGlmIChuZXRfbmRfcGFja2V0X21hYykKPiArwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIG1l
-bWNweShuZXRfbmRfcGFja2V0X21hYywKPiBuZWlnaF9ldGhfYWRkciwgNik7Cj4gCj4gwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAvKiBtb2RpZnkgaGVhZGVy
-LCBhbmQgdHJhbnNtaXQgaXQgKi8KPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgIG1lbWNweSgoKHN0cnVjdCBldGhlcm5ldF9oZHIKPiAqKW5ldF9uZF90eF9w
-YWNrZXQpLT5ldF9kZXN0LAo+IC0tCj4gMi40Mi4wCj4gCkhlbGxvLCBTZWFuLiBUaGFua3MgZm9y
-IHlvdXIgbm90aWNlLiBJIHNlZSB0aGF0IG5ldF9uZF9wYWNrZXRfbWFjIGlzCmp1c3QgYSB1Y2hh
-ciBwb2ludGVyIHdpdGhvdXQgbWVtb3J5IGFsbG9jYXRpb24uIEl0IGlzIGRhbmdlcm91cyB0byBk
-byAKbWVtY3B5IGFuZCBub3QgbmVjZXNzYXJ5LiBBbGwgd29ya3MgYXMgaXQgaGFzIHRvIGJlLgo=
+Hi Tom,
+
+Please pull from u-boot-imx/master, thanks.
+The following changes since commit 2f1e76bcfee75b9f99ade63002c05ffaaec86afb:
+
+  Merge branch '2024-05-02-assorted-updates' (2024-05-03 16:18:51 -0600)
+
+are available in the Git repository at:
+
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20240505
+
+for you to fetch changes up to cecb5fbb42c8b3de3d5a7df40bc01d1fdf4731d3:
+
+  crypto/fsl: Differentiate between CAAM and DCP in Kconfig entry (2024-05-05 11:21:39 -0300)
+
+u-boot-imx-master-20240505
+--------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/20614
+
+- Add SPL variant of DM_RNG so that the DM_RNG can be disabled in SPL
+if necessary. This may be necessary due to e.g. size constraints of
+the SPL.
+- dd SPL variant of SPL_FSL_CAAM_RNG so that the SPL_FSL_CAAM_RNG can
+be disabled in SPL if necessary. This may be necessary due to e.g.
+size constraints of the SPL.
+- Differentiate between CAAM and DCP in Kconfig entry.
+----------------------------------------------------------------
+Marek Vasut (3):
+      rng: Introduce SPL_DM_RNG
+      crypto/fsl: Introduce SPL_FSL_CAAM_RNG
+      crypto/fsl: Differentiate between CAAM and DCP in Kconfig entry
+
+ boot/pxe_utils.c            |  4 +---
+ boot/vbe_request.c          |  2 +-
+ drivers/Makefile            |  2 +-
+ drivers/crypto/fsl/Kconfig  | 11 +++++++++--
+ drivers/crypto/fsl/Makefile |  2 +-
+ drivers/crypto/fsl/jr.c     |  4 ++--
+ drivers/rng/Kconfig         |  7 +++++++
+ drivers/rng/Makefile        |  2 +-
+ lib/uuid.c                  |  2 +-
+ net/net_rand.h              |  2 +-
+ test/dm/Makefile            |  2 +-
+ 11 files changed, 26 insertions(+), 14 deletions(-)
