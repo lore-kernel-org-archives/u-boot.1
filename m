@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DA19C10F16
-	for <u-boot@archiver.kernel.org>; Mon,  6 May 2024 14:39:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77855C25B4F
+	for <u-boot@archiver.kernel.org>; Mon,  6 May 2024 14:40:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3AC9088622;
+	by phobos.denx.de (Postfix) with ESMTP id A384D88625;
 	Mon,  6 May 2024 16:39:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="qBiSqqd4";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="bNvit3kr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCDEF88629; Mon,  6 May 2024 16:39:06 +0200 (CEST)
+ id 948E788638; Mon,  6 May 2024 16:39:07 +0200 (CEST)
 Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
  [46.235.227.194])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C731E885B5
- for <u-boot@lists.denx.de>; Mon,  6 May 2024 16:39:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 835BB8860E
+ for <u-boot@lists.denx.de>; Mon,  6 May 2024 16:39:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=collabora.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=martyn.welch@collabora.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1715006344;
- bh=RE73Mn6Do3+kjc+AR5sq4tWMvLBmml1dnHQgv88B3U0=;
+ s=mail; t=1715006345;
+ bh=6JSKrjy6iJE0wfOolFLiD8Ys06uloVwOwVOgRWPxRlk=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=qBiSqqd4EeetZB27u6J00jOBZtn33cy234zOFOFw2a9bpqJalarjmWn/r9y5ph0Ir
- oY4Pe4PwdBhPieuFFFXVGgnz192hP7QcFPoyoT0qr+T0TalpovX0I250ItTzoy3Xxm
- AvxEVm64K9Ijsxc9IBH+ImMkJYWhDr39CHsurgW071lJt89GuM0EbTQVDIJqV8ZR3t
- yLpH2WsXsO0jIN/hKE5SCBeUOYDQpQaa8RAaucllJHeY12mT32TYZErSWnUMounJqo
- wLAcYG6jBwUFr3N3yl851GpLdErKmZLaPfMtL8lWnCOF3MQt5FpgSjowSMF224DYv9
- pryFkMiNLES6A==
+ b=bNvit3krzwn1JYlhkD048Q+FrPzvz+kN+vLNrNvQl4TBOkgdjyq+TJxbs6IV8VbjP
+ i3SaHTZMIH/6H8IwSVmTRkm5NIVjxaILtS2V3EXonZMQm20pCrfwBFSoHQ3IxyRAto
+ ssNC67NOMGQR0+Ft1w5pxDiIS2cq6Ss+OIDQsPDBqSzqTXUoGoB63VVdtGZsX8oPWa
+ 1uPaJlJbutQIW/clrOQ998f1TLMv5RaHGmBU78qircjlNz6ewq9lVb+g/L6NidX0Ue
+ ANgMi9bCSzhaxc0BKqTwWgFT4bHJ4xTZa1dPjCWTqEJtZJ2re7iRiNfygiXkDaVsJN
+ uNGaWthGs/qqg==
 Received: from pan.lan (ec2-34-240-57-77.eu-west-1.compute.amazonaws.com
  [34.240.57.77])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested) (Authenticated sender: martyn)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id F0142378215D;
- Mon,  6 May 2024 14:39:03 +0000 (UTC)
+ by madrid.collaboradmins.com (Postfix) with ESMTPSA id AF4AE3782134;
+ Mon,  6 May 2024 14:39:04 +0000 (UTC)
 From: Martyn Welch <martyn.welch@collabora.com>
 To: Dave Gerlach <d-gerlach@ti.com>, Tom Rini <trini@konsulko.com>,
  Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>
@@ -50,9 +50,9 @@ Cc: Sjoerd Simons <sjoerd@collabora.com>,
  Alexander Sverdlin <alexander.sverdlin@siemens.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Martyn Welch <martyn.welch@collabora.com>, u-boot@lists.denx.de
-Subject: [PATCH v5 4/6] configs: am62x_evm_*: Enable USB and DFU support
-Date: Mon,  6 May 2024 15:38:44 +0100
-Message-ID: <20240506143846.1252377-5-martyn.welch@collabora.com>
+Subject: [PATCH v5 5/6] beagleplay: Add DFU support
+Date: Mon,  6 May 2024 15:38:45 +0100
+Message-ID: <20240506143846.1252377-6-martyn.welch@collabora.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240506143846.1252377-1-martyn.welch@collabora.com>
 References: <20240506143846.1252377-1-martyn.welch@collabora.com>
@@ -76,129 +76,71 @@ X-Virus-Status: Clean
 
 From: Sjoerd Simons <sjoerd@collabora.com>
 
-Provide config fragments to enable USB host as well as USB gadget and DFU
-support for a53 and r5. This relevant fragment is included into the
-am62x EVM a53 defconfig. For the r5, due to the smaller available size,
-the config fragment also disables support for persistent storage to free
-up space for USB support. This fragment needs to be included is DFU
-booting is desired.
+DFU mode on a beagleplay can be used via the Type-C connector by holding
+the USR switch while powering on.
 
-The CONFIG_DFU_SF option is placed in the defconfig rather than the
-fragment as this is known not to be supported on all boards that can
-support DFU.
+Configuration is already provided as fragments for both the A53 and R5
+u-boot parts. Include the am62x_a53_usbdfu.config config. The
+am62x_r5_usbdfu.config fragment needs to be added should DFU boot be
+required as this will disable booting from persistent storage due to
+binary size constraints.
 
 Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
 Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
 ---
 Changes in v5:
-- Switch to config fragment for a53 most DFU configuration
+- Use existing config fragment for a53 DFU configuration
+- Force usb0 into peripheral mode
 
 Changes in v4:
-- Move R5 dfu config to a config fragment rather then a full defconfig
-- Don't enable XHCI for the R5 SPL, unneeded
+- New patch
 
-Changes in v3:
-- Run savedefconfig to adjust to more recent u-boot
+ arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi | 9 +++++++++
+ board/beagle/beagleplay/beagleplay.env       | 1 +
+ configs/am62x_beagleplay_a53_defconfig       | 2 ++
+ 3 files changed, 12 insertions(+)
 
-Changes in v2:
-- Create a seperate defconfig for R5
-
-
-
- configs/am62x_a53_usbdfu.config | 30 ++++++++++++++++++++++++++++++
- configs/am62x_evm_a53_defconfig |  2 ++
- configs/am62x_r5_usbdfu.config  | 28 ++++++++++++++++++++++++++++
- 3 files changed, 60 insertions(+)
- create mode 100644 configs/am62x_a53_usbdfu.config
- create mode 100644 configs/am62x_r5_usbdfu.config
-
-diff --git a/configs/am62x_a53_usbdfu.config b/configs/am62x_a53_usbdfu.config
-new file mode 100644
-index 0000000000..3a19cf2328
---- /dev/null
-+++ b/configs/am62x_a53_usbdfu.config
-@@ -0,0 +1,29 @@
-+CONFIG_SYS_MALLOC_LEN=0x2000000
-+CONFIG_SPL_ENV_SUPPORT=y
-+CONFIG_SPL_RAM_SUPPORT=y
-+CONFIG_SPL_RAM_DEVICE=y
-+CONFIG_SPL_USB_GADGET=y
-+CONFIG_SPL_DFU=y
-+CONFIG_CMD_DFU=y
-+CONFIG_CMD_USB=y
-+CONFIG_SYSCON=y
-+CONFIG_SPL_SYSCON=y
-+CONFIG_DFU_MMC=y
-+CONFIG_DFU_RAM=y
-+CONFIG_SYS_DFU_DATA_BUF_SIZE=0x5000
-+CONFIG_SYS_DFU_MAX_FILE_SIZE=0x800000
-+CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
-+CONFIG_SPL_DM_USB_GADGET=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_XHCI_DWC3=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_SPL_USB_DWC3_GENERIC=y
-+CONFIG_SPL_USB_DWC3_AM62=y
-+CONFIG_USB_DWC3_AM62=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
-+CONFIG_USB_GADGET_VENDOR_NUM=0x0451
-+CONFIG_USB_GADGET_PRODUCT_NUM=0x6165
-+CONFIG_USB_GADGET_DOWNLOAD=y
-diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defconfig
-index 6c708dcb05..16294a6a79 100644
---- a/configs/am62x_evm_a53_defconfig
-+++ b/configs/am62x_evm_a53_defconfig
-@@ -68,6 +68,7 @@ CONFIG_SPL_OF_TRANSLATE=y
- CONFIG_CLK=y
- CONFIG_SPL_CLK=y
- CONFIG_CLK_TI_SCI=y
-+CONFIG_DFU_SF=y
- CONFIG_DMA_CHANNELS=y
- CONFIG_TI_K3_NAVSS_UDMA=y
- CONFIG_TI_SCI_PROTOCOL=y
-@@ -111,3 +112,5 @@ CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_TI_SCI=y
+diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+index fb2032068d..967a2bdcd1 100644
+--- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
++++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+@@ -54,6 +54,15 @@
+ 	>;
+ };
+ 
++&usbss0 {
++	bootph-all;
++};
++
++&usb0 {
++	dr_mode = "peripheral";
++	bootph-all;
++};
++
+ #ifdef CONFIG_TARGET_AM625_A53_BEAGLEPLAY
+ 
+ #define SPL_NODTB "spl/u-boot-spl-nodtb.bin"
+diff --git a/board/beagle/beagleplay/beagleplay.env b/board/beagle/beagleplay/beagleplay.env
+index bbf6b925d0..8dbfc2f7d2 100644
+--- a/board/beagle/beagleplay/beagleplay.env
++++ b/board/beagle/beagleplay/beagleplay.env
+@@ -1,5 +1,6 @@
+ #include <env/ti/ti_common.env>
+ #include <env/ti/mmc.env>
++#include <env/ti/k3_dfu.env>
+ 
+ name_kern=Image
+ console=ttyS2,115200n8
+diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
+index 4f1be1df59..ec62670d55 100644
+--- a/configs/am62x_beagleplay_a53_defconfig
++++ b/configs/am62x_beagleplay_a53_defconfig
+@@ -121,3 +121,5 @@ CONFIG_EXT4_WRITE=y
  CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
+ CONFIG_LZO=y
  CONFIG_EFI_SET_TIME=y
 +
 +#include <configs/am62x_a53_usbdfu.config>
-diff --git a/configs/am62x_r5_usbdfu.config b/configs/am62x_r5_usbdfu.config
-new file mode 100644
-index 0000000000..772bb2ab93
---- /dev/null
-+++ b/configs/am62x_r5_usbdfu.config
-@@ -0,0 +1,28 @@
-+CONFIG_SPL_ENV_SUPPORT=y
-+CONFIG_SYSCON=y
-+CONFIG_SPL_SYSCON=y
-+CONFIG_SYS_DFU_DATA_BUF_SIZE=0x5000
-+CONFIG_MISC=y
-+CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
-+CONFIG_SPL_DM_USB_GADGET=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_SPL_USB_DWC3_GENERIC=y
-+CONFIG_SPL_USB_DWC3_AM62=y
-+CONFIG_USB_GADGET=y
-+CONFIG_SPL_USB_GADGET=y
-+CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
-+CONFIG_USB_GADGET_VENDOR_NUM=0x0451
-+CONFIG_USB_GADGET_PRODUCT_NUM=0x6165
-+CONFIG_USB_GADGET_DOWNLOAD=y
-+CONFIG_SPL_DFU=y
-+# CONFIG_SPL_MMC is not set
-+# CONFIG_SPL_FS_FAT is not set
-+# CONFIG_SPL_LIBDISK_SUPPORT is not set
-+# CONFIG_SPL_SPI is not set
-+# CONFIG_SPL_SYS_MALLOC is not set
-+# CONFIG_CMD_GPT is not set
-+# CONFIG_CMD_MMC is not set
-+# CONFIG_CMD_FAT is not set
-+# CONFIG_MMC_SDHCI is not set
 -- 
 2.43.0
 
