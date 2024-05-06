@@ -4,65 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEC30C10F16
-	for <u-boot@archiver.kernel.org>; Mon,  6 May 2024 09:16:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD62FC10F16
+	for <u-boot@archiver.kernel.org>; Mon,  6 May 2024 10:04:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1EC3987F6F;
-	Mon,  6 May 2024 11:16:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=qq.com
+	by phobos.denx.de (Postfix) with ESMTP id CFAB487FCD;
+	Mon,  6 May 2024 12:04:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="PEHiRbJ6";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1714989842;
+	bh=spSlrbgDiTjKAPf1924tNYwGCaHnSwRvJ5QcuZDMomE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=UXI3psRlQosGtWH5cpcxKTa3Te8jdproxY3SDIBc/IYDEYt8ejyju9/Xhl2HLYhI1
+	 G3cI9OTqAsjwzPVB512W7szRmey8Epi1iqJDY7OuaRWk3nrf+wfmnEzXPH16ZJoC+L
+	 TvA2ADttyfjvjpr0efhBNbvX5xqqrC/0H+CY6Rv7WsENO2Sa8y/tNwgKIYBaNNdiaX
+	 9vN66L7OHU68FEyq/YPWqBLJp2J3nARLBJFh+wsYJ9cy7MSWkiSwcMsa85SnehZ556
+	 NJe2IAvlRTKk9qh6PdKMTwCjq0cEx/KMeLww26M2X3jlUBgOtwtE4u+HK0Z+gGhE4W
+	 ZkeHOwInZSdkg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 264F887F8B; Mon,  6 May 2024 11:16:21 +0200 (CEST)
-Received: from out162-62-58-211.mail.qq.com (out162-62-58-211.mail.qq.com
- [162.62.58.211])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C3CD788013; Mon,  6 May 2024 12:04:01 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E66887F2E
- for <u-boot@lists.denx.de>; Mon,  6 May 2024 11:16:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D64687FA1
+ for <u-boot@lists.denx.de>; Mon,  6 May 2024 12:03:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=qq.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hanyuan-z@qq.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1714986952; bh=NS7Mia0u+DtBf72bw6i1glbNsGj5osAS3vbEa0U2bqM=;
- h=From:To:Cc:Subject:Date;
- b=PEHiRbJ6azobIowVb8czL/VBfuGPI+WT6sbtmuWGWQiwknu4HmnG556qiWtrL/5pU
- ItXVJgRfclK7xPhZCAG3j2U2tOfxMbLVZMZ4D8LJ+j4CLqh5EnGbFj4Ni+WBYNCsHO
- dp0oUaoRWNPvh3pBnuHiosqudiwdk92LT1mnwa0s=
-Received: from localhost.localdomain ([183.172.232.66])
- by newxmesmtplogicsvrszb9-0.qq.com (NewEsmtp) with SMTP
- id 3F20A033; Mon, 06 May 2024 17:15:50 +0800
-X-QQ-mid: xmsmtpt1714986950tx4g6rvwp
-Message-ID: <tencent_6178F4CBD2326AD3FE5FBAA496630920D405@qq.com>
-X-QQ-XMAILINFO: Nd/Exl7W9DK522sxvvd6T4Fq5owKqP2jiLyvkicvztycteS71L5qjo17vyp7vJ
- cdRT/i+2AIuKX0VJFreqKU4AmTXl6M+NbwZpF3r/OGOLdiXTej8kvgW1ISCisBSyUt47LerUl1hx
- 9+V4hx9DhKzMvTXPQnnGG+FDX5Wq1Evx1PsrYTv0cfWcmk/BYQXbLZIXAFTueyVL5Le+TpnpD9Oe
- XRXSy1C3iqSsPURThlMd2x4JrejgW4HkA1vmBNnj8yZe1dDZkzQJzXGyCQMeNR+DDujuY7XqpgyQ
- cqbsfSJDomfqDsY1+UZfmJ1eGoUkFnuV1iXY0zHzvK9o9Opp+DFVbedlgQAZnNdtErJLF1nk46gk
- iSB2IrIaTNmN+BXAVh6lmypGbk9OVSuuKRhBoyLsjoU4MvxJ9g28MzbmpIKBp0szBGnyk57j1BBF
- caTrdVlf43AEuMDuWRZdozHnWXyWhyRRw6SoEdK+iOCY1YfqLS2A759Vdd29+QtCaUo2DABDkJkj
- CE+w3s2KVulfr4wk3hIWIb6s+MB/w4Kvgv/coxfGd2G4dvn0WbEHHnLHPzUbyt7OUQiOG/9BdMAk
- oFwgQvmlai+vzOl7gM929jNZCa0htgjXj6eR6snHinPkncQ+qRUNDwPrlAHJfK4kI7pMxJ1FoWd4
- TB02geJUolHXJTMZh8BvKr+i1i8S6eVAGxXwRiS2O9Zkg5wiBpnvoUb/U/NjvOKapr9croLbAV5o
- XO0/Yg5XSx3tDoB1d8h8+191I2H5aUF/X+nfqhn9mO7AcEdpDj0fvQS1QViTQg2Bg22b4n+rrdhg
- 9hakygSxr+lGWSFi2mB95eIN3fwtUnS6z0BmahNZxXu4tzdVf92GSfI8wscBzpNjBOSFZ28bAb4Q
- N7SzjX3cRW7REaAgXqYuRC44Oz9tepGPRAsr2vn6YqhfXegRcdp29wF1OTTCds1YsVMz9zgFZpzk
- RH0btUh3al7tuLlwvnH+kE5FqcwvwNh+fa9D4cdHe2jIDdA21CeA==
-X-QQ-XMRINFO: NyFYKkN4Ny6FSmKK/uo/jdU=
-From: Hanyuan Zhao <hanyuan-z@qq.com>
-To: u-boot@lists.denx.de
-Cc: Leo <ycliang@andestech.com>, Bin Meng <bmeng.cn@gmail.com>,
- Hanyuan Zhao <hanyuan-z@qq.com>,
- Hanyuan Zhao <zhaohy22@mails.tsinghua.edu.cn>
-Subject: [PATCH 1/1] riscv: add NULL check before calling strlen in the riscv
- cpu's get_desc()
-Date: Mon,  6 May 2024 17:10:06 +0800
-X-OQ-MSGID: <20240506091005.11063-1-hanyuan-z@qq.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4VXxnm2PBzz9t6j;
+ Mon,  6 May 2024 12:03:56 +0200 (CEST)
+Message-ID: <149e251a-baa7-4512-990a-d332d0d6177f@denx.de>
+Date: Mon, 6 May 2024 12:03:55 +0200
 MIME-Version: 1.0
+Subject: Re: [PATCH u-boot-mvebu 10/10] arm: mvebu: turris_omnia: Support old
+ DDR3 training, selectable via env var
+Content-Language: en-US
+To: =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>
+Cc: u-boot@lists.denx.de
+References: <20240415163043.7482-1-kabel@kernel.org>
+ <20240415163043.7482-11-kabel@kernel.org>
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20240415163043.7482-11-kabel@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4VXxnm2PBzz9t6j
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,29 +72,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Without the NULL check, if the devicetree that u-boot loads does not have a
-compatible property then a store access fault will be raised and force the
-machine to reset, due to the NULL pointer we passed to strlen. This commit
-adds this check and will return -ENOSPC to indicate the get_desc failed.
+Hi Marek,
 
-Signed-off-by: Hanyuan Zhao <zhaohy22@mails.tsinghua.edu.cn>
----
- drivers/cpu/riscv_cpu.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On 4/15/24 18:30, Marek Behún wrote:
+> Support old DDR3 training code on Turris Omnia, selectable by U-Boot
+> enviroment variable.
+> 
+> Users experiencing DDR3 initialization failures or random crashes of the
+> operating system due to incorrect DDR3 configuration can select the old
+> DDR3 training implementation to fix those issues by setting the
+> environment variable
+>    env set omnia_ddr3_training old
+>    env save
+> 
+> Signed-off-by: Marek Behún <kabel@kernel.org>
+> ---
+>   arch/arm/mach-mvebu/Kconfig                   |  1 +
+>   board/CZ.NIC/turris_omnia/Makefile            |  1 +
+>   board/CZ.NIC/turris_omnia/old_ddr3_training.c | 79 +++++++++++++++++++
+>   board/CZ.NIC/turris_omnia/turris_omnia.c      |  2 +-
+>   4 files changed, 82 insertions(+), 1 deletion(-)
+>   create mode 100644 board/CZ.NIC/turris_omnia/old_ddr3_training.c
 
-diff --git a/drivers/cpu/riscv_cpu.c b/drivers/cpu/riscv_cpu.c
-index 9b1950efe0..d39a943cb8 100644
---- a/drivers/cpu/riscv_cpu.c
-+++ b/drivers/cpu/riscv_cpu.c
-@@ -24,7 +24,7 @@ static int riscv_cpu_get_desc(const struct udevice *dev, char *buf, int size)
- 	const char *cpu;
- 
- 	cpu = dev_read_string(dev, "compatible");
--	if (size < (strlen(cpu) + 1))
-+	if (!cpu || size < (strlen(cpu) + 1))
- 		return -ENOSPC;
- 
- 	strcpy(buf, cpu);
+For turris_omnia_defconfig, this is dropped when compiled:
+
+drivers/ddr/marvell/a38x/old/ddr3_debug.c:776:12: warning: 
+'ddr3_tip_access_atr' declared 'static' but never defined 
+[-Wunused-function]
+   776 | static int ddr3_tip_access_atr(u32 dev_num, u32 flag_id, u32 
+value, u32 **ptr);
+       |            ^~~~~~~~~~~~~~~~~~~
+
+Please take a look.
+
+Thanks,
+Stefan
+
+> diff --git a/arch/arm/mach-mvebu/Kconfig b/arch/arm/mach-mvebu/Kconfig
+> index e377e8a48a..4a8328760e 100644
+> --- a/arch/arm/mach-mvebu/Kconfig
+> +++ b/arch/arm/mach-mvebu/Kconfig
+> @@ -149,6 +149,7 @@ config TARGET_TURRIS_OMNIA
+>   	select SPL_SYS_MALLOC_SIMPLE
+>   	select SYS_I2C_MVTWSI
+>   	select ATSHA204A
+> +	select ARMADA_38X_SUPPORT_OLD_DDR3_TRAINING
+>   
+>   config TARGET_TURRIS_MOX
+>   	bool "Support CZ.NIC's Turris Mox / RIPE Atlas Probe"
+> diff --git a/board/CZ.NIC/turris_omnia/Makefile b/board/CZ.NIC/turris_omnia/Makefile
+> index 341378b4e5..28142cca7e 100644
+> --- a/board/CZ.NIC/turris_omnia/Makefile
+> +++ b/board/CZ.NIC/turris_omnia/Makefile
+> @@ -3,3 +3,4 @@
+>   # Copyright (C) 2017 Marek Behún <kabel@kernel.org>
+>   
+>   obj-y	:= turris_omnia.o ../turris_atsha_otp.o ../turris_common.o
+> +obj-$(CONFIG_SPL_BUILD)	+= old_ddr3_training.o
+> diff --git a/board/CZ.NIC/turris_omnia/old_ddr3_training.c b/board/CZ.NIC/turris_omnia/old_ddr3_training.c
+> new file mode 100644
+> index 0000000000..f7e89c58d4
+> --- /dev/null
+> +++ b/board/CZ.NIC/turris_omnia/old_ddr3_training.c
+> @@ -0,0 +1,79 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (C) 2024 Marek Behún <kabel@kernel.org>
+> + */
+> +
+> +#include <common.h>
+> +#include <asm/io.h>
+> +#include <env.h>
+> +
+> +#include "../drivers/ddr/marvell/a38x/old/ddr3_init.h"
+> +
+> +static struct hws_topology_map board_topology_map_1g = {
+> +	0x1, /* active interfaces */
+> +	/* cs_mask, mirror, dqs_swap, ck_swap X PUPs */
+> +	{ { { {0x1, 0, 0, 0},
+> +	      {0x1, 0, 0, 0},
+> +	      {0x1, 0, 0, 0},
+> +	      {0x1, 0, 0, 0},
+> +	      {0x1, 0, 0, 0} },
+> +	    SPEED_BIN_DDR_1600K,	/* speed_bin */
+> +	    BUS_WIDTH_16,		/* memory_width */
+> +	    MEM_4G,			/* mem_size */
+> +	    DDR_FREQ_800,		/* frequency */
+> +	    0, 0,			/* cas_l cas_wl */
+> +	    HWS_TEMP_NORMAL,		/* temperature */
+> +	    HWS_TIM_2T} },              /* timing (force 2t) */
+> +	5,				/* Num Of Bus Per Interface*/
+> +	BUS_MASK_32BIT			/* Busses mask */
+> +};
+> +
+> +static struct hws_topology_map board_topology_map_2g = {
+> +	0x1, /* active interfaces */
+> +	/* cs_mask, mirror, dqs_swap, ck_swap X PUPs */
+> +	{ { { {0x1, 0, 0, 0},
+> +	      {0x1, 0, 0, 0},
+> +	      {0x1, 0, 0, 0},
+> +	      {0x1, 0, 0, 0},
+> +	      {0x1, 0, 0, 0} },
+> +	    SPEED_BIN_DDR_1600K,	/* speed_bin */
+> +	    BUS_WIDTH_16,		/* memory_width */
+> +	    MEM_8G,			/* mem_size */
+> +	    DDR_FREQ_800,		/* frequency */
+> +	    0, 0,			/* cas_l cas_wl */
+> +	    HWS_TEMP_NORMAL,		/* temperature */
+> +	    HWS_TIM_2T} },              /* timing (force 2t) */
+> +	5,				/* Num Of Bus Per Interface*/
+> +	BUS_MASK_32BIT			/* Busses mask */
+> +};
+> +
+> +/* defined in turris_omnia.c */
+> +extern int omnia_get_ram_size_gb(void);
+> +
+> +struct hws_topology_map *ddr3_get_topology_map(void)
+> +{
+> +	if (omnia_get_ram_size_gb() == 2)
+> +		return &board_topology_map_2g;
+> +	else
+> +		return &board_topology_map_1g;
+> +}
+> +
+> +bool board_use_old_ddr3_training(void)
+> +{
+> +	const char *env_val = NULL;
+> +
+> +	if (CONFIG_IS_ENABLED(ENV_SUPPORT) && !env_init())
+> +		env_val = env_get("omnia_ddr3_training");
+> +
+> +	if (env_val && !strcmp(env_val, "old")) {
+> +		printf("Using old DDR3 training implementation\n");
+> +		return true;
+> +	}
+> +
+> +	return false;
+> +}
+> +
+> +__weak u32 sys_env_get_topology_update_info(struct topology_update_info *tui)
+> +{
+> +	return MV_OK;
+> +}
+> diff --git a/board/CZ.NIC/turris_omnia/turris_omnia.c b/board/CZ.NIC/turris_omnia/turris_omnia.c
+> index 3b7a71bdad..225c6f4bc5 100644
+> --- a/board/CZ.NIC/turris_omnia/turris_omnia.c
+> +++ b/board/CZ.NIC/turris_omnia/turris_omnia.c
+> @@ -465,7 +465,7 @@ static bool omnia_read_eeprom(struct omnia_eeprom *oep)
+>   	return true;
+>   }
+>   
+> -static int omnia_get_ram_size_gb(void)
+> +int omnia_get_ram_size_gb(void)
+>   {
+>   	static int ram_size;
+>   	struct omnia_eeprom oep;
+
+Viele Grüße,
+Stefan Roese
+
 -- 
-2.34.1
-
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
