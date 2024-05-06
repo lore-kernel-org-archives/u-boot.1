@@ -4,66 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4EE4C10F16
-	for <u-boot@archiver.kernel.org>; Mon,  6 May 2024 15:17:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 843C0C25B4F
+	for <u-boot@archiver.kernel.org>; Mon,  6 May 2024 15:22:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9F2C8865B;
-	Mon,  6 May 2024 17:17:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id EB3DD881A0;
+	Mon,  6 May 2024 17:22:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="LkPo+8Kb";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="bxb5+Tx8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC7528867D; Mon,  6 May 2024 17:17:48 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D26BF8859F; Mon,  6 May 2024 15:56:21 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 688F788657
- for <u-boot@lists.denx.de>; Mon,  6 May 2024 17:17:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6BFF4884F6
+ for <u-boot@lists.denx.de>; Mon,  6 May 2024 15:56:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=c61d=MK=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1715008646;
- bh=SmM8CCmM36h7XnZ/76zeAlED6Eua2lcbfVvy9mc1J8o=;
- b=LkPo+8KbYZptg4mUPKzVn+hM3QVW2LGLhT/bJi2kA3yvH3suW1W7wa72iNy7r9l8wdM66dA3I
- z0c1mg9YHGAZH3CpXG5++CRJrpplYtgYLg7EEkXYTnKlqIvIc6aGWg98wA428BZjw6LJB9Jg8sZ
- DpJVWUjbJQB00lu+i27XaAhOjHI/a3aVSEgaIM1YS9eL3Hnhimv4JBheti78l0tKGgUSTAETFsc
- KktFl2ZvG6/N3fLnbi/rLwjw3VEGpkBj4dkIOmD6FB3SnB9KNU0pGy0SDfiMhnLPCx7viC1rGlW
- 1A3srbfnL74c4n8TmfedYuaYBIWKJ/EH62yLhBkSpkEw==
-Message-ID: <baacfde3-e0ee-4bd7-a85e-5945ec2a85e8@kwiboo.se>
-Date: Mon, 6 May 2024 17:17:15 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 03/22] clk: rockchip: rk3399: Improve support for
- SCLK_PCIEPHY_REF clock
-To: Quentin Schulz <quentin.schulz@cherry.de>, Quentin Schulz
- <quentin.schulz@theobroma-systems.com>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Dragan
- Simic <dsimic@manjaro.org>, Christopher Obbard
- <chris.obbard@collabora.com>, Peter Robinson <pbrobinson@gmail.com>,
- u-boot@lists.denx.de
-References: <20240501162308.875193-1-jonas@kwiboo.se>
- <20240501162308.875193-4-jonas@kwiboo.se>
- <b0152407-ee06-4c5b-ae5c-210a474ad598@cherry.de>
+ spf=pass smtp.mailfrom=avromanov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id B6C64100006;
+ Mon,  6 May 2024 16:56:18 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru B6C64100006
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1715003778;
+ bh=HZa5uTLgKVQ/zVPin3RXzPw+s74KMtm5c6xUkzvr7Kw=;
+ h=From:To:Subject:Date:Message-ID:Content-Type:MIME-Version:From;
+ b=bxb5+Tx8//xhHNXlr7jPSBnce/DEuyBxPPRA9vtkueV3nBBw6BQzZowyzQR1X2xB4
+ qPAXhteJ3GC9rUWUckW61fus+gToK88BmFtWR1sh47eEo8/lu6ra0OLwOLJ3+HFbuN
+ HyiaEj4ek/xdoXY79Sc+3zpkW2OFJkw81v92H+QyAHGMhql8YjBwhEZ7/ZrXD+I0pL
+ /BE+yU8k2zrgrAM5N0jnN1uzsmC3kUCowX34bNI8WqhYBWvP28gYWuTjLvq+lsHKJP
+ Lc5S2BGt+yi+1rL4XvAMnYyo0XUzBnBXyY09d9IfsNrEEHcihv6r0gvpZuxjQDW/5r
+ H3O43GEZM7pug==
+Received: from smtp.sberdevices.ru (p-i-exch-a-m2.sberdevices.ru
+ [172.24.196.120])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Mon,  6 May 2024 16:56:18 +0300 (MSK)
+Received: from p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) by
+ p-i-exch-a-m2.sberdevices.ru (172.24.196.120) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.4; Mon, 6 May 2024 16:56:18 +0300
+Received: from p-i-exch-sc-m02.sberdevices.ru ([fe80::10c3:6e04:fd07:c511]) by
+ p-i-exch-sc-m02.sberdevices.ru ([fe80::10c3:6e04:fd07:c511%9]) with
+ mapi id 15.02.1118.040; Mon, 6 May 2024 16:56:17 +0300
+From: Alexey Romanov <avromanov@salutedevices.com>
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+CC: "dario.binacchi@amarulasolutions.com"
+ <dario.binacchi@amarulasolutions.com>, "frieder.schrempf@kontron.de"
+ <frieder.schrempf@kontron.de>, "kmpark@infradead.org" <kmpark@infradead.org>, 
+ "hs@denx.de" <hs@denx.de>, "joe.hershberger@ni.com" <joe.hershberger@ni.com>, 
+ "dunaev@tecon.ru" <dunaev@tecon.ru>, "sjg@chromium.org" <sjg@chromium.org>,
+ "bmeng@tinylab.org" <bmeng@tinylab.org>, "xypron.glpk@gmx.de"
+ <xypron.glpk@gmx.de>, "tobias@waldekranz.com" <tobias@waldekranz.com>,
+ "jpewhacker@gmail.com" <jpewhacker@gmail.com>,
+ "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>,
+ "kever.yang@rock-chips.com" <kever.yang@rock-chips.com>, "jbx6244@gmail.com"
+ <jbx6244@gmail.com>, "abdellatif.elkhlifi@arm.com"
+ <abdellatif.elkhlifi@arm.com>, "mikhail.kshevetskiy@iopsys.eu"
+ <mikhail.kshevetskiy@iopsys.eu>, "jagan@amarulasolutions.com"
+ <jagan@amarulasolutions.com>, kernel <kernel@sberdevices.ru>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [PATCH v3 0/3] Introduce mtdblock device
+Thread-Topic: [PATCH v3 0/3] Introduce mtdblock device
+Thread-Index: AQHahn8E065oAbZrwUS8pgiLN8ifkbFjFfGAgAABb4CAJyOngA==
+Date: Mon, 6 May 2024 13:56:17 +0000
+Message-ID: <20240506135607.aprjqn7uyng2jgp5@cab-wsm-0029881>
+References: <20240404105813.1520732-1-avromanov@salutedevices.com>
+ <20240411160857.fb6a2neossmz2d4y@cab-wsm-0029881.sigma.sbrf.ru>
+ <CAOf5uwkGoHVzDvvz3pqCsro2VC+Vxj-YaKKkye=n=AU8w8dJmA@mail.gmail.com>
+In-Reply-To: <CAOf5uwkGoHVzDvvz3pqCsro2VC+Vxj-YaKKkye=n=AU8w8dJmA@mail.gmail.com>
+Accept-Language: ru-RU, en-US
 Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <b0152407-ee06-4c5b-ae5c-210a474ad598@cherry.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 6638f4811ab72626380504c9
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.16.18.93]
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <EF798F4C84A17246A5EAC9CD6575B298@sberdevices.ru>
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 185086 [May 06 2024]
+X-KSMG-AntiSpam-Version: 6.1.0.4
+X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 19 0.3.19
+ 07c7fa124d1a1dc9662cdc5aace418c06ae99d2b, {Tracking_uf_ne_domains},
+ {Track_E25351}, {Tracking_from_domain_doesnt_match_to}, 127.0.0.199:7.1.2;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; lore.kernel.org:7.1.1;
+ smtp.sberdevices.ru:5.0.1,7.1.1; salutedevices.com:7.1.1, FromAlignment: s
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean, bases: 2024/05/06 13:00:00
+X-KSMG-LinksScanning: Clean, bases: 2024/05/06 13:00:00
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/05/06 12:01:00 #25108659
+X-KSMG-AntiVirus-Status: Clean, skipped
+X-Mailman-Approved-At: Mon, 06 May 2024 17:22:47 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,155 +125,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
-
-On 2024-05-06 13:07, Quentin Schulz wrote:
-> Hi Jonas,
-> 
-> On 5/1/24 6:22 PM, Jonas Karlman wrote:
->> rk3399-nanopi-4.dtsi try to set parent of and set rate to 100 MHz of the
->> SCLK_PCIEPHY_REF clock.
->>
->> The existing enable/disable ops for SCLK_PCIEPHY_REF currently force
->> use of 24 MHz parent and rate.
->>
->> Add improved support for setting parent and rate of the pciephy refclk
->> to driver to better support assign-clock props for pciephy refclk in DT.
->>
->> This limited implementation only support setting 24 or 100 MHz rate,
->> and expect npll and clk_pciephy_ref100m divider to use default values.
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> ---
->> v2: Implement partial instead of dummy support for SCLK_PCIEPHY_REF
->> ---
->>   drivers/clk/rockchip/clk_rk3399.c | 59 +++++++++++++++++++++++++++++--
->>   1 file changed, 57 insertions(+), 2 deletions(-)
->>
->> diff --git a/drivers/clk/rockchip/clk_rk3399.c b/drivers/clk/rockchip/clk_rk3399.c
->> index 5934771b4096..0b3223611a32 100644
->> --- a/drivers/clk/rockchip/clk_rk3399.c
->> +++ b/drivers/clk/rockchip/clk_rk3399.c
->> @@ -926,6 +926,26 @@ static ulong rk3399_saradc_set_clk(struct rockchip_cru *cru, uint hz)
->>   	return rk3399_saradc_get_clk(cru);
->>   }
->>   
->> +static ulong rk3399_pciephy_get_clk(struct rockchip_cru *cru)
->> +{
->> +	if (readl(&cru->clksel_con[18]) & BIT(10))
->> +		return 100 * MHz;
->> +	else
->> +		return OSC_HZ;
-> 
-> Could avoid the else since all if blocks return, no other logic than the 
-> one matching the else can reach that part of the code.
-> 
-> Therefore:
-> 
-> """
-> if (readl(&cru->clksel_con[18]) & BIT(10))
->      return 100 * MHz;
-> 
-> return OSC_HZ;
-> """
-> 
-> works just as well.
-
-I was considering above format at first, but chose to align return
-statements for some reason.
-
-I can change to this format in a v3, if needed :-)
-
-> 
-> Could also be
-> 
-> """
-> return (readl(&cru->clksel_con[18]) & BIT(10)) ? 100 * MHz : OSC_HZ;
-> """
-> 
-> [...]
->> +static int __maybe_unused rk3399_pciephy_set_parent(struct clk *clk,
->> +						    struct clk *parent)
->> +{
->> +	struct rk3399_clk_priv *priv = dev_get_priv(clk->dev);
->> +	const char *clock_output_name;
->> +	int ret;
->> +
->> +	if (parent->dev == clk->dev && parent->id == SCLK_PCIEPHY_REF100M) {
->> +		rk_setreg(&priv->cru->clksel_con[18], BIT(10));
->> +		return 0;
->> +	}
->> +
->> +	ret = dev_read_string_index(parent->dev, "clock-output-names",
->> +				    parent->id, &clock_output_name);
-> 
-> Are you sure this works?
-
-It should work for the clk reference I tested, <&xin24m>, where the id
-will be 0, it should also work for e.g. <&rk809 1>, id will be 1.
-
-And if a &cru/&pmucru clk is referenced those nodes do not have the
-clock-output-names prop, so ret should be -EINVAL (or -ENODATA).
-
-> 
-> Considering that parent->id seems to store unique ids, like 167 for 
-> SCLK_PCIEPHY_REF100M, I doubt we should be using it for 
-> dev_read_string_index????
-> 
-> As per documentation:
-> 
-> """
-> /**
->   * dev_read_string_index() - obtain an indexed string from a string list
->   *
->   * @dev: device to examine
->   * @propname: name of the property containing the string list
->   * @index: index of the string to return
->   * @outp: return location for the string
->   *
->   * Return:
->   *   length of string, if found or -ve error value if not found
->   */
-> int dev_read_string_index(const struct udevice *dev, const char *propname,
-> 			  int index, const char **outp);
-> """
-> 
-> So index here means the (index+1)'th string in the list of strings under 
-> the "propname" DT property, I doubt we have properties with 167+ strings 
-> in them?
-
-I would expect the function to return -EINVAL or -ENODATA if it is called
-with an out-of-bounds index value.
-
-> 
-> I realize that rk3399_gmac_set_parent also uses this, so I'm a bit 
-> puzzled right now...
-> 
-> Don't you want to use
-> 
-> dev_read_stringlist_search(parent->dev, "clock-output-names", "xin24m")
-> 
-> instead?
-
-I think the implementation is correct and is what other rk clk drivers
-do for gmac set parent ops.
-
-Using dev_read_stringlist_search() could possible match a name for
-"wrong" clock, e.g:
-
-clk_ref: clock {
-	#clock-cells = <1>;
-	clock-output-names = "xin32k", "xin24m";
-};
-
-here only <&clk_ref 1> should match and not <&clk_ref 0>.
-
-Regards,
-Jonas
-
-> 
-> The rest looks good to me.
-> 
-> Cheers,
-> Quentin
-
+SGVsbG8gTWljaGFlbCwNCg0KT24gVGh1LCBBcHIgMTEsIDIwMjQgYXQgMDY6MTQ6MjlQTSArMDIw
+MCwgTWljaGFlbCBOYXp6YXJlbm8gVHJpbWFyY2hpIHdyb3RlOg0KPiBIaQ0KPiANCj4gSSB3aWxs
+IHJldmlldyB0b21vcnJvdywgSSBuZWVkIGhhdmUgYSB0aW1lIHdpbmRvdyB0byB0ZXN0IGV2ZW4g
+b24gbXkgYm9hcmQNCg0KQW55IG5ld3M/DQoNCj4gDQo+IE1paGNhZWwNCj4gDQo+IE9uIFRodSwg
+QXByIDExLCAyMDI0IGF0IDY6MDnigK9QTSBBbGV4ZXkgUm9tYW5vdg0KPiA8YXZyb21hbm92QHNh
+bHV0ZWRldmljZXMuY29tPiB3cm90ZToNCj4gPg0KPiA+IEhlbGxvISBQaW5nLg0KPiA+DQo+ID4g
+T24gVGh1LCBBcHIgMDQsIDIwMjQgYXQgMDE6NTg6MTBQTSArMDMwMCwgQWxleGV5IFJvbWFub3Yg
+d3JvdGU6DQo+ID4gPiBIZWxsbyENCj4gPiA+DQo+ID4gPiBUaGlzIHNlcmllcyBhZGRzIHN1cHBv
+cnQgZm9yIHRoZSBtdGRibG9jayBkZXZpY2UsIHdoaWNoDQo+ID4gPiBhbGxvd3MgdG8gcmVhZC93
+cml0ZSBkYXRhIGJsb2NrIGJ5IGJsb2NrLiBGb3IgZXhhbXBsZSwNCj4gPiA+IGl0IGNhbiBub3cg
+YmUgdXNlZCBmb3IgQkNCIG9yIEFuZHJvaWQgQUIgY29tbWFuZDoNCj4gPiA+DQo+ID4gPiAgICQg
+YmNiIGxvYWQgbXRkIDAgcGFydF9uYW1lDQo+ID4gPg0KPiA+ID4gVGVzdGVkIG9ubHkgb24gU1BJ
+IE5BTkQsIHNvIGJpbmQgaXMgbWFkZSBvbmx5IGZvcg0KPiA+ID4gU1BJIE5BTkQgZHJpdmVycy4N
+Cj4gPiA+DQo+ID4gPiAtLS0NCj4gPiA+DQo+ID4gPiBDaGFuZ2VzIFYxIC0+IFYyIFsxXToNCj4g
+PiA+DQo+ID4gPiAgIC0gRHJvcCBwYXRjaCBbMl0uDQo+ID4gPiAgIC0gQWRkIHdhcm5pbmcgaWYg
+YmluZCBOQU5EIG10ZGJsb2NrIGRldmljZS4NCj4gPiA+ICAgLSBNb3ZlIGRvY3VtZW50YXRpb24g
+b2YgbXRkYmxvY2sgaW1wbGVtZW50YXRpb24NCj4gPiA+ICAgICBmcm9tIGNvbW1pdCBtZXNzYWdl
+IHRvIHRoZSBzb3VyY2UgY29kZS4NCj4gPiA+ICAgLSBSZW1vdmUgX19tYXliZV91bnVzZWQgZnJv
+bSBtdGQgcGFydGl0aW9uIGZ1bmN0aW9ucw0KPiA+ID4gICAgIGRlc2NyaXB0aW9uLg0KPiA+ID4g
+ICAtIFVzZSBibGtfZW5hYmxlZCgpIGluc3RlYWQgb2YgI2lmZGVmcy4NCj4gPiA+DQo+ID4gPiBD
+aGFuZ2VzIFYyIC0+IFYzIFsyXToNCj4gPiA+DQo+ID4gPiAgIC0gUmViYXNlZCBvdmVyIFszXS4N
+Cj4gPiA+ICAgLSBSZW5hbWUgbXRkX2JyZWFkL2J3cml0ZSAtPiBtdGRfYmxrX3JlYWQvd3JpdGUu
+DQo+ID4gPiAgIC0gRml4IEdQTC0yLjAgbGljZW5zZSBzaG9ydCBuYW1lIGRlZmluaXRvbiBpbiBo
+ZWFkZXJzLg0KPiA+ID4gICAtIEFkZCBlbXB0eSBsaW5lIGFmdGVyIE1URF9FTlRSWV9OVU1CRVJT
+IGRlZmluZS4NCj4gPiA+DQo+ID4gPiBMaW5rczoNCj4gPiA+DQo+ID4gPiAgIC0gWzFdIGh0dHBz
+Oi8vbG9yZS5rZXJuZWwub3JnL2FsbC8yMDI0MDIyNzEwMDQ0MS4xODExMDQ3LTEtYXZyb21hbm92
+QHNhbHV0ZWRldmljZXMuY29tLw0KPiA+ID4gICAtIFsyXSBodHRwczovL2xvcmUua2VybmVsLm9y
+Zy9hbGwvMjAyNDAyMjcxMDA0NDEuMTgxMTA0Ny01LWF2cm9tYW5vdkBzYWx1dGVkZXZpY2VzLmNv
+bS8NCj4gPiA+ICAgLSBbM10gaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvdS1ib290LzIwMjQwNDAz
+MTE0MDQ3Ljg0MDMwLTEtaGVpbnJpY2guc2NodWNoYXJkdEBjYW5vbmljYWwuY29tL1QvI3UNCj4g
+PiA+DQo+ID4gPiBBbGV4ZXkgUm9tYW5vdiAoMyk6DQo+ID4gPiAgIGRpc2s6IHN1cHBvcnQgTVRE
+IHBhcnRpdGlvbnMNCj4gPiA+ICAgZHJpdmVyczogaW50cm9kdWNlIG10ZGJsb2NrIGFic3RyYWN0
+aW9uDQo+ID4gPiAgIHNwaW5hbmQ6IGJpbmQgbXRkYmxvY2sNCj4gPiA+DQo+ID4gPiAgZGlzay9w
+YXJ0LmMgICAgICAgICAgICAgICAgIHwgICAzICstDQo+ID4gPiAgZHJpdmVycy9ibG9jay9ibGst
+dWNsYXNzLmMgIHwgICAxICsNCj4gPiA+ICBkcml2ZXJzL210ZC9LY29uZmlnICAgICAgICAgfCAg
+IDEgKw0KPiA+ID4gIGRyaXZlcnMvbXRkL01ha2VmaWxlICAgICAgICB8ICAgMSArDQo+ID4gPiAg
+ZHJpdmVycy9tdGQvbXRkYmxvY2suYyAgICAgIHwgMjI3ICsrKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysrKysrKw0KPiA+ID4gIGRyaXZlcnMvbXRkL210ZHBhcnQuYyAgICAgICB8ICA2OSAr
+KysrKysrKysrKw0KPiA+ID4gIGRyaXZlcnMvbXRkL25hbmQvc3BpL2NvcmUuYyB8ICAyMCArKysr
+DQo+ID4gPiAgaW5jbHVkZS9saW51eC9tdGQvbXRkLmggICAgIHwgIDEyICsrDQo+ID4gPiAgaW5j
+bHVkZS9wYXJ0LmggICAgICAgICAgICAgIHwgICAzICsNCj4gPiA+ICA5IGZpbGVzIGNoYW5nZWQs
+IDMzNiBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pDQo+ID4gPiAgY3JlYXRlIG1vZGUgMTAw
+NjQ0IGRyaXZlcnMvbXRkL210ZGJsb2NrLmMNCj4gPiA+DQo+ID4gPiAtLQ0KPiA+ID4gMi4zNC4x
+DQo+ID4gPg0KPiA+DQo+ID4gLS0NCj4gPiBUaGFuayB5b3UsDQo+ID4gQWxleGV5DQo+IA0KPiAN
+Cj4gDQo+IC0tIA0KPiBNaWNoYWVsIE5henphcmVubyBUcmltYXJjaGkNCj4gQ28tRm91bmRlciAm
+IENoaWVmIEV4ZWN1dGl2ZSBPZmZpY2VyDQo+IE0uICszOSAzNDcgOTEzIDIxNzANCj4gbWljaGFl
+bEBhbWFydWxhc29sdXRpb25zLmNvbQ0KPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fDQo+IA0KPiBBbWFydWxhIFNvbHV0aW9ucyBCVg0KPiBKb29wIEdlZXNpbmt3ZWcgMTI1LCAx
+MTE0IEFCLCBBbXN0ZXJkYW0sIE5MDQo+IFQuICszMSAoMCk4NSAxMTEgOTE3Mg0KPiBpbmZvQGFt
+YXJ1bGFzb2x1dGlvbnMuY29tDQo+IHd3dy5hbWFydWxhc29sdXRpb25zLmNvbQ0KDQotLSANClRo
+YW5rIHlvdSwNCkFsZXhleQ==
