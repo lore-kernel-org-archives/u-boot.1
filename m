@@ -4,71 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8CC4C10F16
-	for <u-boot@archiver.kernel.org>; Mon,  6 May 2024 14:04:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 606DAC10F16
+	for <u-boot@archiver.kernel.org>; Mon,  6 May 2024 14:07:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2981987D8E;
-	Mon,  6 May 2024 16:04:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AF918885AE;
+	Mon,  6 May 2024 16:07:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1715004279;
-	bh=nnA3Z53pLGvEK/GNLVnhECFHlfhg2JF1fpc4XYBCnT0=;
+	s=phobos-20191101; t=1715004444;
+	bh=QSqpNTlZzZshI4ySD+SVAsp1AzEFxotjdyyMPeqW3Zg=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=DhBmAZmj7fIvUUNwkYycH0ylqwZ8mZxciE1b89jfXgl9U5TKyR9VApoj+pWLkSDd3
-	 /9MToLtVmjJuLYgeoyyuIFyU+jN7m6tcpuEep9s/vbtkFF9NZzEs9xTm8UkHuE4o5N
-	 noHh8g9PAfFDlkUDURGcP7G42QWVcKX/toO7m8Zk6Xoua+4zyC8XOV1ni5wk/q4uFd
-	 MQzKha8Z4pvDpGJOX/AoGzHGf/r+Wxry2fAUvW8Tf7ooH3q8H3JXe8mJOYgOnlfy2h
-	 rA5IURx1RS75cNdNfZUsCAvzp99day+8xnOKqjxsVYVIMMdNubN8YbNrvvfnluxA0g
-	 BKnnxgHEcvbBg==
+	b=gaPB2A7OKFHHr1GEi4HXFBBYPtb67S0hoqN/0dS7AzqqyogrwcUg/8P9aSA7H7y/u
+	 RhqTD50uLS1jAcXVSlIWLXKoiGU2MaoXl4bAqHfK8rTS83tfLtFOiNZW/VcsHU+Q3x
+	 CcP10HGImkBxEd0eIZ7iQ6axEtiTg+mmQrHLDjKJvTysMPk5X9wS2+QZJAvICOCKaq
+	 uYi2gd37+3h2VWIYVSwwOx2bfvANUwzZ4vnOUSpTPBZ1bnM+jgyNF+sBLsJwz7KfBy
+	 j1tnQ+Er7QYYGsptTpobUrVKF6iMlenMUgBgo5ID1f8X9uWQkKiz8Y5QprwCgV2aTR
+	 U2TzTuAnDg8CQ==
 Received: from [192.168.1.107] (89-186-112-218.pool.digikabel.hu
  [89.186.112.218])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E2ACC80E9A;
- Mon,  6 May 2024 16:04:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 8A69C885F7;
+ Mon,  6 May 2024 16:07:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1715004278;
- bh=nnA3Z53pLGvEK/GNLVnhECFHlfhg2JF1fpc4XYBCnT0=;
+ s=phobos-20191101; t=1715004443;
+ bh=QSqpNTlZzZshI4ySD+SVAsp1AzEFxotjdyyMPeqW3Zg=;
  h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
- b=vB/48tgVfzUVY4+Dzy+o+jy8lWhLuOXRCjvqiiMaaPd7shHZ/Bbhx5ZCucATFjE2P
- Af52r2LDoBSaLCnZ+o2IrpRgRvyeNATw90tlTvDg4PwJ4lZUTJH01sxcRT77n6sKcs
- tZf0XTH+n/JbD1/40/rMLSFxc4s/LeqAk/3+U9ZIW6TxzaB0Y9yqFrTEr09ggOLHMw
- A+o+3fPMmiT0OBdMGFYVx0CFsZDrzRe7+t9qrnzrhp62G7K9s0j89vrtVmtyLmyN5N
- QbOErxajydKcEQnsY2sfWOboLRz6qgeC3iISuAjBamGrWUQXFJTXhb0MAYGUwHF2jF
- +8kSNdDxBr8LA==
-Message-ID: <6ac44ced-60b5-73fc-f696-9f769dbf59cf@denx.de>
-Date: Mon, 6 May 2024 16:04:09 +0200
+ b=u+L5ZdTJmQ13IGuKzsvYpnBW85X27s+Z9P3vyxa1nCI8f4+S99mS4twNKSwBruzhW
+ vf4aYVXLc0EAboOr5ZOYJHUiKO+6zYF6bt2YJncKbjKcS4UpokjjlL1Be2W1GfC+6e
+ UetyJs4uV6v4zMGzTPsE5MZ0iG/WCJ4DFXfWVVvfWVn+pLely8g+ShPFj1ap0DWV0g
+ nxPO8u/l3j+HXsFSCiauahGh5rpABopY4V+DbhILQdqcfWR7ZBwPCnvvzTSNOfJAp4
+ 3izKDaiDj/uMrznZrOk/tL7vTbxFzJVVfCifmA4oiLkYyqGtM5Jyt8AMPvasKl0DaM
+ ZbfKAl/tmX/oA==
+Message-ID: <c02ef9dd-669a-9ea5-b764-c03ddff7ee75@denx.de>
+Date: Mon, 6 May 2024 16:07:00 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH v2 0/6] Introduce UBI block device
+Subject: Re: [PATCH] fs: ubifs: Add support for ZSTD decompression
 Content-Language: en-US
-To: Alexey Romanov <avromanov@salutedevices.com>,
- "dario.binacchi@amarulasolutions.com" <dario.binacchi@amarulasolutions.com>,
- "michael@amarulasolutions.com" <michael@amarulasolutions.com>,
- "frieder.schrempf@kontron.de" <frieder.schrempf@kontron.de>,
- "kmpark@infradead.org" <kmpark@infradead.org>,
- "joe.hershberger@ni.com" <joe.hershberger@ni.com>,
- "dunaev@tecon.ru" <dunaev@tecon.ru>, "sjg@chromium.org" <sjg@chromium.org>,
- "bmeng@tinylab.org" <bmeng@tinylab.org>,
- "xypron.glpk@gmx.de" <xypron.glpk@gmx.de>,
- "tobias@waldekranz.com" <tobias@waldekranz.com>,
- "jpewhacker@gmail.com" <jpewhacker@gmail.com>,
- "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>,
- "kever.yang@rock-chips.com" <kever.yang@rock-chips.com>,
- "jbx6244@gmail.com" <jbx6244@gmail.com>,
- "abdellatif.elkhlifi@arm.com" <abdellatif.elkhlifi@arm.com>,
- "mikhail.kshevetskiy@iopsys.eu" <mikhail.kshevetskiy@iopsys.eu>,
- "jagan@amarulasolutions.com" <jagan@amarulasolutions.com>
-Cc: kernel <kernel@sberdevices.ru>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-References: <20240325144148.3738195-1-avromanov@salutedevices.com>
- <20240506135755.pgpttzekxd6g3css@cab-wsm-0029881>
+To: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>, u-boot@lists.denx.de
+Cc: Ben Dooks <ben.dooks@sifive.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>
+References: <20240430102358.11163-1-piotr.wojtaszczyk@timesys.com>
 From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20240506135755.pgpttzekxd6g3css@cab-wsm-0029881>
+In-Reply-To: <20240430102358.11163-1-piotr.wojtaszczyk@timesys.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -88,75 +71,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Alexey,
+Hello Piotr,
 
-On 06.05.24 15:58, Alexey Romanov wrote:
-> Hello! Ping.
+On 30.04.24 12:23, Piotr Wojtaszczyk wrote:
+> Signed-off-by: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
+> ---
+> 
+>   fs/ubifs/ubifs-media.h |  2 ++
+>   fs/ubifs/ubifs.c       | 55 ++++++++++++++++++++++++++++++++++++++++--
+>   2 files changed, 55 insertions(+), 2 deletions(-)
 
-okay from my side... I think I acked them already
+Looks good to me, thanks!
 
-@Dario: IIRC the patchset is delegated to you...
-
-If it is okay, I can apply it in u-boot-ubi and send a pull request to
-Tom, but please, send a Acked-by or Reviewed-by and delegate it back to me!
-
-Thanks!
+Acked-by: Heiko Schocher <hs@denx.de>
 
 bye,
 Heiko
-> 
-> On Mon, Mar 25, 2024 at 05:41:42PM +0300, Alexey Romanov wrote:
->> Hello!
->>
->> This series adds support for the UBI block device, which
->> allows to read/write data block by block. For example,
->> it can now be used for BCB or Android AB command:
->>
->>    $ bcb load ubi 0 part_name
->>
->> Tested only on SPI NAND, so bind is made only for
->> SPI NAND drivers. Can be used with mtdblock device [1].
->>
->> ---
->>
->> Changes V1 -> V2 [2]:
->>
->>   - Rebased over mtdblock v2 patchset [3].
->>   - Compile UBI partitions support only if CONFIG_BLK option
->>     is enabled.
->>
->> - Links:
->>
->>    [1] https://lore.kernel.org/all/20240227100441.1811047-1-avromanov@salutedevices.com/
->>    [2] https://lore.kernel.org/all/20240306134906.1179285-1-avromanov@salutedevices.com/
->>    [3] https://lore.kernel.org/all/20240307130726.1582487-1-avromanov@salutedevices.com/
->>
->> Alexey Romanov (6):
->>    ubi: allow to read from volume with offset
->>    ubi: allow to write to volume with offset
->>    drivers: introduce UBI block abstraction
->>    disk: don't try search for partition type if already set
->>    disk: support UBI partitions
->>    spinand: bind UBI block
->>
->>   cmd/ubi.c                   |  77 +++++++++++++++++++--
->>   disk/part.c                 |   7 ++
->>   drivers/block/blk-uclass.c  |   1 +
->>   drivers/mtd/nand/spi/core.c |   8 ++-
->>   drivers/mtd/ubi/Makefile    |   1 +
->>   drivers/mtd/ubi/block.c     | 130 ++++++++++++++++++++++++++++++++++++
->>   drivers/mtd/ubi/part.c      |  99 +++++++++++++++++++++++++++
->>   env/ubi.c                   |  16 ++---
->>   include/part.h              |   2 +
->>   include/ubi_uboot.h         |   8 ++-
->>   10 files changed, 332 insertions(+), 17 deletions(-)
->>   create mode 100644 drivers/mtd/ubi/block.c
->>   create mode 100644 drivers/mtd/ubi/part.c
->>
->> -- 
->> 2.34.1
->>
-> 
 
 -- 
 DENX Software Engineering GmbH,      Managing Director: Erika Unter
