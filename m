@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 843C0C25B4F
-	for <u-boot@archiver.kernel.org>; Mon,  6 May 2024 15:22:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 376D3C10F16
+	for <u-boot@archiver.kernel.org>; Mon,  6 May 2024 15:23:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB3DD881A0;
-	Mon,  6 May 2024 17:22:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4F57188685;
+	Mon,  6 May 2024 17:22:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="bxb5+Tx8";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="RlEqc5Xb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D26BF8859F; Mon,  6 May 2024 15:56:21 +0200 (CEST)
+ id 6EF4E885B5; Mon,  6 May 2024 15:58:03 +0200 (CEST)
 Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BFF4884F6
- for <u-boot@lists.denx.de>; Mon,  6 May 2024 15:56:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 359FF884F6
+ for <u-boot@lists.denx.de>; Mon,  6 May 2024 15:58:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avromanov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id B6C64100006;
- Mon,  6 May 2024 16:56:18 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru B6C64100006
+ by mx1.sberdevices.ru (Postfix) with ESMTP id B7E87100007;
+ Mon,  6 May 2024 16:58:00 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru B7E87100007
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1715003778;
- bh=HZa5uTLgKVQ/zVPin3RXzPw+s74KMtm5c6xUkzvr7Kw=;
+ s=mail; t=1715003880;
+ bh=hyY5LCyxcWmoaDKAVvMqOeMNQIq5QH2PvnQFee0maYo=;
  h=From:To:Subject:Date:Message-ID:Content-Type:MIME-Version:From;
- b=bxb5+Tx8//xhHNXlr7jPSBnce/DEuyBxPPRA9vtkueV3nBBw6BQzZowyzQR1X2xB4
- qPAXhteJ3GC9rUWUckW61fus+gToK88BmFtWR1sh47eEo8/lu6ra0OLwOLJ3+HFbuN
- HyiaEj4ek/xdoXY79Sc+3zpkW2OFJkw81v92H+QyAHGMhql8YjBwhEZ7/ZrXD+I0pL
- /BE+yU8k2zrgrAM5N0jnN1uzsmC3kUCowX34bNI8WqhYBWvP28gYWuTjLvq+lsHKJP
- Lc5S2BGt+yi+1rL4XvAMnYyo0XUzBnBXyY09d9IfsNrEEHcihv6r0gvpZuxjQDW/5r
- H3O43GEZM7pug==
-Received: from smtp.sberdevices.ru (p-i-exch-a-m2.sberdevices.ru
- [172.24.196.120])
+ b=RlEqc5XbAqEuJkN+579BbmtUO4gNTwe52xWfofsqTNI5HtVFjqs51g0KaOW7XVOcM
+ jOeCQhKY9XCMkv3P0XIrL80K4nmLi7IP8BhElNGdNzeAcbXPYlDvT7Tnvbsr7p9ARI
+ gII5tr4QwJkns8kOhn8XwlhhlrkrPnPlUzY2q3QLlGWXCeLJT2BlqfP/DdkA07Zydn
+ Y/3XTs5h3nJKlE1YcO7nmNW/1BmEMVKF2D/wAu+iztbwZ1yZEAxxuZcBtBsaVFN6Kn
+ QK6N9PD6mOYTllK0aRcZBYMwoRothhupd3gXhRnGkuqY1H223J56mpFmNXOy4sbdKo
+ 5QFgkgQY3VucA==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
+ [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Mon,  6 May 2024 16:56:18 +0300 (MSK)
+ Mon,  6 May 2024 16:58:00 +0300 (MSK)
 Received: from p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) by
- p-i-exch-a-m2.sberdevices.ru (172.24.196.120) with Microsoft SMTP Server
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.4; Mon, 6 May 2024 16:56:18 +0300
+ 15.2.1118.40; Mon, 6 May 2024 16:58:00 +0300
 Received: from p-i-exch-sc-m02.sberdevices.ru ([fe80::10c3:6e04:fd07:c511]) by
  p-i-exch-sc-m02.sberdevices.ru ([fe80::10c3:6e04:fd07:c511%9]) with
- mapi id 15.02.1118.040; Mon, 6 May 2024 16:56:17 +0300
+ mapi id 15.02.1118.040; Mon, 6 May 2024 16:58:00 +0300
 From: Alexey Romanov <avromanov@salutedevices.com>
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-CC: "dario.binacchi@amarulasolutions.com"
- <dario.binacchi@amarulasolutions.com>, "frieder.schrempf@kontron.de"
+To: "dario.binacchi@amarulasolutions.com"
+ <dario.binacchi@amarulasolutions.com>, "michael@amarulasolutions.com"
+ <michael@amarulasolutions.com>, "frieder.schrempf@kontron.de"
  <frieder.schrempf@kontron.de>, "kmpark@infradead.org" <kmpark@infradead.org>, 
  "hs@denx.de" <hs@denx.de>, "joe.hershberger@ni.com" <joe.hershberger@ni.com>, 
  "dunaev@tecon.ru" <dunaev@tecon.ru>, "sjg@chromium.org" <sjg@chromium.org>,
@@ -67,25 +67,24 @@ CC: "dario.binacchi@amarulasolutions.com"
  <jbx6244@gmail.com>, "abdellatif.elkhlifi@arm.com"
  <abdellatif.elkhlifi@arm.com>, "mikhail.kshevetskiy@iopsys.eu"
  <mikhail.kshevetskiy@iopsys.eu>, "jagan@amarulasolutions.com"
- <jagan@amarulasolutions.com>, kernel <kernel@sberdevices.ru>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH v3 0/3] Introduce mtdblock device
-Thread-Topic: [PATCH v3 0/3] Introduce mtdblock device
-Thread-Index: AQHahn8E065oAbZrwUS8pgiLN8ifkbFjFfGAgAABb4CAJyOngA==
-Date: Mon, 6 May 2024 13:56:17 +0000
-Message-ID: <20240506135607.aprjqn7uyng2jgp5@cab-wsm-0029881>
-References: <20240404105813.1520732-1-avromanov@salutedevices.com>
- <20240411160857.fb6a2neossmz2d4y@cab-wsm-0029881.sigma.sbrf.ru>
- <CAOf5uwkGoHVzDvvz3pqCsro2VC+Vxj-YaKKkye=n=AU8w8dJmA@mail.gmail.com>
-In-Reply-To: <CAOf5uwkGoHVzDvvz3pqCsro2VC+Vxj-YaKKkye=n=AU8w8dJmA@mail.gmail.com>
+ <jagan@amarulasolutions.com>
+CC: kernel <kernel@sberdevices.ru>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Subject: Re: [PATCH v2 0/6] Introduce UBI block device
+Thread-Topic: [PATCH v2 0/6] Introduce UBI block device
+Thread-Index: AQHafsKY1wi7DQ3h+k+mVy5zB7Awi7GKSvmA
+Date: Mon, 6 May 2024 13:58:00 +0000
+Message-ID: <20240506135755.pgpttzekxd6g3css@cab-wsm-0029881>
+References: <20240325144148.3738195-1-avromanov@salutedevices.com>
+In-Reply-To: <20240325144148.3738195-1-avromanov@salutedevices.com>
 Accept-Language: ru-RU, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [172.16.18.93]
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <EF798F4C84A17246A5EAC9CD6575B298@sberdevices.ru>
-Content-Transfer-Encoding: base64
+x-originating-ip: [172.16.18.92]
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <E0E645017C086146842939079A66D4F3@sberdevices.ru>
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-KSMG-Rule-ID: 10
 X-KSMG-Message-Action: clean
@@ -125,54 +124,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGVsbG8gTWljaGFlbCwNCg0KT24gVGh1LCBBcHIgMTEsIDIwMjQgYXQgMDY6MTQ6MjlQTSArMDIw
-MCwgTWljaGFlbCBOYXp6YXJlbm8gVHJpbWFyY2hpIHdyb3RlOg0KPiBIaQ0KPiANCj4gSSB3aWxs
-IHJldmlldyB0b21vcnJvdywgSSBuZWVkIGhhdmUgYSB0aW1lIHdpbmRvdyB0byB0ZXN0IGV2ZW4g
-b24gbXkgYm9hcmQNCg0KQW55IG5ld3M/DQoNCj4gDQo+IE1paGNhZWwNCj4gDQo+IE9uIFRodSwg
-QXByIDExLCAyMDI0IGF0IDY6MDnigK9QTSBBbGV4ZXkgUm9tYW5vdg0KPiA8YXZyb21hbm92QHNh
-bHV0ZWRldmljZXMuY29tPiB3cm90ZToNCj4gPg0KPiA+IEhlbGxvISBQaW5nLg0KPiA+DQo+ID4g
-T24gVGh1LCBBcHIgMDQsIDIwMjQgYXQgMDE6NTg6MTBQTSArMDMwMCwgQWxleGV5IFJvbWFub3Yg
-d3JvdGU6DQo+ID4gPiBIZWxsbyENCj4gPiA+DQo+ID4gPiBUaGlzIHNlcmllcyBhZGRzIHN1cHBv
-cnQgZm9yIHRoZSBtdGRibG9jayBkZXZpY2UsIHdoaWNoDQo+ID4gPiBhbGxvd3MgdG8gcmVhZC93
-cml0ZSBkYXRhIGJsb2NrIGJ5IGJsb2NrLiBGb3IgZXhhbXBsZSwNCj4gPiA+IGl0IGNhbiBub3cg
-YmUgdXNlZCBmb3IgQkNCIG9yIEFuZHJvaWQgQUIgY29tbWFuZDoNCj4gPiA+DQo+ID4gPiAgICQg
-YmNiIGxvYWQgbXRkIDAgcGFydF9uYW1lDQo+ID4gPg0KPiA+ID4gVGVzdGVkIG9ubHkgb24gU1BJ
-IE5BTkQsIHNvIGJpbmQgaXMgbWFkZSBvbmx5IGZvcg0KPiA+ID4gU1BJIE5BTkQgZHJpdmVycy4N
-Cj4gPiA+DQo+ID4gPiAtLS0NCj4gPiA+DQo+ID4gPiBDaGFuZ2VzIFYxIC0+IFYyIFsxXToNCj4g
-PiA+DQo+ID4gPiAgIC0gRHJvcCBwYXRjaCBbMl0uDQo+ID4gPiAgIC0gQWRkIHdhcm5pbmcgaWYg
-YmluZCBOQU5EIG10ZGJsb2NrIGRldmljZS4NCj4gPiA+ICAgLSBNb3ZlIGRvY3VtZW50YXRpb24g
-b2YgbXRkYmxvY2sgaW1wbGVtZW50YXRpb24NCj4gPiA+ICAgICBmcm9tIGNvbW1pdCBtZXNzYWdl
-IHRvIHRoZSBzb3VyY2UgY29kZS4NCj4gPiA+ICAgLSBSZW1vdmUgX19tYXliZV91bnVzZWQgZnJv
-bSBtdGQgcGFydGl0aW9uIGZ1bmN0aW9ucw0KPiA+ID4gICAgIGRlc2NyaXB0aW9uLg0KPiA+ID4g
-ICAtIFVzZSBibGtfZW5hYmxlZCgpIGluc3RlYWQgb2YgI2lmZGVmcy4NCj4gPiA+DQo+ID4gPiBD
-aGFuZ2VzIFYyIC0+IFYzIFsyXToNCj4gPiA+DQo+ID4gPiAgIC0gUmViYXNlZCBvdmVyIFszXS4N
-Cj4gPiA+ICAgLSBSZW5hbWUgbXRkX2JyZWFkL2J3cml0ZSAtPiBtdGRfYmxrX3JlYWQvd3JpdGUu
-DQo+ID4gPiAgIC0gRml4IEdQTC0yLjAgbGljZW5zZSBzaG9ydCBuYW1lIGRlZmluaXRvbiBpbiBo
-ZWFkZXJzLg0KPiA+ID4gICAtIEFkZCBlbXB0eSBsaW5lIGFmdGVyIE1URF9FTlRSWV9OVU1CRVJT
-IGRlZmluZS4NCj4gPiA+DQo+ID4gPiBMaW5rczoNCj4gPiA+DQo+ID4gPiAgIC0gWzFdIGh0dHBz
-Oi8vbG9yZS5rZXJuZWwub3JnL2FsbC8yMDI0MDIyNzEwMDQ0MS4xODExMDQ3LTEtYXZyb21hbm92
-QHNhbHV0ZWRldmljZXMuY29tLw0KPiA+ID4gICAtIFsyXSBodHRwczovL2xvcmUua2VybmVsLm9y
-Zy9hbGwvMjAyNDAyMjcxMDA0NDEuMTgxMTA0Ny01LWF2cm9tYW5vdkBzYWx1dGVkZXZpY2VzLmNv
-bS8NCj4gPiA+ICAgLSBbM10gaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvdS1ib290LzIwMjQwNDAz
-MTE0MDQ3Ljg0MDMwLTEtaGVpbnJpY2guc2NodWNoYXJkdEBjYW5vbmljYWwuY29tL1QvI3UNCj4g
-PiA+DQo+ID4gPiBBbGV4ZXkgUm9tYW5vdiAoMyk6DQo+ID4gPiAgIGRpc2s6IHN1cHBvcnQgTVRE
-IHBhcnRpdGlvbnMNCj4gPiA+ICAgZHJpdmVyczogaW50cm9kdWNlIG10ZGJsb2NrIGFic3RyYWN0
-aW9uDQo+ID4gPiAgIHNwaW5hbmQ6IGJpbmQgbXRkYmxvY2sNCj4gPiA+DQo+ID4gPiAgZGlzay9w
-YXJ0LmMgICAgICAgICAgICAgICAgIHwgICAzICstDQo+ID4gPiAgZHJpdmVycy9ibG9jay9ibGst
-dWNsYXNzLmMgIHwgICAxICsNCj4gPiA+ICBkcml2ZXJzL210ZC9LY29uZmlnICAgICAgICAgfCAg
-IDEgKw0KPiA+ID4gIGRyaXZlcnMvbXRkL01ha2VmaWxlICAgICAgICB8ICAgMSArDQo+ID4gPiAg
-ZHJpdmVycy9tdGQvbXRkYmxvY2suYyAgICAgIHwgMjI3ICsrKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKw0KPiA+ID4gIGRyaXZlcnMvbXRkL210ZHBhcnQuYyAgICAgICB8ICA2OSAr
-KysrKysrKysrKw0KPiA+ID4gIGRyaXZlcnMvbXRkL25hbmQvc3BpL2NvcmUuYyB8ICAyMCArKysr
-DQo+ID4gPiAgaW5jbHVkZS9saW51eC9tdGQvbXRkLmggICAgIHwgIDEyICsrDQo+ID4gPiAgaW5j
-bHVkZS9wYXJ0LmggICAgICAgICAgICAgIHwgICAzICsNCj4gPiA+ICA5IGZpbGVzIGNoYW5nZWQs
-IDMzNiBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pDQo+ID4gPiAgY3JlYXRlIG1vZGUgMTAw
-NjQ0IGRyaXZlcnMvbXRkL210ZGJsb2NrLmMNCj4gPiA+DQo+ID4gPiAtLQ0KPiA+ID4gMi4zNC4x
-DQo+ID4gPg0KPiA+DQo+ID4gLS0NCj4gPiBUaGFuayB5b3UsDQo+ID4gQWxleGV5DQo+IA0KPiAN
-Cj4gDQo+IC0tIA0KPiBNaWNoYWVsIE5henphcmVubyBUcmltYXJjaGkNCj4gQ28tRm91bmRlciAm
-IENoaWVmIEV4ZWN1dGl2ZSBPZmZpY2VyDQo+IE0uICszOSAzNDcgOTEzIDIxNzANCj4gbWljaGFl
-bEBhbWFydWxhc29sdXRpb25zLmNvbQ0KPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fDQo+IA0KPiBBbWFydWxhIFNvbHV0aW9ucyBCVg0KPiBKb29wIEdlZXNpbmt3ZWcgMTI1LCAx
-MTE0IEFCLCBBbXN0ZXJkYW0sIE5MDQo+IFQuICszMSAoMCk4NSAxMTEgOTE3Mg0KPiBpbmZvQGFt
-YXJ1bGFzb2x1dGlvbnMuY29tDQo+IHd3dy5hbWFydWxhc29sdXRpb25zLmNvbQ0KDQotLSANClRo
-YW5rIHlvdSwNCkFsZXhleQ==
+Hello! Ping.
+
+On Mon, Mar 25, 2024 at 05:41:42PM +0300, Alexey Romanov wrote:
+> Hello!
+>=20
+> This series adds support for the UBI block device, which
+> allows to read/write data block by block. For example,
+> it can now be used for BCB or Android AB command:
+>=20
+>   $ bcb load ubi 0 part_name
+>=20
+> Tested only on SPI NAND, so bind is made only for
+> SPI NAND drivers. Can be used with mtdblock device [1].
+>=20
+> ---=20
+>=20
+> Changes V1 -> V2 [2]:
+>=20
+>  - Rebased over mtdblock v2 patchset [3].
+>  - Compile UBI partitions support only if CONFIG_BLK option
+>    is enabled.
+>=20
+> - Links:
+>=20
+>   [1] https://lore.kernel.org/all/20240227100441.1811047-1-avromanov@salu=
+tedevices.com/
+>   [2] https://lore.kernel.org/all/20240306134906.1179285-1-avromanov@salu=
+tedevices.com/
+>   [3] https://lore.kernel.org/all/20240307130726.1582487-1-avromanov@salu=
+tedevices.com/
+>=20
+> Alexey Romanov (6):
+>   ubi: allow to read from volume with offset
+>   ubi: allow to write to volume with offset
+>   drivers: introduce UBI block abstraction
+>   disk: don't try search for partition type if already set
+>   disk: support UBI partitions
+>   spinand: bind UBI block
+>=20
+>  cmd/ubi.c                   |  77 +++++++++++++++++++--
+>  disk/part.c                 |   7 ++
+>  drivers/block/blk-uclass.c  |   1 +
+>  drivers/mtd/nand/spi/core.c |   8 ++-
+>  drivers/mtd/ubi/Makefile    |   1 +
+>  drivers/mtd/ubi/block.c     | 130 ++++++++++++++++++++++++++++++++++++
+>  drivers/mtd/ubi/part.c      |  99 +++++++++++++++++++++++++++
+>  env/ubi.c                   |  16 ++---
+>  include/part.h              |   2 +
+>  include/ubi_uboot.h         |   8 ++-
+>  10 files changed, 332 insertions(+), 17 deletions(-)
+>  create mode 100644 drivers/mtd/ubi/block.c
+>  create mode 100644 drivers/mtd/ubi/part.c
+>=20
+> --=20
+> 2.34.1
+>=20
+
+--=20
+Thank you,
+Alexey=
