@@ -4,56 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 606DAC10F16
-	for <u-boot@archiver.kernel.org>; Mon,  6 May 2024 14:07:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6252DC25B4F
+	for <u-boot@archiver.kernel.org>; Mon,  6 May 2024 14:39:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF918885AE;
-	Mon,  6 May 2024 16:07:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 8335D885F7;
+	Mon,  6 May 2024 16:39:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1715004444;
-	bh=QSqpNTlZzZshI4ySD+SVAsp1AzEFxotjdyyMPeqW3Zg=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=gaPB2A7OKFHHr1GEi4HXFBBYPtb67S0hoqN/0dS7AzqqyogrwcUg/8P9aSA7H7y/u
-	 RhqTD50uLS1jAcXVSlIWLXKoiGU2MaoXl4bAqHfK8rTS83tfLtFOiNZW/VcsHU+Q3x
-	 CcP10HGImkBxEd0eIZ7iQ6axEtiTg+mmQrHLDjKJvTysMPk5X9wS2+QZJAvICOCKaq
-	 uYi2gd37+3h2VWIYVSwwOx2bfvANUwzZ4vnOUSpTPBZ1bnM+jgyNF+sBLsJwz7KfBy
-	 j1tnQ+Er7QYYGsptTpobUrVKF6iMlenMUgBgo5ID1f8X9uWQkKiz8Y5QprwCgV2aTR
-	 U2TzTuAnDg8CQ==
-Received: from [192.168.1.107] (89-186-112-218.pool.digikabel.hu
- [89.186.112.218])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 8A69C885F7;
- Mon,  6 May 2024 16:07:21 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1715004443;
- bh=QSqpNTlZzZshI4ySD+SVAsp1AzEFxotjdyyMPeqW3Zg=;
- h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
- b=u+L5ZdTJmQ13IGuKzsvYpnBW85X27s+Z9P3vyxa1nCI8f4+S99mS4twNKSwBruzhW
- vf4aYVXLc0EAboOr5ZOYJHUiKO+6zYF6bt2YJncKbjKcS4UpokjjlL1Be2W1GfC+6e
- UetyJs4uV6v4zMGzTPsE5MZ0iG/WCJ4DFXfWVVvfWVn+pLely8g+ShPFj1ap0DWV0g
- nxPO8u/l3j+HXsFSCiauahGh5rpABopY4V+DbhILQdqcfWR7ZBwPCnvvzTSNOfJAp4
- 3izKDaiDj/uMrznZrOk/tL7vTbxFzJVVfCifmA4oiLkYyqGtM5Jyt8AMPvasKl0DaM
- ZbfKAl/tmX/oA==
-Message-ID: <c02ef9dd-669a-9ea5-b764-c03ddff7ee75@denx.de>
-Date: Mon, 6 May 2024 16:07:00 +0200
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="5TYSMmrA";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D2904885F4; Mon,  6 May 2024 16:39:03 +0200 (CEST)
+Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
+ [46.235.227.194])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id CB5BF87EDC
+ for <u-boot@lists.denx.de>; Mon,  6 May 2024 16:39:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=collabora.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=martyn.welch@collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1715006341;
+ bh=AZr0E2HmvRF6aJsvNwD22wdDWpoNXxrDSQYGFwALVfI=;
+ h=From:To:Cc:Subject:Date:From;
+ b=5TYSMmrAZoQzX6ik+rZDXW20CGcoifMu+9l+xOKs2H2ma/tV4O8C+Jeg/OU1cA6wq
+ 6NYyXac7ydpySPcY/uupqlJ29S10uXinqx/Vzs4+ybWE+KmnJBMA8Uc+JpUsHYfFXm
+ CnZDPThskinRFur4ec9sqgqSqKZQB3guaxbNBqiFqQ1eTKY9SCTZ2E//QgLxRQHjoC
+ +IFdvTBSRfMHoy0unEmEsB9PAANQtBdkS7E4gm66suOrgjEp8eizNOQRZTnluUJB6u
+ UsKScl2t64uR8hAImNxhs6nldSoBywqkqHsrK40V6RNxbVMuTVCC93bSVHPGl1FZXL
+ 8me4GQc2l1/4g==
+Received: from pan.lan (ec2-34-240-57-77.eu-west-1.compute.amazonaws.com
+ [34.240.57.77])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: martyn)
+ by madrid.collaboradmins.com (Postfix) with ESMTPSA id C848D3782112;
+ Mon,  6 May 2024 14:39:00 +0000 (UTC)
+From: Martyn Welch <martyn.welch@collabora.com>
+To: Dave Gerlach <d-gerlach@ti.com>, Tom Rini <trini@konsulko.com>,
+ Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>
+Cc: Sjoerd Simons <sjoerd@collabora.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Martyn Welch <martyn.welch@collabora.com>, u-boot@lists.denx.de
+Subject: [PATCH v5 0/6] Add DFU and usb boot for TI am62x SK and beagleplay
+Date: Mon,  6 May 2024 15:38:40 +0100
+Message-ID: <20240506143846.1252377-1-martyn.welch@collabora.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH] fs: ubifs: Add support for ZSTD decompression
-Content-Language: en-US
-To: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>, u-boot@lists.denx.de
-Cc: Ben Dooks <ben.dooks@sifive.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>
-References: <20240430102358.11163-1-piotr.wojtaszczyk@timesys.com>
-From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20240430102358.11163-1-piotr.wojtaszczyk@timesys.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,30 +67,75 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Piotr,
+This series adds DFU support for TI AM62 SK and beagleplay boards.
 
-On 30.04.24 12:23, Piotr Wojtaszczyk wrote:
-> Signed-off-by: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
-> ---
-> 
->   fs/ubifs/ubifs-media.h |  2 ++
->   fs/ubifs/ubifs.c       | 55 ++++++++++++++++++++++++++++++++++++++++--
->   2 files changed, 55 insertions(+), 2 deletions(-)
+I have picked this series up from Sjoerd due to time constraints.
 
-Looks good to me, thanks!
+Since the last revision:
+* Removed dwc3 mode setting in favour of reinstating forced peripheral
+  mode for usb0
+* Use of config fragments for both r5 and a53 DFU configuration to
+  reduce duplication
+* Typographical improvements to documentation
 
-Acked-by: Heiko Schocher <hs@denx.de>
+We plan to also submit the dts changes to linux so that those can be
+dropped again in the near future (hopefully)
 
-bye,
-Heiko
+Changes in v5:
+- Forcing usb0 into peripheral mode reinstated
+- Switch to config fragment for a53 DFU configuration
+- Use existing config fragment for a53 DFU configuration
+- Typographical corrections
+
+Changes in v4:
+- Add config dependency on SYSCON
+- Move defines and constants outside out of function scope
+- Don't force usb0 into peripheral mode
+- Move R5 dfu config to a config fragment rather then a full defconfig
+- Don't enable XHCI for the R5 SPL, unneeded
+
+Change in v3:
+- Add dfu via environment rather then config headers
+- Enable usb nodes in all boot phases
+- Run savedefconfig to adjust to more recent u-boot
+
+Changes in v2:
+- Switch dwc3 glue to a seperate driver rather then in dwc-generic
+- Minimize config changes to just DFU configuration
+- Only enable usb port 0 DFU in SPL
+- Create a seperate defconfig for R5
+
+Sjoerd Simons (6):
+  usb: dwc3: Add dwc3 glue driver for am62
+  board: ti: am62x: am62x: include env for DFU
+  arm: dts: k3-am625-sk: Enable usb port in u-boot
+  configs: am62x_evm_*: Enable USB and DFU support
+  beagleplay: Add DFU support
+  doc: board: Add document for DFU boot on am62x SoCs
+
+ arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi |   9 ++
+ arch/arm/dts/k3-am625-sk-u-boot.dtsi         |   9 ++
+ board/beagle/beagleplay/beagleplay.env       |   1 +
+ board/ti/am62x/am62x.env                     |   1 +
+ configs/am62x_a53_usbdfu.config              |  29 +++++
+ configs/am62x_beagleplay_a53_defconfig       |   2 +
+ configs/am62x_evm_a53_defconfig              |   3 +
+ configs/am62x_r5_usbdfu.config               |  28 +++++
+ doc/board/beagle/am62x_beagleplay.rst        |  14 ++-
+ doc/board/ti/am62x_sk.rst                    |  37 ++++++
+ drivers/usb/dwc3/Kconfig                     |  14 +++
+ drivers/usb/dwc3/Makefile                    |   1 +
+ drivers/usb/dwc3/dwc3-am62.c                 | 125 +++++++++++++++++++
+ 13 files changed, 272 insertions(+), 1 deletion(-)
+ create mode 100644 configs/am62x_a53_usbdfu.config
+ create mode 100644 configs/am62x_r5_usbdfu.config
+ create mode 100644 drivers/usb/dwc3/dwc3-am62.c
 
 -- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+2.43.0
+
