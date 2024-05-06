@@ -4,60 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75DB5C25B4F
-	for <u-boot@archiver.kernel.org>; Mon,  6 May 2024 14:40:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93863C25B4F
+	for <u-boot@archiver.kernel.org>; Mon,  6 May 2024 14:52:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 168398866A;
-	Mon,  6 May 2024 16:39:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
+	by phobos.denx.de (Postfix) with ESMTP id F361B88345;
+	Mon,  6 May 2024 16:52:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="aIW4nKpD";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LVzGl2s3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B2AB8864D; Mon,  6 May 2024 16:39:08 +0200 (CEST)
-Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
- [46.235.227.194])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5E403885AE; Mon,  6 May 2024 16:52:37 +0200 (CEST)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 426DC88624
- for <u-boot@lists.denx.de>; Mon,  6 May 2024 16:39:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=collabora.com
+ by phobos.denx.de (Postfix) with ESMTPS id F397A87F68
+ for <u-boot@lists.denx.de>; Mon,  6 May 2024 16:52:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=martyn.welch@collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1715006346;
- bh=FY+6xnScvT00pJhA42jtHzD+Z+8lx1MWy3PnSSDmpxw=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=aIW4nKpDIz+g94Hl31lnJkl3rncLBewMVmjacT+GzCE3nDjrj1h9A2dn0y9QcMwPk
- sDbq5vrDpxCDOT+zNwgyMNN9YqWzNkN8FHQ3YgJ71VaQze9A09irgC9eyWXpaj1DP/
- aKujTx7abqDjZtvI0jA08lmpCb+XbpW4DMMTnXcnHSBurrqQFLoIyMk/ARpT9uLC1Y
- XCAjp4vln6AGi5cRr0batAOilbZnkaobOLPceqt+7cQ7dMAgMd6N4vcdasqo3IUiDh
- Z2EhtxlRDWaY5y+6t193iikrEPnMRsUIE2z6NMrzb+R0f5gBnOAAW/dcz8PQpplVEi
- c7xTLbbX3NKIA==
-Received: from pan.lan (ec2-34-240-57-77.eu-west-1.compute.amazonaws.com
- [34.240.57.77])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: martyn)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id 6B82B3781107;
- Mon,  6 May 2024 14:39:05 +0000 (UTC)
-From: Martyn Welch <martyn.welch@collabora.com>
-To: Dave Gerlach <d-gerlach@ti.com>, Tom Rini <trini@konsulko.com>,
- Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>
-Cc: Sjoerd Simons <sjoerd@collabora.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Martyn Welch <martyn.welch@collabora.com>, u-boot@lists.denx.de
-Subject: [PATCH v5 6/6] doc: board: Add document for DFU boot on am62x SoCs
-Date: Mon,  6 May 2024 15:38:46 +0100
-Message-ID: <20240506143846.1252377-7-martyn.welch@collabora.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240506143846.1252377-1-martyn.welch@collabora.com>
-References: <20240506143846.1252377-1-martyn.welch@collabora.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-43ad4097aefso4916501cf.2
+ for <u-boot@lists.denx.de>; Mon, 06 May 2024 07:52:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1715007154; x=1715611954; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=1nhiXoPDLOYJVFGVArKKO2CHts24Aq2EHukB8xzuWCU=;
+ b=LVzGl2s3OaWH3D4EJ6oxKinoMMLypqHnjsfl7A0tSjMMCNLZKH77Hmbe0WzUpdLCxp
+ ZxAk/KV0bAD5ypUw/uD2D68xNKHeQHh3CLEG5sZHT2vHVMkX/n1xQATBTFIwTMVlC0HA
+ oalRVVq5LtnX6fhLfXJ7uj4oH/7Ws9EeJeh68=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1715007154; x=1715611954;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1nhiXoPDLOYJVFGVArKKO2CHts24Aq2EHukB8xzuWCU=;
+ b=L2maQKtiTjzHsVcLByoSZ+KJuVPX3LtBuKOxHJhq0HP/sX1/K7bChFCRPpK0rHbCaw
+ BSGG1kiP+TonkGP7ohPYOnoxc7zZmXtpIlhMA9pF0DI/GJVLnhaX/73a5aV1xM8Ek42Z
+ O+JYKugFo5atWIpDWYu526Ar8MrPLcJURBU11ug67h44XILEVe9X120SuxUA+MN2mfdb
+ c84C22S4KJpIN65pDXgZuRPkrMq5T0ctmMIHf56rHy4lpOu0YRqbr7ptks+wuIzgC9er
+ 1j5gqwe/Onlwevqfk5OVD63TH1/7aDMoCiw0i/pknL8g0cRbgMQNnU0qqCJYe1LrAO1C
+ sm2w==
+X-Gm-Message-State: AOJu0YzdHtWXwdffdNmy8o6DurZL3XTSUM3McpT8JQpx5heWn4dTlDxU
+ fyrgrV0IICkW7NRu+Dm00qvWQjp1P3Jn6obuDaEKAqJYwfFVQxyGTOjfU8/E1qOM+qCBVhmghkp
+ yXCA=
+X-Google-Smtp-Source: AGHT+IEd4aJoUWxU7IltomA4yv8nVDLu0IdUujtQ/vh2QjUkC0ilH4VzJZ7+VwRKyaoeivKA2+BbSw==
+X-Received: by 2002:a05:622a:2b4d:b0:436:5f58:84d5 with SMTP id
+ hb13-20020a05622a2b4d00b004365f5884d5mr13858155qtb.21.1715007153596; 
+ Mon, 06 May 2024 07:52:33 -0700 (PDT)
+Received: from bill-the-cat ([187.144.98.216])
+ by smtp.gmail.com with ESMTPSA id
+ ci22-20020a05622a261600b0043476c7f668sm5214257qtb.5.2024.05.06.07.52.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 06 May 2024 07:52:33 -0700 (PDT)
+Date: Mon, 6 May 2024 08:52:30 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [GIT PULL] Please pull u-boot-imx-master-20240505
+Message-ID: <20240506145230.GM2568172@bill-the-cat>
+References: <20240505191139.3024264-1-festevam@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="EsjLiCJ7dlfRwrm9"
+Content-Disposition: inline
+In-Reply-To: <20240505191139.3024264-1-festevam@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,106 +90,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Sjoerd Simons <sjoerd@collabora.com>
 
-Both AM62 SK and beagleplay support DFU boot in a similar way now;
-Document how to actually run DFU boot for both boards
+--EsjLiCJ7dlfRwrm9
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> # on beagle play
-Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
----
-Changes in v5:
-- Typographical corrections
+On Sun, May 05, 2024 at 04:11:39PM -0300, Fabio Estevam wrote:
 
-Changes in v4:
-- New patch
+> Hi Tom,
+>=20
+> Please pull from u-boot-imx/master, thanks.
+> The following changes since commit 2f1e76bcfee75b9f99ade63002c05ffaaec86a=
+fb:
+>=20
+>   Merge branch '2024-05-02-assorted-updates' (2024-05-03 16:18:51 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx=
+-master-20240505
+>=20
+> for you to fetch changes up to cecb5fbb42c8b3de3d5a7df40bc01d1fdf4731d3:
+>=20
+>   crypto/fsl: Differentiate between CAAM and DCP in Kconfig entry (2024-0=
+5-05 11:21:39 -0300)
+>=20
+> u-boot-imx-master-20240505
 
- doc/board/beagle/am62x_beagleplay.rst | 14 +++++++++-
- doc/board/ti/am62x_sk.rst             | 37 +++++++++++++++++++++++++++
- 2 files changed, 50 insertions(+), 1 deletion(-)
+Applied to u-boot/master, thanks!
 
-diff --git a/doc/board/beagle/am62x_beagleplay.rst b/doc/board/beagle/am62x_beagleplay.rst
-index 7784e62b0b..cdc610264e 100644
---- a/doc/board/beagle/am62x_beagleplay.rst
-+++ b/doc/board/beagle/am62x_beagleplay.rst
-@@ -268,7 +268,19 @@ for details.
-      - USB Device Firmware Upgrade (DFU) mode
- 
- To switch to SD card boot mode, hold the USR button while powering on
--with Type-C power supply, then release when power LED lights up.
-+with a USB type C power supply, then release when power LED lights up.
-+
-+DFU based boot
-+--------------
-+
-+To boot the board over DFU, ensure there is no SD card inserted with a
-+bootloader. Hold the USR switch while plugging into the type C to boot into DFU
-+mode. After power-on the build artifacts needs to be uploaded one by one with a
-+tool like dfu-util.
-+
-+.. include::  ../ti/am62x_sk.rst
-+    :start-after: .. am62x_evm_rst_include_start_dfu_boot
-+    :end-before: .. am62x_evm_rst_include_end_dfu_boot
- 
- Debugging U-Boot
- ----------------
-diff --git a/doc/board/ti/am62x_sk.rst b/doc/board/ti/am62x_sk.rst
-index b12dc85f06..d5f7fe3b03 100644
---- a/doc/board/ti/am62x_sk.rst
-+++ b/doc/board/ti/am62x_sk.rst
-@@ -105,6 +105,20 @@ Set the variables corresponding to this platform:
- 
- * 3.1 R5:
- 
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_spl_r5
-+    :end-before: .. k3_rst_include_end_build_steps_spl_r5
-+
-+* 3.1.1 Alternative build of R5 for DFU boot:
-+
-+As the SPL size can get too big when building with support for booting both
-+from local storage *and* DFU an extra config fragment should be used to enable
-+DFU support (and disable storage support)
-+
-+.. prompt:: bash $
-+
-+  export UBOOT_CFG_CORTEXR="${UBOOT_CFG_CORTEXR} am62x_r5_usbdfu.config"
-+
- .. include::  ../ti/k3.rst
-     :start-after: .. k3_rst_include_start_build_steps_spl_r5
-     :end-before: .. k3_rst_include_end_build_steps_spl_r5
-@@ -251,6 +265,29 @@ https://www.ti.com/lit/pdf/spruiv7 under the `Boot Mode Pins` section.
- 
- For SW2 and SW1, the switch state in the "ON" position = 1.
- 
-+DFU based boot
-+--------------
-+
-+To boot the board over DFU, set the switches to DFU mode and connect to the
-+USB type C DRD port on the board. After power-on the build artifacts needs to be
-+uploaded one by one with a tool like dfu-util.
-+
-+.. am62x_evm_rst_include_start_dfu_boot
-+
-+The initial ROM will have a DFU alt named `bootloader` for the initial R5 spl
-+upload. The next stages as exposed by U-Boot have target alts matching the name
-+of the artifacts, for these a USB reset has to be done after each upload.
-+
-+When using dfu-util the following commands can be used to boot to a U-Boot shell:
-+
-+.. prompt:: bash $
-+
-+  dfu-util -a bootloader -D tiboot3.bin
-+  dfu-util -R -a tispl -D tispl.bin
-+  dfu-util -R -a u-boot.img -D u-boot.img
-+
-+.. am62x_evm_rst_include_end_dfu_boot
-+
- Debugging U-Boot
- ----------------
- 
--- 
-2.43.0
+--=20
+Tom
 
+--EsjLiCJ7dlfRwrm9
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY47qsACgkQFHw5/5Y0
+tyz3fQv5AcORLZQczqwH5gTH7qjyxPCXJ32dWECP6EQQCUHLbawHV0NCOuKPhLqO
+VUTKmt2/qrLKhBhRbEDZjt3ET4ZQ2+30WyAawfV1CfSPXjMgYv7tYtAiq17V4UAA
+AZMhwI92OwQPkqBUajwY1u2zLLEv+HHHd7iiIs61Tj2qTb1lWjPf3a70BudDdNIM
+SN17ps4aBa3GIK61v+4wXx7rEBtSzQf73gZbu8O3Gg0p7gl5JpwlGOp/MieFxNC8
+89AeLrsLtddu4EocgyNqVneHfFYk9+cAi0+KuhTc7H7oCV2jfeS1ZQV1orw6CzWR
+sBuTkJBB/LZz0E3uyjCtOss2/Hv8uMKSAcALAGuadFq6uUTIUwfI1nwcYsbJosXs
+lAROWzOd8NlqtQMMGKPx5K9ALFrEt3c4nzIHgftVNLpBqhJR4nSk6cm+pJp32Jcp
+usRB2iWc6ToDNvUql8L/lQoQtXopuZaG9voXEZf+fRiWLTS/tvSJpZ+K44GV6qbA
+7QCW4aQr
+=4ZWZ
+-----END PGP SIGNATURE-----
+
+--EsjLiCJ7dlfRwrm9--
