@@ -4,54 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A04DBC25B5C
-	for <u-boot@archiver.kernel.org>; Mon,  6 May 2024 10:27:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EA57C10F16
+	for <u-boot@archiver.kernel.org>; Mon,  6 May 2024 10:32:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A082587FCD;
-	Mon,  6 May 2024 12:27:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
+	by phobos.denx.de (Postfix) with ESMTP id 9F43E88081;
+	Mon,  6 May 2024 12:32:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="FgisnEoI";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="eQTVmq0x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03B67882FD; Mon,  6 May 2024 12:27:05 +0200 (CEST)
-Received: from mail-4317.proton.ch (mail-4317.proton.ch [185.70.43.17])
+ id 704E18813F; Mon,  6 May 2024 12:32:29 +0200 (CEST)
+Received: from mail-m2417.xmail.ntesmail.com (mail-m2417.xmail.ntesmail.com
+ [45.195.24.17])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2161588013
- for <u-boot@lists.denx.de>; Mon,  6 May 2024 12:27:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 57DFE88013
+ for <u-boot@lists.denx.de>; Mon,  6 May 2024 12:32:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=samcday.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail2; t=1714991222; x=1715250422;
- bh=Ft9zpNnUTnceVB+hzC+UbPmhzA5i8KstkWOp3gtLkVU=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=FgisnEoIBmE1Y5kjzxzCK1pJoj8+Pnotb8+F2ZXJcDBktCg5gdg/aJQuP4H35sRO+
- +fFpEKEEyvG48spEBITfk7mnSTYug7yUH+wrvnu9zVAbydB07ZOLDzateq7l1t7Q1q
- +hxvfNf2da9UgSofj03fkm04zUZT75yDb2HufkqW3NU9p7m6cTU4mxFyiK2/OJ9JHt
- GnvFOfY+M60GEx21dhfEtgq33KFxTrUpSm4nPEc8cqhmRH+Iip54R2zwVfEQaOc2dv
- yakYWM1scZGaZ6d/daMpg29YPGTQ7lA0ZdYxljVY90oooih3NO29zfswhijYS213st
- kdGBuOp4f1AiA==
-Date: Mon, 06 May 2024 10:26:58 +0000
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
- Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>
-From: Sam Day <me@samcday.com>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de, Sam Day <me@samcday.com>
-Subject: [PATCH v2 2/2] ehci: msm: bring up iface + core clocks
-Message-ID: <20240506-msm8916-hs-usb-clocks-v2-2-34f741b3a2ec@samcday.com>
-In-Reply-To: <20240506-msm8916-hs-usb-clocks-v2-0-34f741b3a2ec@samcday.com>
-References: <20240506-msm8916-hs-usb-clocks-v2-0-34f741b3a2ec@samcday.com>
-Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 49d79e4bd82138e88ca3e16e6e6b0340dd84ad00
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=eQTVmq0xp46wBd2ZEMZeIlHZ4shF14f/yFTaDdFrNCZe5nJVeaoe/RRas4s6jgwFPKrEoOrYHZlBb9+7vuc+STpTZRq1wYQcQuZPxbZGtrzlc6nLTxFZJjXUtyupRq4pNk18Vo0loA6DYlaEJ0pH9pVvkID8q5jWaHXQXJsA16E=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
+ bh=7ld5hxFMb4mwZ/bFuUhVEeFtc4ewu663ZrtxB9e/EcI=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.77] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 059EA900227;
+ Mon,  6 May 2024 18:32:10 +0800 (CST)
+Message-ID: <a1c2bfdd-79c1-499d-9261-527fbeca8558@rock-chips.com>
+Date: Mon, 6 May 2024 18:32:10 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 03/22] clk: rockchip: rk3399: Improve support for
+ SCLK_PCIEPHY_REF clock
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
+Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Dragan Simic <dsimic@manjaro.org>,
+ Christopher Obbard <chris.obbard@collabora.com>,
+ Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
+References: <20240501162308.875193-1-jonas@kwiboo.se>
+ <20240501162308.875193-4-jonas@kwiboo.se>
+Content-Language: en-US
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20240501162308.875193-4-jonas@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQkgdQ1YaQkgfTk4aGUgYQk9VEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
+ kG
+X-HM-Tid: 0a8f4d76064d03a9kunm059ea900227
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Nxg6FSo*KzMCFBZLIkodKQI3
+ ESMaCQFVSlVKTEpPQkJKTkhKQkNCVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFNT0tINwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,103 +79,139 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This seems to be necessary on my samsung-a5. Without this patch, the
-first access of EHCI registers causes a bus stall and subsequent reset.
 
-I am unsure why this wasn't already necessary for db410c, perhaps those
-clocks are already enabled on boot.
+On 2024/5/2 00:22, Jonas Karlman wrote:
+> rk3399-nanopi-4.dtsi try to set parent of and set rate to 100 MHz of the
+> SCLK_PCIEPHY_REF clock.
+>
+> The existing enable/disable ops for SCLK_PCIEPHY_REF currently force
+> use of 24 MHz parent and rate.
+>
+> Add improved support for setting parent and rate of the pciephy refclk
+> to driver to better support assign-clock props for pciephy refclk in DT.
+>
+> This limited implementation only support setting 24 or 100 MHz rate,
+> and expect npll and clk_pciephy_ref100m divider to use default values.
+>
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-Signed-off-by: Sam Day <me@samcday.com>
----
- drivers/usb/host/ehci-msm.c | 37 +++++++++++++++++++++++++++++++++++--
- 1 file changed, 35 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/usb/host/ehci-msm.c b/drivers/usb/host/ehci-msm.c
-index 98fe7bc3bc..b2e294dd64 100644
---- a/drivers/usb/host/ehci-msm.c
-+++ b/drivers/usb/host/ehci-msm.c
-@@ -7,8 +7,10 @@
-  * Based on Linux driver
-  */
-=20
-+#include <clk.h>
- #include <common.h>
- #include <dm.h>
-+#include <dm/device_compat.h>
- #include <dm/lists.h>
- #include <errno.h>
- #include <usb.h>
-@@ -25,6 +27,8 @@ struct msm_ehci_priv {
- =09struct usb_ehci *ehci; /* Start of IP core*/
- =09struct ulpi_viewport ulpi_vp; /* ULPI Viewport */
- =09struct phy phy;
-+=09struct clk iface_clk;
-+=09struct clk core_clk;
- };
-=20
- static int msm_init_after_reset(struct ehci_ctrl *dev)
-@@ -53,20 +57,46 @@ static int ehci_usb_probe(struct udevice *dev)
- =09struct ehci_hcor *hcor;
- =09int ret;
-=20
-+=09ret =3D clk_get_by_name(dev, "core", &p->core_clk);
-+=09if (ret) {
-+=09=09dev_err(dev, "Failed to get core clock: %d\n", ret);
-+=09=09return ret;
-+=09}
-+
-+=09ret =3D clk_get_by_name(dev, "iface", &p->iface_clk);
-+=09if (ret) {
-+=09=09dev_err(dev, "Failed to get iface clock: %d\n", ret);
-+=09=09return ret;
-+=09}
-+
-+=09ret =3D clk_prepare_enable(&p->core_clk);
-+=09if (ret)
-+=09=09return ret;
-+
-+=09ret =3D clk_prepare_enable(&p->iface_clk);
-+=09if (ret)
-+=09=09goto cleanup_core;
-+
- =09hccr =3D (struct ehci_hccr *)((phys_addr_t)&ehci->caplength);
- =09hcor =3D (struct ehci_hcor *)((phys_addr_t)hccr +
- =09=09=09HC_LENGTH(ehci_readl(&(hccr)->cr_capbase)));
-=20
- =09ret =3D generic_setup_phy(dev, &p->phy, 0);
- =09if (ret)
--=09=09return ret;
-+=09=09goto cleanup_iface;
-=20
- =09ret =3D board_usb_init(0, plat->init_type);
- =09if (ret < 0)
--=09=09return ret;
-+=09=09goto cleanup_iface;
-=20
- =09return ehci_register(dev, hccr, hcor, &msm_ehci_ops, 0,
- =09=09=09     plat->init_type);
-+
-+cleanup_iface:
-+=09clk_disable_unprepare(&p->iface_clk);
-+cleanup_core:
-+=09clk_disable_unprepare(&p->core_clk);
-+=09return ret;
- }
-=20
- static int ehci_usb_remove(struct udevice *dev)
-@@ -82,6 +112,9 @@ static int ehci_usb_remove(struct udevice *dev)
- =09/* Stop controller. */
- =09clrbits_le32(&ehci->usbcmd, CMD_RUN);
-=20
-+=09clk_disable_unprepare(&p->iface_clk);
-+=09clk_disable_unprepare(&p->core_clk);
-+
- =09ret =3D generic_shutdown_phy(&p->phy);
- =09if (ret)
- =09=09return ret;
-
---=20
-2.44.0
-
-
+Thanks,
+- Kever
+> ---
+> v2: Implement partial instead of dummy support for SCLK_PCIEPHY_REF
+> ---
+>   drivers/clk/rockchip/clk_rk3399.c | 59 +++++++++++++++++++++++++++++--
+>   1 file changed, 57 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/clk/rockchip/clk_rk3399.c b/drivers/clk/rockchip/clk_rk3399.c
+> index 5934771b4096..0b3223611a32 100644
+> --- a/drivers/clk/rockchip/clk_rk3399.c
+> +++ b/drivers/clk/rockchip/clk_rk3399.c
+> @@ -926,6 +926,26 @@ static ulong rk3399_saradc_set_clk(struct rockchip_cru *cru, uint hz)
+>   	return rk3399_saradc_get_clk(cru);
+>   }
+>   
+> +static ulong rk3399_pciephy_get_clk(struct rockchip_cru *cru)
+> +{
+> +	if (readl(&cru->clksel_con[18]) & BIT(10))
+> +		return 100 * MHz;
+> +	else
+> +		return OSC_HZ;
+> +}
+> +
+> +static ulong rk3399_pciephy_set_clk(struct rockchip_cru *cru, uint hz)
+> +{
+> +	if (hz == 100 * MHz)
+> +		rk_setreg(&cru->clksel_con[18], BIT(10));
+> +	else if (hz == OSC_HZ)
+> +		rk_clrreg(&cru->clksel_con[18], BIT(10));
+> +	else
+> +		return -EINVAL;
+> +
+> +	return rk3399_pciephy_get_clk(cru);
+> +}
+> +
+>   static ulong rk3399_clk_get_rate(struct clk *clk)
+>   {
+>   	struct rk3399_clk_priv *priv = dev_get_priv(clk->dev);
+> @@ -967,6 +987,9 @@ static ulong rk3399_clk_get_rate(struct clk *clk)
+>   	case SCLK_SARADC:
+>   		rate = rk3399_saradc_get_clk(priv->cru);
+>   		break;
+> +	case SCLK_PCIEPHY_REF:
+> +		rate = rk3399_pciephy_get_clk(priv->cru);
+> +		break;
+>   	case ACLK_VIO:
+>   	case ACLK_HDCP:
+>   	case ACLK_GIC_PRE:
+> @@ -1058,6 +1081,9 @@ static ulong rk3399_clk_set_rate(struct clk *clk, ulong rate)
+>   	case SCLK_SARADC:
+>   		ret = rk3399_saradc_set_clk(priv->cru, rate);
+>   		break;
+> +	case SCLK_PCIEPHY_REF:
+> +		ret = rk3399_pciephy_set_clk(priv->cru, rate);
+> +		break;
+>   	case ACLK_VIO:
+>   	case ACLK_HDCP:
+>   	case ACLK_GIC_PRE:
+> @@ -1108,12 +1134,39 @@ static int __maybe_unused rk3399_gmac_set_parent(struct clk *clk,
+>   	return -EINVAL;
+>   }
+>   
+> +static int __maybe_unused rk3399_pciephy_set_parent(struct clk *clk,
+> +						    struct clk *parent)
+> +{
+> +	struct rk3399_clk_priv *priv = dev_get_priv(clk->dev);
+> +	const char *clock_output_name;
+> +	int ret;
+> +
+> +	if (parent->dev == clk->dev && parent->id == SCLK_PCIEPHY_REF100M) {
+> +		rk_setreg(&priv->cru->clksel_con[18], BIT(10));
+> +		return 0;
+> +	}
+> +
+> +	ret = dev_read_string_index(parent->dev, "clock-output-names",
+> +				    parent->id, &clock_output_name);
+> +	if (ret < 0)
+> +		return -ENODATA;
+> +
+> +	if (!strcmp(clock_output_name, "xin24m")) {
+> +		rk_clrreg(&priv->cru->clksel_con[18], BIT(10));
+> +		return 0;
+> +	}
+> +
+> +	return -EINVAL;
+> +}
+> +
+>   static int __maybe_unused rk3399_clk_set_parent(struct clk *clk,
+>   						struct clk *parent)
+>   {
+>   	switch (clk->id) {
+>   	case SCLK_RMII_SRC:
+>   		return rk3399_gmac_set_parent(clk, parent);
+> +	case SCLK_PCIEPHY_REF:
+> +		return rk3399_pciephy_set_parent(clk, parent);
+>   	}
+>   
+>   	debug("%s: unsupported clk %ld\n", __func__, clk->id);
+> @@ -1204,7 +1257,8 @@ static int rk3399_clk_enable(struct clk *clk)
+>   		rk_clrreg(&priv->cru->clkgate_con[13], BIT(7));
+>   		break;
+>   	case SCLK_PCIEPHY_REF:
+> -		rk_clrreg(&priv->cru->clksel_con[18], BIT(10));
+> +		if (readl(&priv->cru->clksel_con[18]) & BIT(10))
+> +			rk_clrreg(&priv->cru->clkgate_con[12], BIT(6));
+>   		break;
+>   	default:
+>   		debug("%s: unsupported clk %ld\n", __func__, clk->id);
+> @@ -1298,7 +1352,8 @@ static int rk3399_clk_disable(struct clk *clk)
+>   		rk_setreg(&priv->cru->clkgate_con[13], BIT(7));
+>   		break;
+>   	case SCLK_PCIEPHY_REF:
+> -		rk_clrreg(&priv->cru->clksel_con[18], BIT(10));
+> +		if (readl(&priv->cru->clksel_con[18]) & BIT(10))
+> +			rk_setreg(&priv->cru->clkgate_con[12], BIT(6));
+>   		break;
+>   	default:
+>   		debug("%s: unsupported clk %ld\n", __func__, clk->id);
