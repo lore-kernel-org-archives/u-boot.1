@@ -4,159 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5568DC4345F
-	for <u-boot@archiver.kernel.org>; Mon,  6 May 2024 07:17:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C3B1C4345F
+	for <u-boot@archiver.kernel.org>; Mon,  6 May 2024 07:36:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD4DC87F64;
-	Mon,  6 May 2024 09:17:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=kontron.de
+	by phobos.denx.de (Postfix) with ESMTP id DFC7187F6F;
+	Mon,  6 May 2024 09:36:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mysnt.onmicrosoft.com header.i=@mysnt.onmicrosoft.com header.b="gzZfgkhQ";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="molUN7CX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74D8B87F68; Mon,  6 May 2024 09:17:41 +0200 (CEST)
-Received: from EUR02-AM0-obe.outbound.protection.outlook.com
- (mail-am0eur02on20701.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2606::701])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 31F8787FB6; Mon,  6 May 2024 09:36:07 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83EB587E83
- for <u-boot@lists.denx.de>; Mon,  6 May 2024 09:17:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2724C87F8B
+ for <u-boot@lists.denx.de>; Mon,  6 May 2024 09:36:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=kontron.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=frieder.schrempf@kontron.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=eEKdadZ9J9t1YCeEIGv2u585zrWovIPgEMKPsMWQTJCptyAUj/F2ogRPQa7UrJqU+6eRlCSEB3oQU6sG2U5FQIZG+afxcbfqwgnCXpthzlQVF7mqQ5tE6ORRyQio5C3YOtu5pGRrg2zHtOmZoR8ex61xqbjCtsPsVqpdPPpS1p1L5TDeftI4XDEqYN2pbbk0gIRIKeAkuE6FjWt0hcdisRI8IQsHZfJnRPnLJLHmAmRZ7c2rObTirafU9EppgyXEG89mSlQH09xfKjni9mqCX35zwvyLNi5MPkMJMJjzhJS/RYxGC3TwD8l4znMmj/pB/pcz1OVFgW0YM981SefVJw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3yECJKh1qsBXs6pG4einz9v5fDy5Fo6ihg8oyVn7vIU=;
- b=ecOoKLiVIw67otSPNEF49vUWnLiDs/UPOuyGFJ5KPktWISIsZp0GQHZ/Bf/w1kTyiYP+tMBqCKMyifESkYLwXcDVCHuw2Qj4lEbX4U7mrvhlvzOAuCD++yoCdWenrZxFoc9211mAeEJ2vdRQ25EyglfUw2NwH9ybqjz0tCYN3lZ5Y8O892mKvCUCmpTp8fYqCgLshNqqUtmBH80ioZdKlETugWbbAbrXcCRspphXcJGUXqfV17K89t02i2aK8Fo0RKVVfMNMMvP1qd5Lfw8OjJ1zhdzvoAGpOGYYkLv9pOmLgwULV0h2iII2Rirs9MytWcv3OhvB3WCIffBxxwW/4Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=kontron.de; dmarc=pass action=none header.from=kontron.de;
- dkim=pass header.d=kontron.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mysnt.onmicrosoft.com; 
- s=selector2-mysnt-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3yECJKh1qsBXs6pG4einz9v5fDy5Fo6ihg8oyVn7vIU=;
- b=gzZfgkhQl2PQSeIF96LlfzuxhjaO5nmzZGf8yNvnqWgCP6azVygefTKqNmnwySbHTkyOmOUP2yycH7nHU2WulanWkbu5vjKnDFj5cx9S/lSvCtm0KQW8jlqaUvLcvqmhCimPZszJAeF1UGET2lEQPB7JdvJtbKAJutflkLamp70=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=kontron.de;
-Received: from PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:263::10)
- by DU4PR10MB8975.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:565::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7544.41; Mon, 6 May
- 2024 07:17:37 +0000
-Received: from PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::b854:7611:1533:2a19]) by PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::b854:7611:1533:2a19%4]) with mapi id 15.20.7544.041; Mon, 6 May 2024
- 07:17:36 +0000
-Message-ID: <4293aa84-986a-4326-bef6-5a4f7a1387ab@kontron.de>
-Date: Mon, 6 May 2024 09:17:34 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 080/149] board: kontron: Remove <common.h> and add needed
- includes
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Heiko Thiery <heiko.thiery@gmail.com>, Michael Walle <michael@walle.cc>
-References: <20240501024316.1767971-1-trini@konsulko.com>
- <20240501024316.1767971-80-trini@konsulko.com>
-Content-Language: en-US, de-DE
-From: Frieder Schrempf <frieder.schrempf@kontron.de>
-In-Reply-To: <20240501024316.1767971-80-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR5P281CA0043.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:f3::14) To PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:102:263::10)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a59a0168c75so383153666b.1
+ for <u-boot@lists.denx.de>; Mon, 06 May 2024 00:36:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1714980964; x=1715585764;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UMEejgVw62+LfwhtD6UZPQz3iucUJGkR6/oijPpXhPA=;
+ b=molUN7CXpVLj+2TtTvoiK5iL0os9JGSy+d5hsyAUfjH24Kj6rrgmTtAeg0dVdFW9bv
+ cqQyGKSSIQSo5D88CpYCLhkQKgPvHG5RZsspjx1ipP4Lqo9v8+3ICtAya0nAjRru40Hr
+ 0RtLrD7rvlJpWrWWvi/8aA/MVERZ62aM6A7EQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714980964; x=1715585764;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=UMEejgVw62+LfwhtD6UZPQz3iucUJGkR6/oijPpXhPA=;
+ b=d0kL9NCZ8/eHqHbfnoWJ2rCOnMuHlQF5hwMC/wExzVkGz8ziaRwyNBmaxuB/su9BDS
+ XYQIhoc/WkvuNnit25ba1qm86lR1Be+Xbq1xNVDv/TRSwBnK0X5zAjem4v2zZ9/fR2Ib
+ KcubSdSTpU3hLMdLWrb01nnBaXQtnBkO1ZSOMQl813CbqL6pSOsavZbEgea6fu8EMtkz
+ 2supzsCSrQ4oPILOO/DHOEYi1C/Fo4ezkJtdVkyLPf1A1HOqhsSFUa1VN0ZGkRN6GnMu
+ wIC4PWMofANBFq8FoKf1fBcw+pb4pbUHkZuOmIwTb1hgm7BYdYFy7aCww1qlxI+h8WTG
+ hhcg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVl0YWIc7XNEqMozEoe7SnJDSPoEDxJqBJ2dBWb3QnlzySKTpZAdwaiC/U5N3syOSlJZhcxT9fvYBSHWLtR5Uo+p3AEYg==
+X-Gm-Message-State: AOJu0Yw//M5iWlAZ5m3cQkVmLdE7XCAlwYgOtccsWY2g1ETtmyoEa+rT
+ JIP8srxJkWQCwuRoAPCG0nvsz8he8UzG/Y6qfYscvnIiWgTgihTLi3AASGkdJ6SQqWy2P3WhtIY
+ ebJ/C78UfdbVtQ43Kdw1JVtS+TJaFegaTCddUEw==
+X-Google-Smtp-Source: AGHT+IHyC+7J8qXg1sxBHuZ642fsg85UXIUgaw6FxdNW85FA+8DyXnz2OpKM0sdV1ROxNWj1GW4J3Xk8Ldk4y5ZSjsM=
+X-Received: by 2002:a50:8d13:0:b0:572:9b20:fd with SMTP id
+ s19-20020a508d13000000b005729b2000fdmr5606102eds.31.1714980964400; 
+ Mon, 06 May 2024 00:36:04 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR10MB5681:EE_|DU4PR10MB8975:EE_
-X-MS-Office365-Filtering-Correlation-Id: 92bee270-9ea9-4bfb-3a7c-08dc6d9c9abc
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230031|376005|366007|1800799015;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?YzBlL3I2cUF3eFpqajh4dmlWaFdLanE2aXZqaFVsWFFKZGpXM0dVVm9NT2RF?=
- =?utf-8?B?dEVSRFFrRXVTa1VsQ3pOWTRpVWh5NEZybEdYYm1YQVo2NXdRTzNSMURpZzVR?=
- =?utf-8?B?NGF6WEc2UWdGTDhMRENoblg1OHhrZGdZejluRW9qNFl5bU5tRXRaaVNpU2ta?=
- =?utf-8?B?Q1JvaVpiVzdiK2R6L0lpQjJhUVl3RmtyeklTL0tLRFVzOVpFUTIzM2d2aEJX?=
- =?utf-8?B?QlNNVGhoU3NxUXkrcVZrZXN2R1JkNjdwNWJZMkhFbmRCRGdMT1prNE5XVjNk?=
- =?utf-8?B?UGFOOThRV3lBSDZZbTVKeEVUbkpXZUVXS1pFdmpGMDF4U0tJdmQ3WGJZVkw5?=
- =?utf-8?B?RWdWWHJTRDhvc09jWU5hVnZaY2loTVJqWG10MlhLWlg3akU5amNyd29FK3Qy?=
- =?utf-8?B?VjdoeFFpckJaRXBtVWo3bkI1V3R0Nkx6UVE0c08ybHMwWUhnYjVjY2I4Uk1v?=
- =?utf-8?B?TFJ4ZDEvQ0FPOFBRdFI5RDV2UUpYTGx5Z2c3NjQ1YmNQTjlwcXBveW9maFBD?=
- =?utf-8?B?cERRSmUxeWpFcTZFSXQxR1BGTHExOUo3QVF3a0k1ckxEOGZ1TGlUVGdSWHBU?=
- =?utf-8?B?ekNyb0hldEJ3RFQrVlp4ZExvOHhEWHE2cy9tQ0N4OVJtb0hQU2tERy9USmpN?=
- =?utf-8?B?OFVZUGxRVThaUTRxNzYxdityZk42MW54V1kyMHN0c2R5YitGa2YzelFVMWt2?=
- =?utf-8?B?VWt5TnprM2tjcTlMU29IRFB1QVBjMTIxZnpQQ0ZSQ1V6UVlOOG4xSHpGVlRP?=
- =?utf-8?B?aUtaUGRwTzJ6RlBvWFpzNXVVWWFrZHlWR2NvcFVRNlpNMElNSDFWVWNxb1Zk?=
- =?utf-8?B?NzJ1UDg2ZUhnTjlsUzBQaE9lYkJlZTNONGZXWFAxd0Znb3ZNSHJLMlVWRURq?=
- =?utf-8?B?T1VhdEdYeGlNQjJvMEZnTUcyaFk2WERuYWV0SElwdUxxS1ZsbWlRM0J2cXlS?=
- =?utf-8?B?RklYdXExRWxYUG1xZUZ3Sk96QnlSUmFSZUFmNmNMQThRRDJkZ2IyODRqWGE4?=
- =?utf-8?B?dUVjaTJITVU0ZHJ3blpNcDh5dkNzMis1WUJsSEQzMzEyVVl0cVZPcDMyamNN?=
- =?utf-8?B?OVNnb3c5QXh0S1dPM3Ztand0RDAybUt3VlBocGkzaFRNZ1dmZjZjMDBub3ZK?=
- =?utf-8?B?aE5LSlVTTXBENHJNaHRydFRCQmE3S09TYVJuRGd4d0ZEV3lmMWNlQXA5eWtY?=
- =?utf-8?B?YmxIWGE2T1FuSDdITFE0YS9HTkM4dUpqT3E2b0RTTWQvL1BkUmI2ZTNYWDd2?=
- =?utf-8?B?VHpKbXN3cG1SNXB4N0t1M005QTJOTU9YVU51RW15QzJPT05ybWR5d0JsaTgx?=
- =?utf-8?B?VXdQbmNWbnJCdWQzN2JlQXdtOTZYV2Qyd0FjYTE4enVSMkNBU256SEUxNHRI?=
- =?utf-8?B?UlNzQ0hKR3JacVVxaTE0cnpJWDA1dWdGdlZTdzRZZzI1RHA3TmVFZXpFR1Ni?=
- =?utf-8?B?Wm5WaE9aMDNlNnl6Y0N3Q0tkS0xweVpTTUFldTRmMSt1dlZnQ2ZaRytIRHBZ?=
- =?utf-8?B?Q2N1MUQrK01pSHREYVZmYWMwdXZweThQWStBV1JmaFZhV1h1MGRiYTdyWmRK?=
- =?utf-8?B?aWdKc2R4Y05QSkM3emNTbUNRRFV1Y0JlZWdxMVBvUS9Xdkc4WkJVVmRYckc5?=
- =?utf-8?B?RUhpRWtraE5yb08zaDZzTjF2Nys2b2U2ZERhTjk0RkM2eStBT0ZITE1LZjZy?=
- =?utf-8?B?bjBvbGRiY2YzMWdvVy9HdnF1SFRiTFZPYXhsSzR6YWdOMDc3UGJ3cVNnPT0=?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(376005)(366007)(1800799015); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WFBGb1ZRSG1zS1h0TEhoaWgvR1dpN3VZN2pzbHVjZVVmN1NFZHJ5Ui96QmlT?=
- =?utf-8?B?MFp4QkdLa1A5b0FlUTRZQU1LR1dxRmdQb2NSL3ExZkFoZnRmaUsrUUtJNEF2?=
- =?utf-8?B?Mk5nVWhheDFJWWFhSXhCTFh0V0dhREFzeTdSWUM0L2VXMDZFcXJLWU1SZ0Er?=
- =?utf-8?B?bkdXREg2bU10N2FHYkh0OE9CcDJhL2o3eDI5NWVtWGl1RWlha3dDa2JNZXRS?=
- =?utf-8?B?SEs1bXN6YkRldHJrNk8zdjFHNitRRWx3WUU5OWJQakpucTIza3hiVFNuRURY?=
- =?utf-8?B?WFVXYTVWTDZSaHJxQXdGNHJKWkdQazFIRVd6RkczbUtVelgxMHQxbUpmbG4r?=
- =?utf-8?B?QU5KdW1NemIwNXkzaUd4K2lGWjZrTHhXSDhJTEErL2pteFJrWUdGNFFYRDl5?=
- =?utf-8?B?d0Y5SytWekt2YVc5cXhlRTVxeW80bG1TMFp3d3RnbDhDVyt2SXBDdlRnZy9y?=
- =?utf-8?B?ajUwU3V3blMvVjJWMzZEdVZMUTBINjBVZkU2TW9VZEJvU3NOWjFUTVpkK3ZT?=
- =?utf-8?B?bjdDTW5jcjhGVWNRL2xHeFUzSlRVS3E4QmNMalh2cFMwNkdWanZrMk43V20z?=
- =?utf-8?B?SS93RGp5NzVER2I4Nm5hdzNIRGp3S0xEakNveElsUFkxa0NrNjR4UGtzNjFa?=
- =?utf-8?B?Ym5IdlRQczNIZkxvTWoxUjBTUUlwdFhKa0g3OTZDVE02eGtOL3p5ZW8xdEdn?=
- =?utf-8?B?VFA1dU04TDJxV1FMNG9iTzlSVjV3UTk4RU52MzFQTkdyZURmbDg3WHVMTjVz?=
- =?utf-8?B?eW1ZK2RtMVdwNVR3THFjWll5RFRkdzVsc24xa3g5c1YvNXg0YTRhK2ZpKzhn?=
- =?utf-8?B?SlY4VWJuMnlOUUloN3Q0cHRHVTFLUThrMjZBdW9hazVjOUl6SndkbXJsQlJD?=
- =?utf-8?B?SFZMd0k2SE5xL0UvU3Q4bW1BNnNmTXUrVjFyTGQzdkpDL0YzVkV6aGdERmVP?=
- =?utf-8?B?cmN5eUxhUE03VVJIRHhiazl0cEUwcVBjTWlSNHBoalo0MjZCUlpUMk9nbHZu?=
- =?utf-8?B?Z0dSTmlTaWtTdzNDU2lGc29rUlJ0NmU2bzIyR0V2TjYweWtveWJZNmIvQndH?=
- =?utf-8?B?SjZlUWtGMW1NU0RpZjVmR0UrZWh0Mm9sVXRWSFNsSmQyNGg4aWsreElUQ1lh?=
- =?utf-8?B?VVRpUTVGTzRNeVkrLzhRTWJPL284N2JEVUJib2tCVW9YeXpDNG85S1pXRXUy?=
- =?utf-8?B?aHFmY0pTNkVGZkorRzlRUjBkbC9GY1I1TkZ3emZxV1Rsdm9BSDArOThKb0pw?=
- =?utf-8?B?OW54N1pmOVFSakpiRzFUcXh3Y0ZNQi9kMGxHRzhZQkxSYW9rMktsQTdOczFl?=
- =?utf-8?B?VC91OG1nUXNnSDY2QU5EV1VlUWpUNnNsMEhSbk9BSnQzYlN3aGoxSkpkM2Zr?=
- =?utf-8?B?c1BjbEo1TE51RmR5N0xuYlM4QWpudGJoalZmbE1QM1A0M1d5Z2NXeUhDYXNq?=
- =?utf-8?B?eVM5NzViMnAybWxldDRrM2dXRmhSQ08vbmZVL3lCK3dNeUlPMHdSbG5rSFVt?=
- =?utf-8?B?Z21jRzdiSzVQaUZZN2RQYTQ1TkNhL1F0a2w4NjNJaFhwZmdCMkN1Z2dNVXZR?=
- =?utf-8?B?U2NhSE1jV1hValdqeFJqL0x2YzE2NG01aFhHcU1wTVVrVU9xS3h0OURyNnJ4?=
- =?utf-8?B?Yi9GWjA2bmZ2ZysvSHRzVVpsWkhvWCtVTjdzdmpxRTQzSTdJa1BVcVZOSmNQ?=
- =?utf-8?B?R1QwbDhFQklUZURRa1RGc1dFa1ppend2S0RpRVhjWVZEdmErQ21pM0tvdFVQ?=
- =?utf-8?B?SU42c2VRRDltaGZZQUZvQithTHVwc0xyMUpPSjltMWpkTHU0TW5ldVV6N1Fx?=
- =?utf-8?B?ekZGWndiSzdOaWNiUng2a1dQUll4WWpDV0lZaDdnUisvSXlCc1dUcC9HRUpK?=
- =?utf-8?B?OHJ4a3krUVBDaFgxL3VUNldUZ3dFNUcrU3BMczc3VDlBUU5GVkdTV0JxN2lN?=
- =?utf-8?B?TENOVXlsUVVTdngxc0VwdDl3KzZ6MitCcS9ERlAxYVJOLzk1ZDF1L1BHNGVS?=
- =?utf-8?B?M3krLzBsbi9RcU16dmhxWUxuMkVTcFRpaytiUkRRL0FCNEZLWWg5eXBYNURt?=
- =?utf-8?B?MU1PY3A2Z0JiZE1BcEIzSEJXaTFud2Nmb0tmcGQ3aGtUcjRnTzZGWEs0b2lT?=
- =?utf-8?B?a1NkcEVpS3ZuMVM4VmJCQktGbDJYNmk1clFnRFU0MHlzM2JwOGxYNnc4T0ZX?=
- =?utf-8?B?dXc9PQ==?=
-X-OriginatorOrg: kontron.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 92bee270-9ea9-4bfb-3a7c-08dc6d9c9abc
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 May 2024 07:17:36.1256 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8c9d3c97-3fd9-41c8-a2b1-646f3942daf1
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: IKygGe74Ugc0OlKR2ds0W8HAhkZ/zrF5VgwCRb3xs47WTirEQa/EFOZWg733scGy4yYTE9TiurLZy2ZfC2Yip8nBdKE4NT/bMBQsh8dEodc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR10MB8975
+References: <ea0422cd-a8e6-3c36-f551-a0142893301b@marvell.com>
+ <CAFOYHZCAKtYiy=3X=u2+oqv3Wx8=W-vtV=+akbo+e479hPoX7A@mail.gmail.com>
+ <CAOf5uwm+Am-J6-yiCy0=N=FrcVpYGubtUfW9JT6YN3dp4-zutQ@mail.gmail.com>
+ <7f949d87-585b-8dd8-bd8b-d29766da4ad6@marvell.com>
+In-Reply-To: <7f949d87-585b-8dd8-bd8b-d29766da4ad6@marvell.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Mon, 6 May 2024 09:35:53 +0200
+Message-ID: <CAOf5uw=hsE9ffb0Czzp0B7Q0ZZTp=vHyoRW2oD-ENu_S+qF5CA@mail.gmail.com>
+Subject: Re: [EXTERNAL] Re: [PATCH] mtd: nand: pxa3xx: Incorrect bitflip
+ return on page read
+To: Ravi Minnikanti <rminnikanti@marvell.com>
+Cc: Chris Packham <judge.packham@gmail.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, u-boot@lists.denx.de,
+ hs@denx.de, trini@konsulko.com, sr@denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -173,10 +93,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 01.05.24 04:42, Tom Rini wrote:
-> Remove <common.h> from this board vendor directory and when needed
-> add missing include files directly.
-> 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
+Hi Ravi
 
-Acked-by: Frieder Schrempf <frieder.schrempf@kontron.de>
+On Tue, Apr 30, 2024 at 6:25=E2=80=AFAM Ravi Minnikanti <rminnikanti@marvel=
+l.com> wrote:
+>
+> On 4/29/24 09:59, Michael Nazzareno Trimarchi wrote:
+>
+> > ----------------------------------------------------------------------
+> > On Mon, Apr 29, 2024 at 6:22=E2=80=AFPM Chris Packham <judge.packham@gm=
+ail.com> wrote:
+> >>
+> >> On Sun, Apr 28, 2024 at 4:15=E2=80=AFAM Ravi Minnikanti <rminnikanti@m=
+arvell.com> wrote:
+> >>>
+> >>> Once a page is read with higher bitflips all subsequent reads
+> >>> are returning the same bitflip value even though they have none.
+> >>> max_bitflip variable is not being reset to 0 across page reads.
+> >>>
+> >>> This is causing problems like incorrectly
+> >>> marking erase blocks bad by UBI and causing read failures.
+> >>>
+> >>> Verified the change with both MTD reads and UBI.
+> >>> This change is inline with other NFC drivers.
+> >>>
+> >>> Sample error log where a block is marked bad incorrectly:
+> >>>
+> >>> ubi0: fixable bit-flip detected at PEB 125
+> >>> ubi0: run torture test for PEB 125
+> >>> ubi0: fixable bit-flip detected at PEB 125
+> >>> ubi0 error: torture_peb: read problems on freshly erased PEB 125,
+> >>> must be bad
+> >>> ubi0 error: erase_worker: failed to erase PEB 125, error -5
+> >>> ubi0: mark PEB 125 as bad
+> >>>
+> >>> Signed-off-by: rminnikanti <rminnikanti@marvell.com>
+> >>
+> >> Looks good to me
+> >>
+> >> Reviewed-by: Chris Packham <judge.packham@gmail.com>
+> >>
+> >>> ---
+> >>>  drivers/mtd/nand/raw/pxa3xx_nand.c | 5 +++++
+> >>>  1 file changed, 5 insertions(+)
+> >>>
+> >>> diff --git a/drivers/mtd/nand/raw/pxa3xx_nand.c b/drivers/mtd/nand/ra=
+w/pxa3xx_nand.c
+> >>> index 1d9a6d107b..d2a4faad56 100644
+> >>> --- a/drivers/mtd/nand/raw/pxa3xx_nand.c
+> >>> +++ b/drivers/mtd/nand/raw/pxa3xx_nand.c
+> >>> @@ -800,6 +800,11 @@ static void prepare_start_command(struct pxa3xx_=
+nand_info *info, int command)
+> >>>         info->ecc_err_cnt       =3D 0;
+> >>>         info->ndcb3             =3D 0;
+> >>>         info->need_wait         =3D 0;
+> >>> +       /*
+> >>> +        * Reset max_bitflips to zero. Once command is complete,
+> >>> +        * max_bitflips for this READ is returned in ecc.read_page()
+> >>> +        */
+> >>> +       info->max_bitflips      =3D 0;
+> >>>
+> >
+> > Why this should not be put to 0 in read_page instead on prepare_start_c=
+ommand?
+> >
+> > Michael
+> >
+>
+> ecc.read_page is invoked after the read command execution.
+> First chip->cmdfunc is executed with NAND_CMD_READ0 and then ecc.read_pag=
+e is invoked
+> to read the page from buffer. So, by the time read_page is invoked, info-=
+>max_bitflips
+> must already have the bit flip value.
+>
+
+All the other implementation has a slight different way to handle.
+From what you said the reset should
+be done on for NAND_CMD_READ0 command and should be sufficient.
+Technically should be moved
+in switch and not unconditionally.
+
+Michael
+
+> Thanks, Ravi.
+>
+> >>>         switch (command) {
+> >>>         case NAND_CMD_READ0:
+> >>> --
+> >>> 2.17.1
+> >
+>
+
+
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
