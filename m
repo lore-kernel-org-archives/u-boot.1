@@ -4,76 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93863C25B4F
-	for <u-boot@archiver.kernel.org>; Mon,  6 May 2024 14:52:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4EE4C10F16
+	for <u-boot@archiver.kernel.org>; Mon,  6 May 2024 15:17:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F361B88345;
-	Mon,  6 May 2024 16:52:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E9F2C8865B;
+	Mon,  6 May 2024 17:17:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LVzGl2s3";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="LkPo+8Kb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E403885AE; Mon,  6 May 2024 16:52:37 +0200 (CEST)
-Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
- [IPv6:2607:f8b0:4864:20::82f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CC7528867D; Mon,  6 May 2024 17:17:48 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F397A87F68
- for <u-boot@lists.denx.de>; Mon,  6 May 2024 16:52:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 688F788657
+ for <u-boot@lists.denx.de>; Mon,  6 May 2024 17:17:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82f.google.com with SMTP id
- d75a77b69052e-43ad4097aefso4916501cf.2
- for <u-boot@lists.denx.de>; Mon, 06 May 2024 07:52:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715007154; x=1715611954; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=1nhiXoPDLOYJVFGVArKKO2CHts24Aq2EHukB8xzuWCU=;
- b=LVzGl2s3OaWH3D4EJ6oxKinoMMLypqHnjsfl7A0tSjMMCNLZKH77Hmbe0WzUpdLCxp
- ZxAk/KV0bAD5ypUw/uD2D68xNKHeQHh3CLEG5sZHT2vHVMkX/n1xQATBTFIwTMVlC0HA
- oalRVVq5LtnX6fhLfXJ7uj4oH/7Ws9EeJeh68=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715007154; x=1715611954;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1nhiXoPDLOYJVFGVArKKO2CHts24Aq2EHukB8xzuWCU=;
- b=L2maQKtiTjzHsVcLByoSZ+KJuVPX3LtBuKOxHJhq0HP/sX1/K7bChFCRPpK0rHbCaw
- BSGG1kiP+TonkGP7ohPYOnoxc7zZmXtpIlhMA9pF0DI/GJVLnhaX/73a5aV1xM8Ek42Z
- O+JYKugFo5atWIpDWYu526Ar8MrPLcJURBU11ug67h44XILEVe9X120SuxUA+MN2mfdb
- c84C22S4KJpIN65pDXgZuRPkrMq5T0ctmMIHf56rHy4lpOu0YRqbr7ptks+wuIzgC9er
- 1j5gqwe/Onlwevqfk5OVD63TH1/7aDMoCiw0i/pknL8g0cRbgMQNnU0qqCJYe1LrAO1C
- sm2w==
-X-Gm-Message-State: AOJu0YzdHtWXwdffdNmy8o6DurZL3XTSUM3McpT8JQpx5heWn4dTlDxU
- fyrgrV0IICkW7NRu+Dm00qvWQjp1P3Jn6obuDaEKAqJYwfFVQxyGTOjfU8/E1qOM+qCBVhmghkp
- yXCA=
-X-Google-Smtp-Source: AGHT+IEd4aJoUWxU7IltomA4yv8nVDLu0IdUujtQ/vh2QjUkC0ilH4VzJZ7+VwRKyaoeivKA2+BbSw==
-X-Received: by 2002:a05:622a:2b4d:b0:436:5f58:84d5 with SMTP id
- hb13-20020a05622a2b4d00b004365f5884d5mr13858155qtb.21.1715007153596; 
- Mon, 06 May 2024 07:52:33 -0700 (PDT)
-Received: from bill-the-cat ([187.144.98.216])
- by smtp.gmail.com with ESMTPSA id
- ci22-20020a05622a261600b0043476c7f668sm5214257qtb.5.2024.05.06.07.52.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 May 2024 07:52:33 -0700 (PDT)
-Date: Mon, 6 May 2024 08:52:30 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [GIT PULL] Please pull u-boot-imx-master-20240505
-Message-ID: <20240506145230.GM2568172@bill-the-cat>
-References: <20240505191139.3024264-1-festevam@gmail.com>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=c61d=MK=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1715008646;
+ bh=SmM8CCmM36h7XnZ/76zeAlED6Eua2lcbfVvy9mc1J8o=;
+ b=LkPo+8KbYZptg4mUPKzVn+hM3QVW2LGLhT/bJi2kA3yvH3suW1W7wa72iNy7r9l8wdM66dA3I
+ z0c1mg9YHGAZH3CpXG5++CRJrpplYtgYLg7EEkXYTnKlqIvIc6aGWg98wA428BZjw6LJB9Jg8sZ
+ DpJVWUjbJQB00lu+i27XaAhOjHI/a3aVSEgaIM1YS9eL3Hnhimv4JBheti78l0tKGgUSTAETFsc
+ KktFl2ZvG6/N3fLnbi/rLwjw3VEGpkBj4dkIOmD6FB3SnB9KNU0pGy0SDfiMhnLPCx7viC1rGlW
+ 1A3srbfnL74c4n8TmfedYuaYBIWKJ/EH62yLhBkSpkEw==
+Message-ID: <baacfde3-e0ee-4bd7-a85e-5945ec2a85e8@kwiboo.se>
+Date: Mon, 6 May 2024 17:17:15 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="EsjLiCJ7dlfRwrm9"
-Content-Disposition: inline
-In-Reply-To: <20240505191139.3024264-1-festevam@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 03/22] clk: rockchip: rk3399: Improve support for
+ SCLK_PCIEPHY_REF clock
+To: Quentin Schulz <quentin.schulz@cherry.de>, Quentin Schulz
+ <quentin.schulz@theobroma-systems.com>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Dragan
+ Simic <dsimic@manjaro.org>, Christopher Obbard
+ <chris.obbard@collabora.com>, Peter Robinson <pbrobinson@gmail.com>,
+ u-boot@lists.denx.de
+References: <20240501162308.875193-1-jonas@kwiboo.se>
+ <20240501162308.875193-4-jonas@kwiboo.se>
+ <b0152407-ee06-4c5b-ae5c-210a474ad598@cherry.de>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <b0152407-ee06-4c5b-ae5c-210a474ad598@cherry.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 6638f4811ab72626380504c9
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,55 +80,155 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Quentin,
 
---EsjLiCJ7dlfRwrm9
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2024-05-06 13:07, Quentin Schulz wrote:
+> Hi Jonas,
+> 
+> On 5/1/24 6:22 PM, Jonas Karlman wrote:
+>> rk3399-nanopi-4.dtsi try to set parent of and set rate to 100 MHz of the
+>> SCLK_PCIEPHY_REF clock.
+>>
+>> The existing enable/disable ops for SCLK_PCIEPHY_REF currently force
+>> use of 24 MHz parent and rate.
+>>
+>> Add improved support for setting parent and rate of the pciephy refclk
+>> to driver to better support assign-clock props for pciephy refclk in DT.
+>>
+>> This limited implementation only support setting 24 or 100 MHz rate,
+>> and expect npll and clk_pciephy_ref100m divider to use default values.
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> ---
+>> v2: Implement partial instead of dummy support for SCLK_PCIEPHY_REF
+>> ---
+>>   drivers/clk/rockchip/clk_rk3399.c | 59 +++++++++++++++++++++++++++++--
+>>   1 file changed, 57 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/drivers/clk/rockchip/clk_rk3399.c b/drivers/clk/rockchip/clk_rk3399.c
+>> index 5934771b4096..0b3223611a32 100644
+>> --- a/drivers/clk/rockchip/clk_rk3399.c
+>> +++ b/drivers/clk/rockchip/clk_rk3399.c
+>> @@ -926,6 +926,26 @@ static ulong rk3399_saradc_set_clk(struct rockchip_cru *cru, uint hz)
+>>   	return rk3399_saradc_get_clk(cru);
+>>   }
+>>   
+>> +static ulong rk3399_pciephy_get_clk(struct rockchip_cru *cru)
+>> +{
+>> +	if (readl(&cru->clksel_con[18]) & BIT(10))
+>> +		return 100 * MHz;
+>> +	else
+>> +		return OSC_HZ;
+> 
+> Could avoid the else since all if blocks return, no other logic than the 
+> one matching the else can reach that part of the code.
+> 
+> Therefore:
+> 
+> """
+> if (readl(&cru->clksel_con[18]) & BIT(10))
+>      return 100 * MHz;
+> 
+> return OSC_HZ;
+> """
+> 
+> works just as well.
 
-On Sun, May 05, 2024 at 04:11:39PM -0300, Fabio Estevam wrote:
+I was considering above format at first, but chose to align return
+statements for some reason.
 
-> Hi Tom,
->=20
-> Please pull from u-boot-imx/master, thanks.
-> The following changes since commit 2f1e76bcfee75b9f99ade63002c05ffaaec86a=
-fb:
->=20
->   Merge branch '2024-05-02-assorted-updates' (2024-05-03 16:18:51 -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx=
--master-20240505
->=20
-> for you to fetch changes up to cecb5fbb42c8b3de3d5a7df40bc01d1fdf4731d3:
->=20
->   crypto/fsl: Differentiate between CAAM and DCP in Kconfig entry (2024-0=
-5-05 11:21:39 -0300)
->=20
-> u-boot-imx-master-20240505
+I can change to this format in a v3, if needed :-)
 
-Applied to u-boot/master, thanks!
+> 
+> Could also be
+> 
+> """
+> return (readl(&cru->clksel_con[18]) & BIT(10)) ? 100 * MHz : OSC_HZ;
+> """
+> 
+> [...]
+>> +static int __maybe_unused rk3399_pciephy_set_parent(struct clk *clk,
+>> +						    struct clk *parent)
+>> +{
+>> +	struct rk3399_clk_priv *priv = dev_get_priv(clk->dev);
+>> +	const char *clock_output_name;
+>> +	int ret;
+>> +
+>> +	if (parent->dev == clk->dev && parent->id == SCLK_PCIEPHY_REF100M) {
+>> +		rk_setreg(&priv->cru->clksel_con[18], BIT(10));
+>> +		return 0;
+>> +	}
+>> +
+>> +	ret = dev_read_string_index(parent->dev, "clock-output-names",
+>> +				    parent->id, &clock_output_name);
+> 
+> Are you sure this works?
 
---=20
-Tom
+It should work for the clk reference I tested, <&xin24m>, where the id
+will be 0, it should also work for e.g. <&rk809 1>, id will be 1.
 
---EsjLiCJ7dlfRwrm9
-Content-Type: application/pgp-signature; name="signature.asc"
+And if a &cru/&pmucru clk is referenced those nodes do not have the
+clock-output-names prop, so ret should be -EINVAL (or -ENODATA).
 
------BEGIN PGP SIGNATURE-----
+> 
+> Considering that parent->id seems to store unique ids, like 167 for 
+> SCLK_PCIEPHY_REF100M, I doubt we should be using it for 
+> dev_read_string_index????
+> 
+> As per documentation:
+> 
+> """
+> /**
+>   * dev_read_string_index() - obtain an indexed string from a string list
+>   *
+>   * @dev: device to examine
+>   * @propname: name of the property containing the string list
+>   * @index: index of the string to return
+>   * @outp: return location for the string
+>   *
+>   * Return:
+>   *   length of string, if found or -ve error value if not found
+>   */
+> int dev_read_string_index(const struct udevice *dev, const char *propname,
+> 			  int index, const char **outp);
+> """
+> 
+> So index here means the (index+1)'th string in the list of strings under 
+> the "propname" DT property, I doubt we have properties with 167+ strings 
+> in them?
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY47qsACgkQFHw5/5Y0
-tyz3fQv5AcORLZQczqwH5gTH7qjyxPCXJ32dWECP6EQQCUHLbawHV0NCOuKPhLqO
-VUTKmt2/qrLKhBhRbEDZjt3ET4ZQ2+30WyAawfV1CfSPXjMgYv7tYtAiq17V4UAA
-AZMhwI92OwQPkqBUajwY1u2zLLEv+HHHd7iiIs61Tj2qTb1lWjPf3a70BudDdNIM
-SN17ps4aBa3GIK61v+4wXx7rEBtSzQf73gZbu8O3Gg0p7gl5JpwlGOp/MieFxNC8
-89AeLrsLtddu4EocgyNqVneHfFYk9+cAi0+KuhTc7H7oCV2jfeS1ZQV1orw6CzWR
-sBuTkJBB/LZz0E3uyjCtOss2/Hv8uMKSAcALAGuadFq6uUTIUwfI1nwcYsbJosXs
-lAROWzOd8NlqtQMMGKPx5K9ALFrEt3c4nzIHgftVNLpBqhJR4nSk6cm+pJp32Jcp
-usRB2iWc6ToDNvUql8L/lQoQtXopuZaG9voXEZf+fRiWLTS/tvSJpZ+K44GV6qbA
-7QCW4aQr
-=4ZWZ
------END PGP SIGNATURE-----
+I would expect the function to return -EINVAL or -ENODATA if it is called
+with an out-of-bounds index value.
 
---EsjLiCJ7dlfRwrm9--
+> 
+> I realize that rk3399_gmac_set_parent also uses this, so I'm a bit 
+> puzzled right now...
+> 
+> Don't you want to use
+> 
+> dev_read_stringlist_search(parent->dev, "clock-output-names", "xin24m")
+> 
+> instead?
+
+I think the implementation is correct and is what other rk clk drivers
+do for gmac set parent ops.
+
+Using dev_read_stringlist_search() could possible match a name for
+"wrong" clock, e.g:
+
+clk_ref: clock {
+	#clock-cells = <1>;
+	clock-output-names = "xin32k", "xin24m";
+};
+
+here only <&clk_ref 1> should match and not <&clk_ref 0>.
+
+Regards,
+Jonas
+
+> 
+> The rest looks good to me.
+> 
+> Cheers,
+> Quentin
+
