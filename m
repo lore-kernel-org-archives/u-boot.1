@@ -4,47 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2439C10F1A
-	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 10:26:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5FDAC10F1A
+	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 10:55:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1EB808872A;
-	Tue,  7 May 2024 12:26:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 2E76988742;
+	Tue,  7 May 2024 12:55:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ORmwfOfo";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4FD768873D; Tue,  7 May 2024 12:26:13 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id D444A88662
- for <u-boot@lists.denx.de>; Tue,  7 May 2024 12:26:10 +0200 (CEST)
+ id 8F59588749; Tue,  7 May 2024 12:55:03 +0200 (CEST)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 005D388719
+ for <u-boot@lists.denx.de>; Tue,  7 May 2024 12:55:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1F1F81063;
- Tue,  7 May 2024 03:26:36 -0700 (PDT)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 657873F587;
- Tue,  7 May 2024 03:26:08 -0700 (PDT)
-Date: Tue, 7 May 2024 11:26:04 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Peter Hoyes <peter.hoyes@arm.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, mk7.kang@samsung.com,
- ilias.apalodimas@linaro.org, wqu@suse.com, neil.armstrong@linaro.org,
- sr@denx.de, michal.simek@amd.com, patrick.delaunay@foss.st.com,
- sjg@chromium.org, patrice.chotard@foss.st.com,
- quentin.schulz@theobroma-systems.com
-Subject: Re: [PATCH v2 2/2] armv8: generic_timer: Use event stream for udelay
-Message-ID: <20240507112604.6e8e7388@donnerap.manchester.arm.com>
-In-Reply-To: <20240501081633.120913-3-peter.hoyes@arm.com>
-References: <20240501081633.120913-1-peter.hoyes@arm.com>
- <20240501081633.120913-3-peter.hoyes@arm.com>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-2b432ae7dabso860051a91.0
+ for <u-boot@lists.denx.de>; Tue, 07 May 2024 03:55:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1715079299; x=1715684099; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZNxAWlu36Kafh92k52agZvPB70ZQomrcEgFLyMA4D30=;
+ b=ORmwfOfop1aa2ir+WnGQdu27u1XLDIcm97YW6swVCv4aUusZjtVntbyG8dBqDBKawp
+ ohjJEYT+OMWIl1VgV8ha+foq1GNVK5cW++n64px5WG001dOnVmUqgryQqx2Te0m6T5Ox
+ nzKe0UZkQ8VaOfIuwptyZfw4Bt3MB/UC2IFAqkaerQz/fxfOe2hdmaJh0E+WHMkki5k4
+ WoI30oYo5Hrm49VxAlOQHfrPEyyENzFSLYo31Qd2JxAMOnQHPwcaZQAwCht7w432iSI/
+ Ft2Jm3oDgGALBb0kVFlNqiZ8caopH9n8mddhC0dHJ6Otgnj24DDfp6vWWjvKKXFT45wK
+ Y9dw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1715079299; x=1715684099;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ZNxAWlu36Kafh92k52agZvPB70ZQomrcEgFLyMA4D30=;
+ b=sucI4aLpqPwjGWMTEbr7NikMhcmX1CZpKloJ1kbIn8pSzQptLgU5Pzjb9CJzUAR9S5
+ FK33+0LzDBtmv9jTzjtqtijOG2GFGqAt18QZjOdNetwPREV2UoZXV8ccqKxRFjFXAMzs
+ xzIaua9dmKNMH9u8IpER3F93w9hnQvyVyZQVJL2fzHegbvqhOyLVgGlkMZ0674Tv5c77
+ rYyBQ43p8n4VaYcfYVd6+ItgXPAsYg2gDMVxaZD4njsydxQzUF269C6Whqu4jjXx8P9d
+ /bsBoO/Y3tSsh+oPcnugEDtUHq0XCDB8dpoMdRgXoKA4B+Xwj/xJ9zLDjsJZHvbWIUMs
+ Faiw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX2XHQxbmavr+/mUcYqMz0qy6uYaJl/fX59XCZHYQjiub4a63P3OpgIsVUvtwVsYd7nZPKCbXf33o9n+NHs7CB1ky3cTg==
+X-Gm-Message-State: AOJu0Yx2I5r/GNc0NLRsNtOJHLbjZ92nAKKJeQ7yo6t8TuqTCya03fss
+ gT4m9jVar/IKi2CzmehVxqSZ/XIR2JpMV0jqDC4JXukKgGbG3S2L4E4Vn6aPMgm7DA16GlYwVbp
+ OW9CAF9TUmmVqmOv7wqO5aWbgBig=
+X-Google-Smtp-Source: AGHT+IG5TuZbw3kIUDPJTM2Rc3ldgErkf5oeAq/vpZNk0RmgQqBm5GNHmvsswkTPG0/qBvpvHy0KJwBp6DPJ2gDWseU=
+X-Received: by 2002:a05:6a20:841e:b0:1af:667c:466a with SMTP id
+ c30-20020a056a20841e00b001af667c466amr15278084pzd.4.1715079299356; Tue, 07
+ May 2024 03:54:59 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+References: <20240503-wip-bhahn-bspimx8m-3196-v1-1-855c7242151f@phytec.de>
+ <CAOMZO5DgBF7ULn4Cp7VA0c29A5TKiJrxwoBEXSbYPu-9M4nzJw@mail.gmail.com>
+ <a4808081-9ae8-4556-ba5e-651e5b035c6c@phytec.de>
+In-Reply-To: <a4808081-9ae8-4556-ba5e-651e5b035c6c@phytec.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 7 May 2024 07:54:48 -0300
+Message-ID: <CAOMZO5AiY=7+oLSD_fSEfe1W377U_p1hYvADAUeDH+b3Qfkivw@mail.gmail.com>
+Subject: Re: [PATCH] configs: Make USB_GADGET_MANUFACTURER consistent over all
+ PHYTEC boards
+To: Benjamin Hahn <B.Hahn@phytec.de>
+Cc: Teresa Remmet <T.Remmet@phytec.de>, Yannic Moog <Y.Moog@phytec.de>,
+ Tom Rini <trini@konsulko.com>, 
+ Wadim Egorov <W.Egorov@phytec.de>, Martyn Welch <martyn.welch@collabora.com>, 
+ Parthiban Nallathambi <parthitce@gmail.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
+ "upstream@lists.phytec.de" <upstream@lists.phytec.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,119 +97,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed,  1 May 2024 09:16:33 +0100
-Peter Hoyes <peter.hoyes@arm.com> wrote:
+Hi Benjamin,
 
-Hi Peter,
+On Mon, May 6, 2024 at 7:52=E2=80=AFAM Benjamin Hahn <B.Hahn@phytec.de> wro=
+te:
 
-thanks for the change!
+> We are not registered at USB-IF and therefore don't have a valid
+> VENDOR_NUM and PRODUCT_NUM, so we rely on the VENDOR_NUM and PRODUCT_NUM
+> of the SoC Vendor, so the correct features get enabled by the driver.
 
-> From: Peter Hoyes <Peter.Hoyes@arm.com>
-> 
-> Polling cntpct_el0 in a tight loop for delays is inefficient.
-> This is particularly apparent on Arm FVPs, which do not simulate
-> real time, meaning that a 1s sleep can take a couple of orders
-> of magnitude longer to execute in wall time.
-> 
-> If running at EL2 or above (where CNTHCTL_EL2 is available), enable
-> the cntpct_el0 event stream temporarily and use wfe to implement
-> the delay more efficiently. The event period is chosen as a
-> trade-off between efficiency and the fact that Arm FVPs do not
-> typically simulate real time.
-> 
-> This is only implemented for Armv8 boards, where an architectural
-> timer exists, and only enabled by default for the ARCH_VEXPRESS64
-> board family.
+Ok, understood.
 
-I think total_compute would benefit from this change as well, but this
-needs some testing and can easily be a separate patch.
-
-> Signed-off-by: Peter Hoyes <Peter.Hoyes@arm.com>
-
-Reviewed-by: Andre Przywara <andre.przywara@arm.com>
-
-Cheers,
-Andre
-
-> ---
->  arch/arm/cpu/armv8/Kconfig         |  8 ++++++++
->  arch/arm/cpu/armv8/generic_timer.c | 27 +++++++++++++++++++++++++++
->  arch/arm/include/asm/system.h      |  6 ++++--
->  3 files changed, 39 insertions(+), 2 deletions(-)
-> 
-> diff --git a/arch/arm/cpu/armv8/Kconfig b/arch/arm/cpu/armv8/Kconfig
-> index 9f0fb369f7..199335cd60 100644
-> --- a/arch/arm/cpu/armv8/Kconfig
-> +++ b/arch/arm/cpu/armv8/Kconfig
-> @@ -191,6 +191,14 @@ config ARMV8_EA_EL3_FIRST
->  	  Exception handling at all exception levels for External Abort
-> and SError interrupt exception are taken in EL3.
->  
-> +config ARMV8_UDELAY_EVENT_STREAM
-> +	bool "Use the event stream for udelay"
-> +	default y if ARCH_VEXPRESS64
-> +	help
-> +	  Use the event stream provided by the AArch64 architectural
-> timer for
-> +	  delays. This is more efficient than the default polling
-> +	  implementation.
-> +
->  menuconfig ARMV8_CRYPTO
->  	bool "ARM64 Accelerated Cryptographic Algorithms"
->  
-> diff --git a/arch/arm/cpu/armv8/generic_timer.c
-> b/arch/arm/cpu/armv8/generic_timer.c index 8f83372cbc..e18b5c8187 100644
-> --- a/arch/arm/cpu/armv8/generic_timer.c
-> +++ b/arch/arm/cpu/armv8/generic_timer.c
-> @@ -115,3 +115,30 @@ ulong timer_get_boot_us(void)
->  
->  	return val / get_tbclk();
->  }
-> +
-> +#if CONFIG_IS_ENABLED(ARMV8_UDELAY_EVENT_STREAM)
-> +void __udelay(unsigned long usec)
-> +{
-> +	u64 target = get_ticks() + usec_to_tick(usec);
-> +
-> +	/* At EL2 or above, use the event stream to avoid polling
-> CNTPCT_EL0 so often */
-> +	if (current_el() >= 2) {
-> +		u32 cnthctl_val;
-> +		const u8 event_period = 0x7;
-> +
-> +		asm volatile("mrs %0, cnthctl_el2" : "=r"
-> (cnthctl_val));
-> +		asm volatile("msr cnthctl_el2, %0" : : "r"
-> +			(cnthctl_val | CNTHCTL_EL2_EVNT_EN |
-> CNTHCTL_EL2_EVNT_I(event_period))); +
-> +		while (get_ticks() + (1ULL << event_period) <= target)
-> +			wfe();
-> +
-> +		/* Reset the event stream */
-> +		asm volatile("msr cnthctl_el2, %0" : : "r"
-> (cnthctl_val));
-> +	}
-> +
-> +	/* Fall back to polling CNTPCT_EL0 */
-> +	while (get_ticks() <= target)
-> +		;
-> +}
-> +#endif
-> diff --git a/arch/arm/include/asm/system.h
-> b/arch/arm/include/asm/system.h index 51123c2968..7e30cac32a 100644
-> --- a/arch/arm/include/asm/system.h
-> +++ b/arch/arm/include/asm/system.h
-> @@ -69,8 +69,10 @@
->  /*
->   * CNTHCTL_EL2 bits definitions
->   */
-> -#define CNTHCTL_EL2_EL1PCEN_EN	(1 << 1)  /* Physical timer regs
-> accessible   */ -#define CNTHCTL_EL2_EL1PCTEN_EN	(1 << 0)  /*
-> Physical counter accessible      */ +#define CNTHCTL_EL2_EVNT_EN
-> BIT(2)	     /* Enable the event stream       */ +#define
-> CNTHCTL_EL2_EVNT_I(val)	((val) << 4) /* Event stream trigger bits
->     */ +#define CNTHCTL_EL2_EL1PCEN_EN	(1 << 1)     /* Physical
-> timer regs accessible */ +#define CNTHCTL_EL2_EL1PCTEN_EN	(1 <<
-> 0)     /* Physical counter accessible   */ /*
->   * HCR_EL2 bits definitions
-
+Reviewed-by: Fabio Estevam <festevam@gmail.com>
