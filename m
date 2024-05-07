@@ -4,78 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9CB4C10F1A
-	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 17:24:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED041C10F1A
+	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 17:52:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1FD088386;
-	Tue,  7 May 2024 19:24:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1690588388;
+	Tue,  7 May 2024 19:52:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FofUSnb5";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nucHj8ji";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 716D988388; Tue,  7 May 2024 19:24:08 +0200 (CEST)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
+ id 589BA8836C; Tue,  7 May 2024 19:52:01 +0200 (CEST)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C80B188379
- for <u-boot@lists.denx.de>; Tue,  7 May 2024 19:24:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E1FA88388
+ for <u-boot@lists.denx.de>; Tue,  7 May 2024 19:51:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-43d2b4d4d3eso11988481cf.2
- for <u-boot@lists.denx.de>; Tue, 07 May 2024 10:24:05 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-78f05341128so254271285a.0
+ for <u-boot@lists.denx.de>; Tue, 07 May 2024 10:51:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715102644; x=1715707444; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=m2pKX9YjPIwEgT2+aUfe7IBTTAiaBAh1+BUptssnsyA=;
- b=FofUSnb5ssgFahD4XxScIP7z9ZyDQ14MwsMRxD4eIO9ib7QIwrGkAfRWiQp3CIqJY6
- NhXVHmWlIJ/JsHNIcKqvMBx222jUy8P3V7uRkUuUv8GL4ka2mOoreXiVr+5sItr/zncS
- DKATdlJn4Quv6cvXLzrA5x+vV1h4FGXTfMi3Q=
+ d=linaro.org; s=google; t=1715104317; x=1715709117; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Iwr1uWTUMioYAVYYt7ehnHKsyRGL4pM1y0FJemLsXns=;
+ b=nucHj8ji9oP4bL4VSEPdL3EeJqrBbrgCxc+edLLao1ZAX7M4KisYlynzr4zULq/ZsC
+ SGXkrPx62NSePLK6IsVu95tDiNwFaJ//CI6LBIcfgya/LOVFa0SP9z8zGN4XAFg9+fym
+ 8FIHmxCM8svpNilihHBiNTuuWjIAfStPG+b1bKaurxsN51sQ556naiZnjoyJ3yMhy8Vy
+ Z1Tj8h9RPvNGc8vhvmAFsqQ3ykEa5ZpCW/964NWKk+53PfnL80vpwey7y3QppnMw/KRF
+ dLd9E46ATqkKZ/hKi49Wkf0lqclNv9hoWrJ0u8UgGmeudDDAZl+PSfwteMhWa27c4Kk1
+ AUag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715102644; x=1715707444;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=m2pKX9YjPIwEgT2+aUfe7IBTTAiaBAh1+BUptssnsyA=;
- b=v1Ek8aDaZR/proYDHrGnTd26KebttWBFeF3iH4GSOOcp4UDxF1TkmBju6c7HMb0Du+
- /dALBscc3dr9nao6FHYuTpyLPmEF3SglHqK3kN+nFr0WSlg4Rqq3u3FsLk1Djusvmo0s
- 4Ec30KMV4M/8WrI7hsDARvbcR0CdKom9Ujs7jtGptkbIw5wxigiTBzazUE9Ksj+ezu13
- B+QKUtE4UCCA38VjByBNmRDxQvEiHCICyAHhz9/yu3w4+xS3JaLaUT5OPZtenMpLLNWR
- tYUCrm5mJ2Lys+3Adiu8DPsaZLCLi0tgM7kDYGEteaLbnNUQBq5OhCzJmHY1rLg41Jqw
- 47aw==
-X-Gm-Message-State: AOJu0Yzh4E3lgf3hyvLNfcU09ObrhOWanGvdghmjYmK+wR7+EaRvtYaB
- 0VcBO31vDcJrRpC4yMB1yf7X2dWvkSJeyQjgzE/uKK/O7NIRrxxu+A6OxeOXCn4=
-X-Google-Smtp-Source: AGHT+IH5h7iwxV6fmMRz/vVoZEz3zgkm1ocK6A00dk7qaW+LsQzlCNVmxEVoAwXJXLEYQxigAKznNg==
-X-Received: by 2002:ac8:5f85:0:b0:439:a719:702e with SMTP id
- d75a77b69052e-43dbf84e5ebmr3600381cf.54.1715102644523; 
- Tue, 07 May 2024 10:24:04 -0700 (PDT)
-Received: from bill-the-cat ([187.144.98.216])
+ d=1e100.net; s=20230601; t=1715104317; x=1715709117;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Iwr1uWTUMioYAVYYt7ehnHKsyRGL4pM1y0FJemLsXns=;
+ b=IxMMBk21Pfw8huTQvna5Vj098gy6Rl1gG63K6WuCZLY0T9vKaRTu1vT2sX0i5Y7XXp
+ k+FmmSBbOlYIDNK58s2I7uJqfJikShciWChLldBPp45qc/EGBLTBV891bksdC+gM2oat
+ +OvCnCrfXPNBQsfUW4sVwlSBhva7cu1UPoTSLJ8/3iicbGRMIrlOYtRoB39q38VZLCVn
+ AtgEenhkJimOh2EHSlGZHwz8QSyroweg7ieKjgctHSQ9FAxSEI2C110hK7LQAIxb8sXu
+ dLnQWioMU7tWrqn7UKC3jNiIcjREUB3w0FJbn5smXZHMtB35UkTAH72pyXO/eWIt9+FC
+ 4Vhw==
+X-Gm-Message-State: AOJu0YxnAa8cIfSBMDjj5tysQ7ER+kZaVkMTGLSyXlUMkoHPSRWAKhTU
+ CSFlOL1TPduH72stJcp10CSudrW9KycVBDCN63Z1TZyyDBr7cNJLzU6fqFOuM1ccUw25tXJpPhh
+ Z
+X-Google-Smtp-Source: AGHT+IFLEg9WWTXqvpCNx1gRjmIK1UMX8YIdFTc93393GG35pVTSGy0fdK9GJ++NsHNRyeR5RcTylQ==
+X-Received: by 2002:a05:6214:262f:b0:6a0:b184:1dad with SMTP id
+ 6a1803df08f44-6a151436719mr6655996d6.10.1715104316598; 
+ Tue, 07 May 2024 10:51:56 -0700 (PDT)
+Received: from ubuntu.localdomain
+ (pool-174-115-4-214.cpe.net.cable.rogers.com. [174.115.4.214])
  by smtp.gmail.com with ESMTPSA id
- bx9-20020a05622a090900b0043490cc5254sm6634963qtb.32.2024.05.07.10.24.01
+ o1-20020a0cecc1000000b006a0f126a033sm4801834qvq.28.2024.05.07.10.51.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 May 2024 10:24:01 -0700 (PDT)
-Date: Tue, 7 May 2024 11:23:59 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Yoann Congal <yoann.congal@smile.fr>
-Cc: u-boot@lists.denx.de, Masahiro Yamada <masahiroy@kernel.org>
-Subject: Re: [PATCH] kconfig: default to zero if int/hex symbol lacks default
- property
-Message-ID: <20240507172359.GX2568172@bill-the-cat>
-References: <20240505135353.1507200-1-yoann.congal@smile.fr>
- <20240506174332.GN2568172@bill-the-cat>
- <d7c4aee3-47f3-401e-a66c-642ec5995ad1@smile.fr>
+ Tue, 07 May 2024 10:51:56 -0700 (PDT)
+From: Raymond Mao <raymond.mao@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>,
+ Christophe Leroy <christophe.leroy@csgroup.eu>,
+ Sumit Garg <sumit.garg@linaro.org>, Andrew Davis <afd@ti.com>,
+ Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, Ilya Lukin <4.shket@gmail.com>,
+ Sergei Antonov <saproj@gmail.com>, Bin Meng <bmeng@tinylab.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Alexander Gendin <agendin@matrox.com>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Eddie James <eajames@linux.ibm.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>
+Subject: [PATCH v2 00/28] [RFC] Integrate MbedTLS v3.6 LTS with U-Boot
+Date: Tue,  7 May 2024 10:50:42 -0700
+Message-Id: <20240507175132.1456512-1-raymond.mao@linaro.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="IHgQEVnYOaZ2xwZH"
-Content-Disposition: inline
-In-Reply-To: <d7c4aee3-47f3-401e-a66c-642ec5995ad1@smile.fr>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,142 +112,508 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Integrate MbedTLS v3.6 LTS (currently v3.6.0-RC1) with U-Boot.
 
---IHgQEVnYOaZ2xwZH
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Motivations:
+------------
+1. MbedTLS is well maintained with LTS versions.
+2. LWIP is integrated with MbedTLS and easily to enable HTTPS.
+3. MbedTLS recently switched license back to GPLv2.
 
-On Tue, May 07, 2024 at 09:17:46AM +0200, Yoann Congal wrote:
-> Le 06/05/2024 =E0 19:43, Tom Rini a =E9crit=A0:
-> > On Sun, May 05, 2024 at 03:53:53PM +0200, Yoann Congal wrote:
-> >=20
-> >> From: Masahiro Yamada <masahiroy@kernel.org>
-> >>
-> >> This is a cherry-pick from the kernel commit:
-> >> 6262afa10ef7c (kconfig: default to zero if int/hex symbol lacks defaul=
-t property, 2023-11-26)
-> >>
-> >> When a default property is missing in an int or hex symbol, it defaults
-> >> to an empty string, which is not a valid symbol value.
-> >>
-> >> It results in an incorrect .config, and can also lead to an infinite
-> >> loop in scripting.
-> >>
-> >> Use "0" for int and "0x0" for hex as a default value.
-> >>
-> >> Signed-off-by: Masahiro Yamada <masahiroy@kernel.org>
-> >> Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
-> >>
-> >> Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
-> >> ---
-> >> Added context that was not in the upstream commit:
-> >> The infinite loop case happens with a configuration defined like this
-> >> (a hex config without a valid default value):
-> >>   config HEX_TEST
-> >>   	hex "Hex config without default"
-> >>
-> >> And using:
-> >>   $ make oldconfig < /dev/null
-> >>   scripts/kconfig/conf  --oldconfig Kconfig
-> >>   *
-> >>   * General setup
-> >>   *
-> >>
-> >>   Error in reading or end of file.
-> >>
-> >>   Error in reading or end of file.
-> >>   Hex config without default (HEX_TEST) [] (NEW)
-> >>
-> >>   Error in reading or end of file.
-> >>   Hex config without default (HEX_TEST) [] (NEW)
-> >>   # This loops forever
-> >>
-> >> NB: Scripted config manipulation often call make with /dev/null as
-> >> stdin (Yocto recipe, CI build, ...)
-> >>
-> >> This was discovered when working on Yocto bug:
-> >> https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D14136
->=20
-> Hi Tom,
->=20
-> > I'm surprised this was accepted. In the past I've wanted to avoid this
-> > kind of change in Kconfig because while the empty string can be easily
-> > be checked in the code as "user didn't really configure this, do
-> > nothing" a value of zero is a valid option in these cases and so then in
-> > the code we need a bool symbol to decide if the hex/int symbol is set or
-> > not.
->=20
-> For context (and what it's worth), before this patch was merged, I've tri=
-ed to fix this problem with a patch of my own which only exited the config =
-process when the infinite loop would start:
-> "[PATCH v4] kconfig: avoid an infinite loop in oldconfig/syncconfig" [0]
-> ... the v5 version was a bit more severe and exited as soon as an error w=
-as hit, it was then removed from -next because it triggered a build failure=
- [1].
->=20
-> > Today this is less of an issue than it used to be in U-Boot with
-> > everything CONFIG-related migrated to Kconfig and so there's no longer
-> > the question of if we missed migrating a file that defined the value but
-> > there's still places we have in the code where hex symbol is undefined
-> > is not the same thing as hex symbol is 0x0.
-> >=20
-> > Is there a specific use case you have for this in U-Boot? It's been a
-> > while, but it's also been cases of newly introduced symbols in Kconfig
-> > files with incorrect dependencies, where the infinite loop in kconfig
-> > happened, CI failed and we caught the problem.
->=20
-> For a specific example, one can trigger this with CMD_PSTORE_MEM_ADDR lik=
-e this (tested on today's master):
->   make qemu_arm64_defconfig
->   make menuconfig
->    # activate CONFIG_CMD_PSTORE=3Dy but forget to fill CMD_PSTORE_MEM_ADDR
->   make < /dev/null # This emulates a Yocto/scripted/CI build and loops in=
-finitely
->=20
-> But, my more general use case is the Yocto dev trying to change the U-Boo=
-t (or any kconfig based software) config and accidentally trigger this.
-> In Yocto, what they will see is a do_configure task taking a very long ti=
-me but they won't see the looping logs the detect the problem (This is caug=
-ht later by filing the RAM and the build process is killed by OOM, or the d=
-isk run out of space filed multi-GB log files).
->=20
-> I'm sadly aware that defining a default value for this kind of config (fi=
-xed addresses) is not really sensible but the build time infinite loop is n=
-ot good either.
+Prerequisite:
+-------------
+This patch series requires mbedtls git repo to be added as a
+subtree to the main U-Boot repo via:
+    $ git subtree add --prefix lib/mbedtls/external/mbedtls \
+          https://github.com/Mbed-TLS/mbedtls.git \
+          v3.6.0 --squash
+Moreover, due to the Windows-style files from mbedtls git repo,
+we need to convert the CRLF endings to LF and do a commit manually:
+    $ git add --renormalize .
+    $ git commit
 
-Exactly, but to me it's worse to cover up the build issue and introduce
-a runtime issue instead. Something builds but then crashes at run time
-is worse to me than builds fail / get stuck. Using your example,
-CMD_PSTORE_MEM_ADDR depends on CMD_PSTORE and so if someone enables
-CMD_PSTORE in a config fragment but doesn't define the address, the
-build should not complete. Using 0x0 means that oops, now it fails to
-work and might not be obvious why either.
+New Kconfig options:
+--------------------
+`MBEDTLS_LIB` is for MbedTLS general switch.
+`MBEDTLS_LIB_CRYPTO` is for replacing original digest and crypto libs with
+MbedTLS.
+`MBEDTLS_LIB_X509` is for replacing original X509, PKCS7, MSCode, ASN1,
+and Pubkey parser with MbedTLS.
+`MBEDTLS_LIB_TLS` is for SSL/TLS (Disabled until LWIP port for MbedTLS is
+ready)
+In this patch set, MBEDTLS_LIB, MBEDTLS_LIB_CRYPTO and MBEDTLS_LIB_X509
+are by default enabled in qemu_arm64_defconfig for testing purpose.
 
-I won't revert this change when in the future we're able to sync up with
-the kernel again, but I'm not eager to bring this in by itself as it
-feels like the wrong way to deal with the problem. Thanks for explaining
-the history here.
+Patches for external MbedTLS project:
+-------------------------------------
+Since U-Boot uses Microsoft Authentication Code to verify PE/COFFs
+executables which is not supported by MbedTLS at the moment,
+addtional patches for MbedTLS are created to adapt with the EFI loader: 
+1. Decoding of Microsoft Authentication Code.
+2. Decoding of PKCS#9 Authenticate Attributes.
+3. Extending MbedTLS PKCS#7 lib to support multiple signer's certificates.
+4. MbedTLS native test suites for PKCS#7 signer's info.
+All above 4 patches (tagged with `mbedtls/external`) are submitted to
+MbedTLS project and being reviewed, eventually they should be part of
+MbedTLS release.
+See below PR for the reference:
+https://github.com/Mbed-TLS/mbedtls/pull/9001
 
---=20
-Tom
+Miscellaneous:
+--------------
+Minor fixes for arm EFI linker script for testing EFI secure boot.
 
---IHgQEVnYOaZ2xwZH
-Content-Type: application/pgp-signature; name="signature.asc"
+Optimized MbedTLS library size by tailoring the config file.
+After disabling all unnecessary features for EFI loader, enabling MbedTLS
+increases U-Boot size by 6.03% (V1).
+For V2, this figure drops to about 4.66% by completely replacing
+original libs (rsa, asn1_decoder, rsa_helper, md5, sha1, sha256, sha512)
+with MbedTLS when related Kconfig options are enabled.
+Please see the output of bloat-o-meter for the reference of the size-growth
+on QEMU arm64 target [1].
 
------BEGIN PGP SIGNATURE-----
+Tests done:
+-----------
+EFI Secure Boot test (EFI variables loading and verifying, EFI signed image
+verifying and booting) via U-Boot console.
+EFI Secure Boot and Capsule sandbox test passed.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY6Y6wACgkQFHw5/5Y0
-tyzojwv+PxD4nTc1QgLszcZxfnJ5GJGdqP7YqAopeAy5/lfPGSkujoK8J2XD5o20
-ROxByoBfk+nnb3nXphS6cM8Y0l79Vm40w+ieQTAWseOYwgGQwKDJYZzDP93akxN2
-YiOyt+H0W/8dv7LRAgE77LEEMi+GGoifqgAzpl51ooa3UzzZ5ZeTKwlYbzu+0V+W
-MVHnzXBESmni37xH2Xirvwvke/F+0IUIIZX2eWz9YTiXXF1cT75Nqf7ugP4bnETQ
-jhf6BUxMTL02Y0e/i5AU79xdhJi5IEv5ehkLkC//8hwDCK1IzCykn5wsZN34ukSr
-/AzAcOZ7VQHUB4pmgHTZ3qkvY5knLkg68pzPdXES74q5A3BQ5sShCbINWi4SaZhG
-VpNVDOolIej3dDTq3F6Y54c0JPLngoFdf9EIIb7WTZINN/Ae9IS+oda/1y8tXZIl
-X1O1mXMR6tTLjGyIBQ4ud16ygYNrrWpxdSUj884p9cz0XWzIk/CoF5QLlGEsBjQA
-mJSju9I2
-=Vwjv
------END PGP SIGNATURE-----
+Known issues:
+-------------
+None.
 
---IHgQEVnYOaZ2xwZH--
+[1]: bloat-o-meter output between disabling/enabling MbedTLS (QEMU arm64)
+```
+add/remove: 212/81 grow/shrink: 20/17 up/down: 56376/-17495 (38881)
+Function                                     old     new   delta
+mbedtls_internal_sha1_process                  -    4540   +4540
+mbedtls_x509_crt_parse_der_internal            -    3072   +3072
+mbedtls_internal_md5_process                   -    2928   +2928
+mbedtls_internal_sha256_process                -    2052   +2052
+mbedtls_pkcs7_parse_der                        -    1608   +1608
+mbedtls_rsa_private                            -    1468   +1468
+pkcs7_parse_message                          372    1648   +1276
+mbedtls_mpi_div_mpi                            -    1168   +1168
+mbedtls_internal_sha512_process                -    1056   +1056
+mbedtls_mpi_inv_mod                            -    1000   +1000
+mbedtls_x509_dn_gets                           -     996    +996
+x509_populate_cert                             -     948    +948
+K                                              -     896    +896
+oid_x520_attr_type                             -     840    +840
+__udivti3                                      -     832    +832
+mbedtls_x509_parse_subject_alt_name            -     724    +724
+mbedtls_rsa_deduce_primes                      -     720    +720
+mbedtls_mpi_exp_mod                            -     668    +668
+mbedtls_rsa_rsaes_pkcs1_v15_decrypt            -     652    +652
+pkcs7_get_signer_info                          -     632    +632
+mbedtls_rsa_complete                           -     624    +624
+mbedtls_rsa_validate_params                    -     608    +608
+mbedtls_mpi_core_exp_mod                       -     560    +560
+mbedtls_sha512_finish                          -     556    +556
+mscode_parse                                  28     580    +552
+mbedtls_x509_get_time                          -     552    +552
+mbedtls_x509_get_name                          -     516    +516
+mbedtls_sha256_finish                          -     484    +484
+mbedtls_rsa_validate_crt                       -     464    +464
+mbedtls_mpi_core_mla                           -     460    +460
+rsa_rsassa_pkcs1_v15_encode                    -     420    +420
+mbedtls_sha1_finish                            -     420    +420
+mbedtls_mpi_gcd                                -     400    +400
+oid_x509_ext                                   -     360    +360
+rsa_parse_pub_key                             24     372    +348
+mbedtls_x509_get_subject_alt_name_ext          -     348    +348
+mbedtls_sha512_starts                          -     340    +340
+mbedtls_mpi_mul_mpi                            -     340    +340
+mbedtls_rsa_rsassa_pkcs1_v15_sign              -     336    +336
+mbedtls_oid_get_numeric_string                 -     336    +336
+mbedtls_md5_finish                             -     336    +336
+mbedtls_pk_parse_subpubkey                     -     328    +328
+oid_sig_alg                                    -     320    +320
+mbedtls_rsa_deduce_private_exponent            -     312    +312
+rsa_check_context.isra                         -     300    +300
+mbedtls_rsa_rsaes_pkcs1_v15_encrypt            -     288    +288
+mbedtls_rsa_parse_pubkey                       -     284    +284
+mbedtls_mpi_sub_abs                            -     284    +284
+mbedtls_mpi_core_montmul                       -     276    +276
+mbedtls_rsa_rsassa_pkcs1_v15_verify            -     268    +268
+mbedtls_asn1_traverse_sequence_of              -     268    +268
+mbedtls_sha512_update                          -     264    +264
+hash_command                                 472     732    +260
+mbedtls_asn1_get_alg                           -     256    +256
+mbedtls_sha256_update                          -     252    +252
+mbedtls_mpi_add_abs                            -     248    +248
+oid_md_alg                                     -     240    +240
+mbedtls_sha1_update                            -     236    +236
+mbedtls_rsa_deduce_crt                         -     236    +236
+mbedtls_md5_update                             -     236    +236
+mbedtls_rsa_import_raw                         -     232    +232
+mbedtls_ct_memcpy_if                           -     228    +228
+mbedtls_mpi_copy                               -     220    +220
+mbedtls_mpi_cmp_mpi                            -     212    +212
+mbedtls_mpi_shrink                             -     208    +208
+mbedtls_ct_memmove_left                        -     208    +208
+mbedtls_rsa_public                             -     204    +204
+rsa_sign_wrap                                  -     196    +196
+mbedtls_pk_parse_public_key                    -     196    +196
+asn1_get_tagged_int                            -     196    +196
+mbedtls_mpi_mul_int                            -     184    +184
+mbedtls_mpi_core_write_be                      -     184    +184
+mbedtls_pk_verify_restartable                  -     180    +180
+mbedtls_mpi_mod_mpi                            -     180    +180
+mbedtls_asn1_get_len                           -     180    +180
+pk_get_pk_alg.isra                             -     176    +176
+mbedtls_mpi_core_fill_random                   -     176    +176
+x509_populate_pubkey                           -     164    +164
+rsa_verify_wrap                                -     164    +164
+mbedtls_x509_crt_free                          -     164    +164
+mbedtls_mpi_core_shift_r                       -     164    +164
+oid_pk_alg                                     -     160    +160
+mbedtls_ct_zeroize_if                          -     156    +156
+rsa_encrypt_wrap                               -     152    +152
+rsa_decrypt_wrap                               -     152    +152
+mbedtls_mpi_cmp_abs                            -     152    +152
+add_sub_mpi                                    -     152    +152
+mbedtls_sha512                                 -     148    +148
+mbedtls_rsa_check_privkey                      -     148    +148
+mbedtls_mpi_core_shift_l                       -     148    +148
+mbedtls_x509_get_ext                           -     144    +144
+mbedtls_mpi_grow                               -     144    +144
+mbedtls_mpi_core_read_be                       -     144    +144
+mbedtls_x509_get_serial                        -     140    +140
+mbedtls_asn1_write_len                         -     140    +140
+pkcs7_get_one_cert                             -     136    +136
+mbedtls_x509_crl_free                          -     136    +136
+mbedtls_rsa_free                               -     136    +136
+mbedtls_rsa_check_pubkey                       -     136    +136
+mbedtls_x509_get_key_usage                     -     128    +128
+mbedtls_asn1_get_bitstring                     -     128    +128
+do_sha1sum                                     -     128    +128
+do_md5sum                                      -     128    +128
+mbedtls_sha256_starts                          -     124    +124
+mbedtls_mpi_core_mul                           -     124    +124
+mbedtls_asn1_get_alg_null                      -     124    +124
+hash_parse_string                              -     124    +124
+mbedtls_x509_get_sig                           -     120    +120
+mbedtls_pkcs7_free                             -     120    +120
+mbedtls_oid_get_x509_ext_type                  -     120    +120
+mbedtls_oid_get_pk_alg                         -     120    +120
+mbedtls_oid_get_md_alg                         -     120    +120
+mbedtls_oid_get_attr_short_name                -     120    +120
+mbedtls_x509_get_subject_alt_name              -     116    +116
+asn1_get_sequence_of_cb                        -     116    +116
+mbedtls_x509_get_sig_alg                       -     112    +112
+hash_show                                      -     112    +112
+mbedtls_x509_get_ns_cert_type                  -     108    +108
+mbedtls_mpi_resize_clear                       -     108    +108
+mbedtls_mpi_lset                               -     108    +108
+mbedtls_mpi_fill_random                        -     108    +108
+mbedtls_asn1_get_sequence_of                   -     108    +108
+mbedtls_mpi_core_get_mont_r2_unsafe            -     104    +104
+oid_sig_alg_from_asn1                          -     100    +100
+mbedtls_mpi_shift_l                            -     100    +100
+public_key_verify_signature                  312     408     +96
+mbedtls_rsa_info                               -      96     +96
+mbedtls_pk_setup                               -      96     +96
+mbedtls_mpi_read_binary                        -      96     +96
+mbedtls_rsa_check_pub_priv                     -      92     +92
+mbedtls_mpi_lsb                                -      92     +92
+mbedtls_asn1_get_bool                          -      92     +92
+mbedtls_mpi_core_bigendian_to_host             -      84     +84
+mbedtls_mpi_core_bitlen                        -      76     +76
+mbedtls_asn1_get_bitstring_null                -      76     +76
+x509_free_mbedtls_ctx.part                     -      72     +72
+mbedtls_sha1_starts                            -      72     +72
+mbedtls_mpi_core_cond_assign                   -      72     +72
+CSWTCH                                      1266    1338     +72
+x509_populate_dn_name_string                   -      68     +68
+mbedtls_pk_free                                -      68     +68
+mbedtls_oid_get_sig_alg                        -      68     +68
+mbedtls_mpi_free                               -      68     +68
+mbedtls_mpi_core_sub                           -      68     +68
+mbedtls_mpi_core_check_zero_ct                 -      68     +68
+pkcs7_free_signer_info                         -      64     +64
+pkcs7_free_message                           124     188     +64
+mbedtls_oid_get_oid_by_md                      -      64     +64
+rsa_debug                                      -      60     +60
+mbedtls_mpi_sub_int                            -      60     +60
+mbedtls_mpi_core_add                           -      60     +60
+mbedtls_mpi_cmp_int                            -      60     +60
+mbedtls_mpi_add_int                            -      60     +60
+mbedtls_md5_starts                             -      60     +60
+hash_init_sha512                              52     112     +60
+hash_init_sha256                              52     112     +60
+mbedtls_platform_zeroize                       -      56     +56
+mbedtls_asn1_get_tag                           -      56     +56
+_u_boot_list_2_cmd_2_sha1sum                   -      56     +56
+_u_boot_list_2_cmd_2_md5sum                    -      56     +56
+rsa_alloc_wrap                                 -      52     +52
+mbedtls_mpi_shift_r                            -      52     +52
+mbedtls_mpi_core_montmul_init                  -      52     +52
+mbedtls_mpi_core_from_mont_rep                 -      52     +52
+mbedtls_mpi_core_clz                           -      52     +52
+mbedtls_ct_memcmp                              -      52     +52
+mbedtls_mpi_core_sub_int                       -      48     +48
+mbedtls_asn1_write_tag                         -      48     +48
+mbedtls_asn1_sequence_free                     -      48     +48
+mbedtls_asn1_free_named_data_list_shallow       -      48     +48
+mbedtls_rsa_init                               -      44     +44
+mbedtls_mpi_get_bit                            -      44     +44
+hash_init_sha1                                52      96     +44
+x509_parse2_int                                -      40     +40
+mbedtls_zeroize_and_free                       -      40     +40
+mbedtls_rsa_pkcs1_verify                       -      40     +40
+mbedtls_rsa_pkcs1_sign                         -      40     +40
+mbedtls_mpi_core_exp_mod_working_limbs         -      40     +40
+rsa_free_wrap                                  -      36     +36
+mbedtls_md_info_from_type                      -      36     +36
+mbedtls_x509_get_alg                           -      32     +32
+mbedtls_pk_get_type                            -      28     +28
+mbedtls_mpi_size                               -      28     +28
+mbedtls_mpi_core_to_mont_rep                   -      28     +28
+x509_get_timestamp                             -      24     +24
+mbedtls_x509_free_subject_alt_name             -      24     +24
+mbedtls_rsa_pkcs1_encrypt                      -      20     +20
+mbedtls_rsa_pkcs1_decrypt                      -      20     +20
+mbedtls_pk_info_from_type                      -      20     +20
+mbedtls_mpi_write_binary                       -      20     +20
+mbedtls_md_get_size                            -      20     +20
+rsa_can_do                                     -      16     +16
+mbedtls_x509_crt_parse_der                     -      16     +16
+mbedtls_sha512_free                            -      16     +16
+mbedtls_sha256_free                            -      16     +16
+mbedtls_sha1_free                              -      16     +16
+mbedtls_mpi_init                               -      16     +16
+mbedtls_md5_free                               -      16     +16
+hash_finish_sha512                            72      88     +16
+hash_finish_sha256                            72      88     +16
+hash_finish_sha1                              72      88     +16
+x509_free_certificate                         88     100     +12
+sha512_csum_wd                                68      80     +12
+sha256_csum_wd                                68      80     +12
+sha1_csum_wd                                  68      80     +12
+rsa_check_pair_wrap                            -      12     +12
+md5_wd                                        68      80     +12
+mbedtls_x509_crt_init                          -      12     +12
+mbedtls_sha512_init                            -      12     +12
+mbedtls_sha256_init                            -      12     +12
+mbedtls_sha1_init                              -      12     +12
+mbedtls_pkcs7_init                             -      12     +12
+mbedtls_mpi_bitlen                             -      12     +12
+mbedtls_md5_init                               -      12     +12
+mbedtls_asn1_get_int                           -      12     +12
+rsa_get_bitlen                                 -       8      +8
+mpi_bigendian_to_host                          -       8      +8
+memset_func                                    -       8      +8
+mbedtls_sha512_info                            -       8      +8
+mbedtls_sha384_info                            -       8      +8
+mbedtls_sha256_info                            -       8      +8
+mbedtls_sha1_info                              -       8      +8
+mbedtls_rsa_get_len                            -       8      +8
+mbedtls_rsa_get_bitlen                         -       8      +8
+mbedtls_pk_verify                              -       8      +8
+mbedtls_pk_init                                -       8      +8
+mbedtls_mpi_sub_mpi                            -       8      +8
+mbedtls_mpi_add_mpi                            -       8      +8
+mbedtls_md5_info                               -       8      +8
+mbedtls_ct_zero                                -       8      +8
+sha512_update                                  4       8      +4
+sha384_update                                  4       8      +4
+sha256_update                                 12       8      -4
+sha1_update                                   12       8      -4
+rsapubkey_machine                             10       -     -10
+x509_note_not_before                          12       -     -12
+x509_note_not_after                           12       -     -12
+month_lengths                                 12       -     -12
+x509_akid_note_name                           16       -     -16
+sha256_process                                16       -     -16
+sha1_process                                  16       -     -16
+rsapubkey_action_table                        16       -     -16
+pkcs7_sig_note_skid                           16       -     -16
+pkcs7_sig_note_serial                         16       -     -16
+pkcs7_sig_note_issuer                         16       -     -16
+pkcs7_check_content_type                      20       -     -20
+hash_update_sha512                            36      16     -20
+hash_update_sha256                            36      16     -20
+hash_update_sha1                              36      16     -20
+MD5Init                                       56      36     -20
+x509_note_serial                              24       -     -24
+x509_decoder                                  24       -     -24
+x509_akid_decoder                             24       -     -24
+sha1_starts                                   60      36     -24
+rsapubkey_decoder                             24       -     -24
+pkcs7_decoder                                 24       -     -24
+mscode_machine                                24       -     -24
+mscode_decoder                                24       -     -24
+mscode_action_table                           24       -     -24
+x509_note_subject                             28       -     -28
+x509_note_issuer                              28       -     -28
+x509_note_tbs_certificate                     32       -     -32
+pkcs7_note_data                               32       -     -32
+rsa_get_n                                     36       -     -36
+hash_update_sha384                            36       -     -36
+x509_note_params                              40       -     -40
+x509_akid_action_table                        40       -     -40
+pkcs7_note_content                            40       -     -40
+asn1_op_lengths                               41       -     -41
+rsa_get_e                                     48       -     -48
+pkcs7_note_signeddata_version                 48       -     -48
+pkcs7_note_certificate_list                   48       -     -48
+hash_init_sha384                              52       -     -52
+sha384_csum_wd                                68      12     -56
+sha256_starts                                104      40     -64
+sha256_padding                                64       -     -64
+sha1_padding                                  64       -     -64
+mscode_note_digest                            72       -     -72
+hash_finish_sha384                            72       -     -72
+pkcs7_sig_note_set_of_authattrs               84       -     -84
+x509_note_OID                                 92       -     -92
+x509_akid_note_serial                         92       -     -92
+x509_akid_note_kid                            92       -     -92
+pkcs7_sig_note_pkey_algo                      92       -     -92
+x509_akid_machine                             93       -     -93
+x509_extract_name_segment                     96       -     -96
+pkcs7_note_signerinfo_version                 96       -     -96
+pkcs7_sig_note_signature                     100       -    -100
+x509_action_table                            104       -    -104
+x509_machine                                 113       -    -113
+x509_extract_key_data                        116       -    -116
+sha512_finish                                152      36    -116
+pkcs7_note_OID                               116       -    -116
+pkcs7_extract_cert                           116       -    -116
+sha512_starts                                168      40    -128
+sha384_starts                                168      40    -128
+mscode_note_content_type                     132       -    -132
+pkcs7_action_table                           136       -    -136
+sha384_finish                                152       4    -148
+oid_index                                    150       -    -150
+MD5Final                                     196      44    -152
+sha512_base_do_finalize                      160       -    -160
+x509_process_extension                       168       -    -168
+x509_note_signature                          172       -    -172
+pkcs7_note_signed_info                       216       -    -216
+sha256_update.part                           228       -    -228
+pkcs7_machine                                239       -    -239
+sha1_update.part                             240       -    -240
+sha512_base_do_update                        244       -    -244
+pkcs7_sig_note_digest_algo                   244       -    -244
+look_up_OID                                  244       -    -244
+sprint_oid                                   260       -    -260
+MD5Update                                    260       -    -260
+sha1_finish                                  300      36    -264
+mscode_note_digest_algo                      280       -    -280
+oid_search_table                             296       -    -296
+x509_cert_parse                              408     108    -300
+x509_get_sig_params                          304       -    -304
+pkcs7_sig_note_authenticated_attr            316       -    -316
+x509_note_pkey_algo                          336       -    -336
+sha256_finish                                404      36    -368
+sha256_armv8_ce_process                      428       -    -428
+x509_fabricate_name.isra                     460       -    -460
+sha1_armv8_ce_process                        484       -    -484
+oid_data                                     513       -    -513
+sha512_K                                     640       -    -640
+x509_decode_time                             672       -    -672
+sha512_block_fn                             1212       -   -1212
+asn1_ber_decoder                            1480       -   -1480
+MD5Transform                                2552       -   -2552
+Total: Before=835065, After=873946, chg +4.66%
+```
+
+Raymond Mao (28):
+  CI: Exclude MbedTLS subtree for CONFIG checks
+  mbedtls: Add script to update MbedTLS subtree
+  mbedtls: add mbedtls into the build system
+  arm: EFI linker script text section alignment
+  image: remove redundant hash includes
+  efi_loader: remove redundant hash includes
+  lib: Adapt digest header files to MbedTLS
+  md5: Adapt to the changes of md5 header
+  mbedtls: add digest shim layer for MbedTLS
+  hash: integrate hash on mbedtls
+  makefile: add mbedtls include directories
+  mbedtls/external: support MicroSoft Authentication Code
+  mbedtls/external: support PKCS9 Authenticate Attributes
+  mbedtls/external: support decoding multiple signer's cert
+  mbedtls/external: update MbedTLS PKCS7 test suites
+  mbedtls: add public key porting layer
+  lib/crypto: Adapt public_key header with MbedTLS
+  mbedtls: add X509 cert parser porting layer
+  lib/crypto: Adapt x509_cert_parser to MbedTLS
+  mbedtls: add PKCS7 parser porting layer
+  lib/crypto: Adapt PKCS7 parser to MbedTLS
+  mbedtls: add MSCode parser porting layer
+  lib/crypto: Adapt mscode_parser to MbedTLS
+  mbedtls: add RSA helper layer on MbedTLS
+  lib/rypto: Adapt rsa_helper to MbedTLS
+  asn1_decoder: remove ASN1 decoder when using MbedTLS
+  test: Remove ASN1 library test
+  configs: enable MbedTLS as default setting
+
+ .azure-pipelines.yml                          |    3 +-
+ .gitlab-ci.yml                                |    3 +-
+ Makefile                                      |   13 +
+ arch/arm/lib/elf_aarch64_efi.lds              |    1 +
+ boot/image-fit.c                              |    4 -
+ boot/image.c                                  |    2 -
+ common/hash.c                                 |  134 +
+ configs/qemu_arm64_defconfig                  |    5 +
+ configs/sandbox_defconfig                     |    4 +
+ drivers/crypto/hash/hash_sw.c                 |    8 +-
+ include/crypto/mscode.h                       |    4 +
+ include/crypto/pkcs7_parser.h                 |   56 +
+ include/crypto/public_key.h                   |    6 +
+ include/crypto/x509_parser.h                  |   36 +
+ include/stdio.h                               |    1 +
+ include/stdlib.h                              |    1 +
+ include/u-boot/md5.h                          |   17 +-
+ include/u-boot/sha1.h                         |   21 +-
+ include/u-boot/sha256.h                       |   20 +
+ include/u-boot/sha512.h                       |   22 +-
+ lib/Kconfig                                   |    4 +
+ lib/Makefile                                  |   10 +-
+ lib/crypto/Makefile                           |   12 +-
+ lib/crypto/asymmetric_type.c                  |    2 +-
+ lib/crypto/x509_public_key.c                  |    4 +
+ lib/efi_loader/efi_signature.c                |    1 -
+ lib/efi_loader/efi_tcg2.c                     |    3 -
+ lib/mbedtls/Kconfig                           |   25 +
+ lib/mbedtls/Makefile                          |  132 +
+ .../external/mbedtls/include/mbedtls/oid.h    |   35 +
+ .../external/mbedtls/include/mbedtls/pkcs7.h  |   21 +
+ lib/mbedtls/external/mbedtls/library/pkcs7.c  |  154 +-
+ .../tests/suites/test_suite_pkcs7.data        |    4 +-
+ lib/mbedtls/mbedtls_def_config.h              | 4262 +++++++++++++++++
+ lib/mbedtls/md5.c                             |   68 +
+ lib/mbedtls/mscode_parser.c                   |  111 +
+ lib/mbedtls/pkcs7_parser.c                    |  533 +++
+ lib/mbedtls/port/assert.h                     |   12 +
+ lib/mbedtls/port/limits.h                     |   33 +
+ lib/mbedtls/public_key.c                      |  105 +
+ lib/mbedtls/rsa_helper.c                      |   99 +
+ lib/mbedtls/sha1.c                            |  111 +
+ lib/mbedtls/sha256.c                          |   65 +
+ lib/mbedtls/sha512.c                          |   96 +
+ lib/mbedtls/update-mbedtls-subtree.sh         |   50 +
+ lib/mbedtls/x509_cert_parser.c                |  497 ++
+ lib/md5.c                                     |   10 +-
+ test/Kconfig                                  |    2 +-
+ 48 files changed, 6747 insertions(+), 75 deletions(-)
+ create mode 100644 lib/mbedtls/Kconfig
+ create mode 100644 lib/mbedtls/Makefile
+ create mode 100644 lib/mbedtls/mbedtls_def_config.h
+ create mode 100644 lib/mbedtls/md5.c
+ create mode 100644 lib/mbedtls/mscode_parser.c
+ create mode 100644 lib/mbedtls/pkcs7_parser.c
+ create mode 100644 lib/mbedtls/port/assert.h
+ create mode 100644 lib/mbedtls/port/limits.h
+ create mode 100644 lib/mbedtls/public_key.c
+ create mode 100644 lib/mbedtls/rsa_helper.c
+ create mode 100644 lib/mbedtls/sha1.c
+ create mode 100644 lib/mbedtls/sha256.c
+ create mode 100644 lib/mbedtls/sha512.c
+ create mode 100755 lib/mbedtls/update-mbedtls-subtree.sh
+ create mode 100644 lib/mbedtls/x509_cert_parser.c
+
+-- 
+2.25.1
+
