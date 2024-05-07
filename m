@@ -4,59 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3192FC10F1A
-	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 07:19:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 043D9C10F1A
+	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 07:20:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53E5C88662;
-	Tue,  7 May 2024 09:19:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 45C5B88720;
+	Tue,  7 May 2024 09:20:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="L13HzQ75";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="kvchfbhs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89B798872D; Tue,  7 May 2024 09:19:54 +0200 (CEST)
-Received: from mail-m32105.qiye.163.com (mail-m32105.qiye.163.com
- [220.197.32.105])
+ id E97A38872A; Tue,  7 May 2024 09:20:19 +0200 (CEST)
+Received: from mail-m19731103.qiye.163.com (mail-m19731103.qiye.163.com
+ [220.197.31.103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94B1287FA0
- for <u-boot@lists.denx.de>; Tue,  7 May 2024 09:19:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E271088720
+ for <u-boot@lists.denx.de>; Tue,  7 May 2024 09:20:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=L13HzQ75WOtd50t2lUNXlUfvjjpfROiMt99Bvh4pIjgs2sQuLVskfHa8cKKdXrH/e9uql4OFdNyTtwJpxyb6ffIK+KZKMbndliGfaz7TJW3y6n1p1S/zfz25rstZ83yC2+BSU+Rhob5CEBWuYSEY8p908UdMHEsfFnuswLrovdQ=;
+ b=kvchfbhsG1RlwJswBe+GnVB/Glkaj4EMKibru6PXT2tc32uryK+U7ow/44PnH90pnyoVMcYm/9xS6nh3+cK4/VXOtr3uhDRvBwyNuppSuMFMFvAx+JVDYfY8CFZ0R07BaEkAuzCeFmu2sTv5gJvPYlvAI5D4n+WNprvPyh2vzhg=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=Ulghk9mj/Sx1B0ZuCdKkJuA8tO+a1Rw4nEsZIMGlPYM=;
+ bh=Tc9A+swSpPM0pDgoBmWXlHDEFiDGgWoOQhQ7iZ/KUJY=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id BE1B1900296;
- Tue,  7 May 2024 15:19:35 +0800 (CST)
-Message-ID: <e97c1488-d302-4053-8aa1-870547d0f5b6@rock-chips.com>
-Date: Tue, 7 May 2024 15:19:35 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 371329002AA;
+ Tue,  7 May 2024 15:20:03 +0800 (CST)
+Message-ID: <5c15d491-8968-4a11-808b-385db009bbce@rock-chips.com>
+Date: Tue, 7 May 2024 15:20:02 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Kever Yang <kever.yang@rock-chips.com>
-Subject: Re: [PATCH v3] rockchip: rv1108: Convert to OF_UPSTREAM
-To: Fabio Estevam <festevam@gmail.com>
-Cc: otavio@ossystems.com.br, andy.yan@rock-chips.com, trini@konsulko.com,
- u-boot@lists.denx.de
-References: <20240424141841.312688-1-festevam@gmail.com>
+Subject: Re: [PATCH 15/16] rockchip: rk3588: Migrate to OF_UPSTREAM
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Andy Yan <andyshrk@163.com>, Klaus Goger
+ <klaus.goger@theobroma-systems.com>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Jagan Teki <jagan@edgeble.ai>, Eugen Hristev <eugen.hristev@collabora.com>,
+ Elon Zhang <zhangzj@rock-chips.com>
+Cc: u-boot@lists.denx.de
+References: <20240504194346.2462489-1-jonas@kwiboo.se>
+ <20240504194346.2462489-16-jonas@kwiboo.se>
 Content-Language: en-US
-In-Reply-To: <20240424141841.312688-1-festevam@gmail.com>
+In-Reply-To: <20240504194346.2462489-16-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUkaHlYeGklNHU0ZS09LTkhVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
- kG
-X-HM-Tid: 0a8f51ec0f6f03a9kunmbe1b1900296
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQx0aSFZCGk8aH0kYGExITR5VEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUxOVUpLS1VKQk
+ tLWQY+
+X-HM-Tid: 0a8f51ec7bcd03a9kunm371329002aa
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PEk6Shw6HTNISQtNPU5JThJK
- EE1PCgtVSlVKTEpOS01NSExNTU5LVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJT0hMTTcG
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NSo6FAw5STNDUQtPLD8jFQsU
+ NAxPCypVSlVKTEpOS01NT0tPSUxIVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKSEtJSDcG
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,821 +80,268 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2024/4/24 22:18, Fabio Estevam wrote:
-> Instead of using the local rv1108 devicetree copies from U-Boot,
-> let's convert the rv1108 boards to OF_UPSTREAM so that the upstream kernel
-> devicetrees can be used instead.
+On 2024/5/5 03:43, Jonas Karlman wrote:
+> Migrate RK3588 boards that exists in Linux v6.8 to use OF_UPSTREAM.
 >
-> Tested on a rv1108-elgin-r1 board.
+> Following targets is not migrated to use OF_UPSTREAM:
+> - generic-rk3588: Generic target only meant for U-Boot use
+> - toybrick-rk3588: Merged in v6.9-rc1
 >
-> Signed-off-by: Fabio Estevam <festevam@gmail.com>
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
-> Changes since v2:
-> - Also removed the arch/arm/dts/Makefile entries.
->
->   arch/arm/dts/Makefile            |   4 -
->   arch/arm/dts/rv1108-elgin-r1.dts |  59 ----
->   arch/arm/dts/rv1108-evb.dts      |  79 -----
->   arch/arm/dts/rv1108.dtsi         | 581 -------------------------------
->   arch/arm/mach-rockchip/Kconfig   |   1 +
->   configs/elgin-rv1108_defconfig   |   2 +-
->   configs/evb-rv1108_defconfig     |   2 +-
->   7 files changed, 3 insertions(+), 725 deletions(-)
->   delete mode 100644 arch/arm/dts/rv1108-elgin-r1.dts
->   delete mode 100644 arch/arm/dts/rv1108-evb.dts
->   delete mode 100644 arch/arm/dts/rv1108.dtsi
+>   arch/arm/dts/Makefile                    | 17 -----------------
+>   arch/arm/mach-rockchip/Kconfig           |  1 +
+>   configs/coolpi-4b-rk3588s_defconfig      |  2 +-
+>   configs/coolpi-cm5-evb-rk3588_defconfig  |  2 +-
+>   configs/evb-rk3588_defconfig             |  2 +-
+>   configs/generic-rk3588_defconfig         |  1 +
+>   configs/jaguar-rk3588_defconfig          |  2 +-
+>   configs/nanopc-t6-rk3588_defconfig       |  2 +-
+>   configs/neu6a-io-rk3588_defconfig        |  2 +-
+>   configs/neu6b-io-rk3588_defconfig        |  2 +-
+>   configs/orangepi-5-plus-rk3588_defconfig |  2 +-
+>   configs/orangepi-5-rk3588s_defconfig     |  2 +-
+>   configs/quartzpro64-rk3588_defconfig     |  2 +-
+>   configs/rock5a-rk3588s_defconfig         |  2 +-
+>   configs/rock5b-rk3588_defconfig          |  2 +-
+>   configs/toybrick-rk3588_defconfig        |  1 +
+>   configs/turing-rk1-rk3588_defconfig      |  2 +-
+>   17 files changed, 16 insertions(+), 30 deletions(-)
 >
 > diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> index b1c9c6222e5d..e600f9c6ed25 100644
+> index 1dfcc05a14be..3bbdbd21e394 100644
 > --- a/arch/arm/dts/Makefile
 > +++ b/arch/arm/dts/Makefile
-> @@ -182,10 +182,6 @@ dtb-$(CONFIG_ROCKCHIP_RK3588) += \
->   	rk3588-rock-5b.dtb \
->   	rk3588-turing-rk1.dtb
+> @@ -98,23 +98,6 @@ dtb-$(CONFIG_ROCKCHIP_RK3368) += \
+>   	rk3368-geekbox.dtb \
+>   	rk3368-px5-evb.dtb \
 >   
-> -dtb-$(CONFIG_ROCKCHIP_RV1108) += \
-> -	rv1108-elgin-r1.dtb \
-> -	rv1108-evb.dtb
-> -
->   dtb-$(CONFIG_ROCKCHIP_RV1126) += \
->   	rv1126-edgeble-neu2-io.dtb
->   
-> diff --git a/arch/arm/dts/rv1108-elgin-r1.dts b/arch/arm/dts/rv1108-elgin-r1.dts
-> deleted file mode 100644
-> index 83e8b3183847..000000000000
-> --- a/arch/arm/dts/rv1108-elgin-r1.dts
-> +++ /dev/null
-> @@ -1,59 +0,0 @@
-> -// SPDX-License-Identifier: GPL-2.0+
-> -/*
-> - * (C) Copyright 2016 Rockchip Electronics Co., Ltd
-> - */
-> -
-> -/dts-v1/;
-> -
-> -#include "rv1108.dtsi"
-> -
-> -/ {
-> -	model = "Elgin RV1108 R1 board";
-> -	compatible = "elgin,rv1108-elgin", "rockchip,rv1108";
-> -
-> -	memory@60000000 {
-> -		device_type = "memory";
-> -		reg = <0x60000000 0x08000000>;
-> -	};
-> -
-> -	chosen {
-> -		stdout-path = "serial2:1500000n8";
-> -	};
-> -};
-> -
-> -&emmc {
-> -	pinctrl-names = "default";
-> -	pinctrl-0 = <&emmc_clk &emmc_cmd &emmc_bus8>;
-> -	bus-width = <8>;
-> -	cap-mmc-highspeed;
-> -	disable-wp;
-> -	non-removable;
-> -	status = "okay";
-> -};
-> -
-> -&u2phy {
-> -	status = "okay";
-> -
-> -	u2phy_otg: otg-port {
-> -		status = "okay";
-> -	};
-> -};
-> -
-> -&uart2 {
-> -	pinctrl-names = "default";
-> -	pinctrl-0 = <&uart2m0_xfer_pullup>;
-> -	status = "okay";
-> -};
-> -
-> -&usb20_otg {
-> -	status = "okay";
-> -};
-> -
-> -&pinctrl {
-> -	uart2m0 {
-> -		uart2m0_xfer_pullup: uart2m0-xfer-pullup {
-> -			rockchip,pins = <2 RK_PD2 RK_FUNC_1 &pcfg_pull_up_drv_8ma>,
-> -					<2 RK_PD1 RK_FUNC_1 &pcfg_pull_up_drv_8ma>;
-> -		};
-> -	};
-> -};
-> diff --git a/arch/arm/dts/rv1108-evb.dts b/arch/arm/dts/rv1108-evb.dts
-> deleted file mode 100644
-> index c91776bc106e..000000000000
-> --- a/arch/arm/dts/rv1108-evb.dts
-> +++ /dev/null
-> @@ -1,79 +0,0 @@
-> -// SPDX-License-Identifier: GPL-2.0+
-> -/*
-> - * (C) Copyright 2016 Rockchip Electronics Co., Ltd
-> - */
-> -
-> -/dts-v1/;
-> -
-> -#include "rv1108.dtsi"
-> -
-> -/ {
-> -	model = "Rockchip RV1108 Evaluation board";
-> -	compatible = "rockchip,rv1108-evb", "rockchip,rv1108";
-> -
-> -	memory@60000000 {
-> -		device_type = "memory";
-> -		reg = <0x60000000 0x08000000>;
-> -	};
-> -
-> -	chosen {
-> -		stdout-path = "serial2:1500000n8";
-> -	};
-> -
-> -	vcc5v0_otg: vcc5v0-otg-drv {
-> -		compatible = "regulator-fixed";
-> -		enable-active-high;
-> -		regulator-name = "vcc5v0_otg";
-> -		gpio = <&gpio0 RK_PB0 GPIO_ACTIVE_HIGH>;
-> -		regulator-min-microvolt = <5000000>;
-> -		regulator-max-microvolt = <5000000>;
-> -	};
-> -};
-> -
-> -&gmac {
-> -	status = "okay";
-> -	clock_in_out = <0>;
-> -	snps,reset-active-low;
-> -	snps,reset-delays-us = <0 10000 1000000>;
-> -	snps,reset-gpio = <&gpio1 RK_PC1 GPIO_ACTIVE_LOW>;
-> -};
-> -
-> -&saradc {
-> -	status = "okay";
-> -};
-> -
-> -&sfc {
-> -	status = "okay";
-> -	flash@0 {
-> -		compatible = "gd25q256","jedec,spi-nor";
-> -		reg = <0>;
-> -		spi-tx-bus-width = <1>;
-> -		spi-rx-bus-width = <1>;
-> -		spi-max-frequency = <96000000>;
-> -	};
-> -};
-> -
-> -&uart0 {
-> -	status = "okay";
-> -};
-> -
-> -&uart1 {
-> -	status = "okay";
-> -};
-> -
-> -&uart2 {
-> -	status = "okay";
-> -};
-> -
-> -&usb20_otg {
-> -	vbus-supply = <&vcc5v0_otg>;
-> -	status = "okay";
-> -};
-> -
-> -&usb_host_ehci {
-> -	status = "okay";
-> -};
-> -
-> -&usb_host_ohci {
-> -	status = "okay";
-> -};
-> diff --git a/arch/arm/dts/rv1108.dtsi b/arch/arm/dts/rv1108.dtsi
-> deleted file mode 100644
-> index 215d88522587..000000000000
-> --- a/arch/arm/dts/rv1108.dtsi
-> +++ /dev/null
-> @@ -1,581 +0,0 @@
-> -// SPDX-License-Identifier: GPL-2.0+
-> -/*
-> - * (C) Copyright 2016 Rockchip Electronics Co., Ltd
-> - */
-> -
-> -#include <dt-bindings/gpio/gpio.h>
-> -#include <dt-bindings/interrupt-controller/irq.h>
-> -#include <dt-bindings/interrupt-controller/arm-gic.h>
-> -#include <dt-bindings/clock/rv1108-cru.h>
-> -#include <dt-bindings/pinctrl/rockchip.h>
-> -/ {
-> -	#address-cells = <1>;
-> -	#size-cells = <1>;
-> -
-> -	compatible = "rockchip,rv1108";
-> -
-> -	interrupt-parent = <&gic>;
-> -
-> -	aliases {
-> -		serial0 = &uart0;
-> -		serial1 = &uart1;
-> -		serial2 = &uart2;
-> -		spi0	= &sfc;
-> -	};
-> -
-> -	cpus {
-> -		#address-cells = <1>;
-> -		#size-cells = <0>;
-> -
-> -		cpu0: cpu@f00 {
-> -			device_type = "cpu";
-> -			compatible = "arm,cortex-a7";
-> -			reg = <0xf00>;
-> -		};
-> -	};
-> -
-> -	arm-pmu {
-> -		compatible = "arm,cortex-a7-pmu";
-> -		interrupts = <GIC_SPI 67 IRQ_TYPE_LEVEL_HIGH>;
-> -	};
-> -
-> -	timer {
-> -		compatible = "arm,armv7-timer";
-> -		interrupts = <GIC_PPI 13 (GIC_CPU_MASK_SIMPLE(1) | IRQ_TYPE_LEVEL_HIGH)>,
-> -			     <GIC_PPI 14 (GIC_CPU_MASK_SIMPLE(1) | IRQ_TYPE_LEVEL_HIGH)>;
-> -		clock-frequency = <24000000>;
-> -	};
-> -
-> -	xin24m: oscillator {
-> -		compatible = "fixed-clock";
-> -		clock-frequency = <24000000>;
-> -		clock-output-names = "xin24m";
-> -		#clock-cells = <0>;
-> -	};
-> -
-> -	amba {
-> -		compatible = "simple-bus";
-> -		#address-cells = <1>;
-> -		#size-cells = <1>;
-> -		ranges;
-> -
-> -		pdma: pdma@102a0000 {
-> -			compatible = "arm,pl330", "arm,primecell";
-> -			reg = <0x102a0000 0x4000>;
-> -			interrupts = <GIC_SPI 0 IRQ_TYPE_LEVEL_HIGH>;
-> -			#dma-cells = <1>;
-> -			arm,pl330-broken-no-flushp;
-> -			clocks = <&cru ACLK_DMAC>;
-> -			clock-names = "apb_pclk";
-> -		};
-> -	};
-> -
-> -	bus_intmem@10080000 {
-> -		compatible = "mmio-sram";
-> -		reg = <0x10080000 0x2000>;
-> -		#address-cells = <1>;
-> -		#size-cells = <1>;
-> -		ranges = <0 0x10080000 0x2000>;
-> -	};
-> -
-> -	uart2: serial@10210000 {
-> -		compatible = "rockchip,rv1108-uart", "snps,dw-apb-uart";
-> -		reg = <0x10210000 0x100>;
-> -		interrupts = <GIC_SPI 46 IRQ_TYPE_LEVEL_HIGH>;
-> -		reg-shift = <2>;
-> -		reg-io-width = <4>;
-> -		clock-frequency = <24000000>;
-> -		clocks = <&cru SCLK_UART2>, <&cru PCLK_UART2>;
-> -		clock-names = "baudclk", "apb_pclk";
-> -		pinctrl-names = "default";
-> -		pinctrl-0 = <&uart2m0_xfer>;
-> -		status = "disabled";
-> -	};
-> -
-> -	uart1: serial@10220000 {
-> -		compatible = "rockchip,rv1108-uart", "snps,dw-apb-uart";
-> -		reg = <0x10220000 0x100>;
-> -		interrupts = <GIC_SPI 45 IRQ_TYPE_LEVEL_HIGH>;
-> -		reg-shift = <2>;
-> -		reg-io-width = <4>;
-> -		clock-frequency = <24000000>;
-> -		clocks = <&cru SCLK_UART1>, <&cru PCLK_UART1>;
-> -		clock-names = "baudclk", "apb_pclk";
-> -		pinctrl-names = "default";
-> -		pinctrl-0 = <&uart1_xfer>;
-> -		status = "disabled";
-> -	};
-> -
-> -	uart0: serial@10230000 {
-> -		compatible = "rockchip,rv1108-uart", "snps,dw-apb-uart";
-> -		reg = <0x10230000 0x100>;
-> -		interrupts = <GIC_SPI 44 IRQ_TYPE_LEVEL_HIGH>;
-> -		reg-shift = <2>;
-> -		reg-io-width = <4>;
-> -		clock-frequency = <24000000>;
-> -		clocks = <&cru SCLK_UART0>, <&cru PCLK_UART0>;
-> -		clock-names = "baudclk", "apb_pclk";
-> -		pinctrl-names = "default";
-> -		pinctrl-0 = <&uart0_xfer &uart0_cts &uart0_rts>;
-> -		status = "disabled";
-> -	};
-> -
-> -	grf: syscon@10300000 {
-> -		compatible = "rockchip,rv1108-grf", "syscon", "simple-mfd";
-> -		reg = <0x10300000 0x1000>;
-> -		#address-cells = <1>;
-> -		#size-cells = <1>;
-> -
-> -		u2phy: usb2-phy@100 {
-> -			compatible = "rockchip,rv1108-usb2phy";
-> -			reg = <0x100 0x0c>;
-> -			clocks = <&cru SCLK_USBPHY>;
-> -			clock-names = "phyclk";
-> -			#clock-cells = <0>;
-> -			clock-output-names = "usbphy";
-> -			rockchip,usbgrf = <&usbgrf>;
-> -			status = "disabled";
-> -
-> -			u2phy_otg: otg-port {
-> -				interrupts = <GIC_SPI 48 IRQ_TYPE_LEVEL_HIGH>;
-> -				interrupt-names = "otg-mux";
-> -				#phy-cells = <0>;
-> -				status = "disabled";
-> -			};
-> -
-> -			u2phy_host: host-port {
-> -				interrupts = <GIC_SPI 51 IRQ_TYPE_LEVEL_HIGH>;
-> -				interrupt-names = "linestate";
-> -				#phy-cells = <0>;
-> -				status = "disabled";
-> -			};
-> -		};
-> -	};
-> -
-> -	saradc: saradc@1038c000 {
-> -		compatible = "rockchip,rv1108-saradc", "rockchip,rk3399-saradc";
-> -		reg = <0x1038c000 0x100>;
-> -		interrupts = <GIC_SPI 4 IRQ_TYPE_LEVEL_HIGH>;
-> -		#io-channel-cells = <1>;
-> -		clock-frequency = <1000000>;
-> -		clocks = <&cru SCLK_SARADC>, <&cru PCLK_SARADC>;
-> -		clock-names = "saradc", "apb_pclk";
-> -		status = "disabled";
-> -	};
-> -
-> -	pmugrf: syscon@20060000 {
-> -		compatible = "rockchip,rv1108-pmugrf", "syscon";
-> -		reg = <0x20060000 0x1000>;
-> -	};
-> -
-> -	usbgrf: syscon@202a0000 {
-> -		compatible = "rockchip,rv1108-usbgrf", "syscon";
-> -		reg = <0x202a0000 0x1000>;
-> -	};
-> -
-> -	cru: clock-controller@20200000 {
-> -		compatible = "rockchip,rv1108-cru";
-> -		reg = <0x20200000 0x1000>;
-> -		rockchip,grf = <&grf>;
-> -		#clock-cells = <1>;
-> -		#reset-cells = <1>;
-> -	};
-> -
-> -	emmc: dwmmc@30110000 {
-> -		compatible = "rockchip,rv1108-dw-mshc", "rockchip,rk3288-dw-mshc";
-> -		clock-freq-min-max = <400000 150000000>;
-> -		clocks = <&cru HCLK_EMMC>, <&cru SCLK_EMMC>,
-> -			 <&cru SCLK_EMMC_DRV>, <&cru SCLK_EMMC_SAMPLE>;
-> -		clock-names = "biu", "ciu", "ciu-drive", "ciu-sample";
-> -		fifo-depth = <0x100>;
-> -		interrupts = <GIC_SPI 13 IRQ_TYPE_LEVEL_HIGH>;
-> -		reg = <0x30110000 0x4000>;
-> -		status = "disabled";
-> -	};
-> -
-> -	sdio: dwmmc@30120000 {
-> -		compatible = "rockchip,rv1108-dw-mshc", "rockchip,rk3288-dw-mshc";
-> -		clock-freq-min-max = <400000 150000000>;
-> -		clocks = <&cru HCLK_SDIO>, <&cru SCLK_SDIO>,
-> -			 <&cru SCLK_SDIO_DRV>, <&cru SCLK_SDIO_SAMPLE>;
-> -		clock-names = "biu", "ciu", "ciu-drive", "ciu-sample";
-> -		fifo-depth = <0x100>;
-> -		interrupts = <GIC_SPI 12 IRQ_TYPE_LEVEL_HIGH>;
-> -		reg = <0x30120000 0x4000>;
-> -		status = "disabled";
-> -	};
-> -
-> -	sdmmc: dwmmc@30130000 {
-> -		compatible = "rockchip,rv1108-dw-mshc", "rockchip,rk3288-dw-mshc";
-> -		clock-freq-min-max = <400000 100000000>;
-> -		clocks = <&cru HCLK_SDMMC>, <&cru SCLK_SDMMC>,
-> -			 <&cru SCLK_SDMMC_DRV>, <&cru SCLK_SDMMC_SAMPLE>;
-> -		clock-names = "biu", "ciu", "ciu-drive", "ciu-sample";
-> -		fifo-depth = <0x100>;
-> -		interrupts = <GIC_SPI 11 IRQ_TYPE_LEVEL_HIGH>;
-> -		reg = <0x30130000 0x4000>;
-> -		status = "disabled";
-> -	};
-> -
-> -	usb_host_ehci: usb@30140000 {
-> -		compatible = "generic-ehci";
-> -		reg = <0x30140000 0x20000>;
-> -		interrupts = <GIC_SPI 15 IRQ_TYPE_LEVEL_HIGH>;
-> -		status = "disabled";
-> -	};
-> -
-> -	usb_host_ohci: usb@30160000 {
-> -		compatible = "generic-ohci";
-> -		reg = <0x30160000 0x20000>;
-> -		interrupts = <GIC_SPI 16 IRQ_TYPE_LEVEL_HIGH>;
-> -		status = "disabled";
-> -	};
-> -
-> -	usb20_otg: usb@30180000 {
-> -		compatible = "rockchip,rv1108-usb", "rockchip,rk3066-usb",
-> -			     "snps,dwc2";
-> -		reg = <0x30180000 0x40000>;
-> -		interrupts = <GIC_SPI 18 IRQ_TYPE_LEVEL_HIGH>;
-> -		clocks = <&cru HCLK_OTG>;
-> -		clock-names = "otg";
-> -		dr_mode = "otg";
-> -		g-np-tx-fifo-size = <16>;
-> -		g-rx-fifo-size = <280>;
-> -		g-tx-fifo-size = <256 128 128 64 32 16>;
-> -		g-use-dma;
-> -		phys = <&u2phy_otg>;
-> -		phy-names = "usb2-phy";
-> -		status = "disabled";
-> -	};
-> -
-> -	sfc: sfc@301c0000 {
-> -		compatible = "rockchip,sfc";
-> -		reg = <0x301c0000 0x200>;
-> -		#address-cells = <1>;
-> -		#size-cells = <0>;
-> -		interrupts = <GIC_SPI 56 IRQ_TYPE_LEVEL_HIGH>;
-> -		clocks = <&cru SCLK_SFC>, <&cru HCLK_SFC>;
-> -		clock-names = "clk_sfc", "hclk_sfc";
-> -		pinctrl-0 = <&sfc_pins>;
-> -		pinctrl-names = "default";
-> -		status = "disabled";
-> -        };
-> -
-> -	gmac: ethernet@30200000 {
-> -		compatible = "rockchip,rv1108-gmac";
-> -		reg = <0x30200000 0x10000>;
-> -		interrupts = <GIC_SPI 19 IRQ_TYPE_LEVEL_HIGH>;
-> -		interrupt-names = "macirq";
-> -		rockchip,grf = <&grf>;
-> -		clocks = <&cru SCLK_MAC>,
-> -			<&cru SCLK_MAC_RX>, <&cru SCLK_MAC_TX>,
-> -			<&cru SCLK_MACREF>, <&cru SCLK_MACREF_OUT>,
-> -			<&cru ACLK_GMAC>, <&cru PCLK_GMAC>;
-> -                clock-names = "stmmaceth",
-> -                        "mac_clk_rx", "mac_clk_tx",
-> -                        "clk_mac_ref", "clk_mac_refout",
-> -                        "aclk_mac", "pclk_mac";
-> -		pinctrl-names = "default";
-> -		pinctrl-0 = <&rmii_pins>;
-> -		phy-mode = "rmii";
-> -		max-speed = <100>;
-> -		status = "disabled";
-> -	};
-> -
-> -	gic: interrupt-controller@32010000 {
-> -		compatible = "arm,gic-400";
-> -		interrupt-controller;
-> -		#interrupt-cells = <3>;
-> -		#address-cells = <0>;
-> -
-> -		reg = <0x32011000 0x1000>,
-> -		      <0x32012000 0x1000>,
-> -		      <0x32014000 0x2000>,
-> -		      <0x32016000 0x2000>;
-> -		interrupts = <GIC_PPI 9 (GIC_CPU_MASK_SIMPLE(1) | IRQ_TYPE_LEVEL_HIGH)>;
-> -	};
-> -
-> -	pinctrl: pinctrl {
-> -		compatible = "rockchip,rv1108-pinctrl";
-> -		rockchip,grf = <&grf>;
-> -		rockchip,pmu = <&pmugrf>;
-> -		#address-cells = <1>;
-> -		#size-cells = <1>;
-> -		ranges;
-> -
-> -		gpio0: gpio0@20030000 {
-> -			compatible = "rockchip,gpio-bank";
-> -			reg = <0x20030000 0x100>;
-> -			interrupts = <GIC_SPI 40 IRQ_TYPE_LEVEL_HIGH>;
-> -			clocks = <&xin24m>;
-> -
-> -			gpio-controller;
-> -			#gpio-cells = <2>;
-> -
-> -			interrupt-controller;
-> -			#interrupt-cells = <2>;
-> -		};
-> -
-> -		gpio1: gpio1@10310000 {
-> -			compatible = "rockchip,gpio-bank";
-> -			reg = <0x10310000 0x100>;
-> -			interrupts = <GIC_SPI 41 IRQ_TYPE_LEVEL_HIGH>;
-> -			clocks = <&xin24m>;
-> -
-> -			gpio-controller;
-> -			#gpio-cells = <2>;
-> -
-> -			interrupt-controller;
-> -			#interrupt-cells = <2>;
-> -		};
-> -
-> -		gpio2: gpio2@10320000 {
-> -			compatible = "rockchip,gpio-bank";
-> -			reg = <0x10320000 0x100>;
-> -			interrupts = <GIC_SPI 42 IRQ_TYPE_LEVEL_HIGH>;
-> -			clocks = <&xin24m>;
-> -
-> -			gpio-controller;
-> -			#gpio-cells = <2>;
-> -
-> -			interrupt-controller;
-> -			#interrupt-cells = <2>;
-> -		};
-> -
-> -		gpio3: gpio3@10330000 {
-> -			compatible = "rockchip,gpio-bank";
-> -			reg = <0x10330000 0x100>;
-> -			interrupts = <GIC_SPI 43 IRQ_TYPE_LEVEL_HIGH>;
-> -			clocks = <&xin24m>;
-> -
-> -			gpio-controller;
-> -			#gpio-cells = <2>;
-> -
-> -			interrupt-controller;
-> -			#interrupt-cells = <2>;
-> -		};
-> -
-> -		pcfg_pull_up: pcfg-pull-up {
-> -			bias-pull-up;
-> -		};
-> -
-> -		pcfg_pull_down: pcfg-pull-down {
-> -			bias-pull-down;
-> -		};
-> -
-> -		pcfg_pull_none: pcfg-pull-none {
-> -			bias-disable;
-> -		};
-> -
-> -		pcfg_pull_none_drv_8ma: pcfg-pull-none-drv-8ma {
-> -			drive-strength = <8>;
-> -		};
-> -
-> -		pcfg_pull_none_drv_12ma: pcfg-pull-none-drv-12ma {
-> -			drive-strength = <12>;
-> -		};
-> -
-> -		pcfg_pull_up_drv_8ma: pcfg-pull-up-drv-8ma {
-> -			bias-pull-up;
-> -			drive-strength = <8>;
-> -		};
-> -
-> -		pcfg_pull_none_drv_4ma: pcfg-pull-none-drv-4ma {
-> -			drive-strength = <4>;
-> -		};
-> -
-> -		pcfg_pull_up_drv_4ma: pcfg-pull-up-drv-4ma {
-> -			bias-pull-up;
-> -			drive-strength = <4>;
-> -		};
-> -
-> -		pcfg_output_high: pcfg-output-high {
-> -			output-high;
-> -		};
-> -
-> -		pcfg_output_low: pcfg-output-low {
-> -			output-low;
-> -		};
-> -
-> -		pcfg_input_high: pcfg-input-high {
-> -			bias-pull-up;
-> -			input-enable;
-> -		};
-> -
-> -		gmac {
-> -			rmii_pins: rmii-pins {
-> -				rockchip,pins = <1 RK_PC5 RK_FUNC_2 &pcfg_pull_none>,
-> -						<1 RK_PC3 RK_FUNC_2 &pcfg_pull_none>,
-> -						<1 RK_PC4 RK_FUNC_2 &pcfg_pull_none>,
-> -						<1 RK_PB2 RK_FUNC_3 &pcfg_pull_none_drv_12ma>,
-> -						<1 RK_PB3 RK_FUNC_3 &pcfg_pull_none_drv_12ma>,
-> -						<1 RK_PB4 RK_FUNC_3 &pcfg_pull_none_drv_12ma>,
-> -						<1 RK_PB5 RK_FUNC_3 &pcfg_pull_none>,
-> -						<1 RK_PB6 RK_FUNC_3 &pcfg_pull_none>,
-> -						<1 RK_PB7 RK_FUNC_3 &pcfg_pull_none>,
-> -						<1 RK_PC2 RK_FUNC_3 &pcfg_pull_none>;
-> -			};
-> -		};
-> -
-> -		i2c1 {
-> -			i2c1_xfer: i2c1-xfer {
-> -				rockchip,pins = <2 RK_PD3 RK_FUNC_1 &pcfg_pull_up>,
-> -						<2 RK_PD4 RK_FUNC_1 &pcfg_pull_up>;
-> -			};
-> -		};
-> -
-> -		i2c2m1 {
-> -			i2c2m1_xfer: i2c2m1-xfer {
-> -				rockchip,pins = <0 RK_PC2 RK_FUNC_2 &pcfg_pull_none>,
-> -						<0 RK_PC6 RK_FUNC_3 &pcfg_pull_none>;
-> -			};
-> -
-> -			i2c2m1_gpio: i2c2m1-gpio {
-> -				rockchip,pins = <0 RK_PC2 RK_FUNC_GPIO &pcfg_pull_none>,
-> -						<0 RK_PC6 RK_FUNC_GPIO &pcfg_pull_none>;
-> -			};
-> -		};
-> -
-> -		i2c2m05v {
-> -			i2c2m05v_xfer: i2c2m05v-xfer {
-> -				rockchip,pins = <1 RK_PD5 RK_FUNC_2 &pcfg_pull_none>,
-> -						<1 RK_PD4 RK_FUNC_2 &pcfg_pull_none>;
-> -			};
-> -
-> -			i2c2m05v_gpio: i2c2m05v-gpio {
-> -				rockchip,pins = <1 RK_PD5 RK_FUNC_GPIO &pcfg_pull_none>,
-> -						<1 RK_PD4 RK_FUNC_GPIO &pcfg_pull_none>;
-> -			};
-> -		};
-> -
-> -		i2c3 {
-> -			i2c3_xfer: i2c3-xfer {
-> -				rockchip,pins = <0 RK_PB6 RK_FUNC_1 &pcfg_pull_none>,
-> -						<0 RK_PC4 RK_FUNC_2 &pcfg_pull_none>;
-> -			};
-> -		};
-> -
-> -		sfc {
-> -			sfc_pins: sfc-pins {
-> -				rockchip,pins = <2 RK_PA3 RK_FUNC_3 &pcfg_pull_none>,
-> -						<2 RK_PA2 RK_FUNC_3 &pcfg_pull_none>,
-> -						<2 RK_PA1 RK_FUNC_3 &pcfg_pull_none>,
-> -						<2 RK_PA0 RK_FUNC_3 &pcfg_pull_none>,
-> -						<2 RK_PB7 RK_FUNC_2 &pcfg_pull_none>,
-> -						<2 RK_PB4 RK_FUNC_3 &pcfg_pull_none>;
-> -			};
-> -		};
-> -
-> -		emmc {
-> -			emmc_clk: emmc-clk {
-> -				rockchip,pins = <2 RK_PB6 RK_FUNC_1 &pcfg_pull_none_drv_8ma>;
-> -			};
-> -
-> -			emmc_cmd: emmc-cmd {
-> -				rockchip,pins = <2 RK_PB4 RK_FUNC_2 &pcfg_pull_up_drv_8ma>;
-> -			};
-> -
-> -			emmc_pwren: emmc-pwren {
-> -				rockchip,pins = <2 RK_PC2 RK_FUNC_2 &pcfg_pull_none>;
-> -			};
-> -
-> -			emmc_bus1: emmc-bus1 {
-> -				rockchip,pins = <2 RK_PA0 RK_FUNC_2 &pcfg_pull_up_drv_8ma>;
-> -			};
-> -
-> -			emmc_bus8: emmc-bus8 {
-> -				rockchip,pins = <2 RK_PA0 RK_FUNC_2 &pcfg_pull_up_drv_8ma>,
-> -						<2 RK_PA1 RK_FUNC_2 &pcfg_pull_up_drv_8ma>,
-> -						<2 RK_PA2 RK_FUNC_2 &pcfg_pull_up_drv_8ma>,
-> -						<2 RK_PA3 RK_FUNC_2 &pcfg_pull_up_drv_8ma>,
-> -						<2 RK_PA4 RK_FUNC_2 &pcfg_pull_up_drv_8ma>,
-> -						<2 RK_PA5 RK_FUNC_2 &pcfg_pull_up_drv_8ma>,
-> -						<2 RK_PA6 RK_FUNC_2 &pcfg_pull_up_drv_8ma>,
-> -						<2 RK_PA7 RK_FUNC_2 &pcfg_pull_up_drv_8ma>;
-> -			};
-> -		};
-> -
-> -		sdmmc {
-> -			sdmmc_clk: sdmmc-clk {
-> -				rockchip,pins = <3 RK_PC4 RK_FUNC_1 &pcfg_pull_none_drv_4ma>;
-> -			};
-> -
-> -			sdmmc_cmd: sdmmc-cmd {
-> -				rockchip,pins = <3 RK_PC5 RK_FUNC_1 &pcfg_pull_up_drv_4ma>;
-> -			};
-> -
-> -			sdmmc_cd: sdmmc-cd {
-> -				rockchip,pins = <0 RK_PA1 RK_FUNC_1 &pcfg_pull_up_drv_4ma>;
-> -			};
-> -
-> -			sdmmc_bus1: sdmmc-bus1 {
-> -				rockchip,pins = <3 RK_PC3 RK_FUNC_1 &pcfg_pull_up_drv_4ma>;
-> -			};
-> -
-> -			sdmmc_bus4: sdmmc-bus4 {
-> -				rockchip,pins = <3 RK_PC3 RK_FUNC_1 &pcfg_pull_up_drv_4ma>,
-> -						<3 RK_PC2 RK_FUNC_1 &pcfg_pull_up_drv_4ma>,
-> -						<3 RK_PC1 RK_FUNC_1 &pcfg_pull_up_drv_4ma>,
-> -						<3 RK_PC0 RK_FUNC_1 &pcfg_pull_up_drv_4ma>;
-> -			};
-> -		};
-> -
-> -		uart0 {
-> -			uart0_xfer: uart0-xfer {
-> -				rockchip,pins = <3 RK_PA6 RK_FUNC_1 &pcfg_pull_up>,
-> -						<3 RK_PA5 RK_FUNC_1 &pcfg_pull_none>;
-> -			};
-> -
-> -			uart0_cts: uart0-cts {
-> -				rockchip,pins = <3 RK_PA4 RK_FUNC_1 &pcfg_pull_none>;
-> -			};
-> -
-> -			uart0_rts: uart0-rts {
-> -				rockchip,pins = <3 RK_PA3 RK_FUNC_1 &pcfg_pull_none>;
-> -			};
-> -
-> -			uart0_rts_gpio: uart0-rts-gpio {
-> -				rockchip,pins = <3 RK_PA3 RK_FUNC_GPIO &pcfg_pull_none>;
-> -			};
-> -		};
-> -
-> -		uart1 {
-> -			uart1_xfer: uart1-xfer {
-> -				rockchip,pins = <1 RK_PD3 RK_FUNC_1 &pcfg_pull_up>,
-> -						<1 RK_PD2 RK_FUNC_1 &pcfg_pull_none>;
-> -			};
-> -
-> -			uart1_cts: uart1-cts {
-> -				rockchip,pins = <1 RK_PD0 RK_FUNC_1 &pcfg_pull_none>;
-> -			};
-> -
-> -			uart01rts: uart1-rts {
-> -				rockchip,pins = <1 RK_PD1 RK_FUNC_1 &pcfg_pull_none>;
-> -			};
-> -		};
-> -
-> -		uart2m0 {
-> -			uart2m0_xfer: uart2m0-xfer {
-> -				rockchip,pins = <2 RK_PD2 RK_FUNC_1 &pcfg_pull_up>,
-> -						<2 RK_PD1 RK_FUNC_1 &pcfg_pull_none>;
-> -			};
-> -		};
-> -
-> -		uart2m1 {
-> -			uart2m1_xfer: uart2m1-xfer {
-> -				rockchip,pins = <3 RK_PC3 RK_FUNC_2 &pcfg_pull_up>,
-> -						<3 RK_PC2 RK_FUNC_2 &pcfg_pull_none>;
-> -			};
-> -		};
-> -
-> -		uart2_5v {
-> -			uart2_5v_cts: uart2_5v-cts {
-> -				rockchip,pins = <1 RK_PD4 RK_FUNC_1 &pcfg_pull_none>;
-> -			};
-> -
-> -			uart2_5v_rts: uart2_5v-rts {
-> -				rockchip,pins = <1 RK_PD5 RK_FUNC_1 &pcfg_pull_none>;
-> -			};
-> -		};
-> -	};
-> -};
+> -dtb-$(CONFIG_ROCKCHIP_RK3588) += \
+> -	rk3588s-coolpi-4b.dtb \
+> -	rk3588-coolpi-cm5-evb.dtb \
+> -	rk3588-edgeble-neu6a-io.dtb \
+> -	rk3588-edgeble-neu6b-io.dtb \
+> -	rk3588-evb1-v10.dtb \
+> -	rk3588-generic.dtb \
+> -	rk3588-jaguar.dtb \
+> -	rk3588-nanopc-t6.dtb \
+> -	rk3588s-orangepi-5.dtb \
+> -	rk3588-orangepi-5-plus.dtb \
+> -	rk3588-quartzpro64.dtb \
+> -	rk3588s-rock-5a.dtb \
+> -	rk3588-rock-5b.dtb \
+> -	rk3588-toybrick-x0.dtb \
+> -	rk3588-turing-rk1.dtb
+> -
+>   dtb-$(CONFIG_ROCKCHIP_RV1108) += \
+>   	rv1108-elgin-r1.dtb \
+>   	rv1108-evb.dtb
 > diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-> index 4f22d9bde9f9..b4a10be00249 100644
+> index 03f6bf43fdf4..0b9098426420 100644
 > --- a/arch/arm/mach-rockchip/Kconfig
 > +++ b/arch/arm/mach-rockchip/Kconfig
-> @@ -343,6 +343,7 @@ config ROCKCHIP_RV1108
->   	bool "Support Rockchip RV1108"
->   	select CPU_V7A
->   	imply ROCKCHIP_COMMON_BOARD
+> @@ -355,6 +355,7 @@ config ROCKCHIP_RK3588
+>   	imply MISC_INIT_R
+>   	imply MMC_HS200_SUPPORT if MMC_SDHCI_ROCKCHIP
+>   	imply OF_LIBFDT_OVERLAY
 > +	imply OF_UPSTREAM
->   	help
->   	  The Rockchip RV1108 is a ARM-based SoC with a single-core Cortex-A7
->   	  and a DSP.
-> diff --git a/configs/elgin-rv1108_defconfig b/configs/elgin-rv1108_defconfig
-> index 446c9c9b7aca..140429f84d29 100644
-> --- a/configs/elgin-rv1108_defconfig
-> +++ b/configs/elgin-rv1108_defconfig
-> @@ -6,7 +6,7 @@ CONFIG_NR_DRAM_BANKS=1
->   CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
->   CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x60100000
->   CONFIG_ENV_OFFSET=0x3F8000
-> -CONFIG_DEFAULT_DEVICE_TREE="rv1108-elgin-r1"
-> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rv1108-elgin-r1"
->   CONFIG_ROCKCHIP_RV1108=y
->   CONFIG_ROCKCHIP_BOOT_MODE_REG=0
->   CONFIG_TARGET_ELGIN_RV1108=y
-> diff --git a/configs/evb-rv1108_defconfig b/configs/evb-rv1108_defconfig
-> index 1c62149a9b57..afc0ce4a0929 100644
-> --- a/configs/evb-rv1108_defconfig
-> +++ b/configs/evb-rv1108_defconfig
-> @@ -5,7 +5,7 @@ CONFIG_TEXT_BASE=0x60000000
->   CONFIG_NR_DRAM_BANKS=1
->   CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
->   CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x60100000
-> -CONFIG_DEFAULT_DEVICE_TREE="rv1108-evb"
-> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rv1108-evb"
->   CONFIG_ROCKCHIP_RV1108=y
->   CONFIG_DEBUG_UART_BASE=0x10210000
->   CONFIG_DEBUG_UART_CLOCK=24000000
+>   	imply PHY_GIGE if DWC_ETH_QOS_ROCKCHIP
+>   	imply RNG_ROCKCHIP
+>   	imply ROCKCHIP_COMMON_BOARD
+> diff --git a/configs/coolpi-4b-rk3588s_defconfig b/configs/coolpi-4b-rk3588s_defconfig
+> index 2608bb67679b..3d45d939abb2 100644
+> --- a/configs/coolpi-4b-rk3588s_defconfig
+> +++ b/configs/coolpi-4b-rk3588s_defconfig
+> @@ -4,7 +4,7 @@ CONFIG_COUNTER_FREQUENCY=24000000
+>   CONFIG_ARCH_ROCKCHIP=y
+>   CONFIG_SF_DEFAULT_SPEED=24000000
+>   CONFIG_SF_DEFAULT_MODE=0x2000
+> -CONFIG_DEFAULT_DEVICE_TREE="rk3588s-coolpi-4b"
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-coolpi-4b"
+>   CONFIG_ROCKCHIP_RK3588=y
+>   CONFIG_ROCKCHIP_SPI_IMAGE=y
+>   CONFIG_SPL_SERIAL=y
+> diff --git a/configs/coolpi-cm5-evb-rk3588_defconfig b/configs/coolpi-cm5-evb-rk3588_defconfig
+> index c5bb7a429574..5190d69c1c58 100644
+> --- a/configs/coolpi-cm5-evb-rk3588_defconfig
+> +++ b/configs/coolpi-cm5-evb-rk3588_defconfig
+> @@ -4,7 +4,7 @@ CONFIG_COUNTER_FREQUENCY=24000000
+>   CONFIG_ARCH_ROCKCHIP=y
+>   CONFIG_SF_DEFAULT_SPEED=24000000
+>   CONFIG_SF_DEFAULT_MODE=0x2000
+> -CONFIG_DEFAULT_DEVICE_TREE="rk3588-coolpi-cm5-evb"
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-coolpi-cm5-evb"
+>   CONFIG_ROCKCHIP_RK3588=y
+>   CONFIG_ROCKCHIP_SPI_IMAGE=y
+>   CONFIG_SPL_SERIAL=y
+> diff --git a/configs/evb-rk3588_defconfig b/configs/evb-rk3588_defconfig
+> index a8c32c4fcf4a..1d5585677a46 100644
+> --- a/configs/evb-rk3588_defconfig
+> +++ b/configs/evb-rk3588_defconfig
+> @@ -2,7 +2,7 @@ CONFIG_ARM=y
+>   CONFIG_SKIP_LOWLEVEL_INIT=y
+>   CONFIG_COUNTER_FREQUENCY=24000000
+>   CONFIG_ARCH_ROCKCHIP=y
+> -CONFIG_DEFAULT_DEVICE_TREE="rk3588-evb1-v10"
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-evb1-v10"
+>   CONFIG_ROCKCHIP_RK3588=y
+>   CONFIG_SPL_SERIAL=y
+>   CONFIG_TARGET_EVB_RK3588=y
+> diff --git a/configs/generic-rk3588_defconfig b/configs/generic-rk3588_defconfig
+> index 87a171701e42..42bc2c9a7656 100644
+> --- a/configs/generic-rk3588_defconfig
+> +++ b/configs/generic-rk3588_defconfig
+> @@ -32,6 +32,7 @@ CONFIG_CMD_USB_MASS_STORAGE=y
+>   # CONFIG_SPL_DOS_PARTITION is not set
+>   CONFIG_SPL_OF_CONTROL=y
+>   CONFIG_OF_LIVE=y
+> +# CONFIG_OF_UPSTREAM is not set
+>   CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+>   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>   # CONFIG_NET is not set
+> diff --git a/configs/jaguar-rk3588_defconfig b/configs/jaguar-rk3588_defconfig
+> index f29505ea150b..b69cf4cd057a 100644
+> --- a/configs/jaguar-rk3588_defconfig
+> +++ b/configs/jaguar-rk3588_defconfig
+> @@ -6,7 +6,7 @@ CONFIG_SPL_GPIO=y
+>   CONFIG_SF_DEFAULT_SPEED=24000000
+>   CONFIG_SF_DEFAULT_MODE=0x2000
+>   CONFIG_ENV_SIZE=0x1f000
+> -CONFIG_DEFAULT_DEVICE_TREE="rk3588-jaguar"
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-jaguar"
+>   CONFIG_ROCKCHIP_RK3588=y
+>   CONFIG_ROCKCHIP_BOOT_MODE_REG=0x0
+>   CONFIG_SPL_SERIAL=y
+> diff --git a/configs/nanopc-t6-rk3588_defconfig b/configs/nanopc-t6-rk3588_defconfig
+> index 738dda026b01..926267f93ad5 100644
+> --- a/configs/nanopc-t6-rk3588_defconfig
+> +++ b/configs/nanopc-t6-rk3588_defconfig
+> @@ -5,7 +5,7 @@ CONFIG_COUNTER_FREQUENCY=24000000
+>   CONFIG_ARCH_ROCKCHIP=y
+>   CONFIG_SF_DEFAULT_SPEED=24000000
+>   CONFIG_SF_DEFAULT_MODE=0x2000
+> -CONFIG_DEFAULT_DEVICE_TREE="rk3588-nanopc-t6"
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-nanopc-t6"
+>   CONFIG_ROCKCHIP_RK3588=y
+>   CONFIG_ROCKCHIP_SPI_IMAGE=y
+>   CONFIG_SPL_SERIAL=y
+> diff --git a/configs/neu6a-io-rk3588_defconfig b/configs/neu6a-io-rk3588_defconfig
+> index 56198556affc..ac281e65392c 100644
+> --- a/configs/neu6a-io-rk3588_defconfig
+> +++ b/configs/neu6a-io-rk3588_defconfig
+> @@ -2,7 +2,7 @@ CONFIG_ARM=y
+>   CONFIG_SKIP_LOWLEVEL_INIT=y
+>   CONFIG_COUNTER_FREQUENCY=24000000
+>   CONFIG_ARCH_ROCKCHIP=y
+> -CONFIG_DEFAULT_DEVICE_TREE="rk3588-edgeble-neu6a-io"
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-edgeble-neu6a-io"
+>   CONFIG_ROCKCHIP_RK3588=y
+>   CONFIG_SPL_SERIAL=y
+>   CONFIG_TARGET_RK3588_NEU6=y
+> diff --git a/configs/neu6b-io-rk3588_defconfig b/configs/neu6b-io-rk3588_defconfig
+> index 40baec319c9e..c01e5fb0d044 100644
+> --- a/configs/neu6b-io-rk3588_defconfig
+> +++ b/configs/neu6b-io-rk3588_defconfig
+> @@ -2,7 +2,7 @@ CONFIG_ARM=y
+>   CONFIG_SKIP_LOWLEVEL_INIT=y
+>   CONFIG_COUNTER_FREQUENCY=24000000
+>   CONFIG_ARCH_ROCKCHIP=y
+> -CONFIG_DEFAULT_DEVICE_TREE="rk3588-edgeble-neu6b-io"
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-edgeble-neu6b-io"
+>   CONFIG_ROCKCHIP_RK3588=y
+>   CONFIG_SPL_SERIAL=y
+>   CONFIG_TARGET_RK3588_NEU6=y
+> diff --git a/configs/orangepi-5-plus-rk3588_defconfig b/configs/orangepi-5-plus-rk3588_defconfig
+> index ba8005363ad0..138a633f320e 100644
+> --- a/configs/orangepi-5-plus-rk3588_defconfig
+> +++ b/configs/orangepi-5-plus-rk3588_defconfig
+> @@ -5,7 +5,7 @@ CONFIG_COUNTER_FREQUENCY=24000000
+>   CONFIG_ARCH_ROCKCHIP=y
+>   CONFIG_SF_DEFAULT_SPEED=24000000
+>   CONFIG_SF_DEFAULT_MODE=0x2000
+> -CONFIG_DEFAULT_DEVICE_TREE="rk3588-orangepi-5-plus"
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-orangepi-5-plus"
+>   CONFIG_ROCKCHIP_RK3588=y
+>   CONFIG_ROCKCHIP_SPI_IMAGE=y
+>   CONFIG_SPL_SERIAL=y
+> diff --git a/configs/orangepi-5-rk3588s_defconfig b/configs/orangepi-5-rk3588s_defconfig
+> index d61f85aaa8c6..33529d4cac31 100644
+> --- a/configs/orangepi-5-rk3588s_defconfig
+> +++ b/configs/orangepi-5-rk3588s_defconfig
+> @@ -4,7 +4,7 @@ CONFIG_COUNTER_FREQUENCY=24000000
+>   CONFIG_ARCH_ROCKCHIP=y
+>   CONFIG_SF_DEFAULT_SPEED=24000000
+>   CONFIG_SF_DEFAULT_MODE=0x2000
+> -CONFIG_DEFAULT_DEVICE_TREE="rk3588s-orangepi-5"
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-orangepi-5"
+>   CONFIG_ROCKCHIP_RK3588=y
+>   CONFIG_ROCKCHIP_SPI_IMAGE=y
+>   CONFIG_SPL_SERIAL=y
+> diff --git a/configs/quartzpro64-rk3588_defconfig b/configs/quartzpro64-rk3588_defconfig
+> index 33cbda88285f..06c5cff3ca55 100644
+> --- a/configs/quartzpro64-rk3588_defconfig
+> +++ b/configs/quartzpro64-rk3588_defconfig
+> @@ -3,7 +3,7 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
+>   CONFIG_SYS_HAS_NONCACHED_MEMORY=y
+>   CONFIG_COUNTER_FREQUENCY=24000000
+>   CONFIG_ARCH_ROCKCHIP=y
+> -CONFIG_DEFAULT_DEVICE_TREE="rk3588-quartzpro64"
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-quartzpro64"
+>   CONFIG_ROCKCHIP_RK3588=y
+>   CONFIG_SPL_SERIAL=y
+>   CONFIG_TARGET_QUARTZPRO64_RK3588=y
+> diff --git a/configs/rock5a-rk3588s_defconfig b/configs/rock5a-rk3588s_defconfig
+> index 01df911d9dc8..c09e6655f021 100644
+> --- a/configs/rock5a-rk3588s_defconfig
+> +++ b/configs/rock5a-rk3588s_defconfig
+> @@ -2,7 +2,7 @@ CONFIG_ARM=y
+>   CONFIG_SKIP_LOWLEVEL_INIT=y
+>   CONFIG_COUNTER_FREQUENCY=24000000
+>   CONFIG_ARCH_ROCKCHIP=y
+> -CONFIG_DEFAULT_DEVICE_TREE="rk3588s-rock-5a"
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-rock-5a"
+>   CONFIG_ROCKCHIP_RK3588=y
+>   CONFIG_SPL_SERIAL=y
+>   CONFIG_TARGET_ROCK5A_RK3588=y
+> diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defconfig
+> index 9e14b14af7c6..fc118cea7bae 100644
+> --- a/configs/rock5b-rk3588_defconfig
+> +++ b/configs/rock5b-rk3588_defconfig
+> @@ -5,7 +5,7 @@ CONFIG_COUNTER_FREQUENCY=24000000
+>   CONFIG_ARCH_ROCKCHIP=y
+>   CONFIG_SF_DEFAULT_SPEED=24000000
+>   CONFIG_SF_DEFAULT_MODE=0x2000
+> -CONFIG_DEFAULT_DEVICE_TREE="rk3588-rock-5b"
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-rock-5b"
+>   CONFIG_ROCKCHIP_RK3588=y
+>   CONFIG_ROCKCHIP_SPI_IMAGE=y
+>   CONFIG_SPL_SERIAL=y
+> diff --git a/configs/toybrick-rk3588_defconfig b/configs/toybrick-rk3588_defconfig
+> index 76bfa50c306c..5a190357e454 100644
+> --- a/configs/toybrick-rk3588_defconfig
+> +++ b/configs/toybrick-rk3588_defconfig
+> @@ -31,6 +31,7 @@ CONFIG_CMD_REGULATOR=y
+>   # CONFIG_SPL_DOS_PARTITION is not set
+>   CONFIG_SPL_OF_CONTROL=y
+>   CONFIG_OF_LIVE=y
+> +# CONFIG_OF_UPSTREAM is not set
+>   CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+>   CONFIG_ENV_IS_IN_MMC=y
+>   CONFIG_SPL_DM_SEQ_ALIAS=y
+> diff --git a/configs/turing-rk1-rk3588_defconfig b/configs/turing-rk1-rk3588_defconfig
+> index 038b14769e50..05ef5bf571c6 100644
+> --- a/configs/turing-rk1-rk3588_defconfig
+> +++ b/configs/turing-rk1-rk3588_defconfig
+> @@ -5,7 +5,7 @@ CONFIG_COUNTER_FREQUENCY=24000000
+>   CONFIG_ARCH_ROCKCHIP=y
+>   CONFIG_SF_DEFAULT_SPEED=24000000
+>   CONFIG_SF_DEFAULT_MODE=0x2000
+> -CONFIG_DEFAULT_DEVICE_TREE="rk3588-turing-rk1"
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-turing-rk1"
+>   CONFIG_ROCKCHIP_RK3588=y
+>   CONFIG_ROCKCHIP_SPI_IMAGE=y
+>   CONFIG_SPL_SERIAL=y
