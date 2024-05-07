@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D384C10F1A
-	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 13:26:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3356C25B75
+	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 13:26:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1D2588774;
-	Tue,  7 May 2024 15:26:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0930B88784;
+	Tue,  7 May 2024 15:26:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mb6UHALa";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="OdfV+ycO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A500F88774; Tue,  7 May 2024 15:26:33 +0200 (CEST)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id A0633886D1; Tue,  7 May 2024 15:26:34 +0200 (CEST)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 695A2886D1
+ by phobos.denx.de (Postfix) with ESMTPS id CB5CE88778
  for <u-boot@lists.denx.de>; Tue,  7 May 2024 15:26:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-7929363c7a3so250271785a.2
+ dmarc=none (p=none dis=none) header.from=monstr.eu
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-61df903aa05so34259727b3.3
  for <u-boot@lists.denx.de>; Tue, 07 May 2024 06:26:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715088390; x=1715693190; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=4FLYR1B0+nealrzel+CTyyGRmDgKvfCNkMiAH0lb+DQ=;
- b=mb6UHALamaLsqLj0puMpHyi8Iv2jZdewWc5QKjR+hC5Lqn8cH6kEtl9WWEwv1bQejB
- ik3S1l3Lj9WmXQ03cOYCkR1OPjExjg6SL47SUilt+7GHkExmZV7VmLOPNHspgjlkrtco
- 1uhBr3lYVRPeombH1JU58NJAib24mfy/fo9Wc=
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1715088390; x=1715693190;
+ darn=lists.denx.de; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=vcAlsYR+ZBX4KKujostuJc6RbWI9ZcTBUfszA8SFpYA=;
+ b=OdfV+ycOyY+agLeOjbDBSF78P9WIVq4aOgLwXAyYqXjCH+Bk4VJdyrNnSRYDez/CDk
+ JfweZ1uWAKfpKx6gy/O7iZ3NJWH2fURvpAkbGsyeVfZyrVbYc4+IWVrY3cNCebu6fTOy
+ f9KNpy2SOW9lhxy0PnMpg3JEJG0+d/thhcVfJP9A3E/HHFGXHTePF12+Qtsi0BsBVEhI
+ qc4yWrSDYDZOwuvcZR5GaIGxUu97K3gnZrB7zbIRpAGoFJkyq3EbkYbgTKHRH24p1epY
+ rVq34MVJ/xc72EIYdVIJKL4EmOMY7166S0emZKotkE9K0VI4lwmN9tVh0XWcRXTEWx/I
+ 2FdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1715088390; x=1715693190;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4FLYR1B0+nealrzel+CTyyGRmDgKvfCNkMiAH0lb+DQ=;
- b=rZG4hT+XvinbS3qVageGMYdKVpjiZRKgIM+VUuqMK/4TIklMDnglL0K8OTVORgzxwV
- cUkcnEtBpMgqg8npuL2j3ttY6Q28gBxtie6hDnb2aVQ5AR2g/ldIYYIjin2Si8ce+bnS
- uRZurKQftsKRQfaBw9YGib2enflS3hyoA7G6LfmS6BfUmy4a1xO/TJWYELfGON694pXj
- XtbBYw5ImIEFqY913V/+HGB/pWdkZXrKKZpw5a7rzfKF1Ya25Jg0G2FEetumsQeWsV6b
- yPm9awXOLG1E70Xzl9ThxExlIPwhjP4Ljbgyih37dFuGTYU6RdYF0QdZmSVVPzGas3qs
- DWTg==
-X-Gm-Message-State: AOJu0YzDGvgsY7sOGzExAqZElx/2RZathN4BZeCEz34Xq6bxZM/ZwYGA
- cYRslPJ0iPo6QQ7eyZshSQZsGLY7KTISqUzEwVXlJPTopzumEVC00si9dwo3+oA=
-X-Google-Smtp-Source: AGHT+IFb6Kw90PsiZqGKSDkmp0lv5Bn7nOFfTTXZU0Y7ZwKPuH6ysujSEkBx1haGiLcXUQW94hU4yA==
-X-Received: by 2002:a05:6214:20ec:b0:6a0:cad1:9ba0 with SMTP id
- 12-20020a05621420ec00b006a0cad19ba0mr13228567qvk.64.1715088390250; 
- Tue, 07 May 2024 06:26:30 -0700 (PDT)
-Received: from bill-the-cat ([187.144.98.216])
- by smtp.gmail.com with ESMTPSA id
- h2-20020a0ceec2000000b006a0fbe09a4dsm4674222qvs.16.2024.05.07.06.26.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 May 2024 06:26:29 -0700 (PDT)
-Date: Tue, 7 May 2024 07:26:26 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Love Kumar <love.kumar@amd.com>
-Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com
-Subject: Re: [PATCH v4] test/py: net_boot: Add test cases for net boot
-Message-ID: <20240507132626.GS2568172@bill-the-cat>
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vcAlsYR+ZBX4KKujostuJc6RbWI9ZcTBUfszA8SFpYA=;
+ b=vbml93O46BLF9XwlSIz2NJGa5CN0erwIxwzEJtZXtKl5b4s/KTdYOsWliCZNUv0V9o
+ jjlmigV52Wz64EMqWqK6+2oamhfjFhS1oG7VTCYnZIaryfmpfYEBfJ+9lyj9TASXtik9
+ 6DgjteoGLbMp0J75Yc+yEIXQNkB6p23Lbu0M4/u5tIp7Q5ApkCvVXFj7cg7KlkC479on
+ s1oB1Zyiv8J8Xlzn556L1Hv0EecINzx92UhEQo/YOOY6TNOjudqqQgKXkxSpAH8Gkfth
+ m2xQtD9m3GzEf5NgxMOr0O0x3F+FgwoZmQ+R2TZqmfJm+D78vnojUZgTN90i5m71EW/w
+ gmqQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVEGVdNwtJc0F35Pfg3j0dd14zeaf8gL/UHZhqeSZUFFz/dJR6aIi3PqVk9tbJNyeh0IXm7e5CVkiZGfvVW9kvsrBqjHg==
+X-Gm-Message-State: AOJu0YzYgMF+VGhgjfk6G47So0U6KoJe5mqF1DQygwikzoPN9j+ZaGSI
+ 78Y+1EoL5avdeomp3Zk5wBsfjprESHti5DPchGD2K7vm6fHFl0c4WXDPm/VvlCvjMFKwnqj8IWW
+ IkOCIhN9XRNGe2Dip//EeWGpsBLKNpwubThFt
+X-Google-Smtp-Source: AGHT+IFvB2i7clbEc5r+eacaJjLGUMEZgcDT+TH9iryUI3dYU6+TH13t6uggIMcGb6xrCRWKU1Lh5eiUTClvM4N7Bvo=
+X-Received: by 2002:a81:af09:0:b0:615:800d:67b2 with SMTP id
+ n9-20020a81af09000000b00615800d67b2mr13939511ywh.29.1715088389252; Tue, 07
+ May 2024 06:26:29 -0700 (PDT)
+MIME-Version: 1.0
 References: <d08d45f50dcdfb70e22a27cf13a990bcc2c020fc.1714738132.git.love.kumar@amd.com>
  <20240503201842.GA2560583@bill-the-cat>
  <8df3d032-65bc-4bc9-a255-ba825847ea9d@amd.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="XHWtrc5winuYMQi8"
-Content-Disposition: inline
-In-Reply-To: <8df3d032-65bc-4bc9-a255-ba825847ea9d@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+ <20240507132001.GR2568172@bill-the-cat>
+In-Reply-To: <20240507132001.GR2568172@bill-the-cat>
+From: Michal Simek <monstr@monstr.eu>
+Date: Tue, 7 May 2024 15:26:18 +0200
+Message-ID: <CAHTX3dJ3ZyUs4r4POKG7m0Ud6hCLW4bH9rwTFW1oABdtYL3qLg@mail.gmail.com>
+Subject: Re: [PATCH v4] test/py: net_boot: Add test cases for net boot
+To: Tom Rini <trini@konsulko.com>
+Cc: Love Kumar <love.kumar@amd.com>, u-boot@lists.denx.de, michal.simek@amd.com,
+ git@xilinx.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,105 +93,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---XHWtrc5winuYMQi8
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+=C3=BAt 7. 5. 2024 v 15:20 odes=C3=ADlatel Tom Rini <trini@konsulko.com> na=
+psal:
 
-On Tue, May 07, 2024 at 11:22:45AM +0530, Love Kumar wrote:
->=20
->=20
-> On 04/05/24 1:48 am, Tom Rini wrote:
-> > On Fri, May 03, 2024 at 05:39:46PM +0530, Love Kumar wrote:
-> >=20
-> > > Add tests for booting image using tftpboot/pxe boot commands, tftpboot
-> > > boot case loads the FIT image into DDR and boots using bootm command
-> > > whereas pxe boot cases downloads the pxe configuration file from the
-> > > TFTP server and interprets it to boot the images mentioned in the pxe
-> > > configurations file.
-> > > This test relies on boardenv_* containing configuration values includ=
-ing
-> > > the parameter 'pattern'. tftpboot/pxe boot cases boots the Linux till=
- the
-> > > boot log pattern value is matched. For example, if the parameter
-> > > 'pattern' is defined as 'login:', it will boot till login prompt.
-> > >=20
-> > > Signed-off-by: Love Kumar <love.kumar@amd.com>
-> >=20
-> > I'm not quite sure where the problem is, next. After enabling FIT image
-> > support in my build so I can use the image I have on hand:
-> > U-Boot> tftpboot 200000 v6.6/image.fit.nocomp
-> > Waiting for Ethernet connection... done.
-> > Using smsc95xx_eth device
-> > TFTP from server 192.168.1.10; our IP address is 192.168.1.100
-> > Filename 'v6.6/image.fit.nocomp'.
-> > Load address: 0x200000
-> > Loading: ##################################################  82 MiB
-> >           3.2 MiB/s
-> > done
-> > Bytes transferred =3D 85984256 (5200400 hex)
-> > U-Boot> U-Boot> crc32 200000 $filesize
-> > CRC32 for 00200000 ... 054003ff =3D=3D> 754c839a
-> > U-Boot> U-Boot> bootm 200000
-> > ## Loading kernel from FIT Image at 00200000 ...
-> > Could not find configuration node
-> > ERROR -2: can't get kernel image!
-> > U-Boot>
-> >=20
-> > And in u_boot_boardenv_rpi_arm64.py:
-> > env__tftp_boot_test_skip =3D False
-> >=20
-> > env__net_tftp_bootable_file =3D {
-> >      'fn': 'v6.6/image.fit.nocomp',
-> >      'addr': 0x00200000,
-> >      'size': 85984256,
-> >      'crc32': '754c839a',
-> >      'pattern': 'Linux',
-> >      'config': 'conf-852',
-> > }
-> >=20
-> > But it's not trying to boot conf-852 but instead just passing the
-> > address. This image lacks a default config, which your example has and I
-> > think is why the tests work in your case.
-> >=20
->=20
-> Hi,
->=20
-> Yes, this case expects to have some default config in fit image as it uses
-> 'bootm <addr>' command to boot, below change in fit image should work.
->=20
-> configurations {
->     default =3D "conf-852";
->=20
-> test_net_tftpboot_boot_config - This case will boot from the given config:
-> 'bootm 200000#conf-852'
+> On Tue, May 07, 2024 at 11:22:45AM +0530, Love Kumar wrote:
+> >
+> >
+> > On 04/05/24 1:48 am, Tom Rini wrote:
+> > > On Fri, May 03, 2024 at 05:39:46PM +0530, Love Kumar wrote:
+> > >
+> > > > Add tests for booting image using tftpboot/pxe boot commands,
+> tftpboot
+> > > > boot case loads the FIT image into DDR and boots using bootm comman=
+d
+> > > > whereas pxe boot cases downloads the pxe configuration file from th=
+e
+> > > > TFTP server and interprets it to boot the images mentioned in the p=
+xe
+> > > > configurations file.
+> > > > This test relies on boardenv_* containing configuration values
+> including
+> > > > the parameter 'pattern'. tftpboot/pxe boot cases boots the Linux
+> till the
+> > > > boot log pattern value is matched. For example, if the parameter
+> > > > 'pattern' is defined as 'login:', it will boot till login prompt.
+> > > >
+> > > > Signed-off-by: Love Kumar <love.kumar@amd.com>
+> > >
+> > > I'm not quite sure where the problem is, next. After enabling FIT ima=
+ge
+> > > support in my build so I can use the image I have on hand:
+> > > U-Boot> tftpboot 200000 v6.6/image.fit.nocomp
+> > > Waiting for Ethernet connection... done.
+> > > Using smsc95xx_eth device
+> > > TFTP from server 192.168.1.10; our IP address is 192.168.1.100
+> > > Filename 'v6.6/image.fit.nocomp'.
+> > > Load address: 0x200000
+> > > Loading: ##################################################  82 MiB
+> > >           3.2 MiB/s
+> > > done
+> > > Bytes transferred =3D 85984256 (5200400 hex)
+> > > U-Boot> U-Boot> crc32 200000 $filesize
+> > > CRC32 for 00200000 ... 054003ff =3D=3D> 754c839a
+> > > U-Boot> U-Boot> bootm 200000
+> > > ## Loading kernel from FIT Image at 00200000 ...
+> > > Could not find configuration node
+> > > ERROR -2: can't get kernel image!
+> > > U-Boot>
+> > >
+> > > And in u_boot_boardenv_rpi_arm64.py:
+> > > env__tftp_boot_test_skip =3D False
+> > >
+> > > env__net_tftp_bootable_file =3D {
+> > >      'fn': 'v6.6/image.fit.nocomp',
+> > >      'addr': 0x00200000,
+> > >      'size': 85984256,
+> > >      'crc32': '754c839a',
+> > >      'pattern': 'Linux',
+> > >      'config': 'conf-852',
+> > > }
+> > >
+> > > But it's not trying to boot conf-852 but instead just passing the
+> > > address. This image lacks a default config, which your example has an=
+d
+> I
+> > > think is why the tests work in your case.
+> > >
+> >
+> > Hi,
+> >
+> > Yes, this case expects to have some default config in fit image as it
+> uses
+> > 'bootm <addr>' command to boot, below change in fit image should work.
+> >
+> > configurations {
+> >     default =3D "conf-852";
+> >
+> > test_net_tftpboot_boot_config - This case will boot from the given
+> config:
+> > 'bootm 200000#conf-852'
+>
+> I wasn't clear, sorry. The problem is that since we define the config to
+> use, which is good, we need to then use it. I intentionally have a FIT
+> image that supports every aarch64 platform and I'd rather use it for
+> every platform and not a per-platform FIT image.
+>
 
-I think perhaps a related issue is that you're wanting to test that a
-FIT image with a default config works as expected. This should be added
-to test/py/tests/test_fit.py where we already construct and test
-assorted cases like that, and not handled in the "test OS boot" test I
-believe.
+What about putting those two tests together? I mean if config is not
+defined used default configuration,
+if config is defined use it.
+
+Thanks,
+Michal
 
 --=20
-Tom
-
---XHWtrc5winuYMQi8
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY6LAIACgkQFHw5/5Y0
-tyyMoQv9G11ZTtTp2pMMvIXssMGsJBuLlxhMTNOGR1Pt6Tia9ZN1+xofR8uj2OyK
-GcG1BZ6BwpyyABH/EyRg+XPGOfkS+//dXATgN0Jhtzp9iI3v5K1qJjlJZ0nvNWIC
-aBduUxxvl5CNLwiKGvrIWtGq5escjeOGPfw5IfkKKV+Z3ysC8cRBlYxuZI9tW/E5
-UqIbRxdM4kUHih63jS05UuaZg2w2XBurig6ChKXMVf2y43B+4kEZ0j+GzAhZL3bb
-IwZkpaKcbLsBPIBPT1wOOo6In4H2FmQtPzhTaZ47eEVD9g7aBU+MfvHQZsaD4elK
-EaNPUcIJ9f5Xn2gj45NLPxgm1UynJ3k895Iq3bE93jt1xmAbGSPrqmcugZR+9xsx
-snEKB5IaxMMtG8C3l6uyQ1J+3u4TNOUfDrIyPdOcaxkHWL8VnQbXB3immgVwmV4Q
-/WWtegXN3j3KpAqkEaDRX/d6d6ZWvqHCrjnHvGO5vpQnJcfiRUz58Xxge+PZusrK
-Y8Jf6Ks6
-=sFrb
------END PGP SIGNATURE-----
-
---XHWtrc5winuYMQi8--
+Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+w: www.monstr.eu p: +42-0-721842854
+Maintainer of Linux kernel - Xilinx Microblaze
+Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP ARM64 SoCs
+U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal SoCs
