@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D54CC25B75
-	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 13:20:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D384C10F1A
+	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 13:26:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7246188739;
-	Tue,  7 May 2024 15:20:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A1D2588774;
+	Tue,  7 May 2024 15:26:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dAN/mjiG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mb6UHALa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6954688739; Tue,  7 May 2024 15:20:08 +0200 (CEST)
-Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
- [IPv6:2607:f8b0:4864:20::835])
+ id A500F88774; Tue,  7 May 2024 15:26:33 +0200 (CEST)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C72F88749
- for <u-boot@lists.denx.de>; Tue,  7 May 2024 15:20:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 695A2886D1
+ for <u-boot@lists.denx.de>; Tue,  7 May 2024 15:26:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x835.google.com with SMTP id
- d75a77b69052e-43ab8e0f435so9273901cf.1
- for <u-boot@lists.denx.de>; Tue, 07 May 2024 06:20:06 -0700 (PDT)
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-7929363c7a3so250271785a.2
+ for <u-boot@lists.denx.de>; Tue, 07 May 2024 06:26:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715088005; x=1715692805; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1715088390; x=1715693190; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=pl8hNre18Hx5YIZ4xPV3pkx92qm7YtdSrpsdQ7Sq4Bg=;
- b=dAN/mjiGzS1pGh1mmn92IHWZrwfjbBSorAs/3K6QPzWeRPKNejDDXhS4JMJZ9zvo9T
- QCZVVMN1DcA/VqrP2IEhEjjzSAJF+XGpacUX1uhe4D/739ZqaFk8L1fHV1vzOhBar51g
- z67tD0WVQN5FEEt5PGV+U8PKbuF0hb1P47JMs=
+ bh=4FLYR1B0+nealrzel+CTyyGRmDgKvfCNkMiAH0lb+DQ=;
+ b=mb6UHALamaLsqLj0puMpHyi8Iv2jZdewWc5QKjR+hC5Lqn8cH6kEtl9WWEwv1bQejB
+ ik3S1l3Lj9WmXQ03cOYCkR1OPjExjg6SL47SUilt+7GHkExmZV7VmLOPNHspgjlkrtco
+ 1uhBr3lYVRPeombH1JU58NJAib24mfy/fo9Wc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715088005; x=1715692805;
+ d=1e100.net; s=20230601; t=1715088390; x=1715693190;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pl8hNre18Hx5YIZ4xPV3pkx92qm7YtdSrpsdQ7Sq4Bg=;
- b=Q6Wq8RODQRMWLQ4tKWizAU2zbAQ17aHG88X/uqq+MSITnqb0u8bh0yL4XC/3/B2DLK
- iYlNtXbwldUmv1rtvYF6Hg4ALJHjI6vPzx7+U2BBThxBUMfbV0l9lalawbFzVoVCS/mA
- Lc965Vksh5jlP0mSzBJAGJMS9PflfemytLUMdbJnzNkZq43ikfoTQe2zXadfY6JMMSX2
- yHztBFWUpokrHXyw4U4GriR75k0LpPjSVXvNvX0LPiGIaP2zh1kZts8NZwC40B0YCKgp
- yxtEAtboMJKL7iU9fMsGCQZMPCi/LyLAthrrqpLDepXIsw3h0Aji97MDb2Zl4OM1mWkf
- +hmw==
-X-Gm-Message-State: AOJu0Yzxxt+4v38m/QZVZ9T12WzsLwVk4B7qrhMTDYg0IdHwxNkI5dDo
- W3L9u0Bejft5ACW3yHJ3BiVkygvFlPW5cUxCWq8JVGuD0zjj0IRkCdIiDZaJenk=
-X-Google-Smtp-Source: AGHT+IFkN22WWI63OA5KLbIkGbpfipE9ApyzGkIsnQmRFFix0Yif9l8H7qbjboHKJXhu0upjmUi3sQ==
-X-Received: by 2002:a05:622a:138d:b0:43a:e248:12bc with SMTP id
- o13-20020a05622a138d00b0043ae24812bcmr14387253qtk.8.1715088004946; 
- Tue, 07 May 2024 06:20:04 -0700 (PDT)
+ bh=4FLYR1B0+nealrzel+CTyyGRmDgKvfCNkMiAH0lb+DQ=;
+ b=rZG4hT+XvinbS3qVageGMYdKVpjiZRKgIM+VUuqMK/4TIklMDnglL0K8OTVORgzxwV
+ cUkcnEtBpMgqg8npuL2j3ttY6Q28gBxtie6hDnb2aVQ5AR2g/ldIYYIjin2Si8ce+bnS
+ uRZurKQftsKRQfaBw9YGib2enflS3hyoA7G6LfmS6BfUmy4a1xO/TJWYELfGON694pXj
+ XtbBYw5ImIEFqY913V/+HGB/pWdkZXrKKZpw5a7rzfKF1Ya25Jg0G2FEetumsQeWsV6b
+ yPm9awXOLG1E70Xzl9ThxExlIPwhjP4Ljbgyih37dFuGTYU6RdYF0QdZmSVVPzGas3qs
+ DWTg==
+X-Gm-Message-State: AOJu0YzDGvgsY7sOGzExAqZElx/2RZathN4BZeCEz34Xq6bxZM/ZwYGA
+ cYRslPJ0iPo6QQ7eyZshSQZsGLY7KTISqUzEwVXlJPTopzumEVC00si9dwo3+oA=
+X-Google-Smtp-Source: AGHT+IFb6Kw90PsiZqGKSDkmp0lv5Bn7nOFfTTXZU0Y7ZwKPuH6ysujSEkBx1haGiLcXUQW94hU4yA==
+X-Received: by 2002:a05:6214:20ec:b0:6a0:cad1:9ba0 with SMTP id
+ 12-20020a05621420ec00b006a0cad19ba0mr13228567qvk.64.1715088390250; 
+ Tue, 07 May 2024 06:26:30 -0700 (PDT)
 Received: from bill-the-cat ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- ec21-20020a05622a5b9500b00436e5e47969sm6457607qtb.54.2024.05.07.06.20.03
+ h2-20020a0ceec2000000b006a0fbe09a4dsm4674222qvs.16.2024.05.07.06.26.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 May 2024 06:20:04 -0700 (PDT)
-Date: Tue, 7 May 2024 07:20:01 -0600
+ Tue, 07 May 2024 06:26:29 -0700 (PDT)
+Date: Tue, 7 May 2024 07:26:26 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Love Kumar <love.kumar@amd.com>
 Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com
 Subject: Re: [PATCH v4] test/py: net_boot: Add test cases for net boot
-Message-ID: <20240507132001.GR2568172@bill-the-cat>
+Message-ID: <20240507132626.GS2568172@bill-the-cat>
 References: <d08d45f50dcdfb70e22a27cf13a990bcc2c020fc.1714738132.git.love.kumar@amd.com>
  <20240503201842.GA2560583@bill-the-cat>
  <8df3d032-65bc-4bc9-a255-ba825847ea9d@amd.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="vcfdOcd93RUWs07H"
+ protocol="application/pgp-signature"; boundary="XHWtrc5winuYMQi8"
 Content-Disposition: inline
 In-Reply-To: <8df3d032-65bc-4bc9-a255-ba825847ea9d@amd.com>
 X-Clacks-Overhead: GNU Terry Pratchett
@@ -92,7 +92,7 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---vcfdOcd93RUWs07H
+--XHWtrc5winuYMQi8
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
@@ -165,30 +165,31 @@ ing
 > test_net_tftpboot_boot_config - This case will boot from the given config:
 > 'bootm 200000#conf-852'
 
-I wasn't clear, sorry. The problem is that since we define the config to
-use, which is good, we need to then use it. I intentionally have a FIT
-image that supports every aarch64 platform and I'd rather use it for
-every platform and not a per-platform FIT image.
+I think perhaps a related issue is that you're wanting to test that a
+FIT image with a default config works as expected. This should be added
+to test/py/tests/test_fit.py where we already construct and test
+assorted cases like that, and not handled in the "test OS boot" test I
+believe.
 
 --=20
 Tom
 
---vcfdOcd93RUWs07H
+--XHWtrc5winuYMQi8
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY6Kn0ACgkQFHw5/5Y0
-tyw8dAv1F9hjKkaF/gaeXMoPl6Ykve5DBLDqp7vmJ2DVEWBVDqPwacHXF2G+5skb
-nHGi37L6kxN4ZvoCdriGLlc/hSnWj2Lw0OsjM2e/c/jm6/Vp2ODZQJ24yZxdMRhH
-YERpC60udm1lZOZaKrCopLBabzTvnwV8FZljT+p9zauAHnH6hF6BgG6XskUPrySw
-Gi4SUdsX3qfvQ3c2H7PDHmSOfHoCe16eO+YDDRkELB4qEKCu0y0M5fxiab6gHbL6
-J5dIxMB00FCm3YrhkbxBpFPGhJJzdGgqJYFOxBeP4D0Y1uwY0zByWRjAeBLQWtzG
-r5fMWo07bXWYHvoh2jSQOr4V0k6A4iCA4RoG/FqNokTo1hnww9Z6IhQsI4BJ7Pej
-xE3tdTAulDnFJdvqDoAacu7Pf2c7erM9m5AKkwSnHsuWyzw9sBqacHZjp+dxvWls
-KONcHLjO7RlOyEvAEXQ8DZRq7G+Yuk3OK64x7RRO8jKCSMRp2Wvn9QCcHALZdhGR
-lAaBPqQ=
-=NnaG
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY6LAIACgkQFHw5/5Y0
+tyyMoQv9G11ZTtTp2pMMvIXssMGsJBuLlxhMTNOGR1Pt6Tia9ZN1+xofR8uj2OyK
+GcG1BZ6BwpyyABH/EyRg+XPGOfkS+//dXATgN0Jhtzp9iI3v5K1qJjlJZ0nvNWIC
+aBduUxxvl5CNLwiKGvrIWtGq5escjeOGPfw5IfkKKV+Z3ysC8cRBlYxuZI9tW/E5
+UqIbRxdM4kUHih63jS05UuaZg2w2XBurig6ChKXMVf2y43B+4kEZ0j+GzAhZL3bb
+IwZkpaKcbLsBPIBPT1wOOo6In4H2FmQtPzhTaZ47eEVD9g7aBU+MfvHQZsaD4elK
+EaNPUcIJ9f5Xn2gj45NLPxgm1UynJ3k895Iq3bE93jt1xmAbGSPrqmcugZR+9xsx
+snEKB5IaxMMtG8C3l6uyQ1J+3u4TNOUfDrIyPdOcaxkHWL8VnQbXB3immgVwmV4Q
+/WWtegXN3j3KpAqkEaDRX/d6d6ZWvqHCrjnHvGO5vpQnJcfiRUz58Xxge+PZusrK
+Y8Jf6Ks6
+=sFrb
 -----END PGP SIGNATURE-----
 
---vcfdOcd93RUWs07H--
+--XHWtrc5winuYMQi8--
