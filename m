@@ -4,78 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C42C6C10F1A
-	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 15:48:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68AC7C10F1A
+	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 16:13:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 254B288757;
-	Tue,  7 May 2024 17:48:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9B52088784;
+	Tue,  7 May 2024 18:13:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FcIPtdXt";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="TSdqC8rQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D86F8872F; Tue,  7 May 2024 17:48:44 +0200 (CEST)
-Received: from mail-vk1-xa29.google.com (mail-vk1-xa29.google.com
- [IPv6:2607:f8b0:4864:20::a29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A895C8879A; Tue,  7 May 2024 18:09:25 +0200 (CEST)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07F7A88794
- for <u-boot@lists.denx.de>; Tue,  7 May 2024 17:48:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 43F1188662
+ for <u-boot@lists.denx.de>; Tue,  7 May 2024 18:09:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-vk1-xa29.google.com with SMTP id
- 71dfb90a1353d-4df36a7a6f3so915522e0c.0
- for <u-boot@lists.denx.de>; Tue, 07 May 2024 08:48:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715096920; x=1715701720; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+J6zW+JnnMQRQz6f+yH7DZ11KZzPvuGbDyktuiRGHSE=;
- b=FcIPtdXtS2MFNmGgaThn3eqF3nAv3oE2KMhWfQJXmYsNAUS71P8Boa0VPSa96zbkAw
- s8X9Bz++wKE+ULUUldELN/v6TCNsdzmXnc3IfP/LcvOHpdMcX48R/lWkEeVgl3oE4sWw
- 9L34rWKd8/j2fmjStOTmra76vioQpaCKxAKjw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715096920; x=1715701720;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+J6zW+JnnMQRQz6f+yH7DZ11KZzPvuGbDyktuiRGHSE=;
- b=bvFcNGsWDAVoFYbJ285PaRnAgfGzF2vqzEpPGrSqePxJkAnKDGoU7IJz8hAsEWMSyo
- GPHr9nANea9zlmZSriWSbZVnLucUdE+DKq4NBqfRc0Aoelg+NuztLVRG308/tdeoMbw9
- /PQzN2A9LdKKlHg+OWgC7xNgyTJ5mbpOfSOl9Ohjnq7YTyzzZm0uyuav346MFB+cB6BY
- OK4mkrYZQPDEgtnl9tFaGOQno/82KJg45Ykoj4fCuDLoragrJadjz0xnGikDW4YHXab6
- UQfL+onH5aCiXL4hsVxalnkyVB1MXEZmyNEV2f8Pa5S1CeHJJkBnU/P0K/oL3Jji6RmA
- MW9Q==
-X-Gm-Message-State: AOJu0YxeyRCO7dtZbcYd8UARMBG59rd/8jbDRbvjPAJhEF042K1p5G8f
- zkj7bfb9g8wpx4eu6iEvL7Rreieq6LwK3DZ8CQBwxlpm+667Dk4JQaAW0iyFchs=
-X-Google-Smtp-Source: AGHT+IGo/l/vgKjb4eVD30Iurabb421LL2E78RZNztnCu4rmILcRnflCXP0WCTlcjR+QZwxUO2wgJg==
-X-Received: by 2002:a05:6122:179b:b0:4d8:7d49:18fe with SMTP id
- 71dfb90a1353d-4df587ea7a8mr2920946e0c.4.1715096919765; 
- Tue, 07 May 2024 08:48:39 -0700 (PDT)
-Received: from bill-the-cat ([187.144.98.216])
- by smtp.gmail.com with ESMTPSA id
- q3-20020a1ff203000000b004da6fe03e52sm1494101vkh.44.2024.05.07.08.48.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 May 2024 08:48:38 -0700 (PDT)
-Date: Tue, 7 May 2024 09:48:36 -0600
-From: Tom Rini <trini@konsulko.com>
-To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
- "jagan@amarulasolutions.com" <jagan@amarulasolutions.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "Simek, Michal" <michal.simek@amd.com>, "git (AMD-Xilinx)" <git@amd.com>
-Subject: Re: [PATCH v11 0/8] spi-nor: Add parallel and stacked memories support
-Message-ID: <20240507154836.GV2568172@bill-the-cat>
-References: <20240304031046.25998-1-venkatesh.abbarapu@amd.com>
- <SA1PR12MB8697F03FAFE69E8FE81F397598E42@SA1PR12MB8697.namprd12.prod.outlook.com>
+ spf=pass smtp.mailfrom=D.Schultz@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1715098162; x=1717690162;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=snRBsGoQhJoM2ERl/k4402TX0WBEvMgw66zbiWi+qDY=;
+ b=TSdqC8rQA33H+0xC7eMe23D30UfeNvJ6NpzcApaLV1ZsvxDRbxQ9Rf64yLD69Lwr
+ E8206kO46uPEZPQMDHwnaNKyudNny7016yfh+rOxth8hmws5KFQVnb05u8UV37lK
+ RKOGC0cGdRUKTR9vnCQt5zafwjNc179VEfIU/uigr50=;
+X-AuditID: ac14000a-fbefe7000000290d-a2-663a5232f2e5
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 41.89.10509.2325A366;
+ Tue,  7 May 2024 18:09:22 +0200 (CEST)
+Received: from [10.0.0.19] (172.25.0.11) by Berlix.phytec.de (172.25.0.12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Tue, 7 May 2024
+ 18:09:13 +0200
+Message-ID: <0753993f-8e5a-416c-920f-725854b8795f@phytec.de>
+Date: Tue, 7 May 2024 18:09:08 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="MaXoJorSLg65DlAf"
-Content-Disposition: inline
-In-Reply-To: <SA1PR12MB8697F03FAFE69E8FE81F397598E42@SA1PR12MB8697.namprd12.prod.outlook.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 5/5] board: phytec: am62x: Add support for 1 & 4 GB RAM
+ variants
+To: Wadim Egorov <w.egorov@phytec.de>, <u-boot@lists.denx.de>,
+ <upstream@lists.phytec.de>
+CC: <trini@konsulko.com>, <nm@ti.com>, <bb@ti.com>, <y.moog@phytec.de>,
+ <t.remmet@phytec.de>, <festevam@gmail.com>, <mkorpershoek@baylibre.com>,
+ <joao.goncalves@toradex.com>, <n-jain1@ti.com>,
+ <michael@amarulasolutions.com>, <d-gole@ti.com>, <sjg@chromium.org>,
+ <clamor95@gmail.com>, <m-chawdhry@ti.com>, <afd@ti.com>, <jma@phytec.com>
+References: <20240507151757.1202825-1-w.egorov@phytec.de>
+ <20240507151757.1202825-6-w.egorov@phytec.de>
+Content-Language: de-DE
+From: Daniel Schultz <d.schultz@phytec.de>
+In-Reply-To: <20240507151757.1202825-6-w.egorov@phytec.de>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrLIsWRmVeSWpSXmKPExsWyRpKBR9coyCrNYNk9TYv3pyayW8x9c4DV
+ 4kB/L6NFy1oPi4dX/S2edTYxW1y+f5PV4tKDVItTja0sFi+OzWW36P//nMnizY+zTBbftmxj
+ tJg6aTO7xdu9newW3e/UHQQ81n68z+rx/kYru8fshossHjtn3WX3eHVgFbvH2Ts7GD36u1tY
+ Pf5cfMfqcfzGdiaPTa88AriiuGxSUnMyy1KL9O0SuDImrFnLVrChsOLXsUMsDYxfIrsYOTgk
+ BEwkrt0J6mLk4hASWMIkseVRByOEc5NR4vq3Z2xdjJwcvAI2Egt+HWAHsVkEVCSW/VsDFReU
+ ODnzCQuILSogL3H/1gywGmGBMIl1Kz+BxUUEoiXuvu9jAhnKLHCdSeL3hm1gCSGBTIlnTZuZ
+ QGxmAXGJTc++s4LYbAJaEne2zGUGsTkFrCQuf+hmg6ixkFj85iA7hC0vsf3tHGaIOQoSs7dN
+ ZgSxJYDi0869ZoawQyW2ftnONIFReBaSW2chWTcLydhZSMYuYGRZxSiUm5mcnVqUma1XkFFZ
+ kpqsl5K6iREUxSIMXDsY++Z4HGJk4mA8xCjBwawkwnu03TxNiDclsbIqtSg/vqg0J7X4EKM0
+ B4uSOO/qjuBUIYH0xJLU7NTUgtQimCwTB6dUA2OmnM/x1UudZ/Z+Nvc4pjrx9sJJ7EJPtNod
+ vznfapA0Ek7Rnf+L47p+7Y8OyXw9Tr0mN4+JVkZsZ4NnZH6aPGFfCG8tz8cDTUbJyaek/50/
+ 93NNgMpjk4PfZ803cvHQa/q6vtXvvVC3gcGhc3kMN9YcdvMuPHPcIEtS6ceMTk+LWYeNjnx5
+ VKvEUpyRaKjFXFScCAAlteog0AIAAA==
+X-Mailman-Approved-At: Tue, 07 May 2024 18:13:17 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,185 +98,501 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hey Wadim,
 
---MaXoJorSLg65DlAf
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 07.05.24 17:17, Wadim Egorov wrote:
+> Use content of EEPROM to detect the actual RAM size and adjust
+> DDR timings, size and banks accordingly.
+> Also enable the SoM detection per default in the defconfigs.
+>
+> Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
+> ---
+>   board/phytec/common/am6_som_detection.h       |   8 +
+>   board/phytec/phycore_am62x/phycore-am62x.c    | 152 ++++++++++++-
+>   board/phytec/phycore_am62x/phycore-ddr-data.h | 206 ++++++++++++++++++
+>   configs/phycore_am62x_a53_defconfig           |   4 +
+>   configs/phycore_am62x_r5_defconfig            |   4 +
+>   5 files changed, 372 insertions(+), 2 deletions(-)
+>   create mode 100644 board/phytec/phycore_am62x/phycore-ddr-data.h
+>
+> diff --git a/board/phytec/common/am6_som_detection.h b/board/phytec/common/am6_som_detection.h
+> index 032f9da3aab..c5c6e179da6 100644
+> --- a/board/phytec/common/am6_som_detection.h
+> +++ b/board/phytec/common/am6_som_detection.h
+> @@ -9,11 +9,19 @@
+>   
+>   #include "phytec_som_detection.h"
+>   
+> +#define EEPROM_ADDR				0x50
+>   #define PHYTEC_AM62X_SOM			71
+>   #define PHYTEC_AM64X_SOM			72
+>   #define PHYTEC_EEPROM_VALUE_X			0x21
+>   #define PHYTEC_EEPROM_NOR_FLASH_64MB_QSPI	0xC
+>   
+> +enum {
+> +	EEPROM_RAM_SIZE_512MB = 0,
+> +	EEPROM_RAM_SIZE_1GB = 1,
+> +	EEPROM_RAM_SIZE_2GB = 2,
+> +	EEPROM_RAM_SIZE_4GB = 4
+> +};
+> +
+>   int __maybe_unused phytec_am6_detect(struct phytec_eeprom_data *data);
+>   u8 __maybe_unused phytec_get_am6_ddr_size(struct phytec_eeprom_data *data);
+>   u8 __maybe_unused phytec_get_am6_spi(struct phytec_eeprom_data *data);
+> diff --git a/board/phytec/phycore_am62x/phycore-am62x.c b/board/phytec/phycore_am62x/phycore-am62x.c
+> index a082b886bda..4a76f1343d7 100644
+> --- a/board/phytec/phycore_am62x/phycore-am62x.c
+> +++ b/board/phytec/phycore_am62x/phycore-am62x.c
+> @@ -8,6 +8,13 @@
+>   #include <spl.h>
+>   #include <fdt_support.h>
+>   
+> +#include "phycore-ddr-data.h"
+> +#include "../common/k3/k3_ddrss_patch.h"
+> +#include "../common/am6_som_detection.h"
+> +
+> +#define AM64_DDRSS_SS_BASE	0x0F300000
+> +#define DDRSS_V2A_CTL_REG	0x0020
+> +
+>   DECLARE_GLOBAL_DATA_PTR;
+>   
+>   int board_init(void)
+> @@ -15,16 +22,157 @@ int board_init(void)
+>   	return 0;
+>   }
+>   
+> +static u8 phytec_get_am62_ddr_size_default(void)
+> +{
+> +	int ret;
+> +	struct phytec_eeprom_data data;
+> +
+> +	if (IS_ENABLED(CONFIG_PHYCORE_AM62X_RAM_SIZE_FIX)) {
+> +		if (IS_ENABLED(CONFIG_PHYCORE_AM62X_RAM_SIZE_1GB))
+> +			return EEPROM_RAM_SIZE_1GB;
+> +		else if (IS_ENABLED(CONFIG_PHYCORE_AM62X_RAM_SIZE_2GB))
+> +			return EEPROM_RAM_SIZE_2GB;
+> +		else if (IS_ENABLED(CONFIG_PHYCORE_AM62X_RAM_SIZE_4GB))
+> +			return EEPROM_RAM_SIZE_4GB;
+> +	}
 
-On Tue, May 07, 2024 at 04:15:14AM +0000, Abbarapu, Venkatesh wrote:
+Please define these configs in board/phytec/phycore_am62x/Kconfig.
 
-> + Tom Rini
->=20
-> Do you have any comments for this series?
+- Daniel
 
-Seems likely fine. Jagan, do you have time to put this in a PR for
--next? Thanks.
-
->=20
-> Thanks
-> Venkatesh
->=20
-> > -----Original Message-----
-> > From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-> > Sent: Monday, March 4, 2024 8:41 AM
-> > To: u-boot@lists.denx.de
-> > Cc: Simek, Michal <michal.simek@amd.com>; jagan@amarulasolutions.com;
-> > git (AMD-Xilinx) <git@amd.com>
-> > Subject: [PATCH v11 0/8] spi-nor: Add parallel and stacked memories sup=
-port
-> >=20
-> > This series adds support for Xilinx qspi parallel and stacked memeories.
-> >=20
-> > In parallel mode, the current implementation assumes that a maximum of
-> > two flashes are connected. The QSPI controller splits the data evenly b=
-etween
-> > both the flashes so, both the flashes that are connected in parallel mo=
-de
-> > should be identical.
-> > During each operation SPI-NOR sets 0th bit for CS0 & 1st bit for CS1 in
-> > nor->flags.
-> >=20
-> > In stacked mode the current implementation assumes that a maximum of two
-> > flashes are connected and both the flashes are of same make but can dif=
-fer in
-> > sizes. So, except the sizes all other flash parameters of both the flas=
-hes are
-> > identical.
-> >=20
-> > Spi-nor will pass on the appropriate flash select flag to low level dri=
-ver, and it
-> > will select pass all the data to that particular flash.
-> >=20
-> > Write operation in parallel mode are performed in page size * 2 chunks =
-as
-> > each write operation results in writing both the flashes. For doubling =
-the
-> > address space each operation is performed at addr/2 flash offset, where=
- addr
-> > is the address specified by the user.
-> >=20
-> > Similarly for read and erase operations it will read from both flashes,=
- so size
-> > and offset are divided by 2 and send to flash.
-> >=20
-> > Changes in v2:
-> > - Fixed the compilation issues.
-> > Changes in v3:
-> > - Fixed the CI issues.
-> > Changes in v4:
-> > - Removed the dio,dummy_bytes variables from zynq_qspi driver.
-> > - Fix the compilation issue by including the DM_SPI config.
-> > Changes in v5:
-> > - Fixed the issue reported by buildman.
-> > Changes in v6:
-> > - Fixed the issues reported while running the sandbox test cases.
-> > Changes in v7:
-> > - Fixed the issues reported while running these da850evm_defconfig,
-> >   imx28_xea_defconfig configs.
-> > - Fixed the issue when DM_SPI config is disabled.
-> > - Fixed the issue while running the sandbox_noinst_defconfig with spl
-> >   ./spl/u-boot-spl -d arch/sandbox/dts/test.dtb
-> >    jedec_spi_nor spi.bin@0: has no valid 'reg' property (-12)
-> >    jedec_spi_nor spi.bin@1: has no valid 'reg' property (-12)
-> >    ### ERROR ### Please RESET the board ### Changes in v8:
-> > - Fixed the compilation issue with imx28_xea_defconfig.
-> > - Fixed the SPL size issue with the axm and taurus defconfigs.
-> > - Rebased the patches on top of next branch.
-> > Changes in v9:
-> > - Updated the commit log why SPL_FIT is being enabled.
-> > Changes in v10:
-> > - Added the new config SPI_ADVANCE to fix the issue while enabling
-> > imx28_xea_defconfig.
-> > Changes in v11:
-> > - Removed the unused variable, corrected the type of variable and repla=
-ced
-> > memcpy with memmove.
-> >=20
-> > Ashok Reddy Soma (4):
-> >   mtd: spi-nor: Add parallel and stacked memories support
-> >   mtd: spi-nor: Add parallel memories support for read_sr and read_fsr
-> >   mtd: spi-nor: Add parallel and stacked memories support in read_bar
-> >     and write_bar
-> >   spi: spi-uclass: Read chipselect and restrict capabilities
-> >=20
-> > Venkatesh Yadav Abbarapu (4):
-> >   spi: zynqmp_gqspi: Add parallel memories support in GQSPI driver
-> >   spi: zynq_qspi: Add parallel memories support in QSPI driver
-> >   spi: Add the spi advance options for non SPL
-> >   config: xea: Enable the SPI_ADVANCE config option
-> >=20
-> >  configs/imx28_xea_defconfig    |   1 +
-> >  drivers/mtd/spi/sandbox.c      |   2 +-
-> >  drivers/mtd/spi/spi-nor-core.c | 399 ++++++++++++++++++++++++++++-----
-> >  drivers/spi/Kconfig            |   7 +
-> >  drivers/spi/altera_spi.c       |   4 +-
-> >  drivers/spi/atcspi200_spi.c    |   2 +-
-> >  drivers/spi/ath79_spi.c        |   2 +-
-> >  drivers/spi/atmel_spi.c        |   6 +-
-> >  drivers/spi/bcm63xx_hsspi.c    |  42 ++--
-> >  drivers/spi/bcm63xx_spi.c      |   6 +-
-> >  drivers/spi/bcmbca_hsspi.c     |  34 +--
-> >  drivers/spi/cf_spi.c           |   6 +-
-> >  drivers/spi/davinci_spi.c      |   8 +-
-> >  drivers/spi/fsl_dspi.c         |  18 +-
-> >  drivers/spi/fsl_espi.c         |   4 +-
-> >  drivers/spi/fsl_qspi.c         |   4 +-
-> >  drivers/spi/gxp_spi.c          |   2 +-
-> >  drivers/spi/mpc8xx_spi.c       |   4 +-
-> >  drivers/spi/mpc8xxx_spi.c      |  10 +-
-> >  drivers/spi/mscc_bb_spi.c      |   4 +-
-> >  drivers/spi/mxc_spi.c          |   6 +-
-> >  drivers/spi/npcm_fiu_spi.c     |  14 +-
-> >  drivers/spi/nxp_fspi.c         |   2 +-
-> >  drivers/spi/octeon_spi.c       |   2 +-
-> >  drivers/spi/omap3_spi.c        |   4 +-
-> >  drivers/spi/pic32_spi.c        |   2 +-
-> >  drivers/spi/rk_spi.c           |   4 +-
-> >  drivers/spi/rockchip_sfc.c     |   2 +-
-> >  drivers/spi/spi-aspeed-smc.c   |  28 +--
-> >  drivers/spi/spi-mxic.c         |   6 +-
-> >  drivers/spi/spi-qup.c          |   4 +-
-> >  drivers/spi/spi-sifive.c       |   6 +-
-> >  drivers/spi/spi-sn-f-ospi.c    |   2 +-
-> >  drivers/spi/spi-sunxi.c        |   6 +-
-> >  drivers/spi/spi-synquacer.c    |   4 +-
-> >  drivers/spi/spi-uclass.c       |  34 ++-
-> >  drivers/spi/stm32_qspi.c       |   2 +-
-> >  drivers/spi/stm32_spi.c        |   4 +-
-> >  drivers/spi/ti_qspi.c          |  14 +-
-> >  drivers/spi/xilinx_spi.c       |   6 +-
-> >  drivers/spi/zynq_qspi.c        | 119 ++++++++--
-> >  drivers/spi/zynq_spi.c         |   6 +-
-> >  drivers/spi/zynqmp_gqspi.c     | 141 ++++++++++--
-> >  include/linux/mtd/spi-nor.h    |  12 +
-> >  include/spi.h                  |  23 +-
-> >  lib/acpi/acpi_device.c         |   2 +-
-> >  46 files changed, 792 insertions(+), 228 deletions(-)
-> >=20
-> > --
-> > 2.17.1
->=20
-
---=20
-Tom
-
---MaXoJorSLg65DlAf
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY6TUkACgkQFHw5/5Y0
-tywjLQwAk7abGaMmDkQuB8rHov1wwIQ1voeipb6ir5LbROcN97qY3pwVwWV4KuNX
-OaCXzGzRUBCXSj5H3Oqq8DEDjQKPYNAhvhtZho/HEqYtBg7wRHBiLIBZGTkpKu8G
-kudzhQMy2jlBLt4X608Gp0qweFBJIkbGFLbaPJ0FyN9SwWoNMB1lSNL3dbBjY/xt
-qwnvrg5MuudwJPhfazMq/Yx33bxFpnYwl/BD1oxrJXu8B2nwf8yIPM2mU4PhToFG
-kCyajBhCLu3G9HJWSc0+ov4X0fOIqPVTJsedMUNV7ebHs8qpYQObBVpHV8AmhAWX
-HSJSdYhixGTTFpCVQi00MrMWnL2qZ1qR9ziLPmrAVW6VwXIbejtCmbu9wHFxCroe
-TRrm4t+EZ9sF/0lN8esaoHlfm1Ao4a/OAH+ISedb5cbY9rJdbEF9VHuRlrqq6EHa
-x8JXPHThAt8qdU8cU8TxoSzsUhM56AY50CG4idRaiRxp126fUIgm0RYOurVTU8Cf
-joxmr1Rt
-=Fooa
------END PGP SIGNATURE-----
-
---MaXoJorSLg65DlAf--
+> +
+> +	ret = phytec_eeprom_data_setup(&data, 0, EEPROM_ADDR);
+> +	if (!ret && data.valid)
+> +		return phytec_get_am6_ddr_size(&data);
+> +
+> +	/* Default DDR size is 2GB */
+> +	return EEPROM_RAM_SIZE_2GB;
+> +}
+> +
+>   int dram_init(void)
+>   {
+> -	return fdtdec_setup_mem_size_base();
+> +	u8 ram_size = phytec_get_am62_ddr_size_default();
+> +
+> +	/*
+> +	 * HACK: ddrss driver support 2GB RAM by default
+> +	 * V2A_CTL_REG should be updated to support other RAM size
+> +	 */
+> +	if (IS_ENABLED(CONFIG_K3_AM64_DDRSS))
+> +		if (ram_size == EEPROM_RAM_SIZE_4GB)
+> +			writel(0x00000210, AM64_DDRSS_SS_BASE + DDRSS_V2A_CTL_REG);
+> +
+> +	switch (ram_size) {
+> +	case EEPROM_RAM_SIZE_1GB:
+> +		gd->ram_size = 0x40000000;
+> +		break;
+> +	case EEPROM_RAM_SIZE_2GB:
+> +		gd->ram_size = 0x80000000;
+> +		break;
+> +	case EEPROM_RAM_SIZE_4GB:
+> +#ifdef CONFIG_PHYS_64BIT
+> +		gd->ram_size = 0x100000000;
+> +#else
+> +		gd->ram_size = 0x80000000;
+> +#endif
+> +		break;
+> +	default:
+> +		gd->ram_size = 0x80000000;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +phys_size_t board_get_usable_ram_top(phys_size_t total_size)
+> +{
+> +#ifdef CONFIG_PHYS_64BIT
+> +	/* Limit RAM used by U-Boot to the DDR low region */
+> +	if (gd->ram_top > 0x100000000)
+> +		return 0x100000000;
+> +#endif
+> +	return gd->ram_top;
+>   }
+>   
+>   int dram_init_banksize(void)
+>   {
+> -	return fdtdec_setup_memory_banksize();
+> +	u8 ram_size;
+> +
+> +	ram_size = phytec_get_am62_ddr_size_default();
+> +	switch (ram_size) {
+> +	case EEPROM_RAM_SIZE_1GB:
+> +		gd->bd->bi_dram[0].start = CFG_SYS_SDRAM_BASE;
+> +		gd->bd->bi_dram[0].size = 0x40000000;
+> +		gd->ram_size = 0x40000000;
+> +		break;
+> +
+> +	case EEPROM_RAM_SIZE_2GB:
+> +		gd->bd->bi_dram[0].start = CFG_SYS_SDRAM_BASE;
+> +		gd->bd->bi_dram[0].size = 0x80000000;
+> +		gd->ram_size = 0x80000000;
+> +		break;
+> +
+> +	case EEPROM_RAM_SIZE_4GB:
+> +		/* Bank 0 declares the memory available in the DDR low region */
+> +		gd->bd->bi_dram[0].start = CFG_SYS_SDRAM_BASE;
+> +		gd->bd->bi_dram[0].size = 0x80000000;
+> +		gd->ram_size = 0x80000000;
+> +
+> +#ifdef CONFIG_PHYS_64BIT
+> +		/* Bank 1 declares the memory available in the DDR upper region */
+> +		gd->bd->bi_dram[1].start = 0x880000000;
+> +		gd->bd->bi_dram[1].size = 0x80000000;
+> +		gd->ram_size = 0x100000000;
+> +#endif
+> +		break;
+> +	default:
+> +		/* Continue with default 2GB setup */
+> +		gd->bd->bi_dram[0].start = CFG_SYS_SDRAM_BASE;
+> +		gd->bd->bi_dram[0].size = 0x80000000;
+> +		gd->ram_size = 0x80000000;
+> +		printf("DDR size %d is not supported\n", ram_size);
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +#if defined(CONFIG_K3_DDRSS)
+> +int update_ddrss_timings(void)
+> +{
+> +	int ret;
+> +	u8 ram_size;
+> +	struct ddrss *ddr_patch = NULL;
+> +	void *fdt = (void *)gd->fdt_blob;
+> +
+> +	ram_size = phytec_get_am62_ddr_size_default();
+> +	switch (ram_size) {
+> +	case EEPROM_RAM_SIZE_1GB:
+> +		ddr_patch = &phycore_ddrss_data[PHYCORE_1GB];
+> +		break;
+> +	case EEPROM_RAM_SIZE_2GB:
+> +		ddr_patch = NULL;
+> +		break;
+> +	case EEPROM_RAM_SIZE_4GB:
+> +		ddr_patch = &phycore_ddrss_data[PHYCORE_4GB];
+> +		break;
+> +	default:
+> +		break;
+> +	}
+> +
+> +	/* Nothing to patch */
+> +	if (!ddr_patch)
+> +		return 0;
+> +
+> +	debug("Applying DDRSS timings patch for ram_size %d\n", ram_size);
+> +
+> +	ret = fdt_apply_ddrss_timings_patch(fdt, ddr_patch);
+> +	if (ret < 0) {
+> +		printf("Failed to apply ddrs timings patch %d\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	return 0;
+>   }
+>   
+> +int do_board_detect(void)
+> +{
+> +	return update_ddrss_timings();
+> +}
+> +#endif
+> +
+>   #define CTRLMMR_USB0_PHY_CTRL   0x43004008
+>   #define CTRLMMR_USB1_PHY_CTRL   0x43004018
+>   #define CORE_VOLTAGE            0x80000000
+> diff --git a/board/phytec/phycore_am62x/phycore-ddr-data.h b/board/phytec/phycore_am62x/phycore-ddr-data.h
+> new file mode 100644
+> index 00000000000..fe6eccd959e
+> --- /dev/null
+> +++ b/board/phytec/phycore_am62x/phycore-ddr-data.h
+> @@ -0,0 +1,206 @@
+> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+> +/*
+> + * Copyright (C) 2024 PHYTEC Messtechnik GmbH
+> + * Author: Wadim Egorov <w.egorov@phytec.de>
+> + */
+> +
+> +#ifndef PHYCORE_DDR_DATA
+> +#define PHYCORE_DDR_DATA
+> +
+> +#include "../common/k3/k3_ddrss_patch.h"
+> +
+> +/* 1 GB variant delta */
+> +struct ddr_reg ddr_1gb_ctl_regs[] = {
+> +	{ 55, 0x0400DB60 },
+> +	{ 58, 0x0400DB60 },
+> +	{ 61, 0x0400DB60 },
+> +	{ 73, 0x00001860 },
+> +	{ 75, 0x00001860 },
+> +	{ 77, 0x00001860 },
+> +	{ 119, 0x00061800 },
+> +	{ 120, 0x00061800 },
+> +	{ 121, 0x00061800 },
+> +	{ 122, 0x00061800 },
+> +	{ 123, 0x00061800 },
+> +	{ 125, 0x0000AAA0 },
+> +	{ 126, 0x00061800 },
+> +	{ 127, 0x00061800 },
+> +	{ 128, 0x00061800 },
+> +	{ 129, 0x00061800 },
+> +	{ 130, 0x00061800 },
+> +	{ 132, 0x0000AAA0 },
+> +	{ 133, 0x00061800 },
+> +	{ 134, 0x00061800 },
+> +	{ 135, 0x00061800 },
+> +	{ 136, 0x00061800 },
+> +	{ 137, 0x00061800 },
+> +	{ 139, 0x0000AAA0 },
+> +	{ 206, 0x00000000 },
+> +	{ 209, 0x00000000 },
+> +	{ 212, 0x00000000 },
+> +	{ 215, 0x00000000 },
+> +	{ 218, 0x00000000 },
+> +	{ 221, 0x00000000 },
+> +	{ 230, 0x00000000 },
+> +	{ 231, 0x00000000 },
+> +	{ 232, 0x00000000 },
+> +	{ 233, 0x00000000 },
+> +	{ 234, 0x00000000 },
+> +	{ 235, 0x00000000 },
+> +	{ 316, 0x01010000 },
+> +	{ 318, 0x3FFF0000 },
+> +	{ 327, 0x00000C01 },
+> +	{ 328, 0x00000000 },
+> +	{ 385, 0x000030C0 },
+> +	{ 390, 0x0000DB60 },
+> +	{ 391, 0x0001E780 },
+> +	{ 394, 0x000030C0 },
+> +	{ 399, 0x0000DB60 },
+> +	{ 400, 0x0001E780 },
+> +	{ 403, 0x000030C0 },
+> +	{ 408, 0x0000DB60 },
+> +	{ 409, 0x0001E780 }
+> +};
+> +
+> +struct ddr_reg ddr_1gb_pi_regs[] = {
+> +	{ 77, 0x04000100 },
+> +	{ 176, 0x00001860 },
+> +	{ 178, 0x00001860 },
+> +	{ 180, 0x04001860 },
+> +	{ 233, 0x0000C570 },
+> +	{ 238, 0x0000C570 },
+> +	{ 243, 0x0000C570 },
+> +	{ 247, 0x000030C0 },
+> +	{ 248, 0x0001E780 },
+> +	{ 249, 0x000030C0 },
+> +	{ 250, 0x0001E780 },
+> +	{ 251, 0x000030C0 },
+> +	{ 252, 0x0001E780 },
+> +	{ 299, 0x00000000 },
+> +	{ 301, 0x00000000 },
+> +	{ 307, 0x00000000 },
+> +	{ 309, 0x00000000 },
+> +	{ 315, 0x00000000 },
+> +	{ 317, 0x00000000 },
+> +	{ 323, 0x00000000 },
+> +	{ 325, 0x00000000 },
+> +	{ 331, 0x00000000 },
+> +	{ 333, 0x00000000 },
+> +	{ 339, 0x00000000 },
+> +	{ 341, 0x00000000 }
+> +};
+> +
+> +struct ddr_reg ddr_1gb_phy_regs[] = {
+> +	{ 1371, 0x0001F7C2 },
+> +};
+> +
+> +/* 4 GB variant delta */
+> +struct ddr_reg ddr_4gb_ctl_regs[] = {
+> +	{ 55, 0x0400DB60 },
+> +	{ 58, 0x0400DB60 },
+> +	{ 61, 0x0400DB60 },
+> +	{ 73, 0x00001860 },
+> +	{ 75, 0x00001860 },
+> +	{ 77, 0x00001860 },
+> +	{ 119, 0x00061800 },
+> +	{ 120, 0x00061800 },
+> +	{ 121, 0x00061800 },
+> +	{ 122, 0x00061800 },
+> +	{ 123, 0x00061800 },
+> +	{ 125, 0x0000AAA0 },
+> +	{ 126, 0x00061800 },
+> +	{ 127, 0x00061800 },
+> +	{ 128, 0x00061800 },
+> +	{ 129, 0x00061800 },
+> +	{ 130, 0x00061800 },
+> +	{ 132, 0x0000AAA0 },
+> +	{ 133, 0x00061800 },
+> +	{ 134, 0x00061800 },
+> +	{ 135, 0x00061800 },
+> +	{ 136, 0x00061800 },
+> +	{ 137, 0x00061800 },
+> +	{ 139, 0x0000AAA0 },
+> +	{ 206, 0x00000000 },
+> +	{ 209, 0x00000000 },
+> +	{ 212, 0x00000000 },
+> +	{ 215, 0x00000000 },
+> +	{ 218, 0x00000000 },
+> +	{ 221, 0x00000000 },
+> +	{ 230, 0x00000000 },
+> +	{ 231, 0x00000000 },
+> +	{ 232, 0x00000000 },
+> +	{ 233, 0x00000000 },
+> +	{ 234, 0x00000000 },
+> +	{ 235, 0x00000000 },
+> +	{ 316, 0x00000000 },
+> +	{ 318, 0x7FFF0000 },
+> +	{ 327, 0x01000C01 },
+> +	{ 328, 0x00000001 },
+> +	{ 385, 0x000030C0 },
+> +	{ 390, 0x0000DB60 },
+> +	{ 391, 0x0001E780 },
+> +	{ 394, 0x000030C0 },
+> +	{ 399, 0x0000DB60 },
+> +	{ 400, 0x0001E780 },
+> +	{ 403, 0x000030C0 },
+> +	{ 408, 0x0000DB60 },
+> +	{ 409, 0x0001E780 }
+> +};
+> +
+> +struct ddr_reg ddr_4gb_pi_regs[] = {
+> +	{ 77, 0x04000000 },
+> +	{ 176, 0x00001860 },
+> +	{ 178, 0x00001860 },
+> +	{ 180, 0x04001860 },
+> +	{ 233, 0x0000C570 },
+> +	{ 238, 0x0000C570 },
+> +	{ 243, 0x0000C570 },
+> +	{ 247, 0x000030C0 },
+> +	{ 248, 0x0001E780 },
+> +	{ 249, 0x000030C0 },
+> +	{ 250, 0x0001E780 },
+> +	{ 251, 0x000030C0 },
+> +	{ 252, 0x0001E780 },
+> +	{ 299, 0x00000000 },
+> +	{ 301, 0x00000000 },
+> +	{ 307, 0x00000000 },
+> +	{ 309, 0x00000000 },
+> +	{ 315, 0x00000000 },
+> +	{ 317, 0x00000000 },
+> +	{ 323, 0x00000000 },
+> +	{ 325, 0x00000000 },
+> +	{ 331, 0x00000000 },
+> +	{ 333, 0x00000000 },
+> +	{ 339, 0x00000000 },
+> +	{ 341, 0x00000000 }
+> +};
+> +
+> +struct ddr_reg ddr_4gb_phy_regs[] = {
+> +	{ 1371, 0x0001F7C2 },
+> +};
+> +
+> +enum {
+> +	PHYCORE_1GB,
+> +	PHYCORE_4GB,
+> +};
+> +
+> +struct ddrss phycore_ddrss_data[] = {
+> +	[PHYCORE_1GB] = {
+> +		.ctl_regs = &ddr_1gb_ctl_regs[0],
+> +		.ctl_regs_num = ARRAY_SIZE(ddr_1gb_ctl_regs),
+> +		.pi_regs = &ddr_1gb_pi_regs[0],
+> +		.pi_regs_num = ARRAY_SIZE(ddr_1gb_pi_regs),
+> +		.phy_regs = &ddr_1gb_phy_regs[0],
+> +		.phy_regs_num = ARRAY_SIZE(ddr_1gb_phy_regs),
+> +	},
+> +	[PHYCORE_4GB] = {
+> +		.ctl_regs = &ddr_4gb_ctl_regs[0],
+> +		.ctl_regs_num = ARRAY_SIZE(ddr_4gb_ctl_regs),
+> +		.pi_regs = &ddr_4gb_pi_regs[0],
+> +		.pi_regs_num = ARRAY_SIZE(ddr_4gb_pi_regs),
+> +		.phy_regs = &ddr_4gb_phy_regs[0],
+> +		.phy_regs_num = ARRAY_SIZE(ddr_4gb_phy_regs),
+> +	},
+> +};
+> +
+> +#endif /* PHYCORE_DDR_DATA */
+> diff --git a/configs/phycore_am62x_a53_defconfig b/configs/phycore_am62x_a53_defconfig
+> index fd36edc29dd..145887c0286 100644
+> --- a/configs/phycore_am62x_a53_defconfig
+> +++ b/configs/phycore_am62x_a53_defconfig
+> @@ -5,6 +5,7 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
+>   CONFIG_SPL_LIBGENERIC_SUPPORT=y
+>   CONFIG_NR_DRAM_BANKS=2
+>   CONFIG_SOC_K3_AM625=y
+> +CONFIG_PHYTEC_SOM_DETECTION=y
+>   CONFIG_TARGET_PHYCORE_AM62X_A53=y
+>   CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+>   CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80b80000
+> @@ -45,6 +46,7 @@ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
+>   CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
+>   CONFIG_SPL_ENV_SUPPORT=y
+>   CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
+> +CONFIG_SPL_I2C=y
+>   CONFIG_SPL_DM_MAILBOX=y
+>   CONFIG_SPL_DM_SPI_FLASH=y
+>   CONFIG_SPL_POWER_DOMAIN=y
+> @@ -73,6 +75,8 @@ CONFIG_CLK_TI_SCI=y
+>   CONFIG_DMA_CHANNELS=y
+>   CONFIG_TI_K3_NAVSS_UDMA=y
+>   CONFIG_TI_SCI_PROTOCOL=y
+> +CONFIG_DM_I2C=y
+> +CONFIG_SYS_I2C_OMAP24XX=y
+>   CONFIG_DM_MAILBOX=y
+>   CONFIG_K3_SEC_PROXY=y
+>   CONFIG_SUPPORT_EMMC_BOOT=y
+> diff --git a/configs/phycore_am62x_r5_defconfig b/configs/phycore_am62x_r5_defconfig
+> index 389672d5227..0062a4e3569 100644
+> --- a/configs/phycore_am62x_r5_defconfig
+> +++ b/configs/phycore_am62x_r5_defconfig
+> @@ -6,6 +6,7 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
+>   CONFIG_SPL_LIBGENERIC_SUPPORT=y
+>   CONFIG_NR_DRAM_BANKS=2
+>   CONFIG_SOC_K3_AM625=y
+> +CONFIG_PHYTEC_SOM_DETECTION=y
+>   CONFIG_TARGET_PHYCORE_AM62X_R5=y
+>   CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+>   CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x43c3a7f0
+> @@ -50,6 +51,7 @@ CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
+>   CONFIG_SPL_EARLY_BSS=y
+>   CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
+>   CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
+> +CONFIG_SPL_I2C=y
+>   CONFIG_SPL_DM_MAILBOX=y
+>   CONFIG_SPL_DM_SPI_FLASH=y
+>   CONFIG_SPL_DM_RESET=y
+> @@ -88,6 +90,7 @@ CONFIG_SPL_CLK_K3_PLL=y
+>   CONFIG_SPL_CLK_K3=y
+>   CONFIG_TI_SCI_PROTOCOL=y
+>   CONFIG_DA8XX_GPIO=y
+> +CONFIG_DM_I2C=y
+>   CONFIG_DM_MAILBOX=y
+>   CONFIG_K3_SEC_PROXY=y
+>   CONFIG_SPL_MISC=y
+> @@ -129,3 +132,4 @@ CONFIG_SPL_TIMER=y
+>   CONFIG_OMAP_TIMER=y
+>   CONFIG_LIB_RATIONAL=y
+>   CONFIG_SPL_LIB_RATIONAL=y
+> +CONFIG_SYS_I2C_OMAP24XX=y
