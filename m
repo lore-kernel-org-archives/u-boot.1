@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65811C10F1A
-	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 14:33:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7CB5C25B4F
+	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 14:35:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A147188789;
-	Tue,  7 May 2024 16:33:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 410AE88789;
+	Tue,  7 May 2024 16:35:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kwy1hs5J";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AyGwuR8x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82EE388785; Tue,  7 May 2024 16:33:25 +0200 (CEST)
-Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
- [IPv6:2607:f8b0:4864:20::831])
+ id B27958834B; Tue,  7 May 2024 16:35:23 +0200 (CEST)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 648B188790
- for <u-boot@lists.denx.de>; Tue,  7 May 2024 16:33:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6314488749
+ for <u-boot@lists.denx.de>; Tue,  7 May 2024 16:35:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x831.google.com with SMTP id
- d75a77b69052e-43d2277d7e1so12125991cf.1
- for <u-boot@lists.denx.de>; Tue, 07 May 2024 07:33:21 -0700 (PDT)
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-3c861a87d6dso2114493b6e.0
+ for <u-boot@lists.denx.de>; Tue, 07 May 2024 07:35:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715092400; x=1715697200; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1715092520; x=1715697320; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=4K2b83Z/r9vVtptf4Xwb1q5aIJpjHcngOFBBSbYab0M=;
- b=kwy1hs5JhA45hGtSP12Niz7qHUYBjFupw/4PnDKHIQ3UYB+RMI4KnmMeQKZGMHgJPM
- jndktVVIn/AmI5OvtVgJn73gkqauj4GPF36v+3ej6xm0EdzfgrlVErp6aYG6kz5wifJa
- cx5d3Hs95xNQhhJlumAcAOBiSfUJVWDvN9gYY=
+ bh=3kMhnKMTk3o09QNhMOD9LY30cDElWaP9wLOQOAUzz8o=;
+ b=AyGwuR8xI18eVGbzfMEbOHRSjYAo/c8vV8o+Hzvtc0e0SlmAHeYpcUJjZi3p7RqdiD
+ nqhXuYyNz711/FunzLNxVvTGO9kqxs1W99mFmPtOOU920NLFH2lHUgtpWq7TTpUcwt3a
+ prQlW2YlgrdgJveEQIS6TJOIwmfp6iSRPECqA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715092400; x=1715697200;
+ d=1e100.net; s=20230601; t=1715092520; x=1715697320;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4K2b83Z/r9vVtptf4Xwb1q5aIJpjHcngOFBBSbYab0M=;
- b=w9Nq2CGdwzjFXWUDilNrVaFV7LhWWrjketXoYIg4IZJncKOUh4UGCy8a9rkdkrZKZ5
- Atx3dds0pVH3swU8LmVwUdIqmEusguFS5IDR+H3kumCurzNvkyolTFg8yHkzpXsyDoT9
- /5xczGldcG7hdRsbHvHxmOP1xFBoB6Ia2CaZcsJWRXCbw7im6emIcHV61speyFV+/1yu
- FQlfqFdqyL8zTWuOqBRnzSXWgoYdN2XUvoYa7s+ngxjN0h3AtrGYzDcosQtZF0xFP32f
- NuBRiKMUEMCVvZmUrfhLI7BqLWw7Hstjlv9ORgHyvzdKiPhso5hCv84k14VpSIvYzWqG
- LnYg==
+ bh=3kMhnKMTk3o09QNhMOD9LY30cDElWaP9wLOQOAUzz8o=;
+ b=CN2Kak2QvnNByePnslk2IP3bsD5VlGmDU3l1nwHD7uaajsdNJHDOU0jUp/dWKHeCxe
+ Fw0TiZsY4ojJKb3o92ixWSA3RGb5czRFK5vCFAYX8oFFdXrBcgxeDdVssQL7yXQxIsFF
+ cyfMnEpNpjMI7Mmkih4YX5MZ8lSt5hBvJk3PMN9kouHOPgE60uOkN/tiDKrO0Ze9KjfZ
+ 9E7TECEtaaQa/Csj3ZIciWT2vpoXvC9WWFl6YdtjMEfAg9QYavc/JSxjPZ40sp5XOAIr
+ NQvFIJFUCHq6qMo4pClodD/0Su3slCDuNiXnggyaepGe+BVqs87wM7QImewLVDjfWoc6
+ U4Iw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV+17I3UK1fC4HB/A/ZC0zTufm6ruYvRYTeEVkC7lwAvZH8M+sDf+S2CdyJy+XaamIP8op3kfSghZhne4BAWF0j77ESHg==
-X-Gm-Message-State: AOJu0YyCnQMfhyw/z5Nk5EyhzDztiF//Pm6X9dsTFVXPlMqQFcx7X4cy
- Wv/56zkpaykuz6wMZy6WYHVldKW2ej8A18XvOq2BUHcXuP3c/ILlnZFOV6AN9sQ=
-X-Google-Smtp-Source: AGHT+IEYt47kjWzMS0N17uefFvlXk7FXnTUStbtq+GMiGdOWphoEOs+Pi0x24LdV8bqZlq8qiPz9WQ==
-X-Received: by 2002:a05:622a:491:b0:43a:b531:5e6f with SMTP id
- p17-20020a05622a049100b0043ab5315e6fmr17598545qtx.62.1715092400233; 
- Tue, 07 May 2024 07:33:20 -0700 (PDT)
+ AJvYcCVTICRJQw0pcHHSKy9nzUK6VXH67F+o3Q1OtYXtauWxzop7Ri0smyfJbt9E3UG80i96b5sHsL3rqwWcDAOqXTgMqjuwjQ==
+X-Gm-Message-State: AOJu0YzMQ6Z06nDvKKThQ6Uk3DjIbr+zh/ftbA+i4R61R/Gg8bWXScur
+ eG1YRsHtZyEDOjmDOG0XSZW99ZUh/VZ7qtTvwDxbuxm+GWk0gHC8qRy0VZqDQYE=
+X-Google-Smtp-Source: AGHT+IHdMfxC+9VYpPFRh/xqJS8xZ+NkXRI4e25JTCbaY80boEvXLnEvs46U6piflOMpQeAn0b7Zeg==
+X-Received: by 2002:a05:6808:3026:b0:3c8:6649:51b5 with SMTP id
+ ay38-20020a056808302600b003c8664951b5mr17258258oib.10.1715092520117; 
+ Tue, 07 May 2024 07:35:20 -0700 (PDT)
 Received: from bill-the-cat ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- br11-20020a05622a1e0b00b0043cd877f828sm5805137qtb.45.2024.05.07.07.33.18
+ j24-20020ac86658000000b0043d64cbe012sm2255932qtp.90.2024.05.07.07.35.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 May 2024 07:33:19 -0700 (PDT)
-Date: Tue, 7 May 2024 08:33:15 -0600
+ Tue, 07 May 2024 07:35:19 -0700 (PDT)
+Date: Tue, 7 May 2024 08:35:17 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Francesco Dolcini <francesco@dolcini.it>
-Cc: Martyn Welch <martyn.welch@collabora.com>,
- Dave Gerlach <d-gerlach@ti.com>, Nishanth Menon <nm@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>,
- Sjoerd Simons <sjoerd@collabora.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v5 4/6] configs: am62x_evm_*: Enable USB and DFU support
-Message-ID: <20240507143315.GT2568172@bill-the-cat>
-References: <20240506143846.1252377-1-martyn.welch@collabora.com>
- <20240506143846.1252377-5-martyn.welch@collabora.com>
- <20240507081428.GA17112@francesco-nb>
+To: Michal Simek <monstr@monstr.eu>
+Cc: Love Kumar <love.kumar@amd.com>, u-boot@lists.denx.de,
+ michal.simek@amd.com, git@xilinx.com
+Subject: Re: [PATCH v4] test/py: net_boot: Add test cases for net boot
+Message-ID: <20240507143517.GU2568172@bill-the-cat>
+References: <d08d45f50dcdfb70e22a27cf13a990bcc2c020fc.1714738132.git.love.kumar@amd.com>
+ <20240503201842.GA2560583@bill-the-cat>
+ <8df3d032-65bc-4bc9-a255-ba825847ea9d@amd.com>
+ <20240507132001.GR2568172@bill-the-cat>
+ <CAHTX3dJ3ZyUs4r4POKG7m0Ud6hCLW4bH9rwTFW1oABdtYL3qLg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="4CMIdEcO7TDfrj0j"
+ protocol="application/pgp-signature"; boundary="3+BI6PA+QQmtUAlO"
 Content-Disposition: inline
-In-Reply-To: <20240507081428.GA17112@francesco-nb>
+In-Reply-To: <CAHTX3dJ3ZyUs4r4POKG7m0Ud6hCLW4bH9rwTFW1oABdtYL3qLg@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,85 +97,127 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---4CMIdEcO7TDfrj0j
-Content-Type: text/plain; charset=us-ascii
+--3+BI6PA+QQmtUAlO
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, May 07, 2024 at 10:14:28AM +0200, Francesco Dolcini wrote:
-> Hello Martyn,
-> first thanks for your series, with this we might be able to drop some
-> downstream branch.
+On Tue, May 07, 2024 at 03:26:18PM +0200, Michal Simek wrote:
+> Hi Tom,
 >=20
-> On Mon, May 06, 2024 at 03:38:44PM +0100, Martyn Welch wrote:
-> > From: Sjoerd Simons <sjoerd@collabora.com>
-> >=20
-> > Provide config fragments to enable USB host as well as USB gadget and D=
-FU
-> > support for a53 and r5. This relevant fragment is included into the
-> > am62x EVM a53 defconfig. For the r5, due to the smaller available size,
-> > the config fragment also disables support for persistent storage to free
-> > up space for USB support. This fragment needs to be included is DFU
-> > booting is desired.
-> >=20
-> > The CONFIG_DFU_SF option is placed in the defconfig rather than the
-> > fragment as this is known not to be supported on all boards that can
-> > support DFU.
-> >=20
-> > Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
-> > Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
+> =FAt 7. 5. 2024 v 15:20 odes=EDlatel Tom Rini <trini@konsulko.com> napsal:
 >=20
-> ...
+> > On Tue, May 07, 2024 at 11:22:45AM +0530, Love Kumar wrote:
+> > >
+> > >
+> > > On 04/05/24 1:48 am, Tom Rini wrote:
+> > > > On Fri, May 03, 2024 at 05:39:46PM +0530, Love Kumar wrote:
+> > > >
+> > > > > Add tests for booting image using tftpboot/pxe boot commands,
+> > tftpboot
+> > > > > boot case loads the FIT image into DDR and boots using bootm comm=
+and
+> > > > > whereas pxe boot cases downloads the pxe configuration file from =
+the
+> > > > > TFTP server and interprets it to boot the images mentioned in the=
+ pxe
+> > > > > configurations file.
+> > > > > This test relies on boardenv_* containing configuration values
+> > including
+> > > > > the parameter 'pattern'. tftpboot/pxe boot cases boots the Linux
+> > till the
+> > > > > boot log pattern value is matched. For example, if the parameter
+> > > > > 'pattern' is defined as 'login:', it will boot till login prompt.
+> > > > >
+> > > > > Signed-off-by: Love Kumar <love.kumar@amd.com>
+> > > >
+> > > > I'm not quite sure where the problem is, next. After enabling FIT i=
+mage
+> > > > support in my build so I can use the image I have on hand:
+> > > > U-Boot> tftpboot 200000 v6.6/image.fit.nocomp
+> > > > Waiting for Ethernet connection... done.
+> > > > Using smsc95xx_eth device
+> > > > TFTP from server 192.168.1.10; our IP address is 192.168.1.100
+> > > > Filename 'v6.6/image.fit.nocomp'.
+> > > > Load address: 0x200000
+> > > > Loading: ##################################################  82 MiB
+> > > >           3.2 MiB/s
+> > > > done
+> > > > Bytes transferred =3D 85984256 (5200400 hex)
+> > > > U-Boot> U-Boot> crc32 200000 $filesize
+> > > > CRC32 for 00200000 ... 054003ff =3D=3D> 754c839a
+> > > > U-Boot> U-Boot> bootm 200000
+> > > > ## Loading kernel from FIT Image at 00200000 ...
+> > > > Could not find configuration node
+> > > > ERROR -2: can't get kernel image!
+> > > > U-Boot>
+> > > >
+> > > > And in u_boot_boardenv_rpi_arm64.py:
+> > > > env__tftp_boot_test_skip =3D False
+> > > >
+> > > > env__net_tftp_bootable_file =3D {
+> > > >      'fn': 'v6.6/image.fit.nocomp',
+> > > >      'addr': 0x00200000,
+> > > >      'size': 85984256,
+> > > >      'crc32': '754c839a',
+> > > >      'pattern': 'Linux',
+> > > >      'config': 'conf-852',
+> > > > }
+> > > >
+> > > > But it's not trying to boot conf-852 but instead just passing the
+> > > > address. This image lacks a default config, which your example has =
+and
+> > I
+> > > > think is why the tests work in your case.
+> > > >
+> > >
+> > > Hi,
+> > >
+> > > Yes, this case expects to have some default config in fit image as it
+> > uses
+> > > 'bootm <addr>' command to boot, below change in fit image should work.
+> > >
+> > > configurations {
+> > >     default =3D "conf-852";
+> > >
+> > > test_net_tftpboot_boot_config - This case will boot from the given
+> > config:
+> > > 'bootm 200000#conf-852'
+> >
+> > I wasn't clear, sorry. The problem is that since we define the config to
+> > use, which is good, we need to then use it. I intentionally have a FIT
+> > image that supports every aarch64 platform and I'd rather use it for
+> > every platform and not a per-platform FIT image.
+> >
 >=20
-> > diff --git a/configs/am62x_r5_usbdfu.config b/configs/am62x_r5_usbdfu.c=
-onfig
-> > new file mode 100644
-> > index 0000000000..772bb2ab93
-> > --- /dev/null
-> > +++ b/configs/am62x_r5_usbdfu.config
-> > @@ -0,0 +1,28 @@
->=20
-> ...
->=20
-> > +CONFIG_USB_GADGET_MANUFACTURER=3D"Texas Instruments"
-> > +CONFIG_USB_GADGET_VENDOR_NUM=3D0x0451
-> > +CONFIG_USB_GADGET_PRODUCT_NUM=3D0x6165
->=20
-> This is making this fragment TI _board_ specific, while the file name see=
-ms
-> to imply that this is generic for the TI SoC. Other vendors, using TI
-> SoCs, will likely want to use their own USB IDs.
->=20
-> Not a big deal and no need to change it, we'll handle this in our own
-> defconfig when we'll enable this, but I wanted to mention this.
+> What about putting those two tests together? I mean if config is not
+> defined used default configuration,
+> if config is defined use it.
 
-One thing about fragments, at least so long as it's being processed
-correctly, is that "make fooboard_config fragA.config fragB.config"
-means that fragB.config will override fragA.config values. Not that it
-shouldn't also possibly be re-done as either of:
-1) am62x_r5_usbdfu.config + am62x_evm_r5_usbdfu.config
-2) better use of imply keyword perhaps in the SoC stanza in one of the
-K3 Kconfig files.
+So, I followed up with another email too about tests for FIT vs tests
+for OS boot. If we update the exiting FIT tests to test that the default
+config is used if present would that be a better way to cover the intent
+here?
 
 --=20
 Tom
 
---4CMIdEcO7TDfrj0j
+--3+BI6PA+QQmtUAlO
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY6O6gACgkQFHw5/5Y0
-tyx1Cwv6A8KVsHFXPKIPyug1w1Alglqr8/b4103AYUsg6wr9A7qovP+uFiQ09Sdc
-I6pjTDdB+CTFWIh8sp7pEHFJwxHpuN7sLyNnFrCeR+G34gtW8rae4rqhxpPAfxjy
-r2REFKz0TYAe4ecxxfLbbBn0bHhzI1IoB+zR4yi7lhFB5bwtrviDg2SEajqjga1Z
-yLVnfoCPD22Bt/1nQdezTn37YIquIxEiD7hh8LBxFwpFOP7JI3DYJF058J182kjK
-mHkUUdy0iJZAV/KdrMEmeZ8IpZHVOVs4MVvOZpGuB6wnaxsT9qhdn/q6lkbCGiwm
-3ZnKl1QsUnuoaOYzLvPkkKgM4PVhypRCYYgPHnKJ3elNFGdAp/l4GXdME2V6ZOLq
-eVD9WMD/PfbxZQ9SimP7McKqRX9l+j0fASxaxjKcZhhh0A4wD8lmmu+6HzcrnuV+
-Nun5upEOsnfFuWx0vrZPgOxNxaPBauCw/c6eVAzWZOYlKHXBEiBC34Kuo/26h1ND
-IsfxPJXL
-=q7Hw
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY6PCUACgkQFHw5/5Y0
+tyxEMgv/R6lBwE3z2eWTrnde5DLFEKmtWLvDN22Z4d/WPniGfo1UZxU0Az+r/HQl
+OFX0lEqwi+hREp2WU+c9J9uoYb33Pw0FVDyGxBJHbhtfYZhQHYueh1aFy0xYkhzQ
+qzKUAvnababS6hMQK7NDmctGcFvbp0vrRmc26pOK/EIu3IZnmvF44Y0GNPu2/Y0D
+RVB94n/N1xzKu0PMsTsahwknqfr42v/jiK7UbS8HsPwraNydFyEiwORMnEzhkPTI
+ot49PMmV2jPbVXFmrFRGhCERpolQCueMQcy9lvPHHpkPPtLGYvVcUSWFxcry+EVf
+r7uFS+Z6qJE35i8CoY3uVcJVC6kIAeROC+H6fm3yCOfic9l6wtV2ZrkvFapR7VHl
+Bj5UMR1GY7gQawjz1x/bKWWp4QtOFylGokSRo8uCwzC2YL/bmNvrWCtREPgtR0uw
+JhrdNYOtiQyT8AD0rjNbMBotpvnf8xZVH0FDRJvjksFQGZ6tTYiMTjoYDf1JX/+1
+GsrRVAQl
+=lHjm
 -----END PGP SIGNATURE-----
 
---4CMIdEcO7TDfrj0j--
+--3+BI6PA+QQmtUAlO--
