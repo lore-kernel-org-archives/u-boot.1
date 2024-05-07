@@ -4,63 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CF06C10F1A
-	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 14:47:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9928EC10F1A
+	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 15:18:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1BC38872F;
-	Tue,  7 May 2024 16:47:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id C21C688798;
+	Tue,  7 May 2024 17:18:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="Ssxge2vt";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="s0Qpi61K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B947C8872F; Tue,  7 May 2024 16:47:02 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.183])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3FCD188798; Tue,  7 May 2024 17:18:09 +0200 (CEST)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0B9088551
- for <u-boot@lists.denx.de>; Tue,  7 May 2024 16:46:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CED19883AA
+ for <u-boot@lists.denx.de>; Tue,  7 May 2024 17:18:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
+ dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: a27e04a9-0c80-11ef-903b-005056992ed3
-Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id a27e04a9-0c80-11ef-903b-005056992ed3;
- Tue, 07 May 2024 16:46:49 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=content-type:mime-version:subject:to:from:message-id:date;
- bh=Uw6Is1CXhHy+talK0U+OnoyZoBgNbDIcHqiV1OIeJm8=;
- b=Ssxge2vtWYhJvuncVQM4wx2wsZnjK8s5qSl5tXCcCWT1hjxLRwbjt7mS+mMmIp+kd4YZllCM6RkT1
- FPY1t1K5kaVEl5IDzJivywzXydjCaPE49bukCSQOtDY+quvQXNDdeDvqWQFAalh1EW7gO60LWS94HC
- GcqCUJvZKZ9hk6h9Ik9OzLlOrmS39Kejhjkp6w0w7uhlJMbwEJ4lDxF6qTzAZuSFPhr/DBG8txhe3H
- En1nxkaPjx1os/+M6x/TevZmtfhkaXesliguzO+ZJA9QWHZjIe4HSUtLIUr9ZofpdCghtJyBZFAfn3
- jsnZH2RNPH2qEPZoOOSxqTQl0B91u1w==
-X-KPN-MID: 33|jm156B0XwDa9fOtcMlhKy57srHZQOfDV/2qLE93EruEhlK0PkT0ZvCTYYmtp1DS
- geGx82o+wQPEPzgltXMVhW+FsR1fh1YNnjTPDLpSbGBY=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|62kXG24JhabMj9SJ9Tto6ajjrHsxgDJQ8Ta+6cM8j9Fnuii8CuABI+r2WiZnF35
- Z3V1ImLV995PergNnPaYHCg==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id a822f19c-0c80-11ef-9bda-00505699772e;
- Tue, 07 May 2024 16:46:59 +0200 (CEST)
-Date: Tue, 07 May 2024 16:46:58 +0200
-Message-Id: <87zft1he71.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Igor Opaniuk <igor.opaniuk@gmail.com>
-Cc: antoni.s.jankowski@gmail.com, u-boot@lists.denx.de
-In-Reply-To: <CAByghJZx=KFcygY2=N13=Tw94e3=7+gg7h6Usad2McjaBV2KKw@mail.gmail.com>
- (message from Igor Opaniuk on Tue, 7 May 2024 16:30:17 +0200)
-Subject: Re: Distro Boot instructions with examples
-References: <CAM4sPk-un78JmrMQpAe24nWMp0ytrieyL3zrZd_Qg9HOm--gtg@mail.gmail.com>
- <CAByghJZx=KFcygY2=N13=Tw94e3=7+gg7h6Usad2McjaBV2KKw@mail.gmail.com>
-MIME-version: 1.0
-Content-type: text/plain; charset=utf-8
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1715095086; x=1717687086;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=cbc9JCf27XzaF3Ur0zJRxL0l62XqBDdmlJqSApTM4h8=;
+ b=s0Qpi61KtVfwPQXRwE+DmH5jlfuoX5ut6Ma+RB4OMrT8hKyb9vOCSShn42b01aGH
+ VGj0qf39jBaYPVDfZJ3nZO3P4eeKq/QAeyl77nFl+FbtdfU86uOZNOuJF3DgTZfX
+ QXynOBm4x5HqeCnmHqA+Mn8iECO7/R5VplZVjGsVe+E=;
+X-AuditID: ac14000a-fbefe7000000290d-9c-663a462d295d
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 56.49.10509.D264A366;
+ Tue,  7 May 2024 17:18:05 +0200 (CEST)
+Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Tue, 7 May 2024
+ 17:18:05 +0200
+From: Wadim Egorov <w.egorov@phytec.de>
+To: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
+CC: <trini@konsulko.com>, <nm@ti.com>, <bb@ti.com>, <y.moog@phytec.de>,
+ <t.remmet@phytec.de>, <d.schultz@phytec.de>, <festevam@gmail.com>,
+ <mkorpershoek@baylibre.com>, <joao.goncalves@toradex.com>, <n-jain1@ti.com>,
+ <michael@amarulasolutions.com>, <d-gole@ti.com>, <sjg@chromium.org>,
+ <clamor95@gmail.com>, <m-chawdhry@ti.com>, <afd@ti.com>, <jma@phytec.com>
+Subject: [PATCH 0/5] *** phyCORE-AM62x: DDR detection / Inject DDR timing
+ deltas ***
+Date: Tue, 7 May 2024 17:17:52 +0200
+Message-ID: <20240507151757.1202825-1-w.egorov@phytec.de>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeLIzCtJLcpLzFFi42JZI8nAo6vrZpVmsOiAscX7UxPZLea+OcBq
+ caC/l9GiZa2HxcOr/hbPOpuYLS7fv8lqcelBqsWpxlYWixfH5rJb9P9/zmTx5sdZJotvW7Yx
+ WkydtJnd4u3eTnaL7nfqDgIeaz/eZ/V4f6OV3WN2w0UWj52z7rJ7vDqwit3j7J0djB793S2s
+ Hn8uvmP1OH5jO5PHplceAVxRXDYpqTmZZalF+nYJXBm9tw4xFnznrVixZiNTA+N7ri5GTg4J
+ AROJ9zefs4PYQgJLmCR2rArqYuQCsh8xShw6fowRJMEmoC5xZ8M3VhBbRMBMYtHa82wgRcwC
+ 75gk1h+eAuRwcAgLhEhc/asKUsMioCIxb/9MZhCbV8BSoqFzNyPEMnmJmZe+s0PEBSVOznzC
+ AmIzA8Wbt85mhrAlJA6+eMEMcZC8xItLy1lgeqede80MYYdKHNm0mmkCo8AsJKNmIRk1C8mo
+ BYzMqxiFcjOTs1OLMrP1CjIqS1KT9VJSNzGCYkyEgWsHY98cj0OMTByMhxglOJiVRHiPtpun
+ CfGmJFZWpRblxxeV5qQWH2KU5mBREudd3RGcKiSQnliSmp2aWpBaBJNl4uCUamCUfsZ5d5d0
+ 2BKBu70xa8uVOVtN5v25/sb95DSmHRHfp0p177FrV/WakHWt78jF6TKpBWHren999xET3fGG
+ o2LSAbVLu21DGOd/TZO7ZbB0zeT4j5XTzONlnxpLu/WJ3S0tqzLboL86dCVnvnXIX+P09u3l
+ CvOeBXwsipy6XFxoyWz1wz/Z4w8psRRnJBpqMRcVJwIAZTPaxZ8CAAA=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,44 +91,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Igor Opaniuk <igor.opaniuk@gmail.com>
-> Date: Tue, 7 May 2024 16:30:17 +0200
-> 
-> Hello Antoni,
-> 
-> On Tue, May 7, 2024 at 4:14 PM Antoni Jankowski
-> <antoni.s.jankowski@gmail.com> wrote:
-> >
-> > Hi,
-> >
-> > I've recently learned about the Distro Boot feature of u-boot. This sounds
-> > interesting, however the official instructions are sparse and examples seem
-> > to be non-existent.
-> >
-> > The platform I'm working with at the moment is a raspberry pi CM4, are
-> > there any examples of how to implement this concept? Distro Boot seems to
-> > be suitable for updating all the rootfs at once, including what usually is
-> > a separate boot partition.
-> >
-> > Best regards,
-> > Antoni
-> 
-> There is a nice manual from Toradex about Distro Boot integration [1].
-> You can also find a bunch of examples of integration of existing boards
-> just by grep-ing:
-> 
-> u-boot.git$ grep -ine "config_distro_bootcmd" -r ./include/configs/
-> ./include/configs/pico-imx6ul.h:86:#include <config_distro_bootcmd.h>
-> ./include/configs/kp_imx6q_tpc.h:84:#include <config_distro_bootcmd.h>
-> ./include/configs/imx8mp_venice.h:21:#include <config_distro_bootcmd.h>
-> ./include/configs/stm32f746-disco.h:30:#include <config_distro_bootcmd.h>
-> ...
-> 
-> Hope this helps.
-> 
-> [1] https://developer.toradex.com/linux-bsp/os-development/boot/distro-boot/
+PHYTEC stores details about the hardware in an EEPROM on the SoM. We can
+utilize this information and chose the proper DDR timings accordingly.
 
-However, "distro boot" is being superseded by "standard boot" in
-recent versions of U-Boot and the raspberry pi boards have already
-moved on.  See doc/develop/bootstd.rst for some documentation on
-"standard boot".
+Due to the limited SRAM memory on the AM62x, the concept was to store
+only the DDR timings deltas and not their full set, see Patch 4 & 5.
+
+The last patch adds support for a 1 GB and 4 GB RAM variant of the
+phyCORE-AM62x.
+
+Patch 4 & 5 are based on
+https://patchwork.ozlabs.org/project/uboot/list/?series=404273
+
+Wadim Egorov (5):
+  board: phytec: Make AM6 SoM detection depend on I2C
+  board: phytec: Fix function definitions in AM6x SOM detection
+  arm: mach-k3: am625: Call do_board_detect() before DDR probing
+  board: phytec: common: Introduce a method to inject DDR timings deltas
+  board: phytec: am62x: Add support for 1 & 4 GB RAM variants
+
+ arch/arm/mach-k3/am625_init.c                 |   2 +
+ board/phytec/common/Kconfig                   |   2 +
+ board/phytec/common/am6_som_detection.c       |  18 +-
+ board/phytec/common/am6_som_detection.h       |   8 +
+ board/phytec/common/k3/Makefile               |   1 +
+ board/phytec/common/k3/k3_ddrss_patch.c       |  68 ++++++
+ board/phytec/common/k3/k3_ddrss_patch.h       |  28 +++
+ board/phytec/phycore_am62x/MAINTAINERS        |   1 +
+ board/phytec/phycore_am62x/phycore-am62x.c    | 152 ++++++++++++-
+ board/phytec/phycore_am62x/phycore-ddr-data.h | 206 ++++++++++++++++++
+ configs/phycore_am62x_a53_defconfig           |   4 +
+ configs/phycore_am62x_r5_defconfig            |   4 +
+ 12 files changed, 483 insertions(+), 11 deletions(-)
+ create mode 100644 board/phytec/common/k3/k3_ddrss_patch.c
+ create mode 100644 board/phytec/common/k3/k3_ddrss_patch.h
+ create mode 100644 board/phytec/phycore_am62x/phycore-ddr-data.h
+
+-- 
+2.34.1
+
