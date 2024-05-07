@@ -4,61 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D1B9C10F1A
-	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 14:27:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39530C10F1A
+	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 14:30:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C5BE488798;
-	Tue,  7 May 2024 16:27:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id AFAAA88719;
+	Tue,  7 May 2024 16:30:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1715092027;
-	bh=Ofi5JIehCo4Y3rFQhRS32rf84zVpH7SKsM37tFmiplQ=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=d2vqxLiIv5xG52NL0dX7keWdQ9ptF/pIFK0Ket1R5N2X0WEUTDgWEs8+vqADzGJqa
-	 VK3RWr5fs017H5Xl/oU5fLNZyAYaZPDVxMSELx6PYnVeVrpiCyzuZqHud+cQ6BXwdK
-	 t3ImGkC4yF7+0oJVTzhSgp15CsjIobUFFr9DHFVz+I2EhjbneCJaq6FzaBfTdgK85v
-	 iT2GhTnAop4G6kDdZlCvXPr282/jkR7GuJVaf3wS9AUOCDZGOI+qpLMrz5+4qCJ1Gn
-	 XO5ijohdx5IRsMyKoN7d21RucRE2lYjfxGZ8NEs8F6CdQYBV5VzhwRopwSN5xxWxQn
-	 wdIjlA3nJX3Ig==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BKSasrqI";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 4EE0E88723; Tue,  7 May 2024 16:30:32 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 9A98188742;
- Tue,  7 May 2024 16:27:04 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1715092027;
- bh=Ofi5JIehCo4Y3rFQhRS32rf84zVpH7SKsM37tFmiplQ=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=X8/AZSuEIDeBY2eC3JToWj6YwmXC1jQttz8BxHVjipPcYDdXxBBvnhaHQJi2/IyaW
- hnqLfvgStT7yDyY1hrXIACvNVdu7dlMB8pbmRa4U2xBFn256CfJZa8NkkfhJABy/rt
- J7+p2d/QO354pC+bH1xfPHSH87Hmw38KGozpwc3+tiwr2tTLwLj9r1G5tmKtnW6pNy
- MbJGaZV7ylCvYlfFHaz8aAygvnrX3N3tUMDz6nZO/FKGS5pEXw+OpQVdyAWDNWE15g
- /43Nh87tRLnMKFqUAExJZfZZVrtY/nnJH0goCPu7KFX29KdMeMuYB4UpnnkG5a8yiF
- aWd3iITbAIqNw==
-Message-ID: <54f3cc5c-1f2d-4a7c-ab46-45aa5c40d3e4@denx.de>
-Date: Tue, 7 May 2024 15:41:02 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 06080886EB
+ for <u-boot@lists.denx.de>; Tue,  7 May 2024 16:30:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-34de22deac9so258888f8f.0
+ for <u-boot@lists.denx.de>; Tue, 07 May 2024 07:30:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1715092229; x=1715697029; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ayhUEHczI5vMOLOvi9REtaPfbU76QKlQH4QsvfmA3lc=;
+ b=BKSasrqIKN0ax3QUG1KzYRlZf6hxHCfxj3gAVfiFDfGAi4OMfQY869ErlcPQh+CrdR
+ Zxr9QhK0QDD9FOSxBP3lTsBUkja4+yFBA8wHTpf0lu+iylhUjBCiG2KkMWn2oGz60Tpx
+ FFaHUrGN4qNo1btE3wP3ywciKZSRBsodTR/UpzK5s8n00BX0Z57agr0uaVE5gFvt2bxj
+ Dvz/2fTsFqlJ6JdikwZVo5KRt3EhmJckMNOGefjgxjcN+9nAtv+8f540LHn/QYOKbdw4
+ XHR800x6ISzgckhY9hueKUiblQnNKhNs6es6LnOfGGdfvqyyT75IVJNbF+avaxlzuv5O
+ fK6Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1715092229; x=1715697029;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ayhUEHczI5vMOLOvi9REtaPfbU76QKlQH4QsvfmA3lc=;
+ b=oX99Q/DdYtopX6pFCDCbSGZ/9WYbYzU1mkU5UBimTH56Cemt60W9mxmmSR5gT6Gfki
+ l7PA/fYxLt0F842tBy0o+Nair5fdhczAFye31/1N8ACdnxo5acooUGNCFVG72eiEQ8pY
+ nq9uIBmvplhCUvwUXsfEhpQMYkXFpGgISjOvP/4mnLhiVSgM0lQt4nOK7j4aeVwMJWtG
+ 9Q/sFxMAh9hR7D6AsjrBquUbvNd37LKYEJ1lbIvKLtpM3TiWSXUA5VzxRmPTF4/xqh5Q
+ C1BTkvQha0joVRL1JvevVooUleHNPolzFQVLDpxTj75hWua/FWg9yU+J1Q8wFVDS0yYD
+ e2bg==
+X-Gm-Message-State: AOJu0YwCTT/oMe/WFwFhArlCbFi6GugiuUhRkgtDQxfWzDzVd458RB8c
+ yKYg/87lbyjjXyRV3RuEUlWSqKsOZJ5QrotGMozFWHDy5lbL570N34IfiExgG3RUnc4trm2I9E9
+ ssCxP/Oa2yT2fcGxs01ATRFUEzK0/rcMnKfIvYA==
+X-Google-Smtp-Source: AGHT+IEM9I5Bs0HqOPb9XN3l5pi+Ej4JkCyZsAGAEkuydhlDYqV2XtbhcYbyKvwTJxJz7t3/cTpA5F6qI/S53OinHrs=
+X-Received: by 2002:a5d:63d1:0:b0:34c:f989:dc25 with SMTP id
+ c17-20020a5d63d1000000b0034cf989dc25mr8425615wrw.6.1715092229044; Tue, 07 May
+ 2024 07:30:29 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/1] net: dwc_eth_qos: mdio: Implement clause 45
-To: Philip Oberfichtner <pro@denx.de>, u-boot@lists.denx.de
-Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, trini@konsulko.com,
- caleb.connolly@linaro.org, neil.armstrong@linaro.org, sumit.garg@linaro.org,
- sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
- patrick.delaunay@foss.st.com, patrice.chotard@foss.st.com, jonas@kwiboo.se,
- leyfoon.tan@starfivetech.com, epsi@gmx.de, xypron.glpk@gmx.de,
- seanga2@gmail.com, sebastien.szymanski@armadeus.com, festevam@gmail.com,
- sebastian.reichel@collabora.com, yanhong.wang@starfivetech.com,
- christophe.roullier@st.com
-References: <20240507094237.168238-1-pro@denx.de>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240507094237.168238-1-pro@denx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <CAM4sPk-un78JmrMQpAe24nWMp0ytrieyL3zrZd_Qg9HOm--gtg@mail.gmail.com>
+In-Reply-To: <CAM4sPk-un78JmrMQpAe24nWMp0ytrieyL3zrZd_Qg9HOm--gtg@mail.gmail.com>
+From: Igor Opaniuk <igor.opaniuk@gmail.com>
+Date: Tue, 7 May 2024 16:30:17 +0200
+Message-ID: <CAByghJZx=KFcygY2=N13=Tw94e3=7+gg7h6Usad2McjaBV2KKw@mail.gmail.com>
+Subject: Re: Distro Boot instructions with examples
+To: Antoni Jankowski <antoni.s.jankowski@gmail.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,30 +87,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/7/24 11:42 AM, Philip Oberfichtner wrote:
-> Bevor this commit, only clause 22 access was possible. After this commit,
-> clause 45 direct access will available as well.
-> 
-> Note that there is a slight change of behavior: Before this commit, the
-> C45E bit was set to whatever value was left in the register from the
-> previous access. After this commit, we adopt the common practice of
-> discerning C45 from C22 using the devad argument.
-> 
-> Signed-off-by: Philip Oberfichtner <pro@denx.de>
-> ---
-> 
-> Notes:
->      Attention: There is a slight change of behavior introduced by this
->      commit (see commit message). Please test and review if this works for
->      everybody.
->      
->      My implementation is tested on an Intel Elkhart lake SOC, patch
->      submitted here:
->      
->      https://patchwork.ozlabs.org/project/uboot/list/?series=405358
->      
->      Changes in V2:
->      	- Use FIELD_PREP() instead of manual '<<' shifting
->      	- Fix whitespace errors
+Hello Antoni,
 
-Reviewed-by: Marek Vasut <marex@denx.de>
+On Tue, May 7, 2024 at 4:14=E2=80=AFPM Antoni Jankowski
+<antoni.s.jankowski@gmail.com> wrote:
+>
+> Hi,
+>
+> I've recently learned about the Distro Boot feature of u-boot. This sound=
+s
+> interesting, however the official instructions are sparse and examples se=
+em
+> to be non-existent.
+>
+> The platform I'm working with at the moment is a raspberry pi CM4, are
+> there any examples of how to implement this concept? Distro Boot seems to
+> be suitable for updating all the rootfs at once, including what usually i=
+s
+> a separate boot partition.
+>
+> Best regards,
+> Antoni
+
+There is a nice manual from Toradex about Distro Boot integration [1].
+You can also find a bunch of examples of integration of existing boards
+just by grep-ing:
+
+u-boot.git$ grep -ine "config_distro_bootcmd" -r ./include/configs/
+./include/configs/pico-imx6ul.h:86:#include <config_distro_bootcmd.h>
+./include/configs/kp_imx6q_tpc.h:84:#include <config_distro_bootcmd.h>
+./include/configs/imx8mp_venice.h:21:#include <config_distro_bootcmd.h>
+./include/configs/stm32f746-disco.h:30:#include <config_distro_bootcmd.h>
+...
+
+Hope this helps.
+
+[1] https://developer.toradex.com/linux-bsp/os-development/boot/distro-boot=
+/
+
+--=20
+Best regards - Atentamente - Meilleures salutations
+
+Igor Opaniuk
+
+mailto: igor.opaniuk@gmail.com
+skype: igor.opanyuk
+https://www.linkedin.com/in/iopaniuk
