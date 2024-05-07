@@ -4,46 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C25FC10F1A
-	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 18:41:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAAD3C25B4F
+	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 18:47:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7915B8831C;
-	Tue,  7 May 2024 20:41:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 59C1C88315;
+	Tue,  7 May 2024 20:47:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="E4S2nTVj";
+	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="kHXtW5wI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16E698831F; Tue,  7 May 2024 20:41:30 +0200 (CEST)
-Received: from mail-4022.proton.ch (mail-4022.proton.ch [185.70.40.22])
+ id 7C7C488315; Tue,  7 May 2024 20:47:03 +0200 (CEST)
+Received: from mail-4323.proton.ch (mail-4323.proton.ch [185.70.43.23])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8BFD88116
- for <u-boot@lists.denx.de>; Tue,  7 May 2024 20:41:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9ADF088116
+ for <u-boot@lists.denx.de>; Tue,  7 May 2024 20:47:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail2; t=1715107286; x=1715366486;
- bh=DVdgnGSpIo+am3iCcH8zcHK6iJ374tYs/x3qRTUJbhY=;
+ s=protonmail2; t=1715107619; x=1715366819;
+ bh=QlqxeIq51f4uUs/maV3L90NjheInaPoB/sx8o/8mQ4g=;
  h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
  Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=E4S2nTVj6Igtg/LaR78+3hdFnMl3p6dZPSc+gfx7B4cbnFfMZLE4KrlEUCuzo4O3S
- K0MHzOyS1ySU5GIHjGNg0WaO3aNo3UHRUmJgB+AupkrqBeYinRxueinw1IDCC2kGPQ
- kNnPtA6Bt38f4Ch3PV8doHY4Sb+f/srcz7ITkj52E7b3JS9OgatYQke6iRYMz/l759
- 24ysiMMGqHDgt6IaogpMg2mOfrik1Ox4aRUUe2RU8CnuIUoBe68PRehYvBaXMSxbYZ
- h4+VDTzlqyiIvANMsdIKiAVlEq7/QMcymCBZos6EBLVFaVO0Idizk6zAkCbu/N3V9L
- OFAnZFLHuwm+w==
-Date: Tue, 07 May 2024 18:41:23 +0000
-To: Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
+ b=kHXtW5wIoTk8egqaXdgTct4tPxmb1CLY4NZwOIVObqDq88dyDG17swpoPmCWWIbM2
+ tTTaqqAm8DP2AdhuFcI/ePfFN7ZyLZSwAGUYV53pqrRcU5TBCtXNus0y0BtO7N9ZrR
+ HwQl8CluKMaiAdZLUnuJULypfF6hBzCnwafKYS3x2IsUWpQf6kjrqOiimxkNfZ2zCi
+ ye7Qap+aktTLZdgmoGPLbkTT+AkRFJManIqZ0r5pzx8n7nuTGvvqetDY7ts7Uw4RmF
+ 69eB6tvfn1Fcd23w4gLhSdtpr12bcVuLEY0bOxo0JkjE7KpoZ9OIUDaXV3GO68rwfa
+ yWhifVWx2TDVw==
+Date: Tue, 07 May 2024 18:46:54 +0000
+To: Caleb Connolly <caleb.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Tom Rini <trini@konsulko.com>
 From: Sam Day <me@samcday.com>
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, Sam Day <me@samcday.com>
-Subject: [PATCH] mach-snapdragon: do carveouts for qcs404 only
-Message-ID: <20240507-qcs404-carveout-only-v1-1-93d06884b862@samcday.com>
+Subject: [PATCH] qcom_defconfig: enable msm8916 and msm8996
+Message-ID: <20240507-qcom-defconfig-msm8916-v1-1-6d6914bfc00f@samcday.com>
 Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: cd9e94e31d640f25447f020596271e11ac77cf82
+X-Pm-Message-ID: c68eb679ca26e70e7c5dc2ceb90c5081620df527
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -63,54 +64,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The newly introduced carve_out_reserved_memory causes issues when
-U-Boot is chained from the lk2nd bootloader. lk2nd provides a
-simple-framebuffer device and marks the framebuffer region as no-map in
-the supplied /reserved-memory. Consequently, the simple_video driver
-triggers a page fault when it tries to write to this region.
+From: Caleb Connolly <caleb.connolly@linaro.org>
 
-As per Caleb's advice, this simple patch only does the carveouts for the
-qcs404 SoC for which it was originally designed. The intent is to do the
-carveouts for more Qualcomm SoCs in future.
+Enable the clock/pinctrl drivers for these two SoCs. Previously left out
+due to only being used on the db410c and db820c respectively which both
+have their own board code. We can still boot these with most features
+working without that board code.
 
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
-I'm not sure if it's feasible to get this in for the 2024.07 release,
-but it'd be great if we could - it's the only thing that breaks U-Boot
-master on msm8916 devices that chain from lk2nd.
+I nabbed this commit from one of Caleb's work trees. Along with the
+carveout patch I just sent, this gets U-Boot to successfully boot when
+chained from lk2nd on msm8916 devices supported by that bootloader.
+
+A similar plea on this patch as with the "mach-snapdragon: do carveouts
+for qcs404 only" patch: if we could scrape these changes into the
+2024.07 release that would be positively sublime.
 
 Signed-off-by: Sam Day <me@samcday.com>
 ---
- arch/arm/mach-snapdragon/board.c | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
+ configs/qcom_defconfig | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/bo=
-ard.c
-index 3d5994c878..b439a19ec7 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -467,10 +467,12 @@ void enable_caches(void)
- =09gd->arch.tlb_addr =3D tlb_addr;
- =09gd->arch.tlb_size =3D tlb_size;
-=20
--=09carveout_start =3D get_timer(0);
--=09/* Takes ~20-50ms on SDM845 */
--=09carve_out_reserved_memory();
--=09debug("carveout time: %lums\n", get_timer(carveout_start));
--
-+=09/* We do the carveouts only for QCS404, for now. */
-+=09if (fdt_node_check_compatible(gd->fdt_blob, 0, "qcom,qcs404") =3D=3D 0)=
- {
-+=09=09carveout_start =3D get_timer(0);
-+=09=09/* Takes ~20-50ms on SDM845 */
-+=09=09carve_out_reserved_memory();
-+=09=09debug("carveout time: %lums\n", get_timer(carveout_start));
-+=09}
- =09dcache_enable();
- }
+diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+index 80ad3b32e1..c438aeef8e 100644
+--- a/configs/qcom_defconfig
++++ b/configs/qcom_defconfig
+@@ -37,6 +37,8 @@ CONFIG_OF_LIVE=3Dy
+ CONFIG_OF_BOARD_SETUP=3Dy
+ CONFIG_BUTTON_QCOM_PMIC=3Dy
+ CONFIG_CLK=3Dy
++CONFIG_CLK_QCOM_APQ8016=3Dy
++CONFIG_CLK_QCOM_APQ8096=3Dy
+ CONFIG_CLK_QCOM_QCM2290=3Dy
+ CONFIG_CLK_QCOM_QCS404=3Dy
+ CONFIG_CLK_QCOM_SDM845=3Dy
+@@ -73,6 +75,8 @@ CONFIG_PHY_QCOM_QUSB2=3Dy
+ CONFIG_PHY_QCOM_USB_SNPS_FEMTO_V2=3Dy
+ CONFIG_PHY_QCOM_SNPS_EUSB2=3Dy
+ CONFIG_PINCTRL=3Dy
++CONFIG_PINCTRL_QCOM_APQ8016=3Dy
++CONFIG_PINCTRL_QCOM_APQ8096=3Dy
+ CONFIG_PINCTRL_QCOM_QCM2290=3Dy
+ CONFIG_PINCTRL_QCOM_QCS404=3Dy
+ CONFIG_PINCTRL_QCOM_SDM845=3Dy
 
 ---
 base-commit: 1c40dda60f5f7e83a6d6f541cf5a57eb7e8ec43c
-change-id: 20240507-qcs404-carveout-only-7a15bbf3fd89
+change-id: 20240507-qcom-defconfig-msm8916-61c8437a0b2e
 
 Best regards,
 --=20
