@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 182B6C10F1A
-	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 21:24:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A0F9C10F1A
+	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 21:24:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B521883BA;
-	Tue,  7 May 2024 23:24:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C9832883D2;
+	Tue,  7 May 2024 23:24:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SYVeXxCg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MIy4YbQv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE17487FA0; Tue,  7 May 2024 23:24:03 +0200 (CEST)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
+ id CCB00883C8; Tue,  7 May 2024 23:24:12 +0200 (CEST)
+Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
+ [IPv6:2607:f8b0:4864:20::72a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FD13883BA
- for <u-boot@lists.denx.de>; Tue,  7 May 2024 23:24:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4AC83883DE
+ for <u-boot@lists.denx.de>; Tue,  7 May 2024 23:24:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-78f05341128so265178685a.0
- for <u-boot@lists.denx.de>; Tue, 07 May 2024 14:24:01 -0700 (PDT)
+Received: by mail-qk1-x72a.google.com with SMTP id
+ af79cd13be357-7928ec5308cso17369085a.1
+ for <u-boot@lists.denx.de>; Tue, 07 May 2024 14:24:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715117040; x=1715721840; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1715117049; x=1715721849; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Ud9IH38VZyiHZ+eQ8PczoBzbJA6FcMS5eoEW5KpyhsY=;
- b=SYVeXxCgcXB6ngPwiYkypzKPeiaj4hS59NiKfeOud0FovFz1KoQV8Ol2wVQauoDCrP
- 88wvQyrer4sAe/BZEy0Fr2PZMH/zZtPPg5OGGy1nqir3ss+Aq3lJ8dzC83Lu73bULEa9
- fZhyHkl22wYM/fL67WLx/u6MjsIp11kiQIATk=
+ bh=PSaX6sz1cbTirOmyVuHGoDr5PFf5+Z4gd8BYApEj9rI=;
+ b=MIy4YbQvQq3hDwbYIKl3fSYR4UgPvdRprZXDDJoHuo8AtXcmNzDLA3b6jLBkjlt0jC
+ SPaaOw59nBY2ciKEp9Rl7zF4oFRNzN8RGpBTYjQt4gOR1vx5Xpvoa46v4ucfum4IJ0ze
+ LnkFNoOIqdemCnta0Msd3NT7Q44bmkEHHVHLQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715117040; x=1715721840;
+ d=1e100.net; s=20230601; t=1715117049; x=1715721849;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ud9IH38VZyiHZ+eQ8PczoBzbJA6FcMS5eoEW5KpyhsY=;
- b=DJ+HpwlwOBlbKsuBnvXS4ossZmg3m5d82+BjKqhr/SQME8VryBXSsvJbykHONB2UqT
- YKCnjFPq8+wD/yv2lpywAzrj2nz2z6sM/ICPxdBmQ2Eqoh/59W7rzD7TzazfTawrCMyE
- 2rZq/uoMYGIcUrNHOxZ8NVG1x3+tnFQn6Xk5xPyNv0ikc52AfzsowIJvxTpKOejxNjCe
- CSa6LzZJAm1UOZav7dtd2ZmI2ZXOM/as9exEr17lGRmkBFfGLkxK0Sk+5JiUUdKsbXGQ
- FbQyNnWWbtwaNyLOXozM25Y9H4xW7jclYMjjTt488OzmyVCWrvntWQY77PyA4k5XcdOW
- tZRA==
-X-Gm-Message-State: AOJu0YyD0z/oQvwyrsyHLJ8EeFd2oNxoruKiIf5sfjSUm2cxph4yJ6O9
- hLtVHxM6Wx3KhWlrSEjzGI6XkwMqLULtt0r96CRZ/y0LQSLkUC/T73KDTkrlgrE=
-X-Google-Smtp-Source: AGHT+IGajlYa9RUhqL7xpJ+GJrOGZu+TjgSwD1VgMevcxEK7qX9rNh+XYDCBDSl4sToBpbrhyk0ogQ==
-X-Received: by 2002:a05:620a:f8b:b0:792:928c:d4e9 with SMTP id
- af79cd13be357-792b275c0aamr77909885a.7.1715117040335; 
- Tue, 07 May 2024 14:24:00 -0700 (PDT)
+ bh=PSaX6sz1cbTirOmyVuHGoDr5PFf5+Z4gd8BYApEj9rI=;
+ b=VHiBWNN+eNkKZAsssA94QyDfk1XU6fzZd5NNTTaV++cOxgH2xYFZ3kOdvJjmUI5TkF
+ lhtoqDYffOmAvjJ72yS0oFDqTvWNgl7dXnVeQ55A3W5DQwEcbkvpbMK6yyJQQ9yajn+7
+ XQ6Qk8akdWaHOKkSbA/fT7q0Edjq4489TkWhsovhzBAH7cWmPwyHrvWnewW/42A91Daj
+ 1FVb2ZppjNWhjmMefEO1awdww3xU1+XaeW7BKNfguao3BY+pe7SfD5p/vZNuAUVgUAkr
+ lkj+Su0fStB3KaXwOWeN+B61YoqJ0YgtqO+FLNPtHynTSjAi+Myrq6XmkSTYIFzOHS6k
+ spfQ==
+X-Gm-Message-State: AOJu0Yw7ec5SWCfpnUVfgwKa+GDJNmVMGjSw2VF0w5sjZWuN2AG8gwzP
+ 6kCfraHh6eUmEI9Sj5wQWcizy4XHgvx1rtNuqM6Dk/XKAg/rSQuctCnyrHK9V48=
+X-Google-Smtp-Source: AGHT+IETuWrWphmMZLrcwHfjlmDxLpAvnr1k70Mcbma+mqzCo+++LriOdWZ0YTz4VmzKyGj9zCuvIQ==
+X-Received: by 2002:a05:6214:76b:b0:6a0:ea1e:833d with SMTP id
+ 6a1803df08f44-6a1514ce653mr19449806d6.27.1715117049187; 
+ Tue, 07 May 2024 14:24:09 -0700 (PDT)
 Received: from bill-the-cat ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- q21-20020ae9e415000000b007929d34177esm2000775qkc.79.2024.05.07.14.23.57
+ f14-20020a0cf7ce000000b006a0e5626f67sm4982261qvo.50.2024.05.07.14.24.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 May 2024 14:23:59 -0700 (PDT)
-Date: Tue, 7 May 2024 15:23:55 -0600
+ Tue, 07 May 2024 14:24:08 -0700 (PDT)
+Date: Tue, 7 May 2024 15:24:04 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Raymond Mao <raymond.mao@linaro.org>
 Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -69,30 +69,30 @@ Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Leo Yu-Chi Liang <ycliang@andestech.com>,
  Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>, Andrew Davis <afd@ti.com>,
+ Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
  Christophe Leroy <christophe.leroy@csgroup.eu>,
- Sumit Garg <sumit.garg@linaro.org>,
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
- "Leon M. Busch-George" <leon@georgemail.eu>,
+ Andrew Davis <afd@ti.com>, Jesse Taube <mr.bossman075@gmail.com>,
+ Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
  Ralph Siemsen <ralph.siemsen@linaro.org>,
- Sergei Antonov <saproj@gmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilya Lukin <4.shket@gmail.com>, Bin Meng <bmeng@tinylab.org>,
+ Ilya Lukin <4.shket@gmail.com>, Sergei Antonov <saproj@gmail.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Alexander Gendin <agendin@matrox.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
  Eddie James <eajames@linux.ibm.com>,
  Masahisa Kojima <kojima.masahisa@socionext.com>
-Subject: Re: [PATCH v2 05/28] image: remove redundant hash includes
-Message-ID: <20240507212355.GA2568172@bill-the-cat>
+Subject: Re: [PATCH v2 06/28] efi_loader: remove redundant hash includes
+Message-ID: <20240507212404.GB2568172@bill-the-cat>
 References: <20240507175132.1456512-1-raymond.mao@linaro.org>
- <20240507175132.1456512-6-raymond.mao@linaro.org>
+ <20240507175132.1456512-7-raymond.mao@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="vsBsZd2Nz+KqlB+f"
+ protocol="application/pgp-signature"; boundary="OLGiB7M6fizLoCuc"
 Content-Disposition: inline
-In-Reply-To: <20240507175132.1456512-6-raymond.mao@linaro.org>
+In-Reply-To: <20240507175132.1456512-7-raymond.mao@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,15 +111,15 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---vsBsZd2Nz+KqlB+f
+--OLGiB7M6fizLoCuc
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, May 07, 2024 at 10:50:47AM -0700, Raymond Mao wrote:
+On Tue, May 07, 2024 at 10:50:48AM -0700, Raymond Mao wrote:
 
-> Remove the redundant includes of u-boot/md5.h, u-boot/sha1.h,
-> u-boot/sha256.h and u-boot/sha512.h
+> Remove the redundant includes of u-boot/sha1.h, u-boot/sha256.h
+> and u-boot/sha512.h
 >=20
 > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 
@@ -128,22 +128,22 @@ Reviewed-by: Tom Rini <trini@konsulko.com>
 --=20
 Tom
 
---vsBsZd2Nz+KqlB+f
+--OLGiB7M6fizLoCuc
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY6m+sACgkQFHw5/5Y0
-tyx6jwv/d00tKmWbbSuITnfqzH3NWpvt0TAGMXu3VPS9d7gv6ZXnCl14U8DKdhea
-tIHK6oO+7sdjoBRkrMK2HmOXp5E78WM1QpsemxIZIbn2oab5TR3cZUsW3/VqcGPG
-QgBPgrIdjji+v9rAjuhOaD9JaHFc2/it1emMupiJfm7rq6Vjyfg1ZGep5uAzmCaO
-oKaa9RlO+bd+IOHy32AlDS3iSSRzdfLAI+Bm4y/CfRiO8RANKy+dc/r6AtZBAtNP
-eR83loJfac/laIuQyNZQCnjp7zL5igmLHVyS0PZ9DrDIaDioVdRp2HnZQEzD7/wA
-U6HPFWUJRmcLIZDrrk1RskF9kD1l5d9SBP55tooG8HIE5zvDy5uD9xMoeoWscMpc
-OERYWXgL9D3vUmbasDC96ooGFxnDqrdI+J1Vl9SXdNpTx63v+u3EHaMUT7LcILio
-LZfiwcnd9JI8lipvBxAhLWV2WbAxLOErk7MGmdxNW2ZpyVCBzURvF8O+ca3xFNdo
-kxQoc4pS
-=fK4D
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY6m/QACgkQFHw5/5Y0
+tywsWgv/WyAffQ7fRa6zCk6S7iX1GP1raKCOQaUn7MCqopxO/iHoSdtkhFizgpYl
+fYKFREtJqVHo30EYxDGHOra9V07XRLGwd6Lu3iQZ8DPTSJwm1pcewS5cn3OF5bv/
+5Dkoa6crl0QPDbonrASkjHwsWs4DTxQoqUaIezkoL0KFPZanUhLqlgYLbHu8uIGf
+M/ItpPV2jIOVik6eQIK/OokHk4Arah68Nc3X4/w/V6iEmaY0HJqn37v0XT8wf5M+
+rIUHr3gClXtW8Q2J7Xfk5x8S36tCNAtnnz2AkrCYkMW96iz6ClBFQ/7cVXI7s3Hd
+PhSBv/CfrimMIAlH/3U1OIsW+oOvtrbe5L/H/6OWMlJzdUwh4fSM92UOvk0qxEKs
+25fROMHYlhTNztGtCoM9uuobhk60xgkCWBMGI89kP9dmwWKBwsLwT1S9Qxx5x4XU
+Bw/jESmHE7GOd8/+1zSehbwnq7wwHAVz9Ns79+1BeTqJ2f+kaakjyrRk+pyKZn+Y
+0Yg3tq6i
+=wc8U
 -----END PGP SIGNATURE-----
 
---vsBsZd2Nz+KqlB+f--
+--OLGiB7M6fizLoCuc--
