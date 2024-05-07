@@ -4,62 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73A78C25B4F
-	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 07:41:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA517C10F1A
+	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 08:14:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A68288747;
-	Tue,  7 May 2024 09:41:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id EB0E188662;
+	Tue,  7 May 2024 10:14:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="DgeU+rr7";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="ybGkFdiC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B9858872B; Tue,  7 May 2024 09:41:43 +0200 (CEST)
-Received: from mail-m127172.xmail.ntesmail.com
- (mail-m127172.xmail.ntesmail.com [115.236.127.172])
+ id 2B72288720; Tue,  7 May 2024 10:14:37 +0200 (CEST)
+Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 379AC8874D
- for <u-boot@lists.denx.de>; Tue,  7 May 2024 09:41:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 8D195885F7
+ for <u-boot@lists.denx.de>; Tue,  7 May 2024 10:14:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=DgeU+rr7bc2sn88QcdFfhmmb4Y5dnGk/EIEeIzbguX5QEkuMa2W7Ova2oVFLsYmEar7lSIQyCDnQzHll67DkYmcEq2tedn254yvouSNOi4btuV38ER75wYQGjfT/CtTeFhLse9LmsVujDd2CHZp8jadNyMtJ/fZgaxJm6mx2S6E=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=Nfz+7NBrJcIeXsjnKVhfM4FSnIqt++VcfpMqm2/EzCc=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id F2D2D900347;
- Tue,  7 May 2024 15:41:26 +0800 (CST)
-Message-ID: <79be36d1-dc84-4fca-a811-2170739a0393@rock-chips.com>
-Date: Tue, 7 May 2024 15:41:26 +0800
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id 969DF1F9D7;
+ Tue,  7 May 2024 10:14:32 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1715069672;
+ bh=0eKzgTftRF3yb4I2bLw19bOB0f5axptapJsuMjZ8Gas=; h=From:To:Subject;
+ b=ybGkFdiC5t6QZ/i9gFTausTAfVIvRckpQyFs44qq5Ow16sqq5EopchxnljG/yhqBJ
+ mB/2JTQBy6y1liy1y4il6aclOeBzRP/Bj34Tk72lyu0LdKu/nhSrJktRA7d7EQoRC2
+ v7Epfg4/m/SiNXdqQR2I/sfTOx/oqnKX3asK9qd565y/YMBgenGOWmeCxpWYDDie6G
+ s44IJ6k0feujECgJYKEsNKrnVEKa9vyIskwTLyF9idox6uci6m1ps46sdkLGVaaTWX
+ +Ignd25+zm9iiJ1nFFp/Qg79nYqShqyQEBM8Ofj4j/5LIgaxcsYxZdmzG4r3RGR7Yb
+ y0688+PQ5/nkg==
+Date: Tue, 7 May 2024 10:14:28 +0200
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Martyn Welch <martyn.welch@collabora.com>
+Cc: Dave Gerlach <d-gerlach@ti.com>, Tom Rini <trini@konsulko.com>,
+ Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
+ Sjoerd Simons <sjoerd@collabora.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v5 4/6] configs: am62x_evm_*: Enable USB and DFU support
+Message-ID: <20240507081428.GA17112@francesco-nb>
+References: <20240506143846.1252377-1-martyn.welch@collabora.com>
+ <20240506143846.1252377-5-martyn.welch@collabora.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 060/149] board: firefly: Remove <common.h> and add needed
- includes
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Andy Yan <andy.yan@rock-chips.com>,
- Levin Du <djw@t-chip.com.cn>, Suniel Mahesh <sunil@amarulasolutions.com>
-References: <20240501024316.1767971-1-trini@konsulko.com>
- <20240501024316.1767971-60-trini@konsulko.com>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240501024316.1767971-60-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUpOHlYdTEgdTRhCShpCQ0NVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
- kG
-X-HM-Tid: 0a8f520011af03a9kunmf2d2d900347
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Oi46Igw5QzNLPgs0FQMDITcI
- HTcKCjhVSlVKTEpOS01MTUNMTEtIVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFITkxCNwY+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240506143846.1252377-5-martyn.welch@collabora.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,62 +69,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello Martyn,
+first thanks for your series, with this we might be able to drop some
+downstream branch.
 
-On 2024/5/1 10:41, Tom Rini wrote:
-> Remove <common.h> from this board vendor directory and when needed
-> add missing include files directly.
->
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+On Mon, May 06, 2024 at 03:38:44PM +0100, Martyn Welch wrote:
+> From: Sjoerd Simons <sjoerd@collabora.com>
+> 
+> Provide config fragments to enable USB host as well as USB gadget and DFU
+> support for a53 and r5. This relevant fragment is included into the
+> am62x EVM a53 defconfig. For the r5, due to the smaller available size,
+> the config fragment also disables support for persistent storage to free
+> up space for USB support. This fragment needs to be included is DFU
+> booting is desired.
+> 
+> The CONFIG_DFU_SF option is placed in the defconfig rather than the
+> fragment as this is known not to be supported on all boards that can
+> support DFU.
+> 
+> Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
+> Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
 
-Thanks,
-- Kever
-> ---
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
-> Cc: Kever Yang <kever.yang@rock-chips.com>
-> Cc: Andy Yan <andy.yan@rock-chips.com>
-> Cc: Levin Du <djw@t-chip.com.cn>
-> Cc: Suniel Mahesh <sunil@amarulasolutions.com>
-> ---
->   board/firefly/firefly-rk3288/firefly-rk3288.c | 1 -
->   board/firefly/firefly-rk3308/roc_cc_rk3308.c  | 1 -
->   board/firefly/roc-pc-rk3399/roc-pc-rk3399.c   | 1 -
->   3 files changed, 3 deletions(-)
->
-> diff --git a/board/firefly/firefly-rk3288/firefly-rk3288.c b/board/firefly/firefly-rk3288/firefly-rk3288.c
-> index 95d8b00924d8..8e67ab4b1327 100644
-> --- a/board/firefly/firefly-rk3288/firefly-rk3288.c
-> +++ b/board/firefly/firefly-rk3288/firefly-rk3288.c
-> @@ -3,7 +3,6 @@
->    * (C) Copyright 2015 Google, Inc
->    */
->   
-> -#include <common.h>
->   #include <hang.h>
->   #include <led.h>
->   #include <log.h>
-> diff --git a/board/firefly/firefly-rk3308/roc_cc_rk3308.c b/board/firefly/firefly-rk3308/roc_cc_rk3308.c
-> index af00250e118d..404bdc632bbc 100644
-> --- a/board/firefly/firefly-rk3308/roc_cc_rk3308.c
-> +++ b/board/firefly/firefly-rk3308/roc_cc_rk3308.c
-> @@ -3,7 +3,6 @@
->    * (C) Copyright 2019 Rockchip Electronics Co., Ltd
->    */
->   
-> -#include <common.h>
->   #include <adc.h>
->   #include <asm/arch-rockchip/grf_rk3308.h>
->   #include <asm/arch-rockchip/hardware.h>
-> diff --git a/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c b/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c
-> index 590519b32af2..a149e4fe822e 100644
-> --- a/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c
-> +++ b/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c
-> @@ -3,7 +3,6 @@
->    * (C) Copyright 2016 Rockchip Electronics Co., Ltd
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <env.h>
->   #include <log.h>
+...
+
+> diff --git a/configs/am62x_r5_usbdfu.config b/configs/am62x_r5_usbdfu.config
+> new file mode 100644
+> index 0000000000..772bb2ab93
+> --- /dev/null
+> +++ b/configs/am62x_r5_usbdfu.config
+> @@ -0,0 +1,28 @@
+
+...
+
+> +CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
+> +CONFIG_USB_GADGET_VENDOR_NUM=0x0451
+> +CONFIG_USB_GADGET_PRODUCT_NUM=0x6165
+
+This is making this fragment TI _board_ specific, while the file name seems
+to imply that this is generic for the TI SoC. Other vendors, using TI
+SoCs, will likely want to use their own USB IDs.
+
+Not a big deal and no need to change it, we'll handle this in our own
+defconfig when we'll enable this, but I wanted to mention this.
+
+Francesco
+
