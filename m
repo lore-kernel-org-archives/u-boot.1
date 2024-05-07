@@ -4,79 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3356C25B75
-	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 13:26:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8785EC25B4F
+	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 14:03:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0930B88784;
-	Tue,  7 May 2024 15:26:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
+	by phobos.denx.de (Postfix) with ESMTP id AA7D488742;
+	Tue,  7 May 2024 16:02:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="OdfV+ycO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TE5kSGFQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0633886D1; Tue,  7 May 2024 15:26:34 +0200 (CEST)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
+ id 8444688743; Tue,  7 May 2024 16:02:58 +0200 (CEST)
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [IPv6:2607:f8b0:4864:20::730])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB5CE88778
- for <u-boot@lists.denx.de>; Tue,  7 May 2024 15:26:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5326388719
+ for <u-boot@lists.denx.de>; Tue,  7 May 2024 16:02:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-61df903aa05so34259727b3.3
- for <u-boot@lists.denx.de>; Tue, 07 May 2024 06:26:31 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x730.google.com with SMTP id
+ af79cd13be357-78f05e56cb3so235093085a.1
+ for <u-boot@lists.denx.de>; Tue, 07 May 2024 07:02:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1715088390; x=1715693190;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vcAlsYR+ZBX4KKujostuJc6RbWI9ZcTBUfszA8SFpYA=;
- b=OdfV+ycOyY+agLeOjbDBSF78P9WIVq4aOgLwXAyYqXjCH+Bk4VJdyrNnSRYDez/CDk
- JfweZ1uWAKfpKx6gy/O7iZ3NJWH2fURvpAkbGsyeVfZyrVbYc4+IWVrY3cNCebu6fTOy
- f9KNpy2SOW9lhxy0PnMpg3JEJG0+d/thhcVfJP9A3E/HHFGXHTePF12+Qtsi0BsBVEhI
- qc4yWrSDYDZOwuvcZR5GaIGxUu97K3gnZrB7zbIRpAGoFJkyq3EbkYbgTKHRH24p1epY
- rVq34MVJ/xc72EIYdVIJKL4EmOMY7166S0emZKotkE9K0VI4lwmN9tVh0XWcRXTEWx/I
- 2FdA==
+ d=konsulko.com; s=google; t=1715090575; x=1715695375; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=fFjAida9kmWpTDPtLXm06WN2aJDK9pDDO07PMGoUYbU=;
+ b=TE5kSGFQEc51QkRnnoRfdEI1tBKT2W/RvRD0wyW078GF2IXN4PUFfF2chAp8C+xAg4
+ lV+hVe/tX1yKtE28x9efyqZ0TXSO+kVAPYuzRXCUm8HfvUZUwDFweWbiia17OP4mv/6E
+ VHdVs1LLbE5+eRhGJjyB7bdhAP3lJNTpPiFt8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715088390; x=1715693190;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vcAlsYR+ZBX4KKujostuJc6RbWI9ZcTBUfszA8SFpYA=;
- b=vbml93O46BLF9XwlSIz2NJGa5CN0erwIxwzEJtZXtKl5b4s/KTdYOsWliCZNUv0V9o
- jjlmigV52Wz64EMqWqK6+2oamhfjFhS1oG7VTCYnZIaryfmpfYEBfJ+9lyj9TASXtik9
- 6DgjteoGLbMp0J75Yc+yEIXQNkB6p23Lbu0M4/u5tIp7Q5ApkCvVXFj7cg7KlkC479on
- s1oB1Zyiv8J8Xlzn556L1Hv0EecINzx92UhEQo/YOOY6TNOjudqqQgKXkxSpAH8Gkfth
- m2xQtD9m3GzEf5NgxMOr0O0x3F+FgwoZmQ+R2TZqmfJm+D78vnojUZgTN90i5m71EW/w
- gmqQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVEGVdNwtJc0F35Pfg3j0dd14zeaf8gL/UHZhqeSZUFFz/dJR6aIi3PqVk9tbJNyeh0IXm7e5CVkiZGfvVW9kvsrBqjHg==
-X-Gm-Message-State: AOJu0YzYgMF+VGhgjfk6G47So0U6KoJe5mqF1DQygwikzoPN9j+ZaGSI
- 78Y+1EoL5avdeomp3Zk5wBsfjprESHti5DPchGD2K7vm6fHFl0c4WXDPm/VvlCvjMFKwnqj8IWW
- IkOCIhN9XRNGe2Dip//EeWGpsBLKNpwubThFt
-X-Google-Smtp-Source: AGHT+IFvB2i7clbEc5r+eacaJjLGUMEZgcDT+TH9iryUI3dYU6+TH13t6uggIMcGb6xrCRWKU1Lh5eiUTClvM4N7Bvo=
-X-Received: by 2002:a81:af09:0:b0:615:800d:67b2 with SMTP id
- n9-20020a81af09000000b00615800d67b2mr13939511ywh.29.1715088389252; Tue, 07
- May 2024 06:26:29 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1715090575; x=1715695375;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=fFjAida9kmWpTDPtLXm06WN2aJDK9pDDO07PMGoUYbU=;
+ b=BqrToKvjMpbZpi7VkyImlPMNP3iYP0rN4OgH1Xl1nhBk9pr/pyaq91Vme0KVfs91Dz
+ 8PiG2MOtA+Zg2voltV3WPWcEZfC3waRi9DPuFI+OrIHNfhyk3M9ZTMtTH4mZQge7olY9
+ ncXAK/Mq1mePwpFOjPwgBznl5kV/O3dQwSP9yEcTkKnm29UKgZstyvhEmivoJzWqqJIt
+ QntTsDfzWHSJweCickdQAu3OKfKM6HME5jj0mjXWhGSpzcNXPwXepS7FHDWRGgCXLIqx
+ xrQpPr6q2hetfTKiwnvaa/GyRkdaxcW9hQUJLzdOp0ojpvd4T3ejGcY3+mYIrFNATWUC
+ iZHQ==
+X-Gm-Message-State: AOJu0YyfXW1Sh4+CS+cnRJgL4wTgbHR8EmfnGM1x4dI11xzjf1SeHRyB
+ 6XaBJ14f6RiO1EYqx1kImOxQclh5cxdURaFP94PCmvYZIEMl2fD3xoGAyYh04ZaqT3A9iCbKWqO
+ pPUg=
+X-Google-Smtp-Source: AGHT+IFYICn5dCsKY6kBCmmvsmbhpSW6rXIC7DvQlOVcWY9F6R3TKmeVCUmPy03kzaKiPmogGUqbXA==
+X-Received: by 2002:a05:622a:316:b0:43a:e9a6:47f0 with SMTP id
+ q22-20020a05622a031600b0043ae9a647f0mr17212633qtw.33.1715090575053; 
+ Tue, 07 May 2024 07:02:55 -0700 (PDT)
+Received: from [127.0.1.1] ([187.144.98.216]) by smtp.gmail.com with ESMTPSA id
+ ge16-20020a05622a5c9000b00437543e5307sm6460400qtb.40.2024.05.07.07.02.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 07 May 2024 07:02:54 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20240427141106.3406000-1-trini@konsulko.com>
+References: <20240427141106.3406000-1-trini@konsulko.com>
+Subject: Re: [PATCH 00/18] Remove <common.h> from a number of places
+Message-Id: <171509057423.3014396.4861316399292942473.b4-ty@konsulko.com>
+Date: Tue, 07 May 2024 08:02:54 -0600
 MIME-Version: 1.0
-References: <d08d45f50dcdfb70e22a27cf13a990bcc2c020fc.1714738132.git.love.kumar@amd.com>
- <20240503201842.GA2560583@bill-the-cat>
- <8df3d032-65bc-4bc9-a255-ba825847ea9d@amd.com>
- <20240507132001.GR2568172@bill-the-cat>
-In-Reply-To: <20240507132001.GR2568172@bill-the-cat>
-From: Michal Simek <monstr@monstr.eu>
-Date: Tue, 7 May 2024 15:26:18 +0200
-Message-ID: <CAHTX3dJ3ZyUs4r4POKG7m0Ud6hCLW4bH9rwTFW1oABdtYL3qLg@mail.gmail.com>
-Subject: Re: [PATCH v4] test/py: net_boot: Add test cases for net boot
-To: Tom Rini <trini@konsulko.com>
-Cc: Love Kumar <love.kumar@amd.com>, u-boot@lists.denx.de, michal.simek@amd.com,
- git@xilinx.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,104 +87,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Sat, 27 Apr 2024 08:10:48 -0600, Tom Rini wrote:
 
-=C3=BAt 7. 5. 2024 v 15:20 odes=C3=ADlatel Tom Rini <trini@konsulko.com> na=
-psal:
+> Hey all,
+> 
+> This series is the next step in winding down usage of <common.h> in
+> order to be able to then remove it. This covers not quite 25% of the
+> remaining users of the file. Of what is left, it's either arch/arm/,
+> board/ or drivers/ code. I am likely to start tackling arch/arm/ next,
+> and depending on how exactly I break that down I may try and cover some
+> board/ code as well (for example, tackle arch/arm/mach-omap/ and
+> arch/arm/mach-k3 and board/ti/ (and then the other vendors too..) in one
+> commit.
+> 
+> [...]
 
-> On Tue, May 07, 2024 at 11:22:45AM +0530, Love Kumar wrote:
-> >
-> >
-> > On 04/05/24 1:48 am, Tom Rini wrote:
-> > > On Fri, May 03, 2024 at 05:39:46PM +0530, Love Kumar wrote:
-> > >
-> > > > Add tests for booting image using tftpboot/pxe boot commands,
-> tftpboot
-> > > > boot case loads the FIT image into DDR and boots using bootm comman=
-d
-> > > > whereas pxe boot cases downloads the pxe configuration file from th=
-e
-> > > > TFTP server and interprets it to boot the images mentioned in the p=
-xe
-> > > > configurations file.
-> > > > This test relies on boardenv_* containing configuration values
-> including
-> > > > the parameter 'pattern'. tftpboot/pxe boot cases boots the Linux
-> till the
-> > > > boot log pattern value is matched. For example, if the parameter
-> > > > 'pattern' is defined as 'login:', it will boot till login prompt.
-> > > >
-> > > > Signed-off-by: Love Kumar <love.kumar@amd.com>
-> > >
-> > > I'm not quite sure where the problem is, next. After enabling FIT ima=
-ge
-> > > support in my build so I can use the image I have on hand:
-> > > U-Boot> tftpboot 200000 v6.6/image.fit.nocomp
-> > > Waiting for Ethernet connection... done.
-> > > Using smsc95xx_eth device
-> > > TFTP from server 192.168.1.10; our IP address is 192.168.1.100
-> > > Filename 'v6.6/image.fit.nocomp'.
-> > > Load address: 0x200000
-> > > Loading: ##################################################  82 MiB
-> > >           3.2 MiB/s
-> > > done
-> > > Bytes transferred =3D 85984256 (5200400 hex)
-> > > U-Boot> U-Boot> crc32 200000 $filesize
-> > > CRC32 for 00200000 ... 054003ff =3D=3D> 754c839a
-> > > U-Boot> U-Boot> bootm 200000
-> > > ## Loading kernel from FIT Image at 00200000 ...
-> > > Could not find configuration node
-> > > ERROR -2: can't get kernel image!
-> > > U-Boot>
-> > >
-> > > And in u_boot_boardenv_rpi_arm64.py:
-> > > env__tftp_boot_test_skip =3D False
-> > >
-> > > env__net_tftp_bootable_file =3D {
-> > >      'fn': 'v6.6/image.fit.nocomp',
-> > >      'addr': 0x00200000,
-> > >      'size': 85984256,
-> > >      'crc32': '754c839a',
-> > >      'pattern': 'Linux',
-> > >      'config': 'conf-852',
-> > > }
-> > >
-> > > But it's not trying to boot conf-852 but instead just passing the
-> > > address. This image lacks a default config, which your example has an=
-d
-> I
-> > > think is why the tests work in your case.
-> > >
-> >
-> > Hi,
-> >
-> > Yes, this case expects to have some default config in fit image as it
-> uses
-> > 'bootm <addr>' command to boot, below change in fit image should work.
-> >
-> > configurations {
-> >     default =3D "conf-852";
-> >
-> > test_net_tftpboot_boot_config - This case will boot from the given
-> config:
-> > 'bootm 200000#conf-852'
->
-> I wasn't clear, sorry. The problem is that since we define the config to
-> use, which is good, we need to then use it. I intentionally have a FIT
-> image that supports every aarch64 platform and I'd rather use it for
-> every platform and not a per-platform FIT image.
->
+Applied to u-boot/next, thanks!
 
-What about putting those two tests together? I mean if config is not
-defined used default configuration,
-if config is defined use it.
+-- 
+Tom
 
-Thanks,
-Michal
 
---=20
-Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
-w: www.monstr.eu p: +42-0-721842854
-Maintainer of Linux kernel - Xilinx Microblaze
-Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP ARM64 SoCs
-U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal SoCs
