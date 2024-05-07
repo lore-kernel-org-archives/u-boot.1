@@ -4,73 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39530C10F1A
-	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 14:30:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65811C10F1A
+	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 14:33:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AFAAA88719;
-	Tue,  7 May 2024 16:30:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A147188789;
+	Tue,  7 May 2024 16:33:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BKSasrqI";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kwy1hs5J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EE0E88723; Tue,  7 May 2024 16:30:32 +0200 (CEST)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 82EE388785; Tue,  7 May 2024 16:33:25 +0200 (CEST)
+Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
+ [IPv6:2607:f8b0:4864:20::831])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06080886EB
- for <u-boot@lists.denx.de>; Tue,  7 May 2024 16:30:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 648B188790
+ for <u-boot@lists.denx.de>; Tue,  7 May 2024 16:33:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-34de22deac9so258888f8f.0
- for <u-boot@lists.denx.de>; Tue, 07 May 2024 07:30:29 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x831.google.com with SMTP id
+ d75a77b69052e-43d2277d7e1so12125991cf.1
+ for <u-boot@lists.denx.de>; Tue, 07 May 2024 07:33:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1715092229; x=1715697029; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ayhUEHczI5vMOLOvi9REtaPfbU76QKlQH4QsvfmA3lc=;
- b=BKSasrqIKN0ax3QUG1KzYRlZf6hxHCfxj3gAVfiFDfGAi4OMfQY869ErlcPQh+CrdR
- Zxr9QhK0QDD9FOSxBP3lTsBUkja4+yFBA8wHTpf0lu+iylhUjBCiG2KkMWn2oGz60Tpx
- FFaHUrGN4qNo1btE3wP3ywciKZSRBsodTR/UpzK5s8n00BX0Z57agr0uaVE5gFvt2bxj
- Dvz/2fTsFqlJ6JdikwZVo5KRt3EhmJckMNOGefjgxjcN+9nAtv+8f540LHn/QYOKbdw4
- XHR800x6ISzgckhY9hueKUiblQnNKhNs6es6LnOfGGdfvqyyT75IVJNbF+avaxlzuv5O
- fK6Q==
+ d=konsulko.com; s=google; t=1715092400; x=1715697200; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=4K2b83Z/r9vVtptf4Xwb1q5aIJpjHcngOFBBSbYab0M=;
+ b=kwy1hs5JhA45hGtSP12Niz7qHUYBjFupw/4PnDKHIQ3UYB+RMI4KnmMeQKZGMHgJPM
+ jndktVVIn/AmI5OvtVgJn73gkqauj4GPF36v+3ej6xm0EdzfgrlVErp6aYG6kz5wifJa
+ cx5d3Hs95xNQhhJlumAcAOBiSfUJVWDvN9gYY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715092229; x=1715697029;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ayhUEHczI5vMOLOvi9REtaPfbU76QKlQH4QsvfmA3lc=;
- b=oX99Q/DdYtopX6pFCDCbSGZ/9WYbYzU1mkU5UBimTH56Cemt60W9mxmmSR5gT6Gfki
- l7PA/fYxLt0F842tBy0o+Nair5fdhczAFye31/1N8ACdnxo5acooUGNCFVG72eiEQ8pY
- nq9uIBmvplhCUvwUXsfEhpQMYkXFpGgISjOvP/4mnLhiVSgM0lQt4nOK7j4aeVwMJWtG
- 9Q/sFxMAh9hR7D6AsjrBquUbvNd37LKYEJ1lbIvKLtpM3TiWSXUA5VzxRmPTF4/xqh5Q
- C1BTkvQha0joVRL1JvevVooUleHNPolzFQVLDpxTj75hWua/FWg9yU+J1Q8wFVDS0yYD
- e2bg==
-X-Gm-Message-State: AOJu0YwCTT/oMe/WFwFhArlCbFi6GugiuUhRkgtDQxfWzDzVd458RB8c
- yKYg/87lbyjjXyRV3RuEUlWSqKsOZJ5QrotGMozFWHDy5lbL570N34IfiExgG3RUnc4trm2I9E9
- ssCxP/Oa2yT2fcGxs01ATRFUEzK0/rcMnKfIvYA==
-X-Google-Smtp-Source: AGHT+IEM9I5Bs0HqOPb9XN3l5pi+Ej4JkCyZsAGAEkuydhlDYqV2XtbhcYbyKvwTJxJz7t3/cTpA5F6qI/S53OinHrs=
-X-Received: by 2002:a5d:63d1:0:b0:34c:f989:dc25 with SMTP id
- c17-20020a5d63d1000000b0034cf989dc25mr8425615wrw.6.1715092229044; Tue, 07 May
- 2024 07:30:29 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1715092400; x=1715697200;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=4K2b83Z/r9vVtptf4Xwb1q5aIJpjHcngOFBBSbYab0M=;
+ b=w9Nq2CGdwzjFXWUDilNrVaFV7LhWWrjketXoYIg4IZJncKOUh4UGCy8a9rkdkrZKZ5
+ Atx3dds0pVH3swU8LmVwUdIqmEusguFS5IDR+H3kumCurzNvkyolTFg8yHkzpXsyDoT9
+ /5xczGldcG7hdRsbHvHxmOP1xFBoB6Ia2CaZcsJWRXCbw7im6emIcHV61speyFV+/1yu
+ FQlfqFdqyL8zTWuOqBRnzSXWgoYdN2XUvoYa7s+ngxjN0h3AtrGYzDcosQtZF0xFP32f
+ NuBRiKMUEMCVvZmUrfhLI7BqLWw7Hstjlv9ORgHyvzdKiPhso5hCv84k14VpSIvYzWqG
+ LnYg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV+17I3UK1fC4HB/A/ZC0zTufm6ruYvRYTeEVkC7lwAvZH8M+sDf+S2CdyJy+XaamIP8op3kfSghZhne4BAWF0j77ESHg==
+X-Gm-Message-State: AOJu0YyCnQMfhyw/z5Nk5EyhzDztiF//Pm6X9dsTFVXPlMqQFcx7X4cy
+ Wv/56zkpaykuz6wMZy6WYHVldKW2ej8A18XvOq2BUHcXuP3c/ILlnZFOV6AN9sQ=
+X-Google-Smtp-Source: AGHT+IEYt47kjWzMS0N17uefFvlXk7FXnTUStbtq+GMiGdOWphoEOs+Pi0x24LdV8bqZlq8qiPz9WQ==
+X-Received: by 2002:a05:622a:491:b0:43a:b531:5e6f with SMTP id
+ p17-20020a05622a049100b0043ab5315e6fmr17598545qtx.62.1715092400233; 
+ Tue, 07 May 2024 07:33:20 -0700 (PDT)
+Received: from bill-the-cat ([187.144.98.216])
+ by smtp.gmail.com with ESMTPSA id
+ br11-20020a05622a1e0b00b0043cd877f828sm5805137qtb.45.2024.05.07.07.33.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 07 May 2024 07:33:19 -0700 (PDT)
+Date: Tue, 7 May 2024 08:33:15 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Francesco Dolcini <francesco@dolcini.it>
+Cc: Martyn Welch <martyn.welch@collabora.com>,
+ Dave Gerlach <d-gerlach@ti.com>, Nishanth Menon <nm@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>,
+ Sjoerd Simons <sjoerd@collabora.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v5 4/6] configs: am62x_evm_*: Enable USB and DFU support
+Message-ID: <20240507143315.GT2568172@bill-the-cat>
+References: <20240506143846.1252377-1-martyn.welch@collabora.com>
+ <20240506143846.1252377-5-martyn.welch@collabora.com>
+ <20240507081428.GA17112@francesco-nb>
 MIME-Version: 1.0
-References: <CAM4sPk-un78JmrMQpAe24nWMp0ytrieyL3zrZd_Qg9HOm--gtg@mail.gmail.com>
-In-Reply-To: <CAM4sPk-un78JmrMQpAe24nWMp0ytrieyL3zrZd_Qg9HOm--gtg@mail.gmail.com>
-From: Igor Opaniuk <igor.opaniuk@gmail.com>
-Date: Tue, 7 May 2024 16:30:17 +0200
-Message-ID: <CAByghJZx=KFcygY2=N13=Tw94e3=7+gg7h6Usad2McjaBV2KKw@mail.gmail.com>
-Subject: Re: Distro Boot instructions with examples
-To: Antoni Jankowski <antoni.s.jankowski@gmail.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="4CMIdEcO7TDfrj0j"
+Content-Disposition: inline
+In-Reply-To: <20240507081428.GA17112@francesco-nb>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,49 +98,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Antoni,
 
-On Tue, May 7, 2024 at 4:14=E2=80=AFPM Antoni Jankowski
-<antoni.s.jankowski@gmail.com> wrote:
->
-> Hi,
->
-> I've recently learned about the Distro Boot feature of u-boot. This sound=
-s
-> interesting, however the official instructions are sparse and examples se=
-em
-> to be non-existent.
->
-> The platform I'm working with at the moment is a raspberry pi CM4, are
-> there any examples of how to implement this concept? Distro Boot seems to
-> be suitable for updating all the rootfs at once, including what usually i=
-s
-> a separate boot partition.
->
-> Best regards,
-> Antoni
+--4CMIdEcO7TDfrj0j
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-There is a nice manual from Toradex about Distro Boot integration [1].
-You can also find a bunch of examples of integration of existing boards
-just by grep-ing:
+On Tue, May 07, 2024 at 10:14:28AM +0200, Francesco Dolcini wrote:
+> Hello Martyn,
+> first thanks for your series, with this we might be able to drop some
+> downstream branch.
+>=20
+> On Mon, May 06, 2024 at 03:38:44PM +0100, Martyn Welch wrote:
+> > From: Sjoerd Simons <sjoerd@collabora.com>
+> >=20
+> > Provide config fragments to enable USB host as well as USB gadget and D=
+FU
+> > support for a53 and r5. This relevant fragment is included into the
+> > am62x EVM a53 defconfig. For the r5, due to the smaller available size,
+> > the config fragment also disables support for persistent storage to free
+> > up space for USB support. This fragment needs to be included is DFU
+> > booting is desired.
+> >=20
+> > The CONFIG_DFU_SF option is placed in the defconfig rather than the
+> > fragment as this is known not to be supported on all boards that can
+> > support DFU.
+> >=20
+> > Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
+> > Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
+>=20
+> ...
+>=20
+> > diff --git a/configs/am62x_r5_usbdfu.config b/configs/am62x_r5_usbdfu.c=
+onfig
+> > new file mode 100644
+> > index 0000000000..772bb2ab93
+> > --- /dev/null
+> > +++ b/configs/am62x_r5_usbdfu.config
+> > @@ -0,0 +1,28 @@
+>=20
+> ...
+>=20
+> > +CONFIG_USB_GADGET_MANUFACTURER=3D"Texas Instruments"
+> > +CONFIG_USB_GADGET_VENDOR_NUM=3D0x0451
+> > +CONFIG_USB_GADGET_PRODUCT_NUM=3D0x6165
+>=20
+> This is making this fragment TI _board_ specific, while the file name see=
+ms
+> to imply that this is generic for the TI SoC. Other vendors, using TI
+> SoCs, will likely want to use their own USB IDs.
+>=20
+> Not a big deal and no need to change it, we'll handle this in our own
+> defconfig when we'll enable this, but I wanted to mention this.
 
-u-boot.git$ grep -ine "config_distro_bootcmd" -r ./include/configs/
-./include/configs/pico-imx6ul.h:86:#include <config_distro_bootcmd.h>
-./include/configs/kp_imx6q_tpc.h:84:#include <config_distro_bootcmd.h>
-./include/configs/imx8mp_venice.h:21:#include <config_distro_bootcmd.h>
-./include/configs/stm32f746-disco.h:30:#include <config_distro_bootcmd.h>
-...
-
-Hope this helps.
-
-[1] https://developer.toradex.com/linux-bsp/os-development/boot/distro-boot=
-/
+One thing about fragments, at least so long as it's being processed
+correctly, is that "make fooboard_config fragA.config fragB.config"
+means that fragB.config will override fragA.config values. Not that it
+shouldn't also possibly be re-done as either of:
+1) am62x_r5_usbdfu.config + am62x_evm_r5_usbdfu.config
+2) better use of imply keyword perhaps in the SoC stanza in one of the
+K3 Kconfig files.
 
 --=20
-Best regards - Atentamente - Meilleures salutations
+Tom
 
-Igor Opaniuk
+--4CMIdEcO7TDfrj0j
+Content-Type: application/pgp-signature; name="signature.asc"
 
-mailto: igor.opaniuk@gmail.com
-skype: igor.opanyuk
-https://www.linkedin.com/in/iopaniuk
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY6O6gACgkQFHw5/5Y0
+tyx1Cwv6A8KVsHFXPKIPyug1w1Alglqr8/b4103AYUsg6wr9A7qovP+uFiQ09Sdc
+I6pjTDdB+CTFWIh8sp7pEHFJwxHpuN7sLyNnFrCeR+G34gtW8rae4rqhxpPAfxjy
+r2REFKz0TYAe4ecxxfLbbBn0bHhzI1IoB+zR4yi7lhFB5bwtrviDg2SEajqjga1Z
+yLVnfoCPD22Bt/1nQdezTn37YIquIxEiD7hh8LBxFwpFOP7JI3DYJF058J182kjK
+mHkUUdy0iJZAV/KdrMEmeZ8IpZHVOVs4MVvOZpGuB6wnaxsT9qhdn/q6lkbCGiwm
+3ZnKl1QsUnuoaOYzLvPkkKgM4PVhypRCYYgPHnKJ3elNFGdAp/l4GXdME2V6ZOLq
+eVD9WMD/PfbxZQ9SimP7McKqRX9l+j0fASxaxjKcZhhh0A4wD8lmmu+6HzcrnuV+
+Nun5upEOsnfFuWx0vrZPgOxNxaPBauCw/c6eVAzWZOYlKHXBEiBC34Kuo/26h1ND
+IsfxPJXL
+=q7Hw
+-----END PGP SIGNATURE-----
+
+--4CMIdEcO7TDfrj0j--
