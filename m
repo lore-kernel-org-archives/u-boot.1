@@ -4,81 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47372C25B4F
-	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 12:47:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1EA4C10F1A
+	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 13:07:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A75F188725;
-	Tue,  7 May 2024 14:46:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id E1ECE88739;
+	Tue,  7 May 2024 15:06:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="aQmd8xXd";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 46B4C8872F; Tue,  7 May 2024 14:46:56 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1EE6288719
- for <u-boot@lists.denx.de>; Tue,  7 May 2024 14:46:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-34f7d8bfaa0so820109f8f.0
- for <u-boot@lists.denx.de>; Tue, 07 May 2024 05:46:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1715086013; x=1715690813;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=en8Sz9jg2Ntq+LvXCGwAJCYIwlinMXEVWoYR1iXKxn0=;
- b=aQmd8xXd9DdIGrOAoCfrMYW+zCBiX2htnGyBTnJtMdPw3xwSUdJZJLIxp/IRLE69Hl
- NTyXUUul11/FrCtlZ1g1g3r5o+qwZ19+h/rvQ+FsxgpGob8htZvdrWBbaSYl6P85BzuT
- TAnKXGsAfH7RN0E7rCl0sAyEDNyPayVAd0OqdTEELU5zF/183zrK/NrIF4lzB2Y73d+U
- xOkG47bX2rAHsvqqQZ7dy79v8B8JxRYPc5O50cAW2mh68a23pdpezrIRVtDAqv39t01H
- ghHJEBirpNmrXPZg2Qu0KFHKgw+RBg8CWfbm+XUvWsB7rqI7cLKXOnINH6XHLI3kLKol
- RT6A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715086013; x=1715690813;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=en8Sz9jg2Ntq+LvXCGwAJCYIwlinMXEVWoYR1iXKxn0=;
- b=hQvJ+Cxs0yP4dibfjq+dMXljldKSq2CSWYH7+e7nQhiEuI5sa2VLf5zj+22aEb6qor
- T+tkqWmjpDGnpy8Tz8bfljrKAa+YB3923V5aos3ocXF53PcPy6dzHy6UmSZ32SI9YHmz
- ue2l2NcQreEjnwCLaeqiBYm0r3Rux7uMzwubNmILbtmSuXkWLoeLqDBvPbZUZ+UzNarC
- Q2wv+sR/puVM4oWIuM4WyJVKL/qRPuWYqHaqDxzSsBkGrHLBIl401D6Jt2/RMyALz5ra
- o4rvTQYaCXB0J5YhXB/B5LwU1rrMYQUI1xTgixXhUDxuQ1UuIgbH5t9UDaHLCV8dvzKY
- /MZA==
-X-Gm-Message-State: AOJu0YyQasAKd7a6/uFJVb7LXQCafvXiw0Q1I6PrbY2d45JYZgn74Q+p
- +9CQMRxnmua35fJ8QH8p2RAmFZxY6pDQAXOTcwLfXlvy5W1MogsqaO7MI0G2rkM=
-X-Google-Smtp-Source: AGHT+IGsawwNMl4ZlXlbCPWVDZ8H0ibDzfk62zZ0vRaR0typSZnmCDOhEyQeZ48w+hvyllaBaOuKgA==
-X-Received: by 2002:a5d:6da3:0:b0:34f:4cc7:88f5 with SMTP id
- u3-20020a5d6da3000000b0034f4cc788f5mr3601787wrs.27.1715086013491; 
- Tue, 07 May 2024 05:46:53 -0700 (PDT)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- cx14-20020a056000092e00b0034a2d0b9a4fsm12994065wrb.17.2024.05.07.05.46.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 May 2024 05:46:52 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Benjamin Hahn <B.Hahn@phytec.de>, Teresa Remmet <t.remmet@phytec.de>,
- Yannic Moog <y.moog@phytec.de>, Tom Rini <trini@konsulko.com>, Wadim
- Egorov <w.egorov@phytec.de>, Martyn Welch <martyn.welch@collabora.com>,
- Parthiban Nallathambi <parthitce@gmail.com>, Fabio Estevam
- <festevam@gmail.com>
-Cc: u-boot@lists.denx.de, upstream@lists.phytec.de, Benjamin Hahn
- <B.Hahn@phytec.de>
-Subject: Re: [PATCH] configs: Make USB_GADGET_MANUFACTURER consistent over
- all PHYTEC boards
-In-Reply-To: <20240503-wip-bhahn-bspimx8m-3196-v1-1-855c7242151f@phytec.de>
-References: <20240503-wip-bhahn-bspimx8m-3196-v1-1-855c7242151f@phytec.de>
-Date: Tue, 07 May 2024 14:46:51 +0200
-Message-ID: <87ttj9vlfo.fsf@baylibre.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1715087219;
+	bh=Ali34y/sW+NWcJguDuR5pqwA4KDR/mdQG+HoQ9R/ZF4=;
+	h=From:To:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=xTu4Hb/4zVbYn+dSejSsYYvI5E925tMMkwnU0hI4rPWmVuikN+emCKIRw2dLDJY1C
+	 LC/sE1HBXKPfnJN/EAGGmHVpzqPto0Alr47Uy55f0zUpuJm/1W3x2IOhpIxy/3r3La
+	 9CxVt00XarAOJhyVLn5RzRXDfI3gvS+3vpaORK5eaV2bnmV1Dtu/j4nH+0NNAlSwFi
+	 XAnXTP5/PQS41+/jUPECEkR1s7zw4PaRN4mnVawR0qYkz1G252lXLs0tGzUpBbLv2b
+	 fGkmIh8TgiNBwXMhlOwtvAdlmPdckGxVzrg4qeN/uPCwIgDImO+GfG5NfsEwFPbp2B
+	 2d/Lx8QLZVvCg==
+Received: from localhost (dslb-088-077-007-084.088.077.pools.vodafone-ip.de
+ [88.77.7.84])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested) (Authenticated sender: ch@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 83B8088723;
+ Tue,  7 May 2024 15:06:58 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1715087218;
+ bh=Ali34y/sW+NWcJguDuR5pqwA4KDR/mdQG+HoQ9R/ZF4=;
+ h=From:To:Subject:Date:In-Reply-To:References:From;
+ b=qF4okJ1isGQU26bS/SdGyf3Cy35BXx18QQZ0umbKw3QDVocjVBkJwCo4k+Y3YbLcr
+ YFLOJXBxqZV7lpdGw5UnQ/n8QAN1YFsR1AZXSo+JBsmc2MBK7JPEypSJyIOgB2PwGH
+ SCEt0e39htxFD+/dUt4KxsUndTqreh0kU4mM25EEA+4me92IrCs8Gjgx7FjRR6E/RA
+ /kz7mioE3adXYOx9F4ZQ/VSB5Pb4KowQbMvgsmEeL95oFOls65bmbimNRlQ3qy+i8/
+ SNGmiBsiIU5eGZ8P5qpfWXuv2sYfKIOi6WdbFYksS5DN1bTGbJ7gyCHJVrvId+d1Fj
+ d4vghWdIEKdCQ==
+From: Claudius Heine <ch@denx.de>
+To: Marek Vasut <marex@denx.de>, Peng Fan <peng.fan@nxp.com>,
+ Fabio Estevam <festevam@denx.de>, Tim Harvey <tharvey@gateworks.com>,
+ Claudius Heine <ch@denx.de>, u-boot@lists.denx.de (open list)
+Subject: [PATCH] imx: hab: add documentation about the required keys/certs
+Date: Tue,  7 May 2024 15:06:50 +0200
+Message-ID: <20240507130650.713801-1-ch@denx.de>
+X-Mailer: git-send-email 2.42.0
+In-Reply-To: <20240503010518.263458-1-marex@denx.de>
+References: <20240503010518.263458-1-marex@denx.de>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,101 +67,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Benjamin,
+For CST to find the certificates and keys for signing, some keys and
+certs need to be copied into the u-boot build directory.
 
-Thank you for the patch.
+Signed-off-by: Claudius Heine <ch@denx.de>
+---
+ doc/imx/habv4/guides/mx8m_spl_secure_boot.txt | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
-On ven., mai 03, 2024 at 09:00, Benjamin Hahn <B.Hahn@phytec.de> wrote:
+diff --git a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
+index ce1de659d8..42214df21a 100644
+--- a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
++++ b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
+@@ -144,6 +144,22 @@ The signing is activated by wrapping SPL and fitImage sections into nxp-imx8mcst
+ etype, which is done automatically in arch/arm/dts/imx8m{m,n,p,q}-u-boot.dtsi
+ in case CONFIG_IMX_HAB Kconfig symbol is enabled.
+ 
++Per default the HAB keys and certificates need to be located in the build
++directory, this means copying the following files from the HAB keys directory
++flat (e.g. removing the `keys` and `cert` subdirectory) into the u-boot build
++directory for the CST Code Signing Tool to locate them:
++
++- `crts/SRK_1_2_3_4_table.bin`
++- `crts/CSF1_1_sha256_4096_65537_v3_usr_crt.pem`
++- `keys/CSF1_1_sha256_4096_65537_v3_usr_key.pem`
++- `crts/IMG1_1_sha256_4096_65537_v3_usr_crt.pem`
++- `keys/IMG1_1_sha256_4096_65537_v3_usr_key.pem`
++- `keys/key_pass.txt`
++
++The paths to the SRK table and the certificates can be modified via changes to
++the nxp_imx8mcst device tree node, however the other files are required by the
++CST tools as well, and will be searched for in relation to them.
++
+ Build of flash.bin target then produces a signed flash.bin automatically.
+ 
+ 1.4 Closing the device
+-- 
+2.42.0
 
-> Set CONFIG_USB_GADGET_MANUFACTURER to PHYTEC for all PHYTEC boards.
->
-> Signed-off-by: Benjamin Hahn <B.Hahn@phytec.de>
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-
-This is assigned to me on patchwork. I can pick it up through
-u-boot-dfu.
-
-If someone else wants to pick it up, please let me know.
-
-> ---
->  configs/phycore-imx8mp_defconfig     | 2 +-
->  configs/phycore_am64x_a53_defconfig  | 2 +-
->  configs/phycore_am64x_r5_defconfig   | 2 +-
->  configs/phycore_pcl063_defconfig     | 2 +-
->  configs/phycore_pcl063_ull_defconfig | 2 +-
->  5 files changed, 5 insertions(+), 5 deletions(-)
->
-> diff --git a/configs/phycore-imx8mp_defconfig b/configs/phycore-imx8mp_defconfig
-> index e9a287cb441f..9f42edd72324 100644
-> --- a/configs/phycore-imx8mp_defconfig
-> +++ b/configs/phycore-imx8mp_defconfig
-> @@ -147,7 +147,7 @@ CONFIG_USB_DWC3=y
->  CONFIG_USB_DWC3_GENERIC=y
->  CONFIG_USB_STORAGE=y
->  CONFIG_USB_GADGET=y
-> -CONFIG_USB_GADGET_MANUFACTURER="FSL"
-> +CONFIG_USB_GADGET_MANUFACTURER="PHYTEC"
->  CONFIG_USB_GADGET_VENDOR_NUM=0x0525
->  CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
->  CONFIG_IMX_WATCHDOG=y
-> diff --git a/configs/phycore_am64x_a53_defconfig b/configs/phycore_am64x_a53_defconfig
-> index 1a9359773b45..9b52f8ad0644 100644
-> --- a/configs/phycore_am64x_a53_defconfig
-> +++ b/configs/phycore_am64x_a53_defconfig
-> @@ -159,7 +159,7 @@ CONFIG_USB_CDNS3=y
->  CONFIG_USB_CDNS3_GADGET=y
->  CONFIG_USB_CDNS3_HOST=y
->  CONFIG_USB_GADGET=y
-> -CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
-> +CONFIG_USB_GADGET_MANUFACTURER="PHYTEC"
->  CONFIG_USB_GADGET_VENDOR_NUM=0x0451
->  CONFIG_USB_GADGET_PRODUCT_NUM=0x6165
->  CONFIG_USB_GADGET_DOWNLOAD=y
-> diff --git a/configs/phycore_am64x_r5_defconfig b/configs/phycore_am64x_r5_defconfig
-> index 61d784fa17f6..15a7e7089e73 100644
-> --- a/configs/phycore_am64x_r5_defconfig
-> +++ b/configs/phycore_am64x_r5_defconfig
-> @@ -171,7 +171,7 @@ CONFIG_USB_STORAGE=y
->  CONFIG_SPL_USB_STORAGE=y
->  CONFIG_USB_GADGET=y
->  CONFIG_SPL_USB_GADGET=y
-> -CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
-> +CONFIG_USB_GADGET_MANUFACTURER="PHYTEC"
->  CONFIG_USB_GADGET_VENDOR_NUM=0x0451
->  CONFIG_USB_GADGET_PRODUCT_NUM=0x6165
->  CONFIG_USB_GADGET_DOWNLOAD=y
-> diff --git a/configs/phycore_pcl063_defconfig b/configs/phycore_pcl063_defconfig
-> index 017054a8e12b..2f6b158a6772 100644
-> --- a/configs/phycore_pcl063_defconfig
-> +++ b/configs/phycore_pcl063_defconfig
-> @@ -62,7 +62,7 @@ CONFIG_IMX_THERMAL=y
->  CONFIG_USB=y
->  CONFIG_SPL_USB_HOST=y
->  CONFIG_USB_GADGET=y
-> -CONFIG_USB_GADGET_MANUFACTURER="Phytec"
-> +CONFIG_USB_GADGET_MANUFACTURER="PHYTEC"
->  CONFIG_USB_GADGET_VENDOR_NUM=0x1b67
->  CONFIG_USB_GADGET_PRODUCT_NUM=0x4fff
->  CONFIG_CI_UDC=y
-> diff --git a/configs/phycore_pcl063_ull_defconfig b/configs/phycore_pcl063_ull_defconfig
-> index b3da43a5bf1e..b42a410da69c 100644
-> --- a/configs/phycore_pcl063_ull_defconfig
-> +++ b/configs/phycore_pcl063_ull_defconfig
-> @@ -53,7 +53,7 @@ CONFIG_IMX_THERMAL=y
->  CONFIG_USB=y
->  CONFIG_SPL_USB_HOST=y
->  CONFIG_USB_GADGET=y
-> -CONFIG_USB_GADGET_MANUFACTURER="Phytec"
-> +CONFIG_USB_GADGET_MANUFACTURER="PHYTEC"
->  CONFIG_USB_GADGET_VENDOR_NUM=0x1b67
->  CONFIG_USB_GADGET_PRODUCT_NUM=0x4fff
->  CONFIG_CI_UDC=y
->
-> ---
-> base-commit: 6fdb021f148f598a67eb3cac5e3eb4a569cdaacd
-> change-id: 20240503-wip-bhahn-bspimx8m-3196-c1ebd0bab6ac
->
-> Best regards,
-> -- 
-> Benjamin Hahn <B.Hahn@phytec.de>
