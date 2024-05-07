@@ -4,73 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1D89C10F1A
-	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 07:40:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F232FC10F1A
+	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 07:41:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85FF088735;
-	Tue,  7 May 2024 09:40:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 832478872F;
+	Tue,  7 May 2024 09:41:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="H3KUIsBg";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="YRTjA+Lm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 497FA8872B; Tue,  7 May 2024 09:40:35 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 943B688746; Tue,  7 May 2024 09:41:21 +0200 (CEST)
+Received: from mail-m92251.xmail.ntesmail.com (mail-m92251.xmail.ntesmail.com
+ [103.126.92.251])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5434C87B35
- for <u-boot@lists.denx.de>; Tue,  7 May 2024 09:40:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CB43F8872B
+ for <u-boot@lists.denx.de>; Tue,  7 May 2024 09:41:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a59a5f81af4so711588866b.3
- for <u-boot@lists.denx.de>; Tue, 07 May 2024 00:40:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1715067633; x=1715672433; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TGuz0c5KAUQAcAfTZk5tNAW1++3/cM8R38t7+nVmD1M=;
- b=H3KUIsBgnqRNLCmC5pXF1N0Oxjkkn3rxQjzJIi+i5GWz39H+UhmRGbUuIkHcuK01jv
- pksf5Z6vLopGl4y8gl8ZS1ROE4bOjJbSea4cmUGDU9VOmQLTGsTZr50fX/aYKxPAmPOK
- gciLQ+sUqw5KB7gMUNAoxeYWz/liGc17xqxpNGG9Nn0Xky5LPuLQTtT3GNlVxhOTmt/v
- d+vm4a84CCzH21woMRAosEIQ3XCTU8LH75vxWpdqboPCLXNRBTkxorUqLA/1xR8VfHKW
- FTeVbodDeq6BTntoluXzKwEpdDRlKETNYfrZe6kE4FE20NDVLM0/o78C+pbqCH4PG0OP
- C7fA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715067633; x=1715672433;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=TGuz0c5KAUQAcAfTZk5tNAW1++3/cM8R38t7+nVmD1M=;
- b=Y7LK1BIQnpirY5WTs6l3cusPnvydtcIRfb/6LHWNEGdrKl/Sx8h0T/IGja1jqJR5u8
- HEj0zmGrId7PI1R7JkHxz9WokcnAUNX/f8m0xW/CqbX/vW9d4xcFiND09v278cih9Vvn
- MGB3C/QeCI+ApsuI+d723LqqF+k6OtXS4U+JTR7P43i1OBk3/xfJKxjYV8ReGbD9lrI3
- XwL7cityO+ggp3LxxBRsLj3vHu/T8v0lFjzHpLhNf4J0suFFq8uv9QSQgj5g5QqaNWNr
- Ur7jjQW7nK//BirSjJNoqFo4tysTiEMq46cYpcAc1xcnTbyctgxjcF4L12v5MhDeuzL6
- yZng==
-X-Gm-Message-State: AOJu0YzhUTgvkpQRfJv86neinoEDoaD6h2/rK+egwo+6x3pv8StK6jDK
- DFc67JBUPuPnoO2kw9GPSXsWOuN3o8VI9wp1uMNteuKyB6hjxgjekXo+7Rl4IoqDzaJF49zDSIu
- PCo+78cmGgy2igsDqayuGmhULpY/iGjlj75x+oQ==
-X-Google-Smtp-Source: AGHT+IGG7YtuTbDGtxz4o2EKW/7geyIXKLWjeTxhI1TykxadTrU9FfhDU4QX7LFiCrv+z8ENNqceenBOP/0m1B/WClM=
-X-Received: by 2002:a17:906:7856:b0:a58:fc3b:8c6e with SMTP id
- p22-20020a170906785600b00a58fc3b8c6emr7900293ejm.69.1715067632832; Tue, 07
- May 2024 00:40:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=YRTjA+LmVcCWSCc/t3KTueI4wzdiwDLBAnYcsb1Nd/vxEYRT7UXeOtck5Jvsy4MGzcgInz8+S71dLS1jIz/szMNFaAXklTkbRP7Lq+3u6xDVmxWZnSRuwSnd6/L8vuEhRmDsCiu7rOdat1NRJS2RmmL+xVXRFq3NnYwgBXSQx8I=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
+ bh=lAe2eY3gzzhP+i+2XK7XL6Zl8TDCk6tNwwla/U37gJs=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.77] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTPA id C56C7900350;
+ Tue,  7 May 2024 15:41:03 +0800 (CST)
+Message-ID: <7e4d2395-ae36-4bf1-86e9-bdb495654b16@rock-chips.com>
+Date: Tue, 7 May 2024 15:41:03 +0800
 MIME-Version: 1.0
-References: <20240502013138.2383421-1-trini@konsulko.com>
- <20240502013138.2383421-32-trini@konsulko.com>
-In-Reply-To: <20240502013138.2383421-32-trini@konsulko.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 7 May 2024 10:39:56 +0300
-Message-ID: <CAC_iWjJqFa8=p1PsCzpRMO9uV3oLNC9MMk3y_LJNYoNfVQDP+w@mail.gmail.com>
-Subject: Re: [PATCH 32/81] fwu-mdata: Remove <common.h> and add needed includes
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Jassi Brar <jaswinder.singh@linaro.org>, 
- Etienne Carriere <etienne.carriere@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 111/149] board: rockchip: Remove <common.h> and add needed
+ includes
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: huang lin <hl@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Andy Yan <andy.yan@rock-chips.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+References: <20240501024316.1767971-1-trini@konsulko.com>
+ <20240501024316.1767971-111-trini@konsulko.com>
+Content-Language: en-US
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20240501024316.1767971-111-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ05DSVZOTRodGkxNSk5DHkpVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
+ kG
+X-HM-Tid: 0a8f51ffb71903a9kunmc56c7900350
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OSI6ARw5SjNMFAtISgIYIgor
+ TEwKCgpVSlVKTEpOS01MTU1PTU9OVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOSktPNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,34 +77,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 2 May 2024 at 04:32, Tom Rini <trini@konsulko.com> wrote:
->
-> Remove <common.h> from this driver directory and when needed
+
+On 2024/5/1 10:42, Tom Rini wrote:
+> Remove <common.h> from this board vendor directory and when needed
 > add missing include files directly.
 >
 > Signed-off-by: Tom Rini <trini@konsulko.com>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+
+Thanks,
+- Kever
 > ---
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Jassi Brar <jaswinder.singh@linaro.org>
-> Cc: Etienne Carriere <etienne.carriere@linaro.org>
+> Cc: huang lin <hl@rock-chips.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
+> Cc: Kever Yang <kever.yang@rock-chips.com>
+> Cc: Andy Yan <andy.yan@rock-chips.com>
+> Cc: Michael Trimarchi <michael@amarulasolutions.com>
 > ---
->  drivers/fwu-mdata/fwu-mdata-uclass.c | 1 -
->  1 file changed, 1 deletion(-)
+>   arch/arm/include/asm/arch-rockchip/grf_rk3308.h | 2 ++
+>   board/rockchip/evb_rk3036/evb_rk3036.c          | 1 -
+>   board/rockchip/evb_rk3308/evb_rk3308.c          | 1 -
+>   board/rockchip/evb_rv1108/evb_rv1108.c          | 1 -
+>   board/rockchip/kylin_rk3036/kylin_rk3036.c      | 1 -
+>   board/rockchip/tinker_rk3288/tinker-rk3288.c    | 1 -
+>   6 files changed, 2 insertions(+), 5 deletions(-)
 >
-> diff --git a/drivers/fwu-mdata/fwu-mdata-uclass.c b/drivers/fwu-mdata/fwu-mdata-uclass.c
-> index 0a8edaaa418f..bab7a7e80d1d 100644
-> --- a/drivers/fwu-mdata/fwu-mdata-uclass.c
-> +++ b/drivers/fwu-mdata/fwu-mdata-uclass.c
-> @@ -5,7 +5,6 @@
->
->  #define LOG_CATEGORY UCLASS_FWU_MDATA
->
+> diff --git a/arch/arm/include/asm/arch-rockchip/grf_rk3308.h b/arch/arm/include/asm/arch-rockchip/grf_rk3308.h
+> index a995bb950d97..f4bbc2401310 100644
+> --- a/arch/arm/include/asm/arch-rockchip/grf_rk3308.h
+> +++ b/arch/arm/include/asm/arch-rockchip/grf_rk3308.h
+> @@ -5,6 +5,8 @@
+>   #ifndef _ASM_ARCH_GRF_rk3308_H
+>   #define _ASM_ARCH_GRF_rk3308_H
+>   
+> +#include <linux/kernel.h>
+> +
+>   struct rk3308_grf {
+>   	unsigned int gpio0a_iomux;
+>   	unsigned int reserved0;
+> diff --git a/board/rockchip/evb_rk3036/evb_rk3036.c b/board/rockchip/evb_rk3036/evb_rk3036.c
+> index 8c606463e455..a0805030ea46 100644
+> --- a/board/rockchip/evb_rk3036/evb_rk3036.c
+> +++ b/board/rockchip/evb_rk3036/evb_rk3036.c
+> @@ -3,7 +3,6 @@
+>    * (C) Copyright 2015 Rockchip Electronics Co., Ltd
+>    */
+>   
 > -#include <common.h>
->  #include <dm.h>
->  #include <efi_loader.h>
->  #include <fwu.h>
-> --
-> 2.34.1
->
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>   #include <dm.h>
+>   #include <asm/io.h>
+>   #include <asm/arch-rockchip/uart.h>
+> diff --git a/board/rockchip/evb_rk3308/evb_rk3308.c b/board/rockchip/evb_rk3308/evb_rk3308.c
+> index e0c96fd70a28..c895da934a99 100644
+> --- a/board/rockchip/evb_rk3308/evb_rk3308.c
+> +++ b/board/rockchip/evb_rk3308/evb_rk3308.c
+> @@ -3,7 +3,6 @@
+>    * (C) Copyright 2018 Rockchip Electronics Co., Ltd
+>    */
+>   
+> -#include <common.h>
+>   #include <adc.h>
+>   #include <asm/global_data.h>
+>   
+> diff --git a/board/rockchip/evb_rv1108/evb_rv1108.c b/board/rockchip/evb_rv1108/evb_rv1108.c
+> index 0d7a486bed74..48b9d8f80c4b 100644
+> --- a/board/rockchip/evb_rv1108/evb_rv1108.c
+> +++ b/board/rockchip/evb_rv1108/evb_rv1108.c
+> @@ -4,7 +4,6 @@
+>    * Authors: Andy Yan <andy.yan@rock-chips.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <init.h>
+>   #include <syscon.h>
+>   #include <asm/global_data.h>
+> diff --git a/board/rockchip/kylin_rk3036/kylin_rk3036.c b/board/rockchip/kylin_rk3036/kylin_rk3036.c
+> index 0ca91cdeb014..c452b131208d 100644
+> --- a/board/rockchip/kylin_rk3036/kylin_rk3036.c
+> +++ b/board/rockchip/kylin_rk3036/kylin_rk3036.c
+> @@ -3,7 +3,6 @@
+>    * (C) Copyright 2015 Rockchip Electronics Co., Ltd
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <env.h>
+>   #include <init.h>
+> diff --git a/board/rockchip/tinker_rk3288/tinker-rk3288.c b/board/rockchip/tinker_rk3288/tinker-rk3288.c
+> index e6e75981c2d1..e966e9f201ab 100644
+> --- a/board/rockchip/tinker_rk3288/tinker-rk3288.c
+> +++ b/board/rockchip/tinker_rk3288/tinker-rk3288.c
+> @@ -3,7 +3,6 @@
+>    * (C) Copyright 2016 Rockchip Electronics Co., Ltd
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <env.h>
+>   #include <i2c_eeprom.h>
