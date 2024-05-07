@@ -4,77 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B0FFC10F1A
-	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 14:03:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9758C25B4F
+	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 14:14:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE9768874F;
-	Tue,  7 May 2024 16:03:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5A22A8834B;
+	Tue,  7 May 2024 16:14:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="n5RIt4MP";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jkzTrBLe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1C4788753; Tue,  7 May 2024 16:03:04 +0200 (CEST)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
+ id 3FAA68874A; Tue,  7 May 2024 15:21:46 +0200 (CEST)
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A986A88774
- for <u-boot@lists.denx.de>; Tue,  7 May 2024 16:03:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1199687D2F
+ for <u-boot@lists.denx.de>; Tue,  7 May 2024 15:21:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-7928b705f89so255604085a.1
- for <u-boot@lists.denx.de>; Tue, 07 May 2024 07:03:00 -0700 (PDT)
+ spf=pass smtp.mailfrom=antoni.s.jankowski@gmail.com
+Received: by mail-qt1-x836.google.com with SMTP id
+ d75a77b69052e-43caa36b9f4so10481141cf.1
+ for <u-boot@lists.denx.de>; Tue, 07 May 2024 06:21:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715090579; x=1715695379; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZbdQsgDjw0uyewg/7eaesjnAft/hWSQgOgs2psuNiSU=;
- b=n5RIt4MP3OQVhkVvqX7fBFDJmSjOetUZXzjX+BE6rKDid2FqL1C7wSGfF3A1Hx1zl7
- KLaMTB8MAWOiOzPuf5womBNPH4rEaCvrRp0zEGkyPVtxPqf9EJAit6S17kudhgqqPB/l
- Sa7Z8cr52SYYof/ZDNeYsCA7LOtCDLMt30HD4=
+ d=gmail.com; s=20230601; t=1715088103; x=1715692903; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=BbarOnUc5PLmBoKxfzjybpFVwpHbJugYJOHjZkW/QuA=;
+ b=jkzTrBLeSPQf0sOAJNg+4m1oqGDIjH8rk64wOSaSJXVh1fERN602OEcdWWGp/mcoyq
+ slwMgXBBntR3Bm6Q003JsE36IxI6/ivlAiwjBqzb9m9/xCbo8u7SoFXFqgFZHMYn/+mP
+ 9lyRLrvc42zsVgVDxiFC/EZ9uDEwaCTCiclNxSsqyJiwcwQYwTvhIiHDFdDJht2u5SLc
+ tmP0C/+pxODaG3HPBK6p5wNbeeCu32WS8ezFt2IH2SomiKtMt1vu8/EiZA985RLmOJbY
+ 6vghWUileyl+oCORqvGjkqvjTQBZSllUTTGHONxFz9wSAvzbRDl76vX2Rm9Hjic1QyNR
+ j6+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715090579; x=1715695379;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ZbdQsgDjw0uyewg/7eaesjnAft/hWSQgOgs2psuNiSU=;
- b=UvQ3T1D4j8/c096yR9zNC2KLCovaLAUB1QJgj+UHRbBEQFnm3DtyVE1PpnTjJAabl1
- uFTBctMi2Ezf8fW45/2WfbKPuwUaUgZLLH+a0v9L+/0w0xUX8g9zhuC2ToRHj241+xi3
- PsOgglF30ELYztkCI8i5q35SMcVlRAsn1jy+uwmTpyrF5TxARGmogHr9u7Mep6IZvee9
- gIJ4O6nPInNC1I/CdvvEqHkdNvp1IWu83DLY+0IOaZtuXNaM5xSJ5V7oqAnVPK70QU4o
- 47HwDW2Bf3Lpq1H10nQWJP/1+J8LautKQxmIIsYS3gzornA3b0SakeKS+LFUHwf8u+bo
- 841g==
-X-Gm-Message-State: AOJu0YzqvU1RcbRLrDlacuj0s8I6NKwmc3cijNDCFB76KMdDNIr2BDHo
- z4PoKrpqzS8pX9Qp5kET9CxHX5IAPjijC7LUIomg7gpdwPn+AS+Zjb/xvBqQFP1tHs/WclJ5lMv
- /N9E=
-X-Google-Smtp-Source: AGHT+IEq6VWZxwtTxfS3/Lby+A8RYvqNPFfJN0BGJJ3+CH3j+XTn+gyyDjWoKftUeOJ2h9fqrttSuQ==
-X-Received: by 2002:a05:622a:1106:b0:43a:f443:d126 with SMTP id
- e6-20020a05622a110600b0043af443d126mr16031532qty.48.1715090578914; 
- Tue, 07 May 2024 07:02:58 -0700 (PDT)
-Received: from [127.0.1.1] ([187.144.98.216]) by smtp.gmail.com with ESMTPSA id
- ge16-20020a05622a5c9000b00437543e5307sm6460400qtb.40.2024.05.07.07.02.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 May 2024 07:02:58 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Cc: Weijie Gao <weijie.gao@mediatek.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>
-In-Reply-To: <20240502013138.2383421-1-trini@konsulko.com>
-References: <20240502013138.2383421-1-trini@konsulko.com>
-Subject: Re: [PATCH 01/81] mmc: Migrate MMC_SUPPORTS_TUNING to Kconfig
-Message-Id: <171509057795.3014396.8094901267064773773.b4-ty@konsulko.com>
-Date: Tue, 07 May 2024 08:02:57 -0600
+ d=1e100.net; s=20230601; t=1715088103; x=1715692903;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=BbarOnUc5PLmBoKxfzjybpFVwpHbJugYJOHjZkW/QuA=;
+ b=f2Ufzz69IVX38ZRSZyVlwCuednyPpHNdMyeYX7iZC1dbE/h4Vt/xplcw8RCkv3xrg8
+ U/CgEDuPpt/qYbtaAL33EdvHUgwb7Iy8yrG5akq2aNb5mnd4b15SBCLMtJCA4aCHSF3o
+ jLGW5KgSnoLFKL8iUMhwyXTUdf/va3jigKYfSpnSPToLJYzzdCP+x6eaLy3ISmg4yTkf
+ Qr79zphK3ukLO+URHZKxZd3puQbebWZeNEBZqfQoWaARmBCxoxTxWaqX6L97xZ6qqg5Q
+ dMV/ZVlmc2g8CePqQ3aMDxjCZQolUPKnxeX/IyrxNhVgC6i1nOLD5tZKU/BtgITSJvBS
+ yh3w==
+X-Gm-Message-State: AOJu0Yx1JZwcQperO8KokiBuALyDcMZe/I0w0pZkSD58e5vBobnJv0Hw
+ GwzXtg4UyM4X8UDobf0d1QSbv7ieB+GPnS47MUVAVc1Ww3Xnjk4jGiki/0Aa6jDW+ytK4NcaQCr
+ yhqukHE9ReJ48opo9MxF1TRiuWT3sLRZM
+X-Google-Smtp-Source: AGHT+IEZC6Rwk7IxpmU01h/iVfNMGBr73NmqU7af4eXwVGgFoxb8X0emmECF/mfm/CiTZHgKlrSIWgtOEc4zMOkELFU=
+X-Received: by 2002:ac8:7d84:0:b0:43a:ea68:e0c2 with SMTP id
+ c4-20020ac87d84000000b0043aea68e0c2mr15624265qtd.5.1715088102807; Tue, 07 May
+ 2024 06:21:42 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+From: Antoni Jankowski <antoni.s.jankowski@gmail.com>
+Date: Tue, 7 May 2024 16:21:31 +0300
+Message-ID: <CAM4sPk-un78JmrMQpAe24nWMp0ytrieyL3zrZd_Qg9HOm--gtg@mail.gmail.com>
+Subject: Distro Boot instructions with examples
+To: u-boot@lists.denx.de
+X-Mailman-Approved-At: Tue, 07 May 2024 16:14:24 +0200
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,20 +83,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 01 May 2024 19:30:18 -0600, Tom Rini wrote:
+Hi,
 
-> The constraints on the MMC_SUPPORTS_TUNING symbol can easily be
-> expressed in Kconfig (with the addition of SPL_MMC_SUPPORTS_TUNING).
-> Furthermore, in order to remove <common.h> from the MMC subsystem, the
-> way this symbol is used today needs to be changed in order to continue
-> functioning.
-> 
-> 
-> [...]
+I've recently learned about the Distro Boot feature of u-boot. This sounds
+interesting, however the official instructions are sparse and examples seem
+to be non-existent.
 
-Applied to u-boot/next, thanks!
+The platform I'm working with at the moment is a raspberry pi CM4, are
+there any examples of how to implement this concept? Distro Boot seems to
+be suitable for updating all the rootfs at once, including what usually is
+a separate boot partition.
 
--- 
-Tom
-
-
+Best regards,
+Antoni
