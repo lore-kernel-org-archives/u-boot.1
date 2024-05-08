@@ -4,59 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C6A6C25B74
-	for <u-boot@archiver.kernel.org>; Wed,  8 May 2024 07:23:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D309FC04FFE
+	for <u-boot@archiver.kernel.org>; Wed,  8 May 2024 07:26:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BEEC3884D6;
-	Wed,  8 May 2024 09:23:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 4BA868856C;
+	Wed,  8 May 2024 09:26:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1715153033;
-	bh=GkWJidHhx83ItbBI2+7//f+GUUm+7gHzORbkvOHhPPI=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=DUXWRdRYLl7tU3ajzFSRaMveG67clQ0IzDA1bffkLvO6uloeXrdWrUMxvw6ZmxJEu
-	 7Pacekp3xt3lrxEv25WxpD3TJIee7+PC/ftO1R9SP8nQhoKN6ykgMz7CWo4omkQp1K
-	 sz6OZ/hsZbvLJVV2WfIbZNA3hPjAm5wylme0pE0Mjdy9oUZNa9H4Hv1MGG1MrMB4Q3
-	 kCU9pLwN4bXsqWzJfvF+tv9F+53a3vmW5RHjAPtNlX3OMf554OgxFWUkJDapik49AJ
-	 HaT/9gAWgOQE2JzVvmZjG0OsgZQrC5GRK1E+smOP8GQq5Glr3jtKV5uOYqY1H/Si7I
-	 DP6ddGQo2aYVg==
-Received: from [10.88.0.65] (dslb-088-077-007-084.088.077.pools.vodafone-ip.de
- [88.77.7.84])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: ch@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 8AC8F8845B;
- Wed,  8 May 2024 09:23:52 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1715153032;
- bh=GkWJidHhx83ItbBI2+7//f+GUUm+7gHzORbkvOHhPPI=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=nhV4nJ4nvmmDCONo0Fyc1g+EFNU/4sewBZDpbXHpCXAldEWv+fTpYtBLqDCkGWAt5
- +NbIzGQCnaaIYPFFwPBswKIMVBA0FgLBnbBePUDxcEA811UncsP+awWOUJbVFGa/Qr
- yxS8JvgLN7SatJTgdh63oghEc4o63D3QuD/y1P6CFobOihm3pDQuGFSc37ltqd6+SI
- NtZprFamlpqtHxqMeZloW0p3a5WzlLoRaoxMkVuH6mA2zBWG6/u0JQ3bEVsWOXCo9m
- 70lFAw399ljuG00si4bTYLhJzX5Bbt/w7Mg68PfAQv72wGeRF1bfLJ4BvylBge6enH
- BNk/YJanlWcmA==
-Message-ID: <e98dc839-f58f-4463-9358-4d3ba267d558@denx.de>
-Date: Wed, 8 May 2024 09:23:51 +0200
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SXV6olug";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id AA62E8846E; Wed,  8 May 2024 09:26:36 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2260B8845B
+ for <u-boot@lists.denx.de>; Wed,  8 May 2024 09:26:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4487QVcV052257;
+ Wed, 8 May 2024 02:26:31 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1715153191;
+ bh=Fs1JOkJRFBGjnF7HKQrYh4owPMhy0UENbzLt0UyzDsg=;
+ h=From:Subject:Date:To:CC;
+ b=SXV6olugvXoqpCal4aHuZI8WYUHEQdZTZTeQkpZ9KWskg0MvWjXlBLx4hcZMGp6es
+ 6Lo+bA+m6U/DMnPm86us59DR4IlDcRQn9z+J3ba4Yy/3zMbz+jbxPSzi6Xi13AvPi/
+ 3xgacxWPjE0bgTdb5a2hCSsAjYYD7jx38FqskX5M=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4487QVTM072275
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 8 May 2024 02:26:31 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 8
+ May 2024 02:26:30 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 8 May 2024 02:26:30 -0500
+Received: from [127.0.1.1] (uda0497581.dhcp.ti.com [10.24.68.185])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4487QRJs015339;
+ Wed, 8 May 2024 02:26:28 -0500
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+Subject: [PATCH 0/6] Enable OF_UPSTREAM for j721s2 and am68
+Date: Wed, 8 May 2024 12:56:24 +0530
+Message-ID: <20240508-b4-upstream-j721s2-of-upstream-v1-0-ed0933172410@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] imx: hab: add documentation about the required keys/certs
-To: Marek Vasut <marex@denx.de>, Peng Fan <peng.fan@nxp.com>,
- Fabio Estevam <festevam@denx.de>, Tim Harvey <tharvey@gateworks.com>,
- open list <u-boot@lists.denx.de>
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-References: <20240503010518.263458-1-marex@denx.de>
- <20240507130650.713801-1-ch@denx.de>
- <28173ffa-209b-498f-a2c3-99ec2f898e7c@denx.de>
-Content-Language: en-US
-From: Claudius Heine <ch@denx.de>
-Organization: Denx Software Engineering
-In-Reply-To: <28173ffa-209b-498f-a2c3-99ec2f898e7c@denx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIACApO2YC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIxMDUwMz3SQT3dKC4pKi1MRc3SxzI8NiI938NISQcbKRRVqaoVGKmZmJEtC
+ QgqLUtMwKsAXRsbW1AJZmFkVwAAAA
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Alper Nebi
+ Yasak <alpernebiyasak@gmail.com>
+CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Nishanth
+ Menon <nm@ti.com>, Andrew Davis <afd@ti.com>,
+ Udit Kumar <u-kumar1@ti.com>, Aniket Limaye <a-limaye@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>
+X-Mailer: b4 0.13-dev
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1715153187; l=2354;
+ i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
+ bh=hab+L4TyXNilmUaKkId8LEXgRZRdm+cwrCQg5kbbxAs=;
+ b=JxRffAQZJBtBpAC8I3GFpWXHBlMiv9EW0UK7z0EcFJUpq3a2zpYi1wknaYjH2SAoiUcIx7NHw
+ UqSzSduXGqZCmAHfwZ+m7aHnnDraZoG1Hl8FcQlFro90jeH+0S0X32f
+X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
+ pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,83 +91,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Series splits am68 and j721s2 support along with enabling OF_UPSTREAM
+and adding stdboot support for both the platforms.
 
-On 2024-05-07 3:28 pm, Marek Vasut wrote:
-> On 5/7/24 3:06 PM, Claudius Heine wrote:
->> For CST to find the certificates and keys for signing, some keys and
->> certs need to be copied into the u-boot build directory.
-> 
-> Make sure to CC "NXP i.MX U-Boot Team" , else NXP is not informed. Use 
-> scripts/get_maintainer to get the full list or just reuse the CC list 
-> from patches in this thread.
+Boot logs: https://gist.github.com/manorit2001/6c669e4273933bc46c3b28a631a96ae3
 
-I send the patch with `--to-cmd scripts/get_maintainer.pl`, maybe I 
-should have used `--cc-cmd`, but that would not change the list of 
-recipients.
+Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+---
+Manorit Chawdhry (4):
+      configs: am68_sk: Move to separate defconfig for AM68 SK board
+      arch: arm: dts: k3-am68-sk-r5: Sync with J721s2 R5 file
+      arch: arm: dts: k3-j721s2-r5: Introduce k3-j721s2-r5.dtsi
+      arm: dts: k3-j721s2|am68: Migrate to OF_UPSTREAM
 
-> 
->> diff --git a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt 
->> b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
->> index ce1de659d8..42214df21a 100644
->> --- a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
->> +++ b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
->> @@ -144,6 +144,22 @@ The signing is activated by wrapping SPL and 
->> fitImage sections into nxp-imx8mcst
->>   etype, which is done automatically in 
->> arch/arm/dts/imx8m{m,n,p,q}-u-boot.dtsi
->>   in case CONFIG_IMX_HAB Kconfig symbol is enabled.
->> +Per default the HAB keys and certificates need to be located in the 
->> build
->> +directory, this means copying the following files from the HAB keys 
->> directory
->> +flat (e.g. removing the `keys` and `cert` subdirectory) into the 
->> u-boot build
->> +directory for the CST Code Signing Tool to locate them:
-> 
-> Do symlink(s) work too ?
+Neha Malcom Francis (2):
+      board: ti: j721s2: j721s2.env: Add explicit boot_targets
+      configs: j721s2_evm_a72_defconfig: Switch to bootstd
 
-I have not tested it, but I don't see any reason why it would not. I 
-also don't see a reason for mentioning it. I want to keep it simple, if 
-the dev whats to do things differently, they are free to do so.
+ arch/arm/dts/Makefile                              |    4 +-
+ arch/arm/dts/k3-am68-sk-base-board-u-boot.dtsi     |   41 +-
+ arch/arm/dts/k3-am68-sk-base-board.dts             |  611 -------
+ arch/arm/dts/k3-am68-sk-r5-base-board.dts          |   75 +-
+ arch/arm/dts/k3-am68-sk-som.dtsi                   |  259 ---
+ arch/arm/dts/k3-j721s2-binman.dtsi                 |   91 +-
+ .../dts/k3-j721s2-common-proc-board-u-boot.dtsi    |   18 +-
+ arch/arm/dts/k3-j721s2-common-proc-board.dts       |  504 -----
+ arch/arm/dts/k3-j721s2-main.dtsi                   | 1928 --------------------
+ arch/arm/dts/k3-j721s2-mcu-wakeup.dtsi             |  738 --------
+ arch/arm/dts/k3-j721s2-r5-common-proc-board.dts    |   78 +-
+ arch/arm/dts/k3-j721s2-r5.dtsi                     |   81 +
+ arch/arm/dts/k3-j721s2-som-p0.dtsi                 |  361 ----
+ arch/arm/dts/k3-j721s2-thermal.dtsi                |  101 -
+ arch/arm/dts/k3-j721s2.dtsi                        |  175 --
+ board/ti/j721s2/MAINTAINERS                        |   11 +-
+ board/ti/j721s2/j721s2.env                         |    1 +
+ configs/am68_sk_a72_defconfig                      |   10 +
+ configs/am68_sk_r5_defconfig                       |   10 +
+ configs/j721s2_evm_a72_defconfig                   |   10 +-
+ configs/j721s2_evm_r5_defconfig                    |    2 +-
+ include/configs/j721s2_evm.h                       |    1 -
+ 22 files changed, 155 insertions(+), 4955 deletions(-)
+---
+base-commit: 2f1e76bcfee75b9f99ade63002c05ffaaec86afb
+change-id: 20240506-b4-upstream-j721s2-of-upstream-3c28ff12d664
 
-> 
->> +- `crts/SRK_1_2_3_4_table.bin`
->> +- `crts/CSF1_1_sha256_4096_65537_v3_usr_crt.pem`
->> +- `keys/CSF1_1_sha256_4096_65537_v3_usr_key.pem`
->> +- `crts/IMG1_1_sha256_4096_65537_v3_usr_crt.pem`
->> +- `keys/IMG1_1_sha256_4096_65537_v3_usr_key.pem`
->> +- `keys/key_pass.txt`
->> +
->> +The paths to the SRK table and the certificates can be modified via 
->> changes to
->> +the nxp_imx8mcst device tree node
-> 
-> "nodes", plural, there are two, one for SPL and one for fitImage.
-
-Well, I was thinking here more generally about the node type and was 
-assuming that the person reading this knows how many they have of that 
-type. But I can add a `s` in v2.
-
-> 
-> It would be good to mention the DT properties which govern the crypto 
-> material paths -- nxp,srk-table, nxp,csf-crt, nxp,img-crt -- somewhere 
-> around this sentence.
-
-This is something that should be documented with the changes where that 
-code was added, IMO. I only documented here what I found out and have 
-used myself, I haven't used those.
-
-I would be interested in reading how to best overwrite those paths and 
-the image structured from board u-boot.dtsi files myself.
-
-If you want to can pickup my patch and integrate it into your series and 
-extend it.
-
-regards,
-Claudius
-
+Best regards,
 -- 
-DENX Software Engineering GmbH,        Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-54 Fax: (+49)-8142-66989-80 Email: ch@denx.de
+Manorit Chawdhry <m-chawdhry@ti.com>
+
