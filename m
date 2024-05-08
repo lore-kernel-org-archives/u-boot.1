@@ -4,82 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A797AC25B75
-	for <u-boot@archiver.kernel.org>; Wed,  8 May 2024 11:16:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7999C04FFE
+	for <u-boot@archiver.kernel.org>; Wed,  8 May 2024 11:24:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20C9D886EB;
-	Wed,  8 May 2024 13:16:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4B42F88393;
+	Wed,  8 May 2024 13:24:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hf8LWrye";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BWcxzvvl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAF6F886EB; Wed,  8 May 2024 13:16:21 +0200 (CEST)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
+ id 2A53088427; Wed,  8 May 2024 13:24:24 +0200 (CEST)
+Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
+ [IPv6:2607:f8b0:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AB9C882C8
- for <u-boot@lists.denx.de>; Wed,  8 May 2024 13:16:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D0F2F870AB
+ for <u-boot@lists.denx.de>; Wed,  8 May 2024 13:24:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=o451686892@gmail.com
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-2b433dd2566so3021221a91.2
- for <u-boot@lists.denx.de>; Wed, 08 May 2024 04:16:19 -0700 (PDT)
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-602801ea164so2926238a12.0
+ for <u-boot@lists.denx.de>; Wed, 08 May 2024 04:24:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1715166978; x=1715771778; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1715167460; x=1715772260; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=AEqhZn8a1z3vtKaWroAbHTihipiEum0K1w+Lm+YGP8U=;
- b=hf8LWryesC47ATG6fA5hkATya8nnUha2g6FUhN2R+DHT4X/zsYXAfEOr8NirZACfMo
- MpzEuknAYniaPw+/nnNsX1xKDhFz2Jnzm0Ulpuy3wF9Ji46XUI2B74vy6DhhRYnNbIt8
- 0T/MzbcEwu+EZDYO9RhxaBwWshF5m1PKekhkFCxLuCwOBxj1d+XcbV087Ev6kaNLNgGi
- 8lmSDpml5dummAnXJioMETgTYReSqTKgnuka/WccA09beIaPgJlnk+44DIlHYsPv7f8c
- Wsw3mps9UuGpGss+g4XX3+/YnZzeLmpyOWgm+MmoeHF6DnYDiAKvhNVS6hOke7O1YJcl
- FVcg==
+ bh=GjM3dnQaLwO6IdvZcSjpMlgvXpYtiVSIK43UDVe4/Ac=;
+ b=BWcxzvvlpu9Jgs1arNdjLzNT2l2zptmUs2bs8mM2mIFCjG04ITLG2+T+L0PGFsHhwa
+ O3DaILHmJD1aUefYf6Jt09T1XQIx7LlyydHkzB5/mYyH1o2tIDT01mOZakRTtUfjEs5p
+ OAD/byCaO2UICUQ28l2xnfDM2Wexn55vSWHMEkH4fcaZKQ+Wsmr+IKUokHab1Za7dHxq
+ u8u0AV9vHHfRMZBBmzGuJ27Nb/eJ8VWvdF3X1j3bOQK25/znBArU2NTSNNymIGERrJup
+ H5XEhOCPtP86XgmGU/fDERNMxIS/o6oDclnaRWHLmOISEHi6dznwXPM86lYFBMZawp6r
+ 6uUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715166978; x=1715771778;
+ d=1e100.net; s=20230601; t=1715167460; x=1715772260;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=AEqhZn8a1z3vtKaWroAbHTihipiEum0K1w+Lm+YGP8U=;
- b=gPUXacMZNXpPBcG9KLy5e+Y4M6nD7XkKnMRuDph79mgwwtLxftm0HMFwVT/XIh19dh
- 2BfEC+6Fb8YhpByj0LFP4/mNXIx++uTtQ3fDjKeZmPwKb6SdOTT4eCanaOBsfuIrHYhc
- MOBpuCwzHLyptzYCezGZLixAjao8PPP47Aoqc4EcA4lsIFOzNYti6EmJ5LNt8Akk674A
- SnpQdwdatA2JQ+KrCBItjPymgeYxqudwZClNejW/+e8GQT+a3/+gFp+SDk79VPM6X661
- Z83oPOPX/tn7O/foiU9DSd2bWkGXy19BchPaONHPvXqK6Y+Wlr9qhbtNvH1Cwx8WBoe1
- 94ow==
+ bh=GjM3dnQaLwO6IdvZcSjpMlgvXpYtiVSIK43UDVe4/Ac=;
+ b=r0GullpOQJU9VizAgCv4VJHxIPOg0y8498SXcwpUOq17IhYDS65ulNIH0kyaDdVkiv
+ zIUQoMljjaWe40HGp+XORmKmg9Iw+yiA3DmhOiUDJfZzmDZ/h06fw1xiSDeE+nx5Vj4K
+ TprRx78s6rYCA7a72PMqU6gFXhNdSSQgV8wX+kNijmZUfozoJg1JwFNFwKoFeXLRHX3X
+ 2pX0fAm9l6iWo46I1y0rS6uy4iq/ZhTxdRrJs+0/gyeW4/k9ULEeqxWzpimLedLaKSSe
+ ZJZ8x8mxgYwIcghUeXrXrQkk1UefUIE3ooeBxlwYRndHENv6SheRL5umA9A4hTA14jli
+ DRpg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWM6yumnWjkk4sFFMWkHexcExP+Jbmk/YsZYqieLgNwjkkN+n6LkImlBCMc/Bu7by1mxIKLpirRHSxUwXvUBvkwejnzqA==
-X-Gm-Message-State: AOJu0YxKG0LFMFu7WPdLBGETNwYmx31w1CtVnOdr370WCIa00La+GFDN
- MMlYNRun5rnnhDVwViqX5F35n/6o3MQn3agOm50W0TrsTq+E1Y0b
-X-Google-Smtp-Source: AGHT+IFXFylD9pzS+XguQ38sn7z6+AyEa54Z+VI1oiynuG+OcXjrZ/lO5CbE+dbn4s2R5PZFZ2I22w==
-X-Received: by 2002:a17:90b:4b4b:b0:2b4:32ae:7217 with SMTP id
- 98e67ed59e1d1-2b6169d96d4mr1897563a91.30.1715166977396; 
- Wed, 08 May 2024 04:16:17 -0700 (PDT)
+ AJvYcCXeoP5X8ZkrNzA+CvjlLYMA7C4BxZm+lOOYG0gSD/eXj/DUSElWUISfrOve1eoETAMxfgcYDoq8O7uO4t8LPaABY/0dOw==
+X-Gm-Message-State: AOJu0Yy1nt+FWCe60SSnxsMelrPCjZdTcRyGhriq9xgKxKW09S1X1VaU
+ edW6EKNhsDflVwscinJwoJ57GI4uGjT6utVY3bU6iN4VaCo3db35
+X-Google-Smtp-Source: AGHT+IFK93VcuC9U2COoiqCMwIA+v1vHlzNRIU4ooNV3nOgTqALZEsDSk/O7gp9jzQCJYMatXPHzOA==
+X-Received: by 2002:a05:6a20:1019:b0:1af:cf63:3742 with SMTP id
+ adf61e73a8af0-1afcf633926mr276947637.42.1715167459826; 
+ Wed, 08 May 2024 04:24:19 -0700 (PDT)
 Received: from ownia.localdomain (vps-bd302c4a.vps.ovh.ca.
  [2402:1f00:8000:800::34b0]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2b628ca53c3sm1171510a91.46.2024.05.08.04.16.12
+ z14-20020a170903018e00b001ec5cbd4af5sm11600081plg.305.2024.05.08.04.24.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 May 2024 04:16:17 -0700 (PDT)
+ Wed, 08 May 2024 04:24:19 -0700 (PDT)
 From: Weizhao Ouyang <o451686892@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Jonas Karlman <jonas@kwiboo.se>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- John Keeping <john@metanate.com>, Dragan Simic <dsimic@manjaro.org>,
- Weizhao Ouyang <o451686892@gmail.com>,
- Chris Morgan <macromorgan@hotmail.com>,
- Ben Wolsieffer <benwolsieffer@gmail.com>,
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: [PATCH] arm: rockchip: using generic capsule update mechanism
-Date: Wed,  8 May 2024 19:16:00 +0800
-Message-Id: <20240508111600.154919-1-o451686892@gmail.com>
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Weizhao Ouyang <o451686892@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Dan Carpenter <dan.carpenter@linaro.org>, u-boot@lists.denx.de
+Subject: [PATCH] efi_loader: capsule: detect possible ESP device path
+Date: Wed,  8 May 2024 19:24:01 +0800
+Message-Id: <20240508112401.155528-1-o451686892@gmail.com>
 X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -99,386 +95,208 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently Rockchip's capsule update mechanism only accepts capsules in
-form of a mmc partition, but a generic capsule update mechanism should
-be used to satisfy the universal requirements.
+When using CapsuleApp to execute on-disk update, it will choose the
+first boot option as BootNext entry to perform the capsule update after
+a reboot. But auto-generate boot option will ignore the logical
+partition which might be an ESP, thus it could not find the capsule
+file.
 
+Align with the EDK II, detect the possible ESP device path by expanding
+the media path.
+
+Fixes: f86fba8adbf3 ("efi_loader: auto-generate boot option for each blkio device")
 Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
 ---
- arch/arm/mach-rockchip/board.c              | 153 ------------------
- board/radxa/rockpi4-rk3399/rockpi4-rk3399.c | 166 +++++++++++++++++++-
- 2 files changed, 158 insertions(+), 161 deletions(-)
+ include/efi_loader.h          |   6 ++
+ lib/efi_loader/efi_boottime.c |  15 ++---
+ lib/efi_loader/efi_capsule.c  | 110 +++++++++++++++++++++++++++++++++-
+ 3 files changed, 118 insertions(+), 13 deletions(-)
 
-diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
-index cd226844b6..73fbb3f58c 100644
---- a/arch/arm/mach-rockchip/board.c
-+++ b/arch/arm/mach-rockchip/board.c
-@@ -35,155 +35,6 @@
- #include <asm/arch-rockchip/periph.h>
- #include <power/regulator.h>
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index 9600941aa327..9d78fa936701 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -683,6 +683,12 @@ efi_status_t efi_protocol_open(struct efi_handler *handler,
+ 			       void **protocol_interface, void *agent_handle,
+ 			       void *controller_handle, uint32_t attributes);
  
--#if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) && IS_ENABLED(CONFIG_EFI_PARTITION)
++/* Connect drivers to controller */
++efi_status_t EFIAPI efi_connect_controller(efi_handle_t controller_handle,
++					   efi_handle_t *driver_image_handle,
++					   struct efi_device_path *remain_device_path,
++					   bool recursive);
++
+ /* Install multiple protocol interfaces */
+ efi_status_t EFIAPI
+ efi_install_multiple_protocol_interfaces(efi_handle_t *handle, ...);
+diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
+index 1951291747cd..2c86d78208b2 100644
+--- a/lib/efi_loader/efi_boottime.c
++++ b/lib/efi_loader/efi_boottime.c
+@@ -103,12 +103,6 @@ static efi_status_t EFIAPI efi_disconnect_controller(
+ 					efi_handle_t driver_image_handle,
+ 					efi_handle_t child_handle);
+ 
+-static
+-efi_status_t EFIAPI efi_connect_controller(efi_handle_t controller_handle,
+-					   efi_handle_t *driver_image_handle,
+-					   struct efi_device_path *remain_device_path,
+-					   bool recursive);
 -
--#define DFU_ALT_BUF_LEN			SZ_1K
--
--static struct efi_fw_image *fw_images;
--
--static bool updatable_image(struct disk_partition *info)
--{
--	int i;
--	bool ret = false;
--	efi_guid_t image_type_guid;
--
--	uuid_str_to_bin(info->type_guid, image_type_guid.b,
--			UUID_STR_FORMAT_GUID);
--
--	for (i = 0; i < update_info.num_images; i++) {
--		if (!guidcmp(&fw_images[i].image_type_id, &image_type_guid)) {
--			ret = true;
--			break;
--		}
--	}
--
--	return ret;
--}
--
--static void set_image_index(struct disk_partition *info, int index)
--{
--	int i;
--	efi_guid_t image_type_guid;
--
--	uuid_str_to_bin(info->type_guid, image_type_guid.b,
--			UUID_STR_FORMAT_GUID);
--
--	for (i = 0; i < update_info.num_images; i++) {
--		if (!guidcmp(&fw_images[i].image_type_id, &image_type_guid)) {
--			fw_images[i].image_index = index;
--			break;
--		}
--	}
--}
--
--static int get_mmc_desc(struct blk_desc **desc)
--{
--	int ret;
--	struct mmc *mmc;
--	struct udevice *dev;
--
--	/*
--	 * For now the firmware images are assumed to
--	 * be on the SD card
--	 */
--	ret = uclass_get_device(UCLASS_MMC, 1, &dev);
--	if (ret)
--		return -1;
--
--	mmc = mmc_get_mmc_dev(dev);
--	if (!mmc)
--		return -ENODEV;
--
--	if ((ret = mmc_init(mmc)))
--		return ret;
--
--	*desc = mmc_get_blk_desc(mmc);
--	if (!*desc)
--		return -1;
--
--	return 0;
--}
--
--void set_dfu_alt_info(char *interface, char *devstr)
--{
--	const char *name;
--	bool first = true;
--	int p, len, devnum, ret;
--	char buf[DFU_ALT_BUF_LEN];
--	struct disk_partition info;
--	struct blk_desc *desc = NULL;
--
--	ret = get_mmc_desc(&desc);
--	if (ret) {
--		log_err("Unable to get mmc desc\n");
--		return;
--	}
--
--	memset(buf, 0, sizeof(buf));
--	name = blk_get_uclass_name(desc->uclass_id);
--	devnum = desc->devnum;
--	len = strlen(buf);
--
--	len += snprintf(buf + len, DFU_ALT_BUF_LEN - len,
--			 "%s %d=", name, devnum);
--
--	for (p = 1; p <= MAX_SEARCH_PARTITIONS; p++) {
--		if (part_get_info(desc, p, &info))
--			continue;
--
--		/* Add entry to dfu_alt_info only for updatable images */
--		if (updatable_image(&info)) {
--			if (!first)
--				len += snprintf(buf + len,
--						DFU_ALT_BUF_LEN - len, ";");
--
--			len += snprintf(buf + len, DFU_ALT_BUF_LEN - len,
--					"%s%d_%s part %d %d",
--					name, devnum, info.name, devnum, p);
--			first = false;
--		}
--	}
--
--	log_debug("dfu_alt_info => %s\n", buf);
--	env_set("dfu_alt_info", buf);
--}
--
--__weak void rockchip_capsule_update_board_setup(void)
--{
--}
--
--static void gpt_capsule_update_setup(void)
--{
--	int p, i, ret;
--	struct disk_partition info;
--	struct blk_desc *desc = NULL;
--
--	fw_images = update_info.images;
--	rockchip_capsule_update_board_setup();
--
--	ret = get_mmc_desc(&desc);
--	if (ret) {
--		log_err("Unable to get mmc desc\n");
--		return;
--	}
--
--	for (p = 1, i = 1; p <= MAX_SEARCH_PARTITIONS; p++) {
--		if (part_get_info(desc, p, &info))
--			continue;
--
--		/*
--		 * Since we have a GPT partitioned device, the updatable
--		 * images could be stored in any order. Populate the
--		 * image_index at runtime.
--		 */
--		if (updatable_image(&info)) {
--			set_image_index(&info, i);
--			i++;
--		}
--	}
--}
--#endif /* CONFIG_EFI_HAVE_CAPSULE_SUPPORT && CONFIG_EFI_PARTITION */
--
- __weak int rk_board_late_init(void)
+ /* Called on every callback entry */
+ int __efi_entry_check(void)
  {
- 	return 0;
-@@ -193,10 +44,6 @@ int board_late_init(void)
- {
- 	setup_boot_mode();
- 
--#if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) && IS_ENABLED(CONFIG_EFI_PARTITION)
--	gpt_capsule_update_setup();
--#endif
--
- 	return rk_board_late_init();
- }
- 
-diff --git a/board/radxa/rockpi4-rk3399/rockpi4-rk3399.c b/board/radxa/rockpi4-rk3399/rockpi4-rk3399.c
-index a533128b92..01c3b7d5a2 100644
---- a/board/radxa/rockpi4-rk3399/rockpi4-rk3399.c
-+++ b/board/radxa/rockpi4-rk3399/rockpi4-rk3399.c
-@@ -4,22 +4,132 @@
+@@ -3670,11 +3664,10 @@ static efi_status_t efi_connect_single_controller(
+  *
+  * Return: status code
   */
- 
- #include <dm.h>
-+#include <mmc.h>
-+#include <part.h>
- #include <efi_loader.h>
- 
- #define ROCKPI4_UPDATABLE_IMAGES	2
- 
--#if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
--static struct efi_fw_image fw_images[ROCKPI4_UPDATABLE_IMAGES] = {0};
-+#if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) && IS_ENABLED(CONFIG_EFI_PARTITION)
-+
-+#define DFU_ALT_BUF_LEN			SZ_1K
-+
-+static struct efi_fw_image *fw_images = {0};
-+static struct efi_fw_image fw_images_d[ROCKPI4_UPDATABLE_IMAGES] = {0};
- 
- struct efi_capsule_update_info update_info = {
- 	.num_images = ROCKPI4_UPDATABLE_IMAGES,
--	.images = fw_images,
-+	.images = fw_images_d,
- };
- 
--#endif
-+static bool updatable_image(struct disk_partition *info)
-+{
-+	int i;
-+	bool ret = false;
-+	efi_guid_t image_type_guid;
-+
-+	uuid_str_to_bin(info->type_guid, image_type_guid.b,
-+			UUID_STR_FORMAT_GUID);
-+
-+	for (i = 0; i < update_info.num_images; i++) {
-+		if (!guidcmp(&fw_images[i].image_type_id, &image_type_guid)) {
-+			ret = true;
-+			break;
-+		}
-+	}
-+
-+	return ret;
-+}
-+
-+static void set_image_index(struct disk_partition *info, int index)
-+{
-+	int i;
-+	efi_guid_t image_type_guid;
-+
-+	uuid_str_to_bin(info->type_guid, image_type_guid.b,
-+			UUID_STR_FORMAT_GUID);
-+
-+	for (i = 0; i < update_info.num_images; i++) {
-+		if (!guidcmp(&fw_images[i].image_type_id, &image_type_guid)) {
-+			fw_images[i].image_index = index;
-+			break;
-+		}
-+	}
-+}
-+
-+static int get_mmc_desc(struct blk_desc **desc)
-+{
-+	int ret;
-+	struct mmc *mmc;
-+	struct udevice *dev;
-+
-+	/*
-+	 * For now the firmware images are assumed to
-+	 * be on the SD card
-+	 */
-+	ret = uclass_get_device(UCLASS_MMC, 1, &dev);
-+	if (ret)
-+		return -1;
-+
-+	mmc = mmc_get_mmc_dev(dev);
-+	if (!mmc)
-+		return -ENODEV;
-+
-+	ret = mmc_init(mmc);
-+	if (ret)
-+		return ret;
-+
-+	*desc = mmc_get_blk_desc(mmc);
-+	if (!*desc)
-+		return -1;
-+
-+	return 0;
-+}
-+
-+void set_dfu_alt_info(char *interface, char *devstr)
-+{
-+	const char *name;
-+	bool first = true;
-+	int p, len, devnum, ret;
-+	char buf[DFU_ALT_BUF_LEN];
-+	struct disk_partition info;
-+	struct blk_desc *desc = NULL;
-+
-+	ret = get_mmc_desc(&desc);
-+	if (ret) {
-+		log_err("Unable to get mmc desc\n");
-+		return;
-+	}
-+
-+	memset(buf, 0, sizeof(buf));
-+	name = blk_get_uclass_name(desc->uclass_id);
-+	devnum = desc->devnum;
-+	len = strlen(buf);
-+
-+	len += snprintf(buf + len, DFU_ALT_BUF_LEN - len,
-+			 "%s %d=", name, devnum);
-+
-+	for (p = 1; p <= MAX_SEARCH_PARTITIONS; p++) {
-+		if (part_get_info(desc, p, &info))
-+			continue;
-+
-+		/* Add entry to dfu_alt_info only for updatable images */
-+		if (updatable_image(&info)) {
-+			if (!first)
-+				len += snprintf(buf + len,
-+						DFU_ALT_BUF_LEN - len, ";");
-+
-+			len += snprintf(buf + len, DFU_ALT_BUF_LEN - len,
-+					"%s%d_%s part %d %d",
-+					name, devnum, info.name, devnum, p);
-+			first = false;
-+		}
-+	}
-+
-+	log_debug("dfu_alt_info => %s\n", buf);
-+	env_set("dfu_alt_info", buf);
-+}
- 
--#ifndef CONFIG_SPL_BUILD
--#if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) && IS_ENABLED(CONFIG_EFI_PARTITION)
- static bool board_is_rockpi_4b(void)
+-static efi_status_t EFIAPI efi_connect_controller(
+-			efi_handle_t controller_handle,
+-			efi_handle_t *driver_image_handle,
+-			struct efi_device_path *remain_device_path,
+-			bool recursive)
++efi_status_t EFIAPI efi_connect_controller(efi_handle_t controller_handle,
++					   efi_handle_t *driver_image_handle,
++					   struct efi_device_path *remain_device_path,
++					   bool recursive)
  {
- 	return of_machine_is_compatible("radxa,rockpi4b");
-@@ -30,7 +140,7 @@ static bool board_is_rockpi_4c(void)
- 	return of_machine_is_compatible("radxa,rockpi4c");
+ 	efi_status_t r;
+ 	efi_status_t ret = EFI_NOT_FOUND;
+diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
+index de0d49ebebda..919e3cba071b 100644
+--- a/lib/efi_loader/efi_capsule.c
++++ b/lib/efi_loader/efi_capsule.c
+@@ -922,6 +922,105 @@ static bool device_is_present_and_system_part(struct efi_device_path *dp)
+ 	return true;
  }
  
--void rockchip_capsule_update_board_setup(void)
-+static void rockchip_capsule_update_board_setup(void)
- {
- 	if (board_is_rockpi_4b()) {
- 		efi_guid_t idbldr_image_type_guid =
-@@ -54,5 +164,45 @@ void rockchip_capsule_update_board_setup(void)
- 		fw_images[1].fw_name = u"ROCKPI4C-UBOOT";
- 	}
- }
-+
-+static void gpt_capsule_update_setup(void)
++/**
++ * get_esp_from_boot_option_file_path - get the expand device path
++ *
++ * Get a possible efi system partition by expanding a boot option
++ * file path.
++ *
++ * @boot_dev	The device path pointing to a boot option
++ * Return:	The full ESP device path or NULL if fail
++ */
++static struct efi_device_path *get_esp_from_boot_option_file_path(struct efi_device_path *boot_dev)
 +{
-+	int p, i, ret;
-+	struct disk_partition info;
-+	struct blk_desc *desc = NULL;
++	efi_status_t ret = EFI_SUCCESS;
++	efi_handle_t handle;
++	struct efi_device_path *dp = boot_dev;
++	struct efi_device_path *full_path = NULL;
 +
-+	fw_images = update_info.images;
-+	rockchip_capsule_update_board_setup();
++	ret = EFI_CALL(efi_locate_device_path(&efi_simple_file_system_protocol_guid,
++					      &dp,
++					      &handle));
++	if (ret != EFI_SUCCESS)
++		ret = EFI_CALL(efi_locate_device_path(&efi_block_io_guid, &dp, &handle));
 +
-+	ret = get_mmc_desc(&desc);
-+	if (ret) {
-+		log_err("Unable to get mmc desc\n");
-+		return;
-+	}
++	/* Expand Media Device Path */
++	if (ret == EFI_SUCCESS && EFI_DP_TYPE(dp, END, END)) {
++		struct efi_device_path *temp_dp;
++		struct efi_block_io *block_io;
++		void *buffer;
++		efi_handle_t *simple_file_system_handle;
++		efi_uintn_t number_handles, index;
++		u32 size;
++		u32 temp_size;
 +
-+	for (p = 1, i = 1; p <= MAX_SEARCH_PARTITIONS; p++) {
-+		if (part_get_info(desc, p, &info))
-+			continue;
++		temp_dp = boot_dev;
++		ret = EFI_CALL(efi_locate_device_path(&efi_simple_file_system_protocol_guid,
++						      &temp_dp,
++						      &handle));
++		/*
++		 * For device path pointing to simple file system, it only expands to one
++		 * full path
++		 */
++		if (ret == EFI_SUCCESS && EFI_DP_TYPE(temp_dp, END, END)) {
++			if (device_is_present_and_system_part(temp_dp))
++				return temp_dp;
++		}
 +
 +		/*
-+		 * Since we have a GPT partitioned device, the updatable
-+		 * images could be stored in any order. Populate the
-+		 * image_index at runtime.
++		 * For device path only pointing to the removable device handle, try to
++		 * search all its children handles
 +		 */
-+		if (updatable_image(&info)) {
-+			set_image_index(&info, i);
-+			i++;
++		ret = EFI_CALL(efi_locate_device_path(&efi_block_io_guid, &temp_dp, &handle));
++		EFI_CALL(efi_connect_controller(handle, NULL, NULL, true));
++
++		/* Align with edk2, issue a dummy read to the device to check the device change */
++		ret = EFI_CALL(efi_handle_protocol(handle, &efi_block_io_guid, (void **)&block_io));
++		if (ret == EFI_SUCCESS) {
++			buffer = memalign(block_io->media->io_align, block_io->media->block_size);
++			if (buffer) {
++				ret = EFI_CALL(block_io->read_blocks(block_io,
++								     block_io->media->media_id,
++								     0,
++								     block_io->media->block_size,
++								     buffer));
++				free(buffer);
++			} else {
++				return full_path;
++			}
++		} else {
++			return full_path;
 +		}
++
++		/* detect the default boot file from removable media */
++		size = efi_dp_size(boot_dev) - sizeof(struct efi_device_path);
++		EFI_CALL(efi_locate_handle_buffer(BY_PROTOCOL,
++						  &efi_simple_file_system_protocol_guid,
++						  NULL,
++						  &number_handles,
++						  &simple_file_system_handle));
++		for (index = 0; index < number_handles; index++) {
++			EFI_CALL(efi_handle_protocol(simple_file_system_handle[index],
++						     &efi_guid_device_path,
++						     (void **)&temp_dp));
++
++			log_debug("Search ESP %pD\n", temp_dp);
++			temp_size = efi_dp_size(temp_dp) - sizeof(struct efi_device_path);
++			if (size <= temp_size && !memcmp(temp_dp, boot_dev, size)) {
++				if (device_is_present_and_system_part(temp_dp)) {
++					efi_free_pool(simple_file_system_handle);
++					return temp_dp;
++				}
++			}
++		}
++
++		if (simple_file_system_handle)
++			efi_free_pool(simple_file_system_handle);
 +	}
-+}
- #endif /* CONFIG_EFI_HAVE_CAPSULE_SUPPORT && CONFIG_EFI_PARTITION */
--#endif /* !CONFIG_SPL_BUILD */
 +
-+int rk_board_late_init(void)
-+{
-+#if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) && IS_ENABLED(CONFIG_EFI_PARTITION)
-+	gpt_capsule_update_setup();
-+#endif
-+
-+	return 0;
++	return full_path;
 +}
 +
+ /**
+  * find_boot_device - identify the boot device
+  *
+@@ -938,6 +1037,7 @@ static efi_status_t find_boot_device(void)
+ 	int i, num;
+ 	struct efi_simple_file_system_protocol *volume;
+ 	struct efi_device_path *boot_dev = NULL;
++	struct efi_device_path *full_path = NULL;
+ 	efi_status_t ret;
+ 
+ 	/* find active boot device in BootNext */
+@@ -961,8 +1061,14 @@ static efi_status_t find_boot_device(void)
+ 			if (device_is_present_and_system_part(boot_dev)) {
+ 				goto found;
+ 			} else {
+-				efi_free_pool(boot_dev);
+-				boot_dev = NULL;
++				full_path = get_esp_from_boot_option_file_path(boot_dev);
++				if (full_path) {
++					boot_dev = full_path;
++					goto found;
++				} else {
++					efi_free_pool(boot_dev);
++					boot_dev = NULL;
++				}
+ 			}
+ 		}
+ 	}
 -- 
 2.40.1
 
