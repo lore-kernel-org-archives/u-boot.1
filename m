@@ -4,92 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F904C04FFE
-	for <u-boot@archiver.kernel.org>; Wed,  8 May 2024 10:18:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59923C19F4F
+	for <u-boot@archiver.kernel.org>; Wed,  8 May 2024 10:24:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F27298845B;
-	Wed,  8 May 2024 12:18:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C8021886E9;
+	Wed,  8 May 2024 12:24:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="t1qqqI+w";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TxgtVzX9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 498B688662; Wed,  8 May 2024 12:18:40 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E84048843F; Wed,  8 May 2024 12:24:17 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48E5F8843F
- for <u-boot@lists.denx.de>; Wed,  8 May 2024 12:18:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B50FE886E9
+ for <u-boot@lists.denx.de>; Wed,  8 May 2024 12:24:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a59c0a6415fso959139066b.1
- for <u-boot@lists.denx.de>; Wed, 08 May 2024 03:18:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1715163518; x=1715768318; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=60GX5JAA9s7MqFI3y1IHWx9C4wGSsNvenhGJGjcWlhU=;
- b=t1qqqI+wUuBlCxXmAEKvNOIcqCRZ2f5+5UotjodoFB3XCSHvfbwD6xxlYfGttsF002
- zzy/gedNR2mpq5opLhRIiWC3IJhNi+hNuuwe7ach+zJl52JwgTaAGfVdkiE7yFhgZ5vf
- SbazcdX8CFd+ALK9l4/R67CqezatgP1jl+wQlLcAP+cOa0uQCzjRF0PssYoyYP88vIyj
- 9KQ8bkFeflsG1vp98Kt7QCFuz39a4gmEgr7OxcJfnHeuo6czu65LcYyo0LUHwp1CGQLT
- Aq++VaUgQi3kbbkTU5WI5pWe9s9WsJfLnHBgvPBp6UMmRhnrBAPA/6/EWHQkRjkMrbYA
- 3JWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715163518; x=1715768318;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=60GX5JAA9s7MqFI3y1IHWx9C4wGSsNvenhGJGjcWlhU=;
- b=AEZ4v9ydlilRxrltpcyk41O9v0gQS8Umr6ISdG2m7k86TYIjUWlZE3jSyTouH+D5gz
- /BMFAmmwUUV8nl/fS4u9ZPG/jG/6FrZVVtZWfSKpAola5VpJppiBvhQnmhOIf80Ous5s
- 5OMCTeFoyWxp+E1IyPoKQzahNRfTocrTOLkqdNrXuzfBqvx4Nb/0t3BIIzLtP9hb9NJ4
- 8UC5bOsB0U6ylAbzj4JNfuROsvrkY/OWSBVQxZJMk0c9Vyr2Kpi8TXGIktXvTA3XDnqv
- 6Arz+Brc131aVbBKLsmwxwxbTITdjoPLz53SWB/hU/zkJgLQypG6p/nkDLgbLUjWwI6i
- 03qw==
-X-Gm-Message-State: AOJu0Yz+VDTuQtvXGy7uaz4pnlHQkEPJ2Ur5geZGOzSfE3oS+AEtEwt1
- Idx561CRyhQJg9SLG4zB9vnIF4qOEnSh8pLRaQOnfHC+OIAylu9NjsZNbO1O5zZQGnQrdZAZCVh
- WpyfvyfAZTTDuqahyNzIQSzB/kNF1AGYCPL3GjA==
-X-Google-Smtp-Source: AGHT+IE5pTJPSaBq9aWqxDTJ4YPnTofQ5p4MTGtrYnKokT5UWns/Kt3KNmsCgjXK4p8wLIg++6m4rPR566DqDE9+Guo=
-X-Received: by 2002:a17:907:9623:b0:a59:a18e:3fda with SMTP id
- a640c23a62f3a-a59fb9dc8d0mr144694866b.68.1715163517734; Wed, 08 May 2024
- 03:18:37 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 448AOC0D029050;
+ Wed, 8 May 2024 05:24:12 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1715163852;
+ bh=FLfNyoa4+j/h5QY1W6QF5buWXHmBoOrgQv+7poHBs0A=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=TxgtVzX9Jv2LUiYyD2vkHWNIw5IhAycAj/bDY2VUkZS3r84X5IJdhsqnNtSMroyqf
+ Ob2WR1+gjv0o8RGKfl1zdz6dM1+f5QUMI4UBBMuJtZimDO6r45BUslBI66M3gAGtQ4
+ EHypxrmxpW9AZWHSfqW26sQ9O6hRkIgjop6VNXXA=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 448AOCEC123842
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 8 May 2024 05:24:12 -0500
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 8
+ May 2024 05:24:11 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 8 May 2024 05:24:11 -0500
+Received: from [172.24.227.36]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 448AO8W2002624;
+ Wed, 8 May 2024 05:24:09 -0500
+Message-ID: <1fa4b6a2-edda-46f0-a10d-8a9cfd63cf94@ti.com>
+Date: Wed, 8 May 2024 15:54:08 +0530
 MIME-Version: 1.0
-References: <20240507175132.1456512-1-raymond.mao@linaro.org>
- <20240507175132.1456512-7-raymond.mao@linaro.org>
-In-Reply-To: <20240507175132.1456512-7-raymond.mao@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 8 May 2024 13:18:01 +0300
-Message-ID: <CAC_iWjKf_kBfRj-V3mTTSoq=YEZp4MZM90hhi4RzkL6p2Lr4-A@mail.gmail.com>
-Subject: Re: [PATCH v2 06/28] efi_loader: remove redundant hash includes
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Simon Glass <sjg@chromium.org>, Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
- Christophe Leroy <christophe.leroy@csgroup.eu>, 
- Andrew Davis <afd@ti.com>, Jesse Taube <mr.bossman075@gmail.com>,
- Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
- Ralph Siemsen <ralph.siemsen@linaro.org>, 
- Ilya Lukin <4.shket@gmail.com>, Sergei Antonov <saproj@gmail.com>, 
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- AKASHI Takahiro <takahiro.akashi@linaro.org>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- Eddie James <eajames@linux.ibm.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/6] configs: am68_sk: Move to separate defconfig for AM68
+ SK board
+To: Manorit Chawdhry <m-chawdhry@ti.com>, Tom Rini <trini@konsulko.com>, Simon
+ Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>
+CC: <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>, Andrew Davis
+ <afd@ti.com>, Udit Kumar <u-kumar1@ti.com>, Aniket Limaye <a-limaye@ti.com>
+References: <20240508-b4-upstream-j721s2-of-upstream-v1-0-ed0933172410@ti.com>
+ <20240508-b4-upstream-j721s2-of-upstream-v1-3-ed0933172410@ti.com>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20240508-b4-upstream-j721s2-of-upstream-v1-3-ed0933172410@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,50 +84,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 7 May 2024 at 20:54, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> Remove the redundant includes of u-boot/sha1.h, u-boot/sha256.h
-> and u-boot/sha512.h
->
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+Hi Manorit
+
+On 08/05/24 12:56, Manorit Chawdhry wrote:
+> Add defconfig for AM68 SK R5 and A72 configuration.
+> 
+> This includes and modifies the AM68 EVM defconfigs:
+> j721s2_evm_r5_defconfig -> am68_sk_r5_defconfig
+> j721s2_evm_a72_defconfig -> am68_sk_a72_defconfig
+> 
+> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 > ---
-> Changes in v2
-> - None.
->
->  lib/efi_loader/efi_signature.c | 1 -
->  lib/efi_loader/efi_tcg2.c      | 3 ---
->  2 files changed, 4 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_signature.c b/lib/efi_loader/efi_signature.c
-> index f338e732759..184eac8cddb 100644
-> --- a/lib/efi_loader/efi_signature.c
-> +++ b/lib/efi_loader/efi_signature.c
-> @@ -17,7 +17,6 @@
->  #include <linux/oid_registry.h>
->  #include <u-boot/hash-checksum.h>
->  #include <u-boot/rsa.h>
-> -#include <u-boot/sha256.h>
->
->  const efi_guid_t efi_guid_sha256 = EFI_CERT_SHA256_GUID;
->  const efi_guid_t efi_guid_cert_rsa2048 = EFI_CERT_RSA2048_GUID;
-> diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
-> index b07e0099c27..ac056dcfc55 100644
-> --- a/lib/efi_loader/efi_tcg2.c
-> +++ b/lib/efi_loader/efi_tcg2.c
-> @@ -19,9 +19,6 @@
->  #include <tpm-v2.h>
->  #include <tpm_api.h>
->  #include <u-boot/hash-checksum.h>
-> -#include <u-boot/sha1.h>
-> -#include <u-boot/sha256.h>
-> -#include <u-boot/sha512.h>
->  #include <linux/unaligned/be_byteshift.h>
->  #include <linux/unaligned/le_byteshift.h>
->  #include <linux/unaligned/generic.h>
-> --
-> 2.25.1
->
+>   arch/arm/dts/k3-am68-sk-base-board-u-boot.dtsi | 23 +++++++
+>   arch/arm/dts/k3-j721s2-binman.dtsi             | 89 +-------------------------
+>   board/ti/j721s2/MAINTAINERS                    |  2 +
+>   configs/am68_sk_a72_defconfig                  | 10 +++
+>   configs/am68_sk_r5_defconfig                   | 10 +++
+>   configs/j721s2_evm_a72_defconfig               |  2 +-
+>   configs/j721s2_evm_r5_defconfig                |  2 +-
+>   7 files changed, 49 insertions(+), 89 deletions(-)
+> 
+> 
 
-Please include this in a different cleanup series along with other fixes.
+This looks good to me.
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
+
+-- 
+Thanking You
+Neha Malcom Francis
