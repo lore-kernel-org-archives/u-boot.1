@@ -4,46 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54B26C10F1A
-	for <u-boot@archiver.kernel.org>; Wed,  8 May 2024 02:03:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48A2EC25B4F
+	for <u-boot@archiver.kernel.org>; Wed,  8 May 2024 02:03:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86E738846E;
-	Wed,  8 May 2024 04:02:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E9375885AF;
+	Wed,  8 May 2024 04:02:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1715133766;
-	bh=GW4Qpap7sGTAWhbjvTbzOFp6gvFFb1mw3j8LAdpCbzc=;
+	s=phobos-20191101; t=1715133769;
+	bh=ReK57ZHXJ2MBVQtRDDtoPYARs0pSHI1A8YB7zBL+/iY=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=xgnQ/XPAN3uVMFjxyl9QTMvRdWO5m9XG/edi+elrfYVwQYXZCE+sGZ4/zSfiffKUw
-	 2rpu5O/ufrLaJF0hAxXA6TASjjEOJlOjw1s2O9NdvjB2bGW9x4ev7ZeeAkpMO6a80l
-	 M+YE7AT0eMKsof39JApQFQA2krdyoI58nbs1zC4QunVFp05jbc7WVt2SeGq9FmDCgY
-	 BysIg5DacSNcxH/oxYYWoCuW9Agy2oB5ZxvnxJAfUzw7knMBoTV9/BpWLM9o9Z8Qme
-	 0s/IVF0G672yXh9AqGT8+bUzVlvWhlQgChzCPbMy03+B0M3gtSKYioySf/30pP5mu2
-	 fFwzCTYEUTmVQ==
+	b=j0JdwKh4KT9gckpE1hDRBflNc+e0C8QUY7JmIJ4WpNKtp5jrFbTUp90Ac2wEZlXB/
+	 He35++Lg0oFXE148xSDYFFu2WDxr2G2BzFV7nL75ezESWakN7+Nn9wGSZrdJq8qhzv
+	 ugY/VWeA+J4IKz0nifrDAaSAHQZ2opU2xWqWFK5y1XOi1/7o3WdNLSKTt81JAbDvqg
+	 2vBtNWynGxvcRV2TfmB+IL6Omfp+iVP/xlTWEucg2A0TKQe1BljwaxE2s/sm/wmkrH
+	 WtDs8/vtdP8lrpYOeFW2xoWGPuIOld0pJMUTPTnO2KNV8BkBdl9HTIyujCW4Yt4+Ht
+	 zpNuWi8kCHnRg==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id EFD1388436;
- Wed,  8 May 2024 04:02:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 171BE8843D;
+ Wed,  8 May 2024 04:02:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1715133765;
- bh=GW4Qpap7sGTAWhbjvTbzOFp6gvFFb1mw3j8LAdpCbzc=;
+ s=phobos-20191101; t=1715133766;
+ bh=ReK57ZHXJ2MBVQtRDDtoPYARs0pSHI1A8YB7zBL+/iY=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=H8o1qbT7bh45NKxeOJiMPjV302XgJ1pR3HueCuXveH9S3plQ6IZN5ZRJmxDWEQoSE
- SjLKvWT0vYmEcI3Jq2U5NLndzArX/k8VBD4lkW6n0S+0F1ilEBkNXlkNV9UpXWAL8H
- RJaivOGkmj7NMX36YE98QBI8kEdallKcHIo9qkAthdqdfghohPAn62AYr8e1+HKqNL
- W7Yg43PNX3R83gDu5K7SoQzjNSZ2xZNtyFNue5OWX1EW+88mqZjYoP6CqwZ5sSJAUk
- sRqbi952H1T6fVXwgnXkIdP5OGYZjfdg/cbqtgIAvHRcWu4P2iaeTocAUscyBy8H2t
- 6XC66FYSZYHJg==
-Message-ID: <31c00a3c-c757-4cc4-9c05-363f1cbae746@denx.de>
-Date: Wed, 8 May 2024 03:35:40 +0200
+ b=iXGjOSDHH2NNuQNQ4VxmwujcnWvfMWtQuwP5NiiJJKpr1FMHLoVM/O32RUytMCC0I
+ +tGNZ/MgGhrYsjEJlpZbglye4w6/vImylLgwoiwlvhCcuBQiFyLr8bmeFUllLfHR/A
+ 6f8HTUtIFKQZshmmi+o493LencdZGe9oQ+6m1Y9mhZpu7JWwpgdGbBora7+wZMwx1y
+ o9FwXONic1b6BMCXc1thRR8JNUzCgxylcBb9NWnVbycGfZqH0F6OZHnCTV3hOxPmDy
+ F73GksL8134A9kKb0hFHTp+08+MU2MjQ59dhkxUWOMrocO9HSDgD3hBE4UiJurcK+r
+ uSj+ofhkkZ3FA==
+Message-ID: <31783bbc-5efe-4721-aff7-53933c87baf5@denx.de>
+Date: Wed, 8 May 2024 03:36:08 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 4/7] usb: cdns: starfive: Add cdns USB driver
+Subject: Re: [PATCH v1 7/7] MAINTAINERS: Update Starfive visionfive2 maintain
+ files.
 To: Minda Chen <minda.chen@starfivetech.com>, Tom Rini <trini@konsulko.com>,
  Roger Quadros <rogerq@kernel.org>, Neil Armstrong
  <neil.armstrong@linaro.org>, Alexey Romanov <avromanov@salutedevices.com>,
@@ -53,10 +54,10 @@ To: Minda Chen <minda.chen@starfivetech.com>, Tom Rini <trini@konsulko.com>,
 Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>
 References: <20240504150358.19600-1-minda.chen@starfivetech.com>
- <20240504150358.19600-5-minda.chen@starfivetech.com>
+ <20240504150358.19600-8-minda.chen@starfivetech.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240504150358.19600-5-minda.chen@starfivetech.com>
+In-Reply-To: <20240504150358.19600-8-minda.chen@starfivetech.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -76,42 +77,24 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 5/4/24 5:03 PM, Minda Chen wrote:
+> Add USB related files to Starfive visionfive2 MAINTAINERS.
+> 
+> Signed-off-by: Minda Chen <minda.chen@starfivetech.com>
+> ---
+>   board/starfive/visionfive2/MAINTAINERS | 2 ++
+>   1 file changed, 2 insertions(+)
+> 
+> diff --git a/board/starfive/visionfive2/MAINTAINERS b/board/starfive/visionfive2/MAINTAINERS
+> index d7f638f9b4..1faf83f581 100644
+> --- a/board/starfive/visionfive2/MAINTAINERS
+> +++ b/board/starfive/visionfive2/MAINTAINERS
+> @@ -6,3 +6,5 @@ F:	board/starfive/visionfive2/
+>   F:	include/configs/starfive-visionfive2.h
+>   F:	configs/starfive_visionfive2_defconfig
+>   F:	drivers/pci/pcie_starfive_jh7110.c
+> +F:	drivers/phy/starfive/
+> +F:	drivers/usb/cdns3/cdns3-starfive.c
 
-[...]
+Thanks !
 
-> +static void cdns_mode_init(struct cdns_starfive *data, enum usb_dr_mode mode)
-> +{
-> +	regmap_update_bits(data->stg_syscon, data->stg_usb_mode,
-> +			   USB_MISC_CFG_MASK,
-> +			   USB_SUSPENDM_BYPS | USB_PLL_EN | USB_REFCLK_MODE);
-> +
-> +	switch (mode) {
-> +	case USB_DR_MODE_HOST:
-> +		regmap_update_bits(data->stg_syscon,
-> +				   data->stg_usb_mode,
-> +				   USB_STRAP_MASK,
-> +				   USB_STRAP_HOST);
-> +		regmap_update_bits(data->stg_syscon,
-> +				   data->stg_usb_mode,
-> +				   USB_SUSPENDM_MASK,
-> +				   USB_SUSPENDM_HOST);
-
-Can you deduplicate thse regmap_update_bits at the end of this function 
-? Set a variable to USB_STRAP_HOST and another to USB_SUSPENDM_HOST 
-here, set the same variables to USB_STRAP_DEVICE/0 below, and then call 
-regmap_update_bits() with these variables at the end of this function once.
-
-> +		break;
-> +
-> +	case USB_DR_MODE_PERIPHERAL:
-> +		regmap_update_bits(data->stg_syscon, data->stg_usb_mode,
-> +				   USB_STRAP_MASK, USB_STRAP_DEVICE);
-> +		regmap_update_bits(data->stg_syscon, data->stg_usb_mode,
-> +				   USB_SUSPENDM_MASK, 0);
-> +		break;
-> +	default:
-> +		break;
-> +	}
-> +}
-
-[...]
+Reviewed-by: Marek Vasut <marex@denx.de>
