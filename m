@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B83A7C25B77
-	for <u-boot@archiver.kernel.org>; Wed,  8 May 2024 12:39:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E589DC19F4F
+	for <u-boot@archiver.kernel.org>; Wed,  8 May 2024 12:46:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32F448843F;
-	Wed,  8 May 2024 14:39:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 74C4F8843F;
+	Wed,  8 May 2024 14:46:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lTPasW5k";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GGLpNwCe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 39F648869A; Wed,  8 May 2024 14:39:48 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 9CBAB88306; Wed,  8 May 2024 14:46:22 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B791988306
- for <u-boot@lists.denx.de>; Wed,  8 May 2024 14:39:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B7D7E886F1
+ for <u-boot@lists.denx.de>; Wed,  8 May 2024 14:46:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a59a9d66a51so993694866b.2
- for <u-boot@lists.denx.de>; Wed, 08 May 2024 05:39:45 -0700 (PDT)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a59b097b202so853757866b.0
+ for <u-boot@lists.denx.de>; Wed, 08 May 2024 05:46:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1715171985; x=1715776785; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1715172379; x=1715777179; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=NwuH+P5r+qaT6VT8sFEYcQNhkA0mKNBFV6BLR4T8GqY=;
- b=lTPasW5kZu7jSMkU42sbfoOF5JPew2T7qHZKs+TQXbbmEX0iiyqHq6GRRwvLc/fSfT
- FnYHRYjcrFi/dP1YRr20QHp2witFHUrO7MDKe89k7ojz0SD5KuS++y/atkTlWB5bK3ME
- 1c6l2zu2XygwbuJTh0elDPPBdda2SIBKJkNBITwNdQMlnq2gx66fGUqCneStySvfAXqT
- ajsIJoA6QEMtVDjVaoayDfGOrAmHcQ6jxEMj34zosWxqPh8M2ZK5KNCBImQsMnba7UwU
- ba1fp3eOduw+El5MdWZr9o+IuHVD/sUujaKft4Pqy5rzjIrSY+Dl0FtHITGWBBUROBJu
- ezLw==
+ bh=NA96iGzvP4THh/Stz/YeBJVZGXbQbRgAmZxFQiz/kC0=;
+ b=GGLpNwCemb7x7DlU4Zgs0ohsjzYgkorEc1dtLk14CAz52pnHQgNu/LWOoxqIMoAokF
+ d3cEqxfW26v9zmBMwX4NXNQwdk6xrKUHgM29JQrTT1RR1Ce2wC+/Ydix4rUjJR5sLqiu
+ XboDn/7hDtMEyjU9I41BqtDNmEGZw+WkO8Bb11i2XxIsSwpVIzCERR5KO/liYyP2b7l+
+ nC5F+vfG7r4JclyIEC5+g2UcXWjf5g7y0E16Y2KRX5MvEHnxJ5+PA3rQuLLz+Tz1yysy
+ /cIVHH9SEIXUpQTd4WdQPQaiHD1w4X7k/Su5I0zLytl3DuqxpYJ1lBh0LoQiYzChP9vZ
+ FJ3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715171985; x=1715776785;
+ d=1e100.net; s=20230601; t=1715172379; x=1715777179;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=NwuH+P5r+qaT6VT8sFEYcQNhkA0mKNBFV6BLR4T8GqY=;
- b=lZ6GTDfwB2i3CKXf8r/9FLw7VL7Y0cE0hS9F1Hzb9G+DNwJJX8sOZd6Aou1gPCQdbI
- H7P0Zg24thd2S+SsksCx/QDMpwXtYRMqcVyopriGxjgGMeS6e8eJIWsLleKTFASuPkqQ
- kX79PZ/gRK5XVRGltPa3HXcuSt+mAt7tXd0Wo3THfrKo6e8CocFxxmJEk0b9w2u9RFzK
- r23lJCoW7ndz6cPjbtvR6iVrmcWIHY9Rkg3Q4nqmDj10e6dXBNqfJrwQEpnlX7pz5PKc
- 6+veYZNyOofZKyutnku7BrRB3qMfnm4IRj7J6phT/vOsJVbdClsg9sFIYaSfxfhvPDxc
- vmnw==
+ bh=NA96iGzvP4THh/Stz/YeBJVZGXbQbRgAmZxFQiz/kC0=;
+ b=U1S3dKdRAF0GKy9ysJNAT1A1Kp0wpliZn0PL31hK/UAuGhUV6h9pefsRvbYINCp+ER
+ dzdNX2AtNIqdRJZWRWa5J6k0ZteP899vMlaWEb8fVzA1RJUI/BAN9+sugb6ZwlHOVJlf
+ 83zlseiMNJ5+iGjuyN3jn9u1wyZMkEcac67TFHkbkZJN9xZf+HY1oQtWH0qQwce5yRQ9
+ hs9VcilJZauKgHEoo4VKFrqaTf0HAzgVijBOLuKtp3xJP4Cm+CkcAcbLmFpqP/6i0LsW
+ oadFLy6lkgaeHBiOUwOJKG6eGVkFwcYakit6DJkNrqfExJsfGNHQ2al0MI2ICq2aYTHE
+ AJHg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX4PYSShhha1zW76Bi70CKA5p9lTCdfHpPNbUH3aGjBKfM+36vT1uYGcJm/VFK0jf0OtnPteI24tehngrDxhB+GRdie3g==
-X-Gm-Message-State: AOJu0YzAhlXHY6QtBbPYqEygbQqk+3rM0D9R9cPZ9qzhNd79eDZtglqe
- MKKlUID6uMIeXVlFxR9mPxiqvwuRTeCXB5tBCYRn3h2UF7t+RRlxHBwM83iAKsM=
-X-Google-Smtp-Source: AGHT+IGgJ6nld90jvmLQNlF/5M/I9F/vzXsld9SAtng5Argt+jH+Y8Yt6ETzbS/vbRPaSMbfljT6iA==
-X-Received: by 2002:a17:906:a449:b0:a59:a0c1:b222 with SMTP id
- a640c23a62f3a-a59fb95d71dmr154306366b.39.1715171985137; 
- Wed, 08 May 2024 05:39:45 -0700 (PDT)
+ AJvYcCWY59Ajn7CTpNtZN0seLXJNWqRDfdHkSfmcV9pPSrH7rkioJLdm57ISqGN5ZufZgbHurybu/D3ZfcXfeJbc45ZrUzWGSA==
+X-Gm-Message-State: AOJu0Yx/9fmALf8OwPJA49dvaSdhwPreBO2SnRWINH/JveF8edC18oUE
+ /f1+a0y+Npx2mgwcdFUEx6ArUCG+j1BrsDeIjCod2xR1Cin57YShONtt93+Qskg=
+X-Google-Smtp-Source: AGHT+IE3acgWyd8/8pfjFYhVX2y7GbnHZ2qKVLqMw6mhhTGAM5mW2XiAgaJ8iUkTZbFylik3jLQIhg==
+X-Received: by 2002:a17:906:b851:b0:a59:c833:d272 with SMTP id
+ a640c23a62f3a-a59fb921347mr146874466b.13.1715172379094; 
+ Wed, 08 May 2024 05:46:19 -0700 (PDT)
 Received: from ?IPV6:2a02:8109:aa0d:be00::8bb3? ([2a02:8109:aa0d:be00::8bb3])
  by smtp.gmail.com with ESMTPSA id
- lk5-20020a170906cb0500b00a59cd2d802fsm3764334ejb.131.2024.05.08.05.39.44
+ z21-20020a170906715500b00a599c8b6531sm6223611ejj.178.2024.05.08.05.46.18
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 May 2024 05:39:44 -0700 (PDT)
-Message-ID: <81f02041-6cf8-439c-b7a2-9edbfe038de6@linaro.org>
-Date: Wed, 8 May 2024 14:39:43 +0200
+ Wed, 08 May 2024 05:46:18 -0700 (PDT)
+Message-ID: <128740dd-0a7b-47cf-a789-7f18ba43389b@linaro.org>
+Date: Wed, 8 May 2024 14:46:17 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mach-snapdragon: do carveouts for qcs404 only
-To: Sam Day <me@samcday.com>, Sumit Garg <sumit.garg@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20240507-qcs404-carveout-only-v1-1-93d06884b862@samcday.com>
- <CAFA6WYPEK0CeK-WATVymNSzYR6U3+gKxu0TpBeCQ7a03C7PObw@mail.gmail.com>
- <PaGjHRvdULVbxVZ6A0Mw4PKFhK2AmMa171TAjH-3X9skahkwpgp9AEvt_W7tfepnpu2cTHmJt0zhnaSo-ukBYGP0K7PdFieiiYUNaMpiG1k=@samcday.com>
+Subject: Re: [PATCH v2 1/2] clk/qcom: apq8016: add support for USB_HS clocks
+To: Sam Day <me@samcday.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20240506-msm8916-hs-usb-clocks-v2-0-34f741b3a2ec@samcday.com>
+ <20240506-msm8916-hs-usb-clocks-v2-1-34f741b3a2ec@samcday.com>
 Content-Language: en-US
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <PaGjHRvdULVbxVZ6A0Mw4PKFhK2AmMa171TAjH-3X9skahkwpgp9AEvt_W7tfepnpu2cTHmJt0zhnaSo-ukBYGP0K7PdFieiiYUNaMpiG1k=@samcday.com>
+In-Reply-To: <20240506-msm8916-hs-usb-clocks-v2-1-34f741b3a2ec@samcday.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -98,107 +99,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sam,
 
-On 08/05/2024 13:40, Sam Day wrote:
-> Salutations Sumit,
-> 
-> On Wednesday, 8 May 2024 at 11:14 AM, Sumit Garg <sumit.garg@linaro.org> wrote:
-> 
->>
->>
->> Hi Sam,
->>
->> On Wed, 8 May 2024 at 00:11, Sam Day me@samcday.com wrote:
->>
->>> The newly introduced carve_out_reserved_memory causes issues when
->>> U-Boot is chained from the lk2nd bootloader. lk2nd provides a
->>> simple-framebuffer device and marks the framebuffer region as no-map in
->>> the supplied /reserved-memory. Consequently, the simple_video driver
->>> triggers a page fault when it tries to write to this region.
->>
->>
->> How does the corresponding Linux kernel driver handle this?
-> 
-> Firstly: I'm something of a middle-man here. I would consider Caleb the authoritative source on the carveouts stuff (since they wrote it) and Nikita Travkin the authority on the simplefb handoff (since he originally wrote it for lk2nd to hand off to Linux simpledrm and then adapted it to work with U-Boot simplefb).
-> 
-> I consulted with Nikita on your first question here. He linked me to this snippet: https://elixir.bootlin.com/linux/v6.9-rc7/source/drivers/gpu/drm/tiny/simpledrm.c#L877
-> 
->>   Is the
->> framebuffer region required to be mapped as normal memory or device
->> type or something else?
-> 
-> So I guess based on the link above, it's just mapped as normal uncached memory.
-> 
-> I tried to do something like this a few days ago in U-Boot, but a) it doesn't work and b) I have no idea what I'm doing: https://github.com/samcday/u-boot/commit/c100cb3711ddf5b01601691f3e6a9ec890d9a496
-> 
-> After talking with Caleb about this for a bit, they suggested the patch you see here as what I guess could be considered a "stopgap" solution that hopefully makes it into 2024.07.
-> 
->> Similarly would normal memory type work for
->> all other reserved memory regions marked as no-map?
-> 
-> I'll let Caleb weigh in here. My understanding is that the other regions *should* be marked as PTE_TYPE_FAULT because otherwise drivers might inadvertently speculatively access regions that are very much off-limits, such as TZ app regions.
 
-Right, carving out reserved regions and having the driver handle them is 
-theoretically the "correct" thing to do here. But I'm not sure that the 
-additional complexity offers much value from a U-Boot context.
+On 06/05/2024 12:26, Sam Day wrote:
+> The newer "register map for simple gate clocks" support added for qcom
+> clocks is used. As a result gcc_apq8016 now has a mixture of the old and
+> new styles. I didn't (and still don't!) feel comfortable enough in this
+> area to update the existing code.
+> 
 
-If we can teach the armv8 PT/cache code to handle this better, and teach 
-all the drivers to map their regions on-demand, this would probably help 
-us a lot (especially as right now if you attempt to access dead space 
-between peripherals then you'll hang the bus...). But U-Boot is a ways 
-away from that.
+Thanks for this!
+
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+> Signed-off-by: Sam Day <me@samcday.com>
+> ---
+>   drivers/clk/qcom/clock-apq8016.c | 32 ++++++++++++++++++++++++++++++++
+>   1 file changed, 32 insertions(+)
 > 
-> Cheers,
-> -Sam
+> diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
+> index d3b63b9c1a..3b8c88c769 100644
+> --- a/drivers/clk/qcom/clock-apq8016.c
+> +++ b/drivers/clk/qcom/clock-apq8016.c
+> @@ -17,6 +17,8 @@
+>   
+>   #include "clock-qcom.h"
+>   
+> +#define USB_HS_SYSTEM_CLK_CMD_RCGR	0x41010
+> +
+>   /* Clocks: (from CLK_CTL_BASE)  */
+>   #define GPLL0_STATUS			(0x2101C)
+>   #define APCS_GPLL_ENA_VOTE		(0x45000)
+> @@ -52,6 +54,11 @@ static struct vote_clk gcc_blsp1_ahb_clk = {
+>   	.vote_bit = BIT(10),
+>   };
+>   
+> +static const struct gate_clk apq8016_clks[] = {
+> +	GATE_CLK(GCC_USB_HS_AHB_CLK,    0x41008, 0x00000001),
+> +	GATE_CLK(GCC_USB_HS_SYSTEM_CLK,	0x41004, 0x00000001),
+> +};
+> +
+>   /* SDHCI */
+>   static int apq8016_clk_init_sdc(struct msm_clk_priv *priv, int slot, uint rate)
+>   {
+> @@ -117,13 +124,38 @@ static ulong apq8016_clk_set_rate(struct clk *clk, ulong rate)
+>   	case GCC_BLSP1_UART2_APPS_CLK: /* UART2 */
+>   		apq8016_clk_init_uart(priv->base, clk->id);
+>   		return 7372800;
+> +	case GCC_USB_HS_SYSTEM_CLK:
+> +		if (rate != 80000000)
+> +			log_warning("Unexpected rate %ld requested for USB_HS_SYSTEM_CLK\n",
+> +			            rate);
+> +		clk_rcg_set_rate_mnd(priv->base, USB_HS_SYSTEM_CLK_CMD_RCGR,
+> +		                     10, 0, 0, CFG_CLK_SRC_GPLL0, 0);
+> +		return rate;
+>   	default:
+>   		return 0;
+>   	}
+>   }
+>   
+> +static int apq8016_clk_enable(struct clk *clk)
+> +{
+> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+> +
+> +	if (priv->data->num_clks < clk->id) {
+> +		log_warning("%s: unknown clk id %lu\n", __func__, clk->id);
+> +		return 0;
+> +	}
+> +
+> +	debug("%s: clk %s\n", __func__, apq8016_clks[clk->id].name);
+> +	qcom_gate_clk_en(priv, clk->id);
+> +
+> +	return 0;
+> +}
+> +
+>   static struct msm_clk_data apq8016_clk_data = {
+>   	.set_rate = apq8016_clk_set_rate,
+> +	.clks = apq8016_clks,
+> +	.num_clks = ARRAY_SIZE(apq8016_clks),
+> +	.enable = apq8016_clk_enable,
+>   };
+>   
+>   static const struct udevice_id gcc_apq8016_of_match[] = {
 > 
->>
->> -Sumit
->>
->>> As per Caleb's advice, this simple patch only does the carveouts for the
->>> qcs404 SoC for which it was originally designed. The intent is to do the
->>> carveouts for more Qualcomm SoCs in future.
->>>
->>> ---
->>> I'm not sure if it's feasible to get this in for the 2024.07 release,
->>> but it'd be great if we could - it's the only thing that breaks U-Boot
->>> master on msm8916 devices that chain from lk2nd.
->>>
->>> Signed-off-by: Sam Day me@samcday.com
->>> ---
->>> arch/arm/mach-snapdragon/board.c | 12 +++++++-----
->>> 1 file changed, 7 insertions(+), 5 deletions(-)
->>>
->>> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
->>> index 3d5994c878..b439a19ec7 100644
->>> --- a/arch/arm/mach-snapdragon/board.c
->>> +++ b/arch/arm/mach-snapdragon/board.c
->>> @@ -467,10 +467,12 @@ void enable_caches(void)
->>> gd->arch.tlb_addr = tlb_addr;
->>> gd->arch.tlb_size = tlb_size;
->>>
->>> - carveout_start = get_timer(0);
->>> - /* Takes ~20-50ms on SDM845 /
->>> - carve_out_reserved_memory();
->>> - debug("carveout time: %lums\n", get_timer(carveout_start));
->>> -
->>> + / We do the carveouts only for QCS404, for now. /
->>> + if (fdt_node_check_compatible(gd->fdt_blob, 0, "qcom,qcs404") == 0) {
->>> + carveout_start = get_timer(0);
->>> + / Takes ~20-50ms on SDM845 */
->>> + carve_out_reserved_memory();
->>> + debug("carveout time: %lums\n", get_timer(carveout_start));
->>> + }
->>> dcache_enable();
->>> }
->>>
->>> ---
->>> base-commit: 1c40dda60f5f7e83a6d6f541cf5a57eb7e8ec43c
->>> change-id: 20240507-qcs404-carveout-only-7a15bbf3fd89
->>>
->>> Best regards,
->>> --
->>> Sam Day me@samcday.com
 
 -- 
 // Caleb (they/them)
