@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD02AC10F1A
-	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 04:59:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56F98C25B74
+	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 04:59:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 09DB788445;
+	by phobos.denx.de (Postfix) with ESMTP id 6143D88478;
 	Thu,  9 May 2024 06:59:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=protonmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=protonmail.com header.i=@protonmail.com header.b="fpE01VoN";
+	dkim=pass (2048-bit key; secure) header.d=protonmail.com header.i=@protonmail.com header.b="XuKAvmav";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6EB4E8823D; Wed,  8 May 2024 22:33:11 +0200 (CEST)
-Received: from mail-40135.protonmail.ch (mail-40135.protonmail.ch
- [185.70.40.135])
+ id 2C51187DCD; Wed,  8 May 2024 22:33:50 +0200 (CEST)
+Received: from mail-40132.protonmail.ch (mail-40132.protonmail.ch
+ [185.70.40.132])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15B9687D43
- for <u-boot@lists.denx.de>; Wed,  8 May 2024 22:33:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 883708826C
+ for <u-boot@lists.denx.de>; Wed,  8 May 2024 22:33:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=protonmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dmoo_dv@protonmail.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
- s=protonmail3; t=1715200387; x=1715459587;
- bh=ZgYGIH/a5JtGKtCkdg25mnJycF0lrj4sl0J0tuS7a48=;
+ s=protonmail3; t=1715200426; x=1715459626;
+ bh=4tlZDqqmoFwWQUc1e4RRiXtsY4BQa82utGwajwoX6Hk=;
  h=Date:To:From:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
  Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=fpE01VoNj5ytSW0mc84sqILxDa01nJIkCwR7URZ8T0mTSiA4v4+E2hynVtECVzomi
- sv/8UQcwq7yi+0DncS2OPq3JdJbtcydI5os6ffdzmWjKufkc04+BhNIGH1g5TYO6Vw
- sQibuZod/jTd9GXfpVaWSsr/mMKLhZSfZgjn/PUSAe928tZkPTNtFOjR0jmSIeo19/
- VPEEhBKCYU9Z2WwIR++WgxpDmlT2+lb0Cow1KDDYOV5CuIpICqSS3usFpjw8/lK20s
- DP1s0VOIcm9/zuOUtk1YEqKjLZ46ZHRIXYZGG9o1CaZ17VPGUTq7HTKCtS92AAo0jg
- oon1h/rVgmXYA==
-Date: Wed, 08 May 2024 20:33:04 +0000
+ b=XuKAvmavYrskv2O5AGB8lV2K25nEvtF/skNIX3UIxiuId1kzhysMCA8nQT/+stLO7
+ MBcF7UQTYm6j+0iW0XtljduMoR0a088m/e+vLIwanBHkHpGjgWLuj4blXTq3h5WYFK
+ 6dsqctWSD+9KWrr6is2D5jMBNuOxw/9Q+SI3WiuU+icCuh162+Jo7MiQRe6ppFuVD+
+ wgmrvVukgx3EXfQ8zPkQGEzHAe4aEav34dGCuIyGMB5syM3TwVMUvqo3AZ9yZ5fg0e
+ woo0DANB/XPCD9XJE6nXZSGUhyiXQ2ZC1Ymh3f01p725OwS3KHJeyiUXFBw0/zeYGM
+ oLkPTQZsgGp8g==
+Date: Wed, 08 May 2024 20:33:44 +0000
 To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 From: H Bell <dmoo_dv@protonmail.com>
-Subject: [PATCH 1/2 v2] board: starfive: support Pine64 Star64 board
-Message-ID: <2Wf_X25fjiTRU7BZzFK3Mxj8Bgte4ggnq0BjYcxn2AR0FFfZi0jwedw-hokUad4ow2wxy6lhNW5gC0CEVbeCNo_qq1CM74FBrwlopiFYcp0=@protonmail.com>
+Subject: [PATCH 2/2 v2] board: starfive: support Pine64 Star64 board
+Message-ID: <4yWrCvGQf7QHU6yyu78zoEYdB14BqDmLpfJrIcPDierL5oQKWT_IWgQPC8k6KbKEuW738-F2xl5D2KFDT8XfOnm7WLt7nldN5_cO5AJ3PL0=@protonmail.com>
 Feedback-ID: 106097379:user:proton
-X-Pm-Message-ID: 64a4bba41c986436fd9b8683f0852a90318bce4e
+X-Pm-Message-ID: b41f26480545584f4c46b7796f64ca03a810576e
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -64,9 +64,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Similar to the Milk-V Mars, The Star64 board contains few differences to th=
-e
-VisionFive 2 boards, so can be part of the same U-boot build.
+
+Add documentation files
 
 Signed-off-by: Henry Bell <dmoo_dv@protonmail.com>
 Cc: ycliang@andestech.com
@@ -75,155 +74,153 @@ Cc: heinrich.schuchardt@canonical.com
 
 Changes since v1
 
-- Fix typos on naming
-- Create pine64_star64 struct to be populated with PHY values once confirme=
-d
+- New patch
 ---
- board/starfive/visionfive2/spl.c              | 85 +++++++++++++++++++
- .../visionfive2/starfive_visionfive2.c        |  4 +
- 2 files changed, 89 insertions(+)
+ doc/board/starfive/index.rst         |   1 +
+ doc/board/starfive/pine64_star64.rst | 109 +++++++++++++++++++++++++++
+ 2 files changed, 110 insertions(+)
+ create mode 100644 doc/board/starfive/pine64_star64.rst
 
-diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfive2/=
-spl.c
-index ca61b5be22..248c6ba01d 100644
---- a/board/starfive/visionfive2/spl.c
-+++ b/board/starfive/visionfive2/spl.c
-@@ -86,6 +86,39 @@ static const struct starfive_vf2_pro starfive_verb[] =3D=
- {
- =09=09"tx-internal-delay-ps", "0"},
- };
+diff --git a/doc/board/starfive/index.rst b/doc/board/starfive/index.rst
+index 2762bf74c1..f05f8a0765 100644
+--- a/doc/board/starfive/index.rst
++++ b/doc/board/starfive/index.rst
+@@ -7,4 +7,5 @@ StarFive
+    :maxdepth: 1
 =20
-+static const struct starfive_vf2_pro star64_pine64[] =3D {
-+=09{"/soc/ethernet@16030000", "starfive,tx-use-rgmii-clk", NULL},
-+=09{"/soc/ethernet@16040000", "starfive,tx-use-rgmii-clk", NULL},
+    milk-v_mars.rst
++   pine64_star64
+    visionfive2
+diff --git a/doc/board/starfive/pine64_star64.rst b/doc/board/starfive/pine=
+64_star64.rst
+new file mode 100644
+index 0000000000..047f109028
+--- /dev/null
++++ b/doc/board/starfive/pine64_star64.rst
+@@ -0,0 +1,109 @@
++.. SPDX-License-Identifier: GPL-2.0+
 +
-+=09{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
-+=09=09"motorcomm,tx-clk-adj-enabled", NULL},
-+=09{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
-+=09=09"motorcomm,tx-clk-100-inverted", NULL},
-+=09{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
-+=09=09"motorcomm,tx-clk-1000-inverted", NULL},
-+=09{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
-+=09=09"motorcomm,rx-clk-drv-microamp", "3970"},
-+=09{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
-+=09=09"motorcomm,rx-data-drv-microamp", "2910"},
-+=09{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
-+=09=09"rx-internal-delay-ps", "1900"},
-+=09{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
-+=09=09"tx-internal-delay-ps", "1500"},
++Pine64 Star64
++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 +
-+=09{"/soc/ethernet@16040000/mdio/ethernet-phy@1",
-+=09=09"motorcomm,tx-clk-adj-enabled", NULL},
-+=09{ "/soc/ethernet@16040000/mdio/ethernet-phy@1",
-+=09=09"motorcomm,tx-clk-100-inverted", NULL},
-+=09{"/soc/ethernet@16040000/mdio/ethernet-phy@1",
-+=09=09"motorcomm,rx-clk-drv-microamp", "3970"},
-+=09{"/soc/ethernet@16040000/mdio/ethernet-phy@1",
-+=09=09"motorcomm,rx-data-drv-microamp", "2910"},
-+=09{"/soc/ethernet@16040000/mdio/ethernet-phy@1",
-+=09=09"rx-internal-delay-ps", "0"},
-+=09{"/soc/ethernet@16040000/mdio/ethernet-phy@1",
-+=09=09"tx-internal-delay-ps", "0"},
-+};
++U-Boot for the Star64 uses the same U-Boot binaries as the VisionFive 2 bo=
+ard.
++In U-Boot SPL the actual board is detected and the device-tree patched
++accordingly.
 +
- void spl_fdt_fixup_mars(void *fdt)
- {
- =09static const char compat[] =3D "milkv,mars\0starfive,jh7110";
-@@ -226,6 +259,56 @@ void spl_fdt_fixup_version_b(void *fdt)
- =09}
- }
-=20
-+void spl_fdt_fixup_star64(void *fdt)
-+{
-+=09static const char compat[] =3D "pine64,star64\0starfive,jh7110";
-+=09u32 phandle;
-+=09u8 i;
-+=09int offset;
-+=09int ret;
++Building
++~~~~~~~~
 +
-+=09fdt_setprop(fdt, fdt_path_offset(fdt, "/"), "compatible", compat, sizeo=
-f(compat));
-+=09fdt_setprop_string(fdt, fdt_path_offset(fdt, "/"), "model",
-+=09=09=09   "Pine64 Star64");
++1. Add the RISC-V toolchain to your PATH.
++2. Setup ARCH & cross compilation environment variable:
 +
-+=09/* gmac0 */
-+=09offset =3D fdt_path_offset(fdt, "/soc/clock-controller@17000000");
-+=09phandle =3D fdt_get_phandle(fdt, offset);
-+=09offset =3D fdt_path_offset(fdt, "/soc/ethernet@16030000");
++.. code-block:: none
 +
-+=09fdt_setprop_u32(fdt, offset, "assigned-clocks", phandle);
-+=09fdt_appendprop_u32(fdt, offset, "assigned-clocks", JH7110_AONCLK_GMAC0_=
-TX);
-+=09fdt_setprop_u32(fdt, offset,  "assigned-clock-parents", phandle);
-+=09fdt_appendprop_u32(fdt, offset,  "assigned-clock-parents",
-+=09=09=09   JH7110_AONCLK_GMAC0_RMII_RTX);
++   export CROSS_COMPILE=3D<riscv64 toolchain prefix>
 +
-+=09/* gmac1 */
-+=09offset =3D fdt_path_offset(fdt, "/soc/clock-controller@13020000");
-+=09phandle =3D fdt_get_phandle(fdt, offset);
-+=09offset =3D fdt_path_offset(fdt, "/soc/ethernet@16040000");
++The M-mode software OpenSBI provides the supervisor binary interface (SBI)=
+ and
++is responsible for the switch to S-Mode. It is a prerequisite to build U-B=
+oot.
++Support for the JH7110 was introduced in OpenSBI 1.2. It is recommended to=
+ use
++a current release.
 +
-+=09fdt_setprop_u32(fdt, offset, "assigned-clocks", phandle);
-+=09fdt_appendprop_u32(fdt, offset, "assigned-clocks", JH7110_SYSCLK_GMAC1_=
-TX);
-+=09fdt_setprop_u32(fdt, offset,  "assigned-clock-parents", phandle);
-+=09fdt_appendprop_u32(fdt, offset,  "assigned-clock-parents",
-+=09=09=09   JH7110_SYSCLK_GMAC1_RMII_RTX);
++.. code-block:: console
 +
-+=09for (i =3D 0; i < ARRAY_SIZE(star64_pine64); i++) {
-+=09=09offset =3D fdt_path_offset(fdt, star64_pine64[i].path);
++=09git clone https://github.com/riscv/opensbi.git
++=09cd opensbi
++=09make PLATFORM=3Dgeneric FW_TEXT_START=3D0x40000000 FW_OPTIONS=3D0
 +
-+=09=09if (star64_pine64[i].value)
-+=09=09=09ret =3D fdt_setprop_u32(fdt, offset,  star64_pine64[i].name,
-+=09=09=09=09=09      dectoul(star64_pine64[i].value, NULL));
-+=09=09else
-+=09=09=09ret =3D fdt_setprop_empty(fdt, offset, star64_pine64[i].name);
++Now build the U-Boot SPL and U-Boot proper.
 +
-+=09=09if (ret) {
-+=09=09=09pr_err("%s set prop %s fail.\n", __func__, star64_pine64[i].name)=
-;
-+=09=09=09=09break;
-+=09=09}
-+=09}
-+}
++.. code-block:: console
 +
- void spl_perform_fixups(struct spl_image_info *spl_image)
- {
- =09u8 version;
-@@ -252,6 +335,8 @@ void spl_perform_fixups(struct spl_image_info *spl_imag=
-e)
- =09=09=09spl_fdt_fixup_version_b(spl_image->fdt_addr);
- =09=09break;
- =09=09};
-+=09} else if (!strncmp(product_id, "STAR64", 6)) {
-+=09=09spl_fdt_fixup_star64(spl_image->fdt_addr);
- =09} else {
- =09=09pr_err("Unknown product %s\n", product_id);
- =09};
-diff --git a/board/starfive/visionfive2/starfive_visionfive2.c b/board/star=
-five/visionfive2/starfive_visionfive2.c
-index a86bca533b..1e7c41f01b 100644
---- a/board/starfive/visionfive2/starfive_visionfive2.c
-+++ b/board/starfive/visionfive2/starfive_visionfive2.c
-@@ -23,6 +23,8 @@ DECLARE_GLOBAL_DATA_PTR;
- =09"starfive/jh7110-starfive-visionfive-2-v1.2a.dtb"
- #define FDTFILE_VISIONFIVE2_1_3B \
- =09"starfive/jh7110-starfive-visionfive-2-v1.3b.dtb"
-+#define FDTFILE_PINE64_STAR64 \
-+=09"starfive/jh7110-pine64-star64.dtb"
-=20
- /* enable U74-mc hart1~hart4 prefetcher */
- static void enable_prefetcher(void)
-@@ -78,6 +80,8 @@ static void set_fdtfile(void)
- =09=09=09fdtfile =3D FDTFILE_VISIONFIVE2_1_3B;
- =09=09=09break;
- =09=09}
-+=09} else if (!strncmp(product_id, "STAR64", 6)) {
-+=09=09fdtfile =3D FDTFILE_PINE64_STAR64;
- =09} else {
- =09=09log_err("Unknown product\n");
- =09=09return;
++=09cd <U-Boot-dir>
++=09make starfive_visionfive2_defconfig
++=09make OPENSBI=3D$(opensbi_dir)/build/platform/generic/firmware/fw_dynami=
+c.bin
++
++This will generate the U-Boot SPL image (spl/u-boot-spl.bin.normal.out) as=
+ well
++as the FIT image (u-boot.itb) with OpenSBI and U-Boot.
++
++Device-tree selection
++~~~~~~~~~~~~~~~~~~~~~
++
++U-Boot will set variable $fdtfile to starfive/jh7110-pine64-star64.dtb.
++
++To overrule this selection the variable can be set manually and saved in t=
+he
++environment
++
++::
++
++    setenv fdtfile my_device-tree.dtb
++    env save
++
++or the configuration variable CONFIG_DEFAULT_FDT_FILE can be used to set t=
+o
++provide a default value.
++
++Boot source selection
++~~~~~~~~~~~~~~~~~~~~~
++
++The board provides the DIP switches MSEL[1:0] to select the boot device ou=
+t of
++SPI flash, eMMC, SD-card, UART. To select booting from SD-card set the DIP
++switches MSEL[1:0] to 10.
++
++Preparing the SD-Card
++~~~~~~~~~~~~~~~~~~~~~
++
++The device firmware loads U-Boot SPL (u-boot-spl.bin.normal.out) from the
++partition with type GUID 2E54B353-1271-4842-806F-E436D6AF6985. You are fre=
+e
++to choose any partition number.
++
++With the default configuration U-Boot SPL loads the U-Boot FIT image
++(u-boot.itb) from partition 2 (CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=
+=3D0x2).
++When formatting it is recommended to use GUID
++BC13C2FF-59E6-4262-A352-B275FD6F7172 for this partition.
++
++The FIT image (u-boot.itb) is a combination of OpenSBI's fw_dynamic.bin,
++u-boot-nodtb.bin and the device tree blob.
++
++Format the SD card (make sure the disk has GPT, otherwise use gdisk to swi=
+tch)
++
++.. code-block:: bash
++
++=09sudo sgdisk --clear \
++=09  --set-alignment=3D2 \
++=09  --new=3D1:4096:8191 --change-name=3D1:spl --typecode=3D1:2E54B353-127=
+1-4842-806F-E436D6AF6985\
++=09  --new=3D2:8192:16383 --change-name=3D2:uboot --typecode=3D2:BC13C2FF-=
+59E6-4262-A352-B275FD6F7172  \
++=09  --new=3D3:16384:1654784 --change-name=3D3:system --typecode=3D3:EBD0A=
+0A2-B9E5-4433-87C0-68B6B72699C7 \
++=09  /dev/sdb
++
++Copy U-Boot to the SD card
++
++.. code-block:: bash
++
++=09sudo dd if=3Du-boot-spl.bin.normal.out of=3D/dev/sdb1
++=09sudo dd if=3Du-boot.itb of=3D/dev/sdb2
++
++=09sudo mount /dev/sdb3 /mnt/
++=09sudo cp u-boot-spl.bin.normal.out /mnt/
++=09sudo cp u-boot.itb /mnt/
++=09sudo cp Image.gz /mnt/
++=09sudo cp initramfs.cpio.gz /mnt/
++=09sudo cp jh7110-starfive-visionfive-2.dtb /mnt/
++=09sudo umount /mnt
++
++Booting
++~~~~~~~
++
++Once you plugin the sdcard and power up, you should see the U-Boot prompt.
 --=20
 2.44.0
-
-
