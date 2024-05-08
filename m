@@ -4,47 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 970D6C25B4F
-	for <u-boot@archiver.kernel.org>; Wed,  8 May 2024 02:03:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54B26C10F1A
+	for <u-boot@archiver.kernel.org>; Wed,  8 May 2024 02:03:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 288A388440;
+	by phobos.denx.de (Postfix) with ESMTP id 86E738846E;
 	Wed,  8 May 2024 04:02:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1715133766;
-	bh=viNhSCoHnGvhXldNBtydA8C9tPEEHEiLIZaW8gNFM/w=;
+	bh=GW4Qpap7sGTAWhbjvTbzOFp6gvFFb1mw3j8LAdpCbzc=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ZRwnTyUgdurnP5Z+STLHy1NaMGeS8goS2tfcbNXNNOoMvGQNE1izZvzQftrnJMA5X
-	 w1ONkpsHxrbED3CWMp5nRhr2oWd2003CVe+rIC31ScLxKX5n7JfpvaBshO9kFzQrau
-	 N56Xue8ENuYRzkc1iNaLX9F1TsQsILA83lB+YkPNkNjJgMic+rGvHC5M1lbHRI6UJZ
-	 fIAG6Y5jZCkVyeoUwPdyCUivxh2HgrgmkL/0ILOVGaZBDJOIoAXQc99P9OXHWRvtJV
-	 mHKi+W5vwyvf0zwyRUGw5rbpXFsfklC6M/jpsKBHp9lCR96NbalzVhKNHg/XqhibQx
-	 xvNL5a8I4hV7A==
+	b=xgnQ/XPAN3uVMFjxyl9QTMvRdWO5m9XG/edi+elrfYVwQYXZCE+sGZ4/zSfiffKUw
+	 2rpu5O/ufrLaJF0hAxXA6TASjjEOJlOjw1s2O9NdvjB2bGW9x4ev7ZeeAkpMO6a80l
+	 M+YE7AT0eMKsof39JApQFQA2krdyoI58nbs1zC4QunVFp05jbc7WVt2SeGq9FmDCgY
+	 BysIg5DacSNcxH/oxYYWoCuW9Agy2oB5ZxvnxJAfUzw7knMBoTV9/BpWLM9o9Z8Qme
+	 0s/IVF0G672yXh9AqGT8+bUzVlvWhlQgChzCPbMy03+B0M3gtSKYioySf/30pP5mu2
+	 fFwzCTYEUTmVQ==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id D6DCF8842E;
- Wed,  8 May 2024 04:02:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id EFD1388436;
+ Wed,  8 May 2024 04:02:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1715133764;
- bh=viNhSCoHnGvhXldNBtydA8C9tPEEHEiLIZaW8gNFM/w=;
+ s=phobos-20191101; t=1715133765;
+ bh=GW4Qpap7sGTAWhbjvTbzOFp6gvFFb1mw3j8LAdpCbzc=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=rcjkmRdhcxLAC6aaXxDN293juOx9vsg5ynAmuqUFyedgjPOieoCRBogkpsguYqUw7
- waGoLRHjbTFwxvhX8Hq9l2EPWngAR9AAaA3UZXg2SNyY42PO5+7fiP0jZD4hmrlMRk
- hvU1Z1yAsXiFjhYQe7zBsxrTqgYy0haq+Y9Vwsib2ne1rcEsbvI9WCLCI9x+OsyFv8
- 7YRBgCUbb5ba3t45NqT182HFpdUiqTlkcnjHUeIBa5qbitb4WjWYsccmrcDXOuMhGk
- ydpGZGf1nAMIW5ZTPjAXAgOZDDqakYgwf09PlQ5qIq70+8BiYI3skmm9yHw1qEYZBU
- T5akj9s1aL3hQ==
-Message-ID: <761a57cc-1074-4167-9eaa-2bdb6fe88799@denx.de>
-Date: Wed, 8 May 2024 03:32:42 +0200
+ b=H8o1qbT7bh45NKxeOJiMPjV302XgJ1pR3HueCuXveH9S3plQ6IZN5ZRJmxDWEQoSE
+ SjLKvWT0vYmEcI3Jq2U5NLndzArX/k8VBD4lkW6n0S+0F1ilEBkNXlkNV9UpXWAL8H
+ RJaivOGkmj7NMX36YE98QBI8kEdallKcHIo9qkAthdqdfghohPAn62AYr8e1+HKqNL
+ W7Yg43PNX3R83gDu5K7SoQzjNSZ2xZNtyFNue5OWX1EW+88mqZjYoP6CqwZ5sSJAUk
+ sRqbi952H1T6fVXwgnXkIdP5OGYZjfdg/cbqtgIAvHRcWu4P2iaeTocAUscyBy8H2t
+ 6XC66FYSZYHJg==
+Message-ID: <31c00a3c-c757-4cc4-9c05-363f1cbae746@denx.de>
+Date: Wed, 8 May 2024 03:35:40 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 3/7] phy: starfive: Add Starfive JH7110 PCIe 2.0 PHY
- driver
+Subject: Re: [PATCH v1 4/7] usb: cdns: starfive: Add cdns USB driver
 To: Minda Chen <minda.chen@starfivetech.com>, Tom Rini <trini@konsulko.com>,
  Roger Quadros <rogerq@kernel.org>, Neil Armstrong
  <neil.armstrong@linaro.org>, Alexey Romanov <avromanov@salutedevices.com>,
@@ -54,10 +53,10 @@ To: Minda Chen <minda.chen@starfivetech.com>, Tom Rini <trini@konsulko.com>,
 Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>
 References: <20240504150358.19600-1-minda.chen@starfivetech.com>
- <20240504150358.19600-4-minda.chen@starfivetech.com>
+ <20240504150358.19600-5-minda.chen@starfivetech.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240504150358.19600-4-minda.chen@starfivetech.com>
+In-Reply-To: <20240504150358.19600-5-minda.chen@starfivetech.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -78,51 +77,41 @@ X-Virus-Status: Clean
 
 On 5/4/24 5:03 PM, Minda Chen wrote:
 
-Fix up the copyrights to year 2024 globally please.
-
 [...]
 
-> +static int phy_usb3_mode_set(struct jh7110_pcie_phy *data)
+> +static void cdns_mode_init(struct cdns_starfive *data, enum usb_dr_mode mode)
 > +{
+> +	regmap_update_bits(data->stg_syscon, data->stg_usb_mode,
+> +			   USB_MISC_CFG_MASK,
+> +			   USB_SUSPENDM_BYPS | USB_PLL_EN | USB_REFCLK_MODE);
+> +
+> +	switch (mode) {
+> +	case USB_DR_MODE_HOST:
+> +		regmap_update_bits(data->stg_syscon,
+> +				   data->stg_usb_mode,
+> +				   USB_STRAP_MASK,
+> +				   USB_STRAP_HOST);
+> +		regmap_update_bits(data->stg_syscon,
+> +				   data->stg_usb_mode,
+> +				   USB_SUSPENDM_MASK,
+> +				   USB_SUSPENDM_HOST);
 
-Can this phy_usb3_mode_set and phy_pcie_mode_set be unified into single 
-function with parameter to select usb3/pcie mode instead ?
+Can you deduplicate thse regmap_update_bits at the end of this function 
+? Set a variable to USB_STRAP_HOST and another to USB_SUSPENDM_HOST 
+here, set the same variables to USB_STRAP_DEVICE/0 below, and then call 
+regmap_update_bits() with these variables at the end of this function once.
 
-> +	if (!data->stg_syscon || !data->sys_syscon) {
-> +		dev_err(data->phy->dev, "doesn't support usb3 mode\n");
-> +		return -EINVAL;
+> +		break;
+> +
+> +	case USB_DR_MODE_PERIPHERAL:
+> +		regmap_update_bits(data->stg_syscon, data->stg_usb_mode,
+> +				   USB_STRAP_MASK, USB_STRAP_DEVICE);
+> +		regmap_update_bits(data->stg_syscon, data->stg_usb_mode,
+> +				   USB_SUSPENDM_MASK, 0);
+> +		break;
+> +	default:
+> +		break;
 > +	}
-> +
-> +	regmap_update_bits(data->stg_syscon, data->stg_pcie_mode,
-> +			   PCIE_PHY_MODE_MASK, PCIE_PHY_MODE);
-> +	regmap_update_bits(data->stg_syscon, data->stg_pcie_usb,
-> +			   PCIE_USB3_BUS_WIDTH_MASK, 0);
-> +	regmap_update_bits(data->stg_syscon, data->stg_pcie_usb,
-> +			   PCIE_USB3_PHY_ENABLE, PCIE_USB3_PHY_ENABLE);
-> +
-> +	/* Connect usb 3.0 phy mode */
-> +	regmap_update_bits(data->sys_syscon, data->sys_phy_connect,
-> +			   USB_PDRSTN_SPLIT, 0);
-> +
-> +	/* Configuare spread-spectrum mode: down-spread-spectrum */
-> +	writel(PCIE_USB3_PHY_ENABLE, data->regs + PCIE_USB3_PHY_PLL_CTL_OFF);
-> +
-> +	return 0;
 > +}
-
-[...]
-
-> +int jh7110_pcie_phy_probe(struct udevice *dev)
-> +{
-> +	struct jh7110_pcie_phy *phy = dev_get_priv(dev);
-> +	int rc;
-> +
-> +	phy->regs = dev_read_addr_ptr(dev);
-> +
-
-Drop extra newline here.
-
-> +	if (!phy->regs)
-> +		return -EINVAL;
 
 [...]
