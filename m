@@ -4,94 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAC15C10F1A
-	for <u-boot@archiver.kernel.org>; Tue,  7 May 2024 22:57:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 268F6C10F1A
+	for <u-boot@archiver.kernel.org>; Wed,  8 May 2024 02:02:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43633882C5;
-	Wed,  8 May 2024 00:57:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 65D65882DB;
+	Wed,  8 May 2024 04:02:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lzNjAsmU";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id AF66B88387; Wed,  8 May 2024 00:57:31 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1715133763;
+	bh=6Qk9OnTjMt7jzdyhPf3BL/RB9if9uD4hEGKrB8YyVmM=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=BURwhD3yZZccMMatlmS7UoKXy2rKLJOwJExM6C+HNiFKhac/uKjTaB6rq25ZWTzeZ
+	 TkiGtf8Vo9CRHXV2RyMeXZAI+zwSGUxcoh0gF7AsD6mWuUnAye6IJMqk1NDAp4spNv
+	 Ov5xWcTQk9AMBSMfb2fsTbasudc6kfiFN0NpyvK0GhSiKuha5T805D6SUAnYvwV/LK
+	 O8DTScyd//h35rjih4vAbEsAnUDlcB1vvQYXIVaZwmZWnM01iwSUHDrCdQIcSwPSJV
+	 Stu9SuebkNLPz3a02NtRYRC5sCq4AGnld/bVjT5VwPbhkmK3YDFAuB4V9HRzYgz+nG
+	 afrqYOLZW0xqQ==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8238F8802D
- for <u-boot@lists.denx.de>; Wed,  8 May 2024 00:57:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-41ecf80482bso3668575e9.1
- for <u-boot@lists.denx.de>; Tue, 07 May 2024 15:57:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1715122649; x=1715727449; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mgQPpcRmxEgmUQMZ4ifLZjc6r1BC32xA9GU/1rNtT9Y=;
- b=lzNjAsmUknYdE/kHkRBaYUZ58OPtab4LpHgCaZ4dEFgA6cZ51y0kqFfh3RrdtzomMP
- BT5dDwbRfXRGVWKa/x3VGEcVWiykj/F76vHMgh8Ay+rd12lDlk1L6TQJCEhPnRuiYrJw
- uKf4mXgwjOVAPo0D+gNibQRQIZAQ5FgEHgiZV0DX4rCHv/7fr2vjhoZhU5ruueM/SAmF
- 0STNM3JQu/di8Ymqc8mFrR5nMFDICEVMfN15h+lPUz3DRwMhbzkxtQk/QkVljUikH60t
- Egu4Pvf67GLi3RlCnhALGzB0cskAbokTTIyE76+cTWjKeVrWDDP8gL60JSDI347IvZXV
- UCNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715122649; x=1715727449;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mgQPpcRmxEgmUQMZ4ifLZjc6r1BC32xA9GU/1rNtT9Y=;
- b=T0xDL6E+1pTwA+gPvI1QWuXDskF3LmxHSKZpNhBNu30TTY/b9rhr/irEyab8pbM2KL
- UNn6kIUnUkRN0itzMcnzK29DPxqMt7QNUdo0S5JYhs1SIBJnFBh7O+Z4lTDpMCZqxxpf
- OqzgXxF/7dGoZRlMh5NhQSyJYtqcAnoT+/ai9IDvvuYLwPFc6Ybz9X8YLqRhafrQEHie
- dXZ3vr8M0hZkSF5SDUE9mFUdG2VjE+3dq8eJ9x7VvF/AiP+8vC58vyF3m/j/U2OJjySB
- xzgTMc0QoESJmQ3HgQXIfeVKoIXYb8/SqhjP+jqTwcMXDtbLALzKjkZENp0aLWomCFRK
- 6Hww==
-X-Gm-Message-State: AOJu0YwMlyggoS92bMFgjFbntIpyyBcKgaGNYmg9C3WVtBWa+ZHzHRe4
- YLyhN7eoOUxbJE7CVppjbeOcQCes3ifKfn+gNh4W7hXCnI0TDoX1gn8EQu7XDw6GzlLeRVEPPpn
- O9b51LNcBw8I7Mcd5RQMNWPsExOk=
-X-Google-Smtp-Source: AGHT+IFD6kAVl1ewB0W9CAJg2KRDysRBriKwsw3FQq96OxDjihNDJxqJ1v0HvxD023f5I/AZ0ye/n+RF38FVjNs8mK4=
-X-Received: by 2002:adf:ee4f:0:b0:34d:742e:3db8 with SMTP id
- ffacd0b85a97d-34fca052508mr775059f8f.0.1715122648641; Tue, 07 May 2024
- 15:57:28 -0700 (PDT)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id D7F0188423;
+ Wed,  8 May 2024 04:02:40 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1715133762;
+ bh=6Qk9OnTjMt7jzdyhPf3BL/RB9if9uD4hEGKrB8YyVmM=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=SrhGlpCxdnrnkbKAArBw+GFBbuY7bhlOzliOcvh8GBZQB7+FwOAbDymiVn8qazo2r
+ DPHPlpf6K7XNRK8vSTo/7SV70m28PA8SSmUpdmca3keaOjV+tfCvt1mFV8LgfRAlza
+ ZeGFvbvl5IAhcAjHYcBmfmhVOeYh33ND3102IbNWUaXVaCi/5oOhgq8CTq5gGasYPZ
+ eZ9nJzXXF4TXQp+GKCxRiWeq+cm+bRI58e0Hw6TPRnWeZfQC9Sr+iMmdTq1yd33wmO
+ VmMtKtPhtADrLXcC0dqoFjF7G9VFMGtXRCwmJX7VoG5rzHdZFpHXcZK1QDXW+fumpg
+ Ba7yUW9laDnww==
+Message-ID: <e9205e96-720a-48da-abd0-2fae5e31e155@denx.de>
+Date: Wed, 8 May 2024 03:27:44 +0200
 MIME-Version: 1.0
-References: <20240507175132.1456512-1-raymond.mao@linaro.org>
- <20240507175132.1456512-6-raymond.mao@linaro.org>
-In-Reply-To: <20240507175132.1456512-6-raymond.mao@linaro.org>
-From: Igor Opaniuk <igor.opaniuk@gmail.com>
-Date: Wed, 8 May 2024 00:57:17 +0200
-Message-ID: <CAByghJYwSZY2G3dWGWkvYSdzJnjRZcfUQSboTFxso3G9+_bq7w@mail.gmail.com>
-Subject: Re: [PATCH v2 05/28] image: remove redundant hash includes
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>, 
- Andrew Davis <afd@ti.com>, Christophe Leroy <christophe.leroy@csgroup.eu>, 
- Sumit Garg <sumit.garg@linaro.org>, Jesse Taube <mr.bossman075@gmail.com>, 
- Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
- Ralph Siemsen <ralph.siemsen@linaro.org>, 
- Sergei Antonov <saproj@gmail.com>, Ilya Lukin <4.shket@gmail.com>,
- Bin Meng <bmeng@tinylab.org>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>, 
- Alexander Gendin <agendin@matrox.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
- Eddie James <eajames@linux.ibm.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 1/7] usb: cdns3: Set USB PHY mode in cdns3_probe()
+To: Minda Chen <minda.chen@starfivetech.com>, Tom Rini <trini@konsulko.com>,
+ Roger Quadros <rogerq@kernel.org>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Alexey Romanov <avromanov@salutedevices.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
+ Nishanth Menon <nm@ti.com>, Rick Chen <rick@andestech.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>
+References: <20240504150358.19600-1-minda.chen@starfivetech.com>
+ <20240504150358.19600-2-minda.chen@starfivetech.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20240504150358.19600-2-minda.chen@starfivetech.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,60 +75,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, May 7, 2024 at 7:54=E2=80=AFPM Raymond Mao <raymond.mao@linaro.org>=
- wrote:
->
-> Remove the redundant includes of u-boot/md5.h, u-boot/sha1.h,
-> u-boot/sha256.h and u-boot/sha512.h
->
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+On 5/4/24 5:03 PM, Minda Chen wrote:
+> USB PHY maybe need to set PHY mode in different USB
+> dr mode. So translate to generic PHY mode and call
+> generic_phy_set_mode().
+> 
+> Signed-off-by: Minda Chen <minda.chen@starfivetech.com>
 > ---
-> Changes in v2
-> - None.
->
->  boot/image-fit.c | 4 ----
->  boot/image.c     | 2 --
->  2 files changed, 6 deletions(-)
->
-> diff --git a/boot/image-fit.c b/boot/image-fit.c
-> index 89e377563ce..1efc39f4408 100644
-> --- a/boot/image-fit.c
-> +++ b/boot/image-fit.c
-> @@ -38,10 +38,6 @@ DECLARE_GLOBAL_DATA_PTR;
->  #include <image.h>
->  #include <bootstage.h>
->  #include <u-boot/crc.h>
-> -#include <u-boot/md5.h>
-> -#include <u-boot/sha1.h>
-> -#include <u-boot/sha256.h>
-> -#include <u-boot/sha512.h>
->
->  /***********************************************************************=
-******/
->  /* New uImage format routines */
-> diff --git a/boot/image.c b/boot/image.c
-> index 073931cd7a3..e57d6eae52d 100644
-> --- a/boot/image.c
-> +++ b/boot/image.c
-> @@ -26,8 +26,6 @@
->  #endif
->
->  #include <asm/global_data.h>
-> -#include <u-boot/md5.h>
-> -#include <u-boot/sha1.h>
->  #include <linux/errno.h>
->  #include <asm/io.h>
->
-> --
-> 2.25.1
->
-Reviewed-by: Igor Opaniuk <igor.opaniuk@gmail.com>
+>   drivers/usb/cdns3/core.c | 17 +++++++++++++++++
+>   1 file changed, 17 insertions(+)
+> 
+> diff --git a/drivers/usb/cdns3/core.c b/drivers/usb/cdns3/core.c
+> index 12a741c6ea..c1a61471f9 100644
+> --- a/drivers/usb/cdns3/core.c
+> +++ b/drivers/usb/cdns3/core.c
+> @@ -321,6 +321,7 @@ static int cdns3_probe(struct cdns3 *cdns)
+>   {
+>   	struct udevice *dev = cdns->dev;
+>   	int ret;
+> +	int mode = PHY_MODE_INVALID;
 
---=20
-Best regards - Atentamente - Meilleures salutations
+Please swap ret and mode to keep this list sorted.
 
-Igor Opaniuk
+>   	cdns->xhci_regs = dev_remap_addr_name(dev, "xhci");
+>   	if (!cdns->xhci_regs)
+> @@ -372,6 +373,22 @@ static int cdns3_probe(struct cdns3 *cdns)
+>   	if (ret)
+>   		return ret;
+>   
+> +	if (cdns->dr_mode == USB_DR_MODE_HOST)
+> +		mode = PHY_MODE_USB_HOST;
+> +	else if (cdns->dr_mode == USB_DR_MODE_PERIPHERAL)
+> +		mode = PHY_MODE_USB_DEVICE;
+> +	else if (cdns->dr_mode == USB_DR_MODE_OTG)
+> +		mode = PHY_MODE_USB_OTG;
+> +
+> +	if (mode != PHY_MODE_INVALID) {
 
-mailto: igor.opaniuk@gmail.com
-skype: igor.opanyuk
-https://www.linkedin.com/in/iopaniuk
+Better invert the condition this way to reduce indent:
+
+if (mode == PHY_MODE_INVALID) {
+   dev_err(...report the error...);
+   return ret;
+}
+
+ret = generic_phy_set...
+
+> +		ret = generic_phy_set_mode(&cdns->usb2_phy, mode, 0);
+> +		if (ret)
+> +			return ret;
+> +		ret = generic_phy_set_mode(&cdns->usb3_phy, mode, 0);
+> +		if (ret)
+> +			return ret;
+> +	}
+> +
+>   	dev_dbg(dev, "Cadence USB3 core: probe succeed\n");
+>   
+>   	return 0;
+
