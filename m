@@ -4,112 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5395C19F4F
-	for <u-boot@archiver.kernel.org>; Wed,  8 May 2024 14:55:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55F16C04FFE
+	for <u-boot@archiver.kernel.org>; Wed,  8 May 2024 14:56:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D255A887D4;
-	Wed,  8 May 2024 16:55:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D94FA887CC;
+	Wed,  8 May 2024 16:56:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DIDPjvpy";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HWp797zU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8CFF884E5; Wed,  8 May 2024 16:52:24 +0200 (CEST)
-Received: from mail-vk1-xa32.google.com (mail-vk1-xa32.google.com
- [IPv6:2607:f8b0:4864:20::a32])
+ id 1999C887E3; Wed,  8 May 2024 16:56:25 +0200 (CEST)
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [IPv6:2607:f8b0:4864:20::1033])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9FFD688798
- for <u-boot@lists.denx.de>; Wed,  8 May 2024 16:52:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A86E881EB
+ for <u-boot@lists.denx.de>; Wed,  8 May 2024 16:56:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-vk1-xa32.google.com with SMTP id
- 71dfb90a1353d-4df3d4f0bf7so1184482e0c.0
- for <u-boot@lists.denx.de>; Wed, 08 May 2024 07:52:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-2b5388087f9so2466783a91.0
+ for <u-boot@lists.denx.de>; Wed, 08 May 2024 07:56:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715179939; x=1715784739; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BFkvImjWERLIqoDpiY5NabxpICi8El7mOC8Adlakk6c=;
- b=DIDPjvpyehwx+Jh9g+EStFTksHRgpL6WuoJPnVi346oKKaUBk6Ng1HealNACXnCwSa
- FZw2okaFRWZX2pnTcvtPksdWLkS8l5+j53Im9SrarivUbkFOEmTDFIy7Hb54hnVA4ayP
- W3jD4A62J6VQBRSniJuEK65hlG9Rmd0zbyzqY=
+ d=linaro.org; s=google; t=1715180181; x=1715784981; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=9wg9g4NiyeJUcb2nYCfmD4DYiDchXC1Wy+6+SW9ZcM0=;
+ b=HWp797zUTxTnzjYTJjsM5kKnd9vzGKcYMo98eaZg4dV9TvcmZ9BRTdByvXX4tZiNla
+ h20LdwuvRUZhPyK47U0lPbIRrsgSSMhUKGSlb6Z4VGvfNi8zBmbjy+/0maXzDE+7Lb/m
+ IVBbP3ZC3+apI1VpNzb2KoGkqBovUSbmLcLHmna4MUq/hZHwvK6ymez+2eyyvckduzFg
+ c5Wktuk6MzrEBq2B/0zo5P4F3HM9o/kAI/CJoQBlx3HLCdYpfnfcuoTdFKTs7OQjMODT
+ u07auwypzg3uLM5CUojX++x2Go3DgYfjVe5G7W6JksOpn/tP3qTeBQq0hY9qXzcaul+A
+ FBlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715179939; x=1715784739;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=BFkvImjWERLIqoDpiY5NabxpICi8El7mOC8Adlakk6c=;
- b=jLyoLWpDBPj5l5laxK1HuZaAX46D3FxCNjbpnjDqN2gY6Iii5VsiM+svSKb0z1fF5d
- 7hamx78vQ159BOl8IGCHPs3WbfedjRfH50syYkHh51ZySd2Lz464sKLJC3Ype1Ym8gCU
- 9cVbm4YJd6iMby/pfZ57UccQ4vUWleN+MgoKA0D9y1hsWMrAfUYM0/fPjNJ/sOxvBOvi
- wH2nqj/N5W4uHlyyhINDA0c55vWMeNbOTPTnIuUrjUzX9l7DDFNF1EEtwlnTMc4FIkXO
- JtL0vX80BVvD5PzQ3Ve3lFbMJqskv3ETb57+pHLOPqBZtoqNyCybYm3hLcWr7JtXkhOi
- L7HQ==
-X-Gm-Message-State: AOJu0Yz7CiVSsUlikf45lIfMMI7xqRX1PGYu4nllJPpPWriEfIWZXWjQ
- dLyJFTDela07mG+Hmc3TnSJwKFPdjbkyYmndOOlXocxp8bRL7Sy+mAa21qomQQc=
-X-Google-Smtp-Source: AGHT+IEsysydAejhF6Uo5+mxOTKrSWbptecAxfHnyn+tAOSuwOpvT1PdfhQgYXiltbagMr8rm3FX+w==
-X-Received: by 2002:a05:6122:208d:b0:4da:9aa1:dd5e with SMTP id
- 71dfb90a1353d-4df693608e1mr3155963e0c.10.1715179939401; 
- Wed, 08 May 2024 07:52:19 -0700 (PDT)
-Received: from [127.0.1.1] ([187.144.98.216]) by smtp.gmail.com with ESMTPSA id
- en15-20020a05622a540f00b004377f87147bsm7713764qtb.69.2024.05.08.07.52.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 May 2024 07:52:19 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Greg Malysa <greg.malysa@timesys.com>
-Cc: Matthew McClintock <Matthew.Mcclintock@analog.com>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Alexey Brodkin <alexey.brodkin@synopsys.com>, 
- Alison Wang <alison.wang@nxp.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Andre Przywara <andre.przywara@arm.com>, Andrew Davis <afd@ti.com>, 
- Andy Fleming <afleming@gmail.com>, 
- Angelo Dureghello <angelo@kernel-space.org>, 
- Arturs Artamonovs <arturs.artamonovs@analog.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Bin Meng <bmeng@tinylab.org>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- =?utf-8?q?Cs=C3=B3k=C3=A1s_Bence?= <csokas.bence@prolan.hu>, 
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ian Roberts <ian.roberts@timesys.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, 
- Kuan Lim Lee <kuanlim.lee@starfivetech.com>, 
- Linus Walleij <linus.walleij@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
- Manorit Chawdhry <m-chawdhry@ti.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
- Mario Six <mario.six@gdsys.cc>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>, 
- Peter Robinson <pbrobinson@gmail.com>, 
- Priyanka Jain <priyanka.jain@nxp.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Rick Chen <rick@andestech.com>, Sam Protsenko <semen.protsenko@linaro.org>, 
- Samuel Holland <samuel@sholland.org>, Sean Anderson <seanga2@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>, 
- Sumit Garg <sumit.garg@linaro.org>, Thomas Chou <thomas@wytron.com.tw>, 
- Utsav Agarwal <utsav.agarwal@analog.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
- Wolfgang Denk <wd@denx.de>, Yang Xiwen <forbidden405@outlook.com>, 
- Yu Chien Peter Lin <peterlin@andestech.com>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Michal Simek <michal.simek@amd.com>
-In-Reply-To: <20240425000515.21896-1-greg.malysa@timesys.com>
-References: <20240425000515.21896-1-greg.malysa@timesys.com>
-Subject: Re: [PATCH v2 0/4] arm: Add Analog Devices SC5xx Machine Type
-Message-Id: <171517993519.3110847.7832938517546565543.b4-ty@konsulko.com>
-Date: Wed, 08 May 2024 08:52:15 -0600
+ d=1e100.net; s=20230601; t=1715180181; x=1715784981;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9wg9g4NiyeJUcb2nYCfmD4DYiDchXC1Wy+6+SW9ZcM0=;
+ b=wdbsnQ181oOikS+3w749p878L2o0LhIaLBCWlw9PHv13g5sMO4WyMB5LTfQ7HPU0XT
+ 0m8U9KHnLoJ5PUpzwCd1YD/RgUoBenGZaOgvpR/LCf83qrCaOO4tSYZIo/o1msn4s+7c
+ Se7TUvFbVCSuf2Fm6PVyAugQySSgHBX2MLE5nVFHMeIh2fdU1THc5kgfSQxlTG1qdYqo
+ Q8pkPbWm9VbJkIe71s9EMKzKuVB5eYCmR2hOwquspENXy+Os1+T/BKXb0u+dumRg7JqI
+ OVtqCznlvGnO6oyvLUjtAyMlVqXXyOzVE/6kh0TugmJ0b4BjWH0txIV56IuQYwVO9oEH
+ UafA==
+X-Gm-Message-State: AOJu0YyfXPF8A/BJT1zdVBp7NAlZCBK79XNM+MHOdNFujhpPCMmyglym
+ rzYKRQgZGP50hIp2VRhf/Z/oWEOxVZUi5niQPfDfCDYD023WIgz9IaC732C6MDDrdP5msIOcGJH
+ 8DjkHjprjxw5jxmurLFH2Lsw83X0be2VoqF/kkA==
+X-Google-Smtp-Source: AGHT+IFpUTcrTRvwB5Ai5ab1sN1o8+0m6DgrSujTnAQrqwBipSiNunkHjhzQYe06McuxoAXyFVlSUuNtwYOvHy8SH7g=
+X-Received: by 2002:a17:90a:858b:b0:2b1:50:cf05 with SMTP id
+ 98e67ed59e1d1-2b6166c3197mr2790165a91.27.1715180180972; Wed, 08 May 2024
+ 07:56:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
-X-Mailman-Approved-At: Wed, 08 May 2024 16:55:31 +0200
+References: <20240507175132.1456512-1-raymond.mao@linaro.org>
+ <20240507175132.1456512-15-raymond.mao@linaro.org>
+ <CAC_iWj+Ob8UyPD3w5t3k0k55gau_K=Gy9VsdFXgm2Br0EjijsQ@mail.gmail.com>
+In-Reply-To: <CAC_iWj+Ob8UyPD3w5t3k0k55gau_K=Gy9VsdFXgm2Br0EjijsQ@mail.gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Wed, 8 May 2024 10:56:09 -0400
+Message-ID: <CAEfUkULk_9NZqH4P-NjLLGESz0TovdO-QvLrret7Wj414EopUg@mail.gmail.com>
+Subject: Re: [PATCH v2 14/28] mbedtls/external: support decoding multiple
+ signer's cert
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Simon Glass <sjg@chromium.org>, Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Andrew Davis <afd@ti.com>, Christophe Leroy <christophe.leroy@csgroup.eu>, 
+ Sumit Garg <sumit.garg@linaro.org>, Jesse Taube <mr.bossman075@gmail.com>, 
+ Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>, 
+ Ilya Lukin <4.shket@gmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Sergei Antonov <saproj@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>, 
+ Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>, 
+ Manorit Chawdhry <m-chawdhry@ti.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
+ Eddie James <eajames@linux.ibm.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,27 +108,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 24 Apr 2024 20:03:59 -0400, Greg Malysa wrote:
+Hi Ilias,
 
-> This series adds support for the ADI SC5xx machine type and includes two
-> core drivers that are required for being able to boot any board--a UART
-> driver, the gptimer driver which is used as a clock reference (CNTVCNT
-> is not supported on the armv7 sc5xx SoCs) and the clock tree driver. Our
-> corresponding Linux support relies on u-boot configuring the clocks
-> correctly before booting, so it is not possible to boot any board
-> without the CGU/CDU configuration happening here. There are also no
-> board files, device trees, or defconfigs included here, but some common
-> definitions that will be used to build board files currently are. The
-> sc5xx SoCs themselves include many armv7 families (sc57x, sc58x, and
-> sc594) all using an ARM Cortex-A5, and one armv8 family (sc598) indended
-> to be a drop-in replacement for the SC594 in terms of peripherals, with
-> a Cortex-A55 instead.
-> 
-> [...]
+On Wed, 8 May 2024 at 10:35, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+wrote:
 
-Applied to u-boot/next, thanks!
+> Hi Raymond
+>
+> On Tue, 7 May 2024 at 20:57, Raymond Mao <raymond.mao@linaro.org> wrote:
+> >
+> > Support decoding multiple signer's cert in the signed data within
+> > a PKCS7 message.
+>
+> For all similar external mbedTLS patches, try to explain which belong
+> to mbedTLS must be sent upstream and which ones we need to carry
+> internally. I don't expect us to have to carry anything in U-Boot
+>
+> I can add a reference link to the MbedTLS PR for the patches marked with
+"mbedtls/external".
+But for enabling the features, we still need to merge them before the next
+git
+subtree update when those patches are merged in a MbedTLS release.
 
--- 
-Tom
+Regards,
+Raymond
 
-
+Thanks
+> /Ilias
+>
+> >
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > ---
+> > Changes in v2
+> > - None.
+> >
+> >  lib/mbedtls/external/mbedtls/library/pkcs7.c | 75 ++++++++++++--------
+> >  1 file changed, 47 insertions(+), 28 deletions(-)
+> >
+> > diff --git a/lib/mbedtls/external/mbedtls/library/pkcs7.c
+> b/lib/mbedtls/external/mbedtls/library/pkcs7.c
+> > index da73fb341d6..01105227d7a 100644
+> > --- a/lib/mbedtls/external/mbedtls/library/pkcs7.c
+> > +++ b/lib/mbedtls/external/mbedtls/library/pkcs7.c
+> > @@ -61,6 +61,36 @@ static int pkcs7_get_next_content_len(unsigned char
+> **p, unsigned char *end,
+> >      return ret;
+> >  }
+> >
+> > +/**
+> > + * Get and decode one cert from a sequence.
+> > + * Return 0 for success,
+> > + * Return negative error code for failure.
+> > + **/
+> > +static int pkcs7_get_one_cert(unsigned char **p, unsigned char *end,
+> > +                              mbedtls_x509_crt *certs)
+> > +{
+> > +    int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
+> > +    size_t len = 0;
+> > +    unsigned char *start = *p;
+> > +    unsigned char *end_cert;
+> > +
+> > +    ret = mbedtls_asn1_get_tag(p, end, &len, MBEDTLS_ASN1_CONSTRUCTED
+> > +                               | MBEDTLS_ASN1_SEQUENCE);
+> > +    if (ret != 0) {
+> > +        return MBEDTLS_ERROR_ADD(MBEDTLS_ERR_PKCS7_INVALID_CERT, ret);
+> > +    }
+> > +
+> > +    end_cert = *p + len;
+> > +
+> > +    if ((ret = mbedtls_x509_crt_parse_der(certs, start, end_cert -
+> start)) < 0) {
+> > +        return MBEDTLS_ERR_PKCS7_INVALID_CERT;
+> > +    }
+> > +
+> > +    *p = end_cert;
+> > +
+> > +    return 0;
+> > +}
+> > +
+> >  /**
+> >   * version Version
+> >   * Version ::= INTEGER
+> > @@ -178,11 +208,12 @@ static int pkcs7_get_certificates(unsigned char
+> **p, unsigned char *end,
+> >                                    mbedtls_x509_crt *certs)
+> >  {
+> >      int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
+> > -    size_t len1 = 0;
+> > -    size_t len2 = 0;
+> > -    unsigned char *end_set, *end_cert, *start;
+> > +    size_t len = 0;
+> > +    unsigned char *end_set;
+> > +    int num_of_certs = 0;
+> >
+> > -    ret = mbedtls_asn1_get_tag(p, end, &len1, MBEDTLS_ASN1_CONSTRUCTED
+> > +    /* Get the set of certs */
+> > +    ret = mbedtls_asn1_get_tag(p, end, &len, MBEDTLS_ASN1_CONSTRUCTED
+> >                                 | MBEDTLS_ASN1_CONTEXT_SPECIFIC);
+> >      if (ret == MBEDTLS_ERR_ASN1_UNEXPECTED_TAG) {
+> >          return 0;
+> > @@ -190,38 +221,26 @@ static int pkcs7_get_certificates(unsigned char
+> **p, unsigned char *end,
+> >      if (ret != 0) {
+> >          return MBEDTLS_ERROR_ADD(MBEDTLS_ERR_PKCS7_INVALID_FORMAT, ret);
+> >      }
+> > -    start = *p;
+> > -    end_set = *p + len1;
+> > +    end_set = *p + len;
+> >
+> > -    ret = mbedtls_asn1_get_tag(p, end_set, &len2,
+> MBEDTLS_ASN1_CONSTRUCTED
+> > -                               | MBEDTLS_ASN1_SEQUENCE);
+> > +    ret = pkcs7_get_one_cert(p, end_set, certs);
+> >      if (ret != 0) {
+> > -        return MBEDTLS_ERROR_ADD(MBEDTLS_ERR_PKCS7_INVALID_CERT, ret);
+> > +        return ret;
+> >      }
+> >
+> > -    end_cert = *p + len2;
+> > +    num_of_certs++;
+> >
+> > -    /*
+> > -     * This is to verify that there is only one signer certificate. It
+> seems it is
+> > -     * not easy to differentiate between the chain vs different
+> signer's certificate.
+> > -     * So, we support only the root certificate and the single signer.
+> > -     * The behaviour would be improved with addition of multiple signer
+> support.
+> > -     */
+> > -    if (end_cert != end_set) {
+> > -        return MBEDTLS_ERR_PKCS7_FEATURE_UNAVAILABLE;
+> > -    }
+> > -
+> > -    if ((ret = mbedtls_x509_crt_parse_der(certs, start, len1)) < 0) {
+> > -        return MBEDTLS_ERR_PKCS7_INVALID_CERT;
+> > +    while (*p != end_set) {
+> > +        ret = pkcs7_get_one_cert(p, end_set, certs);
+> > +        if (ret != 0) {
+> > +            return ret;
+> > +        }
+> > +        num_of_certs++;
+> >      }
+> >
+> > -    *p = end_cert;
+> > +    *p = end_set;
+> >
+> > -    /*
+> > -     * Since in this version we strictly support single certificate,
+> and reaching
+> > -     * here implies we have parsed successfully, we return 1.
+> > -     */
+> > -    return 1;
+> > +    return num_of_certs;
+> >  }
+> >
+> >  /**
+> > --
+> > 2.25.1
+> >
+>
