@@ -4,54 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D63AC04FFE
-	for <u-boot@archiver.kernel.org>; Wed,  8 May 2024 17:38:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46630C04FFE
+	for <u-boot@archiver.kernel.org>; Wed,  8 May 2024 17:39:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DDDA87FC1;
-	Wed,  8 May 2024 19:38:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C0845882B1;
+	Wed,  8 May 2024 19:39:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=posteo.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=posteo.net header.i=@posteo.net header.b="PckQNVSb";
+	dkim=pass (2048-bit key; secure) header.d=posteo.net header.i=@posteo.net header.b="U8aG34R+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54E9187FCC; Wed,  8 May 2024 19:38:08 +0200 (CEST)
-Received: from mout01.posteo.de (mout01.posteo.de [185.67.36.65])
+ id 3849C87FCC; Wed,  8 May 2024 19:39:54 +0200 (CEST)
+Received: from mout02.posteo.de (mout02.posteo.de [185.67.36.66])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 100CE87ED0
- for <u-boot@lists.denx.de>; Wed,  8 May 2024 19:38:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 49E2B87ED0
+ for <u-boot@lists.denx.de>; Wed,  8 May 2024 19:39:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=posteo.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=stefan_b@posteo.net
 Received: from submission (posteo.de [185.67.36.169]) 
- by mout01.posteo.de (Postfix) with ESMTPS id A0C1C240027
- for <u-boot@lists.denx.de>; Wed,  8 May 2024 19:38:05 +0200 (CEST)
+ by mout02.posteo.de (Postfix) with ESMTPS id E499D240101
+ for <u-boot@lists.denx.de>; Wed,  8 May 2024 19:39:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=posteo.net; s=2017;
- t=1715189885; bh=cV74pzm9zVo4mEbXCdiETx7qJDLlPMnVuLenMvb+AsM=;
- h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:
+ t=1715189991; bh=Orlqb90XcpoISQn3Tvgz+Xf5D8HT8P8MFhW3QComh7o=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:From:Content-Type:
  Content-Transfer-Encoding:From;
- b=PckQNVSbuyh2TTcLK18OWiGBFPo7EDxR6pDTz/iSKxcVsVxNYq1zIRTFq6WwZD2Tn
- t4+ymUItWGoC6EXXYi8T2cnuxReFvValq3gn1HywSrCL/aKRM58N1YfqHWlGHD28JJ
- viuItIfCNvQFPbiBLh+cEs13jz42M5oWmYk12dzplFPWqCh0FwHKNI0yFY+Ry7gh8s
- ++J5QI5XgZnowE6n9UY5Geue7CDDgUAaJ6MvgcEF5lPLfiQWB/P0pJLHnfmlXqRlm8
- muJrTL/Yeg+PxRDJBDm6qoB4EAUxtM5BUeYvJ7pDoD+uZPwTQF1yf2C+1TDjot0mJK
- gNMF+WCg2RTPg==
+ b=U8aG34R+zPSi5L0sbFUDtLdwqwGrsKTEISWMUvwlfaGn17znxVe1CaAIX2FmvFns2
+ U2I384cHcmk2Yfa5c1gKmySWrcuf7iNxH9yaALH+xCK+q4/ygp7NllkCIAGpac1fkK
+ vQD7PLswv+ol0FmteykYcVn9hb9KQ65yG0ToH35FGmbxasuvzHreeJWgKtkdFc0V/z
+ RKBIOuJ2jASm1sHk9l/bMw3QchinZcMCTV3GnKaX6W6RVuN+3JSl6fdZICxh3zkUBR
+ 1b9GwS02nPEDJQNDI+AC1TiqUgBru7CISwh742EdZvjGgnFuukN1z/kRpAP14DMFWC
+ uOCvccaegklBw==
 Received: from customer (localhost [127.0.0.1])
- by submission (posteo.de) with ESMTPSA id 4VZMms14jVz9rxL;
- Wed,  8 May 2024 19:38:05 +0200 (CEST)
-Message-ID: <3356c564-c60b-3da3-09ea-b1613277bb84@posteo.net>
-Date: Wed,  8 May 2024 17:37:37 +0000
+ by submission (posteo.de) with ESMTPSA id 4VZMpt1dpFz9rxF;
+ Wed,  8 May 2024 19:39:50 +0200 (CEST)
+Message-ID: <edb978c6-b13f-eb1a-958d-1bd22ae9859f@posteo.net>
+Date: Wed,  8 May 2024 17:39:22 +0000
 MIME-Version: 1.0
-Subject: Re: [PATCH 17/33] arm: nexell: Remove <common.h> and add needed
- includes
+Subject: Re: [PATCH 062/149] board: friendlyarm: Remove <common.h> and add
+ needed includes
 Content-Language: en-US, de-DE
 To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20240430133559.1836389-1-trini@konsulko.com>
- <20240430133559.1836389-17-trini@konsulko.com>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Igor Prusov <ivprusov@salutedevices.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+References: <20240501024316.1767971-1-trini@konsulko.com>
+ <20240501024316.1767971-62-trini@konsulko.com>
 From: Stefan Bosch <stefan_b@posteo.net>
-In-Reply-To: <20240430133559.1836389-17-trini@konsulko.com>
+In-Reply-To: <20240501024316.1767971-62-trini@konsulko.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -72,9 +76,9 @@ X-Virus-Status: Clean
 
 
 
-On 30.04.24 15:35, Tom Rini wrote:
-> Remove <common.h> from all mach-nexell files and when needed add missing
-> include files directly.
+On 01.05.24 04:41, Tom Rini wrote:
+> Remove <common.h> from this board vendor directory and when needed
+> add missing include files directly.
 > 
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 Reviewed-by: Stefan Bosch <stefan_b@posteo.net>
@@ -83,76 +87,65 @@ Tested-by: Stefan Bosch <stefan_b@posteo.net>
 Looks good, tested on FriendlyElec-Board NanoPC-T2.
 
 Thanks a lot!
+
 > ---
 > Cc: Stefan Bosch <stefan_b@posteo.net>
+> Cc: Caleb Connolly <caleb.connolly@linaro.org>
+> Cc: Eugen Hristev <eugen.hristev@collabora.com>
+> Cc: Igor Prusov <ivprusov@salutedevices.com>
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
 > ---
->   arch/arm/mach-nexell/clock.c              | 2 +-
->   arch/arm/mach-nexell/include/mach/reset.h | 2 ++
->   arch/arm/mach-nexell/reset.c              | 1 -
->   arch/arm/mach-nexell/tieoff.c             | 1 -
->   arch/arm/mach-nexell/timer.c              | 1 -
->   5 files changed, 3 insertions(+), 4 deletions(-)
+>   board/friendlyarm/nanopi2/board.c   | 1 -
+>   board/friendlyarm/nanopi2/hwrev.c   | 1 -
+>   board/friendlyarm/nanopi2/lcds.c    | 1 -
+>   board/friendlyarm/nanopi2/onewire.c | 1 -
+>   4 files changed, 4 deletions(-)
 > 
-> diff --git a/arch/arm/mach-nexell/clock.c b/arch/arm/mach-nexell/clock.c
-> index 59ffa26255f5..3082f6077b73 100644
-> --- a/arch/arm/mach-nexell/clock.c
-> +++ b/arch/arm/mach-nexell/clock.c
-> @@ -4,8 +4,8 @@
->    * Hyunseok, Jung <hsjung@nexell.co.kr>
+> diff --git a/board/friendlyarm/nanopi2/board.c b/board/friendlyarm/nanopi2/board.c
+> index 393c5a447d6f..c8cbc5a15fa8 100644
+> --- a/board/friendlyarm/nanopi2/board.c
+> +++ b/board/friendlyarm/nanopi2/board.c
+> @@ -5,7 +5,6 @@
 >    */
 >   
+>   #include <config.h>
 > -#include <common.h>
 >   #include <command.h>
-> +#include <vsprintf.h>
->   #include <linux/err.h>
->   #include <asm/io.h>
->   #include <asm/arch/nexell.h>
-> diff --git a/arch/arm/mach-nexell/include/mach/reset.h b/arch/arm/mach-nexell/include/mach/reset.h
-> index e1301d4e53d3..0c6a13043f91 100644
-> --- a/arch/arm/mach-nexell/include/mach/reset.h
-> +++ b/arch/arm/mach-nexell/include/mach/reset.h
-> @@ -7,6 +7,8 @@
->   #ifndef __NEXELL_RESET__
->   #define __NEXELL_RESET__
->   
-> +#include <linux/types.h>
-> +
->   #define NUMBER_OF_RESET_MODULE_PIN      69
->   
->   enum rstcon {
-> diff --git a/arch/arm/mach-nexell/reset.c b/arch/arm/mach-nexell/reset.c
-> index 1f732a3d3732..627f568270b6 100644
-> --- a/arch/arm/mach-nexell/reset.c
-> +++ b/arch/arm/mach-nexell/reset.c
-> @@ -8,7 +8,6 @@
->    *FIXME : Not support device tree & reset control driver.
->    *        will remove after support device tree & reset control driver.
->    */
-> -#include <common.h>
->   #include <asm/io.h>
->   #include <asm/arch/nexell.h>
->   #include <asm/arch/reset.h>
-> diff --git a/arch/arm/mach-nexell/tieoff.c b/arch/arm/mach-nexell/tieoff.c
-> index 5a4744c296a2..51cca6744d6f 100644
-> --- a/arch/arm/mach-nexell/tieoff.c
-> +++ b/arch/arm/mach-nexell/tieoff.c
-> @@ -4,7 +4,6 @@
->    * Youngbok, Park <park@nexell.co.kr>
->    */
->   
-> -#include <common.h>
->   #include <asm/arch/nexell.h>
->   #include <asm/arch/clk.h>
->   #include <asm/arch/reset.h>
-> diff --git a/arch/arm/mach-nexell/timer.c b/arch/arm/mach-nexell/timer.c
-> index 3b311fd22a56..b35c7b1bb33a 100644
-> --- a/arch/arm/mach-nexell/timer.c
-> +++ b/arch/arm/mach-nexell/timer.c
-> @@ -4,7 +4,6 @@
->    * Hyunseok, Jung <hsjung@nexell.co.kr>
->    */
->   
-> -#include <common.h>
+>   #include <fdt_support.h>
 >   #include <log.h>
+> diff --git a/board/friendlyarm/nanopi2/hwrev.c b/board/friendlyarm/nanopi2/hwrev.c
+> index 585e08c944f9..cd9c2414a320 100644
+> --- a/board/friendlyarm/nanopi2/hwrev.c
+> +++ b/board/friendlyarm/nanopi2/hwrev.c
+> @@ -5,7 +5,6 @@
+>    */
 >   
+>   #include <config.h>
+> -#include <common.h>
+>   #include <i2c.h>
 >   #include <asm/io.h>
+>   
+> diff --git a/board/friendlyarm/nanopi2/lcds.c b/board/friendlyarm/nanopi2/lcds.c
+> index 7303e53af925..b37367300cf0 100644
+> --- a/board/friendlyarm/nanopi2/lcds.c
+> +++ b/board/friendlyarm/nanopi2/lcds.c
+> @@ -4,7 +4,6 @@
+>    */
+>   
+>   #include <config.h>
+> -#include <common.h>
+>   #include <errno.h>
+>   #include <fdtdec.h>
+>   #include <fdt_support.h>
+> diff --git a/board/friendlyarm/nanopi2/onewire.c b/board/friendlyarm/nanopi2/onewire.c
+> index 4f0b1e33c2df..31cc871330ca 100644
+> --- a/board/friendlyarm/nanopi2/onewire.c
+> +++ b/board/friendlyarm/nanopi2/onewire.c
+> @@ -5,7 +5,6 @@
+>    */
+>   
+>   #include <config.h>
+> -#include <common.h>
+>   #include <errno.h>
+>   #include <asm/io.h>
+>   #include <asm/arch/clk.h>
