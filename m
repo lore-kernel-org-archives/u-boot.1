@@ -4,54 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C428C04FFE
-	for <u-boot@archiver.kernel.org>; Wed,  8 May 2024 11:40:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAF3AC19F4F
+	for <u-boot@archiver.kernel.org>; Wed,  8 May 2024 11:53:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B709C882C8;
-	Wed,  8 May 2024 13:40:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
+	by phobos.denx.de (Postfix) with ESMTP id E9F728843D;
+	Wed,  8 May 2024 13:53:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="roWj69cz";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="EVF8ePxM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8841988393; Wed,  8 May 2024 13:40:15 +0200 (CEST)
-Received: from mail-40136.proton.ch (mail-40136.proton.ch [185.70.40.136])
+ id 91D108844B; Wed,  8 May 2024 13:53:00 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF8A6882C8
- for <u-boot@lists.denx.de>; Wed,  8 May 2024 13:40:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A2048839E
+ for <u-boot@lists.denx.de>; Wed,  8 May 2024 13:52:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=samcday.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail2; t=1715168412; x=1715427612;
- bh=BOmsCO5MspT/LPzA57SWrmc33v3o2goSGw1DzcHYig8=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=roWj69czz5SbZnP4OU7n2pRcVTJKJJOt4UkgUAVSdwnp12CqCKY25/ipePUPG9fkw
- xdnhWOHba2HVRwWW9vCSkPYsOMpmVJXP7Ihw+C5gGe9XpemnliXRpveZjM7OG4VbvD
- 4Yt1cJBsQfLmoavLHzZBmBJoYUXe1w4yuNlYx4WHlJ3avwkktiFovUUoWJTS+lcHAn
- RD3tZORST071aFT+TBAmyugxC4ssFrxJoxifHx9bDdYDz4u9ZFym8PotdUID4DkCEG
- 06eDgomTE8+QBOalNeEjbN2RaYqbnlrFpuePDA13KmlDAXxNF3esja9LOoIGpDrISF
- h7BEoHfvst+cA==
-Date: Wed, 08 May 2024 11:40:08 +0000
-To: Sumit Garg <sumit.garg@linaro.org>
-From: Sam Day <me@samcday.com>
-Cc: Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-Subject: Re: [PATCH] mach-snapdragon: do carveouts for qcs404 only
-Message-ID: <PaGjHRvdULVbxVZ6A0Mw4PKFhK2AmMa171TAjH-3X9skahkwpgp9AEvt_W7tfepnpu2cTHmJt0zhnaSo-ukBYGP0K7PdFieiiYUNaMpiG1k=@samcday.com>
-In-Reply-To: <CAFA6WYPEK0CeK-WATVymNSzYR6U3+gKxu0TpBeCQ7a03C7PObw@mail.gmail.com>
-References: <20240507-qcs404-carveout-only-v1-1-93d06884b862@samcday.com>
- <CAFA6WYPEK0CeK-WATVymNSzYR6U3+gKxu0TpBeCQ7a03C7PObw@mail.gmail.com>
-Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 95befe42479d6066fa6012fb680b3c0cded5b443
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1715169172; x=1715773972; i=xypron.glpk@gmx.de;
+ bh=FQYHxjy9ZH/+FFLnkQTWdhiOOhkdEf5fsZX6H2JANJE=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:
+ References:Cc:To:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=EVF8ePxMivP8xE76O/ETOR2++rp5bxfWi1RVTRNitQUBZ/bTe3jqg1wl5245zMA4
+ 3f9FD9gMcJtFTYqHHmFpQyNL010SIj7PKqBKttgM+dxStIonA9nRRQvg4Kb6motAf
+ WIJjEhfBRp6KxvPSVkqptZZFndD+YWjhGIRCJV96kdFOuh+u5xNPf7uwHAVl3dH9E
+ +AV6Tk+H7551jJ7kXs1JCMWfRHIEornBVCc7mjrN4SOPpM5WI0JGsU2IU1RRNYBd/
+ h/zzEm760JC6cEBJCc4LLbf7134hPmAjnXQX0HFI2WO2NRl0Y44H/32R2vSwbk7tg
+ 3cUEMdbWG1Gi7N2cng==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [10.55.2.71] ([149.11.192.251]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MV67o-1sDukP3qJK-00S7UP; Wed, 08
+ May 2024 13:52:52 +0200
+Message-ID: <f4caebe2-d218-4ce7-9c3d-4dc83a0e1c76@gmx.de>
+Date: Wed, 8 May 2024 13:52:45 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] efi_loader: capsule: detect possible ESP device path
+References: <20240508112401.155528-1-o451686892@gmail.com>
+Content-Language: en-US
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Dan Carpenter <dan.carpenter@linaro.org>, u-boot@lists.denx.de
+To: Weizhao Ouyang <o451686892@gmail.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240508112401.155528-1-o451686892@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:o8iR8kOk7aI+ojcDsq4qq+Rqi8XqMRumZxx0AluKt40Rpce4JeS
+ ZaLZ2GQE/majFEqcQ7MmAuHmWxerYQVbTN3geX9pSJES3jC4+95ix1/eavBD9vcMLw4uFSI
+ T19/CTbRYgIQ+RPs35rgoaTJAhUya9sSgE96CYpaP5ZMggPFsFc3kji+xSYqYlgLicF4p8e
+ qctkpEhv+1Ir69RC37iKA==
+UI-OutboundReport: notjunk:1;M01:P0:IhlgU1+Ldwo=;GoEtdCETtArMkp5U8V0cHdf8sp2
+ HMHFPx2gGdRYoVGP+eEh0Ezuokwnc0BjxKGhVz15QXi1XE9yC4rqt3HViyFcBvuI+Jd2lsFk6
+ frVfVMHgE7+SaCRpG7jx1KOSJe7l76wJSZcjooVbT4DDjKA0vqfac0xxeuTw+dDa2AXsCbTwL
+ /6PHf/MLMkbp8o2adJXqIyq5hPm1oknDYJ2Zj/6wFrpV3gM/+FM34JiW/MUuU43orp6r9jcQh
+ 7RT8M4UJ6KCRrBIK+gYpE2ecwVpDNyLYsn0E9xWijYFT31ydpYc0lq8WZBTDI5JpWNNPoXKSU
+ OjVT6Y7ctr7fAX3+BjXm5sexT5sCzpiTQnxXmw+q0gdCAyartiWauv1vQq9HPzLBjHOzSY0ex
+ tHPjzloccLdEC2rcs4Ly5FyPoTpQahsblLHAlUFNpl0At1UnVnpa7sB4zAbvMlwDAB96obwQ8
+ EHLEKsVSxQSL04ik9HNf80h2nMVUJGUf6t7lU+JD5mzo4cY2LQv0Hgw1kFwa4h7+C1nWKwHMB
+ e4aYY7xCqN4SHbE/x4WEbByAvR6YujPrPpgFs8majC5Sok2bzU/kpp+eVdsYoOldvCObayZl+
+ EGQ1JeGmb5gxjEpXBGTxsIr6zWHBMi3HmRr24lbill40faSRuJ/ncTly7F5wUgPfx9uT9sRpZ
+ xYofGmOLfzGiSyoNkSVmAOzcQ6QwoNkdSdMVoWwiffsAuntR0/GVpZtV/R7dmNG7zElUGXeTp
+ iC6yJqeldrwgb+DuhtAa/CgMfA4wIs1X83+FYgwRecLiw0fNyfWht5ml36ZHsAMC+AmSXTN0a
+ DTHonNbC8FrWobty4VV7TztX1FeKCGOYeJMyc2sDivWDA=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,110 +94,248 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Salutations Sumit,
+On 5/8/24 13:24, Weizhao Ouyang wrote:
+> When using CapsuleApp to execute on-disk update, it will choose the
+> first boot option as BootNext entry to perform the capsule update after
+> a reboot. But auto-generate boot option will ignore the logical
+> partition which might be an ESP, thus it could not find the capsule
+> file.
+>
+> Align with the EDK II, detect the possible ESP device path by expanding
+> the media path.
 
-On Wednesday, 8 May 2024 at 11:14 AM, Sumit Garg <sumit.garg@linaro.org> wr=
-ote:
+Hello Wheizhoa,
 
->=20
->=20
-> Hi Sam,
->=20
-> On Wed, 8 May 2024 at 00:11, Sam Day me@samcday.com wrote:
->=20
-> > The newly introduced carve_out_reserved_memory causes issues when
-> > U-Boot is chained from the lk2nd bootloader. lk2nd provides a
-> > simple-framebuffer device and marks the framebuffer region as no-map in
-> > the supplied /reserved-memory. Consequently, the simple_video driver
-> > triggers a page fault when it tries to write to this region.
->=20
->=20
-> How does the corresponding Linux kernel driver handle this?
+ From the description I would not know how to reproduce the problem you
+face.
 
-Firstly: I'm something of a middle-man here. I would consider Caleb the aut=
-horitative source on the carveouts stuff (since they wrote it) and Nikita T=
-ravkin the authority on the simplefb handoff (since he originally wrote it =
-for lk2nd to hand off to Linux simpledrm and then adapted it to work with U=
--Boot simplefb).
+Could you, please, provide an example (including disk image and capsule)
+for QEMU and describe expected and observed behavior.
 
-I consulted with Nikita on your first question here. He linked me to this s=
-nippet: https://elixir.bootlin.com/linux/v6.9-rc7/source/drivers/gpu/drm/ti=
-ny/simpledrm.c#L877
+We should add a CI test case covering the observed bug.
 
->  Is the
-> framebuffer region required to be mapped as normal memory or device
-> type or something else?
+>
+> Fixes: f86fba8adbf3 ("efi_loader: auto-generate boot option for each blk=
+io device")
+> Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
+> ---
+>   include/efi_loader.h          |   6 ++
+>   lib/efi_loader/efi_boottime.c |  15 ++---
+>   lib/efi_loader/efi_capsule.c  | 110 +++++++++++++++++++++++++++++++++-
+>   3 files changed, 118 insertions(+), 13 deletions(-)
+>
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index 9600941aa327..9d78fa936701 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -683,6 +683,12 @@ efi_status_t efi_protocol_open(struct efi_handler *=
+handler,
+>   			       void **protocol_interface, void *agent_handle,
+>   			       void *controller_handle, uint32_t attributes);
+>
+> +/* Connect drivers to controller */
+> +efi_status_t EFIAPI efi_connect_controller(efi_handle_t controller_hand=
+le,
+> +					   efi_handle_t *driver_image_handle,
+> +					   struct efi_device_path *remain_device_path,
+> +					   bool recursive);
+> +
+>   /* Install multiple protocol interfaces */
+>   efi_status_t EFIAPI
+>   efi_install_multiple_protocol_interfaces(efi_handle_t *handle, ...);
+> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime=
+.c
+> index 1951291747cd..2c86d78208b2 100644
+> --- a/lib/efi_loader/efi_boottime.c
+> +++ b/lib/efi_loader/efi_boottime.c
+> @@ -103,12 +103,6 @@ static efi_status_t EFIAPI efi_disconnect_controlle=
+r(
+>   					efi_handle_t driver_image_handle,
+>   					efi_handle_t child_handle);
+>
+> -static
+> -efi_status_t EFIAPI efi_connect_controller(efi_handle_t controller_hand=
+le,
+> -					   efi_handle_t *driver_image_handle,
+> -					   struct efi_device_path *remain_device_path,
+> -					   bool recursive);
+> -
+>   /* Called on every callback entry */
+>   int __efi_entry_check(void)
+>   {
+> @@ -3670,11 +3664,10 @@ static efi_status_t efi_connect_single_controlle=
+r(
+>    *
+>    * Return: status code
+>    */
+> -static efi_status_t EFIAPI efi_connect_controller(
+> -			efi_handle_t controller_handle,
+> -			efi_handle_t *driver_image_handle,
+> -			struct efi_device_path *remain_device_path,
+> -			bool recursive)
+> +efi_status_t EFIAPI efi_connect_controller(efi_handle_t controller_hand=
+le,
+> +					   efi_handle_t *driver_image_handle,
+> +					   struct efi_device_path *remain_device_path,
+> +					   bool recursive)
+>   {
+>   	efi_status_t r;
+>   	efi_status_t ret =3D EFI_NOT_FOUND;
+> diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
+> index de0d49ebebda..919e3cba071b 100644
+> --- a/lib/efi_loader/efi_capsule.c
+> +++ b/lib/efi_loader/efi_capsule.c
+> @@ -922,6 +922,105 @@ static bool device_is_present_and_system_part(stru=
+ct efi_device_path *dp)
+>   	return true;
+>   }
+>
+> +/**
+> + * get_esp_from_boot_option_file_path - get the expand device path
+> + *
+> + * Get a possible efi system partition by expanding a boot option
+> + * file path.
+> + *
+> + * @boot_dev	The device path pointing to a boot option
+> + * Return:	The full ESP device path or NULL if fail
+> + */
+> +static struct efi_device_path *get_esp_from_boot_option_file_path(struc=
+t efi_device_path *boot_dev)
+> +{
+> +	efi_status_t ret =3D EFI_SUCCESS;
+> +	efi_handle_t handle;
+> +	struct efi_device_path *dp =3D boot_dev;
+> +	struct efi_device_path *full_path =3D NULL;
+> +
+> +	ret =3D EFI_CALL(efi_locate_device_path(&efi_simple_file_system_protoc=
+ol_guid,
+> +					      &dp,
+> +					      &handle));
+> +	if (ret !=3D EFI_SUCCESS)
+> +		ret =3D EFI_CALL(efi_locate_device_path(&efi_block_io_guid, &dp, &han=
+dle));
+> +
+> +	/* Expand Media Device Path */
+> +	if (ret =3D=3D EFI_SUCCESS && EFI_DP_TYPE(dp, END, END)) {
+> +		struct efi_device_path *temp_dp;
+> +		struct efi_block_io *block_io;
+> +		void *buffer;
+> +		efi_handle_t *simple_file_system_handle;
+> +		efi_uintn_t number_handles, index;
+> +		u32 size;
+> +		u32 temp_size;
+> +
+> +		temp_dp =3D boot_dev;
+> +		ret =3D EFI_CALL(efi_locate_device_path(&efi_simple_file_system_proto=
+col_guid,
+> +						      &temp_dp,
+> +						      &handle));
+> +		/*
+> +		 * For device path pointing to simple file system, it only expands to=
+ one
+> +		 * full path
+> +		 */
+> +		if (ret =3D=3D EFI_SUCCESS && EFI_DP_TYPE(temp_dp, END, END)) {
+> +			if (device_is_present_and_system_part(temp_dp))
+> +				return temp_dp;
+> +		}
+> +
+> +		/*
+> +		 * For device path only pointing to the removable device handle, try =
+to
+> +		 * search all its children handles
+> +		 */
+> +		ret =3D EFI_CALL(efi_locate_device_path(&efi_block_io_guid, &temp_dp,=
+ &handle));
+> +		EFI_CALL(efi_connect_controller(handle, NULL, NULL, true));
 
-So I guess based on the link above, it's just mapped as normal uncached mem=
-ory.
+Which driver do you expect to connect here?
 
-I tried to do something like this a few days ago in U-Boot, but a) it doesn=
-'t work and b) I have no idea what I'm doing: https://github.com/samcday/u-=
-boot/commit/c100cb3711ddf5b01601691f3e6a9ec890d9a496
+> +
+> +		/* Align with edk2, issue a dummy read to the device to check the dev=
+ice change */
+> +		ret =3D EFI_CALL(efi_handle_protocol(handle, &efi_block_io_guid, (voi=
+d **)&block_io));
+> +		if (ret =3D=3D EFI_SUCCESS) {
+> +			buffer =3D memalign(block_io->media->io_align, block_io->media->bloc=
+k_size);
+> +			if (buffer) {
+> +				ret =3D EFI_CALL(block_io->read_blocks(block_io,
+> +								     block_io->media->media_id,
+> +								     0,
+> +								     block_io->media->block_size,
+> +								     buffer));
+> +				free(buffer);
+> +			} else {
+> +				return full_path;
+> +			}
+> +		} else {
+> +			return full_path;
+> +		}
+> +
+> +		/* detect the default boot file from removable media */
+> +		size =3D efi_dp_size(boot_dev) - sizeof(struct efi_device_path);
+> +		EFI_CALL(efi_locate_handle_buffer(BY_PROTOCOL,
+> +						  &efi_simple_file_system_protocol_guid,
 
-After talking with Caleb about this for a bit, they suggested the patch you=
- see here as what I guess could be considered a "stopgap" solution that hop=
-efully makes it into 2024.07.
+If you are looking for an ESP shouldn't you use the ESP GUID to find it?
+It is installed on the ESP in efi_status_t efi_disk_add_dev().
 
-> Similarly would normal memory type work for
-> all other reserved memory regions marked as no-map?
+Best regards
 
-I'll let Caleb weigh in here. My understanding is that the other regions *s=
-hould* be marked as PTE_TYPE_FAULT because otherwise drivers might inadvert=
-ently speculatively access regions that are very much off-limits, such as T=
-Z app regions.
+Heinrich
 
-Cheers,
--Sam
+> +						  NULL,
+> +						  &number_handles,
+> +						  &simple_file_system_handle));
+> +		for (index =3D 0; index < number_handles; index++) {
+> +			EFI_CALL(efi_handle_protocol(simple_file_system_handle[index],
+> +						     &efi_guid_device_path,
+> +						     (void **)&temp_dp));
+> +
+> +			log_debug("Search ESP %pD\n", temp_dp);
+> +			temp_size =3D efi_dp_size(temp_dp) - sizeof(struct efi_device_path);
+> +			if (size <=3D temp_size && !memcmp(temp_dp, boot_dev, size)) {
+> +				if (device_is_present_and_system_part(temp_dp)) {
+> +					efi_free_pool(simple_file_system_handle);
+> +					return temp_dp;
+> +				}
+> +			}
+> +		}
+> +
+> +		if (simple_file_system_handle)
+> +			efi_free_pool(simple_file_system_handle);
+> +	}
+> +
+> +	return full_path;
+> +}
+> +
+>   /**
+>    * find_boot_device - identify the boot device
+>    *
+> @@ -938,6 +1037,7 @@ static efi_status_t find_boot_device(void)
+>   	int i, num;
+>   	struct efi_simple_file_system_protocol *volume;
+>   	struct efi_device_path *boot_dev =3D NULL;
+> +	struct efi_device_path *full_path =3D NULL;
+>   	efi_status_t ret;
+>
+>   	/* find active boot device in BootNext */
+> @@ -961,8 +1061,14 @@ static efi_status_t find_boot_device(void)
+>   			if (device_is_present_and_system_part(boot_dev)) {
+>   				goto found;
+>   			} else {
+> -				efi_free_pool(boot_dev);
+> -				boot_dev =3D NULL;
+> +				full_path =3D get_esp_from_boot_option_file_path(boot_dev);
+> +				if (full_path) {
+> +					boot_dev =3D full_path;
+> +					goto found;
+> +				} else {
+> +					efi_free_pool(boot_dev);
+> +					boot_dev =3D NULL;
+> +				}
+>   			}
+>   		}
+>   	}
 
->=20
-> -Sumit
->=20
-> > As per Caleb's advice, this simple patch only does the carveouts for th=
-e
-> > qcs404 SoC for which it was originally designed. The intent is to do th=
-e
-> > carveouts for more Qualcomm SoCs in future.
-> >=20
-> > ---
-> > I'm not sure if it's feasible to get this in for the 2024.07 release,
-> > but it'd be great if we could - it's the only thing that breaks U-Boot
-> > master on msm8916 devices that chain from lk2nd.
-> >=20
-> > Signed-off-by: Sam Day me@samcday.com
-> > ---
-> > arch/arm/mach-snapdragon/board.c | 12 +++++++-----
-> > 1 file changed, 7 insertions(+), 5 deletions(-)
-> >=20
-> > diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdrago=
-n/board.c
-> > index 3d5994c878..b439a19ec7 100644
-> > --- a/arch/arm/mach-snapdragon/board.c
-> > +++ b/arch/arm/mach-snapdragon/board.c
-> > @@ -467,10 +467,12 @@ void enable_caches(void)
-> > gd->arch.tlb_addr =3D tlb_addr;
-> > gd->arch.tlb_size =3D tlb_size;
-> >=20
-> > - carveout_start =3D get_timer(0);
-> > - /* Takes ~20-50ms on SDM845 /
-> > - carve_out_reserved_memory();
-> > - debug("carveout time: %lums\n", get_timer(carveout_start));
-> > -
-> > + / We do the carveouts only for QCS404, for now. /
-> > + if (fdt_node_check_compatible(gd->fdt_blob, 0, "qcom,qcs404") =3D=3D =
-0) {
-> > + carveout_start =3D get_timer(0);
-> > + / Takes ~20-50ms on SDM845 */
-> > + carve_out_reserved_memory();
-> > + debug("carveout time: %lums\n", get_timer(carveout_start));
-> > + }
-> > dcache_enable();
-> > }
-> >=20
-> > ---
-> > base-commit: 1c40dda60f5f7e83a6d6f541cf5a57eb7e8ec43c
-> > change-id: 20240507-qcs404-carveout-only-7a15bbf3fd89
-> >=20
-> > Best regards,
-> > --
-> > Sam Day me@samcday.com
