@@ -4,86 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DA9CC04FFE
-	for <u-boot@archiver.kernel.org>; Wed,  8 May 2024 15:32:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDED1C04FFE
+	for <u-boot@archiver.kernel.org>; Wed,  8 May 2024 15:35:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6601B88667;
-	Wed,  8 May 2024 17:32:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3DBFE885AF;
+	Wed,  8 May 2024 17:35:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=andreas-buschka.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KIaArO9q";
+	dkim=pass (2048-bit key; unprotected) header.d=andreas-buschka.de header.i=@andreas-buschka.de header.b="jwVgy3h3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 002398802D; Wed,  8 May 2024 17:32:54 +0200 (CEST)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 67E558838D; Wed,  8 May 2024 17:29:54 +0200 (CEST)
+Received: from smtp052.goneo.de (smtp5.goneo.de [IPv6:2001:1640:5::8:30])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D262A87DFC
- for <u-boot@lists.denx.de>; Wed,  8 May 2024 17:32:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C33B88667
+ for <u-boot@lists.denx.de>; Wed,  8 May 2024 17:29:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=andreas-buschka.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-79290c53456so347265985a.2
- for <u-boot@lists.denx.de>; Wed, 08 May 2024 08:32:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715182371; x=1715787171; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QUfL/YBE6WWfYtdKOEkbZZgNFxI+5uMaDW90hZKZOno=;
- b=KIaArO9qb1wWkmeB4+LWo16v/aDqJc6vBuEb+SFT1ofFgApZrwbNJai37+/9U/3xED
- KMjmAs04qgHU4J4SkOVTJkhzgFWtb+Iec/ljSlScLvVVSDky1U2d0ST7bguoRm4yqJKx
- hKkWOjrh4ZAeLREFhaE5e8Muw/Udhdrhocgj4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715182371; x=1715787171;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QUfL/YBE6WWfYtdKOEkbZZgNFxI+5uMaDW90hZKZOno=;
- b=ewiVuEMX65XlrBJytMUx71Tr+VXJp7je9chu/pQy2FO9HDwIc0IT/OFTLs8rdRZM42
- ZEB/8jidUcooHuVSN1UXGOwowRIY/2X+0T69mKWDqamdBlhu+xLDrKRnfIvbhAbBdsKe
- +NTVmF902JWoSisFdb14Jh4DPLfaLEuhS/rsNhrqOH/OAwuM3T+Dwoom0tmfeegaFBsv
- 5fKdsw8i8HuqcNZ9A4jqMP7DvmSM59ZIA57pjePcFmLAtBAhk32L/k3NpED7Vdn7/eGg
- f1W2BtQtAc07OLCRYD0HBGnmRJepKLFNi8OWw/biUU6LVeZp3f2HLeAT9A1fmIjOdut9
- 7Y0w==
-X-Gm-Message-State: AOJu0Yy6TptYZivga4ayCwfMeVj2N9025QoqZ2BP2/oZ7RowXpPdCxp2
- QUWltDHyMo2iTgRH+Q8xYj02dr/P7CH7h+HfaivRE4qM52jq+Am/x0tQ2/BqRtM=
-X-Google-Smtp-Source: AGHT+IGHTDabwowS0JO+HRgyZLYVPlMmYM/+A3UbvrCW3tEDSukM+VGFZT96XigE5a7Djwtayxv1ig==
-X-Received: by 2002:a05:620a:46a2:b0:790:eedf:42a5 with SMTP id
- af79cd13be357-792b2829119mr425005985a.47.1715182371551; 
- Wed, 08 May 2024 08:32:51 -0700 (PDT)
-Received: from bill-the-cat ([187.144.98.216])
- by smtp.gmail.com with ESMTPSA id
- y7-20020a05620a44c700b007929ca64e0fsm2810547qkp.5.2024.05.08.08.32.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 May 2024 08:32:50 -0700 (PDT)
-Date: Wed, 8 May 2024 09:32:47 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Sean Edmond <seanedmond@microsoft.com>
-Cc: u-boot@lists.denx.de, AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Bin Meng <bmeng.cn@gmail.com>, Charles Hardin <ckhardin@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Michal Simek <michal.simek@amd.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Ramon Fried <rfried.dev@gmail.com>, Sean Anderson <sean.anderson@seco.com>,
- Simon Glass <sjg@chromium.org>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>
-Subject: Re: [PATCH v6 2/3] net: bootp: BOOTP/DHCPv4 retransmission
- improvements
-Message-ID: <20240508153247.GA3129288@bill-the-cat>
-References: <20240429183449.2284935-1-seanedmond@microsoft.com>
- <20240429183449.2284935-3-seanedmond@microsoft.com>
+ spf=pass smtp.mailfrom=kontakt@andreas-buschka.de
+Received: from hub2.goneo.de (hub2.goneo.de [85.220.129.53])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested)
+ by smtp5.goneo.de (Postfix) with ESMTPS id 180A2240DA6;
+ Wed,  8 May 2024 17:29:52 +0200 (CEST)
+Received: from hub2.goneo.de (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested)
+ by hub2.goneo.de (Postfix) with ESMTPS id 7B18F24030E;
+ Wed,  8 May 2024 17:29:50 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=andreas-buschka.de;
+ s=DKIM001; t=1715182190;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=JzOaMYBb62vEue6WKrCZNFhdHIPlEVmNz4ncA1naMLY=;
+ b=jwVgy3h3pQ8UZwtyfSvUjj4Nzi40ma5vzDcuqcqZ4rOpfH74qCWPCgTebdxsyX3m++qJeW
+ QM1y6hsPFmZ3zI2m8VenXcVfNiZphKRS0F5bPW4dXbeUPx5BEn8lFEHx1J825ho+FZWgx1
+ ss/IiK59PWBVZUZ3Lc28FTbLfWEvvE9Qcss08J2G3JhnlBRiTy9b0/AtzQfE2VTAbBAgp7
+ g8ne3bpvpyRNAvnDqTIvln1jO1Se7Mi17U/HQnTX91pMsU083nPaJY1Eca/T5BmxCuDtzC
+ RBeWzT2nEUcikaPi4QFNWa4G5xnRfgiY5q95YNLVfEgaMUEpDmiu4Stvs4jwzQ==
+Received: from [IPV6:2003:e8:170d:e600:c161:808e:e5fe:918b]
+ (p200300e8170de600c161808ee5fe918b.dip0.t-ipconnect.de
+ [IPv6:2003:e8:170d:e600:c161:808e:e5fe:918b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by hub2.goneo.de (Postfix) with ESMTPSA id 3996B240287;
+ Wed,  8 May 2024 17:29:50 +0200 (CEST)
+Message-ID: <ff647650-44bf-41f3-8ede-085f9ff9a1bd@andreas-buschka.de>
+Date: Wed, 8 May 2024 17:29:51 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Be2PqQ0Yz3nV9jrm"
-Content-Disposition: inline
-In-Reply-To: <20240429183449.2284935-3-seanedmond@microsoft.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: Does u-boot support USB CCID communication?
+To: Sourabh Hegde Ramu <hrsourabh1107@gmail.com>, u-boot@lists.denx.de
+References: <CAHseuWCExW0TpJE+wcASX5Q5gcYzisD+JfCazTjzx5n4m-jCEQ@mail.gmail.com>
+Content-Language: en-GB, de-DE
+From: Andreas Buschka <kontakt@andreas-buschka.de>
+Autocrypt: addr=kontakt@andreas-buschka.de; keydata=
+ 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
+ afVgxDc=
+In-Reply-To: <CAHseuWCExW0TpJE+wcASX5Q5gcYzisD+JfCazTjzx5n4m-jCEQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Rspamd-UID: bfcf5c
+X-Rspamd-UID: 47d954
+X-Mailman-Approved-At: Wed, 08 May 2024 17:35:22 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,75 +132,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Sourabh,
 
---Be2PqQ0Yz3nV9jrm
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+In U-Boot, the only methods of separating storage of secrets from 
+general storage are (as far as I know):
 
-On Mon, Apr 29, 2024 at 11:33:57AM -0700, Sean Edmond wrote:
+* TPM v1/v2
+* OP-TEE in combination with an MMC supporting RPMB
 
-> This patch introduces 3 improvements to align with RFC 951:
-> - retransmission backoff interval maximum is configurable
-> - initial retranmission backoff interval is configurable
-> - transaction ID is kept the same for each BOOTP/DHCPv4 request
->=20
-> In applications where thousands of nodes are serviced by a single DHCP
-> server, maximizing the retransmission backoff interval at 2 seconds (the
-> current u-boot default) exerts high pressure on the DHCP server and
-> network layer.
->=20
-> RFC 951 =E2=80=9C7.2. Client Retransmission Strategy=E2=80=9D states that=
- the
-> retransmission backoff interval should be limited to 60 seconds.  This
-> patch allows the interval to be configurable using the environment
-> variable "bootpretransmitperiodmax"
->=20
-> The initial retranmission backoff period defaults to 250ms, which is
-> also too small for these scenarios with many clients.  This patch makes
-> the initial retransmission interval to be configurable using the
-> environment variable "bootpretransmitperiodinit".
->=20
-> Also, on a retransmission it is not expected for the transaction ID to
-> change (only the 'secs' field should be updated). Let's save the
-> transaction ID and use the same transaction ID for each BOOTP/DHCPv4
-> exchange.
->=20
-> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
+-- 
+Kind regards
+Andreas Buschka
 
-On numerous platforms we now get:
-+(imx8qm_dmsse20a1) WARNING 'mx8qm-ahab-container.img' not found, resulting=
- binary is not-functional
-+(imx8qm_dmsse20a1) net/bootp.c: In function 'bootp_reset':
-+(imx8qm_dmsse20a1) net/bootp.c:741:15: error: unused variable 'ep' [-Werro=
-r=3Dunused-variable]
-+(imx8qm_dmsse20a1)   741 |         char *ep;  /* Environment pointer */
-+(imx8qm_dmsse20a1)       |               ^~
-+(imx8qm_dmsse20a1) cc1: all warnings being treated as errors
-+(imx8qm_dmsse20a1) make[2]: *** [scripts/Makefile.build:257: net/bootp.o] =
-Error 1
-+(imx8qm_dmsse20a1) make[1]: *** [Makefile:1892: net] Error 2
-+(imx8qm_dmsse20a1) make: *** [Makefile:177: sub-make] Error 2
-
---=20
-Tom
-
---Be2PqQ0Yz3nV9jrm
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY7mxsACgkQFHw5/5Y0
-tyyurgv6A91MIHIXDQLj8ZwL/wNvvGNKtsC67tJL3axquKqxnSHZ2wkcg6DGmrik
-+RehLU6GKqHCICaffTt+nYTmoni4sRtEq417910GW0yoBi2Ntftu7VKXcB7RLVS5
-XFFdgWq2VCQGMl1oxlCriQKFaIfyRqu9Ie0qxdPRvt0JAKYp62R9yGDSsKKERj7A
-KrVPCgBrepXZhEeyaQDG1PUrtsIJ7lDWepFEbySC0/xUp1tBAbbAzi1PRhMg43c4
-w3dwBeTimFwdDKSFEB1uRZ2zvzcxIc5oaQz6TZYQR4xvxd7WITNmJAtBua6SCdcc
-ueCXhicYwJxv8RJ9xwnCEULfgTXrtDhFaToGaMISj3w8Uovs4PbBEmR8Mf57V3lI
-skUfgYuQI965yBQLfgQMmFpF6uyeRB2cYiOitjAkp+nCA75Z9/PskFZzrcjq3Zg+
-Qs+H3LGNZk8TS+53225o0sSjFcvWj0Rx31OThWN6VDH4OOf/saLYSNHuCx9l2Ley
-t1udvpLp
-=H7p7
------END PGP SIGNATURE-----
-
---Be2PqQ0Yz3nV9jrm--
