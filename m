@@ -4,94 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94975C10F1A
-	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 15:04:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFA02C10F1A
+	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 15:07:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E131888096;
-	Thu,  9 May 2024 17:04:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6CD4F880A5;
+	Thu,  9 May 2024 17:07:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GrM9wmoH";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="aiy6Rn/E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E353D88096; Thu,  9 May 2024 17:04:25 +0200 (CEST)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D74F68812C; Thu,  9 May 2024 17:07:04 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9DC8888076
- for <u-boot@lists.denx.de>; Thu,  9 May 2024 17:04:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4EEF788076
+ for <u-boot@lists.denx.de>; Thu,  9 May 2024 17:07:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-2a2d82537efso765529a91.2
- for <u-boot@lists.denx.de>; Thu, 09 May 2024 08:04:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1715267062; x=1715871862; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NvuV70qfnaN/LhCSjurve2Pv4KeikAz0UbV2Fg7UcMA=;
- b=GrM9wmoHkRcJARPEM2UQhpPhQCpZfvybIZcOouXZu9eZOfMeRB2/h5xnI2KdDRDjGm
- OB9XE/WQrZ4e1uTxYgdz/40ya2xLFYLMhLuxmbvP3fqHZ2joFCKy6DkanC3CPWvkn0q4
- vx3VOuv0k2xSuvUVKi/qEZcqJi+19ioMGItDYzID7FZa+zRoONLxF6UNPS0ZxKnUWGtH
- xA3UeoyHnjlLAoaifp+Jqz7a8xnP6yV9GsPxq8rpNLTmgTzougKQRMD9nnh951Hmp7Wq
- R0kepzginz7SfeadRnV+S/vWzY4t3uAudTufA5R/DVp8VSuFtiqXfsFSG733IBVHVO/t
- OOyQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715267062; x=1715871862;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NvuV70qfnaN/LhCSjurve2Pv4KeikAz0UbV2Fg7UcMA=;
- b=N1HG2qwmDDe41CSO05wLy2QikQka0Vac+f4JbVIJdLlLxKiEBgT6QDpV/2HMBaH1Z3
- C/dNP5OmB0x01AgySVbBo6wVvqknIQDKHxO+30fGlclwkjX9ZBKvJWvLWkITOm6yt/A0
- pY+5XucK4+eHq27GPuG7Ns+Fx/6z+KsueRQvmCMs1yQNo3GSvbAbMxYUlVUYVpGdTkrP
- /pNkL/TFuFdytv+XSyN8M+NxcCAl/N/TrLp/idSbgmTLMes2GNbG8OA6xJkChijK6qTy
- TU702hIJuBBfL/9/4dVlF9NgUf7Y0dVQrXPX0GDJPuF2kKwXj1J/Kc1tjOlkRb8ZkupA
- rr+Q==
-X-Gm-Message-State: AOJu0YxH+6t4nOa7HIWro3i+liElGsgTcRDiVyHdZqCM8fJjkIdoPM/C
- MLI1YJ5EQpxsdIkeQUFEbFdpB75O/c2qmvEiUmy8nf92dW12Z4b+TxOf1qL/3+pwqvjx+B3zCwm
- 0Us/K0fEey0SuV9gAQZUxgmGy8Ejn1k+SoAVjiA==
-X-Google-Smtp-Source: AGHT+IGU0EgOe7axCerlNdHl1S/eaGEd/ZxHUbzwqpqjM+1vE49IWAjtVwm+Siqdur3xbjeQHK4JStuLaoqEfxrwsTo=
-X-Received: by 2002:a17:90a:bf0b:b0:2b2:b4e8:ccce with SMTP id
- 98e67ed59e1d1-2b6165a66a2mr6174388a91.13.1715267062040; Thu, 09 May 2024
- 08:04:22 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 449F6jme012040;
+ Thu, 9 May 2024 10:06:45 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1715267205;
+ bh=ldlWgIoTtDYnhvvnZ6V2qmfo5iD15kIO8ab8k8hHyw8=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=aiy6Rn/ENn9/ZmDBB9/zqoa491wh2DhPD8XYWN+yjaiR8jItaoRfSHNqVhgMUJj9v
+ arOWIuaFA0Hkvn/x2RSLGHHQqLpALC27jV8dVxpj6Ux7CZkXejHPZ0gfxUsXRzLpYD
+ 4RdP6cwt2eW6jQSnlcC8/2ceR6eX6B/cyD6Hc+lQ=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 449F6jtM032207
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 9 May 2024 10:06:45 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 9
+ May 2024 10:06:44 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 9 May 2024 10:06:44 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 449F6iC2027907;
+ Thu, 9 May 2024 10:06:44 -0500
+Message-ID: <1c00963a-c581-4ef5-a1b9-33db78d6e7d2@ti.com>
+Date: Thu, 9 May 2024 10:06:43 -0500
 MIME-Version: 1.0
-References: <20240507175132.1456512-1-raymond.mao@linaro.org>
- <20240507175132.1456512-4-raymond.mao@linaro.org>
- <20240507211643.GY2568172@bill-the-cat>
-In-Reply-To: <20240507211643.GY2568172@bill-the-cat>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Thu, 9 May 2024 11:04:07 -0400
-Message-ID: <CAEfUkULdF1R2c=QEOQHQH+8go7VnXnSBKXh2AVYXQt5LkMXy_w@mail.gmail.com>
-Subject: Re: [PATCH v2 03/28] mbedtls: add mbedtls into the build system
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Simon Glass <sjg@chromium.org>, Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>, 
- Christophe Leroy <christophe.leroy@csgroup.eu>, Andrew Davis <afd@ti.com>, 
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Ralph Siemsen <ralph.siemsen@linaro.org>, 
- Sergei Antonov <saproj@gmail.com>, Ilya Lukin <4.shket@gmail.com>, 
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- AKASHI Takahiro <takahiro.akashi@linaro.org>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- Eddie James <eajames@linux.ibm.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/2] arm: dts: k3-j721e-binman: Add support for HSFS1.1
+To: Neha Malcom Francis <n-francis@ti.com>, <u-boot@lists.denx.de>,
+ <trini@konsulko.com>, <sjg@chromium.org>
+CC: <kamlesh@ti.com>, <m-chawdhry@ti.com>, <u-kumar1@ti.com>, <bsheraw@ti.com>,
+ <s-anna@ti.com>, <a-limaye@ti.com>
+References: <20240425220659.2056955-1-n-francis@ti.com>
+ <20240425220659.2056955-2-n-francis@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20240425220659.2056955-2-n-francis@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,38 +82,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On 4/25/24 5:06 PM, Neha Malcom Francis wrote:
+> J721E has SR1.1 and SR2.0 having three variants of each GP, HS-FS and
+> HS-SE. Current build does not generate HS-FS SR1.1 so add support for
+> them.
+> 
+> Reported-by: Suman Anna <s-anna@ti.com>
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> ---
+> Changes since v1:
+> - removed redundant HS-SE SR2.0 generation
+> 
 
-On Tue, 7 May 2024 at 17:16, Tom Rini <trini@konsulko.com> wrote:
+Looks good to me now,
 
-> On Tue, May 07, 2024 at 10:50:45AM -0700, Raymond Mao wrote:
->
-> > Port mbedtls with dummy libc header files.
-> > Add mbedtls default config header file.
-> > Optimize mbedtls default config by disabling unused features to
-> > reduce the target size.
-> > Add mbedtls kbuild makefile.
-> > Add Kconfig and mbedtls config submenu.
-> [snip]
-> > diff --git a/include/stdio.h b/include/stdio.h
-> > index 3241e2d493f..874279c60dd 100644
-> > --- a/include/stdio.h
-> > +++ b/include/stdio.h
-> > @@ -3,6 +3,7 @@
-> >
-> >  #include <stdarg.h>
-> >  #include <linux/compiler.h>
-> > +#include <vsprintf.h>
-> >
-> >  /* stdin */
-> >  int getchar(void);
->
-> Is this really needed? I know our include structure is a bit odd. Should
-> we perhaps look at moving a prototype or two around to be more broadly
-> compatible?
->
-> Then we need to move  prototypes of snprintf, _vprintf, putc_outstr and
-printf_info from tiny-printf to stdio.h. Is this good for you?
+Reviewed-by: Andrew Davis <afd@ti.com>
 
-Regards,
-Raymond
+>   arch/arm/dts/k3-j721e-binman.dtsi | 90 ++++++++++++++++++++++++++++++-
+>   1 file changed, 89 insertions(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/dts/k3-j721e-binman.dtsi b/arch/arm/dts/k3-j721e-binman.dtsi
+> index 75a6e9599b9..1514d897634 100644
+> --- a/arch/arm/dts/k3-j721e-binman.dtsi
+> +++ b/arch/arm/dts/k3-j721e-binman.dtsi
+> @@ -1,6 +1,6 @@
+>   // SPDX-License-Identifier: GPL-2.0
+>   /*
+> - * Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
+> + * Copyright (C) 2022-2024 Texas Instruments Incorporated - https://www.ti.com/
+>    */
+>   
+>   #include "k3-binman.dtsi"
+> @@ -129,6 +129,94 @@
+>   	};
+>   };
+>   
+> +&binman {
+> +	tiboot3-j721e_sr1_1-hs-fs-evm.bin {
+> +		filename = "tiboot3-j721e_sr1_1-hs-fs-evm.bin";
+> +		ti-secure-rom {
+> +			content = <&u_boot_spl_fs_sr1_1>;
+> +			core = "public";
+> +			core-opts = <2>;
+> +			load = <CONFIG_SPL_TEXT_BASE>;
+> +			keyfile = "custMpk.pem";
+> +		};
+> +		u_boot_spl_fs_sr1_1: u-boot-spl {
+> +			no-expanded;
+> +		};
+> +	};
+> +	sysfw_fs_sr1_1 {
+> +		filename = "sysfw.bin_fs_sr1_1";
+> +		ti-fs-cert-fs.bin {
+> +			filename = "ti-sysfw/ti-fs-firmware-j721e_sr1_1-hs-fs-cert.bin";
+> +			type = "blob-ext";
+> +			optional;
+> +		};
+> +		ti-fs-firmware-j721e-hs-fs-enc.bin {
+> +			filename = "ti-sysfw/ti-fs-firmware-j721e_sr1_1-hs-fs-enc.bin";
+> +			type = "blob-ext";
+> +			optional;
+> +		};
+> +	};
+> +	itb_fs_sr1_1 {
+> +		filename = "sysfw-j721e_sr1_1-hs-fs-evm.itb";
+> +		fit {
+> +			description = "SYSFW and Config fragments";
+> +			#address-cells = <1>;
+> +			images {
+> +				sysfw.bin {
+> +					description = "sysfw";
+> +					type = "firmware";
+> +					arch = "arm";
+> +					compression = "none";
+> +					blob-ext {
+> +					    filename = "sysfw.bin_fs_sr1_1";
+> +					};
+> +				};
+> +				board-cfg.bin {
+> +					description = "board-cfg";
+> +					type = "firmware";
+> +					arch = "arm";
+> +					compression = "none";
+> +					board-cfg {
+> +						filename = "board-cfg.bin";
+> +						type = "blob-ext";
+> +					};
+> +
+> +				};
+> +				pm-cfg.bin {
+> +					description = "pm-cfg";
+> +					type = "firmware";
+> +					arch = "arm";
+> +					compression = "none";
+> +					pm-cfg {
+> +						filename = "pm-cfg.bin";
+> +						type = "blob-ext";
+> +					};
+> +				};
+> +				rm-cfg.bin {
+> +					description = "rm-cfg";
+> +					type = "firmware";
+> +					arch = "arm";
+> +					compression = "none";
+> +					rm-cfg {
+> +						filename = "rm-cfg.bin";
+> +						type = "blob-ext";
+> +					};
+> +				};
+> +				sec-cfg.bin {
+> +					description = "sec-cfg";
+> +					type = "firmware";
+> +					arch = "arm";
+> +					compression = "none";
+> +					sec-cfg {
+> +						filename = "sec-cfg.bin";
+> +						type = "blob-ext";
+> +					};
+> +				};
+> +			};
+> +		};
+> +	};
+> +};
+> +
+>   &binman {
+>   	tiboot3-j721e_sr2-hs-fs-evm.bin {
+>   		filename = "tiboot3-j721e_sr2-hs-fs-evm.bin";
