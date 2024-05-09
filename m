@@ -4,98 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0A68C10F1A
-	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 15:11:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11BE0C10F1A
+	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 15:16:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 863208814E;
-	Thu,  9 May 2024 17:11:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8B31087FD7;
+	Thu,  9 May 2024 17:16:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ruAh/SwQ";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gT6DCr5S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DA7588140; Thu,  9 May 2024 17:11:43 +0200 (CEST)
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [IPv6:2607:f8b0:4864:20::72a])
+ id 88DC288076; Thu,  9 May 2024 17:16:06 +0200 (CEST)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C95987DEA
- for <u-boot@lists.denx.de>; Thu,  9 May 2024 17:11:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C1E987DEA
+ for <u-boot@lists.denx.de>; Thu,  9 May 2024 17:16:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-792bd1f5b28so76887485a.2
- for <u-boot@lists.denx.de>; Thu, 09 May 2024 08:11:40 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-2b4aa87e01aso780574a91.3
+ for <u-boot@lists.denx.de>; Thu, 09 May 2024 08:16:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715267500; x=1715872300; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=em/Vr59VRTWOEMtKo+XCUJZ3uWwwuy+3iCHiV0a3A80=;
- b=ruAh/SwQ9DhWPqzJstIUxh1eIwv1OeV0YtfCZD27QqI8oQerTpJgjMc+WlOJf1Ln1u
- 90C4P7verCRl60oilRiJu0mz0OfhPkQEpwBXMcaCvodFubwh9H6Ay1ZZvq9yq3i8emny
- tswrgi3ZoGJcHgSiOd3Vy089P3Td5oUmu1W8g=
+ d=linaro.org; s=google; t=1715267763; x=1715872563; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=XcZ7MZ4rl89u5vpQaUu2JAg612ZP61kFKe9cUF58Wp0=;
+ b=gT6DCr5So6KTuQ0AJP3WPkjkr4KVCJa4w5aKXxkERtv3AD38v61btf+bssw7t4+vcj
+ 4ZaG8Yr3sB6l8G/und9przO8BIHhBWeW6arqlf2m8GAPaJKJpAtJt5TRfkiqEK8Osg69
+ AC0kRIcAQBuBevTqXf7ZRqGE2F1uJ8vp9/JchScnySOZGy+kMhjw4X3uIdhxzfhGv+Ba
+ rDBmcaqfGnXQj5b99dR0rLpai7VPOzwrCiWKBzkjUhCPEnbbkQbKBy7II+J2p+kPrh4/
+ /GCgYqvRPxwdl1aGcfWK/fSNDu/zNv1FqDP5cxudqIs5sh4PJnYNDNcLfhlrjOsG/uuw
+ FPKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715267500; x=1715872300;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=em/Vr59VRTWOEMtKo+XCUJZ3uWwwuy+3iCHiV0a3A80=;
- b=XPIw7twQr0xMOsljclVyPJuXkZHUvPEt2HMVY2kpAzyNzNnIEpLqeLUW78IevDUtwB
- 2OGljHI38AnYTWVj7NHoeO1e3W7loWWgFAR+YDth36IEzdzPoplzRilHRghINHc3kbF9
- fnf17Bgab4X92LftH1TsuUYr0Yy02OTu4DNECu5H4EcW91hVaLJxb4an8IZRtZ5+QbU2
- f054//P8PiQT2sPNYNsntxLkcb+cbIKtqIjKaXVe/AyyD9yD0PAl7X4Fp6dcYdwxDRWd
- +N0ZyjmWUW6+96TFdCL3x0E5bMb6DdwQTrUXMKccrPZXplE4AWnbH+ctbfsBBo4VMDrR
- p4rg==
-X-Gm-Message-State: AOJu0Yy7uqrgMfGIVpXb1H7K1GZ2WwtCfqkq8IAOd/Fea8a+WZg88riC
- C3YvkSQBX5CIqCEJHMmXVFjILQU3j6lY/mNwgrN6y7B9l43l64DCbMi0KkmtvE0=
-X-Google-Smtp-Source: AGHT+IHP8GGMCIQ6KasI5533HYkrZ/9SGwyjttn2+l7egVLuTVUglRB0EYWTqkdytwhAF1N/C/j0Ig==
-X-Received: by 2002:a05:620a:13d0:b0:792:c330:5da7 with SMTP id
- af79cd13be357-792c3305fbemr101023585a.76.1715267499812; 
- Thu, 09 May 2024 08:11:39 -0700 (PDT)
-Received: from bill-the-cat ([187.144.98.216])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-792bf2a11e8sm76342685a.58.2024.05.09.08.11.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 May 2024 08:11:39 -0700 (PDT)
-Date: Thu, 9 May 2024 09:11:33 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>,
- Christophe Leroy <christophe.leroy@csgroup.eu>,
- Andrew Davis <afd@ti.com>, Jesse Taube <mr.bossman075@gmail.com>,
- Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
- Ralph Siemsen <ralph.siemsen@linaro.org>,
- Sergei Antonov <saproj@gmail.com>, Ilya Lukin <4.shket@gmail.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
- Eddie James <eajames@linux.ibm.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Masahisa Kojima <kojima.masahisa@socionext.com>
-Subject: Re: [PATCH v2 03/28] mbedtls: add mbedtls into the build system
-Message-ID: <20240509151133.GJ2568172@bill-the-cat>
-References: <20240507175132.1456512-1-raymond.mao@linaro.org>
- <20240507175132.1456512-4-raymond.mao@linaro.org>
- <20240507211643.GY2568172@bill-the-cat>
- <CAEfUkULdF1R2c=QEOQHQH+8go7VnXnSBKXh2AVYXQt5LkMXy_w@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1715267763; x=1715872563;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=XcZ7MZ4rl89u5vpQaUu2JAg612ZP61kFKe9cUF58Wp0=;
+ b=gFb5irzAHMMAVV4Bdqx7AtA/tbHbrVHAwhdmi+UaFXyhmCXSUEvKpyD4OB8lUXH+lF
+ KFReknUFyllwTypFSUCq5aRvdx5TZrwhBKcbhm6aEFQ1CKi39FRw6RJtThw2luyklZ4D
+ Y7xiBDLUDkF+BuaR3Fvp6tZ4EZpZqe7QE7x7Fxknjbq4JlIkb8T+lqPIR+H3uiVjn+Jo
+ 6QIylWUmvcpYtJ0FGXXQWMLBAWP/FDngg1wmZ12oBDBRTxxSYpVodSBZ9rEjCRYNNfee
+ BlFDLvOZqYhzYoZupjULudhL5i+x0XhEfCioUczv9vsrfnp+RxQay8X4LOhw3Q95dvXR
+ EIFA==
+X-Gm-Message-State: AOJu0YxMsvQOMt1v+h5da/kQG+72bR3QVjgkcVkzaS0Xoesex+LEhGvJ
+ D0UzTjReOV8Ffg5DxLINo+U9Q63DsC7uLWwAFoX7LM+uflGy/QfbrY09dTM+bv/bqLv71++rROH
+ EhIzT4XwRw3zyVAp1MXdxZL8W+KXFvIIFPRyJRA==
+X-Google-Smtp-Source: AGHT+IFLoSKmNzHIXR7p5+ObejyoMSJ0eyuHB2UiNeZ6DyTqejcMN+NvnaR+MjVLIFQ5LZGkiHqxF/toTZ56tQKdlWQ=
+X-Received: by 2002:a17:90a:de0b:b0:2af:ff3:e14a with SMTP id
+ 98e67ed59e1d1-2b61808fae6mr5502140a91.16.1715267762569; Thu, 09 May 2024
+ 08:16:02 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="qIyZz/t92SpLiCp1"
-Content-Disposition: inline
-In-Reply-To: <CAEfUkULdF1R2c=QEOQHQH+8go7VnXnSBKXh2AVYXQt5LkMXy_w@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240507175132.1456512-1-raymond.mao@linaro.org>
+ <20240507175132.1456512-8-raymond.mao@linaro.org>
+ <CAC_iWjJ50--SCCEq3srxD0+F_5_5s_okfghcsjJrA+WJ9ftWLg@mail.gmail.com>
+In-Reply-To: <CAC_iWjJ50--SCCEq3srxD0+F_5_5s_okfghcsjJrA+WJ9ftWLg@mail.gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Thu, 9 May 2024 11:15:48 -0400
+Message-ID: <CAEfUkUKgagdhdCOPon=8fUgSiiiT0Rr_EHEg-4mDDp-+0=4+iQ@mail.gmail.com>
+Subject: Re: [PATCH v2 07/28] lib: Adapt digest header files to MbedTLS
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Simon Glass <sjg@chromium.org>, Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Andrew Davis <afd@ti.com>, Christophe Leroy <christophe.leroy@csgroup.eu>, 
+ Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>, 
+ Sergei Antonov <saproj@gmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Ilya Lukin <4.shket@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Bin Meng <bmeng@tinylab.org>, AKASHI Takahiro <takahiro.akashi@linaro.org>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Alexander Gendin <agendin@matrox.com>, 
+ Eddie James <eajames@linux.ibm.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,70 +106,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Ilias,
 
---qIyZz/t92SpLiCp1
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, 8 May 2024 at 06:30, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+wrote:
 
-On Thu, May 09, 2024 at 11:04:07AM -0400, Raymond Mao wrote:
-> Hi Tom,
->=20
-> On Tue, 7 May 2024 at 17:16, Tom Rini <trini@konsulko.com> wrote:
->=20
-> > On Tue, May 07, 2024 at 10:50:45AM -0700, Raymond Mao wrote:
+> On Tue, 7 May 2024 at 20:54, Raymond Mao <raymond.mao@linaro.org> wrote:
 > >
-> > > Port mbedtls with dummy libc header files.
-> > > Add mbedtls default config header file.
-> > > Optimize mbedtls default config by disabling unused features to
-> > > reduce the target size.
-> > > Add mbedtls kbuild makefile.
-> > > Add Kconfig and mbedtls config submenu.
-> > [snip]
-> > > diff --git a/include/stdio.h b/include/stdio.h
-> > > index 3241e2d493f..874279c60dd 100644
-> > > --- a/include/stdio.h
-> > > +++ b/include/stdio.h
-> > > @@ -3,6 +3,7 @@
-> > >
-> > >  #include <stdarg.h>
-> > >  #include <linux/compiler.h>
-> > > +#include <vsprintf.h>
-> > >
-> > >  /* stdin */
-> > >  int getchar(void);
+> > Adapt digest header files to support both original libs and MbedTLS
+> > by switching on/off MBEDTLS_LIB_CRYPTO
 > >
-> > Is this really needed? I know our include structure is a bit odd. Should
-> > we perhaps look at moving a prototype or two around to be more broadly
-> > compatible?
+> > FIXME:
+> > `IS_ENABLED` or `CONFIG_IS_ENABLED` is not applicable here, since
+> > including <linux/kconfig.h> causes undefined reference on schedule()
+> > with sandbox build.
+> > As <linux/kconfig.h> includes <generated/autoconf.h> which enables
+> > `CONFIG_HW_WATCHDOG` and `CONFIG_WATCHDOG` but no schedule() are
+> > defined in sandbox build.
+> > `#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)` is a workaround.
 > >
-> Then we need to move  prototypes of snprintf, _vprintf, putc_outstr and
-> printf_info from tiny-printf to stdio.h. Is this good for you?
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > ---
+> > Changes in v2
+> > - Initial patch.
+> >
+> >  include/u-boot/md5.h    | 17 ++++++++++++-----
+> >  include/u-boot/sha1.h   | 21 ++++++++++++++++++++-
+> >  include/u-boot/sha256.h | 20 ++++++++++++++++++++
+> >  include/u-boot/sha512.h | 22 +++++++++++++++++++---
+> >  lib/Makefile            |  6 +++++-
+> >  5 files changed, 76 insertions(+), 10 deletions(-)
+> >
+> [snip]
+> > diff --git a/include/u-boot/sha256.h b/include/u-boot/sha256.h
+> > index 9aa1251789a..e2b7fdd41c8 100644
+> > --- a/include/u-boot/sha256.h
+> > +++ b/include/u-boot/sha256.h
+> > @@ -1,6 +1,22 @@
+> >  #ifndef _SHA256_H
+> >  #define _SHA256_H
+> >
+> > +#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
+> > +/*
+> > + * FIXME:
+> > + * MbedTLS define the members of "mbedtls_sha256_context" as private,
+> > + * but "state" needs to be access by arch/arm/cpu/armv8/sha256_ce_glue.
+>
+> 'be able to access.'
+>
+> Isn't the MBEDTLS_ALLOW_PRIVATE_ACCESS considered deprecated?
+> I'd prefer if we fix this properly.
+>
+> If  MBEDTLS_ALLOW_PRIVATE_ACCESS is deprecated, that is another issue
+other than the one I marked FIXME here.
+Once MBEDTLS_ALLOW_PRIVATE_ACCESS is deprecated, all callers are not
+able to access the private members (e.g. 'hash->state').
+Currently only arm drivers are using 'hash->state', but I don't have the
+background
+context about this - why we cannot use the normal hash functions without
+knowing
+the 'state' like other arches.
 
-I don't quite follow you but yes, please work it up for review at least
-as I'm not too thrilled with adding <vsprintf.h> to <stdio.h> after the
-work I did removing <common.h> showed some fun around those headers as
-well, and I'd like to sort it out correctly.  Thanks.
-
---=20
-Tom
-
---qIyZz/t92SpLiCp1
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY855sACgkQFHw5/5Y0
-tyxBaAv+MFXoLAk4etisJqtPOVHDj7u444SmspII6SZbIUfE2/fJloqPdFwL1Btl
-8Wc6wNBiTbxXQmN9HlAAzjnuUqkO/uGzSL9rkErE+7sDGf/wQekzAPqar7RLYoun
-7+VJLe/UIjHK4Ep+fhcI7rLQZfDASJPQeF91lvUA/f8is0q8Ks0WHKZ0uWxreGhs
-v2kJd3I6xfe1ogvQpZ9XpyDibnSB+NW0bVH7gwspOq5ji64XkWRvjj+jTxIwbZw+
-Fg72WQqDysi6enc2MED/STBJN63dlonaHtjT2P82dRGl0bmq8HcIgMB2hs6Jusjh
-/r8XudcFoba0nU1A75ru5kNbTy3ODkmkdi12//8Wxg8aImRuaILQMisKIGdmG980
-BhBYQn4Pot1mzG6G93wxStagXRyyL9OOnw13MdH4n35XsEaA0hzypJKDSM7kgmyL
-uWwyrWwVi3T1lhpFjeXktwFmChM4ZQx5FyvbMCBiKC9aVKs7DM2SQ1Iuk/mz2DUo
-hKoAXuUA
-=NgwB
------END PGP SIGNATURE-----
-
---qIyZz/t92SpLiCp1--
+Regards,
+Raymond
