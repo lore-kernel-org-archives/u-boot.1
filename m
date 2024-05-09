@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A77A3C25B10
-	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 12:37:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DAEAC25B10
+	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 12:37:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D395A88126;
-	Thu,  9 May 2024 14:37:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4299C88131;
+	Thu,  9 May 2024 14:37:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=posteo.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=posteo.net header.i=@posteo.net header.b="QejsIGiX";
+	dkim=pass (2048-bit key; secure) header.d=posteo.net header.i=@posteo.net header.b="MX51MgY6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 683DB8847C; Thu,  9 May 2024 11:10:56 +0200 (CEST)
+ id 762D78847C; Thu,  9 May 2024 11:11:21 +0200 (CEST)
 Received: from mout02.posteo.de (mout02.posteo.de [185.67.36.66])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D973988485
- for <u-boot@lists.denx.de>; Thu,  9 May 2024 11:10:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BF27788479
+ for <u-boot@lists.denx.de>; Thu,  9 May 2024 11:11:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=posteo.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=stefan_b@posteo.net
 Received: from submission (posteo.de [185.67.36.169]) 
- by mout02.posteo.de (Postfix) with ESMTPS id 8AD21240103
- for <u-boot@lists.denx.de>; Thu,  9 May 2024 11:10:51 +0200 (CEST)
+ by mout02.posteo.de (Postfix) with ESMTPS id 71B37240101
+ for <u-boot@lists.denx.de>; Thu,  9 May 2024 11:11:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=posteo.net; s=2017;
- t=1715245851; bh=W0kgsAb3znS8CNyZs5fP9kWUpjbty/ttrRmW9MqClQo=;
+ t=1715245877; bh=ZZG9jUhbmryf3sF34V1eMGz+VnB05EWcGzx0zCPHnNQ=;
  h=Message-ID:Date:MIME-Version:Subject:To:Cc:From:Content-Type:
  Content-Transfer-Encoding:From;
- b=QejsIGiXVVV2sUg4sUmBsvbACw5/Sea6+ykR5Mp3mDhjpXW4CkEDNNRRVuUBx0fxw
- f/UuxOTo7TyeEvn5bGz9VuhpkxSFYQ1PZa07EYYM9mcP/tu/XuNtNXTTMrfRSWVXPa
- Jn3lFXvPlv3ZBgw7Llc8yMKzREJoQwJPn7m9H2PKtKEplR0wpM4wy6f1Fzo4j4dSDX
- 4ylKSYkIlIBzKZb1pHF3APbG8YZN7r06WZyAJ6VxXHEMiQEXHmjMWqmoZ2zTDEzqL1
- tZRqncyCvjuvn3a6nZSZ2y3gHlB4cV/T5mX1HrXrPgode87JhlIOkIm8NN9D8WbF0g
- zLoyLiSOr9e5g==
+ b=MX51MgY66N0/KcLfCzxabnxpR1Wap52tQDx4dELXngA+K+5D6Xd/aGhTFcIQpevHD
+ O3+KNllL6Q7p0lkjZ3rXsQFvDgQmR/kw0YhXTiftXN1VeDSN1rTdAEeLvuh6XkEE15
+ h4rgc4XGOH/D8FjgV6x83wA9fZR+vuerXz0jzUJisqdlc9w7p8pVkOzFarT6BYNNVx
+ fOIGxuRPJ2GJCLmTTAcDRhy1KB8fb6Lr0/K8zzt8/rsRBYJBAVuhs8u59gTlsNwlQJ
+ 5gCASUOYvWpXDEj9HLBdTiYikxDMWfiPH2UFOfAt0ST+f21CaciN4HTBU58vJdQr2B
+ LaZWmQI65bWow==
 Received: from customer (localhost [127.0.0.1])
- by submission (posteo.de) with ESMTPSA id 4VZmSz0rZNz6tw9;
- Thu,  9 May 2024 11:10:43 +0200 (CEST)
-Message-ID: <286abd4f-d342-06ad-a092-0d8510477099@posteo.net>
-Date: Thu,  9 May 2024 09:10:14 +0000
+ by submission (posteo.de) with ESMTPSA id 4VZmTV5zGcz6tsg;
+ Thu,  9 May 2024 11:11:10 +0200 (CEST)
+Message-ID: <f350b416-02a5-ea51-450b-d95409d14e9f@posteo.net>
+Date: Thu,  9 May 2024 09:10:42 +0000
 MIME-Version: 1.0
-Subject: Re: [PATCH 50/81] phy: Remove <common.h> and add needed includes
+Subject: Re: [PATCH 51/81] pinctrl: Remove <common.h> and add needed includes
 Content-Language: en-US, de-DE
 To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, Stefan Roese <sr@denx.de>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Stephan Gerhold <stephan@gerhold.net>,
- Linus Walleij <linus.walleij@linaro.org>,
- Mark Kettenis <kettenis@openbsd.org>, Ryder Lee <ryder.lee@mediatek.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
+Cc: Ryan Chen <ryan_chen@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
+ Matthias Brugger <mbrugger@suse.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
  Chunfeng Yun <chunfeng.yun@mediatek.com>,
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Gregory CLEMENT <gregory.clement@bootlin.com>,
+ Lars Povlsen <lars.povlsen@microchip.com>,
+ Horatiu Vultur <horatiu.vultur@microchip.com>, Stefan Roese <sr@denx.de>,
+ Mark Kettenis <kettenis@openbsd.org>, Sean Anderson <seanga2@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Patrice Chotard
+ <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
  Michal Simek <michal.simek@amd.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@linaro.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Thierry Reding <treding@nvidia.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
  Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Dai Okamura <okamura.dai@socionext.com>, Sean Anderson <seanga2@gmail.com>,
- Nishanth Menon <nm@ti.com>,
+ Dai Okamura <okamura.dai@socionext.com>, Minkyu Kang <mk7.kang@samsung.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Stefano Babic <sbabic@denx.de>,
  Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Igor Prusov <ivprusov@salutedevices.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
- Fabio Estevam <festevam@denx.de>, Adam Ford <aford173@gmail.com>,
- Jonas Karlman <jonas@kwiboo.se>, Johan Jonker <jbx6244@gmail.com>,
- Jon Lin <jon.lin@rock-chips.com>, Ren Jianing <jianing.ren@rock-chips.com>,
- Frank Wang <frank.wang@rock-chips.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>,
- Ravi Gunasekaran <r-gunasekaran@ti.com>
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Jonas Karlman <jonas@kwiboo.se>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Robert Marko <robert.marko@sartura.hr>
 References: <20240502013138.2383421-1-trini@konsulko.com>
- <20240502013138.2383421-50-trini@konsulko.com>
+ <20240502013138.2383421-51-trini@konsulko.com>
 From: Stefan Bosch <stefan_b@posteo.net>
-In-Reply-To: <20240502013138.2383421-50-trini@konsulko.com>
+In-Reply-To: <20240502013138.2383421-51-trini@konsulko.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 09 May 2024 14:37:05 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -116,723 +115,1358 @@ Looks ok, tested on FriendlyElec-Board NanoPC-T2
 Thanks a lot!
 
 > ---
-> Cc: Jagan Teki <jagan@amarulasolutions.com>
-> Cc: Andre Przywara <andre.przywara@arm.com>
+> Cc: Ryan Chen <ryan_chen@aspeedtech.com>
+> Cc: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
+> Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>
+> Cc: Joel Stanley <joel@jms.id.au>
 > Cc: Tom Rini <trini@konsulko.com>
-> Cc: Stefan Roese <sr@denx.de>
-> Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> Cc: Stephan Gerhold <stephan@gerhold.net>
-> Cc: Linus Walleij <linus.walleij@linaro.org>
-> Cc: Mark Kettenis <kettenis@openbsd.org>
+> Cc: Matthias Brugger <mbrugger@suse.com>
+> Cc: Peter Robinson <pbrobinson@gmail.com>
 > Cc: Ryder Lee <ryder.lee@mediatek.com>
 > Cc: Weijie Gao <weijie.gao@mediatek.com>
 > Cc: Chunfeng Yun <chunfeng.yun@mediatek.com>
 > Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Neil Armstrong <neil.armstrong@linaro.org>
+> Cc: Gregory CLEMENT <gregory.clement@bootlin.com>
+> Cc: Lars Povlsen <lars.povlsen@microchip.com>
+> Cc: Horatiu Vultur <horatiu.vultur@microchip.com>
+> Cc: Stefan Roese <sr@denx.de>
+> Cc: Stefan Bosch <stefan_b@posteo.net>
+> Cc: Mark Kettenis <kettenis@openbsd.org>
+> Cc: Sean Anderson <seanga2@gmail.com>
+> Cc: Simon Glass <sjg@chromium.org>
 > Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > Cc: Michal Simek <michal.simek@amd.com>
 > Cc: Caleb Connolly <caleb.connolly@linaro.org>
 > Cc: Sumit Garg <sumit.garg@linaro.org>
-> Cc: Simon Glass <sjg@chromium.org>
 > Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
 > Cc: Kever Yang <kever.yang@rock-chips.com>
+> Cc: Thierry Reding <treding@nvidia.com>
+> Cc: Svyatoslav Ryhel <clamor95@gmail.com>
 > Cc: Kunihiko Hayashi <hayashi.kunihiko@socionext.com>
 > Cc: Dai Okamura <okamura.dai@socionext.com>
-> Cc: Sean Anderson <seanga2@gmail.com>
-> Cc: Nishanth Menon <nm@ti.com>
+> Cc: Minkyu Kang <mk7.kang@samsung.com>
+> Cc: Sam Protsenko <semen.protsenko@linaro.org>
+> Cc: Peng Fan <peng.fan@nxp.com>
+> Cc: Stefano Babic <sbabic@denx.de>
 > Cc: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
-> Cc: Stefan Bosch <stefan_b@posteo.net>
-> Cc: Eugen Hristev <eugen.hristev@collabora.com>
-> Cc: Igor Prusov <ivprusov@salutedevices.com>
-> Cc: Svyatoslav Ryhel <clamor95@gmail.com>
-> Cc: Tim Harvey <tharvey@gateworks.com>
-> Cc: Fabio Estevam <festevam@denx.de>
-> Cc: Adam Ford <aford173@gmail.com>
+> Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 > Cc: Jonas Karlman <jonas@kwiboo.se>
-> Cc: Johan Jonker <jbx6244@gmail.com>
-> Cc: Jon Lin <jon.lin@rock-chips.com>
-> Cc: Ren Jianing <jianing.ren@rock-chips.com>
-> Cc: Frank Wang <frank.wang@rock-chips.com>
-> Cc: Siddharth Vadapalli <s-vadapalli@ti.com>
-> Cc: Ravi Gunasekaran <r-gunasekaran@ti.com>
+> Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+> Cc: Robert Marko <robert.marko@sartura.hr>
 > ---
->   drivers/phy/allwinner/phy-sun4i-usb.c              | 1 -
->   drivers/phy/bcm6318-usbh-phy.c                     | 1 -
->   drivers/phy/bcm6348-usbh-phy.c                     | 1 -
->   drivers/phy/bcm6358-usbh-phy.c                     | 1 -
->   drivers/phy/bcm6368-usbh-phy.c                     | 1 -
->   drivers/phy/cadence/phy-cadence-sierra.c           | 1 -
->   drivers/phy/cadence/phy-cadence-torrent.c          | 1 -
->   drivers/phy/keystone-usb-phy.c                     | 1 -
->   drivers/phy/marvell/comphy_a3700.c                 | 1 -
->   drivers/phy/marvell/comphy_core.c                  | 1 -
->   drivers/phy/marvell/comphy_cp110.c                 | 2 +-
->   drivers/phy/marvell/comphy_mux.c                   | 1 -
->   drivers/phy/meson-axg-mipi-dphy.c                  | 1 -
->   drivers/phy/meson-axg-mipi-pcie-analog.c           | 1 -
->   drivers/phy/meson-g12a-usb2.c                      | 1 -
->   drivers/phy/meson-g12a-usb3-pcie.c                 | 1 -
->   drivers/phy/meson-gxbb-usb2.c                      | 1 -
->   drivers/phy/meson-gxl-usb2.c                       | 1 -
->   drivers/phy/mt76x8-usb-phy.c                       | 1 -
->   drivers/phy/nop-phy.c                              | 1 -
->   drivers/phy/omap-usb2-phy.c                        | 1 -
->   drivers/phy/phy-ab8500-usb.c                       | 1 -
->   drivers/phy/phy-apple-atc.c                        | 1 -
->   drivers/phy/phy-bcm-sr-pcie.c                      | 1 -
->   drivers/phy/phy-core-mipi-dphy.c                   | 2 +-
->   drivers/phy/phy-da8xx-usb.c                        | 2 +-
->   drivers/phy/phy-imx8mq-usb.c                       | 1 -
->   drivers/phy/phy-mtk-tphy.c                         | 1 -
->   drivers/phy/phy-npcm-usb.c                         | 1 -
->   drivers/phy/phy-rcar-gen2.c                        | 1 -
->   drivers/phy/phy-rcar-gen3.c                        | 1 -
->   drivers/phy/phy-stm32-usbphyc.c                    | 1 -
->   drivers/phy/phy-ti-am654.c                         | 1 -
->   drivers/phy/phy-uclass.c                           | 1 -
->   drivers/phy/phy-zynqmp.c                           | 1 -
->   drivers/phy/qcom/msm8916-usbh-phy.c                | 1 -
->   drivers/phy/qcom/phy-qcom-ipq4019-usb.c            | 1 -
->   drivers/phy/qcom/phy-qcom-usb-hs-28nm.c            | 1 -
->   drivers/phy/qcom/phy-qcom-usb-ss.c                 | 1 -
->   drivers/phy/renesas/r8a779f0-ether-serdes.c        | 1 -
->   drivers/phy/rockchip/phy-rockchip-naneng-combphy.c | 1 -
->   drivers/phy/rockchip/phy-rockchip-pcie.c           | 1 -
->   drivers/phy/rockchip/phy-rockchip-snps-pcie3.c     | 1 -
->   drivers/phy/rockchip/phy-rockchip-typec.c          | 1 -
->   drivers/phy/rockchip/phy-rockchip-usbdp.c          | 1 -
->   drivers/phy/sandbox-phy.c                          | 1 -
->   drivers/phy/socionext/phy-uniphier-pcie.c          | 1 -
->   drivers/phy/socionext/phy-uniphier-usb3.c          | 1 -
->   drivers/phy/sti_usb_phy.c                          | 1 -
->   drivers/phy/ti-pipe3-phy.c                         | 1 -
->   drivers/phy/ti/phy-j721e-wiz.c                     | 1 -
->   51 files changed, 3 insertions(+), 51 deletions(-)
+>   drivers/pinctrl/aspeed/pinctrl_ast2500.c         | 1 -
+>   drivers/pinctrl/aspeed/pinctrl_ast2600.c         | 1 -
+>   drivers/pinctrl/ath79/pinctrl_ar933x.c           | 1 -
+>   drivers/pinctrl/ath79/pinctrl_qca953x.c          | 1 -
+>   drivers/pinctrl/broadcom/pinctrl-bcm283x.c       | 1 -
+>   drivers/pinctrl/broadcom/pinctrl-bcm6838.c       | 1 -
+>   drivers/pinctrl/exynos/pinctrl-exynos.c          | 1 -
+>   drivers/pinctrl/exynos/pinctrl-exynos7420.c      | 1 -
+>   drivers/pinctrl/exynos/pinctrl-exynos78x0.c      | 1 -
+>   drivers/pinctrl/intel/pinctrl.c                  | 1 -
+>   drivers/pinctrl/intel/pinctrl_apl.c              | 1 -
+>   drivers/pinctrl/mediatek/pinctrl-mtk-common.c    | 1 -
+>   drivers/pinctrl/meson/pinctrl-meson-a1.c         | 1 -
+>   drivers/pinctrl/meson/pinctrl-meson-axg-pmx.c    | 1 -
+>   drivers/pinctrl/meson/pinctrl-meson-axg.c        | 1 -
+>   drivers/pinctrl/meson/pinctrl-meson-g12a.c       | 1 -
+>   drivers/pinctrl/meson/pinctrl-meson-gx-pmx.c     | 1 -
+>   drivers/pinctrl/meson/pinctrl-meson-gxbb.c       | 1 -
+>   drivers/pinctrl/meson/pinctrl-meson-gxl.c        | 1 -
+>   drivers/pinctrl/meson/pinctrl-meson.c            | 1 -
+>   drivers/pinctrl/mscc/mscc-common.c               | 1 -
+>   drivers/pinctrl/mscc/pinctrl-jr2.c               | 1 -
+>   drivers/pinctrl/mscc/pinctrl-luton.c             | 1 -
+>   drivers/pinctrl/mscc/pinctrl-ocelot.c            | 1 -
+>   drivers/pinctrl/mscc/pinctrl-serval.c            | 1 -
+>   drivers/pinctrl/mscc/pinctrl-servalt.c           | 1 -
+>   drivers/pinctrl/mtmips/pinctrl-mt7628.c          | 1 -
+>   drivers/pinctrl/mtmips/pinctrl-mtmips-common.c   | 1 -
+>   drivers/pinctrl/mvebu/pinctrl-armada-37xx.c      | 1 -
+>   drivers/pinctrl/mvebu/pinctrl-armada-38x.c       | 1 -
+>   drivers/pinctrl/mvebu/pinctrl-mvebu.c            | 1 -
+>   drivers/pinctrl/nexell/pinctrl-nexell.c          | 1 -
+>   drivers/pinctrl/nexell/pinctrl-s5pxx18.c         | 1 -
+>   drivers/pinctrl/nxp/pinctrl-imx.c                | 1 -
+>   drivers/pinctrl/nxp/pinctrl-imx5.c               | 1 -
+>   drivers/pinctrl/nxp/pinctrl-imx6.c               | 1 -
+>   drivers/pinctrl/nxp/pinctrl-imx7.c               | 1 -
+>   drivers/pinctrl/nxp/pinctrl-imx7ulp.c            | 1 -
+>   drivers/pinctrl/nxp/pinctrl-imx8.c               | 1 -
+>   drivers/pinctrl/nxp/pinctrl-imx8ulp.c            | 1 -
+>   drivers/pinctrl/nxp/pinctrl-imxrt.c              | 1 -
+>   drivers/pinctrl/nxp/pinctrl-mxs.c                | 1 -
+>   drivers/pinctrl/nxp/pinctrl-scu.c                | 1 -
+>   drivers/pinctrl/nxp/pinctrl-vf610.c              | 1 -
+>   drivers/pinctrl/pinctrl-apple.c                  | 1 -
+>   drivers/pinctrl/pinctrl-at91-pio4.c              | 1 -
+>   drivers/pinctrl/pinctrl-at91.c                   | 1 -
+>   drivers/pinctrl/pinctrl-generic.c                | 1 -
+>   drivers/pinctrl/pinctrl-k210.c                   | 1 -
+>   drivers/pinctrl/pinctrl-qe-io.c                  | 1 -
+>   drivers/pinctrl/pinctrl-sandbox.c                | 1 -
+>   drivers/pinctrl/pinctrl-single.c                 | 1 -
+>   drivers/pinctrl/pinctrl-sti.c                    | 1 -
+>   drivers/pinctrl/pinctrl-stmfx.c                  | 1 -
+>   drivers/pinctrl/pinctrl-uclass.c                 | 1 -
+>   drivers/pinctrl/pinctrl-zynqmp.c                 | 1 -
+>   drivers/pinctrl/pinctrl_pic32.c                  | 1 -
+>   drivers/pinctrl/pinctrl_stm32.c                  | 1 -
+>   drivers/pinctrl/qcom/pinctrl-apq8016.c           | 1 -
+>   drivers/pinctrl/qcom/pinctrl-apq8096.c           | 1 -
+>   drivers/pinctrl/qcom/pinctrl-ipq4019.c           | 1 -
+>   drivers/pinctrl/qcom/pinctrl-qcom.c              | 1 -
+>   drivers/pinctrl/qcom/pinctrl-qcs404.c            | 1 -
+>   drivers/pinctrl/qcom/pinctrl-sdm845.c            | 1 -
+>   drivers/pinctrl/rockchip/pinctrl-px30.c          | 1 -
+>   drivers/pinctrl/rockchip/pinctrl-rk3036.c        | 1 -
+>   drivers/pinctrl/rockchip/pinctrl-rk3066.c        | 1 -
+>   drivers/pinctrl/rockchip/pinctrl-rk3128.c        | 1 -
+>   drivers/pinctrl/rockchip/pinctrl-rk3188.c        | 1 -
+>   drivers/pinctrl/rockchip/pinctrl-rk322x.c        | 1 -
+>   drivers/pinctrl/rockchip/pinctrl-rk3288.c        | 1 -
+>   drivers/pinctrl/rockchip/pinctrl-rk3308.c        | 1 -
+>   drivers/pinctrl/rockchip/pinctrl-rk3328.c        | 1 -
+>   drivers/pinctrl/rockchip/pinctrl-rk3368.c        | 1 -
+>   drivers/pinctrl/rockchip/pinctrl-rk3399.c        | 1 -
+>   drivers/pinctrl/rockchip/pinctrl-rk3568.c        | 1 -
+>   drivers/pinctrl/rockchip/pinctrl-rk3588.c        | 1 -
+>   drivers/pinctrl/rockchip/pinctrl-rockchip-core.c | 1 -
+>   drivers/pinctrl/rockchip/pinctrl-rv1108.c        | 1 -
+>   drivers/pinctrl/rockchip/pinctrl-rv1126.c        | 1 -
+>   drivers/pinctrl/starfive/pinctrl-starfive.c      | 1 -
+>   drivers/pinctrl/tegra/funcmux-tegra114.c         | 1 -
+>   drivers/pinctrl/tegra/funcmux-tegra124.c         | 1 -
+>   drivers/pinctrl/tegra/funcmux-tegra20.c          | 1 -
+>   drivers/pinctrl/tegra/funcmux-tegra210.c         | 1 -
+>   drivers/pinctrl/tegra/funcmux-tegra30.c          | 1 -
+>   drivers/pinctrl/tegra/pinmux-common.c            | 1 -
+>   drivers/pinctrl/tegra/pinmux-tegra114.c          | 1 -
+>   drivers/pinctrl/tegra/pinmux-tegra124.c          | 1 -
+>   drivers/pinctrl/tegra/pinmux-tegra20.c           | 1 -
+>   drivers/pinctrl/tegra/pinmux-tegra30.c           | 1 -
+>   drivers/pinctrl/uniphier/pinctrl-uniphier-core.c | 1 -
+>   drivers/pinctrl/uniphier/pinctrl-uniphier-ld11.c | 1 -
+>   drivers/pinctrl/uniphier/pinctrl-uniphier-ld20.c | 1 -
+>   drivers/pinctrl/uniphier/pinctrl-uniphier-ld4.c  | 1 -
+>   drivers/pinctrl/uniphier/pinctrl-uniphier-ld6b.c | 1 -
+>   drivers/pinctrl/uniphier/pinctrl-uniphier-pro4.c | 1 -
+>   drivers/pinctrl/uniphier/pinctrl-uniphier-pro5.c | 1 -
+>   drivers/pinctrl/uniphier/pinctrl-uniphier-pxs2.c | 1 -
+>   drivers/pinctrl/uniphier/pinctrl-uniphier-pxs3.c | 1 -
+>   drivers/pinctrl/uniphier/pinctrl-uniphier-sld8.c | 1 -
+>   101 files changed, 101 deletions(-)
 > 
-> diff --git a/drivers/phy/allwinner/phy-sun4i-usb.c b/drivers/phy/allwinner/phy-sun4i-usb.c
-> index 6624e9134f43..b9306c9a8279 100644
-> --- a/drivers/phy/allwinner/phy-sun4i-usb.c
-> +++ b/drivers/phy/allwinner/phy-sun4i-usb.c
-> @@ -10,7 +10,6 @@
->    * SPDX-License-Identifier:	GPL-2.0+
->    */
->   
-> -#include <common.h>
->   #include <clk.h>
->   #include <dm.h>
->   #include <log.h>
-> diff --git a/drivers/phy/bcm6318-usbh-phy.c b/drivers/phy/bcm6318-usbh-phy.c
-> index a2fa446cb1c9..d715541bd4cb 100644
-> --- a/drivers/phy/bcm6318-usbh-phy.c
-> +++ b/drivers/phy/bcm6318-usbh-phy.c
-> @@ -7,7 +7,6 @@
->    *	Copyright 2013 Florian Fainelli <florian@openwrt.org>
->    */
->   
-> -#include <common.h>
->   #include <clk.h>
->   #include <dm.h>
->   #include <generic-phy.h>
-> diff --git a/drivers/phy/bcm6348-usbh-phy.c b/drivers/phy/bcm6348-usbh-phy.c
-> index 857fb575ef19..ffb37b634a31 100644
-> --- a/drivers/phy/bcm6348-usbh-phy.c
-> +++ b/drivers/phy/bcm6348-usbh-phy.c
-> @@ -7,7 +7,6 @@
->    *	Copyright 2013 Florian Fainelli <florian@openwrt.org>
->    */
->   
-> -#include <common.h>
->   #include <clk.h>
->   #include <dm.h>
->   #include <generic-phy.h>
-> diff --git a/drivers/phy/bcm6358-usbh-phy.c b/drivers/phy/bcm6358-usbh-phy.c
-> index bfdcfb0d245e..a8d24609bfc0 100644
-> --- a/drivers/phy/bcm6358-usbh-phy.c
-> +++ b/drivers/phy/bcm6358-usbh-phy.c
-> @@ -7,7 +7,6 @@
->    *	Copyright 2013 Florian Fainelli <florian@openwrt.org>
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <generic-phy.h>
->   #include <log.h>
-> diff --git a/drivers/phy/bcm6368-usbh-phy.c b/drivers/phy/bcm6368-usbh-phy.c
-> index 1a2870d51499..5bee130425d5 100644
-> --- a/drivers/phy/bcm6368-usbh-phy.c
-> +++ b/drivers/phy/bcm6368-usbh-phy.c
-> @@ -7,7 +7,6 @@
->    *	Copyright 2013 Florian Fainelli <florian@openwrt.org>
->    */
->   
-> -#include <common.h>
->   #include <clk.h>
->   #include <dm.h>
->   #include <generic-phy.h>
-> diff --git a/drivers/phy/cadence/phy-cadence-sierra.c b/drivers/phy/cadence/phy-cadence-sierra.c
-> index 4bb8a0ca7f34..f5e23f36c56e 100644
-> --- a/drivers/phy/cadence/phy-cadence-sierra.c
-> +++ b/drivers/phy/cadence/phy-cadence-sierra.c
-> @@ -11,7 +11,6 @@
->    * Jean-Jacques Hiblot <jjhiblot@ti.com>
->    *
->    */
-> -#include <common.h>
->   #include <clk.h>
->   #include <linux/delay.h>
->   #include <linux/clk-provider.h>
-> diff --git a/drivers/phy/cadence/phy-cadence-torrent.c b/drivers/phy/cadence/phy-cadence-torrent.c
-> index ef924e7af508..d4e8ece4935a 100644
-> --- a/drivers/phy/cadence/phy-cadence-torrent.c
-> +++ b/drivers/phy/cadence/phy-cadence-torrent.c
-> @@ -10,7 +10,6 @@
->    *
->    */
->   
-> -#include <common.h>
->   #include <clk.h>
->   #include <generic-phy.h>
->   #include <reset.h>
-> diff --git a/drivers/phy/keystone-usb-phy.c b/drivers/phy/keystone-usb-phy.c
-> index 3bb9c0814c14..cfc15203d632 100644
-> --- a/drivers/phy/keystone-usb-phy.c
-> +++ b/drivers/phy/keystone-usb-phy.c
-> @@ -4,7 +4,6 @@
->    * Written by Jean-Jacques Hiblot  <jjhiblot@ti.com>
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <log.h>
->   #include <dm/device.h>
-> diff --git a/drivers/phy/marvell/comphy_a3700.c b/drivers/phy/marvell/comphy_a3700.c
-> index c490dc69c695..bca325d19960 100644
-> --- a/drivers/phy/marvell/comphy_a3700.c
-> +++ b/drivers/phy/marvell/comphy_a3700.c
+> diff --git a/drivers/pinctrl/aspeed/pinctrl_ast2500.c b/drivers/pinctrl/aspeed/pinctrl_ast2500.c
+> index 93920a6389bf..9e7c347caf89 100644
+> --- a/drivers/pinctrl/aspeed/pinctrl_ast2500.c
+> +++ b/drivers/pinctrl/aspeed/pinctrl_ast2500.c
 > @@ -3,7 +3,6 @@
->    * Copyright (C) 2015-2016 Marvell International Ltd.
+>    * Copyright 2017 Google, Inc
 >    */
 >   
 > -#include <common.h>
->   #include <fdt_support.h>
->   #include <log.h>
->   #include <asm/global_data.h>
-> diff --git a/drivers/phy/marvell/comphy_core.c b/drivers/phy/marvell/comphy_core.c
-> index 7272dfb9fe80..a666a4e794ee 100644
-> --- a/drivers/phy/marvell/comphy_core.c
-> +++ b/drivers/phy/marvell/comphy_core.c
-> @@ -5,7 +5,6 @@
->    * Copyright (C) 2016 Stefan Roese <sr@denx.de>
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <fdtdec.h>
->   #include <asm/global_data.h>
-> diff --git a/drivers/phy/marvell/comphy_cp110.c b/drivers/phy/marvell/comphy_cp110.c
-> index bb15fbaf347e..b8cdedf6edf0 100644
-> --- a/drivers/phy/marvell/comphy_cp110.c
-> +++ b/drivers/phy/marvell/comphy_cp110.c
-> @@ -3,7 +3,6 @@
->    * Copyright (C) 2015-2016 Marvell International Ltd.
->    */
->   
-> -#include <common.h>
->   #include <fdtdec.h>
->   #include <log.h>
->   #include <asm/global_data.h>
-> @@ -12,6 +11,7 @@
->   #include <asm/arch/cpu.h>
->   #include <asm/arch/soc.h>
->   #include <linux/delay.h>
-> +#include <linux/errno.h>
->   #include <linux/printk.h>
->   
->   #include "comphy_core.h"
-> diff --git a/drivers/phy/marvell/comphy_mux.c b/drivers/phy/marvell/comphy_mux.c
-> index 10981d25ec95..a8aa37fc46f3 100644
-> --- a/drivers/phy/marvell/comphy_mux.c
-> +++ b/drivers/phy/marvell/comphy_mux.c
-> @@ -3,7 +3,6 @@
->    * Copyright (C) 2015-2016 Marvell International Ltd.
->    */
->   
-> -#include <common.h>
->   #include <log.h>
->   #include <asm/io.h>
->   
-> diff --git a/drivers/phy/meson-axg-mipi-dphy.c b/drivers/phy/meson-axg-mipi-dphy.c
-> index faa1d9d6d378..3f89de19970b 100644
-> --- a/drivers/phy/meson-axg-mipi-dphy.c
-> +++ b/drivers/phy/meson-axg-mipi-dphy.c
-> @@ -7,7 +7,6 @@
->    * Author: Neil Armstrong <narmstrong@baylibre.com>
->    */
->   
-> -#include <common.h>
->   #include <log.h>
->   #include <malloc.h>
->   #include <asm/io.h>
-> diff --git a/drivers/phy/meson-axg-mipi-pcie-analog.c b/drivers/phy/meson-axg-mipi-pcie-analog.c
-> index 236ea1ce5ca7..731917cef434 100644
-> --- a/drivers/phy/meson-axg-mipi-pcie-analog.c
-> +++ b/drivers/phy/meson-axg-mipi-pcie-analog.c
-> @@ -7,7 +7,6 @@
->    * Author: Neil Armstrong <narmstrong@baylibre.com>
->    */
->   
-> -#include <common.h>
->   #include <log.h>
->   #include <malloc.h>
->   #include <asm/io.h>
-> diff --git a/drivers/phy/meson-g12a-usb2.c b/drivers/phy/meson-g12a-usb2.c
-> index 3958d2404b85..8cded12438b9 100644
-> --- a/drivers/phy/meson-g12a-usb2.c
-> +++ b/drivers/phy/meson-g12a-usb2.c
-> @@ -7,7 +7,6 @@
->    * Author: Neil Armstrong <narmstron@baylibre.com>
->    */
->   
-> -#include <common.h>
->   #include <log.h>
->   #include <malloc.h>
->   #include <asm/io.h>
-> diff --git a/drivers/phy/meson-g12a-usb3-pcie.c b/drivers/phy/meson-g12a-usb3-pcie.c
-> index 1eaff410efa4..4d183867c3a0 100644
-> --- a/drivers/phy/meson-g12a-usb3-pcie.c
-> +++ b/drivers/phy/meson-g12a-usb3-pcie.c
-> @@ -7,7 +7,6 @@
->    * Author: Neil Armstrong <narmstron@baylibre.com>
->    */
->   
-> -#include <common.h>
->   #include <clk.h>
->   #include <dm.h>
->   #include <malloc.h>
-> diff --git a/drivers/phy/meson-gxbb-usb2.c b/drivers/phy/meson-gxbb-usb2.c
-> index 725b056a71a7..4c88ccf39276 100644
-> --- a/drivers/phy/meson-gxbb-usb2.c
-> +++ b/drivers/phy/meson-gxbb-usb2.c
-> @@ -8,7 +8,6 @@
->    * Author: Beniamino Galvani <b.galvani@gmail.com>
->    */
->   
-> -#include <common.h>
->   #include <clk.h>
->   #include <dm.h>
->   #include <generic-phy.h>
-> diff --git a/drivers/phy/meson-gxl-usb2.c b/drivers/phy/meson-gxl-usb2.c
-> index d633effa4042..92c285103c4a 100644
-> --- a/drivers/phy/meson-gxl-usb2.c
-> +++ b/drivers/phy/meson-gxl-usb2.c
-> @@ -7,7 +7,6 @@
->    * Author: Neil Armstrong <narmstron@baylibre.com>
->    */
->   
-> -#include <common.h>
->   #include <malloc.h>
->   #include <asm/io.h>
->   #include <bitfield.h>
-> diff --git a/drivers/phy/mt76x8-usb-phy.c b/drivers/phy/mt76x8-usb-phy.c
-> index 4069208b6790..99f8a221f5a1 100644
-> --- a/drivers/phy/mt76x8-usb-phy.c
-> +++ b/drivers/phy/mt76x8-usb-phy.c
-> @@ -7,7 +7,6 @@
->    */
->   
->   #include <clk.h>
-> -#include <common.h>
->   #include <dm.h>
->   #include <generic-phy.h>
->   #include <log.h>
-> diff --git a/drivers/phy/nop-phy.c b/drivers/phy/nop-phy.c
-> index c53e3216d0fd..286171cba76a 100644
-> --- a/drivers/phy/nop-phy.c
-> +++ b/drivers/phy/nop-phy.c
-> @@ -5,7 +5,6 @@
->    */
->   
->   #include <clk.h>
-> -#include <common.h>
->   #include <dm.h>
->   #include <dm/device.h>
->   #include <dm/device_compat.h>
-> diff --git a/drivers/phy/omap-usb2-phy.c b/drivers/phy/omap-usb2-phy.c
-> index d3d38062ecf7..2be0178882a4 100644
-> --- a/drivers/phy/omap-usb2-phy.c
-> +++ b/drivers/phy/omap-usb2-phy.c
-> @@ -6,7 +6,6 @@
->    * Written by Jean-Jacques Hiblot <jjhiblot@ti.com>
->    */
->   
-> -#include <common.h>
->   #include <asm/global_data.h>
->   #include <asm/io.h>
->   #include <dm.h>
-> diff --git a/drivers/phy/phy-ab8500-usb.c b/drivers/phy/phy-ab8500-usb.c
-> index 3d3d48c9733a..5de7b6f86cca 100644
-> --- a/drivers/phy/phy-ab8500-usb.c
-> +++ b/drivers/phy/phy-ab8500-usb.c
-> @@ -1,7 +1,6 @@
->   // SPDX-License-Identifier: GPL-2.0+
->   /* Copyright (C) 2019 Stephan Gerhold */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <generic-phy.h>
->   #include <linux/bitops.h>
-> diff --git a/drivers/phy/phy-apple-atc.c b/drivers/phy/phy-apple-atc.c
-> index 15c5b8a1c2d0..78eedf676b09 100644
-> --- a/drivers/phy/phy-apple-atc.c
-> +++ b/drivers/phy/phy-apple-atc.c
-> @@ -3,7 +3,6 @@
->    * Copyright (C) 2022 Mark Kettenis <kettenis@openbsd.org>
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <dm/device-internal.h>
->   #include <generic-phy.h>
-> diff --git a/drivers/phy/phy-bcm-sr-pcie.c b/drivers/phy/phy-bcm-sr-pcie.c
-> index cf33bab37072..97859a0cb87e 100644
-> --- a/drivers/phy/phy-bcm-sr-pcie.c
-> +++ b/drivers/phy/phy-bcm-sr-pcie.c
-> @@ -3,7 +3,6 @@
->    * Copyright (C) 2019 Broadcom
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <generic-phy.h>
->   #include <asm/io.h>
-> diff --git a/drivers/phy/phy-core-mipi-dphy.c b/drivers/phy/phy-core-mipi-dphy.c
-> index bb61816add27..8fb985a1e682 100644
-> --- a/drivers/phy/phy-core-mipi-dphy.c
-> +++ b/drivers/phy/phy-core-mipi-dphy.c
-> @@ -4,8 +4,8 @@
->    * Copyright (C) 2018 Cadence Design Systems Inc.
->    */
->   
-> -#include <common.h>
->   #include <div64.h>
-> +#include <linux/kernel.h>
->   #include <linux/time.h>
->   
->   #include <phy-mipi-dphy.h>
-> diff --git a/drivers/phy/phy-da8xx-usb.c b/drivers/phy/phy-da8xx-usb.c
-> index d025188eae98..cf26aaaa3d82 100644
-> --- a/drivers/phy/phy-da8xx-usb.c
-> +++ b/drivers/phy/phy-da8xx-usb.c
-> @@ -6,9 +6,9 @@
->    * DT support added by: Adam Ford <aford173@gmail.com>
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <log.h>
-> +#include <time.h>
->   #include <dm/device-internal.h>
->   #include <dm/lists.h>
->   #include <asm/arch/hardware.h>
-> diff --git a/drivers/phy/phy-imx8mq-usb.c b/drivers/phy/phy-imx8mq-usb.c
-> index e5e96e77a681..75763046adc1 100644
-> --- a/drivers/phy/phy-imx8mq-usb.c
-> +++ b/drivers/phy/phy-imx8mq-usb.c
-> @@ -4,7 +4,6 @@
->    *
->    */
->   
-> -#include <common.h>
->   #include <asm/io.h>
 >   #include <dm.h>
 >   #include <errno.h>
-> diff --git a/drivers/phy/phy-mtk-tphy.c b/drivers/phy/phy-mtk-tphy.c
-> index ea9edf212c6f..6f9ac1528e88 100644
-> --- a/drivers/phy/phy-mtk-tphy.c
-> +++ b/drivers/phy/phy-mtk-tphy.c
-> @@ -5,7 +5,6 @@
->    *	   Ryder Lee <ryder.lee@mediatek.com>
->    */
->   
-> -#include <common.h>
->   #include <clk.h>
->   #include <dm.h>
->   #include <generic-phy.h>
-> diff --git a/drivers/phy/phy-npcm-usb.c b/drivers/phy/phy-npcm-usb.c
-> index 24eba6655435..028fedf92dc3 100644
-> --- a/drivers/phy/phy-npcm-usb.c
-> +++ b/drivers/phy/phy-npcm-usb.c
+>   #include <log.h>
+> diff --git a/drivers/pinctrl/aspeed/pinctrl_ast2600.c b/drivers/pinctrl/aspeed/pinctrl_ast2600.c
+> index 8a4f9705ca93..bc12590e5836 100644
+> --- a/drivers/pinctrl/aspeed/pinctrl_ast2600.c
+> +++ b/drivers/pinctrl/aspeed/pinctrl_ast2600.c
 > @@ -3,7 +3,6 @@
->    * Copyright (c) 2021 Nuvoton Technology Corp.
+>    * Copyright (C) ASPEED Technology Inc.
+>    */
+>   
+> -#include <common.h>
+>   #include <errno.h>
+>   #include <asm/arch/pinctrl.h>
+>   #include <asm/arch/scu_ast2600.h>
+> diff --git a/drivers/pinctrl/ath79/pinctrl_ar933x.c b/drivers/pinctrl/ath79/pinctrl_ar933x.c
+> index eb673a9f69cb..61e37a2e5598 100644
+> --- a/drivers/pinctrl/ath79/pinctrl_ar933x.c
+> +++ b/drivers/pinctrl/ath79/pinctrl_ar933x.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (C) 2015-2016 Wills Wang <wills.wang@live.com>
 >    */
 >   
 > -#include <common.h>
 >   #include <dm.h>
->   #include <generic-phy.h>
+>   #include <errno.h>
+>   #include <log.h>
+> diff --git a/drivers/pinctrl/ath79/pinctrl_qca953x.c b/drivers/pinctrl/ath79/pinctrl_qca953x.c
+> index 0d534268e966..e4f695fc4d44 100644
+> --- a/drivers/pinctrl/ath79/pinctrl_qca953x.c
+> +++ b/drivers/pinctrl/ath79/pinctrl_qca953x.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (C) 2015-2016 Wills Wang <wills.wang@live.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <errno.h>
+>   #include <log.h>
+> diff --git a/drivers/pinctrl/broadcom/pinctrl-bcm283x.c b/drivers/pinctrl/broadcom/pinctrl-bcm283x.c
+> index e949cb70900a..cf9350c151e0 100644
+> --- a/drivers/pinctrl/broadcom/pinctrl-bcm283x.c
+> +++ b/drivers/pinctrl/broadcom/pinctrl-bcm283x.c
+> @@ -10,7 +10,6 @@
+>    * https://spdx.org/licenses
+>    */
+>   
+> -#include <common.h>
+>   #include <config.h>
+>   #include <errno.h>
+>   #include <dm.h>
+> diff --git a/drivers/pinctrl/broadcom/pinctrl-bcm6838.c b/drivers/pinctrl/broadcom/pinctrl-bcm6838.c
+> index 58f28a137096..7d0c09a130c6 100644
+> --- a/drivers/pinctrl/broadcom/pinctrl-bcm6838.c
+> +++ b/drivers/pinctrl/broadcom/pinctrl-bcm6838.c
+> @@ -1,6 +1,5 @@
+>   // SPDX-License-Identifier: GPL-2.0
+>   
+> -#include <common.h>
+>   #include <dm.h>
 >   #include <regmap.h>
-> diff --git a/drivers/phy/phy-rcar-gen2.c b/drivers/phy/phy-rcar-gen2.c
-> index e528c4ec5793..f9428c7ad122 100644
-> --- a/drivers/phy/phy-rcar-gen2.c
-> +++ b/drivers/phy/phy-rcar-gen2.c
-> @@ -5,7 +5,6 @@
->    * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
->    */
->   
-> -#include <common.h>
->   #include <clk.h>
->   #include <div64.h>
->   #include <dm.h>
-> diff --git a/drivers/phy/phy-rcar-gen3.c b/drivers/phy/phy-rcar-gen3.c
-> index 03c747b373b1..7c292cae0e2f 100644
-> --- a/drivers/phy/phy-rcar-gen3.c
-> +++ b/drivers/phy/phy-rcar-gen3.c
-> @@ -5,7 +5,6 @@
->    * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
->    */
->   
-> -#include <common.h>
->   #include <clk.h>
->   #include <div64.h>
->   #include <dm.h>
-> diff --git a/drivers/phy/phy-stm32-usbphyc.c b/drivers/phy/phy-stm32-usbphyc.c
-> index 000e495dbd4e..8d643b762f90 100644
-> --- a/drivers/phy/phy-stm32-usbphyc.c
-> +++ b/drivers/phy/phy-stm32-usbphyc.c
-> @@ -5,7 +5,6 @@
->   
->   #define LOG_CATEGORY UCLASS_PHY
->   
-> -#include <common.h>
->   #include <clk.h>
->   #include <clk-uclass.h>
->   #include <div64.h>
-> diff --git a/drivers/phy/phy-ti-am654.c b/drivers/phy/phy-ti-am654.c
-> index 70a746d2c92d..c3d9972397aa 100644
-> --- a/drivers/phy/phy-ti-am654.c
-> +++ b/drivers/phy/phy-ti-am654.c
+>   #include <syscon.h>
+> diff --git a/drivers/pinctrl/exynos/pinctrl-exynos.c b/drivers/pinctrl/exynos/pinctrl-exynos.c
+> index 8a045cdf7aa8..b393127c642c 100644
+> --- a/drivers/pinctrl/exynos/pinctrl-exynos.c
+> +++ b/drivers/pinctrl/exynos/pinctrl-exynos.c
 > @@ -6,7 +6,6 @@
->    * Author: Kishon Vijay Abraham I <kishon@ti.com>
 >    */
 >   
-> -#include <common.h>
->   #include <clk-uclass.h>
->   #include <dm.h>
 >   #include <log.h>
-> diff --git a/drivers/phy/phy-uclass.c b/drivers/phy/phy-uclass.c
-> index 0dcfe258bc44..acdcda15b5b8 100644
-> --- a/drivers/phy/phy-uclass.c
-> +++ b/drivers/phy/phy-uclass.c
-> @@ -6,7 +6,6 @@
->   
->   #define LOG_CATEGORY UCLASS_PHY
->   
 > -#include <common.h>
 >   #include <dm.h>
->   #include <dm/device_compat.h>
->   #include <dm/devres.h>
-> diff --git a/drivers/phy/phy-zynqmp.c b/drivers/phy/phy-zynqmp.c
-> index d1288bb17f3c..7049e740d569 100644
-> --- a/drivers/phy/phy-zynqmp.c
-> +++ b/drivers/phy/phy-zynqmp.c
-> @@ -9,7 +9,6 @@
->    * Author: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
->    */
->   
-> -#include <common.h>
->   #include <clk-uclass.h>
->   #include <dm.h>
->   #include <generic-phy.h>
-> diff --git a/drivers/phy/qcom/msm8916-usbh-phy.c b/drivers/phy/qcom/msm8916-usbh-phy.c
-> index f52046f7cb02..4b435aa2a6eb 100644
-> --- a/drivers/phy/qcom/msm8916-usbh-phy.c
-> +++ b/drivers/phy/qcom/msm8916-usbh-phy.c
-> @@ -3,7 +3,6 @@
->    * Copyright (C) 2018 Ramon Fried <ramon.fried@gmail.com>
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <generic-phy.h>
->   #include <linux/bitops.h>
-> diff --git a/drivers/phy/qcom/phy-qcom-ipq4019-usb.c b/drivers/phy/qcom/phy-qcom-ipq4019-usb.c
-> index 5808489249f5..3b647324e021 100644
-> --- a/drivers/phy/qcom/phy-qcom-ipq4019-usb.c
-> +++ b/drivers/phy/qcom/phy-qcom-ipq4019-usb.c
-> @@ -8,7 +8,6 @@
->    */
->   
->   #include <clk.h>
-> -#include <common.h>
->   #include <dm.h>
->   #include <generic-phy.h>
->   #include <log.h>
-> diff --git a/drivers/phy/qcom/phy-qcom-usb-hs-28nm.c b/drivers/phy/qcom/phy-qcom-usb-hs-28nm.c
-> index 05a9a2cf1d7c..c344809a6086 100644
-> --- a/drivers/phy/qcom/phy-qcom-usb-hs-28nm.c
-> +++ b/drivers/phy/qcom/phy-qcom-usb-hs-28nm.c
-> @@ -5,7 +5,6 @@
->    * Based on Linux driver
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <generic-phy.h>
->   #include <reset.h>
-> diff --git a/drivers/phy/qcom/phy-qcom-usb-ss.c b/drivers/phy/qcom/phy-qcom-usb-ss.c
-> index 1b03a3c43dc8..270d09d883c4 100644
-> --- a/drivers/phy/qcom/phy-qcom-usb-ss.c
-> +++ b/drivers/phy/qcom/phy-qcom-usb-ss.c
-> @@ -5,7 +5,6 @@
->    * Based on Linux driver
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <generic-phy.h>
->   #include <linux/bitops.h>
-> diff --git a/drivers/phy/renesas/r8a779f0-ether-serdes.c b/drivers/phy/renesas/r8a779f0-ether-serdes.c
-> index bd1fdd3a667d..40284ef2fd34 100644
-> --- a/drivers/phy/renesas/r8a779f0-ether-serdes.c
-> +++ b/drivers/phy/renesas/r8a779f0-ether-serdes.c
-> @@ -7,7 +7,6 @@
+>   #include <errno.h>
 >   #include <asm/io.h>
->   #include <clk-uclass.h>
->   #include <clk.h>
-> -#include <common.h>
->   #include <div64.h>
->   #include <dm.h>
->   #include <dm/device_compat.h>
-> diff --git a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
-> index 9ca66bf8db92..3ad339bccc1d 100644
-> --- a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
-> +++ b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
+> diff --git a/drivers/pinctrl/exynos/pinctrl-exynos7420.c b/drivers/pinctrl/exynos/pinctrl-exynos7420.c
+> index 77d510d8f600..8fdf60715a53 100644
+> --- a/drivers/pinctrl/exynos/pinctrl-exynos7420.c
+> +++ b/drivers/pinctrl/exynos/pinctrl-exynos7420.c
 > @@ -5,7 +5,6 @@
->    * Copyright (C) 2021 Rockchip Electronics Co., Ltd.
+>    * Thomas Abraham <thomas.ab@samsung.com>
 >    */
 >   
 > -#include <common.h>
->   #include <clk.h>
 >   #include <dm.h>
->   #include <dm/lists.h>
-> diff --git a/drivers/phy/rockchip/phy-rockchip-pcie.c b/drivers/phy/rockchip/phy-rockchip-pcie.c
-> index 44ca4bc7919e..660037034ec0 100644
-> --- a/drivers/phy/rockchip/phy-rockchip-pcie.c
-> +++ b/drivers/phy/rockchip/phy-rockchip-pcie.c
-> @@ -7,7 +7,6 @@
->    * Copyright (C) 2016 ROCKCHIP, Inc.
+>   #include <errno.h>
+>   #include <asm/io.h>
+> diff --git a/drivers/pinctrl/exynos/pinctrl-exynos78x0.c b/drivers/pinctrl/exynos/pinctrl-exynos78x0.c
+> index 1b696fdfd288..61b98443daf3 100644
+> --- a/drivers/pinctrl/exynos/pinctrl-exynos78x0.c
+> +++ b/drivers/pinctrl/exynos/pinctrl-exynos78x0.c
+> @@ -9,7 +9,6 @@
+>    * Thomas Abraham <thomas.ab@samsung.com>
 >    */
 >   
 > -#include <common.h>
->   #include <clk.h>
 >   #include <dm.h>
->   #include <asm/global_data.h>
-> diff --git a/drivers/phy/rockchip/phy-rockchip-snps-pcie3.c b/drivers/phy/rockchip/phy-rockchip-snps-pcie3.c
-> index a4392daf4c92..2737bd81dd96 100644
-> --- a/drivers/phy/rockchip/phy-rockchip-snps-pcie3.c
-> +++ b/drivers/phy/rockchip/phy-rockchip-snps-pcie3.c
-> @@ -5,7 +5,6 @@
->    * Copyright (C) 2021 Rockchip Electronics Co., Ltd.
->    */
+>   #include <errno.h>
+>   #include <asm/io.h>
+> diff --git a/drivers/pinctrl/intel/pinctrl.c b/drivers/pinctrl/intel/pinctrl.c
+> index 1607000dedc1..6cfe83a593a2 100644
+> --- a/drivers/pinctrl/intel/pinctrl.c
+> +++ b/drivers/pinctrl/intel/pinctrl.c
+> @@ -16,7 +16,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_GPIO
 >   
 > -#include <common.h>
->   #include <clk.h>
 >   #include <dm.h>
->   #include <generic-phy.h>
-> diff --git a/drivers/phy/rockchip/phy-rockchip-typec.c b/drivers/phy/rockchip/phy-rockchip-typec.c
-> index 47c69dd6c453..c7459dbc5fc6 100644
-> --- a/drivers/phy/rockchip/phy-rockchip-typec.c
-> +++ b/drivers/phy/rockchip/phy-rockchip-typec.c
+>   #include <irq.h>
+>   #include <log.h>
+> diff --git a/drivers/pinctrl/intel/pinctrl_apl.c b/drivers/pinctrl/intel/pinctrl_apl.c
+> index 181a6ff27026..e554d2854353 100644
+> --- a/drivers/pinctrl/intel/pinctrl_apl.c
+> +++ b/drivers/pinctrl/intel/pinctrl_apl.c
 > @@ -8,7 +8,6 @@
->    *         Kever Yang <kever.yang@rock-chips.com>
+>   
+>   #define LOG_CATEGORY UCLASS_GPIO
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dt-structs.h>
+>   #include <log.h>
+> diff --git a/drivers/pinctrl/mediatek/pinctrl-mtk-common.c b/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
+> index 0baef57c1c2f..37fc28bb7790 100644
+> --- a/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
+> +++ b/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
+> @@ -4,7 +4,6 @@
+>    * Author: Ryder Lee <ryder.lee@mediatek.com>
 >    */
 >   
 > -#include <common.h>
->   #include <clk.h>
+>   #include <dm.h>
+>   #include <dm/device-internal.h>
+>   #include <dm/lists.h>
+> diff --git a/drivers/pinctrl/meson/pinctrl-meson-a1.c b/drivers/pinctrl/meson/pinctrl-meson-a1.c
+> index 30cf3bc0be4e..7e9ac6390b1e 100644
+> --- a/drivers/pinctrl/meson/pinctrl-meson-a1.c
+> +++ b/drivers/pinctrl/meson/pinctrl-meson-a1.c
+> @@ -6,7 +6,6 @@
+>    * Author: Igor Prusov <ivprusov@sberdevices.ru>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   #include <dt-bindings/gpio/meson-a1-gpio.h>
+> diff --git a/drivers/pinctrl/meson/pinctrl-meson-axg-pmx.c b/drivers/pinctrl/meson/pinctrl-meson-axg-pmx.c
+> index cfe94cf9e17d..52c726cf038e 100644
+> --- a/drivers/pinctrl/meson/pinctrl-meson-axg-pmx.c
+> +++ b/drivers/pinctrl/meson/pinctrl-meson-axg-pmx.c
+> @@ -6,7 +6,6 @@
+>   
+>   #include <log.h>
+>   #include <asm/gpio.h>
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   #include <linux/io.h>
+> diff --git a/drivers/pinctrl/meson/pinctrl-meson-axg.c b/drivers/pinctrl/meson/pinctrl-meson-axg.c
+> index 820a6c9bb1aa..94e09cd3f8a2 100644
+> --- a/drivers/pinctrl/meson/pinctrl-meson-axg.c
+> +++ b/drivers/pinctrl/meson/pinctrl-meson-axg.c
+> @@ -7,7 +7,6 @@
+>    *  Author: Xingyu Chen <xingyu.chen@amlogic.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   #include <dt-bindings/gpio/meson-axg-gpio.h>
+> diff --git a/drivers/pinctrl/meson/pinctrl-meson-g12a.c b/drivers/pinctrl/meson/pinctrl-meson-g12a.c
+> index 90a4f8056cdb..24f47f825582 100644
+> --- a/drivers/pinctrl/meson/pinctrl-meson-g12a.c
+> +++ b/drivers/pinctrl/meson/pinctrl-meson-g12a.c
+> @@ -8,7 +8,6 @@
+>    * Author: Yixun Lan <yixun.lan@amlogic.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   #include <dt-bindings/gpio/meson-g12a-gpio.h>
+> diff --git a/drivers/pinctrl/meson/pinctrl-meson-gx-pmx.c b/drivers/pinctrl/meson/pinctrl-meson-gx-pmx.c
+> index 99502d89c6c0..396b3a0e842e 100644
+> --- a/drivers/pinctrl/meson/pinctrl-meson-gx-pmx.c
+> +++ b/drivers/pinctrl/meson/pinctrl-meson-gx-pmx.c
+> @@ -5,7 +5,6 @@
+>   
+>   #include <log.h>
+>   #include <asm/gpio.h>
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   #include <linux/bitops.h>
+> diff --git a/drivers/pinctrl/meson/pinctrl-meson-gxbb.c b/drivers/pinctrl/meson/pinctrl-meson-gxbb.c
+> index 93a895c9fa7f..03ae1f9f8a5d 100644
+> --- a/drivers/pinctrl/meson/pinctrl-meson-gxbb.c
+> +++ b/drivers/pinctrl/meson/pinctrl-meson-gxbb.c
+> @@ -6,7 +6,6 @@
+>    *   Copyright (C) 2016 Endless Mobile, Inc.
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   #include <dt-bindings/gpio/meson-gxbb-gpio.h>
+> diff --git a/drivers/pinctrl/meson/pinctrl-meson-gxl.c b/drivers/pinctrl/meson/pinctrl-meson-gxl.c
+> index a44145e2d4e8..16517f95ddbf 100644
+> --- a/drivers/pinctrl/meson/pinctrl-meson-gxl.c
+> +++ b/drivers/pinctrl/meson/pinctrl-meson-gxl.c
+> @@ -6,7 +6,6 @@
+>    *   Copyright (C) 2016 Endless Mobile, Inc.
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   #include <dt-bindings/gpio/meson-gxl-gpio.h>
+> diff --git a/drivers/pinctrl/meson/pinctrl-meson.c b/drivers/pinctrl/meson/pinctrl-meson.c
+> index ee362d8464fc..babf1bccc969 100644
+> --- a/drivers/pinctrl/meson/pinctrl-meson.c
+> +++ b/drivers/pinctrl/meson/pinctrl-meson.c
+> @@ -3,7 +3,6 @@
+>    * (C) Copyright 2016 - Beniamino Galvani <b.galvani@gmail.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <malloc.h>
+> diff --git a/drivers/pinctrl/mscc/mscc-common.c b/drivers/pinctrl/mscc/mscc-common.c
+> index 307ed1db8750..2af5587ec47a 100644
+> --- a/drivers/pinctrl/mscc/mscc-common.c
+> +++ b/drivers/pinctrl/mscc/mscc-common.c
+> @@ -10,7 +10,6 @@
+>   
+>   #include <asm/gpio.h>
+>   #include <asm/system.h>
+> -#include <common.h>
+>   #include <config.h>
+>   #include <dm.h>
+>   #include <dm/device-internal.h>
+> diff --git a/drivers/pinctrl/mscc/pinctrl-jr2.c b/drivers/pinctrl/mscc/pinctrl-jr2.c
+> index cb340581cc0f..4ef4040cd702 100644
+> --- a/drivers/pinctrl/mscc/pinctrl-jr2.c
+> +++ b/drivers/pinctrl/mscc/pinctrl-jr2.c
+> @@ -6,7 +6,6 @@
+>    * Copyright (c) 2018 Microsemi Corporation
+>    */
+>   
+> -#include <common.h>
+>   #include <config.h>
+>   #include <dm.h>
+>   #include <dm/device-internal.h>
+> diff --git a/drivers/pinctrl/mscc/pinctrl-luton.c b/drivers/pinctrl/mscc/pinctrl-luton.c
+> index 325c9a9705b2..7707350aace6 100644
+> --- a/drivers/pinctrl/mscc/pinctrl-luton.c
+> +++ b/drivers/pinctrl/mscc/pinctrl-luton.c
+> @@ -7,7 +7,6 @@
+>    * Copyright (c) 2018 Microsemi Corporation
+>    */
+>   
+> -#include <common.h>
+>   #include <config.h>
+>   #include <dm.h>
+>   #include <dm/device-internal.h>
+> diff --git a/drivers/pinctrl/mscc/pinctrl-ocelot.c b/drivers/pinctrl/mscc/pinctrl-ocelot.c
+> index 57e2ef0d7c16..826388c2f746 100644
+> --- a/drivers/pinctrl/mscc/pinctrl-ocelot.c
+> +++ b/drivers/pinctrl/mscc/pinctrl-ocelot.c
+> @@ -10,7 +10,6 @@
+>   
+>   #include <asm/gpio.h>
+>   #include <asm/system.h>
+> -#include <common.h>
+>   #include <config.h>
+>   #include <dm.h>
+>   #include <dm/device-internal.h>
+> diff --git a/drivers/pinctrl/mscc/pinctrl-serval.c b/drivers/pinctrl/mscc/pinctrl-serval.c
+> index a6b9796df81f..2081cd6750c8 100644
+> --- a/drivers/pinctrl/mscc/pinctrl-serval.c
+> +++ b/drivers/pinctrl/mscc/pinctrl-serval.c
+> @@ -6,7 +6,6 @@
+>    * Copyright (c) 2019 Microsemi Corporation
+>    */
+>   
+> -#include <common.h>
+>   #include <config.h>
+>   #include <dm.h>
+>   #include <dm/device-internal.h>
+> diff --git a/drivers/pinctrl/mscc/pinctrl-servalt.c b/drivers/pinctrl/mscc/pinctrl-servalt.c
+> index 8e8678580db1..efa4e26d9f72 100644
+> --- a/drivers/pinctrl/mscc/pinctrl-servalt.c
+> +++ b/drivers/pinctrl/mscc/pinctrl-servalt.c
+> @@ -6,7 +6,6 @@
+>    * Copyright (c) 2019 Microsemi Corporation
+>    */
+>   
+> -#include <common.h>
+>   #include <config.h>
+>   #include <dm.h>
+>   #include <dm/device-internal.h>
+> diff --git a/drivers/pinctrl/mtmips/pinctrl-mt7628.c b/drivers/pinctrl/mtmips/pinctrl-mt7628.c
+> index 79c63c7caec6..dc7acec4a77f 100644
+> --- a/drivers/pinctrl/mtmips/pinctrl-mt7628.c
+> +++ b/drivers/pinctrl/mtmips/pinctrl-mt7628.c
+> @@ -5,7 +5,6 @@
+>    * Author: Weijie Gao <weijie.gao@mediatek.com>
+>    */
+>   
+> -#include <common.h>
 >   #include <dm.h>
 >   #include <asm/global_data.h>
-> diff --git a/drivers/phy/rockchip/phy-rockchip-usbdp.c b/drivers/phy/rockchip/phy-rockchip-usbdp.c
-> index baf92529348c..5bcc76613d14 100644
-> --- a/drivers/phy/rockchip/phy-rockchip-usbdp.c
-> +++ b/drivers/phy/rockchip/phy-rockchip-usbdp.c
+>   #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/mtmips/pinctrl-mtmips-common.c b/drivers/pinctrl/mtmips/pinctrl-mtmips-common.c
+> index 869b78106851..bab34e97b615 100644
+> --- a/drivers/pinctrl/mtmips/pinctrl-mtmips-common.c
+> +++ b/drivers/pinctrl/mtmips/pinctrl-mtmips-common.c
 > @@ -5,7 +5,6 @@
->    * Copyright (C) 2021 Rockchip Electronics Co., Ltd
+>    * Author: Weijie Gao <weijie.gao@mediatek.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <malloc.h>
+>   #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/mvebu/pinctrl-armada-37xx.c b/drivers/pinctrl/mvebu/pinctrl-armada-37xx.c
+> index e834dddfd137..64036296e24d 100644
+> --- a/drivers/pinctrl/mvebu/pinctrl-armada-37xx.c
+> +++ b/drivers/pinctrl/mvebu/pinctrl-armada-37xx.c
+> @@ -16,7 +16,6 @@
+>    * https://spdx.org/licenses
+>    */
+>   
+> -#include <common.h>
+>   #include <config.h>
+>   #include <dm.h>
+>   #include <malloc.h>
+> diff --git a/drivers/pinctrl/mvebu/pinctrl-armada-38x.c b/drivers/pinctrl/mvebu/pinctrl-armada-38x.c
+> index 252151f3e5d9..78184d2860a8 100644
+> --- a/drivers/pinctrl/mvebu/pinctrl-armada-38x.c
+> +++ b/drivers/pinctrl/mvebu/pinctrl-armada-38x.c
+> @@ -1,7 +1,6 @@
+>   // SPDX-License-Identifier: GPL-2.0-or-later
+>   // (C) 2022 Pali Rohár <pali@kernel.org>
+>   
+> -#include <common.h>
+>   #include <config.h>
+>   #include <dm.h>
+>   #include <dm/devres.h>
+> diff --git a/drivers/pinctrl/mvebu/pinctrl-mvebu.c b/drivers/pinctrl/mvebu/pinctrl-mvebu.c
+> index fd49a97b5b0a..0d5fa4ceb9ca 100644
+> --- a/drivers/pinctrl/mvebu/pinctrl-mvebu.c
+> +++ b/drivers/pinctrl/mvebu/pinctrl-mvebu.c
+> @@ -4,7 +4,6 @@
+>    * https://spdx.org/licenses
+>    */
+>   
+> -#include <common.h>
+>   #include <config.h>
+>   #include <fdtdec.h>
+>   #include <errno.h>
+> diff --git a/drivers/pinctrl/nexell/pinctrl-nexell.c b/drivers/pinctrl/nexell/pinctrl-nexell.c
+> index 20497a746d26..d5be7baf50dd 100644
+> --- a/drivers/pinctrl/nexell/pinctrl-nexell.c
+> +++ b/drivers/pinctrl/nexell/pinctrl-nexell.c
+> @@ -5,7 +5,6 @@
+>    * Bongyu, KOO <freestyle@nexell.co.kr>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <errno.h>
+>   #include <asm/global_data.h>
+> diff --git a/drivers/pinctrl/nexell/pinctrl-s5pxx18.c b/drivers/pinctrl/nexell/pinctrl-s5pxx18.c
+> index 863eb1455d23..e7d0994f29e7 100644
+> --- a/drivers/pinctrl/nexell/pinctrl-s5pxx18.c
+> +++ b/drivers/pinctrl/nexell/pinctrl-s5pxx18.c
+> @@ -7,7 +7,6 @@
+>    * (C) Copyright 2019 Stefan Bosch <stefan_b@posteo.net>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <errno.h>
+>   #include <asm/global_data.h>
+> diff --git a/drivers/pinctrl/nxp/pinctrl-imx.c b/drivers/pinctrl/nxp/pinctrl-imx.c
+> index 1596dcc4747e..ff466c491041 100644
+> --- a/drivers/pinctrl/nxp/pinctrl-imx.c
+> +++ b/drivers/pinctrl/nxp/pinctrl-imx.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (C) 2016 Peng Fan <van.freenix@gmail.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <malloc.h>
+>   #include <mapmem.h>
+>   #include <asm/global_data.h>
+> diff --git a/drivers/pinctrl/nxp/pinctrl-imx5.c b/drivers/pinctrl/nxp/pinctrl-imx5.c
+> index b32b748cfc63..6b690fdce8fd 100644
+> --- a/drivers/pinctrl/nxp/pinctrl-imx5.c
+> +++ b/drivers/pinctrl/nxp/pinctrl-imx5.c
+> @@ -4,7 +4,6 @@
+>    * Copyright (C) 2016 Peng Fan <van.freenix@gmail.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   
+> diff --git a/drivers/pinctrl/nxp/pinctrl-imx6.c b/drivers/pinctrl/nxp/pinctrl-imx6.c
+> index 6994dbb61a3d..322eec87ff5d 100644
+> --- a/drivers/pinctrl/nxp/pinctrl-imx6.c
+> +++ b/drivers/pinctrl/nxp/pinctrl-imx6.c
+> @@ -4,7 +4,6 @@
+>    * Copyright (C) 2016 Peng Fan <van.freenix@gmail.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   
+> diff --git a/drivers/pinctrl/nxp/pinctrl-imx7.c b/drivers/pinctrl/nxp/pinctrl-imx7.c
+> index 77ddb8e0b9d5..a8275e26456b 100644
+> --- a/drivers/pinctrl/nxp/pinctrl-imx7.c
+> +++ b/drivers/pinctrl/nxp/pinctrl-imx7.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (C) 2016 Peng Fan <van.freenix@gmail.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   
+> diff --git a/drivers/pinctrl/nxp/pinctrl-imx7ulp.c b/drivers/pinctrl/nxp/pinctrl-imx7ulp.c
+> index 6da9ff7c5bce..7ea2dbe7d36b 100644
+> --- a/drivers/pinctrl/nxp/pinctrl-imx7ulp.c
+> +++ b/drivers/pinctrl/nxp/pinctrl-imx7ulp.c
+> @@ -5,7 +5,6 @@
+>    * Peng Fan <peng.fan@nxp.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   
+> diff --git a/drivers/pinctrl/nxp/pinctrl-imx8.c b/drivers/pinctrl/nxp/pinctrl-imx8.c
+> index 46af44ecb1f2..4e9a9ea68086 100644
+> --- a/drivers/pinctrl/nxp/pinctrl-imx8.c
+> +++ b/drivers/pinctrl/nxp/pinctrl-imx8.c
+> @@ -3,7 +3,6 @@
+>    * Copyright 2018 NXP
+>    */
+>   
+> -#include <common.h>
+>   #include <asm/global_data.h>
+>   #include <dm/device.h>
+>   #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/nxp/pinctrl-imx8ulp.c b/drivers/pinctrl/nxp/pinctrl-imx8ulp.c
+> index 4e8fa08bc6e3..73d3c009d5b6 100644
+> --- a/drivers/pinctrl/nxp/pinctrl-imx8ulp.c
+> +++ b/drivers/pinctrl/nxp/pinctrl-imx8ulp.c
+> @@ -4,7 +4,6 @@
+>    *
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   
+> diff --git a/drivers/pinctrl/nxp/pinctrl-imxrt.c b/drivers/pinctrl/nxp/pinctrl-imxrt.c
+> index 53b70da869ec..23f07f8d1e05 100644
+> --- a/drivers/pinctrl/nxp/pinctrl-imxrt.c
+> +++ b/drivers/pinctrl/nxp/pinctrl-imxrt.c
+> @@ -4,7 +4,6 @@
+>    * Author(s): Giulio Benetti <giulio.benetti@benettiengineering.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   
+> diff --git a/drivers/pinctrl/nxp/pinctrl-mxs.c b/drivers/pinctrl/nxp/pinctrl-mxs.c
+> index eb90e28d4b21..85ab5fdf6404 100644
+> --- a/drivers/pinctrl/nxp/pinctrl-mxs.c
+> +++ b/drivers/pinctrl/nxp/pinctrl-mxs.c
+> @@ -4,7 +4,6 @@
+>    * Lukasz Majewski, DENX Software Engineering, lukma@denx.de
+>    */
+>   
+> -#include <common.h>
+>   #include <log.h>
+>   #include <asm/global_data.h>
+>   #include <dm/device_compat.h>
+> diff --git a/drivers/pinctrl/nxp/pinctrl-scu.c b/drivers/pinctrl/nxp/pinctrl-scu.c
+> index 4959834c0fcd..42d5c96468c7 100644
+> --- a/drivers/pinctrl/nxp/pinctrl-scu.c
+> +++ b/drivers/pinctrl/nxp/pinctrl-scu.c
+> @@ -3,7 +3,6 @@
+>    * Copyright 2018-2019 NXP
+>    */
+>   
+> -#include <common.h>
+>   #include <errno.h>
+>   #include <linux/bitops.h>
+>   #include <asm/io.h>
+> diff --git a/drivers/pinctrl/nxp/pinctrl-vf610.c b/drivers/pinctrl/nxp/pinctrl-vf610.c
+> index 14e2e9d3ee61..adf3073f1be0 100644
+> --- a/drivers/pinctrl/nxp/pinctrl-vf610.c
+> +++ b/drivers/pinctrl/nxp/pinctrl-vf610.c
+> @@ -4,7 +4,6 @@
+>    * Lukasz Majewski, DENX Software Engineering, lukma@denx.de
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   
+> diff --git a/drivers/pinctrl/pinctrl-apple.c b/drivers/pinctrl/pinctrl-apple.c
+> index 62476358c349..f373afde58e4 100644
+> --- a/drivers/pinctrl/pinctrl-apple.c
+> +++ b/drivers/pinctrl/pinctrl-apple.c
+> @@ -3,7 +3,6 @@
+>    * (C) Copyright 2021 Mark Kettenis <kettenis@openbsd.org>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/device-internal.h>
+>   #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/pinctrl-at91-pio4.c b/drivers/pinctrl/pinctrl-at91-pio4.c
+> index 84b398619c47..c697a4c3456a 100644
+> --- a/drivers/pinctrl/pinctrl-at91-pio4.c
+> +++ b/drivers/pinctrl/pinctrl-at91-pio4.c
+> @@ -6,7 +6,6 @@
+>    *               Wenyou.Yang <wenyou.yang@atmel.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <asm/global_data.h>
+>   #include <dm/device-internal.h>
+> diff --git a/drivers/pinctrl/pinctrl-at91.c b/drivers/pinctrl/pinctrl-at91.c
+> index b7aab12f11c1..5038cb535e38 100644
+> --- a/drivers/pinctrl/pinctrl-at91.c
+> +++ b/drivers/pinctrl/pinctrl-at91.c
+> @@ -6,7 +6,6 @@
+>    *               Wenyou.Yang <wenyou.yang@atmel.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <asm/global_data.h>
+> diff --git a/drivers/pinctrl/pinctrl-generic.c b/drivers/pinctrl/pinctrl-generic.c
+> index 8909b57810af..2464acf0b854 100644
+> --- a/drivers/pinctrl/pinctrl-generic.c
+> +++ b/drivers/pinctrl/pinctrl-generic.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (C) 2015  Masahiro Yamada <yamada.masahiro@socionext.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/device_compat.h>
+>   #include <linux/compat.h>
+> diff --git a/drivers/pinctrl/pinctrl-k210.c b/drivers/pinctrl/pinctrl-k210.c
+> index ee35dfe14203..dad036610c9e 100644
+> --- a/drivers/pinctrl/pinctrl-k210.c
+> +++ b/drivers/pinctrl/pinctrl-k210.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (C) 2020 Sean Anderson <seanga2@gmail.com>
 >    */
 >   
 > -#include <common.h>
 >   #include <clk.h>
 >   #include <dm.h>
+>   #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/pinctrl-qe-io.c b/drivers/pinctrl/pinctrl-qe-io.c
+> index dc0be7ce3bd6..61db9274cc3e 100644
+> --- a/drivers/pinctrl/pinctrl-qe-io.c
+> +++ b/drivers/pinctrl/pinctrl-qe-io.c
+> @@ -6,7 +6,6 @@
+>    * based on source code of Shlomi Gridish
+>    */
+>   
+> -#include <common.h>
+>   #include <linux/errno.h>
+>   #include <asm/io.h>
+>   #include <asm/immap_83xx.h>
+> diff --git a/drivers/pinctrl/pinctrl-sandbox.c b/drivers/pinctrl/pinctrl-sandbox.c
+> index 776597745099..a5d056643a0f 100644
+> --- a/drivers/pinctrl/pinctrl-sandbox.c
+> +++ b/drivers/pinctrl/pinctrl-sandbox.c
+> @@ -4,7 +4,6 @@
+>    * Copyright (C) 2015 Masahiro Yamada <yamada.masahiro@socionext.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   #include <dt-bindings/pinctrl/sandbox-pinmux.h>
+> diff --git a/drivers/pinctrl/pinctrl-single.c b/drivers/pinctrl/pinctrl-single.c
+> index d1db377c1379..a3802d22d4f9 100644
+> --- a/drivers/pinctrl/pinctrl-single.c
+> +++ b/drivers/pinctrl/pinctrl-single.c
+> @@ -4,7 +4,6 @@
+>    * Copyright (C) 2021 Dario Binacchi <dariobin@libero.it>
+>    */
+>   
+> -#include <common.h>
+>   #include <mapmem.h>
+>   #include <dm.h>
 >   #include <dm/device_compat.h>
-> diff --git a/drivers/phy/sandbox-phy.c b/drivers/phy/sandbox-phy.c
-> index 7e123da25fb4..b159147a765b 100644
-> --- a/drivers/phy/sandbox-phy.c
-> +++ b/drivers/phy/sandbox-phy.c
-> @@ -4,7 +4,6 @@
->    * Written by Jean-Jacques Hiblot  <jjhiblot@ti.com>
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <generic-phy.h>
->   
-> diff --git a/drivers/phy/socionext/phy-uniphier-pcie.c b/drivers/phy/socionext/phy-uniphier-pcie.c
-> index d352c4ca3a9c..91208dfe1200 100644
-> --- a/drivers/phy/socionext/phy-uniphier-pcie.c
-> +++ b/drivers/phy/socionext/phy-uniphier-pcie.c
-> @@ -4,7 +4,6 @@
->    * Copyright 2019-2021 Socionext, Inc.
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <generic-phy.h>
->   #include <linux/bitops.h>
-> diff --git a/drivers/phy/socionext/phy-uniphier-usb3.c b/drivers/phy/socionext/phy-uniphier-usb3.c
-> index 1d65b0b08f76..1d65c1f7da52 100644
-> --- a/drivers/phy/socionext/phy-uniphier-usb3.c
-> +++ b/drivers/phy/socionext/phy-uniphier-usb3.c
-> @@ -4,7 +4,6 @@
->    * Copyright 2019-2023 Socionext, Inc.
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <generic-phy.h>
->   
-> diff --git a/drivers/phy/sti_usb_phy.c b/drivers/phy/sti_usb_phy.c
-> index 9e5ac9bfde67..2447e89f50df 100644
-> --- a/drivers/phy/sti_usb_phy.c
-> +++ b/drivers/phy/sti_usb_phy.c
-> @@ -4,7 +4,6 @@
+> diff --git a/drivers/pinctrl/pinctrl-sti.c b/drivers/pinctrl/pinctrl-sti.c
+> index 1ff7ea005551..4996b69d9afb 100644
+> --- a/drivers/pinctrl/pinctrl-sti.c
+> +++ b/drivers/pinctrl/pinctrl-sti.c
+> @@ -6,7 +6,6 @@
 >    * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
 >    */
 >   
 > -#include <common.h>
+>   #include <bitfield.h>
+>   #include <dm.h>
+>   #include <errno.h>
+> diff --git a/drivers/pinctrl/pinctrl-stmfx.c b/drivers/pinctrl/pinctrl-stmfx.c
+> index 509e2a80e9a5..61f335c4eb14 100644
+> --- a/drivers/pinctrl/pinctrl-stmfx.c
+> +++ b/drivers/pinctrl/pinctrl-stmfx.c
+> @@ -8,7 +8,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_PINCTRL
+>   
+> -#include <common.h>
+>   #include <dm.h>
 >   #include <log.h>
+>   #include <i2c.h>
+> diff --git a/drivers/pinctrl/pinctrl-uclass.c b/drivers/pinctrl/pinctrl-uclass.c
+> index fe2ba5021a78..d9bda7494e23 100644
+> --- a/drivers/pinctrl/pinctrl-uclass.c
+> +++ b/drivers/pinctrl/pinctrl-uclass.c
+> @@ -5,7 +5,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_PINCTRL
+>   
+> -#include <common.h>
+>   #include <malloc.h>
 >   #include <asm/global_data.h>
->   #include <asm/io.h>
-> diff --git a/drivers/phy/ti-pipe3-phy.c b/drivers/phy/ti-pipe3-phy.c
-> index 29a35ae5ffb9..62f6cc2bfbfd 100644
-> --- a/drivers/phy/ti-pipe3-phy.c
-> +++ b/drivers/phy/ti-pipe3-phy.c
-> @@ -4,7 +4,6 @@
->    * Written by Jean-Jacques Hiblot  <jjhiblot@ti.com>
+>   #include <dm/device_compat.h>
+> diff --git a/drivers/pinctrl/pinctrl-zynqmp.c b/drivers/pinctrl/pinctrl-zynqmp.c
+> index eb17a4290b7d..6fa203a3b861 100644
+> --- a/drivers/pinctrl/pinctrl-zynqmp.c
+> +++ b/drivers/pinctrl/pinctrl-zynqmp.c
+> @@ -8,7 +8,6 @@
+>    * Copyright (C) 2021 Xilinx, Inc. All rights reserved.
 >    */
 >   
 > -#include <common.h>
 >   #include <dm.h>
->   #include <dm/device.h>
->   #include <generic-phy.h>
-> diff --git a/drivers/phy/ti/phy-j721e-wiz.c b/drivers/phy/ti/phy-j721e-wiz.c
-> index daf62f5deda0..c69a342e2b49 100644
-> --- a/drivers/phy/ti/phy-j721e-wiz.c
-> +++ b/drivers/phy/ti/phy-j721e-wiz.c
+>   #include <errno.h>
+>   #include <malloc.h>
+> diff --git a/drivers/pinctrl/pinctrl_pic32.c b/drivers/pinctrl/pinctrl_pic32.c
+> index 54d97ac0ae37..9f38b56e9c0e 100644
+> --- a/drivers/pinctrl/pinctrl_pic32.c
+> +++ b/drivers/pinctrl/pinctrl_pic32.c
 > @@ -4,7 +4,6 @@
->    * Jean-Jacques Hiblot <jjhiblot@ti.com>
+>    * Copyright (c) 2015 Microchip Technology Inc.
+>    * Written by Purna Chandra Mandal <purna.mandal@microchip.com>
+>    */
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <errno.h>
+>   #include <log.h>
+> diff --git a/drivers/pinctrl/pinctrl_stm32.c b/drivers/pinctrl/pinctrl_stm32.c
+> index 7120b8edba00..eada1001240c 100644
+> --- a/drivers/pinctrl/pinctrl_stm32.c
+> +++ b/drivers/pinctrl/pinctrl_stm32.c
+> @@ -5,7 +5,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_PINCTRL
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <hwspinlock.h>
+>   #include <log.h>
+> diff --git a/drivers/pinctrl/qcom/pinctrl-apq8016.c b/drivers/pinctrl/qcom/pinctrl-apq8016.c
+> index b14a8921af4f..0c7437822ff2 100644
+> --- a/drivers/pinctrl/qcom/pinctrl-apq8016.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-apq8016.c
+> @@ -6,7 +6,6 @@
+>    *
 >    */
 >   
 > -#include <common.h>
->   #include <clk-uclass.h>
+>   #include <dm.h>
+>   
+>   #include "pinctrl-qcom.h"
+> diff --git a/drivers/pinctrl/qcom/pinctrl-apq8096.c b/drivers/pinctrl/qcom/pinctrl-apq8096.c
+> index 9697cb5beb7a..132ece868bf2 100644
+> --- a/drivers/pinctrl/qcom/pinctrl-apq8096.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-apq8096.c
+> @@ -6,7 +6,6 @@
+>    *
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   
+>   #include "pinctrl-qcom.h"
+> diff --git a/drivers/pinctrl/qcom/pinctrl-ipq4019.c b/drivers/pinctrl/qcom/pinctrl-ipq4019.c
+> index 26ab487857fe..3215c677b263 100644
+> --- a/drivers/pinctrl/qcom/pinctrl-ipq4019.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-ipq4019.c
+> @@ -7,7 +7,6 @@
+>    * Author: Robert Marko <robert.marko@sartura.hr>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   
+>   #include "pinctrl-qcom.h"
+> diff --git a/drivers/pinctrl/qcom/pinctrl-qcom.c b/drivers/pinctrl/qcom/pinctrl-qcom.c
+> index e68971b37ff0..3c3336e76358 100644
+> --- a/drivers/pinctrl/qcom/pinctrl-qcom.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-qcom.c
+> @@ -6,7 +6,6 @@
+>    *
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <errno.h>
+>   #include <asm/io.h>
+> diff --git a/drivers/pinctrl/qcom/pinctrl-qcs404.c b/drivers/pinctrl/qcom/pinctrl-qcs404.c
+> index 4b7c670c90b7..fb6defaeddf0 100644
+> --- a/drivers/pinctrl/qcom/pinctrl-qcs404.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-qcs404.c
+> @@ -5,7 +5,6 @@
+>    * (C) Copyright 2022 Sumit Garg <sumit.garg@linaro.org>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   
+>   #include "pinctrl-qcom.h"
+> diff --git a/drivers/pinctrl/qcom/pinctrl-sdm845.c b/drivers/pinctrl/qcom/pinctrl-sdm845.c
+> index c1e5cc01fded..f1a23f510999 100644
+> --- a/drivers/pinctrl/qcom/pinctrl-sdm845.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-sdm845.c
+> @@ -7,7 +7,6 @@
+>    *
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   
+>   #include "pinctrl-qcom.h"
+> diff --git a/drivers/pinctrl/rockchip/pinctrl-px30.c b/drivers/pinctrl/rockchip/pinctrl-px30.c
+> index 2c35491b24d8..cc7885bae408 100644
+> --- a/drivers/pinctrl/rockchip/pinctrl-px30.c
+> +++ b/drivers/pinctrl/rockchip/pinctrl-px30.c
+> @@ -3,7 +3,6 @@
+>    * (C) Copyright 2019 Rockchip Electronics Co., Ltd
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3036.c b/drivers/pinctrl/rockchip/pinctrl-rk3036.c
+> index afcd34396e27..b14386ccd937 100644
+> --- a/drivers/pinctrl/rockchip/pinctrl-rk3036.c
+> +++ b/drivers/pinctrl/rockchip/pinctrl-rk3036.c
+> @@ -3,7 +3,6 @@
+>    * (C) Copyright 2019 Rockchip Electronics Co., Ltd
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   #include <regmap.h>
+> diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3066.c b/drivers/pinctrl/rockchip/pinctrl-rk3066.c
+> index 598b63223e36..60e088a9a6f0 100644
+> --- a/drivers/pinctrl/rockchip/pinctrl-rk3066.c
+> +++ b/drivers/pinctrl/rockchip/pinctrl-rk3066.c
+> @@ -3,7 +3,6 @@
+>    * (C) Copyright 2021 Rockchip Electronics Co., Ltd
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   #include <regmap.h>
+> diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3128.c b/drivers/pinctrl/rockchip/pinctrl-rk3128.c
+> index 355c45eb7f8c..d00fc3da8b23 100644
+> --- a/drivers/pinctrl/rockchip/pinctrl-rk3128.c
+> +++ b/drivers/pinctrl/rockchip/pinctrl-rk3128.c
+> @@ -3,7 +3,6 @@
+>    * (C) Copyright 2019 Rockchip Electronics Co., Ltd
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   #include <regmap.h>
+> diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3188.c b/drivers/pinctrl/rockchip/pinctrl-rk3188.c
+> index 9a982cbfad9c..83db51f66ae4 100644
+> --- a/drivers/pinctrl/rockchip/pinctrl-rk3188.c
+> +++ b/drivers/pinctrl/rockchip/pinctrl-rk3188.c
+> @@ -3,7 +3,6 @@
+>    * (C) Copyright 2019 Rockchip Electronics Co., Ltd
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/rockchip/pinctrl-rk322x.c b/drivers/pinctrl/rockchip/pinctrl-rk322x.c
+> index 351406da2d45..b804597c0484 100644
+> --- a/drivers/pinctrl/rockchip/pinctrl-rk322x.c
+> +++ b/drivers/pinctrl/rockchip/pinctrl-rk322x.c
+> @@ -3,7 +3,6 @@
+>    * (C) Copyright 2019 Rockchip Electronics Co., Ltd
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3288.c b/drivers/pinctrl/rockchip/pinctrl-rk3288.c
+> index a976b7aeeb27..3870c1b7a341 100644
+> --- a/drivers/pinctrl/rockchip/pinctrl-rk3288.c
+> +++ b/drivers/pinctrl/rockchip/pinctrl-rk3288.c
+> @@ -3,7 +3,6 @@
+>    * (C) Copyright 2019 Rockchip Electronics Co., Ltd
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3308.c b/drivers/pinctrl/rockchip/pinctrl-rk3308.c
+> index f9ac6347eaf1..2cd91b10a3bd 100644
+> --- a/drivers/pinctrl/rockchip/pinctrl-rk3308.c
+> +++ b/drivers/pinctrl/rockchip/pinctrl-rk3308.c
+> @@ -3,7 +3,6 @@
+>    * (C) Copyright 2019 Rockchip Electronics Co., Ltd
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3328.c b/drivers/pinctrl/rockchip/pinctrl-rk3328.c
+> index 65a750076773..47c2e923a1bb 100644
+> --- a/drivers/pinctrl/rockchip/pinctrl-rk3328.c
+> +++ b/drivers/pinctrl/rockchip/pinctrl-rk3328.c
+> @@ -3,7 +3,6 @@
+>    * (C) Copyright 2019 Rockchip Electronics Co., Ltd
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3368.c b/drivers/pinctrl/rockchip/pinctrl-rk3368.c
+> index ba867a891748..9ae06ed19e9c 100644
+> --- a/drivers/pinctrl/rockchip/pinctrl-rk3368.c
+> +++ b/drivers/pinctrl/rockchip/pinctrl-rk3368.c
+> @@ -3,7 +3,6 @@
+>    * (C) Copyright 2019 Rockchip Electronics Co., Ltd
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3399.c b/drivers/pinctrl/rockchip/pinctrl-rk3399.c
+> index ae785573baf5..b7a5092c032b 100644
+> --- a/drivers/pinctrl/rockchip/pinctrl-rk3399.c
+> +++ b/drivers/pinctrl/rockchip/pinctrl-rk3399.c
+> @@ -3,7 +3,6 @@
+>    * (C) Copyright 2019 Rockchip Electronics Co., Ltd
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3568.c b/drivers/pinctrl/rockchip/pinctrl-rk3568.c
+> index 1d4391982605..5deedc648a41 100644
+> --- a/drivers/pinctrl/rockchip/pinctrl-rk3568.c
+> +++ b/drivers/pinctrl/rockchip/pinctrl-rk3568.c
+> @@ -3,7 +3,6 @@
+>    * (C) Copyright 2020 Rockchip Electronics Co., Ltd
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   #include <regmap.h>
+> diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3588.c b/drivers/pinctrl/rockchip/pinctrl-rk3588.c
+> index 548cf09bcca4..98ababc7c907 100644
+> --- a/drivers/pinctrl/rockchip/pinctrl-rk3588.c
+> +++ b/drivers/pinctrl/rockchip/pinctrl-rk3588.c
+> @@ -3,7 +3,6 @@
+>    * (C) Copyright 2021 Rockchip Electronics Co., Ltd
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   #include <regmap.h>
+> diff --git a/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c b/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
+> index 8ef089994f46..3e74e2f14895 100644
+> --- a/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
+> +++ b/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
+> @@ -3,7 +3,6 @@
+>    * (C) Copyright 2019 Rockchip Electronics Co., Ltd
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/rockchip/pinctrl-rv1108.c b/drivers/pinctrl/rockchip/pinctrl-rv1108.c
+> index 5b70b503d2b1..3eff5f59598c 100644
+> --- a/drivers/pinctrl/rockchip/pinctrl-rv1108.c
+> +++ b/drivers/pinctrl/rockchip/pinctrl-rv1108.c
+> @@ -3,7 +3,6 @@
+>    * (C) Copyright 2019 Rockchip Electronics Co., Ltd
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/rockchip/pinctrl-rv1126.c b/drivers/pinctrl/rockchip/pinctrl-rv1126.c
+> index eefb8b17768b..efa2408b204b 100644
+> --- a/drivers/pinctrl/rockchip/pinctrl-rv1126.c
+> +++ b/drivers/pinctrl/rockchip/pinctrl-rv1126.c
+> @@ -3,7 +3,6 @@
+>    * (C) Copyright 2020 Rockchip Electronics Co., Ltd
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/starfive/pinctrl-starfive.c b/drivers/pinctrl/starfive/pinctrl-starfive.c
+> index 9b09cc21cfaa..95b1a752de2e 100644
+> --- a/drivers/pinctrl/starfive/pinctrl-starfive.c
+> +++ b/drivers/pinctrl/starfive/pinctrl-starfive.c
+> @@ -7,7 +7,6 @@
+>    *   Author: Jianlong Huang <jianlong.huang@starfivetech.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <clk.h>
+>   #include <dm.h>
+>   #include <dm/device-internal.h>
+> diff --git a/drivers/pinctrl/tegra/funcmux-tegra114.c b/drivers/pinctrl/tegra/funcmux-tegra114.c
+> index 23a27c868881..23e9e2383679 100644
+> --- a/drivers/pinctrl/tegra/funcmux-tegra114.c
+> +++ b/drivers/pinctrl/tegra/funcmux-tegra114.c
+> @@ -5,7 +5,6 @@
+>   
+>   /* Tegra114 high-level function multiplexing */
+>   
+> -#include <common.h>
+>   #include <log.h>
+>   #include <asm/arch/clock.h>
+>   #include <asm/arch/funcmux.h>
+> diff --git a/drivers/pinctrl/tegra/funcmux-tegra124.c b/drivers/pinctrl/tegra/funcmux-tegra124.c
+> index e7ad85fde2d0..b041cead3446 100644
+> --- a/drivers/pinctrl/tegra/funcmux-tegra124.c
+> +++ b/drivers/pinctrl/tegra/funcmux-tegra124.c
+> @@ -6,7 +6,6 @@
+>   
+>   /* Tegra124 high-level function multiplexing */
+>   
+> -#include <common.h>
+>   #include <log.h>
+>   #include <asm/arch/clock.h>
+>   #include <asm/arch/funcmux.h>
+> diff --git a/drivers/pinctrl/tegra/funcmux-tegra20.c b/drivers/pinctrl/tegra/funcmux-tegra20.c
+> index 90fe0cba8ea4..b8c913237853 100644
+> --- a/drivers/pinctrl/tegra/funcmux-tegra20.c
+> +++ b/drivers/pinctrl/tegra/funcmux-tegra20.c
+> @@ -4,7 +4,6 @@
+>    */
+>   
+>   /* Tegra20 high-level function multiplexing */
+> -#include <common.h>
+>   #include <log.h>
+>   #include <asm/arch/clock.h>
+>   #include <asm/arch/funcmux.h>
+> diff --git a/drivers/pinctrl/tegra/funcmux-tegra210.c b/drivers/pinctrl/tegra/funcmux-tegra210.c
+> index 30d994a17ffa..d52b6150e590 100644
+> --- a/drivers/pinctrl/tegra/funcmux-tegra210.c
+> +++ b/drivers/pinctrl/tegra/funcmux-tegra210.c
+> @@ -6,7 +6,6 @@
+>   
+>   /* Tegra210 high-level function multiplexing */
+>   
+> -#include <common.h>
+>   #include <log.h>
+>   #include <asm/arch/clock.h>
+>   #include <asm/arch/funcmux.h>
+> diff --git a/drivers/pinctrl/tegra/funcmux-tegra30.c b/drivers/pinctrl/tegra/funcmux-tegra30.c
+> index c3ee787f33b1..e31b859beb8a 100644
+> --- a/drivers/pinctrl/tegra/funcmux-tegra30.c
+> +++ b/drivers/pinctrl/tegra/funcmux-tegra30.c
+> @@ -5,7 +5,6 @@
+>   
+>   /* Tegra30 high-level function multiplexing */
+>   
+> -#include <common.h>
+>   #include <log.h>
+>   #include <asm/arch/clock.h>
+>   #include <asm/arch/funcmux.h>
+> diff --git a/drivers/pinctrl/tegra/pinmux-common.c b/drivers/pinctrl/tegra/pinmux-common.c
+> index 16b03bfe7b06..5266c8db4876 100644
+> --- a/drivers/pinctrl/tegra/pinmux-common.c
+> +++ b/drivers/pinctrl/tegra/pinmux-common.c
+> @@ -4,7 +4,6 @@
+>    * Copyright (c) 2011 The Chromium OS Authors.
+>    */
+>   
+> -#include <common.h>
+>   #include <log.h>
+>   #include <asm/io.h>
+>   #include <asm/arch/pinmux.h>
+> diff --git a/drivers/pinctrl/tegra/pinmux-tegra114.c b/drivers/pinctrl/tegra/pinmux-tegra114.c
+> index 11796602c548..15c6b653aed8 100644
+> --- a/drivers/pinctrl/tegra/pinmux-tegra114.c
+> +++ b/drivers/pinctrl/tegra/pinmux-tegra114.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (c) 2010-2014, NVIDIA CORPORATION. All rights reserved.
+>    */
+>   
+> -#include <common.h>
+>   #include <asm/io.h>
+>   #include <asm/arch/pinmux.h>
+>   
+> diff --git a/drivers/pinctrl/tegra/pinmux-tegra124.c b/drivers/pinctrl/tegra/pinmux-tegra124.c
+> index 261ce64b205e..6d5b720aa0e6 100644
+> --- a/drivers/pinctrl/tegra/pinmux-tegra124.c
+> +++ b/drivers/pinctrl/tegra/pinmux-tegra124.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (c) 2013-2014, NVIDIA CORPORATION. All rights reserved.
+>    */
+>   
+> -#include <common.h>
+>   #include <asm/io.h>
+>   #include <asm/arch/pinmux.h>
+>   
+> diff --git a/drivers/pinctrl/tegra/pinmux-tegra20.c b/drivers/pinctrl/tegra/pinmux-tegra20.c
+> index 0af39e74c53b..c1f86476b9ef 100644
+> --- a/drivers/pinctrl/tegra/pinmux-tegra20.c
+> +++ b/drivers/pinctrl/tegra/pinmux-tegra20.c
+> @@ -5,7 +5,6 @@
+>   
+>   /* Tegra20 pin multiplexing functions */
+>   
+> -#include <common.h>
+>   #include <asm/io.h>
+>   #include <asm/arch/pinmux.h>
+>   
+> diff --git a/drivers/pinctrl/tegra/pinmux-tegra30.c b/drivers/pinctrl/tegra/pinmux-tegra30.c
+> index d11b2aa572df..59ce9cea4a97 100644
+> --- a/drivers/pinctrl/tegra/pinmux-tegra30.c
+> +++ b/drivers/pinctrl/tegra/pinmux-tegra30.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (c) 2010-2014, NVIDIA CORPORATION. All rights reserved.
+>    */
+>   
+> -#include <common.h>
+>   #include <asm/io.h>
+>   #include <asm/arch/pinmux.h>
+>   
+> diff --git a/drivers/pinctrl/uniphier/pinctrl-uniphier-core.c b/drivers/pinctrl/uniphier/pinctrl-uniphier-core.c
+> index bdca3f2f7156..eafb65496a3d 100644
+> --- a/drivers/pinctrl/uniphier/pinctrl-uniphier-core.c
+> +++ b/drivers/pinctrl/uniphier/pinctrl-uniphier-core.c
+> @@ -4,7 +4,6 @@
+>    *   Author: Masahiro Yamada <yamada.masahiro@socionext.com>
+>    */
+>   
+> -#include <common.h>
 >   #include <dm.h>
 >   #include <dm/device_compat.h>
+>   #include <linux/bitops.h>
+> diff --git a/drivers/pinctrl/uniphier/pinctrl-uniphier-ld11.c b/drivers/pinctrl/uniphier/pinctrl-uniphier-ld11.c
+> index a1a3cd73859a..778a9899483c 100644
+> --- a/drivers/pinctrl/uniphier/pinctrl-uniphier-ld11.c
+> +++ b/drivers/pinctrl/uniphier/pinctrl-uniphier-ld11.c
+> @@ -4,7 +4,6 @@
+>    *   Author: Masahiro Yamada <yamada.masahiro@socionext.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   
+> diff --git a/drivers/pinctrl/uniphier/pinctrl-uniphier-ld20.c b/drivers/pinctrl/uniphier/pinctrl-uniphier-ld20.c
+> index 7a92a46c17f5..3ef10151dabf 100644
+> --- a/drivers/pinctrl/uniphier/pinctrl-uniphier-ld20.c
+> +++ b/drivers/pinctrl/uniphier/pinctrl-uniphier-ld20.c
+> @@ -4,7 +4,6 @@
+>    *   Author: Masahiro Yamada <yamada.masahiro@socionext.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   
+> diff --git a/drivers/pinctrl/uniphier/pinctrl-uniphier-ld4.c b/drivers/pinctrl/uniphier/pinctrl-uniphier-ld4.c
+> index d33e4d7dd259..9302e309e20f 100644
+> --- a/drivers/pinctrl/uniphier/pinctrl-uniphier-ld4.c
+> +++ b/drivers/pinctrl/uniphier/pinctrl-uniphier-ld4.c
+> @@ -4,7 +4,6 @@
+>    *   Author: Masahiro Yamada <yamada.masahiro@socionext.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   
+> diff --git a/drivers/pinctrl/uniphier/pinctrl-uniphier-ld6b.c b/drivers/pinctrl/uniphier/pinctrl-uniphier-ld6b.c
+> index 0e3eb131ecf7..f7c5bf3bcaed 100644
+> --- a/drivers/pinctrl/uniphier/pinctrl-uniphier-ld6b.c
+> +++ b/drivers/pinctrl/uniphier/pinctrl-uniphier-ld6b.c
+> @@ -4,7 +4,6 @@
+>    *   Author: Masahiro Yamada <yamada.masahiro@socionext.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   
+> diff --git a/drivers/pinctrl/uniphier/pinctrl-uniphier-pro4.c b/drivers/pinctrl/uniphier/pinctrl-uniphier-pro4.c
+> index 7ba2266092f0..2704a50749e5 100644
+> --- a/drivers/pinctrl/uniphier/pinctrl-uniphier-pro4.c
+> +++ b/drivers/pinctrl/uniphier/pinctrl-uniphier-pro4.c
+> @@ -4,7 +4,6 @@
+>    *   Author: Masahiro Yamada <yamada.masahiro@socionext.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   
+> diff --git a/drivers/pinctrl/uniphier/pinctrl-uniphier-pro5.c b/drivers/pinctrl/uniphier/pinctrl-uniphier-pro5.c
+> index 9ce2e2c270ef..655ec6e60573 100644
+> --- a/drivers/pinctrl/uniphier/pinctrl-uniphier-pro5.c
+> +++ b/drivers/pinctrl/uniphier/pinctrl-uniphier-pro5.c
+> @@ -4,7 +4,6 @@
+>    *   Author: Masahiro Yamada <yamada.masahiro@socionext.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   
+> diff --git a/drivers/pinctrl/uniphier/pinctrl-uniphier-pxs2.c b/drivers/pinctrl/uniphier/pinctrl-uniphier-pxs2.c
+> index e8c2018097c2..226272c2b82f 100644
+> --- a/drivers/pinctrl/uniphier/pinctrl-uniphier-pxs2.c
+> +++ b/drivers/pinctrl/uniphier/pinctrl-uniphier-pxs2.c
+> @@ -4,7 +4,6 @@
+>    *   Author: Masahiro Yamada <yamada.masahiro@socionext.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   
+> diff --git a/drivers/pinctrl/uniphier/pinctrl-uniphier-pxs3.c b/drivers/pinctrl/uniphier/pinctrl-uniphier-pxs3.c
+> index 8a8f1269bb51..8df13ca209c7 100644
+> --- a/drivers/pinctrl/uniphier/pinctrl-uniphier-pxs3.c
+> +++ b/drivers/pinctrl/uniphier/pinctrl-uniphier-pxs3.c
+> @@ -5,7 +5,6 @@
+>    *   Author: Dai Okamura <dai.okamura@socionext.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   
+> diff --git a/drivers/pinctrl/uniphier/pinctrl-uniphier-sld8.c b/drivers/pinctrl/uniphier/pinctrl-uniphier-sld8.c
+> index 04c06fb280e2..c045ae99ac53 100644
+> --- a/drivers/pinctrl/uniphier/pinctrl-uniphier-sld8.c
+> +++ b/drivers/pinctrl/uniphier/pinctrl-uniphier-sld8.c
+> @@ -4,7 +4,6 @@
+>    *   Author: Masahiro Yamada <yamada.masahiro@socionext.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/pinctrl.h>
+>   
