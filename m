@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC0EDC04FFE
-	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 01:03:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B71CC04FFE
+	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 01:13:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F73B882A8;
-	Thu,  9 May 2024 03:03:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 67F3E8826B;
+	Thu,  9 May 2024 03:13:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A3D38833D; Thu,  9 May 2024 03:03:26 +0200 (CEST)
+ id BE945882F3; Thu,  9 May 2024 03:13:48 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33FD28811D
- for <u-boot@lists.denx.de>; Thu,  9 May 2024 03:03:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0CCD588239
+ for <u-boot@lists.denx.de>; Thu,  9 May 2024 03:13:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 44913FjY046290
- for <u-boot@lists.denx.de>; Thu, 9 May 2024 09:03:15 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 4491DdKw051176
+ for <u-boot@lists.denx.de>; Thu, 9 May 2024 09:13:39 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02.andestech.com (10.0.15.183) by ATCPCS16.andestech.com
  (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0;
- Thu, 9 May 2024 09:03:15 +0800
+ Thu, 9 May 2024 09:13:36 +0800
 From: Leo Yu-Chi Liang <ycliang@andestech.com>
 To: <u-boot@lists.denx.de>
 CC: <ycliang@andestech.com>, <tim609@andestech.com>, <randolph@andestech.com>, 
  <dylan@andestech.com>
-Subject: [PATCH 1/1] andes: Unify naming policy for Andes related source
-Date: Thu, 9 May 2024 09:03:10 +0800
-Message-ID: <20240509010310.3680186-1-ycliang@andestech.com>
+Subject: [PATCH v2 1/1] andes: Unify naming policy for Andes related source
+Date: Thu, 9 May 2024 09:13:31 +0800
+Message-ID: <20240509011331.3701007-1-ycliang@andestech.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [10.0.15.183]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 44913FjY046290
+X-MAIL: Atcsqr.andestech.com 4491DdKw051176
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -130,7 +130,7 @@ diff --git a/arch/riscv/cpu/andesv5/cache.c b/arch/riscv/cpu/andes/cache.c
 similarity index 90%
 rename from arch/riscv/cpu/andesv5/cache.c
 rename to arch/riscv/cpu/andes/cache.c
-index 269bb27f75..801857ab8f 100644
+index 269bb27f75..7d3df8722d 100644
 --- a/arch/riscv/cpu/andesv5/cache.c
 +++ b/arch/riscv/cpu/andes/cache.c
 @@ -12,21 +12,21 @@
@@ -150,12 +150,12 @@ index 269bb27f75..801857ab8f 100644
  					  &dev);
  	if (ret) {
 -		log_debug("Cannot enable v5l2 cache\n");
-+		log_debug("Cannot enable andes-l2 cache\n");
++		log_debug("Cannot enable Andes L2 cache\n");
  	} else {
  		ret = cache_enable(dev);
  		if (ret)
 -			log_debug("v5l2 cache enable failed\n");
-+			log_debug("andes-l2 cache enable failed\n");
++			log_debug("Failed to enable Andes L2 cache\n");
  	}
  }
  
