@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BF11C25B10
-	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 16:45:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A954BC25B10
+	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 16:45:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DEA14884CC;
-	Thu,  9 May 2024 18:41:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7E68F882A7;
+	Thu,  9 May 2024 18:42:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JbM6BZDV";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="D8rRxvA7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 541D088482; Thu,  9 May 2024 18:41:56 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 80943884B7; Thu,  9 May 2024 18:41:58 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 090AF88488
- for <u-boot@lists.denx.de>; Thu,  9 May 2024 18:41:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CB788849E
+ for <u-boot@lists.denx.de>; Thu,  9 May 2024 18:41:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 449GfZNh032228;
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 449GfZKP060432;
  Thu, 9 May 2024 11:41:35 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1715272895;
- bh=VoxWmgdWGgpdkmaEzJiqLsCeHxpsyI2ZLHlhX6KvNI8=;
+ bh=IXnYIo5gKpmmJYUBOvYzMLbPuUV1w4sU5b81/zNmkx8=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=JbM6BZDV5SucbAGYi2/kJrZ9j2RvabRxNXqPomLdciKn8OnysLLvJc0wzyA3/tj6j
- XrQaAmyKmiu/HeS1vu5pzL2Q0uQj96JGHiIWrczeE/Wue3NTNXxd+2HqL7onm/p11Z
- wyZQSeXZ1ayVFf0w/C6UxSnbVotGwc//sw3fsqJo=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 449GfZaG020127
+ b=D8rRxvA7l0dh022cfS5WMHFJqO+9gIjAVxKTFB00k+bE/j+golmoUAXDPgDjnKJFX
+ TqN36UydnDNBTXDuRxxGRWIRISCue2XHgo1JOCXuJx4tcyir4PciGhHjj7KiY3bOIe
+ owuXe37kV1qrZCf2Phq5AWfKAUaDvy5JsM9jRqmY=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 449GfZFg105671
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Thu, 9 May 2024 11:41:35 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 9
  May 2024 11:41:35 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 9 May 2024 11:41:34 -0500
+ Frontend Transport; Thu, 9 May 2024 11:41:35 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 449GfYbf063018;
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 449GfYE5063023;
  Thu, 9 May 2024 11:41:34 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
@@ -67,9 +67,9 @@ To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ilias Apalodimas
  <ilias.apalodimas@linaro.org>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH v4 02/19] board: am64x: Define capsule update firmware info
-Date: Thu, 9 May 2024 11:41:06 -0500
-Message-ID: <20240509164123.1753050-3-j-humphreys@ti.com>
+Subject: [PATCH v4 03/19] configs: am64x: Enable EFI capsule update
+Date: Thu, 9 May 2024 11:41:07 -0500
+Message-ID: <20240509164123.1753050-4-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240509164123.1753050-1-j-humphreys@ti.com>
 References: <20240509164123.1753050-1-j-humphreys@ti.com>
@@ -93,101 +93,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Define the firmware components updatable via EFI capsule update, including
-defining capsule GUIDs for the various firmware components for the AM64x
-SK.
+Enable on disk, raw capsule update.
 
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- board/ti/am64x/evm.c        | 32 ++++++++++++++++++++++++++++++++
- include/configs/am64x_evm.h | 24 ++++++++++++++++++++++++
- 2 files changed, 56 insertions(+)
+ configs/am64x_evm_a53_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/board/ti/am64x/evm.c b/board/ti/am64x/evm.c
-index b8de69da06c..c30e9e064ec 100644
---- a/board/ti/am64x/evm.c
-+++ b/board/ti/am64x/evm.c
-@@ -7,6 +7,7 @@
-  *
-  */
- 
-+#include <efi_loader.h>
- #include <asm/io.h>
- #include <dm/uclass.h>
- #include <k3-ddrss.h>
-@@ -27,6 +28,37 @@
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-+struct efi_fw_image fw_images[] = {
-+	{
-+		.image_type_id = AM64X_SK_TIBOOT3_IMAGE_GUID,
-+		.fw_name = u"AM64X_SK_TIBOOT3",
-+		.image_index = 1,
-+	},
-+	{
-+		.image_type_id = AM64X_SK_SPL_IMAGE_GUID,
-+		.fw_name = u"AM64X_SK_SPL",
-+		.image_index = 2,
-+	},
-+	{
-+		.image_type_id = AM64X_SK_UBOOT_IMAGE_GUID,
-+		.fw_name = u"AM64X_SK_UBOOT",
-+		.image_index = 3,
-+	}
-+};
-+
-+struct efi_capsule_update_info update_info = {
-+	.dfu_string = "sf 0:0=tiboot3.bin raw 0 100000;"
-+	"tispl.bin raw 100000 200000;u-boot.img raw 300000 400000",
-+	.num_images = ARRAY_SIZE(fw_images),
-+	.images = fw_images,
-+};
-+
-+void set_dfu_alt_info(char *interface, char *devstr)
-+{
-+	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
-+		env_set("dfu_alt_info", update_info.dfu_string);
-+}
-+
- int board_init(void)
- {
- 	return 0;
-diff --git a/include/configs/am64x_evm.h b/include/configs/am64x_evm.h
-index f9f8c7bc2f6..9db83621ea8 100644
---- a/include/configs/am64x_evm.h
-+++ b/include/configs/am64x_evm.h
-@@ -9,6 +9,30 @@
- #ifndef __CONFIG_AM642_EVM_H
- #define __CONFIG_AM642_EVM_H
- 
-+/**
-+ * define AM64X_SK_TIBOOT3_IMAGE_GUID - firmware GUID for AM64X sk tiboot3.bin
-+ * define AM64X_SK_SPL_IMAGE_GUID     - firmware GUID for AM64X sk SPL
-+ * define AM64X_SK_UBOOT_IMAGE_GUID   - firmware GUID for AM64X sk UBOOT
-+ *
-+ * These GUIDs are used in capsules updates to identify the corresponding
-+ * firmware object.
-+ *
-+ * Board developers using this as a starting reference should
-+ * define their own GUIDs to ensure that firmware repositories (like
-+ * LVFS) do not confuse them.
-+ */
-+#define AM64X_SK_TIBOOT3_IMAGE_GUID \
-+	EFI_GUID(0xede0a0d5, 0x9116, 0x4bfb, 0xaa, 0x54, \
-+		0x09, 0xe9, 0x7b, 0x5a, 0xfe, 0x1a)
-+
-+#define AM64X_SK_SPL_IMAGE_GUID \
-+	EFI_GUID(0x77678f5c, 0x64d4, 0x4910, 0xad, 0x75, \
-+		0x52, 0xc9, 0xd9, 0x5c, 0xdb, 0x1d)
-+
-+#define AM64X_SK_UBOOT_IMAGE_GUID \
-+	EFI_GUID(0xc6ad43a9, 0x7d31, 0x4f5d, 0x83, 0xe9, \
-+		0xb8, 0xef, 0xec, 0xae, 0x05, 0xbf)
-+
- /* Now for the remaining common defines */
- #include <configs/ti_armv7_common.h>
- 
+diff --git a/configs/am64x_evm_a53_defconfig b/configs/am64x_evm_a53_defconfig
+index e000549d6d0..c9bdd7b54cc 100644
+--- a/configs/am64x_evm_a53_defconfig
++++ b/configs/am64x_evm_a53_defconfig
+@@ -178,3 +178,5 @@ CONFIG_USB_FUNCTION_MASS_STORAGE=y
+ CONFIG_SPL_DFU=y
+ CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
+ CONFIG_EFI_SET_TIME=y
++CONFIG_EFI_CAPSULE_ON_DISK=y
++CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
 -- 
 2.34.1
 
