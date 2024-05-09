@@ -4,49 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1709C04FFE
-	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 02:39:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 077F0C04FFE
+	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 02:39:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D4498846C;
-	Thu,  9 May 2024 04:39:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 707E88846F;
+	Thu,  9 May 2024 04:39:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=microsoft.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FB7388473; Thu,  9 May 2024 04:39:31 +0200 (CEST)
+ id 6090A88477; Thu,  9 May 2024 04:39:33 +0200 (CEST)
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by phobos.denx.de (Postfix) with ESMTP id D84648846D
- for <u-boot@lists.denx.de>; Thu,  9 May 2024 04:39:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 44C5088468
+ for <u-boot@lists.denx.de>; Thu,  9 May 2024 04:39:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
  header.from=microsoft.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=seanedmond@microsoft.com
 Received: from ovlvm106.redmond.corp.microsoft.com (unknown [131.107.147.185])
- by linux.microsoft.com (Postfix) with ESMTPSA id CFC3420B2C80;
- Wed,  8 May 2024 19:39:26 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com CFC3420B2C80
+ by linux.microsoft.com (Postfix) with ESMTPSA id 537C120B2C82;
+ Wed,  8 May 2024 19:39:29 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 537C120B2C82
 From: Sean Edmond <seanedmond@microsoft.com>
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, Sean Edmond <seanedmond@microsoft.com>,
  AKASHI Takahiro <takahiro.akashi@linaro.org>,
  Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Bin Meng <bmeng.cn@gmail.com>, Bin Meng <bmeng@tinylab.org>,
- Charles Hardin <ckhardin@gmail.com>,
+ Bin Meng <bmeng@tinylab.org>, Charles Hardin <ckhardin@gmail.com>,
  Francis Laniel <francis.laniel@amarulasolutions.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Joe Hershberger <joe.hershberger@ni.com>, Marek Vasut <marex@denx.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michal Simek <michal.simek@amd.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Peter Robinson <pbrobinson@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
- Sean Anderson <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>,
+ Michal Simek <michal.simek@amd.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Sean Anderson <seanga2@gmail.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v8 0/3] BOOTP/DHCPv4 enhancements
-Date: Wed,  8 May 2024 19:39:00 -0700
-Message-ID: <20240509023918.2504185-1-seanedmond@microsoft.com>
+Subject: [PATCH v8 1/3] net: Enhancements for dhcp option 209
+Date: Wed,  8 May 2024 19:39:01 -0700
+Message-ID: <20240509023918.2504185-2-seanedmond@microsoft.com>
 X-Mailer: git-send-email 2.42.0
+In-Reply-To: <20240509023918.2504185-1-seanedmond@microsoft.com>
+References: <20240509023918.2504185-1-seanedmond@microsoft.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -64,71 +61,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+- Enable option 209 by default
+- Set pxelinux_configfile to NULL to avoid potential double free
+- change hardcoded 209 to a define
 
-In our datacenter application, a single DHCP server is servicing 36000+ clients.
-Improvements are required to the DHCPv4 retransmission behavior to align with
-RFC and ensure less pressure is exerted on the server:
-- retransmission backoff interval maximum is configurable
-  (environment variable bootpretransmitperiodmax)
-- initial retransmission backoff interval is configurable
-  (environment variable bootpretransmitperiodinit)
-- transaction ID is kept the same for each BOOTP/DHCPv4 request
-  (not recreated on each retry)
+Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
 
-For our application we'll use:
-- bootpretransmitperiodmax=16000
-- bootpretransmitperiodinit=2000
+---
 
-A new configuration BOOTP_RANDOM_XID has been added to enable a randomized
-BOOTP/DHCPv4 transaction ID.
-
-Enhance DHCPv4 sending/parsing option 209 (PXE config file).  A previous
-patch was accepted.  A new patch fixes a possible double free() and
-addresses latest review comments.
-
-Changes in v8:
-- remove unused variable "char *ep" from bootp_reset()
+(no changes since v7)
 
 Changes in v7:
-- Remove "depends on LIB_RAND || LIB_HW_RAND" from CMD_BOOTP
-- Add CMD_BOOTP/CMD_DHCP/CMD_DHCP6 to LIB_RAND menu choice
-- Add space after "config CMD_DHCP"
+- Reword this commit
 
 Changes in v6:
-- CMD_BOOTP should "depends on LIB_RAND || LIB_HW_RAND"
-
-Changes in v5:
-- add change log to individual patches
-- fix depends for BOOTP_RANDOM_XID:
-  "depends on CMD_BOOTP && (LIB_RAND || LIB_HW_RAND)"
+- Reword this commit
 
 Changes in v4:
 - rebase master and resolve conflicts
 - default y for BOOTP_PXE_DHCP_OPTION (feedback from review)
-- Add "select LIB_RAND" for "config CMD_BOOTP" (retransmission
-  improvements require rand())
+- change commit description for this patch (this is now
+  an enhancement patch)
 
 Changes in v3:
 - add define for option 209 and rfc5071 reference
-- Set RETRANSMIT_PERIOD_MAX_MS=60000
-- Add randomization factor to retransmission timeout
-- Add depends for BOOTP_RANDOM_XID
 
-Changes in v2:
-- use env_get_ulong() to get environment variables
+ cmd/Kconfig | 1 +
+ cmd/pxe.c   | 2 ++
+ net/bootp.c | 4 ++--
+ net/bootp.h | 2 ++
+ 4 files changed, 7 insertions(+), 2 deletions(-)
 
-Sean Edmond (3):
-  net: Enhancements for dhcp option 209
-  net: bootp: BOOTP/DHCPv4 retransmission improvements
-  net: bootp: add config option BOOTP_RANDOM_XID
-
- cmd/Kconfig |  8 ++++++
- cmd/pxe.c   |  2 ++
- lib/Kconfig |  3 ++-
- net/bootp.c | 73 ++++++++++++++++++++++++++++++++++++++++-------------
- net/bootp.h |  2 ++
- 5 files changed, 70 insertions(+), 18 deletions(-)
-
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index c182d73ddbd..54c4ab8570c 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -1898,6 +1898,7 @@ config BOOTP_PXE_CLIENTARCH
+ 
+ config BOOTP_PXE_DHCP_OPTION
+ 	bool "Request & store 'pxe_configfile' from BOOTP/DHCP server"
++	default y
+ 	depends on BOOTP_PXE
+ 
+ config BOOTP_VCI_STRING
+diff --git a/cmd/pxe.c b/cmd/pxe.c
+index 21134eb7a30..9404f445187 100644
+--- a/cmd/pxe.c
++++ b/cmd/pxe.c
+@@ -65,6 +65,8 @@ static int pxe_dhcp_option_path(struct pxe_context *ctx, unsigned long pxefile_a
+ 	int ret = get_pxe_file(ctx, pxelinux_configfile, pxefile_addr_r);
+ 
+ 	free(pxelinux_configfile);
++	/* set to NULL to avoid double-free if DHCP is tried again */
++	pxelinux_configfile = NULL;
+ 
+ 	return ret;
+ }
+diff --git a/net/bootp.c b/net/bootp.c
+index c15472f5d37..b9e3cccb4f9 100644
+--- a/net/bootp.c
++++ b/net/bootp.c
+@@ -603,7 +603,7 @@ static int dhcp_extended(u8 *e, int message_type, struct in_addr server_ip,
+ 	*cnt += 1;
+ #endif
+ 	if (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION)) {
+-		*e++ = 209;	/* PXELINUX Config File */
++		*e++ = DHCP_OPTION_PXE_CONFIG_FILE;	/* PXELINUX Config File */
+ 		*cnt += 1;
+ 	}
+ 	/* no options, so back up to avoid sending an empty request list */
+@@ -922,7 +922,7 @@ static void dhcp_process_options(uchar *popt, uchar *end)
+ 				net_boot_file_name[size] = 0;
+ 			}
+ 			break;
+-		case 209:	/* PXELINUX Config File */
++		case DHCP_OPTION_PXE_CONFIG_FILE:	/* PXELINUX Config File */
+ 			if (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION)) {
+ 				/* In case it has already been allocated when get DHCP Offer packet,
+ 				 * free first to avoid memory leak.
+diff --git a/net/bootp.h b/net/bootp.h
+index 4e32b19d424..24b32c73f62 100644
+--- a/net/bootp.h
++++ b/net/bootp.h
+@@ -91,6 +91,8 @@ typedef enum { INIT,
+ #define DHCP_NAK      6
+ #define DHCP_RELEASE  7
+ 
++#define DHCP_OPTION_PXE_CONFIG_FILE	209	/* "ConfigFile" option according to rfc5071 */
++
+ /**********************************************************************/
+ 
+ #endif /* __BOOTP_H__ */
 -- 
 2.42.0
 
