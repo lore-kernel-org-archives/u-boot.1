@@ -4,54 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4E35C10F1A
-	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 04:59:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D93DFC10F1A
+	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 05:07:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B84A08847F;
-	Thu,  9 May 2024 06:59:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=protonmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C94D788474;
+	Thu,  9 May 2024 07:07:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=protonmail.com header.i=@protonmail.com header.b="jClFQe9c";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="AHhugolh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25895882C1; Wed,  8 May 2024 22:45:27 +0200 (CEST)
-Received: from mail-40132.protonmail.ch (mail-40132.protonmail.ch
- [185.70.40.132])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6841F88476; Thu,  9 May 2024 07:07:53 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2692B88232
- for <u-boot@lists.denx.de>; Wed,  8 May 2024 22:45:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=protonmail.com
+ by phobos.denx.de (Postfix) with ESMTPS id 0B40E8846C
+ for <u-boot@lists.denx.de>; Thu,  9 May 2024 07:07:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dmoo_dv@protonmail.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
- s=protonmail3; t=1715201124; x=1715460324;
- bh=c/YnMMcqglq+DyNY3BoaTGDDg6n7Gx2GT5llKiduCz4=;
- h=Date:To:From:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=jClFQe9cyObfGLIQTkGsbpY5urDJYGb3u8Bk9+IZj/VCOqjuZO3RAi9o0tEBCOrk6
- Zb7Zon8PnM50vIODL6uWJe7sgTuQzrrWegFMZgyku3kkBiPmhrgcnMWtOMB6Ok9tQ0
- LDC2Er367fszJpbQtr1ddIdnGaTBbcn9L9gQ6hptFfWuutmHxTmfZvJ4K7bJ29DW0/
- AIHuFZBf3dSpFitfd3hG2UQ8uCR5UCBuk+6See5q8GcdN+KvcGNuoOY80g2sgX8ZD0
- yvVtLjT84Faz0PCr6NkYbAel/EJ/mgSvFq4LIeYFpxyDKQ1/Zy08s3kUwzgel9Wy4+
- CgYD0XHAxsl0g==
-Date: Wed, 08 May 2024 20:45:20 +0000
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-From: H Bell <dmoo_dv@protonmail.com>
-Subject: [PATCH] board: starfive: support Pine64 Star64 board
-Message-ID: <FA20o8OKLcD-qkvYM3H9-K8AtQy5USkc9CTxhGBNKpSKJ9C4k_CH3KvRtW7lOAFJUctRcWLj-sb7nAIH-9YQ2zlwg9rYf7Z-dfqOUBfE6a4=@protonmail.com>
-In-Reply-To: <CANV2PTPkebMS76obVPZ2e9vw+pgXhWbNAC5SGb1yLkiyByBU4A@mail.gmail.com>
-References: <9UKxZxvyW2p7WWu5KwPIVoiFveSPOTEAzCVemUccLIb70r8QO7ch2PAiwVf428TC-7K9HDSO26ShohI0gnI4C671Plwa0M1CuwclJt3xJEc=@protonmail.com>
- <CANV2PTPkebMS76obVPZ2e9vw+pgXhWbNAC5SGb1yLkiyByBU4A@mail.gmail.com>
-Feedback-ID: 106097379:user:proton
-X-Pm-Message-ID: 02e5e1efdc6078c76466b0c0d6ccd880cff2a911
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44957lE2079970;
+ Thu, 9 May 2024 00:07:47 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1715231267;
+ bh=J+11MLTIkMIzjwz0GkuOZXgYP9ZbNtxObKt5cNkbgYU=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=AHhugolhbsaT0trMjIAHWxXDpBPsHYrclGCTR89QxU//Fk4baPU/NpO7HQHui0eiu
+ WMCz6bB/BHfZy1M61TdywelllpMA27y2A7V649hS0EshdDy/pDd1PR6JOtBjos3Mif
+ sKKKxzCMabQOvBQin6U1Znbfge07nL6yq54ua9Sg=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44957lFK050841
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 9 May 2024 00:07:47 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 9
+ May 2024 00:07:47 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 9 May 2024 00:07:46 -0500
+Received: from localhost (uda0497581.dhcp.ti.com [10.24.68.185])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44957kMZ025187;
+ Thu, 9 May 2024 00:07:46 -0500
+Date: Thu, 9 May 2024 10:37:45 +0530
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+To: Neha Malcom Francis <n-francis@ti.com>
+CC: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Alper Nebi
+ Yasak <alpernebiyasak@gmail.com>, <u-boot@lists.denx.de>, Nishanth Menon
+ <nm@ti.com>, Andrew Davis <afd@ti.com>,
+ Udit Kumar <u-kumar1@ti.com>, Aniket Limaye <a-limaye@ti.com>
+Subject: Re: [PATCH 4/6] arch: arm: dts: k3-am68-sk-r5: Sync with J721s2 R5
+ file
+Message-ID: <20240509050745.h6tsoyofe6jptcf7@uda0497581>
+References: <20240508-b4-upstream-j721s2-of-upstream-v1-0-ed0933172410@ti.com>
+ <20240508-b4-upstream-j721s2-of-upstream-v1-4-ed0933172410@ti.com>
+ <82dd9ec5-99c0-4e09-8ce9-e35c6dd98c36@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Thu, 09 May 2024 06:59:07 +0200
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <82dd9ec5-99c0-4e09-8ce9-e35c6dd98c36@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,29 +84,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tuesday, May 7th, 2024 at 12:31 AM, E Shattow <lucent@gmail.com> wrote:
-> On Mon, May 6, 2024 at 8:30=E2=80=AFAM H Bell <dmoo_dv@protonmail.com> wr=
-ote:
-> > + static const char compat[] =3D "starfive,star64\0starfive,jh7110";
-> Should be "pine64,star64\nstarfive,jh7110" ?
-changed to "pine64,star64\0starfive,jh7110" in v2
+Hi Neha,
 
-On Tuesday, May 7th, 2024 at 12:31 AM, E Shattow <lucent@gmail.com> wrote:
-> New property names are not made clear to me how to choose these
-> different delays for 10/100 Mbps vs 1000 Mbps operation. If the
-> fishwaldo repo is a valid reference then it seems different than the
-> content in starfive_vf2_pro starfive_verb[]. No Star64 here to test
-> with, does this work as-is for both network interfaces?
-Agreed. I've created a separate object in v2 for some further investigation=
-s
-with the delays/timings to make sure they're both working
+On 16:09-20240508, Neha Malcom Francis wrote:
+> Hi Manorit,
+> 
+> On 08/05/24 12:56, Manorit Chawdhry wrote:
+> > Update the file with the required nodes from J721s2 R5 file to start
+> > using k3-am68-sk-r5 file for AM68.
+> > 
+> > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> > ---
+> 
+> What's the motivation behind this patch vs. squashing it into patch 5/6?
+> 
 
-On Tuesday, May 7th, 2024 at 12:31 AM, E Shattow <lucent@gmail.com> wrote:
-> On Mon, May 6, 2024 at 8:30=E2=80=AFAM H Bell <dmoo_dv@protonmail.com> wr=
-ote:
-> > +#define FDTFILE_PINE64_STAR64 \
-> > + "starfive/pine64-star64.dtb"
-> Should be "starfive/jh7110-pine64-star64.dtb" ?
-fixed in v2
+Could've squashed it ig, I think developed it in this order so this
+remained. Would squash it. Also realised that I should be putting that
+patch before the config split otherwise am68 boot would break again.
+Would take that up as well in v2. Thanks for the review!
 
+Regards,
+Manorit
 
+> >   arch/arm/dts/k3-am68-sk-r5-base-board.dts | 5 ++++-
+> >   1 file changed, 4 insertions(+), 1 deletion(-)
+> > 
+> > diff --git a/arch/arm/dts/k3-am68-sk-r5-base-board.dts b/arch/arm/dts/k3-am68-sk-r5-base-board.dts
+> > index 695aadc287bd..038b08dc3e01 100644
+> > --- a/arch/arm/dts/k3-am68-sk-r5-base-board.dts
+> > +++ b/arch/arm/dts/k3-am68-sk-r5-base-board.dts
+> > @@ -24,7 +24,8 @@
+> >   		compatible = "ti,am654-rproc";
+> >   		reg = <0x0 0x00a90000 0x0 0x10>;
+> >   		power-domains = <&k3_pds 61 TI_SCI_PD_EXCLUSIVE>,
+> > -				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>;
+> > +				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>,
+> > +				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
+> >   		resets = <&k3_reset 202 0>;
+> >   		clocks = <&k3_clks 61 1>;
+> >   		assigned-clocks = <&k3_clks 61 1>, <&k3_clks 202 0>;
+> > @@ -54,10 +55,12 @@
+> >   &secure_proxy_mcu {
+> >   	bootph-pre-ram;
+> > +	status = "okay";
+> >   };
+> >   &secure_proxy_sa3 {
+> >   	bootph-pre-ram;
+> > +	status = "okay";
+> >   };
+> >   &cbass_mcu_wakeup {
+> > 
+> 
+> -- 
+> Thanking You
+> Neha Malcom Francis
