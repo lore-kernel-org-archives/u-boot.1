@@ -4,82 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45F06C25B10
-	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 14:38:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CD28C25B10
+	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 14:38:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D746880A3;
-	Thu,  9 May 2024 16:37:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8BB81880FB;
+	Thu,  9 May 2024 16:38:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jzbKU/Ei";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lykeHA+w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 536A388054; Thu,  9 May 2024 16:37:56 +0200 (CEST)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
+ id 6A34088054; Thu,  9 May 2024 16:38:05 +0200 (CEST)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2CFBE87FD7
- for <u-boot@lists.denx.de>; Thu,  9 May 2024 16:37:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D8858810E
+ for <u-boot@lists.denx.de>; Thu,  9 May 2024 16:38:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-5b2735f217aso345505eaf.2
- for <u-boot@lists.denx.de>; Thu, 09 May 2024 07:37:54 -0700 (PDT)
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-6ef98eee195so253179a34.1
+ for <u-boot@lists.denx.de>; Thu, 09 May 2024 07:38:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1715265472; x=1715870272; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=+5HkLJGrLllH1xojGL6e8CxNXG5j4+y38l2LNx+4yeY=;
- b=jzbKU/EisKpfXjfz9X1uPagvMZY+Jane+3sH1K//+sNoMWN/QXnZVwwL8qMhIe6wfx
- fGVKde2qeZcIkfJrBQrNoXgjnqoID9MHWyHGp/lMFa7CWDlsQ+3GgtiRVaJsyRqq3rm9
- dpoJ9jBCL4a3ME0KGWZ7usfb0JTbv+UTcfy/TCHe1CGGBjAUtNXOJBH8wk5Ns9wURg8Y
- kSLeOS4qrPlKh5S4hjF3cCxjI25lSEv4kmL5QvHtQoa6ETljV20llyu2wH8Dfla+Al9A
- rwbJD587oBtemTjOrBibHTlKoASEqGsyvK6ACXwQjDHbg8H5BZbtNyg2UmvdHOTC3KkR
- 7nBQ==
+ d=linaro.org; s=google; t=1715265481; x=1715870281; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2u+JFr48lqQW3khtQN88692erGm8L+75uAfk9fXF1TI=;
+ b=lykeHA+wpda+k4+Pbzt7Whqg5Wfv27Q8RlA2sfVQZBQPCvPwq6zDUmzYND4XzWzPgZ
+ 7WtdXDZagkEXs3dg7HCMIFSGFqXjKgoIOHrnNr35KqxRQxZHV18NIEps190NATJ19l9Y
+ JjzEvzPsvAgy8QgqGWasrhukwgQwmkVTI5BJf9LO6gyog34iza9tnR46DtVPNpBz0Iu+
+ i0yZrKC7AeOVUfU5cwE5VGDxQd8fjrWDGlhGVu6WJimLEQyjm74RfULAWiWsAH5S/EbX
+ KxOWdkssVkV/LqJvSqR37JMEqOtR8go8I0UdQOHegfBstfMI7yZX5XauUtN7+h0A4xgB
+ SXZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715265472; x=1715870272;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=+5HkLJGrLllH1xojGL6e8CxNXG5j4+y38l2LNx+4yeY=;
- b=KqIKkXHlwNzwHAr1dXbrM1Jo4/LDn75/AC6cQlz+c8XN48TmzUo+2Z0mED4Ot5VIz4
- rQTMxsj9+ev1i4SUtCUj2JGXn2Nd3ous5D3RAuxhtOnohmIgHjtZeMvCOdOUXhHtEW7m
- PQKoTgmfLMj36uxMY3IFNM22giHov9VNUog0iNNAWxZy7aE/n0Pt9N7qXqLSanBeSz6e
- 4O4ZH3ypdsYbD5apjyQjIoLDXygZU2fgifpEAXYPypdrtZeKJ+7hzTQYcgFBWrlHStSv
- LEeftCSCxeD1yRK4LHSagsrqMS/YeUmVfyF6fyAmbrQaANGxc3KoTHaHjnGTR0prk6nQ
- mH2A==
-X-Gm-Message-State: AOJu0Yzm9iTldPBjJSJGURO6MRDrBflywzOk13NUZuxZncoi0O0xeaYA
- 2wK9BUiebR4ThDXz8vULH0KBx3R3SC0+pR0Ce+1aNesV/BAj4R7GYomfJqOM79b9MZzmMhCrsvp
- Z
-X-Google-Smtp-Source: AGHT+IEyYTxpdlMrc/lZ+i05uYGeae8qbAGPlgAOWcQrL/Op2dSbyUFevARHcnElt5r1BDytYbiLKg==
-X-Received: by 2002:a05:6871:289a:b0:23c:bbe9:570 with SMTP id
- 586e51a60fabf-24098a62d26mr6861230fac.37.1715265472677; 
- Thu, 09 May 2024 07:37:52 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1715265481; x=1715870281;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2u+JFr48lqQW3khtQN88692erGm8L+75uAfk9fXF1TI=;
+ b=vMHsA/ePoZ6k8nLrLyX+ycQzb05QBz8ZpIQlPh+rpLkeDVDQPbyulk+KQ2JTyLRAkW
+ mB36hPj3DtARXSr2jBGLefk4QNrRAXay/OHOZnVi0IdacVbaamVlYSZAxAU7izjHpIKH
+ FkFOSoCL7Mo8zBiMU0L6u+8syrrXKe4g6xR0rXgehO9E8zhZMRa36OIi92VtVmk8N0Pd
+ vyC6QZBMKXN30uxAHS3X3HLHbSKTu8gcX/89weXV6Ad0u66uu4BNaVWmAAdthEssWD2r
+ ESMvUdTIJ7UHKrO0aA3EmtPMcxKzW2O8gSL6+gqkZIm1ZwXO+MLRsQFaGbBBRIZSXlFB
+ 1UPQ==
+X-Gm-Message-State: AOJu0YxQWAio7/iKaeyKaBtGlFtSIXwTZ5McChXPcWfLIj+/Jov6Ts5I
+ mVTWHOcZvOZ/D8xHzakl7seriMDOaLAMoyxP7g8c2HuCIoYDogldN+SoVoMPZTiUAQvAYmegFKl
+ 5
+X-Google-Smtp-Source: AGHT+IFJfmaqd5/SEueZuHCmHbFcKw7HxvQ4e40Ks1fVukwcVuFjFr7CEPwHh8qT8gM6nusD545OZQ==
+X-Received: by 2002:a05:6830:1be3:b0:6f0:396c:86f0 with SMTP id
+ 46e09a7af769-6f0b7939545mr6031735a34.12.1715265481658; 
+ Thu, 09 May 2024 07:38:01 -0700 (PDT)
 Received: from ubuntu.localdomain
  (pool-174-115-4-214.cpe.net.cable.rogers.com. [174.115.4.214])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-792bf275b07sm74563685a.24.2024.05.09.07.37.51
+ af79cd13be357-792bf275b07sm74563685a.24.2024.05.09.07.38.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 May 2024 07:37:52 -0700 (PDT)
+ Thu, 09 May 2024 07:38:01 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Raymond Mao <raymond.mao@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Simon Glass <sjg@chromium.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Ralph Siemsen <ralph.siemsen@linaro.org>,
- Eddie James <eajames@linux.ibm.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>
-Subject: [PATCH 0/4] Clean-up patch set for MbedTLS integration
-Date: Thu,  9 May 2024 07:37:37 -0700
-Message-Id: <20240509143743.1496210-1-raymond.mao@linaro.org>
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Eddie James <eajames@linux.ibm.com>
+Subject: [PATCH 1/4] image: remove redundant hash includes
+Date: Thu,  9 May 2024 07:37:38 -0700
+Message-Id: <20240509143743.1496210-2-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20240509143743.1496210-1-raymond.mao@linaro.org>
+References: <20240509143743.1496210-1-raymond.mao@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -98,28 +101,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch set is picked from the previously posted serie:
-"[RFC] Integrate MbedTLS v3.6 LTS with U-Boot"
+Remove the redundant includes of u-boot/md5.h, u-boot/sha1.h,
+u-boot/sha256.h and u-boot/sha512.h
 
-They are not directly related to MbedTLS integration, but the
-prerequisite for a few clean-up, refactoring and minor fixes.
+Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+---
+ boot/image-fit.c | 4 ----
+ boot/image.c     | 2 --
+ 2 files changed, 6 deletions(-)
 
-Raymond Mao (4):
-  image: remove redundant hash includes
-  efi_loader: remove redundant hash includes
-  md5: Use typedef for MD5 context
-  arm: EFI linker script text section alignment
-
- arch/arm/lib/elf_aarch64_efi.lds |  1 +
- boot/image-fit.c                 |  4 ----
- boot/image.c                     |  2 --
- drivers/crypto/hash/hash_sw.c    |  8 ++++----
- include/u-boot/md5.h             | 10 +++++-----
- lib/efi_loader/efi_signature.c   |  1 -
- lib/efi_loader/efi_tcg2.c        |  3 ---
- lib/md5.c                        | 10 +++++-----
- 8 files changed, 15 insertions(+), 24 deletions(-)
-
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index 89e377563ce..1efc39f4408 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -38,10 +38,6 @@ DECLARE_GLOBAL_DATA_PTR;
+ #include <image.h>
+ #include <bootstage.h>
+ #include <u-boot/crc.h>
+-#include <u-boot/md5.h>
+-#include <u-boot/sha1.h>
+-#include <u-boot/sha256.h>
+-#include <u-boot/sha512.h>
+ 
+ /*****************************************************************************/
+ /* New uImage format routines */
+diff --git a/boot/image.c b/boot/image.c
+index 073931cd7a3..e57d6eae52d 100644
+--- a/boot/image.c
++++ b/boot/image.c
+@@ -26,8 +26,6 @@
+ #endif
+ 
+ #include <asm/global_data.h>
+-#include <u-boot/md5.h>
+-#include <u-boot/sha1.h>
+ #include <linux/errno.h>
+ #include <asm/io.h>
+ 
 -- 
 2.25.1
 
