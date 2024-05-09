@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00F36C25B74
-	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 23:44:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91655C10F1A
+	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 23:44:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F22788825E;
-	Fri, 10 May 2024 01:44:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5AC47884B0;
+	Fri, 10 May 2024 01:44:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC4C988441; Fri, 10 May 2024 01:44:16 +0200 (CEST)
+ id B17B78825E; Fri, 10 May 2024 01:44:17 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 15EF98825E
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 01:44:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 70E6088194
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 01:44:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B2A6912FC;
- Thu,  9 May 2024 16:44:38 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3374615A1;
+ Thu,  9 May 2024 16:44:40 -0700 (PDT)
 Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
  [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 252303F6A8;
- Thu,  9 May 2024 16:44:12 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9B11E3F6A8;
+ Thu,  9 May 2024 16:44:13 -0700 (PDT)
 From: Andre Przywara <andre.przywara@arm.com>
 To: Jaehoon Chung <jh80.chung@samsung.com>,
  Jagan Teki <jagan@amarulasolutions.com>
@@ -34,9 +34,9 @@ Cc: Jernej Skrabec <jernej.skrabec@gmail.com>,
  Chris Morgan <macromorgan@hotmail.com>, Ryan Walklin <ryan@testtoast.com>,
  u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/2] power: pmic: sunxi: add AXP717 SPL driver
-Date: Fri, 10 May 2024 00:43:18 +0100
-Message-Id: <20240509234319.13104-2-andre.przywara@arm.com>
+Subject: [PATCH 2/2] power: regulator: add AXP717 support
+Date: Fri, 10 May 2024 00:43:19 +0100
+Message-Id: <20240509234319.13104-3-andre.przywara@arm.com>
 X-Mailer: git-send-email 2.35.8
 In-Reply-To: <20240509234319.13104-1-andre.przywara@arm.com>
 References: <20240509234319.13104-1-andre.przywara@arm.com>
@@ -58,222 +58,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On boards using the AXP717 PMIC, the DRAM rail is often not setup
-correctly at reset time, so we have to program the PMIC very early in
-the SPL, before running the DRAM initialisation.
+The X-Powers AXP717 is a PMIC with four buck converters and a number
+of LDOs, one of which is actually fixed (so not modelled here).
 
-Add a simple AXP717 PMIC driver that knows about the buck converters, so
-that we can set the voltage for the DRAM chips and the CPU cores.
+Add the compatible string and the respective regulator ranges to allow
+drivers to adjust voltages.
 
 Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 ---
- arch/arm/mach-sunxi/pmic_bus.c |  3 ++
- board/sunxi/board.c            |  2 +-
- drivers/power/Kconfig          | 17 +++++--
- drivers/power/Makefile         |  1 +
- drivers/power/axp717.c         | 92 ++++++++++++++++++++++++++++++++++
- 5 files changed, 110 insertions(+), 5 deletions(-)
- create mode 100644 drivers/power/axp717.c
+ drivers/power/pmic/axp.c                |  1 +
+ drivers/power/regulator/axp_regulator.c | 28 +++++++++++++++++++++++++
+ include/axp_pmic.h                      |  1 +
+ 3 files changed, 30 insertions(+)
 
-diff --git a/arch/arm/mach-sunxi/pmic_bus.c b/arch/arm/mach-sunxi/pmic_bus.c
-index 87df312725c..8e19324c8ac 100644
---- a/arch/arm/mach-sunxi/pmic_bus.c
-+++ b/arch/arm/mach-sunxi/pmic_bus.c
-@@ -19,6 +19,7 @@
- #define AXP152_I2C_ADDR			0x30
+diff --git a/drivers/power/pmic/axp.c b/drivers/power/pmic/axp.c
+index fdf9ff66c29..c300fd2bbc2 100644
+--- a/drivers/power/pmic/axp.c
++++ b/drivers/power/pmic/axp.c
+@@ -89,6 +89,7 @@ static const struct udevice_id axp_pmic_ids[] = {
+ 	{ .compatible = "x-powers,axp221", .data = AXP221_ID },
+ 	{ .compatible = "x-powers,axp223", .data = AXP223_ID },
+ 	{ .compatible = "x-powers,axp313a", .data = AXP313_ID },
++	{ .compatible = "x-powers,axp717", .data = AXP717_ID },
+ 	{ .compatible = "x-powers,axp803", .data = AXP803_ID },
+ 	{ .compatible = "x-powers,axp806", .data = AXP806_ID },
+ 	{ .compatible = "x-powers,axp809", .data = AXP809_ID },
+diff --git a/drivers/power/regulator/axp_regulator.c b/drivers/power/regulator/axp_regulator.c
+index d27e09538e0..75cdbca30f6 100644
+--- a/drivers/power/regulator/axp_regulator.c
++++ b/drivers/power/regulator/axp_regulator.c
+@@ -189,6 +189,33 @@ static const struct axp_regulator_plat axp313_regulators[] = {
+ 	{ }
+ };
  
- #define AXP209_I2C_ADDR			0x34
-+#define AXP717_I2C_ADDR			0x34
- 
- #define AXP305_I2C_ADDR			0x36
- #define AXP313_I2C_ADDR			0x36
-@@ -36,6 +37,8 @@ static int pmic_i2c_address(void)
- 		return AXP305_I2C_ADDR;
- 	if (IS_ENABLED(CONFIG_AXP313_POWER))
- 		return AXP313_I2C_ADDR;
-+	if (IS_ENABLED(CONFIG_AXP717_POWER))
-+		return AXP717_I2C_ADDR;
- 
- 	/* Other AXP2xx and AXP8xx variants */
- 	return AXP209_I2C_ADDR;
-diff --git a/board/sunxi/board.c b/board/sunxi/board.c
-index 1313b01dcea..2c65f4c93cb 100644
---- a/board/sunxi/board.c
-+++ b/board/sunxi/board.c
-@@ -563,7 +563,7 @@ void sunxi_board_init(void)
- #if defined CONFIG_AXP152_POWER || defined CONFIG_AXP209_POWER || \
- 	defined CONFIG_AXP221_POWER || defined CONFIG_AXP305_POWER || \
- 	defined CONFIG_AXP809_POWER || defined CONFIG_AXP818_POWER || \
--	defined CONFIG_AXP313_POWER
-+	defined CONFIG_AXP313_POWER || defined CONFIG_AXP717_POWER
- 	power_failed = axp_init();
- 
- 	if (IS_ENABLED(CONFIG_AXP_DISABLE_BOOT_ON_POWERON) && !power_failed) {
-diff --git a/drivers/power/Kconfig b/drivers/power/Kconfig
-index 33b8bc1214d..5556a22cf69 100644
---- a/drivers/power/Kconfig
-+++ b/drivers/power/Kconfig
-@@ -109,6 +109,13 @@ config AXP313_POWER
- 	Select this to enable support for the AXP313 PMIC found on some
- 	H616 boards.
- 
-+config AXP717_POWER
-+	bool "axp717 pmic support"
-+	select AXP_PMIC_BUS
-+	select CMD_POWEROFF
-+	---help---
-+	Select this to enable support for the AXP717 PMIC found on some boards.
-+
- config AXP809_POWER
- 	bool "axp809 pmic support"
- 	depends on MACH_SUN9I
-@@ -151,10 +158,11 @@ config AXP_DCDC1_VOLT
- 
- config AXP_DCDC2_VOLT
- 	int "axp pmic dcdc2 voltage"
--	depends on AXP152_POWER || AXP209_POWER || AXP221_POWER || AXP809_POWER || AXP818_POWER || AXP313_POWER
-+	depends on AXP152_POWER || AXP209_POWER || AXP221_POWER || AXP809_POWER || AXP818_POWER || AXP313_POWER || AXP717_POWER
- 	default 900 if AXP818_POWER
- 	default 1400 if AXP152_POWER || AXP209_POWER
- 	default 1000 if AXP313_POWER
-+	default 1000 if AXP717_POWER
- 	default 1200 if MACH_SUN6I
- 	default 1100 if MACH_SUN8I
- 	default 0 if MACH_SUN9I
-@@ -167,11 +175,11 @@ config AXP_DCDC2_VOLT
- 	On A80 boards dcdc2 powers the GPU and can be left off.
- 	On A83T boards dcdc2 is used for VDD-CPUA(cluster 0) and should be 0.9V.
- 	On R40 boards dcdc2 is VDD-CPU and should be 1.1V
--	On boards using the AXP313 it's often VDD-CPU.
-+	On boards using the AXP313 or AXP717 it's often VDD-CPU.
- 
- config AXP_DCDC3_VOLT
- 	int "axp pmic dcdc3 voltage"
--	depends on AXP152_POWER || AXP209_POWER || AXP221_POWER || AXP809_POWER || AXP818_POWER || AXP313_POWER
-+	depends on AXP152_POWER || AXP209_POWER || AXP221_POWER || AXP809_POWER || AXP818_POWER || AXP313_POWER || AXP717_POWER
- 	default 900 if AXP809_POWER || AXP818_POWER
- 	default 1500 if AXP152_POWER
- 	default 1250 if AXP209_POWER
-@@ -188,7 +196,8 @@ config AXP_DCDC3_VOLT
- 	On A80 boards dcdc3 is used for VDD-CPUA(cluster 0) and should be 0.9V.
- 	On A83T boards dcdc3 is used for VDD-CPUB(cluster 1) and should be 0.9V.
- 	On R40 boards dcdc3 is VDD-SYS and VDD-GPU and should be 1.1V.
--	On boards using the AXP313 it's often VDD-DRAM and should be 1.1V for LPDDR4.
-+	On boards using the AXP313 or AXP717 it's often VDD-DRAM and should
-+	be 1.1V for LPDDR4.
- 
- config AXP_DCDC4_VOLT
- 	int "axp pmic dcdc4 voltage"
-diff --git a/drivers/power/Makefile b/drivers/power/Makefile
-index c7ee4595fc8..41ebb494fff 100644
---- a/drivers/power/Makefile
-+++ b/drivers/power/Makefile
-@@ -13,6 +13,7 @@ obj-$(CONFIG_AXP209_POWER)	+= axp209.o
- obj-$(CONFIG_AXP221_POWER)	+= axp221.o
- obj-$(CONFIG_AXP305_POWER)	+= axp305.o
- obj-$(CONFIG_AXP313_POWER)	+= axp313.o
-+obj-$(CONFIG_AXP717_POWER)	+= axp717.o
- obj-$(CONFIG_AXP809_POWER)	+= axp809.o
- obj-$(CONFIG_AXP818_POWER)	+= axp818.o
- obj-$(CONFIG_EXYNOS_TMU)	+= exynos-tmu.o
-diff --git a/drivers/power/axp717.c b/drivers/power/axp717.c
-new file mode 100644
-index 00000000000..7c77c09ea8f
---- /dev/null
-+++ b/drivers/power/axp717.c
-@@ -0,0 +1,92 @@
-+// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * AXP717 SPL driver
-+ * (C) Copyright 2024 Arm Ltd.
++ * The "dcdc2" regulator has another range, beyond 1.54V up to 3.4V, in
++ * steps of 100mV. We cannot model this easily, but also don't need that,
++ * since it's typically only used for lower voltages anyway, so just ignore it.
 + */
-+
-+#include <common.h>
-+#include <command.h>
-+#include <errno.h>
-+#include <asm/arch/pmic_bus.h>
-+#include <axp_pmic.h>
-+
-+enum axp717_reg {
-+	AXP717_CHIP_VERSION = 0x3,
-+	AXP717_SHUTDOWN = 0x27,
-+	AXP717_OUTPUT_CTRL1 = 0x80,
-+	AXP717_DCDC1_VOLTAGE = 0x83,
++static const struct axp_regulator_plat axp717_regulators[] = {
++	{ "dcdc1", 0x80, BIT(0), 0x83, 0x7f,  500, 1540,  10, 70 },
++	{ "dcdc2", 0x80, BIT(1), 0x84, 0x7f,  500, 1540,  10, 70 },
++	{ "dcdc3", 0x80, BIT(2), 0x85, 0x7f,  500, 1840,  10, 70 },
++	{ "dcdc4", 0x80, BIT(3), 0x86, 0x7f, 1000, 3700, 100, NA },
++	{ "aldo1", 0x90, BIT(0), 0x93, 0x1f,  500, 3500, 100, NA },
++	{ "aldo2", 0x90, BIT(1), 0x94, 0x1f,  500, 3500, 100, NA },
++	{ "aldo3", 0x90, BIT(2), 0x95, 0x1f,  500, 3500, 100, NA },
++	{ "aldo4", 0x90, BIT(3), 0x96, 0x1f,  500, 3500, 100, NA },
++	{ "bldo1", 0x90, BIT(4), 0x97, 0x1f,  500, 3500, 100, NA },
++	{ "bldo2", 0x90, BIT(5), 0x98, 0x1f,  500, 3500, 100, NA },
++	{ "bldo3", 0x90, BIT(6), 0x99, 0x1f,  500, 3500, 100, NA },
++	{ "bldo4", 0x90, BIT(7), 0x9a, 0x1f,  500, 3500, 100, NA },
++	{ "cldo1", 0x91, BIT(0), 0x9b, 0x1f,  500, 3500, 100, NA },
++	{ "cldo2", 0x91, BIT(1), 0x9c, 0x1f,  500, 3500, 100, NA },
++	{ "cldo3", 0x91, BIT(2), 0x9d, 0x1f,  500, 3500, 100, NA },
++	{ "cldo4", 0x91, BIT(3), 0x9e, 0x1f,  500, 3500, 100, NA },
++	{"cpusldo",0x91, BIT(4), 0x9f, 0x1f,  500, 1400,  50, NA },
++	{" boost", 0x19, BIT(4), 0x1e, 0xf0, 4550, 5510,  64, NA },
++	{ }
 +};
 +
-+#define AXP717_CHIP_VERSION_MASK	0xc8
-+#define AXP717_DCDC_1220MV_OFFSET	71
-+#define AXP717_POWEROFF			(1U << 0)
-+#define DCDC_DVM_ENABLE			(1U << 7)
-+
-+static u8 axp_mvolt_to_cfg(int mvolt, int min, int max, int div)
-+{
-+	if (mvolt < min)
-+		mvolt = min;
-+	else if (mvolt > max)
-+		mvolt = max;
-+
-+	return (mvolt - min) / div;
-+}
-+
-+static int axp_set_dcdc(int dcdc_num, unsigned int mvolt)
-+{
-+	int ret;
-+	u8 cfg = DCDC_DVM_ENABLE;
-+
-+	if (dcdc_num < 1 || dcdc_num > 3)
-+		return -EINVAL;
-+
-+	if (mvolt >= 1220)
-+		cfg |= AXP717_DCDC_1220MV_OFFSET +
-+			axp_mvolt_to_cfg(mvolt, 1220,
-+					 dcdc_num == 3 ? 1840 : 1540, 20);
-+	else
-+		cfg |= axp_mvolt_to_cfg(mvolt, 500, 1200, 10);
-+
-+	if (mvolt == 0)
-+		return pmic_bus_clrbits(AXP717_OUTPUT_CTRL1,
-+					1U << (dcdc_num -1));
-+
-+	ret = pmic_bus_write(AXP717_DCDC1_VOLTAGE + dcdc_num - 1, cfg);
-+	if (ret)
-+		return ret;
-+
-+	return pmic_bus_setbits(AXP717_OUTPUT_CTRL1, 1U << (dcdc_num - 1));
-+}
-+
-+int axp_set_dcdc1(unsigned int mvolt)
-+{
-+	return axp_set_dcdc(1, mvolt);
-+}
-+
-+int axp_set_dcdc2(unsigned int mvolt)
-+{
-+	return axp_set_dcdc(2, mvolt);
-+}
-+
-+int axp_set_dcdc3(unsigned int mvolt)
-+{
-+	return axp_set_dcdc(3, mvolt);
-+}
-+
-+int axp_init(void)
-+{
-+	return pmic_bus_init();
-+}
-+
-+#if !CONFIG_IS_ENABLED(ARM_PSCI_FW) && !IS_ENABLED(CONFIG_SYSRESET_CMD_POWEROFF)
-+int do_poweroff(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-+{
-+	pmic_bus_setbits(AXP717_SHUTDOWN, AXP717_POWEROFF);
-+
-+	/* infinite loop during shutdown */
-+	while (1) {}
-+
-+	/* not reached */
-+	return 0;
-+}
-+#endif
+ static const struct axp_regulator_plat axp803_regulators[] = {
+ 	{ "dcdc1", 0x10, BIT(0), 0x20, 0x1f, 1600, 3400, 100, NA },
+ 	{ "dcdc2", 0x10, BIT(1), 0x21, 0x7f,  500, 1300,  10, 70 },
+@@ -291,6 +318,7 @@ static const struct axp_regulator_plat *const axp_regulators[] = {
+ 	[AXP221_ID]	= axp22x_regulators,
+ 	[AXP223_ID]	= axp22x_regulators,
+ 	[AXP313_ID]	= axp313_regulators,
++	[AXP717_ID]	= axp717_regulators,
+ 	[AXP803_ID]	= axp803_regulators,
+ 	[AXP806_ID]	= axp806_regulators,
+ 	[AXP809_ID]	= axp809_regulators,
+diff --git a/include/axp_pmic.h b/include/axp_pmic.h
+index aabafc8501b..ae62ef0d76d 100644
+--- a/include/axp_pmic.h
++++ b/include/axp_pmic.h
+@@ -33,6 +33,7 @@ enum {
+ 	AXP221_ID,
+ 	AXP223_ID,
+ 	AXP313_ID,
++	AXP717_ID,
+ 	AXP803_ID,
+ 	AXP806_ID,
+ 	AXP809_ID,
 -- 
 2.35.8
 
