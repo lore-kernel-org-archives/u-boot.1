@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D248BC10F1A
-	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 16:43:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B240C25B10
+	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 16:43:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F19B884AE;
+	by phobos.denx.de (Postfix) with ESMTP id A82A08847B;
 	Thu,  9 May 2024 18:41:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fxZJ9E6G";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hCfi7/Gs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6C6188441; Thu,  9 May 2024 18:41:52 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 9C2BC8811C; Thu,  9 May 2024 18:41:53 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02740883E2
- for <u-boot@lists.denx.de>; Thu,  9 May 2024 18:41:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4913988416
+ for <u-boot@lists.denx.de>; Thu,  9 May 2024 18:41:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 449GfZap038983;
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 449GfZt7060450;
  Thu, 9 May 2024 11:41:35 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1715272895;
- bh=ZB4Yg/YoBeu8s1O8mXYXK1nIo+TRa5YumnFSn1ikL7Y=;
+ bh=Nr/7Gb32CASZAF1Ls4DiRELkC+P4jZbpkqyCgzkyeJw=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=fxZJ9E6GGZYue09eKRCTQvYPAjeT1r40pjPbGXlT43IR92xuGArw+5KQgm+/omAf8
- vOMvyS43gPyaFJlm+1vgPPjTJ1FiGub9by7rz/D3V7SqxE34DqW2xqml7LahFyBZvq
- 6QOB3PQoc71PDJarrZaoPwbHIGZ4CI42obLd5CNo=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 449GfZP6063034
+ b=hCfi7/GsHnicwWvuY2EEZQJcRbp3yj/HRtRwz/hefZymtIBW6KgqeF1RhGBVcfBi9
+ azED1W1LsA7wAqnRyShhyH1JjIna8SLcSlIJ0hJ2p71pS42x8yJkZVIBvTPf+o+pt6
+ 5hFZSAz2P4TmH1UnQP+S4vh2FEReFpP0CZbaO9bw=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 449GfZa5038121
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Thu, 9 May 2024 11:41:35 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 9
  May 2024 11:41:35 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 9 May 2024 11:41:34 -0500
+ Frontend Transport; Thu, 9 May 2024 11:41:35 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 449GfYTC116923;
- Thu, 9 May 2024 11:41:34 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 449GfZhD116947;
+ Thu, 9 May 2024 11:41:35 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Heinrich Schuchardt
@@ -67,10 +67,9 @@ To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ilias Apalodimas
  <ilias.apalodimas@linaro.org>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH v4 01/19] doc: uefi: capsules: Add Capsule Update porting
- section
-Date: Thu, 9 May 2024 11:41:05 -0500
-Message-ID: <20240509164123.1753050-2-j-humphreys@ti.com>
+Subject: [PATCH v4 06/19] configs: j721e: Enable EFI capsule update
+Date: Thu, 9 May 2024 11:41:10 -0500
+Message-ID: <20240509164123.1753050-7-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240509164123.1753050-1-j-humphreys@ti.com>
 References: <20240509164123.1753050-1-j-humphreys@ti.com>
@@ -94,41 +93,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Created a capsule update porting section in the documentation that outlines
-the steps a board developer must do when porting from an existing reference
-board implementation.
-
-In particular, added a big warning that new capsule GUID's need to be
-defined.
+Enable on disk, raw capsule update.
 
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- doc/develop/uefi/uefi.rst | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ configs/j721e_evm_a72_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
-index 0389b269c01..36ac75278fa 100644
---- a/doc/develop/uefi/uefi.rst
-+++ b/doc/develop/uefi/uefi.rst
-@@ -631,6 +631,18 @@ where version.dtso looks like::
- The properties of image-type-id and image-index must match the value
- defined in the efi_fw_image array as image_type_id and image_index.
- 
-+Porting Capsule Updates to new boards
-+*************************************
-+
-+It is important, when using a reference board as a starting point for a custom
-+board, that certain steps are taken to properly support Capsule Updates.
-+
-+Capsule GUIDs need to be unique for each firmware and board. That is, if two
-+firmwares are built from the same source but result in different binaries
-+because they are built for different boards, they should have different GUIDs.
-+Therefore it is important when creating support for a new board, new GUIDs are
-+defined in the board's header file.  *DO NOT* reuse capsule GUIDs.
-+
- Executing the boot manager
- ~~~~~~~~~~~~~~~~~~~~~~~~~~
- 
+diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_defconfig
+index 3d8e9391987..e2c2ad27ef8 100644
+--- a/configs/j721e_evm_a72_defconfig
++++ b/configs/j721e_evm_a72_defconfig
+@@ -210,3 +210,5 @@ CONFIG_UFS=y
+ CONFIG_CADENCE_UFS=y
+ CONFIG_TI_J721E_UFS=y
+ CONFIG_EFI_SET_TIME=y
++CONFIG_EFI_CAPSULE_ON_DISK=y
++CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
 -- 
 2.34.1
 
