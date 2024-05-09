@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B3C8C10F1A
-	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 16:43:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29ABAC10F1A
+	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 16:43:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA4F6884A4;
-	Thu,  9 May 2024 18:41:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3B3D0884A6;
+	Thu,  9 May 2024 18:41:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="waRQBwrF";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="yMI7DeYG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0F0088496; Thu,  9 May 2024 18:41:51 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id CD5C6882AD; Thu,  9 May 2024 18:41:51 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93E2788439
- for <u-boot@lists.denx.de>; Thu,  9 May 2024 18:41:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EFBA78832B
+ for <u-boot@lists.denx.de>; Thu,  9 May 2024 18:41:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 449GfZwg004865;
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 449GfZxJ060438;
  Thu, 9 May 2024 11:41:35 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1715272895;
- bh=M8v0fvyRxrVI3TqLdgeqewynV7LLOmILi0xN54c59Pw=;
+ bh=CL6LydXks4H5Dox5okKqwFhBEatRak7DVUWooRo9Nh8=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=waRQBwrFuMg6ir6urLJlj+h0yMupWQaCYM2457GyKl1av2/CnXSIwSIXMMUTk7u0t
- 1dODTArCFFjG42751Frzmz+Z79jUNak3CZ+/nykIloxvxg5Mh8a+O9rZnskUxfPXWt
- 50c33izIq+DWdqUj2l4KMKRHg7LuXNjmQryrhIME=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 449GfZHe105681
+ b=yMI7DeYGSxCxWya5GGiXbj1OiTzfStqZtx1yErR0rVYSN0/38yyy/DKCRWe6WmKmL
+ xLD1R3sXOxm2FtLCkHW5S2J8a/ZaYx3ccUA6605g6w/R6yCBaShbzffWJgFGPrWpVO
+ gDIXjG1hgbOSE62yD7h+RHWVXINDKCXYVyOsipjo=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 449GfZS0063040
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Thu, 9 May 2024 11:41:35 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 9
  May 2024 11:41:35 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Thu, 9 May 2024 11:41:35 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 449GfZvw063041;
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 449GfZd9063032;
  Thu, 9 May 2024 11:41:35 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
@@ -67,9 +67,9 @@ To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ilias Apalodimas
  <ilias.apalodimas@linaro.org>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH v4 10/19] configs: beagleplay: Enable EFI capsule update
-Date: Thu, 9 May 2024 11:41:14 -0500
-Message-ID: <20240509164123.1753050-11-j-humphreys@ti.com>
+Subject: [PATCH v4 05/19] board: j721e: Define capsule update firmware info
+Date: Thu, 9 May 2024 11:41:09 -0500
+Message-ID: <20240509164123.1753050-6-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240509164123.1753050-1-j-humphreys@ti.com>
 References: <20240509164123.1753050-1-j-humphreys@ti.com>
@@ -93,23 +93,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable on disk, raw capsule update.
+Define the firmware components updatable via EFI capsule update, including
+defining capsule GUIDs for the various firmware components for the
+SK-TDA4VM.
 
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- configs/am62x_beagleplay_a53_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
+ board/ti/j721e/evm.c        | 38 +++++++++++++++++++++++++++++++++++++
+ include/configs/j721e_evm.h | 29 ++++++++++++++++++++++++++++
+ 2 files changed, 67 insertions(+)
 
-diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
-index 933baba9211..ef7d81b5379 100644
---- a/configs/am62x_beagleplay_a53_defconfig
-+++ b/configs/am62x_beagleplay_a53_defconfig
-@@ -124,3 +124,5 @@ CONFIG_EXT4_WRITE=y
- CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
- CONFIG_LZO=y
- CONFIG_EFI_SET_TIME=y
-+CONFIG_EFI_CAPSULE_ON_DISK=y
-+CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
+index 539eaf47186..e4fa90e11e9 100644
+--- a/board/ti/j721e/evm.c
++++ b/board/ti/j721e/evm.c
+@@ -7,6 +7,7 @@
+  *
+  */
+ 
++#include <efi_loader.h>
+ #include <generic-phy.h>
+ #include <image.h>
+ #include <net.h>
+@@ -32,6 +33,43 @@
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
++struct efi_fw_image fw_images[] = {
++	{
++		.image_type_id = J721E_SK_TIBOOT3_IMAGE_GUID,
++		.fw_name = u"J721E_SK_TIBOOT3",
++		.image_index = 1,
++	},
++	{
++		.image_type_id = J721E_SK_SPL_IMAGE_GUID,
++		.fw_name = u"J721E_SK_SPL",
++		.image_index = 2,
++	},
++	{
++		.image_type_id = J721E_SK_UBOOT_IMAGE_GUID,
++		.fw_name = u"J721E_SK_UBOOT",
++		.image_index = 3,
++	},
++	{
++		.image_type_id = J721E_SK_SYSFW_IMAGE_GUID,
++		.fw_name = u"J721E_SK_SYSFW",
++		.image_index = 4,
++	}
++};
++
++struct efi_capsule_update_info update_info = {
++	.dfu_string = "sf 0:0=tiboot3.bin raw 0 80000;"
++	"tispl.bin raw 80000 200000;u-boot.img raw 280000 400000;"
++	"sysfw.itb raw 6C0000 100000",
++	.num_images = ARRAY_SIZE(fw_images),
++	.images = fw_images,
++};
++
++void set_dfu_alt_info(char *interface, char *devstr)
++{
++	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
++		env_set("dfu_alt_info", update_info.dfu_string);
++}
++
+ int board_init(void)
+ {
+ 	return 0;
+diff --git a/include/configs/j721e_evm.h b/include/configs/j721e_evm.h
+index c26438c8684..a5140ea6a11 100644
+--- a/include/configs/j721e_evm.h
++++ b/include/configs/j721e_evm.h
+@@ -22,6 +22,35 @@
+ #define CFG_SYS_UBOOT_BASE		0x50080000
+ #endif
+ 
++/**
++ * define J721E_SK_TIBOOT3_IMAGE_GUID - firmware GUID for J721e sk tiboot3.bin
++ * define J721E_SK_SPL_IMAGE_GUID     - firmware GUID for J721e sk SPL
++ * define J721E_SK_UBOOT_IMAGE_GUID   - firmware GUID for J721e sk UBOOT
++ * define J721E_SK_SYSFW_IMAGE_GUID   - firmware GUID for J721e sk SYSFW
++ *
++ * These GUIDs are used in capsules updates to identify the corresponding
++ * firmware object.
++ *
++ * Board developers using this as a starting reference should
++ * define their own GUIDs to ensure that firmware repositories (like
++ * LVFS) do not confuse them.
++ */
++#define J721E_SK_TIBOOT3_IMAGE_GUID \
++	EFI_GUID(0xe672b518, 0x7cd7, 0x4014, 0xbd, 0x8d, \
++		 0x40, 0x72, 0x4d, 0x0a, 0xd4, 0xdc)
++
++#define J721E_SK_SPL_IMAGE_GUID \
++	EFI_GUID(0x86f710ad, 0x10cf, 0x46ea, 0xac, 0x67, \
++		 0x85, 0x6a, 0xe0, 0x6e, 0xfa, 0xd2)
++
++#define J721E_SK_UBOOT_IMAGE_GUID \
++	EFI_GUID(0x81b58fb0, 0x3b00, 0x4add, 0xa2, 0x0a, \
++		 0xc1, 0x85, 0xbb, 0xac, 0xa1, 0xed)
++
++#define J721E_SK_SYSFW_IMAGE_GUID \
++	EFI_GUID(0x6fd10680, 0x361b, 0x431f, 0x80, 0xaa, \
++		 0x89, 0x94, 0x55, 0x81, 0x9e, 0x11)
++
+ /* Now for the remaining common defines */
+ #include <configs/ti_armv7_common.h>
+ 
 -- 
 2.34.1
 
