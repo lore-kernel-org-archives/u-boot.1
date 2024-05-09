@@ -4,64 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01ED3C10F1A
-	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 14:21:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45F06C25B10
+	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 14:38:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD57A8812F;
-	Thu,  9 May 2024 16:20:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 3D746880A3;
+	Thu,  9 May 2024 16:37:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TwBA/w4t";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jzbKU/Ei";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1018C88074; Thu,  9 May 2024 16:20:50 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 536A388054; Thu,  9 May 2024 16:37:56 +0200 (CEST)
+Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
+ [IPv6:2607:f8b0:4864:20::c2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60CDC88074
- for <u-boot@lists.denx.de>; Thu,  9 May 2024 16:20:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2CFBE87FD7
+ for <u-boot@lists.denx.de>; Thu,  9 May 2024 16:37:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hnagalla@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 449EKiEZ124646;
- Thu, 9 May 2024 09:20:44 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1715264444;
- bh=QO5uG8YpNc+iPyPN+9mF/OE3S3mnQsj54R3LDkEZOfI=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=TwBA/w4t/an/WwsgjKgbO7qYPHrjr8aj+YRje34pichJ4Jgl0A7qtqhKc0KvgY8Es
- qhXMTehxPCvWyiv2+pcYCSIqRpmaIt1PlLk3M0RkqQfxCRAIxiIgBJLU+tFltSb+rq
- DJFIGEiz92Y4535erqpkPm4OI0MbbaeLbei0qRys=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 449EKiZg059606
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 9 May 2024 09:20:44 -0500
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 9
- May 2024 09:20:44 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 9 May 2024 09:20:44 -0500
-Received: from localhost ([10.250.32.135])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 449EKiYq075433;
- Thu, 9 May 2024 09:20:44 -0500
-From: Hari Nagalla <hnagalla@ti.com>
-To: <trini@konsulko.com>, <nm@ti.com>, <devarsht@ti.com>, <afd@ti.com>,
- <b-padhi@ti.com>, <u-boot@lists.denx.de>
-CC: <u-kumar1@ti.com>, <praneeth@ti.com>
-Subject: [PATCH 2/4] remoteproc: k3-r5: Add support for R5F core on AM62A SoCs
-Date: Thu, 9 May 2024 09:20:35 -0500
-Message-ID: <20240509142037.32064-3-hnagalla@ti.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20240509142037.32064-1-hnagalla@ti.com>
-References: <20240509142037.32064-1-hnagalla@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-oo1-xc2d.google.com with SMTP id
+ 006d021491bc7-5b2735f217aso345505eaf.2
+ for <u-boot@lists.denx.de>; Thu, 09 May 2024 07:37:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1715265472; x=1715870272; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=+5HkLJGrLllH1xojGL6e8CxNXG5j4+y38l2LNx+4yeY=;
+ b=jzbKU/EisKpfXjfz9X1uPagvMZY+Jane+3sH1K//+sNoMWN/QXnZVwwL8qMhIe6wfx
+ fGVKde2qeZcIkfJrBQrNoXgjnqoID9MHWyHGp/lMFa7CWDlsQ+3GgtiRVaJsyRqq3rm9
+ dpoJ9jBCL4a3ME0KGWZ7usfb0JTbv+UTcfy/TCHe1CGGBjAUtNXOJBH8wk5Ns9wURg8Y
+ kSLeOS4qrPlKh5S4hjF3cCxjI25lSEv4kmL5QvHtQoa6ETljV20llyu2wH8Dfla+Al9A
+ rwbJD587oBtemTjOrBibHTlKoASEqGsyvK6ACXwQjDHbg8H5BZbtNyg2UmvdHOTC3KkR
+ 7nBQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1715265472; x=1715870272;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+5HkLJGrLllH1xojGL6e8CxNXG5j4+y38l2LNx+4yeY=;
+ b=KqIKkXHlwNzwHAr1dXbrM1Jo4/LDn75/AC6cQlz+c8XN48TmzUo+2Z0mED4Ot5VIz4
+ rQTMxsj9+ev1i4SUtCUj2JGXn2Nd3ous5D3RAuxhtOnohmIgHjtZeMvCOdOUXhHtEW7m
+ PQKoTgmfLMj36uxMY3IFNM22giHov9VNUog0iNNAWxZy7aE/n0Pt9N7qXqLSanBeSz6e
+ 4O4ZH3ypdsYbD5apjyQjIoLDXygZU2fgifpEAXYPypdrtZeKJ+7hzTQYcgFBWrlHStSv
+ LEeftCSCxeD1yRK4LHSagsrqMS/YeUmVfyF6fyAmbrQaANGxc3KoTHaHjnGTR0prk6nQ
+ mH2A==
+X-Gm-Message-State: AOJu0Yzm9iTldPBjJSJGURO6MRDrBflywzOk13NUZuxZncoi0O0xeaYA
+ 2wK9BUiebR4ThDXz8vULH0KBx3R3SC0+pR0Ce+1aNesV/BAj4R7GYomfJqOM79b9MZzmMhCrsvp
+ Z
+X-Google-Smtp-Source: AGHT+IEyYTxpdlMrc/lZ+i05uYGeae8qbAGPlgAOWcQrL/Op2dSbyUFevARHcnElt5r1BDytYbiLKg==
+X-Received: by 2002:a05:6871:289a:b0:23c:bbe9:570 with SMTP id
+ 586e51a60fabf-24098a62d26mr6861230fac.37.1715265472677; 
+ Thu, 09 May 2024 07:37:52 -0700 (PDT)
+Received: from ubuntu.localdomain
+ (pool-174-115-4-214.cpe.net.cable.rogers.com. [174.115.4.214])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-792bf275b07sm74563685a.24.2024.05.09.07.37.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 May 2024 07:37:52 -0700 (PDT)
+From: Raymond Mao <raymond.mao@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Raymond Mao <raymond.mao@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>,
+ Eddie James <eajames@linux.ibm.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>
+Subject: [PATCH 0/4] Clean-up patch set for MbedTLS integration
+Date: Thu,  9 May 2024 07:37:37 -0700
+Message-Id: <20240509143743.1496210-1-raymond.mao@linaro.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,116 +98,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-AM62A has a R5F core in MCU voltage domain.
-Extend support for R5F remote proc driver on AM62A with compatible
-strings.
+This patch set is picked from the previously posted serie:
+"[RFC] Integrate MbedTLS v3.6 LTS with U-Boot"
 
-Signed-off-by: Hari Nagalla <hnagalla@ti.com>
----
- drivers/remoteproc/ti_k3_r5f_rproc.c | 29 ++++++++++++++++++++++++++--
- 1 file changed, 27 insertions(+), 2 deletions(-)
+They are not directly related to MbedTLS integration, but the
+prerequisite for a few clean-up, refactoring and minor fixes.
 
-diff --git a/drivers/remoteproc/ti_k3_r5f_rproc.c b/drivers/remoteproc/ti_k3_r5f_rproc.c
-index 631e548dcc..35835b2d61 100644
---- a/drivers/remoteproc/ti_k3_r5f_rproc.c
-+++ b/drivers/remoteproc/ti_k3_r5f_rproc.c
-@@ -40,6 +40,8 @@
- #define PROC_BOOT_CFG_FLAG_GEN_IGN_BOOTVECTOR		0x10000000
- /* Available from J7200 SoCs onwards */
- #define PROC_BOOT_CFG_FLAG_R5_MEM_INIT_DIS		0x00004000
-+#define PROC_BOOT_CFG_FLAG_R5_SINGLE_CORE		0x00008000
-+
- 
- /* R5 TI-SCI Processor Control Flags */
- #define PROC_BOOT_CTRL_FLAG_R5_CORE_HALT		0x00000001
-@@ -55,6 +57,8 @@
- enum cluster_mode {
- 	CLUSTER_MODE_SPLIT = 0,
- 	CLUSTER_MODE_LOCKSTEP,
-+	CLUSTER_MODE_SINGLECPU,
-+	CLUSTER_MODE_SINGLECORE,
- };
- 
- /**
-@@ -65,6 +69,7 @@ enum cluster_mode {
- struct k3_r5f_ip_data {
- 	bool tcm_is_double;
- 	bool tcm_ecc_autoinit;
-+	bool is_single_core;
- };
- 
- /**
-@@ -599,8 +604,10 @@ static int k3_r5f_rproc_configure(struct k3_r5f_core *core)
- 	/* Sanity check for Lockstep mode */
- 	lockstep_permitted = !!(sts &
- 				PROC_BOOT_STATUS_FLAG_R5_LOCKSTEP_PERMITTED);
--	if (cluster->mode && is_primary_core(core) && !lockstep_permitted) {
--		dev_err(core->dev, "LockStep mode not permitted on this device\n");
-+	if (cluster->mode == CLUSTER_MODE_LOCKSTEP && is_primary_core(core) &&
-+	    !lockstep_permitted) {
-+		dev_err(core->dev, "LockStep mode not permitted on this \
-+			device\n");
- 		ret = -EINVAL;
- 		goto out;
- 	}
-@@ -615,6 +622,9 @@ static int k3_r5f_rproc_configure(struct k3_r5f_core *core)
- 			clr_cfg |= PROC_BOOT_CFG_FLAG_R5_LOCKSTEP;
- 	}
- 
-+	if (core->ipdata->is_single_core)
-+		set_cfg = PROC_BOOT_CFG_FLAG_R5_SINGLE_CORE;
-+
- 	if (core->atcm_enable)
- 		set_cfg |= PROC_BOOT_CFG_FLAG_R5_ATCM_EN;
- 	else
-@@ -853,11 +863,19 @@ static int k3_r5f_remove(struct udevice *dev)
- static const struct k3_r5f_ip_data k3_data = {
- 	.tcm_is_double = false,
- 	.tcm_ecc_autoinit = false,
-+	.is_single_core = false,
- };
- 
- static const struct k3_r5f_ip_data j7200_j721s2_data = {
- 	.tcm_is_double = true,
- 	.tcm_ecc_autoinit = true,
-+	.is_single_core = false,
-+};
-+
-+static const struct k3_r5f_ip_data am62_data = {
-+	.tcm_is_double = false,
-+	.tcm_ecc_autoinit = false,
-+	.is_single_core = true,
- };
- 
- static const struct udevice_id k3_r5f_rproc_ids[] = {
-@@ -865,6 +883,7 @@ static const struct udevice_id k3_r5f_rproc_ids[] = {
- 	{ .compatible = "ti,j721e-r5f", .data = (ulong)&k3_data, },
- 	{ .compatible = "ti,j7200-r5f", .data = (ulong)&j7200_j721s2_data, },
- 	{ .compatible = "ti,j721s2-r5f", .data = (ulong)&j7200_j721s2_data, },
-+	{ .compatible = "ti,am62-r5f", .data = (ulong)&am62_data, },
- 	{}
- };
- 
-@@ -887,6 +906,11 @@ static int k3_r5f_cluster_probe(struct udevice *dev)
- 	cluster->mode = dev_read_u32_default(dev, "ti,cluster-mode",
- 					     CLUSTER_MODE_LOCKSTEP);
- 
-+	if (device_is_compatible(dev, "ti,am62-r5fss")) {
-+		cluster->mode = CLUSTER_MODE_SINGLECORE;
-+		return 0;
-+	}
-+
- 	if (device_get_child_count(dev) != 2) {
- 		dev_err(dev, "Invalid number of R5 cores");
- 		return -EINVAL;
-@@ -903,6 +927,7 @@ static const struct udevice_id k3_r5fss_ids[] = {
- 	{ .compatible = "ti,j721e-r5fss"},
- 	{ .compatible = "ti,j7200-r5fss"},
- 	{ .compatible = "ti,j721s2-r5fss"},
-+	{ .compatible = "ti,am62-r5fss"},
- 	{}
- };
- 
+Raymond Mao (4):
+  image: remove redundant hash includes
+  efi_loader: remove redundant hash includes
+  md5: Use typedef for MD5 context
+  arm: EFI linker script text section alignment
+
+ arch/arm/lib/elf_aarch64_efi.lds |  1 +
+ boot/image-fit.c                 |  4 ----
+ boot/image.c                     |  2 --
+ drivers/crypto/hash/hash_sw.c    |  8 ++++----
+ include/u-boot/md5.h             | 10 +++++-----
+ lib/efi_loader/efi_signature.c   |  1 -
+ lib/efi_loader/efi_tcg2.c        |  3 ---
+ lib/md5.c                        | 10 +++++-----
+ 8 files changed, 15 insertions(+), 24 deletions(-)
+
 -- 
-2.34.1
+2.25.1
 
