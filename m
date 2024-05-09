@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 818BEC10F1A
-	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 10:22:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3813BC10F1A
+	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 10:23:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E930F88232;
-	Thu,  9 May 2024 12:22:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6A7BB8826C;
+	Thu,  9 May 2024 12:23:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Q+XR+cq/";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="V6I81FxI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5F0B8826C; Thu,  9 May 2024 12:22:34 +0200 (CEST)
+ id B706E8848C; Thu,  9 May 2024 12:23:50 +0200 (CEST)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46DC587CF2
- for <u-boot@lists.denx.de>; Thu,  9 May 2024 12:22:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E52E87CF2
+ for <u-boot@lists.denx.de>; Thu,  9 May 2024 12:23:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 449AMQSb059290;
- Thu, 9 May 2024 05:22:26 -0500
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 449ANjrX059435;
+ Thu, 9 May 2024 05:23:45 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1715250146;
- bh=1Oof456My8SdoIUYELvxKzSbXJAsKQPhPqJmfHJPxLA=;
+ s=ti-com-17Q1; t=1715250225;
+ bh=vxJxZ1/F1mZ+3fe1HR5fHLGFE8ucXLqBvGj82PX4HhQ=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=Q+XR+cq/i94zHbiuONoHqJ5GlLs4ptonVSN9INU45Kt7HHVuCCsBOXONyKxkbBryk
- LOwf4/sx4e8/ZOGxIfeVN1SStuBH13Cqsd9xUWoDPaiPOoxq8vYYOXaR4YgBLmhh8h
- KFPQOujVLKH8qMIGLJEvQM2RNSKAnmeE2GQ51u2o=
+ b=V6I81FxI6Vi8d1Aspx4gotW56AVLURA4vR46QRJC4OQZGMamkLNfg3xdKjIdtwKjH
+ roVxjfPDOy0aYVePb9LCZHGGr2OMA+sdvN46w8yIK6VHUTD8diiEdy/rZkRG9TIufC
+ 8IiNvvobpEDe5wZ7zBcFBmiZo1qY7GxsVQ5qeT8w=
 Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 449AMQqZ009684
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 449ANjJs077724
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 9 May 2024 05:22:26 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE105.ent.ti.com
+ Thu, 9 May 2024 05:23:45 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE105.ent.ti.com
  (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 9
- May 2024 05:22:25 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ May 2024 05:23:44 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 9 May 2024 05:22:25 -0500
+ Frontend Transport; Thu, 9 May 2024 05:23:44 -0500
 Received: from [172.24.227.36]
  (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 449AMMZs068608;
- Thu, 9 May 2024 05:22:23 -0500
-Message-ID: <c3599462-1475-4ead-9a21-5c94f4828868@ti.com>
-Date: Thu, 9 May 2024 15:52:22 +0530
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 449ANfl5070294;
+ Thu, 9 May 2024 05:23:42 -0500
+Message-ID: <e95e5bec-2153-4f74-bfdb-06c7bf28e70e@ti.com>
+Date: Thu, 9 May 2024 15:53:41 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/6] arch: arm: dts: k3-j721s2-r5: Introduce
- k3-j721s2-r5.dtsi
+Subject: Re: [PATCH v2 5/6] configs: am68_sk: Move to separate defconfig for
+ AM68 SK board
 To: Manorit Chawdhry <m-chawdhry@ti.com>, Tom Rini <trini@konsulko.com>, Simon
  Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>
 CC: <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>, Andrew Davis
  <afd@ti.com>, Udit Kumar <u-kumar1@ti.com>,
  Aniket Limaye <a-limaye@ti.com>, Sumit Garg <sumit.garg@linaro.org>
 References: <20240509-b4-upstream-j721s2-of-upstream-v2-0-149563cd4901@ti.com>
- <20240509-b4-upstream-j721s2-of-upstream-v2-4-149563cd4901@ti.com>
+ <20240509-b4-upstream-j721s2-of-upstream-v2-5-149563cd4901@ti.com>
 Content-Language: en-US
 From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20240509-b4-upstream-j721s2-of-upstream-v2-4-149563cd4901@ti.com>
+In-Reply-To: <20240509-b4-upstream-j721s2-of-upstream-v2-5-149563cd4901@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -85,291 +85,292 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Manorit
-
 On 09/05/24 15:23, Manorit Chawdhry wrote:
-> Create an SoC R5 dtsi file that could be used at board level R5 files. This
-> would help in keeping the SoC level changes in sync across board files.
+> Add defconfig for AM68 SK R5 and A72 configuration.
+> 
+> This includes and modifies the AM68 EVM defconfigs:
+> j721s2_evm_r5_defconfig -> am68_sk_r5_defconfig
+> j721s2_evm_a72_defconfig -> am68_sk_a72_defconfig
 > 
 > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 > ---
->   arch/arm/dts/k3-am68-sk-r5-base-board.dts       | 78 +-----------------------
->   arch/arm/dts/k3-j721s2-r5-common-proc-board.dts | 78 +-----------------------
->   arch/arm/dts/k3-j721s2-r5.dtsi                  | 81 +++++++++++++++++++++++++
->   board/ti/j721s2/MAINTAINERS                     |  1 +
->   4 files changed, 84 insertions(+), 154 deletions(-)
+>   arch/arm/dts/k3-am68-sk-base-board-u-boot.dtsi | 23 +++++++
+>   arch/arm/dts/k3-j721s2-binman.dtsi             | 89 +-------------------------
+>   board/ti/j721s2/MAINTAINERS                    |  2 +
+>   configs/am68_sk_a72_defconfig                  | 10 +++
+>   configs/am68_sk_r5_defconfig                   | 10 +++
+>   configs/j721s2_evm_a72_defconfig               |  2 +-
+>   configs/j721s2_evm_r5_defconfig                |  2 +-
+>   7 files changed, 49 insertions(+), 89 deletions(-)
 > 
-> diff --git a/arch/arm/dts/k3-am68-sk-r5-base-board.dts b/arch/arm/dts/k3-am68-sk-r5-base-board.dts
-> index 038b08dc3e01..3b2d7af2e528 100644
-> --- a/arch/arm/dts/k3-am68-sk-r5-base-board.dts
-> +++ b/arch/arm/dts/k3-am68-sk-r5-base-board.dts
-> @@ -9,80 +9,4 @@
->   #include "k3-j721s2-ddr-evm-lp4-4266.dtsi"
->   #include "k3-j721s2-ddr.dtsi"
->   #include "k3-am68-sk-base-board-u-boot.dtsi"
-> -
-> -/ {
-> -	chosen {
-> -		tick-timer = &mcu_timer0;
-> -	};
-> -
-> -	aliases {
-> -		remoteproc0 = &sysctrler;
-> -		remoteproc1 = &a72_0;
-> -	};
-> -
-> -	a72_0: a72@0 {
-> -		compatible = "ti,am654-rproc";
-> -		reg = <0x0 0x00a90000 0x0 0x10>;
-> -		power-domains = <&k3_pds 61 TI_SCI_PD_EXCLUSIVE>,
-> -				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>,
-> -				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
-> -		resets = <&k3_reset 202 0>;
-> -		clocks = <&k3_clks 61 1>;
-> -		assigned-clocks = <&k3_clks 61 1>, <&k3_clks 202 0>;
-> -		assigned-clock-parents = <&k3_clks 61 2>;
-> -		assigned-clock-rates = <200000000>, <2000000000>;
-> -		ti,sci = <&sms>;
-> -		ti,sci-proc-id = <32>;
-> -		ti,sci-host-id = <10>;
-> -		bootph-pre-ram;
-> -	};
-> -
-> -	dm_tifs: dm-tifs {
-> -		compatible = "ti,j721e-dm-sci";
-> -		ti,host-id = <3>;
-> -		ti,secure-host;
-> -		mbox-names = "rx", "tx";
-> -		mboxes= <&secure_proxy_mcu 21>,
-> -			<&secure_proxy_mcu 23>;
-> -		bootph-pre-ram;
-> -	};
-> -};
-> -
-> -&mcu_timer0 {
-> -	clock-frequency = <250000000>;
-> -	bootph-pre-ram;
-> -};
-> -
-> -&secure_proxy_mcu {
-> -	bootph-pre-ram;
-> -	status = "okay";
-> -};
-> -
-> -&secure_proxy_sa3 {
-> -	bootph-pre-ram;
-> -	status = "okay";
-> -};
-> -
-> -&cbass_mcu_wakeup {
-> -	sysctrler: sysctrler {
-> -		compatible = "ti,am654-system-controller";
-> -		mboxes= <&secure_proxy_mcu 4>, <&secure_proxy_mcu 5>, <&secure_proxy_sa3 5>;
-> -		mbox-names = "tx", "rx", "boot_notify";
-> -		bootph-pre-ram;
-> -	};
-> -};
-> -
-> -&sms {
-> -	mboxes= <&secure_proxy_mcu 8>, <&secure_proxy_mcu 6>, <&secure_proxy_mcu 5>;
-> -	mbox-names = "tx", "rx", "notify";
-> -	ti,host-id = <4>;
-> -	ti,secure-host;
-> -};
-> -
-> -&mcu_ringacc {
-> -	ti,sci = <&dm_tifs>;
-> -};
-> -
-> -&mcu_udmap {
-> -	ti,sci = <&dm_tifs>;
-> -};
-> +#include "k3-j721s2-r5.dtsi"
-> diff --git a/arch/arm/dts/k3-j721s2-r5-common-proc-board.dts b/arch/arm/dts/k3-j721s2-r5-common-proc-board.dts
-> index 03bd680f4421..e92b1917df4e 100644
-> --- a/arch/arm/dts/k3-j721s2-r5-common-proc-board.dts
-> +++ b/arch/arm/dts/k3-j721s2-r5-common-proc-board.dts
-> @@ -9,80 +9,4 @@
->   #include "k3-j721s2-ddr-evm-lp4-4266.dtsi"
->   #include "k3-j721s2-ddr.dtsi"
->   #include "k3-j721s2-common-proc-board-u-boot.dtsi"
-> -
-> -/ {
-> -	chosen {
-> -		tick-timer = &mcu_timer0;
-> -	};
-> -
-> -	aliases {
-> -		remoteproc0 = &sysctrler;
-> -		remoteproc1 = &a72_0;
-> -	};
-> -
-> -	a72_0: a72@0 {
-> -		compatible = "ti,am654-rproc";
-> -		reg = <0x0 0x00a90000 0x0 0x10>;
-> -		power-domains = <&k3_pds 61 TI_SCI_PD_EXCLUSIVE>,
-> -				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>,
-> -				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
-> -		resets = <&k3_reset 202 0>;
-> -		clocks = <&k3_clks 61 1>;
-> -		assigned-clocks = <&k3_clks 61 1>, <&k3_clks 202 0>;
-> -		assigned-clock-parents = <&k3_clks 61 2>;
-> -		assigned-clock-rates = <200000000>, <2000000000>;
-> -		ti,sci = <&sms>;
-> -		ti,sci-proc-id = <32>;
-> -		ti,sci-host-id = <10>;
-> -		bootph-pre-ram;
-> -	};
-> -
-> -	dm_tifs: dm-tifs {
-> -		compatible = "ti,j721e-dm-sci";
-> -		ti,host-id = <3>;
-> -		ti,secure-host;
-> -		mbox-names = "rx", "tx";
-> -		mboxes= <&secure_proxy_mcu 21>,
-> -			<&secure_proxy_mcu 23>;
-> -		bootph-pre-ram;
-> -	};
-> -};
-> -
-> -&mcu_timer0 {
-> -	clock-frequency = <250000000>;
-> -	bootph-pre-ram;
-> -};
-> -
-> -&secure_proxy_sa3 {
-> -	bootph-pre-ram;
-> -	status = "okay";
-> -};
-> -
-> -&secure_proxy_mcu {
-> -	bootph-pre-ram;
-> -	status = "okay";
-> -};
-> -
-> -&cbass_mcu_wakeup {
-> -	sysctrler: sysctrler {
-> -		compatible = "ti,am654-system-controller";
-> -		mboxes= <&secure_proxy_mcu 4>, <&secure_proxy_mcu 5>, <&secure_proxy_sa3 5>;
-> -		mbox-names = "tx", "rx", "boot_notify";
-> -		bootph-pre-ram;
-> -	};
-> -};
-> -
-> -&sms {
-> -	mboxes= <&secure_proxy_mcu 8>, <&secure_proxy_mcu 6>, <&secure_proxy_mcu 5>;
-> -	mbox-names = "tx", "rx", "notify";
-> -	ti,host-id = <4>;
-> -	ti,secure-host;
-> -};
-> -
-> -&mcu_ringacc {
-> -	ti,sci = <&dm_tifs>;
-> -};
-> -
-> -&mcu_udmap {
-> -	ti,sci = <&dm_tifs>;
-> -};
-> +#include "k3-j721s2-r5.dtsi"
-> diff --git a/arch/arm/dts/k3-j721s2-r5.dtsi b/arch/arm/dts/k3-j721s2-r5.dtsi
-> new file mode 100644
-> index 000000000000..eb0df42583a3
-> --- /dev/null
-> +++ b/arch/arm/dts/k3-j721s2-r5.dtsi
-> @@ -0,0 +1,81 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Copyright (C) 2021-2024 Texas Instruments Incorporated - https://www.ti.com/
-> + */
+> diff --git a/arch/arm/dts/k3-am68-sk-base-board-u-boot.dtsi b/arch/arm/dts/k3-am68-sk-base-board-u-boot.dtsi
+> index b8fc62f0dd1c..dca588485d41 100644
+> --- a/arch/arm/dts/k3-am68-sk-base-board-u-boot.dtsi
+> +++ b/arch/arm/dts/k3-am68-sk-base-board-u-boot.dtsi
+> @@ -129,3 +129,26 @@
+>   	dr_mode = "peripheral";
+>   	bootph-all;
+>   };
 > +
-> +/ {
-> +	chosen {
-> +		tick-timer = &mcu_timer0;
-> +	};
+> +#ifdef CONFIG_TARGET_J721S2_A72_EVM
 > +
-> +	aliases {
-> +		remoteproc0 = &sysctrler;
-> +		remoteproc1 = &a72_0;
-> +	};
+> +#define SPL_AM68_SK_DTB "spl/dts/k3-am68-sk-base-board.dtb"
+> +#define AM68_SK_DTB "u-boot.dtb"
 > +
-> +	a72_0: a72@0 {
-> +		compatible = "ti,am654-rproc";
-> +		reg = <0x0 0x00a90000 0x0 0x10>;
-> +		power-domains = <&k3_pds 61 TI_SCI_PD_EXCLUSIVE>,
-> +				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>,
-> +				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
-> +		resets = <&k3_reset 202 0>;
-> +		clocks = <&k3_clks 61 1>;
-> +		assigned-clocks = <&k3_clks 61 1>, <&k3_clks 202 0>;
-> +		assigned-clock-parents = <&k3_clks 61 2>;
-> +		assigned-clock-rates = <200000000>, <2000000000>;
-> +		ti,sci = <&sms>;
-> +		ti,sci-proc-id = <32>;
-> +		ti,sci-host-id = <10>;
-> +		bootph-pre-ram;
-> +	};
-> +
-> +	dm_tifs: dm-tifs {
-> +		compatible = "ti,j721e-dm-sci";
-> +		ti,host-id = <3>;
-> +		ti,secure-host;
-> +		mbox-names = "rx", "tx";
-> +		mboxes= <&secure_proxy_mcu 21>,
-> +			<&secure_proxy_mcu 23>;
-> +		bootph-pre-ram;
-> +	};
+> +&spl_j721s2_evm_dtb {
+> +	filename = SPL_AM68_SK_DTB;
 > +};
 > +
-> +&mcu_timer0 {
-> +	clock-frequency = <250000000>;
-> +	bootph-pre-ram;
+> +&j721s2_evm_dtb {
+> +	filename = AM68_SK_DTB;
 > +};
 > +
-> +&secure_proxy_sa3 {
-> +	bootph-pre-ram;
-> +	status = "okay";
+> +&spl_j721s2_evm_dtb_unsigned {
+> +	filename = SPL_AM68_SK_DTB;
 > +};
 > +
-> +&secure_proxy_mcu {
-> +	bootph-pre-ram;
-> +	status = "okay";
+> +&j721s2_evm_dtb_unsigned {
+> +	filename = AM68_SK_DTB;
 > +};
 > +
-> +&cbass_mcu_wakeup {
-> +	sysctrler: sysctrler {
-> +		compatible = "ti,am654-system-controller";
-> +		mboxes= <&secure_proxy_mcu 4>, <&secure_proxy_mcu 5>, <&secure_proxy_sa3 5>;
-> +		mbox-names = "tx", "rx", "boot_notify";
-> +		bootph-pre-ram;
-> +	};
-> +};
-> +
-> +&sms {
-> +	mboxes= <&secure_proxy_mcu 8>, <&secure_proxy_mcu 6>, <&secure_proxy_mcu 5>;
-> +	mbox-names = "tx", "rx", "notify";
-> +	ti,host-id = <4>;
-> +	ti,secure-host;
-> +};
-> +
-> +&mcu_ringacc {
-> +	ti,sci = <&dm_tifs>;
-> +};
-> +
-> +&mcu_udmap {
-> +	ti,sci = <&dm_tifs>;
-> +};
+> +#endif
+> diff --git a/arch/arm/dts/k3-j721s2-binman.dtsi b/arch/arm/dts/k3-j721s2-binman.dtsi
+> index 7efb135bdff9..c46fda66b0b2 100644
+> --- a/arch/arm/dts/k3-j721s2-binman.dtsi
+> +++ b/arch/arm/dts/k3-j721s2-binman.dtsi
+> @@ -142,10 +142,7 @@
+>   #ifdef CONFIG_TARGET_J721S2_A72_EVM
+>   
+>   #define SPL_J721S2_EVM_DTB "spl/dts/k3-j721s2-common-proc-board.dtb"
+> -#define SPL_AM68_SK_DTB "spl/dts/k3-am68-sk-base-board.dtb"
+> -
+>   #define J721S2_EVM_DTB "u-boot.dtb"
+> -#define AM68_SK_DTB "arch/arm/dts/k3-am68-sk-base-board.dtb"
+>   
+>   &binman {
+>   	ti-dm {
+> @@ -306,20 +303,6 @@
+>   					};
+>   
+>   				};
+> -
+> -				fdt-1 {
+> -					description = "k3-am68-sk-base-board";
+> -					type = "flat_dt";
+> -					arch = "arm";
+> -					compression = "none";
+> -					ti-secure {
+> -						content = <&spl_am68_sk_dtb>;
+> -						keyfile = "custMpk.pem";
+> -					};
+> -					spl_am68_sk_dtb: blob-ext {
+> -						filename = SPL_AM68_SK_DTB;
+> -					};
+> -				};
+>   			};
+>   
+>   			configurations {
+> @@ -331,13 +314,6 @@
+>   					loadables = "tee", "dm", "spl";
+>   					fdt = "fdt-0";
+>   				};
+> -
+> -				conf-1 {
+> -					description = "k3-am68-sk-base-board";
+> -					firmware = "atf";
+> -					loadables = "tee", "dm", "spl";
+> -					fdt = "fdt-1";
+> -				};
+>   			};
+>   		};
+>   	};
+> @@ -370,25 +346,6 @@
+>   						algo = "crc32";
+>   					};
+>   				};
+> -
+> -				fdt-1 {
+> -					description = "k3-am68-sk-base-board";
+> -					type = "flat_dt";
+> -					arch = "arm";
+> -					compression = "none";
+> -					ti-secure {
+> -						content = <&am68_sk_dtb>;
+> -						keyfile = "custMpk.pem";
+> -					};
+> -					am68_sk_dtb: blob-ext {
+> -						filename = AM68_SK_DTB;
+> -					};
+> -
+> -					hash {
+> -						algo = "crc32";
+> -					};
+> -				};
+> -
+>   			};
+>   
+>   			configurations {
+> @@ -400,13 +357,6 @@
+>   					loadables = "uboot";
+>   					fdt = "fdt-0";
+>   				};
+> -				conf-1 {
+> -					description = "k3-am68-sk-base-board";
+> -					firmware = "uboot";
+> -					loadables = "uboot";
+> -					fdt = "fdt-1";
+> -				};
+> -
+>   			};
+>   		};
+>   	};
+> @@ -429,20 +379,10 @@
+>   					type = "flat_dt";
+>   					arch = "arm";
+>   					compression = "none";
+> -					blob {
+> +					spl_j721s2_evm_dtb_unsigned: blob {
+>   						filename = SPL_J721S2_EVM_DTB;
+>   					};
+>   				};
+> -				fdt-1 {
+> -					description = "k3-am68-sk-base-board";
+> -					type = "flat_dt";
+> -					arch = "arm";
+> -					compression = "none";
+> -					blob {
+> -						filename = SPL_AM68_SK_DTB;
+> -					};
+> -				};
+> -
+>   			};
+>   
+>   			configurations {
+> @@ -454,12 +394,6 @@
+>   					loadables = "tee", "dm", "spl";
+>   					fdt = "fdt-0";
+>   				};
+> -				conf-1 {
+> -					description = "k3-am68-sk-base-board";
+> -					firmware = "atf";
+> -					loadables = "tee", "dm", "spl";
+> -					fdt = "fdt-1";
+> -				};
+>   			};
+>   		};
+>   	};
+> @@ -480,26 +414,13 @@
+>   					type = "flat_dt";
+>   					arch = "arm";
+>   					compression = "none";
+> -					blob {
+> +					j721s2_evm_dtb_unsigned: blob {
+>   						filename = J721S2_EVM_DTB;
+>   					};
+>   					hash {
+>   						algo = "crc32";
+>   					};
+>   				};
+> -				fdt-1 {
+> -					description = "k3-am68-sk-base-board";
+> -					type = "flat_dt";
+> -					arch = "arm";
+> -					compression = "none";
+> -					blob {
+> -						filename = AM68_SK_DTB;
+> -					};
+> -					hash {
+> -						algo = "crc32";
+> -					};
+> -				};
+> -
+>   			};
+>   
+>   			configurations {
+> @@ -511,12 +432,6 @@
+>   					loadables = "uboot";
+>   					fdt = "fdt-0";
+>   				};
+> -				conf-1 {
+> -					description = "k3-am68-sk-base-board";
+> -					firmware = "uboot";
+> -					loadables = "uboot";
+> -					fdt = "fdt-1";
+> -				};
+>   			};
+>   		};
+>   	};
 > diff --git a/board/ti/j721s2/MAINTAINERS b/board/ti/j721s2/MAINTAINERS
-> index 08c8d110ac0a..561c3dfff9bd 100644
+> index 561c3dfff9bd..6cf90014a090 100644
 > --- a/board/ti/j721s2/MAINTAINERS
 > +++ b/board/ti/j721s2/MAINTAINERS
-> @@ -14,6 +14,7 @@ F:	arch/arm/dts/k3-j721s2-thermal.dtsi
->   F:	arch/arm/dts/k3-j721s2-som-p0.dtsi
->   F:	arch/arm/dts/k3-j721s2-common-proc-board.dts
->   F:	arch/arm/dts/k3-j721s2-common-proc-board-u-boot.dtsi
-> +F:	arch/arm/dts/k3-j721s2-r5.dtsi
->   F:	arch/arm/dts/k3-j721s2-r5-common-proc-board.dts
->   F:	arch/arm/dts/k3-j721s2-ddr.dtsi
->   F:	arch/arm/dts/k3-j721s2-ddr-evm-lp4-4266.dtsi
+> @@ -7,6 +7,8 @@ F:	doc/board/ti/j721s2_evm.rst
+>   F:	include/configs/j721s2_evm.h
+>   F:	configs/j721s2_evm_r5_defconfig
+>   F:	configs/j721s2_evm_a72_defconfig
+> +F:	configs/am68_sk_r5_defconfig
+> +F:	configs/am68_sk_a72_defconfig
+>   F:	arch/arm/dts/k3-j721s2.dtsi
+>   F:	arch/arm/dts/k3-j721s2-main.dtsi
+>   F:	arch/arm/dts/k3-j721s2-mcu-wakeup.dtsi
+> diff --git a/configs/am68_sk_a72_defconfig b/configs/am68_sk_a72_defconfig
+> new file mode 100644
+> index 000000000000..d477f9e4e988
+> --- /dev/null
+> +++ b/configs/am68_sk_a72_defconfig
+> @@ -0,0 +1,10 @@
+> +#include <configs/j721s2_evm_a72_defconfig>
+> +
+> +CONFIG_ARM=y
+> +CONFIG_ARCH_K3=y
+> +CONFIG_SOC_K3_J721S2=y
+> +CONFIG_TARGET_J721S2_A72_EVM=y
+> +
+> +CONFIG_DEFAULT_DEVICE_TREE="k3-am68-sk-base-board"
+> +CONFIG_SPL_OF_LIST="k3-am68-sk-base-board"
+> +CONFIG_OF_LIST="k3-am68-sk-base-board"
+> diff --git a/configs/am68_sk_r5_defconfig b/configs/am68_sk_r5_defconfig
+> new file mode 100644
+> index 000000000000..e9b6882c1f68
+> --- /dev/null
+> +++ b/configs/am68_sk_r5_defconfig
+> @@ -0,0 +1,10 @@
+> +#include <configs/j721s2_evm_r5_defconfig>
+> +
+> +CONFIG_ARM=y
+> +CONFIG_ARCH_K3=y
+> +CONFIG_SOC_K3_J721S2=y
+> +CONFIG_TARGET_J721S2_R5_EVM=y
+> +
+> +CONFIG_DEFAULT_DEVICE_TREE="k3-am68-sk-r5-base-board"
+> +CONFIG_SPL_OF_LIST="k3-am68-sk-r5-base-board"
+> +CONFIG_OF_LIST="k3-am68-sk-r5-base-board"
+> diff --git a/configs/j721s2_evm_a72_defconfig b/configs/j721s2_evm_a72_defconfig
+> index 8b02d07a9f09..dd86b5c05092 100644
+> --- a/configs/j721s2_evm_a72_defconfig
+> +++ b/configs/j721s2_evm_a72_defconfig
+> @@ -84,7 +84,7 @@ CONFIG_CMD_UBI=y
+>   # CONFIG_SPL_EFI_PARTITION is not set
+>   CONFIG_OF_CONTROL=y
+>   CONFIG_SPL_OF_CONTROL=y
+> -CONFIG_OF_LIST="k3-j721s2-common-proc-board k3-am68-sk-base-board"
+> +CONFIG_OF_LIST="k3-j721s2-common-proc-board"
+>   CONFIG_SPL_MULTI_DTB_FIT=y
+>   CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
+>   CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+> diff --git a/configs/j721s2_evm_r5_defconfig b/configs/j721s2_evm_r5_defconfig
+> index 5ef5247a3e00..3c958cafbe8f 100644
+> --- a/configs/j721s2_evm_r5_defconfig
+> +++ b/configs/j721s2_evm_r5_defconfig
+> @@ -82,7 +82,7 @@ CONFIG_CMD_FAT=y
+>   CONFIG_OF_CONTROL=y
+>   CONFIG_SPL_OF_CONTROL=y
+>   CONFIG_SPL_MULTI_DTB_FIT=y
+> -CONFIG_SPL_OF_LIST="k3-j721s2-r5-common-proc-board k3-am68-sk-r5-base-board"
+> +CONFIG_SPL_OF_LIST="k3-j721s2-r5-common-proc-board"
+>   CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
+>   CONFIG_ENV_OVERWRITE=y
+>   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
 > 
 
 Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
