@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27E0FC10F1A
-	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 18:03:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC8E3C10F1A
+	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 18:15:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E9AA8826E;
-	Thu,  9 May 2024 20:03:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1E4B2884AE;
+	Thu,  9 May 2024 20:15:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VsvrouV4";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pFtPUYYc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E84088113; Thu,  9 May 2024 20:03:50 +0200 (CEST)
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [IPv6:2a00:1450:4864:20::236])
+ id 25864884B1; Thu,  9 May 2024 20:15:44 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15608884AC
- for <u-boot@lists.denx.de>; Thu,  9 May 2024 20:03:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C4A898822D
+ for <u-boot@lists.denx.de>; Thu,  9 May 2024 20:15:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-2db13ca0363so17903671fa.3
- for <u-boot@lists.denx.de>; Thu, 09 May 2024 11:03:48 -0700 (PDT)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a59b58fe083so285512566b.0
+ for <u-boot@lists.denx.de>; Thu, 09 May 2024 11:15:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1715277827; x=1715882627; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1715278541; x=1715883341; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=RqZ4UD0gTkR0pW/mRn/Y6Y72qA+hg35d8Od6w7zkrtU=;
- b=VsvrouV4cQmSj4X2nIE2kU60tj78lfgkmDJiIPqMijeoXzcNKUMusn80QywlcszVFf
- /FlNvNbDUy+AIJDbL3V6pO6IEXmG2YR9fry+ZJGbv/XmstmzCcVtXCx1JaBSG9N0g/lu
- bOR2GCCwfJvueU9JtKVHJom4DpXZ8FA9ecETxTaglwQhrHD23QN47yvq0MCIPClEGuwM
- OKMvOuYyLsj4Te7gInKY72sdhlMndrREPBPtKsVT/FiisvTr3aAzy0ptHq4WW2UjizAN
- 8+X3FFny7pZ8PGUECZIU3GMAbITEldrCju8QuWs69rOCpPZQFcOHWOAj+bXLxROKPBh8
- TyWw==
+ bh=BJo+H1H2kMY/mRP+Ufr6EX/xCAkb2XHOUr02qpCr1Bs=;
+ b=pFtPUYYcVCWYTUyAl4O5bRPcKWwHQiCxhH9qvB0byJqtZqaSsX3DFcfKrMapmM2TtB
+ eMPyb00b1sOwKZMIaBRhA5vThKk2XafPGGa8xK4bAjgM2u+lVEgCR5on59CPQOFMslLE
+ 8esMom2nSe8dYU4i0BLie+mh2FUwU6YoWIpNGSh3BmSF7JPlqRL7yG68sx9xK17NAlJV
+ rUMg4luDK3pDewOwGD6kIoaMPiuWD4RyUwmeMJyryOGk95QWBsu69Trgg9B7bJKUjYe8
+ ClwjORXi+aOdoPOv1kXE/4vioCSRlOBm//0te8JOKv/GLuuGQbvdp3picfhhT3RL/KXj
+ DNpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715277827; x=1715882627;
+ d=1e100.net; s=20230601; t=1715278541; x=1715883341;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=RqZ4UD0gTkR0pW/mRn/Y6Y72qA+hg35d8Od6w7zkrtU=;
- b=TrEacKoWfRaY2uvT3g+/EGawAhk45P9v9ShIyi8RNvASyTs+je3llD5ZAKJrJgU/uo
- ycO0QrFF5C/u6gAL0wRcjOMzxhne6C64vY94GtnT+k+ByiLkixd7dPQvEqqZw47MCX05
- f/6Wlx2CozCVaAhQjcZ4sp14Lsw3HuvnO4cHMoPR3eWoWrQsLa4C/IkuASlCxajWEhZ4
- CUuZa/Jk7rhAVAU0WJjh2ZZQhybDi4qstpJXkE8WkawVRV8q/5qGFq8852uo1FPRPgtC
- MSbdP3Q50yECtVWX5twn3cmp9btpFpxQcsBow0oHYKjii9d+qfP7lFbD+fXOOU6jvEQM
- n+xg==
-X-Gm-Message-State: AOJu0YwCbncK/S520/Piu4kXDj1HUUoTwanRY3AJdbxO4Hl2aqt+3u9d
- pk64lPRcaX68hvL1hFeVm5rznPe+XGYppjWoZdyISlaRB+q2ADjfGGgFEl70zoyqsopN1IaW2yh
- vnGtNUhxYcQpcraFvHufw/CJ4WaGvKjrAATzb+A==
-X-Google-Smtp-Source: AGHT+IE+JsM7DhM1bTYuPsK6LtHGnVYBrra2UhzBYV/zVauFEqyah8oR7BtHtmLMj82EOBOcv1sqKs07ClzMv9PXZNA=
-X-Received: by 2002:a2e:9d14:0:b0:2e1:a504:f9ec with SMTP id
- 38308e7fff4ca-2e51fe542bdmr1853441fa.23.1715277826899; Thu, 09 May 2024
- 11:03:46 -0700 (PDT)
+ bh=BJo+H1H2kMY/mRP+Ufr6EX/xCAkb2XHOUr02qpCr1Bs=;
+ b=V/SDm2J0iJ97PB1zpyHPAMeevPS355BJuWjpdpyz8DMqtGTVQxLlpWbWkN6NjCaa1m
+ czcLzgn2XQu1I1919wKismjx0zYQZhKjS4YyNoC+rBp/qJ4JnHNq/5dEKmPQKzUsVTpj
+ itZ8MH90dE7vbxOj61mOY+y8pg3YlPN+0p8eYxRm7IF01UjGxbkok/vD6i7XlHxZvDSe
+ LSXbcvQ5RCSbYhUNyA2BubEsTiuGf67kZjAfDFHvYaZ+7IDcrCrUKe1TnG7IBkNo4IYq
+ 2NeKFp+NTR7UvqBLBHnlDNLiOFlFfpLFBPPvPut9oAMtKDcM7RnxR8Cy7cEM3ysU4csF
+ 5rBQ==
+X-Gm-Message-State: AOJu0YwRMJecQqv7clvdKh9dQFUAa1eGtxW+EkuJXVhgGC919MishU5K
+ aBH1uOcCAulMTHr/TQ0UgLZp/8zJc+ghxrwUhLjl7E/nO6BWktRaWYby2XIAs7G3X3TGIpz2nGg
+ tv4Qdm7gctmoc4oLjdf2ZjmXLgrXMc7s7t3kVOg==
+X-Google-Smtp-Source: AGHT+IEJF6Vw3dci43Gn8+wch4CIFAjQboGyqhq9eAOr2FfmZxGaNKxpaMU+uH5zUJa6xDuDUk16oi2KddrSftFXIUs=
+X-Received: by 2002:a17:907:d22:b0:a59:aa9d:3142 with SMTP id
+ a640c23a62f3a-a5a2d5cb794mr29229666b.37.1715278541111; Thu, 09 May 2024
+ 11:15:41 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240509143743.1496210-1-raymond.mao@linaro.org>
- <20240509143743.1496210-3-raymond.mao@linaro.org>
-In-Reply-To: <20240509143743.1496210-3-raymond.mao@linaro.org>
+ <20240509143743.1496210-5-raymond.mao@linaro.org>
+In-Reply-To: <20240509143743.1496210-5-raymond.mao@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 9 May 2024 21:03:10 +0300
-Message-ID: <CAC_iWj+rfPf7WZpTq+TzNfWfpqx8s5ivDmFfLiL0SuAJTBvquw@mail.gmail.com>
-Subject: Re: [PATCH 2/4] efi_loader: remove redundant hash includes
+Date: Thu, 9 May 2024 21:15:04 +0300
+Message-ID: <CAC_iWjL+kbQLG=QwBGfrcRpFU3bhCCcyXLCtwxdY86JcC=0Kmg@mail.gmail.com>
+Subject: Re: [PATCH 4/4] arm: EFI linker script text section alignment
 To: Raymond Mao <raymond.mao@linaro.org>
 Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Tom Rini <trini@konsulko.com>, 
@@ -92,45 +92,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Raymond,
+
+Try not to post the same patches without the fixes that were asked
+[0], at least not without an explanation.
+
 On Thu, 9 May 2024 at 17:38, Raymond Mao <raymond.mao@linaro.org> wrote:
 >
-> Remove the redundant includes of u-boot/sha1.h, u-boot/sha256.h
-> and u-boot/sha512.h
+> Add text section alignment to fix sbsign signing warning
+> 'gaps in the section table may result in different checksums'
+> which causes a failure of efi_image_verify_diges()
 >
 > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 > ---
->  lib/efi_loader/efi_signature.c | 1 -
->  lib/efi_loader/efi_tcg2.c      | 3 ---
->  2 files changed, 4 deletions(-)
+>  arch/arm/lib/elf_aarch64_efi.lds | 1 +
+>  1 file changed, 1 insertion(+)
 >
-> diff --git a/lib/efi_loader/efi_signature.c b/lib/efi_loader/efi_signature.c
-> index f338e732759..184eac8cddb 100644
-> --- a/lib/efi_loader/efi_signature.c
-> +++ b/lib/efi_loader/efi_signature.c
-> @@ -17,7 +17,6 @@
->  #include <linux/oid_registry.h>
->  #include <u-boot/hash-checksum.h>
->  #include <u-boot/rsa.h>
-> -#include <u-boot/sha256.h>
->
->  const efi_guid_t efi_guid_sha256 = EFI_CERT_SHA256_GUID;
->  const efi_guid_t efi_guid_cert_rsa2048 = EFI_CERT_RSA2048_GUID;
-> diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
-> index b07e0099c27..ac056dcfc55 100644
-> --- a/lib/efi_loader/efi_tcg2.c
-> +++ b/lib/efi_loader/efi_tcg2.c
-> @@ -19,9 +19,6 @@
->  #include <tpm-v2.h>
->  #include <tpm_api.h>
->  #include <u-boot/hash-checksum.h>
-> -#include <u-boot/sha1.h>
-> -#include <u-boot/sha256.h>
-> -#include <u-boot/sha512.h>
->  #include <linux/unaligned/be_byteshift.h>
->  #include <linux/unaligned/le_byteshift.h>
->  #include <linux/unaligned/generic.h>
+> diff --git a/arch/arm/lib/elf_aarch64_efi.lds b/arch/arm/lib/elf_aarch64_efi.lds
+> index 5dd98091698..bffd9a0447a 100644
+> --- a/arch/arm/lib/elf_aarch64_efi.lds
+> +++ b/arch/arm/lib/elf_aarch64_efi.lds
+> @@ -28,6 +28,7 @@ SECTIONS
+>                 *(.dynamic);
+>                 . = ALIGN(512);
+>         }
+> +       . = ALIGN(4096);
+
+This is not what you want. There's already an ALIGN a few lines below
+and you must include the symbols for _etext and _text_size.
+You have to move the rela.* sections after the alignment. IIRC those
+were inspired by [1], so you can look for guidance there.
+On top of that riscv will need similar fixes (and any other
+architecture that uses those)
+
+
+>         .rela.dyn : { *(.rela.dyn) }
+>         .rela.plt : { *(.rela.plt) }
+>         .rela.got : { *(.rela.got) }
 > --
 > 2.25.1
 >
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+[0] https://lore.kernel.org/u-boot/CAC_iWjK+14L6mEi8GQN-McF-SChvhnjJ79nE1tWLV+kgWZKVew@mail.gmail.com/
+[1] https://git.code.sf.net/p/gnu-efi/code
+
+/Ilias
