@@ -4,73 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3030C10F1A
-	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 06:27:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 524DAC10F1A
+	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 08:07:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1057B88165;
-	Thu,  9 May 2024 08:27:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 7FD008829B;
+	Thu,  9 May 2024 10:07:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TwcC8Y6a";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fIuHPpoO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50F478815B; Thu,  9 May 2024 08:27:14 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 39E268846C; Thu,  9 May 2024 10:07:04 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7CCE8815B
- for <u-boot@lists.denx.de>; Thu,  9 May 2024 08:27:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1ECAD88252
+ for <u-boot@lists.denx.de>; Thu,  9 May 2024 10:07:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4496R9Rb031635;
- Thu, 9 May 2024 01:27:09 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1715236029;
- bh=VYaMdiAbJR+oXPJganYJYJYMCoHwesIKiX1EBs1DplQ=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=TwcC8Y6aYziQLQwYwBG0QlaI075C0j8GFXfLixCtW2HR0oRPtGftydx05wGNXDGYL
- XNHYDw/fg/1nUa0RP1Vfn5M6C1ZTbHxPsGaiJqYqv2F/zRHMXWti0e5ho0qfJaBRQj
- fx1cGK2yojrm53bPeunHaGSlZPElYZRS/S4a7y0c=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4496R9gg018378
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 9 May 2024 01:27:09 -0500
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 9
- May 2024 01:27:08 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 9 May 2024 01:27:09 -0500
-Received: from localhost (uda0497581.dhcp.ti.com [10.24.68.185])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4496R8e4053319;
- Thu, 9 May 2024 01:27:08 -0500
-Date: Thu, 9 May 2024 11:57:07 +0530
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-To: Neha Malcom Francis <n-francis@ti.com>
-CC: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Alper Nebi
- Yasak <alpernebiyasak@gmail.com>, <u-boot@lists.denx.de>, Nishanth Menon
- <nm@ti.com>, Andrew Davis <afd@ti.com>,
- Udit Kumar <u-kumar1@ti.com>, Aniket Limaye <a-limaye@ti.com>
-Subject: Re: [PATCH 4/6] arch: arm: dts: k3-am68-sk-r5: Sync with J721s2 R5
- file
-Message-ID: <20240509062707.cgoniskfs5bm2lyp@uda0497581>
-References: <20240508-b4-upstream-j721s2-of-upstream-v1-0-ed0933172410@ti.com>
- <20240508-b4-upstream-j721s2-of-upstream-v1-4-ed0933172410@ti.com>
- <82dd9ec5-99c0-4e09-8ce9-e35c6dd98c36@ti.com>
- <20240509050745.h6tsoyofe6jptcf7@uda0497581>
- <20240509053429.hy7hjwbiqk7xra35@uda0497581>
- <4750f270-eddc-4597-bead-fc26fb390089@ti.com>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a59b58fe083so129536266b.0
+ for <u-boot@lists.denx.de>; Thu, 09 May 2024 01:07:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1715242021; x=1715846821; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=JnJzdHeb48Yzgej2ycBJWA3UHUjDwyxBtbOidnKWLJU=;
+ b=fIuHPpoO7bAnIw10qkO7psCPCSAXQazX5fRBhi8fivU223TbOQHrlxovJbG3ZMpTff
+ ZSFIbLIlsNMa49wH7ytoeYBlyhSpdMks0EwpiOhZvnamtNbymS6CHksXagslkaa6IlTx
+ P1jM3KNS6foApGLNUddTNB02Z/2OP/mpkxLbMxEmLrgKpPaj52PB5Pq2+/+33IEsEMM2
+ zJZsYfTbdZFeelxImebGuB2WToBLfqgCHpateZhO2ge+nzD/61l7ZxEaxUt5GYOstnzM
+ WsCTQEOnbRgnz6jhdvJ4eSFpFux5Pi9MUFgdZyMYcvqnqQE5VCaLW2YXAoxEaISn8+y+
+ zhUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1715242021; x=1715846821;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=JnJzdHeb48Yzgej2ycBJWA3UHUjDwyxBtbOidnKWLJU=;
+ b=V+X669S9IdYKEw0JKxoW7csDBDRiEz1Ek9JyzJqteGOeLjOXkd+U/g1Er22m08cKo0
+ kDwJ1Aygmhb5fOAQZ+kqsVbsVDzQlk5jUqngtfDMwzOQgm2kyuAwgD2qYz7oydhkz0vn
+ aUUvO1E459LEu2PgEaR32aoapSigraFpVIY1q/9MmzHTWUXp2VB20mGjz8RRuBGgFt0H
+ cV0gqDo2IDYvIX4SqqXzEmXJYcZiJI8uEmwkT8oCkH76BgEqZ5wVd77cbLmiMZ8WEyVv
+ CPAOt+C8SKldS891oBE8VsZ/INMOESJXMQaN5ohjyTYi9GJjjn4b93Lzv8OiCWZxAb+O
+ GXVQ==
+X-Gm-Message-State: AOJu0Ywf42WswHBgWPIBDJPliJ14kPzl8cdQ/X/gqk8JqmLKfzWctDbQ
+ saoXXkMPlUgkusVuSpdhR8hkvb+vbV0P3AbCqgv0jd36+2fUys0SydmrBSlURmzZD41eyYRGb7o
+ d9L/mGLl1I0zmP6PM12iBnat0jOe04NhNOI15Iw==
+X-Google-Smtp-Source: AGHT+IENum0JV6Nj4kGSWUOmNyC7ObEKdcPGmjYrSi5Ck2c2WT8e2c7yxEpfjd8EE7x4YbLpYHhVLS7glg2TeKsf3ig=
+X-Received: by 2002:a17:906:6db:b0:a59:a857:85ce with SMTP id
+ a640c23a62f3a-a59fb9db786mr306698666b.52.1715242021443; Thu, 09 May 2024
+ 01:07:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <4750f270-eddc-4597-bead-fc26fb390089@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20240507175132.1456512-1-raymond.mao@linaro.org>
+ <20240507175132.1456512-9-raymond.mao@linaro.org>
+In-Reply-To: <20240507175132.1456512-9-raymond.mao@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 9 May 2024 11:06:25 +0300
+Message-ID: <CAC_iWj+d=8oevabbGnOjNM9Y0PJV6Mc+YzneNN=UJRrxqn9Pyw@mail.gmail.com>
+Subject: Re: [PATCH v2 08/28] md5: Adapt to the changes of md5 header
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Simon Glass <sjg@chromium.org>, Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Andrew Davis <afd@ti.com>, Christophe Leroy <christophe.leroy@csgroup.eu>, 
+ Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>, 
+ Ilya Lukin <4.shket@gmail.com>, Sergei Antonov <saproj@gmail.com>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ AKASHI Takahiro <takahiro.akashi@linaro.org>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
+ Eddie James <eajames@linux.ibm.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,99 +105,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neha,
+On Tue, 7 May 2024 at 20:55, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> The md5 header is updated to adapt to both original lib and MbedTLS.
+> Now we need to change the API callers accordingly.
+>
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
+> Changes in v2
+> - Initial patch.
+>
+>  drivers/crypto/hash/hash_sw.c |  8 ++++----
+>  lib/md5.c                     | 10 +++++-----
+>  2 files changed, 9 insertions(+), 9 deletions(-)
+>
+> diff --git a/drivers/crypto/hash/hash_sw.c b/drivers/crypto/hash/hash_sw.c
+> index d8065d68ea4..a5033677930 100644
+> --- a/drivers/crypto/hash/hash_sw.c
+> +++ b/drivers/crypto/hash/hash_sw.c
+> @@ -51,17 +51,17 @@ static void hash_finish_crc32(void *ctx, void *obuf)
+>  /* MD5 */
+>  static void hash_init_md5(void *ctx)
+>  {
+> -       MD5Init((struct MD5Context *)ctx);
+> +       MD5Init((MD5Context *)ctx);
+>  }
+>
+>  static void hash_update_md5(void *ctx, const void *ibuf, uint32_t ilen)
+>  {
+> -       MD5Update((struct MD5Context *)ctx, ibuf, ilen);
+> +       MD5Update((MD5Context *)ctx, ibuf, ilen);
+>  }
+>
+>  static void hash_finish_md5(void *ctx, void *obuf)
+>  {
+> -       MD5Final(obuf, (struct MD5Context *)ctx);
+> +       MD5Final(obuf, (MD5Context *)ctx);
+>  }
+>
+>  /* SHA1 */
+> @@ -159,7 +159,7 @@ static struct sw_hash_impl sw_hash_impl[HASH_ALGO_NUM] = {
+>                 .init = hash_init_md5,
+>                 .update = hash_update_md5,
+>                 .finish = hash_finish_md5,
+> -               .ctx_alloc_sz = sizeof(struct MD5Context),
+> +               .ctx_alloc_sz = sizeof(MD5Context),
+>         },
+>
+>         [HASH_ALGO_SHA1] = {
+> diff --git a/lib/md5.c b/lib/md5.c
+> index faf3f78ab1e..34343cf8e23 100644
+> --- a/lib/md5.c
+> +++ b/lib/md5.c
+> @@ -55,7 +55,7 @@ byteReverse(unsigned char *buf, unsigned longs)
+>   * initialization constants.
+>   */
+>  void
+> -MD5Init(struct MD5Context *ctx)
+> +MD5Init(MD5Context *ctx)
+>  {
+>         ctx->buf[0] = 0x67452301;
+>         ctx->buf[1] = 0xefcdab89;
+> @@ -71,7 +71,7 @@ MD5Init(struct MD5Context *ctx)
+>   * of bytes.
+>   */
+>  void
+> -MD5Update(struct MD5Context *ctx, unsigned char const *buf, unsigned len)
+> +MD5Update(MD5Context *ctx, unsigned char const *buf, unsigned int len)
+>  {
+>         register __u32 t;
+>
+> @@ -120,7 +120,7 @@ MD5Update(struct MD5Context *ctx, unsigned char const *buf, unsigned len)
+>   * 1 0* (64-bit count of bits processed, MSB-first)
+>   */
+>  void
+> -MD5Final(unsigned char digest[16], struct MD5Context *ctx)
+> +MD5Final(unsigned char digest[16], MD5Context *ctx)
+>  {
+>         unsigned int count;
+>         unsigned char *p;
+> @@ -269,7 +269,7 @@ MD5Transform(__u32 buf[4], __u32 const in[16])
+>  void
+>  md5 (unsigned char *input, int len, unsigned char output[16])
+>  {
+> -       struct MD5Context context;
+> +       MD5Context context;
+>
+>         MD5Init(&context);
+>         MD5Update(&context, input, len);
+> @@ -286,7 +286,7 @@ void
+>  md5_wd(const unsigned char *input, unsigned int len, unsigned char output[16],
+>         unsigned int chunk_sz)
+>  {
+> -       struct MD5Context context;
+> +       MD5Context context;
+>  #if defined(CONFIG_HW_WATCHDOG) || defined(CONFIG_WATCHDOG)
+>         const unsigned char *end, *curr;
+>         int chunk;
+> --
+> 2.25.1
+>
 
-On 11:29-20240509, Neha Malcom Francis wrote:
-> Hi Manorit
-> 
-> On 09/05/24 11:04, Manorit Chawdhry wrote:
-> > Hi Neha,
-> > 
-> > On 10:37-20240509, Manorit Chawdhry wrote:
-> > > Hi Neha,
-> > > 
-> > > On 16:09-20240508, Neha Malcom Francis wrote:
-> > > > Hi Manorit,
-> > > > 
-> > > > On 08/05/24 12:56, Manorit Chawdhry wrote:
-> > > > > Update the file with the required nodes from J721s2 R5 file to start
-> > > > > using k3-am68-sk-r5 file for AM68.
-> > > > > 
-> > > > > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-> > > > > ---
-> > > > 
-> > > > What's the motivation behind this patch vs. squashing it into patch 5/6?
-> > > > 
-> > > 
-> > > Could've squashed it ig, I think developed it in this order so this
-> > > remained. Would squash it. Also realised that I should be putting that
-> > > patch before the config split otherwise am68 boot would break again.
-> > > Would take that up as well in v2. Thanks for the review!
-> > > 
-> > 
-> > Though on second thoughts.. I think it's good as it tells that AM68 R5
-> > DT had been missing some changes. If someone wants to track what changed
-> > then ig it's better that they don't have to debug the merge commit which
-> > ends up altering the contents of AM68 R5 DT ( in-case this patch ain't
-> > there ) and people will have to manually check the diff as to what
-> > altered. Do you think it's better to keep this patch with the following
-> > reasoning?
-> > 
-> 
-> Yes you can do that but I think this commit message is confusing. The "start
-> using k3-am68-sk-r5 file for AM68" threw me off, maybe modify it to say that
-> AM68 R5 DT is missing these changes and needs them why? After that grabbing
-> the common bits into an SoC R5 file in patch 5/6 makes sense.
-> 
-
-Ah okay, I think I can explain better "start using k3-am68-sk-r5 file"
-in the commit message itself along with telling the reasoning as to why
-it wasn't failing previously as well along with your suggestions.
-Thanks!
-
-Regards,
-Manorit
-
-> 
-> > Regards,
-> > Manorit
-> > 
-> > > Regards,
-> > > Manorit
-> > > 
-> > > > >    arch/arm/dts/k3-am68-sk-r5-base-board.dts | 5 ++++-
-> > > > >    1 file changed, 4 insertions(+), 1 deletion(-)
-> > > > > 
-> > > > > diff --git a/arch/arm/dts/k3-am68-sk-r5-base-board.dts b/arch/arm/dts/k3-am68-sk-r5-base-board.dts
-> > > > > index 695aadc287bd..038b08dc3e01 100644
-> > > > > --- a/arch/arm/dts/k3-am68-sk-r5-base-board.dts
-> > > > > +++ b/arch/arm/dts/k3-am68-sk-r5-base-board.dts
-> > > > > @@ -24,7 +24,8 @@
-> > > > >    		compatible = "ti,am654-rproc";
-> > > > >    		reg = <0x0 0x00a90000 0x0 0x10>;
-> > > > >    		power-domains = <&k3_pds 61 TI_SCI_PD_EXCLUSIVE>,
-> > > > > -				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>;
-> > > > > +				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>,
-> > > > > +				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
-> > > > >    		resets = <&k3_reset 202 0>;
-> > > > >    		clocks = <&k3_clks 61 1>;
-> > > > >    		assigned-clocks = <&k3_clks 61 1>, <&k3_clks 202 0>;
-> > > > > @@ -54,10 +55,12 @@
-> > > > >    &secure_proxy_mcu {
-> > > > >    	bootph-pre-ram;
-> > > > > +	status = "okay";
-> > > > >    };
-> > > > >    &secure_proxy_sa3 {
-> > > > >    	bootph-pre-ram;
-> > > > > +	status = "okay";
-> > > > >    };
-> > > > >    &cbass_mcu_wakeup {
-> > > > > 
-> > > > 
-> > > > -- 
-> > > > Thanking You
-> > > > Neha Malcom Francis
-> 
-> -- 
-> Thanking You
-> Neha Malcom Francis
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
