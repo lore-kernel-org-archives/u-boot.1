@@ -4,46 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B71CC04FFE
-	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 01:13:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1709C04FFE
+	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 02:39:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67F3E8826B;
-	Thu,  9 May 2024 03:13:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id 0D4498846C;
+	Thu,  9 May 2024 04:39:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=microsoft.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE945882F3; Thu,  9 May 2024 03:13:48 +0200 (CEST)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CCD588239
- for <u-boot@lists.denx.de>; Thu,  9 May 2024 03:13:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
+ id 7FB7388473; Thu,  9 May 2024 04:39:31 +0200 (CEST)
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+ by phobos.denx.de (Postfix) with ESMTP id D84648846D
+ for <u-boot@lists.denx.de>; Thu,  9 May 2024 04:39:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
+ header.from=microsoft.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 4491DdKw051176
- for <u-boot@lists.denx.de>; Thu, 9 May 2024 09:13:39 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02.andestech.com (10.0.15.183) by ATCPCS16.andestech.com
- (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0;
- Thu, 9 May 2024 09:13:36 +0800
-From: Leo Yu-Chi Liang <ycliang@andestech.com>
-To: <u-boot@lists.denx.de>
-CC: <ycliang@andestech.com>, <tim609@andestech.com>, <randolph@andestech.com>, 
- <dylan@andestech.com>
-Subject: [PATCH v2 1/1] andes: Unify naming policy for Andes related source
-Date: Thu, 9 May 2024 09:13:31 +0800
-Message-ID: <20240509011331.3701007-1-ycliang@andestech.com>
-X-Mailer: git-send-email 2.34.1
+ spf=fail smtp.mailfrom=seanedmond@microsoft.com
+Received: from ovlvm106.redmond.corp.microsoft.com (unknown [131.107.147.185])
+ by linux.microsoft.com (Postfix) with ESMTPSA id CFC3420B2C80;
+ Wed,  8 May 2024 19:39:26 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com CFC3420B2C80
+From: Sean Edmond <seanedmond@microsoft.com>
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com, Sean Edmond <seanedmond@microsoft.com>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Bin Meng <bmeng@tinylab.org>,
+ Charles Hardin <ckhardin@gmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Peter Robinson <pbrobinson@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Sean Anderson <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v8 0/3] BOOTP/DHCPv4 enhancements
+Date: Wed,  8 May 2024 19:39:00 -0700
+Message-ID: <20240509023918.2504185-1-seanedmond@microsoft.com>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.0.15.183]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 4491DdKw051176
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,310 +64,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Signed-off-by: Leo Yu-Chi Liang <ycliang@andestech.com>
----
- arch/riscv/Kconfig                            |  2 +-
- arch/riscv/cpu/{andesv5 => andes}/Kconfig     |  4 +-
- arch/riscv/cpu/{andesv5 => andes}/Makefile    |  0
- arch/riscv/cpu/{andesv5 => andes}/cache.c     | 12 +++---
- arch/riscv/cpu/{andesv5 => andes}/cpu.c       |  0
- arch/riscv/cpu/{andesv5 => andes}/spl.c       |  0
- board/{AndesTech => andestech}/ae350/Kconfig  |  4 +-
- .../ae350/MAINTAINERS                         |  0
- board/{AndesTech => andestech}/ae350/Makefile |  0
- board/{AndesTech => andestech}/ae350/ae350.c  |  2 +-
- drivers/cache/Kconfig                         |  6 +--
- drivers/cache/Makefile                        |  2 +-
- .../cache/{cache-v5l2.c => cache-andes-l2.c}  | 40 +++++++++----------
- 13 files changed, 36 insertions(+), 36 deletions(-)
- rename arch/riscv/cpu/{andesv5 => andes}/Kconfig (91%)
- rename arch/riscv/cpu/{andesv5 => andes}/Makefile (100%)
- rename arch/riscv/cpu/{andesv5 => andes}/cache.c (90%)
- rename arch/riscv/cpu/{andesv5 => andes}/cpu.c (100%)
- rename arch/riscv/cpu/{andesv5 => andes}/spl.c (100%)
- rename board/{AndesTech => andestech}/ae350/Kconfig (94%)
- rename board/{AndesTech => andestech}/ae350/MAINTAINERS (100%)
- rename board/{AndesTech => andestech}/ae350/Makefile (100%)
- rename board/{AndesTech => andestech}/ae350/ae350.c (99%)
- rename drivers/cache/{cache-v5l2.c => cache-andes-l2.c} (84%)
 
-diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-index 7e20ef63bb..120ee1a01c 100644
---- a/arch/riscv/Kconfig
-+++ b/arch/riscv/Kconfig
-@@ -93,7 +93,7 @@ source "board/thead/th1520_lpi4a/Kconfig"
- source "board/xilinx/mbv/Kconfig"
- 
- # platform-specific options below
--source "arch/riscv/cpu/andesv5/Kconfig"
-+source "arch/riscv/cpu/andes/Kconfig"
- source "arch/riscv/cpu/cv1800b/Kconfig"
- source "arch/riscv/cpu/fu540/Kconfig"
- source "arch/riscv/cpu/fu740/Kconfig"
-diff --git a/arch/riscv/cpu/andesv5/Kconfig b/arch/riscv/cpu/andes/Kconfig
-similarity index 91%
-rename from arch/riscv/cpu/andesv5/Kconfig
-rename to arch/riscv/cpu/andes/Kconfig
-index e3efb0de8f..120fec5e54 100644
---- a/arch/riscv/cpu/andesv5/Kconfig
-+++ b/arch/riscv/cpu/andes/Kconfig
-@@ -1,4 +1,4 @@
--config RISCV_NDS
-+config RISCV_ANDES
- 	bool
- 	select ARCH_EARLY_INIT_R
- 	select SYS_CACHE_SHIFT_6
-@@ -8,7 +8,7 @@ config RISCV_NDS
- 	imply ANDES_PLMT_TIMER
- 	imply SPL_ANDES_PLMT_TIMER
- 	imply ANDES_PLICSW if (RISCV_MMODE || SPL_RISCV_MMODE)
--	imply V5L2_CACHE
-+	imply ANDES_L2_CACHE
- 	imply SPL_CPU
- 	imply SPL_OPENSBI
- 	imply SPL_LOAD_FIT
-diff --git a/arch/riscv/cpu/andesv5/Makefile b/arch/riscv/cpu/andes/Makefile
-similarity index 100%
-rename from arch/riscv/cpu/andesv5/Makefile
-rename to arch/riscv/cpu/andes/Makefile
-diff --git a/arch/riscv/cpu/andesv5/cache.c b/arch/riscv/cpu/andes/cache.c
-similarity index 90%
-rename from arch/riscv/cpu/andesv5/cache.c
-rename to arch/riscv/cpu/andes/cache.c
-index 269bb27f75..7d3df8722d 100644
---- a/arch/riscv/cpu/andesv5/cache.c
-+++ b/arch/riscv/cpu/andes/cache.c
-@@ -12,21 +12,21 @@
- #include <dm/uclass-internal.h>
- #include <asm/arch-andes/csr.h>
- 
--#ifdef CONFIG_V5L2_CACHE
-+#ifdef CONFIG_ANDES_L2_CACHE
- void enable_caches(void)
- {
- 	struct udevice *dev;
- 	int ret;
- 
- 	ret = uclass_get_device_by_driver(UCLASS_CACHE,
--					  DM_DRIVER_GET(v5l2_cache),
-+					  DM_DRIVER_GET(andes_l2_cache),
- 					  &dev);
- 	if (ret) {
--		log_debug("Cannot enable v5l2 cache\n");
-+		log_debug("Cannot enable Andes L2 cache\n");
- 	} else {
- 		ret = cache_enable(dev);
- 		if (ret)
--			log_debug("v5l2 cache enable failed\n");
-+			log_debug("Failed to enable Andes L2 cache\n");
- 	}
- }
- 
-@@ -78,7 +78,7 @@ void dcache_enable(void)
- 	asm volatile("csrsi %0, 0x2" :: "i"(CSR_MCACHE_CTL));
- #endif
- 
--#ifdef CONFIG_V5L2_CACHE
-+#ifdef CONFIG_ANDES_L2_CACHE
- 	cache_ops(cache_enable);
- #endif
- }
-@@ -89,7 +89,7 @@ void dcache_disable(void)
- 	asm volatile("csrci %0, 0x2" :: "i"(CSR_MCACHE_CTL));
- #endif
- 
--#ifdef CONFIG_V5L2_CACHE
-+#ifdef CONFIG_ANDES_L2_CACHE
- 	cache_ops(cache_disable);
- #endif
- }
-diff --git a/arch/riscv/cpu/andesv5/cpu.c b/arch/riscv/cpu/andes/cpu.c
-similarity index 100%
-rename from arch/riscv/cpu/andesv5/cpu.c
-rename to arch/riscv/cpu/andes/cpu.c
-diff --git a/arch/riscv/cpu/andesv5/spl.c b/arch/riscv/cpu/andes/spl.c
-similarity index 100%
-rename from arch/riscv/cpu/andesv5/spl.c
-rename to arch/riscv/cpu/andes/spl.c
-diff --git a/board/AndesTech/ae350/Kconfig b/board/andestech/ae350/Kconfig
-similarity index 94%
-rename from board/AndesTech/ae350/Kconfig
-rename to board/andestech/ae350/Kconfig
-index a85e7d6351..1c95e8447f 100644
---- a/board/AndesTech/ae350/Kconfig
-+++ b/board/andestech/ae350/Kconfig
-@@ -1,7 +1,7 @@
- if TARGET_ANDES_AE350
- 
- config SYS_CPU
--	default "andesv5"
-+	default "andes"
- 
- config SYS_BOARD
- 	default "ae350"
-@@ -33,7 +33,7 @@ config SYS_FDT_BASE
- 
- config BOARD_SPECIFIC_OPTIONS # dummy
- 	def_bool y
--	select RISCV_NDS
-+	select RISCV_ANDES
- 	select SUPPORT_SPL
- 	select BINMAN if SPL
- 	imply SMP
-diff --git a/board/AndesTech/ae350/MAINTAINERS b/board/andestech/ae350/MAINTAINERS
-similarity index 100%
-rename from board/AndesTech/ae350/MAINTAINERS
-rename to board/andestech/ae350/MAINTAINERS
-diff --git a/board/AndesTech/ae350/Makefile b/board/andestech/ae350/Makefile
-similarity index 100%
-rename from board/AndesTech/ae350/Makefile
-rename to board/andestech/ae350/Makefile
-diff --git a/board/AndesTech/ae350/ae350.c b/board/andestech/ae350/ae350.c
-similarity index 99%
-rename from board/AndesTech/ae350/ae350.c
-rename to board/andestech/ae350/ae350.c
-index 62b93b4ecb..5ae5baed6b 100644
---- a/board/AndesTech/ae350/ae350.c
-+++ b/board/andestech/ae350/ae350.c
-@@ -99,7 +99,7 @@ void *board_fdt_blob_setup(int *err)
- #ifdef CONFIG_SPL_BOARD_INIT
- void spl_board_init()
- {
--	/* enable v5l2 cache */
-+	/* enable andes-l2 cache */
- 	if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
- 		enable_caches();
- }
-diff --git a/drivers/cache/Kconfig b/drivers/cache/Kconfig
-index 26c2d80a1c..4f35865744 100644
---- a/drivers/cache/Kconfig
-+++ b/drivers/cache/Kconfig
-@@ -22,11 +22,11 @@ config L2X0_CACHE
- 	  ARMv7(32-bit) devices. The driver configures the cache settings
- 	  found in the device tree.
- 
--config V5L2_CACHE
--	bool "Andes V5L2 cache driver"
-+config ANDES_L2_CACHE
-+	bool "Andes L2 cache driver"
- 	select CACHE
- 	help
--	  Support Andes V5L2 cache controller in AE350 platform.
-+	  Support Andes L2 cache controller in AE350 platform.
- 	  It will configure tag and data ram timing control from the
- 	  device tree and enable L2 cache.
- 
-diff --git a/drivers/cache/Makefile b/drivers/cache/Makefile
-index 78e673d09e..e1b71e0ed5 100644
---- a/drivers/cache/Makefile
-+++ b/drivers/cache/Makefile
-@@ -3,6 +3,6 @@ obj-$(CONFIG_$(SPL_TPL_)CACHE) += cache-uclass.o
- obj-$(CONFIG_SANDBOX) += sandbox_cache.o
- obj-$(CONFIG_L2X0_CACHE) += cache-l2x0.o
- obj-$(CONFIG_NCORE_CACHE) += cache-ncore.o
--obj-$(CONFIG_V5L2_CACHE) += cache-v5l2.o
-+obj-$(CONFIG_ANDES_L2_CACHE) += cache-andes-l2.o
- obj-$(CONFIG_SIFIVE_CCACHE) += cache-sifive-ccache.o
- obj-$(CONFIG_SIFIVE_PL2) += cache-sifive-pl2.o
-diff --git a/drivers/cache/cache-v5l2.c b/drivers/cache/cache-andes-l2.c
-similarity index 84%
-rename from drivers/cache/cache-v5l2.c
-rename to drivers/cache/cache-andes-l2.c
-index fe3f9392b2..45d29f2fbd 100644
---- a/drivers/cache/cache-v5l2.c
-+++ b/drivers/cache/cache-andes-l2.c
-@@ -73,7 +73,7 @@ static u32 status_bit_offset = 0x4;
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
--struct v5l2_plat {
-+struct andes_l2_plat {
- 	struct l2cache	*regs;
- 	u32		iprefetch;
- 	u32		dprefetch;
-@@ -81,9 +81,9 @@ struct v5l2_plat {
- 	u32		dram_ctl[2];
- };
- 
--static int v5l2_enable(struct udevice *dev)
-+static int andes_l2_enable(struct udevice *dev)
- {
--	struct v5l2_plat *plat = dev_get_plat(dev);
-+	struct andes_l2_plat *plat = dev_get_plat(dev);
- 	volatile struct l2cache *regs = plat->regs;
- 
- 	if (regs)
-@@ -92,9 +92,9 @@ static int v5l2_enable(struct udevice *dev)
- 	return 0;
- }
- 
--static int v5l2_disable(struct udevice *dev)
-+static int andes_l2_disable(struct udevice *dev)
- {
--	struct v5l2_plat *plat = dev_get_plat(dev);
-+	struct andes_l2_plat *plat = dev_get_plat(dev);
- 	volatile struct l2cache *regs = plat->regs;
- 	u8 hart = gd->arch.boot_hart;
- 	void __iomem *cctlcmd = (void __iomem *)CCTL_CMD_REG(regs, hart);
-@@ -114,9 +114,9 @@ static int v5l2_disable(struct udevice *dev)
- 	return 0;
- }
- 
--static int v5l2_of_to_plat(struct udevice *dev)
-+static int andes_l2_of_to_plat(struct udevice *dev)
- {
--	struct v5l2_plat *plat = dev_get_plat(dev);
-+	struct andes_l2_plat *plat = dev_get_plat(dev);
- 	struct l2cache *regs;
- 
- 	regs = dev_read_addr_ptr(dev);
-@@ -138,9 +138,9 @@ static int v5l2_of_to_plat(struct udevice *dev)
- 	return 0;
- }
- 
--static int v5l2_probe(struct udevice *dev)
-+static int andes_l2_probe(struct udevice *dev)
- {
--	struct v5l2_plat *plat = dev_get_plat(dev);
-+	struct andes_l2_plat *plat = dev_get_plat(dev);
- 	struct l2cache *regs = plat->regs;
- 	u32 cfg_val, ctl_val;
- 
-@@ -183,23 +183,23 @@ static int v5l2_probe(struct udevice *dev)
- 	return 0;
- }
- 
--static const struct udevice_id v5l2_cache_ids[] = {
-+static const struct udevice_id andes_l2_cache_ids[] = {
- 	{ .compatible = "cache" },
- 	{}
- };
- 
--static const struct cache_ops v5l2_cache_ops = {
--	.enable		= v5l2_enable,
--	.disable	= v5l2_disable,
-+static const struct cache_ops andes_l2_cache_ops = {
-+	.enable		= andes_l2_enable,
-+	.disable	= andes_l2_disable,
- };
- 
--U_BOOT_DRIVER(v5l2_cache) = {
--	.name   = "v5l2_cache",
-+U_BOOT_DRIVER(andes_l2_cache) = {
-+	.name   = "andes_l2_cache",
- 	.id     = UCLASS_CACHE,
--	.of_match = v5l2_cache_ids,
--	.of_to_plat = v5l2_of_to_plat,
--	.probe	= v5l2_probe,
--	.plat_auto	= sizeof(struct v5l2_plat),
--	.ops = &v5l2_cache_ops,
-+	.of_match = andes_l2_cache_ids,
-+	.of_to_plat = andes_l2_of_to_plat,
-+	.probe	= andes_l2_probe,
-+	.plat_auto	= sizeof(struct andes_l2_plat),
-+	.ops = &andes_l2_cache_ops,
- 	.flags  = DM_FLAG_PRE_RELOC,
- };
+In our datacenter application, a single DHCP server is servicing 36000+ clients.
+Improvements are required to the DHCPv4 retransmission behavior to align with
+RFC and ensure less pressure is exerted on the server:
+- retransmission backoff interval maximum is configurable
+  (environment variable bootpretransmitperiodmax)
+- initial retransmission backoff interval is configurable
+  (environment variable bootpretransmitperiodinit)
+- transaction ID is kept the same for each BOOTP/DHCPv4 request
+  (not recreated on each retry)
+
+For our application we'll use:
+- bootpretransmitperiodmax=16000
+- bootpretransmitperiodinit=2000
+
+A new configuration BOOTP_RANDOM_XID has been added to enable a randomized
+BOOTP/DHCPv4 transaction ID.
+
+Enhance DHCPv4 sending/parsing option 209 (PXE config file).  A previous
+patch was accepted.  A new patch fixes a possible double free() and
+addresses latest review comments.
+
+Changes in v8:
+- remove unused variable "char *ep" from bootp_reset()
+
+Changes in v7:
+- Remove "depends on LIB_RAND || LIB_HW_RAND" from CMD_BOOTP
+- Add CMD_BOOTP/CMD_DHCP/CMD_DHCP6 to LIB_RAND menu choice
+- Add space after "config CMD_DHCP"
+
+Changes in v6:
+- CMD_BOOTP should "depends on LIB_RAND || LIB_HW_RAND"
+
+Changes in v5:
+- add change log to individual patches
+- fix depends for BOOTP_RANDOM_XID:
+  "depends on CMD_BOOTP && (LIB_RAND || LIB_HW_RAND)"
+
+Changes in v4:
+- rebase master and resolve conflicts
+- default y for BOOTP_PXE_DHCP_OPTION (feedback from review)
+- Add "select LIB_RAND" for "config CMD_BOOTP" (retransmission
+  improvements require rand())
+
+Changes in v3:
+- add define for option 209 and rfc5071 reference
+- Set RETRANSMIT_PERIOD_MAX_MS=60000
+- Add randomization factor to retransmission timeout
+- Add depends for BOOTP_RANDOM_XID
+
+Changes in v2:
+- use env_get_ulong() to get environment variables
+
+Sean Edmond (3):
+  net: Enhancements for dhcp option 209
+  net: bootp: BOOTP/DHCPv4 retransmission improvements
+  net: bootp: add config option BOOTP_RANDOM_XID
+
+ cmd/Kconfig |  8 ++++++
+ cmd/pxe.c   |  2 ++
+ lib/Kconfig |  3 ++-
+ net/bootp.c | 73 ++++++++++++++++++++++++++++++++++++++++-------------
+ net/bootp.h |  2 ++
+ 5 files changed, 70 insertions(+), 18 deletions(-)
+
 -- 
-2.34.1
+2.42.0
 
