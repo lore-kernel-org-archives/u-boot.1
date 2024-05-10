@@ -4,60 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EEFEC25B4F
-	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 04:50:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 123BDC25B10
+	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 04:51:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93A9788808;
-	Fri, 10 May 2024 06:50:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 086F8886EB;
+	Fri, 10 May 2024 06:50:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Lg5SQ+aR";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uHNsVDZh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA18888719; Fri, 10 May 2024 06:50:38 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id C60F988667; Fri, 10 May 2024 06:50:42 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D104C87DEA
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 06:50:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 49E4688131
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 06:50:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44A4oXnK090951;
- Thu, 9 May 2024 23:50:33 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44A4obk9063278;
+ Thu, 9 May 2024 23:50:37 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1715316633;
- bh=m8jh6F1eoOGG1rxD88QKo1/PLbAL4lSPzYAyaHgzzAE=;
+ s=ti-com-17Q1; t=1715316637;
+ bh=5+qSiBUJmEoWq3yjnbwSbsh/BjDvs+vK6emi0bf6cQE=;
  h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=Lg5SQ+aRjnrdi8aFgoYkwKMw48YABvIizEHfRdpDiI5ApVKyA1bsM8ykX+VfQTQvy
- T7ga5cp/muqrsKNl/RWcP+QqZXIR8qLLG2azmaof+aA13LA7DauzGeSdbqCwKYc8Fo
- 9zdmllbzksob3Ou690Qpd9mlK6xqqHXZRul4h5hQ=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44A4oXIu101403
+ b=uHNsVDZhvMUA08yqxgoQSWvsGs5lto5yaqLrCFGusHA/lDTy3r0ql8L3b1RcVD4sX
+ IJNnj+BKO699tywXrzO7RWUj2TC/P/XCoHMVDiHFbm6b+0/y4Sb0wqJXYYnOYjMerL
+ wG/NjNJZ/T90ZrKm2Ql+MrlXlpKItbucw/huzP/8=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44A4obsY016481
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 9 May 2024 23:50:33 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 9 May 2024 23:50:37 -0500
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 9
- May 2024 23:50:33 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ May 2024 23:50:36 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 9 May 2024 23:50:33 -0500
+ Frontend Transport; Thu, 9 May 2024 23:50:36 -0500
 Received: from [127.0.1.1] (uda0497581.dhcp.ti.com [10.24.68.185])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44A4oMGL126967;
- Thu, 9 May 2024 23:50:30 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44A4oMGM126967;
+ Thu, 9 May 2024 23:50:33 -0500
 From: Manorit Chawdhry <m-chawdhry@ti.com>
-Date: Fri, 10 May 2024 10:20:21 +0530
-Subject: [PATCH v3 2/6] configs: j721s2_evm_a72_defconfig: Switch to
- bootstd
+Date: Fri, 10 May 2024 10:20:22 +0530
+Subject: [PATCH v3 3/6] arch: arm: dts: k3-am68-sk-r5: Sync with J721s2 R5 file
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20240510-b4-upstream-j721s2-of-upstream-v3-2-43672b7134b7@ti.com>
+Message-ID: <20240510-b4-upstream-j721s2-of-upstream-v3-3-43672b7134b7@ti.com>
 References: <20240510-b4-upstream-j721s2-of-upstream-v3-0-43672b7134b7@ti.com>
 In-Reply-To: <20240510-b4-upstream-j721s2-of-upstream-v3-0-43672b7134b7@ti.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Alper Nebi
@@ -67,11 +66,11 @@ CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Nishanth
  Udit Kumar <u-kumar1@ti.com>, Aniket Limaye <a-limaye@ti.com>,
  Sumit Garg <sumit.garg@linaro.org>, Manorit Chawdhry <m-chawdhry@ti.com>
 X-Mailer: b4 0.13-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1715316623; l=1549;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1715316623; l=1560;
  i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
- bh=f2/qa0bsyybOyAvTmDnqWekzN0BWA10EdH6uCfnnyhQ=;
- b=k8a4AZ3mv/T1DcO0zRV1j1tjvBap7+myuAwirKW3pBFZS3UZWBFZPGQKDqjg8i1zCeRIP5406
- GcjoXRrY4WiBllYmMjnnB8lb3VSzfu3YuPZsRtALycJZrtfLr1XoKUA
+ bh=TrsymMoN6vF2J46GLb2YyLtd8rKaesuanKZqcu4I+aY=;
+ b=U3t9sBBpaapq8OxSF9h8GPAHozl0Ru6gMCXfvBNsQhmnJDTw0ICCkZHwurx3ZSqmzR9l6Gg/u
+ RZ6+YVKxN5oDppTWrds4By1hGJGBTRlBHghqQVyRheIYRos0Oz1cDA1
 X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
  pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -91,51 +90,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Neha Malcom Francis <n-francis@ti.com>
+Currently AM68 SK boots with J721s2 R5 DTS and then later changes to
+AM68 SK DT during runtime.
 
-Switch to using bootstd. Note that with this change, we will stop using
-distro_bootcmd and instead depend entirely on bootflow method of
-starting the system up.
+To split the support of J721s2 and AM68, sync AM68 R5 DT with J721s2 R5
+DT as that contains some essential node changes for booting up AM68
+using AM68 R5 DT.
 
-Also config_distro_bootcmd.h header file that is no longer needed in
-j721s2_evm.h.
+secure_proxy_sa3 and secure_proxy_mcu node changes are required for
+establishing contact with ROM and TIFS running on SMS M4 core,
+respectively, and the addition of new power domain helps in holding A72
+cluster in reset for configuration of firewalls.
 
-Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
 Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 ---
- configs/j721s2_evm_a72_defconfig | 5 +++--
- include/configs/j721s2_evm.h     | 1 -
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ arch/arm/dts/k3-am68-sk-r5-base-board.dts | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/configs/j721s2_evm_a72_defconfig b/configs/j721s2_evm_a72_defconfig
-index 19cd44b068c0..8b02d07a9f09 100644
---- a/configs/j721s2_evm_a72_defconfig
-+++ b/configs/j721s2_evm_a72_defconfig
-@@ -33,9 +33,10 @@ CONFIG_SPL_SPI=y
- # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
- CONFIG_SPL_LOAD_FIT=y
- CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
--CONFIG_DISTRO_DEFAULTS=y
- CONFIG_OF_SYSTEM_SETUP=y
--CONFIG_BOOTCOMMAND="run envboot; run distro_bootcmd;"
-+CONFIG_BOOTSTD_FULL=y
-+CONFIG_BOOTSTD_DEFAULTS=y
-+CONFIG_BOOTCOMMAND="run envboot; bootflow scan -lb"
- CONFIG_LOGLEVEL=7
- CONFIG_SPL_MAX_SIZE=0xc0000
- CONFIG_SPL_BOARD_INIT=y
-diff --git a/include/configs/j721s2_evm.h b/include/configs/j721s2_evm.h
-index 846cfa7531cc..6186ec32b1d8 100644
---- a/include/configs/j721s2_evm.h
-+++ b/include/configs/j721s2_evm.h
-@@ -10,7 +10,6 @@
- #define __CONFIG_J721S2_EVM_H
+diff --git a/arch/arm/dts/k3-am68-sk-r5-base-board.dts b/arch/arm/dts/k3-am68-sk-r5-base-board.dts
+index 695aadc287bd..038b08dc3e01 100644
+--- a/arch/arm/dts/k3-am68-sk-r5-base-board.dts
++++ b/arch/arm/dts/k3-am68-sk-r5-base-board.dts
+@@ -24,7 +24,8 @@
+ 		compatible = "ti,am654-rproc";
+ 		reg = <0x0 0x00a90000 0x0 0x10>;
+ 		power-domains = <&k3_pds 61 TI_SCI_PD_EXCLUSIVE>,
+-				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>;
++				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>,
++				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
+ 		resets = <&k3_reset 202 0>;
+ 		clocks = <&k3_clks 61 1>;
+ 		assigned-clocks = <&k3_clks 61 1>, <&k3_clks 202 0>;
+@@ -54,10 +55,12 @@
  
- #include <linux/sizes.h>
--#include <config_distro_bootcmd.h>
+ &secure_proxy_mcu {
+ 	bootph-pre-ram;
++	status = "okay";
+ };
  
- /* SPL Loader Configuration */
- #if defined(CONFIG_TARGET_J721S2_A72_EVM)
+ &secure_proxy_sa3 {
+ 	bootph-pre-ram;
++	status = "okay";
+ };
+ 
+ &cbass_mcu_wakeup {
 
 -- 
 2.43.2
