@@ -4,93 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D198DC25B10
-	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 05:37:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CE02C25B10
+	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 05:46:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55B7F88113;
-	Fri, 10 May 2024 07:37:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C094C8811C;
+	Fri, 10 May 2024 07:46:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GJ2VEgh2";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="nezhkaGp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C94A88194; Fri, 10 May 2024 07:37:12 +0200 (CEST)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 67845881A6; Fri, 10 May 2024 07:46:19 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E630880A1
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 07:37:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B571A880A1
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 07:46:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-51f174e316eso1985341e87.0
- for <u-boot@lists.denx.de>; Thu, 09 May 2024 22:37:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1715319430; x=1715924230; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=i+6SpaDWKVVUB3BjHgEoLfA5G4X6vWg3igCK3/cfc8E=;
- b=GJ2VEgh20URq5VcjDYrP9+/axYqb2DpzEmsuFWfzl/tIES7xmLuYwWT19G+YHXBJRL
- K1yohuEnXNhN0lVGL4BeCMv0DJJjCYtHehX1PCbGR6Sne6Za0+wNrNaYYi92xoraCIjK
- HjhWi3XIM4WzCHlFNOup/JPcCbkgsWn/ZD4ZAA/QViKQn7NSKHTGxzzsHmP2T3rr0DPs
- kFPyMTQ/7QQtxScg4e5Ohn+LtOp74lX0x232Q1NVT84Appdlahj27UYyuuCHKwbI7OMs
- HpYiP2fR2KnGvgGclHcllNs4StVv80pjfe8FywfokUXV4lFG70jEoyxmzj1MQlCj0cn+
- Nfeg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715319430; x=1715924230;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=i+6SpaDWKVVUB3BjHgEoLfA5G4X6vWg3igCK3/cfc8E=;
- b=YtD1Naz61V5R1ldiO+TgUD671ZTlpHfomVQ7Ocv5VtYnrz3q27oqgGlKc9bTMxpB0Z
- oCxYTPMl1LVppEL+02kXmClgyY86UhelVctyb6AEputiBo5kKJMQ09z1p6vH6PTgu8kx
- xEGzYgQNU55aC9ae/MvOA//go0uDkp+RHOlG3RqgjTM3XvpdI8rISqgmNrAS+A564gAR
- oQyBwlMdoCQkLmPJRJZN6wYUl4M3UzDiGwjaKRlNvXgyC5cgi+a4lLqs2L1Whv9ZYlzn
- G6oT81Ibe7ics69XX00YMylLdhqbCsQ1WfyrP1n0Snw8VL8K3E1lPtBaTGngl9bLs5kA
- 8Ejw==
-X-Gm-Message-State: AOJu0YwEVoQolUpenAJdfi8S+Wirhpfh2RrWjx0gBw+ntqgr6vcg6EwT
- uYlEAfG2Mh+F2j0qX8Pw4gF2krVTBBTVIlRcfhAJAAIRkKe7jdxMkrkgpck66Lulbr7L7HBJLdF
- KsogNE6KeRe5JJGzWzr4nlhaXEyqfHboVSOP8NQ==
-X-Google-Smtp-Source: AGHT+IEul9wtrq6jBZ5qBvrLaW6xNz9o/6G4riV8/noYVgP7hmYgtdOGVbVMQuY0oQ9L+j9JFho80bTiKZUQf+oEN3o=
-X-Received: by 2002:a19:6b0b:0:b0:51d:97e8:d2ea with SMTP id
- 2adb3069b0e04-5220fb77411mr852249e87.30.1715319429691; Thu, 09 May 2024
- 22:37:09 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44A5kFvB079925;
+ Fri, 10 May 2024 00:46:15 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1715319975;
+ bh=K3945RSuCv/LEwTazyzb5JpYc+qk2JuSLVd6FOlZ4oY=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=nezhkaGpeYeq1crGlKVkNeVAftKRdyyPpGezb8cTKZiCurK9pZVjK1n4cIKeGRMJp
+ zj2rkU1Y86FDcZ2/v03btrCNDQs1puImajWKnIuVsRura5eBEA3pbwhJiygMTxEr7p
+ 3MATjfHZAkIIRSCPVLFeh54xUvcxsNEuNR6+bIZA=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44A5kEG2059468
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 10 May 2024 00:46:14 -0500
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 10
+ May 2024 00:46:14 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 10 May 2024 00:46:14 -0500
+Received: from [172.24.227.193] (devarsht.dhcp.ti.com [172.24.227.193] (may be
+ forged))
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44A5kBDM112284;
+ Fri, 10 May 2024 00:46:12 -0500
+Message-ID: <0171842f-1d12-9af6-fc8f-021a6a2229e1@ti.com>
+Date: Fri, 10 May 2024 11:16:10 +0530
 MIME-Version: 1.0
-References: <20240507175132.1456512-1-raymond.mao@linaro.org>
- <20240507175132.1456512-27-raymond.mao@linaro.org>
-In-Reply-To: <20240507175132.1456512-27-raymond.mao@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 10 May 2024 08:36:33 +0300
-Message-ID: <CAC_iWj+v8YqK7mA-rWZwK+j1NmG7dwMDSfSV51Q_qCGrVJ4h5g@mail.gmail.com>
-Subject: Re: [PATCH v2 26/28] asn1_decoder: remove ASN1 decoder when using
- MbedTLS
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Simon Glass <sjg@chromium.org>, Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>, 
- Andrew Davis <afd@ti.com>, Sumit Garg <sumit.garg@linaro.org>, 
- Christophe Leroy <christophe.leroy@csgroup.eu>,
- Jesse Taube <mr.bossman075@gmail.com>, 
- Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
- Ralph Siemsen <ralph.siemsen@linaro.org>, 
- Igor Opaniuk <igor.opaniuk@gmail.com>, Sergei Antonov <saproj@gmail.com>, 
- Ilya Lukin <4.shket@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- AKASHI Takahiro <takahiro.akashi@linaro.org>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Alexander Gendin <agendin@matrox.com>, 
- Bin Meng <bmeng@tinylab.org>, Eddie James <eajames@linux.ibm.com>, 
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH 1/4] remoteproc: k3-dsp: Enable C71x support for AM62A
+Content-Language: en-US
+To: Hari Nagalla <hnagalla@ti.com>, <trini@konsulko.com>, <nm@ti.com>,
+ <afd@ti.com>, <b-padhi@ti.com>, <u-boot@lists.denx.de>
+CC: <u-kumar1@ti.com>, <praneeth@ti.com>
+References: <20240509142037.32064-1-hnagalla@ti.com>
+ <20240509142037.32064-2-hnagalla@ti.com>
+From: Devarsh Thakkar <devarsht@ti.com>
+In-Reply-To: <20240509142037.32064-2-hnagalla@ti.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,36 +83,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 7 May 2024 at 21:03, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> When building with MbedTLS, we are using MbedTLS to decode ASN1 data
-> for x509, pkcs7 and mscode. So we can remove asn1_decoder when
-> MBEDTLS_LIB_X509 is enabled.
->
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> ---
-> Changes in v2
-> - Initial patch.
->
->  lib/Makefile | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/lib/Makefile b/lib/Makefile
-> index 3534b3301ae..7e3dc1084fb 100644
-> --- a/lib/Makefile
-> +++ b/lib/Makefile
-> @@ -82,7 +82,9 @@ obj-$(CONFIG_$(SPL_)SHA512) += sha512.o
->  endif
->
->  obj-$(CONFIG_CRYPT_PW) += crypt/
-> +ifneq ($(CONFIG_MBEDTLS_LIB_X509), y)
->  obj-$(CONFIG_$(SPL_)ASN1_DECODER) += asn1_decoder.o
-> +endif
->
->  obj-$(CONFIG_$(SPL_)ZLIB) += zlib/
->  obj-$(CONFIG_$(SPL_)ZSTD) += zstd/
-> --
-> 2.25.1
->
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+On 09/05/24 19:50, Hari Nagalla wrote:
+> AM62A SoC has a single C71x DSP subsystem with analytics engine in
+> main voltage domain. Extend support to AM62A with compatible strings.
+> 
+> Signed-off-by: Hari Nagalla <hnagalla@ti.com>
+
+Reviewed-by: Devarsh Thakkar <devarsht@ti.com>
+
+Regards
+Devarsh
+> ---
+>  drivers/remoteproc/ti_k3_dsp_rproc.c | 13 +++++++++++--
+>  1 file changed, 11 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/remoteproc/ti_k3_dsp_rproc.c b/drivers/remoteproc/ti_k3_dsp_rproc.c
+> index e790406324..ed13729c33 100644
+> --- a/drivers/remoteproc/ti_k3_dsp_rproc.c
+> +++ b/drivers/remoteproc/ti_k3_dsp_rproc.c
+> @@ -339,7 +339,8 @@ static int k3_dsp_of_get_memories(struct udevice *dev)
+>  	for (i = 0; i < dsp->num_mems; i++) {
+>  		/* C71 cores only have a L1P Cache, there are no L1P SRAMs */
+>  		if (((device_is_compatible(dev, "ti,j721e-c71-dsp")) ||
+> -		     (device_is_compatible(dev, "ti,j721s2-c71-dsp"))) &&
+> +		    (device_is_compatible(dev, "ti,j721s2-c71-dsp")) ||
+> +		    (device_is_compatible(dev, "ti,am62a-c7xv-dsp"))) &&
+>  		    !strcmp(mem_names[i], "l1pram")) {
+>  			dsp->mem[i].bus_addr = FDT_ADDR_T_NONE;
+>  			dsp->mem[i].dev_addr = FDT_ADDR_T_NONE;
+> @@ -347,7 +348,14 @@ static int k3_dsp_of_get_memories(struct udevice *dev)
+>  			dsp->mem[i].size = 0;
+>  			continue;
+>  		}
+> -
+> +		if (device_is_compatible(dev, "ti,am62a-c7xv-dsp") &&
+> +		    !strcmp(mem_names[i], "l1dram")) {
+> +			dsp->mem[i].bus_addr = FDT_ADDR_T_NONE;
+> +			dsp->mem[i].dev_addr = FDT_ADDR_T_NONE;
+> +			dsp->mem[i].cpu_addr = NULL;
+> +			dsp->mem[i].size = 0;
+> +			continue;
+> +		}
+>  		dsp->mem[i].bus_addr = dev_read_addr_size_name(dev, mem_names[i],
+>  					  (fdt_addr_t *)&dsp->mem[i].size);
+>  		if (dsp->mem[i].bus_addr == FDT_ADDR_T_NONE) {
+> @@ -459,6 +467,7 @@ static const struct udevice_id k3_dsp_ids[] = {
+>  	{ .compatible = "ti,j721e-c66-dsp", .data = (ulong)&c66_data, },
+>  	{ .compatible = "ti,j721e-c71-dsp", .data = (ulong)&c71_data, },
+>  	{ .compatible = "ti,j721s2-c71-dsp", .data = (ulong)&c71_data, },
+> +	{ .compatible = "ti,am62a-c7xv-dsp", .data = (ulong)&c71_data, },
+>  	{}
+>  };
+>  
