@@ -4,48 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36AAAC25B10
-	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 12:54:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 483D0C25B5F
+	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 13:08:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7ED56884B0;
-	Fri, 10 May 2024 14:53:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=fancydomain.eu
+	by phobos.denx.de (Postfix) with ESMTP id 71B8A88194;
+	Fri, 10 May 2024 15:08:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=fancydomain.eu header.i=@fancydomain.eu header.b="W80Hi//G";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WwBsIZv+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1131088296; Fri, 10 May 2024 13:39:02 +0200 (CEST)
-Received: from mx.walter.deinstapel.de (mx.walter.deinstapel.de
- [IPv6:2a01:584:9::4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D8EAF884C7; Fri, 10 May 2024 15:08:26 +0200 (CEST)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1287E88131
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 13:39:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=fancydomain.eu
+ by phobos.denx.de (Postfix) with ESMTPS id C7CAC88194
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 15:08:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jasper@fancydomain.eu
-From: jasper@fancydomain.eu
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=fancydomain.eu;
- s=mail; t=1715341139;
- bh=1IZrh2ZRfBgPF4k/e5wALz8Y4VJQwIzC/FQevaIBabA=;
- h=From:To:Cc:Subject;
- b=W80Hi//Gjc5gmUp42JrpDaZLaCX3+gwMy4uIo6PBgUW9/Fr1kiyNJJFEGxSPk67T6
- HESXkp7Iio5zrMvAoJpyMGhlcik7oe+n5sGq228Ju7GAkMBrLUfyFs0Rnqhl7ve1CC
- ltWKmB8jWu9xIvZsWtLtAmqM+OKhyNCsMP9aEDJQu0gJ7MS1u/DtzUkifr+kpM6uqD
- fItcRAKFOR+EF6F/Zms5v7JNbRVkJ6pHwA1osjJ8fCRxGh+RmaOpqbB8aORgwDa0x2
- MpDGxmVax0psQzV87VzmIxL1A0bzcPWc7F4Mi0R45N5agTsG1CBHqVSVlCyi5WArYv
- Uc7iMyvxTV16w==
-To: u-boot@lists.denx.de
-Cc: joe.hershberger@ni.com, Jasper Orschulko <jasper@fancydomain.eu>,
- Michael Glembotzki <Michael.Glembotzki@iris-sensing.com>
-Subject: [PATCH] env: Invert gd->env_valid for env_mmc_save
-Date: Fri, 10 May 2024 13:38:34 +0200
-Message-ID: <20240510113834.826783-1-jasper@fancydomain.eu>
-Mime-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 10 May 2024 14:53:58 +0200
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-792b8d98a56so175557285a.2
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 06:08:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1715346503; x=1715951303; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=CLojNXgKAtru/O9GNy35xBj2KcZjQ/oT7za8YnQJl4I=;
+ b=WwBsIZv+dTBmoFPf15HRSofXadv0xIZZl8PdSxlczjLrK4WFe/4dcd3rVRttZ+Ts+K
+ PTaJk7wRVNKEgCechasrmRARVvWcnAMXqHh9UbG2beW94BTRrkLMf/w6/zr063uBeLuF
+ KMatL04Ys0ZzrCEY6nTX2azHf3OZ4wD5QCbdw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1715346503; x=1715951303;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CLojNXgKAtru/O9GNy35xBj2KcZjQ/oT7za8YnQJl4I=;
+ b=rV71+cs9RVV/GAZaysrSrTUZNDs8Btn0JQCVdSHhLDZbVMsRy/HzFtRkjTMXIjRzXV
+ 32QmQNT4X4ppCmFV7l/Vg6YvdZBRZsRGKnuAnVIn54acG9tmnlmO/nEH4tNDPeBjCU/U
+ rxm2dL7AMVMalctzoUG4oPzLxzrQVDTm9Z+zu+jP5cct2QZKvzxKhOe3Gbm+ZDpgiG8g
+ XaC5x/pHH+YGV6ILDNbapXtQLu9JytP+qcRXHVbjy5JzH9R6bs2po/mB/r3q5d+LmbxM
+ DBSODL3h8zaBMBT9b2I0vmEuADOO7pY/RVY/SW1XJcTSM+lEbXwreYXCST8WsgNK/92l
+ KKbA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWiRvbXVL6wrecqLs+wRknoiA7C4PvUe25b14gtTFgizmlz2v5U6fIQiXeLuT1WfwznjR29cPcsHgUHGQicTCfXWyi/lA==
+X-Gm-Message-State: AOJu0YwTmwEfR53Vlp67FklG/48kDIF6K0dF40WbtVEllaYtjy5gX1ZD
+ YgnEfsZ+GjNxfg67QURhAvLosdthCDM2hQKLMms7SmpnGOmD6PoIxruoOznYfHQ=
+X-Google-Smtp-Source: AGHT+IHG1q0ywUqyTptgr2b8xsoPKPgcAO9dl+B65/Pv3wWMAXNp105XeDWn/3M5K5mfSolU60Bp8Q==
+X-Received: by 2002:a05:6214:5881:b0:6a0:b2fa:71e9 with SMTP id
+ 6a1803df08f44-6a168276d38mr25188386d6.61.1715346503427; 
+ Fri, 10 May 2024 06:08:23 -0700 (PDT)
+Received: from bill-the-cat ([187.144.98.216])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6a15f1ccc6esm17028366d6.103.2024.05.10.06.08.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 10 May 2024 06:08:22 -0700 (PDT)
+Date: Fri, 10 May 2024 07:08:19 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Frank Wunderlich <frank-w@public-files.de>
+Cc: Frank Wunderlich <linux@fw-web.de>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ John Crispin <john@phrozen.org>, u-boot@lists.denx.de
+Subject: Re: [RFC] pci: mediatek: add PCIe controller support for Filogic
+Message-ID: <20240510130819.GR2568172@bill-the-cat>
+References: <20240412141051.23943-1-linux@fw-web.de>
+ <trinity-564944df-1cc6-48ba-8661-ece741792f3d-1715342246700@3c-app-gmx-bs34>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="u/uNgEqisQvVtL/2"
+Content-Disposition: inline
+In-Reply-To: <trinity-564944df-1cc6-48ba-8661-ece741792f3d-1715342246700@3c-app-gmx-bs34>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,40 +97,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jasper Orschulko <jasper@fancydomain.eu>
 
-The A/B update strategy of the env's has a gap in the first 2 calls of saveenv.
-The env's are stored twice on the first memory area if:
-gd->env_valid == ENV_INVALID.
+--u/uNgEqisQvVtL/2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-u-boot=> saveenv
-Saving Environment to MMC... Writing to MMC(1)... OK
-u-boot=> saveenv
-Saving Environment to MMC... Writing to MMC(1)... OK  <-- !!!
-u-boot=> saveenv
-Saving Environment to MMC... Writing to redundant MMC(1)... OK
-u-boot=> saveenv
-Saving Environment to MMC... Writing to MMC(1)... OK
+On Fri, May 10, 2024 at 01:57:26PM +0200, Frank Wunderlich wrote:
 
-Signed-off-by: Michael Glembotzki <Michael.Glembotzki@iris-sensing.com>
-Signed-off-by: Jasper Orschulko <jasper@fancydomain.eu>
----
- env/mmc.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> a gentle ping...any comments?
 
-diff --git a/env/mmc.c b/env/mmc.c
-index 7afb733e890..2bef30c973c 100644
---- a/env/mmc.c
-+++ b/env/mmc.c
-@@ -299,7 +299,7 @@ static int env_mmc_save(void)
- 	ret = 0;
- 
- 	if (IS_ENABLED(CONFIG_SYS_REDUNDAND_ENVIRONMENT))
--		gd->env_valid = gd->env_valid == ENV_REDUND ? ENV_VALID : ENV_REDUND;
-+		gd->env_valid = gd->env_valid == ENV_VALID ? ENV_REDUND : ENV_VALID;
- 
- fini:
- 	fini_mmc_for_env(mmc);
--- 
-2.45.0
+Seems fine? Can we switch to OF_UPSTREAM first however?
 
+--=20
+Tom
+
+--u/uNgEqisQvVtL/2
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY+HEAACgkQFHw5/5Y0
+tyxpkAwAs85gEtm5q52IOOIF15pOuyR880WqzoMYlVdrCRybmVioatoNxhKE3nAB
+d39JqHYpP85bB7MxlHLczFq1liSlG1bmzaPX3DdGuympFqccGkEb5X9WQsFq5MzP
+4az/ZOCEIIuRDvWQ0vQkgznu02JlzxK1RAo9zfmV5GZlYaLmSxoCQloyoevlGzyV
+roVLnrUAQKY5stCAEizYZGS+Q0Hw5fKJocVCzEXKMZfhdh4W16WPfGjk/2sq/mmy
+ITN4qY5UUnL+6clyW7k1K4OAskIRA/Fg7ZnEylT2VTLfn7w5ZMUHDAr+6x1+vuPs
+yHQy959YfzaoDEynDuOerAkX06/EGDqP8s+5n362wpcCSuqgyvR/iERsq9vRhPPa
+OvRKT7y/dzhRPSpmgo5Tl7h7bfhuIY9F/jqQqvkBKDtLkKMjeV7YEjGc8r9dPzFF
+7Y800rTl9dZcnWgEJxwxnCSzlf90Wd4tnHyjuyi7QVlPt7edlUr34i6QYWBgnthd
+R0AmxpC9
+=twA0
+-----END PGP SIGNATURE-----
+
+--u/uNgEqisQvVtL/2--
