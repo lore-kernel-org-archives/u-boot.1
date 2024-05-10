@@ -4,44 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91655C10F1A
-	for <u-boot@archiver.kernel.org>; Thu,  9 May 2024 23:44:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A1AAC10F1A
+	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 00:40:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AC47884B0;
-	Fri, 10 May 2024 01:44:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id B57968817B;
+	Fri, 10 May 2024 02:40:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="JyCshnaX";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B17B78825E; Fri, 10 May 2024 01:44:17 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 70E6088194
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 01:44:15 +0200 (CEST)
+ id B80B18804F; Fri, 10 May 2024 02:40:23 +0200 (CEST)
+Received: from mail-m1287.netease.com (mail-m1287.netease.com [103.209.128.7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 461618804F
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 02:40:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3374615A1;
- Thu,  9 May 2024 16:44:40 -0700 (PDT)
-Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
- [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9B11E3F6A8;
- Thu,  9 May 2024 16:44:13 -0700 (PDT)
-From: Andre Przywara <andre.przywara@arm.com>
-To: Jaehoon Chung <jh80.chung@samsung.com>,
- Jagan Teki <jagan@amarulasolutions.com>
-Cc: Jernej Skrabec <jernej.skrabec@gmail.com>,
- Chris Morgan <macromorgan@hotmail.com>, Ryan Walklin <ryan@testtoast.com>,
- u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/2] power: regulator: add AXP717 support
-Date: Fri, 10 May 2024 00:43:19 +0100
-Message-Id: <20240509234319.13104-3-andre.przywara@arm.com>
-X-Mailer: git-send-email 2.35.8
-In-Reply-To: <20240509234319.13104-1-andre.przywara@arm.com>
-References: <20240509234319.13104-1-andre.przywara@arm.com>
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=JyCshnaXvj7gsftHbhN6xH6PBdy99bnDsuy3VytgEawKd/7/NkmlsbcgdmOvSRx+mgKkW1uTufIQ8iuFR3osW1+nOLPyfLUInoKZeUS25DZe3+fPxRZ89O91kq2q34pEjFgYsGR9DkDOeuQ1NJdd+CS6NlCYVGRAo+tlBbXGLPk=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+ bh=rLkFP7jpqw99RLTxD4CDpxSxX7AzryZpsdlOBgU88as=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.77] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 93A4A90019D;
+ Fri, 10 May 2024 08:40:02 +0800 (CST)
+Message-ID: <96e1c16b-2ec4-45de-8002-8806791d8129@rock-chips.com>
+Date: Fri, 10 May 2024 08:40:01 +0800
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 14/81] block: Remove <common.h> and add needed includes
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Tobias Waldekranz <tobias@waldekranz.com>, Simon Glass
+ <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Bin Meng <bmeng@tinylab.org>,
+ Johan Jonker <jbx6244@gmail.com>, Dan Carpenter <dan.carpenter@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+References: <20240502013138.2383421-1-trini@konsulko.com>
+ <20240502013138.2383421-14-trini@konsulko.com>
+Content-Language: en-US
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20240502013138.2383421-14-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGR5OQlZOGEweSB9MGk0aQ01VEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
+ tLWQY+
+X-HM-Tid: 0a8f5ff1572103a9kunm93a4a90019d
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MyI6Tyo*MTNNSQIzCTA8Ly0K
+ Cg1PFBpVSlVKTEpOSEtKTUtITkxLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFNQ05NNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,89 +76,170 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The X-Powers AXP717 is a PMIC with four buck converters and a number
-of LDOs, one of which is actually fixed (so not modelled here).
 
-Add the compatible string and the respective regulator ranges to allow
-drivers to adjust voltages.
+On 2024/5/2 09:30, Tom Rini wrote:
+> Remove <common.h> from this driver directory and when needed
+> add missing include files directly.
+>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
-Signed-off-by: Andre Przywara <andre.przywara@arm.com>
----
- drivers/power/pmic/axp.c                |  1 +
- drivers/power/regulator/axp_regulator.c | 28 +++++++++++++++++++++++++
- include/axp_pmic.h                      |  1 +
- 3 files changed, 30 insertions(+)
-
-diff --git a/drivers/power/pmic/axp.c b/drivers/power/pmic/axp.c
-index fdf9ff66c29..c300fd2bbc2 100644
---- a/drivers/power/pmic/axp.c
-+++ b/drivers/power/pmic/axp.c
-@@ -89,6 +89,7 @@ static const struct udevice_id axp_pmic_ids[] = {
- 	{ .compatible = "x-powers,axp221", .data = AXP221_ID },
- 	{ .compatible = "x-powers,axp223", .data = AXP223_ID },
- 	{ .compatible = "x-powers,axp313a", .data = AXP313_ID },
-+	{ .compatible = "x-powers,axp717", .data = AXP717_ID },
- 	{ .compatible = "x-powers,axp803", .data = AXP803_ID },
- 	{ .compatible = "x-powers,axp806", .data = AXP806_ID },
- 	{ .compatible = "x-powers,axp809", .data = AXP809_ID },
-diff --git a/drivers/power/regulator/axp_regulator.c b/drivers/power/regulator/axp_regulator.c
-index d27e09538e0..75cdbca30f6 100644
---- a/drivers/power/regulator/axp_regulator.c
-+++ b/drivers/power/regulator/axp_regulator.c
-@@ -189,6 +189,33 @@ static const struct axp_regulator_plat axp313_regulators[] = {
- 	{ }
- };
- 
-+/*
-+ * The "dcdc2" regulator has another range, beyond 1.54V up to 3.4V, in
-+ * steps of 100mV. We cannot model this easily, but also don't need that,
-+ * since it's typically only used for lower voltages anyway, so just ignore it.
-+ */
-+static const struct axp_regulator_plat axp717_regulators[] = {
-+	{ "dcdc1", 0x80, BIT(0), 0x83, 0x7f,  500, 1540,  10, 70 },
-+	{ "dcdc2", 0x80, BIT(1), 0x84, 0x7f,  500, 1540,  10, 70 },
-+	{ "dcdc3", 0x80, BIT(2), 0x85, 0x7f,  500, 1840,  10, 70 },
-+	{ "dcdc4", 0x80, BIT(3), 0x86, 0x7f, 1000, 3700, 100, NA },
-+	{ "aldo1", 0x90, BIT(0), 0x93, 0x1f,  500, 3500, 100, NA },
-+	{ "aldo2", 0x90, BIT(1), 0x94, 0x1f,  500, 3500, 100, NA },
-+	{ "aldo3", 0x90, BIT(2), 0x95, 0x1f,  500, 3500, 100, NA },
-+	{ "aldo4", 0x90, BIT(3), 0x96, 0x1f,  500, 3500, 100, NA },
-+	{ "bldo1", 0x90, BIT(4), 0x97, 0x1f,  500, 3500, 100, NA },
-+	{ "bldo2", 0x90, BIT(5), 0x98, 0x1f,  500, 3500, 100, NA },
-+	{ "bldo3", 0x90, BIT(6), 0x99, 0x1f,  500, 3500, 100, NA },
-+	{ "bldo4", 0x90, BIT(7), 0x9a, 0x1f,  500, 3500, 100, NA },
-+	{ "cldo1", 0x91, BIT(0), 0x9b, 0x1f,  500, 3500, 100, NA },
-+	{ "cldo2", 0x91, BIT(1), 0x9c, 0x1f,  500, 3500, 100, NA },
-+	{ "cldo3", 0x91, BIT(2), 0x9d, 0x1f,  500, 3500, 100, NA },
-+	{ "cldo4", 0x91, BIT(3), 0x9e, 0x1f,  500, 3500, 100, NA },
-+	{"cpusldo",0x91, BIT(4), 0x9f, 0x1f,  500, 1400,  50, NA },
-+	{" boost", 0x19, BIT(4), 0x1e, 0xf0, 4550, 5510,  64, NA },
-+	{ }
-+};
-+
- static const struct axp_regulator_plat axp803_regulators[] = {
- 	{ "dcdc1", 0x10, BIT(0), 0x20, 0x1f, 1600, 3400, 100, NA },
- 	{ "dcdc2", 0x10, BIT(1), 0x21, 0x7f,  500, 1300,  10, 70 },
-@@ -291,6 +318,7 @@ static const struct axp_regulator_plat *const axp_regulators[] = {
- 	[AXP221_ID]	= axp22x_regulators,
- 	[AXP223_ID]	= axp22x_regulators,
- 	[AXP313_ID]	= axp313_regulators,
-+	[AXP717_ID]	= axp717_regulators,
- 	[AXP803_ID]	= axp803_regulators,
- 	[AXP806_ID]	= axp806_regulators,
- 	[AXP809_ID]	= axp809_regulators,
-diff --git a/include/axp_pmic.h b/include/axp_pmic.h
-index aabafc8501b..ae62ef0d76d 100644
---- a/include/axp_pmic.h
-+++ b/include/axp_pmic.h
-@@ -33,6 +33,7 @@ enum {
- 	AXP221_ID,
- 	AXP223_ID,
- 	AXP313_ID,
-+	AXP717_ID,
- 	AXP803_ID,
- 	AXP806_ID,
- 	AXP809_ID,
--- 
-2.35.8
-
+Thanks,
+- Kever
+> ---
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Tobias Waldekranz <tobias@waldekranz.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> Cc: Bin Meng <bmeng@tinylab.org>
+> Cc: Johan Jonker <jbx6244@gmail.com>
+> Cc: Kever Yang <kever.yang@rock-chips.com>
+> Cc: Dan Carpenter <dan.carpenter@linaro.org>
+> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> ---
+>   drivers/block/blk-uclass.c       | 1 -
+>   drivers/block/blk_legacy.c       | 1 -
+>   drivers/block/blkcache.c         | 1 -
+>   drivers/block/blkmap.c           | 1 -
+>   drivers/block/efi-media-uclass.c | 1 -
+>   drivers/block/efi_blk.c          | 1 -
+>   drivers/block/host-uclass.c      | 1 -
+>   drivers/block/host_dev.c         | 1 -
+>   drivers/block/ide.c              | 1 -
+>   drivers/block/sandbox.c          | 1 -
+>   drivers/block/sb_efi_media.c     | 1 -
+>   11 files changed, 11 deletions(-)
+>
+> diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
+> index 77066da352a3..512c952f4d7a 100644
+> --- a/drivers/block/blk-uclass.c
+> +++ b/drivers/block/blk-uclass.c
+> @@ -6,7 +6,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_BLK
+>   
+> -#include <common.h>
+>   #include <blk.h>
+>   #include <dm.h>
+>   #include <log.h>
+> diff --git a/drivers/block/blk_legacy.c b/drivers/block/blk_legacy.c
+> index 5bf1d0471524..f36932183d1f 100644
+> --- a/drivers/block/blk_legacy.c
+> +++ b/drivers/block/blk_legacy.c
+> @@ -4,7 +4,6 @@
+>    * Written by Simon Glass <sjg@chromium.org>
+>    */
+>   
+> -#include <common.h>
+>   #include <blk.h>
+>   #include <part.h>
+>   #include <linux/err.h>
+> diff --git a/drivers/block/blkcache.c b/drivers/block/blkcache.c
+> index 26bcbea43533..0e69160249c7 100644
+> --- a/drivers/block/blkcache.c
+> +++ b/drivers/block/blkcache.c
+> @@ -4,7 +4,6 @@
+>    * Author: Eric Nelson<eric@nelint.com>
+>    *
+>    */
+> -#include <common.h>
+>   #include <blk.h>
+>   #include <log.h>
+>   #include <malloc.h>
+> diff --git a/drivers/block/blkmap.c b/drivers/block/blkmap.c
+> index 21201409ed4b..34eed1380dca 100644
+> --- a/drivers/block/blkmap.c
+> +++ b/drivers/block/blkmap.c
+> @@ -4,7 +4,6 @@
+>    * Author: Tobias Waldekranz <tobias@waldekranz.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <blk.h>
+>   #include <blkmap.h>
+>   #include <dm.h>
+> diff --git a/drivers/block/efi-media-uclass.c b/drivers/block/efi-media-uclass.c
+> index e012f6f2f4c4..dc5e4f59b7f3 100644
+> --- a/drivers/block/efi-media-uclass.c
+> +++ b/drivers/block/efi-media-uclass.c
+> @@ -5,7 +5,6 @@
+>    * Copyright 2021 Google LLC
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   
+>   UCLASS_DRIVER(efi_media) = {
+> diff --git a/drivers/block/efi_blk.c b/drivers/block/efi_blk.c
+> index 917a19f60254..9766cd6f8327 100644
+> --- a/drivers/block/efi_blk.c
+> +++ b/drivers/block/efi_blk.c
+> @@ -8,7 +8,6 @@
+>    * Copyright 2021 Google LLC
+>    */
+>   
+> -#include <common.h>
+>   #include <blk.h>
+>   #include <dm.h>
+>   #include <efi.h>
+> diff --git a/drivers/block/host-uclass.c b/drivers/block/host-uclass.c
+> index b3647e3ce335..cf42bd1e07ac 100644
+> --- a/drivers/block/host-uclass.c
+> +++ b/drivers/block/host-uclass.c
+> @@ -9,7 +9,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_HOST
+>   
+> -#include <common.h>
+>   #include <blk.h>
+>   #include <dm.h>
+>   #include <malloc.h>
+> diff --git a/drivers/block/host_dev.c b/drivers/block/host_dev.c
+> index 52313435a0cb..b3ff3cd1fab9 100644
+> --- a/drivers/block/host_dev.c
+> +++ b/drivers/block/host_dev.c
+> @@ -9,7 +9,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_HOST
+>   
+> -#include <common.h>
+>   #include <blk.h>
+>   #include <bootdev.h>
+>   #include <dm.h>
+> diff --git a/drivers/block/ide.c b/drivers/block/ide.c
+> index c698f9cbd558..b16623d7a3ab 100644
+> --- a/drivers/block/ide.c
+> +++ b/drivers/block/ide.c
+> @@ -6,7 +6,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_IDE
+>   
+> -#include <common.h>
+>   #include <ata.h>
+>   #include <blk.h>
+>   #include <bootdev.h>
+> diff --git a/drivers/block/sandbox.c b/drivers/block/sandbox.c
+> index be4e02cb601a..ec34f1ad8c2e 100644
+> --- a/drivers/block/sandbox.c
+> +++ b/drivers/block/sandbox.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (C) 2013 Henrik Nordstrom <henrik@henriknordstrom.net>
+>    */
+>   
+> -#include <common.h>
+>   #include <blk.h>
+>   #include <dm.h>
+>   #include <fdtdec.h>
+> diff --git a/drivers/block/sb_efi_media.c b/drivers/block/sb_efi_media.c
+> index 52af155a6001..3255db064961 100644
+> --- a/drivers/block/sb_efi_media.c
+> +++ b/drivers/block/sb_efi_media.c
+> @@ -5,7 +5,6 @@
+>    * Copyright 2021 Google LLC
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   
+>   static const struct udevice_id sandbox_efi_media_ids[] = {
