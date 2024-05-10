@@ -4,74 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A72E6C25B10
-	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 14:19:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C25F4C25B5F
+	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 14:23:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1BF288149;
-	Fri, 10 May 2024 16:19:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 30EDB887D4;
+	Fri, 10 May 2024 16:23:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VUldzUmj";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tMyWmFWv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD8A788119; Fri, 10 May 2024 16:19:52 +0200 (CEST)
-Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
- [IPv6:2607:f8b0:4864:20::102a])
+ id 74D44887DF; Fri, 10 May 2024 16:23:39 +0200 (CEST)
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B28488149
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 16:19:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 589988860C
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 16:23:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-2b360096cc4so573130a91.1
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 07:19:49 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x836.google.com with SMTP id
+ d75a77b69052e-43df23e034cso17687001cf.0
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 07:23:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1715350788; x=1715955588; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=8LQdmgiNEZrOkfZqpgO+jypq/+hjRbWSKokCJVpk5Iw=;
- b=VUldzUmj9dooc0p6BSrZdGJxZ/EylGOcmoeu6Vx6j7xT1IeBO4rFka4CSAFN/x5fPC
- 9thwGdmVzfRfYY9Gu4E1k+sAVaNdrCp5g6KipzVo+wTVc1BXWoF7xpBfcZgCb+mettR2
- HnjsiU2ouE6npK/xsoiqQNR+UlxaO0BIRv5YmowVfKZ3eJdRB6VjRY/SkrqJBTArn4s7
- I6iDYuxR9LGxa7HQ2l+ThMV/jswo0G4N7YcQC248fO8F7IB/MoqiNchK7BAOer69Bja+
- ouXm8XLAOxzF81eXtqhP0jrvY5FU30xaExWpAs52uyJDSU82gLYvr+WH8YRYFWDRjZz7
- 0aMA==
+ d=konsulko.com; s=google; t=1715351016; x=1715955816; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=RZOqU/9rYJlDYczUmmAhMJpZ43+gaR+JVqm4hjAg2yQ=;
+ b=tMyWmFWvtAxo8bHK4CwKwOeFTPbojWyK6H2/lpm3CWt7xy6J9v9DJISHLNo/QgJ1VE
+ /eDFzqvQ8ewANPYRWNV4oIlIF8+QXjKrLrIv1dOlxpDm6mD69TAYbCEyx+101YD+d9Pd
+ Q0AcLkdXe8bVz1Cnnc4q3fDsr3Xmn37qc5xvQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715350788; x=1715955588;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=8LQdmgiNEZrOkfZqpgO+jypq/+hjRbWSKokCJVpk5Iw=;
- b=RjmCLX7LnfwCRywIyE2TpLIP6tvbWk/ZBZeldfmrC1ipK86FhifEE/VmY3J75IShPQ
- BjjEX5ykQUfdfHsN8PhhUZa9km76ICH0+2/2iDaAhCTTDhWQc3H9O7XGrZds25OznURR
- Qr3bDxlSE3l4an9txiUn4maCkaVduoIK/bR3uwTOcfqPnDRKMHxn8Bcm3OUgqYdGliGq
- zgfkSVdaL3geOOQXvBOdL1Bn61Kkb56FUFRxG3Fa0THlyeK00aJT9Jqaauk36DQhyY6Z
- UZeTWxmMpqXyd0zAEAyXnOgFnGkia5iqPWGrW637U4xN+JjYaAVw2lZigKK/UvsSaaHT
- zLiw==
+ d=1e100.net; s=20230601; t=1715351016; x=1715955816;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RZOqU/9rYJlDYczUmmAhMJpZ43+gaR+JVqm4hjAg2yQ=;
+ b=ehKrbUIGMEzZdnYTsaIigRWdWb2UFmY60t/WXmdUEFhzwPbP26IighO5nsz5Q2ETam
+ j8uxhHMmvKTu2p8hZTmQCOkPiCuhQAc6CWIXzWJyg0IqQvdeJnKCPB3vJPzKZXYaAlgQ
+ sCTiTQxxVuOeFKY428njZoaaEDumGsTINbkubMfcxfOcLRK5kFOc4v00kwoq6HQKSqaG
+ 6Ovg4+fk2gX5r2j4adrSpACa1jNflQ/q87qBtrwunQUfHsm9Y3JmImUwWWshJ3k/cpyI
+ 9Qd9aBnBOtKyFbYegaaF5kHolJNd2HLAC+W5Fx41XAREdDN3enr+1E7UO+VJB+DtSrSc
+ NU4g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUTHpCo5W4XR35yPLeaPNunnvnqWuPCPCvtx+1rcdtoN5ydFx5ZzgdZzFddvwMNgvOA5EXVcnZ5sC1s42uE4qUKkcsprg==
-X-Gm-Message-State: AOJu0YxxD4RaEV+A6qgxvy84Xdbr9e5czUgoLH0lmGx2wpiVJWtAjrOR
- 2fxiW/vUlE38K5FBlblC1d4KInUmNSdT2tZKpOhk7JNStBsvZduldJlJVvQ8Wn144TIWdUSANMF
- VGcn1IZ5PL/mmbLrMnUf3f2X8GzM=
-X-Google-Smtp-Source: AGHT+IHfR0/R5wa1uPYwFgVyUYTL0mk1+8eK07e5lOIsXMzCb1J9EIr6iRu8ySuy6mBnbGvmb7DHFbS2+zVtcyHx//M=
-X-Received: by 2002:a17:90a:bd0f:b0:2b2:4bff:67b7 with SMTP id
- 98e67ed59e1d1-2b6ccef5a6emr2563348a91.3.1715350786484; Fri, 10 May 2024
- 07:19:46 -0700 (PDT)
+ AJvYcCXXnGGHXOVq+3NtTrEzMsT0bnB0Jr1vw5AZpT5OXVVHLBaN3thUmp6D2V1q/6ZD2UW3TCaJC/BZ+A57n/RJamx5JkUfvQ==
+X-Gm-Message-State: AOJu0YxOROmOS0FE/9S3++4mZG2j8TLuHvRCOa/bL4Mfad2nHN/EpXuc
+ pxp2reRZ63zXYsQLEjVyFOeF0tIBkNSK1xU8V67xtE3ApL5HCrkWurAZSH6RSKI=
+X-Google-Smtp-Source: AGHT+IFGD0Ukr8WZFjBzqINr3mC17ChK6YKQNKShxn/+BaxcBdYKYFIS9u1VNYgfqpI7PXLkoEDK5Q==
+X-Received: by 2002:a05:622a:394:b0:43a:fbe3:c2ea with SMTP id
+ d75a77b69052e-43dec297879mr29442491cf.21.1715351016131; 
+ Fri, 10 May 2024 07:23:36 -0700 (PDT)
+Received: from bill-the-cat ([187.144.98.216])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-43dfa7c0c1esm14804011cf.34.2024.05.10.07.23.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 10 May 2024 07:23:35 -0700 (PDT)
+Date: Fri, 10 May 2024 08:23:31 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Frank Wunderlich <frank-w@public-files.de>
+Cc: Frank Wunderlich <linux@fw-web.de>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ John Crispin <john@phrozen.org>, u-boot@lists.denx.de
+Subject: Re: [RFC] pci: mediatek: add PCIe controller support for Filogic
+Message-ID: <20240510142331.GU2568172@bill-the-cat>
+References: <20240412141051.23943-1-linux@fw-web.de>
+ <trinity-564944df-1cc6-48ba-8661-ece741792f3d-1715342246700@3c-app-gmx-bs34>
+ <20240510130819.GR2568172@bill-the-cat>
+ <B563AF62-EB8D-41D9-A5B2-E0E6D561FAC2@public-files.de>
 MIME-Version: 1.0
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 10 May 2024 11:19:35 -0300
-Message-ID: <CAOMZO5AnweEsKk_LXVLRmC5=6L2x-Oo+rdngsAs_hcrSHFH91Q@mail.gmail.com>
-Subject: imx8mp: Flashing U-Boot into eMMC hardware partition via UUU
-To: Frank Li <frank.li@nxp.com>
-Cc: Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
- U-Boot-Denx <u-boot@lists.denx.de>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- Tim Harvey <tharvey@gateworks.com>, 
- Adam Ford <aford173@gmail.com>, Heiko Schocher <hs@denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="78rHKz/1bExiHGIb"
+Content-Disposition: inline
+In-Reply-To: <B563AF62-EB8D-41D9-A5B2-E0E6D561FAC2@public-files.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,35 +99,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-I am using an imx8mp-evk board and I can flash the U-Boot into the
-eMMC hardware partition 0 by running:
+--78rHKz/1bExiHGIb
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-   => tftpboot $loadaddr flash.bin
-   => setexpr blkcnt $filesize + 0x1ff && setexpr blkcnt $blkcnt / 0x200
-   => mmc dev 2 1
-   => mmc write $loadaddr 0 $blkcnt
+On Fri, May 10, 2024 at 04:07:07PM +0200, Frank Wunderlich wrote:
+> Am 10. Mai 2024 15:08:19 MESZ schrieb Tom Rini <trini@konsulko.com>:
+> >On Fri, May 10, 2024 at 01:57:26PM +0200, Frank Wunderlich wrote:
+> >
+> >> a gentle ping...any comments?
+> >
+> >Seems fine?
+>=20
+> > Can we switch to OF_UPSTREAM first however?
+>=20
+> Pulling mediatek devicetrees from linux will afaik break network in
+> uboot for mt7622,7623,mt7986 and mt7988 bananapi boards because switch
+> (mt753x) binding is different to linux.
 
-Now I want to do the same via UUU.
+That needs to be fixed, in U-Boot then. We should not forever diverge
+here, that was not the intent.
 
-I tried to create a script called emmc_flash:
+--=20
+Tom
 
-uuu_version 1.5.21
+--78rHKz/1bExiHGIb
+Content-Type: application/pgp-signature; name="signature.asc"
 
-SDPS: boot -f flash.bin
-SDPS: done
-FB: ucmd setenv fastboot_dev mmc
-FB: ucmd mmc dev 2 1
-FB: flash bootloader flash.bin
-FB: Done
+-----BEGIN PGP SIGNATURE-----
 
-Then on the PC: uuu emmc_flash
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY+LeAACgkQFHw5/5Y0
+tywNTgv8DT1PnBYAbWt+FYjveXiSsy3cC5ngtuKLbYAKXQA9SmDvXo96/2TSBDz6
+av0WUZ9xLQTbrkMUxFQyrAie7MyN6LlDeTrPVZhdRaSjugRQAox69TFJ0c2wj9Pa
+qQmNqI5pQ1gjbhGUZktWwHdn75O3gpNn5roSB073iHh00b9AvMNctFrisgZNyflS
+0wm85JCe1lxHMtsDrPQwZOTKHrp7qQpFkgehnz4MlUnYtjcT5VYNt13UIna3LHxP
+pKPLama7t2tOLR1aRH+N7P87xCjLofpvoIb4HYJGcwHiqVVeZwd+P5lFqN869GNh
+0M+0ZOnGTOxOCcQifZ+ChyB5/KE8lOzhc61LwHUB/Y42i/zgfTbZPxB3jwqWIDVB
+6GijtNTaIXaaV5wRLeqbUsqrewTqaiywmLQ6EoIrSraP7cgFlsGGDv9S0azzlmMv
+xSAHhEE/vub6MSgNK9kNXOUKFW2O8b9VIzfdG53iUVkVxmdgWJRBxpJawf5KFu5m
+pFQnzc3F
+=OKvs
+-----END PGP SIGNATURE-----
 
-U-Boot is loaded to RAM, but the eMMC hardware partition is not programmed.
-
-What is the correct script for doing this?
-
-Any suggestions?
-
-Thanks
+--78rHKz/1bExiHGIb--
