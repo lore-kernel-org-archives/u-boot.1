@@ -4,59 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AADC6C10F1A
-	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 00:46:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9D31C10F1A
+	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 01:06:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3814F8884D;
-	Fri, 10 May 2024 02:46:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 59A998812F;
+	Fri, 10 May 2024 03:06:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="VJRH0yXz";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="hzU/W6CV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 710048886A; Fri, 10 May 2024 02:46:05 +0200 (CEST)
-Received: from mail-m254101.xmail.ntesmail.com
- (mail-m254101.xmail.ntesmail.com [103.129.254.101])
+ id 7C5B288845; Fri, 10 May 2024 02:42:25 +0200 (CEST)
+Received: from mail-m6011.netease.com (mail-m6011.netease.com [210.79.60.11])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38EF280E9A
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 02:46:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 30C538804F
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 02:42:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=VJRH0yXzCW9LuaIi6D6f2mDN9g3mGqvPlraBGo252XGqZHVpc0uc7QuXx0YtTEiQbmKzUp6PpfDVkaeA7vblnBMgIMnRYPnTceF9M/HY0XcHOfCPenH6KRJY8Bzrz9+DsmFCHpBQT9zFAAHzb1IFhdKPkAjVQaBXKHGqB/oUYw0=;
+ b=hzU/W6CVfqAnWH3hDqjgh7m1Xd01voks//yLnsicwPTgilvJbkdVgpR4nu9H96tvADMpcZI8eFkO6bwt9I+wsBfcnnyx47lRKIX23Kjwp1XLIkikl61rM5zh/cYkaEPkZfbuhbm6m5PGK0PxRHd/xhB5+njsxWdQjf4KqQ3xusg=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=plcT94TUe0SewRWhbbjsma/2dXqG2mbtMlx6UbTU80E=;
+ bh=4Z4agmN3NQpZEoohjbcmBT74uK12AsIIFJGgfdV1LP8=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 9099D9001CA;
- Fri, 10 May 2024 08:45:20 +0800 (CST)
-Message-ID: <f6afe798-1636-4445-830f-2f350a421b34@rock-chips.com>
-Date: Fri, 10 May 2024 08:45:20 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id F0480900180;
+ Fri, 10 May 2024 08:40:55 +0800 (CST)
+Message-ID: <e35eabc1-a043-478a-93eb-3d32c23a8206@rock-chips.com>
+Date: Fri, 10 May 2024 08:40:54 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: rv1108: Remove unneeded local rv1108-cru.h
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, jonas@kwiboo.se,
- otavio@ossystems.com.br
-References: <20240509164225.3922996-1-festevam@gmail.com>
+Subject: Re: [PATCH 41/81] misc: Remove <common.h> and add needed includes
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Sean Anderson <sean.anderson@seco.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>, Mario Six <mario.six@gdsys.cc>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Michael Walle
+ <michael@walle.cc>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Liviu Dudau <liviu.dudau@foss.arm.com>, =?UTF-8?B?TWljaGHFgiBCYXJuYcWb?=
+ <barnas@google.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>, =?UTF-8?Q?Milan_P=2E_Stani=C4=87?=
+ <mps@arvanta.net>, Neha Malcom Francis <n-francis@ti.com>,
+ Nishanth Menon <nm@ti.com>, Marek Vasut <marex@denx.de>,
+ Michel Alex <Alex.Michel@wiedemann-group.com>, Stefano Babic
+ <sbabic@denx.de>, Peng Fan <peng.fan@nxp.com>,
+ Igor Opaniuk <igor.opaniuk@foundries.io>,
+ Clement Faure <clement.faure@nxp.com>, Mathieu Othacehe <othacehe@gnu.org>,
+ Ye Li <ye.li@nxp.com>, Jim Liu <jim.t90615@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tim Lunn
+ <tim@feathertop.org>, =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>,
+ Stefan Roese <sr@denx.de>
+References: <20240502013138.2383421-1-trini@konsulko.com>
+ <20240502013138.2383421-41-trini@konsulko.com>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240509164225.3922996-1-festevam@gmail.com>
+In-Reply-To: <20240502013138.2383421-41-trini@konsulko.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGkJNSFZOSU1KS01DHktOTk1VEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1DTExPVUpLS1VKQk
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0IYTlYZTx9OH0pDHhgeT0lVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8f5ff6313a03a9kunm9099d9001ca
+X-HM-Tid: 0a8f5ff22ee503a9kunmf0480900180
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NjI6Khw4QzNWPgIjCS0zSDg0
- CxxPCzRVSlVKTEpOSEtKQklKTUJOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKSUtKTjcG
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6K0k6Lyo6DTNWPgIaTjU2IxgX
+ IkxPCzxVSlVKTEpOSEtKTU5DQk5NVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFITk9IQjcG
+X-Mailman-Approved-At: Fri, 10 May 2024 03:06:23 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,384 +93,1020 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2024/5/10 00:42, Fabio Estevam wrote:
-> After the conversion of RV1108 to OF_UPSTREAM,
-> include/dt-bindings/clock/rv1108-cru.h is no longer needed because
-> there is dts/upstream/include/dt-bindings/clock/rv1108-cru.h from
-> upstream Linux.
+On 2024/5/2 09:30, Tom Rini wrote:
+> Remove <common.h> from this driver directory and when needed
+> add missing include files directly.
 >
-> Remove the unneeded rv1108-cru.h file.
->
-> Reported-by: Jonas Karlman <jonas@kwiboo.se>
-> Signed-off-by: Fabio Estevam <festevam@gmail.com>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
->   include/dt-bindings/clock/rv1108-cru.h | 356 -------------------------
->   1 file changed, 356 deletions(-)
->   delete mode 100644 include/dt-bindings/clock/rv1108-cru.h
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Sean Anderson <sean.anderson@seco.com>
+> Cc: Eugen Hristev <eugen.hristev@collabora.com>
+> Cc: Mario Six <mario.six@gdsys.cc>
+> Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
+> Cc: Kever Yang <kever.yang@rock-chips.com>
+> Cc: Michael Walle <michael@walle.cc>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Thierry Reding <treding@nvidia.com>
+> Cc: Svyatoslav Ryhel <clamor95@gmail.com>
+> Cc: Liviu Dudau <liviu.dudau@foss.arm.com>
+> Cc: "Michał Barnaś" <barnas@google.com>
+> Cc: Bin Meng <bmeng.cn@gmail.com>
+> Cc: Dan Carpenter <dan.carpenter@linaro.org>
+> Cc: "Milan P. Stanić" <mps@arvanta.net>
+> Cc: Neha Malcom Francis <n-francis@ti.com>
+> Cc: Nishanth Menon <nm@ti.com>
+> Cc: Marek Vasut <marex@denx.de>
+> Cc: Michel Alex <Alex.Michel@wiedemann-group.com>
+> Cc: Stefano Babic <sbabic@denx.de>
+> Cc: Peng Fan <peng.fan@nxp.com>
+> Cc: Igor Opaniuk <igor.opaniuk@foundries.io>
+> Cc: Clement Faure <clement.faure@nxp.com>
+> Cc: Mathieu Othacehe <othacehe@gnu.org>
+> Cc: Ye Li <ye.li@nxp.com>
+> Cc: Jim Liu <jim.t90615@gmail.com>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Tim Lunn <tim@feathertop.org>
+> Cc: "Marek Behún" <kabel@kernel.org>
+> Cc: Stefan Roese <sr@denx.de>
+> ---
+>   drivers/misc/altera_sysid.c      | 1 -
+>   drivers/misc/atsha204a-i2c.c     | 1 -
+>   drivers/misc/cbmem_console.c     | 2 +-
+>   drivers/misc/cros_ec.c           | 2 +-
+>   drivers/misc/cros_ec_i2c.c       | 1 -
+>   drivers/misc/cros_ec_lpc.c       | 2 +-
+>   drivers/misc/cros_ec_sandbox.c   | 2 +-
+>   drivers/misc/cros_ec_spi.c       | 2 +-
+>   drivers/misc/ds4510.c            | 1 -
+>   drivers/misc/esm_pmic.c          | 1 -
+>   drivers/misc/fs_loader.c         | 1 -
+>   drivers/misc/fsl_devdis.c        | 2 +-
+>   drivers/misc/fsl_ifc.c           | 2 +-
+>   drivers/misc/fsl_iim.c           | 1 -
+>   drivers/misc/fsl_portals.c       | 2 +-
+>   drivers/misc/fsl_sec_mon.c       | 2 +-
+>   drivers/misc/gdsys_ioep.c        | 1 -
+>   drivers/misc/gdsys_rxaui_ctrl.c  | 1 -
+>   drivers/misc/gdsys_soc.c         | 1 -
+>   drivers/misc/gpio_led.c          | 1 -
+>   drivers/misc/i2c_eeprom.c        | 1 -
+>   drivers/misc/i2c_eeprom_emul.c   | 1 -
+>   drivers/misc/ihs_fpga.c          | 1 -
+>   drivers/misc/imx8/fuse.c         | 1 -
+>   drivers/misc/imx8/scu.c          | 1 -
+>   drivers/misc/imx8/scu_api.c      | 1 -
+>   drivers/misc/imx_ele/ele_api.c   | 1 -
+>   drivers/misc/imx_ele/ele_mu.c    | 1 -
+>   drivers/misc/imx_ele/fuse.c      | 1 -
+>   drivers/misc/irq-uclass.c        | 1 -
+>   drivers/misc/irq_sandbox.c       | 1 -
+>   drivers/misc/irq_sandbox_test.c  | 1 -
+>   drivers/misc/jz4780_efuse.c      | 1 -
+>   drivers/misc/k3_avs.c            | 1 -
+>   drivers/misc/k3_esm.c            | 1 -
+>   drivers/misc/ls2_sfp.c           | 1 -
+>   drivers/misc/microchip_flexcom.c | 1 -
+>   drivers/misc/misc-uclass.c       | 1 -
+>   drivers/misc/misc_sandbox.c      | 1 -
+>   drivers/misc/mpc83xx_serdes.c    | 1 -
+>   drivers/misc/mxc_ocotp.c         | 1 -
+>   drivers/misc/mxs_ocotp.c         | 1 -
+>   drivers/misc/npcm_host_intf.c    | 1 -
+>   drivers/misc/npcm_otp.c          | 1 -
+>   drivers/misc/nuvoton_nct6102d.c  | 1 -
+>   drivers/misc/nvmem.c             | 1 -
+>   drivers/misc/p2sb-uclass.c       | 1 -
+>   drivers/misc/p2sb_emul.c         | 1 -
+>   drivers/misc/p2sb_sandbox.c      | 1 -
+>   drivers/misc/pca9551_led.c       | 1 -
+>   drivers/misc/pwrseq-uclass.c     | 1 -
+>   drivers/misc/qfw.c               | 1 -
+>   drivers/misc/rockchip-efuse.c    | 1 -
+>   drivers/misc/rockchip-otp.c      | 1 -
+>   drivers/misc/sandbox_adder.c     | 1 -
+>   drivers/misc/sifive-otp.c        | 1 -
+>   drivers/misc/sl28cpld.c          | 1 -
+>   drivers/misc/smsc_lpc47m.c       | 1 -
+>   drivers/misc/smsc_sio1007.c      | 1 -
+>   drivers/misc/spltest_sandbox.c   | 1 -
+>   drivers/misc/status_led.c        | 2 +-
+>   drivers/misc/stm32_rcc.c         | 1 -
+>   drivers/misc/stm32mp_fuse.c      | 1 -
+>   drivers/misc/swap_case.c         | 1 -
+>   drivers/misc/syscon_sandbox.c    | 1 -
+>   drivers/misc/tegra186_bpmp.c     | 1 -
+>   drivers/misc/tegra_car.c         | 1 -
+>   drivers/misc/test_drv.c          | 1 -
+>   drivers/misc/turris_omnia_mcu.c  | 1 -
+>   drivers/misc/usb251xb.c          | 1 -
+>   drivers/misc/vexpress_config.c   | 1 -
+>   drivers/misc/winbond_w83627.c    | 1 -
+>   72 files changed, 10 insertions(+), 72 deletions(-)
 >
-> diff --git a/include/dt-bindings/clock/rv1108-cru.h b/include/dt-bindings/clock/rv1108-cru.h
-> deleted file mode 100644
-> index 10ed9d140f4b..000000000000
-> --- a/include/dt-bindings/clock/rv1108-cru.h
-> +++ /dev/null
-> @@ -1,356 +0,0 @@
-> -/* SPDX-License-Identifier: GPL-2.0+ */
-> -/*
-> - * Copyright (c) 2017 Rockchip Electronics Co. Ltd.
-> - * Author: Shawn Lin <shawn.lin@rock-chips.com>
-> - */
-> -
-> -#ifndef _DT_BINDINGS_CLK_ROCKCHIP_RV1108_H
-> -#define _DT_BINDINGS_CLK_ROCKCHIP_RV1108_H
-> -
-> -/* pll id */
-> -#define PLL_APLL			0
-> -#define PLL_DPLL			1
-> -#define PLL_GPLL			2
-> -#define ARMCLK				3
-> -
-> -/* sclk gates (special clocks) */
-> -#define SCLK_SPI0			65
-> -#define SCLK_NANDC			67
-> -#define SCLK_SDMMC			68
-> -#define SCLK_SDIO			69
-> -#define SCLK_EMMC			71
-> -#define SCLK_UART0			72
-> -#define SCLK_UART1			73
-> -#define SCLK_UART2			74
-> -#define SCLK_I2S0			75
-> -#define SCLK_I2S1			76
-> -#define SCLK_I2S2			77
-> -#define SCLK_TIMER0			78
-> -#define SCLK_TIMER1			79
-> -#define SCLK_SFC			80
-> -#define SCLK_SDMMC_DRV			81
-> -#define SCLK_SDIO_DRV			82
-> -#define SCLK_EMMC_DRV			83
-> -#define SCLK_SDMMC_SAMPLE		84
-> -#define SCLK_SDIO_SAMPLE		85
-> -#define SCLK_EMMC_SAMPLE		86
-> -#define SCLK_VENC_CORE			87
-> -#define SCLK_HEVC_CORE			88
-> -#define SCLK_HEVC_CABAC			89
-> -#define SCLK_PWM0_PMU			90
-> -#define SCLK_I2C0_PMU			91
-> -#define SCLK_WIFI			92
-> -#define SCLK_CIFOUT			93
-> -#define SCLK_MIPI_CSI_OUT		94
-> -#define SCLK_CIF0			95
-> -#define SCLK_CIF1			96
-> -#define SCLK_CIF2			97
-> -#define SCLK_CIF3			98
-> -#define SCLK_DSP			99
-> -#define SCLK_DSP_IOP			100
-> -#define SCLK_DSP_EPP			101
-> -#define SCLK_DSP_EDP			102
-> -#define SCLK_DSP_EDAP			103
-> -#define SCLK_CVBS_HOST			104
-> -#define SCLK_HDMI_SFR			105
-> -#define SCLK_HDMI_CEC			106
-> -#define SCLK_CRYPTO			107
-> -#define SCLK_SPI			108
-> -#define SCLK_SARADC			109
-> -#define SCLK_TSADC			110
-> -#define SCLK_MAC_PRE			111
-> -#define SCLK_MAC			112
-> -#define SCLK_MAC_RX			113
-> -#define SCLK_MAC_REF			114
-> -#define SCLK_MAC_REFOUT			115
-> -#define SCLK_DSP_PFM			116
-> -#define SCLK_RGA			117
-> -#define SCLK_I2C1			118
-> -#define SCLK_I2C2			119
-> -#define SCLK_I2C3			120
-> -#define SCLK_PWM			121
-> -#define SCLK_ISP			122
-> -#define SCLK_USBPHY			123
-> -#define SCLK_I2S0_SRC			124
-> -#define SCLK_I2S1_SRC			125
-> -#define SCLK_I2S2_SRC			126
-> -#define SCLK_UART0_SRC			127
-> -#define SCLK_UART1_SRC			128
-> -#define SCLK_UART2_SRC			129
-> -#define SCLK_MAC_TX			130
-> -#define SCLK_MACREF			131
-> -#define SCLK_MACREF_OUT			132
-> -
-> -#define DCLK_VOP_SRC			185
-> -#define DCLK_HDMIPHY			186
-> -#define DCLK_VOP			187
-> -
-> -/* aclk gates */
-> -#define ACLK_DMAC			192
-> -#define ACLK_PRE			193
-> -#define ACLK_CORE			194
-> -#define ACLK_ENMCORE			195
-> -#define ACLK_RKVENC			196
-> -#define ACLK_RKVDEC			197
-> -#define ACLK_VPU			198
-> -#define ACLK_CIF0			199
-> -#define ACLK_VIO0			200
-> -#define ACLK_VIO1			201
-> -#define ACLK_VOP			202
-> -#define ACLK_IEP			203
-> -#define ACLK_RGA			204
-> -#define ACLK_ISP			205
-> -#define ACLK_CIF1			206
-> -#define ACLK_CIF2			207
-> -#define ACLK_CIF3			208
-> -#define ACLK_PERI			209
-> -#define ACLK_GMAC			210
-> -
-> -/* pclk gates */
-> -#define PCLK_GPIO1			256
-> -#define PCLK_GPIO2			257
-> -#define PCLK_GPIO3			258
-> -#define PCLK_GRF			259
-> -#define PCLK_I2C1			260
-> -#define PCLK_I2C2			261
-> -#define PCLK_I2C3			262
-> -#define PCLK_SPI			263
-> -#define PCLK_SFC			264
-> -#define PCLK_UART0			265
-> -#define PCLK_UART1			266
-> -#define PCLK_UART2			267
-> -#define PCLK_TSADC			268
-> -#define PCLK_PWM			269
-> -#define PCLK_TIMER			270
-> -#define PCLK_PERI			271
-> -#define PCLK_GPIO0_PMU			272
-> -#define PCLK_I2C0_PMU			273
-> -#define PCLK_PWM0_PMU			274
-> -#define PCLK_ISP			275
-> -#define PCLK_VIO			276
-> -#define PCLK_MIPI_DSI			277
-> -#define PCLK_HDMI_CTRL			278
-> -#define PCLK_SARADC			279
-> -#define PCLK_DSP_CFG			280
-> -#define PCLK_BUS			281
-> -#define PCLK_EFUSE0			282
-> -#define PCLK_EFUSE1			283
-> -#define PCLK_WDT			284
-> -#define PCLK_GMAC			285
-> -
-> -/* hclk gates */
-> -#define HCLK_I2S0_8CH			320
-> -#define HCLK_I2S1_2CH			321
-> -#define HCLK_I2S2_2CH			322
-> -#define HCLK_NANDC			323
-> -#define HCLK_SDMMC			324
-> -#define HCLK_SDIO			325
-> -#define HCLK_EMMC			326
-> -#define HCLK_PERI			327
-> -#define HCLK_SFC			328
-> -#define HCLK_RKVENC			329
-> -#define HCLK_RKVDEC			330
-> -#define HCLK_CIF0			331
-> -#define HCLK_VIO			332
-> -#define HCLK_VOP			333
-> -#define HCLK_IEP			334
-> -#define HCLK_RGA			335
-> -#define HCLK_ISP			336
-> -#define HCLK_CRYPTO_MST			337
-> -#define HCLK_CRYPTO_SLV			338
-> -#define HCLK_HOST0			339
-> -#define HCLK_OTG			340
-> -#define HCLK_CIF1			341
-> -#define HCLK_CIF2			342
-> -#define HCLK_CIF3			343
-> -#define HCLK_BUS			344
-> -#define HCLK_VPU			345
-> -
-> -#define CLK_NR_CLKS			(HCLK_VPU + 1)
-> -
-> -/* reset id */
-> -#define SRST_CORE_PO_AD			0
-> -#define SRST_CORE_AD			1
-> -#define SRST_L2_AD			2
-> -#define SRST_CPU_NIU_AD			3
-> -#define SRST_CORE_PO			4
-> -#define SRST_CORE			5
-> -#define SRST_L2				6
-> -#define SRST_CORE_DBG			8
-> -#define PRST_DBG			9
-> -#define RST_DAP				10
-> -#define PRST_DBG_NIU			11
-> -#define ARST_STRC_SYS_AD		15
-> -
-> -#define SRST_DDRPHY_CLKDIV		16
-> -#define SRST_DDRPHY			17
-> -#define PRST_DDRPHY			18
-> -#define PRST_HDMIPHY			19
-> -#define PRST_VDACPHY			20
-> -#define PRST_VADCPHY			21
-> -#define PRST_MIPI_CSI_PHY		22
-> -#define PRST_MIPI_DSI_PHY		23
-> -#define PRST_ACODEC			24
-> -#define ARST_BUS_NIU			25
-> -#define PRST_TOP_NIU			26
-> -#define ARST_INTMEM			27
-> -#define HRST_ROM			28
-> -#define ARST_DMAC			29
-> -#define SRST_MSCH_NIU			30
-> -#define PRST_MSCH_NIU			31
-> -
-> -#define PRST_DDRUPCTL			32
-> -#define NRST_DDRUPCTL			33
-> -#define PRST_DDRMON			34
-> -#define HRST_I2S0_8CH			35
-> -#define MRST_I2S0_8CH			36
-> -#define HRST_I2S1_2CH			37
-> -#define MRST_IS21_2CH			38
-> -#define HRST_I2S2_2CH			39
-> -#define MRST_I2S2_2CH			40
-> -#define HRST_CRYPTO			41
-> -#define SRST_CRYPTO			42
-> -#define PRST_SPI			43
-> -#define SRST_SPI			44
-> -#define PRST_UART0			45
-> -#define PRST_UART1			46
-> -#define PRST_UART2			47
-> -
-> -#define SRST_UART0			48
-> -#define SRST_UART1			49
-> -#define SRST_UART2			50
-> -#define PRST_I2C1			51
-> -#define PRST_I2C2			52
-> -#define PRST_I2C3			53
-> -#define SRST_I2C1			54
-> -#define SRST_I2C2			55
-> -#define SRST_I2C3			56
-> -#define PRST_PWM1			58
-> -#define SRST_PWM1			60
-> -#define PRST_WDT			61
-> -#define PRST_GPIO1			62
-> -#define PRST_GPIO2			63
-> -
-> -#define PRST_GPIO3			64
-> -#define PRST_GRF			65
-> -#define PRST_EFUSE			66
-> -#define PRST_EFUSE512			67
-> -#define PRST_TIMER0			68
-> -#define SRST_TIMER0			69
-> -#define SRST_TIMER1			70
-> -#define PRST_TSADC			71
-> -#define SRST_TSADC			72
-> -#define PRST_SARADC			73
-> -#define SRST_SARADC			74
-> -#define HRST_SYSBUS			75
-> -#define PRST_USBGRF			76
-> -
-> -#define ARST_PERIPH_NIU			80
-> -#define HRST_PERIPH_NIU			81
-> -#define PRST_PERIPH_NIU			82
-> -#define HRST_PERIPH			83
-> -#define HRST_SDMMC			84
-> -#define HRST_SDIO			85
-> -#define HRST_EMMC			86
-> -#define HRST_NANDC			87
-> -#define NRST_NANDC			88
-> -#define HRST_SFC			89
-> -#define SRST_SFC			90
-> -#define ARST_GMAC			91
-> -#define HRST_OTG			92
-> -#define SRST_OTG			93
-> -#define SRST_OTG_ADP			94
-> -#define HRST_HOST0			95
-> -
-> -#define HRST_HOST0_AUX			96
-> -#define HRST_HOST0_ARB			97
-> -#define SRST_HOST0_EHCIPHY		98
-> -#define SRST_HOST0_UTMI			99
-> -#define SRST_USBPOR			100
-> -#define SRST_UTMI0			101
-> -#define SRST_UTMI1			102
-> -
-> -#define ARST_VIO0_NIU			102
-> -#define ARST_VIO1_NIU			103
-> -#define HRST_VIO_NIU			104
-> -#define PRST_VIO_NIU			105
-> -#define ARST_VOP			106
-> -#define HRST_VOP			107
-> -#define DRST_VOP			108
-> -#define ARST_IEP			109
-> -#define HRST_IEP			110
-> -#define ARST_RGA			111
-> -#define HRST_RGA			112
-> -#define SRST_RGA			113
-> -#define PRST_CVBS			114
-> -#define PRST_HDMI			115
-> -#define SRST_HDMI			116
-> -#define PRST_MIPI_DSI			117
-> -
-> -#define ARST_ISP_NIU			118
-> -#define HRST_ISP_NIU			119
-> -#define HRST_ISP			120
-> -#define SRST_ISP			121
-> -#define ARST_VIP0			122
-> -#define HRST_VIP0			123
-> -#define PRST_VIP0			124
-> -#define ARST_VIP1			125
-> -#define HRST_VIP1			126
-> -#define PRST_VIP1			127
-> -#define ARST_VIP2			128
-> -#define HRST_VIP2			129
-> -#define PRST_VIP2			120
-> -#define ARST_VIP3			121
-> -#define HRST_VIP3			122
-> -#define PRST_VIP4			123
-> -
-> -#define PRST_CIF1TO4			124
-> -#define SRST_CVBS_CLK			125
-> -#define HRST_CVBS			126
-> -
-> -#define ARST_VPU_NIU			140
-> -#define HRST_VPU_NIU			141
-> -#define ARST_VPU			142
-> -#define HRST_VPU			143
-> -#define ARST_RKVDEC_NIU			144
-> -#define HRST_RKVDEC_NIU			145
-> -#define ARST_RKVDEC			146
-> -#define HRST_RKVDEC			147
-> -#define SRST_RKVDEC_CABAC		148
-> -#define SRST_RKVDEC_CORE		149
-> -#define ARST_RKVENC_NIU			150
-> -#define HRST_RKVENC_NIU			151
-> -#define ARST_RKVENC			152
-> -#define HRST_RKVENC			153
-> -#define SRST_RKVENC_CORE		154
-> -
-> -#define SRST_DSP_CORE			156
-> -#define SRST_DSP_SYS			157
-> -#define SRST_DSP_GLOBAL			158
-> -#define SRST_DSP_OECM			159
-> -#define PRST_DSP_IOP_NIU		160
-> -#define ARST_DSP_EPP_NIU		161
-> -#define ARST_DSP_EDP_NIU		162
-> -#define PRST_DSP_DBG_NIU		163
-> -#define PRST_DSP_CFG_NIU		164
-> -#define PRST_DSP_GRF			165
-> -#define PRST_DSP_MAILBOX		166
-> -#define PRST_DSP_INTC			167
-> -#define PRST_DSP_PFM_MON		169
-> -#define SRST_DSP_PFM_MON		170
-> -#define ARST_DSP_EDAP_NIU		171
-> -
-> -#define SRST_PMU			172
-> -#define SRST_PMU_I2C0			173
-> -#define PRST_PMU_I2C0			174
-> -#define PRST_PMU_GPIO0			175
-> -#define PRST_PMU_INTMEM			176
-> -#define PRST_PMU_PWM0			177
-> -#define SRST_PMU_PWM0			178
-> -#define PRST_PMU_GRF			179
-> -#define SRST_PMU_NIU			180
-> -#define SRST_PMU_PVTM			181
-> -#define ARST_DSP_EDP_PERF		184
-> -#define ARST_DSP_EPP_PERF		185
-> -
-> -#endif /* _DT_BINDINGS_CLK_ROCKCHIP_RV1108_H */
+> diff --git a/drivers/misc/altera_sysid.c b/drivers/misc/altera_sysid.c
+> index 878df12771c8..21e64fa3e6fe 100644
+> --- a/drivers/misc/altera_sysid.c
+> +++ b/drivers/misc/altera_sysid.c
+> @@ -4,7 +4,6 @@
+>    * Scott McNutt <smcnutt@psyent.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <command.h>
+>   #include <dm.h>
+>   #include <errno.h>
+> diff --git a/drivers/misc/atsha204a-i2c.c b/drivers/misc/atsha204a-i2c.c
+> index 707daa90bdba..3b9046da880c 100644
+> --- a/drivers/misc/atsha204a-i2c.c
+> +++ b/drivers/misc/atsha204a-i2c.c
+> @@ -10,7 +10,6 @@
+>    * published by the Free Software Foundation.
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <i2c.h>
+>   #include <errno.h>
+> diff --git a/drivers/misc/cbmem_console.c b/drivers/misc/cbmem_console.c
+> index ba3a599c4a51..8220addd579b 100644
+> --- a/drivers/misc/cbmem_console.c
+> +++ b/drivers/misc/cbmem_console.c
+> @@ -3,8 +3,8 @@
+>    * Copyright (C) 2011 The ChromiumOS Authors.  All rights reserved.
+>    */
+>   
+> -#include <common.h>
+>   #include <console.h>
+> +#include <linux/string.h>
+>   #include <asm/cb_sysinfo.h>
+>   
+>   void cbmemc_putc(struct stdio_dev *dev, char data)
+> diff --git a/drivers/misc/cros_ec.c b/drivers/misc/cros_ec.c
+> index 9c1e6a5e3e70..fabe4964a334 100644
+> --- a/drivers/misc/cros_ec.c
+> +++ b/drivers/misc/cros_ec.c
+> @@ -15,7 +15,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_CROS_EC
+>   
+> -#include <common.h>
+>   #include <command.h>
+>   #include <dm.h>
+>   #include <i2c.h>
+> @@ -24,6 +23,7 @@
+>   #include <log.h>
+>   #include <malloc.h>
+>   #include <spi.h>
+> +#include <time.h>
+>   #include <linux/delay.h>
+>   #include <linux/errno.h>
+>   #include <asm/io.h>
+> diff --git a/drivers/misc/cros_ec_i2c.c b/drivers/misc/cros_ec_i2c.c
+> index a1b78a3045dd..5516aa8b3ffd 100644
+> --- a/drivers/misc/cros_ec_i2c.c
+> +++ b/drivers/misc/cros_ec_i2c.c
+> @@ -12,7 +12,6 @@
+>    * KBC.
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <i2c.h>
+>   #include <cros_ec.h>
+> diff --git a/drivers/misc/cros_ec_lpc.c b/drivers/misc/cros_ec_lpc.c
+> index 1a8a81349c3a..e2a3226362a9 100644
+> --- a/drivers/misc/cros_ec_lpc.c
+> +++ b/drivers/misc/cros_ec_lpc.c
+> @@ -12,11 +12,11 @@
+>    * KBC.
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <command.h>
+>   #include <cros_ec.h>
+>   #include <log.h>
+> +#include <time.h>
+>   #include <asm/io.h>
+>   
+>   #ifdef DEBUG_TRACE
+> diff --git a/drivers/misc/cros_ec_sandbox.c b/drivers/misc/cros_ec_sandbox.c
+> index 1201535f4af4..1cad51d474de 100644
+> --- a/drivers/misc/cros_ec_sandbox.c
+> +++ b/drivers/misc/cros_ec_sandbox.c
+> @@ -7,7 +7,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_CROS_EC
+>   
+> -#include <common.h>
+>   #include <cros_ec.h>
+>   #include <dm.h>
+>   #include <ec_commands.h>
+> @@ -17,6 +16,7 @@
+>   #include <os.h>
+>   #include <u-boot/sha256.h>
+>   #include <spi.h>
+> +#include <time.h>
+>   #include <asm/malloc.h>
+>   #include <asm/state.h>
+>   #include <asm/sdl.h>
+> diff --git a/drivers/misc/cros_ec_spi.c b/drivers/misc/cros_ec_spi.c
+> index 591ff30df89b..e86791c03a73 100644
+> --- a/drivers/misc/cros_ec_spi.c
+> +++ b/drivers/misc/cros_ec_spi.c
+> @@ -12,12 +12,12 @@
+>    * KBC.
+>    */
+>   
+> -#include <common.h>
+>   #include <cros_ec.h>
+>   #include <dm.h>
+>   #include <errno.h>
+>   #include <log.h>
+>   #include <spi.h>
+> +#include <time.h>
+>   
+>   int cros_ec_spi_packet(struct udevice *udev, int out_bytes, int in_bytes)
+>   {
+> diff --git a/drivers/misc/ds4510.c b/drivers/misc/ds4510.c
+> index 9340596f2c63..302015e27938 100644
+> --- a/drivers/misc/ds4510.c
+> +++ b/drivers/misc/ds4510.c
+> @@ -8,7 +8,6 @@
+>    * and 4 programmable non-volatile GPIO pins.
+>    */
+>   
+> -#include <common.h>
+>   #include <i2c.h>
+>   #include <command.h>
+>   #include <linux/delay.h>
+> diff --git a/drivers/misc/esm_pmic.c b/drivers/misc/esm_pmic.c
+> index a518f750611a..1963c8664a54 100644
+> --- a/drivers/misc/esm_pmic.c
+> +++ b/drivers/misc/esm_pmic.c
+> @@ -7,7 +7,6 @@
+>    *
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <errno.h>
+>   #include <power/pmic.h>
+> diff --git a/drivers/misc/fs_loader.c b/drivers/misc/fs_loader.c
+> index 1ffc199ba1e4..66803f4b9975 100644
+> --- a/drivers/misc/fs_loader.c
+> +++ b/drivers/misc/fs_loader.c
+> @@ -6,7 +6,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_FS_FIRMWARE_LOADER
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <env.h>
+>   #include <errno.h>
+> diff --git a/drivers/misc/fsl_devdis.c b/drivers/misc/fsl_devdis.c
+> index 179053a298af..2c3d23480762 100644
+> --- a/drivers/misc/fsl_devdis.c
+> +++ b/drivers/misc/fsl_devdis.c
+> @@ -3,7 +3,7 @@
+>    * Copyright 2015 Freescale Semiconductor, Inc.
+>    * Author: Zhuoyu Zhang <Zhuoyu.Zhang@freescale.com>
+>    */
+> -#include <common.h>
+> +#include <config.h>
+>   #include <asm/io.h>
+>   #include <asm/arch-ls102xa/immap_ls102xa.h>
+>   #include <asm/arch-ls102xa/config.h>
+> diff --git a/drivers/misc/fsl_ifc.c b/drivers/misc/fsl_ifc.c
+> index f165b8c36ba4..93f41da0f974 100644
+> --- a/drivers/misc/fsl_ifc.c
+> +++ b/drivers/misc/fsl_ifc.c
+> @@ -4,7 +4,7 @@
+>    * Author: Dipen Dudhat <dipen.dudhat@freescale.com>
+>    */
+>   
+> -#include <common.h>
+> +#include <config.h>
+>   #include <fsl_ifc.h>
+>   #include <part.h>
+>   
+> diff --git a/drivers/misc/fsl_iim.c b/drivers/misc/fsl_iim.c
+> index 85cc3c26b2ef..65468a68dbdf 100644
+> --- a/drivers/misc/fsl_iim.c
+> +++ b/drivers/misc/fsl_iim.c
+> @@ -8,7 +8,6 @@
+>    * Martha Marx <mmarx@silicontkx.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <fuse.h>
+>   #include <linux/delay.h>
+>   #include <linux/errno.h>
+> diff --git a/drivers/misc/fsl_portals.c b/drivers/misc/fsl_portals.c
+> index 6b831281e96f..e7c0df78b6b6 100644
+> --- a/drivers/misc/fsl_portals.c
+> +++ b/drivers/misc/fsl_portals.c
+> @@ -4,7 +4,7 @@
+>    * Copyright 2017 NXP
+>    */
+>   
+> -#include <common.h>
+> +#include <config.h>
+>   #include <log.h>
+>   #include <linux/libfdt.h>
+>   #include <fdt_support.h>
+> diff --git a/drivers/misc/fsl_sec_mon.c b/drivers/misc/fsl_sec_mon.c
+> index 3597ee22242c..7518089e1e3e 100644
+> --- a/drivers/misc/fsl_sec_mon.c
+> +++ b/drivers/misc/fsl_sec_mon.c
+> @@ -3,7 +3,7 @@
+>    * Copyright 2015 Freescale Semiconductor, Inc.
+>    */
+>   
+> -#include <common.h>
+> +#include <config.h>
+>   #include <fsl_sec_mon.h>
+>   #include <linux/delay.h>
+>   
+> diff --git a/drivers/misc/gdsys_ioep.c b/drivers/misc/gdsys_ioep.c
+> index 145cfa23c6c5..d4916a277b84 100644
+> --- a/drivers/misc/gdsys_ioep.c
+> +++ b/drivers/misc/gdsys_ioep.c
+> @@ -11,7 +11,6 @@
+>    * SPDX-License-Identifier:	GPL-2.0+
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <misc.h>
+> diff --git a/drivers/misc/gdsys_rxaui_ctrl.c b/drivers/misc/gdsys_rxaui_ctrl.c
+> index 8f5cbe420f87..d4cd63ca9f89 100644
+> --- a/drivers/misc/gdsys_rxaui_ctrl.c
+> +++ b/drivers/misc/gdsys_rxaui_ctrl.c
+> @@ -7,7 +7,6 @@
+>    * Mario Six,  Guntermann & Drunck GmbH, mario.six@gdsys.cc
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <regmap.h>
+>   #include <misc.h>
+> diff --git a/drivers/misc/gdsys_soc.c b/drivers/misc/gdsys_soc.c
+> index 27e7dc483276..0adbb8df3c2c 100644
+> --- a/drivers/misc/gdsys_soc.c
+> +++ b/drivers/misc/gdsys_soc.c
+> @@ -4,7 +4,6 @@
+>    * Mario Six,  Guntermann & Drunck GmbH, mario.six@gdsys.cc
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <dm/lists.h>
+> diff --git a/drivers/misc/gpio_led.c b/drivers/misc/gpio_led.c
+> index 30679f80cf15..e63689967a7a 100644
+> --- a/drivers/misc/gpio_led.c
+> +++ b/drivers/misc/gpio_led.c
+> @@ -5,7 +5,6 @@
+>    * Licensed under the GPL-2 or later.
+>    */
+>   
+> -#include <common.h>
+>   #include <status_led.h>
+>   #include <asm/gpio.h>
+>   
+> diff --git a/drivers/misc/i2c_eeprom.c b/drivers/misc/i2c_eeprom.c
+> index 9cb375a99ab8..10f0173d8050 100644
+> --- a/drivers/misc/i2c_eeprom.c
+> +++ b/drivers/misc/i2c_eeprom.c
+> @@ -5,7 +5,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_I2C_EEPROM
+>   
+> -#include <common.h>
+>   #include <linux/delay.h>
+>   #include <linux/err.h>
+>   #include <linux/kernel.h>
+> diff --git a/drivers/misc/i2c_eeprom_emul.c b/drivers/misc/i2c_eeprom_emul.c
+> index 6f32087ede56..3ad2e047ee3e 100644
+> --- a/drivers/misc/i2c_eeprom_emul.c
+> +++ b/drivers/misc/i2c_eeprom_emul.c
+> @@ -5,7 +5,6 @@
+>    * Copyright (c) 2014 Google, Inc
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <errno.h>
+>   #include <i2c.h>
+> diff --git a/drivers/misc/ihs_fpga.c b/drivers/misc/ihs_fpga.c
+> index a0fece985d85..fe196b608198 100644
+> --- a/drivers/misc/ihs_fpga.c
+> +++ b/drivers/misc/ihs_fpga.c
+> @@ -9,7 +9,6 @@
+>    * Dirk Eibach,  Guntermann & Drunck GmbH, eibach@gdsys.de
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <regmap.h>
+> diff --git a/drivers/misc/imx8/fuse.c b/drivers/misc/imx8/fuse.c
+> index b81f73f283f4..90d251a44058 100644
+> --- a/drivers/misc/imx8/fuse.c
+> +++ b/drivers/misc/imx8/fuse.c
+> @@ -3,7 +3,6 @@
+>    * Copyright 2019 NXP
+>    */
+>   
+> -#include <common.h>
+>   #include <console.h>
+>   #include <errno.h>
+>   #include <fuse.h>
+> diff --git a/drivers/misc/imx8/scu.c b/drivers/misc/imx8/scu.c
+> index 798800aa7583..bbd7e24200bd 100644
+> --- a/drivers/misc/imx8/scu.c
+> +++ b/drivers/misc/imx8/scu.c
+> @@ -5,7 +5,6 @@
+>    * Peng Fan <peng.fan@nxp.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <log.h>
+>   #include <asm/global_data.h>
+>   #include <asm/io.h>
+> diff --git a/drivers/misc/imx8/scu_api.c b/drivers/misc/imx8/scu_api.c
+> index 6e2c678e614f..591d71b096a8 100644
+> --- a/drivers/misc/imx8/scu_api.c
+> +++ b/drivers/misc/imx8/scu_api.c
+> @@ -5,7 +5,6 @@
+>    * Peng Fan <peng.fan@nxp.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <hang.h>
+>   #include <malloc.h>
+>   #include <asm/global_data.h>
+> diff --git a/drivers/misc/imx_ele/ele_api.c b/drivers/misc/imx_ele/ele_api.c
+> index e0ec22c7abf9..3745504637b3 100644
+> --- a/drivers/misc/imx_ele/ele_api.c
+> +++ b/drivers/misc/imx_ele/ele_api.c
+> @@ -4,7 +4,6 @@
+>    *
+>    */
+>   
+> -#include <common.h>
+>   #include <hang.h>
+>   #include <malloc.h>
+>   #include <asm/io.h>
+> diff --git a/drivers/misc/imx_ele/ele_mu.c b/drivers/misc/imx_ele/ele_mu.c
+> index 053cdcf0fe07..0cf81f33ba5e 100644
+> --- a/drivers/misc/imx_ele/ele_mu.c
+> +++ b/drivers/misc/imx_ele/ele_mu.c
+> @@ -3,7 +3,6 @@
+>    * Copyright 2020-2022 NXP
+>    */
+>   
+> -#include <common.h>
+>   #include <asm/io.h>
+>   #include <dm.h>
+>   #include <dm/lists.h>
+> diff --git a/drivers/misc/imx_ele/fuse.c b/drivers/misc/imx_ele/fuse.c
+> index 4e4dcb42cdd9..d12539c8aac0 100644
+> --- a/drivers/misc/imx_ele/fuse.c
+> +++ b/drivers/misc/imx_ele/fuse.c
+> @@ -3,7 +3,6 @@
+>    * Copyright 2020 NXP
+>    */
+>   
+> -#include <common.h>
+>   #include <console.h>
+>   #include <errno.h>
+>   #include <fuse.h>
+> diff --git a/drivers/misc/irq-uclass.c b/drivers/misc/irq-uclass.c
+> index 7b79ed2df466..79eb7c200dc2 100644
+> --- a/drivers/misc/irq-uclass.c
+> +++ b/drivers/misc/irq-uclass.c
+> @@ -6,7 +6,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_IRQ
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dt-structs.h>
+>   #include <irq.h>
+> diff --git a/drivers/misc/irq_sandbox.c b/drivers/misc/irq_sandbox.c
+> index 8b5573fcaddd..5d176f63b5cf 100644
+> --- a/drivers/misc/irq_sandbox.c
+> +++ b/drivers/misc/irq_sandbox.c
+> @@ -5,7 +5,6 @@
+>    * Copyright 2019 Google LLC
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <irq.h>
+>   #include <acpi/acpi_device.h>
+> diff --git a/drivers/misc/irq_sandbox_test.c b/drivers/misc/irq_sandbox_test.c
+> index 95c45c24edb8..3669b863bec1 100644
+> --- a/drivers/misc/irq_sandbox_test.c
+> +++ b/drivers/misc/irq_sandbox_test.c
+> @@ -5,7 +5,6 @@
+>    * Copyright 2021 Google LLC
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <irq.h>
+>   #include <asm/irq.h>
+> diff --git a/drivers/misc/jz4780_efuse.c b/drivers/misc/jz4780_efuse.c
+> index 1fba3271db61..5c92de26ec5f 100644
+> --- a/drivers/misc/jz4780_efuse.c
+> +++ b/drivers/misc/jz4780_efuse.c
+> @@ -6,7 +6,6 @@
+>    * Author: Alex Smith <alex.smith@imgtec.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <asm/io.h>
+>   #include <asm/unaligned.h>
+>   #include <errno.h>
+> diff --git a/drivers/misc/k3_avs.c b/drivers/misc/k3_avs.c
+> index 0d29eff1ac08..87471cc3b16a 100644
+> --- a/drivers/misc/k3_avs.c
+> +++ b/drivers/misc/k3_avs.c
+> @@ -7,7 +7,6 @@
+>    *
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <errno.h>
+>   #include <asm/io.h>
+> diff --git a/drivers/misc/k3_esm.c b/drivers/misc/k3_esm.c
+> index f6ac18bdc757..fa3d65656220 100644
+> --- a/drivers/misc/k3_esm.c
+> +++ b/drivers/misc/k3_esm.c
+> @@ -7,7 +7,6 @@
+>    *
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <errno.h>
+>   #include <asm/io.h>
+> diff --git a/drivers/misc/ls2_sfp.c b/drivers/misc/ls2_sfp.c
+> index 5351c7ed34fd..8cb6e999bed1 100644
+> --- a/drivers/misc/ls2_sfp.c
+> +++ b/drivers/misc/ls2_sfp.c
+> @@ -12,7 +12,6 @@
+>    */
+>   
+>   #define LOG_CATEGORY UCLASS_MISC
+> -#include <common.h>
+>   #include <clk.h>
+>   #include <fuse.h>
+>   #include <misc.h>
+> diff --git a/drivers/misc/microchip_flexcom.c b/drivers/misc/microchip_flexcom.c
+> index e0a6f2d38801..c5ddecac7551 100644
+> --- a/drivers/misc/microchip_flexcom.c
+> +++ b/drivers/misc/microchip_flexcom.c
+> @@ -4,7 +4,6 @@
+>    * Author: Eugen Hristev <eugen.hristev@microchip.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <errno.h>
+>   #include <log.h>
+> diff --git a/drivers/misc/misc-uclass.c b/drivers/misc/misc-uclass.c
+> index cfe9d562fa0d..1389e146b612 100644
+> --- a/drivers/misc/misc-uclass.c
+> +++ b/drivers/misc/misc-uclass.c
+> @@ -5,7 +5,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_MISC
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <errno.h>
+>   #include <misc.h>
+> diff --git a/drivers/misc/misc_sandbox.c b/drivers/misc/misc_sandbox.c
+> index 31cde2dbac07..2473419df2a3 100644
+> --- a/drivers/misc/misc_sandbox.c
+> +++ b/drivers/misc/misc_sandbox.c
+> @@ -4,7 +4,6 @@
+>    * Mario Six, Guntermann & Drunck GmbH, mario.six@gdsys.cc
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <misc.h>
+>   
+> diff --git a/drivers/misc/mpc83xx_serdes.c b/drivers/misc/mpc83xx_serdes.c
+> index 93c87e998c4f..cf9aa9b35b33 100644
+> --- a/drivers/misc/mpc83xx_serdes.c
+> +++ b/drivers/misc/mpc83xx_serdes.c
+> @@ -9,7 +9,6 @@
+>    * Copyright (C) 2008 MontaVista Software, Inc.
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <mapmem.h>
+> diff --git a/drivers/misc/mxc_ocotp.c b/drivers/misc/mxc_ocotp.c
+> index 8ee18f29d9be..d1674caa138c 100644
+> --- a/drivers/misc/mxc_ocotp.c
+> +++ b/drivers/misc/mxc_ocotp.c
+> @@ -11,7 +11,6 @@
+>    * Copyright (C) 2011 Freescale Semiconductor, Inc.
+>    */
+>   
+> -#include <common.h>
+>   #include <fuse.h>
+>   #include <linux/delay.h>
+>   #include <linux/errno.h>
+> diff --git a/drivers/misc/mxs_ocotp.c b/drivers/misc/mxs_ocotp.c
+> index facc720c8ef2..6432c62dac34 100644
+> --- a/drivers/misc/mxs_ocotp.c
+> +++ b/drivers/misc/mxs_ocotp.c
+> @@ -11,7 +11,6 @@
+>    *       etc.) which would make common driver an ifdef nightmare :-(
+>    */
+>   
+> -#include <common.h>
+>   #include <fuse.h>
+>   #include <linux/delay.h>
+>   #include <linux/errno.h>
+> diff --git a/drivers/misc/npcm_host_intf.c b/drivers/misc/npcm_host_intf.c
+> index 79f57f57d89c..58bab888c3c8 100644
+> --- a/drivers/misc/npcm_host_intf.c
+> +++ b/drivers/misc/npcm_host_intf.c
+> @@ -4,7 +4,6 @@
+>    * Copyright (c) 2022 Nuvoton Technology Corp.
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <regmap.h>
+>   #include <syscon.h>
+> diff --git a/drivers/misc/npcm_otp.c b/drivers/misc/npcm_otp.c
+> index 08029724c040..adb6135291dc 100644
+> --- a/drivers/misc/npcm_otp.c
+> +++ b/drivers/misc/npcm_otp.c
+> @@ -4,7 +4,6 @@
+>    */
+>   
+>   #include <clk.h>
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <errno.h>
+>   #include <fuse.h>
+> diff --git a/drivers/misc/nuvoton_nct6102d.c b/drivers/misc/nuvoton_nct6102d.c
+> index daf5019d0170..a3ca037d25f7 100644
+> --- a/drivers/misc/nuvoton_nct6102d.c
+> +++ b/drivers/misc/nuvoton_nct6102d.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (C) 2016 Stefan Roese <sr@denx.de>
+>    */
+>   
+> -#include <common.h>
+>   #include <nuvoton_nct6102d.h>
+>   #include <asm/io.h>
+>   #include <asm/pnp_def.h>
+> diff --git a/drivers/misc/nvmem.c b/drivers/misc/nvmem.c
+> index 5a2bd1f9f72c..d0cb0a35b816 100644
+> --- a/drivers/misc/nvmem.c
+> +++ b/drivers/misc/nvmem.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (C) 2022 Sean Anderson <sean.anderson@seco.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <i2c_eeprom.h>
+>   #include <linker_lists.h>
+>   #include <misc.h>
+> diff --git a/drivers/misc/p2sb-uclass.c b/drivers/misc/p2sb-uclass.c
+> index f24857a1515e..016c80733782 100644
+> --- a/drivers/misc/p2sb-uclass.c
+> +++ b/drivers/misc/p2sb-uclass.c
+> @@ -8,7 +8,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_P2SB
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <malloc.h>
+> diff --git a/drivers/misc/p2sb_emul.c b/drivers/misc/p2sb_emul.c
+> index 51f87161d5b7..3dac6bd82e30 100644
+> --- a/drivers/misc/p2sb_emul.c
+> +++ b/drivers/misc/p2sb_emul.c
+> @@ -8,7 +8,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_MISC
+>   
+> -#include <common.h>
+>   #include <axi.h>
+>   #include <dm.h>
+>   #include <log.h>
+> diff --git a/drivers/misc/p2sb_sandbox.c b/drivers/misc/p2sb_sandbox.c
+> index d80bca22a6b2..9f3cd14958b8 100644
+> --- a/drivers/misc/p2sb_sandbox.c
+> +++ b/drivers/misc/p2sb_sandbox.c
+> @@ -7,7 +7,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_P2SB
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <asm/io.h>
+>   #include <p2sb.h>
+> diff --git a/drivers/misc/pca9551_led.c b/drivers/misc/pca9551_led.c
+> index cdc4390f8155..040d0d5cf48c 100644
+> --- a/drivers/misc/pca9551_led.c
+> +++ b/drivers/misc/pca9551_led.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (C) 2015 Stefan Roese <sr@denx.de>
+>    */
+>   
+> -#include <common.h>
+>   #include <errno.h>
+>   #include <i2c.h>
+>   #include <status_led.h>
+> diff --git a/drivers/misc/pwrseq-uclass.c b/drivers/misc/pwrseq-uclass.c
+> index a0f24e1bf3a9..bddc3c336857 100644
+> --- a/drivers/misc/pwrseq-uclass.c
+> +++ b/drivers/misc/pwrseq-uclass.c
+> @@ -5,7 +5,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_PWRSEQ
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <pwrseq.h>
+>   
+> diff --git a/drivers/misc/qfw.c b/drivers/misc/qfw.c
+> index db98619fdf53..0e002ac25f48 100644
+> --- a/drivers/misc/qfw.c
+> +++ b/drivers/misc/qfw.c
+> @@ -6,7 +6,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_QFW
+>   
+> -#include <common.h>
+>   #include <acpi/acpi_table.h>
+>   #include <bootdev.h>
+>   #include <bootflow.h>
+> diff --git a/drivers/misc/rockchip-efuse.c b/drivers/misc/rockchip-efuse.c
+> index 2f96b79ea407..c7430147718a 100644
+> --- a/drivers/misc/rockchip-efuse.c
+> +++ b/drivers/misc/rockchip-efuse.c
+> @@ -6,7 +6,6 @@
+>    * Written by Philipp Tomsich <philipp.tomsich@theobroma-systems.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <asm/io.h>
+>   #include <command.h>
+>   #include <display_options.h>
+> diff --git a/drivers/misc/rockchip-otp.c b/drivers/misc/rockchip-otp.c
+> index 4f757083a1b6..2123c31038fc 100644
+> --- a/drivers/misc/rockchip-otp.c
+> +++ b/drivers/misc/rockchip-otp.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (c) 2019 Fuzhou Rockchip Electronics Co., Ltd
+>    */
+>   
+> -#include <common.h>
+>   #include <asm/io.h>
+>   #include <command.h>
+>   #include <display_options.h>
+> diff --git a/drivers/misc/sandbox_adder.c b/drivers/misc/sandbox_adder.c
+> index 3ea33e46e9f2..de1c63575820 100644
+> --- a/drivers/misc/sandbox_adder.c
+> +++ b/drivers/misc/sandbox_adder.c
+> @@ -7,7 +7,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_MISC
+>   
+> -#include <common.h>
+>   #include <axi.h>
+>   #include <dm.h>
+>   #include <misc.h>
+> diff --git a/drivers/misc/sifive-otp.c b/drivers/misc/sifive-otp.c
+> index a624a358802c..7fbcd3799e52 100644
+> --- a/drivers/misc/sifive-otp.c
+> +++ b/drivers/misc/sifive-otp.c
+> @@ -17,7 +17,6 @@
+>    * Right now first 1KiB is used to store only serial number.
+>    */
+>   
+> -#include <common.h>
+>   #include <dm/device.h>
+>   #include <dm/read.h>
+>   #include <linux/bitops.h>
+> diff --git a/drivers/misc/sl28cpld.c b/drivers/misc/sl28cpld.c
+> index 01ef1c6178fc..1c61b005af3a 100644
+> --- a/drivers/misc/sl28cpld.c
+> +++ b/drivers/misc/sl28cpld.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (c) 2021 Michael Walle <michael@walle.cc>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <i2c.h>
+>   
+> diff --git a/drivers/misc/smsc_lpc47m.c b/drivers/misc/smsc_lpc47m.c
+> index bda064f1365b..1b15907b0933 100644
+> --- a/drivers/misc/smsc_lpc47m.c
+> +++ b/drivers/misc/smsc_lpc47m.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (C) 2014, Bin Meng <bmeng.cn@gmail.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <asm/io.h>
+>   #include <asm/pnp_def.h>
+>   
+> diff --git a/drivers/misc/smsc_sio1007.c b/drivers/misc/smsc_sio1007.c
+> index 3b7b1c8bcf2a..6d99aa61d91d 100644
+> --- a/drivers/misc/smsc_sio1007.c
+> +++ b/drivers/misc/smsc_sio1007.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (C) 2016, Bin Meng <bmeng.cn@gmail.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <asm/io.h>
+>   #include <errno.h>
+>   #include <smsc_sio1007.h>
+> diff --git a/drivers/misc/spltest_sandbox.c b/drivers/misc/spltest_sandbox.c
+> index 6b9701a06aee..3011a2292713 100644
+> --- a/drivers/misc/spltest_sandbox.c
+> +++ b/drivers/misc/spltest_sandbox.c
+> @@ -4,7 +4,6 @@
+>    * Written by Simon Glass <sjg@chromium.org>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dt-structs.h>
+>   
+> diff --git a/drivers/misc/status_led.c b/drivers/misc/status_led.c
+> index a6e9c03a02ec..3b1baa4f840b 100644
+> --- a/drivers/misc/status_led.c
+> +++ b/drivers/misc/status_led.c
+> @@ -4,8 +4,8 @@
+>    * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+>    */
+>   
+> -#include <common.h>
+>   #include <status_led.h>
+> +#include <linux/types.h>
+>   
+>   /*
+>    * The purpose of this code is to signal the operational status of a
+> diff --git a/drivers/misc/stm32_rcc.c b/drivers/misc/stm32_rcc.c
+> index c1e5428a6b81..0dd827e1dd0e 100644
+> --- a/drivers/misc/stm32_rcc.c
+> +++ b/drivers/misc/stm32_rcc.c
+> @@ -6,7 +6,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_NOP
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <misc.h>
+> diff --git a/drivers/misc/stm32mp_fuse.c b/drivers/misc/stm32mp_fuse.c
+> index 9fd6c367dc61..34be6c28c192 100644
+> --- a/drivers/misc/stm32mp_fuse.c
+> +++ b/drivers/misc/stm32mp_fuse.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (C) 2018, STMicroelectronics - All Rights Reserved
+>    */
+>   
+> -#include <common.h>
+>   #include <command.h>
+>   #include <fuse.h>
+>   #include <misc.h>
+> diff --git a/drivers/misc/swap_case.c b/drivers/misc/swap_case.c
+> index ee5c12bd0a42..d4a5620c62c1 100644
+> --- a/drivers/misc/swap_case.c
+> +++ b/drivers/misc/swap_case.c
+> @@ -6,7 +6,6 @@
+>    * Written by Simon Glass <sjg@chromium.org>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <errno.h>
+>   #include <log.h>
+> diff --git a/drivers/misc/syscon_sandbox.c b/drivers/misc/syscon_sandbox.c
+> index d5cef188d742..6adb4154c25b 100644
+> --- a/drivers/misc/syscon_sandbox.c
+> +++ b/drivers/misc/syscon_sandbox.c
+> @@ -4,7 +4,6 @@
+>    * Written by Simon Glass <sjg@chromium.org>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <errno.h>
+>   #include <syscon.h>
+> diff --git a/drivers/misc/tegra186_bpmp.c b/drivers/misc/tegra186_bpmp.c
+> index fecac9c4d902..a1585b818677 100644
+> --- a/drivers/misc/tegra186_bpmp.c
+> +++ b/drivers/misc/tegra186_bpmp.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (c) 2016, NVIDIA CORPORATION.
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <malloc.h>
+> diff --git a/drivers/misc/tegra_car.c b/drivers/misc/tegra_car.c
+> index 0ddbb3c619b2..497ec18564cc 100644
+> --- a/drivers/misc/tegra_car.c
+> +++ b/drivers/misc/tegra_car.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (c) 2016, NVIDIA CORPORATION.
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <dm/lists.h>
+> diff --git a/drivers/misc/test_drv.c b/drivers/misc/test_drv.c
+> index 927618256f0a..9b1e357a1397 100644
+> --- a/drivers/misc/test_drv.c
+> +++ b/drivers/misc/test_drv.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (c) 2014 Google, Inc
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/test.h>
+>   #include <asm/global_data.h>
+> diff --git a/drivers/misc/turris_omnia_mcu.c b/drivers/misc/turris_omnia_mcu.c
+> index 6b2f17c0002d..be77acbd1652 100644
+> --- a/drivers/misc/turris_omnia_mcu.c
+> +++ b/drivers/misc/turris_omnia_mcu.c
+> @@ -4,7 +4,6 @@
+>    * Copyright (C) 2024 Marek Behún <kabel@kernel.org>
+>    */
+>   
+> -#include <common.h>
+>   #include <console.h>
+>   #include <dm.h>
+>   #include <dm/lists.h>
+> diff --git a/drivers/misc/usb251xb.c b/drivers/misc/usb251xb.c
+> index 92e92ba5e624..daba2c2d6835 100644
+> --- a/drivers/misc/usb251xb.c
+> +++ b/drivers/misc/usb251xb.c
+> @@ -10,7 +10,6 @@
+>    * https://patchwork.kernel.org/patch/9257715/
+>    */
+>   
+> -#include <common.h>
+>   #include <asm/gpio.h>
+>   #include <dm.h>
+>   #include <dm/device_compat.h>
+> diff --git a/drivers/misc/vexpress_config.c b/drivers/misc/vexpress_config.c
+> index 99aad1412ae7..e7655ceff74c 100644
+> --- a/drivers/misc/vexpress_config.c
+> +++ b/drivers/misc/vexpress_config.c
+> @@ -4,7 +4,6 @@
+>    * Author: Liviu Dudau <liviu.dudau@foss.arm.com>
+>    *
+>    */
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <malloc.h>
+>   #include <dm/read.h>
+> diff --git a/drivers/misc/winbond_w83627.c b/drivers/misc/winbond_w83627.c
+> index 3838b3f74f40..87b9043e65c4 100644
+> --- a/drivers/misc/winbond_w83627.c
+> +++ b/drivers/misc/winbond_w83627.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (C) 2016 Stefan Roese <sr@denx.de>
+>    */
+>   
+> -#include <common.h>
+>   #include <asm/io.h>
+>   #include <asm/pnp_def.h>
+>   
