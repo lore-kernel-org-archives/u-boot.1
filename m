@@ -4,76 +4,163 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C863C25B10
-	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 14:28:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DABDC25B10
+	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 15:01:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA2648800D;
-	Fri, 10 May 2024 16:28:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id DBCC688194;
+	Fri, 10 May 2024 17:01:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Y011FeXE";
+	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="klBqNRIf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E363687FFB; Fri, 10 May 2024 16:28:52 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EDF62881BF; Fri, 10 May 2024 17:01:43 +0200 (CEST)
+Received: from JPN01-TYC-obe.outbound.protection.outlook.com
+ (mail-tycjpn01olkn20800.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2814::800])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDE2D8800D
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 16:28:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 2EB7688122
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 17:01:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a59b58fe083so506512466b.0
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 07:28:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1715351330; x=1715956130;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tysr5sSTJ+eXuknS2RyvMu0zSLviBH/8z2Owr1FsPxk=;
- b=Y011FeXEs4jt1sSFTDEfqttPbwj7k1SWLjS0m89OPxbBcqviFvC5A9YAT1BrfNdw76
- Tmbro8Btirh2vcONCFNu8K5UV366vngPb9a7/z74D4AQOQN9fddPfJ0ClZ4QO69HrmX9
- aKbApKaqPbful1vpGkwPNiqQnTtAdL1pe8V1k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715351330; x=1715956130;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=tysr5sSTJ+eXuknS2RyvMu0zSLviBH/8z2Owr1FsPxk=;
- b=sXLlhWkh8B/oy95MtV2h3o2CoC9wEq7DgBj54wQrKVeWDI6l02NHYVePmtXofvFzNe
- z/5YfUtEbKB5utPFcyITaNSWTQWc+RWvzEOmCA2q6gNjK4hZm42G5p4XmiYZzBq3NCH2
- n5XD63TIIJT2K3Payk18OqtAofJqsEByFNrU9YXsGgw4LUZRxqyBlbg5gq983ijrhbn5
- CHhX4xR/hP2QK5KiA5Ne+kPZUJjvvC3DfjezYBToRju6BNqMS4z7fIPS9IN82O0ErlbH
- 0ki16975tWYImQffkTZCqqjfHC9YCveKYzDnn8Aq26ddS+eNaEsUd08hBoXuzeCs3g0G
- kh/Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWcLR80gZT52r2hLuU4oDTx4l2UQgUViJzlR7cvklD4cie5+/swKRoKQ/O0rR0xpsubFIUTueGTMmEfeMTRR9KZs3DOuQ==
-X-Gm-Message-State: AOJu0YwzQNxTckGiXTIRERijP+Ix5xE9s7GZZxZIuOs9r1JUZYEToJGg
- T5XPLBUWBIfHG6Iq+wwbGJDNtANqCqxrM+py4hznQMCNzsLAKyoJOLslpAu1afNdMCwFCAIW26d
- nZRX5k8/R7VSuMW+v+Sru2k4YVNgY0crqZgVZQxV5wD+WVw6YdVi3UQ==
-X-Google-Smtp-Source: AGHT+IFipl17a3I6jdpy3MenHGYDZ+h+7AsgG1Jvz/XtLHi7fJr6ICI4T5n5LIh1WDvDHZ47iwNGUA4kk6ZUdhWnU0U=
-X-Received: by 2002:a50:9353:0:b0:568:1248:9f49 with SMTP id
- 4fb4d7f45d1cf-5734d5bfbf9mr1815629a12.18.1715351330031; Fri, 10 May 2024
- 07:28:50 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=outlook.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=wiagn233@outlook.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=gS9PG+jtm/jUbk/yzwYFcxFsunz+LkucQDCUyAWb24ruTiKUEDc5iJ3/9U88t0fh12nE2sQyjG4cFLAMkN0rWtk8FZCYxzQkwn/og1R53HBS3b6pjMp4aSU/j+cqfDTj3XwWa10DidO50/idnNJh9RgcsyxdjoLAo4wciKmK79gksbBtXZmSEuk2qAOOL3R5QsdebxHXS+MZxxK67qPkqH07LGACY+fvdW8g1mpawCA0tz7/AbTuLsqK3K4euWcjQxWjfcYC1Mra/J6X2s5lUrpifDe2FUFCq2HqyMgEllDO8kr7DSoacNenSDyYbUtM5hsuzXT9u9AaCH2nhC9Nrg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=n3tATcz1PivZZm9QDLMPrxRoFK+n/9yzh3VZjZWs0lA=;
+ b=Ml2p+o61H/skMX2FBwqwwt5k7YNfR6l3k+RqH1STE7eJ3aRtDhwnk2XfmmaxT9pIIiH8Kf/EVfu5N3x7QiJmMfkQc14+ap88Bethfw+wbOPdOMEPFHxK2KjlnXSXMGs8obmbgs37zIuKYxkq7ijQBlUUMbRd52jk4EFHC+OoXBupS3wM4TZFktz8gH7t84WotHwoY2hZjCYSgc45p6sVGgi9JJ9n1Sj+gLHI6JXKx/bBSrWJLWNweWMGVqcyB0oh5yqm1sndWzpLQuEnrCScPstCRBDLeff6sYBltjU/hVvVd1nKb0Mmk4mYJyfBvU52INWZvJ+UGV84aUlgx41bKA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=n3tATcz1PivZZm9QDLMPrxRoFK+n/9yzh3VZjZWs0lA=;
+ b=klBqNRIfTbI7agdd2V/ZoT3c9TP2h79HNeY217/Jxsmyo+dgGwhvaHsDn/fYG+BSiU9hcCr7k1FPG4GKLLp2lHvH4UcrRjWw6dWPINz/altQp+Dzd1v5fFuIHTdD+IhO69R1jhNXpxUqXjn322jWnPA8nx4WoLjpgHneJfX/nh0dYDCcVjdnVOaxZzGn29uH4ylG4PyRSdid3/gv31i5jaWhgk7lXI8F0liq4PVkBhN7WnwYXe27HJULUat5gcepUkX/6X4Rz3qcxVuAiIZoO+cVnoW3kDZT6Ht5SkWUgG5fkd+1AoWsygZsnEarJMDFDDTuu0R6V5tbGWOQ79anag==
+Received: from TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:23e::10)
+ by OSZP286MB2459.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:15d::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7544.49; Fri, 10 May
+ 2024 15:01:36 +0000
+Received: from TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::4982:ca24:1b5a:a88b]) by TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::4982:ca24:1b5a:a88b%5]) with mapi id 15.20.7544.049; Fri, 10 May 2024
+ 15:01:36 +0000
+Message-ID: <TY3P286MB2611F8A85713E2ADEF0F918998E72@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
+Date: Fri, 10 May 2024 23:01:30 +0800
+User-Agent: Mozilla Thunderbird
+Cc: wiagn233@outlook.com, Aurelien Jarno <aurelien@aurel32.net>,
+ Lukasz Tekieli <tekieli.lukasz@gmail.com>,
+ Lukas Funke <lukas.funke@weidmueller.com>,
+ Shiji Yang <yangshiji66@outlook.com>, Michal Simek <michal.simek@amd.com>,
+ Seung-Woo Kim <sw0312.kim@samsung.com>,
+ Mason Huo <mason.huo@starfivetech.com>, E Shattow <lucent@gmail.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v4 2/5] board: add support for Milk-V Mars CM
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>
+References: <20240510055223.11617-1-heinrich.schuchardt@canonical.com>
+ <20240510055223.11617-3-heinrich.schuchardt@canonical.com>
+Content-Language: en-US
+From: Shengyu Qu <wiagn233@outlook.com>
+Autocrypt: addr=wiagn233@outlook.com; keydata=
+ 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
+In-Reply-To: <20240510055223.11617-3-heinrich.schuchardt@canonical.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------J0qL49jtODtA00Jk7qbc5kSq"
+X-TMN: [zPmkuCEIHLbxCh9esetiGzjtuQRvyVx518aZ11i7GpYuTujFli5MviOD7TcjJMoWeUp6VezGrSs=]
+X-ClientProxiedBy: SG2PR01CA0136.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:8f::16) To TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:23e::10)
+X-Microsoft-Original-Message-ID: <f06e092b-a02f-48a4-b499-1ac5dabf4ce2@outlook.com>
 MIME-Version: 1.0
-References: <CAOMZO5AnweEsKk_LXVLRmC5=6L2x-Oo+rdngsAs_hcrSHFH91Q@mail.gmail.com>
-In-Reply-To: <CAOMZO5AnweEsKk_LXVLRmC5=6L2x-Oo+rdngsAs_hcrSHFH91Q@mail.gmail.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Fri, 10 May 2024 16:28:39 +0200
-Message-ID: <CAOf5uw=2tob+MQfgGTfhXQqJK8vBjOPNPSD1CFkR70yXyEgAZg@mail.gmail.com>
-Subject: Re: imx8mp: Flashing U-Boot into eMMC hardware partition via UUU
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Frank Li <frank.li@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- Ye Li <ye.li@nxp.com>, 
- U-Boot-Denx <u-boot@lists.denx.de>, Tim Harvey <tharvey@gateworks.com>, 
- Adam Ford <aford173@gmail.com>, Heiko Schocher <hs@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: TY3P286MB2611:EE_|OSZP286MB2459:EE_
+X-MS-Office365-Filtering-Correlation-Id: 43961c85-b714-4485-1ad0-08dc71021631
+X-Microsoft-Antispam: BCL:0;
+ ARA:14566002|6092099003|461199019|440099019|3412199016|1710799017; 
+X-Microsoft-Antispam-Message-Info: T0Z40Mi6Vya3T3Osmi5Ksr7nl7aC7nJnSktHbo98oDLIYu5xrmNt6j0dKls39VL/1YmGDRVM0m5AppoUCYWGxMy6RQuhbq5xuApMKmkzMVtaGGWetxLLaUrWoOgcix2jjCe3t9sY5t4FOuAxKh5/AJJ1X1sl2jUGV0MgMhHSEzNEiS8ctmDqPh1jUTEOYF9j5j7W3CByg96rNNR9TULrfhiZmYL7BXdvqTptGqmJFLfktnVag5jU4Ew9e4pzkxL1VUkSlid/TqQhK+g0bqfW8iLFNkQXdt4nLxdlMC8wuC2pe50iHCMq/o5dHalBXbKrZYaif7bhEs48grEcRIWzYVI4vZ3mkX19J6A+vwfRHCoYu3oPeurzbIhzskkO3aL5YkNvRhnB7KrY8H+v7ZYv7AqGwm/8JbL0IB53IQKcb2z97xqCrnLxG4jIHXav+NB7TQchXRnDr6OS+C6meOMBCnP/E4jDlgKv0Q6hgmdIPXZhfVt7iUGutZ3hPd0GeWdo04Zl9nMmC9a/fUWcBZmpy/ApJtWJWeqF7FOZlbETrigAwhn1RNpGbaEU1WwXxFGJXs0X5y//4LwLj8EKuBIdwBcOGFOOr08iLuytYcOnkmLQj6mANzfGlPZ84iCMQOXDY5IXUmCPFQ/ptd+kZgrGlA==
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?WGshgAnfmW/BPH7ihX4f2qXH0POA2orQ/80x17wiyM+p9/SKwyQlAvT1k3ts?=
+ =?us-ascii?Q?u3YOjqLkHTvNXAbiT2+mf5iLk7HoxbRr/KNc6lCX5xJnK9suS4Yu03IyBUtD?=
+ =?us-ascii?Q?JyD4czvAHQ2p33MK6L4l+xwiL7WxH9P86kSL+9h2/WrDTERod2Nv55dgtnOz?=
+ =?us-ascii?Q?rPpfWXYTeL6lIwUT0/iM/QWUfepp11gAYpgLqxfOuIE8+hDkXh2h3e0HzmUf?=
+ =?us-ascii?Q?C+c5IFx+eOsYOHewvtKz3UidPjzrt3lnBRv9jitS4ZbZP5YL676Lum1ZXMJF?=
+ =?us-ascii?Q?bRhFTw2dBsS9GCsdftdNt837Sf965QZVL3/Y3cIhHmgq0y8M245cVa2SIbnK?=
+ =?us-ascii?Q?m7l85/Ub7pOKsZjsnPfxB6OuaaNtWXKrjV69oi7RYjlB26sIIMA8XnrQrvMl?=
+ =?us-ascii?Q?q2vkRaWSxSr2jL3DA9ujmpkPwi5zIu4iPbwevhxgeBvix2ZE/CAG5Nt8zdUc?=
+ =?us-ascii?Q?07RM9hJ/JvjJmK4V9Bni+H7H/6uXKJ0sJpXWV35iJeR3EWipuEwjJ9ktZEKG?=
+ =?us-ascii?Q?r395+gv4gEJ/yjfRAf1yU5J7g8Tw0wGZXKa520uM0cRDF2ywiKPp0Uubuc+v?=
+ =?us-ascii?Q?HHMqzxg8j1wlDnCOZUcLKWwUWDBS5Rc2V9/bSLjV2eqMD60wHOpSoLqAiGtr?=
+ =?us-ascii?Q?OnPQFBNZcqcniQIAxfEdz+GfxitmWwmB7gVVniNbxNiyWyPuMtuPG+kf5EHP?=
+ =?us-ascii?Q?fKiRZiVB7P8IQogIDAYZ+2MAPdQdryD7kTj8r4YYROr4HM6Qzrk2juwwqEFC?=
+ =?us-ascii?Q?vRiX/BKBa3dCxO0ymHyK3dCWeT0xXu1cDtb0TxR7h5NLUZD11WFvASg2Cu5O?=
+ =?us-ascii?Q?a8aUr7GrBRB+BiPiS6FHcFvquDjuEKiJ17roGf7HS4ONoGFvb+0stHhATeFD?=
+ =?us-ascii?Q?yrYFI1MIEHfh3zdSYw30H9cWWrFOfNr8vvMO1r7b/wLFJXrEngK1Qlj2wZO1?=
+ =?us-ascii?Q?oFKk9bTefIX0w7V7cBXuBK1u6WFU2dzdarM5UIHzhpvg9BNUBgB48JBUFjFJ?=
+ =?us-ascii?Q?KVI9iQpIw0IQn58qVfHHGL3+hHvtwHC5hUFe1ugzaq6vrBMn8sGu/p5kj8VH?=
+ =?us-ascii?Q?tuEohN0yXcszjg2pIoPhU7ALllnB5hNM68SGYJZDYAWhxagav2M0IxILM1Ms?=
+ =?us-ascii?Q?aZzDoVc9M4Ma1AyxQdAMlB/Ln9kgGP5jrSVUqEq2noImF5pGN848qFYv6pz1?=
+ =?us-ascii?Q?YOHe/05wx45sFMrm6pz0VYQZKdKw24RlBKjYRPmV7xeLCt0lZo4B/2lC1Z1g?=
+ =?us-ascii?Q?4Z+bRKSWMQn13LGZgMSZMaJFH7k0VqXHIVB5EFqf5FDC4/eiNx9cwCWdDFgT?=
+ =?us-ascii?Q?QRs=3D?=
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 43961c85-b714-4485-1ad0-08dc71021631
+X-MS-Exchange-CrossTenant-AuthSource: TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 May 2024 15:01:35.9210 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: OSZP286MB2459
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,108 +177,288 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, May 10, 2024 at 4:19=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
-wrote:
->
-> Hi,
->
-> I am using an imx8mp-evk board and I can flash the U-Boot into the
-> eMMC hardware partition 0 by running:
->
->    =3D> tftpboot $loadaddr flash.bin
->    =3D> setexpr blkcnt $filesize + 0x1ff && setexpr blkcnt $blkcnt / 0x20=
-0
->    =3D> mmc dev 2 1
->    =3D> mmc write $loadaddr 0 $blkcnt
->
-> Now I want to do the same via UUU.
->
-> I tried to create a script called emmc_flash:
->
-> uuu_version 1.5.21
->
-> SDPS: boot -f flash.bin
-> SDPS: done
-> FB: ucmd setenv fastboot_dev mmc
-> FB: ucmd mmc dev 2 1
-> FB: flash bootloader flash.bin
-> FB: Done
->
-> Then on the PC: uuu emmc_flash
->
-> U-Boot is loaded to RAM, but the eMMC hardware partition is not programme=
-d.
->
-> What is the correct script for doing this?
->
-> Any suggestions?
+--------------J0qL49jtODtA00Jk7qbc5kSq
+Content-Type: multipart/mixed; boundary="------------Nysf3NieBHomHsoenY0HIZQp";
+ protected-headers="v1"
+From: Shengyu Qu <wiagn233@outlook.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>
+Cc: wiagn233@outlook.com, Aurelien Jarno <aurelien@aurel32.net>,
+ Lukasz Tekieli <tekieli.lukasz@gmail.com>,
+ Lukas Funke <lukas.funke@weidmueller.com>,
+ Shiji Yang <yangshiji66@outlook.com>, Michal Simek <michal.simek@amd.com>,
+ Seung-Woo Kim <sw0312.kim@samsung.com>,
+ Mason Huo <mason.huo@starfivetech.com>, E Shattow <lucent@gmail.com>,
+ u-boot@lists.denx.de
+Message-ID: <f06e092b-a02f-48a4-b499-1ac5dabf4ce2@outlook.com>
+Subject: Re: [PATCH v4 2/5] board: add support for Milk-V Mars CM
+References: <20240510055223.11617-1-heinrich.schuchardt@canonical.com>
+ <20240510055223.11617-3-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240510055223.11617-3-heinrich.schuchardt@canonical.com>
+Autocrypt-Gossip: addr=aurelien@aurel32.net; keydata=
+ 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
 
-Create an lst file
+--------------Nysf3NieBHomHsoenY0HIZQp
+Content-Type: multipart/mixed; boundary="------------CISpQPpmcaVxD79SZgdOpycY"
 
-Hi Fabio
+--------------CISpQPpmcaVxD79SZgdOpycY
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-Top posting
+QnR3IEkgZGlkbid0IGhhdmUgYSBjb2RlIHBhdGggdG8gcGFzcyB0aGUgTUFDIGFkZHJlc3Mg
+dG8ga2VybmVsLiBTbyBkb2VzIGl0IGFjdHVhbGx5IGV4aXN0Pw0KDQpCZXN0IHJlZ2FyZHMs
+DQpTaGVuZ3l1DQoNCuWcqCAyMDI0LzUvMTAgMTM6NTIsIEhlaW5yaWNoIFNjaHVjaGFyZHQg
+5YaZ6YGTOg0KPiBXZSBhbHJlYWR5IHN1cHBvcnQgdGhlIFZpc2lvbkZpdmUgMiBhbmQgdGhl
+IE1pbGstViBNYXJzIGJvYXJkIGJ5DQo+IHBhdGNoaW5nIHRoZSBWaXNpb25GaXZlIDIgZGV2
+aWNlIHRyZWUuIFdpdGggdGhpcyBwYXRjaCB0aGUgc2FtZQ0KPiBpcyBkb25lIGZvciB0aGUg
+TWlsay1WIE1hcnMgQ00uDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBIZWlucmljaCBTY2h1Y2hh
+cmR0IDxoZWlucmljaC5zY2h1Y2hhcmR0QGNhbm9uaWNhbC5jb20+DQo+IFRlc3RlZC1ieTog
+RS4gU2hhdHRvdyA8bHVjZW50QGdtYWlsLmNvbT4NCj4gUmV2aWV3ZWQtYnk6IEUuIFNoYXR0
+b3cgPGx1Y2VudEBnbWFpbC5jb20+DQo+IC0tLQ0KPiB2NDoNCj4gCW5vIGNoYW5nZQ0KPiB2
+MzoNCj4gCW5vIGNoYW5nZQ0KPiB2MjoNCj4gCXJlbmFtZSBzcGxfZmR0X2ZpeHVwX21hcmMo
+KSB0byBzcGxfZmR0X2ZpeHVwX21hcnNfY20oKQ0KPiAJcmVuYW1lIGRldmljZS10cmVlcyBm
+b3IgTWFycyBDTSBhbmQgTWFycyBDTSBMaXRlDQo+IAljaGFuZ2UgbW9kZWwgYW5kIGNvbXBh
+dGlibGUgcHJvcGVydGllcw0KPiAtLS0NCj4gICBib2FyZC9zdGFyZml2ZS92aXNpb25maXZl
+Mi9zcGwuYyAgICAgICAgICAgICAgfCAyOCArKysrKysrKysrKysrKysrKystDQo+ICAgLi4u
+L3Zpc2lvbmZpdmUyL3N0YXJmaXZlX3Zpc2lvbmZpdmUyLmMgICAgICAgIHwgMTEgKysrKysr
+Ky0NCj4gICAyIGZpbGVzIGNoYW5nZWQsIDM3IGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25z
+KC0pDQo+IA0KPiBkaWZmIC0tZ2l0IGEvYm9hcmQvc3RhcmZpdmUvdmlzaW9uZml2ZTIvc3Bs
+LmMgYi9ib2FyZC9zdGFyZml2ZS92aXNpb25maXZlMi9zcGwuYw0KPiBpbmRleCBjYTYxYjVi
+ZTIyNy4uYjU1NTE4OTU1NmEgMTAwNjQ0DQo+IC0tLSBhL2JvYXJkL3N0YXJmaXZlL3Zpc2lv
+bmZpdmUyL3NwbC5jDQo+ICsrKyBiL2JvYXJkL3N0YXJmaXZlL3Zpc2lvbmZpdmUyL3NwbC5j
+DQo+IEBAIC0xMjksNiArMTI5LDMwIEBAIHZvaWQgc3BsX2ZkdF9maXh1cF9tYXJzKHZvaWQg
+KmZkdCkNCj4gICAJfQ0KPiAgIH0NCj4gICANCj4gK3ZvaWQgc3BsX2ZkdF9maXh1cF9tYXJz
+X2NtKHZvaWQgKmZkdCkNCj4gK3sNCj4gKwljb25zdCBjaGFyICpjb21wYXQ7DQo+ICsJY29u
+c3QgY2hhciAqbW9kZWw7DQo+ICsNCj4gKwlzcGxfZmR0X2ZpeHVwX21hcnMoZmR0KTsNCj4g
+Kw0KPiArCWlmICghZ2V0X21tY19zaXplX2Zyb21fZWVwcm9tKCkpIHsNCj4gKwkJaW50IG9m
+ZnNldDsNCj4gKw0KPiArCQltb2RlbCA9ICJNaWxrLVYgTWFycyBDTSBMaXRlIjsNCj4gKwkJ
+Y29tcGF0ID0gIm1pbGt2LG1hcnMtY20tbGl0ZVwwc3RhcmZpdmUsamg3MTEwIjsNCj4gKw0K
+PiArCQlvZmZzZXQgPSBmZHRfcGF0aF9vZmZzZXQoZmR0LCAiL3NvYy9waW5jdHJsL21tYzAt
+cGlucy9tbWMwLXBpbnMtcmVzdCIpOw0KPiArCQkvKiBHUElPTVVYKDIyLCBHUE9VVF9TWVNf
+U0RJTzBfUlNULCBHUE9FTl9FTkFCTEUsIEdQSV9OT05FKSAqLw0KPiArCQlmZHRfc2V0cHJv
+cF91MzIoZmR0LCBvZmZzZXQsICJwaW5tdXgiLCAweGZmMTMwMDE2KTsNCj4gKwl9IGVsc2Ug
+ew0KPiArCQltb2RlbCA9ICJNaWxrLVYgTWFycyBDTSI7DQo+ICsJCWNvbXBhdCA9ICJtaWxr
+dixtYXJzLWNtXDBzdGFyZml2ZSxqaDcxMTAiOw0KPiArCX0NCj4gKwlmZHRfc2V0cHJvcChm
+ZHQsIGZkdF9wYXRoX29mZnNldChmZHQsICIvIiksICJjb21wYXRpYmxlIiwgY29tcGF0LCBz
+aXplb2YoY29tcGF0KSk7DQo+ICsJZmR0X3NldHByb3Bfc3RyaW5nKGZkdCwgZmR0X3BhdGhf
+b2Zmc2V0KGZkdCwgIi8iKSwgIm1vZGVsIiwgbW9kZWwpOw0KPiArfQ0KPiArDQo+ICAgdm9p
+ZCBzcGxfZmR0X2ZpeHVwX3ZlcnNpb25fYSh2b2lkICpmZHQpDQo+ICAgew0KPiAgIAlzdGF0
+aWMgY29uc3QgY2hhciBjb21wYXRbXSA9ICJzdGFyZml2ZSx2aXNpb25maXZlLTItdjEuMmFc
+MHN0YXJmaXZlLGpoNzExMCI7DQo+IEBAIC0yMzYsNyArMjYwLDkgQEAgdm9pZCBzcGxfcGVy
+Zm9ybV9maXh1cHMoc3RydWN0IHNwbF9pbWFnZV9pbmZvICpzcGxfaW1hZ2UpDQo+ICAgCQlw
+cl9lcnIoIkNhbid0IHJlYWQgRUVQUk9NXG4iKTsNCj4gICAJCXJldHVybjsNCj4gICAJfQ0K
+PiAtCWlmICghc3RybmNtcChwcm9kdWN0X2lkLCAiTUFSUyIsIDQpKSB7DQo+ICsJaWYgKCFz
+dHJuY21wKHByb2R1Y3RfaWQsICJNQVJDIiwgNCkpIHsNCj4gKwkJc3BsX2ZkdF9maXh1cF9t
+YXJzX2NtKHNwbF9pbWFnZS0+ZmR0X2FkZHIpOw0KPiArCX0gZWxzZSBpZiAoIXN0cm5jbXAo
+cHJvZHVjdF9pZCwgIk1BUlMiLCA0KSkgew0KPiAgIAkJc3BsX2ZkdF9maXh1cF9tYXJzKHNw
+bF9pbWFnZS0+ZmR0X2FkZHIpOw0KPiAgIAl9IGVsc2UgaWYgKCFzdHJuY21wKHByb2R1Y3Rf
+aWQsICJWRjcxMTAiLCA2KSkgew0KPiAgIAkJdmVyc2lvbiA9IGdldF9wY2JfcmV2aXNpb25f
+ZnJvbV9lZXByb20oKTsNCj4gZGlmZiAtLWdpdCBhL2JvYXJkL3N0YXJmaXZlL3Zpc2lvbmZp
+dmUyL3N0YXJmaXZlX3Zpc2lvbmZpdmUyLmMgYi9ib2FyZC9zdGFyZml2ZS92aXNpb25maXZl
+Mi9zdGFyZml2ZV92aXNpb25maXZlMi5jDQo+IGluZGV4IGE4NmJjYTUzM2IyLi42YmU1MzQ4
+OTYyNiAxMDA2NDQNCj4gLS0tIGEvYm9hcmQvc3RhcmZpdmUvdmlzaW9uZml2ZTIvc3RhcmZp
+dmVfdmlzaW9uZml2ZTIuYw0KPiArKysgYi9ib2FyZC9zdGFyZml2ZS92aXNpb25maXZlMi9z
+dGFyZml2ZV92aXNpb25maXZlMi5jDQo+IEBAIC0xOSw2ICsxOSwxMCBAQCBERUNMQVJFX0dM
+T0JBTF9EQVRBX1BUUjsNCj4gICAjZGVmaW5lIEpINzExMF9MMl9QUkVGRVRDSEVSX0hBUlRf
+T0ZGU0VUCTB4MjAwMA0KPiAgICNkZWZpbmUgRkRURklMRV9NSUxLX1ZfTUFSUyBcDQo+ICAg
+CSJzdGFyZml2ZS9qaDcxMTAtbWlsa3YtbWFycy5kdGIiDQo+ICsjZGVmaW5lIEZEVEZJTEVf
+TUlMS19WX01BUlNfQ00gXA0KPiArCSJzdGFyZml2ZS9qaDcxMTAtbWlsa3YtbWFycy1jbS5k
+dGIiDQo+ICsjZGVmaW5lIEZEVEZJTEVfTUlMS19WX01BUlNfQ01fTElURSBcDQo+ICsJInN0
+YXJmaXZlL2poNzExMC1taWxrdi1tYXJzLWNtLWxpdGUuZHRiIg0KPiAgICNkZWZpbmUgRkRU
+RklMRV9WSVNJT05GSVZFMl8xXzJBIFwNCj4gICAJInN0YXJmaXZlL2poNzExMC1zdGFyZml2
+ZS12aXNpb25maXZlLTItdjEuMmEuZHRiIg0KPiAgICNkZWZpbmUgRkRURklMRV9WSVNJT05G
+SVZFMl8xXzNCIFwNCj4gQEAgLTYxLDcgKzY1LDEyIEBAIHN0YXRpYyB2b2lkIHNldF9mZHRm
+aWxlKHZvaWQpDQo+ICAgCQlsb2dfZXJyKCJDYW4ndCByZWFkIEVFUFJPTVxuIik7DQo+ICAg
+CQlyZXR1cm47DQo+ICAgCX0NCj4gLQlpZiAoIXN0cm5jbXAocHJvZHVjdF9pZCwgIk1BUlMi
+LCA0KSkgew0KPiArCWlmICghc3RybmNtcChwcm9kdWN0X2lkLCAiTUFSQyIsIDQpKSB7DQo+
+ICsJCWlmIChnZXRfbW1jX3NpemVfZnJvbV9lZXByb20oKSkNCj4gKwkJCWZkdGZpbGUgPSBG
+RFRGSUxFX01JTEtfVl9NQVJTX0NNOw0KPiArCQllbHNlDQo+ICsJCQlmZHRmaWxlID0gRkRU
+RklMRV9NSUxLX1ZfTUFSU19DTV9MSVRFOw0KPiArCX0gZWxzZSBpZiAoIXN0cm5jbXAocHJv
+ZHVjdF9pZCwgIk1BUlMiLCA0KSkgew0KPiAgIAkJZmR0ZmlsZSA9IEZEVEZJTEVfTUlMS19W
+X01BUlM7DQo+ICAgCX0gZWxzZSBpZiAoIXN0cm5jbXAocHJvZHVjdF9pZCwgIlZGNzExMCIs
+IDYpKSB7DQo+ICAgCQl2ZXJzaW9uID0gZ2V0X3BjYl9yZXZpc2lvbl9mcm9tX2VlcHJvbSgp
+Ow0K
+--------------CISpQPpmcaVxD79SZgdOpycY
+Content-Type: application/pgp-keys; name="OpenPGP_0xE3520CC91929C8E7.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xE3520CC91929C8E7.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
-# @_flash.bin            | bootloader
-# @_image   [_flash.bin] | image burn to nand, default is the same as bootl=
-oader
-# @_filesystem           | filesystem to burn
-# @_kernel               | kernel image
-# @_dtb                  | dtb image
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-# This command will be run when ROM support stream mode
-# i.MX8QXP, i.MX8QM
-SDPS: boot -f _flash.bin
+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
+lMSoVV3z1s8dA1DK95ykSdIFtVZT
+=3Dr4B8
+-----END PGP PUBLIC KEY BLOCK-----
 
-FB: ucmd setenv fastboot_buffer ${loadaddr}
-FB: download -f _image
-# Burn image to nandfit partition if needed
-FB: ucmd if env exists nandfit_part; then nand erase.part nandfit;
-nand write ${fastboot_buffer} nandfit ${filesize}; else true; fi;
-FB: ucmd nandbcb init ${fastboot_buffer} nandboot ${filesize}
+--------------CISpQPpmcaVxD79SZgdOpycY--
 
-FB[-t 10000]: ucmd ubi part nandrootfs
-FB[-t 10000]: ucmd ubi create root -
-FB: download -f _filesystem
-FB[-t 60000]: ucmd ubi write ${loadaddr} root ${filesize}
+--------------Nysf3NieBHomHsoenY0HIZQp--
 
-FB: download -f _kernel
-FB[-t 10000]: ucmd nand write ${loadaddr} nandkernel ${filesize}
+--------------J0qL49jtODtA00Jk7qbc5kSq
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-FB: download -f _dtb
-FB[-t 8000]: ucmd nand write ${loadaddr} nanddtb ${filesize}
+-----BEGIN PGP SIGNATURE-----
 
-FB: reboot
-FB: done
+wsF5BAABCAAjFiEET/yoGP3p5Zl+RKVuX75KBAfJsRkFAmY+NsoFAwAAAAAACgkQX75KBAfJsRnE
+CRAAodqoIlhyd22eDhRvHuAaMt9cmdHQNmRFz7IEYBWZYkXcoyfbkvfwhZ/43cT2LlTVEiFdy+mh
+nzHx81sjwLUpS9MLgEg2Igc7Wk/d+PdQgJymSxAbjT09EkwQcPvc/HXrvoKifNPRNuVbM/vj21yo
+4/uiI/l64QK6+4u0ds+JcCYB9ii7TEfemObuBqNDg/jXDeyqURxJY4odo+2ZwZLQDtg5Q3bVXx+f
+tW4YmvaulPgcli/9KexZnqT5aD2Hj7ojaB73AHyda+p4RhSGdzusxNTaJvD+HruNbEwJ9jICWpvV
+UHfeZtTcWGKMFq7XVcC2A+7KSbfpf8S3k5Tbilb8AVOmTykS6sVEKuTRWWeg1NvjT4ibKEoEvqTQ
+YLC3yYtM/2xPml3A9tT26HGyF5lARv2FFxtDnTvv5o2a2q2nSSJM6Z9bvbrlTyAzke9OwyTSjw/1
+7ZmoHqyezu1L6QMiyQZ7s9NqZqVOHc9q+eMUmjNbX2qsEGRVJMfN3kkKt9l5wJJXu4XWiBkC/JZd
+qIY81y3aPascgW7H2QgYoyYahDepaB38+vBsTLXkogL2xjPJPR+fo/rq1Hzo6nZMgI86qrbQsGac
+/R+VuNmo+EhvvQg3mt37NPLPKpvAE+PX89OiGa+ChSNF06uYJRkNWGpGNd0tRIzs3h/QnnG9hKAF
+kRE=
+=M5W2
+-----END PGP SIGNATURE-----
 
-You can just change as you want. We have this file in buildroot, uuu
-can run command on the device
-using FB command. Example how call it
-
-${OUTPUT_DIR}/host/bin/uuu -v -b ${IMAGES_DIR}/nand-full.lst \
-  ${IMAGES_DIR}/flash.bin \
-  ${IMAGES_DIR}/flash.bin \
-  ${IMAGES_DIR}/rootfs.ubifs \
-  ${IMAGES_DIR}/Image \
-  ${IMAGES_DIR}/freescale/imx8mn-bsh-smm-s2.dtb
-
-
-Michael
-
->
-> Thanks
-
-
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+--------------J0qL49jtODtA00Jk7qbc5kSq--
