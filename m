@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51DCCC25B4F
-	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 05:52:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03399C25B10
+	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 05:52:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7A45886E9;
-	Fri, 10 May 2024 07:52:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 10C80887A4;
+	Fri, 10 May 2024 07:52:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="BUm7+slT";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="mBh/UCnu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7AD3F884D3; Fri, 10 May 2024 07:52:44 +0200 (CEST)
+ id A941188577; Fri, 10 May 2024 07:52:45 +0200 (CEST)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 818FA88176
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 07:52:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C6B23884AE
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 07:52:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -30,18 +30,19 @@ Received: from LT2ubnt.. (unknown [149.11.192.251])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id DF6293F5F5; 
- Fri, 10 May 2024 05:52:37 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 55FFA3FE0A; 
+ Fri, 10 May 2024 05:52:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
  s=20210705; t=1715320359;
- bh=zh6WMM92elAqNvp9bqFUEep5IY/JDp5dyzrmsdixLhs=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=BUm7+slT/B3MhAXh/iJX1kUd2i0rHuRcwp+Zk6e+m+4wcO1F282MJHn5rBRWRrWEV
- lM50rcrG7i6Rzl4upa31Rrm9vA8W7iOU6ll3ygWvWaEefVKk4akw+soPo2x3bFrK//
- /HwyQ7XxJm//Grx8/BkaculFiitgarYVjp2pwUjpByTEiqoU85aNvbGioYBAvZbu7y
- 2h7zohvYPzQfMq7SHTksLBzFbQK9QW9OhnzgYOCx/HGj6mXsYnCYKCQCLQpmmSMpPs
- xP20ygXWV8oeief7V9Ctb8UToIb+Sm6U2a810ihqlZzQ1PHqXkiToz/Kd8EizNDQ72
- NeyU4yg1w+Gxw==
+ bh=cjmslehnP5/Oa3VzcSEtcdpsEIt0v3psT/YV11dRHyQ=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=mBh/UCnuS3d+AU/91xV4ZgsoZoqn+C+s/WHPSRy+l6LW0xCDqJCw+4Yuvrn4SnTN2
+ j9fHOcU8CP9Qiy1OeLyMPnBKgWjxVrVeDoXVYb2EAlICsZBPNGXwtjawB7Nlbc8bnK
+ TBxVrAW4/W3oD9CCp4snwxMC4JSEISTzehbxp1IindiXeerLSjCjdbPKJGK5fTuC0V
+ mwr9d3czzD0qturO7W1wRrjp+IYv7PsJUWiaWfmeAzecqqxUeiEge+W+/+e8S2oJCg
+ 4nCGoytuBvmxKnnArpCPPp602Ktejv4VjAl1T5TfOv076bHrgyrPk94+oYn8a/Ag//
+ 5J/kUpw9d0h8g==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Minda Chen <minda.chen@starfivetech.com>,
  Hal Feng <hal.feng@starfivetech.com>, Rick Chen <rick@andestech.com>,
@@ -55,10 +56,12 @@ Cc: Aurelien Jarno <aurelien@aurel32.net>,
  Mason Huo <mason.huo@starfivetech.com>, E Shattow <lucent@gmail.com>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v4 0/5] board: starfive: add Milk-V Mars CM support
-Date: Fri, 10 May 2024 07:52:16 +0200
-Message-ID: <20240510055223.11617-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v4 1/5] board: starfive: function to read eMMC size
+Date: Fri, 10 May 2024 07:52:17 +0200
+Message-ID: <20240510055223.11617-2-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240510055223.11617-1-heinrich.schuchardt@canonical.com>
+References: <20240510055223.11617-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -77,49 +80,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With this series the Milk-V Mars CM board can be booted.
+The EEPROM provides information about the size of the eMMC.
+Provide a new function get_mmc_size_from_eeprom() to read it.
 
-NVMe, SD-card, Ethernet, UART are working but not USB.
-
-The first series Milk-V Mars CM Lite board (the version without eMMC)
-uses incorrect series numbers indicating eMMC presence. For these
-CONFIG_STARFIVE_NO_EMMC=y must be set to indicate that eMMC is not
-present.
-
-Thanks to E. Shattow for all the helpful discussions.
-He figured out what needed to be patched in the device-tree.
-
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Reviewed-by: E. Shattow <lucent@gmail.com>
+---
 v4:
-	Documentation fixes
+	no change
 v3:
-	Add mac vendor sub-command
-	Documentation fixes
+	no change
 v2:
 	fix typos in get_mmc_size_from_eeprom() description
-	rename spl_fdt_fixup_marc() to spl_fdt_fixup_mars_cm()
-	rename device-trees for Mars CM and Mars CM Lite
-	change model and compatible properties
-	refer to tio as tool for booting via UART
-	describe how to update serial number
+---
+ arch/riscv/include/asm/arch-jh7110/eeprom.h    |  7 +++++++
+ board/starfive/visionfive2/Kconfig             |  9 +++++++++
+ .../visionfive2/visionfive2-i2c-eeprom.c       | 18 ++++++++++++++++++
+ 3 files changed, 34 insertions(+)
 
-Heinrich Schuchardt (5):
-  board: starfive: function to read eMMC size
-  board: add support for Milk-V Mars CM
-  doc: Milk-V Mars CM and Milk-V Mars CM Lite
-  configs: visionfive2: enable SPL_YMODEM_SUPPORT
-  starfive: add mac vendor sub-command
-
- arch/riscv/include/asm/arch-jh7110/eeprom.h   |   7 +
- board/starfive/visionfive2/Kconfig            |   9 +
- board/starfive/visionfive2/spl.c              |  28 ++-
- .../visionfive2/starfive_visionfive2.c        |  11 +-
- .../visionfive2/visionfive2-i2c-eeprom.c      |  43 +++-
- configs/starfive_visionfive2_defconfig        |   1 +
- doc/board/starfive/index.rst                  |   1 +
- doc/board/starfive/milk-v_mars_cm.rst         | 193 ++++++++++++++++++
- 8 files changed, 290 insertions(+), 3 deletions(-)
- create mode 100644 doc/board/starfive/milk-v_mars_cm.rst
-
+diff --git a/arch/riscv/include/asm/arch-jh7110/eeprom.h b/arch/riscv/include/asm/arch-jh7110/eeprom.h
+index 62d184aeb57..45ad2a5f7bc 100644
+--- a/arch/riscv/include/asm/arch-jh7110/eeprom.h
++++ b/arch/riscv/include/asm/arch-jh7110/eeprom.h
+@@ -12,6 +12,13 @@
+ u8 get_pcb_revision_from_eeprom(void);
+ u32 get_ddr_size_from_eeprom(void);
+ 
++/**
++ * get_mmc_size_from_eeprom() - read eMMC size from EEPROM
++ *
++ * @return: size in GiB or 0 on error.
++ */
++u32 get_mmc_size_from_eeprom(void);
++
+ /**
+  * get_product_id_from_eeprom - get product ID string
+  *
+diff --git a/board/starfive/visionfive2/Kconfig b/board/starfive/visionfive2/Kconfig
+index 2186a939646..d7e8a7a7d78 100644
+--- a/board/starfive/visionfive2/Kconfig
++++ b/board/starfive/visionfive2/Kconfig
+@@ -50,4 +50,13 @@ config BOARD_SPECIFIC_OPTIONS # dummy
+ 	imply PHY_LIB
+ 	imply PHY_MSCC
+ 
++config STARFIVE_NO_EMMC
++	bool "Report eMMC size as zero"
++	help
++	  The serial number string in the EEPROM is meant to report the
++	  size of onboard eMMC. Unfortunately some Milk-V Mars CM Lite
++	  modules without eMMC show a non-zero size here.
++
++	  Set to 'Y' if you have a Mars CM Lite module.
++
+ endif
+diff --git a/board/starfive/visionfive2/visionfive2-i2c-eeprom.c b/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
+index 5095a0e9fdb..9648a270494 100644
+--- a/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
++++ b/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
+@@ -548,6 +548,24 @@ u32 get_ddr_size_from_eeprom(void)
+ 	return hextoul(&pbuf.eeprom.atom1.data.pstr[14], NULL);
+ }
+ 
++u32 get_mmc_size_from_eeprom(void)
++{
++	u32 size;
++
++	if (IS_ENABLED(CONFIG_STARFIVE_NO_EMMC))
++		return 0;
++
++	if (read_eeprom())
++		return 0;
++
++	size = dectoul(&pbuf.eeprom.atom1.data.pstr[19], NULL);
++
++	if (pbuf.eeprom.atom1.data.pstr[21] == 'T')
++		size <<= 10;
++
++	return size;
++}
++
+ U_BOOT_LONGHELP(mac,
+ 	"\n"
+ 	"    - display EEPROM content\n"
 -- 
 2.43.0
 
