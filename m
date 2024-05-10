@@ -4,58 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8E26C25B74
-	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 00:43:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24E32C10F1A
+	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 00:43:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 365128860C;
-	Fri, 10 May 2024 02:43:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A70EC88633;
+	Fri, 10 May 2024 02:43:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="UwrP4gSg";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="BHjs91vB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 113958860C; Fri, 10 May 2024 02:43:11 +0200 (CEST)
-Received: from mail-m12826.netease.com (mail-m12826.netease.com
- [103.209.128.26])
+ id F0C2B8884F; Fri, 10 May 2024 02:43:40 +0200 (CEST)
+Received: from mail-m1033.netease.com (mail-m1033.netease.com [154.81.10.33])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95DD78804F
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 02:43:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4DCC28804F
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 02:43:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=UwrP4gSgd8oadSujIuxDy0pBoDkS5F6YPzrMLxUHbuWGpRitlWvu5DNQJVUhETXZXVrqwbxPYxWMzEQeE1dxjZcqn1zmPQ8ChRkwxGf+xpnMYgtke1a7RqUweUqXTAKreEP/iMRNYoiodp5a/17/b24jYYgSABgl1GEDHjy754U=;
+ b=BHjs91vBTtKNCRemhyy0DiAVOOcp5ZXqTp/k+crFuCgCVQm1hR29E+IhcYo8cToQGT1KMEhZQ0bDUnFNRevByh7wI78h7i66dGkk/7loRDgru76kWAucwNVBM/guCDIwpqRoJsyrun5TGVla8o3Sjs834fauqmpu6U8RLGvGKnc=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=iZqCosjyXfLXt+WqpfxHqm6NSHvEDX67hSNmSfhPmTU=;
+ bh=+Tc+A89mON9NnY7vdCQJ/36PJOTJu5oGE5iI69bdzFQ=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id D2B219001AB;
- Fri, 10 May 2024 08:43:02 +0800 (CST)
-Message-ID: <96f97460-2b4e-4911-bdca-a0adf186c700@rock-chips.com>
-Date: Fri, 10 May 2024 08:43:02 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 88F2E90018C;
+ Fri, 10 May 2024 08:43:33 +0800 (CST)
+Message-ID: <d4674ac2-593f-48fc-a16f-cd62a53e770e@rock-chips.com>
+Date: Fri, 10 May 2024 08:43:33 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 52/81] power: Remove <common.h> and add needed includes
+Subject: Re: [PATCH 54/81] ram: Remove <common.h> and add needed includes
 To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 References: <20240502013138.2383421-1-trini@konsulko.com>
- <20240502013138.2383421-52-trini@konsulko.com>
+ <20240502013138.2383421-54-trini@konsulko.com>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240502013138.2383421-52-trini@konsulko.com>
+In-Reply-To: <20240502013138.2383421-54-trini@konsulko.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0IZQlYZGhodGU0eSRkdSh1VEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGkwdTlYdSB8eH0ofGRkdTBlVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8f5ff415b703a9kunmd2b219001ab
+X-HM-Tid: 0a8f5ff48e1203a9kunm88f2e90018c
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MQw6FRw5HjNLLgIUCSkYEBcd
- HDRPCzZVSlVKTEpOSEtKTENITUpOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOSkJITDcG
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PQg6Fgw*SDMMSQIDGSoWFys2
+ GgkwCjZVSlVKTEpOSEtKQ0pPSEJOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJSk9NTDcG
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,951 +82,415 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
-> Cc: Jaehoon Chung <jh80.chung@samsung.com>
+> Cc: Ryan Chen <ryan_chen@aspeedtech.com>
+> Cc: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
+> Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>
+> Cc: Joel Stanley <joel@jms.id.au>
 > Cc: Tom Rini <trini@konsulko.com>
-> Cc: Neil Armstrong <neil.armstrong@linaro.org>
 > Cc: Ryder Lee <ryder.lee@mediatek.com>
 > Cc: Weijie Gao <weijie.gao@mediatek.com>
 > Cc: Chunfeng Yun <chunfeng.yun@mediatek.com>
 > Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-> Cc: Michal Simek <michal.simek@amd.com>
-> Cc: Stephan Gerhold <stephan@gerhold.net>
-> Cc: Linus Walleij <linus.walleij@linaro.org>
-> Cc: Caleb Connolly <caleb.connolly@linaro.org>
-> Cc: Sumit Garg <sumit.garg@linaro.org>
+> Cc: Mario Six <mario.six@gdsys.cc>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
+> Cc: Kever Yang <kever.yang@rock-chips.com>
 > Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Peng Fan <peng.fan@nxp.com>
-> Cc: Stefano Babic <sbabic@denx.de>
-> Cc: Fabio Estevam <festevam@denx.de>
-> Cc: Marek Vasut <marex@denx.de>
-> Cc: Sean Anderson <seanga2@gmail.com>
-> Cc: Bryan Brattlof <bb@ti.com>
-> Cc: Nishanth Menon <nm@ti.com>
-> Cc: Neha Malcom Francis <n-francis@ti.com>
-> Cc: Igor Opaniuk <igor.opaniuk@foundries.io>
-> Cc: Roger Quadros <rogerq@kernel.org>
-> Cc: Apurva Nandan <a-nandan@ti.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Svyatoslav Ryhel <clamor95@gmail.com>
-> Cc: Kever Yang <kever.yang@rock-chips.com>
-> Cc: Jonas Karlman <jonas@kwiboo.se>
-> Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-> Cc: Bhargav Raviprakash <bhargav.r@ltts.com>
-> Cc: Udit Kumar <u-kumar1@ti.com>
-> Cc: Dhruva Gole <d-gole@ti.com>
-> Cc: Eugen Hristev <eugen.hristev@collabora.com>
-> Cc: Joseph Chen <chenjh@rock-chips.com>
-> Cc: shengfei Xu <xsf@rock-chips.com>
-> Cc: William Wu <william.wu@rock-chips.com>
-> Cc: AKASHI Takahiro <akashi.tkhro@gmail.com>
-> Cc: Etienne Carriere <etienne.carriere@foss.st.com>
+> Cc: Ralph Siemsen <ralph.siemsen@linaro.org>
+> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> Cc: Leo Yu-Chi Liang <ycliang@andestech.com>
+> Cc: Yanhong Wang <yanhong.wang@starfivetech.com>
+> Cc: Andre Przywara <andre.przywara@arm.com>
 > ---
->   drivers/power/acpi_pmc/acpi-pmc-uclass.c         | 1 -
->   drivers/power/acpi_pmc/pmc_emul.c                | 1 -
->   drivers/power/acpi_pmc/sandbox.c                 | 1 -
->   drivers/power/axp152.c                           | 2 +-
->   drivers/power/axp209.c                           | 2 +-
->   drivers/power/axp221.c                           | 1 -
->   drivers/power/axp305.c                           | 1 -
->   drivers/power/axp313.c                           | 1 -
->   drivers/power/axp809.c                           | 1 -
->   drivers/power/axp818.c                           | 1 -
->   drivers/power/domain/apple-pmgr.c                | 1 -
->   drivers/power/domain/bcm6328-power-domain.c      | 1 -
->   drivers/power/domain/imx8-power-domain-legacy.c  | 1 -
->   drivers/power/domain/imx8-power-domain.c         | 1 -
->   drivers/power/domain/imx8m-power-domain.c        | 1 -
->   drivers/power/domain/imx8mp-hsiomix.c            | 1 -
->   drivers/power/domain/meson-ee-pwrc.c             | 1 -
->   drivers/power/domain/meson-gx-pwrc-vpu.c         | 1 -
->   drivers/power/domain/mtk-power-domain.c          | 1 -
->   drivers/power/domain/power-domain-uclass.c       | 1 -
->   drivers/power/domain/sandbox-power-domain-test.c | 1 -
->   drivers/power/domain/sandbox-power-domain.c      | 1 -
->   drivers/power/domain/tegra186-power-domain.c     | 1 -
->   drivers/power/domain/ti-power-domain.c           | 1 -
->   drivers/power/domain/ti-sci-power-domain.c       | 1 -
->   drivers/power/domain/zynqmp-power-domain.c       | 1 -
->   drivers/power/exynos-tmu.c                       | 3 ++-
->   drivers/power/mt6323.c                           | 1 -
->   drivers/power/pmic/ab8500.c                      | 1 -
->   drivers/power/pmic/act8846.c                     | 1 -
->   drivers/power/pmic/as3722.c                      | 1 -
->   drivers/power/pmic/as3722_gpio.c                 | 1 -
->   drivers/power/pmic/bd71837.c                     | 1 -
->   drivers/power/pmic/da9063.c                      | 1 -
->   drivers/power/pmic/fan53555.c                    | 1 -
->   drivers/power/pmic/i2c_pmic_emul.c               | 1 -
->   drivers/power/pmic/lp873x.c                      | 1 -
->   drivers/power/pmic/lp87565.c                     | 1 -
->   drivers/power/pmic/max77686.c                    | 1 -
->   drivers/power/pmic/max8997.c                     | 1 -
->   drivers/power/pmic/max8998.c                     | 1 -
->   drivers/power/pmic/mc34708.c                     | 1 -
->   drivers/power/pmic/mp5416.c                      | 1 -
->   drivers/power/pmic/palmas.c                      | 1 -
->   drivers/power/pmic/pca9450.c                     | 1 -
->   drivers/power/pmic/pfuze100.c                    | 1 -
->   drivers/power/pmic/pmic-uclass.c                 | 1 -
->   drivers/power/pmic/pmic_hi6553.c                 | 1 -
->   drivers/power/pmic/pmic_ltc3676.c                | 1 -
->   drivers/power/pmic/pmic_mc34vr500.c              | 1 -
->   drivers/power/pmic/pmic_pca9450.c                | 1 -
->   drivers/power/pmic/pmic_pfuze100.c               | 1 -
->   drivers/power/pmic/pmic_pfuze3000.c              | 1 -
->   drivers/power/pmic/pmic_qcom.c                   | 1 -
->   drivers/power/pmic/pmic_tps62362.c               | 1 -
->   drivers/power/pmic/pmic_tps65217.c               | 1 -
->   drivers/power/pmic/pmic_tps65218.c               | 1 -
->   drivers/power/pmic/pmic_tps65910.c               | 1 -
->   drivers/power/pmic/pmic_tps65910_dm.c            | 1 -
->   drivers/power/pmic/rk8xx.c                       | 1 -
->   drivers/power/pmic/rn5t567.c                     | 1 -
->   drivers/power/pmic/s2mps11.c                     | 1 -
->   drivers/power/pmic/s5m8767.c                     | 1 -
->   drivers/power/pmic/sandbox.c                     | 1 -
->   drivers/power/pmic/stpmic1.c                     | 1 -
->   drivers/power/pmic/tps65090.c                    | 1 -
->   drivers/power/pmic/tps65219.c                    | 1 -
->   drivers/power/pmic/tps65941.c                    | 1 -
->   drivers/power/power_core.c                       | 1 -
->   drivers/power/power_dialog.c                     | 2 +-
->   drivers/power/power_fsl.c                        | 2 +-
->   drivers/power/power_i2c.c                        | 1 -
->   drivers/power/power_spi.c                        | 1 -
->   drivers/power/regulator/act8846.c                | 1 -
->   drivers/power/regulator/anatop_regulator.c       | 1 -
->   drivers/power/regulator/as3722_regulator.c       | 1 -
->   drivers/power/regulator/bd71837.c                | 1 -
->   drivers/power/regulator/da9063.c                 | 1 -
->   drivers/power/regulator/fan53555.c               | 1 -
->   drivers/power/regulator/fixed.c                  | 1 -
->   drivers/power/regulator/gpio-regulator.c         | 1 -
->   drivers/power/regulator/lp873x_regulator.c       | 1 -
->   drivers/power/regulator/lp87565_regulator.c      | 1 -
->   drivers/power/regulator/max77686.c               | 1 -
->   drivers/power/regulator/npcm8xx_regulator.c      | 1 -
->   drivers/power/regulator/palmas_regulator.c       | 1 -
->   drivers/power/regulator/pbias_regulator.c        | 1 -
->   drivers/power/regulator/pca9450.c                | 1 -
->   drivers/power/regulator/pfuze100.c               | 1 -
->   drivers/power/regulator/pwm_regulator.c          | 1 -
->   drivers/power/regulator/regulator-uclass.c       | 1 -
->   drivers/power/regulator/regulator_common.c       | 1 -
->   drivers/power/regulator/rk8xx.c                  | 1 -
->   drivers/power/regulator/s2mps11_regulator.c      | 1 -
->   drivers/power/regulator/s5m8767.c                | 1 -
->   drivers/power/regulator/sandbox.c                | 1 -
->   drivers/power/regulator/scmi_regulator.c         | 1 -
->   drivers/power/regulator/stm32-vrefbuf.c          | 1 -
->   drivers/power/regulator/stpmic1.c                | 1 -
->   drivers/power/regulator/tps62360_regulator.c     | 1 -
->   drivers/power/regulator/tps65090_regulator.c     | 2 +-
->   drivers/power/regulator/tps65219_regulator.c     | 1 -
->   drivers/power/regulator/tps65910_regulator.c     | 1 -
->   drivers/power/regulator/tps65941_regulator.c     | 1 -
->   drivers/power/sy8106a.c                          | 1 -
->   drivers/power/tps6586x.c                         | 2 +-
->   106 files changed, 8 insertions(+), 106 deletions(-)
+>   drivers/ram/aspeed/sdram_ast2500.c          | 2 +-
+>   drivers/ram/aspeed/sdram_ast2600.c          | 2 +-
+>   drivers/ram/bmips_ram.c                     | 1 -
+>   drivers/ram/cadence/ddr_ctrl.c              | 1 -
+>   drivers/ram/imxrt_sdram.c                   | 1 -
+>   drivers/ram/k3-am654-ddrss.c                | 1 -
+>   drivers/ram/k3-ddrss/k3-ddrss.c             | 1 -
+>   drivers/ram/mediatek/ddr3-mt7629.c          | 2 +-
+>   drivers/ram/mpc83xx_sdram.c                 | 1 -
+>   drivers/ram/ram-uclass.c                    | 1 -
+>   drivers/ram/renesas/rzn1/ddr_async.c        | 1 -
+>   drivers/ram/rockchip/dmc-rk3368.c           | 2 +-
+>   drivers/ram/rockchip/sdram_common.c         | 2 +-
+>   drivers/ram/rockchip/sdram_pctl_px30.c      | 1 -
+>   drivers/ram/rockchip/sdram_phy_px30.c       | 1 -
+>   drivers/ram/rockchip/sdram_px30.c           | 2 +-
+>   drivers/ram/rockchip/sdram_rk3066.c         | 2 +-
+>   drivers/ram/rockchip/sdram_rk3128.c         | 2 +-
+>   drivers/ram/rockchip/sdram_rk3188.c         | 2 +-
+>   drivers/ram/rockchip/sdram_rk322x.c         | 2 +-
+>   drivers/ram/rockchip/sdram_rk3288.c         | 2 +-
+>   drivers/ram/rockchip/sdram_rk3308.c         | 2 +-
+>   drivers/ram/rockchip/sdram_rk3328.c         | 2 +-
+>   drivers/ram/rockchip/sdram_rk3399.c         | 2 +-
+>   drivers/ram/rockchip/sdram_rk3568.c         | 2 +-
+>   drivers/ram/rockchip/sdram_rk3588.c         | 2 +-
+>   drivers/ram/rockchip/sdram_rv1126.c         | 2 +-
+>   drivers/ram/sandbox_ram.c                   | 1 -
+>   drivers/ram/sifive/sifive_ddr.c             | 1 -
+>   drivers/ram/starfive/ddrcsr_boot.c          | 1 -
+>   drivers/ram/starfive/ddrphy_start.c         | 1 -
+>   drivers/ram/starfive/ddrphy_train.c         | 2 +-
+>   drivers/ram/starfive/ddrphy_utils.c         | 2 +-
+>   drivers/ram/starfive/starfive_ddr.c         | 1 -
+>   drivers/ram/starfive/starfive_ddr.h         | 2 ++
+>   drivers/ram/stm32_sdram.c                   | 1 -
+>   drivers/ram/stm32mp1/stm32mp1_ddr.c         | 1 -
+>   drivers/ram/stm32mp1/stm32mp1_interactive.c | 1 -
+>   drivers/ram/stm32mp1/stm32mp1_ram.c         | 1 -
+>   drivers/ram/stm32mp1/stm32mp1_tests.c       | 1 -
+>   drivers/ram/sunxi/dram_sun20i_d1.c          | 2 +-
+>   41 files changed, 22 insertions(+), 40 deletions(-)
 >
-> diff --git a/drivers/power/acpi_pmc/acpi-pmc-uclass.c b/drivers/power/acpi_pmc/acpi-pmc-uclass.c
-> index 34446a34e60d..c289cede15b8 100644
-> --- a/drivers/power/acpi_pmc/acpi-pmc-uclass.c
-> +++ b/drivers/power/acpi_pmc/acpi-pmc-uclass.c
-> @@ -5,7 +5,6 @@
->   
->   #define LOG_CATEGORY UCLASS_ACPI_PMC
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <log.h>
->   #include <spl.h>
-> diff --git a/drivers/power/acpi_pmc/pmc_emul.c b/drivers/power/acpi_pmc/pmc_emul.c
-> index 8015031da859..8eff3d9fa7ac 100644
-> --- a/drivers/power/acpi_pmc/pmc_emul.c
-> +++ b/drivers/power/acpi_pmc/pmc_emul.c
-> @@ -6,7 +6,6 @@
->    * Written by Simon Glass <sjg@chromium.org>
+> diff --git a/drivers/ram/aspeed/sdram_ast2500.c b/drivers/ram/aspeed/sdram_ast2500.c
+> index dc466a88e712..0d6ab79f96fc 100644
+> --- a/drivers/ram/aspeed/sdram_ast2500.c
+> +++ b/drivers/ram/aspeed/sdram_ast2500.c
+> @@ -5,7 +5,7 @@
+>    * Copyright 2016 Google, Inc
 >    */
 >   
 > -#include <common.h>
->   #include <dm.h>
->   #include <log.h>
->   #include <pci.h>
-> diff --git a/drivers/power/acpi_pmc/sandbox.c b/drivers/power/acpi_pmc/sandbox.c
-> index 8cf03f737c08..ed1bb1980931 100644
-> --- a/drivers/power/acpi_pmc/sandbox.c
-> +++ b/drivers/power/acpi_pmc/sandbox.c
-> @@ -7,7 +7,6 @@
->   
->   #define LOG_CATEGORY UCLASS_ACPI_PMC
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <log.h>
->   #include <asm/io.h>
-> diff --git a/drivers/power/axp152.c b/drivers/power/axp152.c
-> index a93987c15382..5a62382ab86e 100644
-> --- a/drivers/power/axp152.c
-> +++ b/drivers/power/axp152.c
-> @@ -3,8 +3,8 @@
->    * (C) Copyright 2012
->    * Henrik Nordstrom <henrik@henriknordstrom.net>
->    */
-> -#include <common.h>
->   #include <command.h>
-> +#include <linux/errno.h>
->   #include <asm/arch/pmic_bus.h>
->   #include <axp_pmic.h>
->   
-> diff --git a/drivers/power/axp209.c b/drivers/power/axp209.c
-> index 3447b9f0113a..6ae416982ebe 100644
-> --- a/drivers/power/axp209.c
-> +++ b/drivers/power/axp209.c
-> @@ -4,11 +4,11 @@
->    * Henrik Nordstrom <henrik@henriknordstrom.net>
->    */
->   
-> -#include <common.h>
->   #include <command.h>
->   #include <asm/arch/pmic_bus.h>
->   #include <axp_pmic.h>
->   #include <linux/delay.h>
-> +#include <linux/errno.h>
->   
->   #ifdef CONFIG_AXP_ALDO3_VOLT_SLOPE_08
->   #  define AXP209_VRC_SLOPE AXP209_VRC_LDO3_800uV_uS
-> diff --git a/drivers/power/axp221.c b/drivers/power/axp221.c
-> index d251c314b987..c22ca03f4694 100644
-> --- a/drivers/power/axp221.c
-> +++ b/drivers/power/axp221.c
-> @@ -9,7 +9,6 @@
->    * (C) Copyright 2013 Oliver Schinagl <oliver@schinagl.nl>
->    */
->   
-> -#include <common.h>
->   #include <command.h>
->   #include <errno.h>
->   #include <asm/arch/pmic_bus.h>
-> diff --git a/drivers/power/axp305.c b/drivers/power/axp305.c
-> index 049ef07f7467..0312ad9af763 100644
-> --- a/drivers/power/axp305.c
-> +++ b/drivers/power/axp305.c
-> @@ -9,7 +9,6 @@
->    * (C) Copyright 2013 Oliver Schinagl <oliver@schinagl.nl>
->    */
->   
-> -#include <common.h>
->   #include <command.h>
->   #include <errno.h>
->   #include <asm/arch/pmic_bus.h>
-> diff --git a/drivers/power/axp313.c b/drivers/power/axp313.c
-> index bbc9e911115f..09ecb5b1ec28 100644
-> --- a/drivers/power/axp313.c
-> +++ b/drivers/power/axp313.c
-> @@ -10,7 +10,6 @@
->    * (C) Copyright 2013 Oliver Schinagl <oliver@schinagl.nl>
->    */
->   
-> -#include <common.h>
->   #include <command.h>
->   #include <errno.h>
->   #include <asm/arch/pmic_bus.h>
-> diff --git a/drivers/power/axp809.c b/drivers/power/axp809.c
-> index d327a584ded0..9e38e1a74508 100644
-> --- a/drivers/power/axp809.c
-> +++ b/drivers/power/axp809.c
-> @@ -10,7 +10,6 @@
->    * (C) Copyright 2013 Oliver Schinagl <oliver@schinagl.nl>
->    */
->   
-> -#include <common.h>
->   #include <command.h>
->   #include <errno.h>
->   #include <asm/arch/pmic_bus.h>
-> diff --git a/drivers/power/axp818.c b/drivers/power/axp818.c
-> index 08286ea3b550..83ae6ecc138d 100644
-> --- a/drivers/power/axp818.c
-> +++ b/drivers/power/axp818.c
-> @@ -10,7 +10,6 @@
->    * (C) Copyright 2013 Oliver Schinagl <oliver@schinagl.nl>
->    */
->   
-> -#include <common.h>
->   #include <command.h>
->   #include <errno.h>
->   #include <asm/arch/pmic_bus.h>
-> diff --git a/drivers/power/domain/apple-pmgr.c b/drivers/power/domain/apple-pmgr.c
-> index 402c5b1fd188..bf9940621ee7 100644
-> --- a/drivers/power/domain/apple-pmgr.c
-> +++ b/drivers/power/domain/apple-pmgr.c
-> @@ -3,7 +3,6 @@
->    * Copyright (C) 2021 Mark Kettenis <kettenis@openbsd.org>
->    */
->   
-> -#include <common.h>
->   #include <asm/io.h>
->   #include <dm.h>
->   #include <dm/device-internal.h>
-> diff --git a/drivers/power/domain/bcm6328-power-domain.c b/drivers/power/domain/bcm6328-power-domain.c
-> index 80144dd97725..36b5a9337480 100644
-> --- a/drivers/power/domain/bcm6328-power-domain.c
-> +++ b/drivers/power/domain/bcm6328-power-domain.c
-> @@ -3,7 +3,6 @@
->    * Copyright (C) 2017 Álvaro Fernández Rojas <noltari@gmail.com>
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <malloc.h>
->   #include <power-domain-uclass.h>
-> diff --git a/drivers/power/domain/imx8-power-domain-legacy.c b/drivers/power/domain/imx8-power-domain-legacy.c
-> index c8ca2665752f..713a51d7807d 100644
-> --- a/drivers/power/domain/imx8-power-domain-legacy.c
-> +++ b/drivers/power/domain/imx8-power-domain-legacy.c
-> @@ -3,7 +3,6 @@
->    * Copyright 2017 NXP
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <log.h>
->   #include <malloc.h>
-> diff --git a/drivers/power/domain/imx8-power-domain.c b/drivers/power/domain/imx8-power-domain.c
-> index b45e468756bf..e8dcc057fee0 100644
-> --- a/drivers/power/domain/imx8-power-domain.c
-> +++ b/drivers/power/domain/imx8-power-domain.c
-> @@ -4,7 +4,6 @@
->    */
->   
->   #define DEBUG
-> -#include <common.h>
->   #include <dm.h>
->   #include <log.h>
->   #include <malloc.h>
-> diff --git a/drivers/power/domain/imx8m-power-domain.c b/drivers/power/domain/imx8m-power-domain.c
-> index df5d7d695621..8b6870c86463 100644
-> --- a/drivers/power/domain/imx8m-power-domain.c
-> +++ b/drivers/power/domain/imx8m-power-domain.c
-> @@ -3,7 +3,6 @@
->    * Copyright 2017 NXP
->    */
->   
-> -#include <common.h>
+> +#include <config.h>
 >   #include <clk.h>
 >   #include <dm.h>
->   #include <malloc.h>
-> diff --git a/drivers/power/domain/imx8mp-hsiomix.c b/drivers/power/domain/imx8mp-hsiomix.c
-> index 6188a04c45ed..455ad53ef525 100644
-> --- a/drivers/power/domain/imx8mp-hsiomix.c
-> +++ b/drivers/power/domain/imx8mp-hsiomix.c
-> @@ -3,7 +3,6 @@
->    * Copyright (C) 2022 Marek Vasut <marex@denx.de>
->    */
->   
-> -#include <common.h>
->   #include <asm/io.h>
->   #include <clk.h>
->   #include <clk-uclass.h>
-> diff --git a/drivers/power/domain/meson-ee-pwrc.c b/drivers/power/domain/meson-ee-pwrc.c
-> index 676fded8080a..20e9f32b3819 100644
-> --- a/drivers/power/domain/meson-ee-pwrc.c
-> +++ b/drivers/power/domain/meson-ee-pwrc.c
-> @@ -4,7 +4,6 @@
->    * Author: Neil Armstrong <narmstrong@baylibre.com>
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <log.h>
->   #include <malloc.h>
-> diff --git a/drivers/power/domain/meson-gx-pwrc-vpu.c b/drivers/power/domain/meson-gx-pwrc-vpu.c
-> index 612660ce89f9..1c56e8508c32 100644
-> --- a/drivers/power/domain/meson-gx-pwrc-vpu.c
-> +++ b/drivers/power/domain/meson-gx-pwrc-vpu.c
-> @@ -6,7 +6,6 @@
->    * Author: Neil Armstrong <narmstrong@baylibre.com>
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <log.h>
->   #include <malloc.h>
-> diff --git a/drivers/power/domain/mtk-power-domain.c b/drivers/power/domain/mtk-power-domain.c
-> index 3b84147d4814..2d1ba1855a5b 100644
-> --- a/drivers/power/domain/mtk-power-domain.c
-> +++ b/drivers/power/domain/mtk-power-domain.c
-> @@ -5,7 +5,6 @@
->    */
->   
->   #include <clk.h>
-> -#include <common.h>
->   #include <dm.h>
->   #include <malloc.h>
->   #include <power-domain-uclass.h>
-> diff --git a/drivers/power/domain/power-domain-uclass.c b/drivers/power/domain/power-domain-uclass.c
-> index f6286c70c1d7..938bd8cbc9ff 100644
-> --- a/drivers/power/domain/power-domain-uclass.c
-> +++ b/drivers/power/domain/power-domain-uclass.c
-> @@ -5,7 +5,6 @@
->   
->   #define LOG_CATEGORY UCLASS_POWER_DOMAIN
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <log.h>
->   #include <malloc.h>
-> diff --git a/drivers/power/domain/sandbox-power-domain-test.c b/drivers/power/domain/sandbox-power-domain-test.c
-> index 1bf52f1d861c..08c15ef342b3 100644
-> --- a/drivers/power/domain/sandbox-power-domain-test.c
-> +++ b/drivers/power/domain/sandbox-power-domain-test.c
-> @@ -3,7 +3,6 @@
->    * Copyright (c) 2016, NVIDIA CORPORATION.
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <malloc.h>
->   #include <power-domain.h>
-> diff --git a/drivers/power/domain/sandbox-power-domain.c b/drivers/power/domain/sandbox-power-domain.c
-> index 04a071044f3b..9dd490b14a3f 100644
-> --- a/drivers/power/domain/sandbox-power-domain.c
-> +++ b/drivers/power/domain/sandbox-power-domain.c
-> @@ -3,7 +3,6 @@
->    * Copyright (c) 2016, NVIDIA CORPORATION.
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <log.h>
->   #include <malloc.h>
-> diff --git a/drivers/power/domain/tegra186-power-domain.c b/drivers/power/domain/tegra186-power-domain.c
-> index 46da541b75a8..334c460c805f 100644
-> --- a/drivers/power/domain/tegra186-power-domain.c
-> +++ b/drivers/power/domain/tegra186-power-domain.c
-> @@ -3,7 +3,6 @@
->    * Copyright (c) 2016, NVIDIA CORPORATION.
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <log.h>
->   #include <malloc.h>
-> diff --git a/drivers/power/domain/ti-power-domain.c b/drivers/power/domain/ti-power-domain.c
-> index 8996c40ddc03..b059dd37376d 100644
-> --- a/drivers/power/domain/ti-power-domain.c
-> +++ b/drivers/power/domain/ti-power-domain.c
-> @@ -7,7 +7,6 @@
->    */
->   
->   #include <asm/io.h>
-> -#include <common.h>
->   #include <dm.h>
 >   #include <errno.h>
->   #include <power-domain-uclass.h>
-> diff --git a/drivers/power/domain/ti-sci-power-domain.c b/drivers/power/domain/ti-sci-power-domain.c
-> index 8d6abe13dbc6..0a9f498b97b1 100644
-> --- a/drivers/power/domain/ti-sci-power-domain.c
-> +++ b/drivers/power/domain/ti-sci-power-domain.c
-> @@ -8,7 +8,6 @@
->    * Loosely based on Linux kernel ti_sci_pm_domains.c...
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <errno.h>
->   #include <log.h>
-> diff --git a/drivers/power/domain/zynqmp-power-domain.c b/drivers/power/domain/zynqmp-power-domain.c
-> index 5ee9e020fb3b..ac93934eb420 100644
-> --- a/drivers/power/domain/zynqmp-power-domain.c
-> +++ b/drivers/power/domain/zynqmp-power-domain.c
-> @@ -3,7 +3,6 @@
->    * Copyright (c) 2021, Xilinx. Inc.
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <dm/device_compat.h>
->   #include <log.h>
-> diff --git a/drivers/power/exynos-tmu.c b/drivers/power/exynos-tmu.c
-> index 6d62f6cae40d..21c2fabce1b8 100644
-> --- a/drivers/power/exynos-tmu.c
-> +++ b/drivers/power/exynos-tmu.c
-> @@ -17,11 +17,12 @@
->    * MA 02111-1307 USA
->    */
->   
-> -#include <common.h>
->   #include <errno.h>
->   #include <fdtdec.h>
->   #include <log.h>
-> +#include <time.h>
->   #include <tmu.h>
-> +#include <asm/io.h>
->   #include <asm/arch/tmu.h>
->   #include <asm/arch/power.h>
->   
-> diff --git a/drivers/power/mt6323.c b/drivers/power/mt6323.c
-> index 354817a03780..dd6cbcf18206 100644
-> --- a/drivers/power/mt6323.c
-> +++ b/drivers/power/mt6323.c
-> @@ -3,7 +3,6 @@
->    * Copyright (C) 2019 Frank Wunderlich <frank-w@public-files.de>
->    */
->   
-> -#include <common.h>
->   #include <command.h>
->   #include <asm/io.h>
->   #include <linux/delay.h>
-> diff --git a/drivers/power/pmic/ab8500.c b/drivers/power/pmic/ab8500.c
-> index 1f64f217c345..9ba096711e14 100644
-> --- a/drivers/power/pmic/ab8500.c
-> +++ b/drivers/power/pmic/ab8500.c
-> @@ -7,7 +7,6 @@
->    * Copyright (C) ST-Ericsson SA 2010
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <regmap.h>
->   #include <syscon.h>
-> diff --git a/drivers/power/pmic/act8846.c b/drivers/power/pmic/act8846.c
-> index 8f0f5a6d96e5..3058ef0f893d 100644
-> --- a/drivers/power/pmic/act8846.c
-> +++ b/drivers/power/pmic/act8846.c
-> @@ -4,7 +4,6 @@
->    * Written by Simon Glass <sjg@chromium.org>
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <errno.h>
->   #include <fdtdec.h>
-> diff --git a/drivers/power/pmic/as3722.c b/drivers/power/pmic/as3722.c
-> index c7dd9705d189..9b0f4fb97363 100644
-> --- a/drivers/power/pmic/as3722.c
-> +++ b/drivers/power/pmic/as3722.c
-> @@ -5,7 +5,6 @@
->   
->   #define pr_fmt(fmt) "as3722: " fmt
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <errno.h>
->   #include <fdtdec.h>
-> diff --git a/drivers/power/pmic/as3722_gpio.c b/drivers/power/pmic/as3722_gpio.c
-> index 987fbdf9bc08..52d8bd00b1fd 100644
-> --- a/drivers/power/pmic/as3722_gpio.c
-> +++ b/drivers/power/pmic/as3722_gpio.c
-> @@ -3,7 +3,6 @@
->    * Copyright (C) 2014 NVIDIA Corporation
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <asm/gpio.h>
->   #include <linux/printk.h>
-> diff --git a/drivers/power/pmic/bd71837.c b/drivers/power/pmic/bd71837.c
-> index ee6ae78e5c4c..a5df2570fc3e 100644
-> --- a/drivers/power/pmic/bd71837.c
-> +++ b/drivers/power/pmic/bd71837.c
-> @@ -3,7 +3,6 @@
->    * Copyright 2018 NXP
->    */
->   
-> -#include <common.h>
->   #include <errno.h>
->   #include <dm.h>
->   #include <i2c.h>
-> diff --git a/drivers/power/pmic/da9063.c b/drivers/power/pmic/da9063.c
-> index ca95b82e6d01..7bd3df391421 100644
-> --- a/drivers/power/pmic/da9063.c
-> +++ b/drivers/power/pmic/da9063.c
-> @@ -4,7 +4,6 @@
->    *  Martin Fuzzey  <martin.fuzzey@flowbird.group>
->    */
->   
-> -#include <common.h>
->   #include <fdtdec.h>
->   #include <errno.h>
->   #include <dm.h>
-> diff --git a/drivers/power/pmic/fan53555.c b/drivers/power/pmic/fan53555.c
-> index d556b9a5878a..95bf600cbc3f 100644
-> --- a/drivers/power/pmic/fan53555.c
-> +++ b/drivers/power/pmic/fan53555.c
-> @@ -3,7 +3,6 @@
->    * (C) 2018 Theobroma Systems Design und Consulting GmbH
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <log.h>
->   #include <dm/device-internal.h>
-> diff --git a/drivers/power/pmic/i2c_pmic_emul.c b/drivers/power/pmic/i2c_pmic_emul.c
-> index f0a03742f87b..6e81b9c34279 100644
-> --- a/drivers/power/pmic/i2c_pmic_emul.c
-> +++ b/drivers/power/pmic/i2c_pmic_emul.c
-> @@ -4,7 +4,6 @@
->    *  Przemyslaw Marczak  <p.marczak@samsung.com>
->    */
->   
-> -#include <common.h>
->   #include <errno.h>
->   #include <dm.h>
->   #include <i2c.h>
-> diff --git a/drivers/power/pmic/lp873x.c b/drivers/power/pmic/lp873x.c
-> index fda5bc151642..2c8fa4ea312f 100644
-> --- a/drivers/power/pmic/lp873x.c
-> +++ b/drivers/power/pmic/lp873x.c
-> @@ -4,7 +4,6 @@
->    * Keerthy <j-keerthy@ti.com>
->    */
->   
-> -#include <common.h>
->   #include <fdtdec.h>
->   #include <errno.h>
->   #include <dm.h>
-> diff --git a/drivers/power/pmic/lp87565.c b/drivers/power/pmic/lp87565.c
-> index 904e02c4d818..c2ff75bbcdcd 100644
-> --- a/drivers/power/pmic/lp87565.c
-> +++ b/drivers/power/pmic/lp87565.c
-> @@ -4,7 +4,6 @@
->    * Keerthy <j-keerthy@ti.com>
->    */
->   
-> -#include <common.h>
->   #include <fdtdec.h>
->   #include <errno.h>
->   #include <dm.h>
-> diff --git a/drivers/power/pmic/max77686.c b/drivers/power/pmic/max77686.c
-> index 7e6f7d1966f1..bfe57b386d3d 100644
-> --- a/drivers/power/pmic/max77686.c
-> +++ b/drivers/power/pmic/max77686.c
-> @@ -4,7 +4,6 @@
->    *  Przemyslaw Marczak  <p.marczak@samsung.com>
->    */
->   
-> -#include <common.h>
->   #include <fdtdec.h>
->   #include <errno.h>
->   #include <dm.h>
-> diff --git a/drivers/power/pmic/max8997.c b/drivers/power/pmic/max8997.c
-> index 504a63bf7431..4afa6c84ef82 100644
-> --- a/drivers/power/pmic/max8997.c
-> +++ b/drivers/power/pmic/max8997.c
-> @@ -4,7 +4,6 @@
->    *  Jaehoon Chung <jh80.chung@samsung.com>
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <i2c.h>
->   #include <linux/printk.h>
-> diff --git a/drivers/power/pmic/max8998.c b/drivers/power/pmic/max8998.c
-> index d155474447f5..05669023753e 100644
-> --- a/drivers/power/pmic/max8998.c
-> +++ b/drivers/power/pmic/max8998.c
-> @@ -4,7 +4,6 @@
->    *  Jaehoon Chung <jh80.chung@samsung.com>
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <errno.h>
->   #include <i2c.h>
-> diff --git a/drivers/power/pmic/mc34708.c b/drivers/power/pmic/mc34708.c
-> index 40d732224b6c..43badb5767a5 100644
-> --- a/drivers/power/pmic/mc34708.c
-> +++ b/drivers/power/pmic/mc34708.c
-> @@ -5,7 +5,6 @@
->    *
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <errno.h>
->   #include <fsl_pmic.h>
-> diff --git a/drivers/power/pmic/mp5416.c b/drivers/power/pmic/mp5416.c
-> index 6180adf77e2d..9d44f0ae655e 100644
-> --- a/drivers/power/pmic/mp5416.c
-> +++ b/drivers/power/pmic/mp5416.c
-> @@ -2,7 +2,6 @@
+> diff --git a/drivers/ram/aspeed/sdram_ast2600.c b/drivers/ram/aspeed/sdram_ast2600.c
+> index d463933363ee..55e80fba3dc0 100644
+> --- a/drivers/ram/aspeed/sdram_ast2600.c
+> +++ b/drivers/ram/aspeed/sdram_ast2600.c
+> @@ -2,7 +2,7 @@
 >   /*
->    * Copyright 2020 Gateworks Corporation
+>    * Copyright (C) ASPEED Technology Inc.
 >    */
 > -#include <common.h>
->   #include <errno.h>
+> +#include <config.h>
+>   #include <clk.h>
 >   #include <dm.h>
->   #include <i2c.h>
-> diff --git a/drivers/power/pmic/palmas.c b/drivers/power/pmic/palmas.c
-> index e340a32279fb..f676bf641694 100644
-> --- a/drivers/power/pmic/palmas.c
-> +++ b/drivers/power/pmic/palmas.c
-> @@ -4,7 +4,6 @@
->    * Keerthy <j-keerthy@ti.com>
->    */
->   
-> -#include <common.h>
->   #include <fdtdec.h>
 >   #include <errno.h>
->   #include <dm.h>
-> diff --git a/drivers/power/pmic/pca9450.c b/drivers/power/pmic/pca9450.c
-> index 0bbe98cd8a29..07af6273d8ae 100644
-> --- a/drivers/power/pmic/pca9450.c
-> +++ b/drivers/power/pmic/pca9450.c
-> @@ -3,7 +3,6 @@
->    * Copyright 2019 NXP
+> diff --git a/drivers/ram/bmips_ram.c b/drivers/ram/bmips_ram.c
+> index 98045248ecfb..760bebdbba04 100644
+> --- a/drivers/ram/bmips_ram.c
+> +++ b/drivers/ram/bmips_ram.c
+> @@ -7,7 +7,6 @@
+>    *	Copyright (C) 2009 Florian Fainelli <florian@openwrt.org>
 >    */
 >   
 > -#include <common.h>
->   #include <fdtdec.h>
->   #include <errno.h>
 >   #include <dm.h>
-> diff --git a/drivers/power/pmic/pfuze100.c b/drivers/power/pmic/pfuze100.c
-> index 15420acb4725..9e09805d251f 100644
-> --- a/drivers/power/pmic/pfuze100.c
-> +++ b/drivers/power/pmic/pfuze100.c
-> @@ -4,7 +4,6 @@
->    * Peng Fan <Peng.Fan@freescale.com>
+>   #include <errno.h>
+>   #include <init.h>
+> diff --git a/drivers/ram/cadence/ddr_ctrl.c b/drivers/ram/cadence/ddr_ctrl.c
+> index 3e5959a84a37..0fa60e766a7e 100644
+> --- a/drivers/ram/cadence/ddr_ctrl.c
+> +++ b/drivers/ram/cadence/ddr_ctrl.c
+> @@ -24,7 +24,6 @@
+>    * bandwidth allocated to each AXI slave can be set.
 >    */
 >   
-> -#include <common.h>
->   #include <fdtdec.h>
->   #include <errno.h>
->   #include <dm.h>
-> diff --git a/drivers/power/pmic/pmic-uclass.c b/drivers/power/pmic/pmic-uclass.c
-> index 0e2f5e1f4111..bb459816d143 100644
-> --- a/drivers/power/pmic/pmic-uclass.c
-> +++ b/drivers/power/pmic/pmic-uclass.c
-> @@ -6,7 +6,6 @@
->   
->   #define LOG_CATEGORY UCLASS_PMIC
->   
-> -#include <common.h>
->   #include <fdtdec.h>
->   #include <errno.h>
->   #include <dm.h>
-> diff --git a/drivers/power/pmic/pmic_hi6553.c b/drivers/power/pmic/pmic_hi6553.c
-> index 80b9078cf8f0..05305013882d 100644
-> --- a/drivers/power/pmic/pmic_hi6553.c
-> +++ b/drivers/power/pmic/pmic_hi6553.c
-> @@ -4,7 +4,6 @@
->    *  Peter Griffin <peter.griffin@linaro.org>
->    */
->   #include <asm/io.h>
 > -#include <common.h>
 >   #include <linux/delay.h>
->   #include <power/pmic.h>
->   #include <power/max8997_muic.h>
-> diff --git a/drivers/power/pmic/pmic_ltc3676.c b/drivers/power/pmic/pmic_ltc3676.c
-> index af94f37b0f10..145a631b6b24 100644
-> --- a/drivers/power/pmic/pmic_ltc3676.c
-> +++ b/drivers/power/pmic/pmic_ltc3676.c
+>   #include <linux/sizes.h>
+>   #include <asm/io.h>
+> diff --git a/drivers/ram/imxrt_sdram.c b/drivers/ram/imxrt_sdram.c
+> index 6a15242c20cc..3df106c9b79a 100644
+> --- a/drivers/ram/imxrt_sdram.c
+> +++ b/drivers/ram/imxrt_sdram.c
 > @@ -4,7 +4,6 @@
->    * Tim Harvey <tharvey@gateworks.com>
+>    * Author(s): Giulio Benetti <giulio.benetti@benettiengineering.com>
 >    */
 >   
 > -#include <common.h>
->   #include <errno.h>
->   #include <i2c.h>
->   #include <power/pmic.h>
-> diff --git a/drivers/power/pmic/pmic_mc34vr500.c b/drivers/power/pmic/pmic_mc34vr500.c
-> index 9dd1c46ea220..0dfdfbdf3dca 100644
-> --- a/drivers/power/pmic/pmic_mc34vr500.c
-> +++ b/drivers/power/pmic/pmic_mc34vr500.c
-> @@ -4,7 +4,6 @@
->    * Hou Zhiqiang <Zhiqiang.Hou@freescale.com>
->    */
->   
-> -#include <common.h>
->   #include <errno.h>
->   #include <i2c.h>
->   #include <power/pmic.h>
-> diff --git a/drivers/power/pmic/pmic_pca9450.c b/drivers/power/pmic/pmic_pca9450.c
-> index 8c4d0a92306b..12500ba99901 100644
-> --- a/drivers/power/pmic/pmic_pca9450.c
-> +++ b/drivers/power/pmic/pmic_pca9450.c
-> @@ -3,7 +3,6 @@
->    * Copyright 2019 NXP
->    */
->   
-> -#include <common.h>
->   #include <errno.h>
->   #include <i2c.h>
->   #include <power/pmic.h>
-> diff --git a/drivers/power/pmic/pmic_pfuze100.c b/drivers/power/pmic/pmic_pfuze100.c
-> index 5115b55e49dc..a266709d8d07 100644
-> --- a/drivers/power/pmic/pmic_pfuze100.c
-> +++ b/drivers/power/pmic/pmic_pfuze100.c
-> @@ -4,7 +4,6 @@
->    * Tim Harvey <tharvey@gateworks.com>
->    */
->   
-> -#include <common.h>
->   #include <errno.h>
->   #include <i2c.h>
->   #include <power/pmic.h>
-> diff --git a/drivers/power/pmic/pmic_pfuze3000.c b/drivers/power/pmic/pmic_pfuze3000.c
-> index a6d97252bc9e..602c4744aa6c 100644
-> --- a/drivers/power/pmic/pmic_pfuze3000.c
-> +++ b/drivers/power/pmic/pmic_pfuze3000.c
-> @@ -4,7 +4,6 @@
->    * Peng Fan <Peng.Fan@freescale.com>
->    */
->   
-> -#include <common.h>
->   #include <errno.h>
->   #include <i2c.h>
->   #include <power/pmic.h>
-> diff --git a/drivers/power/pmic/pmic_qcom.c b/drivers/power/pmic/pmic_qcom.c
-> index f2ac6494811d..92d0a95859b0 100644
-> --- a/drivers/power/pmic/pmic_qcom.c
-> +++ b/drivers/power/pmic/pmic_qcom.c
-> @@ -4,7 +4,6 @@
->    *
->    * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
->    */
-> -#include <common.h>
+>   #include <clk.h>
 >   #include <dm.h>
->   #include <power/pmic.h>
->   #include <spmi/spmi.h>
-> diff --git a/drivers/power/pmic/pmic_tps62362.c b/drivers/power/pmic/pmic_tps62362.c
-> index 6426d1488a5c..4f0e406d5606 100644
-> --- a/drivers/power/pmic/pmic_tps62362.c
-> +++ b/drivers/power/pmic/pmic_tps62362.c
-> @@ -4,7 +4,6 @@
->    * Author: Felipe Balbi <balbi@ti.com>
+>   #include <dm/device_compat.h>
+> diff --git a/drivers/ram/k3-am654-ddrss.c b/drivers/ram/k3-am654-ddrss.c
+> index cff8ffc89295..21ff9d761e1b 100644
+> --- a/drivers/ram/k3-am654-ddrss.c
+> +++ b/drivers/ram/k3-am654-ddrss.c
+> @@ -6,7 +6,6 @@
+>    *	Lokesh Vutla <lokeshvutla@ti.com>
 >    */
 >   
 > -#include <common.h>
->   #include <i2c.h>
->   #include <linux/errno.h>
->   #include <power/pmic.h>
-> diff --git a/drivers/power/pmic/pmic_tps65217.c b/drivers/power/pmic/pmic_tps65217.c
-> index ccbf2235933d..bd44e0d9ae05 100644
-> --- a/drivers/power/pmic/pmic_tps65217.c
-> +++ b/drivers/power/pmic/pmic_tps65217.c
-> @@ -4,7 +4,6 @@
->    * Texas Instruments, <www.ti.com>
->    */
->   
-> -#include <common.h>
->   #include <i2c.h>
+>   #include <clk.h>
 >   #include <dm.h>
->   #include <errno.h>
-> diff --git a/drivers/power/pmic/pmic_tps65218.c b/drivers/power/pmic/pmic_tps65218.c
-> index 671749018041..49d07e95cd7c 100644
-> --- a/drivers/power/pmic/pmic_tps65218.c
-> +++ b/drivers/power/pmic/pmic_tps65218.c
-> @@ -4,7 +4,6 @@
->    * Texas Instruments, <www.ti.com>
+>   #include <log.h>
+> diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
+> index a5c9b82cf1da..525b6d5b79fc 100644
+> --- a/drivers/ram/k3-ddrss/k3-ddrss.c
+> +++ b/drivers/ram/k3-ddrss/k3-ddrss.c
+> @@ -5,7 +5,6 @@
+>    * Copyright (C) 2020-2021 Texas Instruments Incorporated - https://www.ti.com/
 >    */
 >   
 > -#include <common.h>
->   #include <i2c.h>
->   #include <linux/errno.h>
->   #include <power/pmic.h>
-> diff --git a/drivers/power/pmic/pmic_tps65910.c b/drivers/power/pmic/pmic_tps65910.c
-> index e3de73082150..df9bb66a7f9c 100644
-> --- a/drivers/power/pmic/pmic_tps65910.c
-> +++ b/drivers/power/pmic/pmic_tps65910.c
-> @@ -4,7 +4,6 @@
->    * Texas Instruments, <www.ti.com>
+>   #include <config.h>
+>   #include <clk.h>
+>   #include <div64.h>
+> diff --git a/drivers/ram/mediatek/ddr3-mt7629.c b/drivers/ram/mediatek/ddr3-mt7629.c
+> index f65fcf179cf6..c27c4593b9d9 100644
+> --- a/drivers/ram/mediatek/ddr3-mt7629.c
+> +++ b/drivers/ram/mediatek/ddr3-mt7629.c
+> @@ -8,7 +8,7 @@
 >    */
 >   
+>   #include <clk.h>
 > -#include <common.h>
->   #include <i2c.h>
->   #include <power/tps65910.h>
->   
-> diff --git a/drivers/power/pmic/pmic_tps65910_dm.c b/drivers/power/pmic/pmic_tps65910_dm.c
-> index ecf836eb0e65..de8d805566aa 100644
-> --- a/drivers/power/pmic/pmic_tps65910_dm.c
-> +++ b/drivers/power/pmic/pmic_tps65910_dm.c
-> @@ -3,7 +3,6 @@
->    * Copyright (C) EETS GmbH, 2017, Felix Brack <f.brack@eets.ch>
+> +#include <config.h>
+>   #include <dm.h>
+>   #include <ram.h>
+>   #include <asm/io.h>
+> diff --git a/drivers/ram/mpc83xx_sdram.c b/drivers/ram/mpc83xx_sdram.c
+> index 11676d4fae7e..28a663289a23 100644
+> --- a/drivers/ram/mpc83xx_sdram.c
+> +++ b/drivers/ram/mpc83xx_sdram.c
+> @@ -4,7 +4,6 @@
+>    * Mario Six, Guntermann & Drunck GmbH, mario.six@gdsys.cc
 >    */
 >   
 > -#include <common.h>
 >   #include <dm.h>
->   #include <dm/lists.h>
->   #include <i2c.h>
-> diff --git a/drivers/power/pmic/rk8xx.c b/drivers/power/pmic/rk8xx.c
-> index 3a8261d1749f..12ff26a08558 100644
-> --- a/drivers/power/pmic/rk8xx.c
-> +++ b/drivers/power/pmic/rk8xx.c
-> @@ -4,7 +4,6 @@
->    * Written by Simon Glass <sjg@chromium.org>
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <dm/lists.h>
->   #include <errno.h>
-> diff --git a/drivers/power/pmic/rn5t567.c b/drivers/power/pmic/rn5t567.c
-> index 9d103dd84057..0124d84a7295 100644
-> --- a/drivers/power/pmic/rn5t567.c
-> +++ b/drivers/power/pmic/rn5t567.c
-> @@ -4,7 +4,6 @@
->    * Stefan Agner <stefan.agner@toradex.com>
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <errno.h>
->   #include <fdtdec.h>
-> diff --git a/drivers/power/pmic/s2mps11.c b/drivers/power/pmic/s2mps11.c
-> index 5ff4f2052113..17780017035b 100644
-> --- a/drivers/power/pmic/s2mps11.c
-> +++ b/drivers/power/pmic/s2mps11.c
-> @@ -4,7 +4,6 @@
->    *  Przemyslaw Marczak  <p.marczak@samsung.com>
->    */
->   
-> -#include <common.h>
->   #include <fdtdec.h>
->   #include <errno.h>
->   #include <dm.h>
-> diff --git a/drivers/power/pmic/s5m8767.c b/drivers/power/pmic/s5m8767.c
-> index eea072ae824f..799d00125409 100644
-> --- a/drivers/power/pmic/s5m8767.c
-> +++ b/drivers/power/pmic/s5m8767.c
-> @@ -3,7 +3,6 @@
->    * Copyright (C) 2015 Google, Inc
->    */
->   
-> -#include <common.h>
->   #include <fdtdec.h>
->   #include <errno.h>
->   #include <dm.h>
-> diff --git a/drivers/power/pmic/sandbox.c b/drivers/power/pmic/sandbox.c
-> index 14b82455f5fb..ddc11d6df86f 100644
-> --- a/drivers/power/pmic/sandbox.c
-> +++ b/drivers/power/pmic/sandbox.c
+>   #include <init.h>
+>   #include <log.h>
+> diff --git a/drivers/ram/ram-uclass.c b/drivers/ram/ram-uclass.c
+> index 4e21240fd4cb..a33d583cc448 100644
+> --- a/drivers/ram/ram-uclass.c
+> +++ b/drivers/ram/ram-uclass.c
 > @@ -6,7 +6,6 @@
 >   
->   #define LOG_CATEGORY	UCLASS_PMIC
+>   #define LOG_CATEGORY UCLASS_RAM
 >   
 > -#include <common.h>
->   #include <fdtdec.h>
->   #include <errno.h>
+>   #include <ram.h>
 >   #include <dm.h>
-> diff --git a/drivers/power/pmic/stpmic1.c b/drivers/power/pmic/stpmic1.c
-> index 8701d4f971c9..c99a0c27b336 100644
-> --- a/drivers/power/pmic/stpmic1.c
-> +++ b/drivers/power/pmic/stpmic1.c
-> @@ -3,7 +3,6 @@
->    * Copyright (C) 2018, STMicroelectronics - All Rights Reserved
+>   #include <errno.h>
+> diff --git a/drivers/ram/renesas/rzn1/ddr_async.c b/drivers/ram/renesas/rzn1/ddr_async.c
+> index 7a81497bc92b..4d470aae1914 100644
+> --- a/drivers/ram/renesas/rzn1/ddr_async.c
+> +++ b/drivers/ram/renesas/rzn1/ddr_async.c
+> @@ -7,7 +7,6 @@
+>    *
+>    * Copyright (C) 2015 Renesas Electronics Europe Ltd
+>    */
+> -#include <common.h>
+>   #include <clk.h>
+>   #include <dm.h>
+>   #include <dm/device_compat.h>
+> diff --git a/drivers/ram/rockchip/dmc-rk3368.c b/drivers/ram/rockchip/dmc-rk3368.c
+> index 5279bf0a1548..42114a5aa917 100644
+> --- a/drivers/ram/rockchip/dmc-rk3368.c
+> +++ b/drivers/ram/rockchip/dmc-rk3368.c
+> @@ -3,7 +3,7 @@
+>    * (C) Copyright 2017 Theobroma Systems Design und Consulting GmbH
 >    */
 >   
 > -#include <common.h>
+> +#include <config.h>
+>   #include <clk.h>
 >   #include <dm.h>
->   #include <errno.h>
->   #include <i2c.h>
-> diff --git a/drivers/power/pmic/tps65090.c b/drivers/power/pmic/tps65090.c
-> index 2a04d5948a5e..ad2ab34719e5 100644
-> --- a/drivers/power/pmic/tps65090.c
-> +++ b/drivers/power/pmic/tps65090.c
+>   #include <hang.h>
+> diff --git a/drivers/ram/rockchip/sdram_common.c b/drivers/ram/rockchip/sdram_common.c
+> index 60fc90d0a5c0..b7a8fce607c8 100644
+> --- a/drivers/ram/rockchip/sdram_common.c
+> +++ b/drivers/ram/rockchip/sdram_common.c
+> @@ -3,7 +3,7 @@
+>    * (C) Copyright 2018 Rockchip Electronics Co., Ltd.
+>    */
+>   
+> -#include <common.h>
+> +#include <config.h>
+>   #include <debug_uart.h>
+>   #include <ram.h>
+>   #include <asm/io.h>
+> diff --git a/drivers/ram/rockchip/sdram_pctl_px30.c b/drivers/ram/rockchip/sdram_pctl_px30.c
+> index e5c80fb83b3f..3ec98af536e8 100644
+> --- a/drivers/ram/rockchip/sdram_pctl_px30.c
+> +++ b/drivers/ram/rockchip/sdram_pctl_px30.c
+> @@ -3,7 +3,6 @@
+>    * (C) Copyright 2018 Rockchip Electronics Co., Ltd.
+>    */
+>   
+> -#include <common.h>
+>   #include <ram.h>
+>   #include <asm/io.h>
+>   #include <asm/arch-rockchip/sdram.h>
+> diff --git a/drivers/ram/rockchip/sdram_phy_px30.c b/drivers/ram/rockchip/sdram_phy_px30.c
+> index f7f6de1ba98b..5416eef38788 100644
+> --- a/drivers/ram/rockchip/sdram_phy_px30.c
+> +++ b/drivers/ram/rockchip/sdram_phy_px30.c
+> @@ -3,7 +3,6 @@
+>    * (C) Copyright 2018 Rockchip Electronics Co., Ltd.
+>    */
+>   
+> -#include <common.h>
+>   #include <ram.h>
+>   #include <asm/io.h>
+>   #include <asm/arch-rockchip/sdram.h>
+> diff --git a/drivers/ram/rockchip/sdram_px30.c b/drivers/ram/rockchip/sdram_px30.c
+> index 21498e89570f..37e621205047 100644
+> --- a/drivers/ram/rockchip/sdram_px30.c
+> +++ b/drivers/ram/rockchip/sdram_px30.c
+> @@ -3,7 +3,7 @@
+>    * (C) Copyright 2018 Rockchip Electronics Co., Ltd.
+>    */
+>   
+> -#include <common.h>
+> +#include <config.h>
+>   #include <debug_uart.h>
+>   #include <dm.h>
+>   #include <init.h>
+> diff --git a/drivers/ram/rockchip/sdram_rk3066.c b/drivers/ram/rockchip/sdram_rk3066.c
+> index 562cf544c909..a280e2d9fa1d 100644
+> --- a/drivers/ram/rockchip/sdram_rk3066.c
+> +++ b/drivers/ram/rockchip/sdram_rk3066.c
+> @@ -6,7 +6,7 @@
+>    * Adapted from the very similar rk3188 ddr init.
+>    */
+>   
+> -#include <common.h>
+> +#include <config.h>
+>   #include <clk.h>
+>   #include <dm.h>
+>   #include <dt-structs.h>
+> diff --git a/drivers/ram/rockchip/sdram_rk3128.c b/drivers/ram/rockchip/sdram_rk3128.c
+> index ded65393806e..66611f80b2da 100644
+> --- a/drivers/ram/rockchip/sdram_rk3128.c
+> +++ b/drivers/ram/rockchip/sdram_rk3128.c
+> @@ -3,7 +3,7 @@
+>    * (C) Copyright 2017 Rockchip Electronics Co., Ltd.
+>    */
+>   
+> -#include <common.h>
+> +#include <config.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <ram.h>
+> diff --git a/drivers/ram/rockchip/sdram_rk3188.c b/drivers/ram/rockchip/sdram_rk3188.c
+> index e1b28c6e5933..618bce5c9f49 100644
+> --- a/drivers/ram/rockchip/sdram_rk3188.c
+> +++ b/drivers/ram/rockchip/sdram_rk3188.c
+> @@ -6,7 +6,7 @@
+>    * Adapted from the very similar rk3288 ddr init.
+>    */
+>   
+> -#include <common.h>
+> +#include <config.h>
+>   #include <clk.h>
+>   #include <dm.h>
+>   #include <dt-structs.h>
+> diff --git a/drivers/ram/rockchip/sdram_rk322x.c b/drivers/ram/rockchip/sdram_rk322x.c
+> index 5fc23c11193f..a48a50911844 100644
+> --- a/drivers/ram/rockchip/sdram_rk322x.c
+> +++ b/drivers/ram/rockchip/sdram_rk322x.c
+> @@ -2,7 +2,7 @@
+>   /*
+>    * (C) Copyright 2017 Rockchip Electronics Co., Ltd
+>    */
+> -#include <common.h>
+> +#include <config.h>
+>   #include <clk.h>
+>   #include <dm.h>
+>   #include <dt-structs.h>
+> diff --git a/drivers/ram/rockchip/sdram_rk3288.c b/drivers/ram/rockchip/sdram_rk3288.c
+> index 242d564a7d26..c9f61e933e9a 100644
+> --- a/drivers/ram/rockchip/sdram_rk3288.c
+> +++ b/drivers/ram/rockchip/sdram_rk3288.c
+> @@ -6,7 +6,7 @@
+>    * Adapted from coreboot.
+>    */
+>   
+> -#include <common.h>
+> +#include <config.h>
+>   #include <clk.h>
+>   #include <dm.h>
+>   #include <dt-structs.h>
+> diff --git a/drivers/ram/rockchip/sdram_rk3308.c b/drivers/ram/rockchip/sdram_rk3308.c
+> index 264366291cf8..8071997f8d86 100644
+> --- a/drivers/ram/rockchip/sdram_rk3308.c
+> +++ b/drivers/ram/rockchip/sdram_rk3308.c
+> @@ -3,7 +3,7 @@
+>    * (C) Copyright 2019 Rockchip Electronics Co., Ltd.
+>    */
+>   
+> -#include <common.h>
+> +#include <config.h>
+>   #include <dm.h>
+>   #include <ram.h>
+>   #include <syscon.h>
+> diff --git a/drivers/ram/rockchip/sdram_rk3328.c b/drivers/ram/rockchip/sdram_rk3328.c
+> index b5ca8ca436f5..99690d67a501 100644
+> --- a/drivers/ram/rockchip/sdram_rk3328.c
+> +++ b/drivers/ram/rockchip/sdram_rk3328.c
+> @@ -2,7 +2,7 @@
+>   /*
+>    * (C) Copyright 2017 Rockchip Electronics Co., Ltd.
+>    */
+> -#include <common.h>
+> +#include <config.h>
+>   #include <clk.h>
+>   #include <debug_uart.h>
+>   #include <dm.h>
+> diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
+> index 02cc4a38cf0b..ef9a1824b2b3 100644
+> --- a/drivers/ram/rockchip/sdram_rk3399.c
+> +++ b/drivers/ram/rockchip/sdram_rk3399.c
+> @@ -5,7 +5,7 @@
+>    * Adapted from coreboot.
+>    */
+>   
+> -#include <common.h>
+> +#include <config.h>
+>   #include <clk.h>
+>   #include <dm.h>
+>   #include <dt-structs.h>
+> diff --git a/drivers/ram/rockchip/sdram_rk3568.c b/drivers/ram/rockchip/sdram_rk3568.c
+> index f661615c1b91..a252d5c70106 100644
+> --- a/drivers/ram/rockchip/sdram_rk3568.c
+> +++ b/drivers/ram/rockchip/sdram_rk3568.c
+> @@ -3,7 +3,7 @@
+>    * (C) Copyright 2021 Rockchip Electronics Co., Ltd.
+>    */
+>   
+> -#include <common.h>
+> +#include <config.h>
+>   #include <dm.h>
+>   #include <ram.h>
+>   #include <syscon.h>
+> diff --git a/drivers/ram/rockchip/sdram_rk3588.c b/drivers/ram/rockchip/sdram_rk3588.c
+> index cf56e2a94121..a144b432d76f 100644
+> --- a/drivers/ram/rockchip/sdram_rk3588.c
+> +++ b/drivers/ram/rockchip/sdram_rk3588.c
+> @@ -3,7 +3,7 @@
+>    * (C) Copyright 2021 Rockchip Electronics Co., Ltd.
+>    */
+>   
+> -#include <common.h>
+> +#include <config.h>
+>   #include <dm.h>
+>   #include <ram.h>
+>   #include <syscon.h>
+> diff --git a/drivers/ram/rockchip/sdram_rv1126.c b/drivers/ram/rockchip/sdram_rv1126.c
+> index 849e15a91932..4fbb088a8d98 100644
+> --- a/drivers/ram/rockchip/sdram_rv1126.c
+> +++ b/drivers/ram/rockchip/sdram_rv1126.c
+> @@ -4,7 +4,7 @@
+>    * Copyright (c) 2022 Edgeble AI Technologies Pvt. Ltd.
+>    */
+>   
+> -#include <common.h>
+> +#include <config.h>
+>   #include <debug_uart.h>
+>   #include <dm.h>
+>   #include <ram.h>
+> diff --git a/drivers/ram/sandbox_ram.c b/drivers/ram/sandbox_ram.c
+> index 910dce623e90..2097da565322 100644
+> --- a/drivers/ram/sandbox_ram.c
+> +++ b/drivers/ram/sandbox_ram.c
 > @@ -4,7 +4,6 @@
 >    * Written by Simon Glass <sjg@chromium.org>
 >    */
@@ -1035,496 +498,164 @@ Thanks,
 > -#include <common.h>
 >   #include <dm.h>
 >   #include <errno.h>
->   #include <fdtdec.h>
-> diff --git a/drivers/power/pmic/tps65219.c b/drivers/power/pmic/tps65219.c
-> index 9462afee77fd..0716af027a3a 100644
-> --- a/drivers/power/pmic/tps65219.c
-> +++ b/drivers/power/pmic/tps65219.c
-> @@ -4,7 +4,6 @@
->    * Author: Neil Armstrong <narmstrong@baylibre.com>
+>   #include <ram.h>
+> diff --git a/drivers/ram/sifive/sifive_ddr.c b/drivers/ram/sifive/sifive_ddr.c
+> index 4bd69a62be2b..bd2f438d7271 100644
+> --- a/drivers/ram/sifive/sifive_ddr.c
+> +++ b/drivers/ram/sifive/sifive_ddr.c
+> @@ -6,7 +6,6 @@
+>    *   Pragnesh Patel <pragnesh.patel@sifive.com>
 >    */
 >   
 > -#include <common.h>
->   #include <fdtdec.h>
->   #include <errno.h>
 >   #include <dm.h>
-> diff --git a/drivers/power/pmic/tps65941.c b/drivers/power/pmic/tps65941.c
-> index 943d845086c3..c3490db2a089 100644
-> --- a/drivers/power/pmic/tps65941.c
-> +++ b/drivers/power/pmic/tps65941.c
+>   #include <fdtdec.h>
+>   #include <init.h>
+> diff --git a/drivers/ram/starfive/ddrcsr_boot.c b/drivers/ram/starfive/ddrcsr_boot.c
+> index f2dd55f74a08..6764b3ed5cc9 100644
+> --- a/drivers/ram/starfive/ddrcsr_boot.c
+> +++ b/drivers/ram/starfive/ddrcsr_boot.c
 > @@ -4,7 +4,6 @@
->    * Keerthy <j-keerthy@ti.com>
+>    * Author: Yanhong Wang<yanhong.wang@starfivetech.com>
 >    */
 >   
 > -#include <common.h>
->   #include <fdtdec.h>
->   #include <errno.h>
->   #include <dm.h>
-> diff --git a/drivers/power/power_core.c b/drivers/power/power_core.c
-> index 4f7ba099cd91..1caf9f093468 100644
-> --- a/drivers/power/power_core.c
-> +++ b/drivers/power/power_core.c
-> @@ -9,7 +9,6 @@
->    * (C) Copyright 2008-2009 Freescale Semiconductor, Inc.
+>   #include <asm/io.h>
+>   #include <asm/arch/regs.h>
+>   #include <linux/delay.h>
+> diff --git a/drivers/ram/starfive/ddrphy_start.c b/drivers/ram/starfive/ddrphy_start.c
+> index 479b6ef10418..efe3f8a181a5 100644
+> --- a/drivers/ram/starfive/ddrphy_start.c
+> +++ b/drivers/ram/starfive/ddrphy_start.c
+> @@ -4,7 +4,6 @@
+>    * Author: Yanhong Wang<yanhong.wang@starfivetech.com>
 >    */
+>   
+> -#include <common.h>
+>   #include <asm/io.h>
+>   
+>   #include "starfive_ddr.h"
+> diff --git a/drivers/ram/starfive/ddrphy_train.c b/drivers/ram/starfive/ddrphy_train.c
+> index 0740f49be5bb..0aff1e8727ef 100644
+> --- a/drivers/ram/starfive/ddrphy_train.c
+> +++ b/drivers/ram/starfive/ddrphy_train.c
+> @@ -4,7 +4,7 @@
+>    * Author: Yanhong Wang<yanhong.wang@starfivetech.com>
+>    */
+>   
+> -#include <common.h>
+> +#include <linux/kernel.h>
+>   #include <asm/io.h>
+>   
+>   static const u32 ddr_train_data[] = {
+> diff --git a/drivers/ram/starfive/ddrphy_utils.c b/drivers/ram/starfive/ddrphy_utils.c
+> index 1c9fe0a78465..d6dd6ee7a859 100644
+> --- a/drivers/ram/starfive/ddrphy_utils.c
+> +++ b/drivers/ram/starfive/ddrphy_utils.c
+> @@ -4,7 +4,7 @@
+>    * Author: Yanhong Wang<yanhong.wang@starfivetech.com>
+>    */
+>   
+> -#include <common.h>
+> +#include <linux/kernel.h>
+>   #include <asm/io.h>
+>   
+>   static const  u32 ddr_phy_data[] = {
+> diff --git a/drivers/ram/starfive/starfive_ddr.c b/drivers/ram/starfive/starfive_ddr.c
+> index a0a3d6b33dc2..b31ed3bcf617 100644
+> --- a/drivers/ram/starfive/starfive_ddr.c
+> +++ b/drivers/ram/starfive/starfive_ddr.c
+> @@ -4,7 +4,6 @@
+>    * Author: Yanhong Wang<yanhong.wang@starfivetech.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <asm/arch/regs.h>
+>   #include <asm/io.h>
+>   #include <clk.h>
+> diff --git a/drivers/ram/starfive/starfive_ddr.h b/drivers/ram/starfive/starfive_ddr.h
+> index d0ec1c1da807..c29d26b510c9 100644
+> --- a/drivers/ram/starfive/starfive_ddr.h
+> +++ b/drivers/ram/starfive/starfive_ddr.h
+> @@ -7,6 +7,8 @@
+>   #ifndef __STARFIVE_DDR_H__
+>   #define __STARFIVE_DDR_H__
+>   
+> +#include <linux/kernel.h>
+> +
+>   #define SEC_CTRL_ADDR		0x1000
+>   #define PHY_BASE_ADDR		0x800
+>   #define PHY_AC_BASE_ADDR	0x1000
+> diff --git a/drivers/ram/stm32_sdram.c b/drivers/ram/stm32_sdram.c
+> index 891f4137813e..10dc05dd6404 100644
+> --- a/drivers/ram/stm32_sdram.c
+> +++ b/drivers/ram/stm32_sdram.c
+> @@ -6,7 +6,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_RAM
+>   
+> -#include <common.h>
+>   #include <clk.h>
+>   #include <dm.h>
+>   #include <init.h>
+> diff --git a/drivers/ram/stm32mp1/stm32mp1_ddr.c b/drivers/ram/stm32mp1/stm32mp1_ddr.c
+> index 8ee4e24f39df..d7834b322992 100644
+> --- a/drivers/ram/stm32mp1/stm32mp1_ddr.c
+> +++ b/drivers/ram/stm32mp1/stm32mp1_ddr.c
+> @@ -5,7 +5,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_RAM
+>   
+> -#include <common.h>
+>   #include <clk.h>
+>   #include <log.h>
+>   #include <ram.h>
+> diff --git a/drivers/ram/stm32mp1/stm32mp1_interactive.c b/drivers/ram/stm32mp1/stm32mp1_interactive.c
+> index 2c19847c6633..6340afbb8709 100644
+> --- a/drivers/ram/stm32mp1/stm32mp1_interactive.c
+> +++ b/drivers/ram/stm32mp1/stm32mp1_interactive.c
+> @@ -5,7 +5,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_RAM
 >   
 > -#include <common.h>
 >   #include <command.h>
->   #include <log.h>
->   #include <malloc.h>
-> diff --git a/drivers/power/power_dialog.c b/drivers/power/power_dialog.c
-> index ad7aaf35a9a0..a5c7ea34c4ae 100644
-> --- a/drivers/power/power_dialog.c
-> +++ b/drivers/power/power_dialog.c
-> @@ -4,7 +4,7 @@
->    *  Lukasz Majewski <l.majewski@samsung.com>
->    */
->   
-> -#include <common.h>
-> +#include <config.h>
->   #include <log.h>
->   #include <power/pmic.h>
->   #include <dialog_pmic.h>
-> diff --git a/drivers/power/power_fsl.c b/drivers/power/power_fsl.c
-> index 9dc930fb305a..a10a14a79616 100644
-> --- a/drivers/power/power_fsl.c
-> +++ b/drivers/power/power_fsl.c
-> @@ -4,7 +4,7 @@
->    *  Lukasz Majewski <l.majewski@samsung.com>
->    */
->   
-> -#include <common.h>
-> +#include <config.h>
->   #include <spi.h>
->   #include <power/pmic.h>
->   #include <fsl_pmic.h>
-> diff --git a/drivers/power/power_i2c.c b/drivers/power/power_i2c.c
-> index b67ac2f027b5..a871fc419872 100644
-> --- a/drivers/power/power_i2c.c
-> +++ b/drivers/power/power_i2c.c
-> @@ -10,7 +10,6 @@
->    * (C) Copyright 2019 NXP
->    */
->   
-> -#include <common.h>
->   #include <log.h>
->   #include <linux/types.h>
->   #include <power/pmic.h>
-> diff --git a/drivers/power/power_spi.c b/drivers/power/power_spi.c
-> index 1eaf9773ef8b..54427316ce42 100644
-> --- a/drivers/power/power_spi.c
-> +++ b/drivers/power/power_spi.c
-> @@ -9,7 +9,6 @@
->    * (C) Copyright 2008-2009 Freescale Semiconductor, Inc.
->    */
->   
-> -#include <common.h>
->   #include <linux/types.h>
->   #include <power/pmic.h>
->   #include <spi.h>
-> diff --git a/drivers/power/regulator/act8846.c b/drivers/power/regulator/act8846.c
-> index bdce97365dd0..d3e72da0d35a 100644
-> --- a/drivers/power/regulator/act8846.c
-> +++ b/drivers/power/regulator/act8846.c
-> @@ -8,7 +8,6 @@
->    * zyw <zyw@rock-chips.com>
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <errno.h>
->   #include <power/act8846_pmic.h>
-> diff --git a/drivers/power/regulator/anatop_regulator.c b/drivers/power/regulator/anatop_regulator.c
-> index 096a1565d5a7..824a753db161 100644
-> --- a/drivers/power/regulator/anatop_regulator.c
-> +++ b/drivers/power/regulator/anatop_regulator.c
-> @@ -4,7 +4,6 @@
->    * Copyright (C) 2021 Linaro
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <errno.h>
->   #include <log.h>
-> diff --git a/drivers/power/regulator/as3722_regulator.c b/drivers/power/regulator/as3722_regulator.c
-> index ec0776b440bb..8d60965fe9ac 100644
-> --- a/drivers/power/regulator/as3722_regulator.c
-> +++ b/drivers/power/regulator/as3722_regulator.c
-> @@ -6,7 +6,6 @@
->    * Placeholder regulator driver for as3722.
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <errno.h>
->   #include <log.h>
-> diff --git a/drivers/power/regulator/bd71837.c b/drivers/power/regulator/bd71837.c
-> index 913ed88d45f7..59aec1a7313e 100644
-> --- a/drivers/power/regulator/bd71837.c
-> +++ b/drivers/power/regulator/bd71837.c
-> @@ -5,7 +5,6 @@
->    * ROHM BD71837 regulator driver
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <log.h>
->   #include <linux/bitops.h>
-> diff --git a/drivers/power/regulator/da9063.c b/drivers/power/regulator/da9063.c
-> index 8df1abcf7885..5d566b06a522 100644
-> --- a/drivers/power/regulator/da9063.c
-> +++ b/drivers/power/regulator/da9063.c
-> @@ -4,7 +4,6 @@
->    *  Martin Fuzzey  <martin.fuzzey@flowbird.group>
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <linux/bitops.h>
->   #include <power/da9063_pmic.h>
-> diff --git a/drivers/power/regulator/fan53555.c b/drivers/power/regulator/fan53555.c
-> index fa8d88f2e0dc..5cba58f91cac 100644
-> --- a/drivers/power/regulator/fan53555.c
-> +++ b/drivers/power/regulator/fan53555.c
-> @@ -3,7 +3,6 @@
->    * (C) 2018 Theobroma Systems Design und Consulting GmbH
->    */
->   
-> -#include <common.h>
->   #include <bitfield.h>
->   #include <errno.h>
->   #include <dm.h>
-> diff --git a/drivers/power/regulator/fixed.c b/drivers/power/regulator/fixed.c
-> index 590c288d6575..98c89bf2aff6 100644
-> --- a/drivers/power/regulator/fixed.c
-> +++ b/drivers/power/regulator/fixed.c
-> @@ -5,7 +5,6 @@
->    *  Przemyslaw Marczak <p.marczak@samsung.com>
->    */
->   
-> -#include <common.h>
->   #include <clk.h>
->   #include <errno.h>
->   #include <dm.h>
-> diff --git a/drivers/power/regulator/gpio-regulator.c b/drivers/power/regulator/gpio-regulator.c
-> index 74137b7b876f..38b22535c3dd 100644
-> --- a/drivers/power/regulator/gpio-regulator.c
-> +++ b/drivers/power/regulator/gpio-regulator.c
-> @@ -4,7 +4,6 @@
->    * Keerthy <j-keerthy@ti.com>
->    */
->   
-> -#include <common.h>
->   #include <fdtdec.h>
->   #include <errno.h>
->   #include <dm.h>
-> diff --git a/drivers/power/regulator/lp873x_regulator.c b/drivers/power/regulator/lp873x_regulator.c
-> index c326f8efa471..c59d77118ada 100644
-> --- a/drivers/power/regulator/lp873x_regulator.c
-> +++ b/drivers/power/regulator/lp873x_regulator.c
-> @@ -6,7 +6,6 @@
->    * Keerthy <j-keerthy@ti.com>
->    */
->   
-> -#include <common.h>
->   #include <fdtdec.h>
->   #include <errno.h>
->   #include <dm.h>
-> diff --git a/drivers/power/regulator/lp87565_regulator.c b/drivers/power/regulator/lp87565_regulator.c
-> index 6bbc831d2c8a..d622d9568156 100644
-> --- a/drivers/power/regulator/lp87565_regulator.c
-> +++ b/drivers/power/regulator/lp87565_regulator.c
-> @@ -6,7 +6,6 @@
->    * Keerthy <j-keerthy@ti.com>
->    */
->   
-> -#include <common.h>
->   #include <fdtdec.h>
->   #include <errno.h>
->   #include <dm.h>
-> diff --git a/drivers/power/regulator/max77686.c b/drivers/power/regulator/max77686.c
-> index 3a2080399340..4e0ba12a0ef8 100644
-> --- a/drivers/power/regulator/max77686.c
-> +++ b/drivers/power/regulator/max77686.c
-> @@ -6,7 +6,6 @@
->    *  Przemyslaw Marczak <p.marczak@samsung.com>
->    */
->   
-> -#include <common.h>
->   #include <fdtdec.h>
->   #include <errno.h>
->   #include <dm.h>
-> diff --git a/drivers/power/regulator/npcm8xx_regulator.c b/drivers/power/regulator/npcm8xx_regulator.c
-> index fcd1058cdf52..30d1b8945cb7 100644
-> --- a/drivers/power/regulator/npcm8xx_regulator.c
-> +++ b/drivers/power/regulator/npcm8xx_regulator.c
-> @@ -3,7 +3,6 @@
->    * Copyright (c) 2022 Nuvoton Technology Corp.
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <asm/io.h>
->   #include <dm/device_compat.h>
-> diff --git a/drivers/power/regulator/palmas_regulator.c b/drivers/power/regulator/palmas_regulator.c
-> index d615e9473403..2286eac93fbe 100644
-> --- a/drivers/power/regulator/palmas_regulator.c
-> +++ b/drivers/power/regulator/palmas_regulator.c
-> @@ -6,7 +6,6 @@
->    * Keerthy <j-keerthy@ti.com>
->    */
->   
-> -#include <common.h>
->   #include <fdtdec.h>
->   #include <errno.h>
->   #include <dm.h>
-> diff --git a/drivers/power/regulator/pbias_regulator.c b/drivers/power/regulator/pbias_regulator.c
-> index cf4e2858443d..8f599cab6899 100644
-> --- a/drivers/power/regulator/pbias_regulator.c
-> +++ b/drivers/power/regulator/pbias_regulator.c
-> @@ -4,7 +4,6 @@
->    * Jean-Jacques Hiblot <jjhiblot@ti.com>
->    */
->   
-> -#include <common.h>
->   #include <errno.h>
->   #include <dm.h>
->   #include <log.h>
-> diff --git a/drivers/power/regulator/pca9450.c b/drivers/power/regulator/pca9450.c
-> index 7ca20d1f7f87..9faf1eab5f90 100644
-> --- a/drivers/power/regulator/pca9450.c
-> +++ b/drivers/power/regulator/pca9450.c
-> @@ -7,7 +7,6 @@
->    * ROHM BD71837 regulator driver
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <log.h>
->   #include <linux/bitops.h>
-> diff --git a/drivers/power/regulator/pfuze100.c b/drivers/power/regulator/pfuze100.c
-> index 1d926689b3b0..bf3a7019411e 100644
-> --- a/drivers/power/regulator/pfuze100.c
-> +++ b/drivers/power/regulator/pfuze100.c
-> @@ -5,7 +5,6 @@
->    * Peng Fan <peng.fan@nxp.com>
->    */
->   
-> -#include <common.h>
->   #include <fdtdec.h>
->   #include <errno.h>
->   #include <dm.h>
-> diff --git a/drivers/power/regulator/pwm_regulator.c b/drivers/power/regulator/pwm_regulator.c
-> index ca59f3ae3e18..ff738faadc52 100644
-> --- a/drivers/power/regulator/pwm_regulator.c
-> +++ b/drivers/power/regulator/pwm_regulator.c
-> @@ -7,7 +7,6 @@
->    * Author: Lee Jones <lee.jones@linaro.org>
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <errno.h>
->   #include <log.h>
-> diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
-> index 77d101f262e2..66fd531da043 100644
-> --- a/drivers/power/regulator/regulator-uclass.c
-> +++ b/drivers/power/regulator/regulator-uclass.c
-> @@ -6,7 +6,6 @@
->   
->   #define LOG_CATEGORY UCLASS_REGULATOR
->   
-> -#include <common.h>
->   #include <errno.h>
->   #include <dm.h>
->   #include <log.h>
-> diff --git a/drivers/power/regulator/regulator_common.c b/drivers/power/regulator/regulator_common.c
-> index 0116fa01bbfe..e3565d32a019 100644
-> --- a/drivers/power/regulator/regulator_common.c
-> +++ b/drivers/power/regulator/regulator_common.c
-> @@ -4,7 +4,6 @@
->    * Sven Schwermer <sven.svenschwermer@disruptive-technologies.com>
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <log.h>
->   #include <asm/gpio.h>
-> diff --git a/drivers/power/regulator/rk8xx.c b/drivers/power/regulator/rk8xx.c
-> index 1bd4605d43a0..bf3af7815279 100644
-> --- a/drivers/power/regulator/rk8xx.c
-> +++ b/drivers/power/regulator/rk8xx.c
-> @@ -8,7 +8,6 @@
->    * zyw <zyw@rock-chips.com>
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <errno.h>
->   #include <log.h>
-> diff --git a/drivers/power/regulator/s2mps11_regulator.c b/drivers/power/regulator/s2mps11_regulator.c
-> index 987a1f9d8638..96de55065feb 100644
-> --- a/drivers/power/regulator/s2mps11_regulator.c
-> +++ b/drivers/power/regulator/s2mps11_regulator.c
-> @@ -4,7 +4,6 @@
->    *  Jaehoon Chung <jh80.chung@samsung.com>
->    */
->   
-> -#include <common.h>
->   #include <fdtdec.h>
->   #include <errno.h>
->   #include <dm.h>
-> diff --git a/drivers/power/regulator/s5m8767.c b/drivers/power/regulator/s5m8767.c
-> index 23575831f382..0dcf0990802b 100644
-> --- a/drivers/power/regulator/s5m8767.c
-> +++ b/drivers/power/regulator/s5m8767.c
-> @@ -3,7 +3,6 @@
->    * Copyright (C) 2015 Google, Inc
->    */
->   
-> -#include <common.h>
->   #include <fdtdec.h>
->   #include <errno.h>
->   #include <dm.h>
-> diff --git a/drivers/power/regulator/sandbox.c b/drivers/power/regulator/sandbox.c
-> index 71ef0c5441af..80a68f5a30d5 100644
-> --- a/drivers/power/regulator/sandbox.c
-> +++ b/drivers/power/regulator/sandbox.c
-> @@ -4,7 +4,6 @@
->    *  Przemyslaw Marczak  <p.marczak@samsung.com>
->    */
->   
-> -#include <common.h>
->   #include <fdtdec.h>
->   #include <errno.h>
->   #include <dm.h>
-> diff --git a/drivers/power/regulator/scmi_regulator.c b/drivers/power/regulator/scmi_regulator.c
-> index 9c72c35d039e..99f6506f1628 100644
-> --- a/drivers/power/regulator/scmi_regulator.c
-> +++ b/drivers/power/regulator/scmi_regulator.c
+>   #include <console.h>
+>   #include <cli.h>
+> diff --git a/drivers/ram/stm32mp1/stm32mp1_ram.c b/drivers/ram/stm32mp1/stm32mp1_ram.c
+> index a82b1db7592d..debc458c0e2e 100644
+> --- a/drivers/ram/stm32mp1/stm32mp1_ram.c
+> +++ b/drivers/ram/stm32mp1/stm32mp1_ram.c
 > @@ -5,7 +5,6 @@
 >   
->   #define LOG_CATEGORY UCLASS_REGULATOR
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <errno.h>
->   #include <scmi_agent.h>
-> diff --git a/drivers/power/regulator/stm32-vrefbuf.c b/drivers/power/regulator/stm32-vrefbuf.c
-> index c37998a4bac4..dd8a33f15bea 100644
-> --- a/drivers/power/regulator/stm32-vrefbuf.c
-> +++ b/drivers/power/regulator/stm32-vrefbuf.c
-> @@ -8,7 +8,6 @@
->   
->   #define LOG_CATEGORY UCLASS_REGULATOR
+>   #define LOG_CATEGORY UCLASS_RAM
 >   
 > -#include <common.h>
 >   #include <clk.h>
 >   #include <dm.h>
->   #include <asm/io.h>
-> diff --git a/drivers/power/regulator/stpmic1.c b/drivers/power/regulator/stpmic1.c
-> index 4839d834316a..b5ffa1cd5895 100644
-> --- a/drivers/power/regulator/stpmic1.c
-> +++ b/drivers/power/regulator/stpmic1.c
-> @@ -4,7 +4,6 @@
->    * Author: Christophe Kerello <christophe.kerello@st.com>
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <errno.h>
->   #include <linux/delay.h>
-> diff --git a/drivers/power/regulator/tps62360_regulator.c b/drivers/power/regulator/tps62360_regulator.c
-> index 7014b1982d00..9acc6b905497 100644
-> --- a/drivers/power/regulator/tps62360_regulator.c
-> +++ b/drivers/power/regulator/tps62360_regulator.c
-> @@ -4,7 +4,6 @@
->    *      Tero Kristo <t-kristo@ti.com>
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <i2c.h>
->   #include <dm/device_compat.h>
-> diff --git a/drivers/power/regulator/tps65090_regulator.c b/drivers/power/regulator/tps65090_regulator.c
-> index fa15e61a10e0..2d414de14907 100644
-> --- a/drivers/power/regulator/tps65090_regulator.c
-> +++ b/drivers/power/regulator/tps65090_regulator.c
-> @@ -3,10 +3,10 @@
->    * Copyright (c) 2015 Google, Inc
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <errno.h>
->   #include <log.h>
-> +#include <time.h>
->   #include <linux/delay.h>
->   #include <power/pmic.h>
->   #include <power/regulator.h>
-> diff --git a/drivers/power/regulator/tps65219_regulator.c b/drivers/power/regulator/tps65219_regulator.c
-> index f87d07e61fbf..b7124fed0245 100644
-> --- a/drivers/power/regulator/tps65219_regulator.c
-> +++ b/drivers/power/regulator/tps65219_regulator.c
+>   #include <init.h>
+> diff --git a/drivers/ram/stm32mp1/stm32mp1_tests.c b/drivers/ram/stm32mp1/stm32mp1_tests.c
+> index c5f33544144f..6108faa70730 100644
+> --- a/drivers/ram/stm32mp1/stm32mp1_tests.c
+> +++ b/drivers/ram/stm32mp1/stm32mp1_tests.c
 > @@ -5,7 +5,6 @@
->    *
->    */
+>   
+>   #define LOG_CATEGORY UCLASS_RAM
 >   
 > -#include <common.h>
->   #include <fdtdec.h>
->   #include <errno.h>
->   #include <dm.h>
-> diff --git a/drivers/power/regulator/tps65910_regulator.c b/drivers/power/regulator/tps65910_regulator.c
-> index a4b9d449274b..562fd7db1908 100644
-> --- a/drivers/power/regulator/tps65910_regulator.c
-> +++ b/drivers/power/regulator/tps65910_regulator.c
-> @@ -3,7 +3,6 @@
->    * Copyright (C) EETS GmbH, 2017, Felix Brack <f.brack@eets.ch>
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
+>   #include <console.h>
+>   #include <init.h>
 >   #include <log.h>
->   #include <linux/printk.h>
-> diff --git a/drivers/power/regulator/tps65941_regulator.c b/drivers/power/regulator/tps65941_regulator.c
-> index 5809a53fa214..bc4d153fd844 100644
-> --- a/drivers/power/regulator/tps65941_regulator.c
-> +++ b/drivers/power/regulator/tps65941_regulator.c
-> @@ -6,7 +6,6 @@
->    * Keerthy <j-keerthy@ti.com>
+> diff --git a/drivers/ram/sunxi/dram_sun20i_d1.c b/drivers/ram/sunxi/dram_sun20i_d1.c
+> index 38379281d739..a1794032f3b8 100644
+> --- a/drivers/ram/sunxi/dram_sun20i_d1.c
+> +++ b/drivers/ram/sunxi/dram_sun20i_d1.c
+> @@ -13,7 +13,7 @@
 >    */
 >   
-> -#include <common.h>
->   #include <fdtdec.h>
->   #include <errno.h>
->   #include <dm.h>
-> diff --git a/drivers/power/sy8106a.c b/drivers/power/sy8106a.c
-> index 45f47939869a..fb6028de71af 100644
-> --- a/drivers/power/sy8106a.c
-> +++ b/drivers/power/sy8106a.c
-> @@ -3,7 +3,6 @@
->    * (C) Copyright 2016
->    * Jelle van der Waa <jelle@vdwaa.nl>
->    */
-> -#include <common.h>
->   #include <i2c.h>
->   #include <sy8106a.h>
->   
-> diff --git a/drivers/power/tps6586x.c b/drivers/power/tps6586x.c
-> index 37f1c459a637..4034a9b49dd0 100644
-> --- a/drivers/power/tps6586x.c
-> +++ b/drivers/power/tps6586x.c
-> @@ -4,12 +4,12 @@
->    * (C) Copyright 2010,2011 NVIDIA Corporation <www.nvidia.com>
->    */
->   
-> -#include <common.h>
->   #include <log.h>
->   #include <tps6586x.h>
 >   #include <asm/io.h>
->   #include <i2c.h>
->   #include <linux/delay.h>
-> +#include <linux/errno.h>
->   
->   static struct udevice *tps6586x_dev;
->   
+> -#include <common.h>
+> +#include <config.h>
+>   #ifdef CONFIG_RAM
+>     #include <dm.h>
+>     #include <ram.h>
