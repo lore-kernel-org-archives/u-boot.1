@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08C77C25B10
-	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 15:50:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A1E0C25B10
+	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 16:32:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41E6488563;
-	Fri, 10 May 2024 17:49:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 4007B87FD7;
+	Fri, 10 May 2024 18:32:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="WRXwH2e2";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Kt0WI7X5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E595488122; Fri, 10 May 2024 17:49:57 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 4A16587CF1; Fri, 10 May 2024 18:32:28 +0200 (CEST)
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
+ [IPv6:2607:f8b0:4864:20::102b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A08388563
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 17:49:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 934AF87C75
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 18:32:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a59c5c9c6aeso541099566b.2
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 08:49:54 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-2b5f3e20615so2012163a91.1
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 09:32:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1715356194; x=1715960994;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=90ocL8r0R0eaK8Hyf4h1NmQA//4eE2v0FNRibdK4f+Q=;
- b=WRXwH2e24jgQGrJ7IzT9ecxz+FZf1/pBEw1ZwiOp93ip05WEQ2IdiDZbJTU+hjmiPS
- 05IHSMdxJf2ln2qRPqaXRgG2tx8IpQxziNUmYpUn3CqDLlVcRfjhA75WrfK8HHSAnpMI
- UwPPGZV6qSWS267LNt3jxqF0Njv+AhK6tQFv0=
+ d=linaro.org; s=google; t=1715358744; x=1715963544; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=WVtAleKso6FF1LvRJxWPE1AI84qBZ6cenOTn5ZaXugc=;
+ b=Kt0WI7X5Ny9J4ZqEB4KGFsSWoES0IOSsx7WhvwGbU1IWyhQAdmv7OAoUNWEfx35fMn
+ 9sn5/Sbuu1zhhQAi2+DZoQLRGxGDC0HJcCfjDS2YCm0YR7G3+HN+gohSRHI/R2Y8npEJ
+ A6e5q/MWf4ATRGXfudBVpybJzA+7wgue6IiB0gJPJx/ZD0gIHfq+Fu6EGCiEOLFqz1bT
+ ls+ZLYI+w0Tm2D9jtRvIjk133jHMUJZ+HUDohjnSQ6eCRIORZNAPERPU3d+2H/sUYOjT
+ 2Vg8yLYoAftBB9mhkjZHiVlVrzl77oObE2loUTp79Eu10rcctoy8qPOY9eUxioSyLqQP
+ OSWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715356194; x=1715960994;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=90ocL8r0R0eaK8Hyf4h1NmQA//4eE2v0FNRibdK4f+Q=;
- b=ZWZlVv2BwSbLSroNcggccMWFiHLb05TgydNhUun0vCFZcu6p/FLpL2Qg+M2CyQAOdW
- 59B7gKRfBRCzK9GapvKfseOfoXxssJJ81xjMCDno3mk2tD9YImMqhCHm3zRYl73m2TYV
- IfDsBZvtv+rdMZr+fhuOzl1eWctQNEjV0uHaDja2CyO32+CuewWiR/1UdNMIDwQFnfhF
- gZMI/tCHJT0MqpPK/UTnq7BZFkA4UHkceE0LBRCtH/SIzoxS/PSkzixw/AVl1TtdTC+6
- myhA5TSMm0ebzL7+7JlxEJIqaPKIbUffxCL1Q8f1X3dI4C4pkBmL9hz8fK3L+imn/wNF
- 1jPg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXg7TBWsu7SBFhJPAESOln4MjJAZpk3a4IwZtmtx8QLNB1g4W90QPK/T2lcKLLDyifaCPWAX5e08CTgfDZ+wPuhbnDn9g==
-X-Gm-Message-State: AOJu0Yw7tuU6A53UUhBTCWL44J92/0CDgf4a7zJWmQYJPR/y44t8aSNc
- W4LNuXZ67iMi+dtlaWQH3c/KeZELOzYVF0uZw9olQ9nYT9nh9nBu9qCsJru+KEyxpzR90/xpT1w
- yZFO/n3fza4xOuy7xFgUnOEvoBpNbFDn83IQcQw==
-X-Google-Smtp-Source: AGHT+IF8ZvLcUoPF4gXNyZ+twpYfzXiqYTnTEGeMYKy9m6CocsDGC+iJWkYSO7NWKxdnbY5QsMEslqUggPNx8C1FYAc=
-X-Received: by 2002:a50:d496:0:b0:572:42ac:9b19 with SMTP id
- 4fb4d7f45d1cf-5734d440712mr2103518a12.0.1715356193920; Fri, 10 May 2024
- 08:49:53 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1715358744; x=1715963544;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WVtAleKso6FF1LvRJxWPE1AI84qBZ6cenOTn5ZaXugc=;
+ b=DpdXSIBRsPi4WaZRgvFQJFGUBcu0Ogwu1a6MmNdPi7KgPRpoxCM+82++VDpiIYvh2p
+ qESIsfl6y0lxUocu049+Sj0tjCBNXJLAW3St5Af8zEKKIE7KFc0MU8SXNLkiCq1wM3SX
+ fC5Gy/foqqEQvf45QRusjrPdJd7Gr9CNimv4w5QmidZiMCBpZ28zu3zz7P2ANtvuTe6e
+ jBts26+ZqUs2KHa3gnECOzyubwuquUoOlRgESAANSnSeC7jnnE1h2jlNJr0V8lyUPudW
+ lDEI7nm7+56wYonD5zA/d7zOmJnQ3MZFgEfl4pjYMwoVomVWrEtJ+CjOLolLsC+dKDNb
+ DNNA==
+X-Gm-Message-State: AOJu0Yz7L+fWFBgEp+HyV5eNYNCv8IkH9acH+CZLklYh53XGdodZIWWx
+ Kt6yCugC2j+6TDN+/bPcpeH1pXZBBznnM3O+H0QYQ27tAs4WOfe4iOERFh84xfZJjeQckKd5Bj1
+ nsZQibXHcFTQGyccdKwJp2XvsQ9osYJ1/6aNDuQ==
+X-Google-Smtp-Source: AGHT+IGrQeSwiVjROQszz73ooqXpDAZpm83MtQ+GaLCdphQh8KVXTiGOi+JCB7C9sraLgjkMV41OwH9rJwTom6Iaf7o=
+X-Received: by 2002:a17:90a:9601:b0:2ac:9baf:25b5 with SMTP id
+ 98e67ed59e1d1-2b6cc76f70emr2822977a91.25.1715358743966; Fri, 10 May 2024
+ 09:32:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAOMZO5AnweEsKk_LXVLRmC5=6L2x-Oo+rdngsAs_hcrSHFH91Q@mail.gmail.com>
- <CAOf5uw=2tob+MQfgGTfhXQqJK8vBjOPNPSD1CFkR70yXyEgAZg@mail.gmail.com>
- <CAOMZO5Bb9C+9-gj22LnVLGgQbh259h7iuff5jinD3LEDpAnkhQ@mail.gmail.com>
-In-Reply-To: <CAOMZO5Bb9C+9-gj22LnVLGgQbh259h7iuff5jinD3LEDpAnkhQ@mail.gmail.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Fri, 10 May 2024 17:49:42 +0200
-Message-ID: <CAOf5uw=y8n+6GtjkQOCogqLGTuPj41arBxucQVZUecGoDOwzbg@mail.gmail.com>
-Subject: Re: imx8mp: Flashing U-Boot into eMMC hardware partition via UUU
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Frank Li <frank.li@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- Ye Li <ye.li@nxp.com>, 
- U-Boot-Denx <u-boot@lists.denx.de>, Tim Harvey <tharvey@gateworks.com>, 
- Adam Ford <aford173@gmail.com>, Heiko Schocher <hs@denx.de>
+References: <20240509143743.1496210-1-raymond.mao@linaro.org>
+ <20240509143743.1496210-5-raymond.mao@linaro.org>
+ <CAC_iWjL+kbQLG=QwBGfrcRpFU3bhCCcyXLCtwxdY86JcC=0Kmg@mail.gmail.com>
+In-Reply-To: <CAC_iWjL+kbQLG=QwBGfrcRpFU3bhCCcyXLCtwxdY86JcC=0Kmg@mail.gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Fri, 10 May 2024 12:32:12 -0400
+Message-ID: <CAEfUkUJC7S+cwebJqh+TvbjYE6nEnczKwYELHYeN5iXBxoCpMw@mail.gmail.com>
+Subject: Re: [PATCH 4/4] arm: EFI linker script text section alignment
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Eddie James <eajames@linux.ibm.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,111 +94,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fabio
+Hi Ilias,
 
-On Fri, May 10, 2024 at 5:10=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
+On Thu, 9 May 2024 at 14:15, Ilias Apalodimas <ilias.apalodimas@linaro.org>
 wrote:
->
-> Hi Michael,
->
-> On Fri, May 10, 2024 at 11:28=E2=80=AFAM Michael Nazzareno Trimarchi
-> <michael@amarulasolutions.com> wrote:
->
-> > You can just change as you want. We have this file in buildroot, uuu
-> > can run command on the device
-> > using FB command. Example how call it
->
-> Thanks for sharing the example.
->
-> I adapted the UUU script like this:
->
-> SDPS: boot -f flash.bin
-> FB: ucmd setenv fastboot_buffer ${loadaddr}
-> FB: ucmd mmc dev 2 1
-> FB: download -f flash.bin
-> FB: ucmd setexpr blkcnt $filesize + 0x1ff
-> FB: ucmd setexpr blkcnt $blkcnt / 0x200
-> FB: ucmd mmc write $loadaddr 0 $blkcnt
 
-My suggestion is use timeout of some command when is possible
+> Hi Raymond,
+>
+> Try not to post the same patches without the fixes that were asked
+> [0], at least not without an explanation.
+>
+> On Thu, 9 May 2024 at 17:38, Raymond Mao <raymond.mao@linaro.org> wrote:
+> >
+> > Add text section alignment to fix sbsign signing warning
+> > 'gaps in the section table may result in different checksums'
+> > which causes a failure of efi_image_verify_diges()
+> >
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > ---
+> >  arch/arm/lib/elf_aarch64_efi.lds | 1 +
+> >  1 file changed, 1 insertion(+)
+> >
+> > diff --git a/arch/arm/lib/elf_aarch64_efi.lds
+> b/arch/arm/lib/elf_aarch64_efi.lds
+> > index 5dd98091698..bffd9a0447a 100644
+> > --- a/arch/arm/lib/elf_aarch64_efi.lds
+> > +++ b/arch/arm/lib/elf_aarch64_efi.lds
+> > @@ -28,6 +28,7 @@ SECTIONS
+> >                 *(.dynamic);
+> >                 . = ALIGN(512);
+> >         }
+> > +       . = ALIGN(4096);
+>
+> This is not what you want. There's already an ALIGN a few lines below
+> and you must include the symbols for _etext and _text_size.
+> You have to move the rela.* sections after the alignment. IIRC those
+> were inspired by [1], so you can look for guidance there.
+> On top of that riscv will need similar fixes (and any other
+> architecture that uses those)
+>
+> In practice, I have to add  ALIGN(4096) for both `.rela.*` and `.data`,
+otherwise it always prompts warning when signing the EFI image as
+below and finally leads a failure when calling function
+`efi_image_verify_digest()`.
 
-> FB: reboot
-> FB: done
->
-> Did the following changes based on imx8mn_bsh_smm_s2pro:
->
-> index 024b46ef8bc2..0b6026c34309 100644
-> --- a/board/freescale/imx8mp_evk/imx8mp_evk.c
-> +++ b/board/freescale/imx8mp_evk/imx8mp_evk.c
-> @@ -3,6 +3,8 @@
->   * Copyright 2019 NXP
->   */
->
-> +#include <common.h>
-> +#include <asm/arch/sys_proto.h>
->  #include <env.h>
->
->  int board_init(void)
-> @@ -17,5 +19,11 @@ int board_late_init(void)
->         env_set("board_rev", "iMX8MP");
->  #endif
->
-> +       if (is_usb_boot()) {
-> +               printf("***** Entering in USB download mode\n");
-> +               env_set("bootcmd", "fastboot usb 0");
-> +               env_set("bootdelay", "0");
-> +       }
-> +
+```
+warning: gap in section table:
+    .text   : 0x00001000 - 0x00001c00,
+    .data   : 0x00002000 - 0x00002200,
+gaps in the section table may result in different checksums
+warning: data remaining[7680 vs 12720]: gaps between PE/COFF sections?
+```
 
-I think that is kind of good example
-
->         return 0;
->  }
-> diff --git a/include/configs/imx8mp_evk.h b/include/configs/imx8mp_evk.h
-> index 1759318fdd35..148b36bd3169 100644
-> --- a/include/configs/imx8mp_evk.h
-> +++ b/include/configs/imx8mp_evk.h
-> @@ -25,8 +25,17 @@
->
->  #include <config_distro_bootcmd.h>
->
-> +#define EMMCARGS \
-> +       "fastboot_partition_alias_all=3D" \
-> +               __stringify(CONFIG_FASTBOOT_FLASH_MMC_DEV) ".0:0\0" \
-> +       "fastboot_partition_alias_bootloader=3D" \
-> +               __stringify(CONFIG_FASTBOOT_FLASH_MMC_DEV) ".1:0\0" \
-> +       "emmc_dev=3D" __stringify(CONFIG_FASTBOOT_FLASH_MMC_DEV) "\0" \
-> +       "emmc_ack=3D1\0" \
-> +
->  /* Initial environment variables */
->  #define CFG_EXTRA_ENV_SETTINGS         \
-> +       EMMCARGS \
->         BOOTENV \
->         "scriptaddr=3D" __stringify(CONFIG_SYS_LOAD_ADDR) "\0" \
->         "kernel_addr_r=3D" __stringify(CONFIG_SYS_LOAD_ADDR) "\0" \
->
-> and now UUU correctly flashes the eMMC hardware partition.
->
-> Thanks a lot,
-
-No problem
-
-Micheal
-
->
-> Fabio Estevam
+I am not sure if RISC-V is working, never tried to build with that.
+But arm32, x86 should be fine - they don't have the `.rela.*` sections and
+text and data sections are well aligned.
 
 
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+> >         .rela.dyn : { *(.rela.dyn) }
+> >         .rela.plt : { *(.rela.plt) }
+> >         .rela.got : { *(.rela.got) }
+> > --
+> > 2.25.1
+> >
+>
+> [0]
+> https://lore.kernel.org/u-boot/CAC_iWjK+14L6mEi8GQN-McF-SChvhnjJ79nE1tWLV+kgWZKVew@mail.gmail.com/
+> [1] https://git.code.sf.net/p/gnu-efi/code
+>
+>
+Regards,
+Raymond
