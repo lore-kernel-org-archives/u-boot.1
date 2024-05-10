@@ -4,90 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A72B5C25B10
-	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 20:01:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CF41C25B10
+	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 20:21:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3134E87EAC;
-	Fri, 10 May 2024 22:01:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5FA1487ED1;
+	Fri, 10 May 2024 22:21:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q4CmcWpQ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="zGC3NVNy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4219F87FCC; Fri, 10 May 2024 22:01:57 +0200 (CEST)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C526087EF7; Fri, 10 May 2024 22:21:39 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23CE587E74
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 22:01:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EDF7F87DEF
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 22:21:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-3c996526c69so1072804b6e.1
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 13:01:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715371314; x=1715976114; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0TzwZxKSlHomnlApuUKJw6ZF6VkMZH2RVSIFa9ZQYdw=;
- b=q4CmcWpQy8EG0r5lQD1+LW3bEGwkUwApTv7Fp2lLujm4UaG+Q7J+/THxJ4vDb3ZcYD
- 9vJG5rY2wqKkbgIEkOkq7RKVs2es4MkXWvtvpyDOouKo8RJ202Lfjgg7vrojk/mVUJdS
- yqdJKPe98FlmaGpKmU/nujMwWcACSA5tWaaOo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715371314; x=1715976114;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0TzwZxKSlHomnlApuUKJw6ZF6VkMZH2RVSIFa9ZQYdw=;
- b=tn5CjnBQR85mvmko92D9HtWAu+iOc6sNOYvWmxT3psxOr8CHfZSmj6vWlUzrGBafDd
- 54ivKcG2Km73p1+ulBwQVLBuvCbAs7V/0qR7j92VMPPL8/sI8fWf6pZZpDXMbhxSUBNO
- MUDy7c9mqExjlD/neVBer3J7xkkxWdDILLnKkxprYTcEJ/VFdvSX002mxl4Sn4uPQ09u
- 6VOhcGmIVEbdqvvQyT2EAs3lWUqYsnLr4NJszkzU+EdMiAW2FxGBaGByh5I1iF0OiYEG
- UlS6LLmo6TXk3vL8mOeSoWdSYsF783g+A5PEiPhGcgi0hVKkPtDwxnSMz9+CPJPCRNSc
- 86fA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVCv1KnF5K4vDROjdi44w/6yr82Qw9MiBtNU8ZYp+6EB6TTOKkq/gsoxpUEKJFoWpwfZ4zVDFRz1jw64gCMgW5vgPVv2A==
-X-Gm-Message-State: AOJu0YwEhuNTNrUneEPLqYMLwt33ihlN44AF16tSOLKzepSSjOFqGUm8
- lWQnFJNzfPQ4moLjBpI1ZNGFeUHB0sDN29IN6KxJDIl6QiD40Rlm1lrecfVDEvA=
-X-Google-Smtp-Source: AGHT+IEliver/xxE+XvcHXM1GxQQID35fGWpCaQlJf98jA1rxIQ4pi/Bzro4B4+F0N+WMtT/r0eO3Q==
-X-Received: by 2002:a05:6808:16aa:b0:3c8:311c:ac60 with SMTP id
- 5614622812f47-3c9970ccefcmr4446556b6e.46.1715371313879; 
- Fri, 10 May 2024 13:01:53 -0700 (PDT)
-Received: from bill-the-cat ([187.144.98.216])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6a15f1d740fsm20066516d6.115.2024.05.10.13.01.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 May 2024 13:01:53 -0700 (PDT)
-Date: Fri, 10 May 2024 14:01:50 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Nishanth Menon <nm@ti.com>
-Cc: Roger Quadros <rogerq@kernel.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Robert Nelson <robertcnelson@gmail.com>, Wadim Egorov <w.egorov@phytec.de>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Simon Glass <sjg@chromium.org>, srk@ti.com, s-vadapalli@ti.com,
- vigneshr@ti.com, r-gunasekaran@ti.com, danishanwar@ti.com,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 0/3] arm: dts: am62-beagleplay: Fix Beagleplay Ethernet
-Message-ID: <20240510200150.GZ2568172@bill-the-cat>
-References: <20240425-for-2024-07-beagleplay-eth-v1-0-6c985de1c316@kernel.org>
- <9baa5ac5-8ce9-4aea-9a3d-ec1d68ea5505@kernel.org>
- <20240510130830.GT2568172@bill-the-cat>
- <08b22e06-f316-4ef6-bd42-a4600f1f8035@kernel.org>
- <20240510193325.GX2568172@bill-the-cat>
- <20240510195837.oebzog4czpn4wzxs@spearfish>
- <20240510200056.GY2568172@bill-the-cat>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44AKLYIO054675;
+ Fri, 10 May 2024 15:21:34 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1715372494;
+ bh=uoo6yEKziSPodUq0djmKbRE0IGFjaFX3JFj+yR4OZi8=;
+ h=From:To:CC:Subject:Date;
+ b=zGC3NVNyb9inDzzjLETBIRb9pddSWC6xy9ruLgmd4s5YbtZRj0klIUhBK01t5yE69
+ yH9M/UMlRl5Ma02KitJtafBKdA6I0e4Mw/QU+iZfA/Z26gA3BCv7e3NsCzEatbG/CH
+ Yu1LPmhYmNO4a3+aCduNsUdNe7/TGGbFXM+Wubjk=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44AKLYXV030038
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 10 May 2024 15:21:34 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 10
+ May 2024 15:21:33 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 10 May 2024 15:21:34 -0500
+Received: from lelvsmtp5.itg.ti.com ([10.249.42.149])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44AKLXKk091090;
+ Fri, 10 May 2024 15:21:33 -0500
+From: Andrew Davis <afd@ti.com>
+To: Neha Malcom Francis <n-francis@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>
+Subject: [PATCH v2] arm: mach-k3: Move code specific to a SoC into that SoC's
+ directory
+Date: Fri, 10 May 2024 15:21:24 -0500
+Message-ID: <20240510202124.794448-1-afd@ti.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="qVlFJ93RM1Zj5nYe"
-Content-Disposition: inline
-In-Reply-To: <20240510200056.GY2568172@bill-the-cat>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,50 +79,505 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Each SoC now has a directory in mach-k3, let's move the SoC specific
+files into their respective directories.
 
---qVlFJ93RM1Zj5nYe
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Andrew Davis <afd@ti.com>
+---
 
-On Fri, May 10, 2024 at 02:00:56PM -0600, Tom Rini wrote:
-> On Fri, May 10, 2024 at 02:58:37PM -0500, Nishanth Menon wrote:
-> > On 13:33-20240510, Tom Rini wrote:
-> > [...]
-> > > >=20
-> > > > [1] arm64: dts: ti: beagleplay: Fix Ethernet PHY RESET GPIOs
-> > > >       commit: 0b1133ee36ecbf3b02f69cc4e8a169f1b6019e40
-> > >=20
-> > > Ah, since it's been merged to -next now, Nishanth, what do you want to
-> > > do?
-> >=20
-> > No biggie.. it is on route to kernel master anyways, was planning on
-> > OF_UPSTREAM migration for beagle once we settle 6.10-rc1 settles into
-> > u-boot.
->=20
-> OK, I'll just grab this iteration.
+Changes for v2:
+ - Rebased on latest -next
 
-=2E.. needs a rebase anyhow, yes, please do, thanks.
+ arch/arm/mach-k3/Makefile                   | 24 ++++++---------------
+ arch/arm/mach-k3/am62ax/Makefile            |  7 ++++++
+ arch/arm/mach-k3/{ => am62ax}/am62a7_fdt.c  |  3 ++-
+ arch/arm/mach-k3/{ => am62ax}/am62a7_init.c |  5 +++--
+ arch/arm/mach-k3/am62px/Makefile            |  6 ++++++
+ arch/arm/mach-k3/{ => am62px}/am62p5_init.c |  5 +++--
+ arch/arm/mach-k3/am62x/Makefile             |  3 +++
+ arch/arm/mach-k3/{ => am62x}/am625_fdt.c    |  3 ++-
+ arch/arm/mach-k3/{ => am62x}/am625_init.c   |  5 +++--
+ arch/arm/mach-k3/am64x/Makefile             |  2 ++
+ arch/arm/mach-k3/{ => am64x}/am642_init.c   |  5 +++--
+ arch/arm/mach-k3/am65x/Makefile             |  7 ++++++
+ arch/arm/mach-k3/{ => am65x}/am654_fdt.c    |  3 ++-
+ arch/arm/mach-k3/{ => am65x}/am654_init.c   |  5 +++--
+ arch/arm/mach-k3/j721e/Makefile             |  7 ++++++
+ arch/arm/mach-k3/{ => j721e}/j721e_fdt.c    |  3 ++-
+ arch/arm/mach-k3/{ => j721e}/j721e_init.c   |  5 +++--
+ arch/arm/mach-k3/j721s2/Makefile            |  7 ++++++
+ arch/arm/mach-k3/{ => j721s2}/j721s2_fdt.c  |  3 ++-
+ arch/arm/mach-k3/{ => j721s2}/j721s2_init.c |  5 +++--
+ arch/arm/mach-k3/j784s4/Makefile            |  7 ++++++
+ arch/arm/mach-k3/{ => j784s4}/j784s4_fdt.c  |  3 ++-
+ arch/arm/mach-k3/{ => j784s4}/j784s4_init.c |  5 +++--
+ 23 files changed, 88 insertions(+), 40 deletions(-)
+ create mode 100644 arch/arm/mach-k3/am62ax/Makefile
+ rename arch/arm/mach-k3/{ => am62ax}/am62a7_fdt.c (93%)
+ rename arch/arm/mach-k3/{ => am62ax}/am62a7_init.c (99%)
+ create mode 100644 arch/arm/mach-k3/am62px/Makefile
+ rename arch/arm/mach-k3/{ => am62px}/am62p5_init.c (99%)
+ rename arch/arm/mach-k3/{ => am62x}/am625_fdt.c (98%)
+ rename arch/arm/mach-k3/{ => am62x}/am625_init.c (99%)
+ rename arch/arm/mach-k3/{ => am64x}/am642_init.c (99%)
+ create mode 100644 arch/arm/mach-k3/am65x/Makefile
+ rename arch/arm/mach-k3/{ => am65x}/am654_fdt.c (88%)
+ rename arch/arm/mach-k3/{ => am65x}/am654_init.c (99%)
+ create mode 100644 arch/arm/mach-k3/j721e/Makefile
+ rename arch/arm/mach-k3/{ => j721e}/j721e_fdt.c (88%)
+ rename arch/arm/mach-k3/{ => j721e}/j721e_init.c (99%)
+ create mode 100644 arch/arm/mach-k3/j721s2/Makefile
+ rename arch/arm/mach-k3/{ => j721s2}/j721s2_fdt.c (88%)
+ rename arch/arm/mach-k3/{ => j721s2}/j721s2_init.c (99%)
+ create mode 100644 arch/arm/mach-k3/j784s4/Makefile
+ rename arch/arm/mach-k3/{ => j784s4}/j784s4_fdt.c (92%)
+ rename arch/arm/mach-k3/{ => j784s4}/j784s4_init.c (99%)
 
---=20
-Tom
+diff --git a/arch/arm/mach-k3/Makefile b/arch/arm/mach-k3/Makefile
+index 3101f57d324..2b3ebd5c535 100644
+--- a/arch/arm/mach-k3/Makefile
++++ b/arch/arm/mach-k3/Makefile
+@@ -6,24 +6,12 @@
+ obj-$(CONFIG_ARM64) += arm64/
+ obj-$(CONFIG_CPU_V7R) += r5/
+ obj-$(CONFIG_OF_LIBFDT) += common_fdt.o
+-ifeq ($(CONFIG_OF_LIBFDT)$(CONFIG_OF_SYSTEM_SETUP),yy)
+-obj-$(CONFIG_SOC_K3_AM654) += am654_fdt.o
+-obj-$(CONFIG_SOC_K3_J721E) += j721e_fdt.o
+-obj-$(CONFIG_SOC_K3_J721S2) += j721s2_fdt.o
+-obj-$(CONFIG_SOC_K3_AM625) += am625_fdt.o
+-obj-$(CONFIG_SOC_K3_AM62A7) += am62a7_fdt.o
+-obj-$(CONFIG_SOC_K3_J784S4) += j784s4_fdt.o
+-endif
+-ifeq ($(CONFIG_SPL_BUILD),y)
+-obj-$(CONFIG_SOC_K3_AM654) += am654_init.o
+-obj-$(CONFIG_SOC_K3_J721E) += j721e_init.o
+-obj-$(CONFIG_SOC_K3_J721S2) += j721s2_init.o
+-obj-$(CONFIG_SOC_K3_AM642) += am642_init.o
+-obj-$(CONFIG_SOC_K3_AM625) += am625_init.o
+-obj-$(CONFIG_SOC_K3_AM62A7) += am62a7_init.o
+-obj-$(CONFIG_SOC_K3_J784S4) += j784s4_init.o
+-obj-$(CONFIG_SOC_K3_AM62P5) += am62p5_init.o
+-endif
+ obj-y += common.o security.o
++obj-$(CONFIG_SOC_K3_AM62A7) += am62ax/
++obj-$(CONFIG_SOC_K3_AM62P5) += am62px/
+ obj-$(CONFIG_SOC_K3_AM625) += am62x/
+ obj-$(CONFIG_SOC_K3_AM642) += am64x/
++obj-$(CONFIG_SOC_K3_AM654) += am65x/
++obj-$(CONFIG_SOC_K3_J721E) += j721e/
++obj-$(CONFIG_SOC_K3_J721S2) += j721s2/
++obj-$(CONFIG_SOC_K3_J784S4) += j784s4/
+diff --git a/arch/arm/mach-k3/am62ax/Makefile b/arch/arm/mach-k3/am62ax/Makefile
+new file mode 100644
+index 00000000000..1717ca343d6
+--- /dev/null
++++ b/arch/arm/mach-k3/am62ax/Makefile
+@@ -0,0 +1,7 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
++#	Andrew Davis <afd@ti.com>
++
++obj-$(CONFIG_OF_SYSTEM_SETUP) += am62a7_fdt.o
++obj-$(CONFIG_SPL_BUILD) += am62a7_init.o
+diff --git a/arch/arm/mach-k3/am62a7_fdt.c b/arch/arm/mach-k3/am62ax/am62a7_fdt.c
+similarity index 93%
+rename from arch/arm/mach-k3/am62a7_fdt.c
+rename to arch/arm/mach-k3/am62ax/am62a7_fdt.c
+index d67f012a5dc..7f764ab36b5 100644
+--- a/arch/arm/mach-k3/am62a7_fdt.c
++++ b/arch/arm/mach-k3/am62ax/am62a7_fdt.c
+@@ -4,9 +4,10 @@
+  */
+ 
+ #include <asm/hardware.h>
+-#include "common_fdt.h"
+ #include <fdt_support.h>
+ 
++#include "../common_fdt.h"
++
+ int ft_system_setup(void *blob, struct bd_info *bd)
+ {
+ 	fdt_fixup_reserved(blob, "tfa", CONFIG_K3_ATF_LOAD_ADDR, 0x80000);
+diff --git a/arch/arm/mach-k3/am62a7_init.c b/arch/arm/mach-k3/am62ax/am62a7_init.c
+similarity index 99%
+rename from arch/arm/mach-k3/am62a7_init.c
+rename to arch/arm/mach-k3/am62ax/am62a7_init.c
+index 658828cf75f..0f62f39075b 100644
+--- a/arch/arm/mach-k3/am62a7_init.c
++++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
+@@ -8,12 +8,13 @@
+ #include <spl.h>
+ #include <asm/io.h>
+ #include <asm/arch/hardware.h>
+-#include "sysfw-loader.h"
+-#include "common.h"
+ #include <dm.h>
+ #include <dm/uclass-internal.h>
+ #include <dm/pinctrl.h>
+ 
++#include "../sysfw-loader.h"
++#include "../common.h"
++
+ struct fwl_data cbass_main_fwls[] = {
+        { "FSS_DAT_REG3", 7, 8 },
+ };
+diff --git a/arch/arm/mach-k3/am62px/Makefile b/arch/arm/mach-k3/am62px/Makefile
+new file mode 100644
+index 00000000000..5902862b29c
+--- /dev/null
++++ b/arch/arm/mach-k3/am62px/Makefile
+@@ -0,0 +1,6 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
++#	Andrew Davis <afd@ti.com>
++
++obj-$(CONFIG_SPL_BUILD) += am62p5_init.o
+diff --git a/arch/arm/mach-k3/am62p5_init.c b/arch/arm/mach-k3/am62px/am62p5_init.c
+similarity index 99%
+rename from arch/arm/mach-k3/am62p5_init.c
+rename to arch/arm/mach-k3/am62px/am62p5_init.c
+index aab99aa0c95..34ed01cd78c 100644
+--- a/arch/arm/mach-k3/am62p5_init.c
++++ b/arch/arm/mach-k3/am62px/am62p5_init.c
+@@ -8,12 +8,13 @@
+ #include <spl.h>
+ #include <asm/io.h>
+ #include <asm/arch/hardware.h>
+-#include "sysfw-loader.h"
+-#include "common.h"
+ #include <dm.h>
+ #include <dm/uclass-internal.h>
+ #include <dm/pinctrl.h>
+ 
++#include "../sysfw-loader.h"
++#include "../common.h"
++
+ struct fwl_data cbass_main_fwls[] = {
+ 	{ "FSS_DAT_REG3", 7, 8 },
+ };
+diff --git a/arch/arm/mach-k3/am62x/Makefile b/arch/arm/mach-k3/am62x/Makefile
+index acf09c3426c..8494cdda482 100644
+--- a/arch/arm/mach-k3/am62x/Makefile
++++ b/arch/arm/mach-k3/am62x/Makefile
+@@ -1,2 +1,5 @@
+ # SPDX-License-Identifier:	GPL-2.0+
++
++obj-$(CONFIG_OF_SYSTEM_SETUP) += am625_fdt.o
++obj-$(CONFIG_SPL_BUILD) += am625_init.o
+ obj-y += boot.o
+diff --git a/arch/arm/mach-k3/am625_fdt.c b/arch/arm/mach-k3/am62x/am625_fdt.c
+similarity index 98%
+rename from arch/arm/mach-k3/am625_fdt.c
+rename to arch/arm/mach-k3/am62x/am625_fdt.c
+index c56adef13bd..8fe200a4231 100644
+--- a/arch/arm/mach-k3/am625_fdt.c
++++ b/arch/arm/mach-k3/am62x/am625_fdt.c
+@@ -4,9 +4,10 @@
+  */
+ 
+ #include <asm/hardware.h>
+-#include "common_fdt.h"
+ #include <fdt_support.h>
+ 
++#include "../common_fdt.h"
++
+ static void fdt_fixup_cores_nodes_am625(void *blob, int core_nr)
+ {
+ 	char node_path[32];
+diff --git a/arch/arm/mach-k3/am625_init.c b/arch/arm/mach-k3/am62x/am625_init.c
+similarity index 99%
+rename from arch/arm/mach-k3/am625_init.c
+rename to arch/arm/mach-k3/am62x/am625_init.c
+index 668f9a51ef4..ed8d24e0433 100644
+--- a/arch/arm/mach-k3/am625_init.c
++++ b/arch/arm/mach-k3/am62x/am625_init.c
+@@ -9,13 +9,14 @@
+ #include <spl.h>
+ #include <asm/io.h>
+ #include <asm/arch/hardware.h>
+-#include "sysfw-loader.h"
+-#include "common.h"
+ #include <dm.h>
+ #include <dm/uclass-internal.h>
+ #include <dm/pinctrl.h>
+ #include <dm/ofnode.h>
+ 
++#include "../sysfw-loader.h"
++#include "../common.h"
++
+ #define RTC_BASE_ADDRESS		0x2b1f0000
+ #define REG_K3RTC_S_CNT_LSW		(RTC_BASE_ADDRESS + 0x18)
+ #define REG_K3RTC_KICK0			(RTC_BASE_ADDRESS + 0x70)
+diff --git a/arch/arm/mach-k3/am64x/Makefile b/arch/arm/mach-k3/am64x/Makefile
+index acf09c3426c..d0b286276c8 100644
+--- a/arch/arm/mach-k3/am64x/Makefile
++++ b/arch/arm/mach-k3/am64x/Makefile
+@@ -1,2 +1,4 @@
+ # SPDX-License-Identifier:	GPL-2.0+
++
++obj-$(CONFIG_SPL_BUILD) += am642_init.o
+ obj-y += boot.o
+diff --git a/arch/arm/mach-k3/am642_init.c b/arch/arm/mach-k3/am64x/am642_init.c
+similarity index 99%
+rename from arch/arm/mach-k3/am642_init.c
+rename to arch/arm/mach-k3/am64x/am642_init.c
+index f341b4f367c..41812b7dbf7 100644
+--- a/arch/arm/mach-k3/am642_init.c
++++ b/arch/arm/mach-k3/am64x/am642_init.c
+@@ -11,8 +11,6 @@
+ #include <spl.h>
+ #include <asm/io.h>
+ #include <asm/arch/hardware.h>
+-#include "sysfw-loader.h"
+-#include "common.h"
+ #include <linux/soc/ti/ti_sci_protocol.h>
+ #include <dm.h>
+ #include <dm/uclass-internal.h>
+@@ -21,6 +19,9 @@
+ #include <dm/root.h>
+ #include <command.h>
+ 
++#include "../sysfw-loader.h"
++#include "../common.h"
++
+ #define CTRLMMR_MCU_RST_CTRL			0x04518170
+ 
+ #define CTRLMMR_MCU_RST_SRC                    (MCU_CTRL_MMR0_BASE + 0x18178)
+diff --git a/arch/arm/mach-k3/am65x/Makefile b/arch/arm/mach-k3/am65x/Makefile
+new file mode 100644
+index 00000000000..20d5f1d3bf1
+--- /dev/null
++++ b/arch/arm/mach-k3/am65x/Makefile
+@@ -0,0 +1,7 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
++#	Andrew Davis <afd@ti.com>
++
++obj-$(CONFIG_OF_SYSTEM_SETUP) += am654_fdt.o
++obj-$(CONFIG_SPL_BUILD) += am654_init.o
+diff --git a/arch/arm/mach-k3/am654_fdt.c b/arch/arm/mach-k3/am65x/am654_fdt.c
+similarity index 88%
+rename from arch/arm/mach-k3/am654_fdt.c
+rename to arch/arm/mach-k3/am65x/am654_fdt.c
+index 652fe8d32bb..bcb15208be9 100644
+--- a/arch/arm/mach-k3/am654_fdt.c
++++ b/arch/arm/mach-k3/am65x/am654_fdt.c
+@@ -3,9 +3,10 @@
+  * Copyright 2023 Toradex - https://www.toradex.com/
+  */
+ 
+-#include "common_fdt.h"
+ #include <fdt_support.h>
+ 
++#include "../common_fdt.h"
++
+ int ft_system_setup(void *blob, struct bd_info *bd)
+ {
+ 	return fdt_fixup_msmc_ram_k3(blob);
+diff --git a/arch/arm/mach-k3/am654_init.c b/arch/arm/mach-k3/am65x/am654_init.c
+similarity index 99%
+rename from arch/arm/mach-k3/am654_init.c
+rename to arch/arm/mach-k3/am65x/am654_init.c
+index 7c2a143ed1b..a4f038029d7 100644
+--- a/arch/arm/mach-k3/am654_init.c
++++ b/arch/arm/mach-k3/am65x/am654_init.c
+@@ -12,8 +12,6 @@
+ #include <asm/io.h>
+ #include <spl.h>
+ #include <asm/arch/hardware.h>
+-#include "sysfw-loader.h"
+-#include "common.h"
+ #include <dm.h>
+ #include <dm/uclass-internal.h>
+ #include <dm/pinctrl.h>
+@@ -22,6 +20,9 @@
+ #include <mmc.h>
+ #include <stdlib.h>
+ 
++#include "../sysfw-loader.h"
++#include "../common.h"
++
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+ #ifdef CONFIG_K3_LOAD_SYSFW
+diff --git a/arch/arm/mach-k3/j721e/Makefile b/arch/arm/mach-k3/j721e/Makefile
+new file mode 100644
+index 00000000000..982b88db57d
+--- /dev/null
++++ b/arch/arm/mach-k3/j721e/Makefile
+@@ -0,0 +1,7 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
++#	Andrew Davis <afd@ti.com>
++
++obj-$(CONFIG_OF_SYSTEM_SETUP) += j721e_fdt.o
++obj-$(CONFIG_SPL_BUILD) += j721e_init.o
+diff --git a/arch/arm/mach-k3/j721e_fdt.c b/arch/arm/mach-k3/j721e/j721e_fdt.c
+similarity index 88%
+rename from arch/arm/mach-k3/j721e_fdt.c
+rename to arch/arm/mach-k3/j721e/j721e_fdt.c
+index 652fe8d32bb..bcb15208be9 100644
+--- a/arch/arm/mach-k3/j721e_fdt.c
++++ b/arch/arm/mach-k3/j721e/j721e_fdt.c
+@@ -3,9 +3,10 @@
+  * Copyright 2023 Toradex - https://www.toradex.com/
+  */
+ 
+-#include "common_fdt.h"
+ #include <fdt_support.h>
+ 
++#include "../common_fdt.h"
++
+ int ft_system_setup(void *blob, struct bd_info *bd)
+ {
+ 	return fdt_fixup_msmc_ram_k3(blob);
+diff --git a/arch/arm/mach-k3/j721e_init.c b/arch/arm/mach-k3/j721e/j721e_init.c
+similarity index 99%
+rename from arch/arm/mach-k3/j721e_init.c
+rename to arch/arm/mach-k3/j721e/j721e_init.c
+index 7ee9b75de4d..c2024f2500d 100644
+--- a/arch/arm/mach-k3/j721e_init.c
++++ b/arch/arm/mach-k3/j721e/j721e_init.c
+@@ -11,8 +11,6 @@
+ #include <asm/io.h>
+ #include <asm/armv7_mpu.h>
+ #include <asm/arch/hardware.h>
+-#include "sysfw-loader.h"
+-#include "common.h"
+ #include <linux/soc/ti/ti_sci_protocol.h>
+ #include <dm.h>
+ #include <dm/uclass-internal.h>
+@@ -22,6 +20,9 @@
+ #include <mmc.h>
+ #include <remoteproc.h>
+ 
++#include "../sysfw-loader.h"
++#include "../common.h"
++
+ #ifdef CONFIG_K3_LOAD_SYSFW
+ struct fwl_data cbass_hc_cfg0_fwls[] = {
+ #if defined(CONFIG_TARGET_J721E_R5_EVM)
+diff --git a/arch/arm/mach-k3/j721s2/Makefile b/arch/arm/mach-k3/j721s2/Makefile
+new file mode 100644
+index 00000000000..ceef68297c9
+--- /dev/null
++++ b/arch/arm/mach-k3/j721s2/Makefile
+@@ -0,0 +1,7 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
++#	Andrew Davis <afd@ti.com>
++
++obj-$(CONFIG_OF_SYSTEM_SETUP) += j721s2_fdt.o
++obj-$(CONFIG_SPL_BUILD) += j721s2_init.o
+diff --git a/arch/arm/mach-k3/j721s2_fdt.c b/arch/arm/mach-k3/j721s2/j721s2_fdt.c
+similarity index 88%
+rename from arch/arm/mach-k3/j721s2_fdt.c
+rename to arch/arm/mach-k3/j721s2/j721s2_fdt.c
+index 652fe8d32bb..bcb15208be9 100644
+--- a/arch/arm/mach-k3/j721s2_fdt.c
++++ b/arch/arm/mach-k3/j721s2/j721s2_fdt.c
+@@ -3,9 +3,10 @@
+  * Copyright 2023 Toradex - https://www.toradex.com/
+  */
+ 
+-#include "common_fdt.h"
+ #include <fdt_support.h>
+ 
++#include "../common_fdt.h"
++
+ int ft_system_setup(void *blob, struct bd_info *bd)
+ {
+ 	return fdt_fixup_msmc_ram_k3(blob);
+diff --git a/arch/arm/mach-k3/j721s2_init.c b/arch/arm/mach-k3/j721s2/j721s2_init.c
+similarity index 99%
+rename from arch/arm/mach-k3/j721s2_init.c
+rename to arch/arm/mach-k3/j721s2/j721s2_init.c
+index 3374889558a..fe9766e9b4b 100644
+--- a/arch/arm/mach-k3/j721s2_init.c
++++ b/arch/arm/mach-k3/j721s2/j721s2_init.c
+@@ -11,8 +11,6 @@
+ #include <asm/io.h>
+ #include <asm/armv7_mpu.h>
+ #include <asm/arch/hardware.h>
+-#include "sysfw-loader.h"
+-#include "common.h"
+ #include <linux/soc/ti/ti_sci_protocol.h>
+ #include <dm.h>
+ #include <dm/uclass-internal.h>
+@@ -21,6 +19,9 @@
+ #include <mmc.h>
+ #include <remoteproc.h>
+ 
++#include "../sysfw-loader.h"
++#include "../common.h"
++
+ struct fwl_data cbass_hc_cfg0_fwls[] = {
+ 	{ "PCIE0_CFG", 2577, 7 },
+ 	{ "EMMC8SS0_CFG", 2579, 4 },
+diff --git a/arch/arm/mach-k3/j784s4/Makefile b/arch/arm/mach-k3/j784s4/Makefile
+new file mode 100644
+index 00000000000..6d1841e3f9e
+--- /dev/null
++++ b/arch/arm/mach-k3/j784s4/Makefile
+@@ -0,0 +1,7 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
++#	Andrew Davis <afd@ti.com>
++
++obj-$(CONFIG_OF_SYSTEM_SETUP) += j784s4_fdt.o
++obj-$(CONFIG_SPL_BUILD) += j784s4_init.o
+diff --git a/arch/arm/mach-k3/j784s4_fdt.c b/arch/arm/mach-k3/j784s4/j784s4_fdt.c
+similarity index 92%
+rename from arch/arm/mach-k3/j784s4_fdt.c
+rename to arch/arm/mach-k3/j784s4/j784s4_fdt.c
+index d05ed8b9911..e1275097051 100644
+--- a/arch/arm/mach-k3/j784s4_fdt.c
++++ b/arch/arm/mach-k3/j784s4/j784s4_fdt.c
+@@ -6,9 +6,10 @@
+  *	Apurva Nandan <a-nandan@ti.com>
+  */
+ 
+-#include "common_fdt.h"
+ #include <fdt_support.h>
+ 
++#include "../common_fdt.h"
++
+ int ft_system_setup(void *blob, struct bd_info *bd)
+ {
+ 	return fdt_fixup_msmc_ram_k3(blob);
+diff --git a/arch/arm/mach-k3/j784s4_init.c b/arch/arm/mach-k3/j784s4/j784s4_init.c
+similarity index 99%
+rename from arch/arm/mach-k3/j784s4_init.c
+rename to arch/arm/mach-k3/j784s4/j784s4_init.c
+index ae4420362d0..1ce13e0f494 100644
+--- a/arch/arm/mach-k3/j784s4_init.c
++++ b/arch/arm/mach-k3/j784s4/j784s4_init.c
+@@ -11,8 +11,6 @@
+ #include <asm/io.h>
+ #include <asm/armv7_mpu.h>
+ #include <asm/arch/hardware.h>
+-#include "sysfw-loader.h"
+-#include "common.h"
+ #include <linux/soc/ti/ti_sci_protocol.h>
+ #include <dm.h>
+ #include <dm/uclass-internal.h>
+@@ -20,6 +18,9 @@
+ #include <mmc.h>
+ #include <remoteproc.h>
+ 
++#include "../sysfw-loader.h"
++#include "../common.h"
++
+ #define J784S4_MAX_DDR_CONTROLLERS	4
+ 
+ struct fwl_data infra_cbass0_fwls[] = {
+-- 
+2.39.2
 
---qVlFJ93RM1Zj5nYe
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY+fS4ACgkQFHw5/5Y0
-tyyUCwv/U9V+7u5b6e4Hoc0IlvyYQ75iZR3OffjOuXrbfhkccMm71+SCRmDSMDMQ
-9bTZYV327XQq35ITTj3VIhPpXUjlHu51WHuzRAGUjZ5Q5y/pinJ67gyR/6zCBqR2
-5NW78x50rpZ+18R2nn+NeV6bVydvnKncDDY3kHe9360d4FQ13CNR3KcalcLeGjX0
-Jkdc5T0MdmxL5stG6DTwl0tbLTV9W7Q+F9HrijISB65vsUKwgquAtSDYZM3JW8C7
-kJhOPUMV+4lS8PddPKXr0zLrBVAwSnGYr79stzBMwKeQ0CV52kyayXCAxVt0CYAu
-FkoRGQ9U8lEF2dVMBjjuHszBoaE088lO9jpxA5SCEuiyiWyFF8P7VyMrLLhfajrt
-Ie4rcgRny8S8eVujY13PR9AohurgQq5/V8OS3pRZaQBoKWdYeyzxp4I4C+PEQ6NA
-g9I7Aw3LQIqtXQHUMWb76hyAXy8vJuk647+hYILmMrLxh1UhRse7QPpgHzKsjmUl
-ov1FJpxR
-=EJiN
------END PGP SIGNATURE-----
-
---qVlFJ93RM1Zj5nYe--
