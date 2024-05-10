@@ -4,57 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24E32C10F1A
-	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 00:43:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A609BC10F1A
+	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 00:43:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A70EC88633;
-	Fri, 10 May 2024 02:43:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 31EA488858;
+	Fri, 10 May 2024 02:43:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="BHjs91vB";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="VZ0vtYBK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0C2B8884F; Fri, 10 May 2024 02:43:40 +0200 (CEST)
-Received: from mail-m1033.netease.com (mail-m1033.netease.com [154.81.10.33])
+ id 4B13A88858; Fri, 10 May 2024 02:43:52 +0200 (CEST)
+Received: from mail-m17235.xmail.ntesmail.com (mail-m17235.xmail.ntesmail.com
+ [45.195.17.235])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DCC28804F
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 02:43:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EDF0088853
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 02:43:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=BHjs91vBTtKNCRemhyy0DiAVOOcp5ZXqTp/k+crFuCgCVQm1hR29E+IhcYo8cToQGT1KMEhZQ0bDUnFNRevByh7wI78h7i66dGkk/7loRDgru76kWAucwNVBM/guCDIwpqRoJsyrun5TGVla8o3Sjs834fauqmpu6U8RLGvGKnc=;
+ b=VZ0vtYBKjj1ZwtX/6ABngwF8adEnvTnE9JccvekBm11xQB2wgJrV6vKb+Xjsd7DPOU67C7TZtBcEZIFw1kXpP9L17G6bqZdCU0Bbx4SEIbFftOMhU8kCTbJ8CO6kZ4rbnLTAZXGK9PEKOyROJEsTJT/w3n7Cg3bhHpLGJuxKDk8=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=+Tc+A89mON9NnY7vdCQJ/36PJOTJu5oGE5iI69bdzFQ=;
+ bh=VDvLsvGog2/uAyIHCV/wzTjpq4p3SXoVBkrJa6rRhrk=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 88F2E90018C;
- Fri, 10 May 2024 08:43:33 +0800 (CST)
-Message-ID: <d4674ac2-593f-48fc-a16f-cd62a53e770e@rock-chips.com>
-Date: Fri, 10 May 2024 08:43:33 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id C364890018C;
+ Fri, 10 May 2024 08:43:44 +0800 (CST)
+Message-ID: <55e07f63-961e-4f41-8ef3-db679856c481@rock-chips.com>
+Date: Fri, 10 May 2024 08:43:44 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 54/81] ram: Remove <common.h> and add needed includes
+Subject: Re: [PATCH 57/81] reset: Remove <common.h> and add needed includes
 To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 References: <20240502013138.2383421-1-trini@konsulko.com>
- <20240502013138.2383421-54-trini@konsulko.com>
+ <20240502013138.2383421-57-trini@konsulko.com>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240502013138.2383421-54-trini@konsulko.com>
+In-Reply-To: <20240502013138.2383421-57-trini@konsulko.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGkwdTlYdSB8eH0ofGRkdTBlVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQh8ZSFZIGBhLHx9PGU5LSEhVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8f5ff48e1203a9kunm88f2e90018c
+X-HM-Tid: 0a8f5ff4b98203a9kunmc364890018c
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PQg6Fgw*SDMMSQIDGSoWFys2
- GgkwCjZVSlVKTEpOSEtKQ0pPSEJOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJSk9NTDcG
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PBg6Tjo4AjNOMgI2NykzFzw9
+ FB5PC0JVSlVKTEpOSEtKQ0lOT01MVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKTkpKQzcG
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,575 +88,406 @@ Thanks,
 > Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>
 > Cc: Joel Stanley <joel@jms.id.au>
 > Cc: Tom Rini <trini@konsulko.com>
+> Cc: Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>
 > Cc: Ryder Lee <ryder.lee@mediatek.com>
 > Cc: Weijie Gao <weijie.gao@mediatek.com>
 > Cc: Chunfeng Yun <chunfeng.yun@mediatek.com>
 > Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-> Cc: Mario Six <mario.six@gdsys.cc>
+> Cc: Neil Armstrong <neil.armstrong@linaro.org>
 > Cc: Simon Glass <sjg@chromium.org>
 > Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
 > Cc: Kever Yang <kever.yang@rock-chips.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Kunihiko Hayashi <hayashi.kunihiko@socionext.com>
+> Cc: Dai Okamura <okamura.dai@socionext.com>
+> Cc: Michal Simek <michal.simek@amd.com>
 > Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Ralph Siemsen <ralph.siemsen@linaro.org>
-> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> Cc: Leo Yu-Chi Liang <ycliang@andestech.com>
-> Cc: Yanhong Wang <yanhong.wang@starfivetech.com>
-> Cc: Andre Przywara <andre.przywara@arm.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Thierry Reding <treding@nvidia.com>
+> Cc: Svyatoslav Ryhel <clamor95@gmail.com>
+> Cc: Yang Xiwen <forbidden405@outlook.com>
+> Cc: Sumit Garg <sumit.garg@linaro.org>
+> Cc: Marek Vasut <marex@denx.de>
+> Cc: Eugen Hristev <eugen.hristev@collabora.com>
+> Cc: John Keeping <john@metanate.com>
+> Cc: Etienne Carriere <etienne.carriere@foss.st.com>
+> Cc: AKASHI Takahiro <akashi.tkhro@gmail.com>
 > ---
->   drivers/ram/aspeed/sdram_ast2500.c          | 2 +-
->   drivers/ram/aspeed/sdram_ast2600.c          | 2 +-
->   drivers/ram/bmips_ram.c                     | 1 -
->   drivers/ram/cadence/ddr_ctrl.c              | 1 -
->   drivers/ram/imxrt_sdram.c                   | 1 -
->   drivers/ram/k3-am654-ddrss.c                | 1 -
->   drivers/ram/k3-ddrss/k3-ddrss.c             | 1 -
->   drivers/ram/mediatek/ddr3-mt7629.c          | 2 +-
->   drivers/ram/mpc83xx_sdram.c                 | 1 -
->   drivers/ram/ram-uclass.c                    | 1 -
->   drivers/ram/renesas/rzn1/ddr_async.c        | 1 -
->   drivers/ram/rockchip/dmc-rk3368.c           | 2 +-
->   drivers/ram/rockchip/sdram_common.c         | 2 +-
->   drivers/ram/rockchip/sdram_pctl_px30.c      | 1 -
->   drivers/ram/rockchip/sdram_phy_px30.c       | 1 -
->   drivers/ram/rockchip/sdram_px30.c           | 2 +-
->   drivers/ram/rockchip/sdram_rk3066.c         | 2 +-
->   drivers/ram/rockchip/sdram_rk3128.c         | 2 +-
->   drivers/ram/rockchip/sdram_rk3188.c         | 2 +-
->   drivers/ram/rockchip/sdram_rk322x.c         | 2 +-
->   drivers/ram/rockchip/sdram_rk3288.c         | 2 +-
->   drivers/ram/rockchip/sdram_rk3308.c         | 2 +-
->   drivers/ram/rockchip/sdram_rk3328.c         | 2 +-
->   drivers/ram/rockchip/sdram_rk3399.c         | 2 +-
->   drivers/ram/rockchip/sdram_rk3568.c         | 2 +-
->   drivers/ram/rockchip/sdram_rk3588.c         | 2 +-
->   drivers/ram/rockchip/sdram_rv1126.c         | 2 +-
->   drivers/ram/sandbox_ram.c                   | 1 -
->   drivers/ram/sifive/sifive_ddr.c             | 1 -
->   drivers/ram/starfive/ddrcsr_boot.c          | 1 -
->   drivers/ram/starfive/ddrphy_start.c         | 1 -
->   drivers/ram/starfive/ddrphy_train.c         | 2 +-
->   drivers/ram/starfive/ddrphy_utils.c         | 2 +-
->   drivers/ram/starfive/starfive_ddr.c         | 1 -
->   drivers/ram/starfive/starfive_ddr.h         | 2 ++
->   drivers/ram/stm32_sdram.c                   | 1 -
->   drivers/ram/stm32mp1/stm32mp1_ddr.c         | 1 -
->   drivers/ram/stm32mp1/stm32mp1_interactive.c | 1 -
->   drivers/ram/stm32mp1/stm32mp1_ram.c         | 1 -
->   drivers/ram/stm32mp1/stm32mp1_tests.c       | 1 -
->   drivers/ram/sunxi/dram_sun20i_d1.c          | 2 +-
->   41 files changed, 22 insertions(+), 40 deletions(-)
+>   drivers/reset/reset-ast2500.c      | 1 -
+>   drivers/reset/reset-ast2600.c      | 1 -
+>   drivers/reset/reset-bcm6345.c      | 1 -
+>   drivers/reset/reset-dra7.c         | 1 -
+>   drivers/reset/reset-hisilicon.c    | 1 -
+>   drivers/reset/reset-hsdk.c         | 1 -
+>   drivers/reset/reset-imx7.c         | 1 -
+>   drivers/reset/reset-jh7110.c       | 1 -
+>   drivers/reset/reset-mediatek.c     | 1 -
+>   drivers/reset/reset-meson.c        | 1 -
+>   drivers/reset/reset-mtmips.c       | 1 -
+>   drivers/reset/reset-raspberrypi.c  | 1 -
+>   drivers/reset/reset-rockchip.c     | 1 -
+>   drivers/reset/reset-scmi.c         | 1 -
+>   drivers/reset/reset-sifive.c       | 1 -
+>   drivers/reset/reset-socfpga.c      | 1 -
+>   drivers/reset/reset-sunxi.c        | 1 -
+>   drivers/reset/reset-syscon.c       | 1 -
+>   drivers/reset/reset-ti-sci.c       | 1 -
+>   drivers/reset/reset-uclass.c       | 1 -
+>   drivers/reset/reset-uniphier.c     | 1 -
+>   drivers/reset/reset-zynqmp.c       | 1 -
+>   drivers/reset/rst-rk3588.c         | 1 -
+>   drivers/reset/sandbox-reset-test.c | 1 -
+>   drivers/reset/sandbox-reset.c      | 1 -
+>   drivers/reset/sti-reset.c          | 1 -
+>   drivers/reset/stm32-reset.c        | 1 -
+>   drivers/reset/tegra-car-reset.c    | 1 -
+>   drivers/reset/tegra186-reset.c     | 1 -
+>   29 files changed, 29 deletions(-)
 >
-> diff --git a/drivers/ram/aspeed/sdram_ast2500.c b/drivers/ram/aspeed/sdram_ast2500.c
-> index dc466a88e712..0d6ab79f96fc 100644
-> --- a/drivers/ram/aspeed/sdram_ast2500.c
-> +++ b/drivers/ram/aspeed/sdram_ast2500.c
-> @@ -5,7 +5,7 @@
->    * Copyright 2016 Google, Inc
->    */
->   
-> -#include <common.h>
-> +#include <config.h>
->   #include <clk.h>
->   #include <dm.h>
->   #include <errno.h>
-> diff --git a/drivers/ram/aspeed/sdram_ast2600.c b/drivers/ram/aspeed/sdram_ast2600.c
-> index d463933363ee..55e80fba3dc0 100644
-> --- a/drivers/ram/aspeed/sdram_ast2600.c
-> +++ b/drivers/ram/aspeed/sdram_ast2600.c
-> @@ -2,7 +2,7 @@
->   /*
->    * Copyright (C) ASPEED Technology Inc.
->    */
-> -#include <common.h>
-> +#include <config.h>
->   #include <clk.h>
->   #include <dm.h>
->   #include <errno.h>
-> diff --git a/drivers/ram/bmips_ram.c b/drivers/ram/bmips_ram.c
-> index 98045248ecfb..760bebdbba04 100644
-> --- a/drivers/ram/bmips_ram.c
-> +++ b/drivers/ram/bmips_ram.c
-> @@ -7,7 +7,6 @@
->    *	Copyright (C) 2009 Florian Fainelli <florian@openwrt.org>
->    */
->   
-> -#include <common.h>
->   #include <dm.h>
->   #include <errno.h>
->   #include <init.h>
-> diff --git a/drivers/ram/cadence/ddr_ctrl.c b/drivers/ram/cadence/ddr_ctrl.c
-> index 3e5959a84a37..0fa60e766a7e 100644
-> --- a/drivers/ram/cadence/ddr_ctrl.c
-> +++ b/drivers/ram/cadence/ddr_ctrl.c
-> @@ -24,7 +24,6 @@
->    * bandwidth allocated to each AXI slave can be set.
->    */
->   
-> -#include <common.h>
->   #include <linux/delay.h>
->   #include <linux/sizes.h>
->   #include <asm/io.h>
-> diff --git a/drivers/ram/imxrt_sdram.c b/drivers/ram/imxrt_sdram.c
-> index 6a15242c20cc..3df106c9b79a 100644
-> --- a/drivers/ram/imxrt_sdram.c
-> +++ b/drivers/ram/imxrt_sdram.c
+> diff --git a/drivers/reset/reset-ast2500.c b/drivers/reset/reset-ast2500.c
+> index d9cecf3a72e8..0ed5396b3e91 100644
+> --- a/drivers/reset/reset-ast2500.c
+> +++ b/drivers/reset/reset-ast2500.c
 > @@ -4,7 +4,6 @@
->    * Author(s): Giulio Benetti <giulio.benetti@benettiengineering.com>
+>    * Copyright 2020 ASPEED Technology Inc.
 >    */
 >   
 > -#include <common.h>
->   #include <clk.h>
->   #include <dm.h>
->   #include <dm/device_compat.h>
-> diff --git a/drivers/ram/k3-am654-ddrss.c b/drivers/ram/k3-am654-ddrss.c
-> index cff8ffc89295..21ff9d761e1b 100644
-> --- a/drivers/ram/k3-am654-ddrss.c
-> +++ b/drivers/ram/k3-am654-ddrss.c
-> @@ -6,7 +6,6 @@
->    *	Lokesh Vutla <lokeshvutla@ti.com>
->    */
->   
-> -#include <common.h>
->   #include <clk.h>
 >   #include <dm.h>
 >   #include <log.h>
-> diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
-> index a5c9b82cf1da..525b6d5b79fc 100644
-> --- a/drivers/ram/k3-ddrss/k3-ddrss.c
-> +++ b/drivers/ram/k3-ddrss/k3-ddrss.c
+>   #include <misc.h>
+> diff --git a/drivers/reset/reset-ast2600.c b/drivers/reset/reset-ast2600.c
+> index 1732a450efc0..ec7b9b6625dc 100644
+> --- a/drivers/reset/reset-ast2600.c
+> +++ b/drivers/reset/reset-ast2600.c
+> @@ -3,7 +3,6 @@
+>    * Copyright 2020 ASPEED Technology Inc.
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <misc.h>
+> diff --git a/drivers/reset/reset-bcm6345.c b/drivers/reset/reset-bcm6345.c
+> index 5383f59ca375..6f140574216d 100644
+> --- a/drivers/reset/reset-bcm6345.c
+> +++ b/drivers/reset/reset-bcm6345.c
+> @@ -6,7 +6,6 @@
+>    *	Copyright (C) 2012 Jonas Gorski <jonas.gorski@gmail.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <errno.h>
+>   #include <log.h>
+> diff --git a/drivers/reset/reset-dra7.c b/drivers/reset/reset-dra7.c
+> index 05101a94f9bc..2f0ec4c042f7 100644
+> --- a/drivers/reset/reset-dra7.c
+> +++ b/drivers/reset/reset-dra7.c
+> @@ -7,7 +7,6 @@
+>    */
+>   
+>   #include <asm/io.h>
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <reset-uclass.h>
+>   #include <dm/device_compat.h>
+> diff --git a/drivers/reset/reset-hisilicon.c b/drivers/reset/reset-hisilicon.c
+> index 85e02b296b02..aca54cd6701c 100644
+> --- a/drivers/reset/reset-hisilicon.c
+> +++ b/drivers/reset/reset-hisilicon.c
+> @@ -6,7 +6,6 @@
+>   #include <log.h>
+>   #include <malloc.h>
+>   #include <asm/io.h>
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dt-bindings/reset/ti-syscon.h>
+>   #include <reset-uclass.h>
+> diff --git a/drivers/reset/reset-hsdk.c b/drivers/reset/reset-hsdk.c
+> index 74b1173e8878..747e73b17fcb 100644
+> --- a/drivers/reset/reset-hsdk.c
+> +++ b/drivers/reset/reset-hsdk.c
+> @@ -8,7 +8,6 @@
+>   
+>   #include <log.h>
+>   #include <asm/io.h>
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <linux/bitops.h>
+>   #include <linux/iopoll.h>
+> diff --git a/drivers/reset/reset-imx7.c b/drivers/reset/reset-imx7.c
+> index a3b3132f2fae..65a352b71fd7 100644
+> --- a/drivers/reset/reset-imx7.c
+> +++ b/drivers/reset/reset-imx7.c
+> @@ -6,7 +6,6 @@
+>   #include <log.h>
+>   #include <malloc.h>
+>   #include <asm/io.h>
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dt-bindings/reset/imx7-reset.h>
+>   #include <dt-bindings/reset/imx8mp-reset.h>
+> diff --git a/drivers/reset/reset-jh7110.c b/drivers/reset/reset-jh7110.c
+> index d6bdf6bb00c4..adf722d5871a 100644
+> --- a/drivers/reset/reset-jh7110.c
+> +++ b/drivers/reset/reset-jh7110.c
 > @@ -5,7 +5,6 @@
->    * Copyright (C) 2020-2021 Texas Instruments Incorporated - https://www.ti.com/
->    */
->   
-> -#include <common.h>
->   #include <config.h>
->   #include <clk.h>
->   #include <div64.h>
-> diff --git a/drivers/ram/mediatek/ddr3-mt7629.c b/drivers/ram/mediatek/ddr3-mt7629.c
-> index f65fcf179cf6..c27c4593b9d9 100644
-> --- a/drivers/ram/mediatek/ddr3-mt7629.c
-> +++ b/drivers/ram/mediatek/ddr3-mt7629.c
-> @@ -8,7 +8,7 @@
->    */
->   
->   #include <clk.h>
-> -#include <common.h>
-> +#include <config.h>
->   #include <dm.h>
->   #include <ram.h>
->   #include <asm/io.h>
-> diff --git a/drivers/ram/mpc83xx_sdram.c b/drivers/ram/mpc83xx_sdram.c
-> index 11676d4fae7e..28a663289a23 100644
-> --- a/drivers/ram/mpc83xx_sdram.c
-> +++ b/drivers/ram/mpc83xx_sdram.c
-> @@ -4,7 +4,6 @@
->    * Mario Six, Guntermann & Drunck GmbH, mario.six@gdsys.cc
+>    *
 >    */
 >   
 > -#include <common.h>
 >   #include <dm.h>
->   #include <init.h>
->   #include <log.h>
-> diff --git a/drivers/ram/ram-uclass.c b/drivers/ram/ram-uclass.c
-> index 4e21240fd4cb..a33d583cc448 100644
-> --- a/drivers/ram/ram-uclass.c
-> +++ b/drivers/ram/ram-uclass.c
+>   #include <dm/ofnode.h>
+>   #include <dt-bindings/reset/starfive,jh7110-crg.h>
+> diff --git a/drivers/reset/reset-mediatek.c b/drivers/reset/reset-mediatek.c
+> index 97ed221f739a..4b3afab92ea7 100644
+> --- a/drivers/reset/reset-mediatek.c
+> +++ b/drivers/reset/reset-mediatek.c
 > @@ -6,7 +6,6 @@
->   
->   #define LOG_CATEGORY UCLASS_RAM
+>    *	   Weijie Gao <weijie.gao@mediatek.com>
+>    */
 >   
 > -#include <common.h>
->   #include <ram.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <malloc.h>
+> diff --git a/drivers/reset/reset-meson.c b/drivers/reset/reset-meson.c
+> index 9d0c8b354f4a..6337cdaaffa2 100644
+> --- a/drivers/reset/reset-meson.c
+> +++ b/drivers/reset/reset-meson.c
+> @@ -6,7 +6,6 @@
+>    * Author: Neil Armstrong <narmstrong@baylibre.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <malloc.h>
+> diff --git a/drivers/reset/reset-mtmips.c b/drivers/reset/reset-mtmips.c
+> index 7bb8469823c8..2db6766280f2 100644
+> --- a/drivers/reset/reset-mtmips.c
+> +++ b/drivers/reset/reset-mtmips.c
+> @@ -5,7 +5,6 @@
+>    * Author: Weijie Gao <weijie.gao@mediatek.com>
+>    */
+>   
+> -#include <common.h>
 >   #include <dm.h>
 >   #include <errno.h>
-> diff --git a/drivers/ram/renesas/rzn1/ddr_async.c b/drivers/ram/renesas/rzn1/ddr_async.c
-> index 7a81497bc92b..4d470aae1914 100644
-> --- a/drivers/ram/renesas/rzn1/ddr_async.c
-> +++ b/drivers/ram/renesas/rzn1/ddr_async.c
-> @@ -7,7 +7,6 @@
->    *
->    * Copyright (C) 2015 Renesas Electronics Europe Ltd
->    */
-> -#include <common.h>
->   #include <clk.h>
->   #include <dm.h>
->   #include <dm/device_compat.h>
-> diff --git a/drivers/ram/rockchip/dmc-rk3368.c b/drivers/ram/rockchip/dmc-rk3368.c
-> index 5279bf0a1548..42114a5aa917 100644
-> --- a/drivers/ram/rockchip/dmc-rk3368.c
-> +++ b/drivers/ram/rockchip/dmc-rk3368.c
-> @@ -3,7 +3,7 @@
->    * (C) Copyright 2017 Theobroma Systems Design und Consulting GmbH
->    */
->   
-> -#include <common.h>
-> +#include <config.h>
->   #include <clk.h>
->   #include <dm.h>
->   #include <hang.h>
-> diff --git a/drivers/ram/rockchip/sdram_common.c b/drivers/ram/rockchip/sdram_common.c
-> index 60fc90d0a5c0..b7a8fce607c8 100644
-> --- a/drivers/ram/rockchip/sdram_common.c
-> +++ b/drivers/ram/rockchip/sdram_common.c
-> @@ -3,7 +3,7 @@
->    * (C) Copyright 2018 Rockchip Electronics Co., Ltd.
->    */
->   
-> -#include <common.h>
-> +#include <config.h>
->   #include <debug_uart.h>
->   #include <ram.h>
->   #include <asm/io.h>
-> diff --git a/drivers/ram/rockchip/sdram_pctl_px30.c b/drivers/ram/rockchip/sdram_pctl_px30.c
-> index e5c80fb83b3f..3ec98af536e8 100644
-> --- a/drivers/ram/rockchip/sdram_pctl_px30.c
-> +++ b/drivers/ram/rockchip/sdram_pctl_px30.c
-> @@ -3,7 +3,6 @@
->    * (C) Copyright 2018 Rockchip Electronics Co., Ltd.
->    */
->   
-> -#include <common.h>
->   #include <ram.h>
->   #include <asm/io.h>
->   #include <asm/arch-rockchip/sdram.h>
-> diff --git a/drivers/ram/rockchip/sdram_phy_px30.c b/drivers/ram/rockchip/sdram_phy_px30.c
-> index f7f6de1ba98b..5416eef38788 100644
-> --- a/drivers/ram/rockchip/sdram_phy_px30.c
-> +++ b/drivers/ram/rockchip/sdram_phy_px30.c
-> @@ -3,7 +3,6 @@
->    * (C) Copyright 2018 Rockchip Electronics Co., Ltd.
->    */
->   
-> -#include <common.h>
->   #include <ram.h>
->   #include <asm/io.h>
->   #include <asm/arch-rockchip/sdram.h>
-> diff --git a/drivers/ram/rockchip/sdram_px30.c b/drivers/ram/rockchip/sdram_px30.c
-> index 21498e89570f..37e621205047 100644
-> --- a/drivers/ram/rockchip/sdram_px30.c
-> +++ b/drivers/ram/rockchip/sdram_px30.c
-> @@ -3,7 +3,7 @@
->    * (C) Copyright 2018 Rockchip Electronics Co., Ltd.
->    */
->   
-> -#include <common.h>
-> +#include <config.h>
->   #include <debug_uart.h>
->   #include <dm.h>
->   #include <init.h>
-> diff --git a/drivers/ram/rockchip/sdram_rk3066.c b/drivers/ram/rockchip/sdram_rk3066.c
-> index 562cf544c909..a280e2d9fa1d 100644
-> --- a/drivers/ram/rockchip/sdram_rk3066.c
-> +++ b/drivers/ram/rockchip/sdram_rk3066.c
-> @@ -6,7 +6,7 @@
->    * Adapted from the very similar rk3188 ddr init.
->    */
->   
-> -#include <common.h>
-> +#include <config.h>
->   #include <clk.h>
->   #include <dm.h>
->   #include <dt-structs.h>
-> diff --git a/drivers/ram/rockchip/sdram_rk3128.c b/drivers/ram/rockchip/sdram_rk3128.c
-> index ded65393806e..66611f80b2da 100644
-> --- a/drivers/ram/rockchip/sdram_rk3128.c
-> +++ b/drivers/ram/rockchip/sdram_rk3128.c
-> @@ -3,7 +3,7 @@
->    * (C) Copyright 2017 Rockchip Electronics Co., Ltd.
->    */
->   
-> -#include <common.h>
-> +#include <config.h>
->   #include <dm.h>
 >   #include <log.h>
->   #include <ram.h>
-> diff --git a/drivers/ram/rockchip/sdram_rk3188.c b/drivers/ram/rockchip/sdram_rk3188.c
-> index e1b28c6e5933..618bce5c9f49 100644
-> --- a/drivers/ram/rockchip/sdram_rk3188.c
-> +++ b/drivers/ram/rockchip/sdram_rk3188.c
-> @@ -6,7 +6,7 @@
->    * Adapted from the very similar rk3288 ddr init.
+> diff --git a/drivers/reset/reset-raspberrypi.c b/drivers/reset/reset-raspberrypi.c
+> index 804e32b8dd14..1792f0813f79 100644
+> --- a/drivers/reset/reset-raspberrypi.c
+> +++ b/drivers/reset/reset-raspberrypi.c
+> @@ -4,7 +4,6 @@
+>    *
+>    * Copyright (C) 2020 Nicolas Saenz Julienne <nsaenzjulienne@suse.de>
 >    */
->   
 > -#include <common.h>
-> +#include <config.h>
->   #include <clk.h>
 >   #include <dm.h>
->   #include <dt-structs.h>
-> diff --git a/drivers/ram/rockchip/sdram_rk322x.c b/drivers/ram/rockchip/sdram_rk322x.c
-> index 5fc23c11193f..a48a50911844 100644
-> --- a/drivers/ram/rockchip/sdram_rk322x.c
-> +++ b/drivers/ram/rockchip/sdram_rk322x.c
-> @@ -2,7 +2,7 @@
->   /*
+>   #include <reset-uclass.h>
+>   #include <asm/arch/msg.h>
+> diff --git a/drivers/reset/reset-rockchip.c b/drivers/reset/reset-rockchip.c
+> index 6cabaa10a35b..876eb7dddaa8 100644
+> --- a/drivers/reset/reset-rockchip.c
+> +++ b/drivers/reset/reset-rockchip.c
+> @@ -3,7 +3,6 @@
 >    * (C) Copyright 2017 Rockchip Electronics Co., Ltd
 >    */
-> -#include <common.h>
-> +#include <config.h>
->   #include <clk.h>
->   #include <dm.h>
->   #include <dt-structs.h>
-> diff --git a/drivers/ram/rockchip/sdram_rk3288.c b/drivers/ram/rockchip/sdram_rk3288.c
-> index 242d564a7d26..c9f61e933e9a 100644
-> --- a/drivers/ram/rockchip/sdram_rk3288.c
-> +++ b/drivers/ram/rockchip/sdram_rk3288.c
-> @@ -6,7 +6,7 @@
->    * Adapted from coreboot.
->    */
 >   
 > -#include <common.h>
-> +#include <config.h>
->   #include <clk.h>
 >   #include <dm.h>
->   #include <dt-structs.h>
-> diff --git a/drivers/ram/rockchip/sdram_rk3308.c b/drivers/ram/rockchip/sdram_rk3308.c
-> index 264366291cf8..8071997f8d86 100644
-> --- a/drivers/ram/rockchip/sdram_rk3308.c
-> +++ b/drivers/ram/rockchip/sdram_rk3308.c
-> @@ -3,7 +3,7 @@
->    * (C) Copyright 2019 Rockchip Electronics Co., Ltd.
->    */
+>   #include <log.h>
+>   #include <malloc.h>
+> diff --git a/drivers/reset/reset-scmi.c b/drivers/reset/reset-scmi.c
+> index b76711f0a8fb..6dc1fcb33653 100644
+> --- a/drivers/reset/reset-scmi.c
+> +++ b/drivers/reset/reset-scmi.c
+> @@ -5,7 +5,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_RESET
 >   
 > -#include <common.h>
-> +#include <config.h>
 >   #include <dm.h>
->   #include <ram.h>
->   #include <syscon.h>
-> diff --git a/drivers/ram/rockchip/sdram_rk3328.c b/drivers/ram/rockchip/sdram_rk3328.c
-> index b5ca8ca436f5..99690d67a501 100644
-> --- a/drivers/ram/rockchip/sdram_rk3328.c
-> +++ b/drivers/ram/rockchip/sdram_rk3328.c
-> @@ -2,7 +2,7 @@
->   /*
->    * (C) Copyright 2017 Rockchip Electronics Co., Ltd.
->    */
-> -#include <common.h>
-> +#include <config.h>
->   #include <clk.h>
->   #include <debug_uart.h>
->   #include <dm.h>
-> diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
-> index 02cc4a38cf0b..ef9a1824b2b3 100644
-> --- a/drivers/ram/rockchip/sdram_rk3399.c
-> +++ b/drivers/ram/rockchip/sdram_rk3399.c
-> @@ -5,7 +5,7 @@
->    * Adapted from coreboot.
->    */
->   
-> -#include <common.h>
-> +#include <config.h>
->   #include <clk.h>
->   #include <dm.h>
->   #include <dt-structs.h>
-> diff --git a/drivers/ram/rockchip/sdram_rk3568.c b/drivers/ram/rockchip/sdram_rk3568.c
-> index f661615c1b91..a252d5c70106 100644
-> --- a/drivers/ram/rockchip/sdram_rk3568.c
-> +++ b/drivers/ram/rockchip/sdram_rk3568.c
-> @@ -3,7 +3,7 @@
->    * (C) Copyright 2021 Rockchip Electronics Co., Ltd.
->    */
->   
-> -#include <common.h>
-> +#include <config.h>
->   #include <dm.h>
->   #include <ram.h>
->   #include <syscon.h>
-> diff --git a/drivers/ram/rockchip/sdram_rk3588.c b/drivers/ram/rockchip/sdram_rk3588.c
-> index cf56e2a94121..a144b432d76f 100644
-> --- a/drivers/ram/rockchip/sdram_rk3588.c
-> +++ b/drivers/ram/rockchip/sdram_rk3588.c
-> @@ -3,7 +3,7 @@
->    * (C) Copyright 2021 Rockchip Electronics Co., Ltd.
->    */
->   
-> -#include <common.h>
-> +#include <config.h>
->   #include <dm.h>
->   #include <ram.h>
->   #include <syscon.h>
-> diff --git a/drivers/ram/rockchip/sdram_rv1126.c b/drivers/ram/rockchip/sdram_rv1126.c
-> index 849e15a91932..4fbb088a8d98 100644
-> --- a/drivers/ram/rockchip/sdram_rv1126.c
-> +++ b/drivers/ram/rockchip/sdram_rv1126.c
-> @@ -4,7 +4,7 @@
->    * Copyright (c) 2022 Edgeble AI Technologies Pvt. Ltd.
->    */
->   
-> -#include <common.h>
-> +#include <config.h>
->   #include <debug_uart.h>
->   #include <dm.h>
->   #include <ram.h>
-> diff --git a/drivers/ram/sandbox_ram.c b/drivers/ram/sandbox_ram.c
-> index 910dce623e90..2097da565322 100644
-> --- a/drivers/ram/sandbox_ram.c
-> +++ b/drivers/ram/sandbox_ram.c
+>   #include <errno.h>
+>   #include <reset-uclass.h>
+> diff --git a/drivers/reset/reset-sifive.c b/drivers/reset/reset-sifive.c
+> index 23513b2f541b..65f857149b96 100644
+> --- a/drivers/reset/reset-sifive.c
+> +++ b/drivers/reset/reset-sifive.c
 > @@ -4,7 +4,6 @@
->    * Written by Simon Glass <sjg@chromium.org>
+>    * Author: Sagar Kadam <sagar.kadam@sifive.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <reset-uclass.h>
+>   #include <asm/io.h>
+> diff --git a/drivers/reset/reset-socfpga.c b/drivers/reset/reset-socfpga.c
+> index 6e3f03e24843..866437fd24fe 100644
+> --- a/drivers/reset/reset-socfpga.c
+> +++ b/drivers/reset/reset-socfpga.c
+> @@ -12,7 +12,6 @@
+>    * Maxime Ripard <maxime.ripard@free-electrons.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <malloc.h>
+> diff --git a/drivers/reset/reset-sunxi.c b/drivers/reset/reset-sunxi.c
+> index e484d1fff449..fd47e1f9e377 100644
+> --- a/drivers/reset/reset-sunxi.c
+> +++ b/drivers/reset/reset-sunxi.c
+> @@ -4,7 +4,6 @@
+>    * Author: Jagan Teki <jagan@amarulasolutions.com>
 >    */
 >   
 > -#include <common.h>
 >   #include <dm.h>
 >   #include <errno.h>
->   #include <ram.h>
-> diff --git a/drivers/ram/sifive/sifive_ddr.c b/drivers/ram/sifive/sifive_ddr.c
-> index 4bd69a62be2b..bd2f438d7271 100644
-> --- a/drivers/ram/sifive/sifive_ddr.c
-> +++ b/drivers/ram/sifive/sifive_ddr.c
-> @@ -6,7 +6,6 @@
->    *   Pragnesh Patel <pragnesh.patel@sifive.com>
+>   #include <log.h>
+> diff --git a/drivers/reset/reset-syscon.c b/drivers/reset/reset-syscon.c
+> index ff387ab6b22f..5be8c9492af2 100644
+> --- a/drivers/reset/reset-syscon.c
+> +++ b/drivers/reset/reset-syscon.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (C) 2020 Sean Anderson
 >    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <regmap.h>
+>   #include <reset.h>
+> diff --git a/drivers/reset/reset-ti-sci.c b/drivers/reset/reset-ti-sci.c
+> index fd654a08f13a..e69bcd41cbe8 100644
+> --- a/drivers/reset/reset-ti-sci.c
+> +++ b/drivers/reset/reset-ti-sci.c
+> @@ -8,7 +8,6 @@
+>    * Loosely based on Linux kernel reset-ti-sci.c...
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <errno.h>
+>   #include <log.h>
+> diff --git a/drivers/reset/reset-uclass.c b/drivers/reset/reset-uclass.c
+> index b972faf01328..fe4cebf54f15 100644
+> --- a/drivers/reset/reset-uclass.c
+> +++ b/drivers/reset/reset-uclass.c
+> @@ -5,7 +5,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_RESET
 >   
 > -#include <common.h>
 >   #include <dm.h>
 >   #include <fdtdec.h>
->   #include <init.h>
-> diff --git a/drivers/ram/starfive/ddrcsr_boot.c b/drivers/ram/starfive/ddrcsr_boot.c
-> index f2dd55f74a08..6764b3ed5cc9 100644
-> --- a/drivers/ram/starfive/ddrcsr_boot.c
-> +++ b/drivers/ram/starfive/ddrcsr_boot.c
+>   #include <log.h>
+> diff --git a/drivers/reset/reset-uniphier.c b/drivers/reset/reset-uniphier.c
+> index 35e3ccebd72e..49b001f05942 100644
+> --- a/drivers/reset/reset-uniphier.c
+> +++ b/drivers/reset/reset-uniphier.c
+> @@ -5,7 +5,6 @@
+>    *   Author: Kunihiko Hayashi <hayashi.kunihiko@socionext.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <malloc.h>
+> diff --git a/drivers/reset/reset-zynqmp.c b/drivers/reset/reset-zynqmp.c
+> index 87b4df5bf81a..b9c4f09fdfde 100644
+> --- a/drivers/reset/reset-zynqmp.c
+> +++ b/drivers/reset/reset-zynqmp.c
+> @@ -5,7 +5,6 @@
+>   
+>   #define LOG_CATEGORY UCLASS_RESET
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <dm/device_compat.h>
+>   #include <reset-uclass.h>
+> diff --git a/drivers/reset/rst-rk3588.c b/drivers/reset/rst-rk3588.c
+> index 2c524e4c4033..eae2eb10de24 100644
+> --- a/drivers/reset/rst-rk3588.c
+> +++ b/drivers/reset/rst-rk3588.c
+> @@ -5,7 +5,6 @@
+>    * Author: Sebastian Reichel <sebastian.reichel@collabora.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <asm/arch-rockchip/clock.h>
+>   #include <dt-bindings/reset/rockchip,rk3588-cru.h>
+> diff --git a/drivers/reset/sandbox-reset-test.c b/drivers/reset/sandbox-reset-test.c
+> index 51b79810c89e..dfacb764bc77 100644
+> --- a/drivers/reset/sandbox-reset-test.c
+> +++ b/drivers/reset/sandbox-reset-test.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (c) 2016, NVIDIA CORPORATION.
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <malloc.h>
+> diff --git a/drivers/reset/sandbox-reset.c b/drivers/reset/sandbox-reset.c
+> index 97b1b92e4a6c..adf9eedcba6d 100644
+> --- a/drivers/reset/sandbox-reset.c
+> +++ b/drivers/reset/sandbox-reset.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (c) 2016, NVIDIA CORPORATION.
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <malloc.h>
+> diff --git a/drivers/reset/sti-reset.c b/drivers/reset/sti-reset.c
+> index 5305270fbf20..412a0c5b452b 100644
+> --- a/drivers/reset/sti-reset.c
+> +++ b/drivers/reset/sti-reset.c
 > @@ -4,7 +4,6 @@
->    * Author: Yanhong Wang<yanhong.wang@starfivetech.com>
+>    * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
 >    */
 >   
 > -#include <common.h>
->   #include <asm/io.h>
->   #include <asm/arch/regs.h>
->   #include <linux/delay.h>
-> diff --git a/drivers/ram/starfive/ddrphy_start.c b/drivers/ram/starfive/ddrphy_start.c
-> index 479b6ef10418..efe3f8a181a5 100644
-> --- a/drivers/ram/starfive/ddrphy_start.c
-> +++ b/drivers/ram/starfive/ddrphy_start.c
-> @@ -4,7 +4,6 @@
->    * Author: Yanhong Wang<yanhong.wang@starfivetech.com>
->    */
->   
-> -#include <common.h>
->   #include <asm/io.h>
->   
->   #include "starfive_ddr.h"
-> diff --git a/drivers/ram/starfive/ddrphy_train.c b/drivers/ram/starfive/ddrphy_train.c
-> index 0740f49be5bb..0aff1e8727ef 100644
-> --- a/drivers/ram/starfive/ddrphy_train.c
-> +++ b/drivers/ram/starfive/ddrphy_train.c
-> @@ -4,7 +4,7 @@
->    * Author: Yanhong Wang<yanhong.wang@starfivetech.com>
->    */
->   
-> -#include <common.h>
-> +#include <linux/kernel.h>
->   #include <asm/io.h>
->   
->   static const u32 ddr_train_data[] = {
-> diff --git a/drivers/ram/starfive/ddrphy_utils.c b/drivers/ram/starfive/ddrphy_utils.c
-> index 1c9fe0a78465..d6dd6ee7a859 100644
-> --- a/drivers/ram/starfive/ddrphy_utils.c
-> +++ b/drivers/ram/starfive/ddrphy_utils.c
-> @@ -4,7 +4,7 @@
->    * Author: Yanhong Wang<yanhong.wang@starfivetech.com>
->    */
->   
-> -#include <common.h>
-> +#include <linux/kernel.h>
->   #include <asm/io.h>
->   
->   static const  u32 ddr_phy_data[] = {
-> diff --git a/drivers/ram/starfive/starfive_ddr.c b/drivers/ram/starfive/starfive_ddr.c
-> index a0a3d6b33dc2..b31ed3bcf617 100644
-> --- a/drivers/ram/starfive/starfive_ddr.c
-> +++ b/drivers/ram/starfive/starfive_ddr.c
-> @@ -4,7 +4,6 @@
->    * Author: Yanhong Wang<yanhong.wang@starfivetech.com>
->    */
->   
-> -#include <common.h>
->   #include <asm/arch/regs.h>
->   #include <asm/io.h>
->   #include <clk.h>
-> diff --git a/drivers/ram/starfive/starfive_ddr.h b/drivers/ram/starfive/starfive_ddr.h
-> index d0ec1c1da807..c29d26b510c9 100644
-> --- a/drivers/ram/starfive/starfive_ddr.h
-> +++ b/drivers/ram/starfive/starfive_ddr.h
-> @@ -7,6 +7,8 @@
->   #ifndef __STARFIVE_DDR_H__
->   #define __STARFIVE_DDR_H__
->   
-> +#include <linux/kernel.h>
-> +
->   #define SEC_CTRL_ADDR		0x1000
->   #define PHY_BASE_ADDR		0x800
->   #define PHY_AC_BASE_ADDR	0x1000
-> diff --git a/drivers/ram/stm32_sdram.c b/drivers/ram/stm32_sdram.c
-> index 891f4137813e..10dc05dd6404 100644
-> --- a/drivers/ram/stm32_sdram.c
-> +++ b/drivers/ram/stm32_sdram.c
+>   #include <errno.h>
+>   #include <log.h>
+>   #include <malloc.h>
+> diff --git a/drivers/reset/stm32-reset.c b/drivers/reset/stm32-reset.c
+> index 0bbde29810b4..9d4f361b2519 100644
+> --- a/drivers/reset/stm32-reset.c
+> +++ b/drivers/reset/stm32-reset.c
 > @@ -6,7 +6,6 @@
 >   
->   #define LOG_CATEGORY UCLASS_RAM
+>   #define LOG_CATEGORY UCLASS_RESET
 >   
 > -#include <common.h>
->   #include <clk.h>
 >   #include <dm.h>
->   #include <init.h>
-> diff --git a/drivers/ram/stm32mp1/stm32mp1_ddr.c b/drivers/ram/stm32mp1/stm32mp1_ddr.c
-> index 8ee4e24f39df..d7834b322992 100644
-> --- a/drivers/ram/stm32mp1/stm32mp1_ddr.c
-> +++ b/drivers/ram/stm32mp1/stm32mp1_ddr.c
-> @@ -5,7 +5,6 @@
->   
->   #define LOG_CATEGORY UCLASS_RAM
->   
-> -#include <common.h>
->   #include <clk.h>
+>   #include <errno.h>
 >   #include <log.h>
->   #include <ram.h>
-> diff --git a/drivers/ram/stm32mp1/stm32mp1_interactive.c b/drivers/ram/stm32mp1/stm32mp1_interactive.c
-> index 2c19847c6633..6340afbb8709 100644
-> --- a/drivers/ram/stm32mp1/stm32mp1_interactive.c
-> +++ b/drivers/ram/stm32mp1/stm32mp1_interactive.c
-> @@ -5,7 +5,6 @@
->   
->   #define LOG_CATEGORY UCLASS_RAM
->   
-> -#include <common.h>
->   #include <command.h>
->   #include <console.h>
->   #include <cli.h>
-> diff --git a/drivers/ram/stm32mp1/stm32mp1_ram.c b/drivers/ram/stm32mp1/stm32mp1_ram.c
-> index a82b1db7592d..debc458c0e2e 100644
-> --- a/drivers/ram/stm32mp1/stm32mp1_ram.c
-> +++ b/drivers/ram/stm32mp1/stm32mp1_ram.c
-> @@ -5,7 +5,6 @@
->   
->   #define LOG_CATEGORY UCLASS_RAM
->   
-> -#include <common.h>
->   #include <clk.h>
->   #include <dm.h>
->   #include <init.h>
-> diff --git a/drivers/ram/stm32mp1/stm32mp1_tests.c b/drivers/ram/stm32mp1/stm32mp1_tests.c
-> index c5f33544144f..6108faa70730 100644
-> --- a/drivers/ram/stm32mp1/stm32mp1_tests.c
-> +++ b/drivers/ram/stm32mp1/stm32mp1_tests.c
-> @@ -5,7 +5,6 @@
->   
->   #define LOG_CATEGORY UCLASS_RAM
->   
-> -#include <common.h>
->   #include <console.h>
->   #include <init.h>
->   #include <log.h>
-> diff --git a/drivers/ram/sunxi/dram_sun20i_d1.c b/drivers/ram/sunxi/dram_sun20i_d1.c
-> index 38379281d739..a1794032f3b8 100644
-> --- a/drivers/ram/sunxi/dram_sun20i_d1.c
-> +++ b/drivers/ram/sunxi/dram_sun20i_d1.c
-> @@ -13,7 +13,7 @@
+> diff --git a/drivers/reset/tegra-car-reset.c b/drivers/reset/tegra-car-reset.c
+> index 501e9cab8f7c..e3ecc8d37357 100644
+> --- a/drivers/reset/tegra-car-reset.c
+> +++ b/drivers/reset/tegra-car-reset.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (c) 2016, NVIDIA CORPORATION.
 >    */
 >   
->   #include <asm/io.h>
 > -#include <common.h>
-> +#include <config.h>
->   #ifdef CONFIG_RAM
->     #include <dm.h>
->     #include <ram.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <malloc.h>
+> diff --git a/drivers/reset/tegra186-reset.c b/drivers/reset/tegra186-reset.c
+> index d43da454114d..89624227c293 100644
+> --- a/drivers/reset/tegra186-reset.c
+> +++ b/drivers/reset/tegra186-reset.c
+> @@ -3,7 +3,6 @@
+>    * Copyright (c) 2016, NVIDIA CORPORATION.
+>    */
+>   
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <log.h>
+>   #include <malloc.h>
