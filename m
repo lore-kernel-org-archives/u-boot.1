@@ -4,85 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C25F4C25B5F
-	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 14:23:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C863C25B10
+	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 14:28:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30EDB887D4;
-	Fri, 10 May 2024 16:23:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id EA2648800D;
+	Fri, 10 May 2024 16:28:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tMyWmFWv";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Y011FeXE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74D44887DF; Fri, 10 May 2024 16:23:39 +0200 (CEST)
-Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
- [IPv6:2607:f8b0:4864:20::836])
+ id E363687FFB; Fri, 10 May 2024 16:28:52 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 589988860C
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 16:23:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BDE2D8800D
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 16:28:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x836.google.com with SMTP id
- d75a77b69052e-43df23e034cso17687001cf.0
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 07:23:37 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a59b58fe083so506512466b.0
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 07:28:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715351016; x=1715955816; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RZOqU/9rYJlDYczUmmAhMJpZ43+gaR+JVqm4hjAg2yQ=;
- b=tMyWmFWvtAxo8bHK4CwKwOeFTPbojWyK6H2/lpm3CWt7xy6J9v9DJISHLNo/QgJ1VE
- /eDFzqvQ8ewANPYRWNV4oIlIF8+QXjKrLrIv1dOlxpDm6mD69TAYbCEyx+101YD+d9Pd
- Q0AcLkdXe8bVz1Cnnc4q3fDsr3Xmn37qc5xvQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715351016; x=1715955816;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=amarulasolutions.com; s=google; t=1715351330; x=1715956130;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RZOqU/9rYJlDYczUmmAhMJpZ43+gaR+JVqm4hjAg2yQ=;
- b=ehKrbUIGMEzZdnYTsaIigRWdWb2UFmY60t/WXmdUEFhzwPbP26IighO5nsz5Q2ETam
- j8uxhHMmvKTu2p8hZTmQCOkPiCuhQAc6CWIXzWJyg0IqQvdeJnKCPB3vJPzKZXYaAlgQ
- sCTiTQxxVuOeFKY428njZoaaEDumGsTINbkubMfcxfOcLRK5kFOc4v00kwoq6HQKSqaG
- 6Ovg4+fk2gX5r2j4adrSpACa1jNflQ/q87qBtrwunQUfHsm9Y3JmImUwWWshJ3k/cpyI
- 9Qd9aBnBOtKyFbYegaaF5kHolJNd2HLAC+W5Fx41XAREdDN3enr+1E7UO+VJB+DtSrSc
- NU4g==
+ bh=tysr5sSTJ+eXuknS2RyvMu0zSLviBH/8z2Owr1FsPxk=;
+ b=Y011FeXEs4jt1sSFTDEfqttPbwj7k1SWLjS0m89OPxbBcqviFvC5A9YAT1BrfNdw76
+ Tmbro8Btirh2vcONCFNu8K5UV366vngPb9a7/z74D4AQOQN9fddPfJ0ClZ4QO69HrmX9
+ aKbApKaqPbful1vpGkwPNiqQnTtAdL1pe8V1k=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1715351330; x=1715956130;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=tysr5sSTJ+eXuknS2RyvMu0zSLviBH/8z2Owr1FsPxk=;
+ b=sXLlhWkh8B/oy95MtV2h3o2CoC9wEq7DgBj54wQrKVeWDI6l02NHYVePmtXofvFzNe
+ z/5YfUtEbKB5utPFcyITaNSWTQWc+RWvzEOmCA2q6gNjK4hZm42G5p4XmiYZzBq3NCH2
+ n5XD63TIIJT2K3Payk18OqtAofJqsEByFNrU9YXsGgw4LUZRxqyBlbg5gq983ijrhbn5
+ CHhX4xR/hP2QK5KiA5Ne+kPZUJjvvC3DfjezYBToRju6BNqMS4z7fIPS9IN82O0ErlbH
+ 0ki16975tWYImQffkTZCqqjfHC9YCveKYzDnn8Aq26ddS+eNaEsUd08hBoXuzeCs3g0G
+ kh/Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXXnGGHXOVq+3NtTrEzMsT0bnB0Jr1vw5AZpT5OXVVHLBaN3thUmp6D2V1q/6ZD2UW3TCaJC/BZ+A57n/RJamx5JkUfvQ==
-X-Gm-Message-State: AOJu0YxOROmOS0FE/9S3++4mZG2j8TLuHvRCOa/bL4Mfad2nHN/EpXuc
- pxp2reRZ63zXYsQLEjVyFOeF0tIBkNSK1xU8V67xtE3ApL5HCrkWurAZSH6RSKI=
-X-Google-Smtp-Source: AGHT+IFGD0Ukr8WZFjBzqINr3mC17ChK6YKQNKShxn/+BaxcBdYKYFIS9u1VNYgfqpI7PXLkoEDK5Q==
-X-Received: by 2002:a05:622a:394:b0:43a:fbe3:c2ea with SMTP id
- d75a77b69052e-43dec297879mr29442491cf.21.1715351016131; 
- Fri, 10 May 2024 07:23:36 -0700 (PDT)
-Received: from bill-the-cat ([187.144.98.216])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-43dfa7c0c1esm14804011cf.34.2024.05.10.07.23.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 May 2024 07:23:35 -0700 (PDT)
-Date: Fri, 10 May 2024 08:23:31 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Frank Wunderlich <frank-w@public-files.de>
-Cc: Frank Wunderlich <linux@fw-web.de>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Ryder Lee <ryder.lee@mediatek.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- John Crispin <john@phrozen.org>, u-boot@lists.denx.de
-Subject: Re: [RFC] pci: mediatek: add PCIe controller support for Filogic
-Message-ID: <20240510142331.GU2568172@bill-the-cat>
-References: <20240412141051.23943-1-linux@fw-web.de>
- <trinity-564944df-1cc6-48ba-8661-ece741792f3d-1715342246700@3c-app-gmx-bs34>
- <20240510130819.GR2568172@bill-the-cat>
- <B563AF62-EB8D-41D9-A5B2-E0E6D561FAC2@public-files.de>
+ AJvYcCWcLR80gZT52r2hLuU4oDTx4l2UQgUViJzlR7cvklD4cie5+/swKRoKQ/O0rR0xpsubFIUTueGTMmEfeMTRR9KZs3DOuQ==
+X-Gm-Message-State: AOJu0YwzQNxTckGiXTIRERijP+Ix5xE9s7GZZxZIuOs9r1JUZYEToJGg
+ T5XPLBUWBIfHG6Iq+wwbGJDNtANqCqxrM+py4hznQMCNzsLAKyoJOLslpAu1afNdMCwFCAIW26d
+ nZRX5k8/R7VSuMW+v+Sru2k4YVNgY0crqZgVZQxV5wD+WVw6YdVi3UQ==
+X-Google-Smtp-Source: AGHT+IFipl17a3I6jdpy3MenHGYDZ+h+7AsgG1Jvz/XtLHi7fJr6ICI4T5n5LIh1WDvDHZ47iwNGUA4kk6ZUdhWnU0U=
+X-Received: by 2002:a50:9353:0:b0:568:1248:9f49 with SMTP id
+ 4fb4d7f45d1cf-5734d5bfbf9mr1815629a12.18.1715351330031; Fri, 10 May 2024
+ 07:28:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="78rHKz/1bExiHGIb"
-Content-Disposition: inline
-In-Reply-To: <B563AF62-EB8D-41D9-A5B2-E0E6D561FAC2@public-files.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <CAOMZO5AnweEsKk_LXVLRmC5=6L2x-Oo+rdngsAs_hcrSHFH91Q@mail.gmail.com>
+In-Reply-To: <CAOMZO5AnweEsKk_LXVLRmC5=6L2x-Oo+rdngsAs_hcrSHFH91Q@mail.gmail.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Fri, 10 May 2024 16:28:39 +0200
+Message-ID: <CAOf5uw=2tob+MQfgGTfhXQqJK8vBjOPNPSD1CFkR70yXyEgAZg@mail.gmail.com>
+Subject: Re: imx8mp: Flashing U-Boot into eMMC hardware partition via UUU
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Frank Li <frank.li@nxp.com>, Peng Fan <peng.fan@nxp.com>,
+ Ye Li <ye.li@nxp.com>, 
+ U-Boot-Denx <u-boot@lists.denx.de>, Tim Harvey <tharvey@gateworks.com>, 
+ Adam Ford <aford173@gmail.com>, Heiko Schocher <hs@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,48 +90,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, May 10, 2024 at 4:19=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
+wrote:
+>
+> Hi,
+>
+> I am using an imx8mp-evk board and I can flash the U-Boot into the
+> eMMC hardware partition 0 by running:
+>
+>    =3D> tftpboot $loadaddr flash.bin
+>    =3D> setexpr blkcnt $filesize + 0x1ff && setexpr blkcnt $blkcnt / 0x20=
+0
+>    =3D> mmc dev 2 1
+>    =3D> mmc write $loadaddr 0 $blkcnt
+>
+> Now I want to do the same via UUU.
+>
+> I tried to create a script called emmc_flash:
+>
+> uuu_version 1.5.21
+>
+> SDPS: boot -f flash.bin
+> SDPS: done
+> FB: ucmd setenv fastboot_dev mmc
+> FB: ucmd mmc dev 2 1
+> FB: flash bootloader flash.bin
+> FB: Done
+>
+> Then on the PC: uuu emmc_flash
+>
+> U-Boot is loaded to RAM, but the eMMC hardware partition is not programme=
+d.
+>
+> What is the correct script for doing this?
+>
+> Any suggestions?
 
---78rHKz/1bExiHGIb
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Create an lst file
 
-On Fri, May 10, 2024 at 04:07:07PM +0200, Frank Wunderlich wrote:
-> Am 10. Mai 2024 15:08:19 MESZ schrieb Tom Rini <trini@konsulko.com>:
-> >On Fri, May 10, 2024 at 01:57:26PM +0200, Frank Wunderlich wrote:
-> >
-> >> a gentle ping...any comments?
-> >
-> >Seems fine?
->=20
-> > Can we switch to OF_UPSTREAM first however?
->=20
-> Pulling mediatek devicetrees from linux will afaik break network in
-> uboot for mt7622,7623,mt7986 and mt7988 bananapi boards because switch
-> (mt753x) binding is different to linux.
+Hi Fabio
 
-That needs to be fixed, in U-Boot then. We should not forever diverge
-here, that was not the intent.
+Top posting
+
+# @_flash.bin            | bootloader
+# @_image   [_flash.bin] | image burn to nand, default is the same as bootl=
+oader
+# @_filesystem           | filesystem to burn
+# @_kernel               | kernel image
+# @_dtb                  | dtb image
+
+# This command will be run when ROM support stream mode
+# i.MX8QXP, i.MX8QM
+SDPS: boot -f _flash.bin
+
+FB: ucmd setenv fastboot_buffer ${loadaddr}
+FB: download -f _image
+# Burn image to nandfit partition if needed
+FB: ucmd if env exists nandfit_part; then nand erase.part nandfit;
+nand write ${fastboot_buffer} nandfit ${filesize}; else true; fi;
+FB: ucmd nandbcb init ${fastboot_buffer} nandboot ${filesize}
+
+FB[-t 10000]: ucmd ubi part nandrootfs
+FB[-t 10000]: ucmd ubi create root -
+FB: download -f _filesystem
+FB[-t 60000]: ucmd ubi write ${loadaddr} root ${filesize}
+
+FB: download -f _kernel
+FB[-t 10000]: ucmd nand write ${loadaddr} nandkernel ${filesize}
+
+FB: download -f _dtb
+FB[-t 8000]: ucmd nand write ${loadaddr} nanddtb ${filesize}
+
+FB: reboot
+FB: done
+
+You can just change as you want. We have this file in buildroot, uuu
+can run command on the device
+using FB command. Example how call it
+
+${OUTPUT_DIR}/host/bin/uuu -v -b ${IMAGES_DIR}/nand-full.lst \
+  ${IMAGES_DIR}/flash.bin \
+  ${IMAGES_DIR}/flash.bin \
+  ${IMAGES_DIR}/rootfs.ubifs \
+  ${IMAGES_DIR}/Image \
+  ${IMAGES_DIR}/freescale/imx8mn-bsh-smm-s2.dtb
+
+
+Michael
+
+>
+> Thanks
+
+
 
 --=20
-Tom
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
 
---78rHKz/1bExiHGIb
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY+LeAACgkQFHw5/5Y0
-tywNTgv8DT1PnBYAbWt+FYjveXiSsy3cC5ngtuKLbYAKXQA9SmDvXo96/2TSBDz6
-av0WUZ9xLQTbrkMUxFQyrAie7MyN6LlDeTrPVZhdRaSjugRQAox69TFJ0c2wj9Pa
-qQmNqI5pQ1gjbhGUZktWwHdn75O3gpNn5roSB073iHh00b9AvMNctFrisgZNyflS
-0wm85JCe1lxHMtsDrPQwZOTKHrp7qQpFkgehnz4MlUnYtjcT5VYNt13UIna3LHxP
-pKPLama7t2tOLR1aRH+N7P87xCjLofpvoIb4HYJGcwHiqVVeZwd+P5lFqN869GNh
-0M+0ZOnGTOxOCcQifZ+ChyB5/KE8lOzhc61LwHUB/Y42i/zgfTbZPxB3jwqWIDVB
-6GijtNTaIXaaV5wRLeqbUsqrewTqaiywmLQ6EoIrSraP7cgFlsGGDv9S0azzlmMv
-xSAHhEE/vub6MSgNK9kNXOUKFW2O8b9VIzfdG53iUVkVxmdgWJRBxpJawf5KFu5m
-pFQnzc3F
-=OKvs
------END PGP SIGNATURE-----
-
---78rHKz/1bExiHGIb--
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
