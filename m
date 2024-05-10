@@ -4,66 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CC84C25B4F
-	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 08:49:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0834C25B10
+	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 09:11:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E28B688256;
-	Fri, 10 May 2024 10:48:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 29F378801A;
+	Fri, 10 May 2024 11:11:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="iGO7a1WL";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="J/BPXzS2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFF468818B; Fri, 10 May 2024 10:48:40 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9942088294; Fri, 10 May 2024 11:11:25 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B398588256
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 10:48:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 824BF87EF5
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 11:11:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-k6@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44A8mbT5003167;
- Fri, 10 May 2024 03:48:37 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1715330917;
- bh=g1bijHJ1LZ4jS5KdM49rCPcqQmqeBsfAJJUyHI+qI84=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=iGO7a1WLx1SEVoJGLnqmmgu+QdcEdGuMKOGhufD/ziGl4C918rypkSS5zeUnN8EmY
- rX1u5TTxkY3eovdGsTLSxavP84qGvY7mSxgM2IHTtStd1zuMH333pZpPbpP1aYpkMS
- yWPOSJe9s67iTopXInR53E3AonjfqBdkrPBxHGxc=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44A8mb0s028804
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 10 May 2024 03:48:37 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 10
- May 2024 03:48:37 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 10 May 2024 03:48:36 -0500
-Received: from santhoshkumark.dhcp.ti.com (santhoshkumark.dhcp.ti.com
- [172.24.227.241])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44A8mA1h107745;
- Fri, 10 May 2024 03:48:34 -0500
-From: Santhosh Kumar K <s-k6@ti.com>
-To: <trini@konsulko.com>, <nm@ti.com>, <vigneshr@ti.com>, <bb@ti.com>,
- <u-kumar1@ti.com>, <m-chawdhry@ti.com>
-CC: <u-boot@lists.denx.de>, <n-francis@ti.com>, <s-k6@ti.com>
-Subject: [PATCH v2 8/8] arm: dts: k3-*-ddr: Add ss_cfg reg entry
-Date: Fri, 10 May 2024 14:17:07 +0530
-Message-ID: <20240510084707.1903133-9-s-k6@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240510084707.1903133-1-s-k6@ti.com>
-References: <20240510084707.1903133-1-s-k6@ti.com>
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 1C95361E75;
+ Fri, 10 May 2024 09:11:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AE9D2C32781;
+ Fri, 10 May 2024 09:11:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1715332281;
+ bh=MvVvo0O7kg2ytU6fKsYhbQFuOzMtod79fLU6NMcCXIo=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=J/BPXzS2OH78CQYwJrjHmRiAaQdM3lYRXb1ddrFAPCR4mltHNn56mSnwGNjdT7KDS
+ Bkrt7wrN4FIKlxmCb6vFmI4ffa2AD3stHOlwrBsY76A76ZHIpDftu1tfodsJBDbsyT
+ dL5YknFV5Ue0YiybyWHNJjORHU1UmAzJgHrIab59iuc1hED76VKs4LvtaXcDdmr+Wx
+ +JbEEQzhHfU5Zh6+7GcMIG762WQvWEOEjYTdPti/Qi1E2MEgfVAviCPWa/ZxMtLYmi
+ ojjKQ3ilQNe+n2hBp1KIokigrcowfbLaSp+Ca94dGkagWHyhOwlwdmAUJ0WfKJ3Yzp
+ ohS2Be6f7G8YA==
+Message-ID: <98ffe161-33d0-479b-972e-92f9e8b8c2ff@kernel.org>
+Date: Fri, 10 May 2024 12:11:16 +0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] net: ti: am65-cpsw-nuss: don't touch DMA after stop
+To: "A. Sverdlin" <alexander.sverdlin@siemens.com>, u-boot@lists.denx.de
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Siddharth Vadapalli
+ <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>,
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Suman Anna <s-anna@ti.com>, Keerthy <j-keerthy@ti.com>,
+ Grygorii Strashko <grygorii.strashko@ti.com>
+References: <20240508183605.955341-1-alexander.sverdlin@siemens.com>
+Content-Language: en-US
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <20240508183605.955341-1-alexander.sverdlin@siemens.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,137 +75,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add ss_cfg memory region which maps the DDRSS configuration region
-for the memory controller node.
+Hi Alexander,
 
-Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
-Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
----
- arch/arm/dts/k3-am62a-ddr.dtsi  |  7 ++++---
- arch/arm/dts/k3-j721s2-ddr.dtsi | 12 ++++++++----
- arch/arm/dts/k3-j784s4-ddr.dtsi | 24 ++++++++++++++++--------
- 3 files changed, 28 insertions(+), 15 deletions(-)
+On 08/05/2024 21:36, A. Sverdlin wrote:
+> From: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+> 
+> Contrary to doc/develop/driver-model/ethernet.rst contract, eth_ops
+> .free_pkt can be called after .stop, there are several error paths in TFTP,
+> for instance:
 
-diff --git a/arch/arm/dts/k3-am62a-ddr.dtsi b/arch/arm/dts/k3-am62a-ddr.dtsi
-index 8629ea45b847..42e41f78505a 100644
---- a/arch/arm/dts/k3-am62a-ddr.dtsi
-+++ b/arch/arm/dts/k3-am62a-ddr.dtsi
-@@ -4,11 +4,12 @@
-  */
- 
- / {
--	memorycontroller: memory-controller@f308000 {
-+	memorycontroller: memory-controller@f300000 {
- 		compatible = "ti,am62a-ddrss";
- 		reg = <0x00 0x0f308000 0x00 0x4000>,
--		      <0x00 0x43014000 0x00 0x100>;
--		reg-names = "cfg", "ctrl_mmr_lp4";
-+		      <0x00 0x43014000 0x00 0x100>,
-+		      <0x00 0x0f300000 0x00 0x200>;
-+		reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 		ti,ddr-freq1 = <DDRSS_PLL_FREQUENCY_1>;
- 		ti,ddr-freq2 = <DDRSS_PLL_FREQUENCY_2>;
- 		ti,ddr-fhs-cnt = <DDRSS_PLL_FHS_CNT>;
-diff --git a/arch/arm/dts/k3-j721s2-ddr.dtsi b/arch/arm/dts/k3-j721s2-ddr.dtsi
-index 345e2b84f9e8..9764085163c4 100644
---- a/arch/arm/dts/k3-j721s2-ddr.dtsi
-+++ b/arch/arm/dts/k3-j721s2-ddr.dtsi
-@@ -5,6 +5,8 @@
- 
- &main_navss {
- 	ranges = <0x00 0x00114000 0x00 0x00114000 0x00 0x00000100>, // ctrl_mmr_lpr
-+		 <0x00 0x02980000 0x00 0x02980000 0x00 0x00000200>, // ss cfg 0
-+		 <0x00 0x029a0000 0x00 0x029a0000 0x00 0x00000200>, // ss cfg 1
- 		 <0x00 0x02990000 0x00 0x02990000 0x00 0x00004000>, // ddr0 cfg
- 		 <0x00 0x029b0000 0x00 0x029b0000 0x00 0x00004000>, // ddr1 cfg
- 		 <0x00 0x30000000 0x00 0x30000000 0x00 0x0c400000>;
-@@ -24,8 +26,9 @@
- 		memorycontroller0: memorycontroller@2990000 {
- 			compatible = "ti,j721s2-ddrss";
- 			reg = <0x0 0x02990000 0x0 0x4000>,
--			      <0x0 0x0114000 0x0 0x100>;
--			reg-names = "cfg", "ctrl_mmr_lp4";
-+			      <0x0 0x0114000 0x0 0x100>,
-+			      <0x0 0x02980000 0x0 0x200>;
-+			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 			power-domains = <&k3_pds 138 TI_SCI_PD_SHARED>,
- 				<&k3_pds 96 TI_SCI_PD_SHARED>;
- 			clocks = <&k3_clks 138 0>, <&k3_clks 43 2>;
-@@ -2232,8 +2235,9 @@
- 		memorycontroller1: memorycontroller@29b0000 {
- 			compatible = "ti,j721s2-ddrss";
- 			reg = <0x0 0x029b0000 0x0 0x4000>,
--			      <0x0 0x0114000 0x0 0x100>;
--			reg-names = "cfg", "ctrl_mmr_lp4";
-+			      <0x0 0x0114000 0x0 0x100>,
-+			      <0x0 0x029a0000 0x0 0x200>;
-+			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 			power-domains = <&k3_pds 139 TI_SCI_PD_SHARED>,
- 				<&k3_pds 97 TI_SCI_PD_SHARED>;
- 			clocks = <&k3_clks 139 0>, <&k3_clks 43 2>;
-diff --git a/arch/arm/dts/k3-j784s4-ddr.dtsi b/arch/arm/dts/k3-j784s4-ddr.dtsi
-index 1c3242b0870c..fc74c539331e 100644
---- a/arch/arm/dts/k3-j784s4-ddr.dtsi
-+++ b/arch/arm/dts/k3-j784s4-ddr.dtsi
-@@ -9,6 +9,10 @@
- 		 <0x00 0x029b0000 0x00 0x029b0000 0x00 0x00004000>, // ddr1 cfg
- 		 <0x00 0x029d0000 0x00 0x029d0000 0x00 0x00004000>, // ddr2 cfg
- 		 <0x00 0x029f0000 0x00 0x029f0000 0x00 0x00004000>, // ddr3 cfg
-+		 <0x00 0x02980000 0x00 0x02980000 0x00 0x00000200>, // ss cfg 0
-+		 <0x00 0x029a0000 0x00 0x029a0000 0x00 0x00000200>, // ss cfg 1
-+		 <0x00 0x029c0000 0x00 0x029c0000 0x00 0x00000200>, // ss cfg 2
-+		 <0x00 0x029e0000 0x00 0x029e0000 0x00 0x00000200>, // ss cfg 3
- 		 <0x00 0x30000000 0x00 0x30000000 0x00 0x0c400000>;
- 
- 	msmc0: msmc {
-@@ -26,8 +30,9 @@
- 		memorycontroller0: memorycontroller@2990000 {
- 			compatible = "ti,j721s2-ddrss";
- 			reg = <0x0 0x02990000 0x0 0x4000>,
--			      <0x0 0x0114000 0x0 0x100>;
--			reg-names = "cfg", "ctrl_mmr_lp4";
-+			      <0x0 0x0114000 0x0 0x100>,
-+			      <0x0 0x02980000 0x0 0x200>;
-+			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 			power-domains = <&k3_pds 191 TI_SCI_PD_SHARED>,
- 				<&k3_pds 131 TI_SCI_PD_SHARED>;
- 			clocks = <&k3_clks 191 1>, <&k3_clks 78 2>;
-@@ -2234,8 +2239,9 @@
- 		memorycontroller1: memorycontroller@29b0000 {
- 			compatible = "ti,j721s2-ddrss";
- 			reg = <0x0 0x029b0000 0x0 0x4000>,
--			      <0x0 0x0114000 0x0 0x100>;
--			reg-names = "cfg", "ctrl_mmr_lp4";
-+			      <0x0 0x0114000 0x0 0x100>,
-+			      <0x0 0x029a0000 0x0 0x200>;
-+			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 			power-domains = <&k3_pds 192 TI_SCI_PD_SHARED>,
- 				<&k3_pds 132 TI_SCI_PD_SHARED>;
- 			clocks = <&k3_clks 192 1>, <&k3_clks 78 2>;
-@@ -4442,8 +4448,9 @@
- 		memorycontroller2: memorycontroller@29d0000 {
- 			compatible = "ti,j721s2-ddrss";
- 			reg = <0x0 0x029d0000 0x0 0x4000>,
--			      <0x0 0x0114000 0x0 0x100>;
--			reg-names = "cfg", "ctrl_mmr_lp4";
-+			      <0x0 0x0114000 0x0 0x100>,
-+			      <0x0 0x029c0000 0x0 0x200>;
-+			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 			power-domains = <&k3_pds 193 TI_SCI_PD_SHARED>,
- 				<&k3_pds 133 TI_SCI_PD_SHARED>;
- 			clocks = <&k3_clks 193 1>, <&k3_clks 78 2>;
-@@ -6650,8 +6657,9 @@
- 		memorycontroller3: memorycontroller@29f0000 {
- 			compatible = "ti,j721s2-ddrss";
- 			reg = <0x0 0x029f0000 0x0 0x4000>,
--			      <0x0 0x0114000 0x0 0x100>;
--			reg-names = "cfg", "ctrl_mmr_lp4";
-+			      <0x0 0x0114000 0x0 0x100>,
-+			      <0x0 0x29e0000 0x0 0x200>;
-+			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 			power-domains = <&k3_pds 194 TI_SCI_PD_SHARED>,
- 				<&k3_pds 139 TI_SCI_PD_SHARED>;
- 			clocks = <&k3_clks 194 1>, <&k3_clks 78 2>;
+Doesn't this mean we need to fix TFTP instead of patching the Ethernet
+driver? I'm sure the issue is present for all Ethernet drivers as none
+of them are checking if Ethernet is stopped. Just that most of them
+don't print any error message so it goes unnoticed.
+
+> 
+> eth_halt() <= tftp_handler() <= net_process_received_packet() <= eth_rx()
+> ...
+> am65_cpsw_free_pkt() <= eth_rx()> 
+> Which results in (deliberately "tftpboot"ing non-existing file):
+> 
+> TFTP error: 'File not found' (1)
+> Not retrying...
+> am65_cpsw_nuss_port ethernet@8000000port@1: RX dma free_pkt failed -22
+> 
+> Avoid the error message by checking that the interface is still not stopped
+> in am65_cpsw_free_pkt().
+> 
+> Fixes: 9d0dca1199d1 ("net: ethernet: ti: Introduce am654 gigabit eth switch subsystem driver")
+> Signed-off-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+> ---
+>  drivers/net/ti/am65-cpsw-nuss.c | 3 +++
+>  1 file changed, 3 insertions(+)
+> 
+> diff --git a/drivers/net/ti/am65-cpsw-nuss.c b/drivers/net/ti/am65-cpsw-nuss.c
+> index 65ade1afd05..646f618afcf 100644
+> --- a/drivers/net/ti/am65-cpsw-nuss.c
+> +++ b/drivers/net/ti/am65-cpsw-nuss.c
+> @@ -523,6 +523,9 @@ static int am65_cpsw_free_pkt(struct udevice *dev, uchar *packet, int length)
+>  	struct am65_cpsw_common	*common = priv->cpsw_common;
+>  	int ret;
+>  
+> +	if (!common->started)
+> +		return -ENETDOWN;
+> +
+>  	if (length > 0) {
+>  		u32 pkt = common->rx_next % UDMA_RX_DESC_NUM;
+>  
+
 -- 
-2.34.1
-
+cheers,
+-roger
