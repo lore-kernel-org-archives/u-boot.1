@@ -4,84 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAC95C25B10
-	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 13:08:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E0B5C25B5F
+	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 14:07:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3303A884C7;
-	Fri, 10 May 2024 15:08:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A6E73880AE;
+	Fri, 10 May 2024 16:07:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=public-files.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a6Ql34jR";
+	dkim=pass (2048-bit key; unprotected) header.d=public-files.de header.i=frank-w@public-files.de header.b="baskfCCE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9607F884C7; Fri, 10 May 2024 15:08:37 +0200 (CEST)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 23A33881BF; Fri, 10 May 2024 16:07:15 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EFCC88167
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 15:08:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DD2288080
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 16:07:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=public-files.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-23d477a1a4fso1268414fac.3
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 06:08:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715346514; x=1715951314; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=37389sJM/LFhFXlaf3OUXwn/SYkpVR5Vab6Gxd/eL+0=;
- b=a6Ql34jR+4znUN3F5jsDpvvbG7anobC/1Q9bvCN6ZWIXbkoY+m+TvEPKYqsKTT/3IP
- 2zpQWWNbCBiHqFWcpvOXfvzVbwxD59y3zmBIgvmSGZeqclzQ0WysBw+ZOyudU89Y+R/A
- GQaCUjmQV7RAOucTw0/WJyeuy8XiwMGS6JVlo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715346514; x=1715951314;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=37389sJM/LFhFXlaf3OUXwn/SYkpVR5Vab6Gxd/eL+0=;
- b=Go1zKQpU5RMz23h7SMTnBga4kwQzVSDjs4GcX58lmQdxVKNnDS+lX4Z8GAd2Vlym/U
- ze2c1j2TG0nG8JQpl2/hq91jZnp2EhFRQwAgAc10tbMk3f4myXmhiUPtT3XySqr7Y5xW
- MUOzjPh7D2rb6l7TBdVlcVSPkQkMf9i8rcOckIR0WRJ1IDn/0IneajTazVI8fW0j9zVB
- vWqGq/TeNPmCcigMyINIK2/mh90GTyVuMa2g+frZqJHa9q+1U68c4gIBAKpDT8tEkC5l
- fDXt2/EziXinEiMBVHFVM+YeqCBRCZ8wGEYc7pkX1OcnqzoROzhM7E0ElOm/PG/UL1y0
- XNbA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVvxlX6nokkuXCNk73fNebR/eoZEtkhmfVouINa1Fdnoik2jEOWKFLVW1YEmYx6Tg4R7Y9R/z7YqL5CbCW5enJjXBNIpw==
-X-Gm-Message-State: AOJu0YzL6ttJXPexePKuw6fNrxy9JbgVlAi5YFi4enKMLSjvN7RepPNR
- MWAjSRYLieahQq8cGf+EtCxXShgIz2uI2OhMfPhz8TwhWjGqiS7t+yLBhsZ1LHw=
-X-Google-Smtp-Source: AGHT+IET7pUS0EeCahmm2n8isuu0uKbzYJMJZIaxWnDPz26qw5rd8iBOeuV6wE2y2M3gTsPhKxd+qQ==
-X-Received: by 2002:a05:6870:1b19:b0:23f:9c2e:8ca2 with SMTP id
- 586e51a60fabf-24172fd286dmr3244912fac.55.1715346513995; 
- Fri, 10 May 2024 06:08:33 -0700 (PDT)
-Received: from bill-the-cat ([187.144.98.216])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6a1680b8840sm8510056d6.42.2024.05.10.06.08.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 May 2024 06:08:33 -0700 (PDT)
-Date: Fri, 10 May 2024 07:08:30 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Roger Quadros <rogerq@kernel.org>
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Nishanth Menon <nm@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>, Wadim Egorov <w.egorov@phytec.de>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Simon Glass <sjg@chromium.org>, srk@ti.com, s-vadapalli@ti.com,
- vigneshr@ti.com, r-gunasekaran@ti.com, danishanwar@ti.com,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 0/3] arm: dts: am62-beagleplay: Fix Beagleplay Ethernet
-Message-ID: <20240510130830.GT2568172@bill-the-cat>
-References: <20240425-for-2024-07-beagleplay-eth-v1-0-6c985de1c316@kernel.org>
- <9baa5ac5-8ce9-4aea-9a3d-ec1d68ea5505@kernel.org>
+ spf=pass smtp.mailfrom=frank-w@public-files.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=public-files.de;
+ s=s31663417; t=1715350027; x=1715954827; i=frank-w@public-files.de;
+ bh=KE/hscB+K5eBWoN0R14zEE70JvV2oWsHS0DsLnlMaGs=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:Reply-to:In-Reply-To:
+ References:Message-ID:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=baskfCCEMAl7ZVaKBnfqssT54eDcpK8No68fXL7/LcZVNXsmJj39gLK5m6DO4sO2
+ Zeg7Q27grnNcY1Ob8RHmMTn3WqhIjcS0DyARUbuYHsdjn0oOY+dHeFMb4Rpapz+ht
+ CVCUDw1mbtsGVPPjg0axvw+yL0eoGrlFlhfxtH2RVXsVyuwCKxFr1vgSxqlT4oFR5
+ ZbWFz0u34+9DJJT2+5QG3o1WYC5AGUGyJLxfdACZG/LQU08K2Oneq+YGilnIsXY1I
+ NipbCkgKWYJKNHHePa5Wx6hGC3HnscMSJyq4X/h2tLuYHFVBe8kNoT6GyTRRSCRZq
+ WFdMoisaPSMwB25tBw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([217.61.152.152]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N1OXT-1sl7Oi0vX9-012swM; Fri, 10
+ May 2024 16:07:07 +0200
+Date: Fri, 10 May 2024 16:07:07 +0200
+From: Frank Wunderlich <frank-w@public-files.de>
+To: Tom Rini <trini@konsulko.com>
+CC: Frank Wunderlich <linux@fw-web.de>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ John Crispin <john@phrozen.org>, u-boot@lists.denx.de
+Subject: Re: [RFC] pci: mediatek: add PCIe controller support for Filogic
+User-Agent: K-9 Mail for Android
+In-Reply-To: <20240510130819.GR2568172@bill-the-cat>
+References: <20240412141051.23943-1-linux@fw-web.de>
+ <trinity-564944df-1cc6-48ba-8661-ece741792f3d-1715342246700@3c-app-gmx-bs34>
+ <20240510130819.GR2568172@bill-the-cat>
+Message-ID: <B563AF62-EB8D-41D9-A5B2-E0E6D561FAC2@public-files.de>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="m4dghqOsQVvbtx4J"
-Content-Disposition: inline
-In-Reply-To: <9baa5ac5-8ce9-4aea-9a3d-ec1d68ea5505@kernel.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:NG8UW38A9p5QuvVoMikQQFIfUDeO8dsZTlmHpxAhg1G5HZ58lRe
+ Uiy8O+g/8LC7s5uLk80JnfheSmvdwvAcRcEW0dsrTURgIKOwKDv62yG0qLVQF7kbhHbIH8g
+ 0ySVAt+FoFhsrM0N5mLAtjCgW0cx1NDOGTa+JAVKbqds5f0kgE4d44SeHp7sAXjRZ4nEJEc
+ uUMDau2TeqM24vNSu0sgw==
+UI-OutboundReport: notjunk:1;M01:P0:GyDGdONcJWA=;eJJRNg/B0GqDprB9GWAut0eZiOj
+ UE5Q3x31kN69jGo/clGvPdMB82m2RYWYAULjTMB8PoVzlUAU1SDyyIhdJ4rgGMbe+9ToUSnuS
+ GlQulguD0JLL4hSwPFJrwQkaaVXEwvCul2CWtUBgHxzrn/p0lRF11t/XehyBIhVSZir8S7rkT
+ 7uFDqepQEYe1ksf7aayWEcwuVrNuUDldDzCP6xNG8YCYcNLFzlbqk1abInEE3QudJFE77mNNU
+ 8AcYQjrDxcOQGXg47Oc68h7J2eHa1vXUOwng5TObRKUafp6UZmq54zSCEQ7k9WCJ0EoF2Sgmi
+ 0B0w6NgggU+up5j5ZsFrPg+CSsCLBJrXQK6gu+ExnJQHoqfL+k9/kY/KHzKIppNTf//5O69GF
+ Qo9pj6v3UNiygYq39GM8ucey5O/1rBxYpcT7h2zs/Ux9G137GzpVvgY8nHDiBe+DF9zN2ly+s
+ Oegmvq1uR0YUjg54m9/0+NS5zyaemKTPOOy7XLxUnkwMdxBOwM+v4DiJcpqokKVCoJ0Q3VxpJ
+ You5JlYLbE5fOqASFW+J4dOqOs52mHfe7IQMa6SWlMPbQS0W7nagBg94/0N+pJlapGy1YrqXb
+ SB3y9YzaiATOt5b3/338Davg2j4qNgkoAMY7xZZvqr1gYAfszhXqVXc+PtU2EvL4s2+1zO6BS
+ j5cwfgisfpiKO3PfMvFD/nL/ZtGn1OLMLi0f0nEoOEEx87Hf6FfsEcuLCF6eJBZEVRzu85uHf
+ kYd0LtXn9DtkF5MsJ2jqG3FyZknrZhWExRqp/F9flSZvTVrkvrZ0VcP++kbiNvWWuaHNn73NU
+ IV9qb/oJd43RXUeXCGmXhGmg2chV+uOv+HW7q9KvMkxpc=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,63 +91,23 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: frank-w@public-files.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Am 10=2E Mai 2024 15:08:19 MESZ schrieb Tom Rini <trini@konsulko=2Ecom>:
+>On Fri, May 10, 2024 at 01:57:26PM +0200, Frank Wunderlich wrote:
+>
+>> a gentle ping=2E=2E=2Eany comments?
+>
+>Seems fine?
 
---m4dghqOsQVvbtx4J
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Can we switch to OF_UPSTREAM first however?
 
-On Fri, May 10, 2024 at 12:55:15PM +0300, Roger Quadros wrote:
-> Tom,
->=20
-> On 25/04/2024 15:20, Roger Quadros wrote:
-> > Sync AM62 device tree files with Linux v6.9-rc5 and
-> > add in the missing bits in -u-boot.dtsi to get CPSW
-> > Ethernet working.
-> >=20
-> > The last patch is marked [not-for-merge] as it is not yet
-> > applied to Linux device tree.
-> >=20
-> > CI testing
-> > https://github.com/u-boot/u-boot/pull/527
->=20
-> While the checks have passed, there are some recent conflicts introduced
->=20
-> Conflicting files
-> arch/arm/dts/k3-am62-phycore-som.dtsi
-> arch/arm/dts/k3-am625-phyboard-lyra-rdk.dts=20
->=20
-> Those files have been removed.
->=20
-> Do you want me to rebase and resend this series?
+Pulling mediatek devicetrees from linux will afaik break network in uboot =
+for mt7622,7623,mt7986 and mt7988 bananapi boards because switch (mt753x) b=
+inding is different to linux=2E
 
-Since part 3 was a do not merge I wasn't sure what the end goal of this
-series was.
-
---=20
-Tom
-
---m4dghqOsQVvbtx4J
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY+HE4ACgkQFHw5/5Y0
-tyxgpQv/UoeCdvZoSXdxetuog/Z6g79BTN4nZm3MRERwFeT7RItmuwQikDhZqIbF
-TCUXDKnTkuGwwMI66yktdE0B+4vUVddyqtJE49Rubb0nqBG3BwlzC4KXMhjv12jj
-UHYC+Wz6hfCyOGc5PIqiEp8TuqRFlQW/gmO+J+tpimV7tBvo4fDN8PxtIqwAU+DQ
-dBnH3kKNhEpS9qcB9U+3pIMXInknCj7OoYFlAGATF+GBpkx4l55qEb3RToeZ0bi2
-u+18nIR+QRpIchlkA55xWW98EOhTpJK0NYTovt1KyrYCjg7ucHkSx3lsRmzXiEtY
-C3eRjq80xMVLJwRYUjk1wV416SYwpgh25wOv7Pcarw2ZedkpjgPyF6snEgGcu+0p
-hjs80l9Howo8KYXV/LzXnYruA//vQ8/qpgjb2OPf57rSEC8f+Dn9tyuum/Ajn+v6
-u+KvTM/2lvTMqclSfNISxwMp4213JjCs1D4d8Ub/DTBrQyMnI2Emf68evS7GOiB0
-egQa3/JC
-=Qpkg
------END PGP SIGNATURE-----
-
---m4dghqOsQVvbtx4J--
+regards Frank
