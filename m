@@ -4,88 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81862C25B10
-	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 09:32:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E01EC25B4F
+	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 09:55:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E581388294;
-	Fri, 10 May 2024 11:32:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 4390F88294;
+	Fri, 10 May 2024 11:55:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="QuZSqsDk";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="aZ968wnB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6511088296; Fri, 10 May 2024 11:32:17 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id B19D088361; Fri, 10 May 2024 11:55:25 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55B2588287
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 11:32:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4DFED88287
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 11:55:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 9D1993F364
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 09:32:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1715333533;
- bh=xyJdFLq9zQ/YL8ZlvgK59d5i54DQdJwz0p3tkZAHB88=;
- h=Message-ID:Date:MIME-Version:Subject:To:References:Cc:From:
- In-Reply-To:Content-Type;
- b=QuZSqsDkP2BU/GFfM+TzzNXav/0qtfe88nB7cSpwa3tWFfVClznlEGkepIttA8Arq
- lq+oZiVSMiiAE6tMKK1AKM2mUcERZXQYRPZuyKc/e2e7yVIv2YKQRRr/tlFK+9j8ow
- Z1AbRA3Vn8gp6qlb1NjfTfa+pWFCs+iY4NJdNMB27uzCBMp2M5T69f9GgWSRB0CUcJ
- 3tdMvRAkWh9bddqQYEjaiVMLWfeOrVUh7zTQT9w3Ys0dhgf6V57Kj+gTkWPiJnsjle
- 1VksLZhK71rLP7FKis3yent4uIgQqn8Q3Ac6dYVRe/zgP487XGfBAI6arBJ6fuqRFp
- 25Gce3T6GeRMg==
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-41ffb6bc28fso1462945e9.2
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 02:32:13 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715333532; x=1715938332;
- h=content-transfer-encoding:in-reply-to:from:cc:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xyJdFLq9zQ/YL8ZlvgK59d5i54DQdJwz0p3tkZAHB88=;
- b=gopW9fbKTtbhDlXUr00ovFGnFdZAGcrZ9NebLUaOZJjf7nbZPFKb0ThjCd0vvTQyvb
- gESNw1Gs0Vo9/00zRzgD0ylZQhL5+88BmyouzzADzUw7xZ2j4E6AAPtidcZ/PU7uGzo4
- FeZ+7E+NTVW6xow3II7QepCBZLcYF8+UVMSgVv7MzIZIHPYaiBEOTMMulKA/32hUa4oA
- zANxo8fXe6SCizw87b1O2V74B4nnx8+EP5p54ZpRiaqccOO0YgibmezL/jlKE2IKgha3
- cb8ugVr4uaY52S/YMAd6XC6HX3Blobu+HOYQyC0edfVvVpX8I8ll54UxKzUOMCWcJy5x
- 8aog==
-X-Gm-Message-State: AOJu0YwuFOt2UWwXZ2w8OJG4MmOFuUttD7EzExxdpVD+EpWw3b4CeBQT
- D6Y22E0vdfaR9RK4w0z36FEUYUc/rHglIWvlAzxfeq4nLvG7FMu/nldQSDM5SKj+Hs1CeDBNXsC
- vvM2ViCai6EMcCEDHb3zmTxsuHxUFrYVoPmEaJZgtg3QDHuKA6gm88BuX82gBUUQ2ANo=
-X-Received: by 2002:adf:ef4c:0:b0:349:bccc:a1e7 with SMTP id
- ffacd0b85a97d-3504a6310c6mr2214355f8f.19.1715333532459; 
- Fri, 10 May 2024 02:32:12 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFsCXCVg8aWhl1Ymv9jkEpvAHDPeJYmDu7B837DogNhSnAMTUBUZv0MNwayEuQ8E2cl1hkQPQ==
-X-Received: by 2002:adf:ef4c:0:b0:349:bccc:a1e7 with SMTP id
- ffacd0b85a97d-3504a6310c6mr2214336f8f.19.1715333531990; 
- Fri, 10 May 2024 02:32:11 -0700 (PDT)
-Received: from [10.55.2.71] ([149.11.192.251])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3502b8a7884sm4051882f8f.57.2024.05.10.02.32.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 10 May 2024 02:32:11 -0700 (PDT)
-Message-ID: <d36435ea-74ac-49b8-9d16-9494e8ed2cb1@canonical.com>
-Date: Fri, 10 May 2024 11:32:10 +0200
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id DE54761E89;
+ Fri, 10 May 2024 09:55:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7BEC4C113CC;
+ Fri, 10 May 2024 09:55:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1715334921;
+ bh=E4B1dMy+hklqx8U8zY1vOYqntigCnUUK0bDm7BWDqHU=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=aZ968wnB18rGET58wKKTBjc0rvSK04+gW5bHwQBa3TVfTwQM+LWW91DW9m+BXMdh8
+ VVru8aK141pS7rx63W8+PYSkIIVbj28wXnaTN2JT9Xoij5UYtujdNhBQ01+5FO1uTw
+ AI7JNirJiC3hOykq4joUco2EgbfMkwYfReRCLRssQSSvP8TGIkEO0oopzoq82DvJ5L
+ k6dKZpnn2sMUUM2WDVlF1D8CYpSgerstc8kp46D10m4DSDg7wp3YwI1Ijs6Od96D+x
+ 3F2IXRgHaLDaaHNuuXJIXhanEPA0ka5ix4i4acqFsoOgI5z3WXDNrp7hUnjNZeUMSt
+ WLEW93YAHXpIQ==
+Message-ID: <9baa5ac5-8ce9-4aea-9a3d-ec1d68ea5505@kernel.org>
+Date: Fri, 10 May 2024 12:55:15 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] doc/sphinx: Bump Jinja2 to 3.1.4
-To: Tom Rini <trini@konsulko.com>
-References: <20240506212230.2948754-1-trini@konsulko.com>
+Subject: Re: [PATCH 0/3] arm: dts: am62-beagleplay: Fix Beagleplay Ethernet
+To: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
+ Wadim Egorov <w.egorov@phytec.de>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Simon Glass <sjg@chromium.org>
+Cc: srk@ti.com, s-vadapalli@ti.com, vigneshr@ti.com, r-gunasekaran@ti.com,
+ danishanwar@ti.com, u-boot@lists.denx.de
+References: <20240425-for-2024-07-beagleplay-eth-v1-0-6c985de1c316@kernel.org>
 Content-Language: en-US
-Cc: u-boot@lists.denx.de
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240506212230.2948754-1-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <20240425-for-2024-07-beagleplay-eth-v1-0-6c985de1c316@kernel.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,38 +74,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/6/24 23:22, Tom Rini wrote:
-> While we unlikely to have an issue with CVE-2024-22195, it is simple
-> enough to bump our version of Jinja2 to receive the fix, do so.
+Tom,
+
+On 25/04/2024 15:20, Roger Quadros wrote:
+> Sync AM62 device tree files with Linux v6.9-rc5 and
+> add in the missing bits in -u-boot.dtsi to get CPSW
+> Ethernet working.
 > 
-> Reported-by: GitHub dependabot
-> Signed-off-by: Tom Rini <trini@konsulko.com>
+> The last patch is marked [not-for-merge] as it is not yet
+> applied to Linux device tree.
+> 
+> CI testing
+> https://github.com/u-boot/u-boot/pull/527
 
-Tested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+While the checks have passed, there are some recent conflicts introduced
 
-Hello tom,
+Conflicting files
+arch/arm/dts/k3-am62-phycore-som.dtsi
+arch/arm/dts/k3-am625-phyboard-lyra-rdk.dts 
 
-My review queue is rather empty. Do you want to pick up this patch directly?
+Those files have been removed.
 
-Best regards
+Do you want me to rebase and resend this series?
 
-Heinrich
-
+> 
+> Signed-off-by: Roger Quadros <rogerq@kernel.org>
 > ---
->   doc/sphinx/requirements.txt | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/doc/sphinx/requirements.txt b/doc/sphinx/requirements.txt
-> index 5b4df36804b5..426f41e1a028 100644
-> --- a/doc/sphinx/requirements.txt
-> +++ b/doc/sphinx/requirements.txt
-> @@ -5,7 +5,7 @@ charset-normalizer==3.3.2
->   docutils==0.20.1
->   idna==3.7
->   imagesize==1.4.1
-> -Jinja2==3.1.3
-> +Jinja2==3.1.4
->   MarkupSafe==2.1.3
->   packaging==23.2
->   Pygments==2.17.2
+> ---
+> Roger Quadros (3):
+>       arm: dts: k3-am62*: sync with Linux v6.9-rc5
+>       arm: dts: k3-am625-beagleplay: get CPSW Ethernet to work
+>       [not-for-merge] arm: dts: k3-am625-beagleplay: Fix Ethernet PHY reset GPIO
+> 
+>  arch/arm/dts/k3-am62-main.dtsi               | 126 ++++++++++++++---
+>  arch/arm/dts/k3-am62-mcu.dtsi                |   4 +-
+>  arch/arm/dts/k3-am62-phycore-som.dtsi        |   5 +-
+>  arch/arm/dts/k3-am62-thermal.dtsi            |   5 +-
+>  arch/arm/dts/k3-am62-wakeup.dtsi             |  38 +++--
+>  arch/arm/dts/k3-am62.dtsi                    |   4 +-
+>  arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi |  63 +++++++++
+>  arch/arm/dts/k3-am625-beagleplay.dts         |  66 ++++-----
+>  arch/arm/dts/k3-am625-phyboard-lyra-rdk.dts  | 104 +++++++++++++-
+>  arch/arm/dts/k3-am625-sk.dts                 |   4 +-
+>  arch/arm/dts/k3-am625.dtsi                   |   4 +-
+>  arch/arm/dts/k3-am62a-main.dtsi              | 201 +++++++++++++++++++++++++--
+>  arch/arm/dts/k3-am62a-mcu.dtsi               |   4 +-
+>  arch/arm/dts/k3-am62a-thermal.dtsi           |   5 +-
+>  arch/arm/dts/k3-am62a-wakeup.dtsi            |   4 +-
+>  arch/arm/dts/k3-am62a.dtsi                   |   4 +-
+>  arch/arm/dts/k3-am62a7-sk.dts                | 162 ++++++++++++++++++++-
+>  arch/arm/dts/k3-am62a7.dtsi                  |   4 +-
+>  arch/arm/dts/k3-am62x-sk-common.dtsi         |  24 +++-
+>  19 files changed, 722 insertions(+), 109 deletions(-)
+> ---
+> base-commit: 38ea74d6d5c05224acdb03f799897c1bdd56f8cc
+> change-id: 20240305-for-2024-07-beagleplay-eth-f82a51197937
+> 
+> Best regards,
 
+-- 
+cheers,
+-roger
