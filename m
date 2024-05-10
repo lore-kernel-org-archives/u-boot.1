@@ -4,89 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95B22C25B10
-	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 05:36:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D198DC25B10
+	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 05:37:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D871A880F5;
-	Fri, 10 May 2024 07:36:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 55B7F88113;
+	Fri, 10 May 2024 07:37:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Llw5Onf3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GJ2VEgh2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11BA28825B; Fri, 10 May 2024 07:36:29 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 5C94A88194; Fri, 10 May 2024 07:37:12 +0200 (CEST)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4750880A1
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 07:36:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E630880A1
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 07:37:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a59b097b202so365441066b.0
- for <u-boot@lists.denx.de>; Thu, 09 May 2024 22:36:26 -0700 (PDT)
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-51f174e316eso1985341e87.0
+ for <u-boot@lists.denx.de>; Thu, 09 May 2024 22:37:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1715319386; x=1715924186; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1715319430; x=1715924230; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Oh5vrhPBppz+/Z7C4tXpwbUgdzGo9xUSFmm4XHxGuEk=;
- b=Llw5Onf3h0DUFBSFpWOeWnun+oIF2kKlW65tjVKZRBs13T4rKvhIrq1bfn/F3e8Bzh
- BMcZ6L4wCIXgvUMrA1wiEZVX+rV7jSSgaqmvnAsql+EVz4AepS2nt9JNlFnH4AiOh6rP
- VtqYVOTnJpKtiwQYWLzYh4Ng0vN5mT2ruwbaKHoUHW/UjqApr8EUlJzgLSCL8pcrhMBl
- 6G1g4UUCjHIdyIzTkZSPgbl6pGaLh24ioBPA81pqYIZWGsE+NEWSml4AF7aOU5HVVIoo
- oVxnEO85jLr52Ku9SS+7bKfU73A7GinuyDY3FCCHRo9MO9ib2BPrR9BbW1lBBD5GBr2C
- QFBw==
+ bh=i+6SpaDWKVVUB3BjHgEoLfA5G4X6vWg3igCK3/cfc8E=;
+ b=GJ2VEgh20URq5VcjDYrP9+/axYqb2DpzEmsuFWfzl/tIES7xmLuYwWT19G+YHXBJRL
+ K1yohuEnXNhN0lVGL4BeCMv0DJJjCYtHehX1PCbGR6Sne6Za0+wNrNaYYi92xoraCIjK
+ HjhWi3XIM4WzCHlFNOup/JPcCbkgsWn/ZD4ZAA/QViKQn7NSKHTGxzzsHmP2T3rr0DPs
+ kFPyMTQ/7QQtxScg4e5Ohn+LtOp74lX0x232Q1NVT84Appdlahj27UYyuuCHKwbI7OMs
+ HpYiP2fR2KnGvgGclHcllNs4StVv80pjfe8FywfokUXV4lFG70jEoyxmzj1MQlCj0cn+
+ Nfeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715319386; x=1715924186;
+ d=1e100.net; s=20230601; t=1715319430; x=1715924230;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Oh5vrhPBppz+/Z7C4tXpwbUgdzGo9xUSFmm4XHxGuEk=;
- b=M0+wGGJOiPiW7bSQOUOClhG5K2Y8BzH8s9JCjjTHaFA7wsT1kBmqHg7X9hF9+JIsF6
- IxoAOpUrfykKY9F8XIxupyJbUNnLvfAtVEbQIq6YEvkvTWkKkMlIDByxB8xB83DzdPTD
- lwrOxJd1DYsDkxtkvt8SeGw48ejaZPMSe57fG92Jr8dTiOfZl9de/gCI/FXYzYxmsux8
- ibwRQgaamrAV0DrpjrlRCw9fxNKxMSMAJUjlF4pU2mEhvUbN24Bz/5PgwUQDAu/D53qf
- XyTOTX7ZrpbH70KdhIKvh6udpYgiuFCGk5Z7N3MThIg5x7YUmtO6gOobhFa7kkfXbdEP
- H93w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWCJxUDUECZVN//NH5igtpqcMQ5ygPowiNvusCeGu04o0JZQ3AmwwjAEazCZbTBgkeaFX49EjGp26lYCvPk7Kf7z1F8FA==
-X-Gm-Message-State: AOJu0YzzPSBIUKpTFUQ2HX3hj5HHKCkgago4rl5tfOMmqZOQ17u37+hR
- vf/8E5tHOLNczO4H+eTL+NdBtSjKABRiFJiT9BOPoeMfdKAU6MSuW5uOdrWLjUekkoDADGRedgK
- G8Jybv4MKq70epocwKvASpBvsYmWYvnnjB1w75w==
-X-Google-Smtp-Source: AGHT+IG7bSIxJv/4w8Kqm8G9XM7yZxI6UQY8b82v5JwkDHLH9yFpf4FvodJAYJtwaGZqIZ8oEsttkj+vW9uU1BOk3Vo=
-X-Received: by 2002:a17:906:1992:b0:a59:b359:3e14 with SMTP id
- a640c23a62f3a-a5a2d5356d3mr102075766b.10.1715319386078; Thu, 09 May 2024
- 22:36:26 -0700 (PDT)
+ bh=i+6SpaDWKVVUB3BjHgEoLfA5G4X6vWg3igCK3/cfc8E=;
+ b=YtD1Naz61V5R1ldiO+TgUD671ZTlpHfomVQ7Ocv5VtYnrz3q27oqgGlKc9bTMxpB0Z
+ oCxYTPMl1LVppEL+02kXmClgyY86UhelVctyb6AEputiBo5kKJMQ09z1p6vH6PTgu8kx
+ xEGzYgQNU55aC9ae/MvOA//go0uDkp+RHOlG3RqgjTM3XvpdI8rISqgmNrAS+A564gAR
+ oQyBwlMdoCQkLmPJRJZN6wYUl4M3UzDiGwjaKRlNvXgyC5cgi+a4lLqs2L1Whv9ZYlzn
+ G6oT81Ibe7ics69XX00YMylLdhqbCsQ1WfyrP1n0Snw8VL8K3E1lPtBaTGngl9bLs5kA
+ 8Ejw==
+X-Gm-Message-State: AOJu0YwEVoQolUpenAJdfi8S+Wirhpfh2RrWjx0gBw+ntqgr6vcg6EwT
+ uYlEAfG2Mh+F2j0qX8Pw4gF2krVTBBTVIlRcfhAJAAIRkKe7jdxMkrkgpck66Lulbr7L7HBJLdF
+ KsogNE6KeRe5JJGzWzr4nlhaXEyqfHboVSOP8NQ==
+X-Google-Smtp-Source: AGHT+IEul9wtrq6jBZ5qBvrLaW6xNz9o/6G4riV8/noYVgP7hmYgtdOGVbVMQuY0oQ9L+j9JFho80bTiKZUQf+oEN3o=
+X-Received: by 2002:a19:6b0b:0:b0:51d:97e8:d2ea with SMTP id
+ 2adb3069b0e04-5220fb77411mr852249e87.30.1715319429691; Thu, 09 May 2024
+ 22:37:09 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240509164123.1753050-1-j-humphreys@ti.com>
- <20240509164123.1753050-2-j-humphreys@ti.com>
-In-Reply-To: <20240509164123.1753050-2-j-humphreys@ti.com>
+References: <20240507175132.1456512-1-raymond.mao@linaro.org>
+ <20240507175132.1456512-27-raymond.mao@linaro.org>
+In-Reply-To: <20240507175132.1456512-27-raymond.mao@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 10 May 2024 08:35:49 +0300
-Message-ID: <CAC_iWjK2rTFkSdU2NW9o3fqe9+7=gy+qPEWqFhhXwEOk+5W5KA@mail.gmail.com>
-Subject: Re: [PATCH v4 01/19] doc: uefi: capsules: Add Capsule Update porting
- section
-To: Jonathan Humphreys <j-humphreys@ti.com>
-Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>, 
- Manorit Chawdhry <m-chawdhry@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Judith Mendez <jm@ti.com>, 
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>, 
- Simon Glass <sjg@chromium.org>, Nikhil M Jain <n-jain1@ti.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
- Maxime Ripard <mripard@kernel.org>, 
- Siddharth Vadapalli <s-vadapalli@ti.com>, Roger Quadros <rogerq@kernel.org>,
- Bryan Brattlof <bb@ti.com>, 
- Vignesh Raghavendra <vigneshr@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
- Nishanth Menon <nm@ti.com>, 
- Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, u-boot@lists.denx.de
+Date: Fri, 10 May 2024 08:36:33 +0300
+Message-ID: <CAC_iWj+v8YqK7mA-rWZwK+j1NmG7dwMDSfSV51Q_qCGrVJ4h5g@mail.gmail.com>
+Subject: Re: [PATCH v2 26/28] asn1_decoder: remove ASN1 decoder when using
+ MbedTLS
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Simon Glass <sjg@chromium.org>, Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Andrew Davis <afd@ti.com>, Sumit Garg <sumit.garg@linaro.org>, 
+ Christophe Leroy <christophe.leroy@csgroup.eu>,
+ Jesse Taube <mr.bossman075@gmail.com>, 
+ Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>, Sergei Antonov <saproj@gmail.com>, 
+ Ilya Lukin <4.shket@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ AKASHI Takahiro <takahiro.akashi@linaro.org>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Alexander Gendin <agendin@matrox.com>, 
+ Bin Meng <bmeng@tinylab.org>, Eddie James <eajames@linux.ibm.com>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,45 +107,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 9 May 2024 at 19:41, Jonathan Humphreys <j-humphreys@ti.com> wrote:
+On Tue, 7 May 2024 at 21:03, Raymond Mao <raymond.mao@linaro.org> wrote:
 >
-> Created a capsule update porting section in the documentation that outlines
-> the steps a board developer must do when porting from an existing reference
-> board implementation.
+> When building with MbedTLS, we are using MbedTLS to decode ASN1 data
+> for x509, pkcs7 and mscode. So we can remove asn1_decoder when
+> MBEDTLS_LIB_X509 is enabled.
 >
-> In particular, added a big warning that new capsule GUID's need to be
-> defined.
->
-> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 > ---
->  doc/develop/uefi/uefi.rst | 12 ++++++++++++
->  1 file changed, 12 insertions(+)
+> Changes in v2
+> - Initial patch.
 >
-> diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
-> index 0389b269c01..36ac75278fa 100644
-> --- a/doc/develop/uefi/uefi.rst
-> +++ b/doc/develop/uefi/uefi.rst
-> @@ -631,6 +631,18 @@ where version.dtso looks like::
->  The properties of image-type-id and image-index must match the value
->  defined in the efi_fw_image array as image_type_id and image_index.
+>  lib/Makefile | 2 ++
+>  1 file changed, 2 insertions(+)
 >
-> +Porting Capsule Updates to new boards
-> +*************************************
-> +
-> +It is important, when using a reference board as a starting point for a custom
-> +board, that certain steps are taken to properly support Capsule Updates.
-> +
-> +Capsule GUIDs need to be unique for each firmware and board. That is, if two
-> +firmwares are built from the same source but result in different binaries
-> +because they are built for different boards, they should have different GUIDs.
-> +Therefore it is important when creating support for a new board, new GUIDs are
-> +defined in the board's header file.  *DO NOT* reuse capsule GUIDs.
-> +
->  Executing the boot manager
->  ~~~~~~~~~~~~~~~~~~~~~~~~~~
+> diff --git a/lib/Makefile b/lib/Makefile
+> index 3534b3301ae..7e3dc1084fb 100644
+> --- a/lib/Makefile
+> +++ b/lib/Makefile
+> @@ -82,7 +82,9 @@ obj-$(CONFIG_$(SPL_)SHA512) += sha512.o
+>  endif
 >
+>  obj-$(CONFIG_CRYPT_PW) += crypt/
+> +ifneq ($(CONFIG_MBEDTLS_LIB_X509), y)
+>  obj-$(CONFIG_$(SPL_)ASN1_DECODER) += asn1_decoder.o
+> +endif
+>
+>  obj-$(CONFIG_$(SPL_)ZLIB) += zlib/
+>  obj-$(CONFIG_$(SPL_)ZSTD) += zstd/
 > --
-> 2.34.1
+> 2.25.1
 >
 
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
