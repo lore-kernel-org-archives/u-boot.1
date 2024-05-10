@@ -4,80 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A1E0C25B10
-	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 16:32:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BDEDC25B10
+	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 17:32:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4007B87FD7;
-	Fri, 10 May 2024 18:32:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8451587EF7;
+	Fri, 10 May 2024 19:32:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Kt0WI7X5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qmrnVoj9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A16587CF1; Fri, 10 May 2024 18:32:28 +0200 (CEST)
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [IPv6:2607:f8b0:4864:20::102b])
+ id B0B4088027; Fri, 10 May 2024 19:32:09 +0200 (CEST)
+Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
+ [IPv6:2607:f8b0:4864:20::82c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 934AF87C75
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 18:32:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5604587EF5
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 19:32:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-2b5f3e20615so2012163a91.1
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 09:32:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82c.google.com with SMTP id
+ d75a77b69052e-439656c1b50so12810701cf.1
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 10:32:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1715358744; x=1715963544; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WVtAleKso6FF1LvRJxWPE1AI84qBZ6cenOTn5ZaXugc=;
- b=Kt0WI7X5Ny9J4ZqEB4KGFsSWoES0IOSsx7WhvwGbU1IWyhQAdmv7OAoUNWEfx35fMn
- 9sn5/Sbuu1zhhQAi2+DZoQLRGxGDC0HJcCfjDS2YCm0YR7G3+HN+gohSRHI/R2Y8npEJ
- A6e5q/MWf4ATRGXfudBVpybJzA+7wgue6IiB0gJPJx/ZD0gIHfq+Fu6EGCiEOLFqz1bT
- ls+ZLYI+w0Tm2D9jtRvIjk133jHMUJZ+HUDohjnSQ6eCRIORZNAPERPU3d+2H/sUYOjT
- 2Vg8yLYoAftBB9mhkjZHiVlVrzl77oObE2loUTp79Eu10rcctoy8qPOY9eUxioSyLqQP
- OSWQ==
+ d=konsulko.com; s=google; t=1715362326; x=1715967126; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=/AL6GzQ8FgCmFZfCx6kHP+ZOfYsBsyIteBhLn2YQReI=;
+ b=qmrnVoj9kv0GmPOPm7e2SATtkB9PN/KkKOIcRZCPepAS0T55Y7yGj7orJ3t9eGpVPs
+ 2U/b07MDg3Ron7KD1zYMneraTogYsuu9mhowi+9SLeSP02xMPjGjanHLN0M+YYOz26Sg
+ 78xDj3rYRWvycHHIZOHnrXYjKMlwZLAwuR0yo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715358744; x=1715963544;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=WVtAleKso6FF1LvRJxWPE1AI84qBZ6cenOTn5ZaXugc=;
- b=DpdXSIBRsPi4WaZRgvFQJFGUBcu0Ogwu1a6MmNdPi7KgPRpoxCM+82++VDpiIYvh2p
- qESIsfl6y0lxUocu049+Sj0tjCBNXJLAW3St5Af8zEKKIE7KFc0MU8SXNLkiCq1wM3SX
- fC5Gy/foqqEQvf45QRusjrPdJd7Gr9CNimv4w5QmidZiMCBpZ28zu3zz7P2ANtvuTe6e
- jBts26+ZqUs2KHa3gnECOzyubwuquUoOlRgESAANSnSeC7jnnE1h2jlNJr0V8lyUPudW
- lDEI7nm7+56wYonD5zA/d7zOmJnQ3MZFgEfl4pjYMwoVomVWrEtJ+CjOLolLsC+dKDNb
- DNNA==
-X-Gm-Message-State: AOJu0Yz7L+fWFBgEp+HyV5eNYNCv8IkH9acH+CZLklYh53XGdodZIWWx
- Kt6yCugC2j+6TDN+/bPcpeH1pXZBBznnM3O+H0QYQ27tAs4WOfe4iOERFh84xfZJjeQckKd5Bj1
- nsZQibXHcFTQGyccdKwJp2XvsQ9osYJ1/6aNDuQ==
-X-Google-Smtp-Source: AGHT+IGrQeSwiVjROQszz73ooqXpDAZpm83MtQ+GaLCdphQh8KVXTiGOi+JCB7C9sraLgjkMV41OwH9rJwTom6Iaf7o=
-X-Received: by 2002:a17:90a:9601:b0:2ac:9baf:25b5 with SMTP id
- 98e67ed59e1d1-2b6cc76f70emr2822977a91.25.1715358743966; Fri, 10 May 2024
- 09:32:23 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240509143743.1496210-1-raymond.mao@linaro.org>
- <20240509143743.1496210-5-raymond.mao@linaro.org>
- <CAC_iWjL+kbQLG=QwBGfrcRpFU3bhCCcyXLCtwxdY86JcC=0Kmg@mail.gmail.com>
-In-Reply-To: <CAC_iWjL+kbQLG=QwBGfrcRpFU3bhCCcyXLCtwxdY86JcC=0Kmg@mail.gmail.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Fri, 10 May 2024 12:32:12 -0400
-Message-ID: <CAEfUkUJC7S+cwebJqh+TvbjYE6nEnczKwYELHYeN5iXBxoCpMw@mail.gmail.com>
-Subject: Re: [PATCH 4/4] arm: EFI linker script text section alignment
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Igor Opaniuk <igor.opaniuk@gmail.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ralph Siemsen <ralph.siemsen@linaro.org>, 
+ d=1e100.net; s=20230601; t=1715362326; x=1715967126;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/AL6GzQ8FgCmFZfCx6kHP+ZOfYsBsyIteBhLn2YQReI=;
+ b=hQJDKv9bus9A70yJn1fU5A4SjYowZUO2/mdjBV9g8h5Yj/zs9Yw57jaAxGEMXNdaNm
+ UcJs3PfUgbpOABYmK6oQRz6AqXeW+yuYw3A/wpC75d9C/iJsLJ4OoX5N6zjZbG9QqTvv
+ gMKCWiqck9GjhrxmGnermNjdeHzYrk6WL74SROUWuH4+y0gAknLyb/UXiuLGC5Et+4Do
+ Jw3FvPez4Wu8XRvj21gwglNFcMyHFEdWvDf2hw5kNUcX4IqBnf06ovv/MjR1wrvUQK+W
+ uffuPxTj+p/2joHCq9rBOTujTyW0yyO2VHRePgRlLFXI6ilv9IREAQ3xvulzbypkiIma
+ A8gw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUof5rUt5/uqOf9e7Wc99lwDdldq3qSnPzy6LzdgEvOmr1yownX1J5ZsxdYRBhdKRFMgz5uqwz65HzIoGS1tRcTOpb+ig==
+X-Gm-Message-State: AOJu0Yyr34jJR4mspjAMLdO6EpWZziGEy4ssyDWApl/vCaKEIaCfmGIk
+ obImMuAiOOLCDNXnkE5e+AYOq+zy6zgRlFel/vdIq/FJN0xawcsgZ+KEjwSp0Vo=
+X-Google-Smtp-Source: AGHT+IGxqSkNn9Tq6mIuk7XZta3RDvBiy0d+NnMPlG7QLZK5oMvZIoZP8qKoi9E2LkkE2xet9GsKyQ==
+X-Received: by 2002:ac8:58d4:0:b0:43a:df11:f872 with SMTP id
+ d75a77b69052e-43dfda8cebcmr35578871cf.4.1715362326073; 
+ Fri, 10 May 2024 10:32:06 -0700 (PDT)
+Received: from bill-the-cat ([187.144.98.216])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-43df55273cfsm23599541cf.49.2024.05.10.10.32.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 10 May 2024 10:32:05 -0700 (PDT)
+Date: Fri, 10 May 2024 11:32:00 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jonathan Humphreys <j-humphreys@ti.com>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>, Simon Glass <sjg@chromium.org>,
+ Nikhil M Jain <n-jain1@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Roger Quadros <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
- Eddie James <eajames@linux.ibm.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 4/7] dts: beagleplay: binman: Include firmware
+ capsules binman nodes
+Message-ID: <20240510173200.GV2568172@bill-the-cat>
+References: <20240419212819.170033-1-j-humphreys@ti.com>
+ <20240419212819.170033-5-j-humphreys@ti.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="9TyPSf/MfPk2jSP9"
+Content-Disposition: inline
+In-Reply-To: <20240419212819.170033-5-j-humphreys@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,74 +108,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
 
-On Thu, 9 May 2024 at 14:15, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-wrote:
+--9TyPSf/MfPk2jSP9
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Hi Raymond,
->
-> Try not to post the same patches without the fixes that were asked
-> [0], at least not without an explanation.
->
-> On Thu, 9 May 2024 at 17:38, Raymond Mao <raymond.mao@linaro.org> wrote:
-> >
-> > Add text section alignment to fix sbsign signing warning
-> > 'gaps in the section table may result in different checksums'
-> > which causes a failure of efi_image_verify_diges()
-> >
-> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > ---
-> >  arch/arm/lib/elf_aarch64_efi.lds | 1 +
-> >  1 file changed, 1 insertion(+)
-> >
-> > diff --git a/arch/arm/lib/elf_aarch64_efi.lds
-> b/arch/arm/lib/elf_aarch64_efi.lds
-> > index 5dd98091698..bffd9a0447a 100644
-> > --- a/arch/arm/lib/elf_aarch64_efi.lds
-> > +++ b/arch/arm/lib/elf_aarch64_efi.lds
-> > @@ -28,6 +28,7 @@ SECTIONS
-> >                 *(.dynamic);
-> >                 . = ALIGN(512);
-> >         }
-> > +       . = ALIGN(4096);
->
-> This is not what you want. There's already an ALIGN a few lines below
-> and you must include the symbols for _etext and _text_size.
-> You have to move the rela.* sections after the alignment. IIRC those
-> were inspired by [1], so you can look for guidance there.
-> On top of that riscv will need similar fixes (and any other
-> architecture that uses those)
->
-> In practice, I have to add  ALIGN(4096) for both `.rela.*` and `.data`,
-otherwise it always prompts warning when signing the EFI image as
-below and finally leads a failure when calling function
-`efi_image_verify_digest()`.
+On Fri, Apr 19, 2024 at 04:28:16PM -0500, Jonathan Humphreys wrote:
 
-```
-warning: gap in section table:
-    .text   : 0x00001000 - 0x00001c00,
-    .data   : 0x00002000 - 0x00002200,
-gaps in the section table may result in different checksums
-warning: data remaining[7680 vs 12720]: gaps between PE/COFF sections?
-```
+> Fill in the BeaglePlay's capsule GUID properties of the base binman capsu=
+le
+> nodes.
+>=20
+> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
+> ---
+>  arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi | 27 ++++++++++++++++++++
+>  arch/arm/dts/k3-am625-r5-beagleplay.dts      | 15 +++++++++++
+>  2 files changed, 42 insertions(+)
 
-I am not sure if RISC-V is working, never tried to build with that.
-But arm32, x86 should be fine - they don't have the `.rela.*` sections and
-text and data sections are well aligned.
+This series introduces failure to build in CI, and it's a little tricky
+to replicate locally, depending on your environment. You first need to
+NOT have BINMAN_INDIRS set and instead be using fake binaries. Second,
+it seems python version dependent perhaps? I don't see this on my host,
+but by:
+- Using the CI container
+- Setting up a virtualenv inside of it
+- pip install -r tools/buildman/requirements.txt
+I get:
+$ ./tools/buildman/buildman --keep-outputs --reproducible-builds -dvel --fo=
+rce-build -PEWM --output /tmp/am62x_beagleplay_r5 --board am62x_beagleplay_=
+r5
+Building current source for 1 boards (1 thread, 12 jobs per thread)
+       arm:  +   am62x_beagleplay_r5
++(am62x_beagleplay_r5) Image 'tiboot3-am62x-gp-evm.bin' is missing optional=
+ external blobs but is still functional: ti-fs-gp.bin
++(am62x_beagleplay_r5)
++(am62x_beagleplay_r5) /binman/tiboot3-am62x-gp-evm.bin/ti-fs-gp.bin (ti-sy=
+sfw/ti-fs-firmware-am62x-gp.bin):
++(am62x_beagleplay_r5)    Missing blob
++(am62x_beagleplay_r5) binman: object of type 'NoneType' has no len()
++(am62x_beagleplay_r5) make[1]: *** [Makefile:1126: .binman_stamp] Error 1
++(am62x_beagleplay_r5) make: *** [Makefile:177: sub-make] Error 2
+    0    0    1 /1              am62x_beagleplay_r5
 
+--=20
+Tom
 
-> >         .rela.dyn : { *(.rela.dyn) }
-> >         .rela.plt : { *(.rela.plt) }
-> >         .rela.got : { *(.rela.got) }
-> > --
-> > 2.25.1
-> >
->
-> [0]
-> https://lore.kernel.org/u-boot/CAC_iWjK+14L6mEi8GQN-McF-SChvhnjJ79nE1tWLV+kgWZKVew@mail.gmail.com/
-> [1] https://git.code.sf.net/p/gnu-efi/code
->
->
-Regards,
-Raymond
+--9TyPSf/MfPk2jSP9
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY+WgwACgkQFHw5/5Y0
+tyySgQwApfDxABzpwQvs0zmpEjQ+5A7eoj6vwA2dGL8/Cvsa+ozD4MBPef9EsOmm
+Uc91aV6iHP0yItxxY+YNyJ/noB/mJJ5ClMAqFuqf1EruXXUsy7aLvjaXsdQz+JZz
+dV+WJL4IUrSqXe+ayvBfUV1LCRSo/o/YbQnkaO/f1i2TJ5veGfV0Hq2l7/BNEqWl
+C0ugWKOoGKerwUM3a40iVFLqkWMDX53cC9z1bBOgq3L6fCfNBVnLRqkCIoiQ7ZLN
+dwEzIdd8XRDDfqAWz/F60O/mGvdhGtjfYRrHOib17cZ54bRyYzjTonGLz3SfJ7Ne
+kB5qpMZkKMFtTDIiv3nvQHJ6uJngY7IP2aeN1UexWfra9oeyb3Ovc0Qq86FIrytm
+uJNuyKR9QrBdV8CAg4B3IXECVTKAbgCvfkB/e+VAo3qu13Jg3bQ0Ke6zBa0/EfNk
+ULmoaUfUCStsLvhiOXZPuSp28ljqWzhysM1SDFJgPLtCRbSz5sZBeleJuArXfmdR
+FR34SRHl
+=GMQR
+-----END PGP SIGNATURE-----
+
+--9TyPSf/MfPk2jSP9--
