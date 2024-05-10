@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3196EC25B10
-	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 20:01:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A72B5C25B10
+	for <u-boot@archiver.kernel.org>; Fri, 10 May 2024 20:01:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A50AB8780E;
-	Fri, 10 May 2024 22:01:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3134E87EAC;
+	Fri, 10 May 2024 22:01:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VkY1uUBM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q4CmcWpQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C27487964; Fri, 10 May 2024 22:01:04 +0200 (CEST)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id 4219F87FCC; Fri, 10 May 2024 22:01:57 +0200 (CEST)
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD9D587572
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 22:01:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 23CE587E74
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 22:01:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-78f043eaee9so144282085a.3
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 13:01:01 -0700 (PDT)
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-3c996526c69so1072804b6e.1
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 13:01:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715371260; x=1715976060; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1715371314; x=1715976114; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ULkJnyfnK7aIe5NfzCFTlg95J7sOhuz5DJvzuW6uurU=;
- b=VkY1uUBMYfh4/bUnlVIuE/1Meh+FIc9fBh0fhCmyuo9NS/PIuqS0mYouWLhVtYDe9C
- Ewcgck735MZ6lIwy1jkBfRWlsZFtxvRWpuIOuv0KC9/RHfazS86UjNRorbw02PJ6Acz5
- 7CHXwdNihdLRd8pP6CL+t3bi5iJYvfzfrxaHU=
+ bh=0TzwZxKSlHomnlApuUKJw6ZF6VkMZH2RVSIFa9ZQYdw=;
+ b=q4CmcWpQy8EG0r5lQD1+LW3bEGwkUwApTv7Fp2lLujm4UaG+Q7J+/THxJ4vDb3ZcYD
+ 9vJG5rY2wqKkbgIEkOkq7RKVs2es4MkXWvtvpyDOouKo8RJ202Lfjgg7vrojk/mVUJdS
+ yqdJKPe98FlmaGpKmU/nujMwWcACSA5tWaaOo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715371260; x=1715976060;
+ d=1e100.net; s=20230601; t=1715371314; x=1715976114;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ULkJnyfnK7aIe5NfzCFTlg95J7sOhuz5DJvzuW6uurU=;
- b=emrnMl/L2FTIPkruY0C7rT4qP+ly1f5/aH3egRAj/fQDnVaYheju+w94iNQ4UAjG3f
- Q/16K12mVwvy8qjgvJOqyBKcsJECcogXZ7NMvvKXNNfHj9WuB2gXIwcmUcbDmXhiA3YO
- e/7g5o7kwpRNFYLAeSVxs9ZmsDf42hIpiCQjl5GXs+WKHVWJGhLqgfLYeqYhIAoYpocO
- gPdvixgfnuCptTrGXog6KURAt0FDDseCgooZAsLJ7Hiq/mu/KDWv/Pd3UZg0sveF+BNL
- tTSDtWxyXU7QQJoLVEr1U6H+SjuSx1jqn0iua8lrAB1TzAmjlAiDUKzsGSZyhx3y9asu
- r44w==
+ bh=0TzwZxKSlHomnlApuUKJw6ZF6VkMZH2RVSIFa9ZQYdw=;
+ b=tn5CjnBQR85mvmko92D9HtWAu+iOc6sNOYvWmxT3psxOr8CHfZSmj6vWlUzrGBafDd
+ 54ivKcG2Km73p1+ulBwQVLBuvCbAs7V/0qR7j92VMPPL8/sI8fWf6pZZpDXMbhxSUBNO
+ MUDy7c9mqExjlD/neVBer3J7xkkxWdDILLnKkxprYTcEJ/VFdvSX002mxl4Sn4uPQ09u
+ 6VOhcGmIVEbdqvvQyT2EAs3lWUqYsnLr4NJszkzU+EdMiAW2FxGBaGByh5I1iF0OiYEG
+ UlS6LLmo6TXk3vL8mOeSoWdSYsF783g+A5PEiPhGcgi0hVKkPtDwxnSMz9+CPJPCRNSc
+ 86fA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV1B4tN+DXpwcVlWf+VupykhkjiePzm/pk2gRKcgqFWu+x8KRYA6nngCyQ4jEcFDAFVcxhDnRK4U+ArGickvN27RCIFHA==
-X-Gm-Message-State: AOJu0YzIHT2ejDa+vgPVWNSu6ijwthQvs8jAIEnt5sz7T2ezKp11YuQ2
- DWmIFvnjZsPTJ3Xtga6/l1qVgpL41HLyGqevHrRpImDwZA0Vl0jnHETldRgVsw0=
-X-Google-Smtp-Source: AGHT+IHgauVNTkWsjdCJz02XFO06GxKHjE4EoqPlhs0DRq+mtMZ2cYzQ/rNKBDpfrNi/AK/tj3qQ4g==
-X-Received: by 2002:a05:620a:51d0:b0:792:c429:1267 with SMTP id
- af79cd13be357-792c7597e48mr367574685a.24.1715371260546; 
- Fri, 10 May 2024 13:01:00 -0700 (PDT)
+ AJvYcCVCv1KnF5K4vDROjdi44w/6yr82Qw9MiBtNU8ZYp+6EB6TTOKkq/gsoxpUEKJFoWpwfZ4zVDFRz1jw64gCMgW5vgPVv2A==
+X-Gm-Message-State: AOJu0YwEhuNTNrUneEPLqYMLwt33ihlN44AF16tSOLKzepSSjOFqGUm8
+ lWQnFJNzfPQ4moLjBpI1ZNGFeUHB0sDN29IN6KxJDIl6QiD40Rlm1lrecfVDEvA=
+X-Google-Smtp-Source: AGHT+IEliver/xxE+XvcHXM1GxQQID35fGWpCaQlJf98jA1rxIQ4pi/Bzro4B4+F0N+WMtT/r0eO3Q==
+X-Received: by 2002:a05:6808:16aa:b0:3c8:311c:ac60 with SMTP id
+ 5614622812f47-3c9970ccefcmr4446556b6e.46.1715371313879; 
+ Fri, 10 May 2024 13:01:53 -0700 (PDT)
 Received: from bill-the-cat ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-43df5da15f4sm23951001cf.68.2024.05.10.13.00.58
+ 6a1803df08f44-6a15f1d740fsm20066516d6.115.2024.05.10.13.01.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 May 2024 13:01:00 -0700 (PDT)
-Date: Fri, 10 May 2024 14:00:56 -0600
+ Fri, 10 May 2024 13:01:53 -0700 (PDT)
+Date: Fri, 10 May 2024 14:01:50 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Nishanth Menon <nm@ti.com>
 Cc: Roger Quadros <rogerq@kernel.org>,
@@ -74,18 +74,19 @@ Cc: Roger Quadros <rogerq@kernel.org>,
  vigneshr@ti.com, r-gunasekaran@ti.com, danishanwar@ti.com,
  u-boot@lists.denx.de
 Subject: Re: [PATCH 0/3] arm: dts: am62-beagleplay: Fix Beagleplay Ethernet
-Message-ID: <20240510200056.GY2568172@bill-the-cat>
+Message-ID: <20240510200150.GZ2568172@bill-the-cat>
 References: <20240425-for-2024-07-beagleplay-eth-v1-0-6c985de1c316@kernel.org>
  <9baa5ac5-8ce9-4aea-9a3d-ec1d68ea5505@kernel.org>
  <20240510130830.GT2568172@bill-the-cat>
  <08b22e06-f316-4ef6-bd42-a4600f1f8035@kernel.org>
  <20240510193325.GX2568172@bill-the-cat>
  <20240510195837.oebzog4czpn4wzxs@spearfish>
+ <20240510200056.GY2568172@bill-the-cat>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="oWKfwDrshOo6enLU"
+ protocol="application/pgp-signature"; boundary="qVlFJ93RM1Zj5nYe"
 Content-Disposition: inline
-In-Reply-To: <20240510195837.oebzog4czpn4wzxs@spearfish>
+In-Reply-To: <20240510200056.GY2568172@bill-the-cat>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,46 +105,49 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---oWKfwDrshOo6enLU
+--qVlFJ93RM1Zj5nYe
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, May 10, 2024 at 02:58:37PM -0500, Nishanth Menon wrote:
-> On 13:33-20240510, Tom Rini wrote:
-> [...]
+On Fri, May 10, 2024 at 02:00:56PM -0600, Tom Rini wrote:
+> On Fri, May 10, 2024 at 02:58:37PM -0500, Nishanth Menon wrote:
+> > On 13:33-20240510, Tom Rini wrote:
+> > [...]
+> > > >=20
+> > > > [1] arm64: dts: ti: beagleplay: Fix Ethernet PHY RESET GPIOs
+> > > >       commit: 0b1133ee36ecbf3b02f69cc4e8a169f1b6019e40
 > > >=20
-> > > [1] arm64: dts: ti: beagleplay: Fix Ethernet PHY RESET GPIOs
-> > >       commit: 0b1133ee36ecbf3b02f69cc4e8a169f1b6019e40
+> > > Ah, since it's been merged to -next now, Nishanth, what do you want to
+> > > do?
 > >=20
-> > Ah, since it's been merged to -next now, Nishanth, what do you want to
-> > do?
+> > No biggie.. it is on route to kernel master anyways, was planning on
+> > OF_UPSTREAM migration for beagle once we settle 6.10-rc1 settles into
+> > u-boot.
 >=20
-> No biggie.. it is on route to kernel master anyways, was planning on
-> OF_UPSTREAM migration for beagle once we settle 6.10-rc1 settles into
-> u-boot.
+> OK, I'll just grab this iteration.
 
-OK, I'll just grab this iteration.
+=2E.. needs a rebase anyhow, yes, please do, thanks.
 
 --=20
 Tom
 
---oWKfwDrshOo6enLU
+--qVlFJ93RM1Zj5nYe
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY+fPIACgkQFHw5/5Y0
-tyxTmwv/RHypvnQvxhj0MF7z0ymriwPy2kNO/Zo38A7Os7Ex1eRdjDgiyvR5VRQO
-j1Z/pgnUSG5hY6AJrTNFy9/uGLtJGIinFKhuZ2Z6XGM0MSogt+XkFVdbsJm8aue3
-V70PhD+DgDvQkaqD5k7wX6P8eZ0ryOBDh62wUF+MBKAYls5Y7LZnYr7pTfIQ44Uz
-CiVCU4g7THBMm9tyCDAxKDKsyHK9YLYmdm5NcV65UClXuKL4r5K+9fmVaLLh1QRk
-jgumU3WQ9M5cdMZMI8SaXQrA4VU1vWVR3QOQZEm6u4f8Haci0sZCXvRXo2hwd7dk
-izA5FQJRAILzkb+lTPliTGB1FUVfHD0sO2+kShBQzGE+jh9VTf/wZE+hPm8+nDLv
-h//xpbA04sAYflZnnM7Eif4KrhTnwMQHPefauzObhdLE7oYj92thBhEPTUTp8ViC
-jmKRwdAiLOL6XOoz3+yo4GcgvliDBJWHYLdh7bm5L4Vecsb4FNwSMKCvl1M6MMXv
-rvQhVgRX
-=zo2/
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY+fS4ACgkQFHw5/5Y0
+tyyUCwv/U9V+7u5b6e4Hoc0IlvyYQ75iZR3OffjOuXrbfhkccMm71+SCRmDSMDMQ
+9bTZYV327XQq35ITTj3VIhPpXUjlHu51WHuzRAGUjZ5Q5y/pinJ67gyR/6zCBqR2
+5NW78x50rpZ+18R2nn+NeV6bVydvnKncDDY3kHe9360d4FQ13CNR3KcalcLeGjX0
+Jkdc5T0MdmxL5stG6DTwl0tbLTV9W7Q+F9HrijISB65vsUKwgquAtSDYZM3JW8C7
+kJhOPUMV+4lS8PddPKXr0zLrBVAwSnGYr79stzBMwKeQ0CV52kyayXCAxVt0CYAu
+FkoRGQ9U8lEF2dVMBjjuHszBoaE088lO9jpxA5SCEuiyiWyFF8P7VyMrLLhfajrt
+Ie4rcgRny8S8eVujY13PR9AohurgQq5/V8OS3pRZaQBoKWdYeyzxp4I4C+PEQ6NA
+g9I7Aw3LQIqtXQHUMWb76hyAXy8vJuk647+hYILmMrLxh1UhRse7QPpgHzKsjmUl
+ov1FJpxR
+=EJiN
 -----END PGP SIGNATURE-----
 
---oWKfwDrshOo6enLU--
+--qVlFJ93RM1Zj5nYe--
