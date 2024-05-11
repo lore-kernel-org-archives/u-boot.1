@@ -4,63 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1E96C04FFE
-	for <u-boot@archiver.kernel.org>; Sat, 11 May 2024 20:55:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6DCEC04FFE
+	for <u-boot@archiver.kernel.org>; Sat, 11 May 2024 23:13:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB59E87C69;
-	Sat, 11 May 2024 22:55:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id A531287DEF;
+	Sun, 12 May 2024 01:13:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="KrtTqh3n";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="pMYfE3VB";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="dQlFN/zi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13B5587C69; Sat, 11 May 2024 22:55:40 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 30EC187E1D; Sun, 12 May 2024 01:13:34 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8B3887B30
- for <u-boot@lists.denx.de>; Sat, 11 May 2024 22:55:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 47C3387DC7
+ for <u-boot@lists.denx.de>; Sun, 12 May 2024 01:13:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=b203=MP=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1715460923;
- bh=4KyqmlhRn5TTzKmiNri8Pz+mNeyf10Gy6t3eydR9Q4w=;
- b=KrtTqh3nzi/evwZJNquvCiJiuv/uV61qyPBK/+S2r7wCYb+udSn9oGAMd/eW3UVtkWee+OHWB
- U7JFRACL9H3L7k+2EnIpOwm+JRp7UJGr0RjdPjxqYN90717v0beAtqX6YtVATSxDUr0jPxJ3ByN
- 7s+3+XduEC79+tg7IOVBYJ8ni5HGOn4FZTUzMLvs6M7drex1O5WfE4yBA6T/l5X7xfIs+X4qZxc
- nX1B5h2WGdJHQlEqygqrKCOOr6mBq6HQRpV40UxOMQVRYzcGERZNCIqh2r2i2DSi0I7aqly70z5
- FjCvDf4ppiVe2tQWW1GZNFDlehzeMYrVyr3QbrkexSVw==
-Message-ID: <bea381f4-8e5c-4f72-982d-0e828ab950b4@kwiboo.se>
-Date: Sat, 11 May 2024 22:55:18 +0200
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4VcM4W0FTxz9sTD;
+ Sun, 12 May 2024 01:13:31 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1715469211;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=WHzBgdk0ucFaDBYuTIsyN9zkZjcCzGsa+exDI39wiP4=;
+ b=pMYfE3VB0Cg9UY1Yyled7192Wi7XwQp5Z5u0foVu5JptJXE/7BxY7Os8pvx0avPEN47inc
+ HGpJQR/Xfa9KrBnL6ZeYQKhGcITXjfTy7aMR94Spgp5RKFKNJmPutUjo5o2eiqXh5fG2Ga
+ Fp3Hhd31JPOiFAezAInC2SIM4cVJTPJwoPSB+Ev/W8amVxfGIXxiuvLnpLG8M+WJYJTPJR
+ XiB8Up92sinqgWlTaBdIo7ZTCjC0A8aNXUT43HYySQtzKtjVTP3axcvnTrhR/+Ts8pwz2h
+ KqZNMIK7mqfxsv5UMnm3LaaQLOUv7I7dMgGBkvErNaVqxoaJ96PM4oZL/o/JzA==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1715469208;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=WHzBgdk0ucFaDBYuTIsyN9zkZjcCzGsa+exDI39wiP4=;
+ b=dQlFN/zi6zmWghf9AQjX35xCXxSJ7PPb/F/keRr19VRIMC60IZj5v51b+0bEEBUZNKtCAN
+ 3gcw0BtX3ujZTs9P7CnUYTVLLaz1VPLWJJlCggFCmsZDIX1IojL2mnGGp6SQj+wvJH/nBX
+ ERUBZS9VXwXqQECwKyKsu+jOaxXbwEY1gQBMNTen4Fhyozy1CKJpuI/N0OhAz7uDZ7v+hZ
+ X6W+GYnZA3ABUtXX9gdmEzKjRnTdIOa42k5CaofnZ8IEeSiR6mf+1l0G+wG/zWGclZhtqb
+ t5nGaJp4QC2ixBA4hfJHaD40rqVmkhZL0Hm07vVRCTecZCgqjsLEyv71Xw+k+g==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PULL] u-boot-sh/master-cleanup
+Date: Sun, 12 May 2024 01:12:27 +0200
+Message-ID: <20240511231302.74263-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/4] rockchip: Add gpio request() ops and drop PCIe
- reset-gpios workaround
-To: Mark Kettenis <mark.kettenis@xs4all.nl>
-Cc: knaerzche@gmail.com, kever.yang@rock-chips.com, sjg@chromium.org,
- philipp.tomsich@vrull.eu, trini@konsulko.com, jbx6244@gmail.com,
- u-boot@lists.denx.de
-References: <20240511112821.1156519-1-jonas@kwiboo.se>
- <0e701fd8-b2c6-4ac4-9427-d984032470d1@gmail.com>
- <6853e5ac-271f-4d19-b8fb-a2746b834b24@kwiboo.se>
- <87bk5cglzj.fsf@bloch.sibelius.xs4all.nl>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <87bk5cglzj.fsf@bloch.sibelius.xs4all.nl>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 663fdb3bd6c959cb98842489
+X-MBO-RS-META: uqirtfkm79thczsnqxswgh1wej88oh61
+X-MBO-RS-ID: ec7534184bae9a6f3db
+X-Rspamd-Queue-Id: 4VcM4W0FTxz9sTD
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,142 +84,145 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mark,
+The following changes since commit 5c5565cfec92eb7377ff7fe197612c6a813bb6c7:
 
-On 2024-05-11 21:57, Mark Kettenis wrote:
->> Date: Sat, 11 May 2024 20:47:40 +0200
->> From: Jonas Karlman <jonas@kwiboo.se>
-> 
-> Hi Jonas & Alex,
-> 
->> Hi Alex,
->>
->> On 2024-05-11 19:44, Alex Bee wrote:
->>> Hi Jonas,
->>>
->>> Am 11.05.24 um 13:28 schrieb Jonas Karlman:
->>>> This series add gpio request() and pinctrl gpio_request_enable() ops so
->>>> that a gpio requested pin automatically use gpio pinmux and U-Boot
->>>> behaves more similar to Linux kernel.
->>>
->>> I'm not sure that's a good idea.
->>> While linux does it the same way, we really shouldn't expect every 
->>> software/os/ … which uses DT (now or in future) to implicitly switch the 
->>> pin function when using a pin as gpio. So the real fix would probably be 
->>> to add the the correct pinctrl settings to the upstream DT of those 
->>> boards and sync it later on (not sure those if those SoCs already using 
->>> OF_UPSTREAM) and leave the -u-boot.dtsi-"hack" alone for now.
-> 
-> I missed Alex's mail, but OpenBSD certainly is one of the OSes that
-> could break if the pinctrl settings get removed.  We currently have no
-> code to automatically mux the gpio pins on these Rockchip SoCs. I
-> suppose as long as U-Boot probes the PCIe bus, the pins will already
-> be muxed correctly and things will continue to work.  But I think
-> there are certain boot scenarios where this won't happen.
+  Merge patch series "arm: davinci: Migrate da850-evm to OF_UPSTREAM" (2024-05-07 11:59:26 -0600)
 
-The control FDT on the known affected boards was only patched to prevent
-the boards from a full device freeze when PCIe was enumerated. An OS
-should probably not depend on a workaround made for U-Boot use.
+are available in the Git repository at:
 
-Is it common for *BDS to use the control FDT or is it more common that a
-separate .dtb-file to be loaded during boot?
+  https://source.denx.de/u-boot/custodians/u-boot-sh.git master-cleanup
 
-To recap, the issue on e.g. ROCK 3A is that the upstream DT use pinctrl
-to signal PCIE30X2 CLKREQn_M1/WAKEn_M1/PERSTn_M1 function, DT also
-specify a reset-gpios prop pointing on PERSTn_M1. To me this seem like a
-correct description of HW.
+for you to fetch changes up to 2d10e76547b896fb002cb3f946ac6f9b628e9fb7:
 
-When U-Boot probe the PCIE30X2 device the pinctrl driver would
-automatically configure CLKREQn_M1/WAKEn_M1/PERSTn_M1 function.
+  ARM: dts: renesas: Drop DTs with OF_UPSTREAM counterparts (2024-05-12 01:12:00 +0200)
 
-When U-Boot RK PCIe driver try to use the reset-gpios pin the device
-would freeze unless the PERSTn pin is first re-configured for gpio use.
+----------------------------------------------------------------
+Marek Vasut (1):
+      ARM: dts: renesas: Drop DTs with OF_UPSTREAM counterparts
 
-Current workaround in U-Boot throws away the existing upstream pinctrl
-and replace it to only configure gpio func on the PERSTn pin. This also
-leaves the CLKREQn and WAKEn to incorrectly use gpio func.
-
-With this series I try to cleanup the old workaround that I added without
-much insight beyond: device no longer freeze and nvme "works" :-)
-
-> 
-> I've wondered in the past what the purpose of the gpio-ranges
-> properties was.  I never considered that they could be used to
-> automatically mux the pins for GPIO since the gpio-ranges mapping
-> provides no indication of what the correct pin settings arefor the
-> GPIO pins.
-
-The gpio-ranges prop is only used to provide details on how the pins are
-mapped between gpio and pin controller. It is not used to change any
-muxing. But the property is required to make the U-Boot helpers
-pinctrl_gpio_request()/pinctrl_gpio_free() work and figure out what
-pinctrl udevice to use if another driver use e.g. gpio_request_by_name()
-to request use of a pin for gpio use.
-
-Keep in mind that this series should not change any behavior except for
-the special case when DT pinctrl may configure a pin for non-gpio
-function and later U-Boot request the pin to be used for gpio.
-
-> 
->>
->> I fully agree that the pinctrl for the problematic boards should be
->> corrected in upstream DT, but that is a separate issue and should not
->> block adding support for the request()/gpio_request_enable() ops.
->>
->> While the pcie reset-gpios full board freeze that was my driving factor
->> to fully implement the gpio request() ops it is not the only use case,
->> using the gpio cmd on a pin that use a non-gpio pinmux is another.
->>
->> Or do you see any technical issue with having the gpio request() ops
->> implemented and having it ensure gpio pinmux is used on a gpio requested
->> pin? Similar to how gpio/pinctrl is behaving in Linux and on some other
->> platforms in U-Boot?
-> 
-> Well, it removes the incentive to fix the upstream DTs and would make
-> it harder to notice missing pinctrls in the DTs.
-
-I can understand that, but gpio pinmux is default so any missing pinctrl
-would still cause issues, this changes nothing in that regard.
-
-This only affect if pinctrl exists and pin gets configured for non-gpio
-function use. And later a driver/cmd tries to use such pin for gpio use.
-Before this patch the use of gpio_request() would not change the pin mux
-for gpio use. After this series when code explicily request a pin for
-gpio use the pinctrl driver gets notified that it should change pinmux
-of the pin for gpio use.
-
-Regards,
-Jonas
-
-> 
-> Cheers,
-> 
-> Mark
-> 
->>> Alex
->>>>
->>>> With the gpio and pinctrl ops implemented this series also remove a PCIe
->>>> reset-gpios related device lock-up workaround from board u-boot.dtsi.
->>>>
->>>> PX30, RK3066, RK3188, RK356x and RK3588 are the only SoCs that currently
->>>> define gpio-ranges props and is affected by this series.
->>>>
->>>> A follow up series adding support for the pinmux status cmd will also
->>>> add gpio-ranges props for remaining RK SoCs.
->>>>
->>>> Jonas Karlman (4):
->>>>    pinctrl: rockchip: Add gpio_request_enable() ops
->>>>    gpio: rockchip: Add request() ops
->>>>    rockchip: rk3568-rock-3a: Drop PCIe reset-gpios workaround
->>>>    rockchip: rk3568-radxa-e25: Drop PCIe reset-gpios workaround
->>>>
->>>>   arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi     | 12 -------
->>>>   arch/arm/dts/rk3568-rock-3a-u-boot.dtsi       | 12 -------
->>>>   drivers/gpio/rk_gpio.c                        | 10 ++++++
->>>>   .../pinctrl/rockchip/pinctrl-rockchip-core.c  | 31 +++++++++++++++++++
->>>>   4 files changed, 41 insertions(+), 24 deletions(-)
->>>>
->>>
->>
->>
-
+ arch/arm/dts/Makefile                          |   34 -
+ arch/arm/dts/r8a774a1-beacon-rzg2m-kit.dts     |   60 -
+ arch/arm/dts/r8a774a1-hihope-rzg2m-ex.dts      |   21 -
+ arch/arm/dts/r8a774a1-hihope-rzg2m.dts         |   37 -
+ arch/arm/dts/r8a774a1.dtsi                     | 2865 -------------------
+ arch/arm/dts/r8a774b1-beacon-rzg2n-kit.dts     |   56 -
+ arch/arm/dts/r8a774b1-hihope-rzg2n-ex.dts      |   21 -
+ arch/arm/dts/r8a774b1-hihope-rzg2n.dts         |   41 -
+ arch/arm/dts/r8a774b1.dtsi                     | 2716 ------------------
+ arch/arm/dts/r8a774c0-cat874.dts               |  455 ----
+ arch/arm/dts/r8a774c0-ek874.dts                |   14 -
+ arch/arm/dts/r8a774c0.dtsi                     | 2000 --------------
+ arch/arm/dts/r8a774e1-beacon-rzg2h-kit.dts     |   61 -
+ arch/arm/dts/r8a774e1-hihope-rzg2h-ex.dts      |   20 -
+ arch/arm/dts/r8a774e1-hihope-rzg2h.dts         |   41 -
+ arch/arm/dts/r8a774e1.dtsi                     | 2997 --------------------
+ arch/arm/dts/r8a7790-lager.dts                 |  947 -------
+ arch/arm/dts/r8a7790-stout.dts                 |  382 ---
+ arch/arm/dts/r8a7790.dtsi                      | 1965 -------------
+ arch/arm/dts/r8a7791-koelsch.dts               |  912 -------
+ arch/arm/dts/r8a7791-porter.dts                |  523 ----
+ arch/arm/dts/r8a7791.dtsi                      | 1891 -------------
+ arch/arm/dts/r8a7792-blanche.dts               |  364 ---
+ arch/arm/dts/r8a7792.dtsi                      |  928 -------
+ arch/arm/dts/r8a7793-gose.dts                  |  818 ------
+ arch/arm/dts/r8a7793.dtsi                      | 1470 ----------
+ arch/arm/dts/r8a7794-alt.dts                   |  533 ----
+ arch/arm/dts/r8a7794-silk.dts                  |  578 ----
+ arch/arm/dts/r8a7794.dtsi                      | 1437 ----------
+ arch/arm/dts/r8a77950-salvator-x.dts           |   49 -
+ arch/arm/dts/r8a77950-ulcb.dts                 |   37 -
+ arch/arm/dts/r8a77950.dtsi                     |  330 ---
+ arch/arm/dts/r8a77951.dtsi                     | 3485 ------------------------
+ arch/arm/dts/r8a77960-salvator-x.dts           |   37 -
+ arch/arm/dts/r8a77960-ulcb.dts                 |   38 -
+ arch/arm/dts/r8a77960.dtsi                     | 3080 ---------------------
+ arch/arm/dts/r8a77965-salvator-x.dts           |   32 -
+ arch/arm/dts/r8a77965-ulcb.dts                 |   33 -
+ arch/arm/dts/r8a77965.dtsi                     | 2889 --------------------
+ arch/arm/dts/r8a77970-eagle.dts                |  405 ---
+ arch/arm/dts/r8a77970-v3msk.dts                |  303 --
+ arch/arm/dts/r8a77970.dtsi                     | 1220 ---------
+ arch/arm/dts/r8a77980-condor.dts               |   24 -
+ arch/arm/dts/r8a77980-v3hsk.dts                |  293 --
+ arch/arm/dts/r8a77980.dtsi                     | 1625 -----------
+ arch/arm/dts/r8a77990-ebisu.dts                |   15 -
+ arch/arm/dts/r8a77990.dtsi                     | 2154 ---------------
+ arch/arm/dts/r8a77995-draak.dts                |   16 -
+ arch/arm/dts/r8a77995.dtsi                     | 1473 ----------
+ arch/arm/dts/r8a779a0-falcon-cpu.dtsi          |  359 ---
+ arch/arm/dts/r8a779a0-falcon-csi-dsi.dtsi      |  270 --
+ arch/arm/dts/r8a779a0-falcon-ethernet.dtsi     |   15 -
+ arch/arm/dts/r8a779a0-falcon.dts               |  101 -
+ arch/arm/dts/r8a779a0.dtsi                     | 2915 --------------------
+ arch/arm/dts/r8a779f0-spider-cpu.dtsi          |  210 --
+ arch/arm/dts/r8a779f0-spider-ethernet.dtsi     |  105 -
+ arch/arm/dts/r8a779f0-spider.dts               |   24 -
+ arch/arm/dts/r8a779f0.dtsi                     | 1193 --------
+ arch/arm/dts/r8a779g0-white-hawk-cpu.dtsi      |  375 ---
+ arch/arm/dts/r8a779g0-white-hawk-csi-dsi.dtsi  |  187 --
+ arch/arm/dts/r8a779g0-white-hawk-ethernet.dtsi |   16 -
+ arch/arm/dts/r8a779g0-white-hawk.dts           |   69 -
+ arch/arm/dts/r8a779g0.dtsi                     | 2349 ----------------
+ 63 files changed, 49913 deletions(-)
+ delete mode 100644 arch/arm/dts/r8a774a1-beacon-rzg2m-kit.dts
+ delete mode 100644 arch/arm/dts/r8a774a1-hihope-rzg2m-ex.dts
+ delete mode 100644 arch/arm/dts/r8a774a1-hihope-rzg2m.dts
+ delete mode 100644 arch/arm/dts/r8a774a1.dtsi
+ delete mode 100644 arch/arm/dts/r8a774b1-beacon-rzg2n-kit.dts
+ delete mode 100644 arch/arm/dts/r8a774b1-hihope-rzg2n-ex.dts
+ delete mode 100644 arch/arm/dts/r8a774b1-hihope-rzg2n.dts
+ delete mode 100644 arch/arm/dts/r8a774b1.dtsi
+ delete mode 100644 arch/arm/dts/r8a774c0-cat874.dts
+ delete mode 100644 arch/arm/dts/r8a774c0-ek874.dts
+ delete mode 100644 arch/arm/dts/r8a774c0.dtsi
+ delete mode 100644 arch/arm/dts/r8a774e1-beacon-rzg2h-kit.dts
+ delete mode 100644 arch/arm/dts/r8a774e1-hihope-rzg2h-ex.dts
+ delete mode 100644 arch/arm/dts/r8a774e1-hihope-rzg2h.dts
+ delete mode 100644 arch/arm/dts/r8a774e1.dtsi
+ delete mode 100644 arch/arm/dts/r8a7790-lager.dts
+ delete mode 100644 arch/arm/dts/r8a7790-stout.dts
+ delete mode 100644 arch/arm/dts/r8a7790.dtsi
+ delete mode 100644 arch/arm/dts/r8a7791-koelsch.dts
+ delete mode 100644 arch/arm/dts/r8a7791-porter.dts
+ delete mode 100644 arch/arm/dts/r8a7791.dtsi
+ delete mode 100644 arch/arm/dts/r8a7792-blanche.dts
+ delete mode 100644 arch/arm/dts/r8a7792.dtsi
+ delete mode 100644 arch/arm/dts/r8a7793-gose.dts
+ delete mode 100644 arch/arm/dts/r8a7793.dtsi
+ delete mode 100644 arch/arm/dts/r8a7794-alt.dts
+ delete mode 100644 arch/arm/dts/r8a7794-silk.dts
+ delete mode 100644 arch/arm/dts/r8a7794.dtsi
+ delete mode 100644 arch/arm/dts/r8a77950-salvator-x.dts
+ delete mode 100644 arch/arm/dts/r8a77950-ulcb.dts
+ delete mode 100644 arch/arm/dts/r8a77950.dtsi
+ delete mode 100644 arch/arm/dts/r8a77951.dtsi
+ delete mode 100644 arch/arm/dts/r8a77960-salvator-x.dts
+ delete mode 100644 arch/arm/dts/r8a77960-ulcb.dts
+ delete mode 100644 arch/arm/dts/r8a77960.dtsi
+ delete mode 100644 arch/arm/dts/r8a77965-salvator-x.dts
+ delete mode 100644 arch/arm/dts/r8a77965-ulcb.dts
+ delete mode 100644 arch/arm/dts/r8a77965.dtsi
+ delete mode 100644 arch/arm/dts/r8a77970-eagle.dts
+ delete mode 100644 arch/arm/dts/r8a77970-v3msk.dts
+ delete mode 100644 arch/arm/dts/r8a77970.dtsi
+ delete mode 100644 arch/arm/dts/r8a77980-condor.dts
+ delete mode 100644 arch/arm/dts/r8a77980-v3hsk.dts
+ delete mode 100644 arch/arm/dts/r8a77980.dtsi
+ delete mode 100644 arch/arm/dts/r8a77990-ebisu.dts
+ delete mode 100644 arch/arm/dts/r8a77990.dtsi
+ delete mode 100644 arch/arm/dts/r8a77995-draak.dts
+ delete mode 100644 arch/arm/dts/r8a77995.dtsi
+ delete mode 100644 arch/arm/dts/r8a779a0-falcon-cpu.dtsi
+ delete mode 100644 arch/arm/dts/r8a779a0-falcon-csi-dsi.dtsi
+ delete mode 100644 arch/arm/dts/r8a779a0-falcon-ethernet.dtsi
+ delete mode 100644 arch/arm/dts/r8a779a0-falcon.dts
+ delete mode 100644 arch/arm/dts/r8a779a0.dtsi
+ delete mode 100644 arch/arm/dts/r8a779f0-spider-cpu.dtsi
+ delete mode 100644 arch/arm/dts/r8a779f0-spider-ethernet.dtsi
+ delete mode 100644 arch/arm/dts/r8a779f0-spider.dts
+ delete mode 100644 arch/arm/dts/r8a779f0.dtsi
+ delete mode 100644 arch/arm/dts/r8a779g0-white-hawk-cpu.dtsi
+ delete mode 100644 arch/arm/dts/r8a779g0-white-hawk-csi-dsi.dtsi
+ delete mode 100644 arch/arm/dts/r8a779g0-white-hawk-ethernet.dtsi
+ delete mode 100644 arch/arm/dts/r8a779g0-white-hawk.dts
+ delete mode 100644 arch/arm/dts/r8a779g0.dtsi
