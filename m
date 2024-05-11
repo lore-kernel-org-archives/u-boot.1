@@ -4,104 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A613CC25B10
-	for <u-boot@archiver.kernel.org>; Sat, 11 May 2024 01:44:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7200C04FFE
+	for <u-boot@archiver.kernel.org>; Sat, 11 May 2024 04:20:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B31E488027;
-	Sat, 11 May 2024 03:44:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B72258840F;
+	Sat, 11 May 2024 06:20:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JEyrsbmz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SplbTmaP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1A4D8803A; Sat, 11 May 2024 03:44:33 +0200 (CEST)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
+ id EC97E884EC; Sat, 11 May 2024 06:20:50 +0200 (CEST)
+Received: from mail-ua1-x936.google.com (mail-ua1-x936.google.com
+ [IPv6:2607:f8b0:4864:20::936])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EC0287FEE
- for <u-boot@lists.denx.de>; Sat, 11 May 2024 03:44:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B53AD87D1D
+ for <u-boot@lists.denx.de>; Sat, 11 May 2024 06:20:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-6a077a861e7so17791426d6.2
- for <u-boot@lists.denx.de>; Fri, 10 May 2024 18:44:31 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-ua1-x936.google.com with SMTP id
+ a1e0cc1a2514c-7f1d60dee9aso896485241.0
+ for <u-boot@lists.denx.de>; Fri, 10 May 2024 21:20:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715391870; x=1715996670; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=NBWerHbVJ9b4/Ewjbzy4q6EABQgBt7+j4eWMYgr9Z4c=;
- b=JEyrsbmzcng7Wtf/0sxjka4zpphDkOXe1VMhDvDIlHBC43uP27pecQLM98HPt8FqJW
- PnC0KlPZIE/XH3SKGQY/Ko/jHjfetmuNVbffingQGt9O2Sl3/FCVNXhYlXHa3zUwyRCB
- y44eYRhxCWwziUPSF2k35cYithSlkM7NCC2DQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715391870; x=1715996670;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1715401247; x=1716006047; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NBWerHbVJ9b4/Ewjbzy4q6EABQgBt7+j4eWMYgr9Z4c=;
- b=YpJ441zWyolPyaTND1NTD910SbtBj9sksCNrgCbfg+EYqIWO6yGZBVhl4zQztU82tI
- OBUkL3QTvcxRkfQHuSralztj/7Pn7MpipJH/xRSjLY4BAG8YRGD8x0NTqUTvJsS6pfOo
- ZSLj/2aW69J/ucatLWpz3rRKWB9ObCJglnIAhDNADfQ5LcanR+pyA8ZIqBrIaEhdHoKZ
- kTu/Tug0H3XsT6SS8pr8LiESi66XYlbPskPuy5YhmgSL7WZaQFhia6eJTNp8P9IhctTI
- vITQ04OxOxS+i9DALgAHPEI8uHlMzo661RMuG1npNJVAv03I+H36tBS2Hua8vJdgwAPr
- Vb+A==
-X-Gm-Message-State: AOJu0YxjVSFIPCjMuaLwpH0WL4ozPUvnFIz7u4oXTRK5MI590g2qDmIF
- 2K+eNCdrkczVje7GDevJsm1lfEhznkxFg5cRAwPgdIWuwhwwhuRyBRe/6wwG6CI=
-X-Google-Smtp-Source: AGHT+IFfacxCLlO0UolKWK1Ba8Jmg52HWvn2eiOUIleJwjdUQPZG8d67gjcD/XCL4ChNdRpJ85ebJw==
-X-Received: by 2002:a05:6214:3a09:b0:6a0:84f8:6b85 with SMTP id
- 6a1803df08f44-6a16823d998mr50397296d6.53.1715391869904; 
- Fri, 10 May 2024 18:44:29 -0700 (PDT)
-Received: from bill-the-cat ([187.144.98.216])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6a15f194c88sm22092606d6.65.2024.05.10.18.44.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 May 2024 18:44:28 -0700 (PDT)
-Date: Fri, 10 May 2024 19:44:23 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>,
- Christophe Leroy <christophe.leroy@csgroup.eu>,
- Andrew Davis <afd@ti.com>, Jesse Taube <mr.bossman075@gmail.com>,
- Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
- Ralph Siemsen <ralph.siemsen@linaro.org>,
- Sergei Antonov <saproj@gmail.com>, Ilya Lukin <4.shket@gmail.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
- Eddie James <eajames@linux.ibm.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Masahisa Kojima <kojima.masahisa@socionext.com>
-Subject: Re: [PATCH v2 03/28] mbedtls: add mbedtls into the build system
-Message-ID: <20240511014423.GA2568172@bill-the-cat>
-References: <20240507175132.1456512-1-raymond.mao@linaro.org>
- <20240507175132.1456512-4-raymond.mao@linaro.org>
- <20240507211643.GY2568172@bill-the-cat>
- <CAEfUkULdF1R2c=QEOQHQH+8go7VnXnSBKXh2AVYXQt5LkMXy_w@mail.gmail.com>
- <20240509151133.GJ2568172@bill-the-cat>
- <CAEfUkU+Ax6o8NnL=e3Tm+-75HMbXpa5zqMm5TS3EpqY79GAEXw@mail.gmail.com>
- <20240509153100.GK2568172@bill-the-cat>
- <CAEfUkULtQdPYmSdj0qgRaWsNBQvxSFZP00+u0F57J4K+tLhfyQ@mail.gmail.com>
- <20240509154306.GL2568172@bill-the-cat>
- <CAEfUkULvHMqdD4ZaF7kXthoBvvEFb5DZEUgw5UyoWf1xoU8HLQ@mail.gmail.com>
+ bh=hm9k79b5k0YjiSAcxCrHPlERHOJvuRj67gc6R25br8s=;
+ b=SplbTmaPxwg1bci3vqhveZgBlCwDbrRMDYekLeYmjh4FnoY0I6IcxToNDyPLH8qPpb
+ SevkAdkBB2ZkKBaPihd5Xkkk7rQQge8zrqMLXWrv2qyU8SNYmngUkWtNoLNQ41jkaIsc
+ mY7QX+GZ12bfrIe2bbR+Nwiy010+utDIwFYWkOHOh/BZccVwzC8qxPvVzm8pZXq25+sQ
+ qFRtaTVgNImXV5Zg40kKvdMY3pL7ygqacQR7onVecK3PQjSVYYdPaFc3o1DLbxn0fCVv
+ a2SMswQUvGLIF/SNzn33vVvT7f+7+K92NQYCiXJScRjk4MFDSeiY5ZkZTEdxmu7/iOpc
+ Yt/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1715401247; x=1716006047;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=hm9k79b5k0YjiSAcxCrHPlERHOJvuRj67gc6R25br8s=;
+ b=hv8Tza6E4ZddTTLJsvacxqiX/I+TEJOvkR6GMEHBpZGEMK7Tyh/Px45bT9rPUUYBT0
+ BnJu4so5mrtWZKmSL2nSI7l6OY4hcG+Y/32Q3nK6/Zoaq9WHU7uYwYeMlDGLz7/Jjocj
+ 7wGkaZQQ+UZKxzbYT0H1D6BKXmZzNZYE2j9KdwYlEHjI8wtNO4qTzPr3Jyw2/wkMKNUy
+ CO8/c1beIsBFdIkkXt0HHKmqXEyZqKTeWrZxJdTTXrbVSwgej6E1iz9SrN0m1bUfrqT5
+ agqcM3ftPnqlKoWMufs9yp72EIqFCLPkiCIdsYqmonicmtCQHwrPgwPrYZWfrfqAx0Na
+ GKOQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXA3vRObcKoMJkWRXRubQkazjQuFH0Y0EhjEVKclw3CYTfMiTFmwEC2xZWcaaWP5AsFnW8JcPn0OWJF7UOzB64Dvubrjg==
+X-Gm-Message-State: AOJu0YwUSth4KvLOtZnAw3J+d5MynzyFcPVMq6qStCZ57vKoH+61CSTn
+ olRetEzw+t9Zsee4bKAmwf2Lhrwia+AnL1PW0kjmdrGDEfPfxo17Aw+QQO9Dn70+8pAhCj9O0ob
+ HNTGCOGsXLhVSqBE32qloFwanG1Q=
+X-Google-Smtp-Source: AGHT+IGq581vcSgiDjsK5JOhuS+zDaajmmAILOO2vRqEgcfxMWrIJDiVc6XwI8g5ryCERH6ie9pTrvPOvEki6t0FDgk=
+X-Received: by 2002:a05:6102:1526:b0:47f:3557:84f9 with SMTP id
+ ada2fe7eead31-48077eb3fddmr5097993137.35.1715401247550; Fri, 10 May 2024
+ 21:20:47 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="rdib+oFRns8d3znl"
-Content-Disposition: inline
-In-Reply-To: <CAEfUkULvHMqdD4ZaF7kXthoBvvEFb5DZEUgw5UyoWf1xoU8HLQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240510055223.11617-1-heinrich.schuchardt@canonical.com>
+ <20240510055223.11617-6-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240510055223.11617-6-heinrich.schuchardt@canonical.com>
+From: E Shattow <lucent@gmail.com>
+Date: Fri, 10 May 2024 21:20:36 -0700
+Message-ID: <CANV2PTN3Kfd7SG_ENw5FqXCuKSEWvNj3_58oR0SyYnL5H0Hpbw@mail.gmail.com>
+Subject: Re: [PATCH v4 5/5] starfive: add mac vendor sub-command
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>, 
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Lukasz Tekieli <tekieli.lukasz@gmail.com>, 
+ Lukas Funke <lukas.funke@weidmueller.com>, Shiji Yang <yangshiji66@outlook.com>,
+ Shengyu Qu <wiagn233@outlook.com>, Michal Simek <michal.simek@amd.com>, 
+ Seung-Woo Kim <sw0312.kim@samsung.com>, Mason Huo <mason.huo@starfivetech.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,135 +97,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On comparing raw bytes from manufacturer data in EEPROM to having done
+mac initialize and each of the commands incl. 'mac vendor' to
+construct again that data, looks good.
 
---rdib+oFRns8d3znl
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, May 9, 2024 at 10:52=E2=80=AFPM Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> As boards from multiple vendors (Milk-V, StarFive, Pine64) use the mac
+> command provide a sub-command to set the vendor string.
+>
+> Reported-by: E. Shattow <lucent@gmail.com>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+> v4:
+>         no change
+> v3:
+>         new patch
+> ---
+>  .../visionfive2/visionfive2-i2c-eeprom.c      | 25 ++++++++++++++++++-
+>  1 file changed, 24 insertions(+), 1 deletion(-)
+>
+> diff --git a/board/starfive/visionfive2/visionfive2-i2c-eeprom.c b/board/=
+starfive/visionfive2/visionfive2-i2c-eeprom.c
+> index 9648a270494..141d3db8667 100644
+> --- a/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
+> +++ b/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
+> @@ -404,6 +404,24 @@ static void set_product_id(char *string)
+>         update_crc();
+>  }
+>
+> +/**
+> + * set_vendor() - set vendor name
+> + *
+> + * Takes a pointer to a string representing the vendor name, e.g.
+> + * "StarFive Technology Co., Ltd.", stores it in the vendor field
+> + * of the EEPROM local copy, and updates the CRC of the local copy.
+> + */
+> +static void set_vendor(char *string)
+> +{
+> +       memset(pbuf.eeprom.atom1.data.vstr, 0,
+> +              sizeof(pbuf.eeprom.atom1.data.vstr));
+> +
+> +       snprintf(pbuf.eeprom.atom1.data.vstr,
+> +                sizeof(pbuf.eeprom.atom1.data.vstr), string);
+> +
+> +       update_crc();
+> +}
+> +
+>  const char *get_product_id_from_eeprom(void)
+>  {
+>         if (read_eeprom())
+> @@ -463,6 +481,9 @@ int do_mac(struct cmd_tbl *cmdtp, int flag, int argc,=
+ char *const argv[])
+>         } else if (!strcmp(cmd, "product_id")) {
+>                 set_product_id(argv[2]);
+>                 return 0;
+> +       } else if (!strcmp(cmd, "vendor")) {
+> +               set_vendor(argv[2]);
+> +               return 0;
+>         }
+>
+>         return CMD_RET_USAGE;
+> @@ -586,7 +607,9 @@ U_BOOT_LONGHELP(mac,
+>         "mac bom_revision <A>\n"
+>         "    - stores a StarFive BOM revision into the local EEPROM copy\=
+n"
+>         "mac product_id <VF7110A1-2228-D008E000-xxxxxxxx>\n"
+> -       "    - stores a StarFive product ID into the local EEPROM copy\n"=
+);
+> +       "    - stores a StarFive product ID into the local EEPROM copy\n"
+> +       "mac vendor <Vendor Name>\n"
+> +       "    - set vendor string\n");
+>
+>  U_BOOT_CMD(
+>         mac, 3, 1,  do_mac,
+> --
+> 2.43.0
+>
 
-On Fri, May 10, 2024 at 09:09:13PM -0400, Raymond Mao wrote:
-> Hi Tom,
->=20
-> On Thu, 9 May 2024 at 11:43, Tom Rini <trini@konsulko.com> wrote:
->=20
-> > On Thu, May 09, 2024 at 11:36:37AM -0400, Raymond Mao wrote:
-> > > Hi Tom,
-> > >
-> > > On Thu, 9 May 2024 at 11:31, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > > On Thu, May 09, 2024 at 11:23:11AM -0400, Raymond Mao wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Thu, 9 May 2024 at 11:11, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > > On Thu, May 09, 2024 at 11:04:07AM -0400, Raymond Mao wrote:
-> > > > > > > Hi Tom,
-> > > > > > >
-> > > > > > > On Tue, 7 May 2024 at 17:16, Tom Rini <trini@konsulko.com>
-> > wrote:
-> > > > > > >
-> > > > > > > > On Tue, May 07, 2024 at 10:50:45AM -0700, Raymond Mao wrote:
-> > > > > > > >
-> > > > > > > > > Port mbedtls with dummy libc header files.
-> > > > > > > > > Add mbedtls default config header file.
-> > > > > > > > > Optimize mbedtls default config by disabling unused featu=
-res
-> > to
-> > > > > > > > > reduce the target size.
-> > > > > > > > > Add mbedtls kbuild makefile.
-> > > > > > > > > Add Kconfig and mbedtls config submenu.
-> > > > > > > > [snip]
-> > > > > > > > > diff --git a/include/stdio.h b/include/stdio.h
-> > > > > > > > > index 3241e2d493f..874279c60dd 100644
-> > > > > > > > > --- a/include/stdio.h
-> > > > > > > > > +++ b/include/stdio.h
-> > > > > > > > > @@ -3,6 +3,7 @@
-> > > > > > > > >
-> > > > > > > > >  #include <stdarg.h>
-> > > > > > > > >  #include <linux/compiler.h>
-> > > > > > > > > +#include <vsprintf.h>
-> > > > > > > > >
-> > > > > > > > >  /* stdin */
-> > > > > > > > >  int getchar(void);
-> > > > > > > >
-> > > > > > > > Is this really needed? I know our include structure is a bit
-> > odd.
-> > > > > > Should
-> > > > > > > > we perhaps look at moving a prototype or two around to be m=
-ore
-> > > > broadly
-> > > > > > > > compatible?
-> > > > > > > >
-> > > > > > > Then we need to move  prototypes of snprintf, _vprintf,
-> > putc_outstr
-> > > > and
-> > > > > > > printf_info from tiny-printf to stdio.h. Is this good for you?
-> > > > > >
-> > > > > > I don't quite follow you but yes, please work it up for review =
-at
-> > least
-> > > > > > as I'm not too thrilled with adding <vsprintf.h> to <stdio.h>
-> > after the
-> > > > > > work I did removing <common.h> showed some fun around those
-> > headers as
-> > > > > > well, and I'd like to sort it out correctly.  Thanks.
-> > > > > >
-> > > > > > When MbedTLS native codes include <stdio.h>, they expect to hav=
-e a
-> > > > > prototype
-> > > > > 'snprintf', that is the reason why I hijacked <stdio.h> as we are=
- not
-> > > > going
-> > > > > to
-> > > > > change MbedTLS native codes.
-> > > > > I mean in v3, I can move 'snprintf' related stuff to <stdio.h> so
-> > that we
-> > > > > don't
-> > > > > need to include <vsprintf.h>.
-> > > >
-> > > > Yes, I would suggest doing a branch where you just make that change=
- to
-> > > > stdio.h and see what the build fall out is on -next. I would not be
-> > > > surprised if it requires a bit of work. It's work that needs to be =
-done
-> > > > and is worth doing, but might be... large.
-> > > >
-> > > > Yes, I can do this before posting v3.
-> > > If it affects too much, it would prefer to just keep the <vsprintf.h>
-> > > though...
-> >
-> > No, if it effects too much I'll just have to do a series to move things
-> > around. Which I will do, soon, if needed.
-> >
-> > I made a patch to move snprintf to stdio.h, please see the last commit =
-=66rom
-> https://github.com/u-boot/u-boot/pull/533
->=20
-> If you are fine with it, I will include it into the prerequisite series v=
-2.
-
-Yes, please clean that up and send it as part of the clean-up series,
-thanks.
-
---=20
-Tom
-
---rdib+oFRns8d3znl
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmY+zXMACgkQFHw5/5Y0
-tywSKAv+N9X7mz6n8ZkqdGbAQNyr24PZ3h29wNV2laM016kwbr3g3GddTG3ghnC/
-w4k5+6RumUaEno2O3wpwH05SnImSchwWQ6vn414SuD4ghFaLNra+PXDqUn8jvZ5X
-rtp+sq9+VheXMtyYrw6yXNNOe2JpLiMvxyHv5Ka9J0RT3V6mXTt1+vQTbVA49dBC
-+wggXcse4CpsED7OfYJA2RWTBigV2NoXlBq60q4k9DYuThSQGdR10WrqDc6hbgAO
-PxpyMXpZvsqhNXbfFHT6HBmogG8+4R/w2005ai3kwT7TRJGGXOc0nFXo2tWMG/kh
-9dH2pqVkhe/sEs1ygfFuXiuOFm/8l9Iy5hA0qECZbfSNuHYDrjl/kIgpFy/EBzLx
-yG5qRJcBHLWONN9ruySMCJIzXOx/ghQ1EyVDhjpo1U5qvW8V+jo1No92OSt3LqiR
-aQ0coR/FcKOR6IEkMBGVdQs760GsgNOPqgF6yGQeu8Kqhqsy19k8Xuab7mbrO+oY
-hufoRPvl
-=MzIp
------END PGP SIGNATURE-----
-
---rdib+oFRns8d3znl--
+Tested-by: E Shattow <lucent@gmail.com>
