@@ -4,94 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78497C25B4F
-	for <u-boot@archiver.kernel.org>; Sat, 11 May 2024 12:46:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB529C04FFE
+	for <u-boot@archiver.kernel.org>; Sat, 11 May 2024 16:23:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1A838859A;
-	Sat, 11 May 2024 14:46:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=testtoast.com
+	by phobos.denx.de (Postfix) with ESMTP id 1239087F5C;
+	Sat, 11 May 2024 18:23:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=testtoast.com header.i=@testtoast.com header.b="rOLrCoke";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="kKnodI3t";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RITXWWws";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 274DA87FA7; Sat, 11 May 2024 12:10:40 +0200 (CEST)
-Received: from wfout5-smtp.messagingengine.com
- (wfout5-smtp.messagingengine.com [64.147.123.148])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6702787F6F; Sat, 11 May 2024 18:23:50 +0200 (CEST)
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F4EE87C40
- for <u-boot@lists.denx.de>; Sat, 11 May 2024 12:10:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 416C487D43
+ for <u-boot@lists.denx.de>; Sat, 11 May 2024 18:23:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=testtoast.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ryan@testtoast.com
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailfout.west.internal (Postfix) with ESMTP id 18AF81C0010A;
- Sat, 11 May 2024 06:10:35 -0400 (EDT)
-Received: from imap47 ([10.202.2.97])
- by compute5.internal (MEProxy); Sat, 11 May 2024 06:10:35 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=testtoast.com;
- h=cc:cc:content-type:content-type:date:date:from:from
- :in-reply-to:in-reply-to:message-id:mime-version:references
- :reply-to:subject:subject:to:to; s=fm3; t=1715422234; x=
- 1715508634; bh=p2IxAeisI4B+HZkJcWJFrEqZri6RVyUriXAsHbPOcCI=; b=r
- OLrCokeeunM32I+z29jw9A8hIpBkTuqNjNFCIWFduTpMCYB0QPem8Qh+5fAZizdd
- KrmsXzZKETpPmw+I9Tg6zwiLIrRqi1Gy9EDlAdXzgM4LC2ww2ukaowMSMMsQETOO
- 7lMeetcVgWmKJuE/zKdiAL9RdFfDY5aSalIkMYdDMfjYZRi36to2bs5fuHpsMzAe
- Mw+c4F0Wc/YSD9gc84msf1GOBIJt1nWOmNsnM9kS72buBbBX+DCBoMYD43mO8bsf
- p6qpnndbjLGZckHjMsyUw9bvhjwZ8MuDc8Xmt1UVHXICxEWpwvF5IPZ+ghFlrqBV
- HTHjQooVnZsCKN6qB8wdg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:content-type:date:date
- :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
- :message-id:mime-version:references:reply-to:subject:subject:to
- :to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm3; t=1715422234; x=1715508634; bh=p2IxAeisI4B+HZkJcWJFrEqZri6R
- VyUriXAsHbPOcCI=; b=kKnodI3tMwST9llnNwba54JzSe3VPABDIhq5E6I/BzZP
- LOwhGCW9qUIeq8gYAKyLqkfblJdvSpXZmASz6G7IOAU5yI82pZlWPfvV8cYkWmZP
- dOsaMAJCS61Sa9rteLy49kSlJRCjuxqynFh3N7MwpQ1ahQsZYPRoPpymJ2c55n/S
- y+AEjX0WEBChNlzCAkenOvB90nf8x78fTVxSCQQ/0/YMOpnF9YbbYoInYN/ZPji/
- AAmJ/Y1ToeK7kajE9ruznHvJim/dV7OY+hWijR1C2lYsR7wrPk8osZJyDxb7xDAA
- hVZJLtNDmT2FJ0RLfiw7lHtMTtfuaGCKlQ9Hqyq4rg==
-X-ME-Sender: <xms:GkQ_ZnTBjABr8YKY41zNdNg6HrF58XZzhyDErwviHzWUjKIJB0ifAg>
- <xme:GkQ_ZoyyouhQPWIewxvbM1Kn3fgiI9hna3dexxJl8nCLmQeG6c5K2C5Kqw1tsVKmE
- SZ2IzC5aX-x-qfFrA>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdegtddgvdehucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepofgfggfkjghffffhvfevufgtsehttdertderredtnecuhfhrohhmpedftfih
- rghnucghrghlkhhlihhnfdcuoehrhigrnhesthgvshhtthhorghsthdrtghomheqnecugg
- ftrfgrthhtvghrnhephedvveeigedujeeufeegffehhfffveduhfeijefgtdffteelgfet
- ueevieduieejnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrh
- homheprhihrghnsehtvghsthhtohgrshhtrdgtohhm
-X-ME-Proxy: <xmx:GkQ_Zs0lIDLVbotf-iybj9WSpEQNOhT7Wm_8dh33C8XHlDjKVsukhA>
- <xmx:GkQ_ZnCyhR1jDzCoQscrmMTKQgLT35N5VvFFolN8PuTu7dtiN-34JA>
- <xmx:GkQ_ZghewYsHEutCJnFllV45pUeYAXfAeAx6uRLXJ2lCghexSvOEhg>
- <xmx:GkQ_ZrrVFlz_ktZsesHH77wJ0Net4rYjWCKT8uj9dtnt_13WduS4Jw>
- <xmx:GkQ_Zsj3jbDMjjBSZEfem7ohn-_y0AcoHPa758x6Hzur0hXil-hucA54>
-Feedback-ID: idc0145fc:Fastmail
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
- id 265D5A60079; Sat, 11 May 2024 06:10:34 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.11.0-alpha0-443-g0dc955c2a-fm-20240507.001-g0dc955c2
+ spf=pass smtp.mailfrom=linux.amoon@gmail.com
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-5aa28cde736so1818616eaf.1
+ for <u-boot@lists.denx.de>; Sat, 11 May 2024 09:23:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1715444627; x=1716049427; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=1c0ytrtMf+G6hA3d6y4ZJlofiSAddoCaV0kDAvHqc1I=;
+ b=RITXWWwsVcP0ehsMIG326Wp3F1zCDizKXr9aQxNkD42A8iq/DK3i1bbtI0Ss766+dn
+ tvi1jgz7YG1tq7fp1yO0ItYzVahM6TtdXy5xOz+U8lY0zF3NRghnnIDPmRfIE8vY1d2n
+ yIoMpN9Q6+vm9lrY21xT6f3169bvert5Ko7GH/YbQrYQNt3iOIilk4yM131fzKjFRiIS
+ ckdCC3xSi+FC+I3RAH+NXhVAQ+BCORCsTd9Kcrx3kbeDlwyOpxfGzTXh4qDunJucMC3T
+ RmINNnzM2evjhqzo2Qh/05/LxLr1RS1bv5I9lTa5lLyx0fdX3xC3vMP2hBX7fvM5PbfQ
+ mbqA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1715444627; x=1716049427;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1c0ytrtMf+G6hA3d6y4ZJlofiSAddoCaV0kDAvHqc1I=;
+ b=Hy35QcM4yRkBNmjfn++oWjfBt+iDZ9GqctvAz8L6geeYXu5q2T8fHXuYDmWaRTuVLJ
+ 8DUeps4z2XjPXvL1tZ8vj77AqSO57jfgHsujqZpxyMqaFbueHY3JLme9XRKIJzGQDVI2
+ W3Ad/+wl9cgS2w7/k1G2iGAtTyjgLanGrEpDlSzJeBJtQeO4v25s8tMp2XT0JNY75PXF
+ ey5vu8RTsZYp+eXrN1TdNnIohQWwTfRPK6AacVIkWPS45VnPDmFk/xijzXoVhaQnmeO0
+ cQI4UCElGYJvaWKKSxxqRD+s7kwemq050oQdsiuz9OFhGFhEhz1YFCfOo+9ZiMkYA+MF
+ l89Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVkwCiyOfrECP1oC2Hslp/EZu6hGrZPzQHHcQaUdY9xh4PDhKKOwF0byW/yGfo2EDagZ5earAT8B6ObszbCQ85SmyQrpA==
+X-Gm-Message-State: AOJu0YwRe2jntL19NIYxQq9deK39wIu38/T1REC6fFTqThUv6lCGl2ne
+ ZWV/lH4nOmLati4ha9z0fDVKqEtYNV3+w5kw7TJWAI+wGGNlYlKCNpM8e5SyfGVgQdOv31CLJIU
+ jFy9zXiB82ElSOtBdBmuzqOe6nQw=
+X-Google-Smtp-Source: AGHT+IGYgYNq1QJ5Y0x+cw0Cc+A8WU581rmS/aK62HmKQWEaSoT1mFpbnuxe4LOAZokRDDcF6Pe1W9FLfGni/AGAUMI=
+X-Received: by 2002:a4a:5141:0:b0:5aa:396b:6537 with SMTP id
+ 006d021491bc7-5b281a1b4a0mr6276173eaf.7.1715444626990; Sat, 11 May 2024
+ 09:23:46 -0700 (PDT)
 MIME-Version: 1.0
-Message-Id: <ed15f4f9-7afe-478a-9f63-54309cff0c36@app.fastmail.com>
-In-Reply-To: <20240509234319.13104-3-andre.przywara@arm.com>
-References: <20240509234319.13104-1-andre.przywara@arm.com>
- <20240509234319.13104-3-andre.przywara@arm.com>
-Date: Sat, 11 May 2024 22:10:12 +1200
-From: "Ryan Walklin" <ryan@testtoast.com>
-To: "Andre Przywara" <andre.przywara@arm.com>,
- "Jaehoon Chung" <jh80.chung@samsung.com>,
- "Jagan Teki" <jagan@amarulasolutions.com>
-Cc: "Jernej Skrabec" <jernej.skrabec@gmail.com>,
- "Chris Morgan" <macromorgan@hotmail.com>, u-boot@lists.denx.de,
- linux-sunxi@lists.linux.dev, "Tom Rini" <trini@konsulko.com>
-Subject: Re: [PATCH 2/2] power: regulator: add AXP717 support
-Content-Type: text/plain
-X-Mailman-Approved-At: Sat, 11 May 2024 14:46:24 +0200
+References: <20240510044347.5303-1-linux.amoon@gmail.com>
+ <63dc4af7-038b-492e-bf9f-08608be26330@rock-chips.com>
+In-Reply-To: <63dc4af7-038b-492e-bf9f-08608be26330@rock-chips.com>
+From: Anand Moon <linux.amoon@gmail.com>
+Date: Sat, 11 May 2024 21:53:32 +0530
+Message-ID: <CANAwSgS_tZVQQH6DyTXr_7QZ89hXFLCXUBootdFeWeGmiYPT6A@mail.gmail.com>
+Subject: Re: [PATCH v2] rockchip: rv1126: Migrate to OF_UPSTREAM
+To: Kever Yang <kever.yang@rock-chips.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Jagan Teki <jagan@edgeble.ai>, 
+ Tim Lunn <tim@feathertop.org>, Jonas Karlman <jonas@kwiboo.se>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,103 +91,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 10 May 2024, at 11:43 AM, Andre Przywara wrote:
-> The X-Powers AXP717 is a PMIC with four buck converters and a number
-> of LDOs, one of which is actually fixed (so not modelled here).
+Hi Kever,
+
+On Sat, 11 May 2024 at 12:09, Kever Yang <kever.yang@rock-chips.com> wrote:
 >
-> Add the compatible string and the respective regulator ranges to allow
-> drivers to adjust voltages.
 >
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> ---
->  drivers/power/pmic/axp.c                |  1 +
->  drivers/power/regulator/axp_regulator.c | 28 +++++++++++++++++++++++++
->  include/axp_pmic.h                      |  1 +
->  3 files changed, 30 insertions(+)
+> On 2024/5/10 12:43, Anand Moon wrote:
+> > Migrate RV1126 boards that exists in Linux v6.8 to use OF_UPSTREAM.
+> >
+> > Following targets is migrated to use OF_UPSTREAM:
+> >
+> > - rv1126-edgeble-neu2 : Board is an industrial form factor
+> >                          IO board.
+> > - sonoff-ihost-rv1126 : Gateway device designed to provide a
+> >                          Smart Home Hub.
+> >
+> > Cc: Tim Lunn <tim@feathertop.org>
+> > Cc: Jagan Teki <jagan@edgeble.ai>
+> > Signed-off-by: Anand Moon <linux.amoon@gmail.com>
+> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 >
-> diff --git a/drivers/power/pmic/axp.c b/drivers/power/pmic/axp.c
-> index fdf9ff66c29..c300fd2bbc2 100644
-> --- a/drivers/power/pmic/axp.c
-> +++ b/drivers/power/pmic/axp.c
-> @@ -89,6 +89,7 @@ static const struct udevice_id axp_pmic_ids[] = {
->  	{ .compatible = "x-powers,axp221", .data = AXP221_ID },
->  	{ .compatible = "x-powers,axp223", .data = AXP223_ID },
->  	{ .compatible = "x-powers,axp313a", .data = AXP313_ID },
-> +	{ .compatible = "x-powers,axp717", .data = AXP717_ID },
->  	{ .compatible = "x-powers,axp803", .data = AXP803_ID },
->  	{ .compatible = "x-powers,axp806", .data = AXP806_ID },
->  	{ .compatible = "x-powers,axp809", .data = AXP809_ID },
-> diff --git a/drivers/power/regulator/axp_regulator.c 
-> b/drivers/power/regulator/axp_regulator.c
-> index d27e09538e0..75cdbca30f6 100644
-> --- a/drivers/power/regulator/axp_regulator.c
-> +++ b/drivers/power/regulator/axp_regulator.c
-> @@ -189,6 +189,33 @@ static const struct axp_regulator_plat 
-> axp313_regulators[] = {
->  	{ }
->  };
-> 
-> +/*
-> + * The "dcdc2" regulator has another range, beyond 1.54V up to 3.4V, in
-> + * steps of 100mV. We cannot model this easily, but also don't need 
-> that,
-> + * since it's typically only used for lower voltages anyway, so just 
-> ignore it.
-> + */
-> +static const struct axp_regulator_plat axp717_regulators[] = {
-> +	{ "dcdc1", 0x80, BIT(0), 0x83, 0x7f,  500, 1540,  10, 70 },
-> +	{ "dcdc2", 0x80, BIT(1), 0x84, 0x7f,  500, 1540,  10, 70 },
-> +	{ "dcdc3", 0x80, BIT(2), 0x85, 0x7f,  500, 1840,  10, 70 },
-> +	{ "dcdc4", 0x80, BIT(3), 0x86, 0x7f, 1000, 3700, 100, NA },
-> +	{ "aldo1", 0x90, BIT(0), 0x93, 0x1f,  500, 3500, 100, NA },
-> +	{ "aldo2", 0x90, BIT(1), 0x94, 0x1f,  500, 3500, 100, NA },
-> +	{ "aldo3", 0x90, BIT(2), 0x95, 0x1f,  500, 3500, 100, NA },
-> +	{ "aldo4", 0x90, BIT(3), 0x96, 0x1f,  500, 3500, 100, NA },
-> +	{ "bldo1", 0x90, BIT(4), 0x97, 0x1f,  500, 3500, 100, NA },
-> +	{ "bldo2", 0x90, BIT(5), 0x98, 0x1f,  500, 3500, 100, NA },
-> +	{ "bldo3", 0x90, BIT(6), 0x99, 0x1f,  500, 3500, 100, NA },
-> +	{ "bldo4", 0x90, BIT(7), 0x9a, 0x1f,  500, 3500, 100, NA },
-> +	{ "cldo1", 0x91, BIT(0), 0x9b, 0x1f,  500, 3500, 100, NA },
-> +	{ "cldo2", 0x91, BIT(1), 0x9c, 0x1f,  500, 3500, 100, NA },
-> +	{ "cldo3", 0x91, BIT(2), 0x9d, 0x1f,  500, 3500, 100, NA },
-> +	{ "cldo4", 0x91, BIT(3), 0x9e, 0x1f,  500, 3500, 100, NA },
-> +	{"cpusldo",0x91, BIT(4), 0x9f, 0x1f,  500, 1400,  50, NA },
-> +	{" boost", 0x19, BIT(4), 0x1e, 0xf0, 4550, 5510,  64, NA },
-> +	{ }
-> +};
-> +
->  static const struct axp_regulator_plat axp803_regulators[] = {
->  	{ "dcdc1", 0x10, BIT(0), 0x20, 0x1f, 1600, 3400, 100, NA },
->  	{ "dcdc2", 0x10, BIT(1), 0x21, 0x7f,  500, 1300,  10, 70 },
-> @@ -291,6 +318,7 @@ static const struct axp_regulator_plat *const 
-> axp_regulators[] = {
->  	[AXP221_ID]	= axp22x_regulators,
->  	[AXP223_ID]	= axp22x_regulators,
->  	[AXP313_ID]	= axp313_regulators,
-> +	[AXP717_ID]	= axp717_regulators,
->  	[AXP803_ID]	= axp803_regulators,
->  	[AXP806_ID]	= axp806_regulators,
->  	[AXP809_ID]	= axp809_regulators,
-> diff --git a/include/axp_pmic.h b/include/axp_pmic.h
-> index aabafc8501b..ae62ef0d76d 100644
-> --- a/include/axp_pmic.h
-> +++ b/include/axp_pmic.h
-> @@ -33,6 +33,7 @@ enum {
->  	AXP221_ID,
->  	AXP223_ID,
->  	AXP313_ID,
-> +	AXP717_ID,
->  	AXP803_ID,
->  	AXP806_ID,
->  	AXP809_ID,
-> -- 
-> 2.35.8
+It looks like I have used the my personal Signed-off-by
+send v3 with correct Signed-off-by with edegeble.ai id.
+can you apply the modified patch?
 
+> Thanks,
+> - Kever
 
-Confirmed working on H700 board with AXP717 PMIC and LPDDR4 DRAM controller (Anbernic RG35XX-H). Registers and voltage ranges confirmed from datasheet.
-
-Reviewed-by: Ryan Walklin <ryan@testtoast.com>
-
-Regards,
-
-Ryan
+Thanks
+-Anand
