@@ -4,70 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6DCEC04FFE
-	for <u-boot@archiver.kernel.org>; Sat, 11 May 2024 23:13:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32AE7C10F1A
+	for <u-boot@archiver.kernel.org>; Sun, 12 May 2024 04:26:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A531287DEF;
-	Sun, 12 May 2024 01:13:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 0EDD987DEA;
+	Sun, 12 May 2024 06:26:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="pMYfE3VB";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="dQlFN/zi";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="pUfQFysV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30EC187E1D; Sun, 12 May 2024 01:13:34 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id DB56C87E96; Sun, 12 May 2024 06:26:02 +0200 (CEST)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47C3387DC7
- for <u-boot@lists.denx.de>; Sun, 12 May 2024 01:13:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C63C387E15
+ for <u-boot@lists.denx.de>; Sun, 12 May 2024 06:26:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.lan (unknown [149.11.192.251])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4VcM4W0FTxz9sTD;
- Sun, 12 May 2024 01:13:31 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1715469211;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=WHzBgdk0ucFaDBYuTIsyN9zkZjcCzGsa+exDI39wiP4=;
- b=pMYfE3VB0Cg9UY1Yyled7192Wi7XwQp5Z5u0foVu5JptJXE/7BxY7Os8pvx0avPEN47inc
- HGpJQR/Xfa9KrBnL6ZeYQKhGcITXjfTy7aMR94Spgp5RKFKNJmPutUjo5o2eiqXh5fG2Ga
- Fp3Hhd31JPOiFAezAInC2SIM4cVJTPJwoPSB+Ev/W8amVxfGIXxiuvLnpLG8M+WJYJTPJR
- XiB8Up92sinqgWlTaBdIo7ZTCjC0A8aNXUT43HYySQtzKtjVTP3axcvnTrhR/+Ts8pwz2h
- KqZNMIK7mqfxsv5UMnm3LaaQLOUv7I7dMgGBkvErNaVqxoaJ96PM4oZL/o/JzA==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1715469208;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=WHzBgdk0ucFaDBYuTIsyN9zkZjcCzGsa+exDI39wiP4=;
- b=dQlFN/zi6zmWghf9AQjX35xCXxSJ7PPb/F/keRr19VRIMC60IZj5v51b+0bEEBUZNKtCAN
- 3gcw0BtX3ujZTs9P7CnUYTVLLaz1VPLWJJlCggFCmsZDIX1IojL2mnGGp6SQj+wvJH/nBX
- ERUBZS9VXwXqQECwKyKsu+jOaxXbwEY1gQBMNTen4Fhyozy1CKJpuI/N0OhAz7uDZ7v+hZ
- X6W+GYnZA3ABUtXX9gdmEzKjRnTdIOa42k5CaofnZ8IEeSiR6mf+1l0G+wG/zWGclZhtqb
- t5nGaJp4QC2ixBA4hfJHaD40rqVmkhZL0Hm07vVRCTecZCgqjsLEyv71Xw+k+g==
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PULL] u-boot-sh/master-cleanup
-Date: Sun, 12 May 2024 01:12:27 +0200
-Message-ID: <20240511231302.74263-1-marek.vasut+renesas@mailbox.org>
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 3357A4081F; 
+ Sun, 12 May 2024 04:25:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1715487957;
+ bh=gU+2FwcK1OVl2QS+SuChCWgC6RbE5U83lM+KlBG+WZg=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=pUfQFysVBf1cg1rwpMTVYkhLsqjLC3CjxXe8l+M//DyMch4qrt0m02fM3d06sy1v+
+ VwR+KdxMRRPRd0UV1ObGQZevhz2TWWPLqiw1QeY4UHpMeW/yAEp1WlzmXOYEAQgV6t
+ BlfmAcGpkspPslBpaCl6shw4JnWs3bCgKTz6GHAwCGYEr1Agi+xV/sep8VdDo1gU0k
+ bp/SZbIYMMvznpvCZKrp88Rri7z1SPOo63mBx9tUGeex1XzBhJz3D6K7FLBM37M2L7
+ obUKoBMydh4S1nzyK3O9kw50wUtQtd0D/DChvGS/sespV5Syd8zlSBN+90PzETLF7m
+ FWrmYE3AQiu4w==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>
+Cc: Aurelien Jarno <aurelien@aurel32.net>,
+ Lukasz Tekieli <tekieli.lukasz@gmail.com>,
+ Lukas Funke <lukas.funke@weidmueller.com>,
+ Shiji Yang <yangshiji66@outlook.com>, Shengyu Qu <wiagn233@outlook.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Seung-Woo Kim <sw0312.kim@samsung.com>,
+ Mason Huo <mason.huo@starfivetech.com>, E Shattow <lucent@gmail.com>,
+ u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v4 1/5] board: starfive: function to read eMMC size
+Date: Sun, 12 May 2024 06:25:22 +0200
+Message-ID: <20240512042528.7766-2-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240512042528.7766-1-heinrich.schuchardt@canonical.com>
+References: <20240512042528.7766-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: uqirtfkm79thczsnqxswgh1wej88oh61
-X-MBO-RS-ID: ec7534184bae9a6f3db
-X-Rspamd-Queue-Id: 4VcM4W0FTxz9sTD
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,145 +80,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit 5c5565cfec92eb7377ff7fe197612c6a813bb6c7:
+The EEPROM provides information about the size of the eMMC.
+Provide a new function get_mmc_size_from_eeprom() to read it.
 
-  Merge patch series "arm: davinci: Migrate da850-evm to OF_UPSTREAM" (2024-05-07 11:59:26 -0600)
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Reviewed-by: E. Shattow <lucent@gmail.com>
+---
+v5:
+	no change
+v4:
+	no change
+v3:
+	no change
+v2:
+	fix typos in get_mmc_size_from_eeprom() description
+---
+ arch/riscv/include/asm/arch-jh7110/eeprom.h    |  7 +++++++
+ board/starfive/visionfive2/Kconfig             |  9 +++++++++
+ .../visionfive2/visionfive2-i2c-eeprom.c       | 18 ++++++++++++++++++
+ 3 files changed, 34 insertions(+)
 
-are available in the Git repository at:
+diff --git a/arch/riscv/include/asm/arch-jh7110/eeprom.h b/arch/riscv/include/asm/arch-jh7110/eeprom.h
+index 62d184aeb57..45ad2a5f7bc 100644
+--- a/arch/riscv/include/asm/arch-jh7110/eeprom.h
++++ b/arch/riscv/include/asm/arch-jh7110/eeprom.h
+@@ -12,6 +12,13 @@
+ u8 get_pcb_revision_from_eeprom(void);
+ u32 get_ddr_size_from_eeprom(void);
+ 
++/**
++ * get_mmc_size_from_eeprom() - read eMMC size from EEPROM
++ *
++ * @return: size in GiB or 0 on error.
++ */
++u32 get_mmc_size_from_eeprom(void);
++
+ /**
+  * get_product_id_from_eeprom - get product ID string
+  *
+diff --git a/board/starfive/visionfive2/Kconfig b/board/starfive/visionfive2/Kconfig
+index 2186a939646..d7e8a7a7d78 100644
+--- a/board/starfive/visionfive2/Kconfig
++++ b/board/starfive/visionfive2/Kconfig
+@@ -50,4 +50,13 @@ config BOARD_SPECIFIC_OPTIONS # dummy
+ 	imply PHY_LIB
+ 	imply PHY_MSCC
+ 
++config STARFIVE_NO_EMMC
++	bool "Report eMMC size as zero"
++	help
++	  The serial number string in the EEPROM is meant to report the
++	  size of onboard eMMC. Unfortunately some Milk-V Mars CM Lite
++	  modules without eMMC show a non-zero size here.
++
++	  Set to 'Y' if you have a Mars CM Lite module.
++
+ endif
+diff --git a/board/starfive/visionfive2/visionfive2-i2c-eeprom.c b/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
+index 5095a0e9fdb..9648a270494 100644
+--- a/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
++++ b/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
+@@ -548,6 +548,24 @@ u32 get_ddr_size_from_eeprom(void)
+ 	return hextoul(&pbuf.eeprom.atom1.data.pstr[14], NULL);
+ }
+ 
++u32 get_mmc_size_from_eeprom(void)
++{
++	u32 size;
++
++	if (IS_ENABLED(CONFIG_STARFIVE_NO_EMMC))
++		return 0;
++
++	if (read_eeprom())
++		return 0;
++
++	size = dectoul(&pbuf.eeprom.atom1.data.pstr[19], NULL);
++
++	if (pbuf.eeprom.atom1.data.pstr[21] == 'T')
++		size <<= 10;
++
++	return size;
++}
++
+ U_BOOT_LONGHELP(mac,
+ 	"\n"
+ 	"    - display EEPROM content\n"
+-- 
+2.43.0
 
-  https://source.denx.de/u-boot/custodians/u-boot-sh.git master-cleanup
-
-for you to fetch changes up to 2d10e76547b896fb002cb3f946ac6f9b628e9fb7:
-
-  ARM: dts: renesas: Drop DTs with OF_UPSTREAM counterparts (2024-05-12 01:12:00 +0200)
-
-----------------------------------------------------------------
-Marek Vasut (1):
-      ARM: dts: renesas: Drop DTs with OF_UPSTREAM counterparts
-
- arch/arm/dts/Makefile                          |   34 -
- arch/arm/dts/r8a774a1-beacon-rzg2m-kit.dts     |   60 -
- arch/arm/dts/r8a774a1-hihope-rzg2m-ex.dts      |   21 -
- arch/arm/dts/r8a774a1-hihope-rzg2m.dts         |   37 -
- arch/arm/dts/r8a774a1.dtsi                     | 2865 -------------------
- arch/arm/dts/r8a774b1-beacon-rzg2n-kit.dts     |   56 -
- arch/arm/dts/r8a774b1-hihope-rzg2n-ex.dts      |   21 -
- arch/arm/dts/r8a774b1-hihope-rzg2n.dts         |   41 -
- arch/arm/dts/r8a774b1.dtsi                     | 2716 ------------------
- arch/arm/dts/r8a774c0-cat874.dts               |  455 ----
- arch/arm/dts/r8a774c0-ek874.dts                |   14 -
- arch/arm/dts/r8a774c0.dtsi                     | 2000 --------------
- arch/arm/dts/r8a774e1-beacon-rzg2h-kit.dts     |   61 -
- arch/arm/dts/r8a774e1-hihope-rzg2h-ex.dts      |   20 -
- arch/arm/dts/r8a774e1-hihope-rzg2h.dts         |   41 -
- arch/arm/dts/r8a774e1.dtsi                     | 2997 --------------------
- arch/arm/dts/r8a7790-lager.dts                 |  947 -------
- arch/arm/dts/r8a7790-stout.dts                 |  382 ---
- arch/arm/dts/r8a7790.dtsi                      | 1965 -------------
- arch/arm/dts/r8a7791-koelsch.dts               |  912 -------
- arch/arm/dts/r8a7791-porter.dts                |  523 ----
- arch/arm/dts/r8a7791.dtsi                      | 1891 -------------
- arch/arm/dts/r8a7792-blanche.dts               |  364 ---
- arch/arm/dts/r8a7792.dtsi                      |  928 -------
- arch/arm/dts/r8a7793-gose.dts                  |  818 ------
- arch/arm/dts/r8a7793.dtsi                      | 1470 ----------
- arch/arm/dts/r8a7794-alt.dts                   |  533 ----
- arch/arm/dts/r8a7794-silk.dts                  |  578 ----
- arch/arm/dts/r8a7794.dtsi                      | 1437 ----------
- arch/arm/dts/r8a77950-salvator-x.dts           |   49 -
- arch/arm/dts/r8a77950-ulcb.dts                 |   37 -
- arch/arm/dts/r8a77950.dtsi                     |  330 ---
- arch/arm/dts/r8a77951.dtsi                     | 3485 ------------------------
- arch/arm/dts/r8a77960-salvator-x.dts           |   37 -
- arch/arm/dts/r8a77960-ulcb.dts                 |   38 -
- arch/arm/dts/r8a77960.dtsi                     | 3080 ---------------------
- arch/arm/dts/r8a77965-salvator-x.dts           |   32 -
- arch/arm/dts/r8a77965-ulcb.dts                 |   33 -
- arch/arm/dts/r8a77965.dtsi                     | 2889 --------------------
- arch/arm/dts/r8a77970-eagle.dts                |  405 ---
- arch/arm/dts/r8a77970-v3msk.dts                |  303 --
- arch/arm/dts/r8a77970.dtsi                     | 1220 ---------
- arch/arm/dts/r8a77980-condor.dts               |   24 -
- arch/arm/dts/r8a77980-v3hsk.dts                |  293 --
- arch/arm/dts/r8a77980.dtsi                     | 1625 -----------
- arch/arm/dts/r8a77990-ebisu.dts                |   15 -
- arch/arm/dts/r8a77990.dtsi                     | 2154 ---------------
- arch/arm/dts/r8a77995-draak.dts                |   16 -
- arch/arm/dts/r8a77995.dtsi                     | 1473 ----------
- arch/arm/dts/r8a779a0-falcon-cpu.dtsi          |  359 ---
- arch/arm/dts/r8a779a0-falcon-csi-dsi.dtsi      |  270 --
- arch/arm/dts/r8a779a0-falcon-ethernet.dtsi     |   15 -
- arch/arm/dts/r8a779a0-falcon.dts               |  101 -
- arch/arm/dts/r8a779a0.dtsi                     | 2915 --------------------
- arch/arm/dts/r8a779f0-spider-cpu.dtsi          |  210 --
- arch/arm/dts/r8a779f0-spider-ethernet.dtsi     |  105 -
- arch/arm/dts/r8a779f0-spider.dts               |   24 -
- arch/arm/dts/r8a779f0.dtsi                     | 1193 --------
- arch/arm/dts/r8a779g0-white-hawk-cpu.dtsi      |  375 ---
- arch/arm/dts/r8a779g0-white-hawk-csi-dsi.dtsi  |  187 --
- arch/arm/dts/r8a779g0-white-hawk-ethernet.dtsi |   16 -
- arch/arm/dts/r8a779g0-white-hawk.dts           |   69 -
- arch/arm/dts/r8a779g0.dtsi                     | 2349 ----------------
- 63 files changed, 49913 deletions(-)
- delete mode 100644 arch/arm/dts/r8a774a1-beacon-rzg2m-kit.dts
- delete mode 100644 arch/arm/dts/r8a774a1-hihope-rzg2m-ex.dts
- delete mode 100644 arch/arm/dts/r8a774a1-hihope-rzg2m.dts
- delete mode 100644 arch/arm/dts/r8a774a1.dtsi
- delete mode 100644 arch/arm/dts/r8a774b1-beacon-rzg2n-kit.dts
- delete mode 100644 arch/arm/dts/r8a774b1-hihope-rzg2n-ex.dts
- delete mode 100644 arch/arm/dts/r8a774b1-hihope-rzg2n.dts
- delete mode 100644 arch/arm/dts/r8a774b1.dtsi
- delete mode 100644 arch/arm/dts/r8a774c0-cat874.dts
- delete mode 100644 arch/arm/dts/r8a774c0-ek874.dts
- delete mode 100644 arch/arm/dts/r8a774c0.dtsi
- delete mode 100644 arch/arm/dts/r8a774e1-beacon-rzg2h-kit.dts
- delete mode 100644 arch/arm/dts/r8a774e1-hihope-rzg2h-ex.dts
- delete mode 100644 arch/arm/dts/r8a774e1-hihope-rzg2h.dts
- delete mode 100644 arch/arm/dts/r8a774e1.dtsi
- delete mode 100644 arch/arm/dts/r8a7790-lager.dts
- delete mode 100644 arch/arm/dts/r8a7790-stout.dts
- delete mode 100644 arch/arm/dts/r8a7790.dtsi
- delete mode 100644 arch/arm/dts/r8a7791-koelsch.dts
- delete mode 100644 arch/arm/dts/r8a7791-porter.dts
- delete mode 100644 arch/arm/dts/r8a7791.dtsi
- delete mode 100644 arch/arm/dts/r8a7792-blanche.dts
- delete mode 100644 arch/arm/dts/r8a7792.dtsi
- delete mode 100644 arch/arm/dts/r8a7793-gose.dts
- delete mode 100644 arch/arm/dts/r8a7793.dtsi
- delete mode 100644 arch/arm/dts/r8a7794-alt.dts
- delete mode 100644 arch/arm/dts/r8a7794-silk.dts
- delete mode 100644 arch/arm/dts/r8a7794.dtsi
- delete mode 100644 arch/arm/dts/r8a77950-salvator-x.dts
- delete mode 100644 arch/arm/dts/r8a77950-ulcb.dts
- delete mode 100644 arch/arm/dts/r8a77950.dtsi
- delete mode 100644 arch/arm/dts/r8a77951.dtsi
- delete mode 100644 arch/arm/dts/r8a77960-salvator-x.dts
- delete mode 100644 arch/arm/dts/r8a77960-ulcb.dts
- delete mode 100644 arch/arm/dts/r8a77960.dtsi
- delete mode 100644 arch/arm/dts/r8a77965-salvator-x.dts
- delete mode 100644 arch/arm/dts/r8a77965-ulcb.dts
- delete mode 100644 arch/arm/dts/r8a77965.dtsi
- delete mode 100644 arch/arm/dts/r8a77970-eagle.dts
- delete mode 100644 arch/arm/dts/r8a77970-v3msk.dts
- delete mode 100644 arch/arm/dts/r8a77970.dtsi
- delete mode 100644 arch/arm/dts/r8a77980-condor.dts
- delete mode 100644 arch/arm/dts/r8a77980-v3hsk.dts
- delete mode 100644 arch/arm/dts/r8a77980.dtsi
- delete mode 100644 arch/arm/dts/r8a77990-ebisu.dts
- delete mode 100644 arch/arm/dts/r8a77990.dtsi
- delete mode 100644 arch/arm/dts/r8a77995-draak.dts
- delete mode 100644 arch/arm/dts/r8a77995.dtsi
- delete mode 100644 arch/arm/dts/r8a779a0-falcon-cpu.dtsi
- delete mode 100644 arch/arm/dts/r8a779a0-falcon-csi-dsi.dtsi
- delete mode 100644 arch/arm/dts/r8a779a0-falcon-ethernet.dtsi
- delete mode 100644 arch/arm/dts/r8a779a0-falcon.dts
- delete mode 100644 arch/arm/dts/r8a779a0.dtsi
- delete mode 100644 arch/arm/dts/r8a779f0-spider-cpu.dtsi
- delete mode 100644 arch/arm/dts/r8a779f0-spider-ethernet.dtsi
- delete mode 100644 arch/arm/dts/r8a779f0-spider.dts
- delete mode 100644 arch/arm/dts/r8a779f0.dtsi
- delete mode 100644 arch/arm/dts/r8a779g0-white-hawk-cpu.dtsi
- delete mode 100644 arch/arm/dts/r8a779g0-white-hawk-csi-dsi.dtsi
- delete mode 100644 arch/arm/dts/r8a779g0-white-hawk-ethernet.dtsi
- delete mode 100644 arch/arm/dts/r8a779g0-white-hawk.dts
- delete mode 100644 arch/arm/dts/r8a779g0.dtsi
