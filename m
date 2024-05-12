@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B66D7C25B5F
-	for <u-boot@archiver.kernel.org>; Sun, 12 May 2024 12:17:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9136C25B5F
+	for <u-boot@archiver.kernel.org>; Sun, 12 May 2024 12:18:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01C54882AB;
+	by phobos.denx.de (Postfix) with ESMTP id 64BBD882CF;
 	Sun, 12 May 2024 14:17:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="cIbMcGBx";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="lgiiScfl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EDAE788299; Sun, 12 May 2024 14:17:43 +0200 (CEST)
+ id CB720882AB; Sun, 12 May 2024 14:17:44 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5AF0087F33
- for <u-boot@lists.denx.de>; Sun, 12 May 2024 14:17:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D991088001
+ for <u-boot@lists.denx.de>; Sun, 12 May 2024 14:17:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,22 +28,21 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1715516227; bh=b3Q1s4bmKuHZgO9N3E9IGkC2kNikyveCH+Ez0/chLmE=;
- b=cIbMcGBxRyNENf7q5zjHWWlS/RgVD5Ah4GTYaRd/0D8XZdVySoiaDki4bayymCxMjp2AalWRt
- +Fwybbkv1MCZ3JLLql3UjKSb5fa0pwK1/LnweOWn0gtf/msvPoi+3B0lDjvhmTMidFeEHks7CGN
- 9FjbZ5mqVFBMveU2zxaUOXa+VkX9TFQOWvFJ63XQfYAR/MBvzoeQ/WnWh3ilLlbfuPdRcV7GU9q
- 2GR1bKLq6CWZdXGBiNDkgMtErkN7AtQkD8vBvPmh0cFUKcFEnaxoU5d7w3LCArd74ZJS+xzEaax
- IkMi9bOdd5RZAOaT3+W8pYQ6FDZZj/wIAr3wzYdmGoDg==
+ t=1715516227; bh=YQO6291lzx9kSK/Uqt9Hu0CjvmF/Iw1by0DIQYIfHnY=;
+ b=lgiiScfl7gc3+bZaEVwMQ4WddGqPtA+wwFsTdKOY0Tc9/VX5j03tJvd6SpJhuadfMp+8WbCxD
+ IT2T3eE33Qm3lKZE5jAOEwHj/HST/s2aD/WJfG7lhcjAgaDgahpSAA4SDbq+ud4QvmOzdhGFFRK
+ flEce65C3gyTtG3r3w+quSs7KGDmDNyYYr58x81dejQBp0Uk8IRcRg8v01416ZB4qyHzlcUxrs9
+ iMNW4W80K/71glDpCK6NY1riLizYSVurHjIHmVdannr7ecmiJpUss4dWguNooVm8RSWzBldSfPr
+ mieZXAUsmSxi0XgRRI0T+JbMUOW2c83H3/YC3lNQVLKg==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: Johan Jonker <jbx6244@gmail.com>, Alex Bee <knaerzche@gmail.com>, Mark
  Kettenis <mark.kettenis@xs4all.nl>, u-boot@lists.denx.de, Jonas Karlman
  <jonas@kwiboo.se>
-Subject: [PATCH 3/9] pinctrl: rockchip: rk3588: Fix support for
- rockchip_get_mux()
-Date: Sun, 12 May 2024 12:16:16 +0000
-Message-ID: <20240512121633.1632597-4-jonas@kwiboo.se>
+Subject: [PATCH 5/9] pinctrl: rockchip: Update get_gpio_mux() ops
+Date: Sun, 12 May 2024 12:16:18 +0000
+Message-ID: <20240512121633.1632597-6-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240512121633.1632597-1-jonas@kwiboo.se>
 References: <20240512121633.1632597-1-jonas@kwiboo.se>
@@ -55,7 +54,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 6640b3341cfb9f69e9a4f00c
+X-ForwardEmail-ID: 6640b33c1cfb9f69e9a4f036
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,66 +71,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-GPIO IOMUX control is located at PMU2_IOC or BUS_IOC offset on RK3588.
+Add a way to get_gpio_mux() based on the pinctrl pin offset, use -1 as
+banknum to use the pinctrl pin offset mode instead of bank pin offset.
 
-Based on Linux commit fdc33eba11c5 ("pinctrl/rockchip: add rk3588
-support").
+This mode will be used by the gpio driver to ensure a pin used by gpio
+request() and get_function() ops always refer to the same pinctrl pin.
 
-Compared to the Linux commit, this include a fix so that the iomux of
-GPIO0_B4-D7 is reported correctly.
+Also add verify_config() of banknum and index to avoid an out of range
+access of the pin_banks array, i.e. with gpio6 on rk3066a.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
-The fix to report correct iomux for GPIO0_B4-D7 will be sent to Linux.
+The pin_to_mux() helper will be used in the get_pin_muxing() ops added
+in a later patch to support the pinmux status cmd.
 ---
- .../pinctrl/rockchip/pinctrl-rockchip-core.c  | 24 ++++++++++++++++++-
- 1 file changed, 23 insertions(+), 1 deletion(-)
+ .../pinctrl/rockchip/pinctrl-rockchip-core.c  | 22 ++++++++++++++++++-
+ 1 file changed, 21 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c b/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
-index 973e6a4f6db9..efc2070d32d9 100644
+index b7c08c23311f..1a8eec19d268 100644
 --- a/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
 +++ b/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
-@@ -14,10 +14,10 @@
- #include <linux/libfdt.h>
+@@ -194,10 +194,30 @@ static struct rockchip_pin_bank *rockchip_pin_to_bank(struct udevice *dev,
+ 	return NULL;
+ }
  
- #include "pinctrl-rockchip.h"
-+#include <dt-bindings/pinctrl/rockchip.h>
++static int rockchip_pin_to_mux(struct udevice *dev, unsigned int pin)
++{
++	struct rockchip_pin_bank *bank;
++
++	bank = rockchip_pin_to_bank(dev, pin);
++	if (!bank)
++		return -EINVAL;
++
++	return rockchip_get_mux(bank, pin - bank->pin_base);
++}
++
+ static int rockchip_pinctrl_get_gpio_mux(struct udevice *dev, int banknum,
+ 					 int index)
+-{	struct rockchip_pinctrl_priv *priv = dev_get_priv(dev);
++{
++	struct rockchip_pinctrl_priv *priv = dev_get_priv(dev);
+ 	struct rockchip_pin_ctrl *ctrl = priv->ctrl;
++	int ret;
++
++	if (banknum == -1)
++		return rockchip_pin_to_mux(dev, index);
++
++	ret = rockchip_verify_config(dev, banknum, index);
++	if (ret)
++		return ret;
  
- #define MAX_ROCKCHIP_PINS_ENTRIES	30
- #define MAX_ROCKCHIP_GPIO_PER_BANK      32
--#define RK_FUNC_GPIO                    0
- 
- static int rockchip_verify_config(struct udevice *dev, u32 bank, u32 pin)
- {
-@@ -147,6 +147,28 @@ static int rockchip_get_mux(struct rockchip_pin_bank *bank, int pin)
- 	if (bank->recalced_mask & BIT(pin))
- 		rockchip_get_recalced_mux(bank, pin, &reg, &bit, &mask);
- 
-+	if (IS_ENABLED(CONFIG_ROCKCHIP_RK3588)) {
-+		if (bank->bank_num == 0) {
-+			if (pin >= RK_PB4 && pin <= RK_PD7) {
-+				u32 reg0 = 0;
-+
-+				reg0 = reg + 0x4000 - 0xC; /* PMU2_IOC_BASE */
-+				ret = regmap_read(regmap, reg0, &val);
-+				if (ret)
-+					return ret;
-+
-+				ret = ((val >> bit) & mask);
-+				if (ret != 8)
-+					return ret;
-+
-+				reg = reg + 0x8000; /* BUS_IOC_BASE */
-+				regmap = priv->regmap_base;
-+			}
-+		} else if (bank->bank_num > 0) {
-+			reg += 0x8000; /* BUS_IOC_BASE */
-+		}
-+	}
-+
- 	ret = regmap_read(regmap, reg, &val);
- 	if (ret)
- 		return ret;
+ 	return rockchip_get_mux(&ctrl->pin_banks[banknum], index);
+ }
 -- 
 2.43.2
 
