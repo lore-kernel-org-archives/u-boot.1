@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19501C10F1A
-	for <u-boot@archiver.kernel.org>; Sun, 12 May 2024 04:26:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9716C25B4F
+	for <u-boot@archiver.kernel.org>; Sun, 12 May 2024 04:26:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE1DC87F30;
-	Sun, 12 May 2024 06:26:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4920C87EDC;
+	Sun, 12 May 2024 06:26:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="svEOxgxC";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="RaxgRCof";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 886E087ECD; Sun, 12 May 2024 06:26:07 +0200 (CEST)
+ id 5632987ED3; Sun, 12 May 2024 06:26:11 +0200 (CEST)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B4C287ECD
- for <u-boot@lists.denx.de>; Sun, 12 May 2024 06:26:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CDC387EF5
+ for <u-boot@lists.denx.de>; Sun, 12 May 2024 06:26:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -30,19 +30,19 @@ Received: from LT2ubnt.lan (unknown [149.11.192.251])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 624FC40821; 
- Sun, 12 May 2024 04:25:58 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 0ECF840822; 
+ Sun, 12 May 2024 04:26:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1715487960;
- bh=3EFFAJM4uPsYo0D6L06qAM2oIoq7bdquW+Z8OoexXAE=;
+ s=20210705; t=1715487963;
+ bh=XTrl7tG1DhQDm030+uTbTXzswmvCERRMMiW6C7/j8gg=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=svEOxgxC6MDu86W8vPtxLbR2NC09Ki1UDmBGwvEr8TXIKFroOEvrhjCFsQlLhzfas
- 1hdOgW+riQtvpWpt7i82Ov3kLb4T8TdTC4R2ouDiiuwlXCcVTwGGsMsvhXWDYhfvDp
- TahQQKZDNRB7BL4FJsOIznATW81RL4UOrci+Zu8RGBwtoC6rlXREH8b0hXZahCdUyI
- 3VzWDnbYHINXGFC+ycAwnbtPJ3LKIXoNmEVtee/blWSQxvxeT+cnSjURSpwAORPNrG
- AAbjgih+Ch+EEobo4o0B0g6MU9SlPWhsWBWegswDM6Vzv31UHLkAYCPk+9acxEQUVd
- 6mdPqm0QDJhdQ==
+ MIME-Version:Content-Type;
+ b=RaxgRCofMIReJRI5hbJtcLYTyM5cdwc+4BZszbZSvrtsIGGrRsCYuQfpwggvA5p+g
+ tk/EOQ8q1WvzY9TUQDf32Gty9lwfABlcpUA4bLig1h9sWMPc4aievkuwGvu4gf2+4y
+ 8q0tbky7nm0cqCrzhW2TlhZdJ1HUF66PH+1Xh8e1DH8wpjBH1i4qnVMZHYYarect8B
+ QjXYiXZHjTrVPUVo9LmfnoxfViaG8bi82XVz6MIG3JdALKgfLzdSViOTQwbjvtnymF
+ FbS1U7aGFAWUsOlvFDQuyJptk85wXRlujBhCw0xWEmmgm/dMJLDYtxwEb45774S9Kr
+ aI6BkQNHnUpWg==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Minda Chen <minda.chen@starfivetech.com>,
  Hal Feng <hal.feng@starfivetech.com>, Rick Chen <rick@andestech.com>,
@@ -56,13 +56,14 @@ Cc: Aurelien Jarno <aurelien@aurel32.net>,
  Mason Huo <mason.huo@starfivetech.com>, E Shattow <lucent@gmail.com>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v4 2/5] board: add support for Milk-V Mars CM
-Date: Sun, 12 May 2024 06:25:23 +0200
-Message-ID: <20240512042528.7766-3-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v4 3/5] doc: Milk-V Mars CM and Milk-V Mars CM Lite
+Date: Sun, 12 May 2024 06:25:24 +0200
+Message-ID: <20240512042528.7766-4-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240512042528.7766-1-heinrich.schuchardt@canonical.com>
 References: <20240512042528.7766-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,104 +81,243 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We already support the VisionFive 2 and the Milk-V Mars board by
-patching the VisionFive 2 device tree. With this patch the same
-is done for the Milk-V Mars CM.
+Provide a man-page describing the usage of U-Boot on
+the Milk-V Mars CM and Milk-V Mars CM Lite boards.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Tested-by: E. Shattow <lucent@gmail.com>
-Reviewed-by: E. Shattow <lucent@gmail.com>
+Reviewed-by: E Shattow <lucent@gmail.com>
 ---
 v5:
 	no change
 v4:
-	no change
+	remove .rst extension from toctree links
+	remove superfluous word 'connected' describing booting from SPI
+	flash
 v3:
-	no change
+	correct device-tree names
+	suggest not to use mac initialize
+	refer to XMODEM-1K
 v2:
-	rename spl_fdt_fixup_marc() to spl_fdt_fixup_mars_cm()
-	rename device-trees for Mars CM and Mars CM Lite
-	change model and compatible properties
+	refer to tio as tool for booting via UART
+	describe how to update serial number
+	description updates as suggested by E. Shattow
 ---
- board/starfive/visionfive2/spl.c              | 28 ++++++++++++++++++-
- .../visionfive2/starfive_visionfive2.c        | 11 +++++++-
- 2 files changed, 37 insertions(+), 2 deletions(-)
+ doc/board/starfive/index.rst          |   1 +
+ doc/board/starfive/milk-v_mars_cm.rst | 193 ++++++++++++++++++++++++++
+ 2 files changed, 194 insertions(+)
+ create mode 100644 doc/board/starfive/milk-v_mars_cm.rst
 
-diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfive2/spl.c
-index ca61b5be227..b555189556a 100644
---- a/board/starfive/visionfive2/spl.c
-+++ b/board/starfive/visionfive2/spl.c
-@@ -129,6 +129,30 @@ void spl_fdt_fixup_mars(void *fdt)
- 	}
- }
+diff --git a/doc/board/starfive/index.rst b/doc/board/starfive/index.rst
+index 2762bf74c11..afa85ad2540 100644
+--- a/doc/board/starfive/index.rst
++++ b/doc/board/starfive/index.rst
+@@ -7,5 +7,6 @@ StarFive
+ .. toctree::
+    :maxdepth: 1
  
-+void spl_fdt_fixup_mars_cm(void *fdt)
-+{
-+	const char *compat;
-+	const char *model;
+-   milk-v_mars.rst
++   milk-v_mars
++   milk-v_mars_cm
+    visionfive2
+diff --git a/doc/board/starfive/milk-v_mars_cm.rst b/doc/board/starfive/milk-v_mars_cm.rst
+new file mode 100644
+index 00000000000..68561adadfc
+--- /dev/null
++++ b/doc/board/starfive/milk-v_mars_cm.rst
+@@ -0,0 +1,193 @@
++.. SPDX-License-Identifier: GPL-2.0+
 +
-+	spl_fdt_fixup_mars(fdt);
++Milk-V Mars CM
++==============
 +
-+	if (!get_mmc_size_from_eeprom()) {
-+		int offset;
++U-Boot for the Milk-V Mars CM uses the same U-Boot binaries as the VisionFive 2
++board. In U-Boot SPL the actual board is detected and the device-tree patched
++accordingly.
 +
-+		model = "Milk-V Mars CM Lite";
-+		compat = "milkv,mars-cm-lite\0starfive,jh7110";
++The Milk-V Mars CM Lite comes without eMMC and needs a different pin muxing
++than the Milk-V Mars CM. The availability and size of the eMMC shows up in the
++serial number displayed by the *mac* command, e.g.
++MARC-V10-2340-D002E016-00000304. The number after the E is the MMC size. U-Boot
++takes a value of E000 as an indicator for the Lite version. Unfortunately the
++vendor has not set this value correctly on some Lite boards.
 +
-+		offset = fdt_path_offset(fdt, "/soc/pinctrl/mmc0-pins/mmc0-pins-rest");
-+		/* GPIOMUX(22, GPOUT_SYS_SDIO0_RST, GPOEN_ENABLE, GPI_NONE) */
-+		fdt_setprop_u32(fdt, offset, "pinmux", 0xff130016);
-+	} else {
-+		model = "Milk-V Mars CM";
-+		compat = "milkv,mars-cm\0starfive,jh7110";
-+	}
-+	fdt_setprop(fdt, fdt_path_offset(fdt, "/"), "compatible", compat, sizeof(compat));
-+	fdt_setprop_string(fdt, fdt_path_offset(fdt, "/"), "model", model);
-+}
++Please, use CONFIG_STARFIVE_NO_EMMC=y if EEPROM data indicates eMMC is present
++on the Milk-V Mars CM Lite. Otherwise you will not be able to read from the
++SD-card.
 +
- void spl_fdt_fixup_version_a(void *fdt)
- {
- 	static const char compat[] = "starfive,visionfive-2-v1.2a\0starfive,jh7110";
-@@ -236,7 +260,9 @@ void spl_perform_fixups(struct spl_image_info *spl_image)
- 		pr_err("Can't read EEPROM\n");
- 		return;
- 	}
--	if (!strncmp(product_id, "MARS", 4)) {
-+	if (!strncmp(product_id, "MARC", 4)) {
-+		spl_fdt_fixup_mars_cm(spl_image->fdt_addr);
-+	} else if (!strncmp(product_id, "MARS", 4)) {
- 		spl_fdt_fixup_mars(spl_image->fdt_addr);
- 	} else if (!strncmp(product_id, "VF7110", 6)) {
- 		version = get_pcb_revision_from_eeprom();
-diff --git a/board/starfive/visionfive2/starfive_visionfive2.c b/board/starfive/visionfive2/starfive_visionfive2.c
-index a86bca533b2..6be53489626 100644
---- a/board/starfive/visionfive2/starfive_visionfive2.c
-+++ b/board/starfive/visionfive2/starfive_visionfive2.c
-@@ -19,6 +19,10 @@ DECLARE_GLOBAL_DATA_PTR;
- #define JH7110_L2_PREFETCHER_HART_OFFSET	0x2000
- #define FDTFILE_MILK_V_MARS \
- 	"starfive/jh7110-milkv-mars.dtb"
-+#define FDTFILE_MILK_V_MARS_CM \
-+	"starfive/jh7110-milkv-mars-cm.dtb"
-+#define FDTFILE_MILK_V_MARS_CM_LITE \
-+	"starfive/jh7110-milkv-mars-cm-lite.dtb"
- #define FDTFILE_VISIONFIVE2_1_2A \
- 	"starfive/jh7110-starfive-visionfive-2-v1.2a.dtb"
- #define FDTFILE_VISIONFIVE2_1_3B \
-@@ -61,7 +65,12 @@ static void set_fdtfile(void)
- 		log_err("Can't read EEPROM\n");
- 		return;
- 	}
--	if (!strncmp(product_id, "MARS", 4)) {
-+	if (!strncmp(product_id, "MARC", 4)) {
-+		if (get_mmc_size_from_eeprom())
-+			fdtfile = FDTFILE_MILK_V_MARS_CM;
-+		else
-+			fdtfile = FDTFILE_MILK_V_MARS_CM_LITE;
-+	} else if (!strncmp(product_id, "MARS", 4)) {
- 		fdtfile = FDTFILE_MILK_V_MARS;
- 	} else if (!strncmp(product_id, "VF7110", 6)) {
- 		version = get_pcb_revision_from_eeprom();
++The serial number can be corrected using the *mac* command:
++
++.. code-block::
++
++    mac read_eeprom
++    mac product_id MARC-V10-2340-D002E000-00000304
++    mac write_eeprom
++
++.. note::
++
++   The *mac initialize* command overwrites the vendor string and the MAC
++   addresses. This is why it is avoided here.
++
++By default the EEPROM is write protected. The write protection may be overcome
++by connecting the "GND" and "EN" test pads on top of the module.
++
++Building
++~~~~~~~~
++
++1. Add the RISC-V toolchain to your PATH.
++2. Setup ARCH & cross compilation environment variable:
++
++.. code-block:: none
++
++   export CROSS_COMPILE=<riscv64 toolchain prefix>
++
++The M-mode software OpenSBI provides the supervisor binary interface (SBI) and
++is responsible for the switch to S-Mode. It is a prerequisite to build U-Boot.
++Support for the JH7110 was introduced in OpenSBI 1.2. It is recommended to use
++a current release.
++
++.. code-block:: console
++
++	git clone https://github.com/riscv/opensbi.git
++	cd opensbi
++	make PLATFORM=generic FW_TEXT_START=0x40000000
++
++(*FW_TEXT_START* is not needed anymore after OpenSBI patch d4d2582eef7a
++"firmware: remove FW_TEXT_START" which should appear in OpenSBI 1.5.)
++
++Now build the U-Boot SPL and U-Boot proper.
++
++.. code-block:: console
++
++	cd <U-Boot-dir>
++	make starfive_visionfive2_defconfig
++	make OPENSBI=$(opensbi_dir)/build/platform/generic/firmware/fw_dynamic.bin
++
++This will generate the U-Boot SPL image (spl/u-boot-spl.bin.normal.out) as well
++as the FIT image (u-boot.itb) with OpenSBI and U-Boot.
++
++Device-tree selection
++~~~~~~~~~~~~~~~~~~~~~
++
++Depending on the board version U-Boot sets variable $fdtfile to either
++starfive/jh7110-milkv-mars-cm.dtb (with eMMC storage) or
++starfive/jh7110-milkv-mars-cm-lite.dtb (without eMMC storage).
++
++To overrule this selection the variable can be set manually and saved in the
++environment
++
++::
++
++    env set fdtfile my_device-tree.dtb
++    env save
++
++or the configuration variable CONFIG_DEFAULT_FDT_FILE can be used to set to
++provide a default value.
++
++The variable *$fdtfile* is used in the boot process to automatically load
++a device-tree provided by the operating system. For details of the boot
++process refer to the :doc:`U-Boot Standard Boot <../../../develop/bootstd>`
++description.
++
++Boot source selection
++~~~~~~~~~~~~~~~~~~~~~
++
++The low speed connector nRPIBOOT line is used to switch the boot source.
++
++* If nRPIBOOT is connected to ground, the board boots from UART.
++* If nRPIBOOT is not connected, the board boots from SPI flash.
++
++Compute module boards typically have a switch or jumper for this line.
++
++Flashing a new U-Boot version
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++
++U-Boot SPL is provided as file spl/u-boot-spl.bin.normal.out. Main U-Boot is
++in file u-boot.itb.
++
++Assuming your new U-Boot version is on partition 1 of an SD-card you could
++install it to the SPI flash with:
++
++::
++
++    sf probe
++    load mmc 0:1 $kernel_addr_r u-boot-spl.bin.normal.out
++    sf update $kernel_addr_r 0 $filesize
++    load mmc 0:1 $kernel_addr_r u-boot.itb
++    sf update $kernel_addr_r 0x100000 $filesize
++
++For loading the files from a TFTP server refer to the dhcp and tftpboot
++commands.
++
++After updating U-Boot you may want to reboot and reset the environment to the
++default.
++
++::
++
++    env default -f -a
++    env save
++
++Booting from UART
++~~~~~~~~~~~~~~~~~
++
++For booting via UART U-Boot must be built with CONFIG_SPL_YMODEM_SUPPORT=y.
++
++With nRPIBOOT connected to ground for UART boot, power the board and upload
++u-boot-spl.bin.normal.out via XMODEM. Then upload u-boot.itb via YMODEM.
++
++The XMODEM implementation in the boot ROM is not fully specification compliant.
++It sends too many NAKs in a row. Tio is a terminal emulation that tolerates
++these faults.
++
++::
++
++    $ tio -b 115200 --databits 8 --flow none --stopbits 1 /dev/ttyUSB0
++    [08:14:54.700] tio v2.7
++    [08:14:54.700] Press ctrl-t q to quit
++    [08:14:54.701] Connected
++
++    (C)StarFive
++    CCC
++    (C)StarFive
++    CCCCCCCC
++
++Press *ctrl-t x* to initiate XMODEM-1K transfer.
++
++::
++
++    [08:15:14.778] Send file with XMODEM
++    [08:15:22.459] Sending file 'u-boot-spl.bin.normal.out'
++    [08:15:22.459] Press any key to abort transfer
++    ........................................................................
++    .......................................................................|
++    [08:15:22.459] Done
++
++    U-Boot SPL 2024.07-rc1-00075-gd6a4ab20097 (Apr 25 2024 - 16:32:10 +0200)
++    DDR version: dc2e84f0.
++    Trying to boot from UART
++    CC
++
++Press *ctrl-t y* to initiate YMODEM transfer.
++
++::
++
++    [08:15:50.331] Send file with YMODEM
++    [08:15:53.540] Sending file 'u-boot.itb'
++    [08:15:53.540] Press any key to abort transfer
++    ........................................................................
++    …
++    ...............|
++    [08:15:53.540] Done
++    Loaded 1040599 bytes
++
++
++    U-Boot 2024.07-rc1-00075-gd6a4ab20097 (Apr 25 2024 - 16:32:10 +0200)
++
++Booting from SPI flash
++~~~~~~~~~~~~~~~~~~~~~~
++
++With nRPIBOOT disconnected from ground for SPI boot, power up the board. You
++should see the U-Boot prompt on the serial console.
 -- 
 2.43.0
 
