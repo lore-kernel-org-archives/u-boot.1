@@ -4,80 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D10FC25B10
-	for <u-boot@archiver.kernel.org>; Mon, 13 May 2024 16:59:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4AC5C25B74
+	for <u-boot@archiver.kernel.org>; Mon, 13 May 2024 17:48:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21F9B88054;
-	Mon, 13 May 2024 18:59:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C2B6487C75;
+	Mon, 13 May 2024 19:48:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LA9RVKzu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tHJgGlFy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1F8787D57; Mon, 13 May 2024 18:59:26 +0200 (CEST)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
+ id C1437882FA; Mon, 13 May 2024 19:48:20 +0200 (CEST)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7371E87D57
- for <u-boot@lists.denx.de>; Mon, 13 May 2024 18:59:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7478688013
+ for <u-boot@lists.denx.de>; Mon, 13 May 2024 19:48:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maximmosk4@gmail.com
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-51f4d2676d1so5038313e87.3
- for <u-boot@lists.denx.de>; Mon, 13 May 2024 09:59:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-3c99e8e372fso1664988b6e.3
+ for <u-boot@lists.denx.de>; Mon, 13 May 2024 10:48:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1715619564; x=1716224364; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Oiqcn+SJy04OqHGsKcMnEzSFKDAp8cCnfP/sfQoyAfw=;
- b=LA9RVKzuoJMinQWneVOEXDVWH098h1YjpaqISQCb91BBY/yrjxBRg17NLa+IwO+I7o
- wZ+xjwC6y9tuQB8rZpLpCYtLUyyyvecioFO8hBjcev5PNcla4x1E8ArSvij9OrZWjBaa
- sNzkjGu0q+RzwtlsTnbQUqdQrGPNN1T02JvFXNVUDg2n+ftT0m9V5UkamkCyXONaqvwh
- 4pCYzSrOZX7PiT+pTp1lUK32ZDr0lOVWke2TUFmw00Y4TupxyjbCoBhJnNMBaLdZI+yL
- rndx+pahm2gCybAN5t+opuqkxLvm0l+v3DAABAMODQ4Xo1bWWaYxglENrKWJBHWBmgZw
- c/TQ==
+ d=konsulko.com; s=google; t=1715622497; x=1716227297; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zwJBFR4MCt0URSOLscdOzh3tZvrPnEmY9ldhGbOtKwc=;
+ b=tHJgGlFyaTsKOywkflysyfnSdnbS8slsdEqaejV4VVKdbMSyT2UYov7tssy17IO/pG
+ 8KPal4We4YvC8lNw4NyuKT1BvRk/IO3t1NGO+6z5dVNdfEbd6Yk36IvdcCKzcG0vJdBq
+ grjzaU6O71bN6PCYB3ZpHkYQluqMNveQF2bCo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715619564; x=1716224364;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Oiqcn+SJy04OqHGsKcMnEzSFKDAp8cCnfP/sfQoyAfw=;
- b=Rvw8xmRtsVA5FCsWPMrtLkbv8iApbjdk023o45N/gLOFQKomG0Qxva5W1CVtwzTjKR
- zp3znqqT104/qdhiHNEliEE1QX2puMdgVlD3iDhvLHZOhBiPdtZhufzIPOG3z2Ptus/t
- Nf4azdTK0OENVFdS8gH4F9sD6si//Up/wr2nFAvRwY22fHYr3mz1QJEcCfpFF+Mm9CWS
- OfTH7/WHKruoLITj4mwP3CdoXGTdYn5Dr18WkE69gUS56MP57JCd5GnDhKOMEmMieQ+g
- jaQqds1HzDqQjuxskuQUQMdIQfoZDajHQg91ruaDGMGCMz6knunnDQ+UBCgf8S/lT6yd
- I79w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW9Pr0y9s0J064xD5aZG3dUM61kIR0HZL/Q8KTzqj3nA7V6k6AiOqRJvHNi+GCIzfVAjUhPWioUKXC49+ukVpJgPWZI+A==
-X-Gm-Message-State: AOJu0YwKW86WgfVebONIDde+uMwbD+B2owrhbOXQWPBikWAoJFymakJa
- NsjlVJ9BOH7d58o6uPL9omKXqgb3gQRDz73rtsvHpYTENgUmNvEx
-X-Google-Smtp-Source: AGHT+IHcnAW0ycIL/OWBOpCydBfh0tr5ZpLcbhoKMs1KGfr35y0jUCUghFkYbIj1fICGYYsFTUz+yg==
-X-Received: by 2002:a05:6512:3e1e:b0:523:2ed9:edf9 with SMTP id
- 2adb3069b0e04-5232ed9ef10mr2592292e87.63.1715619563388; 
- Mon, 13 May 2024 09:59:23 -0700 (PDT)
-Received: from localhost.localdomain (109-252-12-58.nat.spd-mgts.ru.
- [109.252.12.58]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-521f35ba56fsm1811192e87.91.2024.05.13.09.59.22
+ d=1e100.net; s=20230601; t=1715622497; x=1716227297;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zwJBFR4MCt0URSOLscdOzh3tZvrPnEmY9ldhGbOtKwc=;
+ b=EVj8AJQGlVwxA81RazUxxAML9hnM2aoPTj3koEjkEkRWJsrMhi9200wnaFRhwL5tRe
+ Le/VXKragXFMvfModGd6t83L77SyVYkfBwGklS5j4Hrt3vz8Z3iVZnI2gQgRfzcHSK5H
+ 7JDRrRmGSUe+VsakUV7HcyXvVwtmCmk2R3dW4JVFnh4QqDcr2JSO1JNUVuDHt261LxvN
+ mFOD9SavirbV7mm8EtuMGlWAmNILC15tf6unfQS6i1tSTHw58ESvpgARu19auxnmtnJk
+ +SZywkBwjGnwZTmIqmntrAzHU+g+ql6+rfsFdpLOzlAJ+hvYWCbrfYyaqWzErOIlmsoE
+ 8OyQ==
+X-Gm-Message-State: AOJu0YzS5nH4S0DYruJVRpd/h3IX/iDa+ab73lxvwCK7MGrUcbeYuFLw
+ jDKOg+rH26G4cNWF273RyhdRn7sYqUligEzjoUKi4IZiQR+e7E4SjLMMvIqrHslNGYzhO+jUnz2
+ z
+X-Google-Smtp-Source: AGHT+IFrIOP2ZYY0EDK8JeDd6I5DTCsTBVvii4ox2GTBKysEmkdOo19DewDBsZJVAS3xayBq7PGvug==
+X-Received: by 2002:a54:4186:0:b0:3c9:9598:c74a with SMTP id
+ 5614622812f47-3c997068184mr11476105b6e.32.1715622496871; 
+ Mon, 13 May 2024 10:48:16 -0700 (PDT)
+Received: from [127.0.1.1] ([187.144.98.216]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6a32e0fa401sm21966386d6.111.2024.05.13.10.48.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 May 2024 09:59:23 -0700 (PDT)
-From: Maxim Moskalets <maximmosk4@gmail.com>
-X-Google-Original-From: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
-To: sjg@chromium.org, trini@konsulko.com, u-boot@lists.denx.de,
- philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
- eugen.hristev@collabora.com
-Cc: maximmosk4@gmail.com,
-	Maxim.Moskalets@kaspersky.com
-Subject: [PATCH] arch: fix arch-rockchip/clock.h dependency
-Date: Mon, 13 May 2024 19:59:16 +0300
-Message-Id: <20240513165916.24259-1-Maxim.Moskalets@kaspersky.com>
-X-Mailer: git-send-email 2.39.2
+ Mon, 13 May 2024 10:48:16 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240506212230.2948754-1-trini@konsulko.com>
+References: <20240506212230.2948754-1-trini@konsulko.com>
+Subject: Re: [PATCH] doc/sphinx: Bump Jinja2 to 3.1.4
+Message-Id: <171562249597.3674659.6728312247525574762.b4-ty@konsulko.com>
+Date: Mon, 13 May 2024 11:48:15 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,26 +89,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This header uses u32 and should include header with this typedef.
+On Mon, 06 May 2024 15:22:30 -0600, Tom Rini wrote:
 
-Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
----
- arch/arm/include/asm/arch-rockchip/clock.h | 2 ++
- 1 file changed, 2 insertions(+)
+> While we unlikely to have an issue with CVE-2024-22195, it is simple
+> enough to bump our version of Jinja2 to receive the fix, do so.
+> 
+> 
 
-diff --git a/arch/arm/include/asm/arch-rockchip/clock.h b/arch/arm/include/asm/arch-rockchip/clock.h
-index f01c5aeb71..ade53e6fd9 100644
---- a/arch/arm/include/asm/arch-rockchip/clock.h
-+++ b/arch/arm/include/asm/arch-rockchip/clock.h
-@@ -6,6 +6,8 @@
- #ifndef _ASM_ARCH_CLOCK_H
- #define _ASM_ARCH_CLOCK_H
- 
-+#include <common.h>
-+
- struct udevice;
- 
- /* define pll mode */
+Applied to u-boot/master, thanks!
+
 -- 
-2.39.2
+Tom
+
 
