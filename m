@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4AC5C25B74
-	for <u-boot@archiver.kernel.org>; Mon, 13 May 2024 17:48:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07743C25B10
+	for <u-boot@archiver.kernel.org>; Mon, 13 May 2024 17:48:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2B6487C75;
-	Mon, 13 May 2024 19:48:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3203B88303;
+	Mon, 13 May 2024 19:48:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tHJgGlFy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CBJNSbcS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1437882FA; Mon, 13 May 2024 19:48:20 +0200 (CEST)
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
+ id E5E3687C75; Mon, 13 May 2024 19:48:20 +0200 (CEST)
+Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
+ [IPv6:2607:f8b0:4864:20::735])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7478688013
+ by phobos.denx.de (Postfix) with ESMTPS id 2A1B387C69
  for <u-boot@lists.denx.de>; Mon, 13 May 2024 19:48:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-3c99e8e372fso1664988b6e.3
+Received: by mail-qk1-x735.google.com with SMTP id
+ af79cd13be357-792c031ffdeso356471185a.2
  for <u-boot@lists.denx.de>; Mon, 13 May 2024 10:48:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=konsulko.com; s=google; t=1715622497; x=1716227297; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zwJBFR4MCt0URSOLscdOzh3tZvrPnEmY9ldhGbOtKwc=;
- b=tHJgGlFyaTsKOywkflysyfnSdnbS8slsdEqaejV4VVKdbMSyT2UYov7tssy17IO/pG
- 8KPal4We4YvC8lNw4NyuKT1BvRk/IO3t1NGO+6z5dVNdfEbd6Yk36IvdcCKzcG0vJdBq
- grjzaU6O71bN6PCYB3ZpHkYQluqMNveQF2bCo=
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=c7lUMJNyyG1zXZK4/N4JA0W3AXk9bFwUZrlJ2cvt5eI=;
+ b=CBJNSbcSq5/wDdabydwSPdDPd62coNcmbMdBr30rSGHcdYscx5wX80t2W9xmaF5wzI
+ PoP9txQjtS9IE54DJsgE9h+RGEwS1wYOkqx25zyqXvv5ZwHN4+H7uXYu1URjiM/1z3tX
+ P1WUfn1aHcDK08ONCKj+e7JOABhOOQwlMQkTY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1715622497; x=1716227297;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zwJBFR4MCt0URSOLscdOzh3tZvrPnEmY9ldhGbOtKwc=;
- b=EVj8AJQGlVwxA81RazUxxAML9hnM2aoPTj3koEjkEkRWJsrMhi9200wnaFRhwL5tRe
- Le/VXKragXFMvfModGd6t83L77SyVYkfBwGklS5j4Hrt3vz8Z3iVZnI2gQgRfzcHSK5H
- 7JDRrRmGSUe+VsakUV7HcyXvVwtmCmk2R3dW4JVFnh4QqDcr2JSO1JNUVuDHt261LxvN
- mFOD9SavirbV7mm8EtuMGlWAmNILC15tf6unfQS6i1tSTHw58ESvpgARu19auxnmtnJk
- +SZywkBwjGnwZTmIqmntrAzHU+g+ql6+rfsFdpLOzlAJ+hvYWCbrfYyaqWzErOIlmsoE
- 8OyQ==
-X-Gm-Message-State: AOJu0YzS5nH4S0DYruJVRpd/h3IX/iDa+ab73lxvwCK7MGrUcbeYuFLw
- jDKOg+rH26G4cNWF273RyhdRn7sYqUligEzjoUKi4IZiQR+e7E4SjLMMvIqrHslNGYzhO+jUnz2
- z
-X-Google-Smtp-Source: AGHT+IFrIOP2ZYY0EDK8JeDd6I5DTCsTBVvii4ox2GTBKysEmkdOo19DewDBsZJVAS3xayBq7PGvug==
-X-Received: by 2002:a54:4186:0:b0:3c9:9598:c74a with SMTP id
- 5614622812f47-3c997068184mr11476105b6e.32.1715622496871; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=c7lUMJNyyG1zXZK4/N4JA0W3AXk9bFwUZrlJ2cvt5eI=;
+ b=Q0KmkHowm2f91K17OLex190Xw4S3rXtJU/mAHCtjd9zJw28/o2zg+amMNuH90auVO1
+ W6obt/Yfg5gZbTgucgXz9MD6BH0jQ5NNwn8pUKqmF1GWdhaRw24TgSA/Pylh5BTIumVV
+ aGPU/mXBSzEsJ+CDlFPQBZLJle5hweZ1FEafWIPdcU2O3kn+d3qGuDzU+HjxpLfqVl6l
+ dDoeQhZ7Hvl35BeExq2zSX9ya6af5N8z7K3d2RgX7liTwsQZfx9HmGAwFLWtYR3W4/JA
+ m9UowODUZMgoAxFgLJ1AJ8qSG6ZQbigxIf64CuTa2OB1GtJ1B6t8sgh/0whdRZMGqRzj
+ P6rw==
+X-Gm-Message-State: AOJu0Yyn7kYx++lmXfFPU0JQPov06Fa7UKdT3WBoKJ+YOnWYa9yTTQbd
+ wpGyGXRH3NDr65wJfvwK/KeZAYs9zT8+BMX14qIuEV6ZBddWNwrvuG13LvMvI4E=
+X-Google-Smtp-Source: AGHT+IGrmI3ikpjfmj7yUAWl1WsPdEzT51PlrGT04nc6e/9t+WjS2AiFfzLpXSMNiW/8awUFENfGCg==
+X-Received: by 2002:a05:6214:4343:b0:6a0:cd28:ffaa with SMTP id
+ 6a1803df08f44-6a16816031amr160338826d6.25.1715622496851; 
  Mon, 13 May 2024 10:48:16 -0700 (PDT)
-Received: from [127.0.1.1] ([187.144.98.216]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6a32e0fa401sm21966386d6.111.2024.05.13.10.48.16
+Received: from bill-the-cat ([187.144.98.216])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6a15f179664sm45374276d6.2.2024.05.13.10.48.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 13 May 2024 10:48:16 -0700 (PDT)
+Date: Mon, 13 May 2024 11:48:13 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240506212230.2948754-1-trini@konsulko.com>
-References: <20240506212230.2948754-1-trini@konsulko.com>
-Subject: Re: [PATCH] doc/sphinx: Bump Jinja2 to 3.1.4
-Message-Id: <171562249597.3674659.6728312247525574762.b4-ty@konsulko.com>
-Date: Mon, 13 May 2024 11:48:15 -0600
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: Pull request: rpi-2024.07 rc3
+Message-ID: <20240513174813.GF2568172@bill-the-cat>
+References: <CALeDE9OF_4eTtiPJ+bwsRphD6cGNhTdm_XW1XRyGpgNX1QY=GA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="b28hENS0hW2h6yDY"
+Content-Disposition: inline
+In-Reply-To: <CALeDE9OF_4eTtiPJ+bwsRphD6cGNhTdm_XW1XRyGpgNX1QY=GA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,16 +89,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 06 May 2024 15:22:30 -0600, Tom Rini wrote:
 
-> While we unlikely to have an issue with CVE-2024-22195, it is simple
-> enough to bump our version of Jinja2 to receive the fix, do so.
-> 
-> 
+--b28hENS0hW2h6yDY
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, May 13, 2024 at 08:48:00AM +0100, Peter Robinson wrote:
+
+> Hi Tom,
+>=20
+> Please pull the updates for the Raspberry Pi:
+>=20
+> Updates for RPi for 2024.07:
+> - Switch to OF_HAS_PRIOR_STAGE by default
+>=20
+> The following changes since commit 52835266d3e933656a217233eaf672dd9ccd73=
+52:
+>=20
+>   Prepare v2024.07-rc2 (2024-05-06 13:54:17 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+> https://source.denx.de/u-boot/custodians/u-boot-raspberrypi.git
+> tags/rpi-2024.07-rc3
 
 Applied to u-boot/master, thanks!
 
--- 
+--=20
 Tom
 
+--b28hENS0hW2h6yDY
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZCUloACgkQFHw5/5Y0
+tyxSigv/Tl3jZliQ21fBEPA/BLdl4TcKFcfiqkY10nMnQvScDMhXKE/yhFN+bmlh
+iORolRSovSPV8O9nK6xydnOILNPGGyZn1RNLwXaTvT6TopWe6raCWR5eKOONd6Tj
+vDkNAkrcKXRnP/iLD4Pb+j1C3y6LRE8exCmuyvqQJOhMvuv7fBectAFhc2M6UW4c
+5+zdPGKWEglK0f+3JvocvuaE2h1I+1pKwOVspuvxWuXHVpxjqKMpeOWO0gqF1SJ9
+tRFAyDAUfzwkDtq7UU/4TIYheVNxEegVJuUWyj1AJhUQaRV5q55ohryrAtRuaaFN
+8CVOuu3NGrD0JRR7UEbtFSpx1l3pd5lIb2QbU01C5xCEg/lKUBYJwzgEWDXPxdDD
+zB4QzUi02cWpSqKSWIXwXztB7SoSyyP02VNH2NID76Qb9N6EJnxltxrDCb9k1jYH
+StABY8MrghsUSk/ooWOezhLPre8xuxOU1LV5Ru4PT/X2Go9zbH+2rVh7tK+DCC1X
+Xi+h9hve
+=DI93
+-----END PGP SIGNATURE-----
+
+--b28hENS0hW2h6yDY--
