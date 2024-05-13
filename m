@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3372C25B75
-	for <u-boot@archiver.kernel.org>; Mon, 13 May 2024 20:56:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD542C25B10
+	for <u-boot@archiver.kernel.org>; Mon, 13 May 2024 20:57:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 847B488273;
-	Mon, 13 May 2024 22:56:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DEB3887D46;
+	Mon, 13 May 2024 22:56:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Vmi51gOQ";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="iTLPWdrV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BECB787D46; Mon, 13 May 2024 22:56:43 +0200 (CEST)
+ id 9AACA8829E; Mon, 13 May 2024 22:56:45 +0200 (CEST)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2D8588210
- for <u-boot@lists.denx.de>; Mon, 13 May 2024 22:56:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A5F6488280
+ for <u-boot@lists.denx.de>; Mon, 13 May 2024 22:56:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mwalle@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 9B00260F80;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 7546D60F82;
+ Mon, 13 May 2024 20:56:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D6803C2BD11;
  Mon, 13 May 2024 20:56:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DFA26C4AF07;
- Mon, 13 May 2024 20:56:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1715633799;
- bh=Z51OZIOCShp1ZcHIbATzWebdi4zEruWXy6IqzirLhis=;
+ s=k20201202; t=1715633802;
+ bh=k64/xBc/spU8kAXnkJ4y7tvyRQBRv6l0Mf1xM3dADBI=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Vmi51gOQtkAkmofI6/XiUoWvCPvUvS+vSbwmI3m1iokQK2idJetrMh8liJP1iCqAC
- FHeHuvutC7bQQIf9aLc2Vk0DAmsDGIouWycsBHJTm9DF8Bm4LuPosBwzehN57E43v5
- a10JRQaT53yY+LCNcgQ+nUmhY8y2lW0IzhrT4lRG55RCGKOiXUxL8oEEynvIA3Y76C
- rYa2Z6+/pohi6QwpyNcM9xuUP7290AwYw2mZLo+eGBrKvkl+6/wa4+rKRiPx/DD5JU
- +TZOX29Hu32JVm+FXlWrVt3PAJnE+xMA333ujhRYmrY0cmTucqYc3C/68vo05GTHgc
- PwzU0H7Y5VBxg==
+ b=iTLPWdrVj3oQ7qcLg4ao0gb9wXgR8FkjuZxZaFtdmHVFn688WOKWt6vTMoMWrushP
+ CZ8DDApleQdJ12R3jjyltS206UsONH31pe7EHnOzWTdAv3D/5kSTzkjapACCmzOoVc
+ CB/mpQXDmkVQ93YXzYqfaGLYJcVmNiMEqDRCzWpjQOXUdQ1uI8pgYMhAdbmk1ML6p1
+ l/hSEXtiOjTBKf1STbREbh28qbFtevVnAYtqli6UNdcFA6Wb0HZCtxF7Ws9rop5Em+
+ Bd3mYpQ4Otp1hQ5kv+HbXIm7fjHxVSV8Gd7q6US/4YcBj9Zx/eLuJTeGTmpqMvS6eD
+ Hu0LKqBVMHM3g==
 From: Michael Walle <mwalle@kernel.org>
 To: Jagan Teki <jagan@amarulasolutions.com>,
  Andre Przywara <andre.przywara@arm.com>, Lukasz Majewski <lukma@denx.de>,
@@ -48,10 +48,9 @@ To: Jagan Teki <jagan@amarulasolutions.com>,
  Ramon Fried <rfried.dev@gmail.com>
 Cc: Samuel Holland <samuel@sholland.org>, u-boot@lists.denx.de,
  Michael Walle <mwalle@kernel.org>
-Subject: [PATCH 1/2] clk: sunxi: add EMAC and EPHY clocks and resets for the
- V3s SoC
-Date: Mon, 13 May 2024 22:56:08 +0200
-Message-Id: <20240513205609.1872861-2-mwalle@kernel.org>
+Subject: [PATCH 2/2] net: sun8i_emac: add support for the V3s
+Date: Mon, 13 May 2024 22:56:09 +0200
+Message-Id: <20240513205609.1872861-3-mwalle@kernel.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240513205609.1872861-1-mwalle@kernel.org>
 References: <20240513205609.1872861-1-mwalle@kernel.org>
@@ -73,51 +72,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the clock gate registers as well as the reset register bits for the
-EMAC and EPHY for the V3s. These are needed by the sun8i network driver.
+Add the compatible string for the emac found on the V3s SoC. The SoC
+only supports the internal PHY. There are no (R)MII signals on any pins.
 
 Signed-off-by: Michael Walle <mwalle@kernel.org>
 ---
- drivers/clk/sunxi/clk_v3s.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ drivers/net/sun8i_emac.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/drivers/clk/sunxi/clk_v3s.c b/drivers/clk/sunxi/clk_v3s.c
-index 6524c13540e..0402d5ed190 100644
---- a/drivers/clk/sunxi/clk_v3s.c
-+++ b/drivers/clk/sunxi/clk_v3s.c
-@@ -17,6 +17,7 @@ static struct ccu_clk_gate v3s_gates[] = {
- 	[CLK_BUS_MMC0]		= GATE(0x060, BIT(8)),
- 	[CLK_BUS_MMC1]		= GATE(0x060, BIT(9)),
- 	[CLK_BUS_MMC2]		= GATE(0x060, BIT(10)),
-+	[CLK_BUS_EMAC]		= GATE(0x060, BIT(17)),
- 	[CLK_BUS_SPI0]		= GATE(0x060, BIT(20)),
- 	[CLK_BUS_OTG]		= GATE(0x060, BIT(24)),
+diff --git a/drivers/net/sun8i_emac.c b/drivers/net/sun8i_emac.c
+index 8bff4fe9a9e..94bcd40acb8 100644
+--- a/drivers/net/sun8i_emac.c
++++ b/drivers/net/sun8i_emac.c
+@@ -893,6 +893,11 @@ static const struct emac_variant emac_variant_r40 = {
+ 	.syscon_offset		= 0x164,
+ };
  
-@@ -31,6 +32,8 @@ static struct ccu_clk_gate v3s_gates[] = {
- 	[CLK_BUS_UART1]		= GATE(0x06c, BIT(17)),
- 	[CLK_BUS_UART2]		= GATE(0x06c, BIT(18)),
- 
-+	[CLK_BUS_EPHY]		= GATE(0x070, BIT(0)),
++static const struct emac_variant emac_variant_v3s = {
++	.syscon_offset		= 0x30,
++	.soc_has_internal_phy	= true,
++};
 +
- 	[CLK_SPI0]		= GATE(0x0a0, BIT(31)),
- 
- 	[CLK_USB_PHY0]          = GATE(0x0cc, BIT(8)),
-@@ -45,12 +48,15 @@ static struct ccu_reset v3s_resets[] = {
- 	[RST_BUS_MMC0]		= RESET(0x2c0, BIT(8)),
- 	[RST_BUS_MMC1]		= RESET(0x2c0, BIT(9)),
- 	[RST_BUS_MMC2]		= RESET(0x2c0, BIT(10)),
-+	[RST_BUS_EMAC]		= RESET(0x2c0, BIT(17)),
- 	[RST_BUS_SPI0]		= RESET(0x2c0, BIT(20)),
- 	[RST_BUS_OTG]		= RESET(0x2c0, BIT(24)),
- 
- 	[RST_BUS_TCON0]		= RESET(0x2c4, BIT(4)),
- 	[RST_BUS_DE]		= RESET(0x2c4, BIT(12)),
- 
-+	[RST_BUS_EPHY]		= RESET(0x2c8, BIT(2)),
-+
- 	[RST_BUS_I2C0]		= RESET(0x2d8, BIT(0)),
- 	[RST_BUS_I2C1]		= RESET(0x2d8, BIT(1)),
- 	[RST_BUS_UART0]		= RESET(0x2d8, BIT(16)),
+ static const struct emac_variant emac_variant_a64 = {
+ 	.syscon_offset		= 0x30,
+ 	.support_rmii		= true,
+@@ -910,6 +915,8 @@ static const struct udevice_id sun8i_emac_eth_ids[] = {
+ 	  .data = (ulong)&emac_variant_h3 },
+ 	{ .compatible = "allwinner,sun8i-r40-gmac",
+ 	  .data = (ulong)&emac_variant_r40 },
++	{ .compatible = "allwinner,sun8i-v3s-emac",
++	  .data = (ulong)&emac_variant_v3s },
+ 	{ .compatible = "allwinner,sun50i-a64-emac",
+ 	  .data = (ulong)&emac_variant_a64 },
+ 	{ .compatible = "allwinner,sun50i-h6-emac",
 -- 
 2.39.2
 
