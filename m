@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7AFCC25B74
-	for <u-boot@archiver.kernel.org>; Mon, 13 May 2024 18:19:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34178C25B10
+	for <u-boot@archiver.kernel.org>; Mon, 13 May 2024 18:19:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDC6088385;
-	Mon, 13 May 2024 20:17:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 667B5883A0;
+	Mon, 13 May 2024 20:17:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="Gq7S1q9q";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="Gxr/ZmaN";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="pSWWvaZz";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="jDDQXC2H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E46E882ED; Mon, 13 May 2024 20:13:28 +0200 (CEST)
-Received: from fout6-smtp.messagingengine.com (fout6-smtp.messagingengine.com
- [103.168.172.149])
+ id 87183882ED; Mon, 13 May 2024 20:13:31 +0200 (CEST)
+Received: from fhigh2-smtp.messagingengine.com
+ (fhigh2-smtp.messagingengine.com [103.168.172.153])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E1CA87F39
- for <u-boot@lists.denx.de>; Mon, 13 May 2024 20:13:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4AD37882D5
+ for <u-boot@lists.denx.de>; Mon, 13 May 2024 20:13:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
 Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailfout.nyi.internal (Postfix) with ESMTP id 984F31380255;
- Mon, 13 May 2024 14:13:25 -0400 (EDT)
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id 3D23711400B1;
+ Mon, 13 May 2024 14:13:27 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Mon, 13 May 2024 14:13:25 -0400
+ by compute2.internal (MEProxy); Mon, 13 May 2024 14:13:27 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm1; t=1715624005;
- x=1715710405; bh=dqH7MeKxmLgwT7duSypbBpjdgwqP27IixCx8Vqgz6qI=; b=
- Gq7S1q9qBHHeNMFie5PHUUzVw3gWWLQouwlW7oVfyJZOJGAFrRlyEHfNiXgjpsf6
- +N5xxIbGgoLsESSn4hrjbAvBmi4Nnl+OQdDxKlr9bnig0MYW7d1eLTepjfuvWS5g
- LtEov5XXGb5VxE7Oi25goWiOJ3p2+lu/HKYaScfMF8YxQJtKq5kspR7uchXIRicf
- VYCGPtFrOfirb2dGTcYoiJW7fTv+anokqYntm6R50tnaI4SC5/KhF1uCP3LAI2Rd
- r1WujayeRAKZX2VyGmkALuX2ykbrpqNLrN2WN2a84ytw85HbTeJhx80pm16NDb0l
- n5uNB0pV8wcMz0JZYzskag==
+ :references:reply-to:subject:subject:to:to; s=fm1; t=1715624007;
+ x=1715710407; bh=z3B6dviYyp7BMaVggM04PCxnwCEGC4IX9N2JtsCA5yA=; b=
+ pSWWvaZzvyNID0fr6kitjM0bnQC2b38qECrQIOECYPtuHpCEpsKr2Kj32oWzqe1i
+ Btvs8fVYadUBi4Ll/pNB75ndcN1Tj/rVofHzRVxR3vRWVJemSKcf/bY440Zn5XFl
+ 5l8abB2FHWEg96rr1nmdU9qyMOpa8DDb5iC+qcoMREVToU0L4F8/T5TcSspBhrcN
+ 0cFuxbHMtJTJ+m6vAgXbTmZdwqslciLj8Z/GyoVd0Q76KgAiiZLHkLN3PRW1/K7k
+ O6a3E3mOz03A6ua7Ooje/8wlM9N6F4DbftIQF8/4G2nHGmbgabC4xE9DBbAxzL8w
+ Xu29z6SBqWVbRprjzAQncw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715624005; x=
- 1715710405; bh=dqH7MeKxmLgwT7duSypbBpjdgwqP27IixCx8Vqgz6qI=; b=G
- xr/ZmaNQ1nCnr0MquTbqCP2Baz2glh7wJ0aKSYeLpnDBI96k82Mle/h7DKrHjiuV
- xHG8eXhzgPXGBHJFDKF7aaT7S36FGNbhnzv+fANuboE5+C2e92f4XXsfJ0Dev+ph
- Iy2Z97ueBRH34TycBD26P7a5uYmUOxUCre/SQj+WT8VgKvUObCmGU5G2j80seLOm
- LZQP80gHFkwlMrSYmGPVCcSxygVloVBd/ARdlksrQkvpmnBILouIA8P9O7gH7tj1
- EtFxUmbEGI3PBZ1o39cmJk0C65z588dDbsMgZ1/VREtsHstaMcp0jkI3ziZwVSu2
- DCq606g49yi3mcCsAEDwQ==
-X-ME-Sender: <xms:RVhCZtdtK8OrYftQqJJeDM7xSKXCzV2IujqN6ePwTLDkh7o8Dffo4Q>
- <xme:RVhCZrMKVxpL0CGfeEdSd_3z-gkPIKPmrywcPp6T0DX-j0X994IS5f3DUH1b3fT_w
- Fm70S1_GqlcsS02ldU>
-X-ME-Received: <xmr:RVhCZmi4EHkMpuD5ajN1K5rliyrxJ24Db6u39LcW-2iUo9_BsUBM_uM>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715624007; x=
+ 1715710407; bh=z3B6dviYyp7BMaVggM04PCxnwCEGC4IX9N2JtsCA5yA=; b=j
+ DDQXC2HVRfPgTPYjkQNTGAIg+N0m0kl5KOUJcpNKea9qg/8l/+TPklb6toco9ZWG
+ 0FT9c2mPoUJiiynTtRZoUxMGoE/RfSQBPqZogSSgaPgSlQZyHsFri4acxrXxIUH3
+ BDysUEs6TgC+HS3d7/OQEXyD1LJQtdtcFYxZaV2OBaxgv+3wicHY/5EObajN1Qjb
+ v09qp2/D7HHCi9hNkbvb8TuV7Po43J86PbY0cjTDrG4jHY0HTBvVXF+X/JP1AwtK
+ lMUVet4Bi/MlqWX7omLBrajWGNBiUZJV9/P6rI/EEtsT5ewU0ogGpE9En5eJ13EF
+ b+2rcGXu3XW9Wpbm0Sgnw==
+X-ME-Sender: <xms:R1hCZo2XO9NnTiRbXBbTaRkZiw6ppVAlzWzaCmo1A8IKVQxnPQkdrQ>
+ <xme:R1hCZjFRer541pwLXfSdbrZMOSrf_FHdNT-qBFt2L5m9_IXdtO8-Q147J0_aKGNCH
+ RS3O6Gvoj-RXXbkIVo>
+X-ME-Received: <xmr:R1hCZg7wkk0GWvW6SHVN4D0wP7KOP2ceYCswyldvXl-4ltW94EyKq2w>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdeggedguddvudcutefuodetggdotefrod
  ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
  necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
  enucfjughrpefhfffugggtgffkfhgjvfevofesthejredtredtjeenucfhrhhomheplfhi
  rgiguhhnucgjrghnghcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhmqe
  enucggtffrrghtthgvrhhnpedvkeeihfefveekueevteefleffkeegudeghfdtuddugefh
- ueevgeffgedukeejleenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrih
+ ueevgeffgedukeejleenucevlhhushhtvghrufhiiigvpedvnecurfgrrhgrmhepmhgrih
  hlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
-X-ME-Proxy: <xmx:RVhCZm9gjwaOnBA7fJhdBqTE--EOHBwjMWhN2muGlnszLuaVOTXBjA>
- <xmx:RVhCZpuNRwAo7CFyrL06PFRkEw-JbRMQKY6vcT-ICNBbtKS4t8QP3w>
- <xmx:RVhCZlEpe910jX5_Z2yfJuKLsVBvWyh39CdDKIzHg1biyue2YAqi8w>
- <xmx:RVhCZgPv2LuWYDJOOaUYX0HqxlXRbeLhlMvZMVc4WNLz8iimiKAXdw>
- <xmx:RVhCZqm86HuTCJaoPmcmaHW3lTfkOzYLHuzxsFcrcgykX9VSrgbjVfgD>
+X-ME-Proxy: <xmx:R1hCZh02CME0tE6pYjjige8tjrtbZD9D_FzoEiGwkXrR1GHEx3Elyw>
+ <xmx:R1hCZrHcHNbOn8slZfYrkOIXY3JODt-I7U4wfwQYaIbExmA4hZMYdA>
+ <xmx:R1hCZq-Zo4rmIvb85piEfuwrx0mVAcFnvbPejn5zfRrGWQfg0YEt_w>
+ <xmx:R1hCZgk7reUO2xSsGCF1Ng8VFwcU4XY0dOoF9JgClT4iCpZ-Aiom5Q>
+ <xmx:R1hCZj_9p4c7hSqlpSLdYx0mhG0pEdP5e7aMwo3wEkqwGR8KAP5JruBg>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 13 May 2024 14:13:24 -0400 (EDT)
+ 13 May 2024 14:13:25 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Mon, 13 May 2024 19:13:07 +0100
-Subject: [PATCH 10/13] clk: boston: Allow to get regmap from parent device
+Date: Mon, 13 May 2024 19:13:08 +0100
+Subject: [PATCH 11/13] dts/upstream: Add Makefile for MIPS
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240513-boston-v1-10-fac96938417e@flygoat.com>
+Message-Id: <20240513-boston-v1-11-fac96938417e@flygoat.com>
 References: <20240513-boston-v1-0-fac96938417e@flygoat.com>
 In-Reply-To: <20240513-boston-v1-0-fac96938417e@flygoat.com>
 To: u-boot@lists.denx.de
@@ -92,13 +92,13 @@ Cc: Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
  Sumit Garg <sumit.garg@linaro.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1326;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=700;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=DfqmG+aARBsvQ0h3NuFP+96dkFMiCYO7T5+Q/H3qFVo=;
- b=owGbwMvMwCHmXMhTe71c8zDjabUkhjSnCOMUrvVPX/cnGjAUvZY+z26urXKBs/JjnN6Kug+1g
- olHn0d3lLIwiHEwyIopsoQIKPVtaLy44PqDrD8wc1iZQIYwcHEKwEQmcDAyzEj+IiSxdIJw/+wJ
- 0Wvyb05gquDLunwsqS/gRNuzj1Un9BkZPniuld6g/XjjbqMp/lJlDEYf5vWt1rU5u9XNS25ppks
- NAwA=
+ bh=C8gD7IB7KO/1v73B7QkR1vu8asFECiTxJxXrxkTJ1W4=;
+ b=owGbwMvMwCHmXMhTe71c8zDjabUkhjSnCOO5jMfScqate2gXsOrhaaV9kvmpETsvma78bbhx8
+ Z637vxOHaUsDGIcDLJiiiwhAkp9GxovLrj+IOsPzBxWJpAhDFycAjCRfw8Y/vv3bb9leEjG/3gq
+ WxrvrL93G2b15/+SnH0my6/7imhdQwzDP7X/lw/syj2Wb+T0qVbHp0ajtjT2ilVQlWi7l5v3A+u
+ NbAA=
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-Mailman-Approved-At: Mon, 13 May 2024 20:17:26 +0200
@@ -118,47 +118,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In upstream devicetree, clk_boston is a child of syscon node
-and there is no "regmap" property for clk_boston node.
-
-Try to check parent device first to look for syscon.
+It is required to make OF_UPSTREAM work.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- drivers/clk/clk_boston.c | 15 ++++++++++-----
- 1 file changed, 10 insertions(+), 5 deletions(-)
+ dts/upstream/src/mips/Makefile | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-diff --git a/drivers/clk/clk_boston.c b/drivers/clk/clk_boston.c
-index 030ff7cc58ec..2e584ed867d5 100644
---- a/drivers/clk/clk_boston.c
-+++ b/drivers/clk/clk_boston.c
-@@ -64,11 +64,15 @@ static int clk_boston_of_to_plat(struct udevice *dev)
- 	struct udevice *syscon;
- 	int err;
- 
--	err = uclass_get_device_by_phandle(UCLASS_SYSCON, dev,
--					   "regmap", &syscon);
--	if (err) {
--		pr_err("unable to find syscon device\n");
--		return err;
-+	if (device_get_uclass_id(dev->parent) == UCLASS_SYSCON) {
-+		syscon = dev->parent;
-+	} else {
-+		err = uclass_get_device_by_phandle(UCLASS_SYSCON, dev,
-+						   "regmap", &syscon);
-+		if (err) {
-+			pr_err("unable to find syscon device\n");
-+			return err;
-+		}
- 	}
- 
- 	state->regmap = syscon_get_regmap(syscon);
-@@ -94,4 +98,5 @@ U_BOOT_DRIVER(clk_boston) = {
- 	.of_to_plat = clk_boston_of_to_plat,
- 	.plat_auto	= sizeof(struct clk_boston),
- 	.ops = &clk_boston_ops,
-+	.flags = DM_FLAG_PRE_RELOC,
- };
+diff --git a/dts/upstream/src/mips/Makefile b/dts/upstream/src/mips/Makefile
+new file mode 100644
+index 000000000000..9a8f6aa35846
+--- /dev/null
++++ b/dts/upstream/src/mips/Makefile
+@@ -0,0 +1,14 @@
++# SPDX-License-Identifier: GPL-2.0+
++
++include $(srctree)/scripts/Makefile.dts
++
++targets += $(dtb-y)
++
++# Add any required device tree compiler flags here
++DTC_FLAGS += -a 0x8
++
++PHONY += dtbs
++dtbs: $(addprefix $(obj)/, $(dtb-y))
++	@:
++
++clean-files := */*.dtb */*.dtbo
 
 -- 
 2.34.1
