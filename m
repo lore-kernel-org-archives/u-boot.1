@@ -4,57 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD542C25B10
-	for <u-boot@archiver.kernel.org>; Mon, 13 May 2024 20:57:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9B37C25B78
+	for <u-boot@archiver.kernel.org>; Mon, 13 May 2024 23:15:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DEB3887D46;
-	Mon, 13 May 2024 22:56:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 0328987B35;
+	Tue, 14 May 2024 01:15:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="iTLPWdrV";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 9AACA8829E; Mon, 13 May 2024 22:56:45 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1715642138;
+	bh=S2yZDNrp6AJXXdKEmou2ws69uome7ZJYqyupIsgXriM=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=vA0cnuTvuMkZCxmcymNufU4mpm+Qpp8JCKrsqq8H2lBvOTrLnN7VPJe0XH4hyf8YR
+	 1TjeCZLglcCZWbh51iyKuMADgaIDrqDmwjVntFkWtK/pseeg2k3hxWFkMJcuHq443Q
+	 cqPU81gNbyAJAfNQzWxa+TWZcYa/kL0nCNxBC1tKGtjrVzt/QEoucAL9xrg27YwwWo
+	 mKaVA0DUOpl1ju8heC15REMvSeFie8kRbO96tPYWj5yNt6L3LRRu97zWOnedtHjjDK
+	 NmBl5oWLL/K9buY3igaq3sCZejB4NIvO4TfhedRJwDtv40mNqzllAM7EvPMsA+R1Zc
+	 lK0YfH4Fk8UUg==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5F6488280
- for <u-boot@lists.denx.de>; Mon, 13 May 2024 22:56:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mwalle@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 7546D60F82;
- Mon, 13 May 2024 20:56:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D6803C2BD11;
- Mon, 13 May 2024 20:56:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1715633802;
- bh=k64/xBc/spU8kAXnkJ4y7tvyRQBRv6l0Mf1xM3dADBI=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=iTLPWdrVj3oQ7qcLg4ao0gb9wXgR8FkjuZxZaFtdmHVFn688WOKWt6vTMoMWrushP
- CZ8DDApleQdJ12R3jjyltS206UsONH31pe7EHnOzWTdAv3D/5kSTzkjapACCmzOoVc
- CB/mpQXDmkVQ93YXzYqfaGLYJcVmNiMEqDRCzWpjQOXUdQ1uI8pgYMhAdbmk1ML6p1
- l/hSEXtiOjTBKf1STbREbh28qbFtevVnAYtqli6UNdcFA6Wb0HZCtxF7Ws9rop5Em+
- Bd3mYpQ4Otp1hQ5kv+HbXIm7fjHxVSV8Gd7q6US/4YcBj9Zx/eLuJTeGTmpqMvS6eD
- Hu0LKqBVMHM3g==
-From: Michael Walle <mwalle@kernel.org>
-To: Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>
-Cc: Samuel Holland <samuel@sholland.org>, u-boot@lists.denx.de,
- Michael Walle <mwalle@kernel.org>
-Subject: [PATCH 2/2] net: sun8i_emac: add support for the V3s
-Date: Mon, 13 May 2024 22:56:09 +0200
-Message-Id: <20240513205609.1872861-3-mwalle@kernel.org>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240513205609.1872861-1-mwalle@kernel.org>
-References: <20240513205609.1872861-1-mwalle@kernel.org>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 1976587D33;
+ Tue, 14 May 2024 01:15:35 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1715642137;
+ bh=S2yZDNrp6AJXXdKEmou2ws69uome7ZJYqyupIsgXriM=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=edm0doT2Xq68SqJpBDqN/GrA4c/l7MYoApn2G9gQhR/yqsBupxUhM7qXsjVy4jQHx
+ qc54kw/2ECfSQ/foENFRLUWpR0dc+SAq9SZ8fTc8Oeie//uIou+hwSmj6gVwZ2D8cw
+ BH5N9RD3G7ZufjPIcKdId75nZMJJUS8vmVBZXYogpvdbgGbhSbxtSgVfUiHvDStARH
+ URszCCkyO2r1IwdxurXPmvFoQqTYpCHy7kZ6GIVmqrHqeXAewdMdw7wWDRz0NTCURY
+ ORGB6mtdpkk1eC8JXLftW8Tkk2cSWHoEGWIalEtl/W/eYThNeOiMShtysL0dWDoxjp
+ jizcWzvZSPp0A==
+Message-ID: <c0704b40-51e2-4f35-b062-ceeaee1b2986@denx.de>
+Date: Tue, 14 May 2024 01:02:53 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] mmc: allow use of hardware partition names for mmc
+ partconf
+To: Tim Harvey <tharvey@gateworks.com>, Ulf Hansson <ulf.hansson@linaro.org>, 
+ Avri Altman <avri.altman@wdc.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Fabio Estevam <festevam@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ u-boot@lists.denx.de, Dragan Simic <dsimic@manjaro.org>
+References: <20240427001157.1460302-1-tharvey@gateworks.com>
+ <495f60d6-6ff2-4c53-8b2c-867b5ca05993@denx.de>
+ <CAJ+vNU0R5iTgS2_C_OV2VYh5fQnyPV-Lw003CTJAkp1Q6Qdedg@mail.gmail.com>
+ <ef623aca-ead7-42dc-bacf-6cb51bdfba41@denx.de>
+ <CAJ+vNU3bOrBHf4nQeb=1_EfrcsjcjYncQN3Od2=O93yuVQc2FA@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CAJ+vNU3bOrBHf4nQeb=1_EfrcsjcjYncQN3Od2=O93yuVQc2FA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -72,39 +76,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the compatible string for the emac found on the V3s SoC. The SoC
-only supports the internal PHY. There are no (R)MII signals on any pins.
+On 5/13/24 10:52 PM, Tim Harvey wrote:
+> On Mon, Apr 29, 2024 at 1:51 PM Marek Vasut <marex@denx.de> wrote:
+>>
+>> On 4/29/24 6:48 PM, Tim Harvey wrote:
+>>> On Sat, Apr 27, 2024 at 4:20 PM Marek Vasut <marex@denx.de> wrote:
+>>>>
+>>>> On 4/27/24 2:11 AM, Tim Harvey wrote:
+>>>>
+>>>> [...]
+>>>>
+>>>>> diff --git a/include/mmc.h b/include/mmc.h
+>>>>> index 4b8327f1f93b..7243bd761202 100644
+>>>>> --- a/include/mmc.h
+>>>>> +++ b/include/mmc.h
+>>>>> @@ -381,6 +381,21 @@ enum mmc_voltage {
+>>>>>     #define MMC_TIMING_MMC_HS200        9
+>>>>>     #define MMC_TIMING_MMC_HS400        10
+>>>>>
+>>>>> +/* emmc hardware partition values */
+>>>>> +enum emmc_hwpart {
+>>>>> +     EMMC_HWPART_DEFAULT = 0,
+>>>>
+>>>> One more thing ... eMMC hardware partition 0 and 7 are both referring to
+>>>> USER HW partition. Have a look at the git log, there have been patches
+>>>> which handled this case in the MMC subsystem from about a year ago.
+>>>
+>>> Hi Marek,
+>>>
+>>> I can't find what you are referring to. I assume you are talking about
+>>> calling the first name something other than 'user' as technically it's
+>>> not (but it gets treated as user).
+>>>
+>>> Can you find the commit or discussion you are thinking about?
+>>
+>> It seems this whole thing is much older:
+>>
+>> 7dbe63bc950b ("SPL: Add CONFIG_SUPPORT_EMMC_BOOT support to
+>> CONFIG_SPL_FRAMEWORK")
+>>
+>> +                * We need to check what the partition is configured to.
+>> +                * 1 and 2 match up to boot0 / boot1 and 7 is user data
+>> +                * which is the first physical partition (0).
+>> +                */
+>> +               int part = (mmc->part_config >> 3) & PART_ACCESS_MASK;
+>> +
+>> +               if (part == 7)
+>> +                       part = 0;
+> 
+> Hi Marek,
 
-Signed-off-by: Michael Walle <mwalle@kernel.org>
----
- drivers/net/sun8i_emac.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+Hello Tim,
 
-diff --git a/drivers/net/sun8i_emac.c b/drivers/net/sun8i_emac.c
-index 8bff4fe9a9e..94bcd40acb8 100644
---- a/drivers/net/sun8i_emac.c
-+++ b/drivers/net/sun8i_emac.c
-@@ -893,6 +893,11 @@ static const struct emac_variant emac_variant_r40 = {
- 	.syscon_offset		= 0x164,
- };
- 
-+static const struct emac_variant emac_variant_v3s = {
-+	.syscon_offset		= 0x30,
-+	.soc_has_internal_phy	= true,
-+};
-+
- static const struct emac_variant emac_variant_a64 = {
- 	.syscon_offset		= 0x30,
- 	.support_rmii		= true,
-@@ -910,6 +915,8 @@ static const struct udevice_id sun8i_emac_eth_ids[] = {
- 	  .data = (ulong)&emac_variant_h3 },
- 	{ .compatible = "allwinner,sun8i-r40-gmac",
- 	  .data = (ulong)&emac_variant_r40 },
-+	{ .compatible = "allwinner,sun8i-v3s-emac",
-+	  .data = (ulong)&emac_variant_v3s },
- 	{ .compatible = "allwinner,sun50i-a64-emac",
- 	  .data = (ulong)&emac_variant_a64 },
- 	{ .compatible = "allwinner,sun50i-h6-emac",
--- 
-2.39.2
+> Sorry, I haven't been able to work on U-Boot for the past week or so
+> and am just getting back to this.
 
+No worries.
+
+> I'm glad you pointed this out as it made me aware that there is a bit
+> of a mixing of eMMC PARTITION_CONFIG (Ext CSD 179) fields
+> BOOT_PARTITION_ENABLE and PARTITION_ACCESS in U-Boot currently.
+> 
+> I'm going to add an enumerated type for each and update the various
+> places where a 'conversion' as above is done but I'm still a bit torn
+> on naming conventions.
+> 
+> Consider the following:
+> - the eMMC spec refers to boot partitions and gp partitions as 1 based
+> - the Linux kernel device names for these are 0 based
+> - U-Boot does not currently refer to the boot devices by names but
+> does currently refer to the gp's by names using 1-based names (the
+> 'mmc hwpartition' command)
+> 
+> Personally I would like to name the boot partitions 'boot0' and
+> 'boot1' to match Linux but I think I should name the gp's
+> 'gp1'...'gp4' to be backward compatible with the 'mmc hwpartition'
+> command.
+> 
+> What do you think?
+
+I agree.
+
+Maybe you could also check this with Ulf (Linux MMC maintainer) and Avri 
+(mmc-utils), both on To:, so we would be consistent and in sync ?
