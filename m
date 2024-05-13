@@ -4,87 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67DC6C25B10
-	for <u-boot@archiver.kernel.org>; Mon, 13 May 2024 18:17:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E63DCC25B10
+	for <u-boot@archiver.kernel.org>; Mon, 13 May 2024 18:17:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FECE881BC;
-	Mon, 13 May 2024 20:17:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0A3D788303;
+	Mon, 13 May 2024 20:17:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="FAE6v39m";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="aPj37DL8";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="EHYTLUiW";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="JI+JH2/S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B2858830F; Mon, 13 May 2024 20:13:11 +0200 (CEST)
-Received: from fhigh2-smtp.messagingengine.com
- (fhigh2-smtp.messagingengine.com [103.168.172.153])
+ id 684D787D08; Mon, 13 May 2024 20:13:13 +0200 (CEST)
+Received: from fout6-smtp.messagingengine.com (fout6-smtp.messagingengine.com
+ [103.168.172.149])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 183F887D08
- for <u-boot@lists.denx.de>; Mon, 13 May 2024 20:13:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C5C6088303
+ for <u-boot@lists.denx.de>; Mon, 13 May 2024 20:13:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailfhigh.nyi.internal (Postfix) with ESMTP id D65651140118;
- Mon, 13 May 2024 14:13:07 -0400 (EDT)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+ by mailfout.nyi.internal (Postfix) with ESMTP id A40E713803BD;
+ Mon, 13 May 2024 14:13:09 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute5.internal (MEProxy); Mon, 13 May 2024 14:13:07 -0400
+ by compute4.internal (MEProxy); Mon, 13 May 2024 14:13:09 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:message-id:mime-version:reply-to
- :subject:subject:to:to; s=fm1; t=1715623987; x=1715710387; bh=7s
- MqLPVaxj0touXlN17Ov6NosGmWiAW35u8vT/HRAEs=; b=FAE6v39m+ZTKsiVvGE
- InYFogheNptzC1PPaivGIzn3NY1fhHsN0mOCjkoRsKscXQzgOnRTND/2M6Gnd+CU
- /qsrP7sM/dIAAzjcwyaFdv6pztykq+xET7Vw5dG0o1NrjsW3//txkmNq5ffilRcI
- sNNF8FlEW7u5Cgh3cBVTcwTqnO2vXWqSV7Mij2bT5VauEb9Xu4cuagbcOR7Dhm1A
- 1hZPB974KGxUdath3ky/k3yK1FGlfvHuvHiCQ79H4etZkQvaEakMUnT2t5ptVqVF
- qkTHV7eQrU68U/IDA8KNY7owKsBJ0xu7qzPCZeis8aVpxlLqn3bQRKqXlbRTe9r3
- wMmw==
+ :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to; s=fm1; t=1715623989;
+ x=1715710389; bh=FHOkLkDoexiMQ/U2G1EFu1LKxC7hFW6/lzB9xBeafnY=; b=
+ EHYTLUiWn6YZljpiLOuZzgxeMPSetJNJgxT6fX8BpIgQhwN9sETab7D3GBq+9Pya
+ x5xAYN0s9+PA4xk2/IuIZzQD8xZEEvOiEHHt99U+RPsxPkaw0WYdZNOQe/Auq1sP
+ Rcs32hHOTqb1QMqo/xXy7tfzkqxKcsdLtQP24674/W2DRaXXBGWerk9G7tx+uEnq
+ YkdaPVhNGmjhRJkvVhSjfFMJ9kL4FmrQ+obbULF4hXga1W34Joc6Gs5fXX3Oi7HB
+ /ELfVm9YH0K6beYIJGfDE2D7U+LjFyq2alvjHIuhv0JJt4uhlI0DR0qHOtcydro0
+ 5ibQPiWFLykGziXqBCCoRg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:message-id:mime-version:reply-to:subject
- :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
- :x-sasl-enc; s=fm3; t=1715623987; x=1715710387; bh=7sMqLPVaxj0to
- uXlN17Ov6NosGmWiAW35u8vT/HRAEs=; b=aPj37DL8Kg9b98SD6ADl6B+gocv3F
- ID7WO3/sd13W5QcLJZCs4eh9VNK8eZXbFyGfL/YsOmannxuihLGIhC2x8lLNGZem
- LblR2S5f/uInbxCcf042eCEJnjXWC4x4sfrUxjMmDpQflLAMom2T1AUbSTTS0ro6
- eyDt0m3FsVbL8Ez6Gowrdwj5DqkujF4f3oMtKVe3q3tBucgYciVNXkGVpFjdnHGQ
- 3XjGBLEGZ5kiGDrHOs4wpv0uv5IlspDOnrN/8O35uw/hBrcrJ9p1FghIP0I1guqI
- sNKAmH3kHIHj/kPrIlgOe5UjlUBjJ28pZbr7HEpIYq34zHOnQ7yty44MQ==
-X-ME-Sender: <xms:M1hCZgTgiO6-NjpbQBVcXxPupYs-QFGSmR4LQhXECVV5f6fH7qxR6w>
- <xme:M1hCZtwVMc2L_ZsPlyPXsbcijJdyr62BPdPGWms35OFV-WGHOPfTLNFEYX5Hl0LaJ
- _2H5fbbcO21cybFnmI>
-X-ME-Received: <xmr:M1hCZt1Oul20qxf2Zf4xPMtcjtadHbYpW9j4QXAIKloRPoE2NBDTYoI>
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715623989; x=
+ 1715710389; bh=FHOkLkDoexiMQ/U2G1EFu1LKxC7hFW6/lzB9xBeafnY=; b=J
+ I+JH2/SjOnKAvg6ptdruBg1gKX6icO+us+gKH2ofQz6WaOUDvTck79xC1EKyxHp7
+ 0r+yBrEJaKeofm+pJ9fRZiFR1tIFOABb1xDC/QQi0jwLrBGAwRBfqa/nZCs5zbD0
+ 94GGPd7z8iJcg9KhcRxnyCB4qMMzhrK/F0p43r3me0oPc/qvYGDjqClqcp1t+LCB
+ Kx+/zCGjEDR3oES/DaZq8lB3U5uBl9ojGME0sNLJDijVMWWUCGXS+BYlsAi0Q3lF
+ ODvTad/nyCklY3PDSPDD3+2zIisgMC49xr6QPLlTJOACYejVEh21ZXCXO7GW7eDt
+ ZHxODGyxW9D+GeODSg01w==
+X-ME-Sender: <xms:NVhCZsRL-n3p6pU_qCnU3BBVvCDvHT3abe_Sz9k1OLfwy__6Qj_IMw>
+ <xme:NVhCZpx2SpxfWf5UqA8CE7VZ-xUaDJVD-AEK-9RsYjORQv0dyqAOtGjoHvsBOi1ex
+ RuN-PqHZ4gqbEdDnrA>
+X-ME-Received: <xmr:NVhCZp0AdQlok5Csm-NvcghmzywsIycfKz_gVxFTlUBeNnmpeD4bvrs>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdeggedguddvtdcutefuodetggdotefrod
  ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
  necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
- enucfjughrpefhufffkfggtgfgvfevofesthejredtredtjeenucfhrhhomheplfhirgig
- uhhnucgjrghnghcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhmqeenuc
- ggtffrrghtthgvrhhnpedufffffffhueehvefhgfelveekueegteefgeeiieejheefkeeh
- keevudevieegueenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfh
- hrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
-X-ME-Proxy: <xmx:M1hCZkCOzek7Qqchv0k9yMQ4BA6g6DqHvQY03JN9gOXDJi1dj1RycA>
- <xmx:M1hCZpjVlhlBabf42D9BER1gh1RO5qgSrEVEma5P4R99ZvvRkTC4Ow>
- <xmx:M1hCZgoeJqKNuEan3cscb3Fg9NF1DBGTIm-jx5ZPtGHMCfT9_ZgPqg>
- <xmx:M1hCZshXDRnXx966rGhA-VUfVuBcZw5X5wnN9EaE2uXtmxtPAFM6uw>
- <xmx:M1hCZub9PQZ3QxoHfqeBsAaZFkvSLxjHYVW6PEyHrOtg8rMNry4ygHQu>
+ enucfjughrpefhfffugggtgffkfhgjvfevofesthejredtredtjeenucfhrhhomheplfhi
+ rgiguhhnucgjrghnghcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhmqe
+ enucggtffrrghtthgvrhhnpedvkeeihfefveekueevteefleffkeegudeghfdtuddugefh
+ ueevgeffgedukeejleenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrih
+ hlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
+X-ME-Proxy: <xmx:NVhCZgC9_SBkecu36CoHF-mC1iUZlPpNxSUihJxeKTR-1bhpH9m6Ug>
+ <xmx:NVhCZlg9G3yT4q_itt5-GPXwafAbpuQ2Y8dUMRxkCscuHOnELbdTiw>
+ <xmx:NVhCZsrKvK7FiMkwV9GOTWqbnXnVn5uskuvWkg-2sQsum42Lc879fw>
+ <xmx:NVhCZohlaZUxp9sm660brd1nGT-Q2-TRSD1kX1hn5WE3tEqMqNaQpQ>
+ <xmx:NVhCZqbVqxXFIDkUJrLlwqe54G15j6I7uBQcPj_qc7lGPYOo7YKabqWB>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 13 May 2024 14:13:06 -0400 (EDT)
+ 13 May 2024 14:13:07 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Subject: [PATCH 00/13] MIPS: Boston: Various enhancements
-Date: Mon, 13 May 2024 19:12:57 +0100
-Message-Id: <20240513-boston-v1-0-fac96938417e@flygoat.com>
+Date: Mon, 13 May 2024 19:12:58 +0100
+Subject: [PATCH 01/13] pci: xilinx: Handle size of ecam region properly
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAClYQmYC/2WMQQrDIBAAvxL23C1qTKA99R8hh2jWZKHVokEag
- n+vzbXHGYY5IFFkSnBvDoiUOXHwFeSlAbtOfiHkuTIoobToZIsmpC141B25nmar5M1Bjd+RHH/
- O0TBWXrlmcT+/Wf7s3yJLFGiEUKSNbcn0D/fclzBtVxteMJZSvrDHkpqeAAAA
+Message-Id: <20240513-boston-v1-1-fac96938417e@flygoat.com>
+References: <20240513-boston-v1-0-fac96938417e@flygoat.com>
+In-Reply-To: <20240513-boston-v1-0-fac96938417e@flygoat.com>
 To: u-boot@lists.denx.de
 Cc: Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>, 
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
@@ -92,13 +92,13 @@ Cc: Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
  Sumit Garg <sumit.garg@linaro.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2782;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3688;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=nisqF0Ww/OvSVhzVZ3zZNUUMfcDbjCmXWYkg+tnGkRE=;
- b=owGbwMvMwCHmXMhTe71c8zDjabUkhjSnCONNasFhUzebp7gGqvBs36NwY20qw+ecp5X+AnzGl
- +quNW/tKGVhEONgkBVTZAkRUOrb0HhxwfUHWX9g5rAygQxh4OIUgIk8MmH4p+ZtkDDThSFFicte
- XyFJZkIUq7nPhasFZr9MGjZ9Ld4+iZFh61PeJDvj+GlFj3c86c3+456fse2D7f0thboOG+Y+7ot
- gBgA=
+ bh=8jtahATj+J0VxXyy7U3lsuyxhxEVDaJ4JLco4h9mYN8=;
+ b=owGbwMvMwCHmXMhTe71c8zDjabUkhjSnCGPL5JwrmrLlol7Wb796nOuPDzCUsIxkNGiatri41
+ SZSSKqjlIVBjINBVkyRJURAqW9D48UF1x9k/YGZw8oEMoSBi1MAJqL+gpGhk6liy2ORA4Lql25H
+ ls95+uTj0TKfD58ffN8gxj/vvSaPMiND82HfrFKRFbci7k8KZqyMzW/zndpcKZJkd2Xh152fXv3
+ nAAA=
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-Mailman-Approved-At: Mon, 13 May 2024 20:17:26 +0200
@@ -118,77 +118,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+Probe size of ecam from devicetree properly and cap accessible
+bus number accorading to ecam region size to ensure we don't go
+beyond hardware address space.
 
-This is a huge series which promoted MIPS/Boston target into a
-usable state, with fixes to drivers and general framework issues
-I found in this process.
-
-I also converted the target to OF_UPSTREAM.
-
-This target is covered by QEMU, to test on QEMU:
-```
-make boston64r6el_defconfig
-make
-qemu-system-mips64el -M boston -cpu I6500 -bios ./u-boot.bin -nographic
-```
-
-This is my first u-boot contribution, please kindly advise if you
-have any comments.
-
-Thanks
+Also disable all interrupts to ensure errors are handled silently.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
-Jiaxun Yang (13):
-      pci: xilinx: Handle size of ecam region properly
-      pci: auto: Reduce bridge mem alignment boundary for boston
-      pci: Enable PCI_MAP_SYSTEM_MEMORY when ARCH_MAP_SYSMEM is not set
-      ahci: DMA addressing fixes
-      ahci: dwc_ahsata: Generalize the driver
-      MIPS: Provide dummy acpi_table.h
-      MIPS: boston: Imply various options
-      MIPS: boston: Provide default env vars
-      syscon: Probe device first in syscon_get_regmap
-      clk: boston: Allow to get regmap from parent device
-      dts/upstream: Add Makefile for MIPS
-      MIPS: boston: Migrate to OF_UPSTREAM
-      mailmap: Update email for Paul Burton
+ drivers/pci/pcie_xilinx.c | 53 +++++++++++++++++++++++++++++++++++------------
+ 1 file changed, 40 insertions(+), 13 deletions(-)
 
- .mailmap                           |   3 +-
- arch/mips/Kconfig                  |  28 +++++
- arch/mips/dts/Makefile             |   1 -
- arch/mips/dts/boston-u-boot.dtsi   |  10 ++
- arch/mips/dts/img,boston.dts       | 222 -------------------------------------
- arch/mips/include/asm/acpi_table.h |  10 ++
- board/imgtec/boston/Kconfig        |   4 +
- board/imgtec/boston/MAINTAINERS    |   3 +-
- board/imgtec/boston/boston.env     |   9 ++
- board/imgtec/malta/MAINTAINERS     |   2 +-
- configs/boston32r2_defconfig       |   2 +-
- configs/boston32r2el_defconfig     |   2 +-
- configs/boston32r6_defconfig       |   2 +-
- configs/boston32r6el_defconfig     |   2 +-
- configs/boston64r2_defconfig       |   2 +-
- configs/boston64r2el_defconfig     |   2 +-
- configs/boston64r6_defconfig       |   2 +-
- configs/boston64r6el_defconfig     |   2 +-
- drivers/ata/ahci.c                 |  34 +++---
- drivers/ata/dwc_ahsata.c           |  82 +++++++++-----
- drivers/ata/dwc_ahsata_priv.h      |   2 -
- drivers/clk/clk_boston.c           |  15 ++-
- drivers/core/syscon-uclass.c       |   4 +
- drivers/pci/Kconfig                |  10 ++
- drivers/pci/pci_auto.c             |  16 +--
- drivers/pci/pcie_xilinx.c          |  53 ++++++---
- dts/upstream/src/mips/Makefile     |  14 +++
- include/ahci.h                     |   4 +-
- 28 files changed, 234 insertions(+), 308 deletions(-)
----
-base-commit: c8ffd1356d42223cbb8c86280a083cc3c93e6426
-change-id: 20240513-boston-45ef6edc219f
+diff --git a/drivers/pci/pcie_xilinx.c b/drivers/pci/pcie_xilinx.c
+index a674ab04beee..63058e8e7c5d 100644
+--- a/drivers/pci/pcie_xilinx.c
++++ b/drivers/pci/pcie_xilinx.c
+@@ -18,14 +18,19 @@
+  */
+ struct xilinx_pcie {
+ 	void *cfg_base;
++	pci_size_t size;
++	int first_busno;
+ };
+ 
+ /* Register definitions */
+-#define XILINX_PCIE_REG_PSCR		0x144
+-#define XILINX_PCIE_REG_PSCR_LNKUP	BIT(11)
+-#define XILINX_PCIE_REG_RPSC		0x148
+-#define XILINX_PCIE_REG_RPSC_BEN	BIT(0)
+-
++#define XILINX_PCIE_REG_BRIDGE_INFO			0x130
++#define  XILINX_PCIE_REG_BRIDGE_INFO_ECAMSZ_SHIFT	16
++#define  XILINX_PCIE_REG_BRIDGE_INFO_ECAMSZ_MASK	(0x7 << 16)
++#define XILINX_PCIE_REG_INT_MASK			0x13c
++#define XILINX_PCIE_REG_PSCR				0x144
++#define  XILINX_PCIE_REG_PSCR_LNKUP			BIT(11)
++#define XILINX_PCIE_REG_RPSC				0x148
++#define  XILINX_PCIE_REG_RPSC_BEN			BIT(0)
+ /**
+  * pcie_xilinx_link_up() - Check whether the PCIe link is up
+  * @pcie: Pointer to the PCI controller state
+@@ -61,14 +66,18 @@ static int pcie_xilinx_config_address(const struct udevice *udev, pci_dev_t bdf,
+ 				      uint offset, void **paddress)
+ {
+ 	struct xilinx_pcie *pcie = dev_get_priv(udev);
+-	unsigned int bus = PCI_BUS(bdf);
++	unsigned int bus = PCI_BUS(bdf) - pcie->first_busno;
+ 	unsigned int dev = PCI_DEV(bdf);
+ 	unsigned int func = PCI_FUNC(bdf);
++	int num_buses = DIV_ROUND_UP(pcie->size, 1 << 16);
+ 	void *addr;
+ 
+ 	if ((bus > 0) && !pcie_xilinx_link_up(pcie))
+ 		return -ENODEV;
+ 
++	if (bus > num_buses)
++		return -ENODEV;
++
+ 	/*
+ 	 * Busses 0 (host-PCIe bridge) & 1 (its immediate child) are
+ 	 * limited to a single device each.
+@@ -142,20 +151,37 @@ static int pcie_xilinx_of_to_plat(struct udevice *dev)
+ 	struct xilinx_pcie *pcie = dev_get_priv(dev);
+ 	fdt_addr_t addr;
+ 	fdt_size_t size;
+-	u32 rpsc;
+ 
+ 	addr = dev_read_addr_size(dev, &size);
+ 	if (addr == FDT_ADDR_T_NONE)
+ 		return -EINVAL;
+ 
+-	pcie->cfg_base = devm_ioremap(dev, addr, size);
+-	if (IS_ERR(pcie->cfg_base))
+-		return PTR_ERR(pcie->cfg_base);
++	pcie->cfg_base = map_physmem(addr, size, MAP_NOCACHE);
++	if (!pcie->cfg_base)
++		return -ENOMEM;
++	pcie->size = size;
++	return 0;
++}
+ 
+-	/* Enable the Bridge enable bit */
+-	rpsc = __raw_readl(pcie->cfg_base + XILINX_PCIE_REG_RPSC);
++static int pci_xilinx_probe(struct udevice *dev)
++{
++	struct xilinx_pcie *pcie = dev_get_priv(dev);
++	u32 rpsc;
++	int num_buses = DIV_ROUND_UP(pcie->size, 1 << 16);
++
++	pcie->first_busno = dev_seq(dev);
++
++	/* Disable all interrupts */
++	writel(0, pcie->cfg_base + XILINX_PCIE_REG_INT_MASK);
++
++	/* Enable the bridge */
++	rpsc = readl(pcie->cfg_base + XILINX_PCIE_REG_RPSC);
+ 	rpsc |= XILINX_PCIE_REG_RPSC_BEN;
+-	__raw_writel(rpsc, pcie->cfg_base + XILINX_PCIE_REG_RPSC);
++	writel(rpsc, pcie->cfg_base + XILINX_PCIE_REG_RPSC);
++
++	/* Enable access to all possible subordinate buses */
++	writel((0 << 0) | (1 << 8) | (num_buses << 16),
++	       pcie->cfg_base + PCI_PRIMARY_BUS);
+ 
+ 	return 0;
+ }
+@@ -176,5 +202,6 @@ U_BOOT_DRIVER(pcie_xilinx) = {
+ 	.of_match		= pcie_xilinx_ids,
+ 	.ops			= &pcie_xilinx_ops,
+ 	.of_to_plat	= pcie_xilinx_of_to_plat,
++	.probe			= pci_xilinx_probe,
+ 	.priv_auto	= sizeof(struct xilinx_pcie),
+ };
 
-Best regards,
 -- 
-Jiaxun Yang <jiaxun.yang@flygoat.com>
+2.34.1
 
