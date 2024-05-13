@@ -4,85 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08161C25B10
-	for <u-boot@archiver.kernel.org>; Mon, 13 May 2024 08:02:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12D30C25B10
+	for <u-boot@archiver.kernel.org>; Mon, 13 May 2024 08:27:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA79887F13;
-	Mon, 13 May 2024 10:02:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=smile.fr
+	by phobos.denx.de (Postfix) with ESMTP id 539EC8815E;
+	Mon, 13 May 2024 10:27:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=smile-fr.20230601.gappssmtp.com header.i=@smile-fr.20230601.gappssmtp.com header.b="b7Epn+y9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fOnoYy3W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D888B87E74; Mon, 13 May 2024 10:02:32 +0200 (CEST)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
+ id EBAFA87F13; Mon, 13 May 2024 10:27:20 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2075F8815E
- for <u-boot@lists.denx.de>; Mon, 13 May 2024 10:02:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 90859881BC
+ for <u-boot@lists.denx.de>; Mon, 13 May 2024 10:27:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=smile.fr
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yoann.congal@smile.fr
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2e4b90b03a9so45562391fa.1
- for <u-boot@lists.denx.de>; Mon, 13 May 2024 01:02:29 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-41fc2f7fbb5so21389165e9.1
+ for <u-boot@lists.denx.de>; Mon, 13 May 2024 01:27:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1715587348; x=1716192148;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:organization:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=pyaVCcdRBkJ82BCSiwgj4NGZrzyAXi2thL0Mspjp5qA=;
- b=b7Epn+y93ECUDjOCIJ+/LCQsr7ClTbSm0hOj9IH7Ra0nYLXXUxJimueDSi4doZbV1N
- VuZ0TLDXoiKweFHf1kQX7tF5kLwYXuymUL3NC9MAnop4kFNjMngvR+4BW0wMyUVntYQ1
- WmZr2LTk0LSfXw/ygnvKEUje1myLoyH676GIc7GnyCLo6KUvueDL+yJ0iy/t+XN9UlgR
- KAXVUht8XizLxTFU5qdueh9uyFlzlpH5kVU0eZHWp2JUtob3OiR9JIs4BGsHfXaXGHn8
- LU9cM9ctyx779/aNY16nxzz59iebrdUn7xrpZ0FJ6oDcHOvcRYTFlYk5nXPFMdAbnhxl
- MUxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715587348; x=1716192148;
- h=content-transfer-encoding:in-reply-to:organization:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1715588836; x=1716193636; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pyaVCcdRBkJ82BCSiwgj4NGZrzyAXi2thL0Mspjp5qA=;
- b=D2DhUUbWeANpONGVQj8x+yEQx5MYRk280zRYVa9qgP14nC7PiBbZZT+t6G0Zvnlzmn
- l02Uq6bp3UyAPkktpj8+x/TjRV9pVVzr+H7JE68udXdEyYvfwoJ9inDxU3Add/KX/GRZ
- TfIWFXwFm6uPCg6Sot8S6MUdbuJ/Cjgq971VQ679lbdRQcs7x7sl7bV6zOSkfgSFrGhp
- pA59PeHpTD5eOgAtAjuo1DzqAQJVME4suZWWvJ25naQk3f6oLb79pfR80vefLYhciC4u
- KKOKvZwq01NBRVOINJjW1DiywLiaWSwnBpycSkg+oLPcK2gCYz+724y5Y9mZlONi+IyT
- j3SA==
-X-Gm-Message-State: AOJu0YzPyeYAzR7CbupkR3aoYgZC13uBkwh0GBz04pAGLZQzaXW6uIQG
- m52PHKACuS4QaDpievYTarAWjxEviFukvgXaSwYWLFSH3kMutt+0Ew6QuPMAxIQ=
-X-Google-Smtp-Source: AGHT+IFjLA1ZQKFp+ALnhO/iG8Siq2eY+/JEOXk86Z+J1i5PKPhrDTThoTyfSXEaqZqw1lI0Ondcgw==
-X-Received: by 2002:a2e:8255:0:b0:2db:4f3f:55a7 with SMTP id
- 38308e7fff4ca-2e5204cc8d2mr52467601fa.45.1715587348256; 
- Mon, 13 May 2024 01:02:28 -0700 (PDT)
-Received: from [192.168.0.27] ([89.159.1.53]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3502bbbbe43sm10419644f8f.99.2024.05.13.01.02.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 13 May 2024 01:02:27 -0700 (PDT)
-Message-ID: <c106c17c-b5ac-4a3b-b730-2df5844faef2@smile.fr>
-Date: Mon, 13 May 2024 10:02:27 +0200
+ bh=xx1CKiicLVpLnXpopRBe+lp9kQLLwCDDUnfpZnNf52g=;
+ b=fOnoYy3WXFdpqzlCYoxOzcgJkEjXKzKtkc0G/Ulzsg6QPpcTqUwSWHNhfPr1AtAEOc
+ sgtOcrrsjo9vH7z/vFJRt2kBGhHRQbxSuKVtvQBtG2qxvjfJ4VQSC/joH3qYVB8VswHm
+ Mak6FssvfkAs/W24xFMD1w9xaVLOQovafDjYy0ju3p4o8z4cahgn7ORjYZz5kDITeJec
+ ZyQqjyFwsRqN+wif70q0HliBiysm7a3UDuznoXkxkIiqT2QQTUFvIkICZ540mMifFy4F
+ u1U2ZS8Hl9kzRGqWOHCGrgVxYcsqD9NAdPwfAdyFiKontcVpGDCOi3rCaW+vk2nU8HWe
+ OIhA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1715588836; x=1716193636;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=xx1CKiicLVpLnXpopRBe+lp9kQLLwCDDUnfpZnNf52g=;
+ b=WUOwQh2H3ce1W9+PiHKH/BKnlZjOi+laYWEA0pka4FcdbkVmkolqd34HoeDpPYZfUR
+ Isx7ooGmuBIJOzxNvdyvZIeiE3Lc5Gs9OTbBWCJ7Hvd8tnsllK8RFNIaRQt5/MlHH12z
+ dkBeyQBMAf4I9/C0Q550vm25XKhxNvK5oNZIBywFzW97YeRucRUWxRjexTQCmr575s5s
+ SOxHmjwEKAGHy0NkTHx80cyuao4i6KrCGON0uG6M6IJRqGMv6GsrnfT5S8jmVlCPYHSD
+ m+JEba7OYAR/S9yggSmJAep2FvpHGNkvyP1VrJAztPbELaEp1HaKkQUSlRiU4P8VWOek
+ gAyQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWLWyPivNpX1lnmpJbj4ZjULHcjJJHkLK/pIGNX8JdOg7/jlu7HkpEPuIn1hB9BiqUqTA5Xb8pUS8/PEqUgR1CH3NA+ew==
+X-Gm-Message-State: AOJu0YzquvAX7FD5092uC+vjv6sIkn5RVgqdrOmATR4P2vjtZ84xYrWn
+ KdNdInvE9lirbApUQF2xJ+8sgXRI/2fpDQOZOGlRk8t3koEybb3AB6w232gcOGU=
+X-Google-Smtp-Source: AGHT+IF5SfX2A7zBzBz/6lPJRBtTlT6r5g0i6OB9vbnqLnacJM8Szi9EIXtNOixoK9FxQEVpGUq7tA==
+X-Received: by 2002:adf:ed8d:0:b0:34d:7d04:7903 with SMTP id
+ ffacd0b85a97d-3504979ca69mr7972373f8f.6.1715588835982; 
+ Mon, 13 May 2024 01:27:15 -0700 (PDT)
+Received: from [10.91.0.157] ([149.14.240.163])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3502baacf52sm10640263f8f.87.2024.05.13.01.27.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 13 May 2024 01:27:15 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Marek Vasut <marex@denx.de>, Sam Day <me@samcday.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+In-Reply-To: <20240506-msm8916-hs-usb-clocks-v2-0-34f741b3a2ec@samcday.com>
+References: <20240506-msm8916-hs-usb-clocks-v2-0-34f741b3a2ec@samcday.com>
+Subject: Re: [PATCH v2 0/2] qcom: ehci: enable core + iface clocks
+Message-Id: <171558883489.3055487.8428613683652910908.b4-ty@linaro.org>
+Date: Mon, 13 May 2024 10:27:14 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] kconfig: default to zero if int/hex symbol lacks default
- property
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Masahiro Yamada <masahiroy@kernel.org>
-References: <20240505135353.1507200-1-yoann.congal@smile.fr>
- <20240506174332.GN2568172@bill-the-cat>
- <d7c4aee3-47f3-401e-a66c-642ec5995ad1@smile.fr>
- <20240507172359.GX2568172@bill-the-cat>
-Content-Language: en-US
-From: Yoann Congal <yoann.congal@smile.fr>
-Organization: Smile ECS
-In-Reply-To: <20240507172359.GX2568172@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14-dev
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,110 +97,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le 07/05/2024 à 19:23, Tom Rini a écrit :
-> On Tue, May 07, 2024 at 09:17:46AM +0200, Yoann Congal wrote:
->> Le 06/05/2024 à 19:43, Tom Rini a écrit :
->>> On Sun, May 05, 2024 at 03:53:53PM +0200, Yoann Congal wrote:
->>>
->>>> From: Masahiro Yamada <masahiroy@kernel.org>
->>>>
->>>> This is a cherry-pick from the kernel commit:
->>>> 6262afa10ef7c (kconfig: default to zero if int/hex symbol lacks default property, 2023-11-26)
->>>>
->>>> When a default property is missing in an int or hex symbol, it defaults
->>>> to an empty string, which is not a valid symbol value.
->>>>
->>>> It results in an incorrect .config, and can also lead to an infinite
->>>> loop in scripting.
->>>>
->>>> Use "0" for int and "0x0" for hex as a default value.
->>>>
->>>> Signed-off-by: Masahiro Yamada <masahiroy@kernel.org>
->>>> Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
->>>>
->>>> Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
->>>> ---
->>>> Added context that was not in the upstream commit:
->>>> The infinite loop case happens with a configuration defined like this
->>>> (a hex config without a valid default value):
->>>>   config HEX_TEST
->>>>   	hex "Hex config without default"
->>>>
->>>> And using:
->>>>   $ make oldconfig < /dev/null
->>>>   scripts/kconfig/conf  --oldconfig Kconfig
->>>>   *
->>>>   * General setup
->>>>   *
->>>>
->>>>   Error in reading or end of file.
->>>>
->>>>   Error in reading or end of file.
->>>>   Hex config without default (HEX_TEST) [] (NEW)
->>>>
->>>>   Error in reading or end of file.
->>>>   Hex config without default (HEX_TEST) [] (NEW)
->>>>   # This loops forever
->>>>
->>>> NB: Scripted config manipulation often call make with /dev/null as
->>>> stdin (Yocto recipe, CI build, ...)
->>>>
->>>> This was discovered when working on Yocto bug:
->>>> https://bugzilla.yoctoproject.org/show_bug.cgi?id=14136
->>
->> Hi Tom,
->>
->>> I'm surprised this was accepted. In the past I've wanted to avoid this
->>> kind of change in Kconfig because while the empty string can be easily
->>> be checked in the code as "user didn't really configure this, do
->>> nothing" a value of zero is a valid option in these cases and so then in
->>> the code we need a bool symbol to decide if the hex/int symbol is set or
->>> not.
->>
->> For context (and what it's worth), before this patch was merged, I've tried to fix this problem with a patch of my own which only exited the config process when the infinite loop would start:
->> "[PATCH v4] kconfig: avoid an infinite loop in oldconfig/syncconfig" [0]
->> ... the v5 version was a bit more severe and exited as soon as an error was hit, it was then removed from -next because it triggered a build failure [1].
->>
->>> Today this is less of an issue than it used to be in U-Boot with
->>> everything CONFIG-related migrated to Kconfig and so there's no longer
->>> the question of if we missed migrating a file that defined the value but
->>> there's still places we have in the code where hex symbol is undefined
->>> is not the same thing as hex symbol is 0x0.
->>>
->>> Is there a specific use case you have for this in U-Boot? It's been a
->>> while, but it's also been cases of newly introduced symbols in Kconfig
->>> files with incorrect dependencies, where the infinite loop in kconfig
->>> happened, CI failed and we caught the problem.
->>
->> For a specific example, one can trigger this with CMD_PSTORE_MEM_ADDR like this (tested on today's master):
->>   make qemu_arm64_defconfig
->>   make menuconfig
->>    # activate CONFIG_CMD_PSTORE=y but forget to fill CMD_PSTORE_MEM_ADDR
->>   make < /dev/null # This emulates a Yocto/scripted/CI build and loops infinitely
->>
->> But, my more general use case is the Yocto dev trying to change the U-Boot (or any kconfig based software) config and accidentally trigger this.
->> In Yocto, what they will see is a do_configure task taking a very long time but they won't see the looping logs the detect the problem (This is caught later by filing the RAM and the build process is killed by OOM, or the disk run out of space filed multi-GB log files).
->>
->> I'm sadly aware that defining a default value for this kind of config (fixed addresses) is not really sensible but the build time infinite loop is not good either.
+
+On Mon, 06 May 2024 10:26:51 +0000, Sam Day wrote:
+> These clocks are mandatory, as can be seen in msm_hsusb driver in the
+> Linux kernel.
 > 
-> Exactly, but to me it's worse to cover up the build issue and introduce
-> a runtime issue instead. Something builds but then crashes at run time
-> is worse to me than builds fail / get stuck. Using your example,
-> CMD_PSTORE_MEM_ADDR depends on CMD_PSTORE and so if someone enables
-> CMD_PSTORE in a config fragment but doesn't define the address, the
-> build should not complete. Using 0x0 means that oops, now it fails to
-> work and might not be obvious why either.
+> The appropriate HS_USB AHB/SYSTEM clocks were added to gcc_apq8016.
 > 
-> I won't revert this change when in the future we're able to sync up with
-> the kernel again, but I'm not eager to bring this in by itself as it
-> feels like the wrong way to deal with the problem. Thanks for explaining
-> the history here.
+> Technically there's other adjacent SoC families that can use the
+> msm_hsusb driver with different clocks, but only msm8916/apq8016 are
+> currently making use of it so I think this change shouldn't break
+> anything elsewhere.
+> 
+> [...]
 
-Ok, I understand your position (I agree that runtime failure is bad)
+Applied, thanks!
 
-Thanks for looking at this. I need to find another solution.
+[1/2] clk/qcom: apq8016: add support for USB_HS clocks
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/9809ca4fae77
+[2/2] ehci: msm: bring up iface + core clocks
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/5c23a760473f
 
-Regards,
+Best regards,
 -- 
-Yoann Congal
-Smile ECS - Tech Expert
+Caleb Connolly <caleb.connolly@linaro.org>
+
