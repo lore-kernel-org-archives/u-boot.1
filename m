@@ -4,56 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E56AC25B78
-	for <u-boot@archiver.kernel.org>; Mon, 13 May 2024 14:24:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D10FC25B10
+	for <u-boot@archiver.kernel.org>; Mon, 13 May 2024 16:59:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73FD7882D8;
-	Mon, 13 May 2024 16:24:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 21F9B88054;
+	Mon, 13 May 2024 18:59:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1715610261;
-	bh=GPe/uHnfJz0kZB4N3D/KArwIFrEqmtdkwFA3DkcO6gM=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=sH7ssSI7WuoWhLgvNFRp8gVLMEQPpKJTVQ1OmXPMWAUeaBXKFOTiGou8uLuKP9zde
-	 L3P4ViefY8ayZSmyx1T5KJ4oBn2r0DnvMv/NGLciFdWBQtDAdnTt2VbvBKOCLWrx3Q
-	 QOWePN/35Q9if3EDdmkMPJs1XCnZCjO9M+njm5Iu6gDYu4kwIFu0ejCnxvusBP33UI
-	 b59TSJGIKb9pVIa/cnjX0zpAiE9pStWVavw4CPbA804nGaUHIf+/MxM/l+aElxA355
-	 M59Cc3u0IGjhF/3zPCA00WkdvOgjUn+aK0YZKpy7AAcS8Jfkdt3iIk5IH+CaWS4ml0
-	 h3NPdz+b9YDOA==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id D2AE687D57; Mon, 13 May 2024 16:24:20 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE0FD882D8
- for <u-boot@lists.denx.de>; Mon, 13 May 2024 16:24:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LA9RVKzu";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id A1F8787D57; Mon, 13 May 2024 18:59:26 +0200 (CEST)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4VdMDy3GVPz9t8G;
- Mon, 13 May 2024 16:24:18 +0200 (CEST)
-Message-ID: <0c19ad2e-9336-4c82-9a54-a8bb20962654@denx.de>
-Date: Mon, 13 May 2024 16:24:15 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 7371E87D57
+ for <u-boot@lists.denx.de>; Mon, 13 May 2024 18:59:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=maximmosk4@gmail.com
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-51f4d2676d1so5038313e87.3
+ for <u-boot@lists.denx.de>; Mon, 13 May 2024 09:59:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1715619564; x=1716224364; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Oiqcn+SJy04OqHGsKcMnEzSFKDAp8cCnfP/sfQoyAfw=;
+ b=LA9RVKzuoJMinQWneVOEXDVWH098h1YjpaqISQCb91BBY/yrjxBRg17NLa+IwO+I7o
+ wZ+xjwC6y9tuQB8rZpLpCYtLUyyyvecioFO8hBjcev5PNcla4x1E8ArSvij9OrZWjBaa
+ sNzkjGu0q+RzwtlsTnbQUqdQrGPNN1T02JvFXNVUDg2n+ftT0m9V5UkamkCyXONaqvwh
+ 4pCYzSrOZX7PiT+pTp1lUK32ZDr0lOVWke2TUFmw00Y4TupxyjbCoBhJnNMBaLdZI+yL
+ rndx+pahm2gCybAN5t+opuqkxLvm0l+v3DAABAMODQ4Xo1bWWaYxglENrKWJBHWBmgZw
+ c/TQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1715619564; x=1716224364;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Oiqcn+SJy04OqHGsKcMnEzSFKDAp8cCnfP/sfQoyAfw=;
+ b=Rvw8xmRtsVA5FCsWPMrtLkbv8iApbjdk023o45N/gLOFQKomG0Qxva5W1CVtwzTjKR
+ zp3znqqT104/qdhiHNEliEE1QX2puMdgVlD3iDhvLHZOhBiPdtZhufzIPOG3z2Ptus/t
+ Nf4azdTK0OENVFdS8gH4F9sD6si//Up/wr2nFAvRwY22fHYr3mz1QJEcCfpFF+Mm9CWS
+ OfTH7/WHKruoLITj4mwP3CdoXGTdYn5Dr18WkE69gUS56MP57JCd5GnDhKOMEmMieQ+g
+ jaQqds1HzDqQjuxskuQUQMdIQfoZDajHQg91ruaDGMGCMz6knunnDQ+UBCgf8S/lT6yd
+ I79w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW9Pr0y9s0J064xD5aZG3dUM61kIR0HZL/Q8KTzqj3nA7V6k6AiOqRJvHNi+GCIzfVAjUhPWioUKXC49+ukVpJgPWZI+A==
+X-Gm-Message-State: AOJu0YwKW86WgfVebONIDde+uMwbD+B2owrhbOXQWPBikWAoJFymakJa
+ NsjlVJ9BOH7d58o6uPL9omKXqgb3gQRDz73rtsvHpYTENgUmNvEx
+X-Google-Smtp-Source: AGHT+IHcnAW0ycIL/OWBOpCydBfh0tr5ZpLcbhoKMs1KGfr35y0jUCUghFkYbIj1fICGYYsFTUz+yg==
+X-Received: by 2002:a05:6512:3e1e:b0:523:2ed9:edf9 with SMTP id
+ 2adb3069b0e04-5232ed9ef10mr2592292e87.63.1715619563388; 
+ Mon, 13 May 2024 09:59:23 -0700 (PDT)
+Received: from localhost.localdomain (109-252-12-58.nat.spd-mgts.ru.
+ [109.252.12.58]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-521f35ba56fsm1811192e87.91.2024.05.13.09.59.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 13 May 2024 09:59:23 -0700 (PDT)
+From: Maxim Moskalets <maximmosk4@gmail.com>
+X-Google-Original-From: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
+To: sjg@chromium.org, trini@konsulko.com, u-boot@lists.denx.de,
+ philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
+ eugen.hristev@collabora.com
+Cc: maximmosk4@gmail.com,
+	Maxim.Moskalets@kaspersky.com
+Subject: [PATCH] arch: fix arch-rockchip/clock.h dependency
+Date: Mon, 13 May 2024 19:59:16 +0300
+Message-Id: <20240513165916.24259-1-Maxim.Moskalets@kaspersky.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Subject: Re: [PATCH 2/3] wdt-uclass: prevent multiple cyclic_register calls
-Content-Language: en-US
-To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-References: <20240509004714.1394547-1-rasmus.villemoes@prevas.dk>
- <20240509004714.1394547-3-rasmus.villemoes@prevas.dk>
- <16a0c385-8293-42da-b56d-0122fea46d2b@denx.de>
- <5a406521-a1a8-4e51-b9f6-0cfdfd304667@prevas.dk>
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <5a406521-a1a8-4e51-b9f6-0cfdfd304667@prevas.dk>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -71,76 +94,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rasmus,
+This header uses u32 and should include header with this typedef.
 
-On 5/13/24 13:09, Rasmus Villemoes wrote:
-> On 13/05/2024 12.40, Stefan Roese wrote:
->> On 5/9/24 02:47, Rasmus Villemoes wrote:
->>> Currently, the cyclic_register() done in wdt_start() is not undone in
->>> wdt_stop(). Moreover, calling wdt_start multiple times (which is
->>> perfectly allowed on an already started device, e.g. to change the
->>> timeout value) will result in another struct cyclic_info being
->>> registered, referring to the same watchdog device.
->>>
->>> This can easily be seen on e.g. a wandboard:
->>>
->>> => cyclic list
->>> function: watchdog@20bc000, cpu-time: 22 us, frequency: 1.01 times/s
->>> => wdt list
->>> watchdog@20bc000 (imx_wdt)
->>> => wdt dev watchdog@20bc000
->>> => wdt start 50000
->>> WDT:   Started watchdog@20bc000 with servicing every 1000ms (50s timeout)
->>> => cyclic list
->>> function: watchdog@20bc000, cpu-time: 37 us, frequency: 1.03 times/s
->>> function: watchdog@20bc000, cpu-time: 241 us, frequency: 1.01 times/s
->>> => wdt start 12345
->>> WDT:   Started watchdog@20bc000 with servicing every 1000ms (12s timeout)
->>> => cyclic list
->>> function: watchdog@20bc000, cpu-time: 36 us, frequency: 1.03 times/s
->>> function: watchdog@20bc000, cpu-time: 100 us, frequency: 1.04 times/s
->>> function: watchdog@20bc000, cpu-time: 299 us, frequency: 1.00 times/s
->>>
->>> So properly unregister the watchdog device from the cyclic framework
->>> in wdt_stop(). In wdt_start(), we cannot just skip the registration,
->>> as the (new) timeout value may mean that we have to ask the cyclic
->>> framework to call us more often. So if we're already running,
->>> first unregister the old cyclic instance.
->>
->> Thanks again for all your valuable work here. I do have a question
->> regarding this patch though. AFAIU, it's a valid use-case to enable
->> 2 different watchdog devices. And this patch will prevent such a
->> setup. Or do I misunderstand this?
-> 
-> No, that shouldn't prevent enabling or petting two different watchdogs
-> at all, that should work just as well as today. All the state I'm
-> looking at and modifying belongs to one specific device, it's not
-> wdt-uclass-global state, it's wdt-uclass-per-device state.
+Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
+---
+ arch/arm/include/asm/arch-rockchip/clock.h | 2 ++
+ 1 file changed, 2 insertions(+)
 
-That's what I was hoping, but was too lazy to figure out myself.
+diff --git a/arch/arm/include/asm/arch-rockchip/clock.h b/arch/arm/include/asm/arch-rockchip/clock.h
+index f01c5aeb71..ade53e6fd9 100644
+--- a/arch/arm/include/asm/arch-rockchip/clock.h
++++ b/arch/arm/include/asm/arch-rockchip/clock.h
+@@ -6,6 +6,8 @@
+ #ifndef _ASM_ARCH_CLOCK_H
+ #define _ASM_ARCH_CLOCK_H
+ 
++#include <common.h>
++
+ struct udevice;
+ 
+ /* define pll mode */
+-- 
+2.39.2
 
-> But with the existing code, if one calls wdt_start() a second time on an
-> already started device, the existing priv->cyclic pointer is dropped on
-> the floor (it gets unconditionally overwritten by the new
-> cyclic_register() return value), so one gets the situation that the same
-> device has multiple cyclic callbacks registered. Also, we're not
-> unregistering the device from the cyclic framework upon ->stop().
-
-Understood.
-
-> Today, that's "mostly harmless". It does mean 'cyclic list' becomes
-> cluttered, and is a memory leak, so you could exhaust memory by doing
-> wdt_start in a loop, and cyclic_run() ends up doing extra callbacks to
-> the same device (all but one will be no-ops due to the per-device
-> rate-limiting of ->reset callbacks). In practice there's no chance of
-> memory corruption or other failures. However, that changes with 3/3,
-> where it would be catastrophic to call cyclic_register() with an already
-> registered cyclic_info instance, as the hlist would become corrupt. I
-> think it's worth fixing regardless of whether 3/3 is accepted.
-
-Agreed.
-
-Reviewed-by: Stefan Roese <sr@denx.de>
-
-Thanks,
-Stefan
