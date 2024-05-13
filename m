@@ -4,79 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0123C25B74
-	for <u-boot@archiver.kernel.org>; Mon, 13 May 2024 17:52:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67DC6C25B10
+	for <u-boot@archiver.kernel.org>; Mon, 13 May 2024 18:17:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E55087C75;
-	Mon, 13 May 2024 19:52:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9FECE881BC;
+	Mon, 13 May 2024 20:17:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UCnd5+WN";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="FAE6v39m";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="aPj37DL8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 351D287C69; Mon, 13 May 2024 19:52:15 +0200 (CEST)
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4B2858830F; Mon, 13 May 2024 20:13:11 +0200 (CEST)
+Received: from fhigh2-smtp.messagingengine.com
+ (fhigh2-smtp.messagingengine.com [103.168.172.153])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 437EA882D8
- for <u-boot@lists.denx.de>; Mon, 13 May 2024 19:52:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 183F887D08
+ for <u-boot@lists.denx.de>; Mon, 13 May 2024 20:13:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-5b2a66dce8fso1319804eaf.1
- for <u-boot@lists.denx.de>; Mon, 13 May 2024 10:52:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715622731; x=1716227531; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6u/y8JUV0KlK7ubW5bB1zFw2lpk2htIvt0tEAdOws8w=;
- b=UCnd5+WNvSka8TVPcPiOIyHlxLvVb+ZA1WvEC/nKsO1TLicckoVahGqdgBjMh9cJ4l
- EnTr/w+bNwnCRUy9fGLefvsnLb/B481141ykZ/kvm071jpfLFLYCKue5k4+0GRMJinax
- Epw8ZcU0s00U17pzyVb8MN3dZ/QPwynuutoDI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715622731; x=1716227531;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6u/y8JUV0KlK7ubW5bB1zFw2lpk2htIvt0tEAdOws8w=;
- b=QAFN7gZpz9IZVuNFcKfmaULgJ0QPdSof4mDO3b1rIrOVYpvj73CQz37FSuxUeN9pJn
- 2XyYpN4pVfKYRiFCt5CmXA+wTSqwJJuE4GJpRwg+5ClYsSDKZ969HWhYiigz4uuUhTLZ
- nN7FRTqyIoQwPcL007wqeB607lhyIOTJxmdKC4Es8IRVQmfxmMy90EZHEypk7tp+iwER
- dOYyCxpT6oaHD3QMP2lihadcE/KwW5c+uPb5XjZp5k/aDMlLP71rX66wMvgJ/+ZNNJj7
- EO9/siIsP3m287E+jg7b3Qbge0AjpiPg7HdNbooh0SAM1QMpl+NCHYnXqhTLAVXT1u77
- w07w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXA/jWzZgeFRqzUaNVuibL3SFVNHEs3yCITbV2kfKfD61stqmIi5AiiSFBCmbWSVRqZypifHFyUVVAGX71ls4DB7vOCLQ==
-X-Gm-Message-State: AOJu0YzZt86369ESBk+bVXYweW8t3iD1q6GQLaIn+MogSmmQyrnNFhSi
- RRnAOW2rLES14XiXWnZzKCRzTRJqgTQGsoshlvXL4nWOhGTTDpQouhUcEpsU974=
-X-Google-Smtp-Source: AGHT+IGvq+R4+Vkxo0v/Dv3sMtn+7wzf98PZViWPlzP97Onq0vvJoRINqutDS5r9Hx0u0ZmrPOypoQ==
-X-Received: by 2002:a05:6870:c34a:b0:21e:a839:d807 with SMTP id
- 586e51a60fabf-24172c344f9mr13987237fac.54.1715622730961; 
- Mon, 13 May 2024 10:52:10 -0700 (PDT)
-Received: from bill-the-cat ([187.144.98.216])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-792bf2fca1dsm476003585a.92.2024.05.13.10.52.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 May 2024 10:52:10 -0700 (PDT)
-Date: Mon, 13 May 2024 11:52:07 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Maxim Moskalets <maximmosk4@gmail.com>
-Cc: sjg@chromium.org, u-boot@lists.denx.de, philipp.tomsich@vrull.eu,
- kever.yang@rock-chips.com, eugen.hristev@collabora.com,
- Maxim.Moskalets@kaspersky.com
-Subject: Re: [PATCH] arch: fix arch-rockchip/clock.h dependency
-Message-ID: <20240513175207.GG2568172@bill-the-cat>
-References: <20240513165916.24259-1-Maxim.Moskalets@kaspersky.com>
+ spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id D65651140118;
+ Mon, 13 May 2024 14:13:07 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute5.internal (MEProxy); Mon, 13 May 2024 14:13:07 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
+ cc:cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:message-id:mime-version:reply-to
+ :subject:subject:to:to; s=fm1; t=1715623987; x=1715710387; bh=7s
+ MqLPVaxj0touXlN17Ov6NosGmWiAW35u8vT/HRAEs=; b=FAE6v39m+ZTKsiVvGE
+ InYFogheNptzC1PPaivGIzn3NY1fhHsN0mOCjkoRsKscXQzgOnRTND/2M6Gnd+CU
+ /qsrP7sM/dIAAzjcwyaFdv6pztykq+xET7Vw5dG0o1NrjsW3//txkmNq5ffilRcI
+ sNNF8FlEW7u5Cgh3cBVTcwTqnO2vXWqSV7Mij2bT5VauEb9Xu4cuagbcOR7Dhm1A
+ 1hZPB974KGxUdath3ky/k3yK1FGlfvHuvHiCQ79H4etZkQvaEakMUnT2t5ptVqVF
+ qkTHV7eQrU68U/IDA8KNY7owKsBJ0xu7qzPCZeis8aVpxlLqn3bQRKqXlbRTe9r3
+ wMmw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:message-id:mime-version:reply-to:subject
+ :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+ :x-sasl-enc; s=fm3; t=1715623987; x=1715710387; bh=7sMqLPVaxj0to
+ uXlN17Ov6NosGmWiAW35u8vT/HRAEs=; b=aPj37DL8Kg9b98SD6ADl6B+gocv3F
+ ID7WO3/sd13W5QcLJZCs4eh9VNK8eZXbFyGfL/YsOmannxuihLGIhC2x8lLNGZem
+ LblR2S5f/uInbxCcf042eCEJnjXWC4x4sfrUxjMmDpQflLAMom2T1AUbSTTS0ro6
+ eyDt0m3FsVbL8Ez6Gowrdwj5DqkujF4f3oMtKVe3q3tBucgYciVNXkGVpFjdnHGQ
+ 3XjGBLEGZ5kiGDrHOs4wpv0uv5IlspDOnrN/8O35uw/hBrcrJ9p1FghIP0I1guqI
+ sNKAmH3kHIHj/kPrIlgOe5UjlUBjJ28pZbr7HEpIYq34zHOnQ7yty44MQ==
+X-ME-Sender: <xms:M1hCZgTgiO6-NjpbQBVcXxPupYs-QFGSmR4LQhXECVV5f6fH7qxR6w>
+ <xme:M1hCZtwVMc2L_ZsPlyPXsbcijJdyr62BPdPGWms35OFV-WGHOPfTLNFEYX5Hl0LaJ
+ _2H5fbbcO21cybFnmI>
+X-ME-Received: <xmr:M1hCZt1Oul20qxf2Zf4xPMtcjtadHbYpW9j4QXAIKloRPoE2NBDTYoI>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdeggedguddvtdcutefuodetggdotefrod
+ ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
+ necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+ enucfjughrpefhufffkfggtgfgvfevofesthejredtredtjeenucfhrhhomheplfhirgig
+ uhhnucgjrghnghcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhmqeenuc
+ ggtffrrghtthgvrhhnpedufffffffhueehvefhgfelveekueegteefgeeiieejheefkeeh
+ keevudevieegueenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfh
+ hrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
+X-ME-Proxy: <xmx:M1hCZkCOzek7Qqchv0k9yMQ4BA6g6DqHvQY03JN9gOXDJi1dj1RycA>
+ <xmx:M1hCZpjVlhlBabf42D9BER1gh1RO5qgSrEVEma5P4R99ZvvRkTC4Ow>
+ <xmx:M1hCZgoeJqKNuEan3cscb3Fg9NF1DBGTIm-jx5ZPtGHMCfT9_ZgPqg>
+ <xmx:M1hCZshXDRnXx966rGhA-VUfVuBcZw5X5wnN9EaE2uXtmxtPAFM6uw>
+ <xmx:M1hCZub9PQZ3QxoHfqeBsAaZFkvSLxjHYVW6PEyHrOtg8rMNry4ygHQu>
+Feedback-ID: ifd894703:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 13 May 2024 14:13:06 -0400 (EDT)
+From: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Subject: [PATCH 00/13] MIPS: Boston: Various enhancements
+Date: Mon, 13 May 2024 19:12:57 +0100
+Message-Id: <20240513-boston-v1-0-fac96938417e@flygoat.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Pe6+7TZPlZKIPeQW"
-Content-Disposition: inline
-In-Reply-To: <20240513165916.24259-1-Maxim.Moskalets@kaspersky.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAClYQmYC/2WMQQrDIBAAvxL23C1qTKA99R8hh2jWZKHVokEag
+ n+vzbXHGYY5IFFkSnBvDoiUOXHwFeSlAbtOfiHkuTIoobToZIsmpC141B25nmar5M1Bjd+RHH/
+ O0TBWXrlmcT+/Wf7s3yJLFGiEUKSNbcn0D/fclzBtVxteMJZSvrDHkpqeAAAA
+To: u-boot@lists.denx.de
+Cc: Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>, 
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Paul Burton <paulburton@kernel.org>, Simon Glass <sjg@chromium.org>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Sumit Garg <sumit.garg@linaro.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2782;
+ i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
+ bh=nisqF0Ww/OvSVhzVZ3zZNUUMfcDbjCmXWYkg+tnGkRE=;
+ b=owGbwMvMwCHmXMhTe71c8zDjabUkhjSnCONNasFhUzebp7gGqvBs36NwY20qw+ecp5X+AnzGl
+ +quNW/tKGVhEONgkBVTZAkRUOrb0HhxwfUHWX9g5rAygQxh4OIUgIk8MmH4p+ZtkDDThSFFicte
+ XyFJZkIUq7nPhasFZr9MGjZ9Ld4+iZFh61PeJDvj+GlFj3c86c3+456fse2D7f0thboOG+Y+7ot
+ gBgA=
+X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
+ fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
+X-Mailman-Approved-At: Mon, 13 May 2024 20:17:26 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,60 +118,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi all,
 
---Pe6+7TZPlZKIPeQW
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This is a huge series which promoted MIPS/Boston target into a
+usable state, with fixes to drivers and general framework issues
+I found in this process.
 
-On Mon, May 13, 2024 at 07:59:16PM +0300, Maxim Moskalets wrote:
+I also converted the target to OF_UPSTREAM.
 
-> This header uses u32 and should include header with this typedef.
->=20
-> Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
-> ---
->  arch/arm/include/asm/arch-rockchip/clock.h | 2 ++
->  1 file changed, 2 insertions(+)
->=20
-> diff --git a/arch/arm/include/asm/arch-rockchip/clock.h b/arch/arm/includ=
-e/asm/arch-rockchip/clock.h
-> index f01c5aeb71..ade53e6fd9 100644
-> --- a/arch/arm/include/asm/arch-rockchip/clock.h
-> +++ b/arch/arm/include/asm/arch-rockchip/clock.h
-> @@ -6,6 +6,8 @@
->  #ifndef _ASM_ARCH_CLOCK_H
->  #define _ASM_ARCH_CLOCK_H
-> =20
-> +#include <common.h>
-> +
->  struct udevice;
-> =20
->  /* define pll mode */
+This target is covered by QEMU, to test on QEMU:
+```
+make boston64r6el_defconfig
+make
+qemu-system-mips64el -M boston -cpu I6500 -bios ./u-boot.bin -nographic
+```
 
-NAK. In the -next branch, common.h has been removed. If this header
-needs type information it should include <linux/types.h> directly.
-Please check the next branch as well as I may have already added it
-there.
+This is my first u-boot contribution, please kindly advise if you
+have any comments.
 
---=20
-Tom
+Thanks
 
---Pe6+7TZPlZKIPeQW
-Content-Type: application/pgp-signature; name="signature.asc"
+Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+---
+Jiaxun Yang (13):
+      pci: xilinx: Handle size of ecam region properly
+      pci: auto: Reduce bridge mem alignment boundary for boston
+      pci: Enable PCI_MAP_SYSTEM_MEMORY when ARCH_MAP_SYSMEM is not set
+      ahci: DMA addressing fixes
+      ahci: dwc_ahsata: Generalize the driver
+      MIPS: Provide dummy acpi_table.h
+      MIPS: boston: Imply various options
+      MIPS: boston: Provide default env vars
+      syscon: Probe device first in syscon_get_regmap
+      clk: boston: Allow to get regmap from parent device
+      dts/upstream: Add Makefile for MIPS
+      MIPS: boston: Migrate to OF_UPSTREAM
+      mailmap: Update email for Paul Burton
 
------BEGIN PGP SIGNATURE-----
+ .mailmap                           |   3 +-
+ arch/mips/Kconfig                  |  28 +++++
+ arch/mips/dts/Makefile             |   1 -
+ arch/mips/dts/boston-u-boot.dtsi   |  10 ++
+ arch/mips/dts/img,boston.dts       | 222 -------------------------------------
+ arch/mips/include/asm/acpi_table.h |  10 ++
+ board/imgtec/boston/Kconfig        |   4 +
+ board/imgtec/boston/MAINTAINERS    |   3 +-
+ board/imgtec/boston/boston.env     |   9 ++
+ board/imgtec/malta/MAINTAINERS     |   2 +-
+ configs/boston32r2_defconfig       |   2 +-
+ configs/boston32r2el_defconfig     |   2 +-
+ configs/boston32r6_defconfig       |   2 +-
+ configs/boston32r6el_defconfig     |   2 +-
+ configs/boston64r2_defconfig       |   2 +-
+ configs/boston64r2el_defconfig     |   2 +-
+ configs/boston64r6_defconfig       |   2 +-
+ configs/boston64r6el_defconfig     |   2 +-
+ drivers/ata/ahci.c                 |  34 +++---
+ drivers/ata/dwc_ahsata.c           |  82 +++++++++-----
+ drivers/ata/dwc_ahsata_priv.h      |   2 -
+ drivers/clk/clk_boston.c           |  15 ++-
+ drivers/core/syscon-uclass.c       |   4 +
+ drivers/pci/Kconfig                |  10 ++
+ drivers/pci/pci_auto.c             |  16 +--
+ drivers/pci/pcie_xilinx.c          |  53 ++++++---
+ dts/upstream/src/mips/Makefile     |  14 +++
+ include/ahci.h                     |   4 +-
+ 28 files changed, 234 insertions(+), 308 deletions(-)
+---
+base-commit: c8ffd1356d42223cbb8c86280a083cc3c93e6426
+change-id: 20240513-boston-45ef6edc219f
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZCU0cACgkQFHw5/5Y0
-tyzlFgwAugmgUg+wmorgKgoMwFvCfL/i1y54exmB9ijsJYiDOBYtEExaPtLUwfSp
-QrdLFqvqCvMXJSjjCquTwI1Gc5L8Jv4jUso8Ph839jVVbAFZL1/j2b5NtukgSk7P
-MuBbrypRr9F5mfPabikS8RfenuH9qnWUhjt5VeBgD1fpwSMJAXPzT8sgRjjT+lGo
-+Dn6exulr4fCiLnU48OdFbglzoJitnGXUJnFGnbeMAVbVr/VZLDiour2ePyqhfZH
-xGkHV+DGf5zoYbspDBTGoDVc8pj/BqouajM1ahuQbP+xnZ2PdFREvGUkjMtpRVnU
-dBK8NaiYKOKji4YueLZI9dvrg+2dZ8vkIF2mkXv9mmtc+ef2IPmQKHrxH0eayMz8
-GLJI5hqb/5en42TzM5t+momh3aru1YbALe37hp2LitRpvPEL1S4QOBVYKrYgn1fR
-tpes7hYH4tF/CXQsipPOiEX3Lqyy0no4P3hjEMsVUPhAzl/A/Y88HkBxq5tkNEGp
-TB8wAfzx
-=JFC9
------END PGP SIGNATURE-----
+Best regards,
+-- 
+Jiaxun Yang <jiaxun.yang@flygoat.com>
 
---Pe6+7TZPlZKIPeQW--
