@@ -4,55 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3485CC25B10
-	for <u-boot@archiver.kernel.org>; Mon, 13 May 2024 06:03:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41426C25B10
+	for <u-boot@archiver.kernel.org>; Mon, 13 May 2024 06:27:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8567C87E50;
-	Mon, 13 May 2024 08:03:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 8E17788224;
+	Mon, 13 May 2024 08:27:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1715580218;
-	bh=2WMfv8uYoHtT5xeJCoCDTcxM6czTWGZfMcl5xvPGE4w=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=drzDVATfMk4sfaDWuAnN944hsuRXPK0s5EJV0h1Fq352zF99E/MEPzAmSjj8rJ94s
-	 lZQvLsy4qSodZp72Q08ZPiSn8EUJCwYm2+agipByC0iN5GThZaqKYBI8ruuzv46Svo
-	 5sawENBMb1WVsYBFTY3JuVXd13mAFsfjcq+T+b9evvot4JfK7kRll7x+DzrIQiHwB0
-	 2awfQbdJpj6wqpGhC2GWn/j35NFDFnPU5HNAgt5nys93IL2fzGlsFk2unNsq20oZuL
-	 UjSDKm2n0BJimJvEFgLH3xFVdsPHxxTAUmZ5/1p2EWuT3S+02knO6dqDkx1kvD9c0/
-	 z/Y5VmKc2WE4g==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id EEFB0882AF; Mon, 13 May 2024 08:03:37 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0519787D46
- for <u-boot@lists.denx.de>; Mon, 13 May 2024 08:03:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (1024-bit key; secure) header.d=siemens.com header.i=alexander.sverdlin@siemens.com header.b="SPZ2utGz";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id BDB0C88224; Mon, 13 May 2024 08:27:24 +0200 (CEST)
+Received: from mta-64-228.siemens.flowmailer.net
+ (mta-64-228.siemens.flowmailer.net [185.136.64.228])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4Vd87C4b5mz9t4W;
- Mon, 13 May 2024 08:03:35 +0200 (CEST)
-Message-ID: <4c1c0efc-eeb2-4a90-86d0-9c7895c11614@denx.de>
-Date: Mon, 13 May 2024 08:03:32 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 476EC83334
+ for <u-boot@lists.denx.de>; Mon, 13 May 2024 08:27:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=alexander.sverdlin@siemens.com
+Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id
+ 20240513062721a1cd6ace686f689914 for <u-boot@lists.denx.de>;
+ Mon, 13 May 2024 08:27:21 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=alexander.sverdlin@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=LA6knZiuB8yaD5COiK0PBRL36GSTLSI4nKw9Dsr/kDc=;
+ b=SPZ2utGzQF6f9avbx19ljgyHhKwR1esiTucx8Oe1RFsIHxza7Mz6SuuLg1QxQyc6XcYFqt
+ 1fHAvCVaeHZS7+TL1BrddZFSHiGr+2wc4K/v6BhnSoAUWuHSMvTEM0G9W0PaQgDA4XX4WWHP
+ p+Yt8rdJdPSdC3N878Tqlh83DuhjQ=;
+From: "A. Sverdlin" <alexander.sverdlin@siemens.com>
+To: u-boot@lists.denx.de
+Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Roger Quadros <rogerq@kernel.org>, Nishanth Menon <nm@ti.com>,
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Suman Anna <s-anna@ti.com>, Keerthy <j-keerthy@ti.com>
+Subject: [PATCH] net: tftp: don't call stop callback from UDP handler
+Date: Mon, 13 May 2024 08:26:35 +0200
+Message-ID: <20240513062643.3589070-1-alexander.sverdlin@siemens.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH 1/3] cyclic: stop strdup'ing name in cyclic_register()
-To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-References: <20240509004714.1394547-1-rasmus.villemoes@prevas.dk>
- <20240509004714.1394547-2-rasmus.villemoes@prevas.dk>
-Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20240509004714.1394547-2-rasmus.villemoes@prevas.dk>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-456497:519-21489:flowmailer
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,58 +68,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/9/24 02:47, Rasmus Villemoes wrote:
-> We are not checking the return value of strdup(), nor
-> freeing the string in cyclic_unregister().
-> 
-> However, all current users either pass a string literal or the
-> dev->name of the client device. So in all cases the name string will
-> live at least as long as the cyclic_info is registered, so just make
-> that a requirement.
-> 
-> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+From: Alexander Sverdlin <alexander.sverdlin@siemens.com>
 
-Reviewed-by: Stefan Roese <sr@denx.de>
+Contrary to doc/develop/driver-model/ethernet.rst contract, eth_ops
+.free_pkt can be called after .stop, there are several error paths in TFTP,
+for instance:
 
-Thanks,
-Stefan
+eth_halt() <= tftp_handler() <= net_process_received_packet() <= eth_rx()
+...
+am65_cpsw_free_pkt() <= eth_rx()
 
-> ---
->   common/cyclic.c  | 2 +-
->   include/cyclic.h | 2 +-
->   2 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/common/cyclic.c b/common/cyclic.c
-> index a49bfc88f5c..c62e7fa7d19 100644
-> --- a/common/cyclic.c
-> +++ b/common/cyclic.c
-> @@ -40,7 +40,7 @@ struct cyclic_info *cyclic_register(cyclic_func_t func, uint64_t delay_us,
->   	/* Store values in struct */
->   	cyclic->func = func;
->   	cyclic->ctx = ctx;
-> -	cyclic->name = strdup(name);
-> +	cyclic->name = name;
->   	cyclic->delay_us = delay_us;
->   	cyclic->start_time_us = timer_get_us();
->   	hlist_add_head(&cyclic->list, cyclic_get_list());
-> diff --git a/include/cyclic.h b/include/cyclic.h
-> index 44ad3cb6b80..38946216fb8 100644
-> --- a/include/cyclic.h
-> +++ b/include/cyclic.h
-> @@ -31,7 +31,7 @@
->   struct cyclic_info {
->   	void (*func)(void *ctx);
->   	void *ctx;
-> -	char *name;
-> +	const char *name;
->   	uint64_t delay_us;
->   	uint64_t start_time_us;
->   	uint64_t cpu_time_us;
+Which results in (deliberately "tftpboot"ing non-existing file):
 
-Viele Grüße,
-Stefan Roese
+TFTP error: 'File not found' (1)
+Not retrying...
+am65_cpsw_nuss_port ethernet@8000000port@1: RX dma free_pkt failed -22
 
+Avoid the DMA error message (and follow the documentation) by deferring
+eth_halt() until net_loop() calls net_start_again() and only do
+eth_halt_state_only() instead.
+
+Fixes: aafda38fb266 ("Add error codes/handling for TFTP-server")
+Signed-off-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+---
+ net/eth-uclass.c | 2 ++
+ net/tftp.c       | 4 ++--
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+This isn't a v2, but a completely different approach to
+https://patchwork.ozlabs.org/project/uboot/patch/20240508183605.955341-1-alexander.sverdlin@siemens.com/
+
+diff --git a/net/eth-uclass.c b/net/eth-uclass.c
+index 193218a328b..9863db59d68 100644
+--- a/net/eth-uclass.c
++++ b/net/eth-uclass.c
+@@ -450,6 +450,8 @@ int eth_rx(void)
+ 			eth_get_ops(current)->free_pkt(current, packet, ret);
+ 		if (ret <= 0)
+ 			break;
++		if (!eth_is_active(current))
++			break;
+ 	}
+ 	if (ret == -EAGAIN)
+ 		ret = 0;
+diff --git a/net/tftp.c b/net/tftp.c
+index 2e335413492..081014a1fde 100644
+--- a/net/tftp.c
++++ b/net/tftp.c
+@@ -649,7 +649,7 @@ static void tftp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
+ 		net_set_timeout_handler(timeout_ms, tftp_timeout_handler);
+ 
+ 		if (store_block(tftp_cur_block, pkt + 2, len)) {
+-			eth_halt();
++			eth_halt_state_only();
+ 			net_set_state(NETLOOP_FAIL);
+ 			break;
+ 		}
+@@ -678,7 +678,7 @@ static void tftp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
+ 		case TFTP_ERR_FILE_NOT_FOUND:
+ 		case TFTP_ERR_ACCESS_DENIED:
+ 			puts("Not retrying...\n");
+-			eth_halt();
++			eth_halt_state_only();
+ 			net_set_state(NETLOOP_FAIL);
+ 			break;
+ 		case TFTP_ERR_UNDEFINED:
 -- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+2.44.0
+
