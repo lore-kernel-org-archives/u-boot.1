@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 197CFC25B10
-	for <u-boot@archiver.kernel.org>; Mon, 13 May 2024 18:18:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B36C0C25B74
+	for <u-boot@archiver.kernel.org>; Mon, 13 May 2024 18:18:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C387888354;
-	Mon, 13 May 2024 20:17:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3234788365;
+	Mon, 13 May 2024 20:17:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="sP351ZtC";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="HIk7hhP6";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="oRnd8IPN";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="blEuad3d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82DDE88308; Mon, 13 May 2024 20:13:21 +0200 (CEST)
+ id 08B0688054; Mon, 13 May 2024 20:13:22 +0200 (CEST)
 Received: from fhigh2-smtp.messagingengine.com
  (fhigh2-smtp.messagingengine.com [103.168.172.153])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2782B88054
- for <u-boot@lists.denx.de>; Mon, 13 May 2024 20:13:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9EE28882ED
+ for <u-boot@lists.denx.de>; Mon, 13 May 2024 20:13:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
- by mailfhigh.nyi.internal (Postfix) with ESMTP id 40C531140118;
- Mon, 13 May 2024 14:13:17 -0400 (EDT)
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id D81FF1140173;
+ Mon, 13 May 2024 14:13:18 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute4.internal (MEProxy); Mon, 13 May 2024 14:13:17 -0400
+ by compute1.internal (MEProxy); Mon, 13 May 2024 14:13:18 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm1; t=1715623997;
- x=1715710397; bh=k8Sf/AVqQ7iN2Nshzu0i9OiG0HNPAfu39HBe53trCYs=; b=
- sP351ZtCEELeqjGIjy8BOqYMuFVFT5TwvH+lnXnYess785jBdK5B6NA9BFuhln3t
- MxasR56yHvev/qr0flvWru4te66sXIriI0QxPR5xgdPQ0yUxG5F1FJ/HC3GSc24b
- LYWvQaK9cV0k5vcjZpokrd2eL2r5vfg/2vlHdQSu6daTHZw3cnHaATLlRTx+Ym0u
- jA/3irXEMHKe6E/2hGAqN6CM6WZM7w6wnf514yb1vzsJ96Fnr5lXTX5eL640kejd
- GHpIarNkYdkBCdqjzK0HW0W7M2ErsknNdXct2vSwHqCqi1iwKzmpfNRvKb4IF3XB
- RiuB2VOBf9BYvAomt7jX7w==
+ :references:reply-to:subject:subject:to:to; s=fm1; t=1715623998;
+ x=1715710398; bh=hXyfIt/Nf4DgaoGMQpBQwyFkQdzcF0MKkHKNpMrvmBE=; b=
+ oRnd8IPNpYtxJZQhSOMYLLFBAJjQgkq7dMi5Uq6n5qe9QGwpjfPCnAQ3Yu5lvsoq
+ ZaKt/UanbXtCe4Nu5JhTRSFfDh51jqaW/IIi3z/vLMgaz4ymkQemEPzQ5eiBDOep
+ OtWF2qKhDNzs8BKoA7eBjUanZ4Zi4y00rRFCgmEtwC2GJLPoWECnBrbMg7APUB/3
+ LzEoQn7AS8S57m2xj9J82kagypzEBt6NcjWu7Bfyz2kxhVswk6bOyclKblby1JCl
+ aJ6DoTe+1PzMBaPaO1bXdeSDaQPNbQ/X1hfzQPnQkVUvz4miTig0r6iCECy0I/3z
+ gA8oQRKFDcV2EHkbLlEsFA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715623997; x=
- 1715710397; bh=k8Sf/AVqQ7iN2Nshzu0i9OiG0HNPAfu39HBe53trCYs=; b=H
- Ik7hhP6sZJmo7zxC/c8jXAQWRLxJkV03SNdPdGpLfinyKUpRINnnO5kO/39IopHc
- RfYiiDL6yl1me7YplPynbgBGUN3eWxbbtRSlmHRrLS9YZ5EXuOy2tDIDSgzr/86X
- 35BpDDE9fzHWqEHPfMrUcb/sqEv8Y//cObOgbCtJjr85yZs34Am188rq0MfKttZy
- aDPJTRd2dOJrZ+SCDPi8E9L8aW4ZMRWgShC+Q5uoGky7lwnfcJMpmLhx4y67Qcor
- hsHGORRX2UtwaZA70q1L3nppbUhaLmjq71blUAXl2nTrb1eMkS57h675eL78SKBj
- cRNplT+4EEOTz8Ki3B3eA==
-X-ME-Sender: <xms:PFhCZoqvze3sKcXK03Mlcb3cGQ1nlIh33Esb4N0hzqkpK4xsqrH7Uw>
- <xme:PFhCZurVd9NIXhj_tFILEOWojEQfJfk63QgFB07hDd7zQpu1aBGkj_XeBjpTSCJZa
- Ld_XxOkBTnNoDCfJ-U>
-X-ME-Received: <xmr:PFhCZtOoTsudQr24M2jcxo7-PhvbCapl7q70GLHwXATM8VpZkgctP0g>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdeggedguddvtdcutefuodetggdotefrod
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715623998; x=
+ 1715710398; bh=hXyfIt/Nf4DgaoGMQpBQwyFkQdzcF0MKkHKNpMrvmBE=; b=b
+ lEuad3dHZlm2x/6UiPewbv9JcPGeMUGyKMOq27TLoY1PDIjDhzZeD99IXHCtTVQS
+ AgS4m1Djgv9yf5krhUibJ3eoH5vRu38WvQFMtv8d4NXHkrTUVK8d+wc9taKTrFrJ
+ 33kdxb/6cEbRGc0phQvglYEMBU0FRO9ih/Mdp+mAdMcUVkNEhIQszH99dubMOTSX
+ aMpqHIz0/yMRjy7c2kVHghvGdHvWetQukHBzfqua6lvCpbWvKcQ64eLlawtlVIvv
+ zsmk4+nI0o2g82okPK6ldr2zxpLx2mjwWX+yL/rNxRueqSN+/QQQn1UI2ZHo9qCM
+ U46Qj6WcJ1MEPubn1D7ug==
+X-ME-Sender: <xms:PlhCZpO6BtvvyJvRHZhqmK1FbMkkglTQapDHml0o_xSKW866b9d_Rw>
+ <xme:PlhCZr-e9w5mvXGJBc1xNLMWDe7bku-dJP2vQGVKQoIBvK47fOxy6BlNsP9PoSRlm
+ MCU5HNoyXWWBQ2FWkc>
+X-ME-Received: <xmr:PlhCZoSJgsmCja7u1gtjkJlXv7_OkPo1ht_VNNs0gofHzpTnl6JilYo>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdeggedguddvudcutefuodetggdotefrod
  ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
  necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
  enucfjughrpefhfffugggtgffkfhgjvfevofesthejredtredtjeenucfhrhhomheplfhi
  rgiguhhnucgjrghnghcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhmqe
  enucggtffrrghtthgvrhhnpedvkeeihfefveekueevteefleffkeegudeghfdtuddugefh
- ueevgeffgedukeejleenucevlhhushhtvghrufhiiigvpedvnecurfgrrhgrmhepmhgrih
+ ueevgeffgedukeejleenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrih
  hlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
-X-ME-Proxy: <xmx:PFhCZv7fkh2wrO7HWOyjJ4E58hshcsmy0O4cVXd3hCdQ4hplgTzMXw>
- <xmx:PFhCZn5XM4v3RrUyQC74BpUBPLIevMXjB_YYyzxRFsaJPz7UhJX_Og>
- <xmx:PFhCZvgQhtJHsMbX1QI8d38foZLhkhhWoSL8sQew1PKzUIPS2E59Uw>
- <xmx:PFhCZh6bkT3T7Mka1bN64CXYrtCt40ip9YMlD9mU2QeJ_HI9OlCMTg>
- <xmx:PVhCZkzFNjQhyQto5c7cVOE5rt89ZeXvkYB4R7tg8z3Lm2XKiIWtJ9Z4>
+X-ME-Proxy: <xmx:PlhCZluRtJYOf9YglBGTcM7evi-Utti_vZUe7PHaXJZ1gUabiCGu5g>
+ <xmx:PlhCZhdqoYsz2VdGxrl-a7ceGa9zZDxDLQJEy5s5PiXnnEpv0zW9aA>
+ <xmx:PlhCZh1yJbnkYH8Ym63qzCuG64T4MiFnrhI1rmgON81KjKPNgyODjw>
+ <xmx:PlhCZt810UQTdcdlfwjQE2dRi2KprD2RPkgUfNHPhZ3cSUpA0uWFuA>
+ <xmx:PlhCZiWwovm0S9uh20PX7xP-bf8tqYT0zJ-5Q9upqGjgd4iAOm77_7Z8>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 13 May 2024 14:13:14 -0400 (EDT)
+ 13 May 2024 14:13:17 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Mon, 13 May 2024 19:13:02 +0100
-Subject: [PATCH 05/13] ahci: dwc_ahsata: Generalize the driver
+Date: Mon, 13 May 2024 19:13:03 +0100
+Subject: [PATCH 06/13] MIPS: Provide dummy acpi_table.h
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240513-boston-v1-5-fac96938417e@flygoat.com>
+Message-Id: <20240513-boston-v1-6-fac96938417e@flygoat.com>
 References: <20240513-boston-v1-0-fac96938417e@flygoat.com>
 In-Reply-To: <20240513-boston-v1-0-fac96938417e@flygoat.com>
 To: u-boot@lists.denx.de
@@ -92,13 +92,13 @@ Cc: Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
  Sumit Garg <sumit.garg@linaro.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3395;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=667;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=kc074xhaq5eZqjHZFuP2QtfsC7eLQ/HYuVNInznPrIM=;
- b=owGbwMvMwCHmXMhTe71c8zDjabUkhjSnCONVTJND3k5y8d+7zf7P9mfTlHd6Js1fWjZ1U99SI
- 51Vea0nOkpZGMQ4GGTFFFlCBJT6NjReXHD9QdYfmDmsTCBDGLg4BeAmdzD8z9w/o/aJJ6+9h6ku
- j7bWLe3qP5unWr27fXTenrzDOpHHrBgZWlJjr73ZuJl1v2aplXX8EomzD156RYhNXZ1gp1X04nE
- yAwA=
+ bh=yr3ri0QU64OToHT56T9aYUBzi4wcreWomscT3Aiz5G8=;
+ b=owGbwMvMwCHmXMhTe71c8zDjabUkhjSnCOP77nmcr/t9wkzSQ7svpKxVi1hR8uKnk9QOxU993
+ ntXP27pKGVhEONgkBVTZAkRUOrb0HhxwfUHWX9g5rAygQxh4OIUgIm8imdkuOkyS237ueO1O/1e
+ 87w6EiDy/MyfJX8+725Zz1QdsG7qmzeMDOc9vjmLRp9y2qYdenjvWWapPU1/NaM5Avf+XmImrHC
+ ilQkA
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-Mailman-Approved-At: Mon, 13 May 2024 20:17:26 +0200
@@ -118,124 +118,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove hard dependencies to arch headers, get clock from clk
-subsystem if arch clock function is not available, align
-compatible strings with devicetree binding.
-
-No functional change on existing platforms, just get it build
-on other platforms.
+Some drivers needs this header.
+Provide this dummy header as riscv did.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- drivers/ata/dwc_ahsata.c | 38 ++++++++++++++++++++++++++++++++------
- 1 file changed, 32 insertions(+), 6 deletions(-)
+ arch/mips/include/asm/acpi_table.h | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/drivers/ata/dwc_ahsata.c b/drivers/ata/dwc_ahsata.c
-index c2cde48c0b55..cef95e76c642 100644
---- a/drivers/ata/dwc_ahsata.c
-+++ b/drivers/ata/dwc_ahsata.c
-@@ -6,6 +6,7 @@
- 
- #include <ahci.h>
- #include <blk.h>
-+#include <clk.h>
- #include <cpu_func.h>
- #include <dm.h>
- #include <dwc_ahsata.h>
-@@ -18,9 +19,11 @@
- #include <sata.h>
- #include <asm/cache.h>
- #include <asm/io.h>
-+#if IS_ENABLED(CONFIG_ARCH_MX5) || IS_ENABLED(CONFIG_ARCH_MX6)
- #include <asm/arch/clock.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/mach-imx/sata.h>
-+#endif
- #include <linux/bitops.h>
- #include <linux/ctype.h>
- #include <linux/delay.h>
-@@ -115,13 +118,12 @@ static int ahci_setup_oobr(struct ahci_uc_priv *uc_priv, int clk)
- 	return 0;
- }
- 
--static int ahci_host_init(struct ahci_uc_priv *uc_priv)
-+static int ahci_host_init(struct ahci_uc_priv *uc_priv, int clk)
- {
- 	u32 tmp, cap_save, num_ports;
- 	int i, j, timeout = 1000;
- 	struct sata_port_regs *port_mmio = NULL;
- 	struct sata_host_regs *host_mmio = uc_priv->mmio_base;
--	int clk = mxc_get_clock(MXC_SATA_CLK);
- 
- 	cap_save = readl(&host_mmio->cap);
- 	cap_save |= SATA_HOST_CAP_SSS;
-@@ -909,17 +911,41 @@ int dwc_ahsata_scan(struct udevice *dev)
- int dwc_ahsata_probe(struct udevice *dev)
- {
- 	struct ahci_uc_priv *uc_priv = dev_get_uclass_priv(dev);
-+	struct clk_bulk clk_bulk;
-+	struct clk clk;
-+	int sataclk;
- 	int ret;
- 
--#if defined(CONFIG_MX6)
-+#if IS_ENABLED(CONFIG_MX6)
- 	setup_sata();
- #endif
-+#if IS_ENABLED(CONFIG_MX5) || IS_ENABLED(CONFIG_MX6)
-+	sataclk = mxc_get_clock(MXC_SATA_CLK);
-+#else
-+	ret = clk_get_bulk(dev, &clk_bulk);
-+	if (ret)
-+		return ret;
+diff --git a/arch/mips/include/asm/acpi_table.h b/arch/mips/include/asm/acpi_table.h
+new file mode 100644
+index 000000000000..b4139d0ba328
+--- /dev/null
++++ b/arch/mips/include/asm/acpi_table.h
+@@ -0,0 +1,10 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
 +
-+	ret = clk_enable_bulk(&clk_bulk);
-+	if (ret)
-+		return ret;
++#ifndef __ASM_ACPI_TABLE_H__
++#define __ASM_ACPI_TABLE_H__
 +
-+	ret	= clk_get_by_name(dev, "sata", &clk);
-+	if (ret)
-+		return ret;
++/*
++ * This file is needed by some drivers.
++ */
 +
-+	sataclk = clk_get_rate(&clk);
-+#endif
-+	if (IS_ERR_VALUE(sataclk)) {
-+		log_err("Unable to get SATA clock rate\n");
-+		return -EINVAL;
-+	}
- 	uc_priv->host_flags = ATA_FLAG_SATA | ATA_FLAG_NO_LEGACY |
- 			ATA_FLAG_MMIO | ATA_FLAG_PIO_DMA | ATA_FLAG_NO_ATAPI;
- 	uc_priv->mmio_base = dev_read_addr_ptr(dev);
- 
- 	/* initialize adapter */
--	ret = ahci_host_init(uc_priv);
-+	ret = ahci_host_init(uc_priv, sataclk);
- 	if (ret)
- 		return ret;
- 
-@@ -961,7 +987,6 @@ U_BOOT_DRIVER(dwc_ahsata_blk) = {
- 	.ops		= &dwc_ahsata_blk_ops,
- };
- 
--#if CONFIG_IS_ENABLED(DWC_AHSATA_AHCI)
- struct ahci_ops dwc_ahsata_ahci_ops = {
- 	.port_status = dwc_ahsata_port_status,
- 	.reset       = dwc_ahsata_bus_reset,
-@@ -969,7 +994,9 @@ struct ahci_ops dwc_ahsata_ahci_ops = {
- };
- 
- static const struct udevice_id dwc_ahsata_ahci_ids[] = {
-+	{ .compatible = "fsl,imx53-ahci" },
- 	{ .compatible = "fsl,imx6q-ahci" },
-+	{ .compatible = "fsl,imx6qp-ahci" },
- 	{ }
- };
- 
-@@ -980,4 +1007,3 @@ U_BOOT_DRIVER(dwc_ahsata_ahci) = {
- 	.ops      = &dwc_ahsata_ahci_ops,
- 	.probe    = dwc_ahsata_probe,
- };
--#endif
++#endif /* __ASM_ACPI_TABLE_H__ */
 
 -- 
 2.34.1
