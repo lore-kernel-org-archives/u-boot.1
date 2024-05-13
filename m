@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75AA0C25B78
-	for <u-boot@archiver.kernel.org>; Mon, 13 May 2024 23:29:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EDB7C25B78
+	for <u-boot@archiver.kernel.org>; Mon, 13 May 2024 23:29:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1713F8813F;
-	Tue, 14 May 2024 01:29:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7F21887C2D;
+	Tue, 14 May 2024 01:29:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8405D87C75; Tue, 14 May 2024 01:29:20 +0200 (CEST)
+ id 472E188228; Tue, 14 May 2024 01:29:22 +0200 (CEST)
 Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9FE388210
- for <u-boot@lists.denx.de>; Tue, 14 May 2024 01:29:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B8CDF87D08
+ for <u-boot@lists.denx.de>; Tue, 14 May 2024 01:29:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
@@ -25,18 +25,20 @@ Authentication-Results: phobos.denx.de;
 Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
  helo=tharvey.pdc.gateworks.com)
  by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1s6f6V-007JY8-Nx;
- Mon, 13 May 2024 23:29:11 +0000
+ (envelope-from <tharvey@gateworks.com>) id 1s6f6X-007JY8-Vb;
+ Mon, 13 May 2024 23:29:14 +0000
 From: Tim Harvey <tharvey@gateworks.com>
 To: Tom Rini <trini@konsulko.com>, Tim Harvey <tharvey@gateworks.com>,
  Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
  Fabio Estevam <festevam@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>,
  u-boot@lists.denx.de, Dragan Simic <dsimic@manjaro.org>,
  Ulf Hansson <ulf.hansson@linaro.org>, Avri Altman <avri.altman@wdc.com>
-Subject: [PATCH 0/3 v4] provide names for emmc hardware partitions
-Date: Mon, 13 May 2024 16:29:04 -0700
-Message-Id: <20240513232907.2738959-1-tharvey@gateworks.com>
+Subject: [PATCH 3/3 v4] venice: show emmc boot hardware partition
+Date: Mon, 13 May 2024 16:29:07 -0700
+Message-Id: <20240513232907.2738959-4-tharvey@gateworks.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20240513232907.2738959-1-tharvey@gateworks.com>
+References: <20240513232907.2738959-1-tharvey@gateworks.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -55,105 +57,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Modern eMMC v4+ devices have multiple hardware partitions per the JEDEC
-specification described as:
- Boot Area Partition 1
- Boot Area Partition 2
- RPMB Partition
- General Purpose Partition 1
- General Purpose Partition 2
- General Purpose Partition 3
- General Purpose Partition 4
- User Data Area
+To aid in understanding what emmc hardware partition is being
+used to boot on power-up, display the hardware partition name in the
+SPL.
 
-These are referenced by fields in the PARTITION_CONFIG register
-(Extended CSD Register 179) which is defined as:
-bit 7: reserved
-bit 6: BOOT_ACK
-  0x0: No boot acknowledge sent (default
-  0x1: Boot acknowledge sent during boot operation Bit
-bit 5:3: BOOT_PARTITION_ENABLE
-  0x0: Device not boot enabled (default)
-  0x1: Boot Area partition 1 enabled for boot
-  0x2: Boot Area partition 2 enabled for boot
-  0x3-0x6: Reserved
-  0x7: User area enabled for boot
-bit 2:0 PARTITION_ACCESS
-  0x0: No access to boot partition (default)
-  0x1: Boot Area partition 1
-  0x2: Boot Area partition 2
-  0x3: Replay Protected Memory Block (RPMB)
-  0x4: Access to General Purpose partition 1
-  0x5: Access to General Purpose partition 2
-  0x6: Access to General Purpose partition 3
-  0x7: Access to General Purpose partition 4
+Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+---
+v4:
+ - include previous stand-alone patch in series
+ - use emmc hw partition enum and names
+---
+ board/gateworks/venice/spl.c | 16 ++++++++++++----
+ 1 file changed, 12 insertions(+), 4 deletions(-)
 
-Note that setting PARTITION_ACCESS to 0x0 results in selecting the User
-Data Area partition.
-
-You can see above that the two fields BOOT_PARTITION_ENABLE and
-PARTITION_ACCESS do not use the same enumerated values.
-
-U-Boot uses a set of macros to access fields of the PARTITION_CONFIG
-register:
-#define EXT_CSD_BOOT_ACK_ENABLE                 (1 << 6)
-#define EXT_CSD_BOOT_PARTITION_ENABLE           (1 << 3)
-#define EXT_CSD_PARTITION_ACCESS_ENABLE         (1 << 0)
-#define EXT_CSD_PARTITION_ACCESS_DISABLE        (0 << 0)
-
-#define EXT_CSD_BOOT_ACK(x)             (x << 6)
-#define EXT_CSD_BOOT_PART_NUM(x)        (x << 3)
-#define EXT_CSD_PARTITION_ACCESS(x)     (x << 0)
-
-#define EXT_CSD_EXTRACT_BOOT_ACK(x) (((x) >> 6) & 0x1)
-#define EXT_CSD_EXTRACT_BOOT_PART(x) (((x) >> 3) & 0x7)
-#define EXT_CSD_EXTRACT_PARTITION_ACCESS(x) ((x) & 0x7)
-
-There are various places in U-Boot where the BOOT_PARTITION_ENABLE field
-is accessed via EXT_CSD_EXTRACT_PARTITION_ACCESS and converted to a
-hardware partition consistent with the definition of the
-PARTITION_ACCESS field used by the various mmc_switch incarnations.
-
-To add some sanity to the distinction between BOOT_PARTITION_ENABLE
-(used to specify the active device on power-cycle) and PARTITION_ACCESS
-(used to switch between hardware partitions) create two enumerated types
-and use them wherever struct mmc * part_config is used or the above
-macros are used.
-
-Additionally provide arrays of the field names and allow those to be
-used in the 'mmc partconf' command and in board support files.
-
-The first patch adds enumerated types and makes use of them which
-represents no compiled code change.
-
-The 2nd patch adds the array of names and uses them in the 'mmc
-partconf' command.
-
-The 3rd patch uses the array of hardware partition names in a board
-support file to show what emmc hardware partition U-Boot is being loaded
-from.
-
-I'm sending this as a series this time around as previously it was
-repsented as two different patches.
-
-Tim Harvey (3):
-  mmc: use an enumerated type to represent PARTITION_CONFIG fields
-  mmc: allow use of hardware partition names for mmc partconf
-  venice: show emmc boot hardware partition
-
- arch/arm/mach-imx/image-container.c | 10 ++++-----
- arch/arm/mach-sunxi/board.c         |  2 +-
- board/gateworks/venice/spl.c        | 20 ++++++++++++-----
- board/gateworks/venice/venice.c     | 22 +++++++++---------
- board/purism/librem5/librem5.c      |  4 ++--
- board/storopack/smegw01/smegw01.c   |  4 ++--
- cmd/mmc.c                           | 27 ++++++++++++++++++----
- cmd/mvebu/bubt.c                    |  4 ++--
- common/spl/spl_mmc.c                |  4 ++--
- drivers/mmc/mmc.c                   | 35 +++++++++++++++++++++++++++++
- include/mmc.h                       | 26 +++++++++++++++++++++
- 11 files changed, 123 insertions(+), 35 deletions(-)
-
+diff --git a/board/gateworks/venice/spl.c b/board/gateworks/venice/spl.c
+index 6f6dea84feee..ad3af93143d9 100644
+--- a/board/gateworks/venice/spl.c
++++ b/board/gateworks/venice/spl.c
+@@ -366,16 +366,24 @@ unsigned long board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc, unsigned long
+ 
+ const char *spl_board_loader_name(u32 boot_device)
+ {
++	static char name[16];
++	struct mmc *mmc;
++
+ 	switch (boot_device) {
+ 	/* SDHC2 */
+ 	case BOOT_DEVICE_MMC1:
+-		return "eMMC";
++		mmc_init_device(0);
++		mmc = find_mmc_device(0);
++		mmc_init(mmc);
++		snprintf(name, sizeof(name), "eMMC %s", emmc_hwpart_names[EXT_CSD_EXTRACT_BOOT_PART(mmc->part_config)]);
++		return name;
+ 	/* SDHC3 */
+ 	case BOOT_DEVICE_MMC2:
+-		return "SD card";
+-	default:
+-		return NULL;
++		sprintf(name, "SD card");
++		return name;
+ 	}
++
++	return NULL;
+ }
+ 
+ void spl_board_init(void)
 -- 
 2.25.1
 
