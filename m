@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAB71C04FFE
-	for <u-boot@archiver.kernel.org>; Tue, 14 May 2024 18:51:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42186C04FFE
+	for <u-boot@archiver.kernel.org>; Tue, 14 May 2024 20:26:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0598687915;
-	Tue, 14 May 2024 20:51:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 7452187527;
+	Tue, 14 May 2024 22:26:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="qyUgRShM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fpTpnZzn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE752878E2; Tue, 14 May 2024 20:51:00 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 5F0F187527; Tue, 14 May 2024 22:26:44 +0200 (CEST)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0C7387915
- for <u-boot@lists.denx.de>; Tue, 14 May 2024 20:50:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E2F3E871C7
+ for <u-boot@lists.denx.de>; Tue, 14 May 2024 22:26:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-a59b58fe083so69736966b.0
- for <u-boot@lists.denx.de>; Tue, 14 May 2024 11:50:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-61e0c2b5cd2so48308487b3.1
+ for <u-boot@lists.denx.de>; Tue, 14 May 2024 13:26:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1715712656; x=1716317456; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1715718400; x=1716323200; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iaRpIOi2rAxD9Fqh+y7uP585pa5fOxuJHPOhcksZH6s=;
- b=qyUgRShMA4ik93l9ZIriPnsl+AwS9k0OgKoF63lnU2nrU0S5Eop9MghSz/Pkd/PSFh
- Ivuq1lyAw+ggQzbJBH/vLXEMoDS44Yp5y6bW3qrusq8rFwLdXoUqnNreV7jnZfpPmVJ8
- jk/PzSPSQlcQEYj6ORWhEPkXKGdQZWh2mxs2OIRzrQkC0F5T9PJKWvwD0ZK/qhAxTaKp
- ZtN7dl/z/rABy5h9DAsskXvftIZNheaPCICvLrYIpXCmAd1lbUvTIBDS6nrGT2b+6YZT
- K69By+YvDYKdkPTLNp06d5gWOFRuJoDoJxE0FBlccSec1m9Yl2cN+L/JR6UcpSv7Ifme
- 7wqA==
+ bh=hljhHZT0YBIuxtEL2XUiKvaJqsx0YEa2X9Prfx7GeoQ=;
+ b=fpTpnZznNbg60p4ByUteqd4bHYK9EuenM5J0NbpLGpBEBT9KMXzBuS/fx1mrqbpJDg
+ prRLkfn0ppz4OMc/0c36I5R68g2kQ9TP95vM4kCB888Lj0Msbf/fCiZorXfjrZs/4YZU
+ kCWlU77kf9G4ampBOdPTSqbY/U9CwJS4rjcf6FBxknHjHP9Ec8BX6dhDFI3nPri5IKkQ
+ Wtdv4KY+1+LmoTdO2XpKMCP2Jnu/0J7zkL3fDS03erPT2+4ZS0wiyFnBUXD5CmVaSy9+
+ ZE7YpkPvEIon6x8/4fWxOD3y72U2tt6G3RVFHX87gOJZjaHKLX2jlWF7rqoSSIt0xGBV
+ XaYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715712656; x=1716317456;
+ d=1e100.net; s=20230601; t=1715718400; x=1716323200;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iaRpIOi2rAxD9Fqh+y7uP585pa5fOxuJHPOhcksZH6s=;
- b=h0n6i9mSbRv/bp34WHvrhz55gf3seiz+ww2i84flgU6gPEIOLu9p/L4THN0b1GbO+L
- 9gyZPVHI0XXAld55f4uI24daOh5KNyipVM8IbNDbd6jaY/y5PG7kVeEkT+EwJlMJGTZl
- jQK+8975sNBPSmXUfVUPJDQdH01Ph/OpiiQZaKj/uXj63NexO4gnlH4hSrYviCN37lzs
- eJFu6UdUPuVvTwsJWURuE3e50Wt/d0hSMCiR3e8hGaBg+Ufc0JMqbXucvRhX/VHYArvm
- R1fcUrKQDp9Z6fUTEEsswugQtYE/A6gUTjFuO+BVGZvlNuPzV2e07tL+OCRV1iGCgGuE
- 7s2g==
+ bh=hljhHZT0YBIuxtEL2XUiKvaJqsx0YEa2X9Prfx7GeoQ=;
+ b=OzQgIKcTc96DAZtAkPHEepYBHKSPHvZq0x0Yc2fPydBypq1rDUiTsqDnj/U0YFt/wT
+ Tz2kfSsq+aRKXgeXp3t183gGdnnnxT/kq/Tf2Z6RdhvtggoeCzAatUEalGeC1JcMdjkP
+ dWfzpjnIh5dO4hz1TMBq6xsbuJ6IzwonuHebnJUrcA50xaA9aNQv12fkCQQOeJTzWvUQ
+ 3SXZrtNpYJa0G7ELZFY58HJDJB2/iZuqbrBC6gJr9OazrBobYMIX2PP/W+rhEeSJtwZo
+ 0XPbFp6xUpkTTKAGrxx32+YoUK8DBCw82iR69qSuiyslUmkoEu0j2ItD1nGYBam5Dvae
+ XiYw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVoh+ri1ZvasBUfXx+dIWUq4abCWurnORQpo+fbExhS45+ampWWYaW4i4TNa2lea6pPh8sK+zYx9Ne2Lg+HHYJpenrfFg==
-X-Gm-Message-State: AOJu0Yw2yGzr58pzK+Q+pQM2KT9EJOGpKVaYJ7Av9bd9/O8VD93nGmiz
- DNfteQQkKqvc/KcoQ7auBhx901KA7IOAx71+4Usn6051eOYRfcpTZeXWPzJ9FOY78fGqIH9oBf/
- 8FhZo/Oiqx1ceEeVhC+2hwfVLPc3knubTexaQXTduVfRP/5dSaaY=
-X-Google-Smtp-Source: AGHT+IEX4ykhKacumFRyXfggzVvDZNMVopZuDTkgqk6iUVu5c213aC97T0/q2KIA+foszFUdsG3qJS3UBUaeG0Fl+Hw=
-X-Received: by 2002:a17:906:7f06:b0:a59:ae57:1660 with SMTP id
- a640c23a62f3a-a5a2d57a756mr739106266b.32.1715712655875; Tue, 14 May 2024
- 11:50:55 -0700 (PDT)
+ AJvYcCXkLS0RgVjVWJoBNrmXcylgy8oIOkz+RYogkd+Z3Flcc74Ug5PHqHLewGD5xtkNhuGNuZ+JwgPv0ZgJYZ9Vy85IE/uFfg==
+X-Gm-Message-State: AOJu0YxjVjm+wZGsvd+tEt0NAy1eJ5IXyyaAwleTsERdOYTMn/FeBQaO
+ k6C8uOx/JYnQfHZsUoDIaRMCb+zQG6OLzwI75wnZvV4+a+V4XKw3Ek17II3lw7PxzVxoInpc7qu
+ 2PbPA7bsrHlhCR6xyv9Tk1Jn0XXd0NsUbZyEdLQ==
+X-Google-Smtp-Source: AGHT+IHNmgbe+UFTr6URgJOwfo3JpXAuydF5A1+DIsAp48smF16RSIRuQeqjDRueB3wVBioNRDZiLt2p78Cs2Xrb31o=
+X-Received: by 2002:a0d:db12:0:b0:615:73f:d52d with SMTP id
+ 00721157ae682-6255811bedemr15836397b3.17.1715718400663; Tue, 14 May 2024
+ 13:26:40 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240503010518.263458-1-marex@denx.de>
- <20240507130650.713801-1-ch@denx.de>
- <28173ffa-209b-498f-a2c3-99ec2f898e7c@denx.de>
- <e98dc839-f58f-4463-9358-4d3ba267d558@denx.de>
- <7d834245-9ac2-45cf-b5bb-045560863bcb@denx.de>
-In-Reply-To: <7d834245-9ac2-45cf-b5bb-045560863bcb@denx.de>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Tue, 14 May 2024 11:50:44 -0700
-Message-ID: <CAJ+vNU2MCQNDO1hehq3CvWAFUqaSR=0eW6xRrE8Dzcna79-doA@mail.gmail.com>
-Subject: Re: [PATCH] imx: hab: add documentation about the required keys/certs
-To: Marek Vasut <marex@denx.de>, Claudius Heine <ch@denx.de>
-Cc: Peng Fan <peng.fan@nxp.com>, Fabio Estevam <festevam@denx.de>,
- open list <u-boot@lists.denx.de>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+References: <20240308000432.32369-1-semen.protsenko@linaro.org>
+ <a135888e-0d97-1382-c1f9-5bf097a7ffe3@gmail.com>
+ <CAPLW+4=f1AcZRde8e+rWWpCm9BtFAACqdWCfMryRBcSFn4OinA@mail.gmail.com>
+In-Reply-To: <CAPLW+4=f1AcZRde8e+rWWpCm9BtFAACqdWCfMryRBcSFn4OinA@mail.gmail.com>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Tue, 14 May 2024 15:26:29 -0500
+Message-ID: <CAPLW+4kBMcO8xOyHYeOqi+npCT651990Efyuanzq8jDgnaqX5Q@mail.gmail.com>
+Subject: Re: [PATCH] clk: Propagate clk_set_rate() if CLK_SET_PARENT_RATE
+ present
+To: Sean Anderson <seanga2@gmail.com>
+Cc: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>, 
+ Yang Xiwen <forbidden405@outlook.com>, Julien Masson <jmasson@baylibre.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -95,107 +98,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, May 12, 2024 at 10:08=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+On Wed, May 1, 2024 at 4:12=E2=80=AFPM Sam Protsenko <semen.protsenko@linar=
+o.org> wrote:
 >
-> On 5/8/24 9:23 AM, Claudius Heine wrote:
-> > Hi Marek,
->
-> Hi,
->
-> > On 2024-05-07 3:28 pm, Marek Vasut wrote:
-> >> On 5/7/24 3:06 PM, Claudius Heine wrote:
-> >>> For CST to find the certificates and keys for signing, some keys and
-> >>> certs need to be copied into the u-boot build directory.
-> >>
-> >> Make sure to CC "NXP i.MX U-Boot Team" , else NXP is not informed. Use
-> >> scripts/get_maintainer to get the full list or just reuse the CC list
-> >> from patches in this thread.
+> On Wed, Apr 10, 2024 at 9:53=E2=80=AFPM Sean Anderson <seanga2@gmail.com>=
+ wrote:
 > >
-> > I send the patch with `--to-cmd scripts/get_maintainer.pl`, maybe I
-> > should have used `--cc-cmd`, but that would not change the list of
-> > recipients.
+> > On 3/7/24 19:04, Sam Protsenko wrote:
+> > > Sometimes clocks provided to a consumer might not have .set_rate
+> > > operation (like gate or mux clocks), but have CLK_SET_PARENT_RATE fla=
+g
+> > > set. In that case it's usually possible to find a parent up the tree
+> > > which is capable of setting the rate (div, pll, etc). Implement a sim=
+ple
+> > > lookup procedure for such cases, to traverse the clock tree until
+> > > .set_rate capable parent is found, and use that parent to actually
+> > > change the rate. The search will stop once the first .set_rate capabl=
+e
+> > > clock is found, which is usually enough to handle most cases.
+> > >
+> > > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+> > > ---
 >
-> Should now be fixed in
-> [PATCH] ARM: imx: Add doc/imx/ to i.MX MAINTAINERS entry
+> [snip]
 >
-> >>> diff --git a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-> >>> b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-> >>> index ce1de659d8..42214df21a 100644
-> >>> --- a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-> >>> +++ b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-> >>> @@ -144,6 +144,22 @@ The signing is activated by wrapping SPL and
-> >>> fitImage sections into nxp-imx8mcst
-> >>>   etype, which is done automatically in
-> >>> arch/arm/dts/imx8m{m,n,p,q}-u-boot.dtsi
-> >>>   in case CONFIG_IMX_HAB Kconfig symbol is enabled.
-> >>> +Per default the HAB keys and certificates need to be located in the
-> >>> build
-> >>> +directory, this means copying the following files from the HAB keys
-> >>> directory
-> >>> +flat (e.g. removing the `keys` and `cert` subdirectory) into the
-> >>> u-boot build
-> >>> +directory for the CST Code Signing Tool to locate them:
-> >>
-> >> Do symlink(s) work too ?
 > >
-> > I have not tested it, but I don't see any reason why it would not. I
-> > also don't see a reason for mentioning it. I want to keep it simple, if
-> > the dev whats to do things differently, they are free to do so.
+> > Can you give an example of where this is needed?
+> >
 >
-> "
-> Per default the HAB keys and certificates need to be located in the
-> build directory, this means {+creating a symbolic link or +}copying the
-> following...
-> "
+> Sure. In my case it's needed for eMMC enablement on E850-96 board.
+> eMMC node in the device tree [1] is a gate clock
+> (CLK_GOUT_MMC_EMBD_SDCLKIN), so the MMC driver won't be able to change
+> its rate. But that clock actually has CLK_SET_RATE_PARENT flag set in
+> the clock driver [2]. So the right thing to do in this case (and
+> that's basically how it's done in Linux kernel too) is to traverse the
+> clock tree upwards, and try to find the parent capable to do .set_rate
+> (which is usually a divider clock), and use it to change the clock
+> rate. I'm working on exynos_dw_mmc driver [3] right now, making it use
+> CCF clocks, but I can't do that before this patch is applied.
 >
-> Please test it and add it in V2 if it works, I think symlink is better
-> than bluntly copying files around, esp. for crypto material.
+> Grepping the U-Boot tree I can see the CLK_SET_RATE_PARENT flag is
+> also used in various IMX clock drivers and STM32MP13 clock driver. I
+> guess without this change those flags will be basically ignored.
+>
+> Thanks!
+>
 
-Hi Marek and Claudius,
+Hi Sean,
 
-Yes, this documentation is needed as well but I'm still unclear why
-the old method before this series did not require the usr_key.pem
-files, why I don't have the *usr_key.pem files in my crts dir created
-(long ago) with cst-3.3.1 and cst-3.3.2, and what I need to do to
-generate them now that they are apparently needed.
+Just wanted to check if you think my explanation above is ok and the
+patch can be applied? I'm finishing my new patch series for enabling
+MMC on E850-96, but this patch has to be applied first.
 
-Best Regards,
+Thanks!
 
-Tim
-
+> [1] https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/dts/exyno=
+s850.dtsi#L408
+> [2] https://source.denx.de/u-boot/u-boot/-/blob/master/drivers/clk/exynos=
+/clk-exynos850.c#L353
+> [3] https://source.denx.de/u-boot/u-boot/-/blob/master/drivers/mmc/exynos=
+_dw_mmc.c#L117
 >
-> >>> +- `crts/SRK_1_2_3_4_table.bin`
-> >>> +- `crts/CSF1_1_sha256_4096_65537_v3_usr_crt.pem`
-> >>> +- `keys/CSF1_1_sha256_4096_65537_v3_usr_key.pem`
-> >>> +- `crts/IMG1_1_sha256_4096_65537_v3_usr_crt.pem`
-> >>> +- `keys/IMG1_1_sha256_4096_65537_v3_usr_key.pem`
-> >>> +- `keys/key_pass.txt`
-> >>> +
-> >>> +The paths to the SRK table and the certificates can be modified via
-> >>> changes to
-> >>> +the nxp_imx8mcst device tree node
-> >>
-> >> "nodes", plural, there are two, one for SPL and one for fitImage.
-> >
-> > Well, I was thinking here more generally about the node type and was
-> > assuming that the person reading this knows how many they have of that
-> > type. But I can add a `s` in v2.
->
-> Use "node(s)" which covers both options.
->
-> >> It would be good to mention the DT properties which govern the crypto
-> >> material paths -- nxp,srk-table, nxp,csf-crt, nxp,img-crt -- somewhere
-> >> around this sentence.
-> >
-> > This is something that should be documented with the changes where that
-> > code was added, IMO. I only documented here what I found out and have
-> > used myself, I haven't used those.
-> >
-> > I would be interested in reading how to best overwrite those paths and
-> > the image structured from board u-boot.dtsi files myself.
-> >
-> > If you want to can pickup my patch and integrate it into your series an=
-d
-> > extend it.
->
-> I'll keep it in mind for V3.
+> > --Sean
