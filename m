@@ -4,81 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D313EC25B75
-	for <u-boot@archiver.kernel.org>; Tue, 14 May 2024 13:37:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B63FC25B75
+	for <u-boot@archiver.kernel.org>; Tue, 14 May 2024 13:38:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EEAAA88312;
-	Tue, 14 May 2024 15:37:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 60D5B882D6;
+	Tue, 14 May 2024 15:38:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="iPfmoiE5";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 683AC882D6; Tue, 14 May 2024 15:37:37 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDED488311
- for <u-boot@lists.denx.de>; Tue, 14 May 2024 15:37:32 +0200 (CEST)
+ id 22F8388232; Tue, 14 May 2024 15:38:16 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id DAEB0882FA
+ for <u-boot@lists.denx.de>; Tue, 14 May 2024 15:38:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-41fd5dc0439so37920465e9.0
- for <u-boot@lists.denx.de>; Tue, 14 May 2024 06:37:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1715693852; x=1716298652;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ZpozE+HyQ9arx1P8/tUW4cZhnnAU9lMCVxDjuem/+6M=;
- b=iPfmoiE5DiK38ehQt/8ppj46A7GIyrZ1xq1HG/y7p/VIv/tpJyDATR+AwB0a5MCIz3
- xk9jWgAsPRKu5ajxsPzx/1qJGh9/LKQ4eWO4dm+Kcw4wtKq5PyaO5UzabCLZHjhVLECZ
- 2dMmyENuaQ4X4ltkEa3mAcZk7XBc2E3uuu3SpxfDZuFyRUneqitG3gkjLdBO5AywCsyN
- u1v1O5D0+wmhwuUUHBrcAjoMFUeY2UqhXKb6/rrI5NuaMVMrAdDSEfAenxzgcFg7ZU70
- 2bvZshk/PXBbi6kQ37JK0S0NHZSBqxykJfCaA/F/+Fezx0lk4IGPpxxgo61jGzhswh/X
- W1pg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715693852; x=1716298652;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ZpozE+HyQ9arx1P8/tUW4cZhnnAU9lMCVxDjuem/+6M=;
- b=GWcKKEl2PMF7JE5YznTXe1sd2OSJaldbdS8rbXIhmKYd93qC/iS3OxU2mabjWys9Az
- Gkc5AcX6Jw5jFKAQvFS0ehFNnZO15YoGHOuP2hcB2d/bGRdzXsmj7qTfsU8KJCdSw6VZ
- GwH3P8q1JTAdtNpm3gBlTs1qUDe4Lkwi3fzpVKGE/ES88aK0AeeOgIHAkn8KzcsaATXQ
- sU66Py5Otshhe7bkFuNjYW0A6Xy0OQTyc6bFNNEwvAp/ysD/3IxY3nXShtVkOEd+ocpZ
- aThDwGjfAPHTTPIQk5w6/3katYk5Shkuhdkp3Yi9rb6ZfF/S5XHXaRzK9VUAokoo0cyJ
- IrwA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUZEowohM5kVPhHHvxNnE+6MPA22u50Cy0ZVqouqzLYR7Kilk/E0w08SdL2T6wc8G8DyjrSPI9vtSlu2/5B+6EO66jlGA==
-X-Gm-Message-State: AOJu0Yy6B6JtDLEnNoCK+diyguICRkcU4Rho+KFYEl7d3SXu5eKbC8y1
- PIeGNSZLLctywydfigxniaAMpZ27zmx8fbBNVN+hNflHEtn0lmWP+SvektgCS4o=
-X-Google-Smtp-Source: AGHT+IH2j3o0wYCZDnw3S5YUonuEjkSRaQnlqBROBLXR1ubRFgaTqUK5o3zuMI3BTIsB98BhKZ+PoQ==
-X-Received: by 2002:a05:600c:4ba3:b0:417:fbc2:caf8 with SMTP id
- 5b1f17b1804b1-41feaa39374mr94476795e9.23.1715693852446; 
- Tue, 14 May 2024 06:37:32 -0700 (PDT)
-Received: from groot.home ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42010940845sm113834015e9.35.2024.05.14.06.37.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 May 2024 06:37:32 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Date: Tue, 14 May 2024 15:37:25 +0200
-Subject: [PATCH 2/2] MAINTAINERS: add usb gadget regex to u-boot-dfu tree
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D84921007;
+ Tue, 14 May 2024 06:38:37 -0700 (PDT)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5A8763F7A6;
+ Tue, 14 May 2024 06:38:12 -0700 (PDT)
+Date: Tue, 14 May 2024 14:38:04 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Michael Walle <mwalle@kernel.org>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH] sunxi: SPL SPI: add support for the V3s SoC
+Message-ID: <20240514143804.167bf448@donnerap.manchester.arm.com>
+In-Reply-To: <20240513234319.1966434-1-mwalle@kernel.org>
+References: <20240513234319.1966434-1-mwalle@kernel.org>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240514-gadget-maintainer-v1-2-b170f291dc00@baylibre.com>
-References: <20240514-gadget-maintainer-v1-0-b170f291dc00@baylibre.com>
-In-Reply-To: <20240514-gadget-maintainer-v1-0-b170f291dc00@baylibre.com>
-To: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>
-Cc: Lukasz Majewski <lukma@denx.de>, u-boot@lists.denx.de, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-X-Mailer: b4 0.13.1-dev-5d32f
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,34 +57,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We try to split work with Marek on USB as following:
-- Mattijs handles usb gadget
-- Marek handles the rest of usb
+On Tue, 14 May 2024 01:43:19 +0200
+Michael Walle <mwalle@kernel.org> wrote:
 
-Add additional gadget patterns to the maintainers file so that I
-get cc'ed more often on USB gadget patches.
+Hi Michael,
 
-Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
----
- MAINTAINERS | 2 ++
- 1 file changed, 2 insertions(+)
+> The V3s is identical regarding register layout, clocks and resets to
+> the sun6i variants. Therefore, we can just add the MACH_SUN8I_V3S to
+> the sun6i compatible ones.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 05217db79f7e..7fd3dd85e0a9 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1017,8 +1017,10 @@ F:	common/update.c
- F:	doc/api/dfu.rst
- F:	doc/usage/dfu.rst
- F:	drivers/dfu/
-+F:	drivers/usb/*/*gadget*
- F:	drivers/usb/gadget/
- F:	include/dfu.h
-+F:	include/linux/usb/gadget.h
- 
- DRIVER MODEL
- M:	Simon Glass <sjg@chromium.org>
+Interesting, I was a bit surprised that this would be all we need, but
+indeed everything else falls into place, when none of the newer SoCs are
+used.
+Regression-tested on an H616.
 
--- 
-2.44.0
+> SPI boot was tested on a custom board with a Gigadevice GD25Q64 8MiB
+> SPI flash.
+> 
+> Signed-off-by: Michael Walle <mwalle@kernel.org>
+
+Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+
+Cheers,
+Andre
+
+> ---
+>  arch/arm/mach-sunxi/Kconfig         | 2 +-
+>  arch/arm/mach-sunxi/spl_spi_sunxi.c | 3 ++-
+>  2 files changed, 3 insertions(+), 2 deletions(-)
+> 
+> diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
+> index ddf9414b08e..17666814c52 100644
+> --- a/arch/arm/mach-sunxi/Kconfig
+> +++ b/arch/arm/mach-sunxi/Kconfig
+> @@ -1078,7 +1078,7 @@ config SPL_STACK_R_ADDR
+>  
+>  config SPL_SPI_SUNXI
+>  	bool "Support for SPI Flash on Allwinner SoCs in SPL"
+> -	depends on MACH_SUN4I || MACH_SUN5I || MACH_SUN7I || MACH_SUNXI_H3_H5 || MACH_SUN50I || MACH_SUN8I_R40 || SUN50I_GEN_H6 || MACH_SUNIV || SUNXI_GEN_NCAT2
+> +	depends on MACH_SUN4I || MACH_SUN5I || MACH_SUN7I || MACH_SUNXI_H3_H5 || MACH_SUN50I || MACH_SUN8I_R40 || MACH_SUN8I_V3S || SUN50I_GEN_H6 || MACH_SUNIV || SUNXI_GEN_NCAT2
+>  	help
+>  	  Enable support for SPI Flash. This option allows SPL to read from
+>  	  sunxi SPI Flash. It uses the same method as the boot ROM, so does
+> diff --git a/arch/arm/mach-sunxi/spl_spi_sunxi.c b/arch/arm/mach-sunxi/spl_spi_sunxi.c
+> index 7acb44f52ae..d7abdc2e401 100644
+> --- a/arch/arm/mach-sunxi/spl_spi_sunxi.c
+> +++ b/arch/arm/mach-sunxi/spl_spi_sunxi.c
+> @@ -140,7 +140,8 @@ static bool is_sun6i_gen_spi(void)
+>  {
+>  	return IS_ENABLED(CONFIG_SUNXI_GEN_SUN6I) ||
+>  	       IS_ENABLED(CONFIG_SUN50I_GEN_H6) ||
+> -	       IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2);
+> +	       IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2) ||
+> +	       IS_ENABLED(CONFIG_MACH_SUN8I_V3S);
+>  }
+>  
+>  static uintptr_t spi0_base_address(void)
 
