@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A2A8C04FFE
-	for <u-boot@archiver.kernel.org>; Tue, 14 May 2024 16:15:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2001C25B75
+	for <u-boot@archiver.kernel.org>; Tue, 14 May 2024 16:15:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 951F888321;
-	Tue, 14 May 2024 18:15:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ECBCF8834E;
+	Tue, 14 May 2024 18:15:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Lg+WIqak";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L7us8GjV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2EBD87CF8; Tue, 14 May 2024 18:15:19 +0200 (CEST)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id 018DA882FA; Tue, 14 May 2024 18:15:27 +0200 (CEST)
+Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
+ [IPv6:2607:f8b0:4864:20::b2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC89B88321
- for <u-boot@lists.denx.de>; Tue, 14 May 2024 18:15:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE3A387CF8
+ for <u-boot@lists.denx.de>; Tue, 14 May 2024 18:15:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-78f05341128so451318685a.0
- for <u-boot@lists.denx.de>; Tue, 14 May 2024 09:15:17 -0700 (PDT)
+Received: by mail-yb1-xb2f.google.com with SMTP id
+ 3f1490d57ef6-de462979e00so6197790276.3
+ for <u-boot@lists.denx.de>; Tue, 14 May 2024 09:15:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715703317; x=1716308117; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1715703323; x=1716308123; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=PmSq8LdSETr27QShODFUJ0WMKXmQBe6VpCIzY796WRM=;
- b=Lg+WIqakQBPvHsrCiarzGKXuHrnEkFBxK6lyS3Jj+eqnndRWwz6N7HY0x/lx5SzT8C
- /OJOqdbFYPAoCTzCDylhkkhP0/fydrPjaA3bokUHzCn0VrjQl4VVvI6fAqxybjldtD2p
- ubFB6LuWom67DMUqnL8vIRDan27oQQY6VW00E=
+ bh=phUwFPtnBsmBguY66erzeEqD2UNSFzDI6XconeW8E+4=;
+ b=L7us8GjV5G49KkNGUwmG6qNTcLbUcx7T6RMM/qMdhpFhbhA5AGgOkoho5rr4IbwEtQ
+ aRgZjzXkGC1Wby8QKa4Rp+DNjsoYkhOw79uC1WCPmvNgEAlorP+pojTbsE2gBwf1jy6R
+ 0Ir953UAwQz3+Asv5sHwTrSbjknWZXJxMkVk0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715703317; x=1716308117;
+ d=1e100.net; s=20230601; t=1715703323; x=1716308123;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PmSq8LdSETr27QShODFUJ0WMKXmQBe6VpCIzY796WRM=;
- b=GKwIMkPSQ3DjN2wHuH27c6HTstFm5GLb/jLN3T+q9bRvxST6Pf32Y1PG461kxHXxc/
- OTdT1y9QtDuvcMOAJjrRPSus74pkcbfD7QgBpqSR5cF13fopiZxs01UYV9I+bAnf2Rdu
- trW6GhPPIkbbIIjs5RGxCoCBc0TSpwNN6/Cn4rNlMNA/0Q/22eW7QCKQZ+xsiJATk24z
- NoF3aZOYdCPq7LORiNmQXo3FF+OU/jdhCYPJIbZL5EAX5Lxkjok947YHrzpVh/5LbnGG
- KjozAS27VFImN5+Wx4b5i5MJQF5lmqNKAa2a5gpy6m9cOlu2yE7A5BRAzPc0ye5KK3j2
- k03Q==
-X-Gm-Message-State: AOJu0YwRMvVVxVkUG5pv42QLn2yLkFlpcd230NSsnOKBTXhkuSDHs7jk
- KkpDohCdj5T+k7scfVeWFFy6jf6SRDalk9tj1ykvrrUQrk6Ts26oNhGJmT5BQRPIqvSvrXlltYq
- jIvc=
-X-Google-Smtp-Source: AGHT+IE0X6AihpRhgKbkR7JZUP0efmK7Her4TQ93UvEd8KtDCMue9RPSDJuBbThQAnmTt0WnP3PJRw==
-X-Received: by 2002:a05:620a:941:b0:792:bc47:4064 with SMTP id
- af79cd13be357-792c75a0f26mr1350050885a.25.1715703316634; 
- Tue, 14 May 2024 09:15:16 -0700 (PDT)
+ bh=phUwFPtnBsmBguY66erzeEqD2UNSFzDI6XconeW8E+4=;
+ b=AwV+PCHz7gLPfcypw0atmOcfT2Ecl/2HF7ZP/IpzygmCHEzcDSdzgv4FNEbRE8Zw+Y
+ YEMwfYAVRJC2HjssJ0N9DS5XR88ngHWSa/7R8jAUYQGRsBLO7zFxc176KNxpSuywPW+o
+ riDEMiiwpmwD5PdRJSD3ROLu9UlDlGSZZ2e98nJYUCIp7OaKQgfm1KDCgosxp/oLMj9q
+ fli7WJsKlrrrmXTcjUnPgDQUoeJ2OZMlB/A4eZM/B6xGlviWC0wTfBrgga/j40Carl/R
+ jnVpM7iXCrMrFNYgWNauBkoZGvF9FT1Xl1Z85IHdrI3yry9JNOtldkLEoF+dWRnWFv+n
+ z+5Q==
+X-Gm-Message-State: AOJu0YwYit7EZ7bpsFWpxrxsu98CrSnSE22z+qiBBx8h3uaMO2q2UUc8
+ ONfpB1Ebhs1Nqm3YvIUdpGxoUKwvJJNXGBim1MOH7CfGifkKD4k9qCbLgjY8y4o=
+X-Google-Smtp-Source: AGHT+IEoO69kY1m86iIdf7/VLT3hNGelXrtD7hZmoAFlswf12unkx965mAKGVQTj/OsGIgnx3G5srQ==
+X-Received: by 2002:a25:8746:0:b0:de6:aef:fc2e with SMTP id
+ 3f1490d57ef6-dee4f3aa085mr11446514276.41.1715703322588; 
+ Tue, 14 May 2024 09:15:22 -0700 (PDT)
 Received: from bill-the-cat ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-792dbc57811sm265533385a.14.2024.05.14.09.15.15
+ 6a1803df08f44-6a15f194871sm54814366d6.59.2024.05.14.09.15.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 May 2024 09:15:16 -0700 (PDT)
-Date: Tue, 14 May 2024 10:15:13 -0600
+ Tue, 14 May 2024 09:15:22 -0700 (PDT)
+Date: Tue, 14 May 2024 10:15:18 -0600
 From: Tom Rini <trini@konsulko.com>
-To: WHR <whr@rivoreo.one>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v3] sandbox: make function 'do_undefined' properly
- compiles for PowerPC
-Message-ID: <20240514161513.GM2568172@bill-the-cat>
-References: <98e71d2cd17cd9992e60190ede4a5b03.squirrel@_>
+To: Peter Hoyes <peter.hoyes@arm.com>
+Cc: u-boot@lists.denx.de, andre.przywara@arm.com, mk7.kang@samsung.com,
+ ilias.apalodimas@linaro.org, wqu@suse.com,
+ neil.armstrong@linaro.org, sr@denx.de, michal.simek@amd.com,
+ patrick.delaunay@foss.st.com, sjg@chromium.org,
+ patrice.chotard@foss.st.com, quentin.schulz@theobroma-systems.com
+Subject: Re: [PATCH v2 1/2] arm: Move sev() and wfe() definitions to common
+ Arm header file
+Message-ID: <20240514161518.GN2568172@bill-the-cat>
+References: <20240501081633.120913-1-peter.hoyes@arm.com>
+ <20240501081633.120913-2-peter.hoyes@arm.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="rhiphOAujL+mV3Qe"
+ protocol="application/pgp-signature"; boundary="t7fGb7kHZ43JnHdR"
 Content-Disposition: inline
-In-Reply-To: <98e71d2cd17cd9992e60190ede4a5b03.squirrel@_>
+In-Reply-To: <20240501081633.120913-2-peter.hoyes@arm.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,46 +96,47 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---rhiphOAujL+mV3Qe
+--t7fGb7kHZ43JnHdR
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, May 01, 2024 at 12:55:10AM +0800, WHR wrote:
+On Wed, May 01, 2024 at 09:16:32AM +0100, Peter Hoyes wrote:
 
-> The 2 bytes 0xffff is too short for being a PowerPC instruction, resulting
-> in an error similar to:
->     /tmp/ccW8yjie.s: Assembler messages:
->     /tmp/ccW8yjie.s: Error: unaligned opcodes detected in executable segm=
-ent
->     /tmp/ccW8yjie.s:223: Error: instruction address is not a multiple of =
-4=20
->     make[2]: *** [/tmp/ccyF4HIC.mk:17: /tmp/ccCKUFuF.ltrans5.ltrans.o] Er=
-ror 1
+> From: Peter Hoyes <Peter.Hoyes@arm.com>
 >=20
-> Signed-off-by: WHR <msl0000023508@gmail.com>
+> The sev() and wfe() asm macros are currently defined only for
+> mach-exynos. As these are common Arm instructions, move them to the
+> common asm/system.h header file, for both Armv7 and Armv8, so they
+> can be used by other machines.
+>=20
+> wfe may theoretically trigger a context switch if an interrupt occurs
+> so add a memory barrier to this call.
+>=20
+> Signed-off-by: Peter Hoyes <Peter.Hoyes@arm.com>
+> Reviewed-by: Andre Przywara<andre.przywara@arm.com>
 
 Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---rhiphOAujL+mV3Qe
+--t7fGb7kHZ43JnHdR
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZDjhEACgkQFHw5/5Y0
-tyzrqQv/byQH9+Kq0hEEgVnrR/nuoM02RXcGSmR86uKZ5+UH3Mghia892Cq4Ugk1
-llgvg45bqiTNI9lAZJFdQU4sLaKSSzX6q8DWGmhcOzCLjSI6vgo8cTT8XaW5lKKz
-TI3zeQTERmnjeGcmMMDBdo9RE4+J9LuVhdSesEQXMku29DV/izj0dfD6iDk4iuMl
-1PaGCMzqWqqf1L7u70zjGsnKMQqZBqccGb+gWgvDe8WyW5WE3anPn9uFnW8XfDeJ
-D0XnIf6By21xOPL0B5Mj0wCEJIdC0gkPsGtGY41aDE3VK9Pr6DRusR/Q1JR3iZG1
-qNzXfKJTivuctZZMrXpmg6O96mTEPOf7cQJ97uEYbXfo/Gs/BB2iv7gMyqBknXFS
-Z4PKHvcaWcvRwKyQMF3CgUe3cG1QvBlxMYYEXbm2Sxe8eI2WxyXrkhEdVe3S2sLY
-Cq6RS7PVyIjqAtctxpIyGnRTQGJu45LcdOb+M2wpsKhRFlEJjqIBaosh5x87nNtV
-Q9S5XD7D
-=/HSP
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZDjhYACgkQFHw5/5Y0
+tyyGBgv+IGHtZe3NNhylZHwMTjjm0YKFQGahkd8/t+mKAS6yF8JMpcdxIRTXbryG
+oyixAQ3azukcED8zC1mRiVRriH65D9yjeVh1TVGTJRx+eLSoQvd6zrDHhgTbCrec
+uFdRvVR2Uon0HfwLkEaWogUhxzVaLZu/TJE8zrmCl6EHoluVbuHehOGCIOylgcub
+9efikScRGXfEpMk6bXhwmRLp097TztmRToFE8NW0VGb/3PtN14Vq/W0q9tUwG5HD
+cYfFRVcnZr608njZuop9I+jXlcsCx4szWu0GH5LUggfDQuAt4Ei0nLgztxveSAMN
+Vt9KG3GfABAUzfim9LWJ5opkcn/MATy6DzndQ1cxXeRrK00VWWp5K2rJuLctPhM5
+oNwMYfxZfKgyJupMuG9U04TH14bhSYfEtL36D5uhqimhCA7ORWPQMNZXYJk1RFjo
+hdOot9Jvw+TEt6S7yk2/F0XbhBhvoVWw30TC1yaMDRNsQERFDq7PtF80f7AwtcN+
+ssXXCFk4
+=te/c
 -----END PGP SIGNATURE-----
 
---rhiphOAujL+mV3Qe--
+--t7fGb7kHZ43JnHdR--
