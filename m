@@ -4,81 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BD9FC04FFE
-	for <u-boot@archiver.kernel.org>; Tue, 14 May 2024 04:30:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CD96C04FFE
+	for <u-boot@archiver.kernel.org>; Tue, 14 May 2024 05:39:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D156C880DE;
-	Tue, 14 May 2024 06:30:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=edgeble.ai
+	by phobos.denx.de (Postfix) with ESMTP id 8597288229;
+	Tue, 14 May 2024 07:38:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=edgeble-ai.20230601.gappssmtp.com header.i=@edgeble-ai.20230601.gappssmtp.com header.b="isSVB6PJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="V7a8witw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C8BB88246; Tue, 14 May 2024 06:08:00 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id E48AB88280; Tue, 14 May 2024 07:38:56 +0200 (CEST)
+Received: from mail-vs1-xe29.google.com (mail-vs1-xe29.google.com
+ [IPv6:2607:f8b0:4864:20::e29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD2B287CDB
- for <u-boot@lists.denx.de>; Tue, 14 May 2024 06:07:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C894588229
+ for <u-boot@lists.denx.de>; Tue, 14 May 2024 07:38:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=edgeble.ai
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anand@edgeble.ai
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-51f3a49ff7dso6647102e87.2
- for <u-boot@lists.denx.de>; Mon, 13 May 2024 21:07:57 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-vs1-xe29.google.com with SMTP id
+ ada2fe7eead31-47eee2af758so3302838137.1
+ for <u-boot@lists.denx.de>; Mon, 13 May 2024 22:38:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=edgeble-ai.20230601.gappssmtp.com; s=20230601; t=1715659677; x=1716264477;
- darn=lists.denx.de; 
+ d=linaro.org; s=google; t=1715665133; x=1716269933; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=OlZd9AEqnV8mMu4XVxbmzR90JWuoqIPNFykPRh+dYtc=;
- b=isSVB6PJDNtcgnxaluxOTSJHRDMSu7AEkskLyKSqm+dcscRgVk+Qq1sMaadmxownYT
- ferm+DD5/KS3ZwXp4fwP8f/DsffZeOmZ/vAGROKe1JbEXioMT3naddzPe1VFzOJF/lOJ
- KyTpoOnaX7zNoND1ZJaJU/dQD448iaFZ8Q6tCrqE9xVBk/3TMWvwLp1YSiH64i2x6XAE
- ZxzsiwQK1N3ho2fVIoCN//hAHsV7d3UEJAMF3n20GnkQhtOt1W0livcAVr69SrwxmGSv
- WMv20qTMR9PG7MHZlEH7SsmyBgTYBl3hAUUxNV3JkpUUUJcGTChuQKgxqAOI34Nu8UVy
- ky0w==
+ bh=sMIcQDQCc1bL6rRW36WmRwGdIyIvUB1tFt8g7V/OOmA=;
+ b=V7a8witwjFRx8m8FFghSFfpp+SE+zBgwtMy/96lHL8soKxKIAbmGUAxyVfJuqp4uYb
+ iH5K8g/Vqxxz+jcvTbmh/6gnZyqw2mANRZfL7vNOIvWe1Xd1QGNz8l8YcvjrbAbXRl2a
+ sAsZuxCfa1XqQLECecBsKFVr5RPnOQbbco5gfRnVe4ueOlyefVVmLgknkr53B1uPvRN1
+ jGiH7bCcmtN4DW81NB1MnOxpQKvIcNG2xr6iAbP0bnrbxqMBHj89sVefb/ehzeCm9qm0
+ fD2r/OC0Q//SLPmRgugsJRtP1mjXnSn053kv/BpkPUh3arPwWkdsXiYONzhXHH/9gxtJ
+ 2pTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715659677; x=1716264477;
+ d=1e100.net; s=20230601; t=1715665133; x=1716269933;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=OlZd9AEqnV8mMu4XVxbmzR90JWuoqIPNFykPRh+dYtc=;
- b=AdPylYu4XCITQ4nS18yeEO8bALgO9d6LsWu4wBAaOs4oxjCe+xaUs4FsB5wmzoXI7H
- n/h2gi37R+9gMdweoX5KX7X9GhOl0QXUo1wrAipdJrdhi0vOQg3fJx0LD2pWkSfHJGaQ
- CIdcr9RU2QRTHhuvJSL+7q55AOWUUtugRLCYMuVvZAea576uHBmj5rgqn4ANTF5YWmj0
- wpZOUQzhI4V7BQqRLP+M4GogWS/QJWno1oqVIrRx2vsFylQ5azAZho3v4SS0mjqk80CA
- oGTsx1XYwg26TqGhd8YfyKyheaR0/ljDnHh1RssOo0dKghw1t5BifddzoOqmxD01H9/K
- Jc8Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXd9EEZCwTgetDs7tDpSCLdol75KqM31u2XViZ9b14lJ0Qhhj3EaFOZxBpfQiJz+4mjuUZs8661WH4hiUQVskHYjASuYg==
-X-Gm-Message-State: AOJu0YyHylFFpBPu31SWIsPnNvDBKWxFjufuumfQhNojl47zhYGVQ/T/
- 8lfraauE/2tGtL+VBoQddqEii6aR4AGC2sI7KEZGGWkFukbrdPFkYldvzEOs7EH5Du2Zc6WBg1t
- bgtvZ0yUkNHK34nTQRyWMSVcFvgQoAmzJSH615g==
-X-Google-Smtp-Source: AGHT+IG5xraivrMfm5EDDBMhPHTsgnGXqnGIMze0MFjJPPZ2eO5MVB3yuS5PBKlBEAaVzJGYym1sWFe8wVs+Cwug26o=
-X-Received: by 2002:a05:6512:2310:b0:523:70db:7a0f with SMTP id
- 2adb3069b0e04-52370db7b5emr372001e87.8.1715659676858; Mon, 13 May 2024
- 21:07:56 -0700 (PDT)
+ bh=sMIcQDQCc1bL6rRW36WmRwGdIyIvUB1tFt8g7V/OOmA=;
+ b=Y1xC/i69/Q0sRI2tHlRav+u/Z5Oc1x4NXgPxDgzlsnTb5VPmfs/0uLJXg7VrK+qe1m
+ uXdtYPlZZMUsen6Aj89qMgw7ek3RyOYyFwlY2Y755y5TdhCKSE0D6dTID7/LZr44rPih
+ 1XKsL/TKKwYVjcfhPjvslYY/QSYjPtXY3KkmJq6MF1sg+V2zw4TcyXw1V47bsYHZ/wUQ
+ 61NigSsAaY9SHSvdl0FneY7t6Oc0Rz2rPwuBklZSMJAPHqRR55tygA5uPMlw5wPKGiCS
+ Td/+YEowvT9sz8z1p6FdXLvL5CX5M2IJ471lvHW4dyQ0e5iRpsrjh9LmDbHds5Im3obq
+ ekiQ==
+X-Gm-Message-State: AOJu0YwcL9IgGNENlpOmFsjFHmgTtKB9F+l+ae5dvHWiuul2o2a+VCIm
+ dE4GM1I/MtmrzQk4B+4jV9Ld0fF6flQMaV9XaVQUVhWDXiLuIBr4Js7qWOM/hsfhL1/Ad5YcTHn
+ jouh4U8YrkbXSViqRn9yDRfia1uitL30ticQEGg==
+X-Google-Smtp-Source: AGHT+IHidPBSnUgAUC3g2j93puxQK1bLEmeuWiUaHmnIH4jbz98zO22ohY61+aRM+Ebo0gOKK03KrI7ivCxzDo7OWWM=
+X-Received: by 2002:a05:6102:1914:b0:47f:2480:584d with SMTP id
+ ada2fe7eead31-47faba20f99mr11464298137.6.1715665132685; Mon, 13 May 2024
+ 22:38:52 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240511161224.1176-1-anand@edgeble.ai>
- <6857bc47-895d-45bc-9b7d-d00ac7b0ec1a@cherry.de>
- <CACF1qncdn9y+bE6vwjCBOAdseTkwPORMHfJ2JFJt6m7ECHGT1A@mail.gmail.com>
- <e8bdf854-db5c-4292-b469-bb678d75d498@cherry.de>
-In-Reply-To: <e8bdf854-db5c-4292-b469-bb678d75d498@cherry.de>
-From: Anand Moon <anand@edgeble.ai>
-Date: Tue, 14 May 2024 09:37:46 +0530
-Message-ID: <CACF1qnd+uOemB+8qjQyndf29m+O8yQW+BkTdXNEazSD5mUqhNg@mail.gmail.com>
-Subject: Re: [PATCH v3] rockchip: rv1126: Migrate to OF_UPSTREAM
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Jagan Teki <jagan@edgeble.ai>, Tim Lunn <tim@feathertop.org>,
- u-boot@lists.denx.de
+References: <20240513-boston-v1-0-fac96938417e@flygoat.com>
+ <20240513-boston-v1-11-fac96938417e@flygoat.com>
+In-Reply-To: <20240513-boston-v1-11-fac96938417e@flygoat.com>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Tue, 14 May 2024 11:08:41 +0530
+Message-ID: <CAFA6WYMYA7t_KHZ7z-80uBispXp1gk3+MD5LEXWEgNRrnA9hLw@mail.gmail.com>
+Subject: Re: [PATCH 11/13] dts/upstream: Add Makefile for MIPS
+To: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Cc: u-boot@lists.denx.de, Michal Simek <michal.simek@amd.com>, 
+ Tom Rini <trini@konsulko.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Paul Burton <paulburton@kernel.org>, Simon Glass <sjg@chromium.org>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Tue, 14 May 2024 06:30:10 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,63 +90,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin
+Hi Jiaxun,
 
-On Tue, 14 May 2024 at 00:01, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+On Mon, 13 May 2024 at 23:43, Jiaxun Yang <jiaxun.yang@flygoat.com> wrote:
 >
-> Hi Anand,
+> It is required to make OF_UPSTREAM work.
 >
-> On 5/13/24 2:07 PM, Anand Moon wrote:
-> > [You don't often get email from anand@edgeble.ai. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
-> >
-> > Hi Quentin,
-> >
-> > On Mon, 13 May 2024 at 16:10, Quentin Schulz <quentin.schulz@cherry.de> wrote:
-> >>
-> >> Hi Anand,
-> >>
-> >> On 5/11/24 6:12 PM, Anand Moon wrote:
-> >>> [You don't often get email from anand@edgeble.ai. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
-> >>>
-> >>> Migrate RV1126 boards that exists in Linux v6.8 to use OF_UPSTREAM.
-> >>>
-> >>> Following targets is migrated to use OF_UPSTREAM:
-> >>>
-> >>> - rv1126-edgeble-neu2 : Board is an industrial form factor
-> >>>                           IO board.
-> >>> - sonoff-ihost-rv1126 : Gateway device designed to provide a
-> >>>                           Smart Home Hub.
-> >>>
-> >>> Cc: Tim Lunn <tim@feathertop.org>
-> >>> Cc: Jagan Teki <jagan@edgeble.ai>
-> >>> Reviewed-By: Tim Lunn <tim@feathertop.org>
-> >>> Tested-By: Tim Lunn <tim@feathertop.org>
-> >>> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
-> >>> Signed-off-by: Anand Moon <anand@edgable.ai>
-> >>
-> >> Doesn't match the mail address sending this patch :)
-> >>
-> > Earlier I sent this patch with my email ID,
-> > Since I am testing these new boards,
-> > I will use this edgable.ai email ID for source code changes to boards.
-> > if needed I could send this with From: Anand Moon <anand@edgable.ai>
-> >
+> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> ---
+>  dts/upstream/src/mips/Makefile | 14 ++++++++++++++
+>  1 file changed, 14 insertions(+)
 >
-> Up to you, it is just particularly odd that there's only one letter
-> difference between those two mail addresses, which very much looks like
-> a typo:
-> edgeble.ai and
-> edgable.ai
->
-> But if this was on purpose, nothing against it :)
->
-> (I made a similar typo in a kernel patch recently, hence why I brought
-> this up :) )
->
-Thanks, I will take care in the future.
 
-> Cheers,
-> Quentin
+Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 
-Thanks
--Anand
+-Sumit
+
+> diff --git a/dts/upstream/src/mips/Makefile b/dts/upstream/src/mips/Makefile
+> new file mode 100644
+> index 000000000000..9a8f6aa35846
+> --- /dev/null
+> +++ b/dts/upstream/src/mips/Makefile
+> @@ -0,0 +1,14 @@
+> +# SPDX-License-Identifier: GPL-2.0+
+> +
+> +include $(srctree)/scripts/Makefile.dts
+> +
+> +targets += $(dtb-y)
+> +
+> +# Add any required device tree compiler flags here
+> +DTC_FLAGS += -a 0x8
+> +
+> +PHONY += dtbs
+> +dtbs: $(addprefix $(obj)/, $(dtb-y))
+> +       @:
+> +
+> +clean-files := */*.dtb */*.dtbo
+>
+> --
+> 2.34.1
+>
