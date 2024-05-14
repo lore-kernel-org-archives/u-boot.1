@@ -4,82 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B21F8C25B75
-	for <u-boot@archiver.kernel.org>; Tue, 14 May 2024 14:12:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD67EC04FFE
+	for <u-boot@archiver.kernel.org>; Tue, 14 May 2024 14:51:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1770E88262;
-	Tue, 14 May 2024 16:12:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E8B1688232;
+	Tue, 14 May 2024 16:51:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Jum4dcC2";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="U98ZDF4F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFBC888262; Tue, 14 May 2024 16:12:31 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6B7E788262; Tue, 14 May 2024 16:51:23 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D2118829B
- for <u-boot@lists.denx.de>; Tue, 14 May 2024 16:12:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 19A7B881F4
+ for <u-boot@lists.denx.de>; Tue, 14 May 2024 16:51:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-34db9a38755so5413660f8f.1
- for <u-boot@lists.denx.de>; Tue, 14 May 2024 07:12:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1715695949; x=1716300749; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IcPxZCmisqpi3KPhN9IyAijedk8NM7rns+/JuJm/m5Y=;
- b=Jum4dcC2LiL7R89VuzWFZSWDezI8pkG/i8EzfxVv+HWiZ5oYEgOlLEDuC9Xhl3dufP
- 7QroSmnZvG19hJzMDkkbCDsgMFYvCz41tkrqG1gKMXAqlYqo5+Rkf1rWAMnLrJ6oPgsD
- fbLn5NWF5BH/TdBQbk4M2fnTlVi4i3v0DtCrzzu6dcCcTOoif3+zsG8AFROPPv5o/2IZ
- GWlIftqtRnNJ36FB4l+mz6adhHdh4y0neTCDBM/BdbfamflwSbVrjgaPRPdT+kqKgaCL
- VsDRCDPG+a+utHZRTyAg6Z0CpxIdjFwaQJWwyICHEhf/007k71pwEGMmk+I3cw4m+m0I
- nRIw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715695949; x=1716300749;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=IcPxZCmisqpi3KPhN9IyAijedk8NM7rns+/JuJm/m5Y=;
- b=JlPjE2OsnI8fZxncVRrteLVJS/+fQ5kKivRJdZ3uQ+4rDvB6p3GUBW9CTHWXYshSOR
- Rx94jTp76LwD3VeTACEQryiXsJiHNVP+bpjJ+hT/UAf5c6Gtz4V+OgS/RADz3rZabQCX
- IJffEIn18dXDJ+m6+3HDhAmBZUEVtWh3CQ0zT7ujWIGvFXNYVSmG1e06OEIrEQP5gI+t
- 3ItrbU3doPTmWXLG6CQskv3lERmuiIkb8AJ/S4yyub31oMyFdz5zgm5UYmb3k0Ba0bk6
- CMwhtn2eOimC6RQye4gtiucL10uSrr2yaiRb97/ol3jV/F2F4C+FHsY1mTu1qov5zay2
- Xmdw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVCRNbxXxeVmWjVYr14nAA9jd+bWFD9YA/DkmJ3cvHk1Uha83xu2M7l71EYpdBbDKBoBD9+EQbWxmx5oUMAXw8VQdBlpw==
-X-Gm-Message-State: AOJu0YwUzgyIby4JD8VSFdn0TIlH9u0jyhQT1GBYtGBwcpUXEHMrK8lk
- IW8MQNKfsrNZGpw8nX5RrpwbLBwEFpBKOGdCPaM4UdM8yRb+w3rF2PpbhisQ4OQ=
-X-Google-Smtp-Source: AGHT+IFhiqgFIJ38BlMN5Lz+etMjRqea0Nz6jKrf54XcRoOnPlA0tOqfFx+/dXj83swo1dYnfOi5tg==
-X-Received: by 2002:a5d:4050:0:b0:34f:3293:83d9 with SMTP id
- ffacd0b85a97d-3504aa6321fmr11619564f8f.57.1715695949024; 
- Tue, 14 May 2024 07:12:29 -0700 (PDT)
-Received: from [10.91.1.187] ([149.14.240.163])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3502b896ad0sm13678670f8f.47.2024.05.14.07.12.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 May 2024 07:12:28 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: trini@konsulko.com, neil.armstrong@linaro.org, sumit.garg@linaro.org, 
- u-boot@lists.denx.de, u-boot-qcom@groups.io, 
- Robert Marko <robert.marko@sartura.hr>
-Cc: j.beck@linefinity.com
-In-Reply-To: <20240514101524.23607-1-robert.marko@sartura.hr>
-References: <20240514101524.23607-1-robert.marko@sartura.hr>
-Subject: Re: [PATCH v3] sysreset: add Qualcomm PSHOLD reset driver
-Message-Id: <171569594806.3780346.6566964171831761989.b4-ty@linaro.org>
-Date: Tue, 14 May 2024 16:12:28 +0200
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=71b8=MS=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1715698265;
+ bh=1HJvWSl1slRMeKHlXnoWIjzO4ekg3KE78EtvNsO/bCw=;
+ b=U98ZDF4Fmdz2Lhvb4suQoR+AngpM7f0KNh5OQyo7EcgqwMeP/xRdU/Tleg3nwt5gfoEqnQXuI
+ AIAnWIn8NhoXz9nZnasW/biFxbOTTaQUYFLkvALwz1O7PTo8fV0i5cl/ZjeOYqTflKX9gUx/sla
+ a2dXqn5dxN/y7esreu0t/ibQ2cSHsivqfqDllNjrQnDAC3Q7MgZo2IN4rA47Y91OLJzapyBDEo8
+ 1/aEwaxwy4lRJCOVfc5yZV+MPfMFxUAPCn8S4zD6+DT9TOR6hBFJXRn7PaGXgNIq2T0VU/Xyed+
+ 8f4LpRLFcszhXwUQvMnr25QxUxjQNtF3TdGS2hxSlkJg==
+Message-ID: <6bbce6d6-35a2-49f6-b9a1-36dbebfdb9e3@kwiboo.se>
+Date: Tue, 14 May 2024 16:50:58 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 09/13] syscon: Probe device first in syscon_get_regmap
+To: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Cc: Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, Paul Burton
+ <paulburton@kernel.org>, Simon Glass <sjg@chromium.org>, Lukasz Majewski
+ <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Sumit Garg
+ <sumit.garg@linaro.org>, u-boot@lists.denx.de
+References: <20240513-boston-v1-0-fac96938417e@flygoat.com>
+ <20240513-boston-v1-9-fac96938417e@flygoat.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20240513-boston-v1-9-fac96938417e@flygoat.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14-dev
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 66437a589f1ed1a30c1918f8
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,23 +76,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jiaxun,
 
-On Tue, 14 May 2024 12:15:02 +0200, Robert Marko wrote:
-> Number of Qualcomm ARMv7 SoC-s did not use PSCI but rather used PSHOLD
-> (Qualcomm Power Supply Hold Reset) bit to trigger reset or poweroff.
+On 2024-05-13 20:13, Jiaxun Yang wrote:
+> When bootph-all is enabled for a syscon driver, the device
+> may leave unprobed when syscon_get_regmap is called by another
+> driver.
 > 
-> Qualcomm IPQ40XX is one of them, so provide a simple sysreset driver based
-> on the upstream Linux one, it is DT compatible as well.
+> Perform device_probe in syscon_get_regmap, there is no side
+> affect as device_probe will return 0 quickly for an activated
+> device.
 > 
+> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> ---
+>  drivers/core/syscon-uclass.c | 4 ++++
+>  1 file changed, 4 insertions(+)
 > 
-> [...]
+> diff --git a/drivers/core/syscon-uclass.c b/drivers/core/syscon-uclass.c
+> index f0e69d7216b3..b09f7013194d 100644
+> --- a/drivers/core/syscon-uclass.c
+> +++ b/drivers/core/syscon-uclass.c
+> @@ -32,10 +32,14 @@
+>   */
+>  struct regmap *syscon_get_regmap(struct udevice *dev)
+>  {
+> +	int ret;
+>  	struct syscon_uc_info *priv;
+>  
+>  	if (device_get_uclass_id(dev) != UCLASS_SYSCON)
+>  		return ERR_PTR(-ENOEXEC);
+> +	ret = device_probe(dev);
+> +	if (ret)
+> +		return ERR_PTR(ret);
 
-Applied, thanks!
+Please explain in more details what the issue this is trying to solve.
 
-[1/1] sysreset: add Qualcomm PSHOLD reset driver
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/93738072fea1
+Typically syscon_get_regmap() is called on a udevice returned from a
+uclass_get_device call, and that should trigger a probe for the device
+and its parents.
 
-Best regards,
--- 
-Caleb Connolly <caleb.connolly@linaro.org>
+Adding device_probe() here possible just hides an issue that exists
+somewhere else. In what instance are you ending up with a call to
+this function with a udevice that has not been probed?
+
+Also, please add a new test to test/dm/regmap.c if this solves a real
+issue.
+
+Regards,
+Jonas
+
+>  	priv = dev_get_uclass_priv(dev);
+>  	return priv->regmap;
+>  }
+> 
 
