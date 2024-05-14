@@ -4,78 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B8A4C04FFE
-	for <u-boot@archiver.kernel.org>; Tue, 14 May 2024 07:03:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4122C04FFE
+	for <u-boot@archiver.kernel.org>; Tue, 14 May 2024 09:50:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B3E988273;
-	Tue, 14 May 2024 09:03:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2F74B88239;
+	Tue, 14 May 2024 11:50:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WGzpUWdG";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8192388279; Tue, 14 May 2024 09:03:55 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0213B882A3; Tue, 14 May 2024 11:50:35 +0200 (CEST)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0EFAE87128
- for <u-boot@lists.denx.de>; Tue, 14 May 2024 09:03:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B5CEE879A2
+ for <u-boot@lists.denx.de>; Tue, 14 May 2024 11:50:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-4200ee47de7so19746595e9.2
- for <u-boot@lists.denx.de>; Tue, 14 May 2024 00:03:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1715670231; x=1716275031; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=TjSbvefoBvBC+u5oIgvuM0pJ4VO+3usxYhuPEM/dQQg=;
- b=WGzpUWdG9aFWgfqWjojIv86vkh9mWHqTr5KYMAwrtBy+g8vvArEMii0tjEicvgBNuz
- GRrilMDz48k5zdvuKijC6ZXNnJ+wDVpd/GS01pOSxjIkMKC/kzyY5SuxCrSzue1X+6h4
- gMkrsqzZjf0DZkq2rHJH3vVc/vpYcOZAa5Oy7Ln1rU8uB+NtK4aBtLBatbFM3N0ao31I
- 4PsBbJcge5RnD7Zhx8TCB+U2/nWta/Hz2j6L/anCN8aL51rfHpKzG2WIgpGks09Rat+m
- 0KFKy6o451t5y2jQvk2cpwnM46JdXJITkPyeoOm37BWWPBwVEkzskeUf2uvZeUt/zePR
- IUhg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715670231; x=1716275031;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=TjSbvefoBvBC+u5oIgvuM0pJ4VO+3usxYhuPEM/dQQg=;
- b=Idhep3gkbYZirr90T6/EMw9ySZ0EUPuGxobOG6zvN7aoDnXWWWJwaZLx46q0oHZgsT
- EGUxUkGVoLOwxDsxjAjyhoEuhE8HzoruJUnNGdUBz3rps5iw47Ooy0bskasY+rvxWfii
- dYXn8VHNGsHQg+eMv/a45jUU4THYbRMXBZyx5xPf+pKAcsYTUitpgZneiCpK7r8vLn8v
- fzIE6XhYMD4iYQeC1jPV2faVc5JBBNBtlj2SmynWNuwl1ZVGm7mSBIi39uaILxt0VxV4
- rn4vDxJ7vbmMZ7Dg4Yd36kWq+vvbjzHjfAfUWaBs60/ObADR+ze3C2gcjQm4EECn84jv
- Xx4A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVuxoy/uuY8/TmsQ48+P2p+CRRv81gS/CGGn85Q73Ar3VBxEUF5iM5IfoT3EfUYf3EGYndAC60F4iGrET25l7SA7fywpQ==
-X-Gm-Message-State: AOJu0YzXZZFafjv9bJ83RAV/mfwPS57n26g6LQbyTqls0SpPHx+2wvtB
- 4t2sDk4C4IA0R5t9Qzs/bUKL3cUZjG2igZA+VxJKTTBxSZgJ5XU67/QuA6iMto0=
-X-Google-Smtp-Source: AGHT+IEtoCCa8tn5vIlu54n7WRbap9DOLtkAP+LuB6EY0ayu8o5pPOQiGVPyilLHkxlcFngiT0EzeQ==
-X-Received: by 2002:a5d:4248:0:b0:34c:bf58:abde with SMTP id
- ffacd0b85a97d-3504a632f8fmr7980944f8f.27.1715670231199; 
- Tue, 14 May 2024 00:03:51 -0700 (PDT)
-Received: from cymric.caleb.rex.connolly.tech ([149.14.240.163])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3502b895731sm12935440f8f.42.2024.05.14.00.03.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 May 2024 00:03:50 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, Sam Day <me@samcday.com>,
- Sumit Garg <sumit.garg@linaro.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de, Caleb Connolly <caleb.connolly@linaro.org>
-Subject: [PULL] Please pull qcom/qcom-main
-Date: Tue, 14 May 2024 09:01:24 +0200
-Message-ID: <20240514070339.3372871-1-caleb.connolly@linaro.org>
-X-Mailer: git-send-email 2.45.0
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 44E9oHRL026957
+ for <u-boot@lists.denx.de>; Tue, 14 May 2024 17:50:17 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02.andestech.com (10.0.15.183) by ATCPCS16.andestech.com
+ (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0;
+ Tue, 14 May 2024 17:50:16 +0800
+From: Leo Yu-Chi Liang <ycliang@andestech.com>
+To: <u-boot@lists.denx.de>
+CC: <ycliang@andestech.com>
+Subject: [PATCH v3 1/1] andes: Unify naming policy for Andes related source
+Date: Tue, 14 May 2024 17:50:11 +0800
+Message-ID: <20240514095011.2896139-1-ycliang@andestech.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.0.15.183]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 44E9oHRL026957
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,26 +59,352 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Signed-off-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+---
+ arch/riscv/Kconfig                            |  4 +-
+ arch/riscv/cpu/{andesv5 => andes}/Kconfig     |  4 +-
+ arch/riscv/cpu/{andesv5 => andes}/Makefile    |  0
+ arch/riscv/cpu/{andesv5 => andes}/cache.c     | 12 +++---
+ arch/riscv/cpu/{andesv5 => andes}/cpu.c       |  0
+ arch/riscv/cpu/{andesv5 => andes}/spl.c       |  0
+ board/{AndesTech => andestech}/ae350/Kconfig  |  6 +--
+ .../ae350/MAINTAINERS                         |  2 +-
+ board/{AndesTech => andestech}/ae350/Makefile |  0
+ board/{AndesTech => andestech}/ae350/ae350.c  |  2 +-
+ doc/board/index.rst                           |  2 +-
+ drivers/cache/Kconfig                         |  6 +--
+ drivers/cache/Makefile                        |  2 +-
+ .../cache/{cache-v5l2.c => cache-andes-l2.c}  | 40 +++++++++----------
+ 14 files changed, 40 insertions(+), 40 deletions(-)
+ rename arch/riscv/cpu/{andesv5 => andes}/Kconfig (91%)
+ rename arch/riscv/cpu/{andesv5 => andes}/Makefile (100%)
+ rename arch/riscv/cpu/{andesv5 => andes}/cache.c (90%)
+ rename arch/riscv/cpu/{andesv5 => andes}/cpu.c (100%)
+ rename arch/riscv/cpu/{andesv5 => andes}/spl.c (100%)
+ rename board/{AndesTech => andestech}/ae350/Kconfig (91%)
+ rename board/{AndesTech => andestech}/ae350/MAINTAINERS (95%)
+ rename board/{AndesTech => andestech}/ae350/Makefile (100%)
+ rename board/{AndesTech => andestech}/ae350/ae350.c (99%)
+ rename drivers/cache/{cache-v5l2.c => cache-andes-l2.c} (84%)
 
-This patch for master fixes framebuffer video on almost all Qualcomm platforms
-where the framebuffer is initialised by the first stage bootloader.
+diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
+index 7e20ef63bb..fa3b016c52 100644
+--- a/arch/riscv/Kconfig
++++ b/arch/riscv/Kconfig
+@@ -80,7 +80,7 @@ config SPL_ZERO_MEM_BEFORE_USE
+ 	  Sifive core devices that uses L2 cache to store SPL.
+ 
+ # board-specific options below
+-source "board/AndesTech/ae350/Kconfig"
++source "board/andestech/ae350/Kconfig"
+ source "board/emulation/qemu-riscv/Kconfig"
+ source "board/microchip/mpfs_icicle/Kconfig"
+ source "board/openpiton/riscv64/Kconfig"
+@@ -93,7 +93,7 @@ source "board/thead/th1520_lpi4a/Kconfig"
+ source "board/xilinx/mbv/Kconfig"
+ 
+ # platform-specific options below
+-source "arch/riscv/cpu/andesv5/Kconfig"
++source "arch/riscv/cpu/andes/Kconfig"
+ source "arch/riscv/cpu/cv1800b/Kconfig"
+ source "arch/riscv/cpu/fu540/Kconfig"
+ source "arch/riscv/cpu/fu740/Kconfig"
+diff --git a/arch/riscv/cpu/andesv5/Kconfig b/arch/riscv/cpu/andes/Kconfig
+similarity index 91%
+rename from arch/riscv/cpu/andesv5/Kconfig
+rename to arch/riscv/cpu/andes/Kconfig
+index e3efb0de8f..120fec5e54 100644
+--- a/arch/riscv/cpu/andesv5/Kconfig
++++ b/arch/riscv/cpu/andes/Kconfig
+@@ -1,4 +1,4 @@
+-config RISCV_NDS
++config RISCV_ANDES
+ 	bool
+ 	select ARCH_EARLY_INIT_R
+ 	select SYS_CACHE_SHIFT_6
+@@ -8,7 +8,7 @@ config RISCV_NDS
+ 	imply ANDES_PLMT_TIMER
+ 	imply SPL_ANDES_PLMT_TIMER
+ 	imply ANDES_PLICSW if (RISCV_MMODE || SPL_RISCV_MMODE)
+-	imply V5L2_CACHE
++	imply ANDES_L2_CACHE
+ 	imply SPL_CPU
+ 	imply SPL_OPENSBI
+ 	imply SPL_LOAD_FIT
+diff --git a/arch/riscv/cpu/andesv5/Makefile b/arch/riscv/cpu/andes/Makefile
+similarity index 100%
+rename from arch/riscv/cpu/andesv5/Makefile
+rename to arch/riscv/cpu/andes/Makefile
+diff --git a/arch/riscv/cpu/andesv5/cache.c b/arch/riscv/cpu/andes/cache.c
+similarity index 90%
+rename from arch/riscv/cpu/andesv5/cache.c
+rename to arch/riscv/cpu/andes/cache.c
+index 269bb27f75..7d3df8722d 100644
+--- a/arch/riscv/cpu/andesv5/cache.c
++++ b/arch/riscv/cpu/andes/cache.c
+@@ -12,21 +12,21 @@
+ #include <dm/uclass-internal.h>
+ #include <asm/arch-andes/csr.h>
+ 
+-#ifdef CONFIG_V5L2_CACHE
++#ifdef CONFIG_ANDES_L2_CACHE
+ void enable_caches(void)
+ {
+ 	struct udevice *dev;
+ 	int ret;
+ 
+ 	ret = uclass_get_device_by_driver(UCLASS_CACHE,
+-					  DM_DRIVER_GET(v5l2_cache),
++					  DM_DRIVER_GET(andes_l2_cache),
+ 					  &dev);
+ 	if (ret) {
+-		log_debug("Cannot enable v5l2 cache\n");
++		log_debug("Cannot enable Andes L2 cache\n");
+ 	} else {
+ 		ret = cache_enable(dev);
+ 		if (ret)
+-			log_debug("v5l2 cache enable failed\n");
++			log_debug("Failed to enable Andes L2 cache\n");
+ 	}
+ }
+ 
+@@ -78,7 +78,7 @@ void dcache_enable(void)
+ 	asm volatile("csrsi %0, 0x2" :: "i"(CSR_MCACHE_CTL));
+ #endif
+ 
+-#ifdef CONFIG_V5L2_CACHE
++#ifdef CONFIG_ANDES_L2_CACHE
+ 	cache_ops(cache_enable);
+ #endif
+ }
+@@ -89,7 +89,7 @@ void dcache_disable(void)
+ 	asm volatile("csrci %0, 0x2" :: "i"(CSR_MCACHE_CTL));
+ #endif
+ 
+-#ifdef CONFIG_V5L2_CACHE
++#ifdef CONFIG_ANDES_L2_CACHE
+ 	cache_ops(cache_disable);
+ #endif
+ }
+diff --git a/arch/riscv/cpu/andesv5/cpu.c b/arch/riscv/cpu/andes/cpu.c
+similarity index 100%
+rename from arch/riscv/cpu/andesv5/cpu.c
+rename to arch/riscv/cpu/andes/cpu.c
+diff --git a/arch/riscv/cpu/andesv5/spl.c b/arch/riscv/cpu/andes/spl.c
+similarity index 100%
+rename from arch/riscv/cpu/andesv5/spl.c
+rename to arch/riscv/cpu/andes/spl.c
+diff --git a/board/AndesTech/ae350/Kconfig b/board/andestech/ae350/Kconfig
+similarity index 91%
+rename from board/AndesTech/ae350/Kconfig
+rename to board/andestech/ae350/Kconfig
+index a85e7d6351..096564b3dc 100644
+--- a/board/AndesTech/ae350/Kconfig
++++ b/board/andestech/ae350/Kconfig
+@@ -1,13 +1,13 @@
+ if TARGET_ANDES_AE350
+ 
+ config SYS_CPU
+-	default "andesv5"
++	default "andes"
+ 
+ config SYS_BOARD
+ 	default "ae350"
+ 
+ config SYS_VENDOR
+-	default "AndesTech"
++	default "andestech"
+ 
+ config SYS_SOC
+ 	default "ae350"
+@@ -33,7 +33,7 @@ config SYS_FDT_BASE
+ 
+ config BOARD_SPECIFIC_OPTIONS # dummy
+ 	def_bool y
+-	select RISCV_NDS
++	select RISCV_ANDES
+ 	select SUPPORT_SPL
+ 	select BINMAN if SPL
+ 	imply SMP
+diff --git a/board/AndesTech/ae350/MAINTAINERS b/board/andestech/ae350/MAINTAINERS
+similarity index 95%
+rename from board/AndesTech/ae350/MAINTAINERS
+rename to board/andestech/ae350/MAINTAINERS
+index a6bc90baf8..31e34e610d 100644
+--- a/board/AndesTech/ae350/MAINTAINERS
++++ b/board/andestech/ae350/MAINTAINERS
+@@ -1,7 +1,7 @@
+ AE350 BOARD
+ M:	Rick Chen <rick@andestech.com>
+ S:	Maintained
+-F:	board/AndesTech/ae350/
++F:	board/andestech/ae350/
+ F:	include/configs/ae350.h
+ F:	configs/ae350_rv32_defconfig
+ F:	configs/ae350_rv32_falcon_defconfig
+diff --git a/board/AndesTech/ae350/Makefile b/board/andestech/ae350/Makefile
+similarity index 100%
+rename from board/AndesTech/ae350/Makefile
+rename to board/andestech/ae350/Makefile
+diff --git a/board/AndesTech/ae350/ae350.c b/board/andestech/ae350/ae350.c
+similarity index 99%
+rename from board/AndesTech/ae350/ae350.c
+rename to board/andestech/ae350/ae350.c
+index 62b93b4ecb..5ae5baed6b 100644
+--- a/board/AndesTech/ae350/ae350.c
++++ b/board/andestech/ae350/ae350.c
+@@ -99,7 +99,7 @@ void *board_fdt_blob_setup(int *err)
+ #ifdef CONFIG_SPL_BOARD_INIT
+ void spl_board_init()
+ {
+-	/* enable v5l2 cache */
++	/* enable andes-l2 cache */
+ 	if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
+ 		enable_caches();
+ }
+diff --git a/doc/board/index.rst b/doc/board/index.rst
+index 428faa810b..2340eeb077 100644
+--- a/doc/board/index.rst
++++ b/doc/board/index.rst
+@@ -8,7 +8,7 @@ Board-specific doc
+ 
+    actions/index
+    advantech/index
+-   AndesTech/index
++   andestech/index
+    allwinner/index
+    amlogic/index
+    anbernic/index
+diff --git a/drivers/cache/Kconfig b/drivers/cache/Kconfig
+index 26c2d80a1c..4f35865744 100644
+--- a/drivers/cache/Kconfig
++++ b/drivers/cache/Kconfig
+@@ -22,11 +22,11 @@ config L2X0_CACHE
+ 	  ARMv7(32-bit) devices. The driver configures the cache settings
+ 	  found in the device tree.
+ 
+-config V5L2_CACHE
+-	bool "Andes V5L2 cache driver"
++config ANDES_L2_CACHE
++	bool "Andes L2 cache driver"
+ 	select CACHE
+ 	help
+-	  Support Andes V5L2 cache controller in AE350 platform.
++	  Support Andes L2 cache controller in AE350 platform.
+ 	  It will configure tag and data ram timing control from the
+ 	  device tree and enable L2 cache.
+ 
+diff --git a/drivers/cache/Makefile b/drivers/cache/Makefile
+index 78e673d09e..e1b71e0ed5 100644
+--- a/drivers/cache/Makefile
++++ b/drivers/cache/Makefile
+@@ -3,6 +3,6 @@ obj-$(CONFIG_$(SPL_TPL_)CACHE) += cache-uclass.o
+ obj-$(CONFIG_SANDBOX) += sandbox_cache.o
+ obj-$(CONFIG_L2X0_CACHE) += cache-l2x0.o
+ obj-$(CONFIG_NCORE_CACHE) += cache-ncore.o
+-obj-$(CONFIG_V5L2_CACHE) += cache-v5l2.o
++obj-$(CONFIG_ANDES_L2_CACHE) += cache-andes-l2.o
+ obj-$(CONFIG_SIFIVE_CCACHE) += cache-sifive-ccache.o
+ obj-$(CONFIG_SIFIVE_PL2) += cache-sifive-pl2.o
+diff --git a/drivers/cache/cache-v5l2.c b/drivers/cache/cache-andes-l2.c
+similarity index 84%
+rename from drivers/cache/cache-v5l2.c
+rename to drivers/cache/cache-andes-l2.c
+index f0b8ecc880..7de8f16852 100644
+--- a/drivers/cache/cache-v5l2.c
++++ b/drivers/cache/cache-andes-l2.c
+@@ -72,7 +72,7 @@ static u32 status_bit_offset = 0x4;
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+-struct v5l2_plat {
++struct andes_l2_plat {
+ 	struct l2cache	*regs;
+ 	u32		iprefetch;
+ 	u32		dprefetch;
+@@ -80,9 +80,9 @@ struct v5l2_plat {
+ 	u32		dram_ctl[2];
+ };
+ 
+-static int v5l2_enable(struct udevice *dev)
++static int andes_l2_enable(struct udevice *dev)
+ {
+-	struct v5l2_plat *plat = dev_get_plat(dev);
++	struct andes_l2_plat *plat = dev_get_plat(dev);
+ 	volatile struct l2cache *regs = plat->regs;
+ 
+ 	if (regs)
+@@ -91,9 +91,9 @@ static int v5l2_enable(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-static int v5l2_disable(struct udevice *dev)
++static int andes_l2_disable(struct udevice *dev)
+ {
+-	struct v5l2_plat *plat = dev_get_plat(dev);
++	struct andes_l2_plat *plat = dev_get_plat(dev);
+ 	volatile struct l2cache *regs = plat->regs;
+ 	u8 hart = gd->arch.boot_hart;
+ 	void __iomem *cctlcmd = (void __iomem *)CCTL_CMD_REG(regs, hart);
+@@ -113,9 +113,9 @@ static int v5l2_disable(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-static int v5l2_of_to_plat(struct udevice *dev)
++static int andes_l2_of_to_plat(struct udevice *dev)
+ {
+-	struct v5l2_plat *plat = dev_get_plat(dev);
++	struct andes_l2_plat *plat = dev_get_plat(dev);
+ 	struct l2cache *regs;
+ 
+ 	regs = dev_read_addr_ptr(dev);
+@@ -137,9 +137,9 @@ static int v5l2_of_to_plat(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-static int v5l2_probe(struct udevice *dev)
++static int andes_l2_probe(struct udevice *dev)
+ {
+-	struct v5l2_plat *plat = dev_get_plat(dev);
++	struct andes_l2_plat *plat = dev_get_plat(dev);
+ 	struct l2cache *regs = plat->regs;
+ 	u32 cfg_val, ctl_val;
+ 
+@@ -182,23 +182,23 @@ static int v5l2_probe(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-static const struct udevice_id v5l2_cache_ids[] = {
++static const struct udevice_id andes_l2_cache_ids[] = {
+ 	{ .compatible = "cache" },
+ 	{}
+ };
+ 
+-static const struct cache_ops v5l2_cache_ops = {
+-	.enable		= v5l2_enable,
+-	.disable	= v5l2_disable,
++static const struct cache_ops andes_l2_cache_ops = {
++	.enable		= andes_l2_enable,
++	.disable	= andes_l2_disable,
+ };
+ 
+-U_BOOT_DRIVER(v5l2_cache) = {
+-	.name   = "v5l2_cache",
++U_BOOT_DRIVER(andes_l2_cache) = {
++	.name   = "andes_l2_cache",
+ 	.id     = UCLASS_CACHE,
+-	.of_match = v5l2_cache_ids,
+-	.of_to_plat = v5l2_of_to_plat,
+-	.probe	= v5l2_probe,
+-	.plat_auto	= sizeof(struct v5l2_plat),
+-	.ops = &v5l2_cache_ops,
++	.of_match = andes_l2_cache_ids,
++	.of_to_plat = andes_l2_of_to_plat,
++	.probe	= andes_l2_probe,
++	.plat_auto	= sizeof(struct andes_l2_plat),
++	.ops = &andes_l2_cache_ops,
+ 	.flags  = DM_FLAG_PRE_RELOC,
+ };
+-- 
+2.34.1
 
-The following changes since commit 5c5565cfec92eb7377ff7fe197612c6a813bb6c7:
-
-  Merge patch series "arm: davinci: Migrate da850-evm to OF_UPSTREAM" (2024-05-07 11:59:26 -0600)
-
-are available in the Git repository at:
-
-  git@source.denx.de:u-boot/custodians/u-boot-snapdragon.git qcom-main
-
-for you to fetch changes up to 3ceaa825869bd43e9a2ec00a90589cc84885bd40:
-
-  mach-snapdragon: do carveouts for qcs404 only (2024-05-14 09:00:41 +0200)
-
-----------------------------------------------------------------
-Sam Day (1):
-      mach-snapdragon: do carveouts for qcs404 only
-
- arch/arm/mach-snapdragon/board.c | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
