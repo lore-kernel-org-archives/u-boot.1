@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2001C25B75
-	for <u-boot@archiver.kernel.org>; Tue, 14 May 2024 16:15:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5A0AC04FFE
+	for <u-boot@archiver.kernel.org>; Tue, 14 May 2024 16:16:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECBCF8834E;
-	Tue, 14 May 2024 18:15:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5640F8829B;
+	Tue, 14 May 2024 18:15:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L7us8GjV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OW/ekIXG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 018DA882FA; Tue, 14 May 2024 18:15:27 +0200 (CEST)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
+ id E344288343; Tue, 14 May 2024 18:15:31 +0200 (CEST)
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
+ [IPv6:2607:f8b0:4864:20::72e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE3A387CF8
- for <u-boot@lists.denx.de>; Tue, 14 May 2024 18:15:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE59F88356
+ for <u-boot@lists.denx.de>; Tue, 14 May 2024 18:15:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-de462979e00so6197790276.3
- for <u-boot@lists.denx.de>; Tue, 14 May 2024 09:15:23 -0700 (PDT)
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-792b8bca915so564988685a.2
+ for <u-boot@lists.denx.de>; Tue, 14 May 2024 09:15:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715703323; x=1716308123; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1715703329; x=1716308129; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=phUwFPtnBsmBguY66erzeEqD2UNSFzDI6XconeW8E+4=;
- b=L7us8GjV5G49KkNGUwmG6qNTcLbUcx7T6RMM/qMdhpFhbhA5AGgOkoho5rr4IbwEtQ
- aRgZjzXkGC1Wby8QKa4Rp+DNjsoYkhOw79uC1WCPmvNgEAlorP+pojTbsE2gBwf1jy6R
- 0Ir953UAwQz3+Asv5sHwTrSbjknWZXJxMkVk0=
+ bh=kzpCrBDcL1eDNnAE4Y4De4z95YQRjwlBD6JZY3x3pcM=;
+ b=OW/ekIXGij/c+4BUVrx25uoxjSOZWF687L12QNtmkrWr82j2pucIf3YdoU/xp2t9eS
+ IohH2XKeYAjAiakPE3YpILykW27xRwowjDQa+JnDiC8vFYB4EdNswkDmlgkz4EsrFFBF
+ LKWi3FR2jo4mNnpn6xRMoejQW12f96nVYp2Vw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715703323; x=1716308123;
+ d=1e100.net; s=20230601; t=1715703329; x=1716308129;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=phUwFPtnBsmBguY66erzeEqD2UNSFzDI6XconeW8E+4=;
- b=AwV+PCHz7gLPfcypw0atmOcfT2Ecl/2HF7ZP/IpzygmCHEzcDSdzgv4FNEbRE8Zw+Y
- YEMwfYAVRJC2HjssJ0N9DS5XR88ngHWSa/7R8jAUYQGRsBLO7zFxc176KNxpSuywPW+o
- riDEMiiwpmwD5PdRJSD3ROLu9UlDlGSZZ2e98nJYUCIp7OaKQgfm1KDCgosxp/oLMj9q
- fli7WJsKlrrrmXTcjUnPgDQUoeJ2OZMlB/A4eZM/B6xGlviWC0wTfBrgga/j40Carl/R
- jnVpM7iXCrMrFNYgWNauBkoZGvF9FT1Xl1Z85IHdrI3yry9JNOtldkLEoF+dWRnWFv+n
- z+5Q==
-X-Gm-Message-State: AOJu0YwYit7EZ7bpsFWpxrxsu98CrSnSE22z+qiBBx8h3uaMO2q2UUc8
- ONfpB1Ebhs1Nqm3YvIUdpGxoUKwvJJNXGBim1MOH7CfGifkKD4k9qCbLgjY8y4o=
-X-Google-Smtp-Source: AGHT+IEoO69kY1m86iIdf7/VLT3hNGelXrtD7hZmoAFlswf12unkx965mAKGVQTj/OsGIgnx3G5srQ==
-X-Received: by 2002:a25:8746:0:b0:de6:aef:fc2e with SMTP id
- 3f1490d57ef6-dee4f3aa085mr11446514276.41.1715703322588; 
- Tue, 14 May 2024 09:15:22 -0700 (PDT)
+ bh=kzpCrBDcL1eDNnAE4Y4De4z95YQRjwlBD6JZY3x3pcM=;
+ b=oe4kJBwLCX2kJKjcc1WnqvOGNg/cxIUHV7dRwkzdhfW6jlUQyKXZZfOJvNOUlRvibj
+ HnN4Um7MT4jPwNEPS0OHoqiJ05OMNtw6NxsQrooPXFRW/72Mk/VAMq1O1BpkoL6upVRL
+ Dyt/u8Z3c1T0ki/BbMVLflb4fNOCl1tmv9JTExJyAy9ZH/NTJ87XPa2hcrizC7adArg1
+ PvapL4eDquFIVT5zpNSizBH1dyehDiALexEGiuU6lItC1BukxQmvadFZV0W3uDJTuNb3
+ lgSML3qg4HRlc0HR9tmnWG0B8CR8w1iQ1uYLaEU4RKjHWNi2rzikcHJd32/HC0ZcptdK
+ Xx6Q==
+X-Gm-Message-State: AOJu0YxIXaqJZxXrY5seaTPQvtQytKxtIl0x9zsSF+yYvt8eutlR+7VT
+ oIodTZM+lgqUWO63xSJ4mrHXP0WxTgN8qfWTu1eUg6k7ZrO6oow6jUmU4wk0XPw=
+X-Google-Smtp-Source: AGHT+IGrlfLrxNUICqwER6jXo9yJxuPar7RxHS+2ScgsYS8RgvUMR0RP0S61Zu9IWldqMkpicurWXQ==
+X-Received: by 2002:a05:620a:4610:b0:792:c7dd:c057 with SMTP id
+ af79cd13be357-792c7ddc885mr1736142185a.72.1715703328613; 
+ Tue, 14 May 2024 09:15:28 -0700 (PDT)
 Received: from bill-the-cat ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6a15f194871sm54814366d6.59.2024.05.14.09.15.20
+ af79cd13be357-792bf2a5724sm579500685a.69.2024.05.14.09.15.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 May 2024 09:15:22 -0700 (PDT)
-Date: Tue, 14 May 2024 10:15:18 -0600
+ Tue, 14 May 2024 09:15:28 -0700 (PDT)
+Date: Tue, 14 May 2024 10:15:25 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Peter Hoyes <peter.hoyes@arm.com>
 Cc: u-boot@lists.denx.de, andre.przywara@arm.com, mk7.kang@samsung.com,
@@ -68,16 +68,15 @@ Cc: u-boot@lists.denx.de, andre.przywara@arm.com, mk7.kang@samsung.com,
  neil.armstrong@linaro.org, sr@denx.de, michal.simek@amd.com,
  patrick.delaunay@foss.st.com, sjg@chromium.org,
  patrice.chotard@foss.st.com, quentin.schulz@theobroma-systems.com
-Subject: Re: [PATCH v2 1/2] arm: Move sev() and wfe() definitions to common
- Arm header file
-Message-ID: <20240514161518.GN2568172@bill-the-cat>
+Subject: Re: [PATCH v2 2/2] armv8: generic_timer: Use event stream for udelay
+Message-ID: <20240514161525.GO2568172@bill-the-cat>
 References: <20240501081633.120913-1-peter.hoyes@arm.com>
- <20240501081633.120913-2-peter.hoyes@arm.com>
+ <20240501081633.120913-3-peter.hoyes@arm.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="t7fGb7kHZ43JnHdR"
+ protocol="application/pgp-signature"; boundary="RnAzJ4nKwq5II/TB"
 Content-Disposition: inline
-In-Reply-To: <20240501081633.120913-2-peter.hoyes@arm.com>
+In-Reply-To: <20240501081633.120913-3-peter.hoyes@arm.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,47 +95,54 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---t7fGb7kHZ43JnHdR
+--RnAzJ4nKwq5II/TB
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, May 01, 2024 at 09:16:32AM +0100, Peter Hoyes wrote:
+On Wed, May 01, 2024 at 09:16:33AM +0100, Peter Hoyes wrote:
 
 > From: Peter Hoyes <Peter.Hoyes@arm.com>
 >=20
-> The sev() and wfe() asm macros are currently defined only for
-> mach-exynos. As these are common Arm instructions, move them to the
-> common asm/system.h header file, for both Armv7 and Armv8, so they
-> can be used by other machines.
+> Polling cntpct_el0 in a tight loop for delays is inefficient.
+> This is particularly apparent on Arm FVPs, which do not simulate
+> real time, meaning that a 1s sleep can take a couple of orders
+> of magnitude longer to execute in wall time.
 >=20
-> wfe may theoretically trigger a context switch if an interrupt occurs
-> so add a memory barrier to this call.
+> If running at EL2 or above (where CNTHCTL_EL2 is available), enable
+> the cntpct_el0 event stream temporarily and use wfe to implement
+> the delay more efficiently. The event period is chosen as a
+> trade-off between efficiency and the fact that Arm FVPs do not
+> typically simulate real time.
+>=20
+> This is only implemented for Armv8 boards, where an architectural
+> timer exists, and only enabled by default for the ARCH_VEXPRESS64
+> board family.
 >=20
 > Signed-off-by: Peter Hoyes <Peter.Hoyes@arm.com>
-> Reviewed-by: Andre Przywara<andre.przywara@arm.com>
+> Reviewed-by: Andre Przywara <andre.przywara@arm.com>
 
 Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---t7fGb7kHZ43JnHdR
+--RnAzJ4nKwq5II/TB
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZDjhYACgkQFHw5/5Y0
-tyyGBgv+IGHtZe3NNhylZHwMTjjm0YKFQGahkd8/t+mKAS6yF8JMpcdxIRTXbryG
-oyixAQ3azukcED8zC1mRiVRriH65D9yjeVh1TVGTJRx+eLSoQvd6zrDHhgTbCrec
-uFdRvVR2Uon0HfwLkEaWogUhxzVaLZu/TJE8zrmCl6EHoluVbuHehOGCIOylgcub
-9efikScRGXfEpMk6bXhwmRLp097TztmRToFE8NW0VGb/3PtN14Vq/W0q9tUwG5HD
-cYfFRVcnZr608njZuop9I+jXlcsCx4szWu0GH5LUggfDQuAt4Ei0nLgztxveSAMN
-Vt9KG3GfABAUzfim9LWJ5opkcn/MATy6DzndQ1cxXeRrK00VWWp5K2rJuLctPhM5
-oNwMYfxZfKgyJupMuG9U04TH14bhSYfEtL36D5uhqimhCA7ORWPQMNZXYJk1RFjo
-hdOot9Jvw+TEt6S7yk2/F0XbhBhvoVWw30TC1yaMDRNsQERFDq7PtF80f7AwtcN+
-ssXXCFk4
-=te/c
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZDjh0ACgkQFHw5/5Y0
+tyxAUAv8DIrsOIfhcfRkPkxW1oG9DtQzu3ntt54Lx+oB9ncil7QHLjjGUsWdnR0a
+/JzsrjFZtFDEONQtgFDPUdbB/ocZObh5OLKOYsXVL+ORo6tKYp8c763PI0Bky+xD
+WsfxFnIf1Nj06AmPEPiLK5JS6RjKWAz2hd+uQ99Tmm0HGu/73JGP7/oOCx5wplJ5
+JXbDkWtHAEQZtNo0wb4eC22nEkdzSrwekkQM775pKTC1ocBmmV7fVcJWtOAMTDVg
+iFQLTT6QITeckrkKpwLyuTndPCT9TmQaKbGKutXrulcNFljt6MQtLcUsc0pDuGYp
+fAqjKfaqONpUQQRMFRUviQUNkiorKxLXrGFEFWsBE/yvy8/EXu6ndXowKgsYawH4
+VWrNqV3b7HtJFcl1JYbMGQPfsALPsNgALznWTYc3N2QwOe1UlBNcuoNtAbxB3Kyf
+HTMzgbwC20oNGsapcE1sLrSc4dEZwKO/Tj122b6NhLoyKKnymETarFIWLtquhGpX
+iiIk4Q6Q
+=Y+K1
 -----END PGP SIGNATURE-----
 
---t7fGb7kHZ43JnHdR--
+--RnAzJ4nKwq5II/TB--
