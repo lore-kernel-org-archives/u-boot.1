@@ -4,67 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1702AC04FFE
-	for <u-boot@archiver.kernel.org>; Tue, 14 May 2024 12:59:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C460CC04FFE
+	for <u-boot@archiver.kernel.org>; Tue, 14 May 2024 13:00:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77E9F88311;
-	Tue, 14 May 2024 14:59:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id 32D72880A7;
+	Tue, 14 May 2024 15:00:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="OUen3qHo";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="fj1SNhiV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B14CE8830F; Tue, 14 May 2024 14:58:57 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.185])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7DCF1880A7; Tue, 14 May 2024 15:00:56 +0200 (CEST)
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [IPv6:2a00:1450:4864:20::233])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3B8D880F8
- for <u-boot@lists.denx.de>; Tue, 14 May 2024 14:58:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 82D1888304
+ for <u-boot@lists.denx.de>; Tue, 14 May 2024 15:00:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: aef25b41-11f1-11ef-9240-005056999439
-Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id aef25b41-11f1-11ef-9240-005056999439;
- Tue, 14 May 2024 14:58:39 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=DeUdXgUuQ78mDoW0QfZablKbKTPzwruLofjuDNsHUtw=;
- b=OUen3qHoQepA6POvvTYf5EHo02/k3zjmvv+EEmWwhHk9tVd0V7vy7UOuCbFbjkokVAMC5hvzyZb1x
- wsE5xUAkhjWJl8KjYW1mpuxQ5ZnehvUaqbA+vqrjsXz73ocDaQymfq+OE5Ga/y/gNAdUd8Sl0gaP5w
- IKM+v96VSD5KYxGCDyCkGMa5EywZpMbHUaCNeaxej4kABksk7rKo+UWZKRGR0etB5yCcXVreBVIx/3
- qCeSlYQGtl9OZJ2+JjijW/ix+4LIduea0iVuOgBmr0kbQ7lDILNawCBlYXFiGyNa4ooYj4G/FNqUBn
- Focdat9GKkD3jx8dHG8G7NHe6LYrrOQ==
-X-KPN-MID: 33|dALZithOjIF7udN01vM7rb2bzeyVlr/7JkhepmJYDeetlYeapPabOPmBZ8ytpqY
- POD1+dlAxVX/TgHSfTGFaDdqv1b0bxORh23NVhRW+l2Y=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|jMcrPsBcdVjqx2kwJSNerSXBA/871f2dE4suAAJpL0ScIrdH5MWfRHDHwShBh6B
- mK5x/Yo6/qTqQaD7wtk1z2g==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id b74b3a80-11f1-11ef-9bde-00505699772e;
- Tue, 14 May 2024 14:58:54 +0200 (CEST)
-Date: Tue, 14 May 2024 14:58:53 +0200
-Message-Id: <87ikzgft2q.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: ilias.apalodimas@linaro.org, sjg@chromium.org, trini@konsulko.com,
- i@shantur.com, bmeng@tinylab.org, akashi.tkhro@gmail.com,
- kojima.masahisa@socionext.com, raymond.mao@linaro.org,
- kettenis@openbsd.org, jmcosta944@gmail.com, u-boot@lists.denx.de
-In-Reply-To: <a17e0a7e-8269-4d1d-aaaa-a944655b90f4@canonical.com> (message
- from Heinrich Schuchardt on Tue, 14 May 2024 14:49:47 +0200)
-Subject: Re: [RFC 02/14] efi_loader: library function efi_dp_merge
-References: <20240426141321.232236-1-heinrich.schuchardt@canonical.com>
- <20240426141321.232236-3-heinrich.schuchardt@canonical.com>
- <CAC_iWjKg9NDKnoNa-V+H+5OOJe2uYsHb0vXM0+-QdCxUctiksg@mail.gmail.com>
- <aac7887b-b123-4006-bbcd-4549e8e44a54@canonical.com>
- <CAC_iWjL4umEBcEkZtjeWgfnrHV3oB3qECD0xYAY6qjphKb4umg@mail.gmail.com>
- <a17e0a7e-8269-4d1d-aaaa-a944655b90f4@canonical.com>
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-2e564cad1f1so47651511fa.0
+ for <u-boot@lists.denx.de>; Tue, 14 May 2024 06:00:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1715691652; x=1716296452;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=OJ0jXnRT97WygL6HxtSEZTPFvVAqN2wPPVHotWY3OS8=;
+ b=fj1SNhiVVQ9DUOxOzEpyH6YviM7W9IYsEsvdy0zm+Lklnix6qsUdApv5HbBwFC8NO3
+ xv+t9i4zXKGpWb+zQ5e0K+uqKt+05440BUunCRETBrm8TR8IwOw9hqdCHZ34UUkONnAf
+ t0WpMWBTPC3kQYeP1KEhnLw2zsrgm/iDpxzzvPWOPdSXClhZvksXjP9tJ2bCfpqq1RsG
+ iMSEIUE1/iAl229/GPlB6ze7xiTavwRevdUYmDSWjQIyn+rDB6DF+MUbM4SeNC+JR4MI
+ sAr4e5fAe4TIogoBuRELFL8NrESZ2qxKJYaFAv7J7bPiLkTjFKOkm7CDJhjjNMnSjmK7
+ nxkQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1715691652; x=1716296452;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=OJ0jXnRT97WygL6HxtSEZTPFvVAqN2wPPVHotWY3OS8=;
+ b=v+TUAEwKb5k9glyyjAsnTC3Jl5XjfIJnTv6MTpuSxBtRP8JyA2tLxphg8bFUkLJmh9
+ +9YAarBDy8v11Lu+IXVKIiSfN2MGLk/YQowtt1ShU2JWTqwPFIykCtUxcpnXwXUYXEiX
+ NuCZm7q6JMZIt57q9C7qJyyqNSI7qW43rjtDkNpV474RYB47aokTaIP+iCh/Aw/yB0bj
+ RfB9C0N6R8YywwUr7WIIuY0KIGtCaxskqU1gzqY//Wi95caF1wLmHuZ3kL0tOoIZahK2
+ dhapF5Ap96uyuxpRymMhQ1Q1bYJINeCzGSXRVb8pQ42reDZB/BZhmL5jkhdnAscWX/rV
+ fFSA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUoXykv6koOnO5blCWOErqR04RJ/VEjBJfdKgm3IlRpgUOVzaoeURSqVYRulbEgZaOQkSiNqpuiwacvHGe8oCr3I/Kh4g==
+X-Gm-Message-State: AOJu0YzeMp+gBRgPe9ZopRP5sm/O2V2vNs9yitl7DgKVV7HXc1AWGvNI
+ E80gvNojBJcHdqqGS5OSB15XjQcZFhwbIHmeOBmsAmDpz9Rng5Zu7vh0njFoAhQ=
+X-Google-Smtp-Source: AGHT+IHpIViy73XTIpnlxFNP314thyRvMVwWZY+tzjAm0LEGa5BiDaoVGb55ZL461WzNey1uH8nMcA==
+X-Received: by 2002:a05:651c:14f:b0:2df:eee9:c71f with SMTP id
+ 38308e7fff4ca-2e51fc36881mr74976561fa.7.1715691651762; 
+ Tue, 14 May 2024 06:00:51 -0700 (PDT)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-420193b0903sm55907575e9.47.2024.05.14.06.00.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 14 May 2024 06:00:50 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: "A. Sverdlin" <alexander.sverdlin@siemens.com>, u-boot@lists.denx.de
+Cc: Felipe Balbi <felipe.balbi@linux.intel.com>, Marek Vasut
+ <marex@denx.de>, Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Nishanth Menon
+ <nm@ti.com>, Sjoerd Simons <sjoerd@collabora.com>, Janusz Dziedzic
+ <januszx.dziedzic@intel.com>, Alexander Sverdlin
+ <alexander.sverdlin@siemens.com>
+Subject: Re: [PATCH 5/6] usb: dwc3: gadget: properly check ep cmd
+In-Reply-To: <20240412202611.3565052-6-alexander.sverdlin@siemens.com>
+References: <20240412202611.3565052-1-alexander.sverdlin@siemens.com>
+ <20240412202611.3565052-6-alexander.sverdlin@siemens.com>
+Date: Tue, 14 May 2024 15:00:48 +0200
+Message-ID: <87r0e44kfz.fsf@baylibre.com>
+MIME-Version: 1.0
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,131 +96,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Date: Tue, 14 May 2024 14:49:47 +0200
-> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Hi Alexander,
 
-Hi Heinrich,
+Thank you for the patch.
 
-> On 4/26/24 17:47, Ilias Apalodimas wrote:
-> > Hi Heinrich
-> > 
-> > On Fri, 26 Apr 2024 at 17:53, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> >>
-> >> On 26.04.24 16:30, Ilias Apalodimas wrote:
-> >>> Hi Heinrich,
-> >>>
-> >>> On Fri, 26 Apr 2024 at 17:13, Heinrich Schuchardt
-> >>> <heinrich.schuchardt@canonical.com> wrote:
-> >>>>
-> >>>> Provide a function to append a device_path to a list of device paths
-> >>>> that is separated by final end nodes.
-> >>>>
-> >>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >>>> ---
-> >>>>    include/efi_loader.h             |  3 +++
-> >>>>    lib/efi_loader/efi_device_path.c | 31 +++++++++++++++++++++++++++++++
-> >>>>    2 files changed, 34 insertions(+)
-> >>>>
-> >>>> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> >>>> index 9600941aa32..a7d7b8324f1 100644
-> >>>> --- a/include/efi_loader.h
-> >>>> +++ b/include/efi_loader.h
-> >>>> @@ -944,6 +944,9 @@ struct efi_load_option {
-> >>>>
-> >>>>    struct efi_device_path *efi_dp_from_lo(struct efi_load_option *lo,
-> >>>>                                          const efi_guid_t *guid);
-> >>>> +struct efi_device_path *efi_dp_merge(const struct efi_device_path *dp1,
-> >>>> +                                    efi_uintn_t *size,
-> >>>> +                                    const struct efi_device_path *dp2);
-> >>>>    struct efi_device_path *efi_dp_concat(const struct efi_device_path *dp1,
-> >>>>                                         const struct efi_device_path *dp2,
-> >>>>                                         bool split_end_node);
-> >>>> diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
-> >>>> index 46aa59b9e40..16cbe41d32f 100644
-> >>>> --- a/lib/efi_loader/efi_device_path.c
-> >>>> +++ b/lib/efi_loader/efi_device_path.c
-> >>>> @@ -270,6 +270,37 @@ struct efi_device_path *efi_dp_dup(const struct efi_device_path *dp)
-> >>>>           return ndp;
-> >>>>    }
-> >>>>
-> >>>> +/**
-> >>>> + * efi_dp_merge() - Concatenate two device paths separated by final end node
-> >>>> + *
-> >>>> + * @dp1:       first device path
-> >>>> + * @size:      pointer to length of @dp1, total size on return
-> >>>> + * @dp2:       second device path
-> >>>> + *
-> >>>> + * Return:     concatenated device path or NULL
-> >>>> + */
-> >>>> +struct efi_device_path *efi_dp_merge(const struct efi_device_path *dp1,
-> >>>> +                                    efi_uintn_t *size,
-> >>>> +                                    const struct efi_device_path *dp2)
-> >>>> +{
-> >>>> +       efi_uintn_t len, len1, len2;
-> >>>> +       struct efi_device_path *dp;
-> >>>> +       u8 *p;
-> >>>> +
-> >>>> +       len1 = *size;
-> >>>> +       len2 = efi_dp_size(dp2) + sizeof(END);
-> >>>> +       len = len1 + len2;
-> >>>> +       dp = efi_alloc(len);
-> >>>> +       if (!dp)
-> >>>> +               return NULL;
-> >>>> +       memcpy(dp, dp1, len1);
-> >>>> +       p = (u8 *)dp + len1;
-> >>>> +       memcpy(p, dp2, len2);
-> >>>> +       *size = len;
-> >>>
-> >>> Can't we just use efi_dp_concat()?
-> >>
-> >> efi_dp_concat cannot be used to put a device-path end-node in between
-> >> two device-paths that are concatenated. We need that separator in the
-> >> load options.
-> > 
-> > I am not sure I am following you. It's been a few years so please bear
-> > with me until I manage to re-read that code and page it back to
-> > memory.
-> > 
-> > What I remember though is that the format of the DP looks like this:
-> > 
-> > Loaded image DP - end node - initrd GUID DP (without and end node) -
-> > initrd - end of device path.
-> > So to jump from the special initrd GUID to the actual DP that contains
-> > the initrd you need to do an efi_dp_next(). Also, efi_dp_concat() will
-> > inject an end node with a DEVICE_PATH_SUB_TYPE_END type if the third
-> > argument is 'true'.
-> > 
-> > What am I missing?
-> 
-> Let us assume
-> 
-> dp1 = /vmlinux/endnode/initrd/endnode
-> dp2 = /dtb/endnode
-> 
-> and we invoke dp_concat(dp1, dp2, true):
-> 
-> sz1 is calculated via the efi_dp_size() function which looks for the 
-> *first* device-path end node.
-> 
-> sz1 = efi_dp_size(dp1) = sizeof(/vmlinux)
-> 
-> sz1 will not include initrd and its endnode.
-> 
-> So dp_concat(/vmlinux/endnode/initrd/endnode, /dtb/endnode, true)
-> will return:
-> 
-> /vmlinux/endnode/dtb/endnode
-> 
-> but in our boot option we want
-> 
-> /vmlinux/endnode/initrd/endnode/dtb/endnode
+On ven., avril 12, 2024 at 22:26, "A. Sverdlin" <alexander.sverdlin@siemens.com> wrote:
 
-That makes me realize a potential flaw with the design of this boot
-option.  The concept of an initrd is Linux-specific, but the concept
-of loading a DTB to pass along to an EFI image far less so.  So how
-would this work if I want to only pass the DTB?  Would that be:
+> From: Felipe Balbi <felipe.balbi@linux.intel.com>
+>
+> Upstream Linux commit 5999914f227b.
+>
+> The cmd argument we pass to
+> dwc3_send_gadget_ep_cmd() could contain extra
+> arguments embedded. When checking for StartTransfer
+> command, we need to make sure to match only lower 4
+> bits which contain the actual command and ignore the
+> rest.
+>
+> Reported-by: Janusz Dziedzic <januszx.dziedzic@intel.com>
+> Signed-off-by: Felipe Balbi <felipe.balbi@linux.intel.com>
+> [A. Sverdlin: cherry-picked only DWC3_DEPCMD_CMD() define]
+> Signed-off-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
 
-/vmlinux/endnode/endnode/dtb/endnode
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-?
+> ---
+>  drivers/usb/dwc3/core.h | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
+> index 1e7eda89a34c9..7709ab793f36d 100644
+> --- a/drivers/usb/dwc3/core.h
+> +++ b/drivers/usb/dwc3/core.h
+> @@ -405,6 +405,8 @@
+>  #define DWC3_DEPCMD_SETTRANSFRESOURCE	(0x02 << 0)
+>  #define DWC3_DEPCMD_SETEPCONFIG		(0x01 << 0)
+>  
+> +#define DWC3_DEPCMD_CMD(x)		((x) & 0xf)
+> +
+>  /* The EP number goes 0..31 so ep0 is always out and ep1 is always in */
+>  #define DWC3_DALEPENA_EP(n)		(1 << n)
+>  
+> -- 
+> 2.44.0
