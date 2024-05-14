@@ -4,76 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BA37C25B75
-	for <u-boot@archiver.kernel.org>; Tue, 14 May 2024 13:07:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABA4CC04FFE
+	for <u-boot@archiver.kernel.org>; Tue, 14 May 2024 13:08:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AFF2D88307;
-	Tue, 14 May 2024 15:07:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3BD3E88223;
+	Tue, 14 May 2024 15:08:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EX9+Vhdh";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="qs4fhe0o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9701088308; Tue, 14 May 2024 15:07:29 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C9D6A88223; Tue, 14 May 2024 15:08:32 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB26380245
- for <u-boot@lists.denx.de>; Tue, 14 May 2024 15:07:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B8AC088308
+ for <u-boot@lists.denx.de>; Tue, 14 May 2024 15:08:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-420104e5390so29657285e9.1
- for <u-boot@lists.denx.de>; Tue, 14 May 2024 06:07:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1715692047; x=1716296847; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=qVuGn+9AyCNBI6zZCYZbRDe/G28MVZVjlPcYyMNh+M8=;
- b=EX9+VhdhVxtccO58KEmcYOtfa2BqW8ewQrfSxr7N8LA1+fxy495JFqq5GTiZnxuyKe
- NAgTsgA+jZHw9v08KsDe3sdrFwpOHoHAjmb15m3csZ6ZYS0JGuQqHHQVf5l6dZjTYO12
- AEaCQHIaJHD08HEH/QbHv3hrmIK65x7gRV0MAVMvsubNKrd7I2OeOZzR/15m6Z8wOuvM
- 3cahtacD96ifQFJNiLpUCska0WEBM61Tg6/2euF1Tj6w67oK8MbSxoBNIyB7AQPRuhLv
- DLtGTd2roDQCHmaGiFqVHTlryUYiYCxSEBWe7rk5eU6Ca9QR4c5rTNFI/R8Wpyppahot
- 29ZA==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
+ [209.85.218.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 3CAFE41204
+ for <u-boot@lists.denx.de>; Tue, 14 May 2024 13:08:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1715692109;
+ bh=0hnD9518iHuiHD5Ay7kNO3cgPp9sM1HxY1VIeCs9RJQ=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=qs4fhe0oLaB4dK3aMUUn3wrwgtgbHwUEdA3mjxTipZpIAeOMn1kKUPXy5JaVAXtqK
+ Uhux6k+XxJgnhXBoxZeidE9GufG7E0vFlTOM9Sjhy5zTCsJMCokhdLuRkh4YHNXF/k
+ VGFMqVbnqPyhn0uAA29Fq/Xx61xcPEVKujg73ob6v6MJhUVEFr1IWFYqnSeHkrd+mq
+ Jp48EZAqltYtXbJozbZoAkDUvVmKjZDtZ6QfHYDOR0pyKs1DJDNIpQaw4ALSMbGKYJ
+ DCxkpPgVzX8j3kiMVbnA1xltXvRhBLp93qYln57K4uJqrvSw1K8PVYqKmI8SYSCjbK
+ UjFWSAXA6Tyhw==
+Received: by mail-ej1-f71.google.com with SMTP id
+ a640c23a62f3a-a59ad2436f8so349287966b.2
+ for <u-boot@lists.denx.de>; Tue, 14 May 2024 06:08:29 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715692047; x=1716296847;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qVuGn+9AyCNBI6zZCYZbRDe/G28MVZVjlPcYyMNh+M8=;
- b=iA5eEqZUpmY9gBf6YAVnop9YskS7YZ03ZwfbimKWec5K5COpKj8rDHvWwvCqbtce7z
- 8kMsqVtxDpkoeT5XJeTlfzRah05q5LRQTyPhfZAHCZ9niHLjgBDGSN3dTqfFhjIat8ey
- sSGpPTW9x2iqMdSYlAQf8eoU9lRn2StWbpzl9bM8FHtkI/xJKkDAhNmxd6fuENoYu/14
- 6kcr1ZaFJuJAkVM1DF4xjErOeUrs1w0BoiZZrxblSQ0mSKm+CQLlhqyf2tGSiaZKVlrG
- 0EWm4Y8p9Cpj6iLiRgkJjLTYF3Hc2hQEHD+MpCZy8fVnazh68rM1jsF2ML7Gw2S/dl3M
- w9Eg==
+ d=1e100.net; s=20230601; t=1715692108; x=1716296908;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=0hnD9518iHuiHD5Ay7kNO3cgPp9sM1HxY1VIeCs9RJQ=;
+ b=aWqwbRigqmVuvOVCOD44zTZw52uNgmNQOJgBGQED4HqIrObrREXnPDF49Nrv1Y8/+1
+ jhLrThOr//OWCY36gy5Q2VJtL4hmoko0Ado/3ytsGqUXAqAiOyPiaIukJ1CHKwBWiIo2
+ dE0stccymcpFjfVNw5pikRrggC3BX2suOuM7NCJdRrIrANQ/7ID7h9rTk2Lfwddy1RqM
+ P+JQguRfg13khfWckGhR0vP2Kd97dWC/9qUCrbr7xNNj5jfZejKG+o8zX89ovwo0KEC0
+ UH0RF6tyNrvIL+uwWPB7OfcOC2j/o4fgN88DkA4ewyWaBrbtnsFxSe7w2iG6hGR6Meno
+ PaBg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW2KXvdWhHq/HoNKcMmeXi2m/kh0kkygSPpwTNma9i1LtuWz9QAGBNhMOixzY2VZ/oIQkmABZXfyaknWsDOsXoBiga/Fw==
-X-Gm-Message-State: AOJu0Yxn4JIrGrEQjPDpefKn5FcOMJmgo3EJ6b3b4hzsigMsYUScaLlP
- gMjG0DeNrXsUlP1ekCUtt7qaMrv8hYcUk8LSYGWqrDZShbT8vk6V
-X-Google-Smtp-Source: AGHT+IG/eqC9DQdPbKEj7QvmtjwqHkI+ehNDOtcKkxfVClFPpO2z9mBuqrrm09seNZUO3R3ECj+kwQ==
-X-Received: by 2002:a1c:4c14:0:b0:415:540e:74e3 with SMTP id
- 5b1f17b1804b1-41fead6503fmr118166225e9.40.1715692046807; 
- Tue, 14 May 2024 06:07:26 -0700 (PDT)
-Received: from morpheus.home.roving-it.com ([149.14.240.163])
- by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-41fccbe8f74sm195437905e9.8.2024.05.14.06.07.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 May 2024 06:07:26 -0700 (PDT)
-From: Peter Robinson <pbrobinson@gmail.com>
-To: Matthias Brugger <mbrugger@suse.com>,
- Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Subject: [PATCH] Revert "arm: dts: bcm283x: Add minimal smbios information"
-Date: Tue, 14 May 2024 14:07:19 +0100
-Message-ID: <20240514130724.1474507-1-pbrobinson@gmail.com>
-X-Mailer: git-send-email 2.45.0
+ AJvYcCXUbjIHqv0QjdcakAvmRE8p6Goj4fg6ng2r9KiXZy0cH00tZ4aq54X84xwRImbq6UB/gSQSHNXVTc2i7WuEfyUBkrUJzQ==
+X-Gm-Message-State: AOJu0YyTPA7A1maZDbq37VgDRHIvQYJRV6Ili7/EoD+w6DoT+9pj6rIe
+ IGGOhu8B/idzTC459+Ye9YB3xy08aRZMuaerHnRGLUXHCgdXV8W3mT0q/4YPX3Gd4d2u3Q3lN3x
+ 6jqbyEg3DzfL3XSkaxdcmIeP7JSNWjKQaRX/dnvL7sm1NvaiAmosuUXGGuNjPWiIK3ts=
+X-Received: by 2002:a17:906:fada:b0:a59:cb29:3fb5 with SMTP id
+ a640c23a62f3a-a5a2d572af8mr813716166b.20.1715692108505; 
+ Tue, 14 May 2024 06:08:28 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFS1v00DvQegzvcaKxdFKh/sEo2ieC9DxtEfA8B198hjVCrrO50M/rD5GjJCknt1aeF3PwIJQ==
+X-Received: by 2002:a17:906:fada:b0:a59:cb29:3fb5 with SMTP id
+ a640c23a62f3a-a5a2d572af8mr813714266b.20.1715692108089; 
+ Tue, 14 May 2024 06:08:28 -0700 (PDT)
+Received: from [10.55.2.71] ([149.11.192.251])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a5a691870absm263817266b.124.2024.05.14.06.08.26
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 14 May 2024 06:08:27 -0700 (PDT)
+Message-ID: <4b2fa591-40da-4a4c-ab0e-8d168545195c@canonical.com>
+Date: Tue, 14 May 2024 15:08:25 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC 02/14] efi_loader: library function efi_dp_merge
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: ilias.apalodimas@linaro.org, sjg@chromium.org, trini@konsulko.com,
+ i@shantur.com, bmeng@tinylab.org, akashi.tkhro@gmail.com,
+ kojima.masahisa@socionext.com, raymond.mao@linaro.org, kettenis@openbsd.org,
+ jmcosta944@gmail.com, u-boot@lists.denx.de
+References: <20240426141321.232236-1-heinrich.schuchardt@canonical.com>
+ <20240426141321.232236-3-heinrich.schuchardt@canonical.com>
+ <CAC_iWjKg9NDKnoNa-V+H+5OOJe2uYsHb0vXM0+-QdCxUctiksg@mail.gmail.com>
+ <aac7887b-b123-4006-bbcd-4549e8e44a54@canonical.com>
+ <CAC_iWjL4umEBcEkZtjeWgfnrHV3oB3qECD0xYAY6qjphKb4umg@mail.gmail.com>
+ <a17e0a7e-8269-4d1d-aaaa-a944655b90f4@canonical.com>
+ <87ikzgft2q.fsf@bloch.sibelius.xs4all.nl>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <87ikzgft2q.fsf@bloch.sibelius.xs4all.nl>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,47 +114,151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This reverts commit 33041972727e84d3f95e26c83322521f61827584.
+On 5/14/24 14:58, Mark Kettenis wrote:
+>> Date: Tue, 14 May 2024 14:49:47 +0200
+>> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> 
+> Hi Heinrich,
+> 
+>> On 4/26/24 17:47, Ilias Apalodimas wrote:
+>>> Hi Heinrich
+>>>
+>>> On Fri, 26 Apr 2024 at 17:53, Heinrich Schuchardt
+>>> <heinrich.schuchardt@canonical.com> wrote:
+>>>>
+>>>> On 26.04.24 16:30, Ilias Apalodimas wrote:
+>>>>> Hi Heinrich,
+>>>>>
+>>>>> On Fri, 26 Apr 2024 at 17:13, Heinrich Schuchardt
+>>>>> <heinrich.schuchardt@canonical.com> wrote:
+>>>>>>
+>>>>>> Provide a function to append a device_path to a list of device paths
+>>>>>> that is separated by final end nodes.
+>>>>>>
+>>>>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>>>>>> ---
+>>>>>>     include/efi_loader.h             |  3 +++
+>>>>>>     lib/efi_loader/efi_device_path.c | 31 +++++++++++++++++++++++++++++++
+>>>>>>     2 files changed, 34 insertions(+)
+>>>>>>
+>>>>>> diff --git a/include/efi_loader.h b/include/efi_loader.h
+>>>>>> index 9600941aa32..a7d7b8324f1 100644
+>>>>>> --- a/include/efi_loader.h
+>>>>>> +++ b/include/efi_loader.h
+>>>>>> @@ -944,6 +944,9 @@ struct efi_load_option {
+>>>>>>
+>>>>>>     struct efi_device_path *efi_dp_from_lo(struct efi_load_option *lo,
+>>>>>>                                           const efi_guid_t *guid);
+>>>>>> +struct efi_device_path *efi_dp_merge(const struct efi_device_path *dp1,
+>>>>>> +                                    efi_uintn_t *size,
+>>>>>> +                                    const struct efi_device_path *dp2);
+>>>>>>     struct efi_device_path *efi_dp_concat(const struct efi_device_path *dp1,
+>>>>>>                                          const struct efi_device_path *dp2,
+>>>>>>                                          bool split_end_node);
+>>>>>> diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
+>>>>>> index 46aa59b9e40..16cbe41d32f 100644
+>>>>>> --- a/lib/efi_loader/efi_device_path.c
+>>>>>> +++ b/lib/efi_loader/efi_device_path.c
+>>>>>> @@ -270,6 +270,37 @@ struct efi_device_path *efi_dp_dup(const struct efi_device_path *dp)
+>>>>>>            return ndp;
+>>>>>>     }
+>>>>>>
+>>>>>> +/**
+>>>>>> + * efi_dp_merge() - Concatenate two device paths separated by final end node
+>>>>>> + *
+>>>>>> + * @dp1:       first device path
+>>>>>> + * @size:      pointer to length of @dp1, total size on return
+>>>>>> + * @dp2:       second device path
+>>>>>> + *
+>>>>>> + * Return:     concatenated device path or NULL
+>>>>>> + */
+>>>>>> +struct efi_device_path *efi_dp_merge(const struct efi_device_path *dp1,
+>>>>>> +                                    efi_uintn_t *size,
+>>>>>> +                                    const struct efi_device_path *dp2)
+>>>>>> +{
+>>>>>> +       efi_uintn_t len, len1, len2;
+>>>>>> +       struct efi_device_path *dp;
+>>>>>> +       u8 *p;
+>>>>>> +
+>>>>>> +       len1 = *size;
+>>>>>> +       len2 = efi_dp_size(dp2) + sizeof(END);
+>>>>>> +       len = len1 + len2;
+>>>>>> +       dp = efi_alloc(len);
+>>>>>> +       if (!dp)
+>>>>>> +               return NULL;
+>>>>>> +       memcpy(dp, dp1, len1);
+>>>>>> +       p = (u8 *)dp + len1;
+>>>>>> +       memcpy(p, dp2, len2);
+>>>>>> +       *size = len;
+>>>>>
+>>>>> Can't we just use efi_dp_concat()?
+>>>>
+>>>> efi_dp_concat cannot be used to put a device-path end-node in between
+>>>> two device-paths that are concatenated. We need that separator in the
+>>>> load options.
+>>>
+>>> I am not sure I am following you. It's been a few years so please bear
+>>> with me until I manage to re-read that code and page it back to
+>>> memory.
+>>>
+>>> What I remember though is that the format of the DP looks like this:
+>>>
+>>> Loaded image DP - end node - initrd GUID DP (without and end node) -
+>>> initrd - end of device path.
+>>> So to jump from the special initrd GUID to the actual DP that contains
+>>> the initrd you need to do an efi_dp_next(). Also, efi_dp_concat() will
+>>> inject an end node with a DEVICE_PATH_SUB_TYPE_END type if the third
+>>> argument is 'true'.
+>>>
+>>> What am I missing?
+>>
+>> Let us assume
+>>
+>> dp1 = /vmlinux/endnode/initrd/endnode
+>> dp2 = /dtb/endnode
+>>
+>> and we invoke dp_concat(dp1, dp2, true):
+>>
+>> sz1 is calculated via the efi_dp_size() function which looks for the
+>> *first* device-path end node.
+>>
+>> sz1 = efi_dp_size(dp1) = sizeof(/vmlinux)
+>>
+>> sz1 will not include initrd and its endnode.
+>>
+>> So dp_concat(/vmlinux/endnode/initrd/endnode, /dtb/endnode, true)
+>> will return:
+>>
+>> /vmlinux/endnode/dtb/endnode
+>>
+>> but in our boot option we want
+>>
+>> /vmlinux/endnode/initrd/endnode/dtb/endnode
+> 
+> That makes me realize a potential flaw with the design of this boot
+> option.  The concept of an initrd is Linux-specific, but the concept
+> of loading a DTB to pass along to an EFI image far less so.  So how
+> would this work if I want to only pass the DTB?  Would that be:
+> 
+> /vmlinux/endnode/endnode/dtb/endnode
 
-With the ability to generate this SMBIOS details autmotically the
-small amount of details that this patch provided are generated
-automatically so this is now obsolete so we can just drop it.
+Hello Mark,
 
-Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
----
- arch/arm/dts/bcm283x-u-boot.dtsi | 19 -------------------
- 1 file changed, 19 deletions(-)
+We have a VenMedia() device path node with specific GUIDs for initrd and 
+dtb prefixed to these paths. See patch 03/14.
 
-diff --git a/arch/arm/dts/bcm283x-u-boot.dtsi b/arch/arm/dts/bcm283x-u-boot.dtsi
-index 8c17c6f6a52..ec0f93dd850 100644
---- a/arch/arm/dts/bcm283x-u-boot.dtsi
-+++ b/arch/arm/dts/bcm283x-u-boot.dtsi
-@@ -6,25 +6,6 @@
-  * (C) Copyright 2016 Fabian Vogt <fvogt@suse.com>
-  */
- 
--/ {
--	smbios {
--		compatible = "u-boot,sysinfo-smbios";
--		smbios {
--			system {
--				manufacturer = "raspberrypi";
--				product = "rpi";
--			};
--			baseboard {
--				manufacturer = "raspberrypi";
--				product = "rpi";
--			};
--			chassis {
--				manufacturer = "raspberrypi";
--			};
--		};
--	};
--};
--
- &uart0 {
- 	skip-init;
- 	bootph-all;
--- 
-2.45.0
+We don't rely on the position. So in your case:
+
+/vmlinux/endnode/dtb/endnode
+
+where the device path 'dtb' would consist of multiple nodes, e.g.:
+
+VenMedia(EFI_FDT_GUID)/HD(1,GPT, ...)/\dir\filename.dtb
+
+Best regards
+
+Heinrich
+
+> 
+> ?
 
