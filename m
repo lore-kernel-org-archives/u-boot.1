@@ -4,60 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1BF3C25B75
-	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 15:11:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16523C25B75
+	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 15:34:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EEDD088216;
-	Wed, 15 May 2024 17:11:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5E7DB8824C;
+	Wed, 15 May 2024 17:34:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1715785885;
-	bh=VtLxjhvxB+JakY9qQP49jMgRFX/7W/gIczvh2EHnxyQ=;
+	s=phobos-20191101; t=1715787293;
+	bh=qpDDMZnH4oh16JFkL5vC8XgjNaFyOtdyPIqtGSul/2U=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=JwfpzTPPz4KTPDmp8QHpf9CMIDXQZEaTehh+mN4EOsYRudXZD+SeeE8FtuFCdmOmd
-	 oe0qjS9DRinP5gMdLNUGDZOWpZKBJlULljm0JR0MIocerU/K5aLNQSgLnprE9klNdt
-	 CwLLZhuDxrJgUuK5C+1VM7+1D0On3AZeGa9Qa6QQg2zaT9YYWmjIQTiOwALwIccI9u
-	 UJB4zU2wSgwiJdnP2uGIYumm6J36sYcixDkWqvcJtHoHf51PXge6yck4z7gQoCWYK4
-	 uyV92ZaV3cygB9mvWTDKyLYyzOJwy5lmTn5F7S4TK5WrxojHvb2F3vxeg4P5aLOmYz
-	 xau3DtNcga8sw==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A83C88262; Wed, 15 May 2024 17:11:23 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
- [IPv6:2001:67c:2050:101:465::107])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+	b=wtctoNMfh0VD6spOf8tkq38SqXBMfpQ48E+aXdSoLervyPLNB9qIZ3fwfXRF/c4CD
+	 xnuQr5vVwpl+Vbs+m8nPqI9tpFracEay4+j6vch9ng8qk5dODtjUue/TAoI5FSCWhO
+	 kw0hasfnbcYpTyPjC6x2Q0IP+sBh/iUwTV9M50rwpJRUw/WIIGb+72CRqGvRLdDN1S
+	 4CzXLdcIpsoMpJ2N390Bf7eBMJ1r3W1V3RQ8XS11ei5kFntqn1bwQsshqypdiJ8rIw
+	 OZVfpF9/7qbE319V7nBqQV2MkqUa02MynK2UjCjAVSIqAUOW6yEG/V5lMuD2HYUlYe
+	 Ii+6Gq+yukrpQ==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB3E888010
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 17:11:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4VfcBH5Fz5z9sld;
- Wed, 15 May 2024 17:11:19 +0200 (CEST)
-Message-ID: <f6ad2812-40bf-438c-b2ea-ed2b5526fc89@denx.de>
-Date: Wed, 15 May 2024 17:11:18 +0200
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 827AB8826C;
+ Wed, 15 May 2024 17:34:50 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1715787291;
+ bh=qpDDMZnH4oh16JFkL5vC8XgjNaFyOtdyPIqtGSul/2U=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=Z1JM2eE0Er10itepZxwytSeH4lmJlWwYzfvoXRxzOMHP6J2E4JXXfGn4zNSculB3B
+ N0LNRK94cLSu1M+ri0xV1uX2zq54yuXoRojrlZgd8gQeof2vhFGXFygb/rfbaIyX6d
+ 9p3el+DfGUISrmjSkwFLf83cumWGixPIxkIPZZ1ohNr8hVb1O2we2fKSG2SAkQeV27
+ GtW8folVsllhleExA5cqGothnC/CbbdspPagNCFf8hAn0g7JNjx5HhU2YxKMiQxrVl
+ jVkxkQEZgiimZb7w6spDy4DQPWBRvZFWRZjv2iDQIRkCPvYXN4iMy6ItTBjq8HXIvl
+ 0/uL7H8wHos3g==
+Message-ID: <515848c8-65e3-41de-8a2c-af1c9e5351f1@denx.de>
+Date: Wed, 15 May 2024 16:55:29 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH u-boot-mvebu 10/10] arm: mvebu: turris_omnia: Support old
- DDR3 training, selectable via env var
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mtd: spi-nor: Clear Winbond SR3 WPS bit on boot
+To: Michael Walle <michael@walle.cc>, u-boot@lists.denx.de
+Cc: Hai Pham <hai.pham.ud@renesas.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Johann Neuhauser <jneuhauser@dh-electronics.com>,
+ Simon Glass <sjg@chromium.org>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Vignesh R <vigneshr@ti.com>, linux-mtd@lists.infradead.org
+References: <20240304161607.82759-1-marex@denx.de>
+ <CZLOVK212G8L.2ISEL1IIWU1YE@walle.cc>
+ <7c0e2496-4338-497d-96cf-41d75e2fc52b@denx.de>
+ <CZLTVKVR3AG1.BZIQQU2PYSU6@walle.cc>
+ <a28b0543-67ee-4e33-91c1-86ae36eb44d5@denx.de>
+ <CZLXRLFU5YKU.1S5D9EZ3GUTH4@walle.cc>
+ <faa78709-6b7c-4394-8048-3c1f09b65a04@denx.de>
+ <CZLZ391C9O5F.38A18T9S51BNT@walle.cc>
+ <d522ac8e-8664-4798-9069-947691c6cd43@denx.de>
+ <CZM55T7YDKCR.3AIA4OQT2VG0S@walle.cc>
+ <ba2831d1-9ba1-4cd3-89c5-f4b9e8a4b94f@denx.de>
+ <CZMOLX07WDHJ.36M7NNZK94F99@walle.cc>
 Content-Language: en-US
-To: =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>
-Cc: u-boot@lists.denx.de
-References: <20240415163043.7482-1-kabel@kernel.org>
- <20240415163043.7482-11-kabel@kernel.org>
- <149e251a-baa7-4512-990a-d332d0d6177f@denx.de>
- <20240515105906.3cfca4fb@dellmb>
- <8ea997c2-e164-4ea1-9a75-28bbf159827b@denx.de>
- <20240515112431.5ba3f2a0@dellmb>
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20240515112431.5ba3f2a0@dellmb>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CZMOLX07WDHJ.36M7NNZK94F99@walle.cc>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,61 +86,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/15/24 11:24, Marek Behún wrote:
-> On Wed, 15 May 2024 11:10:09 +0200
-> Stefan Roese <sr@denx.de> wrote:
+On 3/6/24 1:55 PM, Michael Walle wrote:
+> Hi,
 > 
->> Hi Marek,
+> On Wed Mar 6, 2024 at 3:56 AM CET, Marek Vasut wrote:
+>>> I'd argue if one wants to use the locking at all, you have to set
+>>> UNLOCK_ALL=n. Otherwise, the bootloader might come alone and just
+>>> clear your locking bits again. Clearing the WPS bit there is just
+>>> one more thing which IMHO doesn't make much sense.
 >>
->> On 5/15/24 10:59, Marek Behún wrote:
->>> On Mon, 6 May 2024 12:03:55 +0200
->>> Stefan Roese <sr@denx.de> wrote:
->>>    
->>>> Hi Marek,
->>>>
->>>> On 4/15/24 18:30, Marek Behún wrote:
->>>>> Support old DDR3 training code on Turris Omnia, selectable by U-Boot
->>>>> enviroment variable.
->>>>>
->>>>> Users experiencing DDR3 initialization failures or random crashes of the
->>>>> operating system due to incorrect DDR3 configuration can select the old
->>>>> DDR3 training implementation to fix those issues by setting the
->>>>> environment variable
->>>>>      env set omnia_ddr3_training old
->>>>>      env save
->>>>>
->>>>> Signed-off-by: Marek Behún <kabel@kernel.org>
->>>>> ---
->>>>>     arch/arm/mach-mvebu/Kconfig                   |  1 +
->>>>>     board/CZ.NIC/turris_omnia/Makefile            |  1 +
->>>>>     board/CZ.NIC/turris_omnia/old_ddr3_training.c | 79 +++++++++++++++++++
->>>>>     board/CZ.NIC/turris_omnia/turris_omnia.c      |  2 +-
->>>>>     4 files changed, 82 insertions(+), 1 deletion(-)
->>>>>     create mode 100644 board/CZ.NIC/turris_omnia/old_ddr3_training.c
->>>>
->>>> For turris_omnia_defconfig, this is dropped when compiled:
->>>>
->>>> drivers/ddr/marvell/a38x/old/ddr3_debug.c:776:12: warning:
->>>> 'ddr3_tip_access_atr' declared 'static' but never defined
->>>> [-Wunused-function]
->>>>      776 | static int ddr3_tip_access_atr(u32 dev_num, u32 flag_id, u32
->>>> value, u32 **ptr);
->>>>          |            ^~~~~~~~~~~~~~~~~~~
->>>
->>> And it also seems that there is still something wrong with this
->>> old DDR training code port. Some boards still experience random bugs
->>> with this, but not with the U-Boot from 2015. :-(
->>
->> Hmmm, strange.
->>
->> How to continue? Are these "old DDR training patches" on hold for now?
+>> On the other hand, if UNLOCK_ALL=y is supposed to work and reset
+>> locking, then the SR3 WPS bit has to be configured to select the
+>> standard SPI NOR locking scheme, so the locking can actually be reset
+>> using that scheme.
 > 
-> The first 5 patches should be fine, the "old DDR training" comes in the
-> second half. Is it possible to merge only the first 5? And also the one
-> patch I sent on April 30:
->    arm: mvebu: turris_omnia: Fix ethernet PHY reset gpio FDT fixup
+> Yes, that's what I've meant with "the unlock all works as
+> advertised" and your patch is fine.
 
-Yes, that might be possible. Let me check...
-
-Thanks,
-Stefan
+Can this be applied ?
