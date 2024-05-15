@@ -4,68 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 329CAC25B75
-	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 18:48:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7C5FC25B78
+	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 18:51:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A01F882DF;
-	Wed, 15 May 2024 20:48:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 43BDC8829B;
+	Wed, 15 May 2024 20:51:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="S/ZDrDaS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RtQC4g2g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51A2C88286; Wed, 15 May 2024 20:48:20 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D23A7882CE; Wed, 15 May 2024 20:51:12 +0200 (CEST)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A572E88286
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 20:48:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A721688261
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 20:51:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44FImFKP061390;
- Wed, 15 May 2024 13:48:15 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1715798895;
- bh=6izq5pcb0nlBVBbJ2nc7wazmBPeR8iq9lX5LANJYeRM=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=S/ZDrDaSUYZAwA8yQ/BEH4pI0q697ftKHKBKDI6mPzYRpSzcOGX2foXGm3SUWWL1g
- iNpRyqIpMAqwBAEFKd+9nEZqqgZ3Fw03t5v2ce6yd18un31aGsKiAvB20/JwgBpwAn
- pggPcynBWmnAWLxPi3imdX8ejoskGvnsmGfRqJrA=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44FImFgV051486
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 15 May 2024 13:48:15 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 15
- May 2024 13:48:15 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 15 May 2024 13:48:15 -0500
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44FImE3H124677;
- Wed, 15 May 2024 13:48:15 -0500
-Message-ID: <098126c3-ac13-46b1-8983-dc6bfcd284f6@ti.com>
-Date: Wed, 15 May 2024 13:48:14 -0500
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6a04bb4f6d5so37636686d6.0
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 11:51:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1715799068; x=1716403868; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=KTJEbWyYk0cgssWCplfExz8UafbYvdA0491L4/k5+mI=;
+ b=RtQC4g2gK6j0Q07DZPmQ9UZV/qb94V5uVUNLVvwdYEyZY7ANWeey1xY41Z6m0CmZvz
+ +ZLpFieHW/76L67l685MywT2xhddkexCJRJp3IrTLY2P9txd7p5zFqZZGskXYciCWnRM
+ LnltVM9xS5DcZ5NACirE9AMyemhHiIBVRgRr8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1715799068; x=1716403868;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KTJEbWyYk0cgssWCplfExz8UafbYvdA0491L4/k5+mI=;
+ b=rseaR3wzCVcUdK6i5MaeWTffEVXw65Qw2YcZs50BWoew+8yhuiPGNw21Ap5HBoXg9R
+ D2YjeD+dfS67Sk9GYJE8gOCm1dst7tHwrL7AeE+8EzwKoyYsXBomUCUTFBqgp0FrifJ2
+ 2gsT4c0a12yVHkfaqc//2lQ1mfuVglk7ew+ESZRMenPTyNvresv9Yz0hhRhGQlj2qGKg
+ pL/jJqgq/RbMoku4Q2iOEn4mMI4eWRk25M7T5BQaacSd3zjMFM1S5Zx8lF5Vs/45Mg6L
+ s1DgCEvTVVj+4R6MA1eoR6DBQPaFUhyZi4y9NCW6Bv15O8Ko8F9SuQTRGU7zVyWu+HIx
+ RtHw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUc72cJMSv81Iqdwr6uffpnxBkDi5OQQ0BbzAHbUTIsXyKnqaLVo7lA9+ZJ+sHCyRhcp0tc1K0dD7iYCsksfdZ0mXDmQg==
+X-Gm-Message-State: AOJu0Yw0dsj58QMq+HvwRnQBG8s1rT9/YcklUjONQD0FeCi7kynNcgPJ
+ zXmqdgAcLYN5EhkZ9uj2JIgReKBmHrWxdorn+3wkME9v7UtthszoMdCuONRAU90=
+X-Google-Smtp-Source: AGHT+IFgedIZ8buN8Q+DC1IC/+oN53QK+ebFh1X+Q7dJlAv5zdjayyEsM8SB9WEadBJn/AFgvmxi0w==
+X-Received: by 2002:a05:6214:4807:b0:6a3:5d98:67c8 with SMTP id
+ 6a1803df08f44-6a35d986d42mr8983316d6.51.1715799068511; 
+ Wed, 15 May 2024 11:51:08 -0700 (PDT)
+Received: from bill-the-cat ([187.144.98.216])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6a15f179aa6sm67101606d6.9.2024.05.15.11.51.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 15 May 2024 11:51:08 -0700 (PDT)
+Date: Wed, 15 May 2024 12:51:04 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jim Liu <jim.t90615@gmail.com>
+Cc: YSCHU@nuvoton.com, KWLIU@nuvoton.com, JJLIU0@nuvoton.com,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v1] board: nuvoton: Use an event to replace
+ last_stage_init() and fix build error
+Message-ID: <20240515185104.GZ2568172@bill-the-cat>
+References: <20240507091055.1749680-1-JJLIU0@nuvoton.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/2] configs: add defconfigs for the am625-lp-sk
-To: Tom Rini <trini@konsulko.com>, Bryan Brattlof <bb@ti.com>
-CC: <u-boot@lists.denx.de>, Nitin Yadav <n-yadav@ti.com>, Dhruva Gole
- <d-gole@ti.com>
-References: <20240429-am62q-wip-v3-0-17dcfdb1075a@ti.com>
- <20240429-am62q-wip-v3-2-17dcfdb1075a@ti.com>
- <20240515182123.GY2568172@bill-the-cat>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20240515182123.GY2568172@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="LiaYiH//q3bC9Sdm"
+Content-Disposition: inline
+In-Reply-To: <20240507091055.1749680-1-JJLIU0@nuvoton.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,49 +93,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/15/24 1:21 PM, Tom Rini wrote:
-> On Fri, May 03, 2024 at 11:44:29AM -0500, Bryan Brattlof wrote:
-> 
->> The am62x-lp-sk is a package and reference board spin of the am62x-sk to
->> showcase the low-power features of the am62x SoC family. Because it so
->> closely resembles the am62x-sk board, use the preprocessor to inherit
->> its configuration making the needed changes for this board where
->> necessary.
->>
->> Reviewed-by: Dhruva Gole <d-gole@ti.com>
->> Signed-off-by: Bryan Brattlof <bb@ti.com>
->> ---
->>   configs/am62x_lp_sk_a53_defconfig | 3 +++
->>   configs/am62x_lp_sk_r5_defconfig  | 2 ++
->>   2 files changed, 5 insertions(+)
->>
->> diff --git a/configs/am62x_lp_sk_a53_defconfig b/configs/am62x_lp_sk_a53_defconfig
->> new file mode 100644
->> index 0000000000000..904b2142b2f53
->> --- /dev/null
->> +++ b/configs/am62x_lp_sk_a53_defconfig
->> @@ -0,0 +1,3 @@
->> +#include <configs/am62x_evm_a53_defconfig>
->> +CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am62-lp-sk"
->> +CONFIG_OF_UPSTREAM=y
-> 
-> So, there's a problem here. The #include trick for defconfig files isn't
-> working as intended, exactly. The example here doesn't work right.
-> First, it shows up as a variant of "sandbox" (as buildman will show and
-> leads to https://source.denx.de/u-boot/u-boot/-/jobs/835067#L119)
-> 
-> And this becomes clearer if you look at configs/am69_sk_r5_defconfig
-> which has to set some symbols already found in
-> configs/j784s4_evm_r5_defconfig in order to work. This is seemingly very
-> not equivalent to invoking "make foo_defconfig bar.config" to combine
-> things.
-> 
 
-This is equivalent when running make. The issue is with buildman which
-manually checks the content of the defconfig to find what ARCH it should
-run the defconfig with. buildman doesn't understand the #include yet.
-Until buildman can be fixed, you'll need to do what we did with
-am69_sk_r5_defconfig and redefine the ARCH/SOC/TARGET info in the
-defconfig file so buildman can find it without following the #include.
+--LiaYiH//q3bC9Sdm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Andrew
+On Tue, May 07, 2024 at 05:10:55PM +0800, Jim Liu wrote:
+
+> Followed the new style use event to replace last_stage_init().
+> Fixed build error After replace last_stage_init().
+> And remove CONFIG_SYS_SKIP_UART_INIT from defconfig,
+> system will reuse the setting from bootblock
+> and skip the baud rate setting.
+>=20
+> Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
+> ---
+>  board/nuvoton/arbel_evb/arbel_evb.c | 7 +++++--
+>  board/nuvoton/common/Makefile       | 2 +-
+>  board/nuvoton/poleg_evb/poleg_evb.c | 6 +++++-
+>  configs/arbel_evb_defconfig         | 1 -
+>  4 files changed, 11 insertions(+), 5 deletions(-)
+>=20
+> diff --git a/board/nuvoton/arbel_evb/arbel_evb.c b/board/nuvoton/arbel_ev=
+b/arbel_evb.c
+> index 53c931c3c2..d112329dc1 100644
+> --- a/board/nuvoton/arbel_evb/arbel_evb.c
+> +++ b/board/nuvoton/arbel_evb/arbel_evb.c
+> @@ -5,6 +5,7 @@
+> =20
+>  #include <common.h>
+>  #include <dm.h>
+> +#include <event.h>
+>  #include <asm/io.h>
+>  #include <asm/arch/gcr.h>
+>  #include "../common/uart.h"
+> @@ -95,9 +96,11 @@ int dram_init_banksize(void)
+>  	return 0;
+>  }
+> =20
+> -int last_stage_init(void)
+> +static int last_stage_init(void)
+>  {
+> +#if CONFIG_IS_ENABLED(CONFIG_SYS_SKIP_UART_INIT)
+
+The CONFIG_IS_ENABLED takes symbols without the CONFIG_ prefix part so
+that it will be true for FOO, and SPL_FOO and TPL_FOO.
+
+--=20
+Tom
+
+--LiaYiH//q3bC9Sdm
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZFBBQACgkQFHw5/5Y0
+tyyVegv/ar5rAZt8ZJtBjkRzLRpK2UwYVtymSOW0DdIM51IZ6I9hTEwak+pJjsug
+SlnmR1hrZ/K0tds1uL7kFz1KqvYLL/2o5uDlWrg8+aDYD3FK6Ukdnq40eChT3RfM
+6g5h4IRc4uiWagMbOKkNtjRqDmI8cbApBM2tYiTRfW2zj+LdnyXURfZA/xnZ5QT4
+GgCVPopZDlNtx89dLBPeXzPAZxRxIo3BJEpzN79idG49un95PKIyBELIblpJkEC2
+VTmTl1lIMCOp4d1JOgLGezoj9pYxocc0moapq1WeENh+agqphHpWyZS0TYu+Ks2f
+VAXRA1e5mV31cORBp5x/kkwjXbnj4Tw8UlmuL/whD2Ygq9EcWkkqcq0M45BoMOHI
+E00WoYIjvcOCoTPFURciw23xsfV/u2IfqnKtTagxJbxUahMsg/dmmY/3tq6KhueG
+T0AnSNDgyjD6FkLjI4NhPcBP5e35TuPt1gqdj5zY+qfropGU7BWrEktZLbG5nPTF
+KWIwsSKI
+=y3DG
+-----END PGP SIGNATURE-----
+
+--LiaYiH//q3bC9Sdm--
