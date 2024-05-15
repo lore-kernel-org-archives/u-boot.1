@@ -4,54 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 020E6C25B75
-	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 07:03:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 559A1C25B75
+	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 07:08:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27B39881C8;
-	Wed, 15 May 2024 09:03:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id A8CF388191;
+	Wed, 15 May 2024 09:08:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1715756583;
-	bh=IWet0IX+A4dvjHZnLOvJ2JzYYFBIiA/Q+ZlGpRs16RU=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=uGmgh3DAE3tFko3fuECpnleQp7+J7WGGX0lJRf6JOkZdGdGWYPwYk2IQ7KEJGggoS
-	 rZkn4jIrBWPJPSqpzaCsoLJ6m8Ebzhupllq/vxRp6xJNI1u4u13mwxzBfM9TrJ1+uK
-	 4akuqwFarLcdsvEF0ADAS2qQCW3eHVlTOe6XvLr2NTakI83H49q9asawfxswVgfvHa
-	 EMIAVpS1lnLGn8qssqikemdNm6tqyvI2BZ0cF7rf+nlyUGIHTZrFeQvcCWUsGM7M4F
-	 8DAz63SRCmURXZQ8AqqwEmF50jEQnWB6FkoFRLZ8zFMOiFnOktuZ93yTZYj6bJ2EAq
-	 bQEubSUH5lniA==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Yr8X6FSe";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 888BB881EA; Wed, 15 May 2024 09:08:52 +0200 (CEST)
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [IPv6:2604:1380:40e1:4800::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id AB01B878AA;
- Wed, 15 May 2024 09:03:01 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1715756582;
- bh=IWet0IX+A4dvjHZnLOvJ2JzYYFBIiA/Q+ZlGpRs16RU=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=0IJzrRTNQ/ZFEe726L5CxNpRMhA6RBWdg+bPQKf8ukW7HFzCKFvmz0oRPFdvaM2Kz
- d+G9H0U5nk80mgi88H7lOqVFQ6w903beFGW7TYLO4pNzQTgUjVK9I5eCnmrJThVJe7
- zSrhT3DumCE4M+EpN5wJfjyHRxzMXrnPN3y7yo2NDVBEm1nKItr3d1CeXWJqyrZPCg
- wbb5j1l/Hi0X54IhBzu3U44bqIzrmYIjaFbLb8G8V7V2te9RoO67rw28uxJh//VIaC
- PfHiH0dj/CfYIL3xOdhuaKDhjVYUPW5rFLfvmpH2FrPRxnCunPBJ+M+jqMm5bxG1N+
- k6zxufXFz2n0g==
-Message-ID: <bcd69266-07a2-4296-be76-f18b471a2f19@denx.de>
-Date: Wed, 15 May 2024 08:34:51 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 5F32B878AA
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 09:08:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 853F9CE1372;
+ Wed, 15 May 2024 07:08:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A29DBC116B1;
+ Wed, 15 May 2024 07:08:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1715756926;
+ bh=OHxBDCAnrsHhZXwuh8HWMPAjSEj3jaiOTQMbdDQZm8E=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=Yr8X6FSeFRYt66oN1q722C7ROe/GcKOxoJQQDA4aIAXe0ZurXJJlW1h6WUM3tglw6
+ sPSfNDBoF8XI8ISKZ3UR0lWuj7Lgm9rQrYeYtck0Qg0BNmt5h6v8fEGj0GtxQjDuA9
+ Shp5ga9xM9RbRXaxVBrX0xT6KHexFKWVjCMcfSMhmbtKejTG0nS2ttSdEVDptnAU0w
+ 1l7Cc1MEoO3Z/+8DGYoiySFLc30x6hJYVt7zRSQg+tNgc5k/dBdhJVCDv0qMKUWe+A
+ QCLV3e2e1/lt8GsbAxPaF1ZK7aGe3A8a8FacsoscV6otWh+glw3NVMolQdDaApfGro
+ b9/eRDk26W3Mw==
+Date: Wed, 15 May 2024 09:08:38 +0200
+From: Marek =?UTF-8?B?QmVow7pu?= <kabel@kernel.org>
+To: lukas.funke-oss@weidmueller.com
+Cc: u-boot@lists.denx.de, Michal Simek <michal.simek@amd.com>, Lukas Funke
+ <lukas.funke@weidmueller.com>, Algapally Santosh Sagar
+ <santoshsagar.algapally@amd.com>, Ashok Reddy Soma
+ <ashok.reddy.soma@amd.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Taedcke <christian.taedcke@weidmueller.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, Jonas
+ Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, Neil
+ Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>, Qu
+ Wenruo <wqu@suse.com>, Simon Glass <sjg@chromium.org>, Stefan
+ Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>, Stefan Roese
+ <sr@denx.de>, Tanmay Shah <tanmay.shah@amd.com>, Tom Rini
+ <trini@konsulko.com>, Venkatesh Yadav Abbarapu
+ <venkatesh.abbarapu@amd.com>, Wan Yee Lau <wan.yee.lau@intel.com>
+Subject: Re: [PATCH 0/3] Add eFuse access for ZynqMP
+Message-ID: <20240515090838.6cfc424d@dellmb>
+In-Reply-To: <20240514140416.156747-1-lukas.funke-oss@weidmueller.com>
+References: <20240514140416.156747-1-lukas.funke-oss@weidmueller.com>
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.41; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] usb: remove not used variable in usb_ether_curr_dev
-To: Heiko Schocher <hs@denx.de>, u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Xavier Drudis Ferran <xdrudis@tinet.cat>
-References: <20240515062442.9667-1-hs@denx.de>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240515062442.9667-1-hs@denx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -69,16 +80,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/15/24 8:24 AM, Heiko Schocher wrote:
-> grepping for usb_ether_curr_dev in u-boot source code shows
-> 
-> $ grep -r usb_ether_curr_dev .
-> ./cmd/usb.c:static int __maybe_unused usb_ether_curr_dev = -1; /* current ethernet device */
-> $
-> 
-> only declared but never used, so it can safely
-> removed from code.
-> 
-> Signed-off-by: Heiko Schocher <hs@denx.de>
+On Tue, 14 May 2024 16:04:13 +0200
+lukas.funke-oss@weidmueller.com wrote:
 
-Reviewed-by: Marek Vasut <marex@denx.de>
+> From: Lukas Funke <lukas.funke@weidmueller.com>
+> 
+> 
+> This series adds a driver to read and write ZynqMP eFuses [1]. The
+> driver can be accessed by the 'efuse_read' and 'efuse_write' subcommands
+> of the 'zynqmp' command.
+
+Vendor specific commands aren't great.
+
+There is the 'fuse' command in u-boot. You need to implement the
+  fuse_read()
+  fuse_sense()
+  fuse_prog()
+  fuse_override()
+functions.
+
+See for example arch/arm/mach-mvebu/efuse.c, or other implementations.
+
+Please don't invent new vendor specific commands in new code, it is an
+antipattern.
+
+Marek
