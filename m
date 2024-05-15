@@ -4,85 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F54EC25B75
-	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 16:53:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FC98C25B75
+	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 18:21:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A8B888261;
-	Wed, 15 May 2024 18:53:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=armadeus.com
+	by phobos.denx.de (Postfix) with ESMTP id 59903841BC;
+	Wed, 15 May 2024 20:21:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 3569188260; Wed, 15 May 2024 18:53:21 +0200 (CEST)
-Received: from 5.mo561.mail-out.ovh.net (5.mo561.mail-out.ovh.net
- [87.98.178.36])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E59B488262
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 18:53:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=armadeus.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=sebastien.szymanski@armadeus.com
-Received: from director9.ghost.mail-out.ovh.net (unknown [10.108.2.179])
- by mo561.mail-out.ovh.net (Postfix) with ESMTP id 4VffRy2bfKz1R1P
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 16:53:18 +0000 (UTC)
-Received: from ghost-submission-6684bf9d7b-s86zv (unknown [10.111.182.7])
- by director9.ghost.mail-out.ovh.net (Postfix) with ESMTPS id D49A01FE80;
- Wed, 15 May 2024 16:53:17 +0000 (UTC)
-Received: from armadeus.com ([37.59.142.107])
- by ghost-submission-6684bf9d7b-s86zv with ESMTPSA
- id DxqhL33oRGarshcA5OnDeQ
- (envelope-from <sebastien.szymanski@armadeus.com>);
- Wed, 15 May 2024 16:53:17 +0000
-Authentication-Results: garm.ovh; auth=pass
- (GARM-107S001e5535f9d-7d59-47db-9a73-4c84d48e2240,
- 03DF5091F34F52AE6C7A285C13E5116C4BD8D023)
- smtp.auth=sebastien.szymanski@armadeus.com
-X-OVh-ClientIp: 92.140.169.135
-Message-ID: <5b5d6fe5-d436-4ac0-b6bf-7485196a97db@armadeus.com>
-Date: Wed, 15 May 2024 18:53:08 +0200
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="D9VIj3lq";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 05E85870AB; Wed, 15 May 2024 20:21:31 +0200 (CEST)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8087883334
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 20:21:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-61be74097cbso76716217b3.1
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 11:21:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1715797287; x=1716402087; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Y3qHurFWXOjtb3Lk9Jd2E88MTmActuiMxc6dNHOx/1k=;
+ b=D9VIj3lqmp2D0nZUWMrx/f4Jx7UwZWou1vinF4aG2IWbKiJMfhRZZmtAN0FH7sFJ8+
+ N60Liz0W40JNCQpsJcpkZbXhWxUSKkQCgsM+yAvkgZPG5a/7YCPJGECtwWmg9vWviZu6
+ WIL53+ybI0cKS0MH+9s0BQy6QeTjalTIwSsvA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1715797287; x=1716402087;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Y3qHurFWXOjtb3Lk9Jd2E88MTmActuiMxc6dNHOx/1k=;
+ b=S4uWMBCrlQz9LJA1BdGTOM0QAwVQ9VmonL+mK7Zy1uOGLeeoPctqDRhjVxoij3/zKG
+ KQvR/iXNCWtz/nw8aIFPXmnKvNs9hkJnoNPaTZJPA8gCrhzHrRR7uEuiG53//hsxgD67
+ zOhZ4Xs+KGQLldeY3oocHAVGU7PEW5eC0axddAx7IuzVcZBhkvJMgDR8AtOYgONFisQ1
+ Ha7dEUMACfkTyLPyiDFvaBiv97KAI88ZYXhAaHgoTCeWYpmJGyCkpRJjgwDESnUhyVDF
+ hSE/2PX0dud85ujtBgJBqBT8EjH/13WtB+q00kdhrMtrf6mxwpggbTaW2dHjurWxmEwC
+ LUSA==
+X-Gm-Message-State: AOJu0YwooX2AuzclGKhf9Y61eXxgn/rvOljb24bqxqduOH+b5VLIjq7I
+ xsUIypa25MJmt9Xy3x3UQOBaqQnkJY5HyB1xZkoDf0go8qR9Q0yoAflxbfc1J60=
+X-Google-Smtp-Source: AGHT+IEViyOO/FBP7U6L7FIoprFUthVVhsUCGyUHiEDKM87yF/+44MYyZVUxVCfx/ltI8djalyTyIw==
+X-Received: by 2002:a0d:e28b:0:b0:618:412a:d12b with SMTP id
+ 00721157ae682-622affa80a5mr163785877b3.15.1715797287195; 
+ Wed, 15 May 2024 11:21:27 -0700 (PDT)
+Received: from bill-the-cat ([187.144.98.216])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-43df56d1915sm85820881cf.87.2024.05.15.11.21.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 15 May 2024 11:21:26 -0700 (PDT)
+Date: Wed, 15 May 2024 12:21:23 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Bryan Brattlof <bb@ti.com>, Andrew Davis <afd@ti.com>
+Cc: u-boot@lists.denx.de, Nitin Yadav <n-yadav@ti.com>,
+ Dhruva Gole <d-gole@ti.com>
+Subject: Re: [PATCH v3 2/2] configs: add defconfigs for the am625-lp-sk
+Message-ID: <20240515182123.GY2568172@bill-the-cat>
+References: <20240429-am62q-wip-v3-0-17dcfdb1075a@ti.com>
+ <20240429-am62q-wip-v3-2-17dcfdb1075a@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [NFS] fetching kernel via nfs
-To: Johannes Kirchmair - SKIDATA <Johannes.Kirchmair@skidata.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: "joe.hershberger@ni.com" <joe.hershberger@ni.com>,
- "rfried.dev@gmail.com" <rfried.dev@gmail.com>
-References: <GVAP278MB045609BECD802008B0FEBD2C8CEC2@GVAP278MB0456.CHEP278.PROD.OUTLOOK.COM>
-Content-Language: en-US
-From: =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>
-Autocrypt: addr=sebastien.szymanski@armadeus.com; keydata=
- xsBNBFNfZLEBCACv1lqSePHJNpRgcnER+3emy+Arjz84zFax3XkogjY/e3ZneihIgWrVKe5M
- ql16pX4KTkzNgMUKz4bG/XwT3kjcrXshxFLlg7KrHMl287C+W+QOUjnjVeRi/su+SPmjz8VD
- yr11h+ZkVLAWhS+uQJ93jy1NwG8M4t1kBLAVHHD5Vw4FJ+3ouaVYIp1X1Cr8bVKQw33Q1aTd
- ro0kMBb96B9vNu7ciJZ3gvlaBzUEKOgNnq9KaywuLnqrqr4HUIn5JuxZjCjJzt9kTAKcTfp2
- cJM8qpp+2FF5qtbkse9fZ6M64qozgOPr9Tk4Amf9fZEUQ6UNw14mmBZuXSzoHe75gI7TABEB
- AAHNN1PDqWJhc3RpZW4gU1pZTUFOU0tJIDxzZWJhc3RpZW4uc3p5bWFuc2tpQGFybWFkZXVz
- LmNvbT7CwJAEEwEIADoCGyMHCwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgBYhBJwGygpYm/1C
- /GCmwbCaKeiBMmTiBQJdhIHLAAoJELCaKeiBMmTixXIH/2W3kbzRG0UF81jtRRnp0H83rjDT
- v0H+8fgFMRL/7HCJ1QPArkfRJlM2wlJkN+ChP09CCarYfUEHfRCHlTb7At6Yyrz1jziD7ZwX
- 8IWHYRXnZkY5eZc5DsiUgq6JH49kt+GPzK8UVP9MTa6zkBpPCUf7LzZ4pD3FihdkT52BU3gI
- d9P49fSI0TYySlb/VKn815aOhvwEr7+Dh3mZUjSh7saofbRmVUOr7p+R3MvvGI19/IJZjeOE
- ZWliODDOt6HnBOtoGSXMcNIFF6snH52D5N5gY88njZjTwhgGGUBix1bsgf/EY0v4R5itZBXB
- B/Ze4Tm++YHaB75hZK6PQu/YRv7OwE0EU19ksQEIALo7jhXddrXBTRu5SAjelV53jyHBJTX/
- vN4nL/VbbW/saca+NJjDSxx5DBmotZbQdWIyZiSIjU/xnTREvtDrl6ZeSsKWd7ZqiuiY4fSR
- zwuQp9rd0yqRuxesrWeyJB1zCSdEvLyKASERt+nxkOA+IzJ4y1qLtvnWr+SL1AXgTMw+Tkyw
- KIDCRWHTIYas11ldGj82gOIpYeXnapeNLHfT4EQwg0NeWYHynJxAQWiX5aPlw0uSpAQSsBXQ
- FIe3fpoveMSnXK+PG2BBOzexYv7r4S70a6sF9sgTTPpfKqUaqqC+u1+bUX6alTAKhGKJywaF
- 6ViqLlgY8PfwohSyAlqlTRMAEQEAAcLAdgQYAQgAIAIbDBYhBJwGygpYm/1C/GCmwbCaKeiB
- MmTiBQJdhIHSAAoJELCaKeiBMmTitU8IAK7NQM3fEwaF5XaKtepYWsVka44CD8A9e4r7NVK9
- ugirKvXirIxBSDmN/Db862NmVpITsZ6ERNSNZLm/7k55N+TexKYiFZeU7G92TEfAM6qPElvx
- DLEcrkNMq9r08YZeUloacsq31AL5fK4LW+xdvXudkdiKRMJsdTpmff3x5kIziGOHjwFP9wve
- ZgEH52gpbRsP8Whx/Z2lNX/BBRmFM8OnEXFsjjqDzYThdxTq85wGPpkgvvUGyPNRD7TpbB1C
- pajOUUkPxgj5LKt77HD1afeZNudWhgcdkbtT5PMQTT0WY6wvMEj9S1+bGPeXRGWLYB7gHQ+L
- JNoSD7Kz6Y9qnKo=
-In-Reply-To: <GVAP278MB045609BECD802008B0FEBD2C8CEC2@GVAP278MB0456.CHEP278.PROD.OUTLOOK.COM>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 16752827665915177779
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvledrvdegkedguddtudcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefkffggfgfuvfevfhfhjggtgfesthekredttddvjeenucfhrhhomhepuforsggrshhtihgvnhcuufiihihmrghnshhkihcuoehsvggsrghsthhivghnrdhsiiihmhgrnhhskhhisegrrhhmrgguvghushdrtghomheqnecuggftrfgrthhtvghrnhepiefhgeffudetiedvheeuffelieetffevueekgffgffekffehveehvdegheejkedtnecuffhomhgrihhnpeguvghngidruggvnecukfhppeduvdejrddtrddtrddupdelvddrudegtddrudeiledrudefhedpfeejrdehledrudegvddruddtjeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepshgvsggrshhtihgvnhdrshiihihmrghnshhkihesrghrmhgruggvuhhsrdgtohhmpdhnsggprhgtphhtthhopedupdhrtghpthhtohepuhdqsghoohhtsehlihhsthhsrdguvghngidruggvpdfovfetjfhoshhtpehmohehiedupdhmohguvgepshhmthhpohhuth
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="+iS2YAyjeiQaM54f"
+Content-Disposition: inline
+In-Reply-To: <20240429-am62q-wip-v3-2-17dcfdb1075a@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,41 +91,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
 
-On 5/15/24 14:40, Johannes Kirchmair - SKIDATA wrote:
-> Dear u-boot people,
-> 
-> I encountered some problems trying to fetch the Linux kernel via nfs (v3).
-> One problem was that the nfs file lookup always returned NFS3ERR_BADHANDLE.
+--+iS2YAyjeiQaM54f
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I have fixed this. See:
+On Fri, May 03, 2024 at 11:44:29AM -0500, Bryan Brattlof wrote:
 
-https://source.denx.de/u-boot/u-boot/-/commit/d2986567b27dae764b19886bcda1d24b7c41d075
+> The am62x-lp-sk is a package and reference board spin of the am62x-sk to
+> showcase the low-power features of the am62x SoC family. Because it so
+> closely resembles the am62x-sk board, use the preprocessor to inherit
+> its configuration making the needed changes for this board where
+> necessary.
+>=20
+> Reviewed-by: Dhruva Gole <d-gole@ti.com>
+> Signed-off-by: Bryan Brattlof <bb@ti.com>
+> ---
+>  configs/am62x_lp_sk_a53_defconfig | 3 +++
+>  configs/am62x_lp_sk_r5_defconfig  | 2 ++
+>  2 files changed, 5 insertions(+)
+>=20
+> diff --git a/configs/am62x_lp_sk_a53_defconfig b/configs/am62x_lp_sk_a53_=
+defconfig
+> new file mode 100644
+> index 0000000000000..904b2142b2f53
+> --- /dev/null
+> +++ b/configs/am62x_lp_sk_a53_defconfig
+> @@ -0,0 +1,3 @@
+> +#include <configs/am62x_evm_a53_defconfig>
+> +CONFIG_DEFAULT_DEVICE_TREE=3D"ti/k3-am62-lp-sk"
+> +CONFIG_OF_UPSTREAM=3Dy
 
-Regards,
+So, there's a problem here. The #include trick for defconfig files isn't
+working as intended, exactly. The example here doesn't work right.
+First, it shows up as a variant of "sandbox" (as buildman will show and
+leads to https://source.denx.de/u-boot/u-boot/-/jobs/835067#L119)
 
-> This is due to the following line in nfs_lookup_req() function (net/nfs.c):
-> 
-> 		len = (uint32_t *)p - (uint32_t *)&(data[0]);
-> 		rpc_req(PROG_NFS, NFS_LOOKUP, data, len);
-> 	} else {  /* NFS_V3 */
-> 		*p++ = htonl(NFS_FHSIZE);	/* Dir handle length */    <=====  this line
-> 		memcpy(p, dirfh, NFS_FHSIZE);
-> 		p += (NFS_FHSIZE / 4);
-> 		*p++ = htonl(fnamelen);
-> 
-> In the NFS_V3 case we add the dir file handle  size to data and then the dir file handle.
-> IUC, this is not correct here because dirfh includes already the size of the handle in the first 4 bytes.
-> Feel free to correct me if I am wrong.
-> 
-> As a result, if I remove the line "*p++ = htonl(NFS_FHSIZE);", it works fine.
-> 
-> Don't have an in deps understanding of nfs, so I am not sure if this is the root problem here.
-> 
-> Best regards Johannes
+And this becomes clearer if you look at configs/am69_sk_r5_defconfig
+which has to set some symbols already found in
+configs/j784s4_evm_r5_defconfig in order to work. This is seemingly very
+not equivalent to invoking "make foo_defconfig bar.config" to combine
+things.
 
--- 
-Sébastien Szymanski, Armadeus Systems
-Software engineer
+--=20
+Tom
 
+--+iS2YAyjeiQaM54f
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZE/SAACgkQFHw5/5Y0
+tyw5Cwv/W1Y+xAP2/QifMH4JKWcu3QNR1Su8CxOSSq+IKO3IUIL9AlNez2mcStka
+LD4KI9nIjG41YoruJzZelc/w+SJDakiT41wWJuDxXtPEdwj15h7qpUglhzJOZVFr
+83od249QIe+u8aciHAX787J0pmI5DpJI7P+gianCoUvGkJePL62O2XRNBosVcSDw
+0NYdTftvvCblp+yH+75EMqEiM/Q+mhc/L5Hs5vHCOsb44ZTYWTjQr1I7UDB9mPpC
+agFuJ+bIscytzJyUPrWuz0Hz5MbYZNZ4Qi6BlDEAVCCeJPLzolS+4CgQ+glu1c3v
+XnviJoR7W7/nencrSfygV6X92WaDgk9eEhVKyQAbB+3hGg7jb+4z+wXrv39FXklQ
+WFOJ4XdDwa6HR2ouNabw5v2if0Iqdv/jQ9F8aeYhlAOxGI9v/xB55Xh1wmuF3ZPE
+L0hlZIngzhCSfHt+bFyAbbH27aOzLHDm5WcCw51HoJAf5UVaH9AmkplSCtmVPLcQ
+qW2J5AYq
+=CtTZ
+-----END PGP SIGNATURE-----
+
+--+iS2YAyjeiQaM54f--
