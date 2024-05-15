@@ -4,69 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE93AC04FFE
-	for <u-boot@archiver.kernel.org>; Tue, 14 May 2024 20:58:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6562C25B78
+	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 00:12:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C14C288013;
-	Tue, 14 May 2024 22:58:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id D198C8813A;
+	Wed, 15 May 2024 02:12:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1715720309;
-	bh=3WYSPDlyBGj48k9GjqB3/Bv9DZD5qp795GteTdXWLEg=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=bInhssh7fPJgLBMzoRykgrVSvstV6TW4SQozZxJxtCqBmqBwzyMfgKsqben005h4v
-	 AnjtlgdaGJW5t1BxWm0iNNlRuFhwjJXOK9NjKRJ1PsE4M4i2DcJJ9STGp2DyjU+fHF
-	 Pdy7l5DvE8hdLht2OMu6VCH9nUqS9X9d4/sb86cAFcVp3j/kezYU5Zw3cvSziMz+Og
-	 zf7Y0heFP9Xs2JKrnnBd9gE5N5ftRn3fZS2w6yCIaZc36hyt2CysBgiRoubgIyWm30
-	 YC0a5EgQWRXSHKYY2MI8qaP2ZzTI5pDEQbTegXnTcqNLVhQVk/0qs7pede550L8akd
-	 GkMjI2jS7Bbug==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="WT+suhHb";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="IitBgK2u";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 06CFD88179; Wed, 15 May 2024 02:12:40 +0200 (CEST)
+Received: from fout8-smtp.messagingengine.com (fout8-smtp.messagingengine.com
+ [103.168.172.151])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id A32B5880B5;
- Tue, 14 May 2024 22:58:27 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1715720309;
- bh=3WYSPDlyBGj48k9GjqB3/Bv9DZD5qp795GteTdXWLEg=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=A4gnQAmzGSAf+pVbLsEBkI+j+Uq/zN0/SIm+H1/ucv9E3xpu58Lx31K4kZzjj5luL
- pLU+99/WPPMDDBx1YjV/iv4JYPnNPer+od7C6ZVUj6C8DhjVnYtA+yOYE8439NonVX
- 0+uquwq7x/oSVdzkGTeXAQ/0kUNA5q0fDS3VWCZKCheeVoa6t6QlNtgM5gNYy1T8v8
- eiGTuW8Xy/Qehqju2a83pdYqn+WT0kEI3ljUX9+ip3TZ7ORRLehbwduU6UOm8Mm4Gr
- h8WuglEQBlb+0SFDcJcdSx5ByyOtfK7E+lTsEPRQpGo2aZl1Ssp4Ba1f+i7Wm/VuLU
- pu70D2/s8lodw==
-Message-ID: <1bb31e71-6fe3-44ce-90dc-6bc7a7fc4d94@denx.de>
-Date: Tue, 14 May 2024 22:23:22 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id D5CF68813A
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 02:12:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=flygoat.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailfout.nyi.internal (Postfix) with ESMTP id 95B6E1381494;
+ Tue, 14 May 2024 20:12:36 -0400 (EDT)
+Received: from imap44 ([10.202.2.94])
+ by compute3.internal (MEProxy); Tue, 14 May 2024 20:12:36 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
+ cc:cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to; s=fm1; t=1715731956;
+ x=1715818356; bh=J78KLYtcaiOuFV+MmGvA67kMEMKsh/+edugWtG71M0o=; b=
+ WT+suhHb+nbl7QyKrVzzYTqDx7Rgf1DwyKi4BxdcKX+hZUVDznxWLsRefoVtQ9gX
+ fQNm9U7dZY3OULHON++uB5jWdrzp1/axgZJCMAtty0A15xsNe1VuTTcZu0lDhvTC
+ GD6x5v11IFz6YqfzVFMUHpuY5MlLWWx+xTsNxoZoREVuiIT3ggUwvjX+/LKGCfM5
+ RKcTQ+tuhTWvelM2tmeRaEBRnUItuf0mmKLnGrK7ZFh8tTDUYyLoP4EFBI6AXZJh
+ gqbMx0eEndDiJEUiZoh7OhkapNElLPOwvqDy7XAc2n7D6Ih5umJRVagm4TyeAR90
+ sFXn346FLHCejXbgh/ZOEA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715731956; x=
+ 1715818356; bh=J78KLYtcaiOuFV+MmGvA67kMEMKsh/+edugWtG71M0o=; b=I
+ itBgK2uWxv8MEF8DbpdhAxfBxj43eRcOdKug4zTRqmvDuYLd2POlKyvbpI8zSvUb
+ i0LQko5N1sQqke1hSu99GJoBDVS6hjX2PZxAorIHVYGGtLm2dQA9PYKSYtn0J19Y
+ 8Dh23v4RbyQjhb2X17vuj56x7CGZy6fyf6hPentT2U59VMS8dnMlMUmHJLC5zt8B
+ /nlIhML7MKhiVanIHjGOotI46TNfh5VIOleFgD6eW0MD342gO3znuPeTgx9kdbBo
+ pg3AUGMQiivv2/n0icxIhqH2rOfVMaXENG5Q8+BCGBq11fIKWWup/Of5TeqVr9ht
+ C/AXe7eh+bYASFRiBNdig==
+X-ME-Sender: <xms:9P1DZoobj2HtTxVRcEjeVfVGJLdnGHDEwWLDUR4-31sZPfRgyGCSsA>
+ <xme:9P1DZurR2nMGJs46awtiH9fi-3ZVwQsp72Vn2cHO5OOzYQgG_XbBJKgvJkMvfbqYz
+ hgvvoapSi3CE8cLjEw>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdegjedgfedtucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhepofgfggfkjghffffhvfevufgtgfesthhqredtreerjeenucfhrhhomhepfdfl
+ ihgrgihunhcujggrnhhgfdcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtoh
+ hmqeenucggtffrrghtthgvrhhnpedufeegfeetudeghefftdehfefgveffleefgfehhfej
+ ueegveethfduuddvieehgfenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmh
+ grihhlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
+X-ME-Proxy: <xmx:9P1DZtP021MsaCapRsjT9ZuQU1tZNN_7_6_-PLlup35OQs7UXMUhSQ>
+ <xmx:9P1DZv47BET3_iMBmHmd23NOlm5T2TN4A_a8gWbGd0KArEYkHtNaHg>
+ <xmx:9P1DZn6DH5K0P8XvfpzkU5q1uKJ0VeJN6PJx-e3nFP6zFzH6olg3wg>
+ <xmx:9P1DZvjMnIQhg-ptde4XBLE5VtcvtnCBkQhnf1WMx36BF-Vdlj1JNQ>
+ <xmx:9P1DZkFYuNmHe6Mc5Tht_tQtTnv3Odx2GJ-5bR9mQvWRPMk3AiCC4b0B>
+Feedback-ID: ifd894703:Fastmail
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id 0B14936A0074; Tue, 14 May 2024 20:12:35 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.11.0-alpha0-455-g0aad06e44-fm-20240509.001-g0aad06e4
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/4] imx: hab: Use nxp_imx8mcst etype for i.MX8M
- flash.bin signing
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: u-boot@lists.denx.de, anton.gres@ifm.com, ch@denx.de,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Adam Ford <aford173@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Angus Ainslie <angus@akkea.ca>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Fabio Estevam <festevam@gmail.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Simon Glass
- <sjg@chromium.org>, Stefan Eichenberger <stefan.eichenberger@toradex.com>,
- Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>,
- kernel@puri.sm, u-boot@dh-electronics.com
-References: <20240503010518.263458-1-marex@denx.de>
- <20240503010518.263458-4-marex@denx.de>
- <CAJ+vNU2=k911jK8rYuaCx7qUN9GyCF6GLjuhLi0y82+yq1hYng@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAJ+vNU2=k911jK8rYuaCx7qUN9GyCF6GLjuhLi0y82+yq1hYng@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Message-Id: <c2881dc8-153b-4233-b123-a89cd596c4ec@app.fastmail.com>
+In-Reply-To: <6bbce6d6-35a2-49f6-b9a1-36dbebfdb9e3@kwiboo.se>
+References: <20240513-boston-v1-0-fac96938417e@flygoat.com>
+ <20240513-boston-v1-9-fac96938417e@flygoat.com>
+ <6bbce6d6-35a2-49f6-b9a1-36dbebfdb9e3@kwiboo.se>
+Date: Wed, 15 May 2024 01:12:15 +0100
+From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
+To: "Jonas Karlman" <jonas@kwiboo.se>
+Cc: "Michal Simek" <michal.simek@amd.com>, "Tom Rini" <trini@konsulko.com>,
+ "Daniel Schwierzeck" <daniel.schwierzeck@gmail.com>,
+ "paulburton@kernel.org" <paulburton@kernel.org>,
+ "Simon Glass" <sjg@chromium.org>, "Lukasz Majewski" <lukma@denx.de>,
+ "Sean Anderson" <seanga2@gmail.com>, "Sumit Garg" <sumit.garg@linaro.org>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH 09/13] syscon: Probe device first in syscon_get_regmap
+Content-Type: text/plain;charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,96 +111,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/14/24 8:34 PM, Tim Harvey wrote:
 
-Hi,
 
->> diff --git a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
->> index e16e5410bd9..ce1de659d8c 100644
->> --- a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
->> +++ b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
->> @@ -121,6 +121,9 @@ build configuration:
->>   - Defconfig:
+=E5=9C=A82024=E5=B9=B45=E6=9C=8814=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8B=E5=
+=8D=883:50=EF=BC=8CJonas Karlman=E5=86=99=E9=81=93=EF=BC=9A
+> Hi Jiaxun,
+[...]
+>> +		return ERR_PTR(ret);
+>
+> Please explain in more details what the issue this is trying to solve.
+>
+> Typically syscon_get_regmap() is called on a udevice returned from a
+> uclass_get_device call, and that should trigger a probe for the device
+> and its parents.
+>
+> Adding device_probe() here possible just hides an issue that exists
+> somewhere else. In what instance are you ending up with a call to
+> this function with a udevice that has not been probed?
+
+Hi Jonas,
+
+Thanks for the reply, my problem is in [PATCH 10/13] I'm using dev->pare=
+nt
+directly to get parent device and then use that pointer to access
+syscon_get_regmap.
+
+There is no chance to invoke uclass_get_device_* as what we need is just
+the parent device.
+
+I can think of two solution without touching syscon code here.
+
+First would be performing uclass_get_device_by_ofnode against parent's
+ofnode, which seems a little bit overkilling.
+
+Second would be trigger probing in dev_get_parent.
+
+Thanks
+- Jiaxun
+
+>
+> Also, please add a new test to test/dm/regmap.c if this solves a real
+> issue.
+>
+> Regards,
+> Jonas
+>
+>>  	priv =3D dev_get_uclass_priv(dev);
+>>  	return priv->regmap;
+>>  }
 >>
->>     CONFIG_IMX_HAB=y
->> +  CONFIG_FSL_CAAM=y
->> +  CONFIG_ARCH_MISC_INIT=y
->> +  CONFIG_SPL_CRYPTO=y
->>
-> 
-> Hi Marek,
-> 
-> Thanks for wrapping the dts bits with a config item.
-> 
-> Is there any other reason to build with CONFIG_IMX_HAB than to use a
-> signed image? I see that there are several ARCH_MX6 and ARCH_MX7
-> configs that have this enabled (not ARCH_IMX8M so this certainly
-> doesn't break anything) and I'm not sure what the value of that is.
 
-I think those few either enabled in preemptively in anticipation of 
-possibly using HAB, or are wrong. I suspect it should be disabled for 
-those, as it only adds to the board boot time and I am not even sure if 
-those machines would boot correctly.
-
-Francesco, maybe you do have MX7 Colibri ?
-
-> I notice that FSL_CAAM is selected when you select IMX_HAB... is there
-> any reason why ARCH_MISC_INIT and SPL_CRYPTO should not be selected by
-> IMX_HAB as well (future patch perhaps)?
-
-ARCH_MISC_INIT should be selected by SoC Kconfig on MX7 and maybe CAAM 
-on MX8M I think . As for SPL_CRYPTO, that should be selected by 
-SPL_FSL_CAAM I think.
-
->>   - Kconfig:
->>
-> 
-> We definitely need to describe the additional requirements here. Maybe
-> something like:
-> 
-> - Tools:
-> cst - NXP code-signing-tool (eg apt install imx-code-signing-tool)
-> 
-> - Files: (created with NXP IMX_CST_TOOL)
-> SRK_1_2_3_4_table.bin (specified by nxp,srk-table node): fuse table
-> CSF1_1_sha256_4096_65537_v3_usr_crt.pem (specified by nxp,csf-crt node): CSF_KEY
-> IMG1_1_sha256_4096_65537_v3_usr_crt.pem (specified by nxp,img-crt node): IMG_KEY
-> 
-> The following works fine for me on v2024.01
-> export CST_DIR=/usr/src/nxp/cst-3.3.2/
-> export CSF_KEY=$CST_DIR/crts/CSF1_1_sha256_4096_65537_v3_usr_crt.pem
-> export IMG_KEY=$CST_DIR/crts/IMG1_1_sha256_4096_65537_v3_usr_crt.pem
-> export SRK_TABLE=$CST_DIR/crts/SRK_1_2_3_4_table.bin
-> export PATH=$CST_DIR/linux64/bin:$PATH
-> make && /bin/sh doc/imx/habv4/csf_examples/mx8m/csf.sh
-> 
-> But with the above defines and your series this fails:
-> ln -sf $SRK_TABLE SRK_1_2_3_4_table.bin
-> ln -sf $CSF_KEY CSF1_1_sha256_4096_65537_v3_usr_crt.pem
-> ln -sf $IMG_KEY IMG1_1_sha256_4096_65537_v3_usr_crt.pem
-> make
->    BINMAN  .binman_stamp
-> Wrote map file './image.map' to show errors
-> binman: Error 1 running 'cst -i
-> ./nxp.csf-config-txt.section.nxp-imx8mcst@0 -o
-> ./nxp.csf-output-blob.section.nxp-imx8mcst@0': Error:
-> Cannot open key file IMG1_1_sha256_4096_65537_v3_usr_key.pem
-> 0:error:02001002:system library:fopen:No such file or
-> directory:crypto/bio/bss_file.c:288:fopen('IMG1_1_sha256_4096_65537_v3_usr_key.
-> pem','r')
-> 0:error:20074002:BIO routines:file_ctrl:system lib:crypto/bio/bss_file.c:290:
-> 
-> make: *** [Makefile:1126: .binman_stamp] Error 1
-> 
-> So how is it that the default for nxp,img-crt
-> IMG1_1_sha256_4096_65537_v3_usr_crt.pem is now looking for
-> IMG1_1_sha256_4096_65537_v3_usr_key? It fails also if I cp the files
-> vs ln them.
-> 
-> So what am I missing here?
-
-I think CST is using both the certificate and the key files. Try and run 
-strace on the CST to test that:
-
-$ strace cst -i ./nxp.csf-config-txt.section.nxp-imx8mcst@0 -o 
-./nxp.csf-output-blob.section.nxp-imx8mcst@0
+--=20
+- Jiaxun
