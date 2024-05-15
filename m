@@ -4,42 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DDB4C25B75
-	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 23:21:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E62EEC25B75
+	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 23:28:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68EC988010;
-	Thu, 16 May 2024 01:21:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 4F13588339;
+	Thu, 16 May 2024 01:28:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dXo8GQPL";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A8D988315; Thu, 16 May 2024 01:21:46 +0200 (CEST)
-Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 715758833D; Thu, 16 May 2024 01:28:50 +0200 (CEST)
+Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
+ [IPv6:2607:f8b0:4864:20::82c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5C1C8800C
- for <u-boot@lists.denx.de>; Thu, 16 May 2024 01:21:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 61BDC88335
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 01:28:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
- helo=tharvey.pdc.gateworks.com)
- by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1s7NwK-004s0j-Q7;
- Wed, 15 May 2024 23:21:40 +0000
-From: Tim Harvey <tharvey@gateworks.com>
-To: u-boot@lists.denx.de,
-	Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Miquel Raynal <miquel.raynal@bootlin.com>,
- Jorge Ramirez-Ortiz <jorge@foundries.io>, Adam Ford <aford173@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH v3] tpm: display warning if using gpio reset with TPM
-Date: Wed, 15 May 2024 16:21:38 -0700
-Message-Id: <20240515232138.3065987-1-tharvey@gateworks.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82c.google.com with SMTP id
+ d75a77b69052e-43df44ef2f9so48578071cf.1
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 16:28:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1715815727; x=1716420527; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZI+2Y1kwAQ+zMeqNalTjdYNn+Yb1xZ37lCDCpRR2AU8=;
+ b=dXo8GQPLHfcuJ69Zg9rayrwQiuaZI1megneVhi3RijtQ2hybwkcEJ39A99NWzrG8kr
+ q6SUPkUYFfM/Jpn2Xwpuobv6Vs4DYc5gNFUC702k0a5IZi48bBQvdPlHF2Aj5YI2lsER
+ MmXLuWLXk49fV1KCk0a/plj3CzVZ8GZWZY5HU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1715815727; x=1716420527;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZI+2Y1kwAQ+zMeqNalTjdYNn+Yb1xZ37lCDCpRR2AU8=;
+ b=fULsYDVvFDQ3PZkJfbR3EJZBUADR9aBUHm9ATOUFhHH7E14j2KMYEdsWv51Gi9i8jL
+ V9ECmbNP/E5zixObDAJtz7D3NWlpUPG+quzqrnlZHH24ryTj689s7BUokPRlUgXEM02K
+ hUMfabnSaVXCw2GpbgGh5M/jq8vg6VBElwBkrdCqJZa300g2DA0QwLTs1+g0yOi4xvVv
+ t3An9jSrofKlshbAbW+ZwKKacSPa+LN7j4hsJPG/7eA1apBz8xco+pfkSWf9pUw0L62B
+ lNR225+XtvYZylzr9gXOVAwEPwOFHbiJ493qK2/WxcrK9Bd80hwStRsoyQdsDngyX+Fw
+ j8vA==
+X-Gm-Message-State: AOJu0YyXnR8TocIl6Nvn9e5PLg5yst832UdQ3QT5zwdRv9kblJdfzGc8
+ RRrHLcREO0Di7zgPkx/3VKYIooWhhkpqbVHFzF+9r4jLYuIFkaNmYUBbx5fbC8Y=
+X-Google-Smtp-Source: AGHT+IEbuqaglU8SP187k6sanUoBUt1jAkoVWg7s6udwHBUSGXuU0YvujtcpvSbskA+MHq0Y3uDAuA==
+X-Received: by 2002:a05:6214:2dc9:b0:6a0:e8c2:a8ba with SMTP id
+ 6a1803df08f44-6a168237832mr205976516d6.54.1715815727173; 
+ Wed, 15 May 2024 16:28:47 -0700 (PDT)
+Received: from bill-the-cat ([187.144.98.216])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6a15f179aa6sm69576966d6.9.2024.05.15.16.28.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 15 May 2024 16:28:46 -0700 (PDT)
+Date: Wed, 15 May 2024 17:28:43 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Aniket Limaye <a-limaye@ti.com>
+Cc: u-boot@lists.denx.de, u-kumar1@ti.com, sumit.garg@linaro.org,
+ n-francis@ti.com, m-chawdhry@ti.com, nm@ti.com
+Subject: Re: [PATCH 1/1] arm: dts: k3-j7200: Move to OF_UPSTREAM
+Message-ID: <20240515232843.GA2568172@bill-the-cat>
+References: <20240506134834.353252-1-a-limaye@ti.com>
+ <20240506134834.353252-2-a-limaye@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="k9yDoI/FQlOzYCc2"
+Content-Disposition: inline
+In-Reply-To: <20240506134834.353252-2-a-limaye@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -56,90 +91,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Instead of displaying what looks like an error message if a
-gpio-reset dt prop is missing for a TPM display a warning that
-having a gpio reset on a TPM should not be used for a secure production
-device.
 
-TCG TIS spec [1] says:
-"The TPM_Init (LRESET#/SPI_RST#) signal MUST be connected to the
-platform CPU Reset signal such that it complies with the requirements
-specified in section 1.2.7 HOST Platform Reset in the PC Client
-Implementation Specification for Conventional BIOS."
+--k9yDoI/FQlOzYCc2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The reasoning is that you should not be able to toggle a GPIO and reset
-the TPM without resetting the CPU as well because if an attacker can
-break into your OS via an OS level security flaw they can then reset the
-TPM via GPIO and replay the measurements required to unseal keys
-that you have otherwise protected.
+On Mon, May 06, 2024 at 07:18:34PM +0530, Aniket Limaye wrote:
 
-Additionally restructure the code for improved readability allowing for
-removal of the init label.
+> Move to using OF_UPSTREAM config and thus using the devicetree-rebasing
+> subtree.
+>=20
+> Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+> ---
+>  arch/arm/dts/Makefile                         |    1 -
+>  .../k3-j7200-common-proc-board-u-boot.dtsi    |   16 +-
+>  arch/arm/dts/k3-j7200-common-proc-board.dts   |  396 -----
+>  arch/arm/dts/k3-j7200-main.dtsi               | 1284 -----------------
+>  arch/arm/dts/k3-j7200-mcu-wakeup.dtsi         |  647 ---------
+>  arch/arm/dts/k3-j7200-som-p0.dtsi             |  327 -----
+>  arch/arm/dts/k3-j7200-thermal.dtsi            |   47 -
+>  arch/arm/dts/k3-j7200.dtsi                    |  164 ---
+>  configs/j7200_evm_a72_defconfig               |    3 +-
+>  9 files changed, 8 insertions(+), 2877 deletions(-)
+>  delete mode 100644 arch/arm/dts/k3-j7200-common-proc-board.dts
+>  delete mode 100644 arch/arm/dts/k3-j7200-main.dtsi
+>  delete mode 100644 arch/arm/dts/k3-j7200-mcu-wakeup.dtsi
+>  delete mode 100644 arch/arm/dts/k3-j7200-som-p0.dtsi
+>  delete mode 100644 arch/arm/dts/k3-j7200-thermal.dtsi
+>  delete mode 100644 arch/arm/dts/k3-j7200.dtsi
 
-Before:
- - board with no reset gpio
-u-boot=> tpm init && tpm info
-tpm_tis_spi_probe: missing reset GPIO
-tpm@1 v2.0: VendorID 0x1114, DeviceID 0x3205, RevisionID 0x01 [open]
- - board with a reset gpio
-u-boot=> tpm init && tpm info
-tpm@1 v2.0: VendorID 0x1114, DeviceID 0x3205, RevisionID 0x01 [open]
+This no longer applies cleanly to -next, please rebase, thanks.
 
-After:
- - board with no reset gpio
-u-boot=> tpm init && tpm info
-tpm@1 v2.0: VendorID 0x1114, DeviceID 0x3205, RevisionID 0x01 [open]
- - board with a reset gpio
-u-boot=> tpm init && tpm info
-tpm@1: TPM gpio reset should not be used on secure production devices
-tpm@1 v2.0: VendorID 0x1114, DeviceID 0x3205, RevisionID 0x01 [open]
+--=20
+Tom
 
-[1] https://trustedcomputinggroup.org/wp-content/uploads/TCG_PCClientTPMInterfaceSpecification_TIS__1-3_27_03212013.pdf
+--k9yDoI/FQlOzYCc2
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Signed-off-by: Tim Harvey <tharvey@gateworks.com>
----
-v3: restructure code for improved readability (recommended by Miquel)
-v2: change the message to a warning
----
- drivers/tpm/tpm2_tis_spi.c | 21 ++++++++++++---------
- 1 file changed, 12 insertions(+), 9 deletions(-)
+-----BEGIN PGP SIGNATURE-----
 
-diff --git a/drivers/tpm/tpm2_tis_spi.c b/drivers/tpm/tpm2_tis_spi.c
-index 28079b5039a3..b0fe97ab1d08 100644
---- a/drivers/tpm/tpm2_tis_spi.c
-+++ b/drivers/tpm/tpm2_tis_spi.c
-@@ -237,19 +237,22 @@ static int tpm_tis_spi_probe(struct udevice *dev)
- 			/* legacy reset */
- 			ret = gpio_request_by_name(dev, "gpio-reset", 0,
- 						   &reset_gpio, GPIOD_IS_OUT);
--			if (ret) {
-+			if (!ret) {
- 				log(LOGC_NONE, LOGL_NOTICE,
--				    "%s: missing reset GPIO\n", __func__);
--				goto init;
-+				    "%s: gpio-reset is deprecated\n", __func__);
- 			}
--			log(LOGC_NONE, LOGL_NOTICE,
--			    "%s: gpio-reset is deprecated\n", __func__);
- 		}
--		dm_gpio_set_value(&reset_gpio, 1);
--		mdelay(1);
--		dm_gpio_set_value(&reset_gpio, 0);
-+
-+		if (!ret) {
-+			log(LOGC_NONE, LOGL_WARNING,
-+			    "%s: TPM gpio reset should not be used on secure production devices\n",
-+			    dev->name);
-+			dm_gpio_set_value(&reset_gpio, 1);
-+			mdelay(1);
-+			dm_gpio_set_value(&reset_gpio, 0);
-+		}
- 	}
--init:
-+
- 	/* Ensure a minimum amount of time elapsed since reset of the TPM */
- 	mdelay(drv_data->time_before_first_cmd_ms);
- 
--- 
-2.25.1
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZFRSgACgkQFHw5/5Y0
+tyxuvgv+MhVjIOC9ZUch5o5QgTAtLE+xsqqLInCg7Q0lP7zrt1ODv7397KJoKnCW
+zVPxye9PQmZiIh+A/8BBz+U2zm1Ueyhsl0qmxOvyq7JH4o44WA0Bn0+tsy15GO1H
+VOkC+hDRVp9JumNcYPZewYLMCfoRxCIhbgRMfidSc4VTunJ+NKLfDlh3p3bQgeuY
+XW/NvQzHPFoPsiEb/4I5BsYZEtC6AP75gNHIlIOYCYCmpZTF0KWapHrXsoU/B60s
+grZOBqJcP/mTS3mHWg5IEKyYxPQlNlk2rwouco2Tf0NQRqgp3jx7WD1ZkD3dMFld
+RDDyfSxcHvYJQ+E6xMPkEe0o2JXsawp+TzvN/WtjLE0g1WxbEPh/wHsOlCrQRffZ
+dKMr5XjzniCZZebzD59rlD+M6h4+xk71X47PKEBnLz9FU1g1UGw5F5NgyXPDA6Tx
+rmCc15MJtTkZZL7Qy2hL5TvU19EtdS8D8EhJeIJSCMaNpa++F8W60DDDA0SzNkB4
+P4hVIL56
+=zSsY
+-----END PGP SIGNATURE-----
 
+--k9yDoI/FQlOzYCc2--
