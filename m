@@ -4,63 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A05B0C25B75
-	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 06:04:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F9E9C25B77
+	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 06:13:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B762B881AC;
-	Wed, 15 May 2024 08:04:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C768B8817B;
+	Wed, 15 May 2024 08:13:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1715753070;
-	bh=SSS6D62UvT2AaepSALftynwdhsr373IyjoaneZGic4E=;
+	s=phobos-20191101; t=1715753584;
+	bh=3njBbuqcm0qL1ycq8M1cKImEwqNfMiBLY2lIwYmATGA=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=aIwLYuNPDxeEjziUFRwmP9HgaBfALw/QG2cm9oFyp5uCwPn5KoZDOvo1cErmFeCvZ
-	 ApuR/ZTLPxm4VlXhLPe2zPFqSRJQNOhsjFm07eke0bN3f+xAwf1h7/gSX5soy2kNA7
-	 oabNgWxus+JX9Wiy9Pl8W6bhsPfOpzXVnitxMDSqgahCfnBWS48T/KzwgwImbsgHop
-	 yezdop1Y92x0FaUB3DWOkzLDYhlJgJHRcXXVYYRBM52/1DoD45ExCIXVa3u7mmvPgh
-	 Lcw1sYoK9Keg3A2+nvt3P9bKomT34mBKSbl4CcMDXNtluWimLAdgX6VOMpfxtKCtbZ
-	 dA748bP7oMAvQ==
+	b=RuoXPo/fs++e9UIZGjYTcwjV7C8kbO7BN7eQlZaHhMIR/f5iYpLUx+ZNb5aaS71jR
+	 9agKX7EysFfJlJsppJqlBkNgWTMdiFFj8eyuvYq7R2YaqjVTCW8BvwvEpvw44fw2xz
+	 JYLXcArCox4dD+gEm+qq+8z9mpINRYYqZKXdu6ErzdrU3RdEfymXrbGsFs3LeP9Cg8
+	 2BTLekLgGLLINyozwIekY6m0i6OPMj6fhju6zEi1fQT+B07+yBEnXqsgHzFXi3VqBd
+	 4u8NhPNtOoOvJFFkNZYt+2SxhRKspgCvV36yp4en8a4oB4o511dxhxJP6cxDG1pe/r
+	 BJNInM4UMBWkw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90D3E881CE; Wed, 15 May 2024 08:04:29 +0200 (CEST)
+ id D0F5A881A1; Wed, 15 May 2024 08:13:02 +0200 (CEST)
 Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
  [IPv6:2001:67c:2050:101:465::107])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A56988817B
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 08:04:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7670B88179
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 08:13:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4VfN3471jjz9tGR;
- Wed, 15 May 2024 08:04:16 +0200 (CEST)
-Message-ID: <d2e15688-bb50-45dc-9e43-3317e8c7c762@denx.de>
-Date: Wed, 15 May 2024 08:04:10 +0200
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4VfNF60hx6z9tKj;
+ Wed, 15 May 2024 08:12:58 +0200 (CEST)
+Message-ID: <aef8d0d5-15ff-4c6a-84bb-462675717b5a@denx.de>
+Date: Wed, 15 May 2024 08:12:55 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH 1/3] firmware: zynqmp: Add support to access efuses
+Subject: Re: [PATCH 3/3] drivers: misc: Add driver to access ZynqMP efuses
 Content-Language: en-US
 To: lukas.funke-oss@weidmueller.com, u-boot@lists.denx.de
 Cc: Michal Simek <michal.simek@amd.com>,
  Lukas Funke <lukas.funke@weidmueller.com>,
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Qu Wenruo <wqu@suse.com>,
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
- Tanmay Shah <tanmay.shah@amd.com>, Tom Rini <trini@konsulko.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>, Peng Fan
+ <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Wan Yee Lau <wan.yee.lau@intel.com>
 References: <20240514140416.156747-1-lukas.funke-oss@weidmueller.com>
- <20240514140416.156747-2-lukas.funke-oss@weidmueller.com>
+ <20240514140416.156747-4-lukas.funke-oss@weidmueller.com>
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20240514140416.156747-2-lukas.funke-oss@weidmueller.com>
+In-Reply-To: <20240514140416.156747-4-lukas.funke-oss@weidmueller.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4VfNF60hx6z9tKj
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,84 +84,273 @@ Hi Lukas,
 On 5/14/24 16:04, lukas.funke-oss@weidmueller.com wrote:
 > From: Lukas Funke <lukas.funke@weidmueller.com>
 > 
-> Add functions to access efuses through PMU firmware
-> interface.
+> Add driver to access ZynqMP efuses. This is a u-boot port of [1].
+> 
+> [1] https://lore.kernel.org/all/20240224114516.86365-8-srinivas.kandagatla@linaro.org/
 > 
 > Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
 > ---
 > 
->   drivers/firmware/firmware-zynqmp.c | 31 ++++++++++++++++++++++++++++++
->   include/zynqmp_firmware.h          |  2 ++
->   2 files changed, 33 insertions(+)
+>   drivers/misc/Kconfig        |   8 ++
+>   drivers/misc/Makefile       |   1 +
+>   drivers/misc/zynqmp_efuse.c | 213 ++++++++++++++++++++++++++++++++++++
+>   3 files changed, 222 insertions(+)
+>   create mode 100644 drivers/misc/zynqmp_efuse.c
 > 
-> diff --git a/drivers/firmware/firmware-zynqmp.c b/drivers/firmware/firmware-zynqmp.c
-> index f99507d86c6..7483f2a8709 100644
-> --- a/drivers/firmware/firmware-zynqmp.c
-> +++ b/drivers/firmware/firmware-zynqmp.c
-> @@ -210,6 +210,37 @@ int zynqmp_pm_feature(const u32 api_id)
->   	return ret_payload[1] & FIRMWARE_VERSION_MASK;
->   }
+> diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+> index 6009d55f400..c07f50c9a76 100644
+> --- a/drivers/misc/Kconfig
+> +++ b/drivers/misc/Kconfig
+> @@ -298,6 +298,14 @@ config FSL_SEC_MON
+>   	  Security Monitor can be transitioned on any security failures,
+>   	  like software violations or hardware security violations.
 >   
-> +int zynqmp_pm_get_chipid(u32 *idcode, u32 *version)
+> +config ZYNQMP_EFUSE
+> +	bool "Enable ZynqMP eFUSE Driver"
+> +	depends on ZYNQMP_FIRMWARE
+> +	help
+> +	  Enable access to Zynq UltraScale (ZynqMP) eFUSEs thought PMU firmware
+> +	  interface. ZnyqMP has 256 eFUSEs where some of them are security related
+> +	  and cannot be read back (i.e. AES key).
+> +
+>   choice
+>   	prompt "Security monitor interaction endianess"
+>   	depends on FSL_SEC_MON
+> diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
+> index e53d52c47b3..68ba5648eab 100644
+> --- a/drivers/misc/Makefile
+> +++ b/drivers/misc/Makefile
+> @@ -92,3 +92,4 @@ obj-$(CONFIG_ESM_K3) += k3_esm.o
+>   obj-$(CONFIG_ESM_PMIC) += esm_pmic.o
+>   obj-$(CONFIG_SL28CPLD) += sl28cpld.o
+>   obj-$(CONFIG_SPL_SOCFPGA_DT_REG) += socfpga_dtreg.o
+> +obj-$(CONFIG_ZYNQMP_EFUSE) += zynqmp_efuse.o
+> diff --git a/drivers/misc/zynqmp_efuse.c b/drivers/misc/zynqmp_efuse.c
+> new file mode 100644
+> index 00000000000..0cfc42a4f39
+> --- /dev/null
+> +++ b/drivers/misc/zynqmp_efuse.c
+> @@ -0,0 +1,213 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * (C) Copyright 2014 - 2015 Xilinx, Inc.
+> + * Michal Simek <michal.simek@amd.com>
+> + *
+> + * (C) Copyright 2024 Weidmueller Interface GmbH
+> + * Lukas Funke <lukas.funke@weidmueller.com>
+> + */
+> +
+> +#include <compiler.h>
+> +#include <linux/types.h>
+> +#include <linux/errno.h>
+> +#include <zynqmp_firmware.h>
+> +#include <asm/dma-mapping.h>
+> +#include <dm.h>
+> +#include <dm/device_compat.h>
+> +#include <misc.h>
+> +
+> +#define SILICON_REVISION_MASK 0xF
+> +#define P_USER_0_64_UPPER_MASK	0x5FFF0000
+> +#define P_USER_127_LOWER_4_BIT_MASK 0xF
+> +#define WORD_INBYTES		(4)
+> +#define SOC_VER_SIZE		(0x4)
+> +#define EFUSE_MEMORY_SIZE	(0x177)
+> +#define UNUSED_SPACE		(0x8)
+> +#define ZYNQMP_NVMEM_SIZE	(SOC_VER_SIZE + UNUSED_SPACE + \
+> +				 EFUSE_MEMORY_SIZE)
+> +#define SOC_VERSION_OFFSET	(0x0)
+> +#define EFUSE_START_OFFSET	(0xC)
+> +#define EFUSE_END_OFFSET	(0xFC)
+> +#define EFUSE_PUF_START_OFFSET	(0x100)
+> +#define EFUSE_PUF_MID_OFFSET	(0x140)
+> +#define EFUSE_PUF_END_OFFSET	(0x17F)
+> +#define EFUSE_NOT_ENABLED	(29)
+> +#define EFUSE_READ		(0)
+> +#define EFUSE_WRITE		(1)
+> +
+> +/**
+> + * struct xilinx_efuse - the basic structure
+> + * @src:	address of the buffer to store the data to be write/read
+> + * @size:	no of words to be read/write
+> + * @offset:	offset to be read/write`
+> + * @flag:	0 - represents efuse read and 1- represents efuse write
+> + * @pufuserfuse:0 - represents non-puf efuses, offset is used for read/write
+> + *		1 - represents puf user fuse row number.
+> + *
+> + * this structure stores all the required details to
+> + * read/write efuse memory.
+> + */
+> +struct xilinx_efuse {
+> +	u64 src;
+> +	u32 size;
+> +	u32 offset;
+> +	u32 flag;
+> +	u32 pufuserfuse;
+> +};
+> +
+> +static int zynqmp_efuse_access(struct udevice *dev, unsigned int offset,
+> +			       void *val, size_t bytes, unsigned int flag,
+> +			       unsigned int pufflag)
 > +{
-> +	int ret;
-> +	u32 ret_payload[PAYLOAD_ARG_CNT];
+> +	size_t words = bytes / WORD_INBYTES;
+> +	ulong dma_addr, dma_buf;
+> +	struct xilinx_efuse *efuse;
+> +	char *data;
+> +	int ret, value;
+> +
+> +	if (bytes % WORD_INBYTES != 0) {
+> +		dev_err(dev, "Bytes requested should be word aligned\n");
+> +		return -EOPNOTSUPP;
+> +	}
+> +
+> +	if (pufflag == 0 && offset % WORD_INBYTES) {
+> +		dev_err(dev, "Offset requested should be word aligned\n");
+> +		return -EOPNOTSUPP;
+> +	}
+> +
+> +	if (pufflag == 1 && flag == EFUSE_WRITE) {
+> +		memcpy(&value, val, bytes);
+> +		if ((offset == EFUSE_PUF_START_OFFSET ||
+> +		     offset == EFUSE_PUF_MID_OFFSET) &&
+> +		    value & P_USER_0_64_UPPER_MASK) {
+> +			dev_err(dev, "Only lower 4 bytes are allowed to be programmed in P_USER_0 & P_USER_64\n");
+> +			return -EOPNOTSUPP;
+> +		}
+> +
+> +		if (offset == EFUSE_PUF_END_OFFSET &&
+> +		    (value & P_USER_127_LOWER_4_BIT_MASK)) {
+> +			dev_err(dev, "Only MSB 28 bits are allowed to be programmed for P_USER_127\n");
+> +			return -EOPNOTSUPP;
+> +		}
+> +	}
+> +
+> +	efuse = dma_alloc_coherent(sizeof(struct xilinx_efuse), &dma_addr);
+> +	if (!efuse)
+> +		return -ENOMEM;
+> +
+> +	data = dma_alloc_coherent(bytes, &dma_buf);
+> +	if (!data) {
+> +		dma_free_coherent(efuse);
+> +		return -ENOMEM;
+> +	}
+> +
+> +	if (flag == EFUSE_WRITE) {
+> +		memcpy(data, val, bytes);
+> +		efuse->flag = EFUSE_WRITE;
+> +	} else {
+> +		efuse->flag = EFUSE_READ;
+> +	}
+> +
+> +	efuse->src = dma_buf;
+> +	efuse->size = words;
+> +	efuse->offset = offset;
+> +	efuse->pufuserfuse = pufflag;
+> +
+> +	flush_dcache_range((ulong)efuse, (ulong)efuse +
+> +				   roundup(sizeof(struct xilinx_efuse), ARCH_DMA_MINALIGN));
+> +	flush_dcache_range((ulong)data, (ulong)data +
+> +				   roundup(sizeof(struct xilinx_efuse), ARCH_DMA_MINALIGN));
 
-Reverse x-mas tree ordering looks better IMHO.
+efuse and data are allocated via dma_alloc_coherent(). It should not be
+necessary to use flush the cache here IIUTC.
 
 > +
-> +	if (!idcode || !version)
-> +		return -EINVAL;
+> +	zynqmp_pm_efuse_access(dma_addr, (u32 *)&ret);
+> +	if (ret != 0) {
+> +		if (ret == EFUSE_NOT_ENABLED) {
+> +			dev_err(dev, "efuse access is not enabled\n");
+> +			ret = -EOPNOTSUPP;
+> +			goto END;
+> +		}
+> +		dev_err(dev, "Error in efuse read %x\n", ret);
+> +		ret = -EPERM;
+> +		goto END;
+> +	}
 > +
-> +	ret = xilinx_pm_request(PM_GET_CHIPID, 0, 0, 0, 0, ret_payload);
-> +	*idcode = ret_payload[1];
-> +	*version = ret_payload[2];
+> +	if (flag == EFUSE_READ)
+> +		memcpy(val, data, bytes);
+> +END:
 
-You don't check ret for an error above but still pass the return values
-here. Perhaps it makes sense to return with error above instead?
+Nitpicking: Upper case label ist pretty uncommon AFAIK.
 
+> +
+> +	dma_free_coherent(efuse);
+> +	dma_free_coherent(data);
 > +
 > +	return ret;
 > +}
 > +
-> +int zynqmp_pm_efuse_access(const u64 address, u32 *out)
+> +static int zynqmp_nvmem_read(struct udevice *dev, int offset,
+> +			     void *val, int bytes)
 > +{
-> +	int ret;
-> +	u32 ret_payload[PAYLOAD_ARG_CNT];
+> +	int ret, pufflag = 0;
+> +	int idcode, version;
 > +
-> +	if (!out)
-> +		return -EINVAL;
+> +	if (offset >= EFUSE_PUF_START_OFFSET && offset <= EFUSE_PUF_END_OFFSET)
+> +		pufflag = 1;
 > +
-> +	ret = xilinx_pm_request(PM_EFUSE_ACCESS, upper_32_bits(address),
-> +				lower_32_bits(address), 0, 0, ret_payload);
-
-Same here.
-
-Thanks,
-Stefan
-
+> +	dev_dbg(dev, "reading from offset=0x%x, bytes=%d\n", offset, bytes);
 > +
-> +	*out = ret_payload[1];
+> +	switch (offset) {
+> +	/* Soc version offset is zero */
+> +	case SOC_VERSION_OFFSET:
+> +		if (bytes != SOC_VER_SIZE)
+> +			return -EOPNOTSUPP;
+> +
+> +		ret = zynqmp_pm_get_chipid((u32 *)&idcode, (u32 *)&version);
+> +		if (ret < 0)
+> +			return ret;
+> +
+> +		*(int *)val = version & SILICON_REVISION_MASK;
+> +		break;
+> +	/* Efuse offset starts from 0xc */
+> +	case EFUSE_START_OFFSET ... EFUSE_END_OFFSET:
+> +	case EFUSE_PUF_START_OFFSET ... EFUSE_PUF_END_OFFSET:
+> +		ret = zynqmp_efuse_access(dev, offset, val,
+> +					  bytes, EFUSE_READ, pufflag);
+> +		break;
+> +	default:
+> +		*(u32 *)val = 0xDEADBEEF;
+> +		ret = 0;
+> +		break;
+> +	}
 > +
 > +	return ret;
 > +}
 > +
->   int zynqmp_pm_is_function_supported(const u32 api_id, const u32 id)
->   {
->   	int ret;
-> diff --git a/include/zynqmp_firmware.h b/include/zynqmp_firmware.h
-> index 73198a6a6ea..7f18b4d59bf 100644
-> --- a/include/zynqmp_firmware.h
-> +++ b/include/zynqmp_firmware.h
-> @@ -453,6 +453,8 @@ int xilinx_pm_request(u32 api_id, u32 arg0, u32 arg1, u32 arg2,
->   int zynqmp_pm_set_sd_config(u32 node, enum pm_sd_config_type config, u32 value);
->   int zynqmp_pm_set_gem_config(u32 node, enum pm_gem_config_type config,
->   			     u32 value);
-> +int zynqmp_pm_get_chipid(u32 *idcode, u32 *version);
-> +int zynqmp_pm_efuse_access(const u64 address, u32 *out);
->   int zynqmp_pm_is_function_supported(const u32 api_id, const u32 id);
->   int zynqmp_mmio_read(const u32 address, u32 *value);
->   int zynqmp_mmio_write(const u32 address, const u32 mask, const u32 value);
+> +static int zynqmp_nvmem_write(struct udevice *dev, int offset, const void *val,
+> +			      int bytes)
+> +{
+> +	int pufflag = 0;
+> +
+> +	dev_dbg(dev, "writing to offset=0x%x, bytes=%d", offset, bytes);
+> +
+> +	if (offset < EFUSE_START_OFFSET || offset > EFUSE_PUF_END_OFFSET)
+> +		return -EOPNOTSUPP;
+> +
+> +	if (offset >= EFUSE_PUF_START_OFFSET && offset <= EFUSE_PUF_END_OFFSET)
+> +		pufflag = 1;
+> +
+> +	return zynqmp_efuse_access(dev, offset,
+> +				   (void *)val, bytes, EFUSE_WRITE, pufflag);
+> +}
+> +
+> +static const struct udevice_id zynqmp_efuse_match[] = {
+> +	{ .compatible = "xlnx,zynqmp-nvmem-fw", },
+> +	{ /* sentinel */ },
+> +};
+> +
+> +static const struct misc_ops zynqmp_efuse_ops = {
+> +	.read = zynqmp_nvmem_read,
+> +	.write = zynqmp_nvmem_write,
+> +};
+> +
+> +U_BOOT_DRIVER(zynqmp_efuse) = {
+> +	.name = "zynqmp_efuse",
+> +	.id = UCLASS_MISC,
+> +	.of_match = zynqmp_efuse_match,
+> +	.ops = &zynqmp_efuse_ops,
+> +};
 
 Viele Grüße,
 Stefan Roese
