@@ -4,83 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5EF8C25B77
-	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 05:04:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A05B0C25B75
+	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 06:04:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29015881AC;
-	Wed, 15 May 2024 07:04:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id B762B881AC;
+	Wed, 15 May 2024 08:04:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="JCL4Gz7b";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1715753070;
+	bh=SSS6D62UvT2AaepSALftynwdhsr373IyjoaneZGic4E=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=aIwLYuNPDxeEjziUFRwmP9HgaBfALw/QG2cm9oFyp5uCwPn5KoZDOvo1cErmFeCvZ
+	 ApuR/ZTLPxm4VlXhLPe2zPFqSRJQNOhsjFm07eke0bN3f+xAwf1h7/gSX5soy2kNA7
+	 oabNgWxus+JX9Wiy9Pl8W6bhsPfOpzXVnitxMDSqgahCfnBWS48T/KzwgwImbsgHop
+	 yezdop1Y92x0FaUB3DWOkzLDYhlJgJHRcXXVYYRBM52/1DoD45ExCIXVa3u7mmvPgh
+	 Lcw1sYoK9Keg3A2+nvt3P9bKomT34mBKSbl4CcMDXNtluWimLAdgX6VOMpfxtKCtbZ
+	 dA748bP7oMAvQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8806C881D6; Wed, 15 May 2024 07:04:23 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ id 90D3E881CE; Wed, 15 May 2024 08:04:29 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EF5A88191
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 07:04:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A56988817B
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 08:04:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1715749446; x=1716354246; i=xypron.glpk@gmx.de;
- bh=AlVCNhot3vBHgg4SUTjF9Lx3nrEHbrGlzYxaMpo2PQU=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=JCL4Gz7bC3RpXZNnZ2zEeT5P/1HPnAfhCUWLXdtF2r0nIlVRJjNTBJ3XlC0zCWJT
- EeY/gXsf/HYTLMV/3h2bznjmpM74ffsu3B/72crulnwkRzn/T6PANYa6XXosWIRQo
- 2U49+3hnxExuDri2wmBJDLbxtSubOYso7sb/Yci/2j/UUa8xl59PNtuWK0y8ERgrK
- pzmY6jPHu57Y1XKlAvH2xHqOGKlCxLhKqsfdr+/lMcQpEvu1CrA0MREdNJbCjguGK
- lBXgwwcRfVCXApZW3wdArhdn36PA9SXmzmGfhyGqc0lR3QpBli+sotEEIDNAABh/L
- Nq8msLZSNH6p5wzk6g==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [10.55.2.71] ([149.11.192.251]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mkpex-1srDPF0THT-00ihzq; Wed, 15
- May 2024 07:04:06 +0200
-Message-ID: <b16b85dc-90bf-463b-a206-06d98c3c1f0e@gmx.de>
-Date: Wed, 15 May 2024 07:03:59 +0200
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4VfN3471jjz9tGR;
+ Wed, 15 May 2024 08:04:16 +0200 (CEST)
+Message-ID: <d2e15688-bb50-45dc-9e43-3317e8c7c762@denx.de>
+Date: Wed, 15 May 2024 08:04:10 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] fdt: add kaslr-seed if DM_RNG is enabled
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: Simon Glass <sjg@chromium.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Devarsh Thakkar <devarsht@ti.com>, Hugo Villeneuve
- <hvilleneuve@dimonoff.com>, Eddie James <eajames@linux.ibm.com>,
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Michal Simek <michal.simek@amd.com>
-References: <20240515002248.2920155-1-tharvey@gateworks.com>
- <039c0adc-3014-4ae7-99b3-0df9e5366b79@denx.de>
+Subject: Re: [PATCH 1/3] firmware: zynqmp: Add support to access efuses
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <039c0adc-3014-4ae7-99b3-0df9e5366b79@denx.de>
+To: lukas.funke-oss@weidmueller.com, u-boot@lists.denx.de
+Cc: Michal Simek <michal.simek@amd.com>,
+ Lukas Funke <lukas.funke@weidmueller.com>,
+ Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Qu Wenruo <wqu@suse.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Tanmay Shah <tanmay.shah@amd.com>, Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+References: <20240514140416.156747-1-lukas.funke-oss@weidmueller.com>
+ <20240514140416.156747-2-lukas.funke-oss@weidmueller.com>
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20240514140416.156747-2-lukas.funke-oss@weidmueller.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:D6V8OudDFphFmwhLTzyIFlhSMolpbfObVnLDz+m6w49+gaVqjq2
- UaEVsyQz5/BGSqE7sly1pliQgeDukjURt3KpHdEwONQUs2TtsGjexeAOjEscWO2m33uvNJw
- TMq3Zl4R5okAOtaGl+yXqpXf1znJm2GNsGuZml45iUkDLrdlFh4+9zZq55DwlItDtPM0OmY
- HnFQIHCHIYyXsz6ieZiHA==
-UI-OutboundReport: notjunk:1;M01:P0:4/D2ZfIr14g=;kpLK1qWhzqQghBfwxkbWhqzKFoA
- DZ85gXXaWcEnrPil0XVZXe9yE0H7aE1kuAGzL/XZmqhXx8Fqvv6ZgmVEmRjg+htaCdbhtTnVc
- 0rCRWmrVhNaz/5G/d63yU9vfaWdBNfk45ZsVjj5+csTnG1CHBODN5K73XDRKHq2aSoejddeGW
- nZeqkcqVegO/VW7h+Z4NLTsCkDDAv2zHUSOxHlYlu25oQklX/xcwVg7tE5x5Y2T97w9F5XpKY
- 5S2QjgloxLGffSWPJ1lCF7gJmuCti85N0sUaRrPEjimkzj+pzRHvYm+D1FI+6zPz5N1d+Fbsv
- r8FF8FgwSuoXAOkLOov/wiaGHEWOQ9K9/jCBzu6M4WXPGC4pdQKSP771UIBS7WzS5bHsiaT1Y
- bhghjMe4TLPfRis1VZb1HPC//Hh5L8VmQzj7YZXO387l56vFAMb7/T7YzP9eyBsTYO5dTf/iB
- Nq0oCcehWkc31IRGmV3+BkVfd7eBhMwI8bibkXAtn3M+LaeFXebQpCc73fX7FsViuEdeakqo7
- Q2rW1Q4mwshUA1Yo5/QTIf5+LWufoca8QqnMWcx8KkO7nb9iF5z/2jIErg7wDxA6Dl9JtZJfN
- kOYFqcmSuCo1hfL/82TZtzAMKQ0z3pSPriTPpdxfNMo+EUzFD+uBzX9H7aCp8ByjLVJCcOlKZ
- /yZnjU1Rzvan3VAYthGadnIJi3EiiifbVDDq6JiB7fZ7pauuLGle3AJv63hzEL79ckhAOtkRG
- 52sFwSXfIrLWT3TYAH6u/AdEuL9gdUK/ry+BsShBX0rzqVYOug3Q0Fut4PMpqD7Le6ip+RBKC
- SjcUB9mUN5+rvO6nozjG2ydsGyk3GQETETy1cRMj14roU=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,125 +77,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/15/24 02:50, Marek Vasut wrote:
-> On 5/15/24 2:22 AM, Tim Harvey wrote:
->> If RANDOMIZE_BASE is enabled in the Linux kernel instructing it to
->> randomize the virtual address at which the kernel image is loaded, it
->> expects entropy to be provided by the bootloader by populating
->> /chosen/kaslr-seed with a 64-bit value from source of entropy at boot.
->
-> Thanks for working on this one, this is really nice.
+Hi Lukas,
 
-The general direction of always supplying a seed for KASLR is right. But
-there are some items to observe:
+On 5/14/24 16:04, lukas.funke-oss@weidmueller.com wrote:
+> From: Lukas Funke <lukas.funke@weidmueller.com>
+> 
+> Add functions to access efuses through PMU firmware
+> interface.
+> 
+> Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
+> ---
+> 
+>   drivers/firmware/firmware-zynqmp.c | 31 ++++++++++++++++++++++++++++++
+>   include/zynqmp_firmware.h          |  2 ++
+>   2 files changed, 33 insertions(+)
+> 
+> diff --git a/drivers/firmware/firmware-zynqmp.c b/drivers/firmware/firmware-zynqmp.c
+> index f99507d86c6..7483f2a8709 100644
+> --- a/drivers/firmware/firmware-zynqmp.c
+> +++ b/drivers/firmware/firmware-zynqmp.c
+> @@ -210,6 +210,37 @@ int zynqmp_pm_feature(const u32 api_id)
+>   	return ret_payload[1] & FIRMWARE_VERSION_MASK;
+>   }
+>   
+> +int zynqmp_pm_get_chipid(u32 *idcode, u32 *version)
+> +{
+> +	int ret;
+> +	u32 ret_payload[PAYLOAD_ARG_CNT];
 
-We already have multiple places where /chosen/kaslr-seed is set, e.g.
-arch/arm/cpu/armv8/sec_firmware.c and board/xilinx/common/board.c.
+Reverse x-mas tree ordering looks better IMHO.
 
-Some boards are using the kaslrseed command to initialize
-/chosen/kaslr-seed from DM_RNG.
+> +
+> +	if (!idcode || !version)
+> +		return -EINVAL;
+> +
+> +	ret = xilinx_pm_request(PM_GET_CHIPID, 0, 0, 0, 0, ret_payload);
+> +	*idcode = ret_payload[1];
+> +	*version = ret_payload[2];
 
-It does not make sense to set it multiple times from different sources
-of randomness. I am missing the necessary clean-up in this patch.
+You don't check ret for an error above but still pass the return values
+here. Perhaps it makes sense to return with error above instead?
 
-For CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT=3Dy the right way forward could be
-moving sec_firmware_get_random() into the driver model. Tom is the
-maintainer for this code.
+> +
+> +	return ret;
+> +}
+> +
+> +int zynqmp_pm_efuse_access(const u64 address, u32 *out)
+> +{
+> +	int ret;
+> +	u32 ret_payload[PAYLOAD_ARG_CNT];
+> +
+> +	if (!out)
+> +		return -EINVAL;
+> +
+> +	ret = xilinx_pm_request(PM_EFUSE_ACCESS, upper_32_bits(address),
+> +				lower_32_bits(address), 0, 0, ret_payload);
 
-For Xilinx boards your patch obsoletes part of the code in
-ft_board_setup() of board/xilinx/common/board.c. CCing Michal as maintaine=
-r.
+Same here.
 
-The kaslrseed command similarly becomes obsolete with your patch and
-should be removed. 'git grep -n CMD_KASLR' indicates which defconfigs
-would be impacted.
+Thanks,
+Stefan
 
-label_boot_kaslrseed() needs review too.
+> +
+> +	*out = ret_payload[1];
+> +
+> +	return ret;
+> +}
+> +
+>   int zynqmp_pm_is_function_supported(const u32 api_id, const u32 id)
+>   {
+>   	int ret;
+> diff --git a/include/zynqmp_firmware.h b/include/zynqmp_firmware.h
+> index 73198a6a6ea..7f18b4d59bf 100644
+> --- a/include/zynqmp_firmware.h
+> +++ b/include/zynqmp_firmware.h
+> @@ -453,6 +453,8 @@ int xilinx_pm_request(u32 api_id, u32 arg0, u32 arg1, u32 arg2,
+>   int zynqmp_pm_set_sd_config(u32 node, enum pm_sd_config_type config, u32 value);
+>   int zynqmp_pm_set_gem_config(u32 node, enum pm_gem_config_type config,
+>   			     u32 value);
+> +int zynqmp_pm_get_chipid(u32 *idcode, u32 *version);
+> +int zynqmp_pm_efuse_access(const u64 address, u32 *out);
+>   int zynqmp_pm_is_function_supported(const u32 api_id, const u32 id);
+>   int zynqmp_mmio_read(const u32 address, u32 *value);
+>   int zynqmp_mmio_write(const u32 address, const u32 mask, const u32 value);
 
-kaslr-seed is not compatible with measured boot if the device-tree is
-measured. When booting via EFI in efi_try_purge_kaslr_seed() we can
-safely remove the value because it is not used anyway; we provide the
-EFI_RNG_PROTOCOL instead. We also support measured boot via the legacy
-Linux entry point. See patch dec166d6b2c2 ("bootm: Support boot
-measurement"). We should not populate kaslr-seed if
-CONFIG_MEASURE_DEVICETREE=3Dy. CCing Eddie and Ilias as they have been
-working on measured boot.
+Viele Grüße,
+Stefan Roese
 
->
->> If we have DM_RNG enabled poulate this value automatically when
-
-nits
-
-%s/poulate/populate/
-
-Best regards
-
-Heinrich
-
->> fdt_chosen is called.
->>
->> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
->> ---
->> =C2=A0 boot/fdt_support.c | 23 +++++++++++++++++++++++
->> =C2=A0 1 file changed, 23 insertions(+)
->>
->> diff --git a/boot/fdt_support.c b/boot/fdt_support.c
->> index 874ca4d6f5af..cd3069baf450 100644
->> --- a/boot/fdt_support.c
->> +++ b/boot/fdt_support.c
->> @@ -7,10 +7,12 @@
->> =C2=A0=C2=A0 */
->> =C2=A0 #include <abuf.h>
->> +#include <dm.h>
->> =C2=A0 #include <env.h>
->> =C2=A0 #include <log.h>
->> =C2=A0 #include <mapmem.h>
->> =C2=A0 #include <net.h>
->> +#include <rng.h>
->> =C2=A0 #include <stdio_dev.h>
->> =C2=A0 #include <dm/ofnode.h>
->> =C2=A0 #include <linux/ctype.h>
->> @@ -300,6 +302,27 @@ int fdt_chosen(void *fdt)
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (nodeoffset < 0)
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return nodeoffse=
-t;
->> +=C2=A0=C2=A0=C2=A0 if (IS_ENABLED(CONFIG_DM_RNG)) {
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct udevice *dev;
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 size_t len =3D 0x8;
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 u64 *data;
->> +
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 data =3D malloc(len);
->
-> Can you allocate this 8 byte array on stack , i.e. u64 data[2]; ?
->
-> cmd/kaslrseed.c could use similar clean up (and
-> lib/efi_loader/efi_dt_fixup.c and boot/pxe_utils.c ... uhhh). Maybe you
-> can deduplicate this functionality into common code shared by all those
-> duplicates before the duplication gets out of control ?
->
-> lib/kaslrseed.c looks like a good place to put the common stuff.
->
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (!data)
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ret=
-urn -ENOMEM;
->> +
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 err =3D uclass_get_device(U=
-CLASS_RNG, 0, &dev);
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (!err)
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 err=
- =3D dm_rng_read(dev, data, len);
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (!err)
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 err=
- =3D fdt_setprop(fdt, nodeoffset, "kaslr-seed", data, len);
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (err < 0) {
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 pri=
-ntf("WARNING: could not set kaslr-seed %s.\n",
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 fdt_strerror(err));
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ret=
-urn err;
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
->
-> You're missing free() here, but it shouldn't be needed if you allocate
-> the array on stack, which is better/simpler.
-
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
