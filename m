@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4291DC25B75
-	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 23:49:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3ADDEC25B75
+	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 23:49:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D1B088315;
-	Thu, 16 May 2024 01:49:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E67B788346;
+	Thu, 16 May 2024 01:49:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EEBD988333; Thu, 16 May 2024 01:49:31 +0200 (CEST)
+ id 1D8598833A; Thu, 16 May 2024 01:49:33 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id D676F88286
- for <u-boot@lists.denx.de>; Thu, 16 May 2024 01:49:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 38EF088302
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 01:49:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 83EC5DA7;
- Wed, 15 May 2024 16:49:53 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1E04E1007;
+ Wed, 15 May 2024 16:49:55 -0700 (PDT)
 Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
  [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id AEEC03F641;
- Wed, 15 May 2024 16:49:27 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4AEDB3F641;
+ Wed, 15 May 2024 16:49:29 -0700 (PDT)
 From: Andre Przywara <andre.przywara@arm.com>
 To: Tom Rini <trini@konsulko.com>,
 	Jaehoon Chung <jh80.chung@samsung.com>
@@ -35,10 +35,12 @@ Cc: Jagan Teki <jagan@amarulasolutions.com>,
  Samuel Holland <samuel@sholland.org>,
  Chris Morgan <macromorgan@hotmail.com>, Ryan Walklin <ryan@testtoast.com>,
  u-boot@lists.denx.de, linux-sunxi@lists.linux.dev
-Subject: [PATCH 0/6] power: pmic: sunxi: consolidate AXP SPL drivers
-Date: Thu, 16 May 2024 00:48:33 +0100
-Message-Id: <20240515234839.26898-1-andre.przywara@arm.com>
+Subject: [PATCH 1/6] power: pmic: sunxi: only build AXP drivers for SPL
+Date: Thu, 16 May 2024 00:48:34 +0100
+Message-Id: <20240515234839.26898-2-andre.przywara@arm.com>
 X-Mailer: git-send-email 2.35.8
+In-Reply-To: <20240515234839.26898-1-andre.przywara@arm.com>
+References: <20240515234839.26898-1-andre.przywara@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -57,53 +59,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+The axp<xxx>.c drivers are only used for the SPL, for U-Boot proper we
+have a separate, DM compliant driver.
+Mask the build instructions with CONFIG_SPL_BUILD, to avoid them being
+build for U-Boot proper as well.
 
-this is the first series in an attempt to clean up the X-Powers AXP PMIC
-drivers used by the SPL for sunxi boards. So far we have a separate
-driver file for each AXP variant, but the code was largely the same,
-just differing by the regulator ranges.
+Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+---
+ drivers/power/Makefile | 2 ++
+ 1 file changed, 2 insertions(+)
 
-This adds a new generic driver, which reads the regulator description
-from an array of structs. This is similar to how the DM AXP driver used
-for U-Boot proper works, but is simplified, since we won't need the full
-feature set for the SPL, and we want to keep the code size small.
-
-To help bisect-ability, and to simplify review, each of the simpler AXP
-drivers covered by this approach is handled in a separate patch.
-We just convert the AXP313, AXP305, AXP717 for now, and on the way add
-support for the AXP707, just because it's now very easy, and we will
-need it soon enough.
-The other AXP SPL drivers are more complex, and support more regulators,
-but my hunch is that we really just need the DC/DC converters in the
-SPL. However I need to prove and test this, so I will convert the other
-AXP chips later.
-
-Please have a look and comment whether the approach in general is a good
-idea.
-
-Cheers,
-Andre
-
-Andre Przywara (6):
-  power: pmic: sunxi: only build AXP drivers for SPL
-  power: pmic: sunxi: introduce generic SPL AXP DC/DC driver
-  power: pmic: sunxi: replace AXP717 SPL driver
-  power: pmic: sunxi: use generic AXP SPL driver for AXP313
-  power: pmic: sunxi: use generic AXP SPL driver for AXP305
-  power: pmic: sunxi: add AXP707 support
-
- drivers/power/Makefile  |   8 +-
- drivers/power/axp305.c  |  82 ------------------
- drivers/power/axp313.c  | 133 -----------------------------
- drivers/power/axp717.c  |  92 --------------------
- drivers/power/axp_spl.c | 184 ++++++++++++++++++++++++++++++++++++++++
- 5 files changed, 189 insertions(+), 310 deletions(-)
- delete mode 100644 drivers/power/axp305.c
- delete mode 100644 drivers/power/axp313.c
- delete mode 100644 drivers/power/axp717.c
- create mode 100644 drivers/power/axp_spl.c
-
+diff --git a/drivers/power/Makefile b/drivers/power/Makefile
+index 41ebb494fff..9d1f4c65262 100644
+--- a/drivers/power/Makefile
++++ b/drivers/power/Makefile
+@@ -8,6 +8,7 @@ obj-$(CONFIG_$(SPL_TPL_)POWER_DOMAIN) += domain/
+ obj-y += pmic/
+ obj-y += regulator/
+ 
++ifdef CONFIG_SPL_BUILD
+ obj-$(CONFIG_AXP152_POWER)	+= axp152.o
+ obj-$(CONFIG_AXP209_POWER)	+= axp209.o
+ obj-$(CONFIG_AXP221_POWER)	+= axp221.o
+@@ -16,6 +17,7 @@ obj-$(CONFIG_AXP313_POWER)	+= axp313.o
+ obj-$(CONFIG_AXP717_POWER)	+= axp717.o
+ obj-$(CONFIG_AXP809_POWER)	+= axp809.o
+ obj-$(CONFIG_AXP818_POWER)	+= axp818.o
++endif
+ obj-$(CONFIG_EXYNOS_TMU)	+= exynos-tmu.o
+ obj-$(CONFIG_SY8106A_POWER)	+= sy8106a.o
+ obj-$(CONFIG_TPS6586X_POWER)	+= tps6586x.o
 -- 
 2.35.8
 
