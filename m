@@ -4,91 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F033C25B78
-	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 22:00:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 816E1C25B78
+	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 22:00:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5679688366;
+	by phobos.denx.de (Postfix) with ESMTP id B23FB88308;
 	Wed, 15 May 2024 23:59:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=timesys.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=timesys-com.20230601.gappssmtp.com header.i=@timesys-com.20230601.gappssmtp.com header.b="cf2C1QPy";
+	dkim=pass (2048-bit key; unprotected) header.d=timesys-com.20230601.gappssmtp.com header.i=@timesys-com.20230601.gappssmtp.com header.b="a28QlXsE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2F3A8833B; Wed, 15 May 2024 23:59:35 +0200 (CEST)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id 4D16E88346; Wed, 15 May 2024 23:59:36 +0200 (CEST)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF8B786DBD
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 23:59:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B6C3A88319
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 23:59:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=timesys.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=greg.malysa@timesys.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-61be4b98766so85094817b3.3
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 14:59:32 -0700 (PDT)
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-620314aa1d7so79562117b3.2
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 14:59:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=timesys-com.20230601.gappssmtp.com; s=20230601; t=1715810371; x=1716415171;
+ d=timesys-com.20230601.gappssmtp.com; s=20230601; t=1715810372; x=1716415172;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=z+ESdM3nGVZgo68VvQHebUEr4my4IzWFOIa3E44V34k=;
- b=cf2C1QPyKHWSYRiVXCZxSVJXQwIDjoJnvUQjk2OqrRmiCeYD03+oIBCQfsgR/9FRAY
- 3INMDx1x8D+IgzfNOGuMCdQeoX/xbZw0XoIFLAHqCeDgWzmoApfV2AjPyeFTsh+0VM/I
- fX10URqDx7WuEieQSudh8yHFJtYk1n2jOEZsKYwUzA9bWVtYGqlIvdg9dCnCPY/q/AlK
- PY56jf/M56vPWx++/mEWfjCBydNFGwcPxvFYv03z5Q1AhRbTG3ik+ntHFMTSathny6UN
- N3Jw96PPFigkc8IT2HTjOEhjalD/gH/K0r1rUpDQtirs0CKmiJVvkkKvR4klXIhOS79C
- pY2Q==
+ bh=Q5eW6gk9frReeybfjzwz6RGyvslVNpqm8EjEOjB8Q0Y=;
+ b=a28QlXsEqfd0D6uFXH93npSrNMSxFkj1+dwGtLtBwb0YgyQG4c9LWHeQYY3WQypyQp
+ WuaRHSuziZbL1xNwwx8sr70c1ZmRdLdPyqwHeKeeEbP2C1jq0gp0bgfpWX/INH8b58c6
+ 4rSw0esib5hVT/QWTQgdJ/o/alAR9hddgNw8itBs4J7JqwQeMar0Hb/hOKFXLE6giPjh
+ kYXW3rjMX4+vxX5HPcvmp675e3T4BWndR8oOuRc6PFJpASnpeHob7Zjp+2IE5aebT7tl
+ kH3/lwzZ9G/Y/8OTCNMIgiGYLwcHTVyr4vY1YqzW338arYMQuDrxNGoy4adfgskJAdMr
+ 58AQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715810371; x=1716415171;
+ d=1e100.net; s=20230601; t=1715810372; x=1716415172;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=z+ESdM3nGVZgo68VvQHebUEr4my4IzWFOIa3E44V34k=;
- b=SQkWhQftuqATp1D/o+yBFUH+iymiPr2wgPc9Lpyn5McgOcj9bSyrOifqT9j+TQk789
- RrlVK+4TlGK89m2GeyC07Klcopt4BxPGTOD30D800htuvHc3V7QpRkql3uQ7dtzVVhbb
- 6sJHXXB63hO+SA9usKdlbpSVE2GuRoODF4K3+3QKGCOOmy1eCGR+/KEO16ASuzoie9PS
- KgI7qG9zG1n2olonFoue7CgS+T9lw0PXcgHE4p5TyK1KgnZ+O5RUQAmRBsILXivztO9O
- tE/13O80IJAGI2fgo9Rwi23x8r1g6aBvivU1kB3VUHYfrsca6xVDaoK0oe/lgaX/PtW0
- PKLQ==
-X-Gm-Message-State: AOJu0YzQistkebV1r7W7LPzbGNiKq/iSi8q4LciBJJEtDv3P49i8Youq
- MZSJduCPTeGiqddw14bHlTKWK9MgD24XYhMsOHtlJJPqHJwpmK//ZAWoqkU925/yuuF/cVLp1Wy
- P3A==
-X-Google-Smtp-Source: AGHT+IGKGua68Tb8wwd07TpxrfSTpIdbz2ZQvDxXnj63QNVlgmSLt2zowzXm6A8DoxwSS3OQQirOow==
-X-Received: by 2002:a81:6c05:0:b0:620:4018:7c67 with SMTP id
- 00721157ae682-622aff8cc75mr167433877b3.27.1715810371450; 
- Wed, 15 May 2024 14:59:31 -0700 (PDT)
+ bh=Q5eW6gk9frReeybfjzwz6RGyvslVNpqm8EjEOjB8Q0Y=;
+ b=UJPyebCWjFmT4Jdun1VBdHvrhUi+n3clTpR5FnjaiIYX3b6vMA3izwr5URmmQ23n/y
+ 0vj7JiTGXi1XRRs1IKH8gkeYLjOuFF70GYY5KJwTrq/doQqMW76jqz6D3E/zAuPI7wdO
+ SbDfI2vv7HuVg2zL55YUANUR/GhFLFG4hJ8Lb7HPDrZazDiuWCC+LSQXty1r1quR3y2m
+ /IqGIv9iAHgDRcsEDo6azUSPSod5qe17JmNJZY15ILK4YoZfOHjKVYEauNAjQmjIou+d
+ nKYn+wst/tSdn8grMC3DCG8FrG+TnOs5usoAsU/HhxqNe5rIDECFI5Okh6vp24UbPYlU
+ BIRw==
+X-Gm-Message-State: AOJu0YyPbYnjeoTnLlpfeiqf9bfoB+U9ElaMGd4+mLup2JjntCE1W+5b
+ QY56CAXzY6PjEF5ojk5Mg0X6WGP/yaPOrvyCfk8pTR3xdp9bRa6hl7Go0ubSKzII66E97/kK/8e
+ ctA==
+X-Google-Smtp-Source: AGHT+IH7tsHDxEQZWDU1NYFvJuLIasDYaU7iaeKnyGQToh6tsDe79EoNT9FLZ7mCHyqqLMqHMkbzgg==
+X-Received: by 2002:a81:84ca:0:b0:61b:3304:cdc7 with SMTP id
+ 00721157ae682-622affcc3famr167775247b3.29.1715810372400; 
+ Wed, 15 May 2024 14:59:32 -0700 (PDT)
 Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
  by smtp.gmail.com with ESMTPSA id
  00721157ae682-6209e37913asm30956457b3.105.2024.05.15.14.59.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 May 2024 14:59:31 -0700 (PDT)
+ Wed, 15 May 2024 14:59:32 -0700 (PDT)
 From: Greg Malysa <greg.malysa@timesys.com>
 To: u-boot@lists.denx.de
 Cc: Matthew McClintock <Matthew.Mcclintock@analog.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
  Greg Malysa <greg.malysa@timesys.com>,
  Ian Roberts <ian.roberts@timesys.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
  Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
  Utsav Agarwal <utsav.agarwal@analog.com>,
  Arturs Artamonovs <arturs.artamonovs@analog.com>,
  Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
  Caleb Connolly <caleb.connolly@linaro.org>,
- Chanho Park <chanho61.park@samsung.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Randolph <randolph@andestech.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 07/11] watchdog: Add support for ADI SC5XX-family watchdog
- peripheral
-Date: Wed, 15 May 2024 17:57:44 -0400
-Message-ID: <20240515215837.14028-8-greg.malysa@timesys.com>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 08/11] dma: Add driver for ADI SC5xx-family SoC MDMA
+ functionality
+Date: Wed, 15 May 2024 17:57:45 -0400
+Message-ID: <20240515215837.14028-9-greg.malysa@timesys.com>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240515215837.14028-1-greg.malysa@timesys.com>
 References: <20240515215837.14028-1-greg.malysa@timesys.com>
@@ -110,216 +107,328 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Add a rudimentary MDMA driver for the Analog Devices SC5xx SoCs,
+primarily intended for use with and tested against the QSPI/OSPI
+IP included in the SoC.
 
-Co-developed-by: Greg Malysa <greg.malysa@timesys.com>
-Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
 Co-developed-by: Ian Roberts <ian.roberts@timesys.com>
 Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
+Co-developed-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 Signed-off-by: Vasileios Bimpikas <vasileios.bimpikas@analog.com>
 Signed-off-by: Utsav Agarwal <utsav.agarwal@analog.com>
 Signed-off-by: Arturs Artamonovs <arturs.artamonovs@analog.com>
-Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
 ---
 
- MAINTAINERS                |   1 +
- drivers/watchdog/Kconfig   |   9 +++
- drivers/watchdog/Makefile  |   1 +
- drivers/watchdog/adi_wdt.c | 145 +++++++++++++++++++++++++++++++++++++
- 4 files changed, 156 insertions(+)
- create mode 100644 drivers/watchdog/adi_wdt.c
+ MAINTAINERS           |   1 +
+ drivers/dma/Kconfig   |   7 ++
+ drivers/dma/Makefile  |   1 +
+ drivers/dma/adi_dma.c | 255 ++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 264 insertions(+)
+ create mode 100644 drivers/dma/adi_dma.c
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index c1685f0352..6feb7e540b 100644
+index 6feb7e540b..ce92ce107d 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -618,6 +618,7 @@ F:	drivers/pinctrl/pinctrl-adi-adsp.c
- F:	drivers/serial/serial_adi_uart4.c
- F:	drivers/timer/adi_sc5xx_timer.c
- F:	drivers/usb/musb-new/sc5xx.c
-+F:	drivers/watchdog/adi_wdt.c
- F:	include/env/adi/
+@@ -610,6 +610,7 @@ T:	git https://github.com/analogdevicesinc/lnxdsp-u-boot
+ F:	arch/arm/include/asm/arch-adi/
+ F:	arch/arm/mach-sc5xx/
+ F:	drivers/clk/adi/
++F:	drivers/dma/adi_dma.c
+ F:	drivers/gpio/adp5588_gpio.c
+ F:	drivers/gpio/gpio-adi-adsp.c
+ F:	drivers/i2c/adi_i2c.c
+diff --git a/drivers/dma/Kconfig b/drivers/dma/Kconfig
+index 3c64e89464..4b47be6b01 100644
+--- a/drivers/dma/Kconfig
++++ b/drivers/dma/Kconfig
+@@ -76,6 +76,13 @@ config XILINX_DPDMA
+ 	  this file is used as placeholder for driver. The main reason is
+ 	  to record compatible string and calling power domain driver.
  
- ARM SNAPDRAGON
-diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-index 8318fd77a3..5a62000272 100644
---- a/drivers/watchdog/Kconfig
-+++ b/drivers/watchdog/Kconfig
-@@ -94,6 +94,15 @@ config WDT_APPLE
- 	  The watchdog will perform a full SoC reset resulting in a
- 	  reboot of the entire system.
- 
-+config WDT_ADI
-+	bool "Analog Devices watchdog timer support"
-+	select WDT
-+	select SPL_WDT if SPL
-+	depends on (SC57X || SC58X || SC59X || SC59X_64)
++config ADI_DMA
++	bool "ADI DMA driver"
++	depends on DMA && DMA_CHANNELS
 +	help
-+	  Enable this to support Watchdog Timer on ADI SC57X, SC58X, SC59X,
-+	  and SC59X_64 processors
++	  Enable DMA support for Analog Devices SOCs, such as the SC5xx.
++	  Currently this is a minimalistic driver tested against OSPI use only.
 +
- config WDT_ARMADA_37XX
- 	bool "Marvell Armada 37xx watchdog timer support"
- 	depends on WDT && ARMADA_3700
-diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
-index 7b39adcf0f..7ad61b513c 100644
---- a/drivers/watchdog/Makefile
-+++ b/drivers/watchdog/Makefile
-@@ -50,3 +50,4 @@ obj-$(CONFIG_WDT_STM32MP) += stm32mp_wdt.o
- obj-$(CONFIG_WDT_SUNXI) += sunxi_wdt.o
- obj-$(CONFIG_WDT_TANGIER) += tangier_wdt.o
- obj-$(CONFIG_WDT_XILINX) += xilinx_wwdt.o
-+obj-$(CONFIG_WDT_ADI) += adi_wdt.o
-diff --git a/drivers/watchdog/adi_wdt.c b/drivers/watchdog/adi_wdt.c
+ if APBH_DMA
+ config APBH_DMA_BURST
+ 	bool "Enable DMA BURST"
+diff --git a/drivers/dma/Makefile b/drivers/dma/Makefile
+index 48811eaaeb..00d765864c 100644
+--- a/drivers/dma/Makefile
++++ b/drivers/dma/Makefile
+@@ -13,5 +13,6 @@ obj-$(CONFIG_TI_KSNAV) += keystone_nav.o keystone_nav_cfg.o
+ obj-$(CONFIG_TI_EDMA3) += ti-edma3.o
+ obj-$(CONFIG_DMA_LPC32XX) += lpc32xx_dma.o
+ obj-$(CONFIG_XILINX_DPDMA) += xilinx_dpdma.o
++obj-$(CONFIG_ADI_DMA) += adi_dma.o
+ 
+ obj-y += ti/
+diff --git a/drivers/dma/adi_dma.c b/drivers/dma/adi_dma.c
 new file mode 100644
-index 0000000000..67d17dc692
+index 0000000000..56eceff712
 --- /dev/null
-+++ b/drivers/watchdog/adi_wdt.c
-@@ -0,0 +1,145 @@
++++ b/drivers/dma/adi_dma.c
+@@ -0,0 +1,255 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later
 +/*
-+ * (C) Copyright 2022 - Analog Devices, Inc.
++ * Analog Devices DMA controller driver
++ *
++ * (C) Copyright 2024 - Analog Devices, Inc.
 + *
 + * Written and/or maintained by Timesys Corporation
 + *
-+ * Converted to driver model by Nathan Barrett-Morrison
-+ *
 + * Contact: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 + * Contact: Greg Malysa <greg.malysa@timesys.com>
-+ *
-+ * adi_wtd.c - driver for ADI on-chip watchdog
++ * Contact: Ian Roberts <ian.roberts@timesys.com>
 + *
 + */
-+
-+#include <clk.h>
 +#include <dm.h>
-+#include <wdt.h>
-+#include <linux/delay.h>
-+#include <linux/ioport.h>
-+#include <linux/io.h>
++#include <dma.h>
++#include <dma-uclass.h>
++#include <asm/io.h>
++#include <dm/device_compat.h>
++#include <linux/errno.h>
 +
-+#define WDOG_CTL  0x0
-+#define WDOG_CNT  0x4
-+#define WDOG_STAT 0x8
++#define HAS_MDMA	BIT(0)
 +
-+#define RCU_CTL   0x0
-+#define RCU_STAT  0x4
++#define REG_ADDRSTART	0x04
++#define REG_CFG		0x08
++#define REG_XCNT	0x0C
++#define REG_XMOD	0x10
++#define REG_STAT	0x30
 +
-+#define SEC_GCTL  0x0
-+#define SEC_FCTL  0x10
-+#define SEC_SCTL0 0x800
++#define BITP_DMA_CFG_MSIZE                        8
++#define BITP_DMA_CFG_PSIZE                        4
++#define BITM_DMA_CFG_WNR                 0x00000002
++#define BITM_DMA_CFG_EN                  0x00000001
++#define ENUM_DMA_CFG_XCNT_INT            0x00100000
 +
-+#define WDEN      0x0010
-+#define WDDIS     0x0AD0
++#define BITP_DMA_STAT_PBWID                      12
++#define BITP_DMA_STAT_ERRC                        4
++#define BITM_DMA_STAT_PBWID              0x00003000
++#define BITM_DMA_STAT_ERRC               0x00000070
++#define BITM_DMA_STAT_PIRQ               0x00000004
++#define BITM_DMA_STAT_IRQERR             0x00000002
++#define BITM_DMA_STAT_IRQDONE            0x00000001
 +
-+struct adi_wdt_priv {
-+	void __iomem *rcu_base;
-+	void __iomem *sec_base;
-+	void __iomem *wdt_base;
-+	struct clk clock;
++#define DMA_MDMA_SRC_DEFAULT_CONFIG(psize, msize) \
++	(BITM_DMA_CFG_EN | ((psize) << BITP_DMA_CFG_PSIZE) | ((msize) << BITP_DMA_CFG_MSIZE))
++#define DMA_MDMA_DST_DEFAULT_CONFIG(psize, msize) \
++	(BITM_DMA_CFG_EN | BITM_DMA_CFG_WNR | ENUM_DMA_CFG_XCNT_INT | \
++	((psize) << BITP_DMA_CFG_PSIZE) | ((msize) << BITP_DMA_CFG_MSIZE))
++
++struct adi_dma_channel {
++	int id;
++	struct adi_dma *dma;
++	void __iomem *iosrc;
++	void __iomem *iodest;
 +};
 +
-+static int adi_wdt_reset(struct udevice *dev)
++struct adi_dma {
++	struct udevice *dev;
++	struct adi_dma_channel channels[1];
++	void __iomem *ioaddr;
++	unsigned long hw_cfg;
++};
++
++static const struct udevice_id dma_dt_ids[] = {
++	{ .compatible = "adi,mdma-controller", .data = HAS_MDMA },
++	{ }
++};
++
++static u8 adi_dma_get_msize(u32 n_bytecount, u32 n_address)
 +{
-+	struct adi_wdt_priv *priv = dev_get_priv(dev);
++	/* Calculate MSIZE, PSIZE, XCNT and XMOD */
++	u8 n_msize = 0;
++	u32 n_value = n_bytecount | n_address;
++	u32 n_mask = 0x1;
 +
-+	writel(0, priv->wdt_base + WDOG_STAT);
++	for (n_msize = 0; n_msize < 5; n_msize++, n_mask <<= 1) {
++		if ((n_value & n_mask) == n_mask)
++			break;
++	}
 +
-+	return 0;
++	return n_msize;
 +}
 +
-+static int adi_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
++static int adi_dma_get_ch_error(void __iomem *ch)
 +{
-+	struct adi_wdt_priv *priv = dev_get_priv(dev);
-+	u32 sctl_val;
-+
-+	/* Disable SYSCD_RESETb input and clear the RCU0 reset status */
-+	writel(0xf, priv->rcu_base + RCU_STAT);
-+	writel(0x0, priv->rcu_base + RCU_CTL);
-+
-+	/* reset the SEC controller */
-+	writel(0x2, priv->sec_base + SEC_GCTL);
-+	writel(0x2, priv->sec_base + SEC_FCTL);
-+
-+	udelay(50);
-+
-+	/* enable SEC fault event */
-+	writel(0x1, priv->sec_base + SEC_GCTL);
-+
-+	/* ANOMALY 36100004 Spurious External Fault event occurs when FCTL
-+	 * is re-programmed when currently active fault is not cleared
-+	 */
-+	writel(0xc0, priv->sec_base + SEC_FCTL);
-+	writel(0xc1, priv->sec_base + SEC_FCTL);
-+
-+	/* enable SEC fault source for watchdog0 */
-+	sctl_val = readl((priv->sec_base + SEC_SCTL0) + 3 * 8) | 0x6;
-+	writel(sctl_val, (priv->sec_base + SEC_SCTL0) + 3 * 8);
-+
-+	/* Enable SYSCD_RESETb input */
-+	writel(0x100, priv->rcu_base + RCU_CTL);
-+
-+	/* enable watchdog0 */
-+	writel(WDDIS, priv->wdt_base + WDOG_CTL);
-+
-+	writel(timeout_ms / 1000 *
-+	       (clk_get_rate(&priv->clock) / (IS_ENABLED(CONFIG_SC58X) ? 2 : 1)),
-+	       priv->wdt_base + WDOG_CNT);
-+
-+	writel(0, priv->wdt_base + WDOG_STAT);
-+	writel(WDEN, priv->wdt_base + WDOG_CTL);
-+
-+	return 0;
++	u32 cause = (readl(ch + REG_STAT) &  BITM_DMA_STAT_ERRC) >>
++		    BITP_DMA_STAT_ERRC;
++	switch (cause) {
++	case 0:
++		return -EINVAL;
++	case 1:
++		return -EBUSY;
++	case 2:
++		return -EFAULT;
++	case 3:
++		fallthrough;
++	case 5:
++		fallthrough;
++	case 6:
++		fallthrough;
++	default:
++		return -EIO;
++	}
 +}
 +
-+static int adi_wdt_probe(struct udevice *dev)
++static int adi_mdma_transfer(struct udevice *dev, int direction,
++			     dma_addr_t dst, dma_addr_t src, size_t len)
 +{
-+	struct adi_wdt_priv *priv = dev_get_priv(dev);
-+	int ret;
-+	struct resource res;
++	struct adi_dma *priv = dev_get_priv(dev);
++	void __iomem *chsrc = priv->channels[0].iosrc;
++	void __iomem *chdst = priv->channels[0].iodest;
 +
-+	ret = dev_read_resource_byname(dev, "rcu", &res);
-+	if (ret)
-+		return ret;
-+	priv->rcu_base = devm_ioremap(dev, res.start, resource_size(&res));
++	int result = 0;
++	u32 reg;
++	u32 bytecount = len;
 +
-+	ret = dev_read_resource_byname(dev, "sec", &res);
-+	if (ret)
-+		return ret;
-+	priv->sec_base = devm_ioremap(dev, res.start, resource_size(&res));
++	u8 n_srcmsize;
++	u8 n_dstmsize;
++	u8 n_srcpsize;
++	u8 n_dstpsize;
++	u8 n_psize;
++	u32 srcconfig;
++	u32 dstconfig;
++	u8 srcpsizemax = (readl(chsrc + REG_STAT) & BITM_DMA_STAT_PBWID) >>
++			 BITP_DMA_STAT_PBWID;
++	u8 dstpsizemax = (readl(chdst + REG_STAT) & BITM_DMA_STAT_PBWID) >>
++			 BITP_DMA_STAT_PBWID;
 +
-+	ret = dev_read_resource_byname(dev, "wdt", &res);
-+	if (ret)
-+		return ret;
-+	priv->wdt_base = devm_ioremap(dev, res.start, resource_size(&res));
++	const u32 CLRSTAT = (BITM_DMA_STAT_IRQDONE | BITM_DMA_STAT_IRQERR |
++			     BITM_DMA_STAT_PIRQ);
 +
-+	ret = clk_get_by_name(dev, "sclk0", &priv->clock);
-+	if (ret < 0) {
-+		printf("Can't get WDT clk: %d\n", ret);
-+		return ret;
++	if (len == 0)
++		return -EINVAL;
++
++	/* Clear DMA status */
++	writel(CLRSTAT, chsrc + REG_STAT);
++	writel(CLRSTAT, chdst + REG_STAT);
++
++	/* Calculate MSIZE, PSIZE, XCNT and XMOD */
++	n_srcmsize = adi_dma_get_msize(bytecount, src);
++	n_dstmsize = adi_dma_get_msize(bytecount, dst);
++	n_srcpsize = min(n_srcmsize, srcpsizemax);
++	n_dstpsize = min(n_dstmsize, dstpsizemax);
++	n_psize = min(n_srcpsize, n_dstpsize);
++
++	srcconfig = DMA_MDMA_SRC_DEFAULT_CONFIG(n_psize, n_srcmsize);
++	dstconfig = DMA_MDMA_DST_DEFAULT_CONFIG(n_psize, n_dstmsize);
++
++	/* Load the DMA descriptors */
++	writel(src,			chsrc + REG_ADDRSTART);
++	writel(bytecount >> n_srcmsize,	chsrc + REG_XCNT);
++	writel(1 << n_srcmsize,		chsrc + REG_XMOD);
++	writel(dst,			chdst + REG_ADDRSTART);
++	writel(bytecount >> n_dstmsize,	chdst + REG_XCNT);
++	writel(1 << n_dstmsize,		chdst + REG_XMOD);
++
++	writel(dstconfig, chdst + REG_CFG);
++	writel(srcconfig, chsrc + REG_CFG);
++
++	/* Wait for DMA to complete while checking for a DMA error */
++	do {
++		reg = readl(chsrc + REG_STAT);
++		if ((reg & BITM_DMA_STAT_IRQERR) == BITM_DMA_STAT_IRQERR) {
++			result = adi_dma_get_ch_error(chsrc);
++			break;
++		}
++		reg = readl(chdst + REG_STAT);
++		if ((reg & BITM_DMA_STAT_IRQERR) == BITM_DMA_STAT_IRQERR) {
++			result = adi_dma_get_ch_error(chdst);
++			break;
++		}
++	} while ((reg & BITM_DMA_STAT_IRQDONE) == 0);
++
++	reg = readl(chsrc + REG_CFG);
++	writel(reg & ~1, chsrc + REG_CFG);
++	reg = readl(chdst + REG_CFG);
++	writel(reg & ~1, chdst + REG_CFG);
++
++	return result;
++}
++
++static int adi_dma_init_channel(struct adi_dma *dma,
++				struct adi_dma_channel *channel, ofnode node)
++{
++	u32 offset;
++
++	if (ofnode_read_u32(node, "adi,id", &channel->id)) {
++		dev_err(dma->dev, "Missing adi,id for channel %s\n",
++			ofnode_get_name(node));
++		return -ENOENT;
++	}
++
++	if (ofnode_read_u32(node, "adi,src-offset", &offset)) {
++		dev_err(dma->dev, "Missing adi,src-offset for channel %s\n",
++			ofnode_get_name(node));
++		return -ENOENT;
++	}
++
++	channel->iosrc = dma->ioaddr + offset;
++	channel->dma = dma;
++
++	if (dma->hw_cfg & HAS_MDMA) {
++		if (ofnode_read_u32(node, "adi,dest-offset", &offset)) {
++			dev_err(dma->dev,
++				"Missing adi,dest-offset for channel %s\n",
++				ofnode_get_name(node));
++			return -ENOENT;
++		}
++		channel->iodest = dma->ioaddr + offset;
 +	}
 +
 +	return 0;
 +}
 +
-+static const struct wdt_ops adi_wdt_ops = {
-+	.start		= adi_wdt_start,
-+	.reset		= adi_wdt_reset,
++static int adi_dma_probe(struct udevice *dev)
++{
++	struct dma_dev_priv *uc_priv = dev_get_uclass_priv(dev);
++	struct adi_dma *priv = dev_get_priv(dev);
++	ofnode node, child;
++
++	priv->hw_cfg = dev_get_driver_data(dev);
++	if (priv->hw_cfg & HAS_MDMA)
++		uc_priv->supported = DMA_SUPPORTS_MEM_TO_MEM;
++
++	priv->ioaddr = dev_remap_addr(dev);
++	if (!priv->ioaddr)
++		return -EINVAL;
++
++	node = dev_read_first_subnode(dev);
++	if (!ofnode_valid(node)) {
++		dev_err(dev,
++			"Error: device tree DMA channel config missing!\n");
++		return -ENODEV;
++	}
++
++	node = dev_ofnode(dev);
++	ofnode_for_each_subnode(child, node) {
++		adi_dma_init_channel(priv, priv->channels, child);
++		break; //Only 1 channel supported for now
++	}
++
++	return 0;
++}
++
++static const struct dma_ops adi_dma_ops = {
++	.transfer = adi_mdma_transfer,
 +};
 +
-+static const struct udevice_id adi_wdt_ids[] = {
-+	{ .compatible = "adi,wdt" },
-+	{}
-+};
-+
-+U_BOOT_DRIVER(adi_wdt) = {
-+	.name		= "adi_wdt",
-+	.id		= UCLASS_WDT,
-+	.of_match	= adi_wdt_ids,
-+	.probe		= adi_wdt_probe,
-+	.ops		= &adi_wdt_ops,
-+	.priv_auto = sizeof(struct adi_wdt_priv),
-+	.flags		= DM_FLAG_PRE_RELOC,
++U_BOOT_DRIVER(adi_dma) = {
++	.name = "adi_dma",
++	.id = UCLASS_DMA,
++	.of_match = dma_dt_ids,
++	.ops = &adi_dma_ops,
++	.probe = adi_dma_probe,
++	.priv_auto = sizeof(struct adi_dma),
 +};
 -- 
 2.43.2
