@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8E40C25B75
-	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 08:01:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EF0FC25B77
+	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 08:02:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA803881EA;
-	Wed, 15 May 2024 10:01:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5AD0B881B8;
+	Wed, 15 May 2024 10:01:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZBOlzlXX";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SIH1Po19";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED193881E5; Wed, 15 May 2024 10:01:52 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id AFAEE88247; Wed, 15 May 2024 10:01:54 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9134C8817B
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 10:01:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EAAD4881D6
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 10:01:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a59b097b202so100316766b.0
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 01:01:48 -0700 (PDT)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-a59cdd185b9so187836666b.1
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 01:01:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1715760107; x=1716364907; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=WfcKU1mLtvYqKO6TC0CO891kAc6XWruPKDkAqajCiGw=;
- b=ZBOlzlXXSUan3eBPtYCu4hatYIu/QknV31qsIzCcwmpTPVj9T8gCpWrzLeCY0v+p7V
- UNvnfnKyQzpPtPEFScKjGi/EVoK11TcwiIjZ9VvvOoyDkT1IZVIhUjbszwiEpzXPo39A
- mCy9cn4EnDVXvlC2xU8IfQsDnP9hCmw4L08alIuhMwLBmfJG0sQkaprHpii5GU7cMV61
- vmpITaXICvcyobK5BwdE1Rtta9kvWb03Jj45tsS3hGt+7HOAD6/1hjDw8ovJZPBJ4lvn
- Nvz6f9SmV+w69beZD8K75n6XMiEBMFurcHmLqOILY3196h+z8/mezpWXdTip5PFLN1GG
- zOZw==
+ d=gmail.com; s=20230601; t=1715760110; x=1716364910; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1K6AII+H+f4XuHfe77Qp2nz5nk4jATnwOptqvUbjmo8=;
+ b=SIH1Po19iMgQdZeSaMyw+LvS9BM1LLFUn2hT4nI+xCEjWbgRHFqZ8mEA2LZvbWQRxb
+ kw9I8TRo5n2Pv9bZilqxo18dfNw2ei0Elz+7SwplM6WhCcxIwFzizNscI1LEq9OIbmqE
+ 8u/iDmsYzlnIksdGSreESXQHJW4cRm2k/d5JwV3xIkcFWCVvYxYLAptAILO13yFnctsC
+ gOzK1klL22YlfVoWk2Ykej21SSCKPqHCZksuokqKZ3y9bUri5V7Ks3WCp777KfM8DBWL
+ MDxjEuv+PzypOok3mUOX6QN3aXM13TbF2a/tMHMu0yi+SdpLvL/5gjhJy7bkPiAOAhSV
+ 2/8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715760107; x=1716364907;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=WfcKU1mLtvYqKO6TC0CO891kAc6XWruPKDkAqajCiGw=;
- b=La9chj9L74OTygG/c4+RhEQlfvjLfdYAMD45H0AcqEMUZasGtD+lMjoNtMPkQzr6sq
- bWNKWsb5AezYVKGJ+dlch1VMSm1IOFfHEuPiGVhB+91Qb18lOxyo6cxzFZ+USMf91mt0
- QbeL0LFmiVf/Es7DlOBcrQWigREmPxYX/Y/5pwmBKMA/waxP/Z2vH4TbFx0WjmcQUDnl
- k6RUSqhYgYh5ikRHMMcY8DDKg2/cQYoA9CrZ9VN+s3Ty7thXxtlZjuXGAQxQt1G8w1ee
- o+dQyUBICRW/neMN7EIjGEt8V4jTJcg9gYeFWYKqw8kA4zjoFY5kUtA/TyFOJ+gG7hq4
- szGA==
-X-Gm-Message-State: AOJu0YyR/+IetCLYz2WzTwR3Gda0KUOoExm7n3uvs4w64ehgl+VhkgH+
- LuRmHCA+hRP+rHKvzs5y7Q1gkCqBKmYWJt60lQc3K2B59kqH/Y7gZ49LOhqceBM=
-X-Google-Smtp-Source: AGHT+IHszR5xBUWPMS/tps3zA96o8zbT7Gpf3ycugwjpXuTz7+E32tpaQR77pC5qpKJEU0G4wihVhw==
-X-Received: by 2002:a17:906:56c2:b0:a59:9fc8:38be with SMTP id
- a640c23a62f3a-a5a2d55ae7dmr973444866b.26.1715760107119; 
- Wed, 15 May 2024 01:01:47 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1715760110; x=1716364910;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=1K6AII+H+f4XuHfe77Qp2nz5nk4jATnwOptqvUbjmo8=;
+ b=duRa/kojf3xsho2EgfWUZdo2QXdw/QA/tjB9fA67rra/4Qz4ChgdkoPplo9zmnxUCZ
+ HKl6VUAOWIfffjy8VmLh+EQtu8fLnuT3lc3xITRvYL6bp6Gv3twjXko4JJgmFArZpn63
+ TWaPRltVTWrhfg2pp4Wrjtc33Cm6IJC169kP+WmTweNuLfN5yGxSfxdvg+ANkM88bzSs
+ CGY4HMYoXfQnOWayacf+D38fI9dMCFvALELSTvQ/2V3xjSFEYxXdC+vup31Bz/xn6b9i
+ qBgBI5+cnX6fRvaTcxwNluLZpQcv49kTgYc2P06yEPLxkgtnPx6qXXXGy6OzUKkhEdPz
+ rFSg==
+X-Gm-Message-State: AOJu0Yyyv03MejFKsWgzXhMKwjIZ+eEpSHWXMpALu7CGAf5qJAWgwwsD
+ gi+rCzZ5Gk8vLmD9dVa13bT+TDMCHPHjhGS3lXa2hqalnz9ZGhXRVZu8+g1nYEI=
+X-Google-Smtp-Source: AGHT+IEkDHlI6FDHdvPRTljBcEkaHJTB9rf5XCOSVbTWSXzZyGeRGNo+MY7RH1RdqxSLi/1jzVWsWg==
+X-Received: by 2002:a17:906:6a22:b0:a5a:5bc8:9fcf with SMTP id
+ a640c23a62f3a-a5a5bc8a0c9mr960568966b.36.1715760109780; 
+ Wed, 15 May 2024 01:01:49 -0700 (PDT)
 Received: from emanuele-nb.corp.toradex.com (31-10-206-125.static.upc.ch.
  [31.10.206.125]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a5a17b01472sm823804966b.159.2024.05.15.01.01.46
+ a640c23a62f3a-a5a17b01472sm823804966b.159.2024.05.15.01.01.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 May 2024 01:01:46 -0700 (PDT)
+ Wed, 15 May 2024 01:01:49 -0700 (PDT)
 From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
 To: u-boot@lists.denx.de,
 	Tom Rini <trini@konsulko.com>
 Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
  Marcel Ziswiler <marcel.ziswiler@toradex.com>,
  Francesco Dolcini <francesco.dolcini@toradex.com>
-Subject: [PATCH v1 0/2] arm: dts: k3-am625-verdin: Enable LPDDR4 WDQS control
-Date: Wed, 15 May 2024 10:00:56 +0200
-Message-Id: <20240515080058.1530985-1-ghidoliemanuele@gmail.com>
+Subject: [PATCH v1 1/2] arm: dts: k3-am625-verdin: Update autogenerated LPDDR4
+ configuration
+Date: Wed, 15 May 2024 10:00:57 +0200
+Message-Id: <20240515080058.1530985-2-ghidoliemanuele@gmail.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240515080058.1530985-1-ghidoliemanuele@gmail.com>
+References: <20240515080058.1530985-1-ghidoliemanuele@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -93,18 +97,42 @@ X-Virus-Status: Clean
 
 From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
-Manually, since SysConfig tool do not have the relevant option,
-set PHY_LP4_WDQS_OE_EXTEND to 1.
-Since WDQS control mode is required on our modules LPDDR4,
-this enables WDQS control mode 1.
+Update the autogenerated LPDDR4 configuration using the latest available
+SysConfig tool.
+This changes are cosmetic and are made to track the last used tool version.
 
-Emanuele Ghidoli (2):
-  arm: dts: k3-am625-verdin: Update autogenerated LPDDR4 configuration
-  arm: dts: k3-am625-verdin: Enable LPDDR4 WDQS control
+Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+---
+ arch/arm/dts/k3-am625-verdin-lpddr4-1600MTs.dtsi | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
- arch/arm/dts/k3-am625-verdin-lpddr4-1600MTs.dtsi | 10 ++++++----
- 1 file changed, 6 insertions(+), 4 deletions(-)
-
+diff --git a/arch/arm/dts/k3-am625-verdin-lpddr4-1600MTs.dtsi b/arch/arm/dts/k3-am625-verdin-lpddr4-1600MTs.dtsi
+index 841541bb2433..ca883ae82c7d 100644
+--- a/arch/arm/dts/k3-am625-verdin-lpddr4-1600MTs.dtsi
++++ b/arch/arm/dts/k3-am625-verdin-lpddr4-1600MTs.dtsi
+@@ -1,8 +1,8 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ /*
+  * This file was generated with the
+- * AM62x SysConfig DDR Subsystem Register Configuration Tool v0.09.10
+- * Mon Dec 11 2023 17:07:35 GMT+0100 (Central European Standard Time)
++ * AM62x SysConfig DDR Subsystem Register Configuration Tool v0.10.01
++ * Tue May 14 2024 12:55:28 GMT+0200 (Central European Summer Time)
+  * DDR Type: LPDDR4
+  * F0 = 50MHz    F1 = NA     F2 = 800MHz
+  * Density (per channel): 16Gb
+@@ -10,9 +10,11 @@
+  * Number of Ranks: 1
+ */
+ 
++
+ #define DDRSS_PLL_FHS_CNT 3
+ #define DDRSS_PLL_FREQUENCY_1 400000000
+ #define DDRSS_PLL_FREQUENCY_2 400000000
++#define DDRSS_SDRAM_IDX 15
+ 
+ 
+ #define DDRSS_CTL_0_DATA 0x00000B00
 -- 
 2.34.1
 
