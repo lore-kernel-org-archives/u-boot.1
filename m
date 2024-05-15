@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDD72C25B75
-	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 12:32:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6956AC25B79
+	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 12:33:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 625EA88253;
-	Wed, 15 May 2024 14:32:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C478F88266;
+	Wed, 15 May 2024 14:33:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="M1De29GL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SJPBY8VL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F21E988261; Wed, 15 May 2024 14:32:53 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id 13D0F8826D; Wed, 15 May 2024 14:33:15 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0559588250
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 14:32:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2458088250
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 14:33:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-34d7b0dac54so3923511f8f.0
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 05:32:52 -0700 (PDT)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-34db6a29a1eso5372414f8f.1
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 05:33:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1715776371; x=1716381171; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1715776392; x=1716381192; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8tYY9vXgd/6FndAyjqhdV08iRoiUAwStXpih6zevSzo=;
- b=M1De29GLHlZUxBtpcHNIG1IIkpD1YJIxVb4chii4jVhFEWRnODFYNXdUaZuV1N11yI
- a64/zlzqIavnr4eVlaE7I/i06Up9wYxCBR/ixFDRiM15Wlfup6YUsPI+dAw3qzHsTu/W
- k6rAkL12HDuaNYdSA3jGH7sHQrM3gNzihw1/n0oevuxSYFA9ZwkfBDY0cfepA511ALY5
- FOxMndqVtxKw5S55BC99cpd/1vn32py/8e5/l7VeLLcTtntHUGRteAsFnONOfRoyTYBi
- TUezLrKBB1IAmemCP1NH6Q+xfch29xcoEatNrWEpy0LwYSvpLspKA+8KoglobxkiREgL
- HhSQ==
+ bh=5XjdVTV/76FcCAKo/nqu5PCdfs4U07Vo+hgb69Fpqfw=;
+ b=SJPBY8VLDKev+GRJKMO8zl32ebRMMr0eoX3Y0S6QTqAj75jY8lwUbORab/QEMrUpsc
+ QeXyuMW2M2K/MkhHfAIWhI+ZuDmTnJ23542wP7HLdHxlCFJ3B+TOx4Ks1jiRQYc+Xjo4
+ lHWXRGdlgUrrD4HKufCdwVU3EBMFE3nMWUo2nwp78s5xYBANUN79E2r77l5DRyC2P5fR
+ g8jOW4jfkgv06za2Cr4NRRTqO/GCytx84uNtnftUHGgUadyx/XoAaMhdtM9agccqb86S
+ fOhnnQ15T47jwdQC3t58yPOTp+q14M3jJh9n5ktm04cH4aDsRk9fRP7pRnILvtvRSQnK
+ KpzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715776371; x=1716381171;
+ d=1e100.net; s=20230601; t=1715776392; x=1716381192;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8tYY9vXgd/6FndAyjqhdV08iRoiUAwStXpih6zevSzo=;
- b=AmOncpnK156YBqzkxuuAPTkvjOzvn/BUuzjWBwIrscLhdIMbtAKsDLAz89zfnxdcrB
- mujpwEKlhawOVuZE9gPekEIRUNvRCHMWNa3MZFaJ7gLaKEtqa5AP+DWEJrnSBIcBTU+H
- QaWqLQ6+BeXPhCmXPXnUMHF+DR0ugc9Xe68DTi93vfndZhU6cQG8lroTEbM/E/cGuBme
- hFQsuTk+co7a/XPkf5MC6qyWPMMLxgk0ZZtbbd1jFCZ7Rt5Z+8Nf0b/VjaDBDQpPm6wj
- sHMP9UlsnPN0TAtYuP+XDNnJccPI1RWy8lBKSsgS24M1oQbML4o+p5tAagtGus4p5dCP
- vBSQ==
-X-Gm-Message-State: AOJu0YzDJPALas+GEg+iOlvKU9RVMUG5GqywLMlyBT3RHt9OcvWVVC67
- bfhxb75O7n8jrMw5UkNaduM9BwTB7Qqf+i0F9LwdWukkhIcFb0IqUGYw5P4lQZPYFY0TBQIV5AC
- K
-X-Google-Smtp-Source: AGHT+IFzsyQJyodOZO75btRuCXEkDoqOQHLgtFgXHzfU5sFXVxnn2tDPXdE4vQrbrxNyn4QRxsm20w==
-X-Received: by 2002:a5d:6952:0:b0:34d:8d11:f8c0 with SMTP id
- ffacd0b85a97d-350498a4abfmr12929332f8f.18.1715776371325; 
- Wed, 15 May 2024 05:32:51 -0700 (PDT)
+ bh=5XjdVTV/76FcCAKo/nqu5PCdfs4U07Vo+hgb69Fpqfw=;
+ b=FbEbYqBZDV/BD6gUcotJGjjV4v30x0OUo7B126jgK/kbHpdJmujPVMDGOo3KgddWwo
+ Dx9lH0kU8/cpXQFyueQqZXo+1KRne3A84Zj9Bi1zFhlLl/WHtECmXxE3/91TMIsQSF4x
+ inB4QFZOLVsZv9oZ5maKFy7g1jXgWJo2420jdrFyzbcmn8bRc89+i9IrP21DRKyE+QPi
+ U6FvjJG2+OBDmAjbEhQ0o6OUk3zIz6mJ0DsIXj2Cgu10MwDtjCrDBPcQQDabtQEVmOII
+ WdZP6zaVQlsI+GtylFUFpQQWF+uRlzYiR22q7qZ83yg1qohPpeVqR49xPh1RcK5eRS7e
+ o9/w==
+X-Gm-Message-State: AOJu0YxgUesaNMjNf7DjaiWQEzkbpu29pLj9AZ9YG6PJArkNMSbg0rE8
+ fbaC06bU1qzTU5gnhcKVIatFgHo3CkMeVIrszph2DesFWAP7M4pzP/gb+Vcu5Mr3T2nz32Ex0Je
+ B
+X-Google-Smtp-Source: AGHT+IGyDmt2bSl5aUDXhLslsgBSXWV39+DfY6j0AwvvhcdPB7Tjpo0npw8FRbPa/mUdGRBL5c+ASQ==
+X-Received: by 2002:a5d:4745:0:b0:34d:98eb:4cb with SMTP id
+ ffacd0b85a97d-3504a73da3dmr10815843f8f.33.1715776392055; 
+ Wed, 15 May 2024 05:33:12 -0700 (PDT)
 Received: from ubuntu.localdomain ([149.14.240.163])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3502baad042sm16406896f8f.80.2024.05.15.05.32.49
+ ffacd0b85a97d-3502baad042sm16406896f8f.80.2024.05.15.05.33.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 May 2024 05:32:50 -0700 (PDT)
+ Wed, 15 May 2024 05:33:11 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Alexey Brodkin <alexey.brodkin@synopsys.com>,
- Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
- Tony Dinh <mibodhi@gmail.com>,
- Walter Schweizer <swwa@users.sourceforge.net>, Phil Sutter <phil@nwl.cc>,
- Mario Six <mario.six@gdsys.cc>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, Nishanth Menon <nm@ti.com>,
- Jonathan Humphreys <j-humphreys@ti.com>, Roger Quadros <rogerq@kernel.org>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, Phil Sutter <phil@nwl.cc>,
+ Walter Schweizer <swwa@users.sourceforge.net>,
+ Tony Dinh <mibodhi@gmail.com>, Mario Six <mario.six@gdsys.cc>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Roger Quadros <rogerq@kernel.org>, Nishanth Menon <nm@ti.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
  Eddie James <eajames@linux.ibm.com>,
  Jassi Brar <jaswinder.singh@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
  Masami Hiramatsu <masami.hiramatsu@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Etienne Carriere <etienne.carriere@foss.st.com>,
  uboot-snps-arc@synopsys.com
-Subject: [PATCH v2 1/4] image: remove redundant hash includes
-Date: Wed, 15 May 2024 05:31:56 -0700
-Message-Id: <20240515123213.1701691-2-raymond.mao@linaro.org>
+Subject: [PATCH v2 2/4] efi_loader: remove redundant hash includes
+Date: Wed, 15 May 2024 05:31:57 -0700
+Message-Id: <20240515123213.1701691-3-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240515123213.1701691-1-raymond.mao@linaro.org>
 References: <20240515123213.1701691-1-raymond.mao@linaro.org>
@@ -111,49 +111,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove the redundant includes of u-boot/md5.h, u-boot/sha1.h,
-u-boot/sha256.h and u-boot/sha512.h
+Remove the redundant includes of u-boot/sha1.h, u-boot/sha256.h
+and u-boot/sha512.h
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 Reviewed-by: Tom Rini <trini@konsulko.com>
-Reviewed-by: Igor Opaniuk <igor.opaniuk@gmail.com>
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 Changes in v2
 - None.
 
- boot/image-fit.c | 4 ----
- boot/image.c     | 2 --
- 2 files changed, 6 deletions(-)
+ lib/efi_loader/efi_signature.c | 1 -
+ lib/efi_loader/efi_tcg2.c      | 3 ---
+ 2 files changed, 4 deletions(-)
 
-diff --git a/boot/image-fit.c b/boot/image-fit.c
-index 89e377563ce..1efc39f4408 100644
---- a/boot/image-fit.c
-+++ b/boot/image-fit.c
-@@ -38,10 +38,6 @@ DECLARE_GLOBAL_DATA_PTR;
- #include <image.h>
- #include <bootstage.h>
- #include <u-boot/crc.h>
--#include <u-boot/md5.h>
+diff --git a/lib/efi_loader/efi_signature.c b/lib/efi_loader/efi_signature.c
+index f338e732759..184eac8cddb 100644
+--- a/lib/efi_loader/efi_signature.c
++++ b/lib/efi_loader/efi_signature.c
+@@ -17,7 +17,6 @@
+ #include <linux/oid_registry.h>
+ #include <u-boot/hash-checksum.h>
+ #include <u-boot/rsa.h>
+-#include <u-boot/sha256.h>
+ 
+ const efi_guid_t efi_guid_sha256 = EFI_CERT_SHA256_GUID;
+ const efi_guid_t efi_guid_cert_rsa2048 = EFI_CERT_RSA2048_GUID;
+diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
+index b07e0099c27..ac056dcfc55 100644
+--- a/lib/efi_loader/efi_tcg2.c
++++ b/lib/efi_loader/efi_tcg2.c
+@@ -19,9 +19,6 @@
+ #include <tpm-v2.h>
+ #include <tpm_api.h>
+ #include <u-boot/hash-checksum.h>
 -#include <u-boot/sha1.h>
 -#include <u-boot/sha256.h>
 -#include <u-boot/sha512.h>
- 
- /*****************************************************************************/
- /* New uImage format routines */
-diff --git a/boot/image.c b/boot/image.c
-index 073931cd7a3..e57d6eae52d 100644
---- a/boot/image.c
-+++ b/boot/image.c
-@@ -26,8 +26,6 @@
- #endif
- 
- #include <asm/global_data.h>
--#include <u-boot/md5.h>
--#include <u-boot/sha1.h>
- #include <linux/errno.h>
- #include <asm/io.h>
- 
+ #include <linux/unaligned/be_byteshift.h>
+ #include <linux/unaligned/le_byteshift.h>
+ #include <linux/unaligned/generic.h>
 -- 
 2.25.1
 
