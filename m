@@ -4,97 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43A6BC25B75
-	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 12:33:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41AB0C25B75
+	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 12:40:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C08DD882DC;
-	Wed, 15 May 2024 14:33:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B73E1880A5;
+	Wed, 15 May 2024 14:40:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=skidata.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bRaQD+J3";
+	dkim=pass (2048-bit key; unprotected) header.d=skidata.com header.i=@skidata.com header.b="xMdvEzP8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D01A882DF; Wed, 15 May 2024 14:33:51 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C3B6C880D2; Wed, 15 May 2024 14:40:07 +0200 (CEST)
+Received: from ZRAP278CU002.outbound.protection.outlook.com
+ (mail-switzerlandnorthazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c213::1])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D296882D6
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 14:33:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C9F4887F19
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 14:40:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=skidata.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-34da35cd01cso6290164f8f.2
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 05:33:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1715776428; x=1716381228; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pZB2WN9KCVMfZyYoPhNQjP2Md9H0Pbuq/IK8CBvwCCE=;
- b=bRaQD+J3aTvWtKIE0m7GfBEd1by5NWI2DrCyLn5Xk0cRrEcv62jFqL6+P3cTi8r3gd
- W7apueIwFv+6SFcJLxLZCflRWRFzoKb0Cc6+1m4SnupzHjiCNOreuKyC5JliQ+ANV461
- UEVKwlSIjXourY3AIOIFMMmttpeXWlvpqD3UjzQrRXVhkYGlOp45wq7WdxRKNHKZC07F
- 4KJiU710ANTqIAWMAug+AP5irOYHgWQhMAbzgYmN5ZvDQM3knTfZCFjTuUDQKjyImKTZ
- GjASEM2bcXjg/7pwNYDGsi8Ibd3L2UjWl3FR35jVEvzQMVwoMc8Fx81TQXrETkyLSkBM
- JyhA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715776428; x=1716381228;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=pZB2WN9KCVMfZyYoPhNQjP2Md9H0Pbuq/IK8CBvwCCE=;
- b=EHS9ssIKUjrwje67p5ZurC4wI3cQ41QbW2CAwbdtJMqi4bS3RmHztM3T5AKyL1l2tQ
- Zjuk8xpKgAa15NEMH2Yr88QnUnRBh3IzMOAuFCU5pdO/8udq9esJ3TA4kf8UBe1vSIqU
- gehsU33CUqR+ApfEGhpPVc4lBCkilr44PaN6+JKO2oILc852AnhEPO4F9fQov5GRwoXZ
- RGcc3JBDtGxroDcHhgk8K7galfl5rcJAuUtQXqY7N5I0zz883QtNQQUPybNgj6De88kK
- LuvRZ0+vb+hjJU/AjM0aGGKYM0HvNMwJxcy6L7ibKHrGPGUhX3rhOoQB+IYQlhNf0sSe
- LRzg==
-X-Gm-Message-State: AOJu0YzGI7mQbRrFot/yG70drJZ0UbCdqlZuGmn+2D7+6uES4cXxdY2t
- J023SsXWmEkpBINZVnlqhPhaUy+yRXqgUyyw8DLXaIY29jKFbkS0or/L0fd1TrYZxEGwK4nx4Os
- K
-X-Google-Smtp-Source: AGHT+IE01AJZ15v7kp/NN+htPOtmHcuF6XUP1LeqDOobFYwZx8fdOGy/d19t/cG5rZDb5cr/b13JRA==
-X-Received: by 2002:a5d:68cd:0:b0:34d:83cf:dc56 with SMTP id
- ffacd0b85a97d-3504a73752cmr14036187f8f.24.1715776428556; 
- Wed, 15 May 2024 05:33:48 -0700 (PDT)
-Received: from ubuntu.localdomain ([149.14.240.163])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3502baad042sm16406896f8f.80.2024.05.15.05.33.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 May 2024 05:33:48 -0700 (PDT)
-From: Raymond Mao <raymond.mao@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- Alexey Brodkin <alexey.brodkin@synopsys.com>,
- Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
- Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>,
- Phil Sutter <phil@nwl.cc>, Walter Schweizer <swwa@users.sourceforge.net>,
- Mario Six <mario.six@gdsys.cc>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Nishanth Menon <nm@ti.com>,
- Roger Quadros <rogerq@kernel.org>, Jonathan Humphreys <j-humphreys@ti.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Eddie James <eajames@linux.ibm.com>,
- Jassi Brar <jaswinder.singh@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
- Masami Hiramatsu <masami.hiramatsu@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Etienne Carriere <etienne.carriere@foss.st.com>,
- uboot-snps-arc@synopsys.com
-Subject: [PATCH v2 4/4] include: Move snprintf to stdio.h
-Date: Wed, 15 May 2024 05:31:59 -0700
-Message-Id: <20240515123213.1701691-5-raymond.mao@linaro.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240515123213.1701691-1-raymond.mao@linaro.org>
-References: <20240515123213.1701691-1-raymond.mao@linaro.org>
+ spf=pass smtp.mailfrom=Johannes.Kirchmair@skidata.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=YQoIbzUBDvWeTPT1aVy3EurQoNcPHZgwWgaA5bkR+eSv9OM0pjFpOcpKRHRnPt4r99GZGopc+nZHSZ72GYxXlGixDGf2ry4y4DyhGOfqhkDuXPcb2KFUucajk91C5P4cMPiLetrLL3Zg+BDPfkgoc/MSpXp8WE/YGoKmyCMQoPMo2n5QfB6c4yvWzzjA5S1t8MyTgwBWtmzzqLJHEK/dtpMxOx4ANv5gjOFPfWGZfjNJuLHIL5ABc31kpYCPrgbC0xLNQmbEnsIbZuU0OjsjRIpYtzNrR7SzK4rEVfUPJsT3iMNJkABQyKQR1Gkec6GSck8QfiOn+AfQuqP4IFc8JA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=5xX8K7+crH2IONfb+fFgR6j062XPLRWdVRUnXw+0JvU=;
+ b=RZSARvdwrlEGTxHifkz/Wwnfjaq9GIxAH9v2arZ2SJQddv3pfPCE5QswmA5ubdhVH6uHHqJ3HYLtmjspSXlLlcWN0oJ6m+vQ2nkC4KcD9cI+GrH59Wq9fkNV2wzYRy7q0+odJo7ZbZ+SIu8+SQZQMKSemNqmeA8dUIWbv7sa6yw5v997uQZLN0TlfISnfbdGCV/90v3yXFCtadAl966woQ2kaU2Pfq8HP4Ko2gWoCqS0RxC2vXmuTtztqBAKV1XZ68SxKuw8OthsjWmQ+08z2fJhK6PtP1qxpzP23LFzykL9TJnrs5tbS8yHME4EhK33mnNEWdNleksZUbcm+ufcmQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=skidata.com; dmarc=pass action=none header.from=skidata.com;
+ dkim=pass header.d=skidata.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=skidata.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=5xX8K7+crH2IONfb+fFgR6j062XPLRWdVRUnXw+0JvU=;
+ b=xMdvEzP8APgfssJNO7KNFwQ7xSEpHSVl9j1Qbdw9HufVmZMtl+Iv8gNphldYEu6e+iN0EdSsmDYu+6/vxDwQJwaUq5q/5Bn9o89dvRFDfSkv4kSHuapZzWbbfaPlqKK6aW/owKT4lmTgHzyxjAV24klpevhCBO4k19+Od/noqR1gFGuwq5+zxrAWLfENqNCyiItLA0fAFKNkugrxjlf69WRLbht2kcHO2eswVOhhi4lIVxijXxDoRyFPPgPethg+w9tMXNoqlpxfe1maqEO3fQslKt1n+8HUyaA3wEeowcWOxx0mq2K8gdIuqSzDPMrXwtWxYcxY+DgLN0mEqYNnLg==
+Received: from GVAP278MB0456.CHEP278.PROD.OUTLOOK.COM (2603:10a6:710:39::5) by
+ GV0P278MB0116.CHEP278.PROD.OUTLOOK.COM (2603:10a6:710:1e::15) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7587.27; Wed, 15 May 2024 12:40:04 +0000
+Received: from GVAP278MB0456.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::f5f4:4769:5e87:a09c]) by GVAP278MB0456.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::f5f4:4769:5e87:a09c%6]) with mapi id 15.20.7587.026; Wed, 15 May 2024
+ 12:40:04 +0000
+From: Johannes Kirchmair - SKIDATA <Johannes.Kirchmair@skidata.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: "joe.hershberger@ni.com" <joe.hershberger@ni.com>, "rfried.dev@gmail.com"
+ <rfried.dev@gmail.com>
+Subject: [NFS] fetching kernel via nfs
+Thread-Topic: [NFS] fetching kernel via nfs
+Thread-Index: AdqmxNtVZ7j6TX9BRqmqRnxh009Epg==
+Date: Wed, 15 May 2024 12:40:04 +0000
+Message-ID: <GVAP278MB045609BECD802008B0FEBD2C8CEC2@GVAP278MB0456.CHEP278.PROD.OUTLOOK.COM>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-bromium-msgid: 2dfc9372-0b83-4f7c-90b3-6e9b729ac039
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=skidata.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: GVAP278MB0456:EE_|GV0P278MB0116:EE_
+x-ms-office365-filtering-correlation-id: 69d778f7-ab2f-44f3-8e13-08dc74dc24f4
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230031|1800799015|376005|366007|38070700009;
+x-microsoft-antispam-message-info: =?us-ascii?Q?Udf8Tl2sOz+o8hHiDgNXrAUEXKhrX1eBmwsxySD1aj0DQR21Q5yWb72SKFSZ?=
+ =?us-ascii?Q?t6YGsgfJwYjl3BiARvW+JzjVlMYoQzGKiLf7GqB+UzKa+f6QpbjBB8I1wMyr?=
+ =?us-ascii?Q?IYESI1swQkiRhzG2Lgjkh7S+mAe67K9vKVmkjpfkhr+4sdFYRGN6h12wHHe/?=
+ =?us-ascii?Q?yy5ypN8VSV6kr4rk5pdG5xrkvXw3imVQjbrXJJUknRtMDKXmCMIXihsnvmNJ?=
+ =?us-ascii?Q?xVDhFosFPrIYd8qON+0vjZOkko2yAwYjLrXRjtj6arcwlWRSlBDiKeBDqztj?=
+ =?us-ascii?Q?A4v/h5L6ir+gCwJDjsI7lpHRfEr8i0eVBTio9hMgN0ARIv2dirwxP5xohonj?=
+ =?us-ascii?Q?Qp5YBizSyybPMMhkWSkjIU4e+CnEVaxdVkkgb9y2Szm53qIrISi0k1pLjLnF?=
+ =?us-ascii?Q?ArrIFKr+zxcX0AoKvi9bm1hh+QdZ73TBuo1Xjrt9EfMMkAKrKKwHBua/210+?=
+ =?us-ascii?Q?oh+7nZyRdzVd1rK6sD06wCJ0ZRQPD84GEURvpl0tTO36Ob8+xqvH0AkY3S4Y?=
+ =?us-ascii?Q?M7+WdRMb2ItmGuSrxewEoVmesCwFotMeBy5WJdMLwXQcYwJv8Aut4Td7Tj3o?=
+ =?us-ascii?Q?U4fdh5M32XyaKXYv6BBNiKrgnORCyXOqSbQneXtwusQHK4mnTIsDdKHHE6Bl?=
+ =?us-ascii?Q?x3CRhnJXZEtDbGhUdz6jgxVZLcaPOXcJDhwhNJvb8gNwm5F8+QgkXZOf8QB7?=
+ =?us-ascii?Q?3qCLw2DBXJaKATgZvDRJYeZNFBWYzn6kQY3hguTGoKP/FQgFut9V31+U4zfl?=
+ =?us-ascii?Q?SXEPNlJeV3Ffv1Va77k621froq97dPbdj2SBHa5M+vLLh+R5S51LMYOPzMQb?=
+ =?us-ascii?Q?jikUdwyrNjAckEO1bbJ3a/oqCo4TW0RxHLsNgBd1zSYClk7nRHEZik15HpZI?=
+ =?us-ascii?Q?9/k/KxDFu2VxpK9vW+IzN0feJEiENj6+Y/OyyMO1retbmyKCWoUr5CQn31+9?=
+ =?us-ascii?Q?j0mkYxrpWmVMxQxbIRbNnNQpq9MX4KYVprW254XMtxqBbLsKn+VAonHHZ7q3?=
+ =?us-ascii?Q?B92xPs/AWuY3dVcdO7pTIm8NEH9CfwY4Hdza63TcVTcvHxmWPy4IAfXMEFAD?=
+ =?us-ascii?Q?mpvl7YQqlDefNpGtASwqkZcT/9H6nZwf1YWbPkNAHFQrHMm7BMA9fZDEAzHC?=
+ =?us-ascii?Q?wpysueydNHXBj5ZEF0n3ztpQetXZZCsY6MlQeMlpMm8krS6Zvk8ntf4HVBbi?=
+ =?us-ascii?Q?uA+f7WB0rxSLBI9SOvxThP0gNIm/V5cWibxGj5CQo4hmKQ9oBTUcT82gh9bj?=
+ =?us-ascii?Q?3YjvbQcP69VuV6dqw7n4fKkiRxRCCHweeuaum532oO5c1bHqtRfcysiXoFgZ?=
+ =?us-ascii?Q?Y/OBp1Kgb5dW12qiYl8nk6ByczCPbaN2AMfNze0YZxFQxA=3D=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GVAP278MB0456.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(1800799015)(376005)(366007)(38070700009); DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?Nx6kwLF6cyvg0FdG8fbVjSZusm+OBT8tUvYmDX96ku5Xy/2Pqi1bxVEY7jdy?=
+ =?us-ascii?Q?ud5UZ10v0Ocqo8wRLZWbNIJ1SHO0ORrmFlAvIU14jFj3f+RGMdeZ0eTK9mVr?=
+ =?us-ascii?Q?5pKRNkQhKiAY3hgk6OluLhxxKnYJbArbDkPLjtpcWKOXYBLkSc13mVadyOzT?=
+ =?us-ascii?Q?QPsgqS3jg5qtfu6g7YZ4Cu94M6WOBNsM/IhVMnOCgxTEyYpt+xwOqgvVxXlA?=
+ =?us-ascii?Q?65mcSODhEpYNzEjBkmllgFDGtQ/Cn5kqaC1ulG9rRMCBOp5Oz1s39DS9zJyC?=
+ =?us-ascii?Q?B5+DH7VTUHydtlAJoYXPuQCEt4aELZ4bWiQgY/8V1VKxP6k9C6jJhKtFgS4z?=
+ =?us-ascii?Q?Qb7WnS1GZjRBqw+QMszZRrg3IxgGKmL8qK6kmMyVz1eqlpm9wTvaUNpKLtGL?=
+ =?us-ascii?Q?C9HU+j8ABpZ6HCQF9cj10TMFFHLR3f8s9OyC2SmVes0cPMSZQPmYXwv2Dlqh?=
+ =?us-ascii?Q?9zOnS2QqF9CkKRNpj61h3cBZKKnO4hh9qMZlrjxA0FvWZcPoeiyERRUUq2ta?=
+ =?us-ascii?Q?DF1wh7byfBCII+vA5aLtpklC90knbmiPuLDZKeHekiOuk10+7RBxZ7ba8zi+?=
+ =?us-ascii?Q?9tDRZM65iCh8fz7FSgq4HuNlay3uZXGpB4bBuviukKY1XFuw3kVh47T0novl?=
+ =?us-ascii?Q?XyAx4Y+ZsrM1GVJSdmdMU9QTwEEQDH1XcAdQsHmNpjOk3QtMTbWDZvnCjaW5?=
+ =?us-ascii?Q?nEqGEWvDoMcY/fMAYT0TojCJVKHhvB4E7NDLQzHsmh6K1GqpTaLq7scJlw+z?=
+ =?us-ascii?Q?Vj6gKjB7JwamdTNHWQeY9T4Iu3mf+UFg1HxzZz/dn5dah/OAXqh4GPIWOiWA?=
+ =?us-ascii?Q?xSM4LSoUmDyST2G7AkR2Bq5UGEcbP66eeXI97WN+ZrSQAyhwuLe+hJExu/mu?=
+ =?us-ascii?Q?yDoAsQAXq1RRHYkyL5J4KxmoAZs/IejI0UzEbSsGLvii0tscamX3fcedonyP?=
+ =?us-ascii?Q?tJBerBIsDmbYZXGFqcJVl2+ybCNWknzyrlMD406AgSQ50FSChv1NM+BSkuAj?=
+ =?us-ascii?Q?73XugRrZS9N1SDWiG72n72sXVz6TIL/DWeG/XGIedFmWo4LGHEqx1CO5S/0x?=
+ =?us-ascii?Q?MVUEUUAoSvXuoIVNyO7tXmFsplLj7S98X4IAqDDxfxkPMbIH+HDscSWKKTZe?=
+ =?us-ascii?Q?llyhnKzthW+YmGrN7D++czqiR37DI8yBcOK66GenE40WNIP9rcEamm+PUMop?=
+ =?us-ascii?Q?HHAd/UuQlS4S3Nlg3An8u1TTqwLwIi0nVWhqwSFFFWyeXHRNIFpZ+rWt4zIe?=
+ =?us-ascii?Q?01gn3nOUTjC1Lr4Jzd/fc2AcowtgIbddqLhuExyAjPrqRtP1XXQjZhWKkBFc?=
+ =?us-ascii?Q?JwsLSiAYrCA7INhuIRBSGLZtvMOzGi8CQoo6sB3DQEMXBrT1PDWxlujPOs1G?=
+ =?us-ascii?Q?tq2QjgRFzcsOIj4m4FxN8nULPWGXVuxhJYfpKW97riB1/f6Jz4xT8IdgpGv7?=
+ =?us-ascii?Q?iQVcFLj3dw+mXoti/PCt+osbkPWRXwEoJ/T5Dr5JHkqx15r4RCjflNIy5LKN?=
+ =?us-ascii?Q?kKlkKBb5QlrgL6GzM3REKslBrHGI/1QlIeDtS5gS48RaMj/nWMgI0RM8z0UC?=
+ =?us-ascii?Q?w9qZNqmotCFHRaILzeTqqa5nSBhAl6ylLvy42aVDBJjqATUM9YD56n3uG5gi?=
+ =?us-ascii?Q?6A=3D=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-OriginatorOrg: skidata.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: GVAP278MB0456.CHEP278.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 69d778f7-ab2f-44f3-8e13-08dc74dc24f4
+X-MS-Exchange-CrossTenant-originalarrivaltime: 15 May 2024 12:40:04.0786 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: e5733095-4425-4f08-b6ba-487b9a46a425
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: NdfLPQ2cWhsfbYM8uBupV3yTTYbbotJCpaWfQ9minv8o5/RcqH1DMdVtH9Xlg+e5tEuJf9UD59A8hnRGtO9MDEO4z7VabXCdmXbC6dPRiYg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV0P278MB0116
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,221 +157,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move snprintf to stdio.h since it is needed by exteranl libraries.
+Dear u-boot people,
 
-Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
----
-Changes in v2
-- New patch.
+I encountered some problems trying to fetch the Linux kernel via nfs (v3).
+One problem was that the nfs file lookup always returned NFS3ERR_BADHANDLE.
+This is due to the following line in nfs_lookup_req() function (net/nfs.c):
 
- arch/arc/lib/cpu.c             |  2 +-
- board/Synology/common/legacy.c |  1 +
- board/ti/common/fdt_ops.c      |  2 +-
- cmd/part.c                     |  2 +-
- common/button_cmd.c            |  2 +-
- drivers/cpu/mpc83xx_cpu.c      |  2 +-
- include/stdio.h                |  1 +
- include/vsprintf.h             | 17 -----------------
- lib/display_options.c          |  1 +
- lib/fwu_updates/fwu_mtd.c      |  2 +-
- lib/hexdump.c                  |  2 +-
- lib/vsprintf.c                 |  1 +
- test/dm/scmi.c                 |  2 +-
- test/print_ut.c                |  1 +
- 14 files changed, 13 insertions(+), 25 deletions(-)
+		len =3D (uint32_t *)p - (uint32_t *)&(data[0]);
+		rpc_req(PROG_NFS, NFS_LOOKUP, data, len);
+	} else {  /* NFS_V3 */
+		*p++ =3D htonl(NFS_FHSIZE);	/* Dir handle length */    <=3D=3D=3D=3D=3D  =
+this line
+		memcpy(p, dirfh, NFS_FHSIZE);
+		p +=3D (NFS_FHSIZE / 4);
+		*p++ =3D htonl(fnamelen);
 
-diff --git a/arch/arc/lib/cpu.c b/arch/arc/lib/cpu.c
-index 593950449f2..269b4dbdd15 100644
---- a/arch/arc/lib/cpu.c
-+++ b/arch/arc/lib/cpu.c
-@@ -7,7 +7,7 @@
- #include <clock_legacy.h>
- #include <init.h>
- #include <malloc.h>
--#include <vsprintf.h>
-+#include <stdio.h>
- #include <asm/arcregs.h>
- #include <asm/cache.h>
- #include <asm/global_data.h>
-diff --git a/board/Synology/common/legacy.c b/board/Synology/common/legacy.c
-index a0bace7b46c..2e3aa660eaa 100644
---- a/board/Synology/common/legacy.c
-+++ b/board/Synology/common/legacy.c
-@@ -6,6 +6,7 @@
-  */
- 
- #include <config.h>
-+#include <stdio.h>
- #include <vsprintf.h>
- #include <env.h>
- #include <net.h>
-diff --git a/board/ti/common/fdt_ops.c b/board/ti/common/fdt_ops.c
-index eb917be9e0d..8a3300993ed 100644
---- a/board/ti/common/fdt_ops.c
-+++ b/board/ti/common/fdt_ops.c
-@@ -6,7 +6,7 @@
-  */
- 
- #include <env.h>
--#include <vsprintf.h>
-+#include <stdio.h>
- #include "fdt_ops.h"
- 
- void ti_set_fdt_env(const char *board_name, struct ti_fdt_map *fdt_map)
-diff --git a/cmd/part.c b/cmd/part.c
-index c75f85acd52..b1c06064ad5 100644
---- a/cmd/part.c
-+++ b/cmd/part.c
-@@ -20,7 +20,7 @@
- #include <command.h>
- #include <env.h>
- #include <part.h>
--#include <vsprintf.h>
-+#include <stdio.h>
- 
- enum cmd_part_info {
- 	CMD_PART_INFO_START = 0,
-diff --git a/common/button_cmd.c b/common/button_cmd.c
-index 8642c26735c..72dac1f9ef6 100644
---- a/common/button_cmd.c
-+++ b/common/button_cmd.c
-@@ -8,7 +8,7 @@
- #include <command.h>
- #include <env.h>
- #include <log.h>
--#include <vsprintf.h>
-+#include <stdio.h>
- 
- /* Some sane limit "just in case" */
- #define MAX_BTN_CMDS 32
-diff --git a/drivers/cpu/mpc83xx_cpu.c b/drivers/cpu/mpc83xx_cpu.c
-index e451c11116a..5b2d0485258 100644
---- a/drivers/cpu/mpc83xx_cpu.c
-+++ b/drivers/cpu/mpc83xx_cpu.c
-@@ -10,7 +10,7 @@
- #include <cpu.h>
- #include <dm.h>
- #include <log.h>
--#include <vsprintf.h>
-+#include <stdio.h>
- #include <linux/bitops.h>
- 
- #include "mpc83xx_cpu.h"
-diff --git a/include/stdio.h b/include/stdio.h
-index 3241e2d493f..ecd0f996efb 100644
---- a/include/stdio.h
-+++ b/include/stdio.h
-@@ -45,6 +45,7 @@ static inline int vprintf(const char *fmt, va_list args)
- 	return 0;
- }
- #endif
-+int snprintf(char *buf, size_t size, const char *fmt, ...);
- 
- /*
-  * FILE based functions (can only be used AFTER relocation!)
-diff --git a/include/vsprintf.h b/include/vsprintf.h
-index ed8a060ee17..fe951471426 100644
---- a/include/vsprintf.h
-+++ b/include/vsprintf.h
-@@ -218,23 +218,6 @@ char *simple_itoa(ulong val);
-  */
- char *simple_xtoa(ulong num);
- 
--/**
-- * Format a string and place it in a buffer
-- *
-- * @buf: The buffer to place the result into
-- * @size: The size of the buffer, including the trailing null space
-- * @fmt: The format string to use
-- * @...: Arguments for the format string
-- * Return: the number of characters which would be
-- * generated for the given input, excluding the trailing null,
-- * as per ISO C99.  If the return is greater than or equal to
-- * @size, the resulting string is truncated.
-- *
-- * See the vsprintf() documentation for format string extensions over C99.
-- */
--int snprintf(char *buf, size_t size, const char *fmt, ...)
--		__attribute__ ((format (__printf__, 3, 4)));
--
- /**
-  * Format a string and place it in a buffer
-  *
-diff --git a/lib/display_options.c b/lib/display_options.c
-index d6b93553dcb..d5df53ab15f 100644
---- a/lib/display_options.c
-+++ b/lib/display_options.c
-@@ -12,6 +12,7 @@
- #include <linux/ctype.h>
- #include <linux/kernel.h>
- #include <asm/io.h>
-+#include <stdio.h>
- #include <vsprintf.h>
- 
- char *display_options_get_banner_priv(bool newlines, const char *build_tag,
-diff --git a/lib/fwu_updates/fwu_mtd.c b/lib/fwu_updates/fwu_mtd.c
-index 69cd3d7001f..4a52834b61a 100644
---- a/lib/fwu_updates/fwu_mtd.c
-+++ b/lib/fwu_updates/fwu_mtd.c
-@@ -11,7 +11,7 @@
- #include <malloc.h>
- #include <mtd.h>
- #include <uuid.h>
--#include <vsprintf.h>
-+#include <stdio.h>
- 
- #include <dm/ofnode.h>
- 
-diff --git a/lib/hexdump.c b/lib/hexdump.c
-index 33e3e6e5182..2bc508ff504 100644
---- a/lib/hexdump.c
-+++ b/lib/hexdump.c
-@@ -10,7 +10,7 @@
- 
- #include <hexdump.h>
- #include <mapmem.h>
--#include <vsprintf.h>
-+#include <stdio.h>
- #include <linux/ctype.h>
- #include <linux/compat.h>
- #include <linux/log2.h>
-diff --git a/lib/vsprintf.c b/lib/vsprintf.c
-index 27ea9c907a3..cfd1f1914ed 100644
---- a/lib/vsprintf.c
-+++ b/lib/vsprintf.c
-@@ -19,6 +19,7 @@
- #include <hexdump.h>
- #include <stdarg.h>
- #include <uuid.h>
-+#include <stdio.h>
- #include <vsprintf.h>
- #include <linux/ctype.h>
- #include <linux/err.h>
-diff --git a/test/dm/scmi.c b/test/dm/scmi.c
-index adf36ffaab1..a03824ab653 100644
---- a/test/dm/scmi.c
-+++ b/test/dm/scmi.c
-@@ -19,7 +19,7 @@
- #include <scmi_agent.h>
- #include <scmi_agent-uclass.h>
- #include <scmi_protocols.h>
--#include <vsprintf.h>
-+#include <stdio.h>
- #include <asm/scmi_test.h>
- #include <dm/device-internal.h>
- #include <dm/test.h>
-diff --git a/test/print_ut.c b/test/print_ut.c
-index bb844d2542b..a0d6a551203 100644
---- a/test/print_ut.c
-+++ b/test/print_ut.c
-@@ -10,6 +10,7 @@
- #include <log.h>
- #include <mapmem.h>
- #include <version_string.h>
-+#include <stdio.h>
- #include <vsprintf.h>
- #include <test/suites.h>
- #include <test/test.h>
--- 
-2.25.1
+In the NFS_V3 case we add the dir file handle  size to data and then the di=
+r file handle.
+IUC, this is not correct here because dirfh includes already the size of th=
+e handle in the first 4 bytes.
+Feel free to correct me if I am wrong.
 
+As a result, if I remove the line "*p++ =3D htonl(NFS_FHSIZE);", it works f=
+ine.
+
+Don't have an in deps understanding of nfs, so I am not sure if this is the=
+ root problem here.
+
+Best regards Johannes
