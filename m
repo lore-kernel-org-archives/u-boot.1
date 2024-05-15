@@ -4,73 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA9BBC25B75
-	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 19:05:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F134EC25B75
+	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 19:52:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 389DA88261;
-	Wed, 15 May 2024 21:05:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 24272882DF;
+	Wed, 15 May 2024 21:52:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JRn6Dol9";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 09DE688261; Wed, 15 May 2024 21:05:43 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1715802743;
+	bh=UOSet8MyKY5OOkN5Eu76NlNd4nhgHCtsVXS2BTC0xEA=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=jHqI+nSsJVhqBJNPmWa5fSXk3ZTA9sHzvfoER1sJCy3Yq0JJMbqZPUA9t+SAEr6kh
+	 aXZwIYewTjOSkF18YCTNIRcneN5MaeNfuJO44NMsamB66Fxdxm6Tz8+NUYuKaEwefY
+	 WZsIRjqBiVxl67SyubnN0t5N1/0kl8ltrG56t7eEv+bty7gI4cicrDPac8tlQjOEEN
+	 1+MzgtWy6pLUsqAOGlf7YI7EtPFz5F+WrUZ9/T5aXDFAw0N0OShWqGb4MQvMCaUfKg
+	 r/kSmYubJBpsqRmFVq78Bc+iDo1EY/XUNr6DRXJ7CUdllCFbU/lthCYw0mY8/PzOc3
+	 Jr7om2BgoIkxg==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0701E87F52
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 21:05:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5708d8beec6so2301120a12.0
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 12:05:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1715799940; x=1716404740; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=q3SBdz0ppReNPn6yIkuDzTFw8J6Z9AzgwQ1EsAX8G0I=;
- b=JRn6Dol9w/0j1j8J93tPC2tvM6aGNHxbReABAS9OiMibSuWfv7uWu8gKhCVM9mfbAk
- Zd/H/QbzhHzGzd7mWaXnJuqOn/838unY8mBBknDJYHXRzms2BNkowfVdvGCvjkNZnlYV
- 6i1c0/k5FakAdUvIxZ5dC0PQswrFqMYUrSuuwCLmABube0KrSHtOzdUirtw9oEQBVn3+
- kY/kRGxiu71lZ5KzjjM0P88bcnXBcJM+fFR+2kEtdDWSNIXScP/2hGFZLfnguEaVrTjY
- mTgK2ugzo6yXDbW7JP/cE36LyqjQun4ZgK5yjyH4UgsTMSdJCPz9+3XPBmAszHQUVTKt
- nDFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715799940; x=1716404740;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=q3SBdz0ppReNPn6yIkuDzTFw8J6Z9AzgwQ1EsAX8G0I=;
- b=vH0p6/QIp9vcnRZH5QlNJY2KgrxDs/xV93fMGvNLg1GHRoh1jEWslq01deVOTaLO+T
- Ojzk1R6xxg5Vdv62dwdZT7K47fl8+sgM9VeE2rGYPtRRNrytNPkrsRQwt0vhCtzmu5Uw
- OUPvWNEp7getmyXC8sL8qxvEqWKvudImQa9q4eVVmQVxfUUVWJWGbzcvupijDqFqf9E2
- d3mqdKPMjeeFcu+9BBsEfDL1Yu+FgWcHKpk1HUaJNfkyuTnGPw71D6K4JEdZridTpSZ5
- I50m18JgjOulcC0P/FhPPHQ8JqunbbVNpXuvkgUbvGJE5fpkV1vcT81yDO7+166V/JWr
- Pa6A==
-X-Gm-Message-State: AOJu0YwIj2YShwIiC2lRQYtjtff061KglwRsDphGV+p5yD0Wfx5ug4C0
- PQUa+7c+WaD0B36+lMa6cAu8Wi9bRH7Vn/xTGKiD56q0AtqK9Sx33oadKxOCsTW20zPE3h2cYQ5
- 0qzMfukDl5yIy3QIZ7kR/A5L+adU=
-X-Google-Smtp-Source: AGHT+IHAd2t37DOSkEFh9dEuaicMxHgLZsbc1sR2A7r5vk04qRzclLD5GcYkqf7XtI5SadELxiJYUmL+gzqaC4CSK3s=
-X-Received: by 2002:a50:c010:0:b0:572:a6dc:45aa with SMTP id
- 4fb4d7f45d1cf-5734d5c1796mr16195164a12.4.1715799940311; Wed, 15 May 2024
- 12:05:40 -0700 (PDT)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id E7FFB880F1;
+ Wed, 15 May 2024 21:52:21 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1715802742;
+ bh=UOSet8MyKY5OOkN5Eu76NlNd4nhgHCtsVXS2BTC0xEA=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=GCEl7GJD+uXRmWVhLplplx3/4xj9ow61/g+cjjfD5Yh+bLql/+4zBv7h1JL9k9lnO
+ u0LwHLBO10HHcjTRxkaUroXO7vgpeW7WmmLp9RvbTCn46suvngv8+MDYqYNiEMVv3H
+ yhJzArBqBDYFx+xazNP+CnD87hPwMHp+uTTe2XNxXpk+v/JnYnvsgPyrGl0L0rPzed
+ Z2piZEVvyy2EaoAhMktccq4axO3UZ6oLUstnUbfGyKz0wCmAhg3znO0d/Y0r6dPsmY
+ /+aipJXdN2lcOipzQ+5hsDDrIy9Zn9sqK7faw3sacLavJ5Fj4SHM3btIAjeZ5Nb4pQ
+ SWUWPvnSVtqag==
+Message-ID: <91a62c19-d565-4cd8-a20d-75d682acf95f@denx.de>
+Date: Wed, 15 May 2024 20:35:38 +0200
 MIME-Version: 1.0
-References: <20240514202041.386027-1-fiona.klute@gmx.de>
-In-Reply-To: <20240514202041.386027-1-fiona.klute@gmx.de>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Wed, 15 May 2024 12:05:28 -0700
-Message-ID: <CAJaLiFxwTCCiXjrRP4eHZ+Enjw+X5H-Yzd6wFJemQnLR6Ws0Rw@mail.gmail.com>
-Subject: Re: [PATCH 1/2] doc: Detailed example for netconsole setup
-To: Fiona Klute <fiona.klute@gmx.de>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] fdt: add kaslr-seed if DM_RNG is enabled
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Devarsh Thakkar <devarsht@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>
+References: <20240515002248.2920155-1-tharvey@gateworks.com>
+ <039c0adc-3014-4ae7-99b3-0df9e5366b79@denx.de>
+ <CAJ+vNU0nSV-xKkrrXtod9zYfsSe2vUQsCVEgq9PntTxCnqV0dA@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CAJ+vNU0nSV-xKkrrXtod9zYfsSe2vUQsCVEgq9PntTxCnqV0dA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,76 +75,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fiona,
+On 5/15/24 6:29 PM, Tim Harvey wrote:
+> On Tue, May 14, 2024 at 5:50 PM Marek Vasut <marex@denx.de> wrote:
+>>
+>> On 5/15/24 2:22 AM, Tim Harvey wrote:
+>>> If RANDOMIZE_BASE is enabled in the Linux kernel instructing it to
+>>> randomize the virtual address at which the kernel image is loaded, it
+>>> expects entropy to be provided by the bootloader by populating
+>>> /chosen/kaslr-seed with a 64-bit value from source of entropy at boot.
+>>
+>> Thanks for working on this one, this is really nice.
+>>
+>>> If we have DM_RNG enabled poulate this value automatically when
+>>> fdt_chosen is called.
+> 
+> Hi Marek,
+> 
+> Just noticed a typo in the commit log - I'll s/poulate/populate/ in v2
+> 
+>>>
+>>> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+>>> ---
+>>>    boot/fdt_support.c | 23 +++++++++++++++++++++++
+>>>    1 file changed, 23 insertions(+)
+>>>
+>>> diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+>>> index 874ca4d6f5af..cd3069baf450 100644
+>>> --- a/boot/fdt_support.c
+>>> +++ b/boot/fdt_support.c
+>>> @@ -7,10 +7,12 @@
+>>>     */
+>>>
+>>>    #include <abuf.h>
+>>> +#include <dm.h>
+>>>    #include <env.h>
+>>>    #include <log.h>
+>>>    #include <mapmem.h>
+>>>    #include <net.h>
+>>> +#include <rng.h>
+>>>    #include <stdio_dev.h>
+>>>    #include <dm/ofnode.h>
+>>>    #include <linux/ctype.h>
+>>> @@ -300,6 +302,27 @@ int fdt_chosen(void *fdt)
+>>>        if (nodeoffset < 0)
+>>>                return nodeoffset;
+>>>
+>>> +     if (IS_ENABLED(CONFIG_DM_RNG)) {
+>>> +             struct udevice *dev;
+>>> +             size_t len = 0x8;
+>>> +             u64 *data;
+>>> +
+>>> +             data = malloc(len);
+>>
+>> Can you allocate this 8 byte array on stack , i.e. u64 data[2]; ?
+>>
+> 
+> Sure... that makes sense - u64 data (just 1 64bit value)
 
-On Tue, May 14, 2024 at 5:28=E2=80=AFPM Fiona Klute <fiona.klute@gmx.de> wr=
-ote:
->
-> This adds details that I would have liked to have readily available,
-> in particular how to activate the network interface before enabling
-> netconsole, and how to integrate netconsole so you can use the U-Boot
-> prompt.
->
-> Signed-off-by: Fiona Klute <fiona.klute@gmx.de>
-> ---
->  doc/usage/netconsole.rst | 33 ++++++++++++++++++++++++++++++++-
->  1 file changed, 32 insertions(+), 1 deletion(-)
->
-> diff --git a/doc/usage/netconsole.rst b/doc/usage/netconsole.rst
-> index 2aa3b9ccc5..0c983e6970 100644
-> --- a/doc/usage/netconsole.rst
-> +++ b/doc/usage/netconsole.rst
-> @@ -18,7 +18,9 @@ broadcast address and port 6666 are used. If it is set =
-to an IP
->  address of 0 (or 0.0.0.0) then no messages are sent to the network.
->  The source / listening port can be configured separately by setting
->  the 'ncinport' environment variable and the destination port can be
-> -configured by setting the 'ncoutport' environment variable.
-> +configured by setting the 'ncoutport' environment variable. Note that
-> +you need to set up the network interface (e.g. using DHCP) before it
-> +can be used for network console.
->
->  For example, if your server IP is 192.168.1.1, you could use::
->
-> @@ -107,3 +109,32 @@ as follows:
->
->  Note that unlike the U-Boot implementation the Linux netconsole is
->  unidirectional, i. e. you have console output only in Linux.
-> +
-> +Setup via environment
-> +---------------------
-> +
-> +If persistent environment is enabled in your U-Boot configuration, you
-> +can configure the network console using the environment. For example::
-> +
-> +       =3D> env set autoload no
-> +       =3D> env set hostname "u-boot"
-> +       =3D> env set bootdelay 5
-> +       =3D> env set nc 'dhcp; env set stdout nc; env set stdin nc'
-
-We would need "env set stderr nc" here, too.
-
-All the best,
-Tony
-
-> +       =3D> env set ncip 192.168.1.1
-> +       =3D> env set preboot "${preboot}; run nc;"
-> +       =3D> env save
-> +       =3D> reset
-> +
-> +``autoload no`` tells the ``dhcp`` command to configure the network
-> +interface without trying to load an image. ``hostname "u-boot"`` sets
-> +the hostname to be sent in DHCP requests, so they are easy to
-> +recognize in the DHCP server log. The command in ``nc`` calls ``dhcp``
-> +to make sure the network interface is set up before enabling
-> +netconsole.
-> +
-> +Adding ``nc`` to ``preboot`` tells U-Boot to activate netconsole
-> +before trying to find any boot options, so you can interact with it if
-> +desired.
-> +
-> +``env save`` stores the settings persistently, and ``reset`` then
-> +triggers a fresh start that will use the changed settings.
-> --
-> 2.43.0
->
+Oh, right. Thanks for fixing it all up and keeping an eye on all the bugs !
