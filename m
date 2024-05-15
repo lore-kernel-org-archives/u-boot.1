@@ -4,53 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2075C25B79
-	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 15:05:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1BF3C25B75
+	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 15:11:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0934880A7;
-	Wed, 15 May 2024 17:05:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id EEDD088216;
+	Wed, 15 May 2024 17:11:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="dxMfCW9C";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1715785885;
+	bh=VtLxjhvxB+JakY9qQP49jMgRFX/7W/gIczvh2EHnxyQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=JwfpzTPPz4KTPDmp8QHpf9CMIDXQZEaTehh+mN4EOsYRudXZD+SeeE8FtuFCdmOmd
+	 oe0qjS9DRinP5gMdLNUGDZOWpZKBJlULljm0JR0MIocerU/K5aLNQSgLnprE9klNdt
+	 CwLLZhuDxrJgUuK5C+1VM7+1D0On3AZeGa9Qa6QQg2zaT9YYWmjIQTiOwALwIccI9u
+	 UJB4zU2wSgwiJdnP2uGIYumm6J36sYcixDkWqvcJtHoHf51PXge6yck4z7gQoCWYK4
+	 uyV92ZaV3cygB9mvWTDKyLYyzOJwy5lmTn5F7S4TK5WrxojHvb2F3vxeg4P5aLOmYz
+	 xau3DtNcga8sw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A298D8826D; Wed, 15 May 2024 17:05:02 +0200 (CEST)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ id 9A83C88262; Wed, 15 May 2024 17:11:23 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C94D88013
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 17:05:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AB3E888010
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 17:11:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 2AA0ACE14E9;
- Wed, 15 May 2024 15:04:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F288EC2BD11;
- Wed, 15 May 2024 15:04:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1715785491;
- bh=CfxGm1OX5VQ/btYoiTsZm/owbPxeLkQPM0AMMg5KDXo=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=dxMfCW9CSO2MkRZNyehnpif5+ilxtG/rNQdW/ZLuRMxQAom9kKnUXXtklOIfIsP6+
- /8rEOR8E1u+Wl9UTuvLZIzU+PvPspn/jfvmpe/18gLJDxOFFf/YQMeEHDYDzQaeaGZ
- +YA7u2xMOKkgcHuRfy7sesxWdokpycIRBECHgPw3vGuQFKwv3WzNtu+CRSWpAmFu8m
- 8v81rpRyG3lmSXyuHndih3Z16FmyxW7wz5usyfX3MhoNZEAqtslpaeYlTW2YpSLouo
- DIDhiQdJ2pR1mD5WCsmFk1Y29TFUSybdetB5UjFcpVTwDnO1fq5p8DZO3ox+nfzMvQ
- EkMneWHNZgeIQ==
-From: Conor Dooley <conor@kernel.org>
-To: u-boot@lists.denx.de
-Cc: conor@kernel.org, Conor Dooley <conor.dooley@microchip.com>,
- Padmarao Begari <padmarao.begari@microchip.com>,
- Cyril Jean <cyril.jean@microchip.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1 2/2] board: microchip: icicle: make both ethernets optional
-Date: Wed, 15 May 2024 16:04:31 +0100
-Message-ID: <20240515150434.406916-3-conor@kernel.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240515150434.406916-1-conor@kernel.org>
-References: <20240515150434.406916-1-conor@kernel.org>
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4VfcBH5Fz5z9sld;
+ Wed, 15 May 2024 17:11:19 +0200 (CEST)
+Message-ID: <f6ad2812-40bf-438c-b2ea-ed2b5526fc89@denx.de>
+Date: Wed, 15 May 2024 17:11:18 +0200
 MIME-Version: 1.0
+Subject: Re: [PATCH u-boot-mvebu 10/10] arm: mvebu: turris_omnia: Support old
+ DDR3 training, selectable via env var
+Content-Language: en-US
+To: =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>
+Cc: u-boot@lists.denx.de
+References: <20240415163043.7482-1-kabel@kernel.org>
+ <20240415163043.7482-11-kabel@kernel.org>
+ <149e251a-baa7-4512-990a-d332d0d6177f@denx.de>
+ <20240515105906.3cfca4fb@dellmb>
+ <8ea997c2-e164-4ea1-9a75-28bbf159827b@denx.de>
+ <20240515112431.5ba3f2a0@dellmb>
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20240515112431.5ba3f2a0@dellmb>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -68,59 +74,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Conor Dooley <conor.dooley@microchip.com>
+On 5/15/24 11:24, Marek Behún wrote:
+> On Wed, 15 May 2024 11:10:09 +0200
+> Stefan Roese <sr@denx.de> wrote:
+> 
+>> Hi Marek,
+>>
+>> On 5/15/24 10:59, Marek Behún wrote:
+>>> On Mon, 6 May 2024 12:03:55 +0200
+>>> Stefan Roese <sr@denx.de> wrote:
+>>>    
+>>>> Hi Marek,
+>>>>
+>>>> On 4/15/24 18:30, Marek Behún wrote:
+>>>>> Support old DDR3 training code on Turris Omnia, selectable by U-Boot
+>>>>> enviroment variable.
+>>>>>
+>>>>> Users experiencing DDR3 initialization failures or random crashes of the
+>>>>> operating system due to incorrect DDR3 configuration can select the old
+>>>>> DDR3 training implementation to fix those issues by setting the
+>>>>> environment variable
+>>>>>      env set omnia_ddr3_training old
+>>>>>      env save
+>>>>>
+>>>>> Signed-off-by: Marek Behún <kabel@kernel.org>
+>>>>> ---
+>>>>>     arch/arm/mach-mvebu/Kconfig                   |  1 +
+>>>>>     board/CZ.NIC/turris_omnia/Makefile            |  1 +
+>>>>>     board/CZ.NIC/turris_omnia/old_ddr3_training.c | 79 +++++++++++++++++++
+>>>>>     board/CZ.NIC/turris_omnia/turris_omnia.c      |  2 +-
+>>>>>     4 files changed, 82 insertions(+), 1 deletion(-)
+>>>>>     create mode 100644 board/CZ.NIC/turris_omnia/old_ddr3_training.c
+>>>>
+>>>> For turris_omnia_defconfig, this is dropped when compiled:
+>>>>
+>>>> drivers/ddr/marvell/a38x/old/ddr3_debug.c:776:12: warning:
+>>>> 'ddr3_tip_access_atr' declared 'static' but never defined
+>>>> [-Wunused-function]
+>>>>      776 | static int ddr3_tip_access_atr(u32 dev_num, u32 flag_id, u32
+>>>> value, u32 **ptr);
+>>>>          |            ^~~~~~~~~~~~~~~~~~~
+>>>
+>>> And it also seems that there is still something wrong with this
+>>> old DDR training code port. Some boards still experience random bugs
+>>> with this, but not with the U-Boot from 2015. :-(
+>>
+>> Hmmm, strange.
+>>
+>> How to continue? Are these "old DDR training patches" on hold for now?
+> 
+> The first 5 patches should be fine, the "old DDR training" comes in the
+> second half. Is it possible to merge only the first 5? And also the one
+> patch I sent on April 30:
+>    arm: mvebu: turris_omnia: Fix ethernet PHY reset gpio FDT fixup
 
-A given AMP configuration for a board may make either one, or neither
-of, the ethernet ports available to U-Boot. The Icicle's init code will
-fail if mac1 is not present, so move it to the optional approach taken
-for mac0.
+Yes, that might be possible. Let me check...
 
-Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
----
- board/microchip/mpfs_icicle/mpfs_icicle.c | 23 +++++++----------------
- 1 file changed, 7 insertions(+), 16 deletions(-)
-
-diff --git a/board/microchip/mpfs_icicle/mpfs_icicle.c b/board/microchip/mpfs_icicle/mpfs_icicle.c
-index 5fd0ec66a9..4d7d843dfa 100644
---- a/board/microchip/mpfs_icicle/mpfs_icicle.c
-+++ b/board/microchip/mpfs_icicle/mpfs_icicle.c
-@@ -79,18 +79,6 @@ int board_late_init(void)
- 	char icicle_mac_addr[20];
- 	void *blob = (void *)gd->fdt_blob;
- 
--	node = fdt_path_offset(blob, "/soc/ethernet@20112000");
--	if (node < 0) {
--		printf("No ethernet0 path offset\n");
--		return -ENODEV;
--	}
--
--	ret = fdtdec_get_byte_array(blob, node, "local-mac-address", mac_addr, 6);
--	if (ret) {
--		printf("No local-mac-address property for ethernet@20112000\n");
--		return -EINVAL;
--	}
--
- 	read_device_serial_number(device_serial_number, 16);
- 
- 	/* Update MAC address with device serial number */
-@@ -101,10 +89,13 @@ int board_late_init(void)
- 	mac_addr[4] = device_serial_number[1];
- 	mac_addr[5] = device_serial_number[0];
- 
--	ret = fdt_setprop(blob, node, "local-mac-address", mac_addr, 6);
--	if (ret) {
--		printf("Error setting local-mac-address property for ethernet@20112000\n");
--		return -ENODEV;
-+	node = fdt_path_offset(blob, "/soc/ethernet@20112000");
-+	if (node >= 0) {
-+		ret = fdt_setprop(blob, node, "local-mac-address", mac_addr, 6);
-+		if (ret) {
-+			printf("Error setting local-mac-address property for ethernet@20112000\n");
-+			return -ENODEV;
-+		}
- 	}
- 
- 	icicle_mac_addr[0] = '[';
--- 
-2.43.0
-
+Thanks,
+Stefan
