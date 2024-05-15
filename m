@@ -4,30 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CCFDC25B75
-	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 22:00:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F033C25B78
+	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 22:00:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB9DF8832D;
-	Wed, 15 May 2024 23:59:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5679688366;
+	Wed, 15 May 2024 23:59:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=timesys.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=timesys-com.20230601.gappssmtp.com header.i=@timesys-com.20230601.gappssmtp.com header.b="owHZBB6g";
+	dkim=pass (2048-bit key; unprotected) header.d=timesys-com.20230601.gappssmtp.com header.i=@timesys-com.20230601.gappssmtp.com header.b="cf2C1QPy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC5378833B; Wed, 15 May 2024 23:59:34 +0200 (CEST)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
+ id B2F3A8833B; Wed, 15 May 2024 23:59:35 +0200 (CEST)
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 134D988335
+ by phobos.denx.de (Postfix) with ESMTPS id CF8B786DBD
  for <u-boot@lists.denx.de>; Wed, 15 May 2024 23:59:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=timesys.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=greg.malysa@timesys.com
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-61be4b9869dso78019197b3.1
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-61be4b98766so85094817b3.3
  for <u-boot@lists.denx.de>; Wed, 15 May 2024 14:59:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=timesys-com.20230601.gappssmtp.com; s=20230601; t=1715810371; x=1716415171;
@@ -35,65 +35,60 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=f9mEqXILaCXFuSCORiwgHJL2CvNohtEGSS/JZEMslBE=;
- b=owHZBB6gyVDtZaHd7np2+oKUyfBT0EDqDI8ggR8+i6ZvNsEX362QUyDEgcbjhQszCV
- 2xmrmHFqqOeg+MSvrtBPiUdYKRZRMfllrg4o283mlkHK0yx5HoNxtKR+dMZjFcHAQefV
- gpJn7k7VrUpvKYb1qQYjDjUT1x3/YovfwVsLrGRpnAmsqllj7s0RY01udK+MSyGjUtFM
- hHEEqO55kC+dc6p/r3A0PtXWNWoGMVdz16pZjIqG4MSHOsqHH/CPJivOLj2U5yZ/qpsI
- Mzf1OrLpFJbx7N1qEaHqTnrFl1fzJzfAZ/r/1dCbGt6jgI2GUHdaNe+xnFVWJ3vUSXHW
- Eblw==
+ bh=z+ESdM3nGVZgo68VvQHebUEr4my4IzWFOIa3E44V34k=;
+ b=cf2C1QPyKHWSYRiVXCZxSVJXQwIDjoJnvUQjk2OqrRmiCeYD03+oIBCQfsgR/9FRAY
+ 3INMDx1x8D+IgzfNOGuMCdQeoX/xbZw0XoIFLAHqCeDgWzmoApfV2AjPyeFTsh+0VM/I
+ fX10URqDx7WuEieQSudh8yHFJtYk1n2jOEZsKYwUzA9bWVtYGqlIvdg9dCnCPY/q/AlK
+ PY56jf/M56vPWx++/mEWfjCBydNFGwcPxvFYv03z5Q1AhRbTG3ik+ntHFMTSathny6UN
+ N3Jw96PPFigkc8IT2HTjOEhjalD/gH/K0r1rUpDQtirs0CKmiJVvkkKvR4klXIhOS79C
+ pY2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1715810371; x=1716415171;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=f9mEqXILaCXFuSCORiwgHJL2CvNohtEGSS/JZEMslBE=;
- b=CoJb7cFRQL8T+vfrDUk9hsl06VY/jO71xkgKFVKPl/W9DPpNbBiNCt3pltZ/u6gpXB
- 9LkVQmO10jPP1fr8Y6gf3J3VpOX6dSzC1eGLIZckpHZwEr5ad6GHsDLLv/H0uBw6anCi
- CYXDNNDNDh8IcHoxZfffEVgruomtoiOejpM8e779dpSYDWqliChOjYGdRu4GQxrRugis
- L4t+cuMG8AIdTrhSkv9d/748SinPKU0Z2oS8xjD9OAfuAzXzAaXTHhQrbW/Bo8m79Jfr
- 2k9+Rp8UwXJcb1rlkyJ+KB3rRePuTrgnlRoeYTCy/glC2WxlaIFLuJDWCY8AkfK9fMIZ
- s4aA==
-X-Gm-Message-State: AOJu0Yw4Lvmj55gzA5UeQ9WZH+pMPT1nUdp4tj93n/qE49D/krZm/Pu+
- MuJwDHwAIETfdpsdSyY9cUh+23OS4ZWoIcP2XGe8Y3v+3CSyV8upQcP3KWR9aoL7ePfY8r2BKD4
- 4Vw==
-X-Google-Smtp-Source: AGHT+IHb4W3m+7NX018kXKl3MdD46MZsQ+P6QN+6FjipPMA/8AWDFyW6X579XsWXbbhjX0MIhEMNfg==
-X-Received: by 2002:a0d:d895:0:b0:61a:b474:1c4b with SMTP id
- 00721157ae682-622b013a8d3mr164204467b3.46.1715810370787; 
- Wed, 15 May 2024 14:59:30 -0700 (PDT)
+ bh=z+ESdM3nGVZgo68VvQHebUEr4my4IzWFOIa3E44V34k=;
+ b=SQkWhQftuqATp1D/o+yBFUH+iymiPr2wgPc9Lpyn5McgOcj9bSyrOifqT9j+TQk789
+ RrlVK+4TlGK89m2GeyC07Klcopt4BxPGTOD30D800htuvHc3V7QpRkql3uQ7dtzVVhbb
+ 6sJHXXB63hO+SA9usKdlbpSVE2GuRoODF4K3+3QKGCOOmy1eCGR+/KEO16ASuzoie9PS
+ KgI7qG9zG1n2olonFoue7CgS+T9lw0PXcgHE4p5TyK1KgnZ+O5RUQAmRBsILXivztO9O
+ tE/13O80IJAGI2fgo9Rwi23x8r1g6aBvivU1kB3VUHYfrsca6xVDaoK0oe/lgaX/PtW0
+ PKLQ==
+X-Gm-Message-State: AOJu0YzQistkebV1r7W7LPzbGNiKq/iSi8q4LciBJJEtDv3P49i8Youq
+ MZSJduCPTeGiqddw14bHlTKWK9MgD24XYhMsOHtlJJPqHJwpmK//ZAWoqkU925/yuuF/cVLp1Wy
+ P3A==
+X-Google-Smtp-Source: AGHT+IGKGua68Tb8wwd07TpxrfSTpIdbz2ZQvDxXnj63QNVlgmSLt2zowzXm6A8DoxwSS3OQQirOow==
+X-Received: by 2002:a81:6c05:0:b0:620:4018:7c67 with SMTP id
+ 00721157ae682-622aff8cc75mr167433877b3.27.1715810371450; 
+ Wed, 15 May 2024 14:59:31 -0700 (PDT)
 Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
  by smtp.gmail.com with ESMTPSA id
- 00721157ae682-6209e37913asm30956457b3.105.2024.05.15.14.59.30
+ 00721157ae682-6209e37913asm30956457b3.105.2024.05.15.14.59.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 May 2024 14:59:30 -0700 (PDT)
+ Wed, 15 May 2024 14:59:31 -0700 (PDT)
 From: Greg Malysa <greg.malysa@timesys.com>
 To: u-boot@lists.denx.de
 Cc: Matthew McClintock <Matthew.Mcclintock@analog.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
  Greg Malysa <greg.malysa@timesys.com>,
  Ian Roberts <ian.roberts@timesys.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
  Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
  Utsav Agarwal <utsav.agarwal@analog.com>,
  Arturs Artamonovs <arturs.artamonovs@analog.com>,
  Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Boon Khai Ng <boon.khai.ng@intel.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
  Caleb Connolly <caleb.connolly@linaro.org>,
- Christophe ROULLIER <christophe.roullier@foss.st.com>,
+ Chanho Park <chanho61.park@samsung.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Joe Hershberger <joe.hershberger@ni.com>, Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>,
- Ley Foon Tan <leyfoon.tan@starfivetech.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Yang Xiwen <forbidden405@outlook.com>
-Subject: [PATCH 06/11] net: Add support for ADI SC5xx SoCs with DWC QoS
- ethernet
-Date: Wed, 15 May 2024 17:57:43 -0400
-Message-ID: <20240515215837.14028-7-greg.malysa@timesys.com>
+ Randolph <randolph@andestech.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 07/11] watchdog: Add support for ADI SC5XX-family watchdog
+ peripheral
+Date: Wed, 15 May 2024 17:57:44 -0400
+Message-ID: <20240515215837.14028-8-greg.malysa@timesys.com>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240515215837.14028-1-greg.malysa@timesys.com>
 References: <20240515215837.14028-1-greg.malysa@timesys.com>
@@ -115,211 +110,216 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The ADI SC598 includes a Designware QoS 5.20a IP block. This
-commit adds support for using the existing ethernet QoS driver
-with the SC598 SoC.
+From: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 
+Co-developed-by: Greg Malysa <greg.malysa@timesys.com>
+Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
 Co-developed-by: Ian Roberts <ian.roberts@timesys.com>
 Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
-Co-developed-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
-Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 Signed-off-by: Vasileios Bimpikas <vasileios.bimpikas@analog.com>
 Signed-off-by: Utsav Agarwal <utsav.agarwal@analog.com>
 Signed-off-by: Arturs Artamonovs <arturs.artamonovs@analog.com>
-Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
+Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 ---
 
- MAINTAINERS                   |   1 +
- drivers/net/Kconfig           |   7 +++
- drivers/net/Makefile          |   1 +
- drivers/net/dwc_eth_qos.c     |   6 ++
- drivers/net/dwc_eth_qos.h     |   2 +
- drivers/net/dwc_eth_qos_adi.c | 101 ++++++++++++++++++++++++++++++++++
- 6 files changed, 118 insertions(+)
- create mode 100644 drivers/net/dwc_eth_qos_adi.c
+ MAINTAINERS                |   1 +
+ drivers/watchdog/Kconfig   |   9 +++
+ drivers/watchdog/Makefile  |   1 +
+ drivers/watchdog/adi_wdt.c | 145 +++++++++++++++++++++++++++++++++++++
+ 4 files changed, 156 insertions(+)
+ create mode 100644 drivers/watchdog/adi_wdt.c
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 977233451e..c1685f0352 100644
+index c1685f0352..6feb7e540b 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -613,6 +613,7 @@ F:	drivers/clk/adi/
- F:	drivers/gpio/adp5588_gpio.c
- F:	drivers/gpio/gpio-adi-adsp.c
- F:	drivers/i2c/adi_i2c.c
-+F:	drivers/net/dwc_eth_qos_adi.c
- F:	drivers/pinctrl/pinctrl-adi-adsp.c
+@@ -618,6 +618,7 @@ F:	drivers/pinctrl/pinctrl-adi-adsp.c
  F:	drivers/serial/serial_adi_uart4.c
  F:	drivers/timer/adi_sc5xx_timer.c
-diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-index b4ff033afa..9ae471e371 100644
---- a/drivers/net/Kconfig
-+++ b/drivers/net/Kconfig
-@@ -236,6 +236,13 @@ config DWC_ETH_QOS
- 	  Of Service) IP block. The IP supports many options for bus type,
- 	  clocking/reset structure, and feature list.
+ F:	drivers/usb/musb-new/sc5xx.c
++F:	drivers/watchdog/adi_wdt.c
+ F:	include/env/adi/
  
-+config DWC_ETH_QOS_ADI
-+	bool "Synopsys DWC Ethernet QOS device support for ADI SC59x-64 parts"
-+	depends on DWC_ETH_QOS
+ ARM SNAPDRAGON
+diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+index 8318fd77a3..5a62000272 100644
+--- a/drivers/watchdog/Kconfig
++++ b/drivers/watchdog/Kconfig
+@@ -94,6 +94,15 @@ config WDT_APPLE
+ 	  The watchdog will perform a full SoC reset resulting in a
+ 	  reboot of the entire system.
+ 
++config WDT_ADI
++	bool "Analog Devices watchdog timer support"
++	select WDT
++	select SPL_WDT if SPL
++	depends on (SC57X || SC58X || SC59X || SC59X_64)
 +	help
-+		The Synopsis Designware Ethernet QoS IP block with the specific
-+		configuration used in the ADI ADSP-SC59X 64 bit SoCs
++	  Enable this to support Watchdog Timer on ADI SC57X, SC58X, SC59X,
++	  and SC59X_64 processors
 +
- config DWC_ETH_QOS_IMX
- 	bool "Synopsys DWC Ethernet QOS device support for IMX"
- 	depends on DWC_ETH_QOS
-diff --git a/drivers/net/Makefile b/drivers/net/Makefile
-index dce71685c3..612f5644f3 100644
---- a/drivers/net/Makefile
-+++ b/drivers/net/Makefile
-@@ -19,6 +19,7 @@ obj-$(CONFIG_DM_ETH_PHY) += eth-phy-uclass.o
- obj-$(CONFIG_DRIVER_DM9000) += dm9000x.o
- obj-$(CONFIG_DSA_SANDBOX) += dsa_sandbox.o
- obj-$(CONFIG_DWC_ETH_QOS) += dwc_eth_qos.o
-+obj-$(CONFIG_DWC_ETH_QOS_ADI) += dwc_eth_qos_adi.o
- obj-$(CONFIG_DWC_ETH_QOS_IMX) += dwc_eth_qos_imx.o
- obj-$(CONFIG_DWC_ETH_QOS_ROCKCHIP) += dwc_eth_qos_rockchip.o
- obj-$(CONFIG_DWC_ETH_QOS_QCOM) += dwc_eth_qos_qcom.o
-diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
-index 67ac86f82b..10528368ca 100644
---- a/drivers/net/dwc_eth_qos.c
-+++ b/drivers/net/dwc_eth_qos.c
-@@ -1544,6 +1544,12 @@ static const struct udevice_id eqos_ids[] = {
- 		.compatible = "starfive,jh7110-dwmac",
- 		.data = (ulong)&eqos_jh7110_config
- 	},
-+#endif
-+#if IS_ENABLED(CONFIG_DWC_ETH_QOS_ADI)
-+	{
-+		.compatible = "adi,sc59x-dwmac-eqos",
-+		.data = (ulong)&eqos_adi_config
-+	},
- #endif
- 	{ }
- };
-diff --git a/drivers/net/dwc_eth_qos.h b/drivers/net/dwc_eth_qos.h
-index 8b3d0d464d..1b28f2a056 100644
---- a/drivers/net/dwc_eth_qos.h
-+++ b/drivers/net/dwc_eth_qos.h
-@@ -84,6 +84,7 @@ struct eqos_mac_regs {
- #define EQOS_MAC_MDIO_ADDRESS_CR_SHIFT			8
- #define EQOS_MAC_MDIO_ADDRESS_CR_100_150		1
- #define EQOS_MAC_MDIO_ADDRESS_CR_20_35			2
-+#define EQOS_MAC_MDIO_ADDRESS_CR_150_250		4
- #define EQOS_MAC_MDIO_ADDRESS_CR_250_300		5
- #define EQOS_MAC_MDIO_ADDRESS_SKAP			BIT(4)
- #define EQOS_MAC_MDIO_ADDRESS_GOC_SHIFT			2
-@@ -293,3 +294,4 @@ extern struct eqos_config eqos_qcom_config;
- extern struct eqos_config eqos_stm32mp13_config;
- extern struct eqos_config eqos_stm32mp15_config;
- extern struct eqos_config eqos_jh7110_config;
-+extern struct eqos_config eqos_adi_config;
-diff --git a/drivers/net/dwc_eth_qos_adi.c b/drivers/net/dwc_eth_qos_adi.c
+ config WDT_ARMADA_37XX
+ 	bool "Marvell Armada 37xx watchdog timer support"
+ 	depends on WDT && ARMADA_3700
+diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
+index 7b39adcf0f..7ad61b513c 100644
+--- a/drivers/watchdog/Makefile
++++ b/drivers/watchdog/Makefile
+@@ -50,3 +50,4 @@ obj-$(CONFIG_WDT_STM32MP) += stm32mp_wdt.o
+ obj-$(CONFIG_WDT_SUNXI) += sunxi_wdt.o
+ obj-$(CONFIG_WDT_TANGIER) += tangier_wdt.o
+ obj-$(CONFIG_WDT_XILINX) += xilinx_wwdt.o
++obj-$(CONFIG_WDT_ADI) += adi_wdt.o
+diff --git a/drivers/watchdog/adi_wdt.c b/drivers/watchdog/adi_wdt.c
 new file mode 100644
-index 0000000000..8e770c0dcb
+index 0000000000..67d17dc692
 --- /dev/null
-+++ b/drivers/net/dwc_eth_qos_adi.c
-@@ -0,0 +1,101 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/**
-+ * (C) Copyright 2024 - Analog Devices, Inc.
++++ b/drivers/watchdog/adi_wdt.c
+@@ -0,0 +1,145 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * (C) Copyright 2022 - Analog Devices, Inc.
 + *
 + * Written and/or maintained by Timesys Corporation
 + *
-+ * Author: Greg Malysa <greg.malysa@timesys.com>
-+ * Additional Contact: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
++ * Converted to driver model by Nathan Barrett-Morrison
++ *
++ * Contact: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
++ * Contact: Greg Malysa <greg.malysa@timesys.com>
++ *
++ * adi_wtd.c - driver for ADI on-chip watchdog
++ *
 + */
 +
 +#include <clk.h>
 +#include <dm.h>
-+#include <net.h>
-+#include <phy.h>
-+#include <reset.h>
-+#include <asm/io.h>
++#include <wdt.h>
++#include <linux/delay.h>
++#include <linux/ioport.h>
++#include <linux/io.h>
 +
-+#include <asm/arch-adi/sc5xx/sc5xx.h>
++#define WDOG_CTL  0x0
++#define WDOG_CNT  0x4
++#define WDOG_STAT 0x8
 +
-+#include "dwc_eth_qos.h"
++#define RCU_CTL   0x0
++#define RCU_STAT  0x4
 +
-+static int eqos_start_resets_adi(struct udevice *dev)
++#define SEC_GCTL  0x0
++#define SEC_FCTL  0x10
++#define SEC_SCTL0 0x800
++
++#define WDEN      0x0010
++#define WDDIS     0x0AD0
++
++struct adi_wdt_priv {
++	void __iomem *rcu_base;
++	void __iomem *sec_base;
++	void __iomem *wdt_base;
++	struct clk clock;
++};
++
++static int adi_wdt_reset(struct udevice *dev)
 +{
-+	struct eqos_priv *eqos = dev_get_priv(dev);
-+	u32 val;
++	struct adi_wdt_priv *priv = dev_get_priv(dev);
 +
-+	/*
-+	 * Settings need to latch with the DMA reset below. Currently only
-+	 * rgmii is supported but other phy interfaces may be supported in
-+	 * the future
-+	 */
-+	sc5xx_enable_rgmii();
-+
-+	val = readl(&eqos->dma_regs->mode);
-+	val |= EQOS_DMA_MODE_SWR;
-+	writel(val, &eqos->dma_regs->mode);
++	writel(0, priv->wdt_base + WDOG_STAT);
 +
 +	return 0;
 +}
 +
-+static int eqos_probe_resources_adi(struct udevice *dev)
++static int adi_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
 +{
-+	struct eqos_priv *eqos = dev_get_priv(dev);
-+	phy_interface_t interface;
++	struct adi_wdt_priv *priv = dev_get_priv(dev);
++	u32 sctl_val;
 +
-+	interface = eqos->config->interface(dev);
-+	if (interface == PHY_INTERFACE_MODE_NA) {
-+		pr_err("Invalid PHY interface\n");
-+		return -EINVAL;
++	/* Disable SYSCD_RESETb input and clear the RCU0 reset status */
++	writel(0xf, priv->rcu_base + RCU_STAT);
++	writel(0x0, priv->rcu_base + RCU_CTL);
++
++	/* reset the SEC controller */
++	writel(0x2, priv->sec_base + SEC_GCTL);
++	writel(0x2, priv->sec_base + SEC_FCTL);
++
++	udelay(50);
++
++	/* enable SEC fault event */
++	writel(0x1, priv->sec_base + SEC_GCTL);
++
++	/* ANOMALY 36100004 Spurious External Fault event occurs when FCTL
++	 * is re-programmed when currently active fault is not cleared
++	 */
++	writel(0xc0, priv->sec_base + SEC_FCTL);
++	writel(0xc1, priv->sec_base + SEC_FCTL);
++
++	/* enable SEC fault source for watchdog0 */
++	sctl_val = readl((priv->sec_base + SEC_SCTL0) + 3 * 8) | 0x6;
++	writel(sctl_val, (priv->sec_base + SEC_SCTL0) + 3 * 8);
++
++	/* Enable SYSCD_RESETb input */
++	writel(0x100, priv->rcu_base + RCU_CTL);
++
++	/* enable watchdog0 */
++	writel(WDDIS, priv->wdt_base + WDOG_CTL);
++
++	writel(timeout_ms / 1000 *
++	       (clk_get_rate(&priv->clock) / (IS_ENABLED(CONFIG_SC58X) ? 2 : 1)),
++	       priv->wdt_base + WDOG_CNT);
++
++	writel(0, priv->wdt_base + WDOG_STAT);
++	writel(WDEN, priv->wdt_base + WDOG_CTL);
++
++	return 0;
++}
++
++static int adi_wdt_probe(struct udevice *dev)
++{
++	struct adi_wdt_priv *priv = dev_get_priv(dev);
++	int ret;
++	struct resource res;
++
++	ret = dev_read_resource_byname(dev, "rcu", &res);
++	if (ret)
++		return ret;
++	priv->rcu_base = devm_ioremap(dev, res.start, resource_size(&res));
++
++	ret = dev_read_resource_byname(dev, "sec", &res);
++	if (ret)
++		return ret;
++	priv->sec_base = devm_ioremap(dev, res.start, resource_size(&res));
++
++	ret = dev_read_resource_byname(dev, "wdt", &res);
++	if (ret)
++		return ret;
++	priv->wdt_base = devm_ioremap(dev, res.start, resource_size(&res));
++
++	ret = clk_get_by_name(dev, "sclk0", &priv->clock);
++	if (ret < 0) {
++		printf("Can't get WDT clk: %d\n", ret);
++		return ret;
 +	}
 +
 +	return 0;
 +}
 +
-+/**
-+ * rgmii tx clock rate is set to 125 MHz regardless of phy mode, and
-+ * by default the internal clock is always connected to 125 MHz. According
-+ * to the HRM it is invalid for this clock to have any other speed, so
-+ * the hardware won't work anyway if this is wrong.
-+ */
-+static ulong eqos_get_tick_clk_rate_adi(struct udevice *dev)
-+{
-+	return 125 * 1000000;
-+}
-+
-+static int eqos_get_enetaddr_adi(struct udevice *dev)
-+{
-+	struct eth_pdata *pdata = dev_get_plat(dev);
-+	return eth_env_get_enetaddr("ethaddr", pdata->enetaddr);
-+}
-+
-+static struct eqos_ops eqos_adi_ops = {
-+	.eqos_inval_desc = eqos_inval_desc_generic,
-+	.eqos_flush_desc = eqos_flush_desc_generic,
-+	.eqos_inval_buffer = eqos_inval_buffer_generic,
-+	.eqos_flush_buffer = eqos_flush_buffer_generic,
-+	.eqos_probe_resources = eqos_probe_resources_adi,
-+	.eqos_remove_resources = eqos_null_ops,
-+	.eqos_start_resets = eqos_start_resets_adi,
-+	.eqos_stop_resets = eqos_null_ops,
-+	.eqos_start_clks = eqos_null_ops,
-+	.eqos_stop_clks = eqos_null_ops,
-+	.eqos_calibrate_pads = eqos_null_ops,
-+	.eqos_disable_calibration = eqos_null_ops,
-+	.eqos_set_tx_clk_speed = eqos_null_ops,
-+	.eqos_get_enetaddr = eqos_get_enetaddr_adi,
-+	.eqos_get_tick_clk_rate = eqos_get_tick_clk_rate_adi,
++static const struct wdt_ops adi_wdt_ops = {
++	.start		= adi_wdt_start,
++	.reset		= adi_wdt_reset,
 +};
 +
-+// @todo read mdio_wait from device tree
-+// @todo read swr_wait from device tree
-+struct eqos_config __maybe_unused eqos_adi_config = {
-+	.reg_access_always_ok = true,
-+	.mdio_wait =  20,
-+	.swr_wait = 50,
-+	.config_mac = EQOS_MAC_RXQ_CTRL0_RXQ0EN_ENABLED_DCB,
-+	.config_mac_mdio = EQOS_MAC_MDIO_ADDRESS_CR_150_250,
-+	.axi_bus_width = EQOS_AXI_WIDTH_32,
-+	.interface = dev_read_phy_mode,
-+	.ops = &eqos_adi_ops,
++static const struct udevice_id adi_wdt_ids[] = {
++	{ .compatible = "adi,wdt" },
++	{}
++};
++
++U_BOOT_DRIVER(adi_wdt) = {
++	.name		= "adi_wdt",
++	.id		= UCLASS_WDT,
++	.of_match	= adi_wdt_ids,
++	.probe		= adi_wdt_probe,
++	.ops		= &adi_wdt_ops,
++	.priv_auto = sizeof(struct adi_wdt_priv),
++	.flags		= DM_FLAG_PRE_RELOC,
 +};
 -- 
 2.43.2
