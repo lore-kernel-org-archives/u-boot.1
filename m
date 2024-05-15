@@ -4,75 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06CB9C25B77
-	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 08:50:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2F47C25B75
+	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 08:59:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 177BB88216;
-	Wed, 15 May 2024 10:50:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5977988248;
+	Wed, 15 May 2024 10:59:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IxoJ9FhV";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="cd7K267R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEC1388229; Wed, 15 May 2024 10:50:00 +0200 (CEST)
-Received: from mail-vs1-xe35.google.com (mail-vs1-xe35.google.com
- [IPv6:2607:f8b0:4864:20::e35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6FF4188248; Wed, 15 May 2024 10:59:14 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE30D8812F
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 10:49:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 72F3688249
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 10:59:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe35.google.com with SMTP id
- ada2fe7eead31-47f0a45375aso1793362137.1
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 01:49:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1715762997; x=1716367797; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MibIGIXjMowow8FXPHQ5SN7qYBacNo7Lu5zPFXKkZc0=;
- b=IxoJ9FhVjUG6G81xqGEl7v+tesFQemBYsIkeE8/WZy/Ip0r5YJ2QjyLyiAdTHTYIPg
- mmsYYp1F3UnhW0zD4JZWr3DgnXwFefbBU0ngxiyEDS7CvXJYE19a/kFA5leZnYbevH/g
- JgDlv+bHBhdvqAesgpvUKpiKGqFF1iQVmhHpptzFlHxtQdEr4iki9Xd1oAjXeO2sGNEa
- 0cZy6FnD83gxzY+FIUrrj3WR/8PlBCY9tlkSyMfXNzB47v8CbS/ErbrwoLCRXBkXe8RZ
- b6NwbP/0FLEjmwkc7DioRIIM1tTuLHYH0Cbv0/cWlB5ZU+ALRa+HxcN43RKWGaA9HAR2
- 9Msw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715762997; x=1716367797;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=MibIGIXjMowow8FXPHQ5SN7qYBacNo7Lu5zPFXKkZc0=;
- b=Ee9sUYntS/racDDwJVSQMkbHk0BEoPkFym4dgnBCxAXfFyHtv/hNwe4EnJNHHUtn6u
- EvN0zkFw/ur+ZEP8aeU9Ak8k3URmRhsJwMHeoyV2W5u2xDhWdYQ3gXHrvrqgc4XRnhGc
- GVWpOVyv9pLuifXzq4jZk3fZpT63dCwc49rTz49F3MEgVSz9ghZxtfgxOPiJiiBSaJ7C
- We2LksJotS6YdOS01ThPElFrU9NaSW7Z5aK+ahWpGXfuvfJK8QYWCC90ObSfC1fJo1/V
- wD0aDbGryp/MH1WSdUF7TNi2cNg3PDIFecrIKFdfpdIv832djRO6O76ZeWzn4oW0kVoa
- 1Vvg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUVuUsU6DNY1qXs70zd7c9oTLhx/ADsTpkEnpWjW6ILv5BLnlnsr3Duwz7PU/f8rPiilYUzvi/xx36OgK9+NlLAexPYZg==
-X-Gm-Message-State: AOJu0Yyx8PtnMMXjY+BUWv4cN8jZ3c87wjfOKyhlWP+ukvlsLpaPe2i5
- 1djuRWl4PP7IFxY95sZW8L+/CyXTNRksbTFIFZ79QMMRP7cblSpXH6MgFl9tKAZUQGHMb36CL5Z
- 01b7qV0XE1IwgdXRIDRJEgSXFScDaApfKr4cDNWRQkgA3+jrXFNo=
-X-Google-Smtp-Source: AGHT+IGWtWqzhEIVEYnLLPkF/j6piUeYEY5YcjBKmzOruUdNbnbkKQlr+eF/r9twpzZcYtbllp3YqS+a7K0Ew3cjqgg=
-X-Received: by 2002:a05:6102:3f13:b0:47b:d23d:281a with SMTP id
- ada2fe7eead31-48077ea7e6amr16048646137.30.1715762994785; Wed, 15 May 2024
- 01:49:54 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id DE2D26147F;
+ Wed, 15 May 2024 08:59:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E8E58C116B1;
+ Wed, 15 May 2024 08:59:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1715763550;
+ bh=yrE/bfN6YTz64Ustrs4Tm9WY8XZz4Oz9+nv/RL3iQ9s=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=cd7K267R1/Diku/Us3ZS29JkMkILq7qRQKVK6AL3yjon8kMG90JMH0jcf1jSCEyVe
+ Y0jq4fYkqWFyTBMac4t2wcWfOfM7F56bw+x4VjJfJquDi3SsB9j/Zqnxj4H9ib4bp2
+ DInD4jM75Y1muVe4Z1tZF8XxIahqIJKR2SSbPpoa6KEBwlrac9inRM4LKpl1hqZZXZ
+ ua2lz7iDHP5oAMsDOAMd3ZYtEQRaoTzTGU9T3ObOdN9zJjLZ7JNvFpd/Wiu+6bghGP
+ GLkiPcKpodkjkRJ4LsmZsYBiyRAG+Ik1Lg1DCwEGuiKFq1Q9JGXkWAJWk1NM7kcdlK
+ xiguSXibWLmoQ==
+Date: Wed, 15 May 2024 10:59:06 +0200
+From: Marek =?UTF-8?B?QmVow7pu?= <kabel@kernel.org>
+To: Stefan Roese <sr@denx.de>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH u-boot-mvebu 10/10] arm: mvebu: turris_omnia: Support
+ old DDR3 training, selectable via env var
+Message-ID: <20240515105906.3cfca4fb@dellmb>
+In-Reply-To: <149e251a-baa7-4512-990a-d332d0d6177f@denx.de>
+References: <20240415163043.7482-1-kabel@kernel.org>
+ <20240415163043.7482-11-kabel@kernel.org>
+ <149e251a-baa7-4512-990a-d332d0d6177f@denx.de>
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.41; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-References: <20240514164236.516595-1-trini@konsulko.com>
- <b12a9b07-2c92-4651-b6ba-3aff6ecc9219@kwiboo.se>
-In-Reply-To: <b12a9b07-2c92-4651-b6ba-3aff6ecc9219@kwiboo.se>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Wed, 15 May 2024 14:19:43 +0530
-Message-ID: <CAFA6WYPsicMrtrDg7T8m=4-vg-QAPUY1D5E=_T8gZYgT=o2b4Q@mail.gmail.com>
-Subject: Re: [PATCH 1/1] Squashed 'dts/upstream/' changes from
- b35b9bd1d4ee..7e08733c96c8
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,68 +71,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+On Mon, 6 May 2024 12:03:55 +0200
+Stefan Roese <sr@denx.de> wrote:
 
-On Wed, 15 May 2024 at 13:11, Jonas Karlman <jonas@kwiboo.se> wrote:
->
-> Hi Tom,
->
-> On 2024-05-14 18:42, Tom Rini wrote:>
-> > git-subtree-dir: dts/upstream
-> > git-subtree-split: 7e08733c96c84eb323f47e9b248c924e2ac6272a
+> Hi Marek,
+>=20
+> On 4/15/24 18:30, Marek Beh=C3=BAn wrote:
+> > Support old DDR3 training code on Turris Omnia, selectable by U-Boot
+> > enviroment variable.
+> >=20
+> > Users experiencing DDR3 initialization failures or random crashes of the
+> > operating system due to incorrect DDR3 configuration can select the old
+> > DDR3 training implementation to fix those issues by setting the
+> > environment variable
+> >    env set omnia_ddr3_training old
+> >    env save
+> >=20
+> > Signed-off-by: Marek Beh=C3=BAn <kabel@kernel.org>
 > > ---
-> > This moves OF_UPSTREAM to be tracking the v6.9 release and is for the
-> > -next branch. To test these changes yourself locally, either use my
-> > "WIP/14May2024-next" branch or run:
-> > ./dts/update-dts-subtree.sh pull v6.9-dts
-> > yourself locally. I intend to wait a few days to apply this to -next, to
-> > give people time to test.
-> >
->
-> There are currently more boards/SoCs that use OF_UPSTREAM in master
-> branch than in next branch, a few Rockchip SoCs and other boards/SoCs.
+> >   arch/arm/mach-mvebu/Kconfig                   |  1 +
+> >   board/CZ.NIC/turris_omnia/Makefile            |  1 +
+> >   board/CZ.NIC/turris_omnia/old_ddr3_training.c | 79 +++++++++++++++++++
+> >   board/CZ.NIC/turris_omnia/turris_omnia.c      |  2 +-
+> >   4 files changed, 82 insertions(+), 1 deletion(-)
+> >   create mode 100644 board/CZ.NIC/turris_omnia/old_ddr3_training.c =20
+>=20
+> For turris_omnia_defconfig, this is dropped when compiled:
+>=20
+> drivers/ddr/marvell/a38x/old/ddr3_debug.c:776:12: warning:=20
+> 'ddr3_tip_access_atr' declared 'static' but never defined=20
+> [-Wunused-function]
+>    776 | static int ddr3_tip_access_atr(u32 dev_num, u32 flag_id, u32=20
+> value, u32 **ptr);
+>        |            ^~~~~~~~~~~~~~~~~~~
 
-Glad to see more OF_UPSTREAM adoption.
-
-> Next dts/upstream sync will probably be good to do together with a merge
-> of master into next :-)
-
-I don't have any particular opinion here and rather leave it upto Tom
-how he would like to merge stuff.
-
->
-> Also what is the expected sync cadence of dts/upstream? Linux v6.10 will
-> probably be released shortly after U-Boot v2024.07. So will next sync be
-> to v6.10-dts if that happens in the U-Boot merge window or do we expect
-> 2024.10 to use v6.9 DTs if the v6.10 release gets delayed and miss the
-> U-Boot merge window?
->
-> Linux kernel typically have all major DT changes in -rc1 and fixes in
-> later -rcX, so for next branch I would suggest an early sync to a
-> v6.10-rcX-dts tag, and then sync to the final v6.10-dts tag once v6.10
-> gets released. That should give more time for testing, migration and
-> cleanup using v6.10 DTs in time for a 2024.10 release.
-
-I can see the reasoning for an aggressive DT syncing approach, it has
-been brought up in the past too. And the major reason for the current
-moderate sync approach [1] is to limit any DT ABI breakages for
-U-Boot, we are even prone to breakages with syncs against major Linux
-kernel releases (eg. v6.10-dts etc.). It has been a long time
-discussion topic where we have been advocating about requirements for
-DT ABI stability [2].
-
-So having DT syncs done during the merge window will shorten the
-testing window for developers/maintainers. And more syncs means a
-multiplicative factor for testing. However, time will tell with more
-and more platforms adopting OF_UPSTREAM, if there are any real DT ABI
-breakages seen in the future. But surely if they are very rare then I
-am open to adopting aggressive DT sync approaches.
-
-[1] https://docs.u-boot.org/en/latest/develop/devicetree/control.html#resyncing-with-devicetree-rebasing
-[2] https://www.mail-archive.com/boot-architecture@lists.linaro.org/msg02162.html
-
--Sumit
-
->
-> Regards,
-> Jonas
+And it also seems that there is still something wrong with this
+old DDR training code port. Some boards still experience random bugs
+with this, but not with the U-Boot from 2015. :-(
