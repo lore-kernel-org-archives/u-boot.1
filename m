@@ -4,76 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3481FC25B75
-	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 23:29:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15911C25B78
+	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 23:29:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF32C88364;
-	Thu, 16 May 2024 01:28:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9BA2E8835E;
+	Thu, 16 May 2024 01:29:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kfcNJopZ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EKIIEr4A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6642B8835C; Thu, 16 May 2024 01:28:57 +0200 (CEST)
-Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
- [IPv6:2607:f8b0:4864:20::833])
+ id 99E3B88369; Thu, 16 May 2024 01:29:00 +0200 (CEST)
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60ED788335
- for <u-boot@lists.denx.de>; Thu, 16 May 2024 01:28:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E8A3F8835C
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 01:28:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x833.google.com with SMTP id
- d75a77b69052e-43df3b00becso28838801cf.2
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 16:28:55 -0700 (PDT)
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-61be4b986aaso83725517b3.3
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 16:28:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715815734; x=1716420534; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1715815737; x=1716420537; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FokHb3sZmSBiuNfuQFV8+NFDvBnLGYox2r8kUW6K3fo=;
- b=kfcNJopZYv1dlEwRQ+LyWXXi4z4VBNKUFuGmm9bHyhGrB6fIkGZudkIhwJY4ZV302o
- bLsBYG3IKxnla43UBsjjn6GqF8JLoKtom7DWALkZavT6i+yKD+MH8KEBaketLqdR16b/
- aS3VjShjsAIfpLELRo3Rwawys2aeTLXJnA3L8=
+ bh=/xu7c0BJqsEKSSK+7a0SFHtjmJkNpBcB8s6bYsqCrK0=;
+ b=EKIIEr4Aq6Q6W7BkjhUyYR7CdD//tGQ+1T5uJFqNqBD+xkCa4rThmXIZpAg4ZsPDkg
+ EqxzJ8l97EPMOTNuj9F1chXYKD5uEkUpcUtJiBVGJt0n68hL7OVjSjdXLKlyw29nfWqf
+ to1/D8j8fr6AjezRVhF4YZ5+lGdWIQNtw/MnE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715815734; x=1716420534;
+ d=1e100.net; s=20230601; t=1715815737; x=1716420537;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FokHb3sZmSBiuNfuQFV8+NFDvBnLGYox2r8kUW6K3fo=;
- b=gcj7ULoPkmhfDl5/aCpwzAh943OanEcHiodI9VWLbDjarsyaArVzMZHj84IRHL+UdK
- C2j0irEegoZvPVHq/uL/JwOSe4LNiBUpqdTGGVZb64judmaCPmaBsKq7DpKVTxG6m7sn
- 4Hm5py+6HfLk83WPnuziGQDpW4bDVRt+7EVSL7tGSxrjWuausqg2kp69CePNWpxHGlko
- 9yAf0ZwPGst5xNuulHdmpEihuDYrBLRdYraR2rusTkpwMLV28nn8XeYfCpt71wqoKSRu
- 2BpFgKxFLZG9TUN8jv/dNkb8SYuVY/lfCzNG3v5qWJLOnoBYcxBSYpvWMiT1hBkixVZD
- osJw==
+ bh=/xu7c0BJqsEKSSK+7a0SFHtjmJkNpBcB8s6bYsqCrK0=;
+ b=Fs+KUP6723R3Ve+LT1XzN4pGiWI1pGbCFWkxI3Fi+/H8922YHsKFiI0U0ySPD1SYP3
+ 4HbAvLHg8t6fc1v4bScyzHq2b3hMm7dQdK9wub0XRICf1JsNTvz4y8hOq7K0xyqPiOJT
+ xILjRyh3eIrtVdwmxtS9RSZXV2mTkBG7Ny+/aoNu2MQQxDwgUKOrGkiFeTs9dHinIyZY
+ XNd/mx5frT/CIyPlbSxnj5gkjswQ5CT/9ulJZvee672iHLDAHP98Xu1zjRvG9xeQ6KZy
+ MHDk9igaZoeoWWrkA3dLRWVg4kQpTq994xqhzWyDHSE3SxeY+8av8vRZ6fpnU4y82HT/
+ k6Qw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWw6xCzESCfWHh/brG08sd+qpiWN+w6/UO11j8RNxbEuKFgzivTCxBjmt5SGZACTNnuHFeAkpizTVzx1KHhcpi4deEJNQ==
-X-Gm-Message-State: AOJu0YzUVry5/2U8nyCcmJbimyVfFi3nKOCYTQfG4CbU3eieGptgSOhp
- BOEVGmrZwln0aRDS3hIQaPIbeZRwS0cPVXDx0yPqY9ABR3jllqqCbFDH3OQpm6w=
-X-Google-Smtp-Source: AGHT+IERoXbvWUJ0N0AT2xB26l3jE2YeIjliRkTnvR0ngkTZEVVTcv6WouS2kTUhie3J13SD6QfjXA==
-X-Received: by 2002:a05:622a:1906:b0:43a:f441:b3b2 with SMTP id
- d75a77b69052e-43dfdb22321mr244974091cf.17.1715815734155; 
- Wed, 15 May 2024 16:28:54 -0700 (PDT)
+ AJvYcCUh/+mumvV5JEHhNAc1yYBKt8lBARFqcEwdBXkiumCKw3LaKsHriBMDusCKwjbU/qIM2YOrVtbWpcAFTvsmPOJ3wFHQHw==
+X-Gm-Message-State: AOJu0YyuOu4AyhMPvltcYkCAiLiHGPaeRACoWxvbbFhBUzbmd7zDTD4L
+ z9zAGIEZDO5akJEm9GIwx5WRmfi5BWNkaZ8Mx9iXtcS6I4q4KCoTdQBudEysbwU=
+X-Google-Smtp-Source: AGHT+IGEBpzJCKKEk7OzkZrh/GGRIEyQdd7lNxwH3P8TXDYpifHI1C7gpxZL0xC3xRa3/oSv9v6h7A==
+X-Received: by 2002:a05:690c:88:b0:61b:2b7:27d8 with SMTP id
+ 00721157ae682-622affdc90emr196830407b3.23.1715815735490; 
+ Wed, 15 May 2024 16:28:55 -0700 (PDT)
 Received: from [127.0.1.1] ([187.144.98.216]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-43e3935af58sm7978291cf.65.2024.05.15.16.28.53
+ d75a77b69052e-43e3935af58sm7978291cf.65.2024.05.15.16.28.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 May 2024 16:28:53 -0700 (PDT)
+ Wed, 15 May 2024 16:28:55 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Dave Gerlach <d-gerlach@ti.com>, Nishanth Menon <nm@ti.com>, 
- Robert Nelson <robertcnelson@gmail.com>, 
- Martyn Welch <martyn.welch@collabora.com>
-Cc: Sjoerd Simons <sjoerd@collabora.com>, 
- Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
-In-Reply-To: <20240506143846.1252377-1-martyn.welch@collabora.com>
-References: <20240506143846.1252377-1-martyn.welch@collabora.com>
-Subject: Re: [PATCH v5 0/6] Add DFU and usb boot for TI am62x SK and beagleplay
-Message-Id: <171581573300.812585.12291710364879103682.b4-ty@konsulko.com>
-Date: Wed, 15 May 2024 17:28:53 -0600
+To: nm@ti.com, devarsht@ti.com, afd@ti.com, b-padhi@ti.com, 
+ u-boot@lists.denx.de, Hari Nagalla <hnagalla@ti.com>
+Cc: u-kumar1@ti.com, praneeth@ti.com
+In-Reply-To: <20240509142037.32064-1-hnagalla@ti.com>
+References: <20240509142037.32064-1-hnagalla@ti.com>
+Subject: Re: [PATCH 0/4] Add remoteproc driver for AM62a SoC
+Message-Id: <171581573428.812585.3544471980053898090.b4-ty@konsulko.com>
+Date: Wed, 15 May 2024 17:28:54 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -94,18 +91,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 06 May 2024 15:38:40 +0100, Martyn Welch wrote:
+On Thu, 09 May 2024 09:20:33 -0500, Hari Nagalla wrote:
 
-> This series adds DFU support for TI AM62 SK and beagleplay boards.
+> This series adds relevant ip data in remoteproc driver for AM62a devices.
 > 
-> I have picked this series up from Sjoerd due to time constraints.
+> Logs: https://paste.sr.ht/~hnagalla/5e20838705c1d688bca81886dad56451b56d3913
 > 
-> Since the last revision:
-> * Removed dwc3 mode setting in favour of reinstating forced peripheral
->   mode for usb0
-> * Use of config fragments for both r5 and a53 DFU configuration to
->   reduce duplication
-> * Typographical improvements to documentation
+> Hari Nagalla (4):
+>   remoteproc: k3-dsp: Enable C71x support for AM62A
+>   remoteproc: k3-r5: Add support for R5F core on AM62A SoCs
+>   configs: am62ax: enable remote proc drivers
+>   board: ti: am62ax: Add support for remote proc load
 > 
 > [...]
 
