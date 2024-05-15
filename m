@@ -4,95 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2563C25B75
-	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 22:01:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7703AC25B75
+	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 22:16:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DFE6D88361;
-	Wed, 15 May 2024 23:59:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=timesys.com
+	by phobos.denx.de (Postfix) with ESMTP id DB52D8831C;
+	Thu, 16 May 2024 00:16:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=timesys-com.20230601.gappssmtp.com header.i=@timesys-com.20230601.gappssmtp.com header.b="TxtfehUy";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="WLejhl6B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CE6988377; Wed, 15 May 2024 23:59:39 +0200 (CEST)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
+ id C055A88315; Thu, 16 May 2024 00:16:41 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D69D588356
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 23:59:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DDB48831C
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 00:16:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=timesys.com
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=greg.malysa@timesys.com
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-61bb219737dso84159397b3.2
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 14:59:36 -0700 (PDT)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-5210684cee6so117571e87.0
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 15:16:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=timesys-com.20230601.gappssmtp.com; s=20230601; t=1715810375; x=1716415175;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gateworks.com; s=google; t=1715811397; x=1716416197; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6S6Hvdjpi5P/3LRtNeZ0sFdseWgpWW13t+cPLmDABOI=;
- b=TxtfehUyaDZIo40TawiUWZ7Qt7nz4kcduQtmFDinuROd70OZs07C3jDiWwCKrXflVn
- 7nWR5+qE488fgXaLijTr21QDj5qLgzXNdNgOBq1STKKE2xzm7k214drtcCpPrzStZD1I
- VDBQ5ekkj/lKpMZIngma8oBLJlSDwcsWPP5KWgkn7AZKyNkjmH++PidfMNN+zV+OqMbO
- i5gbLGnFNfg5znnS3/hQ4L0jmC7ac0HWJA4d6yjyz1aCgdV2II1UP1CtRMoQdLvAWpTW
- Fphybh7p+v6bpeWNdi56oWd05voWVNJVK7u0+FMIBBbQuaRtfagWFER9tmRost3lcKxS
- tUSA==
+ bh=FlKtmQZi1eStSPFlJJ0vlwG7m+XQnBz5UXA5b1IWskI=;
+ b=WLejhl6B1QjaDc4ZJtBT8JOjvpde9jD97qBGZwQtvafjp9f9JLbgt6mRN3Q4BE6eaX
+ Wdp9v2ko3ZVIN2k9e5KVBDWZD2p98gSbm29vovNZaciiuH/qV3xhznaDvpUjyNWGv+CJ
+ pf0Lkpx7HaJguZuHzYCylxUVzrDfgIa5aB9DSEMPrIWvxkcpTV5Vmk+hCLou45tS123b
+ 7ZWkizhe+ZUO1oVomd4dOpnvq3fiNoCVh5ORNyDlBBhO46t8MsTdM3vRC7Fa7Hk1hzJG
+ 4R1I8ZFdTbSD0EyJRcerp78t3a80hat0wZCLtPWlQxcoEifbp2kRxA9ocrXA1hwaqFz9
+ hBeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715810375; x=1716415175;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1715811397; x=1716416197;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6S6Hvdjpi5P/3LRtNeZ0sFdseWgpWW13t+cPLmDABOI=;
- b=tddIIJOr042wF61eALZVdPyBO5Mzrp3059/hNPnukr2K6dGYrmTOAtwwJ0RG01FnX8
- 6VclXJzRwkfhL1iePzWznU/URTWR88xEswzQvApV6dhfjtLQgpyGRsD5rSOdksAi41RU
- wZP3jKbE1jY7L2eNhVFNjwnIIabd7lcva/n99cGt50DxbHY7fqticrS3ch/DGagMSo6X
- a8kS4ajmEl2JSO/LKxBKCu7eJOiAxhIO8h5z4O+byMeaQ3l0Xu5bQEIPGfTbJ5gGV/Sf
- 6l3y+V9zLHT3SeyDudZoIGyz9scNXLn6bV0mbShHPbe5gkrCdG4yi4CXCxyPvXZBq1gy
- 6thA==
-X-Gm-Message-State: AOJu0YztDKcza8buFkKuRxchoXLnyEDRdpNj+2yKMtqOR0eIQM3XpdSw
- t24TtzXlIb0n5UjpNdwURAnE3054GgUeIQAmbuGvzCqLOZHgtIgHNtPm1CZg1MjTDnwyij6yP+p
- EAg==
-X-Google-Smtp-Source: AGHT+IEOQwXY+2sUKF6HgrNkvpc+VzZgKWtvPurxlIDhUo8I15O4Qm85O4mnOm8ady83fIoUbGpQ8A==
-X-Received: by 2002:a05:690c:fc7:b0:615:3e2c:d318 with SMTP id
- 00721157ae682-622affda599mr206334267b3.41.1715810375575; 
- Wed, 15 May 2024 14:59:35 -0700 (PDT)
-Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
- by smtp.gmail.com with ESMTPSA id
- 00721157ae682-6209e37913asm30956457b3.105.2024.05.15.14.59.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 May 2024 14:59:34 -0700 (PDT)
-From: Greg Malysa <greg.malysa@timesys.com>
-To: u-boot@lists.denx.de
-Cc: Matthew McClintock <Matthew.Mcclintock@analog.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Greg Malysa <greg.malysa@timesys.com>,
- Ian Roberts <ian.roberts@timesys.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jaehoon Chung <jh80.chung@samsung.com>, Jonas Karlman <jonas@kwiboo.se>,
- Kongyang Liu <seashell11234455@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>,
- Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 11/11] mmc: Add support for ADI SC5XX-family processor SDHCI
- peripherals
-Date: Wed, 15 May 2024 17:57:48 -0400
-Message-ID: <20240515215837.14028-12-greg.malysa@timesys.com>
-X-Mailer: git-send-email 2.43.2
-In-Reply-To: <20240515215837.14028-1-greg.malysa@timesys.com>
-References: <20240515215837.14028-1-greg.malysa@timesys.com>
+ bh=FlKtmQZi1eStSPFlJJ0vlwG7m+XQnBz5UXA5b1IWskI=;
+ b=NVbN8KN0O06CCGONcC8C5ebHn7hLY4udrP/WImZU3ooC1dIkL9g0GIFGfJDCaaG4v6
+ xuDHkPaqCzy/rEBzAll1ZZ18mHOCb/SUuly1Rn/JaZpPb7FMz+fMpOsdr+A1CGJyr1iE
+ zXyOpNBuHj/Uofpw+p5aQDMh92SoVDHBVNiyXrmmG7bnQZYv33gNJAuIEPDucJ5uovvw
+ OfZDF7QcOMwAmF1La3tH8iWWxqKPWAtOBQrq0NjXznsMSJrZRvyX4Bma8AubCi0BTWIW
+ ZCwNR4fMnZAqVfAH7tC13D8+qYkHYICDAjqsu51MzaQi7mVMBzru8oqQ9be6e1lEGZt+
+ Xk8A==
+X-Gm-Message-State: AOJu0YzNhl54EATqkYcmahl9I8yEFRvDztaNmZeHyrMZlCmMDVjOUbW2
+ V9kJxCLcUHnN4vsekOBqRrxorL0NvyNouLoqlLKNuScHfIuzw7duQVmQdKMJC8eAM2f2tY/gukF
+ z3m/5j9kCr1y5vZOE3G6sGXnN9VX9J7iq2QN8SA==
+X-Google-Smtp-Source: AGHT+IGNmy/xMMS+vEcb6bfqylNXhfhaIsfefD5yfpNM6wYBp6nIM3cVd5rWaP49I/1SSm7AbXI5kUIH2gnoXNcYBk4=
+X-Received: by 2002:ac2:4858:0:b0:51d:b2a:5f7d with SMTP id
+ 2adb3069b0e04-5220fe799b0mr10825210e87.48.1715811396752; Wed, 15 May 2024
+ 15:16:36 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240503010518.263458-1-marex@denx.de>
+ <20240503010518.263458-4-marex@denx.de>
+ <CAJ+vNU2=k911jK8rYuaCx7qUN9GyCF6GLjuhLi0y82+yq1hYng@mail.gmail.com>
+ <1bb31e71-6fe3-44ce-90dc-6bc7a7fc4d94@denx.de>
+In-Reply-To: <1bb31e71-6fe3-44ce-90dc-6bc7a7fc4d94@denx.de>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Wed, 15 May 2024 15:16:24 -0700
+Message-ID: <CAJ+vNU3NQyC26+=_8sGk+a6vHNif_Yt96YDQ53xvZ4naWb0tYQ@mail.gmail.com>
+Subject: Re: [PATCH v2 4/4] imx: hab: Use nxp_imx8mcst etype for i.MX8M
+ flash.bin signing
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, anton.gres@ifm.com, ch@denx.de, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Adam Ford <aford173@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Angus Ainslie <angus@akkea.ca>, 
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Fabio Estevam <festevam@gmail.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Simon Glass <sjg@chromium.org>,
+ Stefan Eichenberger <stefan.eichenberger@toradex.com>, 
+ Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>, kernel@puri.sm, 
+ u-boot@dh-electronics.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,226 +104,206 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+On Tue, May 14, 2024 at 1:58=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+>
+> On 5/14/24 8:34 PM, Tim Harvey wrote:
+>
+> Hi,
+>
+> >> diff --git a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt b/doc/imx/h=
+abv4/guides/mx8m_spl_secure_boot.txt
+> >> index e16e5410bd9..ce1de659d8c 100644
+> >> --- a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
+> >> +++ b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
+> >> @@ -121,6 +121,9 @@ build configuration:
+> >>   - Defconfig:
+> >>
+> >>     CONFIG_IMX_HAB=3Dy
+> >> +  CONFIG_FSL_CAAM=3Dy
+> >> +  CONFIG_ARCH_MISC_INIT=3Dy
+> >> +  CONFIG_SPL_CRYPTO=3Dy
+> >>
+> >
+> > Hi Marek,
+> >
+> > Thanks for wrapping the dts bits with a config item.
+> >
+> > Is there any other reason to build with CONFIG_IMX_HAB than to use a
+> > signed image? I see that there are several ARCH_MX6 and ARCH_MX7
+> > configs that have this enabled (not ARCH_IMX8M so this certainly
+> > doesn't break anything) and I'm not sure what the value of that is.
+>
+> I think those few either enabled in preemptively in anticipation of
+> possibly using HAB, or are wrong. I suspect it should be disabled for
+> those, as it only adds to the board boot time and I am not even sure if
+> those machines would boot correctly.
+>
+> Francesco, maybe you do have MX7 Colibri ?
+>
+> > I notice that FSL_CAAM is selected when you select IMX_HAB... is there
+> > any reason why ARCH_MISC_INIT and SPL_CRYPTO should not be selected by
+> > IMX_HAB as well (future patch perhaps)?
+>
+> ARCH_MISC_INIT should be selected by SoC Kconfig on MX7 and maybe CAAM
+> on MX8M I think . As for SPL_CRYPTO, that should be selected by
+> SPL_FSL_CAAM I think.
+>
+> >>   - Kconfig:
+> >>
+> >
+> > We definitely need to describe the additional requirements here. Maybe
+> > something like:
+> >
+> > - Tools:
+> > cst - NXP code-signing-tool (eg apt install imx-code-signing-tool)
+> >
+> > - Files: (created with NXP IMX_CST_TOOL)
+> > SRK_1_2_3_4_table.bin (specified by nxp,srk-table node): fuse table
+> > CSF1_1_sha256_4096_65537_v3_usr_crt.pem (specified by nxp,csf-crt node)=
+: CSF_KEY
+> > IMG1_1_sha256_4096_65537_v3_usr_crt.pem (specified by nxp,img-crt node)=
+: IMG_KEY
+> >
+> > The following works fine for me on v2024.01
+> > export CST_DIR=3D/usr/src/nxp/cst-3.3.2/
+> > export CSF_KEY=3D$CST_DIR/crts/CSF1_1_sha256_4096_65537_v3_usr_crt.pem
+> > export IMG_KEY=3D$CST_DIR/crts/IMG1_1_sha256_4096_65537_v3_usr_crt.pem
+> > export SRK_TABLE=3D$CST_DIR/crts/SRK_1_2_3_4_table.bin
+> > export PATH=3D$CST_DIR/linux64/bin:$PATH
+> > make && /bin/sh doc/imx/habv4/csf_examples/mx8m/csf.sh
+> >
+> > But with the above defines and your series this fails:
+> > ln -sf $SRK_TABLE SRK_1_2_3_4_table.bin
+> > ln -sf $CSF_KEY CSF1_1_sha256_4096_65537_v3_usr_crt.pem
+> > ln -sf $IMG_KEY IMG1_1_sha256_4096_65537_v3_usr_crt.pem
+> > make
+> >    BINMAN  .binman_stamp
+> > Wrote map file './image.map' to show errors
+> > binman: Error 1 running 'cst -i
+> > ./nxp.csf-config-txt.section.nxp-imx8mcst@0 -o
+> > ./nxp.csf-output-blob.section.nxp-imx8mcst@0': Error:
+> > Cannot open key file IMG1_1_sha256_4096_65537_v3_usr_key.pem
+> > 0:error:02001002:system library:fopen:No such file or
+> > directory:crypto/bio/bss_file.c:288:fopen('IMG1_1_sha256_4096_65537_v3_=
+usr_key.
+> > pem','r')
+> > 0:error:20074002:BIO routines:file_ctrl:system lib:crypto/bio/bss_file.=
+c:290:
+> >
+> > make: *** [Makefile:1126: .binman_stamp] Error 1
+> >
+> > So how is it that the default for nxp,img-crt
+> > IMG1_1_sha256_4096_65537_v3_usr_crt.pem is now looking for
+> > IMG1_1_sha256_4096_65537_v3_usr_key? It fails also if I cp the files
+> > vs ln them.
+> >
+> > So what am I missing here?
+>
+> I think CST is using both the certificate and the key files. Try and run
+> strace on the CST to test that:
+>
+> $ strace cst -i ./nxp.csf-config-txt.section.nxp-imx8mcst@0 -o
+> ./nxp.csf-output-blob.section.nxp-imx8mcst@0
 
-Co-developed-by: Greg Malysa <greg.malysa@timesys.com>
-Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
-Co-developed-by: Ian Roberts <ian.roberts@timesys.com>
-Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
-Signed-off-by: Vasileios Bimpikas <vasileios.bimpikas@analog.com>
-Signed-off-by: Utsav Agarwal <utsav.agarwal@analog.com>
-Signed-off-by: Arturs Artamonovs <arturs.artamonovs@analog.com>
-Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
----
+Hi Marek,
 
- MAINTAINERS             |   1 +
- drivers/mmc/Kconfig     |   8 +++
- drivers/mmc/Makefile    |   1 +
- drivers/mmc/adi_sdhci.c | 152 ++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 162 insertions(+)
- create mode 100644 drivers/mmc/adi_sdhci.c
+strace was a good idea and showed me what was going on.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 1131c85d22..b4c00c4d5a 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -614,6 +614,7 @@ F:	drivers/dma/adi_dma.c
- F:	drivers/gpio/adp5588_gpio.c
- F:	drivers/gpio/gpio-adi-adsp.c
- F:	drivers/i2c/adi_i2c.c
-+F:	drivers/mmc/adi_sdhci.c
- F:	drivers/net/dwc_eth_qos_adi.c
- F:	drivers/pinctrl/pinctrl-adi-adsp.c
- F:	drivers/remoteproc/adi_sc5xx_rproc.c
-diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
-index d0944793c9..f32c8a3c13 100644
---- a/drivers/mmc/Kconfig
-+++ b/drivers/mmc/Kconfig
-@@ -283,6 +283,14 @@ config MMC_DW_ROCKCHIP
- 	  SD 3.0, SDIO 3.0 and MMC 4.5 and supports common eMMC chips as well
- 	  as removeable SD and micro-SD cards.
- 
-+config MMC_SDHCI_ADI
-+	bool "ADI SD/MMC controller support"
-+	depends on DM_MMC && OF_CONTROL
-+	depends on MMC_SDHCI && MMC_SDHCI_ADMA
-+	help
-+	  This enables support for the SD/MMC controller included in some Analog
-+	  Devices SC5XX Socs.
-+
- config MMC_DW_SOCFPGA
- 	bool "SOCFPGA specific extensions for Synopsys DW Memory Card Interface"
- 	depends on ARCH_SOCFPGA
-diff --git a/drivers/mmc/Makefile b/drivers/mmc/Makefile
-index 72c3fb66ce..eac8c28ee5 100644
---- a/drivers/mmc/Makefile
-+++ b/drivers/mmc/Makefile
-@@ -69,6 +69,7 @@ obj-$(CONFIG_MMC_SDHCI_MV)		+= mv_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_NPCM)            += npcm_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_PIC32)		+= pic32_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_ROCKCHIP)	+= rockchip_sdhci.o
-+obj-$(CONFIG_MMC_SDHCI_ADI)		+= adi_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_S5P)		+= s5p_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_STI)		+= sti_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_TANGIER)		+= tangier_sdhci.o
-diff --git a/drivers/mmc/adi_sdhci.c b/drivers/mmc/adi_sdhci.c
-new file mode 100644
-index 0000000000..a8484e0e7a
---- /dev/null
-+++ b/drivers/mmc/adi_sdhci.c
-@@ -0,0 +1,152 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * (C) Copyright 2022 - Analog Devices, Inc.
-+ *
-+ * Written and/or maintained by Timesys Corporation
-+ *
-+ * Contact: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
-+ * Contact: Greg Malysa <greg.malysa@timesys.com>
-+ *
-+ * Based on Rockchip's sdhci.c file
-+ */
-+
-+#include <clk.h>
-+#include <dm.h>
-+#include <malloc.h>
-+#include <sdhci.h>
-+#include <asm/cache.h>
-+
-+/* 400KHz is max freq for card ID etc. Use that as min */
-+#define EMMC_MIN_FREQ	400000
-+
-+#define ADMA_BOUNDARY_ALGN SZ_128M
-+#define BOUNDARY_OK(addr, len) \
-+	(((addr) | (ADMA_BOUNDARY_ALGN - 1)) == (((addr) + (len) - 1) | \
-+	(ADMA_BOUNDARY_ALGN - 1)))
-+/* We split a descriptor for every crossing of the ADMA alignment boundary,
-+ * so we need an additional descriptor for every expected crossing.
-+ * As I understand it, the max expected transaction size is:
-+ *  CONFIG_SYS_MMC_MAX_BLK_COUNT * MMC_MAX_BLOCK_LEN
-+ *
-+ * With the way the SDHCI-ADMA driver is implemented, if ADMA_MAX_LEN was a
-+ * clean power of two, we'd only ever need +1 descriptor as the first
-+ * descriptor that got split would then bring the remaining DMA
-+ * destination addresses into alignment. Unfortunately, it's currently
-+ * hardcoded to a non-power-of-two value.
-+ *
-+ * If that ever becomes parameterized, ADMA max length can be set to
-+ * 0x10000, and set this to 1.
-+ */
-+#define ADMA_POTENTIAL_CROSSINGS \
-+	DIV_ROUND_UP((CONFIG_SYS_MMC_MAX_BLK_COUNT * MMC_MAX_BLOCK_LEN), \
-+		 ADMA_BOUNDARY_ALGN)
-+/* +1 descriptor for each crossing.
-+ */
-+#define ADMA_TABLE_EXTRA_SZ (ADMA_POTENTIAL_CROSSINGS * ADMA_DESC_LEN)
-+
-+struct adi_sdhc_plat {
-+	struct mmc_config cfg;
-+	struct mmc mmc;
-+};
-+
-+struct adi_sdhc {
-+	struct sdhci_host host;
-+	void *base;
-+};
-+
-+void adi_dwcmshc_adma_write_desc(struct sdhci_host *host, void **desc,
-+			     dma_addr_t addr, int len, bool end)
-+{
-+	int tmplen, offset;
-+
-+	if (likely(!len || BOUNDARY_OK(addr, len))) {
-+		sdhci_adma_write_desc(host, desc, addr, len, end);
-+		return;
-+	}
-+
-+	offset = addr & (ADMA_BOUNDARY_ALGN - 1);
-+	tmplen = ADMA_BOUNDARY_ALGN - offset;
-+	sdhci_adma_write_desc(host, desc, addr, tmplen, false);
-+
-+	addr += tmplen;
-+	len -= tmplen;
-+	sdhci_adma_write_desc(host, desc, addr, len, end);
-+}
-+
-+struct sdhci_ops adi_dwcmshc_sdhci_ops = {
-+	.adma_write_desc = adi_dwcmshc_adma_write_desc,
-+};
-+
-+static int adi_dwcmshc_sdhci_probe(struct udevice *dev)
-+{
-+	struct mmc_uclass_priv *upriv = dev_get_uclass_priv(dev);
-+	struct adi_sdhc_plat *plat = dev_get_plat(dev);
-+	struct adi_sdhc *prv = dev_get_priv(dev);
-+	struct sdhci_host *host = &prv->host;
-+	int max_frequency, ret;
-+	struct clk clk;
-+
-+	max_frequency = dev_read_u32_default(dev, "max-frequency", 0);
-+	ret = clk_get_by_index(dev, 0, &clk);
-+
-+	host->quirks = 0;
-+	host->max_clk = max_frequency;
-+	/*
-+	 * The sdhci-driver only supports 4bit and 8bit, as sdhci_setup_cfg
-+	 * doesn't allow us to clear MMC_MODE_4BIT.  Consequently, we don't
-+	 * check for other bus-width values.
-+	 */
-+	if (host->bus_width == 8)
-+		host->host_caps |= MMC_MODE_8BIT;
-+
-+	host->mmc = &plat->mmc;
-+	host->mmc->priv = &prv->host;
-+	host->mmc->dev = dev;
-+	upriv->mmc = host->mmc;
-+
-+	host->ops = &adi_dwcmshc_sdhci_ops;
-+	host->adma_desc_table = memalign(ARCH_DMA_MINALIGN,
-+					 ADMA_TABLE_SZ + ADMA_TABLE_EXTRA_SZ);
-+	host->adma_addr = virt_to_phys(host->adma_desc_table);
-+
-+	ret = sdhci_setup_cfg(&plat->cfg, host, 0, EMMC_MIN_FREQ);
-+	if (ret)
-+		return ret;
-+
-+	return sdhci_probe(dev);
-+}
-+
-+static int adi_dwcmshc_sdhci_of_to_plat(struct udevice *dev)
-+{
-+	struct sdhci_host *host = dev_get_priv(dev);
-+
-+	host->name = dev->name;
-+	host->ioaddr = dev_read_addr_ptr(dev);
-+	host->bus_width = dev_read_u32_default(dev, "bus-width", 4);
-+
-+	return 0;
-+}
-+
-+static int adi_sdhci_bind(struct udevice *dev)
-+{
-+	struct adi_sdhc_plat *plat = dev_get_plat(dev);
-+
-+	return sdhci_bind(dev, &plat->mmc, &plat->cfg);
-+}
-+
-+static const struct udevice_id adi_dwcmshc_sdhci_ids[] = {
-+	{ .compatible = "adi,dwc-sdhci" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(adi_dwcmshc_sdhci_drv) = {
-+	.name		= "adi_sdhci",
-+	.id		= UCLASS_MMC,
-+	.of_match	= adi_dwcmshc_sdhci_ids,
-+	.of_to_plat	= adi_dwcmshc_sdhci_of_to_plat,
-+	.ops		= &sdhci_ops,
-+	.bind		= adi_sdhci_bind,
-+	.probe		= adi_dwcmshc_sdhci_probe,
-+	.priv_auto	= sizeof(struct adi_sdhc),
-+	.plat_auto	= sizeof(struct adi_sdhc_plat),
-+};
--- 
-2.43.2
+The previous documentation stated to pass your keys via env vars that
+were full paths to key certificates. Using strace shows me that it
+will use the directory the KEY certificate is in and try to open up
+../keys/*_usr_key.pem if the key path is specified. So apparently the
+'File' in the CST config file is used indirectly. Pointing to the
+usr_key.pem isn't enough either by the way, it seems to need both of
+these:
 
+so if I hack the path to my certs in like this it works:
+diff --git a/tools/binman/etype/nxp_imx8mcst.py
+b/tools/binman/etype/nxp_imx8mcst.py
+index 132127ad4827..b432200960df 100644
+--- a/tools/binman/etype/nxp_imx8mcst.py
++++ b/tools/binman/etype/nxp_imx8mcst.py
+@@ -67,10 +67,11 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+
+     def ReadNode(self):
+         super().ReadNode()
++        self.certpath =3D '/usr/src/nxp/cst-3.3.2/crts/';
+         self.loader_address =3D fdt_util.GetInt(self._node, 'nxp,loader-ad=
+dress')
+         self.srk_table =3D fdt_util.GetString(self._node,
+'nxp,srk-table', 'SRK_1_2_3_4_table.bin')
+-        self.csf_crt =3D fdt_util.GetString(self._node, 'nxp,csf-crt',
+'CSF1_1_sha256_4096_65537_v3_usr_crt.pem')
+-        self.img_crt =3D fdt_util.GetString(self._node, 'nxp,img-crt',
+'IMG1_1_sha256_4096_65537_v3_usr_crt.pem')
++        self.csf_crt =3D fdt_util.GetString(self._node, 'nxp,csf-crt',
+self.certpath + '/CSF1_1_sha256_4096_65537_v3_usr_crt.pem')
++        self.img_crt =3D fdt_util.GetString(self._node, 'nxp,img-crt',
+self.certpath + '/IMG1_1_sha256_4096_65537_v3_usr_crt.pem')
+         self.unlock =3D fdt_util.GetBool(self._node, 'nxp,unlock')
+         self.ReadEntries()
+
+$ make -j8
+  BINMAN  .binman_stamp
+  OFCHK   .config
+
+Here is a snippet of strace with the patch above:
+openat(AT_FDCWD,
+"/usr/src/nxp/cst-3.3.2/crts//IMG1_1_sha256_4096_65537_v3_usr_crt.pem",
+O_RDONLY) =3D 6
+fstat(6, {st_mode=3DS_IFREG|0644, st_size=3D7012, ...}) =3D 0
+read(6, "Certificate:\n    Data:\n        V"..., 4096) =3D 4096
+read(6, "31:3d:64:30:11:32:1d:ab:15:\n    "..., 4096) =3D 2916
+close(6)                                =3D 0
+openat(AT_FDCWD,
+"/usr/src/nxp/cst-3.3.2/keys//IMG1_1_sha256_4096_65537_v3_usr_key.pem",
+O_RDONLY) =3D 6
+fstat(6, {st_mode=3DS_IFREG|0600, st_size=3D3414, ...}) =3D 0
+read(6, "-----BEGIN ENCRYPTED PRIVATE KEY"..., 4096) =3D 3414
+
+And a snippet at the same part without the patch above:
+openat(AT_FDCWD, "IMG1_1_sha256_4096_65537_v3_usr_crt.pem", O_RDONLY) =3D 6
+fstat(6, {st_mode=3DS_IFREG|0644, st_size=3D7012, ...}) =3D 0
+read(6, "Certificate:\n    Data:\n        V"..., 4096) =3D 4096
+read(6, "31:3d:64:30:11:32:1d:ab:15:\n    "..., 4096) =3D 2916
+close(6)                                =3D 0
+openat(AT_FDCWD, "IMG1_1_sha256_4096_65537_v3_usr_key.pem", O_RDONLY)
+=3D -1 ENOENT (No such file or directory)
+write(2, "Error: Cannot open key file IMG1"..., 68
+Error: Cannot open key file IMG1_1_sha256_4096_65537_v3_usr_key.pem
+) =3D 68
+write(2, "0:error:02001002:system library:"...,
+1430:error:02001002:system library:fopen:No such file or
+directory:crypto/bio/bss_file.c:288:fopen('IMG1_1_sha256_4096_65537_v3_usr_=
+key.pem','r')
+
+Do you not run into this and if not is it because you have put full
+paths in the dtsi overriding the defaults I'm using? Maybe this has
+something to do with how my keys were generated or the version of cst
+I'm using or maybe we just need to also add a directory which can be
+symlinked to or something.
+
+Another thing that I'm seeing is that this leaves a bunch of turd files aro=
+und:
+$ git status
+On branch cst
+Your branch is ahead of 'origin/master' by 4 commits.
+  (use "git push" to publish your local commits)
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        cfg-out.section.nxp-imx8mcst@0.nxp-imx8mimage
+        cfg-out.section.nxp-imx8mimage
+        input.section.nxp-imx8mcst@0
+        input.section.nxp-imx8mcst@0.nxp-imx8mimage
+        input.section.nxp-imx8mimage
+        nxp.csf-config-txt.section.nxp-imx8mcst@0
+        nxp.cst-input-data.section.nxp-imx8mcst@0
+        nxp.imx8mimage.cfg.section.nxp-imx8mcst@0.nxp-imx8mimage
+        nxp.imx8mimage.cfg.section.nxp-imx8mimage
+
+These intermediate files should be cleaned up after signing is complete.
+
+Best Regards,
+
+Tim
