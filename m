@@ -4,61 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F134EC25B75
-	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 19:52:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F08E7C25B75
+	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 19:58:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24272882DF;
-	Wed, 15 May 2024 21:52:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 135E5882DC;
+	Wed, 15 May 2024 21:58:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1715802743;
-	bh=UOSet8MyKY5OOkN5Eu76NlNd4nhgHCtsVXS2BTC0xEA=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=jHqI+nSsJVhqBJNPmWa5fSXk3ZTA9sHzvfoER1sJCy3Yq0JJMbqZPUA9t+SAEr6kh
-	 aXZwIYewTjOSkF18YCTNIRcneN5MaeNfuJO44NMsamB66Fxdxm6Tz8+NUYuKaEwefY
-	 WZsIRjqBiVxl67SyubnN0t5N1/0kl8ltrG56t7eEv+bty7gI4cicrDPac8tlQjOEEN
-	 1+MzgtWy6pLUsqAOGlf7YI7EtPFz5F+WrUZ9/T5aXDFAw0N0OShWqGb4MQvMCaUfKg
-	 r/kSmYubJBpsqRmFVq78Bc+iDo1EY/XUNr6DRXJ7CUdllCFbU/lthCYw0mY8/PzOc3
-	 Jr7om2BgoIkxg==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="QnUxVmbb";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D3A2D882FE; Wed, 15 May 2024 21:58:13 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E7FFB880F1;
- Wed, 15 May 2024 21:52:21 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1715802742;
- bh=UOSet8MyKY5OOkN5Eu76NlNd4nhgHCtsVXS2BTC0xEA=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=GCEl7GJD+uXRmWVhLplplx3/4xj9ow61/g+cjjfD5Yh+bLql/+4zBv7h1JL9k9lnO
- u0LwHLBO10HHcjTRxkaUroXO7vgpeW7WmmLp9RvbTCn46suvngv8+MDYqYNiEMVv3H
- yhJzArBqBDYFx+xazNP+CnD87hPwMHp+uTTe2XNxXpk+v/JnYnvsgPyrGl0L0rPzed
- Z2piZEVvyy2EaoAhMktccq4axO3UZ6oLUstnUbfGyKz0wCmAhg3znO0d/Y0r6dPsmY
- /+aipJXdN2lcOipzQ+5hsDDrIy9Zn9sqK7faw3sacLavJ5Fj4SHM3btIAjeZ5Nb4pQ
- SWUWPvnSVtqag==
-Message-ID: <91a62c19-d565-4cd8-a20d-75d682acf95f@denx.de>
-Date: Wed, 15 May 2024 20:35:38 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 73CDF882DC
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 21:58:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-41f9ce16ed8so71947775e9.0
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 12:58:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gateworks.com; s=google; t=1715803091; x=1716407891; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=AwxEM5cCxdPozzvRejTbGlcXnNtEBM4GAg95F08wviY=;
+ b=QnUxVmbbUDs5ojESCZxjbzfDVKPy5spF6PfgUL+nZraqCB5/Vuftr7brTrHcLgrW4K
+ ZbrwIN+HYJTfqe+qtAEit8gJ2/mYOuiL+roAntd6vtngTMQu0zHh1vDwDuOvbEO9jhK/
+ YZY6Gsz/i5N+UTGGrDocC2zv5vxGHAUxtVp4WL4FPqOWc6bhCSXON0ntY/oPkTtAKWNg
+ A0Xz5EwFrxci4TV9UFPOP8RKhUojOZfCGhz2tGDo3SOgE5/drawPTGFJ1Yd79DdH1OEk
+ 5coWg2LQXZZqKbpsoG7YGfZ9yg62f6pfEWMsIRUvdK2DTzMh0ctolga1ySRO0Am7LAYC
+ /qUA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1715803091; x=1716407891;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=AwxEM5cCxdPozzvRejTbGlcXnNtEBM4GAg95F08wviY=;
+ b=dXHvjbH9vlLnCaNYldZZcM0p4SB2nMOL54OsypGJudVSpwEDc5ooE9BKdocuk+B6eM
+ 0Lh8ArDLGQz4afRKnSomTM6vOnZ5RgtLb55Mhxi0K+WdM1gOAvMbtvbioEqXJKHPInPt
+ deUplKYhtWI3Kma7IzD2Xc70pgt6NVqieS9QoaIEThrmwT7NNztkTcV7pOor3aGnHd1/
+ b5Xg1KyoXRfTQLsxrM7NVtYw8suPirhbvSf2NGW95GcH1zdqBbcTiLXFufDvd3N0lnD4
+ W2pq2FARBVV/1oFphOqiRBfXLq/Ry1gGFV0j5Hk/OOAtTBOSTF1xJtJ9tu1J6EabcY3U
+ p5yg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUa//MmrwsW31YdMIHWCo/9na4WwPqi8jq4K1p1kz0K5QossHayteBkRc1Z7APF4hryCSRCdHPcFZ59oWQYfmsF4VYCvQ==
+X-Gm-Message-State: AOJu0YzqggWh5dGSaL/OTpxe/O/NxenOG7GUtTPqLy27Dm9NKZod2vmD
+ VSecejLzzYKqBBDHm/Da7UOCJ4KGKmk6uUQnklbYIY6x9wDm5H+2opmZvo9FcS9KzjeRM8OTRwJ
+ yEdSBm9s1YiwxuJ6/9Q5W5Vh9Vwi948LXvcVYXg==
+X-Google-Smtp-Source: AGHT+IFp+SvJHmfB60xwqBMt4rjSFOBp/xQTEm7p6tTcn1rb4WqUWLLqCBqSus7oBtvsjmB1PAWjvE/2Vu80DGkbeLM=
+X-Received: by 2002:a5d:6e87:0:b0:34d:a9ff:7ebf with SMTP id
+ ffacd0b85a97d-3504a73725bmr14714656f8f.22.1715803090859; Wed, 15 May 2024
+ 12:58:10 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] fdt: add kaslr-seed if DM_RNG is enabled
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Devarsh Thakkar <devarsht@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hugo Villeneuve <hvilleneuve@dimonoff.com>
 References: <20240515002248.2920155-1-tharvey@gateworks.com>
  <039c0adc-3014-4ae7-99b3-0df9e5366b79@denx.de>
- <CAJ+vNU0nSV-xKkrrXtod9zYfsSe2vUQsCVEgq9PntTxCnqV0dA@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAJ+vNU0nSV-xKkrrXtod9zYfsSe2vUQsCVEgq9PntTxCnqV0dA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ <b16b85dc-90bf-463b-a206-06d98c3c1f0e@gmx.de>
+In-Reply-To: <b16b85dc-90bf-463b-a206-06d98c3c1f0e@gmx.de>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Wed, 15 May 2024 12:57:58 -0700
+Message-ID: <CAJ+vNU2yjkFpz4-WUDzJtwnsm4yi4mLk3HMK6J7J_Y38c6C2Sw@mail.gmail.com>
+Subject: Re: [PATCH] fdt: add kaslr-seed if DM_RNG is enabled
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Devarsh Thakkar <devarsht@ti.com>, 
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>, Eddie James <eajames@linux.ibm.com>,
+ Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,61 +98,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/15/24 6:29 PM, Tim Harvey wrote:
-> On Tue, May 14, 2024 at 5:50 PM Marek Vasut <marex@denx.de> wrote:
->>
->> On 5/15/24 2:22 AM, Tim Harvey wrote:
->>> If RANDOMIZE_BASE is enabled in the Linux kernel instructing it to
->>> randomize the virtual address at which the kernel image is loaded, it
->>> expects entropy to be provided by the bootloader by populating
->>> /chosen/kaslr-seed with a 64-bit value from source of entropy at boot.
->>
->> Thanks for working on this one, this is really nice.
->>
->>> If we have DM_RNG enabled poulate this value automatically when
->>> fdt_chosen is called.
-> 
-> Hi Marek,
-> 
-> Just noticed a typo in the commit log - I'll s/poulate/populate/ in v2
-> 
->>>
->>> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
->>> ---
->>>    boot/fdt_support.c | 23 +++++++++++++++++++++++
->>>    1 file changed, 23 insertions(+)
->>>
->>> diff --git a/boot/fdt_support.c b/boot/fdt_support.c
->>> index 874ca4d6f5af..cd3069baf450 100644
->>> --- a/boot/fdt_support.c
->>> +++ b/boot/fdt_support.c
->>> @@ -7,10 +7,12 @@
->>>     */
->>>
->>>    #include <abuf.h>
->>> +#include <dm.h>
->>>    #include <env.h>
->>>    #include <log.h>
->>>    #include <mapmem.h>
->>>    #include <net.h>
->>> +#include <rng.h>
->>>    #include <stdio_dev.h>
->>>    #include <dm/ofnode.h>
->>>    #include <linux/ctype.h>
->>> @@ -300,6 +302,27 @@ int fdt_chosen(void *fdt)
->>>        if (nodeoffset < 0)
->>>                return nodeoffset;
->>>
->>> +     if (IS_ENABLED(CONFIG_DM_RNG)) {
->>> +             struct udevice *dev;
->>> +             size_t len = 0x8;
->>> +             u64 *data;
->>> +
->>> +             data = malloc(len);
->>
->> Can you allocate this 8 byte array on stack , i.e. u64 data[2]; ?
->>
-> 
-> Sure... that makes sense - u64 data (just 1 64bit value)
+On Tue, May 14, 2024 at 10:17=E2=80=AFPM Heinrich Schuchardt <xypron.glpk@g=
+mx.de> wrote:
+>
+> On 5/15/24 02:50, Marek Vasut wrote:
+> > On 5/15/24 2:22 AM, Tim Harvey wrote:
+> >> If RANDOMIZE_BASE is enabled in the Linux kernel instructing it to
+> >> randomize the virtual address at which the kernel image is loaded, it
+> >> expects entropy to be provided by the bootloader by populating
+> >> /chosen/kaslr-seed with a 64-bit value from source of entropy at boot.
+> >
+> > Thanks for working on this one, this is really nice.
+>
+> The general direction of always supplying a seed for KASLR is right. But
+> there are some items to observe:
+>
+> We already have multiple places where /chosen/kaslr-seed is set, e.g.
+> arch/arm/cpu/armv8/sec_firmware.c and board/xilinx/common/board.c.
+>
 
-Oh, right. Thanks for fixing it all up and keeping an eye on all the bugs !
+Hi Heinrich,
+
+Yes, Marek pointed out the same thing about de-duplicating code. I can
+add a lib/kaslrseed.c with a fdt_kaslrseed function to deduplicate the
+usage.
+
+> Some boards are using the kaslrseed command to initialize
+> /chosen/kaslr-seed from DM_RNG.
+>
+> It does not make sense to set it multiple times from different sources
+> of randomness. I am missing the necessary clean-up in this patch.
+>
+> For CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT=3Dy the right way forward could be
+> moving sec_firmware_get_random() into the driver model. Tom is the
+> maintainer for this code.
+
+ok, I will not address arch/arm/cpu/armv8/sec_firmware.c and will
+protect my implementation with 'if (IS_ENABLED(CONFIG_DM_RNG) &&
+!IS_ENABLED(ARMV8_SEC_FIRMWARE_SUPPORT))'
+
+>
+> For Xilinx boards your patch obsoletes part of the code in
+> ft_board_setup() of board/xilinx/common/board.c. CCing Michal as maintain=
+er.
+>
+
+yes, I can remove that code to deduplicate as they are using
+dm_rng_read() thus users of that must have CONFIG_DM_RNG enabled.
+
+> The kaslrseed command similarly becomes obsolete with your patch and
+> should be removed. 'git grep -n CMD_KASLR' indicates which defconfigs
+> would be impacted.
+>
+
+There are several users of this command currently:
+$ git grep CMD_KASLR configs/
+configs/evb-rk3308_defconfig:CONFIG_CMD_KASLRSEED=3Dy
+configs/imx8mm_data_modul_edm_sbc_defconfig:CONFIG_CMD_KASLRSEED=3Dy
+configs/imx8mp_data_modul_edm_sbc_defconfig:CONFIG_CMD_KASLRSEED=3Dy
+configs/imx8mp_dhcom_pdk2_defconfig:CONFIG_CMD_KASLRSEED=3Dy
+configs/imx8mp_dhcom_pdk3_defconfig:CONFIG_CMD_KASLRSEED=3Dy
+configs/roc-cc-rk3308_defconfig:CONFIG_CMD_KASLRSEED=3Dy
+configs/rock-pi-s-rk3308_defconfig:CONFIG_CMD_KASLRSEED=3Dy
+configs/xilinx_versal_net_virt_defconfig:CONFIG_CMD_KASLRSEED=3Dy
+configs/xilinx_versal_virt_defconfig:CONFIG_CMD_KASLRSEED=3Dy
+configs/xilinx_zynqmp_kria_defconfig:CONFIG_CMD_KASLRSEED=3Dy
+configs/xilinx_zynqmp_virt_defconfig:CONFIG_CMD_KASLRSEED=3Dy
+
+While I can deduplicate code by calling a shared function in that
+command I don't feel like I should remove that command until the
+maintainers of the boards above agree on removing it from their
+defconfigs as they could have bootscripts that fail with the command
+missing.
+
+I could add a warning print in the kaslrseed command indicating that
+the use of this command is no longer needed.
+
+> label_boot_kaslrseed() needs review too.
+>
+
+yes, this can be deduplicated
+
+> kaslr-seed is not compatible with measured boot if the device-tree is
+> measured. When booting via EFI in efi_try_purge_kaslr_seed() we can
+> safely remove the value because it is not used anyway; we provide the
+> EFI_RNG_PROTOCOL instead. We also support measured boot via the legacy
+> Linux entry point. See patch dec166d6b2c2 ("bootm: Support boot
+> measurement"). We should not populate kaslr-seed if
+> CONFIG_MEASURE_DEVICETREE=3Dy. CCing Eddie and Ilias as they have been
+> working on measured boot.
+>
+
+board/raspberrypi/rpi/rpi.c:ft_board_setup copies /chosen/kaslr-seed
+from an fdt apparently passed in from a lower level firmware stage.
+
+should I check to see if /chosen/kaslr-seed exists and never overwrite
+it or just let this get overwritten?
+
+> >
+> >> If we have DM_RNG enabled poulate this value automatically when
+>
+> nits
+>
+> %s/poulate/populate/
+>
+
+yes, I will fix that as well.
+
+Thanks for the review!
+
+Best Regards,
+
+Tim
