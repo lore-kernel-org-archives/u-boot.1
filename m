@@ -4,51 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91CFDC25B79
-	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 15:04:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 702AFC25B75
+	for <u-boot@archiver.kernel.org>; Wed, 15 May 2024 15:05:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9CD788250;
-	Wed, 15 May 2024 17:04:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4147E882E5;
+	Wed, 15 May 2024 17:04:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="MJ0rFqmL";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="iIgS4rmg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74FEF88176; Wed, 15 May 2024 17:04:48 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id 41FA588176; Wed, 15 May 2024 17:04:56 +0200 (CEST)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7234688013
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 17:04:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 12A278823D
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 17:04:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 00486614CE;
+ by sin.source.kernel.org (Postfix) with ESMTP id 057EDCE14E9;
+ Wed, 15 May 2024 15:04:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0766FC116B1;
  Wed, 15 May 2024 15:04:45 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 479B1C32786;
- Wed, 15 May 2024 15:04:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1715785484;
- bh=kdv3zbpMlvYD6sO/O1R+YhrUOXzmgfyFy2AjMhh/pcQ=;
- h=From:To:Cc:Subject:Date:From;
- b=MJ0rFqmLJfY87FfdqmNdygrUjDBLhywn9AVjE0ZxiEBvhp7XG+EW2nOPqa1HgaszG
- CluseXAElaLf0E8Vds2vrmbQFK/oEcGb7NGhYruw8r89Fpbd0Cv8J4zDeS/a/0f/Qz
- 4kpAULVqoC+xnGG9XHlskbhNSAl8iTpZ0w3FGu8+8iaLIju1/5C25SKIh49ij4H5to
- 8k+Uo6276fx82sDdryF+RvwhYkQPkU57k9/CbeNrAlXuHN9gK/RCFGUUyCF+tfJTqu
- Ou997NjpXzgdE3NpN0qkbyTp0Q97Dj72tfOW+beE6efVO5/yEof6uLkU4HhW8CVkJI
- NIERnwtig2v0g==
+ s=k20201202; t=1715785487;
+ bh=FRRqG/7zbIQrDbvYUPIabC6FzgZYAxFTzDrzF8FYSac=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=iIgS4rmgUdrpJ3CecgiztYiLpd86i1uxrhlBYJktdrtlWrnLqvewg4GtZsXN5H8BD
+ l7qae4WYGouw9ElzvJuBUTSq38B2vM0OsMuoeQOh9qc7H8zBrON33j8lqiF7zBRwC1
+ V7Rw+lpTm81GzEE2n9cj0foLJ4vKKgGLIx3YRYj6RySxSjI2dwBu7UrjE9DJJBBzJu
+ Wu1fVbwTqf5wRNBdfNEnE2BnLyhr3868wvKN7lvaBE/Ip7lqGR/HRwZGh+LNDcd0fn
+ vPFyjwx60UeCHdc3RbNOMv3uvyf9mrdyjm+90I1Ajbj3aa23eSrQvtdx1aCWyK2eI7
+ FL6AREqE0qSIQ==
 From: Conor Dooley <conor@kernel.org>
 To: u-boot@lists.denx.de
 Cc: conor@kernel.org, Conor Dooley <conor.dooley@microchip.com>,
  Padmarao Begari <padmarao.begari@microchip.com>,
  Cyril Jean <cyril.jean@microchip.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1 0/2] Two mpfs icicle init fixes
-Date: Wed, 15 May 2024 16:04:29 +0100
-Message-ID: <20240515150434.406916-1-conor@kernel.org>
+Subject: [PATCH v1 1/2] board: microchip: icicle: correct type for node offset
+Date: Wed, 15 May 2024 16:04:30 +0100
+Message-ID: <20240515150434.406916-2-conor@kernel.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240515150434.406916-1-conor@kernel.org>
+References: <20240515150434.406916-1-conor@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -69,26 +70,31 @@ X-Virus-Status: Clean
 
 From: Conor Dooley <conor.dooley@microchip.com>
 
-Two fixes for issues that I spotted today while looking into passing a
-minimal dtb to U-Boot from the first bootloader stage. This minimal dtb
-had no ethernet nodes, and the code in this patches fell over :\
+Node offsets returned by libfdt can contain negative error numbers, so
+the variable type should be "int". As things stand, if the ethernet
+nodes are not found in the early init callback, the if (node < 0) tests
+pass and the code errors out while trying to set the local-mac-address
+for a non-existent node.
 
-Cheers,
-Conor.
+Fixes: 64413e1b7c ("riscv: Add Microchip MPFS Icicle Kit support")
+Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
 ---
-CC: Padmarao Begari <padmarao.begari@microchip.com>
-CC: Cyril Jean <cyril.jean@microchip.com>
-CC: Tom Rini <trini@konsulko.com>
-CC: Conor Dooley <conor.dooley@microchip.com>
-CC: u-boot@lists.denx.de
+ board/microchip/mpfs_icicle/mpfs_icicle.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Conor Dooley (2):
-  board: microchip: icicle: correct type for node offset
-  board: microchip: icicle: make both ethernets optional
-
- board/microchip/mpfs_icicle/mpfs_icicle.c | 25 ++++++++---------------
- 1 file changed, 8 insertions(+), 17 deletions(-)
-
+diff --git a/board/microchip/mpfs_icicle/mpfs_icicle.c b/board/microchip/mpfs_icicle/mpfs_icicle.c
+index 7beac33cfb..5fd0ec66a9 100644
+--- a/board/microchip/mpfs_icicle/mpfs_icicle.c
++++ b/board/microchip/mpfs_icicle/mpfs_icicle.c
+@@ -72,7 +72,7 @@ int board_early_init_f(void)
+ int board_late_init(void)
+ {
+ 	u32 ret;
+-	u32 node;
++	int node;
+ 	u8 idx;
+ 	u8 device_serial_number[16] = { 0 };
+ 	unsigned char mac_addr[6];
 -- 
 2.43.0
 
