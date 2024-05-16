@@ -4,77 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C395C25B74
-	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 18:22:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64C5EC25B74
+	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 19:20:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF923883BD;
-	Thu, 16 May 2024 20:22:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9AB0A870AB;
+	Thu, 16 May 2024 21:20:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kyZxOUxA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Z05XN4tI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 561A6883AE; Thu, 16 May 2024 20:22:31 +0200 (CEST)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
+ id 7742C883E6; Thu, 16 May 2024 21:20:31 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4751883BD
- for <u-boot@lists.denx.de>; Thu, 16 May 2024 20:22:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 86CB38701E
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 21:20:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-6a0ce3e823fso44756926d6.1
- for <u-boot@lists.denx.de>; Thu, 16 May 2024 11:22:28 -0700 (PDT)
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-572e48f91e9so4240244a12.0
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 12:20:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715883748; x=1716488548; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Aq7si82leRMzwvQRVxnDYZSwKyyg2ui2H049xRMigxA=;
- b=kyZxOUxASkEnPetEjrRcaM3YBCiUQVfvRJfnUzIzNqaM4GPJiK9fHAhBR4/eCc82gy
- Ht0THiBmy3yKzA6CB1wGpHTxF6h7diwiLlSzTv0eabNKl3sTm5ikm41pWgqM5tkPQVM4
- JTO45lsie7D3POrPDBTursf1R/Mfph0oTpVA8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715883748; x=1716488548;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1715887229; x=1716492029; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Aq7si82leRMzwvQRVxnDYZSwKyyg2ui2H049xRMigxA=;
- b=DRTyFHlqD5rNJZo+MjdHB27mxDecrMHNxGmGgWlYHFTA0IJLK5RLmwyXH5zJercXGm
- OizrXLodu1i1UL8oiE7TnXinL3agn6vXzH1ZhNZ/JCDyy+s28TJUM9/d6FEXuNWDjebq
- oNdgjfR0PpQXTMB6cAEIuaHXrx2J1nNb2zuDHtNPWlgo4P5mSA2D8w/9iZZwDMlp7FWa
- Q2eFpXhJ9QSFN77SCAyUjAbWEQLzWlvB5y6mh+nzZDa6aWQO5TnpSSU1TxH9jHh8tSvD
- leMnauZUYywJf84pVFwKd1Ltk+2cp3nt1mpSpBUkyTMQOcrApjrnLdSkOL1pktrlmUVZ
- Xk5w==
-X-Gm-Message-State: AOJu0YzX2dt9hbydIhlGnHcvUniLJrdF26srPDJZDMHOrCx8mJncttKi
- zQOPAO/xKK1glGo5VNrSswNcK0YqdHkzzlKKpe7o9DBq/YGnoimJ6XysqZyYNXQ=
-X-Google-Smtp-Source: AGHT+IFO+lBupVTog1A8ETu0Hh41tbu4xFIDKjf/0XqCAGlVlGrZiUGwPrDbWaK/AuO7Mf8vfhiCxg==
-X-Received: by 2002:a05:6214:2f90:b0:6a0:c934:56c3 with SMTP id
- 6a1803df08f44-6a16819f324mr216932846d6.2.1715883747579; 
- Thu, 16 May 2024 11:22:27 -0700 (PDT)
-Received: from bill-the-cat ([187.144.98.216])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6a15f17960csm77525466d6.25.2024.05.16.11.22.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 May 2024 11:22:27 -0700 (PDT)
-Date: Thu, 16 May 2024 12:22:24 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
- Aswath Govindraju <a-govindraju@ti.com>, Benjamin Hahn <B.Hahn@phytec.de>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>
-Subject: Re: [GIT PULL] Please pull u-boot-dfu-20240516
-Message-ID: <20240516182224.GE2568172@bill-the-cat>
-References: <87cyplzt7i.fsf@baylibre.com>
+ bh=4zTXjj6RvV3nsONmDLr/xg3cU39Ijje68fP+kf3cstY=;
+ b=Z05XN4tI07SQAJ+elKyQye503ytt6JhFMBK4P+r3vFMtGnyFbtWC3zgRxf2IrdIy9O
+ 4pTbLnHtp0CoGlb7cFF69yp54Gy1+Tzbsi/FuCBEGbUGQ6Gz9peEZBTMRUblPAnSglDi
+ JAWy1OGWmn2yqi1a+SIZKney6nHfTTjbExAwh/Qb7VR0WyDbjBvs/Pra7NddZtHTthsJ
+ nFPPilhqdccM+I1A81Jke+KB/w2gJvbTuyHZmejLAzm6MKQHvSqaF7Mwod4sUYyNz0DP
+ sAVdBCeqWfds0Z0V+qVAikV+fqxML+yo56fPHQRzr7sop7tQ2Sk7ZYC5u/ZFaZTiEZ5P
+ 145Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1715887229; x=1716492029;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=4zTXjj6RvV3nsONmDLr/xg3cU39Ijje68fP+kf3cstY=;
+ b=uJ8cACFffoWbiWWXM3UF7HbHbQQfA4zSImtxXGbMonVnS9kC3NmDTD+Jhqx6nA4/28
+ wJzD9eTfhzVrVH4ZKBAKRKVOlnbp36Z2YF1DxScZ0VY5AwlxfpW5QVuteCcyKOQyxBK1
+ RfUVI4SyM3GPsRZlZpEUmzGFomowNngKifAs8VA3tJ7HkRI6Scc/zVYTeH7Z+jZ+C4Rn
+ DFx3pU/6RcmT3pWZIFtIJY9ZSNM7jgaeJRGVprQmH+GhYW5Qo//dSupin5g0UubF8z6u
+ /bVo9k/UUlwZvinKMzL4WTyDzDNQ+U7GFWx3E6nMJfo8RZwvJTlhjm8y0v0CXQD9lO+4
+ Ny6Q==
+X-Gm-Message-State: AOJu0YwHrKiaSFyKmFHH1BYSU9DonLqk/iDEDH82u7hZfpZzU7Cs0af3
+ T7kuEcJ0E2Iq59XgHpTd2tLzdy4OBNbKPRiw1eU/sM3LD8RcXuOGZqgC9yzq922Iv2Z0QIeXs9F
+ BOpq7k00yioUvrh/QfSD5Mi4hp/s=
+X-Google-Smtp-Source: AGHT+IHNLaRaw/StyDMWYUcLDJAh8kZ2zB7aBSAP4winakM5i1cSswy9NJo92DzLCL8STubj4UyubGHc0A1U2bjoshQ=
+X-Received: by 2002:a50:cd82:0:b0:56e:22b6:d924 with SMTP id
+ 4fb4d7f45d1cf-5734d5cf8dcmr11993626a12.13.1715887228726; Thu, 16 May 2024
+ 12:20:28 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="nJyj0854iAZLegYU"
-Content-Disposition: inline
-In-Reply-To: <87cyplzt7i.fsf@baylibre.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240516104245.2075748-1-fiona.klute@gmx.de>
+ <20240516104245.2075748-2-fiona.klute@gmx.de>
+In-Reply-To: <20240516104245.2075748-2-fiona.klute@gmx.de>
+From: Tony Dinh <mibodhi@gmail.com>
+Date: Thu, 16 May 2024 12:20:17 -0700
+Message-ID: <CAJaLiFxP91T9CvgjZxtrgqZWjvQLzAP7z4M1xbw6EwXyeRJnUQ@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] doc: Update netconsole examples, mention stderr
+To: Fiona Klute <fiona.klute@gmx.de>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,69 +88,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Fiona,
 
---nJyj0854iAZLegYU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, May 16, 2024 at 3:43=E2=80=AFAM Fiona Klute <fiona.klute@gmx.de> wr=
+ote:
+>
+> Stderr was missing from the initial description and example.
+>
+> As I understand the env command documentation the subcommand style is
+> preferred, though the old format is still fully supported.
+>
+> Signed-off-by: Fiona Klute <fiona.klute@gmx.de>
+> ---
+> Changes in v2:
+> * Mention stderr redirection
+> * Use 4 spaces instead of tabs for code block to avoid overflowing
+>   lines
+>
+>  doc/usage/netconsole.rst | 16 ++++++++--------
+>  1 file changed, 8 insertions(+), 8 deletions(-)
+>
+> diff --git a/doc/usage/netconsole.rst b/doc/usage/netconsole.rst
+> index 647f0c220b..f745615d9a 100644
+> --- a/doc/usage/netconsole.rst
+> +++ b/doc/usage/netconsole.rst
+> @@ -3,10 +3,10 @@ Network console
+>
+>  In U-Boot, we implemented the networked console via the standard
+>  "devices" mechanism, which means that you can switch between the
+> -serial and network input/output devices by adjusting the 'stdin' and
+> -'stdout' environment variables. To switch to the networked console,
+> -set either of these variables to "nc". Input and output can be
+> -switched independently.
+> +serial and network input/output devices by adjusting the 'stdin',
+> +'stdout', and 'stderr' environment variables. To switch to the
+> +networked console, set either of these variables to "nc". Input and
+> +output can be switched independently.
+>
+>  The default buffer size can be overridden by setting
+>  CFG_NETCONSOLE_BUFFER_SIZE.
+> @@ -24,10 +24,10 @@ can be used for network console.
+>
+>  For example, if your server IP is 192.168.1.1, you could use::
+>
+> -       =3D> setenv nc 'setenv stdout nc;setenv stdin nc'
+> -       =3D> setenv ncip 192.168.1.1
+> -       =3D> saveenv
+> -       =3D> run nc
+> +    =3D> env set nc 'env set stdout nc; env set stderr nc; env set stdin=
+ nc'
+> +    =3D> env set ncip 192.168.1.1
+> +    =3D> env save
+> +    =3D> run nc
+>
+>  On the host side, please use this script to access the console
+>
+> --
+> 2.43.0
+>
 
-On Thu, May 16, 2024 at 05:12:33PM +0200, Mattijs Korpershoek wrote:
+Reviewed-by: Tony Dinh <mibodhi@gmail.com>
 
-> Hi Tom, everyone,
->=20
-> Sorry for the double email, I missed to include the list :(
->=20
-> Please find some fixes for master:
->=20
-> - Fix cdns3 low power hang via fast access bit
-> - Multiple dwc3 gadget fixes, mainly for USB support on TI AM6232
-> - Consistent USB_GADGET_MANUFACTURER for PHYTEC boards
-> - MAINTAINERS file update for u-boot-dfu
->=20
-> The CI job is at https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pi=
-pelines/20737
->=20
-> Thanks,
-> Mattijs
->=20
-> The following changes since commit c8ffd1356d42223cbb8c86280a083cc3c93e64=
-26:
->=20
->   Merge patch series "arm: dts: am62-beagleplay: Fix Beagleplay Ethernet"=
- (2024-05-13 09:15:51 -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu=
--20240516
->=20
-> for you to fetch changes up to efbc11ccef89030ed54b7368458eeaf9ec687c77:
->=20
->   MAINTAINERS: add USB gadget regex to u-boot-dfu tree (2024-05-16 13:28:=
-45 +0200)
->=20
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---nJyj0854iAZLegYU
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZGTt0ACgkQFHw5/5Y0
-tyzhPAwAlzIumTUWpSCLKWiTByaT5D2G1p6uJARS8CnFr3UO8djj6cEqnIYmBlPW
-FiPOW1bONE+orlZ1Jk4STy7P4LbJcx3HFWegfLqwGw54O9/gAPF383ch2jLFhR42
-3djQ72QysKQ/D1UuxoBhTO/whFIxZ6yoImfYUaCdF+/ZIUYENMJGO1X6U9u8X05c
-gY+UkLGFBsz4Y2uw827ryqEYjY/OaQRrEwb7531jLjCadTZmtxP2g3Vsg1ti7cj/
-rMX4S20NTYJojvoRx0XzcuvNXhCqtZpYGz3mt3yyABkGeFL2bLukJOWMNjBppe3A
-bBA/1pH4gg+sMpHhGhPmZ/DpXNGuwRGissvx8W6YCgFEDeoIRk7jOFwulH/qb6T2
-WvtUaH82BDy4NVsfgizjrA+aW76cnFDxyUJDlAVue5C1V+YF9+1dS+ita5Ta67s+
-iimERWktoDfIr0z0BcUUmhDw3cHlk+SYlRwMTkifV5XHzs+M3N+icko3FnRTIuh1
-4xudX37d
-=Y5TF
------END PGP SIGNATURE-----
-
---nJyj0854iAZLegYU--
+All the best,
+Tony
