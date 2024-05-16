@@ -4,92 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3B73C25B74
-	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 21:12:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E60DC25B78
+	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 21:12:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9454288486;
-	Thu, 16 May 2024 23:12:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 01B2688485;
+	Thu, 16 May 2024 23:12:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uybExKRi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iMTTFsIX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47A9288485; Thu, 16 May 2024 23:12:30 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 921B388481; Thu, 16 May 2024 23:12:42 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1BC888480
- for <u-boot@lists.denx.de>; Thu, 16 May 2024 23:12:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 605DB88483
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 23:12:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-572a93890d1so4327467a12.3
- for <u-boot@lists.denx.de>; Thu, 16 May 2024 14:12:27 -0700 (PDT)
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-5231efd80f2so1390889e87.2
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 14:12:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1715893947; x=1716498747; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1715893959; x=1716498759; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cVXcWaR/AYumEqnfsZykQKPepzLnsVM3Se8YLjNvPS0=;
- b=uybExKRiLdsGSRsPe6QlMhljgogBArLsX9fJ7lo6qX+uzkDUWlkHfBjm/iOc68Y0f5
- 6YpLf3H9LoZ2nXx48e8x/EkIzsXfdEQDeIvagdD0AkgzXDOki3G6Dp0/BIGOMK3rqXkV
- 6xkfyns7moVFXeNMeGOWnbn2JbO127nLlLFTYW/Sqcalv1aD9wx67CLxIfaOnBdof1eK
- Z2o+51uxK0uhgCd//stRQsXgWNOW84VLLR+iy5ip6qN7I6q9LMTPorUO6d8edwKAwwTU
- mejNGPaCYczaAPnAD+Tq7FSSdcAxO51qVceIV29B/tevl+pwaLcTikCZeHjafddQBEcQ
- m8Xg==
+ bh=BMLf5bzg1N4Kj7IW38T7Dw42nwEJ/O5BQjE5lMoLsZA=;
+ b=iMTTFsIXA3ZqTsjlI/e/qo3NICgR2fobAyravUR+MCdn5joza3KHO2vunIG4uMw9GH
+ f1f8m6tyUfiwTnxoERugUmX/T7N0eFVGWIUktxyw4r+Kx2WlySp7mIV9wkiwzVDy3zWx
+ FFjGo2N8lO+xTqZZAoELs5vRQ0KkVqzuFAq02Tl9SdD5X1kaLTqxUfi3lN/xtl2y45CT
+ EXcaowcmyLympi37ljLFdlx9gbr+S7cfdxyZyR/K5Zp2MEcnuoDBwpZf8RhxKhbk/Hdo
+ bPT7p7T0Zhf9kdf/vfiIxFNY29VL1gOGDebUXs6y4XfxJQ5AQTfBDQAhImwESxLXvddv
+ CbLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715893947; x=1716498747;
+ d=1e100.net; s=20230601; t=1715893959; x=1716498759;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cVXcWaR/AYumEqnfsZykQKPepzLnsVM3Se8YLjNvPS0=;
- b=UB5Z5nKs3jCBMixyHbYmzbcDyFTdKfpbMhhEqN/PaD2iKXSkvHty8vumvVg/hnZICw
- Wupvwwz0TdKDw6lIrMyMOiWoaYflt7zbwx7hPplrnSsufOz5gWJ69LIxr28EVBxZHCgK
- xfpPLkiTrjT+xcolQi0s/FVti8kXBphGMjnmQQnfOnt9QdV1wYyNKwScWRDGqWq71CNV
- uwMg6JiCqP9qe7rEtg/XLQ4zkvD1A6nRc/W2xASc7igw5UMp/AiAlMeDd+qTkghTwbTe
- 39u7x3R8B7cUaIhbgVopZWUFkYTzOCHLSEQmYO1I2g0fUAXpM+7OsAcHAQAxGqgi4k64
- IIZw==
-X-Gm-Message-State: AOJu0YwWROqN5sVvpRRhOlOQmNI4Zq4HcnvdJg22q5AU4MM03boCQQ0v
- 6FDK7Mn8dYd1/N8U6PXqHq/T5Lmn000i2DyFW0FIMMubRP/Wa8UjMoVMa78tHn6r7ui1UFHyXd4
- Z
-X-Google-Smtp-Source: AGHT+IFaD151tRnu5iYdT8TW1279YjdqGa98q7X2fn6EQSATb8efDO2wTN8WbnPYPqu8u31rqXRaMQ==
-X-Received: by 2002:a17:906:3c10:b0:a59:cc9b:d6f8 with SMTP id
- a640c23a62f3a-a5a2d5cca1cmr1833828666b.39.1715893947000; 
- Thu, 16 May 2024 14:12:27 -0700 (PDT)
+ bh=BMLf5bzg1N4Kj7IW38T7Dw42nwEJ/O5BQjE5lMoLsZA=;
+ b=buk46PgVWbcEEiXP8/0xMBKrezc0XnpZtsRFH80fnJDOiUBV/kPKpTILLDDeuYRFRs
+ fRMdABvDZnALF/4vevKSiIyzLuxfuXWzq2hW4XtcDwoezSv2eYIsY9uHJ0UxhFymV08X
+ lvFBr8Ct8LB75O4BVEVxMdDTs5DbnD2R7frdPOn+4RhYrBPfP5DHH54OAD/IRQfFQM+e
+ f1SkD5VLMzlTUiLEiOPvK1uYyuxICniRWv7vab0SoojRNxeApce1hezK2vKYnJ3g1i4X
+ o8oFdc0P1iXiHrJsKATRTv5I4aMOYaKN3v6KWsYEyhf6shAIOQLVGwndzPyzDJL2df3d
+ HL3A==
+X-Gm-Message-State: AOJu0YyxwljKd2r7CCFiLTGf6h5g+ulD1j+ClAu3gBeAmrEZTW4U0avY
+ ejyb7wyHvZuuuifS0msyw6kqueqb9DsSQL4nR6DcSTkcMSLD7M8iehKj5tYGp+JqIAazQp+pR/J
+ U
+X-Google-Smtp-Source: AGHT+IGkFGCjYIdTiPKVv/kVQJOvMuRk3aGra7JDR1cZe0CQppmLZGi0612V7xcAe5D5fqFPpnmTjg==
+X-Received: by 2002:a05:6512:3605:b0:51f:b781:729d with SMTP id
+ 2adb3069b0e04-5220fd7acf5mr10817034e87.38.1715893959254; 
+ Thu, 16 May 2024 14:12:39 -0700 (PDT)
 Received: from ubuntu.localdomain ([149.14.240.163])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a5a179c7d09sm1021582266b.107.2024.05.16.14.12.25
+ a640c23a62f3a-a5a179c7d09sm1021582266b.107.2024.05.16.14.12.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 May 2024 14:12:26 -0700 (PDT)
+ Thu, 16 May 2024 14:12:38 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+Cc: Raymond Mao <raymond.mao@linaro.org>,
  Alexey Brodkin <alexey.brodkin@synopsys.com>,
  Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Tom Rini <trini@konsulko.com>, Phil Sutter <phil@nwl.cc>,
  Walter Schweizer <swwa@users.sourceforge.net>,
- Tony Dinh <mibodhi@gmail.com>, Phil Sutter <phil@nwl.cc>,
- Mario Six <mario.six@gdsys.cc>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, Nishanth Menon <nm@ti.com>,
- Roger Quadros <rogerq@kernel.org>, Jonathan Humphreys <j-humphreys@ti.com>,
+ Tony Dinh <mibodhi@gmail.com>, Mario Six <mario.six@gdsys.cc>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Jonathan Humphreys <j-humphreys@ti.com>,
+ Nishanth Menon <nm@ti.com>, Roger Quadros <rogerq@kernel.org>,
  Igor Opaniuk <igor.opaniuk@gmail.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
  Eddie James <eajames@linux.ibm.com>,
  Jassi Brar <jaswinder.singh@linaro.org>,
- Masami Hiramatsu <masami.hiramatsu@linaro.org>,
  Michal Simek <michal.simek@amd.com>,
+ Masami Hiramatsu <masami.hiramatsu@linaro.org>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Etienne Carriere <etienne.carriere@foss.st.com>,
  uboot-snps-arc@synopsys.com
-Subject: [PATCH v3 3/4] md5: Use typedef for MD5 context
-Date: Thu, 16 May 2024 14:11:51 -0700
-Message-Id: <20240516211156.1819939-4-raymond.mao@linaro.org>
+Subject: [PATCH v3 4/4] include: Move snprintf to stdio.h
+Date: Thu, 16 May 2024 14:11:52 -0700
+Message-Id: <20240516211156.1819939-5-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240516211156.1819939-1-raymond.mao@linaro.org>
 References: <20240516211156.1819939-1-raymond.mao@linaro.org>
@@ -111,136 +112,238 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use of typedef is beneficial for porting with other crypto libs
-without changing the API callers.
-Secondly, it is for the code consistency with other digest libs.
-SHA1, SHA256 and SHA512 are all using typedef for their context.
+Move snprintf to stdio.h since it is needed by exteranl libraries.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 Changes in v2
-- None.
+- New patch.
 Changes in v3
-- None.
+- Move comments and attributes of snprintf.
 
- drivers/crypto/hash/hash_sw.c |  8 ++++----
- include/u-boot/md5.h          | 10 +++++-----
- lib/md5.c                     | 10 +++++-----
- 3 files changed, 14 insertions(+), 14 deletions(-)
+ arch/arc/lib/cpu.c             |  2 +-
+ board/Synology/common/legacy.c |  1 +
+ board/ti/common/fdt_ops.c      |  2 +-
+ cmd/part.c                     |  1 +
+ common/button_cmd.c            |  2 +-
+ drivers/cpu/mpc83xx_cpu.c      |  2 +-
+ include/stdio.h                | 17 +++++++++++++++++
+ include/vsprintf.h             | 17 -----------------
+ lib/display_options.c          |  1 +
+ lib/fwu_updates/fwu_mtd.c      |  2 +-
+ lib/hexdump.c                  |  2 +-
+ lib/vsprintf.c                 |  1 +
+ test/dm/scmi.c                 |  2 +-
+ test/print_ut.c                |  1 +
+ 14 files changed, 29 insertions(+), 24 deletions(-)
 
-diff --git a/drivers/crypto/hash/hash_sw.c b/drivers/crypto/hash/hash_sw.c
-index ffd4ab149ff..4590e225481 100644
---- a/drivers/crypto/hash/hash_sw.c
-+++ b/drivers/crypto/hash/hash_sw.c
-@@ -50,17 +50,17 @@ static void hash_finish_crc32(void *ctx, void *obuf)
- /* MD5 */
- static void hash_init_md5(void *ctx)
- {
--	MD5Init((struct MD5Context *)ctx);
-+	MD5Init((MD5Context *)ctx);
+diff --git a/arch/arc/lib/cpu.c b/arch/arc/lib/cpu.c
+index 593950449f2..269b4dbdd15 100644
+--- a/arch/arc/lib/cpu.c
++++ b/arch/arc/lib/cpu.c
+@@ -7,7 +7,7 @@
+ #include <clock_legacy.h>
+ #include <init.h>
+ #include <malloc.h>
+-#include <vsprintf.h>
++#include <stdio.h>
+ #include <asm/arcregs.h>
+ #include <asm/cache.h>
+ #include <asm/global_data.h>
+diff --git a/board/Synology/common/legacy.c b/board/Synology/common/legacy.c
+index a0bace7b46c..2e3aa660eaa 100644
+--- a/board/Synology/common/legacy.c
++++ b/board/Synology/common/legacy.c
+@@ -6,6 +6,7 @@
+  */
+ 
+ #include <config.h>
++#include <stdio.h>
+ #include <vsprintf.h>
+ #include <env.h>
+ #include <net.h>
+diff --git a/board/ti/common/fdt_ops.c b/board/ti/common/fdt_ops.c
+index eb917be9e0d..8a3300993ed 100644
+--- a/board/ti/common/fdt_ops.c
++++ b/board/ti/common/fdt_ops.c
+@@ -6,7 +6,7 @@
+  */
+ 
+ #include <env.h>
+-#include <vsprintf.h>
++#include <stdio.h>
+ #include "fdt_ops.h"
+ 
+ void ti_set_fdt_env(const char *board_name, struct ti_fdt_map *fdt_map)
+diff --git a/cmd/part.c b/cmd/part.c
+index d140a1eddb9..db7bc5819c0 100644
+--- a/cmd/part.c
++++ b/cmd/part.c
+@@ -19,6 +19,7 @@
+ #include <command.h>
+ #include <env.h>
+ #include <part.h>
++#include <stdio.h>
+ #include <vsprintf.h>
+ 
+ enum cmd_part_info {
+diff --git a/common/button_cmd.c b/common/button_cmd.c
+index 8642c26735c..72dac1f9ef6 100644
+--- a/common/button_cmd.c
++++ b/common/button_cmd.c
+@@ -8,7 +8,7 @@
+ #include <command.h>
+ #include <env.h>
+ #include <log.h>
+-#include <vsprintf.h>
++#include <stdio.h>
+ 
+ /* Some sane limit "just in case" */
+ #define MAX_BTN_CMDS 32
+diff --git a/drivers/cpu/mpc83xx_cpu.c b/drivers/cpu/mpc83xx_cpu.c
+index 9a7b5fd7c42..127d3c3af08 100644
+--- a/drivers/cpu/mpc83xx_cpu.c
++++ b/drivers/cpu/mpc83xx_cpu.c
+@@ -9,7 +9,7 @@
+ #include <cpu.h>
+ #include <dm.h>
+ #include <log.h>
+-#include <vsprintf.h>
++#include <stdio.h>
+ #include <linux/bitops.h>
+ 
+ #include "mpc83xx_cpu.h"
+diff --git a/include/stdio.h b/include/stdio.h
+index 3241e2d493f..7b999a519ba 100644
+--- a/include/stdio.h
++++ b/include/stdio.h
+@@ -46,6 +46,23 @@ static inline int vprintf(const char *fmt, va_list args)
  }
+ #endif
  
- static void hash_update_md5(void *ctx, const void *ibuf, uint32_t ilen)
- {
--	MD5Update((struct MD5Context *)ctx, ibuf, ilen);
-+	MD5Update((MD5Context *)ctx, ibuf, ilen);
- }
- 
- static void hash_finish_md5(void *ctx, void *obuf)
- {
--	MD5Final(obuf, (struct MD5Context *)ctx);
-+	MD5Final(obuf, (MD5Context *)ctx);
- }
- 
- /* SHA1 */
-@@ -158,7 +158,7 @@ static struct sw_hash_impl sw_hash_impl[HASH_ALGO_NUM] = {
- 		.init = hash_init_md5,
- 		.update = hash_update_md5,
- 		.finish = hash_finish_md5,
--		.ctx_alloc_sz = sizeof(struct MD5Context),
-+		.ctx_alloc_sz = sizeof(MD5Context),
- 	},
- 
- 	[HASH_ALGO_SHA1] = {
-diff --git a/include/u-boot/md5.h b/include/u-boot/md5.h
-index d61364c0ae3..c465925ea8d 100644
---- a/include/u-boot/md5.h
-+++ b/include/u-boot/md5.h
-@@ -10,18 +10,18 @@
- 
- #define MD5_SUM_LEN	16
- 
--struct MD5Context {
-+typedef struct MD5Context {
- 	__u32 buf[4];
- 	__u32 bits[2];
- 	union {
- 		unsigned char in[64];
- 		__u32 in32[16];
- 	};
--};
-+} MD5Context;
- 
--void MD5Init(struct MD5Context *ctx);
--void MD5Update(struct MD5Context *ctx, unsigned char const *buf, unsigned len);
--void MD5Final(unsigned char digest[16], struct MD5Context *ctx);
-+void MD5Init(MD5Context *ctx);
-+void MD5Update(MD5Context *ctx, unsigned char const *buf, unsigned int len);
-+void MD5Final(unsigned char digest[16], MD5Context *ctx);
- 
++/**
++ * Format a string and place it in a buffer
++ *
++ * @buf: The buffer to place the result into
++ * @size: The size of the buffer, including the trailing null space
++ * @fmt: The format string to use
++ * @...: Arguments for the format string
++ * Return: the number of characters which would be
++ * generated for the given input, excluding the trailing null,
++ * as per ISO C99.  If the return is greater than or equal to
++ * @size, the resulting string is truncated.
++ *
++ * See the vsprintf() documentation for format string extensions over C99.
++ */
++int snprintf(char *buf, size_t size, const char *fmt, ...)
++	     __attribute__ ((format (__printf__, 3, 4)));
++
  /*
-  * Calculate and store in 'output' the MD5 digest of 'len' bytes at
-diff --git a/lib/md5.c b/lib/md5.c
-index faf3f78ab1e..34343cf8e23 100644
---- a/lib/md5.c
-+++ b/lib/md5.c
-@@ -55,7 +55,7 @@ byteReverse(unsigned char *buf, unsigned longs)
-  * initialization constants.
+  * FILE based functions (can only be used AFTER relocation!)
   */
- void
--MD5Init(struct MD5Context *ctx)
-+MD5Init(MD5Context *ctx)
- {
- 	ctx->buf[0] = 0x67452301;
- 	ctx->buf[1] = 0xefcdab89;
-@@ -71,7 +71,7 @@ MD5Init(struct MD5Context *ctx)
-  * of bytes.
+diff --git a/include/vsprintf.h b/include/vsprintf.h
+index ed8a060ee17..fe951471426 100644
+--- a/include/vsprintf.h
++++ b/include/vsprintf.h
+@@ -218,23 +218,6 @@ char *simple_itoa(ulong val);
   */
- void
--MD5Update(struct MD5Context *ctx, unsigned char const *buf, unsigned len)
-+MD5Update(MD5Context *ctx, unsigned char const *buf, unsigned int len)
- {
- 	register __u32 t;
+ char *simple_xtoa(ulong num);
  
-@@ -120,7 +120,7 @@ MD5Update(struct MD5Context *ctx, unsigned char const *buf, unsigned len)
-  * 1 0* (64-bit count of bits processed, MSB-first)
-  */
- void
--MD5Final(unsigned char digest[16], struct MD5Context *ctx)
-+MD5Final(unsigned char digest[16], MD5Context *ctx)
- {
- 	unsigned int count;
- 	unsigned char *p;
-@@ -269,7 +269,7 @@ MD5Transform(__u32 buf[4], __u32 const in[16])
- void
- md5 (unsigned char *input, int len, unsigned char output[16])
- {
--	struct MD5Context context;
-+	MD5Context context;
+-/**
+- * Format a string and place it in a buffer
+- *
+- * @buf: The buffer to place the result into
+- * @size: The size of the buffer, including the trailing null space
+- * @fmt: The format string to use
+- * @...: Arguments for the format string
+- * Return: the number of characters which would be
+- * generated for the given input, excluding the trailing null,
+- * as per ISO C99.  If the return is greater than or equal to
+- * @size, the resulting string is truncated.
+- *
+- * See the vsprintf() documentation for format string extensions over C99.
+- */
+-int snprintf(char *buf, size_t size, const char *fmt, ...)
+-		__attribute__ ((format (__printf__, 3, 4)));
+-
+ /**
+  * Format a string and place it in a buffer
+  *
+diff --git a/lib/display_options.c b/lib/display_options.c
+index d6b93553dcb..d5df53ab15f 100644
+--- a/lib/display_options.c
++++ b/lib/display_options.c
+@@ -12,6 +12,7 @@
+ #include <linux/ctype.h>
+ #include <linux/kernel.h>
+ #include <asm/io.h>
++#include <stdio.h>
+ #include <vsprintf.h>
  
- 	MD5Init(&context);
- 	MD5Update(&context, input, len);
-@@ -286,7 +286,7 @@ void
- md5_wd(const unsigned char *input, unsigned int len, unsigned char output[16],
- 	unsigned int chunk_sz)
- {
--	struct MD5Context context;
-+	MD5Context context;
- #if defined(CONFIG_HW_WATCHDOG) || defined(CONFIG_WATCHDOG)
- 	const unsigned char *end, *curr;
- 	int chunk;
+ char *display_options_get_banner_priv(bool newlines, const char *build_tag,
+diff --git a/lib/fwu_updates/fwu_mtd.c b/lib/fwu_updates/fwu_mtd.c
+index 69cd3d7001f..4a52834b61a 100644
+--- a/lib/fwu_updates/fwu_mtd.c
++++ b/lib/fwu_updates/fwu_mtd.c
+@@ -11,7 +11,7 @@
+ #include <malloc.h>
+ #include <mtd.h>
+ #include <uuid.h>
+-#include <vsprintf.h>
++#include <stdio.h>
+ 
+ #include <dm/ofnode.h>
+ 
+diff --git a/lib/hexdump.c b/lib/hexdump.c
+index 33e3e6e5182..2bc508ff504 100644
+--- a/lib/hexdump.c
++++ b/lib/hexdump.c
+@@ -10,7 +10,7 @@
+ 
+ #include <hexdump.h>
+ #include <mapmem.h>
+-#include <vsprintf.h>
++#include <stdio.h>
+ #include <linux/ctype.h>
+ #include <linux/compat.h>
+ #include <linux/log2.h>
+diff --git a/lib/vsprintf.c b/lib/vsprintf.c
+index 27ea9c907a3..cfd1f1914ed 100644
+--- a/lib/vsprintf.c
++++ b/lib/vsprintf.c
+@@ -19,6 +19,7 @@
+ #include <hexdump.h>
+ #include <stdarg.h>
+ #include <uuid.h>
++#include <stdio.h>
+ #include <vsprintf.h>
+ #include <linux/ctype.h>
+ #include <linux/err.h>
+diff --git a/test/dm/scmi.c b/test/dm/scmi.c
+index 69fc900e342..c9a03523184 100644
+--- a/test/dm/scmi.c
++++ b/test/dm/scmi.c
+@@ -18,7 +18,7 @@
+ #include <scmi_agent.h>
+ #include <scmi_agent-uclass.h>
+ #include <scmi_protocols.h>
+-#include <vsprintf.h>
++#include <stdio.h>
+ #include <asm/scmi_test.h>
+ #include <dm/device-internal.h>
+ #include <dm/test.h>
+diff --git a/test/print_ut.c b/test/print_ut.c
+index bded2b6ebe5..53d3354ea69 100644
+--- a/test/print_ut.c
++++ b/test/print_ut.c
+@@ -9,6 +9,7 @@
+ #include <log.h>
+ #include <mapmem.h>
+ #include <version_string.h>
++#include <stdio.h>
+ #include <vsprintf.h>
+ #include <test/suites.h>
+ #include <test/test.h>
 -- 
 2.25.1
 
