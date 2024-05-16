@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3277DC25B74
-	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 06:09:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 818C7C25B74
+	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 06:40:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A76187E3F;
-	Thu, 16 May 2024 08:09:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D0B9987ED1;
+	Thu, 16 May 2024 08:40:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EpM+xo4Q";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="DX4cCWCH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 78B4187F19; Thu, 16 May 2024 08:09:20 +0200 (CEST)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
+ id 0456687F65; Thu, 16 May 2024 08:40:06 +0200 (CEST)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34C2B83339
- for <u-boot@lists.denx.de>; Thu, 16 May 2024 08:09:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A123C87ED1
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 08:40:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-dc6cbe1ac75so5842240276.1
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 23:09:18 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-34dc129accaso5622804f8f.0
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 23:40:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1715839757; x=1716444557; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Du6eDknbufrcX2u7rsU+KNKue/0Di1nz6YEN2LYv7dI=;
- b=EpM+xo4Q3OuLB328zhxgPD8mSEub07Y/U2qSOkKW3i9r9STrDJMaYGN/Dc+NF5FGFd
- g77eHXpQZKDGFor3WUZTHoN2FXLprGTCXwSiuYr4tuRiFJ26pC9bdrDroHqz1I63Z+yK
- VTVR/2SS8Ysm78cAMEdn4JwhCkebpbLutuKgAce+/o5SN4pUYUwxI3UHzXrW+NIR8/V7
- BuCXT1iFKW377q96eYkgKXlms9wg1+aXRUTkf8E0pp2o2xEm78rZrzroJ/nMXuXVybT9
- B8xyQVmzAUPPtRtyjuSrOM1jBb9X5afsH0RNPvl29aEzhEhmv8+dTZMdOp24EcfowOVG
- GrsQ==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1715841603; x=1716446403;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bRt36BZgMuuJI3gcGGg4M04K2sXAntfGnMJKZ/7mxOU=;
+ b=DX4cCWCHamX0jdlrsuDyCJwAbpNhknein3Iro2+3f5Le8Du8KEgo9867WCBsYNSoj8
+ neTdkdcVdHNHb+JhhKDq6gAd2yVsif40m9mVF2XTVyENvypUKkHAc1Fl1rpaar4qqkXh
+ N3faQQHb3jlWrYuFluObm0C+0t2igKoBJA7Z0Wa8NFpWwfVKTQ/sl6oDk58xAnx/ikos
+ L7w6VF3jNh5Z9yOLhp1wIffTVzS4jh067uEsKWHssWPmtJHfCFHhjotQ3S3O1SE1olaV
+ TRmDFCo9YXuQsw30fuam9Aa+cQAEx0cvOUS48RegP04cZP14Z5Hmg+8L7dViHDdR+VGQ
+ 8BsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715839757; x=1716444557;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Du6eDknbufrcX2u7rsU+KNKue/0Di1nz6YEN2LYv7dI=;
- b=jv+I1jcmDa7j9dAZT/eYFoR6jY2XXo26f68Qzekzmt7DBQoaUtGXYCzXttT3+8vQ8S
- Nj0O9hd0ZvMUjXnSulJVnvW+wBQdP9C/ZovCbM9GVVU3rCEye5FQ4rzqFYWUP7WwF/nq
- QhYxXv9sUbsIb7YSWUbgnnVLKFaBVkT0bM6f7G/JKfolqmz414RIO8/C2Vfj0hDfajlN
- 9YvfRqZCQtTxQWu3XFlokmGvSIHYsPTJ6NjxyP6WMZWNJHDCh4A6qN7GNmEObjJXSeHL
- JnOyhSvnC3pQFiceHVOOD/1F0eOj7yy3XL4W6dPlDR68YQqjsj/8sDdMg3ztmPiBPo+3
- jWyA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVAm2gdAkh5TQyBUUkYmiJdV9IlUiMwjHeUMGyYsF90xRiuFcivcQSrmQMJBtNnDfo4pknyPK1w3x5gHBEomVH+ThJwhg==
-X-Gm-Message-State: AOJu0YwRGZvA//AIQafumqw8kvea0i6vbIlmxQMUHOMAQzCx/KR4sA0W
- 0/HbFWYaKP0t7XKcpinSjSG05pfGygppXCkWxP9KLqigU/oDAHtgIPwCSK2ht4x4LOCOyd82dZI
- yJU1SQohKfgabGhrusIEUYOjo6C/miFeaD67LUTS/DCO4kY5J
-X-Google-Smtp-Source: AGHT+IFIqanmRLoI5Ld6cFjg8/JofdP6A3lRrndACeKLMKurXFxmVMqHChKuZSpgm3NyDd5ORStdcpQmDP4UAHmd/cU=
-X-Received: by 2002:a25:ce0c:0:b0:df4:449d:e09f with SMTP id
- 3f1490d57ef6-df4449de233mr1559262276.23.1715839756955; Wed, 15 May 2024
- 23:09:16 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1715841603; x=1716446403;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=bRt36BZgMuuJI3gcGGg4M04K2sXAntfGnMJKZ/7mxOU=;
+ b=gYId0QEiJ23l7q0As+CLmVQ8TtNC343Lr8eSQvLvHNvCf3c0nAx/dDFc9LMQBrEoHs
+ jP98aQT9jDZNg/PKZukFlcpfOccdG5jV/uBYVUeUpOqmzdW4ob99BS3oYxEv30cMT+cD
+ g32w5DU+wnpjmyyghUR8O/3kYUnm2+mr+hKx5x6RyIXoYAiOHDgWazxTZUv2GIfNWIBW
+ yAdBeYlIYBxZCmRwswGK9sYHWFu10sCr3uwta19YuGIi3HIo0OGoGM9rDFTMnF6h00Ol
+ njKim1kKztaazqs2IL7WK9Vtq8DEB7nEzoqJnRkA+KAWcrX0PpvpABzMXB+zxpkmzVGq
+ aW6w==
+X-Gm-Message-State: AOJu0YyrHamYVJQWmIHljP+oLP5/fc/1GiPWQuexVM/TypUYJo7Jyoh/
+ oGdrBPVxXrn6EGIS7T7DYF8s8ZlKtNbSW/SQqMRzPpYtYlMI0ScjoFpEjbCj2Yw=
+X-Google-Smtp-Source: AGHT+IEF6ej+8nf7rHDvz2I3dv8XXbxR59hfeY7o//CXekjS/s4xN/9mOsMqu1PdGrnvQspM4spYVw==
+X-Received: by 2002:a05:6000:18af:b0:351:b4af:c84b with SMTP id
+ ffacd0b85a97d-351b4afc92emr13070882f8f.51.1715841602903; 
+ Wed, 15 May 2024 23:40:02 -0700 (PDT)
+Received: from mkorpershoek-xps13.carmes.etincelle-coworking.com
+ ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3502bbc4b41sm18087722f8f.113.2024.05.15.23.40.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 15 May 2024 23:40:01 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: u-boot@lists.denx.de, "A. Sverdlin" <alexander.sverdlin@siemens.com>
+Cc: Marek Vasut <marex@denx.de>, Felipe Balbi <felipe.balbi@linux.intel.com>, 
+ Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Nishanth Menon <nm@ti.com>, 
+ Sjoerd Simons <sjoerd@collabora.com>
+In-Reply-To: <20240412202611.3565052-1-alexander.sverdlin@siemens.com>
+References: <20240412202611.3565052-1-alexander.sverdlin@siemens.com>
+Subject: Re: [PATCH 0/6] usb: dwc3: gadget: avoid EP command timeout
+Message-Id: <171584160086.8529.11179405967993150086.b4-ty@baylibre.com>
+Date: Thu, 16 May 2024 08:40:00 +0200
 MIME-Version: 1.0
-References: <20240514164236.516595-1-trini@konsulko.com>
- <b12a9b07-2c92-4651-b6ba-3aff6ecc9219@kwiboo.se>
- <CAFA6WYPsicMrtrDg7T8m=4-vg-QAPUY1D5E=_T8gZYgT=o2b4Q@mail.gmail.com>
- <e26ab5cc-2b2d-4e96-a073-819a935f435a@kwiboo.se>
- <20240515160009.GX2568172@bill-the-cat>
-In-Reply-To: <20240515160009.GX2568172@bill-the-cat>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Thu, 16 May 2024 11:39:05 +0530
-Message-ID: <CAFA6WYNBCgW0nwZsOvMLF6kObgQ3gowY9SEY5rQZ3NsccnqWkg@mail.gmail.com>
-Subject: Re: [PATCH 1/1] Squashed 'dts/upstream/' changes from
- b35b9bd1d4ee..7e08733c96c8
-To: Tom Rini <trini@konsulko.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.12.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,30 +95,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 15 May 2024 at 21:30, Tom Rini <trini@konsulko.com> wrote:
->
-> On Wed, May 15, 2024 at 11:39:08AM +0200, Jonas Karlman wrote:
->
-> [snip]
-> > My main concern is how to best handle new boards and features/drivers.
-> > E.g. for Rockchip the RK3588 SoC is under active development, new boards
-> > and features/drivers are actively added/fixed in upstream Linux.
->
-> To this question specifically, dts/update-dts-subtree.sh has a "pick"
-> option and in some previous quick testing, it does what one would hope.
-> So for this case you could pick the N commits that need to be brought
-> it, the resulting patch would be small enough to send to the list
-> normally (the resync patch for v6.9 is 2.7MB) and then when I do the
-> next full resync it goes cleanly still.
+Hi,
 
-That sounds like a good alternative although it was proposed for any
-fixes to be incorporated but it's worth giving it a try for new
-features too. I think as long as the cherry pick is clean with all
-dependencies being picked up properly, the next sync should work
-cleanly.
+On Fri, 12 Apr 2024 22:26:00 +0200, A. Sverdlin wrote:
+> From: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+> 
+> While there are happy users who successfully have been using DFU on TI
+> AM62x [1][2], there are also others who were not so lucky up to now [3].
+> 
+> I felt into latter category and was wondering why I observe this:
+> 
+> [...]
 
--Sumit
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
 
->
-> --
-> Tom
+[1/6] usb: dwc3: gadget: combine return points into a single one
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/13395507ca1f48de25e70f4d27f709b1a4fa0a82
+[2/6] usb: dwc3: gadget: clear SUSPHY bit before ep cmds
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/967b31c3ccdc09284a4447ebc4577bb7ef06d500
+[3/6] usb: dwc3: gadget: only resume USB2 PHY in <=HIGHSPEED
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/d107a5319e20d5e5be3bd8fa298aeca9ef4990a0
+[4/6] usb: dwc3: gadget: Check ENBLSLPM before sending ep command
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/db11351a887e20ff86e3a4c1f466d3d8dd42754a
+[5/6] usb: dwc3: gadget: properly check ep cmd
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/95b4d655a44626f888bf823a0561a175d456d33a
+[6/6] usb: dwc3: gadget: Disable GUSB2PHYCFG.SUSPHY for End Transfer
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/30f39de786ff3a87006461903e41a48c811ee764
+
+--
+Mattijs
