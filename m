@@ -4,81 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F32DC25B74
-	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 22:19:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8204FC25B77
+	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 23:03:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B025B88458;
-	Fri, 17 May 2024 00:19:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 90D2E8823C;
+	Fri, 17 May 2024 01:03:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="A5B1wBuP";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="W2iUdFj1";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="EUBNnF6e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C35E88480; Fri, 17 May 2024 00:19:48 +0200 (CEST)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F104F88480; Fri, 17 May 2024 01:03:27 +0200 (CEST)
+Received: from fhigh3-smtp.messagingengine.com
+ (fhigh3-smtp.messagingengine.com [103.168.172.154])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B26B88458
- for <u-boot@lists.denx.de>; Fri, 17 May 2024 00:19:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C382E8823C
+ for <u-boot@lists.denx.de>; Fri, 17 May 2024 01:03:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-3c996526c69so438580b6e.1
- for <u-boot@lists.denx.de>; Thu, 16 May 2024 15:19:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715897983; x=1716502783; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=dFPvWSx/a1wGsnZ9DsNfjvZkDaktq9KWPhK9P2o4q28=;
- b=A5B1wBuPhB4zKAqLoi4NDf6RLxLdxR5Ng8bDE8cOE/zdHmdDmfps5q+AbigbOt3uV0
- idX/x2THKVT/e8SzLzia170yKEmlaGxObEdsv6i/OLdIcifSPVh2ENWcWea0PIqpDxs0
- H76euaPNituzAR54Bf5pYtfKC3ldjyTlweHGU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715897983; x=1716502783;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dFPvWSx/a1wGsnZ9DsNfjvZkDaktq9KWPhK9P2o4q28=;
- b=leGcZHf9bv8TQ6tMAo3xGDExS9Qvoq/FfjqZOwnMHbtMQ9py+xgC3hJb05cuhO33BB
- h5QgaoIBsOqNS1ow7DHZC1TUTgZGZsqSCRhQC/XYugNXWo08pVirfQZZwzAUGQXRjxJw
- CkOERhWD2+U+Z/26L9W7MT42u9ZEbIzcUnK0vDlCbX9+GmYibK/WcUAWmMKNtxd5iqB3
- 11ssjc+glfaRHZBIDNnjuBFeDwfEvyKALony4rMNN4Cs33Ivn0KluXAN+xNPTo5DgbnL
- k5Go6AU8A+MLW3zetuaItuKNIgQ9yQW1/HiCs85HlWSgJHne+swA8i2De6wST4zFUi+W
- N95A==
-X-Gm-Message-State: AOJu0YwPkUrsv8NowbVXNdfueZDtFngn1IgkA3lbHk2t0swRE50BZ7og
- tVsvlR7tKB7WuVL9uS7VzF2qQw2g93S0le4LH5V/MYVVGJsDwCKMVDDkVEU28R8=
-X-Google-Smtp-Source: AGHT+IFGIOmKFSOxRGrYmaC2L42/aVkdq4YxGxNLwn6XaSeA3x76NbZl/EInNyWctGXqR6vbqwEfRw==
-X-Received: by 2002:a54:4818:0:b0:3c9:63d1:6fde with SMTP id
- 5614622812f47-3c9970cc5c2mr21524958b6e.37.1715897983360; 
- Thu, 16 May 2024 15:19:43 -0700 (PDT)
-Received: from bill-the-cat ([187.144.98.216])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-792bf2a3cadsm840538385a.67.2024.05.16.15.19.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 May 2024 15:19:42 -0700 (PDT)
-Date: Thu, 16 May 2024 16:19:38 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Cc: u-boot@lists.denx.de, Heiko Schocher <hs@denx.de>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Anatolij Gustschin <agust@denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH 1/6] video: Move generated bmp headers to include/generated
-Message-ID: <20240516221938.GG2568172@bill-the-cat>
-References: <20240516-rework-video-format-v1-0-f69822b742a3@flygoat.com>
- <20240516-rework-video-format-v1-1-f69822b742a3@flygoat.com>
+ spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
+Received: from compute7.internal (compute7.nyi.internal [10.202.2.48])
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id 99D1711400C5;
+ Thu, 16 May 2024 19:03:24 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+ by compute7.internal (MEProxy); Thu, 16 May 2024 19:03:24 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
+ cc:cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:message-id:mime-version:reply-to
+ :subject:subject:to:to; s=fm1; t=1715900604; x=1715987004; bh=Os
+ bgS7EZFsT5lTMJXGgzjtwlFhoXBNRtpMFiRe37dpM=; b=W2iUdFj1/RcrK9+U4j
+ r6s2VEQZNPa2FKxq8TrJbsd7TvVmLxZEE/UFvXQcPNk+Su5q0un/mlnAMjIqcU+6
+ 1jm3t2keHmLkPqe31zdl7SeXC2p6LyG4XWls67TO1rqcG1djoOWMY9/9SPk5cEiX
+ 0seFqLOD5owm5RGil2hibCLyieo8ma3HjqO18oAsIKMsBWMJWWvFOQ9nSLEKtQOX
+ xzGfoHGF9ssFPaxOcYNPhuesrXrlUNqjK5Eml7o1eOi9AiC6i3t8vQsYI+LNfuBi
+ /PKpVwVLJDjAVhw/3lV/F8xqCX5Dcbvi9zaghPIqnCq5HIdLnP+b93I6ok89B2bS
+ jRNg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:message-id:mime-version:reply-to:subject
+ :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+ :x-sasl-enc; s=fm3; t=1715900604; x=1715987004; bh=OsbgS7EZFsT5l
+ TMJXGgzjtwlFhoXBNRtpMFiRe37dpM=; b=EUBNnF6ep63TFJ2TtRU0kXIZcUmoj
+ vuGZ9ow2ko2qiNFhI0spBlVUmoUE1o/7sR/OexL3uD0e8n40sCylmj+D4zlFiEc6
+ e5uCNsoKWdxHkL6LnqYSHvXjK7R9VJHT/i6eY+H3pIql4Fof6sLjw2ip8mrtJzoP
+ v4jd6wDfa69kUJa1cN6DO76jR58s6OevEcJvVpCC41Y82VEo0xXHtO/jTfHRLSTp
+ c0Ymn+txaY8amb3I5TNEU6ugwyD79Iu2fMiFDt/Dukc08bIYy4f718JTMQDSunZS
+ UVQmF2i7YASt0AioKioajbFqmxs5CinwZsPfyzqezGsWWegEpdjbomtmQ==
+X-ME-Sender: <xms:vJBGZmW2gfb57S7CEgHGbWv8pjN8cjQkpnQLqMgDJ0HYE37JY7OycQ>
+ <xme:vJBGZimDK4KCZXttG9sZFRMkZ8DVGO1bAOKcVODvetcpvSctIIBO9pGMWISF6kibs
+ 98LTP1nux29KFchhTE>
+X-ME-Received: <xmr:vJBGZqYGivM91YvsbNaMo_ULC78uUjLx06IgHqPDMFGjYcygJ_PEsyY>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehvddgudeiucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhephffufffkgggtgffvvefosehtjeertdertdejnecuhfhrohhmpeflihgrgihu
+ nhcujggrnhhguceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomheqnecugg
+ ftrfgrthhtvghrnhepudffffffhfeuheevhffgleevkeeugeetfeegieeijeehfeekheek
+ veduveeigeeunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrh
+ homhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
+X-ME-Proxy: <xmx:vJBGZtVkqQ3HQpp35hAV70h_PiZvTT3v4JG-953tLwQINfEVRvtklQ>
+ <xmx:vJBGZgkRV-iqiaspiwIcC0QnHmcer2JHx2qiM6VAvoktOnOa58e3zQ>
+ <xmx:vJBGZifzkintJzumml70jZlcnFC4GYCJwzi3LffkIa4oDqgHqQH2mw>
+ <xmx:vJBGZiEjmCaFPS72Vj5vYfLw-dftzRprns4FianNWLEyo9HajeUSzQ>
+ <xmx:vJBGZuZ-jcswH6qnOhI-xtMhAQWnzhfW4BVhN8x2IddFjMz8H3WJI09O>
+Feedback-ID: ifd894703:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 16 May 2024 19:03:23 -0400 (EDT)
+From: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Subject: [PATCH 0/2] virtio_gpu driver and relevant fix
+Date: Fri, 17 May 2024 00:03:23 +0100
+Message-Id: <20240517-virtio_gpu-v1-0-6353b87472c7@flygoat.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="An21jf3zRvEfcpoi"
-Content-Disposition: inline
-In-Reply-To: <20240516-rework-video-format-v1-1-f69822b742a3@flygoat.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIALuQRmYC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIxMDU0Nj3bLMopLM/Pj0glLdxKQkk5RUMwtTCwMLJaCGgqLUtMwKsGHRsbW
+ 1AMhUrelcAAAA
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1339;
+ i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
+ bh=EL55uLW471NbfslGB32lQrpg4Xfs35C+rlOE6HRtwS4=;
+ b=owGbwMvMwCHmXMhTe71c8zDjabUkhjS3CXvN5jxZ4LL+Tf6lrc6zPwjypHGvv6NULT/DZk9D9
+ lfujxdedJSyMIhxMMiKKbKECCj1bWi8uOD6g6w/MHNYmUCGMHBxCsBENq5h+Gfh9bNuuwbT7IWf
+ Tp4o1jm7Y0Mzzw6jMJ7D138+ePdLQY6JkeH5W7b9hyK5bigffx2/fJ7piUP+X+TMLi3nTTOtTz5
+ fcZkJAA==
+X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
+ fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,40 +116,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi all,
 
---An21jf3zRvEfcpoi
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This series added support for virtio-gpu device, it has been
+tested on QEMU riscv64 and aarch64.
 
-On Thu, May 16, 2024 at 11:16:41PM +0100, Jiaxun Yang wrote:
+I also fixed a problem in EFI GOP so it works with EFI applications
+as well.
 
-> Emphasis that those headers are generated.
-> Also naturally gitignore them.
->=20
-> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+There is a problem remaining. virtio_init() is being called too
+late to allow virtio-gpu to be selected as a vidconsole. My current
+appraoch is to register virtio_init in init_sequence_r, just after
+pci_init. Is this a viable approach? Should I introduce a config
+like CONFIG_VIRTIO_INIT_R to allow it to be selected by boards?
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Thanks
 
---=20
-Tom
+Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+---
+Jiaxun Yang (2):
+      virtio: New virtio_gpu driver
+      efi: gop: Mark pixel_format as BLTONLY if we have sync hook
 
---An21jf3zRvEfcpoi
-Content-Type: application/pgp-signature; name="signature.asc"
+ drivers/virtio/Kconfig         |  29 +++
+ drivers/virtio/Makefile        |   1 +
+ drivers/virtio/virtio-uclass.c |   1 +
+ drivers/virtio/virtio_gpu.c    | 298 ++++++++++++++++++++++++++++
+ drivers/virtio/virtio_gpu.h    | 428 +++++++++++++++++++++++++++++++++++++++++
+ include/efi_api.h              |   1 +
+ include/virtio.h               |   4 +-
+ lib/efi_loader/efi_gop.c       |   9 +-
+ 8 files changed, 769 insertions(+), 2 deletions(-)
+---
+base-commit: 21aa37ec1cd4a12e01e0e863ec9e99d703ce4d52
+change-id: 20240513-virtio_gpu-abb4de685808
 
------BEGIN PGP SIGNATURE-----
+Best regards,
+-- 
+Jiaxun Yang <jiaxun.yang@flygoat.com>
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZGhncACgkQFHw5/5Y0
-tyzdLwwAlhBtlnGiBU7XcPh9W+nLAdQQerI9SuCuETqFJr3ogl23eVBei5nz1ib6
-HlvkNNAnQSTZDID6Df19wyw3a/AQZKX5IXbhmAZfhltIZVOIHHF8O+wOeAOMosGT
-D1SOzgyk6JdUYLXAPH9QRh7kUh6IvAB3EpHL5ogGrhOLKWywN+KDt2l7jmUdkeZv
-g0mIGj/Yjgmr6MSovFkQM+kL98umXtppsKdWOegg52bH+JRgx+2apR1se/ptoZBg
-Z7jswU70sUN1UecEY9ngDyUplBkcUi8HH1tyh9XG6xwq92t2RjYUOpkD0mvvJCdK
-n3LR8qIflQzU3TZNgML++b5Yj1/ATR98BMLWndH427C3VF8ZAPTa04/uBb2nuKA1
-6VK59RF+/Og4+WUexz7fMkT9Dp+2EcsGhD5I1XTt+Zm7Y4Yx9opoHGo/Ex3V4P0F
-wNw1muA3fNXr76zazdU+FPGA4wVIpZghc5NBQ+LcXWho3l4F6D3/PKrWnpSQVpfx
-wTu0BaVg
-=vHpY
------END PGP SIGNATURE-----
-
---An21jf3zRvEfcpoi--
