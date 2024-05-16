@@ -4,85 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D27DCC25B79
-	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 09:09:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7709BC25B79
+	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 09:15:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA0DD88027;
-	Thu, 16 May 2024 11:09:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
+	by phobos.denx.de (Postfix) with ESMTP id C4AD188027;
+	Thu, 16 May 2024 11:15:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="Bilpqsyg";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="rQSb3mv7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4AD2C8824A; Thu, 16 May 2024 11:09:16 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 799F5882D9; Thu, 16 May 2024 11:15:49 +0200 (CEST)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EA7C87FED
- for <u-boot@lists.denx.de>; Thu, 16 May 2024 11:09:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=foundries.io
+ by phobos.denx.de (Postfix) with ESMTPS id 6623B87F52
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 11:15:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jorge@foundries.io
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-42011507a54so30691555e9.0
- for <u-boot@lists.denx.de>; Thu, 16 May 2024 02:09:13 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-51f1bf83f06so640873e87.1
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 02:15:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=foundries.io; s=google; t=1715850553; x=1716455353; darn=lists.denx.de;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:date:from:from:to
- :cc:subject:date:message-id:reply-to;
- bh=sRZuoe5Cd0pNFy/cV6gjaVmq1Ete09uq2W43CXmbMYI=;
- b=BilpqsygUSHZpkbyZjbsGlJwt2brVwXzBS6XkbeT7gsQIwu60jQMihwUIxxfwWr9R+
- LxmD2i0C6hL5KqsS984dv92aA3GjX79YxE8xuWUeq0XqP2r+s5UglgrlTRrdY1DQng5d
- 1l8AXeMF3MGuIYhkPLA3n4QfK2j9PlSeASBmcU/2rg+n2wAadAaeWaPuWtoudwH3Vbzx
- WeRqVKj0jQ4+uo95vj29Mss9RummxSvcWD1TGbMhIxIYsRnu2X6vA0oQeeNc7zKGmZT6
- qf2SCfuSe8XNMRP0CJusobaxnmd7Tk4cXLuhjm9F8pU4CgQRH9+G97ZIc1+GXfVMH0m7
- MU5A==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1715850943; x=1716455743;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=fBHt+AeSZ0ZZnxdZx32ciK+E5pQ2eTIpHeo7P14lknQ=;
+ b=rQSb3mv7GapbWE8yUvUpdoj/QvwZrU2tk6BP2rYM1mcvlj6NjebfcVr5ZQcyZMV5Ai
+ WwIZ19klcIqPpFR5JFNK4rV0PD4PqaLiVl+A90Qm+eKm25oig7KWLhVyDp92Olg1s6oa
+ jkZ/RhG17sxrDMalO6eupq9nTdrU2mVtC9MmRPUCkBNXxgCJFuCT3z5z7aHaTi0vgQVL
+ Igh5VTtfvMOAHvJ85EKaotbDomSwDlyA5Om8tJ1Sj1IjOYtI1V8uiiwM2i44D3eVv4tY
+ G+cRdaSa+d1JyM2fbrUY3izo3Rmzsw+VQOYmU62t4dX4D0toEB2wCGVQpHVld7TKB8tf
+ 8tSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715850553; x=1716455353;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:date:from
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=sRZuoe5Cd0pNFy/cV6gjaVmq1Ete09uq2W43CXmbMYI=;
- b=Snu3m8NSwXnDfKpRBFFX9iMUF4fxDL2SRbaNhj/zUilE5EJ06eFC249ybPFW9fVQpD
- QevYND7LZmMlMc7IzmSFEL0vISZKwfVRC33+C711SdCzPSRRuGWSy/IlCzeHOwm5SWpd
- VduuBsRuSWuidvRiNy6P4HF5smjTBXei4hrfvHB/GymOwjGxglKd7IYV7nTsIIL95PpP
- dVe4Q/9EVba5xqGouWM/XP1XDxf+d067AFTghrH1m0wh3tvJT3biChX80dujrbTj5fAU
- g6GZGM/vIIDgZo5cuThjC6tYzYRUcuFGmhF6GqR7nLTzJsXkZzgLnx9YcibNWZ9VbG4t
- F/TA==
+ d=1e100.net; s=20230601; t=1715850943; x=1716455743;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fBHt+AeSZ0ZZnxdZx32ciK+E5pQ2eTIpHeo7P14lknQ=;
+ b=Kxx8RZhboMMQvK7Z+yyD2a+v4IcwU3Mem9j6K0OnzCFWho2+779XiANc/s6FjiwQOq
+ paqmqin2YuYHMEaya1riLBuPTiRrjT9pU/8AwaqjMDWOttPQ3LaPB79Og+PD5kbSdxj1
+ 4zcsEhyjnprO2IYzJiJmdPNjDfYOC5hpUNdhy6hv+lMx3yzQiQV2pfDjlFN/2JNFO8Lc
+ EfIkkKhQA2StiBk3wx94neZmT/wxUtmiTWdcDCAr6pmPryUhm5yHeQWUHCSAjyUgH8QZ
+ jC7pP4hJI4APvr14M6wUwqGglUHSoAAOAUI+a51O2lxBaV/9kqXW5Y47mLSHenIfcyFS
+ UxuQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW00f20N2oOlkspRuKQ9T7j1ZjvZouEM6muGPsMLohPGK1z3t6wQVZPCyEXLOu0lGDsUjBknc54HWuINmTe65tkQYK26Q==
-X-Gm-Message-State: AOJu0Yz3mRdQYuHZmI0e6KmVHW0gl7yXmEzqAvOBocOkWykRrTLKDmS/
- 6fnqdmHSAtYDm3QEr/X/PdDgnMVxUqEXEKuaBiicATZHCqMM3akB8UZlCLXp79I=
-X-Google-Smtp-Source: AGHT+IFqAvj0ODyzIMs7rMso3H+MEzD4B9MGEvKIGc8KtPy9X8J+8ygvxBaYzJ3IrVXpwyCiQZ2b4Q==
-X-Received: by 2002:a05:600c:3c8e:b0:41f:9edf:de50 with SMTP id
- 5b1f17b1804b1-41fbcea32ddmr206091725e9.15.1715850552903; 
- Thu, 16 May 2024 02:09:12 -0700 (PDT)
-Received: from trex (113.red-79-144-189.dynamicip.rima-tde.net.
- [79.144.189.113]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-41f881110f9sm298204165e9.37.2024.05.16.02.09.11
+ AJvYcCUkXVKHnT81ganC35gJuscwyQKxKJ8YCeIFPt7Hkxq0EVDEHfwXlanlVZmudkne6CO3U8MprqRfE4mCLqSMysPrmcHWGQ==
+X-Gm-Message-State: AOJu0YwVgwsVgu5HK8TM9HxvT9fmmJM88y27ItifSfAEJIj3QzzOgPrc
+ SWfJfiynaEI7KBjrMfVmO0the07accpriT02JrS0kfpbTlyKYkPvQmKPUvSSvv0=
+X-Google-Smtp-Source: AGHT+IGWGx9OSYgDw82SCVWyEI2TIzWMFg6d50osMRVtoxmITp9CKsu+RDR1Fzunx6dLB0vO3YvrOQ==
+X-Received: by 2002:ac2:4a6c:0:b0:51d:4c0a:a512 with SMTP id
+ 2adb3069b0e04-52210273e3cmr11099714e87.68.1715850942584; 
+ Thu, 16 May 2024 02:15:42 -0700 (PDT)
+Received: from groot.home ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-351d95d47e7sm1072603f8f.117.2024.05.16.02.15.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 May 2024 02:09:12 -0700 (PDT)
-From: "Jorge Ramirez-Ortiz, Foundries" <jorge@foundries.io>
-X-Google-Original-From: "Jorge Ramirez-Ortiz, Foundries" <JorgeRamirez-Ortiz>
-Date: Thu, 16 May 2024 11:09:11 +0200
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jorge Ramirez-Ortiz <jorge@foundries.io>, Adam Ford <aford173@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Subject: Re: [PATCH v3] tpm: display warning if using gpio reset with TPM
-Message-ID: <ZkXNN4I/gFgjD3oP@trex>
-References: <20240515232138.3065987-1-tharvey@gateworks.com>
- <20240516090950.373d304c@xps-13>
+ Thu, 16 May 2024 02:15:42 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Subject: [v2][PATCH 0/2] MAINTAINERS: updates for fastboot and USB gadget
+Date: Thu, 16 May 2024 11:15:40 +0200
+Message-Id: <20240516-gadget-maintainer-v2-0-23cc916df434@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20240516090950.373d304c@xps-13>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIALzORWYC/32NQQrCMBBFr1JmbWQSIqIr7yFdJOmkHbCtTEKwl
+ Nzd2AO4+Iv34b+/QyJhSnDvdhAqnHhdGphTB2Fyy0iKh8Zg0Fi8aKtGN4yU1ex4yS0kKkSLMUT
+ jnbfQdm+hyJ/D+ewbT5zyKttxUfSv/WcrWqHy+orR3PQQEB/ebS/2QuewztDXWr/YlXUPtQAAA
+ A==
+To: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>
+Cc: Lukasz Majewski <lukma@denx.de>, u-boot@lists.denx.de, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+X-Mailer: b4 0.13.1-dev-5d32f
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,59 +97,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 16/05/24 09:09:50, Miquel Raynal wrote:
-> Hi Tim,
-> 
-> tharvey@gateworks.com wrote on Wed, 15 May 2024 16:21:38 -0700:
-> 
-> > Instead of displaying what looks like an error message if a
-> > gpio-reset dt prop is missing for a TPM display a warning that
-> > having a gpio reset on a TPM should not be used for a secure production
-> > device.
-> > 
-> > TCG TIS spec [1] says:
-> > "The TPM_Init (LRESET#/SPI_RST#) signal MUST be connected to the
-> > platform CPU Reset signal such that it complies with the requirements
-> > specified in section 1.2.7 HOST Platform Reset in the PC Client
-> > Implementation Specification for Conventional BIOS."
-> > 
-> > The reasoning is that you should not be able to toggle a GPIO and reset
-> > the TPM without resetting the CPU as well because if an attacker can
-> > break into your OS via an OS level security flaw they can then reset the
-> > TPM via GPIO and replay the measurements required to unseal keys
-> > that you have otherwise protected.
-> > 
-> > Additionally restructure the code for improved readability allowing for
-> > removal of the init label.
-> > 
-> > Before:
-> >  - board with no reset gpio
-> > u-boot=> tpm init && tpm info
-> > tpm_tis_spi_probe: missing reset GPIO
-> > tpm@1 v2.0: VendorID 0x1114, DeviceID 0x3205, RevisionID 0x01 [open]
-> >  - board with a reset gpio
-> > u-boot=> tpm init && tpm info
-> > tpm@1 v2.0: VendorID 0x1114, DeviceID 0x3205, RevisionID 0x01 [open]
-> > 
-> > After:
-> >  - board with no reset gpio
-> > u-boot=> tpm init && tpm info
-> > tpm@1 v2.0: VendorID 0x1114, DeviceID 0x3205, RevisionID 0x01 [open]
-> >  - board with a reset gpio
-> > u-boot=> tpm init && tpm info
-> > tpm@1: TPM gpio reset should not be used on secure production devices
-> > tpm@1 v2.0: VendorID 0x1114, DeviceID 0x3205, RevisionID 0x01 [open]
-> > 
-> > [1] https://trustedcomputinggroup.org/wp-content/uploads/TCG_PCClientTPMInterfaceSpecification_TIS__1-3_27_03212013.pdf
-> > 
-> > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-> 
-> Looks way cleaner, thanks.
-> 
-> Reviewed-by: Miquel Raynal <miquel.raynal@bootlin.com>
-> 
-> Miquèl
+I've noticed that I'm missing quite some USB gadget patches such as [1]
+since I'm not always cc'ed.
 
-nice. if needed
+With Marek, we agreed on the following split:
+- I take care of USB gadget side
+- Marek handles the rest
 
-Signed-off-by: Jorge Ramirez-Ortiz <jorge@foundries.io>
+Update the maintainers file to make sure I get included on gadget
+related patches.
+
+While at it, also update FASTBOOT entry to point towards the u-boot-dfu
+tree.
+
+[1] https://lore.kernel.org/all/20240412202611.3565052-1-alexander.sverdlin@siemens.com/
+
+Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+---
+Changes in v2:
+- Updated commit message (s/usb/USB) for patch 2
+- Added ch9 include to USB gadget list
+- Link to v1: https://lore.kernel.org/r/20240514-gadget-maintainer-v1-0-b170f291dc00@baylibre.com
+
+---
+Mattijs Korpershoek (2):
+      MAINTAINERS: add tree link for fastboot
+      MAINTAINERS: add USB gadget regex to u-boot-dfu tree
+
+ MAINTAINERS | 4 ++++
+ 1 file changed, 4 insertions(+)
+---
+base-commit: c8ffd1356d42223cbb8c86280a083cc3c93e6426
+change-id: 20240514-gadget-maintainer-cf40fcf2bab4
+
+Best regards,
+-- 
+Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
