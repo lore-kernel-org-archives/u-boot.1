@@ -4,71 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B0CEC25B74
-	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 20:34:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50F68C25B78
+	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 20:34:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4AA5688405;
-	Thu, 16 May 2024 22:34:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ADEF588458;
+	Thu, 16 May 2024 22:34:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FHAZ53TP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ITkB7IHT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 39389883EE; Thu, 16 May 2024 22:34:22 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id 451A0883EE; Thu, 16 May 2024 22:34:23 +0200 (CEST)
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [IPv6:2607:f8b0:4864:20::730])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1AA1A8841A
+ by phobos.denx.de (Postfix) with ESMTPS id F232288453
  for <u-boot@lists.denx.de>; Thu, 16 May 2024 22:34:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6a0ffaa079dso80984126d6.1
+Received: by mail-qk1-x730.google.com with SMTP id
+ af79cd13be357-792b8bf806fso671521285a.0
  for <u-boot@lists.denx.de>; Thu, 16 May 2024 13:34:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715891658; x=1716496458; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=m5BF5+u5CpGxag+FUE/xIAbd0rnBG5hgbJ/y6PY7qZk=;
- b=FHAZ53TPje89DjmqV1aDsz6lzXsV2X/6WFn7ZJ72iRkks1OADfAcMr3Tnf6di+48BP
- kKb5lmm8Ait0vZyHSwzapYv7WXx2P5DGBQK6tbqiEgJCOV7FUVjxV5yIQOjOBp5Nk9hj
- 1epAsp3s6ayXP+14wLySnpjHusDe6yk80vz9w=
+ d=konsulko.com; s=google; t=1715891659; x=1716496459; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=F3GUT9fuBM3qeECHLPBdiEk0soYRMwgMa9Le6gnIuuQ=;
+ b=ITkB7IHTCt6cx+zpu3UTbDRSWOjfuDguCmtyC/6GCwPhte+CiiFY2mzb5EyTh2ihXu
+ GoQW7cGxRPcVobatjpXA+UN9U2e4DVjWItm8PPh86UEmUD42o5uu2wh8qv4Cj2XzMj//
+ DaGPmMQTY+rapzA65o2UPYObrBKJMwQzq/vpc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715891658; x=1716496458;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=m5BF5+u5CpGxag+FUE/xIAbd0rnBG5hgbJ/y6PY7qZk=;
- b=K3S5cdnOeccQa/r+UIlueX6DI7VWb2kAdzQsXebOaqXCLdA2AA4WeW8NB4JdvH/63/
- y+nTPaX5F+2o9r5EGgKpphoO5m0T9QhlThK8Sq21mzhvC/qhOREv1dy9ljX5Agl3s+gA
- 9YFZ5n0UPXK/X3aC/tYD7UED9cKjkzGP3bvakS8hFshZEe7sW+ZcMBpkyoWhrLfB3Yus
- 0B7T89k5dHIcSh73+lSNOZWp267B/bWpE4fqRHa/mt4gu0gnx+AxslQVK8/i6+5cawC/
- qb+0MKJ9oszZu7LU+KlyEFJI8nc0n/7qQLeA8mfgqziezEKngLPM4li22jO237QhR5p+
- YDyw==
-X-Gm-Message-State: AOJu0YwG4xqkhd3k32W3hKR9+RteO4K90hF7Y13d1Kw4OqeRMryD8Ycc
- +UlO3PpVdg9kSFlwOTlXQGwSkJGpK01Vrum0GERRQdS90A8KjDaGmPiLOnbltSFkuMa55GVpOm7
- 34dc=
-X-Google-Smtp-Source: AGHT+IFFM+8IYtKjUdIj0YZ/5ENT20TIdHpT6tpgwJC9MBkA+4CMmFfgxhOscxsAPQKqq7e2YkigVA==
-X-Received: by 2002:a0c:f6c4:0:b0:6a3:58a1:1e24 with SMTP id
- 6a1803df08f44-6a358a129b7mr85294876d6.25.1715891658387; 
- Thu, 16 May 2024 13:34:18 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1715891659; x=1716496459;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=F3GUT9fuBM3qeECHLPBdiEk0soYRMwgMa9Le6gnIuuQ=;
+ b=aMKFOh+j7tctSEdwWwZZXrLF3yxETvHT8PwToZlrp6ocDkfzajYU1w5V/GMr2LZOpU
+ RVTaiGZWW3/ZXBNHI4wkr3OraXjGPHKcO+ru3FT9LOVAyirSd6P7uZvJ2XHNpYeIlxwj
+ K+5b8aZXMYNIg4p4WgD23mX1aWuIDJKLe8CBmTte78pJROcw3LjHht4I0Q89tddlCish
+ V/+u7z7nGWWMh1E+Uuh7J3O6ZGBOZJto1tWhlPdUUeyFuJkDEEMrJEHaAJJjnDAaWxBR
+ fcOsKHdwhWm2oqBguB+7hcemYfNR+szMyejwETo0uNoHwsufDdL1u4SI204eDR/gIP0k
+ yUtw==
+X-Gm-Message-State: AOJu0YwNmRF0pFluMEDV374RnuYPe5+Uciqq7wgvRiGec7XEXuGdjfHZ
+ /tbqPuY8XOAeNMJsg8RR+7LTavlLj3heXT9suopkDQmeQ/8JI1lSvbSMAVjhAlf/g/MEcbk4lb9
+ vRXc=
+X-Google-Smtp-Source: AGHT+IFrSNCPxviXHCZ/brvJeeogHiPZSajrNV9VirqWyMGGcwV+hSy2s1NjB9+ROIPy/UT9BdgjFg==
+X-Received: by 2002:a05:6214:5909:b0:6a0:5a42:9626 with SMTP id
+ 6a1803df08f44-6a1681a15e5mr232651116d6.31.1715891659499; 
+ Thu, 16 May 2024 13:34:19 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6a15f20570bsm78234346d6.140.2024.05.16.13.34.17
+ 6a1803df08f44-6a15f20570bsm78234346d6.140.2024.05.16.13.34.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 May 2024 13:34:18 -0700 (PDT)
+ Thu, 16 May 2024 13:34:19 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH 1/2] doc: process.rst: Use subsubheading for "Phases of the
- Development Process"
-Date: Thu, 16 May 2024 14:34:15 -0600
-Message-Id: <20240516203416.928567-1-trini@konsulko.com>
+Subject: [PATCH 2/2] doc: process.rst: Document device tree resync rules
+Date: Thu, 16 May 2024 14:34:16 -0600
+Message-Id: <20240516203416.928567-2-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240516203416.928567-1-trini@konsulko.com>
+References: <20240516203416.928567-1-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -87,54 +89,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These sections which talk about the different phases of the development
-process should be using the subsubheading identifier.
+Document the logic of when we do a full resync of the device trees used
+by OF_UPSTREAM as well as that cherry-picking is allowed as needed.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 ---
- doc/develop/process.rst | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ doc/develop/process.rst | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
 diff --git a/doc/develop/process.rst b/doc/develop/process.rst
-index 92477d05dd85..a66540a698c1 100644
+index a66540a698c1..0542b3fc1245 100644
 --- a/doc/develop/process.rst
 +++ b/doc/develop/process.rst
-@@ -34,7 +34,7 @@ It is followed by a *Stabilization Period*.
- The end of a Release Cycle is marked by the release of a new U-Boot version.
+@@ -108,6 +108,19 @@ Differences to the Linux Development Process
+   In U-Boot, ``"-rc1"`` will only be released after all (or at least most of
+   the) patches that were submitted during the merge window have been applied.
  
- Merge Window
--------------
-+^^^^^^^^^^^^
++Resyncing of the device tree subtree
++------------------------------------
++
++As explained in :doc:`devicetree/control` some platforms make use of device tree
++files which come from a git subtree that mirrors the Linux Kernel sources
++itself. For our purposes, we only track releases and not release candidates for
++merging in our tree. These merges follow the normal merge window rules.
++
++In the case of specific changes, such as bug fixes or new platform support,
++these can be "cherry-picked" and are subject to the normal merge rules. For
++example, a bug fix can come in later in the window but a full re-sync only
++happens within the merge window itself.
++
+ .. _custodians:
  
- The Merge Window is the period when new patches get submitted (and hopefully
- accepted) for inclusion into U-Boot mainline. This period lasts for 21 days (3
-@@ -44,7 +44,7 @@ This is the only time when new code (like support for new processors or new
- boards, or other new features or reorganization of code) is accepted.
- 
- Twilight Time
---------------
-+^^^^^^^^^^^^^
- 
- Usually patches do not get accepted as they are - the peer review that takes
- place will usually require changes and resubmissions of the patches before they
-@@ -65,13 +65,13 @@ the Merge Window does not preclude patches that were already posted from being
- merged for the upcoming release.
- 
- Stabilization Period
----------------------
-+^^^^^^^^^^^^^^^^^^^^
- 
- During the Stabilization Period only patches containing bug fixes get
- applied.
- 
- Corner Cases
--------------
-+^^^^^^^^^^^^
- 
- Sometimes it is not clear if a patch contains a bug fix or not.
- For example, changes that remove dead code, unused macros etc. or
+ Custodians
 -- 
 2.34.1
 
