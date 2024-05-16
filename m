@@ -4,98 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D24ADC25B74
-	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 15:07:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDC51C25B74
+	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 15:12:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27774881C3;
-	Thu, 16 May 2024 17:07:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
+	by phobos.denx.de (Postfix) with ESMTP id 2F9C988297;
+	Thu, 16 May 2024 17:12:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="MlaCYnbn";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="GGLfg411";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="LsMugEtf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBC7B8826E; Thu, 16 May 2024 17:07:13 +0200 (CEST)
-Received: from wfout3-smtp.messagingengine.com
- (wfout3-smtp.messagingengine.com [64.147.123.146])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D392B88353; Thu, 16 May 2024 17:12:39 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F099E8800B
- for <u-boot@lists.denx.de>; Thu, 16 May 2024 17:07:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DCC488297
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 17:12:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=flygoat.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailfout.west.internal (Postfix) with ESMTP id 794411C0010E;
- Thu, 16 May 2024 11:07:08 -0400 (EDT)
-Received: from imap44 ([10.202.2.94])
- by compute3.internal (MEProxy); Thu, 16 May 2024 11:07:09 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
- cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm1; t=1715872028;
- x=1715958428; bh=tdFAaPehCgXxITt6hFDcgJGVN2a/8XUwti0wu+g2Ins=; b=
- MlaCYnbnv9XWqgS9heT8BczW+YpXGfG91fYDM/9DFrFsAjpYjpSgVpUKF5D3vkjo
- w5vUdWzhZcjiSuH0rehgT26FHcRpAC+6ApHMgEaQzOjC4xEPxTBpBu06h850tELc
- TeNyWZp8Mu0amPNy3lG+FJHPZjcOZyAPtiv+RFMctuSEZMRa5Gmd12c6d3Cdrsyr
- wbbfPT/s7qdamBLjWEZmDqwZFukrjYqSWJxE55vCjhrtNzc5e/zDDCXR59qpzxTc
- 19begE4aDoVMdLzTsNML1rNMC5KNYwDi2L8SN+qhhx/N+/i5fbn0MuYeIpXcbxkT
- 6tMG72Z7jdXVLdU+wYVMZw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715872028; x=
- 1715958428; bh=tdFAaPehCgXxITt6hFDcgJGVN2a/8XUwti0wu+g2Ins=; b=G
- GLfg411a719uX3U29VtUVC1L54KBTxm6/pe40puImcLIRRc1b/e3XSk6vPFZAkbm
- k1qxpOUwooimtQGYemqity2GnsqtbROvE9EkXAoSbHgKYCBtnYWWaiUUcJHSGP3B
- wT6pzA2HIPDO/epU4WEP6dqaxPgthFfIk/VPozFSzpZ2TBWLBppHxEzsKY8ydHps
- 0pZ++NFzMQc7JRQ/Or89fThTTD2pf6bSOdCHAcxLmZYy5CDDNOIi2N7IBFGnNDgD
- nwbPd8JLZENPlMcNE0kTyZsmNaISJ5O/RyrdO7T8C8tckPrxFDFUp6OFm38Avb7o
- ipBKKNxFBTTzzSjy6ky8Q==
-X-ME-Sender: <xms:GyFGZoeZXpltL_qjPqJRd8De5fwfcTnKCDJa_Qo8V5G1pAWIFyuy7w>
- <xme:GyFGZqPEoC3bHaZybyZaXmL_sZXAWvYKwUIIix4qdR1GcQBBVg7_78HtflSyYkoLK
- 1hxWHmdf8rF7RnBrjY>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehuddgkedvucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepofgfggfkjghffffhvfevufgtgfesthhqredtreerjeenucfhrhhomhepfdfl
- ihgrgihunhcujggrnhhgfdcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtoh
- hmqeenucggtffrrghtthgvrhhnpedufeegfeetudeghefftdehfefgveffleefgfehhfej
- ueegveethfduuddvieehgfenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmh
- grihhlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
-X-ME-Proxy: <xmx:GyFGZpiDwnUCW_y04wmg1aBkXsfPiC4lRtZiA3UqUzQmjxg4q2h3qQ>
- <xmx:GyFGZt8DEEsJDtr4PU6FXmPBzCnbd0zbY2_mJlxatOP1FXYhcP8rxA>
- <xmx:GyFGZkvEI4k06ZSDYpkmntJF8W5rI6Sf_f4zQ2j-Ta3X4eAwALEQLQ>
- <xmx:GyFGZkGSoAYDWLhwA4v-Z_r_bfSMtEMsE91Fuxg7e2_YTrJ8XugDeA>
- <xmx:HCFGZmLaOa2IO3hB22wQDOgvyVduXQEZ9p-U7-gII5AGsdkkq6Rur9vO>
-Feedback-ID: ifd894703:Fastmail
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
- id D7ED136A0074; Thu, 16 May 2024 11:07:06 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.11.0-alpha0-456-gcd147058c-fm-hotfix-20240509.001-g0aad06e4
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-351da5838fcso629108f8f.1
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 08:12:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1715872357; x=1716477157;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:subject:cc:to:from:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=7x5EJAVTWOUZ2URBJXvmG1OB7cnDQ947VHPhL86JDqc=;
+ b=LsMugEtfuxf/V/X+xbgS75IqQYQeBNgdCRPioawT5sCXCN3MkAJh3X2HM0HfUqDzhX
+ xQTH3srNChViAYFPmMVHeQ3QYJdqszJGscPTuQNYF5NB0OfUow+sLf7gr5AS9yiK0D+2
+ 53QtpvjMBxP7bX7dkmtksAPQhpaP8KV8Quqlh76djLEz4VPzp9GWlfy3X1o1FbnBr9Th
+ E+9AbHZ+AJVomOburI1djWOvmbefuRbvdy5YrUeuclNxc6WcBgtnx7J5+l/6R5CoM3fx
+ b4lyO3Vz/anFT0MVQ6QwGDWZfiK8B3ltTcpL6PCz1MAef1k0BRQO88pQkyShmVfdCgB7
+ z+ow==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1715872357; x=1716477157;
+ h=mime-version:message-id:date:subject:cc:to:from:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=7x5EJAVTWOUZ2URBJXvmG1OB7cnDQ947VHPhL86JDqc=;
+ b=CJCKfGINytEI2xidqdhrbVlYjRXxIiEFOoglnkFRl5AanFijTD7L7+5C0yJPSXgDP6
+ lAIL6/QuuXjiHzqK78m6vum0NkrnbFrWWqOfeg7RQ/PUNmeZUSZ3LT1OCPLnp6qEsGFH
+ +gXbJrd2tWVH+cIdBGv6TVvtHYITRieI8nijqeHPw6nPW5eXai7XsdlQ2o64VkBHBQ3g
+ Mds5hxF7O52LqZ85fPDCpOUuT9HenpxWrh26og+bI9DanxGfQyjgDbYgKYYt8PFrsGJ0
+ gKhwuHjOQsFg5Z6AVjT+Ai/N2qe6Imll9oR5kF5OR/H0pwgEUbQBXovSHofVkPeHEDGn
+ 24Jg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUkc6J3fZVB3IHRWpU7EeSNGaCqEm0zUi9Uyg6WlunWVson+Vx+vaklpg1CaOyvUvCLs/bLEj15niz64t/JzhsDXpR4Og==
+X-Gm-Message-State: AOJu0YxIS0sxx2XM6snPD17HdW2h543aUR3OgTvqWzPpNw6766FZBVvQ
+ ChyLPeqSifY8m+gTYe2bKDFxkoQl3jrRxZ+PBW68NlDC29oM5ORJeos1bnbamVY=
+X-Google-Smtp-Source: AGHT+IGgsvKtgeMT+0+xVAu6Zd1tx1fBswqAikFfbVLydIqieN2hwPKh/JjyerYy8YpxzNdEqWQpGg==
+X-Received: by 2002:a5d:50c5:0:b0:351:d669:5ed7 with SMTP id
+ ffacd0b85a97d-351d6696d29mr1646171f8f.39.1715872357067; 
+ Thu, 16 May 2024 08:12:37 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3502b79bc83sm19233575f8f.16.2024.05.16.08.12.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 16 May 2024 08:12:36 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Lukasz Majewski <lukma@denx.de>, Aswath Govindraju
+ <a-govindraju@ti.com>, Benjamin Hahn <B.Hahn@phytec.de>, Alexander
+ Sverdlin <alexander.sverdlin@siemens.com>
+Subject: [GIT PULL] Please pull u-boot-dfu-20240516
+Date: Thu, 16 May 2024 17:12:33 +0200
+Message-ID: <87cyplzt7i.fsf@baylibre.com>
 MIME-Version: 1.0
-Message-Id: <1559cb32-ea27-4baa-a615-2f7cabda5529@app.fastmail.com>
-In-Reply-To: <b6ba47d2-be93-40e8-a1b7-1bd593a933b7@kwiboo.se>
-References: <20240516-boston-v2-0-77938800d1dd@flygoat.com>
- <20240516-boston-v2-9-77938800d1dd@flygoat.com>
- <b6ba47d2-be93-40e8-a1b7-1bd593a933b7@kwiboo.se>
-Date: Thu, 16 May 2024 16:06:48 +0100
-From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
-To: "Jonas Karlman" <jonas@kwiboo.se>
-Cc: "Michal Simek" <michal.simek@amd.com>, "Tom Rini" <trini@konsulko.com>,
- "Daniel Schwierzeck" <daniel.schwierzeck@gmail.com>,
- "paulburton@kernel.org" <paulburton@kernel.org>,
- "Simon Glass" <sjg@chromium.org>, "Lukasz Majewski" <lukma@denx.de>,
- "Sean Anderson" <seanga2@gmail.com>, "Sumit Garg" <sumit.garg@linaro.org>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2 09/12] clk: boston: Allow to get regmap from parent
- device
-Content-Type: text/plain;charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,87 +90,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom, everyone,
 
+Sorry for the double email, I missed to include the list :(
 
-=E5=9C=A82024=E5=B9=B45=E6=9C=8816=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8B=E5=
-=8D=883:00=EF=BC=8CJonas Karlman=E5=86=99=E9=81=93=EF=BC=9A
-> Hi Jiaxun,
->
-> On 2024-05-16 13:40, Jiaxun Yang wrote:
->> In upstream devicetree, clk_boston is a child of syscon node
->> and there is no "regmap" property for clk_boston node.
->>=20
->> Try to check parent device first to look for syscon.
->>=20
->> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
->> ---
->> v2: Move syscon_get_regmap to probe
->> ---
->>  drivers/clk/clk_boston.c | 37 +++++++++++++++++++++++++------------
->>  1 file changed, 25 insertions(+), 12 deletions(-)
->>=20
->> diff --git a/drivers/clk/clk_boston.c b/drivers/clk/clk_boston.c
->> index 030ff7cc58ec..1985bb0ec334 100644
->> --- a/drivers/clk/clk_boston.c
->> +++ b/drivers/clk/clk_boston.c
->> @@ -12,6 +12,7 @@
->>  #include <linux/printk.h>
->> =20
->>  struct clk_boston {
->> +	struct udevice *syscon;
->>  	struct regmap *regmap;
->>  };
->> =20
->> @@ -58,23 +59,33 @@ const struct clk_ops clk_boston_ops =3D {
->>  	.get_rate =3D clk_boston_get_rate,
->>  };
->> =20
->> -static int clk_boston_of_to_plat(struct udevice *dev)
->> +static int clk_boston_probe(struct udevice *dev)
->>  {
->>  	struct clk_boston *state =3D dev_get_plat(dev);
->> -	struct udevice *syscon;
->> -	int err;
->> =20
->> -	err =3D uclass_get_device_by_phandle(UCLASS_SYSCON, dev,
->> -					   "regmap", &syscon);
->> -	if (err) {
->> -		pr_err("unable to find syscon device\n");
->> -		return err;
->> +	state->regmap =3D syscon_get_regmap(state->syscon);
->> +	if (IS_ERR(state->regmap)) {
->> +		pr_err("unable to find regmap\n");
->> +		return PTR_ERR(state->regmap);
->>  	}
->> =20
->> -	state->regmap =3D syscon_get_regmap(syscon);
->> -	if (!state->regmap) {
->> -		pr_err("unable to find regmap\n");
->> -		return -ENODEV;
->> +	return 0;
->> +}
->> +
->> +static int clk_boston_of_to_plat(struct udevice *dev)
->> +{
->> +	struct clk_boston *state =3D dev_get_plat(dev);
->> +	int err;
->> +
->> +	if (dev->parent && device_get_uclass_id(dev->parent) =3D=3D UCLASS_=
-SYSCON) {
->> +		state->syscon =3D dev->parent;
->> +	} else {
->> +		err =3D uclass_get_device_by_phandle(UCLASS_SYSCON, dev,
->> +						   "regmap", &state->syscon);
->
-> This will trigger a probe of the referenced regmap phandle. To simplify
-> and avoid probing devices at of_to_plat() stage, you can probably just
-> rename of_to_plat() to probe() and skip of_to_plat() stage completely.
+Please find some fixes for master:
 
-Thanks, will fix in next version.
+- Fix cdns3 low power hang via fast access bit
+- Multiple dwc3 gadget fixes, mainly for USB support on TI AM6232
+- Consistent USB_GADGET_MANUFACTURER for PHYTEC boards
+- MAINTAINERS file update for u-boot-dfu
 
->
-> Regards,
-> Jonas
+The CI job is at https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/20737
 
---=20
-- Jiaxun
+Thanks,
+Mattijs
+
+The following changes since commit c8ffd1356d42223cbb8c86280a083cc3c93e6426:
+
+  Merge patch series "arm: dts: am62-beagleplay: Fix Beagleplay Ethernet" (2024-05-13 09:15:51 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu-20240516
+
+for you to fetch changes up to efbc11ccef89030ed54b7368458eeaf9ec687c77:
+
+  MAINTAINERS: add USB gadget regex to u-boot-dfu tree (2024-05-16 13:28:45 +0200)
+
+----------------------------------------------------------------
+u-boot-dfu-20240516
+
+- Fix cdns3 low power hang via fast access bit
+- Multiple dwc3 gadget fixes, mainly for USB support on TI AM6232
+- Consistent USB_GADGET_MANUFACTURER for PHYTEC boards
+- MAINTAINERS file update for u-boot-dfu
+
+----------------------------------------------------------------
+Aswath Govindraju (1):
+      usb: cdns3: gadget.c: Set fast access bit
+
+Benjamin Hahn (1):
+      configs: Make USB_GADGET_MANUFACTURER consistent over all PHYTEC boards
+
+Felipe Balbi (4):
+      usb: dwc3: gadget: combine return points into a single one
+      usb: dwc3: gadget: clear SUSPHY bit before ep cmds
+      usb: dwc3: gadget: only resume USB2 PHY in <=HIGHSPEED
+      usb: dwc3: gadget: properly check ep cmd
+
+Mattijs Korpershoek (2):
+      MAINTAINERS: add tree link for fastboot
+      MAINTAINERS: add USB gadget regex to u-boot-dfu tree
+
+Thinh Nguyen (2):
+      usb: dwc3: gadget: Check ENBLSLPM before sending ep command
+      usb: dwc3: gadget: Disable GUSB2PHYCFG.SUSPHY for End Transfer
+
+ MAINTAINERS                          |  4 +++
+ configs/phycore-imx8mp_defconfig     |  2 +-
+ configs/phycore_am64x_a53_defconfig  |  2 +-
+ configs/phycore_am64x_r5_defconfig   |  2 +-
+ configs/phycore_pcl063_defconfig     |  2 +-
+ configs/phycore_pcl063_ull_defconfig |  2 +-
+ drivers/usb/cdns3/gadget.c           |  4 +++
+ drivers/usb/dwc3/core.h              |  2 ++
+ drivers/usb/dwc3/gadget.c            | 47 +++++++++++++++++++++++++++++++++---
+ 9 files changed, 59 insertions(+), 8 deletions(-)
