@@ -4,81 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 818C7C25B74
-	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 06:40:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAFD4C25B74
+	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 06:43:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D0B9987ED1;
-	Thu, 16 May 2024 08:40:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id F362D87ED1;
+	Thu, 16 May 2024 08:43:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="DX4cCWCH";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1715841815;
+	bh=CpGHX61C8ZflxjUAGIQgWjKvwJ+PZumNeqoGBZ++VdI=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=VBCIim4IOSGnOniJTNOp+/Cq+5Y1Xy1HrnEoJfHiqwqlKHLvatHpKeN/y3pEnWquV
+	 Mm5QPdjp2p+lxoEU9Ovgn+y2Ou7XZKZNAjICmcWrqlQG6l72opvYVH0p9jje/zqnLY
+	 l+39a5BHYf2JJQ/TFWeiP6nlA3zv+Xm1i3E/nZhBYq9A3yrlNI0BuJhCqLZ31J3s46
+	 mwMRh68p3EtIVTpSd6GIlB6OczB1b1MwWw4oAXNzPgrzlZyd+W/8lumHIiNl4FpON9
+	 skxQ54p5zX+vCbOGMS0uttRQtcLIPQ59dpG5T0iZouizAxuohBu7hpi2EH7w1UB9WA
+	 k/9ZdBPXJXQ5g==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0456687F65; Thu, 16 May 2024 08:40:06 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9816D88069; Thu, 16 May 2024 08:43:33 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A123C87ED1
- for <u-boot@lists.denx.de>; Thu, 16 May 2024 08:40:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A5D28717A
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 08:43:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-34dc129accaso5622804f8f.0
- for <u-boot@lists.denx.de>; Wed, 15 May 2024 23:40:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1715841603; x=1716446403;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=bRt36BZgMuuJI3gcGGg4M04K2sXAntfGnMJKZ/7mxOU=;
- b=DX4cCWCHamX0jdlrsuDyCJwAbpNhknein3Iro2+3f5Le8Du8KEgo9867WCBsYNSoj8
- neTdkdcVdHNHb+JhhKDq6gAd2yVsif40m9mVF2XTVyENvypUKkHAc1Fl1rpaar4qqkXh
- N3faQQHb3jlWrYuFluObm0C+0t2igKoBJA7Z0Wa8NFpWwfVKTQ/sl6oDk58xAnx/ikos
- L7w6VF3jNh5Z9yOLhp1wIffTVzS4jh067uEsKWHssWPmtJHfCFHhjotQ3S3O1SE1olaV
- TRmDFCo9YXuQsw30fuam9Aa+cQAEx0cvOUS48RegP04cZP14Z5Hmg+8L7dViHDdR+VGQ
- 8BsA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715841603; x=1716446403;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=bRt36BZgMuuJI3gcGGg4M04K2sXAntfGnMJKZ/7mxOU=;
- b=gYId0QEiJ23l7q0As+CLmVQ8TtNC343Lr8eSQvLvHNvCf3c0nAx/dDFc9LMQBrEoHs
- jP98aQT9jDZNg/PKZukFlcpfOccdG5jV/uBYVUeUpOqmzdW4ob99BS3oYxEv30cMT+cD
- g32w5DU+wnpjmyyghUR8O/3kYUnm2+mr+hKx5x6RyIXoYAiOHDgWazxTZUv2GIfNWIBW
- yAdBeYlIYBxZCmRwswGK9sYHWFu10sCr3uwta19YuGIi3HIo0OGoGM9rDFTMnF6h00Ol
- njKim1kKztaazqs2IL7WK9Vtq8DEB7nEzoqJnRkA+KAWcrX0PpvpABzMXB+zxpkmzVGq
- aW6w==
-X-Gm-Message-State: AOJu0YyrHamYVJQWmIHljP+oLP5/fc/1GiPWQuexVM/TypUYJo7Jyoh/
- oGdrBPVxXrn6EGIS7T7DYF8s8ZlKtNbSW/SQqMRzPpYtYlMI0ScjoFpEjbCj2Yw=
-X-Google-Smtp-Source: AGHT+IEF6ej+8nf7rHDvz2I3dv8XXbxR59hfeY7o//CXekjS/s4xN/9mOsMqu1PdGrnvQspM4spYVw==
-X-Received: by 2002:a05:6000:18af:b0:351:b4af:c84b with SMTP id
- ffacd0b85a97d-351b4afc92emr13070882f8f.51.1715841602903; 
- Wed, 15 May 2024 23:40:02 -0700 (PDT)
-Received: from mkorpershoek-xps13.carmes.etincelle-coworking.com
- ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3502bbc4b41sm18087722f8f.113.2024.05.15.23.40.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 May 2024 23:40:01 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: u-boot@lists.denx.de, "A. Sverdlin" <alexander.sverdlin@siemens.com>
-Cc: Marek Vasut <marex@denx.de>, Felipe Balbi <felipe.balbi@linux.intel.com>, 
- Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Nishanth Menon <nm@ti.com>, 
- Sjoerd Simons <sjoerd@collabora.com>
-In-Reply-To: <20240412202611.3565052-1-alexander.sverdlin@siemens.com>
-References: <20240412202611.3565052-1-alexander.sverdlin@siemens.com>
-Subject: Re: [PATCH 0/6] usb: dwc3: gadget: avoid EP command timeout
-Message-Id: <171584160086.8529.11179405967993150086.b4-ty@baylibre.com>
-Date: Thu, 16 May 2024 08:40:00 +0200
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4Vg0st5P5Lz9ssQ;
+ Thu, 16 May 2024 08:43:30 +0200 (CEST)
+Message-ID: <6dc4996c-ebc0-4ad8-a4d5-2906c7aca732@denx.de>
+Date: Thu, 16 May 2024 08:43:27 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.12.2
+Subject: Re: [PATCH 3/3] cyclic: make clients embed a struct cyclic_info in
+ their own data structure
+Content-Language: en-US
+To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+References: <20240509004714.1394547-1-rasmus.villemoes@prevas.dk>
+ <20240509004714.1394547-4-rasmus.villemoes@prevas.dk>
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20240509004714.1394547-4-rasmus.villemoes@prevas.dk>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4Vg0st5P5Lz9ssQ
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,32 +73,393 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Rasmus,
 
-On Fri, 12 Apr 2024 22:26:00 +0200, A. Sverdlin wrote:
-> From: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+On 5/9/24 02:47, Rasmus Villemoes wrote:
+> There are of course not a whole lot of examples in-tree yet, but
+> before they appear, let's make this API change: Instead of separately
+> allocating a 'struct cyclic_info', make the users embed such an
+> instance in their own structure, and make the convention that the
+> callback simply receives the 'struct cyclic_info *', from which the
+> clients can get their own data using the container_of() macro.
 > 
-> While there are happy users who successfully have been using DFU on TI
-> AM62x [1][2], there are also others who were not so lucky up to now [3].
+> This has a number of advantages.
 > 
-> I felt into latter category and was wondering why I observe this:
+> First, it means cyclic_register() simply cannot fail, simplifying the
+> code. The necessary storage will simply be allocated automatically
+> when the client's own structure is allocated (often via
+> uclass_priv_auto or similar).
 > 
-> [...]
+> Second, code for which CONFIG_CYCLIC is just an option can more easily
+> be written without #ifdefs, if we just provide an empty struct
+> cyclic_info {}. For example, the nested CONFIG_IS_ENABLED()s in
+> https://lore.kernel.org/u-boot/20240316201416.211480-1-marek.vasut+renesas@mailbox.org/
+> are mostly due to the existence of the 'struct cyclic_info *' member
+> being guarded by #ifdef CONFIG_CYCLIC.
+> 
+> And we do probably want to avoid the extra memory overhead of that
+> member when !CONFIG_CYCLIC. But that is automatic if, instead of a
+> 'struct cyclic_info *', one simply embeds a 'struct cyclic_info',
+> which will have size 0 when !CONFIG_CYCLIC. Also, the no-op
+> cyclic_register() function can just unconditionally be called, and the
+> compiler will see that (1) the callback is referenced, so not emit a
+> warning for a maybe-unused function and (2) see that it can actually
+> never be reached, so not emit any code for it.
+> 
+> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+> ---
+>   board/Marvell/octeon_nic23/board.c |  9 +++++---
+>   cmd/cyclic.c                       | 12 +++++------
+>   common/cyclic.c                    | 22 +++++--------------
+>   doc/develop/cyclic.rst             | 26 ++++++++++++++---------
+>   drivers/watchdog/wdt-uclass.c      | 33 +++++++++++++----------------
+>   include/cyclic.h                   | 34 +++++++++++++++---------------
+>   6 files changed, 64 insertions(+), 72 deletions(-)
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
+I like this approach. And would like to pull this in as well, perhaps
+before leaving on a 2 week vacation mid of next week. Unfortunately
+this patch 3/3 does not apply on TOT any more. Could you please rebase
+and re-submit?
 
-[1/6] usb: dwc3: gadget: combine return points into a single one
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/13395507ca1f48de25e70f4d27f709b1a4fa0a82
-[2/6] usb: dwc3: gadget: clear SUSPHY bit before ep cmds
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/967b31c3ccdc09284a4447ebc4577bb7ef06d500
-[3/6] usb: dwc3: gadget: only resume USB2 PHY in <=HIGHSPEED
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/d107a5319e20d5e5be3bd8fa298aeca9ef4990a0
-[4/6] usb: dwc3: gadget: Check ENBLSLPM before sending ep command
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/db11351a887e20ff86e3a4c1f466d3d8dd42754a
-[5/6] usb: dwc3: gadget: properly check ep cmd
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/95b4d655a44626f888bf823a0561a175d456d33a
-[6/6] usb: dwc3: gadget: Disable GUSB2PHYCFG.SUSPHY for End Transfer
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/30f39de786ff3a87006461903e41a48c811ee764
+Reviewed-by: Stefan Roese <sr@denx.de>
 
---
-Mattijs
+Thanks,
+Stefan
+
+> diff --git a/board/Marvell/octeon_nic23/board.c b/board/Marvell/octeon_nic23/board.c
+> index bc9332cb74a..74b9c741b7b 100644
+> --- a/board/Marvell/octeon_nic23/board.c
+> +++ b/board/Marvell/octeon_nic23/board.c
+> @@ -357,10 +357,13 @@ int board_late_init(void)
+>   	board_configure_qlms();
+>   
+>   	/* Register cyclic function for PCIe FLR fixup */
+> -	cyclic = cyclic_register(octeon_board_restore_pf, 100,
+> -				 "pcie_flr_fix", NULL);
+> -	if (!cyclic)
+> +	cyclic = calloc(1, sizeof(*cyclic));
+> +	if (cyclic) {
+> +		cyclic_register(cyclic, octeon_board_restore_pf, 100,
+> +				"pcie_flr_fix");
+> +	} else {
+>   		printf("Registering of cyclic function failed\n");
+> +	}
+>   
+>   	return 0;
+>   }
+> diff --git a/cmd/cyclic.c b/cmd/cyclic.c
+> index ad7fc3b975e..315546515f0 100644
+> --- a/cmd/cyclic.c
+> +++ b/cmd/cyclic.c
+> @@ -14,14 +14,16 @@
+>   #include <div64.h>
+>   #include <malloc.h>
+>   #include <linux/delay.h>
+> +#include <linux/kernel.h>
+>   
+>   struct cyclic_demo_info {
+> +	struct cyclic_info cyclic;
+>   	uint delay_us;
+>   };
+>   
+> -static void cyclic_demo(void *ctx)
+> +static void cyclic_demo(struct cyclic_info *c)
+>   {
+> -	struct cyclic_demo_info *info = ctx;
+> +	struct cyclic_demo_info *info = container_of(c, struct cyclic_demo_info, cyclic);
+>   
+>   	/* Just a small dummy delay here */
+>   	udelay(info->delay_us);
+> @@ -31,7 +33,6 @@ static int do_cyclic_demo(struct cmd_tbl *cmdtp, int flag, int argc,
+>   			  char *const argv[])
+>   {
+>   	struct cyclic_demo_info *info;
+> -	struct cyclic_info *cyclic;
+>   	uint time_ms;
+>   
+>   	if (argc < 3)
+> @@ -47,10 +48,7 @@ static int do_cyclic_demo(struct cmd_tbl *cmdtp, int flag, int argc,
+>   	info->delay_us = simple_strtoul(argv[2], NULL, 0);
+>   
+>   	/* Register demo cyclic function */
+> -	cyclic = cyclic_register(cyclic_demo, time_ms * 1000, "cyclic_demo",
+> -				 info);
+> -	if (!cyclic)
+> -		printf("Registering of cyclic_demo failed\n");
+> +	cyclic_register(&info->cyclic, cyclic_demo, time_ms * 1000, "cyclic_demo");
+>   
+>   	printf("Registered function \"%s\" to be executed all %dms\n",
+>   	       "cyclic_demo", time_ms);
+> diff --git a/common/cyclic.c b/common/cyclic.c
+> index c62e7fa7d19..ec38fad6775 100644
+> --- a/common/cyclic.c
+> +++ b/common/cyclic.c
+> @@ -26,34 +26,22 @@ struct hlist_head *cyclic_get_list(void)
+>   	return (struct hlist_head *)&gd->cyclic_list;
+>   }
+>   
+> -struct cyclic_info *cyclic_register(cyclic_func_t func, uint64_t delay_us,
+> -				    const char *name, void *ctx)
+> +void cyclic_register(struct cyclic_info *cyclic, cyclic_func_t func,
+> +		     uint64_t delay_us, const char *name)
+>   {
+> -	struct cyclic_info *cyclic;
+> -
+> -	cyclic = calloc(1, sizeof(struct cyclic_info));
+> -	if (!cyclic) {
+> -		pr_debug("Memory allocation error\n");
+> -		return NULL;
+> -	}
+> +	memset(cyclic, 0, sizeof(*cyclic));
+>   
+>   	/* Store values in struct */
+>   	cyclic->func = func;
+> -	cyclic->ctx = ctx;
+>   	cyclic->name = name;
+>   	cyclic->delay_us = delay_us;
+>   	cyclic->start_time_us = timer_get_us();
+>   	hlist_add_head(&cyclic->list, cyclic_get_list());
+> -
+> -	return cyclic;
+>   }
+>   
+> -int cyclic_unregister(struct cyclic_info *cyclic)
+> +void cyclic_unregister(struct cyclic_info *cyclic)
+>   {
+>   	hlist_del(&cyclic->list);
+> -	free(cyclic);
+> -
+> -	return 0;
+>   }
+>   
+>   void cyclic_run(void)
+> @@ -76,7 +64,7 @@ void cyclic_run(void)
+>   		if (time_after_eq64(now, cyclic->next_call)) {
+>   			/* Call cyclic function and account it's cpu-time */
+>   			cyclic->next_call = now + cyclic->delay_us;
+> -			cyclic->func(cyclic->ctx);
+> +			cyclic->func(cyclic);
+>   			cyclic->run_cnt++;
+>   			cpu_time = timer_get_us() - now;
+>   			cyclic->cpu_time_us += cpu_time;
+> diff --git a/doc/develop/cyclic.rst b/doc/develop/cyclic.rst
+> index 67831496a70..bcc1ca6ce6d 100644
+> --- a/doc/develop/cyclic.rst
+> +++ b/doc/develop/cyclic.rst
+> @@ -19,20 +19,26 @@ Registering a cyclic function
+>   
+>   To register a cyclic function, use something like this::
+>   
+> -    static void cyclic_demo(void *ctx)
+> +    struct donkey {
+> +        struct cyclic_info cyclic;
+> +	void (*say)(const char *s);
+> +    };
+> +
+> +    static void cyclic_demo(struct cyclic_info *c)
+>       {
+> -        /* Just a small dummy delay here */
+> -        udelay(10);
+> +        struct donkey *donkey = container_of(c, struct donkey, cyclic);
+> +
+> +	donkey->say("Are we there yet?");
+>       }
+> -
+> -    int board_init(void)
+> +
+> +    int donkey_init(void)
+>       {
+> -        struct cyclic_info *cyclic;
+> -
+> +        struct donkey *donkey;
+> +
+> +        /* Initialize donkey ... */
+> +
+>           /* Register demo cyclic function */
+> -        cyclic = cyclic_register(cyclic_demo, 10 * 1000, "cyclic_demo", NULL);
+> -        if (!cyclic)
+> -        printf("Registering of cyclic_demo failed\n");
+> +        cyclic_register(&donkey->cyclic, cyclic_demo, 10 * 1000, "cyclic_demo");
+>           
+>           return 0;
+>       }
+> diff --git a/drivers/watchdog/wdt-uclass.c b/drivers/watchdog/wdt-uclass.c
+> index caa1567e0c3..c0332f39dfb 100644
+> --- a/drivers/watchdog/wdt-uclass.c
+> +++ b/drivers/watchdog/wdt-uclass.c
+> @@ -18,12 +18,15 @@
+>   #include <asm/global_data.h>
+>   #include <dm/device-internal.h>
+>   #include <dm/lists.h>
+> +#include <linux/kernel.h>
+>   
+>   DECLARE_GLOBAL_DATA_PTR;
+>   
+>   #define WATCHDOG_TIMEOUT_SECS	(CONFIG_WATCHDOG_TIMEOUT_MSECS / 1000)
+>   
+>   struct wdt_priv {
+> +	/* The udevice owning this wdt_priv. */
+> +	struct udevice *dev;
+>   	/* Timeout, in seconds, to configure this device to. */
+>   	u32 timeout;
+>   	/*
+> @@ -41,18 +44,17 @@ struct wdt_priv {
+>   	/* autostart */
+>   	bool autostart;
+>   
+> -	struct cyclic_info *cyclic;
+> +	struct cyclic_info cyclic;
+>   };
+>   
+> -static void wdt_cyclic(void *ctx)
+> +static void wdt_cyclic(struct cyclic_info *c)
+>   {
+> -	struct udevice *dev = ctx;
+> -	struct wdt_priv *priv;
+> +	struct wdt_priv *priv = container_of(c, struct wdt_priv, cyclic);
+> +	struct udevice *dev = priv->dev;
+>   
+>   	if (!device_active(dev))
+>   		return;
+>   
+> -	priv = dev_get_uclass_priv(dev);
+>   	if (!priv->running)
+>   		return;
+>   
+> @@ -125,20 +127,14 @@ int wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
+>   		memset(str, 0, 16);
+>   		if (IS_ENABLED(CONFIG_WATCHDOG)) {
+>   			if (priv->running)
+> -				cyclic_unregister(priv->cyclic);
+> +				cyclic_unregister(&priv->cyclic);
+>   
+>   			/* Register the watchdog driver as a cyclic function */
+> -			priv->cyclic = cyclic_register(wdt_cyclic,
+> -						       priv->reset_period * 1000,
+> -						       dev->name, dev);
+> -			if (!priv->cyclic) {
+> -				printf("cyclic_register for %s failed\n",
+> -				       dev->name);
+> -				return -ENODEV;
+> -			} else {
+> -				snprintf(str, 16, "every %ldms",
+> -					 priv->reset_period);
+> -			}
+> +			cyclic_register(&priv->cyclic, wdt_cyclic,
+> +					priv->reset_period * 1000,
+> +					dev->name);
+> +
+> +			snprintf(str, 16, "every %ldms", priv->reset_period);
+>   		}
+>   
+>   		priv->running = true;
+> @@ -163,7 +159,7 @@ int wdt_stop(struct udevice *dev)
+>   		struct wdt_priv *priv = dev_get_uclass_priv(dev);
+>   
+>   		if (IS_ENABLED(CONFIG_WATCHDOG) && priv->running)
+> -			cyclic_unregister(priv->cyclic);
+> +			cyclic_unregister(&priv->cyclic);
+>   
+>   		priv->running = false;
+>   	}
+> @@ -263,6 +259,7 @@ static int wdt_pre_probe(struct udevice *dev)
+>   			autostart = true;
+>   	}
+>   	priv = dev_get_uclass_priv(dev);
+> +	priv->dev = dev;
+>   	priv->timeout = timeout;
+>   	priv->reset_period = reset_period;
+>   	priv->autostart = autostart;
+> diff --git a/include/cyclic.h b/include/cyclic.h
+> index 38946216fb8..dc0749ba03d 100644
+> --- a/include/cyclic.h
+> +++ b/include/cyclic.h
+> @@ -18,7 +18,6 @@
+>    * struct cyclic_info - Information about cyclic execution function
+>    *
+>    * @func: Function to call periodically
+> - * @ctx: Context pointer to get passed to this function
+>    * @name: Name of the cyclic function, e.g. shown in the commands
+>    * @delay_ns: Delay is ns after which this function shall get executed
+>    * @start_time_us: Start time in us, when this function started its execution
+> @@ -29,8 +28,7 @@
+>    * @already_warned: Flag that we've warned about exceeding CPU time usage
+>    */
+>   struct cyclic_info {
+> -	void (*func)(void *ctx);
+> -	void *ctx;
+> +	void (*func)(struct cyclic_info *c);
+>   	const char *name;
+>   	uint64_t delay_us;
+>   	uint64_t start_time_us;
+> @@ -42,28 +40,30 @@ struct cyclic_info {
+>   };
+>   
+>   /** Function type for cyclic functions */
+> -typedef void (*cyclic_func_t)(void *ctx);
+> +typedef void (*cyclic_func_t)(struct cyclic_info *c);
+>   
+>   #if defined(CONFIG_CYCLIC)
+>   /**
+>    * cyclic_register - Register a new cyclic function
+>    *
+> + * @cyclic: Cyclic info structure
+>    * @func: Function to call periodically
+>    * @delay_us: Delay is us after which this function shall get executed
+>    * @name: Cyclic function name/id
+> - * @ctx: Context to pass to the function
+> - * @return: pointer to cyclic_struct if OK, NULL on error
+> + *
+> + * The function @func will be called with @cyclic as its
+> + * argument. @cyclic will usually be embedded in some device-specific
+> + * structure, which the callback can retrieve using container_of().
+>    */
+> -struct cyclic_info *cyclic_register(cyclic_func_t func, uint64_t delay_us,
+> -				    const char *name, void *ctx);
+> +void cyclic_register(struct cyclic_info *cyclic, cyclic_func_t func,
+> +		     uint64_t delay_us, const char *name);
+>   
+>   /**
+>    * cyclic_unregister - Unregister a cyclic function
+>    *
+>    * @cyclic: Pointer to cyclic_struct of the function that shall be removed
+> - * @return: 0 if OK, -ve on error
+>    */
+> -int cyclic_unregister(struct cyclic_info *cyclic);
+> +void cyclic_unregister(struct cyclic_info *cyclic);
+>   
+>   /**
+>    * cyclic_unregister_all() - Clean up cyclic functions
+> @@ -97,17 +97,17 @@ void cyclic_run(void);
+>    */
+>   void schedule(void);
+>   #else
+> -static inline struct cyclic_info *cyclic_register(cyclic_func_t func,
+> -						  uint64_t delay_us,
+> -						  const char *name,
+> -						  void *ctx)
+> +
+> +struct cyclic_info {
+> +};
+> +
+> +static inline void cyclic_register(struct cyclic_info *cyclic, cyclic_func_t func,
+> +				   uint64_t delay_us, const char *name)
+>   {
+> -	return NULL;
+>   }
+>   
+> -static inline int cyclic_unregister(struct cyclic_info *cyclic)
+> +static inline void cyclic_unregister(struct cyclic_info *cyclic)
+>   {
+> -	return 0;
+>   }
+>   
+>   static inline void cyclic_run(void)
+
+Viele Grüße,
+Stefan Roese
+
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
