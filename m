@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6FB4C25B74
-	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 21:12:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3B73C25B74
+	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 21:12:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 359C188488;
-	Thu, 16 May 2024 23:12:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9454288486;
+	Thu, 16 May 2024 23:12:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nuDmAqX8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uybExKRi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DEC9288490; Thu, 16 May 2024 23:12:22 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 47A9288485; Thu, 16 May 2024 23:12:30 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 012C188486
- for <u-boot@lists.denx.de>; Thu, 16 May 2024 23:12:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F1BC888480
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 23:12:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a59b81d087aso343904066b.3
- for <u-boot@lists.denx.de>; Thu, 16 May 2024 14:12:19 -0700 (PDT)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-572a93890d1so4327467a12.3
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 14:12:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1715893939; x=1716498739; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1715893947; x=1716498747; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4M9/M4NQ4sJT2Ey+CGPaC9WJfX7bubF8lZzmPc0HNXg=;
- b=nuDmAqX80y7N2J9dO5z5NPwcM+P/mLC1XPpVOMIHMXb0K4aqIvh7/lTAERwrVlo0B0
- CCqUwU1f5cTjbeJ7swZO4zqhV/hPT7OGwYM44gWcODHrD1NNiEoMEqGyDgPykLXAgFIq
- OJjwTxXd/sMvvU4dnPYgYKagCeVRagZsaRySU3J9o1Ctwqeq2ohBNExsc4wdsf9detuu
- 5Pn7KhrDl6d/sq0EOKpzRAZQVBO+Rr+ZdlgrTrkcUVr2tXu1Rxmtl7ts4aYksqxVtz+o
- FKwE6bFOS8QUWqsKhnYsV3A6RAX+T3Pt7sMIf7sDWp9QvlsN3gANZ3tpVZ4ZpJ3FR0WI
- RnmA==
+ bh=cVXcWaR/AYumEqnfsZykQKPepzLnsVM3Se8YLjNvPS0=;
+ b=uybExKRiLdsGSRsPe6QlMhljgogBArLsX9fJ7lo6qX+uzkDUWlkHfBjm/iOc68Y0f5
+ 6YpLf3H9LoZ2nXx48e8x/EkIzsXfdEQDeIvagdD0AkgzXDOki3G6Dp0/BIGOMK3rqXkV
+ 6xkfyns7moVFXeNMeGOWnbn2JbO127nLlLFTYW/Sqcalv1aD9wx67CLxIfaOnBdof1eK
+ Z2o+51uxK0uhgCd//stRQsXgWNOW84VLLR+iy5ip6qN7I6q9LMTPorUO6d8edwKAwwTU
+ mejNGPaCYczaAPnAD+Tq7FSSdcAxO51qVceIV29B/tevl+pwaLcTikCZeHjafddQBEcQ
+ m8Xg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715893939; x=1716498739;
+ d=1e100.net; s=20230601; t=1715893947; x=1716498747;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4M9/M4NQ4sJT2Ey+CGPaC9WJfX7bubF8lZzmPc0HNXg=;
- b=izUnCbT0zXzSwF7Ekwh6y3JW6Ie0zPHv1sA2XdHKG2yaNXVIWsDNghzPWScKVeQVcF
- Zqjl8YOV9kblMZj76PQhiNlU4n4/NbyDRixcj6fCnROgF2A6FJGlfab/Zf5R8BdJzaEF
- lNrsYT7Br9nWwf/Haee1hUmSUERDTA3KCyunpd+8VC/TDU0GAACZtuv877nIQd5tYDsg
- 0Qayvg0LYWzqzlZFM4hOR9CovDqRDrN2TWlXcfqv4xamQHJPQAqO4fLEC2TuyhkFEbem
- u1lZh5p57qtghfXcwhgAE9w7NgbXKpqIsEWEwzCx21Qpzba3H81/x4JFjs15rAO815Bx
- 3Elw==
-X-Gm-Message-State: AOJu0YyZ0IG1PLcRCxK+eaQ6pQBzGP6Wf8gEvZ/6wpujCkOFy1BvyOY3
- vvj8S5kJIU8kZuG58fhTec90xEEecdpejWQuIuSdUXktYCwdK5PP9cUzuQ/NcDB1vl8aqE29mpV
- 1
-X-Google-Smtp-Source: AGHT+IGqT73hIvx0bC0xXBD90/216X4Fh/wcOOACUgxw9oeAnENdLqgg26uAF1PxQU1hftlBzAWmZA==
-X-Received: by 2002:a17:906:4a95:b0:a5a:1562:5184 with SMTP id
- a640c23a62f3a-a5a2d53af6amr2015883666b.3.1715893938880; 
- Thu, 16 May 2024 14:12:18 -0700 (PDT)
+ bh=cVXcWaR/AYumEqnfsZykQKPepzLnsVM3Se8YLjNvPS0=;
+ b=UB5Z5nKs3jCBMixyHbYmzbcDyFTdKfpbMhhEqN/PaD2iKXSkvHty8vumvVg/hnZICw
+ Wupvwwz0TdKDw6lIrMyMOiWoaYflt7zbwx7hPplrnSsufOz5gWJ69LIxr28EVBxZHCgK
+ xfpPLkiTrjT+xcolQi0s/FVti8kXBphGMjnmQQnfOnt9QdV1wYyNKwScWRDGqWq71CNV
+ uwMg6JiCqP9qe7rEtg/XLQ4zkvD1A6nRc/W2xASc7igw5UMp/AiAlMeDd+qTkghTwbTe
+ 39u7x3R8B7cUaIhbgVopZWUFkYTzOCHLSEQmYO1I2g0fUAXpM+7OsAcHAQAxGqgi4k64
+ IIZw==
+X-Gm-Message-State: AOJu0YwWROqN5sVvpRRhOlOQmNI4Zq4HcnvdJg22q5AU4MM03boCQQ0v
+ 6FDK7Mn8dYd1/N8U6PXqHq/T5Lmn000i2DyFW0FIMMubRP/Wa8UjMoVMa78tHn6r7ui1UFHyXd4
+ Z
+X-Google-Smtp-Source: AGHT+IFaD151tRnu5iYdT8TW1279YjdqGa98q7X2fn6EQSATb8efDO2wTN8WbnPYPqu8u31rqXRaMQ==
+X-Received: by 2002:a17:906:3c10:b0:a59:cc9b:d6f8 with SMTP id
+ a640c23a62f3a-a5a2d5cca1cmr1833828666b.39.1715893947000; 
+ Thu, 16 May 2024 14:12:27 -0700 (PDT)
 Received: from ubuntu.localdomain ([149.14.240.163])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a5a179c7d09sm1021582266b.107.2024.05.16.14.12.17
+ a640c23a62f3a-a5a179c7d09sm1021582266b.107.2024.05.16.14.12.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 May 2024 14:12:18 -0700 (PDT)
+ Thu, 16 May 2024 14:12:26 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Alexey Brodkin <alexey.brodkin@synopsys.com>,
  Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
- Walter Schweizer <swwa@users.sourceforge.net>, Phil Sutter <phil@nwl.cc>,
- Tony Dinh <mibodhi@gmail.com>, Mario Six <mario.six@gdsys.cc>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Roger Quadros <rogerq@kernel.org>, Nishanth Menon <nm@ti.com>,
- Jonathan Humphreys <j-humphreys@ti.com>,
+ Walter Schweizer <swwa@users.sourceforge.net>,
+ Tony Dinh <mibodhi@gmail.com>, Phil Sutter <phil@nwl.cc>,
+ Mario Six <mario.six@gdsys.cc>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, Nishanth Menon <nm@ti.com>,
+ Roger Quadros <rogerq@kernel.org>, Jonathan Humphreys <j-humphreys@ti.com>,
  Igor Opaniuk <igor.opaniuk@gmail.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
@@ -87,9 +87,9 @@ Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Etienne Carriere <etienne.carriere@foss.st.com>,
  uboot-snps-arc@synopsys.com
-Subject: [PATCH v3 2/4] efi_loader: remove redundant hash includes
-Date: Thu, 16 May 2024 14:11:50 -0700
-Message-Id: <20240516211156.1819939-3-raymond.mao@linaro.org>
+Subject: [PATCH v3 3/4] md5: Use typedef for MD5 context
+Date: Thu, 16 May 2024 14:11:51 -0700
+Message-Id: <20240516211156.1819939-4-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240516211156.1819939-1-raymond.mao@linaro.org>
 References: <20240516211156.1819939-1-raymond.mao@linaro.org>
@@ -111,8 +111,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove the redundant includes of u-boot/sha1.h, u-boot/sha256.h
-and u-boot/sha512.h
+Use of typedef is beneficial for porting with other crypto libs
+without changing the API callers.
+Secondly, it is for the code consistency with other digest libs.
+SHA1, SHA256 and SHA512 are all using typedef for their context.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 Reviewed-by: Tom Rini <trini@konsulko.com>
@@ -123,36 +125,122 @@ Changes in v2
 Changes in v3
 - None.
 
- lib/efi_loader/efi_signature.c | 1 -
- lib/efi_loader/efi_tcg2.c      | 3 ---
- 2 files changed, 4 deletions(-)
+ drivers/crypto/hash/hash_sw.c |  8 ++++----
+ include/u-boot/md5.h          | 10 +++++-----
+ lib/md5.c                     | 10 +++++-----
+ 3 files changed, 14 insertions(+), 14 deletions(-)
 
-diff --git a/lib/efi_loader/efi_signature.c b/lib/efi_loader/efi_signature.c
-index f338e732759..184eac8cddb 100644
---- a/lib/efi_loader/efi_signature.c
-+++ b/lib/efi_loader/efi_signature.c
-@@ -17,7 +17,6 @@
- #include <linux/oid_registry.h>
- #include <u-boot/hash-checksum.h>
- #include <u-boot/rsa.h>
--#include <u-boot/sha256.h>
+diff --git a/drivers/crypto/hash/hash_sw.c b/drivers/crypto/hash/hash_sw.c
+index ffd4ab149ff..4590e225481 100644
+--- a/drivers/crypto/hash/hash_sw.c
++++ b/drivers/crypto/hash/hash_sw.c
+@@ -50,17 +50,17 @@ static void hash_finish_crc32(void *ctx, void *obuf)
+ /* MD5 */
+ static void hash_init_md5(void *ctx)
+ {
+-	MD5Init((struct MD5Context *)ctx);
++	MD5Init((MD5Context *)ctx);
+ }
  
- const efi_guid_t efi_guid_sha256 = EFI_CERT_SHA256_GUID;
- const efi_guid_t efi_guid_cert_rsa2048 = EFI_CERT_RSA2048_GUID;
-diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
-index b07e0099c27..ac056dcfc55 100644
---- a/lib/efi_loader/efi_tcg2.c
-+++ b/lib/efi_loader/efi_tcg2.c
-@@ -19,9 +19,6 @@
- #include <tpm-v2.h>
- #include <tpm_api.h>
- #include <u-boot/hash-checksum.h>
--#include <u-boot/sha1.h>
--#include <u-boot/sha256.h>
--#include <u-boot/sha512.h>
- #include <linux/unaligned/be_byteshift.h>
- #include <linux/unaligned/le_byteshift.h>
- #include <linux/unaligned/generic.h>
+ static void hash_update_md5(void *ctx, const void *ibuf, uint32_t ilen)
+ {
+-	MD5Update((struct MD5Context *)ctx, ibuf, ilen);
++	MD5Update((MD5Context *)ctx, ibuf, ilen);
+ }
+ 
+ static void hash_finish_md5(void *ctx, void *obuf)
+ {
+-	MD5Final(obuf, (struct MD5Context *)ctx);
++	MD5Final(obuf, (MD5Context *)ctx);
+ }
+ 
+ /* SHA1 */
+@@ -158,7 +158,7 @@ static struct sw_hash_impl sw_hash_impl[HASH_ALGO_NUM] = {
+ 		.init = hash_init_md5,
+ 		.update = hash_update_md5,
+ 		.finish = hash_finish_md5,
+-		.ctx_alloc_sz = sizeof(struct MD5Context),
++		.ctx_alloc_sz = sizeof(MD5Context),
+ 	},
+ 
+ 	[HASH_ALGO_SHA1] = {
+diff --git a/include/u-boot/md5.h b/include/u-boot/md5.h
+index d61364c0ae3..c465925ea8d 100644
+--- a/include/u-boot/md5.h
++++ b/include/u-boot/md5.h
+@@ -10,18 +10,18 @@
+ 
+ #define MD5_SUM_LEN	16
+ 
+-struct MD5Context {
++typedef struct MD5Context {
+ 	__u32 buf[4];
+ 	__u32 bits[2];
+ 	union {
+ 		unsigned char in[64];
+ 		__u32 in32[16];
+ 	};
+-};
++} MD5Context;
+ 
+-void MD5Init(struct MD5Context *ctx);
+-void MD5Update(struct MD5Context *ctx, unsigned char const *buf, unsigned len);
+-void MD5Final(unsigned char digest[16], struct MD5Context *ctx);
++void MD5Init(MD5Context *ctx);
++void MD5Update(MD5Context *ctx, unsigned char const *buf, unsigned int len);
++void MD5Final(unsigned char digest[16], MD5Context *ctx);
+ 
+ /*
+  * Calculate and store in 'output' the MD5 digest of 'len' bytes at
+diff --git a/lib/md5.c b/lib/md5.c
+index faf3f78ab1e..34343cf8e23 100644
+--- a/lib/md5.c
++++ b/lib/md5.c
+@@ -55,7 +55,7 @@ byteReverse(unsigned char *buf, unsigned longs)
+  * initialization constants.
+  */
+ void
+-MD5Init(struct MD5Context *ctx)
++MD5Init(MD5Context *ctx)
+ {
+ 	ctx->buf[0] = 0x67452301;
+ 	ctx->buf[1] = 0xefcdab89;
+@@ -71,7 +71,7 @@ MD5Init(struct MD5Context *ctx)
+  * of bytes.
+  */
+ void
+-MD5Update(struct MD5Context *ctx, unsigned char const *buf, unsigned len)
++MD5Update(MD5Context *ctx, unsigned char const *buf, unsigned int len)
+ {
+ 	register __u32 t;
+ 
+@@ -120,7 +120,7 @@ MD5Update(struct MD5Context *ctx, unsigned char const *buf, unsigned len)
+  * 1 0* (64-bit count of bits processed, MSB-first)
+  */
+ void
+-MD5Final(unsigned char digest[16], struct MD5Context *ctx)
++MD5Final(unsigned char digest[16], MD5Context *ctx)
+ {
+ 	unsigned int count;
+ 	unsigned char *p;
+@@ -269,7 +269,7 @@ MD5Transform(__u32 buf[4], __u32 const in[16])
+ void
+ md5 (unsigned char *input, int len, unsigned char output[16])
+ {
+-	struct MD5Context context;
++	MD5Context context;
+ 
+ 	MD5Init(&context);
+ 	MD5Update(&context, input, len);
+@@ -286,7 +286,7 @@ void
+ md5_wd(const unsigned char *input, unsigned int len, unsigned char output[16],
+ 	unsigned int chunk_sz)
+ {
+-	struct MD5Context context;
++	MD5Context context;
+ #if defined(CONFIG_HW_WATCHDOG) || defined(CONFIG_WATCHDOG)
+ 	const unsigned char *end, *curr;
+ 	int chunk;
 -- 
 2.25.1
 
