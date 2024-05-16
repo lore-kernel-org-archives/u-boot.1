@@ -4,82 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 482FCC25B78
-	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 11:29:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B4CAC25B74
+	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 11:40:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9E9887F4E;
-	Thu, 16 May 2024 13:29:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 8B346882A2;
+	Thu, 16 May 2024 13:40:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="As7a4h3M";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="q+VUqN9X";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="k+IEZQCw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F40F687C40; Thu, 16 May 2024 13:29:36 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A60248717A; Thu, 16 May 2024 13:40:44 +0200 (CEST)
+Received: from fhigh4-smtp.messagingengine.com
+ (fhigh4-smtp.messagingengine.com [103.168.172.155])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB857880DB
- for <u-boot@lists.denx.de>; Thu, 16 May 2024 13:29:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B850887C40
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 13:40:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-420160f8f52so29903395e9.0
- for <u-boot@lists.denx.de>; Thu, 16 May 2024 04:29:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1715858972; x=1716463772;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AEW4G8dp1QWvRrc1c5yBNuu/H5FUPgZ1Na4gyLHAIZw=;
- b=As7a4h3MIBA8VDRxdcz8xNZ1D+iifamiocxUBdILxExXLRioIBZWn2Rbhz174/S9dz
- wBwXmDp0Mfs0FcbUM/RE+x2jeWSQWo026Y+LPh4y8/b3OzAUiMWyr/KcM5cTMEQqZXNk
- OXJr8BO3RGUqAhfZ5NyjzdmbTPcN7jlAASKV+B0zMZExlWTrTFmTfDZukJe37M3jzU5X
- Cri1lURxUW7ewyRs2XSttSPnVIbtR2o5VmCmtxaRm+e2ZgSVHNSRGpDv7oRxEtAsZsza
- Bvl7VW33W8ASBtrQJPguLqkDhkK6lN6nEGlj4lHOXXvLM0KJ3vXi9CXRv9A3t/7FNOtF
- IFNQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715858972; x=1716463772;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=AEW4G8dp1QWvRrc1c5yBNuu/H5FUPgZ1Na4gyLHAIZw=;
- b=PbIErvdcL975rw5d2O7u+S3K4uoLWCkMCL0TDFuc3NgNNiWxswrG00E3G84JlEAT8K
- pkShqWBgT6wXQpo8fR9RREYIAxfYUSoTVLbxJ3CO7rnid3ZNigWG71DTxokQepi2X9Ul
- i5gHpihuBJqJHGXT8fbqHVL7i25KyReD4NB5GrQ7laLcPMfzCf28WA9g2zJ7qQHZeV3r
- fYqymug32ikuKJO0As91y9UULukYuF31ye/eGeiL9GbAWrEgtQme/kpUChwLA/rHr9re
- 07GhSFPO/2DAtJ1qsGL4Lq/PEprbooqJX+Q8LSBI2wpfpk39qw6V3rkIAkguGh5fkZkH
- /omw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVKYOyIdvPIAXUsmDqr9aip7yWVe3nTtRMxHnt/c2c4iW4r4L1toL0rpDe0PC7sMH+xErLNlV5EgSZD3vebH1o9UGz1sA==
-X-Gm-Message-State: AOJu0YxqyUEbPGknwPagiPLLdCvx/rGKxV4EV+Byu83NOYzMVRvf/Mys
- mfMQTUztAtrg0sS4M/or8leicBkfkNUKk/GbYm42/3Z6gYzOxtIlP0dfIsPYc5o=
-X-Google-Smtp-Source: AGHT+IGuePtjdYe9KuKAol/4FAmnKZeoAOQMFGupU0wbLo9GBhx/Q9VKqiYBsIz04zO8s7zBeVKZFA==
-X-Received: by 2002:a05:600c:5487:b0:41b:851a:af43 with SMTP id
- 5b1f17b1804b1-41feaa38f9dmr125595365e9.11.1715858972116; 
- Thu, 16 May 2024 04:29:32 -0700 (PDT)
-Received: from mkorpershoek-xps13.carmes.etincelle-coworking.com
- ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42013bf1a5dsm161083235e9.30.2024.05.16.04.29.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 May 2024 04:29:31 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Lukasz Majewski <lukma@denx.de>, u-boot@lists.denx.de
-In-Reply-To: <20240516-gadget-maintainer-v2-0-23cc916df434@baylibre.com>
-References: <20240516-gadget-maintainer-v2-0-23cc916df434@baylibre.com>
-Subject: Re: [v2][PATCH 0/2] MAINTAINERS: updates for fastboot and USB gadget
-Message-Id: <171585897146.292604.17310788084977868073.b4-ty@baylibre.com>
-Date: Thu, 16 May 2024 13:29:31 +0200
+ spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id B8FE71140078;
+ Thu, 16 May 2024 07:40:40 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+ by compute5.internal (MEProxy); Thu, 16 May 2024 07:40:40 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
+ cc:cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:message-id:mime-version:reply-to
+ :subject:subject:to:to; s=fm1; t=1715859640; x=1715946040; bh=nE
+ 5vV8Yz/FQWUP3vl+6otuodFUuF87dbelSHmWBtVvI=; b=q+VUqN9XCIyU4abSyn
+ OVPWPWOrrPGa8QMJiVHkhaTufkJ70trYEOsACgFH5IAvdiP21LghZYzUvkvJW7kj
+ 9Dn1L9jc0cwm0aJe2XKA1ljgv5NOdCqDC6ukjxHO/kjPOWtY8mvoKfhnu52URJvF
+ lI4dQCDqT0D/kgHWxgNe5xseVgnSBtNH2wIIAUBfcZeZh+AmwVpYmIbaKP1Rh2lA
+ 1rQjg1rxJsyf1Q0rZOiQXTbrLaUzsWuOSTPJVywv+18ce4kD+ytMPuF5SwHDGAgh
+ eoseM9YPmOa4WXvxHX8GRodp8AMl6lFUqK+SYjV8yJA2os4kpdSi0sCsvXK2ANkh
+ 6smQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:message-id:mime-version:reply-to:subject
+ :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+ :x-sasl-enc; s=fm3; t=1715859640; x=1715946040; bh=nE5vV8Yz/FQWU
+ P3vl+6otuodFUuF87dbelSHmWBtVvI=; b=k+IEZQCwgrro90vf19x1h+jiufs2b
+ 1HLhQtmasQDLmKdcfnVMYl3VO2fNA02GLWr1YwZgva0YtJCy9Kay1Xc39WtfRB1w
+ w2baHVZ7AqjNYd2RY2yLDdJnwxoG5fmqGoCsM7jff6oUr3ap+Fdjuxl81CY8pha9
+ /u3xJli7Fc3Hm0JBfFFW50r26KQ9yjF5JJULlDw3kBQFuKcJupb2j88VEFa1VIfn
+ 3iPcLmJYUsVEtUPY9zlhI0W/1hoos8PNdhu4q9ufiPMb7JJ2OuMUDHO2lpk6uhcy
+ 4m86BfNVQXpQRuv7ZTI5iTGFAFTAQoqh10ghWdEKKYdhPUvCXb5N+pWpg==
+X-ME-Sender: <xms:uPBFZv1qD1OvlQONBrVOUZBKb7F2IG4KpYrjy8_rMjyvX1tdIXh0bQ>
+ <xme:uPBFZuH34YaAhbVbT5vUtDK-IpHyzxa4bmqwi13iwTiQarmJ8P31JBrQvUmTfBukT
+ vfvzx2r-snvACNg5zo>
+X-ME-Received: <xmr:uPBFZv4ItwvD9VB_k_di-yiwn-pMRC6_9OcBRCsQfxfjpW7z2Xe6YL4>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehuddggedvucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhephffufffkgggtgffvvefosehtjeertdertdejnecuhfhrohhmpeflihgrgihu
+ nhcujggrnhhguceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomheqnecugg
+ ftrfgrthhtvghrnhepgfevffejteegjeeflefgkeetleekhfeugfegvdeuueejkeejteek
+ kedvfffffedunecuffhomhgrihhnpehkvghrnhgvlhdrohhrghenucevlhhushhtvghruf
+ hiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjihgrgihunhdrhigrnhhgsehf
+ lhihghhorghtrdgtohhm
+X-ME-Proxy: <xmx:uPBFZk10DkIxBUfkYgnoTIU4AESe9e6pgZOUyQ783Vt3JbVAhmk8fg>
+ <xmx:uPBFZiF35FVZ0dWJ6Lv2BhhgDbVlTsLKQcTlM93W_gpwD8LA4nyOSA>
+ <xmx:uPBFZl_7oMZlIplxjqa9JCzpvlHMJj3X-MF3Mb_7n61DIqN59RwU4A>
+ <xmx:uPBFZvnyk8TCLE4HQN2JsjwURpYxVFmW7o3pnVZiGaMej_uI4_VTrA>
+ <xmx:uPBFZq8TS4NPMWNWtHZHzd46YHXTBQpfZxCsekgERQWwtGdDrOAFUEvC>
+Feedback-ID: ifd894703:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 16 May 2024 07:40:39 -0400 (EDT)
+From: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Subject: [PATCH v2 00/12] MIPS: Boston: Various enhancements
+Date: Thu, 16 May 2024 12:40:20 +0100
+Message-Id: <20240516-boston-v2-0-77938800d1dd@flygoat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.12.2
+X-B4-Tracking: v=1; b=H4sIAKTwRWYC/22MTQ7CIBgFr9KwFsNfUVx5D9MF0I+WREsDDbFpu
+ Lu0O6PLeXkzG0oQPSR0azYUIfvkw1SBnRpkRz0NgH1fGTHCBGkpxyakJUxYtOAk9JZR5VA9zxG
+ cfx+hR1d59PUW16Ob6b7+JDLFBBtCGAhjORh5d891CHo52/Dam38Fp62Sil8FvcCX0JVSPq+60
+ 17PAAAA
+To: u-boot@lists.denx.de
+Cc: Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>, 
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Paul Burton <paulburton@kernel.org>, Simon Glass <sjg@chromium.org>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Sumit Garg <sumit.garg@linaro.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2929;
+ i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
+ bh=n6Sl99F/n3cbf4r2Ej9sApIs51gAdG3CrZiKiKJis2w=;
+ b=owGbwMvMwCHmXMhTe71c8zDjabUkhjTXDztSU5yvKp1O1jN5yye6N8PJz0vEsSV8kcTCpFXZL
+ xXP8TN3lLIwiHEwyIopsoQIKPVtaLy44PqDrD8wc1iZQIYwcHEKwEROSDAyLLnkWscs7NRSxpbH
+ sfXr4evnF/584+n/SknB2eHF3u0t5xn+KbRcuTRvwtMXV6yum2XXMDjcTNcudfJduNXetu+Rg0M
+ TKwA=
+X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
+ fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,24 +119,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi all,
 
-On Thu, 16 May 2024 11:15:40 +0200, Mattijs Korpershoek wrote:
-> I've noticed that I'm missing quite some USB gadget patches such as [1]
-> since I'm not always cc'ed.
-> 
-> With Marek, we agreed on the following split:
-> - I take care of USB gadget side
-> - Marek handles the rest
-> 
-> [...]
+This is a huge series which promoted MIPS/Boston target into a
+usable state, with fixes to drivers and general framework issues
+I found in this process.
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
+I also converted the target to OF_UPSTREAM.
 
-[1/2] MAINTAINERS: add tree link for fastboot
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/5738a44f88d65c2847ad204e6ba9f4a5f12f7d4e
-[2/2] MAINTAINERS: add USB gadget regex to u-boot-dfu tree
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/efbc11ccef89030ed54b7368458eeaf9ec687c77
+This target is covered by QEMU, to test on QEMU:
+```
+make boston64r6el_defconfig
+make
+qemu-system-mips64el -M boston -cpu I6500 -bios ./u-boot.bin -nographic
+```
 
---
-Mattijs
+This is my first u-boot contribution, please kindly advise if you
+have any comments.
+
+Thanks
+
+Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+---
+Changes in v2:
+- Drop "[PATCH 09/13] syscon: Probe device first in syscon_get_regmap"
+  in flavour of fixing the driver device life cycle (Jonas)
+- Link to v1: https://lore.kernel.org/r/20240513-boston-v1-0-fac96938417e@flygoat.com
+
+---
+Jiaxun Yang (12):
+      pci: xilinx: Handle size of ecam region properly
+      pci: auto: Reduce bridge mem alignment boundary for boston
+      pci: Enable PCI_MAP_SYSTEM_MEMORY when ARCH_MAP_SYSMEM is not set
+      ahci: DMA addressing fixes
+      ahci: dwc_ahsata: Generalize the driver
+      MIPS: Provide dummy acpi_table.h
+      MIPS: boston: Imply various options
+      MIPS: boston: Provide default env vars
+      clk: boston: Allow to get regmap from parent device
+      dts/upstream: Add Makefile for MIPS
+      MIPS: boston: Migrate to OF_UPSTREAM
+      mailmap: Update email for Paul Burton
+
+ .mailmap                           |   3 +-
+ arch/mips/Kconfig                  |  28 +++++
+ arch/mips/dts/Makefile             |   1 -
+ arch/mips/dts/boston-u-boot.dtsi   |  10 ++
+ arch/mips/dts/img,boston.dts       | 222 -------------------------------------
+ arch/mips/include/asm/acpi_table.h |  10 ++
+ board/imgtec/boston/Kconfig        |   4 +
+ board/imgtec/boston/MAINTAINERS    |   3 +-
+ board/imgtec/boston/boston.env     |   9 ++
+ board/imgtec/malta/MAINTAINERS     |   2 +-
+ configs/boston32r2_defconfig       |   2 +-
+ configs/boston32r2el_defconfig     |   2 +-
+ configs/boston32r6_defconfig       |   2 +-
+ configs/boston32r6el_defconfig     |   2 +-
+ configs/boston64r2_defconfig       |   2 +-
+ configs/boston64r2el_defconfig     |   2 +-
+ configs/boston64r6_defconfig       |   2 +-
+ configs/boston64r6el_defconfig     |   2 +-
+ drivers/ata/ahci.c                 |  34 +++---
+ drivers/ata/dwc_ahsata.c           |  82 +++++++++-----
+ drivers/ata/dwc_ahsata_priv.h      |   2 -
+ drivers/clk/clk_boston.c           |  37 +++++--
+ drivers/pci/Kconfig                |  10 ++
+ drivers/pci/pci_auto.c             |  16 +--
+ drivers/pci/pcie_xilinx.c          |  53 ++++++---
+ dts/upstream/src/mips/Makefile     |  14 +++
+ include/ahci.h                     |   4 +-
+ 27 files changed, 245 insertions(+), 315 deletions(-)
+---
+base-commit: c8ffd1356d42223cbb8c86280a083cc3c93e6426
+change-id: 20240513-boston-45ef6edc219f
+
+Best regards,
+-- 
+Jiaxun Yang <jiaxun.yang@flygoat.com>
+
