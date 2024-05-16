@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88FC4C25B78
-	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 11:41:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C5ABC25B74
+	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 11:41:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 653798826D;
+	by phobos.denx.de (Postfix) with ESMTP id CCCCA88341;
 	Thu, 16 May 2024 13:40:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="nQ//NQur";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="jSeZ69V9";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="LaapUEok";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="coWDnL2+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F6238833D; Thu, 16 May 2024 13:40:51 +0200 (CEST)
-Received: from fhigh4-smtp.messagingengine.com
- (fhigh4-smtp.messagingengine.com [103.168.172.155])
+ id CB9AA8833A; Thu, 16 May 2024 13:40:51 +0200 (CEST)
+Received: from fout6-smtp.messagingengine.com (fout6-smtp.messagingengine.com
+ [103.168.172.149])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81C75882D9
- for <u-boot@lists.denx.de>; Thu, 16 May 2024 13:40:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 343AA8825A
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 13:40:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
- by mailfhigh.nyi.internal (Postfix) with ESMTP id B66971140172;
- Thu, 16 May 2024 07:40:48 -0400 (EDT)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailfout.nyi.internal (Postfix) with ESMTP id 1C8F51380232;
+ Thu, 16 May 2024 07:40:47 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute4.internal (MEProxy); Thu, 16 May 2024 07:40:48 -0400
+ by compute3.internal (MEProxy); Thu, 16 May 2024 07:40:47 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm1; t=1715859648;
- x=1715946048; bh=MudHcT6nkAL9NvsKcwX238XGHotEDwIVtfmoDEi/AtQ=; b=
- nQ//NQureCNAxS7HW7EN00AEC2bMDFn7Qih1sAE6lnUhHRiqmpuc0nTpC72+umY1
- agoFHGZUb3lZxhpM85Td0DhzMw/EAv/t5OSDuoWyDMF0pD2B9NcdMVWJ5eIwo+OF
- iwTM432m2vqffpqN7kVSQfmwV7Y8EOHPkex7XMXplvKI9e9kg/IqsSNmrtay48tq
- zPXCurV+JElbnCuW24QpghMpidVcVLyV2DtTjRBx3RKwSvLqCNL1QTwqLV3iIiDL
- n43GgAbljowWROz5k0YmR5iHmLJzleJNUQqfsNJ04q4J7pgj3VOkbFJYkLkw2nqN
- M4wIOlRmnItXPghDT1tU3A==
+ :references:reply-to:subject:subject:to:to; s=fm1; t=1715859647;
+ x=1715946047; bh=MSzSQ1dSj3f5QzEIvjJj71+RlzAvGxEFWZVc7ZeXqcQ=; b=
+ LaapUEokUp4VvM1k5On988upMCNeSKE3glX43zZV7Af0t1TLvuA/gg4H9Cd8YLTd
+ pUV4np4/WddWfiQtya5gVgJPhD4kYaYwbPonv41Ys77zsR3gF+gmzDauqZ+M8Iwx
+ OHuFmCQQAq5CwuQTM2LH0ftr/I0SmfNl5wnrRP3sqcp5WtFHKO+pMKQwn58m+1SI
+ IqWVpPHkh9AfANBXe9bihykOS/3xqioflzOUdB2IxnOoKzS2ai+GaFIQrBAHicRz
+ 4K86ar788iNr9ROrUbqH8D+cM6/VvrMbFU8kuNqZoRS1VVy7Rb6fVEcSokU0az0R
+ fUWrTUDX0HD69L/VwK0P5g==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715859648; x=
- 1715946048; bh=MudHcT6nkAL9NvsKcwX238XGHotEDwIVtfmoDEi/AtQ=; b=j
- SeZ69V9bC9sfJxC0xJVspaD6aNt575XRd9y2d/ZVPoy1+B8JWwcKZ6a2wN7UyNjc
- EYIgfEueUdVa6QURTQLNAWESBJvuCY9IfLfDQB+JrtPTubptrDtkdHqEvGJFEl3e
- l++WwVxWYRqC4hxfZYbu69cmqr6mqTBSGIyQ89KcDp+cq1jSxkyYS0EjhSmLHvE8
- 6K+QUkbPeS4T84Xry7qFl4VGQ/dAb4YTuD1KOL6z2YK7YAyCMD3wMe5+KnGvkpJ7
- +Ct+PP+QmVcg964zxFBH/FH/aYfre3nwx8AwWMXZ4b6hFo6lqVe3NrvOqzo6ZI0w
- tdffxonol3aNZzeFFyWRQ==
-X-ME-Sender: <xms:wPBFZpxYG5xeX3b5VXc-3I7C4S41nBUTPE0sMeob1Ue969k1MPsdXA>
- <xme:wPBFZpT-BklkDHcjgFM0SbJsAPfoB_CHU1ulWM_tHdX3Fds6p7r2K4On9i3g4Pg27
- spLJvDlv_R9dVNpQVk>
-X-ME-Received: <xmr:wPBFZjW1g2AedR94D0-warRg_01wXicRHDkPZeGDxDEFE3Bxl40sjos>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715859647; x=
+ 1715946047; bh=MSzSQ1dSj3f5QzEIvjJj71+RlzAvGxEFWZVc7ZeXqcQ=; b=c
+ oWDnL2+mI+mt/LV/v+UN2EK/VgbUKbVMlSOhV+8S94Q0gd85FQm7OGpUcPJNGJ+G
+ jA8cbR0uGA/FUODjgZZwJE/M4SnAbzS+9sr1ha5tyhxWe7/D6xqwUVhKQkNo/Ovs
+ r/yXeZEgV0se4gknvNAjLMU0k99C3tpjZExMeNyrsWbvWhC8XGbqspcP01RcuUZw
+ CKM0/Hb48pZyOgx1NqzVnhKuL8rNs+v18AwA4MFW6CfRpqA4i8STOpbm5D5WiTGC
+ KFzMAySxN0KAE8TgyOcsmk1C84JZVU3rC9TPl7c31LKjWSxDaR23JUBhSq1kMM/h
+ bl+FNq+paODCCIWadU0+w==
+X-ME-Sender: <xms:vvBFZpQ8wxBpMU8YFHD_chE7m2TZgo2pJiiVB1QZq-Fcl17wbfPDqA>
+ <xme:vvBFZizf8wNBi7gOj-bsmvw22OnXo9hHnsMYM7oRfWfH9mQ9ate23UuHchglP4JD8
+ jKx5y1OwPC3xEnlvA8>
+X-ME-Received: <xmr:vvBFZu3lR6U_5HPADM6ZhATsgeyMLD36nJf-Sb6ccaR1fkqYIWYQplE>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehuddggeduucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
@@ -68,21 +68,21 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehuddggeduucetufdoteggod
  cuggftrfgrthhtvghrnhepvdekiefhfeevkeeuveetfeelffekgedugefhtdduudeghfeu
  veegffegudekjeelnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilh
  hfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:wPBFZrgxobSnuECsTj-eA0AQ2Vvf_O2LxGKsQ5r5fAR2TaTmTGQhFA>
- <xmx:wPBFZrA_MV2T1xW1TZkcrqRDe-UHIkP2E_2aQF0T7t3T68Gv2UOPjw>
- <xmx:wPBFZkLaVsQYxfPWVqq9ema0NNWPq3aDmVrg9HjjEBUWq2tJzikjzw>
- <xmx:wPBFZqDLh4SOfxHToPsTE_v3Wnty7Ph20qMxDYMVDimgWdjPOmcaIQ>
- <xmx:wPBFZv4dJ3h4TTJ_JKnKpJXnVrMu-YbYEyZYDpwktgiB-DKMUsK6xQ93>
+X-ME-Proxy: <xmx:vvBFZhBAj7lksq1m48o4zSCJCIY5SD2UzmW8cHvM1OanHbunWhbaoQ>
+ <xmx:vvBFZihrkOAwoPTLm2xk87xhHG9yBON9ONYRWnY2QZ3K4aYC81mCgg>
+ <xmx:vvBFZlosilcT173t5_EftiUTSFi6PlfP-frkGlozlCDM8tn2XlqxGg>
+ <xmx:vvBFZthPQ8sBycMN4oEgomUQB_roFMLbvay-vqx_O_6VMILVJKEBRg>
+ <xmx:v_BFZnYXCEQw8Z-HpvJFlujhwW5s2beqj7DlNP6aT0ISq3Vr7EwipmsP>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 16 May 2024 07:40:47 -0400 (EDT)
+ 16 May 2024 07:40:45 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Thu, 16 May 2024 12:40:25 +0100
-Subject: [PATCH v2 05/12] ahci: dwc_ahsata: Generalize the driver
+Date: Thu, 16 May 2024 12:40:24 +0100
+Subject: [PATCH v2 04/12] ahci: DMA addressing fixes
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240516-boston-v2-5-77938800d1dd@flygoat.com>
+Message-Id: <20240516-boston-v2-4-77938800d1dd@flygoat.com>
 References: <20240516-boston-v2-0-77938800d1dd@flygoat.com>
 In-Reply-To: <20240516-boston-v2-0-77938800d1dd@flygoat.com>
 To: u-boot@lists.denx.de
@@ -92,13 +92,13 @@ Cc: Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
  Sumit Garg <sumit.garg@linaro.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3425;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=8830;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=8WC6UwtgnSwOcma/DO1wti6Z13nzmnj4aQ97q6VC7+g=;
- b=owGbwMvMwCHmXMhTe71c8zDjabUkhjTXDztq5245ffvJ7yM/A0SF+M/9L9Mw8De/f2+d2717/
- Ee6yz7c7ihlYRDjYJAVU2QJEVDq29B4ccH1B1l/YOawMoEMYeDiFICJlLxl+Kekdqjq8QXR05vi
- KgSMtln6mf/P+KHfUCVvf7xlj8zE4I2MDJ+KU4JObDxoJm37SUdl1gyhb6oMXRMSvt0MqXJhNLN
- Ywg4A
+ bh=fw17qbL3Fk/uTmZo+IITOEuVcTdCWfeQs2YU77ePoFU=;
+ b=owGbwMvMwCHmXMhTe71c8zDjabUkhjTXDzv2TvD687kkSTyJzyLjeYzcr5vcSmV3VZddaz7iq
+ fPTOZq1o5SFQYyDQVZMkSVEQKlvQ+PFBdcfZP2BmcPKBDKEgYtTACYyS5uR4e59z1PpTJXhqoz7
+ F25R5Z+W2ZNrcEDhqnbjiwN1TIqcLxn+qZdXPT/6ta+jbdrWzFk7FKfnFHH9bvzJFS7O5X4q64s
+ CAwA=
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -117,124 +117,250 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove hard dependencies to arch headers, get clock from clk
-subsystem if arch clock function is not available, align
-compatible strings with devicetree binding.
+Ensure that we are using correct physical/virtual address for
+DMA buffer write and hardware register settings.
 
-No functional change on existing platforms, just get it build
-on other platforms.
+The convention is: in ahci_ioports all pointers are virtual,
+that will be converted to physical address when writing to
+hardware registers or into sg/cmd_tbl.
+
+Also fixed 64bit physical address support for dwc_ahsata, ensure
+higher bits are written into registers/sg properly.
+
+Use memalign for allocating aligned buffer in dwc_ahsata so we
+don't have to do our own alignment in driver.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- drivers/ata/dwc_ahsata.c | 38 ++++++++++++++++++++++++++++++++------
- 1 file changed, 32 insertions(+), 6 deletions(-)
+ drivers/ata/ahci.c            | 34 ++++++++++++++++-----------------
+ drivers/ata/dwc_ahsata.c      | 44 +++++++++++++++++++++++--------------------
+ drivers/ata/dwc_ahsata_priv.h |  2 --
+ include/ahci.h                |  4 ++--
+ 4 files changed, 42 insertions(+), 42 deletions(-)
 
+diff --git a/drivers/ata/ahci.c b/drivers/ata/ahci.c
+index ac869296d525..21b13fedac50 100644
+--- a/drivers/ata/ahci.c
++++ b/drivers/ata/ahci.c
+@@ -421,7 +421,7 @@ static int ahci_fill_sg(struct ahci_uc_priv *uc_priv, u8 port,
+ 
+ static void ahci_fill_cmd_slot(struct ahci_ioports *pp, u32 opts)
+ {
+-	phys_addr_t pa = virt_to_phys((void *)pp->cmd_tbl);
++	phys_addr_t pa = virt_to_phys(pp->cmd_tbl);
+ 
+ 	pp->cmd_slot->opts = cpu_to_le32(opts);
+ 	pp->cmd_slot->status = 0;
+@@ -450,7 +450,7 @@ static int ahci_port_start(struct ahci_uc_priv *uc_priv, u8 port)
+ {
+ 	struct ahci_ioports *pp = &(uc_priv->port[port]);
+ 	void __iomem *port_mmio = pp->port_mmio;
+-	u64 dma_addr;
++	phys_addr_t dma_addr;
+ 	u32 port_status;
+ 	void __iomem *mem;
+ 
+@@ -474,34 +474,32 @@ static int ahci_port_start(struct ahci_uc_priv *uc_priv, u8 port)
+ 	 * First item in chunk of DMA memory: 32-slot command table,
+ 	 * 32 bytes each in size
+ 	 */
+-	pp->cmd_slot =
+-		(struct ahci_cmd_hdr *)(uintptr_t)virt_to_phys((void *)mem);
+-	debug("cmd_slot = %p\n", pp->cmd_slot);
+-	mem += (AHCI_CMD_SLOT_SZ + 224);
++	pp->cmd_slot = (struct ahci_cmd_hdr *)mem;
++	mem += AHCI_CMD_SLOT_SZ * AHCI_MAX_CMD_SLOT;
+ 
+ 	/*
+ 	 * Second item: Received-FIS area
+ 	 */
+-	pp->rx_fis = virt_to_phys((void *)mem);
++	pp->rx_fis = mem;
+ 	mem += AHCI_RX_FIS_SZ;
+ 
+ 	/*
+ 	 * Third item: data area for storing a single command
+ 	 * and its scatter-gather table
+ 	 */
+-	pp->cmd_tbl = virt_to_phys((void *)mem);
+-	debug("cmd_tbl_dma = %lx\n", pp->cmd_tbl);
++	pp->cmd_tbl = mem;
+ 
+ 	mem += AHCI_CMD_TBL_HDR;
+-	pp->cmd_tbl_sg =
+-			(struct ahci_sg *)(uintptr_t)virt_to_phys((void *)mem);
+-
+-	dma_addr = (ulong)pp->cmd_slot;
+-	writel_with_flush(dma_addr, port_mmio + PORT_LST_ADDR);
+-	writel_with_flush(dma_addr >> 32, port_mmio + PORT_LST_ADDR_HI);
+-	dma_addr = (ulong)pp->rx_fis;
+-	writel_with_flush(dma_addr, port_mmio + PORT_FIS_ADDR);
+-	writel_with_flush(dma_addr >> 32, port_mmio + PORT_FIS_ADDR_HI);
++	pp->cmd_tbl_sg = (struct ahci_sg *)(mem);
++
++	dma_addr = virt_to_phys(pp->cmd_slot);
++	debug("cmd_slot_dma = 0x%08llx\n", (u64)dma_addr);
++	writel_with_flush(lower_32_bits(dma_addr), port_mmio + PORT_LST_ADDR);
++	writel_with_flush(upper_32_bits(dma_addr), port_mmio + PORT_LST_ADDR_HI);
++	dma_addr = virt_to_phys(pp->rx_fis);
++	debug("rx_fis_dma = 0x%08llx\n", (u64)dma_addr);
++	writel_with_flush(lower_32_bits(dma_addr), port_mmio + PORT_FIS_ADDR);
++	writel_with_flush(upper_32_bits(dma_addr), port_mmio + PORT_FIS_ADDR_HI);
+ 
+ #ifdef CONFIG_SUNXI_AHCI
+ 	sunxi_dma_init(port_mmio);
 diff --git a/drivers/ata/dwc_ahsata.c b/drivers/ata/dwc_ahsata.c
-index c2cde48c0b55..27c24228ef89 100644
+index a29d641343ed..c2cde48c0b55 100644
 --- a/drivers/ata/dwc_ahsata.c
 +++ b/drivers/ata/dwc_ahsata.c
-@@ -6,6 +6,7 @@
+@@ -329,6 +329,7 @@ static int ahci_fill_sg(struct ahci_uc_priv *uc_priv, u8 port,
+ {
+ 	struct ahci_ioports *pp = &uc_priv->port[port];
+ 	struct ahci_sg *ahci_sg = pp->cmd_tbl_sg;
++	phys_addr_t pa = virt_to_phys(buf);
+ 	u32 sg_count, max_bytes;
+ 	int i;
  
- #include <ahci.h>
- #include <blk.h>
-+#include <clk.h>
- #include <cpu_func.h>
- #include <dm.h>
- #include <dwc_ahsata.h>
-@@ -18,9 +19,11 @@
- #include <sata.h>
- #include <asm/cache.h>
- #include <asm/io.h>
-+#if IS_ENABLED(CONFIG_ARCH_MX5) || IS_ENABLED(CONFIG_ARCH_MX6)
- #include <asm/arch/clock.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/mach-imx/sata.h>
-+#endif
- #include <linux/bitops.h>
- #include <linux/ctype.h>
- #include <linux/delay.h>
-@@ -115,13 +118,12 @@ static int ahci_setup_oobr(struct ahci_uc_priv *uc_priv, int clk)
- 	return 0;
+@@ -340,9 +341,8 @@ static int ahci_fill_sg(struct ahci_uc_priv *uc_priv, u8 port,
+ 	}
+ 
+ 	for (i = 0; i < sg_count; i++) {
+-		ahci_sg->addr =
+-			cpu_to_le32((u32)buf + i * max_bytes);
+-		ahci_sg->addr_hi = 0;
++		ahci_sg->addr = cpu_to_le32(lower_32_bits(pa));
++		ahci_sg->addr_hi = cpu_to_le32(upper_32_bits(pa));
+ 		ahci_sg->flags_size = cpu_to_le32(0x3fffff &
+ 					(buf_len < max_bytes
+ 					? (buf_len - 1)
+@@ -358,14 +358,14 @@ static void ahci_fill_cmd_slot(struct ahci_ioports *pp, u32 cmd_slot, u32 opts)
+ {
+ 	struct ahci_cmd_hdr *cmd_hdr = (struct ahci_cmd_hdr *)(pp->cmd_slot +
+ 					AHCI_CMD_SLOT_SZ * cmd_slot);
++	phys_addr_t pa = virt_to_phys(pp->cmd_tbl);
+ 
+ 	memset(cmd_hdr, 0, AHCI_CMD_SLOT_SZ);
+ 	cmd_hdr->opts = cpu_to_le32(opts);
+ 	cmd_hdr->status = 0;
+-	pp->cmd_slot->tbl_addr = cpu_to_le32((u32)pp->cmd_tbl & 0xffffffff);
++	pp->cmd_slot->tbl_addr = cpu_to_le32(lower_32_bits(pa));
+ #ifdef CONFIG_PHYS_64BIT
+-	pp->cmd_slot->tbl_addr_hi =
+-	    cpu_to_le32((u32)(((pp->cmd_tbl) >> 16) >> 16));
++	pp->cmd_slot->tbl_addr_hi = cpu_to_le32(upper_32_bits(pa));
+ #endif
  }
  
--static int ahci_host_init(struct ahci_uc_priv *uc_priv)
-+static int ahci_host_init(struct ahci_uc_priv *uc_priv, int clk)
+@@ -403,7 +403,7 @@ static int ahci_exec_ata_cmd(struct ahci_uc_priv *uc_priv, u8 port,
+ 	}
+ 	ahci_fill_cmd_slot(pp, cmd_slot, opts);
+ 
+-	flush_cache((int)(pp->cmd_slot), AHCI_PORT_PRIV_DMA_SZ);
++	flush_cache((ulong)(pp->cmd_slot), AHCI_PORT_PRIV_DMA_SZ);
+ 	writel_with_flush(1 << cmd_slot, &port_mmio->ci);
+ 
+ 	if (waiting_for_cmd_completed((u8 *)&port_mmio->ci, 10000,
+@@ -411,8 +411,8 @@ static int ahci_exec_ata_cmd(struct ahci_uc_priv *uc_priv, u8 port,
+ 		printf("timeout exit!\n");
+ 		return -1;
+ 	}
+-	invalidate_dcache_range((int)(pp->cmd_slot),
+-				(int)(pp->cmd_slot)+AHCI_PORT_PRIV_DMA_SZ);
++	invalidate_dcache_range((ulong)(pp->cmd_slot),
++				(ulong)(pp->cmd_slot) + AHCI_PORT_PRIV_DMA_SZ);
+ 	debug("ahci_exec_ata_cmd: %d byte transferred.\n",
+ 	      pp->cmd_slot->status);
+ 	if (!is_write)
+@@ -440,8 +440,9 @@ static int ahci_port_start(struct ahci_uc_priv *uc_priv, u8 port)
  {
- 	u32 tmp, cap_save, num_ports;
- 	int i, j, timeout = 1000;
- 	struct sata_port_regs *port_mmio = NULL;
- 	struct sata_host_regs *host_mmio = uc_priv->mmio_base;
--	int clk = mxc_get_clock(MXC_SATA_CLK);
+ 	struct ahci_ioports *pp = &uc_priv->port[port];
+ 	struct sata_port_regs *port_mmio = pp->port_mmio;
++	phys_addr_t dma_addr;
+ 	u32 port_status;
+-	u32 mem;
++	void *mem;
+ 	int timeout = 10000000;
  
- 	cap_save = readl(&host_mmio->cap);
- 	cap_save |= SATA_HOST_CAP_SSS;
-@@ -909,17 +911,41 @@ int dwc_ahsata_scan(struct udevice *dev)
- int dwc_ahsata_probe(struct udevice *dev)
- {
- 	struct ahci_uc_priv *uc_priv = dev_get_uclass_priv(dev);
-+	struct clk_bulk clk_bulk __maybe_unused;
-+	struct clk clk __maybe_unused;
-+	int sataclk;
- 	int ret;
+ 	debug("Enter start port: %d\n", port);
+@@ -452,22 +453,20 @@ static int ahci_port_start(struct ahci_uc_priv *uc_priv, u8 port)
+ 		return -1;
+ 	}
  
--#if defined(CONFIG_MX6)
-+#if IS_ENABLED(CONFIG_MX6)
- 	setup_sata();
- #endif
-+#if IS_ENABLED(CONFIG_MX5) || IS_ENABLED(CONFIG_MX6)
-+	sataclk = mxc_get_clock(MXC_SATA_CLK);
-+#else
-+	ret = clk_get_bulk(dev, &clk_bulk);
-+	if (ret)
-+		return ret;
+-	mem = (u32)malloc(AHCI_PORT_PRIV_DMA_SZ + 1024);
++	mem = memalign(2048, AHCI_PORT_PRIV_DMA_SZ);
+ 	if (!mem) {
+ 		printf("No mem for table!\n");
+ 		return -ENOMEM;
+ 	}
+ 
+-	mem = (mem + 0x400) & (~0x3ff);	/* Aligned to 1024-bytes */
+-	memset((u8 *)mem, 0, AHCI_PORT_PRIV_DMA_SZ);
++	memset(mem, 0, AHCI_PORT_PRIV_DMA_SZ);
+ 
+ 	/*
+ 	 * First item in chunk of DMA memory: 32-slot command table,
+ 	 * 32 bytes each in size
+ 	 */
+ 	pp->cmd_slot = (struct ahci_cmd_hdr *)mem;
+-	debug("cmd_slot = 0x%x\n", (unsigned int) pp->cmd_slot);
+-	mem += (AHCI_CMD_SLOT_SZ * DWC_AHSATA_MAX_CMD_SLOTS);
++	mem += AHCI_CMD_SLOT_SZ * AHCI_MAX_CMD_SLOT;
+ 
+ 	/*
+ 	 * Second item: Received-FIS area, 256-Byte aligned
+@@ -480,14 +479,19 @@ static int ahci_port_start(struct ahci_uc_priv *uc_priv, u8 port)
+ 	 * and its scatter-gather table
+ 	 */
+ 	pp->cmd_tbl = mem;
+-	debug("cmd_tbl_dma = 0x%lx\n", pp->cmd_tbl);
+-
+ 	mem += AHCI_CMD_TBL_HDR;
++	pp->cmd_tbl_sg = (struct ahci_sg *)mem;
+ 
+ 	writel_with_flush(0x00004444, &port_mmio->dmacr);
+-	pp->cmd_tbl_sg = (struct ahci_sg *)mem;
+-	writel_with_flush((u32)pp->cmd_slot, &port_mmio->clb);
+-	writel_with_flush(pp->rx_fis, &port_mmio->fb);
++	dma_addr = virt_to_phys(pp->cmd_slot);
++	debug("cmd_slot_dma = 0x%08llx\n", (u64)dma_addr);
++	writel_with_flush(lower_32_bits(dma_addr), &port_mmio->clb);
++	writel_with_flush(upper_32_bits(dma_addr), &port_mmio->clbu);
++	dma_addr = virt_to_phys(pp->cmd_slot);
++	debug("rx_fis_slot_dma = 0x%08llx\n", (u64)dma_addr);
++	writel_with_flush(lower_32_bits(dma_addr), &port_mmio->fb);
++	writel_with_flush(upper_32_bits(dma_addr), &port_mmio->fbu);
 +
-+	ret = clk_enable_bulk(&clk_bulk);
-+	if (ret)
-+		return ret;
-+
-+	ret	= clk_get_by_name(dev, "sata", &clk);
-+	if (ret)
-+		return ret;
-+
-+	sataclk = clk_get_rate(&clk);
-+#endif
-+	if (IS_ERR_VALUE(sataclk)) {
-+		log_err("Unable to get SATA clock rate\n");
-+		return -EINVAL;
-+	}
- 	uc_priv->host_flags = ATA_FLAG_SATA | ATA_FLAG_NO_LEGACY |
- 			ATA_FLAG_MMIO | ATA_FLAG_PIO_DMA | ATA_FLAG_NO_ATAPI;
- 	uc_priv->mmio_base = dev_read_addr_ptr(dev);
  
- 	/* initialize adapter */
--	ret = ahci_host_init(uc_priv);
-+	ret = ahci_host_init(uc_priv, sataclk);
- 	if (ret)
- 		return ret;
+ 	/* Enable FRE */
+ 	writel_with_flush((SATA_PORT_CMD_FRE | readl(&port_mmio->cmd)),
+diff --git a/drivers/ata/dwc_ahsata_priv.h b/drivers/ata/dwc_ahsata_priv.h
+index 5b0579ae1159..0c2cd5446b57 100644
+--- a/drivers/ata/dwc_ahsata_priv.h
++++ b/drivers/ata/dwc_ahsata_priv.h
+@@ -7,8 +7,6 @@
+ #ifndef __DWC_AHSATA_PRIV_H__
+ #define __DWC_AHSATA_PRIV_H__
  
-@@ -961,7 +987,6 @@ U_BOOT_DRIVER(dwc_ahsata_blk) = {
- 	.ops		= &dwc_ahsata_blk_ops,
+-#define DWC_AHSATA_MAX_CMD_SLOTS	32
+-
+ /* Max host controller numbers */
+ #define SATA_HC_MAX_NUM		4
+ /* Max command queue depth per host controller */
+diff --git a/include/ahci.h b/include/ahci.h
+index d4f0f3ce0e71..eb05cc687f64 100644
+--- a/include/ahci.h
++++ b/include/ahci.h
+@@ -137,8 +137,8 @@ struct ahci_ioports {
+ 	void __iomem	*port_mmio;
+ 	struct ahci_cmd_hdr	*cmd_slot;
+ 	struct ahci_sg		*cmd_tbl_sg;
+-	ulong	cmd_tbl;
+-	u32	rx_fis;
++	void *cmd_tbl;
++	void *rx_fis;
  };
  
--#if CONFIG_IS_ENABLED(DWC_AHSATA_AHCI)
- struct ahci_ops dwc_ahsata_ahci_ops = {
- 	.port_status = dwc_ahsata_port_status,
- 	.reset       = dwc_ahsata_bus_reset,
-@@ -969,7 +994,9 @@ struct ahci_ops dwc_ahsata_ahci_ops = {
- };
- 
- static const struct udevice_id dwc_ahsata_ahci_ids[] = {
-+	{ .compatible = "fsl,imx53-ahci" },
- 	{ .compatible = "fsl,imx6q-ahci" },
-+	{ .compatible = "fsl,imx6qp-ahci" },
- 	{ }
- };
- 
-@@ -980,4 +1007,3 @@ U_BOOT_DRIVER(dwc_ahsata_ahci) = {
- 	.ops      = &dwc_ahsata_ahci_ops,
- 	.probe    = dwc_ahsata_probe,
- };
--#endif
+ /**
 
 -- 
 2.34.1
