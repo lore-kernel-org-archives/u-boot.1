@@ -4,74 +4,159 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B461C25B77
-	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 12:52:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BD56C25B74
+	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 13:39:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BBBE88837B;
-	Thu, 16 May 2024 14:50:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 8A3E08824A;
+	Thu, 16 May 2024 15:39:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=fiona.klute@gmx.de header.b="TR+kqr81";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="QL1/uczt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 489B787F65; Thu, 16 May 2024 12:43:10 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 670298826E; Thu, 16 May 2024 15:39:37 +0200 (CEST)
+Received: from EUR03-DBA-obe.outbound.protection.outlook.com
+ (mail-dbaeur03on20701.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260d::701])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CB5488258
- for <u-boot@lists.denx.de>; Thu, 16 May 2024 12:43:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E554B87FF2
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 15:39:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fiona.klute@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1715856187; x=1716460987; i=fiona.klute@gmx.de;
- bh=8KOvOwHVKwbDuTyMEGLqicUZIERVzh4qIxNB/lis0F0=;
- h=X-UI-Sender-Class:From:To:Cc:Subject:Date:Message-ID:In-Reply-To:
- References:MIME-Version:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=TR+kqr813qBezrIbkQJPNlM3d8lhEv31hetLOpr2UGmUChUE0USrlb2witUvmEMK
- D4TRJIb2rMRTzk9YWJbRr701cetQJlXD1Ufy+Lybjki/dpACgIjKRygtupTf4o7Kc
- qm7lMCcDfHjKHJf2M4XbUOE9pv4z49GLC2NLAvpZYGhCGzBPLTsujsAmjw5QKcED7
- RbS2BnRtbFGQsG8QQ+SAu1+XpdJUbg34A8dzazV9GqeqS3vxIQrt/qxgwLN/bb5oe
- qnlMP7e1sJnGVMrVb2kOFcOIz/J7R054mUIJIEqxMfHU35tiId6bZVtIjqXl1xCXA
- 1dpDo5LyrwhT1tUyFw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from haruka.lan ([85.22.121.157]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1McpNy-1shAJF1PH8-00ZvVa; Thu, 16
- May 2024 12:43:07 +0200
-From: Fiona Klute <fiona.klute@gmx.de>
-To: u-boot@lists.denx.de
-Cc: mibodhi@gmail.com,
-	Fiona Klute <fiona.klute@gmx.de>
-Subject: [PATCH v2 2/2] doc: Update netconsole examples, mention stderr
-Date: Thu, 16 May 2024 12:42:45 +0200
-Message-ID: <20240516104245.2075748-2-fiona.klute@gmx.de>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240516104245.2075748-1-fiona.klute@gmx.de>
-References: <20240516104245.2075748-1-fiona.klute@gmx.de>
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=iB6fwzEL4ajkHEWybI23ddMeYvkFqnOLfg2NxcdWd7AIvIj7r0pEJpNi20+U588jXAzu2V8hDVKuptlpiOuLWVodLHHWxV3beMbL2sVcLjs+OuEthcvIE0Z/kLx0M3L9ETNM+LExBXvrXD0totbAoBhtUEqwve5QcdV8hrF+pRWm34+eahxheHB3Bi16g38PUIEX890TrknPU9r7mQScpfqRHe1ET6DEJo7P5ckynuSkRQEqvOxYoHGhOlEJs8px2CawPa0SSR/r0UipSgjESg6kkov/Yrbk9C6/5SSksCu2gSPaFX8z5Sur3xGkn4VgEbZmUyXnSszI4fnifyDByQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=fAq6Ud6B1FBpCyElz9lCAksW2QZ9rwIztUYqOKui6k8=;
+ b=cv4EIKsFWf+3OCBAyGaVvRPdLUKlxZ8zhacwz3gAgvefxDENbSf2JGH05uAWmHIWTydo7+tIKBQ2sUZ7ipEf7fKz308a1j3ycTo5Vgdr3CvLRTmhAFeZLsVeX0A+InIexF9y9/xebIw2jqt6L7XTm7C5AOxGaDK8v7Vx1BOsVcIOVIiUle/5jlPZQD10ubnyI2Q9JesJoBIYi17s3wVgpT0wC2Q49r7iKJYIg8bLxbyOfagVw0rnuroCIATeifY/o+4N+MjETo19WuPiSp7FOK2Pq6N6mVhJ+5/37C3BIFA3fsPqKGCDIF7VFHhV70V/Zjzk2RyeIleV5mo/tbnh5w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fAq6Ud6B1FBpCyElz9lCAksW2QZ9rwIztUYqOKui6k8=;
+ b=QL1/ucztf8tNuDxuDsXWuEhB8Tn/7bSMbE3MWZlKjDOXRIJLbIa1d+uUoBUBsESLVDO3kNHG9HJukJOXs/LW7Ys8pHVuFNTBfgsFhwkVhvWz7TmY2ssrVXwR+9WBULefermiFdvWg11em0UVzzdZ/GcCeHQGKNSTszYHHT5CKdM=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from VE1PR04MB6589.eurprd04.prod.outlook.com (2603:10a6:803:128::25)
+ by AM9PR04MB8471.eurprd04.prod.outlook.com (2603:10a6:20b:416::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7587.28; Thu, 16 May
+ 2024 13:39:33 +0000
+Received: from VE1PR04MB6589.eurprd04.prod.outlook.com
+ ([fe80::8476:1b2f:f236:db31]) by VE1PR04MB6589.eurprd04.prod.outlook.com
+ ([fe80::8476:1b2f:f236:db31%6]) with mapi id 15.20.7544.052; Thu, 16 May 2024
+ 13:39:33 +0000
+Message-ID: <0929d137-54d7-45cc-b58f-6549510e95c3@cherry.de>
+Date: Thu, 16 May 2024 15:39:30 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 1/9] rockchip: RK3328: Read the reset cause from clock
+ reset unit for RK3328 SoC
+To: Anand Moon <anand@edgeble.ai>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>
+Cc: Jagan Teki <jagan@edgeble.ai>, u-boot@lists.denx.de
+References: <20240516090031.2373-1-anand@edgeble.ai>
+ <20240516090031.2373-2-anand@edgeble.ai>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20240516090031.2373-2-anand@edgeble.ai>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: WA2P291CA0005.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:1e::11) To VE1PR04MB6589.eurprd04.prod.outlook.com
+ (2603:10a6:803:128::25)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Uq34CTjh1CNUZKTK/DMOku80wuS1wwMWUZ8LaC7GX+pan7nMiBH
- PlSxYN/wSynSDcRVU9xqbh3ETpq24qqKa2H6hKL3SaD8BYGZHMzH0XUQhH4+tUhSBelAN0/
- oV1IWZvIuw6fSgLp+YzXxsFClhci/e3FGdxJ+tdj/z2L8xrUg3ugeVVdbJJSdOwW1J7zUAx
- y2wsxx3Tan+eWs87iAF5g==
-UI-OutboundReport: notjunk:1;M01:P0:7T/bJHfm0zo=;mlkxskOMvtMxUN6zqKYCo+JO+dz
- cbtZN3FDaMWroLJbD9pEsWjlxWdoqNrzrr8jhP86ERWxFIVlHRi8mqQS51dwxV8VwWmIln3pL
- O4bSx0P2DY64RiVyIrPB5hyqvr8cZgkCKfDQStrVXgSMMB7t7U/GV6iGstHXz7KA63WnE3+5C
- tACIJIqZbMgOdSm6B9Wz5e+lT30ZV78vRIdzBODp0qeZXPgu0xeINbl/fbjGk3ihIrkUHOm6D
- qjDt4j/v7h0ouaZyxzLoSRNAFwH2fP/CFLx1z0ux7AX8vRufXyHUwKbNoWbKjAUKcz59we1ZY
- plfBzQ5CtJVGlf2m/43hkFhChRXIwzQDOJLvldGlKEGuL+ioFTdqQIrXRCjlHx2GddAcpAVxd
- gZehR57nN/S7gS+RcL8glA/bFm8QZHrmVArdM+HiLMXY2uIgyZwZrxyhTLBcJHA4fn5vEA/6j
- 4njf81TJEYqqKJVhw0C1DP24L/K9kJ6o5ZAYp8tcUHltSxwobwX44DJDneiGtj6odJeBoTkJP
- rOOF5S3bekJOOzaoOmYnd812VaX4k2UfL4kzzWZvV4wXcRnG2D8jLMsSeIVKZcln6pEL173Cl
- gVOETRn70fBwqlKPPJLwSjxjhv2k+oJ+foDFo1It3dtX3LsJd9EpiFkcpGYrF/Xz+WdQ4kfIp
- mmRxr80FGSF0qsl8CMo6HU7vnXaYlxUHFMB4Zxn0W8S9u6x0W5Ah5pZZlu1Al2UtFxGRI24pQ
- +sntws0MioCNc8JWFpQGN6WxQoqr9EHxENCcM1cxUxigla+WY08HVscKeJffHJw3pOk35LWTk
- E2BZzHjoRIqYeOWxfmhfE4Kuoo0rNufDABU2gk/6eYFEk=
-X-Mailman-Approved-At: Thu, 16 May 2024 14:50:16 +0200
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: VE1PR04MB6589:EE_|AM9PR04MB8471:EE_
+X-MS-Office365-Filtering-Correlation-Id: bc6e0549-1d1d-41f0-aa85-08dc75ad9e3c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230031|366007|376005|1800799015;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?UzVYaHpRM1RLQlUvTURiRzd4UU02WHNXaFJxZlYwaHg5eHNub0ttZFJ1Skw0?=
+ =?utf-8?B?WXRzZ0NiYnp2WDZVcCt6WTY0UGlxY3FzT2ZFK1hzRndkSFNHWEdzYTR4U0hT?=
+ =?utf-8?B?V1JwazRIcnhobnM3UUFQN2p6U2ZvU0ZyZEpWSSs2RHR2UklYUmUyQXM3Rk5I?=
+ =?utf-8?B?YTMvNUI0V2lNMXFRVkVFc3dybEFqZXRNSFdtMW5UdVg5Tlc5K0c4aGpaTkZV?=
+ =?utf-8?B?dXkyYUJES0VZTTRmcXVVeUM1SjhsNGtEWUdPZXFrWXl2M2hSamZhbVhuclJK?=
+ =?utf-8?B?ejg5NVNKRDdiclVoaFQ5RU1tVzlJVFFjVHhWSkxrcFNqN0thbDFxc3l5VnFN?=
+ =?utf-8?B?UzFVSkgvOVpOb04yd29Wakl5bW1JT1RIcEFSOFZ3bm9nZTU5aGV5d3haUmNi?=
+ =?utf-8?B?S2FpWWorbTV2cTR0WlU3NVFQRWgrbnV4emJldTVaT1RzM3krK0tvc3d1cmI5?=
+ =?utf-8?B?K1Vxa0ExNHZ2dW9LaXJxVGFFejNHN2lXSmZFQWJSOURxSnRLYnVwYlRHRlFP?=
+ =?utf-8?B?NFpRMm9vcDkraG9acTYreVhKOVc4aVkvbHdjUEd5RGxIazR4WTlSRHpFRjFF?=
+ =?utf-8?B?SjNmbmhWNElJLzdFSXVsbkRQNUtjNkdKVkJyNCtoU2daaGRTMElXeTJLRVVu?=
+ =?utf-8?B?OUd2MVFxUDFtVGZVWlI1WWxObGlCenA0S0lKSExBTHVMc09uSjYxRHBydGpL?=
+ =?utf-8?B?QkRyRGpINVM4UDYzdWZhZUpZcDE0SWZoblY0M1NHS0RBN0xpSEorL21mZml4?=
+ =?utf-8?B?dEF4NWdLVUtWdEtVM1JNbDBCN1A0QzRYSnVEc21BTVFxQWRBMUJvSnlyc2JE?=
+ =?utf-8?B?Y3BtcCtmcGR4RnBtRm5JMndtZDJnNzBSOHpBb2NzT0o1K003UVlXVno0WXRk?=
+ =?utf-8?B?ZWovNmo4S3FwRGw4L1doSExFSVF5bTZhRU0ySm4vamtXOVdvaUV0NDAzNkll?=
+ =?utf-8?B?STBoYzUzWGJZeTlPK3pCZTF2amlIemtQTGNSZU16amwrUTExVm5mMzJsajZL?=
+ =?utf-8?B?dDVmdithYWg3UGlnSENRWEluemJJSVBPTVl1dUxOTW5Wa3RpK2M1VHpnZ1VY?=
+ =?utf-8?B?SktvYnVaOVBnUnFvWnpGZ3F6Q25rVTBwRXdSUEp2RlFMTjRncFo1MlJqNVl1?=
+ =?utf-8?B?ZEY3MTYwdzl0dkw4ZFBOcDFXRENNMlFDRXpyVER2aDk2RHJteER6b0Q2ZVVp?=
+ =?utf-8?B?Szk5a2RZeC9CTzdIWEdBZ1dxZlNxNitHRGlDa212alloN1lxS1RNL2xtM1Vo?=
+ =?utf-8?B?ZjdVTXE3Q1ByTWt4bmNFVTBjMXdZSEE4QmxuR2poblhLNGoxd05kUkFkNmRZ?=
+ =?utf-8?B?VUhoRzVWOXppaVdZd3ErTkJnUkMrMjlrMFkwdDg2eFBNTktmR01QZ3BGaWNT?=
+ =?utf-8?B?dTlHUDA4UmhTcmsrMkVkTWhKQkZLMUR5UEg0U3hpNHZmNG5RMnhYNjJuYTZq?=
+ =?utf-8?B?dDdmMW04em1YZEVGanFLSk5hbUQ1NVVsbkhld20xQ2xoeVU4R2VpR2J5Qkc3?=
+ =?utf-8?B?Uk1tRUVsVWY2RHJhNmdOb0o4WlFidzJpZFhJWVpYR216emJuTTUrM2hrV2dS?=
+ =?utf-8?B?dVNtWEdSTXFYak9UYWd2c1l6SGVtSlc1VEw5dC9OWElTaDVhUFArbVR4R0FB?=
+ =?utf-8?Q?EkmghbhDy8Lvc2rm2ToNwsc/CLaNFkAzPiGFMqKEwBBg=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:VE1PR04MB6589.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(366007)(376005)(1800799015); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SFZ3TmFyQkp0VVJ1cEcyTS9ycXJZUDg1amNNWkt0eWNJLzA2UDZmWisxYlh6?=
+ =?utf-8?B?Z3NtT1pSZjVaSUNIS2JPUjc1NGlXMzBtQjJVTGh3cG95MUZFN1ZITUJyc0M3?=
+ =?utf-8?B?cGtkaXBjQnZLRkhFTzFVT1k1K3lxUlRQVE5wTWhweEYzWTZvWk1PaUVFenc0?=
+ =?utf-8?B?U1RoUlVxRXBEVHB4bE1KUXNRTWU5V3lnN0k1Y0E0K0tKVHJQajBvWGJtWU02?=
+ =?utf-8?B?eEViT1NDL2xoY1lpSzI5ejlnaXZUdDN1N0RMWDl3c0pqZXM0aE03UThQSWp0?=
+ =?utf-8?B?dmlvWHV4dFUrbENGWWowdVc4anZ3N2JyU1d4YVpzY2haZ0JoRlN4VFhkUnds?=
+ =?utf-8?B?ckNIWnFrNW1aZ21pd3BPUE9Dc0ZvMFpjZWhIZzdHVU1CK1E5RVNGVG1TbDJU?=
+ =?utf-8?B?UkR0WTBwajRabGNhemk0dXVYVUJqL0xDRFM3cG5ORXdUVG56ZUxFTmtaVndY?=
+ =?utf-8?B?YXBZTVJ3MnhrZTVXaVFrWTh3bGIyQ0Z0bURSYUVIdCt6d1hTa29oZllpVk8v?=
+ =?utf-8?B?eVMxeG5CQjd5UWR2TEloRUlrTUluUUZWcXhKaGcxNzQyZ1puSy93YVo2d3pR?=
+ =?utf-8?B?WlNYc0JidXZWcHFQYk9aMmRPT2lzb3VNVzlXemZmSldXM2FRdVhqTFBJMnBi?=
+ =?utf-8?B?SzZZR1Jxbm84ZGEyb3VvL2F2T05YdEJsckJaQ0Mzd05kVW41QW1keEc3ckFR?=
+ =?utf-8?B?VEx5NnZnZkVNVHJlRGNrVUlpQUYvNmdoSklZNmxrL2tnK1ZCWjV1YkQ5bExp?=
+ =?utf-8?B?Yk9MMXJGUnhtZnJtTkFRRjVHRFR0OHV0NEx5dHVOeUlCR2x0U3dJT1AzZS9Y?=
+ =?utf-8?B?VmFubzhSMXhXektxSHpxRzdKNlRSMFZMY0E0d080c1Y5ZVQ3SDU5bUtDdmRV?=
+ =?utf-8?B?RnRyM3lRSkNNQkhJYnA4cGlnUU5sMi9hbFdYMkZza2N6MEt4MEFUWjFCanRJ?=
+ =?utf-8?B?dnJLNXByTGMxQ0hqUnRJNnVNZ1o2UHZIMXhVeUdLcjRsN0s0dFJWRlB2SEQ2?=
+ =?utf-8?B?amtQTmY5cUZKSUIyK2xFSCtwQm9XYVZ2Y3J6SXp6TkcrQ0ZJTU5laGFnblVo?=
+ =?utf-8?B?cUZ3SHN5NklHZ1VsSWNwdzk5NS92dGlxRzN5WWhmOG1WV1NJR2lpRnliV3N1?=
+ =?utf-8?B?NHhEZVF4aGZCVmo1b2U2cVA3bzZOWW0yb1dVMlBKQk9EaDl1UWFZcUs2TEx2?=
+ =?utf-8?B?Qm9uV24xdnVOSTQycTJGNnZYOVovaUlabEFQeDRpOVNGV1dsWTRsaFN1RVU5?=
+ =?utf-8?B?U1Q4Zm0yZ21iRHVlNXN5YWVTZkx1VklMUTNacDQxWUF4NHd4SlJQUDRDQ0ZE?=
+ =?utf-8?B?VVdNQUIveWd6a21SNFI5U1VLRWFyWlR1T0VKRzR3L3NyY1BqMmR6R1lTSjlq?=
+ =?utf-8?B?K0xpMnJWRUt0TFpOa0JaSHhWdE92MmpKYXQzZUxoUVZWVi84UlprZWVaS1Ew?=
+ =?utf-8?B?dElHMUE0cWpyeGQrU21INGhhNUwzKzZMVDY4clNGVFFsVFExcXV6SlpYdmlG?=
+ =?utf-8?B?VG1lUzR2dVFQZXpxYUtQMU5SZENiRlpieXFLK0s4Rm1VU2RiclVITnF5OEdl?=
+ =?utf-8?B?VHFVeE1IMm9mYk4rclVocVJwN2FkbW5KNW1zOFB6dU8zdTNMUVBneHZQNGZx?=
+ =?utf-8?B?bXZSa3gvelI2VllsNEZSOHp1KzYrUmVyMGhvMWRXeDBwWWl1ZVFBRy9Gcms1?=
+ =?utf-8?B?Snk1am13OUowcDZscXhOMTI5YmdFemhEeWZ5ZFcxdERCdHRsaVRJTXhMU0R6?=
+ =?utf-8?B?Qk5zVllUTjlZZXRXUEhqSkFLSndOK2lFODdCdnZJZUpPTnhzUnpVUjgxa21P?=
+ =?utf-8?B?U3NYbGNMOUdqNWhSK3JwRFVxa2kvdG9GdmFuVXljYXcyYnUxNWRsY0pybjFP?=
+ =?utf-8?B?WXJ2WFZCZlNoNTFjcWF5UCtIMm1ORlRzN3J3V1MvZ05QVnBIRVdTNDk4UDVI?=
+ =?utf-8?B?UUZMcEF2VEJubkc1V2RLNWVGSytJcllxOFVDUzVweEFCRFk3MVVEaUNBUzls?=
+ =?utf-8?B?WW9rcGU4Q21kb2hEY2MrRE9IQmEzNDZoTlBob3FiSENwSWRsMkUzY3R3M3hQ?=
+ =?utf-8?B?S0ppUE1aSE9tUjVNZ2Z4aXM2ZGh4Vld0NTRYaW5TNGw3WmdHYnM5RGhIR09H?=
+ =?utf-8?B?YTZBWmNuOHRteGRQMVF0TEplNUVNZnZqMm92SVdCWnZUWU9WWlBOYkgrZXdS?=
+ =?utf-8?B?TGc9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: bc6e0549-1d1d-41f0-aa85-08dc75ad9e3c
+X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6589.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 May 2024 13:39:32.9600 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: LkXVAzL7u0KoaloQjbbMaHdiRdr2r8k8duzHr5kpbSCetuPwegHRqqKDaqGZmVaRf7tYzVpyIHwJRgj6VwyQeDaoNUuBaLPdO7WLtu2XMYs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8471
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,56 +173,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Stderr was missing from the initial description and example.
+Hi Anand,
 
-As I understand the env command documentation the subcommand style is
-preferred, though the old format is still fully supported.
+On 5/16/24 10:59 AM, Anand Moon wrote:
+> Read the reset cause from clock reset unit for RK3328 SoC.
+> 
+> Cc: Jagan Teki <jagan@edgeble.ai>
+> Signed-off-by: Anand Moon <anand@edgeble.ai>
+> ---
+>   arch/arm/mach-rockchip/cpu-info.c | 7 ++++++-
+>   1 file changed, 6 insertions(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/mach-rockchip/cpu-info.c b/arch/arm/mach-rockchip/cpu-info.c
+> index 14c7331e1a..fce4bd7541 100644
+> --- a/arch/arm/mach-rockchip/cpu-info.c
+> +++ b/arch/arm/mach-rockchip/cpu-info.c
+> @@ -8,12 +8,17 @@
+>   #include <init.h>
+>   #include <asm/arch-rockchip/clock.h>
+>   #include <asm/arch-rockchip/cru.h>
+> +#if IS_ENABLED(CONFIG_ROCKCHIP_RK3328)
+> +#include <asm/arch-rockchip/cru_rk3328.h>
+> +#endif
+>   #include <asm/arch-rockchip/hardware.h>
+>   #include <linux/err.h>
+>   
+>   char *get_reset_cause(void)
+>   {
+> -	struct rockchip_cru *cru = rockchip_get_cru();
+> +#if IS_ENABLED(CONFIG_ROCKCHIP_RK3328)
+> +	struct rk3328_cru *cru = rockchip_get_cru();
+> +#endif
 
-Signed-off-by: Fiona Klute <fiona.klute@gmx.de>
-=2D--
-Changes in v2:
-* Mention stderr redirection
-* Use 4 spaces instead of tabs for code block to avoid overflowing
-  lines
+NACK.
 
- doc/usage/netconsole.rst | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+If I only apply this patch, it breaks support for rk3288 and rk3399 (the 
+ones which have a rockchip_cru struct).
 
-diff --git a/doc/usage/netconsole.rst b/doc/usage/netconsole.rst
-index 647f0c220b..f745615d9a 100644
-=2D-- a/doc/usage/netconsole.rst
-+++ b/doc/usage/netconsole.rst
-@@ -3,10 +3,10 @@ Network console
+Do:
 
- In U-Boot, we implemented the networked console via the standard
- "devices" mechanism, which means that you can switch between the
--serial and network input/output devices by adjusting the 'stdin' and
--'stdout' environment variables. To switch to the networked console,
--set either of these variables to "nc". Input and output can be
--switched independently.
-+serial and network input/output devices by adjusting the 'stdin',
-+'stdout', and 'stderr' environment variables. To switch to the
-+networked console, set either of these variables to "nc". Input and
-+output can be switched independently.
+"""
 
- The default buffer size can be overridden by setting
- CFG_NETCONSOLE_BUFFER_SIZE.
-@@ -24,10 +24,10 @@ can be used for network console.
+#if IS_ENABLED(CONFIG_ROCKCHIP_RK3328)
+     struct rk3328_cru *cru = rockchip_get_cru();
+#else
+     struct rockchip_cru *cru = rockchip_get_cru();
+#endif
+"""
 
- For example, if your server IP is 192.168.1.1, you could use::
+instead to keep the current support and add stuff.
 
--	=3D> setenv nc 'setenv stdout nc;setenv stdin nc'
--	=3D> setenv ncip 192.168.1.1
--	=3D> saveenv
--	=3D> run nc
-+    =3D> env set nc 'env set stdout nc; env set stderr nc; env set stdin =
-nc'
-+    =3D> env set ncip 192.168.1.1
-+    =3D> env save
-+    =3D> run nc
+However, I very much don't like this. There's no need for cpuinfo.c to 
+become SoC-specific.
 
- On the host side, please use this script to access the console
+I would recommend to move get_reset_cause() in some file that is SoC 
+specific, and out of the DISPLAY_CPUINFO ifdef since it may be useful 
+outside of this very specific print_cpuinfo function (c.f. the rk3399 
+firefly board).
 
-=2D-
-2.43.0
+Yes there's a bit of code duplication then, BUT, nothing guarantees us 
+the reset reason will always be stored in that glb_rst_st register and 
+moreover, RK3588 already has more reasons that currently supported, and 
+this prevents us from expanding it.
 
+You can have a
+
+"""
+__weak char *get_reset_cause(void)
+{
+     return "could not get reset cause";
+}
+"""
+in replacement and let SoC-specific files expand it by overriding it.
+
+And.... to think even further than that, maybe we should actually expand 
+drivers/sysreset/sysreset_rockchip.c to support more SoCs.
+
+Then we could get the status via get_status callback from sysreset_ops in
+
+https://elixir.bootlin.com/u-boot/latest/source/common/board_f.c#L904
+
+and remove this cpu-info.c file from the arch/arm/mach-rockchip.
+
+Reporting the SoC could be done with a CPU UCLASS (c.f. what's done for 
+IMX8 already), from 
+https://elixir.bootlin.com/u-boot/latest/source/common/board_f.c#L176.
+
+This honestly makes more sense to me.
+
+Cheers,
+Quentin
