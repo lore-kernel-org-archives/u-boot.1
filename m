@@ -4,92 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 486B9C25B74
-	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 23:11:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3EC1C25B74
+	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 23:47:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B467388485;
-	Fri, 17 May 2024 01:11:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
+	by phobos.denx.de (Postfix) with ESMTP id EA8DA8847E;
+	Fri, 17 May 2024 01:47:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="cS5OO30C";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="hfsbtY0J";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B4E78848A; Fri, 17 May 2024 01:11:13 +0200 (CEST)
-Received: from fhigh3-smtp.messagingengine.com
- (fhigh3-smtp.messagingengine.com [103.168.172.154])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1715903274;
+	bh=ZYf2OMFdtMJ9n0iWBDn6vJaysrAe8miBtmG01x23INk=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=lgCWdMOiH1PL6sdcNjSjtVXMXyjmnK/bvUjQcdARQJYhS0/+LKUZAQuA/qNt/bFDi
+	 75gLTIhjE69lwWXc2Vv4oc74DjQq8cWmE+zhoTTf4OBYJJzw8u8zaBRGFyzOdYp1Zo
+	 jck3804zAC1cLAHeiu9Nm7bF3fsJqExFZPo2bPP6/kmUi/khqvZOeQrhatwXYRuDwd
+	 TOFHSCi3h4MhVz0h/4eW0+WgGFBpNZgUVuata/D5Y9VKZ+QNhYBCgPgjILPyziFVp6
+	 KCMGV6aR8riS0I+q1AGMScgMKEEyzzGCD8k7/gHtwSayrnkHzueHL9jR7UGY4NutRS
+	 mnzJLmZSKefqw==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A05488485
- for <u-boot@lists.denx.de>; Fri, 17 May 2024 01:11:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=flygoat.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailfhigh.nyi.internal (Postfix) with ESMTP id 892C4114014B;
- Thu, 16 May 2024 19:11:10 -0400 (EDT)
-Received: from imap44 ([10.202.2.94])
- by compute3.internal (MEProxy); Thu, 16 May 2024 19:11:10 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
- cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm1; t=1715901070;
- x=1715987470; bh=b4wIL0T3RIVDcC1KwGs0C9K2sdo74OKkxmEmQN67Kk4=; b=
- cS5OO30C8XQ0snNV7rphLDBKfmtl07aa66s0hbLmVj+8ULNCZFuxnQ6pqpiC/ZCn
- OicZ9EWM15lRwnWbRO8i+i6DhhfoQwPsHZ5GU24Yyi9DN+2de8K2ecQURp17jXVA
- Fu83OfVPpKGGx/VTydvqaifkzohf1Tz2IQvbmm5ud404bwCXyUpbWVxxeQTNhylX
- 3TBKg9j0KmbSL4p4sdfOWLtWicF88Cx8JoIu7w3eIC9ESqNYhTHw0vga5D+jaaoc
- 8l9y8vbj0AQKj2v/b7GhPdInyeKioxilhq7BFGPai5OhNpOm3/FKI0tjN+2YQuDL
- lZv/ufyQn3xwomDkFqexoA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715901070; x=
- 1715987470; bh=b4wIL0T3RIVDcC1KwGs0C9K2sdo74OKkxmEmQN67Kk4=; b=h
- fsbtY0J40/hBW332IU7jJKc00csWD/YlGkytApskGOonH2eOQxCu666qiW+NKRQr
- oMpOKmmE9XJSV+jbvv7tzb6wi8WoUFSDB9TOPf5FyLuF6keYjgyCJn80atljKNKp
- p0+xIhdXu1vuixEe+/QFfj1uIP9mDCNyAJavqB8p1nMVbc2BhD/U0iRi4k3h71Sq
- myOoiJrPIIvf/tKgkqOx5Nhnsi3VHVZk6a+oovfV9pCG6EtKtnK5JrNKuUi5bXGW
- oeMot/YNiTrUkYFm8B7LYlHJrnEhoRyRd6VPaySqhF9ig1NVa6Z/8lIwQzfE0vNZ
- qjDQtJDZnebMzWP5I2Rqw==
-X-ME-Sender: <xms:jpJGZkfzkVp9Yyefgw0dptR8OI8yEWR5N3wQXe4PsKXwKdkHXxapKA>
- <xme:jpJGZmN7INAIE4H3NSWB7v41kRsIFyQTePI0Pz8lSJJ_gnrrmwDDxMjY4pFCfXqwd
- OOPBcdTawTnzNbm3gQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehvddgudejucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepofgfggfkjghffffhvfevufgtgfesthhqredtreerjeenucfhrhhomhepfdfl
- ihgrgihunhcujggrnhhgfdcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtoh
- hmqeenucggtffrrghtthgvrhhnpedufeegfeetudeghefftdehfefgveffleefgfehhfej
- ueegveethfduuddvieehgfenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmh
- grihhlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
-X-ME-Proxy: <xmx:jpJGZljTU10rHup0eqdDQCvsYz_VcRM27XikvGdEOVDGqS5F8H0NDg>
- <xmx:jpJGZp94lXanRoBH8meC-187HBgMacvfY0KBtNVop-PDWdqzPTT4yw>
- <xmx:jpJGZgv62hhPUcdeRM9toEff7cD5QmIlC3lSZ937SMN1uNbguQPy3A>
- <xmx:jpJGZgH17N5QqbgS6-k3o_twEG-VbyAls4FRRTKGXg_sxhqQ883bWg>
- <xmx:jpJGZiJjBUyjTjY51maCthNN9lPUdBwy5b1lLLdSTCCsTFsu6fsY1T3v>
-Feedback-ID: ifd894703:Fastmail
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
- id 36F6836A0074; Thu, 16 May 2024 19:11:10 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.11.0-alpha0-456-gcd147058c-fm-hotfix-20240509.001-g0aad06e4
-MIME-Version: 1.0
-Message-Id: <7a9fb41e-e207-4037-a8bb-eb8fc149e496@app.fastmail.com>
-In-Reply-To: <20240517-virtio_gpu-v1-0-6353b87472c7@flygoat.com>
-References: <20240517-virtio_gpu-v1-0-6353b87472c7@flygoat.com>
-Date: Fri, 17 May 2024 00:10:52 +0100
-From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 28B6688453;
+ Fri, 17 May 2024 01:47:52 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1715903272;
+ bh=ZYf2OMFdtMJ9n0iWBDn6vJaysrAe8miBtmG01x23INk=;
+ h=From:To:Cc:Subject:Date:From;
+ b=hrqQngZcEwNs7/F4NIx9ztHAj4Rk+P0/7+PwI6DqQG6mQppboGRGM6JRwjTrilPL3
+ v7zW2QkmIf644ot0I6kibgL0PHwq6bAgiT+M/yGbL2z/5eUwi58Yd7E/6TxN2f3/mw
+ sRCXrDOmIn+H9xVnT7ONd71ptdv/GsSDJupdL7r9Exy59WB6qG3ec0P/XKG/xrUTZk
+ Cg5CemLw0gRwQoLnl0JdOjFUn6FVmMRH2G5AQUSoo2VLcHmVhK0YYTTbo7DyTzju8I
+ O1M55NT1dQouHxQjU+Mk9BAXDVYsCrPhGWkR9HooyrZq65XtqfkHhwynY6BnUKokCL
+ 4hEed9YTiK/cA==
+From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
-Cc: "Tom Rini" <trini@konsulko.com>, "Bin Meng" <bmeng.cn@gmail.com>,
- "Heinrich Schuchardt" <xypron.glpk@gmx.de>,
- "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH 0/2] virtio_gpu driver and relevant fix
-Content-Type: text/plain;charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Cc: Marek Vasut <marex@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@dh-electronics.com, uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH] ARM: dts: stm32: Add generic SoM compatible to STM32MP15xx DH
+ electronics DHSOM
+Date: Fri, 17 May 2024 01:47:04 +0200
+Message-ID: <20240516234737.201250-1-marex@denx.de>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,63 +67,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add generic SoM compatible string into machine compatible string
+for all STM32MP15xx based DH electronics DHSOM. This way, common
+board code can match on this compatible. No functional change.
 
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+---
+ arch/arm/dts/stm32mp15xx-dhcom-drc02.dts       | 4 +++-
+ arch/arm/dts/stm32mp15xx-dhcom-pdk2.dts        | 4 +++-
+ arch/arm/dts/stm32mp15xx-dhcom-picoitx.dts     | 4 +++-
+ arch/arm/dts/stm32mp15xx-dhcor-avenger96.dts   | 4 +++-
+ arch/arm/dts/stm32mp15xx-dhcor-drc-compact.dts | 4 +++-
+ arch/arm/dts/stm32mp15xx-dhcor-testbench.dts   | 4 +++-
+ 6 files changed, 18 insertions(+), 6 deletions(-)
 
-=E5=9C=A82024=E5=B9=B45=E6=9C=8817=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8A=E5=
-=8D=8812:03=EF=BC=8CJiaxun Yang=E5=86=99=E9=81=93=EF=BC=9A
-> Hi all,
->
-> This series added support for virtio-gpu device, it has been
-> tested on QEMU riscv64 and aarch64.
->
-> I also fixed a problem in EFI GOP so it works with EFI applications
-> as well.
->
-> There is a problem remaining. virtio_init() is being called too
-> late to allow virtio-gpu to be selected as a vidconsole. My current
-> appraoch is to register virtio_init in init_sequence_r, just after
-> pci_init. Is this a viable approach? Should I introduce a config
-> like CONFIG_VIRTIO_INIT_R to allow it to be selected by boards?
+diff --git a/arch/arm/dts/stm32mp15xx-dhcom-drc02.dts b/arch/arm/dts/stm32mp15xx-dhcom-drc02.dts
+index 1ef9ac29cea..90625bf6b60 100644
+--- a/arch/arm/dts/stm32mp15xx-dhcom-drc02.dts
++++ b/arch/arm/dts/stm32mp15xx-dhcom-drc02.dts
+@@ -11,5 +11,7 @@
+ 
+ / {
+ 	model = "DH Electronics STM32MP15xx DHCOM DRC02";
+-	compatible = "dh,stm32mp15xx-dhcom-drc02", "st,stm32mp1xx";
++	compatible = "dh,stm32mp15xx-dhcom-drc02",
++		     "dh,stm32mp15xx-dhcom-som",
++		     "st,stm32mp1xx";
+ };
+diff --git a/arch/arm/dts/stm32mp15xx-dhcom-pdk2.dts b/arch/arm/dts/stm32mp15xx-dhcom-pdk2.dts
+index e2e01e2146c..b2e450aa13b 100644
+--- a/arch/arm/dts/stm32mp15xx-dhcom-pdk2.dts
++++ b/arch/arm/dts/stm32mp15xx-dhcom-pdk2.dts
+@@ -11,5 +11,7 @@
+ 
+ / {
+ 	model = "STMicroelectronics STM32MP15xx DHCOM Premium Developer Kit (2)";
+-	compatible = "dh,stm32mp15xx-dhcom-pdk2", "st,stm32mp15x";
++	compatible = "dh,stm32mp15xx-dhcom-pdk2",
++		     "dh,stm32mp15xx-dhcom-som",
++		     "st,stm32mp15x";
+ };
+diff --git a/arch/arm/dts/stm32mp15xx-dhcom-picoitx.dts b/arch/arm/dts/stm32mp15xx-dhcom-picoitx.dts
+index 06770b47873..3e908102f61 100644
+--- a/arch/arm/dts/stm32mp15xx-dhcom-picoitx.dts
++++ b/arch/arm/dts/stm32mp15xx-dhcom-picoitx.dts
+@@ -11,5 +11,7 @@
+ 
+ / {
+ 	model = "DH Electronics STM32MP15xx DHCOM PicoITX";
+-	compatible = "dh,stm32mp15xx-dhcom-picoitx", "st,stm32mp1xx";
++	compatible = "dh,stm32mp15xx-dhcom-picoitx",
++		     "dh,stm32mp15xx-dhcom-som",
++		     "st,stm32mp1xx";
+ };
+diff --git a/arch/arm/dts/stm32mp15xx-dhcor-avenger96.dts b/arch/arm/dts/stm32mp15xx-dhcor-avenger96.dts
+index 76ac5a873c1..dd8fcecbca5 100644
+--- a/arch/arm/dts/stm32mp15xx-dhcor-avenger96.dts
++++ b/arch/arm/dts/stm32mp15xx-dhcor-avenger96.dts
+@@ -14,5 +14,7 @@
+ 
+ / {
+ 	model = "Arrow Electronics STM32MP15xx Avenger96 board";
+-	compatible = "arrow,stm32mp15xx-avenger96", "st,stm32mp15x";
++	compatible = "arrow,stm32mp15xx-avenger96",
++		     "dh,stm32mp15xx-dhcor-som",
++		     "st,stm32mp15x";
+ };
+diff --git a/arch/arm/dts/stm32mp15xx-dhcor-drc-compact.dts b/arch/arm/dts/stm32mp15xx-dhcor-drc-compact.dts
+index 77dd944ff53..c1f99c1685e 100644
+--- a/arch/arm/dts/stm32mp15xx-dhcor-drc-compact.dts
++++ b/arch/arm/dts/stm32mp15xx-dhcor-drc-compact.dts
+@@ -12,5 +12,7 @@
+ 
+ / {
+ 	model = "DH electronics STM32MP15xx DHCOR DRC Compact";
+-	compatible = "dh,stm32mp15xx-dhcor-drc-compact", "st,stm32mp1xx";
++	compatible = "dh,stm32mp15xx-dhcor-drc-compact",
++		     "dh,stm32mp15xx-dhcor-som",
++		     "st,stm32mp1xx";
+ };
+diff --git a/arch/arm/dts/stm32mp15xx-dhcor-testbench.dts b/arch/arm/dts/stm32mp15xx-dhcor-testbench.dts
+index c9163e1c028..5fdd762ddbf 100644
+--- a/arch/arm/dts/stm32mp15xx-dhcor-testbench.dts
++++ b/arch/arm/dts/stm32mp15xx-dhcor-testbench.dts
+@@ -9,7 +9,9 @@
+ 
+ / {
+ 	model = "DH electronics STM32MP15xx DHCOR Testbench";
+-	compatible = "dh,stm32mp15xx-dhcor-testbench", "st,stm32mp1xx";
++	compatible = "dh,stm32mp15xx-dhcor-testbench",
++		     "dh,stm32mp15xx-dhcor-som",
++		     "st,stm32mp1xx";
+ 
+ 	aliases {
+ 		ethernet0 = &ethernet0;
+-- 
+2.43.0
 
-Just realized I made a mistake on preparing patches to be sent.
-
-Two tiny modifications are missing from this series, dual endian
-handling in patch 1 and removing an unused variable in patch 2.
-
-I'll update a reversion, meanwhile fell free to review the current
-version.
-
-Apologize for the noise.
-
-Thanks
-- Jiaxun
-
->
-> Thanks
->
-> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
-> ---
-> Jiaxun Yang (2):
->       virtio: New virtio_gpu driver
->       efi: gop: Mark pixel_format as BLTONLY if we have sync hook
->
->  drivers/virtio/Kconfig         |  29 +++
->  drivers/virtio/Makefile        |   1 +
->  drivers/virtio/virtio-uclass.c |   1 +
->  drivers/virtio/virtio_gpu.c    | 298 ++++++++++++++++++++++++++++
->  drivers/virtio/virtio_gpu.h    | 428 ++++++++++++++++++++++++++++++++=
-+++++++++
->  include/efi_api.h              |   1 +
->  include/virtio.h               |   4 +-
->  lib/efi_loader/efi_gop.c       |   9 +-
->  8 files changed, 769 insertions(+), 2 deletions(-)
-> ---
-> base-commit: 21aa37ec1cd4a12e01e0e863ec9e99d703ce4d52
-> change-id: 20240513-virtio_gpu-abb4de685808
->
-> Best regards,
-> --=20
-> Jiaxun Yang <jiaxun.yang@flygoat.com>
-
---=20
-- Jiaxun
