@@ -4,168 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B8DEC25B74
-	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 10:43:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52079C25B74
+	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 10:53:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF86D8803A;
-	Thu, 16 May 2024 12:43:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id BD37588080;
+	Thu, 16 May 2024 12:53:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=skidata.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="RjVnAa4R";
+	dkim=pass (2048-bit key; unprotected) header.d=skidata.com header.i=@skidata.com header.b="dCx3qUCY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B551F88258; Thu, 16 May 2024 12:43:24 +0200 (CEST)
-Received: from EUR02-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur02on20701.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2607::701])
+ id 383CD88258; Thu, 16 May 2024 12:53:42 +0200 (CEST)
+Received: from ZRZP278CU001.outbound.protection.outlook.com
+ (mail-switzerlandnorthazlp170110002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c213::2])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4805187F65
- for <u-boot@lists.denx.de>; Thu, 16 May 2024 12:43:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id EEB9B8803A
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 12:53:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ dmarc=pass (p=none dis=none) header.from=skidata.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=Johannes.Kirchmair@skidata.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=O2ANu4HT9vYtShqmV4ZyUeYrAtXK1YqUjeOZPPomfzuky2DOBvusYs4LG/CT/QrC1e4w2XKVOEqWwpsuvTHLOSBpB982Zl/LZ5qyBOe3nMLt8Z+oNFPHxSLw7WgjV2z0GdcYc2lhTL77HmCIXOyh5JQ3QxVhqJYBcBiEwg/aETZXlfUszcheW7zbJH8qQ6QrHJWtbsvTx1nfpLHTXL0254JvugpsFD/5aogDluRAqK+muI5We3h2YH91DtUI67re1EzSQPyGygJplX+r8pAFj3KUS0oQjwHwIJx3yTqgTWsNZx3U8E9h9YlR2Ptsc+mwO9gnZa5hqljbE3Q64uGpIg==
+ b=SeJL3mS9Nq1XYHwl3o3GDMP3cupR83AkeqaNG1AzV9UuD4na0Fdr+tOcTQC/8pUSC1F76AdfxRFlxWKfeMoPOam5KvDw2MnSl2Pr+Yf0HMdqoO226KlQKfW41W9xsPC3/wOSQufENZn/9cJeZxE0DPKAwmVBC6eKcXIa77URGVLxylbyQe3pganFLqfJsp3uVJOf/62gBFZS4rbh4pquPsG1kz9hIqBAavQXoyLtGovsyj5PANZFlHHjYwpLtpb1G/NIE+3DXRriJBJGntKPLM8Jtjs00XJ7UYag0Cf4/uB/Lj/Ea6vOcv6YZN7ZX9wmDmdhBgVgYadzPqM6o1G18Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kYWhrbcongXiUDUQX0hLClzYwRKDBhpBpqrfte8va0c=;
- b=jW7kvakoZBfrezaCr/s3XxDKa3dT8UYCxzmN6sbMOgxXhQ4Tko0kWHYoLF50wxOz/x2dhd3dQqDTVpjM//nh0LwUp0XjhoGuBjfJwBUCNRnMJ49I7Ucp++rnWHuFHwz9kNmeuEHWA84nVDS9vrJ1Av3+wJbGnBBVBcgopGm5vyP6aOskSoZfPH5ZowD0lxqekp92UrLv1x4XV20GBlAWnfMTVssDLj5JAwVI55rW5e4zkN5NLzwTeNS0iG4GISug+123ztlHxt/OLxtbJyRydfufT/qv27yvU50Ddv2X6CoDBchiKtkcv3XJHOkDnlQjPXdix5chAjb2ypPkQaePfg==
+ bh=tq+cHNneuptk+b3l6jAtbjGdXoW/5QurOyLzOdzDeyQ=;
+ b=YnqI2CY60ShEdKaFKhhO6iyUkk+DWGpgsp/DfO2dTi9EeOCsWFDN525w/kfmJoU4jgJd6e9hqWduCgYtUQF4K4Kwye+GeoeSA0ZXvJy3KFCWXzN/auNdIYlqCx3qL+cZiYp1FQrgMqj8Zfg3uMZAgttHFDYOzFECoJC8X+Dyc9Z9KZWy85WvjMLb+KRiq8c+G9M8pDsREcLBg0qAsoRHtol1ZtoIRZBcFC5ebm7zYxoRV6maI2TR85W3Q6IPXrAgTaGdX7VgwzDH0idFVrDoaM7kwN0hDOEf0VcxSmK+gRyqSJTFU4uMpwFPsnsXrYTh/9giOAQSo+5SWksH/w4j5Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ smtp.mailfrom=skidata.com; dmarc=pass action=none header.from=skidata.com;
+ dkim=pass header.d=skidata.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=skidata.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kYWhrbcongXiUDUQX0hLClzYwRKDBhpBpqrfte8va0c=;
- b=RjVnAa4RqOFgQwjnkXO10I2I3vEKFgksYoQIzIJ/M3n/7wsGXK7lfYPirQDAkVk8ull2DRB9ZzkkiZW0DwKaJY5o95eMcPY/ACVCoi1ctCsI5GEPffQbwUsc1xdT/sDtfX37Un3+eDcnMxSsgG5gbt9eP2Wz3FKdlAiKtAFFNc0=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from VE1PR04MB6589.eurprd04.prod.outlook.com (2603:10a6:803:128::25)
- by PAXPR04MB8127.eurprd04.prod.outlook.com (2603:10a6:102:1c5::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7587.28; Thu, 16 May
- 2024 10:43:19 +0000
-Received: from VE1PR04MB6589.eurprd04.prod.outlook.com
- ([fe80::8476:1b2f:f236:db31]) by VE1PR04MB6589.eurprd04.prod.outlook.com
- ([fe80::8476:1b2f:f236:db31%6]) with mapi id 15.20.7544.052; Thu, 16 May 2024
- 10:43:19 +0000
-Message-ID: <1529741c-f09f-42c4-9bd2-e59b1c2828c2@cherry.de>
-Date: Thu, 16 May 2024 12:43:17 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 9/9] rockchip: RK3588: Enable display cpuinfo support
- on all boards
-To: Anand Moon <linux.amoon@gmail.com>
-Cc: Anand Moon <anand@edgeble.ai>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Andy Yan <andyshrk@163.com>,
- Jonas Karlman <jonas@kwiboo.se>,
- Klaus Goger <klaus.goger@theobroma-systems.com>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Heiko Stuebner <heiko.stuebner@cherry.de>, John Clark <inindev@gmail.com>,
- Jagan Teki <jagan@edgeble.ai>, Tom Fitzhenry <tom@tom-fitzhenry.me.uk>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Elon Zhang <zhangzj@rock-chips.com>, Joshua Riek <jjriek@verizon.net>,
- u-boot@lists.denx.de
-References: <20240516090031.2373-1-anand@edgeble.ai>
- <20240516090031.2373-10-anand@edgeble.ai>
- <1c5c0be5-eb49-4af9-be29-e4ab95e9f8be@cherry.de>
- <CANAwSgS3Fd91FqQkfKHxVBYJ8-2LSdY4z4Tmx31UY7Bhd9K37g@mail.gmail.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <CANAwSgS3Fd91FqQkfKHxVBYJ8-2LSdY4z4Tmx31UY7Bhd9K37g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-X-ClientProxiedBy: WA2P291CA0016.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1e::12) To VE1PR04MB6589.eurprd04.prod.outlook.com
- (2603:10a6:803:128::25)
+ bh=tq+cHNneuptk+b3l6jAtbjGdXoW/5QurOyLzOdzDeyQ=;
+ b=dCx3qUCYR+vP16DRE+BYXXoT7U00QPDEzy6cVu/n+m/ubChwImolmTBjXnhnyvM2TbQDCwB1UXbpdUNFCa7SF+j0KQdVlbv6Z70jea43lPf6S6N8ZB3DKfxaLa6SQzh145WJ/lE1fcA+qXHe5c2ApzlmjzEI+p4AgX78qs++H1jSy+VSkAF9eLP9PqMrjn2f3x+Nipv3hWibDpqVHPC5qa2SszjLv2Ofr5LgapDf5uEKYtK11M4oV6LA2swq++RKkEEyrZD+f9EfSJkiWp4ehxbrfjui1meeBnXShjWXmol8q9NM1nUbrqITf0qGtiXwEV9ABpoW06+UXS4adP32bw==
+Received: from GVAP278MB0456.CHEP278.PROD.OUTLOOK.COM (2603:10a6:710:39::5) by
+ GV0P278MB1141.CHEP278.PROD.OUTLOOK.COM (2603:10a6:710:4d::7) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7587.28; Thu, 16 May 2024 10:53:38 +0000
+Received: from GVAP278MB0456.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::f5f4:4769:5e87:a09c]) by GVAP278MB0456.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::f5f4:4769:5e87:a09c%6]) with mapi id 15.20.7587.028; Thu, 16 May 2024
+ 10:53:38 +0000
+From: Johannes Kirchmair - SKIDATA <Johannes.Kirchmair@skidata.com>
+To: =?iso-8859-1?Q?S=E9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>, 
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: AW: [NFS] fetching kernel via nfs
+Thread-Topic: [NFS] fetching kernel via nfs
+Thread-Index: AdqmxNtVZ7j6TX9BRqmqRnxh009EpgAI4FwAACWipOA=
+Date: Thu, 16 May 2024 10:53:38 +0000
+Message-ID: <GVAP278MB0456BB0B0B5FEEB5CC0F22118CED2@GVAP278MB0456.CHEP278.PROD.OUTLOOK.COM>
+References: <GVAP278MB045609BECD802008B0FEBD2C8CEC2@GVAP278MB0456.CHEP278.PROD.OUTLOOK.COM>
+ <5b5d6fe5-d436-4ac0-b6bf-7485196a97db@armadeus.com>
+In-Reply-To: <5b5d6fe5-d436-4ac0-b6bf-7485196a97db@armadeus.com>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-bromium-msgid: 0664f8b8-f804-4673-8cdc-e4f1afdb9d16
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=skidata.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: GVAP278MB0456:EE_|GV0P278MB1141:EE_
+x-ms-office365-filtering-correlation-id: b3751ab7-7aae-4758-3894-08dc7596710f
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230031|366007|376005|1800799015|38070700009;
+x-microsoft-antispam-message-info: =?iso-8859-1?Q?jfva+pZRUZKU7hFbklIwfFNZfWBE/eLNNNDqCRap/T5uGe0iw6aXP/Mjba?=
+ =?iso-8859-1?Q?wPHv2bGruPgaCLmUq/0ioWoWy80ZnwkSJyoQA0g5gBcI99crx972Ihg4f0?=
+ =?iso-8859-1?Q?OWQn3Q3aHA5Ys3pOUvX66UUewmIbrgcdtOvUfNjbtz7EhvDRsj6Y2rEO5b?=
+ =?iso-8859-1?Q?xEJS0WZOikh4IL1xIMrs3fggaelZ8VqF6CzHbSI9LgOUOaMZ0zTanqZuas?=
+ =?iso-8859-1?Q?hfiq9h9Aog/RQuT7YDyto50fmFg3paUcGPnhF/KaFOXnglBHtp6aVYYPNM?=
+ =?iso-8859-1?Q?p2Dv4NcPnTOv1Tts6mRJoq5Jqno8/pofs4JRn8oMX2WfLgAE+Nf9aoRAo7?=
+ =?iso-8859-1?Q?BiEe9RY+CDstkx1i00T9cNfXZ/6YKwUq2702eFsfKiKyuqMOuBwjs43qCF?=
+ =?iso-8859-1?Q?el6Bs+YLWMCHr2eyswMZujqRU8EaoXxL+Gpo0yOWwG3GJnuIa0tt24LDNB?=
+ =?iso-8859-1?Q?n2y305+UvGp79BHTR4DBSlk2GqXyVwqLCWbZAut/Ta1rAW+yOK/7LSaYav?=
+ =?iso-8859-1?Q?sUK+AwAhx3AW9aJTNavs+jyQOg4yX7TY4R+X557MX6vRjB++jnIC7qneqE?=
+ =?iso-8859-1?Q?mNxifItoiWsph5W1awyoDMpPbpmG4njQY/zWg+detBQ8bceFQ9pcDJX5NH?=
+ =?iso-8859-1?Q?Kov/KKechpt2BdJN25sb633kc7aE1TVnJO7d1ISjVCWaMsNBcRBYDLVZyo?=
+ =?iso-8859-1?Q?92HA7MBPi93vwOseTx4y0PD6WMjWImJ3V2qO0szWIzNurFdzOQWFqpQ/aR?=
+ =?iso-8859-1?Q?nYwJuOJmC+EoXecigKZwty/FG+SvEufwzCHvDIcH2hl1amjSMOyE5cn0dd?=
+ =?iso-8859-1?Q?AA058l0qWMs0CStg52hnfbUKDQXMpkywGtSOX93GSJf5X5nKummZzy2ybB?=
+ =?iso-8859-1?Q?rVMmKr4oXCwrx1UzZKIVET+giKrQIB6SQu87MeEsULtVbI5dXpG3sOEymv?=
+ =?iso-8859-1?Q?6AIoHK5tq8z0P4QQQduInlWA6kitQcl1IW/QcoEP8+TAdRXqTxHy3SOpPV?=
+ =?iso-8859-1?Q?/uF3InwZVQdeEfn2+fqE1KNvd+x/x63gyaaWvluRkKu+CIBWvu7pNLcJwn?=
+ =?iso-8859-1?Q?MBr0JCDxDpJLE2o+PM0IE3eJ8JFSYLGwiPqJ/U+TX/cLUJtYk+cBLO0T1I?=
+ =?iso-8859-1?Q?jhUatqdKjaHTz9Mm76L3cEXvjybIPxsvQp+zUMBw57aZE8TSyWO9rdKm4W?=
+ =?iso-8859-1?Q?UUgSjvLl9OAw7YrsiK2pVdlQwcl52gou5HRKa2suIr1/QlPdWuW+Ox7XP/?=
+ =?iso-8859-1?Q?u/DHgCNpyftASoVjjar6ogJ1hkCobuEmFdwquqFdWLLpx+Nzsp0kmOSKl0?=
+ =?iso-8859-1?Q?PzsfVjHAoMzPewx9RQcQFb4wzw=3D=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GVAP278MB0456.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(366007)(376005)(1800799015)(38070700009); DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?FCBc8BCKVpMyV1ddw2bA2NmbTDaoAH7XaK6WMembL/vNmTOGpogt66HSBZ?=
+ =?iso-8859-1?Q?yoAJxxio+wKw9vl7DOEGEhf2ny4+iAsg2FnWENd4Ppln2qDpXCLCk6AhlV?=
+ =?iso-8859-1?Q?nsICcmZzrcM+ikPe1uJG5UfjmVOW0iDluZFQLnxZ/Gnla7r/dCTYkmg0At?=
+ =?iso-8859-1?Q?07jJWN34gRUXWlcB0zzGn42Zxqoo6mjpqYHnqHlmghSt+b0EzMoq+sK817?=
+ =?iso-8859-1?Q?QNEDEt58VCx8GDZOuLVyNpIgLaEei2R29IYyof39E77Kq7/DOG4lzT211R?=
+ =?iso-8859-1?Q?w3/Y6IGci27h6aRD+JdR0Bz6DWCel92wyq32X1dUO3dlJzYNu5Kah0rFlj?=
+ =?iso-8859-1?Q?NvbFJ/7ZZYm7Wp8DSIeSeRRYMkI7/BsYm1lWUtPLFioUpIVnWZDkHEbfFX?=
+ =?iso-8859-1?Q?xg6TUpdR6RQkLcle2uC+pGOHYOGbPobPG+klW/oF8LohfA9GusN9Jq1TFP?=
+ =?iso-8859-1?Q?irb2tF88mK3BdISZjDSYZDvnoj7YcSsmB6ai16Hd9ZEcWWuo7HY7wEbNWe?=
+ =?iso-8859-1?Q?JhLnuFsgxDMh1yCpYTPPlCJS8sdzSAppkAXuOzZ0aAyq9XSrrTlcNs4nie?=
+ =?iso-8859-1?Q?BUsm1reHRNz/rnRpyvJI8N0M+kh9qHTA99rsBJuFfloDHELBCZL2URJYNP?=
+ =?iso-8859-1?Q?YzJ58aMyLKKa3Meb9lBQI1nrLQ48g8bkqbkOEc7v/zgnpwdzMP173sYL2Q?=
+ =?iso-8859-1?Q?80AgOzD3m+iex13rbu55kCYmrzHWork8um7c08BYhs8Ie0ynsWII0KF/UV?=
+ =?iso-8859-1?Q?Rpm35oxnYQ9JlOqiVk8S7j+wjGHdrJHuJ1uv5D0OQq2jZ663gRSU79Ioh9?=
+ =?iso-8859-1?Q?Cy00jsSaVGCQDe3nPkIwwPuuqZ+4spLbGL1wfnNMEOedRyR7049aCHPyuZ?=
+ =?iso-8859-1?Q?hq2KNcC81Ew0KRbaphC8uBp8sV0xAiRWNiw3EpcMx1GNc79HxA0oRFvr3M?=
+ =?iso-8859-1?Q?mzK0JEFJx3mlYVB/nXtGQFRjsnex1R82Oa1Fdw0YgZ0jDrf+gzBBv7WcOq?=
+ =?iso-8859-1?Q?T3N9u+YW5wwOPzf9f/GocbjE4coZS1t46OudDWCI7G6TLdOlnBPjMhmIGS?=
+ =?iso-8859-1?Q?0VjJNhnSJAHXfFxhfXlabrshW4itz9F5oLp720d5OL/MaM4xUEAnXCrbTe?=
+ =?iso-8859-1?Q?7LkR9OXtFEE7ffZSkaGyeteABOADhaN2Ust/JxW4tQ0Wz7XpXiWYAWgiJU?=
+ =?iso-8859-1?Q?Bgnkhu9lunYsOwqxcZOXBLCPmU8S3Y8BBkSXB3aA9fNGNqiegyBAs64CjS?=
+ =?iso-8859-1?Q?iZ1GIjexbYv1c+di3KH5QF890avf4fdw5oTXzdqn5wDAlS6IduYHMsgrDR?=
+ =?iso-8859-1?Q?+Xkq7r83+Dv963tYg1zAMwTBAXL+xwvId3QRxC0jyz2nbBtuBYbQcUCS5X?=
+ =?iso-8859-1?Q?CpStOzBeIdDtR/Hr1M2GkdHNMaeLcyGdl0G0fFDVltXFkuE25aZ3uG7w7A?=
+ =?iso-8859-1?Q?WZzSH12/KWbdmj+uL7RS+u3LPJJp+uuWOzT/U9zRjSda9es80YFQ+QiOg9?=
+ =?iso-8859-1?Q?t5omQOPB6Pr2fmVrjnrl1pcwkzvRvcXG3l6s7voz6mWWAC5ZDUKRxhpuG5?=
+ =?iso-8859-1?Q?XA4K0OlR1zPBacZUO/6VLglqrn+2TcwK23munUXl3IiBp9VdNSpj04I3kQ?=
+ =?iso-8859-1?Q?BEfXf9q7CYc9WOlWa5bpdDASD5osBwVxMpw7p2Lj5etMB1T0RA5YZvsg?=
+ =?iso-8859-1?Q?=3D=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: VE1PR04MB6589:EE_|PAXPR04MB8127:EE_
-X-MS-Office365-Filtering-Correlation-Id: 504ec010-f988-46f7-1bbb-08dc7594ffde
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230031|366007|376005|7416005|1800799015;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?SVJNMTJXVjRsc284V0wyM2huSW1rUk0rWHYrT2tRNnBqR0g1WTN1SUxJUnFS?=
- =?utf-8?B?c3dFb2NvU0NTSzVkenhQNFlsSUFuWWlRSzI3MWVsSXJDcTRmcXNXVnNNRi81?=
- =?utf-8?B?OGdnc3cxVlFiQ3QvNVdXVkQ5WUdRMXVmUGpEODNIVm1CM3YzTDRkem1ldXJO?=
- =?utf-8?B?WHIzMEF4cCtwejFkU2NpZzlnL0dvNmh5VTA5MExwbk9WQzkzRVorM3c1U3ZX?=
- =?utf-8?B?RlBQUFZVVjUvWXY5MmZKVWRlRlNRSitySzJzV0trSW1yUjNZdzVFL1RGQjhn?=
- =?utf-8?B?c2FuenBJRFpILy95K05FellxUGJHQlFnNDJSNEM1K0RoMGlsWmVFYXRhSHBl?=
- =?utf-8?B?a0YrWFJNWDVCbUJVd2JzL1Fsd3ErdlVYVDhoVW5ack9ZcTl0bmtyMnQ4M2E3?=
- =?utf-8?B?M3RlV2o3dGlpbHM4WENBRVI5NjRJM0FrMUZYZ24wRnpKbU1vTndTdFBmOVA1?=
- =?utf-8?B?UEk0VGJISlpxemphdDF3cjdQODkrWTdFRDFJWFVadGwrM3g1SG80NHlaZTNY?=
- =?utf-8?B?dUJUUVRvcmlvSThGY3doNGpudTljQWU5RERMMjMyeCtiMGt2MEI5bTFkMzFk?=
- =?utf-8?B?cmxranp5M0l0ZVo1RkF3Zit5aEtyQUNsckdSOVZIZmFtRDdPQVl6b2pTOE9L?=
- =?utf-8?B?aHJBaUxhTTNSSzIyTStGT0ltdVFHbWtLa3Q5Ui9LamdOUWJCcWR1b09oRjRV?=
- =?utf-8?B?ak1td3drMmk3VCs4SVpIVS8vNUpnWVJMV0dEQjFEVWZYUEtPZXY0aTArdFpi?=
- =?utf-8?B?d0dEYWdCWUY4VDFyQ0JTa2RQNnFPZ2FDU1VzdkUySXhReFhmdHk4UnpyeENS?=
- =?utf-8?B?Z2dTUFJ5aGVweThETFhWRTNLbERWUW5nSzgrRTE0Z2Yya0dmZUQxaEVCdXcv?=
- =?utf-8?B?TmJtMDBJSjF2MjFaNG9rU082WXpxTllkM1dPNUx6djRTaVIyd2hQczdYMWFJ?=
- =?utf-8?B?TjMwRkZ0MlUxOEZqaE4zRG1oY0prRmhKaUU3MXJSUlQ1aXJjVnBOWTZxdnpH?=
- =?utf-8?B?WTJJM0VYSWMvQjJyWVBCMGpEMWhleGlLRld4REdzaDQ3WHd1SDh4eEVBV1lm?=
- =?utf-8?B?c3Y5MU5YWjNsYXgrWHRXZTA4U1RMVEQ5M0IzdHpiSFpRVjdKK2ZKL3JhNTBW?=
- =?utf-8?B?SnpjVUlnODJza1dCM2pnWmRlMEV5M0tramdoWXpISGowMGp2T1hVWHU5dUM3?=
- =?utf-8?B?MGp1eW1wZjMzK1NuQXhYM3BhRGVMeVVMa1k4S2V3OUEzSFVmUHZmVTBUNldC?=
- =?utf-8?B?b1NGTnYvcWxEQmJtNmd5d09CRC9sSXM1a0dCL210elFsK3NFTnh5QTJxYU1h?=
- =?utf-8?B?eW01a0s3dkw5V2xrUm1DTVpsYXhNZkdoVlY3aDJZUHlFSGk0cGREMlgzU3da?=
- =?utf-8?B?dVBXZjVWV2ZJYUJjUC9mNVVIK3BsSFJpbzB0YUJ1UHlJTURsQ2tKdkRsOWFs?=
- =?utf-8?B?bXdydFN4WnV2NUk3eVdFcGRGQnkvRmRlNEhnVG9TS0ZzTU1JMlhBM0VLZCt6?=
- =?utf-8?B?YTZFU2xsWWxOSDFySzdqVndSUzgwQlNHOFRxWVRNV1lUaFljaDE0OVVaRmpo?=
- =?utf-8?B?RzhtYlV5eElVU1NBbmlDNHpHTzZHczB0QjlKQmYrU1B0YTJDY0Z2Y21DVmxX?=
- =?utf-8?B?QUhKOWNRbkl2NWtacFZVZXZBYUdtRlE9PQ==?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:VE1PR04MB6589.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366007)(376005)(7416005)(1800799015); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QmlSN0FlTUZzNnAwY1VzZG5FWUdtemlzNlJjVUptbXo2dFQ1MTJnTEpPaGNU?=
- =?utf-8?B?UFk4eHg4cjVKdGdvMEEyWHpOcWtsYnBpNmg1Q1g0UWxua3lobWNSa01adHpO?=
- =?utf-8?B?NDlVMlNTRnZJVlRkakJpQXVvY3N5N2JJanBHVEtVVURERzlyU0Q4QmRxOHlr?=
- =?utf-8?B?bE0rd2tEZDhSTStpUU1NZ3N1Mk05SUZ3ZWxFTUMxRG82UzVPSXpkVWx4cXV0?=
- =?utf-8?B?cjk2VzM0T0pvWjNZeWVaK0hVYXlEOVFEdzMwTnBmRkI3ZUlHWlpWcVppWEEr?=
- =?utf-8?B?V0dybjQ1TXZRdHNycHBhVG1ORVBFMGxZN29yako5S1RrcmkxU0U0RVlpa1NG?=
- =?utf-8?B?TFBReG1qd0h0S3VpWDdQdHczdGxGVzB0bTRNa0dyRG04V080dTdZTS93U3ZV?=
- =?utf-8?B?VS9QeTJveFJFV0UwZm5LMHJXZDY0bFNDVlpQdnR0VHhDUitBYm83NTB3Wi9B?=
- =?utf-8?B?LzA3QUVCRTYwUE1QSzllU3I0bm4yUUthWTY3bU5zbnRjdUh1aEUwN1htSkF6?=
- =?utf-8?B?eUp6OXZ0M1lmSnFldXNCT0ZTampobWRsUW5PK2ZNNVJFMWhyWE1jTWNrRklM?=
- =?utf-8?B?MWRqQ1djRTA2d2dqUHVGSm5sTEh5THdJWlA1L3FuRk9EbG5DTlNvWFMwK3l3?=
- =?utf-8?B?NXdhajdJamowdlBoQms0ZEoyRVNHUDc3SHpTWjRMSHMxRWFFMkNhQXFLemdP?=
- =?utf-8?B?QngvVUZVeklBYUNaNnNRdFVIQXpqRHNEL3cxQm9ncnBGTlFMb1pma2xYaFA2?=
- =?utf-8?B?ZE9IUlZxd3IydDNvMlF0S3NEUGZiclJocGZlNHQ3RytFUU5KS3RsWVd1Q1hK?=
- =?utf-8?B?LzFUZlNua0FxYlBsTGZrdVRNSWw0ZnVNeE0zVzlCaGM5OHh5bEdzQUM1MFdX?=
- =?utf-8?B?WE1sdzhtRVhFRi9UMm45SjN3NFNkc0dqWFZXZ08vUEdIbnkyMTdFWnJpK3o4?=
- =?utf-8?B?SnJhaEFrOVlhM1JMNGZ2QjBuSkxIRXQ5VWxwRGYxMmh3c3lhWFd1Z1hTclRw?=
- =?utf-8?B?Q0NIL1ora1FQZWZiTlVJL2NRcE5NcU5HVVQ1em9jam5JaEQ1ZHh3ZDBsYVVW?=
- =?utf-8?B?Rm1INEhYanRwMmxpU0ZyQXltNzc1bm93aE1vSjU4Y0dzMkQxamY3dmUvS3U2?=
- =?utf-8?B?WlA1MCt5bm92MHJ2UlNZSC9paVVJYktBWktyZEpwT2ZoUGNsWmNPUVBvemh4?=
- =?utf-8?B?OS9YN2VrT0hDNHIvZVV1bXkvVVNTSHR2OUI4OEs1QzVRaTZxb1Y0RUxVTlBh?=
- =?utf-8?B?TDhEdkxjbkY3S1RjeWplWFZjVVJ1Q3ZNcHArMENPdlFpQkF6RnJ5cnROWDlM?=
- =?utf-8?B?bDd0MERwaGw3SWV5SGlPOFBGdE1OZkJVcEx4WEFqNndjQjVDaFdPRzRlQkNi?=
- =?utf-8?B?R3ZQUFQxalVad0svdlVNQU1WSWgyYTVzcWl4VXRkTDZFeUNMb2JsWEpteGZJ?=
- =?utf-8?B?eEI3RVQ1WEtZSkVNV0xkWG9keGdzWk5EK0NtKzdqRy9NQzB2RHFocU5LZU52?=
- =?utf-8?B?K1FwNjlPZld3K25FaThDNVZkbUxYUDVmajYyRFFka21naUVXNGk3SGdRM3RZ?=
- =?utf-8?B?ZEQvSkRiaksybjNTY1hZUzZnMzFia0g4NVpZSnhRUk4zRyswU1ZGUzZmVTdZ?=
- =?utf-8?B?U3pFQ281STBGN0xUMllFeGxnWjJPbGszZXgwKzRVWWJlamEvamFUcmhjNFNQ?=
- =?utf-8?B?VExSQWtTS1k0QWdxSDg2MjNsZk9lcThJOTdPZFhISjdNVUFMZDZYSlYxbjlV?=
- =?utf-8?B?OE5KYU41WCtUMlllSEREaGRIQis3TDBmRlFNNHBvS3dIWnM4MlFlOHROTXF4?=
- =?utf-8?B?WGE5RjlTc0hKYWphNVkzTjVaYVRtNWlSRTdvZDB4QVFKWmpNdW0zSjR1dTRZ?=
- =?utf-8?B?WExzS2xuelBEblJZQytDWnhDUk54TUM0TDJUSUFBdm9Ub2dBc1ZNSzZJY3hT?=
- =?utf-8?B?cG1kL3BvSDlqb2toNmhqZnRUWHppa1JCSzNvS3FpM05sM3pSZWJFZ1laYm00?=
- =?utf-8?B?Z1gxR09sRWlQUDFhV1dwMFZZVzFBMjJ2L2F6QjRLVERhQ1hnQW9RQlh2NDRz?=
- =?utf-8?B?U3dZZmphS0ltZXA1a1lOcGJpTVNkTlRBR1NkNE5PWlZHWEQzTFo2dDF5L0JG?=
- =?utf-8?B?cGszL0NSL3ZYSnBnUDdiNHQ0OEg2SmwwLzlsNjBnUlJzZ2d1V25DbjBjVlJ4?=
- =?utf-8?B?Q3c9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 504ec010-f988-46f7-1bbb-08dc7594ffde
-X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6589.eurprd04.prod.outlook.com
+X-OriginatorOrg: skidata.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 May 2024 10:43:19.0643 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 58pRPXcoHUkfhtzhYe93yCWlufcz6MWlDlDpW52xd/M4JJ29XXEodAEn/dun1Gqj3tZVtkFFNuREpqLYJgvNSgPTe5NdjLEi7UhYrqL5X4g=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8127
+X-MS-Exchange-CrossTenant-AuthSource: GVAP278MB0456.CHEP278.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: b3751ab7-7aae-4758-3894-08dc7596710f
+X-MS-Exchange-CrossTenant-originalarrivaltime: 16 May 2024 10:53:38.1909 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: e5733095-4425-4f08-b6ba-487b9a46a425
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: dOB5bmmbtTS8sZA74UyNZ4ij9bcjaOlJQK5vbma8SsAVqF29HPFT9NmC6SDOyzLSEAHFWq6/5HSa1oplZvmFVY2bkPaNagkVdbPjFkDW7L0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV0P278MB1141
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -182,125 +160,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Anand,
+Hello S=E9bastien,
 
-On 5/16/24 12:12 PM, Anand Moon wrote:
-> Hi Quentin
-> 
-> On Thu, 16 May 2024 at 14:52, Quentin Schulz <quentin.schulz@cherry.de> wrote:
->>
->> Hi Anand,
->>
->> This is patch 9/9 but somehow I didn't receive any other patch, nor did
->> the mailing list? c.f.
->> https://lists.denx.de/pipermail/u-boot/2024-May/thread.html and
->> https://lore.kernel.org/u-boot/. Are you registered on the ML?
->>
-> 
-> Thanks for your  review comments.
-> 
-> Something went wrong with git sendmail,
-> Your message have not reached my email client (gmail)
-> 
+missed that because was testing on v2024.4.
+And did not think about looking at master branch because it seemed to be br=
+oken for quite a while.
 
-A mail server rejected the mail to edgeble.ai domain (both you and 
-Jagan) /me shrugs.
+Anyways, thanks for the quick response and for fixing this thing.
 
->> On 5/16/24 10:59 AM, Anand Moon wrote:
->>> Imply DISPLAY_CPUINFO Kconfig options to support on all RK3588s and
->>> RK3588 boards, Its used to determine the reset cause of the board.
->>>
->>> Cc: Jagan Teki <jagan@edgeble.ai>
->>> Signed-off-by: Anand Moon <anand@edgeble.ai>
->>> ---
->>>    arch/arm/mach-rockchip/Kconfig           | 1 +
->>>    configs/coolpi-4b-rk3588s_defconfig      | 1 -
->>>    configs/coolpi-cm5-evb-rk3588_defconfig  | 1 -
->>>    configs/evb-rk3588_defconfig             | 1 -
->>>    configs/generic-rk3588_defconfig         | 1 -
->>>    configs/jaguar-rk3588_defconfig          | 1 -
->>>    configs/nanopc-t6-rk3588_defconfig       | 1 -
->>>    configs/neu6a-io-rk3588_defconfig        | 1 -
->>>    configs/neu6b-io-rk3588_defconfig        | 1 -
->>>    configs/orangepi-5-plus-rk3588_defconfig | 1 -
->>>    configs/orangepi-5-rk3588s_defconfig     | 1 -
->>>    configs/quartzpro64-rk3588_defconfig     | 1 -
->>>    configs/rock5a-rk3588s_defconfig         | 1 -
->>>    configs/rock5b-rk3588_defconfig          | 1 -
->>>    configs/toybrick-rk3588_defconfig        | 1 -
->>>    configs/turing-rk1-rk3588_defconfig      | 1 -
->>>    16 files changed, 1 insertion(+), 15 deletions(-)
->>>
->>> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
->>> index 2e9c71138e..1b5cc34f99 100644
->>> --- a/arch/arm/mach-rockchip/Kconfig
->>> +++ b/arch/arm/mach-rockchip/Kconfig
->>> @@ -366,6 +366,7 @@ config ROCKCHIP_RK3588
->>>        imply SCMI_FIRMWARE
->>>        imply SPL_ATF_NO_PLATFORM_PARAM if SPL_ATF
->>>        imply SPL_MMC_HS200_SUPPORT if SPL_MMC && MMC_HS200_SUPPORT
->>> +     imply DISPLAY_CPUINFO
->>
->> This is unnecessary, it's already defaulting to y if building for ARM
->> boards: https://elixir.bootlin.com/u-boot/latest/source/common/Kconfig#L596
->>
-> See below...
->> I also don't think this is SO useful that we need to enable it on all
->> rk3588 boards? But also, doesn't hurt, so... whatever I guess :) ?
->>
->> While looking at the code, I think we can remove the ifdef in
->> https://elixir.bootlin.com/u-boot/latest/source/arch/arm/mach-rockchip/cpu-info.c#L47
->> because this file is anyway only compiled when CONFIG_DISPLAY_CPUINFO is
->> set, c.f.
-> 
-> Oops I missed this changes, my bad
-> I will dop my changes over here.
-> 
->> https://elixir.bootlin.com/u-boot/latest/source/arch/arm/mach-rockchip/Makefile#L30
->>
-> On Rockchip SoC CONFIG_DISPLAY_CPUINFO is been disable on most of the
-> configs files.
-> 
-> -# CONFIG_DISPLAY_CPUINFO is not set
-> 
-> My changes are related to determine the reset cause of the board and
-> display the results.
-> its only enable on selected SoC hence I have to used this logic.
-> 
+Best regards
 
-It's enabled for all Aarch64/Aarch32 SoCs by default. People explicitly 
-disabled them in their own defconfig, either because the first person 
-who added a board based on rk3588 didn't know or didn't care and 
-everybody just copied it as a base, or because they don't care about 
-it/don't want it.
+-----Urspr=FCngliche Nachricht-----
+Von: S=E9bastien Szymanski <sebastien.szymanski@armadeus.com>
+Gesendet: Mittwoch, 15. Mai 2024 18:53
+An: Johannes Kirchmair - SKIDATA <Johannes.Kirchmair@skidata.com>; u-boot@l=
+ists.denx.de
+Cc: joe.hershberger@ni.com; rfried.dev@gmail.com
+Betreff: Re: [NFS] fetching kernel via nfs
 
-In any case, you only need to change the defconfigs, nothing else.
+[Sie erhalten nicht h=E4ufig E-Mails von sebastien.szymanski@armadeus.com. =
+Weitere Informationen, warum dies wichtig ist, finden Sie unter https://aka=
+.ms/LearnAboutSenderIdentification ]
 
-> U-Boot 2024.07-rc2-00397-g0370324feb-dirty (May 16 2024 - 13:11:14 +0530)
-> 
-> SoC: Rockchip rk3568
-> Reset cause: POR         <-----------
-> Model: Radxa ROCK3 Model A
-> DRAM:  8 GiB (effective 7.7 GiB)
-> PMIC:  RK8090 (on=0x40, off=0x00)
-> Core:  344 devices, 31 uclasses,
->  >> which also means...
->>
->> https://elixir.bootlin.com/u-boot/latest/source/arch/arm/include/asm/arch-rockchip/cru.h#L35
->> should probably be ifdef'ed
->>
->> which means...
->>
->> https://elixir.bootlin.com/u-boot/latest/source/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c#L64
->> should probably also be ifdef'ed (but the config is enabled already
->> (well... it wouldn't compile otherwsie), so I guess this is fine?).
-> 
-> This code changes will not affect this feature by default its enable
-> on RK3399 boards.
-> 
+EXTERNAL EMAIL
 
-Yes, but if you disable it, it won't compile anymore. (I'm not asking 
-you to fix anything I've reported here though).
 
-Cheers,
-Quentin
+Hello,
+
+On 5/15/24 14:40, Johannes Kirchmair - SKIDATA wrote:
+> Dear u-boot people,
+>
+> I encountered some problems trying to fetch the Linux kernel via nfs (v3)=
+.
+> One problem was that the nfs file lookup always returned NFS3ERR_BADHANDL=
+E.
+
+I have fixed this. See:
+
+https://source.denx.de/u-boot/u-boot/-/commit/d2986567b27dae764b19886bcda1d=
+24b7c41d075
+
+Regards,
+
+> This is due to the following line in nfs_lookup_req() function (net/nfs.c=
+):
+>
+>               len =3D (uint32_t *)p - (uint32_t *)&(data[0]);
+>               rpc_req(PROG_NFS, NFS_LOOKUP, data, len);
+>       } else {  /* NFS_V3 */
+>               *p++ =3D htonl(NFS_FHSIZE);       /* Dir handle length */  =
+  <=3D=3D=3D=3D=3D  this line
+>               memcpy(p, dirfh, NFS_FHSIZE);
+>               p +=3D (NFS_FHSIZE / 4);
+>               *p++ =3D htonl(fnamelen);
+>
+> In the NFS_V3 case we add the dir file handle  size to data and then the =
+dir file handle.
+> IUC, this is not correct here because dirfh includes already the size of =
+the handle in the first 4 bytes.
+> Feel free to correct me if I am wrong.
+>
+> As a result, if I remove the line "*p++ =3D htonl(NFS_FHSIZE);", it works=
+ fine.
+>
+> Don't have an in deps understanding of nfs, so I am not sure if this is t=
+he root problem here.
+>
+> Best regards Johannes
+
+--
+S=E9bastien Szymanski, Armadeus Systems
+Software engineer
+
