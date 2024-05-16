@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3ECDC25B74
-	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 21:31:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB9D3C25B74
+	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 21:32:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6B6F88480;
-	Thu, 16 May 2024 23:31:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 444EB8849D;
+	Thu, 16 May 2024 23:31:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1715895094;
-	bh=oDSxTuf79fLRowIpiestT2AG8ilZpok83dYUYxndYzQ=;
+	s=phobos-20191101; t=1715895095;
+	bh=NO8hR/sogh2hQZJfCJJmJKisuxqmo8ynIzAj72CLee4=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=aeNSyELoa4oRgiO0MmqXHz3uHH/FZuOXSkgI/ogzMAzJQWBFTBog3IGHai7T4vwNB
-	 1OamCGm8dZ0uSQkfPqq1mN5HXEcQgzkhMOTTRXgG09d7L5GriZjwUPZCmF+6pLdiij
-	 cJzKr4eBXRIbV1qQsm8aLP4NlAFh3qTxoRHcGDHTENszKGIFDkx+7ItpFVLk4V86CT
-	 w/f5mNtW19IF7BxbqfeE8fjSQkJ99G/ZsTNHKPGsQ5lTGmStq77xri0qnfVA2LehmZ
-	 6w6mmUrA1L7lvtQj/xH6LP8nxtweyV5mlQPatMpLhyqjwEEOj+Rjdc/NGOANYjHQYF
-	 cV51oYddym3zA==
+	b=AIGGutmV3PZS4J6lthOY35ySG/1Sod0fIRdwQpCfu6YAyZ8hADVWYOv5EOrEgAs10
+	 NtiTimWv/aEU6ZDHepaIIu313uqc6i7V1HZMF2L3XnUdmH6AztHFkF8wqDqXOiOYe7
+	 PXh9dR+UFmDvx9PLupovDVTfmMhVE2DiayrxV7krrAz3wVcVbhrAV5PjpYIKk9ifd7
+	 70MNPjE7HmyIQkeePo2pE2hOcIyvnaq9LuL7TTXE55r7WQ5mOJw4OlDONJUo+GY2js
+	 vu0p1fw051YO79jqWZxpkz16DDrNNVVBoPZ0bmMTxyA8D99HFA61PaSAj8os31Hh2n
+	 7tvaF+hs1fdsw==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 0A91A88463;
+ by phobos.denx.de (Postfix) with ESMTPSA id E4B7588489;
  Thu, 16 May 2024 23:31:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1715895091;
- bh=oDSxTuf79fLRowIpiestT2AG8ilZpok83dYUYxndYzQ=;
+ s=phobos-20191101; t=1715895092;
+ bh=NO8hR/sogh2hQZJfCJJmJKisuxqmo8ynIzAj72CLee4=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=oPfx4qr3lOWSIvNRsmpFMBC5P5gdq6EfvSD7ajI9ESxgtSEgiZkJWjpvAErFtxuju
- KKh9AYKAHnMtRwesxag4lPwmCJnwFSKThZRNbGy5xMwp2gUgl8gGrlv0eXNE3L+Vcz
- VC1krI2fbCCr9H2KfeoNfKt0sW7hocEy5tpvF84qEfnk1EcVqDSOkky672AWV0fpaB
- b1KwXuEIOQ+H+8OC76yYMkJ70/vYTweDfr1cqHnDtRNCG9SN9S88G8GcV26lqyVDar
- S+uKDqttyrr3hEoCZJtu8pblVFu1EeEiY0cTdfoM1sQGEVjZbslKKmt+bpb20wjz45
- 2bBmOF4k+4sHA==
+ b=SzGz/Y/ffMstSsCYvWlZ3n1vyBeDqgZRmadpfUB+23Vhg1F6N6DtmJZ10dsk/geyz
+ 6Rp/BdqUlHDRJFQsVaulsAfEANLMOOeT+diMpz7u2k4zOnIYRRW98/YdH7aXWhRmUM
+ cTAiwBstQU4mwuMgr5JZgrYaseBFTFYXhGiToHdMYv+XCANHBSbf6B5qZDtT5U2HP6
+ LPvev0KSUEWvsRC4DVT1nDDTojsrajyKzngT8VIhdrhWp2Wvz063Ow7KSpAU1BGqPB
+ aznVzxrpSA3gW+j8gsLsVorp1xLNe8vrc0+OD62I06eXJqyrTARgiTDMZsCl5hFops
+ N3bGWvAz0tDaQ==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: anton.gres@ifm.com, ch@denx.de, Marek Vasut <marex@denx.de>,
@@ -55,10 +55,10 @@ Cc: anton.gres@ifm.com, ch@denx.de, Marek Vasut <marex@denx.de>,
  Stefan Eichenberger <stefan.eichenberger@toradex.com>,
  Stefano Babic <sbabic@denx.de>, Tim Harvey <tharvey@gateworks.com>,
  Tom Rini <trini@konsulko.com>, kernel@puri.sm, u-boot@dh-electronics.com
-Subject: [PATCH v3 3/4] ARM: dts: imx: Wrap i.MX8M binman SPL and FIT nodes in
- CST node if IMX_HAB enabled
-Date: Thu, 16 May 2024 23:28:41 +0200
-Message-ID: <20240516213036.89016-3-marex@denx.de>
+Subject: [PATCH v3 4/4] imx: hab: Use nxp_imx8mcst etype for i.MX8M flash.bin
+ signing
+Date: Thu, 16 May 2024 23:28:42 +0200
+Message-ID: <20240516213036.89016-4-marex@denx.de>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240516213036.89016-1-marex@denx.de>
 References: <20240516213036.89016-1-marex@denx.de>
@@ -80,9 +80,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In case CONFIG_IMX_HAB is enabled, extend the binman image description for
-all of i.MX8M{Q,M,N,P} with CST wrapper node. This way, if CONFIG_IMX_HAB
-is enabled, binman will be automatically used to sign SPL and fitImage.
+Update documentation and use nxp_imx8mcst binman etype for signing
+of flash.bin instead of previous horrible shell scripting.
 
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
@@ -105,958 +104,325 @@ Cc: kernel@puri.sm
 Cc: u-boot@dh-electronics.com
 Cc: u-boot@lists.denx.de
 ---
-V2: New patch
-V3: No change
+V2: Document the automatic signing in case CONFIG_IMX_HAB is enabled
+V3: Document configuration of imx8mcst
 ---
- arch/arm/dts/imx8mm-u-boot.dtsi | 195 ++++++++++++++++-------------
- arch/arm/dts/imx8mn-u-boot.dtsi | 209 ++++++++++++++++++--------------
- arch/arm/dts/imx8mp-u-boot.dtsi | 172 ++++++++++++++------------
- arch/arm/dts/imx8mq-u-boot.dtsi | 182 ++++++++++++++-------------
- 4 files changed, 424 insertions(+), 334 deletions(-)
+ doc/imx/habv4/csf_examples/mx8m/csf.sh        |  92 --------------
+ doc/imx/habv4/csf_examples/mx8m/csf_fit.txt   |  30 -----
+ doc/imx/habv4/csf_examples/mx8m/csf_spl.txt   |  33 -----
+ doc/imx/habv4/guides/mx8m_spl_secure_boot.txt | 116 +++++-------------
+ 4 files changed, 30 insertions(+), 241 deletions(-)
+ delete mode 100644 doc/imx/habv4/csf_examples/mx8m/csf.sh
+ delete mode 100644 doc/imx/habv4/csf_examples/mx8m/csf_fit.txt
+ delete mode 100644 doc/imx/habv4/csf_examples/mx8m/csf_spl.txt
 
-diff --git a/arch/arm/dts/imx8mm-u-boot.dtsi b/arch/arm/dts/imx8mm-u-boot.dtsi
-index b9b1193823a..c02e11def5f 100644
---- a/arch/arm/dts/imx8mm-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mm-u-boot.dtsi
-@@ -54,126 +54,151 @@
- 		};
- #endif
- 
--		binman_imx_spl: nxp-imx8mimage {
--			filename = "u-boot-spl-mkimage.bin";
--			nxp,boot-from = "sd";
--			nxp,rom-version = <1>;
-+#ifdef CONFIG_IMX_HAB
-+		nxp-imx8mcst@0 {
-+			filename = "u-boot-spl-mkimage.signed.bin";
- 			nxp,loader-address = <CONFIG_SPL_TEXT_BASE>;
-+			nxp,unlock;
- 			args;	/* Needed by mkimage etype superclass */
-+#endif
- 
--			section {
--				align = <4>;
--				align-size = <4>;
--				filename = "u-boot-spl-ddr.bin";
--				pad-byte = <0xff>;
+diff --git a/doc/imx/habv4/csf_examples/mx8m/csf.sh b/doc/imx/habv4/csf_examples/mx8m/csf.sh
+deleted file mode 100644
+index cd3b2614a2f..00000000000
+--- a/doc/imx/habv4/csf_examples/mx8m/csf.sh
++++ /dev/null
+@@ -1,92 +0,0 @@
+-#!/bin/sh
 -
--				u-boot-spl {
--					align-end = <4>;
--					filename = "u-boot-spl.bin";
--				};
-+			binman_imx_spl: nxp-imx8mimage {
-+				filename = "u-boot-spl-mkimage.bin";
-+				nxp,boot-from = "sd";
-+				nxp,rom-version = <1>;
-+				nxp,loader-address = <CONFIG_SPL_TEXT_BASE>;
-+				args;	/* Needed by mkimage etype superclass */
-+
-+				section {
-+					align = <4>;
-+					align-size = <4>;
-+					filename = "u-boot-spl-ddr.bin";
-+					pad-byte = <0xff>;
-+
-+					u-boot-spl {
-+						align-end = <4>;
-+						filename = "u-boot-spl.bin";
-+					};
- 
--				ddr-1d-imem-fw {
--					filename = "lpddr4_pmu_train_1d_imem.bin";
--					align-end = <4>;
--					type = "blob-ext";
--				};
-+					ddr-1d-imem-fw {
-+						filename = "lpddr4_pmu_train_1d_imem.bin";
-+						align-end = <4>;
-+						type = "blob-ext";
-+					};
- 
--				ddr-1d-dmem-fw {
--					filename = "lpddr4_pmu_train_1d_dmem.bin";
--					align-end = <4>;
--					type = "blob-ext";
--				};
-+					ddr-1d-dmem-fw {
-+						filename = "lpddr4_pmu_train_1d_dmem.bin";
-+						align-end = <4>;
-+						type = "blob-ext";
-+					};
- 
--				ddr-2d-imem-fw {
--					filename = "lpddr4_pmu_train_2d_imem.bin";
--					align-end = <4>;
--					type = "blob-ext";
--				};
-+					ddr-2d-imem-fw {
-+						filename = "lpddr4_pmu_train_2d_imem.bin";
-+						align-end = <4>;
-+						type = "blob-ext";
-+					};
- 
--				ddr-2d-dmem-fw {
--					filename = "lpddr4_pmu_train_2d_dmem.bin";
--					align-end = <4>;
--					type = "blob-ext";
-+					ddr-2d-dmem-fw {
-+						filename = "lpddr4_pmu_train_2d_dmem.bin";
-+						align-end = <4>;
-+						type = "blob-ext";
-+					};
- 				};
- 			};
-+#ifdef CONFIG_IMX_HAB
- 		};
- 
--		binman_imx_fit: fit {
--			description = "Configuration to load ATF before U-Boot";
--#ifndef CONFIG_IMX_HAB
--			fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
--#endif
--			fit,fdt-list = "of-list";
--			#address-cells = <1>;
-+		nxp-imx8mcst@1 {
-+			filename = "u-boot-fit.signed.bin";
-+			nxp,loader-address = <CONFIG_SPL_LOAD_FIT_ADDRESS>;
- #ifdef CONFIG_FSPI_CONF_HEADER
- 			offset = <0x58C00>;
- #else
- 			offset = <0x57c00>;
- #endif
- 
--			images {
--				uboot {
--					arch = "arm64";
--					compression = "none";
--					description = "U-Boot (64-bit)";
--					load = <CONFIG_TEXT_BASE>;
--					type = "standalone";
-+			args;	/* Needed by mkimage etype superclass */
-+#endif
- 
--					uboot-blob {
--						filename = "u-boot-nodtb.bin";
--						type = "blob-ext";
-+			binman_imx_fit: fit {
-+				description = "Configuration to load ATF before U-Boot";
-+#ifndef CONFIG_IMX_HAB
-+				fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
-+#endif
-+				fit,fdt-list = "of-list";
-+				#address-cells = <1>;
-+#ifdef CONFIG_FSPI_CONF_HEADER
-+				offset = <0x58C00>;
-+#else
-+				offset = <0x57c00>;
-+#endif
-+
-+				images {
-+					uboot {
-+						arch = "arm64";
-+						compression = "none";
-+						description = "U-Boot (64-bit)";
-+						load = <CONFIG_TEXT_BASE>;
-+						type = "standalone";
-+
-+						uboot-blob {
-+							filename = "u-boot-nodtb.bin";
-+							type = "blob-ext";
-+						};
- 					};
--				};
- 
- #ifndef CONFIG_ARMV8_PSCI
--				atf {
--					arch = "arm64";
--					compression = "none";
--					description = "ARM Trusted Firmware";
--					entry = <0x920000>;
--					load = <0x920000>;
--					type = "firmware";
+-# 0) Generate keys
+-#
+-# WARNING: ECDSA keys are only supported by HAB 4.5 and newer (i.e. i.MX8M Plus)
+-#
+-# cd /path/to/cst-3.3.1/keys/
+-#    ./hab4_pki_tree.sh -existing-ca n -use-ecc n -kl 4096 -duration 10 -num-srk 4 -srk-ca y
+-# cd /path/to/cst-3.3.1/crts/
+-#   ../linux64/bin/srktool -h 4 -t SRK_1_2_3_4_table.bin -e SRK_1_2_3_4_fuse.bin -d sha256 -c ./SRK1_sha256_4096_65537_v3_ca_crt.pem,./SRK2_sha256_4096_65537_v3_ca_crt.pem,./SRK3_sha256_4096_65537_v3_ca_crt.pem,./SRK4_sha256_4096_65537_v3_ca_crt.pem -f 1
 -
--					atf-blob {
--						filename = "bl31.bin";
--						type = "atf-bl31";
-+					atf {
-+						arch = "arm64";
-+						compression = "none";
-+						description = "ARM Trusted Firmware";
-+						entry = <0x920000>;
-+						load = <0x920000>;
-+						type = "firmware";
-+
-+						atf-blob {
-+							filename = "bl31.bin";
-+							type = "atf-bl31";
-+						};
- 					};
--				};
- #endif
- 
--				binman_fip: fip {
--					arch = "arm64";
--					compression = "none";
--					description = "Trusted Firmware FIP";
--					load = <0x40310000>;
--					type = "firmware";
--				};
-+					binman_fip: fip {
-+						arch = "arm64";
-+						compression = "none";
-+						description = "Trusted Firmware FIP";
-+						load = <0x40310000>;
-+						type = "firmware";
-+					};
- 
--				@fdt-SEQ {
--					compression = "none";
--					description = "NAME";
--					type = "flat_dt";
-+					@fdt-SEQ {
-+						compression = "none";
-+						description = "NAME";
-+						type = "flat_dt";
- 
--					uboot-fdt-blob {
--						filename = "u-boot.dtb";
--						type = "blob-ext";
-+						uboot-fdt-blob {
-+							filename = "u-boot.dtb";
-+							type = "blob-ext";
-+						};
- 					};
- 				};
--			};
- 
--			configurations {
--				default = "@config-DEFAULT-SEQ";
-+				configurations {
-+					default = "@config-DEFAULT-SEQ";
- 
--				@config-SEQ {
--					description = "NAME";
--					fdt = "fdt-SEQ";
--					firmware = "uboot";
-+					@config-SEQ {
-+						description = "NAME";
-+						fdt = "fdt-SEQ";
-+						firmware = "uboot";
- #ifndef CONFIG_ARMV8_PSCI
--					loadables = "atf";
-+						loadables = "atf";
- #endif
-+					};
- 				};
- 			};
-+#ifdef CONFIG_IMX_HAB
- 		};
-+#endif
- 	};
- };
- 
-diff --git a/arch/arm/dts/imx8mn-u-boot.dtsi b/arch/arm/dts/imx8mn-u-boot.dtsi
-index c9fb33cfb73..732191f5205 100644
---- a/arch/arm/dts/imx8mn-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mn-u-boot.dtsi
-@@ -103,147 +103,172 @@
- 		};
- #endif
- 
--		binman_imx_spl: nxp-imx8mimage {
--			filename = "u-boot-spl-mkimage.bin";
--			nxp,boot-from = "sd";
--			nxp,rom-version = <2>;
-+#ifdef CONFIG_IMX_HAB
-+		nxp-imx8mcst@0 {
-+			filename = "u-boot-spl-mkimage.signed.bin";
- 			nxp,loader-address = <CONFIG_SPL_TEXT_BASE>;
-+			nxp,unlock;
- 			args;	/* Needed by mkimage etype superclass */
-+#endif
- 
--			section {
--				filename = "u-boot-spl-ddr.bin";
--				pad-byte = <0xff>;
--				align-size = <4>;
--				align = <4>;
+-# 1) Build U-Boot (e.g. for i.MX8MM)
+-#
+-# cp -Lv /path/to/arm-trusted-firmware/build/imx8mm/release/bl31.bin .
+-# cp -Lv /path/to/firmware-imx-8.14/firmware/ddr/synopsys/ddr3* .
+-# make -j imx8mm_board_defconfig
+-# make -j`nproc` flash.bin
 -
--				u-boot-spl {
--					align-end = <4>;
--					filename = "u-boot-spl.bin";
--				};
-+			binman_imx_spl: nxp-imx8mimage {
-+				filename = "u-boot-spl-mkimage.bin";
-+				nxp,boot-from = "sd";
-+				nxp,rom-version = <2>;
-+				nxp,loader-address = <CONFIG_SPL_TEXT_BASE>;
-+				args;	/* Needed by mkimage etype superclass */
-+
-+				section {
-+					filename = "u-boot-spl-ddr.bin";
-+					pad-byte = <0xff>;
-+					align-size = <4>;
-+					align = <4>;
-+
-+					u-boot-spl {
-+						align-end = <4>;
-+						filename = "u-boot-spl.bin";
-+					};
- 
--				ddr-1d-imem-fw {
-+					ddr-1d-imem-fw {
- #ifdef CONFIG_IMX8M_LPDDR4
--					filename = "lpddr4_pmu_train_1d_imem.bin";
-+						filename = "lpddr4_pmu_train_1d_imem.bin";
- #elif CONFIG_IMX8M_DDR4
--					filename = "ddr4_imem_1d_201810.bin";
-+						filename = "ddr4_imem_1d_201810.bin";
- #else
--					filename = "ddr3_imem_1d.bin";
-+						filename = "ddr3_imem_1d.bin";
- #endif
--					type = "blob-ext";
--					align-end = <4>;
--				};
-+						type = "blob-ext";
-+						align-end = <4>;
-+					};
- 
--				ddr-1d-dmem-fw {
-+					ddr-1d-dmem-fw {
- #ifdef CONFIG_IMX8M_LPDDR4
--					filename = "lpddr4_pmu_train_1d_dmem.bin";
-+						filename = "lpddr4_pmu_train_1d_dmem.bin";
- #elif CONFIG_IMX8M_DDR4
--					filename = "ddr4_dmem_1d_201810.bin";
-+						filename = "ddr4_dmem_1d_201810.bin";
- #else
--					filename = "ddr3_dmem_1d.bin";
-+						filename = "ddr3_dmem_1d.bin";
- #endif
--					type = "blob-ext";
--					align-end = <4>;
--				};
-+						type = "blob-ext";
-+						align-end = <4>;
-+					};
- 
- #if defined(CONFIG_IMX8M_LPDDR4) || defined(CONFIG_IMX8M_DDR4)
--				ddr-2d-imem-fw {
-+					ddr-2d-imem-fw {
- #ifdef CONFIG_IMX8M_LPDDR4
--					filename = "lpddr4_pmu_train_2d_imem.bin";
-+						filename = "lpddr4_pmu_train_2d_imem.bin";
- #else
--					filename = "ddr4_imem_2d_201810.bin";
-+						filename = "ddr4_imem_2d_201810.bin";
- #endif
--					type = "blob-ext";
--					align-end = <4>;
--				};
-+						type = "blob-ext";
-+						align-end = <4>;
-+					};
- 
--				ddr-2d-dmem-fw {
-+					ddr-2d-dmem-fw {
- #ifdef CONFIG_IMX8M_LPDDR4
--					filename = "lpddr4_pmu_train_2d_dmem.bin";
-+						filename = "lpddr4_pmu_train_2d_dmem.bin";
- #else
--					filename = "ddr4_dmem_2d_201810.bin";
-+						filename = "ddr4_dmem_2d_201810.bin";
- #endif
--					type = "blob-ext";
--					align-end = <4>;
--				};
-+						type = "blob-ext";
-+						align-end = <4>;
-+					};
- #endif
-+				};
- 			};
-+
-+#ifdef CONFIG_IMX_HAB
- 		};
- 
--		binman_imx_fit: fit {
--			description = "Configuration to load ATF before U-Boot";
--#ifndef CONFIG_IMX_HAB
--			fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
--#endif
--			fit,fdt-list = "of-list";
--			#address-cells = <1>;
-+		nxp-imx8mcst@1 {
-+			filename = "u-boot-fit.signed.bin";
-+			nxp,loader-address = <CONFIG_SPL_LOAD_FIT_ADDRESS>;
- #ifdef CONFIG_FSPI_CONF_HEADER
- 			offset = <0x59000>;
- #else
- 			offset = <0x58000>;
- #endif
-+			args;	/* Needed by mkimage etype superclass */
-+#endif
- 
--			images {
--				uboot {
--					arch = "arm64";
--					compression = "none";
--					description = "U-Boot (64-bit)";
--					load = <CONFIG_TEXT_BASE>;
--					type = "standalone";
-+			binman_imx_fit: fit {
-+				description = "Configuration to load ATF before U-Boot";
-+#ifndef CONFIG_IMX_HAB
-+				fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
-+#endif
-+				fit,fdt-list = "of-list";
-+				#address-cells = <1>;
-+#ifdef CONFIG_FSPI_CONF_HEADER
-+				offset = <0x59000>;
-+#else
-+				offset = <0x58000>;
-+#endif
- 
--					uboot-blob {
--						filename = "u-boot-nodtb.bin";
--						type = "blob-ext";
-+				images {
-+					uboot {
-+						arch = "arm64";
-+						compression = "none";
-+						description = "U-Boot (64-bit)";
-+						load = <CONFIG_TEXT_BASE>;
-+						type = "standalone";
-+
-+						uboot-blob {
-+							filename = "u-boot-nodtb.bin";
-+							type = "blob-ext";
-+						};
- 					};
--				};
- 
- #ifndef CONFIG_ARMV8_PSCI
--				atf {
--					arch = "arm64";
--					compression = "none";
--					description = "ARM Trusted Firmware";
--					entry = <0x960000>;
--					load = <0x960000>;
--					type = "firmware";
+-# 2) Sign SPL and DRAM blobs
 -
--					atf-blob {
--						filename = "bl31.bin";
--						type = "atf-bl31";
-+					atf {
-+						arch = "arm64";
-+						compression = "none";
-+						description = "ARM Trusted Firmware";
-+						entry = <0x960000>;
-+						load = <0x960000>;
-+						type = "firmware";
-+
-+						atf-blob {
-+							filename = "bl31.bin";
-+							type = "atf-bl31";
-+						};
- 					};
--				};
- #endif
- 
--				binman_fip: fip {
--					arch = "arm64";
--					compression = "none";
--					description = "Trusted Firmware FIP";
--					load = <0x40310000>;
--					type = "firmware";
--				};
-+					binman_fip: fip {
-+						arch = "arm64";
-+						compression = "none";
-+						description = "Trusted Firmware FIP";
-+						load = <0x40310000>;
-+						type = "firmware";
-+					};
- 
--				@fdt-SEQ {
--					compression = "none";
--					description = "NAME";
--					type = "flat_dt";
-+					@fdt-SEQ {
-+						compression = "none";
-+						description = "NAME";
-+						type = "flat_dt";
- 
--					uboot-fdt-blob {
--						filename = "u-boot.dtb";
--						type = "blob-ext";
-+						uboot-fdt-blob {
-+							filename = "u-boot.dtb";
-+							type = "blob-ext";
-+						};
- 					};
- 				};
--			};
- 
--			configurations {
--				default = "@config-DEFAULT-SEQ";
-+				configurations {
-+					default = "@config-DEFAULT-SEQ";
- 
--				@config-SEQ {
--					description = "NAME";
--					fdt = "fdt-SEQ";
--					firmware = "uboot";
-+					@config-SEQ {
-+						description = "NAME";
-+						fdt = "fdt-SEQ";
-+						firmware = "uboot";
- #ifndef CONFIG_ARMV8_PSCI
--					loadables = "atf";
-+						loadables = "atf";
- #endif
-+					};
- 				};
- 			};
-+#ifdef CONFIG_IMX_HAB
- 		};
-+#endif
- 	};
- };
-diff --git a/arch/arm/dts/imx8mp-u-boot.dtsi b/arch/arm/dts/imx8mp-u-boot.dtsi
-index 8b5ac3faf1c..f2655a4d0c8 100644
---- a/arch/arm/dts/imx8mp-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mp-u-boot.dtsi
-@@ -86,110 +86,130 @@
- 	section {
- 		pad-byte = <0x00>;
- 
--		binman_imx_spl: nxp-imx8mimage {
--			filename = "u-boot-spl-mkimage.bin";
--			nxp,boot-from = "sd";
--			nxp,rom-version = <2>;
-+#ifdef CONFIG_IMX_HAB
-+		nxp-imx8mcst@0 {
-+			filename = "u-boot-spl-mkimage.signed.bin";
- 			nxp,loader-address = <CONFIG_SPL_TEXT_BASE>;
-+			nxp,unlock;
- 			args;	/* Needed by mkimage etype superclass */
-+#endif
- 
--			section {
--				filename = "u-boot-spl-ddr.bin";
--				pad-byte = <0xff>;
--				align-size = <4>;
--				align = <4>;
+-cp doc/imx/habv4/csf_examples/mx8m/csf_spl.txt csf_spl.tmp
+-cp doc/imx/habv4/csf_examples/mx8m/csf_fit.txt csf_fit.tmp
 -
--				u-boot-spl {
--					align-end = <4>;
--				};
-+			binman_imx_spl: nxp-imx8mimage {
-+				filename = "u-boot-spl-mkimage.bin";
-+				nxp,boot-from = "sd";
-+				nxp,rom-version = <2>;
-+				nxp,loader-address = <CONFIG_SPL_TEXT_BASE>;
-+				args;	/* Needed by mkimage etype superclass */
-+
-+				section {
-+					filename = "u-boot-spl-ddr.bin";
-+					pad-byte = <0xff>;
-+					align-size = <4>;
-+					align = <4>;
-+
-+					u-boot-spl {
-+						align-end = <4>;
-+					};
- 
--				ddr-1d-imem-fw {
--					filename = "lpddr4_pmu_train_1d_imem_202006.bin";
--					type = "blob-ext";
--					align-end = <4>;
--				};
-+					ddr-1d-imem-fw {
-+						filename = "lpddr4_pmu_train_1d_imem_202006.bin";
-+						type = "blob-ext";
-+						align-end = <4>;
-+					};
- 
--				ddr-1d-dmem-fw {
--					filename = "lpddr4_pmu_train_1d_dmem_202006.bin";
--					type = "blob-ext";
--					align-end = <4>;
--				};
-+					ddr-1d-dmem-fw {
-+						filename = "lpddr4_pmu_train_1d_dmem_202006.bin";
-+						type = "blob-ext";
-+						align-end = <4>;
-+					};
- 
--				ddr-2d-imem-fw {
--					filename = "lpddr4_pmu_train_2d_imem_202006.bin";
--					type = "blob-ext";
--					align-end = <4>;
--				};
-+					ddr-2d-imem-fw {
-+						filename = "lpddr4_pmu_train_2d_imem_202006.bin";
-+						type = "blob-ext";
-+						align-end = <4>;
-+					};
- 
--				ddr-2d-dmem-fw {
--					filename = "lpddr4_pmu_train_2d_dmem_202006.bin";
--					type = "blob-ext";
--					align-end = <4>;
-+					ddr-2d-dmem-fw {
-+						filename = "lpddr4_pmu_train_2d_dmem_202006.bin";
-+						type = "blob-ext";
-+						align-end = <4>;
-+					};
- 				};
- 			};
-+#ifdef CONFIG_IMX_HAB
- 		};
- 
--		binman_imx_fit: fit {
--			description = "Configuration to load ATF before U-Boot";
--#ifndef CONFIG_IMX_HAB
--			fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
--#endif
--			fit,fdt-list = "of-list";
--			#address-cells = <1>;
-+		nxp-imx8mcst@1 {
-+			filename = "u-boot-fit.signed.bin";
-+			nxp,loader-address = <CONFIG_SPL_LOAD_FIT_ADDRESS>;
- 			offset = <0x58000>;
-+			args;	/* Needed by mkimage etype superclass */
-+#endif
- 
--			images {
--				uboot {
--					description = "U-Boot (64-bit)";
--					type = "standalone";
--					arch = "arm64";
--					compression = "none";
--					load = <CONFIG_TEXT_BASE>;
+-# update File Paths from env vars
+-if ! [ -r $CSF_KEY ]; then
+-	echo "Error: \$CSF_KEY not found"
+-	exit 1
+-fi
+-if ! [ -r $IMG_KEY ]; then
+-	echo "Error: \$IMG_KEY not found"
+-	exit 1
+-fi
+-if ! [ -r $SRK_TABLE ]; then
+-	echo "Error: \$SRK_TABLE not found"
+-	exit 1
+-fi
+-sed -i "s:\$CSF_KEY:$CSF_KEY:" csf_spl.tmp
+-sed -i "s:\$IMG_KEY:$IMG_KEY:" csf_spl.tmp
+-sed -i "s:\$SRK_TABLE:$SRK_TABLE:" csf_spl.tmp
+-sed -i "s:\$CSF_KEY:$CSF_KEY:" csf_fit.tmp
+-sed -i "s:\$IMG_KEY:$IMG_KEY:" csf_fit.tmp
+-sed -i "s:\$SRK_TABLE:$SRK_TABLE:" csf_fit.tmp
 -
--					uboot_blob: blob-ext {
--						filename = "u-boot-nodtb.bin";
-+			binman_imx_fit: fit {
-+				description = "Configuration to load ATF before U-Boot";
-+#ifndef CONFIG_IMX_HAB
-+				fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
-+#endif
-+				fit,fdt-list = "of-list";
-+				#address-cells = <1>;
-+				offset = <0x58000>;
-+
-+				images {
-+					uboot {
-+						description = "U-Boot (64-bit)";
-+						type = "standalone";
-+						arch = "arm64";
-+						compression = "none";
-+						load = <CONFIG_TEXT_BASE>;
-+
-+						uboot_blob: blob-ext {
-+							filename = "u-boot-nodtb.bin";
-+						};
- 					};
--				};
- 
- #ifndef CONFIG_ARMV8_PSCI
--				atf {
--					description = "ARM Trusted Firmware";
--					type = "firmware";
--					arch = "arm64";
--					compression = "none";
--					load = <0x970000>;
--					entry = <0x970000>;
+-# update SPL Blocks
+-spl_block_base=$(printf "0x%x" $(( $(sed -n "/CONFIG_SPL_TEXT_BASE=/ s@.*=@@p" .config) - 0x40)) )
+-spl_block_size=$(printf "0x%x" $(stat -tc %s u-boot-spl-ddr.bin))
+-sed -i "/Blocks = / s@.*@  Blocks = $spl_block_base 0x0 $spl_block_size \"flash.bin\"@" csf_spl.tmp
 -
--					atf_blob: atf-blob {
--						filename = "bl31.bin";
--						type = "atf-bl31";
-+					atf {
-+						description = "ARM Trusted Firmware";
-+						type = "firmware";
-+						arch = "arm64";
-+						compression = "none";
-+						load = <0x970000>;
-+						entry = <0x970000>;
-+
-+						atf_blob: atf-blob {
-+							filename = "bl31.bin";
-+							type = "atf-bl31";
-+						};
- 					};
--				};
- #endif
- 
--				@fdt-SEQ {
--					description = "NAME";
--					type = "flat_dt";
--					compression = "none";
-+					@fdt-SEQ {
-+						description = "NAME";
-+						type = "flat_dt";
-+						compression = "none";
- 
--					blob-ext {
--						filename = "u-boot.dtb";
-+						blob-ext {
-+							filename = "u-boot.dtb";
-+						};
- 					};
- 				};
--			};
- 
--			configurations {
--				default = "@config-DEFAULT-SEQ";
-+				configurations {
-+					default = "@config-DEFAULT-SEQ";
- 
--				@config-SEQ {
--					description = "NAME";
--					fdt = "fdt-SEQ";
--					firmware = "uboot";
-+					@config-SEQ {
-+						description = "NAME";
-+						fdt = "fdt-SEQ";
-+						firmware = "uboot";
- #ifndef CONFIG_ARMV8_PSCI
--					loadables = "atf";
-+						loadables = "atf";
- #endif
-+					};
- 				};
- 			};
-+#ifdef CONFIG_IMX_HAB
- 		};
-+#endif
- 	};
- };
-diff --git a/arch/arm/dts/imx8mq-u-boot.dtsi b/arch/arm/dts/imx8mq-u-boot.dtsi
-index 72da674d245..e1cd6f8996d 100644
---- a/arch/arm/dts/imx8mq-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mq-u-boot.dtsi
-@@ -38,116 +38,136 @@
- 	section {
- 		pad-byte = <0x00>;
- 
--		binman_imx_spl: nxp-imx8mimage {
--			filename = "u-boot-spl-mkimage.bin";
--			nxp,boot-from = "sd";
--			nxp,rom-version = <1>;
-+#ifdef CONFIG_IMX_HAB
-+		nxp-imx8mcst@0 {
-+			filename = "u-boot-spl-mkimage.signed.bin";
- 			nxp,loader-address = <CONFIG_SPL_TEXT_BASE>;
-+			nxp,unlock;
- 			args;	/* Needed by mkimage etype superclass */
-+#endif
- 
--			section {
--				align = <4>;
--				align-size = <4>;
--				filename = "u-boot-spl-ddr.bin";
--				pad-byte = <0xff>;
+-# Generate CSF blob
+-cst -i csf_spl.tmp -o csf_spl.bin
 -
--				u-boot-spl {
--					align-end = <4>;
--					filename = "u-boot-spl.bin";
--				};
-+			binman_imx_spl: nxp-imx8mimage {
-+				filename = "u-boot-spl-mkimage.bin";
-+				nxp,boot-from = "sd";
-+				nxp,rom-version = <1>;
-+				nxp,loader-address = <CONFIG_SPL_TEXT_BASE>;
-+				args;	/* Needed by mkimage etype superclass */
-+
-+				section {
-+					align = <4>;
-+					align-size = <4>;
-+					filename = "u-boot-spl-ddr.bin";
-+					pad-byte = <0xff>;
-+
-+					u-boot-spl {
-+						align-end = <4>;
-+						filename = "u-boot-spl.bin";
-+					};
- 
--				ddr-1d-imem-fw {
--					filename = "lpddr4_pmu_train_1d_imem.bin";
--					align-end = <4>;
--					type = "blob-ext";
--				};
-+					ddr-1d-imem-fw {
-+						filename = "lpddr4_pmu_train_1d_imem.bin";
-+						align-end = <4>;
-+						type = "blob-ext";
-+					};
- 
--				ddr-1d-dmem-fw {
--					filename = "lpddr4_pmu_train_1d_dmem.bin";
--					align-end = <4>;
--					type = "blob-ext";
--				};
-+					ddr-1d-dmem-fw {
-+						filename = "lpddr4_pmu_train_1d_dmem.bin";
-+						align-end = <4>;
-+						type = "blob-ext";
-+					};
- 
--				ddr-2d-imem-fw {
--					filename = "lpddr4_pmu_train_2d_imem.bin";
--					align-end = <4>;
--					type = "blob-ext";
--				};
-+					ddr-2d-imem-fw {
-+						filename = "lpddr4_pmu_train_2d_imem.bin";
-+						align-end = <4>;
-+						type = "blob-ext";
-+					};
- 
--				ddr-2d-dmem-fw {
--					filename = "lpddr4_pmu_train_2d_dmem.bin";
--					align-end = <4>;
--					type = "blob-ext";
--				};
-+					ddr-2d-dmem-fw {
-+						filename = "lpddr4_pmu_train_2d_dmem.bin";
-+						align-end = <4>;
-+						type = "blob-ext";
-+					};
- 
--				signed-hdmi-imx8m {
--					filename = "signed_hdmi_imx8m.bin";
--					type = "blob-ext";
-+					signed-hdmi-imx8m {
-+						filename = "signed_hdmi_imx8m.bin";
-+						type = "blob-ext";
-+					};
- 				};
- 			};
-+#ifdef CONFIG_IMX_HAB
- 		};
- 
--		binman_imx_fit: fit {
--			description = "Configuration to load ATF before U-Boot";
-+		nxp-imx8mcst@1 {
-+			filename = "u-boot-fit.signed.bin";
-+			nxp,loader-address = <CONFIG_SPL_LOAD_FIT_ADDRESS>;
-+			offset = <0x58000>;
-+			args;	/* Needed by mkimage etype superclass */
-+#endif
-+
-+			binman_imx_fit: fit {
-+				description = "Configuration to load ATF before U-Boot";
- #ifndef CONFIG_IMX_HAB
--			fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
-+				fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
- #endif
--			#address-cells = <1>;
+-# Patch CSF blob into flash.bin
+-spl_csf_offset=$(xxd -s 24 -l 4 -e flash.bin | cut -d " " -f 2 | sed "s@^@0x@")
+-spl_bin_offset=$(xxd -s 4 -l 4 -e flash.bin | cut -d " " -f 2 | sed "s@^@0x@")
+-spl_dd_offset=$((${spl_csf_offset} - ${spl_bin_offset} + 0x40))
+-dd if=csf_spl.bin of=flash.bin bs=1 seek=${spl_dd_offset} conv=notrunc
 -
--			images {
--				uboot {
--					arch = "arm64";
--					compression = "none";
--					description = "U-Boot (64-bit)";
--					load = <CONFIG_TEXT_BASE>;
--					type = "standalone";
+-# 3) Sign u-boot.itb
 -
--					uboot-blob {
--						filename = "u-boot-nodtb.bin";
--						type = "blob-ext";
-+				#address-cells = <1>;
-+
-+				images {
-+					uboot {
-+						arch = "arm64";
-+						compression = "none";
-+						description = "U-Boot (64-bit)";
-+						load = <CONFIG_TEXT_BASE>;
-+						type = "standalone";
-+
-+						uboot-blob {
-+							filename = "u-boot-nodtb.bin";
-+							type = "blob-ext";
-+						};
- 					};
--				};
- 
- #ifndef CONFIG_ARMV8_PSCI
--				atf {
--					arch = "arm64";
--					compression = "none";
--					description = "ARM Trusted Firmware";
--					entry = <0x910000>;
--					load = <0x910000>;
--					type = "firmware";
+-# fitImage
+-fit_block_base=$(printf "0x%x" $(sed -n "/CONFIG_SPL_LOAD_FIT_ADDRESS=/ s@.*=@@p" .config) )
+-fit_block_offset=$(printf "0x%s" $(fdtget -t x u-boot.dtb /binman/imx-boot/uboot offset))
+-fit_block_size=$(printf "0x%x" $(( ( ( $(stat -tc %s u-boot.itb) + 0x1000 - 0x1 ) & ~(0x1000 - 0x1)) + 0x20 )) )
+-sed -i "/Blocks = / s@.*@  Blocks = $fit_block_base $fit_block_offset $fit_block_size \"flash.bin\"@" csf_fit.tmp
 -
--					atf-blob {
--						filename = "bl31.bin";
--						type = "blob-ext";
-+					atf {
-+						arch = "arm64";
-+						compression = "none";
-+						description = "ARM Trusted Firmware";
-+						entry = <0x910000>;
-+						load = <0x910000>;
-+						type = "firmware";
+-# IVT
+-ivt_ptr_base=$(printf "%08x" ${fit_block_base} | sed "s@\(..\)\(..\)\(..\)\(..\)@0x\4\3\2\1@")
+-ivt_block_base=$(printf "%08x" $(( ${fit_block_base} + ${fit_block_size} - 0x20 )) | sed "s@\(..\)\(..\)\(..\)\(..\)@0x\4\3\2\1@")
+-csf_block_base=$(printf "%08x" $(( ${fit_block_base} + ${fit_block_size} )) | sed "s@\(..\)\(..\)\(..\)\(..\)@0x\4\3\2\1@")
+-ivt_block_offset=$((${fit_block_offset} + ${fit_block_size} - 0x20))
+-csf_block_offset=$((${ivt_block_offset} + 0x20))
+-
+-echo "0xd1002041 ${ivt_block_base} 0x00000000 0x00000000 0x00000000 ${ivt_block_base} ${csf_block_base} 0x00000000" | xxd -r -p > ivt.bin
+-dd if=ivt.bin of=flash.bin bs=1 seek=${ivt_block_offset} conv=notrunc
+-
+-# Generate CSF blob
+-cst -i csf_fit.tmp -o csf_fit.bin
+-
+-# When loading flash.bin via USB, we must ensure that the file being
+-# served is as large as the target expects (see
+-# board_spl_fit_size_align()), otherwise the target will hang in
+-# rom_api_download_image() waiting for the remaining bytes.
+-#
+-# Note that in order for dd to actually extend the file, one must not
+-# pass conv=notrunc here. With a non-zero seek= argument, dd is
+-# documented to preserve the contents of the file seeked past; in
+-# particular, dd does not open the file with O_TRUNC.
+-CSF_SIZE=$(sed -n "/CONFIG_CSF_SIZE=/ s@.*=@@p" .config)
+-dd if=/dev/null of=csf_fit.bin bs=1 seek=$((CSF_SIZE - 0x20)) count=0
+-
+-# Patch CSF blob into flash.bin
+-dd if=csf_fit.bin of=flash.bin bs=1 seek=${csf_block_offset} conv=notrunc
+diff --git a/doc/imx/habv4/csf_examples/mx8m/csf_fit.txt b/doc/imx/habv4/csf_examples/mx8m/csf_fit.txt
+deleted file mode 100644
+index 97f3eea573b..00000000000
+--- a/doc/imx/habv4/csf_examples/mx8m/csf_fit.txt
++++ /dev/null
+@@ -1,30 +0,0 @@
+-[Header]
+-  Version = 4.3
+-  Hash Algorithm = sha256
+-  Engine = CAAM
+-  Engine Configuration = 0
+-  Certificate Format = X509
+-  Signature Format = CMS
+-
+-[Install SRK]
+-  # SRK_TABLE is full path to SRK_1_2_3_4_table.bin
+-  File = "$SRK_TABLE"
+-  Source index = 0
+-
+-[Install CSFK]
+-  # CSF_KEY is full path to CSF1_1_sha256_4096_65537_v3_usr_crt.pem
+-  File = "$CSF_KEY"
+-
+-[Authenticate CSF]
+-
+-[Install Key]
+-  Verification index = 0
+-  Target Index = 2
+-  # IMG_KEY is full path to IMG1_1_sha256_4096_65537_v3_usr_crt.pem
+-  File = "$IMG_KEY"
+-
+-[Authenticate Data]
+-  Verification index = 2
+-  # FIXME:
+-  # Line 1 -- fitImage
+-  Blocks = CONFIG_SPL_LOAD_FIT_ADDRESS 0x57c00 0xffff "flash.bin"
+diff --git a/doc/imx/habv4/csf_examples/mx8m/csf_spl.txt b/doc/imx/habv4/csf_examples/mx8m/csf_spl.txt
+deleted file mode 100644
+index 88fa420a5fa..00000000000
+--- a/doc/imx/habv4/csf_examples/mx8m/csf_spl.txt
++++ /dev/null
+@@ -1,33 +0,0 @@
+-[Header]
+-  Version = 4.3
+-  Hash Algorithm = sha256
+-  Engine = CAAM
+-  Engine Configuration = 0
+-  Certificate Format = X509
+-  Signature Format = CMS
+-
+-[Install SRK]
+-  # SRK_TABLE is full path to SRK_1_2_3_4_table.bin
+-  File = "$SRK_TABLE"
+-  Source index = 0
+-
+-[Install CSFK]
+-  # CSF_KEY is full path to CSF1_1_sha256_4096_65537_v3_usr_crt.pem
+-  File = "$CSF_KEY"
+-
+-[Authenticate CSF]
+-
+-[Unlock]
+-  Engine = CAAM
+-  Features = MID
+-
+-[Install Key]
+-  Verification index = 0
+-  Target Index = 2
+-  # IMG_KEY is full path to IMG1_1_sha256_4096_65537_v3_usr_crt.pem
+-  File = "$IMG_KEY"
+-
+-[Authenticate Data]
+-  Verification index = 2
+-  # FIXME: Adjust start (first column) and size (third column) here
+-  Blocks = 0x7e0fc0 0x0 0x306f0 "flash.bin"
+diff --git a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
+index e16e5410bd9..1eb1fb0aa61 100644
+--- a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
++++ b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
+@@ -121,6 +121,9 @@ build configuration:
+ - Defconfig:
+ 
+   CONFIG_IMX_HAB=y
++  CONFIG_FSL_CAAM=y
++  CONFIG_ARCH_MISC_INIT=y
++  CONFIG_SPL_CRYPTO=y
+ 
+ - Kconfig:
+ 
+@@ -131,92 +134,33 @@ build configuration:
+ 
+ The CSF contains all the commands that the HAB executes during the secure
+ boot. These commands instruct the HAB code on which memory areas of the image
+-to authenticate, which keys to install, use and etc.
+-
+-CSF examples are available under doc/imx/habv4/csf_examples/ directory.
+-
+-CSF "Blocks" line for csf_spl.txt can be generated as follows:
+-
+-```
+-spl_block_base=$(printf "0x%x" $(( $(sed -n "/CONFIG_SPL_TEXT_BASE=/ s@.*=@@p" .config) - 0x40)) )
+-spl_block_size=$(printf "0x%x" $(stat -tc %s u-boot-spl-ddr.bin))
+-sed -i "/Blocks = / s@.*@  Blocks = $spl_block_base 0x0 $spl_block_size \"flash.bin\"@" csf_spl.txt
+-```
+-
+-The resulting line looks as follows:
+-```
+-  Blocks = 0x7e0fc0 0x0 0x306f0 "flash.bin"
+-```
+-
+-The columns mean:
+-  - CONFIG_SPL_TEXT_BASE - 0x40 -- Start address of signed data, in DRAM
+-  - 0x0 -- Start address of signed data, in "flash.bin"
+-  - 0x306f0 -- Length of signed data, in "flash.bin"
+-  - Filename -- "flash.bin"
+-
+-To generate signature for the SPL part of flash.bin container, use CST:
+-```
+-cst -i csf_spl.tmp -o csf_spl.bin
+-```
+-
+-The newly generated CST blob has to be patched into existing flash.bin
+-container. Conveniently, flash.bin IVT contains physical address of the
+-CSF blob. Remember, the SPL part of flash.bin container is loaded by the
+-BootROM at CONFIG_SPL_TEXT_BASE - 0x40 , so the offset of CSF blob in
+-the fitImage can be calculated and inserted into the flash.bin in the
+-correct location as follows:
+-```
+-# offset = IVT_HEADER[6 = CSF address] - CONFIG_SPL_TEXT_BASE - 0x40
+-spl_csf_offset=$(xxd -s 24 -l 4 -e flash.bin | cut -d " " -f 2 | sed "s@^@0x@")
+-spl_bin_offset=$(xxd -s 4 -l 4 -e flash.bin | cut -d " " -f 2 | sed "s@^@0x@")
+-spl_dd_offset=$((${spl_csf_offset} - ${spl_bin_offset} + 0x40))
+-dd if=csf_spl.bin of=flash.bin bs=1 seek=${spl_dd_offset} conv=notrunc
+-```
+-
+-CSF "Blocks" line for csf_fit.txt can be generated as follows:
+-```
+-# fitImage
+-fit_block_base=$(printf "0x%x" $(sed -n "/CONFIG_SPL_LOAD_FIT_ADDRESS=/ s@.*=@@p" .config) )
+-fit_block_offset=$(printf "0x%s" $(fdtget -t x u-boot.dtb /binman/imx-boot/uboot offset))
+-fit_block_size=$(printf "0x%x" $(( ( ( $(stat -tc %s u-boot.itb) + 0x1000 - 0x1 ) & ~(0x1000 - 0x1)) + 0x20 )) )
+-sed -i "/Blocks = / s@.*@  Blocks = $fit_block_base $fit_block_offset $fit_block_size \"flash.bin\"@" csf_fit.tmp
+-```
+-
+-The fitImage part of flash.bin requires separate IVT. Generate the IVT and
+-patch it into the correct aligned location of flash.bin as follows:
+-```
+-# IVT
+-ivt_ptr_base=$(printf "%08x" ${fit_block_base} | sed "s@\(..\)\(..\)\(..\)\(..\)@0x\4\3\2\1@")
+-ivt_block_base=$(printf "%08x" $(( ${fit_block_base} + ${fit_block_size} - 0x20 )) | sed "s@\(..\)\(..\)\(..\)\(..\)@0x\4\3\2\1@")
+-csf_block_base=$(printf "%08x" $(( ${fit_block_base} + ${fit_block_size} )) | sed "s@\(..\)\(..\)\(..\)\(..\)@0x\4\3\2\1@")
+-ivt_block_offset=$((${fit_block_offset} + ${fit_block_size} - 0x20))
+-csf_block_offset=$((${ivt_block_offset} + 0x20))
+-
+-echo "0xd1002041 ${ivt_block_base} 0x00000000 0x00000000 0x00000000 ${ivt_block_base} ${csf_block_base} 0x00000000" | xxd -r -p > ivt.bin
+-dd if=ivt.bin of=flash.bin bs=1 seek=${ivt_block_offset} conv=notrunc
+-```
+-
+-To generate CSF signature for the fitImage part of flash.bin container, use CST:
+-```
+-cst -i csf_fit.tmp -o csf_fit.bin
+-```
+-
+-Finally, patch the CSF signature into the fitImage right past the IVT:
+-```
+-dd if=csf_fit.bin of=flash.bin bs=1 seek=${csf_block_offset} conv=notrunc
+-```
+-
+-The entire script is available in doc/imx/habv4/csf_examples/mx8m/csf.sh
+-and can be used as follows to modify flash.bin to be signed
+-(adjust paths as needed):
+-```
+-export CST_DIR=/usr/src/cst-3.3.1/
+-export CSF_KEY=$CST_DIR/crts/CSF1_1_sha256_4096_65537_v3_usr_crt.pem
+-export IMG_KEY=$CST_DIR/crts/IMG1_1_sha256_4096_65537_v3_usr_crt.pem
+-export SRK_TABLE=$CST_DIR/crts/SRK_1_2_3_4_table.bin
+-export PATH=$CST_DIR/linux64/bin:$PATH
+-/bin/sh doc/imx/habv4/csf_examples/mx8m/csf.sh
+-```
++to authenticate, which keys to install, use and etc. The CSF is generated
++using the CST Code Signing Tool based on input configuration file. This tool
++input configuration file is generated using binman, and the tool is invoked
++from binman as well.
 +
-+						atf-blob {
-+							filename = "bl31.bin";
-+							type = "blob-ext";
-+						};
- 					};
--				};
- #endif
++The SPL and fitImage sections of the generated image are signed separately.
++The signing is activated by wrapping SPL and fitImage sections into nxp-imx8mcst
++etype, which is done automatically in arch/arm/dts/imx8m{m,n,p,q}-u-boot.dtsi
++in case CONFIG_IMX_HAB Kconfig symbol is enabled.
++
++The nxp-imx8mcst etype is configurable using either DT properties or environment
++variables. The following DT properties and environment variables are supported.
++Note that environment variables override DT properties.
++
+++--------------------+-----------+------------------------------------------------------------------+
++| DT property        | Variable  | Description                                                      |
+++====================+===========+==================================================================+
++| nxp,loader-address |           | SPL base address                                                 |
+++--------------------+-----------+------------------------------------------------------------------+
++| nxp,srk-table      | SRK_TABLE | full path to SRK_1_2_3_4_table.bin                               |
+++--------------------+-----------+------------------------------------------------------------------+
++| nxp,csf-crt        | CSF_KEY   | full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem |
+++--------------------+-----------+------------------------------------------------------------------+
++| nxp,img-crt        | IMG_KEY   | full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem |
+++--------------------+-----------+------------------------------------------------------------------+
++
++Build of flash.bin target then produces a signed flash.bin automatically.
  
--				fdt {
--					compression = "none";
--					description = "NAME";
--					type = "flat_dt";
-+					fdt {
-+						compression = "none";
-+						description = "NAME";
-+						type = "flat_dt";
- 
--					uboot-fdt-blob {
--						filename = "u-boot.dtb";
--						type = "blob-ext";
-+						uboot-fdt-blob {
-+							filename = "u-boot.dtb";
-+							type = "blob-ext";
-+						};
- 					};
- 				};
--			};
- 
--			configurations {
--				default = "conf";
-+				configurations {
-+					default = "conf";
- 
--				conf {
--					description = "NAME";
--					fdt = "fdt";
--					firmware = "uboot";
-+					conf {
-+						description = "NAME";
-+						fdt = "fdt";
-+						firmware = "uboot";
- #ifndef CONFIG_ARMV8_PSCI
--					loadables = "atf";
-+						loadables = "atf";
- #endif
-+					};
- 				};
- 			};
-+#ifdef CONFIG_IMX_HAB
- 		};
-+#endif
- 	};
- };
+ 1.4 Closing the device
+ -----------------------
 -- 
 2.43.0
 
