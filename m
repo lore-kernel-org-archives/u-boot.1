@@ -4,80 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2628EC25B74
-	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 12:10:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BB58C25B74
+	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 12:50:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64FCD87FF0;
-	Thu, 16 May 2024 14:10:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C0F678704E;
+	Thu, 16 May 2024 14:50:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=edgeble.ai
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XDKhSVVR";
+	dkim=pass (2048-bit key; unprotected) header.d=edgeble-ai.20230601.gappssmtp.com header.i=@edgeble-ai.20230601.gappssmtp.com header.b="o0CG+yRk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF70387FF0; Thu, 16 May 2024 14:10:33 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id CF68A8824A; Thu, 16 May 2024 11:02:58 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5350F87FA7
- for <u-boot@lists.denx.de>; Thu, 16 May 2024 14:10:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 84AA088258
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 11:02:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-6f0ef6bee72so54171a34.0
- for <u-boot@lists.denx.de>; Thu, 16 May 2024 05:10:30 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=edgeble.ai
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=anand@edgeble.ai
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-23bd61fbd64so228608fac.0
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 02:02:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1715861429; x=1716466229; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=edgeble-ai.20230601.gappssmtp.com; s=20230601; t=1715850173; x=1716454973;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9ekDMBWUi6SQQXQganpdwgbyJ1jrgAB49LYDyQjqULg=;
- b=XDKhSVVRMPtqQ44oza2iqbvEvp8wc7+1ZCeLCfxi+EMKOdtztcQTXWiuWECsYJUs+o
- m6CLK6stbXGZV/h7wXXkQZdjoqRZa5dmuetJ+GnE+cHRBvwRoNNld9nBlHfXQKJ8eBJQ
- GAfybQqYyLhlbA24YpEXanCQ65et5mL5s0WkHVXs8n109+UYjkwtf+CzbMtP//trOgJV
- koLKUrKcHCJcJZjtGe6FslkqKR9sNSbWzz7Alo9CAILFOA2K4tR+XT+v2vqjAMjsOYid
- AXWV8CqY01sQ7dVxE+peWOETRPPlJMtfTm0fM2c7zY1u1bn8eW0rvOnuhPM8L00V0G9H
- mkZA==
+ bh=9EE9IKbI7WW+fYz9MVqHAZCyMbUhpRk4cuLFOHdNjWk=;
+ b=o0CG+yRku8/qEjReE7+f/9SmyMxhIYlMF+GV8yXEJkIibEcaXTv+98NurkSH3/7m8l
+ SdZBhdy8uLO3w4ZYIN/WI64BSg1eLqUjYYGyQzveMBjkZza8e+2Lg8n+MQ3J94R3dhee
+ 8La6FESzrhw2oCFtcYRy32lrqk6q6Q5IrbgwW8lcBGH0mvTj/XgU+2qb9bDff+KOmu4r
+ QjX9baFrak38nbSFovGZMp3vz/Q7f4MmHlq0kHq2ps2uZaRyslgdfugaNA0hcecJoHI0
+ kavbf5kvS6Cj2M7m8qmJVg9MrEa9nE+rEP3Hl9pP8BYHUcGdH1WkSeaW/49A7o/wH8tf
+ dORw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715861429; x=1716466229;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1715850173; x=1716454973;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9ekDMBWUi6SQQXQganpdwgbyJ1jrgAB49LYDyQjqULg=;
- b=EBdIDKZAdKGBGkjHTpawnoaGQTJ7E2qhpAysmPkSJOLZ8Kk0WSpayZJLDB7ydM8iEK
- xwlnPVssuVIJfPt1VVb09QIgEHGVZ4qVGJbC9nxgvWEjDWycfBmGPjei1QLrbdiemr/7
- GjW63E10nCal/seKSe/X8ZEmUydVGUEobnSrdiRT3wMGTxTWDsI6sMBF+p7V4cxwFttl
- bQw+ijRB5Q+XKWk/Uy8y00mU61u8a8Zju7WTKZUUA903fjmH7d41Dea75qgmkNIi33GW
- T1W/qPEXC0p+jvIJcWKeUcAV4rqYncCt8lkjqVrl1Y2y1xkmvhs2ZcuWeXsHDCuuHrzT
- gBBQ==
-X-Gm-Message-State: AOJu0Yy3gXUOcICR/PMy7VqQPr493sTNa9pEl8nKKQr3194JBroCkv6m
- xot8Q41VxNGwImhy3OOwoCKlQrKBrJ8ci+qyGuY2mehL88CzMpxb5ldj1U5tsFuW+RP6E0uVmOY
- ZQT0iTMWT3b5FzkMGlcaW2HkMioG6anjpUdDbiw==
-X-Google-Smtp-Source: AGHT+IEWt+pyVcy1XYvOzoqrUN/C+sKYjge/seaWrHJsuWnWSub1hELWrTW3lgjopF4tOOPboy7EoyhqQjhyuM/e+wo=
-X-Received: by 2002:a05:6808:253:b0:3c8:6dad:cad8 with SMTP id
- 5614622812f47-3c997057154mr19772432b6e.21.1715861429027; Thu, 16 May 2024
- 05:10:29 -0700 (PDT)
+ bh=9EE9IKbI7WW+fYz9MVqHAZCyMbUhpRk4cuLFOHdNjWk=;
+ b=NqQ5RlyTLDxeyXpYdGap8wooGe2cVORuvEXDnQbhJwdY7Kx8/igbmpxapNOBHzuWob
+ 4oQEoXGJPb1gCnYLPLypkXzWFoNFBvRSEHafYQzE8tvMzSoh8YMBcsAdzSeqGVBNSkUz
+ /geXgVfC2UJmXIJwEq33bJTm/ysd4p1jlP2m2BTlGzRibAdIXGRUUCNdspRkyydInJMA
+ +FP1y5eIOD+lH3fs79cV+aBOFnYYQZqM9TquSPku+vzttDfx5FF/BWFWBGHmvyi9hMcr
+ dm0B5KchKf6RhCxpIs+i3jISd2F9DiK+5jHl8SHmtYgBJ2d0WbpXPcVZoHIETxsxdeMJ
+ Cz4A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXE0NnhjuNesofsqmN91DQp+BEvP86TTVoDdxfS1NnaVhMdV7qUfywXc0xPt2MtxM+h3YG9awDTUGXQ27XwBkaFytkYEQ==
+X-Gm-Message-State: AOJu0YzoXtyWsClyqe+xPZWQxF/BNhx/go/xeHni7cDn6iZCKHKeXDcE
+ xnbWBiDRa4sQkWjnhJmLcqFMIA1KQtd1kPOKB+ta3s/L4L9RzJ43NEMcvM7w9g6ZZX6YtJtHchg
+ m
+X-Google-Smtp-Source: AGHT+IFEqCEUROOrFC5KWkQkosbNTPq5SqUhNJSxZxSkpzsgx3ZnzI+sXTDxLrqIp3g8oAZ/HKX8aQ==
+X-Received: by 2002:a05:6870:a44c:b0:238:c6c2:2f1f with SMTP id
+ 586e51a60fabf-2417231344bmr21154284fac.0.1715850173170; 
+ Thu, 16 May 2024 02:02:53 -0700 (PDT)
+Received: from localhost.localdomain ([113.30.217.222])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-6584e7897bdsm1325189a12.21.2024.05.16.02.02.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 16 May 2024 02:02:52 -0700 (PDT)
+From: Anand Moon <anand@edgeble.ai>
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>
+Cc: Anand Moon <anand@edgeble.ai>, Jagan Teki <jagan@edgeble.ai>,
+ u-boot@lists.denx.de
+Subject: [PATCH v1 1/9] rockchip: RK3328: Read the reset cause from clock
+ reset unit for RK3328 SoC
+Date: Thu, 16 May 2024 08:59:01 +0000
+Message-ID: <20240516090031.2373-2-anand@edgeble.ai>
+X-Mailer: git-send-email 2.45.0
+In-Reply-To: <20240516090031.2373-1-anand@edgeble.ai>
+References: <20240516090031.2373-1-anand@edgeble.ai>
 MIME-Version: 1.0
-References: <20240513-boston-v1-0-fac96938417e@flygoat.com>
- <20240513-boston-v1-12-fac96938417e@flygoat.com>
- <CAFA6WYPapa8PUqOQ-wJRkD4bOfX+2eBCk_5voamQB-XbAhhBcg@mail.gmail.com>
- <0d2fd774-7f63-4b3b-abea-6dda6a9159cd@app.fastmail.com>
-In-Reply-To: <0d2fd774-7f63-4b3b-abea-6dda6a9159cd@app.fastmail.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Thu, 16 May 2024 17:40:17 +0530
-Message-ID: <CAFA6WYP_hrZ2g4i4kiOdnk_BkXkn_Cg7bD1_2a18T3GsC3rBaA@mail.gmail.com>
-Subject: Re: [PATCH 12/13] MIPS: boston: Migrate to OF_UPSTREAM
-To: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Cc: u-boot@lists.denx.de, Michal Simek <michal.simek@amd.com>, 
- Tom Rini <trini@konsulko.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- "paulburton@kernel.org" <paulburton@kernel.org>, Simon Glass <sjg@chromium.org>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 16 May 2024 14:50:16 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,47 +99,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 16 May 2024 at 17:29, Jiaxun Yang <jiaxun.yang@flygoat.com> wrote:
->
->
->
-> =E5=9C=A82024=E5=B9=B45=E6=9C=8814=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8A=
-=E5=8D=886:45=EF=BC=8CSumit Garg=E5=86=99=E9=81=93=EF=BC=9A
-> > Hi Jiaxun,
-> >
-> [...]
-> >> @@ -0,0 +1,10 @@
-> >> +// SPDX-License-Identifier: GPL-2.0+
-> >> +
-> >> +&plat_regs {
-> >> +       compatible =3D "img,boston-platform-regs", "syscon", "simple-m=
-fd";
-> >> +       bootph-all;
-> >> +};
-> >> +
-> >> +&clk_boston {
-> >> +       bootph-all;
-> >> +};
-> >
-> > You can try to push these overrides to upstream DTS as well, so you
-> > won't have to maintain them in U-Boot.
->
-> Hi Sumit,
->
-> Thanks for your comments! For the compatible override, I already sent
-> patch to upstream. However, I have a question, Can we really do bootph-al=
-l
-> in linux upstream?
+Read the reset cause from clock reset unit for RK3328 SoC.
 
-Yes.
+Cc: Jagan Teki <jagan@edgeble.ai>
+Signed-off-by: Anand Moon <anand@edgeble.ai>
+---
+ arch/arm/mach-rockchip/cpu-info.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
->
-> I don't think it's documented in upstream dt bindings.
->
+diff --git a/arch/arm/mach-rockchip/cpu-info.c b/arch/arm/mach-rockchip/cpu-info.c
+index 14c7331e1a..fce4bd7541 100644
+--- a/arch/arm/mach-rockchip/cpu-info.c
++++ b/arch/arm/mach-rockchip/cpu-info.c
+@@ -8,12 +8,17 @@
+ #include <init.h>
+ #include <asm/arch-rockchip/clock.h>
+ #include <asm/arch-rockchip/cru.h>
++#if IS_ENABLED(CONFIG_ROCKCHIP_RK3328)
++#include <asm/arch-rockchip/cru_rk3328.h>
++#endif
+ #include <asm/arch-rockchip/hardware.h>
+ #include <linux/err.h>
+ 
+ char *get_reset_cause(void)
+ {
+-	struct rockchip_cru *cru = rockchip_get_cru();
++#if IS_ENABLED(CONFIG_ROCKCHIP_RK3328)
++	struct rk3328_cru *cru = rockchip_get_cru();
++#endif
+ 	char *cause = NULL;
+ 
+ 	if (IS_ERR(cru))
+-- 
+2.45.0
 
-It has been documented as part of core schema DT bindings here [1].
-
-[1] https://github.com/devicetree-org/dt-schema/blob/main/dtschema/schemas/=
-bootph.yaml
-
--Sumit
