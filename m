@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7709BC25B79
-	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 09:15:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F66BC25B79
+	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 09:16:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C4AD188027;
-	Thu, 16 May 2024 11:15:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 356F88827D;
+	Thu, 16 May 2024 11:15:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="rQSb3mv7";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="r9mKMqN7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 799F5882D9; Thu, 16 May 2024 11:15:49 +0200 (CEST)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
+ id C47858704E; Thu, 16 May 2024 11:15:52 +0200 (CEST)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6623B87F52
+ by phobos.denx.de (Postfix) with ESMTPS id E81D88826D
  for <u-boot@lists.denx.de>; Thu, 16 May 2024 11:15:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-51f1bf83f06so640873e87.1
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-34e0d47bd98so5040372f8f.0
  for <u-boot@lists.denx.de>; Thu, 16 May 2024 02:15:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1715850943; x=1716455743;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1715850944; x=1716455744;
  darn=lists.denx.de; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=fBHt+AeSZ0ZZnxdZx32ciK+E5pQ2eTIpHeo7P14lknQ=;
- b=rQSb3mv7GapbWE8yUvUpdoj/QvwZrU2tk6BP2rYM1mcvlj6NjebfcVr5ZQcyZMV5Ai
- WwIZ19klcIqPpFR5JFNK4rV0PD4PqaLiVl+A90Qm+eKm25oig7KWLhVyDp92Olg1s6oa
- jkZ/RhG17sxrDMalO6eupq9nTdrU2mVtC9MmRPUCkBNXxgCJFuCT3z5z7aHaTi0vgQVL
- Igh5VTtfvMOAHvJ85EKaotbDomSwDlyA5Om8tJ1Sj1IjOYtI1V8uiiwM2i44D3eVv4tY
- G+cRdaSa+d1JyM2fbrUY3izo3Rmzsw+VQOYmU62t4dX4D0toEB2wCGVQpHVld7TKB8tf
- 8tSw==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=5sglo65XMHmczjFUKMb7iW2SnGAG9MHSaIcE86hL9Y4=;
+ b=r9mKMqN70nWP40glBX9SujZqPZMpF0jS/dAk1K1PQRWsQA5MB6TCgrHRSh6PZPWKSY
+ SaTJjXjVBErDnxWCdIfsXNgdZELmgECkqxA1jbxHUc3qhA4GyupAFkA40EYrWnlSXbbs
+ nLlifeE/ezMm0IJKAmwSpBf7T6A8eCl9XV9214R4uN1OlTN2tPz9uYer9kQMFBFQz/zd
+ OSncro+7w8+VmZHvz3FeXczooNqiWCwPUOevBbtmxIs6su/TIxTtwsv5IV9Riy2fwFqh
+ 6OvD1gJ2G8pF//v6gDEqRTwahT9qrpfSh1D/D1O9aUtnYyUtoo59pNWXy1j90NAA1yRm
+ qKJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715850943; x=1716455743;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fBHt+AeSZ0ZZnxdZx32ciK+E5pQ2eTIpHeo7P14lknQ=;
- b=Kxx8RZhboMMQvK7Z+yyD2a+v4IcwU3Mem9j6K0OnzCFWho2+779XiANc/s6FjiwQOq
- paqmqin2YuYHMEaya1riLBuPTiRrjT9pU/8AwaqjMDWOttPQ3LaPB79Og+PD5kbSdxj1
- 4zcsEhyjnprO2IYzJiJmdPNjDfYOC5hpUNdhy6hv+lMx3yzQiQV2pfDjlFN/2JNFO8Lc
- EfIkkKhQA2StiBk3wx94neZmT/wxUtmiTWdcDCAr6pmPryUhm5yHeQWUHCSAjyUgH8QZ
- jC7pP4hJI4APvr14M6wUwqGglUHSoAAOAUI+a51O2lxBaV/9kqXW5Y47mLSHenIfcyFS
- UxuQ==
+ d=1e100.net; s=20230601; t=1715850944; x=1716455744;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=5sglo65XMHmczjFUKMb7iW2SnGAG9MHSaIcE86hL9Y4=;
+ b=Nce80igupKEf/4BASLtQKRerGwJ7Q6Q1E56xfOLqTHxSktm0cwyiYiRDkljGWi86gF
+ WIHterkmdxf1Vjv6paMJPJ0iKNLHHBM7hO1Dgn0S+lhq+hTTRezLAQkYXCzNW2qi8I+D
+ z/khQMCTZMB4o0hdU5BvF69aSYuRf0tbxPJpvsAdA4Fw2CaiUZmAR+lbQveBjL6zu8g+
+ Sffgv8oyril8ZlH1SDQ4F1MbUQUVQeVATpE/dJSOp6usRYmLwRnBmJ2xtB7erV5yzaoQ
+ opNZ6UxRaA7fvYbrvkJmqTG2vMddtyp4V0VtLteOvKmH6zgGaQODP0X/m2PhbXrDQ1Pj
+ k2KA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUkXVKHnT81ganC35gJuscwyQKxKJ8YCeIFPt7Hkxq0EVDEHfwXlanlVZmudkne6CO3U8MprqRfE4mCLqSMysPrmcHWGQ==
-X-Gm-Message-State: AOJu0YwVgwsVgu5HK8TM9HxvT9fmmJM88y27ItifSfAEJIj3QzzOgPrc
- SWfJfiynaEI7KBjrMfVmO0the07accpriT02JrS0kfpbTlyKYkPvQmKPUvSSvv0=
-X-Google-Smtp-Source: AGHT+IGWGx9OSYgDw82SCVWyEI2TIzWMFg6d50osMRVtoxmITp9CKsu+RDR1Fzunx6dLB0vO3YvrOQ==
-X-Received: by 2002:ac2:4a6c:0:b0:51d:4c0a:a512 with SMTP id
- 2adb3069b0e04-52210273e3cmr11099714e87.68.1715850942584; 
- Thu, 16 May 2024 02:15:42 -0700 (PDT)
+ AJvYcCUKYYml9X1XT6M2TVbjHl19Mxa+kS84/kaimCqVLcRgdCSBzcOAXAmCtEfw0EzbWUcXZq3vt/Zjr6v+FA5AiPAvkqRQTw==
+X-Gm-Message-State: AOJu0YwyiWy7dbFc+dR6UosejxIB4fMHYeNtyf8w54O40u/pl3N10Jmt
+ 9fR7MYTzNJUf2IuFji+SrR2ayHK4Bq6hKCoJP9PKX+3pKYFcWS41g2f+UvndQWQ=
+X-Google-Smtp-Source: AGHT+IGK1cEEkH3GlNIF0yd3XjULdBjlsSn/ZSLpor+dalMqwgZ0T8cvz6Ns1qivtqSVM8GRyCFsAA==
+X-Received: by 2002:adf:ffcf:0:b0:34a:4b4b:7f4b with SMTP id
+ ffacd0b85a97d-350182861d4mr19877928f8f.19.1715850944354; 
+ Thu, 16 May 2024 02:15:44 -0700 (PDT)
 Received: from groot.home ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-351d95d47e7sm1072603f8f.117.2024.05.16.02.15.41
+ ffacd0b85a97d-351d95d47e7sm1072603f8f.117.2024.05.16.02.15.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 May 2024 02:15:42 -0700 (PDT)
+ Thu, 16 May 2024 02:15:43 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Subject: [v2][PATCH 0/2] MAINTAINERS: updates for fastboot and USB gadget
-Date: Thu, 16 May 2024 11:15:40 +0200
-Message-Id: <20240516-gadget-maintainer-v2-0-23cc916df434@baylibre.com>
+Date: Thu, 16 May 2024 11:15:41 +0200
+Subject: [v2][PATCH 1/2] MAINTAINERS: add tree link for fastboot
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIALzORWYC/32NQQrCMBBFr1JmbWQSIqIr7yFdJOmkHbCtTEKwl
- Nzd2AO4+Iv34b+/QyJhSnDvdhAqnHhdGphTB2Fyy0iKh8Zg0Fi8aKtGN4yU1ex4yS0kKkSLMUT
- jnbfQdm+hyJ/D+ewbT5zyKttxUfSv/WcrWqHy+orR3PQQEB/ebS/2QuewztDXWr/YlXUPtQAAA
- A==
+Message-Id: <20240516-gadget-maintainer-v2-1-23cc916df434@baylibre.com>
+References: <20240516-gadget-maintainer-v2-0-23cc916df434@baylibre.com>
+In-Reply-To: <20240516-gadget-maintainer-v2-0-23cc916df434@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>
 Cc: Lukasz Majewski <lukma@denx.de>, u-boot@lists.denx.de, 
  Mattijs Korpershoek <mkorpershoek@baylibre.com>
@@ -97,40 +95,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I've noticed that I'm missing quite some USB gadget patches such as [1]
-since I'm not always cc'ed.
+Fastboot patches go through the u-boot-dfu tree.
 
-With Marek, we agreed on the following split:
-- I take care of USB gadget side
-- Marek handles the rest
-
-Update the maintainers file to make sure I get included on gadget
-related patches.
-
-While at it, also update FASTBOOT entry to point towards the u-boot-dfu
-tree.
-
-[1] https://lore.kernel.org/all/20240412202611.3565052-1-alexander.sverdlin@siemens.com/
+Add a link in the maintainers file for it.
 
 Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 ---
-Changes in v2:
-- Updated commit message (s/usb/USB) for patch 2
-- Added ch9 include to USB gadget list
-- Link to v1: https://lore.kernel.org/r/20240514-gadget-maintainer-v1-0-b170f291dc00@baylibre.com
+ MAINTAINERS | 1 +
+ 1 file changed, 1 insertion(+)
 
----
-Mattijs Korpershoek (2):
-      MAINTAINERS: add tree link for fastboot
-      MAINTAINERS: add USB gadget regex to u-boot-dfu tree
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 6853288975c0..05217db79f7e 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1118,6 +1118,7 @@ F:	test/py/tests/test_event_dump.py
+ FASTBOOT
+ M:	Mattijs Korpershoek <mkorpershoek@baylibre.com>
+ S:	Maintained
++T:	git https://source.denx.de/u-boot/custodians/u-boot-dfu.git
+ F:	cmd/fastboot.c
+ F:	doc/android/fastboot*.rst
+ F:	include/fastboot.h
 
- MAINTAINERS | 4 ++++
- 1 file changed, 4 insertions(+)
----
-base-commit: c8ffd1356d42223cbb8c86280a083cc3c93e6426
-change-id: 20240514-gadget-maintainer-cf40fcf2bab4
-
-Best regards,
 -- 
-Mattijs Korpershoek <mkorpershoek@baylibre.com>
+2.44.0
 
