@@ -4,165 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9AD6C25B74
-	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 09:50:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98B94C25B74
+	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 10:13:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0932E8827D;
-	Thu, 16 May 2024 11:50:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id E853788193;
+	Thu, 16 May 2024 12:13:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="P8+zmRxQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="apoZc8df";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 277C688293; Thu, 16 May 2024 11:50:18 +0200 (CEST)
-Received: from EUR02-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur02on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2607::601])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 802348825A; Thu, 16 May 2024 12:13:04 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3E13880DB
- for <u-boot@lists.denx.de>; Thu, 16 May 2024 11:50:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 19F21880DB
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 12:13:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=UbJydH8DvOqVlFHxUl8aRk5682NL0EIZR0llmcGa9SY4UIJVGyWgxFdQ6HavVS5QoD7wgyuRTRIzqpsAowTcxjVgaBodeoPNKiiIUR6WyCWx1OmZurCT6zKEhlLitYqI4bYxhji43yKaLvt0cvnpzRJfPXgy0/eotoqlrRQSl5huWMDXhD+Aac0Boz9QNF5dnVGqeVtC8s0M5TPKs8p8dhNbI6Z7QxV8VC/FZIsiuSQW15eRNh/5ffvKZo3Q7NBwWjcVGdXwHGzpl0jKcDsoZ4kGyLBjdBcrU6tD1ISoYqJsZpOspxwCG/T3stdwvYOdmntBjcIPd2mZ4MB+2SgNPw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bG3Z4Tt/j7AENAm+mAqiPre3KjfWvuD0bXdCTJFAi5E=;
- b=GDlNSvmOFp9ykVzrPllUTt1KUKYjs30AEua3gavGA2VHv+ei9hB7Dul9qz+d4XAtS0K2NEBxaf1HF3x8ej3I3qdfZWeU2C53mutFqN5GLndLdxpG8xfsqsUIvuM+8UfkqPiGCH1GLu7K48PpoBycfuno4ZhFkz8UNKrj+d7+pF5XC0Xkm3cjK6U3m0XZ7kMC39gXQxKzRMZDP2eiPMxnBhrug+v3ZeoyFfN9XwR88dCX1kAFCrPVZB/a9I4HDCwIn7MimYwvWJ6fA3jNUze9K7uj2YhNPlYAddaN6B/5gaqrurC/iPL33reD27I1ouHdW9ckdZQjcb+chkb4ruxWpA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bG3Z4Tt/j7AENAm+mAqiPre3KjfWvuD0bXdCTJFAi5E=;
- b=P8+zmRxQYIxa7/88ykjsO/FIAliT2vCI9byIOYwQIv85FXzlOdiz6IQ34wZCWH32KiVaHpVaBR0VDSzIvo0rSCnKehexEZ9C2ZrLI/YVd1mBU80HD9Ouzkb9LLUYheF/0zb/FIlx+Lc5NWFjV9FURtTmyYi5G4mlCaOWRg9/bN4=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
- by DU4PR10MB8322.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:566::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7587.27; Thu, 16 May
- 2024 09:50:14 +0000
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::9fcc:5df3:197:6691]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::9fcc:5df3:197:6691%3]) with mapi id 15.20.7544.052; Thu, 16 May 2024
- 09:50:14 +0000
-Message-ID: <aa29ae8a-ca23-4139-8d8b-e56ae0e6b8eb@prevas.dk>
-Date: Thu, 16 May 2024 11:50:11 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] imx: hab: add documentation about the required keys/certs
-To: Claudius Heine <ch@denx.de>, Tim Harvey <tharvey@gateworks.com>,
- Marek Vasut <marex@denx.de>
-Cc: Peng Fan <peng.fan@nxp.com>, Fabio Estevam <festevam@denx.de>,
- open list <u-boot@lists.denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-References: <20240503010518.263458-1-marex@denx.de>
- <20240507130650.713801-1-ch@denx.de>
- <28173ffa-209b-498f-a2c3-99ec2f898e7c@denx.de>
- <e98dc839-f58f-4463-9358-4d3ba267d558@denx.de>
- <7d834245-9ac2-45cf-b5bb-045560863bcb@denx.de>
- <CAJ+vNU2MCQNDO1hehq3CvWAFUqaSR=0eW6xRrE8Dzcna79-doA@mail.gmail.com>
- <CAJ+vNU1NJOXELwyUJ_QW4m-QTdJZwSA9R8v3-1wzJK9K8PxEZw@mail.gmail.com>
- <ac57d92f-5f75-47fe-b2d5-5f633290b030@denx.de>
-Content-Language: en-US, da
-From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-In-Reply-To: <ac57d92f-5f75-47fe-b2d5-5f633290b030@denx.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: MM0P280CA0064.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:8::26) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:10:45a::14)
+ spf=pass smtp.mailfrom=linux.amoon@gmail.com
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-23d621abfb7so209046fac.1
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 03:13:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1715854380; x=1716459180; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=c21U4cNFAc/TKqMOIgqlR1vpVtukKwKEiswOtukqbcA=;
+ b=apoZc8dfcpmvWzqRxKMeTjfCBQNkup7suXtiToTKiTA9I1N/xI0IKfp3jJ2oCCei0f
+ RMqryhWoClAmwIhxN9RkA4CxLT1jkADkObGIeR9QRth5yKjzR+81dg8SekYAhF5n03+9
+ l7Om57HHEIQOE4ev10pCm9oPfcB5sFtxW7NfTqcU7e5syBXCpBDbxRQt+v8iPiPabh+/
+ ovbmL8Xxdm/46rQpGjioQGILcgXO1UwvunuTovrTpSScbR2fceT4rYt9+Hwh8x1IRA1j
+ z8HmOzktd6HyDtgyU5zG3pMKKTo6PaOr0Itm3E8NXWIDAGvq47Ez6MeGy3tWRPc2Wf6d
+ 47MA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1715854380; x=1716459180;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=c21U4cNFAc/TKqMOIgqlR1vpVtukKwKEiswOtukqbcA=;
+ b=khxk2QuFV0EEo+T4oTBVD++LCvmoOh4BSga2LIDeorCEH54JsjIQnyhkOOKqqw9r3l
+ 0Cz0aF2PJtn7dHAB+VHwB47udb1O2RGcWQvQX0elHzyMiAm9dtGoA78Y1azPN1fXMy58
+ TvVfiH+T0nZDGFFVXSwxHKOMBb+d4Fh1UxRQKAoQsV8+91pTAWNduogJzR71zhbYPaSu
+ OpCtJH/dCGGxHfNVKZIFW0eKMEPdx9JksoRKvTDjqi9ki0npnNBmri15C9dqux23JyU3
+ QegZgSH7FzfTBkdDxAWr4P5J+dtm+Hy5rIZMHR9aR8BT7XpLb/ZmDjt/kpqTeqRJJUPB
+ fQ4w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVD2gClnUVQVKakIEeNCA8T0aLskTl8dFOGMxKWeh1YtFqWid5XA03givg0cV27EUK2/+CtOyhxfil9bOPuzDPXxPZSaQ==
+X-Gm-Message-State: AOJu0YyCdpaOVjlqS1f1bppOwyahqwstNDleHy9L8+m3En0P4ULha+gS
+ AAnnYbHUAPQeBc7MWRukHq5H0CnQEFsTVvF+8D84twr6+RKvTVMXMNa4+MoMTvhARHnqlgP5Xi3
+ aC+Cio5DHXl+MSM1UQv4PkPFR0GA=
+X-Google-Smtp-Source: AGHT+IHHvoPU/3c/jFfFvAH8g/H7RzNxhnu5SbtuVIH7HlByCs9oJLkCy6GcAootDGI21K9Ib2/RQK2+2RAJw3AQoWA=
+X-Received: by 2002:a05:6871:a913:b0:23d:b3b9:de0 with SMTP id
+ 586e51a60fabf-2417198c4e9mr8701992fac.10.1715854380540; Thu, 16 May 2024
+ 03:13:00 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|DU4PR10MB8322:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7c866bc2-fbe4-45d5-4522-08dc758d95b5
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230031|366007|376005|1800799015;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?bVpCNXFTbDh1S3FPcVB3NWFKeHpJcWp3UWFYa3FHR0IyYnpJN2tTcFpOWUNV?=
- =?utf-8?B?cVNvQ3VXSmN1ZWxwekt5MDQ4Yk05YWpwSmt6U2h0cFFJcDZIVDBqOWJ1Z25q?=
- =?utf-8?B?VjVjbFovaXRUK3R5MjdVUndoVjYyR3V2VUpyc3dYeGUrZG9LUVRzeGhiSnc0?=
- =?utf-8?B?MjZNc3JtcEd3VWI1aUJUV3gvaCtrRUkrTVlDc2VJdU00UEt4d212bU15M0U5?=
- =?utf-8?B?V3d4WHBGRWJuaXBaZm1oQXZseGowWlY3bSs5S1R3OXZ2SzdtV2Q4QzZlRnlM?=
- =?utf-8?B?eEFEczBNMkpUZENpMFhLZjNOamVvbW9oc3k4cHNIQjBNWlRIbG9aT1psMXRH?=
- =?utf-8?B?VW1laG5reTVsOUVUOVlkMSttMGtKaE0za1QreWtzV1FWM0gzL0dBeHdvUG8w?=
- =?utf-8?B?aERYcjRuYUFhaUIzaCtFRlc0dDRVZWM2c1A5Z2cxS3lnbk9CL0gyZ2M5cEUv?=
- =?utf-8?B?QWZCd2VPRmUvYS9VSFBSbjduZ3RVdEkrSjczYkZKTDFLQUhOMDhoVCtBbjk5?=
- =?utf-8?B?eWU5ZEt1b053S0orNjdMcm5lSHhYZU01VFRFL0x3Z0M1OElXUEsxOXRlL3BB?=
- =?utf-8?B?aGZOR0VpcTV3eUFWOHpUYWdQT2ZVeHpjN25mWmRDbEZ1bEtITktKbmR6M085?=
- =?utf-8?B?YURNMit1dVhjbSt5N2o0b0Nkb1k2RFhQS29ZeUJINDhFSTRGdCs3VUsya3l4?=
- =?utf-8?B?NC9MY0pDQWxEUnBWb2FhK3REM29qYjB1ZnFLSG1FbmpOMEdpYkw5dmZkT1ZQ?=
- =?utf-8?B?VlQ1L0NVM2xSV2g0VERHREJpMGVXbXE2NzlLSWRyT0FadXBQNDVvMXdVYkpx?=
- =?utf-8?B?U0pnYW5YNzVzTGtkS085dGNHay94ckVCd3FodGwyS1kvK01vRWRYRld6TzBB?=
- =?utf-8?B?VXpDaHI2eHlGK08zRHd3QWRiUHlUcDdDRzh5R3l6RENlZk9RcFRwN1p1dXVr?=
- =?utf-8?B?TUxjTksyc0xLeGxzcXFvcFNzd0xxK1I2Y25VSUZzUjM2dEY3b29PQ0o3Lzl4?=
- =?utf-8?B?VU1IaEdBQ1VuZFJjRmg4NlNCM0Z2K25RZmwyejdvK1RWRSs0Nks1UFliVzU3?=
- =?utf-8?B?dEQza1dlMjViaUV2MFJiRGdmbkhjdFZsQ1NKbGw1S1VOc2lDSWh1OS9YSTVL?=
- =?utf-8?B?M3FRcHpKQkU1YmFSVTZqRFJCMFEzSDZ1d2cwbHVlNzJKTXpnVkIyVkJZdGJV?=
- =?utf-8?B?eHZmS01OZDBGWDc1OUtTNzFTMG9Bb29kWUdNLzYzU2JkMjVuR1JqMzVZK0dk?=
- =?utf-8?B?eTZkeHo5bHo5Q3R5ZWFidWZGY3dmSHgybXVWVjVhTzlZaTNuajRrbzlkaXQv?=
- =?utf-8?B?RE9YbnhPZTJDc3lYV00vMnp3UTFZQXdibGVZdlYrWW53cHkxRlcvdGloQ0NZ?=
- =?utf-8?B?eTdhZVk5am1yY1FjZVdGTlgyNjlUalNMekFCOGpabitPRWIwQnlTRFc4Y2k1?=
- =?utf-8?B?UHlOcDZRSlcxYnhOcVF2RXFRN1VkMWgvaGtZell6RVRIZXg3a01wTkJBbjB4?=
- =?utf-8?B?eDg2akRZQTJBQVozYUR6c3pUcGNPSENLQmc3ZW1oZ0ZCL3A2dkRhTWQ2N1U0?=
- =?utf-8?B?dzVmcG5zcmZFSURDVEdHUG5Relo1RFl0cTV5dVNSd2loTWxPNERicXMwamNr?=
- =?utf-8?B?Q3J3cjFGck9TdG10WGV2QnBSSi9DREFlZUNYa2FqMHkxMkg0b0UrSUljLzdU?=
- =?utf-8?B?TDR6QWhtYlpTcHNqaTJHUmVaYzN0WE8za0NMY1Y3TFVuYnJFWkhDdG9BPT0=?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(366007)(376005)(1800799015); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Y3AvUWpZUHFWOVhQVEVVNHFaOXdpY1JOUUprbHhMaTZ0V0tCaFlRaCtIQ2NW?=
- =?utf-8?B?Vmg1dE9yaEdjRTZJeHVtbFY3RWpSd05wTXZvNDRISnFOVWhvaFhJOWNKaWo1?=
- =?utf-8?B?Ym1jY284OHlmVFBjSE9JTytvdnlBZGlwcW5UbUZhRVJzTytYSTlCam4rQ2ZM?=
- =?utf-8?B?VWdWUVdHbEE1VGlHUXY2cTByWTVlRU1UcUgvWWZ4Rm9Xamt3R3cyMXYxc2dm?=
- =?utf-8?B?Y05jWEJzS2FCdlE1MkllZldNYVJmN2V6S3ZqbnhYWVFLSEZqTmRZNnhYaEo5?=
- =?utf-8?B?b2ZFNXludGNuTVpwd005M29ielZFY1A4aVhHNERkUnhVU0pPeFNsZDlDRG1n?=
- =?utf-8?B?ZG5FY0RMUE5Yb3ZyVTl4dDFTcWwxNHlkQ0lETWFtcThldDR1WXFPM2FPYUt0?=
- =?utf-8?B?dStnaU5HaTV6OUx5TVZwdVkvVVluVDRRSk1wempPMGJsSUhHSUp5RHc0WUly?=
- =?utf-8?B?R2diclh5UmxTZjcxN0RTTzNwZitJbytKVXhCTlZleUxEejF0a1dYZ010Q0V4?=
- =?utf-8?B?b0dPMHR5VDJ4bExSUVR2UUIyakFpSzBjaFhpckFPRXNReFhpdTZxdjlUMlU4?=
- =?utf-8?B?SWxWVHF3bGVHb1lXU2FpdnpQVUhSOGlRVXJYcGhhQ2VwRTl6S0tiL0lxc0lQ?=
- =?utf-8?B?ajVrVlJNTGxMTWpPdVVQM1ZpSUdjK1pQbTRJZW9oRzhGYXBhbGNwSm1WUmwy?=
- =?utf-8?B?azF0N281bGFyUHZ2bXlQRHRDazFhekRxQ0ZEQ0VZc3MxemJYdndFSUZvTnFO?=
- =?utf-8?B?MmxXSjEyWXhLQVY2enkwUlVaWlNwU3FuY3lqaVMyU0JhdlVQckgxSnB6TGda?=
- =?utf-8?B?TjZpU3BnZU1HNGlxa2NuaUlUTDZHWW0vM3NwZzVORUJ2NndFbUo2ZXBqWVhk?=
- =?utf-8?B?TzMxWTMwa3pndi9OT3lTblhNZUZOS1NSWndxZG13NzVmbEJXYVFXcWVNTHFD?=
- =?utf-8?B?WWpBSUl4NVVHeXBETVVvR3RLQnIyU25UU0RWNWNiWmFPRjF2ZUtPTjlValk3?=
- =?utf-8?B?Y21vcEpVZVBnUm9TaWI1Z3dnaGdVdGNROGY1ajAvZDhHUXZXVi9LVU5UaUxu?=
- =?utf-8?B?RXBDTW9nSG9tRy8xWEc3OFJvMlpZL21DSmRRbWJSTWFOYlJJNWRtNFljajUw?=
- =?utf-8?B?TGtVU05GNk4zYlM3Y2lSZFhVNS85SXdPd2VsR1ZQMGJ5RnlMZ2I5cEtpc1hT?=
- =?utf-8?B?MmhXekhCWDJSUVprQ0o4ZjEvZnloZGk0dE5kWHVYZjVSYVI2am1IMzRHUHBG?=
- =?utf-8?B?YzJGYXJ1VW9OcFB5cWh6SGh4TVp3YnNReEFGUmFWMVFPNWRDTTdZV0lXRUhC?=
- =?utf-8?B?YzhtelNBdkcxK0R3MFVJSnpCZmdWUFlIb0ZaRVJZQ0ZsdzdEejhENkxqalo1?=
- =?utf-8?B?Zzd0cGJGTlRXYXVMTHMweGZGZnpwRzdMNk1vNWdySXhQWUJuL2xoQkxXSUFP?=
- =?utf-8?B?d0pWYlUrWHZteWl4NVVKbFFwYm8zRktNeERrK290d0hnWWlXTUROMXh0SDF2?=
- =?utf-8?B?OUVUY01iMndCaTVpVStkUDZ1WlhGUUZDdUhnVE93UmhhVDJLWkdKVXNHc3Zz?=
- =?utf-8?B?SFIvdVdaOWRBWTNTbUhqL2RMR0liWVFHVWk1aEM3bnJLV3k0QXc2WjUydkp6?=
- =?utf-8?B?cnJVbUs1RjJhSE00SlNKTkdYNkpPTFcxVzB1N0g4YUIyK3ZqSytUOWFXdE8y?=
- =?utf-8?B?Qm1pOEFlM0FHZEVmeDhJUkNpMzlpcDQ5YU94RXV5OXBoNitpNjV4UHI5NGVW?=
- =?utf-8?B?US92WEdWQjc5SklUdDIwc0trOEU2bnBScWRJSEloMzJhamN4OUlOdEEzWVQ2?=
- =?utf-8?B?emY1QnNOTGRnekc5OHpYd0hRdlNrdXZmTmZ0S08yV2hRUFhMR05SZStBbU5D?=
- =?utf-8?B?QXlVNWVSbklUOEMxNlBSUE5KTzlHcTAzSElwWE11V0NWRVFUcnJZaCt1dDI4?=
- =?utf-8?B?RmNPcU9tN21yeXFZM1prSXBNRGN2MzM0N3grWmM4Zk93aHN6U0Q0MjZmUWdK?=
- =?utf-8?B?aDZYSTRnZzYvaUc5T1dKc2tEekRieURYUnJJNFlQcFZNQkRHbVZWbU55V1ZT?=
- =?utf-8?B?YkRoUmo1MXZ4Qmg4czRRSDBzMnZSNzRZTHVFTTN3cFJhUkNEeUNhU0tkcitp?=
- =?utf-8?B?eVBBaU9MODZJcVlsL1RtMEl5dks0RVdJNzJSUUpZRkNSd1AzbGRlTzFTS1Va?=
- =?utf-8?B?Z2c9PQ==?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7c866bc2-fbe4-45d5-4522-08dc758d95b5
-X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 May 2024 09:50:14.3508 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: AtK2bddrK/3zeg409ecy0y7VRtdB89KFKDB8vU5dd0eNn1fj0MwSKlxQtpS8EpC3kNqBXtx2uG/b5zhc4VjkKbqgPO5mpZ/RVIhONDbSdHo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR10MB8322
+References: <20240516090031.2373-1-anand@edgeble.ai>
+ <20240516090031.2373-10-anand@edgeble.ai>
+ <1c5c0be5-eb49-4af9-be29-e4ab95e9f8be@cherry.de>
+In-Reply-To: <1c5c0be5-eb49-4af9-be29-e4ab95e9f8be@cherry.de>
+From: Anand Moon <linux.amoon@gmail.com>
+Date: Thu, 16 May 2024 15:42:44 +0530
+Message-ID: <CANAwSgS3Fd91FqQkfKHxVBYJ8-2LSdY4z4Tmx31UY7Bhd9K37g@mail.gmail.com>
+Subject: Re: [PATCH v1 9/9] rockchip: RK3588: Enable display cpuinfo support
+ on all boards
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Anand Moon <anand@edgeble.ai>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Andy Yan <andyshrk@163.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Klaus Goger <klaus.goger@theobroma-systems.com>, 
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
+ Heiko Stuebner <heiko.stuebner@cherry.de>, John Clark <inindev@gmail.com>, 
+ Jagan Teki <jagan@edgeble.ai>, Tom Fitzhenry <tom@tom-fitzhenry.me.uk>, 
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Elon Zhang <zhangzj@rock-chips.com>, 
+ Joshua Riek <jjriek@verizon.net>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -179,98 +101,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 16/05/2024 10.25, Claudius Heine wrote:
-> Hi Tim and Marek,
-> 
-> On 2024-05-16 12:46 am, Tim Harvey wrote:
->> On Tue, May 14, 2024 at 11:50 AM Tim Harvey <tharvey@gateworks.com>
->> wrote:
->>> On Sun, May 12, 2024 at 10:08 PM Marek Vasut <marex@denx.de> wrote:
->>>> On 5/8/24 9:23 AM, Claudius Heine wrote:
->>>>> On 2024-05-07 3:28 pm, Marek Vasut wrote:
->>>>>> It would be good to mention the DT properties which govern the crypto
->>>>>> material paths -- nxp,srk-table, nxp,csf-crt, nxp,img-crt --
->>>>>> somewhere
->>>>>> around this sentence.
->>>>>
->>>>> This is something that should be documented with the changes where
->>>>> that
->>>>> code was added, IMO. I only documented here what I found out and have
->>>>> used myself, I haven't used those.
->>>>>
->>>>> I would be interested in reading how to best overwrite those paths and
->>>>> the image structured from board u-boot.dtsi files myself.
->>>>>
->>>>> If you want to can pickup my patch and integrate it into your
->>>>> series and
->>>>> extend it.
->>>>
->>>> I'll keep it in mind for V3.
->>
->> Hi Marek,
->>
->> The documentation patch here by Claudius does resolve my issues
->> discussed in the other thread and I can confirm symlinks work fine so
->> I think something like the following should be added:
->>
->> CST_DIR=/usr/src/cst-3.3.2/
->> ln -s $CST_DIR/crts .
->> ln -s $CST_DIR/keys .
-> 
-> `keys` and `crts` are very short and generic names, and putting them
-> into the build directory might cause issues at some point. But I would
-> not be against putting them into a sub directory (`imx-hab/{keys,crts}`?).
+Hi Quentin
 
-It is probably useful to be aware of the quality of the cst code. For
-reference, I quote get_key_file()
+On Thu, 16 May 2024 at 14:52, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+>
+> Hi Anand,
+>
+> This is patch 9/9 but somehow I didn't receive any other patch, nor did
+> the mailing list? c.f.
+> https://lists.denx.de/pipermail/u-boot/2024-May/thread.html and
+> https://lore.kernel.org/u-boot/. Are you registered on the ML?
+>
 
-int32_t get_key_file(const char* cert_file, char* key_file)
-{
-    /* Algorithm to locate key file from given cert file  */
-    /* for now just assume the key to present in the      */
-    /* same folder as cert file. The crt in the name will */
-    /* will be replaced with key */
-    char * folder;
-    int32_t i = strlen(cert_file);  /**< Index into key filename,
-initialized
-                                         to filename length */
+Thanks for your  review comments.
 
-    strcpy(key_file, cert_file);
-    key_file[i] = 0;
+Something went wrong with git sendmail,
+Your message have not reached my email client (gmail)
 
-    key_file[i-5] = 'y';
-    key_file[i-6] = 'e';
-    key_file[i-7] = 'k';
+> On 5/16/24 10:59 AM, Anand Moon wrote:
+> > Imply DISPLAY_CPUINFO Kconfig options to support on all RK3588s and
+> > RK3588 boards, Its used to determine the reset cause of the board.
+> >
+> > Cc: Jagan Teki <jagan@edgeble.ai>
+> > Signed-off-by: Anand Moon <anand@edgeble.ai>
+> > ---
+> >   arch/arm/mach-rockchip/Kconfig           | 1 +
+> >   configs/coolpi-4b-rk3588s_defconfig      | 1 -
+> >   configs/coolpi-cm5-evb-rk3588_defconfig  | 1 -
+> >   configs/evb-rk3588_defconfig             | 1 -
+> >   configs/generic-rk3588_defconfig         | 1 -
+> >   configs/jaguar-rk3588_defconfig          | 1 -
+> >   configs/nanopc-t6-rk3588_defconfig       | 1 -
+> >   configs/neu6a-io-rk3588_defconfig        | 1 -
+> >   configs/neu6b-io-rk3588_defconfig        | 1 -
+> >   configs/orangepi-5-plus-rk3588_defconfig | 1 -
+> >   configs/orangepi-5-rk3588s_defconfig     | 1 -
+> >   configs/quartzpro64-rk3588_defconfig     | 1 -
+> >   configs/rock5a-rk3588s_defconfig         | 1 -
+> >   configs/rock5b-rk3588_defconfig          | 1 -
+> >   configs/toybrick-rk3588_defconfig        | 1 -
+> >   configs/turing-rk1-rk3588_defconfig      | 1 -
+> >   16 files changed, 1 insertion(+), 15 deletions(-)
+> >
+> > diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
+> > index 2e9c71138e..1b5cc34f99 100644
+> > --- a/arch/arm/mach-rockchip/Kconfig
+> > +++ b/arch/arm/mach-rockchip/Kconfig
+> > @@ -366,6 +366,7 @@ config ROCKCHIP_RK3588
+> >       imply SCMI_FIRMWARE
+> >       imply SPL_ATF_NO_PLATFORM_PARAM if SPL_ATF
+> >       imply SPL_MMC_HS200_SUPPORT if SPL_MMC && MMC_HS200_SUPPORT
+> > +     imply DISPLAY_CPUINFO
+>
+> This is unnecessary, it's already defaulting to y if building for ARM
+> boards: https://elixir.bootlin.com/u-boot/latest/source/common/Kconfig#L596
+>
+See below...
+> I also don't think this is SO useful that we need to enable it on all
+> rk3588 boards? But also, doesn't hurt, so... whatever I guess :) ?
+>
+> While looking at the code, I think we can remove the ifdef in
+> https://elixir.bootlin.com/u-boot/latest/source/arch/arm/mach-rockchip/cpu-info.c#L47
+> because this file is anyway only compiled when CONFIG_DISPLAY_CPUINFO is
+> set, c.f.
 
-    /* Search for folder name "certs" in the file and replace it with
-"keys" */
-    /* Keys are found in "keys" folder and certs are in "certs" folder
-    */
+Oops I missed this changes, my bad
+I will dop my changes over here.
 
-    folder = strstr(key_file, "crts");
-    if(folder)
-    {
-        folder[0] = 'k';
-        folder[1] = 'e';
-        folder[2] = 'y';
-        folder[3] = 's';
-    }
-    return CAL_SUCCESS;
-}
+> https://elixir.bootlin.com/u-boot/latest/source/arch/arm/mach-rockchip/Makefile#L30
+>
+On Rockchip SoC CONFIG_DISPLAY_CPUINFO is been disable on most of the
+configs files.
 
-Ignoring the inconsistencies in the comments, obviously there are a lot
-of implicit assumptions on file names and paths. First, the assumption
-that the filename of they key corresponding to the certificate can be
-obtained by replacing [-7:-5] by "key". Second, and much more egregious,
-is the use of strstr() on key_file searching for "crts", and just
-blindly replacing the first such with "keys", and ignoring it if not
-found. So if that string appears anywhere in the path (say, my homedir
-is /home/dcrts/ and I have the key material somewhere below that) this
-will replace the wrong occurrence (and look in /home/dkeys/ ....).
+-# CONFIG_DISPLAY_CPUINFO is not set
 
-And of course it was unthinkable that this could have been written using
-the much shorter memcpy(..., "keys", 4) so that one could actually `git
-grep 'keys'` and figure out what was going on.
+My changes are related to determine the reset cause of the board and
+display the results.
+its only enable on selected SoC hence I have to used this logic.
 
-Rasmus
+U-Boot 2024.07-rc2-00397-g0370324feb-dirty (May 16 2024 - 13:11:14 +0530)
 
+SoC: Rockchip rk3568
+Reset cause: POR         <-----------
+Model: Radxa ROCK3 Model A
+DRAM:  8 GiB (effective 7.7 GiB)
+PMIC:  RK8090 (on=0x40, off=0x00)
+Core:  344 devices, 31 uclasses,
+
+> which also means...
+>
+> https://elixir.bootlin.com/u-boot/latest/source/arch/arm/include/asm/arch-rockchip/cru.h#L35
+> should probably be ifdef'ed
+>
+> which means...
+>
+> https://elixir.bootlin.com/u-boot/latest/source/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c#L64
+> should probably also be ifdef'ed (but the config is enabled already
+> (well... it wouldn't compile otherwsie), so I guess this is fine?).
+
+This code changes will not affect this feature by default its enable
+on RK3399 boards.
+
+>
+> Cheers,
+> Quentin
+
+Thanks
+
+-Anand
