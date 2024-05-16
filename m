@@ -4,72 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4F6CC25B74
-	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 05:39:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3277DC25B74
+	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 06:09:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25ABC87FFB;
-	Thu, 16 May 2024 07:39:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 8A76187E3F;
+	Thu, 16 May 2024 08:09:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1715837956;
-	bh=ogaXkOS9eJ0pP1NSg10PBmFv+o6Q9wcPo7nBmWg016k=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=WsUDTIjyYsusq7hcEPUqiQNYrREkwwC6vb2BYg4k8aQcDcTHqfu5eXYk1YrOaAWUW
-	 Oux2MPSVuCrjAfU3FHI3Z3DEXJSyB5TMcGOGPecQ3OOwUcWgYCNlANDSExKcKJauvx
-	 f9/qK6XaX5EnDTOU41uCIK4IlknTamlaQSlmiO/+U6z8AcPMzaI2IRaDhKjEnVyKLU
-	 p2/XRItFAdQh9of4rS8cQynMuMD3g387MvqSlRrUj7aZWkuun3uCs6kICAJXce4c7T
-	 dJQCuhoeiWAv5ih0OuU/GxG0KSITcRnENbs5Jw5dkfA7Rzv7JT/TMaAHBM7H8m3gD1
-	 bqcxS2+qmfAWQ==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 000F688003; Thu, 16 May 2024 07:39:14 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC82987FF0
- for <u-boot@lists.denx.de>; Thu, 16 May 2024 07:39:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EpM+xo4Q";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 78B4187F19; Thu, 16 May 2024 08:09:20 +0200 (CEST)
+Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
+ [IPv6:2607:f8b0:4864:20::b2f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4VfzRh2WHlz9sqn;
- Thu, 16 May 2024 07:39:12 +0200 (CEST)
-Message-ID: <6ccec60b-471d-4db1-a50e-2d1f3a2039af@denx.de>
-Date: Thu, 16 May 2024 07:39:06 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 34C2B83339
+ for <u-boot@lists.denx.de>; Thu, 16 May 2024 08:09:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-yb1-xb2f.google.com with SMTP id
+ 3f1490d57ef6-dc6cbe1ac75so5842240276.1
+ for <u-boot@lists.denx.de>; Wed, 15 May 2024 23:09:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1715839757; x=1716444557; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Du6eDknbufrcX2u7rsU+KNKue/0Di1nz6YEN2LYv7dI=;
+ b=EpM+xo4Q3OuLB328zhxgPD8mSEub07Y/U2qSOkKW3i9r9STrDJMaYGN/Dc+NF5FGFd
+ g77eHXpQZKDGFor3WUZTHoN2FXLprGTCXwSiuYr4tuRiFJ26pC9bdrDroHqz1I63Z+yK
+ VTVR/2SS8Ysm78cAMEdn4JwhCkebpbLutuKgAce+/o5SN4pUYUwxI3UHzXrW+NIR8/V7
+ BuCXT1iFKW377q96eYkgKXlms9wg1+aXRUTkf8E0pp2o2xEm78rZrzroJ/nMXuXVybT9
+ B8xyQVmzAUPPtRtyjuSrOM1jBb9X5afsH0RNPvl29aEzhEhmv8+dTZMdOp24EcfowOVG
+ GrsQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1715839757; x=1716444557;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Du6eDknbufrcX2u7rsU+KNKue/0Di1nz6YEN2LYv7dI=;
+ b=jv+I1jcmDa7j9dAZT/eYFoR6jY2XXo26f68Qzekzmt7DBQoaUtGXYCzXttT3+8vQ8S
+ Nj0O9hd0ZvMUjXnSulJVnvW+wBQdP9C/ZovCbM9GVVU3rCEye5FQ4rzqFYWUP7WwF/nq
+ QhYxXv9sUbsIb7YSWUbgnnVLKFaBVkT0bM6f7G/JKfolqmz414RIO8/C2Vfj0hDfajlN
+ 9YvfRqZCQtTxQWu3XFlokmGvSIHYsPTJ6NjxyP6WMZWNJHDCh4A6qN7GNmEObjJXSeHL
+ JnOyhSvnC3pQFiceHVOOD/1F0eOj7yy3XL4W6dPlDR68YQqjsj/8sDdMg3ztmPiBPo+3
+ jWyA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVAm2gdAkh5TQyBUUkYmiJdV9IlUiMwjHeUMGyYsF90xRiuFcivcQSrmQMJBtNnDfo4pknyPK1w3x5gHBEomVH+ThJwhg==
+X-Gm-Message-State: AOJu0YwRGZvA//AIQafumqw8kvea0i6vbIlmxQMUHOMAQzCx/KR4sA0W
+ 0/HbFWYaKP0t7XKcpinSjSG05pfGygppXCkWxP9KLqigU/oDAHtgIPwCSK2ht4x4LOCOyd82dZI
+ yJU1SQohKfgabGhrusIEUYOjo6C/miFeaD67LUTS/DCO4kY5J
+X-Google-Smtp-Source: AGHT+IFIqanmRLoI5Ld6cFjg8/JofdP6A3lRrndACeKLMKurXFxmVMqHChKuZSpgm3NyDd5ORStdcpQmDP4UAHmd/cU=
+X-Received: by 2002:a25:ce0c:0:b0:df4:449d:e09f with SMTP id
+ 3f1490d57ef6-df4449de233mr1559262276.23.1715839756955; Wed, 15 May 2024
+ 23:09:16 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [PATCH 07/11] watchdog: Add support for ADI SC5XX-family watchdog
- peripheral
-To: Greg Malysa <greg.malysa@timesys.com>, u-boot@lists.denx.de
-Cc: Matthew McClintock <Matthew.Mcclintock@analog.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Ian Roberts <ian.roberts@timesys.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Chanho Park <chanho61.park@samsung.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Randolph <randolph@andestech.com>, Sam Protsenko
- <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-References: <20240515215837.14028-1-greg.malysa@timesys.com>
- <20240515215837.14028-8-greg.malysa@timesys.com>
-Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20240515215837.14028-8-greg.malysa@timesys.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4VfzRh2WHlz9sqn
+References: <20240514164236.516595-1-trini@konsulko.com>
+ <b12a9b07-2c92-4651-b6ba-3aff6ecc9219@kwiboo.se>
+ <CAFA6WYPsicMrtrDg7T8m=4-vg-QAPUY1D5E=_T8gZYgT=o2b4Q@mail.gmail.com>
+ <e26ab5cc-2b2d-4e96-a073-819a935f435a@kwiboo.se>
+ <20240515160009.GX2568172@bill-the-cat>
+In-Reply-To: <20240515160009.GX2568172@bill-the-cat>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Thu, 16 May 2024 11:39:05 +0530
+Message-ID: <CAFA6WYNBCgW0nwZsOvMLF6kObgQ3gowY9SEY5rQZ3NsccnqWkg@mail.gmail.com>
+Subject: Re: [PATCH 1/1] Squashed 'dts/upstream/' changes from
+ b35b9bd1d4ee..7e08733c96c8
+To: Tom Rini <trini@konsulko.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,228 +92,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/15/24 23:57, Greg Malysa wrote:
-> From: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
-> 
-> Co-developed-by: Greg Malysa <greg.malysa@timesys.com>
-> Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
-> Co-developed-by: Ian Roberts <ian.roberts@timesys.com>
-> Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
-> Signed-off-by: Vasileios Bimpikas <vasileios.bimpikas@analog.com>
-> Signed-off-by: Utsav Agarwal <utsav.agarwal@analog.com>
-> Signed-off-by: Arturs Artamonovs <arturs.artamonovs@analog.com>
-> Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
-> ---
-> 
->   MAINTAINERS                |   1 +
->   drivers/watchdog/Kconfig   |   9 +++
->   drivers/watchdog/Makefile  |   1 +
->   drivers/watchdog/adi_wdt.c | 145 +++++++++++++++++++++++++++++++++++++
->   4 files changed, 156 insertions(+)
->   create mode 100644 drivers/watchdog/adi_wdt.c
+On Wed, 15 May 2024 at 21:30, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Wed, May 15, 2024 at 11:39:08AM +0200, Jonas Karlman wrote:
+>
+> [snip]
+> > My main concern is how to best handle new boards and features/drivers.
+> > E.g. for Rockchip the RK3588 SoC is under active development, new boards
+> > and features/drivers are actively added/fixed in upstream Linux.
+>
+> To this question specifically, dts/update-dts-subtree.sh has a "pick"
+> option and in some previous quick testing, it does what one would hope.
+> So for this case you could pick the N commits that need to be brought
+> it, the resulting patch would be small enough to send to the list
+> normally (the resync patch for v6.9 is 2.7MB) and then when I do the
+> next full resync it goes cleanly still.
 
-Reviewed-by: Stefan Roese <sr@denx.de>
+That sounds like a good alternative although it was proposed for any
+fixes to be incorporated but it's worth giving it a try for new
+features too. I think as long as the cherry pick is clean with all
+dependencies being picked up properly, the next sync should work
+cleanly.
 
-Thanks,
-Stefan
+-Sumit
 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index c1685f0352..6feb7e540b 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -618,6 +618,7 @@ F:	drivers/pinctrl/pinctrl-adi-adsp.c
->   F:	drivers/serial/serial_adi_uart4.c
->   F:	drivers/timer/adi_sc5xx_timer.c
->   F:	drivers/usb/musb-new/sc5xx.c
-> +F:	drivers/watchdog/adi_wdt.c
->   F:	include/env/adi/
->   
->   ARM SNAPDRAGON
-> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-> index 8318fd77a3..5a62000272 100644
-> --- a/drivers/watchdog/Kconfig
-> +++ b/drivers/watchdog/Kconfig
-> @@ -94,6 +94,15 @@ config WDT_APPLE
->   	  The watchdog will perform a full SoC reset resulting in a
->   	  reboot of the entire system.
->   
-> +config WDT_ADI
-> +	bool "Analog Devices watchdog timer support"
-> +	select WDT
-> +	select SPL_WDT if SPL
-> +	depends on (SC57X || SC58X || SC59X || SC59X_64)
-> +	help
-> +	  Enable this to support Watchdog Timer on ADI SC57X, SC58X, SC59X,
-> +	  and SC59X_64 processors
-> +
->   config WDT_ARMADA_37XX
->   	bool "Marvell Armada 37xx watchdog timer support"
->   	depends on WDT && ARMADA_3700
-> diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
-> index 7b39adcf0f..7ad61b513c 100644
-> --- a/drivers/watchdog/Makefile
-> +++ b/drivers/watchdog/Makefile
-> @@ -50,3 +50,4 @@ obj-$(CONFIG_WDT_STM32MP) += stm32mp_wdt.o
->   obj-$(CONFIG_WDT_SUNXI) += sunxi_wdt.o
->   obj-$(CONFIG_WDT_TANGIER) += tangier_wdt.o
->   obj-$(CONFIG_WDT_XILINX) += xilinx_wwdt.o
-> +obj-$(CONFIG_WDT_ADI) += adi_wdt.o
-> diff --git a/drivers/watchdog/adi_wdt.c b/drivers/watchdog/adi_wdt.c
-> new file mode 100644
-> index 0000000000..67d17dc692
-> --- /dev/null
-> +++ b/drivers/watchdog/adi_wdt.c
-> @@ -0,0 +1,145 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +/*
-> + * (C) Copyright 2022 - Analog Devices, Inc.
-> + *
-> + * Written and/or maintained by Timesys Corporation
-> + *
-> + * Converted to driver model by Nathan Barrett-Morrison
-> + *
-> + * Contact: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
-> + * Contact: Greg Malysa <greg.malysa@timesys.com>
-> + *
-> + * adi_wtd.c - driver for ADI on-chip watchdog
-> + *
-> + */
-> +
-> +#include <clk.h>
-> +#include <dm.h>
-> +#include <wdt.h>
-> +#include <linux/delay.h>
-> +#include <linux/ioport.h>
-> +#include <linux/io.h>
-> +
-> +#define WDOG_CTL  0x0
-> +#define WDOG_CNT  0x4
-> +#define WDOG_STAT 0x8
-> +
-> +#define RCU_CTL   0x0
-> +#define RCU_STAT  0x4
-> +
-> +#define SEC_GCTL  0x0
-> +#define SEC_FCTL  0x10
-> +#define SEC_SCTL0 0x800
-> +
-> +#define WDEN      0x0010
-> +#define WDDIS     0x0AD0
-> +
-> +struct adi_wdt_priv {
-> +	void __iomem *rcu_base;
-> +	void __iomem *sec_base;
-> +	void __iomem *wdt_base;
-> +	struct clk clock;
-> +};
-> +
-> +static int adi_wdt_reset(struct udevice *dev)
-> +{
-> +	struct adi_wdt_priv *priv = dev_get_priv(dev);
-> +
-> +	writel(0, priv->wdt_base + WDOG_STAT);
-> +
-> +	return 0;
-> +}
-> +
-> +static int adi_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
-> +{
-> +	struct adi_wdt_priv *priv = dev_get_priv(dev);
-> +	u32 sctl_val;
-> +
-> +	/* Disable SYSCD_RESETb input and clear the RCU0 reset status */
-> +	writel(0xf, priv->rcu_base + RCU_STAT);
-> +	writel(0x0, priv->rcu_base + RCU_CTL);
-> +
-> +	/* reset the SEC controller */
-> +	writel(0x2, priv->sec_base + SEC_GCTL);
-> +	writel(0x2, priv->sec_base + SEC_FCTL);
-> +
-> +	udelay(50);
-> +
-> +	/* enable SEC fault event */
-> +	writel(0x1, priv->sec_base + SEC_GCTL);
-> +
-> +	/* ANOMALY 36100004 Spurious External Fault event occurs when FCTL
-> +	 * is re-programmed when currently active fault is not cleared
-> +	 */
-> +	writel(0xc0, priv->sec_base + SEC_FCTL);
-> +	writel(0xc1, priv->sec_base + SEC_FCTL);
-> +
-> +	/* enable SEC fault source for watchdog0 */
-> +	sctl_val = readl((priv->sec_base + SEC_SCTL0) + 3 * 8) | 0x6;
-> +	writel(sctl_val, (priv->sec_base + SEC_SCTL0) + 3 * 8);
-> +
-> +	/* Enable SYSCD_RESETb input */
-> +	writel(0x100, priv->rcu_base + RCU_CTL);
-> +
-> +	/* enable watchdog0 */
-> +	writel(WDDIS, priv->wdt_base + WDOG_CTL);
-> +
-> +	writel(timeout_ms / 1000 *
-> +	       (clk_get_rate(&priv->clock) / (IS_ENABLED(CONFIG_SC58X) ? 2 : 1)),
-> +	       priv->wdt_base + WDOG_CNT);
-> +
-> +	writel(0, priv->wdt_base + WDOG_STAT);
-> +	writel(WDEN, priv->wdt_base + WDOG_CTL);
-> +
-> +	return 0;
-> +}
-> +
-> +static int adi_wdt_probe(struct udevice *dev)
-> +{
-> +	struct adi_wdt_priv *priv = dev_get_priv(dev);
-> +	int ret;
-> +	struct resource res;
-> +
-> +	ret = dev_read_resource_byname(dev, "rcu", &res);
-> +	if (ret)
-> +		return ret;
-> +	priv->rcu_base = devm_ioremap(dev, res.start, resource_size(&res));
-> +
-> +	ret = dev_read_resource_byname(dev, "sec", &res);
-> +	if (ret)
-> +		return ret;
-> +	priv->sec_base = devm_ioremap(dev, res.start, resource_size(&res));
-> +
-> +	ret = dev_read_resource_byname(dev, "wdt", &res);
-> +	if (ret)
-> +		return ret;
-> +	priv->wdt_base = devm_ioremap(dev, res.start, resource_size(&res));
-> +
-> +	ret = clk_get_by_name(dev, "sclk0", &priv->clock);
-> +	if (ret < 0) {
-> +		printf("Can't get WDT clk: %d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct wdt_ops adi_wdt_ops = {
-> +	.start		= adi_wdt_start,
-> +	.reset		= adi_wdt_reset,
-> +};
-> +
-> +static const struct udevice_id adi_wdt_ids[] = {
-> +	{ .compatible = "adi,wdt" },
-> +	{}
-> +};
-> +
-> +U_BOOT_DRIVER(adi_wdt) = {
-> +	.name		= "adi_wdt",
-> +	.id		= UCLASS_WDT,
-> +	.of_match	= adi_wdt_ids,
-> +	.probe		= adi_wdt_probe,
-> +	.ops		= &adi_wdt_ops,
-> +	.priv_auto = sizeof(struct adi_wdt_priv),
-> +	.flags		= DM_FLAG_PRE_RELOC,
-> +};
-
-Viele Grüße,
-Stefan Roese
-
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+>
+> --
+> Tom
