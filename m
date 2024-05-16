@@ -4,103 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B2DDC25B77
-	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 23:03:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 486B9C25B74
+	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 23:11:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61BEE88490;
-	Fri, 17 May 2024 01:03:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B467388485;
+	Fri, 17 May 2024 01:11:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="amR/OvVz";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="SUDQplJD";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="cS5OO30C";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="hfsbtY0J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAF7A88480; Fri, 17 May 2024 01:03:31 +0200 (CEST)
-Received: from fout5-smtp.messagingengine.com (fout5-smtp.messagingengine.com
- [103.168.172.148])
+ id 5B4E78848A; Fri, 17 May 2024 01:11:13 +0200 (CEST)
+Received: from fhigh3-smtp.messagingengine.com
+ (fhigh3-smtp.messagingengine.com [103.168.172.154])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CC0D88481
- for <u-boot@lists.denx.de>; Fri, 17 May 2024 01:03:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A05488485
+ for <u-boot@lists.denx.de>; Fri, 17 May 2024 01:11:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailfout.nyi.internal (Postfix) with ESMTP id 597F91380250;
- Thu, 16 May 2024 19:03:27 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute5.internal (MEProxy); Thu, 16 May 2024 19:03:27 -0400
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id 892C4114014B;
+ Thu, 16 May 2024 19:11:10 -0400 (EDT)
+Received: from imap44 ([10.202.2.94])
+ by compute3.internal (MEProxy); Thu, 16 May 2024 19:11:10 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm1; t=1715900607;
- x=1715987007; bh=nCBzLxZrlNwulMp+yUT1aIiGxQ+A2Orz+JaurscNmw0=; b=
- amR/OvVz2yCU/eRC29QiqcGn7mhVLM/MCL7xVt8v8UURtBq4kQq6d8+1GNy/tIhO
- 8Zv/ykoYjAGiJcNsELoeTvvhRGBS5+AklQ1gQvzr7qaoXgGVyLSR3DhkDuinXDxF
- bPdS/VW1IGI9u8vJcXS2Sr620PWrOnRxXYcYWHgIXtmK+oAMEiJUm17XCmELoCfK
- jmw8bCxlbF8fmGfENPCpqXndpx7QgqVm7SpjH6jMBVZy08GzVYsd71n9IGk21nO9
- HaKkpKoDj9XAwY2XsVgCzbb84W9Gxm6zgVCeAD+6F2ObhpujOGhVMgh6prjHMdgi
- LoX0oEFqJMkY5NF+HvR7HQ==
+ :references:reply-to:subject:subject:to:to; s=fm1; t=1715901070;
+ x=1715987470; bh=b4wIL0T3RIVDcC1KwGs0C9K2sdo74OKkxmEmQN67Kk4=; b=
+ cS5OO30C8XQ0snNV7rphLDBKfmtl07aa66s0hbLmVj+8ULNCZFuxnQ6pqpiC/ZCn
+ OicZ9EWM15lRwnWbRO8i+i6DhhfoQwPsHZ5GU24Yyi9DN+2de8K2ecQURp17jXVA
+ Fu83OfVPpKGGx/VTydvqaifkzohf1Tz2IQvbmm5ud404bwCXyUpbWVxxeQTNhylX
+ 3TBKg9j0KmbSL4p4sdfOWLtWicF88Cx8JoIu7w3eIC9ESqNYhTHw0vga5D+jaaoc
+ 8l9y8vbj0AQKj2v/b7GhPdInyeKioxilhq7BFGPai5OhNpOm3/FKI0tjN+2YQuDL
+ lZv/ufyQn3xwomDkFqexoA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715900607; x=
- 1715987007; bh=nCBzLxZrlNwulMp+yUT1aIiGxQ+A2Orz+JaurscNmw0=; b=S
- UDQplJDjMPGwB0Qd8fSU8uaRQ+7Fa7LHh/6N5vJ4cUoihAejX8qRvNBWOGfLKQ5w
- CPTe4jZiunRdtITBQjslOK4A8FVpIyvjs0b8Z+O8Ij7TgbYfYHwaTcgQaNy8EtO9
- ZEbCSfocB/RVnPkmLjDuVvYwfjdEjze6IKRzI5UvGNlxpg7BTD+VUThsprkw36C7
- Sh9nJRSkORHxH7Cj61S3USylELKzr/rtin9jVGezYDSa86TdW6o+HvhLHRXcDDO0
- NYKqU3xrPp9dJUbqcpgvY542kX9/z4wlICB8Jp74iJj4MS5Z5ZNvyEkDMXn8kTjp
- //uUn2ZrrwloH5hU24iTg==
-X-ME-Sender: <xms:v5BGZuKua0prYqGJRvPty3WaLkW4tVZAP7NGOqeMjxJIfvfKAeBnJA>
- <xme:v5BGZmKeRuvorpbrOufQqUqfgm-kAljlZbhbjRJt1jNmkdVP1vkV5tXG73xMuqo0E
- 46vIm-EL84O38GzomQ>
-X-ME-Received: <xmr:v5BGZuvTFZWWry_YAzOClmBMSx6rOR4tStogdVHeGG0Ov2YNrBcXrYI>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehvddgudehucetufdoteggodetrfdotf
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715901070; x=
+ 1715987470; bh=b4wIL0T3RIVDcC1KwGs0C9K2sdo74OKkxmEmQN67Kk4=; b=h
+ fsbtY0J40/hBW332IU7jJKc00csWD/YlGkytApskGOonH2eOQxCu666qiW+NKRQr
+ oMpOKmmE9XJSV+jbvv7tzb6wi8WoUFSDB9TOPf5FyLuF6keYjgyCJn80atljKNKp
+ p0+xIhdXu1vuixEe+/QFfj1uIP9mDCNyAJavqB8p1nMVbc2BhD/U0iRi4k3h71Sq
+ myOoiJrPIIvf/tKgkqOx5Nhnsi3VHVZk6a+oovfV9pCG6EtKtnK5JrNKuUi5bXGW
+ oeMot/YNiTrUkYFm8B7LYlHJrnEhoRyRd6VPaySqhF9ig1NVa6Z/8lIwQzfE0vNZ
+ qjDQtJDZnebMzWP5I2Rqw==
+X-ME-Sender: <xms:jpJGZkfzkVp9Yyefgw0dptR8OI8yEWR5N3wQXe4PsKXwKdkHXxapKA>
+ <xme:jpJGZmN7INAIE4H3NSWB7v41kRsIFyQTePI0Pz8lSJJ_gnrrmwDDxMjY4pFCfXqwd
+ OOPBcdTawTnzNbm3gQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehvddgudejucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhephfffufggtgfgkfhfjgfvvefosehtjeertdertdejnecuhfhrohhmpeflihgr
- gihunhcujggrnhhguceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomheqne
- cuggftrfgrthhtvghrnhepvdekiefhfeevkeeuveetfeelffekgedugefhtdduudeghfeu
- veegffegudekjeelnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilh
- hfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:v5BGZjbJN4IA95IY3lC6DWGFfwafs8OpzwXmu-LLWsMgc7bUYOl0-A>
- <xmx:v5BGZlb0kh4-qFRqlScu-i575MgToqhhaTP1_4MkPO1BRHhVxZXhOQ>
- <xmx:v5BGZvDoRWA8yDXt5eAxLk0zJPO_f5ommbzdhMkEfd8Eb6Nyl-3K0g>
- <xmx:v5BGZrZf6RziUynFnEI2D7e_Pzv40O_ifeFUoYTn7qVmHGuTt7jJqQ>
- <xmx:v5BGZqOQimbU0Z0koW-bfJMuOHLGJWYq7OmfQDtSFybF2HPig68vsbl9>
+ cujfgurhepofgfggfkjghffffhvfevufgtgfesthhqredtreerjeenucfhrhhomhepfdfl
+ ihgrgihunhcujggrnhhgfdcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtoh
+ hmqeenucggtffrrghtthgvrhhnpedufeegfeetudeghefftdehfefgveffleefgfehhfej
+ ueegveethfduuddvieehgfenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmh
+ grihhlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
+X-ME-Proxy: <xmx:jpJGZljTU10rHup0eqdDQCvsYz_VcRM27XikvGdEOVDGqS5F8H0NDg>
+ <xmx:jpJGZp94lXanRoBH8meC-187HBgMacvfY0KBtNVop-PDWdqzPTT4yw>
+ <xmx:jpJGZgv62hhPUcdeRM9toEff7cD5QmIlC3lSZ937SMN1uNbguQPy3A>
+ <xmx:jpJGZgH17N5QqbgS6-k3o_twEG-VbyAls4FRRTKGXg_sxhqQ883bWg>
+ <xmx:jpJGZiJjBUyjTjY51maCthNN9lPUdBwy5b1lLLdSTCCsTFsu6fsY1T3v>
 Feedback-ID: ifd894703:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 16 May 2024 19:03:26 -0400 (EDT)
-From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Fri, 17 May 2024 00:03:25 +0100
-Subject: [PATCH 2/2] efi: gop: Mark pixel_format as BLTONLY if we have sync
- hook
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id 36F6836A0074; Thu, 16 May 2024 19:11:10 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.11.0-alpha0-456-gcd147058c-fm-hotfix-20240509.001-g0aad06e4
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240517-virtio_gpu-v1-2-6353b87472c7@flygoat.com>
-References: <20240517-virtio_gpu-v1-0-6353b87472c7@flygoat.com>
+Message-Id: <7a9fb41e-e207-4037-a8bb-eb8fc149e496@app.fastmail.com>
 In-Reply-To: <20240517-virtio_gpu-v1-0-6353b87472c7@flygoat.com>
+References: <20240517-virtio_gpu-v1-0-6353b87472c7@flygoat.com>
+Date: Fri, 17 May 2024 00:10:52 +0100
+From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
 To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>
-X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2193;
- i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=w8jKtvqGSl/qcBMK2MpygP9drCFB+QXiCxldh68aZu0=;
- b=owGbwMvMwCHmXMhTe71c8zDjabUkhjS3CXvvFSzjuBlsfOLOZ9nQfwqq11s9v83Uz50t9Ndg8
- 08e0UyfjlIWBjEOBlkxRZYQAaW+DY0XF1x/kPUHZg4rE8gQBi5OAZiIsykjwy3LXVs9o7IUC5fN
- +79j4qbgbNdlB5i/VNtbRTa7fpghuZ7hr8C6tO8H/odfEPur0RI5neHkzkXr4n58mHtiqsR1MYl
- mPQYA
-X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
- fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
+Cc: "Tom Rini" <trini@konsulko.com>, "Bin Meng" <bmeng.cn@gmail.com>,
+ "Heinrich Schuchardt" <xypron.glpk@gmx.de>,
+ "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH 0/2] virtio_gpu driver and relevant fix
+Content-Type: text/plain;charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,72 +106,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If a video device has a video_sync hook, it means some software
-intervene is required to scanout framebuffer up on change.
 
-That means EFI application can't just use it as raw framebuffer,
-it should call BLT operation to let U-Boot help with scanout.
 
-Mark pixel format as BLTONLY as per UEFI spec to reflect this
-nature.
+=E5=9C=A82024=E5=B9=B45=E6=9C=8817=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8A=E5=
+=8D=8812:03=EF=BC=8CJiaxun Yang=E5=86=99=E9=81=93=EF=BC=9A
+> Hi all,
+>
+> This series added support for virtio-gpu device, it has been
+> tested on QEMU riscv64 and aarch64.
+>
+> I also fixed a problem in EFI GOP so it works with EFI applications
+> as well.
+>
+> There is a problem remaining. virtio_init() is being called too
+> late to allow virtio-gpu to be selected as a vidconsole. My current
+> appraoch is to register virtio_init in init_sequence_r, just after
+> pci_init. Is this a viable approach? Should I introduce a config
+> like CONFIG_VIRTIO_INIT_R to allow it to be selected by boards?
 
-Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
----
- include/efi_api.h        | 1 +
- lib/efi_loader/efi_gop.c | 9 ++++++++-
- 2 files changed, 9 insertions(+), 1 deletion(-)
+Just realized I made a mistake on preparing patches to be sent.
 
-diff --git a/include/efi_api.h b/include/efi_api.h
-index ab40b1b5ddf6..3eaefb322878 100644
---- a/include/efi_api.h
-+++ b/include/efi_api.h
-@@ -1399,6 +1399,7 @@ struct efi_hii_config_access_protocol {
- #define EFI_GOT_RGBA8		0
- #define EFI_GOT_BGRA8		1
- #define EFI_GOT_BITMASK		2
-+#define EFI_GOT_BLTONLY		3
- 
- struct efi_gop_mode_info {
- 	u32 version;
-diff --git a/lib/efi_loader/efi_gop.c b/lib/efi_loader/efi_gop.c
-index 41e12fa72460..784d43d3d39b 100644
---- a/lib/efi_loader/efi_gop.c
-+++ b/lib/efi_loader/efi_gop.c
-@@ -467,10 +467,12 @@ efi_status_t efi_gop_register(void)
- 	struct efi_gop_obj *gopobj;
- 	u32 bpix, format, col, row;
- 	u64 fb_base, fb_size;
-+	bool needs_sync;
- 	efi_status_t ret;
- 	struct udevice *vdev;
- 	struct video_priv *priv;
- 	struct video_uc_plat *plat;
-+	struct video_ops *ops;
- 
- 	/* We only support a single video output device for now */
- 	if (uclass_first_device_err(UCLASS_VIDEO, &vdev)) {
-@@ -485,6 +487,7 @@ efi_status_t efi_gop_register(void)
- 	row = video_get_ysize(vdev);
- 
- 	plat = dev_get_uclass_plat(vdev);
-+	ops = video_get_ops(vid);
- 	fb_base = IS_ENABLED(CONFIG_VIDEO_COPY) ? plat->copy_base : plat->base;
- 	fb_size = plat->size;
- 
-@@ -529,7 +532,11 @@ efi_status_t efi_gop_register(void)
- 	gopobj->info.version = 0;
- 	gopobj->info.width = col;
- 	gopobj->info.height = row;
--	if (bpix == VIDEO_BPP32)
-+
-+	if (ops && ops->video_sync) {
-+		/* Applications can't really use it as framebuffer */
-+		gopobj->info.pixel_format = EFI_GOT_BLTONLY;
-+	} else if (bpix == VIDEO_BPP32)
- 	{
- 		if (format == VIDEO_X2R10G10B10) {
- 			gopobj->info.pixel_format = EFI_GOT_BITMASK;
+Two tiny modifications are missing from this series, dual endian
+handling in patch 1 and removing an unused variable in patch 2.
 
--- 
-2.34.1
+I'll update a reversion, meanwhile fell free to review the current
+version.
 
+Apologize for the noise.
+
+Thanks
+- Jiaxun
+
+>
+> Thanks
+>
+> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> ---
+> Jiaxun Yang (2):
+>       virtio: New virtio_gpu driver
+>       efi: gop: Mark pixel_format as BLTONLY if we have sync hook
+>
+>  drivers/virtio/Kconfig         |  29 +++
+>  drivers/virtio/Makefile        |   1 +
+>  drivers/virtio/virtio-uclass.c |   1 +
+>  drivers/virtio/virtio_gpu.c    | 298 ++++++++++++++++++++++++++++
+>  drivers/virtio/virtio_gpu.h    | 428 ++++++++++++++++++++++++++++++++=
++++++++++
+>  include/efi_api.h              |   1 +
+>  include/virtio.h               |   4 +-
+>  lib/efi_loader/efi_gop.c       |   9 +-
+>  8 files changed, 769 insertions(+), 2 deletions(-)
+> ---
+> base-commit: 21aa37ec1cd4a12e01e0e863ec9e99d703ce4d52
+> change-id: 20240513-virtio_gpu-abb4de685808
+>
+> Best regards,
+> --=20
+> Jiaxun Yang <jiaxun.yang@flygoat.com>
+
+--=20
+- Jiaxun
