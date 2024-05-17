@@ -4,95 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 177F0C04FFE
-	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 16:36:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A94E8C04FFE
+	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 17:13:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 993918823C;
-	Fri, 17 May 2024 18:36:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
+	by phobos.denx.de (Postfix) with ESMTP id D65F187F52;
+	Fri, 17 May 2024 19:13:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="avdw0sNc";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="MVRcPLrF";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="mMVIUZoY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17CB487ECD; Fri, 17 May 2024 18:36:20 +0200 (CEST)
-Received: from fout8-smtp.messagingengine.com (fout8-smtp.messagingengine.com
- [103.168.172.151])
+ id 1A47B87F64; Fri, 17 May 2024 19:13:06 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 258A788489
- for <u-boot@lists.denx.de>; Fri, 17 May 2024 18:36:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BA45A87EF4
+ for <u-boot@lists.denx.de>; Fri, 17 May 2024 19:13:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=flygoat.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailfout.nyi.internal (Postfix) with ESMTP id 57CCF138153C;
- Fri, 17 May 2024 12:36:17 -0400 (EDT)
-Received: from imap44 ([10.202.2.94])
- by compute3.internal (MEProxy); Fri, 17 May 2024 12:36:17 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
- cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm1; t=1715963777;
- x=1716050177; bh=hfEGXBjB6zXiwex5AZeDBwSS+XxMoUAB+9cw8Qig5QA=; b=
- avdw0sNcTl+mQlPIah4gmQR5bjuhB8J09rykxt8h+z2yvE3M4IdrDovyg5VRp2qy
- CRqRahH+hGR3whBvxhtwXeFJWZ2VlCnHo6NXoM4VnRbU/QfmROHA53QVBQpnN4Y7
- TUuPGRVCI5s0mS6Wbv2QKBmeiAMrCaaTjAAZbBHE2OoKnIHly1O0eg9h7A166eEm
- 5nWUfy7yecIQOXbZIHxoxhW7z6++LcdgYXPCwobfQ3VlpzfOTvZwkkqNM24DG5tn
- L36iWbMNi9uDO0ojOng6sQEg3HI+UxwKm1hdqUjN6CXYn0UXcPf6WHajtRZrznFT
- WOWEdLPd3+B13bo1tBwSBA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715963777; x=
- 1716050177; bh=hfEGXBjB6zXiwex5AZeDBwSS+XxMoUAB+9cw8Qig5QA=; b=M
- VRcPLrFHDIB/nwA1a5aT5EL4WwJN5Fo8lX0EfVfdFPL+jaKsdn543GE4Op9bfZab
- /mtAVJxS9nHWPzktfKjV1fwie1xIjPIfg8y2H2JXTZ0iScqGNzV++50DUe/nTOjO
- 81lyQuea4g7/0eK8NF1ZPB+nOwIcfEY/U5BdlcCKhUi17eR+kKSZIAw5Itgs8n+I
- Ev+hZjxGMmoRiBvK8kV+EuI+iQ+lY1RYvotBYr1ULdbVelLJYCVk0vVo3aq+e3Q2
- OV5NVJpEl8oR7UF/oLBfKk+d2TP7J3f01URFoy8uUJywFcOBwejxdlmWSV4Blbjy
- t4XGWdHnt29c2PszQxu7g==
-X-ME-Sender: <xms:gYdHZlu-k71RyoyL1BGBW-ImWnrb_ccjmjSD4JUqOyEh2wY_GRoEBQ>
- <xme:gYdHZufqxyJ4iZyw2J8gcdDnF9lKRppOaz626f9Y_tzetbZBSPtZHOFGO5Lte4txg
- F0y_xBa9hnoTlncESo>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehgedgtdelucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepofgfggfkjghffffhvfevufgtgfesthhqredtreerjeenucfhrhhomhepfdfl
- ihgrgihunhcujggrnhhgfdcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtoh
- hmqeenucggtffrrghtthgvrhhnpedufeegfeetudeghefftdehfefgveffleefgfehhfej
- ueegveethfduuddvieehgfenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmh
- grihhlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
-X-ME-Proxy: <xmx:gYdHZozmfkJhC3H-tl6DH5RcP1IXeEv82guOkwXNqyGcdrnTN1TH2w>
- <xmx:gYdHZsNdHYnti1xztTgwxum4zJpQlm6q980OotLZHKambNklnh2KWA>
- <xmx:gYdHZl_ixYktowBy1GmwSEqq8oZYupiqoP6gHatgsqeCn_R52nrmTg>
- <xmx:gYdHZsVYHQWONFiOpMVfpqLb6d-4k8DBCY5hp4tj4Pw7JZiLON55Ww>
- <xmx:gYdHZhSKJA8DeAZT8fmCry73xVSVpWyKsCSfw-6fL90Qipsjt-pTDjIc>
-Feedback-ID: ifd894703:Fastmail
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
- id E91E036A0074; Fri, 17 May 2024 12:36:16 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.11.0-alpha0-456-gcd147058c-fm-hotfix-20240509.001-g0aad06e4
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1715965978; x=1716570778; i=xypron.glpk@gmx.de;
+ bh=xu1SUPwsJraLJLDYNjtCZcBLBwZkaDdlCzXnJI/wPkA=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=mMVIUZoYMv52obojfTvLExOckf0xLHiHqgIzOySxNLA54Y7dLPJ3uS1QxuCUlrcy
+ IM4qjTgq0OzC8vFcvoH/Y0uD03zkrPYL42zhGDFEB1Mzv0i7PQCLN21kvupcs+2hw
+ BOA8QdVke/+y0g+nG5cYolR3HBDtuFwxKMcR7ug/cT1s3PRSSta0+6G3Zy5WpUcY6
+ 3/r9ibTf8R6mmxRxmq8HucexTO0ufsKeInsU8y5lRp5C/44TmDbLrGVjT97nOAIia
+ gZzFu+U06UbyKj+x0vUjOzGxv05zeHSXFgbSrRsrzvSBjq3+5BJdFtY/pEh/uenOY
+ gsE3neDgI75iKslPGQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([176.4.195.183]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MXXuB-1s3zkb2Fkl-00Z23m; Fri, 17
+ May 2024 19:12:58 +0200
+Date: Fri, 17 May 2024 19:12:55 +0200
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Jiaxun Yang <jiaxun.yang@flygoat.com>, u-boot@lists.denx.de
+CC: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH 0/7] MIPS: Enable EFI support
+User-Agent: K-9 Mail for Android
+In-Reply-To: <20240517-mips-efi-v1-0-79096e3ca3b3@flygoat.com>
+References: <20240517-mips-efi-v1-0-79096e3ca3b3@flygoat.com>
+Message-ID: <F673BC88-7C9C-4633-91E6-1994732C5955@gmx.de>
 MIME-Version: 1.0
-Message-Id: <248bc1e8-2fcb-4865-a7a3-dcd2e0df1aa5@app.fastmail.com>
-In-Reply-To: <20240517160624.156962-1-heinrich.schuchardt@canonical.com>
-References: <20240517160624.156962-1-heinrich.schuchardt@canonical.com>
-Date: Fri, 17 May 2024 17:35:21 +0100
-From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
-To: "Heinrich Schuchardt" <heinrich.schuchardt@canonical.com>,
- "Simon Glass" <sjg@chromium.org>
-Cc: "Marek Vasut" <marek.vasut+renesas@mailbox.org>,
- "Ilias Apalodimas" <ilias.apalodimas@linaro.org>,
- "AKASHI Takahiro" <akashi.tkhro@gmail.com>,
- "Sean Anderson" <seanga2@gmail.com>, "Alexander Gendin" <agendin@matrox.com>, 
- "Bin Meng" <bmeng.cn@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] defconfig: disable VIDEO_COPY on the sandbox
-Content-Type: text/plain;charset=utf-8
+Content-Type: text/plain;
+ charset=utf-8
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:yvehqnBcJ5sd559iXYYtwIFw8X5kA6rsoleI3rqDokWvjaD7t8A
+ +LW0RIuAvFfeu70drgGGL8Mtv+CUWvWpSd25Yn4JDBACHczIqqDAEMaJ9PZX2gK6wE8dQoX
+ SmDN63ZNJTMpKkwgcEJI5sn+Kuh9QUYOVZOA7NfqmJk6VQOsllsj7BiRXZ6QWlX6ph+Sn4Q
+ rIrJJaLLfdByOFTtM/GoQ==
+UI-OutboundReport: notjunk:1;M01:P0:KSrO/EjhY84=;hBzlOrL+7A8op5Px3et/mOq5oTG
+ rYh4WT7eShXjivimxCAlR5JSrUNDQ1PnfeSFoCovJNk4QBUH3dgjR3S31cX+6PGsxiaf8cyTv
+ LlU4QHHdk6AKuXMCaEIXL+wGWL1rOQGjWcosv9/QOpi+8BF6WqEsLhNGfsXLCBu0o3lZkHane
+ hECCbKJeV8kiOzTuZJ6ZuH9HY3FFXhEr6ji/i8dlJEjIRqc4RX80A/v6HH+3PBmnW3KA+rDaw
+ FTm1xx5OMjzEFQxfjqMQFkwPJvqpAtMoTRilTvW15zrBkJ0lOv69hQ0wH/C6OZcW2cLDKhRrH
+ FiAc+hp+rJ9vqWXRkfpthxVl4NuL16ZfwRLk3J0JQRg3x7AV9EwnTmf4ncKmIVMMRZYoFaueI
+ wPIYX7mIrZMpCS093iCLtDSxDV3LmC+dtZaHIZYPWkOyvWtYICr0YkYodbbpsNc4YMCZzDUoH
+ c8Nfw4pxJu3jvTRMQ6c39+1DKQ9wPu9gD9Pvjv2179i2xHyhhm4+P3PN2g8cjBNuQz9BeWXLL
+ e5g7/xbc/fJNFNM9pUZDvTQD6wkt3SGlJE5+6Mle6Srb1lIpQfcv7tvCZpChamS7BET5lNqRI
+ Zeyo+mpn2mSlAYs1mDiXNujI9Y7PWZpjm2Xo6vJHA1lSn+NtJ9JYcyxg21BqfDvrgQBOn3l5X
+ V3aNvns2yMJPq5GFkMK0zjJwggU484RwgLFR19SzHUg+/1CQaDvD8XNZP2boLbRlUoHeJbb1t
+ iMITtmZJ+S1+wXprBG7UwffE+ZkFpumE7Q8sgQWdKvGKe3EsbnikVffw04f0eoabTtHc1J++M
+ JQaiP16W5REEhmjR4jk290t7lpfPndGKR/19NzGVNLZHY=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,47 +92,93 @@ X-Virus-Status: Clean
 
 
 
-=E5=9C=A82024=E5=B9=B45=E6=9C=8817=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8B=E5=
-=8D=885:06=EF=BC=8CHeinrich Schuchardt=E5=86=99=E9=81=93=EF=BC=9A
-> Since commit a75cf70d23ac ("efi: Correct handling of frame buffer") th=
-e EFI
-> block image transfer is broken on the sandbox.
+Am 17=2E Mai 2024 18:32:51 MESZ schrieb Jiaxun Yang <jiaxun=2Eyang@flygoat=
+=2Ecom>:
+>Hi all,
 >
-> To test build sandbox_defconfig with CONFIG_EFI_SELFTEST=3Dy and execu=
-te
+>This series enabled EFI support to MIPS platform=2E
 >
->     setenv efi_selftest block image transfer
->     bootefi selftest
+>Although MIPS is not defined by UEFI specification, there are
+>quite a few firmware implementations available, including
+>MIPS-EFI[1] for Loongson-2F, Lemote's proprietary EDK2 implementation
+>on Loongson-3[2], Kunlun firmware for Loongson-3[3], efiffy[4]
+>for MIPS Creator CI20 and another mystery EDK implementation shipped
+>with some Creator CI20 board=2E =20
 >
-> Fixes: a75cf70d23ac ("efi: Correct handling of frame buffer")
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-
-Reviewed-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
-
-It turns out that texture copy is only required for 8bpc display, which
-we don't care much anyway.
-
-Thanks
-- Jiaxun
-
-> ---
->  configs/sandbox_defconfig | 1 -
->  1 file changed, 1 deletion(-)
+>Available applications including gnu-efi, Loongson's GRUB fork[5],
+>Ventoy[6]=2E
 >
-> diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-> index 93b52f2de5c..80c310b8e82 100644
-> --- a/configs/sandbox_defconfig
-> +++ b/configs/sandbox_defconfig
-> @@ -318,7 +318,6 @@ CONFIG_USB_ETHER=3Dy
->  CONFIG_USB_ETH_CDC=3Dy
->  CONFIG_VIDEO=3Dy
->  CONFIG_VIDEO_FONT_SUN12X22=3Dy
-> -CONFIG_VIDEO_COPY=3Dy
->  CONFIG_CONSOLE_ROTATION=3Dy
->  CONFIG_CONSOLE_TRUETYPE=3Dy
->  CONFIG_CONSOLE_TRUETYPE_CANTORAONE=3Dy
-> --=20
-> 2.43.0
+>My implementation in U-Boot is aiming to follow conventions made
+>by other implementations for architecture stuff and remain
+>compliance with spec for general aspects=2E
+>
+>bootefi hello and selftest passed on both 32 and 64 bit system,
+>gnu-efi, grub and ventoy are tested on mips64el with my pending
+>platform works=2E mips32el efi executable from efiffy is tested
+>as well=2E
+>
+>Please review=2E
+>Thanks
 
---=20
-- Jiaxun
+Implementing the Loongarch architecture defined in <https://uefi=2Eorg/spe=
+cs/UEFI/2=2E10/02_Overview=2Ehtml#loongarch-platforms> would make sense to =
+me=2E
+
+Supporting an architecture that does not have published UEFI standards is =
+less convincing=2E=20
+
+Is any of the mentioned boards being produced anymore?
+
+Best regards
+
+Heinrich
+
+>
+>[1]: https://github=2Ecom/kontais/EFI-MIPS
+>[2]: https://github=2Ecom/loongson-community/firmware-nonfree
+>[3]: http://www=2Ekunluntech=2Ecom=2Ecn/klbiosxl
+>[4]: https://sourceforge=2Enet/projects/efify/
+>[5]: https://github=2Ecom/loongson-community/grub
+>[6]: https://www=2Eventoy=2Enet/en/index=2Ehtml
+>
+>Signed-off-by: Jiaxun Yang <jiaxun=2Eyang@flygoat=2Ecom>
+>---
+>Jiaxun Yang (7):
+>      MIPS: Implement setjmp
+>      efi: Allow runtime relocate to be disabled
+>      Makefile=2Elib: Preserve =2Erodata section for EFI file
+>      Makefile=2Elib: Enforce EFI CFLAGS/AFLAGS
+>      MIPS: Add smbios_start to arch_global_data
+>      MIPS: Define MIPS EFI related bits everywhere
+>      MIPS: Implement EFI supporting stuff
+>
+> Makefile                                          |   3 +
+> arch/mips/config=2Emk                               |   9 +
+> arch/mips/include/asm/global_data=2Eh               |   3 +
+> arch/mips/include/asm/setjmp=2Eh                    |  36 ++++
+> arch/mips/lib/Makefile                            |  15 ++
+> arch/mips/lib/crt0_mips_efi=2ES                     | 239 ++++++++++++++=
+++++++++
+> arch/mips/lib/elf_mips_efi=2Elds                    | 113 ++++++++++
+> arch/mips/lib/reloc_mips_efi=2Ec                    |  99 +++++++++
+> arch/mips/lib/setjmp32=2ES                          |  51 +++++
+> arch/mips/lib/setjmp64=2ES                          |  56 +++++
+> include/asm-generic/pe=2Eh                          |   5 +
+> include/config_distro_bootcmd=2Eh                   |   6 +
+> include/efi_default_filename=2Eh                    |   8 +
+> include/efi_loader=2Eh                              |  26 ++-
+> include/elf=2Eh                                     |   8 +
+> lib/efi_loader/Kconfig                            |  12 +-
+> lib/efi_loader/efi_image_loader=2Ec                 |  18 ++
+> lib/efi_loader/efi_memory=2Ec                       |  14 +-
+> lib/efi_loader/efi_runtime=2Ec                      |  11 +-
+> lib/efi_loader/efi_var_mem=2Ec                      |   6 +-
+> lib/efi_selftest/Makefile                         |   2 +-
+> lib/efi_selftest/efi_selftest_miniapp_exception=2Ec |   2 +
+> scripts/Makefile=2Elib                              |  10 +-
+> 23 files changed, 734 insertions(+), 18 deletions(-)
+>---
+>base-commit: ad7dce5abd49ef3b5c93da5303e15449c8c162b4
+>change-id: 20240517-mips-efi-c9a1ad819c2d
+>
+>Best regards,
