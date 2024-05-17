@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6CA7C25B74
-	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 02:06:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DFB6C25B74
+	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 02:26:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 065CE8847E;
-	Fri, 17 May 2024 04:06:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 89E96883BA;
+	Fri, 17 May 2024 04:26:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="F/1L2/sv";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="M+OpffLk";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="LpT7WKlz";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="I64EmAAD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4156E88479; Fri, 17 May 2024 04:06:33 +0200 (CEST)
-Received: from wfhigh5-smtp.messagingengine.com
- (wfhigh5-smtp.messagingengine.com [64.147.123.156])
+ id 5744088453; Fri, 17 May 2024 04:26:27 +0200 (CEST)
+Received: from wfout2-smtp.messagingengine.com
+ (wfout2-smtp.messagingengine.com [64.147.123.145])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7438E88453
- for <u-boot@lists.denx.de>; Fri, 17 May 2024 04:06:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E1D5788318
+ for <u-boot@lists.denx.de>; Fri, 17 May 2024 04:26:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
 Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailfhigh.west.internal (Postfix) with ESMTP id 9F8BC1800183;
- Thu, 16 May 2024 22:06:25 -0400 (EDT)
+ by mailfout.west.internal (Postfix) with ESMTP id 926621C0019F;
+ Thu, 16 May 2024 22:26:22 -0400 (EDT)
 Received: from imap44 ([10.202.2.94])
- by compute3.internal (MEProxy); Thu, 16 May 2024 22:06:26 -0400
+ by compute3.internal (MEProxy); Thu, 16 May 2024 22:26:22 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm1; t=1715911585;
- x=1715997985; bh=MLKdoT9FbYUdABbVPSWF/dm6TovMVwU2bJke+TfE0Z8=; b=
- F/1L2/svzCaEwvr9/RTXUxIHQ7u7r/kFcWBr84xEC54ExIe76UvnB1rbXVq5Q1th
- PTYY4cM3NK0FPalUz0VEtz0w4kdeDCyiojMG59pm13lSMas9eYL/dCoTjNTePsav
- RfYRefNkC+thRTUVumS88FN62qrjenLnQvYgic3erMp93e06UtNLb7s2Lo4X2UPM
- 2tIIDt4A88iyKEpARIcmxZPFT1oQcW7QI0hYgV6viEPgPaUPW70Iqjlz2wYuz+xs
- xkmMEjlKTnS1am/LjxSJO+cqkS4RVs/iipzGr/5JlNWqdXIU3QWThVx63PnuLzdz
- EJx8G3eVn71cL6ZG3o0zPQ==
+ :references:reply-to:subject:subject:to:to; s=fm1; t=1715912782;
+ x=1715999182; bh=tTj93SaIY9EiPn+UO1InH0vNkpmxN2r80gE89i48IQM=; b=
+ LpT7WKlz4YH8m4GKNtEjSwWXfMCfZnKm1T8j6BVrUts6WwAFKRI2s22xddnrW7WD
+ Mt2MGxfBT8jtDXFOS1RAwTnklgbrRpK5oFH7ukke+iwpEKkJkFMvegfSB8eG388+
+ BynVFqEhlm973LusHctp0vi9Otz/MAil9cIxz7XwhmkEFxDRJmWEHev7ojYZPnhc
+ GraKrm4hcGZ2HWpqyKMK4AnIWokbqiEXZwC88HxVA5Jhunw5OJFaBtCcsOMteYur
+ Te8wWi1210Ccc80F0mXPCWPckxG10dKKRd5y1qtLDD1Dq5N12cevqYQMt7GuGRKv
+ FzINXSReTvQWWcZ1rLl5HQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715911585; x=
- 1715997985; bh=MLKdoT9FbYUdABbVPSWF/dm6TovMVwU2bJke+TfE0Z8=; b=M
- +OpffLkle61PlfI0ZLFZOihtrgynwbPxdPsuFP+9NKm5F0CNepl/tDXI/o2hpDHW
- t3u6qay5NOTHhxIZmxsNokMQRDlNTx+/Hs8ktD+8ycRs7PlOVg0EA165GyPbsWxU
- KiXlTODSoL5xy+29Bgz9icnKFmxazrSrcNCv1J3sVxcKtgIaxgLW9RaUeCwqDte/
- ysTrI4pUI2zUeSuMNmyi3lU2rx+m13RyKw9+FoabWwQjfo9GZDePdJIbcyrcqYPG
- M038B+cWC0F0KdHIQBpIs2jhh8bgVmdiRCxw7uSh5lbFVoCkybm+83yfaPzxyg1v
- fgMh82UA+rUASoFJuyHyg==
-X-ME-Sender: <xms:oLtGZtrEU01vCsEla9cFOCaIjJDYnsPtcCYqy2rMVNtAGb-im9outA>
- <xme:oLtGZvrIdPyC8-xS9aBmkYb_Jjm3BUGZTYt-aqhBgGBy-SwJedhJrGgW0MJLyRvRi
- qTVCQ6jRQ60qTqoqsg>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehvddghedvucetufdoteggodetrfdotf
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715912782; x=
+ 1715999182; bh=tTj93SaIY9EiPn+UO1InH0vNkpmxN2r80gE89i48IQM=; b=I
+ 64EmAADiGrZCtKAIud+LtYTlSvfcxHxn3JqQHAS+FVrg9OOJTLo0lXAgX9ZjZJEA
+ h7jfrRGHbVR0P93LyQqo094HTaY6LqVwg+Q6NDgX6Z9jZRNrV7jqPLm4+vUyuU/F
+ SxxuHaxFhoeqGeNgp15ITjjIdsIoeat7sP343abhXtK/7U7KB2IirI7Ao8+zkhyZ
+ 2ix3SRf9bemO1dnwR64Ka/eZGPpzpby4vbNCSWBVb/7MXwgRN9l2GP8D4iiDLzP8
+ 91JQNanOTEY5k0qSTPvrvbgn23O+dlTe3JbRGfaSaqY+uD5ZqFRGsOBnyR4nU9Cu
+ zSZY0Gca7cctU0vTR2gMg==
+X-ME-Sender: <xms:TsBGZhkunikCriRcrGPsQFCTJIni5OyB_tKmBoi3NrsJv-WkKTeICg>
+ <xme:TsBGZs0yxkpKOL_YO3COrJjQpWQ_222z0JQn0x4KmkBIPlHEbeNaJ1L7Fo4-TUCBg
+ YlR0vDf5FPY08a2zuQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehfedgtdefucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
  cujfgurhepofgfggfkjghffffhvfevufgtgfesthhqredtreerjeenucfhrhhomhepfdfl
@@ -67,29 +67,28 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehvddghedvucetufdoteggod
  hmqeenucggtffrrghtthgvrhhnpedufeegfeetudeghefftdehfefgveffleefgfehhfej
  ueegveethfduuddvieehgfenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmh
  grihhlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
-X-ME-Proxy: <xmx:obtGZqOGInQV-iZHPyCgG51aiuYks44NbTmfS4dPVMOwZ4P4ZYaxdQ>
- <xmx:obtGZo4x0TRgligVAUxZFdnZn6-undQsbF2_QGSV-Dbne43U9tIgQA>
- <xmx:obtGZs5xw37pp5tltA_we0EDBK89KeTzX_q5KNuLVCB1s2fk1gAl5A>
- <xmx:obtGZgglRaAWA6KrzpKSmPMNLr0Ns85mlXEagIdDht5lKclqhJ_S2w>
- <xmx:obtGZn2kqjsNYMM07CDdmyAygtl99mpc7qY2EbRVGCPNmeJBxzPEvRpu>
+X-ME-Proxy: <xmx:TsBGZnonZHpR-3IQmPAlJ-7-GbnGPy4bkrynj67elQku95xStl_VcA>
+ <xmx:TsBGZhnXd41fw1OtJyKffFFZt1N8seQRXKDaBnIykYzcSj0hLt1RpQ>
+ <xmx:TsBGZv3Plhw_jmtr4a1TqyYRJe4jE_-cm163MMhkgR5n3Da-dHvRtw>
+ <xmx:TsBGZgt5Nk-ehRbNJ1Arp9ixM5wbqMObmGaAwVXA0xtXtRW0KuQ9IQ>
+ <xmx:TsBGZqQd8fdKOA0znBGeH8FOu83tHdswJ0kmxnokI466uUPE_NAGJRJl>
 Feedback-ID: ifd894703:Fastmail
 Received: by mailuser.nyi.internal (Postfix, from userid 501)
- id E4AAE36A0074; Thu, 16 May 2024 22:06:24 -0400 (EDT)
+ id E844636A0074; Thu, 16 May 2024 22:26:21 -0400 (EDT)
 X-Mailer: MessagingEngine.com Webmail Interface
 User-Agent: Cyrus-JMAP/3.11.0-alpha0-456-gcd147058c-fm-hotfix-20240509.001-g0aad06e4
 MIME-Version: 1.0
-Message-Id: <209b29fa-ff46-4a96-9169-daac1bb9c631@app.fastmail.com>
-In-Reply-To: <2227C151-FA5E-4649-89D4-989B7DE32930@gmx.de>
+Message-Id: <47734ebf-6c33-4b0c-95fa-3e8986e3d91b@app.fastmail.com>
+In-Reply-To: <0664F4C3-6C95-43DF-A283-760A8BCA1811@gmx.de>
 References: <20240517-virtio_gpu-v1-0-6353b87472c7@flygoat.com>
- <20240517-virtio_gpu-v1-2-6353b87472c7@flygoat.com>
- <2227C151-FA5E-4649-89D4-989B7DE32930@gmx.de>
-Date: Fri, 17 May 2024 03:06:06 +0100
+ <20240517-virtio_gpu-v1-1-6353b87472c7@flygoat.com>
+ <0664F4C3-6C95-43DF-A283-760A8BCA1811@gmx.de>
+Date: Fri, 17 May 2024 03:26:04 +0100
 From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
 To: "Heinrich Schuchardt" <xypron.glpk@gmx.de>, u-boot@lists.denx.de
 Cc: "Tom Rini" <trini@konsulko.com>, "Bin Meng" <bmeng.cn@gmail.com>,
  "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH 2/2] efi: gop: Mark pixel_format as BLTONLY if we have
- sync hook
+Subject: Re: [PATCH 1/2] virtio: New virtio_gpu driver
 Content-Type: text/plain;charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -111,37 +110,63 @@ X-Virus-Status: Clean
 
 
 =E5=9C=A82024=E5=B9=B45=E6=9C=8817=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8A=E5=
-=8D=882:44=EF=BC=8CHeinrich Schuchardt=E5=86=99=E9=81=93=EF=BC=9A
+=8D=882:56=EF=BC=8CHeinrich Schuchardt=E5=86=99=E9=81=93=EF=BC=9A
 [...]
-Hi Heinrich,
->>=20
->> 	plat =3D dev_get_uclass_plat(vdev);
->>+	ops =3D video_get_ops(vid);
->> 	fb_base =3D IS_ENABLED(CONFIG_VIDEO_COPY) ? plat->copy_base : plat->=
-base;
+>>+config VIRTIO_GPU_SIZE_X
+>>+	int "Width of display (X resolution)"
+>>+	default 1280
 >
-> Wasn't this line introduced to handle the video sync case by pointing=20
-> the EFI application to target framebuffer?
+> 1920x1080 would look like a reasonable default for me.
 
-This is used to handle the case that U-Boot itself is performing a copy
-from U-Boot's shadow buffer to the target buffer.
+1280x1024 was chosen because it is the largest resolution being defined =
+in
+VESA VBE, hence guaranteed compatibility everywhere. I think it's Linux's
+behaviour as well.
 
-However, in virtio-gpu (and some other driver like syncoam,seps525, ste,=
-mcde)
-cases hardware needs to be notified for any update to the framebuffer.
+Carving out a huge framebuffer out of memory might be a challenge on
+some platforms, so I'd like to keep it small.
 
-For those hardwares if application just write to target framebuffer the =
-display
-won't be updated. Hence we must direct applications to call BLT to allow=
- hardware
-being notified when framebuffer is changed.
+>
+>
+>>+	help
+>>+	  Sets the width of the display.
+>>+
+>>+	  These two options control the size of the display set up by QEMU.
+>>+	  Typical sizes are 1024 x 768 or 1280 x 1024.
+>>+
+>>+config VIRTIO_GPU_SIZE_Y
+>>+	int "High of display (Y resolution)"
+>>+	default 1024
+>>+	help
+>>+	  Sets the height of the display.
+>>+
+>>+	  These two options control the size of the display set up by QEMU.
+>>+	  Typical sizes are 1024 x 768 or 1280 x 1024.
+>
+> Haven't had such small monitors for a while. Why should this be typica=
+l?
 
-Thanks
+Haha I copied this from bochs driver's help text, I can replace it with
+more reasonable text.
+
+>
+> Doesn't QEMU allow to read the size of the output window at runtime?
+
+Unfortunately, it's always guest to determine the size of display.
+VIRTIO_GPU_CMD_GET_DISPLAY_INFO simply returned 0 as size of the scanout
+before guest initialize it first.
+
+It is possible to parse EDID provided by QEMU to get a resolution list,
+but I found implementing the whole modesetting procdure here is a little
+bit unnecessary.
+
+I think resizing display in OS is generally done with VMM's guest agent.
 
 >
 > Best regards
 >
 > Heinrich
 >
+
 --=20
 - Jiaxun
