@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40421C04FFE
-	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 18:15:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C24B4C25B78
+	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 18:15:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93B3788544;
-	Fri, 17 May 2024 20:15:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1BDAC88556;
+	Fri, 17 May 2024 20:15:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="fxVlkZlU";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="EqBR3QnA";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="Rjkzk2kR";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="IU4naAlA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 91F128853E; Fri, 17 May 2024 20:14:59 +0200 (CEST)
+ id CE0E78853E; Fri, 17 May 2024 20:15:00 +0200 (CEST)
 Received: from fhigh7-smtp.messagingengine.com
  (fhigh7-smtp.messagingengine.com [103.168.172.158])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3649288541
- for <u-boot@lists.denx.de>; Fri, 17 May 2024 20:14:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D772688547
+ for <u-boot@lists.denx.de>; Fri, 17 May 2024 20:14:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
- by mailfhigh.nyi.internal (Postfix) with ESMTP id 5250C11400BD;
- Fri, 17 May 2024 14:14:56 -0400 (EDT)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id EEE5611401C5;
+ Fri, 17 May 2024 14:14:57 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute1.internal (MEProxy); Fri, 17 May 2024 14:14:56 -0400
+ by compute2.internal (MEProxy); Fri, 17 May 2024 14:14:57 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm1; t=1715969696;
- x=1716056096; bh=A09TdZSjf/AHnbMvBFi9xIa9m13gd1pgvqRU37n3YsQ=; b=
- fxVlkZlUeALuW5nE/FS7+6FvtjFuk7oEgfWFr1uKVVGaK84zS4/BtqTCXEWzZmvh
- IYfW1GGZkjqKQrcJgQN0Ho138pBq4Juv7PRerau/bXDSWge9O2qYhgoCTgqbULr+
- 5GSYE8HvV3jV4RrM3DaRhPFQh2y5S2nekZlUJJ0sqN6bc3DdSWIIXlDlSDMf+uww
- kLkxroNEcHWROKbIIP651a8OZhh7hWO0SMPKiBXPe6VmBYP0aQ0Zh/VmFQ1zYYhw
- SCu4EUpHhe4gCD/s1/78PG9/fzVG35BljOPXJP2QyJDgqb6oD15qTsBLOc3kgjK6
- olGULlRSYJPm5KJXA8lxpA==
+ :references:reply-to:subject:subject:to:to; s=fm1; t=1715969697;
+ x=1716056097; bh=x8LDYv2RenMOlJR07nmGqmXKuo8xzS8MSIcW3Gnujww=; b=
+ Rjkzk2kRxQQNdeLwgsNTIBykDmic5wp82cFuiIwqwYU7mut0cyzi/vG2245c7tGL
+ bE8zaUTrO/Rqg3ehqjEDtE92anT3G13ceZOFvuvOyQQ+xPWVDHDssWKjbS6f1Sa9
+ gCE4n03NuJod7giWWcq7rD+KHmbSYi5XZWMW0n1+mOJqnUmUfcRuIYzcsTbcJ+4e
+ NYUjoiywjCBvyq1L+1qbTQf4IUaZxJ/XoruIohV+4clDNCxlQkW1btyR1AIPeeC4
+ OPHVhYizYcRDpTGTr+7jo6xjgAE9o7JFpC7cTFYxAkJNtrR6LPEN3lpkEOb4jKlF
+ IaeWgnT/+SA6GIOlaWfBGw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715969696; x=
- 1716056096; bh=A09TdZSjf/AHnbMvBFi9xIa9m13gd1pgvqRU37n3YsQ=; b=E
- qBR3QnAr0Jz9K1jxA8wzctKx5MZNh14fY8Uu5HTv2d1eGp9tNgHtRI0xcXOlf3af
- vqxxnSDYib3UtKcHYqoryC1sISv4cuDu1duqJg7K0mUQqkGw+PPNxRZ7Jac+Ut8o
- UZifcQjTa1pXwt0Xnn6RqSmMphyMtsdwLXWzHUdxpTiMOpxE2pwLWOSdN+tHE1U3
- oVejMo0zvvWAIviHpKyTQwPBc/0dzBv5X3Ewf7Ry7t7MQ/uO6AMWaI77qiPV60or
- VIigr8+IyOYtK3SOteNHPe7MYkgpHTTbJX9iWsPFFXQXHCWvEWBDbX577E9PmE53
- sr0HrO2kvmX4rZrtgWilQ==
-X-ME-Sender: <xms:oJ5HZmRlc1VF0oC-nlGxiw8VH7hk7D0IkpJFJNE2qUOUUTAPXPEB-w>
- <xme:oJ5HZrwfYIdhsZkYxsBwV76LLuo9dIlKlQeMO0U_BbrzrjNyuNso0iom0yBEcJWMI
- bcJmtVeaPzL4eI3Shw>
-X-ME-Received: <xmr:oJ5HZj3DIEHl_9tXotzB4GixXZLxl1vNfzC4QQ4qWIvO3KgwxqR9JO4>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715969697; x=
+ 1716056097; bh=x8LDYv2RenMOlJR07nmGqmXKuo8xzS8MSIcW3Gnujww=; b=I
+ U4naAlAfX+uzCwPkFNAM5ewsc2ywbsfdsMyNYDzxIYfZmZZ04toXUnLGtORUjzrq
+ IcwdprmTdOzeqp5ZNrqj6evLBaUFNw9FPbutXIzKY+23TfMVVNoHutQACl6ZXbe9
+ uskE+vmQHZmFyNNPhP5BuHS12FOGQS2jqv2xTaQDbnaqpLamMf6MyW5FuPrKfqch
+ KUMlv/ZpnRXn+LLxvUMHtWc1qRz//V0ywBhMs/1sBAhfyH3avF2DArqc6nd8quFm
+ YN9C4eK6F3qFB6CuQ7bIm7LIfJuOfT4Ycqzm/wGUog+e80uTr8J1mVeMm8Bw6c99
+ F3R/ALaO1XS7pMB1WViIw==
+X-ME-Sender: <xms:oZ5HZgJiEY8iVa-kmtCc8UmtjdEU42ZGVYRzZmYS8FQCNT_otIaFtA>
+ <xme:oZ5HZgKjQuYO9O0oba4YY019i5I7qNffP1nA9V63qfSva5UCswn4Jox-ytKet2WqO
+ q45YDKeNFVN2AYwOSs>
+X-ME-Received: <xmr:oZ5HZguMC-KaQ2lx4_X0KwJcAgToKP1uZJi2X1Kpai8yy0kAPd6vKlw>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehgedgvdelucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
@@ -68,22 +68,22 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehgedgvdelucetufdoteggod
  cuggftrfgrthhtvghrnhepvdekiefhfeevkeeuveetfeelffekgedugefhtdduudeghfeu
  veegffegudekjeelnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilh
  hfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:oJ5HZiBbe1Gg7VOXkxLAWcyNLzwzDs4XeJ3DI_F1AIUvXO3RczShaQ>
- <xmx:oJ5HZvhQKIP1MYQfidOHFlVY7o7cZnv8Z14lmAkF5Gsj4mYhYFE03g>
- <xmx:oJ5HZurlb0b57zmsubvJ4U9adbVAIvPxrPOzaGXY2cwQKOLBfAorbg>
- <xmx:oJ5HZiiyitjSaOi_BOWgyHMlbYGXQP0TTe4uzfEEgkrIjArjA5ke6A>
- <xmx:oJ5HZipH0-7ESMtycWVzqfPkz4UBdj4znbJU-fIu93PS9JcG0wzfoqNH>
+X-ME-Proxy: <xmx:oZ5HZtbuw4epjGhGJJSTZZPOcZOEO69SNruP2Mv8nyX9Oz9ut1YxUQ>
+ <xmx:oZ5HZna5jNShq72VRApON03jkiJnRQRo8Vqvi4RlHjj7Stc66t-WLA>
+ <xmx:oZ5HZpCXObxhbHmhdrKXRuti1u5lX_jWgDQgFq4G6xaJQsxpl348Pg>
+ <xmx:oZ5HZtZ5Du5sKB_xrGRsk7hO-3Ry6AoH3EIGWIHVsLRV9frt-tOWNA>
+ <xmx:oZ5HZlCupCm-44rOy6-HpgEiDagiEcL44349RUKytWLUuFhUGvp3KmBR>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 17 May 2024 14:14:54 -0400 (EDT)
+ 17 May 2024 14:14:56 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Fri, 17 May 2024 19:14:50 +0100
-Subject: [PATCH v3 02/12] pci: auto: Reduce bridge mem alignment boundary
- for boston
+Date: Fri, 17 May 2024 19:14:51 +0100
+Subject: [PATCH v3 03/12] pci: Enable PCI_MAP_SYSTEM_MEMORY when
+ ARCH_MAP_SYSMEM is not set
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240517-boston-v3-2-1ea7d23f4a1d@flygoat.com>
+Message-Id: <20240517-boston-v3-3-1ea7d23f4a1d@flygoat.com>
 References: <20240517-boston-v3-0-1ea7d23f4a1d@flygoat.com>
 In-Reply-To: <20240517-boston-v3-0-1ea7d23f4a1d@flygoat.com>
 To: u-boot@lists.denx.de
@@ -94,13 +94,13 @@ Cc: Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@linaro.org>, Jonas Karlman <jonas@kwiboo.se>, 
  Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3164;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=845;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=47N9g7qZS/9fuK9fjUgi3DPCL1HeIrDjoEfRwEqV7nU=;
- b=owGbwMvMwCHmXMhTe71c8zDjabUkhjT3ebMXn9a+fK/xvJhDRp8ak5Hu9nNFq/gOLVEwfmD2U
- PjDOtZLHaUsDGIcDLJiiiwhAkp9GxovLrj+IOsPzBxWJpAhDFycAjCRxX8Y/ufG7hdWr2OMiq5V
- E9ZQ5Zm+2If5p/mdWrvu+4crnp2/cpqRYfpxl8UTA/wWHDJnnLXv66xvwtK1d/duX3kxY6GOt1J
- zLSMA
+ bh=5P0kah0j1rkZJDtXsUvgnBypLjtGpRRBsmtGjzJbCg4=;
+ b=owGbwMvMwCHmXMhTe71c8zDjabUkhjT3ebMNX2hPDFrcsObgze1eSsHv/PubqqQe2S2fYflwQ
+ biGLN+1jlIWBjEOBlkxRZYQAaW+DY0XF1x/kPUHZg4rE8gQBi5OAZjIJQuG/3GrBCUyF55U//3o
+ k96WUNnQwhMq4hpf/xdob1GsPFUuO5Phv3tx8fTZvhfaLux7b6/HbRw7PfjMacGKyw2uKiZavRL
+ dLAA=
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -119,86 +119,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Boston has a very limited memory range for PCI controllers, where
-1MB can't easily fit into it.
+For MIPS we are always looking gd->dram in virtual address so
+PCI_MAP_SYSTEM_MEMORY should always be enabled.
 
-Make alignment boundary of PCI memory resource allocation a Kconfig
-option and default to 0x10000 for boston.
+If in future we ever want to make it physical we have to set
+ARCH_MAP_SYSMEM.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- drivers/pci/Kconfig    |  9 +++++++++
- drivers/pci/pci_auto.c | 16 ++++++++--------
- 2 files changed, 17 insertions(+), 8 deletions(-)
+ drivers/pci/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/drivers/pci/Kconfig b/drivers/pci/Kconfig
-index 8d02ab82ad9f..289d1deb38b6 100644
+index 289d1deb38b6..14f6067fa29b 100644
 --- a/drivers/pci/Kconfig
 +++ b/drivers/pci/Kconfig
-@@ -75,6 +75,15 @@ config PCI_MAP_SYSTEM_MEMORY
- 	  This should only be required on MIPS where CFG_SYS_SDRAM_BASE is still
- 	  being used as virtual address.
- 
-+config PCI_BRIDGE_MEM_ALIGNMENT
-+	hex "Alignment boundary of PCI memory resource allocation"
-+	default 0x10000 if TARGET_BOSTON
-+	default 0x100000
-+	help
-+	  Specify a boundary for alignment of PCI memory resource allocation,
-+	  this is normally 0x100000 (1MB) but can be reduced to accommodate
-+	  hardware with tight bridge range if hardware allows.
-+
- config PCI_SRIOV
- 	bool "Enable Single Root I/O Virtualization support for PCI"
+@@ -67,6 +67,7 @@ config PCI_CONFIG_HOST_BRIDGE
+ config PCI_MAP_SYSTEM_MEMORY
+ 	bool "Map local system memory from a virtual base address"
+ 	depends on MIPS
++	default y if !ARCH_MAP_SYSMEM
  	help
-diff --git a/drivers/pci/pci_auto.c b/drivers/pci/pci_auto.c
-index 90f818864457..b2c76b25801a 100644
---- a/drivers/pci/pci_auto.c
-+++ b/drivers/pci/pci_auto.c
-@@ -372,8 +372,8 @@ void dm_pciauto_prescan_setup_bridge(struct udevice *dev, int sub_bus)
- 	dm_pci_write_config8(dev, PCI_SUBORDINATE_BUS, 0xff);
- 
- 	if (pci_mem) {
--		/* Round memory allocator to 1MB boundary */
--		pciauto_region_align(pci_mem, 0x100000);
-+		/* Round memory allocator */
-+		pciauto_region_align(pci_mem, CONFIG_PCI_BRIDGE_MEM_ALIGNMENT);
- 
- 		/*
- 		 * Set up memory and I/O filter limits, assume 32-bit
-@@ -387,8 +387,8 @@ void dm_pciauto_prescan_setup_bridge(struct udevice *dev, int sub_bus)
- 	}
- 
- 	if (pci_prefetch) {
--		/* Round memory allocator to 1MB boundary */
--		pciauto_region_align(pci_prefetch, 0x100000);
-+		/* Round memory allocator */
-+		pciauto_region_align(pci_prefetch, CONFIG_PCI_BRIDGE_MEM_ALIGNMENT);
- 
- 		/*
- 		 * Set up memory and I/O filter limits, assume 32-bit
-@@ -465,8 +465,8 @@ void dm_pciauto_postscan_setup_bridge(struct udevice *dev, int sub_bus)
- 	dm_pci_write_config8(dev, PCI_SUBORDINATE_BUS, sub_bus - dev_seq(ctlr));
- 
- 	if (pci_mem) {
--		/* Round memory allocator to 1MB boundary */
--		pciauto_region_align(pci_mem, 0x100000);
-+		/* Round memory allocator */
-+		pciauto_region_align(pci_mem, CONFIG_PCI_BRIDGE_MEM_ALIGNMENT);
- 
- 		dm_pci_write_config16(dev, PCI_MEMORY_LIMIT,
- 				      ((pci_mem->bus_lower - 1) >> 16) &
-@@ -480,8 +480,8 @@ void dm_pciauto_postscan_setup_bridge(struct udevice *dev, int sub_bus)
- 				     &prefechable_64);
- 		prefechable_64 &= PCI_PREF_RANGE_TYPE_MASK;
- 
--		/* Round memory allocator to 1MB boundary */
--		pciauto_region_align(pci_prefetch, 0x100000);
-+		/* Round memory allocator */
-+		pciauto_region_align(pci_prefetch, CONFIG_PCI_BRIDGE_MEM_ALIGNMENT);
- 
- 		dm_pci_write_config16(dev, PCI_PREF_MEMORY_LIMIT,
- 				      (((pci_prefetch->bus_lower - 1) >> 16) &
+ 	  Say Y if base address of system memory is being used as a virtual address
+ 	  instead of a physical address (e.g. on MIPS). The PCI core will then remap
 
 -- 
 2.34.1
