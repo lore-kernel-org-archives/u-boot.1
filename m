@@ -4,89 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05659C25B78
-	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 17:36:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38C3EC04FFE
+	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 17:40:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47917884DC;
-	Fri, 17 May 2024 19:36:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 8461E88126;
+	Fri, 17 May 2024 19:40:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="JpfQ4Lvp";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="r95xXhR/";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="I0skGkFL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 05615884CD; Fri, 17 May 2024 19:36:14 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 901AE8818C; Fri, 17 May 2024 19:40:45 +0200 (CEST)
+Received: from fhigh6-smtp.messagingengine.com
+ (fhigh6-smtp.messagingengine.com [103.168.172.157])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76CEF884E1
- for <u-boot@lists.denx.de>; Fri, 17 May 2024 19:36:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7629188093
+ for <u-boot@lists.denx.de>; Fri, 17 May 2024 19:40:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a5a4bc9578cso459199066b.2
- for <u-boot@lists.denx.de>; Fri, 17 May 2024 10:36:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1715967369; x=1716572169; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=O9JgpT0iD5QKfPati6r1tZpT7sJG+gdX54lZ/cN37eY=;
- b=JpfQ4LvpqsH/Xci+3cZNOlzyMrp0L7QS0+wn1eW8J73dNtiRhGQpnkl06qPbz/rdPz
- oCb+tM5urf0YwGu5W5b3GfHWK70DN9KmIEXtWhnTGZdRRZE9MeEQ9F2iowDEjgnmgyMg
- WBdVyb4vxt4i3v7vjEfaM/MV/GfocW84BJmA1f8HJsRkVTThpcBhKBMI0grokiDoPmTs
- tLD8N1WrdFOpQ2GgKREZGgTFyr2f0FD2KGqSDK1YgqqKUj/KCkeh8ZHL43cb8wT5TCsp
- Z/tOSJmpaEsrQZvVyWL+3tV/kTpeJEtrmsAhu9WTIxMYkcbExIm5BYtGOS6ktUtoeKNB
- JRrw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715967369; x=1716572169;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=O9JgpT0iD5QKfPati6r1tZpT7sJG+gdX54lZ/cN37eY=;
- b=safpqQN1PMWuV0PsyGcPk85QvfmN/z0IHu71w+MzRarI0nWYCDYU3VGLCHiNVFO536
- ETFyO/XAZR1Dlc+SDjoM+wHuTqIIO3XngKCuH6dVaJSiRdlqnYI8Ofe8iDZiTSQJRM2R
- eJcHBl72h7UrFubO1OOD2xWJ7pfu9r/D9iVacDhNo31cTG4j8t0RMvgi41DGsk9VO3F4
- HDZ7TtiMQ0aCTyYSAJYhcTABvM88VyGHi0B5NEK76RJtIdVAk/nKu6WlGVEW4EZrrl6m
- TcSfE7LfcERe1Ae5hZzap7h8QnXV1UGog1uZ6FM/vy8qa50bCP6GAoucwQ0Vtci79mGt
- CMZw==
-X-Gm-Message-State: AOJu0YxfXq3YbdAVZDMQdNccH9z40t0gcAe9h/bRTq+eCeSrb9lifkV2
- OTznOjZwaVoapw5Yzx+42b244LlVOCv7xtb14Wz+DJZTvJfdxQNA8nx4GWJD45s+QjHr1tO4XdQ
- V0nJXC4IqrClxBnydv/VJH/X4QDyEYiGVaMVE1w==
-X-Google-Smtp-Source: AGHT+IGlijReSOypcHWT/BXp4K4rsL9NW2Ol46jVG58PrUCTeeBJNh249ein5iY66bSD0bPVOnPmc6EqnJuk6gDUjco=
-X-Received: by 2002:a17:907:320b:b0:a59:b177:22d7 with SMTP id
- a640c23a62f3a-a5a2d53b75emr2738642066b.8.1715967368808; Fri, 17 May 2024
- 10:36:08 -0700 (PDT)
+ spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id 361A011401AA;
+ Fri, 17 May 2024 13:40:41 -0400 (EDT)
+Received: from imap44 ([10.202.2.94])
+ by compute3.internal (MEProxy); Fri, 17 May 2024 13:40:41 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
+ cc:cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to; s=fm1; t=1715967641;
+ x=1716054041; bh=AHZZeSpN5s3qw0SbkktmzkCkiajPaeqQe4zMAyEvYKI=; b=
+ r95xXhR/cWqrRLOkV07hIUQZpGKiQa9Rz4Cl9iDhZvlmLTflu2Lqpl1uDFLNu5o2
+ XO72EXVht/hucAvkS+VcGP5Ah4/AsFg0i6u3HWMGIepiDzt8HZASF4fZ/Luv3yXv
+ RhlkwpJ5d7x6FmfS0+3qtadbbRgMl2ECVNSDwXxZ3TcVytwSRwX/g+jwARunphTO
+ vkrBuuhW5+Tz55TQe3iOGGEPlPj+dj+OkHySbzKWcVTSByB9iIYls4mAH/1eANuC
+ v3TdQ5T3hu2/Vzr/pHth/NjJC9lxeANAtnDOri6jW9KAo2fSDI7EOfSpCV35Khus
+ unhj7FG80wCvmBzkiXyPPw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715967641; x=
+ 1716054041; bh=AHZZeSpN5s3qw0SbkktmzkCkiajPaeqQe4zMAyEvYKI=; b=I
+ 0skGkFLWV7aFxVGPBRuTDaY/tiDoBxvhS2QDWj1pxEvHNW9SpoSDh9AjM49SI+aL
+ vXm1sP8KYRGS0XLyOlZBotSKzYoqfL4bthXdHxVh57JEh3VB5zfxhuGf58V0tr3z
+ WLkBmwncUIviQNXFoVRKhCDgxPySyIoT8jNeaZ1eNJ9K2KnU8xbQOd/kY/SFC3eI
+ kJZHoslpFrONjIQG7iFo/+jiMXmwU0JfXyF4tESxF2t6qCsZuO6JAxjb3nHFS4gj
+ HMasd8M61rABulDf4gc77T39KTVnW1Ige6OM3hDEOmX9TkRPxKi35PTc4Zn+/p9e
+ w3OXtSr08HogJ39dJbKJg==
+X-ME-Sender: <xms:mJZHZp-kVCOkGI2RZtCH9SKPuJbKINGvtRnoBXLX8N3EWgdM9FlgpQ>
+ <xme:mJZHZtsNewOI-TygeSCqM9Xz__U4sPvdFOVzHJ7EnEvVir2jsYYEEdAx2x2o680kZ
+ wGIBKekFVYklEJ7dCY>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehgedgvddvucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ goufhushhpvggtthffohhmrghinhculdegledmnecujfgurhepofgfggfkjghffffhvfev
+ ufgtgfesthhqredtreerjeenucfhrhhomhepfdflihgrgihunhcujggrnhhgfdcuoehjih
+ grgihunhdrhigrnhhgsehflhihghhorghtrdgtohhmqeenucggtffrrghtthgvrhhnpeel
+ udevkefgvdegvdfgteefgefhgeffffetkeegkefgledujeeiueelleegjeevveenucffoh
+ hmrghinhepuhgvfhhirdhorhhgpdgtihhpuhhnihhtvggurdgtohhmpdhgihhthhhusgdr
+ tghomhdpkhhunhhluhhnthgvtghhrdgtohhmrdgtnhdpshhouhhrtggvfhhorhhgvgdrnh
+ gvthdpvhgvnhhtohihrdhnvghtnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghm
+ pehmrghilhhfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
+X-ME-Proxy: <xmx:mJZHZnAAHLGkBedBUMjU4sJ5Cop4bPdjoCu7-BwLDlzi46CqIT5Mmw>
+ <xmx:mZZHZtc7dF0AFUyye5fPZxhKlDaf62r52JiAJ5gZU_ZKIaBm1Q4fbQ>
+ <xmx:mZZHZuNouBCyU2wZKhAjtrKQ4yV7_rG13Ae_U0aqGSHtON9W94O4IA>
+ <xmx:mZZHZvk269isZTMspRjKIILmI4UDTuHMUXVaQ-ZweXw-b_eQZxBZmA>
+ <xmx:mZZHZrqEORcF0hUJ0-8MNRNm-SIrbLPQsA059ywRV_h_kX2KVUA-utXC>
+Feedback-ID: ifd894703:Fastmail
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id DBCE036A0074; Fri, 17 May 2024 13:40:40 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.11.0-alpha0-456-gcd147058c-fm-hotfix-20240509.001-g0aad06e4
 MIME-Version: 1.0
-References: <20240516213036.89016-1-marex@denx.de>
- <20240516213036.89016-4-marex@denx.de>
- <CAJ+vNU1Sb60gX4RoHwO=o2kf0c9bW85W2i1VwJg3Oa1hFmxADw@mail.gmail.com>
- <b5366e76-6642-457d-ade9-a0e68f181e99@denx.de>
-In-Reply-To: <b5366e76-6642-457d-ade9-a0e68f181e99@denx.de>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Fri, 17 May 2024 10:35:55 -0700
-Message-ID: <CAJ+vNU3jpRe+6VvA1UVJSvoxf5SrAvK-ZC9vcsCF74_zLsyx_g@mail.gmail.com>
-Subject: Re: [PATCH v3 4/4] imx: hab: Use nxp_imx8mcst etype for i.MX8M
- flash.bin signing
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, anton.gres@ifm.com, ch@denx.de, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Adam Ford <aford173@gmail.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Angus Ainslie <angus@akkea.ca>, 
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Fabio Estevam <festevam@gmail.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Simon Glass <sjg@chromium.org>,
- Stefan Eichenberger <stefan.eichenberger@toradex.com>, 
- Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>, kernel@puri.sm, 
- u-boot@dh-electronics.com
-Content-Type: text/plain; charset="UTF-8"
+Message-Id: <0153f00e-feb3-45b1-a13b-0b57da90252c@app.fastmail.com>
+In-Reply-To: <F673BC88-7C9C-4633-91E6-1994732C5955@gmx.de>
+References: <20240517-mips-efi-v1-0-79096e3ca3b3@flygoat.com>
+ <F673BC88-7C9C-4633-91E6-1994732C5955@gmx.de>
+Date: Fri, 17 May 2024 18:40:21 +0100
+From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
+To: "Heinrich Schuchardt" <xypron.glpk@gmx.de>, u-boot@lists.denx.de
+Cc: "Daniel Schwierzeck" <daniel.schwierzeck@gmail.com>,
+ "Tom Rini" <trini@konsulko.com>,
+ "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH 0/7] MIPS: Enable EFI support
+Content-Type: text/plain;charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,85 +110,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, May 16, 2024 at 6:31=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
->
-> On 5/16/24 11:40 PM, Tim Harvey wrote:
->
-> [...]
->
-> >> -The entire script is available in doc/imx/habv4/csf_examples/mx8m/csf=
-.sh
-> >> -and can be used as follows to modify flash.bin to be signed
-> >> -(adjust paths as needed):
-> >> -```
-> >> -export CST_DIR=3D/usr/src/cst-3.3.1/
-> >> -export CSF_KEY=3D$CST_DIR/crts/CSF1_1_sha256_4096_65537_v3_usr_crt.pe=
-m
-> >> -export IMG_KEY=3D$CST_DIR/crts/IMG1_1_sha256_4096_65537_v3_usr_crt.pe=
-m
-> >> -export SRK_TABLE=3D$CST_DIR/crts/SRK_1_2_3_4_table.bin
-> >> -export PATH=3D$CST_DIR/linux64/bin:$PATH
-> >
-> > Hi Marek,
-> >
-> > I thought you were going to leave the above env setting examples in
-> > the documentation.
-> >
-> > I suggest showing how to specify using env (by just leaving the above
-> > in) as well as by copying them directly to the build directory if
-> > wanted.. otherwise the documentation is lacking.
->
-> If the tool can do env vars now, I would like to avoid copying key
-> material around. So what about this:
->
-> diff --git a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-> b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-> index 1eb1fb0aa61..257ffb45656 100644
-> --- a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-> +++ b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-> @@ -144,6 +144,8 @@ The signing is activated by wrapping SPL and
-> fitImage sections into nxp-imx8mcst
->   etype, which is done automatically in
-> arch/arm/dts/imx8m{m,n,p,q}-u-boot.dtsi
->   in case CONFIG_IMX_HAB Kconfig symbol is enabled.
->
-> +Build of flash.bin target then produces a signed flash.bin automatically=
-.
-> +
->   The nxp-imx8mcst etype is configurable using either DT properties or
-> environment
->   variables. The following DT properties and environment variables are
-> supported.
->   Note that environment variables override DT properties.
-> @@ -160,7 +162,15 @@ Note that environment variables override DT properti=
-es.
->   | nxp,img-crt        | IMG_KEY   | full path to the IMG Key
-> IMG1_1_sha256_4096_65537_v3_usr_crt.pem |
->
-> +--------------------+-----------+---------------------------------------=
----------------------------+
->
-> -Build of flash.bin target then produces a signed flash.bin automatically=
-.
-> +Environment variables can be set as follows to point the build process
-> +to external key material:
-> +```
-> +export CST_DIR=3D/usr/src/cst-3.3.1/
-> +export CSF_KEY=3D$CST_DIR/crts/CSF1_1_sha256_4096_65537_v3_usr_crt.pem
-> +export IMG_KEY=3D$CST_DIR/crts/IMG1_1_sha256_4096_65537_v3_usr_crt.pem
-> +export SRK_TABLE=3D$CST_DIR/crts/SRK_1_2_3_4_table.bin
-> +make flash.bin
-> +```
->
->   1.4 Closing the device
->   -----------------------
->
 
-Hi Marek,
 
-Yes, with that change you can add for the series:
-Reviewed-by: Tim Harvey <tharvey@gateworks.com>
+=E5=9C=A82024=E5=B9=B45=E6=9C=8817=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8B=E5=
+=8D=886:12=EF=BC=8CHeinrich Schuchardt=E5=86=99=E9=81=93=EF=BC=9A
+[...]
+>>as well.
+>>
+>>Please review.
+>>Thanks
+>
+> Implementing the Loongarch architecture defined in=20
+> <https://uefi.org/specs/UEFI/2.10/02_Overview.html#loongarch-platforms=
+>=20
+> would make sense to me.
+>
+> Supporting an architecture that does not have published UEFI standards=20
+> is less convincing.=20
+>
+> Is any of the mentioned boards being produced anymore?
 
-Best Regards,
+Hi Heinrich,
 
-Tim
+Yes, MIPS/Loongson boards are still producing for many existing applicat=
+ions.
+There will be some future MIPS product from CIP United [1], and I think =
+get
+EBBR like booting stuff implemented can save a lot of hassle.
+
+I also intended to use UEFI as loongson3-virt firmware, supporting actual
+Loongson hardware is out of my scope.
+
+I'm a hobbyist (and contractor) on MIPS stuff, so I don't really know de=
+tails
+on LoongArch UEFI.
+
+Thanks
+
+[1]: http://www.cipunited.com/
+
+>
+> Best regards
+>
+> Heinrich
+>
+>>
+>>[1]: https://github.com/kontais/EFI-MIPS
+>>[2]: https://github.com/loongson-community/firmware-nonfree
+>>[3]: http://www.kunluntech.com.cn/klbiosxl
+>>[4]: https://sourceforge.net/projects/efify/
+>>[5]: https://github.com/loongson-community/grub
+>>[6]: https://www.ventoy.net/en/index.html
+>>
+>>Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+>>---
+>>Jiaxun Yang (7):
+>>      MIPS: Implement setjmp
+>>      efi: Allow runtime relocate to be disabled
+>>      Makefile.lib: Preserve .rodata section for EFI file
+>>      Makefile.lib: Enforce EFI CFLAGS/AFLAGS
+>>      MIPS: Add smbios_start to arch_global_data
+>>      MIPS: Define MIPS EFI related bits everywhere
+>>      MIPS: Implement EFI supporting stuff
+>>
+>> Makefile                                          |   3 +
+>> arch/mips/config.mk                               |   9 +
+>> arch/mips/include/asm/global_data.h               |   3 +
+>> arch/mips/include/asm/setjmp.h                    |  36 ++++
+>> arch/mips/lib/Makefile                            |  15 ++
+>> arch/mips/lib/crt0_mips_efi.S                     | 239 +++++++++++++=
++++++++++
+>> arch/mips/lib/elf_mips_efi.lds                    | 113 ++++++++++
+>> arch/mips/lib/reloc_mips_efi.c                    |  99 +++++++++
+>> arch/mips/lib/setjmp32.S                          |  51 +++++
+>> arch/mips/lib/setjmp64.S                          |  56 +++++
+>> include/asm-generic/pe.h                          |   5 +
+>> include/config_distro_bootcmd.h                   |   6 +
+>> include/efi_default_filename.h                    |   8 +
+>> include/efi_loader.h                              |  26 ++-
+>> include/elf.h                                     |   8 +
+>> lib/efi_loader/Kconfig                            |  12 +-
+>> lib/efi_loader/efi_image_loader.c                 |  18 ++
+>> lib/efi_loader/efi_memory.c                       |  14 +-
+>> lib/efi_loader/efi_runtime.c                      |  11 +-
+>> lib/efi_loader/efi_var_mem.c                      |   6 +-
+>> lib/efi_selftest/Makefile                         |   2 +-
+>> lib/efi_selftest/efi_selftest_miniapp_exception.c |   2 +
+>> scripts/Makefile.lib                              |  10 +-
+>> 23 files changed, 734 insertions(+), 18 deletions(-)
+>>---
+>>base-commit: ad7dce5abd49ef3b5c93da5303e15449c8c162b4
+>>change-id: 20240517-mips-efi-c9a1ad819c2d
+>>
+>>Best regards,
+
+--=20
+- Jiaxun
