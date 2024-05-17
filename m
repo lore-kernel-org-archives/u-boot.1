@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB09CC25B7A
-	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 12:52:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16A83C41513
+	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 12:52:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87102884D1;
+	by phobos.denx.de (Postfix) with ESMTP id EC15A884D7;
 	Fri, 17 May 2024 14:50:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="G/vTBmw3";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="ar0pj4Vw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 802CA88490; Fri, 17 May 2024 07:28:13 +0200 (CEST)
+ id D8F1C8848D; Fri, 17 May 2024 07:28:14 +0200 (CEST)
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4B9A8848D
- for <u-boot@lists.denx.de>; Fri, 17 May 2024 07:28:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EBF3C883C7
+ for <u-boot@lists.denx.de>; Fri, 17 May 2024 07:28:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tingting.meng@intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1715923690; x=1747459690;
+ t=1715923692; x=1747459692;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=juRteyv5EkojtpK4/X2NpGr6OrXlPJcwZT8usP1UT+Q=;
- b=G/vTBmw3vgAtdDcGBUW5Nw98OAOqX9q66ngJ4pthjCXUELw/9X9uuzJc
- fMsDgvq02Gc3tpCb43bEuBnCXGQpqI7zszC8jGdq+lFSl76Au/TSWyipD
- rSE7RwqNIgo44ZhEcXrXvrWU03yXcbfJvngm/zFxISUWpIoVhqbPSZ8gQ
- wWhS/G9KxkMj3zH9Abwgn/KWr/58mTs5CRTa0iiIFJWvz6PjX2TnjKvkN
- NPoV7Z9SW/pAqKA+Q4T29jbX6EOsfK9FE8K1LmEL1giZY8KDbhV8EJfHt
- FNl7MDl25wiP7+IjkT7xfJCjdb4rA5ytNbmTkuIAH2bq9rTas+WV38djE g==;
-X-CSE-ConnectionGUID: RlxLCSb4QMy6/VPgGW+LAw==
-X-CSE-MsgGUID: zeeLzBeYSuWQdZpHX3uMdA==
-X-IronPort-AV: E=McAfee;i="6600,9927,11074"; a="11929994"
-X-IronPort-AV: E=Sophos;i="6.08,166,1712646000"; d="scan'208";a="11929994"
+ bh=nZvrDaNa5Wyhl1t/d2aFiu+UzkmELGqt+6f9IcOgMVk=;
+ b=ar0pj4VwF7VwaAJ/QR1oZPalpJ6qtqS71X/RVI2aE/7Sn26C/neXlMr6
+ bei2bVzuTJjvZf9DNE7t7DKsj4JUahOgQUUSRzvNeH0m/+3bx57nWK/vC
+ 2qBh3EWsWyat7uQrOppvsRnVYRe+mAGzOnyygV5F/7s/GC2WnCXV2pU6I
+ CqpUHUbgzDy8l0flGo6P95rGaLAqVVpDfPmwpkmhdPBULStuBJ25hfnJf
+ 165IRO4VDVZDFwccLdLqSD+hFWHF8B+u5dIGgIq99yAWQVywt7aDXmL19
+ ySy8yAhJq85CyxmzOB0tmbHlZydM3X5SgdZkPbvD5TxX337enM5/IYNq/ Q==;
+X-CSE-ConnectionGUID: CQADuYb2STq0tOgS6/RIzA==
+X-CSE-MsgGUID: MaPHWlhgQx6wSAefMg5Wbg==
+X-IronPort-AV: E=McAfee;i="6600,9927,11074"; a="11930002"
+X-IronPort-AV: E=Sophos;i="6.08,166,1712646000"; d="scan'208";a="11930002"
 Received: from fmviesa003.fm.intel.com ([10.60.135.143])
  by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 16 May 2024 22:28:04 -0700
-X-CSE-ConnectionGUID: zwoMCzeQSqCtVrlMbf9Olg==
-X-CSE-MsgGUID: MZQN9ctgR1GeSqw+GFkMeQ==
+ 16 May 2024 22:28:09 -0700
+X-CSE-ConnectionGUID: Yyy/mMB+Q8WObKO5Weukyw==
+X-CSE-MsgGUID: 0Y8PZ29PSD66ed6wVVmCEQ==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.08,166,1712646000"; d="scan'208";a="36188272"
+X-IronPort-AV: E=Sophos;i="6.08,166,1712646000"; d="scan'208";a="36188282"
 Received: from pglc00543.png.intel.com ([10.221.239.235])
- by fmviesa003.fm.intel.com with ESMTP; 16 May 2024 22:28:00 -0700
+ by fmviesa003.fm.intel.com with ESMTP; 16 May 2024 22:28:04 -0700
 From: tingting.meng@intel.com
 To: u-boot@lists.denx.de
 Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
@@ -63,12 +63,11 @@ Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Hazim <muhammad.hazim.izzat.zamri@intel.com>,
  Jit Loon Lim <jit.loon.lim@intel.com>,
  Sieu Mun Tang <sieu.mun.tang@intel.com>,
- Wan Yee Lau <wan.yee.lau@intel.com>,
  Tingting Meng <tingting.meng@intel.com>
-Subject: [Agilex7 M-series Platform Enablement v1 08/16] ddr: altera: Add
- iossm mailbox for Agilex7 M-series
-Date: Fri, 17 May 2024 13:26:53 +0800
-Message-Id: <20240517052701.12949-9-tingting.meng@intel.com>
+Subject: [Agilex7 M-series Platform Enablement v1 09/16] ddr: altera: Add
+ uibssm mailbox for Agilex7 M-series
+Date: Fri, 17 May 2024 13:26:54 +0800
+Message-Id: <20240517052701.12949-10-tingting.meng@intel.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240517052701.12949-1-tingting.meng@intel.com>
 References: <20240517052701.12949-1-tingting.meng@intel.com>
@@ -91,855 +90,463 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Wan Yee Lau <wan.yee.lau@intel.com>
+From: Teik Heng Chong <teik.heng.chong@intel.com>
 
-Add iossm mailbox driver for Agilex7 M-series. HPS will interact with IO96B
-and DDR subsystem through software defined mailbox interface.
-HPS can retrieve memory interface calibration status, IO96B configuration,
+Add uibssm mailbox driver for Agilex7 M-series. HPS will interact with UIB
+and HBM subsystem through software defined mailbox interface.
+HPS can retrieve memory interface calibration status, UIB configuration,
 memory interfae configuration, trigger calibration and etc with the list of
 supported mailbox command type and opcode.
 
-Signed-off-by: Wan Yee Lau <wan.yee.lau@intel.com>
 Signed-off-by: Teik Heng Chong <teik.heng.chong@intel.com>
 Signed-off-by: Tingting Meng <tingting.meng@intel.com>
 ---
- drivers/ddr/altera/iossm_mailbox.c | 637 +++++++++++++++++++++++++++++
- drivers/ddr/altera/iossm_mailbox.h | 182 +++++++++
- 2 files changed, 819 insertions(+)
- create mode 100644 drivers/ddr/altera/iossm_mailbox.c
- create mode 100644 drivers/ddr/altera/iossm_mailbox.h
+ drivers/ddr/altera/uibssm_mailbox.c | 311 ++++++++++++++++++++++++++++
+ drivers/ddr/altera/uibssm_mailbox.h | 117 +++++++++++
+ 2 files changed, 428 insertions(+)
+ create mode 100644 drivers/ddr/altera/uibssm_mailbox.c
+ create mode 100644 drivers/ddr/altera/uibssm_mailbox.h
 
-diff --git a/drivers/ddr/altera/iossm_mailbox.c b/drivers/ddr/altera/iossm_mailbox.c
+diff --git a/drivers/ddr/altera/uibssm_mailbox.c b/drivers/ddr/altera/uibssm_mailbox.c
 new file mode 100644
-index 0000000000..f84a3a070d
+index 0000000000..a6e2a5f44b
 --- /dev/null
-+++ b/drivers/ddr/altera/iossm_mailbox.c
-@@ -0,0 +1,637 @@
++++ b/drivers/ddr/altera/uibssm_mailbox.c
+@@ -0,0 +1,311 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
 + * Copyright (C) 2024 Intel Corporation <www.intel.com>
 + */
-+
 +#include <hang.h>
-+#include <string.h>
 +#include <wait_bit.h>
 +#include <asm/arch/base_addr_soc64.h>
 +#include <asm/io.h>
-+#include <linux/bitfield.h>
-+#include "iossm_mailbox.h"
++#include "uibssm_mailbox.h"
 +
-+#define ECC_INTSTATUS_SERR SOCFPGA_SYSMGR_ADDRESS + 0x9C
-+#define ECC_INISTATUS_DERR SOCFPGA_SYSMGR_ADDRESS + 0xA0
-+#define DDR_CSR_CLKGEN_LOCKED_IO96B0_MASK BIT(16)
-+#define DDR_CSR_CLKGEN_LOCKED_IO96B1_MASK BIT(17)
++#define MAX_RETRIES 3
 +
-+#define DDR_CSR_CLKGEN_LOCKED_IO96B_MASK(x)	(i == 0 ? DDR_CSR_CLKGEN_LOCKED_IO96B0_MASK : \
-+							DDR_CSR_CLKGEN_LOCKED_IO96B1_MASK)
-+
-+#define IO96B_MB_REQ_SETUP(v, w, x, y, z)	usr_req.ip_type = v; \
-+						usr_req.ip_id = w; \
-+						usr_req.usr_cmd_type = x; \
-+						usr_req.usr_cmd_opcode = y; \
-+						usr_req.cmd_param[0] = z; \
-+						for (n = 1; n < NUM_CMD_PARAM; n++) \
-+							usr_req.cmd_param[n] = 0
-+#define MAX_RETRY_COUNT		3
-+
-+#define IO96B0_PLL_A_MASK	BIT(0)
-+#define IO96B0_PLL_B_MASK	BIT(1)
-+#define IO96B1_PLL_A_MASK	BIT(2)
-+#define IO96B1_PLL_B_MASK	BIT(3)
-+
-+/* supported DDR type list */
-+static const char *ddr_type_list[7] = {
-+		"DDR4", "DDR5", "DDR5_RDIMM", "LPDDR4", "LPDDR5", "QDRIV", "UNKNOWN"
-+};
-+
-+static int is_ddr_csr_clkgen_locked(u8 io96b_pll)
++int uib_bist_mem_init_start(struct uib_info *uib_ctrl)
 +{
-+	int ret = 0;
-+
-+	if (FIELD_GET(IO96B0_PLL_A_MASK, io96b_pll)) {
-+		ret = wait_for_bit_le32((const void *)(ECC_INTSTATUS_SERR),
-+					DDR_CSR_CLKGEN_LOCKED_IO96B0_MASK, true, TIMEOUT, false);
-+
-+		if (ret) {
-+			debug("%s: ddr csr io96b_0 clkgenA locked is timeout\n", __func__);
-+			goto err;
-+		}
-+	}
-+
-+	if (FIELD_GET(IO96B0_PLL_B_MASK, io96b_pll)) {
-+		ret = wait_for_bit_le32((const void *)(ECC_INISTATUS_DERR),
-+					DDR_CSR_CLKGEN_LOCKED_IO96B0_MASK, true, TIMEOUT, false);
-+
-+		if (ret) {
-+			debug("%s: ddr csr io96b_0 clkgenB locked is timeout\n", __func__);
-+			goto err;
-+		}
-+	}
-+
-+	if (FIELD_GET(IO96B1_PLL_A_MASK, io96b_pll)) {
-+		ret = wait_for_bit_le32((const void *)(ECC_INTSTATUS_SERR),
-+					DDR_CSR_CLKGEN_LOCKED_IO96B1_MASK, true, TIMEOUT, false);
-+
-+		if (ret) {
-+			debug("%s: ddr csr io96b_1 clkgenA locked is timeout\n", __func__);
-+			goto err;
-+		}
-+	}
-+
-+	if (FIELD_GET(IO96B1_PLL_B_MASK, io96b_pll)) {
-+		ret = wait_for_bit_le32((const void *)(ECC_INISTATUS_DERR),
-+					DDR_CSR_CLKGEN_LOCKED_IO96B1_MASK, true, TIMEOUT, false);
-+
-+		if (ret) {
-+			debug("%s: ddr csr io96b_1 clkgenB locked is timeout\n", __func__);
-+			goto err;
-+		}
-+	}
-+
-+err:
-+	return ret;
-+}
-+
-+/* Mailbox request function
-+ * This function will send the request to IOSSM mailbox and wait for response return
-+ *
-+ * @io96b_csr_addr: CSR address for the target IO96B
-+ * @req:            Structure contain command request for IOSSM mailbox command
-+ * @resp_data_len:  User desire extra response data fields other than
-+ *					CMD_RESPONSE_DATA_SHORT field on CMD_RESPONSE_STATUS
-+ * @resp:           Structure contain responses returned from the requested IOSSM
-+ *					mailbox command
-+ */
-+int io96b_mb_req(phys_addr_t io96b_csr_addr, struct io96b_mb_req req,
-+		 u32 resp_data_len, struct io96b_mb_resp *resp)
-+{
-+	int i, ret;
-+	u32 cmd_req, cmd_resp;
-+
-+	/* Initialized zeros for responses */
-+	resp->cmd_resp_status = 0;
-+	for (i = 0; i < NUM_CMD_RESPONSE_DATA; i++)
-+		resp->cmd_resp_data[i] = 0;
-+
-+	/* Ensure CMD_REQ is cleared before write any command request */
-+	ret = wait_for_bit_le32((const void *)(io96b_csr_addr + IOSSM_CMD_REQ_OFFSET),
-+				GENMASK(31, 0), 0, TIMEOUT, false);
-+	if (ret) {
-+		printf("%s: CMD_REQ not ready\n", __func__);
-+
-+		return ret;
-+	}
-+
-+	/* Write CMD_PARAM_* */
-+	for (i = 0; i < NUM_CMD_PARAM ; i++) {
-+		switch (i) {
-+		case 0:
-+			if (req.cmd_param[0])
-+				writel(req.cmd_param[0], io96b_csr_addr + IOSSM_CMD_PARAM_0_OFFSET);
-+			break;
-+		case 1:
-+			if (req.cmd_param[1])
-+				writel(req.cmd_param[1], io96b_csr_addr + IOSSM_CMD_PARAM_1_OFFSET);
-+			break;
-+		case 2:
-+			if (req.cmd_param[2])
-+				writel(req.cmd_param[2], io96b_csr_addr + IOSSM_CMD_PARAM_2_OFFSET);
-+			break;
-+		case 3:
-+			if (req.cmd_param[3])
-+				writel(req.cmd_param[3], io96b_csr_addr + IOSSM_CMD_PARAM_3_OFFSET);
-+			break;
-+		case 4:
-+			if (req.cmd_param[4])
-+				writel(req.cmd_param[4], io96b_csr_addr + IOSSM_CMD_PARAM_4_OFFSET);
-+			break;
-+		case 5:
-+			if (req.cmd_param[5])
-+				writel(req.cmd_param[5], io96b_csr_addr + IOSSM_CMD_PARAM_5_OFFSET);
-+			break;
-+		case 6:
-+			if (req.cmd_param[6])
-+				writel(req.cmd_param[6], io96b_csr_addr + IOSSM_CMD_PARAM_6_OFFSET);
-+			break;
-+		default:
-+			printf("%s: Invalid command parameter\n", __func__);
-+		}
-+	}
-+
-+	/* Write CMD_REQ (IP_TYPE, IP_INSTANCE_ID, CMD_TYPE and CMD_OPCODE) */
-+	cmd_req = FIELD_PREP(CMD_TARGET_IP_TYPE_MASK, req.ip_type) |
-+		FIELD_PREP(CMD_TARGET_IP_INSTANCE_ID_MASK, req.ip_id) |
-+		FIELD_PREP(CMD_TYPE_MASK, req.usr_cmd_type) |
-+		FIELD_PREP(CMD_OPCODE_MASK, req.usr_cmd_opcode);
-+	writel(cmd_req, io96b_csr_addr + IOSSM_CMD_REQ_OFFSET);
-+
-+	debug("%s: Write 0x%x to IOSSM_CMD_REQ_OFFSET 0x%llx\n", __func__, cmd_req,
-+	      io96b_csr_addr + IOSSM_CMD_REQ_OFFSET);
-+	/* Read CMD_RESPONSE_READY in CMD_RESPONSE_STATUS */
-+	ret = wait_for_bit_le32((const void *)(io96b_csr_addr + IOSSM_CMD_RESPONSE_STATUS_OFFSET),
-+				IOSSM_STATUS_COMMAND_RESPONSE_READY, 1, TIMEOUT, false);
-+	if (ret) {
-+		printf("%s: CMD_RESPONSE ERROR:\n", __func__);
-+
-+		cmd_resp = readl(io96b_csr_addr + IOSSM_CMD_RESPONSE_STATUS_OFFSET);
-+
-+		printf("%s: STATUS_GENERAL_ERROR: 0x%lx\n", __func__,
-+		       IOSSM_STATUS_GENERAL_ERROR(cmd_resp));
-+		printf("%s: STATUS_CMD_RESPONSE_ERROR: 0x%lx\n", __func__,
-+		       IOSSM_STATUS_CMD_RESPONSE_ERROR(cmd_resp));
-+	}
-+
-+	/* read CMD_RESPONSE_STATUS */
-+	resp->cmd_resp_status = readl(io96b_csr_addr + IOSSM_CMD_RESPONSE_STATUS_OFFSET);
-+
-+	debug("%s: CMD_RESPONSE_STATUS 0x%llx: 0x%x\n", __func__, io96b_csr_addr +
-+	      IOSSM_CMD_RESPONSE_STATUS_OFFSET, resp->cmd_resp_status);
-+
-+	/* read CMD_RESPONSE_DATA_* */
-+	for (i = 0; i < resp_data_len; i++) {
-+		switch (i) {
-+		case 0:
-+			resp->cmd_resp_data[i] =
-+					readl(io96b_csr_addr + IOSSM_CMD_RESPONSE_DATA_0_OFFSET);
-+
-+			debug("%s: IOSSM_CMD_RESPONSE_DATA_0_OFFSET 0x%llx: 0x%x\n", __func__,
-+			      io96b_csr_addr + IOSSM_CMD_RESPONSE_DATA_0_OFFSET,
-+			      resp->cmd_resp_data[i]);
-+			break;
-+		case 1:
-+			resp->cmd_resp_data[i] =
-+					readl(io96b_csr_addr + IOSSM_CMD_RESPONSE_DATA_1_OFFSET);
-+
-+			debug("%s: IOSSM_CMD_RESPONSE_DATA_1_OFFSET 0x%llx: 0x%x\n", __func__,
-+			      io96b_csr_addr + IOSSM_CMD_RESPONSE_DATA_1_OFFSET,
-+			      resp->cmd_resp_data[i]);
-+			break;
-+		case 2:
-+			resp->cmd_resp_data[i] =
-+					readl(io96b_csr_addr + IOSSM_CMD_RESPONSE_DATA_2_OFFSET);
-+
-+			debug("%s: IOSSM_CMD_RESPONSE_DATA_2_OFFSET 0x%llx: 0x%x\n", __func__,
-+			      io96b_csr_addr + IOSSM_CMD_RESPONSE_DATA_2_OFFSET,
-+			      resp->cmd_resp_data[i]);
-+			break;
-+		default:
-+			printf("%s: Invalid response data\n", __func__);
-+		}
-+	}
-+
-+	resp->cmd_resp_status = readl(io96b_csr_addr + IOSSM_CMD_RESPONSE_STATUS_OFFSET);
-+
-+	debug("%s: CMD_RESPONSE_STATUS 0x%llx: 0x%x\n", __func__, io96b_csr_addr +
-+	      IOSSM_CMD_RESPONSE_STATUS_OFFSET, resp->cmd_resp_status);
-+
-+	/* write CMD_RESPONSE_READY = 0 */
-+	clrbits_le32((u32 *)(uintptr_t)(io96b_csr_addr + IOSSM_CMD_RESPONSE_STATUS_OFFSET),
-+		     IOSSM_STATUS_COMMAND_RESPONSE_READY);
-+
-+	resp->cmd_resp_status = readl(io96b_csr_addr + IOSSM_CMD_RESPONSE_STATUS_OFFSET);
-+
-+	debug("%s: CMD_RESPONSE_READY 0x%llx: 0x%x\n", __func__, io96b_csr_addr +
-+	      IOSSM_CMD_RESPONSE_STATUS_OFFSET, resp->cmd_resp_status);
-+
-+	return 0;
-+}
-+
-+/*
-+ * Initial function to be called to set memory interface IP type and instance ID
-+ * IP type and instance ID need to be determined before sending mailbox command
-+ */
-+void io96b_mb_init(struct io96b_info *io96b_ctrl)
-+{
-+	struct io96b_mb_req usr_req;
-+	struct io96b_mb_resp usr_resp;
-+	u8 ip_type_ret, instance_id_ret;
-+	int i, j, k, n;
-+
-+	debug("%s: num_instance %d\n", __func__, io96b_ctrl->num_instance);
-+
-+	for (i = 0; i < io96b_ctrl->num_instance; i++) {
-+		debug("%s: get memory interface IO96B %d\n", __func__, i);
-+
-+		IO96B_MB_REQ_SETUP(0,
-+				   0,
-+				   CMD_GET_SYS_INFO,
-+				   GET_MEM_INTF_INFO,
-+				   0);
-+
-+		/* Get memory interface IP type and instance ID (IP identifier) */
-+		io96b_mb_req(io96b_ctrl->io96b[i].io96b_csr_addr, usr_req, 2, &usr_resp);
-+
-+		debug("%s: get response from memory interface IO96B %d\n", __func__, i);
-+
-+		/* Retrieve number of memory interface(s) */
-+		io96b_ctrl->io96b[i].mb_ctrl.num_mem_interface =
-+			IOSSM_CMD_RESPONSE_DATA_SHORT(usr_resp.cmd_resp_status) & 0x3;
-+
-+		debug("%s: IO96B %d: num_mem_interface: 0x%x\n", __func__, i,
-+		      io96b_ctrl->io96b[i].mb_ctrl.num_mem_interface);
-+
-+		/* Retrieve memory interface IP type and instance ID (IP identifier) */
-+		j = 0;
-+		for (k = 0; k < io96b_ctrl->io96b[i].mb_ctrl.num_mem_interface; k++) {
-+			ip_type_ret = FIELD_GET(INTF_IP_TYPE_MASK, usr_resp.cmd_resp_data[k]);
-+			instance_id_ret = FIELD_GET(INTF_INSTANCE_ID_MASK,
-+						    usr_resp.cmd_resp_data[k]);
-+
-+			if (ip_type_ret) {
-+				io96b_ctrl->io96b[i].mb_ctrl.ip_type[j] = ip_type_ret;
-+				io96b_ctrl->io96b[i].mb_ctrl.ip_id[j] = instance_id_ret;
-+
-+				debug("%s: IO96B %d mem_interface %d: ip_type_ret: 0x%x\n",
-+				      __func__, i, j, ip_type_ret);
-+				debug("%s: IO96B %d mem_interface %d: instance_id_ret: 0x%x\n",
-+				      __func__, i, j, instance_id_ret);
-+
-+				j++;
-+			}
-+		}
-+	}
-+}
-+
-+int io96b_cal_status(phys_addr_t addr)
-+{
-+	int ret;
-+	u32 cal_success, cal_fail;
-+	phys_addr_t status_addr = addr + IOSSM_STATUS_OFFSET;
-+
-+	/* Ensure calibration completed */
-+	ret = wait_for_bit_le32((const void *)status_addr, IOSSM_STATUS_CAL_BUSY, false,
-+				TIMEOUT, false);
-+	if (ret) {
-+		printf("%s: SDRAM calibration IO96b instance 0x%llx timeout\n", __func__,
-+		       status_addr);
-+
-+		hang();
-+	}
-+
-+	/* Calibration status */
-+	cal_success = readl(status_addr) & IOSSM_STATUS_CAL_SUCCESS;
-+	cal_fail = readl(status_addr) & IOSSM_STATUS_CAL_FAIL;
-+
-+	if (cal_success && !cal_fail)
-+		return 0;
-+	else
-+		return -EPERM;
-+}
-+
-+void init_mem_cal(struct io96b_info *io96b_ctrl)
-+{
-+	int count, i, ret;
-+
-+	/* Initialize overall calibration status */
-+	io96b_ctrl->overall_cal_status = false;
-+
-+	if (io96b_ctrl->ckgen_lock) {
-+		ret = is_ddr_csr_clkgen_locked(io96b_ctrl->io96b_pll);
-+		if (ret) {
-+			printf("%s: iossm IO96B ckgena_lock is not locked\n", __func__);
-+			hang();
-+		}
-+	}
-+
-+	/* Check initial calibration status for the assigned IO96B */
-+	count = 0;
-+	for (i = 0; i < io96b_ctrl->num_instance; i++) {
-+		ret = io96b_cal_status(io96b_ctrl->io96b[i].io96b_csr_addr);
-+		if (ret) {
-+			io96b_ctrl->io96b[i].cal_status = false;
-+
-+			printf("%s: Initial DDR calibration IO96B_%d failed %d\n", __func__,
-+			       i, ret);
-+
-+			hang();
-+		}
-+
-+		io96b_ctrl->io96b[i].cal_status = true;
-+
-+		printf("%s: Initial DDR calibration IO96B_%d succeed\n", __func__, i);
-+
-+		count++;
-+	}
-+
-+	if (count == io96b_ctrl->num_instance)
-+		io96b_ctrl->overall_cal_status = true;
-+}
-+
-+/* Trying 3 times re-calibration if initial calibration failed */
-+int trig_mem_cal(struct io96b_info *io96b_ctrl)
-+{
-+	struct io96b_mb_req usr_req;
-+	struct io96b_mb_resp usr_resp;
-+	bool recal_success;
-+	int i, j, k, n;
-+	u32 cal_stat_offset;
-+	u8 cal_stat, trig_cal_stat;
-+	int count = 0;
-+
-+	for (i = 0; i < io96b_ctrl->num_instance; i++) {
-+		if (!io96b_ctrl->io96b[i].cal_status) {
-+			for (j = 0; j < io96b_ctrl->io96b[i].mb_ctrl.num_mem_interface; j++) {
-+				/* Get the memory calibration status for memory interface */
-+				IO96B_MB_REQ_SETUP(0,
-+						   0,
-+						   CMD_TRIG_MEM_CAL_OP,
-+						   GET_MEM_CAL_STATUS,
-+						   0);
-+
-+				io96b_mb_req(io96b_ctrl->io96b[i].io96b_csr_addr, usr_req,
-+					     2, &usr_resp);
-+
-+				recal_success = false;
-+
-+				/* Re-calibration first memory interface with failed calibration */
-+				for (k = 0; k < MAX_RETRY_COUNT; k++) {
-+					cal_stat_offset = usr_resp.cmd_resp_data[j];
-+					cal_stat = readl(io96b_ctrl->io96b[i].io96b_csr_addr +
-+							 cal_stat_offset);
-+					if (cal_stat == INTF_MEM_CAL_STATUS_SUCCESS) {
-+						recal_success = true;
-+						break;
-+					}
-+
-+					IO96B_MB_REQ_SETUP(io96b_ctrl->io96b[i].mb_ctrl.ip_type[j],
-+							   io96b_ctrl->io96b[i].mb_ctrl.ip_id[j],
-+							   CMD_TRIG_MEM_CAL_OP,
-+							   TRIG_MEM_CAL,
-+							   0);
-+
-+					io96b_mb_req(io96b_ctrl->io96b[i].io96b_csr_addr, usr_req,
-+						     2, &usr_resp);
-+
-+					trig_cal_stat =
-+					IOSSM_CMD_RESPONSE_DATA_SHORT(usr_resp.cmd_resp_status) &
-+					BIT(0);
-+
-+					debug("%s: Memory calibration triggered status = %d\n",
-+					      __func__, trig_cal_stat);
-+
-+					udelay(1);
-+
-+					IO96B_MB_REQ_SETUP(0,
-+							   0,
-+							   CMD_TRIG_MEM_CAL_OP,
-+							   GET_MEM_CAL_STATUS,
-+							   0);
-+
-+					io96b_mb_req(io96b_ctrl->io96b[i].io96b_csr_addr, usr_req,
-+						     2, &usr_resp);
-+				}
-+
-+				if (!recal_success) {
-+					printf("%s: Error as SDRAM calibration failed\n", __func__);
-+
-+					hang();
-+				}
-+			}
-+
-+			io96b_ctrl->io96b[i].cal_status = true;
-+			io96b_ctrl->overall_cal_status = io96b_ctrl->io96b[i].cal_status;
-+
-+			printf("%s: Initial DDR calibration IO96B_%d succeed\n", __func__, i);
-+
-+			count++;
-+		}
-+	}
-+
-+	if (io96b_ctrl->overall_cal_status)
-+		debug("%s: Overall SDRAM calibration success\n", __func__);
-+
-+	return 0;
-+}
-+
-+int get_mem_technology(struct io96b_info *io96b_ctrl)
-+{
-+	struct io96b_mb_req usr_req;
-+	struct io96b_mb_resp usr_resp;
-+	int i, j, n;
-+	u8 ddr_type_ret;
-+
-+	/* Initialize ddr type */
-+	io96b_ctrl->ddr_type = ddr_type_list[6];
-+
-+	/* Get and ensure all memory interface(s) same DDR type */
-+	for (i = 0; i < io96b_ctrl->num_instance; i++) {
-+		for (j = 0; j < io96b_ctrl->io96b[i].mb_ctrl.num_mem_interface; j++) {
-+			IO96B_MB_REQ_SETUP(io96b_ctrl->io96b[i].mb_ctrl.ip_type[j],
-+					   io96b_ctrl->io96b[i].mb_ctrl.ip_id[j],
-+					   CMD_GET_MEM_INFO,
-+					   GET_MEM_TECHNOLOGY,
-+					   0);
-+
-+			io96b_mb_req(io96b_ctrl->io96b[i].io96b_csr_addr, usr_req, 0, &usr_resp);
-+
-+			ddr_type_ret =
-+				IOSSM_CMD_RESPONSE_DATA_SHORT(usr_resp.cmd_resp_status)
-+				& GENMASK(2, 0);
-+
-+			if (!strcmp(io96b_ctrl->ddr_type, "UNKNOWN"))
-+				io96b_ctrl->ddr_type = ddr_type_list[ddr_type_ret];
-+
-+			if (ddr_type_list[ddr_type_ret] != io96b_ctrl->ddr_type) {
-+				printf("%s: Mismatch DDR type on IO96B_%d\n", __func__, i);
-+
-+				return -EINVAL;
-+			}
-+		}
-+	}
-+
-+	return 0;
-+}
-+
-+int get_mem_width_info(struct io96b_info *io96b_ctrl)
-+{
-+	struct io96b_mb_req usr_req;
-+	struct io96b_mb_resp usr_resp;
-+	int i, j, n;
-+	u16 memory_size;
-+	u16 total_memory_size = 0;
-+
-+	/* Get all memory interface(s) total memory size on all instance(s) */
-+	for (i = 0; i < io96b_ctrl->num_instance; i++) {
-+		memory_size = 0;
-+		for (j = 0; j < io96b_ctrl->io96b[i].mb_ctrl.num_mem_interface; j++) {
-+			IO96B_MB_REQ_SETUP(io96b_ctrl->io96b[i].mb_ctrl.ip_type[j],
-+					   io96b_ctrl->io96b[i].mb_ctrl.ip_id[j],
-+					   CMD_GET_MEM_INFO,
-+					   GET_MEM_WIDTH_INFO,
-+					   0);
-+
-+			io96b_mb_req(io96b_ctrl->io96b[i].io96b_csr_addr, usr_req,
-+				     2, &usr_resp);
-+
-+			memory_size = memory_size +
-+					(usr_resp.cmd_resp_data[1] & GENMASK(7, 0));
-+		}
-+
-+		if (!memory_size) {
-+			printf("%s: Failed to get valid memory size\n", __func__);
-+
-+			return -EINVAL;
-+		}
-+
-+		io96b_ctrl->io96b[i].size = memory_size;
-+
-+		total_memory_size = total_memory_size + memory_size;
-+	}
-+
-+	if (!total_memory_size) {
-+		printf("%s: Failed to get valid memory size\n", __func__);
++	struct uib_mb_resp usr_resp;
++	bool bist_start = false;
++	bool bist_success = false;
++	u32 start;
++
++	/*
++	 * Full memory initialization BIST performed on all UIB channels
++	 * start memory initialization BIST on full memory address
++	 */
++	uib_mb_req(uib_ctrl->uib[0].uib_csr_addr,
++		   UIB_CMD_TRIG_CONTROLLER_OP,
++		   UIB_BIST_MEM_INIT_START,
++		   UIB_BIST_FULL_MEM, &usr_resp);
++
++	bist_start = UIBSSM_CMD_RESPONSE_DATA_SHORT(usr_resp.cmd_resp_status) &
++			UIB_BIST_INITIATE_PASS;
++	if (!bist_start) {
++		printf("%s: Failed to initialized memory on UIB\n", __func__);
 +
 +		return -EINVAL;
 +	}
 +
-+	io96b_ctrl->overall_size = total_memory_size;
++	/* Polling for the initiated memory initialization BIST status */
++	start = get_timer(0);
++	while (!bist_success) {
++		/*
++		 * cmd_param_0 is not used in BIST status request,
++		 * hence set the value to 0
++		 */
++		uib_mb_req(uib_ctrl->uib[0].uib_csr_addr,
++			   UIB_CMD_TRIG_CONTROLLER_OP,
++			   UIB_BIST_MEM_INIT_STATUS,
++			   0, &usr_resp);
++
++		bist_success = UIBSSM_CMD_RESPONSE_DATA_SHORT(usr_resp.cmd_resp_status) & BIT(0);
++		if (!bist_success && (get_timer(start) > TIMEOUT)) {
++			printf("%s: Timeout initialize memory on UIB\n", __func__);
++
++			return -ETIMEDOUT;
++		}
++
++		udelay(1);
++	}
++
++	debug("%s: Memory initialized successfully on UIB\n", __func__);
 +
 +	return 0;
 +}
 +
-+int ecc_enable_status(struct io96b_info *io96b_ctrl)
++int uib_cal_status(phys_addr_t addr)
 +{
-+	struct io96b_mb_req usr_req;
-+	struct io96b_mb_resp usr_resp;
-+	int i, j, n;
-+	bool ecc_stat_set = false;
-+	bool ecc_stat;
++	int ret = 0;
++	phys_addr_t status_addr = addr + UIB_R_INITSTS_OFFSET;
 +
-+	/* Initialize ECC status */
-+	io96b_ctrl->ecc_status = false;
++	/* Ensure calibration completed */
++	ret = wait_for_bit_le32((const void *)status_addr, UIB_R_INITSTS_INITSTS_PASS, true,
++				TIMEOUT, false);
++	if (ret)
++		printf("%s: HBM calibration UIB instance 0x%llx timeout\n", __func__, status_addr);
 +
-+	/* Get and ensure all memory interface(s) same ECC status */
-+	for (i = 0; i < io96b_ctrl->num_instance; i++) {
-+		for (j = 0; j < io96b_ctrl->io96b[i].mb_ctrl.num_mem_interface; j++) {
-+			IO96B_MB_REQ_SETUP(io96b_ctrl->io96b[i].mb_ctrl.ip_type[j],
-+					   io96b_ctrl->io96b[i].mb_ctrl.ip_id[j],
-+					   CMD_TRIG_CONTROLLER_OP,
-+					   ECC_ENABLE_STATUS,
-+					   0);
++	return ret;
++}
 +
-+			io96b_mb_req(io96b_ctrl->io96b[i].io96b_csr_addr, usr_req, 0, &usr_resp);
++void uib_init_mem_cal(struct uib_info *uib_ctrl)
++{
++	int i, ret;
 +
-+			ecc_stat = (IOSSM_CMD_RESPONSE_DATA_SHORT(usr_resp.cmd_resp_status)
-+					& GENMASK(1, 0)) == 0 ? false : true;
++	if (!uib_ctrl->num_instance) {
++		uib_ctrl->overall_cal_status = false;
++	} else {
++		uib_ctrl->overall_cal_status = true;
 +
-+			if (!ecc_stat_set) {
-+				io96b_ctrl->ecc_status = ecc_stat;
-+				ecc_stat_set = true;
++		/* Check initial calibration status for the assigned UIB */
++		for (i = 0; i < uib_ctrl->num_instance; i++) {
++			ret = uib_cal_status(uib_ctrl->uib[i].uib_csr_addr);
++			if (ret) {
++				uib_ctrl->uib[i].cal_status = false;
++				uib_ctrl->overall_cal_status = false;
++
++				printf("%s: Initial HBM calibration UIB_%d failed\n", __func__, i);
++				break;
 +			}
 +
-+			if (ecc_stat != io96b_ctrl->ecc_status) {
-+				printf("%s: Mismatch DDR ECC status on IO96B_%d\n", __func__, i);
++			uib_ctrl->uib[i].cal_status = true;
 +
-+				return -EINVAL;
++			debug("%s: Initial HBM calibration UIB_%d succeed\n", __func__, i);
++		}
++	}
++}
++
++/* Trying 3 times re-calibration if initial calibration failed */
++void uib_trig_mem_cal(struct uib_info *uib_ctrl)
++{
++	int i, j, cal_stat;
++
++	if (!uib_ctrl->num_instance) {
++		uib_ctrl->overall_cal_status = false;
++	} else {
++		uib_ctrl->overall_cal_status = true;
++
++		for (i = 0; i < uib_ctrl->num_instance; i++) {
++			uib_ctrl->uib[i].cal_status = false;
++
++			/* Initiate Re-calibration */
++			for (j = 0; j < MAX_RETRIES; j++) {
++				clrsetbits_le32(uib_ctrl->uib[i].uib_csr_addr +
++						UIB_R_INITCTL_OFFSET,
++						UIB_R_INITCTL_INITTYPE_MASK |
++						UIB_R_INITCTL_INITREQ_MASK,
++						UIB_R_INITCTL_INITTYPE(UIB_RST_REQUEST_WITH_CAL) |
++						UIB_R_INITCTL_INITREQ(1));
++
++				cal_stat = uib_cal_status(uib_ctrl->uib[i].uib_csr_addr);
++				if (cal_stat)
++					continue;
++
++				debug("%s: HBM re-calibration UIB_%d succeed\n", __func__, i);
++
++				uib_ctrl->uib[i].cal_status = true;
++				break;
++			}
++
++			if (!uib_ctrl->uib[i].cal_status) {
++				uib_ctrl->overall_cal_status = false;
++
++				printf("%s: HBM re-calibration UIB_%d failed\n", __func__, i);
++				break;
 +			}
 +		}
 +	}
-+
-+	debug("%s: ECC enable status: %d\n", __func__, io96b_ctrl->ecc_status);
-+
-+	return 0;
 +}
 +
-+int bist_mem_init_start(struct io96b_info *io96b_ctrl)
++static void uib_mailbox_write_request(u32 data, u32 target_write_addr, phys_addr_t csr_addr)
 +{
-+	struct io96b_mb_req usr_req;
-+	struct io96b_mb_resp usr_resp;
-+	int i, j, n;
-+	bool bist_start, bist_success;
-+	u32 start;
++	int ret;
 +
-+	/* Full memory initialization BIST performed on all memory interface(s) */
-+	for (i = 0; i < io96b_ctrl->num_instance; i++) {
-+		for (j = 0; j < io96b_ctrl->io96b[i].mb_ctrl.num_mem_interface; j++) {
-+			bist_start = false;
-+			bist_success = false;
++	/*
++	 * Read from chms0020 MBWRADDR_VALID and ensure its not set or
++	 * wait till it get cleared by controller
++	 */
++	debug("%s: #1 Read MBWRADDR_VALID from UIB_R_MBWRCTL\n", __func__);
++	ret = wait_for_bit_le32((const void *)csr_addr + UIB_R_MBWRCTL,
++				UIB_R_MBWRCTL_MBWRADDR_VALID, false, TIMEOUT, false);
++	if (ret) {
++		printf("%s: TIMEOUT!!! MBWRADDR_VALID is not zero\n", __func__);
 +
-+			/* Start memory initialization BIST on full memory address */
-+			IO96B_MB_REQ_SETUP(io96b_ctrl->io96b[i].mb_ctrl.ip_type[j],
-+					   io96b_ctrl->io96b[i].mb_ctrl.ip_id[j],
-+					   CMD_TRIG_CONTROLLER_OP,
-+					   BIST_MEM_INIT_START,
-+					   BIST_FULL_MEM);
-+
-+			io96b_mb_req(io96b_ctrl->io96b[i].io96b_csr_addr, usr_req, 0, &usr_resp);
-+
-+			bist_start = IOSSM_CMD_RESPONSE_DATA_SHORT(usr_resp.cmd_resp_status)
-+				& BIT(0);
-+
-+			if (!bist_start) {
-+				printf("%s: Failed to initialize memory on IO96B_%d\n", __func__,
-+				       i);
-+				printf("%s: BIST_MEM_INIT_START Error code 0x%lx\n", __func__,
-+				       IOSSM_STATUS_CMD_RESPONSE_ERROR(usr_resp.cmd_resp_status));
-+
-+				return -EINVAL;
-+			}
-+
-+			/* Polling for the initiated memory initialization BIST status */
-+			start = get_timer(0);
-+			while (!bist_success) {
-+				IO96B_MB_REQ_SETUP(io96b_ctrl->io96b[i].mb_ctrl.ip_type[j],
-+						   io96b_ctrl->io96b[i].mb_ctrl.ip_id[j],
-+						   CMD_TRIG_CONTROLLER_OP,
-+						   BIST_MEM_INIT_STATUS,
-+						   0);
-+
-+				io96b_mb_req(io96b_ctrl->io96b[i].io96b_csr_addr, usr_req, 0,
-+					     &usr_resp);
-+
-+				bist_success =
-+					IOSSM_CMD_RESPONSE_DATA_SHORT(usr_resp.cmd_resp_status)
-+					& BIT(0);
-+
-+				if (!bist_success && (get_timer(start) > TIMEOUT)) {
-+					printf("%s: Timeout initialize memory on IO96B_%d\n",
-+					       __func__, i);
-+					printf("%s: BIST_MEM_INIT_STATUS Error code 0x%lx\n",
-+					       __func__,
-+					IOSSM_STATUS_CMD_RESPONSE_ERROR(usr_resp.cmd_resp_status));
-+
-+					return -ETIMEDOUT;
-+				}
-+
-+				udelay(1);
-+			}
-+		}
-+
-+		debug("%s: Memory initialized successfully on IO96B_%d\n", __func__, i);
++		hang();
 +	}
++
++	/* Write <target write address> to chms0024 MBWRADDR */
++	debug("%s: #2 Write 0x%x to UIB_R_MBWRADDR\n", __func__, target_write_addr);
++	writel(target_write_addr, csr_addr + UIB_R_MBWRADDR);
++
++	/*
++	 * Write 1 to chms0020 MBWRADDR_VALID to indicate the address is now valid
++	 * for FW to read
++	 */
++	debug("%s: #3 Write 1 to MBWRADDR_VALID for FW to read address\n", __func__);
++	setbits_le32(csr_addr + UIB_R_MBWRCTL, UIB_R_MBWRCTL_MBWRADDR_VALID);
++
++	/*
++	 * Read from chms0020 MBWRDATA_VALID and ensure its not set or
++	 * wait till it get cleared by controller
++	 */
++	debug("%s: #4 Read MBWRDATA_VALID from UIB_R_MBWRCTL\n", __func__);
++	ret = wait_for_bit_le32((const void *)csr_addr + UIB_R_MBWRCTL,
++				UIB_R_MBWRCTL_MBWRDATA_VALID, false, TIMEOUT, false);
++	if (ret) {
++		printf("%s: TIMEOUT!!! MBWRADDR_VALID is not zero\n", __func__);
++
++		hang();
++	}
++
++	/*
++	 * Read from chms0020 MBWRDATA_END and ensure its not set or
++	 * wait till it get cleared by controller
++	 */
++	debug("%s: #5 Read R_MBWRCTL_MBWRDATA_END from UIB_R_MBWRCTL\n", __func__);
++	ret = wait_for_bit_le32((const void *)csr_addr + UIB_R_MBWRCTL,
++				UIB_R_MBWRCTL_MBWRDATA_END, false, TIMEOUT, false);
++	if (ret) {
++		printf("%s: TIMEOUT!!! MBWRDATA_END is not zero\n", __func__);
++
++		hang();
++	}
++
++	/* Write <write data> to chms0028 MMR_MBWRDATA */
++	debug("%s: #6 Write 0x%x to UIB_R_MBWRDATA\n", __func__, data);
++	writel(data, csr_addr + UIB_R_MBWRDATA);
++
++	/*
++	 * Write 1 to chms0020 MBWRDATA_END to indicate if the <write data> is the last burst
++	 * for FW to read for the <target write address>
++	 */
++	debug("%s: #7 Write 1 to MBWRDATA_END to inform FW this is last burst of data to read\n",
++	      __func__);
++	setbits_le32(csr_addr + UIB_R_MBWRCTL, UIB_R_MBWRCTL_MBWRDATA_END);
++
++	/* Write 1 to chms0020 MBWRDATA_VALID to indicate the data is now valid for FW to read */
++	debug("%s: #8 Write 1 to MBWRDATA_VALID for FW to read data\n", __func__);
++	setbits_le32(csr_addr + UIB_R_MBWRCTL, UIB_R_MBWRCTL_MBWRDATA_VALID);
++}
++
++static u32 uib_mailbox_read_request(u32 target_read_addr, phys_addr_t csr_addr)
++{
++	int ret;
++	u32 reg, rd_data = 0;
++
++	/*
++	 * Read from chms0030 MBRDADDR_VALID and ensure its not set or
++	 * wait till it get cleared by controller
++	 */
++	debug("%s: #1 Read MBRDADDR_VALID from UIB_R_MBRDCTL\n", __func__);
++	ret = wait_for_bit_le32((const void *)csr_addr + UIB_R_MBRDCTL,
++				UIB_R_MBRDCTL_MBRDADDR_VALID, false, TIMEOUT, false);
++	if (ret) {
++		printf("%s: TIMEOUT!!! MBRDADDR_VALID is not zero\n", __func__);
++
++		hang();
++	}
++
++	/* Write <target read address> to chms0034 MBRDADDR */
++	debug("%s: #2 Write 0x%x to UIB_R_MBRDADDR\n", __func__, target_read_addr);
++	writel(target_read_addr, csr_addr + UIB_R_MBRDADDR);
++
++	/*
++	 * Write 1 to chms0030 MBRDADDR_VALID to indicate the address is now valid
++	 * for FW to read
++	 */
++	debug("%s: #3 Write 1 to MBRDADDR_VALID for FW to read address\n", __func__);
++	setbits_le32(csr_addr + UIB_R_MBRDCTL, UIB_R_MBRDCTL_MBRDADDR_VALID);
++
++	/*
++	 * Continuously poll the chms0030 MBRDDATA_VALID. If MBRDDATA_VALID are set, read
++	 * chms0038 MBRDDATA and chms0030 MBRDDATA_END to retrieve the <read data> and
++	 * <end of read burst> status accordingly
++	 */
++	debug("%s: #4 Read MBRDDATA_VALID from UIB_R_MBRDCTL\n", __func__);
++	ret = wait_for_bit_le32((const void *)csr_addr + UIB_R_MBRDCTL,
++				UIB_R_MBRDCTL_MBRDDATA_VALID, false, TIMEOUT, false);
++	if (ret) {
++		printf("%s: TIMEOUT!!! MBRDDATA_VALID is not zero\n", __func__);
++
++		hang();
++	}
++
++	reg = readl(csr_addr + UIB_R_MBRRDATA);
++	debug("%s: #5 Read data from UIB_R_MBRRDATA = 0x%x\n", __func__, reg);
++	rd_data = reg;
++
++	reg = readl(csr_addr + UIB_R_MBRDCTL);
++	debug("%s: #6 Read end of read burst status from UIB_R_MBRDCTL = 0x%x\n", __func__, reg);
++
++	/*
++	 * Once done retrieving the data, write 1 to chms0030 MBRDDATA_VALID,
++	 * chms0030 MBRDDATA_END to clear the register
++	 */
++	debug("%s: #7 Write 1 to MBRDDATA_VALID for FW to read address\n", __func__);
++	setbits_le32(csr_addr + UIB_R_MBRDCTL, UIB_R_MBRDCTL_MBRDDATA_VALID |
++			UIB_R_MBWRCTL_MBWRDATA_END);
++
++	return rd_data;
++}
++
++int uib_mb_req(phys_addr_t uib_csr_addr, u32 usr_cmd_type, u32 usr_cmd_opcode,
++	       u32 cmd_param_0, struct uib_mb_resp *resp)
++{
++	u32 cmd_req;
++
++	/* Initialized zeros for responses */
++	resp->cmd_resp_status = 0;
++
++	/* Write CMD_REQ (CMD_TYPE and CMD_OPCODE) */
++	cmd_req = FIELD_PREP(CMD_TYPE_MASK, usr_cmd_type) |
++		FIELD_PREP(CMD_OPCODE_MASK, usr_cmd_opcode);
++	uib_mailbox_write_request(cmd_req, 0, uib_csr_addr);
++
++	debug("%s: Write 0x%x to UIBSSM_CMD_REQ_OFFSET 0x%llx\n", __func__, cmd_req, uib_csr_addr);
++
++	/* Write CMD_PARAM_* */
++	if (cmd_param_0)
++		uib_mailbox_write_request(cmd_param_0, 0, uib_csr_addr);
++	else
++		debug("%s: cmd_param_0 is NULL\n", __func__);
++
++	/* read CMD_RESPONSE_STATUS */
++	resp->cmd_resp_status = uib_mailbox_read_request(0, uib_csr_addr);
++
++	debug("%s: CMD_RESPONSE_STATUS 0x%llx: 0x%x\n", __func__,
++	      uib_csr_addr, resp->cmd_resp_status);
++	debug("%s: STATUS_CMD_RESPONSE_ERROR: 0x%lx\n", __func__,
++	      UIBSSM_CMD_RESPONSE_ERROR(resp->cmd_resp_status));
++	debug("%s: STATUS_GENERAL_ERROR: 0x%lx\n", __func__,
++	      UIBSSM_GENERAL_ERROR(resp->cmd_resp_status));
++
 +	return 0;
 +}
-diff --git a/drivers/ddr/altera/iossm_mailbox.h b/drivers/ddr/altera/iossm_mailbox.h
+diff --git a/drivers/ddr/altera/uibssm_mailbox.h b/drivers/ddr/altera/uibssm_mailbox.h
 new file mode 100644
-index 0000000000..2a10b0dba6
+index 0000000000..5d0dc0f475
 --- /dev/null
-+++ b/drivers/ddr/altera/iossm_mailbox.h
-@@ -0,0 +1,182 @@
++++ b/drivers/ddr/altera/uibssm_mailbox.h
+@@ -0,0 +1,117 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
 + * Copyright (C) 2024 Intel Corporation <www.intel.com>
 + */
++#include <linux/bitfield.h>
 +
-+#define TIMEOUT_120000MS			120000
-+#define TIMEOUT					TIMEOUT_120000MS
-+#define IOSSM_STATUS_CAL_SUCCESS		BIT(0)
-+#define IOSSM_STATUS_CAL_FAIL			BIT(1)
-+#define IOSSM_STATUS_CAL_BUSY			BIT(2)
-+#define IOSSM_STATUS_COMMAND_RESPONSE_READY	BIT(0)
-+#define IOSSM_CMD_RESPONSE_STATUS_OFFSET	0x45C
-+#define IOSSM_CMD_RESPONSE_DATA_0_OFFSET	0x458
-+#define IOSSM_CMD_RESPONSE_DATA_1_OFFSET	0x454
-+#define IOSSM_CMD_RESPONSE_DATA_2_OFFSET	0x450
-+#define IOSSM_CMD_REQ_OFFSET			0x43C
-+#define IOSSM_CMD_PARAM_0_OFFSET		0x438
-+#define IOSSM_CMD_PARAM_1_OFFSET		0x434
-+#define IOSSM_CMD_PARAM_2_OFFSET		0x430
-+#define IOSSM_CMD_PARAM_3_OFFSET		0x42C
-+#define IOSSM_CMD_PARAM_4_OFFSET		0x428
-+#define IOSSM_CMD_PARAM_5_OFFSET		0x424
-+#define IOSSM_CMD_PARAM_6_OFFSET		0x420
-+#define IOSSM_STATUS_OFFSET			0x400
-+#define IOSSM_CMD_RESPONSE_DATA_SHORT_MASK	GENMASK(31, 16)
-+#define IOSSM_CMD_RESPONSE_DATA_SHORT(n)	FIELD_GET(IOSSM_CMD_RESPONSE_DATA_SHORT_MASK, n)
-+#define IOSSM_STATUS_CMD_RESPONSE_ERROR_MASK	GENMASK(7, 5)
-+#define IOSSM_STATUS_CMD_RESPONSE_ERROR(n)	FIELD_GET(IOSSM_STATUS_CMD_RESPONSE_ERROR_MASK, n)
-+#define IOSSM_STATUS_GENERAL_ERROR_MASK		GENMASK(4, 1)
-+#define IOSSM_STATUS_GENERAL_ERROR(n)		FIELD_GET(IOSSM_STATUS_GENERAL_ERROR_MASK, n)
-+#define MAX_IO96B_SUPPORTED			2
-+#define NUM_CMD_RESPONSE_DATA			3
-+#define NUM_CMD_PARAM				6
++#define TIMEOUT_120000MS	120000
++#define TIMEOUT			TIMEOUT_120000MS
 +
-+/* supported mailbox command type */
-+enum iossm_mailbox_cmd_type  {
-+	CMD_NOP,
-+	CMD_GET_SYS_INFO,
-+	CMD_GET_MEM_INFO,
-+	CMD_GET_MEM_CAL_INFO,
-+	CMD_TRIG_CONTROLLER_OP,
-+	CMD_TRIG_MEM_CAL_OP
-+};
++#define UIBSSM_CMD_RESPONSE_DATA_SHORT_MASK	GENMASK(31, 16)
++#define UIBSSM_CMD_RESPONSE_DATA_SHORT(x)	FIELD_GET(UIBSSM_CMD_RESPONSE_DATA_SHORT_MASK, x)
++#define UIBSSM_CMD_RESPONSE_ERROR_MASK		GENMASK(7, 5)
++#define UIBSSM_CMD_RESPONSE_ERROR(x)		FIELD_GET(UIBSSM_CMD_RESPONSE_ERROR_MASK, x)
++#define UIBSSM_GENERAL_ERROR_MASK		GENMASK(4, 1)
++#define UIBSSM_GENERAL_ERROR(x)			FIELD_GET(UIBSSM_GENERAL_ERROR_MASK, x)
 +
-+/* supported mailbox command opcode */
-+enum iossm_mailbox_cmd_opcode  {
-+	GET_MEM_INTF_INFO = 0x0001,
-+	GET_MEM_TECHNOLOGY,
-+	GET_MEMCLK_FREQ_KHZ,
-+	GET_MEM_WIDTH_INFO,
-+	ECC_ENABLE_SET = 0x0101,
-+	ECC_ENABLE_STATUS,
-+	ECC_INTERRUPT_STATUS,
-+	ECC_INTERRUPT_ACK,
-+	ECC_INTERRUPT_MASK,
-+	ECC_WRITEBACK_ENABLE,
-+	ECC_SCRUB_IN_PROGRESS_STATUS = 0x0201,
-+	ECC_SCRUB_MODE_0_START,
-+	ECC_SCRUB_MODE_1_START,
-+	BIST_STANDARD_MODE_START = 0x0301,
-+	BIST_RESULTS_STATUS,
-+	BIST_MEM_INIT_START,
-+	BIST_MEM_INIT_STATUS,
-+	BIST_SET_DATA_PATTERN_UPPER,
-+	BIST_SET_DATA_PATTERN_LOWER,
-+	TRIG_MEM_CAL = 0x000a,
-+	GET_MEM_CAL_STATUS
-+};
++/* UIB Responder Initialization Control Register */
++#define UIB_R_INITCTL_OFFSET			0x10
++#define UIB_R_INITCTL_INITREQ_MASK		BIT(0)
++#define UIB_R_INITCTL_INITTYPE_MASK		GENMASK(11, 8)
++#define UIB_R_INITCTL_INITREQ(x)		FIELD_PREP(UIB_R_INITCTL_INITREQ_MASK, x)
++#define UIB_R_INITCTL_INITTYPE(x)		FIELD_PREP(UIB_R_INITCTL_INITTYPE_MASK, x)
++#define UIB_RST_REQUEST_WITH_CAL		5
 +
-+/* response data of cmd opcode GET_MEM_INTF_INFO */
-+#define INTF_IP_TYPE_MASK		GENMASK(31, 29)
-+#define INTF_INSTANCE_ID_MASK		GENMASK(28, 24)
++/* UIB Initialization control and status registers */
++#define UIB_R_INITSTS_OFFSET		0x14
++#define UIB_R_INITSTS_INITSTS_PASS	BIT(1)
++#define MAX_UIB_SUPPORTED		8
 +
-+/* response data of cmd opcode GET_MEM_CAL_STATUS */
-+#define INTF_UNUSED			0x0
-+#define INTF_MEM_CAL_STATUS_SUCCESS	0x1
-+#define INTF_MEM_CAL_STATUS_FAIL	0x2
-+#define INTF_MEM_CAL_STATUS_ONGOING	0x4
++#define UIB_R_MBWRCTL			0x20
++#define UIB_R_MBWRADDR			0x24
++#define UIB_R_MBWRDATA			0x28
++#define UIB_R_MBWRCTL_MBWRADDR_VALID	BIT(0)
++#define UIB_R_MBWRCTL_MBWRDATA_VALID	BIT(4)
++#define UIB_R_MBWRCTL_MBWRDATA_END	BIT(7)
 +
-+/* cmd opcode BIST_MEM_INIT_START, BIST performed on full memory address range */
-+#define BIST_FULL_MEM			BIT(6)
++#define UIB_R_MBRDCTL			0x30
++#define UIB_R_MBRDADDR			0x34
++#define UIB_R_MBRRDATA			0x38
++#define UIB_R_MBRDCTL_MBRDADDR_VALID	BIT(0)
++#define UIB_R_MBRDCTL_MBRDDATA_VALID	BIT(4)
++#define UIB_R_MBRDCTL_MBRDDATA_END	BIT(7)
 +
-+/*
-+ * IOSSM mailbox required information
-+ *
-+ * @num_mem_interface:	Number of memory interfaces instantiated
-+ * @ip_type:		IP type implemented on the IO96B
-+ * @ip_instance_id:	IP identifier for every IP instance implemented on the IO96B
-+ */
-+struct io96b_mb_ctrl {
-+	u32 num_mem_interface;
-+	u32 ip_type[2];
-+	u32 ip_id[2];
-+};
++/* Responder Error Mask Register */
++#define UIB_R_ERRMSK_PSEUDO_CH0_OFFSET	0x520
++#define UIB_R_ERRMSK_PSEUDO_CH1_OFFSET	0X820
++#define UIB_DRAM_SBE_MSK		BIT(25)
++#define UIB_INTERNAL_CORR_ERR_MSK	BIT(30)
++#define UIB_DRAM_SBE(x)			FIELD_PREP(UIB_DRAM_SBE_MSK, x)
++#define UIB_INTERNAL_CORR_ERR(x)	FIELD_PREP(UIB_INTERNAL_CORR_ERR_MSK, x)
 +
 +/* CMD_REQ Register Definition */
-+#define CMD_TARGET_IP_TYPE_MASK		GENMASK(31, 29)
-+#define CMD_TARGET_IP_INSTANCE_ID_MASK	GENMASK(28, 24)
 +#define CMD_TYPE_MASK			GENMASK(23, 16)
 +#define CMD_OPCODE_MASK			GENMASK(15, 0)
 +
-+/*
-+ * IOSSM mailbox request
-+ * @ip_type:	    IP type for the specified memory interface
-+ * @ip_id:	    IP instance ID for the specified memory interface
-+ * @usr_cmd_type:   User desire IOSSM mailbox command type
-+ * @usr_cmd_opcode: User desire IOSSM mailbox command opcode
-+ * @cmd_param_*:    Parameters (if applicable) for the requested IOSSM mailbox command
-+ */
-+struct io96b_mb_req {
-+	u32 ip_type;
-+	u32 ip_id;
-+	u32 usr_cmd_type;
-+	u32 usr_cmd_opcode;
-+	u32 cmd_param[NUM_CMD_PARAM];
++/* supported mailbox command type */
++enum uibssm_mailbox_cmd_type  {
++	UIB_CMD_TRIG_CONTROLLER_OP = 0x04
 +};
 +
++/* supported mailbox command opcode */
++enum uibssm_mailbox_cmd_opcode  {
++	UIB_BIST_MEM_INIT_START = 0x0303,
++	UIB_BIST_MEM_INIT_STATUS
++};
++
++/* CMD_PARAM_0 for opcode UIB_BIST_MEM_INIT_START */
++#define UIB_BIST_FULL_MEM	BIT(6)
++
++/* UIBSSM_CMD_RESPONSE_DATA_SHORT for opcode UIB_BIST_MEM_INIT_START */
++#define UIB_BIST_INITIATE_PASS	BIT(0)
++
 +/*
-+ * IOSSM mailbox response outputs
++ * UIBSSM mailbox response outputs
 + *
 + * @cmd_resp_status: Command Interface status
-+ * @cmd_resp_data_*: More spaces for command response
 + */
-+struct io96b_mb_resp {
++struct uib_mb_resp {
 +	u32 cmd_resp_status;
-+	u32 cmd_resp_data[NUM_CMD_RESPONSE_DATA];
 +};
 +
 +/*
-+ * IO96B instance specific information
++ * UIB instance specific information
 + *
-+ * @size:		Memory size
-+ * @io96b_csr_addr:	IO96B instance CSR address
-+ * @cal_status:		IO96B instance calibration status
-+ * @mb_ctrl:		IOSSM mailbox required information
++ * @uib_csr_addr:	UIB instance CSR address
++ * @cal_status:		UIB instance calibration status
 + */
-+struct io96b_instance {
-+	u16 size;
-+	phys_addr_t io96b_csr_addr;
++struct uib_instance {
++	phys_addr_t uib_csr_addr;
 +	bool cal_status;
-+	struct io96b_mb_ctrl mb_ctrl;
 +};
 +
 +/*
-+ * Overall IO96B instance(s) information
++ * Overall UIB instance(s) information
 + *
 + * @num_instance:	Number of instance(s) assigned to HPS
-+ * @overall_cal_status: Overall calibration status for all IO96B instance(s)
-+ * @ddr_type:		DDR memory type
++ * @overall_cal_status: Overall calibration status for all UIB instance(s)
 + * @ecc_status:		ECC enable status (false = disabled, true = enabled)
-+ * @overall_size:	Total DDR memory size
-+ * @io96b[]:		IO96B instance specific information
-+ * @ckgen_lock:		IO96B GEN PLL lock (false = not locked, true = locked)
-+ * @num_port:		Number of IO96B port. Example bit 0 represent port 0, bit 1 represent port 1, and so on
-+ * @io96b_pll:		Selected IO96B PLL. Example bit 0: EMIF0 PLL A selected,
-+ *			bit 1: EMIF0 PLL B selected, bit 2 - EMIF1 PLL A selected,
-+ *			bit 3: EMIF1 PLL B selected
++ * @overall_size:	Total HBM memory size
++ * @uib:		UIB instance specific information
 + */
-+struct io96b_info {
++struct uib_info {
 +	u8 num_instance;
 +	bool overall_cal_status;
-+	const char *ddr_type;
 +	bool ecc_status;
 +	u16 overall_size;
-+	struct io96b_instance io96b[MAX_IO96B_SUPPORTED];
-+	bool ckgen_lock;
-+	u8 num_port;
-+	u8 io96b_pll;
++	struct uib_instance uib[MAX_UIB_SUPPORTED];
 +};
 +
-+int io96b_mb_req(phys_addr_t io96b_csr_addr, struct io96b_mb_req req,
-+		 u32 resp_data_len, struct io96b_mb_resp *resp);
-+
-+/* Supported IOSSM mailbox function */
-+void io96b_mb_init(struct io96b_info *io96b_ctrl);
-+int io96b_cal_status(phys_addr_t addr);
-+void init_mem_cal(struct io96b_info *io96b_ctrl);
-+int trig_mem_cal(struct io96b_info *io96b_ctrl);
-+int get_mem_technology(struct io96b_info *io96b_ctrl);
-+int get_mem_width_info(struct io96b_info *io96b_ctrl);
-+int ecc_enable_status(struct io96b_info *io96b_ctrl);
-+int bist_mem_init_start(struct io96b_info *io96b_ctrl);
++/* Supported UIB function */
++int uib_mb_req(phys_addr_t uib_csr_addr,
++	       u32 usr_cmd_type, u32 usr_cmd_opcode,
++	       u32 cmd_param_0, struct uib_mb_resp *resp);
++int uib_cal_status(phys_addr_t addr);
++void uib_init_mem_cal(struct uib_info *uib_ctrl);
++void uib_trig_mem_cal(struct uib_info *uib_ctrl);
++int uib_bist_mem_init_start(struct uib_info *uib_ctrl);
 -- 
 2.25.1
 
