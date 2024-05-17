@@ -4,53 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3EC1C25B74
-	for <u-boot@archiver.kernel.org>; Thu, 16 May 2024 23:47:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A742CC25B7A
+	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 01:31:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA8DA8847E;
-	Fri, 17 May 2024 01:47:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D2C8288481;
+	Fri, 17 May 2024 03:31:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1715903274;
-	bh=ZYf2OMFdtMJ9n0iWBDn6vJaysrAe8miBtmG01x23INk=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=lgCWdMOiH1PL6sdcNjSjtVXMXyjmnK/bvUjQcdARQJYhS0/+LKUZAQuA/qNt/bFDi
-	 75gLTIhjE69lwWXc2Vv4oc74DjQq8cWmE+zhoTTf4OBYJJzw8u8zaBRGFyzOdYp1Zo
-	 jck3804zAC1cLAHeiu9Nm7bF3fsJqExFZPo2bPP6/kmUi/khqvZOeQrhatwXYRuDwd
-	 TOFHSCi3h4MhVz0h/4eW0+WgGFBpNZgUVuata/D5Y9VKZ+QNhYBCgPgjILPyziFVp6
-	 KCMGV6aR8riS0I+q1AGMScgMKEEyzzGCD8k7/gHtwSayrnkHzueHL9jR7UGY4NutRS
-	 mnzJLmZSKefqw==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+	s=phobos-20191101; t=1715909475;
+	bh=/xZm0NiS6DDz/rvMQ9RbRDNYS5ENkM94TKT7VUVe8Xk=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=HBRGxs+DhCO6c8VAXSrEeDtnx9ZoCIVfmPMx/wPWiZjd4GnM76oeMzaPsJSiHa5ZV
+	 N2U9IQscNt39sx9oNilmlDNOXSuZyoDpRygPsg2DPdI8tIzZUnpD5uI5GVZOd7DnOk
+	 93hHyUh/WZ9V/uOeI4kDakKUtKEHoy9cGGIOCO9HPb9ZOa2yY/re4erKWT9QDBLWgu
+	 2AZDYdysHtkv+sFbKmLDkfaUuMMNSVtiGy4O7ZaBGKId9hsqgxh3D48sH/r9vD+CBK
+	 SSxbCPYXPrAlbx8VEe9VXb+uTwDQL20SiEPEU4pgfRR21aNzCUkvDNmhDLzFKbKG8W
+	 wQPFshJjMuSvA==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 28B6688453;
- Fri, 17 May 2024 01:47:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 2EB9A883AE;
+ Fri, 17 May 2024 03:31:12 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1715903272;
- bh=ZYf2OMFdtMJ9n0iWBDn6vJaysrAe8miBtmG01x23INk=;
- h=From:To:Cc:Subject:Date:From;
- b=hrqQngZcEwNs7/F4NIx9ztHAj4Rk+P0/7+PwI6DqQG6mQppboGRGM6JRwjTrilPL3
- v7zW2QkmIf644ot0I6kibgL0PHwq6bAgiT+M/yGbL2z/5eUwi58Yd7E/6TxN2f3/mw
- sRCXrDOmIn+H9xVnT7ONd71ptdv/GsSDJupdL7r9Exy59WB6qG3ec0P/XKG/xrUTZk
- Cg5CemLw0gRwQoLnl0JdOjFUn6FVmMRH2G5AQUSoo2VLcHmVhK0YYTTbo7DyTzju8I
- O1M55NT1dQouHxQjU+Mk9BAXDVYsCrPhGWkR9HooyrZq65XtqfkHhwynY6BnUKokCL
- 4hEed9YTiK/cA==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- u-boot@dh-electronics.com, uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH] ARM: dts: stm32: Add generic SoM compatible to STM32MP15xx DH
- electronics DHSOM
-Date: Fri, 17 May 2024 01:47:04 +0200
-Message-ID: <20240516234737.201250-1-marex@denx.de>
-X-Mailer: git-send-email 2.43.0
+ s=phobos-20191101; t=1715909474;
+ bh=/xZm0NiS6DDz/rvMQ9RbRDNYS5ENkM94TKT7VUVe8Xk=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=ZPW1BRbRs0O2jvBAsyumpFkXoZyr/hE08Hu7TY/1Ib4J6NtfTtk571817UOKFm08M
+ 05SE0SQJG3GiJilAFcnD1pdQsh726AkcBu42/hazdbYKyfm65Q2Rl0CAmNFu2ygLyB
+ id1lkBeYGuwBTli8KAr8CvUnElYkHox72rCV0pkrRRb9Q00HfgsNBdhggrdHFyI9/t
+ OuDaXxjXi3TQjcnPLmoQDuxzDnbVc73OVIQv6UnSgvq1MRMAlBEjTBqZDvKgCwNv03
+ Iyg6XRD5LQvMaydKdIPa555Wqnt99QwWqwYZuREeyci6WPFG9bY3ojfCDMIw8jyMgu
+ XatWjy0ReXTgg==
+Message-ID: <b5366e76-6642-457d-ade9-a0e68f181e99@denx.de>
+Date: Fri, 17 May 2024 03:25:38 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 4/4] imx: hab: Use nxp_imx8mcst etype for i.MX8M
+ flash.bin signing
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: u-boot@lists.denx.de, anton.gres@ifm.com, ch@denx.de,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Adam Ford <aford173@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Angus Ainslie <angus@akkea.ca>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Simon Glass
+ <sjg@chromium.org>, Stefan Eichenberger <stefan.eichenberger@toradex.com>,
+ Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>,
+ kernel@puri.sm, u-boot@dh-electronics.com
+References: <20240516213036.89016-1-marex@denx.de>
+ <20240516213036.89016-4-marex@denx.de>
+ <CAJ+vNU1Sb60gX4RoHwO=o2kf0c9bW85W2i1VwJg3Oa1hFmxADw@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CAJ+vNU1Sb60gX4RoHwO=o2kf0c9bW85W2i1VwJg3Oa1hFmxADw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,108 +83,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add generic SoM compatible string into machine compatible string
-for all STM32MP15xx based DH electronics DHSOM. This way, common
-board code can match on this compatible. No functional change.
+On 5/16/24 11:40 PM, Tim Harvey wrote:
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@dh-electronics.com
-Cc: u-boot@lists.denx.de
-Cc: uboot-stm32@st-md-mailman.stormreply.com
----
- arch/arm/dts/stm32mp15xx-dhcom-drc02.dts       | 4 +++-
- arch/arm/dts/stm32mp15xx-dhcom-pdk2.dts        | 4 +++-
- arch/arm/dts/stm32mp15xx-dhcom-picoitx.dts     | 4 +++-
- arch/arm/dts/stm32mp15xx-dhcor-avenger96.dts   | 4 +++-
- arch/arm/dts/stm32mp15xx-dhcor-drc-compact.dts | 4 +++-
- arch/arm/dts/stm32mp15xx-dhcor-testbench.dts   | 4 +++-
- 6 files changed, 18 insertions(+), 6 deletions(-)
+[...]
 
-diff --git a/arch/arm/dts/stm32mp15xx-dhcom-drc02.dts b/arch/arm/dts/stm32mp15xx-dhcom-drc02.dts
-index 1ef9ac29cea..90625bf6b60 100644
---- a/arch/arm/dts/stm32mp15xx-dhcom-drc02.dts
-+++ b/arch/arm/dts/stm32mp15xx-dhcom-drc02.dts
-@@ -11,5 +11,7 @@
+>> -The entire script is available in doc/imx/habv4/csf_examples/mx8m/csf.sh
+>> -and can be used as follows to modify flash.bin to be signed
+>> -(adjust paths as needed):
+>> -```
+>> -export CST_DIR=/usr/src/cst-3.3.1/
+>> -export CSF_KEY=$CST_DIR/crts/CSF1_1_sha256_4096_65537_v3_usr_crt.pem
+>> -export IMG_KEY=$CST_DIR/crts/IMG1_1_sha256_4096_65537_v3_usr_crt.pem
+>> -export SRK_TABLE=$CST_DIR/crts/SRK_1_2_3_4_table.bin
+>> -export PATH=$CST_DIR/linux64/bin:$PATH
+> 
+> Hi Marek,
+> 
+> I thought you were going to leave the above env setting examples in
+> the documentation.
+> 
+> I suggest showing how to specify using env (by just leaving the above
+> in) as well as by copying them directly to the build directory if
+> wanted.. otherwise the documentation is lacking.
+
+If the tool can do env vars now, I would like to avoid copying key 
+material around. So what about this:
+
+diff --git a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt 
+b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
+index 1eb1fb0aa61..257ffb45656 100644
+--- a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
++++ b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
+@@ -144,6 +144,8 @@ The signing is activated by wrapping SPL and 
+fitImage sections into nxp-imx8mcst
+  etype, which is done automatically in 
+arch/arm/dts/imx8m{m,n,p,q}-u-boot.dtsi
+  in case CONFIG_IMX_HAB Kconfig symbol is enabled.
+
++Build of flash.bin target then produces a signed flash.bin automatically.
++
+  The nxp-imx8mcst etype is configurable using either DT properties or 
+environment
+  variables. The following DT properties and environment variables are 
+supported.
+  Note that environment variables override DT properties.
+@@ -160,7 +162,15 @@ Note that environment variables override DT properties.
+  | nxp,img-crt        | IMG_KEY   | full path to the IMG Key 
+IMG1_1_sha256_4096_65537_v3_usr_crt.pem |
  
- / {
- 	model = "DH Electronics STM32MP15xx DHCOM DRC02";
--	compatible = "dh,stm32mp15xx-dhcom-drc02", "st,stm32mp1xx";
-+	compatible = "dh,stm32mp15xx-dhcom-drc02",
-+		     "dh,stm32mp15xx-dhcom-som",
-+		     "st,stm32mp1xx";
- };
-diff --git a/arch/arm/dts/stm32mp15xx-dhcom-pdk2.dts b/arch/arm/dts/stm32mp15xx-dhcom-pdk2.dts
-index e2e01e2146c..b2e450aa13b 100644
---- a/arch/arm/dts/stm32mp15xx-dhcom-pdk2.dts
-+++ b/arch/arm/dts/stm32mp15xx-dhcom-pdk2.dts
-@@ -11,5 +11,7 @@
- 
- / {
- 	model = "STMicroelectronics STM32MP15xx DHCOM Premium Developer Kit (2)";
--	compatible = "dh,stm32mp15xx-dhcom-pdk2", "st,stm32mp15x";
-+	compatible = "dh,stm32mp15xx-dhcom-pdk2",
-+		     "dh,stm32mp15xx-dhcom-som",
-+		     "st,stm32mp15x";
- };
-diff --git a/arch/arm/dts/stm32mp15xx-dhcom-picoitx.dts b/arch/arm/dts/stm32mp15xx-dhcom-picoitx.dts
-index 06770b47873..3e908102f61 100644
---- a/arch/arm/dts/stm32mp15xx-dhcom-picoitx.dts
-+++ b/arch/arm/dts/stm32mp15xx-dhcom-picoitx.dts
-@@ -11,5 +11,7 @@
- 
- / {
- 	model = "DH Electronics STM32MP15xx DHCOM PicoITX";
--	compatible = "dh,stm32mp15xx-dhcom-picoitx", "st,stm32mp1xx";
-+	compatible = "dh,stm32mp15xx-dhcom-picoitx",
-+		     "dh,stm32mp15xx-dhcom-som",
-+		     "st,stm32mp1xx";
- };
-diff --git a/arch/arm/dts/stm32mp15xx-dhcor-avenger96.dts b/arch/arm/dts/stm32mp15xx-dhcor-avenger96.dts
-index 76ac5a873c1..dd8fcecbca5 100644
---- a/arch/arm/dts/stm32mp15xx-dhcor-avenger96.dts
-+++ b/arch/arm/dts/stm32mp15xx-dhcor-avenger96.dts
-@@ -14,5 +14,7 @@
- 
- / {
- 	model = "Arrow Electronics STM32MP15xx Avenger96 board";
--	compatible = "arrow,stm32mp15xx-avenger96", "st,stm32mp15x";
-+	compatible = "arrow,stm32mp15xx-avenger96",
-+		     "dh,stm32mp15xx-dhcor-som",
-+		     "st,stm32mp15x";
- };
-diff --git a/arch/arm/dts/stm32mp15xx-dhcor-drc-compact.dts b/arch/arm/dts/stm32mp15xx-dhcor-drc-compact.dts
-index 77dd944ff53..c1f99c1685e 100644
---- a/arch/arm/dts/stm32mp15xx-dhcor-drc-compact.dts
-+++ b/arch/arm/dts/stm32mp15xx-dhcor-drc-compact.dts
-@@ -12,5 +12,7 @@
- 
- / {
- 	model = "DH electronics STM32MP15xx DHCOR DRC Compact";
--	compatible = "dh,stm32mp15xx-dhcor-drc-compact", "st,stm32mp1xx";
-+	compatible = "dh,stm32mp15xx-dhcor-drc-compact",
-+		     "dh,stm32mp15xx-dhcor-som",
-+		     "st,stm32mp1xx";
- };
-diff --git a/arch/arm/dts/stm32mp15xx-dhcor-testbench.dts b/arch/arm/dts/stm32mp15xx-dhcor-testbench.dts
-index c9163e1c028..5fdd762ddbf 100644
---- a/arch/arm/dts/stm32mp15xx-dhcor-testbench.dts
-+++ b/arch/arm/dts/stm32mp15xx-dhcor-testbench.dts
-@@ -9,7 +9,9 @@
- 
- / {
- 	model = "DH electronics STM32MP15xx DHCOR Testbench";
--	compatible = "dh,stm32mp15xx-dhcor-testbench", "st,stm32mp1xx";
-+	compatible = "dh,stm32mp15xx-dhcor-testbench",
-+		     "dh,stm32mp15xx-dhcor-som",
-+		     "st,stm32mp1xx";
- 
- 	aliases {
- 		ethernet0 = &ethernet0;
--- 
-2.43.0
++--------------------+-----------+------------------------------------------------------------------+
+
+-Build of flash.bin target then produces a signed flash.bin automatically.
++Environment variables can be set as follows to point the build process
++to external key material:
++```
++export CST_DIR=/usr/src/cst-3.3.1/
++export CSF_KEY=$CST_DIR/crts/CSF1_1_sha256_4096_65537_v3_usr_crt.pem
++export IMG_KEY=$CST_DIR/crts/IMG1_1_sha256_4096_65537_v3_usr_crt.pem
++export SRK_TABLE=$CST_DIR/crts/SRK_1_2_3_4_table.bin
++make flash.bin
++```
+
+  1.4 Closing the device
+  -----------------------
 
