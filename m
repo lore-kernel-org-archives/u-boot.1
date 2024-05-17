@@ -4,105 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14E46C25B78
-	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 18:17:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E51BC04FFE
+	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 18:51:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7E5488582;
-	Fri, 17 May 2024 20:15:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
+	by phobos.denx.de (Postfix) with ESMTP id 3D7848851D;
+	Fri, 17 May 2024 20:51:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="U9jYjTHv";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="jLdHKab1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WohMWEV9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E768D88581; Fri, 17 May 2024 20:15:17 +0200 (CEST)
-Received: from fhigh7-smtp.messagingengine.com
- (fhigh7-smtp.messagingengine.com [103.168.172.158])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AEB1488524; Fri, 17 May 2024 20:51:51 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37E8988586
- for <u-boot@lists.denx.de>; Fri, 17 May 2024 20:15:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 58767884FD
+ for <u-boot@lists.denx.de>; Fri, 17 May 2024 20:51:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=flygoat.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
- by mailfhigh.nyi.internal (Postfix) with ESMTP id 6DCE411400BD;
- Fri, 17 May 2024 14:15:14 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute6.internal (MEProxy); Fri, 17 May 2024 14:15:14 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
- cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm1; t=1715969714;
- x=1716056114; bh=8V2Qr/6eSx/MT+l/EtFNwAEO9j/M8gqIVbnvZ+Zafpc=; b=
- U9jYjTHvUrOgngi0VfM7B3Extf3Ls+089p9xnnHP2Q4cmWcGofneHncJSPBwPOb6
- doFIp9YLnPndUFhwwlrp33E0326JqVQTZ7IPqZpKwr1MHBaLHJomvhSAKWPMCNcV
- YZYwDld9PsyT6QMX+vHMnUgJY8dY3k6nWfgSCNw/PBrT74NMBfzlCFIQvuBi7sUM
- xCQbRTm7zPM/jUCbCqn0O6de4+TkZqRFyqbaLMMclsmI06tlD/4Fj4L/pVU/SxxU
- gffMFp2lq4HQeBeYlwOaFYkiccb50rrlgZavDp5S+t8FIOpwE9weLzfPgZ/Xcdwk
- 8mMqO+gO14LvSaIA0AFNKA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715969714; x=
- 1716056114; bh=8V2Qr/6eSx/MT+l/EtFNwAEO9j/M8gqIVbnvZ+Zafpc=; b=j
- LdHKab1CV8/QdH8tcGMr+kpq3vcNv8s70l+etjyc+3sUdvgj/tr9fCQbRqLEi/Te
- 7aSxwn3g9TfUK5IdCPw8a4qg9iZXg/8RDrRML3DxS0Pf6POultYDsqgcj9wE7C89
- Kya+mfkR6zkFs0RgrWGzOdLXFXItF2ivncIg49jXQwWKRwCU54202EqjrCgdZrzv
- LYomuHPsTi4el418gS7awD6ImGvGttLKwe+DbC5Jqg2Q/DIP9OtbeVhEJlbNZoPP
- y1IJGP7280MbiJfQ8tRCp62sRq/Nfn6brQrObl2p/ud4XHEGJkUx8G0Q8unuSfhP
- 6YPqISB0NrEsBxj8Etvew==
-X-ME-Sender: <xms:sp5HZv5QaZf0mJBKc_njOojNILCrddSpotZx4KRifg4Ut8S4IFYw3g>
- <xme:sp5HZk7MuUxVg1U8yPl1rXhb0giqtYeXcXjOcH4S8NE7ldZWnf1sTWU1_m8EaLBEp
- RefTVoldhV78eOQTTI>
-X-ME-Received: <xmr:sp5HZmdp8ouoL5VBNv_AmcwoGM2YdbaAAnKPV_nPuy3OihNCNcYbEuY>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehgedgvdelucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhephfffufggtgfgkfhfjgfvvefosehtjeertdertdejnecuhfhrohhmpeflihgr
- gihunhcujggrnhhguceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomheqne
- cuggftrfgrthhtvghrnhephefgleegjeeugfelhfeuudehleeitdethfeljefhvdevgeef
- feevteehheekudeknecuffhomhgrihhnpehkvghnrhgvlhdrohhrghenucevlhhushhtvg
- hrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjihgrgihunhdrhigrnhhg
- sehflhihghhorghtrdgtohhm
-X-ME-Proxy: <xmx:sp5HZgLXwCJlIVGdCMOYGYQ_Bs7DnWN7asllGZKtJ289riITAARYXw>
- <xmx:sp5HZjIcYzveOrTpw0NXHzUalt3QQreCouqx541tEGqP7UoaR2Gb1Q>
- <xmx:sp5HZpyJhi-dP3S-AOmDoDjua3QeJhv5WATX3ew6xErwA8teKSawLA>
- <xmx:sp5HZvJQWLJIPJWjBWO4NDX6el1625HdPX60axDyQ8sWYYBiUksmdg>
- <xmx:sp5HZlw7gjcZU2BxonHhfBFPcRdhuqwpoHBP9Hr_c4V0UjgQcrtQ2OSo>
-Feedback-ID: ifd894703:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 17 May 2024 14:15:12 -0400 (EDT)
-From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Fri, 17 May 2024 19:15:00 +0100
-Subject: [PATCH v3 12/12] mailmap: Update email for Paul Burton
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-622e32414ffso5122227b3.1
+ for <u-boot@lists.denx.de>; Fri, 17 May 2024 11:51:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1715971908; x=1716576708; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=gcbzITbjAG0eJrpUDrPtx2/+R/EE+oTiEP09SY4iYts=;
+ b=WohMWEV9oYjke4+dOpcJ+CwOgd3yFitGpDnfaS++ou4GFg0pDGMEN3NyHo/VVsQHce
+ FDlDVs02o4hK30ECwfJ1+OY6me81K6cQuY3+/UxGqFEC/ER23Zn/qjap/zZUqjPfvo+M
+ epwAs8ZZr7FWb2sG31Pn+KFF1/KWNIKhnAuqo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1715971908; x=1716576708;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gcbzITbjAG0eJrpUDrPtx2/+R/EE+oTiEP09SY4iYts=;
+ b=lD8u9tbgrJkNsmSCBB4z1fTaCQ/GjnZeqs/joza+YR+QMMhhS0WxTzmvw4GkpGt9/u
+ M7+RtaEslZCcPDnNOs9Ej5SoAqcxlTiIFSm2XWG2vpWpH2rU9JaQ7EqeU4NDNI6EtAE8
+ ebWpX0iHd5jtf2D8wVR/DDFS9dS/w5bh3BtTsLcaeoTU/AOfGQCLDQF+N1FpT+vrPNfb
+ 2wgXqu7ImzhjWNO7VSwJ9F/zMWb+ych5ic4rRmS5556tc9Q5noeGpg27kXDtNBNeKaUv
+ mZ8k+dH1sxEvCcUv5POTaTPptYIMB/XlKt2KUq6G0tSxdHKJfkc/cWiJyeAOHA2NxXnr
+ XZLw==
+X-Gm-Message-State: AOJu0Yz3B63vkTGESGBE5HI0amYB7iS41txO1U8YLm61DBaqusv2X+4k
+ cUh6S9cY83pgoGtwHQvBkA8kilYeYJlmXAzue607mka0Cvh32cegywrwrhVo1c0=
+X-Google-Smtp-Source: AGHT+IGdxjxyfPI0dYjACRV75EyXFgATsXhS/8rs9IxO8wzETfp79C/kRQ9/Ql3VwBFATefoRJbLNg==
+X-Received: by 2002:a05:690c:6906:b0:615:bb7:d59c with SMTP id
+ 00721157ae682-622aff9d827mr326198597b3.22.1715971908081; 
+ Fri, 17 May 2024 11:51:48 -0700 (PDT)
+Received: from bill-the-cat ([187.144.98.216])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-43e25f3ec65sm55992351cf.81.2024.05.17.11.51.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 17 May 2024 11:51:47 -0700 (PDT)
+Date: Fri, 17 May 2024 12:51:44 -0600
+From: Tom Rini <trini@konsulko.com>
+To: jasper@fancydomain.eu
+Cc: u-boot@lists.denx.de, joe.hershberger@ni.com,
+ Michael Glembotzki <Michael.Glembotzki@iris-sensing.com>
+Subject: Re: [PATCH] env: Invert gd->env_valid for env_mmc_save
+Message-ID: <20240517185144.GM2568172@bill-the-cat>
+References: <20240510113834.826783-1-jasper@fancydomain.eu>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240517-boston-v3-12-1ea7d23f4a1d@flygoat.com>
-References: <20240517-boston-v3-0-1ea7d23f4a1d@flygoat.com>
-In-Reply-To: <20240517-boston-v3-0-1ea7d23f4a1d@flygoat.com>
-To: u-boot@lists.denx.de
-Cc: Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>, 
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- Paul Burton <paulburton@kernel.org>, Simon Glass <sjg@chromium.org>, 
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Sumit Garg <sumit.garg@linaro.org>, Jonas Karlman <jonas@kwiboo.se>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>
-X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2072;
- i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=qT8F2GfpoNQmppl7T68l24x0+KoFuNYyRrCngUMWAMI=;
- b=owGbwMvMwCHmXMhTe71c8zDjabUkhjT3ebMrft/T0nw4d5ND3dyE5RnmLm63pj4td152W91Z2
- orxau+JjlIWBjEOBlkxRZYQAaW+DY0XF1x/kPUHZg4rE8gQBi5OAZhIshgjw+MzR9hEJLyW5Tjd
- MvTLyOnwE9so5MV0dNcCjcMSy2+8ucDwh6uxbNs2TpFeH94le6U3rFyyQePN2YCMQ0IFRq/sbil
- ZsQIA
-X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
- fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="M9nWV3ORUZg4H21A"
+Content-Disposition: inline
+In-Reply-To: <20240510113834.826783-1-jasper@fancydomain.eu>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,56 +90,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Paul had left MIPS a couple of years ago, his email address is
-no longer valid.
 
-Replace it with his kenrel.org email, which has been used in
-kernel and QEMU, in case we still want to reach him.
+--M9nWV3ORUZg4H21A
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
----
- .mailmap                        | 3 ++-
- board/imgtec/boston/MAINTAINERS | 2 +-
- board/imgtec/malta/MAINTAINERS  | 2 +-
- 3 files changed, 4 insertions(+), 3 deletions(-)
+On Fri, May 10, 2024 at 01:38:34PM +0200, jasper@fancydomain.eu wrote:
 
-diff --git a/.mailmap b/.mailmap
-index 8049856d41c3..bb7c1c3869ab 100644
---- a/.mailmap
-+++ b/.mailmap
-@@ -87,7 +87,8 @@ This contributor prefers not to receive mails <noreply@example.com> <pali@kernel
- This contributor prefers not to receive mails <noreply@example.com> <pali.rohar@gmail.com>
- Patrice Chotard <patrice.chotard@foss.st.com> <patrice.chotard@st.com>
- Patrick Delaunay <patrick.delaunay@foss.st.com> <patrick.delaunay@st.com>
--Paul Burton <paul.burton@mips.com> <paul.burton@imgtec.com>
-+Paul Burton <paulburton@kernel.org> <paul.burton@imgtec.com>
-+Paul Burton <paulburton@kernel.org> <paul.burton@mips.com>
- Piyush Mehta <piyush.mehta@amd.com> <piyush.mehta@xilinx.com>
- Prabhakar Kushwaha <prabhakar@freescale.com>
- Punnaiah Choudary Kalluri <punnaiah.choudary.kalluri@amd.com> <punnaiah.choudary.kalluri@xilinx.com>
-diff --git a/board/imgtec/boston/MAINTAINERS b/board/imgtec/boston/MAINTAINERS
-index 12e1652858bb..b03a6487db29 100644
---- a/board/imgtec/boston/MAINTAINERS
-+++ b/board/imgtec/boston/MAINTAINERS
-@@ -1,5 +1,5 @@
- BOSTON BOARD
--M:	Paul Burton <paul.burton@mips.com>
-+M:	Paul Burton <paulburton@kernel.org>
- S:	Maintained
- F:  arch/mips/dts/boston-u-boot.dtsi
- F:	board/imgtec/boston/
-diff --git a/board/imgtec/malta/MAINTAINERS b/board/imgtec/malta/MAINTAINERS
-index b1cf297f4fac..252c5e45ab56 100644
---- a/board/imgtec/malta/MAINTAINERS
-+++ b/board/imgtec/malta/MAINTAINERS
-@@ -1,5 +1,5 @@
- MALTA BOARD
--M:	Paul Burton <paul.burton@mips.com>
-+M:	Paul Burton <paulburton@kernel.org>
- S:	Maintained
- F:	board/imgtec/malta/
- F:	include/configs/malta.h
+> From: Jasper Orschulko <jasper@fancydomain.eu>
+>=20
+> The A/B update strategy of the env's has a gap in the first 2 calls of sa=
+veenv.
+> The env's are stored twice on the first memory area if:
+> gd->env_valid =3D=3D ENV_INVALID.
+>=20
+> u-boot=3D> saveenv
+> Saving Environment to MMC... Writing to MMC(1)... OK
+> u-boot=3D> saveenv
+> Saving Environment to MMC... Writing to MMC(1)... OK  <-- !!!
+> u-boot=3D> saveenv
+> Saving Environment to MMC... Writing to redundant MMC(1)... OK
+> u-boot=3D> saveenv
+> Saving Environment to MMC... Writing to MMC(1)... OK
+>=20
+> Signed-off-by: Michael Glembotzki <Michael.Glembotzki@iris-sensing.com>
+> Signed-off-by: Jasper Orschulko <jasper@fancydomain.eu>
+> ---
+>  env/mmc.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/env/mmc.c b/env/mmc.c
+> index 7afb733e890..2bef30c973c 100644
+> --- a/env/mmc.c
+> +++ b/env/mmc.c
+> @@ -299,7 +299,7 @@ static int env_mmc_save(void)
+>  	ret =3D 0;
+> =20
+>  	if (IS_ENABLED(CONFIG_SYS_REDUNDAND_ENVIRONMENT))
+> -		gd->env_valid =3D gd->env_valid =3D=3D ENV_REDUND ? ENV_VALID : ENV_RE=
+DUND;
+> +		gd->env_valid =3D gd->env_valid =3D=3D ENV_VALID ? ENV_REDUND : ENV_VA=
+LID;
+> =20
+>  fini:
+>  	fini_mmc_for_env(mmc);
 
--- 
-2.34.1
+Can you please explain a little more on how you get to this problem? The
+same code / test exists in env/fat.c, env/sf.c and env/ubi.c. In the
+case of env/mmc.c it's been that way since introduction in:
+commit d196bd880347373237d73e0d115b4d51c68cf2ad
+Author: Michael Heimpold <mhei@heimpold.de>
+Date:   Wed Apr 10 10:36:19 2013 +0000
 
+    env_mmc: add support for redundant environment
+   =20
+    This patch add support for storing the environment redundant on
+    mmc devices. Substantially it re-uses the logic from the NAND implement=
+ation,
+    that means using an incremental counter for marking newer data.
+   =20
+    Signed-off-by: Michael Heimpold <mhei@heimpold.de>
+
+as well. Thanks!
+
+--=20
+Tom
+
+--M9nWV3ORUZg4H21A
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZHpzYACgkQFHw5/5Y0
+tywJawwAg+fx1/LxcVNynf5oB+Be04TTHkeMGwySjM7TfHcS5BJdb0gKEjv8JUs2
+f6PkgQbwhFEI9az1trtc3vA3+yIjlmMQUP1ratmtoXXRNYCdbZNaWBrPmbNn9F8+
+6MzGmROW3Bqn7gxq7XDhgl1QOpOR629CKFOPpctF5eH/azDejhJ3vuPBH+tBDJsc
+6nTQIl0q5G+KvNxoHRdN1rz32fLfQ6nQh/apQlE7iJxg6AqMzS0xLPHxx4rFhf/d
+8mnyeZlBoLZIMjk16X95ee+CmurGjxXULIgXlKVknmOgEKOgw0cIWyW+LjCWruTT
++4iCpqqvNvH1JFn1ZGFOdj1QkKwJtkbNBoQGUmDPbTgIxgl3X3K2AAN7G9+KnUkL
+GHKQYB9EKT7dVsV/FPbLM9+X9CoSj/Z5M9apv2Y8HxkbbvyRJu/6rSbC7TGVCYnl
+xQqtrVjr3KHSg5Q1PFoavSZNugpW2GcdwYe0OW6CLCikz+MOe/koBTvxRYZnNZVK
+8sH6oCji
+=XNSM
+-----END PGP SIGNATURE-----
+
+--M9nWV3ORUZg4H21A--
