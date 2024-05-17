@@ -4,77 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBA46C04FFE
-	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 14:35:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC31AC25B79
+	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 15:08:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2149F8818C;
-	Fri, 17 May 2024 16:35:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0E89088093;
+	Fri, 17 May 2024 17:08:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cF0BLS58";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Lwgll+Nh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D05C7882CF; Fri, 17 May 2024 16:35:17 +0200 (CEST)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
+ id 9F6AE87ED0; Fri, 17 May 2024 17:08:09 +0200 (CEST)
+Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
+ [IPv6:2607:f8b0:4864:20::82d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F38287EF4
- for <u-boot@lists.denx.de>; Fri, 17 May 2024 16:35:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C45087F33
+ for <u-boot@lists.denx.de>; Fri, 17 May 2024 17:08:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-6a0b68733f5so5205616d6.1
- for <u-boot@lists.denx.de>; Fri, 17 May 2024 07:35:15 -0700 (PDT)
+Received: by mail-qt1-x82d.google.com with SMTP id
+ d75a77b69052e-43de92e228aso4399971cf.1
+ for <u-boot@lists.denx.de>; Fri, 17 May 2024 08:08:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715956514; x=1716561314; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1715958486; x=1716563286; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=4rfKwnKtEeSjfwfJjfFFLC9erifzxv4gzUoQ4aj317M=;
- b=cF0BLS58xrJMpN8yVQJHwC/BZKjdaEdR/T9jigOZO72jvPd0/aOPh92rflZnexfBA2
- GXyrIrYjDme8fRePqsJQS0sI2J37Q5H38bPBCvOkHTmzwGbsqRNzHHo9qU9PtD9XlGdY
- ISy3eGX9eClYRIHp3Z8bYAeRWKgJvhKyFInSg=
+ bh=1i9+UdJh+ewa0DoG9ozcY1f+KWU3qBe3f1aOV+LkAnc=;
+ b=Lwgll+Nh0No2TeYk/QGkn0WhjgWXCKAuFMvZnUKWq3jO0Z6ZeWKoRuSRbG9qWI1ktS
+ RcG+ZycgF4pAws4dt97jznHN7Hx6Ra3NdZ0AdoApW8V17n3XUh2J0Wky65eZe6Ep6S9L
+ zLnlglcTwScjwvjuaxNMWRyOl3mx4HKAKGAg4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715956514; x=1716561314;
+ d=1e100.net; s=20230601; t=1715958486; x=1716563286;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4rfKwnKtEeSjfwfJjfFFLC9erifzxv4gzUoQ4aj317M=;
- b=r8wUCpjrZ52TNB8/4eSRjEYq8ucLTuWNjoq9xtSORkKk2vXnRb/9LeA1GhIGgJDvZn
- JZTYka6gIC4mBMG9TISHT8kiHKF9vlA3/t2NQG4yQ4N/SG6Zs5S+/TdWmLQPED1HLnwz
- 6MMjROefnHZQXONx02rcvU7zqKa9vuSA7RSou7/9J2sK5Yqr2bSV+7qgL9/kn9VeuNpF
- 45deK7fFCnJ2Wx34CDZQOjoEp2rS/vUYDOdLfApT6hIJ8TT6Xw3djiCHZFOnfgsvsfbC
- z+iPfOFC1011LkBG0cyvV2eXFtgQNFV8qnmy1FTan7M6EndoLF/MLyrF2GMKDZ6rNxM8
- BaCQ==
-X-Gm-Message-State: AOJu0YwPf9FtSqutFcWoujw50pfpB0ub+kyPLvLynTwBs9nHCEdTCL1a
- Jq+OagLYXUlBiPKKaMztHYd9D5JuBlv2m7Wk1O9VzmvvC4wrymiXL2yR3s484PeJVtDUXyfuIqb
- aH5I=
-X-Google-Smtp-Source: AGHT+IFOQ3VTLZOjT7LkpJjkz8jrRiBtaZFYw8VYj1hKdKDVBdzoyE0di49emdb+pILhPZdQabsoEQ==
-X-Received: by 2002:a05:6214:5342:b0:6a0:a9c5:af85 with SMTP id
- 6a1803df08f44-6a1682794aamr229285586d6.53.1715956514242; 
- Fri, 17 May 2024 07:35:14 -0700 (PDT)
+ bh=1i9+UdJh+ewa0DoG9ozcY1f+KWU3qBe3f1aOV+LkAnc=;
+ b=blhq5Ke07oRg19wiy9YEX1Ht6eitYNBW/1YYwigqmjU1WJg6bAafvFLoOcrq4aRj/T
+ 0AtM4kjzzDrHYl9eO3M06KA4nvqvr3RPDdNpHuMSmbGcNi2p2SLvcPonv18w05oXcGcb
+ 8mvHt2Id7MWXuEfSGqGwfMDbaEOvUfOB76cLCtQyX+qN8rcKNqHaU0JzA1QpfWUPOBXy
+ FLSWIYMddu4qgfMPMveblud4JgEkQ7Bo97LdbpAZzSQgai5e4dmqF35Nyj1s2CpudSpa
+ Rzn0J4mFJiWvkPGi9DqJr7EAYmBGsUVDeyQbtSRvkXNv5g5dg+/vGa4q0pSMSbNrVMOd
+ cuPQ==
+X-Gm-Message-State: AOJu0Yxz+skBaNYpWBPyKpD74dBnTn2HYtHaU8mwM46UZklR/9Nx5ChR
+ ebc79dy7GxOhMPLZ00cSiGhdjRLZPdDpLw1MPt4HG+/dqlTDMfcnfjrofTJKgDo=
+X-Google-Smtp-Source: AGHT+IGRFbOBrhz6wNzBh0kkrTEXB55m9YT9JemkE3QtvuNetpVIjUt82Td4kJmMl9gz0d4GIxKdNw==
+X-Received: by 2002:ac8:5d44:0:b0:43c:5d8c:f854 with SMTP id
+ d75a77b69052e-43dfdac38a5mr325601811cf.11.1715958486135; 
+ Fri, 17 May 2024 08:08:06 -0700 (PDT)
 Received: from bill-the-cat ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6a15f194945sm85167766d6.61.2024.05.17.07.35.13
+ d75a77b69052e-43e1c32e8basm64731761cf.36.2024.05.17.08.08.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 May 2024 07:35:13 -0700 (PDT)
-Date: Fri, 17 May 2024 08:35:11 -0600
+ Fri, 17 May 2024 08:08:05 -0700 (PDT)
+Date: Fri, 17 May 2024 09:08:00 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH 2/2] doc: process.rst: Document device tree resync rules
-Message-ID: <20240517143511.GH2568172@bill-the-cat>
-References: <20240516203416.928567-1-trini@konsulko.com>
- <20240516203416.928567-2-trini@konsulko.com>
- <364fef96-5f0a-466d-99ad-6a4310f7c2f4@cherry.de>
+To: tingting.meng@intel.com
+Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong <tien.fong.chee@intel.com>, Kok Kiang <kok.kiang.hea@intel.com>,
+ Dinesh <dinesh.maniyam@intel.com>, Boon Khai <boon.khai.ng@intel.com>,
+ Alif <alif.zakuan.yuslaimi@intel.com>,
+ Teik Heng <teik.heng.chong@intel.com>,
+ Hazim <muhammad.hazim.izzat.zamri@intel.com>,
+ Jit Loon Lim <jit.loon.lim@intel.com>,
+ Sieu Mun Tang <sieu.mun.tang@intel.com>,
+ Wan Yee Lau <wan.yee.lau@intel.com>
+Subject: Re: [Agilex7 M-series Platform Enablement v1 01/16] arch: arm: dts:
+ Add dts and dtsi for new platform Agilex7 M-series
+Message-ID: <20240517150800.GI2568172@bill-the-cat>
+References: <20240517052701.12949-1-tingting.meng@intel.com>
+ <20240517052701.12949-2-tingting.meng@intel.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="psF/Tdk79nh/xqtt"
+ protocol="application/pgp-signature"; boundary="yY8Ce8692rO9zNZV"
 Content-Disposition: inline
-In-Reply-To: <364fef96-5f0a-466d-99ad-6a4310f7c2f4@cherry.de>
+In-Reply-To: <20240517052701.12949-2-tingting.meng@intel.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,101 +103,52 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---psF/Tdk79nh/xqtt
+--yY8Ce8692rO9zNZV
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, May 17, 2024 at 10:35:43AM +0200, Quentin Schulz wrote:
-> Hi Tom,
->=20
-> On 5/16/24 10:34 PM, Tom Rini wrote:
-> > Document the logic of when we do a full resync of the device trees used
-> > by OF_UPSTREAM as well as that cherry-picking is allowed as needed.
-> >=20
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > ---
-> >   doc/develop/process.rst | 13 +++++++++++++
-> >   1 file changed, 13 insertions(+)
-> >=20
-> > diff --git a/doc/develop/process.rst b/doc/develop/process.rst
-> > index a66540a698c1..0542b3fc1245 100644
-> > --- a/doc/develop/process.rst
-> > +++ b/doc/develop/process.rst
-> > @@ -108,6 +108,19 @@ Differences to the Linux Development Process
-> >     In U-Boot, ``"-rc1"`` will only be released after all (or at least =
-most of
-> >     the) patches that were submitted during the merge window have been =
-applied.
-> > +Resyncing of the device tree subtree
-> > +------------------------------------
-> > +
-> > +As explained in :doc:`devicetree/control` some platforms make use of d=
-evice tree
-> > +files which come from a git subtree that mirrors the Linux Kernel sour=
-ces
-> > +itself. For our purposes, we only track releases and not release candi=
-dates for
-> > +merging in our tree. These merges follow the normal merge window rules.
-> > +
-> > +In the case of specific changes, such as bug fixes or new platform sup=
-port,
-> > +these can be "cherry-picked" and are subject to the normal merge rules=
-=2E For
-> > +example, a bug fix can come in later in the window but a full re-sync =
-only
-> > +happens within the merge window itself.
-> > +
->=20
-> Can we provide an example on how to cherry-pick those changes with a comm=
-and
-> line?
+On Fri, May 17, 2024 at 01:26:46PM +0800, tingting.meng@intel.com wrote:
 
-This is covered in doc/develop/devicetree/control.rst already so I'd
-rather not, in this document, which is currently just "why" we do
-things. If we need full examples and not just how to use, we should
-expand "Resyncing with devicetree-rebasing" in the other document I
-think.
+> From: Wan Yee Lau <wan.yee.lau@intel.com>
+>=20
+> Add Agilex7 M-series dtsi and dts for new platform Agilex7 M-series.
+>=20
+> Signed-off-by: Wan Yee Lau <wan.yee.lau@intel.com>
+> Signed-off-by: Teik Heng Chong <teik.heng.chong@intel.com>
+> Signed-off-by: Tingting Meng <tingting.meng@intel.com>
+> ---
+>  ...tsi =3D> socfpga_agilex7m_socdk-u-boot.dtsi} |  37 ++++-
+>  ...x_socdk.dts =3D> socfpga_agilex7m_socdk.dts} |  66 +++++++--
+>  arch/arm/dts/socfpga_soc64_u-boot.dtsi        | 127 ++++++++++++++++++
+>  3 files changed, 213 insertions(+), 17 deletions(-)
+>  copy arch/arm/dts/{socfpga_agilex_socdk-u-boot.dtsi =3D> socfpga_agilex7=
+m_socdk-u-boot.dtsi} (50%)
+>  copy arch/arm/dts/{socfpga_agilex_socdk.dts =3D> socfpga_agilex7m_socdk.=
+dts} (63%)
+>  create mode 100644 arch/arm/dts/socfpga_soc64_u-boot.dtsi
 
-> Additionally, in doc/develop/devicetree/control.rst we say:
->=20
-> """
-> However, if `dts/upstream/` hasn't yet received devicetree source file for
-> your newly added board support then you can add corresponding devicetree
-> source file as `arch/<arch>/dts/<name>.dts`. To select that add `#
-> CONFIG_OF_UPSTREAM is not set` and set `DEFAULT_DEVICE_TREE=3D<name>` when
-> prompted by Kconfig.
-> """
->=20
-> But now we have a second option, cherry-picking upstream changes instead,=
- so
-> I assume we should document it there as well (or cross-reference?).
->=20
-> Looks good to me otherwise, thanks for clarifying this new process.
-
-Thanks for spotting that part, yes, I'll go re-word that as well.
+Why can't we use OF_UPSTREAM on these platforms?
 
 --=20
 Tom
 
---psF/Tdk79nh/xqtt
+--yY8Ce8692rO9zNZV
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZHaxsACgkQFHw5/5Y0
-tyzdBgwAiyrEHgwpLBfAB9Vyu+gVQRfPERxI0nbbOhYrSvF/m9b6Xbx/b63/jLDB
-YWDT5eg0OTCI/K5rn2wYZyctrDEqjoTH1vO5TjR+nnXQyQb9pxPATuMpchZAokwX
-5ASyJeVbogdnTU5oHh+rzPO4GTyOhsVBQqYCYUhT12DYaVwLPHu1x5Q9N4dqiskf
-OfT6Buv+huiVGae66l0Fy4kQ/JKxE0la/PFUXIGIUzSD9Czz+jx+WHTRpW8T8NLY
-f/kTYXM6+siGnFx9e7XYFhGOxkQBbxq2nsICQm1CCC6U3xlVMJklBWi0SJxqYPjb
-0TPlikLL5l4AsPqijciPvgeX/C2CH34Dn7OyeYVo93FkRf1wd8C4h7vp65PagQ86
-UbTeifepe4ecRJqcqV1A6ambHbTq6Ikd8OfQxb8748XystpJ6FT6sgzLjcr5EGse
-+cl75uW2LaYAX48gotB4mMTkiCmvVRjzFNTpUxjQbOeZMXmySZhr9Y6oN0Sb1lBN
-36kKeheS
-=A7PW
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZHcs0ACgkQFHw5/5Y0
+tywi4gwAmtBSfToSTPQZHOHOIib1O5HUwTo7w9aFVQqON60grVq4O1vTzIcCblNf
+CJ5S9nBM6wvWHN7LVvsH76esy+cRtag3VDK8NRNHJfmghyrZk1I83gsMJPNuMjOJ
+xIguW13q1JBmTzyOqW0nUPKvuTrtRrqoqVa6yV+bqzWC7+vHA6fZSez3xP7Zbtc0
+6R0qCC5HB0E51vCclI1mpsnZ5QykYs2TzBh5RI5Gc5AG/Xek2Q06olisnYsWNiFh
+5FVR5hImswzdrSgypM7KwtTudUdkrwwhvwAgmZwgqJA6EzMBlpDEobehpNC5VIDH
+rixj0I6Z/d9X9S0crhVxRbo1ZKNTrhplpEiqS0lCR2Mw21sP6CMZk4g2iDiAx1Gj
+7a5MqpKisIK6SmciyTGC8GXxTMBmLab+u1ym7QAQ8JXegZqt+I6vhZjdZsDqoNkT
+3lk62xtn0fOayDEWukxxp1RchDJpZNG5lCAVJsNRNwOaOI/kzo3BPTcMf9dsA1Su
+DpLYFMDD
+=i9Ni
 -----END PGP SIGNATURE-----
 
---psF/Tdk79nh/xqtt--
+--yY8Ce8692rO9zNZV--
