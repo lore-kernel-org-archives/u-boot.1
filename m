@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D84ADC25B77
-	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 22:10:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99084C25B77
+	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 22:10:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51950885E4;
+	by phobos.denx.de (Postfix) with ESMTP id AA7EF885E9;
 	Sat, 18 May 2024 00:09:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="MsxYFTta";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="lE19xbJD";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="L2qOTx/P";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="QfibnVHC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A28B1885DC; Sat, 18 May 2024 00:09:36 +0200 (CEST)
-Received: from fout4-smtp.messagingengine.com (fout4-smtp.messagingengine.com
- [103.168.172.147])
+ id 484B087DEA; Sat, 18 May 2024 00:09:37 +0200 (CEST)
+Received: from fhigh1-smtp.messagingengine.com
+ (fhigh1-smtp.messagingengine.com [103.168.172.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB6A2882CF
- for <u-boot@lists.denx.de>; Sat, 18 May 2024 00:09:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FE1A87DEA
+ for <u-boot@lists.denx.de>; Sat, 18 May 2024 00:09:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
- by mailfout.nyi.internal (Postfix) with ESMTP id E7A8A13814EF;
- Fri, 17 May 2024 18:09:32 -0400 (EDT)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id 1C0131140091;
+ Fri, 17 May 2024 18:09:34 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute6.internal (MEProxy); Fri, 17 May 2024 18:09:32 -0400
+ by compute4.internal (MEProxy); Fri, 17 May 2024 18:09:34 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm1; t=1715983772;
- x=1716070172; bh=f9RJ36sX8SAsAspZh86VjaznR7vuuOOF017xPEwY1Zc=; b=
- MsxYFTtayNm171SKbKdHW5jo70cJgQrqWOtbOWgWfojqwVnMR6Z/grPqmqFYTrxo
- ffbh3jS7JdATVYeXQ21ciVeSrgVLb0PlHkZMulzBbCxJtdOFz3EPi6UrGZm/YzSw
- qjBwAlESCKUaido1rVILMSMIIe7BXLTUXAnO+aIQaiXEOxw+frhGTI050NfKSkTk
- y7d/ChV9QdZRlIWYtidPAnKgRQ3K1wZ6zFBuFk8oGL5Epm8VtaOSt5KlrFbwPLiH
- 6YSV1xmvMR7rmCjwc9B+BZBIE7SnqY7ecLVBJDavPorXI1kFf6sj8jwg1K8inTuZ
- hHBZeeyi0ydU5gw+sj7PHQ==
+ :references:reply-to:subject:subject:to:to; s=fm1; t=1715983774;
+ x=1716070174; bh=t8l/7y4mhZg6+xdS8K6hKjbj9GufHDzDVYvDwzl2qC8=; b=
+ L2qOTx/PlxTuqQxE236lpv++gjYvf6bIuja8TanYmM/1EAcoLsgtU7J2LsJdtgig
+ gEltnC1v86a5mU3Y9Vrz8R2QBRJKgR5F/Y0klt/w4aV6nvjhHGRirLMLy+6MZw5v
+ 9eB6hTfZe8++14TRHUVrflNbz9Gos7av4VaXQdKpEvaiML+SMc1P3dSmxYInkr5Z
+ 5kBDPc2PH1TgnVVCsUp0rTfWZ/28qVzZ1VL/37KNidxbjNJCWBILTydLXcEEkXow
+ IpzjCAQgxgURmzXTWOi8tq2/Pt8Lr95Phg6QRV+jqEdS2ybJ3l5KBSzofH2sWazY
+ ccaYVjuLZu0WkXzzcXAFKA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715983772; x=
- 1716070172; bh=f9RJ36sX8SAsAspZh86VjaznR7vuuOOF017xPEwY1Zc=; b=l
- E19xbJDh4N2t02UPGlQ15arrEGIMJCN/N0uCWZoK8ng9uu6dkaO55WIfLV7L/lRL
- 2xE3CTFtXoccuLOWS8jN54NMuUDsXU7iXVBBaINFT1eSkUOuKDhAsVHiczV/ailu
- Ldwkn35IdSw0AHPORRLDSfl5yGtO8zJvUT4nsDf7zcCdE7+xEQJC07G4VHya1zEK
- YAwzTz2GtPDeguUjq4lSyyAlZG5+8e82Dhpoq3WDREkLQElNZ3Sh7e87PbVskiTA
- LV3AD8kgVsOx5U1YbyWDuUuMK9TF7oU4Sk7VGQA6/1eYnp8i+bsT/5CJIbMeD3I1
- cL86/DKCpRgW9ckJn0AlQ==
-X-ME-Sender: <xms:nNVHZmW7Fg8K5k8To1TFHnCuVAz-A89N2o1aDbfFSky0b4JqRhHf1g>
- <xme:nNVHZimkHHgZphCbrsZoxdpC4S4mv-joVRjMXh7xcb13qbrrEmfJLkj0XBEJ9hp2I
- JUuNIVBL5EtRzDnpZM>
-X-ME-Received: <xmr:nNVHZqYT27q73uGPLohlIlQFrRwbzsIlEg8PtSVEuvjdGUQE3m-yLWQ>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715983774; x=
+ 1716070174; bh=t8l/7y4mhZg6+xdS8K6hKjbj9GufHDzDVYvDwzl2qC8=; b=Q
+ fibnVHCljjG4hxOKkdP7bnsxlOCmn1XEfRvG4UMabE0KxAHmDUezMhTO2mA9gzUa
+ AAmcUSVnunCNGI7dAqiPsyTYOlOBI+83SXfSVTXV8sXeWiTIyaIZTCHHZbFxTqdn
+ YUo9w0EjCSyHD4BeP0ErX0tj1z5ti4O8lkJmgWfF6ahut2PYYN3cAUJQECXpd0Nh
+ bX+lShlBDw4MBSXBeHFIoGy5ANtEjhI1MUv7yyrSqrGeOFCzvMzpiJY7yYL4XFRU
+ 4AUKy0b00ZcVMaib41pYqF1ESQpQmSI5LBJhRuefBlVUSmsvOosiR76Nu3gVIFiy
+ rnQhFIp1IqG47MT7Yr8SA==
+X-ME-Sender: <xms:ndVHZvpDDb6rZymaQ6-jmX99IHN2AajSpXY6pS2j6t1loNQgoWrGbg>
+ <xme:ndVHZpqpJpW2pWiPM5_NHTZ8a4pqD4eKkPAMHXMO9KGAADYzz2l9t90apM3N3xvSH
+ md30yAnZpy_9K25ZUY>
+X-ME-Received: <xmr:ndVHZsPqLhsUGo2-qMXcgHBHouNPJWEAYoXFcDYpNI2dkd-PUI12LMM>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehhedgtdeiucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
@@ -68,21 +68,21 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehhedgtdeiucetufdoteggod
  cuggftrfgrthhtvghrnhepvdekiefhfeevkeeuveetfeelffekgedugefhtdduudeghfeu
  veegffegudekjeelnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilh
  hfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:nNVHZtXt2bjuRziKSKW-Md1gBmBxbfIhrCGLV0ON34YIBNAM2evASQ>
- <xmx:nNVHZglmF7PRB5d0P3xOTfPAUKItbeU27LyJmyJsSY7LzDXe1w3mzw>
- <xmx:nNVHZick1aWTIACKsdYIo_7ZjNJyUk2L6PMNa6dC_GGV9-o2R8NEyQ>
- <xmx:nNVHZiEAzbImr8OgRy6dizQG0x0tX56xg-fG8L16iFTCEkz0x-jMtg>
- <xmx:nNVHZubDbXfDnKS2glm5irZSFbbST0dKgbhkgl-H_mXLeQ8maS-5u5IY>
+X-ME-Proxy: <xmx:ndVHZi6TjIRnEODV1A4QhhK9p3T3OZ3eLJRFna83KT1Lqz4i6A8GXQ>
+ <xmx:ndVHZu7CwYrZcdv7fXiOoksd6kif0rrhqF68Rgf6T_t34x5IZZPr6A>
+ <xmx:ndVHZqhv8MG0EbNPHQKypXRXenc4K8OLrYjTyJFebDnTocfb5zy2JA>
+ <xmx:ndVHZg4MLqkvhKunMHFJj8pJ3kN-6hamrut_gYwLzcJ5bcdgeqYa5Q>
+ <xmx:ntVHZrubm5QMQL5xUUXQBMLQ-JBtw05A3O_XUhHr42tmZIaM-FN5qWXa>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 17 May 2024 18:09:31 -0400 (EDT)
+ 17 May 2024 18:09:33 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Fri, 17 May 2024 23:09:28 +0100
-Subject: [PATCH 2/3] EFI: Make EFI loader depend sandbox HOST_ARCH
+Date: Fri, 17 May 2024 23:09:29 +0100
+Subject: [PATCH 3/3] sandbox: Use pkg-config to detect and config sdl2
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240517-sandbox-hostarch-kconfig-v1-2-716c146635c9@flygoat.com>
+Message-Id: <20240517-sandbox-hostarch-kconfig-v1-3-716c146635c9@flygoat.com>
 References: <20240517-sandbox-hostarch-kconfig-v1-0-716c146635c9@flygoat.com>
 In-Reply-To: <20240517-sandbox-hostarch-kconfig-v1-0-716c146635c9@flygoat.com>
 To: u-boot@lists.denx.de
@@ -91,13 +91,13 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1118;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3337;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=rEmujuOwsi/1eJM03/w+0Z/Zuzk9b/dzlFtnuX+I1qA=;
- b=owGbwMvMwCHmXMhTe71c8zDjabUkhjT3q7NuTZMsshZ4MfdT1ZbJd52+hNmfN/U3OnPqeP0Et
- RPCHJVuHaUsDGIcDLJiiiwhAkp9GxovLrj+IOsPzBxWJpAhDFycAjARt6sM/9NftG/Zp7V+edYh
- Z8fIjYVPBbd/ENhoM7d395w7pYpLN9oxMuzbn+i7Zt69NwfOeHTYLDhVefFWmf3l94c3Ktp22b0
- oOsEDAA==
+ bh=ZrV0I6ONEy/uVoeFco/sTMAFFoRNqDYU80b/rQwKFlk=;
+ b=owGbwMvMwCHmXMhTe71c8zDjabUkhjT3q7P03HxaHRcYnYzwW2Oy1bpasSv4y/LPyX3/hJ2OC
+ P5/MedrRykLgxgHg6yYIkuIgFLfhsaLC64/yPoDM4eVCWQIAxenAEyEQYbhf3Z+zMqLZaffP+pf
+ uW5W3KuSZlOx1sOtj1/odP478GyCjzsjw/ppJxNWyN8w25bcGMP5p1bZ+N5OtuSjX5c+13Lllpl
+ VxAEA
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -116,36 +116,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since EFI loader on sandbox requires some architecture
-code, make it depend on HOST_ARCH to ensure it's only
-compiled on desired host.
+sdl2-config is not cross compile friendly, it can only detect
+and config stuff from build host.
+
+Use pkg-config instead, which is a generic way to config libraries
+on any sane system & cross toolchain should have it ready.
+
+The output of pkg-config practically have no difference with
+sdl2-config.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- lib/efi_loader/Kconfig | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ Makefile                     | 3 ++-
+ arch/sandbox/Kconfig         | 2 +-
+ arch/sandbox/config.mk       | 5 ++---
+ doc/arch/sandbox/sandbox.rst | 6 ------
+ 4 files changed, 5 insertions(+), 11 deletions(-)
 
-diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-index 430bb7f0f7dc..54d180fe31c1 100644
---- a/lib/efi_loader/Kconfig
-+++ b/lib/efi_loader/Kconfig
-@@ -1,11 +1,14 @@
- config EFI_LOADER
- 	bool "Support running UEFI applications"
--	depends on OF_LIBFDT && ( \
-+	depends on OF_LIBFDT && (( \
- 		ARM && (SYS_CPU = arm1136 || \
- 			SYS_CPU = arm1176 || \
- 			SYS_CPU = armv7   || \
- 			SYS_CPU = armv8)  || \
--		X86 || RISCV || SANDBOX)
-+		X86 || RISCV) || \
-+		(SANDBOX && (HOST_ARCH_X86 || HOST_ARCH_X86_64 || \
-+			     HOST_ARCH_ARM || HOST_ARCH_AARCH64 || \
-+			     HOST_ARCH_RISCV32 || HOST_ARCH_RISCV64)))
- 	# We need EFI_STUB_64BIT to be set on x86_64 with EFI_STUB
- 	depends on !EFI_STUB || !X86_64 || EFI_STUB_64BIT
- 	# We need EFI_STUB_32BIT to be set on x86_32 with EFI_STUB
+diff --git a/Makefile b/Makefile
+index 596f6458e6b2..5e397e107a80 100644
+--- a/Makefile
++++ b/Makefile
+@@ -383,6 +383,7 @@ LDR		= $(CROSS_COMPILE)ldr
+ STRIP		= $(CROSS_COMPILE)strip
+ OBJCOPY		= $(CROSS_COMPILE)objcopy
+ OBJDUMP		= $(CROSS_COMPILE)objdump
++PKG_CONFIG	= $(CROSS_COMPILE)pkg-config
+ LEX		= flex
+ YACC		= bison
+ AWK		= awk
+@@ -439,7 +440,7 @@ UBOOTVERSION = $(VERSION)$(if $(PATCHLEVEL),.$(PATCHLEVEL)$(if $(SUBLEVEL),.$(SU
+ 
+ export VERSION PATCHLEVEL SUBLEVEL UBOOTRELEASE UBOOTVERSION
+ export ARCH CPU BOARD VENDOR SOC CPUDIR BOARDDIR
+-export CONFIG_SHELL HOSTCC KBUILD_HOSTCFLAGS CROSS_COMPILE AS LD CC
++export CONFIG_SHELL HOSTCC KBUILD_HOSTCFLAGS CROSS_COMPILE AS LD CC PKG_CONFIG
+ export CPP AR NM LDR STRIP OBJCOPY OBJDUMP KBUILD_HOSTLDFLAGS KBUILD_HOSTLDLIBS
+ export MAKE LEX YACC AWK PERL PYTHON PYTHON2 PYTHON3
+ export HOSTCXX KBUILD_HOSTCXXFLAGS CHECK CHECKFLAGS DTC DTC_FLAGS
+diff --git a/arch/sandbox/Kconfig b/arch/sandbox/Kconfig
+index c3954e33aceb..5af074e3e700 100644
+--- a/arch/sandbox/Kconfig
++++ b/arch/sandbox/Kconfig
+@@ -71,7 +71,7 @@ config HOST_ARCH_UNKNOWN
+ 		 !HOST_ARCH_RISCV32 && !HOST_ARCH_RISCV64
+ 
+ config HOST_HAS_SDL
+-	def_bool $(success,sdl2-config --version)
++	def_bool $(success,$(PKG_CONFIG) sdl2)
+ 
+ config SANDBOX_SDL
+ 	bool "Enable SDL2 support in sandbox"
+diff --git a/arch/sandbox/config.mk b/arch/sandbox/config.mk
+index 6b1da993ba4e..94c11fd78918 100644
+--- a/arch/sandbox/config.mk
++++ b/arch/sandbox/config.mk
+@@ -4,13 +4,12 @@
+ PLATFORM_CPPFLAGS += -D__SANDBOX__ -U_FORTIFY_SOURCE
+ PLATFORM_CPPFLAGS += -fPIC -ffunction-sections -fdata-sections
+ PLATFORM_LIBS += -lrt
+-SDL_CONFIG ?= sdl2-config
+ 
+ # Define this to avoid linking with SDL, which requires SDL libraries
+ # This can solve 'sdl-config: Command not found' errors
+ ifeq ($(CONFIG_SANDBOX_SDL),y)
+-PLATFORM_LIBS += $(shell $(SDL_CONFIG) --libs)
+-PLATFORM_CPPFLAGS += $(shell $(SDL_CONFIG) --cflags)
++PLATFORM_LIBS += $(shell $(PKG_CONFIG) sdl2 --libs)
++PLATFORM_CPPFLAGS += $(shell $(PKG_CONFIG) sdl2 --cflags)
+ endif
+ 
+ SANITIZERS :=
+diff --git a/doc/arch/sandbox/sandbox.rst b/doc/arch/sandbox/sandbox.rst
+index 5f8db126657f..9ad1b654989c 100644
+--- a/doc/arch/sandbox/sandbox.rst
++++ b/doc/arch/sandbox/sandbox.rst
+@@ -526,12 +526,6 @@ For debugging with GDB or LLDB, it is preferable to reduce the compiler
+ optimization level (CONFIG_CC_OPTIMIZE_FOR_DEBUG=y) and to disable Link Time
+ Optimization (CONFIG_LTO=n).
+ 
+-SDL_CONFIG
+-----------
+-
+-If sdl-config is on a different path from the default, set the SDL_CONFIG
+-environment variable to the correct pathname before building U-Boot.
+-
+ 
+ Using valgrind / memcheck
+ -------------------------
 
 -- 
 2.34.1
