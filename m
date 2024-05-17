@@ -4,102 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99084C25B77
-	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 22:10:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3269AC04FFE
+	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 22:14:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA7EF885E9;
-	Sat, 18 May 2024 00:09:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 82E0E8857D;
+	Sat, 18 May 2024 00:14:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="L2qOTx/P";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="QfibnVHC";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="X+qscpCr";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="Rav29bbD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 484B087DEA; Sat, 18 May 2024 00:09:37 +0200 (CEST)
-Received: from fhigh1-smtp.messagingengine.com
- (fhigh1-smtp.messagingengine.com [103.168.172.152])
+ id 496BA885DC; Sat, 18 May 2024 00:14:54 +0200 (CEST)
+Received: from fout4-smtp.messagingengine.com (fout4-smtp.messagingengine.com
+ [103.168.172.147])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FE1A87DEA
- for <u-boot@lists.denx.de>; Sat, 18 May 2024 00:09:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5275F8856C
+ for <u-boot@lists.denx.de>; Sat, 18 May 2024 00:14:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
- by mailfhigh.nyi.internal (Postfix) with ESMTP id 1C0131140091;
- Fri, 17 May 2024 18:09:34 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute4.internal (MEProxy); Fri, 17 May 2024 18:09:34 -0400
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailfout.nyi.internal (Postfix) with ESMTP id 7B02F13814FA;
+ Fri, 17 May 2024 18:14:51 -0400 (EDT)
+Received: from imap44 ([10.202.2.94])
+ by compute3.internal (MEProxy); Fri, 17 May 2024 18:14:51 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm1; t=1715983774;
- x=1716070174; bh=t8l/7y4mhZg6+xdS8K6hKjbj9GufHDzDVYvDwzl2qC8=; b=
- L2qOTx/PlxTuqQxE236lpv++gjYvf6bIuja8TanYmM/1EAcoLsgtU7J2LsJdtgig
- gEltnC1v86a5mU3Y9Vrz8R2QBRJKgR5F/Y0klt/w4aV6nvjhHGRirLMLy+6MZw5v
- 9eB6hTfZe8++14TRHUVrflNbz9Gos7av4VaXQdKpEvaiML+SMc1P3dSmxYInkr5Z
- 5kBDPc2PH1TgnVVCsUp0rTfWZ/28qVzZ1VL/37KNidxbjNJCWBILTydLXcEEkXow
- IpzjCAQgxgURmzXTWOi8tq2/Pt8Lr95Phg6QRV+jqEdS2ybJ3l5KBSzofH2sWazY
- ccaYVjuLZu0WkXzzcXAFKA==
+ :references:reply-to:subject:subject:to:to; s=fm1; t=1715984091;
+ x=1716070491; bh=nKdFcULqh6VrAT+JJGIgf2cDJWH/pFZ5B6cBX2DEj4Y=; b=
+ X+qscpCrDKGiBbDaGWkmRRtl3oEBg+Nh6b3fc4cZ0IzF7Hz51Cq3hwBjdL0ng5+8
+ gYCIgdc7j+iZ220SiIV61JL1aP3VX7oXfuJvzCG5ul88/bN5THaeC29wy4hHfJ4z
+ wSYnCyEOYZxlqEe/x71BB8IjEoqgYq6QPeBfprHdaUqYnJshBBckRwZi9p55RJWd
+ NkaALrHtUm//Td6mYpzMp5ZeX3Nzei87pjAtnG/TXBs1qlUbGypWXe1+esijGhLk
+ /NOcD+w/6EFeZ8mzaxTNqUZ0mnw/4+16/6QW6yCLnd7liDp4cDAbw6ZRxZdU9AlZ
+ FCAybVijsNJr3ZRT+MK+8g==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715983774; x=
- 1716070174; bh=t8l/7y4mhZg6+xdS8K6hKjbj9GufHDzDVYvDwzl2qC8=; b=Q
- fibnVHCljjG4hxOKkdP7bnsxlOCmn1XEfRvG4UMabE0KxAHmDUezMhTO2mA9gzUa
- AAmcUSVnunCNGI7dAqiPsyTYOlOBI+83SXfSVTXV8sXeWiTIyaIZTCHHZbFxTqdn
- YUo9w0EjCSyHD4BeP0ErX0tj1z5ti4O8lkJmgWfF6ahut2PYYN3cAUJQECXpd0Nh
- bX+lShlBDw4MBSXBeHFIoGy5ANtEjhI1MUv7yyrSqrGeOFCzvMzpiJY7yYL4XFRU
- 4AUKy0b00ZcVMaib41pYqF1ESQpQmSI5LBJhRuefBlVUSmsvOosiR76Nu3gVIFiy
- rnQhFIp1IqG47MT7Yr8SA==
-X-ME-Sender: <xms:ndVHZvpDDb6rZymaQ6-jmX99IHN2AajSpXY6pS2j6t1loNQgoWrGbg>
- <xme:ndVHZpqpJpW2pWiPM5_NHTZ8a4pqD4eKkPAMHXMO9KGAADYzz2l9t90apM3N3xvSH
- md30yAnZpy_9K25ZUY>
-X-ME-Received: <xmr:ndVHZsPqLhsUGo2-qMXcgHBHouNPJWEAYoXFcDYpNI2dkd-PUI12LMM>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehhedgtdeiucetufdoteggodetrfdotf
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715984091; x=
+ 1716070491; bh=nKdFcULqh6VrAT+JJGIgf2cDJWH/pFZ5B6cBX2DEj4Y=; b=R
+ av29bbDtYlhxj2u8PFnQj0djlVdcWFP+eE/v0rAROFbwjDZswm0NAIupyLXOq100
+ fFnuhi/w/olD1JZ9xtOwvBI5SxaWLzIrTMfjicZ5Pvyk4qeBQNtP+pDadZ9YLegV
+ veGMNtiW0Q56R+AGZAEAVuB398htIFvJZiGxVd5nfxeTyGzzcvtxUvmGJZXrWH8p
+ HM7e90JaE+WCHWiOfX0SVAXiSQhk8mpxF2xA5H7ZRQlIRvC2wnxoKlliwz3rqsw6
+ nw0kLkNDIFuw42Pq8e1IU5q0qHHFNhuPp6W3O6w5rmF4fdXw8x4mOEIsfu5Ahw1x
+ ONYNW0aYIM6tvVAyMGrSw==
+X-ME-Sender: <xms:29ZHZoDncqj6iYEw6ACyOcSqKB6WPOddt-wofX071vW-4bumxUvTTw>
+ <xme:29ZHZqit36aMHqpT5zysVs83GP9PqNoc18R9EXE3TnrUH7qMaazz4XvaLnPIChoWT
+ 1kbSAiypVoiPAKOlGw>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehhedgtdejucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhephfffufggtgfgkfhfjgfvvefosehtjeertdertdejnecuhfhrohhmpeflihgr
- gihunhcujggrnhhguceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomheqne
- cuggftrfgrthhtvghrnhepvdekiefhfeevkeeuveetfeelffekgedugefhtdduudeghfeu
- veegffegudekjeelnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilh
- hfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:ndVHZi6TjIRnEODV1A4QhhK9p3T3OZ3eLJRFna83KT1Lqz4i6A8GXQ>
- <xmx:ndVHZu7CwYrZcdv7fXiOoksd6kif0rrhqF68Rgf6T_t34x5IZZPr6A>
- <xmx:ndVHZqhv8MG0EbNPHQKypXRXenc4K8OLrYjTyJFebDnTocfb5zy2JA>
- <xmx:ndVHZg4MLqkvhKunMHFJj8pJ3kN-6hamrut_gYwLzcJ5bcdgeqYa5Q>
- <xmx:ntVHZrubm5QMQL5xUUXQBMLQ-JBtw05A3O_XUhHr42tmZIaM-FN5qWXa>
+ cujfgurhepofgfggfkjghffffhvfevufgtgfesthhqredtreerjeenucfhrhhomhepfdfl
+ ihgrgihunhcujggrnhhgfdcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtoh
+ hmqeenucggtffrrghtthgvrhhnpedufeegfeetudeghefftdehfefgveffleefgfehhfej
+ ueegveethfduuddvieehgfenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmh
+ grihhlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
+X-ME-Proxy: <xmx:29ZHZrk4gsHjhsujlCN-X4YfcjzGXHCvt-w5zOzQP_NnPASQsQtJdQ>
+ <xmx:29ZHZuzI12Btx0vibo8aS2mLf7Twgg6mFNp8rysN7aQ0iY0NmIwPYg>
+ <xmx:29ZHZtRYODg9R99W12bDY6HiGE9UECn3D-szFWsIRMnwAMJ3nOqBpQ>
+ <xmx:29ZHZpbmIsxvjztdBmEBhSxAtKwU5yKLyNaH4U_kg8cQMNP23piEPw>
+ <xmx:29ZHZrOafZBJTmIVfhPEyZK2K4x9fsUQytvBAgaslBmJ5Zj0RLKT5keC>
 Feedback-ID: ifd894703:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 17 May 2024 18:09:33 -0400 (EDT)
-From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Fri, 17 May 2024 23:09:29 +0100
-Subject: [PATCH 3/3] sandbox: Use pkg-config to detect and config sdl2
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id 2FD4036A0074; Fri, 17 May 2024 18:14:51 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.11.0-alpha0-456-gcd147058c-fm-hotfix-20240509.001-g0aad06e4
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240517-sandbox-hostarch-kconfig-v1-3-716c146635c9@flygoat.com>
-References: <20240517-sandbox-hostarch-kconfig-v1-0-716c146635c9@flygoat.com>
-In-Reply-To: <20240517-sandbox-hostarch-kconfig-v1-0-716c146635c9@flygoat.com>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>
-X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3337;
- i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=ZrV0I6ONEy/uVoeFco/sTMAFFoRNqDYU80b/rQwKFlk=;
- b=owGbwMvMwCHmXMhTe71c8zDjabUkhjT3q7P03HxaHRcYnYzwW2Oy1bpasSv4y/LPyX3/hJ2OC
- P5/MedrRykLgxgHg6yYIkuIgFLfhsaLC64/yPoDM4eVCWQIAxenAEyEQYbhf3Z+zMqLZaffP+pf
- uW5W3KuSZlOx1sOtj1/odP478GyCjzsjw/ppJxNWyN8w25bcGMP5p1bZ+N5OtuSjX5c+13Lllpl
- VxAEA
-X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
- fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
+Message-Id: <db8b728a-e3ea-44ab-9cf0-c873dbc488d2@app.fastmail.com>
+In-Reply-To: <2283C936-E570-4015-92F2-06433E3FD506@gmx.de>
+References: <20240517-mips-efi-v1-0-79096e3ca3b3@flygoat.com>
+ <20240517-mips-efi-v1-1-79096e3ca3b3@flygoat.com>
+ <2283C936-E570-4015-92F2-06433E3FD506@gmx.de>
+Date: Fri, 17 May 2024 23:14:22 +0100
+From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
+To: "Heinrich Schuchardt" <xypron.glpk@gmx.de>, u-boot@lists.denx.de
+Cc: "Daniel Schwierzeck" <daniel.schwierzeck@gmail.com>,
+ "Tom Rini" <trini@konsulko.com>,
+ "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH 1/7] MIPS: Implement setjmp
+Content-Type: text/plain;charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,95 +108,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-sdl2-config is not cross compile friendly, it can only detect
-and config stuff from build host.
 
-Use pkg-config instead, which is a generic way to config libraries
-on any sane system & cross toolchain should have it ready.
 
-The output of pkg-config practically have no difference with
-sdl2-config.
+=E5=9C=A82024=E5=B9=B45=E6=9C=8817=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8B=E5=
+=8D=8810:11=EF=BC=8CHeinrich Schuchardt=E5=86=99=E9=81=93=EF=BC=9A
+[...]
+> As the jumpbuffer is only used inside U-Boot we should be able to use=20
+> the same register sequence independant of the bitness.
 
-Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
----
- Makefile                     | 3 ++-
- arch/sandbox/Kconfig         | 2 +-
- arch/sandbox/config.mk       | 5 ++---
- doc/arch/sandbox/sandbox.rst | 6 ------
- 4 files changed, 5 insertions(+), 11 deletions(-)
+Hi Heinrich,
 
-diff --git a/Makefile b/Makefile
-index 596f6458e6b2..5e397e107a80 100644
---- a/Makefile
-+++ b/Makefile
-@@ -383,6 +383,7 @@ LDR		= $(CROSS_COMPILE)ldr
- STRIP		= $(CROSS_COMPILE)strip
- OBJCOPY		= $(CROSS_COMPILE)objcopy
- OBJDUMP		= $(CROSS_COMPILE)objdump
-+PKG_CONFIG	= $(CROSS_COMPILE)pkg-config
- LEX		= flex
- YACC		= bison
- AWK		= awk
-@@ -439,7 +440,7 @@ UBOOTVERSION = $(VERSION)$(if $(PATCHLEVEL),.$(PATCHLEVEL)$(if $(SUBLEVEL),.$(SU
- 
- export VERSION PATCHLEVEL SUBLEVEL UBOOTRELEASE UBOOTVERSION
- export ARCH CPU BOARD VENDOR SOC CPUDIR BOARDDIR
--export CONFIG_SHELL HOSTCC KBUILD_HOSTCFLAGS CROSS_COMPILE AS LD CC
-+export CONFIG_SHELL HOSTCC KBUILD_HOSTCFLAGS CROSS_COMPILE AS LD CC PKG_CONFIG
- export CPP AR NM LDR STRIP OBJCOPY OBJDUMP KBUILD_HOSTLDFLAGS KBUILD_HOSTLDLIBS
- export MAKE LEX YACC AWK PERL PYTHON PYTHON2 PYTHON3
- export HOSTCXX KBUILD_HOSTCXXFLAGS CHECK CHECKFLAGS DTC DTC_FLAGS
-diff --git a/arch/sandbox/Kconfig b/arch/sandbox/Kconfig
-index c3954e33aceb..5af074e3e700 100644
---- a/arch/sandbox/Kconfig
-+++ b/arch/sandbox/Kconfig
-@@ -71,7 +71,7 @@ config HOST_ARCH_UNKNOWN
- 		 !HOST_ARCH_RISCV32 && !HOST_ARCH_RISCV64
- 
- config HOST_HAS_SDL
--	def_bool $(success,sdl2-config --version)
-+	def_bool $(success,$(PKG_CONFIG) sdl2)
- 
- config SANDBOX_SDL
- 	bool "Enable SDL2 support in sandbox"
-diff --git a/arch/sandbox/config.mk b/arch/sandbox/config.mk
-index 6b1da993ba4e..94c11fd78918 100644
---- a/arch/sandbox/config.mk
-+++ b/arch/sandbox/config.mk
-@@ -4,13 +4,12 @@
- PLATFORM_CPPFLAGS += -D__SANDBOX__ -U_FORTIFY_SOURCE
- PLATFORM_CPPFLAGS += -fPIC -ffunction-sections -fdata-sections
- PLATFORM_LIBS += -lrt
--SDL_CONFIG ?= sdl2-config
- 
- # Define this to avoid linking with SDL, which requires SDL libraries
- # This can solve 'sdl-config: Command not found' errors
- ifeq ($(CONFIG_SANDBOX_SDL),y)
--PLATFORM_LIBS += $(shell $(SDL_CONFIG) --libs)
--PLATFORM_CPPFLAGS += $(shell $(SDL_CONFIG) --cflags)
-+PLATFORM_LIBS += $(shell $(PKG_CONFIG) sdl2 --libs)
-+PLATFORM_CPPFLAGS += $(shell $(PKG_CONFIG) sdl2 --cflags)
- endif
- 
- SANITIZERS :=
-diff --git a/doc/arch/sandbox/sandbox.rst b/doc/arch/sandbox/sandbox.rst
-index 5f8db126657f..9ad1b654989c 100644
---- a/doc/arch/sandbox/sandbox.rst
-+++ b/doc/arch/sandbox/sandbox.rst
-@@ -526,12 +526,6 @@ For debugging with GDB or LLDB, it is preferable to reduce the compiler
- optimization level (CONFIG_CC_OPTIMIZE_FOR_DEBUG=y) and to disable Link Time
- Optimization (CONFIG_LTO=n).
- 
--SDL_CONFIG
------------
--
--If sdl-config is on a different path from the default, set the SDL_CONFIG
--environment variable to the correct pathname before building U-Boot.
--
- 
- Using valgrind / memcheck
- -------------------------
+I chose to use ABI's stack frame because GDB requires it to perform prop=
+er
+unwinding and it helped debugging a lot.
 
--- 
-2.34.1
+But I'm fine with unifying them if you think it's necessary, what's your=
+ opinion?
 
+Thanks
+- Jiaxun
+
+>
+> Best regards
+>
+> Heinrich
+>
+--=20
+- Jiaxun
