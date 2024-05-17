@@ -4,69 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A742CC25B7A
-	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 01:31:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A78EDC25B74
+	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 01:44:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2C8288481;
-	Fri, 17 May 2024 03:31:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 024DA88459;
+	Fri, 17 May 2024 03:44:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1715909475;
-	bh=/xZm0NiS6DDz/rvMQ9RbRDNYS5ENkM94TKT7VUVe8Xk=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=HBRGxs+DhCO6c8VAXSrEeDtnx9ZoCIVfmPMx/wPWiZjd4GnM76oeMzaPsJSiHa5ZV
-	 N2U9IQscNt39sx9oNilmlDNOXSuZyoDpRygPsg2DPdI8tIzZUnpD5uI5GVZOd7DnOk
-	 93hHyUh/WZ9V/uOeI4kDakKUtKEHoy9cGGIOCO9HPb9ZOa2yY/re4erKWT9QDBLWgu
-	 2AZDYdysHtkv+sFbKmLDkfaUuMMNSVtiGy4O7ZaBGKId9hsqgxh3D48sH/r9vD+CBK
-	 SSxbCPYXPrAlbx8VEe9VXb+uTwDQL20SiEPEU4pgfRR21aNzCUkvDNmhDLzFKbKG8W
-	 wQPFshJjMuSvA==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="U0TbR1Oa";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 96E1688459; Fri, 17 May 2024 03:44:44 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 2EB9A883AE;
- Fri, 17 May 2024 03:31:12 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1715909474;
- bh=/xZm0NiS6DDz/rvMQ9RbRDNYS5ENkM94TKT7VUVe8Xk=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ZPW1BRbRs0O2jvBAsyumpFkXoZyr/hE08Hu7TY/1Ib4J6NtfTtk571817UOKFm08M
- 05SE0SQJG3GiJilAFcnD1pdQsh726AkcBu42/hazdbYKyfm65Q2Rl0CAmNFu2ygLyB
- id1lkBeYGuwBTli8KAr8CvUnElYkHox72rCV0pkrRRb9Q00HfgsNBdhggrdHFyI9/t
- OuDaXxjXi3TQjcnPLmoQDuxzDnbVc73OVIQv6UnSgvq1MRMAlBEjTBqZDvKgCwNv03
- Iyg6XRD5LQvMaydKdIPa555Wqnt99QwWqwYZuREeyci6WPFG9bY3ojfCDMIw8jyMgu
- XatWjy0ReXTgg==
-Message-ID: <b5366e76-6642-457d-ade9-a0e68f181e99@denx.de>
-Date: Fri, 17 May 2024 03:25:38 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 97897883AE
+ for <u-boot@lists.denx.de>; Fri, 17 May 2024 03:44:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1715910277; x=1716515077; i=xypron.glpk@gmx.de;
+ bh=pM346XSOyOSSMPIsZrhsWFMyQQ4RHYUcifPuNat8cqQ=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=U0TbR1Oaus0zBQoOMJPz2J3ztnFXORIc1O0aD/Cet5xOxHGwRMu6YSZ9a4pFBLi7
+ EUA6fcthXUYxFcCpIi4eUE/5J0N3wHm254TNRAggUkJIPe0YbpWWZlKyxwvzh1szy
+ C1zxyl48bc9xKkAn30CE4ZUVYj5+EgBIuZV+twIKJunenVCGiv3qPr0sp+pe7+d1n
+ kWJABUuqsTR3DfHOaBPa22dtKCU9tI2YTEzLpS4LK1BR3dxaVszEWxUNrmtWO8REP
+ zosojbIhlbA49BNAZPh8mIOhAstMH4mcBCrLvXb9MhIY8jXSrt1Jn9+lii46Ab07o
+ HjBtF4MlLiHPFLsFWA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([149.11.192.251]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N3KTy-1sXWi72d9e-010PNg; Fri, 17
+ May 2024 03:44:37 +0200
+Date: Fri, 17 May 2024 03:44:35 +0200
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Jiaxun Yang <jiaxun.yang@flygoat.com>, u-boot@lists.denx.de
+CC: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_2/2=5D_efi=3A_gop=3A_Mark_pixel=5F?=
+ =?US-ASCII?Q?format_as_BLTONLY_if_we_have_sync_hook?=
+User-Agent: K-9 Mail for Android
+In-Reply-To: <20240517-virtio_gpu-v1-2-6353b87472c7@flygoat.com>
+References: <20240517-virtio_gpu-v1-0-6353b87472c7@flygoat.com>
+ <20240517-virtio_gpu-v1-2-6353b87472c7@flygoat.com>
+Message-ID: <2227C151-FA5E-4649-89D4-989B7DE32930@gmx.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/4] imx: hab: Use nxp_imx8mcst etype for i.MX8M
- flash.bin signing
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: u-boot@lists.denx.de, anton.gres@ifm.com, ch@denx.de,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Adam Ford <aford173@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Angus Ainslie <angus@akkea.ca>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Fabio Estevam <festevam@gmail.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Simon Glass
- <sjg@chromium.org>, Stefan Eichenberger <stefan.eichenberger@toradex.com>,
- Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>,
- kernel@puri.sm, u-boot@dh-electronics.com
-References: <20240516213036.89016-1-marex@denx.de>
- <20240516213036.89016-4-marex@denx.de>
- <CAJ+vNU1Sb60gX4RoHwO=o2kf0c9bW85W2i1VwJg3Oa1hFmxADw@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAJ+vNU1Sb60gX4RoHwO=o2kf0c9bW85W2i1VwJg3Oa1hFmxADw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:oSKo1qqwpP9rObT5VZPn0ra9k7BzjDggIziyStjwekkMiIJ5y1t
+ FkEIxPtBdy9JS4DVZageFS0st3ShWHnZS1QsEZ+NjcS9Ayz6kxyIvJ/KYr6UMm24UeuNYgF
+ s++e9dRj4R3tbogmXJ7Iq2DnFWn4mdt+9MPfRTtUuNl6ER/u/H1e93LDBnoXWP3JC+X2F0X
+ XBSJwnt4QmY+92dopyr4g==
+UI-OutboundReport: notjunk:1;M01:P0:cHKWZg0SKN4=;pBAXs6uQ+DvG/Hnk4qALkDEI7F6
+ ShqLvq5JxpR/4HR24rYzhqkMbKqRMfZW71Z4DFFmFH1t6Ns64CvVrcWzIo+jPNSHaDXW4Zb/u
+ dLLDHRXVNt4AdruhpWrAC8En0GDMEAdL5eaAPGLGGW/D5U0NU/c701fAY7ibPzBvZsv603QKf
+ JOtu29A95qUTegnHPBuCTELQjlG6vjfLxNwQJuSxDiJ7hdm+/iHfsmjZvqX0X+u0rDvCI5vNF
+ mXP9NOFr7zyogUhYqSrMGAPxFc/Q6GstiqUIxofRIqmW5XPfjZWuqH0Ofi9Z9PUc66UoWoBrT
+ mbkyPJOjDHeKqelw4xAbgL4rrYtFNLQywAzmyKLCfNY44sBXPib00IX3erAG5hqoiBq6HTY2w
+ LEgflq0CAjz9Ctbz3Nwg7vGuhPo8xpdNmReTu9ne2/Ox5UkNhM25bD8Oo1R2HFqnSh+mq3d6t
+ KCbB+Q5mbzXIj8G8vGxuTlzbo3b5QtWM86j/dFC+0ys6Ky/ZXSWsqB6fhtDpDmN93iYiU/9iG
+ Bv0fdQeg1tNfbPlF3sub+zuzaRnZORR8tjqu4CxEXCv4mMLYg9JCbj3aiMta5RvHEBRWBRv4i
+ Nji3gWO414SM2uwd9i2LTcaqjiEupFBlMN1UDkn3rpZ/optMepEldK0wZhwkE/o0llcVk4/T4
+ am6evhbHKPuHM7XhrLk7RQgU3nKSnJ9j7BzEqYNWjE6pVTOZNvq7uy5Yo/30Ijtq7Ojrfm4tp
+ oec2rX9W1ygxK/M1bWlRMi6cX6Z9Zq3xYcV0I9l6bQcv0wetCvLQx4V3ljbwitK+RqYhCKqUF
+ eSj59uDguccv7u7BVGeiST6MBqzcLejeGNYMjjZFIInPk=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,67 +91,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/16/24 11:40 PM, Tim Harvey wrote:
 
-[...]
 
->> -The entire script is available in doc/imx/habv4/csf_examples/mx8m/csf.sh
->> -and can be used as follows to modify flash.bin to be signed
->> -(adjust paths as needed):
->> -```
->> -export CST_DIR=/usr/src/cst-3.3.1/
->> -export CSF_KEY=$CST_DIR/crts/CSF1_1_sha256_4096_65537_v3_usr_crt.pem
->> -export IMG_KEY=$CST_DIR/crts/IMG1_1_sha256_4096_65537_v3_usr_crt.pem
->> -export SRK_TABLE=$CST_DIR/crts/SRK_1_2_3_4_table.bin
->> -export PATH=$CST_DIR/linux64/bin:$PATH
-> 
-> Hi Marek,
-> 
-> I thought you were going to leave the above env setting examples in
-> the documentation.
-> 
-> I suggest showing how to specify using env (by just leaving the above
-> in) as well as by copying them directly to the build directory if
-> wanted.. otherwise the documentation is lacking.
+Am 17=2E Mai 2024 01:03:25 MESZ schrieb Jiaxun Yang <jiaxun=2Eyang@flygoat=
+=2Ecom>:
+>If a video device has a video_sync hook, it means some software
+>intervene is required to scanout framebuffer up on change=2E
+>
+>That means EFI application can't just use it as raw framebuffer,
+>it should call BLT operation to let U-Boot help with scanout=2E
+>
+>Mark pixel format as BLTONLY as per UEFI spec to reflect this
+>nature=2E
+>
+>Signed-off-by: Jiaxun Yang <jiaxun=2Eyang@flygoat=2Ecom>
+>---
+> include/efi_api=2Eh        | 1 +
+> lib/efi_loader/efi_gop=2Ec | 9 ++++++++-
+> 2 files changed, 9 insertions(+), 1 deletion(-)
+>
+>diff --git a/include/efi_api=2Eh b/include/efi_api=2Eh
+>index ab40b1b5ddf6=2E=2E3eaefb322878 100644
+>--- a/include/efi_api=2Eh
+>+++ b/include/efi_api=2Eh
+>@@ -1399,6 +1399,7 @@ struct efi_hii_config_access_protocol {
+> #define EFI_GOT_RGBA8		0
+> #define EFI_GOT_BGRA8		1
+> #define EFI_GOT_BITMASK		2
+>+#define EFI_GOT_BLTONLY		3
+>=20
+> struct efi_gop_mode_info {
+> 	u32 version;
+>diff --git a/lib/efi_loader/efi_gop=2Ec b/lib/efi_loader/efi_gop=2Ec
+>index 41e12fa72460=2E=2E784d43d3d39b 100644
+>--- a/lib/efi_loader/efi_gop=2Ec
+>+++ b/lib/efi_loader/efi_gop=2Ec
+>@@ -467,10 +467,12 @@ efi_status_t efi_gop_register(void)
+> 	struct efi_gop_obj *gopobj;
+> 	u32 bpix, format, col, row;
+> 	u64 fb_base, fb_size;
+>+	bool needs_sync;
+> 	efi_status_t ret;
+> 	struct udevice *vdev;
+> 	struct video_priv *priv;
+> 	struct video_uc_plat *plat;
+>+	struct video_ops *ops;
+>=20
+> 	/* We only support a single video output device for now */
+> 	if (uclass_first_device_err(UCLASS_VIDEO, &vdev)) {
+>@@ -485,6 +487,7 @@ efi_status_t efi_gop_register(void)
+> 	row =3D video_get_ysize(vdev);
+>=20
+> 	plat =3D dev_get_uclass_plat(vdev);
+>+	ops =3D video_get_ops(vid);
+> 	fb_base =3D IS_ENABLED(CONFIG_VIDEO_COPY) ? plat->copy_base : plat->bas=
+e;
 
-If the tool can do env vars now, I would like to avoid copying key 
-material around. So what about this:
+Wasn't this line introduced to handle the video sync case by pointing the =
+EFI application to target framebuffer?
 
-diff --git a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt 
-b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-index 1eb1fb0aa61..257ffb45656 100644
---- a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-+++ b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-@@ -144,6 +144,8 @@ The signing is activated by wrapping SPL and 
-fitImage sections into nxp-imx8mcst
-  etype, which is done automatically in 
-arch/arm/dts/imx8m{m,n,p,q}-u-boot.dtsi
-  in case CONFIG_IMX_HAB Kconfig symbol is enabled.
+Best regards
 
-+Build of flash.bin target then produces a signed flash.bin automatically.
-+
-  The nxp-imx8mcst etype is configurable using either DT properties or 
-environment
-  variables. The following DT properties and environment variables are 
-supported.
-  Note that environment variables override DT properties.
-@@ -160,7 +162,15 @@ Note that environment variables override DT properties.
-  | nxp,img-crt        | IMG_KEY   | full path to the IMG Key 
-IMG1_1_sha256_4096_65537_v3_usr_crt.pem |
- 
-+--------------------+-----------+------------------------------------------------------------------+
+Heinrich
 
--Build of flash.bin target then produces a signed flash.bin automatically.
-+Environment variables can be set as follows to point the build process
-+to external key material:
-+```
-+export CST_DIR=/usr/src/cst-3.3.1/
-+export CSF_KEY=$CST_DIR/crts/CSF1_1_sha256_4096_65537_v3_usr_crt.pem
-+export IMG_KEY=$CST_DIR/crts/IMG1_1_sha256_4096_65537_v3_usr_crt.pem
-+export SRK_TABLE=$CST_DIR/crts/SRK_1_2_3_4_table.bin
-+make flash.bin
-+```
-
-  1.4 Closing the device
-  -----------------------
-
+> 	fb_size =3D plat->size;
+>=20
+>@@ -529,7 +532,11 @@ efi_status_t efi_gop_register(void)
+> 	gopobj->info=2Eversion =3D 0;
+> 	gopobj->info=2Ewidth =3D col;
+> 	gopobj->info=2Eheight =3D row;
+>-	if (bpix =3D=3D VIDEO_BPP32)
+>+
+>+	if (ops && ops->video_sync) {
+>+		/* Applications can't really use it as framebuffer */
+>+		gopobj->info=2Epixel_format =3D EFI_GOT_BLTONLY;
+>+	} else if (bpix =3D=3D VIDEO_BPP32)
+> 	{
+> 		if (format =3D=3D VIDEO_X2R10G10B10) {
+> 			gopobj->info=2Epixel_format =3D EFI_GOT_BITMASK;
+>
