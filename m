@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D833DC04FFE
-	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 16:33:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADDE6C25B79
+	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 16:34:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 855C8884B2;
-	Fri, 17 May 2024 18:33:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E7E5A884BC;
+	Fri, 17 May 2024 18:33:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="qQFlEOfo";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="JiS+6Uq3";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="iSdqN+pi";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="SFwodB38";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 973F4884A6; Fri, 17 May 2024 18:33:05 +0200 (CEST)
+ id A57B9884A6; Fri, 17 May 2024 18:33:06 +0200 (CEST)
 Received: from fout8-smtp.messagingengine.com (fout8-smtp.messagingengine.com
  [103.168.172.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 864348823C
- for <u-boot@lists.denx.de>; Fri, 17 May 2024 18:33:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B3D648849D
+ for <u-boot@lists.denx.de>; Fri, 17 May 2024 18:33:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute7.internal (compute7.nyi.internal [10.202.2.48])
- by mailfout.nyi.internal (Postfix) with ESMTP id A28EC1381524;
- Fri, 17 May 2024 12:33:02 -0400 (EDT)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailfout.nyi.internal (Postfix) with ESMTP id CE788138151F;
+ Fri, 17 May 2024 12:33:03 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute7.internal (MEProxy); Fri, 17 May 2024 12:33:02 -0400
+ by compute5.internal (MEProxy); Fri, 17 May 2024 12:33:03 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm1; t=1715963582;
- x=1716049982; bh=JhT8Q3D6n7rg1lgYpwlcal58gTgLZ7v3osl1v4z0Dok=; b=
- qQFlEOfojAQD4gym1FWvzmZYO7tdcfuM0voUyHOxKrEMKaaA69X80xV8f2nOtCvC
- Rs9Pp3sXzriMcKJ/C89/dERDvK89q2pQLgXZ/FsPgo5lnPiwIFupfLsf28whjn6M
- Tv7y2zK0r00xnvS2WJkTY/SzCj3ZJkm/Bj+Fl6tL/mOZiV1moc3gASNRAEMndXS0
- HgMEO3WvOfODyazq0Nw0eUTvAwyGTySG0YUQnaLL6LIKhqaDM/SQUbLbm1lvRol8
- qQ4Y9bIvNXo8FFI0sVhehQu3mZQi2GB8oRZkVa4k+KOZ5iN2BqwdVyT0qXBMc6u7
- yP6KdGT0UzyzVE3HfRw7Fw==
+ :references:reply-to:subject:subject:to:to; s=fm1; t=1715963583;
+ x=1716049983; bh=9juQBKxyhjgoTFpiianocmI1WldtbMpPiLI7jqsPI3Q=; b=
+ iSdqN+pigP+7gJt79ORCO96KyVgdH6bGU4ze6Gxp5rlKZ0FTUWcxvjZ/hVPIMtBM
+ zySguCnKUwCXY6vZPP9UJHWJ+xUReIdYeJP78UqtQlPHPNjYuuQ3oHUls1llRt7R
+ 21cXf0FlfGKVVSj5bKmryeJoE+ZSr6ayJwrStjXQqV3nfM6W/1og5HnOHAA+a5Ze
+ g/CG9z1/h2r0RwAOMOkutt/rKEhufFs+fcA5ATAjfy3wqkiX1XrFUUwB+BaA+K7E
+ EJ8Osk66hL+GaUDHwuHXZFnuYSEoqM5Q5lAxTdfHFscHmn4KRL78DxamD+Gq+y+0
+ zZ51/rEeW0/WiINPXnEb8A==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715963582; x=
- 1716049982; bh=JhT8Q3D6n7rg1lgYpwlcal58gTgLZ7v3osl1v4z0Dok=; b=J
- iS+6Uq3dPfmI9+ypzk5YfO4p/ZgFNDIIsuQHnZmARqH8aQRJknXi3MmnDeXwW4G2
- w3YxYK4qenbs/oaPUQ+qC/nvLFUrbJ1i2VCwzJJTVKcoTjX/8lep2TplC1/WhF6n
- jXrqbugfREcXQOVaetHSBvnyBewBNTDXJNHlwtvQjTMCatJneNfQrqXS2FF3J8L+
- JNROHVc0ySIBp1DU8qexfFjFvbheUvrlm6s69l4Iiy9+oVwhcRWXfqvfo4xburwv
- WR6+0Q4dRZBFGgh1bmVvjKkHU57oJiAD1gnk+Imbmv0d0NnmIrAHtbzyo1zPM7ho
- 8fvJ6NEEfnlvF7ZGEWBlw==
-X-ME-Sender: <xms:voZHZoM9Xlp5t_z59DPLCOXCF3UEEOKMfW83TKVBGs9F_xl5v762WA>
- <xme:voZHZu_-Hbwz1pt6IeTbmHhAetEVYkiixEmgIozY_BdsNeFRmiwqskoZU_XAoyUP6
- 2kA6Pbzohw-_3Wwodg>
-X-ME-Received: <xmr:voZHZvSdhEn4YA61nDjQRV1l1PyCQgrUcX4zdAtJ9DP22bDhCpU0VZQ>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715963583; x=
+ 1716049983; bh=9juQBKxyhjgoTFpiianocmI1WldtbMpPiLI7jqsPI3Q=; b=S
+ FwodB38OqWL9myHQrZy6U9uvi6tKP0ibrSypcjZCD/6pRVDKHwVjLm5uYWxAEhVW
+ 9BtMys+jCmIpZ4zq5ISZAdjaQOsUO3QzrSEtGTznkaRB7pRd2m1rCxeUqu6OJA1w
+ jVcsVlcpbhGJgT4UwX1EH7Dkb6fkOYbgdhTjerVB3nc5dq0Uj782WGZliI/uPXtk
+ Wo4oeWihZhwyOYsTBN7k+l8UssKp6aOrYYs9JwxQ0Dcbr/TOT4a6+y2ycd7HRwbE
+ L2xLQQrpUk/fSTJs7rXg2GlZg56LW6t7s0Cv+OmtVbc9dn0cQ/YdD73zgubMCVql
+ 35Ol0852tNzGIhi3+A9jQ==
+X-ME-Sender: <xms:v4ZHZoknG5Imzg3LGzK0fz0KGC4t_rsT9NKOeTWPd1FcR7lZhswRvA>
+ <xme:v4ZHZn0HVyMHQ7F9jBm_wyqLSXDoLGjb73e_jwDnI8PYevi_9cuai0nG-aohMdWPq
+ wlQRYUXb3pUu21NHcU>
+X-ME-Received: <xmr:v4ZHZmrWZIGe5Qx6bm3HbE4XJ9dZvX28yff4aUz_Jh-K-2reo_6xoQ4>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehgedgtdelucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
@@ -68,21 +68,21 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehgedgtdelucetufdoteggod
  cuggftrfgrthhtvghrnhepvdekiefhfeevkeeuveetfeelffekgedugefhtdduudeghfeu
  veegffegudekjeelnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilh
  hfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:voZHZgvlM-1YIUfP79xsw_yEkXS_lRlU9Jg9qKEbJAqZ9C9prTQaMw>
- <xmx:voZHZgcsSIuPbbgND4k1YOK1xkaxhQedVxY76ZyNEGV0g4oJMQ7zbA>
- <xmx:voZHZk2lo05cUSCINZivz04jeHIZXI31XzDLRqaz_vXfcsTjPAM2kg>
- <xmx:voZHZk8hyh0TrBNPpxxO7_njDMobPX8lYJLNm0Fn7p8MQocvST21kQ>
- <xmx:voZHZoQJMlmdfH0GIC9DqQbSf-o2_8rkTrBG2VxYaHf9Ov77RlqfbIMn>
+X-ME-Proxy: <xmx:v4ZHZknzLYvSwa5EHSaeL12jLiN98a1kqr1c1-KT2o8nbWhe_SRuDw>
+ <xmx:v4ZHZm3ws1wYz-UjE8lHDjVhc1Ns7aBM6zDZKv8G1eJikkFno1UaqA>
+ <xmx:v4ZHZrvoAc7rQ8xUcGR0t-k925y6itxsxMs90T19m2QTRpZ2rUJ1Mg>
+ <xmx:v4ZHZiWr6ZYkrlm7YOS-IjfVKgT17LbhkyDfkDMUdCORUOlpmzAzeA>
+ <xmx:v4ZHZgqBtUTgwf3FrI7jMGsq1XgXUlvgqXot8KJv86iZDYxws0luUFFX>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 17 May 2024 12:33:01 -0400 (EDT)
+ 17 May 2024 12:33:02 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Fri, 17 May 2024 17:32:55 +0100
-Subject: [PATCH 4/7] Makefile.lib: Enforce EFI CFLAGS/AFLAGS
+Date: Fri, 17 May 2024 17:32:56 +0100
+Subject: [PATCH 5/7] MIPS: Add smbios_start to arch_global_data
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240517-mips-efi-v1-4-79096e3ca3b3@flygoat.com>
+Message-Id: <20240517-mips-efi-v1-5-79096e3ca3b3@flygoat.com>
 References: <20240517-mips-efi-v1-0-79096e3ca3b3@flygoat.com>
 In-Reply-To: <20240517-mips-efi-v1-0-79096e3ca3b3@flygoat.com>
 To: u-boot@lists.denx.de
@@ -91,13 +91,13 @@ Cc: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2096;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=685;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=CSJtpFj5b7zu420sJwH/Z3EfZu/4s5WymivI4RlsgWA=;
- b=owGbwMvMwCHmXMhTe71c8zDjabUkhjT3th1yP2SvP/DhNhS3Ud9j8V20Yv15C36L2tO7jpoFG
- 8ia3l7RUcrCIMbBICumyBIioNS3ofHigusPsv7AzGFlAhnCwMUpABOx7mb4w8G5Myb0216+2RWz
- RW9sX7yYl8vbeQf3t9BMqUixnXbmVxgZlvMWPnR0Cuv7dNV9UgbTMh/11SH8jz893PCAP67H5Cc
- zCwA=
+ bh=N5nHCKJp6TcyM5ZIUDebRGUgyo6DEeXQ+cKkTaPZmZ0=;
+ b=owGbwMvMwCHmXMhTe71c8zDjabUkhjT3th3B608Yyt5XPXMk/7DOLU216ancgRE/j+Xc+D3LO
+ 93IwntxRykLgxgHg6yYIkuIgFLfhsaLC64/yPoDM4eVCWQIAxenAExE8CEjw25jDmGjF//CTQ7O
+ yFnPs/HWrJ8/3oh/W7hxiW/AY94fwk8YGZ53S8yyvHdNLOh50QGPRLYHLNNits3QS0jNjFjew1Z
+ 8lxkA
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -116,56 +116,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-EFI AFLAGS/CFLAGS should be enforced for those runtime
-supporting files as well, otherwise EFI applications
-will fail to compile on MIPS.
+This is necessary for SMBIOS to build on MIPS.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- Makefile             | 3 +++
- scripts/Makefile.lib | 8 ++++++--
- 2 files changed, 9 insertions(+), 2 deletions(-)
+ arch/mips/include/asm/global_data.h | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/Makefile b/Makefile
-index 44deb339af19..6c9098f5823f 100644
---- a/Makefile
-+++ b/Makefile
-@@ -652,6 +652,8 @@ export EFI_CRT0		# Filename of EFI CRT0 in arch/$(ARCH)/lib
- export EFI_RELOC	# Filename of EFU relocation code in arch/$(ARCH)/lib
- export CFLAGS_EFI	# Compiler flags to add when building EFI app
- export CFLAGS_NON_EFI	# Compiler flags to remove when building EFI app
-+export AFLAGS_EFI	# Assembler flags to add when building EFI app
-+export AFLAGS_NON_EFI	# Assembler flags to remove when building EFI app
- export EFI_TARGET	# binutils target if EFI is natively supported
+diff --git a/arch/mips/include/asm/global_data.h b/arch/mips/include/asm/global_data.h
+index 147a95ecea8b..740bbcdb84e9 100644
+--- a/arch/mips/include/asm/global_data.h
++++ b/arch/mips/include/asm/global_data.h
+@@ -40,6 +40,9 @@ struct arch_global_data {
+ #ifdef CONFIG_ARCH_OCTEON
+ 	struct octeon_eeprom_mac_addr mac_desc;
+ #endif
++#ifdef CONFIG_SMBIOS
++	ulong smbios_start;		/* Start address of SMBIOS table */
++#endif
+ };
  
- export LTO_ENABLE
-@@ -926,6 +928,7 @@ export PLATFORM_LIBGCC
- LDPPFLAGS += \
- 	-include $(srctree)/include/u-boot/u-boot.lds.h \
- 	-DCPUDIR=$(CPUDIR) \
-+	-DARCHDIR=arch/$(ARCH) \
- 	$(shell $(LD) --version | \
- 	  sed -ne 's/GNU ld version \([0-9][0-9]*\)\.\([0-9][0-9]*\).*/-DLD_MAJOR=\1 -DLD_MINOR=\2/p')
- 
-diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-index 52aed7a65d47..5aacab32cb38 100644
---- a/scripts/Makefile.lib
-+++ b/scripts/Makefile.lib
-@@ -495,8 +495,12 @@ $(obj)/%_efi.so: $(obj)/%.o $(obj)/efi_crt0.o $(obj)/efi_reloc.o $(obj)/efi_free
- 
- targets += $(obj)/efi_crt0.o $(obj)/efi_reloc.o $(obj)/efi_freestanding.o
- 
--CFLAGS_REMOVE_efi_reloc.o := $(LTO_CFLAGS)
--CFLAGS_REMOVE_efi_freestanding.o := $(LTO_CFLAGS)
-+AFLAGS_efi_crt0.o := $(AFLAGS_EFI)
-+CFLAGS_efi_reloc.o := $(CFLAGS_EFI)
-+CFLAGS_efi_freestanding.o := $(CFLAGS_EFI)
-+AFLAGS_REMOVE_efi_crt0.o := $(AFLAGS_NON_EFI)
-+CFLAGS_REMOVE_efi_reloc.o := $(CFLAGS_NON_EFI) $(LTO_CFLAGS)
-+CFLAGS_REMOVE_efi_freestanding.o := $(CFLAGS_NON_EFI) $(LTO_CFLAGS)
- 
- # ACPI
- # ---------------------------------------------------------------------------
+ #include <asm-generic/global_data.h>
 
 -- 
 2.34.1
