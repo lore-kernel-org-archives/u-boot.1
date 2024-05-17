@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18B39C25B79
-	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 16:33:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D833DC04FFE
+	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 16:33:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A3F28848B;
+	by phobos.denx.de (Postfix) with ESMTP id 855C8884B2;
 	Fri, 17 May 2024 18:33:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="EG0DJPdi";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="WQGptF80";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="qQFlEOfo";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="JiS+6Uq3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C2C5883BD; Fri, 17 May 2024 18:33:04 +0200 (CEST)
+ id 973F4884A6; Fri, 17 May 2024 18:33:05 +0200 (CEST)
 Received: from fout8-smtp.messagingengine.com (fout8-smtp.messagingengine.com
  [103.168.172.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F3B3881C5
- for <u-boot@lists.denx.de>; Fri, 17 May 2024 18:33:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 864348823C
+ for <u-boot@lists.denx.de>; Fri, 17 May 2024 18:33:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailfout.nyi.internal (Postfix) with ESMTP id 6245D138151F;
- Fri, 17 May 2024 12:33:01 -0400 (EDT)
+Received: from compute7.internal (compute7.nyi.internal [10.202.2.48])
+ by mailfout.nyi.internal (Postfix) with ESMTP id A28EC1381524;
+ Fri, 17 May 2024 12:33:02 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Fri, 17 May 2024 12:33:01 -0400
+ by compute7.internal (MEProxy); Fri, 17 May 2024 12:33:02 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm1; t=1715963581;
- x=1716049981; bh=6+LX3BdKeTPxLigfZQrvLRZOlT8olOhZUFCILqJq27A=; b=
- EG0DJPdiHXtgxsxAGw0CFvq7nLulmQUNL2qT8037EFQ7UAcTwwHoyeoZpzjl/iCQ
- unb0UIMNjj86mphY6jIttRJ9I68sxQ7qyf1rjjRJlasIJohMer2NlGHKWGLcFWec
- 3j8/nU/q93BTA0HgzGdfBLwhXiIwNHopCeNHUMzGEIAFQyJHGJTQsJzYK5zn259v
- BKh2uAuszcAfb82HAb+8LF/8WlKEbaxZuGd8jqKVX7G8cquZcK35oRAKQ8OFtLya
- Dwbtbtf8d8698g4RQeWL9vs88TWkQpQjEK+pdlGR/SeWi98Cs31KIRTitT01NFC5
- YrCevUH5b7Ow/VmeAYIG9Q==
+ :references:reply-to:subject:subject:to:to; s=fm1; t=1715963582;
+ x=1716049982; bh=JhT8Q3D6n7rg1lgYpwlcal58gTgLZ7v3osl1v4z0Dok=; b=
+ qQFlEOfojAQD4gym1FWvzmZYO7tdcfuM0voUyHOxKrEMKaaA69X80xV8f2nOtCvC
+ Rs9Pp3sXzriMcKJ/C89/dERDvK89q2pQLgXZ/FsPgo5lnPiwIFupfLsf28whjn6M
+ Tv7y2zK0r00xnvS2WJkTY/SzCj3ZJkm/Bj+Fl6tL/mOZiV1moc3gASNRAEMndXS0
+ HgMEO3WvOfODyazq0Nw0eUTvAwyGTySG0YUQnaLL6LIKhqaDM/SQUbLbm1lvRol8
+ qQ4Y9bIvNXo8FFI0sVhehQu3mZQi2GB8oRZkVa4k+KOZ5iN2BqwdVyT0qXBMc6u7
+ yP6KdGT0UzyzVE3HfRw7Fw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715963581; x=
- 1716049981; bh=6+LX3BdKeTPxLigfZQrvLRZOlT8olOhZUFCILqJq27A=; b=W
- QGptF802hkVc72qmLbgcES7sQDKOvILiIlYQ9Sg+oqPaPrOZEbbUxYks/bJ4xibM
- uLRa6DHyIxIsEpYsnEwTyhAkgnWauT1BWMhPw96G3XR1/HYyirddtHfMKpZt7fTX
- PTZmw1GkhI07OmGWYg+XtWs0C5YjJDPnfe54SVZm+aLaUZHZt8p2uKXdU2fJMgiN
- gQMmNhcaS03AJyn01FATn8n524X7/ygUt5s8dOg7bAorLyctyD779Nuzof4UK/VJ
- unWSDKkMKmYDROoQ8d0y30T2cS/NWMPRVL4eUnPpYZnM3ysrgGhhFH3NAVYDkRu8
- w05UisZQX3JsEIGbF3RCg==
-X-ME-Sender: <xms:vYZHZgYVZxKbtU-sIB8AJJKPUj6LAnT7HQwEtIK3TvxEkbzf6Zyb5A>
- <xme:vYZHZrZzRVDeLc83buAcOAuWsHvioJpjQndqFy9kV4_tOpPk4nbh_ufC1ke-Nv-nm
- 3_jyGaj07blrdafAIE>
-X-ME-Received: <xmr:vYZHZq8gsArRcnIncVh_0ldGIKc-_mMyaLo5EJF67Zf4wBi3V3LvW6s>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715963582; x=
+ 1716049982; bh=JhT8Q3D6n7rg1lgYpwlcal58gTgLZ7v3osl1v4z0Dok=; b=J
+ iS+6Uq3dPfmI9+ypzk5YfO4p/ZgFNDIIsuQHnZmARqH8aQRJknXi3MmnDeXwW4G2
+ w3YxYK4qenbs/oaPUQ+qC/nvLFUrbJ1i2VCwzJJTVKcoTjX/8lep2TplC1/WhF6n
+ jXrqbugfREcXQOVaetHSBvnyBewBNTDXJNHlwtvQjTMCatJneNfQrqXS2FF3J8L+
+ JNROHVc0ySIBp1DU8qexfFjFvbheUvrlm6s69l4Iiy9+oVwhcRWXfqvfo4xburwv
+ WR6+0Q4dRZBFGgh1bmVvjKkHU57oJiAD1gnk+Imbmv0d0NnmIrAHtbzyo1zPM7ho
+ 8fvJ6NEEfnlvF7ZGEWBlw==
+X-ME-Sender: <xms:voZHZoM9Xlp5t_z59DPLCOXCF3UEEOKMfW83TKVBGs9F_xl5v762WA>
+ <xme:voZHZu_-Hbwz1pt6IeTbmHhAetEVYkiixEmgIozY_BdsNeFRmiwqskoZU_XAoyUP6
+ 2kA6Pbzohw-_3Wwodg>
+X-ME-Received: <xmr:voZHZvSdhEn4YA61nDjQRV1l1PyCQgrUcX4zdAtJ9DP22bDhCpU0VZQ>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehgedgtdelucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
@@ -68,21 +68,21 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehgedgtdelucetufdoteggod
  cuggftrfgrthhtvghrnhepvdekiefhfeevkeeuveetfeelffekgedugefhtdduudeghfeu
  veegffegudekjeelnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilh
  hfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:vYZHZqqQkvJYT7dgWCG_2nEq5q49s1GFTYcn9N54S4r0D7fBqMPBxw>
- <xmx:vYZHZroYXPtFCryGthZe8JeA5GoPT-2_7hnJIsU5hdZ4sgzaMF7oFQ>
- <xmx:vYZHZoQ_zFxVqONh6Dw5FeSdmWNvCJ0J1bR7z9qPLGguPJCssz5O7A>
- <xmx:vYZHZro0VXzhtH1AKn_5iEjJllyvKpaatsS0b3FqnXU7U635dQemLw>
- <xmx:vYZHZsfHe-yvOksgs6u8zo3WZxPg51vGZqYFSGqy4jraIlok2h6IGk_g>
+X-ME-Proxy: <xmx:voZHZgvlM-1YIUfP79xsw_yEkXS_lRlU9Jg9qKEbJAqZ9C9prTQaMw>
+ <xmx:voZHZgcsSIuPbbgND4k1YOK1xkaxhQedVxY76ZyNEGV0g4oJMQ7zbA>
+ <xmx:voZHZk2lo05cUSCINZivz04jeHIZXI31XzDLRqaz_vXfcsTjPAM2kg>
+ <xmx:voZHZk8hyh0TrBNPpxxO7_njDMobPX8lYJLNm0Fn7p8MQocvST21kQ>
+ <xmx:voZHZoQJMlmdfH0GIC9DqQbSf-o2_8rkTrBG2VxYaHf9Ov77RlqfbIMn>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 17 May 2024 12:33:00 -0400 (EDT)
+ 17 May 2024 12:33:01 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Fri, 17 May 2024 17:32:54 +0100
-Subject: [PATCH 3/7] Makefile.lib: Preserve .rodata section for EFI file
+Date: Fri, 17 May 2024 17:32:55 +0100
+Subject: [PATCH 4/7] Makefile.lib: Enforce EFI CFLAGS/AFLAGS
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240517-mips-efi-v1-3-79096e3ca3b3@flygoat.com>
+Message-Id: <20240517-mips-efi-v1-4-79096e3ca3b3@flygoat.com>
 References: <20240517-mips-efi-v1-0-79096e3ca3b3@flygoat.com>
 In-Reply-To: <20240517-mips-efi-v1-0-79096e3ca3b3@flygoat.com>
 To: u-boot@lists.denx.de
@@ -91,13 +91,13 @@ Cc: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=747;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2096;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=5HzhRj+Ut6MF+E06jhkxsOUHC0B687xXtjCBHF2RE74=;
- b=owGbwMvMwCHmXMhTe71c8zDjabUkhjT3th2ea3yO8G/gWZH8acm1UHt+l4UWU1uue+ZxtZ+eq
- m6fXnu8o5SFQYyDQVZMkSVEQKlvQ+PFBdcfZP2BmcPKBDKEgYtTACbi9Ibhv4+Oa5Pzy2nVaUsC
- DnAJWqfuvJKzvV8h206gmz1qp1uZCyPDU4enuz7Wewnt3Z6rbbXFwOf8Qv8VFnH5u35pP3eW+De
- TEQA=
+ bh=CSJtpFj5b7zu420sJwH/Z3EfZu/4s5WymivI4RlsgWA=;
+ b=owGbwMvMwCHmXMhTe71c8zDjabUkhjT3th1yP2SvP/DhNhS3Ud9j8V20Yv15C36L2tO7jpoFG
+ 8ia3l7RUcrCIMbBICumyBIioNS3ofHigusPsv7AzGFlAhnCwMUpABOx7mb4w8G5Myb0216+2RWz
+ RW9sX7yYl8vbeQf3t9BMqUixnXbmVxgZlvMWPnR0Cuv7dNV9UgbTMh/11SH8jz893PCAP67H5Cc
+ zCwA=
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -116,26 +116,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is required in performing objcopy to MIPS EFI files.
+EFI AFLAGS/CFLAGS should be enforced for those runtime
+supporting files as well, otherwise EFI applications
+will fail to compile on MIPS.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- scripts/Makefile.lib | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ Makefile             | 3 +++
+ scripts/Makefile.lib | 8 ++++++--
+ 2 files changed, 9 insertions(+), 2 deletions(-)
 
+diff --git a/Makefile b/Makefile
+index 44deb339af19..6c9098f5823f 100644
+--- a/Makefile
++++ b/Makefile
+@@ -652,6 +652,8 @@ export EFI_CRT0		# Filename of EFI CRT0 in arch/$(ARCH)/lib
+ export EFI_RELOC	# Filename of EFU relocation code in arch/$(ARCH)/lib
+ export CFLAGS_EFI	# Compiler flags to add when building EFI app
+ export CFLAGS_NON_EFI	# Compiler flags to remove when building EFI app
++export AFLAGS_EFI	# Assembler flags to add when building EFI app
++export AFLAGS_NON_EFI	# Assembler flags to remove when building EFI app
+ export EFI_TARGET	# binutils target if EFI is natively supported
+ 
+ export LTO_ENABLE
+@@ -926,6 +928,7 @@ export PLATFORM_LIBGCC
+ LDPPFLAGS += \
+ 	-include $(srctree)/include/u-boot/u-boot.lds.h \
+ 	-DCPUDIR=$(CPUDIR) \
++	-DARCHDIR=arch/$(ARCH) \
+ 	$(shell $(LD) --version | \
+ 	  sed -ne 's/GNU ld version \([0-9][0-9]*\)\.\([0-9][0-9]*\).*/-DLD_MAJOR=\1 -DLD_MINOR=\2/p')
+ 
 diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-index 62f87517c09c..52aed7a65d47 100644
+index 52aed7a65d47..5aacab32cb38 100644
 --- a/scripts/Makefile.lib
 +++ b/scripts/Makefile.lib
-@@ -469,7 +469,7 @@ $(obj)/%_efi.S: $(obj)/%.efi
+@@ -495,8 +495,12 @@ $(obj)/%_efi.so: $(obj)/%.o $(obj)/efi_crt0.o $(obj)/efi_reloc.o $(obj)/efi_free
  
- quiet_cmd_efi_objcopy = OBJCOPY $@
- cmd_efi_objcopy = $(OBJCOPY) -j .header -j .text -j .sdata -j .data -j \
--		.dynamic -j .dynsym  -j .rel* -j .rela* -j .reloc \
-+		.dynamic -j .dynsym  -j .rel* -j .rela* -j .reloc -j .rodata \
- 		$(if $(EFI_TARGET),$(EFI_TARGET),-O binary) $^ $@
+ targets += $(obj)/efi_crt0.o $(obj)/efi_reloc.o $(obj)/efi_freestanding.o
  
- $(obj)/%.efi: $(obj)/%_efi.so
+-CFLAGS_REMOVE_efi_reloc.o := $(LTO_CFLAGS)
+-CFLAGS_REMOVE_efi_freestanding.o := $(LTO_CFLAGS)
++AFLAGS_efi_crt0.o := $(AFLAGS_EFI)
++CFLAGS_efi_reloc.o := $(CFLAGS_EFI)
++CFLAGS_efi_freestanding.o := $(CFLAGS_EFI)
++AFLAGS_REMOVE_efi_crt0.o := $(AFLAGS_NON_EFI)
++CFLAGS_REMOVE_efi_reloc.o := $(CFLAGS_NON_EFI) $(LTO_CFLAGS)
++CFLAGS_REMOVE_efi_freestanding.o := $(CFLAGS_NON_EFI) $(LTO_CFLAGS)
+ 
+ # ACPI
+ # ---------------------------------------------------------------------------
 
 -- 
 2.34.1
