@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91B1CC04FFE
-	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 12:51:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64723C25B77
+	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 12:52:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B24F5882A9;
-	Fri, 17 May 2024 14:50:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1CC18884CC;
+	Fri, 17 May 2024 14:50:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="QcZqnzE8";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="N1IC6PGi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E382D88490; Fri, 17 May 2024 07:27:58 +0200 (CEST)
+ id 706B688495; Fri, 17 May 2024 07:28:11 +0200 (CEST)
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E2E6882D9
- for <u-boot@lists.denx.de>; Fri, 17 May 2024 07:27:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C3073882D9
+ for <u-boot@lists.denx.de>; Fri, 17 May 2024 07:28:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tingting.meng@intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1715923676; x=1747459676;
+ t=1715923689; x=1747459689;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=WeBYBKRYAwI1jpZxv+YHrY9kDvTcBDswzxm2Lqc12ZE=;
- b=QcZqnzE86K/DaLItK7up4VRyikPqNYs1UEbOGlNoJJFQI4NIMJG0x9at
- tbKBMxA0I+E3kGy8a6ULJxMP618uT1z1cfn7R1alzd6J760ZvfUG+hF5A
- RjBAS8ZMcAKkYjduc+wVvSyN0PMH+J9uLYGLcHVP7xeLwFiRzNB4lg24/
- L9g4Cgxpi40bpVcBqQt3ag6zgQXDks1TpvnULP7sraU5hu8v+tF/auHhK
- dC2coduswzjX8JSZMUavtp6iV6vkucflWJQZY7Nfb/xPQ/3UJJlb3jc8V
- OGXdv5SrPm5IQMpS1xDp3z0j+ZStHzZdL1WY9+zAXcwzEfp1oFT3sjZNL Q==;
-X-CSE-ConnectionGUID: isFuwhQ+QnWkbDjiCSQANA==
-X-CSE-MsgGUID: 9wdzggQKSLuikVKsp4LsEg==
-X-IronPort-AV: E=McAfee;i="6600,9927,11074"; a="11929978"
-X-IronPort-AV: E=Sophos;i="6.08,166,1712646000"; d="scan'208";a="11929978"
+ bh=c7N/vGlZ17cmTXKaDPsULpJjelWBQvuPP2d9AsLWlvY=;
+ b=N1IC6PGiWzr9eCSNwuMmUrAUWki6V6mvvUixYQAz/b39tNTA51Smb5y0
+ cQeX2TerwUkd+MQcuUTYdF1lkjSkpg3nBTCDCsSCnzFroujzbBnnVGFIn
+ IrIhAhZfWd3dKHumIPH0YdFQHYufLksNRG5uq4o27xwVXZo7vZqdGj9GM
+ IW13tOaDm//pPkc5Cr6VwhXW6iKns7Vp9PAW96C++ct1xhMVylDDXUbV0
+ +kPdVzsdklfW1greEicURKYLTp8csWRraJCtYT9WhM0SlkFT65Ve4AeDw
+ WwYbs7OC6EsBPYXzn/9XiiehfBZT9mjJWVEevl0wjzMMPstY0BNNjSu7r g==;
+X-CSE-ConnectionGUID: rPBo6sZDQ+eQFozNj6sf/Q==
+X-CSE-MsgGUID: Z9VijCkGQsWOL6lYuSol+A==
+X-IronPort-AV: E=McAfee;i="6600,9927,11074"; a="11929985"
+X-IronPort-AV: E=Sophos;i="6.08,166,1712646000"; d="scan'208";a="11929985"
 Received: from fmviesa003.fm.intel.com ([10.60.135.143])
  by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 16 May 2024 22:27:56 -0700
-X-CSE-ConnectionGUID: NWEJYjXxTLKsO51yFazCfQ==
-X-CSE-MsgGUID: +d+EN3cZRnaYnOuLSrVidg==
+ 16 May 2024 22:28:00 -0700
+X-CSE-ConnectionGUID: wsoRFhzhT9WOLFA7QS8D+Q==
+X-CSE-MsgGUID: 7U5AKwooSGqw5W5wH6rOaw==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.08,166,1712646000"; d="scan'208";a="36188248"
+X-IronPort-AV: E=Sophos;i="6.08,166,1712646000"; d="scan'208";a="36188254"
 Received: from pglc00543.png.intel.com ([10.221.239.235])
- by fmviesa003.fm.intel.com with ESMTP; 16 May 2024 22:27:51 -0700
+ by fmviesa003.fm.intel.com with ESMTP; 16 May 2024 22:27:56 -0700
 From: tingting.meng@intel.com
 To: u-boot@lists.denx.de
 Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
@@ -63,12 +63,12 @@ Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Hazim <muhammad.hazim.izzat.zamri@intel.com>,
  Jit Loon Lim <jit.loon.lim@intel.com>,
  Sieu Mun Tang <sieu.mun.tang@intel.com>,
- Siew Chin Lim <elly.siew.chin.lim@intel.com>,
+ Wan Yee Lau <wan.yee.lau@intel.com>,
  Tingting Meng <tingting.meng@intel.com>
-Subject: [Agilex7 M-series Platform Enablement v1 06/16] include: configs:
- soc64: Use CONFIG_SPL_ATF to differentiate bootfile
-Date: Fri, 17 May 2024 13:26:51 +0800
-Message-Id: <20240517052701.12949-7-tingting.meng@intel.com>
+Subject: [Agilex7 M-series Platform Enablement v1 07/16] clk: altera: Add
+ clock support for Agilex7 M-series
+Date: Fri, 17 May 2024 13:26:52 +0800
+Message-Id: <20240517052701.12949-8-tingting.meng@intel.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240517052701.12949-1-tingting.meng@intel.com>
 References: <20240517052701.12949-1-tingting.meng@intel.com>
@@ -91,36 +91,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Siew Chin Lim <elly.siew.chin.lim@intel.com>
+From: Teik Heng Chong <teik.heng.chong@intel.com>
 
-ATF boot flow (SPL->ATF->U-Boot Proper->OS) boot to OS via kernel.itb file
-using bootm command.
+Agilex7 M-series reuse the clock driver from Agilex.
 
-Change to use CONFIG_SPL_ATF to differentiate the bootfile of default
-environment variable. We shouldn't use CONFIG_FIT because it is enabled
-by default for U-Boot Proper.
-
-Signed-off-by: Siew Chin Lim <elly.siew.chin.lim@intel.com>
+Signed-off-by: Wan Yee Lau <wan.yee.lau@intel.com>
 Signed-off-by: Teik Heng Chong <teik.heng.chong@intel.com>
 Signed-off-by: Tingting Meng <tingting.meng@intel.com>
 ---
- arch/arm/Kconfig | 3 +++
- 1 file changed, 3 insertions(+)
+ arch/arm/mach-socfpga/include/mach/clock_manager.h | 2 +-
+ arch/arm/mach-socfpga/misc.c                       | 2 +-
+ drivers/clk/altera/Makefile                        | 1 +
+ 3 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index a0842e1933..56e190adf6 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -21,6 +21,9 @@ config ARM64_CRC32
- 	  not be present on all ARMv8.0, but is always present on ARMv8.1 and
- 	  newer.
+diff --git a/arch/arm/mach-socfpga/include/mach/clock_manager.h b/arch/arm/mach-socfpga/include/mach/clock_manager.h
+index 6c9d32b9dd..77d97193f5 100644
+--- a/arch/arm/mach-socfpga/include/mach/clock_manager.h
++++ b/arch/arm/mach-socfpga/include/mach/clock_manager.h
+@@ -26,7 +26,7 @@ int cm_set_qspi_controller_clk_hz(u32 clk_hz);
+ #include <asm/arch/clock_manager_arria10.h>
+ #elif defined(CONFIG_TARGET_SOCFPGA_STRATIX10)
+ #include <asm/arch/clock_manager_s10.h>
+-#elif defined(CONFIG_TARGET_SOCFPGA_AGILEX)
++#elif IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX) || IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX7M)
+ #include <asm/arch/clock_manager_agilex.h>
+ #elif IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX5)
+ #include <asm/arch/clock_manager_agilex5.h>
+diff --git a/arch/arm/mach-socfpga/misc.c b/arch/arm/mach-socfpga/misc.c
+index 79f7887519..5537445e10 100644
+--- a/arch/arm/mach-socfpga/misc.c
++++ b/arch/arm/mach-socfpga/misc.c
+@@ -252,7 +252,7 @@ void socfpga_get_managers_addr(void)
+ 	if (ret)
+ 		hang();
  
-+config BOOTFILE
-+	default kernel.itb if SPL_ATF && TARGET_SOCFPGA_SOC64
-+
- config COUNTER_FREQUENCY
- 	int "Timer clock frequency"
- 	depends on ARM64 || CPU_V7A
+-#ifdef CONFIG_TARGET_SOCFPGA_AGILEX
++#if IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX) || IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX7M)
+ 	ret = socfpga_get_base_addr("intel,agilex-clkmgr",
+ 				    &socfpga_clkmgr_base);
+ #elif IS_ENABLED(CONFIG_TARGET_SOCFPGA_N5X)
+diff --git a/drivers/clk/altera/Makefile b/drivers/clk/altera/Makefile
+index 61ffa4179a..858f828e53 100644
+--- a/drivers/clk/altera/Makefile
++++ b/drivers/clk/altera/Makefile
+@@ -4,6 +4,7 @@
+ #
+ 
+ obj-$(CONFIG_TARGET_SOCFPGA_AGILEX) += clk-agilex.o
++obj-$(CONFIG_TARGET_SOCFPGA_AGILEX7M) += clk-agilex.o
+ obj-$(CONFIG_TARGET_SOCFPGA_ARRIA10) += clk-arria10.o
+ obj-$(CONFIG_TARGET_SOCFPGA_N5X) += clk-n5x.o
+ obj-$(CONFIG_TARGET_SOCFPGA_N5X) += clk-mem-n5x.o
 -- 
 2.25.1
 
