@@ -4,85 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCF73C04FFE
-	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 18:16:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14E46C25B78
+	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 18:17:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C4F18856D;
-	Fri, 17 May 2024 20:15:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A7E5488582;
+	Fri, 17 May 2024 20:15:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="xXTE7Wk+";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="OaEDmSn+";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="U9jYjTHv";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="jLdHKab1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E816F8856D; Fri, 17 May 2024 20:15:15 +0200 (CEST)
-Received: from fout1-smtp.messagingengine.com (fout1-smtp.messagingengine.com
- [103.168.172.144])
+ id E768D88581; Fri, 17 May 2024 20:15:17 +0200 (CEST)
+Received: from fhigh7-smtp.messagingengine.com
+ (fhigh7-smtp.messagingengine.com [103.168.172.158])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9663B8857F
- for <u-boot@lists.denx.de>; Fri, 17 May 2024 20:15:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 37E8988586
+ for <u-boot@lists.denx.de>; Fri, 17 May 2024 20:15:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailfout.nyi.internal (Postfix) with ESMTP id D064813814FC;
- Fri, 17 May 2024 14:15:12 -0400 (EDT)
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id 6DCE411400BD;
+ Fri, 17 May 2024 14:15:14 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Fri, 17 May 2024 14:15:12 -0400
+ by compute6.internal (MEProxy); Fri, 17 May 2024 14:15:14 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm1; t=1715969712;
- x=1716056112; bh=msBbvnhAhHwx3UK5woPPob3xiy6e/E6WHyKpixXWjZ0=; b=
- xXTE7Wk+pPIB80GOhPGKRzx/+i3CCWrtbjWWvFzsdF2jg3z1M7mMN8+AyfylJnD/
- 8TyNjCvVJm9ODrkBPJKIUY9o+fdT9MJ4UAvIBSui4Ty2U5IJw9sePxKFAG803kcO
- rPTS/f+ffMWDB2GL68xHhTw1UmLDe/3NT8f9dZGQ+v2m8R0gEmw2iAQ+Llgkz6mT
- LAIUyEztxfDciGAHoYhImsn5wST6c8V7m8Xa3sGzG4zy9Qd6XtPzcrDYOEAn4wor
- aFZULCKCtrfdO2FF7AdAXUJFbngXxWrbERjUV7v0Yz3ZgzZR8mD7P7KSF1sQmkDQ
- Dr74uRgc97+TUdGFRIOxIQ==
+ :references:reply-to:subject:subject:to:to; s=fm1; t=1715969714;
+ x=1716056114; bh=8V2Qr/6eSx/MT+l/EtFNwAEO9j/M8gqIVbnvZ+Zafpc=; b=
+ U9jYjTHvUrOgngi0VfM7B3Extf3Ls+089p9xnnHP2Q4cmWcGofneHncJSPBwPOb6
+ doFIp9YLnPndUFhwwlrp33E0326JqVQTZ7IPqZpKwr1MHBaLHJomvhSAKWPMCNcV
+ YZYwDld9PsyT6QMX+vHMnUgJY8dY3k6nWfgSCNw/PBrT74NMBfzlCFIQvuBi7sUM
+ xCQbRTm7zPM/jUCbCqn0O6de4+TkZqRFyqbaLMMclsmI06tlD/4Fj4L/pVU/SxxU
+ gffMFp2lq4HQeBeYlwOaFYkiccb50rrlgZavDp5S+t8FIOpwE9weLzfPgZ/Xcdwk
+ 8mMqO+gO14LvSaIA0AFNKA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715969712; x=
- 1716056112; bh=msBbvnhAhHwx3UK5woPPob3xiy6e/E6WHyKpixXWjZ0=; b=O
- aEDmSn+4MLoR/SMd+SeQFrX9+eY0+/yfGIxlfbfhkN0UHASDRp84M9mjRtfWZijO
- LZZEPXg6cwj59Xl4OYTPB68WJ/nh+AeUJeXjm9SbhiVVHImzGmvbbRb0AN8qpniT
- 7IuYowwwquavFs4tolaCsypvNblpYRopOIdxW32P6grgI8dnKcLBBeBynrvhriYT
- d8jD0rsOlPNtAf/drEajvR5NeQMVa2CeVCnqt9xQ1Fcrsub+0PNJSlqBufPIrR6u
- sPh+A6J/8qWyKhD2uT8pTtqKxqAqtEj0x9s42ht+XQSvVBe0fLbTGbHq9u9cz+3B
- qcmGuZNAGqI0G5JrR8Itw==
-X-ME-Sender: <xms:sJ5HZgs4GEVaGJUAXur_P7_bW0hqwRPQeuGttn_V4zNKqgOVLwhJwA>
- <xme:sJ5HZtfaw6kvhmutwWQXzIymif4vhhjIyN7pVLqLXGDEzyWKz3hOQS_aDfz5xIMxW
- bAnv6oYYl8ieKXAftk>
-X-ME-Received: <xmr:sJ5HZryvlWaPALiGpVm8pVR6lJ9zOIS2Uk6g_k5fFA0NE1nu98SccrE>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehgedgfedtucetufdoteggodetrfdotf
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715969714; x=
+ 1716056114; bh=8V2Qr/6eSx/MT+l/EtFNwAEO9j/M8gqIVbnvZ+Zafpc=; b=j
+ LdHKab1CV8/QdH8tcGMr+kpq3vcNv8s70l+etjyc+3sUdvgj/tr9fCQbRqLEi/Te
+ 7aSxwn3g9TfUK5IdCPw8a4qg9iZXg/8RDrRML3DxS0Pf6POultYDsqgcj9wE7C89
+ Kya+mfkR6zkFs0RgrWGzOdLXFXItF2ivncIg49jXQwWKRwCU54202EqjrCgdZrzv
+ LYomuHPsTi4el418gS7awD6ImGvGttLKwe+DbC5Jqg2Q/DIP9OtbeVhEJlbNZoPP
+ y1IJGP7280MbiJfQ8tRCp62sRq/Nfn6brQrObl2p/ud4XHEGJkUx8G0Q8unuSfhP
+ 6YPqISB0NrEsBxj8Etvew==
+X-ME-Sender: <xms:sp5HZv5QaZf0mJBKc_njOojNILCrddSpotZx4KRifg4Ut8S4IFYw3g>
+ <xme:sp5HZk7MuUxVg1U8yPl1rXhb0giqtYeXcXjOcH4S8NE7ldZWnf1sTWU1_m8EaLBEp
+ RefTVoldhV78eOQTTI>
+X-ME-Received: <xmr:sp5HZmdp8ouoL5VBNv_AmcwoGM2YdbaAAnKPV_nPuy3OihNCNcYbEuY>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehgedgvdelucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
  cujfgurhephfffufggtgfgkfhfjgfvvefosehtjeertdertdejnecuhfhrohhmpeflihgr
  gihunhcujggrnhhguceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomheqne
- cuggftrfgrthhtvghrnhepvdekiefhfeevkeeuveetfeelffekgedugefhtdduudeghfeu
- veegffegudekjeelnecuvehluhhsthgvrhfuihiivgepudenucfrrghrrghmpehmrghilh
- hfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:sJ5HZjMn0neyjSuEv_-XueX853gcEYUIrbbxAtZ_ByL7evZJuqneDQ>
- <xmx:sJ5HZg9H-mzv3hOVcYRpAAS4iy1UqHW0ajXvan6hZSEjefNVbgnzEw>
- <xmx:sJ5HZrVXIkePLhICYXyVCe7D7lz2PVQIMzxQbw9T62YiH6zQcvd-Sw>
- <xmx:sJ5HZpeH5Wegyk5TY4KJDOYzQk2lK-AiRV-2lTXQnjx5OVM-E6WcPw>
- <xmx:sJ5HZrXBATGrWv5S9hqCCk_l-gk5S2ORctXVrZ7K_mYw5N8hVAtOxk-Y>
+ cuggftrfgrthhtvghrnhephefgleegjeeugfelhfeuudehleeitdethfeljefhvdevgeef
+ feevteehheekudeknecuffhomhgrihhnpehkvghnrhgvlhdrohhrghenucevlhhushhtvg
+ hrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjihgrgihunhdrhigrnhhg
+ sehflhihghhorghtrdgtohhm
+X-ME-Proxy: <xmx:sp5HZgLXwCJlIVGdCMOYGYQ_Bs7DnWN7asllGZKtJ289riITAARYXw>
+ <xmx:sp5HZjIcYzveOrTpw0NXHzUalt3QQreCouqx541tEGqP7UoaR2Gb1Q>
+ <xmx:sp5HZpyJhi-dP3S-AOmDoDjua3QeJhv5WATX3ew6xErwA8teKSawLA>
+ <xmx:sp5HZvJQWLJIPJWjBWO4NDX6el1625HdPX60axDyQ8sWYYBiUksmdg>
+ <xmx:sp5HZlw7gjcZU2BxonHhfBFPcRdhuqwpoHBP9Hr_c4V0UjgQcrtQ2OSo>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 17 May 2024 14:15:11 -0400 (EDT)
+ 17 May 2024 14:15:12 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Fri, 17 May 2024 19:14:59 +0100
-Subject: [PATCH v3 11/12] MIPS: boston: Migrate to OF_UPSTREAM
+Date: Fri, 17 May 2024 19:15:00 +0100
+Subject: [PATCH v3 12/12] mailmap: Update email for Paul Burton
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240517-boston-v3-11-1ea7d23f4a1d@flygoat.com>
+Message-Id: <20240517-boston-v3-12-1ea7d23f4a1d@flygoat.com>
 References: <20240517-boston-v3-0-1ea7d23f4a1d@flygoat.com>
 In-Reply-To: <20240517-boston-v3-0-1ea7d23f4a1d@flygoat.com>
 To: u-boot@lists.denx.de
@@ -93,13 +94,13 @@ Cc: Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@linaro.org>, Jonas Karlman <jonas@kwiboo.se>, 
  Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=11667;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2072;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=yVBbruDA8lNGPB8rgiWABPMNmC+PWguTCNEK9TcF8+k=;
- b=owGbwMvMwCHmXMhTe71c8zDjabUkhjT3ebPbAnOluZIecmUWOjkz7PbcFcH6fZrKYR+bOWdLW
- W/kHl3VUcrCIMbBICumyBIioNS3ofHigusPsv7AzGFlAhnCwMUpABNZ+pWRYVd60t5Nzzs0VL7M
- 9bmT6u64yWvzUWvHj0m55vvPqkWGXGT4w1V2rJ1n8qd0heS1zUcPNN6Y5XyouCCBz/ru6/KjOdM
- /sQAA
+ bh=qT8F2GfpoNQmppl7T68l24x0+KoFuNYyRrCngUMWAMI=;
+ b=owGbwMvMwCHmXMhTe71c8zDjabUkhjT3ebMrft/T0nw4d5ND3dyE5RnmLm63pj4td152W91Z2
+ orxau+JjlIWBjEOBlkxRZYQAaW+DY0XF1x/kPUHZg4rE8gQBi5OAZhIshgjw+MzR9hEJLyW5Tjd
+ MvTLyOnwE9so5MV0dNcCjcMSy2+8ucDwh6uxbNs2TpFeH94le6U3rFyyQePN2YCMQ0IFRq/sbil
+ ZsQIA
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -118,410 +119,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We can now boot with upstream devicetree.
+Paul had left MIPS a couple of years ago, his email address is
+no longer valid.
 
-Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
+Replace it with his kenrel.org email, which has been used in
+kernel and QEMU, in case we still want to reach him.
+
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- arch/mips/Kconfig                |   1 +
- arch/mips/dts/Makefile           |   1 -
- arch/mips/dts/boston-u-boot.dtsi |  10 ++
- arch/mips/dts/img,boston.dts     | 222 ---------------------------------------
- board/imgtec/boston/MAINTAINERS  |   1 +
- configs/boston32r2_defconfig     |   2 +-
- configs/boston32r2el_defconfig   |   2 +-
- configs/boston32r6_defconfig     |   2 +-
- configs/boston32r6el_defconfig   |   2 +-
- configs/boston64r2_defconfig     |   2 +-
- configs/boston64r2el_defconfig   |   2 +-
- configs/boston64r6_defconfig     |   2 +-
- configs/boston64r6el_defconfig   |   2 +-
- 13 files changed, 20 insertions(+), 231 deletions(-)
+ .mailmap                        | 3 ++-
+ board/imgtec/boston/MAINTAINERS | 2 +-
+ board/imgtec/malta/MAINTAINERS  | 2 +-
+ 3 files changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/arch/mips/Kconfig b/arch/mips/Kconfig
-index 748b5175b2eb..733a8de4fb83 100644
---- a/arch/mips/Kconfig
-+++ b/arch/mips/Kconfig
-@@ -146,6 +146,7 @@ config TARGET_BOSTON
- 	select SUPPORTS_CPU_MIPS64_R2
- 	select SUPPORTS_CPU_MIPS64_R6
- 	select SUPPORTS_LITTLE_ENDIAN
-+	imply OF_UPSTREAM
- 	imply BOOTSTD_FULL
- 	imply CLK
- 	imply CLK_BOSTON
-diff --git a/arch/mips/dts/Makefile b/arch/mips/dts/Makefile
-index 14fbce597b9e..5478dcd8d025 100644
---- a/arch/mips/dts/Makefile
-+++ b/arch/mips/dts/Makefile
-@@ -3,7 +3,6 @@
- dtb-$(CONFIG_TARGET_AP121) += ap121.dtb
- dtb-$(CONFIG_TARGET_AP143) += ap143.dtb
- dtb-$(CONFIG_TARGET_AP152) += ap152.dtb
--dtb-$(CONFIG_TARGET_BOSTON) += img,boston.dtb
- dtb-$(CONFIG_TARGET_MALTA) += mti,malta.dtb
- dtb-$(CONFIG_TARGET_PIC32MZDASK) += pic32mzda_sk.dtb
- dtb-$(CONFIG_TARGET_XILFPGA) += nexys4ddr.dtb
-diff --git a/arch/mips/dts/boston-u-boot.dtsi b/arch/mips/dts/boston-u-boot.dtsi
-new file mode 100644
-index 000000000000..1b0c0a289613
---- /dev/null
-+++ b/arch/mips/dts/boston-u-boot.dtsi
-@@ -0,0 +1,10 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+&plat_regs {
-+	compatible = "img,boston-platform-regs", "syscon", "simple-mfd";
-+	bootph-all;
-+};
-+
-+&clk_boston {
-+	bootph-all;
-+};
-diff --git a/arch/mips/dts/img,boston.dts b/arch/mips/dts/img,boston.dts
-deleted file mode 100644
-index c1a73963037d..000000000000
---- a/arch/mips/dts/img,boston.dts
-+++ /dev/null
-@@ -1,222 +0,0 @@
--/dts-v1/;
--
--#include <dt-bindings/clock/boston-clock.h>
--#include <dt-bindings/gpio/gpio.h>
--#include <dt-bindings/interrupt-controller/irq.h>
--#include <dt-bindings/interrupt-controller/mips-gic.h>
--
--/ {
--	#address-cells = <1>;
--	#size-cells = <1>;
--	compatible = "img,boston";
--
--	chosen {
--		stdout-path = &uart0;
--	};
--
--	cpus {
--		#address-cells = <1>;
--		#size-cells = <0>;
--
--		cpu@0 {
--			device_type = "cpu";
--			compatible = "img,mips";
--			reg = <0>;
--			clocks = <&clk_boston BOSTON_CLK_CPU>;
--		};
--	};
--
--	memory@0 {
--		device_type = "memory";
--		reg = <0x00000000 0x10000000>;
--	};
--
--	gic: interrupt-controller {
--		compatible = "mti,gic";
--
--		interrupt-controller;
--		#interrupt-cells = <3>;
--
--		timer {
--			compatible = "mti,gic-timer";
--			interrupts = <GIC_LOCAL 1 IRQ_TYPE_NONE>;
--			clocks = <&clk_boston BOSTON_CLK_CPU>;
--		};
--	};
--
--	pci0: pci@10000000 {
--		status = "disabled";
--		compatible = "xlnx,axi-pcie-host-1.00.a";
--		device_type = "pci";
--		reg = <0x10000000 0x2000000>;
--
--		#address-cells = <3>;
--		#size-cells = <2>;
--		#interrupt-cells = <1>;
--
--		interrupt-parent = <&gic>;
--		interrupts = <GIC_SHARED 2 IRQ_TYPE_LEVEL_HIGH>;
--
--		ranges = <0x02000000 0 0x40000000
--			  0x40000000 0 0x40000000>;
--
--		interrupt-map-mask = <0 0 0 7>;
--		interrupt-map = <0 0 0 1 &pci0_intc 0>,
--				<0 0 0 2 &pci0_intc 1>,
--				<0 0 0 3 &pci0_intc 2>,
--				<0 0 0 4 &pci0_intc 3>;
--
--		pci0_intc: interrupt-controller {
--			interrupt-controller;
--			#address-cells = <0>;
--			#interrupt-cells = <1>;
--		};
--	};
--
--	pci1: pci@12000000 {
--		status = "disabled";
--		compatible = "xlnx,axi-pcie-host-1.00.a";
--		device_type = "pci";
--		reg = <0x12000000 0x2000000>;
--
--		#address-cells = <3>;
--		#size-cells = <2>;
--		#interrupt-cells = <1>;
--
--		interrupt-parent = <&gic>;
--		interrupts = <GIC_SHARED 1 IRQ_TYPE_LEVEL_HIGH>;
--
--		ranges = <0x02000000 0 0x20000000
--			  0x20000000 0 0x20000000>;
--
--		interrupt-map-mask = <0 0 0 7>;
--		interrupt-map = <0 0 0 1 &pci1_intc 0>,
--				<0 0 0 2 &pci1_intc 1>,
--				<0 0 0 3 &pci1_intc 2>,
--				<0 0 0 4 &pci1_intc 3>;
--
--		pci1_intc: interrupt-controller {
--			interrupt-controller;
--			#address-cells = <0>;
--			#interrupt-cells = <1>;
--		};
--	};
--
--	pci2: pci@14000000 {
--		compatible = "xlnx,axi-pcie-host-1.00.a";
--		device_type = "pci";
--		reg = <0x14000000 0x2000000>;
--
--		#address-cells = <3>;
--		#size-cells = <2>;
--		#interrupt-cells = <1>;
--
--		interrupt-parent = <&gic>;
--		interrupts = <GIC_SHARED 0 IRQ_TYPE_LEVEL_HIGH>;
--
--		ranges = <0x02000000 0 0x16000000
--			  0x16000000 0 0x100000>;
--
--		interrupt-map-mask = <0 0 0 7>;
--		interrupt-map = <0 0 0 1 &pci2_intc 0>,
--				<0 0 0 2 &pci2_intc 1>,
--				<0 0 0 3 &pci2_intc 2>,
--				<0 0 0 4 &pci2_intc 3>;
--
--		pci2_intc: interrupt-controller {
--			interrupt-controller;
--			#address-cells = <0>;
--			#interrupt-cells = <1>;
--		};
--
--		pci2_root@0,0,0 {
--			compatible = "pci10ee,7021";
--			reg = <0x00000000 0 0 0 0>;
--
--			#address-cells = <3>;
--			#size-cells = <2>;
--			#interrupt-cells = <1>;
--
--			eg20t_bridge@1,0,0 {
--				compatible = "pci8086,8800";
--				reg = <0x00010000 0 0 0 0>;
--
--				#address-cells = <3>;
--				#size-cells = <2>;
--				#interrupt-cells = <1>;
--
--				eg20t_mac@2,0,1 {
--					compatible = "pci8086,8802";
--					reg = <0x00020100 0 0 0 0>;
--					phy-reset-gpios = <&eg20t_gpio 6 GPIO_ACTIVE_LOW>;
--				};
--
--				eg20t_gpio: eg20t_gpio@2,0,2 {
--					compatible = "pci8086,8803";
--					reg = <0x00020200 0 0 0 0>;
--
--					gpio-controller;
--					#gpio-cells = <2>;
--				};
--
--				eg20t_i2c@2,12,2 {
--					compatible = "pci8086,8817";
--					reg = <0x00026200 0 0 0 0>;
--
--					#address-cells = <1>;
--					#size-cells = <0>;
--
--					rtc@0x68 {
--						compatible = "st,m41t81s";
--						reg = <0x68>;
--					};
--				};
--			};
--		};
--	};
--
--	plat_regs: system-controller@17ffd000 {
--		compatible = "img,boston-platform-regs", "syscon";
--		reg = <0x17ffd000 0x1000>;
--		bootph-all;
--	};
--
--	clk_boston: clock {
--		compatible = "img,boston-clock";
--		#clock-cells = <1>;
--		regmap = <&plat_regs>;
--		bootph-all;
--	};
--
--	reboot: syscon-reboot {
--		compatible = "syscon-reboot";
--		regmap = <&plat_regs>;
--		offset = <0x10>;
--		mask = <0x10>;
--	};
--
--	uart0: uart@17ffe000 {
--		compatible = "ns16550a";
--		reg = <0x17ffe000 0x1000>;
--		reg-shift = <2>;
--		reg-io-width = <4>;
--
--		interrupt-parent = <&gic>;
--		interrupts = <GIC_SHARED 3 IRQ_TYPE_LEVEL_HIGH>;
--
--		clocks = <&clk_boston BOSTON_CLK_SYS>;
--
--		bootph-all;
--	};
--
--	lcd: lcd@17fff000 {
--		compatible = "img,boston-lcd";
--		reg = <0x17fff000 0x8>;
--	};
--
--	flash@18000000 {
--		compatible = "cfi-flash";
--		reg = <0x18000000 0x8000000>;
--		bank-width = <2>;
--	};
--};
+diff --git a/.mailmap b/.mailmap
+index 8049856d41c3..bb7c1c3869ab 100644
+--- a/.mailmap
++++ b/.mailmap
+@@ -87,7 +87,8 @@ This contributor prefers not to receive mails <noreply@example.com> <pali@kernel
+ This contributor prefers not to receive mails <noreply@example.com> <pali.rohar@gmail.com>
+ Patrice Chotard <patrice.chotard@foss.st.com> <patrice.chotard@st.com>
+ Patrick Delaunay <patrick.delaunay@foss.st.com> <patrick.delaunay@st.com>
+-Paul Burton <paul.burton@mips.com> <paul.burton@imgtec.com>
++Paul Burton <paulburton@kernel.org> <paul.burton@imgtec.com>
++Paul Burton <paulburton@kernel.org> <paul.burton@mips.com>
+ Piyush Mehta <piyush.mehta@amd.com> <piyush.mehta@xilinx.com>
+ Prabhakar Kushwaha <prabhakar@freescale.com>
+ Punnaiah Choudary Kalluri <punnaiah.choudary.kalluri@amd.com> <punnaiah.choudary.kalluri@xilinx.com>
 diff --git a/board/imgtec/boston/MAINTAINERS b/board/imgtec/boston/MAINTAINERS
-index 07f6156ffcbe..12e1652858bb 100644
+index 12e1652858bb..b03a6487db29 100644
 --- a/board/imgtec/boston/MAINTAINERS
 +++ b/board/imgtec/boston/MAINTAINERS
-@@ -1,6 +1,7 @@
+@@ -1,5 +1,5 @@
  BOSTON BOARD
- M:	Paul Burton <paul.burton@mips.com>
+-M:	Paul Burton <paul.burton@mips.com>
++M:	Paul Burton <paulburton@kernel.org>
  S:	Maintained
-+F:  arch/mips/dts/boston-u-boot.dtsi
+ F:  arch/mips/dts/boston-u-boot.dtsi
  F:	board/imgtec/boston/
- F:	include/configs/boston.h
- F:	configs/boston32r2_defconfig
-diff --git a/configs/boston32r2_defconfig b/configs/boston32r2_defconfig
-index 6f0024a6663d..cb5898c3cafa 100644
---- a/configs/boston32r2_defconfig
-+++ b/configs/boston32r2_defconfig
-@@ -4,7 +4,7 @@ CONFIG_SYS_MALLOC_LEN=0x40000
- CONFIG_SYS_MALLOC_F_LEN=0x400
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_SECT_SIZE=0x20000
--CONFIG_DEFAULT_DEVICE_TREE="img,boston"
-+CONFIG_DEFAULT_DEVICE_TREE="img/boston"
- CONFIG_SYS_LOAD_ADDR=0x88000000
- CONFIG_ENV_ADDR=0xBFFE0000
- CONFIG_TARGET_BOSTON=y
-diff --git a/configs/boston32r2el_defconfig b/configs/boston32r2el_defconfig
-index 71926429b051..4c603b69df7b 100644
---- a/configs/boston32r2el_defconfig
-+++ b/configs/boston32r2el_defconfig
-@@ -4,7 +4,7 @@ CONFIG_SYS_MALLOC_LEN=0x40000
- CONFIG_SYS_MALLOC_F_LEN=0x400
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_SECT_SIZE=0x20000
--CONFIG_DEFAULT_DEVICE_TREE="img,boston"
-+CONFIG_DEFAULT_DEVICE_TREE="img/boston"
- CONFIG_SYS_LOAD_ADDR=0x88000000
- CONFIG_ENV_ADDR=0xBFFE0000
- CONFIG_TARGET_BOSTON=y
-diff --git a/configs/boston32r6_defconfig b/configs/boston32r6_defconfig
-index 4335d04b39eb..17f7c4364a03 100644
---- a/configs/boston32r6_defconfig
-+++ b/configs/boston32r6_defconfig
-@@ -4,7 +4,7 @@ CONFIG_SYS_MALLOC_LEN=0x40000
- CONFIG_SYS_MALLOC_F_LEN=0x400
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_SECT_SIZE=0x20000
--CONFIG_DEFAULT_DEVICE_TREE="img,boston"
-+CONFIG_DEFAULT_DEVICE_TREE="img/boston"
- CONFIG_SYS_LOAD_ADDR=0x88000000
- CONFIG_ENV_ADDR=0xBFFE0000
- CONFIG_TARGET_BOSTON=y
-diff --git a/configs/boston32r6el_defconfig b/configs/boston32r6el_defconfig
-index b859a4f198ba..e662d167fe3d 100644
---- a/configs/boston32r6el_defconfig
-+++ b/configs/boston32r6el_defconfig
-@@ -4,7 +4,7 @@ CONFIG_SYS_MALLOC_LEN=0x40000
- CONFIG_SYS_MALLOC_F_LEN=0x400
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_SECT_SIZE=0x20000
--CONFIG_DEFAULT_DEVICE_TREE="img,boston"
-+CONFIG_DEFAULT_DEVICE_TREE="img/boston"
- CONFIG_SYS_LOAD_ADDR=0x88000000
- CONFIG_ENV_ADDR=0xBFFE0000
- CONFIG_TARGET_BOSTON=y
-diff --git a/configs/boston64r2_defconfig b/configs/boston64r2_defconfig
-index 70354f117169..bf5a3ead3646 100644
---- a/configs/boston64r2_defconfig
-+++ b/configs/boston64r2_defconfig
-@@ -4,7 +4,7 @@ CONFIG_SYS_MALLOC_LEN=0x40000
- CONFIG_SYS_MALLOC_F_LEN=0x400
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_SECT_SIZE=0x20000
--CONFIG_DEFAULT_DEVICE_TREE="img,boston"
-+CONFIG_DEFAULT_DEVICE_TREE="img/boston"
- CONFIG_SYS_LOAD_ADDR=0xffffffff88000000
- CONFIG_ENV_ADDR=0xFFFFFFFFBFFE0000
- CONFIG_TARGET_BOSTON=y
-diff --git a/configs/boston64r2el_defconfig b/configs/boston64r2el_defconfig
-index eafb8c67ba7a..de22344b5bb6 100644
---- a/configs/boston64r2el_defconfig
-+++ b/configs/boston64r2el_defconfig
-@@ -4,7 +4,7 @@ CONFIG_SYS_MALLOC_LEN=0x40000
- CONFIG_SYS_MALLOC_F_LEN=0x400
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_SECT_SIZE=0x20000
--CONFIG_DEFAULT_DEVICE_TREE="img,boston"
-+CONFIG_DEFAULT_DEVICE_TREE="img/boston"
- CONFIG_SYS_LOAD_ADDR=0xffffffff88000000
- CONFIG_ENV_ADDR=0xFFFFFFFFBFFE0000
- CONFIG_TARGET_BOSTON=y
-diff --git a/configs/boston64r6_defconfig b/configs/boston64r6_defconfig
-index a6c89278512a..bb339cfd5dbe 100644
---- a/configs/boston64r6_defconfig
-+++ b/configs/boston64r6_defconfig
-@@ -4,7 +4,7 @@ CONFIG_SYS_MALLOC_LEN=0x40000
- CONFIG_SYS_MALLOC_F_LEN=0x400
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_SECT_SIZE=0x20000
--CONFIG_DEFAULT_DEVICE_TREE="img,boston"
-+CONFIG_DEFAULT_DEVICE_TREE="img/boston"
- CONFIG_SYS_LOAD_ADDR=0xffffffff88000000
- CONFIG_ENV_ADDR=0xFFFFFFFFBFFE0000
- CONFIG_TARGET_BOSTON=y
-diff --git a/configs/boston64r6el_defconfig b/configs/boston64r6el_defconfig
-index 6cc227600df1..260f6dfb3583 100644
---- a/configs/boston64r6el_defconfig
-+++ b/configs/boston64r6el_defconfig
-@@ -4,7 +4,7 @@ CONFIG_SYS_MALLOC_LEN=0x40000
- CONFIG_SYS_MALLOC_F_LEN=0x400
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_SECT_SIZE=0x20000
--CONFIG_DEFAULT_DEVICE_TREE="img,boston"
-+CONFIG_DEFAULT_DEVICE_TREE="img/boston"
- CONFIG_SYS_LOAD_ADDR=0xffffffff88000000
- CONFIG_ENV_ADDR=0xFFFFFFFFBFFE0000
- CONFIG_TARGET_BOSTON=y
+diff --git a/board/imgtec/malta/MAINTAINERS b/board/imgtec/malta/MAINTAINERS
+index b1cf297f4fac..252c5e45ab56 100644
+--- a/board/imgtec/malta/MAINTAINERS
++++ b/board/imgtec/malta/MAINTAINERS
+@@ -1,5 +1,5 @@
+ MALTA BOARD
+-M:	Paul Burton <paul.burton@mips.com>
++M:	Paul Burton <paulburton@kernel.org>
+ S:	Maintained
+ F:	board/imgtec/malta/
+ F:	include/configs/malta.h
 
 -- 
 2.34.1
