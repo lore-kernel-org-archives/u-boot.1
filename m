@@ -4,81 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EC26C25B79
-	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 15:19:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77DE2C04FFE
+	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 15:45:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA8E68818C;
-	Fri, 17 May 2024 17:19:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 45B9988001;
+	Fri, 17 May 2024 17:45:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jcOg7mwO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qLiy8lWG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6769A881A9; Fri, 17 May 2024 17:19:02 +0200 (CEST)
-Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
- [IPv6:2607:f8b0:4864:20::835])
+ id 758E488231; Fri, 17 May 2024 17:45:56 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5849487F3F
- for <u-boot@lists.denx.de>; Fri, 17 May 2024 17:19:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3CCEC87ECC
+ for <u-boot@lists.denx.de>; Fri, 17 May 2024 17:45:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x835.google.com with SMTP id
- d75a77b69052e-43df7f42ac9so4840351cf.2
- for <u-boot@lists.denx.de>; Fri, 17 May 2024 08:19:00 -0700 (PDT)
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-6f0ecec6411so1032262a34.1
+ for <u-boot@lists.denx.de>; Fri, 17 May 2024 08:45:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715959139; x=1716563939; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=XmRlqMKnc/68sCyHmegaAl6GMTxnRvIJKMvNMfgCxfQ=;
- b=jcOg7mwOmS2FpszU4fnVXtSlMxnmpHOnkMvkcoQKbzkmHw/NxWJVLGc36s7SMMtIUE
- xnu5dkaNEvkG9ON/K8Y6jshz/dYTn92xcgofJ4B39ZQjQV9MaScuxbG4PuWywNfU4SOU
- Pp4KJXnoQbNfRdkNVWLS9HUtB6IvgGKM72OHY=
+ d=konsulko.com; s=google; t=1715960753; x=1716565553; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=yi3n3U3657WepjSlq+M0prBCnyypkRXNmjJv7GaN2VU=;
+ b=qLiy8lWGKh78cePg0Wy5dlmTYGIz66civV3QfsZ1wTC8TD25nHfWHh6V060YVqv+1+
+ PUyx03duXRHRdUc1PRvS/PKe9sQm5hqwQJUiZWAJOqb09D4pHs97zhIABzMFetWxYztk
+ 2gx/YoaxV5w7YdNvaASHLeEDxs98v1qqbM9jQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715959139; x=1716563939;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XmRlqMKnc/68sCyHmegaAl6GMTxnRvIJKMvNMfgCxfQ=;
- b=DzEhNNKD8smaATnHFWxMEGsNU6EtOnv512bcmWPlUj4yYYaguX9CXKPhxCF/KDo72o
- lIoVlMeLzNR9f91wZ8Vro9QhhuCEReKyANeW9bsFHR0vnTnHBXECpMfwLj3HucxFWJRQ
- AtsEur6sgFSM2bWf4rSgQLSyXxGpiWcujIZGryJHGh+4e53MeYDJzThuuBs9cNgZNY9d
- iTN6BhhlzPQUl+ithXwJcSE9t5N/1fhhwnS5eUFoP41Oyx2gOAcIwSdYUOgXqW3minzM
- N5sz15yq9wuGzJuw0hRQuwNAklvOXLDgBKCWzV5iOK67zp81Wy6/ekYqOnkKHt/PnqfX
- 68WA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVMFdplTw3PP72GgVkPyf2XiebhTU8vqXukpWmel22mCMAYXDGRt3Wfy4Xr5+QtWgLgtdtbI1RxR1O8aGQSea2FOTPQ1g==
-X-Gm-Message-State: AOJu0YxAG2VJpwGRIVR/A3YhvxQNmS1O1cICYF+carTIF88fDW7q1opy
- c25p/KROrHsUDDlxglT3Mc8l1jZeD+rk2Gr1LEQD7EUDi+K0xRUqnQDm+2jLk90=
-X-Google-Smtp-Source: AGHT+IGf0qJKtBHCavlGtiuYNAR16CeE2jfT3X88zSGEVRTv7mR4knQUQLDbukIvyALEl8ng9iFfcg==
-X-Received: by 2002:a05:622a:1906:b0:43a:ed55:f3a9 with SMTP id
- d75a77b69052e-43dfdad7b2amr300577851cf.30.1715959138987; 
- Fri, 17 May 2024 08:18:58 -0700 (PDT)
-Received: from bill-the-cat ([187.144.98.216])
+ d=1e100.net; s=20230601; t=1715960753; x=1716565553;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=yi3n3U3657WepjSlq+M0prBCnyypkRXNmjJv7GaN2VU=;
+ b=Rvb+ua1j8yTULhCp/P6XiggQsedyTlUA/+aNqoeo7qKuqViO+LPFgKgt85onyDHuL0
+ HraFXVoPrSy+YACF1IwuBEIMiGyJYAJQ4EskIK/BxZ3brYRDL6XMFMxVKjwa+AbDq1OK
+ U2DZvs3LwlUfWPyJcPSC+TblMGcX9zmJxSJ/PhRChNDKawRNYyNZfqpn+2vlofl4gnzQ
+ MEj8P5a9zEY3TgAoG9vl+RGrGl4gVnkqnC9JeYIRbkaMLbZoXu+4pL1Lwnr5a41vnKVx
+ OwxyHM11zxfjFmiow6hnIpKjhPSR63XTxJV0CRjrHPZGx5PZgz9drz9tVrYCXldt7viS
+ WdPA==
+X-Gm-Message-State: AOJu0Yy9qQR510VEf9+DHY5LQfkCD7B2T/L4IuMN5xpFgWgJ3+kO2Eku
+ 0BPM91IugkAnnvsho2eTuixL4SStDmhtKoQGfu0ncuDPZHPc5bs3+O5UNeFbtveCTx6l9uEHBlc
+ iX8w=
+X-Google-Smtp-Source: AGHT+IELOrLdBwZB07zN646TPh0RIJi++ytPcy6TBr5y64IO28PiXHOvo7dmqql2f2/PjklmyvqLrA==
+X-Received: by 2002:a9d:5d19:0:b0:6f0:e5d4:ccf3 with SMTP id
+ 46e09a7af769-6f0e91336afmr23377883a34.15.1715960752615; 
+ Fri, 17 May 2024 08:45:52 -0700 (PDT)
+Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-43e2c8d3d45sm45940231cf.47.2024.05.17.08.18.57
+ 6a1803df08f44-6a35384037esm33953326d6.73.2024.05.17.08.45.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 May 2024 08:18:58 -0700 (PDT)
-Date: Fri, 17 May 2024 09:18:55 -0600
+ Fri, 17 May 2024 08:45:52 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Andrew Davis <afd@ti.com>, Bryan Brattlof <bb@ti.com>,
- Jesse Taube <mr.bossman075@gmail.com>,
- "Leon M . Busch-George" <leon@georgemail.eu>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] Makefile: add build-sandbox*/ to mrproper target
-Message-ID: <20240517151855.GK2568172@bill-the-cat>
-References: <20240517151534.65242-1-heinrich.schuchardt@canonical.com>
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [v2 1/2] doc: process.rst: Use subsubheading for "Phases of the
+ Development Process"
+Date: Fri, 17 May 2024 09:45:48 -0600
+Message-Id: <20240517154549.1020534-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="/4SBospc4SG5Rbq5"
-Content-Disposition: inline
-In-Reply-To: <20240517151534.65242-1-heinrich.schuchardt@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,56 +87,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+These sections which talk about the different phases of the development
+process should be using the subsubheading identifier.
 
---/4SBospc4SG5Rbq5
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Changes in v2:
+None
 
-On Fri, May 17, 2024 at 05:15:34PM +0200, Heinrich Schuchardt wrote:
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+---
+ doc/develop/process.rst | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-> make mrproper should remove all build artefacts.
->=20
-> Running make tests without deleting build-sandbox led to an error
->=20
->     *** No rule to make target '../include/common.h',
->     needed by 'include/config/auto.conf'.
->=20
-> on my machine.
->=20
-> Let's add the build-sandbox*/ directories to the mrproper target.
->=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  Makefile | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+diff --git a/doc/develop/process.rst b/doc/develop/process.rst
+index 92477d05dd85..a66540a698c1 100644
+--- a/doc/develop/process.rst
++++ b/doc/develop/process.rst
+@@ -34,7 +34,7 @@ It is followed by a *Stabilization Period*.
+ The end of a Release Cycle is marked by the release of a new U-Boot version.
+ 
+ Merge Window
+-------------
++^^^^^^^^^^^^
+ 
+ The Merge Window is the period when new patches get submitted (and hopefully
+ accepted) for inclusion into U-Boot mainline. This period lasts for 21 days (3
+@@ -44,7 +44,7 @@ This is the only time when new code (like support for new processors or new
+ boards, or other new features or reorganization of code) is accepted.
+ 
+ Twilight Time
+--------------
++^^^^^^^^^^^^^
+ 
+ Usually patches do not get accepted as they are - the peer review that takes
+ place will usually require changes and resubmissions of the patches before they
+@@ -65,13 +65,13 @@ the Merge Window does not preclude patches that were already posted from being
+ merged for the upcoming release.
+ 
+ Stabilization Period
+---------------------
++^^^^^^^^^^^^^^^^^^^^
+ 
+ During the Stabilization Period only patches containing bug fixes get
+ applied.
+ 
+ Corner Cases
+-------------
++^^^^^^^^^^^^
+ 
+ Sometimes it is not clear if a patch contains a bug fix or not.
+ For example, changes that remove dead code, unused macros etc. or
+-- 
+2.34.1
 
-I don't believe it's the right place to remove build directories. This
-is also incomplete as it wouldn't clean up other platforms that can be
-built, and of course it cannot handle out of tree build directories. All
-build directories regardless of where they are need to be removed as
-that particular change breaks re-using build directories before/after
-it.
-
---=20
-Tom
-
---/4SBospc4SG5Rbq5
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZHdV8ACgkQFHw5/5Y0
-tywb3Av/U2pveAUfd/YtrcTrC9eqOv05KX4ft16wrbwPcO7Qd4sxUoZFEFAqOl/f
-ay5fvCP/3iJQP75qL/P+rygsEsLYb2dgfU/Nt08UE+iZ24hOyMkvEeWjrk91kiXY
-vDuXbu2d0IjQ/uBYjwDwyHY9mh5klgn50Pr66zEyxn/5iA/r5PG9qrsxKighG29y
-N7OJM8bIHVKzqylzhgKR/fkSw/ILu9Cge3L6PV3lfmIr+S7GS4/zb1VZYLs2aekg
-2PulU9ZKTXAeWgSpd/WCYkkVDa1yyIlxWFjv3o3+XasKXjTxoK2K+UmgcxjgeJxG
-uLudVwfdFIlZCTBJTPob6jkOQeAmFkRnKjoyPGr87FUL3VfAEthPOpClJHcCgt2k
-o7vW6LBDPkiQKVXNecE20GxsOwTTsL0BqwvMumzH30q81MmDj3LaPgaop3+F3XjU
-digBNiwUBVv2rvqLj7acD0vAoFChM19Ubkm97yjcHj5H+pa9awOLSIrwaEuBj2YZ
-I/xzx74k
-=NODq
------END PGP SIGNATURE-----
-
---/4SBospc4SG5Rbq5--
