@@ -4,76 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 149CBC25B79
-	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 15:46:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D15DC04FFE
+	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 15:51:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C319988253;
-	Fri, 17 May 2024 17:45:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A914888253;
+	Fri, 17 May 2024 17:51:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="i39PxvN7";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="tiqvgaN9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F407D87ECC; Fri, 17 May 2024 17:45:56 +0200 (CEST)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 827C188263; Fri, 17 May 2024 17:51:36 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D983688001
- for <u-boot@lists.denx.de>; Fri, 17 May 2024 17:45:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 86A2087ED3
+ for <u-boot@lists.denx.de>; Fri, 17 May 2024 17:51:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-69b514d3cf4so8041476d6.0
- for <u-boot@lists.denx.de>; Fri, 17 May 2024 08:45:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1715960753; x=1716565553; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=k+7e7rwitc8Rh83GYr+WvJx8rbZDtTT1AJOIbD6kJv0=;
- b=i39PxvN7R/aoW5t+B1FSbYi/ZkJY16iJ+98zl2sO5K8ZzJ44kjCR3CKUzQ3shJSBY9
- mPg3g5UeA0CTJjJWDi3AWoHQfPu05xJRBUgS8f8qRbmGBOCTylIhukVokFabASlkJf+q
- xQmMRTK4Gba4JYJFXmnx3ocEvmwg/Iqh/Btp8=
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id B157C400F6
+ for <u-boot@lists.denx.de>; Fri, 17 May 2024 15:51:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1715961093;
+ bh=pI6TMwC82RQUezDZ67xFWmqn1v49m9Ynh6CEUdS5Cf4=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=tiqvgaN9gyQ3x/kl1tRC0160PrVuDhQt0jluplyChfLnX443qdY0FtRbHhDmnfykl
+ ak9rx24yYMHBPUq9xPcRGbFqVCcAuVZ87B56LJMVS6QHiQQQXW0D03ntH6+onNEVAR
+ p8+BB2JWkb0jzeQf5NUQOA4Fio+pII1EEsZCFZD6PI+pz2zrCUDizBdBVW9enFg4NK
+ 0QvFU6KMMRqwxpz7vTM7a5hf6s62P+Oy0iGVFSVk3WtKhmAoB3t40Clcfco8s4OcKZ
+ APpc05uEeTFxEYYPdAPjY2zAZQMUYjB9BA7qQ6nRC5nQz34BxUHPohmsFB9zEtlOUn
+ I95dMRSbZSPQg==
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-34da03e19beso5839701f8f.1
+ for <u-boot@lists.denx.de>; Fri, 17 May 2024 08:51:33 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715960753; x=1716565553;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=k+7e7rwitc8Rh83GYr+WvJx8rbZDtTT1AJOIbD6kJv0=;
- b=FvrCT8DCFp19aAMn49VcI9ZqIWLb4h+Yi44Jtvu/J3TepUKfNjFZe2/0XfBuClyyIo
- hWR+qCmFqjmwPIZjQ1ENKiK+giyzA+l1+/2GgcL14G4lcvMV06C6ld4EuiWelAJA3Q0/
- P70XpJqp4DDjptOLyynKyWtcaqbnK4XNEBoqKlGEEfBEwNWsvyH4SFxBfoANbyTZMJbR
- vE1P93u5lJ01pD7dx0FkaTKYdsTH21/mDfseEou3GlSGoNzvI4zVcGaxoXLl/Ez3+yET
- MAam5pqCesek/cTfNkSlZh0iJuN8png3nTAR/Y55/DmIzgFZ88YC4zOkKByolgzwWIxT
- Blvw==
-X-Gm-Message-State: AOJu0YyrRuZepHzujRT5mM4bbhwlC9pJ92kZL6mJIwGBORq2GiW6qgD6
- ToJFnIKoDTixC9DBvanTvnccKonc+abHzrRH5omsLKUOT9sWZIXbXKDGYMugndjRh7cUHlbm2gl
- ml6U=
-X-Google-Smtp-Source: AGHT+IEfTlFzH1UMNf9z/zK59NV2T65oqcDB8nlNMDn9eTQLob6hHl+SGQCstC7W000C8Tj+lbESrg==
-X-Received: by 2002:a05:6214:4506:b0:69b:bcc7:f823 with SMTP id
- 6a1803df08f44-6a16814eee2mr331470176d6.14.1715960753573; 
- Fri, 17 May 2024 08:45:53 -0700 (PDT)
-Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6a35384037esm33953326d6.73.2024.05.17.08.45.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 May 2024 08:45:53 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: [v2 2/2] doc: process.rst: Document device tree resync rules
-Date: Fri, 17 May 2024 09:45:49 -0600
-Message-Id: <20240517154549.1020534-2-trini@konsulko.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240517154549.1020534-1-trini@konsulko.com>
-References: <20240517154549.1020534-1-trini@konsulko.com>
+ d=1e100.net; s=20230601; t=1715961093; x=1716565893;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=pI6TMwC82RQUezDZ67xFWmqn1v49m9Ynh6CEUdS5Cf4=;
+ b=o8mFw60LkOMc548eoTpVEAXJow+rt8SPpoH5mn6rsLn6PytMGRkSdDQZYkKoiFis7x
+ b+wakTbwNCVYtqIHjKPEh+Y/1IwCZcX6Vyq1q8ixhg07tLQuLDEop0qVgGS+irKfBbU8
+ wrx774Yyo59c8Puouy9zrrxjLIZXzYtEV66D9ljjUvgqhq2atU0YC7SWSy+bVTU3rA6f
+ bX0oOCWUaSIArgysfpe7FOhpn6c5o83L/AyVv6aVx2CQWnCquPjXIVhPGGpUwSY3r60w
+ 0fmr2yJ5RAW4xu/TISBmF9zpA0kn59sn8AyM3wk1pn52MS73O7UAy/fQakq8UQxfGjXx
+ sIWg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXEEBBzJrzA158kPfB7iqcqLuGt2ImXQdRr2lVgyfrIV2qzLfLKWc1cjmfrXIB+luI/3h+ET7pI01t03DpthMm/OI6C8A==
+X-Gm-Message-State: AOJu0YwHwT5DEyNjILFNgU6LyoNvnpm5LVvkleeksmsnQs9f1SJb5lD7
+ Wxuk/WlEX0zWKgDfaMBjOTBjvQJmaCwBprnBHke2MidFgwZve3/FEvh/v5PwOcdMy+uyzV6+AuZ
+ 1eW5dkq34KQ4h3E1OKaNTarPefdSt26kaDWAObiMc5FS6J6ifhb5vbCs2w57k6vW1rlM=
+X-Received: by 2002:a05:600c:1c88:b0:41b:855b:5d26 with SMTP id
+ 5b1f17b1804b1-41fea927e30mr162894385e9.2.1715961092879; 
+ Fri, 17 May 2024 08:51:32 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFefxWDC8rV2TvPoQ2X6XaLqO96s7p25HKsql8E4H8jQEcStPOX5hH/A+q4YxzXdWi4lOXZlg==
+X-Received: by 2002:a05:600c:1c88:b0:41b:855b:5d26 with SMTP id
+ 5b1f17b1804b1-41fea927e30mr162894195e9.2.1715961092530; 
+ Fri, 17 May 2024 08:51:32 -0700 (PDT)
+Received: from [172.33.107.111] (18.pool62-36-37.static.orange.es.
+ [62.36.37.18]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-41facbd295fsm330389535e9.36.2024.05.17.08.51.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 17 May 2024 08:51:31 -0700 (PDT)
+Message-ID: <f055664e-5d3b-45eb-b6e9-d0321058e76c@canonical.com>
+Date: Fri, 17 May 2024 17:51:29 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] Makefile: add build-sandbox*/ to mrproper target
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Andrew Davis <afd@ti.com>,
+ Bryan Brattlof <bb@ti.com>, Jesse Taube <mr.bossman075@gmail.com>,
+ "Leon M . Busch-George" <leon@georgemail.eu>, u-boot@lists.denx.de
+References: <20240517151534.65242-1-heinrich.schuchardt@canonical.com>
+ <20240517151855.GK2568172@bill-the-cat>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240517151855.GK2568172@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,44 +109,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Document the logic of when we do a full resync of the device trees used
-by OF_UPSTREAM as well as that cherry-picking is allowed as needed.
+On 5/17/24 17:18, Tom Rini wrote:
+> On Fri, May 17, 2024 at 05:15:34PM +0200, Heinrich Schuchardt wrote:
+> 
+>> make mrproper should remove all build artefacts.
+>>
+>> Running make tests without deleting build-sandbox led to an error
+>>
+>>      *** No rule to make target '../include/common.h',
+>>      needed by 'include/config/auto.conf'.
+>>
+>> on my machine.
+>>
+>> Let's add the build-sandbox*/ directories to the mrproper target.
+>>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>>   Makefile | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> I don't believe it's the right place to remove build directories. This
+> is also incomplete as it wouldn't clean up other platforms that can be
+> built, and of course it cannot handle out of tree build directories. All
+> build directories regardless of where they are need to be removed as
+> that particular change breaks re-using build directories before/after
+> it.
+> 
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-Changes in v2:
-- Address Quentin's feedback
+My expectation is that after 'make mrproper; git clean -df' I have no 
+build artifacts left over.
 
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
----
- doc/develop/process.rst | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+In .gitignore I find '/build*'. This results in 'git clean -df' not 
+removing the the build directories either.
 
-diff --git a/doc/develop/process.rst b/doc/develop/process.rst
-index a66540a698c1..0542b3fc1245 100644
---- a/doc/develop/process.rst
-+++ b/doc/develop/process.rst
-@@ -108,6 +108,19 @@ Differences to the Linux Development Process
-   In U-Boot, ``"-rc1"`` will only be released after all (or at least most of
-   the) patches that were submitted during the merge window have been applied.
- 
-+Resyncing of the device tree subtree
-+------------------------------------
-+
-+As explained in :doc:`devicetree/control` some platforms make use of device tree
-+files which come from a git subtree that mirrors the Linux Kernel sources
-+itself. For our purposes, we only track releases and not release candidates for
-+merging in our tree. These merges follow the normal merge window rules.
-+
-+In the case of specific changes, such as bug fixes or new platform support,
-+these can be "cherry-picked" and are subject to the normal merge rules. For
-+example, a bug fix can come in later in the window but a full re-sync only
-+happens within the merge window itself.
-+
- .. _custodians:
- 
- Custodians
--- 
-2.34.1
+Tom, what is your suggestion?
 
+Best regards
+
+Heinrich
