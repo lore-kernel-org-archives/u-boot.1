@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0DD7C25B78
-	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 18:15:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40421C04FFE
+	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 18:15:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26C3B8850B;
-	Fri, 17 May 2024 20:14:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 93B3788544;
+	Fri, 17 May 2024 20:15:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="IB9/U6YX";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="WO7p7DJD";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="fxVlkZlU";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="EqBR3QnA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D06088518; Fri, 17 May 2024 20:14:58 +0200 (CEST)
-Received: from fout1-smtp.messagingengine.com (fout1-smtp.messagingengine.com
- [103.168.172.144])
+ id 91F128853E; Fri, 17 May 2024 20:14:59 +0200 (CEST)
+Received: from fhigh7-smtp.messagingengine.com
+ (fhigh7-smtp.messagingengine.com [103.168.172.158])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A96D38852B
- for <u-boot@lists.denx.de>; Fri, 17 May 2024 20:14:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3649288541
+ for <u-boot@lists.denx.de>; Fri, 17 May 2024 20:14:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailfout.nyi.internal (Postfix) with ESMTP id 71D2E13814F5;
- Fri, 17 May 2024 14:14:54 -0400 (EDT)
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id 5250C11400BD;
+ Fri, 17 May 2024 14:14:56 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Fri, 17 May 2024 14:14:54 -0400
+ by compute1.internal (MEProxy); Fri, 17 May 2024 14:14:56 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm1; t=1715969694;
- x=1716056094; bh=FHOkLkDoexiMQ/U2G1EFu1LKxC7hFW6/lzB9xBeafnY=; b=
- IB9/U6YX/YiAbLGHKsh5KN1LgbYyn618FDEU2GC0meTOXP9iLgVQxsTsaN2ib5Jb
- 5jN6hav48Yetox8c9XjHYOkfPPfzOi5IO2CFtJ5uQlcgqkwaMA7uL9m+6j3tSS/r
- Uiu8BGASpzh802g3I60E5KNeseD09S2E06b0LFmMzWHfr4DWQyC0QiWAE0RWOg26
- P4N01cUhq0V2jRa92FegO4/c7exD3CW64swQq6MOwlZjm1Rn2svHnOvERROHrpIJ
- bIm4brfILQJIDiNSUCOM/DQil9X9kaSmWsgt8QfKoe2lGEAy5DzYw6Wt2mHqzdr0
- ciAi1TiLpyta2Jfdj+IVBg==
+ :references:reply-to:subject:subject:to:to; s=fm1; t=1715969696;
+ x=1716056096; bh=A09TdZSjf/AHnbMvBFi9xIa9m13gd1pgvqRU37n3YsQ=; b=
+ fxVlkZlUeALuW5nE/FS7+6FvtjFuk7oEgfWFr1uKVVGaK84zS4/BtqTCXEWzZmvh
+ IYfW1GGZkjqKQrcJgQN0Ho138pBq4Juv7PRerau/bXDSWge9O2qYhgoCTgqbULr+
+ 5GSYE8HvV3jV4RrM3DaRhPFQh2y5S2nekZlUJJ0sqN6bc3DdSWIIXlDlSDMf+uww
+ kLkxroNEcHWROKbIIP651a8OZhh7hWO0SMPKiBXPe6VmBYP0aQ0Zh/VmFQ1zYYhw
+ SCu4EUpHhe4gCD/s1/78PG9/fzVG35BljOPXJP2QyJDgqb6oD15qTsBLOc3kgjK6
+ olGULlRSYJPm5KJXA8lxpA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715969694; x=
- 1716056094; bh=FHOkLkDoexiMQ/U2G1EFu1LKxC7hFW6/lzB9xBeafnY=; b=W
- O7p7DJDfkXRFdLkV/8PZFJIjryjsK/pMcDcVsiMAjIsEmq16RGga1I0bEz4sdFbd
- bNyCucbuXjjBb4w36SrO2jD6eoMWYoS57PVDspxfZRwWb2r9U6bSqB9efsjkqLrp
- U8qDyHtlSYvUqhoSPXDF8TIMt6C4LR9g5G6nnZK9P9wFkQpHrvWaEXU9PPylojWL
- 1EjAsPN4dOoy6jV5ENYvKl6mb/2pbsM/zCNxnmrdrX/xk55cmYLImAjabhDf46pF
- uH3XA2KuK6ABlXFCAnBu9KGi2PBcU6ZDmwFS3xnkQIlwYQYp7bTZJZz1ZjoDIUC6
- NhLrL7nJytcPbRckl4yxQ==
-X-ME-Sender: <xms:np5HZqToJDXpOLm2cTRqSuEMh8PcIucDrkFtS6NHHfC7lZdRpglI9g>
- <xme:np5HZvyB4MCApUeJ0DNEQEVHyD2QCwvJW5dTUk8nZIe5KJGwpYYvrY_2TP1MBa4w2
- EKalLOMSi9QQ8KM8MI>
-X-ME-Received: <xmr:np5HZn0YECiGC098As5kwXBqQfxOHALLXOHu4Fc7Xo5OvxkeZlDNv-c>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715969696; x=
+ 1716056096; bh=A09TdZSjf/AHnbMvBFi9xIa9m13gd1pgvqRU37n3YsQ=; b=E
+ qBR3QnAr0Jz9K1jxA8wzctKx5MZNh14fY8Uu5HTv2d1eGp9tNgHtRI0xcXOlf3af
+ vqxxnSDYib3UtKcHYqoryC1sISv4cuDu1duqJg7K0mUQqkGw+PPNxRZ7Jac+Ut8o
+ UZifcQjTa1pXwt0Xnn6RqSmMphyMtsdwLXWzHUdxpTiMOpxE2pwLWOSdN+tHE1U3
+ oVejMo0zvvWAIviHpKyTQwPBc/0dzBv5X3Ewf7Ry7t7MQ/uO6AMWaI77qiPV60or
+ VIigr8+IyOYtK3SOteNHPe7MYkgpHTTbJX9iWsPFFXQXHCWvEWBDbX577E9PmE53
+ sr0HrO2kvmX4rZrtgWilQ==
+X-ME-Sender: <xms:oJ5HZmRlc1VF0oC-nlGxiw8VH7hk7D0IkpJFJNE2qUOUUTAPXPEB-w>
+ <xme:oJ5HZrwfYIdhsZkYxsBwV76LLuo9dIlKlQeMO0U_BbrzrjNyuNso0iom0yBEcJWMI
+ bcJmtVeaPzL4eI3Shw>
+X-ME-Received: <xmr:oJ5HZj3DIEHl_9tXotzB4GixXZLxl1vNfzC4QQ4qWIvO3KgwxqR9JO4>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehgedgvdelucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
@@ -68,21 +68,22 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehgedgvdelucetufdoteggod
  cuggftrfgrthhtvghrnhepvdekiefhfeevkeeuveetfeelffekgedugefhtdduudeghfeu
  veegffegudekjeelnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilh
  hfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:np5HZmAn-sJN5_sKYmD6lqmCJ-5AdrqtksIfBdG04tFz90-7lzyGtQ>
- <xmx:np5HZjjIpox4pZR6pQCvC6UnhFqnGNPq-GsjLNE-Ass9F2UQaT-AZw>
- <xmx:np5HZiosbF84oCUuzZRIhdiqr6CtfVOeDoqNN19fJXFnq93PMQFfFA>
- <xmx:np5HZmgbEmYGPU_W09WbWee269syvimCwXC6RfcwU5SzjZOM-_ExUQ>
- <xmx:np5HZmqdbRSbeteNL6gjIcN3BB0jnDq1dyT3aB0CZE79srlyOnxjMuds>
+X-ME-Proxy: <xmx:oJ5HZiBbe1Gg7VOXkxLAWcyNLzwzDs4XeJ3DI_F1AIUvXO3RczShaQ>
+ <xmx:oJ5HZvhQKIP1MYQfidOHFlVY7o7cZnv8Z14lmAkF5Gsj4mYhYFE03g>
+ <xmx:oJ5HZurlb0b57zmsubvJ4U9adbVAIvPxrPOzaGXY2cwQKOLBfAorbg>
+ <xmx:oJ5HZiiyitjSaOi_BOWgyHMlbYGXQP0TTe4uzfEEgkrIjArjA5ke6A>
+ <xmx:oJ5HZipH0-7ESMtycWVzqfPkz4UBdj4znbJU-fIu93PS9JcG0wzfoqNH>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 17 May 2024 14:14:52 -0400 (EDT)
+ 17 May 2024 14:14:54 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Fri, 17 May 2024 19:14:49 +0100
-Subject: [PATCH v3 01/12] pci: xilinx: Handle size of ecam region properly
+Date: Fri, 17 May 2024 19:14:50 +0100
+Subject: [PATCH v3 02/12] pci: auto: Reduce bridge mem alignment boundary
+ for boston
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240517-boston-v3-1-1ea7d23f4a1d@flygoat.com>
+Message-Id: <20240517-boston-v3-2-1ea7d23f4a1d@flygoat.com>
 References: <20240517-boston-v3-0-1ea7d23f4a1d@flygoat.com>
 In-Reply-To: <20240517-boston-v3-0-1ea7d23f4a1d@flygoat.com>
 To: u-boot@lists.denx.de
@@ -93,13 +94,13 @@ Cc: Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@linaro.org>, Jonas Karlman <jonas@kwiboo.se>, 
  Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3688;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3164;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=8jtahATj+J0VxXyy7U3lsuyxhxEVDaJ4JLco4h9mYN8=;
- b=owGbwMvMwCHmXMhTe71c8zDjabUkhjT3ebO7f1bO1EiesdFaPqvZSb6K525IiMnlWm2Gs26CE
- XNmPVvTUcrCIMbBICumyBIioNS3ofHigusPsv7AzGFlAhnCwMUpABNhWcLIMOlhSyjHoXNsVQ9Y
- o6uXi7nN2s2/qeHdVP9PVm5Fr2b11DIy/FvJJ5qwSEKFzZNloxvbRD6X9K1iQku8fzzary+5uU+
- cCwA=
+ bh=47N9g7qZS/9fuK9fjUgi3DPCL1HeIrDjoEfRwEqV7nU=;
+ b=owGbwMvMwCHmXMhTe71c8zDjabUkhjT3ebMXn9a+fK/xvJhDRp8ak5Hu9nNFq/gOLVEwfmD2U
+ PjDOtZLHaUsDGIcDLJiiiwhAkp9GxovLrj+IOsPzBxWJpAhDFycAjCRxX8Y/ufG7hdWr2OMiq5V
+ E9ZQ5Zm+2If5p/mdWrvu+4crnp2/cpqRYfpxl8UTA/wWHDJnnLXv66xvwtK1d/duX3kxY6GOt1J
+ zLSMA
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -118,118 +119,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Probe size of ecam from devicetree properly and cap accessible
-bus number accorading to ecam region size to ensure we don't go
-beyond hardware address space.
+Boston has a very limited memory range for PCI controllers, where
+1MB can't easily fit into it.
 
-Also disable all interrupts to ensure errors are handled silently.
+Make alignment boundary of PCI memory resource allocation a Kconfig
+option and default to 0x10000 for boston.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- drivers/pci/pcie_xilinx.c | 53 +++++++++++++++++++++++++++++++++++------------
- 1 file changed, 40 insertions(+), 13 deletions(-)
+ drivers/pci/Kconfig    |  9 +++++++++
+ drivers/pci/pci_auto.c | 16 ++++++++--------
+ 2 files changed, 17 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/pci/pcie_xilinx.c b/drivers/pci/pcie_xilinx.c
-index a674ab04beee..63058e8e7c5d 100644
---- a/drivers/pci/pcie_xilinx.c
-+++ b/drivers/pci/pcie_xilinx.c
-@@ -18,14 +18,19 @@
-  */
- struct xilinx_pcie {
- 	void *cfg_base;
-+	pci_size_t size;
-+	int first_busno;
- };
+diff --git a/drivers/pci/Kconfig b/drivers/pci/Kconfig
+index 8d02ab82ad9f..289d1deb38b6 100644
+--- a/drivers/pci/Kconfig
++++ b/drivers/pci/Kconfig
+@@ -75,6 +75,15 @@ config PCI_MAP_SYSTEM_MEMORY
+ 	  This should only be required on MIPS where CFG_SYS_SDRAM_BASE is still
+ 	  being used as virtual address.
  
- /* Register definitions */
--#define XILINX_PCIE_REG_PSCR		0x144
--#define XILINX_PCIE_REG_PSCR_LNKUP	BIT(11)
--#define XILINX_PCIE_REG_RPSC		0x148
--#define XILINX_PCIE_REG_RPSC_BEN	BIT(0)
--
-+#define XILINX_PCIE_REG_BRIDGE_INFO			0x130
-+#define  XILINX_PCIE_REG_BRIDGE_INFO_ECAMSZ_SHIFT	16
-+#define  XILINX_PCIE_REG_BRIDGE_INFO_ECAMSZ_MASK	(0x7 << 16)
-+#define XILINX_PCIE_REG_INT_MASK			0x13c
-+#define XILINX_PCIE_REG_PSCR				0x144
-+#define  XILINX_PCIE_REG_PSCR_LNKUP			BIT(11)
-+#define XILINX_PCIE_REG_RPSC				0x148
-+#define  XILINX_PCIE_REG_RPSC_BEN			BIT(0)
- /**
-  * pcie_xilinx_link_up() - Check whether the PCIe link is up
-  * @pcie: Pointer to the PCI controller state
-@@ -61,14 +66,18 @@ static int pcie_xilinx_config_address(const struct udevice *udev, pci_dev_t bdf,
- 				      uint offset, void **paddress)
- {
- 	struct xilinx_pcie *pcie = dev_get_priv(udev);
--	unsigned int bus = PCI_BUS(bdf);
-+	unsigned int bus = PCI_BUS(bdf) - pcie->first_busno;
- 	unsigned int dev = PCI_DEV(bdf);
- 	unsigned int func = PCI_FUNC(bdf);
-+	int num_buses = DIV_ROUND_UP(pcie->size, 1 << 16);
- 	void *addr;
- 
- 	if ((bus > 0) && !pcie_xilinx_link_up(pcie))
- 		return -ENODEV;
- 
-+	if (bus > num_buses)
-+		return -ENODEV;
++config PCI_BRIDGE_MEM_ALIGNMENT
++	hex "Alignment boundary of PCI memory resource allocation"
++	default 0x10000 if TARGET_BOSTON
++	default 0x100000
++	help
++	  Specify a boundary for alignment of PCI memory resource allocation,
++	  this is normally 0x100000 (1MB) but can be reduced to accommodate
++	  hardware with tight bridge range if hardware allows.
 +
- 	/*
- 	 * Busses 0 (host-PCIe bridge) & 1 (its immediate child) are
- 	 * limited to a single device each.
-@@ -142,20 +151,37 @@ static int pcie_xilinx_of_to_plat(struct udevice *dev)
- 	struct xilinx_pcie *pcie = dev_get_priv(dev);
- 	fdt_addr_t addr;
- 	fdt_size_t size;
--	u32 rpsc;
+ config PCI_SRIOV
+ 	bool "Enable Single Root I/O Virtualization support for PCI"
+ 	help
+diff --git a/drivers/pci/pci_auto.c b/drivers/pci/pci_auto.c
+index 90f818864457..b2c76b25801a 100644
+--- a/drivers/pci/pci_auto.c
++++ b/drivers/pci/pci_auto.c
+@@ -372,8 +372,8 @@ void dm_pciauto_prescan_setup_bridge(struct udevice *dev, int sub_bus)
+ 	dm_pci_write_config8(dev, PCI_SUBORDINATE_BUS, 0xff);
  
- 	addr = dev_read_addr_size(dev, &size);
- 	if (addr == FDT_ADDR_T_NONE)
- 		return -EINVAL;
+ 	if (pci_mem) {
+-		/* Round memory allocator to 1MB boundary */
+-		pciauto_region_align(pci_mem, 0x100000);
++		/* Round memory allocator */
++		pciauto_region_align(pci_mem, CONFIG_PCI_BRIDGE_MEM_ALIGNMENT);
  
--	pcie->cfg_base = devm_ioremap(dev, addr, size);
--	if (IS_ERR(pcie->cfg_base))
--		return PTR_ERR(pcie->cfg_base);
-+	pcie->cfg_base = map_physmem(addr, size, MAP_NOCACHE);
-+	if (!pcie->cfg_base)
-+		return -ENOMEM;
-+	pcie->size = size;
-+	return 0;
-+}
+ 		/*
+ 		 * Set up memory and I/O filter limits, assume 32-bit
+@@ -387,8 +387,8 @@ void dm_pciauto_prescan_setup_bridge(struct udevice *dev, int sub_bus)
+ 	}
  
--	/* Enable the Bridge enable bit */
--	rpsc = __raw_readl(pcie->cfg_base + XILINX_PCIE_REG_RPSC);
-+static int pci_xilinx_probe(struct udevice *dev)
-+{
-+	struct xilinx_pcie *pcie = dev_get_priv(dev);
-+	u32 rpsc;
-+	int num_buses = DIV_ROUND_UP(pcie->size, 1 << 16);
-+
-+	pcie->first_busno = dev_seq(dev);
-+
-+	/* Disable all interrupts */
-+	writel(0, pcie->cfg_base + XILINX_PCIE_REG_INT_MASK);
-+
-+	/* Enable the bridge */
-+	rpsc = readl(pcie->cfg_base + XILINX_PCIE_REG_RPSC);
- 	rpsc |= XILINX_PCIE_REG_RPSC_BEN;
--	__raw_writel(rpsc, pcie->cfg_base + XILINX_PCIE_REG_RPSC);
-+	writel(rpsc, pcie->cfg_base + XILINX_PCIE_REG_RPSC);
-+
-+	/* Enable access to all possible subordinate buses */
-+	writel((0 << 0) | (1 << 8) | (num_buses << 16),
-+	       pcie->cfg_base + PCI_PRIMARY_BUS);
+ 	if (pci_prefetch) {
+-		/* Round memory allocator to 1MB boundary */
+-		pciauto_region_align(pci_prefetch, 0x100000);
++		/* Round memory allocator */
++		pciauto_region_align(pci_prefetch, CONFIG_PCI_BRIDGE_MEM_ALIGNMENT);
  
- 	return 0;
- }
-@@ -176,5 +202,6 @@ U_BOOT_DRIVER(pcie_xilinx) = {
- 	.of_match		= pcie_xilinx_ids,
- 	.ops			= &pcie_xilinx_ops,
- 	.of_to_plat	= pcie_xilinx_of_to_plat,
-+	.probe			= pci_xilinx_probe,
- 	.priv_auto	= sizeof(struct xilinx_pcie),
- };
+ 		/*
+ 		 * Set up memory and I/O filter limits, assume 32-bit
+@@ -465,8 +465,8 @@ void dm_pciauto_postscan_setup_bridge(struct udevice *dev, int sub_bus)
+ 	dm_pci_write_config8(dev, PCI_SUBORDINATE_BUS, sub_bus - dev_seq(ctlr));
+ 
+ 	if (pci_mem) {
+-		/* Round memory allocator to 1MB boundary */
+-		pciauto_region_align(pci_mem, 0x100000);
++		/* Round memory allocator */
++		pciauto_region_align(pci_mem, CONFIG_PCI_BRIDGE_MEM_ALIGNMENT);
+ 
+ 		dm_pci_write_config16(dev, PCI_MEMORY_LIMIT,
+ 				      ((pci_mem->bus_lower - 1) >> 16) &
+@@ -480,8 +480,8 @@ void dm_pciauto_postscan_setup_bridge(struct udevice *dev, int sub_bus)
+ 				     &prefechable_64);
+ 		prefechable_64 &= PCI_PREF_RANGE_TYPE_MASK;
+ 
+-		/* Round memory allocator to 1MB boundary */
+-		pciauto_region_align(pci_prefetch, 0x100000);
++		/* Round memory allocator */
++		pciauto_region_align(pci_prefetch, CONFIG_PCI_BRIDGE_MEM_ALIGNMENT);
+ 
+ 		dm_pci_write_config16(dev, PCI_PREF_MEMORY_LIMIT,
+ 				      (((pci_prefetch->bus_lower - 1) >> 16) &
 
 -- 
 2.34.1
