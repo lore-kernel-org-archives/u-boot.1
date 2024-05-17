@@ -4,93 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DFB6C25B74
-	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 02:26:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CF04C04FFE
+	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 06:05:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89E96883BA;
-	Fri, 17 May 2024 04:26:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
+	by phobos.denx.de (Postfix) with ESMTP id 56ED28848D;
+	Fri, 17 May 2024 08:05:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="LpT7WKlz";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="I64EmAAD";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="nyUnNAku";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5744088453; Fri, 17 May 2024 04:26:27 +0200 (CEST)
-Received: from wfout2-smtp.messagingengine.com
- (wfout2-smtp.messagingengine.com [64.147.123.145])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 90478883BA; Fri, 17 May 2024 08:05:03 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E1D5788318
- for <u-boot@lists.denx.de>; Fri, 17 May 2024 04:26:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5566F8848F
+ for <u-boot@lists.denx.de>; Fri, 17 May 2024 08:04:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=flygoat.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailfout.west.internal (Postfix) with ESMTP id 926621C0019F;
- Thu, 16 May 2024 22:26:22 -0400 (EDT)
-Received: from imap44 ([10.202.2.94])
- by compute3.internal (MEProxy); Thu, 16 May 2024 22:26:22 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
- cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm1; t=1715912782;
- x=1715999182; bh=tTj93SaIY9EiPn+UO1InH0vNkpmxN2r80gE89i48IQM=; b=
- LpT7WKlz4YH8m4GKNtEjSwWXfMCfZnKm1T8j6BVrUts6WwAFKRI2s22xddnrW7WD
- Mt2MGxfBT8jtDXFOS1RAwTnklgbrRpK5oFH7ukke+iwpEKkJkFMvegfSB8eG388+
- BynVFqEhlm973LusHctp0vi9Otz/MAil9cIxz7XwhmkEFxDRJmWEHev7ojYZPnhc
- GraKrm4hcGZ2HWpqyKMK4AnIWokbqiEXZwC88HxVA5Jhunw5OJFaBtCcsOMteYur
- Te8wWi1210Ccc80F0mXPCWPckxG10dKKRd5y1qtLDD1Dq5N12cevqYQMt7GuGRKv
- FzINXSReTvQWWcZ1rLl5HQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1715912782; x=
- 1715999182; bh=tTj93SaIY9EiPn+UO1InH0vNkpmxN2r80gE89i48IQM=; b=I
- 64EmAADiGrZCtKAIud+LtYTlSvfcxHxn3JqQHAS+FVrg9OOJTLo0lXAgX9ZjZJEA
- h7jfrRGHbVR0P93LyQqo094HTaY6LqVwg+Q6NDgX6Z9jZRNrV7jqPLm4+vUyuU/F
- SxxuHaxFhoeqGeNgp15ITjjIdsIoeat7sP343abhXtK/7U7KB2IirI7Ao8+zkhyZ
- 2ix3SRf9bemO1dnwR64Ka/eZGPpzpby4vbNCSWBVb/7MXwgRN9l2GP8D4iiDLzP8
- 91JQNanOTEY5k0qSTPvrvbgn23O+dlTe3JbRGfaSaqY+uD5ZqFRGsOBnyR4nU9Cu
- zSZY0Gca7cctU0vTR2gMg==
-X-ME-Sender: <xms:TsBGZhkunikCriRcrGPsQFCTJIni5OyB_tKmBoi3NrsJv-WkKTeICg>
- <xme:TsBGZs0yxkpKOL_YO3COrJjQpWQ_222z0JQn0x4KmkBIPlHEbeNaJ1L7Fo4-TUCBg
- YlR0vDf5FPY08a2zuQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehfedgtdefucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepofgfggfkjghffffhvfevufgtgfesthhqredtreerjeenucfhrhhomhepfdfl
- ihgrgihunhcujggrnhhgfdcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtoh
- hmqeenucggtffrrghtthgvrhhnpedufeegfeetudeghefftdehfefgveffleefgfehhfej
- ueegveethfduuddvieehgfenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmh
- grihhlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
-X-ME-Proxy: <xmx:TsBGZnonZHpR-3IQmPAlJ-7-GbnGPy4bkrynj67elQku95xStl_VcA>
- <xmx:TsBGZhnXd41fw1OtJyKffFFZt1N8seQRXKDaBnIykYzcSj0hLt1RpQ>
- <xmx:TsBGZv3Plhw_jmtr4a1TqyYRJe4jE_-cm163MMhkgR5n3Da-dHvRtw>
- <xmx:TsBGZgt5Nk-ehRbNJ1Arp9ixM5wbqMObmGaAwVXA0xtXtRW0KuQ9IQ>
- <xmx:TsBGZqQd8fdKOA0znBGeH8FOu83tHdswJ0kmxnokI466uUPE_NAGJRJl>
-Feedback-ID: ifd894703:Fastmail
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
- id E844636A0074; Thu, 16 May 2024 22:26:21 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.11.0-alpha0-456-gcd147058c-fm-hotfix-20240509.001-g0aad06e4
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=5867d29662=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 44H0LZZv003247;
+ Fri, 17 May 2024 08:04:47 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=bvd3Om39NsB4vQxd7FGtoQ5/hzs2EBku+HfNHxDK/v8=; b=ny
+ UnNAkur63xe3BQeWjVHVH/CSt6jd3t/g25sbc4jVfBRcUe6z3X7E7o08dlVUF0kV
+ k+8jKMUjLlP1Pd95NTYOReQg129n2sItq+oBuJPnXnaIs4B9GPk7dVk3IsRoBCqd
+ gRhXc77BNz9ofVEE2PebN3WJcZdRu7SkN0fch80qdqq6XAIqtBErGyw241yneT0a
+ xUxtJ0SbNG7sOXQ+xQPfC8AovuPO2bVjAAPlPDLmDGLqpCqXSzAdon4w2oMOy78S
+ 6B9vDCxIblHnoYQ+3+Z/iuFKg1PTl4JCkDNBVbWFA1A/xq7J5+2tA1TU0ZF7JwiE
+ bztZ2UISNyh0Ni7UA9lg==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3y4sxwggba-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 17 May 2024 08:04:47 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 30A024002D;
+ Fri, 17 May 2024 08:04:42 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5BC5420BA0F;
+ Fri, 17 May 2024 08:04:16 +0200 (CEST)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Fri, 17 May
+ 2024 08:04:15 +0200
+Message-ID: <20c22d72-f590-47bd-a084-bbbd78b0a356@foss.st.com>
+Date: Fri, 17 May 2024 08:04:15 +0200
 MIME-Version: 1.0
-Message-Id: <47734ebf-6c33-4b0c-95fa-3e8986e3d91b@app.fastmail.com>
-In-Reply-To: <0664F4C3-6C95-43DF-A283-760A8BCA1811@gmx.de>
-References: <20240517-virtio_gpu-v1-0-6353b87472c7@flygoat.com>
- <20240517-virtio_gpu-v1-1-6353b87472c7@flygoat.com>
- <0664F4C3-6C95-43DF-A283-760A8BCA1811@gmx.de>
-Date: Fri, 17 May 2024 03:26:04 +0100
-From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
-To: "Heinrich Schuchardt" <xypron.glpk@gmx.de>, u-boot@lists.denx.de
-Cc: "Tom Rini" <trini@konsulko.com>, "Bin Meng" <bmeng.cn@gmail.com>,
- "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH 1/2] virtio: New virtio_gpu driver
-Content-Type: text/plain;charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] ARM: dts: stm32: Add generic SoM compatible to
+ STM32MP15xx DH electronics DHSOM
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ <u-boot@dh-electronics.com>, <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20240516234737.201250-1-marex@denx.de>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20240516234737.201250-1-marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.650,FMLib:17.11.176.26
+ definitions=2024-05-16_07,2024-05-15_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,64 +93,110 @@ X-Virus-Status: Clean
 
 
 
-=E5=9C=A82024=E5=B9=B45=E6=9C=8817=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8A=E5=
-=8D=882:56=EF=BC=8CHeinrich Schuchardt=E5=86=99=E9=81=93=EF=BC=9A
-[...]
->>+config VIRTIO_GPU_SIZE_X
->>+	int "Width of display (X resolution)"
->>+	default 1280
->
-> 1920x1080 would look like a reasonable default for me.
+On 5/17/24 01:47, Marek Vasut wrote:
+> Add generic SoM compatible string into machine compatible string
+> for all STM32MP15xx based DH electronics DHSOM. This way, common
+> board code can match on this compatible. No functional change.
+> 
+> Signed-off-by: Marek Vasut <marex@denx.de>
+> ---
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@dh-electronics.com
+> Cc: u-boot@lists.denx.de
+> Cc: uboot-stm32@st-md-mailman.stormreply.com
+> ---
+>  arch/arm/dts/stm32mp15xx-dhcom-drc02.dts       | 4 +++-
+>  arch/arm/dts/stm32mp15xx-dhcom-pdk2.dts        | 4 +++-
+>  arch/arm/dts/stm32mp15xx-dhcom-picoitx.dts     | 4 +++-
+>  arch/arm/dts/stm32mp15xx-dhcor-avenger96.dts   | 4 +++-
+>  arch/arm/dts/stm32mp15xx-dhcor-drc-compact.dts | 4 +++-
+>  arch/arm/dts/stm32mp15xx-dhcor-testbench.dts   | 4 +++-
+>  6 files changed, 18 insertions(+), 6 deletions(-)
+> 
+> diff --git a/arch/arm/dts/stm32mp15xx-dhcom-drc02.dts b/arch/arm/dts/stm32mp15xx-dhcom-drc02.dts
+> index 1ef9ac29cea..90625bf6b60 100644
+> --- a/arch/arm/dts/stm32mp15xx-dhcom-drc02.dts
+> +++ b/arch/arm/dts/stm32mp15xx-dhcom-drc02.dts
+> @@ -11,5 +11,7 @@
+>  
+>  / {
+>  	model = "DH Electronics STM32MP15xx DHCOM DRC02";
+> -	compatible = "dh,stm32mp15xx-dhcom-drc02", "st,stm32mp1xx";
+> +	compatible = "dh,stm32mp15xx-dhcom-drc02",
+> +		     "dh,stm32mp15xx-dhcom-som",
+> +		     "st,stm32mp1xx";
+>  };
+> diff --git a/arch/arm/dts/stm32mp15xx-dhcom-pdk2.dts b/arch/arm/dts/stm32mp15xx-dhcom-pdk2.dts
+> index e2e01e2146c..b2e450aa13b 100644
+> --- a/arch/arm/dts/stm32mp15xx-dhcom-pdk2.dts
+> +++ b/arch/arm/dts/stm32mp15xx-dhcom-pdk2.dts
+> @@ -11,5 +11,7 @@
+>  
+>  / {
+>  	model = "STMicroelectronics STM32MP15xx DHCOM Premium Developer Kit (2)";
+> -	compatible = "dh,stm32mp15xx-dhcom-pdk2", "st,stm32mp15x";
+> +	compatible = "dh,stm32mp15xx-dhcom-pdk2",
+> +		     "dh,stm32mp15xx-dhcom-som",
+> +		     "st,stm32mp15x";
+>  };
+> diff --git a/arch/arm/dts/stm32mp15xx-dhcom-picoitx.dts b/arch/arm/dts/stm32mp15xx-dhcom-picoitx.dts
+> index 06770b47873..3e908102f61 100644
+> --- a/arch/arm/dts/stm32mp15xx-dhcom-picoitx.dts
+> +++ b/arch/arm/dts/stm32mp15xx-dhcom-picoitx.dts
+> @@ -11,5 +11,7 @@
+>  
+>  / {
+>  	model = "DH Electronics STM32MP15xx DHCOM PicoITX";
+> -	compatible = "dh,stm32mp15xx-dhcom-picoitx", "st,stm32mp1xx";
+> +	compatible = "dh,stm32mp15xx-dhcom-picoitx",
+> +		     "dh,stm32mp15xx-dhcom-som",
+> +		     "st,stm32mp1xx";
+>  };
+> diff --git a/arch/arm/dts/stm32mp15xx-dhcor-avenger96.dts b/arch/arm/dts/stm32mp15xx-dhcor-avenger96.dts
+> index 76ac5a873c1..dd8fcecbca5 100644
+> --- a/arch/arm/dts/stm32mp15xx-dhcor-avenger96.dts
+> +++ b/arch/arm/dts/stm32mp15xx-dhcor-avenger96.dts
+> @@ -14,5 +14,7 @@
+>  
+>  / {
+>  	model = "Arrow Electronics STM32MP15xx Avenger96 board";
+> -	compatible = "arrow,stm32mp15xx-avenger96", "st,stm32mp15x";
+> +	compatible = "arrow,stm32mp15xx-avenger96",
+> +		     "dh,stm32mp15xx-dhcor-som",
+> +		     "st,stm32mp15x";
+>  };
+> diff --git a/arch/arm/dts/stm32mp15xx-dhcor-drc-compact.dts b/arch/arm/dts/stm32mp15xx-dhcor-drc-compact.dts
+> index 77dd944ff53..c1f99c1685e 100644
+> --- a/arch/arm/dts/stm32mp15xx-dhcor-drc-compact.dts
+> +++ b/arch/arm/dts/stm32mp15xx-dhcor-drc-compact.dts
+> @@ -12,5 +12,7 @@
+>  
+>  / {
+>  	model = "DH electronics STM32MP15xx DHCOR DRC Compact";
+> -	compatible = "dh,stm32mp15xx-dhcor-drc-compact", "st,stm32mp1xx";
+> +	compatible = "dh,stm32mp15xx-dhcor-drc-compact",
+> +		     "dh,stm32mp15xx-dhcor-som",
+> +		     "st,stm32mp1xx";
+>  };
+> diff --git a/arch/arm/dts/stm32mp15xx-dhcor-testbench.dts b/arch/arm/dts/stm32mp15xx-dhcor-testbench.dts
+> index c9163e1c028..5fdd762ddbf 100644
+> --- a/arch/arm/dts/stm32mp15xx-dhcor-testbench.dts
+> +++ b/arch/arm/dts/stm32mp15xx-dhcor-testbench.dts
+> @@ -9,7 +9,9 @@
+>  
+>  / {
+>  	model = "DH electronics STM32MP15xx DHCOR Testbench";
+> -	compatible = "dh,stm32mp15xx-dhcor-testbench", "st,stm32mp1xx";
+> +	compatible = "dh,stm32mp15xx-dhcor-testbench",
+> +		     "dh,stm32mp15xx-dhcor-som",
+> +		     "st,stm32mp1xx";
+>  
+>  	aliases {
+>  		ethernet0 = &ethernet0;
 
-1280x1024 was chosen because it is the largest resolution being defined =
-in
-VESA VBE, hence guaranteed compatibility everywhere. I think it's Linux's
-behaviour as well.
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
-Carving out a huge framebuffer out of memory might be a challenge on
-some platforms, so I'd like to keep it small.
-
->
->
->>+	help
->>+	  Sets the width of the display.
->>+
->>+	  These two options control the size of the display set up by QEMU.
->>+	  Typical sizes are 1024 x 768 or 1280 x 1024.
->>+
->>+config VIRTIO_GPU_SIZE_Y
->>+	int "High of display (Y resolution)"
->>+	default 1024
->>+	help
->>+	  Sets the height of the display.
->>+
->>+	  These two options control the size of the display set up by QEMU.
->>+	  Typical sizes are 1024 x 768 or 1280 x 1024.
->
-> Haven't had such small monitors for a while. Why should this be typica=
-l?
-
-Haha I copied this from bochs driver's help text, I can replace it with
-more reasonable text.
-
->
-> Doesn't QEMU allow to read the size of the output window at runtime?
-
-Unfortunately, it's always guest to determine the size of display.
-VIRTIO_GPU_CMD_GET_DISPLAY_INFO simply returned 0 as size of the scanout
-before guest initialize it first.
-
-It is possible to parse EDID provided by QEMU to get a resolution list,
-but I found implementing the whole modesetting procdure here is a little
-bit unnecessary.
-
-I think resizing display in OS is generally done with VMM's guest agent.
-
->
-> Best regards
->
-> Heinrich
->
-
---=20
-- Jiaxun
+Thanks
