@@ -4,100 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54E8DC04FFE
-	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 11:45:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15A7EC04FFE
+	for <u-boot@archiver.kernel.org>; Fri, 17 May 2024 12:46:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FECC882DA;
-	Fri, 17 May 2024 13:45:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
+	by phobos.denx.de (Postfix) with ESMTP id 34011883C7;
+	Fri, 17 May 2024 14:46:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="DvlHhW2z";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="Ay95BSqT";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="su1HlGZr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A87BD88375; Fri, 17 May 2024 13:45:30 +0200 (CEST)
-Received: from fhigh3-smtp.messagingengine.com
- (fhigh3-smtp.messagingengine.com [103.168.172.154])
+ id 9B0EA8823C; Fri, 17 May 2024 14:46:21 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D21D0801BA
- for <u-boot@lists.denx.de>; Fri, 17 May 2024 13:45:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9721A8823C
+ for <u-boot@lists.denx.de>; Fri, 17 May 2024 14:46:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=flygoat.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
- by mailfhigh.nyi.internal (Postfix) with ESMTP id CE56611400DB;
- Fri, 17 May 2024 07:45:26 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute4.internal (MEProxy); Fri, 17 May 2024 07:45:26 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
- cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:message-id:mime-version:reply-to
- :subject:subject:to:to; s=fm1; t=1715946326; x=1716032726; bh=sT
- 0P5CfO8ggJkO1bJPtg5kwwH6/HxHEw1WNbKMzbuKE=; b=DvlHhW2zdIsGpD6SEc
- VVjN+/wQO25QkgMal30Qhi/7SU8PiP07iou5XGAX/tOks3ZxQc3xZIDxPGULI7VR
- h0M3osY605b/Eq/XjU2/43JlQyJ/fiayA1jTFYlQ/Y33rsUTgloiKKozCdM7uD/A
- x9wTWuXySVAQJGvbI7lE9Bs3S8vBcxBrWi4sFwzMKmcKle/hCepv32owLcWG3G71
- kcVB4XsSZwgPgHACN7AXRwtkO3fPwJqXIesKdbO83KleGHhD5SVbJYcQTYbeLLdI
- SJNxQXi0j634UpzwdYZBy62BPyfTlxr4BS9V7hLOQ7LLlIo5ml9PlTdUAnjRMTBn
- 5/zw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:message-id:mime-version:reply-to:subject
- :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
- :x-sasl-enc; s=fm3; t=1715946326; x=1716032726; bh=sT0P5CfO8ggJk
- O1bJPtg5kwwH6/HxHEw1WNbKMzbuKE=; b=Ay95BSqThWeukGYSQnrdc0owm4hNr
- gPJOqDCJeZYhRdGilHgLEXorSRXfbFxY0YdrtPEDr021p47jQJW0idSmKZdVb4CU
- TjIXjEigdc3D848AEuFZtGtPQdi8k2bJ7shOqhFQBKbjMSHY/y8+/zNFctjBXlgd
- A1Asd1aUNGjeAkxi9GkSnvbhlRQDlTPwmPmG1w9V8FPUg+FvpfGK6UGQD4eElPGQ
- 7Nxe3l8nQc9ehsfbQtrN9pg6A4AAEem/hxCTPsXCRRBucQYgu3YPHHOZpuXdZCjW
- YMg9eLxzjeziX4pyQapP6dobCGVuFAHwGArTniPJF3ivpPew+/J1uVUQA==
-X-ME-Sender: <xms:VkNHZkmD7aZMlIhwg5CukL8zE0FuKigZGiAAYDf3eE1GYEfQpwPrpA>
- <xme:VkNHZj2YVhQDOAionLPAJrNlaDgznvij8B9VriWLopmpti5WNGLDMad5m_h7-AZ4d
- w-yOdo1ep3cwev74Ko>
-X-ME-Received: <xmr:VkNHZir4QautUtC3UfmXIKxVK1EIt_JiueJPzLSprG6ArX_EJd_1OU4>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehfedgleeiucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhephfffufggtgfgkffvvefosehtjeertdertdejnecuhfhrohhmpeflihgrgihu
- nhcujggrnhhguceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomheqnecugg
- ftrfgrthhtvghrnhepffetueegkedtgfejveeuvdfghfegtddvgfehudeghfegheetuedu
- heduveejtefhnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrh
- homhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:VkNHZgnSp6cvtzQPGAToRgSVeRx_AokS4VeNLyMmEtKErO-Pzk3WwQ>
- <xmx:VkNHZi1IuNMcwGXof3wfhl8XFxp5kiVtZBxYsNJ3fncrdTKd_DvvQQ>
- <xmx:VkNHZnvFscb10GaQ15MCgK76A2nlj_dkcQM1GMXKQxgj9IoVXSXTfw>
- <xmx:VkNHZuUoH3u4Y1COvRM7_gavjveQOjuQTt3hytgHI2yKaSHGj_rOPg>
- <xmx:VkNHZlQPdbJRM6BSi75NbP5iyx_7_TYbdXF6mqlfPZgVMYg4mupY_pQX>
-Feedback-ID: ifd894703:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 17 May 2024 07:45:25 -0400 (EDT)
-From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Fri, 17 May 2024 12:45:17 +0100
-Subject: [PATCH RFC] doc: Document address spaces used by U-Boot
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1715949975; x=1716554775; i=xypron.glpk@gmx.de;
+ bh=1CD7bJv57crJ+jE9uUGFIHfsAY1Ro298UWLqfXrAPSc=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=su1HlGZrXiV/o8fO1fVU03kh9gX9893RVDY9gFWY+z0UPiLICkCHblQ7rBBBLGx4
+ 4+Fq6UmByuxoikKJLcg/T0+GCfanXtSm4w1YmBUXolvAp4dtweGGmqxdE8NKxOKWQ
+ 9o26kmINWoncdZfEQGCoH7MoCSWxiRQG8PAA86luhWERPBrgpEB3JP8Dyc9FtkhLF
+ I97uTrmCciOsZinW5MqcSUJ2NVr05TKNkkgqU8wKIEEbO/uTc8VuHXLD5OM/6N78/
+ ogkznKvPNoDsrGz+QiE3EjZUmxzstoByLKwZj08AlnXj5/LBsNZ2951KT9QmJspiA
+ 5mvjOURWqdhjSG6Nqg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [10.55.2.71] ([149.11.192.251]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MEm2D-1sMYEm369D-00GFxM; Fri, 17
+ May 2024 14:46:15 +0200
+Message-ID: <96451f9b-8411-4764-ace3-45b25f097f69@gmx.de>
+Date: Fri, 17 May 2024 14:46:12 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240517-address-spaces-v1-1-93e14c260b73@flygoat.com>
-X-B4-Tracking: v=1; b=H4sIAExDR2YC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIxMDU0Nz3cSUlKLU4mLd4oLE5NRiXcNk4yTLZGNzyyRDYyWgpoKi1LTMCrC
- B0UpBbs5KsbW1AM2wCFxlAAAA
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 01/12] efi: Correct handling of frame buffer
+To: Simon Glass <sjg@chromium.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Anatolij Gustschin <agust@denx.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>
-X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4808;
- i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=vwjJs6qO2H9zIImz0mjFG3WXek0F0G1VIaRrLLcSA10=;
- b=owGbwMvMwCHmXMhTe71c8zDjabUkhjR351DuwtfPk1r/FcTMNCvgajhkonsmxnzJue2vLkdMK
- j0btXR5RykLgxgHg6yYIkuIgFLfhsaLC64/yPoDM4eVCWQIAxenAExkUycjQ//kG/4nds69y82+
- RWjDQ+c/yUylhSo3ft/evFh63Y0DvdYM/ysLr+W4SecV7Oa58sbVXksyOGads1JzTfx20etN9o+
- /sAAA
-X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
- fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
+References: <20231119191202.667180-1-sjg@chromium.org>
+ <20231119121144.v5.1.I9f7f373d00947c704aeae0088dfedd8df07fab60@changeid>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20231119121144.v5.1.I9f7f373d00947c704aeae0088dfedd8df07fab60@changeid>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:w5LgdLA/Z4i8Bcp4/j33fl3d9cgpwi3IGf5uQ5rB9OZXZkSzGxS
+ 1dHKsKgHACVKx8Av5oz6BsDzsH8WRnu53UR3r1E4dc3j0vMA07CHvytgNfyrx+NI8rj7bYw
+ JH+DBOZTTDUkmMHwTbkjPAqGdLXvYZBrjoogEMruocjcxw0Bv+CjPkH32wyCw3Nsy77PVbd
+ QND6ddKSFBNMt/D3M9B8Q==
+UI-OutboundReport: notjunk:1;M01:P0:vbOEUFIjvb8=;q7MPwXGlOxuz77G9CaeWWaGBhTZ
+ d1jU8LhIb8NGmrxmeAaXpweo/lJr+J1ILzX3+ABh2Dzw/ehS05mcj0V8MQKMqSBm22+WSumSg
+ 6Kjjps9OD6t58KeFvWm7MjsyaBkvKeWI1xZI2rb/qYp7T0s3n7LJLyqJx4byiDnNeMGJNebXN
+ UDReTZgatkSWHvk6dpNZ/UZ0V3lrVVL2y9Ai3Z6bXaBE7TeAGCkZnebHwx0lbh7t+fMmtfEy5
+ gzib76e3cgNOhUYRu1MT3YrxyxbujNf2pWlf5iOQ5MY4cCGukzioKkWA6JgbLBhcc3IuAnmHk
+ TIUs9HMwyrygcLKnn8pv4wqagBNG6bd0+IJ6fXjIpBZPKAOyqN7FoPXQ8FmuGLndhwA3fUr7S
+ QcXXOtaUYPqA1/Grd8fnCECZLKG/s9VemRDbqUke110reZpMTxxUtdvAu7lc8X6FNnEc5LbHv
+ w373dRZqMJIfSEnAHz0FiU7uvn6eswY4gTO7+GmSPk5aleqJaoQer4+GUsXgdBCAjTHW6QMp2
+ WB7pqww0lIXQfeOt13l6orPeITVhMzX0R004NLrMpdoxSl18V6e9W0ilJfYNxMgVtBTWDpVG9
+ GWkdsmUL/bwEq2idfsEg/NjrzA/YCkQaKfJ5PY2aBne+QOjaLvT9W/x8yY03rz1UFK09NNfA5
+ COC/PskDO5wqYibFifg/SXaVFlkF7VNtfLR2HLgOhvPi4zhvY+wX0RXmWPQb08uxOECBfL1Ur
+ C8ZY1kOnWV5lGajTIq8/f7Lb9Ga0QJEKIkatAoXubOS8//lzwEzvrdtrzrRNbLk00jaRT0bCS
+ TY0yaBMhUfbXLkSLHOPNZslJJH6R1uija9sLS6C2wL26w=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,130 +93,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This serves as a reference for developers on how to handle
-all those address spaces for U-Boot.
+On 11/19/23 20:11, Simon Glass wrote:
+> The efi_gop driver uses private fields from the video uclass to obtain a
+> pointer to the frame buffer. Use the platform data instead.
+>
+> Check the VIDEO_COPY setting to determine which frame buffer to use. Onc=
+e
+> the next stage is running (and making use of U-Boot's EFI boot services)
+> U-Boot does not handle copying from priv->fb to the hardware framebuffer=
+,
+> so we must allow EFI to write directly to the hardware framebuffer.
+>
+> We could provide a function to read this, but it seems better to just
+> document how it works. The original change ignored an explicit comment
+> in the video.h file ("Things that are private to the uclass: don't use
+> these in the driver") which is why this was missed when the VIDEO_COPY
+> feature was added.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Fixes: 8f661a5b662 ("efi_loader: gop: Expose fb when 32bpp")
+> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>#
 
-Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
----
-Hi all,
+Since this patch
+a75cf70d23ac ("efi: Correct handling of frame buffer") the EFI block
+image transfer is broken on the sandbox.
 
-I was trying to clear up long standing myth of virtual
-address vs physical adddress mapping on MIPS by having
-a clear division betweem virt and phys adddress everywhere.
+Build sandbox_defconfig with CONFIG_EFI_SELFTEST=3Dy.
 
-In this process I would like to confirm my understanding
-by writing a document and requesting comments from the
-community.
+setenv efi_selftest block image transfer
+bootefi selftest
 
-Note that there are some sysmem APIs mentioned in the document
-are not in U-Boot tree, namely ``sysmem_addr_t`` and sysmem_to_phys
-co. I think they can help with annotating address spaces.
+A moving submarine should be shown.
 
-Please kindly comment on the design.
+Best regards
 
-Thanks!
----
- doc/develop/address_spaces.rst | 73 ++++++++++++++++++++++++++++++++++++++++++
- doc/develop/index.rst          |  1 +
- 2 files changed, 74 insertions(+)
+Heinrich
 
-diff --git a/doc/develop/address_spaces.rst b/doc/develop/address_spaces.rst
-new file mode 100644
-index 000000000000..05c4a1575f27
---- /dev/null
-+++ b/doc/develop/address_spaces.rst
-@@ -0,0 +1,73 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. Copyright (c) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
-+
-+Address Spaces
-+==============
-+
-+Introduction
-+------------
-+
-+In U-Boot, we have three address spaces that are used to describe a memory
-+address:
-+
-+    - ``virt``: virtual address space
-+    - ``phys``: physical address space
-+    - ``sysmem``: system memory address space
-+
-+On most architectures, we maintain a 1:1:1 mapping between all three address,
-+with the exception of MIPS and sandbox.
-+
-+There are many API misused in existing code base, this document is to clarify
-+the usage of these address spaces and APIs. Hopefully it will help to reduce
-+the confusion and porting effort.
-+
-+``virt``
-+--------
-+
-+This is the address space that is directly used by U-Boot to access memory.
-+Every pointer in U-Boot must in ``virt`` address space. to get a valid ``virt``
-+address from any other address space, you must use relavant mapping functions
-+to ensure it's being tracked. It is recomanded to use ``ulong`` or pointer types
-+to store ``virt`` address.
-+
-+``phys``
-+--------
-+
-+This is the address space that is used to describe the physical memory address.
-+It's used to describe the physical memory address of a device, or the physical
-+memory address of a memory region. Usual places you would see ``phys`` address
-+are addresses comes from Device Tree and some memory related APIs. It is
-+recommended to use ``fdt_addr_t`` or ``phys_addr_t`` to store ``phys`` address.
-+
-+Following APIs are availble to handle ``phys`` address:
-+
-+    - ``map_physmem()``: Create mapping from physical address to virtual address
-+    - ``unmap_physmem()``: Remove mapping created by ``map_physmem()``
-+    - ``virt_to_phys()``: Find physical address mapping for a virtual address
-+    - ``ioremap()``: Create mapping for I/O memory region
-+    - ``iounmap()``: Remove mapping created by ``ioremap()``
-+
-+``sysmem``
-+----------
-+
-+This is the address space that is used by U-Boot internally to describe RAM
-+address. It helps to abstract some architecture differences and provide a
-+consistent way to managed RAM. Usual places you would see ``sysmem`` address
-+are addresses comes from ``gd->bd->bi_dram[]``, addresses comes from ``LMB``
-+addresses being used as memory related config optinos, and addresses being
-+used as arguments to load commands. It is recommended to use ``sysmem_addr_t``
-+to store ``sysmem`` address.
-+
-+It is further used by sandbox to simulate memory, and by MIPS to handle
-+differences between ``virt`` and ``phys`` address spaces.
-+
-+Following APIs are availble to handle ``sysmem`` address:
-+
-+    - ``map_sysmem()``: Create mapping from system memory address to virtual address
-+    - ``unmap_sysmem()``: Remove mapping created by ``map_sysmem()``
-+    - ``map_to_sysmem()``: Find system memory address mapping for a virtual address
-+    - ``sysmem_to_phys()``: Find physical address mapping for a system memory address
-+    - ``phys_to_sysmem()``: Find system memory address mapping for a physical address
-+    - ``nomap_sysmem()``: Pass through an address unchanged (For sandbox tracking)
-+    - ``nomap_to_sysmem()``: Pass through an address unchanged
-+
-diff --git a/doc/develop/index.rst b/doc/develop/index.rst
-index f82e148b101c..1b8e11cd2f24 100644
---- a/doc/develop/index.rst
-+++ b/doc/develop/index.rst
-@@ -27,6 +27,7 @@ Implementation
- .. toctree::
-    :maxdepth: 1
- 
-+   address_spaces
-    directories
-    bloblist
-    bootstd
-
----
-base-commit: ad7dce5abd49ef3b5c93da5303e15449c8c162b4
-change-id: 20240517-address-spaces-1c3b9c379b13
-
-Best regards,
--- 
-Jiaxun Yang <jiaxun.yang@flygoat.com>
+> ---
+>
+> (no changes since v2)
+>
+> Changes in v2:
+> - Rebase to -next
+> - Add some more comments to the header file
+> - Add fixes tag
+>
+>   include/video.h          |  9 ++++++---
+>   lib/efi_loader/efi_gop.c | 12 +++++++-----
+>   2 files changed, 13 insertions(+), 8 deletions(-)
+>
+> diff --git a/include/video.h b/include/video.h
+> index 5048116a3d57..4d8df9baaada 100644
+> --- a/include/video.h
+> +++ b/include/video.h
+> @@ -21,9 +21,12 @@ struct udevice;
+>    * @align: Frame-buffer alignment, indicating the memory boundary the =
+frame
+>    *	buffer should start on. If 0, 1MB is assumed
+>    * @size: Frame-buffer size, in bytes
+> - * @base: Base address of frame buffer, 0 if not yet known
+> - * @copy_base: Base address of a hardware copy of the frame buffer. See
+> - *	CONFIG_VIDEO_COPY.
+> + * @base: Base address of frame buffer, 0 if not yet known. If CONFIG_V=
+IDEO_COPY
+> + *	is enabled, this is the software copy, so writes to this will not be
+> + *	visible until vidconsole_sync_copy() is called. If CONFIG_VIDEO_COPY=
+ is
+> + *	disabled, this is the hardware framebuffer.
+> + * @copy_base: Base address of a hardware copy of the frame buffer. If
+> + *	CONFIG_VIDEO_COPY is disabled, this is not used.
+>    * @copy_size: Size of copy framebuffer, used if @size is 0
+>    * @hide_logo: Hide the logo (used for testing)
+>    */
+> diff --git a/lib/efi_loader/efi_gop.c b/lib/efi_loader/efi_gop.c
+> index 778b693f983a..a09db31eb465 100644
+> --- a/lib/efi_loader/efi_gop.c
+> +++ b/lib/efi_loader/efi_gop.c
+> @@ -10,6 +10,7 @@
+>   #include <efi_loader.h>
+>   #include <log.h>
+>   #include <malloc.h>
+> +#include <mapmem.h>
+>   #include <video.h>
+>   #include <asm/global_data.h>
+>
+> @@ -467,10 +468,10 @@ efi_status_t efi_gop_register(void)
+>   	struct efi_gop_obj *gopobj;
+>   	u32 bpix, format, col, row;
+>   	u64 fb_base, fb_size;
+> -	void *fb;
+>   	efi_status_t ret;
+>   	struct udevice *vdev;
+>   	struct video_priv *priv;
+> +	struct video_uc_plat *plat;
+>
+>   	/* We only support a single video output device for now */
+>   	if (uclass_first_device_err(UCLASS_VIDEO, &vdev)) {
+> @@ -483,9 +484,10 @@ efi_status_t efi_gop_register(void)
+>   	format =3D priv->format;
+>   	col =3D video_get_xsize(vdev);
+>   	row =3D video_get_ysize(vdev);
+> -	fb_base =3D (uintptr_t)priv->fb;
+> -	fb_size =3D priv->fb_size;
+> -	fb =3D priv->fb;
+> +
+> +	plat =3D dev_get_uclass_plat(vdev);
+> +	fb_base =3D IS_ENABLED(CONFIG_VIDEO_COPY) ? plat->copy_base : plat->ba=
+se;
+> +	fb_size =3D plat->size;
+>
+>   	switch (bpix) {
+>   	case VIDEO_BPP16:
+> @@ -547,7 +549,7 @@ efi_status_t efi_gop_register(void)
+>   	}
+>   	gopobj->info.pixels_per_scanline =3D col;
+>   	gopobj->bpix =3D bpix;
+> -	gopobj->fb =3D fb;
+> +	gopobj->fb =3D map_sysmem(fb_base, fb_size);
+>
+>   	return EFI_SUCCESS;
+>   }
 
