@@ -4,76 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9154C25B74
-	for <u-boot@archiver.kernel.org>; Sat, 18 May 2024 09:40:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EA3DC25B74
+	for <u-boot@archiver.kernel.org>; Sat, 18 May 2024 11:36:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7E7E8865B;
-	Sat, 18 May 2024 11:40:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id B41118863A;
+	Sat, 18 May 2024 13:36:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="WGAV72V+";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="TxmfiGeT";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="R2tbOIRN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9AA7C88666; Sat, 18 May 2024 11:40:53 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ id 39DEF8863A; Sat, 18 May 2024 13:36:20 +0200 (CEST)
+Received: from fhigh2-smtp.messagingengine.com
+ (fhigh2-smtp.messagingengine.com [103.168.172.153])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 310E588657
- for <u-boot@lists.denx.de>; Sat, 18 May 2024 11:40:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E02E882B8
+ for <u-boot@lists.denx.de>; Sat, 18 May 2024 13:36:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1716025246; x=1716630046; i=xypron.glpk@gmx.de;
- bh=CXselaLZX36o9iR8IhhRF0KoLiVOm8OHucDoZvrPsh0=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=WGAV72V+ErJyK/Hbv70l6GKWZV5JmDdf8oCviMX211R/h5+wWOrP4V9xJHU/5yV6
- it8zTJg1PnA7JxjzHSSuVBhXLwG50bPlxrTfoBeixx36tyJDutlzqEgG3chcwC4Zd
- lb+ijHssaF9l2Os69yaijrH90xb83ZedkfJRa25b0Shzou0045c555fpKhAa9G2wk
- v5otyNegDFtBq04IgxrmdY6eoeeJR/jlms6/fjR42faP4EP/nhxwoQ5qV8KO0XBt5
- AjSd+9v1I4/NyAzgSvpHxoYcWcbrtT8hlhFnjLR8XrShSOO9rMVq99NO5gCJMQsoD
- 14C3fdx4tjbzyAXLNQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([62.143.245.32]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M4s4r-1sABQn1Fmp-0037le; Sat, 18
- May 2024 11:40:46 +0200
-Message-ID: <673897a4-4887-4ca0-9dbb-a6d94ebed335@gmx.de>
-Date: Sat, 18 May 2024 11:40:45 +0200
+ spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id 6CC3511400A1;
+ Sat, 18 May 2024 07:36:15 -0400 (EDT)
+Received: from imap44 ([10.202.2.94])
+ by compute3.internal (MEProxy); Sat, 18 May 2024 07:36:15 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
+ cc:cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1716032175;
+ x=1716118575; bh=8eV6BVk5CVWUaMAHCxbOacyWn1FPmMmtVK0/1rmj6CQ=; b=
+ TxmfiGeTjpWShDwZ5eQXRC4v5FOzGzB6MmNkWuPT9TEjDzTh6MLakhX6ynfDOcmU
+ H6vM1Wmyd+RGHri931EGx+FWbsWtL75PWCMSmkSr3482U8SnHOdhc034y3hRPdlt
+ 4GQUu8I8lPA60OykVw9Tii/tmOB+Zjs2pA2vHxtrlTprnb25u5J6M0X1AsCEOTKK
+ yWSMh4/WzIRtzC/yEc7TqDEEXt64sUTdYKW5Zkt0wUw94R0KbsNLRhC2RQi8QgQ3
+ QTasdBbtTOf+zHtGwBKhldOclsP4mPteE5gwl5Cnsncrjazv8Vc5puut6RPawQRt
+ le/cKupkh+1SqwPRu8/c3g==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716032175; x=
+ 1716118575; bh=8eV6BVk5CVWUaMAHCxbOacyWn1FPmMmtVK0/1rmj6CQ=; b=R
+ 2tbOIRNnyFZXAXJLITKHMxzy5NrzaweaT9zSRgzETdhXAkdC3om4XkkqQMEwyRX4
+ FyIqOJ2xiKMkyJVFcC+bu1ZjMKg11CBuhMq7jnzoz7ppdvBOFIBO30y/LBVLvi0n
+ c8MlhDL5LLlYSjKW40wTd7Oo9RrJajedMvhOn+6BcOO1VWbS7HqC+I6RdmDyTsej
+ ZAdC1uMOB+btFKmIc1IocKEN961B1nONbot+kvGbJqq90mlj207QtTdCqDFc5j06
+ KdJDEbhTTStiWTsaESumulhVvoH8KDDkaPYxaKi0nbg/tRKZB/t2EEBlczyPEQel
+ VjbrcRg6cMeTLozEN9MUw==
+X-ME-Sender: <xms:r5JIZns_W1EzV-gBbRNIbkt-x969KNdgsm_hQlZeD3koLZfx9ViCAw>
+ <xme:r5JIZoelPBaEduHjjKKtrPyM3Nq6o-QGZAVTiaNB8byawuvASeIMSqDK5pK0XqVhi
+ vgupxSxSzs1nxcYnE4>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehiedgfeegucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhepofgfggfkjghffffhvfevufgtgfesthhqredtreerjeenucfhrhhomhepfdfl
+ ihgrgihunhcujggrnhhgfdcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtoh
+ hmqeenucggtffrrghtthgvrhhnpedufeegfeetudeghefftdehfefgveffleefgfehhfej
+ ueegveethfduuddvieehgfenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmh
+ grihhlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
+X-ME-Proxy: <xmx:r5JIZqwcXpYO5kIlTdqKXmkAwSbfjxZe207EcyPyrjyZjblpu6OtoA>
+ <xmx:r5JIZmMpSG9apcsaUnCbFIQGtiElNRqf4fFjZ10TyiwCUbb5sNYLzQ>
+ <xmx:r5JIZn9VcHTBvca8LS-LHsfUb9gob_8hlEHWCU2nK6lRF9AOER7GTw>
+ <xmx:r5JIZmUdn_SZzRXNa_WORcChV2HIe4e1X1dUoX3lJ7Gwut144Fv1fQ>
+ <xmx:r5JIZqbqBTymoJE5QFtP1Yy5OiaYkP52DN79bXQJTjcFsp1BeiwBZoNQ>
+Feedback-ID: ifd894703:Fastmail
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id 20B8736A0074; Sat, 18 May 2024 07:36:14 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.11.0-alpha0-456-gcd147058c-fm-hotfix-20240509.001-g0aad06e4
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] cmd: move ELF load and boot to lib/elf.c
-To: Maxim Moskalets <maximmosk4@gmail.com>
-Cc: Maxim.Moskalets@kaspersky.com, quentin.schulz@theobroma-systems.com,
- sjg@chromium.org, trini@konsulko.com, u-boot@lists.denx.de
-References: <20240513181757.84898-1-Maxim.Moskalets@kaspersky.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240513181757.84898-1-Maxim.Moskalets@kaspersky.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Message-Id: <1d7b798a-5f1e-4b69-84b4-044456fe8a89@app.fastmail.com>
+In-Reply-To: <a4d513ec-2f6e-464b-8167-462e05615571@gmx.de>
+References: <20240517-address-spaces-v1-1-93e14c260b73@flygoat.com>
+ <a4d513ec-2f6e-464b-8167-462e05615571@gmx.de>
+Date: Sat, 18 May 2024 12:35:55 +0100
+From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
+To: "Heinrich Schuchardt" <xypron.glpk@gmx.de>
+Cc: "Tom Rini" <trini@konsulko.com>, "Simon Glass" <sjg@chromium.org>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH RFC] doc: Document address spaces used by U-Boot
+Content-Type: text/plain;charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:u9gw+AZQMa8HU5akuEaSQ1HM5vuFDxOmdyhwJrYxd57+m4aPpzL
- IZcSpweCgwfvcHmZulJEUINRAY7YZYrmnljG2OIA/3dYjBWqZ7fF8mk9nVM8qish3W7+ykQ
- K5TgnuHIqFbStOcZtKlZK5hGUmVDbqO76Um/TTkE/1zBtlBg/rDXOUG79lX+f9Xff+mxwWH
- YOV+Xc+rZXgzlftxbGDKA==
-UI-OutboundReport: notjunk:1;M01:P0:i67NTxFmDCY=;X6Nz+lfqCylRblbLD2IiWnYs8wA
- ah5BRIg7JTFS4pFiRey3eHwPM+NCZevb66vAZP0EwUq2duEbJrTNUrzLzn4w2Hh3a0kNZgEba
- 2QMSSC2Lsn5Tm453qc502yhMT/SGq7Ycu7CUavoy4NGaJfqIbtonLR5WK8+mNWo0A81c9TC+2
- YlwNq1lrYNuWp42Iyk8+wIKfr8CE8iw6Juwq1gljOyFuygUuPuKsGWGsZT0MQ4Uz86zicHLGS
- 7LEjq4vKx4ZhstBFhPEX3BR2s3dYvp+j7YCYE9xbckYyDoq8+sM6v1PprmWBNduYGdOfU7nZk
- uOwBPkTlVeI6Ax/qhOaJUd8JaM4yTRW+sP8m0fQl72sxBEB83frsYvvCSWcvVPcXi4A64n2qO
- EIa8Whtm75Facf3NzuvbTEUTn1Vh5BEFSgrNFRV3+jLNJnbI5tt/nEwloJnyBk4SNONECrHre
- ex0eJ0NP6tEo+BoqRN3DAEBSyE6T+1vZx7H/aqMi1b9qL/FLTHk1G7PjpwRU1MOfrD+v28fgd
- J1ZaSpyjstJAhz0FdC63PFSbWlxmQN00UZVrCnKSnx0Q+L49lswb5vBTZF407YIBC0EE+Qeiw
- WV+YiDhhlPNQBIdmCW8I5wPrOWtzmNWwivWwppt7Wjt+ReFxNs/IVoh4EcZa/DsDoB71uW2Bj
- NDyFiSBCf7goVZxBqaiaiFxKw5XsOmQLXU2Mdawm1v6PcHm5sY/A7mzFjwYxzUNcZ/f8SXcxu
- e9AadsJw694sIU4GML0O+oXcJHLvKSnQcGn9h/VXC0XUaGJbrIHYrRINWVkfX8ZNANkqiVBVt
- 7VHq8gA7AXkRQcrs3KyEl/ARmy0tdrhNq4YksHo4ZS8Yo=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,298 +106,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/13/24 20:17, Maxim Moskalets wrote:
-> From: Maxim Moskalets <maximmosk4@gmail.com>
+
+
+=E5=9C=A82024=E5=B9=B45=E6=9C=8818=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8A=E5=
+=8D=889:08=EF=BC=8CHeinrich Schuchardt=E5=86=99=E9=81=93=EF=BC=9A
+> On 5/17/24 13:45, Jiaxun Yang wrote:
+[...]
+
+Hi Heinrich,
+
+Ah sorry I should really spell check it before sending it off....
+It was copied directly from my personal note.
+
+> %s/optinos/options/
 >
-> Loading and running the ELF image is the responsibility of the
-> library and should not be associated with the command line interface.
->
-> It is also required to run ELF images from FIT with the bootm command
-> so as not to depend on the command line interface.
->
-> Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
-> ---
->   cmd/elf.c     | 49 +++++++++++++++++--------------------------------
->   include/elf.h | 10 ++++++++++
->   lib/elf.c     | 38 ++++++++++++++++++++++++++++++++++++++
->   3 files changed, 65 insertions(+), 32 deletions(-)
->
-> diff --git a/cmd/elf.c b/cmd/elf.c
-> index a02361f9f5..1fb955ae41 100644
-> --- a/cmd/elf.c
-> +++ b/cmd/elf.c
-> @@ -19,21 +19,6 @@
->   #include <linux/linkage.h>
->   #endif
->
-> -/* Allow ports to override the default behavior */
-> -static unsigned long do_bootelf_exec(ulong (*entry)(int, char * const[]=
-),
-> -				     int argc, char *const argv[])
-> -{
-> -	unsigned long ret;
-> -
-> -	/*
-> -	 * pass address parameter as argv[0] (aka command name),
-> -	 * and all remaining args
+> Relating to gd->bd->bi_dram[] or LMB just adds a layer of confusion to
+> the reader. I would not refer to specific internal structures in this
+> document.
 
-Carving out the library function is a good idea.
-
-Nits
-
-%s/args/arguments/
-
-> -	 */
-> -	ret =3D entry(argc, argv);
-> -
-> -	return ret;
-> -}
-> -
->   /* Interpreter command to boot an arbitrary ELF image from memory */
-
-Please, document functions fully:
-
-https://www.kernel.org/doc/html/latest/doc-guide/kernel-doc.html#function-=
-documentation
-
-The preferred place for documenting exported functions is in the header
-file.
-
->   int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const =
-argv[])
->   {
-> @@ -43,8 +28,8 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int ar=
-gc, char *const argv[])
->   #endif
->   	unsigned long addr; /* Address of the ELF image */
->   	unsigned long rc; /* Return value from user code */
-> -	char *sload =3D NULL;
->   	int rcode =3D 0;
-
-Maybe
-
-%s/0/CMD_RET_SUCCESS/
-
-> +	Bootelf_flags flags =3D {0};
->
->   	/* Consume 'bootelf' */
->   	argc--; argv++;
-> @@ -52,7 +37,10 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int a=
-rgc, char *const argv[])
->   	/* Check for [-p|-s] flag. */
->   	if (argc >=3D 1 && (argv[0][0] =3D=3D '-' && \
->   				(argv[0][1] =3D=3D 'p' || argv[0][1] =3D=3D 's'))) {
-> -		sload =3D argv[0];
-> +		if (argv[0][1] =3D=3D 'p')
-> +			flags.phdr =3D 1;
-> +		printf("## Try to elf hdr format %s\n",
-> +				flags.phdr ? "phdr" : "shdr");
-
-Please, use log_debug() for debug messages and avoid the '## ' noise.
-
-Do you mean:
-
-log_debug("Using ELF header format %s\n",
-
->   		/* Consume flag. */
->   		argc--; argv++;
->   	}
-> @@ -75,14 +63,6 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int a=
-rgc, char *const argv[])
->   	} else
->   		addr =3D image_load_addr;
->
-> -	if (!valid_elf_image(addr))
-> -		return 1;
-> -
-> -	if (sload && sload[1] =3D=3D 'p')
-> -		addr =3D load_elf_image_phdr(addr);
-> -	else
-> -		addr =3D load_elf_image_shdr(addr);
-> -
->   #if CONFIG_IS_ENABLED(CMD_ELF_FDT_SETUP)
->   	if (fdt_addr) {
->   		printf("## Setting up FDT at 0x%08lx ...\n", fdt_addr);
-
-This looks like a debug message too.
-
-> @@ -93,21 +73,26 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int =
-argc, char *const argv[])
->   	}
->   #endif
->
-> -	if (!env_get_autostart())
-> -		return rcode;
-> -
-> -	printf("## Starting application at 0x%08lx ...\n", addr);
-> -	flush();
-> +	if (env_get_autostart()) {
-> +		flags.autostart =3D 1;
-> +		printf("## Starting application at 0x%08lx ...\n", addr);
-
-log_debug("Starting application at 0x%08lx ...\n", addr);
-
-> +		flush();
-> +	}
->
->   	/*
->   	 * pass address parameter as argv[0] (aka command name),
->   	 * and all remaining args
->   	 */
-> -	rc =3D do_bootelf_exec((void *)addr, argc, argv);
-> +	rc =3D bootelf(addr, flags, argc, argv);
->   	if (rc !=3D 0)
->   		rcode =3D 1;
-
-%s/1/CMD_RET_FAILURE/
+So it's a developer oriented document and I decided to add some examples.
 
 >
-> -	printf("## Application terminated, rc =3D 0x%lx\n", rc);
-> +	if (flags.autostart) {
-> +		if (ENOEXEC =3D=3D errno)
-
-if (rc && ENOEXEC =3D=3D errno)
-
-> +			printf("## Invalid ELF image\n");
-
-log_err("Invalid ELF image\n");
-
-> +		else
-> +			printf("## Application terminated, rc =3D 0x%lx\n", rc);
-
-This message is only relevant if the application failed:
-
-else if (rc)
-     log_err("Application failed, rc =3D 0x%lx\n", rc);
-
-> +	}
+>> +used as arguments to load commands. It is recommended to use ``sysme=
+m_addr_t``
+>> +to store ``sysmem`` address.
 >
->   	return rcode;
->   }
-> diff --git a/include/elf.h b/include/elf.h
-> index a4ba74d8ab..b88e6cf403 100644
-> --- a/include/elf.h
-> +++ b/include/elf.h
-> @@ -12,6 +12,12 @@
->   #ifndef __ASSEMBLY__
->   #include "compiler.h"
+> In most places long is used.
 >
-> +/* Flag param bits for bootelf() function */
-> +typedef struct {
-> +	unsigned phdr      : 1; /* load via program (not section) headers */
-> +	unsigned autostart : 1; /* Start ELF after loading */
-> +} Bootelf_flags;
-> +
->   /* This version doesn't work for 64-bit ABIs - Erik */
+>> +
+>> +It is further used by sandbox to simulate memory, and by MIPS to han=
+dle
+>> +differences between ``virt`` and ``phys`` address spaces.
+>
+> You have been submitting patches to implement EFI for MIPS.
+>
+> The EFI specification explicitly requires a 1:1 mapping in the MMU
+> between. virtual and physical addresses.
+>
+> In what respect does MIPS not comply to this?
+>
+> In how far do MIPS addresses shown in the CLI differ from the physical
+> addresses (i.e. addresses on the electrical address lines)?
 
-If the elf command does not work in certain ABIs we need to ensure via
-Kconfig that it is not build for these.
+So for MIPS we need to apply a fixed offset to physical address to get a
+usable virtual address, i.e. 0x1000 physical is 0x80001000 virtual. That
+mapping is guaranteed by the hardware, and you can't disable it even aft=
+er
+enabling MMU.
+
+All CLIs are currently using virtual address.
+
+For EFI all table address passed are virtual-ish address.
 
 >
->   /* These typedefs need to be handled better */
-> @@ -700,6 +706,10 @@ unsigned long elf_hash(const unsigned char *name);
->   #define R_RISCV_RELATIVE	3
+> CONFIG_ARCH_MAP_SYSMEM seems only to be set on the sandbox and not on
+> MIPS. We should try to keep it that way.
 >
->   #ifndef __ASSEMBLY__
-> +unsigned long bootelf_exec(ulong (*entry)(int, char * const[]),
-> +			   int argc, char *const argv[]);
-> +unsigned long bootelf(unsigned long addr, Bootelf_flags flags,
-> +		      int argc, char *const argv[]);
->   int valid_elf_image(unsigned long addr);
->   unsigned long load_elf64_image_phdr(unsigned long addr);
->   unsigned long load_elf64_image_shdr(unsigned long addr);
-> diff --git a/lib/elf.c b/lib/elf.c
-> index 9a794f9cba..f8eeceef3d 100644
-> --- a/lib/elf.c
-> +++ b/lib/elf.c
-> @@ -7,6 +7,7 @@
->   #include <cpu_func.h>
->   #include <elf.h>
->   #include <env.h>
-> +#include <errno.h>
->   #include <net.h>
->   #include <vxworks.h>
->   #ifdef CONFIG_X86
-> @@ -15,6 +16,43 @@
->   #include <linux/linkage.h>
->   #endif
+
+I'm actually trying to introduce ARCH_MAP_SYSMEM abstraction to MIPS
+because currently it's totally a mess about virtual vs physical everywhe=
+re.
+
+I think eventually we should convert most internal data structure (and c=
+md
+arguments) to use physical address for consistency, but converting all
+existing boards to that model cost an arm and a leg. So my plan is to in=
+troduce
+an option telling if sysmem is virtual or physical and let boards opt-in
+that option.
+
+Thanks
+
 >
-> +/* Allow ports to override the default behavior */
-
-Please, fully document the function.
-
-> +unsigned long bootelf_exec(ulong (*entry)(int, char * const[]),
-> +			   int argc, char *const argv[])
-> +{
-> +	return entry(argc, argv);
-> +}
-> +
-> +/*
-> + * @brief Boot ELF from memory
-> + *
-> + * @param addr       Loading address of ELF in memory
-> + * @param flags      Bits like ELF_PHDR to control boot details
-> + * @param argc, argv May be used to pass command line arguments (maybe =
-unused)
-> + *		     Necessary for backward compatibility with the CLI command
-> + * @retuen Number returned by ELF application
-
-This does not match our documentation style, see
-
-https://www.kernel.org/doc/html/latest/doc-guide/kernel-doc.html#function-=
-documentation
-
-> + *
-> + * Sets errno =3D ENOEXEC if ELF image is not valid
-
-%s/if ELF/if the ELF/
-
-> + */
-> +unsigned long bootelf(unsigned long addr, Bootelf_flags flags,
-> +		      int argc, char *const argv[])
-> +{
-> +	unsigned long entry_addr;
-> +
-> +	if (!valid_elf_image(addr)) {
-> +		errno =3D ENOEXEC;
-> +		return 1;
-> +	}
-> +
-> +	entry_addr =3D flags.phdr ? load_elf_image_phdr(addr)
-> +					    : load_elf_image_shdr(addr);
-> +
-> +	if (!flags.autostart)
-> +		return 0;
-
-Please, return early. We don't need entry_addr here.
-
-> +
-> +	return bootelf_exec((void *)entry_addr, argc, argv);;
-
-Duplicate ';'.
-
-An ELF binary may expect that argc >=3D 1 and argv[0] being the binary
-name. How do we ensure this?
-
-We should describe in a man-page doc/usage/cmd/elf.rst that the first
-extraneous argument passed to the elf command is argv[0]?
-
-On some paths we have not set errno which means it has a random value
-set in unrelated functions. How would we able to evaluate errno in the
-caller if the return value is non-zero?
-
-Please, initialize errno to 0 at the start of the function.
-
-We need a test case. E.g. we could build an ELF binary returning the
-CRC32 of the concatenated arguments.
-
-Best regards
-
-Heinrich
-
-> +}
-> +
->   /*
->    * A very simple ELF64 loader, assumes the image is valid, returns the
->    * entry point address.
-
+> To summarize. If I have not mistaken anything about MIPS:
+>
+> All physical devices are identity mapped.
+>
+> The sandbox uses a virtual address space incorrectly called 'physical'
+> which is mapped to the virtual address space of the host. This sandbox
+> virtual address space is used in
+>
+> * the command line interface
+> * in the sandbox device-tree
+> * in environment variable
+>
+> This allows using the same address values in sandbox tests irrespective
+> of what part of the host RAM was mapped via mmap().
+>
+> Best regards
+>
+> Heinrich
+>
+[...]
+--=20
+- Jiaxun
