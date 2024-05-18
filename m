@@ -4,93 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D3C8C25B75
-	for <u-boot@archiver.kernel.org>; Sat, 18 May 2024 15:03:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A743C25B75
+	for <u-boot@archiver.kernel.org>; Sat, 18 May 2024 15:04:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21CD6886A4;
+	by phobos.denx.de (Postfix) with ESMTP id 81909886A7;
 	Sat, 18 May 2024 17:03:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="Opex4Bml";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="bDXeMpsq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 931648863A; Sat, 18 May 2024 14:03:08 +0200 (CEST)
+ id D53748863F; Sat, 18 May 2024 14:03:10 +0200 (CEST)
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A285A8863F
- for <u-boot@lists.denx.de>; Sat, 18 May 2024 14:03:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0974F88659
+ for <u-boot@lists.denx.de>; Sat, 18 May 2024 14:03:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=javierm@redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1716033784;
+ s=mimecast20190719; t=1716033786;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=NhWlwT/pT1fmUODA99kY/A/9JxHW00PIxAWnT4pFUdE=;
- b=Opex4Bml4mBe6T7oWQlq9nzk8sveL2RXOXXlscU8ugPBxT2WOA4TclJAMpTiqOWkkWR7p+
- YDx8T9mhMdj3Hmu6uuWPN/yX5tj8fnjBDHrUfYUYiObk4vN+4wyTAGmYd0I5ZTS8BmZlg9
- WqcvWLzwC4FMwuSegXcwXxuNdHuRDi8=
-Received: from mail-lj1-f197.google.com (mail-lj1-f197.google.com
- [209.85.208.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=9wWTaAmMTAo74NaoqGMbgHxXdbG0mpL4ixasp7W9sNk=;
+ b=bDXeMpsqIHTyvwCFjGxTJM/DTz6ihHp0GWvVxPralCY7Oy/NQhG4wCY40wst9E/BvT0yiV
+ exv9qojfvyZnZe7MVzY2nqcrmswS9vOqWnGWLPwD4YXiPg0rS23yeV/a4Fl+hvzaXY+pke
+ ruPLzdar4RGvJctgWeQywUp57A8w8fQ=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-683-Bmaez33ZPXSN7V3xp83fXw-1; Sat, 18 May 2024 08:03:03 -0400
-X-MC-Unique: Bmaez33ZPXSN7V3xp83fXw-1
-Received: by mail-lj1-f197.google.com with SMTP id
- 38308e7fff4ca-2e3003fae2dso65819941fa.3
- for <u-boot@lists.denx.de>; Sat, 18 May 2024 05:03:02 -0700 (PDT)
+ us-mta-96-JIh98tGRO1KcS77J498cjg-1; Sat, 18 May 2024 08:03:05 -0400
+X-MC-Unique: JIh98tGRO1KcS77J498cjg-1
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-41feab38d16so39287735e9.3
+ for <u-boot@lists.denx.de>; Sat, 18 May 2024 05:03:04 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716033781; x=1716638581;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NhWlwT/pT1fmUODA99kY/A/9JxHW00PIxAWnT4pFUdE=;
- b=ST2tzcXc42opy6wTrVh/606rrvY3Erl2WQnnExjk5IQM495hfxEwkay0iIY5EhyJq/
- /zRhxEMQcyOwUWRKsvHrHtIsYmOYsQbi0184JYY4Idf8YGaiXLbNUvs2BOtO1n3PEeRV
- xXFKGwIjjj9e0YHg1ovN5l9PIGBvzKE2b3DW3PCU4VVuhk2ck5FxZhYw60kgpXlaawou
- thjbTKrNHQ51uadECMWCYbwhsB/qdft12FkixhupLo6AorzUQ5BankwHro/spfMgd+U4
- 9UCAlysmz8ozs+dtYfg4sWCyoep/mJJeu+Sqn2gaycXvcoe7Fxh3Bw9ixiI9/9+E5uko
- 8WSg==
-X-Gm-Message-State: AOJu0YwO8xDgoyjw719HYnYoo8iD0Xswdks9/agagwtic+w9OF3JavJO
- 4cjICWGlc+mQP/VkMDOdE6c6kXVKurxE95z7MzNMZQBVt1PLM07mdFdgsdBlMXdaV9uAr+6HtMT
- GPbeuijP8KDPOPV2Z68q+ad6UxNDEgqdfaMjPAwAMQ5Cb0bJdrXC/G4WiS3X/NYN+96eGnFiHMI
- Gif7+edRuTULSUzkMVrjS5bvz9nwzmkmjkGg==
-X-Received: by 2002:a05:651c:1a2a:b0:2e7:18d3:cd56 with SMTP id
- 38308e7fff4ca-2e718d3cef5mr10372241fa.25.1716033781280; 
- Sat, 18 May 2024 05:03:01 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFw6tM15yh3ZbNV97llvBn6EKP7BOUHpokolEXuLdQvarMbx4e4RpHhMZ+FRQ6ZObLPJzV/ig==
-X-Received: by 2002:a05:651c:1a2a:b0:2e7:18d3:cd56 with SMTP id
- 38308e7fff4ca-2e718d3cef5mr10371791fa.25.1716033780623; 
- Sat, 18 May 2024 05:03:00 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1716033783; x=1716638583;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=9wWTaAmMTAo74NaoqGMbgHxXdbG0mpL4ixasp7W9sNk=;
+ b=Xlu7ZToOlwfSp3lMWHgbEao58HY+/AIbQ5Tes+fBroBj1hJq9WBGJ/qv6rUhigJIy2
+ okdBa4NgIvAb+ecRym3fR+saYAJ7UEyS8AVSRYLFlhr8nBaE2TlcIGEXO9rHXGQ2dsx8
+ tTROML1xpQBr5Sm9ZOvHaYPUgvYKNPb4AtxXww7RK9du/8LsTcRdZll8Imk+QHPVKzfD
+ OCPm+TOwWRdtYIYnaoe3MS72zUGOewN5wAKSqWGEqmDbinL95lbWgn7FLuRRemAkFj/K
+ Yb9gd6b0amPd0p/OtxGKCuXEJANAo2SlvecRH81Lw7fK4TFp46aq6kFR6hmRaM9BQevP
+ sUZQ==
+X-Gm-Message-State: AOJu0YztNxWiuU1fZRKbW+nrzOowbUj0HonyI+ynal6g4XaNCXF01Rze
+ r6/GMAmqMXlWhv0yWXLcPi+qHrkfr/6dZ9uoDq7GTbD3hrCrpfSW6r1WX474H2xufisNEqoF3gd
+ tmaMRX3ImBFLlUxBqtDiK9bHn4Idc5mxfZWR22mk+JpPIGnmTQwNcNs8xH2RbwS3MmzKTUk+7uK
+ 7BA5H+u56jQ9ONVXkyMoGyJzw7rQzltcaeZw==
+X-Received: by 2002:a05:600c:1392:b0:420:e24b:dbc with SMTP id
+ 5b1f17b1804b1-420e24b1202mr10104035e9.27.1716033783485; 
+ Sat, 18 May 2024 05:03:03 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHTWwBY2KoAk6w6/kk7qcT3NgYvDMfTpIIEfMxDvqNNBBoimBi4M02QephAcg0p+dtMkK57yw==
+X-Received: by 2002:a05:600c:1392:b0:420:e24b:dbc with SMTP id
+ 5b1f17b1804b1-420e24b1202mr10103725e9.27.1716033782780; 
+ Sat, 18 May 2024 05:03:02 -0700 (PDT)
 Received: from localhost (205.pool92-176-231.dynamic.orange.es.
  [92.176.231.205]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42009eda143sm278834645e9.14.2024.05.18.05.03.00
+ 5b1f17b1804b1-41ff7a840d2sm304084385e9.39.2024.05.18.05.03.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 18 May 2024 05:03:00 -0700 (PDT)
+ Sat, 18 May 2024 05:03:02 -0700 (PDT)
 From: Javier Martinez Canillas <javierm@redhat.com>
 To: u-boot@lists.denx.de
 Cc: Javier Martinez Canillas <javierm@redhat.com>,
  Enric Balletbo i Serra <eballetbo@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
  Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Martyn Welch <martyn.welch@collabora.com>,
- Michal Simek <michal.simek@amd.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Qu Wenruo <wqu@suse.com>,
  Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>, Sumit Garg <sumit.garg@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
- Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>
-Subject: [RESEND PATCH 0/4] omap3: igep0x00: Fix boot failure and modernize
- the boards support
-Date: Sat, 18 May 2024 14:02:28 +0200
-Message-ID: <20240518120254.204138-1-javierm@redhat.com>
+ Tom Rini <trini@konsulko.com>
+Subject: [RESEND PATCH 1/4] omap3: igep00x0: Increase malloc() pool size
+Date: Sat, 18 May 2024 14:02:29 +0200
+Message-ID: <20240518120254.204138-2-javierm@redhat.com>
 X-Mailer: git-send-email 2.45.0
+In-Reply-To: <20240518120254.204138-1-javierm@redhat.com>
+References: <20240518120254.204138-1-javierm@redhat.com>
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
@@ -113,41 +108,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+The IGEPv2 board boot started to fail since the commit afd4f15a39de ("spi:
+omap3_spi: Read platform data in ofdata_to_platdata()"). Because this made
+the OMAP3 SPI controller driver to allocate its platform data before doing
+a relocation, but the igep0x00 config sets this pool size to just 1 KiB.
 
-I noticed that the IGEPv2 board did not boot anymore with mainline U-Boot.
-This was caused by a driver change to allocate its platform data before
-relocation and U-Boot not having enough pre-relocation heap size for this.
+Increase the pre-relocation malloc heap size to 16 KiB, as is set by other
+OMAP3 boards. This not only restores booting but also makes it consistent.
 
-This series fixes this issue and also makes the board support more modern,
-by enabling DM for SPL and migrating the IGEP boards to use upstream DTBs.
+Leave the SPL pool size to the previous 1 KiB size since 16 KiB may not be
+a possible size in that constrained environment and is also the value that
+is set by other OMAP3 boards.
 
-It is a resend because previous emails were blocked on moderator approval
-due not being subscribed in the mailing list. Hopefully this time makes it
-through, sorry for the spam to folks Cc'ed.
+Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
+---
 
-Best regards,
-Javier
+ configs/igep00x0_defconfig | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-
-Javier Martinez Canillas (4):
-  omap3: igep00x0: Increase malloc() pool size
-  omap3: igep0x00: Drop unused SPI support
-  omap3: igep0x00: Update for DM SPL support
-  omap3: igep0x00: Migrate to use upstream DT
-
- arch/arm/dts/Makefile                   |   3 -
- arch/arm/dts/omap3-igep.dtsi            | 247 ----------------------
- arch/arm/dts/omap3-igep0020-common.dtsi | 261 ------------------------
- arch/arm/dts/omap3-igep0020-u-boot.dtsi |  14 +-
- arch/arm/dts/omap3-igep0020.dts         |  47 -----
- board/isee/igep00x0/igep00x0.c          |  12 --
- configs/igep00x0_defconfig              |  26 ++-
- 7 files changed, 14 insertions(+), 596 deletions(-)
- delete mode 100644 arch/arm/dts/omap3-igep.dtsi
- delete mode 100644 arch/arm/dts/omap3-igep0020-common.dtsi
- delete mode 100644 arch/arm/dts/omap3-igep0020.dts
-
+diff --git a/configs/igep00x0_defconfig b/configs/igep00x0_defconfig
+index 261f71acc1dd..e4d25556e3f3 100644
+--- a/configs/igep00x0_defconfig
++++ b/configs/igep00x0_defconfig
+@@ -1,6 +1,6 @@
+ CONFIG_ARM=y
+ CONFIG_ARCH_OMAP2PLUS=y
+-CONFIG_SYS_MALLOC_F_LEN=0x400
++CONFIG_SYS_MALLOC_F_LEN=0x4000
+ CONFIG_TI_COMMON_CMD_OPTIONS=y
+ CONFIG_NR_DRAM_BANKS=2
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+@@ -10,6 +10,7 @@ CONFIG_DEFAULT_DEVICE_TREE="omap3-igep0020"
+ CONFIG_SPL_TEXT_BASE=0x40200000
+ CONFIG_TARGET_OMAP3_IGEP00X0=y
+ CONFIG_SYS_MONITOR_LEN=262144
++CONFIG_SPL_SYS_MALLOC_F_LEN=0x400
+ CONFIG_SPL=y
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTDELAY=3
 -- 
 2.45.0
 
