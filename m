@@ -4,40 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8C2DC25B74
-	for <u-boot@archiver.kernel.org>; Sat, 18 May 2024 03:55:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 739FFC25B74
+	for <u-boot@archiver.kernel.org>; Sat, 18 May 2024 03:55:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1AAB884BE;
-	Sat, 18 May 2024 05:55:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D2EE4885E4;
+	Sat, 18 May 2024 05:55:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=jookia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=jookia.org header.i=@jookia.org header.b="zgBt//yl";
+	dkim=pass (2048-bit key; unprotected) header.d=jookia.org header.i=@jookia.org header.b="dPHffoCS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C0F2884AC; Sat, 18 May 2024 05:55:14 +0200 (CEST)
-Received: from out-171.mta1.migadu.com (out-171.mta1.migadu.com
- [95.215.58.171])
+ id 4E53D8858C; Sat, 18 May 2024 05:55:19 +0200 (CEST)
+Received: from out-183.mta1.migadu.com (out-183.mta1.migadu.com
+ [95.215.58.183])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49A6D884BE
- for <u-boot@lists.denx.de>; Sat, 18 May 2024 05:55:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A4C7885A0
+ for <u-boot@lists.denx.de>; Sat, 18 May 2024 05:55:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=jookia.org
 Authentication-Results: phobos.denx.de;
  spf=none smtp.mailfrom=contact@jookia.org
 X-Envelope-To: contact@jookia.org
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jookia.org; s=key1;
- t=1716004509;
+ t=1716004517;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=NKCDMjYeGS9diSVEsecNUZnlb4Z0QpuNFm5YbcSwXic=;
- b=zgBt//ylrlYgttzyexu5/JAvjNN0m1UGJuxqsRS9+2giXbP766MACBEd4p00KSmbsMpL14
- kML38+OTO5FiExIMHuDDuBGC34Ears+uXz3oTzmtmANn7QD6/eyTBrzEVsj82IdLgQsoD3
- NJ3EOr8AWJBLqciBMTfLHtTHTAln6ECo6GlKoQoGGc3lbq98RkykubZRG5kKZR9rbzMe10
- FYy/csp7gHautyEfpHWeE69IZwXyU2GI4qPMyZ6YPr6LsmCUj8xMGk/WN+RfwkReD/BFGL
- u0rNNKa51cB1zIWNsFfkHnp8fZ/LVh0q+ZgozW7UeAei1ZD0SP4yhAGwhVy6uw==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=aT9xmtMVgAoWnzoaRYOrRVILa1wd+OE7PzOHEMlobek=;
+ b=dPHffoCSVQPgxzGdQfnzDY2j7CIfh4j3ki9/AWJPkmULCqf5OdzR/I+0pijW0A8r6U42x8
+ icfU03jG2KXZYmDaFmqGGfNSMmKlrZejx5H2HrvobSbhCbR0zSO4f1cHMQSY97FycwNR86
+ 1Jn+tz0DiPl3bm+79fAZJHtatbdaITdmxe6MG1nBUj1DrVcVaQTFVEYXBDt/sNI0rg8nk7
+ GhDH2OJyLYbXjWN2LSEd/lTP/xNMXgHX6hmQrCChl1VADa4VpCTaXajyPSwD8D+55tIxO6
+ AeTPT6gMkLlMD/XrkFLuwtYbtzbdTqr/ng5scRGbIuvXYj7VOSX0V/K5V4qIhw==
 X-Envelope-To: lukma@denx.de
 X-Envelope-To: rick@andestech.com
 X-Envelope-To: seanga2@gmail.com
@@ -50,28 +51,27 @@ X-Envelope-To: jagan@amarulasolutions.com
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 From: John Watts <contact@jookia.org>
-Subject: [PATCH RFC 0/4] pwm: sunxi: Add support Allwinner D1 PWM
-Date: Sat, 18 May 2024 13:54:42 +1000
-Message-Id: <20240518-pwm_d1-v1-0-311fc5fe2248@jookia.org>
+Date: Sat, 18 May 2024 13:54:43 +1000
+Subject: [PATCH RFC 1/4] clk: sunxi: Add PWM bus clock and reset
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAIImSGYC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIxMDU0ML3YLy3PgUQ90kE+MUIzPj1ERDE2MloOKCotS0zAqwQdFKQW7OSrG
- 1tQDl83OQXQAAAA==
+Message-Id: <20240518-pwm_d1-v1-1-311fc5fe2248@jookia.org>
+References: <20240518-pwm_d1-v1-0-311fc5fe2248@jookia.org>
+In-Reply-To: <20240518-pwm_d1-v1-0-311fc5fe2248@jookia.org>
 To: Jagan Teki <jagan@amarulasolutions.com>, 
  Andre Przywara <andre.przywara@arm.com>, Lukasz Majewski <lukma@denx.de>, 
  Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>, 
  Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
  Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de, John Watts <contact@jookia.org>
-X-Developer-Signature: v=1; a=openssh-sha256; t=1716004483; l=1198;
+X-Developer-Signature: v=1; a=openssh-sha256; t=1716004486; l=912;
  i=contact@jookia.org; h=from:subject:message-id;
- bh=vJ+DS6h4tqBT8vnFYQWxEIjg7D7ds9bw5fnoJD2HxsA=;
+ bh=Kmsnwpa7uOGEZkgz5Qdpb19tUIvmBu659timOMwdCoQ=;
  b=U1NIU0lHAAAAAQAAAEoAAAAac2stc3NoLWVkMjU1MTlAb3BlbnNzaC5jb20AAAAgpGuA3uho2
  8zVxm554DVLHyl4gq5/nBHglU5WIWN8/zYAAAAEc3NoOgAAAAZwYXRhdHQAAAAAAAAABnNoYTUx
- MgAAAGcAAAAac2stc3NoLWVkMjU1MTlAb3BlbnNzaC5jb20AAABAf4pg2RUU6JZ8y66oL7LNur8
- sc3ChgAgY0B4kR3+Njr8y4Z6PM2rRj/CNsPBlTo2KBlWuS7EZkXQR/AZ5BtOUCQUAAPQ8
+ MgAAAGcAAAAac2stc3NoLWVkMjU1MTlAb3BlbnNzaC5jb20AAABAmLfjqVpJ/iUXB5DkKnR8War
+ Hmt1z+n/ABox9k1a7zESFEiyVhMoM1niUmvDy6NRTF+gm6UZLzbjH8BsqmdXKCAUAAPQ/
 X-Developer-Key: i=contact@jookia.org; a=openssh;
  fpr=SHA256:6LBQmZH5u7i/edmEZXzCTwCrpSevs/ZshZxNmlD1thY
 X-Migadu-Flow: FLOW_OUT
@@ -91,34 +91,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series adds support for the Allwinner D1, T113 and R329 PWM.
-
-This code isn't based on any kernel code but instead written from scratch with
-the goal of handling the PWM pairs deterministically.
-
-I've tested this on T113 hardware and it works very well.
+This is needed for the D1 PWM driver.
 
 Signed-off-by: John Watts <contact@jookia.org>
 ---
-John Watts (4):
-      clk: sunxi: Add PWM bus clock and reset
-      pinctrl: sunxi: Add PWM7 pinctrl for the D1
-      pwm: sunxi: Add support Allwinner D1 PWM
-      [FOR TESTING ONLY] sunxi-d1s-t113: Add D1 and T113 PWM node
+ drivers/clk/sunxi/clk_d1.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
- arch/riscv/dts/sunxi-d1s-t113.dtsi                 |  12 +
- drivers/clk/sunxi/clk_d1.c                         |   4 +
- drivers/pinctrl/sunxi/pinctrl-sunxi.c              |   1 +
- drivers/pwm/Kconfig                                |   6 +
- drivers/pwm/Makefile                               |   1 +
- drivers/pwm/sunxi_pwm_d1.c                         | 542 +++++++++++++++++++++
- .../src/riscv/allwinner/sunxi-d1s-t113.dtsi        |  12 +
- 7 files changed, 578 insertions(+)
----
-base-commit: 312efdf9c9297382b4e1d04c50376573764b5c00
-change-id: 20240518-pwm_d1-b43d263ea143
+diff --git a/drivers/clk/sunxi/clk_d1.c b/drivers/clk/sunxi/clk_d1.c
+index 9dae761de8..6577d86e0b 100644
+--- a/drivers/clk/sunxi/clk_d1.c
++++ b/drivers/clk/sunxi/clk_d1.c
+@@ -15,6 +15,8 @@
+ static struct ccu_clk_gate d1_gates[] = {
+ 	[CLK_APB0]		= GATE_DUMMY,
+ 
++	[CLK_BUS_PWM]		= GATE(0x7ac, BIT(0)),
++
+ 	[CLK_BUS_MMC0]		= GATE(0x84c, BIT(0)),
+ 	[CLK_BUS_MMC1]		= GATE(0x84c, BIT(1)),
+ 	[CLK_BUS_MMC2]		= GATE(0x84c, BIT(2)),
+@@ -48,6 +50,8 @@ static struct ccu_clk_gate d1_gates[] = {
+ };
+ 
+ static struct ccu_reset d1_resets[] = {
++	[RST_BUS_PWM]		= RESET(0x7ac, BIT(16)),
++
+ 	[RST_BUS_MMC0]		= RESET(0x84c, BIT(16)),
+ 	[RST_BUS_MMC1]		= RESET(0x84c, BIT(17)),
+ 	[RST_BUS_MMC2]		= RESET(0x84c, BIT(18)),
 
-Best regards,
 -- 
-John Watts <contact@jookia.org>
+2.45.1
 
