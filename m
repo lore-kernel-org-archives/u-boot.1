@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8452FC25B74
-	for <u-boot@archiver.kernel.org>; Sat, 18 May 2024 19:57:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06196C25B74
+	for <u-boot@archiver.kernel.org>; Sat, 18 May 2024 20:16:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8DA45882B6;
-	Sat, 18 May 2024 21:57:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 71379884A3;
+	Sat, 18 May 2024 22:15:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UnPojwtb";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="g/c1swuX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38BEF882B8; Sat, 18 May 2024 21:57:47 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6E7F3884CD; Sat, 18 May 2024 22:15:58 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC51287F39
- for <u-boot@lists.denx.de>; Sat, 18 May 2024 21:57:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 59BBC882B8
+ for <u-boot@lists.denx.de>; Sat, 18 May 2024 22:15:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-572d83e3c7eso6640052a12.3
- for <u-boot@lists.denx.de>; Sat, 18 May 2024 12:57:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716062264; x=1716667064; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Bffhg0X7HWdXcCVfj9JRAgoe8gkNWP0KKYOqpYHVBmE=;
- b=UnPojwtbbaQrOTCxrk7gRy9Yr0QG4HgCyxnpnfspHS9psBovUp4Y1IlD4AQafLEx+t
- VjVzyX2OlzcbCQy/W15hxAg1Ss9xcNpGawae4Ot1HWZFdClNyo+/uuGJgo15E1kX3LxC
- lDfQQWvgKL+SlEn2eMT9r6W03WZo0EcLSu5j8HjM2mmkYomDg65aq3GyI53Rx2tHiurI
- vn0JsxmeJtwj6SBGHp77QCLvrIASsbS+Ly3niiG4qHm/Jm6XI8e7PhW7fYXbIWnUKtJf
- N0OnBoEQjSMpoBV83O2fsEQfGWTy24bWMnZzbq4zx5HHMNyWMVnw+fntyxGtoLjT1FhD
- iA+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716062264; x=1716667064;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Bffhg0X7HWdXcCVfj9JRAgoe8gkNWP0KKYOqpYHVBmE=;
- b=wn9Jrwsu48CQmfB48qV+iWFqyFMKuhDxw+tHqn0hhALsROeLyY6bWYUqLhWs+MsF/p
- nqt8OH0w0/Tq7gL1/1g0DHOhvfvUzxp9Kpec28kok2Y8iWSAvP08yXVdKvzQi6YNI2c6
- 5Bk1P1T9SqGT1iEJ9XmbY4Em19ru42ADe0omjFrudrKF+VOVAyB1eBn5yHzT/gNSdCgt
- 94iiEfcaxYCl/xklqimFgTcOdTUCf4XjjeZVmEsdafHMsBu+9nTIxle0sUq4M7XdZwwW
- 6dtR5nTSogfLgb4Wnj2H99f35cWLGt3LB/D/mZqazvxAhwKAozt7T5Z7xezyj+J+gjlm
- NaGA==
-X-Gm-Message-State: AOJu0YwFzK0drOROxdPc3DBae2BPpj5yLypSHspPD1veolaIalZyQR9f
- KKfdemahwPVjjpa4ULxrVpBA+AclMLE6d6fSof5HphZzlef68RL4TExQzpMLdAWwUsZDf3VhgsZ
- L7NkxoUEBSLdQg3JTVdbheM6BMxg=
-X-Google-Smtp-Source: AGHT+IGKva84it/adDOyexI/rI90Vln7GVy0ga90wqsSGQnYUzWAKuGjroPDCFUEzA/c47STAhSoF1eYFnNDnY1CuqM=
-X-Received: by 2002:a05:6402:27cd:b0:573:555e:6d89 with SMTP id
- 4fb4d7f45d1cf-573555e6e72mr17572332a12.1.1716062264122; Sat, 18 May 2024
- 12:57:44 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1716063352; x=1716668152; i=xypron.glpk@gmx.de;
+ bh=KcrRHRyGcqsuk6PHaLF4Rp8p+w0/2KK5HUuubUgwfuA=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=g/c1swuXgc8fNWq8/jY39iIbn/Tk6JSSGGWa0H+ypzZFan9/VuPE6GyB2VAKfUz3
+ 9QrpfpdocfKlXa7JvNKWftJ74YLEmNwxcBOInBlJ2SNvs3WyR7Dw4+y1Hb5nrJxNL
+ Kw1wyV1gnq80V3c2rYb7wBAJXJTorgNZ4BbSpmEfGx6sIYjCyenfIhry+bLEw0gby
+ 5WT4gtLX1AaE22FWalvLhgCI4oApA0sJprdVdIFM2hv1/rDGDRCjbXfnxlWbz73Ww
+ RcWy15SWdHT6HitDhCnl8riieX4oMUlhGHc9ZngrK7LOZNPMICgOr17NsPMGP+3ml
+ jfRr79NpNjiQNvgtcQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([62.143.245.32]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N7QxB-1sc5xN10Gb-017o68; Sat, 18
+ May 2024 22:15:52 +0200
+Message-ID: <b57f12c5-77fd-4020-b88f-8a1c0464bc93@gmx.de>
+Date: Sat, 18 May 2024 22:15:43 +0200
 MIME-Version: 1.0
-References: <20240516104245.2075748-1-fiona.klute@gmx.de>
- <CAJaLiFw1BD6rtMd8E3eejM62YY9W+YA9fmP9FGkiN1KE0fwgZw@mail.gmail.com>
- <f1f07df1-758c-4329-8449-a187cb378c1d@gmx.de>
-In-Reply-To: <f1f07df1-758c-4329-8449-a187cb378c1d@gmx.de>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Sat, 18 May 2024 12:57:32 -0700
-Message-ID: <CAJaLiFzWb_DrV1rqaULNW6PvwKChT3wm=R59VAatSUBtBvLyPA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] doc: Detailed example for netconsole setup
-To: Fiona Klute <fiona.klute@gmx.de>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/3] EFI: Make EFI loader depend sandbox HOST_ARCH
+To: Jiaxun Yang <jiaxun.yang@flygoat.com>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20240517-sandbox-hostarch-kconfig-v1-0-716c146635c9@flygoat.com>
+ <20240517-sandbox-hostarch-kconfig-v1-2-716c146635c9@flygoat.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240517-sandbox-hostarch-kconfig-v1-2-716c146635c9@flygoat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:lgLN4/sobAs4q43Ha1wDXOTBY3Ib8ZS/L2vrD5LOBVagTaEUwaA
+ Km/JpbFZzpnVQW0gJjK/4My+GwLHqipw+q6EfABjnGjWK19ArU5OSg9x3/gtADWGnB19ODx
+ tqO0ucfXKLBwZmyr1xkN0dfuZ5M7DpvThl1B6OTvUlwY4j6QY6xkDxOVn9rMZIU4u9vhNTn
+ CUmTvArgN6h1NYHEbHUeA==
+UI-OutboundReport: notjunk:1;M01:P0:UuQ5WYZPqHw=;fKTYYtfO+BpvuIxaon/q143keFA
+ Lwfb6grCZmTzPuf/DihzGeJY2giv0Q+TaB0h1yL32+1V3A3lNUSZNx7rQAbVNWx0x2RYnJECn
+ pEuUz5iWyhJTsh4WgSDv2vUAHmEzNejxgNxCgFgWQka+FRsI22nUT852fDVzTSHGuIrw6ufDV
+ fECaWXs48tFms8/+iMbH8MXaXxXPO+MbrFPUd4pgMV9MNz+D7ry0S3p0R1cHBWl0mLOSnLkpu
+ Z9wRZWaXcemoZsyTNd2lhm7LggVaxU2fubQ1pREs6WKjUCYSDMKD/kz/yWwpkwJhIjAIWLTEF
+ eHL6JihYBI60LIzANarWjDK5Gsox4vn6UjvL2Er6+jeFYjTaC+dILAIDAneTB3C7D77Xg4yS3
+ A+iHRgJ4dqjOeNd1lb100Yqo9ada7QyGh09KOwjmN7k8mqjUJbC8unYJeX7UFNMRWxeHh11T2
+ 26gUlI7uLfGTxO/PdNqDU9/yAp9lUGPurOluQK5yO04zVBgxMt40l1rdrb3pQ3xdJkW1dmi38
+ memFcU6M++DW0+LUi6oJBeX4Zp6kb16LZY8g01TwVq+rDr0dxmnEbaWfREzHGrvGE7bTcnsH5
+ i+VLi4JGIJz2ExEDdVRlZybf/LXeXqdsq8c2n78dvYTM2JJxJ67LdmP3DTkbeVmcuKZxQufwJ
+ XUCKDeY0wrSNSc0nYFPEKlZ19aIiZqRHdUsLhhpGsiWfEE8xeZlIvIUDvGANYVXxnmrIqckfk
+ BlwjuGUXK5QyO+CTiLoa6m78IVWGjfbiKq92n2GkF56lxX2cV0auS5MGV+lMLva88A+UNRSng
+ HQpFwiQ8wgTAfj04mJ2XVEibBu0/qOj1fcGbS53Dx0ycg=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,135 +91,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fiona,
-
-Added Heinrich to CC list.
-
-On Sat, May 18, 2024 at 4:05=E2=80=AFAM Fiona Klute <fiona.klute@gmx.de> wr=
-ote:
+On 5/18/24 00:09, Jiaxun Yang wrote:
+> Since EFI loader on sandbox requires some architecture
+> code, make it depend on HOST_ARCH to ensure it's only
+> compiled on desired host.
 >
-> Hi Tony!
+> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> ---
+>   lib/efi_loader/Kconfig | 7 +++++--
+>   1 file changed, 5 insertions(+), 2 deletions(-)
 >
-> Am 16.05.24 um 21:28 schrieb Tony Dinh:
-> > On Thu, May 16, 2024 at 3:43=E2=80=AFAM Fiona Klute <fiona.klute@gmx.de=
-> wrote:
-> >>
-> >> This adds details that I would have liked to have readily available,
-> >> in particular how to activate the network interface before enabling
-> >> netconsole, and how to integrate netconsole so you can use the U-Boot
-> >> prompt.
-> >>
-> >> Signed-off-by: Fiona Klute <fiona.klute@gmx.de>
-> >> ---
-> >> Changes in v2:
-> >> * Include stderr redirection
-> >> * Use 4 spaces instead of tabs for code block to avoid overflowing
-> >>    lines
-> >>
-> >>   doc/usage/netconsole.rst | 33 ++++++++++++++++++++++++++++++++-
-> >>   1 file changed, 32 insertions(+), 1 deletion(-)
-> >>
-> >> diff --git a/doc/usage/netconsole.rst b/doc/usage/netconsole.rst
-> >> index 2aa3b9ccc5..647f0c220b 100644
-> >> --- a/doc/usage/netconsole.rst
-> >> +++ b/doc/usage/netconsole.rst
-> >> @@ -18,7 +18,9 @@ broadcast address and port 6666 are used. If it is s=
-et to an IP
-> >>   address of 0 (or 0.0.0.0) then no messages are sent to the network.
-> >>   The source / listening port can be configured separately by setting
-> >>   the 'ncinport' environment variable and the destination port can be
-> >> -configured by setting the 'ncoutport' environment variable.
-> >> +configured by setting the 'ncoutport' environment variable. Note that
-> >> +you need to set up the network interface (e.g. using DHCP) before it
-> >> +can be used for network console.
-> >>
-> >>   For example, if your server IP is 192.168.1.1, you could use::
-> >>
-> >> @@ -107,3 +109,32 @@ as follows:
-> >>
-> >>   Note that unlike the U-Boot implementation the Linux netconsole is
-> >>   unidirectional, i. e. you have console output only in Linux.
-> >> +
-> >> +Setup via environment
-> >> +---------------------
-> >> +
-> >> +If persistent environment is enabled in your U-Boot configuration, yo=
-u
-> >> +can configure the network console using the environment. For example:=
-:
-> >> +
-> >> +    =3D> env set autoload no
-> >> +    =3D> env set hostname "u-boot"
-> >> +    =3D> env set bootdelay 5
-> >> +    =3D> env set nc 'dhcp; env set stdout nc; env set stderr nc; env =
-set stdin nc'
-> >> +    =3D> env set ncip 192.168.1.1
-> >> +    =3D> env set preboot "${preboot}; run nc;"
-> >> +    =3D> env save
-> >> +    =3D> reset
-> >> +
-> >> +``autoload no`` tells the ``dhcp`` command to configure the network
-> >> +interface without trying to load an image. ``hostname "u-boot"`` sets
-> >> +the hostname to be sent in DHCP requests, so they are easy to
-> >> +recognize in the DHCP server log. The command in ``nc`` calls ``dhcp`=
-`
-> >> +to make sure the network interface is set up before enabling
-> >> +netconsole.
-> >> +
-> >> +Adding ``nc`` to ``preboot`` tells U-Boot to activate netconsole
-> >> +before trying to find any boot options, so you can interact with it i=
-f
-> >> +desired.
-> >> +
-> >> +``env save`` stores the settings persistently, and ``reset`` then
-> >> +triggers a fresh start that will use the changed settings.
-> >> --
-> >> 2.43.0
-> >>
-> >
-> > Just for information, if the board uses static IP then the example
-> > would be slightly different. I usually use static IP and ping the
-> > netconsole server to make sure it is up. However, I think this DHCP
-> > example is good enough to show how to prepare and activate netconsole.
->
-> Maybe it'd make sense to link to a general network setup section for
-> alternatives? The problem is I can't find any in the existing docs, the
-> closest I see is the "Automatically updated variables" list:
-> https://docs.u-boot.org/en/latest/usage/environment.html#automatically-up=
-dated-variables
->
-> As far as I understand you can also set the environment variables
-> mentioned there manually to configure networking, but I'm not sure if
-> that applies to all of them.
->
-> Is my understanding correct? If yes, I could send a separate patch to
-> add that information, and maybe rename the section to "Network
-> configuration variables".
+> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> index 430bb7f0f7dc..54d180fe31c1 100644
+> --- a/lib/efi_loader/Kconfig
+> +++ b/lib/efi_loader/Kconfig
+> @@ -1,11 +1,14 @@
+>   config EFI_LOADER
+>   	bool "Support running UEFI applications"
+> -	depends on OF_LIBFDT && ( \
+> +	depends on OF_LIBFDT && (( \
+>   		ARM && (SYS_CPU =3D arm1136 || \
+>   			SYS_CPU =3D arm1176 || \
+>   			SYS_CPU =3D armv7   || \
+>   			SYS_CPU =3D armv8)  || \
+> -		X86 || RISCV || SANDBOX)
+> +		X86 || RISCV) || \
 
-Currently, there is no documentation for using static IP in netconsole
-that I'm aware of. I think it would be great if you send a separate
-patch after this. Basically, the current u-boot network driver model
-will automatically bring up the network when we try to use it, e.g.
-pinging a server, or dhcp.
+The newly parentheses are not needed.
 
-So the difference is instead of dhcp in your example, we could also do this=
-:
-
-env set ipaddr 192.168.1.100
-env set nc 'if ping ${ncip}; then env set stdout nc; env set stderr
-nc; env set stdin nc; fi'
-
-Note that the board ipaddr needed to be set before the ping.
-
-All the best,
-Tony
-
+> +		(SANDBOX && (HOST_ARCH_X86 || HOST_ARCH_X86_64 || \
+> +			     HOST_ARCH_ARM || HOST_ARCH_AARCH64 || \
+> +			     HOST_ARCH_RISCV32 || HOST_ARCH_RISCV64)))
+>   	# We need EFI_STUB_64BIT to be set on x86_64 with EFI_STUB
+>   	depends on !EFI_STUB || !X86_64 || EFI_STUB_64BIT
+>   	# We need EFI_STUB_32BIT to be set on x86_32 with EFI_STUB
 >
-> Best regards,
-> Fiona
->
-> > Reviewed-by: Tony Dinh <mibodhi@gmail.com>
-> >
-> > All the best,
-> > Tony
->
+
