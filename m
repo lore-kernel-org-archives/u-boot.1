@@ -4,99 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BB30C25B77
-	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 20:54:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC1CCC25B75
+	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 20:54:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4AEEE8822D;
-	Sun, 19 May 2024 22:53:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BC6B388047;
+	Sun, 19 May 2024 22:53:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="eL3jpBdm";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="nHN3m9Z1";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="5KSq12VQ";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="QbNwJOH8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D5F88813F; Sun, 19 May 2024 22:53:56 +0200 (CEST)
+ id F0F2E882BE; Sun, 19 May 2024 22:53:57 +0200 (CEST)
 Received: from fout8-smtp.messagingengine.com (fout8-smtp.messagingengine.com
  [103.168.172.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C83C87E0B
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 22:53:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7696F88193
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 22:53:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
- by mailfout.nyi.internal (Postfix) with ESMTP id 26A5513803B4;
- Sun, 19 May 2024 16:53:51 -0400 (EDT)
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
+ by mailfout.nyi.internal (Postfix) with ESMTP id A9B6113803B4;
+ Sun, 19 May 2024 16:53:54 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute1.internal (MEProxy); Sun, 19 May 2024 16:53:51 -0400
+ by compute6.internal (MEProxy); Sun, 19 May 2024 16:53:54 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:message-id:mime-version:reply-to
- :subject:subject:to:to; s=fm2; t=1716152031; x=1716238431; bh=Xt
- 6TtxJM89SSm8S9rYb0bBDcfvCkE8lV5qNnkClhZBw=; b=eL3jpBdm5NvGehjZPV
- 8A1yj+AouUIYNgMBnCAhbDMKbWOXkelT3hYltQeHa0E1/3intLqpp0llvShdC7bV
- Qj7UGxZhiF+T7k82ySzniYv/X7dU6AP6f9FgCfHTh1ING21JClS5onoODsPPskAw
- FJCYMFfUP9P+6XGOlO7YFHtWulcFxAg/memNKNqmSQoq2lYKTKnK2DwQefJkQXBA
- MbLTNpR9UJVjuynnK66NQ9hupFPg5So5q9BHc7694cVT7i05orbXOiaJB8Z1r4IC
- 5aZ67HxJhxh5jexzMBVQs2XytUq/0NmTpkncfK+h3yQGz7TmTi1eccrX64fW8phv
- f5YQ==
+ :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1716152034;
+ x=1716238434; bh=NsrkSuV8RmpBH30BptZufEhcSWZsZMDUf0peTeuaIjU=; b=
+ 5KSq12VQgjdhsp9+3FO1vhQ81QyykmOrr0WRoh+bLRaCU/pbTvbbLEZCIX+puflj
+ aiGW3GKPSP0pRHnaGl7VSFsUKIAmlYPK3Gp1OoCcAdlaMTgkBOLOmDcmbKjkuKHI
+ w8PT7xyNzbk81cC6FBbBiiGGOm0Q3ogk9gSduXF687gHETP5ZQhvpYKdoAtTIeTa
+ R0mTeVxybgzMMt0uym6lijQprp0d2PwG+qrUqzi/UZkPCbmtvTcl+FuBo7WfNknV
+ lBOo3g/+PDZAiLWP/C2zmzTgDS+QjVzWkpCkSm4/QIC+aOgWqluSyrXxLUEM/V0p
+ v0gWBB82GZQlktK/7eTmXg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:message-id:mime-version:reply-to:subject
- :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
- :x-sasl-enc; s=fm1; t=1716152031; x=1716238431; bh=Xt6TtxJM89SSm
- 8S9rYb0bBDcfvCkE8lV5qNnkClhZBw=; b=nHN3m9Z1Rtu50T9nu2b1vpU7JAz6P
- ZI12GiNyx2UBJL0zQhUNOuyCkR2DYgwDpCEq0g/Vq+OkS2+y/Gpb7cx5mbn7hqf1
- WZe8xxCZYd12+2iyoTMdqFApti4AsjNzTpOwWEQbRpZWKKZyl6iM2f3HjYF7NYZw
- FPE/++m34ZuhhQMZykS2MY5aMOGAkK+irTflR6bQtjoHwpkuwsaGDomZmyDcRhcz
- 7Iu6bX5uV+SPbN1nDEStibxKdMR3KPwPgv8w+DYG0Bz5LA35kize9hkBeASSiRbR
- qkD4sQxx08KzooBMH5Vcx/lKMQ9fdgYb6/TLEfgceMco6OzK4nxFGp05A==
-X-ME-Sender: <xms:3mZKZh1JCvroWvuRs1DhHYbnAknf8T4bYNxaNzhzobWs4k5dRriKUQ>
- <xme:3mZKZoFLw4ikQW7UUqVZG_3chXLl7MdgN6ozcUDC2yUjZLhyxxcTs7OcwFagV2TjL
- CDvR8EIJ_OsnuFKLwM>
-X-ME-Received: <xmr:3mZKZh5kSSGF7WKyQ6I1oIYt3-mMo3Y4pJ343aVIly-vxaD3RRCiln8>
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716152034; x=
+ 1716238434; bh=NsrkSuV8RmpBH30BptZufEhcSWZsZMDUf0peTeuaIjU=; b=Q
+ bNwJOH8UFh9c5gcR47gL9qLNH0nBAPIUid8Ne4PcFmP0rE+K8UkOnZni0HObZxGr
+ noJdnzjmPANDA/Y4HxjNoB4WVcpm1JI7rRygCr7Z2QbUkwVfCSuXg3pqSIUkR7vW
+ t+aERzsNiFQVq6DUniNXbV6Z4t+hmtN9Ci6lOs3PkLprcMkjwpexr052IzAeYwfD
+ 9HSJLo17KrCse2rYAc8eiRkCbRhwWgYw+x2FcEIaBgvx8vLuY+U1Ht8NJLJ1EOw1
+ Q3/MSk3ZA4YwFD0LpYE35CSATd8yuukzo0u5vNZMP8uQPLjD2mnn2HzWDRycwJ+I
+ ZReDSLSkreyqr+QTAyb1A==
+X-ME-Sender: <xms:4mZKZhvzZd5fY8SORkKt3RLFkef3jjBL3znLEtskRQJabtr1EUzpbQ>
+ <xme:4mZKZqfgrBhxBPUkHxEirPF57jSPx7_un0OoQUQq8IxaSL-GLRR9PN3eRsAUmheUt
+ ZHkeK6qAFjinhJmdno>
+X-ME-Received: <xmr:4mZKZkwJxrYYOXliqsNzIPL7G60IDezhD2qwQ4UTCzd2ti7RBb4hmlo>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehkedgudehvdcutefuodetggdotefrod
  ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
  necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
- enucfjughrpefhufffkfggtgfgvfevofesthejredtredtjeenucfhrhhomheplfhirgig
- uhhnucgjrghnghcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhmqeenuc
- ggtffrrghtthgvrhhnpeelleehgeevgedtvefgfeevgfevveefheejhfekjeeiveethfeg
- geeivefggeegudenucffohhmrghinhepghhithhhuhgsrdgtohhmnecuvehluhhsthgvrh
- fuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepjhhirgiguhhnrdihrghnghes
- fhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:3mZKZu0AvrCbivics4UcYvaPJbE8WIom8uKZGIj6exlyyjTpfB2mCw>
- <xmx:3mZKZkEXe5J_vZlmRZQTz8TbR8wz6tszP08aOgoY3u6klNWx1qngVg>
- <xmx:3mZKZv_oH0RMSvjUxa-Iv82q9PaHz6-0hBzrme48cjPqOiVDFmeGRQ>
- <xmx:3mZKZhngnAzT-IVxnoMfGU76rOiqQFNlCHJZFtTxB0YxmGvjkY_IMQ>
- <xmx:32ZKZp4vwD0abbXvBqbAjWCNk5BrSSj0faXTAs0rv1HmrahKURYDB5Sh>
+ enucfjughrpefhfffugggtgffkfhgjvfevofesthejredtredtjeenucfhrhhomheplfhi
+ rgiguhhnucgjrghnghcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhmqe
+ enucggtffrrghtthgvrhhnpedvkeeihfefveekueevteefleffkeegudeghfdtuddugefh
+ ueevgeffgedukeejleenucevlhhushhtvghrufhiiigvpedunecurfgrrhgrmhepmhgrih
+ hlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
+X-ME-Proxy: <xmx:4mZKZoOpn322sPiX_fpXwjWppLXh6JaJoYkmGMYGZ4ldn5-51ULGOQ>
+ <xmx:4mZKZh-jTgpK2B8ds01qj2vzl2o885TZSrcRTeeHhUMEFAIl5QYA9g>
+ <xmx:4mZKZoXqg82209cEe8rk8--WmGAHqrhBJAXDaXo6gBx7EXOkRIryaQ>
+ <xmx:4mZKZifqFwFur9E9RUgH8JxE3o9XOZy-ITO_qv4J-pLNgeAKB0WUFQ>
+ <xmx:4mZKZhxVcjdi-GBT3Blv2IhfHo39IpuzsBIwhk0Zo9apOiDdv2ceXwSs>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sun,
- 19 May 2024 16:53:49 -0400 (EDT)
+ 19 May 2024 16:53:53 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Subject: [PATCH 00/10] xtensa: Enable qemu-xtensa board
-Date: Sun, 19 May 2024 21:53:47 +0100
-Message-Id: <20240519-qemu-xtensa-v1-0-8fff0cb11c19@flygoat.com>
+Date: Sun, 19 May 2024 21:53:50 +0100
+Subject: [PATCH 03/10] xtensa: Implement phys virt conversion for PTP_MMU
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIANtmSmYC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIxMDU0NL3cLU3FLdipLUvOJEXdO0JEvTpCQTc5NUSyWgjoKi1LTMCrBp0bG
- 1tQDD6K1DXQAAAA==
+Message-Id: <20240519-qemu-xtensa-v1-3-8fff0cb11c19@flygoat.com>
+References: <20240519-qemu-xtensa-v1-0-8fff0cb11c19@flygoat.com>
+In-Reply-To: <20240519-qemu-xtensa-v1-0-8fff0cb11c19@flygoat.com>
 To: u-boot@lists.denx.de, Sean Anderson <sean.anderson@seco.com>
 Cc: Max Filippov <jcmvbkbc@gmail.com>, Tom Rini <trini@konsulko.com>, 
  Sumit Garg <sumit.garg@linaro.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3100;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2005;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=LjyXmTRZpZ9cfEHbF+MierMhPmfobD63ozrH8ErRUjU=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhjSvtHv9tXbWr1PTw4K3tPxVFPy76PHN9uiUE8EzCrx3P
- 4toj1rSUcrCIMbFICumyBIioNS3ofHigusPsv7AzGFlAhnCwMUpABMJCWb4Z1x7ysiSM+LQ/Mgr
- xUfXHfqgxuhnfLy6r85qTZlTCXMtOyPDgUWTDlgyTPLhTXjL9zR4+gJm9fe8EzpnTNyqxdNlfcS
- CDwA=
+ bh=i66e2H8mL9AQRiPd5Y0iBlvD+fpKKl6Al3uT1QeU5ts=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhjSvtHuNL9S+MWuJnixdqGX7t5rxke7/He41uQltVg9kV
+ 2cHXz/SUcrCIMbFICumyBIioNS3ofHigusPsv7AzGFlAhnCwMUpABO5/ZeRYa5CWuUcPcVLM08d
+ OM5u/3HCbkGjmaYpVx2+PvjGuCoz2pCR4R2DdWj/8VOm2dMCo1d8+CmSw7vg9/ONsirlziJG8zj
+ NmAE=
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -115,72 +114,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+For PTP_MMU our physical address is not directly mapped
+into virtual address space, we need to access physical
+memory from those fixed map segments.
 
-This series enabled qemu-xtensa board.
-
-For dc232b CPU it needs to be built with toolchain[1].
-
-This is a side product of me investigating architectures
-physical address != virtual address in U-Boot. Now we can
-get it covered under CI and regular tests.
-
-VirtIO devices are not working as expected, due to U-Boot's
-assumption on VA == PA everywhere, I'm going to get this fixed
-later.
-
-My Xtensa knowledge is pretty limited, Xtensa people please
-feel free to point out if I got anything wrong.
-
-Thanks
-[1]: https://github.com/foss-xtensa/toolchain/releases/download/2020.07/x86_64-2020.07-xtensa-dc232b-elf.tar.gz
+Implement phys_to_virt and virt_to_phys hook to reflect
+this setting.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
-Jiaxun Yang (10):
-      xtensa: Move dram_init to xtfpga board file
-      xtensa: Correct define of _end symbol
-      xtensa: Implement phys virt conversion for PTP_MMU
-      xtensa: Define PLATFORM_ELFFLAGS
-      xtensa: Bring in semihosting headers and config options
-      drivers: serial: Add xtensa semihosting driver
-      drivers: cpu: Add xtensa CPU driver
-      dts/upsteam: Add Makefile for xtensa
-      board: emulation: New board qemu-xtensa
-      doc: New documentation for qemu-xtensa
+ arch/xtensa/include/asm/addrspace.h |  2 ++
+ arch/xtensa/include/asm/io.h        | 32 ++++++++++++++++++++++++++++++++
+ 2 files changed, 34 insertions(+)
 
- arch/xtensa/Kconfig                              |  32 +++++++
- arch/xtensa/config.mk                            |   3 +
- arch/xtensa/cpu/cpu.c                            |   5 -
- arch/xtensa/cpu/u-boot.lds                       |   2 +
- arch/xtensa/include/asm/addrspace.h              |   2 +
- arch/xtensa/include/asm/io.h                     |  32 +++++++
- arch/xtensa/include/asm/ldscript.h               |   1 -
- arch/xtensa/include/asm/platform/simcall-gdbio.h |  34 +++++++
- arch/xtensa/include/asm/platform/simcall-iss.h   |  73 ++++++++++++++
- arch/xtensa/include/asm/platform/simcall.h       | 110 +++++++++++++++++++++
- board/cadence/xtfpga/xtfpga.c                    |   5 +
- board/emulation/qemu-xtensa/Kconfig              |  41 ++++++++
- board/emulation/qemu-xtensa/MAINTAINERS          |   7 ++
- board/emulation/qemu-xtensa/Makefile             |   5 +
- board/emulation/qemu-xtensa/qemu-xtensa.c        |  60 ++++++++++++
- configs/qemu-xtensa-dc232b_defconfig             |  32 +++++++
- doc/board/emulation/index.rst                    |   1 +
- doc/board/emulation/qemu-xtensa.rst              |  33 +++++++
- drivers/cpu/Kconfig                              |   6 ++
- drivers/cpu/Makefile                             |   1 +
- drivers/cpu/xtensa_cpu.c                         | 117 +++++++++++++++++++++++
- drivers/serial/Kconfig                           |  18 +++-
- drivers/serial/Makefile                          |   1 +
- drivers/serial/serial_xtensa_semihosting.c       |  79 +++++++++++++++
- dts/upstream/src/xtensa/Makefile                 |  14 +++
- include/configs/qemu-xtensa.h                    |  34 +++++++
- 26 files changed, 741 insertions(+), 7 deletions(-)
----
-base-commit: 3be9f399e911cfc437a37ac826441f1d96da1c9b
-change-id: 20240519-qemu-xtensa-5fb95bb474e9
+diff --git a/arch/xtensa/include/asm/addrspace.h b/arch/xtensa/include/asm/addrspace.h
+index 920b5fd26b20..c8bed8834b55 100644
+--- a/arch/xtensa/include/asm/addrspace.h
++++ b/arch/xtensa/include/asm/addrspace.h
+@@ -7,6 +7,8 @@
+ #ifndef _XTENSA_ADDRSPACE_H
+ #define _XTENSA_ADDRSPACE_H
+ 
++#include <config.h>
++
+ #include <asm/arch/core.h>
+ 
+ /*
+diff --git a/arch/xtensa/include/asm/io.h b/arch/xtensa/include/asm/io.h
+index 87ad9faa2995..ab2438b829ac 100644
+--- a/arch/xtensa/include/asm/io.h
++++ b/arch/xtensa/include/asm/io.h
+@@ -12,6 +12,8 @@
+ #include <linux/types.h>
+ #include <asm/byteorder.h>
+ 
++#include <asm/addrspace.h>
++
+ /*
+  * swap functions to change byte order from little-endian to big-endian and
+  * vice versa.
+@@ -127,6 +129,36 @@ static inline void sync(void)
+ {
+ }
+ 
++#if XCHAL_HAVE_PTP_MMU
++static inline void *phys_to_virt(phys_addr_t paddr)
++{
++	if (paddr >= CFG_SYS_IO_BASE)
++		return (void *)(unsigned long)paddr;
++
++	if (paddr < CFG_MAX_MEM_MAPPED)
++		return (void *)(unsigned long)MEMADDR(paddr);
++
++	return NULL;
++}
++
++#define phys_to_virt phys_to_virt
++
++static inline phys_addr_t virt_to_phys(void *vaddr)
++{
++	unsigned long addr = (unsigned long)vaddr;
++
++	if (addr >= CFG_SYS_IO_BASE)
++		return addr;
++
++	if (addr >= CFG_SYS_SDRAM_BASE && addr < MEMADDR(CFG_MAX_MEM_MAPPED))
++		return PHYSADDR(addr);
++
++	return 0;
++}
++
++#define virt_to_phys virt_to_phys
++#endif /* XCHAL_HAVE_PTP_MMU */
++
+ #include <asm-generic/io.h>
+ 
+ #endif	/* _XTENSA_IO_H */
 
-Best regards,
 -- 
-Jiaxun Yang <jiaxun.yang@flygoat.com>
+2.43.0
 
