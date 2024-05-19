@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B462C25B78
-	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 17:59:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 980E4C25B75
+	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 18:00:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7AB988093;
-	Sun, 19 May 2024 19:59:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2137F881AD;
+	Sun, 19 May 2024 19:59:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="g/CtPmVA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="f5l4p0xF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E37DD882C4; Sun, 19 May 2024 19:59:27 +0200 (CEST)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
+ id 0EF6E880FB; Sun, 19 May 2024 19:59:58 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 080EB87F65
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 19:59:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 629E1881AD
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 19:59:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=daniel.schwierzeck@gmail.com
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-51f12ccff5eso4408940e87.1
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 10:59:26 -0700 (PDT)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5766cd9ca1bso1014522a12.0
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 10:59:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716141565; x=1716746365; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1716141594; x=1716746394; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=plvGJi1rFQMTBJTpTq4ZSLPVPAimBzra0mTZIO1zDXs=;
- b=g/CtPmVA7rYyTv3L/W55bYfDIx27x+7lo1fIGjPnyU4uvgmPTDoDrEGCBiYRv/ZADb
- skPWY+eUwgoIr5A1fz9ZMwaZHyVecR+Vbj+fql5JG7ApmwKKO/g0VbXMmmwa7kQHUus7
- 1o2dg3FScvs4K7ZItyesXCRszM/GsoUM8E1AyuQiHiyhryB0GBncCEDiCExWbTdcMge5
- cSwyUArsTQd1918Bqt7pt9lz2dnQ7tV81Fdb7YB3P/fmMmUcOh7FPawEFUBp48BySYSb
- G/uIp9s5unBlet/cHRiVT1qB4WL4vq99h1d+EmZCvzUTIrrp1y/izKG+/mrG+LD/67OM
- Qg3Q==
+ bh=kBLImWpHiYjaTDEkZaRYLFjUJf3qUktBilnLH2W6jn8=;
+ b=f5l4p0xFW+aymegqXuyR5d5cp4BMHXAPnSkUnjbEJyFKIMjcRP5B2ivf3CwualryQD
+ RR/8qIMihNiwY+L/y2H5WXme+AhRPNgA+ZAOj3n22h/Yc9EVOZBwTLKUJacQjA5MeeaG
+ D+/QtHCu1kQfOBtyhe2cPo0jxjkeGvCTP0wcQxFDbS9okOntNjT62LxvvhzPM+HS+QuW
+ zTP6wRyVvVN2OF3m5w0vhwAB+g2eU1gSJICMBFnriST+kPleX3iSEfPyK3x9vLSVJtQV
+ vMd9JTezx4bVYOcj60X6svOt26uFzFUOJQBN8GzIduDkf7DgcJ+5VJmDlw6ewEK6L97u
+ uWFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716141565; x=1716746365;
+ d=1e100.net; s=20230601; t=1716141594; x=1716746394;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=plvGJi1rFQMTBJTpTq4ZSLPVPAimBzra0mTZIO1zDXs=;
- b=R+i79E93FbklUPrh3eRIjLMivD7G9/Bwn+jRJVIy1DIC+tXrXh8Qdk/KGj/acSNose
- 8hqjVbUfEo15aALJJrntATfwhTY48D9B6tqe/ZL0RjReq/zRPHZjvqOiJ0bWyDgosIuq
- 9unhT+pOroNq+wmNzSH1/H5pycb4ASsW8Z99+IP2wczu97C2qow/noSUNneWNk7mMiiw
- e2yHmP8myt7VCozm90j08xWywr7UYq2zKw/ocdTYEekfBT7FUcsjncp8ESnfF4Ma7/tN
- C330ze89sUEyDVX/PCPs74dfsl+6gOa5bhrbBrE6umHAZeMd0bAI9xDhSvywY1SZ6BMU
- wVBg==
+ bh=kBLImWpHiYjaTDEkZaRYLFjUJf3qUktBilnLH2W6jn8=;
+ b=nU7RklOsUWI72RiYrZyaDdw0nKgLmCrOsoS3fVlIg0rz8Ba+xwLEVpUB3YaKRHd8Ah
+ ILXZtMKsY4SqTzWtgVuuc4YFdgKdWo0sg8DIbcr1xybDhcz8IkEgDOsmN3j8yzRe2AUy
+ kroO897oNWjIW/7fNjQTO6/7//Bp6X4NLul+sQT6UtKnL2Nh8UuTnHOyKoiw+kJc3rAg
+ 1nF+g4Z3xnlA/joz+1iSfkDdM3fdA+LmxwfLuJtgoQoYg685G8zobPhofU1JU7pFniuc
+ vDpVKgZ6fOpxrxib/b1TJBIrxgqjuliQU2Uc+GHHYyAU1b/wmuQBEh1xybW/pDweUCmv
+ E2dg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUFHKocsOPF2rVehfU/3mkT//cYHztyt0RNzzBpRUR2beMggNc9aUSUZFZkBFeFRRo0lwlY+dbcjNttIzXJKOESSQ9zLQ==
-X-Gm-Message-State: AOJu0Yy+hbQrIgHriYQ5hv6pKypRrAyJ9D+Jt2Aqakovt2e4q8tLtyXr
- owWS7MiKPPG0OFxlHICh+IK7mrdCP/7s40inkl689n5iCMbaLwq/Xfw0GxTn
-X-Google-Smtp-Source: AGHT+IE7Q7fGrcELI16ga4SY9cJPMewmT/ueFxXOr/VY0Npfei627DCug43TNcRVBGZEGvNahXxxcA==
-X-Received: by 2002:a05:6512:b88:b0:523:8c7a:5f6 with SMTP id
- 2adb3069b0e04-5238c7a06e3mr11480447e87.51.1716141565259; 
- Sun, 19 May 2024 10:59:25 -0700 (PDT)
+ AJvYcCWWnz5WpwQJehvW9U1ANSs0ln8Zmux/Yd/TLoQZGdCwYK0c2908rBXmSCGgL4m3uvaf/BlY1LeHsuXgE4OCjfcft096Xg==
+X-Gm-Message-State: AOJu0YwEFcQZ/dJh0RpJ0ofQMHMqAmAQWDMjC9oVFEXwnrOr0y+d0Dqu
+ njd3i8tohl/iuW/Ma4iJaiIsCY5BNBBt9IKquL/ZKEOOcQ6LGgkgQ0D6DFRC
+X-Google-Smtp-Source: AGHT+IHOlTBTaN0mO97u+kkBmbD59jvbiKkgZZWeefGb6EQeGBXfobRns1tw1Q9c57AgZiip5RbIUg==
+X-Received: by 2002:a17:906:6a0e:b0:a5a:7cfe:30e9 with SMTP id
+ a640c23a62f3a-a5a7cfe31b2mr1397666966b.49.1716141593879; 
+ Sun, 19 May 2024 10:59:53 -0700 (PDT)
 Received: from [192.168.10.30] (77-7-142-46.pool.kielnet.net. [46.142.7.77])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a5a1787c715sm1370708466b.46.2024.05.19.10.59.23
+ a640c23a62f3a-a5a17b0173asm1387741466b.179.2024.05.19.10.59.52
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 19 May 2024 10:59:24 -0700 (PDT)
-Message-ID: <2987dbda-6879-4f23-8190-44238655b1e6@gmail.com>
-Date: Sun, 19 May 2024 19:59:23 +0200
+ Sun, 19 May 2024 10:59:53 -0700 (PDT)
+Message-ID: <e1d5e4e7-d86d-4dba-aeb6-2df6127fcde6@gmail.com>
+Date: Sun, 19 May 2024 19:59:52 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 07/12] MIPS: boston: Imply various options
+Subject: Re: [PATCH v3 08/12] MIPS: boston: Provide default env vars
 To: Jiaxun Yang <jiaxun.yang@flygoat.com>, u-boot@lists.denx.de
 Cc: Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>,
  Paul Burton <paulburton@kernel.org>, Simon Glass <sjg@chromium.org>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Sumit Garg <sumit.garg@linaro.org>, Jonas Karlman <jonas@kwiboo.se>
 References: <20240517-boston-v3-0-1ea7d23f4a1d@flygoat.com>
- <20240517-boston-v3-7-1ea7d23f4a1d@flygoat.com>
+ <20240517-boston-v3-8-1ea7d23f4a1d@flygoat.com>
 Content-Language: en-US
 From: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
-In-Reply-To: <20240517-boston-v3-7-1ea7d23f4a1d@flygoat.com>
+In-Reply-To: <20240517-boston-v3-8-1ea7d23f4a1d@flygoat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -102,13 +102,14 @@ X-Virus-Status: Clean
 
 
 On 5/17/24 20:14, Jiaxun Yang wrote:
-> This is a PC-like platform board.
-> Enable drivers for most on-board devices to make it useful.
+> Provide default environment variables on image loading address
+> to make the board useful.
 > 
 > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 > ---
->   arch/mips/Kconfig | 27 +++++++++++++++++++++++++++
->   1 file changed, 27 insertions(+)
+>   board/imgtec/boston/Kconfig    | 4 ++++
+>   board/imgtec/boston/boston.env | 9 +++++++++
+>   2 files changed, 13 insertions(+)
 > 
 
 Reviewed-by: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
