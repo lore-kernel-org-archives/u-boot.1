@@ -4,121 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97DB2C25B75
-	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 03:41:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93B39C25B77
+	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 12:53:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69CDF882BE;
-	Sun, 19 May 2024 05:41:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 7A7BC88292;
+	Sun, 19 May 2024 14:53:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=fiona.klute@gmx.de header.b="SZd5tACW";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kNJrVVFz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3417C882AB; Sat, 18 May 2024 23:04:19 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E778D88286; Sun, 19 May 2024 14:53:48 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0B5B881BC
- for <u-boot@lists.denx.de>; Sat, 18 May 2024 23:04:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E9CFC882B5
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 14:53:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fiona.klute@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1716066254; x=1716671054; i=fiona.klute@gmx.de;
- bh=jckCCtmwlQ78+1s9nYXAbxjqk+WsXk3fL+T0pmdhh5M=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=SZd5tACW8OlD8Osau8jlcS8l5yi3HoS6sDZfInElhEwwltA2+DMXmEYDVea4c8ak
- INUW4qQO6P2ifQyH4H7/+sX0frDrb898hCclbnFKsox6owLhGOWhKPufE8u7Cd5pc
- z65K2BMjwDDU41XlTJyjPP3qWRZD64WM/4cC1ZwhtGkzryCBu4UE3TwPS3wkOKEaO
- lfAUUpj5U9FiwynWbdhH1d2011j6ye9+dEm60ExoGsFhHbrcHNY37BXeoR/QFur/5
- 6Pl2WYQf7OTuCeWduu7QSxh22x/kOrBmfPAx+PUaROvNgLbjGWveLjooTibti2JbZ
- x8xUTWz3bJRWqZS06Q==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.7.2] ([85.22.125.1]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MpDNf-1suAJl2a59-00n5hi; Sat, 18
- May 2024 23:04:14 +0200
-Message-ID: <d8175e23-f1c7-4301-bd2c-ac51ba4b103e@gmx.de>
-Date: Sat, 18 May 2024 23:04:13 +0200
+ spf=pass smtp.mailfrom=r.stratiienko@gmail.com
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-4200ee78f35so9814915e9.1
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 05:53:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1716123224; x=1716728024; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=N5rfa23+5MsDNfCwjiZRXiK/j6dImDvkD/CsBC68Y30=;
+ b=kNJrVVFzm5I6hq2kC6nxYnnE5KN62UH+BRIDpTpk01pwwUmjUl2PhNSrWrlnTmKjVU
+ /noJsZ+iU2GqDETHiTvGQ4Yq69KqUdSyrjfxOnbGxU+e+qCQI+ESbuncKFw7Cg8m04F9
+ BX/D++SV6v5+j/+zGmtwqA+rgpyg2OOrzgW9MkKv18VLgLsiSFdU1Y9sKQaSuZBasAu6
+ LVNtAA/KsfCUNL/MwrLu0yIWyrUACXE7DZIt1PyjuNqAPIEKKfAbu7KioZrrynIbWHmm
+ xuS+sT7UeNgM2km8XNR3NNoJVHUftxrQy0BaethyLuVW1yiuUkYbExQidp8RHHJBS3ao
+ pRvQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716123224; x=1716728024;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=N5rfa23+5MsDNfCwjiZRXiK/j6dImDvkD/CsBC68Y30=;
+ b=t1wftCasf4qyYtne7c+CZwpXw+LldJkpFowI9tkSU00y47g6GgT5udK6nFBF9Dtina
+ 3/odPYrWPfCAE5eaOpbdo3Qaf6bRI/IgI9mpVM/diOzOik/i0VJL/7seFmuNMRQ2XG3N
+ 70VBHPvVnL5MRC3VeLcIOzErhFEouRqarZQZdkvQ4RJ3EGPlRybYorPOAhn4OD8RGKPf
+ EgG6BGhMvBeiv++dd77olt/DC+UA692C7Ah3yoDcGExm5kY65vLI90P6yJAhThMP5WBB
+ DSJg0ZWKFFRJThruVkWaMRzDAmepTOmfuY1yuh7yaojSAXqlrDntrQ29x7x2KVLaG1Cb
+ WCXQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWSIp82jM9jZrrXauus35bCEOkxX/7ux8pDSnBb48mmZU4LTILNOLn1lpLmuZTv0eZwaikTrvhTxvwNxWfBVQ6fVsXT5w==
+X-Gm-Message-State: AOJu0YxJJ/681vFr23m7GTHXetSExmeQl5zoIWoLqgffl5FZzO0YDXn/
+ fs4FI1MTuCfDpgkAeKpUYangMPx+T9obOTnvadhpeh8CX5OH9JD9
+X-Google-Smtp-Source: AGHT+IHcYv9xm88PazP7fIHP/TKwmdYe8devBpNGHKYyM5f8Ov/LRjPu4rNFlBqSYxmt4VJu7kbpog==
+X-Received: by 2002:a05:600c:3b26:b0:420:66e:4c31 with SMTP id
+ 5b1f17b1804b1-420066e4d6cmr228566155e9.34.1716123224179; 
+ Sun, 19 May 2024 05:53:44 -0700 (PDT)
+Received: from roman-envy-fast.. ([46.172.77.250])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-41fe518a8fasm357734375e9.33.2024.05.19.05.53.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 19 May 2024 05:53:43 -0700 (PDT)
+From: Roman Stratiienko <r.stratiienko@gmail.com>
+To: sjg@chromium.org, eajames@linux.ibm.com, xypron.glpk@gmx.de,
+ ilias.apalodimas@linaro.org, paulerwan.rio@gmail.com, u-boot@lists.denx.de,
+ mkorpershoek@baylibre.com, igor.opaniuk@gmail.com
+Cc: r.stratiienko@gmail.com
+Subject: [PATCH] abootimg: Add init_boot image support
+Date: Sun, 19 May 2024 12:53:37 +0000
+Message-Id: <20240519125337.2557883-1-r.stratiienko@gmail.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Pull request efi-2024-07-rc3
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Weizhao Ouyang <o451686892@gmail.com>
-References: <63cd77fe-73aa-48e2-af4b-a3de9ea09d0a@gmx.de>
-Content-Language: en-US, de-DE-1901, de-DE
-From: Fiona Klute <fiona.klute@gmx.de>
-Autocrypt: addr=fiona.klute@gmx.de; keydata=
- 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
-In-Reply-To: <63cd77fe-73aa-48e2-af4b-a3de9ea09d0a@gmx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:cpE91FMZC+GbbW/zZYMNOHifrenJ7XARLD4FUzKwaX9nd1LnENe
- PHTDcD2vQiZBbiL+rys24rP65u8+SZ8rr1lypj7pqo6z8Nlf2CYCU9pEqsBqRhO/6jIPTKp
- 9Wcz+zRG8a6JBUPk8y5qRicgl0GQSygiAG+4h/ewMwvcgYhcpPR8pyr5zhlqigwZAtPDszo
- u4u8sas3vNgQZGKdEet9g==
-UI-OutboundReport: notjunk:1;M01:P0:CNM9EI3ui0M=;g5LEbQtOwDd4AGYhU8gYJf3AubV
- 7Z1rFv0Aeq59z+kXpWW02R/XiYdRfcpNh1dlKHNw02O436vWKQxAbX9NFkzpxuenY+zgBEOxi
- enqjz1WaPi4UTlVT82Kupi+ruaW/n54zkK8k4/Y0mQYGO1xhqIZ+IjWhIoBy9LHPtf91gH4O/
- iuvFYyY4ifU5UvAcRBgWBi0IJld/blkpnDXUof3uQ3+1SNsUdcDCRnTaR0oZ6XYRiaJWREyPz
- vs6viLODgiL6AkzIpUPv3FGXwGm2POMkdNSwZDuuZRpe6bo9EiLT65HsoejPhURKkdYv0PeGG
- Qqy3PaMmu08Kn/Djp9aOg+WSO8HntgnVbgF2B21jNWWRIBTRAj9dqzW2kmKCPa+KTzGGxcjhu
- lYOO6mqxFWDcl805AjOqQzOAT/9tiqDnXOzzI+BdJp3FQuwaUIOmR/0Oce/mfeHHql8Z1VQZl
- F68HVJPdCU+wwAPB5fxcY+VskrRZMaAXvvybl/QXPyC72VOBvDdKXA8ClwbJGOGwHl+oAPbeX
- Y3ek1vNVpEpwqsWx3Goyou/2+KchGYnBK77pC82EhxWaSQPQ7u0QpOGeoec4qlVK4KtZi/UBK
- tZEhHyvkdadvzgiadSbbhuHzNkEn10vZhRm+k4yTohO8Kc1Qc5WaUMCqU3zNVVWnEErJ0qajg
- rSokY+ik2qt8DDyolnPeSbD5xH+hlIlUJCE+rortSiWgOJ7RxJYjugTJevps2TlWyMqcYEsYR
- pzRAGawC8FWaglxOtr8mjVLRT33qsecL2/VdYNoiVU1ykgmyDrMEiXuQtOOV7aR0R1D0AaVy1
- NDqbfQSzkRVbvbVns+5k5CQ+dVK9d0tTAMy3IDzBuy9m4=
-X-Mailman-Approved-At: Sun, 19 May 2024 05:41:38 +0200
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,83 +92,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Quote from [1]:
 
-Am 18.05.24 um 22:51 schrieb Heinrich Schuchardt:
-> Dear Tom,
->
-> The following changes since commit
-> 3be9f399e911cfc437a37ac826441f1d96da1c9b:
->
->  =C2=A0 Init virtio before loading ENV from EXT4 or FAT (2024-05-17 13:1=
-8:43
-> -0600)
->
-> are available in the Git repository at:
->
->  =C2=A0 https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/efi-2024-07-rc3
->
-> for you to fetch changes up to 41145d93556e3f1d38e5147f4a6fc65610229ab4:
->
->  =C2=A0 doc: process.rst: Document device tree resync rules (2024-05-18
-> 10:36:59 +0200)
->
-> Gitlab CI reported no issues:
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/20753
->
-> ----------------------------------------------------------------
-> Pull request efi-2024-07-rc3
->
-> Documentation:
->
-> * improve netconsole documenation
-> * document device tree resync rules
->
-> UEFI:
->
-> * correct handling of signed variable append
->
-> ----------------------------------------------------------------
-> Fiona Klute (2):
->  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 doc: Detailed example for netconsole set=
-up
->  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 doc: Update netconsole examples, mention=
- stderr
+"For devices launching with Android 13, the generic ramdisk is removed
+from the boot image and placed in a separate init_boot image.
+This change leaves the boot image with only the GKI kernel."
 
-it seems the git branch contains v2 of the netconsole documentation
-patches, not v3 with the prompt formatting change you requested. Is that
-intentional?
+[1]: https://source.android.com/docs/core/architecture/partitions/generic-boot
+Signed-off-by: Roman Stratiienko <r.stratiienko@gmail.com>
+---
+ boot/image-board.c |  5 ++++-
+ cmd/abootimg.c     | 26 +++++++++++++++++++++-----
+ include/image.h    |  7 +++++++
+ 3 files changed, 32 insertions(+), 6 deletions(-)
 
-Best regards,
-Fiona
-
-> Tom Rini (2):
->  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 doc: process.rst: Use subsubheading for =
-"Phases of the
-> Development Process"
->  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 doc: process.rst: Document device tree r=
-esync rules
->
-> Weizhao Ouyang (1):
->  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 efi_loader: Fix EFI_VARIABLE_APPEND_WRIT=
-E hash check
->
->  =C2=A0doc/develop/devicetree/control.rst=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 9 +++--
->  =C2=A0doc/develop/process.rst=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 | 21 ++++++++---
->  =C2=A0doc/usage/netconsole.rst=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 | 49
-> +++++++++++++++++++++-----
->  =C2=A0lib/efi_loader/efi_variable.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=
- 6 ++--
->  =C2=A0test/py/tests/test_efi_secboot/conftest.py=C2=A0=C2=A0=C2=A0=C2=
-=A0 | 10 ++++++
->  =C2=A0test/py/tests/test_efi_secboot/test_authvar.py |=C2=A0 4 +--
->  =C2=A0test/py/tests/test_efi_secboot/test_signed.py=C2=A0 | 10 +++---
->  =C2=A07 files changed, 83 insertions(+), 26 deletions(-)
+diff --git a/boot/image-board.c b/boot/image-board.c
+index 75f6906cd5..715654ff01 100644
+--- a/boot/image-board.c
++++ b/boot/image-board.c
+@@ -414,9 +414,12 @@ static int select_ramdisk(struct bootm_headers *images, const char *select, u8 a
+ 			int ret;
+ 			if (IS_ENABLED(CONFIG_CMD_ABOOTIMG)) {
+ 				void *boot_img = map_sysmem(get_abootimg_addr(), 0);
++				void *init_boot_img = map_sysmem(get_ainit_bootimg_addr(), 0);
+ 				void *vendor_boot_img = map_sysmem(get_avendor_bootimg_addr(), 0);
++				void *ramdisk_img = (init_boot_img == -1) ? boot_img :
++									    init_boot_img;
+ 
+-				ret = android_image_get_ramdisk(boot_img, vendor_boot_img,
++				ret = android_image_get_ramdisk(ramdisk_img, vendor_boot_img,
+ 								rd_datap, rd_lenp);
+ 				unmap_sysmem(vendor_boot_img);
+ 				unmap_sysmem(boot_img);
+diff --git a/cmd/abootimg.c b/cmd/abootimg.c
+index e68c523705..7c450a3b2d 100644
+--- a/cmd/abootimg.c
++++ b/cmd/abootimg.c
+@@ -17,6 +17,7 @@
+ 
+ /* Please use abootimg_addr() macro to obtain the boot image address */
+ static ulong _abootimg_addr = -1;
++static ulong _ainit_bootimg_addr = -1;
+ static ulong _avendor_bootimg_addr = -1;
+ 
+ ulong get_abootimg_addr(void)
+@@ -24,6 +25,11 @@ ulong get_abootimg_addr(void)
+ 	return (_abootimg_addr == -1 ? image_load_addr : _abootimg_addr);
+ }
+ 
++ulong get_ainit_bootimg_addr(void)
++{
++	return _ainit_bootimg_addr;
++}
++
+ ulong get_avendor_bootimg_addr(void)
+ {
+ 	return _avendor_bootimg_addr;
+@@ -209,7 +215,7 @@ static int do_abootimg_addr(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	char *endp;
+ 	ulong img_addr;
+ 
+-	if (argc < 2 || argc > 3)
++	if (argc < 2 || argc > 4)
+ 		return CMD_RET_USAGE;
+ 
+ 	img_addr = hextoul(argv[1], &endp);
+@@ -220,16 +226,26 @@ static int do_abootimg_addr(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ 	_abootimg_addr = img_addr;
+ 
+-	if (argc == 3) {
++	if (argc > 2) {
+ 		img_addr = simple_strtoul(argv[2], &endp, 16);
+ 		if (*endp != '\0') {
+-			printf("Error: Wrong vendor image address\n");
++			printf("Error: Wrong vendor_boot image address\n");
+ 			return CMD_RET_FAILURE;
+ 		}
+ 
+ 		_avendor_bootimg_addr = img_addr;
+ 	}
+ 
++	if (argc == 4) {
++		img_addr = simple_strtoul(argv[3], &endp, 16);
++		if (*endp != '\0') {
++			printf("Error: Wrong init_boot image address\n");
++			return CMD_RET_FAILURE;
++		}
++
++		_ainit_bootimg_addr = img_addr;
++	}
++
+ 	return CMD_RET_SUCCESS;
+ }
+ 
+@@ -346,7 +362,7 @@ fail:
+ }
+ 
+ static struct cmd_tbl cmd_abootimg_sub[] = {
+-	U_BOOT_CMD_MKENT(addr, 3, 1, do_abootimg_addr, "", ""),
++	U_BOOT_CMD_MKENT(addr, 4, 1, do_abootimg_addr, "", ""),
+ 	U_BOOT_CMD_MKENT(dump, 2, 1, do_abootimg_dump, "", ""),
+ 	U_BOOT_CMD_MKENT(get, 5, 1, do_abootimg_get, "", ""),
+ 	U_BOOT_CMD_MKENT(load, 5, 1, do_abootimg_load, "", ""),
+@@ -375,7 +391,7 @@ static int do_abootimg(struct cmd_tbl *cmdtp, int flag, int argc,
+ U_BOOT_CMD(
+ 	abootimg, CONFIG_SYS_MAXARGS, 0, do_abootimg,
+ 	"manipulate Android Boot Image",
+-	"addr <boot_img_addr> [<vendor_boot_img_addr>]>\n"
++	"addr <boot_img_addr> [<vendor_boot_img_addr> [<init_boot_img_addr>]]\n"
+ 	"    - set the address in RAM where boot image is located\n"
+ 	"      ($loadaddr is used by default)\n"
+ 	"abootimg dump dtb\n"
+diff --git a/include/image.h b/include/image.h
+index be3c73a72e..b1fd6b3149 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -1982,6 +1982,13 @@ bool is_android_vendor_boot_image_header(const void *vendor_boot_img);
+  */
+ ulong get_abootimg_addr(void);
+ 
++/**
++ * get_ainit_bootimg_addr() - Get Android init boot image address
++ *
++ * Return: Android init boot image address
++ */
++ulong get_ainit_bootimg_addr(void);
++
+ /**
+  * get_avendor_bootimg_addr() - Get Android vendor boot image address
+  *
+-- 
+2.40.1
 
