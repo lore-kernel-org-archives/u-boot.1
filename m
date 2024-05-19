@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4812C25B78
-	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 19:19:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66549C25B75
+	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 19:19:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B72AF87C83;
-	Sun, 19 May 2024 21:19:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 38E04881EA;
+	Sun, 19 May 2024 21:19:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="noskCreg";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WPOyxkSV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D4E988093; Sun, 19 May 2024 21:19:13 +0200 (CEST)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id D94BC882AA; Sun, 19 May 2024 21:19:16 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5115881EA
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 21:19:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D8505881EA
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 21:19:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=r.stratiienko@gmail.com
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-34d9c9f2cf0so1578805f8f.3
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 12:19:11 -0700 (PDT)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-41dc9c83e57so9014735e9.0
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 12:19:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716146351; x=1716751151; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1716146354; x=1716751154; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=oa2EyQ/NWmndmd/7fwRdHGzbEVAzycMo9tzXk8yWyG0=;
- b=noskCregW+Zug9SBxxNnU/CiYO/UMdmepJJ5F0Wm3yre+NIgSDdnKXhHgPaRNdTEyP
- XQys1j/kbDD6sJnKie23WVVoHel7bSA06VDwUcqzfcAXGgBrmO9fYxhIkTsVWrAVmIjD
- ZuIBXUeseK9GRooMFwrzf/z7xNk/8jvhZyuRzTS9Y7UsUu+DRmeV4fSZ+WLmpvuBpJI4
- pt+eVW4isqSXzQAuORtD+5OOWrqGAwjdiLaoqErhPHTngy0C29nftjkL0MbLcgC3eknu
- C28OgFOPJK5C9yVzPy0JnmMv2FOTg9B7KqZO0p00apxcTGdJrQ34U3lXKatk1UAdM79N
- zcAg==
+ :reply-to; bh=SqQwjbaY8E+m6FLQfScMC/zMS5tWjuvslo7ETSjsMus=;
+ b=WPOyxkSVzwjUez4VLpwB9STEKMmgzIKX52RONTyKCwNPD39dRUDN87Av4jVu+G/yOg
+ 47kxO6KFluIj0Sa5lGnMfV0+vzUOhbLSiFOya1tUY8DSOHB+OAvn2eyw28J9B3Q3uMxo
+ Ii0nEyCoSF6IHobHNN/kdKw4GHrj5SV5SaD/RYowwDK0UYlCCHNMQQAYcpoyc1D/NZMc
+ CQ0P1+q67cSKM+iCMkDZIoah6FmYVCrXprgoVPFkpz0nR/fjBNFwNeYcxlZ21AU1PJCi
+ jTXeGMpQr0YQltFglADIAVCGuI3/cutYiuvytu4y9m6XWIeEG9qrZeq5KRqPddqvnSC4
+ NvjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716146351; x=1716751151;
+ d=1e100.net; s=20230601; t=1716146354; x=1716751154;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oa2EyQ/NWmndmd/7fwRdHGzbEVAzycMo9tzXk8yWyG0=;
- b=G/LnYdi/kRri5CRaf/xZPqnKQw5ZbHQFPubJn3JiDa13Dv7faGkV6S6yIdsyjTM0pS
- JVT9/q/AW9r2vCvOZ/A+sjGZ/kOPI/YmdCUQuDtxdvcZ3rHxduEz9pEapeCVgunuUIy+
- QXXA6a4Ihz1ASrfMLrwVjSeW+AR1eRhWUD0d7Iolmtr7hODwnZlJo+7N9/0zMTiSL7h6
- cVU9I6XgTWib+Am8HZsz3UL6IT810bhgd1XgUOBQ1ysBkqajL3aUSFtzdw78I/HMJWiJ
- ZYEYOVrxv36mnVpt95Iqvt3oJl+hToEaZ1GI+DpgRNzS4Lf7zwaAju1ygthmNNrTqy51
- AO7A==
+ bh=SqQwjbaY8E+m6FLQfScMC/zMS5tWjuvslo7ETSjsMus=;
+ b=jxFnsJtctliPb3Rc2Ze+QYohWhBQAvCTmaHWjDGp8Y2nMzgHkcP6ZQH2svoLunEY+S
+ Y8x0FjmCjA9XR/Q/djQXv9oo65FuQuzwi+4P67C0NiSzfnImJwqC0K09Sb/tKxCM2SQU
+ p3HygRw2uj+DmQrprZw0J7FHMmi6jaP727HNyJJXfXMz0PrTvtD5eNBnUOt2Qpj3saz+
+ o07pslu/S2GqXN7fIzhddpOj9A5Jqa8tiqF50j+SN2bWERNKueCJK3n3QTyeFrLqIBuJ
+ ywov2kp3D54fjFSAazjWuBGEkyl7UzzqAev3unvAoqRYAdXAEnfDvS1U2vx50273Ne2m
+ TA8Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCULFqi+w5qdNmhziwDa5gV9AfElzHK/ydTJHCRHuI5pHcttEXO+Qp/U+MTccn6QP0A+PXkmGNTFHUr1mRb83/QM5z54rw==
-X-Gm-Message-State: AOJu0YzdJeyQpEB85TOslmaCaLgc2M4MkW6t3dYmdV5MflMCKY2KB0uY
- AmL2vwLftdB+d/Ltmhwffh0p/zJU8Vvc/+h3j8rV5O569PCyQrNI
-X-Google-Smtp-Source: AGHT+IFtnT7v/XQjsbOHmLmgjvMtRY2ORgnp+s7IMlQMpJ/7s0KL/MoaQyzEBUPe7pRacSNWyFi49A==
-X-Received: by 2002:a5d:6982:0:b0:346:bc1b:4e7c with SMTP id
- ffacd0b85a97d-3504a73e009mr22054762f8f.35.1716146350842; 
- Sun, 19 May 2024 12:19:10 -0700 (PDT)
+ AJvYcCUf3tifPzjW3zhOedkB4053E5Q2cNz0gI9baI8qS6suKjMCydZP0XKADzGQ6424FrpuBuO87+Mc7q+1qKilznlXgK++7Q==
+X-Gm-Message-State: AOJu0YwMD7Dw/CtrBmF+DvRubxqMksvNPL4ZP9SH+R9jbi/hFCF/XCUa
+ ebahdlB95WGKhbxzmOF4MLRwFVc3hBviZw8Phg8FqU3bxEpsycR01JieuQ==
+X-Google-Smtp-Source: AGHT+IGjIE1rZD9Vw046WejE7q4LiZJ0tTwUHso1n1U6WiDU/vfn5ZcA27zRrmrjlXnSfTJJElqw/w==
+X-Received: by 2002:adf:e8d0:0:b0:34d:93c1:c7d8 with SMTP id
+ ffacd0b85a97d-354b8deaf60mr4167408f8f.4.1716146353981; 
+ Sun, 19 May 2024 12:19:13 -0700 (PDT)
 Received: from roman-envy-fast.. ([46.172.77.250])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3502b89583dsm27411682f8f.33.2024.05.19.12.19.07
+ ffacd0b85a97d-3502b89583dsm27411682f8f.33.2024.05.19.12.19.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 19 May 2024 12:19:10 -0700 (PDT)
+ Sun, 19 May 2024 12:19:13 -0700 (PDT)
 From: Roman Stratiienko <r.stratiienko@gmail.com>
 To: r.stratiienko@gmail.com, mkorpershoek@baylibre.com, igor.opaniuk@gmail.com,
  dsimic@manjaro.org, sjg@chromium.org, ilias.apalodimas@linaro.org,
  xypron.glpk@gmx.de, eajames@linux.ibm.com, marek.vasut+renesas@mailbox.org,
  paulerwan.rio@gmail.com, u-boot@lists.denx.de
-Subject: [PATCH 2/3] avb: Implement get_preloaded_partition callback
-Date: Sun, 19 May 2024 19:18:55 +0000
-Message-Id: <20240519191856.2582174-3-r.stratiienko@gmail.com>
+Subject: [PATCH 3/3] abootimg: Implement smart image load feature
+Date: Sun, 19 May 2024 19:18:56 +0000
+Message-Id: <20240519191856.2582174-4-r.stratiienko@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240519191856.2582174-1-r.stratiienko@gmail.com>
 References: <20240519191856.2582174-1-r.stratiienko@gmail.com>
@@ -94,95 +94,178 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-AVB can reuse already loaded images instead of loading them
-from the disk.
-
-The get_preloaded_partition now looks for the env. variables
-set by the 'abootimg load' to find the correct partition in RAM.
+Load only part of the boot partition that contains valuable
+information, thus improving the boot time.
 
 Signed-off-by: Roman Stratiienko <r.stratiienko@gmail.com>
 ---
- common/avb_verify.c | 53 +++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 53 insertions(+)
+ boot/image-android.c | 70 ++++++++++++++++++++++++++++++++++++++++++++
+ cmd/abootimg.c       | 40 ++++++++++++++++++++++---
+ include/image.h      | 12 ++++++++
+ 3 files changed, 118 insertions(+), 4 deletions(-)
 
-diff --git a/common/avb_verify.c b/common/avb_verify.c
-index cff9117d92..d2626e8844 100644
---- a/common/avb_verify.c
-+++ b/common/avb_verify.c
-@@ -6,6 +6,7 @@
- #include <avb_verify.h>
- #include <blk.h>
- #include <cpu_func.h>
-+#include <env.h>
- #include <image.h>
- #include <malloc.h>
- #include <part.h>
-@@ -595,6 +596,55 @@ static AvbIOResult read_from_partition(AvbOps *ops,
- 			   num_bytes, buffer, out_num_read, IO_READ);
+diff --git a/boot/image-android.c b/boot/image-android.c
+index da8003f370..d00a896a40 100644
+--- a/boot/image-android.c
++++ b/boot/image-android.c
+@@ -204,6 +204,76 @@ bool android_image_get_data(const void *boot_hdr, const void *vendor_boot_hdr,
+ 	return true;
  }
  
-+#ifdef CONFIG_ANDROID_BOOT_IMAGE
 +/**
-+ * get_preloaded_partition() - Gets the starting pointer of a partition that
-+ * is pre-loaded in memory, and save it to |out_pointer|.
++ * android_image_get_valuable_size() - get the size of the android image
 + *
-+ * If the partition is not pre-loaded in memory, the out_pointer shall not be
-+ * modified.
++ * This function checks if the image is Android boot image and returns the
++ * valuable size of the image.
 + *
-+ * @ops: contains AVB ops handlers
-+ * @partition: partition name, NUL-terminated UTF-8 string
-+ * @num_bytes: amount of bytes to read
-+ * @out_pointer: pointer to the starting address of the partition
-+ * @out_num_bytes_preloaded: amount of bytes pre-loaded in memory
++ * @hdr_addr: Boot image header address (boot or vendor_boot)
 + *
-+ * @return:
-+ *      AVB_IO_RESULT_OK, if partition was found or was not found
-+ *
++ * @return size of the image on success, 0 on failure
 + */
-+static AvbIOResult get_preloaded_partition(AvbOps *ops, const char *partition, size_t num_bytes,
-+					   uint8_t **out_pointer, size_t *out_num_bytes_preloaded)
++size_t android_image_get_valuable_size(const void *hdr_addr)
 +{
-+	size_t partition_start = 0;
-+	size_t partition_size = 0;
-+	char env_name[64];
++	int version, size;
 +
-+	sprintf(env_name, "abootimg_%s_ptr", partition);
-+	partition_start = env_get_hex(env_name, 0);
++	if (is_android_boot_image_header(hdr_addr)) {
++		const struct andr_boot_img_hdr_v0 *hdr = hdr_addr;
 +
-+	sprintf(env_name, "abootimg_%s_size", partition);
-+	partition_size = env_get_hex(env_name, 0);
++		version = ((struct andr_boot_img_hdr_v0 *)hdr_addr)->header_version;
++		if (version > 2) {
++			const struct andr_boot_img_hdr_v3 *hdr = hdr_addr;
 +
-+	if (partition_start == 0 || partition_size == 0)
-+		return AVB_IO_RESULT_OK;
++			size = ALIGN(hdr->header_size, ANDR_GKI_PAGE_SIZE);
++			size += ALIGN(hdr->kernel_size, ANDR_GKI_PAGE_SIZE);
++			size += ALIGN(hdr->ramdisk_size, ANDR_GKI_PAGE_SIZE);
 +
-+	if (partition_size < num_bytes) {
-+		printf("AVB: Preloaded partition %s size %zu is smaller than requested %zu\n",
-+		       partition, partition_size, num_bytes);
-+		return AVB_IO_RESULT_ERROR_IO;
++			if (version > 3)
++				size += ALIGN(hdr->signature_size, ANDR_GKI_PAGE_SIZE);
++
++			return size;
++		}
++
++		size = hdr->page_size;
++		size += ALIGN(hdr->kernel_size, hdr->page_size);
++		size += ALIGN(hdr->ramdisk_size, hdr->page_size);
++		size += ALIGN(hdr->second_size, hdr->page_size);
++
++		if (version > 0)
++			size += ALIGN(hdr->recovery_dtbo_size, hdr->page_size);
++
++		if (version > 1)
++			size += ALIGN(hdr->dtb_size, hdr->page_size);
++
++		return size;
 +	}
 +
-+	*out_pointer = (uint8_t *)partition_start;
-+	*out_num_bytes_preloaded = partition_size;
++	if (is_android_vendor_boot_image_header(hdr_addr)) {
++		const struct andr_vnd_boot_img_hdr *hdr = hdr_addr;
 +
-+	printf("AVB: Using preloaded partition %s at %p\n", partition, *out_pointer);
++		version = ((struct andr_vnd_boot_img_hdr *)hdr_addr)->header_version;
++		if (version < 3) {
++			printf("Vendor boot image header version %d is not supported\n", version);
 +
-+	return AVB_IO_RESULT_OK;
++			return 0;
++		}
++
++		size = ALIGN(hdr->header_size, hdr->page_size);
++		size += ALIGN(hdr->vendor_ramdisk_size, hdr->page_size);
++		size += ALIGN(hdr->dtb_size, hdr->page_size);
++
++		if (version > 3) {
++			size += ALIGN(hdr->vendor_ramdisk_table_size, hdr->page_size);
++			size += ALIGN(hdr->bootconfig_size, hdr->page_size);
++		}
++
++		return size;
++	}
++
++	return 0;
 +}
-+#endif
 +
- /**
-  * write_to_partition() - writes N bytes to a partition identified by a string
-  * name
-@@ -1043,6 +1093,9 @@ AvbOps *avb_ops_alloc(int boot_device)
- 	ops_data->ops.user_data = ops_data;
+ static ulong android_image_get_kernel_addr(struct andr_image_data *img_data)
+ {
+ 	/*
+diff --git a/cmd/abootimg.c b/cmd/abootimg.c
+index 808c9c4941..fe7c5c5e2c 100644
+--- a/cmd/abootimg.c
++++ b/cmd/abootimg.c
+@@ -182,6 +182,35 @@ static int abootimg_get_dtb(int argc, char *const argv[])
+ 	return CMD_RET_USAGE;
+ }
  
- 	ops_data->ops.read_from_partition = read_from_partition;
-+#ifdef CONFIG_ANDROID_BOOT_IMAGE
-+	ops_data->ops.get_preloaded_partition = get_preloaded_partition;
-+#endif
- 	ops_data->ops.write_to_partition = write_to_partition;
- 	ops_data->ops.validate_vbmeta_public_key = validate_vbmeta_public_key;
- 	ops_data->ops.read_rollback_index = read_rollback_index;
++static int abootimg_smart_load(struct blk_desc *desc, struct disk_partition *info, void *addr)
++{
++	int ret, size;
++
++	ret = blk_dread(desc, info->start, 4096 / info->blksz, addr);
++	if (ret < 0) {
++		printf("Error: Failed to read partition\n");
++		return CMD_RET_FAILURE;
++	}
++
++	size = android_image_get_valuable_size(addr);
++	if (size == 0)
++		return 0;
++
++	ret = blk_dread(desc, info->start, DIV_ROUND_UP(size, info->blksz), addr);
++	if (ret < 0) {
++		printf("Error: Failed to read partition\n");
++		return CMD_RET_FAILURE;
++	}
++
++	memset(addr + size, 0, info->size * info->blksz - size);
++
++	printf("Loaded Android boot image using smart load (%d/%d MB)\n",
++	       (int)DIV_ROUND_UP(size, 1024 * 1024),
++	       (int)DIV_ROUND_UP(info->size * info->blksz, 1024 * 1024));
++
++	return size;
++}
++
+ static int do_abootimg_addr(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			    char *const argv[])
+ {
+@@ -299,10 +328,13 @@ static int do_abootimg_load(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		return CMD_RET_FAILURE;
+ 	}
+ 
+-	ret = blk_dread(desc, info.start, info.size, addr);
+-	if (ret < 0) {
+-		printf("Error: Failed to read partition %s\n", buf);
+-		goto fail;
++	ret = abootimg_smart_load(desc, &info, addr);
++	if (ret <= 0) {
++		ret = blk_dread(desc, info.start, info.size, addr);
++		if (ret < 0) {
++			printf("Error: Failed to read partition %s\n", buf);
++			goto fail;
++		}
+ 	}
+ 
+ 	sprintf(buf, "abootimg_%s_ptr", argv[3]);
+diff --git a/include/image.h b/include/image.h
+index c5b288f62b..7d8ff40c3f 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -1826,6 +1826,18 @@ struct andr_image_data;
+ bool android_image_get_data(const void *boot_hdr, const void *vendor_boot_hdr,
+ 			    struct andr_image_data *data);
+ 
++/**
++ * android_image_get_valuable_size() - get the size of the android image
++ *
++ * This function checks if the image is Android boot image and returns the
++ * valuable size of the image.
++ *
++ * @hdr_addr: Boot image header address (boot or vendor_boot)
++ *
++ * @return size of the image on success, 0 on failure
++ */
++size_t android_image_get_valuable_size(const void *hdr_addr);
++
+ struct andr_boot_img_hdr_v0;
+ 
+ /**
 -- 
 2.40.1
 
