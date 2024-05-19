@@ -4,98 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC1CCC25B75
-	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 20:54:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DDE3C25B77
+	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 20:54:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC6B388047;
-	Sun, 19 May 2024 22:53:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 264A8882C4;
+	Sun, 19 May 2024 22:53:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="5KSq12VQ";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="QbNwJOH8";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="5YhcwcMO";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="q2DjbxNq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0F2E882BE; Sun, 19 May 2024 22:53:57 +0200 (CEST)
-Received: from fout8-smtp.messagingengine.com (fout8-smtp.messagingengine.com
- [103.168.172.151])
+ id 00A5688193; Sun, 19 May 2024 22:53:58 +0200 (CEST)
+Received: from fhigh6-smtp.messagingengine.com
+ (fhigh6-smtp.messagingengine.com [103.168.172.157])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7696F88193
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 22:53:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 860DA8817B
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 22:53:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
- by mailfout.nyi.internal (Postfix) with ESMTP id A9B6113803B4;
- Sun, 19 May 2024 16:53:54 -0400 (EDT)
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id 80C74114010A;
+ Sun, 19 May 2024 16:53:53 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute6.internal (MEProxy); Sun, 19 May 2024 16:53:54 -0400
+ by compute1.internal (MEProxy); Sun, 19 May 2024 16:53:53 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1716152034;
- x=1716238434; bh=NsrkSuV8RmpBH30BptZufEhcSWZsZMDUf0peTeuaIjU=; b=
- 5KSq12VQgjdhsp9+3FO1vhQ81QyykmOrr0WRoh+bLRaCU/pbTvbbLEZCIX+puflj
- aiGW3GKPSP0pRHnaGl7VSFsUKIAmlYPK3Gp1OoCcAdlaMTgkBOLOmDcmbKjkuKHI
- w8PT7xyNzbk81cC6FBbBiiGGOm0Q3ogk9gSduXF687gHETP5ZQhvpYKdoAtTIeTa
- R0mTeVxybgzMMt0uym6lijQprp0d2PwG+qrUqzi/UZkPCbmtvTcl+FuBo7WfNknV
- lBOo3g/+PDZAiLWP/C2zmzTgDS+QjVzWkpCkSm4/QIC+aOgWqluSyrXxLUEM/V0p
- v0gWBB82GZQlktK/7eTmXg==
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1716152033;
+ x=1716238433; bh=HGGhjdIBzktfsrN6a24IH5ftL75XU3nRJyM+d4Ewis8=; b=
+ 5YhcwcMOX75gZkR98KULR82RIP1/D4PPo+Ab+/mnRBOPcUSXjyBsxXQmYV1KoyOD
+ f4po0r2zw5l+os+JpEAw8tvq0jLDIC04evaBCX4g/PevP9XqKKk6/KTUysnZmnSC
+ nikkjF1ph8sHF43ZOq6+fPLFRcriyWTmYb8vny8OxjN4FjaaSS6XaKNKPrcTmXTp
+ Il4jolOPLHKjuDLdn8NHl3PL93SwJbRVIAYm/2cmm4j+cCxLH+syaP0QUPed2rDk
+ fNNCnc7m0kt4WrwYlOWO5s2EPFSVLegSvHw/2ARBCGGWNHBkRzqv472JL9spKbEI
+ rou6w26NO3oO3v8hTn6h4A==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716152034; x=
- 1716238434; bh=NsrkSuV8RmpBH30BptZufEhcSWZsZMDUf0peTeuaIjU=; b=Q
- bNwJOH8UFh9c5gcR47gL9qLNH0nBAPIUid8Ne4PcFmP0rE+K8UkOnZni0HObZxGr
- noJdnzjmPANDA/Y4HxjNoB4WVcpm1JI7rRygCr7Z2QbUkwVfCSuXg3pqSIUkR7vW
- t+aERzsNiFQVq6DUniNXbV6Z4t+hmtN9Ci6lOs3PkLprcMkjwpexr052IzAeYwfD
- 9HSJLo17KrCse2rYAc8eiRkCbRhwWgYw+x2FcEIaBgvx8vLuY+U1Ht8NJLJ1EOw1
- Q3/MSk3ZA4YwFD0LpYE35CSATd8yuukzo0u5vNZMP8uQPLjD2mnn2HzWDRycwJ+I
- ZReDSLSkreyqr+QTAyb1A==
-X-ME-Sender: <xms:4mZKZhvzZd5fY8SORkKt3RLFkef3jjBL3znLEtskRQJabtr1EUzpbQ>
- <xme:4mZKZqfgrBhxBPUkHxEirPF57jSPx7_un0OoQUQq8IxaSL-GLRR9PN3eRsAUmheUt
- ZHkeK6qAFjinhJmdno>
-X-ME-Received: <xmr:4mZKZkwJxrYYOXliqsNzIPL7G60IDezhD2qwQ4UTCzd2ti7RBb4hmlo>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716152033; x=
+ 1716238433; bh=HGGhjdIBzktfsrN6a24IH5ftL75XU3nRJyM+d4Ewis8=; b=q
+ 2DjbxNqLJsFDZE2NkjrrDU1VzRucwJxXPedEhmhTLJgZd1DKKdq+WANTDMP57yq/
+ 5tziWXwYKG01OYLdaHLAyTpXaaah/mtSqRR8Q0txT/8/5X059ffxjWkx2HE6lKnC
+ /nUtB4TnGHsOQeB3nsrV9aPIWYOEVcEggur9U3UBcmQpV7jsJh5MZqXYHLUpCjxD
+ 5pE9MoP0C+409fe6QIjCXi4Lk9avzFIGf88COzRhnLjBVj/75MhiBnX4FjpfUK8z
+ zQDIUWt/KVTRWblcDpA3HqUHP+e1nR3xOhkHKp4PRzB3FZ6TVJe7gvZhZDunbvKs
+ 0DdCQ2Dgx2kBL18cuOd5w==
+X-ME-Sender: <xms:4WZKZgbKzxP-i2aLH-YoHEg58ctLJlcpHMiPGM1R8WNjkZs5kw3OFg>
+ <xme:4WZKZraEeNjUpPL19XbBvffH1q664FtuUNlxZkNDAHtmZ4wzkDQnNN9gOXXOhEBLo
+ L7W0fEYv2OjZM3-dJU>
+X-ME-Received: <xmr:4WZKZq9dtJXdRuFkxm7jCyiMjcdHE3miFvgeX6i0EHJg2i9WTPRFLCs>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehkedgudehvdcutefuodetggdotefrod
  ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
  necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
  enucfjughrpefhfffugggtgffkfhgjvfevofesthejredtredtjeenucfhrhhomheplfhi
  rgiguhhnucgjrghnghcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhmqe
  enucggtffrrghtthgvrhhnpedvkeeihfefveekueevteefleffkeegudeghfdtuddugefh
- ueevgeffgedukeejleenucevlhhushhtvghrufhiiigvpedunecurfgrrhgrmhepmhgrih
+ ueevgeffgedukeejleenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrih
  hlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
-X-ME-Proxy: <xmx:4mZKZoOpn322sPiX_fpXwjWppLXh6JaJoYkmGMYGZ4ldn5-51ULGOQ>
- <xmx:4mZKZh-jTgpK2B8ds01qj2vzl2o885TZSrcRTeeHhUMEFAIl5QYA9g>
- <xmx:4mZKZoXqg82209cEe8rk8--WmGAHqrhBJAXDaXo6gBx7EXOkRIryaQ>
- <xmx:4mZKZifqFwFur9E9RUgH8JxE3o9XOZy-ITO_qv4J-pLNgeAKB0WUFQ>
- <xmx:4mZKZhxVcjdi-GBT3Blv2IhfHo39IpuzsBIwhk0Zo9apOiDdv2ceXwSs>
+X-ME-Proxy: <xmx:4WZKZqqJLi4Kub9BeGIh0u0iELiIWJp9bduG9fez-wAifjvSBM73nQ>
+ <xmx:4WZKZrodewr4VTpcq6Wcl5Ha-WHw0Kc8tgGgatg2rV1FsZbRvKewmQ>
+ <xmx:4WZKZoRgf0eRD8Pg6RDKUdw6a8sRY3243NY8iIbPCU2TxDxVWbBzOw>
+ <xmx:4WZKZrpBQMYy-iLU-E5IqofoPQ6vWGU84rTu3fu4r02lF90emUb7dQ>
+ <xmx:4WZKZse8ex0r77-GJVdSRPzsy6Xl67qDmzuNvkfVynOkiMybc4xzZXAb>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sun,
- 19 May 2024 16:53:53 -0400 (EDT)
+ 19 May 2024 16:53:52 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Sun, 19 May 2024 21:53:50 +0100
-Subject: [PATCH 03/10] xtensa: Implement phys virt conversion for PTP_MMU
+Date: Sun, 19 May 2024 21:53:49 +0100
+Subject: [PATCH 02/10] xtensa: Correct define of _end symbol
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240519-qemu-xtensa-v1-3-8fff0cb11c19@flygoat.com>
+Message-Id: <20240519-qemu-xtensa-v1-2-8fff0cb11c19@flygoat.com>
 References: <20240519-qemu-xtensa-v1-0-8fff0cb11c19@flygoat.com>
 In-Reply-To: <20240519-qemu-xtensa-v1-0-8fff0cb11c19@flygoat.com>
 To: u-boot@lists.denx.de, Sean Anderson <sean.anderson@seco.com>
 Cc: Max Filippov <jcmvbkbc@gmail.com>, Tom Rini <trini@konsulko.com>, 
  Sumit Garg <sumit.garg@linaro.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2005;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1261;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=i66e2H8mL9AQRiPd5Y0iBlvD+fpKKl6Al3uT1QeU5ts=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhjSvtHuNL9S+MWuJnixdqGX7t5rxke7/He41uQltVg9kV
- 2cHXz/SUcrCIMbFICumyBIioNS3ofHigusPsv7AzGFlAhnCwMUpABO5/ZeRYa5CWuUcPcVLM08d
- OM5u/3HCbkGjmaYpVx2+PvjGuCoz2pCR4R2DdWj/8VOm2dMCo1d8+CmSw7vg9/ONsirlziJG8zj
- NmAE=
+ bh=CMOosrUZ8OvYNRpXGbk3SzLd/lJWJFV/k1N3YY0PTxU=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhjSvtHuPHL/vmDj5qtSDtkMOSo8eGNw6v71nVdPaYv2oN
+ zFN7aemdpSyMIhxMciKKbKECCj1bWi8uOD6g6w/MHNYmUCGMHBxCsBENC8wMmw/VHs2ulUqXsj1
+ aO7c178y13HMyg36cGem87rby5XtJ0oyMux03f7mzRkJQfHtZxkXOLxccPJy8hrF4w4NSr+iV25
+ JOMIFAA==
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -114,82 +114,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For PTP_MMU our physical address is not directly mapped
-into virtual address space, we need to access physical
-memory from those fixed map segments.
+So U-Boot is using _end symbol to detect location of devicetree
+appended at the end of the ROM.
 
-Implement phys_to_virt and virt_to_phys hook to reflect
-this setting.
+It needs to be calculated based on end of .data load address,
+as in our lds .current address is address in RAM.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- arch/xtensa/include/asm/addrspace.h |  2 ++
- arch/xtensa/include/asm/io.h        | 32 ++++++++++++++++++++++++++++++++
- 2 files changed, 34 insertions(+)
+ arch/xtensa/cpu/u-boot.lds         | 2 ++
+ arch/xtensa/include/asm/ldscript.h | 1 -
+ 2 files changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/arch/xtensa/include/asm/addrspace.h b/arch/xtensa/include/asm/addrspace.h
-index 920b5fd26b20..c8bed8834b55 100644
---- a/arch/xtensa/include/asm/addrspace.h
-+++ b/arch/xtensa/include/asm/addrspace.h
-@@ -7,6 +7,8 @@
- #ifndef _XTENSA_ADDRSPACE_H
- #define _XTENSA_ADDRSPACE_H
+diff --git a/arch/xtensa/cpu/u-boot.lds b/arch/xtensa/cpu/u-boot.lds
+index 84ba32c04444..72e4b9a706e5 100644
+--- a/arch/xtensa/cpu/u-boot.lds
++++ b/arch/xtensa/cpu/u-boot.lds
+@@ -82,6 +82,8 @@ SECTIONS
  
-+#include <config.h>
-+
- #include <asm/arch/core.h>
+   __reloc_end = .;
+   __init_end = .;
++  /* Calculation to get end address in ROM */
++  _end = LOADADDR(.data) + (_data_end - _data_start);
  
- /*
-diff --git a/arch/xtensa/include/asm/io.h b/arch/xtensa/include/asm/io.h
-index 87ad9faa2995..ab2438b829ac 100644
---- a/arch/xtensa/include/asm/io.h
-+++ b/arch/xtensa/include/asm/io.h
-@@ -12,6 +12,8 @@
- #include <linux/types.h>
- #include <asm/byteorder.h>
+   SECTION_bss(__init_end (OVERLAY),)
  
-+#include <asm/addrspace.h>
-+
- /*
-  * swap functions to change byte order from little-endian to big-endian and
-  * vice versa.
-@@ -127,6 +129,36 @@ static inline void sync(void)
- {
- }
- 
-+#if XCHAL_HAVE_PTP_MMU
-+static inline void *phys_to_virt(phys_addr_t paddr)
-+{
-+	if (paddr >= CFG_SYS_IO_BASE)
-+		return (void *)(unsigned long)paddr;
-+
-+	if (paddr < CFG_MAX_MEM_MAPPED)
-+		return (void *)(unsigned long)MEMADDR(paddr);
-+
-+	return NULL;
-+}
-+
-+#define phys_to_virt phys_to_virt
-+
-+static inline phys_addr_t virt_to_phys(void *vaddr)
-+{
-+	unsigned long addr = (unsigned long)vaddr;
-+
-+	if (addr >= CFG_SYS_IO_BASE)
-+		return addr;
-+
-+	if (addr >= CFG_SYS_SDRAM_BASE && addr < MEMADDR(CFG_MAX_MEM_MAPPED))
-+		return PHYSADDR(addr);
-+
-+	return 0;
-+}
-+
-+#define virt_to_phys virt_to_phys
-+#endif /* XCHAL_HAVE_PTP_MMU */
-+
- #include <asm-generic/io.h>
- 
- #endif	/* _XTENSA_IO_H */
+diff --git a/arch/xtensa/include/asm/ldscript.h b/arch/xtensa/include/asm/ldscript.h
+index 78a0b230bdaa..bcf0fd5a7443 100644
+--- a/arch/xtensa/include/asm/ldscript.h
++++ b/arch/xtensa/include/asm/ldscript.h
+@@ -165,7 +165,6 @@
+ 		. = ALIGN(8);						\
+ 		_bss_end = ABSOLUTE(.);					\
+ 		__bss_end = ABSOLUTE(.);				\
+-		_end = ALIGN(0x8);					\
+ 		PROVIDE(end = ALIGN(0x8));				\
+ 		_stack_sentry = ALIGN(0x8);				\
+ 	}
 
 -- 
 2.43.0
