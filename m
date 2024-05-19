@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 980E4C25B75
-	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 18:00:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD559C25B75
+	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 18:16:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2137F881AD;
-	Sun, 19 May 2024 19:59:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2081788124;
+	Sun, 19 May 2024 20:16:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="f5l4p0xF";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QexAyJZo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0EF6E880FB; Sun, 19 May 2024 19:59:58 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 4D975880FB; Sun, 19 May 2024 20:16:25 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 629E1881AD
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 19:59:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 71BCE88124
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 20:16:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=daniel.schwierzeck@gmail.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5766cd9ca1bso1014522a12.0
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 10:59:54 -0700 (PDT)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a5a0013d551so361877666b.2
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 11:16:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716141594; x=1716746394; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1716142583; x=1716747383; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=kBLImWpHiYjaTDEkZaRYLFjUJf3qUktBilnLH2W6jn8=;
- b=f5l4p0xFW+aymegqXuyR5d5cp4BMHXAPnSkUnjbEJyFKIMjcRP5B2ivf3CwualryQD
- RR/8qIMihNiwY+L/y2H5WXme+AhRPNgA+ZAOj3n22h/Yc9EVOZBwTLKUJacQjA5MeeaG
- D+/QtHCu1kQfOBtyhe2cPo0jxjkeGvCTP0wcQxFDbS9okOntNjT62LxvvhzPM+HS+QuW
- zTP6wRyVvVN2OF3m5w0vhwAB+g2eU1gSJICMBFnriST+kPleX3iSEfPyK3x9vLSVJtQV
- vMd9JTezx4bVYOcj60X6svOt26uFzFUOJQBN8GzIduDkf7DgcJ+5VJmDlw6ewEK6L97u
- uWFQ==
+ bh=OGb8c5aiEjJ8wAJ8aoMBcZ9zeqb58k8UZ3nyAhMiB5k=;
+ b=QexAyJZoEX3ROm9KcTsrveIOqB2P+bKlTOGxkRxywnhCPiEv6s4/0Qyvrkc0F575KT
+ dljjm+xFeMkLjZJ2jXcDg35ow2wfVM7vM4lnPTvoPmcJYd9n8MLoRbu08TMl1+I+R5O5
+ n/YZ0NobOQ79p9Evp6n7mLNqqYBAIme48aS95f4JBR+HkpZj22q1/kQhLcQ6qAoWBGW4
+ ydKlZhl1r/Ey9NoN0JFezSMf+8ZT6XrAE3Maz9bNIdfqWvuK2mLX2dlIPhrWUTYUgy5r
+ IkzVEDnYSk3WEpZ5Cnu5OdzypZFjXxhS4c48wwVPeY0xM+3JUUnNPhtSlk21xt+Uvi99
+ 6q9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716141594; x=1716746394;
+ d=1e100.net; s=20230601; t=1716142583; x=1716747383;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=kBLImWpHiYjaTDEkZaRYLFjUJf3qUktBilnLH2W6jn8=;
- b=nU7RklOsUWI72RiYrZyaDdw0nKgLmCrOsoS3fVlIg0rz8Ba+xwLEVpUB3YaKRHd8Ah
- ILXZtMKsY4SqTzWtgVuuc4YFdgKdWo0sg8DIbcr1xybDhcz8IkEgDOsmN3j8yzRe2AUy
- kroO897oNWjIW/7fNjQTO6/7//Bp6X4NLul+sQT6UtKnL2Nh8UuTnHOyKoiw+kJc3rAg
- 1nF+g4Z3xnlA/joz+1iSfkDdM3fdA+LmxwfLuJtgoQoYg685G8zobPhofU1JU7pFniuc
- vDpVKgZ6fOpxrxib/b1TJBIrxgqjuliQU2Uc+GHHYyAU1b/wmuQBEh1xybW/pDweUCmv
- E2dg==
+ bh=OGb8c5aiEjJ8wAJ8aoMBcZ9zeqb58k8UZ3nyAhMiB5k=;
+ b=k7ijjNiTvoMhV20qYx87mcE9cWMHFpY3KlG7+F3Hb3LRdARvHSuwExp8jtDVkLBunO
+ qKryqxfdW8wWEg0r5o+dQzrcpnd5XJUNPNYmi+iTywclemZ2Ce67LPp+KimscT1SL417
+ z3Sba+CxzDqpNKqxNhJwCKMauebmt5ZpQqxzO4FJlmQ4pSg1LOvZ3HytxVdUYXWWvKPO
+ aACTecj15pWp63YVGACCF/URv1+qTeDNIH37FCRrPY7pUl457APpZiZGAOStjxRZtPiD
+ wcux7rNanpv/GnxaXObVX+Gb4A2ZLr3U1R7Fv0CWQaqRFYvn7nkjSN2Etk88bbM++Ar8
+ 5ujA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWWnz5WpwQJehvW9U1ANSs0ln8Zmux/Yd/TLoQZGdCwYK0c2908rBXmSCGgL4m3uvaf/BlY1LeHsuXgE4OCjfcft096Xg==
-X-Gm-Message-State: AOJu0YwEFcQZ/dJh0RpJ0ofQMHMqAmAQWDMjC9oVFEXwnrOr0y+d0Dqu
- njd3i8tohl/iuW/Ma4iJaiIsCY5BNBBt9IKquL/ZKEOOcQ6LGgkgQ0D6DFRC
-X-Google-Smtp-Source: AGHT+IHOlTBTaN0mO97u+kkBmbD59jvbiKkgZZWeefGb6EQeGBXfobRns1tw1Q9c57AgZiip5RbIUg==
-X-Received: by 2002:a17:906:6a0e:b0:a5a:7cfe:30e9 with SMTP id
- a640c23a62f3a-a5a7cfe31b2mr1397666966b.49.1716141593879; 
- Sun, 19 May 2024 10:59:53 -0700 (PDT)
+ AJvYcCWyLPAuqc3Mj6Wepn7lX6Tl8ghR2aKLr7546c1sLFSEU/xeRkohX/tZVlPB5/KvT7kipt6gBfmw3SZQxoc/AiTeAmkYdw==
+X-Gm-Message-State: AOJu0YwSH0wStTgBrMkm7NGKcEFfYXI9Xo1Hv5nKjkpKlnFQIUQTI3TF
+ S99e/i6H8ZKvvRwisZjv2lPI8FttSBqtKPcfVmiPvEJuBDH31aVo
+X-Google-Smtp-Source: AGHT+IGhHUJsEWW0zxukU3HUCqURSEecC1K6pocMY/A1rBa0ZTJtIVZnPJELZv2RGucuXA90pbQu+Q==
+X-Received: by 2002:a50:d7c2:0:b0:570:3bb:e099 with SMTP id
+ 4fb4d7f45d1cf-5734d597dc2mr21245975a12.1.1716142582611; 
+ Sun, 19 May 2024 11:16:22 -0700 (PDT)
 Received: from [192.168.10.30] (77-7-142-46.pool.kielnet.net. [46.142.7.77])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a5a17b0173asm1387741466b.179.2024.05.19.10.59.52
+ 4fb4d7f45d1cf-574eaace761sm7039574a12.91.2024.05.19.11.16.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 19 May 2024 10:59:53 -0700 (PDT)
-Message-ID: <e1d5e4e7-d86d-4dba-aeb6-2df6127fcde6@gmail.com>
-Date: Sun, 19 May 2024 19:59:52 +0200
+ Sun, 19 May 2024 11:16:21 -0700 (PDT)
+Message-ID: <ea3619b7-0a1a-43c1-8de0-f06fd83c4ab3@gmail.com>
+Date: Sun, 19 May 2024 20:16:20 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 08/12] MIPS: boston: Provide default env vars
+Subject: Re: [PATCH v3 09/12] clk: boston: Allow to get regmap from parent
+ device
 To: Jiaxun Yang <jiaxun.yang@flygoat.com>, u-boot@lists.denx.de
 Cc: Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>,
  Paul Burton <paulburton@kernel.org>, Simon Glass <sjg@chromium.org>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Sumit Garg <sumit.garg@linaro.org>, Jonas Karlman <jonas@kwiboo.se>
 References: <20240517-boston-v3-0-1ea7d23f4a1d@flygoat.com>
- <20240517-boston-v3-8-1ea7d23f4a1d@flygoat.com>
+ <20240517-boston-v3-9-1ea7d23f4a1d@flygoat.com>
 Content-Language: en-US
 From: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
-In-Reply-To: <20240517-boston-v3-8-1ea7d23f4a1d@flygoat.com>
+In-Reply-To: <20240517-boston-v3-9-1ea7d23f4a1d@flygoat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -102,14 +103,20 @@ X-Virus-Status: Clean
 
 
 On 5/17/24 20:14, Jiaxun Yang wrote:
-> Provide default environment variables on image loading address
-> to make the board useful.
+> In upstream devicetree, clk_boston is a child of syscon node
+> and there is no "regmap" property for clk_boston node.
+> 
+> Try to check parent device first to look for syscon.
 > 
 > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 > ---
->   board/imgtec/boston/Kconfig    | 4 ++++
->   board/imgtec/boston/boston.env | 9 +++++++++
->   2 files changed, 13 insertions(+)
+> v2: Move syscon_get_regmap to probe
+> v3: Move syscon detection code to probe to ensure
+>      parent is probbed before syscon_get_regmap.
+> ---
+>   drivers/clk/clk_boston.c | 19 ++++++++++++-------
+>   1 file changed, 12 insertions(+), 7 deletions(-)
 > 
 
 Reviewed-by: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
+
