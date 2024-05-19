@@ -4,98 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD299C25B75
-	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 20:53:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BB30C25B77
+	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 20:54:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB7608815E;
-	Sun, 19 May 2024 22:53:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4AEEE8822D;
+	Sun, 19 May 2024 22:53:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="vmTPx0++";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="VFPI3Ilw";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="eL3jpBdm";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="nHN3m9Z1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FBFA881EA; Sun, 19 May 2024 22:53:56 +0200 (CEST)
+ id 5D5F88813F; Sun, 19 May 2024 22:53:56 +0200 (CEST)
 Received: from fout8-smtp.messagingengine.com (fout8-smtp.messagingengine.com
  [103.168.172.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19CD88813F
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 22:53:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C83C87E0B
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 22:53:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
- by mailfout.nyi.internal (Postfix) with ESMTP id 4FC6213808CB;
- Sun, 19 May 2024 16:53:52 -0400 (EDT)
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+ by mailfout.nyi.internal (Postfix) with ESMTP id 26A5513803B4;
+ Sun, 19 May 2024 16:53:51 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute6.internal (MEProxy); Sun, 19 May 2024 16:53:52 -0400
+ by compute1.internal (MEProxy); Sun, 19 May 2024 16:53:51 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1716152032;
- x=1716238432; bh=ZdmKnQ9YhE1iT9cs+BdkdUsgu8lxjLTjqPwY0i0EsXk=; b=
- vmTPx0++231QxGQZuiwAX++H0olhtrIoHBk/qZYM35GTEP6ay6YcuZZuxB8RLS7v
- Dukocc5aOBqQFILQG9CaEeKxgl27njk7rBtxufnPNnmHenHuljz7Sg+VBPc4yYcX
- w+dI4JDpwiEVLh41OAlNh54cCk+OZXsilKuXEm2qjB5xBWgYXXLXBVXueJL1+fex
- +kJCpEcz0VQT7X0d8aH9vpB5DNCIsjj35Igou4HsUk/gbekzdjytSA0SmYt7w0IV
- IXyo4E4wlyoZCAxfcYkNK+vlTWYfq5ovhwIMwoaZbjTyRiQ5gz/TUZDprPOithWw
- e5kEg61doj04AKuxolk45A==
+ :date:from:from:in-reply-to:message-id:mime-version:reply-to
+ :subject:subject:to:to; s=fm2; t=1716152031; x=1716238431; bh=Xt
+ 6TtxJM89SSm8S9rYb0bBDcfvCkE8lV5qNnkClhZBw=; b=eL3jpBdm5NvGehjZPV
+ 8A1yj+AouUIYNgMBnCAhbDMKbWOXkelT3hYltQeHa0E1/3intLqpp0llvShdC7bV
+ Qj7UGxZhiF+T7k82ySzniYv/X7dU6AP6f9FgCfHTh1ING21JClS5onoODsPPskAw
+ FJCYMFfUP9P+6XGOlO7YFHtWulcFxAg/memNKNqmSQoq2lYKTKnK2DwQefJkQXBA
+ MbLTNpR9UJVjuynnK66NQ9hupFPg5So5q9BHc7694cVT7i05orbXOiaJB8Z1r4IC
+ 5aZ67HxJhxh5jexzMBVQs2XytUq/0NmTpkncfK+h3yQGz7TmTi1eccrX64fW8phv
+ f5YQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716152032; x=
- 1716238432; bh=ZdmKnQ9YhE1iT9cs+BdkdUsgu8lxjLTjqPwY0i0EsXk=; b=V
- FPI3IlwAxcV5Wd8Eoef1M0HKuv2j9eAynLQyi4klT4OCO5CwtaRyxL1g9Ymy01TF
- L8E4XjGPm301K8z6V9WxfbbQNk9/TQO1A3RlCSePKi27tKIaNWJdECc/L3GyYP6K
- p4IdGRpQY8rO3KjQYq5cME25nkhtVUeVZiw9t+99xGrg37x7NV09fsi1p97atDi3
- i4Fpink+aqC67KvoeBp3icIk34icSsozCKF2Zli4xOXK9/2PzqBHKwuDuAPFOaX+
- st9HmCdwKcllzTEUjquoOw5RF3hq+46aca11SMhLDOdfPnddaDuNjHxCoVoPtaHF
- VtdjxNg7IFl22B2c5bMHg==
-X-ME-Sender: <xms:4GZKZn4PWRtYAzVoUTvn3Pr9C1rwA0PjtAQxOJNAawY1PWE4VXhEcA>
- <xme:4GZKZs7o9HzL685dhF2T3S5r8fUYQudxUamq3pO9jpyA3DAWoHP09q_5Ely5lCAvl
- nksWojn7CvHWWc153U>
-X-ME-Received: <xmr:4GZKZueLuHZGR9MYmyGSGlD6TsyGiCf3Sp68NJK-KKTbnR_cdA_FP6s>
+ :from:from:in-reply-to:message-id:mime-version:reply-to:subject
+ :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+ :x-sasl-enc; s=fm1; t=1716152031; x=1716238431; bh=Xt6TtxJM89SSm
+ 8S9rYb0bBDcfvCkE8lV5qNnkClhZBw=; b=nHN3m9Z1Rtu50T9nu2b1vpU7JAz6P
+ ZI12GiNyx2UBJL0zQhUNOuyCkR2DYgwDpCEq0g/Vq+OkS2+y/Gpb7cx5mbn7hqf1
+ WZe8xxCZYd12+2iyoTMdqFApti4AsjNzTpOwWEQbRpZWKKZyl6iM2f3HjYF7NYZw
+ FPE/++m34ZuhhQMZykS2MY5aMOGAkK+irTflR6bQtjoHwpkuwsaGDomZmyDcRhcz
+ 7Iu6bX5uV+SPbN1nDEStibxKdMR3KPwPgv8w+DYG0Bz5LA35kize9hkBeASSiRbR
+ qkD4sQxx08KzooBMH5Vcx/lKMQ9fdgYb6/TLEfgceMco6OzK4nxFGp05A==
+X-ME-Sender: <xms:3mZKZh1JCvroWvuRs1DhHYbnAknf8T4bYNxaNzhzobWs4k5dRriKUQ>
+ <xme:3mZKZoFLw4ikQW7UUqVZG_3chXLl7MdgN6ozcUDC2yUjZLhyxxcTs7OcwFagV2TjL
+ CDvR8EIJ_OsnuFKLwM>
+X-ME-Received: <xmr:3mZKZh5kSSGF7WKyQ6I1oIYt3-mMo3Y4pJ343aVIly-vxaD3RRCiln8>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehkedgudehvdcutefuodetggdotefrod
  ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
  necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
- enucfjughrpefhfffugggtgffkfhgjvfevofesthejredtredtjeenucfhrhhomheplfhi
- rgiguhhnucgjrghnghcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhmqe
- enucggtffrrghtthgvrhhnpedvkeeihfefveekueevteefleffkeegudeghfdtuddugefh
- ueevgeffgedukeejleenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrih
- hlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
-X-ME-Proxy: <xmx:4GZKZoKHHOpX-wLTzYwIRpx-LOdchmN6KykMPmjMW3N6yv8al68I9Q>
- <xmx:4GZKZrJCADSdK1js8vgESbqTS54pukDUtwVsxJ44UZllpXVHjOYSXg>
- <xmx:4GZKZhzuBrkrQHwowppCOtfgO0YwUHsa9-BDri6evF9sWg3_p7JiHg>
- <xmx:4GZKZnIbTj43A-3tQyYlIZ-AsV9uxa2uZV5SR3gpE83OjHEDC7FN1g>
- <xmx:4GZKZj9QQZRIsv8AoifB_dxJS3oqYkk1ookUoeXSnepr4em8Ulrg8CA1>
+ enucfjughrpefhufffkfggtgfgvfevofesthejredtredtjeenucfhrhhomheplfhirgig
+ uhhnucgjrghnghcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhmqeenuc
+ ggtffrrghtthgvrhhnpeelleehgeevgedtvefgfeevgfevveefheejhfekjeeiveethfeg
+ geeivefggeegudenucffohhmrghinhepghhithhhuhgsrdgtohhmnecuvehluhhsthgvrh
+ fuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepjhhirgiguhhnrdihrghnghes
+ fhhlhihgohgrthdrtghomh
+X-ME-Proxy: <xmx:3mZKZu0AvrCbivics4UcYvaPJbE8WIom8uKZGIj6exlyyjTpfB2mCw>
+ <xmx:3mZKZkEXe5J_vZlmRZQTz8TbR8wz6tszP08aOgoY3u6klNWx1qngVg>
+ <xmx:3mZKZv_oH0RMSvjUxa-Iv82q9PaHz6-0hBzrme48cjPqOiVDFmeGRQ>
+ <xmx:3mZKZhngnAzT-IVxnoMfGU76rOiqQFNlCHJZFtTxB0YxmGvjkY_IMQ>
+ <xmx:32ZKZp4vwD0abbXvBqbAjWCNk5BrSSj0faXTAs0rv1HmrahKURYDB5Sh>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sun,
- 19 May 2024 16:53:51 -0400 (EDT)
+ 19 May 2024 16:53:49 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Sun, 19 May 2024 21:53:48 +0100
-Subject: [PATCH 01/10] xtensa: Move dram_init to xtfpga board file
+Subject: [PATCH 00/10] xtensa: Enable qemu-xtensa board
+Date: Sun, 19 May 2024 21:53:47 +0100
+Message-Id: <20240519-qemu-xtensa-v1-0-8fff0cb11c19@flygoat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240519-qemu-xtensa-v1-1-8fff0cb11c19@flygoat.com>
-References: <20240519-qemu-xtensa-v1-0-8fff0cb11c19@flygoat.com>
-In-Reply-To: <20240519-qemu-xtensa-v1-0-8fff0cb11c19@flygoat.com>
+X-B4-Tracking: v=1; b=H4sIANtmSmYC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIxMDU0NL3cLU3FLdipLUvOJEXdO0JEvTpCQTc5NUSyWgjoKi1LTMCrBp0bG
+ 1tQDD6K1DXQAAAA==
 To: u-boot@lists.denx.de, Sean Anderson <sean.anderson@seco.com>
 Cc: Max Filippov <jcmvbkbc@gmail.com>, Tom Rini <trini@konsulko.com>, 
  Sumit Garg <sumit.garg@linaro.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=930;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3100;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=GANoPz/dvriQAaXUB4/yZbULtnGNWF6683sB1ucNN2s=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhjSvtHt6kvbPa5s0tG/9D+Nhs6s21fh8i/9jllZwKfsSW
- QW9jF8dpSwMYlwMsmKKLCECSn0bGi8uuP4g6w/MHFYmkCEMXJwCMJHYQIb/5a5zndQX3rkf//IB
- W1iVaWHIzSRGHlHDuvZ9d/dKsRatYfhfwLt3hq5j8J+ieNGZormzlzmf2yLSbDJ53wMX9fgZfqt
- YAA==
+ bh=LjyXmTRZpZ9cfEHbF+MierMhPmfobD63ozrH8ErRUjU=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhjSvtHv9tXbWr1PTw4K3tPxVFPy76PHN9uiUE8EzCrx3P
+ 4toj1rSUcrCIMbFICumyBIioNS3ofHigusPsv7AzGFlAhnCwMUpABMJCWb4Z1x7ysiSM+LQ/Mgr
+ xUfXHfqgxuhnfLy6r85qTZlTCXMtOyPDgUWTDlgyTPLhTXjL9zR4+gJm9fe8EzpnTNyqxdNlfcS
+ CDwA=
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -114,44 +115,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is a board level stuff.
+Hi all,
+
+This series enabled qemu-xtensa board.
+
+For dc232b CPU it needs to be built with toolchain[1].
+
+This is a side product of me investigating architectures
+physical address != virtual address in U-Boot. Now we can
+get it covered under CI and regular tests.
+
+VirtIO devices are not working as expected, due to U-Boot's
+assumption on VA == PA everywhere, I'm going to get this fixed
+later.
+
+My Xtensa knowledge is pretty limited, Xtensa people please
+feel free to point out if I got anything wrong.
+
+Thanks
+[1]: https://github.com/foss-xtensa/toolchain/releases/download/2020.07/x86_64-2020.07-xtensa-dc232b-elf.tar.gz
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- arch/xtensa/cpu/cpu.c         | 5 -----
- board/cadence/xtfpga/xtfpga.c | 5 +++++
- 2 files changed, 5 insertions(+), 5 deletions(-)
+Jiaxun Yang (10):
+      xtensa: Move dram_init to xtfpga board file
+      xtensa: Correct define of _end symbol
+      xtensa: Implement phys virt conversion for PTP_MMU
+      xtensa: Define PLATFORM_ELFFLAGS
+      xtensa: Bring in semihosting headers and config options
+      drivers: serial: Add xtensa semihosting driver
+      drivers: cpu: Add xtensa CPU driver
+      dts/upsteam: Add Makefile for xtensa
+      board: emulation: New board qemu-xtensa
+      doc: New documentation for qemu-xtensa
 
-diff --git a/arch/xtensa/cpu/cpu.c b/arch/xtensa/cpu/cpu.c
-index abcd8f7984fa..d2266812229c 100644
---- a/arch/xtensa/cpu/cpu.c
-+++ b/arch/xtensa/cpu/cpu.c
-@@ -48,8 +48,3 @@ int arch_cpu_init(void)
- 	gd->ram_size = CFG_SYS_SDRAM_SIZE;
- 	return 0;
- }
--
--int dram_init(void)
--{
--	return 0;
--}
-diff --git a/board/cadence/xtfpga/xtfpga.c b/board/cadence/xtfpga/xtfpga.c
-index 5110fed31194..6b92fe31c0e0 100644
---- a/board/cadence/xtfpga/xtfpga.c
-+++ b/board/cadence/xtfpga/xtfpga.c
-@@ -66,6 +66,11 @@ unsigned long get_board_sys_clk(void)
- #endif
- }
- 
-+int dram_init(void)
-+{
-+	return 0;
-+}
-+
- int board_postclk_init(void)
- {
- 	gd->cpu_clk = get_board_sys_clk();
+ arch/xtensa/Kconfig                              |  32 +++++++
+ arch/xtensa/config.mk                            |   3 +
+ arch/xtensa/cpu/cpu.c                            |   5 -
+ arch/xtensa/cpu/u-boot.lds                       |   2 +
+ arch/xtensa/include/asm/addrspace.h              |   2 +
+ arch/xtensa/include/asm/io.h                     |  32 +++++++
+ arch/xtensa/include/asm/ldscript.h               |   1 -
+ arch/xtensa/include/asm/platform/simcall-gdbio.h |  34 +++++++
+ arch/xtensa/include/asm/platform/simcall-iss.h   |  73 ++++++++++++++
+ arch/xtensa/include/asm/platform/simcall.h       | 110 +++++++++++++++++++++
+ board/cadence/xtfpga/xtfpga.c                    |   5 +
+ board/emulation/qemu-xtensa/Kconfig              |  41 ++++++++
+ board/emulation/qemu-xtensa/MAINTAINERS          |   7 ++
+ board/emulation/qemu-xtensa/Makefile             |   5 +
+ board/emulation/qemu-xtensa/qemu-xtensa.c        |  60 ++++++++++++
+ configs/qemu-xtensa-dc232b_defconfig             |  32 +++++++
+ doc/board/emulation/index.rst                    |   1 +
+ doc/board/emulation/qemu-xtensa.rst              |  33 +++++++
+ drivers/cpu/Kconfig                              |   6 ++
+ drivers/cpu/Makefile                             |   1 +
+ drivers/cpu/xtensa_cpu.c                         | 117 +++++++++++++++++++++++
+ drivers/serial/Kconfig                           |  18 +++-
+ drivers/serial/Makefile                          |   1 +
+ drivers/serial/serial_xtensa_semihosting.c       |  79 +++++++++++++++
+ dts/upstream/src/xtensa/Makefile                 |  14 +++
+ include/configs/qemu-xtensa.h                    |  34 +++++++
+ 26 files changed, 741 insertions(+), 7 deletions(-)
+---
+base-commit: 3be9f399e911cfc437a37ac826441f1d96da1c9b
+change-id: 20240519-qemu-xtensa-5fb95bb474e9
 
+Best regards,
 -- 
-2.43.0
+Jiaxun Yang <jiaxun.yang@flygoat.com>
 
