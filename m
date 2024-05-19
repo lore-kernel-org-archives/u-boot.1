@@ -4,98 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9514BC25B75
-	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 20:55:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 836C4C25B77
+	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 20:55:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82179882E2;
-	Sun, 19 May 2024 22:54:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E887F88692;
+	Sun, 19 May 2024 22:54:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="NuziRrUz";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="aYlUFidA";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="PO1gGiqY";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="NK5EdZLh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADA958818C; Sun, 19 May 2024 22:54:02 +0200 (CEST)
+ id 223B688691; Sun, 19 May 2024 22:54:04 +0200 (CEST)
 Received: from fhigh6-smtp.messagingengine.com
  (fhigh6-smtp.messagingengine.com [103.168.172.157])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C03288223
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 22:54:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BDAF488621
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 22:54:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute7.internal (compute7.nyi.internal [10.202.2.48])
- by mailfhigh.nyi.internal (Postfix) with ESMTP id C3BE9114010A;
- Sun, 19 May 2024 16:53:59 -0400 (EDT)
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id F2D391140110;
+ Sun, 19 May 2024 16:54:00 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute7.internal (MEProxy); Sun, 19 May 2024 16:53:59 -0400
+ by compute6.internal (MEProxy); Sun, 19 May 2024 16:54:00 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1716152039;
- x=1716238439; bh=51v4K0P8EVsp0p7SnaIspIVQxfHxeWtRhsc3QAQXJ6s=; b=
- NuziRrUzdbvnd84wZkBZG9UwI0GlijkXXvGpMvZX/RyfMZgGw9kzxmL14FR5+U1u
- RptOsuDavlRFEzx3Ja13uE7e5ObVzk5KXlDpHMPESAfNh3ixukDbVMtZdHpfEnTf
- pp9SXMOwrVl1sFC5ED9PpVizQhlz6AdI4FUS1HRicWg4FDLOUgP3nwKSDNVmbH1K
- 8NeiwpTEOyRR6XFG5gxYtwgDXEMQCvQVNAWAX0L5Ygql4L83fm1TSV4oMdxW+CgW
- pAYujS/yPQ8F/HxJCpnaM7zWUsqIgCgAakiYZYtDnPbV0jcWUNOuwJmb25WNfRPM
- d1RJm52e+bGTUAlEweIKaA==
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1716152040;
+ x=1716238440; bh=zIsXvlCvAdc9XGQjqhmky7Xh+KcCpzvj8gbvSjnO1Io=; b=
+ PO1gGiqYTAutD16u9AW+kkVIdqFXmOeG7cttHbqqaJjbXgRm+HYvKoXJVfY6GIS6
+ r6oSLwvRSezSatD/LDlT3EcqkbbbOFq1UeSOBlCd3KBVEfjJSb5fikOeMuNtWe33
+ GoYFtgcaMzNOyYlLUwz3A7tbMf8W1OdA9wUJFznk6sAkzSUfeRvunQBw7iOHNN9A
+ A/x9ywXbR+2gf08BGYSO5U55ulDsc2lDB/YRyJBT7j6yrKl9hXiOiHrqz1tJqTjC
+ 9jIGl8tkh4NchuthN420gyeXzdfGpj0DHMhEOt0O0ZDeACJUC6x7MEYVXGEnImx5
+ qDWI4LtOKoMxVrnr3s0Xcw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716152039; x=
- 1716238439; bh=51v4K0P8EVsp0p7SnaIspIVQxfHxeWtRhsc3QAQXJ6s=; b=a
- YlUFidASOg7k4ASLhWOM8QLtaWpjUPFQxkPTtenARakn+6BKdBoPN4pEcOXkbH0k
- bSTZ7iCUUTvZsM9nNYpkOixEt6Fpr3rB+KtRM3CtsSAHzqjbj0l7SycZXIFIp37J
- gIP9LkyiNFDWCWxePStz4RfJNCNMiZa6TYmX5yKavDEox3qQf9g6+vLDH63qYrse
- GKE5gZcuDfcPDhRwyv9w3DvNx2EBiB1W6SZokhSF4RAoRMtWYTWGN6KvB5YqSKQJ
- tMoSJAmCDPVGze/5sgT3Sas1MygXYtMpPTCHQSStxZyXDwj9pGCeCHoDt+F9yJGn
- jtTdZmA+I7eFj2TX8bwdg==
-X-ME-Sender: <xms:52ZKZhztmzs35Kupia-Pn2990lALHqJ8fSEgXvJcgd2pBCj9_Pevjg>
- <xme:52ZKZhQ5MZ7Lc0-5GPNnq2R1ASIOPpXFUknwmMUSWmqk1YXLnsTQDFPLJcz9LA24z
- Gjncsa2yYAXhitrkUE>
-X-ME-Received: <xmr:52ZKZrWdDYKuxutz3JvTxxwK3bPVvMq37Xg24W2JXHYBAJJBD3ukZoc>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716152040; x=
+ 1716238440; bh=zIsXvlCvAdc9XGQjqhmky7Xh+KcCpzvj8gbvSjnO1Io=; b=N
+ K5EdZLhxw4qPj6pgnW6kweKdEsV4ixyqEuq/nNbZ+TKtpdNeakYUyTc+X/pcmQKa
+ 9X9JV5+2qcwh4k1/TIVXpRIo2YBgEcRH3UzrIyxSdJViBDgKyyda5YMqQ0HlHMWf
+ o/B+ELcx/SZjAMUXduzUeuR+K6f6CP0PBsQzAVpJiqhQdneY1AOmxomEVzbQNCqY
+ Q8mkWs8kqUxszV6jAva/hPAm2U5HVwDNPQsgHcq2peKyXqKBQznUjJKJpqNeYDgB
+ cpGfTFmJRra23DyuPNlm8LUaCn7ER6XbTcySiLzPwvg8U0FvDVGlKOWbT3fpauph
+ x0tleRR0JYLHQ/5SDkXKw==
+X-ME-Sender: <xms:6GZKZk0wt7aYRc6HXCkL0GxEN2ApkdsK_nEymekKeCSieBwyQXrl2Q>
+ <xme:6GZKZvHaVvadCQ6aUGdAkemFq6GePS-nLlqIcryPR620mh4HoyDHVNhbx5v6MfIo8
+ PyW3bkzwHeY33s0Crw>
+X-ME-Received: <xmr:6GZKZs4WPLfY9oK2eZrPUiwKOhA045HXZNUukQ29Ee59iThRN4Evwus>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehkedgudehvdcutefuodetggdotefrod
  ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
  necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
  enucfjughrpefhfffugggtgffkfhgjvfevofesthejredtredtjeenucfhrhhomheplfhi
  rgiguhhnucgjrghnghcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhmqe
  enucggtffrrghtthgvrhhnpedvkeeihfefveekueevteefleffkeegudeghfdtuddugefh
- ueevgeffgedukeejleenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrih
+ ueevgeffgedukeejleenucevlhhushhtvghrufhiiigvpeegnecurfgrrhgrmhepmhgrih
  hlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
-X-ME-Proxy: <xmx:52ZKZjgwPDnWPoNcM23-FrEeDOU1iPFW4kckcAeBOILl9UJss7RVyw>
- <xmx:52ZKZjCc1rE43NDVOwc9_f2U-Few3tXBdVRiKocPFFJfNNJ7-UpeJQ>
- <xmx:52ZKZsI82qWzmmuqd-VI2MZHFTQ-Ia6AYi8NT5q6rrVhTERxwiEGIA>
- <xmx:52ZKZiC892HdSZKBzWsFJfNlXq7XCl97pSzEdpKKxKFwIjmjVABDuQ>
- <xmx:52ZKZl3RjvZ8ruZIds7DJqv1-MbrSEcd5mAiOQZEuNfsS40-3rZfQleN>
+X-ME-Proxy: <xmx:6GZKZt013u_zqSlPry6tcncJGaGc3L89D5BEnKDYthlTc7Oqrei2xQ>
+ <xmx:6GZKZnFBAVADXQRKf7CdyHiaHIEUZT2FdDqXBLcwIR-HjpDmElz4Uw>
+ <xmx:6GZKZm__ZgRCr9S6uNaDKOqMN0rL8D4XvPSD96qDnEZWZDhum4UFTw>
+ <xmx:6GZKZskNSpi-fZZ8kpDg8rFDYW4jgPglk3ce8KMlqal75jxDQRbwtw>
+ <xmx:6GZKZs5CNUEzP9VM5-U6PmmE6Y-oueS9XoigQoKcjfXehG5k4Z9bGUgk>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sun,
- 19 May 2024 16:53:58 -0400 (EDT)
+ 19 May 2024 16:53:59 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Sun, 19 May 2024 21:53:54 +0100
-Subject: [PATCH 07/10] drivers: cpu: Add xtensa CPU driver
+Date: Sun, 19 May 2024 21:53:55 +0100
+Subject: [PATCH 08/10] dts/upsteam: Add Makefile for xtensa
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240519-qemu-xtensa-v1-7-8fff0cb11c19@flygoat.com>
+Message-Id: <20240519-qemu-xtensa-v1-8-8fff0cb11c19@flygoat.com>
 References: <20240519-qemu-xtensa-v1-0-8fff0cb11c19@flygoat.com>
 In-Reply-To: <20240519-qemu-xtensa-v1-0-8fff0cb11c19@flygoat.com>
 To: u-boot@lists.denx.de, Sean Anderson <sean.anderson@seco.com>
 Cc: Max Filippov <jcmvbkbc@gmail.com>, Tom Rini <trini@konsulko.com>, 
  Sumit Garg <sumit.garg@linaro.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4043;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=730;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=Vj7K34xzk80p+hSGvzRVdiGlPDsc8x+UvGR796zCzTI=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhjSvtHuuF/ZuftT8qf1n4tP/11kvb2Ztn3D0bN2zO+L3Z
- ScuNC5d1FHKwiDGxSArpsgSIqDUt6Hx4oLrD7L+wMxhZQIZwsDFKQATkV7K8N9XQTdNpU3TaEHl
- 6cWfOiQVIg792Cx6kMnjxfZtt4tPHZ/C8Fd08jP+8hdGHr5a5cu5D0Qu//Po0/ekdeFpHyIOu97
- rKGMBAA==
+ bh=1qY44IV7TxVWagBAMK1fqEpEPKDKCDWxXcz6sfAlmuo=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhjSvtHvHwr5x3bUqcGms2plozn5U9Kxy4o4DEsmbeZIL6
+ p5lTrndUcrCIMbFICumyBIioNS3ofHigusPsv7AzGFlAhnCwMUpABNJD2P4X271PyF1c3C2l/rD
+ kMNWa902Xqw1mvH+467fVk7mOfvvP2H4K+Ftf1v8icDmBx8n6HH78UqxfzZTP1rw/PSj2RGJUxp
+ F+AE=
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -114,163 +114,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement various CPU related functions.
-I'm actually just using it to get cpu clock frequency.
+It is required to get it xtensa OF_UPSTREAM work.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- drivers/cpu/Kconfig      |   6 +++
- drivers/cpu/Makefile     |   1 +
- drivers/cpu/xtensa_cpu.c | 117 +++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 124 insertions(+)
+ dts/upstream/src/xtensa/Makefile | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-diff --git a/drivers/cpu/Kconfig b/drivers/cpu/Kconfig
-index 1c3c810651ef..5c06cd9f60e8 100644
---- a/drivers/cpu/Kconfig
-+++ b/drivers/cpu/Kconfig
-@@ -33,3 +33,9 @@ config CPU_MICROBLAZE
- 	select XILINX_MICROBLAZE0_PVR
- 	help
- 	  Support CPU cores for Microblaze architecture.
-+
-+config CPU_XTENSA
-+	bool "Enable Xtensa CPU driver"
-+	depends on CPU && XTENSA
-+	help
-+	  Support CPU cores for Xtensa architecture.
-diff --git a/drivers/cpu/Makefile b/drivers/cpu/Makefile
-index d4bbf6fa5e05..bc75d9b974e8 100644
---- a/drivers/cpu/Makefile
-+++ b/drivers/cpu/Makefile
-@@ -14,4 +14,5 @@ obj-$(CONFIG_CPU_IMX) += imx8_cpu.o
- obj-$(CONFIG_CPU_MPC83XX) += mpc83xx_cpu.o
- obj-$(CONFIG_CPU_RISCV) += riscv_cpu.o
- obj-$(CONFIG_CPU_MICROBLAZE) += microblaze_cpu.o
-+obj-$(CONFIG_CPU_XTENSA) += xtensa_cpu.o
- obj-$(CONFIG_SANDBOX) += cpu_sandbox.o
-diff --git a/drivers/cpu/xtensa_cpu.c b/drivers/cpu/xtensa_cpu.c
+diff --git a/dts/upstream/src/xtensa/Makefile b/dts/upstream/src/xtensa/Makefile
 new file mode 100644
-index 000000000000..fbb561dd6128
+index 000000000000..2a81acb32bc3
 --- /dev/null
-+++ b/drivers/cpu/xtensa_cpu.c
-@@ -0,0 +1,117 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
-+ */
++++ b/dts/upstream/src/xtensa/Makefile
+@@ -0,0 +1,14 @@
++# SPDX-License-Identifier: GPL-2.0+
 +
-+#include <clk.h>
-+#include <cpu.h>
-+#include <dm.h>
-+#include <errno.h>
-+#include <linux/bitops.h>
-+#include <linux/err.h>
++include $(srctree)/scripts/Makefile.dts
 +
-+#include <asm/arch/core.h>
++targets += $(dtb-y)
 +
-+static int xtensa_cpu_get_desc(const struct udevice *dev, char *buf, int size)
-+{
-+	const char *cpu = XCHAL_CORE_ID;
++# Add any required device tree compiler flags here
++DTC_FLAGS += -a 0x8
 +
-+	if (!cpu || size < (strlen(cpu) + 1))
-+		return -ENOSPC;
++PHONY += dtbs
++dtbs: $(addprefix $(obj)/, $(dtb-y))
++	@:
 +
-+	strcpy(buf, cpu);
-+
-+	return 0;
-+}
-+
-+static int xtensa_cpu_get_info(const struct udevice *dev, struct cpu_info *info)
-+{
-+	struct cpu_plat *plat = dev_get_parent_plat(dev);
-+
-+	info->cpu_freq = plat->timebase_freq;
-+
-+#if XCHAL_HAVE_PTP_MMU
-+		info->features |= BIT(CPU_FEAT_MMU);
-+#endif
-+#if XCHAL_ICACHE_SIZE || XCHAL_DCACHE_SIZE
-+		info->features |= BIT(CPU_FEAT_L1_CACHE);
-+#endif
-+
-+	return 0;
-+}
-+
-+static int xtensa_cpu_get_count(const struct udevice *dev)
-+{
-+	ofnode node;
-+	int num = 0;
-+
-+	ofnode_for_each_subnode(node, dev_ofnode(dev->parent)) {
-+		const char *device_type;
-+
-+		/* skip if hart is marked as not available in the device tree */
-+		if (!ofnode_is_enabled(node))
-+			continue;
-+
-+		device_type = ofnode_read_string(node, "device_type");
-+		if (!device_type)
-+			continue;
-+		if (strcmp(device_type, "cpu") == 0)
-+			num++;
-+	}
-+
-+	return num;
-+}
-+
-+static int xtensa_cpu_bind(struct udevice *dev)
-+{
-+	struct cpu_plat *plat = dev_get_parent_plat(dev);
-+
-+	plat->cpu_id = dev_read_addr(dev);
-+
-+	return 0;
-+}
-+
-+static int xtensa_cpu_probe(struct udevice *dev)
-+{
-+	int ret = 0;
-+	struct clk clk;
-+	struct cpu_plat *plat = dev_get_parent_plat(dev);
-+
-+	asm volatile ("rsr %0, 176\n"
-+		      "rsr %1, 208\n"
-+		      : "=r"(plat->id[0]), "=r"(plat->id[1]));
-+
-+	/* Get a clock if it exists */
-+	ret = clk_get_by_index(dev, 0, &clk);
-+	if (!ret) {
-+		ret = clk_enable(&clk);
-+		if (ret && (ret != -ENOSYS || ret != -ENOTSUPP))
-+			return ret;
-+		ret = clk_get_rate(&clk);
-+		if (!IS_ERR_VALUE(ret))
-+			plat->timebase_freq = ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static const struct cpu_ops xtensa_cpu_ops = {
-+	.get_desc	= xtensa_cpu_get_desc,
-+	.get_info	= xtensa_cpu_get_info,
-+	.get_count	= xtensa_cpu_get_count,
-+};
-+
-+static const struct udevice_id xtensa_cpu_ids[] = {
-+	{ .compatible = "cdns,xtensa-cpu" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(xtensa_cpu) = {
-+	.name = "xtensa_cpu",
-+	.id = UCLASS_CPU,
-+	.of_match = xtensa_cpu_ids,
-+	.bind = xtensa_cpu_bind,
-+	.probe = xtensa_cpu_probe,
-+	.ops = &xtensa_cpu_ops,
-+	.flags = DM_FLAG_PRE_RELOC,
-+};
++clean-files := *.dtb *.dtbo */*.dtb */*.dtbo
 
 -- 
 2.43.0
