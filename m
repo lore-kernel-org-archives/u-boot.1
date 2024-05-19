@@ -4,80 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66549C25B75
-	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 19:19:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6A7FC25B75
+	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 19:44:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38E04881EA;
-	Sun, 19 May 2024 21:19:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CEADC880FB;
+	Sun, 19 May 2024 21:44:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WPOyxkSV";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="aaSXHKPC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D94BC882AA; Sun, 19 May 2024 21:19:16 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4BDA18817C; Sun, 19 May 2024 21:44:18 +0200 (CEST)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2612::601])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8505881EA
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 21:19:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B48C880FB
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 21:44:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=r.stratiienko@gmail.com
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-41dc9c83e57so9014735e9.0
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 12:19:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716146354; x=1716751154; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=SqQwjbaY8E+m6FLQfScMC/zMS5tWjuvslo7ETSjsMus=;
- b=WPOyxkSVzwjUez4VLpwB9STEKMmgzIKX52RONTyKCwNPD39dRUDN87Av4jVu+G/yOg
- 47kxO6KFluIj0Sa5lGnMfV0+vzUOhbLSiFOya1tUY8DSOHB+OAvn2eyw28J9B3Q3uMxo
- Ii0nEyCoSF6IHobHNN/kdKw4GHrj5SV5SaD/RYowwDK0UYlCCHNMQQAYcpoyc1D/NZMc
- CQ0P1+q67cSKM+iCMkDZIoah6FmYVCrXprgoVPFkpz0nR/fjBNFwNeYcxlZ21AU1PJCi
- jTXeGMpQr0YQltFglADIAVCGuI3/cutYiuvytu4y9m6XWIeEG9qrZeq5KRqPddqvnSC4
- NvjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716146354; x=1716751154;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=SqQwjbaY8E+m6FLQfScMC/zMS5tWjuvslo7ETSjsMus=;
- b=jxFnsJtctliPb3Rc2Ze+QYohWhBQAvCTmaHWjDGp8Y2nMzgHkcP6ZQH2svoLunEY+S
- Y8x0FjmCjA9XR/Q/djQXv9oo65FuQuzwi+4P67C0NiSzfnImJwqC0K09Sb/tKxCM2SQU
- p3HygRw2uj+DmQrprZw0J7FHMmi6jaP727HNyJJXfXMz0PrTvtD5eNBnUOt2Qpj3saz+
- o07pslu/S2GqXN7fIzhddpOj9A5Jqa8tiqF50j+SN2bWERNKueCJK3n3QTyeFrLqIBuJ
- ywov2kp3D54fjFSAazjWuBGEkyl7UzzqAev3unvAoqRYAdXAEnfDvS1U2vx50273Ne2m
- TA8Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUf3tifPzjW3zhOedkB4053E5Q2cNz0gI9baI8qS6suKjMCydZP0XKADzGQ6424FrpuBuO87+Mc7q+1qKilznlXgK++7Q==
-X-Gm-Message-State: AOJu0YwMD7Dw/CtrBmF+DvRubxqMksvNPL4ZP9SH+R9jbi/hFCF/XCUa
- ebahdlB95WGKhbxzmOF4MLRwFVc3hBviZw8Phg8FqU3bxEpsycR01JieuQ==
-X-Google-Smtp-Source: AGHT+IGjIE1rZD9Vw046WejE7q4LiZJ0tTwUHso1n1U6WiDU/vfn5ZcA27zRrmrjlXnSfTJJElqw/w==
-X-Received: by 2002:adf:e8d0:0:b0:34d:93c1:c7d8 with SMTP id
- ffacd0b85a97d-354b8deaf60mr4167408f8f.4.1716146353981; 
- Sun, 19 May 2024 12:19:13 -0700 (PDT)
-Received: from roman-envy-fast.. ([46.172.77.250])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3502b89583dsm27411682f8f.33.2024.05.19.12.19.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 19 May 2024 12:19:13 -0700 (PDT)
-From: Roman Stratiienko <r.stratiienko@gmail.com>
-To: r.stratiienko@gmail.com, mkorpershoek@baylibre.com, igor.opaniuk@gmail.com,
- dsimic@manjaro.org, sjg@chromium.org, ilias.apalodimas@linaro.org,
- xypron.glpk@gmx.de, eajames@linux.ibm.com, marek.vasut+renesas@mailbox.org,
- paulerwan.rio@gmail.com, u-boot@lists.denx.de
-Subject: [PATCH 3/3] abootimg: Implement smart image load feature
-Date: Sun, 19 May 2024 19:18:56 +0000
-Message-Id: <20240519191856.2582174-4-r.stratiienko@gmail.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20240519191856.2582174-1-r.stratiienko@gmail.com>
-References: <20240519191856.2582174-1-r.stratiienko@gmail.com>
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=DeZ3KKeDl2VLIOyfGACvGbUcZknTSX5gyx/zr+V4BkGmdfYMIQdSWW2FHOMwhsEqrui4f+t+QrY8w27kAqSQLcdUjtMo19FqpSqPVN82yxYO2cWuN2ILU0/mbjYU+uLDxRSasSXE4X/xOl5fCy3eaJ6C00h/lE+W3URymO/6QQ4gJGU+01U7tYVT2ERp8tAL+a4V1pRJepda+G4IA3AdH2MSa4nXw256Laak+xGlW8iDNC7LeCOTfF2lPqL9qnfsqDtx1ga8mqP3qbBBPAlHyTJ+xcVsBuWER2zH6zo0Zt/hM3sPpUgogw9N5U10duD8yNgXjEqB72bNvypFG2VwYg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=DYNVXMPzSlSp3RTzJPcu693+Ql5xgOJsLPX5KGXBk3E=;
+ b=KONH2UOLkS4eY4T8L5L0Pvpo2khvhDh8z2bpQg3OyvIc7xGDGUY+cJ2OKDrzsHjb8wbgmxX2jejUvNhZNx0h0ul5c1LoPA8Ka6CkjbC/EHgT75baM5HK+awJE9wwLEBnAjJ0RejeMKFYCZbEuXIY8Nmm4/fdLTvh14huGj0naFS1jPpaCBE5T9ieEI8a/M3SKgqbH4LBOfh04IbxU0ZI2UcecA+a5mfmz7Bhx0owzfOom7nm0iuC4L4ylkqECwE/rok9t4Yy0yEBU51x3cjYD9YhpTO2vMPqg+FSiZS2TfVMvxwiEGNz42AFlKZF/gXnohZJHsx6AyyLKHgowI5Tuw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=DYNVXMPzSlSp3RTzJPcu693+Ql5xgOJsLPX5KGXBk3E=;
+ b=aaSXHKPC0XESYc1Tzg8FgvNnWGG4eHo8l4QUXUz23lltz8d603lzIwA8zzAPzAKOT9Vg4YqsFpTtIFV0069T0nuLSTf6IP8ZMSwUdJ5w01Ex/wc7QkFEYv3neXJ94dcz+eVhsjmiU8Lo07JIZ+Bk40WnRrDtnXfOxZdDN9KHooI=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
+ by GVXPR10MB8899.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:1eb::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7587.35; Sun, 19 May
+ 2024 19:44:12 +0000
+Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::9fcc:5df3:197:6691]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::9fcc:5df3:197:6691%3]) with mapi id 15.20.7587.030; Sun, 19 May 2024
+ 19:44:12 +0000
+Message-ID: <948d94a1-e97b-460d-8c83-4133eaebd2ff@prevas.dk>
+Date: Sun, 19 May 2024 21:44:10 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/3] cyclic: make clients embed a struct cyclic_info in
+ their own data structure
+To: Stefan Roese <sr@denx.de>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+References: <20240516075314.1548051-1-rasmus.villemoes@prevas.dk>
+ <20240516075314.1548051-4-rasmus.villemoes@prevas.dk>
+ <7f45eeed-4bcd-4a3a-9663-133a20c182f7@denx.de>
+Content-Language: en-US, da
+From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+In-Reply-To: <7f45eeed-4bcd-4a3a-9663-133a20c182f7@denx.de>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: MM0P280CA0102.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:9::23) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:10:45a::14)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|GVXPR10MB8899:EE_
+X-MS-Office365-Filtering-Correlation-Id: 42a6d7e1-7272-401e-2265-08dc783c0ed4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230031|366007|376005|1800799015;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?Z0dnTXhrUUhsMWFTK243TnJSbW55aE4xVTdYN3VaUGFrR1MySUNBWjNRU0RQ?=
+ =?utf-8?B?Q3RPeVRxTlFIYkE2Tks3QzFMVVdpdTZQcHVUK2o5RjhEMHJGU3lSSERFUllp?=
+ =?utf-8?B?UjRvMTZoQVJpZjN5dEgrTXQ1NHlYbjdCdEozWjEzSEpBcTBITnQybGxXa3Nx?=
+ =?utf-8?B?c0J3YWt3aU9lZlpzZ01oMWZpVko5NWNpUXlndklaa0lJTWxKdWxVNTdZUUNN?=
+ =?utf-8?B?Qkh6RStzMHdFcmR0VUdpbWIwQUxmQVpIcG5wWFM1eE5TcGdqT3Mvd3hYMllJ?=
+ =?utf-8?B?ZytQaDNNa2tTQ2hyb0RFa3Q2YUpBZWkvZ2Q1MzgwbElmZW1BYkZDMmU4elFQ?=
+ =?utf-8?B?WnQ4TlFLQllNZVpHajFOaVdSck0zT3JWdTdmeHh3WkV1TlpyS1l4d0FLZnpR?=
+ =?utf-8?B?NE9HNWxOWXA5c2NEYkZFVTdLMXpNSXl1UmRVT0lFL1hRM000OC9RSkVQbUVq?=
+ =?utf-8?B?OUx4VVA3UVFNd2JrSUFyYU95SElUcE93am45cmkrcUg1MnRmd2dQRGFXcDhI?=
+ =?utf-8?B?UTJYRjI3d2UzUHdWZnlvWXdhTkNqNVYwQnBGcmRNWFpSWTh0bE82MUorZ0U3?=
+ =?utf-8?B?UU9ZTisrblc4TDRRclN0L2UvUktBeXE4K2RRc0hwdlU1dEU4eElSeTZ0UnBD?=
+ =?utf-8?B?ZThiUXEwdG5hcUorclFsYXhQek1idlRIZTh5YmpHL2VLYzJNeGU3WkZ0Wm0r?=
+ =?utf-8?B?QWtBaWpFejZuY0t0RnR2QVVISXpzejh4U3p5cVpSZWNJNk5zZjdvdExRS055?=
+ =?utf-8?B?ZjhONFpEcUx1NkN2NWdoSFBLVXkrOW05ZGlTeHZteWh5aEl0R3hkbFNKWjc5?=
+ =?utf-8?B?V2RWT3RoVjBVQ1Y1TFFiVXNqK0ZDQy9rY0hmWEEzY3VrMU0ydkczQVlhV0M3?=
+ =?utf-8?B?ZEF4SVA4Ym50MjJNSDRkVEtrdWJNK2R4aW1JOHFYRE1nZ2IrRmdNRzdCdlIw?=
+ =?utf-8?B?L2xlK0RsaTFiSlZ3ZDdBYWQ2R2VKVFhqZGdXeW1wZGsvbHl6TGVzQzRnRXox?=
+ =?utf-8?B?c1pvVHhIUHMybVBEQ1R2TmUzVGpURzhLNVMrSTVkU2djWnNvamFVKzM5bjJI?=
+ =?utf-8?B?Nmx5N3ViUk5zVXhzTkdRUU9udFNBSXpVN2Y0MUNuTVhjbE1NaXZUYmJJRVR2?=
+ =?utf-8?B?cXZ2UjlCRzhSRmFNUmRUQitVQTNMamp4S3grSDg3ZmI0Z3JaRDBCKzJ4QVVS?=
+ =?utf-8?B?MHNBK1U3NUh0SGdER2trSFRydE1FSFBUZWhmallZaDhKQVdjaXpCYjNkUjNt?=
+ =?utf-8?B?TUlza2R0ME9DTkV3dkQvQXdjYVpqQlRjbjA1bEY1VHRzY2pncDU2NFIvb2xB?=
+ =?utf-8?B?TkVWM3dDMTRUTElQWlludlJRT28yL29Kcy9ENEQyVlU1dlltZThoaW0zVVMy?=
+ =?utf-8?B?b09NekJUZjJOcndIN245Yk5rQWt0dVhPOFd1eVB0MWlZOHRtMEt5RXI2KzZz?=
+ =?utf-8?B?TFF1UjhXZWpzcnVkUktYV1gxNHo2aTlRQjlpM2VwYU1kUDBMUndlV1gveGdj?=
+ =?utf-8?B?aXIwczJSQUNkOXF2elNjc1NrRXR6Vk1uY0ZQUnpCamhCWDVXc096V0twQ3BT?=
+ =?utf-8?B?Y0ZxQ0R5VkFwcytSeDRGZVhhNklDeit1ZkVBWUJObDRLejRLbUpKT2pBbTB3?=
+ =?utf-8?B?M3Bxb1AvcEx1Mzg5YkRLYkRxaFF4WldJU3hKeGpRSTYwOHdNSkcxc3RnOFFI?=
+ =?utf-8?B?N1dDQ2M5NytlTkdrVnZTOGt1eHg4VTJtR1JzclVnOWdUd2ZLRk5RdUFnPT0=?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(366007)(376005)(1800799015); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TDh5TjlKdnY4eEs4RFhrenhiUkpBUVFSeklEZUpGOXYvS3dtcmtEOUJUczBw?=
+ =?utf-8?B?am5YR3FhVmV5VkZ6WGp4eG54bHN4cDNXYzhJaTBLeHpCamZ4WjFiT3V0MnlX?=
+ =?utf-8?B?ZUNXTW82d3FkWHRCcjJjNzBCbmttVmc3SHhKSlJyVG5RNW5KdnVqQmc1Mm90?=
+ =?utf-8?B?YTVTTFhna2x6NTZqZll6UmlqQ2cvei94OGFXL3NlaXBqNE1CRTkvT3N6dyt2?=
+ =?utf-8?B?TGM5SWppNnkyYk1YT0hCVXp0WVIxazRBZ3BmNWFTRGpacFZ0MEFuRC9xY2xW?=
+ =?utf-8?B?dXA0WkxVSVpEa3ZYTDlHQnRXVUNaS1VsK3N6YWVJNzNDV2Q1YS9kR0VBTHFX?=
+ =?utf-8?B?aGF1T2NMS1lpRytPUkZWNHZ2UFZXL0JSQzZJVFJXSGxwdjJhUFNWZXVTd3Bv?=
+ =?utf-8?B?bHdKTmlFSFFZMlpGeUtQQko2Z1FmRmNjNHRFMEhud0FoTnluWlZMdHE1ZzA4?=
+ =?utf-8?B?ZlFIWFM1RlBLRENLdEQ3d05wOWJUYUhEdXBna1RHNjdjbG04MGFhR2JEWGow?=
+ =?utf-8?B?VytEazg1RWhQRUpZZVdwSmNEVy91QUR3cThTbDRrRnZQYmdTODlvOHhqTm5x?=
+ =?utf-8?B?TlBwR2ZUc2ZneXk0TmxHdC9KZmNIVXFCT2UvZnhQdE5PcDFLZkJjbktJZnBs?=
+ =?utf-8?B?aW5kQS9ib3NmYWJlR3FoRlUzdEhCVDRRU1pLOFRWdUdrVGI2K1ZucEhqcVFF?=
+ =?utf-8?B?TGpua2JaQW9ZMGlLZHUxZW9odkx4SFN1cDdVN1BaVVd3OHczN29TVlBMTXha?=
+ =?utf-8?B?bDJiWUZtODlnaVdLaEZwdExwYmJ3clVVMXR6NFJLSGlZcFFFT3FmSEI2RFBN?=
+ =?utf-8?B?TXVydldMT2lFWjVWTUJsbnlIN2hnVDVLR3poYXI2ZWI1WDA4eDVsbnRiR0p0?=
+ =?utf-8?B?NHpkUlpTcVloL3hkWXNDQVVVOHE4WW1IeE1najY5aHBMYkdmbk9DeHRXNExy?=
+ =?utf-8?B?c3FEb3BCUE1zTFhYbmR2bWJwVEJYYkVMVTd3NWM0ZFJWUlJrLytNN0RGZ1Qv?=
+ =?utf-8?B?ZktkYktCclpXTllhQlB0ODJJRTdqVC9SUXBKTUVlRjZCWDh6Rm0zVVZnNGJ0?=
+ =?utf-8?B?MUh3MWZ6T0o1cEVVQ3Z0S1Z2RXpqdkd1ZWg0dGRxd3BRUERkaVVJaVBoOGZj?=
+ =?utf-8?B?OVc3RGs2Nlc4eE1PSjM2b251SndIM0Joemp1T3hLUlFHRDYydnB1a3IycWV1?=
+ =?utf-8?B?eE43SjFPNjhzRzJtVGZQS1g2MVpTQnhQYUtPQUtSQ3VWSGpvZ2VJMUxsTm10?=
+ =?utf-8?B?R0NjSEc0djhLUmhVV01iTUNyYVRHMHo3R3VsWHM3MklQT0RwTlJueGdHY1dw?=
+ =?utf-8?B?VFVyYm1EUVE0QS9pZVhHWUxDSEpWa1FXR1lhb05CTXVrQjFzaFRwdEwxR3Ax?=
+ =?utf-8?B?Rm5teTVvYkhhU0JpMXljbThjWThneGUyRmdzMUpjL2cxRU5zc2VBTGFqS2E5?=
+ =?utf-8?B?djdmUnBBSWtHOFYwaDJiTUhEQ21SN2swL1hZMExMN3ZRVTU3VEJsRkV3RGxt?=
+ =?utf-8?B?Z2JXK051V0dwU1c4SHBvSUZxelZNaW5NeEFPSWFUM245WFhuN1VVeHc5ZHlG?=
+ =?utf-8?B?RTloUkZpdW9VS1Q2NExWUi9lL21mMTIxa085bWZmTUQ4eG9CWWlJcE5ZZnJv?=
+ =?utf-8?B?ZHFxOWVKS0lVblphdEd5eEp2NUswYzY2d2FFZmw2cjU0bEpWbFVnN0FtT0M5?=
+ =?utf-8?B?eklTM21KSnh5L3BlSmV1VEo2UkUwaFh0TFMzOUcyeHc3M1FNM1AyMHF3LzB0?=
+ =?utf-8?B?bmx6MzZ4R1pOa0hkRCtvZEljSk42bEI4M24weGk0dzRxNWhRcFc3Mm5LNWFL?=
+ =?utf-8?B?WGdOcDRqTmMzRDlKcHM0VE1aN0tNYVE3dlZGcW4yZWFVazAwRnNIcE43WUZV?=
+ =?utf-8?B?ckpMakp1ZjQ1bC8rMWpTZjVhY01CTllZZWJ4ZnJOY3dmVDZaU1hYZGpET0l4?=
+ =?utf-8?B?TllVQ0VWSlBsd052Q2U3enFDcUpDTkRPMUJ0amNCdndqUGREN1B3Z2pHT2Vt?=
+ =?utf-8?B?WEJCRStYbUZjWmZwNlFWdUMrcGZ1WVF3aVpUOG5McUlxZ1dkeXVvTll4OGxS?=
+ =?utf-8?B?L1ZORVIvZ0Z2L0JLN3NOZ3h3c1JNS2EwY1dwVytSY3BUaXlaR1FOZUJhc0Iy?=
+ =?utf-8?B?b29MSkhWdTJBNGUxRTQzYkN0dW5pZ1FyaFRERmNVdXdKbWF2Vy9mZlJkZFho?=
+ =?utf-8?B?SEE9PQ==?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: 42a6d7e1-7272-401e-2265-08dc783c0ed4
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2024 19:44:12.3085 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: WUUUNVBiX3L+isBV/XfvEXb2oP7R2d9dizpaY8EQ083TWvLrRtdYH/U49/lUUSZgFLecUm77F7SHXBbB5MEBNreUpG+AXo1kWG90gXFNbqo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR10MB8899
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,178 +174,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Load only part of the boot partition that contains valuable
-information, thus improving the boot time.
+On 18/05/2024 09.34, Stefan Roese wrote:
 
-Signed-off-by: Roman Stratiienko <r.stratiienko@gmail.com>
----
- boot/image-android.c | 70 ++++++++++++++++++++++++++++++++++++++++++++
- cmd/abootimg.c       | 40 ++++++++++++++++++++++---
- include/image.h      | 12 ++++++++
- 3 files changed, 118 insertions(+), 4 deletions(-)
+> This introduces some problems when compiling e.g. sandbox:
+> 
+> In file included from test/common/cyclic.c:10:
+> test/common/cyclic.c: In function ‘dm_test_cyclic_running’:
+> test/common/cyclic.c:25:42: warning: passing argument 1 of
+> ‘cyclic_register’ from incompatible pointer type
+> [-Wincompatible-pointer-types]
+>    25 |         ut_assertnonnull(cyclic_register(cyclic_test, 10 * 1000,
+> "cyclic_demo",
+>       |                                          ^~~~~~~~~~~
+>       |                                          |
+>       |                                          void (*)(void *)
+> include/test/ut.h:298:29: note: in definition of macro ‘ut_assertnonnull’
+[...]
+> 
+> Could you please also change the test file accordingly? I'll then
+> try to get this upstream shortly.
 
-diff --git a/boot/image-android.c b/boot/image-android.c
-index da8003f370..d00a896a40 100644
---- a/boot/image-android.c
-+++ b/boot/image-android.c
-@@ -204,6 +204,76 @@ bool android_image_get_data(const void *boot_hdr, const void *vendor_boot_hdr,
- 	return true;
- }
- 
-+/**
-+ * android_image_get_valuable_size() - get the size of the android image
-+ *
-+ * This function checks if the image is Android boot image and returns the
-+ * valuable size of the image.
-+ *
-+ * @hdr_addr: Boot image header address (boot or vendor_boot)
-+ *
-+ * @return size of the image on success, 0 on failure
-+ */
-+size_t android_image_get_valuable_size(const void *hdr_addr)
-+{
-+	int version, size;
-+
-+	if (is_android_boot_image_header(hdr_addr)) {
-+		const struct andr_boot_img_hdr_v0 *hdr = hdr_addr;
-+
-+		version = ((struct andr_boot_img_hdr_v0 *)hdr_addr)->header_version;
-+		if (version > 2) {
-+			const struct andr_boot_img_hdr_v3 *hdr = hdr_addr;
-+
-+			size = ALIGN(hdr->header_size, ANDR_GKI_PAGE_SIZE);
-+			size += ALIGN(hdr->kernel_size, ANDR_GKI_PAGE_SIZE);
-+			size += ALIGN(hdr->ramdisk_size, ANDR_GKI_PAGE_SIZE);
-+
-+			if (version > 3)
-+				size += ALIGN(hdr->signature_size, ANDR_GKI_PAGE_SIZE);
-+
-+			return size;
-+		}
-+
-+		size = hdr->page_size;
-+		size += ALIGN(hdr->kernel_size, hdr->page_size);
-+		size += ALIGN(hdr->ramdisk_size, hdr->page_size);
-+		size += ALIGN(hdr->second_size, hdr->page_size);
-+
-+		if (version > 0)
-+			size += ALIGN(hdr->recovery_dtbo_size, hdr->page_size);
-+
-+		if (version > 1)
-+			size += ALIGN(hdr->dtb_size, hdr->page_size);
-+
-+		return size;
-+	}
-+
-+	if (is_android_vendor_boot_image_header(hdr_addr)) {
-+		const struct andr_vnd_boot_img_hdr *hdr = hdr_addr;
-+
-+		version = ((struct andr_vnd_boot_img_hdr *)hdr_addr)->header_version;
-+		if (version < 3) {
-+			printf("Vendor boot image header version %d is not supported\n", version);
-+
-+			return 0;
-+		}
-+
-+		size = ALIGN(hdr->header_size, hdr->page_size);
-+		size += ALIGN(hdr->vendor_ramdisk_size, hdr->page_size);
-+		size += ALIGN(hdr->dtb_size, hdr->page_size);
-+
-+		if (version > 3) {
-+			size += ALIGN(hdr->vendor_ramdisk_table_size, hdr->page_size);
-+			size += ALIGN(hdr->bootconfig_size, hdr->page_size);
-+		}
-+
-+		return size;
-+	}
-+
-+	return 0;
-+}
-+
- static ulong android_image_get_kernel_addr(struct andr_image_data *img_data)
- {
- 	/*
-diff --git a/cmd/abootimg.c b/cmd/abootimg.c
-index 808c9c4941..fe7c5c5e2c 100644
---- a/cmd/abootimg.c
-+++ b/cmd/abootimg.c
-@@ -182,6 +182,35 @@ static int abootimg_get_dtb(int argc, char *const argv[])
- 	return CMD_RET_USAGE;
- }
- 
-+static int abootimg_smart_load(struct blk_desc *desc, struct disk_partition *info, void *addr)
-+{
-+	int ret, size;
-+
-+	ret = blk_dread(desc, info->start, 4096 / info->blksz, addr);
-+	if (ret < 0) {
-+		printf("Error: Failed to read partition\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	size = android_image_get_valuable_size(addr);
-+	if (size == 0)
-+		return 0;
-+
-+	ret = blk_dread(desc, info->start, DIV_ROUND_UP(size, info->blksz), addr);
-+	if (ret < 0) {
-+		printf("Error: Failed to read partition\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	memset(addr + size, 0, info->size * info->blksz - size);
-+
-+	printf("Loaded Android boot image using smart load (%d/%d MB)\n",
-+	       (int)DIV_ROUND_UP(size, 1024 * 1024),
-+	       (int)DIV_ROUND_UP(info->size * info->blksz, 1024 * 1024));
-+
-+	return size;
-+}
-+
- static int do_abootimg_addr(struct cmd_tbl *cmdtp, int flag, int argc,
- 			    char *const argv[])
- {
-@@ -299,10 +328,13 @@ static int do_abootimg_load(struct cmd_tbl *cmdtp, int flag, int argc,
- 		return CMD_RET_FAILURE;
- 	}
- 
--	ret = blk_dread(desc, info.start, info.size, addr);
--	if (ret < 0) {
--		printf("Error: Failed to read partition %s\n", buf);
--		goto fail;
-+	ret = abootimg_smart_load(desc, &info, addr);
-+	if (ret <= 0) {
-+		ret = blk_dread(desc, info.start, info.size, addr);
-+		if (ret < 0) {
-+			printf("Error: Failed to read partition %s\n", buf);
-+			goto fail;
-+		}
- 	}
- 
- 	sprintf(buf, "abootimg_%s_ptr", argv[3]);
-diff --git a/include/image.h b/include/image.h
-index c5b288f62b..7d8ff40c3f 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -1826,6 +1826,18 @@ struct andr_image_data;
- bool android_image_get_data(const void *boot_hdr, const void *vendor_boot_hdr,
- 			    struct andr_image_data *data);
- 
-+/**
-+ * android_image_get_valuable_size() - get the size of the android image
-+ *
-+ * This function checks if the image is Android boot image and returns the
-+ * valuable size of the image.
-+ *
-+ * @hdr_addr: Boot image header address (boot or vendor_boot)
-+ *
-+ * @return size of the image on success, 0 on failure
-+ */
-+size_t android_image_get_valuable_size(const void *hdr_addr);
-+
- struct andr_boot_img_hdr_v0;
- 
- /**
--- 
-2.40.1
+Whoops, I don't know how I managed to miss that when grepping for users.
+Sorry about that. Updated version coming shortly.
+
+Rasmus
 
