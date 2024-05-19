@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58888C25B75
-	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 12:57:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBCC9C25B75
+	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 12:58:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E79C8869E;
-	Sun, 19 May 2024 14:57:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8E6BF8865B;
+	Sun, 19 May 2024 14:57:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="rCuICL7o";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="NzS5uCDN";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="cmOHYdQQ";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="F1ranMTJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7ECC58869A; Sun, 19 May 2024 14:57:15 +0200 (CEST)
+ id 6CE3F88291; Sun, 19 May 2024 14:57:19 +0200 (CEST)
 Received: from wfhigh1-smtp.messagingengine.com
  (wfhigh1-smtp.messagingengine.com [64.147.123.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56C448865B
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 14:57:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 52C83886A4
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 14:57:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
 Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
- by mailfhigh.west.internal (Postfix) with ESMTP id A69FE18000B3;
- Sun, 19 May 2024 08:57:10 -0400 (EDT)
+ by mailfhigh.west.internal (Postfix) with ESMTP id 9B91F1800092;
+ Sun, 19 May 2024 08:57:14 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute1.internal (MEProxy); Sun, 19 May 2024 08:57:11 -0400
+ by compute1.internal (MEProxy); Sun, 19 May 2024 08:57:15 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1716123430;
- x=1716209830; bh=prP2jFhmhVOrBc1hyl85nmSp9i06urdF/1QARNdLDJI=; b=
- rCuICL7o6Jkikj0XZrNESIlcsZgGMrtjRUkeCPhnrzDfGlxbU3dYQHhJhdZKgwt7
- 9Emxxtl3ma6FTd+01aM4FPuGiwzQKjcacd/XfUzwtNGjxBWpZdOA4EzSxYIxQUtM
- c+av4j8sMLcTeaEgCicXYmAZag2SvAjDrTr6u3cJ+PI5XeO97nDEYfP4uKdTeWp3
- DpzPyowO9eXhBzi4jciyUGewny2EqdJcY232BCYb1kYa95g2dZk8/W2gKHIxe8Ns
- O3roIbN8OXwL2X/V3ljmcH7k89dV6JRiLk9YuekRDca59gOf7YzIDQ/qyadxvzkp
- fjlixIaS6e6GriPEoUFo+w==
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1716123434;
+ x=1716209834; bh=Gj16HCoZBlsLLSRsnWJQxyM2f+Py+ETmQQYk0aiNp7Y=; b=
+ cmOHYdQQqpnMKFRpAXNnQzDp1fQMrFpi9zsVNQQBaEuLuqZU4UBzyURdI8bGyrG0
+ QQsb80hf1y+BbaLtrjRhQ9iP1h15ouptX6S93VuMwxKy606Ei7cIhisT5ye8LqGw
+ They5egVl18B9eh8VLc1DCyO/bWXpIl2/TvyLMbC2qAla1AmJQ8T+2Ih9FlIUG/J
+ JZJ1cWIAYGYuMh2T5CtdaVTa8qVlQ4hlDnQ2JU8YCAxq1ezRo5UiBNJPMUg5Upgl
+ gO4iZ+qHhLqJ6iST5Aj1EtuKGkGUHzkjuu5P2LNNFdZbTbgPOsfcN528cJGg8Jik
+ kPt0kU9DHr0rX0F7TD8CJw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716123430; x=
- 1716209830; bh=prP2jFhmhVOrBc1hyl85nmSp9i06urdF/1QARNdLDJI=; b=N
- zS5uCDNIOx5I3TLoLeXvIlThmpKIX/o6FGa43mlnjFdiLSHfZgVboaUl8Bs6FmIm
- iG/qpfkTzc5QWOnfVtgnm3zAnHOJHvUvNaOgeZQXqULWKAEel62Xcn1NZ0PJm1/q
- 3d48IYPVDYbixbR73qAju7nhNOPQUUp2YDT+KeJhqCnbmcdeV3OK4mLxhyJcsRbF
- wuTvJ2GYKSakzwYzYqQc7hUDCkaYtLkmHDigAg/UVfuJcSuTNNadcDRdMqC2Lob7
- 9rkGKmJk65A6b0hVMIxhpBDl02FmTNldKpTYKVq74P47v5OOQ8bji5SP5thGFKnl
- XeE1u5eEBa2iEiqXo92ug==
-X-ME-Sender: <xms:JvdJZq--9fpY5JJy6rFOJiIXDaOs0jodNs4yDWuX0bC9XEjj-tcJMg>
- <xme:JvdJZquGPXd2Vj3PC4YygHKjF_FomxnWGRx5moSKDac-nkePuqy6NMDJpphEr8Fg3
- TJ1blYB5mCpw8aKxb0>
-X-ME-Received: <xmr:JvdJZgBRNHOX8xrBskm28lrl-2pRbN3vh_3Bc8k03lH3UJnkFWVmWF4>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716123434; x=
+ 1716209834; bh=Gj16HCoZBlsLLSRsnWJQxyM2f+Py+ETmQQYk0aiNp7Y=; b=F
+ 1ranMTJ9/Wn0lniqqKhEJUPy7xXvoNE3WPVCoB+omoF6yEJwuQgEeAqrieawntsP
+ V7BfkIjtS5QRxOay5N7s6HVkGB1PFtLDG0qka7bLG6cpkb2P77IpPgvEhYZNceoI
+ PClaQHaKwL4e85Fr//PDnkujhjuLng5cHukYpduI5RfGywYJComPCyYOaKPGZXBc
+ JmcmyQIbeja1Tmomg01DPN6r9LJ3VjsqJ1Uu43YpNFQYySragFJ+zAmbzUIP9H1V
+ UVHyp+RLP2lL1h01GPaxL9MKCIaiVrAC18D7CugozJqqoQ5b72Elu5jM8x4EDUyC
+ 4aE+k4X+KFZlLyAQALomg==
+X-ME-Sender: <xms:KvdJZq2qr4pn9yVHJ9rAwrpew5vBx2pHTh1f0q2m2ZPkPPwF8DJyxw>
+ <xme:KvdJZtE1lYXQoTzUQnZI9WFOZXEPUqS0_E_y4jbTUx0xX5Td5IQXj3w2ucq5ACmlx
+ V8VifGCF_YdLRqp3sQ>
+X-ME-Received: <xmr:KvdJZi4I7sCUewEphe4lky5y_xNjqO0XWr1KMN6zSPmk8xhdEuyFcMo>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehkedgheejucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
  cujfgurhephfffufggtgfgkfhfjgfvvefosehtjeertdertdejnecuhfhrohhmpeflihgr
  gihunhcujggrnhhguceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomheqne
  cuggftrfgrthhtvghrnhepvdekiefhfeevkeeuveetfeelffekgedugefhtdduudeghfeu
- veegffegudekjeelnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilh
+ veegffegudekjeelnecuvehluhhsthgvrhfuihiivgepudenucfrrghrrghmpehmrghilh
  hfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:JvdJZifp7_6PvPLDiGDdecPA4ABa1Fjsy2u4d2yRAZzd-FirK1gdXw>
- <xmx:JvdJZvMT1xVvr_393t4QVfXSNCahfz98r66IaCgIwmsQCrBWARUakg>
- <xmx:JvdJZslsaicR6A_LlvK1SO4N9U8r3wPYqe2xbr6tB7gcV_mVl1j0BQ>
- <xmx:JvdJZht59m-JTbdVhj4SUFlStJDv_6MJdAW0NED4mVsT9BTvnJTyqg>
- <xmx:JvdJZozIPsQyR237f-hQ45loxUBiHz7VNKFrMxP4Y_4pWa6juYrz2pFg>
+X-ME-Proxy: <xmx:KvdJZr07_rMdSVNJ2mmlnLoVJJ83LflEYl4TsWnfl8GXW-fAoDWWzg>
+ <xmx:KvdJZtEBa0FtR9Ld2u1ytCxONDGDhs4RvRLM0LbQO9wGqwT1Uu-Xgg>
+ <xmx:KvdJZk8oxGnJbGUSnOH3NsAYmrsTwQLIUkq75PSMvGNCaFns8Wj-Pg>
+ <xmx:KvdJZim1LWLkGS91yrccQWfx-jIK9FQAEmSNaF2dMe1m8gwov8aWXQ>
+ <xmx:KvdJZmIZG2UQc-oTpTS_8Ox4vcqq-vOoT2I6mvPWemItINoG34vp8cGw>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sun,
- 19 May 2024 08:57:08 -0400 (EDT)
+ 19 May 2024 08:57:12 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Sun, 19 May 2024 13:56:50 +0100
-Subject: [PATCH 05/13] arm: Define endian related bits in system.h
+Date: Sun, 19 May 2024 13:56:51 +0100
+Subject: [PATCH 06/13] armv8: Big Endian enablement for compiler and linker
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240519-aarch64-be-v1-5-75cc328eddfa@flygoat.com>
+Message-Id: <20240519-aarch64-be-v1-6-75cc328eddfa@flygoat.com>
 References: <20240519-aarch64-be-v1-0-75cc328eddfa@flygoat.com>
 In-Reply-To: <20240519-aarch64-be-v1-0-75cc328eddfa@flygoat.com>
 To: u-boot@lists.denx.de, uboot-snps-arc@synopsys.com
@@ -102,13 +102,13 @@ Cc: Tom Rini <trini@konsulko.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
  Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1697;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3817;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=gSl1IYqhlojX/V/oOQMUkrR8ElcTUqa8EZlcX1egvcY=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhjTP7/x/i9/1LFV9xvK2b8brHXb3RCouLWmS2GzZ6MTRV
- v9HvsG/o5SFQYyLQVZMkSVEQKlvQ+PFBdcfZP2BmcPKBDKEgYtTACayJZOR4VV6j+Fupa07v6bv
- Fp68sb732t1vt2pyJvNqdwUdOef/yY/hn+n6RwVhKeqNcx86vjw6sU24Pijk3OrU3cEN10Mml5Y
- UcQMA
+ bh=1yX4Bpbs4csyjeuSnIyyjZStqNeO6jot901hzxvg0YA=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhjTP7/wRD0qT9oTHMteKTn3On9oe3b8/uCdG8NKnxe8+7
+ NGs51DsKGVhEONikBVTZAkRUOrb0HhxwfUHWX9g5rAygQxh4OIUgImo/GNkOPy9tmWNgXX7oX17
+ yzf2eK81YFqi1b/+JdtOtrme5w/8NmZkWH+qUjJtVy9H3+Zjn3YEzHLv2frss2Tpzx3WAl4/Uq5
+ MZQcA
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -127,41 +127,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-So they can be used at a later point.
+Pass flags to compilers and linkers, also modify linker
+scripts to set correct output format.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- arch/arm/include/asm/system.h | 3 +++
- 1 file changed, 3 insertions(+)
+ arch/arm/config.mk                | 14 ++++++++++++++
+ arch/arm/cpu/armv8/u-boot-spl.lds |  6 ++++++
+ arch/arm/cpu/armv8/u-boot.lds     |  4 ++++
+ arch/arm/lib/elf_aarch64_efi.lds  |  7 +++++++
+ scripts/Makefile.lib              |  3 ++-
+ 5 files changed, 33 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
-index 43f7503571d7..886a9ffbee35 100644
---- a/arch/arm/include/asm/system.h
-+++ b/arch/arm/include/asm/system.h
-@@ -15,6 +15,7 @@
- #define CR_SA		(1 << 3)	/* Stack Alignment Check Enable	*/
- #define CR_I		(1 << 12)	/* Icache enable		*/
- #define CR_WXN		(1 << 19)	/* Write Permision Imply XN	*/
-+#define CR_E0E		(1 << 24)	/* Endianness of EL0		*/
- #define CR_EE		(1 << 25)	/* Exception (Big) Endian	*/
+diff --git a/arch/arm/config.mk b/arch/arm/config.mk
+index 5530d02b66c4..b3f70c1fe9db 100644
+--- a/arch/arm/config.mk
++++ b/arch/arm/config.mk
+@@ -34,11 +34,25 @@ PLATFORM_RELFLAGS	+= $(LLVM_RELFLAGS)
+ PLATFORM_CPPFLAGS += -D__ARM__
  
- #define ES_TO_AARCH64		1
-@@ -58,6 +59,7 @@
+ ifdef CONFIG_ARM64
++ifdef CONFIG_SYS_BIG_ENDIAN
++PLATFORM_ELFFLAGS += -B aarch64 -O elf64-bigaarch64
++else
+ PLATFORM_ELFFLAGS += -B aarch64 -O elf64-littleaarch64
++endif
+ else
+ PLATFORM_ELFFLAGS += -B arm -O elf32-littlearm
+ endif
+ 
++ifdef CONFIG_SYS_LITTLE_ENDIAN
++KBUILD_LDFLAGS += -EL
++PLATFORM_CPPFLAGS += -mlittle-endian
++endif
++
++ifdef CONFIG_SYS_BIG_ENDIAN
++KBUILD_LDFLAGS += -EB
++PLATFORM_CPPFLAGS += -mbig-endian
++endif
++
+ # Choose between ARM/Thumb instruction sets
+ ifeq ($(CONFIG_$(SPL_)SYS_THUMB_BUILD),y)
+ AFLAGS_IMPLICIT_IT	:= $(call as-option,-Wa$(comma)-mimplicit-it=always)
+diff --git a/arch/arm/cpu/armv8/u-boot-spl.lds b/arch/arm/cpu/armv8/u-boot-spl.lds
+index ef8af67e11c3..1848c501c234 100644
+--- a/arch/arm/cpu/armv8/u-boot-spl.lds
++++ b/arch/arm/cpu/armv8/u-boot-spl.lds
+@@ -11,12 +11,18 @@
+  *	Aneesh V <aneesh@ti.com>
   */
- #define SCTLR_EL2_RES1		(3 << 28 | 3 << 22 | 1 << 18 | 1 << 16 |\
- 				 1 << 11 | 3 << 4)	    /* Reserved, RES1 */
-+#define SCTLR_EL2_EE_BE		(1 << 25) /* Exception Little-endian          */
- #define SCTLR_EL2_EE_LE		(0 << 25) /* Exception Little-endian          */
- #define SCTLR_EL2_WXN_DIS	(0 << 19) /* Write permission is not XN       */
- #define SCTLR_EL2_ICACHE_DIS	(0 << 12) /* Instruction cache disabled       */
-@@ -114,6 +116,7 @@
- 				 1 << 11) /* Reserved, RES1                   */
- #define SCTLR_EL1_UCI_DIS	(0 << 26) /* Cache instruction disabled       */
- #define SCTLR_EL1_EE_LE		(0 << 25) /* Exception Little-endian          */
-+#define SCTLR_EL1_EE_BE		(1 << 25) /* Exception Little-endian          */
- #define SCTLR_EL1_WXN_DIS	(0 << 19) /* Write permission is not XN       */
- #define SCTLR_EL1_NTWE_DIS	(0 << 18) /* WFE instruction disabled         */
- #define SCTLR_EL1_NTWI_DIS	(0 << 16) /* WFI instruction disabled         */
+ 
++#include <config.h>
++
+ MEMORY { .sram : ORIGIN = IMAGE_TEXT_BASE,
+ 		LENGTH = IMAGE_MAX_SIZE }
+ MEMORY { .sdram : ORIGIN = CONFIG_SPL_BSS_START_ADDR,
+ 		LENGTH = CONFIG_SPL_BSS_MAX_SIZE }
+ 
++#if CONFIG_IS_ENABLED(SYS_BIG_ENDIAN)
++OUTPUT_FORMAT("elf64-bigaarch64", "elf64-bigaarch64", "elf64-bigaarch64")
++#else
+ OUTPUT_FORMAT("elf64-littleaarch64", "elf64-littleaarch64", "elf64-littleaarch64")
++#endif
+ OUTPUT_ARCH(aarch64)
+ ENTRY(_start)
+ SECTIONS
+diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
+index 857f44412e07..f357e5468e27 100644
+--- a/arch/arm/cpu/armv8/u-boot.lds
++++ b/arch/arm/cpu/armv8/u-boot.lds
+@@ -10,7 +10,11 @@
+ #include <config.h>
+ #include <asm/psci.h>
+ 
++#if CONFIG_IS_ENABLED(SYS_BIG_ENDIAN)
++OUTPUT_FORMAT("elf64-bigaarch64", "elf64-bigaarch64", "elf64-bigaarch64")
++#else
+ OUTPUT_FORMAT("elf64-littleaarch64", "elf64-littleaarch64", "elf64-littleaarch64")
++#endif
+ OUTPUT_ARCH(aarch64)
+ ENTRY(_start)
+ SECTIONS
+diff --git a/arch/arm/lib/elf_aarch64_efi.lds b/arch/arm/lib/elf_aarch64_efi.lds
+index 5dd98091698c..4bba305bab35 100644
+--- a/arch/arm/lib/elf_aarch64_efi.lds
++++ b/arch/arm/lib/elf_aarch64_efi.lds
+@@ -5,7 +5,14 @@
+  * Modified from elf_aarch64_efi.lds in gnu-efi
+  */
+ 
++#include <config.h>
++
++#if CONFIG_IS_ENABLED(SYS_BIG_ENDIAN)
++OUTPUT_FORMAT("elf64-bigaarch64", "elf64-bigaarch64", "elf64-bigaarch64")
++#else
+ OUTPUT_FORMAT("elf64-littleaarch64", "elf64-littleaarch64", "elf64-littleaarch64")
++#endif
++
+ OUTPUT_ARCH(aarch64)
+ 
+ PHDRS
+diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+index 62f87517c09c..ff88cc3e55cd 100644
+--- a/scripts/Makefile.lib
++++ b/scripts/Makefile.lib
+@@ -475,7 +475,8 @@ cmd_efi_objcopy = $(OBJCOPY) -j .header -j .text -j .sdata -j .data -j \
+ $(obj)/%.efi: $(obj)/%_efi.so
+ 	$(call cmd,efi_objcopy)
+ 
+-KBUILD_EFILDFLAGS = -nostdlib -zexecstack -znocombreloc -znorelro
++KBUILD_EFILDFLAGS += $(if $(CONFIG_SYS_BIG_ENDIAN),-EB,-EL)
++KBUILD_EFILDFLAGS += -nostdlib -zexecstack -znocombreloc -znorelro
+ KBUILD_EFILDFLAGS += $(call ld-option,--no-warn-rwx-segments)
+ quiet_cmd_efi_ld = LD      $@
+ cmd_efi_ld = $(LD) $(KBUILD_EFILDFLAGS) -T $(EFI_LDS_PATH) \
 
 -- 
 2.43.0
