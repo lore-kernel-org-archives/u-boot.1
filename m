@@ -4,144 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 166C2C25B75
-	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 19:56:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB2A3C25B75
+	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 20:40:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 57534882AA;
-	Sun, 19 May 2024 21:55:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 10D0087F39;
+	Sun, 19 May 2024 22:40:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="GxCCxL/g";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Z1ygYpnH";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="OZWfurzn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56D0C8822D; Sun, 19 May 2024 21:55:49 +0200 (CEST)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::601])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D8EB38817C; Sun, 19 May 2024 22:40:06 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAD6388223
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 21:55:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BA813841BC
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 22:40:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Dj39VFoWD2BkqgU6EVrDYispZ49LJ09s+MuT2UfyL6Esf7MMjCMPcwqZL0tiF6qr+7TgB18YwEggJELEharpuK+p4nuBBNWeLZczPjhbRetXHfUBpQXZWz7aZKwiu/vNbftOUwLS4KaW1Svhi+AdNVw1m8Cl7eUFzeuj6pNfE1ISDVrdiyAT039o+1aJWCUxXmV7+MJ52smo8bIjpwrjBfi26uTpnAYjvM2kVt1bG3N2eMhuRWtqqCyEKYn6Ok/tbqJ7HBRbWUIpPAQUfcfQIkba+2VMDsLLc7xEMus3NxXUI3xAgHQeS7duaVa26X8IBpIGslbA4F1tkhLfNNDBlw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UE40nuG7Vu+qqaqGdBU4hU2mGC6HGPVgb4Xrb/CdMPY=;
- b=BWvMtUKtL4e8pnfLe+VbyyrOi+pnqvWSqb85jsh91GSmSqUZchdOkTfDuaIdv+EcnO+4EUkB1K5Pyn5SksnpGJyThir5KVThUE/SbQ/xWwgAfWwn1ozCKfjcFd6hjNm7H6qgoVm2lzOXLcvN1aNekJF1YL6tSf1avyLEm6MEjoCUgU1hqdvALp+58OZRSRl+ptMMu5P1v4zRwd1rmwJh3rqLuQssRfnQn0UEZFDY3+akZBfHDFhYnS6jBf6E4C5YdUw77LcNxxCFdvroRU6mjfH5kwlPfTfRwp9X5GsRzEaIsyeiDZ0xikyt/Utw4mzo/B6d2vTq0uB0EG+OESyWgA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UE40nuG7Vu+qqaqGdBU4hU2mGC6HGPVgb4Xrb/CdMPY=;
- b=GxCCxL/g7KKCm9XOcaMG+d/i1jA+08BWWj7t9lOHC8tmtydWkLM0nLY30VyxZZJvj9/wCR44UiSs+XPTFH3VDlopyg2gkkijkioMhrRNbKusdDrizx1oBkqljzH4rQF0RB8FS5yqp9l4w8fqIN2Nka2lQiwFYebxxYadp/cV0wU=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
- by AM0PR10MB3716.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:156::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7587.35; Sun, 19 May
- 2024 19:55:42 +0000
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::9fcc:5df3:197:6691]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::9fcc:5df3:197:6691%3]) with mapi id 15.20.7587.030; Sun, 19 May 2024
- 19:55:42 +0000
-From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4VjCHl3X4bz9sTx;
+ Sun, 19 May 2024 22:40:03 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1716151203;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=rEoAvh2TTReZZ9/RclrfGamw8Tz30GoKYg9/i085VUk=;
+ b=Z1ygYpnHgbA9Sjkp/kD0zDFQSyi4IAEWanUCbmZ8gEqBAXKJ9IO/cQdMHL4rQbVtt/Szb+
+ J8kwCeHq51Z8bl4etghHvFkHYrJBlpMSJjCzKlbtXSVZyXW1eWKyp3HJUk5oe2d+hTqP2f
+ XpkJyubJBs37fKv1HGqAl92RJ5XDa3KjLzgGZZ227s69mznMJHe4u/5zonMo1aVPLjELIz
+ UOGTD01aPihasxYe4I6KnTBVCGOC1mRi8Sq++qf455fQFqVOY1UZ680ItoYJqNTHqDuBf5
+ HGgB0wCZt8C2d8dhguOraAT2AdyR2bzmLlzviheDBaR9hN3rNvU1ldTW+eJdCQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1716151201;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=rEoAvh2TTReZZ9/RclrfGamw8Tz30GoKYg9/i085VUk=;
+ b=OZWfurznGiZkidST/o7A4Em3RDaf0zX8YZOfVY7sXFQpfpObk9HXjICd7Yyhdc1xFPDpzU
+ mcXjAlyfgQbEVLFgpDy0h/AtsJ1RV+WrFuRniq0FTv7KoSsX6lb8LDaV7UBG0ieA+83ONl
+ UdMT2BiU3JZtDowm3QnfZK6EhC4rBzEgnxXEPrhip2HziIhAgBVwvpqo3XGFZj0iiyc5lq
+ NRlTu4sAraWv2Y3awOjTZ8fFhGzWPLfEjR7hD3dY4lXVv8Ap8R4CSKCZpcAIoBmoVl9AB8
+ CLx0TUbo4pLcIbxfcMNeD0M7A81iq1J0njo2hXULKHDA0hcEdwKwGQIyAMex7A==
 To: u-boot@lists.denx.de
-Cc: Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Subject: [PATCH v3 3/3] cyclic: make clients embed a struct cyclic_info in
- their own data structure
-Date: Sun, 19 May 2024 21:55:32 +0200
-Message-Id: <20240519195532.1648830-4-rasmus.villemoes@prevas.dk>
-X-Mailer: git-send-email 2.40.1.1.g1c60b9335d
-In-Reply-To: <20240519195532.1648830-1-rasmus.villemoes@prevas.dk>
-References: <20240519195532.1648830-1-rasmus.villemoes@prevas.dk>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0105.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:9::14) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:10:45a::14)
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Adam Ford <aford173@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] ARM: dts: renesas: Remove leftovers after OF_UPSTREAM
+ conversion
+Date: Sun, 19 May 2024 22:39:19 +0200
+Message-ID: <20240519203944.187134-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|AM0PR10MB3716:EE_
-X-MS-Office365-Filtering-Correlation-Id: b622d1c9-da3b-44c4-22da-08dc783daa39
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230031|366007|376005|52116005|1800799015|38350700005; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?VxzTVK9N20fNwN2dhRJCMOBr0/pAFClai+adWZSXPX5KWeLVSQIlMONuSw9p?=
- =?us-ascii?Q?wErzD6RbB4zCjT0jSWuJBCGcOFdT7PQ9oUioAAW0sJoaA2a0fxUOlV2pXsyK?=
- =?us-ascii?Q?TohDS6kMWUy9Uli43TVrDnD3LmQjOIKRXOYBXlbY8fHhygpb3I6l+YDwGE2E?=
- =?us-ascii?Q?r1CRCQT0iN1PXx+4TdhmYR5fSngfenKCnilXM2oPDVDlEDZ36kPPMyn16wYL?=
- =?us-ascii?Q?wBnkS+pQjWsNi1evdnndsHdHjnstizAxn45R+zSumfyUrOfgBT9M2CtJVwEy?=
- =?us-ascii?Q?sq5CCcvATHlUyRMDMlAWDXNKvs9KbnKM0Blk36810ntZnpDPsiPD2d88LuiH?=
- =?us-ascii?Q?JVH201lN96ZZKTZRod+aYc3Bs+GofiI8UgLD3/2uj2FeNgCLstY3Wf6qxAtK?=
- =?us-ascii?Q?jTC9U94P63TOv4Ky1Z0BQqKKB7Y6HyXXG/918/80/wv8+mPBlWt2fIXCua3s?=
- =?us-ascii?Q?2tGl9Gok8tnbqW/7opjnrhpFwdOIW6tm09KfLTpgpj2LDzfGMOGpu68B68Wl?=
- =?us-ascii?Q?dgHPG/72IyU91di77WKde+L6pjHAJbgeHkw07iijRvUc9WSirWV3KKvaK9W6?=
- =?us-ascii?Q?D1YBCdsaYilbbR8QzeNnQ5gIwv57Iot8pD38rjotL+NNIt7zrzLBm9IXVeOS?=
- =?us-ascii?Q?5KYzLsXkCTCiFmECOXhLooFGECRw0uT3t4+IRj2OhJ2LyR3nt07w1A90DSSR?=
- =?us-ascii?Q?eI7u8AHxwvaSvklOVr0OdmBI/q+lVKJMf0sxR0hbMAg8mR6TFXkh1MeCD2ON?=
- =?us-ascii?Q?Hrmc24VUyHen9PhU7ByMZZk2alOhKTf/z1vvr7+I8YKMFG5VRUZm36BtNfXV?=
- =?us-ascii?Q?IudCxdQeKg6jc2zOjGq2x9bj7iBW/lP7H47zf34beIysjEYwimpEKRAnGdsE?=
- =?us-ascii?Q?ZLP9aYxnJnZVbD3exnhO7apkqHJf08GJL8p1Bcwm6iA0lMmqzWobOHZD5NxS?=
- =?us-ascii?Q?MoDYjJs1ehG4uzFYpO9m6Lo2Qsm+J1UkXyHpgkwKp0LKb5IG8o7kImCMfYO/?=
- =?us-ascii?Q?DnjfbsXNLkBg6w7p87sdzGB1P20XxaztW9R80Gs1aGxlhj+9KZAZBpkY+3T/?=
- =?us-ascii?Q?1rpr6VDHcB2/1eRJJq7Ac+mtgKYeyKtIzMce5VyAMG9Wsk4OI71qwHYiAyGx?=
- =?us-ascii?Q?iUBFydUfiZ33pr1uppCFH602nmsg6i+Zi+MefNPZg+9gKMlahTUBqlSIWltt?=
- =?us-ascii?Q?ASlDtiPtndCIV4NZ5LsrUF5ayfGWFjOKGl/qlWLXkq6S6SWozQJS48pZCoW5?=
- =?us-ascii?Q?oL2SuEoUtL+QIkqGHhBQ+PaawyFbsK1mN/rq4tKfyA=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(366007)(376005)(52116005)(1800799015)(38350700005); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?gRgMnsHK+1DEndlOuG463DWy6s/FwrYKrUlXxMc3a8mDh1LFERwCErjjMWzb?=
- =?us-ascii?Q?klz+FyLq85Mxr4RC99hpjf3gXYoSWfcrkdxrXOlddYBcyAXhAxRpojHT/gj3?=
- =?us-ascii?Q?GlPlJ8T23lIt+or1vR7iNE1iXYaputVFJowie9sukmRizMW0uDSeE/uanhxQ?=
- =?us-ascii?Q?+Z+L5NUq7C7X1mmFrthrUEzMFmp3HhJO54ywS+PJm7I+YUHHMdGzavR5PjiF?=
- =?us-ascii?Q?K6/BxOIqPSKRJM/+D1wYT/ZdYJOpPjHOpzBwYPI3WQDhL3RRlnSE8cilk8fT?=
- =?us-ascii?Q?56yqoheLH61HovAxyGWBP9manUGm1KJPV/aSxVfxaFSP2+qqInBYfGms8pZQ?=
- =?us-ascii?Q?kl/5RytikPHcL33COBjf9UUVac1NerS7tuc6JukxY5P7qCxokcCDU00n6uU6?=
- =?us-ascii?Q?eyUgY00F9jY6jpThIqhC4jbbm9jU26cVAXyCtzbEKo9ml/Ez13bM3qf81h5V?=
- =?us-ascii?Q?9xeuK2jgHxd/tjgWc33HReIzyjErsUSejnsNsegoRDemRTElpIHNZpgq4UNC?=
- =?us-ascii?Q?xTGR1fSpiCgtGVcExO5QUiTEfxOuYuuml2hI8gSWd9xhs7hy6y9TdcrB86Lu?=
- =?us-ascii?Q?kG+ZLFmBuvsrzUOoRUI7fGAinLC+bNv+9uzELR55bY6hU4YROp6tlOFJixjM?=
- =?us-ascii?Q?Qch7V6rWKyEunxODE2Vvlyf4lQufcn8jFWS4uWgpJcqptTljabYgBQJ9n1M1?=
- =?us-ascii?Q?/A9cTrmRX658NQKIg8aoshP/2WYtgobTN1KslY9tIH6seaqTUfjYtBvuwdVA?=
- =?us-ascii?Q?CD5rb/YAmUvM8fB7LpxJuhTZzgiQuCIrJAuNdA7c9t1XswQFbEKiYahqHDso?=
- =?us-ascii?Q?D/m60Uk3qMEAi6cO1hOQLS7UtCpy8OSH7RM6YTovd3D1nwILbH2UgS5Rn0Gc?=
- =?us-ascii?Q?4nKQ5Flq6T7X1MmVEVbBJtHLH+Df4kh44401YW5uf8V2qq0gY74eDtZQxCol?=
- =?us-ascii?Q?sbluudm7nmyLqB9gdHL5EGbTILn9rSR8mlfmmCcXi9echbfaJBP4Qz8G4TFu?=
- =?us-ascii?Q?/5tKRHlF8C+V/OryRkmHN6zSfp7du2ctaJpY9mOy0QDlF3detqnw3pm3gM+2?=
- =?us-ascii?Q?2J2HD8mjIfHjF02zzs3Nlw+G/LWBDvdH7+n6S9tVgxcuDKd39ny61wPRvRZT?=
- =?us-ascii?Q?8j4JtAftySMjtKj5R+CB8IShPVfZ1z44rocK0Vlr4EM4lykTkFxhkiCGu7U7?=
- =?us-ascii?Q?0sQmvpbLm0zRNJnLQHvM+tIsI7cEXSDdt9g4TpNHmmmlTcoNMSvl3p0nrhA3?=
- =?us-ascii?Q?nJKReW5MOA9dooPekMqoEpQPLKN9desx/zg4/QiIBLYXyK1iPI1haN3173n/?=
- =?us-ascii?Q?VIPPCcqAlf2lsMKVvxI58BZzNqaIxCeAps3IQLhsmCB8AC/8WQnLU1IP6iIg?=
- =?us-ascii?Q?Rt3y+OaiPAi9hxc9K/MbQ0gYxdkFdBPdx3HimR9xzLIvILjG7AjyRYa1cMI1?=
- =?us-ascii?Q?PqIM/N8Ad6OzoMAemRtq/ELypoQLtmdUoCLAqCoYLq2ZcNaD3k2qDVGKqs6u?=
- =?us-ascii?Q?m0Fy3pWWsc7p+9LtvBt6tMaEvKC4Zqj0b1azY1e9XmZATkWMoSh6G3yI7sPD?=
- =?us-ascii?Q?ryof8TdMA0h3jPVj0ywFaF8ZxrSx80MlH2tFDn6UQSVgWR2AU0G1fl9R/2B3?=
- =?us-ascii?Q?Bw=3D=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: b622d1c9-da3b-44c4-22da-08dc783daa39
-X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2024 19:55:42.5230 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 8k73gc85XlbPxMVsWeW8qyfENbU855eY6ytvJPPX3O6pSTrPnC5hDP/8xmyPL/IqBIXVuJjW+32EyAYdPiQvROr1B5o/HakGuuXOEVn1CoU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR10MB3716
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: i73xeym7rfgr3uqnt3xnbe8kk86c9mz5
+X-MBO-RS-ID: ac214066d88e1b244e3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -158,416 +83,1903 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There are of course not a whole lot of examples in-tree yet, but
-before they appear, let's make this API change: Instead of separately
-allocating a 'struct cyclic_info', make the users embed such an
-instance in their own structure, and make the convention that the
-callback simply receives the 'struct cyclic_info *', from which the
-clients can get their own data using the container_of() macro.
+Remove leftover DTSI files after OF_UPSTREAM conversion.
+Those are no longer used and no longer necessary, remove them.
+No functional change.
 
-This has a number of advantages.
-
-First, it means cyclic_register() simply cannot fail, simplifying the
-code. The necessary storage will simply be allocated automatically
-when the client's own structure is allocated (often via
-uclass_priv_auto or similar).
-
-Second, code for which CONFIG_CYCLIC is just an option can more easily
-be written without #ifdefs, if we just provide an empty struct
-cyclic_info {}. For example, the nested CONFIG_IS_ENABLED()s in
-https://lore.kernel.org/u-boot/20240316201416.211480-1-marek.vasut+renesas@mailbox.org/
-are mostly due to the existence of the 'struct cyclic_info *' member
-being guarded by #ifdef CONFIG_CYCLIC.
-
-And we do probably want to avoid the extra memory overhead of that
-member when !CONFIG_CYCLIC. But that is automatic if, instead of a
-'struct cyclic_info *', one simply embeds a 'struct cyclic_info',
-which will have size 0 when !CONFIG_CYCLIC. Also, the no-op
-cyclic_register() function can just unconditionally be called, and the
-compiler will see that (1) the callback is referenced, so not emit a
-warning for a maybe-unused function and (2) see that it can actually
-never be reached, so not emit any code for it.
-
-Reviewed-by: Stefan Roese <sr@denx.de>
-Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- board/Marvell/octeon_nic23/board.c |  9 +++++---
- cmd/cyclic.c                       | 12 +++++------
- common/cyclic.c                    | 22 +++++--------------
- doc/develop/cyclic.rst             | 26 ++++++++++++++---------
- drivers/watchdog/wdt-uclass.c      | 33 +++++++++++++----------------
- include/cyclic.h                   | 34 +++++++++++++++---------------
- test/common/cyclic.c               | 19 +++++++++++------
- 7 files changed, 76 insertions(+), 79 deletions(-)
+Cc: Adam Ford <aford173@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>
+---
+ arch/arm/dts/salvator-common.dtsi        | 1104 ----------------------
+ arch/arm/dts/salvator-x.dtsi             |   29 -
+ arch/arm/dts/salvator-xs.dtsi            |   85 --
+ arch/arm/dts/ulcb-audio-graph-card.dtsi  |   85 --
+ arch/arm/dts/ulcb-audio-graph-card2.dtsi |   26 -
+ arch/arm/dts/ulcb.dtsi                   |  509 ----------
+ 6 files changed, 1838 deletions(-)
+ delete mode 100644 arch/arm/dts/salvator-common.dtsi
+ delete mode 100644 arch/arm/dts/salvator-x.dtsi
+ delete mode 100644 arch/arm/dts/salvator-xs.dtsi
+ delete mode 100644 arch/arm/dts/ulcb-audio-graph-card.dtsi
+ delete mode 100644 arch/arm/dts/ulcb-audio-graph-card2.dtsi
+ delete mode 100644 arch/arm/dts/ulcb.dtsi
 
-diff --git a/board/Marvell/octeon_nic23/board.c b/board/Marvell/octeon_nic23/board.c
-index bc9332cb74a..74b9c741b7b 100644
---- a/board/Marvell/octeon_nic23/board.c
-+++ b/board/Marvell/octeon_nic23/board.c
-@@ -357,10 +357,13 @@ int board_late_init(void)
- 	board_configure_qlms();
- 
- 	/* Register cyclic function for PCIe FLR fixup */
--	cyclic = cyclic_register(octeon_board_restore_pf, 100,
--				 "pcie_flr_fix", NULL);
--	if (!cyclic)
-+	cyclic = calloc(1, sizeof(*cyclic));
-+	if (cyclic) {
-+		cyclic_register(cyclic, octeon_board_restore_pf, 100,
-+				"pcie_flr_fix");
-+	} else {
- 		printf("Registering of cyclic function failed\n");
-+	}
- 
- 	return 0;
- }
-diff --git a/cmd/cyclic.c b/cmd/cyclic.c
-index 40e966de9aa..339dd4a7bce 100644
---- a/cmd/cyclic.c
-+++ b/cmd/cyclic.c
-@@ -15,14 +15,16 @@
- #include <time.h>
- #include <vsprintf.h>
- #include <linux/delay.h>
-+#include <linux/kernel.h>
- 
- struct cyclic_demo_info {
-+	struct cyclic_info cyclic;
- 	uint delay_us;
- };
- 
--static void cyclic_demo(void *ctx)
-+static void cyclic_demo(struct cyclic_info *c)
- {
--	struct cyclic_demo_info *info = ctx;
-+	struct cyclic_demo_info *info = container_of(c, struct cyclic_demo_info, cyclic);
- 
- 	/* Just a small dummy delay here */
- 	udelay(info->delay_us);
-@@ -32,7 +34,6 @@ static int do_cyclic_demo(struct cmd_tbl *cmdtp, int flag, int argc,
- 			  char *const argv[])
- {
- 	struct cyclic_demo_info *info;
--	struct cyclic_info *cyclic;
- 	uint time_ms;
- 
- 	if (argc < 3)
-@@ -48,10 +49,7 @@ static int do_cyclic_demo(struct cmd_tbl *cmdtp, int flag, int argc,
- 	info->delay_us = simple_strtoul(argv[2], NULL, 0);
- 
- 	/* Register demo cyclic function */
--	cyclic = cyclic_register(cyclic_demo, time_ms * 1000, "cyclic_demo",
--				 info);
--	if (!cyclic)
--		printf("Registering of cyclic_demo failed\n");
-+	cyclic_register(&info->cyclic, cyclic_demo, time_ms * 1000, "cyclic_demo");
- 
- 	printf("Registered function \"%s\" to be executed all %dms\n",
- 	       "cyclic_demo", time_ms);
-diff --git a/common/cyclic.c b/common/cyclic.c
-index c62e7fa7d19..ec38fad6775 100644
---- a/common/cyclic.c
-+++ b/common/cyclic.c
-@@ -26,34 +26,22 @@ struct hlist_head *cyclic_get_list(void)
- 	return (struct hlist_head *)&gd->cyclic_list;
- }
- 
--struct cyclic_info *cyclic_register(cyclic_func_t func, uint64_t delay_us,
--				    const char *name, void *ctx)
-+void cyclic_register(struct cyclic_info *cyclic, cyclic_func_t func,
-+		     uint64_t delay_us, const char *name)
- {
--	struct cyclic_info *cyclic;
+diff --git a/arch/arm/dts/salvator-common.dtsi b/arch/arm/dts/salvator-common.dtsi
+deleted file mode 100644
+index 4a3d5037821..00000000000
+--- a/arch/arm/dts/salvator-common.dtsi
++++ /dev/null
+@@ -1,1104 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-/*
+- * Device Tree Source for common parts of Salvator-X board variants
+- *
+- * Copyright (C) 2015-2016 Renesas Electronics Corp.
+- */
 -
--	cyclic = calloc(1, sizeof(struct cyclic_info));
--	if (!cyclic) {
--		pr_debug("Memory allocation error\n");
--		return NULL;
--	}
-+	memset(cyclic, 0, sizeof(*cyclic));
- 
- 	/* Store values in struct */
- 	cyclic->func = func;
--	cyclic->ctx = ctx;
- 	cyclic->name = name;
- 	cyclic->delay_us = delay_us;
- 	cyclic->start_time_us = timer_get_us();
- 	hlist_add_head(&cyclic->list, cyclic_get_list());
+-/*
+- * SSI-AK4613
+- *
+- * This command is required when Playback/Capture
+- *
+- *	amixer set "DVC Out" 100%
+- *	amixer set "DVC In" 100%
+- *
+- * You can use Mute
+- *
+- *	amixer set "DVC Out Mute" on
+- *	amixer set "DVC In Mute" on
+- *
+- * You can use Volume Ramp
+- *
+- *	amixer set "DVC Out Ramp Up Rate"   "0.125 dB/64 steps"
+- *	amixer set "DVC Out Ramp Down Rate" "0.125 dB/512 steps"
+- *	amixer set "DVC Out Ramp" on
+- *	aplay xxx.wav &
+- *	amixer set "DVC Out"  80%  // Volume Down
+- *	amixer set "DVC Out" 100%  // Volume Up
+- */
 -
--	return cyclic;
- }
- 
--int cyclic_unregister(struct cyclic_info *cyclic)
-+void cyclic_unregister(struct cyclic_info *cyclic)
- {
- 	hlist_del(&cyclic->list);
--	free(cyclic);
+-#include <dt-bindings/gpio/gpio.h>
+-#include <dt-bindings/input/input.h>
 -
--	return 0;
- }
- 
- void cyclic_run(void)
-@@ -76,7 +64,7 @@ void cyclic_run(void)
- 		if (time_after_eq64(now, cyclic->next_call)) {
- 			/* Call cyclic function and account it's cpu-time */
- 			cyclic->next_call = now + cyclic->delay_us;
--			cyclic->func(cyclic->ctx);
-+			cyclic->func(cyclic);
- 			cyclic->run_cnt++;
- 			cpu_time = timer_get_us() - now;
- 			cyclic->cpu_time_us += cpu_time;
-diff --git a/doc/develop/cyclic.rst b/doc/develop/cyclic.rst
-index 67831496a70..893c269099a 100644
---- a/doc/develop/cyclic.rst
-+++ b/doc/develop/cyclic.rst
-@@ -19,20 +19,26 @@ Registering a cyclic function
- 
- To register a cyclic function, use something like this::
- 
--    static void cyclic_demo(void *ctx)
-+    struct donkey {
-+        struct cyclic_info cyclic;
-+        void (*say)(const char *s);
-+    };
-+
-+    static void cyclic_demo(struct cyclic_info *c)
-     {
--        /* Just a small dummy delay here */
--        udelay(10);
-+        struct donkey *donkey = container_of(c, struct donkey, cyclic);
-+
-+        donkey->say("Are we there yet?");
-     }
--    
--    int board_init(void)
-+
-+    int donkey_init(void)
-     {
--        struct cyclic_info *cyclic;
--        
-+        struct donkey *donkey;
-+
-+        /* Initialize donkey ... */
-+
-         /* Register demo cyclic function */
--        cyclic = cyclic_register(cyclic_demo, 10 * 1000, "cyclic_demo", NULL);
--        if (!cyclic)
--        printf("Registering of cyclic_demo failed\n");
-+        cyclic_register(&donkey->cyclic, cyclic_demo, 10 * 1000, "cyclic_demo");
-         
-         return 0;
-     }
-diff --git a/drivers/watchdog/wdt-uclass.c b/drivers/watchdog/wdt-uclass.c
-index 12850016c93..e2e7f9ab84b 100644
---- a/drivers/watchdog/wdt-uclass.c
-+++ b/drivers/watchdog/wdt-uclass.c
-@@ -17,12 +17,15 @@
- #include <asm/global_data.h>
- #include <dm/device-internal.h>
- #include <dm/lists.h>
-+#include <linux/kernel.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
- #define WATCHDOG_TIMEOUT_SECS	(CONFIG_WATCHDOG_TIMEOUT_MSECS / 1000)
- 
- struct wdt_priv {
-+	/* The udevice owning this wdt_priv. */
-+	struct udevice *dev;
- 	/* Timeout, in seconds, to configure this device to. */
- 	u32 timeout;
- 	/*
-@@ -40,18 +43,17 @@ struct wdt_priv {
- 	/* autostart */
- 	bool autostart;
- 
--	struct cyclic_info *cyclic;
-+	struct cyclic_info cyclic;
- };
- 
--static void wdt_cyclic(void *ctx)
-+static void wdt_cyclic(struct cyclic_info *c)
- {
--	struct udevice *dev = ctx;
--	struct wdt_priv *priv;
-+	struct wdt_priv *priv = container_of(c, struct wdt_priv, cyclic);
-+	struct udevice *dev = priv->dev;
- 
- 	if (!device_active(dev))
- 		return;
- 
--	priv = dev_get_uclass_priv(dev);
- 	if (!priv->running)
- 		return;
- 
-@@ -124,20 +126,14 @@ int wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
- 		memset(str, 0, 16);
- 		if (IS_ENABLED(CONFIG_WATCHDOG)) {
- 			if (priv->running)
--				cyclic_unregister(priv->cyclic);
-+				cyclic_unregister(&priv->cyclic);
- 
- 			/* Register the watchdog driver as a cyclic function */
--			priv->cyclic = cyclic_register(wdt_cyclic,
--						       priv->reset_period * 1000,
--						       dev->name, dev);
--			if (!priv->cyclic) {
--				printf("cyclic_register for %s failed\n",
--				       dev->name);
--				return -ENODEV;
--			} else {
--				snprintf(str, 16, "every %ldms",
--					 priv->reset_period);
--			}
-+			cyclic_register(&priv->cyclic, wdt_cyclic,
-+					priv->reset_period * 1000,
-+					dev->name);
-+
-+			snprintf(str, 16, "every %ldms", priv->reset_period);
- 		}
- 
- 		priv->running = true;
-@@ -162,7 +158,7 @@ int wdt_stop(struct udevice *dev)
- 		struct wdt_priv *priv = dev_get_uclass_priv(dev);
- 
- 		if (IS_ENABLED(CONFIG_WATCHDOG) && priv->running)
--			cyclic_unregister(priv->cyclic);
-+			cyclic_unregister(&priv->cyclic);
- 
- 		priv->running = false;
- 	}
-@@ -262,6 +258,7 @@ static int wdt_pre_probe(struct udevice *dev)
- 			autostart = true;
- 	}
- 	priv = dev_get_uclass_priv(dev);
-+	priv->dev = dev;
- 	priv->timeout = timeout;
- 	priv->reset_period = reset_period;
- 	priv->autostart = autostart;
-diff --git a/include/cyclic.h b/include/cyclic.h
-index 38946216fb8..dc0749ba03d 100644
---- a/include/cyclic.h
-+++ b/include/cyclic.h
-@@ -18,7 +18,6 @@
-  * struct cyclic_info - Information about cyclic execution function
-  *
-  * @func: Function to call periodically
-- * @ctx: Context pointer to get passed to this function
-  * @name: Name of the cyclic function, e.g. shown in the commands
-  * @delay_ns: Delay is ns after which this function shall get executed
-  * @start_time_us: Start time in us, when this function started its execution
-@@ -29,8 +28,7 @@
-  * @already_warned: Flag that we've warned about exceeding CPU time usage
-  */
- struct cyclic_info {
--	void (*func)(void *ctx);
--	void *ctx;
-+	void (*func)(struct cyclic_info *c);
- 	const char *name;
- 	uint64_t delay_us;
- 	uint64_t start_time_us;
-@@ -42,28 +40,30 @@ struct cyclic_info {
- };
- 
- /** Function type for cyclic functions */
--typedef void (*cyclic_func_t)(void *ctx);
-+typedef void (*cyclic_func_t)(struct cyclic_info *c);
- 
- #if defined(CONFIG_CYCLIC)
- /**
-  * cyclic_register - Register a new cyclic function
-  *
-+ * @cyclic: Cyclic info structure
-  * @func: Function to call periodically
-  * @delay_us: Delay is us after which this function shall get executed
-  * @name: Cyclic function name/id
-- * @ctx: Context to pass to the function
-- * @return: pointer to cyclic_struct if OK, NULL on error
-+ *
-+ * The function @func will be called with @cyclic as its
-+ * argument. @cyclic will usually be embedded in some device-specific
-+ * structure, which the callback can retrieve using container_of().
-  */
--struct cyclic_info *cyclic_register(cyclic_func_t func, uint64_t delay_us,
--				    const char *name, void *ctx);
-+void cyclic_register(struct cyclic_info *cyclic, cyclic_func_t func,
-+		     uint64_t delay_us, const char *name);
- 
- /**
-  * cyclic_unregister - Unregister a cyclic function
-  *
-  * @cyclic: Pointer to cyclic_struct of the function that shall be removed
-- * @return: 0 if OK, -ve on error
-  */
--int cyclic_unregister(struct cyclic_info *cyclic);
-+void cyclic_unregister(struct cyclic_info *cyclic);
- 
- /**
-  * cyclic_unregister_all() - Clean up cyclic functions
-@@ -97,17 +97,17 @@ void cyclic_run(void);
-  */
- void schedule(void);
- #else
--static inline struct cyclic_info *cyclic_register(cyclic_func_t func,
--						  uint64_t delay_us,
--						  const char *name,
--						  void *ctx)
-+
-+struct cyclic_info {
-+};
-+
-+static inline void cyclic_register(struct cyclic_info *cyclic, cyclic_func_t func,
-+				   uint64_t delay_us, const char *name)
- {
--	return NULL;
- }
- 
--static inline int cyclic_unregister(struct cyclic_info *cyclic)
-+static inline void cyclic_unregister(struct cyclic_info *cyclic)
- {
--	return 0;
- }
- 
- static inline void cyclic_run(void)
-diff --git a/test/common/cyclic.c b/test/common/cyclic.c
-index 461f8cf91f4..51a07c576b6 100644
---- a/test/common/cyclic.c
-+++ b/test/common/cyclic.c
-@@ -12,22 +12,27 @@
- #include <linux/delay.h>
- 
- /* Test that cyclic function is called */
--static bool cyclic_active = false;
-+static struct cyclic_test {
-+	struct cyclic_info cyclic;
-+	bool called;
-+} cyclic_test;
- 
--static void cyclic_test(void *ctx)
-+static void test_cb(struct cyclic_info *c)
- {
--	cyclic_active = true;
-+	struct cyclic_test *t = container_of(c, struct cyclic_test, cyclic);
-+	t->called = true;
- }
- 
- static int dm_test_cyclic_running(struct unit_test_state *uts)
- {
--	cyclic_active = false;
--	ut_assertnonnull(cyclic_register(cyclic_test, 10 * 1000, "cyclic_demo",
--					 NULL));
-+	cyclic_test.called = false;
-+	cyclic_register(&cyclic_test.cyclic, test_cb, 10 * 1000, "cyclic_test");
- 
- 	/* Execute all registered cyclic functions */
- 	schedule();
--	ut_asserteq(true, cyclic_active);
-+	ut_asserteq(true, cyclic_test.called);
-+
-+	cyclic_unregister(&cyclic_test.cyclic);
- 
- 	return 0;
- }
+-/ {
+-	aliases {
+-		i2c0 = &i2c0;
+-		i2c1 = &i2c1;
+-		i2c2 = &i2c2;
+-		i2c3 = &i2c3;
+-		i2c4 = &i2c4;
+-		i2c5 = &i2c5;
+-		i2c6 = &i2c6;
+-		i2c7 = &i2c_dvfs;
+-		serial0 = &scif2;
+-		serial1 = &hscif1;
+-		ethernet0 = &avb;
+-		mmc0 = &sdhi2;
+-		mmc1 = &sdhi0;
+-		mmc2 = &sdhi3;
+-	};
+-
+-	chosen {
+-		bootargs = "ignore_loglevel rw root=/dev/nfs ip=on";
+-		stdout-path = "serial0:115200n8";
+-	};
+-
+-	audio_clkout: audio-clkout {
+-		/*
+-		 * This is same as <&rcar_sound 0>
+-		 * but needed to avoid cs2000/rcar_sound probe dead-lock
+-		 */
+-		compatible = "fixed-clock";
+-		#clock-cells = <0>;
+-		clock-frequency = <12288000>;
+-	};
+-
+-	backlight: backlight {
+-		compatible = "pwm-backlight";
+-		pwms = <&pwm1 0 50000>;
+-
+-		brightness-levels = <256 128 64 16 8 4 0>;
+-		default-brightness-level = <6>;
+-
+-		power-supply = <&reg_12v>;
+-		enable-gpios = <&gpio6 7 GPIO_ACTIVE_HIGH>;
+-	};
+-
+-	cvbs-in {
+-		compatible = "composite-video-connector";
+-		label = "CVBS IN";
+-
+-		port {
+-			cvbs_con: endpoint {
+-				remote-endpoint = <&adv7482_ain7>;
+-			};
+-		};
+-	};
+-
+-	hdmi-in {
+-		compatible = "hdmi-connector";
+-		label = "HDMI IN";
+-		type = "a";
+-
+-		port {
+-			hdmi_in_con: endpoint {
+-				remote-endpoint = <&adv7482_hdmi>;
+-			};
+-		};
+-	};
+-
+-	hdmi0-out {
+-		compatible = "hdmi-connector";
+-		label = "HDMI0 OUT";
+-		type = "a";
+-
+-		port {
+-			hdmi0_con: endpoint {
+-				remote-endpoint = <&rcar_dw_hdmi0_out>;
+-			};
+-		};
+-	};
+-
+-	hdmi1-out {
+-		compatible = "hdmi-connector";
+-		label = "HDMI1 OUT";
+-		type = "a";
+-
+-		port {
+-			hdmi1_con: endpoint {
+-			};
+-		};
+-	};
+-
+-	keys {
+-		compatible = "gpio-keys";
+-
+-		pinctrl-0 = <&keys_pins>;
+-		pinctrl-names = "default";
+-
+-		key-1 {
+-			gpios = <&gpio5 17 GPIO_ACTIVE_LOW>;
+-			linux,code = <KEY_1>;
+-			label = "SW4-1";
+-			wakeup-source;
+-			debounce-interval = <20>;
+-		};
+-		key-2 {
+-			gpios = <&gpio5 20 GPIO_ACTIVE_LOW>;
+-			linux,code = <KEY_2>;
+-			label = "SW4-2";
+-			wakeup-source;
+-			debounce-interval = <20>;
+-		};
+-		key-3 {
+-			gpios = <&gpio5 22 GPIO_ACTIVE_LOW>;
+-			linux,code = <KEY_3>;
+-			label = "SW4-3";
+-			wakeup-source;
+-			debounce-interval = <20>;
+-		};
+-		key-4 {
+-			gpios = <&gpio5 23 GPIO_ACTIVE_LOW>;
+-			linux,code = <KEY_4>;
+-			label = "SW4-4";
+-			wakeup-source;
+-			debounce-interval = <20>;
+-		};
+-		key-a {
+-			gpios = <&gpio6 11 GPIO_ACTIVE_LOW>;
+-			linux,code = <KEY_A>;
+-			label = "TSW0";
+-			wakeup-source;
+-			debounce-interval = <20>;
+-		};
+-		key-b {
+-			gpios = <&gpio6 12 GPIO_ACTIVE_LOW>;
+-			linux,code = <KEY_B>;
+-			label = "TSW1";
+-			wakeup-source;
+-			debounce-interval = <20>;
+-		};
+-		key-c {
+-			gpios = <&gpio6 13 GPIO_ACTIVE_LOW>;
+-			linux,code = <KEY_C>;
+-			label = "TSW2";
+-			wakeup-source;
+-			debounce-interval = <20>;
+-		};
+-	};
+-
+-	reg_1p8v: regulator-1p8v {
+-		compatible = "regulator-fixed";
+-		regulator-name = "fixed-1.8V";
+-		regulator-min-microvolt = <1800000>;
+-		regulator-max-microvolt = <1800000>;
+-		regulator-boot-on;
+-		regulator-always-on;
+-	};
+-
+-	reg_3p3v: regulator-3p3v {
+-		compatible = "regulator-fixed";
+-		regulator-name = "fixed-3.3V";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		regulator-boot-on;
+-		regulator-always-on;
+-	};
+-
+-	reg_12v: regulator-12v {
+-		compatible = "regulator-fixed";
+-		regulator-name = "fixed-12V";
+-		regulator-min-microvolt = <12000000>;
+-		regulator-max-microvolt = <12000000>;
+-		regulator-boot-on;
+-		regulator-always-on;
+-	};
+-
+-	sound_card: sound {
+-		compatible = "audio-graph-card";
+-
+-		label = "rcar-sound";
+-
+-		dais = <&rsnd_port0	/* ak4613 */
+-			&rsnd_port1	/* HDMI0  */
+-#ifdef SOC_HAS_HDMI1
+-			&rsnd_port2	/* HDMI1  */
+-#endif
+-			>;
+-	};
+-
+-	vbus0_usb2: regulator-vbus0-usb2 {
+-		compatible = "regulator-fixed";
+-
+-		regulator-name = "USB20_VBUS0";
+-		regulator-min-microvolt = <5000000>;
+-		regulator-max-microvolt = <5000000>;
+-
+-		gpio = <&gpio6 16 GPIO_ACTIVE_HIGH>;
+-		enable-active-high;
+-	};
+-
+-	vcc_sdhi0: regulator-vcc-sdhi0 {
+-		compatible = "regulator-fixed";
+-
+-		regulator-name = "SDHI0 Vcc";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-
+-		gpio = <&gpio5 2 GPIO_ACTIVE_HIGH>;
+-		enable-active-high;
+-	};
+-
+-	vccq_sdhi0: regulator-vccq-sdhi0 {
+-		compatible = "regulator-gpio";
+-
+-		regulator-name = "SDHI0 VccQ";
+-		regulator-min-microvolt = <1800000>;
+-		regulator-max-microvolt = <3300000>;
+-
+-		gpios = <&gpio5 1 GPIO_ACTIVE_HIGH>;
+-		gpios-states = <1>;
+-		states = <3300000 1>, <1800000 0>;
+-	};
+-
+-	vcc_sdhi3: regulator-vcc-sdhi3 {
+-		compatible = "regulator-fixed";
+-
+-		regulator-name = "SDHI3 Vcc";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-
+-		gpio = <&gpio3 15 GPIO_ACTIVE_HIGH>;
+-		enable-active-high;
+-	};
+-
+-	vccq_sdhi3: regulator-vccq-sdhi3 {
+-		compatible = "regulator-gpio";
+-
+-		regulator-name = "SDHI3 VccQ";
+-		regulator-min-microvolt = <1800000>;
+-		regulator-max-microvolt = <3300000>;
+-
+-		gpios = <&gpio3 14 GPIO_ACTIVE_HIGH>;
+-		gpios-states = <1>;
+-		states = <3300000 1>, <1800000 0>;
+-	};
+-
+-	vga {
+-		compatible = "vga-connector";
+-
+-		port {
+-			vga_in: endpoint {
+-				remote-endpoint = <&adv7123_out>;
+-			};
+-		};
+-	};
+-
+-	vga-encoder {
+-		compatible = "adi,adv7123";
+-
+-		ports {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-
+-			port@0 {
+-				reg = <0>;
+-				adv7123_in: endpoint {
+-					remote-endpoint = <&du_out_rgb>;
+-				};
+-			};
+-			port@1 {
+-				reg = <1>;
+-				adv7123_out: endpoint {
+-					remote-endpoint = <&vga_in>;
+-				};
+-			};
+-		};
+-	};
+-
+-	x12_clk: x12 {
+-		compatible = "fixed-clock";
+-		#clock-cells = <0>;
+-		clock-frequency = <24576000>;
+-	};
+-
+-	/* External DU dot clocks */
+-	x21_clk: x21-clock {
+-		compatible = "fixed-clock";
+-		#clock-cells = <0>;
+-		clock-frequency = <33000000>;
+-	};
+-
+-	x22_clk: x22-clock {
+-		compatible = "fixed-clock";
+-		#clock-cells = <0>;
+-		clock-frequency = <33000000>;
+-	};
+-
+-	x23_clk: x23-clock {
+-		compatible = "fixed-clock";
+-		#clock-cells = <0>;
+-		clock-frequency = <25000000>;
+-	};
+-};
+-
+-&a57_0 {
+-	cpu-supply = <&dvfs>;
+-};
+-
+-&audio_clk_a {
+-	clock-frequency = <22579200>;
+-};
+-
+-&avb {
+-	pinctrl-0 = <&avb_pins>;
+-	pinctrl-names = "default";
+-	phy-handle = <&phy0>;
+-	tx-internal-delay-ps = <2000>;
+-	status = "okay";
+-
+-	phy0: ethernet-phy@0 {
+-		compatible = "ethernet-phy-id0022.1622",
+-			     "ethernet-phy-ieee802.3-c22";
+-		rxc-skew-ps = <1500>;
+-		reg = <0>;
+-		interrupt-parent = <&gpio2>;
+-		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
+-		reset-gpios = <&gpio2 10 GPIO_ACTIVE_LOW>;
+-	};
+-};
+-
+-&csi20 {
+-	status = "okay";
+-
+-	ports {
+-		port@0 {
+-			csi20_in: endpoint {
+-				clock-lanes = <0>;
+-				data-lanes = <1>;
+-				remote-endpoint = <&adv7482_txb>;
+-			};
+-		};
+-	};
+-};
+-
+-&csi40 {
+-	status = "okay";
+-
+-	ports {
+-		port@0 {
+-			csi40_in: endpoint {
+-				clock-lanes = <0>;
+-				data-lanes = <1 2 3 4>;
+-				remote-endpoint = <&adv7482_txa>;
+-			};
+-		};
+-	};
+-};
+-
+-&du {
+-	pinctrl-0 = <&du_pins>;
+-	pinctrl-names = "default";
+-	status = "okay";
+-
+-	ports {
+-		port@0 {
+-			du_out_rgb: endpoint {
+-				remote-endpoint = <&adv7123_in>;
+-			};
+-		};
+-	};
+-};
+-
+-&ehci0 {
+-	dr_mode = "otg";
+-	status = "okay";
+-};
+-
+-&ehci1 {
+-	status = "okay";
+-};
+-
+-&extalr_clk {
+-	clock-frequency = <32768>;
+-};
+-
+-&hdmi0 {
+-	status = "okay";
+-
+-	ports {
+-		port@1 {
+-			reg = <1>;
+-			rcar_dw_hdmi0_out: endpoint {
+-				remote-endpoint = <&hdmi0_con>;
+-			};
+-		};
+-		port@2 {
+-			reg = <2>;
+-			dw_hdmi0_snd_in: endpoint {
+-				remote-endpoint = <&rsnd_endpoint1>;
+-			};
+-		};
+-	};
+-};
+-
+-#ifdef SOC_HAS_HDMI1
+-&hdmi1 {
+-	status = "okay";
+-
+-	ports {
+-		port@1 {
+-			reg = <1>;
+-			rcar_dw_hdmi1_out: endpoint {
+-				remote-endpoint = <&hdmi1_con>;
+-			};
+-		};
+-		port@2 {
+-			reg = <2>;
+-			dw_hdmi1_snd_in: endpoint {
+-				remote-endpoint = <&rsnd_endpoint2>;
+-			};
+-		};
+-	};
+-};
+-
+-&hdmi1_con {
+-	remote-endpoint = <&rcar_dw_hdmi1_out>;
+-};
+-#endif /* SOC_HAS_HDMI1 */
+-
+-&hscif1 {
+-	pinctrl-0 = <&hscif1_pins>;
+-	pinctrl-names = "default";
+-
+-	uart-has-rtscts;
+-	/* Please only enable hscif1 or scif1 */
+-	status = "okay";
+-};
+-
+-&hsusb {
+-	dr_mode = "otg";
+-	status = "okay";
+-};
+-
+-&i2c2 {
+-	pinctrl-0 = <&i2c2_pins>;
+-	pinctrl-names = "default";
+-
+-	status = "okay";
+-
+-	clock-frequency = <100000>;
+-
+-	ak4613: codec@10 {
+-		compatible = "asahi-kasei,ak4613";
+-		#sound-dai-cells = <0>;
+-		reg = <0x10>;
+-		clocks = <&rcar_sound 3>;
+-
+-		asahi-kasei,in1-single-end;
+-		asahi-kasei,in2-single-end;
+-		asahi-kasei,out1-single-end;
+-		asahi-kasei,out2-single-end;
+-		asahi-kasei,out3-single-end;
+-		asahi-kasei,out4-single-end;
+-		asahi-kasei,out5-single-end;
+-		asahi-kasei,out6-single-end;
+-
+-		port {
+-			ak4613_endpoint: endpoint {
+-				remote-endpoint = <&rsnd_endpoint0>;
+-			};
+-		};
+-	};
+-
+-	cs2000: clk_multiplier@4f {
+-		#clock-cells = <0>;
+-		compatible = "cirrus,cs2000-cp";
+-		reg = <0x4f>;
+-		clocks = <&audio_clkout>, <&x12_clk>;
+-		clock-names = "clk_in", "ref_clk";
+-
+-		assigned-clocks = <&cs2000>;
+-		assigned-clock-rates = <24576000>; /* 1/1 divide */
+-	};
+-};
+-
+-&i2c4 {
+-	status = "okay";
+-
+-	pca9654: gpio@20 {
+-		compatible = "onnn,pca9654";
+-		reg = <0x20>;
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-	};
+-
+-	video-receiver@70 {
+-		compatible = "adi,adv7482";
+-		reg = <0x70 0x71 0x72 0x73 0x74 0x75
+-		       0x60 0x61 0x62 0x63 0x64 0x65>;
+-		reg-names = "main", "dpll", "cp", "hdmi", "edid", "repeater",
+-			    "infoframe", "cbus", "cec", "sdp", "txa", "txb" ;
+-
+-		interrupt-parent = <&gpio6>;
+-		interrupt-names = "intrq1", "intrq2";
+-		interrupts = <30 IRQ_TYPE_LEVEL_LOW>,
+-			     <31 IRQ_TYPE_LEVEL_LOW>;
+-
+-		ports {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-
+-			port@7 {
+-				reg = <7>;
+-
+-				adv7482_ain7: endpoint {
+-					remote-endpoint = <&cvbs_con>;
+-				};
+-			};
+-
+-			port@8 {
+-				reg = <8>;
+-
+-				adv7482_hdmi: endpoint {
+-					remote-endpoint = <&hdmi_in_con>;
+-				};
+-			};
+-
+-			port@a {
+-				reg = <10>;
+-
+-				adv7482_txa: endpoint {
+-					clock-lanes = <0>;
+-					data-lanes = <1 2 3 4>;
+-					remote-endpoint = <&csi40_in>;
+-				};
+-			};
+-
+-			port@b {
+-				reg = <11>;
+-
+-				adv7482_txb: endpoint {
+-					clock-lanes = <0>;
+-					data-lanes = <1>;
+-					remote-endpoint = <&csi20_in>;
+-				};
+-			};
+-		};
+-	};
+-
+-	csa_vdd: adc@7c {
+-		compatible = "maxim,max9611";
+-		reg = <0x7c>;
+-
+-		shunt-resistor-micro-ohms = <5000>;
+-	};
+-
+-	csa_dvfs: adc@7f {
+-		compatible = "maxim,max9611";
+-		reg = <0x7f>;
+-
+-		shunt-resistor-micro-ohms = <5000>;
+-	};
+-};
+-
+-&i2c_dvfs {
+-	status = "okay";
+-
+-	clock-frequency = <400000>;
+-
+-	pmic: pmic@30 {
+-		pinctrl-0 = <&irq0_pins>;
+-		pinctrl-names = "default";
+-
+-		compatible = "rohm,bd9571mwv";
+-		reg = <0x30>;
+-		interrupt-parent = <&intc_ex>;
+-		interrupts = <0 IRQ_TYPE_LEVEL_LOW>;
+-		interrupt-controller;
+-		#interrupt-cells = <2>;
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-		rohm,ddr-backup-power = <0xf>;
+-		rohm,rstbmode-level;
+-
+-		regulators {
+-			dvfs: dvfs {
+-				regulator-name = "dvfs";
+-				regulator-min-microvolt = <750000>;
+-				regulator-max-microvolt = <1030000>;
+-				regulator-boot-on;
+-				regulator-always-on;
+-			};
+-		};
+-	};
+-
+-	eeprom@50 {
+-		compatible = "rohm,br24t01", "atmel,24c01";
+-		reg = <0x50>;
+-		pagesize = <8>;
+-	};
+-};
+-
+-&ohci0 {
+-	dr_mode = "otg";
+-	status = "okay";
+-};
+-
+-&ohci1 {
+-	status = "okay";
+-};
+-
+-&pcie_bus_clk {
+-	clock-frequency = <100000000>;
+-};
+-
+-&pciec0 {
+-	status = "okay";
+-};
+-
+-&pciec1 {
+-	status = "okay";
+-};
+-
+-&pfc {
+-	pinctrl-0 = <&scif_clk_pins>;
+-	pinctrl-names = "default";
+-
+-	avb_pins: avb {
+-		mux {
+-			groups = "avb_link", "avb_mdio", "avb_mii";
+-			function = "avb";
+-		};
+-
+-		pins_mdio {
+-			groups = "avb_mdio";
+-			drive-strength = <24>;
+-		};
+-
+-		pins_mii_tx {
+-			pins = "PIN_AVB_TX_CTL", "PIN_AVB_TXC", "PIN_AVB_TD0",
+-			       "PIN_AVB_TD1", "PIN_AVB_TD2", "PIN_AVB_TD3";
+-			drive-strength = <12>;
+-		};
+-	};
+-
+-	du_pins: du {
+-		groups = "du_rgb888", "du_sync", "du_oddf", "du_clk_out_0";
+-		function = "du";
+-	};
+-
+-	hscif1_pins: hscif1 {
+-		groups = "hscif1_data_a", "hscif1_ctrl_a";
+-		function = "hscif1";
+-	};
+-
+-	i2c2_pins: i2c2 {
+-		groups = "i2c2_a";
+-		function = "i2c2";
+-	};
+-
+-	irq0_pins: irq0 {
+-		groups = "intc_ex_irq0";
+-		function = "intc_ex";
+-	};
+-
+-	keys_pins: keys {
+-		pins = "GP_5_17", "GP_5_20", "GP_5_22";
+-		bias-pull-up;
+-	};
+-
+-	pwm1_pins: pwm1 {
+-		groups = "pwm1_a";
+-		function = "pwm1";
+-	};
+-
+-	scif1_pins: scif1 {
+-		groups = "scif1_data_a", "scif1_ctrl";
+-		function = "scif1";
+-	};
+-
+-	scif2_pins: scif2 {
+-		groups = "scif2_data_a";
+-		function = "scif2";
+-	};
+-
+-	scif_clk_pins: scif_clk {
+-		groups = "scif_clk_a";
+-		function = "scif_clk";
+-	};
+-
+-	sdhi0_pins: sd0 {
+-		groups = "sdhi0_data4", "sdhi0_ctrl";
+-		function = "sdhi0";
+-		power-source = <3300>;
+-	};
+-
+-	sdhi0_pins_uhs: sd0_uhs {
+-		groups = "sdhi0_data4", "sdhi0_ctrl";
+-		function = "sdhi0";
+-		power-source = <1800>;
+-	};
+-
+-	sdhi2_pins: sd2 {
+-		groups = "sdhi2_data8", "sdhi2_ctrl", "sdhi2_ds";
+-		function = "sdhi2";
+-		power-source = <1800>;
+-	};
+-
+-	sdhi3_pins: sd3 {
+-		groups = "sdhi3_data4", "sdhi3_ctrl";
+-		function = "sdhi3";
+-		power-source = <3300>;
+-	};
+-
+-	sdhi3_pins_uhs: sd3_uhs {
+-		groups = "sdhi3_data4", "sdhi3_ctrl";
+-		function = "sdhi3";
+-		power-source = <1800>;
+-	};
+-
+-	sound_pins: sound {
+-		groups = "ssi01239_ctrl", "ssi0_data", "ssi1_data_a";
+-		function = "ssi";
+-	};
+-
+-	sound_clk_pins: sound_clk {
+-		groups = "audio_clk_a_a", "audio_clk_b_a", "audio_clk_c_a",
+-			 "audio_clkout_a", "audio_clkout3_a";
+-		function = "audio_clk";
+-	};
+-
+-	usb0_pins: usb0 {
+-		groups = "usb0";
+-		function = "usb0";
+-	};
+-
+-	usb1_pins: usb1 {
+-		mux {
+-			groups = "usb1";
+-			function = "usb1";
+-		};
+-
+-		ovc {
+-			pins = "GP_6_27";
+-			bias-pull-up;
+-		};
+-
+-		pwen {
+-			pins = "GP_6_26";
+-			bias-pull-down;
+-		};
+-	};
+-
+-	usb30_pins: usb30 {
+-		groups = "usb30";
+-		function = "usb30";
+-	};
+-};
+-
+-&pwm1 {
+-	pinctrl-0 = <&pwm1_pins>;
+-	pinctrl-names = "default";
+-
+-	status = "okay";
+-};
+-
+-&rcar_sound {
+-	pinctrl-0 = <&sound_pins>, <&sound_clk_pins>;
+-	pinctrl-names = "default";
+-
+-	/* audio_clkout0/1/2/3 */
+-	#clock-cells = <1>;
+-	clock-frequency = <12288000 11289600>;
+-
+-	status = "okay";
+-
+-	/* update <audio_clk_b> to <cs2000> */
+-	clocks = <&cpg CPG_MOD 1005>,
+-		 <&cpg CPG_MOD 1006>, <&cpg CPG_MOD 1007>,
+-		 <&cpg CPG_MOD 1008>, <&cpg CPG_MOD 1009>,
+-		 <&cpg CPG_MOD 1010>, <&cpg CPG_MOD 1011>,
+-		 <&cpg CPG_MOD 1012>, <&cpg CPG_MOD 1013>,
+-		 <&cpg CPG_MOD 1014>, <&cpg CPG_MOD 1015>,
+-		 <&cpg CPG_MOD 1022>, <&cpg CPG_MOD 1023>,
+-		 <&cpg CPG_MOD 1024>, <&cpg CPG_MOD 1025>,
+-		 <&cpg CPG_MOD 1026>, <&cpg CPG_MOD 1027>,
+-		 <&cpg CPG_MOD 1028>, <&cpg CPG_MOD 1029>,
+-		 <&cpg CPG_MOD 1030>, <&cpg CPG_MOD 1031>,
+-		 <&cpg CPG_MOD 1020>, <&cpg CPG_MOD 1021>,
+-		 <&cpg CPG_MOD 1020>, <&cpg CPG_MOD 1021>,
+-		 <&cpg CPG_MOD 1019>, <&cpg CPG_MOD 1018>,
+-		 <&audio_clk_a>, <&cs2000>,
+-		 <&audio_clk_c>,
+-		 <&cpg CPG_CORE CPG_AUDIO_CLK_I>;
+-
+-	ports {
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		rsnd_port0: port@0 {
+-			reg = <0>;
+-			rsnd_endpoint0: endpoint {
+-				remote-endpoint = <&ak4613_endpoint>;
+-
+-				dai-format = "left_j";
+-				bitclock-master = <&rsnd_endpoint0>;
+-				frame-master = <&rsnd_endpoint0>;
+-
+-				playback = <&ssi0>, <&src0>, <&dvc0>;
+-				capture = <&ssi1>, <&src1>, <&dvc1>;
+-			};
+-		};
+-
+-		rsnd_port1: port@1 {
+-			reg = <1>;
+-			rsnd_endpoint1: endpoint {
+-				remote-endpoint = <&dw_hdmi0_snd_in>;
+-
+-				dai-format = "i2s";
+-				bitclock-master = <&rsnd_endpoint1>;
+-				frame-master = <&rsnd_endpoint1>;
+-
+-				playback = <&ssi2>;
+-			};
+-		};
+-
+-#ifdef SOC_HAS_HDMI1
+-		rsnd_port2: port@2 {
+-			reg = <2>;
+-			rsnd_endpoint2: endpoint {
+-				remote-endpoint = <&dw_hdmi1_snd_in>;
+-
+-				dai-format = "i2s";
+-				bitclock-master = <&rsnd_endpoint2>;
+-				frame-master = <&rsnd_endpoint2>;
+-
+-				playback = <&ssi3>;
+-			};
+-		};
+-#endif /* SOC_HAS_HDMI1 */
+-	};
+-};
+-
+-&rpc {
+-	/* Left disabled.  To be enabled by firmware when unlocked. */
+-
+-	flash@0 {
+-		compatible = "cypress,hyperflash", "cfi-flash";
+-		reg = <0>;
+-
+-		partitions {
+-			compatible = "fixed-partitions";
+-			#address-cells = <1>;
+-			#size-cells = <1>;
+-
+-			bootparam@0 {
+-				reg = <0x00000000 0x040000>;
+-				read-only;
+-			};
+-			bl2@40000 {
+-				reg = <0x00040000 0x140000>;
+-				read-only;
+-			};
+-			cert_header_sa6@180000 {
+-				reg = <0x00180000 0x040000>;
+-				read-only;
+-			};
+-			bl31@1c0000 {
+-				reg = <0x001c0000 0x040000>;
+-				read-only;
+-			};
+-			tee@200000 {
+-				reg = <0x00200000 0x440000>;
+-				read-only;
+-			};
+-			uboot@640000 {
+-				reg = <0x00640000 0x100000>;
+-				read-only;
+-			};
+-			dtb@740000 {
+-				reg = <0x00740000 0x080000>;
+-			};
+-			kernel@7c0000 {
+-				reg = <0x007c0000 0x1400000>;
+-			};
+-			user@1bc0000 {
+-				reg = <0x01bc0000 0x2440000>;
+-			};
+-		};
+-	};
+-};
+-
+-&rwdt {
+-	timeout-sec = <60>;
+-	status = "okay";
+-};
+-
+-#ifdef SOC_HAS_SATA
+-&sata {
+-	status = "okay";
+-};
+-#endif /* SOC_HAS_SATA */
+-
+-&scif1 {
+-	pinctrl-0 = <&scif1_pins>;
+-	pinctrl-names = "default";
+-
+-	uart-has-rtscts;
+-	/* Please only enable hscif1 or scif1 */
+-	/* status = "okay"; */
+-};
+-
+-&scif2 {
+-	pinctrl-0 = <&scif2_pins>;
+-	pinctrl-names = "default";
+-
+-	status = "okay";
+-};
+-
+-&scif_clk {
+-	clock-frequency = <14745600>;
+-};
+-
+-&sdhi0 {
+-	pinctrl-0 = <&sdhi0_pins>;
+-	pinctrl-1 = <&sdhi0_pins_uhs>;
+-	pinctrl-names = "default", "state_uhs";
+-
+-	vmmc-supply = <&vcc_sdhi0>;
+-	vqmmc-supply = <&vccq_sdhi0>;
+-	cd-gpios = <&gpio3 12 GPIO_ACTIVE_LOW>;
+-	wp-gpios = <&gpio3 13 GPIO_ACTIVE_HIGH>;
+-	bus-width = <4>;
+-	sd-uhs-sdr50;
+-	sd-uhs-sdr104;
+-	status = "okay";
+-};
+-
+-&sdhi2 {
+-	/* used for on-board 8bit eMMC */
+-	pinctrl-0 = <&sdhi2_pins>;
+-	pinctrl-1 = <&sdhi2_pins>;
+-	pinctrl-names = "default", "state_uhs";
+-
+-	vmmc-supply = <&reg_3p3v>;
+-	vqmmc-supply = <&reg_1p8v>;
+-	bus-width = <8>;
+-	mmc-hs200-1_8v;
+-	mmc-hs400-1_8v;
+-	no-sd;
+-	no-sdio;
+-	non-removable;
+-	fixed-emmc-driver-type = <1>;
+-	full-pwr-cycle-in-suspend;
+-	status = "okay";
+-};
+-
+-&sdhi3 {
+-	pinctrl-0 = <&sdhi3_pins>;
+-	pinctrl-1 = <&sdhi3_pins_uhs>;
+-	pinctrl-names = "default", "state_uhs";
+-
+-	vmmc-supply = <&vcc_sdhi3>;
+-	vqmmc-supply = <&vccq_sdhi3>;
+-	cd-gpios = <&gpio4 15 GPIO_ACTIVE_LOW>;
+-	wp-gpios = <&gpio4 16 GPIO_ACTIVE_HIGH>;
+-	bus-width = <4>;
+-	sd-uhs-sdr50;
+-	sd-uhs-sdr104;
+-	status = "okay";
+-};
+-
+-&ssi1 {
+-	shared-pin;
+-};
+-
+-&usb_extal_clk {
+-	clock-frequency = <50000000>;
+-};
+-
+-&usb2_phy0 {
+-	pinctrl-0 = <&usb0_pins>;
+-	pinctrl-names = "default";
+-
+-	vbus-supply = <&vbus0_usb2>;
+-	status = "okay";
+-};
+-
+-&usb2_phy1 {
+-	pinctrl-0 = <&usb1_pins>;
+-	pinctrl-names = "default";
+-
+-	status = "okay";
+-};
+-
+-&usb3_peri0 {
+-	phys = <&usb3_phy0>;
+-	phy-names = "usb";
+-
+-	companion = <&xhci0>;
+-
+-	status = "okay";
+-};
+-
+-&usb3_phy0 {
+-	status = "okay";
+-};
+-
+-&usb3s0_clk {
+-	clock-frequency = <100000000>;
+-};
+-
+-&vin0 {
+-	status = "okay";
+-};
+-
+-&vin1 {
+-	status = "okay";
+-};
+-
+-&vin2 {
+-	status = "okay";
+-};
+-
+-&vin3 {
+-	status = "okay";
+-};
+-
+-&vin4 {
+-	status = "okay";
+-};
+-
+-&vin5 {
+-	status = "okay";
+-};
+-
+-&vin6 {
+-	status = "okay";
+-};
+-
+-&vin7 {
+-	status = "okay";
+-};
+-
+-&xhci0 {
+-	pinctrl-0 = <&usb30_pins>;
+-	pinctrl-names = "default";
+-
+-	status = "okay";
+-};
+-
+-#ifdef SOC_HAS_USB2_CH2
+-&ehci2 {
+-	status = "okay";
+-};
+-
+-&ohci2 {
+-	status = "okay";
+-};
+-
+-&pfc {
+-	usb2_pins: usb2 {
+-		groups = "usb2";
+-		function = "usb2";
+-	};
+-};
+-
+-&usb2_phy2 {
+-	pinctrl-0 = <&usb2_pins>;
+-	pinctrl-names = "default";
+-
+-	status = "okay";
+-};
+-#endif /* SOC_HAS_USB2_CH2 */
+diff --git a/arch/arm/dts/salvator-x.dtsi b/arch/arm/dts/salvator-x.dtsi
+deleted file mode 100644
+index ddee50e6463..00000000000
+--- a/arch/arm/dts/salvator-x.dtsi
++++ /dev/null
+@@ -1,29 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-/*
+- * Device Tree Source for the Salvator-X board
+- *
+- * Copyright (C) 2015-2016 Renesas Electronics Corp.
+- */
+-
+-#include "salvator-common.dtsi"
+-
+-/ {
+-	model = "Renesas Salvator-X board";
+-	compatible = "renesas,salvator-x";
+-};
+-
+-&extal_clk {
+-	clock-frequency = <16666666>;
+-};
+-
+-&i2c4 {
+-	clock-frequency = <400000>;
+-
+-	versaclock5: clock-generator@6a {
+-		compatible = "idt,5p49v5923";
+-		reg = <0x6a>;
+-		#clock-cells = <1>;
+-		clocks = <&x23_clk>;
+-		clock-names = "xin";
+-	};
+-};
+diff --git a/arch/arm/dts/salvator-xs.dtsi b/arch/arm/dts/salvator-xs.dtsi
+deleted file mode 100644
+index 08b925624e1..00000000000
+--- a/arch/arm/dts/salvator-xs.dtsi
++++ /dev/null
+@@ -1,85 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-/*
+- * Device Tree Source for the Salvator-X 2nd version board
+- *
+- * Copyright (C) 2015-2017 Renesas Electronics Corp.
+- */
+-
+-#include "salvator-common.dtsi"
+-
+-/ {
+-	model = "Renesas Salvator-X 2nd version board";
+-	compatible = "renesas,salvator-xs";
+-};
+-
+-&extal_clk {
+-	clock-frequency = <16640000>;
+-};
+-
+-&i2c4 {
+-	clock-frequency = <400000>;
+-
+-	versaclock6: clock-generator@6a {
+-		compatible = "idt,5p49v6901";
+-		reg = <0x6a>;
+-		#clock-cells = <1>;
+-		clocks = <&x23_clk>;
+-		clock-names = "xin";
+-	};
+-};
+-
+-#ifdef SOC_HAS_SATA
+-&pca9654 {
+-	pcie-sata-switch-hog {
+-		gpio-hog;
+-		gpios = <7 GPIO_ACTIVE_HIGH>;
+-		output-low; /* enable SATA by default */
+-		line-name = "PCIE/SATA switch";
+-	};
+-};
+-
+-/* SW12-7 must be set 'Off' (MD12 set to 1) which is not the default! */
+-#endif /* SOC_HAS_SATA */
+-
+-#ifdef SOC_HAS_USB2_CH3
+-&ehci3 {
+-	dr_mode = "otg";
+-	status = "okay";
+-};
+-
+-&hsusb3 {
+-	dr_mode = "otg";
+-	status = "okay";
+-};
+-
+-&ohci3 {
+-	dr_mode = "otg";
+-	status = "okay";
+-};
+-
+-&pfc {
+-	/*
+-	 * - On Salvator-X[S], GP6_3[01] are connected to ADV7482 as irq pins
+-	 *   (when SW31 is the default setting on Salvator-XS).
+-	 * - If SW31 is the default setting, you cannot use USB2.0 ch3 on
+-	 *   r8a77951 with Salvator-XS.
+-	 *   Hence the SW31 setting must be changed like 2) below.
+-	 *   1) Default setting of SW31: ON-ON-OFF-OFF-OFF-OFF:
+-	 *	- Connect GP6_3[01] to ADV7842.
+-	 *   2) Changed setting of SW31: OFF-OFF-ON-ON-ON-ON:
+-	 *	- Connect GP6_3[01] to BD082065 (USB2.0 ch3's host power).
+-	 *	- Connect GP6_{04,21} to ADV7842.
+-	 */
+-	usb2_ch3_pins: usb2_ch3 {
+-		groups = "usb2_ch3";
+-		function = "usb2_ch3";
+-	};
+-};
+-
+-&usb2_phy3 {
+-	pinctrl-0 = <&usb2_ch3_pins>;
+-	pinctrl-names = "default";
+-
+-	status = "okay";
+-};
+-#endif /* SOC_HAS_USB2_CH3 */
+diff --git a/arch/arm/dts/ulcb-audio-graph-card.dtsi b/arch/arm/dts/ulcb-audio-graph-card.dtsi
+deleted file mode 100644
+index 3be54df645e..00000000000
+--- a/arch/arm/dts/ulcb-audio-graph-card.dtsi
++++ /dev/null
+@@ -1,85 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-/*
+- * Device Tree for ULCB + Audio Graph Card
+- *
+- * Copyright (C) 2022 Renesas Electronics Corp.
+- */
+-
+-/*
+- *	(A) CPU0 <-----> ak4613
+- *	(B) CPU1  -----> HDMI
+- *
+- *	(A) aplay   -D plughw:0,0 xxx.wav
+- *	(B) aplay   -D plughw:0,1 xxx.wav
+- *
+- *	(A) arecord -D plughw:0,0 xxx.wav
+- */
+-
+-/ {
+-	sound_card: sound {
+-		compatible = "audio-graph-card";
+-		label = "rcar-sound";
+-
+-		dais = <&rsnd_port0 /* (A) CPU0 <-> ak4613 */
+-			&rsnd_port1 /* (B) CPU1  -> HDMI   */
+-		>;
+-	};
+-};
+-
+-&ak4613 {
+-	#sound-dai-cells = <0>;
+-
+-	port {
+-		/*
+-		 * (A) CPU0 <-> ak4613
+-		 */
+-		ak4613_endpoint: endpoint {
+-			remote-endpoint = <&rsnd_for_ak4613>;
+-		};
+-	};
+-};
+-
+-&hdmi0 {
+-	ports {
+-		port@2 {
+-			/*
+-			 * (B) CPU1 -> HDMI
+-			 */
+-			dw_hdmi0_snd_in: endpoint {
+-				remote-endpoint = <&rsnd_for_hdmi>;
+-			};
+-		};
+-	};
+-};
+-
+-&rcar_sound {
+-	ports {
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		rsnd_port0: port@0 {
+-			/*
+-			 * (A) CPU0 <-> ak4613
+-			 */
+-			reg = <0>;
+-			rsnd_for_ak4613: endpoint {
+-				remote-endpoint = <&ak4613_endpoint>;
+-				bitclock-master;
+-				frame-master;
+-				playback = <&ssi0>, <&src0>, <&dvc0>;
+-				capture  = <&ssi1>, <&src1>, <&dvc1>;
+-			};
+-		};
+-		rsnd_port1: port@1 {
+-			/*
+-			 * (B) CPU1 -> HDMI
+-			 */
+-			reg = <1>;
+-			rsnd_for_hdmi: endpoint {
+-				remote-endpoint = <&dw_hdmi0_snd_in>;
+-				bitclock-master;
+-				frame-master;
+-				playback = <&ssi2>;
+-			};
+-		};
+-	};
+-};
+diff --git a/arch/arm/dts/ulcb-audio-graph-card2.dtsi b/arch/arm/dts/ulcb-audio-graph-card2.dtsi
+deleted file mode 100644
+index 5ebec123584..00000000000
+--- a/arch/arm/dts/ulcb-audio-graph-card2.dtsi
++++ /dev/null
+@@ -1,26 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-/*
+- * Device Tree for ULCB + Audio Graph Card2
+- *
+- * Copyright (C) 2022 Renesas Electronics Corp.
+- */
+-
+-/*
+- *	(A) CPU0 <----> ak4613
+- *	(B) CPU1  ----> HDMI
+- *
+- *	(A) aplay   -D plughw:0,0 xxx.wav
+- *	(B) aplay   -D plughw:0,1 xxx.wav
+- *
+- *	(A) arecord -D plughw:0,0 xxx.wav
+- */
+-#include "ulcb-audio-graph-card.dtsi"
+-
+-&sound_card {
+-	compatible = "audio-graph-card2";
+-
+-	/delete-property/ dais;
+-	links = <&rsnd_port0	/* (A) CPU0 <-> ak4613 */
+-		 &rsnd_port1	/* (B) CPU1  -> HDMI   */
+-		>;
+-};
+diff --git a/arch/arm/dts/ulcb.dtsi b/arch/arm/dts/ulcb.dtsi
+deleted file mode 100644
+index 0be2716659e..00000000000
+--- a/arch/arm/dts/ulcb.dtsi
++++ /dev/null
+@@ -1,509 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-/*
+- * Device Tree Source for the R-Car Gen3 ULCB board
+- *
+- * Copyright (C) 2016 Renesas Electronics Corp.
+- * Copyright (C) 2016 Cogent Embedded, Inc.
+- */
+-
+-#include <dt-bindings/gpio/gpio.h>
+-#include <dt-bindings/input/input.h>
+-
+-/ {
+-	model = "Renesas R-Car Gen3 ULCB board";
+-
+-	aliases {
+-		i2c0 = &i2c0;
+-		i2c1 = &i2c1;
+-		i2c2 = &i2c2;
+-		i2c3 = &i2c3;
+-		i2c4 = &i2c4;
+-		i2c5 = &i2c5;
+-		i2c6 = &i2c6;
+-		i2c7 = &i2c_dvfs;
+-		serial0 = &scif2;
+-		ethernet0 = &avb;
+-		mmc0 = &sdhi2;
+-		mmc1 = &sdhi0;
+-	};
+-
+-	chosen {
+-		bootargs = "ignore_loglevel rw root=/dev/nfs ip=on";
+-		stdout-path = "serial0:115200n8";
+-	};
+-
+-	audio_clkout: audio-clkout {
+-		/*
+-		 * This is same as <&rcar_sound 0>
+-		 * but needed to avoid cs2000/rcar_sound probe dead-lock
+-		 */
+-		compatible = "fixed-clock";
+-		#clock-cells = <0>;
+-		clock-frequency = <12288000>;
+-	};
+-
+-	hdmi0-out {
+-		compatible = "hdmi-connector";
+-		type = "a";
+-
+-		port {
+-			hdmi0_con: endpoint {
+-				remote-endpoint = <&rcar_dw_hdmi0_out>;
+-			};
+-		};
+-	};
+-
+-	keyboard {
+-		compatible = "gpio-keys";
+-
+-		key-1 {
+-			linux,code = <KEY_1>;
+-			label = "SW3";
+-			wakeup-source;
+-			debounce-interval = <20>;
+-			gpios = <&gpio6 11 GPIO_ACTIVE_LOW>;
+-		};
+-	};
+-
+-	leds {
+-		compatible = "gpio-leds";
+-
+-		led5 {
+-			gpios = <&gpio6 12 GPIO_ACTIVE_HIGH>;
+-		};
+-		led6 {
+-			gpios = <&gpio6 13 GPIO_ACTIVE_HIGH>;
+-		};
+-	};
+-
+-	reg_1p8v: regulator-1p8v {
+-		compatible = "regulator-fixed";
+-		regulator-name = "fixed-1.8V";
+-		regulator-min-microvolt = <1800000>;
+-		regulator-max-microvolt = <1800000>;
+-		regulator-boot-on;
+-		regulator-always-on;
+-	};
+-
+-	reg_3p3v: regulator-3p3v {
+-		compatible = "regulator-fixed";
+-		regulator-name = "fixed-3.3V";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		regulator-boot-on;
+-		regulator-always-on;
+-	};
+-
+-	vcc_sdhi0: regulator-vcc-sdhi0 {
+-		compatible = "regulator-fixed";
+-
+-		regulator-name = "SDHI0 Vcc";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-
+-		gpio = <&gpio5 2 GPIO_ACTIVE_HIGH>;
+-		enable-active-high;
+-	};
+-
+-	vccq_sdhi0: regulator-vccq-sdhi0 {
+-		compatible = "regulator-gpio";
+-
+-		regulator-name = "SDHI0 VccQ";
+-		regulator-min-microvolt = <1800000>;
+-		regulator-max-microvolt = <3300000>;
+-
+-		gpios = <&gpio5 1 GPIO_ACTIVE_HIGH>;
+-		gpios-states = <1>;
+-		states = <3300000 1>, <1800000 0>;
+-	};
+-
+-	x12_clk: x12 {
+-		compatible = "fixed-clock";
+-		#clock-cells = <0>;
+-		clock-frequency = <24576000>;
+-	};
+-
+-	x23_clk: x23-clock {
+-		compatible = "fixed-clock";
+-		#clock-cells = <0>;
+-		clock-frequency = <25000000>;
+-	};
+-};
+-
+-&a57_0 {
+-	cpu-supply = <&dvfs>;
+-};
+-
+-&audio_clk_a {
+-	clock-frequency = <22579200>;
+-};
+-
+-&avb {
+-	pinctrl-0 = <&avb_pins>;
+-	pinctrl-names = "default";
+-	phy-handle = <&phy0>;
+-	tx-internal-delay-ps = <2000>;
+-	status = "okay";
+-
+-	phy0: ethernet-phy@0 {
+-		compatible = "ethernet-phy-id0022.1622",
+-			     "ethernet-phy-ieee802.3-c22";
+-		rxc-skew-ps = <1500>;
+-		reg = <0>;
+-		interrupt-parent = <&gpio2>;
+-		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
+-		reset-gpios = <&gpio2 10 GPIO_ACTIVE_LOW>;
+-	};
+-};
+-
+-&du {
+-	status = "okay";
+-};
+-
+-&ehci1 {
+-	status = "okay";
+-};
+-
+-&extal_clk {
+-	clock-frequency = <16666666>;
+-};
+-
+-&extalr_clk {
+-	clock-frequency = <32768>;
+-};
+-
+-&hdmi0 {
+-	status = "okay";
+-
+-	ports {
+-		port@1 {
+-			reg = <1>;
+-			rcar_dw_hdmi0_out: endpoint {
+-				remote-endpoint = <&hdmi0_con>;
+-			};
+-		};
+-		port@2 {
+-			reg = <2>;
+-		};
+-	};
+-};
+-
+-&i2c2 {
+-	pinctrl-0 = <&i2c2_pins>;
+-	pinctrl-names = "default";
+-
+-	status = "okay";
+-
+-	clock-frequency = <100000>;
+-
+-	ak4613: codec@10 {
+-		compatible = "asahi-kasei,ak4613";
+-		reg = <0x10>;
+-		clocks = <&rcar_sound 3>;
+-
+-		asahi-kasei,in1-single-end;
+-		asahi-kasei,in2-single-end;
+-		asahi-kasei,out1-single-end;
+-		asahi-kasei,out2-single-end;
+-		asahi-kasei,out3-single-end;
+-		asahi-kasei,out4-single-end;
+-		asahi-kasei,out5-single-end;
+-		asahi-kasei,out6-single-end;
+-	};
+-
+-	cs2000: clk-multiplier@4f {
+-		#clock-cells = <0>;
+-		compatible = "cirrus,cs2000-cp";
+-		reg = <0x4f>;
+-		clocks = <&audio_clkout>, <&x12_clk>;
+-		clock-names = "clk_in", "ref_clk";
+-
+-		assigned-clocks = <&cs2000>;
+-		assigned-clock-rates = <24576000>; /* 1/1 divide */
+-	};
+-};
+-
+-&i2c4 {
+-	status = "okay";
+-
+-	clock-frequency = <400000>;
+-
+-	versaclock5: clock-generator@6a {
+-		compatible = "idt,5p49v5925";
+-		reg = <0x6a>;
+-		#clock-cells = <1>;
+-		clocks = <&x23_clk>;
+-		clock-names = "xin";
+-	};
+-};
+-
+-&i2c_dvfs {
+-	status = "okay";
+-
+-	clock-frequency = <400000>;
+-
+-	pmic: pmic@30 {
+-		pinctrl-0 = <&irq0_pins>;
+-		pinctrl-names = "default";
+-
+-		compatible = "rohm,bd9571mwv";
+-		reg = <0x30>;
+-		interrupt-parent = <&intc_ex>;
+-		interrupts = <0 IRQ_TYPE_LEVEL_LOW>;
+-		interrupt-controller;
+-		#interrupt-cells = <2>;
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-		rohm,ddr-backup-power = <0xf>;
+-		rohm,rstbmode-pulse;
+-
+-		regulators {
+-			dvfs: dvfs {
+-				regulator-name = "dvfs";
+-				regulator-min-microvolt = <750000>;
+-				regulator-max-microvolt = <1030000>;
+-				regulator-boot-on;
+-				regulator-always-on;
+-			};
+-		};
+-	};
+-
+-	eeprom@50 {
+-		compatible = "rohm,br24t01", "atmel,24c01";
+-		reg = <0x50>;
+-		pagesize = <8>;
+-	};
+-};
+-
+-&ohci1 {
+-	status = "okay";
+-};
+-
+-&pfc {
+-	pinctrl-0 = <&scif_clk_pins>;
+-	pinctrl-names = "default";
+-
+-	avb_pins: avb {
+-		mux {
+-			groups = "avb_link", "avb_mdio", "avb_mii";
+-			function = "avb";
+-		};
+-
+-		pins_mdio {
+-			groups = "avb_mdio";
+-			drive-strength = <24>;
+-		};
+-
+-		pins_mii_tx {
+-			pins = "PIN_AVB_TX_CTL", "PIN_AVB_TXC", "PIN_AVB_TD0",
+-			       "PIN_AVB_TD1", "PIN_AVB_TD2", "PIN_AVB_TD3";
+-			drive-strength = <12>;
+-		};
+-	};
+-
+-	i2c2_pins: i2c2 {
+-		groups = "i2c2_a";
+-		function = "i2c2";
+-	};
+-
+-	irq0_pins: irq0 {
+-		groups = "intc_ex_irq0";
+-		function = "intc_ex";
+-	};
+-
+-	scif2_pins: scif2 {
+-		groups = "scif2_data_a";
+-		function = "scif2";
+-	};
+-
+-	scif_clk_pins: scif_clk {
+-		groups = "scif_clk_a";
+-		function = "scif_clk";
+-	};
+-
+-	sdhi0_pins: sd0 {
+-		groups = "sdhi0_data4", "sdhi0_ctrl";
+-		function = "sdhi0";
+-		power-source = <3300>;
+-	};
+-
+-	sdhi0_pins_uhs: sd0_uhs {
+-		groups = "sdhi0_data4", "sdhi0_ctrl";
+-		function = "sdhi0";
+-		power-source = <1800>;
+-	};
+-
+-	sdhi2_pins: sd2 {
+-		groups = "sdhi2_data8", "sdhi2_ctrl", "sdhi2_ds";
+-		function = "sdhi2";
+-		power-source = <1800>;
+-	};
+-
+-	sound_pins: sound {
+-		groups = "ssi01239_ctrl", "ssi0_data", "ssi1_data_a";
+-		function = "ssi";
+-	};
+-
+-	sound_clk_pins: sound-clk {
+-		groups = "audio_clk_a_a", "audio_clk_b_a", "audio_clk_c_a",
+-			 "audio_clkout_a", "audio_clkout3_a";
+-		function = "audio_clk";
+-	};
+-
+-	usb1_pins: usb1 {
+-		groups = "usb1";
+-		function = "usb1";
+-	};
+-};
+-
+-&rcar_sound {
+-	pinctrl-0 = <&sound_pins>, <&sound_clk_pins>;
+-	pinctrl-names = "default";
+-
+-	/* audio_clkout0/1/2/3 */
+-	#clock-cells = <1>;
+-	clock-frequency = <12288000 11289600>;
+-
+-	status = "okay";
+-
+-	/* update <audio_clk_b> to <cs2000> */
+-	clocks = <&cpg CPG_MOD 1005>,
+-		 <&cpg CPG_MOD 1006>, <&cpg CPG_MOD 1007>,
+-		 <&cpg CPG_MOD 1008>, <&cpg CPG_MOD 1009>,
+-		 <&cpg CPG_MOD 1010>, <&cpg CPG_MOD 1011>,
+-		 <&cpg CPG_MOD 1012>, <&cpg CPG_MOD 1013>,
+-		 <&cpg CPG_MOD 1014>, <&cpg CPG_MOD 1015>,
+-		 <&cpg CPG_MOD 1022>, <&cpg CPG_MOD 1023>,
+-		 <&cpg CPG_MOD 1024>, <&cpg CPG_MOD 1025>,
+-		 <&cpg CPG_MOD 1026>, <&cpg CPG_MOD 1027>,
+-		 <&cpg CPG_MOD 1028>, <&cpg CPG_MOD 1029>,
+-		 <&cpg CPG_MOD 1030>, <&cpg CPG_MOD 1031>,
+-		 <&cpg CPG_MOD 1020>, <&cpg CPG_MOD 1021>,
+-		 <&cpg CPG_MOD 1020>, <&cpg CPG_MOD 1021>,
+-		 <&cpg CPG_MOD 1019>, <&cpg CPG_MOD 1018>,
+-		 <&audio_clk_a>, <&cs2000>,
+-		 <&audio_clk_c>,
+-		 <&cpg CPG_CORE CPG_AUDIO_CLK_I>;
+-};
+-
+-&rpc {
+-	/* Left disabled.  To be enabled by firmware when unlocked. */
+-
+-	flash@0 {
+-		compatible = "cypress,hyperflash", "cfi-flash";
+-		reg = <0>;
+-
+-		partitions {
+-			compatible = "fixed-partitions";
+-			#address-cells = <1>;
+-			#size-cells = <1>;
+-
+-			bootparam@0 {
+-				reg = <0x00000000 0x040000>;
+-				read-only;
+-			};
+-			bl2@40000 {
+-				reg = <0x00040000 0x140000>;
+-				read-only;
+-			};
+-			cert_header_sa6@180000 {
+-				reg = <0x00180000 0x040000>;
+-				read-only;
+-			};
+-			bl31@1c0000 {
+-				reg = <0x001c0000 0x040000>;
+-				read-only;
+-			};
+-			tee@200000 {
+-				reg = <0x00200000 0x440000>;
+-				read-only;
+-			};
+-			uboot@640000 {
+-				reg = <0x00640000 0x100000>;
+-				read-only;
+-			};
+-			dtb@740000 {
+-				reg = <0x00740000 0x080000>;
+-			};
+-			kernel@7c0000 {
+-				reg = <0x007c0000 0x1400000>;
+-			};
+-			user@1bc0000 {
+-				reg = <0x01bc0000 0x2440000>;
+-			};
+-		};
+-	};
+-};
+-
+-&rwdt {
+-	timeout-sec = <60>;
+-	status = "okay";
+-};
+-
+-&scif2 {
+-	pinctrl-0 = <&scif2_pins>;
+-	pinctrl-names = "default";
+-
+-	status = "okay";
+-};
+-
+-&scif_clk {
+-	clock-frequency = <14745600>;
+-};
+-
+-&sdhi0 {
+-	pinctrl-0 = <&sdhi0_pins>;
+-	pinctrl-1 = <&sdhi0_pins_uhs>;
+-	pinctrl-names = "default", "state_uhs";
+-
+-	vmmc-supply = <&vcc_sdhi0>;
+-	vqmmc-supply = <&vccq_sdhi0>;
+-	cd-gpios = <&gpio3 12 GPIO_ACTIVE_LOW>;
+-	bus-width = <4>;
+-	sd-uhs-sdr50;
+-	sd-uhs-sdr104;
+-	status = "okay";
+-};
+-
+-&sdhi2 {
+-	/* used for on-board 8bit eMMC */
+-	pinctrl-0 = <&sdhi2_pins>;
+-	pinctrl-1 = <&sdhi2_pins>;
+-	pinctrl-names = "default", "state_uhs";
+-
+-	vmmc-supply = <&reg_3p3v>;
+-	vqmmc-supply = <&reg_1p8v>;
+-	bus-width = <8>;
+-	mmc-hs200-1_8v;
+-	mmc-hs400-1_8v;
+-	no-sd;
+-	no-sdio;
+-	non-removable;
+-	full-pwr-cycle-in-suspend;
+-	status = "okay";
+-};
+-
+-&ssi1 {
+-	shared-pin;
+-};
+-
+-&usb2_phy1 {
+-	pinctrl-0 = <&usb1_pins>;
+-	pinctrl-names = "default";
+-
+-	status = "okay";
+-};
+-
+-
+-/*
+- * For sound-test.
+- *
+- * We can switch Audio Card for testing
+- *
+- * #include "ulcb-simple-audio-card.dtsi"
+- * #include "ulcb-simple-audio-card-mix+split.dtsi"
+- * #include "ulcb-audio-graph-card.dtsi"
+- * #include "ulcb-audio-graph-card-mix+split.dtsi"
+- * #include "ulcb-audio-graph-card2-mix+split.dtsi"
+- */
+-#include "ulcb-audio-graph-card2.dtsi"
 -- 
-2.40.1.1.g1c60b9335d
+2.43.0
 
