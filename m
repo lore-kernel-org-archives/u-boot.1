@@ -4,96 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA47BC25B75
-	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 20:57:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85472C25B75
+	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 22:47:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D18D87E0B;
-	Sun, 19 May 2024 22:57:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
+	by phobos.denx.de (Postfix) with ESMTP id 82354881F4;
+	Mon, 20 May 2024 00:47:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="TA9Xc+5V";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="kEa0taqQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iT8x97Q9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7B8587E0B; Sun, 19 May 2024 22:57:25 +0200 (CEST)
-Received: from fhigh6-smtp.messagingengine.com
- (fhigh6-smtp.messagingengine.com [103.168.172.157])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 91AF1881F4; Mon, 20 May 2024 00:47:52 +0200 (CEST)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B957D870AB
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 22:57:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E372880F8
+ for <u-boot@lists.denx.de>; Mon, 20 May 2024 00:47:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=flygoat.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailfhigh.nyi.internal (Postfix) with ESMTP id DDC7B11400E9;
- Sun, 19 May 2024 16:57:22 -0400 (EDT)
-Received: from imap44 ([10.202.2.94])
- by compute3.internal (MEProxy); Sun, 19 May 2024 16:57:22 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
- cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1716152242;
- x=1716238642; bh=uNNTFYmxdPAWUfTG802VoCo4BNirKuGE6Wv13vbHgLI=; b=
- TA9Xc+5V8nQucPZ2zIAJT920kxNrPtmPhcenhNYJGue7OtBMYTEf7LfIZFysxRz9
- +ozD6N7PSz3qT+mt+oCd4DnmgvnMQmrq/nImC8BlBxjRjl0CUHdhuc7E4wXa8Zqg
- NI3SOZGqzTla53bjxg50iHkczMa2K7N1ugjHrfpTXqP1hJJ/QAhVbBRh8dP3/dLw
- 4MbKxCjyXGglP2HSUQqc+2rYIHNb/6OM/9JYLUNuWowVqJ2bkJM+tNmk19Vq9asp
- wBiGBXx2nRlZJATayypnIYynJUbhj8/wui0nuylgA78tYxZSR5+IrcyHRUT+ZOBe
- 4ExdAT+u2T1izac3VldMxw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716152242; x=
- 1716238642; bh=uNNTFYmxdPAWUfTG802VoCo4BNirKuGE6Wv13vbHgLI=; b=k
- Ea0taqQ/GDKwFUFU+yJqXnFzW6rltYyR/5VkUaw6RLLp0JBMeFvdb5CSkj6Iz2ok
- BTszSNheK5n2TyWN6IxxtT5I0U20omumsUIqrVOiYvD6sQ+d0OlAIzQ+alCGDc+f
- ofDpwUXBgQ5nK78Ussx7ES99tbbs/3uu2ddkMhWLVYjek3ZuD+BBAtd9AiHt18TK
- WJDOmPXFGUGxwGrQylmonTtQkqE6sLy8n3SN+TD3OVG8GmA/LgZn50DW9+S4G97s
- HwnP3yYM8OGk3z6pGUeE1G4T384qOe5IbVYE/zg+J9CUeRtgNbgARZ8p/Dym00hs
- 3fXGfmtSTvskF7DR4MHKA==
-X-ME-Sender: <xms:smdKZu2v9tedXLNTwHlzBUfkJTw_9Vl3AGE1Av8ClrVbTQFGyurvGw>
- <xme:smdKZhHyiZLftDnrqF9jbFPkT42AEFzvAsokZXZmNGIKEK3XY1wXIDnHpCOOIgPzD
- NJsvw91svmv2rySf1w>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehkedgudehvdcutefuodetggdotefrod
- ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
- necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
- enucfjughrpefofgggkfgjfhffhffvvefutgfgsehtqhertderreejnecuhfhrohhmpedf
- lfhirgiguhhnucgjrghnghdfuceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtg
- homheqnecuggftrfgrthhtvghrnhepudefgeeftedugeehffdtheefgfevffelfefghefh
- jeeugeevtefhudduvdeihefgnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpe
- hmrghilhhfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:smdKZm6vQzHNrFE8M1kZDfzk6BLJerGTgwyeg29Xf1_uY4y88dQ6xg>
- <xmx:smdKZv3xuSusTqa7WAHWZiOaOY35a-6Z80jyT7M-Dc_gMLFqLlcbQw>
- <xmx:smdKZhEbFWUDt7TpfRWKSrNO3jBKHIASaqAg6fJQ1qkSO087-SbZLQ>
- <xmx:smdKZo9o4DIUCuLmT_MVP_nR2lqvcXZUiZtEhztlPjzf71yrE7dwqw>
- <xmx:smdKZgCM0zE-x6W3qxERd8ubeB2H4fgkQtsMBjWFQwYSItGSt8Mr0Vxs>
-Feedback-ID: ifd894703:Fastmail
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
- id 70AA336A0075; Sun, 19 May 2024 16:57:22 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.11.0-alpha0-456-gcd147058c-fm-hotfix-20240509.001-g0aad06e4
-MIME-Version: 1.0
-Message-Id: <56e0d09f-2499-4f04-9e52-8c122a40921a@app.fastmail.com>
-In-Reply-To: <05c8e427-0bb3-489f-915c-d6a7e743f63c@gmail.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-3c9a0042e7dso922625b6e.0
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 15:47:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1716158869; x=1716763669; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=tBiuKLDIn2wDn9vnh7O7TF651u6aPGSXuqkX/zPM8Aw=;
+ b=iT8x97Q9IUAbVnVieRq4FBEvMR10StevnNxzKl/UAaUtSucx9VNKxRNpLqdBj4M/rZ
+ CSSZIzCXbzniLSCfJThUwoKph7+Q/5Pzr4RG0SZfMLQ34zkiXOH+7pcCEGoy+ffefrZY
+ fFQr5Y6nKucwXO8Ut+nuoLnAElxD0+f/WPvZQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716158869; x=1716763669;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tBiuKLDIn2wDn9vnh7O7TF651u6aPGSXuqkX/zPM8Aw=;
+ b=I1+JOFtUUR18GmIOe2SM2JlmIMhm+ve26zjtagnp1XDUnMSAGnqw+ywS5SAVkgSG8Q
+ qkxkhMzfrLrDoFOmXi90zes0RSYMZvhj0Hx2HHONCc/PZ0D0bL35zdLHoWkYNAAD6tQ7
+ FDaVmAxFiujIEtYl1u8+55xDZlOYkrOjMKWwo+QX+SaSAorf71lCD1VRGSrsX+lkqmdK
+ tMilCRJs5iTVePVjhuqWfbT9ZYeUvAnNtqNCLLGf/xT9uk1RWKMVFFCa4yXAbQ3d99CG
+ XVgXs9coeKcPCrr0A5dJuXCNLPnOKU18Zid/491h/Kiu20R26g8InZG9SarEPeMzk0Qo
+ Il5w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWOu9MgVw3FUfi4V1KzSeweJnj9aGakEfeTvJFuumeNGnplnFgHHCo2H1sTH7Kv9b2op6tVLNhbu3W30Vz/bbI7BaHGfQ==
+X-Gm-Message-State: AOJu0YxxzyJCs2r5m77HE8Z7MZZRFRh6v3zUj0mcOO6m3pAc/1Oarwro
+ 0jaOfm94zQL4uwg/lU4rhWYEEpMMisT2u5T3IBDq/M/bI8hXdHcraQYkkGX9LOM=
+X-Google-Smtp-Source: AGHT+IEpApHCgYMB1o5HdVFvZFHdYdmztta7TLdnGVZrGu+Ln4djU2M0WYw2G9cQWi7Un8fdwSfkxQ==
+X-Received: by 2002:a05:6808:30a4:b0:3c7:48ba:2190 with SMTP id
+ 5614622812f47-3c9970cfacamr30783880b6e.57.1716158869068; 
+ Sun, 19 May 2024 15:47:49 -0700 (PDT)
+Received: from bill-the-cat ([189.178.170.52])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-43df54d59f4sm138464691cf.21.2024.05.19.15.47.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 19 May 2024 15:47:48 -0700 (PDT)
+Date: Sun, 19 May 2024 16:47:45 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Cc: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, u-boot@lists.denx.de,
+ Michal Simek <michal.simek@amd.com>,
+ "paulburton@kernel.org" <paulburton@kernel.org>,
+ Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Jonas Karlman <jonas@kwiboo.se>
+Subject: Re: [PATCH v3 11/12] MIPS: boston: Migrate to OF_UPSTREAM
+Message-ID: <20240519224745.GP2568172@bill-the-cat>
 References: <20240517-boston-v3-0-1ea7d23f4a1d@flygoat.com>
  <20240517-boston-v3-11-1ea7d23f4a1d@flygoat.com>
  <05c8e427-0bb3-489f-915c-d6a7e743f63c@gmail.com>
-Date: Sun, 19 May 2024 21:57:03 +0100
-From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
-To: "Daniel Schwierzeck" <daniel.schwierzeck@gmail.com>, u-boot@lists.denx.de
-Cc: "Michal Simek" <michal.simek@amd.com>, "Tom Rini" <trini@konsulko.com>,
- "paulburton@kernel.org" <paulburton@kernel.org>,
- "Simon Glass" <sjg@chromium.org>, "Lukasz Majewski" <lukma@denx.de>,
- "Sean Anderson" <seanga2@gmail.com>, "Sumit Garg" <sumit.garg@linaro.org>,
- "Jonas Karlman" <jonas@kwiboo.se>
-Subject: Re: [PATCH v3 11/12] MIPS: boston: Migrate to OF_UPSTREAM
-Content-Type: text/plain;charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+ <56e0d09f-2499-4f04-9e52-8c122a40921a@app.fastmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="okwTTXk+eq/PYpel"
+Content-Disposition: inline
+In-Reply-To: <56e0d09f-2499-4f04-9e52-8c122a40921a@app.fastmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,25 +100,56 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--okwTTXk+eq/PYpel
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-=E5=9C=A82024=E5=B9=B45=E6=9C=8819=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8B=E5=
-=8D=887:20=EF=BC=8CDaniel Schwierzeck=E5=86=99=E9=81=93=EF=BC=9A
->
-> Reviewed-by: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
->
-Hi Daniel,
+On Sun, May 19, 2024 at 09:57:03PM +0100, Jiaxun Yang wrote:
+>=20
+>=20
+> =E5=9C=A82024=E5=B9=B45=E6=9C=8819=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8B=
+=E5=8D=887:20=EF=BC=8CDaniel Schwierzeck=E5=86=99=E9=81=93=EF=BC=9A
+> >
+> > Reviewed-by: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
+> >
+> Hi Daniel,
+>=20
+> Thanks for reviewing the series.
+> >
+> [...]
+> >
+> > should be 'select' because the switch to upstream DTS is permanent and=
+=20
+> > it does not make sense for the user to be able to deselect this option
+> >
+>=20
+> Do you want me to send another version or are you going to fix
+> it as you apply the patch?
 
-Thanks for reviewing the series.
->
-[...]
->
-> should be 'select' because the switch to upstream DTS is permanent and=20
-> it does not make sense for the user to be able to deselect this option
->
+So, in the case of OF_UPTREAM, it's "imply OF_UPSTREAM" everywhere else
+and while there's a case to be made it should be select instead, that's
+probably a future clean-up for all users.
 
-Do you want me to send another version or are you going to fix
-it as you apply the patch?
-
-Thanks
 --=20
-- Jiaxun
+Tom
+
+--okwTTXk+eq/PYpel
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZKgY4ACgkQFHw5/5Y0
+tyz0uQwAr14fL/+vRQVMnz8hxb4BzHNNzhKQmYn2M2MmX9rFCPopUCcX9Rx+/zjt
+oZ0caBGTBzTzIvyrsgQ9bhUwn7rysJYbdVtUAf4RU35bStG7Jf7NCB9QxXJ/G+58
+I5lONDRuJQms9KMRiMnZ2nbFv8yoR+yfo2UeeSv2A0y6ZB66GivbuIrL4Wkmi6Ht
+10jcnQabCZdQJc9cR2PoL+krBBklgtEaIwgReEvfpnGbsN7L7Cc9az1ykDw+ji4e
+qHAFi7/MBTFU+junCkz+pAWCTv4lq/iw6sbdFPvrcSiOlKrp4+ZVkGQ1qccqOXCz
+ONJ7L0ulbslBhVp2ODKkC74sxML5PXj3MALh7CcOUxniCo9RaMUXX3NjaDXXoACY
+DTdGcPskai7nL3FcZpNvNJzLVeIxj5UrP93MO5R9DrWIaUTlyMuSo5uc/Wc33xHW
+pZDzgLQSptmrlw57nHcq+fR8T5s5zlvtfRs7r/Ac+Nmd+hiyWKrF9psk9/QWdwNm
+gWepJZeA
+=1Hl+
+-----END PGP SIGNATURE-----
+
+--okwTTXk+eq/PYpel--
