@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED1FCC25B75
-	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 12:59:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEE4CC25B77
+	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 12:59:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FB6D886B3;
-	Sun, 19 May 2024 14:57:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6E880886C8;
+	Sun, 19 May 2024 14:57:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="5CCnkUZL";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="pPupfMGC";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="nUfhlsx4";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="IUmIOa4r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AED68886B1; Sun, 19 May 2024 14:57:43 +0200 (CEST)
-Received: from wfout6-smtp.messagingengine.com
- (wfout6-smtp.messagingengine.com [64.147.123.149])
+ id 877C6886C8; Sun, 19 May 2024 14:57:47 +0200 (CEST)
+Received: from wfhigh1-smtp.messagingengine.com
+ (wfhigh1-smtp.messagingengine.com [64.147.123.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C1BB882B5
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 14:57:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A382886B9
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 14:57:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailfout.west.internal (Postfix) with ESMTP id 6ACE21C00099;
- Sun, 19 May 2024 08:57:38 -0400 (EDT)
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+ by mailfhigh.west.internal (Postfix) with ESMTP id 53F6418000B4;
+ Sun, 19 May 2024 08:57:42 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute5.internal (MEProxy); Sun, 19 May 2024 08:57:39 -0400
+ by compute1.internal (MEProxy); Sun, 19 May 2024 08:57:43 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1716123458;
- x=1716209858; bh=9nKrP3/TdzYaqi8bLQJWpxkzKWxQILRjnQM6ViawEtc=; b=
- 5CCnkUZLPsTqzWMJm7Z3fQhg6IGxvcvWGZjzpUHBWQZPB8z30ZmtlF5V2SLf4NO0
- grM9AQrM3d66bbmHm//9zNqEE28ZodaBhPJpHBrpZ9AXTigbjk/RoBkrEJVuHofL
- ZCRbEBRsU/JSng27NJy29f0OI/XGujuZB55qlsUWuYJpVGASirQhUIRVQCC2ViAw
- zU+Yf0b6S+tfCtOwJocPSysXJQ6C8YMFqXj23qFfsuQNLHN2og2HaEG8IwxXpcwP
- WdCrZ7+X941VI9wDyCvaDbhKyZ8Ir5PXaAGlGj3Gg6ZMpOyjKFlDQ3krA3zQ+n4j
- Re4RenoUsT7Go3SrqYCMxw==
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1716123461;
+ x=1716209861; bh=CFn8VOPLiJLHQnyJKcRYngTmxQ6+CvlN42F1m3+zgPQ=; b=
+ nUfhlsx40WsGHSINPf3zSuwYPgCsvwBT4Wez2uFcSDRVzbIRJ9objeRRnnV7kLuy
+ D7A5fFFX9NWUdtnlSzoYqw+/UEPYA30bpyTahRS5NH/gYNOR+SMwihpppPvNRnB3
+ 55a/XM79ih2PHk6o/g+PtMJn2sm3PgfPx+Ck6GpBUsD/M3jEldUh+d8uGZ4uHvYA
+ MpjpTO/OYxFaKUBFkxaz8VNNbhKEdt2rnhU/e+iEzvDmPFawC1KA0NSdzugua0ZY
+ sbMBQWr+cln29x2k0Zp3OKmyUND3XHz6WJ4k3Mq3BekZLBACBjbsC1GF5maMVuw6
+ joXs+sntHIs6xgg+u3K+XQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716123458; x=
- 1716209858; bh=9nKrP3/TdzYaqi8bLQJWpxkzKWxQILRjnQM6ViawEtc=; b=p
- PupfMGCc3eEHE6KHSmSGZdYL/nlDvbF0BC50eLEOqpU1wO6O19Q/4zJecqJ/9weK
- fLRVZEbfvy77jd/DtLOqmgxiGCK0a6xprtduroxHj5XTid2GAN2oHb55MtQWu1Qi
- f/dO9tjfNRgy70oWXrU4jKZK3uEz7fWkTS91FBIAoKNc1YUhJWeb0sQwwF01wC1O
- Av+MlGD5vtYavOBk4Lke2FIJoaZy2cP10M4LmAjmZHMb8D/bLpjXuRVZoOvsBq3c
- BZlJ4NZXfi9ywDSYOUiZhOGfCOwIAer7MGgvUBQVc8+xxVu5yWnCnOIgXnn5b2mG
- xudLVbjZuw8eCyZHLeeGg==
-X-ME-Sender: <xms:QfdJZvLtKPUqkTFcTpmUMuyKV5htb8d3XJEB5jIZMf5K5FtubNwzlA>
- <xme:QfdJZjLYQqc2fPE4T1LCfTbxnYaYSgy0wcfeuznpkqOGtMkzi_zA5pZ3DDectTgUp
- -BKjjkeU8NEID3G-Ik>
-X-ME-Received: <xmr:QfdJZntRK-do-9Q7CTYQe_uqWxaGZfJv_JFD5Zba0h5kQ-pjQ_DNZZw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehkedgheeiucetufdoteggodetrfdotf
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716123461; x=
+ 1716209861; bh=CFn8VOPLiJLHQnyJKcRYngTmxQ6+CvlN42F1m3+zgPQ=; b=I
+ UmIOa4rWJG2MVjskZM5MoL6qhJMKhHk0kghB23r/A/SHp10UBxZD2bRogiZW+9ZM
+ 0llfWz/9ZwPfgMMd7ehMDe6lV52GckmFH5rDS3WETfpn3GT5m6Na52aBy7Rlqlu9
+ 2nIMTjOELGOXxXTLzsTdBC+s//XEbd8uaVHKGHPLtmwECdzh0RrjoGSq4283GGxt
+ RMdH4sBRgbte3aG+pO6afzL5kVj37nXD7y3fN+k2GwEqNCKlGa0bGdehn1G8SUHH
+ YKd1lcHlU6nN36MyhFH8VtnZYjB/vnwQQCS6pTEGMqjqlNx0PoQTmcrtdgSvPnrf
+ gMWiG9EPYYvkRuTa0F/0A==
+X-ME-Sender: <xms:RfdJZvhSrSmu50AP7p_IDeuVdK8JCS_w6gwXnu8RNmqinla2RrQSJQ>
+ <xme:RfdJZsA_7Utq1LbyUkwrXVyFXrnD_YgLuL2RGQZvtru61Hs8M-JDjvboJaCyReYLW
+ uDOY-lM3xu4OAHePe4>
+X-ME-Received: <xmr:RfdJZvH8qrcnrPM76TadSr_OCXTgZUvcziSjBTcWJswiRCh_CLrss-M>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehkedgheejucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
  cujfgurhephfffufggtgfgkfhfjgfvvefosehtjeertdertdejnecuhfhrohhmpeflihgr
  gihunhcujggrnhhguceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomheqne
  cuggftrfgrthhtvghrnhepvdekiefhfeevkeeuveetfeelffekgedugefhtdduudeghfeu
- veegffegudekjeelnecuvehluhhsthgvrhfuihiivgepfeenucfrrghrrghmpehmrghilh
+ veegffegudekjeelnecuvehluhhsthgvrhfuihiivgepvdenucfrrghrrghmpehmrghilh
  hfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:QfdJZoaf7WSgZpa00MN3Rew9KsrPb7lhKCJdb6pMV5zCfU2KlXTQvQ>
- <xmx:QfdJZmYUS_YUV3ebOOz9e9pX0ohy5Yy09zA4gBWmwpJzReylKDZ8dA>
- <xmx:QfdJZsDvORWBfa48Yosv3D7rIZ9pMU1twIo6krCwQ9T-yYHtKvym-w>
- <xmx:QfdJZkYmrw6FrVrJhCtuvXMUsR1odK1OpggGr4ZFOKkCRybEvyF2Ug>
- <xmx:QvdJZouZpgkiuq_8bJtlIrPlnuBizAvfPiENehxedegNVY3jdsxPHJgZ>
+X-ME-Proxy: <xmx:RfdJZsSkHUQo-WlESqfAtVogun0AkrlOwt6b_FIbHHz-cDYU1D_LCQ>
+ <xmx:RfdJZswDm7vi3uxmikq11ZN5HL29NBI8rVvCsHQDQLqJlO8Py14EVw>
+ <xmx:RfdJZi6CYA_XNwJLSQvt3sFx_InEB_CPSCClxxaB0_Qk6QpqHnFSIw>
+ <xmx:RfdJZhxTEppwYytbRvNtnTanEwfP9-vl91n556OFtylFn8Xu-tF33Q>
+ <xmx:RfdJZgmEkFtT4kxrFY9OxWXvgeztDXnpwQ2CcMREpm_r9gPNyFiTcYFu>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sun,
- 19 May 2024 08:57:35 -0400 (EDT)
+ 19 May 2024 08:57:39 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Sun, 19 May 2024 13:56:57 +0100
-Subject: [PATCH 12/13] config: Use CONFIG_SYS_BIG_ENDIAN in code whenever
- possible
+Date: Sun, 19 May 2024 13:56:58 +0100
+Subject: [PATCH 13/13] qemu-arm: Big endian enablement for arm64
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240519-aarch64-be-v1-12-75cc328eddfa@flygoat.com>
+Message-Id: <20240519-aarch64-be-v1-13-75cc328eddfa@flygoat.com>
 References: <20240519-aarch64-be-v1-0-75cc328eddfa@flygoat.com>
 In-Reply-To: <20240519-aarch64-be-v1-0-75cc328eddfa@flygoat.com>
 To: u-boot@lists.denx.de, uboot-snps-arc@synopsys.com
@@ -103,13 +102,13 @@ Cc: Tom Rini <trini@konsulko.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
  Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4642;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4142;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=D7TRtB2PzZkn2GYcMRbFyhA3Ykd61jGG2zJ+46LANB4=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhjTP7wKZUtfU0+JerpknvXbyvMJfIuV/n1yYWia9JGdq/
- 0vZ7VGiHaUsDGJcDLJiiiwhAkp9GxovLrj+IOsPzBxWJpAhDFycAjARVQ2G/y4hFe4/YpXn7f9w
- hnPiVc+mYwcnaO5bMGnmP52H14qcrdwY/qkbTWNY+83+l9v3jRs+bvtvsqilq+v85sUHZYVW1Rw
- pWsAIAA==
+ bh=8cCeu59DEKbtNtqJzfpV7RXifJZBZKOgfxiz27RRD/U=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhjTP7wLRkv0uiW5nFWJUfF5JKIldveyysPBL+zm+w35rV
+ sju+nauo5SFQYyLQVZMkSVEQKlvQ+PFBdcfZP2BmcPKBDKEgYtTACZyOoHhv8PcqyZ5v4LC65Ue
+ 7DJc8dBavdJA8vDOlXGhVtfe7p0lcImRYbfxpbv1+kvtHt4/qq23Oezqkqe5X2bPKtocNv2o0Wn
+ OLSwA
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -128,132 +127,143 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-So CONFIG_SYS_BIG_ENDIAN is our cross architecture option for
-selecting machine endian, while the old CONFIG_CPU_BIG_ENDIAN
-is defined by Arc only.
-
-Use it whenever possible to ensure big endian code path is enabled
-for all possible big endian machines.
+Select a few config option and generate a new defconfig for
+big endian arm64.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- Makefile                                            |  2 +-
- arch/arc/include/asm/arc-bcr.h                      | 10 +++++-----
- arch/arm/cpu/armv8/linux-kernel-image-header-vars.h |  4 ++--
- drivers/mtd/nand/raw/brcmnand/brcmnand.c            |  2 +-
- scripts/Makefile.build                              |  2 +-
- 5 files changed, 10 insertions(+), 10 deletions(-)
+ board/emulation/qemu-arm/Kconfig     |  2 +
+ board/emulation/qemu-arm/MAINTAINERS |  1 +
+ configs/qemu_arm64be_defconfig       | 71 ++++++++++++++++++++++++++++++++++++
+ doc/board/emulation/qemu-arm.rst     |  7 +++-
+ 4 files changed, 80 insertions(+), 1 deletion(-)
 
-diff --git a/Makefile b/Makefile
-index 44deb339af19..49959ecf3100 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1048,7 +1048,7 @@ endif
- CHECKFLAGS += --arch=$(ARCH)
+diff --git a/board/emulation/qemu-arm/Kconfig b/board/emulation/qemu-arm/Kconfig
+index e21c135e86fa..4c98340a62f4 100644
+--- a/board/emulation/qemu-arm/Kconfig
++++ b/board/emulation/qemu-arm/Kconfig
+@@ -5,8 +5,10 @@ config TEXT_BASE
  
- # insure the checker run with the right endianness
--CHECKFLAGS += $(if $(CONFIG_CPU_BIG_ENDIAN),-mbig-endian,-mlittle-endian)
-+CHECKFLAGS += $(if $(CONFIG_SYS_BIG_ENDIAN),-mbig-endian,-mlittle-endian)
+ config BOARD_SPECIFIC_OPTIONS # dummy
+ 	def_bool y
++	select ARMV8_RESET_SET_ENDIAN if ARM64
+ 	select QFW if ACPI
+ 	select QFW_MMIO if CMD_QFW
++	select SUPPORT_BIG_ENDIAN if ARM64
+ 	imply VIRTIO_MMIO
+ 	imply VIRTIO_PCI
+ 	imply VIRTIO_NET
+diff --git a/board/emulation/qemu-arm/MAINTAINERS b/board/emulation/qemu-arm/MAINTAINERS
+index 5154262f29ea..9384b1003d2c 100644
+--- a/board/emulation/qemu-arm/MAINTAINERS
++++ b/board/emulation/qemu-arm/MAINTAINERS
+@@ -6,3 +6,4 @@ F:	board/emulation/common/
+ F:	include/configs/qemu-arm.h
+ F:	configs/qemu_arm_defconfig
+ F:	configs/qemu_arm64_defconfig
++F:	configs/qemu_arm64be_defconfig
+diff --git a/configs/qemu_arm64be_defconfig b/configs/qemu_arm64be_defconfig
+new file mode 100644
+index 000000000000..af05f484036d
+--- /dev/null
++++ b/configs/qemu_arm64be_defconfig
+@@ -0,0 +1,71 @@
++CONFIG_ARM=y
++CONFIG_POSITION_INDEPENDENT=y
++CONFIG_ARCH_QEMU=y
++CONFIG_SYS_MALLOC_LEN=0x1000000
++CONFIG_NR_DRAM_BANKS=1
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x40200000
++CONFIG_ENV_SIZE=0x40000
++CONFIG_ENV_SECT_SIZE=0x40000
++CONFIG_DEFAULT_DEVICE_TREE="qemu-arm64"
++CONFIG_DEBUG_UART_BASE=0x9000000
++CONFIG_DEBUG_UART_CLOCK=0
++CONFIG_ARMV8_CRYPTO=y
++CONFIG_SYS_LOAD_ADDR=0x40200000
++CONFIG_ENV_ADDR=0x4000000
++CONFIG_PCI=y
++CONFIG_DEBUG_UART=y
++CONFIG_AHCI=y
++CONFIG_SYS_BIG_ENDIAN=y
++CONFIG_FIT=y
++CONFIG_FIT_SIGNATURE=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_FIT_BEST_MATCH=y
++CONFIG_BOOTSTD_FULL=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_USE_PREBOOT=y
++# CONFIG_DISPLAY_CPUINFO is not set
++# CONFIG_DISPLAY_BOARDINFO is not set
++CONFIG_PCI_INIT_R=y
++CONFIG_CMD_SMBIOS=y
++CONFIG_CMD_BOOTZ=y
++CONFIG_CMD_BOOTEFI_SELFTEST=y
++CONFIG_CMD_NVEDIT_EFI=y
++CONFIG_CMD_DFU=y
++CONFIG_CMD_MTD=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_TPM=y
++CONFIG_CMD_MTDPARTS=y
++CONFIG_ENV_IS_IN_FLASH=y
++CONFIG_SCSI_AHCI=y
++CONFIG_AHCI_PCI=y
++CONFIG_DFU_TFTP=y
++CONFIG_DFU_MTD=y
++CONFIG_DFU_RAM=y
++# CONFIG_MMC is not set
++CONFIG_MTD=y
++CONFIG_DM_MTD=y
++CONFIG_MTD_NOR_FLASH=y
++CONFIG_FLASH_SHOW_PROGRESS=0
++CONFIG_CFI_FLASH=y
++CONFIG_CFI_FLASH_USE_WEAK_ACCESSORS=y
++CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
++CONFIG_FLASH_CFI_MTD=y
++CONFIG_SYS_FLASH_CFI=y
++CONFIG_SYS_MAX_FLASH_SECT=256
++CONFIG_SYS_MAX_FLASH_BANKS=2
++CONFIG_SYS_MAX_FLASH_BANKS_DETECT=y
++CONFIG_E1000=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_ECAM_GENERIC=y
++CONFIG_SCSI=y
++CONFIG_DEBUG_UART_PL011=y
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYSRESET=y
++CONFIG_SYSRESET_CMD_POWEROFF=y
++CONFIG_SYSRESET_PSCI=y
++CONFIG_TPM2_MMIO=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_PCI=y
++CONFIG_SEMIHOSTING=y
++CONFIG_TPM=y
+diff --git a/doc/board/emulation/qemu-arm.rst b/doc/board/emulation/qemu-arm.rst
+index 1c91c7f3ac67..70108f98c759 100644
+--- a/doc/board/emulation/qemu-arm.rst
++++ b/doc/board/emulation/qemu-arm.rst
+@@ -38,6 +38,11 @@ Set the CROSS_COMPILE environment variable as usual, and run:
+     make qemu_arm64_defconfig
+     make
  
- # the checker needs the correct machine size
- CHECKFLAGS += $(if $(CONFIG_64BIT),-m64,-m32)
-diff --git a/arch/arc/include/asm/arc-bcr.h b/arch/arc/include/asm/arc-bcr.h
-index a6c972bf1e31..d4de9b818c1a 100644
---- a/arch/arc/include/asm/arc-bcr.h
-+++ b/arch/arc/include/asm/arc-bcr.h
-@@ -15,7 +15,7 @@
++- For AArch64 Big Endian::
++
++    make qemu_arm64be_defconfig
++    make
++
+ Running U-Boot
+ --------------
+ The minimal QEMU command line to get U-Boot up and running is:
+@@ -46,7 +51,7 @@ The minimal QEMU command line to get U-Boot up and running is:
  
- union bcr_di_cache {
- 	struct {
--#ifdef CONFIG_CPU_BIG_ENDIAN
-+#ifdef CONFIG_SYS_BIG_ENDIAN
- 		unsigned int pad:12, line_len:4, sz:4, config:4, ver:8;
- #else
- 		unsigned int ver:8, config:4, sz:4, line_len:4, pad:12;
-@@ -26,7 +26,7 @@ union bcr_di_cache {
+     qemu-system-arm -machine virt -nographic -bios u-boot.bin
  
- union bcr_slc_cfg {
- 	struct {
--#ifdef CONFIG_CPU_BIG_ENDIAN
-+#ifdef CONFIG_SYS_BIG_ENDIAN
- 		unsigned int pad:24, way:2, lsz:2, sz:4;
- #else
- 		unsigned int sz:4, lsz:2, way:2, pad:24;
-@@ -37,7 +37,7 @@ union bcr_slc_cfg {
+-- For AArch64::
++- For AArch64 (both endian)::
  
- union bcr_generic {
- 	struct {
--#ifdef CONFIG_CPU_BIG_ENDIAN
-+#ifdef CONFIG_SYS_BIG_ENDIAN
- 		unsigned int pad:24, ver:8;
- #else
- 		unsigned int ver:8, pad:24;
-@@ -48,7 +48,7 @@ union bcr_generic {
+     qemu-system-aarch64 -machine virt -nographic -cpu cortex-a57 -bios u-boot.bin
  
- union bcr_clust_cfg {
- 	struct {
--#ifdef CONFIG_CPU_BIG_ENDIAN
-+#ifdef CONFIG_SYS_BIG_ENDIAN
- 		unsigned int pad:7, c:1, num_entries:8, num_cores:8, ver:8;
- #else
- 		unsigned int ver:8, num_cores:8, num_entries:8, c:1, pad:7;
-@@ -59,7 +59,7 @@ union bcr_clust_cfg {
- 
- union bcr_mmu_4 {
- 	struct {
--#ifdef CONFIG_CPU_BIG_ENDIAN
-+#ifdef CONFIG_SYS_BIG_ENDIAN
- 	unsigned int ver:8, sasid:1, sz1:4, sz0:4, res:2, pae:1,
- 		     n_ways:2, n_entry:2, n_super:2, u_itlb:3, u_dtlb:3;
- #else
-diff --git a/arch/arm/cpu/armv8/linux-kernel-image-header-vars.h b/arch/arm/cpu/armv8/linux-kernel-image-header-vars.h
-index b6394aee1657..c6af825dbc7b 100644
---- a/arch/arm/cpu/armv8/linux-kernel-image-header-vars.h
-+++ b/arch/arm/cpu/armv8/linux-kernel-image-header-vars.h
-@@ -31,7 +31,7 @@
-  * when PIE is in effect. So we need to split them up in 32-bit high and low
-  * words.
-  */
--#ifdef CONFIG_CPU_BIG_ENDIAN
-+#ifdef CONFIG_SYS_BIG_ENDIAN
- #define DATA_LE32(data)				\
- 	((((data) & 0x000000ff) << 24) |	\
- 	 (((data) & 0x0000ff00) << 8)  |	\
-@@ -55,7 +55,7 @@
- #endif
- #define __MEM_USAGE		(__CODE_DATA_SIZE + __MAX_EXTRA_RAM_USAGE)
- 
--#ifdef CONFIG_CPU_BIG_ENDIAN
-+#ifdef CONFIG_SYS_BIG_ENDIAN
- #define __HEAD_FLAG_BE		1
- #else
- #define __HEAD_FLAG_BE		0
-diff --git a/drivers/mtd/nand/raw/brcmnand/brcmnand.c b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-index b7bf7cc0893d..b1af3f717d43 100644
---- a/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-+++ b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-@@ -1698,7 +1698,7 @@ static int brcmnand_fill_dma_desc(struct brcmnand_host *host,
- 	desc->cmd_irq = (dma_cmd << 24) |
- 		(end ? (0x03 << 8) : 0) | /* IRQ | STOP */
- 		(!!begin) | ((!!end) << 1); /* head, tail */
--#ifdef CONFIG_CPU_BIG_ENDIAN
-+#ifdef CONFIG_SYS_BIG_ENDIAN
- 	desc->cmd_irq |= 0x01 << 12;
- #endif
- 	desc->dram_addr = lower_32_bits(buf);
-diff --git a/scripts/Makefile.build b/scripts/Makefile.build
-index 97dd4a64f6ef..99cc29595b4a 100644
---- a/scripts/Makefile.build
-+++ b/scripts/Makefile.build
-@@ -224,7 +224,7 @@ recordmcount_source := $(srctree)/scripts/recordmcount.c \
- 		    $(srctree)/scripts/recordmcount.h
- else
- sub_cmd_record_mcount = set -e ; perl $(srctree)/scripts/recordmcount.pl "$(ARCH)" \
--	"$(if $(CONFIG_CPU_BIG_ENDIAN),big,little)" \
-+	"$(if $(CONFIG_SYS_BIG_ENDIAN),big,little)" \
- 	"$(if $(CONFIG_64BIT),64,32)" \
- 	"$(OBJDUMP)" "$(OBJCOPY)" "$(CC) $(KBUILD_CPPFLAGS) $(KBUILD_CFLAGS)" \
- 	"$(LD) $(KBUILD_LDFLAGS)" "$(NM)" "$(RM)" "$(MV)" \
 
 -- 
 2.43.0
