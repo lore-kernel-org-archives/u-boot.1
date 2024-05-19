@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD559C25B75
-	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 18:16:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42AEBC25B75
+	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 18:18:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2081788124;
-	Sun, 19 May 2024 20:16:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A9D94882B7;
+	Sun, 19 May 2024 20:18:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QexAyJZo";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JHOaIO3h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D975880FB; Sun, 19 May 2024 20:16:25 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 46FDF882B7; Sun, 19 May 2024 20:18:46 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71BCE88124
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 20:16:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 623FC88223
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 20:18:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=daniel.schwierzeck@gmail.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a5a0013d551so361877666b.2
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 11:16:23 -0700 (PDT)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a59b49162aeso603756666b.3
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 11:18:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716142583; x=1716747383; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1716142724; x=1716747524; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=OGb8c5aiEjJ8wAJ8aoMBcZ9zeqb58k8UZ3nyAhMiB5k=;
- b=QexAyJZoEX3ROm9KcTsrveIOqB2P+bKlTOGxkRxywnhCPiEv6s4/0Qyvrkc0F575KT
- dljjm+xFeMkLjZJ2jXcDg35ow2wfVM7vM4lnPTvoPmcJYd9n8MLoRbu08TMl1+I+R5O5
- n/YZ0NobOQ79p9Evp6n7mLNqqYBAIme48aS95f4JBR+HkpZj22q1/kQhLcQ6qAoWBGW4
- ydKlZhl1r/Ey9NoN0JFezSMf+8ZT6XrAE3Maz9bNIdfqWvuK2mLX2dlIPhrWUTYUgy5r
- IkzVEDnYSk3WEpZ5Cnu5OdzypZFjXxhS4c48wwVPeY0xM+3JUUnNPhtSlk21xt+Uvi99
- 6q9A==
+ bh=jOeEETcd4aVwMnMxkfUM9cz7YO/nJ4v4b2/5ayNReSA=;
+ b=JHOaIO3h/YIYJnkzRVSR+nylJDzOn6dRe59dieVTJUtREWeFsi+eJ1cVrGc5JwHSEw
+ dY7mq5tLnwFjdjgmBfpn7s0tHG8276LgmCqtQjd/lh8YFkB1EIH3L121Kgb5h2xl8EPA
+ CfYpquvVQEH6TPD+vL1Lkx0L96+x6XJ6lT3lwnugf5f1HiuTC2+SdNSxtkbJ3n/giwUo
+ BpDz9IjvBhGwUg5t4opkpH8NIojXzMGbdmn3uUlmBJ167tMYZ6Uu+57mIwi8AuYFTmUJ
+ UbFTwq9hbNx0Q/VDTDQqvFFt3ZPITHu04yK5/vr3I8CtUEs4qSTLM/TLF+Q0pTpVg/vg
+ vOiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716142583; x=1716747383;
+ d=1e100.net; s=20230601; t=1716142724; x=1716747524;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=OGb8c5aiEjJ8wAJ8aoMBcZ9zeqb58k8UZ3nyAhMiB5k=;
- b=k7ijjNiTvoMhV20qYx87mcE9cWMHFpY3KlG7+F3Hb3LRdARvHSuwExp8jtDVkLBunO
- qKryqxfdW8wWEg0r5o+dQzrcpnd5XJUNPNYmi+iTywclemZ2Ce67LPp+KimscT1SL417
- z3Sba+CxzDqpNKqxNhJwCKMauebmt5ZpQqxzO4FJlmQ4pSg1LOvZ3HytxVdUYXWWvKPO
- aACTecj15pWp63YVGACCF/URv1+qTeDNIH37FCRrPY7pUl457APpZiZGAOStjxRZtPiD
- wcux7rNanpv/GnxaXObVX+Gb4A2ZLr3U1R7Fv0CWQaqRFYvn7nkjSN2Etk88bbM++Ar8
- 5ujA==
+ bh=jOeEETcd4aVwMnMxkfUM9cz7YO/nJ4v4b2/5ayNReSA=;
+ b=DXKlcAuUJSda/ZDA9R/zcvG/ollC2QDfAtbDDrJr4NmKi7tfvQ5j8A2I51Nn+MSQci
+ UVAqZ+vLU2e5ZMoVUk0qwDVqHf4IXtAxVGsCi2gsgmyuOLFg8YGf7+ff8m4ObWOSxL5k
+ PwUlBDi7aXCfr1u1ockUU8DB1gjZayqxY7YcS6U2d0YpTeto732a/su22hPCQKJPLI6X
+ DExQqPk0LJ2djabqgzTi2Sat5jw4eUV3diSsdSNKcdtIH0r3kCRxciUOkVfQE/od7d+g
+ yJWFZPGpy/7uFtmGkZ1yg3ksGA+zA7HMqfiiQk6zOHQToQr4HO8IR3Vc/mdl1t7JBSKc
+ BAoA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWyLPAuqc3Mj6Wepn7lX6Tl8ghR2aKLr7546c1sLFSEU/xeRkohX/tZVlPB5/KvT7kipt6gBfmw3SZQxoc/AiTeAmkYdw==
-X-Gm-Message-State: AOJu0YwSH0wStTgBrMkm7NGKcEFfYXI9Xo1Hv5nKjkpKlnFQIUQTI3TF
- S99e/i6H8ZKvvRwisZjv2lPI8FttSBqtKPcfVmiPvEJuBDH31aVo
-X-Google-Smtp-Source: AGHT+IGhHUJsEWW0zxukU3HUCqURSEecC1K6pocMY/A1rBa0ZTJtIVZnPJELZv2RGucuXA90pbQu+Q==
-X-Received: by 2002:a50:d7c2:0:b0:570:3bb:e099 with SMTP id
- 4fb4d7f45d1cf-5734d597dc2mr21245975a12.1.1716142582611; 
- Sun, 19 May 2024 11:16:22 -0700 (PDT)
+ AJvYcCV17+U7OLKFQ/8oKGD0SvUeCnZ5V2+ZFhrrEbqGGUZm2R4wtkEjkRv2CpcXDlytmJ62rHQpVNM/e5tmidmQmlaHsR7VuQ==
+X-Gm-Message-State: AOJu0YzuVoF+C597bjaOJyPgGgKdViuSz4FW1FQE60cfwev+jZBT0Fcd
+ Uc1U9UB5FWLH/I1A+5CcJLebKxG0k1n5ilvZhKOERnrhRaN9suGb
+X-Google-Smtp-Source: AGHT+IGfxXteshy5VFoEG7KEtHfOPt6rx85X5EX7Q1M85btNVObCrJNp4o3iROR65DLnjrW5cWRnHw==
+X-Received: by 2002:a17:907:980d:b0:a5a:5496:3c76 with SMTP id
+ a640c23a62f3a-a5a54963cdfmr2018598366b.6.1716142723791; 
+ Sun, 19 May 2024 11:18:43 -0700 (PDT)
 Received: from [192.168.10.30] (77-7-142-46.pool.kielnet.net. [46.142.7.77])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-574eaace761sm7039574a12.91.2024.05.19.11.16.21
+ a640c23a62f3a-a5a17b17727sm1360107366b.208.2024.05.19.11.18.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 19 May 2024 11:16:21 -0700 (PDT)
-Message-ID: <ea3619b7-0a1a-43c1-8de0-f06fd83c4ab3@gmail.com>
-Date: Sun, 19 May 2024 20:16:20 +0200
+ Sun, 19 May 2024 11:18:42 -0700 (PDT)
+Message-ID: <ebccc62c-6fb0-41d3-899b-12c99e4814ae@gmail.com>
+Date: Sun, 19 May 2024 20:18:42 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 09/12] clk: boston: Allow to get regmap from parent
- device
+Subject: Re: [PATCH v3 10/12] dts/upstream: Add Makefile for MIPS
 To: Jiaxun Yang <jiaxun.yang@flygoat.com>, u-boot@lists.denx.de
 Cc: Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>,
  Paul Burton <paulburton@kernel.org>, Simon Glass <sjg@chromium.org>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Sumit Garg <sumit.garg@linaro.org>, Jonas Karlman <jonas@kwiboo.se>
 References: <20240517-boston-v3-0-1ea7d23f4a1d@flygoat.com>
- <20240517-boston-v3-9-1ea7d23f4a1d@flygoat.com>
+ <20240517-boston-v3-10-1ea7d23f4a1d@flygoat.com>
 Content-Language: en-US
 From: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
-In-Reply-To: <20240517-boston-v3-9-1ea7d23f4a1d@flygoat.com>
+In-Reply-To: <20240517-boston-v3-10-1ea7d23f4a1d@flygoat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -103,20 +102,13 @@ X-Virus-Status: Clean
 
 
 On 5/17/24 20:14, Jiaxun Yang wrote:
-> In upstream devicetree, clk_boston is a child of syscon node
-> and there is no "regmap" property for clk_boston node.
+> It is required to make OF_UPSTREAM work.
 > 
-> Try to check parent device first to look for syscon.
-> 
+> Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 > ---
-> v2: Move syscon_get_regmap to probe
-> v3: Move syscon detection code to probe to ensure
->      parent is probbed before syscon_get_regmap.
-> ---
->   drivers/clk/clk_boston.c | 19 ++++++++++++-------
->   1 file changed, 12 insertions(+), 7 deletions(-)
+>   dts/upstream/src/mips/Makefile | 14 ++++++++++++++
+>   1 file changed, 14 insertions(+)
 > 
 
 Reviewed-by: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
-
