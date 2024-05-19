@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD278C25B77
-	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 12:57:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AFECC25B77
+	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 12:57:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67C4588633;
-	Sun, 19 May 2024 14:57:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C78838849D;
+	Sun, 19 May 2024 14:57:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="GDEU6c75";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="FRycikJn";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="NxBmjfK5";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="WX5/M27s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36DC588633; Sun, 19 May 2024 14:57:08 +0200 (CEST)
+ id 60FC588291; Sun, 19 May 2024 14:57:11 +0200 (CEST)
 Received: from wfout6-smtp.messagingengine.com
  (wfout6-smtp.messagingengine.com [64.147.123.149])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 156808849D
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 14:57:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F6F28849D
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 14:57:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
- by mailfout.west.internal (Postfix) with ESMTP id 134901C00099;
- Sun, 19 May 2024 08:57:03 -0400 (EDT)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailfout.west.internal (Postfix) with ESMTP id D55211C000E0;
+ Sun, 19 May 2024 08:57:06 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute4.internal (MEProxy); Sun, 19 May 2024 08:57:04 -0400
+ by compute5.internal (MEProxy); Sun, 19 May 2024 08:57:08 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1716123422;
- x=1716209822; bh=R++e2OxRdxhOhfyXW/fgfSK09WKNubBoYGFz/UJHtMs=; b=
- GDEU6c75OJcHO6LVojyBCyKXcmcZWfyItbRAx+tF+L+2P2vzzjQcgmi9ohsU7T+t
- p9oL22KMXI3+Tb0k/JqdWyaIeh/Ea8OFlN1TbsILj5lwHsaC2wiNWyJYOGVywCuq
- /ZliYpQ/bf8DC5MISv93zgObjb1fRBrdDtf0jtNUXKxLDOgNVF/r4FSfXEnBfixr
- plpeiISA+PR5oeswvGO/DrvMHGZy4ldjkJ3+aJL+0n4kKfT/NtGP0b1oWIEM75jw
- KnG/c/iJR6wn0dyL6ZtC1jWvfp7kwnBb/+Ybkk9ypoE9VPwOXgcF3fse3+QHCxX4
- WapsTC0oImB037whJnVesQ==
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1716123426;
+ x=1716209826; bh=Y3JDJGNjbgPdvW/klwko4Whyi5RiOGrZtj3GHQI0YEU=; b=
+ NxBmjfK5Rmrd55aIFldriFk+LJ9r7q63aIBDPVljObibJjfW5ZswUWRmaKmeIY8p
+ fs8nVNFQudwwXlhESNgCJ8JClKCebllIDQtR272pbfMvjlTcmvel1brEz2pHqFAI
+ +xj71hH73PQt+eDgttVspwc3J1oqkY7rWYV25DNMbEMyhKb8f5uK0t2BofJU+Uam
+ DpDJxMzctZAFa3VKU1mfo21wEl0cDslGwosmDpg4bto7c6H0cBFk0wivTb1/beaa
+ /JG7BkqyV/X7vR4TDlftoSD68mRYk0YODk6zDhJDDh6QA4LH04PW7FYBrOSTZJHJ
+ YKUAWETFVodU3d4OSRuuRQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716123422; x=
- 1716209822; bh=R++e2OxRdxhOhfyXW/fgfSK09WKNubBoYGFz/UJHtMs=; b=F
- RycikJn6UCxs8b1efjQinSfWTDPHKAwlGx+sTWWXxfrnNPCl/6iRRmeeAvukfImr
- peVS88FjUlKHAs/fcDXvBp9vfdGvMwE01pKVXIp/4DG6T+AEw1ttwZZpWQQiTIr0
- BMP4OjOB37lMdVAkCEYfUBu0ce4j8TcfYxDQdJTi8NLHnSKpiOwaJrcaC21IgEvy
- 8pOFYZomoa+miiWgASnUPsFJ+pJYvO3H/1ImWsCSCV+Nim4r2GhidS+lxjZq/drp
- iOqlV5N6hfGH6dgYtHcecbmTRHtlb+CZlfOjWcOpXbh4AyKxJk/6k/P0Gu21lAF9
- 9+j+iwKlWGznhBfPM3BMw==
-X-ME-Sender: <xms:HvdJZu3Oq-951jdBOfxBR2CssxTNe7bfUOBJNiwib1mKb-q7YdGjUA>
- <xme:HvdJZhElgvjPmuIRfa1YIgLGq2mTzmk3lcDCXoyzEBX-7fyIJamDktdl6kshY6M4U
- kRe_hKLhFnM2pQdduA>
-X-ME-Received: <xmr:HvdJZm5mw515WZJQ8fFJfz-bE36ZOUv8OByUmtfhQxIAwhmZaDm1syM>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716123426; x=
+ 1716209826; bh=Y3JDJGNjbgPdvW/klwko4Whyi5RiOGrZtj3GHQI0YEU=; b=W
+ X5/M27sXrfmiBbkqBk+4omnGP72e3uQbOgPu8RtG6UfZDpol6RfyPPAfasBH0Mop
+ tViV3DG1AUXyCT0CnBpprHc2+3D6hmLbz7K9tYhbminr5vE5QFITnLhbtNtDvtQu
+ XjGGsUJOG4IQc+ST6n83+RpiVUgn7cHjTYRP4FgHcNXhjbvdrQsNjM2fsRnSL9VW
+ nJgHwfLg3RPaBS4zCx6qvLToZ/BTpxVhOE23wqEaZ7zEfVTVK10RUE9hf3y2fbZO
+ FscGTNzTSCIMCDz1EVhZWTsH4s/XKusXhzHIjebl31CtjHv8wqeszj0REGW52vTM
+ 1lsRe1y6uiEoMKhq0YbIg==
+X-ME-Sender: <xms:IvdJZnlhB4adFYR3iwR0VqjxCSKM-Hted8Sk-mj2LNgeGM8X1Dal4w>
+ <xme:IvdJZq1SOcQtuWgJ5TTBnfrWQQMfsNAZ7yM8ZICPyzWTs5TV9f0Jv6fE7HwebzXsw
+ GJKWSMjxi4_OmenJ6o>
+X-ME-Received: <xmr:IvdJZtr5i0Hk8imwrBhyhdoP4zmaqSZh4Nv_2KNEG5WaEbYt7rxdE4w>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehkedgheeiucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
  cujfgurhephfffufggtgfgkfhfjgfvvefosehtjeertdertdejnecuhfhrohhmpeflihgr
  gihunhcujggrnhhguceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomheqne
  cuggftrfgrthhtvghrnhepvdekiefhfeevkeeuveetfeelffekgedugefhtdduudeghfeu
- veegffegudekjeelnecuvehluhhsthgvrhfuihiivgepudenucfrrghrrghmpehmrghilh
+ veegffegudekjeelnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilh
  hfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:HvdJZv3chNAzPnvR4m6Z0cp3SDvsH4hH3DSMbqUa-NbzFskEP0TZWw>
- <xmx:HvdJZhEqnYKZTY_sb95oi0yAhwUF5e0uKFsXSoXjkuqWmescB60TKA>
- <xmx:HvdJZo_LSNdYCfNg-iFK0qcvQm2n7Y75NlfV6_e-8o_0JX03X2Ei7w>
- <xmx:HvdJZmm3Ui2K5lji-6bg3bcrHhttBbpUXcHp-wjGzhcWpKPBOSwnMw>
- <xmx:HvdJZqJyUeMCfEVT85gVeu34o5UGEKjA_qzc9nxZ-Hk2stEwn6czhqAs>
+X-ME-Proxy: <xmx:IvdJZvmp7lAHu7AZD2VL-FlU6JGrbCHGsXC9m2YtCzoiB5OLItm6Gg>
+ <xmx:IvdJZl3ZI75875BrQSbg_5f5BKNzZk97aWHsWlshbV6WXOtwnPO34w>
+ <xmx:IvdJZuu2L7O0qmelZ0xGZbUeyUfLpZx2DEzaSYTuzOvu6dvU9KCMWg>
+ <xmx:IvdJZpWV6QbO2MyMRGGOQAJ3gOOvhCJshUHXoLz45B09H3UAbxTg9Q>
+ <xmx:IvdJZh56vpvTIGHjjPzxwrjnmgQu2Jw0wjKn0cJvppQS_3jSamVYbfXD>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sun,
- 19 May 2024 08:57:00 -0400 (EDT)
+ 19 May 2024 08:57:04 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Sun, 19 May 2024 13:56:48 +0100
-Subject: [PATCH 03/13] arm: Fix assembler.h for arm64
+Date: Sun, 19 May 2024 13:56:49 +0100
+Subject: [PATCH 04/13] arm: Introduce CPU_LE/CPU_BE macros
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240519-aarch64-be-v1-3-75cc328eddfa@flygoat.com>
+Message-Id: <20240519-aarch64-be-v1-4-75cc328eddfa@flygoat.com>
 References: <20240519-aarch64-be-v1-0-75cc328eddfa@flygoat.com>
 In-Reply-To: <20240519-aarch64-be-v1-0-75cc328eddfa@flygoat.com>
 To: u-boot@lists.denx.de, uboot-snps-arc@synopsys.com
@@ -102,13 +102,13 @@ Cc: Tom Rini <trini@konsulko.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
  Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=970;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=893;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=Hr3QOjuatJoZm6dzF/pmhMO+Pdfnq8G8AsT8jAXxWCQ=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhjTP7/wc1nXRKv1/LmkZ2ivUyD40bV6aznJVMOjPjT8pH
- 9cGG2zrKGVhEONikBVTZAkRUOrb0HhxwfUHWX9g5rAygQxh4OIUgIkcZ2VkmKvjtXuqYrRs9sSW
- 2rWZEqwZdZ/WKHhlOBRu4ZEwWcNdyfA/10Pg8tH4Gaeq3obelL40uyA7JyD1fidLRWDT1mu1T05
- zAgA=
+ bh=kGsgGTBZ106TsL9GUHooMBgOEinV0JHsE2itsMGv4ms=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhjTP7/yFPOsWf0talj8/9+RLV9vmbQxbju053/f4wZ8X9
+ hf9cy9JdZSyMIhxMciKKbKECCj1bWi8uOD6g6w/MHNYmUCGMHBxCsBENkxk+CsWFdFpd9G0uavu
+ 0Um5/6kPv3pYRmTOMIt6MWWvBe/xun5GhverLyQtLVn3iS0iacnmzwxRSfK7Xr04VHNi1/aDB6Y
+ 7dfMCAA==
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -127,52 +127,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Header guard is missing, and ret macro is not relevant for
-arm64.
-
-Both fixed.
+They come from the same header in Linux.
+They are used to conditional select code on different endianness.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- arch/arm/include/asm/assembler.h | 7 +++++++
- 1 file changed, 7 insertions(+)
+ arch/arm/include/asm/assembler.h | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 
 diff --git a/arch/arm/include/asm/assembler.h b/arch/arm/include/asm/assembler.h
-index 4fda483b8d8d..c3b8f34dd0af 100644
+index c3b8f34dd0af..2a3858d15d4e 100644
 --- a/arch/arm/include/asm/assembler.h
 +++ b/arch/arm/include/asm/assembler.h
-@@ -14,6 +14,9 @@
-  *  assembler source.
-  */
- 
-+#ifndef __ASM_ARM_ASSEMBLER_H
-+#define __ASM_ARM_ASSEMBLER_H
-+
- #include <asm/unified.h>
- 
- /*
-@@ -56,6 +59,7 @@
- #define PLD(code...)
- #endif
- 
-+#if !defined(__aarch64__)
- /*
-  * Use 'bx lr' everywhere except ARMv4 (without 'T') where only 'mov pc, lr'
-  * works
-@@ -75,6 +79,7 @@
- #endif
- 	.endm
- 	.endr
-+#endif
- 
- /*
-  * Cache aligned, used for optimized memcpy/memset
-@@ -87,3 +92,5 @@
- #else
+@@ -93,4 +93,22 @@
  #define CALGN(code...) code
  #endif
-+
+ 
++/*
++ * Select code when configured for BE.
++ */
++#if CONFIG_IS_ENABLED(SYS_BIG_ENDIAN)
++#define CPU_BE(code...) code
++#else
++#define CPU_BE(code...)
 +#endif
++
++/*
++ * Select code when configured for LE.
++ */
++#if CONFIG_IS_ENABLED(SYS_BIG_ENDIAN)
++#define CPU_LE(code...)
++#else
++#define CPU_LE(code...) code
++#endif
++
+ #endif
 
 -- 
 2.43.0
