@@ -4,85 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A91D9C25B77
-	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 12:58:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED1FCC25B75
+	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 12:59:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CD8F886AE;
-	Sun, 19 May 2024 14:57:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0FB6D886B3;
+	Sun, 19 May 2024 14:57:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="K1nihYc3";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="k/ucYnz2";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="5CCnkUZL";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="pPupfMGC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 269F4886AA; Sun, 19 May 2024 14:57:40 +0200 (CEST)
-Received: from wfhigh1-smtp.messagingengine.com
- (wfhigh1-smtp.messagingengine.com [64.147.123.152])
+ id AED68886B1; Sun, 19 May 2024 14:57:43 +0200 (CEST)
+Received: from wfout6-smtp.messagingengine.com
+ (wfout6-smtp.messagingengine.com [64.147.123.149])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A9DF886B0
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 14:57:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C1BB882B5
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 14:57:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
 Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailfhigh.west.internal (Postfix) with ESMTP id 3F86E18000B3;
- Sun, 19 May 2024 08:57:34 -0400 (EDT)
+ by mailfout.west.internal (Postfix) with ESMTP id 6ACE21C00099;
+ Sun, 19 May 2024 08:57:38 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute5.internal (MEProxy); Sun, 19 May 2024 08:57:35 -0400
+ by compute5.internal (MEProxy); Sun, 19 May 2024 08:57:39 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1716123453;
- x=1716209853; bh=tyVtA4dDTuDJ4pCmJzyqMnxtOZABmX9yHerf8W5hBXA=; b=
- K1nihYc3AxmwReN0FO1buxbyrhVj3XiO339b9rMnNv+/sYTIcrpzCQPzUblTJ0Lf
- EXCcSrkuGDPcnm97WpelYrlxQqixgXzwLjK3OouPx2xIVq32MSjlmoCH3Hs5M8f4
- zAhBPPJKD0keqrIcoiSR4eltLAU5y2FKTTK9XRPYD9uOgukd+SCSHGyiMaBi1Dzf
- 4YQuaqQyEooeAetEqVDIYxQ5dGPaXVojbjN1ZsfoxyWY6lKWtKc+eR66/l7yQWsy
- EVI9+QmKGp/w/2S4SuhHF+3+fW1b8qDDcN1PR6DQ1XMszEMfZgNW8C9keRhng5P2
- nOg3g7OgNTjNNna6Ly3vQQ==
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1716123458;
+ x=1716209858; bh=9nKrP3/TdzYaqi8bLQJWpxkzKWxQILRjnQM6ViawEtc=; b=
+ 5CCnkUZLPsTqzWMJm7Z3fQhg6IGxvcvWGZjzpUHBWQZPB8z30ZmtlF5V2SLf4NO0
+ grM9AQrM3d66bbmHm//9zNqEE28ZodaBhPJpHBrpZ9AXTigbjk/RoBkrEJVuHofL
+ ZCRbEBRsU/JSng27NJy29f0OI/XGujuZB55qlsUWuYJpVGASirQhUIRVQCC2ViAw
+ zU+Yf0b6S+tfCtOwJocPSysXJQ6C8YMFqXj23qFfsuQNLHN2og2HaEG8IwxXpcwP
+ WdCrZ7+X941VI9wDyCvaDbhKyZ8Ir5PXaAGlGj3Gg6ZMpOyjKFlDQ3krA3zQ+n4j
+ Re4RenoUsT7Go3SrqYCMxw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716123453; x=
- 1716209853; bh=tyVtA4dDTuDJ4pCmJzyqMnxtOZABmX9yHerf8W5hBXA=; b=k
- /ucYnz2yWiMTCE7nhmEGcuywLyMbzFhmcCdo/GB/fuiXr2z6XND1U35Yqtqa0U2e
- 4USLyw77sC18DB2yPjGxZf8bhmUs0ZGF+VCv1oXVfusd2c02lbR/hQjMHAPvpXGj
- nWEX8Tnhwk2MPeaYuad5DueiDM1HXc/65xpCxfblSbCyJcaBcr/o9AeAV3rvSgqP
- b2jI+9WcOeVmEKrMs2z/oaNOum1+g+KDLM+MkZcgpgZiUw6qnauVP+YHhu6UmAVu
- 0yUGB5CPdSndYynxp+v7aMo1ucK233k+wQrchgQRs1qTblPV9y8HDFs6bpqQJdBm
- vAOvh1Z0VckyJI6Wp6zkQ==
-X-ME-Sender: <xms:PfdJZhzcnUoS3B-jXDeItdIpt9U3fykE8-eNvAec2qXoOcq6Mk53pg>
- <xme:PfdJZhT8vRKTzyjFUDYQxbonKvNgfR4xkTM0U8AwkQ1QqmBvNRuLbENoU-uLzhBGR
- a6QGrl4CFaLDi_Z3u8>
-X-ME-Received: <xmr:PfdJZrWkLl1IxEXXoRRmF2lVOCH3eYFa_Xc8PH114OSGS5SrlKAX68Q>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716123458; x=
+ 1716209858; bh=9nKrP3/TdzYaqi8bLQJWpxkzKWxQILRjnQM6ViawEtc=; b=p
+ PupfMGCc3eEHE6KHSmSGZdYL/nlDvbF0BC50eLEOqpU1wO6O19Q/4zJecqJ/9weK
+ fLRVZEbfvy77jd/DtLOqmgxiGCK0a6xprtduroxHj5XTid2GAN2oHb55MtQWu1Qi
+ f/dO9tjfNRgy70oWXrU4jKZK3uEz7fWkTS91FBIAoKNc1YUhJWeb0sQwwF01wC1O
+ Av+MlGD5vtYavOBk4Lke2FIJoaZy2cP10M4LmAjmZHMb8D/bLpjXuRVZoOvsBq3c
+ BZlJ4NZXfi9ywDSYOUiZhOGfCOwIAer7MGgvUBQVc8+xxVu5yWnCnOIgXnn5b2mG
+ xudLVbjZuw8eCyZHLeeGg==
+X-ME-Sender: <xms:QfdJZvLtKPUqkTFcTpmUMuyKV5htb8d3XJEB5jIZMf5K5FtubNwzlA>
+ <xme:QfdJZjLYQqc2fPE4T1LCfTbxnYaYSgy0wcfeuznpkqOGtMkzi_zA5pZ3DDectTgUp
+ -BKjjkeU8NEID3G-Ik>
+X-ME-Received: <xmr:QfdJZntRK-do-9Q7CTYQe_uqWxaGZfJv_JFD5Zba0h5kQ-pjQ_DNZZw>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehkedgheeiucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
  cujfgurhephfffufggtgfgkfhfjgfvvefosehtjeertdertdejnecuhfhrohhmpeflihgr
  gihunhcujggrnhhguceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomheqne
  cuggftrfgrthhtvghrnhepvdekiefhfeevkeeuveetfeelffekgedugefhtdduudeghfeu
- veegffegudekjeelnecuvehluhhsthgvrhfuihiivgepudenucfrrghrrghmpehmrghilh
+ veegffegudekjeelnecuvehluhhsthgvrhfuihiivgepfeenucfrrghrrghmpehmrghilh
  hfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:PfdJZjgrlqYxSFsPTYhS-c94LBdRPb9Idj5nE5qr9qdPVx5lwZMdaw>
- <xmx:PfdJZjB7qHxinDpKD3lwf_z8IuLKMgDwmhcvnQBDbHxqqd3YvjqtKw>
- <xmx:PfdJZsIvkCOKx6ZSxae9Yn84tai0Aw4ste9vzUEB9w6jRM4yPyIkaQ>
- <xmx:PfdJZiAzwmRfybSHmOQXvU9WFscW634g9D2_HvFz81riNSJnGfbinw>
- <xmx:PfdJZv0JimTgQi8OvgcwDIrkMPemC4LNzdDNVH3w1p0P3_Ca4Hhusrlm>
+X-ME-Proxy: <xmx:QfdJZoaf7WSgZpa00MN3Rew9KsrPb7lhKCJdb6pMV5zCfU2KlXTQvQ>
+ <xmx:QfdJZmYUS_YUV3ebOOz9e9pX0ohy5Yy09zA4gBWmwpJzReylKDZ8dA>
+ <xmx:QfdJZsDvORWBfa48Yosv3D7rIZ9pMU1twIo6krCwQ9T-yYHtKvym-w>
+ <xmx:QfdJZkYmrw6FrVrJhCtuvXMUsR1odK1OpggGr4ZFOKkCRybEvyF2Ug>
+ <xmx:QvdJZouZpgkiuq_8bJtlIrPlnuBizAvfPiENehxedegNVY3jdsxPHJgZ>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sun,
- 19 May 2024 08:57:31 -0400 (EDT)
+ 19 May 2024 08:57:35 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Sun, 19 May 2024 13:56:56 +0100
-Subject: [PATCH 11/13] Kconfig: Unify endian support option
+Date: Sun, 19 May 2024 13:56:57 +0100
+Subject: [PATCH 12/13] config: Use CONFIG_SYS_BIG_ENDIAN in code whenever
+ possible
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240519-aarch64-be-v1-11-75cc328eddfa@flygoat.com>
+Message-Id: <20240519-aarch64-be-v1-12-75cc328eddfa@flygoat.com>
 References: <20240519-aarch64-be-v1-0-75cc328eddfa@flygoat.com>
 In-Reply-To: <20240519-aarch64-be-v1-0-75cc328eddfa@flygoat.com>
 To: u-boot@lists.denx.de, uboot-snps-arc@synopsys.com
@@ -102,13 +103,13 @@ Cc: Tom Rini <trini@konsulko.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
  Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=11929;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4642;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=Z70xQRZP9R4zGuVXKCt9WWzO4BDm1/ceyX/J615mQoI=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhjTP7wLCHDu3L72wqPNSO/u3FeGWhoK/r+vJr63MvcTAO
- ltw48KwjlIWBjEuBlkxRZYQAaW+DY0XF1x/kPUHZg4rE8gQBi5OAZjI642MDCuDY5+fPz9jrRir
- 27qTMcoOTTM2uL0TEDvAGdK0eH24rQrDH45ITbVnUmKzw+WEziq27zdL8WdyrrZOOyZruHn/rIN
- v2AE=
+ bh=D7TRtB2PzZkn2GYcMRbFyhA3Ykd61jGG2zJ+46LANB4=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhjTP7wKZUtfU0+JerpknvXbyvMJfIuV/n1yYWia9JGdq/
+ 0vZ7VGiHaUsDGJcDLJiiiwhAkp9GxovLrj+IOsPzBxWJpAhDFycAjARVQ2G/y4hFe4/YpXn7f9w
+ hnPiVc+mYwcnaO5bMGnmP52H14qcrdwY/qkbTWNY+83+l9v3jRs+bvtvsqilq+v85sUHZYVW1Rw
+ pWsAIAA==
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -127,423 +128,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move SUPPORT_BIG_ENDIAN, SUPPORT_LITTLE_ENDIAN to top-level
-arch Kconfig and let architectures select them as necessary.
+So CONFIG_SYS_BIG_ENDIAN is our cross architecture option for
+selecting machine endian, while the old CONFIG_CPU_BIG_ENDIAN
+is defined by Arc only.
 
-Remove if guard for Endianness selection choice so we can
-have one of SYS_BIG_ENDIAN, SYS_LITTLE_ENDIAN config symbol
-defined even on single endian system.
-
-Default endian to SYS_BIG_ENDIAN for MIPS || MICROBLAZE
-and LITTLE_ENDIAN for the rest to retain old config
-behaviour.
-
-Note: PPC, SH, Xtensa are technically bi-endian, but I
-checked compiled u-boot image with readelf, U-Boot currently
-only support little endian for SH and Xtensa, Big Endian for
-PPC.
+Use it whenever possible to ensure big endian code path is enabled
+for all possible big endian machines.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- arch/Kconfig                  | 34 ++++++++++++++++++++++++++--------
- arch/mips/Kconfig             | 20 +++++++-------------
- arch/mips/mach-ath79/Kconfig  |  8 ++++----
- arch/mips/mach-bmips/Kconfig  | 20 ++++++++++----------
- arch/mips/mach-jz47xx/Kconfig |  2 +-
- arch/mips/mach-mscc/Kconfig   |  4 ++--
- arch/mips/mach-pic32/Kconfig  |  2 +-
- 7 files changed, 51 insertions(+), 39 deletions(-)
+ Makefile                                            |  2 +-
+ arch/arc/include/asm/arc-bcr.h                      | 10 +++++-----
+ arch/arm/cpu/armv8/linux-kernel-image-header-vars.h |  4 ++--
+ drivers/mtd/nand/raw/brcmnand/brcmnand.c            |  2 +-
+ scripts/Makefile.build                              |  2 +-
+ 5 files changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/arch/Kconfig b/arch/Kconfig
-index abd406d48841..8f1f46670128 100644
---- a/arch/Kconfig
-+++ b/arch/Kconfig
-@@ -8,6 +8,13 @@ config CREATE_ARCH_SYMLINK
- config HAVE_ARCH_IOREMAP
- 	bool
+diff --git a/Makefile b/Makefile
+index 44deb339af19..49959ecf3100 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1048,7 +1048,7 @@ endif
+ CHECKFLAGS += --arch=$(ARCH)
  
-+config SUPPORT_BIG_ENDIAN
-+	bool
-+
-+config SUPPORT_LITTLE_ENDIAN
-+	bool
-+	default y if !SUPPORT_BIG_ENDIAN
-+
- config SYS_CACHE_SHIFT_4
- 	bool
+ # insure the checker run with the right endianness
+-CHECKFLAGS += $(if $(CONFIG_CPU_BIG_ENDIAN),-mbig-endian,-mlittle-endian)
++CHECKFLAGS += $(if $(CONFIG_SYS_BIG_ENDIAN),-mbig-endian,-mlittle-endian)
  
-@@ -59,6 +66,8 @@ config ARC
- 	select SUPPORT_OF_CONTROL
- 	select SYS_CACHE_SHIFT_7
- 	select TIMER
-+	select SUPPORT_BIG_ENDIAN
-+	select SUPPORT_LITTLE_ENDIAN
- 	select SYS_BIG_ENDIAN if CPU_BIG_ENDIAN
- 	select SYS_LITTLE_ENDIAN if !CPU_BIG_ENDIAN
+ # the checker needs the correct machine size
+ CHECKFLAGS += $(if $(CONFIG_64BIT),-m64,-m32)
+diff --git a/arch/arc/include/asm/arc-bcr.h b/arch/arc/include/asm/arc-bcr.h
+index a6c972bf1e31..d4de9b818c1a 100644
+--- a/arch/arc/include/asm/arc-bcr.h
++++ b/arch/arc/include/asm/arc-bcr.h
+@@ -15,7 +15,7 @@
  
-@@ -68,6 +77,7 @@ config ARM
- 	select CREATE_ARCH_SYMLINK
- 	select HAVE_PRIVATE_LIBGCC if !ARM64
- 	select SUPPORT_ACPI
-+	select SUPPORT_LITTLE_ENDIAN
- 	select SUPPORT_OF_CONTROL
+ union bcr_di_cache {
+ 	struct {
+-#ifdef CONFIG_CPU_BIG_ENDIAN
++#ifdef CONFIG_SYS_BIG_ENDIAN
+ 		unsigned int pad:12, line_len:4, sz:4, config:4, ver:8;
+ #else
+ 		unsigned int ver:8, config:4, sz:4, line_len:4, pad:12;
+@@ -26,7 +26,7 @@ union bcr_di_cache {
  
- config M68K
-@@ -77,10 +87,13 @@ config M68K
- 	select SYS_BOOT_GET_CMDLINE
- 	select SYS_BOOT_GET_KBD
- 	select SYS_CACHE_SHIFT_4
-+	select SUPPORT_BIG_ENDIAN
- 	select SUPPORT_OF_CONTROL
+ union bcr_slc_cfg {
+ 	struct {
+-#ifdef CONFIG_CPU_BIG_ENDIAN
++#ifdef CONFIG_SYS_BIG_ENDIAN
+ 		unsigned int pad:24, way:2, lsz:2, sz:4;
+ #else
+ 		unsigned int sz:4, lsz:2, way:2, pad:24;
+@@ -37,7 +37,7 @@ union bcr_slc_cfg {
  
- config MICROBLAZE
- 	bool "MicroBlaze architecture"
-+	select SUPPORT_BIG_ENDIAN
-+	select SUPPORT_LITTLE_ENDIAN
- 	select SUPPORT_OF_CONTROL
- 	imply CMD_TIMER
- 	imply SPL_REGMAP if SPL
-@@ -101,12 +114,14 @@ config NIOS2
- 	select DM
- 	select DM_EVENT
- 	select OF_CONTROL
-+	select SUPPORT_LITTLE_ENDIAN
- 	select SUPPORT_OF_CONTROL
- 	imply CMD_DM
+ union bcr_generic {
+ 	struct {
+-#ifdef CONFIG_CPU_BIG_ENDIAN
++#ifdef CONFIG_SYS_BIG_ENDIAN
+ 		unsigned int pad:24, ver:8;
+ #else
+ 		unsigned int ver:8, pad:24;
+@@ -48,7 +48,7 @@ union bcr_generic {
  
- config PPC
- 	bool "PowerPC architecture"
- 	select HAVE_PRIVATE_LIBGCC
-+	select SUPPORT_BIG_ENDIAN
- 	select SUPPORT_OF_CONTROL
- 	select SYS_BOOT_GET_CMDLINE
- 	select SYS_BOOT_GET_KBD
-@@ -115,6 +130,7 @@ config RISCV
- 	bool "RISC-V architecture"
- 	select CREATE_ARCH_SYMLINK
- 	select SUPPORT_ACPI
-+	select SUPPORT_LITTLE_ENDIAN
- 	select SUPPORT_OF_CONTROL
- 	select OF_CONTROL
- 	select DM
-@@ -160,6 +176,8 @@ config SANDBOX
- 	select PCI_ENDPOINT
- 	select SPI
- 	select SUPPORT_OF_CONTROL
-+	select SUPPORT_BIG_ENDIAN
-+	select SUPPORT_LITTLE_ENDIAN
- 	select SYSRESET_CMD_POWEROFF if CMD_POWEROFF
- 	select SYS_CACHE_SHIFT_4
- 	select IRQ
-@@ -224,6 +242,7 @@ config SANDBOX
+ union bcr_clust_cfg {
+ 	struct {
+-#ifdef CONFIG_CPU_BIG_ENDIAN
++#ifdef CONFIG_SYS_BIG_ENDIAN
+ 		unsigned int pad:7, c:1, num_entries:8, num_cores:8, ver:8;
+ #else
+ 		unsigned int ver:8, num_cores:8, num_entries:8, c:1, pad:7;
+@@ -59,7 +59,7 @@ union bcr_clust_cfg {
  
- config SH
- 	bool "SuperH architecture"
-+	select SUPPORT_LITTLE_ENDIAN
- 	select HAVE_PRIVATE_LIBGCC
- 	select SUPPORT_OF_CONTROL
+ union bcr_mmu_4 {
+ 	struct {
+-#ifdef CONFIG_CPU_BIG_ENDIAN
++#ifdef CONFIG_SYS_BIG_ENDIAN
+ 	unsigned int ver:8, sasid:1, sz1:4, sz0:4, res:2, pae:1,
+ 		     n_ways:2, n_entry:2, n_super:2, u_itlb:3, u_dtlb:3;
+ #else
+diff --git a/arch/arm/cpu/armv8/linux-kernel-image-header-vars.h b/arch/arm/cpu/armv8/linux-kernel-image-header-vars.h
+index b6394aee1657..c6af825dbc7b 100644
+--- a/arch/arm/cpu/armv8/linux-kernel-image-header-vars.h
++++ b/arch/arm/cpu/armv8/linux-kernel-image-header-vars.h
+@@ -31,7 +31,7 @@
+  * when PIE is in effect. So we need to split them up in 32-bit high and low
+  * words.
+  */
+-#ifdef CONFIG_CPU_BIG_ENDIAN
++#ifdef CONFIG_SYS_BIG_ENDIAN
+ #define DATA_LE32(data)				\
+ 	((((data) & 0x000000ff) << 24) |	\
+ 	 (((data) & 0x0000ff00) << 8)  |	\
+@@ -55,7 +55,7 @@
+ #endif
+ #define __MEM_USAGE		(__CODE_DATA_SIZE + __MAX_EXTRA_RAM_USAGE)
  
-@@ -231,6 +250,7 @@ config X86
- 	bool "x86 architecture"
- 	select SUPPORT_SPL
- 	select SUPPORT_TPL
-+	select SUPPORT_LITTLE_ENDIAN
- 	select CREATE_ARCH_SYMLINK
- 	select DM
- 	select HAVE_ARCH_IOMAP
-@@ -312,6 +332,7 @@ config X86
- config XTENSA
- 	bool "Xtensa architecture"
- 	select CREATE_ARCH_SYMLINK
-+	select SUPPORT_LITTLE_ENDIAN
- 	select SUPPORT_OF_CONTROL
- 
- endchoice
-@@ -515,24 +536,21 @@ endif
- 
- source "board/keymile/Kconfig"
- 
--if MIPS || MICROBLAZE
--
- choice
- 	prompt "Endianness selection"
-+	default SYS_BIG_ENDIAN if MIPS || MICROBLAZE
-+	default SYS_LITTLE_ENDIAN
- 	help
--	  Some MIPS boards can be configured for either little or big endian
-+	  Some boards can be configured for either little or big endian
- 	  byte order. These modes require different U-Boot images. In general there
- 	  is one preferred byteorder for a particular system but some systems are
- 	  just as commonly used in the one or the other endianness.
- 
- config SYS_BIG_ENDIAN
- 	bool "Big endian"
--	depends on (SUPPORTS_BIG_ENDIAN && MIPS) || MICROBLAZE
-+	depends on SUPPORT_BIG_ENDIAN
- 
- config SYS_LITTLE_ENDIAN
- 	bool "Little endian"
--	depends on (SUPPORTS_LITTLE_ENDIAN && MIPS) || MICROBLAZE
--
-+	depends on SUPPORT_LITTLE_ENDIAN
- endchoice
--
--endif
-diff --git a/arch/mips/Kconfig b/arch/mips/Kconfig
-index eb7f3ad23762..38577af43d03 100644
---- a/arch/mips/Kconfig
-+++ b/arch/mips/Kconfig
-@@ -28,14 +28,14 @@ config TARGET_MALTA
- 	select OF_ISA_BUS
- 	select PCI_MAP_SYSTEM_MEMORY
- 	select ROM_EXCEPTION_VECTORS
--	select SUPPORTS_BIG_ENDIAN
- 	select SUPPORTS_CPU_MIPS32_R1
- 	select SUPPORTS_CPU_MIPS32_R2
- 	select SUPPORTS_CPU_MIPS32_R6
- 	select SUPPORTS_CPU_MIPS64_R1
- 	select SUPPORTS_CPU_MIPS64_R2
- 	select SUPPORTS_CPU_MIPS64_R6
--	select SUPPORTS_LITTLE_ENDIAN
-+	select SUPPORT_BIG_ENDIAN
-+	select SUPPORT_LITTLE_ENDIAN
- 	select SWAP_IO_SPACE
- 	imply CMD_DM
- 
-@@ -86,7 +86,7 @@ config ARCH_MTMIPS
- 	select ROM_EXCEPTION_VECTORS
- 	select SUPPORTS_CPU_MIPS32_R1
- 	select SUPPORTS_CPU_MIPS32_R2
--	select SUPPORTS_LITTLE_ENDIAN
-+	select SUPPORT_LITTLE_ENDIAN
- 	select SUPPORT_SPL
- 
- config ARCH_JZ47XX
-@@ -112,7 +112,7 @@ config ARCH_OCTEON
- 	select MIPS_TUNE_OCTEON3
- 	select MTD
- 	select ROM_EXCEPTION_VECTORS
--	select SUPPORTS_BIG_ENDIAN
-+	select SUPPORT_BIG_ENDIAN
- 	select SUPPORTS_CPU_MIPS64_OCTEON
- 	select PHYS_64BIT
- 	select OF_CONTROL
-@@ -138,14 +138,14 @@ config TARGET_BOSTON
- 	select OF_BOARD_SETUP
- 	select OF_CONTROL
- 	select ROM_EXCEPTION_VECTORS
--	select SUPPORTS_BIG_ENDIAN
- 	select SUPPORTS_CPU_MIPS32_R1
- 	select SUPPORTS_CPU_MIPS32_R2
- 	select SUPPORTS_CPU_MIPS32_R6
- 	select SUPPORTS_CPU_MIPS64_R1
- 	select SUPPORTS_CPU_MIPS64_R2
- 	select SUPPORTS_CPU_MIPS64_R6
--	select SUPPORTS_LITTLE_ENDIAN
-+	select SUPPORT_BIG_ENDIAN
-+	select SUPPORT_LITTLE_ENDIAN
- 	imply CMD_DM
- 
- config TARGET_XILFPGA
-@@ -159,7 +159,7 @@ config TARGET_XILFPGA
- 	select ROM_EXCEPTION_VECTORS
- 	select SUPPORTS_CPU_MIPS32_R1
- 	select SUPPORTS_CPU_MIPS32_R2
--	select SUPPORTS_LITTLE_ENDIAN
-+	select SUPPORT_LITTLE_ENDIAN
- 	imply CMD_DM
- 	help
- 	  This supports IMGTEC MIPSfpga platform
-@@ -413,12 +413,6 @@ config MIPS_BOOT_FDT
- 
- endmenu
- 
--config SUPPORTS_BIG_ENDIAN
--	bool
--
--config SUPPORTS_LITTLE_ENDIAN
--	bool
--
- config SUPPORTS_CPU_MIPS32_R1
- 	bool
- 
-diff --git a/arch/mips/mach-ath79/Kconfig b/arch/mips/mach-ath79/Kconfig
-index cd85d1b6c31b..2fa628568aa0 100644
---- a/arch/mips/mach-ath79/Kconfig
-+++ b/arch/mips/mach-ath79/Kconfig
-@@ -8,7 +8,7 @@ config SOC_AR933X
- 	bool
- 	select MIPS_TUNE_24KC
- 	select ROM_EXCEPTION_VECTORS
--	select SUPPORTS_BIG_ENDIAN
-+	select SUPPORT_BIG_ENDIAN
- 	select SUPPORTS_CPU_MIPS32_R1
- 	select SUPPORTS_CPU_MIPS32_R2
- 	help
-@@ -17,7 +17,7 @@ config SOC_AR933X
- config SOC_AR934X
- 	bool
- 	select MIPS_TUNE_74KC
--	select SUPPORTS_BIG_ENDIAN
-+	select SUPPORT_BIG_ENDIAN
- 	select SUPPORTS_CPU_MIPS32_R1
- 	select SUPPORTS_CPU_MIPS32_R2
- 	select USB_EHCI_IS_TDI if USB_EHCI_HCD
-@@ -28,7 +28,7 @@ config SOC_QCA953X
- 	bool
- 	select MIPS_TUNE_24KC
- 	select ROM_EXCEPTION_VECTORS
--	select SUPPORTS_BIG_ENDIAN
-+	select SUPPORT_BIG_ENDIAN
- 	select SUPPORTS_CPU_MIPS32_R1
- 	select SUPPORTS_CPU_MIPS32_R2
- 	help
-@@ -37,7 +37,7 @@ config SOC_QCA953X
- config SOC_QCA956X
- 	bool
- 	select MIPS_TUNE_74KC
--	select SUPPORTS_BIG_ENDIAN
-+	select SUPPORT_BIG_ENDIAN
- 	select SUPPORTS_CPU_MIPS32_R1
- 	select SUPPORTS_CPU_MIPS32_R2
- 	help
-diff --git a/arch/mips/mach-bmips/Kconfig b/arch/mips/mach-bmips/Kconfig
-index eb9ea34c52fe..b140552657ff 100644
---- a/arch/mips/mach-bmips/Kconfig
-+++ b/arch/mips/mach-bmips/Kconfig
-@@ -23,7 +23,7 @@ config SOC_BMIPS_BCM3380
- 	bool "BMIPS BCM3380 family"
- 	select SYS_CACHE_SHIFT_4
- 	select MIPS_TUNE_4KC
--	select SUPPORTS_BIG_ENDIAN
-+	select SUPPORT_BIG_ENDIAN
- 	select SUPPORTS_CPU_MIPS32_R1
- 	select SYSRESET_WATCHDOG
- 	help
-@@ -33,7 +33,7 @@ config SOC_BMIPS_BCM6318
- 	bool "BMIPS BCM6318 family"
- 	select SYS_CACHE_SHIFT_4
- 	select MIPS_TUNE_4KC
--	select SUPPORTS_BIG_ENDIAN
-+	select SUPPORT_BIG_ENDIAN
- 	select SUPPORTS_CPU_MIPS32_R1
- 	select SYSRESET_SYSCON
- 	help
-@@ -43,7 +43,7 @@ config SOC_BMIPS_BCM6328
- 	bool "BMIPS BCM6328 family"
- 	select SYS_CACHE_SHIFT_4
- 	select MIPS_TUNE_4KC
--	select SUPPORTS_BIG_ENDIAN
-+	select SUPPORT_BIG_ENDIAN
- 	select SUPPORTS_CPU_MIPS32_R1
- 	select SYSRESET_SYSCON
- 	help
-@@ -53,7 +53,7 @@ config SOC_BMIPS_BCM6338
- 	bool "BMIPS BCM6338 family"
- 	select SYS_CACHE_SHIFT_4
- 	select MIPS_TUNE_4KC
--	select SUPPORTS_BIG_ENDIAN
-+	select SUPPORT_BIG_ENDIAN
- 	select SUPPORTS_CPU_MIPS32_R1
- 	select SYSRESET_SYSCON
- 	help
-@@ -63,7 +63,7 @@ config SOC_BMIPS_BCM6348
- 	bool "BMIPS BCM6348 family"
- 	select SYS_CACHE_SHIFT_4
- 	select MIPS_TUNE_4KC
--	select SUPPORTS_BIG_ENDIAN
-+	select SUPPORT_BIG_ENDIAN
- 	select SUPPORTS_CPU_MIPS32_R1
- 	select SYSRESET_WATCHDOG
- 	help
-@@ -73,7 +73,7 @@ config SOC_BMIPS_BCM6358
- 	bool "BMIPS BCM6358 family"
- 	select SYS_CACHE_SHIFT_4
- 	select MIPS_TUNE_4KC
--	select SUPPORTS_BIG_ENDIAN
-+	select SUPPORT_BIG_ENDIAN
- 	select SUPPORTS_CPU_MIPS32_R1
- 	select SYSRESET_SYSCON
- 	help
-@@ -83,7 +83,7 @@ config SOC_BMIPS_BCM6368
- 	bool "BMIPS BCM6368 family"
- 	select SYS_CACHE_SHIFT_4
- 	select MIPS_TUNE_4KC
--	select SUPPORTS_BIG_ENDIAN
-+	select SUPPORT_BIG_ENDIAN
- 	select SUPPORTS_CPU_MIPS32_R1
- 	select SYSRESET_SYSCON
- 	help
-@@ -93,7 +93,7 @@ config SOC_BMIPS_BCM6362
- 	bool "BMIPS BCM6362 family"
- 	select SYS_CACHE_SHIFT_4
- 	select MIPS_TUNE_4KC
--	select SUPPORTS_BIG_ENDIAN
-+	select SUPPORT_BIG_ENDIAN
- 	select SUPPORTS_CPU_MIPS32_R1
- 	select SYSRESET_SYSCON
- 	help
-@@ -103,7 +103,7 @@ config SOC_BMIPS_BCM63268
- 	bool "BMIPS BCM63268 family"
- 	select SYS_CACHE_SHIFT_4
- 	select MIPS_TUNE_4KC
--	select SUPPORTS_BIG_ENDIAN
-+	select SUPPORT_BIG_ENDIAN
- 	select SUPPORTS_CPU_MIPS32_R1
- 	select SYSRESET_SYSCON
- 	help
-@@ -114,7 +114,7 @@ config SOC_BMIPS_BCM6838
- 	bool "BMIPS BCM6838 family"
- 	select SYS_CACHE_SHIFT_4
- 	select MIPS_TUNE_4KC
--	select SUPPORTS_BIG_ENDIAN
-+	select SUPPORT_BIG_ENDIAN
- 	select SUPPORTS_CPU_MIPS32_R1
- 	select SYSRESET_SYSCON
- 	help
-diff --git a/arch/mips/mach-jz47xx/Kconfig b/arch/mips/mach-jz47xx/Kconfig
-index dcaac0162866..858173e75b40 100644
---- a/arch/mips/mach-jz47xx/Kconfig
-+++ b/arch/mips/mach-jz47xx/Kconfig
-@@ -6,7 +6,7 @@ config SYS_SOC
- 
- config SOC_JZ4780
- 	bool
--	select SUPPORTS_LITTLE_ENDIAN
-+	select SUPPORT_LITTLE_ENDIAN
- 	select SUPPORTS_CPU_MIPS32_R1
- 	select SUPPORTS_CPU_MIPS32_R2
- 	help
-diff --git a/arch/mips/mach-mscc/Kconfig b/arch/mips/mach-mscc/Kconfig
-index affc4721f82e..367d5248a1cc 100644
---- a/arch/mips/mach-mscc/Kconfig
-+++ b/arch/mips/mach-mscc/Kconfig
-@@ -6,10 +6,10 @@ menu "MSCC VCore-III platforms"
- config SOC_VCOREIII
- 	select MIPS_TUNE_24KC
- 	select ROM_EXCEPTION_VECTORS
--	select SUPPORTS_BIG_ENDIAN
-+	select SUPPORT_BIG_ENDIAN
- 	select SUPPORTS_CPU_MIPS32_R1
- 	select SUPPORTS_CPU_MIPS32_R2
--	select SUPPORTS_LITTLE_ENDIAN
-+	select SUPPORT_LITTLE_ENDIAN
- 	bool
- 
- config SYS_SOC
-diff --git a/arch/mips/mach-pic32/Kconfig b/arch/mips/mach-pic32/Kconfig
-index 2afa972074c1..52d2eec0a766 100644
---- a/arch/mips/mach-pic32/Kconfig
-+++ b/arch/mips/mach-pic32/Kconfig
-@@ -13,7 +13,7 @@ config SOC_PIC32MZDA
- 	select ROM_EXCEPTION_VECTORS
- 	select SUPPORTS_CPU_MIPS32_R1
- 	select SUPPORTS_CPU_MIPS32_R2
--	select SUPPORTS_LITTLE_ENDIAN
-+	select SUPPORT_LITTLE_ENDIAN
- 	select SYS_MIPS_CACHE_INIT_RAM_LOAD
- 	help
- 	  This supports Microchip PIC32MZ[DA] family of microcontrollers.
+-#ifdef CONFIG_CPU_BIG_ENDIAN
++#ifdef CONFIG_SYS_BIG_ENDIAN
+ #define __HEAD_FLAG_BE		1
+ #else
+ #define __HEAD_FLAG_BE		0
+diff --git a/drivers/mtd/nand/raw/brcmnand/brcmnand.c b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
+index b7bf7cc0893d..b1af3f717d43 100644
+--- a/drivers/mtd/nand/raw/brcmnand/brcmnand.c
++++ b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
+@@ -1698,7 +1698,7 @@ static int brcmnand_fill_dma_desc(struct brcmnand_host *host,
+ 	desc->cmd_irq = (dma_cmd << 24) |
+ 		(end ? (0x03 << 8) : 0) | /* IRQ | STOP */
+ 		(!!begin) | ((!!end) << 1); /* head, tail */
+-#ifdef CONFIG_CPU_BIG_ENDIAN
++#ifdef CONFIG_SYS_BIG_ENDIAN
+ 	desc->cmd_irq |= 0x01 << 12;
+ #endif
+ 	desc->dram_addr = lower_32_bits(buf);
+diff --git a/scripts/Makefile.build b/scripts/Makefile.build
+index 97dd4a64f6ef..99cc29595b4a 100644
+--- a/scripts/Makefile.build
++++ b/scripts/Makefile.build
+@@ -224,7 +224,7 @@ recordmcount_source := $(srctree)/scripts/recordmcount.c \
+ 		    $(srctree)/scripts/recordmcount.h
+ else
+ sub_cmd_record_mcount = set -e ; perl $(srctree)/scripts/recordmcount.pl "$(ARCH)" \
+-	"$(if $(CONFIG_CPU_BIG_ENDIAN),big,little)" \
++	"$(if $(CONFIG_SYS_BIG_ENDIAN),big,little)" \
+ 	"$(if $(CONFIG_64BIT),64,32)" \
+ 	"$(OBJDUMP)" "$(OBJCOPY)" "$(CC) $(KBUILD_CPPFLAGS) $(KBUILD_CFLAGS)" \
+ 	"$(LD) $(KBUILD_LDFLAGS)" "$(NM)" "$(RM)" "$(MV)" \
 
 -- 
 2.43.0
