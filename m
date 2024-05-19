@@ -4,76 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50C9DC25B75
-	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 15:35:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02D89C25B75
+	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 17:57:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B7771882AA;
-	Sun, 19 May 2024 17:35:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F2636881F4;
+	Sun, 19 May 2024 19:57:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="f48HD1Qm";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bb48xEMT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF892882B0; Sun, 19 May 2024 17:35:50 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 2F0F988291; Sun, 19 May 2024 19:57:21 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15A0288291
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 17:35:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C19F881AD
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 19:57:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=r.stratiienko@gmail.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4201986d60aso12842545e9.3
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 08:35:49 -0700 (PDT)
+ spf=pass smtp.mailfrom=daniel.schwierzeck@gmail.com
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-57230faeb81so3944367a12.0
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 10:57:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716132948; x=1716737748; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=7uLd1c1p0xOTrgYGj6ZEkGX76XS2olZzzjsWcEcgTqA=;
- b=f48HD1Qm6ZAgWuefBVLZ6wxqoCLss1q3M3mJIKhJX8LsOCVIjav8dzW5KsR8rQlAnS
- ECuhdtD3M5hiAKYynSfgfPp2kAe5VVhdPXe2zPTno9MU4T8NG34Wj6IvqHsM9h9CnCyr
- xCEnZzDs1aLh3Ii5o9IGtSD/VRiTep1KUP5RatJOYbwMLnqGlB3OtIQesVh6eDpPRH8O
- Hh/4xRFL+rnx7P/fug/ECZ2y9ZTQuHTBshuU+LIwuFNWHCdmGN8WjpmAlqpBd9h7lXfL
- xAdssgt4DsEZlxLc4xVVCPPEcdNs7nN87jp4ewdf8Gws2vZPxODN9Z+fNww0KsZ3OIp4
- OeIQ==
+ d=gmail.com; s=20230601; t=1716141439; x=1716746239; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=nJosJWP13oW+NBtpHZbNQ8D208IIEHVryY6kvPz3GfQ=;
+ b=bb48xEMTGQ/grc+1S9vGqvXRXeML6SoDLbxMjjYq7C+ijZ2RJ/0iqjrT7dQhVaPd+B
+ qweWf/mEWPA+b0Nv860Lfjv0j3Td89XzyuAPhOYlxM84raEltdREKoiYkuEHVgQL6Toi
+ ehNo/nvc/6zjIdS/drb1jAHavWsUbSY5W5GVPiLjDmQMCwgtKUEGD7Gvbp1U7HnIMn/1
+ aoxgBSTvzWTETPAr9yFmFZ+xEO3uQDQ/0O9ozF7ewqUC/4EZmWelCkB2Ka5DS3BwgIrd
+ 7LBZPrssgaTBGiwFZqX6D5tXJ5CPiaNgGf7SXcB1fb1pSXFoof1/UluBzxeNgknCD9Wu
+ 6KOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716132948; x=1716737748;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=7uLd1c1p0xOTrgYGj6ZEkGX76XS2olZzzjsWcEcgTqA=;
- b=kHkVB4NrvkcneEaETpP9EakIxFgz6//UOlQVfrb0pbKTaVzNMYYk080qfleM5ieqyT
- b9KAJD0ixT7sIqSNqzmn1omoBCxO+O/T6NhmTVi5wxBG02+QCoTrrDYg7INeqFPSmm1g
- U+PDPiWZZ+HZLRZOnkH2bvotsUCS5fRSB65TDyiv/AiJW9siJgMMb8i3pm9qCqHlNeqd
- uL7yGwMEWsLhpWOixW1dQtYBE/C4+LUJyqdZ/sOu56F+cwrBjLO/9fnOn8YYARWwlqcv
- cNvUuOt2JJ/XtCeZu+XR99jduZyifL8spvSsyJRt3+3NzqCRSgp7BpSirYkWc/f9qS3y
- ORnQ==
+ d=1e100.net; s=20230601; t=1716141439; x=1716746239;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=nJosJWP13oW+NBtpHZbNQ8D208IIEHVryY6kvPz3GfQ=;
+ b=v6ShDNc5F3p+7W+XesH3gsfTeSSZ1fzBau3c1SMG8h6Au2WI2GowAEBDIyegV3+HOd
+ OulHOI5x98nMKJ2M+LbmvKAmQJ60ZJYRVCxMlvQb3iBi2aR5DtAZdW4qTBAm44XIWBQG
+ /5yMKgkexb2X3TmZUvPZsl+DWXgYa7PDCiypMgILm5sOMBIyY1PYoSLy4BJdTf0Ga50z
+ eTQllJneVOaxCFFw1QQ/n+cbdSy/B/vwt05TnBFY3Al10X00P+dFB2M43OcuwaQWm99j
+ /NI1OJeEzB8Vinas9SUge5RrKfXKc7DOseS8YVqbHdJhLquz8bismFTDqKVqyZCz+6Tu
+ qFGg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWVwUZbHbk1Y25+oOTq9J9AsNYivb2RfCxBNC4XalnZezc28LfvjtI0jhKYHZiPnTtYfsxfwhTgUPNbJZkqctEzYwCeRQ==
-X-Gm-Message-State: AOJu0Yxem8TdzJeamMIXguTTSc1usmQa6YDaT2SaOOBgWFiK0DGTz/pm
- szJHiwzbKfGCfk1Z1mb9s46vtbmAzL2DyGN3JIQARiMsAXxku0R7
-X-Google-Smtp-Source: AGHT+IE5DZUMMy8YDlltCFQMgjglYIY2+kddvW6J0Pi6gNR+GDrBOCku0uXZdOC2zmY8OXE/xWQkGA==
-X-Received: by 2002:a05:600c:5250:b0:420:1670:d5fb with SMTP id
- 5b1f17b1804b1-4201670d916mr149524055e9.10.1716132948192; 
- Sun, 19 May 2024 08:35:48 -0700 (PDT)
-Received: from roman-envy-fast.. ([46.172.77.250])
+ AJvYcCWWaLfBbleSSvlzMOtYWUmQwaU9tLjE7I9HiIvWIaV7Kls7MD5V0Hvgvr/A+H+om7gdKEXB9rwCXFY99abPAXPV5HcNmA==
+X-Gm-Message-State: AOJu0YzxjYxWrhYfxigWma58v9WrRwOMZRxre3hOEC3kq1PLl4Dxt60C
+ hY6onoy8LGc6e/GXhD0yq4X0u3fnpbFqNEXpSc7RN9SKG9/w0yKW
+X-Google-Smtp-Source: AGHT+IF0hSwjDWd9XtHDdaG7ewe3w02m5ZXgbEqcApoynBW5fo6yXe1UysnmcNTQWGwKT8UmDNFGcg==
+X-Received: by 2002:a50:d65d:0:b0:572:3483:8a27 with SMTP id
+ 4fb4d7f45d1cf-5734d67f8f7mr25348799a12.33.1716141438479; 
+ Sun, 19 May 2024 10:57:18 -0700 (PDT)
+Received: from [192.168.10.30] (77-7-142-46.pool.kielnet.net. [46.142.7.77])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-420149b1c24sm277082425e9.41.2024.05.19.08.35.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 19 May 2024 08:35:47 -0700 (PDT)
-From: Roman Stratiienko <r.stratiienko@gmail.com>
-To: sjg@chromium.org, xypron.glpk@gmx.de, r.stratiienko@gmail.com,
- u-boot@lists.denx.de
-Subject: [PATCH] part: efi: Rely on a definition to specify the primary GPT
- position
-Date: Sun, 19 May 2024 15:35:42 +0000
-Message-Id: <20240519153542.2572014-1-r.stratiienko@gmail.com>
-X-Mailer: git-send-email 2.40.1
+ 4fb4d7f45d1cf-574ec5fb906sm6831497a12.30.2024.05.19.10.57.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 19 May 2024 10:57:17 -0700 (PDT)
+Message-ID: <2c45ebe6-2b8a-4ba9-9a81-ee761a5038ea@gmail.com>
+Date: Sun, 19 May 2024 19:57:16 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 01/12] pci: xilinx: Handle size of ecam region properly
+To: Jiaxun Yang <jiaxun.yang@flygoat.com>, u-boot@lists.denx.de
+Cc: Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>,
+ Paul Burton <paulburton@kernel.org>, Simon Glass <sjg@chromium.org>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Jonas Karlman <jonas@kwiboo.se>
+References: <20240517-boston-v3-0-1ea7d23f4a1d@flygoat.com>
+ <20240517-boston-v3-1-1ea7d23f4a1d@flygoat.com>
+Content-Language: en-US
+From: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
+In-Reply-To: <20240517-boston-v3-1-1ea7d23f4a1d@flygoat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,59 +99,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use GPT_PRIMARY_PARTITION_TABLE_LBA as the only source for a primary GPT
-location instead of hardcoding it every time.
 
-Sometimes, we need to shift the primary GPT location.
-Having the location in the single place simplifies such shifting.
 
-Signed-off-by: Roman Stratiienko <r.stratiienko@gmail.com>
----
- disk/part_efi.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+On 5/17/24 20:14, Jiaxun Yang wrote:
+> Probe size of ecam from devicetree properly and cap accessible
+> bus number accorading to ecam region size to ensure we don't go
+> beyond hardware address space.
+> 
+> Also disable all interrupts to ensure errors are handled silently.
+> 
+> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> ---
+>   drivers/pci/pcie_xilinx.c | 53 +++++++++++++++++++++++++++++++++++------------
+>   1 file changed, 40 insertions(+), 13 deletions(-)
+> 
 
-diff --git a/disk/part_efi.c b/disk/part_efi.c
-index 4ce9243ef2..b55e251ea1 100644
---- a/disk/part_efi.c
-+++ b/disk/part_efi.c
-@@ -387,7 +387,7 @@ int write_gpt_table(struct blk_desc *desc, gpt_header *gpt_h, gpt_entry *gpt_e)
- 	gpt_h->header_crc32 = cpu_to_le32(calc_crc32);
- 
- 	/* Write the First GPT to the block right after the Legacy MBR */
--	if (blk_dwrite(desc, 1, 1, gpt_h) != 1)
-+	if (blk_dwrite(desc, (lbaint_t)le64_to_cpu(gpt_h->my_lba), 1, gpt_h) != 1)
- 		goto err;
- 
- 	if (blk_dwrite(desc, le64_to_cpu(gpt_h->partition_entry_lba),
-@@ -534,7 +534,7 @@ int gpt_fill_pte(struct blk_desc *desc,
- 
- static uint32_t partition_entries_offset(struct blk_desc *desc)
- {
--	uint32_t offset_blks = 2;
-+	uint32_t offset_blks = GPT_PRIMARY_PARTITION_TABLE_LBA + 1;
- 	uint32_t __maybe_unused offset_bytes;
- 	int __maybe_unused config_offset;
- 
-@@ -572,8 +572,8 @@ static uint32_t partition_entries_offset(struct blk_desc *desc)
- 	 * The earliest LBA this can be at is LBA#2 (i.e. right behind
- 	 * the (protective) MBR and the GPT header.
- 	 */
--	if (offset_blks < 2)
--		offset_blks = 2;
-+	if (offset_blks < (GPT_PRIMARY_PARTITION_TABLE_LBA + 1))
-+		offset_blks = GPT_PRIMARY_PARTITION_TABLE_LBA + 1;
- 
- 	return offset_blks;
- }
-@@ -584,7 +584,7 @@ int gpt_fill_header(struct blk_desc *desc, gpt_header *gpt_h, char *str_guid,
- 	gpt_h->signature = cpu_to_le64(GPT_HEADER_SIGNATURE_UBOOT);
- 	gpt_h->revision = cpu_to_le32(GPT_HEADER_REVISION_V1);
- 	gpt_h->header_size = cpu_to_le32(sizeof(gpt_header));
--	gpt_h->my_lba = cpu_to_le64(1);
-+	gpt_h->my_lba = cpu_to_le64(GPT_PRIMARY_PARTITION_TABLE_LBA);
- 	gpt_h->alternate_lba = cpu_to_le64(desc->lba - 1);
- 	gpt_h->last_usable_lba = cpu_to_le64(desc->lba - 34);
- 	gpt_h->partition_entry_lba =
--- 
-2.40.1
-
+Reviewed-by: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
