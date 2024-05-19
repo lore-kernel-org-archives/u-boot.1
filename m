@@ -4,113 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEE4CC25B77
-	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 12:59:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80187C25B75
+	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 13:10:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E880886C8;
-	Sun, 19 May 2024 14:57:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
+	by phobos.denx.de (Postfix) with ESMTP id E4D8F88292;
+	Sun, 19 May 2024 15:10:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="nUfhlsx4";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="IUmIOa4r";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SmGesjGk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 877C6886C8; Sun, 19 May 2024 14:57:47 +0200 (CEST)
-Received: from wfhigh1-smtp.messagingengine.com
- (wfhigh1-smtp.messagingengine.com [64.147.123.152])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4E908882AA; Sun, 19 May 2024 15:10:01 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A382886B9
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 14:57:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5FC5388286
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 15:09:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=flygoat.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
- by mailfhigh.west.internal (Postfix) with ESMTP id 53F6418000B4;
- Sun, 19 May 2024 08:57:42 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute1.internal (MEProxy); Sun, 19 May 2024 08:57:43 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
- cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1716123461;
- x=1716209861; bh=CFn8VOPLiJLHQnyJKcRYngTmxQ6+CvlN42F1m3+zgPQ=; b=
- nUfhlsx40WsGHSINPf3zSuwYPgCsvwBT4Wez2uFcSDRVzbIRJ9objeRRnnV7kLuy
- D7A5fFFX9NWUdtnlSzoYqw+/UEPYA30bpyTahRS5NH/gYNOR+SMwihpppPvNRnB3
- 55a/XM79ih2PHk6o/g+PtMJn2sm3PgfPx+Ck6GpBUsD/M3jEldUh+d8uGZ4uHvYA
- MpjpTO/OYxFaKUBFkxaz8VNNbhKEdt2rnhU/e+iEzvDmPFawC1KA0NSdzugua0ZY
- sbMBQWr+cln29x2k0Zp3OKmyUND3XHz6WJ4k3Mq3BekZLBACBjbsC1GF5maMVuw6
- joXs+sntHIs6xgg+u3K+XQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716123461; x=
- 1716209861; bh=CFn8VOPLiJLHQnyJKcRYngTmxQ6+CvlN42F1m3+zgPQ=; b=I
- UmIOa4rWJG2MVjskZM5MoL6qhJMKhHk0kghB23r/A/SHp10UBxZD2bRogiZW+9ZM
- 0llfWz/9ZwPfgMMd7ehMDe6lV52GckmFH5rDS3WETfpn3GT5m6Na52aBy7Rlqlu9
- 2nIMTjOELGOXxXTLzsTdBC+s//XEbd8uaVHKGHPLtmwECdzh0RrjoGSq4283GGxt
- RMdH4sBRgbte3aG+pO6afzL5kVj37nXD7y3fN+k2GwEqNCKlGa0bGdehn1G8SUHH
- YKd1lcHlU6nN36MyhFH8VtnZYjB/vnwQQCS6pTEGMqjqlNx0PoQTmcrtdgSvPnrf
- gMWiG9EPYYvkRuTa0F/0A==
-X-ME-Sender: <xms:RfdJZvhSrSmu50AP7p_IDeuVdK8JCS_w6gwXnu8RNmqinla2RrQSJQ>
- <xme:RfdJZsA_7Utq1LbyUkwrXVyFXrnD_YgLuL2RGQZvtru61Hs8M-JDjvboJaCyReYLW
- uDOY-lM3xu4OAHePe4>
-X-ME-Received: <xmr:RfdJZvH8qrcnrPM76TadSr_OCXTgZUvcziSjBTcWJswiRCh_CLrss-M>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehkedgheejucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhephfffufggtgfgkfhfjgfvvefosehtjeertdertdejnecuhfhrohhmpeflihgr
- gihunhcujggrnhhguceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomheqne
- cuggftrfgrthhtvghrnhepvdekiefhfeevkeeuveetfeelffekgedugefhtdduudeghfeu
- veegffegudekjeelnecuvehluhhsthgvrhfuihiivgepvdenucfrrghrrghmpehmrghilh
- hfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:RfdJZsSkHUQo-WlESqfAtVogun0AkrlOwt6b_FIbHHz-cDYU1D_LCQ>
- <xmx:RfdJZswDm7vi3uxmikq11ZN5HL29NBI8rVvCsHQDQLqJlO8Py14EVw>
- <xmx:RfdJZi6CYA_XNwJLSQvt3sFx_InEB_CPSCClxxaB0_Qk6QpqHnFSIw>
- <xmx:RfdJZhxTEppwYytbRvNtnTanEwfP9-vl91n556OFtylFn8Xu-tF33Q>
- <xmx:RfdJZgmEkFtT4kxrFY9OxWXvgeztDXnpwQ2CcMREpm_r9gPNyFiTcYFu>
-Feedback-ID: ifd894703:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sun,
- 19 May 2024 08:57:39 -0400 (EDT)
-From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Sun, 19 May 2024 13:56:58 +0100
-Subject: [PATCH 13/13] qemu-arm: Big endian enablement for arm64
+ spf=pass smtp.mailfrom=r.stratiienko@gmail.com
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-4202959b060so11973775e9.2
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 06:09:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1716124199; x=1716728999; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=xau8kTEuANbhoDNhbo+zwN6iGY3P43NpGdFamxG4sKo=;
+ b=SmGesjGkyewU9kLzUPnnEgTFsSPPzQg0hshsCOsg3vvCK+SWbsRDmkDZid4Aacv3PA
+ XhsismHiB4lRGodRwKdcogc1ecHIFz/ArvblELzIjTSdwaaHWWOqzFb0W2qanlwHLFto
+ 1R+QsyJdbO2uWdgM0qbTNDV5DQEYpoifIMwdB5W+ISrCpahCWfEYCS1txyqxDD/cYTUk
+ Vd+/nJUVKpjO4Q3f8aeSM2euF6lrxQE9T9YuxwQxb79o9kQoiUgf6bVgf3r64rWAa3nv
+ EZJTcF9HzZAW/7FeSsg0ToGmwKoaFC4i192mMupUNxTjczJqvCUW3EappSLzWC4rsOA2
+ h2tw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716124199; x=1716728999;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xau8kTEuANbhoDNhbo+zwN6iGY3P43NpGdFamxG4sKo=;
+ b=ppjP70rm9NZzLr5Igi//bC5Ld8FK9wv0bNhQ7EX5Sec+R3megtqmDRHc9JntYa1duo
+ UeGk1Q7iNsoFtK5c4sTnrs00Rpi0aFg0zTEFyGHMTxIR4NkyqrYIzoZx0ja5OL0UsABG
+ WDcIfJvU20hiZknH4xBQfE/y+J5E1fHVbRgMvWgvHUqUSOwDGQ2hPcQW7/pFt8h5yScq
+ wll17WAzn6b8VjM6/macg/Nurx7HvnUUQv1Vtu9/UkvBmTHKbg3bWIE394nsOj/EFbJK
+ nMdG+UxUjowPWN7TDvRtD35RTyCmlhB3J0jmYTicruPKac+4sT+F/nb/NwA/ctdleZ2L
+ BQTw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWLpIjlBbRHyX9aD22SzOBRDcUeKu7Laomk+UyYsAR3r3M88i/LiQjvbyuYshpXxzridwwDOy+B1NWHX8q4XI8Kpll07Q==
+X-Gm-Message-State: AOJu0YyGfCnrfaoK9ucDUIS1wBrZmWS9X+AakMXd/U3uGofCrZVbeevB
+ eN7/qVYcsEPkKUmfGUYjie9pcA44b/CM7YplPNsrm1vimmnN3EU4
+X-Google-Smtp-Source: AGHT+IGhsfd9uo35OV5G59fuD58nr5czi0ysWzTqTLaF+tGeAifUrIF8oeL/vVffNzBldSGiEOzScQ==
+X-Received: by 2002:a05:600c:3509:b0:420:11cd:d302 with SMTP id
+ 5b1f17b1804b1-42011cdd486mr166737055e9.9.1716124198548; 
+ Sun, 19 May 2024 06:09:58 -0700 (PDT)
+Received: from roman-envy-fast.. ([46.172.77.250])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42013bf1a5dsm278536165e9.30.2024.05.19.06.09.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 19 May 2024 06:09:58 -0700 (PDT)
+From: Roman Stratiienko <r.stratiienko@gmail.com>
+To: r.stratiienko@gmail.com,
+	u-boot@lists.denx.de
+Cc: sjg@chromium.org, igor.opaniuk@gmail.com, mkorpershoek@baylibre.com,
+ semen.protsenko@linaro.org, souajih@baylibre.com
+Subject: [PATCH] android: Fix ramdisk loading for bootimage v3+
+Date: Sun, 19 May 2024 13:09:51 +0000
+Message-Id: <20240519130951.2558467-1-r.stratiienko@gmail.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240519-aarch64-be-v1-13-75cc328eddfa@flygoat.com>
-References: <20240519-aarch64-be-v1-0-75cc328eddfa@flygoat.com>
-In-Reply-To: <20240519-aarch64-be-v1-0-75cc328eddfa@flygoat.com>
-To: u-boot@lists.denx.de, uboot-snps-arc@synopsys.com
-Cc: Tom Rini <trini@konsulko.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- Ezequiel Garcia <ezequiel@collabora.com>, 
- Gregory CLEMENT <gregory.clement@bootlin.com>, 
- Lars Povlsen <lars.povlsen@microchip.com>, 
- Horatiu Vultur <horatiu.vultur@microchip.com>, 
- Alexey Brodkin <alexey.brodkin@synopsys.com>, 
- Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>
-X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4142;
- i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=8cCeu59DEKbtNtqJzfpV7RXifJZBZKOgfxiz27RRD/U=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhjTP7wLRkv0uiW5nFWJUfF5JKIldveyysPBL+zm+w35rV
- sju+nauo5SFQYyLQVZMkSVEQKlvQ+PFBdcfZP2BmcPKBDKEgYtTACZyOoHhv8PcqyZ5v4LC65Ue
- 7DJc8dBavdJA8vDOlXGhVtfe7p0lcImRYbfxpbv1+kvtHt4/qq23Oezqkqe5X2bPKtocNv2o0Wn
- OLSwA
-X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
- fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,144 +92,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Select a few config option and generate a new defconfig for
-big endian arm64.
+The boot_ramdisk and vendor_ramdisk must be both concatenated together.
+Without this change, Android root is missing some of the necessary tools
+to complete virtual AB OTA.
 
-Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Signed-off-by: Roman Stratiienko <r.stratiienko@gmail.com>
 ---
- board/emulation/qemu-arm/Kconfig     |  2 +
- board/emulation/qemu-arm/MAINTAINERS |  1 +
- configs/qemu_arm64be_defconfig       | 71 ++++++++++++++++++++++++++++++++++++
- doc/board/emulation/qemu-arm.rst     |  7 +++-
- 4 files changed, 80 insertions(+), 1 deletion(-)
+ boot/image-android.c | 17 ++++++++---------
+ 1 file changed, 8 insertions(+), 9 deletions(-)
 
-diff --git a/board/emulation/qemu-arm/Kconfig b/board/emulation/qemu-arm/Kconfig
-index e21c135e86fa..4c98340a62f4 100644
---- a/board/emulation/qemu-arm/Kconfig
-+++ b/board/emulation/qemu-arm/Kconfig
-@@ -5,8 +5,10 @@ config TEXT_BASE
+diff --git a/boot/image-android.c b/boot/image-android.c
+index 04f2a8015e..499eae9bcd 100644
+--- a/boot/image-android.c
++++ b/boot/image-android.c
+@@ -64,7 +64,6 @@ static void android_boot_image_v3_v4_parse_hdr(const struct andr_boot_img_hdr_v3
  
- config BOARD_SPECIFIC_OPTIONS # dummy
- 	def_bool y
-+	select ARMV8_RESET_SET_ENDIAN if ARM64
- 	select QFW if ACPI
- 	select QFW_MMIO if CMD_QFW
-+	select SUPPORT_BIG_ENDIAN if ARM64
- 	imply VIRTIO_MMIO
- 	imply VIRTIO_PCI
- 	imply VIRTIO_NET
-diff --git a/board/emulation/qemu-arm/MAINTAINERS b/board/emulation/qemu-arm/MAINTAINERS
-index 5154262f29ea..9384b1003d2c 100644
---- a/board/emulation/qemu-arm/MAINTAINERS
-+++ b/board/emulation/qemu-arm/MAINTAINERS
-@@ -6,3 +6,4 @@ F:	board/emulation/common/
- F:	include/configs/qemu-arm.h
- F:	configs/qemu_arm_defconfig
- F:	configs/qemu_arm64_defconfig
-+F:	configs/qemu_arm64be_defconfig
-diff --git a/configs/qemu_arm64be_defconfig b/configs/qemu_arm64be_defconfig
-new file mode 100644
-index 000000000000..af05f484036d
---- /dev/null
-+++ b/configs/qemu_arm64be_defconfig
-@@ -0,0 +1,71 @@
-+CONFIG_ARM=y
-+CONFIG_POSITION_INDEPENDENT=y
-+CONFIG_ARCH_QEMU=y
-+CONFIG_SYS_MALLOC_LEN=0x1000000
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x40200000
-+CONFIG_ENV_SIZE=0x40000
-+CONFIG_ENV_SECT_SIZE=0x40000
-+CONFIG_DEFAULT_DEVICE_TREE="qemu-arm64"
-+CONFIG_DEBUG_UART_BASE=0x9000000
-+CONFIG_DEBUG_UART_CLOCK=0
-+CONFIG_ARMV8_CRYPTO=y
-+CONFIG_SYS_LOAD_ADDR=0x40200000
-+CONFIG_ENV_ADDR=0x4000000
-+CONFIG_PCI=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_AHCI=y
-+CONFIG_SYS_BIG_ENDIAN=y
-+CONFIG_FIT=y
-+CONFIG_FIT_SIGNATURE=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_FIT_BEST_MATCH=y
-+CONFIG_BOOTSTD_FULL=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_USE_PREBOOT=y
-+# CONFIG_DISPLAY_CPUINFO is not set
-+# CONFIG_DISPLAY_BOARDINFO is not set
-+CONFIG_PCI_INIT_R=y
-+CONFIG_CMD_SMBIOS=y
-+CONFIG_CMD_BOOTZ=y
-+CONFIG_CMD_BOOTEFI_SELFTEST=y
-+CONFIG_CMD_NVEDIT_EFI=y
-+CONFIG_CMD_DFU=y
-+CONFIG_CMD_MTD=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_TPM=y
-+CONFIG_CMD_MTDPARTS=y
-+CONFIG_ENV_IS_IN_FLASH=y
-+CONFIG_SCSI_AHCI=y
-+CONFIG_AHCI_PCI=y
-+CONFIG_DFU_TFTP=y
-+CONFIG_DFU_MTD=y
-+CONFIG_DFU_RAM=y
-+# CONFIG_MMC is not set
-+CONFIG_MTD=y
-+CONFIG_DM_MTD=y
-+CONFIG_MTD_NOR_FLASH=y
-+CONFIG_FLASH_SHOW_PROGRESS=0
-+CONFIG_CFI_FLASH=y
-+CONFIG_CFI_FLASH_USE_WEAK_ACCESSORS=y
-+CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
-+CONFIG_FLASH_CFI_MTD=y
-+CONFIG_SYS_FLASH_CFI=y
-+CONFIG_SYS_MAX_FLASH_SECT=256
-+CONFIG_SYS_MAX_FLASH_BANKS=2
-+CONFIG_SYS_MAX_FLASH_BANKS_DETECT=y
-+CONFIG_E1000=y
-+CONFIG_NVME_PCI=y
-+CONFIG_PCIE_ECAM_GENERIC=y
-+CONFIG_SCSI=y
-+CONFIG_DEBUG_UART_PL011=y
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_CMD_POWEROFF=y
-+CONFIG_SYSRESET_PSCI=y
-+CONFIG_TPM2_MMIO=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_PCI=y
-+CONFIG_SEMIHOSTING=y
-+CONFIG_TPM=y
-diff --git a/doc/board/emulation/qemu-arm.rst b/doc/board/emulation/qemu-arm.rst
-index 1c91c7f3ac67..70108f98c759 100644
---- a/doc/board/emulation/qemu-arm.rst
-+++ b/doc/board/emulation/qemu-arm.rst
-@@ -38,6 +38,11 @@ Set the CROSS_COMPILE environment variable as usual, and run:
-     make qemu_arm64_defconfig
-     make
+ 	data->kcmdline = hdr->cmdline;
+ 	data->header_version = hdr->header_version;
+-	data->ramdisk_ptr = env_get_ulong("ramdisk_addr_r", 16, 0);
  
-+- For AArch64 Big Endian::
-+
-+    make qemu_arm64be_defconfig
-+    make
-+
- Running U-Boot
- --------------
- The minimal QEMU command line to get U-Boot up and running is:
-@@ -46,7 +51,7 @@ The minimal QEMU command line to get U-Boot up and running is:
+ 	/*
+ 	 * The header takes a full page, the remaining components are aligned
+@@ -75,6 +74,7 @@ static void android_boot_image_v3_v4_parse_hdr(const struct andr_boot_img_hdr_v3
+ 	data->kernel_ptr = end;
+ 	data->kernel_size = hdr->kernel_size;
+ 	end += ALIGN(hdr->kernel_size, ANDR_GKI_PAGE_SIZE);
++	data->ramdisk_ptr = end;
+ 	data->ramdisk_size = hdr->ramdisk_size;
+ 	data->boot_ramdisk_size = hdr->ramdisk_size;
+ 	end += ALIGN(hdr->ramdisk_size, ANDR_GKI_PAGE_SIZE);
+@@ -462,25 +462,24 @@ int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
+ 		return -1;
+ 	}
+ 	if (img_data.header_version > 2) {
+-		ramdisk_ptr = img_data.ramdisk_ptr;
++		ramdisk_ptr = img_data.ramdisk_addr;
+ 		memcpy((void *)(ramdisk_ptr), (void *)img_data.vendor_ramdisk_ptr,
+ 		       img_data.vendor_ramdisk_size);
+-		memcpy((void *)(ramdisk_ptr + img_data.vendor_ramdisk_size),
+-		       (void *)img_data.ramdisk_ptr,
++		ramdisk_ptr += img_data.vendor_ramdisk_size;
++		memcpy((void *)(ramdisk_ptr), (void *)img_data.ramdisk_ptr,
+ 		       img_data.boot_ramdisk_size);
++		ramdisk_ptr += img_data.boot_ramdisk_size;
+ 		if (img_data.bootconfig_size) {
+ 			memcpy((void *)
+-			       (ramdisk_ptr + img_data.vendor_ramdisk_size +
+-			       img_data.boot_ramdisk_size),
+-			       (void *)img_data.bootconfig_addr,
++			       (ramdisk_ptr), (void *)img_data.bootconfig_addr,
+ 			       img_data.bootconfig_size);
+ 		}
+ 	}
  
-     qemu-system-arm -machine virt -nographic -bios u-boot.bin
+ 	printf("RAM disk load addr 0x%08lx size %u KiB\n",
+-	       img_data.ramdisk_ptr, DIV_ROUND_UP(img_data.ramdisk_size, 1024));
++	       img_data.ramdisk_addr, DIV_ROUND_UP(img_data.ramdisk_size, 1024));
  
--- For AArch64::
-+- For AArch64 (both endian)::
+-	*rd_data = img_data.ramdisk_ptr;
++	*rd_data = img_data.ramdisk_addr;
  
-     qemu-system-aarch64 -machine virt -nographic -cpu cortex-a57 -bios u-boot.bin
- 
-
+ 	*rd_len = img_data.ramdisk_size;
+ 	return 0;
 -- 
-2.43.0
+2.40.1
 
