@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 159C9C25B77
-	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 12:57:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D037C25B75
+	for <u-boot@archiver.kernel.org>; Sun, 19 May 2024 12:57:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92E5D882B5;
-	Sun, 19 May 2024 14:57:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F3A9C885DF;
+	Sun, 19 May 2024 14:57:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="e131jzlw";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="Xj/0hP1n";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="nRtFVfcH";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="VghAquoC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25256882F0; Sun, 19 May 2024 14:57:00 +0200 (CEST)
+ id EEA0688281; Sun, 19 May 2024 14:57:03 +0200 (CEST)
 Received: from wfhigh1-smtp.messagingengine.com
  (wfhigh1-smtp.messagingengine.com [64.147.123.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E020088281
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 14:56:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DBEFF8849D
+ for <u-boot@lists.denx.de>; Sun, 19 May 2024 14:57:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
- by mailfhigh.west.internal (Postfix) with ESMTP id 25D7E18000DF;
- Sun, 19 May 2024 08:56:55 -0400 (EDT)
+Received: from compute7.internal (compute7.nyi.internal [10.202.2.48])
+ by mailfhigh.west.internal (Postfix) with ESMTP id 2BABE18000B4;
+ Sun, 19 May 2024 08:56:59 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute4.internal (MEProxy); Sun, 19 May 2024 08:56:56 -0400
+ by compute7.internal (MEProxy); Sun, 19 May 2024 08:57:00 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1716123414;
- x=1716209814; bh=x8m/IF5ca9Ta8yonTh1b1up8Bgq3edgJeP3Bl0vjhFg=; b=
- e131jzlweL2wmHAedIjJypFTY7Vcm7ZzqEnE1LD0iHnrt7CdIRvbHMuzMucP9tAF
- Tng3oBC6gX/eHmZfKlYIC7QcYidXEjZRec/Gj3z5h3iF/9a/l2WgPlPRFRwojkJS
- mq7iS5TapFiGN5oudbKEXAyEgdA52+vyMtq2Dg75nk7X/yza83ucxbV/J6Xg54wK
- 2NHo0Th8b3th2qSH010uAgbknGdVxbf6uGSAvRW03IGXKuzhoN2CAyCnW+xvQ4VK
- aDXf/V3TIA4vNkdpKBziNukuYLCNjQQ6WNA7Xjy3TRAYjcTpp+pVHsY9Q3bnl7gf
- 24C5LG86t2cE1nBYIsaRag==
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1716123418;
+ x=1716209818; bh=T7mJiv8eohbpeUEHidRVbI5PMPfgASZ9uTdr5KNh440=; b=
+ nRtFVfcHlDBeq3+mASGxEBo+HtjwuU0qPal1vWIjrbmm+qcXX6XXHZQPBBWW0NhO
+ lNE7XnH4dzAxAKSOVVsOfJ5l7lDq2iuNmK76Fs0M2j57s44cIQ17ZOscehd6MKBG
+ B3AtuX81/3r0ddd/zY3cA8T8C88FyeOMHVm2XLNaXG4Zvaft5hjE1MGgWZSqsvww
+ gORuebA7N79Ey5W2VodMoaMArakEYSgR9otR18meS8tBQcLEK7nuh5E8m3+ucJO/
+ MsG9o53s/Bf4Eq22iAtBndl01ubHEibVVM4r4i2PMdx1dYixd1OuFuRJWfJzkooD
+ yKMarDCcdFG2Ht/CnchMbg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716123414; x=
- 1716209814; bh=x8m/IF5ca9Ta8yonTh1b1up8Bgq3edgJeP3Bl0vjhFg=; b=X
- j/0hP1nwlnaZ18c1p2zpzVuUEM1Y18e63LXhfr8cmjCVQp3Am6xctXsmjod21YoD
- X68iEDY1/a9CJHsbq7sJ6XHYAoYkkT6+U9Mvg03AM8w7xOrUxTVt2I1b7OH+WBYw
- 7Edbvux+RmSDn8WVWiLW7gCsHaZSxaS21guj5EF5vsdU036I0ZWwgqPrKzRYHmym
- 6eVyZcfVVBXTNY8TnBH4LBTwXa04V12D0ZsYi3S4N0+kgIDkaFjWpsVpZ8ZLoNIT
- CF74xJm4J0eGKt1xH37X0u1WbuXRL6a9RSZGoKC6DauctIi+2dtxunPlnrcRNIpx
- bzxQt7RJoN/HUhsQ4S6FQ==
-X-ME-Sender: <xms:FvdJZiNAqlB_9PuogpPIP6UbsJIbJd_Pxyva3LaYbS08_inva2Ebug>
- <xme:FvdJZg_dVhB3eJaN5GAEHI8WZDAt8bLlVwh1Rijmb9jBYBysjKV-3lskm0Pw9DLK7
- cAe15-NMNHfvc_CopQ>
-X-ME-Received: <xmr:FvdJZpTxy8Ju1OqSKVSu4OJkwvgCNP5Twonyb91Us92mA2yGTnrrE8E>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehkedgheeiucetufdoteggodetrfdotf
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716123418; x=
+ 1716209818; bh=T7mJiv8eohbpeUEHidRVbI5PMPfgASZ9uTdr5KNh440=; b=V
+ ghAquoCN/IEgM7M3buMwXxH9wEZZnPovZBe/iYNNTkUHjWtHMC1HUG9nrT+VGEu5
+ J9VEFAvJrRef+fPT+a8tHZy9jH0kmMPwA8cZBDTRXdS7vbFMu3k8LGAg9UdRQJ4F
+ ZQtaPVeh8vkII6T44RsF9pqtzdisQlulHEE7GW/SKrImkUU9FMWXNyyrxdbtCI1J
+ Zm+T3V2lleYWaPblMCyU1W2Nt2IOwTtA68furNw5UGk2nKIvVMEoTutnV1GqWuf6
+ Ve9ttd4bUBw6meaSvqLJ7A2v287R827mAeiXqCdGw+j/NvhLoMoWAEcG0AVmOrAW
+ Q52DvHk40NdY8mMbjoqDw==
+X-ME-Sender: <xms:GvdJZgnIGFxG_V-PVrH2TbE7DtDBu_qwWw4dHCrueZZ_DZ0sLLWACA>
+ <xme:GvdJZv1dh_gpj2ZGPvovdyRHCtCMur5MID-YwCUNOsB0K-GmMea_AS_28w1ek-oG0
+ AksL1l_zETvhVLsmcY>
+X-ME-Received: <xmr:GvdJZuqqsHICdzRvIAlEwPReux3BU9-5CuKlV7OsmMJe-WZW8kmN6yc>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehkedgheejucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
  cujfgurhephfffufggtgfgkfhfjgfvvefosehtjeertdertdejnecuhfhrohhmpeflihgr
@@ -68,21 +68,21 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdehkedgheeiucetufdoteggod
  cuggftrfgrthhtvghrnhepvdekiefhfeevkeeuveetfeelffekgedugefhtdduudeghfeu
  veegffegudekjeelnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilh
  hfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:FvdJZitANH0VqS2Xv-0frMUKGD-PHir3-Ga906JatGptUR7ZpxYp7A>
- <xmx:FvdJZqe4ze6aOnue1WFPe6BaE-dX6KScLZVc_tsuzOZgOwotXwxksA>
- <xmx:FvdJZm1FWA7K9Pb6I-XfnyCgWj2nOqV3yJA4lx7gYp4kUBYZgIfiNg>
- <xmx:FvdJZu8OD2OLKjPYvJjEXbkoypSJSDdHa8FMTOipp_pegNBFcLCZPQ>
- <xmx:FvdJZhBlkV3q3ikb_8LWTvV3tuhGzVopdZok8WkvYKSJvC-bNr-1es8C>
+X-ME-Proxy: <xmx:GvdJZsltYk9TqlGT5Ow3dH4yYbaMbbWrXhOu-oC0nROasLMiR6GFCA>
+ <xmx:GvdJZu0YG_tnjkH6hGsBPLSeG84jR2DHMmZdJrr1n6epJMKYAgjMJw>
+ <xmx:GvdJZjsnUUQUJSkSxLl2xMQyzPVqWvunh4y-dbHxkHDM8xzFBB-uvw>
+ <xmx:GvdJZqVHzsaP-KCimwnC8QhTMAb1MVH8pxxGymuT-8HnyFp6aEzCEQ>
+ <xmx:GvdJZu77D-q01DXsrDYeViuDVD4C_wRJGt5L30TJS507uiI8tSm7Nx0j>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sun,
- 19 May 2024 08:56:52 -0400 (EDT)
+ 19 May 2024 08:56:56 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Sun, 19 May 2024 13:56:46 +0100
-Subject: [PATCH 01/13] tools/relocate-rela: Fix Big Endian elf64 handling
+Date: Sun, 19 May 2024 13:56:47 +0100
+Subject: [PATCH 02/13] arm: Don't select ARM_ASM_UNIFIED on arm64
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240519-aarch64-be-v1-1-75cc328eddfa@flygoat.com>
+Message-Id: <20240519-aarch64-be-v1-2-75cc328eddfa@flygoat.com>
 References: <20240519-aarch64-be-v1-0-75cc328eddfa@flygoat.com>
 In-Reply-To: <20240519-aarch64-be-v1-0-75cc328eddfa@flygoat.com>
 To: u-boot@lists.denx.de, uboot-snps-arc@synopsys.com
@@ -102,13 +102,13 @@ Cc: Tom Rini <trini@konsulko.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
  Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3522;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=653;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=ZEJJHvJlIv1tyBAt8PLFUgc4SCvgXoWdePXwCkdD8D0=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhjTP7/xMmd9SPJQ9ujq4VvcdLrk+81RLTUdxfdTDb1c2G
- 1d16J/qKGVhEONikBVTZAkRUOrb0HhxwfUHWX9g5rAygQxh4OIUgIlYH2T4w32jT+t0RGuiwq2Z
- kQW75i/Tn8uTe3VhT92sS7eWXvmX0cPIsGi77N3qT++d5yiJSFl/DDdZ0Fiu31xje30V12Kvf3z
- mbAA=
+ bh=WzCtPoHq/xuv4SVJX4/Y9G+N8QJ3eXBr7pc48yOMzZg=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhjTP7/wsa10qw16qCET6rypVuPnb8ZmQx/qmrYkqE8qcf
+ zIlGLZ1lLIwiHExyIopsoQIKPVtaLy44PqDrD8wc1iZQIYwcHEKwETmzmD4n8hQGf/o5aIN7/ee
+ fLLDY5+NUC1b72flR+4iJZOtrm3jrWFkmP5g+83NV+eZKJZv7T3GdHhl4DRbzey5JkW9mffeSKf
+ WMwMA
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -127,109 +127,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement elf64_to_cpu and use it when necessary.
+We don't have thumb on arm64, so that's pointless and causing
+problems on some headers.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- tools/relocate-rela.c | 40 ++++++++++++++++++++++++----------------
- 1 file changed, 24 insertions(+), 16 deletions(-)
+ arch/arm/Kconfig | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/tools/relocate-rela.c b/tools/relocate-rela.c
-index 613abd25ef46..cbdd2552ec6e 100644
---- a/tools/relocate-rela.c
-+++ b/tools/relocate-rela.c
-@@ -111,6 +111,14 @@ static uint32_t cpu_to_elf32(uint32_t data)
- 	return cpu_to_be32(data);
- }
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 39ad03acd2e4..46c0d33b3c6e 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -152,8 +152,7 @@ config GPIO_EXTRA_HEADER
  
-+static uint64_t elf64_to_cpu(uint64_t data)
-+{
-+	if (ei_data == ELFDATA2LSB)
-+		return le64_to_cpu(data);
-+
-+	return be64_to_cpu(data);
-+}
-+
- static bool supported_rela(Elf64_Rela *rela)
- {
- 	uint64_t mask = 0xffffffffULL; /* would be different on 32-bit */
-@@ -150,7 +158,7 @@ static int decode_elf64(FILE *felf, char **argv)
- 		return 25;
- 	}
+ # Used for compatibility with asm files copied from the kernel
+ config ARM_ASM_UNIFIED
+-	bool
+-	default y
++	def_bool !ARM64
  
--	machine = le16_to_cpu(header.e_machine);
-+	machine = elf16_to_cpu(header.e_machine);
- 	debug("Machine\t%d\n", machine);
- 
- 	if (machine != EM_AARCH64) {
-@@ -158,10 +166,10 @@ static int decode_elf64(FILE *felf, char **argv)
- 		return 30;
- 	}
- 
--	text_base = le64_to_cpu(header.e_entry);
--	section_header_base = le64_to_cpu(header.e_shoff);
--	section_header_size = le16_to_cpu(header.e_shentsize) *
--			      le16_to_cpu(header.e_shnum);
-+	text_base = elf64_to_cpu(header.e_entry);
-+	section_header_base = elf64_to_cpu(header.e_shoff);
-+	section_header_size = elf16_to_cpu(header.e_shentsize) *
-+			      elf16_to_cpu(header.e_shnum);
- 
- 	sh_table = malloc(section_header_size);
- 	if (!sh_table) {
-@@ -189,8 +197,8 @@ static int decode_elf64(FILE *felf, char **argv)
- 		return 27;
- 	}
- 
--	sh_index = le16_to_cpu(header.e_shstrndx);
--	sh_size = le64_to_cpu(sh_table[sh_index].sh_size);
-+	sh_index = elf16_to_cpu(header.e_shstrndx);
-+	sh_size = elf64_to_cpu(sh_table[sh_index].sh_size);
- 	debug("e_shstrndx %x, sh_size %lx\n", sh_index, sh_size);
- 
- 	sh_str = malloc(sh_size);
-@@ -205,8 +213,8 @@ static int decode_elf64(FILE *felf, char **argv)
- 	 * Specifies the byte offset from the beginning of the file
- 	 * to the first byte in the section.
- 	 */
--	sh_offset = le64_to_cpu(sh_table[sh_index].sh_offset);
--	sh_num = le16_to_cpu(header.e_shnum);
-+	sh_offset = elf64_to_cpu(sh_table[sh_index].sh_offset);
-+	sh_num = elf16_to_cpu(header.e_shnum);
- 
- 	ret = fseek(felf, sh_offset, SEEK_SET);
- 	if (ret) {
-@@ -228,13 +236,13 @@ static int decode_elf64(FILE *felf, char **argv)
- 	}
- 
- 	for (i = 0; i < sh_num; i++) {
--		char *sh_name = sh_str + le32_to_cpu(sh_table[i].sh_name);
-+		char *sh_name = sh_str + elf32_to_cpu(sh_table[i].sh_name);
- 
- 		debug("%s\n", sh_name);
- 
--		sh_addr = le64_to_cpu(sh_table[i].sh_addr);
--		sh_offset = le64_to_cpu(sh_table[i].sh_offset);
--		sh_size = le64_to_cpu(sh_table[i].sh_size);
-+		sh_addr = elf64_to_cpu(sh_table[i].sh_addr);
-+		sh_offset = elf64_to_cpu(sh_table[i].sh_offset);
-+		sh_size = elf64_to_cpu(sh_table[i].sh_size);
- 
- 		if (!strcmp(".rela.dyn", sh_name)) {
- 			debug("Found section\t\".rela_dyn\"\n");
-@@ -480,9 +488,9 @@ static int rela_elf64(char **argv, FILE *f)
- 			return 4;
- 		}
- 
--		swrela.r_offset = le64_to_cpu(rela.r_offset);
--		swrela.r_info = le64_to_cpu(rela.r_info);
--		swrela.r_addend = le64_to_cpu(rela.r_addend);
-+		swrela.r_offset = elf64_to_cpu(rela.r_offset);
-+		swrela.r_info = elf64_to_cpu(rela.r_info);
-+		swrela.r_addend = elf64_to_cpu(rela.r_addend);
- 
- 		if (!supported_rela(&swrela))
- 			continue;
+ # Used for compatibility with asm files copied from the kernel
+ config THUMB2_KERNEL
 
 -- 
 2.43.0
