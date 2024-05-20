@@ -4,71 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E3ADC04FFE
-	for <u-boot@archiver.kernel.org>; Mon, 20 May 2024 09:55:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 632ECC04FFE
+	for <u-boot@archiver.kernel.org>; Mon, 20 May 2024 09:59:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0ED1F88124;
-	Mon, 20 May 2024 11:55:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C0B5B886A8;
+	Mon, 20 May 2024 11:59:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dkB+OE/x";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="U1Sd6Ocn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E89CC88140; Mon, 20 May 2024 11:55:20 +0200 (CEST)
-Received: from mail-vs1-xe2c.google.com (mail-vs1-xe2c.google.com
- [IPv6:2607:f8b0:4864:20::e2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 633D5882F1; Mon, 20 May 2024 11:59:34 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBB818806A
- for <u-boot@lists.denx.de>; Mon, 20 May 2024 11:55:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BA5F2886A7
+ for <u-boot@lists.denx.de>; Mon, 20 May 2024 11:59:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe2c.google.com with SMTP id
- ada2fe7eead31-47efcb120feso714041137.2
- for <u-boot@lists.denx.de>; Mon, 20 May 2024 02:55:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716198917; x=1716803717; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6AqOGodQwysyblT03Uwd6h/QOSKAZxqbo8ojrQ8D3tE=;
- b=dkB+OE/xXJfmffgvyOthpeS3o34UD7tDXqeLZG6qbikAxpLh37x9jBBZJGqHB9iABh
- /SyPRjQVm19l89EntWgvbyNHYRyQPZpouk5r96Zm4I859L/DZhMRCsMjz7bAY2AGOzA8
- IJuVkbK9sXNRmPMNrNQBx82zYC/wqUxikVruX9ofEq1Ad+ZuB/lvV85xO6ws67iv1QjF
- To4TzpQrqTVehdHR6uA2Eo35fApm4CNJceTWknfvK0zD0rkK1JluU5MxcgLAPo9N+Aid
- mPWuTYxQtB/9QK8Fmpa3FhvSGfl5VkyV1tm+AtlEYqEUN6q3YEsd6TF05N55+XlthWl2
- sXCw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716198917; x=1716803717;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=6AqOGodQwysyblT03Uwd6h/QOSKAZxqbo8ojrQ8D3tE=;
- b=Vr3lQ4Quox4EDvlkBa9M95vsSGKfdL3NmZfjjmRGYe/vAcmpUiIlHjNsRQRsq8CczB
- PfEw58hKPLh8zklv8L3Sf4En3pSKktGumEJ9XJOki+9vAcD7THlbEPPrbTBmLNUhRXCc
- 3vaFEMKWekvnI8A8pde+H+WZaCXnz5AhtPI7/gxmeQbllLwbDA2HmufbeBfM/GR/sj+q
- I+INWJifpSXY8aJFsr32yi9/vUOVtP3OrG2i9yvLgiSxBKkrRyvD/uobts9AnlGHMA+8
- iJQ9O0oIvqo/NHwZMIrKKdtG0QABoXwimo7RDZ3HW8cCBxso1jrO1yKEaHzp91r8/LCv
- cp/A==
-X-Gm-Message-State: AOJu0YzoPZ8ip2UMEMqL4lx4sVhuumvBop2xG4sQqKkkCd24pbAiUmuJ
- NLNqebhLoL5Ci4Bzt8QZ+1h/GfmbNctnxCKqeYDPgyKsUWE5fY+bzxK3oKUUJ2+TY89E7CWviHc
- H3WWsAiiyCQfAUUL/oA6MzOHVCUOQW8yArj/Dpw==
-X-Google-Smtp-Source: AGHT+IGtRNdl0VrV8WpzIrdttfrK95LE4nKrmRNo7W1AJrafHkaUp+TAx1lZTf63Q5QS5tTA6zqb29U4zsq0P3gBQrw=
-X-Received: by 2002:a05:6102:dc8:b0:47c:11ba:fea9 with SMTP id
- ada2fe7eead31-48077e71431mr30445518137.23.1716198917548; Mon, 20 May 2024
- 02:55:17 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44K9xM70091599;
+ Mon, 20 May 2024 04:59:22 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1716199162;
+ bh=1LiX03ApXzuI4SrNtl55XhIt855Xu97Ozj43nsHmzeg=;
+ h=From:To:CC:Subject:Date;
+ b=U1Sd6Ocnv1bRzzwNJXqoSqXIpZLWbBWoe3OFn1U4MCSqQqJ68KCUYqEstXrLLGu6L
+ krFCPJ6aLPkLz6cHZK4GkJxoz8PzuXcLaPZDCuUp4c7AYCqAKIQ9SpqfStsi1qnKAT
+ g+/boQwmZxKBdPndLVZyR3xRN4tIVRbz4oJ5jtFM=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44K9xMt4012829
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 20 May 2024 04:59:22 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 20
+ May 2024 04:59:22 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 20 May 2024 04:59:22 -0500
+Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44K9xHHf047124;
+ Mon, 20 May 2024 04:59:17 -0500
+From: Neha Malcom Francis <n-francis@ti.com>
+To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <sjg@chromium.org>,
+ <alpernebiyasak@gmail.com>, <bb@ti.com>, <nm@ti.com>,
+ <sumit.garg@linaro.org>
+CC: <michal.simek@amd.com>, <marex@denx.de>, <neil.armstrong@linaro.org>,
+ <afd@ti.com>, <vigneshr@ti.com>, <kamlesh@ti.com>, <m-chawdhry@ti.com>,
+ <u-kumar1@ti.com>, <n-francis@ti.com>
+Subject: [PATCH 0/3] k3-j721e: Enable OF_UPSTREAM for J721E
+Date: Mon, 20 May 2024 15:29:13 +0530
+Message-ID: <20240520095916.1809962-1-n-francis@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240519204044.187165-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20240519204044.187165-1-marek.vasut+renesas@mailbox.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Mon, 20 May 2024 15:25:06 +0530
-Message-ID: <CAFA6WYNVvhZDj5DocnpqJK7QM0dFPru-xfWnBE6UmgxdqWWLTw@mail.gmail.com>
-Subject: Re: [PATCH] ARM: dts: renesas: Reserve space in 64bit R-Car DTs
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,43 +81,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 20 May 2024 at 02:11, Marek Vasut
-<marek.vasut+renesas@mailbox.org> wrote:
->
-> Reserve 4 kiB of space in 64bit R-Car DTs when those DTs are compiled
-> to permit patching in OpTee-OS /firmware node, /reserved-memory node,
-> possibly also additional /memory@ nodes and RPC node by TFA.
->
-> This duplicates behavior in arch/arm/dts/Makefile with OF_UPSTREAM.
->
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Sumit Garg <sumit.garg@linaro.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> ---
->  dts/upstream/src/arm64/Makefile | 4 ++++
->  1 file changed, 4 insertions(+)
->
+This series was plucked out from the larger series [1] that did some
+templating reformatting and also enabled OF_UPSTREAM for J721E. The
+former has been kept aside till all the platforms affected have moved to
+using OF_UPSTREAM to have less conflicts while merging.
 
-Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
+Patches split J721E EVM and J721E SK to using separate builds, as well
+as enable OF_UPSTREAM for both the platforms.
 
--Sumit
+Boot logs:
+https://gist.github.com/nehamalcom/8f326376b6c6b1196084721405159bb9
 
-> diff --git a/dts/upstream/src/arm64/Makefile b/dts/upstream/src/arm64/Makefile
-> index 9a8f6aa3584..26a83d3d29d 100644
-> --- a/dts/upstream/src/arm64/Makefile
-> +++ b/dts/upstream/src/arm64/Makefile
-> @@ -7,6 +7,10 @@ targets += $(dtb-y)
->  # Add any required device tree compiler flags here
->  DTC_FLAGS += -a 0x8
->
-> +ifdef CONFIG_RCAR_64
-> +DTC_FLAGS += -R 4 -p 0x1000
-> +endif
-> +
->  PHONY += dtbs
->  dtbs: $(addprefix $(obj)/, $(dtb-y))
->         @:
-> --
-> 2.43.0
->
+[1] https://lore.kernel.org/all/20240322131011.1029620-1-n-francis@ti.com/
+
+Neha Malcom Francis (3):
+  arm: dts: k3-j721e-r5*: Introduce k3-j721e-r5.dtsi
+  configs: j721e_sk: Move to separate defconfig for J721E SK board
+  arm: dts: k3-j721e: Move to OF_UPSTREAM
+
+ arch/arm/dts/Makefile                         |    4 +-
+ arch/arm/dts/k3-j721e-binman.dtsi             |  101 +-
+ .../k3-j721e-common-proc-board-u-boot.dtsi    |   14 +-
+ arch/arm/dts/k3-j721e-common-proc-board.dts   |  976 ------
+ arch/arm/dts/k3-j721e-main.dtsi               | 2741 -----------------
+ arch/arm/dts/k3-j721e-mcu-wakeup.dtsi         |  681 ----
+ arch/arm/dts/k3-j721e-r5-beagleboneai64.dts   |   78 +-
+ .../arm/dts/k3-j721e-r5-common-proc-board.dts |   75 +-
+ arch/arm/dts/k3-j721e-r5-sk.dts               |   75 +-
+ arch/arm/dts/k3-j721e-r5.dtsi                 |   80 +
+ arch/arm/dts/k3-j721e-sk-u-boot.dtsi          |   41 +-
+ arch/arm/dts/k3-j721e-sk.dts                  | 1074 -------
+ arch/arm/dts/k3-j721e-som-p0.dtsi             |  446 ---
+ arch/arm/dts/k3-j721e-thermal.dtsi            |   75 -
+ arch/arm/dts/k3-j721e.dtsi                    |  176 --
+ board/ti/j721e/MAINTAINERS                    |    2 +
+ configs/j721e_evm_a72_defconfig               |    5 +-
+ configs/j721e_evm_r5_defconfig                |    2 +-
+ configs/j721e_sk_a72_defconfig                |    9 +
+ configs/j721e_sk_r5_defconfig                 |   10 +
+ 20 files changed, 147 insertions(+), 6518 deletions(-)
+ delete mode 100644 arch/arm/dts/k3-j721e-common-proc-board.dts
+ delete mode 100644 arch/arm/dts/k3-j721e-main.dtsi
+ delete mode 100644 arch/arm/dts/k3-j721e-mcu-wakeup.dtsi
+ create mode 100644 arch/arm/dts/k3-j721e-r5.dtsi
+ delete mode 100644 arch/arm/dts/k3-j721e-sk.dts
+ delete mode 100644 arch/arm/dts/k3-j721e-som-p0.dtsi
+ delete mode 100644 arch/arm/dts/k3-j721e-thermal.dtsi
+ delete mode 100644 arch/arm/dts/k3-j721e.dtsi
+ create mode 100644 configs/j721e_sk_a72_defconfig
+ create mode 100644 configs/j721e_sk_r5_defconfig
+
+-- 
+2.34.1
+
