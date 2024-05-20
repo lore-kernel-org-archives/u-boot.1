@@ -4,76 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB990C25B78
-	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 15:34:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2C64C04FFE
+	for <u-boot@archiver.kernel.org>; Mon, 20 May 2024 06:11:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1EAF187B1A;
-	Mon, 27 May 2024 17:34:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 429D58817C;
+	Mon, 20 May 2024 08:11:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=jookia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YhIm0Gz1";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=jookia.org header.i=@jookia.org header.b="g9srCmmc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF4EE87CDB; Mon, 27 May 2024 17:34:53 +0200 (CEST)
-Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
- [IPv6:2607:f8b0:4864:20::82c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6B8F788621; Mon, 20 May 2024 08:11:02 +0200 (CEST)
+Received: from out-178.mta0.migadu.com (out-178.mta0.migadu.com
+ [91.218.175.178])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE74A87A09
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 17:34:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AB0DF8817C
+ for <u-boot@lists.denx.de>; Mon, 20 May 2024 08:10:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=jookia.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82c.google.com with SMTP id
- d75a77b69052e-43fc7623afaso7312091cf.3
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 08:34:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1716824091; x=1717428891; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TBuxWiTzT1DRxtkYdHr5jb/2yIn3c5kDv38NCf4OqQY=;
- b=YhIm0Gz1CPc6/Qph0J+9GJs8mvCTeGGE40q3WYeO5V7YRhjqfgQhXUQFgqYU6H9HqR
- Xz7UnU2nPBxan0oWSpetcSl08JSNe+pta1AdtyrB3As58jAmAk7KxGR8FSmVEwXznQtg
- 3gjNBnMTmIFd52k6yeKbZ6baKZ17e/05awo8I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716824091; x=1717428891;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TBuxWiTzT1DRxtkYdHr5jb/2yIn3c5kDv38NCf4OqQY=;
- b=bRs1xnp16h9auXz35LmnJGZ9jdvoWTErW6H6PYZLGmitF8/+T053g8X7Vpsv61Sw4U
- VIUd90i1xGYfzlAVx1ootxGfbXXWqaUG3WXB7Sexx4JZ51BBbNTD3Z0OhRkuVJR3hlEB
- 4HGQnTXdk41BTpfBrHAZNQAMzY8kM/iRnCfrRWqW7yUrI2UEta9amdOGUSJvrEDj7eBk
- v7Lk6fIeOM8xTzMbROwPZCbV5esu2AhRj7RaISVhu8tL8AJD1ohGviUoDQsqgrxMcWBX
- 5kYNy81lzFBim+a+n+t9XoyZ4WOmGWtlwDjdbgSfGxLCcFUgwHykZ3C2tFcXqX/qD32l
- UMyw==
-X-Gm-Message-State: AOJu0YzhgqSuYKGLIO+SpByk+cBVHrnOZy2Fg3PzGUOke86HCsfXUNDx
- v0LQwHCDeXpVdlr0n0La3faKDYdUWWwKqqVva7XbuqIMVxRCEUrtKAsbA9qzzYA=
-X-Google-Smtp-Source: AGHT+IGQiK59AYhwlAk6g+3hL0EOnRNaIVQRE9ZOzKH4sMcegkx6s8wI36kjZxryg793eEFefH4QGA==
-X-Received: by 2002:a05:622a:15d1:b0:437:d9b:cb56 with SMTP id
- d75a77b69052e-43fb0edd53dmr109798611cf.44.1716824090391; 
- Mon, 27 May 2024 08:34:50 -0700 (PDT)
-Received: from bill-the-cat ([189.178.170.52])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-43fb18c3f46sm34914271cf.85.2024.05.27.08.34.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 May 2024 08:34:49 -0700 (PDT)
-Date: Mon, 27 May 2024 09:34:47 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>
-Subject: Re: [PATCH v2 00/14] Introduce the lwIP network stack
-Message-ID: <20240527153447.GI2568172@bill-the-cat>
-References: <cover.1716566960.git.jerome.forissier@linaro.org>
+ spf=none smtp.mailfrom=contact@jookia.org
+X-Envelope-To: jagan@amarulasolutions.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jookia.org; s=key1;
+ t=1716185457;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=w7EE+n7dXbvm7hDwXm9PI7enxm7iElAKKNeZSI0hkKY=;
+ b=g9srCmmcUkPqND6zgTJSJdtrTc+/TR7HGydod+Y1BHsOpF68GvTyqkYVdr16zRViTq2AMV
+ OHVCoskiwMZP4LRbZhuIBfxUzsn/CJnI3PaimbLfgNENR/4WqMjvPM185WwGjLTVIG+xcl
+ 5KR/tczJ3EzWw4lqJIr3m2eM5wC5l2o1ZheIove0mUovMEiygCD1w5Rv6PCtweUQToAweK
+ 2PXE+C3V0yEyCBYiMcBk90wzZp3cI266rmArG5eEJEX/7uMox0Xsdp5FpkexltHd9DZYOE
+ QyAYG4BTfTmo34JYx/LSv6quGI38ZX9/mZk5irvvbqanCQflkCnvtl6rDtP0Yg==
+X-Envelope-To: andre.przywara@arm.com
+X-Envelope-To: lukma@denx.de
+X-Envelope-To: seanga2@gmail.com
+X-Envelope-To: trini@konsulko.com
+X-Envelope-To: rick@andestech.com
+X-Envelope-To: ycliang@andestech.com
+X-Envelope-To: sumit.garg@linaro.org
+X-Envelope-To: u-boot@lists.denx.de
+X-Envelope-To: contact@jookia.org
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: John Watts <contact@jookia.org>
+To: Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Sumit Garg <sumit.garg@linaro.org>
+Cc: "Cc:u-boot"@lists.denx.de, John Watts <contact@jookia.org>
+Subject: Re: [PATCH RFC 3/4] pwm: sunxi: Add support Allwinner D1 PWM
+Date: Mon, 20 May 2024 16:10:37 +1000
+Message-ID: <20240520061037.2675720-1-contact@jookia.org>
+In-Reply-To: <20240518-pwm_d1-v1-0-311fc5fe2248@jookia.org>
+References: <20240518-pwm_d1-v1-0-311fc5fe2248@jookia.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9k7bY6CJz3VKCafk"
-Content-Disposition: inline
-In-Reply-To: <cover.1716566960.git.jerome.forissier@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,73 +81,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+After a long time reading the datasheet I found out my approach was
+actually wrong and led to an off by on error.
 
---9k7bY6CJz3VKCafk
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: John Watts <contact@jookia.org>
+---
+ drivers/pwm/sunxi_pwm_d1.c | 57 +++++++++++++++++++++-----------------
+ 1 file changed, 32 insertions(+), 25 deletions(-)
 
-On Fri, May 24, 2024 at 06:19:54PM +0200, Jerome Forissier wrote:
+diff --git a/drivers/pwm/sunxi_pwm_d1.c b/drivers/pwm/sunxi_pwm_d1.c
+index 6c57bc6e85..f396afff3e 100644
+--- a/drivers/pwm/sunxi_pwm_d1.c
++++ b/drivers/pwm/sunxi_pwm_d1.c
+@@ -1,34 +1,41 @@
+ // SPDX-License-Identifier: GPL-2.0
+ // Copyright 2022 Jookia <contact@jookia.org>
+ /*
+- * The Allwinner D1's PWM channels are 16-bit counters with up to
+- * 65537 cycles (yes, you read that correctly).
++ * The Allwinner D1's PWM channels are paired 16-bit counters.
+  *
+  * Each channel must be programmed using three variables:
+  * - The entire cycle count (used for the period)
+- * - The active cycle count (the count of inactive cycles)
+- * - The polarity (specifies if the signal is active high or low)
+- * The cycle counts are at minimum 1 and at maximum 65536.
++ * - The active cycle count (used for the duty cycle)
++ * - The active state polarity (specifies if the signal goes high or low)
+  *
+- * The controller will output the number of entire cycles plus one
+- * extra, with any cycles after the active cycle output as active.
++ * All counts are zero based, but the datasheet spends a lot of time
++ * adding 1 to the entire cycle count. There's no hidden extra cycle,
++ * it's just trying to make it human understandable. After all, you can
++ * have 0 active counts for a 100% duty cycle, but 0 entire cycles
++ * doesn't really mean sense or work in time calculations.
+  *
+- * Consider a PWM period of 128 nanoseconds and a cycle period of 32.
+- * Setting the entire cycle count to 3 and active cycle count to 4
+- * gives an output like so:
++ * The counter works like this (quoting the datasheet):
++ * - PCNTR = (PCNTR == PWM_ENTIRE_CYCLE) ? 0 : PCNTR + 1
++ * - PCNTR > (PWM_ENTIRE_CYCLE - PWM_ACT_CYCLE) = Output active state
++ * - PCNTR <= (PWM_ENTIRE_CYCLE - PWM_ACT_CYCLE) = Output inactive state
+  *
+- * - Cycle 1 runs 0 to 32 nanoseconds, inactive
+- * - Cycle 2 runs 32 to 64 nanoseconds, inactive
+- * - Cycle 3 runs 64 to 96 nanoseconds, inactive
+- * - Cycle 4 runs 96 to 128 nanoseconds, inactive
+- * - Cycle 5 is skipped but would run 128 to 160 nanoseconds, active
++ * Here's a 2-bit table of cycle counts versus active cycle counts:
++ *   Active:  |       0 |        1  |        2  |        3 |
++ *   Count 0  | Active  | Inactive  | Inactive  | Inactive |
++ *   Count 1  | Active  | Active    | Inactive  | Inactive |
++ *   Count 2  | Active  | Active    | Active    | Inactive |
++ *   Count 3  | Active  | Active    | Active    | Active   |
+  *
+- * If we set the entire count to 4, cycle 5 would run and we wouldn't be
+- * able to specify it as inactive as the active count only goes up to 4.
++ * An entire count of 2 and active count of 3 would always be inactive.
+  *
+- * In practice this means we want to set the entire cycle to be one less
+- * then the actual number of cycles we want, so we can set the number of
+- * active cycles to be up to maximum for a fully inactive signal.
++ * The main takeaways here for us are:
++ * - The counter wraps around when it hits the entire cycle count
++ * - The output is active after the counter equals the active cycle count
++ * - An active count of 0 means the period is a 100% active cycle
++ * - An active count larger than the entire cycle count is a 0% active cycle
++ *
++ * This driver deals with the last problem by limiting the entire cycles
++ * to 65534 so we can always specify 65535 for a 0% active cycle.
+  *
+  * The PWM channels are paired and clocked together, resulting in a
+  * cycle time found using the following formula:
+@@ -123,7 +130,7 @@ int find_channel_dividers(uint period_ns,
+ 			  uint parent_hz,
+ 			  struct pwm_timings *out)
+ {
+-	uint ideal_cycle_ns = div_ns(period_ns, 65536);
++	uint ideal_cycle_ns = div_ns(period_ns, 65535);
+ 	int common_div = out->common_div;
+ 	int prescaler = 1;
+ 	uint cycle_ns = 0;
+@@ -160,10 +167,10 @@ int find_channel_timings(const struct pwm_channel *in,
+ 	if (find_channel_dividers(in->period_ns, parent_hz, &new))
+ 		return -1;
+ 
+-	new.entire_cycles = (in->period_ns / new.cycle_ns) - 1;
++	new.entire_cycles = (in->period_ns / new.cycle_ns);
+ 	new.active_cycles = (in->duty_ns / new.cycle_ns);
+-	new.period_ns = (new.entire_cycles + 1) * new.cycle_ns;
+-	new.duty_ns = new.active_cycles * new.cycle_ns;
++	new.period_ns = (new.entire_cycles * new.cycle_ns);
++	new.duty_ns = (new.active_cycles * new.cycle_ns);
+ 	new.polarity = in->polarity;
+ 
+ 	if (error_too_large(new.period_ns, in->period_ns))
+@@ -311,7 +318,7 @@ void enable_channel(void *base, int channel, struct pwm_timings *timings)
+ {
+ 	u32 pwm_active = (timings->polarity) ? 0 : PCR_PWM_ACTIVE;
+ 	u32 prescale = (timings->prescale_k - 1);
+-	u32 entire_cycles = timings->entire_cycles;
++	u32 entire_cycles = (timings->entire_cycles - 1);
+ 	u32 active_cycles = timings->active_cycles;
+ 
+ 	u32 PCR_clear = (PCR_PRESCAL_K_MASK | PCR_PWM_ACTIVE);
+-- 
+2.45.1
 
-> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
-> library for the network stack" [1]. The goal is to introduce the lwIP TCP=
-/IP
-> stack [2] [3] as an alternative to the current implementation in net/,
-> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
-> reasons for doing so are:
-> - Make the support of HTTPS in the wget command easier. Javier T. (CC'd)
-> has some additional lwIP and Mbed TLS patches to do so. With that it
-> becomes possible to fetch and launch a distro installer such as Debian
-> etc. directly from the U-Boot shell.
-> - Possibly benefit from additional features implemented in lwIP
-> - Less code to maintain in U-Boot
->=20
-> The first patch introduces a new Kconfig symbol: NET_LWIP, which selects
-> the lwIP implementation instead of the current one (NET). Contrary to the
-> approach chosen by Maxim in [1], NET_LWIP and NET cannot be enabled
-> simultaneously. The rationale is we want to start from a clean state and
-> not pull potentially duplicated functionality from both stacks. Note
-> however that a few files are still built in net/, they are the ones
-> related to ethernet device management and the ethernet bootflow.
->=20
-> The second patch imports the lwIP code as a Git subtree under
-> lib/lwip/lwip. Some glue code is added under lib/lwip/u-boot.
-
-For next time, please just make it a pre-req to run the git subtree
-command (and note it in the cover letter).
-
-In more specific feedback, I tried this on a Pi 3, and:
-U-Boot> tftpboot 200000 EFI/arm64/helloworld.efi
-TFTP from server 192.168.1.10; our IP address is 192.168.1.100
-Filename 'EFI/arm64/helloworld.efi'.
-Load address: 0x200000
-Loading:
-=2E...
-FAILED test/py/tests/test_efi_loader.py::test_efi_helloworld_net - u_boot_s=
-pawn.Timeout
-
-So some amount of networking is working (that's a reasonable dhcp
-response it got), but tftp'ing a file fails.
-
---=20
-Tom
-
---9k7bY6CJz3VKCafk
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZUqBcACgkQFHw5/5Y0
-tyxOLwv7ByRij6fCegHcjbTR+CDpn87uOkSMoJrisHsfa392vCm8NpoxEV3GIbal
-3UY8Vcb8d39RCtRir9+e+aGtkrx64F65gp6XhpPrPqaODNS+bFFHtqM+MedZTGsn
-CDeE/E1+YBAwTvyZeVtgWd+KD6JTEX1pXYXjhbmI6UwBSIYqjCdR5mhcfHrMhgrS
-7ntZDDYKpCZHPvBbyzx6diKZvxv0vKOUy9Xjdha0FIXIAGkXSeO3ubdbJiORtd2Q
-Za+TepdHlGVgkZ1jQKKm7CRsnkfb6x02wkldfbpXd1B30vLwG0g9CXV/3ZNPn9xA
-pUYtXQ9r1woeIfDpScrFwmx31Ji7davAaw0TrRJa89z+Ef70+KLw7yPE1GbFmvM2
-VF3azT0Y4CxFWbBeKjPn3Q95BVNUIDbaSdatvETr6JAtgn22YGQhA34r/ueK0I5Y
-yiNLQX+sgrIQeAfjjeOhQXT1FDZnBEFsVPLremfs5+FnbgXQWInyopVSopsRR7nZ
-30t8Ei3w
-=c0UC
------END PGP SIGNATURE-----
-
---9k7bY6CJz3VKCafk--
