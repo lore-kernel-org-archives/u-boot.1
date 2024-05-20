@@ -4,54 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05306C04FFE
-	for <u-boot@archiver.kernel.org>; Mon, 20 May 2024 13:33:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F641C04FFE
+	for <u-boot@archiver.kernel.org>; Mon, 20 May 2024 14:18:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0357886C3;
-	Mon, 20 May 2024 15:33:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=fancydomain.eu
+	by phobos.denx.de (Postfix) with ESMTP id 7DCD088239;
+	Mon, 20 May 2024 16:18:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=fancydomain.eu header.i=@fancydomain.eu header.b="knyl6Y+w";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1998C8869E; Mon, 20 May 2024 12:43:56 +0200 (CEST)
-Received: from mx.walter.deinstapel.de (mx.walter.deinstapel.de
- [IPv6:2a01:584:9::4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0191A88020
- for <u-boot@lists.denx.de>; Mon, 20 May 2024 12:43:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=fancydomain.eu
+ id BE3EF88691; Mon, 20 May 2024 16:18:15 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 7722B88239
+ for <u-boot@lists.denx.de>; Mon, 20 May 2024 16:18:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jasper@fancydomain.eu
-Date: Mon, 20 May 2024 12:43:50 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=fancydomain.eu;
- s=mail; t=1716201833;
- bh=+AC9Y2LOxcTLckcZxk1l705p2cQ2JAfi7x9GNYdm0Ns=;
- h=From:To:CC:Subject:In-Reply-To:References;
- b=knyl6Y+w+wHN0ubKIJPcclWrrAAWSiJgyCaIewZc17NWqtvWdknudxfVubyERJjuf
- 3M9+ITiBjmbWGX4VOIzIuxk5JoSchwMtdu6qqcwuVFSqZ6lM7qj0XBqbV+61lZcSjn
- 1DMDJe4a9HbiirzrpLlFDyr6ai/I9QjqBdKQMOWunqarkN0v6P8N5E8J+jvz6sHR/u
- 8xrthenucRr023l40OBsNyfoK2N6HQFad1pABXSIl7LpK03np0XxefI2T5LRpgt2M8
- x4TWUoK6I9P2Vw/68/mpYINATpWsVTPwv+sOQfGTz0HkfixmwWDlWsuYC0MJJm9Prq
- HKgkLIdYBjrjQ==
-From: Jasper Orschulko <jasper@fancydomain.eu>
-To: Tom Rini <trini@konsulko.com>
-CC: u-boot@lists.denx.de, joe.hershberger@ni.com,
- Michael Glembotzki <Michael.Glembotzki@iris-sensing.com>
-Subject: Re: [PATCH] env: Invert gd->env_valid for env_mmc_save
-In-Reply-To: <20240517185144.GM2568172@bill-the-cat>
-References: <20240510113834.826783-1-jasper@fancydomain.eu>
- <20240517185144.GM2568172@bill-the-cat>
-Message-ID: <4EDE5074-4AE2-4FFA-A713-9A9060232836@fancydomain.eu>
-Mime-Version: 1.0
-X-Mailman-Approved-At: Mon, 20 May 2024 15:33:14 +0200
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8F218DA7;
+ Mon, 20 May 2024 07:18:36 -0700 (PDT)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2BA093F766;
+ Mon, 20 May 2024 07:18:11 -0700 (PDT)
+Date: Mon, 20 May 2024 15:18:08 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Jernej Skrabec
+ <jernej.skrabec@gmail.com>, Samuel Holland <samuel@sholland.org>, Chris
+ Morgan <macromorgan@hotmail.com>, Ryan Walklin <ryan@testtoast.com>,
+ u-boot@lists.denx.de, linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH 0/6] power: pmic: sunxi: consolidate AXP SPL drivers
+Message-ID: <20240520151808.1e5fe1e1@donnerap.manchester.arm.com>
+In-Reply-To: <CALeDE9OrY-wdpbdOWvqkgYE6YD8SLGCw_Fo1FaBsjQ75LQcqtQ@mail.gmail.com>
+References: <20240515234839.26898-1-andre.przywara@arm.com>
+ <CALeDE9OrY-wdpbdOWvqkgYE6YD8SLGCw_Fo1FaBsjQ75LQcqtQ@mail.gmail.com>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,80 +61,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Mon, 20 May 2024 13:48:41 +0100
+Peter Robinson <pbrobinson@gmail.com> wrote:
 
-you are right=2E If this patch is to be merged, we should change all the o=
-ccurrences=2E That was an oversight on my part, sorry about that=2E I'll se=
-nd an updated patch to the mailing list later this week=2E
+Hi Peter,
 
-My colleague Michael can give more technical background on this than I can=
-, so I'll let him do explaining here ;)
+thanks for having a look!
 
-Best,
-Jasper
+> Hi Andre,
+> 
+> > this is the first series in an attempt to clean up the X-Powers AXP PMIC
+> > drivers used by the SPL for sunxi boards. So far we have a separate
+> > driver file for each AXP variant, but the code was largely the same,
+> > just differing by the regulator ranges.
+> >
+> > This adds a new generic driver, which reads the regulator description
+> > from an array of structs. This is similar to how the DM AXP driver used
+> > for U-Boot proper works, but is simplified, since we won't need the full
+> > feature set for the SPL, and we want to keep the code size small.  
+> 
+> Overall seems a reasonable approach, would it make sense to put the
+> regulator descriptions in a file that could be shared between this and
+> the DM driver so the information isn't duplicated and hence may
+> diverge over time with things like copy/paste errors?
 
-On 17 May 2024 20:51:44 CEST, Tom Rini <trini@konsulko=2Ecom> wrote:
->On Fri, May 10, 2024 at 01:38:34PM +0200, jasper@fancydomain=2Eeu wrote:
->
->> From: Jasper Orschulko <jasper@fancydomain=2Eeu>
->>=20
->> The A/B update strategy of the env's has a gap in the first 2 calls of =
-saveenv=2E
->> The env's are stored twice on the first memory area if:
->> gd->env_valid =3D=3D ENV_INVALID=2E
->>=20
->> u-boot=3D> saveenv
->> Saving Environment to MMC=2E=2E=2E Writing to MMC(1)=2E=2E=2E OK
->> u-boot=3D> saveenv
->> Saving Environment to MMC=2E=2E=2E Writing to MMC(1)=2E=2E=2E OK  <-- !=
-!!
->> u-boot=3D> saveenv
->> Saving Environment to MMC=2E=2E=2E Writing to redundant MMC(1)=2E=2E=2E=
- OK
->> u-boot=3D> saveenv
->> Saving Environment to MMC=2E=2E=2E Writing to MMC(1)=2E=2E=2E OK
->>=20
->> Signed-off-by: Michael Glembotzki <Michael=2EGlembotzki@iris-sensing=2E=
-com>
->> Signed-off-by: Jasper Orschulko <jasper@fancydomain=2Eeu>
->> ---
->>  env/mmc=2Ec | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>=20
->> diff --git a/env/mmc=2Ec b/env/mmc=2Ec
->> index 7afb733e890=2E=2E2bef30c973c 100644
->> --- a/env/mmc=2Ec
->> +++ b/env/mmc=2Ec
->> @@ -299,7 +299,7 @@ static int env_mmc_save(void)
->>  	ret =3D 0;
->> =20
->>  	if (IS_ENABLED(CONFIG_SYS_REDUNDAND_ENVIRONMENT))
->> -		gd->env_valid =3D gd->env_valid =3D=3D ENV_REDUND ? ENV_VALID : ENV_=
-REDUND;
->> +		gd->env_valid =3D gd->env_valid =3D=3D ENV_VALID ? ENV_REDUND : ENV_=
-VALID;
->> =20
->>  fini:
->>  	fini_mmc_for_env(mmc);
->
->Can you please explain a little more on how you get to this problem? The
->same code / test exists in env/fat=2Ec, env/sf=2Ec and env/ubi=2Ec=2E In =
-the
->case of env/mmc=2Ec it's been that way since introduction in:
->commit d196bd880347373237d73e0d115b4d51c68cf2ad
->Author: Michael Heimpold <mhei@heimpold=2Ede>
->Date:   Wed Apr 10 10:36:19 2013 +0000
->
->    env_mmc: add support for redundant environment
->   =20
->    This patch add support for storing the environment redundant on
->    mmc devices=2E Substantially it re-uses the logic from the NAND imple=
-mentation,
->    that means using an incremental counter for marking newer data=2E
->   =20
->    Signed-off-by: Michael Heimpold <mhei@heimpold=2Ede>
->
->as well=2E Thanks!
->
->--=20
->Tom
+Yes, I thought about it, but it gets nasty:
+- The SPL should only have the regulator descriptions for the *one*
+selected AXP chip, whereas the DM driver can afford to describe all
+regulators and select the right ones via the compatible at runtime. This
+is to conserve memory for the SPL.
+- The SPL should only be interested in the DC/DC buck converters, we don't
+really need any LDOs. Again saves memory.
+- Each regulator entry for the SPL should be as small as possible, we don't
+want and need the regulator name, for instance, or the table pointer.
+Again to save memory.
+
+Currently the array for the three AXP313 regulators in the SPL is exactly
+30 bytes long; in the DM driver, just for the small AXP313: 192 bytes. The
+difference is even more pronounced for the larger AXPs.
+
+I am hopeful there might be some macro magic to express this, like:
+static const struct axp_regulator_plat axp313_regulators[] = {
+   SPL( "dcdc1", 0x10, BIT(0), 0x13, 0x7f,  500, 1540,  10, 70 )
+   SPL( "dcdc2", 0x10, BIT(1), 0x14, 0x7f,  500, 1540,  10, 70 )
+   SPL( "dcdc3", 0x10, BIT(2), 0x15, 0x7f,  500, 1840,  10, 70 )
+PROPER( "aldo1", 0x10, BIT(3), 0x16, 0x1f,  500, 3500, 100, NA )
+PROPER( "dldo1", 0x10, BIT(4), 0x17, 0x1f,  500, 3500, 100, NA )
+	{}
+};
+But we still need something to avoid the array altogether when another AXP
+is selected, which might require #ifdefs.
+So it might be possible, but the devil is probably in the details.
+
+For now I just wanted to avoid adding more AXP driver files to
+the drivers/power directory, so I consider this a future optimisation.
+Happy to take patches :-D
+
+Cheers,
+Andre
+
+> Peter
+> 
+> > To help bisect-ability, and to simplify review, each of the simpler AXP
+> > drivers covered by this approach is handled in a separate patch.
+> > We just convert the AXP313, AXP305, AXP717 for now, and on the way add
+> > support for the AXP707, just because it's now very easy, and we will
+> > need it soon enough.
+> > The other AXP SPL drivers are more complex, and support more regulators,
+> > but my hunch is that we really just need the DC/DC converters in the
+> > SPL. However I need to prove and test this, so I will convert the other
+> > AXP chips later.
+> >
+> > Please have a look and comment whether the approach in general is a good
+> > idea.
+> >
+> > Cheers,
+> > Andre
+> >
+> > Andre Przywara (6):
+> >   power: pmic: sunxi: only build AXP drivers for SPL
+> >   power: pmic: sunxi: introduce generic SPL AXP DC/DC driver
+> >   power: pmic: sunxi: replace AXP717 SPL driver
+> >   power: pmic: sunxi: use generic AXP SPL driver for AXP313
+> >   power: pmic: sunxi: use generic AXP SPL driver for AXP305
+> >   power: pmic: sunxi: add AXP707 support
+> >
+> >  drivers/power/Makefile  |   8 +-
+> >  drivers/power/axp305.c  |  82 ------------------
+> >  drivers/power/axp313.c  | 133 -----------------------------
+> >  drivers/power/axp717.c  |  92 --------------------
+> >  drivers/power/axp_spl.c | 184 ++++++++++++++++++++++++++++++++++++++++
+> >  5 files changed, 189 insertions(+), 310 deletions(-)
+> >  delete mode 100644 drivers/power/axp305.c
+> >  delete mode 100644 drivers/power/axp313.c
+> >  delete mode 100644 drivers/power/axp717.c
+> >  create mode 100644 drivers/power/axp_spl.c
+> >
+> > --
+> > 2.35.8
+> >  
+
