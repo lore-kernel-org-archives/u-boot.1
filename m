@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9B20C04FFE
-	for <u-boot@archiver.kernel.org>; Mon, 20 May 2024 12:06:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32AB8C04FFE
+	for <u-boot@archiver.kernel.org>; Mon, 20 May 2024 12:06:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22FBE88224;
-	Mon, 20 May 2024 14:06:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8A5D48824B;
+	Mon, 20 May 2024 14:06:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="k1183K2v";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EgYDM32b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08DE788229; Mon, 20 May 2024 14:06:28 +0200 (CEST)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
+ id E1DD3886A7; Mon, 20 May 2024 14:06:43 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ECC3F8820B
- for <u-boot@lists.denx.de>; Mon, 20 May 2024 14:06:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE07D8820B
+ for <u-boot@lists.denx.de>; Mon, 20 May 2024 14:06:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maximmosk4@gmail.com
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-51f0602bc58so2387206e87.0
- for <u-boot@lists.denx.de>; Mon, 20 May 2024 05:06:25 -0700 (PDT)
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-5238b5c080cso5156360e87.1
+ for <u-boot@lists.denx.de>; Mon, 20 May 2024 05:06:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716206785; x=1716811585; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1716206801; x=1716811601; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
  bh=20R84QFVa4eKXI90iNlmr4XncoVcJqMjK7NyaLQ7SRg=;
- b=k1183K2vvuY6xheX72wMwSS0In8ypl3zN1B35h9kWZsQ3dTRYUVoMGtdrrwLkus2Bi
- hH359WFOkAaIVVzn/vkvYEQDICLZpDNrEWB+fNHgcSG7HIenNnMAqqjoeWBG7bA0j155
- h7fZxZZyEeEKyxGxz9bh6kCLLvdLIKd43F3j1pUwezyGgi0Wu7kgdnfy2pj+IBv/7RuS
- T0mwznVWMzZCv5ab+haPOMckliMTcVCFidiY7XR3l+Hl3/Y+XRbZhTQFAXQJMbMq6uGB
- 12lOcALepXU7eSk7611CVtN1ZLTV7iYAKVezqa993ffbprERUgNpKPgGDQFlfPKHC5FL
- 7P6w==
+ b=EgYDM32boN/R1VlSrzfoCK87Nx9NW82DlW5IR7RU/6zBZIDsznmCBXTEn051mcfhKS
+ dX9GZmUIPFEXW43aTsANPCJKRSzk16ef475BeeY2H7wdEDCUOPl6tylEeR8xbjqaxZxZ
+ 2FP4GHRhkmuiV/saExmUVzSeAoY68nY9lax4XaJBIqrCd6ieGQsr7fzVdkhCq2dY5a3x
+ QKXOWUsV1wzCooLC3yt1thyMwNd1O8yVBblKXi7nct+CToO+jWpeFO1dU10B/nXgjwD3
+ V5S1e8CQY5oS7KAspThi6FXpugRFlguiPO6KBgxG3LnxCVZ8P8S08LOwsNlUr53yzcEv
+ q+Mg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716206785; x=1716811585;
+ d=1e100.net; s=20230601; t=1716206801; x=1716811601;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
  bh=20R84QFVa4eKXI90iNlmr4XncoVcJqMjK7NyaLQ7SRg=;
- b=QR+8M35U1CC3959JyTiTJT3UEYnAcu5yjgnm2cpPdwgBXjGYm2ktWyl+VTHKkXaP+V
- D2GLnrTgaEnL8dEkJ9Jk9sBDHKWCssoP9J9LboIFJ/uqQQfpykLHFXy/Fvic7T0wWHZN
- sd2zhNs4y3rerVVKIMtrhSpilmsanhHGl+43n4Z5yhy9t+D86+kShi2ipz+GaO1VA9SP
- X1mPWFJsrbZ77fFD8v5YtQBVBKJ757Tm6kaJDFyhb90xI4MMJkTwzaycenLUcl1qp2fD
- 4v2hkFCOBug1XumbtxU5VfAtnsnCcDroU5uDcn7PU8J7vlYYfxTbtP2p7WHHHar58yX2
- HPdA==
+ b=Y0G6Jz5mbIXSSS0Kfv6w4OtFXeAmPciG3DSxy5XAAEnVSyQm7OKWAOPusY9kMbHeR8
+ oobDJTSB4Z9YNOhdXasFzzDXUfaK0KKwLc7zJu0QQQf+YZPx09F2frdLw/kcM4ubNgMm
+ jcXXI/mC10jNYBO4Kty/E3WLeD6YOMPaRDNg7I9zuTH+XCM3zDkwf70bKpKaZZ2Uw/TZ
+ t2CKtTqpfWgibUMAtS2NuCyuY6UwpriwQ14Cy5wz/vW5ZVOznyhD8UQDPg6YiH5rmrIl
+ V60Bwr0yG1SZ8FZKKyIWM3ydRZbjd2Hpor839gT1AdA6bcPwYD2zux+H07q7Y5NF7JUN
+ d3Eg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWnqqWUyXq9sjNmOkSqj4hiImE4g1hQQ8PmeAoIh3maxmczWrKiHqc1j7EBQohJxfEgUudWGOT1DoJQcmZxe5DCnLDbFQ==
-X-Gm-Message-State: AOJu0YwN97DEsxlT0bzmS0qqFXkpxaAMqeEGlEHOrPSsMdW+168cgkON
- umEmz+ihMusW2P2qpwLzsXW4ibAB/PjlroXqtIHKGS/jHbb/VWa0
-X-Google-Smtp-Source: AGHT+IEAS7MTzDMQUwH69Widy0mOBV0QL4BYY5VdxCVc0Hm6bVUb0udG9SmTR1Hk8A/foD35OR4+qw==
-X-Received: by 2002:ac2:520b:0:b0:51f:c38b:149c with SMTP id
- 2adb3069b0e04-524079b1220mr1709988e87.10.1716206784987; 
- Mon, 20 May 2024 05:06:24 -0700 (PDT)
+ AJvYcCUmgP5n5uJC3oOvg4MhuvQK0gMXKC66ZNaK/+qImdDZRPRzvU8XIiMkw/DakGx/gz8hmR8taTTl8qdtZyYTiQ/XLafyeg==
+X-Gm-Message-State: AOJu0Yz7CbgNbqn3REEstW0xhh+sAF59uSnM87d4ZgGuWKQSlA8uh7VJ
+ e2WLgESXDSlXntTwqoeHiKH7KOE1XbhX3GcXeP462b3m6F6ortUe
+X-Google-Smtp-Source: AGHT+IGyD59duIdAPIGUsNcEt/9QRNFEUYtaTgtAJIeaH0uUrVdPrdnpMMvOTFh2Qu8xIf+wt8YmDA==
+X-Received: by 2002:ac2:5e67:0:b0:51b:f78d:c189 with SMTP id
+ 2adb3069b0e04-5220fb69910mr15672903e87.14.1716206800776; 
+ Mon, 20 May 2024 05:06:40 -0700 (PDT)
 Received: from moskalets-nb.avp.ru ([2a00:1fa0:684:c5c:8eca:3ada:96fe:92ef])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-52434ae5899sm549530e87.119.2024.05.20.05.06.23
+ 2adb3069b0e04-521f38d7f43sm4252090e87.185.2024.05.20.05.06.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 May 2024 05:06:24 -0700 (PDT)
+ Mon, 20 May 2024 05:06:40 -0700 (PDT)
 From: Maxim Moskalets <maximmosk4@gmail.com>
 X-Google-Original-From: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
 To: xypron.glpk@gmx.de, quentin.schulz@theobroma-systems.com, sjg@chromium.org,
@@ -72,8 +72,8 @@ To: xypron.glpk@gmx.de, quentin.schulz@theobroma-systems.com, sjg@chromium.org,
 Cc: Maxim.Moskalets@kaspersky.com,
 	maximmosk4@gmail.com
 Subject: [PATCH v3] cmd: move ELF load and boot to lib/elf.c
-Date: Mon, 20 May 2024 15:06:13 +0300
-Message-Id: <20240520120613.41462-1-Maxim.Moskalets@kaspersky.com>
+Date: Mon, 20 May 2024 15:06:37 +0300
+Message-Id: <20240520120637.41624-1-Maxim.Moskalets@kaspersky.com>
 X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
