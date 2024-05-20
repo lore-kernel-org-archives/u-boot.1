@@ -4,94 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F03BC04FFE
-	for <u-boot@archiver.kernel.org>; Mon, 20 May 2024 16:00:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FBA9C25B79
+	for <u-boot@archiver.kernel.org>; Mon, 20 May 2024 16:06:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3DEB881D9;
-	Mon, 20 May 2024 18:00:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
+	by phobos.denx.de (Postfix) with ESMTP id 1DA73886D5;
+	Mon, 20 May 2024 18:06:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="G6TyiKrq";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="LzQuBjD9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IvYZPR26";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3C888820B; Mon, 20 May 2024 18:00:23 +0200 (CEST)
-Received: from wfhigh2-smtp.messagingengine.com
- (wfhigh2-smtp.messagingengine.com [64.147.123.153])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EA74B886B0; Mon, 20 May 2024 18:06:43 +0200 (CEST)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9262E881CE
- for <u-boot@lists.denx.de>; Mon, 20 May 2024 18:00:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A238886CF
+ for <u-boot@lists.denx.de>; Mon, 20 May 2024 18:06:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=flygoat.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailfhigh.west.internal (Postfix) with ESMTP id DEB771800096;
- Mon, 20 May 2024 12:00:15 -0400 (EDT)
-Received: from imap44 ([10.202.2.94])
- by compute3.internal (MEProxy); Mon, 20 May 2024 12:00:16 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
- cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1716220815;
- x=1716307215; bh=YtYTLre88FVVVZAbZ9cXkQTVNiEgkqbNDIvrDKQFpc0=; b=
- G6TyiKrqilwuWiWdMnloxqTGz9tD8aA8eI7TRbmlGFW9mqQait2C0Cw27jC5DxFX
- ueOBNGbvgQei879kSFffKJHMFH6etfPjl+0LqKzMnVmLJqoiFfj7Ao/ewwsbFjFJ
- rgWGS2ONTga7ASLTrd69uHZosBVmBlxAydJz7abZSa+MJQ0JLD2J9TQM1ys8rAHW
- mMWxhctbSjTpyS0mRby8h5Gb7ESzIzuFhNegG0BCQRO0alMTvyMJm6+plGTbyPJs
- Akd7J9mIZFPPiYugijZiJTgGpcwJoksuCQvVEvnsXAbOhg8mEZF+WO74ArtuS7SF
- hDOzAfiQvWWqQkzQn5gZIQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716220815; x=
- 1716307215; bh=YtYTLre88FVVVZAbZ9cXkQTVNiEgkqbNDIvrDKQFpc0=; b=L
- zQuBjD9pFjND3bQFA9UySOXXFFK+fwr50GALANc3fJ/Usvx0dbLlpPm5B9Cjb+6Y
- DJXhvMDqclp+luZmQqCtn1r7sTQw45eGJ3wvt94nEFZ0+EK8sPq6xNtemKkKso/g
- 40Se+JCcT8D9X5y5hFr5FwC86cNNqyPN2DLBQksphQHehed3LGesobt2RyuGdTsC
- guB6QIQyiePhMxy0jGFqfg0/MgZUsE+vSxxnWx/ONB0ULuSKZY+kpt0s3J0oZNRV
- 6kGu36XoRRmwAydfzaxUk2jrd5rkRhY1tSjLWGf3tedb0xVvrdwUUaRz4IGiZ+mC
- XVrJJtuOnG8TNYj8DG8vg==
-X-ME-Sender: <xms:j3NLZl3IeJmHYg9_BQUyfm_4SrEEZjhWpvTLbNF7IqigeKJsWNOOSQ>
- <xme:j3NLZsH5IoCL0ZrYlGfoM7KaOntWt9_IFhweq6fEBd6V6UC1kn4uPAUsXK5RCpkgo
- Q-uZ7fSw6VbBFYi9HY>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdeitddgjedtucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepofgfggfkjghffffhvfevufgtgfesthhqredtreerjeenucfhrhhomhepfdfl
- ihgrgihunhcujggrnhhgfdcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtoh
- hmqeenucggtffrrghtthgvrhhnpeelleekkedtteekleeffefggeevfffhtdefudeuiefg
- ueeiudevffeludejffdtffenucffohhmrghinhepohiilhgrsghsrdhorhhgnecuvehluh
- hsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepjhhirgiguhhnrdih
- rghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:j3NLZl4VlI4yXelyd8FN2naPxCVA8OhdNCGiQvQ5xz80OBm9qaB5iA>
- <xmx:j3NLZi35yjsfQV9BFhyLtxA9WPNETl2l7xknJEfi_bhmnGezmIdPBA>
- <xmx:j3NLZoFKCsnelC0u68IRvFsV1Yj8x9onU-oxBYNIo4EvQD1eHlJfFA>
- <xmx:j3NLZj87JOaR3Uyvno-CWWJHWxPT9HjexMU4be6DaUm1XDZc1hnIEQ>
- <xmx:j3NLZkjmRrCaZfiVOZSy7b6DH3zAt9yMDBk1DH1Z6hZAMi9QosqgqfH6>
-Feedback-ID: ifd894703:Fastmail
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
- id 11DC836A0074; Mon, 20 May 2024 12:00:14 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.11.0-alpha0-480-g515a2f54a-fm-20240515.001-g515a2f54
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-6aad7449f22so3108326d6.2
+ for <u-boot@lists.denx.de>; Mon, 20 May 2024 09:06:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1716221199; x=1716825999; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=O52dAGPuN1JZswusml3jULe7mXemYfeDhcZR2eN5byw=;
+ b=IvYZPR26tLR/CFNQfjFQrlTSKjemmngYVHqzwCB4lxsyuuAzgSl7y95QOfpfuZ7fZl
+ x+i/LnSmlgFwEUlYn01xTBNyEzjGFe0HhAc54lX1xODroyt6Swzt1w/p3fdf/mM2klRp
+ KzvYA+2DqvMXPubI9WhH/ke1axWRF2G8wOT7M=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716221199; x=1716825999;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=O52dAGPuN1JZswusml3jULe7mXemYfeDhcZR2eN5byw=;
+ b=D43UKpFhhkUcsSu4tJ4hRfmt6Rd91vqmDoG7k+u5uLFD8H8yjL4DZ+rcOWfqykDQMq
+ ygXGik44ZCsd7qw28byC3VIVLmrIZvdAwN1hs6sWNBBSTpvI0aQ+UID/vZKT9RjH5xHT
+ 4BSDEbT+kjrJ9cR4CUyvd0QVU2Omvw3/1KtP8fcnJ+PU39QPsRxLD0hIG1OisSFpPeMy
+ 6hy8VUNzxK8Ep3cXjMJecVctcpVbkk3qrvyx3CxEP8aWI1bjdZ/vg4mKcAOCugTo2E1f
+ CRKBRDVwcdUxLTp8d4bssSUfmQy3yW6eWuuRE/Y9Vi2Px9M/ke8075u5AqeM8S0hdN/Z
+ fekw==
+X-Gm-Message-State: AOJu0YzPLd02ujzSf5vGJU1xU0+uudWRjyWpp/5LadyVo44ns8uxe3Xm
+ tOa+pdfB94o0zw0m3e53OSd/TqcW5VSYtpsfcpXm03RZ5fEBL06G1Kbgj9ONQHNZ6TrNUkNtf19
+ 9
+X-Google-Smtp-Source: AGHT+IHNE9ApfN2ZlNnR2cFykZPge/oQIGAcu5fzqIL08AXuKJIK1ms4JpAR7QAzsD9/zAM16PBhYg==
+X-Received: by 2002:a05:6214:5788:b0:6aa:dc36:5cb1 with SMTP id
+ 6a1803df08f44-6aadc365f31mr29969156d6.25.1716221198767; 
+ Mon, 20 May 2024 09:06:38 -0700 (PDT)
+Received: from bill-the-cat ([189.178.170.52])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6a15f1ccd4esm114467786d6.97.2024.05.20.09.06.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 20 May 2024 09:06:38 -0700 (PDT)
+Date: Mon, 20 May 2024 10:06:35 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+Subject: [ANN] U-Boot v2024.07-rc3 released
+Message-ID: <20240520160635.GQ2568172@bill-the-cat>
 MIME-Version: 1.0
-Message-Id: <74e04a5a-5b16-49a2-a5e9-d0f7ee97484d@app.fastmail.com>
-In-Reply-To: <CAMo8Bf+JNR-QSECNhaCWKVkU1s+m6-eUrqePzF=7XyezxDWu0g@mail.gmail.com>
-References: <20240519-qemu-xtensa-v1-0-8fff0cb11c19@flygoat.com>
- <20240519-qemu-xtensa-v1-4-8fff0cb11c19@flygoat.com>
- <CAMo8Bf+JNR-QSECNhaCWKVkU1s+m6-eUrqePzF=7XyezxDWu0g@mail.gmail.com>
-Date: Mon, 20 May 2024 16:59:56 +0100
-From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
-To: "Max Filippov" <jcmvbkbc@gmail.com>
-Cc: u-boot@lists.denx.de, "Sean Anderson" <sean.anderson@seco.com>,
- "Tom Rini" <trini@konsulko.com>, "Sumit Garg" <sumit.garg@linaro.org>
-Subject: Re: [PATCH 04/10] xtensa: Define PLATFORM_ELFFLAGS
-Content-Type: text/plain;charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ONWCF+9u14uSxHAj"
+Content-Disposition: inline
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,57 +87,46 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--ONWCF+9u14uSxHAj
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-=E5=9C=A82024=E5=B9=B45=E6=9C=8820=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8B=E5=
-=8D=884:18=EF=BC=8CMax Filippov=E5=86=99=E9=81=93=EF=BC=9A
-> On Sun, May 19, 2024 at 1:53=E2=80=AFPM Jiaxun Yang <jiaxun.yang@flygo=
-at.com> wrote:
->>
->> u-boot.elf target requiures it to work.
->
-> Typo.
->
->> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
->> ---
->>  arch/xtensa/config.mk | 3 +++
->>  1 file changed, 3 insertions(+)
->>
->> diff --git a/arch/xtensa/config.mk b/arch/xtensa/config.mk
->> index b0809999e403..3ec936272f25 100644
->> --- a/arch/xtensa/config.mk
->> +++ b/arch/xtensa/config.mk
->> @@ -7,3 +7,6 @@ PLATFORM_CPPFLAGS +=3D -D__XTENSA__ -mlongcalls -mfor=
-ce-no-pic \
->>                      -ffunction-sections -fdata-sections
->>
->>  LDFLAGS_FINAL +=3D --gc-sections
->> +
->> +PLATFORM_ELFFLAGS +=3D -B xtensa -O elf32-xtensa-le
->> +
->
-> This fixes endianness as little for the whole architecture, but xtensa=
- cores
-> may be either little or big endian.
+Hey all,
 
-Hi Max,
+It's release day and here is -rc3. At this point, I think we're firmly
+on "bug fix and documentation" ground moving forward for changes to
+v2024.07 and the next branch is open and ready for use and pull
+requests.
 
-Thanks for reviewing, I can just add a branch with ifdef CONFIG_SYS_BIG_=
-EDNIAN
-if you wish, but I think all CPUs U-Boot support are little endian only?
+In terms of a changelog,=20
+git log --merges v2024.07-rc2..v2024.07-rc3
+contains what I've pulled but as always, better PR messages and tags
+will provide better results here.
 
-I have an ongoing series[1] fixing endian selection options, please let =
-me know if
-U-Boot do work with big endian Xtensa.
-
-Thanks.
-
-[1]: https://patchwork.ozlabs.org/project/uboot/patch/20240519-aarch64-b=
-e-v1-11-75cc328eddfa@flygoat.com/
-
->
-> --=20
-> Thanks.
-> -- Max
+I hope to remain on schedule and that means the rest of the rcs every
+other Monday, and with final release on Monday, July 1st, 2024. Thanks
+all!
 
 --=20
-- Jiaxun
+Tom
+
+--ONWCF+9u14uSxHAj
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZLdQsACgkQFHw5/5Y0
+tyzi8wwAtT5LWb4RzYHpnfmX9VtKR5xGqEHJPPhAMol6vtRvcwqyae2DLSlIaMOc
+oMAlUXgRR6oJnvk7XvnCs4E3r5REdzH1OdcazWjRWoerm7R25SzhHN6CeNysnZ4k
+2V7l1hvcjW3gjh0fuZX6j6UnaDfIKNuqcDJ5ySeMey0WxoVWFBdfIRcdpfClokNP
+tfF0wmoqMZgoAFZscp7taQ5+z4RohGhVmn9xTcMANfFhnxlmMwOCNLQWnMJRoFMo
+4WKK30Y+0lMcTBkGqCEZ2GJNvwHOn27OxFFiI4zjy8cVjKAiRF7UKgqJqkCD4nmq
+1syTSmbs+sVFzaL/8kBe6wV0rmqAPNedw88M5ovAcGl5xaL+IrB+DxydN4uS3OaQ
+5++dKu1q5NqV4n8KOob47sZJnIL8XR7NQJt7+/EwuQ4PssdJbyIs2vc5QvUl8vJT
+gm/OxottOKLkN3SsSfNti24aydrkTl3BDThXRtIFgsGLVe1D8O1THDZZ7Og2tMX0
+sOuxIZ/g
+=MBrK
+-----END PGP SIGNATURE-----
+
+--ONWCF+9u14uSxHAj--
