@@ -4,82 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A67CBC04FFE
-	for <u-boot@archiver.kernel.org>; Mon, 20 May 2024 05:06:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 192DBC04FFE
+	for <u-boot@archiver.kernel.org>; Mon, 20 May 2024 06:05:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E027A882B7;
-	Mon, 20 May 2024 07:06:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5611288286;
+	Mon, 20 May 2024 08:05:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BfEvTrzr";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="I/48JMuX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 212F488303; Mon, 20 May 2024 07:06:26 +0200 (CEST)
-Received: from mail-vk1-xa2f.google.com (mail-vk1-xa2f.google.com
- [IPv6:2607:f8b0:4864:20::a2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1C5C08817B; Mon, 20 May 2024 08:05:25 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBF10882BE
- for <u-boot@lists.denx.de>; Mon, 20 May 2024 07:06:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 06CC48817B
+ for <u-boot@lists.denx.de>; Mon, 20 May 2024 08:05:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-vk1-xa2f.google.com with SMTP id
- 71dfb90a1353d-4df7cb5894fso765681e0c.1
- for <u-boot@lists.denx.de>; Sun, 19 May 2024 22:06:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716181583; x=1716786383; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=m72pFFiVBRjDRX8/Da3a9izuMmNGh3OqJjf4uiy9ytE=;
- b=BfEvTrzr25aoE5AR7fX0mEZErJw7kJvFNvfROvD/hSFfBQO8uGPzxq9pVpehs447HW
- WySptjBWiG3HzuUOlSNoVhthlUcjUtyDiEIAtXWqn/7JZEip3zi/O2oJqMSiZh2En0/l
- CpeChJ7OnuMhAw78GcQ0N4p913BJ/wy5exFRzflZr4Q+G5RoDMMalg5U449JE4C7+Rb1
- cngppWzMdbuqTEdc6zefQICKwwHuA8x1sCp6VMI1EQkUC9S96YSfGhwH+JM1IztrnMYy
- MVKXku6/f9T78oFFYs6/N3nDe92mSNPRyNcxyrt8Hnj5MtYvc3Nr3KkIDIZGuifoIOv5
- kz2A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716181583; x=1716786383;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=m72pFFiVBRjDRX8/Da3a9izuMmNGh3OqJjf4uiy9ytE=;
- b=dgTeW35XwA+Fg3p8wXa4m4qRKPX58f/h2//HlI/Vbg/Kse/kmZA/j3xyI1NHN7u9wF
- 8uH6kAWtVd7uY2frZ+5nYVlinlfGz5xYvR5mWJJdrScX50+cUZ4bhl1dkXnkHpK/bca9
- WGS1BVw14PsajNeMhsUKvKJReS3WikCSsWwhIRNgst1r03rUpTO/Z17dILT7HAjnJAsD
- uOkgwe48Ds0ozG4e4tWGw3ZnhSEW5aSmvKg8SsTIOlQhHI5qnBuXTikXrbctJthEQ560
- L38AFwMxdYYfCVqhHMa5RSm6OubMme+nOi5oH+GRPvKF2XwVjFmdKUKgAMnryKMsUsee
- NKDg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWrI/wZ5fdLolxGHbcBoH5VZP9BtxM9FAIJp4md3Z3Bl/QRmKkmuvvTct/ZcDFWejSHAXf58bopkA2o97Bi+h822Pm/5Q==
-X-Gm-Message-State: AOJu0YxGhgTc9VfjC/KZ7MV6XKuqJBs563FQCZJzi/2s499uY9YIZ+7H
- dUzDKqnyIXq3gJOaeSWd55SnUeLa1zw0ULn11y8aeUCZzphFHDZeiezMEI2q2+xM6TchU3OB67v
- r5NQ6rI3D4BytQ4t4SQpOZ9v+4M0=
-X-Google-Smtp-Source: AGHT+IEScQdYwivjh2lEVPhNYDI9U3s9FiBSibmaMR6EFub7We6Vv2MyIjJ5zHtSJ/hwaAWIw+gPlwFWjYWuuWd3eOI=
-X-Received: by 2002:a05:6122:1696:b0:4d3:31fc:4839 with SMTP id
- 71dfb90a1353d-4df88280108mr23027019e0c.2.1716181582671; Sun, 19 May 2024
- 22:06:22 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44K656jv027316;
+ Mon, 20 May 2024 01:05:06 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1716185106;
+ bh=y+8H4tbTS3t1QO+4WbwuXP3bSi8cCkJFTpVyHguixp8=;
+ h=Date:Subject:From:To:CC:References:In-Reply-To;
+ b=I/48JMuXwHi47bmul4m5S+3USqZ5yM8UpMITlQoZzRWtOS8jmkFzYOovsmERWed6O
+ jAn+1TZ+rcwBnPXeCl3XDVAvfF9X78u8JxxWsma52v8/a3J3HLhZ3z9Xp46m3uOguz
+ bBoh+ezRvuiSUqAzoKevRR87NXa9ywqBXc3CiTM0=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44K656xo125203
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 20 May 2024 01:05:06 -0500
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 20
+ May 2024 01:05:06 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 20 May 2024 01:05:06 -0500
+Received: from [172.24.227.220] (chintan-thinkstation-p360-tower.dhcp.ti.com
+ [172.24.227.220])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44K64wmm066873;
+ Mon, 20 May 2024 01:04:59 -0500
+Message-ID: <e9911fd1-6a69-448d-9347-7d188ec46c74@ti.com>
+Date: Mon, 20 May 2024 11:34:58 +0530
 MIME-Version: 1.0
-References: <20240504150358.19600-1-minda.chen@starfivetech.com>
-In-Reply-To: <20240504150358.19600-1-minda.chen@starfivetech.com>
-From: E Shattow <lucent@gmail.com>
-Date: Sun, 19 May 2024 22:06:11 -0700
-Message-ID: <CANV2PTM8zp4cQu4vyuz5itm0mhoMiagV_=GUbsp87RUFTmQsNw@mail.gmail.com>
-Subject: Re: [PATCH v1 0/7] Add Starfive JH7110 Cadence USB driver
-To: Minda Chen <minda.chen@starfivetech.com>
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Roger Quadros <rogerq@kernel.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Alexey Romanov <avromanov@salutedevices.com>, 
- Sumit Garg <sumit.garg@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
- Nishanth Menon <nm@ti.com>, 
- Rick Chen <rick@andestech.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
- u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 10/10] arch: arm: dts: k3-am62-sk-u-boot: Add missing
+ "bootph-all" property to phy_gmii_sel node
+From: Chintan Vankar <c-vankar@ti.com>
+To: Roger Quadros <rogerq@kernel.org>, =?UTF-8?Q?Marek_Beh=C3=BAn?=
+ <kabel@kernel.org>, Michal Simek <michal.simek@amd.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>,
+ MD Danish Anwar <danishanwar@ti.com>, Udit Kumar <u-kumar1@ti.com>,
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Andreas Dannenberg <dannenberg@ti.com>,
+ Devarsh Thakkar <devarsht@ti.com>, Bin Meng <bmeng@tinylab.org>,
+ Sean Anderson <seanga2@gmail.com>, "Kishon
+ Vijay Abraham I" <kishon@ti.com>, Nikhil M Jain <n-jain1@ti.com>, Wadim
+ Egorov <w.egorov@phytec.de>, Joao Paulo Goncalves
+ <joao.goncalves@toradex.com>, Mattijs Korpershoek
+ <mkorpershoek@baylibre.com>, Dhruva Gole <d-gole@ti.com>, Francesco Dolcini
+ <francesco.dolcini@toradex.com>, Andrew Davis <afd@ti.com>, Maxime Ripard
+ <mripard@kernel.org>, Neha Malcom Francis <n-francis@ti.com>, Simon Glass
+ <sjg@chromium.org>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>,
+ Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>
+References: <20240425120822.2048012-1-c-vankar@ti.com>
+ <20240425120822.2048012-11-c-vankar@ti.com>
+ <5ac873d5-e485-47d3-b5de-f537c1fb88b1@kernel.org>
+ <e3785fad-fb0d-4cf8-8787-0a91e6b52332@ti.com>
+Content-Language: en-US
+In-Reply-To: <e3785fad-fb0d-4cf8-8787-0a91e6b52332@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,88 +100,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi, there is a compile warning. I don't know why.
-
-On Sat, May 4, 2024 at 8:04=E2=80=AFAM Minda Chen <minda.chen@starfivetech.=
-com> wrote:
->
-> Add Starfive JH7110 Cadence USB driver and related PHY driver.
-> So the codes can be used in visionfive2 and milkv 7110 board.
->
-> The driver is almost the same with kernel driver.
->
-> patch1: Add set phy mode function in cdns3 core driver
->         which is used by Starfive.
->
-> patch2-3: USB and PCIe 2.0 (usb 3.0) PHY drivier
-> patch4: Cadence USB wrapper driver.
-> patch5-7 dts, config and maintainers update.
->
-> Minda Chen (7):
->   usb: cdns3: Set USB PHY mode in cdns3_probe()
->   phy: starfive: Add Starfive JH7110 USB 2.0 PHY driver
->   phy: starfive: Add Starfive JH7110 PCIe 2.0 PHY driver
->   usb: cdns: starfive: Add cdns USB driver
->   configs: starfive: Add visionfive2 cadence USB configuration
->   dts: starfive: Add JH7110 Cadence USB dts node
->   MAINTAINERS: Update Starfive visionfive2 maintain files.
->
->  .../dts/jh7110-starfive-visionfive-2.dtsi     |   5 +
->  arch/riscv/dts/jh7110.dtsi                    |  52 +++++
->  board/starfive/visionfive2/MAINTAINERS        |   2 +
->  configs/starfive_visionfive2_defconfig        |   9 +
->  drivers/phy/Kconfig                           |   1 +
->  drivers/phy/Makefile                          |   1 +
->  drivers/phy/starfive/Kconfig                  |  19 ++
->  drivers/phy/starfive/Makefile                 |   7 +
->  drivers/phy/starfive/phy-jh7110-pcie.c        | 211 ++++++++++++++++++
->  drivers/phy/starfive/phy-jh7110-usb2.c        | 135 +++++++++++
->  drivers/usb/cdns3/Kconfig                     |   7 +
->  drivers/usb/cdns3/Makefile                    |   2 +
->  drivers/usb/cdns3/cdns3-starfive.c            | 184 +++++++++++++++
->  drivers/usb/cdns3/core.c                      |  17 ++
->  14 files changed, 652 insertions(+)
->  create mode 100644 drivers/phy/starfive/Kconfig
->  create mode 100644 drivers/phy/starfive/Makefile
->  create mode 100644 drivers/phy/starfive/phy-jh7110-pcie.c
->  create mode 100644 drivers/phy/starfive/phy-jh7110-usb2.c
->  create mode 100644 drivers/usb/cdns3/cdns3-starfive.c
->
->
-> base-commit: 174ac987655c888017c82df1883c0c2ea0dc2495
-> --
-> 2.17.1
->
-
-The compile warning as follows:
-
-In file included from
-/home/user/source/u-boot.git/drivers/usb/cdns3/gadget.c:70:
-/home/user/source/u-boot.git/include/linux/bitmap.h: In function
-=E2=80=98bitmap_find_next_zero_area=E2=80=99:
-/home/user/source/u-boot.git/include/linux/bitmap.h:170:17: warning:
-implicit declaration of function =E2=80=98find_next_zero_bit=E2=80=99; did =
-you mean
-=E2=80=98find_next_bit=E2=80=99? [-Wimplicit-function-declaration]
-  170 |         index =3D find_next_zero_bit(map, size, start);
-      |                 ^~~~~~~~~~~~~~~~~~
-      |                 find_next_bit
-  CC      drivers/usb/cdns3/ep0.o
-In file included from
-/home/user/source/u-boot.git/include/linux/usb/composite.h:26,
-                 from /home/user/source/u-boot.git/drivers/usb/cdns3/ep0.c:=
-19:
-/home/user/source/u-boot.git/include/linux/bitmap.h: In function
-=E2=80=98bitmap_find_next_zero_area=E2=80=99:
-/home/user/source/u-boot.git/include/linux/bitmap.h:170:17: warning:
-implicit declaration of function =E2=80=98find_next_zero_bit=E2=80=99; did =
-you mean
-=E2=80=98find_next_bit=E2=80=99? [-Wimplicit-function-declaration]
-  170 |         index =3D find_next_zero_bit(map, size, start);
-      |                 ^~~~~~~~~~~~~~~~~~
-      |                 find_next_bit
 
 
-Is this something missing in the patch series?
+On 25/04/24 18:06, Chintan Vankar wrote:
+> 
+> 
+> On 25/04/24 18:01, Roger Quadros wrote:
+>>
+>>
+>> On 25/04/2024 15:08, Chintan Vankar wrote:
+>>> Add "bootph-all" property to CPSW MAC's PHY node phy_gmii_sel.
+>>>
+>>> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
+>>> ---
+>>>
+>>> Changes from v1 to v2:
+>>> - This patch is newly added in this series to enable CPSW MAC's PHY
+>>>    node "phy_gmii_sel". As per discussion at here:
+>>>    https://lore.kernel.org/r/20240112130127.rvvrhz7p4vmlyalh@smother/
+>>>    changes made by this patch can be dropped in the future when the
+>>>    DT-Sync is performed with am62-main.dtsi containing this change in
+>>>    the Linux DT which will match U-Boot's DT.
+>>
+>> I don't think bootph-all exists in am62-main.dtsi. It should come from
+>> board.dts
+>>
+> 
+> Yes, I am having the same discussion at here:
+> https://lore.kernel.org/all/c13ac165-7cbd-4e53-914e-8c6bc28250e3@ti.com/
+> 
 
--E
+Since I have posted patch which adds bootph-all property to
+"k3-am62x-sk-common.dtsi" at here:
+https://lore.kernel.org/r/20240430085048.3143665-1-c-vankar@ti.com/
+and it has no open comments and this series
+also does not have any open comments, so can it be merged ?
+
+>>>
+>>>   arch/arm/dts/k3-am625-sk-u-boot.dtsi | 4 ++++
+>>>   1 file changed, 4 insertions(+)
+>>>
+>>> diff --git a/arch/arm/dts/k3-am625-sk-u-boot.dtsi 
+>>> b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
+>>> index fa778b0ff4..e9a1afde95 100644
+>>> --- a/arch/arm/dts/k3-am625-sk-u-boot.dtsi
+>>> +++ b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
+>>> @@ -46,3 +46,7 @@
+>>>   &cpsw_port2 {
+>>>       status = "disabled";
+>>>   };
+>>> +
+>>> +&phy_gmii_sel {
+>>> +    bootph-all;
+>>> +};
+>>
