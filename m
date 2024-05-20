@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 632ECC04FFE
-	for <u-boot@archiver.kernel.org>; Mon, 20 May 2024 09:59:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A193C04FFE
+	for <u-boot@archiver.kernel.org>; Mon, 20 May 2024 09:59:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0B5B886A8;
-	Mon, 20 May 2024 11:59:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 54316886B4;
+	Mon, 20 May 2024 11:59:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="U1Sd6Ocn";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="lWNAFpL1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 633D5882F1; Mon, 20 May 2024 11:59:34 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 764D98869E; Mon, 20 May 2024 11:59:39 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA5F2886A7
- for <u-boot@lists.denx.de>; Mon, 20 May 2024 11:59:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D1CD886AE
+ for <u-boot@lists.denx.de>; Mon, 20 May 2024 11:59:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44K9xM70091599;
- Mon, 20 May 2024 04:59:22 -0500
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44K9xRMZ012031;
+ Mon, 20 May 2024 04:59:27 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1716199162;
- bh=1LiX03ApXzuI4SrNtl55XhIt855Xu97Ozj43nsHmzeg=;
- h=From:To:CC:Subject:Date;
- b=U1Sd6Ocnv1bRzzwNJXqoSqXIpZLWbBWoe3OFn1U4MCSqQqJ68KCUYqEstXrLLGu6L
- krFCPJ6aLPkLz6cHZK4GkJxoz8PzuXcLaPZDCuUp4c7AYCqAKIQ9SpqfStsi1qnKAT
- g+/boQwmZxKBdPndLVZyR3xRN4tIVRbz4oJ5jtFM=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44K9xMt4012829
+ s=ti-com-17Q1; t=1716199167;
+ bh=CIXmDEQvhvTkVpp+0oCTQmBTXXDs7DbZKOEOUSsEhwI=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=lWNAFpL1wFVSUAQ5AGT7fZ9QI6CdOwAZaQMBkG/LUSl9moSqpor3yje5EuCR0uwDW
+ VTLIDxuKsnZYd6EzMtEd2XnoRzFA7iYex8Dy43RGg8okrCDuyxXBkvxNIlQWRQfPGJ
+ byZj0YpSORl9ivcR2QxNtp2kfAPmUxuQZPOtdT5g=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44K9xR8A012849
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 20 May 2024 04:59:22 -0500
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 20 May 2024 04:59:27 -0500
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 20
- May 2024 04:59:22 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ May 2024 04:59:26 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 20 May 2024 04:59:22 -0500
+ Frontend Transport; Mon, 20 May 2024 04:59:26 -0500
 Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
  (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44K9xHHf047124;
- Mon, 20 May 2024 04:59:17 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44K9xHHg047124;
+ Mon, 20 May 2024 04:59:22 -0500
 From: Neha Malcom Francis <n-francis@ti.com>
 To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <sjg@chromium.org>,
  <alpernebiyasak@gmail.com>, <bb@ti.com>, <nm@ti.com>,
@@ -57,10 +57,12 @@ To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <sjg@chromium.org>,
 CC: <michal.simek@amd.com>, <marex@denx.de>, <neil.armstrong@linaro.org>,
  <afd@ti.com>, <vigneshr@ti.com>, <kamlesh@ti.com>, <m-chawdhry@ti.com>,
  <u-kumar1@ti.com>, <n-francis@ti.com>
-Subject: [PATCH 0/3] k3-j721e: Enable OF_UPSTREAM for J721E
-Date: Mon, 20 May 2024 15:29:13 +0530
-Message-ID: <20240520095916.1809962-1-n-francis@ti.com>
+Subject: [PATCH 1/3] arm: dts: k3-j721e-r5*: Introduce k3-j721e-r5.dtsi
+Date: Mon, 20 May 2024 15:29:14 +0530
+Message-ID: <20240520095916.1809962-2-n-francis@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240520095916.1809962-1-n-francis@ti.com>
+References: <20240520095916.1809962-1-n-francis@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -81,56 +83,373 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series was plucked out from the larger series [1] that did some
-templating reformatting and also enabled OF_UPSTREAM for J721E. The
-former has been kept aside till all the platforms affected have moved to
-using OF_UPSTREAM to have less conflicts while merging.
+Introduce k3-j721e-r5.dtsi to be used by board R5 DTS files. This
+helps sync SoC changes across boards.
 
-Patches split J721E EVM and J721E SK to using separate builds, as well
-as enable OF_UPSTREAM for both the platforms.
-
-Boot logs:
-https://gist.github.com/nehamalcom/8f326376b6c6b1196084721405159bb9
-
-[1] https://lore.kernel.org/all/20240322131011.1029620-1-n-francis@ti.com/
-
-Neha Malcom Francis (3):
-  arm: dts: k3-j721e-r5*: Introduce k3-j721e-r5.dtsi
-  configs: j721e_sk: Move to separate defconfig for J721E SK board
-  arm: dts: k3-j721e: Move to OF_UPSTREAM
-
- arch/arm/dts/Makefile                         |    4 +-
- arch/arm/dts/k3-j721e-binman.dtsi             |  101 +-
- .../k3-j721e-common-proc-board-u-boot.dtsi    |   14 +-
- arch/arm/dts/k3-j721e-common-proc-board.dts   |  976 ------
- arch/arm/dts/k3-j721e-main.dtsi               | 2741 -----------------
- arch/arm/dts/k3-j721e-mcu-wakeup.dtsi         |  681 ----
- arch/arm/dts/k3-j721e-r5-beagleboneai64.dts   |   78 +-
- .../arm/dts/k3-j721e-r5-common-proc-board.dts |   75 +-
- arch/arm/dts/k3-j721e-r5-sk.dts               |   75 +-
- arch/arm/dts/k3-j721e-r5.dtsi                 |   80 +
- arch/arm/dts/k3-j721e-sk-u-boot.dtsi          |   41 +-
- arch/arm/dts/k3-j721e-sk.dts                  | 1074 -------
- arch/arm/dts/k3-j721e-som-p0.dtsi             |  446 ---
- arch/arm/dts/k3-j721e-thermal.dtsi            |   75 -
- arch/arm/dts/k3-j721e.dtsi                    |  176 --
- board/ti/j721e/MAINTAINERS                    |    2 +
- configs/j721e_evm_a72_defconfig               |    5 +-
- configs/j721e_evm_r5_defconfig                |    2 +-
- configs/j721e_sk_a72_defconfig                |    9 +
- configs/j721e_sk_r5_defconfig                 |   10 +
- 20 files changed, 147 insertions(+), 6518 deletions(-)
- delete mode 100644 arch/arm/dts/k3-j721e-common-proc-board.dts
- delete mode 100644 arch/arm/dts/k3-j721e-main.dtsi
- delete mode 100644 arch/arm/dts/k3-j721e-mcu-wakeup.dtsi
+Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+---
+ arch/arm/dts/k3-j721e-r5-beagleboneai64.dts   | 78 +-----------------
+ .../arm/dts/k3-j721e-r5-common-proc-board.dts | 75 +----------------
+ arch/arm/dts/k3-j721e-r5-sk.dts               | 75 +----------------
+ arch/arm/dts/k3-j721e-r5.dtsi                 | 80 +++++++++++++++++++
+ 4 files changed, 83 insertions(+), 225 deletions(-)
  create mode 100644 arch/arm/dts/k3-j721e-r5.dtsi
- delete mode 100644 arch/arm/dts/k3-j721e-sk.dts
- delete mode 100644 arch/arm/dts/k3-j721e-som-p0.dtsi
- delete mode 100644 arch/arm/dts/k3-j721e-thermal.dtsi
- delete mode 100644 arch/arm/dts/k3-j721e.dtsi
- create mode 100644 configs/j721e_sk_a72_defconfig
- create mode 100644 configs/j721e_sk_r5_defconfig
 
+diff --git a/arch/arm/dts/k3-j721e-r5-beagleboneai64.dts b/arch/arm/dts/k3-j721e-r5-beagleboneai64.dts
+index 43da4dafba8..4f97af4fd94 100644
+--- a/arch/arm/dts/k3-j721e-r5-beagleboneai64.dts
++++ b/arch/arm/dts/k3-j721e-r5-beagleboneai64.dts
+@@ -12,84 +12,8 @@
+ #include "k3-j721e-ddr.dtsi"
+ 
+ #include "k3-j721e-beagleboneai64-u-boot.dtsi"
++#include "k3-j721e-r5.dtsi"
+ 
+-/ {
+-	aliases {
+-		remoteproc0 = &sysctrler;
+-		remoteproc1 = &a72_0;
+-	};
+-
+-	chosen {
+-		tick-timer = &mcu_timer0;
+-	};
+-
+-	a72_0: a72@0 {
+-		compatible = "ti,am654-rproc";
+-		reg = <0x0 0x00a90000 0x0 0x10>;
+-		power-domains = <&k3_pds 61 TI_SCI_PD_EXCLUSIVE>,
+-				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>,
+-				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
+-		resets = <&k3_reset 202 0>;
+-		clocks = <&k3_clks 61 1>;
+-		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>;
+-		assigned-clock-rates = <2000000000>, <200000000>;
+-		ti,sci = <&dmsc>;
+-		ti,sci-proc-id = <32>;
+-		ti,sci-host-id = <10>;
+-		bootph-pre-ram;
+-	};
+-
+-	dm_tifs: dm-tifs {
+-		compatible = "ti,j721e-dm-sci";
+-		ti,host-id = <3>;
+-		ti,secure-host;
+-		mbox-names = "rx", "tx";
+-		mboxes= <&secure_proxy_mcu 21>,
+-				<&secure_proxy_mcu 23>;
+-		bootph-pre-ram;
+-	};
+-};
+-
+-&dmsc {
+-	mboxes= <&secure_proxy_mcu 6>,
+-		<&secure_proxy_mcu 8>,
+-		<&secure_proxy_mcu 5>;
+-	mbox-names = "rx", "tx", "notify";
+-	ti,host-id = <4>;
+-	ti,secure-host;
+-};
+-
+-&mcu_timer0 {
+-	status = "okay";
+-	bootph-pre-ram;
+-};
+-
+-&secure_proxy_mcu {
+-	bootph-pre-ram;
+-	/* We require this for boot handshake */
+-	status = "okay";
+-};
+-
+-&cbass_mcu_wakeup {
+-	sysctrler: sysctrler {
+-		compatible = "ti,am654-system-controller";
+-		mboxes= <&secure_proxy_mcu 4>, <&secure_proxy_mcu 5>;
+-		mbox-names = "tx", "rx";
+-		bootph-pre-ram;
+-	};
+-};
+-
+-&mcu_ringacc {
+-	ti,sci = <&dm_tifs>;
+-};
+-
+-&mcu_udmap {
+-	ti,sci = <&dm_tifs>;
+-};
+-
+-&wkup_uart0_pins_default {
+-	bootph-pre-ram;
+-};
+ 
+ &wkup_i2c0 {
+ 	bootph-pre-ram;
+diff --git a/arch/arm/dts/k3-j721e-r5-common-proc-board.dts b/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
+index 9655ca21d02..c7e344350c8 100644
+--- a/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
++++ b/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
+@@ -10,76 +10,7 @@
+ #include "k3-j721e-ddr.dtsi"
+ #include "k3-j721e-common-proc-board-u-boot.dtsi"
+ 
+-/ {
+-	chosen {
+-		tick-timer = &mcu_timer0;
+-	};
+-
+-	aliases {
+-		remoteproc0 = &sysctrler;
+-		remoteproc1 = &a72_0;
+-	};
+-
+-	a72_0: a72@0 {
+-		compatible = "ti,am654-rproc";
+-		reg = <0x0 0x00a90000 0x0 0x10>;
+-		power-domains = <&k3_pds 61 TI_SCI_PD_EXCLUSIVE>,
+-				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>,
+-				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
+-		resets = <&k3_reset 202 0>;
+-		clocks = <&k3_clks 61 1>;
+-		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>;
+-		assigned-clock-rates = <2000000000>, <200000000>;
+-		ti,sci = <&dmsc>;
+-		ti,sci-proc-id = <32>;
+-		ti,sci-host-id = <10>;
+-		bootph-pre-ram;
+-	};
+-
+-	dm_tifs: dm-tifs {
+-		compatible = "ti,j721e-dm-sci";
+-		ti,host-id = <3>;
+-		ti,secure-host;
+-		mbox-names = "rx", "tx";
+-		mboxes= <&secure_proxy_mcu 21>,
+-			<&secure_proxy_mcu 23>;
+-		bootph-pre-ram;
+-	};
+-};
+-
+-&mcu_timer0 {
+-	status = "okay";
+-	bootph-pre-ram;
+-};
+-
+-&dmsc {
+-	mboxes= <&secure_proxy_mcu 8>, <&secure_proxy_mcu 6>, <&secure_proxy_mcu 5>;
+-	mbox-names = "tx", "rx", "notify";
+-	ti,host-id = <4>;
+-	ti,secure-host;
+-};
+-
+-&secure_proxy_mcu {
+-	bootph-pre-ram;
+-	status = "okay";
+-};
+-
+-&cbass_mcu_wakeup {
+-	sysctrler: sysctrler {
+-		bootph-pre-ram;
+-		compatible = "ti,am654-system-controller";
+-		mboxes= <&secure_proxy_mcu 4>, <&secure_proxy_mcu 5>;
+-		mbox-names = "tx", "rx";
+-	};
+-};
+-
+-&mcu_ringacc {
+-	ti,sci = <&dm_tifs>;
+-};
+-
+-&mcu_udmap {
+-	ti,sci = <&dm_tifs>;
+-};
++#include "k3-j721e-r5.dtsi"
+ 
+ &wkup_i2c0 {
+ 	bootph-pre-ram;
+@@ -111,10 +42,6 @@
+ 	};
+ };
+ 
+-&wkup_uart0_pins_default {
+-	bootph-pre-ram;
+-};
+-
+ &mcu_uart0_pins_default {
+ 	bootph-pre-ram;
+ };
+diff --git a/arch/arm/dts/k3-j721e-r5-sk.dts b/arch/arm/dts/k3-j721e-r5-sk.dts
+index b0c108e9693..96a13b2cb2b 100644
+--- a/arch/arm/dts/k3-j721e-r5-sk.dts
++++ b/arch/arm/dts/k3-j721e-r5-sk.dts
+@@ -10,80 +10,7 @@
+ #include "k3-j721e-ddr.dtsi"
+ #include "k3-j721e-sk-u-boot.dtsi"
+ 
+-/ {
+-	chosen {
+-		tick-timer = &mcu_timer0;
+-	};
+-
+-	aliases {
+-		remoteproc0 = &sysctrler;
+-		remoteproc1 = &a72_0;
+-	};
+-
+-	a72_0: a72@0 {
+-		compatible = "ti,am654-rproc";
+-		reg = <0x0 0x00a90000 0x0 0x10>;
+-		power-domains = <&k3_pds 61 TI_SCI_PD_EXCLUSIVE>,
+-				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>,
+-				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
+-		resets = <&k3_reset 202 0>;
+-		clocks = <&k3_clks 61 1>;
+-		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>;
+-		assigned-clock-rates = <2000000000>, <200000000>;
+-		ti,sci = <&dmsc>;
+-		ti,sci-proc-id = <32>;
+-		ti,sci-host-id = <10>;
+-		bootph-pre-ram;
+-	};
+-
+-	dm_tifs: dm-tifs {
+-		compatible = "ti,j721e-dm-sci";
+-		ti,host-id = <3>;
+-		ti,secure-host;
+-		mbox-names = "rx", "tx";
+-		mboxes= <&secure_proxy_mcu 21>,
+-				<&secure_proxy_mcu 23>;
+-		bootph-pre-ram;
+-	};
+-};
+-
+-&mcu_timer0 {
+-	status = "okay";
+-	bootph-pre-ram;
+-};
+-
+-&secure_proxy_mcu {
+-	bootph-pre-ram;
+-	status = "okay";
+-};
+-
+-&cbass_mcu_wakeup {
+-	sysctrler: sysctrler {
+-		bootph-pre-ram;
+-		compatible = "ti,am654-system-controller";
+-		mboxes= <&secure_proxy_mcu 4>, <&secure_proxy_mcu 5>;
+-		mbox-names = "tx", "rx";
+-	};
+-};
+-
+-&dmsc {
+-	mboxes= <&secure_proxy_mcu 8>, <&secure_proxy_mcu 6>, <&secure_proxy_mcu 5>;
+-	mbox-names = "tx", "rx", "notify";
+-	ti,host-id = <4>;
+-	ti,secure-host;
+-};
+-
+-&mcu_ringacc {
+-	ti,sci = <&dm_tifs>;
+-};
+-
+-&mcu_udmap {
+-	ti,sci = <&dm_tifs>;
+-};
+-
+-&wkup_uart0_pins_default {
+-	bootph-pre-ram;
+-};
++#include "k3-j721e-r5.dtsi"
+ 
+ &mcu_uart0_pins_default {
+ 	bootph-pre-ram;
+diff --git a/arch/arm/dts/k3-j721e-r5.dtsi b/arch/arm/dts/k3-j721e-r5.dtsi
+new file mode 100644
+index 00000000000..fd0d921272c
+--- /dev/null
++++ b/arch/arm/dts/k3-j721e-r5.dtsi
+@@ -0,0 +1,80 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
++ */
++
++/ {
++	chosen {
++		tick-timer = &mcu_timer0;
++	};
++
++	aliases {
++		remoteproc0 = &sysctrler;
++		remoteproc1 = &a72_0;
++	};
++
++	a72_0: a72@0 {
++		compatible = "ti,am654-rproc";
++		reg = <0x0 0x00a90000 0x0 0x10>;
++		power-domains = <&k3_pds 61 TI_SCI_PD_EXCLUSIVE>,
++				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>,
++				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
++		resets = <&k3_reset 202 0>;
++		clocks = <&k3_clks 61 1>;
++		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>;
++		assigned-clock-rates = <2000000000>, <200000000>;
++		ti,sci = <&dmsc>;
++		ti,sci-proc-id = <32>;
++		ti,sci-host-id = <10>;
++		bootph-pre-ram;
++	};
++
++	dm_tifs: dm-tifs {
++		compatible = "ti,j721e-dm-sci";
++		ti,host-id = <3>;
++		ti,secure-host;
++		mbox-names = "rx", "tx";
++		mboxes= <&secure_proxy_mcu 21>,
++			<&secure_proxy_mcu 23>;
++		bootph-pre-ram;
++	};
++};
++
++&mcu_timer0 {
++	status = "okay";
++	bootph-pre-ram;
++};
++
++&dmsc {
++	mboxes= <&secure_proxy_mcu 8>, <&secure_proxy_mcu 6>, <&secure_proxy_mcu 5>;
++	mbox-names = "tx", "rx", "notify";
++	ti,host-id = <4>;
++	ti,secure-host;
++};
++
++&secure_proxy_mcu {
++	bootph-pre-ram;
++	/* We require this for boot handshake */
++	status = "okay";
++};
++
++&cbass_mcu_wakeup {
++	sysctrler: sysctrler {
++		bootph-pre-ram;
++		compatible = "ti,am654-system-controller";
++		mboxes= <&secure_proxy_mcu 4>, <&secure_proxy_mcu 5>;
++		mbox-names = "tx", "rx";
++	};
++};
++
++&mcu_ringacc {
++	ti,sci = <&dm_tifs>;
++};
++
++&mcu_udmap {
++	ti,sci = <&dm_tifs>;
++};
++
++&wkup_uart0_pins_default {
++	bootph-pre-ram;
++};
 -- 
 2.34.1
 
