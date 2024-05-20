@@ -4,86 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 192DBC04FFE
-	for <u-boot@archiver.kernel.org>; Mon, 20 May 2024 06:05:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C0E0C04FFE
+	for <u-boot@archiver.kernel.org>; Mon, 20 May 2024 06:14:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5611288286;
-	Mon, 20 May 2024 08:05:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id F115B8817C;
+	Mon, 20 May 2024 08:14:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=jookia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="I/48JMuX";
+	dkim=pass (2048-bit key; unprotected) header.d=jookia.org header.i=@jookia.org header.b="Cb7fmt7+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C5C08817B; Mon, 20 May 2024 08:05:25 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AEC8B88286; Mon, 20 May 2024 08:14:20 +0200 (CEST)
+Received: from out-178.mta1.migadu.com (out-178.mta1.migadu.com
+ [IPv6:2001:41d0:203:375::b2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06CC48817B
- for <u-boot@lists.denx.de>; Mon, 20 May 2024 08:05:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A034E8808B
+ for <u-boot@lists.denx.de>; Mon, 20 May 2024 08:14:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=jookia.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44K656jv027316;
- Mon, 20 May 2024 01:05:06 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1716185106;
- bh=y+8H4tbTS3t1QO+4WbwuXP3bSi8cCkJFTpVyHguixp8=;
- h=Date:Subject:From:To:CC:References:In-Reply-To;
- b=I/48JMuXwHi47bmul4m5S+3USqZ5yM8UpMITlQoZzRWtOS8jmkFzYOovsmERWed6O
- jAn+1TZ+rcwBnPXeCl3XDVAvfF9X78u8JxxWsma52v8/a3J3HLhZ3z9Xp46m3uOguz
- bBoh+ezRvuiSUqAzoKevRR87NXa9ywqBXc3CiTM0=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44K656xo125203
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 20 May 2024 01:05:06 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 20
- May 2024 01:05:06 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 20 May 2024 01:05:06 -0500
-Received: from [172.24.227.220] (chintan-thinkstation-p360-tower.dhcp.ti.com
- [172.24.227.220])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44K64wmm066873;
- Mon, 20 May 2024 01:04:59 -0500
-Message-ID: <e9911fd1-6a69-448d-9347-7d188ec46c74@ti.com>
-Date: Mon, 20 May 2024 11:34:58 +0530
+ spf=none smtp.mailfrom=contact@jookia.org
+X-Envelope-To: u-boot@lists.denx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jookia.org; s=key1;
+ t=1716185658;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=w7EE+n7dXbvm7hDwXm9PI7enxm7iElAKKNeZSI0hkKY=;
+ b=Cb7fmt7+66GkL5pRMjFCalqhXpEdSN2DoI/bjvPY0xPG5+LIFtADifqmvrtjg6XD3GfjcP
+ NZD0wl4v9Gb+l/GxCQK3xkcj4fOA+TRcsLKnSSgYzoELFFAhhZTQ5D4YhlnQiy8C+gpYmP
+ vyYIxVD1DfziFBNx1QreX9EIkp/O5evavrApqmVie0rbVOZRveiftehf9PU1FJlAQYisC4
+ /s2d5MwTqCBbc9fiM4n23TCMdbTaVPQ4k9wEi1QdvfFboIVrZt/ng7Vz23vloE+Q8GnyKo
+ G6/blJ0FsS++aUxm12ojPujTmBYWJ+xifGUiEg/R0Q/UYtK/kYO1wbbDzu2/bw==
+X-Envelope-To: contact@jookia.org
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: John Watts <contact@jookia.org>
+To: u-boot@lists.denx.de
+Cc: John Watts <contact@jookia.org>
+Subject: Re: [PATCH RFC 3/4] pwm: sunxi: Add support Allwinner D1 PWM
+Date: Mon, 20 May 2024 16:14:02 +1000
+Message-ID: <20240520061402.2677139-1-contact@jookia.org>
+In-Reply-To: <20240518-pwm_d1-v1-0-311fc5fe2248@jookia.org>
+References: <20240518-pwm_d1-v1-0-311fc5fe2248@jookia.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 10/10] arch: arm: dts: k3-am62-sk-u-boot: Add missing
- "bootph-all" property to phy_gmii_sel node
-From: Chintan Vankar <c-vankar@ti.com>
-To: Roger Quadros <rogerq@kernel.org>, =?UTF-8?Q?Marek_Beh=C3=BAn?=
- <kabel@kernel.org>, Michal Simek <michal.simek@amd.com>,
- Vignesh Raghavendra <vigneshr@ti.com>,
- MD Danish Anwar <danishanwar@ti.com>, Udit Kumar <u-kumar1@ti.com>,
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
- Andreas Dannenberg <dannenberg@ti.com>,
- Devarsh Thakkar <devarsht@ti.com>, Bin Meng <bmeng@tinylab.org>,
- Sean Anderson <seanga2@gmail.com>, "Kishon
- Vijay Abraham I" <kishon@ti.com>, Nikhil M Jain <n-jain1@ti.com>, Wadim
- Egorov <w.egorov@phytec.de>, Joao Paulo Goncalves
- <joao.goncalves@toradex.com>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>, Dhruva Gole <d-gole@ti.com>, Francesco Dolcini
- <francesco.dolcini@toradex.com>, Andrew Davis <afd@ti.com>, Maxime Ripard
- <mripard@kernel.org>, Neha Malcom Francis <n-francis@ti.com>, Simon Glass
- <sjg@chromium.org>,
- Siddharth Vadapalli <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>,
- Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>
-References: <20240425120822.2048012-1-c-vankar@ti.com>
- <20240425120822.2048012-11-c-vankar@ti.com>
- <5ac873d5-e485-47d3-b5de-f537c1fb88b1@kernel.org>
- <e3785fad-fb0d-4cf8-8787-0a91e6b52332@ti.com>
-Content-Language: en-US
-In-Reply-To: <e3785fad-fb0d-4cf8-8787-0a91e6b52332@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,57 +69,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+After a long time reading the datasheet I found out my approach was
+actually wrong and led to an off by on error.
 
+Signed-off-by: John Watts <contact@jookia.org>
+---
+ drivers/pwm/sunxi_pwm_d1.c | 57 +++++++++++++++++++++-----------------
+ 1 file changed, 32 insertions(+), 25 deletions(-)
 
-On 25/04/24 18:06, Chintan Vankar wrote:
-> 
-> 
-> On 25/04/24 18:01, Roger Quadros wrote:
->>
->>
->> On 25/04/2024 15:08, Chintan Vankar wrote:
->>> Add "bootph-all" property to CPSW MAC's PHY node phy_gmii_sel.
->>>
->>> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
->>> ---
->>>
->>> Changes from v1 to v2:
->>> - This patch is newly added in this series to enable CPSW MAC's PHY
->>>    node "phy_gmii_sel". As per discussion at here:
->>>    https://lore.kernel.org/r/20240112130127.rvvrhz7p4vmlyalh@smother/
->>>    changes made by this patch can be dropped in the future when the
->>>    DT-Sync is performed with am62-main.dtsi containing this change in
->>>    the Linux DT which will match U-Boot's DT.
->>
->> I don't think bootph-all exists in am62-main.dtsi. It should come from
->> board.dts
->>
-> 
-> Yes, I am having the same discussion at here:
-> https://lore.kernel.org/all/c13ac165-7cbd-4e53-914e-8c6bc28250e3@ti.com/
-> 
+diff --git a/drivers/pwm/sunxi_pwm_d1.c b/drivers/pwm/sunxi_pwm_d1.c
+index 6c57bc6e85..f396afff3e 100644
+--- a/drivers/pwm/sunxi_pwm_d1.c
++++ b/drivers/pwm/sunxi_pwm_d1.c
+@@ -1,34 +1,41 @@
+ // SPDX-License-Identifier: GPL-2.0
+ // Copyright 2022 Jookia <contact@jookia.org>
+ /*
+- * The Allwinner D1's PWM channels are 16-bit counters with up to
+- * 65537 cycles (yes, you read that correctly).
++ * The Allwinner D1's PWM channels are paired 16-bit counters.
+  *
+  * Each channel must be programmed using three variables:
+  * - The entire cycle count (used for the period)
+- * - The active cycle count (the count of inactive cycles)
+- * - The polarity (specifies if the signal is active high or low)
+- * The cycle counts are at minimum 1 and at maximum 65536.
++ * - The active cycle count (used for the duty cycle)
++ * - The active state polarity (specifies if the signal goes high or low)
+  *
+- * The controller will output the number of entire cycles plus one
+- * extra, with any cycles after the active cycle output as active.
++ * All counts are zero based, but the datasheet spends a lot of time
++ * adding 1 to the entire cycle count. There's no hidden extra cycle,
++ * it's just trying to make it human understandable. After all, you can
++ * have 0 active counts for a 100% duty cycle, but 0 entire cycles
++ * doesn't really mean sense or work in time calculations.
+  *
+- * Consider a PWM period of 128 nanoseconds and a cycle period of 32.
+- * Setting the entire cycle count to 3 and active cycle count to 4
+- * gives an output like so:
++ * The counter works like this (quoting the datasheet):
++ * - PCNTR = (PCNTR == PWM_ENTIRE_CYCLE) ? 0 : PCNTR + 1
++ * - PCNTR > (PWM_ENTIRE_CYCLE - PWM_ACT_CYCLE) = Output active state
++ * - PCNTR <= (PWM_ENTIRE_CYCLE - PWM_ACT_CYCLE) = Output inactive state
+  *
+- * - Cycle 1 runs 0 to 32 nanoseconds, inactive
+- * - Cycle 2 runs 32 to 64 nanoseconds, inactive
+- * - Cycle 3 runs 64 to 96 nanoseconds, inactive
+- * - Cycle 4 runs 96 to 128 nanoseconds, inactive
+- * - Cycle 5 is skipped but would run 128 to 160 nanoseconds, active
++ * Here's a 2-bit table of cycle counts versus active cycle counts:
++ *   Active:  |       0 |        1  |        2  |        3 |
++ *   Count 0  | Active  | Inactive  | Inactive  | Inactive |
++ *   Count 1  | Active  | Active    | Inactive  | Inactive |
++ *   Count 2  | Active  | Active    | Active    | Inactive |
++ *   Count 3  | Active  | Active    | Active    | Active   |
+  *
+- * If we set the entire count to 4, cycle 5 would run and we wouldn't be
+- * able to specify it as inactive as the active count only goes up to 4.
++ * An entire count of 2 and active count of 3 would always be inactive.
+  *
+- * In practice this means we want to set the entire cycle to be one less
+- * then the actual number of cycles we want, so we can set the number of
+- * active cycles to be up to maximum for a fully inactive signal.
++ * The main takeaways here for us are:
++ * - The counter wraps around when it hits the entire cycle count
++ * - The output is active after the counter equals the active cycle count
++ * - An active count of 0 means the period is a 100% active cycle
++ * - An active count larger than the entire cycle count is a 0% active cycle
++ *
++ * This driver deals with the last problem by limiting the entire cycles
++ * to 65534 so we can always specify 65535 for a 0% active cycle.
+  *
+  * The PWM channels are paired and clocked together, resulting in a
+  * cycle time found using the following formula:
+@@ -123,7 +130,7 @@ int find_channel_dividers(uint period_ns,
+ 			  uint parent_hz,
+ 			  struct pwm_timings *out)
+ {
+-	uint ideal_cycle_ns = div_ns(period_ns, 65536);
++	uint ideal_cycle_ns = div_ns(period_ns, 65535);
+ 	int common_div = out->common_div;
+ 	int prescaler = 1;
+ 	uint cycle_ns = 0;
+@@ -160,10 +167,10 @@ int find_channel_timings(const struct pwm_channel *in,
+ 	if (find_channel_dividers(in->period_ns, parent_hz, &new))
+ 		return -1;
+ 
+-	new.entire_cycles = (in->period_ns / new.cycle_ns) - 1;
++	new.entire_cycles = (in->period_ns / new.cycle_ns);
+ 	new.active_cycles = (in->duty_ns / new.cycle_ns);
+-	new.period_ns = (new.entire_cycles + 1) * new.cycle_ns;
+-	new.duty_ns = new.active_cycles * new.cycle_ns;
++	new.period_ns = (new.entire_cycles * new.cycle_ns);
++	new.duty_ns = (new.active_cycles * new.cycle_ns);
+ 	new.polarity = in->polarity;
+ 
+ 	if (error_too_large(new.period_ns, in->period_ns))
+@@ -311,7 +318,7 @@ void enable_channel(void *base, int channel, struct pwm_timings *timings)
+ {
+ 	u32 pwm_active = (timings->polarity) ? 0 : PCR_PWM_ACTIVE;
+ 	u32 prescale = (timings->prescale_k - 1);
+-	u32 entire_cycles = timings->entire_cycles;
++	u32 entire_cycles = (timings->entire_cycles - 1);
+ 	u32 active_cycles = timings->active_cycles;
+ 
+ 	u32 PCR_clear = (PCR_PRESCAL_K_MASK | PCR_PWM_ACTIVE);
+-- 
+2.45.1
 
-Since I have posted patch which adds bootph-all property to
-"k3-am62x-sk-common.dtsi" at here:
-https://lore.kernel.org/r/20240430085048.3143665-1-c-vankar@ti.com/
-and it has no open comments and this series
-also does not have any open comments, so can it be merged ?
-
->>>
->>>   arch/arm/dts/k3-am625-sk-u-boot.dtsi | 4 ++++
->>>   1 file changed, 4 insertions(+)
->>>
->>> diff --git a/arch/arm/dts/k3-am625-sk-u-boot.dtsi 
->>> b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
->>> index fa778b0ff4..e9a1afde95 100644
->>> --- a/arch/arm/dts/k3-am625-sk-u-boot.dtsi
->>> +++ b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
->>> @@ -46,3 +46,7 @@
->>>   &cpsw_port2 {
->>>       status = "disabled";
->>>   };
->>> +
->>> +&phy_gmii_sel {
->>> +    bootph-all;
->>> +};
->>
