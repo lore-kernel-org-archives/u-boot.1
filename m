@@ -4,78 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32AB8C04FFE
-	for <u-boot@archiver.kernel.org>; Mon, 20 May 2024 12:06:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E67AC04FFE
+	for <u-boot@archiver.kernel.org>; Mon, 20 May 2024 12:12:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A5D48824B;
-	Mon, 20 May 2024 14:06:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 97C6388247;
+	Mon, 20 May 2024 14:12:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EgYDM32b";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="IxCWJ2eq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E1DD3886A7; Mon, 20 May 2024 14:06:43 +0200 (CEST)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 82D6F8824B; Mon, 20 May 2024 14:12:53 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE07D8820B
- for <u-boot@lists.denx.de>; Mon, 20 May 2024 14:06:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 024B388229
+ for <u-boot@lists.denx.de>; Mon, 20 May 2024 14:12:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maximmosk4@gmail.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-5238b5c080cso5156360e87.1
- for <u-boot@lists.denx.de>; Mon, 20 May 2024 05:06:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716206801; x=1716811601; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=20R84QFVa4eKXI90iNlmr4XncoVcJqMjK7NyaLQ7SRg=;
- b=EgYDM32boN/R1VlSrzfoCK87Nx9NW82DlW5IR7RU/6zBZIDsznmCBXTEn051mcfhKS
- dX9GZmUIPFEXW43aTsANPCJKRSzk16ef475BeeY2H7wdEDCUOPl6tylEeR8xbjqaxZxZ
- 2FP4GHRhkmuiV/saExmUVzSeAoY68nY9lax4XaJBIqrCd6ieGQsr7fzVdkhCq2dY5a3x
- QKXOWUsV1wzCooLC3yt1thyMwNd1O8yVBblKXi7nct+CToO+jWpeFO1dU10B/nXgjwD3
- V5S1e8CQY5oS7KAspThi6FXpugRFlguiPO6KBgxG3LnxCVZ8P8S08LOwsNlUr53yzcEv
- q+Mg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716206801; x=1716811601;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=20R84QFVa4eKXI90iNlmr4XncoVcJqMjK7NyaLQ7SRg=;
- b=Y0G6Jz5mbIXSSS0Kfv6w4OtFXeAmPciG3DSxy5XAAEnVSyQm7OKWAOPusY9kMbHeR8
- oobDJTSB4Z9YNOhdXasFzzDXUfaK0KKwLc7zJu0QQQf+YZPx09F2frdLw/kcM4ubNgMm
- jcXXI/mC10jNYBO4Kty/E3WLeD6YOMPaRDNg7I9zuTH+XCM3zDkwf70bKpKaZZ2Uw/TZ
- t2CKtTqpfWgibUMAtS2NuCyuY6UwpriwQ14Cy5wz/vW5ZVOznyhD8UQDPg6YiH5rmrIl
- V60Bwr0yG1SZ8FZKKyIWM3ydRZbjd2Hpor839gT1AdA6bcPwYD2zux+H07q7Y5NF7JUN
- d3Eg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUmgP5n5uJC3oOvg4MhuvQK0gMXKC66ZNaK/+qImdDZRPRzvU8XIiMkw/DakGx/gz8hmR8taTTl8qdtZyYTiQ/XLafyeg==
-X-Gm-Message-State: AOJu0Yz7CbgNbqn3REEstW0xhh+sAF59uSnM87d4ZgGuWKQSlA8uh7VJ
- e2WLgESXDSlXntTwqoeHiKH7KOE1XbhX3GcXeP462b3m6F6ortUe
-X-Google-Smtp-Source: AGHT+IGyD59duIdAPIGUsNcEt/9QRNFEUYtaTgtAJIeaH0uUrVdPrdnpMMvOTFh2Qu8xIf+wt8YmDA==
-X-Received: by 2002:ac2:5e67:0:b0:51b:f78d:c189 with SMTP id
- 2adb3069b0e04-5220fb69910mr15672903e87.14.1716206800776; 
- Mon, 20 May 2024 05:06:40 -0700 (PDT)
-Received: from moskalets-nb.avp.ru ([2a00:1fa0:684:c5c:8eca:3ada:96fe:92ef])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-521f38d7f43sm4252090e87.185.2024.05.20.05.06.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 May 2024 05:06:40 -0700 (PDT)
-From: Maxim Moskalets <maximmosk4@gmail.com>
-X-Google-Original-From: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
-To: xypron.glpk@gmx.de, quentin.schulz@theobroma-systems.com, sjg@chromium.org,
- trini@konsulko.com, u-boot@lists.denx.de
-Cc: Maxim.Moskalets@kaspersky.com,
-	maximmosk4@gmail.com
-Subject: [PATCH v3] cmd: move ELF load and boot to lib/elf.c
-Date: Mon, 20 May 2024 15:06:37 +0300
-Message-Id: <20240520120637.41624-1-Maxim.Moskalets@kaspersky.com>
-X-Mailer: git-send-email 2.39.2
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 6A0A061C47;
+ Mon, 20 May 2024 12:12:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 69675C2BD11;
+ Mon, 20 May 2024 12:12:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1716207169;
+ bh=lOrtLt96STv4qbRVGvARfUQpCimVF70OILUZSEgKYIo=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=IxCWJ2eqJI8JqYYR3g1tBZ23oXRFqDFCYgraly9FTWLc8rUaa9QqXnKE3GtN4w/LP
+ 8gH6cfvhR2dwxHs2Y2oIvYxRNSy7/LvzzXNp0XD++7xJnM011Ls8sWn6qALCEnMGyz
+ iIpCHWZMrnDkIFynm+Rpas9KEJ8G4jRWzxmkX9tWPD6Ks47v0kbhpN77Kdz0kp1EDA
+ fm8wkZB97o0eKSUEXCFju7TiSjrYpcgVQn1NLd0jYAYSAcmvRQfAREmPRjS40SOHjr
+ ffQpZEu58XVC9F0DT16wPB/zpjOxkLxSiiT9iaonP3BU5Pl0kHMvY3AR3cNTe54CbB
+ CHMg9JHvv7ebA==
+Message-ID: <25fb2205-77e8-42dd-a244-4114f028d2c7@kernel.org>
+Date: Mon, 20 May 2024 15:12:40 +0300
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 06/10] arm: mach-k3: am625_init: Probe AM65 CPSW NUSS
+To: Chintan Vankar <c-vankar@ti.com>, =?UTF-8?Q?Marek_Beh=C3=BAn?=
+ <kabel@kernel.org>, Michal Simek <michal.simek@amd.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, MD Danish Anwar <danishanwar@ti.com>,
+ Udit Kumar <u-kumar1@ti.com>,
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Andreas Dannenberg <dannenberg@ti.com>, Devarsh Thakkar <devarsht@ti.com>,
+ Bin Meng <bmeng@tinylab.org>, Sean Anderson <seanga2@gmail.com>,
+ Kishon Vijay Abraham I <kishon@ti.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Wadim Egorov <w.egorov@phytec.de>,
+ Joao Paulo Goncalves <joao.goncalves@toradex.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Dhruva Gole
+ <d-gole@ti.com>, Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Andrew Davis <afd@ti.com>, Maxime Ripard <mripard@kernel.org>,
+ Neha Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20240425120822.2048012-1-c-vankar@ti.com>
+ <20240425120822.2048012-7-c-vankar@ti.com>
+ <84312b9f-7b30-4da1-91a0-067e94cb420a@kernel.org>
+ <29092012-e708-4676-99e3-cd8ef64cd701@ti.com>
+Content-Language: en-US
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <29092012-e708-4676-99e3-cd8ef64cd701@ti.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,221 +88,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Maxim Moskalets <maximmosk4@gmail.com>
 
-Loading and running the ELF image is the responsibility of the
-library and should not be associated with the command line interface.
 
-It is also required to run ELF images from FIT with the bootm command
-so as not to depend on the command line interface.
+On 25/04/2024 15:59, Chintan Vankar wrote:
+> 
+> 
+> On 25/04/24 17:57, Roger Quadros wrote:
+>>
+>>
+>> On 25/04/2024 15:08, Chintan Vankar wrote:
+>>> From: Kishon Vijay Abraham I <kishon@ti.com>
+>>>
+>>> In order to support Ethernet boot on AM62x, probe AM65 CPSW NUSS
+>>> driver in board_init_f().
+>>>
+>>> Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
+>>> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+>>> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
+>>> ---
+>>>
+>>> Link to v1:
+>>> https://lore.kernel.org/r/20240112064759.1801600-8-s-vadapalli@ti.com/
+>>>
+>>> Changes from v1 to v2:
+>>> - No changes.
+>>>
+>>>   arch/arm/mach-k3/am625_init.c | 10 ++++++++++
+>>>   1 file changed, 10 insertions(+)
+>>>
+>>> diff --git a/arch/arm/mach-k3/am625_init.c b/arch/arm/mach-k3/am625_init.c
+>>> index 668f9a51ef..9bf61b1e83 100644
+>>> --- a/arch/arm/mach-k3/am625_init.c
+>>> +++ b/arch/arm/mach-k3/am625_init.c
+>>> @@ -277,6 +277,16 @@ void board_init_f(ulong dummy)
+>>>           if (ret)
+>>>               panic("DRAM init failed: %d\n", ret);
+>>>       }
+>>> +
+>>> +    if (IS_ENABLED(CONFIG_SPL_ETH) && IS_ENABLED(CONFIG_TI_AM65_CPSW_NUSS) &&
+>>> +        spl_boot_device() == BOOT_DEVICE_ETHERNET) {
+>>> +        struct udevice *cpswdev;
+>>> +
+>>> +        if (uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(am65_cpsw_nuss),
+>>> +                        &cpswdev))
+>>> +            printf("Failed to probe am65_cpsw_nuss driver\n");
+>>> +    }
+>>> +
+>>
+>> This looks like a HACK.
+>> The network driver should be probed only when the networking feature is actually required.
+>>
+> 
+> Driver is probed only when the condition above
+> "spl_boot_device() == BOOT_DEVICE_ETHERNET" is true, which says Boot
+> device is Ethernet, and here we are booting with Ethernet so driver is
+> getting probed.
 
-Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
----
- cmd/elf.c     | 53 ++++++++++++++++----------------------------------
- include/elf.h | 10 ++++++++++
- lib/elf.c     | 54 +++++++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 81 insertions(+), 36 deletions(-)
+I think you misunderstood what I was saying as am625_init.c is not using
+any Ethernet function it should not cause the Ethernet driver to probe.
 
-diff --git a/cmd/elf.c b/cmd/elf.c
-index a02361f9f5..9e1df73aff 100644
---- a/cmd/elf.c
-+++ b/cmd/elf.c
-@@ -19,21 +19,6 @@
- #include <linux/linkage.h>
- #endif
- 
--/* Allow ports to override the default behavior */
--static unsigned long do_bootelf_exec(ulong (*entry)(int, char * const[]),
--				     int argc, char *const argv[])
--{
--	unsigned long ret;
--
--	/*
--	 * pass address parameter as argv[0] (aka command name),
--	 * and all remaining args
--	 */
--	ret = entry(argc, argv);
--
--	return ret;
--}
--
- /* Interpreter command to boot an arbitrary ELF image from memory */
- int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- {
-@@ -43,8 +28,8 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- #endif
- 	unsigned long addr; /* Address of the ELF image */
- 	unsigned long rc; /* Return value from user code */
--	char *sload = NULL;
--	int rcode = 0;
-+	int rcode = CMD_RET_SUCCESS;
-+	Bootelf_flags flags = {0};
- 
- 	/* Consume 'bootelf' */
- 	argc--; argv++;
-@@ -52,7 +37,10 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	/* Check for [-p|-s] flag. */
- 	if (argc >= 1 && (argv[0][0] == '-' && \
- 				(argv[0][1] == 'p' || argv[0][1] == 's'))) {
--		sload = argv[0];
-+		if (argv[0][1] == 'p')
-+			flags.phdr = 1;
-+		log_debug("Using ELF header format %s\n",
-+				flags.phdr ? "phdr" : "shdr");
- 		/* Consume flag. */
- 		argc--; argv++;
- 	}
-@@ -75,17 +63,9 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	} else
- 		addr = image_load_addr;
- 
--	if (!valid_elf_image(addr))
--		return 1;
--
--	if (sload && sload[1] == 'p')
--		addr = load_elf_image_phdr(addr);
--	else
--		addr = load_elf_image_shdr(addr);
--
- #if CONFIG_IS_ENABLED(CMD_ELF_FDT_SETUP)
- 	if (fdt_addr) {
--		printf("## Setting up FDT at 0x%08lx ...\n", fdt_addr);
-+		log_debug("Setting up FDT at 0x%08lx ...\n", fdt_addr);
- 		flush();
- 
- 		if (image_setup_libfdt(&img, (void *)fdt_addr, NULL))
-@@ -93,21 +73,22 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	}
- #endif
- 
--	if (!env_get_autostart())
--		return rcode;
--
--	printf("## Starting application at 0x%08lx ...\n", addr);
--	flush();
-+	if (env_get_autostart()) {
-+		flags.autostart = 1;
-+		log_debug("Starting application at 0x%08lx ...\n", addr);
-+		flush();
-+	}
- 
- 	/*
- 	 * pass address parameter as argv[0] (aka command name),
--	 * and all remaining args
-+	 * and all remaining arguments
- 	 */
--	rc = do_bootelf_exec((void *)addr, argc, argv);
-+	rc = bootelf(addr, flags, argc, argv);
- 	if (rc != 0)
--		rcode = 1;
-+		rcode = CMD_RET_FAILURE;
- 
--	printf("## Application terminated, rc = 0x%lx\n", rc);
-+	if (flags.autostart && rc && (ENOEXEC == errno))
-+		log_err("Invalid ELF image\n");
- 
- 	return rcode;
- }
-diff --git a/include/elf.h b/include/elf.h
-index a4ba74d8ab..b88e6cf403 100644
---- a/include/elf.h
-+++ b/include/elf.h
-@@ -12,6 +12,12 @@
- #ifndef __ASSEMBLY__
- #include "compiler.h"
- 
-+/* Flag param bits for bootelf() function */
-+typedef struct {
-+	unsigned phdr      : 1; /* load via program (not section) headers */
-+	unsigned autostart : 1; /* Start ELF after loading */
-+} Bootelf_flags;
-+
- /* This version doesn't work for 64-bit ABIs - Erik */
- 
- /* These typedefs need to be handled better */
-@@ -700,6 +706,10 @@ unsigned long elf_hash(const unsigned char *name);
- #define R_RISCV_RELATIVE	3
- 
- #ifndef __ASSEMBLY__
-+unsigned long bootelf_exec(ulong (*entry)(int, char * const[]),
-+			   int argc, char *const argv[]);
-+unsigned long bootelf(unsigned long addr, Bootelf_flags flags,
-+		      int argc, char *const argv[]);
- int valid_elf_image(unsigned long addr);
- unsigned long load_elf64_image_phdr(unsigned long addr);
- unsigned long load_elf64_image_shdr(unsigned long addr);
-diff --git a/lib/elf.c b/lib/elf.c
-index 9a794f9cba..dc13935e10 100644
---- a/lib/elf.c
-+++ b/lib/elf.c
-@@ -7,6 +7,7 @@
- #include <cpu_func.h>
- #include <elf.h>
- #include <env.h>
-+#include <errno.h>
- #include <net.h>
- #include <vxworks.h>
- #ifdef CONFIG_X86
-@@ -15,6 +16,59 @@
- #include <linux/linkage.h>
- #endif
- 
-+/**
-+ * bootelf_exec() - start the ELF image execution.
-+ *
-+ * @entry: address of entry point of ELF.
-+ *
-+ * May by used to allow ports to override the default behavior.
-+ */
-+unsigned long bootelf_exec(ulong (*entry)(int, char * const[]),
-+			   int argc, char *const argv[])
-+{
-+	return entry(argc, argv);
-+}
-+
-+/**
-+ * bootelf() - Boot ELF from memory.
-+ *
-+ * @addr:  Loading address of ELF in memory.
-+ * @flags: Bits like ELF_PHDR to control boot details.
-+ * @argc: May be used to pass command line arguments (maybe unused).
-+ *	  Necessary for backward compatibility with the CLI command.
-+ *	  If unused, must be 0.
-+ * @argv: see @argc. If unused, must be NULL.
-+ * Return: Number returned by ELF application.
-+ *
-+ * Sets errno = ENOEXEC if the ELF image is not valid.
-+ */
-+unsigned long bootelf(unsigned long addr, Bootelf_flags flags,
-+		      int argc, char *const argv[])
-+{
-+	unsigned long entry_addr;
-+	char *args[] = {"", NULL};
-+
-+	errno = 0;
-+
-+	if (!valid_elf_image(addr)) {
-+		errno = ENOEXEC;
-+		return 1;
-+	}
-+
-+	entry_addr = flags.phdr ? load_elf_image_phdr(addr)
-+					    : load_elf_image_shdr(addr);
-+
-+	if (!flags.autostart)
-+		return 0;
-+
-+	if (!argc && !argv) {
-+		argc = 1;
-+		argv = args;
-+	}
-+
-+	return bootelf_exec((void *)entry_addr, argc, argv);
-+}
-+
- /*
-  * A very simple ELF64 loader, assumes the image is valid, returns the
-  * entry point address.
+Instead it should be probed by the networking use case.
+
+What happens if you don't use this patch? Where is it failing?
+
+> 
+>>>       spl_enable_cache();
+>>>         fixup_a53_cpu_freq_by_speed_grade();
+>>
+
 -- 
-2.39.2
-
+cheers,
+-roger
