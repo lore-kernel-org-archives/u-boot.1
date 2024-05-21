@@ -4,87 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD4B8C25B74
-	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 16:45:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56FCEC25B74
+	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 16:47:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63D9D881C1;
-	Tue, 21 May 2024 18:45:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D5F9D8871D;
+	Tue, 21 May 2024 18:47:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qlpfoBYG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="htEkFc+7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3442888335; Tue, 21 May 2024 18:45:49 +0200 (CEST)
-Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
- [IPv6:2607:f8b0:4864:20::730])
+ id A49DF88778; Tue, 21 May 2024 18:47:05 +0200 (CEST)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F365A87FA7
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 18:45:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D12987FA7
+ for <U-Boot@lists.denx.de>; Tue, 21 May 2024 18:47:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x730.google.com with SMTP id
- af79cd13be357-792b94301eeso34650685a.3
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 09:45:46 -0700 (PDT)
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-6a8691d724eso2538106d6.0
+ for <U-Boot@lists.denx.de>; Tue, 21 May 2024 09:47:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1716309946; x=1716914746; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1716310022; x=1716914822; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Hnn7tZxP3HKBmPBo9F18RfFyisZQt/9/LWH82SDzrMQ=;
- b=qlpfoBYGu0vehYNpIHmbB8DGIjz4EUf6UoJmIusQETRbLxgh1+ouTng1ar/HfW8XYP
- AlUrIx1LYGyjZMvQz0DxavTvX4ZPPDJZaJ4oGBCuRoOvyv3TLolb9PVSshuEdKQvpo2b
- RF4z8nTa0rCU02xAbTc9Kxkr6YQm1kxSYi8jQ=
+ bh=DsB3KGP5CVuD+nyyraUDB5udqrRiwpAibAG+OAG6gGM=;
+ b=htEkFc+7wEt9Rr6za2ZaehI5ch3ZUVNGsH4HxfW9rOT31ZHXL9DohKPEjUrLJ8+hKm
+ pTq/D4tMJsKoXpZ3RFUxLk87d1DgjctBUoSoNzwyQkBwLFHBXdoLdFlXXpr5ZhfkL7t0
+ 7D2svDlN5ebwvImfJgYoFeOMD7QE6Df9m9s94=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716309946; x=1716914746;
+ d=1e100.net; s=20230601; t=1716310022; x=1716914822;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Hnn7tZxP3HKBmPBo9F18RfFyisZQt/9/LWH82SDzrMQ=;
- b=dAJULpjhucyIIq6WeflI6i19QLDBDZGyXF7V62ifD5WfrvS2nMhrjV2K2iYer7Rcil
- TqsrLWYiC35emYReYirKqGIEGfDrgcv6Iw60hZaCUn24gOapu/GCCCVktAlX7tzvVWIP
- hN2X64coL75sBFVCOKu1Sl+VyG5ZK2cm0n0TLo9XDzwcc5FieAvsW3/Gn3LTw+KpQzGj
- t8Hy6MvPHtABxKkqgwP6xwAzsVrWwd4u+b2/C3lv4B8POS5HwB+LySfSut6zK7WBhlHM
- MyCgr67Es6ajrSSCz1H6NMbK/HPgstSi0Jmo1JTdM3SMwiXfcdpgTDl135RG9M5cQPw4
- PVXA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXjZ4Xt+7P7TMiRQWIpVt9Bgfd+E7TsqnlfC4zGEA6gwwBD98j049B71Vc55gdDFMjD/WBtkvB1QyqtMiKjw19dV3HOQw==
-X-Gm-Message-State: AOJu0Yw8hjUzwd8nQr93YV8aIr5nV7JUDxRIwgFGDU/YCOiIO5HHy4PE
- GocmCHtow3+s9sxpwMyfSif8qRosouygM7FQyI2dWkJzyvzznjNNaZ+0Pxc4doU=
-X-Google-Smtp-Source: AGHT+IFlZmiNeYrE4H6kb0CiI0e+1eAPrbaiDedAqboTerrmWxpLhevlcLHhlOKKNvfBapWQwbkfXw==
-X-Received: by 2002:a05:620a:45a3:b0:790:ef5d:25ae with SMTP id
- af79cd13be357-792c75f4541mr4765454685a.56.1716309945663; 
- Tue, 21 May 2024 09:45:45 -0700 (PDT)
+ bh=DsB3KGP5CVuD+nyyraUDB5udqrRiwpAibAG+OAG6gGM=;
+ b=CAz9zbsGWpLlcOa4A9NhZ58vQ5IMM30v77axwJzRWyL0iJbdijJTjE/hMD4u+ehxw+
+ McH/kgh8B8Iw5cdc39xiMDpfITCJd6xUREPF+cADlcrsOrImEv3M7CkU7WdwPBTXDZEr
+ QU2SnkcETgdMtjYsSlkUU/4q5XIIsz7symzI7OC8vt0jC48oF5gp9z1PhnWnjJP6MoJd
+ mWUOEk2N50U/WkLPu42QFjjt9jgTe0FyHAa03oK4KY4wutLoDrABErnUfc1BNWEZ1BvA
+ ey+CD/ew5zdS8MkfxSipv25/r+7+XHwpkdS2XYkssoDj3oFxyIweMTACNJXT1ZXwcuaY
+ fqHg==
+X-Gm-Message-State: AOJu0YyLxKh3lR+hlAstFDSWMShAX4WbivopismQKioi7zXPQa6mkmGr
+ NwSb1qCelFw7TnG29rbnYScNS/UcZ21GgbbYuu30ERWeDYpsgbV1nSy4gkGdlboY2nmNCGcLxwh
+ e0JQ=
+X-Google-Smtp-Source: AGHT+IGD6zbT0N95s50IQWaMJ4wXGOTP+v90wsOHSvA+rH5af/WWpltroFWw1S+bjiJ4XFeNWPaVUw==
+X-Received: by 2002:a05:6214:4291:b0:69b:2897:4fc4 with SMTP id
+ 6a1803df08f44-6a168240335mr427002016d6.58.1716310022388; 
+ Tue, 21 May 2024 09:47:02 -0700 (PDT)
 Received: from bill-the-cat ([189.178.170.52])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-792bf2fc609sm1301342585a.94.2024.05.21.09.45.43
+ 6a1803df08f44-6a941c29753sm30533686d6.18.2024.05.21.09.47.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 May 2024 09:45:45 -0700 (PDT)
-Date: Tue, 21 May 2024 10:45:41 -0600
+ Tue, 21 May 2024 09:47:02 -0700 (PDT)
+Date: Tue, 21 May 2024 10:46:59 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: "Kumar, Udit" <u-kumar1@ti.com>, vigneshr@ti.com, nm@ti.com,
- joe.hershberger@ni.com, m-chawdhry@ti.com, afd@ti.com,
- devarsht@ti.com, sjg@chromium.org, emanuele.ghidoli@toradex.com,
- matthias.schiffer@ew.tq-group.com, a-bhatia1@ti.com,
- vitor.soares@toradex.com, danishanwar@ti.com, bmeng.cn@gmail.com,
- mkorpershoek@baylibre.com, s-vadapalli@ti.com, u-boot@lists.denx.de,
- joao.goncalves@toradex.com, hnagalla@ti.com
-Subject: Re: [PATCH 0/4] Adding support to load secure firmware for HS devices
-Message-ID: <20240521164541.GY2568172@bill-the-cat>
-References: <20240521105648.3780072-1-u-kumar1@ti.com>
- <ZkyvvWotyQJQyz9k@smile.fi.intel.com>
- <37ba74bf-21ea-4551-8631-c07d8ff2c0ea@ti.com>
- <ZkzH2Sa4eGAxb2EB@smile.fi.intel.com>
- <20240521162145.GT2568172@bill-the-cat>
- <ZkzNa9TnTIixVnfJ@smile.fi.intel.com>
+To: "Brunham, Kalen" <kalen.brunham@intel.com>
+Cc: "U-Boot@lists.denx.de" <U-Boot@lists.denx.de>
+Subject: Re: [PATCH 1/1] Added arm64 assembly for examples/api crt0
+Message-ID: <20240521164659.GZ2568172@bill-the-cat>
+References: <DM4PR11MB5296B1B9F0CFC701A8B11284E3EE2@DM4PR11MB5296.namprd11.prod.outlook.com>
+ <DM4PR11MB52961423BCE12552857A12A8E3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
+ <20240521162543.GU2568172@bill-the-cat>
+ <DM4PR11MB529670F5CFDA6B4EDA7B7206E3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="BoQ0OvCEalUS0k9l"
+ protocol="application/pgp-signature"; boundary="kP9kiI8Afegb1IeN"
 Content-Disposition: inline
-In-Reply-To: <ZkzNa9TnTIixVnfJ@smile.fi.intel.com>
+In-Reply-To: <DM4PR11MB529670F5CFDA6B4EDA7B7206E3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,87 +94,43 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---BoQ0OvCEalUS0k9l
-Content-Type: text/plain; charset=utf-8
+--kP9kiI8Afegb1IeN
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, May 21, 2024 at 07:35:55PM +0300, Andy Shevchenko wrote:
-> On Tue, May 21, 2024 at 10:21:45AM -0600, Tom Rini wrote:
-> > On Tue, May 21, 2024 at 07:12:09PM +0300, Andy Shevchenko wrote:
-> > > On Tue, May 21, 2024 at 08:59:17PM +0530, Kumar, Udit wrote:
-> > > > On 5/21/2024 7:59 PM, Andy Shevchenko wrote:
-> > > > > On Tue, May 21, 2024 at 04:26:44PM +0530, Udit Kumar wrote:
->=20
-> ...
->=20
-> > > > > Are you Cc'ing random people with this?
-> > > > > Please don't do it.
-> > > >=20
-> > > > I used names names popped up while running get_maintainer.pl script=
- of
-> > > > u-boot
-> > > >=20
-> > > > your email id was there for patch-3 of this series
-> > >=20
-> > > Nice, the tool is broken. Please, work with the respective people to =
-fix a tool
-> > > or to tune it to avoid such mistakes in the future.
-> > >=20
-> > > (Hint: I would first disable Git fallback completely)
-> >=20
-> > So you were cc'd thanks to:
-> > commit 5e541a05f70296dbad07fc1f4e8678ad207bb476
-> > Author: Simon Glass <sjg@chromium.org>
-> > Date:   Sun Jul 30 21:01:45 2023 -0600
-> >=20
-> >     env: Use include/env for text-environment includes
-> >    =20
-> >     The 'environment' word is too long. We mostly use 'env' in U-Boot, =
-so use
-> >     that as the name of the include directory too.
-> >    =20
-> >     Signed-off-by: Simon Glass <sjg@chromium.org>
-> >     Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com> # =
-Intel Edison
->=20
-> Yeah, and it even explicitly stated what I reviewed from that code...
->=20
-> >     Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-> >=20
-> > And, I'm sorry because there are other contributors who get upset when =
-git
-> > fallback doesn't find them (because it also ages out after a year).
-> > In this case there's not even a "tweak the threshold" option since
-> > there's only a single commit to the file so you're in 100% of them.
->=20
-> Just an example of false positive by get_maintainer.pl :-(
-> And a confirmation of what I said =E2=80=94 tool is broken.
+On Tue, May 21, 2024 at 04:44:54PM +0000, Brunham, Kalen wrote:
 
-It's an imperfect tool, yes. A quick check shows that if you never want
-to be cc'd from a git tag, you can add yourself to
-=2Eget_maintainer.ignore and you will still be matched for things you have
-an explicit MAINTAINER entry for.
+> I don't specifically need API, but today this is needed to enable
+> creation of standalone applications which does work on our ARM64.
+>=20
+> If the concern is fixing this startup code, then I can come back with
+> a change to the KConfig and Makefiles to enable compiling the
+> hello_world standalone example for ARM64.=20
+
+But still, why are you doing that? Removing the standalone API itself is
+on my TODO list, so understanding why someone would be using that today
+rather than just making an EFI application would be helpful.
 
 --=20
 Tom
 
---BoQ0OvCEalUS0k9l
+--kP9kiI8Afegb1IeN
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZMz7UACgkQFHw5/5Y0
-tyy4qAv/WV2pF89HAdXirzuCjw9i8McepQEinj9muyqZCMcL38IdrPAD/2NUlNDu
-BDdXChYBI7oB48Vkg2BthK9hJQe2VwH5zV741kMbIrr0paXcJCXsKLZhWfQZ6Ta2
-eGlkOLnFATfqKDdLXEfDAqA740Ogj5/mf9EFi0v8XSSJZS5cAAlmj7I7jDkOeoq8
-wE4ceH/4vradtAuKL/6QJs/qtBsP8ToereqUDG6Ciq419fsGOXuXjfBm+SLVteRC
-SkpZJtTXD+3YXnxly6R+k7DzQn412b7QoGCSst6XJTvrXES22lqpYZrSooPxugPS
-1PqbApR9PTYgXYRrIrChM1GxJT97Pr14jLyHhUUhgp37XktrHYRcQZgrDm3coxNX
-cSOz+SgYl9gUjsaKUnP2WQ/6NpMgWnpVhJO4cbF6y95r4E7O86VDA+I2cTbmbfXW
-aUlSy1xacYEUmxUWIZMDGhQSqIzC0V17yR4trzp6WPsLw9hJ4IGeKBRZqhqgqDyS
-4GVPE6gX
-=hreI
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZM0AMACgkQFHw5/5Y0
+tyxLlgv+J5ioDSUe675uJmt/hawFyR12Ry1BGesXTzz6gbGd24+zEBp/Yd4DoTLq
+RYNXTPJWE6BflhfUjuE8LQ7w6LXaiuF0h6uAOI/13gktQGmxAY5q5BvtPqHwA9f1
+So0OzmXW3SJj5O/MBA7pWz/psLkksytH6ZFPRafjOj94YZkOCjgGzRlqWEkI213U
+PVcwSJSP0QgtGCBbm+8rJEFcHtqMgh+cJpximebtbVDQ3B1XuReqRQJxllSNRk/M
+gs/htR9Qi3+EgUaMsYtRhWKUCfZM8IcfmvB0juNqGP67yJtWwVPfMmz0Ah+fIElX
+mM27VpVgQMaqCuf/9p6d0m3019hyg3Qf+Fa6hKcFtOBPMBZCxSyBOBjaNLSXksmV
+9YqPJFqrcjrS40y7bJO9hmEpcHb+zokAtVw9qQQ9UzU0bBGLzGSLY2IhraOL9Mws
+rKYLm9jtL1ggz6vaDdwqNRoobG8pCTJfKM+tkjxuldHSNAT2g+NEx6F4bKD335T+
+OHkBcfbo
+=mHdI
 -----END PGP SIGNATURE-----
 
---BoQ0OvCEalUS0k9l--
+--kP9kiI8Afegb1IeN--
