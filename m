@@ -4,57 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C19C1C25B75
-	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 07:15:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C2FDC25B75
+	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 07:35:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E61D38871D;
-	Tue, 21 May 2024 09:14:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id B047488690;
+	Tue, 21 May 2024 09:35:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Ld96Ri2D";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QbS7RXoh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 185D78870B; Tue, 21 May 2024 09:14:05 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 559B488702; Tue, 21 May 2024 09:35:28 +0200 (CEST)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD9D3886FF
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 09:14:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB92888179
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 09:35:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 9A9F061FF2;
- Tue, 21 May 2024 07:14:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C797AC32782;
- Tue, 21 May 2024 07:13:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1716275641;
- bh=fb6Jd6DcoKyRKD7Wzx7N3VP+d2adhb7lwjg1YjcS5SM=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Ld96Ri2DYuMTSD2TpQ6DMo1aJY8bHZuaSEo9aurf5zwxFslYSEfZBCxIL+GjQ9IrY
- Y+O5z20ZA7UWcd/11L52gsAJAWzXo5RNjcCY8ZjvocGH/rZ8+0MdW9xcpy5db70vda
- 16Zrd3aA8znn/USNhC6ddp9vdWon7kgfhv4AyYOMbDx11TYn/RIFtaEkP27YZM/tYC
- zLJukV5RuvuJJICu5MLw8niP1rt8k301YKs2GcbS0xr+na1WxXDUPo6LaYrER1Bsow
- pYdVnDHtyU9G8OYbaxfiOzHXF02hO48J6Tu9DexjFRXdyPcPxqQPgWBXLO9SEzgE5U
- suMw1nZhE6T8Q==
-From: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Stefan Roese <sr@denx.de>
-Cc: Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Nikita Kiryanov <nikita@compulab.co.il>,
- =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
-Subject: [PATCH 11/11] cmd: eeprom: Extend to EEPROMs probed via driver model
-Date: Tue, 21 May 2024 09:13:35 +0200
-Message-ID: <20240521071335.4193-12-kabel@kernel.org>
-X-Mailer: git-send-email 2.44.1
-In-Reply-To: <20240521071335.4193-1-kabel@kernel.org>
-References: <20240521071335.4193-1-kabel@kernel.org>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jcmvbkbc@gmail.com
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-1f0537e39b3so96455835ad.3
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 00:35:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1716276924; x=1716881724; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=neL5WHXS4stFV40VF5NERxUvFQXozjFQw/M03gdsQz8=;
+ b=QbS7RXohNV6ypfiXFUX+V8OzcNEMR/mGXKYqovm6Xi2URNbIzzN1fI51rBNd6Z88ku
+ 6eWzcavZReOTt9DJfo6kEbGE9D5sEJfabvq3Ia4fFsJhzADF6K4A7ouAQ5t65EY1sgIp
+ x5ox330MryDOleXs/0AanGvHQGcefpqDddeE2P0+W5NcypGzCEutUP8rzhzza49/uxtc
+ /Vb57GdEZ7BoedE5YvFUUnvVUvf2bxFDDawaSaaX2cmle9/b4r4XcuGBvIJzAgJeR7/q
+ 3YPv1b2trWVA0lrhLSGjhrx3tQGeI10N8aHSmR1AgeaEt+hd0oOqH0/tRmqgfxIOLrgS
+ HWCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716276924; x=1716881724;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=neL5WHXS4stFV40VF5NERxUvFQXozjFQw/M03gdsQz8=;
+ b=DhRYLxZaT4kE4uCvHiTMe7yk2WQ03vI9e2OUaiv8DAfrqZ5kgBt+BvkT6dV8STemEF
+ MzBgQ7CIObHO9+EhxaevuQsV27rpj5zTUHPo0nm7pvNi0yWuYoVcVIFBcyseiXQRgktw
+ +6Q1uQg9Y1yqrR460baTsay6XXx/3nb6vWt1tL3yo5t0g4SViWeazDZ21bVhq/4HMUQp
+ ZfVSZCn3OxcwD7xO7Pn8guIsuxRO73iJS3FNHi1dAjUq2hiCMwtb7wos1U1BlKvGiXVv
+ 8MmTK6QG5mFD1dBE25JXRfnwl9mZiSeeC8DFDb/q6yTKb/725n0HFo4aq35hYYdd+B01
+ n8Tg==
+X-Gm-Message-State: AOJu0YwYoVqAqGPXFU51zX5C2zHa9EAzJVrrfHTE8pR+KJWRKxb5VRDr
+ x/xow7Om+ZDedAr4FoYbPS1+9UIZqR9s6SDZKKPxGsdgZR0zWcrtX8hmAa+/N4/2MKZrYi3cdja
+ YDUiybE9yGaPDcoAb7ATzToHt4VnY4gtr
+X-Google-Smtp-Source: AGHT+IFFTNh5N32UXIwfAN09SAaL/q1lfz+OYWDiL2fdK9ktu1E2h10AZWusdaieiBQ23Agx1WQFuuL3SNu3msAZyzg=
+X-Received: by 2002:a17:90a:428b:b0:2b9:c9d5:47d4 with SMTP id
+ 98e67ed59e1d1-2b9c9d54b5fmr17921576a91.34.1716276924415; Tue, 21 May 2024
+ 00:35:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20240519-qemu-xtensa-v1-0-8fff0cb11c19@flygoat.com>
+ <20240519-qemu-xtensa-v1-9-8fff0cb11c19@flygoat.com>
+In-Reply-To: <20240519-qemu-xtensa-v1-9-8fff0cb11c19@flygoat.com>
+From: Max Filippov <jcmvbkbc@gmail.com>
+Date: Tue, 21 May 2024 00:35:13 -0700
+Message-ID: <CAMo8BfJXXozimNR8s2w+Fx8DZjMxT=t-039M+EKX9Ysb+-kwYw@mail.gmail.com>
+Subject: Re: [PATCH 09/10] board: emulation: New board qemu-xtensa
+To: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Cc: u-boot@lists.denx.de, Sean Anderson <sean.anderson@seco.com>, 
+ Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,260 +89,285 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Extend the 'eeprom' command to allow accessing EEPROMs probed via
-driver model, uclass UCLASS_I2C_EEPROM.
+On Sun, May 19, 2024 at 1:54=E2=80=AFPM Jiaxun Yang <jiaxun.yang@flygoat.co=
+m> wrote:
+>
+> Introduce the new board, define every bits.
+>
+> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> ---
+>  arch/xtensa/Kconfig                       |  5 +++
+>  board/emulation/qemu-xtensa/Kconfig       | 41 +++++++++++++++++++++
+>  board/emulation/qemu-xtensa/MAINTAINERS   |  7 ++++
+>  board/emulation/qemu-xtensa/Makefile      |  5 +++
+>  board/emulation/qemu-xtensa/qemu-xtensa.c | 60 +++++++++++++++++++++++++=
+++++++
+>  configs/qemu-xtensa-dc232b_defconfig      | 32 +++++++++++++++++
+>  include/configs/qemu-xtensa.h             | 34 ++++++++++++++++++
+>  7 files changed, 184 insertions(+)
+>
+> diff --git a/arch/xtensa/Kconfig b/arch/xtensa/Kconfig
+> index 4afd56bca095..70eebb4bd22f 100644
+> --- a/arch/xtensa/Kconfig
+> +++ b/arch/xtensa/Kconfig
+> @@ -15,6 +15,10 @@ config TARGET_XTFPGA
+>         bool "Support XTFPGA"
+>         select BOARD_POSTCLK_INIT
+>
+> +config TARGET_QEMU_XTENSA
+> +       bool "Support QEMU Xtensa Virt Board"
+> +       select BOARD_LATE_INIT
+> +
+>  endchoice
+>
+>  config SYS_ICACHE_OFF
+> @@ -69,5 +73,6 @@ config XTENSA_SIMCALL_GDBIO
+>  endchoice
+>
+>  source "board/cadence/xtfpga/Kconfig"
+> +source "board/emulation/qemu-xtensa/Kconfig"
+>
+>  endmenu
+> diff --git a/board/emulation/qemu-xtensa/Kconfig b/board/emulation/qemu-x=
+tensa/Kconfig
+> new file mode 100644
+> index 000000000000..df9142af0875
+> --- /dev/null
+> +++ b/board/emulation/qemu-xtensa/Kconfig
+> @@ -0,0 +1,41 @@
+> +if TARGET_QEMU_XTENSA
+> +
+> +config SYS_BOARD
+> +       default "qemu-xtensa"
+> +
+> +config SYS_VENDOR
+> +       default "emulation"
+> +
+> +config SYS_CONFIG_NAME
+> +       default "qemu-xtensa"
+> +
+> +config TEXT_BASE
+> +       default 0xfe000000
+> +
+> +config BOARD_SPECIFIC_OPTIONS # dummy
+> +       def_bool y
+> +       select BOARD_EARLY_INIT_F
+> +       select DM
+> +       select CPU
+> +       select CPU_XTENSA
+> +       select CLK
+> +       select DM_SERIAL
+> +       select XTENSA_SEMIHOSTING
+> +       select XTENSA_SEMIHOSTING_SERIAL
+> +       imply BLK
+> +       imply VIRTIO
+> +       imply VIRTIO_PCI
+> +       imply VIRTIO_NET
+> +       imply VIRTIO_BLK
+> +       imply E1000
+> +       imply PCI
+> +       imply PCI_INIT_R
+> +       imply NVME_PCI
+> +       imply PCIE_ECAM_GENERIC
+> +       imply SCSI
+> +       imply REMAKE_ELF
+> +       select OF_CONTROL
+> +       select OF_UPSTREAM
+> +       imply CMD_DM
+> +
+> +endif
+> diff --git a/board/emulation/qemu-xtensa/MAINTAINERS b/board/emulation/qe=
+mu-xtensa/MAINTAINERS
+> new file mode 100644
+> index 000000000000..851ef596f611
+> --- /dev/null
+> +++ b/board/emulation/qemu-xtensa/MAINTAINERS
+> @@ -0,0 +1,7 @@
+> +QEMU XTENSA 'VIRT' BOARD
+> +M:     Jiaxun Yang <jiaxun.yang@flygoat.com>
+> +S:     Maintained
+> +F:     board/emulation/qemu-xtensa/
+> +F:     board/emulation/common/
+> +F:     include/configs/qemu-riscv.h
 
-When the CONFIG_I2C_EEPROM config option is enabled (and so the
-i2c-eeprom driver is built), the 'eeprom' command now accepts driver
-model device name as EEPROM specifier for the 'eeprom' command, in
-addition to the legacy [[bus] devaddr] specifier.
+This must be qemu-xtensa.h, right?
 
-Moreover if no device specifier is given, then the first
-UCLASS_I2C_EEPROM device is used, if found.
+> +F:     configs/qemu-xtensa-dc232b_defconfig
+> diff --git a/board/emulation/qemu-xtensa/Makefile b/board/emulation/qemu-=
+xtensa/Makefile
+> new file mode 100644
+> index 000000000000..0f33a65f6c6b
+> --- /dev/null
+> +++ b/board/emulation/qemu-xtensa/Makefile
+> @@ -0,0 +1,5 @@
+> +# SPDX-License-Identifier: GPL-2.0+
+> +#
+> +# Copyright (C) 2024, Jiaxun Yang <jiaxun.yang@flygoat.com>
+> +
+> +obj-y  +=3D qemu-xtensa.o
+> diff --git a/board/emulation/qemu-xtensa/qemu-xtensa.c b/board/emulation/=
+qemu-xtensa/qemu-xtensa.c
+> new file mode 100644
+> index 000000000000..0ca83341c25c
+> --- /dev/null
+> +++ b/board/emulation/qemu-xtensa/qemu-xtensa.c
+> @@ -0,0 +1,60 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (C) 2018, Bin Meng <bmeng.cn@gmail.com>
+> + */
+> +
+> +#include <dm.h>
+> +#include <cpu.h>
+> +#include <log.h>
+> +#include <init.h>
+> +#include <usb.h>
+> +#include <virtio_types.h>
+> +#include <virtio.h>
+> +
+> +DECLARE_GLOBAL_DATA_PTR;
+> +
+> +int board_init(void)
+> +{
+> +       return 0;
+> +}
+> +
+> +unsigned long get_board_sys_clk(void)
+> +{
+> +       return gd->cpu_clk ? gd->cpu_clk : 40000000;
+> +}
+> +
+> +int dram_init(void)
+> +{
+> +       return fdtdec_setup_mem_size_base();
+> +}
+> +
+> +int board_early_init_f(void)
+> +{
+> +       struct cpu_plat *cpu_plat;
+> +       struct udevice *cpu =3D cpu_get_current_dev();
+> +
+> +       if (!cpu)
+> +               return -ENODEV;
+> +
+> +       cpu_plat =3D dev_get_parent_plat(cpu);
+> +       if (!cpu_plat)
+> +               return -ENODEV;
+> +
+> +       gd->cpu_clk =3D cpu_plat->timebase_freq;
+> +       return 0;
+> +}
+> +
+> +int board_late_init(void)
+> +{
+> +       /* start usb so that usb keyboard can be used as input device */
+> +       if (CONFIG_IS_ENABLED(USB_KEYBOARD))
+> +               usb_init();
+> +
+> +       /*
+> +        * Make sure virtio bus is enumerated so that peripherals
+> +        * on the virtio bus can be discovered by their drivers
+> +        */
+> +       virtio_init();
+> +
+> +       return 0;
+> +}
+> diff --git a/configs/qemu-xtensa-dc232b_defconfig b/configs/qemu-xtensa-d=
+c232b_defconfig
+> new file mode 100644
+> index 000000000000..12d5ca9399ae
+> --- /dev/null
+> +++ b/configs/qemu-xtensa-dc232b_defconfig
+> @@ -0,0 +1,32 @@
+> +CONFIG_XTENSA=3Dy
+> +CONFIG_SYS_CPU=3D"dc232b"
+> +CONFIG_SYS_MALLOC_LEN=3D0x40000
+> +CONFIG_SYS_MALLOC_F_LEN=3D0x400
+> +CONFIG_ENV_SIZE=3D0x20000
+> +CONFIG_DEFAULT_DEVICE_TREE=3D"virt"
+> +CONFIG_SYS_MONITOR_LEN=3D262144
+> +CONFIG_SYS_LOAD_ADDR=3D0x02000000
+> +CONFIG_TARGET_QEMU_XTENSA=3Dy
+> +CONFIG_REMAKE_ELF=3Dy
+> +CONFIG_SYS_MONITOR_BASE=3D0xF6000000
+> +CONFIG_DYNAMIC_SYS_CLK_FREQ=3Dy
+> +CONFIG_SHOW_BOOT_PROGRESS=3Dy
+> +CONFIG_BOOTDELAY=3D10
+> +CONFIG_AUTOBOOT_KEYED=3Dy
+> +CONFIG_AUTOBOOT_PROMPT=3D"Autobooting in %d seconds, press <SPACE> to st=
+op\n"
+> +CONFIG_AUTOBOOT_STOP_STR=3D" "
+> +CONFIG_SYS_PBSIZE=3D1049
+> +CONFIG_SYS_MALLOC_BOOTPARAMS=3Dy
+> +CONFIG_HUSH_PARSER=3Dy
+> +CONFIG_SYS_PROMPT=3D"U-Boot> "
+> +CONFIG_CMD_ASKENV=3Dy
+> +CONFIG_CRC32_VERIFY=3Dy
+> +CONFIG_CMD_MX_CYCLIC=3Dy
+> +CONFIG_CMD_SAVES=3Dy
+> +CONFIG_CMD_DHCP=3Dy
+> +CONFIG_CMD_PING=3Dy
+> +CONFIG_CMD_DIAG=3Dy
+> +CONFIG_USE_BOOTFILE=3Dy
+> +CONFIG_BOOTFILE=3D"uImage"
+> +CONFIG_VERSION_VARIABLE=3Dy
+> +CONFIG_SYSRESET=3Dy
+> diff --git a/include/configs/qemu-xtensa.h b/include/configs/qemu-xtensa.=
+h
+> new file mode 100644
+> index 000000000000..56e1cd40e1a6
+> --- /dev/null
+> +++ b/include/configs/qemu-xtensa.h
+> @@ -0,0 +1,34 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Copyright (C) 2007-2013 Tensilica, Inc.
+> + * Copyright (C) 2014 - 2016 Cadence Design Systems Inc.
+> + * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
+> + */
+> +
+> +#ifndef __CONFIG_H
+> +#define __CONFIG_H
+> +
+> +#include <asm/arch/core.h>
+> +#include <asm/addrspace.h>
+> +#include <asm/config.h>
+> +
+> +#if XCHAL_HAVE_PTP_MMU
+> +#define CFG_SYS_MEMORY_BASE            \
+> +       (XCHAL_VECBASE_RESET_VADDR - XCHAL_VECBASE_RESET_PADDR)
+> +#define CFG_SYS_IO_BASE                0xf0000000
+> +#else
+> +#define CFG_SYS_MEMORY_BASE            0x60000000
+> +#define CFG_SYS_IO_BASE                0x90000000
+> +#define CFG_MAX_MEM_MAPPED             0x10000000
+> +#endif
+> +
+> +#define CFG_SYS_SDRAM_SIZE             0x80000000
+>
+> +#define CFG_SYS_SDRAM_BASE             MEMADDR(0x00000000)
 
-Signed-off-by: Marek Behún <kabel@kernel.org>
----
- cmd/eeprom.c | 122 ++++++++++++++++++++++++++++++++++++++++++++++-----
- 1 file changed, 112 insertions(+), 10 deletions(-)
+I'm not sure what CFG_SYS_IO_BASE means for the virt machine, but
+it looks like in the noMMU case SDRAM is going to overlap the
+IO range with the above base addresses and sizes. And from QEMU
+monitor I see the following address space distribution in the virt
+machine with a noMMU core:
 
-diff --git a/cmd/eeprom.c b/cmd/eeprom.c
-index 9c4af88738..a39fc5ffdc 100644
---- a/cmd/eeprom.c
-+++ b/cmd/eeprom.c
-@@ -22,8 +22,10 @@
- #include <common.h>
- #include <config.h>
- #include <command.h>
-+#include <dm.h>
- #include <eeprom.h>
- #include <i2c.h>
-+#include <i2c_eeprom.h>
- #include <eeprom_layout.h>
- #include <linux/delay.h>
- 
-@@ -209,10 +211,41 @@ static long parse_numeric_param(char *str)
- }
- 
- struct eeprom_dev_spec {
-+#if CONFIG_IS_ENABLED(I2C_EEPROM)
-+	struct udevice *dev;
-+#endif
- 	int i2c_bus;
- 	ulong i2c_addr;
- };
- 
-+static void eeprom_dev_spec_init(struct eeprom_dev_spec *dev)
-+{
-+#if CONFIG_IS_ENABLED(I2C_EEPROM)
-+	if (!dev->dev)
-+#endif
-+		eeprom_init(dev->i2c_bus);
-+}
-+
-+static int eeprom_dev_spec_read(struct eeprom_dev_spec *dev,
-+				unsigned offset, uchar *buffer, unsigned cnt)
-+{
-+#if CONFIG_IS_ENABLED(I2C_EEPROM)
-+	if (dev->dev)
-+		return i2c_eeprom_read(dev->dev, offset, buffer, cnt);
-+#endif
-+	return eeprom_read(dev->i2c_addr, offset, buffer, cnt);
-+}
-+
-+static int eeprom_dev_spec_write(struct eeprom_dev_spec *dev,
-+				 unsigned offset, uchar *buffer, unsigned cnt)
-+{
-+#if CONFIG_IS_ENABLED(I2C_EEPROM)
-+	if (dev->dev)
-+		return i2c_eeprom_write(dev->dev, offset, buffer, cnt);
-+#endif
-+	return eeprom_write(dev->i2c_addr, offset, buffer, cnt);
-+}
-+
- /**
-  * parse_eeprom_dev_spec - parse the eeprom device specifier
-  *
-@@ -226,6 +259,28 @@ struct eeprom_dev_spec {
- static int parse_eeprom_dev_spec(struct eeprom_dev_spec *dev, int argc,
- 				 char *const argv[])
- {
-+#if CONFIG_IS_ENABLED(I2C_EEPROM)
-+	if (argc == 0) {
-+		if (!uclass_first_device_err(UCLASS_I2C_EEPROM, &dev->dev))
-+			return 0;
-+	}
-+
-+	if (argc == 1) {
-+		if (!uclass_get_device_by_name(UCLASS_I2C_EEPROM, argv[0],
-+					       &dev->dev))
-+			return 1;
-+
-+		/*
-+		 * If we could not find the device by name and the parameter is
-+		 * not numeric (and so won't be handled later), fail.
-+		 */
-+		if (parse_numeric_param(argv[0]) == -1) {
-+			printf("Can't get eeprom device: %s\n", argv[0]);
-+			return CMD_RET_USAGE;
-+		}
-+	}
-+#endif
-+
- #ifdef CONFIG_SYS_I2C_EEPROM_ADDR
- 	if (argc == 0) {
- 		dev->i2c_bus = -1;
-@@ -265,6 +320,7 @@ static unsigned char eeprom_buf[CONFIG_SYS_EEPROM_SIZE];
- #endif
- 
- enum eeprom_action {
-+	EEPROM_LIST,
- 	EEPROM_READ,
- 	EEPROM_WRITE,
- 	EEPROM_PRINT,
-@@ -274,6 +330,10 @@ enum eeprom_action {
- 
- static enum eeprom_action parse_action(char *cmd)
- {
-+#if CONFIG_IS_ENABLED(I2C_EEPROM)
-+	if (!strncmp(cmd, "list", 4))
-+		return EEPROM_LIST;
-+#endif
- 	if (!strncmp(cmd, "read", 4))
- 		return EEPROM_READ;
- 	if (!strncmp(cmd, "write", 5))
-@@ -288,6 +348,24 @@ static enum eeprom_action parse_action(char *cmd)
- 	return EEPROM_ACTION_INVALID;
- }
- 
-+#if CONFIG_IS_ENABLED(I2C_EEPROM)
-+static int do_eeprom_list(void)
-+{
-+	struct udevice *dev;
-+	struct uclass *uc;
-+	int err;
-+
-+	err = uclass_get(UCLASS_I2C_EEPROM, &uc);
-+	if (err)
-+		return CMD_RET_FAILURE;
-+
-+	uclass_foreach_dev(dev, uc)
-+		printf("%s (%s)\n", dev->name, dev->driver->name);
-+
-+	return CMD_RET_SUCCESS;
-+}
-+#endif
-+
- static int do_eeprom_rw(struct eeprom_dev_spec *dev, bool read,
- 			ulong addr, ulong off, ulong cnt)
- {
-@@ -298,9 +376,9 @@ static int do_eeprom_rw(struct eeprom_dev_spec *dev, bool read,
- 
- 	printf(fmt, dev->i2c_addr, read ? "read" : "write", addr, off, cnt);
- 	if (read)
--		ret = eeprom_read(dev->i2c_addr, off, memloc, cnt);
-+		ret = eeprom_dev_spec_read(dev, off, memloc, cnt);
- 	else
--		ret = eeprom_write(dev->i2c_addr, off, memloc, cnt);
-+		ret = eeprom_dev_spec_write(dev, off, memloc, cnt);
- 	puts("done\n");
- 
- 	return ret;
-@@ -314,7 +392,7 @@ static int do_eeprom_layout(struct eeprom_dev_spec *dev, int layout_ver,
- 	eeprom_layout_setup(layout, eeprom_buf, CONFIG_SYS_EEPROM_SIZE,
- 			    layout_ver);
- 
--	return eeprom_read(dev->i2c_addr, 0, eeprom_buf, layout->data_size);
-+	return eeprom_dev_spec_read(dev, 0, eeprom_buf, layout->data_size);
- }
- 
- static int do_eeprom_print(struct eeprom_dev_spec *dev, int layout_ver)
-@@ -345,7 +423,7 @@ static int do_eeprom_update(struct eeprom_dev_spec *dev, int layout_ver,
- 	if (ret)
- 		return CMD_RET_FAILURE;
- 
--	return eeprom_write(dev->i2c_addr, 0, layout.data, layout.data_size);
-+	return eeprom_dev_spec_write(dev, 0, layout.data, layout.data_size);
- }
- 
- #endif
-@@ -353,6 +431,8 @@ static int do_eeprom_update(struct eeprom_dev_spec *dev, int layout_ver,
- static int eeprom_action_expected_argc(enum eeprom_action action)
- {
- 	switch (action) {
-+	case EEPROM_LIST:
-+		return 0;
- 	case EEPROM_READ:
- 	case EEPROM_WRITE:
- 		return 3;
-@@ -389,6 +469,11 @@ int do_eeprom(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	if (action == EEPROM_ACTION_INVALID)
- 		return CMD_RET_USAGE;
- 
-+#if CONFIG_IS_ENABLED(I2C_EEPROM)
-+	if (action == EEPROM_LIST)
-+		return do_eeprom_list();
-+#endif
-+
- #ifdef CONFIG_EEPROM_LAYOUT_VERSIONS
- 	if (action == EEPROM_PRINT || action == EEPROM_UPDATE) {
- 		if (!strcmp(argv[index], "-l")) {
-@@ -425,7 +510,7 @@ int do_eeprom(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	}
- #endif
- 
--	eeprom_init(dev.i2c_bus);
-+	eeprom_dev_spec_init(&dev);
- 
- 	switch (action) {
- 	case EEPROM_READ:
-@@ -450,19 +535,37 @@ int do_eeprom(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- #define EEPROM_LAYOUT_SPEC	""
- #endif
- 
-+#if CONFIG_IS_ENABLED(I2C_EEPROM)
-+# define EEPROM_DEV_SPEC	"[device_specifier]"
-+#else
-+# define EEPROM_DEV_SPEC	"[[bus] devaddr]"
-+#endif
-+
- U_BOOT_CMD(
- 	eeprom,	8,	1,	do_eeprom,
- 	"EEPROM sub-system",
--	"read  [[bus] devaddr] addr off cnt\n"
--	"eeprom write [[bus] devaddr] addr off cnt\n"
-+#if CONFIG_IS_ENABLED(I2C_EEPROM)
-+	"list\n"
-+	"eeprom "
-+#endif
-+	"read  " EEPROM_DEV_SPEC " addr off cnt\n"
-+	"eeprom write " EEPROM_DEV_SPEC " addr off cnt\n"
- 	"       - read/write `cnt' bytes from `devaddr` EEPROM at offset `off'"
- #ifdef CONFIG_CMD_EEPROM_LAYOUT
- 	"\n"
--	"eeprom print " EEPROM_LAYOUT_SPEC "[[bus] devaddr]\n"
-+	"eeprom print " EEPROM_LAYOUT_SPEC EEPROM_DEV_SPEC "\n"
- 	"       - Print layout fields and their data in human readable format\n"
--	"eeprom update " EEPROM_LAYOUT_SPEC "[[bus] devaddr] field_name field_value\n"
-+	"eeprom update " EEPROM_LAYOUT_SPEC EEPROM_DEV_SPEC " field_name field_value\n"
- 	"       - Update a specific eeprom field with new data.\n"
- 	"         The new data must be written in the same human readable format as shown by the print command."
-+#endif
-+#if CONFIG_IS_ENABLED(I2C_EEPROM)
-+	"\n\n"
-+	"DEVICE SPECIFIER - the eeprom device can be specified\n"
-+	"  [dev_name] - by device name (devices can listed with the eeprom list command)\n"
-+	"  [[bus] devaddr] - or by I2C bus and I2C device address\n"
-+	"If no device specifier is given, the first driver-model found device is used."
-+#endif
- #ifdef CONFIG_EEPROM_LAYOUT_VERSIONS
- 	"\n\n"
- 	"LAYOUT VERSIONS\n"
-@@ -471,5 +574,4 @@ U_BOOT_CMD(
- 	"The values which can be provided with the -l option are:\n"
- 	CONFIG_EEPROM_LAYOUT_HELP_STRING"\n"
- #endif
--#endif
- );
--- 
-2.44.1
+address-space: memory
+ 0000000000000000-ffffffffffffffff (prio 0, i/o): system
+   000000003ffe0000-000000003fffffff (prio 0, ram): xtensa.dataram0
+   0000000040000000-000000004001ffff (prio 0, ram): xtensa.instram0
+   0000000050000000-0000000053ffffff (prio 0, ram): xtensa.sysrom0
+   0000000060000000-00000000dfffffff (prio 0, ram): xtensa.sysram0
+   00000000f0000000-00000000f000ffff (prio 0, i/o): alias pcie-pio
+@gpex_ioport_window 0000000000000000-000000000000ffff
+   00000000f0100000-00000000f3ffffff (prio 0, i/o): alias pcie-ecam
+@pcie-mmcfg-mmio 0000000000000000-0000000003efffff
+   00000000f4000000-00000000fbffffff (prio 0, i/o): alias pcie-mmio
+@gpex_mmio_window 00000000f4000000-00000000fbffffff
 
+i.e. there's no IO at the address 0x90000000.
+
+--=20
+Thanks.
+-- Max
