@@ -4,77 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78D5AC25B75
-	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 07:12:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7475C25B74
+	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 07:13:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2D488803E;
-	Tue, 21 May 2024 09:12:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2511588709;
+	Tue, 21 May 2024 09:13:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GnCwI/DN";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="eOOx3Wbo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1229F88690; Tue, 21 May 2024 09:12:55 +0200 (CEST)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 419EB8870C; Tue, 21 May 2024 09:13:44 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4FC8387FA1
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 09:12:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A43B187FA1
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 09:13:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jcmvbkbc@gmail.com
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-1eb0e08bfd2so103339645ad.1
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 00:12:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716275570; x=1716880370; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=M0f8SlwThMHLBE6/rc5zwh2x89oYTaJgG00KPQBnsJ8=;
- b=GnCwI/DNMjMX6wuFwv5oQlpEueT1oq5ucCkSUq5ZeymvkscJZnelq7WNpg/GzbJIEi
- 7IL4mgcgbIuNf/joIPc6o1E6MDlxIa0zcZJt8f05mo3Zx5b+9uX/qiPlOIBP/+nQS3k5
- 0dtejEgi+PeBy8F8ehCEroEFI5FCKDORncJd1neWJLC2XKn595aVwcsqPX6clpM7bKfM
- zK/ab8xyrVdr3+T0jsElxYytrqBXlukHnzYZi+ej02Y80XjRP+EZXJoV5rZuX7BKN2la
- AoF7zhtoJtaL2Q1U7ue6XVpUtusOk4LSltBv/ZYi42gef7Dq3MNni7DPWC00eDXv/kfD
- m13Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716275570; x=1716880370;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=M0f8SlwThMHLBE6/rc5zwh2x89oYTaJgG00KPQBnsJ8=;
- b=WwMNVOcayaeBwgqNg3XLidMcqmJ1R7PN4k8kC2R1d+8r11gDnLykKdGGo01xoE03RU
- 2lfUQGbFjn03221gLWBbjdfPxQxuoA5uq2bnC+tcAZr8C+x1Tp7Ews/l1ThMWrxZi4tE
- GyIrf7LG9uQKSNCjsMnOILpSdSfLPdtm8VBrlnwO/5Q3cjFowOLI2zT6+B7X1+mYog9t
- /NSXY+7cOJ8SufFf89uPBld/VfYoAt08oZ+9j++dPZAILZSFZuXd5nUjXjYgBohX6ZgX
- 2IizhuyR3m87ZR3OgCrkRFc61/fdBBESWQimpU6aXWjsAqvr7D3kSzJ2kv+a6iZmACzn
- pRjQ==
-X-Gm-Message-State: AOJu0Yz/hTbHbmZBov889Fw4pBuaHVK5wQB5m5tZhb1AEhLWu9Atth2v
- 43LdG9CHbxFlNJoKrKmMTKnVtsj2dCX3NO27vhp2waBFCOI1V+xmgWaR1iM1YNV43Sv35fHaqMX
- jUI4dXnmEoqV7ewCREtk7GpNhjxb5J9WV
-X-Google-Smtp-Source: AGHT+IFu0mfi7qjTTdovgi2pdk8810oguFsZR36Nebys0hDR0Ew7fqm7X9q5CuBUB6XoMnpbocnTOmWIfLfoGZU6Ezc=
-X-Received: by 2002:a17:902:da84:b0:1f2:f182:f616 with SMTP id
- d9443c01a7336-1f2f18300e3mr88951385ad.13.1716275569755; Tue, 21 May 2024
- 00:12:49 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 4019262024;
+ Tue, 21 May 2024 07:13:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 63BDEC2BD11;
+ Tue, 21 May 2024 07:13:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1716275619;
+ bh=aYdE7Yz7TNGRPCM5b0bGfYQtQnE+imZliZigySm9Zr8=;
+ h=From:To:Cc:Subject:Date:From;
+ b=eOOx3WbobvqMFsPRQWXg/3idiMLkg6IHf3x2sA3Qrs2QGWbz4NH9tYvmTf9HdBtp6
+ YQUocycWDSVbiOs4wtEqiv4JRZPv6tRA6VpRCGOr3BNCJ9kzM36jlxqo9MX+c3Zwuj
+ 3HzWKZgInIvgSbyk+eEzxHG3wiq78KbB1R477YQu1jZNWhdxLW2S0pe+JMNgXTJyz5
+ JiWAY/CbDgwqXWV+PnN8N6U11Ns7oj0qaSDWSugidK7J1U0JgSYScM3qFX5YJQ+74H
+ 004vJsKrcgkjm4tgjgMlmHwOvoPiaGZSyQd7sq3pGbSBii/x3hsOrsaBMSR9Rc+6PN
+ 7DDEK9o/KTeQA==
+From: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Stefan Roese <sr@denx.de>
+Cc: Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Nikita Kiryanov <nikita@compulab.co.il>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
+Subject: [PATCH 00/11] 'eeprom' command improvements
+Date: Tue, 21 May 2024 09:13:24 +0200
+Message-ID: <20240521071335.4193-1-kabel@kernel.org>
+X-Mailer: git-send-email 2.44.1
 MIME-Version: 1.0
-References: <20240519-qemu-xtensa-v1-0-8fff0cb11c19@flygoat.com>
- <20240519-qemu-xtensa-v1-4-8fff0cb11c19@flygoat.com>
- <CAMo8Bf+JNR-QSECNhaCWKVkU1s+m6-eUrqePzF=7XyezxDWu0g@mail.gmail.com>
- <74e04a5a-5b16-49a2-a5e9-d0f7ee97484d@app.fastmail.com>
-In-Reply-To: <74e04a5a-5b16-49a2-a5e9-d0f7ee97484d@app.fastmail.com>
-From: Max Filippov <jcmvbkbc@gmail.com>
-Date: Tue, 21 May 2024 00:12:38 -0700
-Message-ID: <CAMo8BfKVk544=8Wd=jSe+DyUhrDYqMF2EQgNuQOcubVdYFCVBw@mail.gmail.com>
-Subject: Re: [PATCH 04/10] xtensa: Define PLATFORM_ELFFLAGS
-To: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Cc: u-boot@lists.denx.de, Sean Anderson <sean.anderson@seco.com>, 
- Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,42 +70,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, May 20, 2024 at 9:00=E2=80=AFAM Jiaxun Yang <jiaxun.yang@flygoat.co=
-m> wrote:
-> >> diff --git a/arch/xtensa/config.mk b/arch/xtensa/config.mk
-> >> index b0809999e403..3ec936272f25 100644
-> >> --- a/arch/xtensa/config.mk
-> >> +++ b/arch/xtensa/config.mk
-> >> @@ -7,3 +7,6 @@ PLATFORM_CPPFLAGS +=3D -D__XTENSA__ -mlongcalls -mforc=
-e-no-pic \
-> >>                      -ffunction-sections -fdata-sections
-> >>
-> >>  LDFLAGS_FINAL +=3D --gc-sections
-> >> +
-> >> +PLATFORM_ELFFLAGS +=3D -B xtensa -O elf32-xtensa-le
-> >> +
-> >
-> > This fixes endianness as little for the whole architecture, but xtensa =
-cores
-> > may be either little or big endian.
->
-> Thanks for reviewing, I can just add a branch with ifdef CONFIG_SYS_BIG_E=
-DNIAN
-> if you wish, but I think all CPUs U-Boot support are little endian only?
->
-> I have an ongoing series[1] fixing endian selection options, please let m=
-e know if
-> U-Boot do work with big endian Xtensa.
+Hi Tom,
 
-I had an impression that there's nothing endian-specific in the xtensa port=
-,
-so it should work for both little- and big-endian cores. Let me test whethe=
-r
-it's true though (:
+this series contains improvements for the 'eeprom' command:
+- refactors
+- fixes
+- improvements
+- ability to use driver model EEPROMs (uclass UCLASS_I2C_EEPROM)
+- more flexible EEPROM layout support
 
-> [1]: https://patchwork.ozlabs.org/project/uboot/patch/20240519-aarch64-be=
--v1-11-75cc328eddfa@flygoat.com/
+It should not cause any behavior change for any existing board.
 
---=20
-Thanks.
--- Max
+This series is a dependency for some DDR issue fixes for Turris Omnia.
+I will be sending that one separately.
+
+github PR link (with CI):
+  https://github.com/u-boot/u-boot/pull/540
+- there is a failure for
+    test.py for sandbox sandbox_clang
+  but it seems unrelated to these changes
+
+Marek Behún (11):
+  common: eeprom_layout: Assign default layout methods and parameters
+    before specific ones
+  common: eeprom_layout: Split field finding code from the field update
+    function
+  common: eeprom_field: Fix updating binary field
+  common: eeprom_field: Drop unnecessary comparison
+  cmd: eeprom: Fix usage help for the eeprom command
+  cmd: eeprom: Hide eeprom layout versioning behind a Kconfig option
+  cmd: eeprom: Deduplicate parse_i2c_bus_addr() calls
+  cmd: eeprom: Refactor eeprom device specifier parsing
+  cmd: eeprom: Refactor command execution into function by action
+  cmd: eeprom: Don't read/write whole EEPROM if not necessary
+  cmd: eeprom: Extend to EEPROMs probed via driver model
+
+ cmd/Kconfig                   |   9 +-
+ cmd/eeprom.c                  | 305 +++++++++++++++++++++++++---------
+ common/eeprom/eeprom_field.c  |   4 +-
+ common/eeprom/eeprom_layout.c |  54 +++---
+ configs/cm_fx6_defconfig      |   1 +
+ configs/cm_t43_defconfig      |   1 +
+ include/eeprom_layout.h       |   4 +
+ 7 files changed, 273 insertions(+), 105 deletions(-)
+
+-- 
+2.44.1
+
