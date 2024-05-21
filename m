@@ -4,74 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C2FDC25B75
-	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 07:35:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A5AAC41513
+	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 08:12:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B047488690;
-	Tue, 21 May 2024 09:35:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 811C988485;
+	Tue, 21 May 2024 10:12:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QbS7RXoh";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="KXZ0J/Ju";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="PYEA2URP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 559B488702; Tue, 21 May 2024 09:35:28 +0200 (CEST)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 081B288702; Tue, 21 May 2024 10:12:22 +0200 (CEST)
+Received: from fhigh4-smtp.messagingengine.com
+ (fhigh4-smtp.messagingengine.com [103.168.172.155])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB92888179
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 09:35:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7256888477
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 10:12:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jcmvbkbc@gmail.com
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-1f0537e39b3so96455835ad.3
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 00:35:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716276924; x=1716881724; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=neL5WHXS4stFV40VF5NERxUvFQXozjFQw/M03gdsQz8=;
- b=QbS7RXohNV6ypfiXFUX+V8OzcNEMR/mGXKYqovm6Xi2URNbIzzN1fI51rBNd6Z88ku
- 6eWzcavZReOTt9DJfo6kEbGE9D5sEJfabvq3Ia4fFsJhzADF6K4A7ouAQ5t65EY1sgIp
- x5ox330MryDOleXs/0AanGvHQGcefpqDddeE2P0+W5NcypGzCEutUP8rzhzza49/uxtc
- /Vb57GdEZ7BoedE5YvFUUnvVUvf2bxFDDawaSaaX2cmle9/b4r4XcuGBvIJzAgJeR7/q
- 3YPv1b2trWVA0lrhLSGjhrx3tQGeI10N8aHSmR1AgeaEt+hd0oOqH0/tRmqgfxIOLrgS
- HWCA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716276924; x=1716881724;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=neL5WHXS4stFV40VF5NERxUvFQXozjFQw/M03gdsQz8=;
- b=DhRYLxZaT4kE4uCvHiTMe7yk2WQ03vI9e2OUaiv8DAfrqZ5kgBt+BvkT6dV8STemEF
- MzBgQ7CIObHO9+EhxaevuQsV27rpj5zTUHPo0nm7pvNi0yWuYoVcVIFBcyseiXQRgktw
- +6Q1uQg9Y1yqrR460baTsay6XXx/3nb6vWt1tL3yo5t0g4SViWeazDZ21bVhq/4HMUQp
- ZfVSZCn3OxcwD7xO7Pn8guIsuxRO73iJS3FNHi1dAjUq2hiCMwtb7wos1U1BlKvGiXVv
- 8MmTK6QG5mFD1dBE25JXRfnwl9mZiSeeC8DFDb/q6yTKb/725n0HFo4aq35hYYdd+B01
- n8Tg==
-X-Gm-Message-State: AOJu0YwYoVqAqGPXFU51zX5C2zHa9EAzJVrrfHTE8pR+KJWRKxb5VRDr
- x/xow7Om+ZDedAr4FoYbPS1+9UIZqR9s6SDZKKPxGsdgZR0zWcrtX8hmAa+/N4/2MKZrYi3cdja
- YDUiybE9yGaPDcoAb7ATzToHt4VnY4gtr
-X-Google-Smtp-Source: AGHT+IFFTNh5N32UXIwfAN09SAaL/q1lfz+OYWDiL2fdK9ktu1E2h10AZWusdaieiBQ23Agx1WQFuuL3SNu3msAZyzg=
-X-Received: by 2002:a17:90a:428b:b0:2b9:c9d5:47d4 with SMTP id
- 98e67ed59e1d1-2b9c9d54b5fmr17921576a91.34.1716276924415; Tue, 21 May 2024
- 00:35:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id 7942311400E0;
+ Tue, 21 May 2024 04:12:18 -0400 (EDT)
+Received: from imap44 ([10.202.2.94])
+ by compute3.internal (MEProxy); Tue, 21 May 2024 04:12:18 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
+ cc:cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1716279138;
+ x=1716365538; bh=f3oC/zx0syXsDjBDfOVvTk0TGfpGtG3aQ67l7oZeR3I=; b=
+ KXZ0J/JuCucZnToBLdA3YhH+Gw7YMIGJ3gZHtlB08YCF+JBH0XIb9UyAbeml/iHp
+ CRyEPLwNczl9sDqpGZtG6sdxfwxfhtNmaiHEvteBY+pUiACRyNg3BfJlawxflEDD
+ oG5uYPoM9LxIPdzEWcsYPBOdEkh0UYX3DFV/+SNVo32gG0Hj2QeVrNI4xZdJk+L7
+ 3f70su4vdBlT88JQyeuoHE8RMcenV4dgOaU8ay+tEDLwzsj9Sfdja6I5j5Us7N4s
+ GqsgDHUtob4kjT2mbSSY1OJY3E8Sd8PQlmNR5rpmHpLM9hgKk0Rm/Ox0CbuG+01O
+ lQTMccLspa7bjorbyVmA6w==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716279138; x=
+ 1716365538; bh=f3oC/zx0syXsDjBDfOVvTk0TGfpGtG3aQ67l7oZeR3I=; b=P
+ YEA2URPdXoUBIbl4rL9FPIGtMlkmLQZkYQYZ6G6BwuCNZ1WHSzVX/YiD6kPe/gI+
+ WkGjv58+1bpkxYlKp5ZqA/lGLgz82rhKyJmoE3GChs7QPp7Sb4vW5yTlAYygfFlV
+ 9DO0xjm+5TuFmXh0qCqtsvY/wucdpwjYVjCPyDFv3k+0lIV20BBfEmuMlgLxE6No
+ MS8pOqu8SzAuHiH6ZXH62Rk+0ZCgJ/oI0TsPJ/Nmgw8DZvkDq1p6PtsWOEfgmXxP
+ dOAWa3SQBYoVWCXZOp5CLPTdBWTPbEVXJjOVOFf/FaCOEzVSLLNpNKk23kzyJ2WQ
+ e2Y0It0rScFEK0b7z/nJw==
+X-ME-Sender: <xms:YldMZlQEjLXQSrkPwkasXOvhye9K6o2Y7CexdgkJjCSRY0oxcxuJ0w>
+ <xme:YldMZuxr5zUUB9gI4MAL6OlBedxRPynAUTQI4fTgXcGtPkdKtVogjTF29yPMjCX0O
+ 3MRUqc1sv5ENVSAuLM>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdeivdcutefuodetggdotefrodftvfcurf
+ hrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecuuegr
+ ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
+ hrpefofgggkfgjfhffhffvvefutgfgsehtqhertderreejnecuhfhrohhmpedflfhirgig
+ uhhnucgjrghnghdfuceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomheqne
+ cuggftrfgrthhtvghrnhepudefgeeftedugeehffdtheefgfevffelfefghefhjeeugeev
+ tefhudduvdeihefgnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilh
+ hfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
+X-ME-Proxy: <xmx:YldMZq1Tb_u2BWQDDO-MtJujr64LfU7_s4VhOB3mwlqhVXzHlWMTjQ>
+ <xmx:YldMZtB684HkLGBrAVw1lUcHRvezLdWm9pYYCCJm5m0xt3xqaEa8Aw>
+ <xmx:YldMZujuBemCAS0Lk88aALu4Ss7qd3MFOUkg3-S6zuLLcJH2Egh5OQ>
+ <xmx:YldMZhrF8XpxGmZWvGEJEig_7gGNeTqHa0xzPNXrkyo5_5pkaKJFmA>
+ <xmx:YldMZmcDJpLapR7Pn8BGZ3Bq-BGnoTcfgOVtkG9m7HbzNRNqI8Q7Hazf>
+Feedback-ID: ifd894703:Fastmail
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id 1117E36A0074; Tue, 21 May 2024 04:12:17 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.11.0-alpha0-480-g515a2f54a-fm-20240515.001-g515a2f54
 MIME-Version: 1.0
+Message-Id: <b23506b1-7309-4cb2-bb6c-b7027c9deb90@app.fastmail.com>
+In-Reply-To: <CAMo8Bf+HoyoDiKBVDkWeB=NLVO2zuYWbquk+2rp3znsUEor6pw@mail.gmail.com>
 References: <20240519-qemu-xtensa-v1-0-8fff0cb11c19@flygoat.com>
- <20240519-qemu-xtensa-v1-9-8fff0cb11c19@flygoat.com>
-In-Reply-To: <20240519-qemu-xtensa-v1-9-8fff0cb11c19@flygoat.com>
-From: Max Filippov <jcmvbkbc@gmail.com>
-Date: Tue, 21 May 2024 00:35:13 -0700
-Message-ID: <CAMo8BfJXXozimNR8s2w+Fx8DZjMxT=t-039M+EKX9Ysb+-kwYw@mail.gmail.com>
-Subject: Re: [PATCH 09/10] board: emulation: New board qemu-xtensa
-To: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Cc: u-boot@lists.denx.de, Sean Anderson <sean.anderson@seco.com>, 
- Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+ <20240519-qemu-xtensa-v1-6-8fff0cb11c19@flygoat.com>
+ <CAMo8Bf+HoyoDiKBVDkWeB=NLVO2zuYWbquk+2rp3znsUEor6pw@mail.gmail.com>
+Date: Tue, 21 May 2024 09:11:58 +0100
+From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
+To: "Max Filippov" <jcmvbkbc@gmail.com>
+Cc: u-boot@lists.denx.de, "Sean Anderson" <sean.anderson@seco.com>,
+ "Tom Rini" <trini@konsulko.com>, "Sumit Garg" <sumit.garg@linaro.org>
+Subject: Re: [PATCH 06/10] drivers: serial: Add xtensa semihosting driver
+Content-Type: text/plain;charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,285 +107,217 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, May 19, 2024 at 1:54=E2=80=AFPM Jiaxun Yang <jiaxun.yang@flygoat.co=
-m> wrote:
->
-> Introduce the new board, define every bits.
->
-> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
-> ---
->  arch/xtensa/Kconfig                       |  5 +++
->  board/emulation/qemu-xtensa/Kconfig       | 41 +++++++++++++++++++++
->  board/emulation/qemu-xtensa/MAINTAINERS   |  7 ++++
->  board/emulation/qemu-xtensa/Makefile      |  5 +++
->  board/emulation/qemu-xtensa/qemu-xtensa.c | 60 +++++++++++++++++++++++++=
-++++++
->  configs/qemu-xtensa-dc232b_defconfig      | 32 +++++++++++++++++
->  include/configs/qemu-xtensa.h             | 34 ++++++++++++++++++
->  7 files changed, 184 insertions(+)
->
-> diff --git a/arch/xtensa/Kconfig b/arch/xtensa/Kconfig
-> index 4afd56bca095..70eebb4bd22f 100644
-> --- a/arch/xtensa/Kconfig
-> +++ b/arch/xtensa/Kconfig
-> @@ -15,6 +15,10 @@ config TARGET_XTFPGA
->         bool "Support XTFPGA"
->         select BOARD_POSTCLK_INIT
->
-> +config TARGET_QEMU_XTENSA
-> +       bool "Support QEMU Xtensa Virt Board"
-> +       select BOARD_LATE_INIT
-> +
->  endchoice
->
->  config SYS_ICACHE_OFF
-> @@ -69,5 +73,6 @@ config XTENSA_SIMCALL_GDBIO
->  endchoice
->
->  source "board/cadence/xtfpga/Kconfig"
-> +source "board/emulation/qemu-xtensa/Kconfig"
->
->  endmenu
-> diff --git a/board/emulation/qemu-xtensa/Kconfig b/board/emulation/qemu-x=
-tensa/Kconfig
-> new file mode 100644
-> index 000000000000..df9142af0875
-> --- /dev/null
-> +++ b/board/emulation/qemu-xtensa/Kconfig
-> @@ -0,0 +1,41 @@
-> +if TARGET_QEMU_XTENSA
-> +
-> +config SYS_BOARD
-> +       default "qemu-xtensa"
-> +
-> +config SYS_VENDOR
-> +       default "emulation"
-> +
-> +config SYS_CONFIG_NAME
-> +       default "qemu-xtensa"
-> +
-> +config TEXT_BASE
-> +       default 0xfe000000
-> +
-> +config BOARD_SPECIFIC_OPTIONS # dummy
-> +       def_bool y
-> +       select BOARD_EARLY_INIT_F
-> +       select DM
-> +       select CPU
-> +       select CPU_XTENSA
-> +       select CLK
-> +       select DM_SERIAL
-> +       select XTENSA_SEMIHOSTING
-> +       select XTENSA_SEMIHOSTING_SERIAL
-> +       imply BLK
-> +       imply VIRTIO
-> +       imply VIRTIO_PCI
-> +       imply VIRTIO_NET
-> +       imply VIRTIO_BLK
-> +       imply E1000
-> +       imply PCI
-> +       imply PCI_INIT_R
-> +       imply NVME_PCI
-> +       imply PCIE_ECAM_GENERIC
-> +       imply SCSI
-> +       imply REMAKE_ELF
-> +       select OF_CONTROL
-> +       select OF_UPSTREAM
-> +       imply CMD_DM
-> +
-> +endif
-> diff --git a/board/emulation/qemu-xtensa/MAINTAINERS b/board/emulation/qe=
-mu-xtensa/MAINTAINERS
-> new file mode 100644
-> index 000000000000..851ef596f611
-> --- /dev/null
-> +++ b/board/emulation/qemu-xtensa/MAINTAINERS
-> @@ -0,0 +1,7 @@
-> +QEMU XTENSA 'VIRT' BOARD
-> +M:     Jiaxun Yang <jiaxun.yang@flygoat.com>
-> +S:     Maintained
-> +F:     board/emulation/qemu-xtensa/
-> +F:     board/emulation/common/
-> +F:     include/configs/qemu-riscv.h
 
-This must be qemu-xtensa.h, right?
 
-> +F:     configs/qemu-xtensa-dc232b_defconfig
-> diff --git a/board/emulation/qemu-xtensa/Makefile b/board/emulation/qemu-=
-xtensa/Makefile
-> new file mode 100644
-> index 000000000000..0f33a65f6c6b
-> --- /dev/null
-> +++ b/board/emulation/qemu-xtensa/Makefile
-> @@ -0,0 +1,5 @@
-> +# SPDX-License-Identifier: GPL-2.0+
-> +#
-> +# Copyright (C) 2024, Jiaxun Yang <jiaxun.yang@flygoat.com>
-> +
-> +obj-y  +=3D qemu-xtensa.o
-> diff --git a/board/emulation/qemu-xtensa/qemu-xtensa.c b/board/emulation/=
-qemu-xtensa/qemu-xtensa.c
-> new file mode 100644
-> index 000000000000..0ca83341c25c
-> --- /dev/null
-> +++ b/board/emulation/qemu-xtensa/qemu-xtensa.c
-> @@ -0,0 +1,60 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (C) 2018, Bin Meng <bmeng.cn@gmail.com>
-> + */
-> +
-> +#include <dm.h>
-> +#include <cpu.h>
-> +#include <log.h>
-> +#include <init.h>
-> +#include <usb.h>
-> +#include <virtio_types.h>
-> +#include <virtio.h>
-> +
-> +DECLARE_GLOBAL_DATA_PTR;
-> +
-> +int board_init(void)
-> +{
-> +       return 0;
-> +}
-> +
-> +unsigned long get_board_sys_clk(void)
-> +{
-> +       return gd->cpu_clk ? gd->cpu_clk : 40000000;
-> +}
-> +
-> +int dram_init(void)
-> +{
-> +       return fdtdec_setup_mem_size_base();
-> +}
-> +
-> +int board_early_init_f(void)
-> +{
-> +       struct cpu_plat *cpu_plat;
-> +       struct udevice *cpu =3D cpu_get_current_dev();
-> +
-> +       if (!cpu)
-> +               return -ENODEV;
-> +
-> +       cpu_plat =3D dev_get_parent_plat(cpu);
-> +       if (!cpu_plat)
-> +               return -ENODEV;
-> +
-> +       gd->cpu_clk =3D cpu_plat->timebase_freq;
-> +       return 0;
-> +}
-> +
-> +int board_late_init(void)
-> +{
-> +       /* start usb so that usb keyboard can be used as input device */
-> +       if (CONFIG_IS_ENABLED(USB_KEYBOARD))
-> +               usb_init();
-> +
-> +       /*
-> +        * Make sure virtio bus is enumerated so that peripherals
-> +        * on the virtio bus can be discovered by their drivers
-> +        */
-> +       virtio_init();
-> +
-> +       return 0;
-> +}
-> diff --git a/configs/qemu-xtensa-dc232b_defconfig b/configs/qemu-xtensa-d=
-c232b_defconfig
-> new file mode 100644
-> index 000000000000..12d5ca9399ae
-> --- /dev/null
-> +++ b/configs/qemu-xtensa-dc232b_defconfig
-> @@ -0,0 +1,32 @@
-> +CONFIG_XTENSA=3Dy
-> +CONFIG_SYS_CPU=3D"dc232b"
-> +CONFIG_SYS_MALLOC_LEN=3D0x40000
-> +CONFIG_SYS_MALLOC_F_LEN=3D0x400
-> +CONFIG_ENV_SIZE=3D0x20000
-> +CONFIG_DEFAULT_DEVICE_TREE=3D"virt"
-> +CONFIG_SYS_MONITOR_LEN=3D262144
-> +CONFIG_SYS_LOAD_ADDR=3D0x02000000
-> +CONFIG_TARGET_QEMU_XTENSA=3Dy
-> +CONFIG_REMAKE_ELF=3Dy
-> +CONFIG_SYS_MONITOR_BASE=3D0xF6000000
-> +CONFIG_DYNAMIC_SYS_CLK_FREQ=3Dy
-> +CONFIG_SHOW_BOOT_PROGRESS=3Dy
-> +CONFIG_BOOTDELAY=3D10
-> +CONFIG_AUTOBOOT_KEYED=3Dy
-> +CONFIG_AUTOBOOT_PROMPT=3D"Autobooting in %d seconds, press <SPACE> to st=
-op\n"
-> +CONFIG_AUTOBOOT_STOP_STR=3D" "
-> +CONFIG_SYS_PBSIZE=3D1049
-> +CONFIG_SYS_MALLOC_BOOTPARAMS=3Dy
-> +CONFIG_HUSH_PARSER=3Dy
-> +CONFIG_SYS_PROMPT=3D"U-Boot> "
-> +CONFIG_CMD_ASKENV=3Dy
-> +CONFIG_CRC32_VERIFY=3Dy
-> +CONFIG_CMD_MX_CYCLIC=3Dy
-> +CONFIG_CMD_SAVES=3Dy
-> +CONFIG_CMD_DHCP=3Dy
-> +CONFIG_CMD_PING=3Dy
-> +CONFIG_CMD_DIAG=3Dy
-> +CONFIG_USE_BOOTFILE=3Dy
-> +CONFIG_BOOTFILE=3D"uImage"
-> +CONFIG_VERSION_VARIABLE=3Dy
-> +CONFIG_SYSRESET=3Dy
-> diff --git a/include/configs/qemu-xtensa.h b/include/configs/qemu-xtensa.=
-h
-> new file mode 100644
-> index 000000000000..56e1cd40e1a6
-> --- /dev/null
-> +++ b/include/configs/qemu-xtensa.h
-> @@ -0,0 +1,34 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Copyright (C) 2007-2013 Tensilica, Inc.
-> + * Copyright (C) 2014 - 2016 Cadence Design Systems Inc.
-> + * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
-> + */
-> +
-> +#ifndef __CONFIG_H
-> +#define __CONFIG_H
-> +
-> +#include <asm/arch/core.h>
-> +#include <asm/addrspace.h>
-> +#include <asm/config.h>
-> +
-> +#if XCHAL_HAVE_PTP_MMU
-> +#define CFG_SYS_MEMORY_BASE            \
-> +       (XCHAL_VECBASE_RESET_VADDR - XCHAL_VECBASE_RESET_PADDR)
-> +#define CFG_SYS_IO_BASE                0xf0000000
-> +#else
-> +#define CFG_SYS_MEMORY_BASE            0x60000000
-> +#define CFG_SYS_IO_BASE                0x90000000
-> +#define CFG_MAX_MEM_MAPPED             0x10000000
-> +#endif
-> +
-> +#define CFG_SYS_SDRAM_SIZE             0x80000000
+=E5=9C=A82024=E5=B9=B45=E6=9C=8821=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8A=E5=
+=8D=883:31=EF=BC=8CMax Filippov=E5=86=99=E9=81=93=EF=BC=9A
+> On Sun, May 19, 2024 at 1:53=E2=80=AFPM Jiaxun Yang <jiaxun.yang@flygo=
+at.com> wrote:
+>>
+>> Add xtensa semihosting driver.
+>>
+>> It can't use regular semihosting driver as Xtensa's has it's own
+>> semihosting ABI.
+>>
+>> Note that semihosting supports puts in serial but I never managed to
+>> get it work, so it's putc only for now.
 >
-> +#define CFG_SYS_SDRAM_BASE             MEMADDR(0x00000000)
+> I wonder, what were the issues that you experienced?
 
-I'm not sure what CFG_SYS_IO_BASE means for the virt machine, but
-it looks like in the noMMU case SDRAM is going to overlap the
-IO range with the above base addresses and sizes. And from QEMU
-monitor I see the following address space distribution in the virt
-machine with a noMMU core:
+Never mind, I got it work, it was an off-by-one error in length calculat=
+ion.
+>
+>> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+>> ---
+>>  drivers/serial/Kconfig                     | 18 ++++++-
+>>  drivers/serial/Makefile                    |  1 +
+>>  drivers/serial/serial_xtensa_semihosting.c | 79 ++++++++++++++++++++=
+++++++++++
+>>  3 files changed, 97 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+>> index 1fe4607598eb..3a1e5a6f2877 100644
+>> --- a/drivers/serial/Kconfig
+>> +++ b/drivers/serial/Kconfig
+>> @@ -501,6 +501,15 @@ config DEBUG_UART_MT7620
+>>           driver will be available until the real driver model serial=
+ is
+>>           running.
+>>
+>> +config DEBUG_UART_XTENSA_SEMIHOSTING
+>> +       bool "Xtensa semihosting"
+>> +       depends on XTENSA_SEMIHOSTING_SERIAL
+>> +       help
+>> +         Select this to enable the debug UART using the Xtensa semih=
+osting driver.
+>> +         This provides basic serial output from the console without =
+needing to
+>> +         start up driver model. The driver will be available until t=
+he real
+>> +         driver model serial is running.
+>> +
+>>  endchoice
+>>
+>>  config DEBUG_UART_BASE
+>> @@ -936,7 +945,6 @@ config SH_SCIF_CLK_FREQ
+>>  config SEMIHOSTING_SERIAL
+>>         bool "Semihosting UART support"
+>>         depends on SEMIHOSTING && !SERIAL_RX_BUFFER
+>> -       imply SERIAL_PUTS
+>>         help
+>>           Select this to enable a serial UART using semihosting. Spec=
+ial halt
+>>           instructions will be issued which an external debugger (suc=
+h as a
+>> @@ -1115,6 +1123,14 @@ config XEN_SERIAL
+>>           If built without DM support, then requires Xen
+>>           to be built with CONFIG_VERBOSE_DEBUG.
+>>
+>> +config XTENSA_SEMIHOSTING_SERIAL
+>> +       bool "Xtensa Semihosting UART support"
+>> +       depends on DM_SERIAL
+>> +       depends on XTENSA_SEMIHOSTING
+>> +       imply SERIAL_PUTS
+>> +       help
+>> +         Select this to enable a serial UART using Xtensa semihostin=
+g.
+>> +
+>>  choice
+>>         prompt "Console port"
+>>         default 8xx_CONS_SMC1
+>> diff --git a/drivers/serial/Makefile b/drivers/serial/Makefile
+>> index dbe598b74064..78810f98367c 100644
+>> --- a/drivers/serial/Makefile
+>> +++ b/drivers/serial/Makefile
+>> @@ -60,6 +60,7 @@ obj-$(CONFIG_MT7620_SERIAL) +=3D serial_mt7620.o
+>>  obj-$(CONFIG_HTIF_CONSOLE) +=3D serial_htif.o
+>>  obj-$(CONFIG_SIFIVE_SERIAL) +=3D serial_sifive.o
+>>  obj-$(CONFIG_XEN_SERIAL) +=3D serial_xen.o
+>> +obj-$(CONFIG_XTENSA_SEMIHOSTING_SERIAL) +=3D serial_xtensa_semihosti=
+ng.o
+>>  obj-$(CONFIG_S5P4418_PL011_SERIAL) +=3D serial_s5p4418_pl011.o
+>>
+>>  ifndef CONFIG_SPL_BUILD
+>> diff --git a/drivers/serial/serial_xtensa_semihosting.c b/drivers/ser=
+ial/serial_xtensa_semihosting.c
+>> new file mode 100644
+>> index 000000000000..1bf3c18537e7
+>> --- /dev/null
+>> +++ b/drivers/serial/serial_xtensa_semihosting.c
+>> @@ -0,0 +1,79 @@
+>> +// SPDX-License-Identifier: GPL-2.0+
+>> +/*
+>> + * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
+>> + */
+>> +
+>> +#include <dm.h>
+>> +#include <malloc.h>
+>> +#include <serial.h>
+>> +
+>> +#include <asm/platform/simcall.h>
+>> +
+>> +/**
+>> + * struct simc_serial_priv - Semihosting serial private data
+>> + * @counter: Counter used to fake pending every other call
+>> + */
+>> +struct simc_serial_priv {
+>> +       unsigned int counter;
+>> +};
+>> +
+>> +static int simc_serial_getc(struct udevice *dev)
+>> +{
+>> +       char ch =3D 0;
+>> +
+>> +       simc_read(0, &ch, sizeof(ch));
+>> +
+>> +       return ch;
+>> +}
+>> +
+>> +static int simc_serial_putc(struct udevice *dev, const char ch)
+>> +{
+>> +       char str[2] =3D {0};
+>
+> Why does it need to be an array if only the first element is ever used?
 
-address-space: memory
- 0000000000000000-ffffffffffffffff (prio 0, i/o): system
-   000000003ffe0000-000000003fffffff (prio 0, ram): xtensa.dataram0
-   0000000040000000-000000004001ffff (prio 0, ram): xtensa.instram0
-   0000000050000000-0000000053ffffff (prio 0, ram): xtensa.sysrom0
-   0000000060000000-00000000dfffffff (prio 0, ram): xtensa.sysram0
-   00000000f0000000-00000000f000ffff (prio 0, i/o): alias pcie-pio
-@gpex_ioport_window 0000000000000000-000000000000ffff
-   00000000f0100000-00000000f3ffffff (prio 0, i/o): alias pcie-ecam
-@pcie-mmcfg-mmio 0000000000000000-0000000003efffff
-   00000000f4000000-00000000fbffffff (prio 0, i/o): alias pcie-mmio
-@gpex_mmio_window 00000000f4000000-00000000fbffffff
+I want to ensure it's null terminated but it turns out to be unnecessay,=
+ will
+drop in next version.
 
-i.e. there's no IO at the address 0x90000000.
+>
+>> +
+>> +       str[0] =3D ch;
+>> +       simc_write(1, str, 1);
+>> +
+>> +       return 0;
+>> +}
+>> +
+>> +static int simc_serial_pending(struct udevice *dev, bool input)
+>> +{
+>> +       struct simc_serial_priv *priv =3D dev_get_priv(dev);
+>> +
+>> +       if (input)
+>> +               return priv->counter++ & 1;
+>
+> This can result in blocking the whole CPU thread of the emulator when
+> used with simcall-based semihosting and there's no input actually avai=
+lable.
+> Not sure how it would behave with the gdbio. I think something like
+> the following:
+>
+> if (input) {
+>     int res =3D simc_poll(0);
+>     return res < 0 ? priv->counter++ & 1 : res;
+> }
+>
+> could be used here to avoid that.
+
+That worked out, thanks.
+
+>
+>> +       return false;
+>> +}
+>> +
+>> +static const struct dm_serial_ops simc_serial_ops =3D {
+>> +       .putc =3D simc_serial_putc,
+>> +       .getc =3D simc_serial_getc,
+>> +       .pending =3D simc_serial_pending,
+>> +};
+>> +
+>> +U_BOOT_DRIVER(simc_serial) =3D {
+>> +       .name   =3D "serial_xtensa_semihosting",
+>> +       .id     =3D UCLASS_SERIAL,
+>> +       .priv_auto =3D sizeof(struct simc_serial_priv),
+>> +       .ops    =3D &simc_serial_ops,
+>> +       .flags  =3D DM_FLAG_PRE_RELOC,
+>> +};
+>> +
+>> +U_BOOT_DRVINFO(simc_serial) =3D {
+>> +       .name =3D "serial_xtensa_semihosting",
+>> +};
+>> +
+>> +#if CONFIG_IS_ENABLED(DEBUG_UART_XTENSA_SEMIHOSTING)
+>> +#include <debug_uart.h>
+>> +
+>> +static inline void _debug_uart_init(void)
+>> +{
+>> +}
+>> +
+>> +static inline void _debug_uart_putc(int c)
+>> +{
+>> +       simc_serial_putc(NULL, c);
+>> +}
+>> +
+>> +DEBUG_UART_FUNCS
+>> +#endif
+>>
+>> --
+>> 2.43.0
+>>
+>
+>
+> --=20
+> Thanks.
+> -- Max
 
 --=20
-Thanks.
--- Max
+- Jiaxun
