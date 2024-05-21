@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32436C25B78
-	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 16:37:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3005C25B7C
+	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 16:38:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01BBF88363;
-	Tue, 21 May 2024 18:37:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 798938835E;
+	Tue, 21 May 2024 18:38:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="FxI3s+54";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZEdWT4Hv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8A0188363; Tue, 21 May 2024 18:37:04 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 4AFBD881C1; Tue, 21 May 2024 18:38:16 +0200 (CEST)
+Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
+ [IPv6:2607:f8b0:4864:20::72f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0ABBC881C1
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 18:37:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0CBBE88366
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 18:38:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a59b81d087aso832199466b.3
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 09:37:02 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72f.google.com with SMTP id
+ af79cd13be357-792c3741c71so16580785a.0
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 09:38:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1716309421; x=1716914221; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=l5t+TWaZHUcegmOs6LsPYO4AE/XwHbz3XBHLP8lgcHw=;
- b=FxI3s+54RbrnfKzPBqPyXFf0l+1bMBnpwtt7V/XZ+WDeFpG6eAcVOCyCPi7Ur5I9jF
- B7clIaitBS+TEqFrctFXdJj1vlLAJhmZN/kfNUHYyZbsYg6KOzOkjxGa/fBE39tR0Kj2
- CjlbLIZqFYqpEHbwnIacWgJSJqGanaaf5xdDKg4cK9SVtaJNlBfaUcVF9kQKfmQ0fc1t
- tVr5HGAhXu4uK+v+tu1sF9Y35maiBy9GnNs2ZT/FE8i6DhYvRtAum2kCjLRlTvcTzwRh
- Wgnz/gwgcUbJ6DFt2gP1/w6l3XL2u+NWNCWPdGozZ+qFbDGvLuiG3opIpUUsXY/vU1Sr
- /XKw==
+ d=konsulko.com; s=google; t=1716309492; x=1716914292; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=goszrdD+ZJM+VUybgZ9Nk1Hs2xqmqNwPR9kE6Vp8KoQ=;
+ b=ZEdWT4HvCKJOuFQp3aHKRh0fXt0biv331U2XzmR2dXTkQAbu6bq4gNOObPT7sm4H9u
+ 7qN+xHCqE1ag0XYJbuXoeTfsN0pxGGOdZJNwOL3PfGf5p6Na1yx1PpsQK32JGYIipTSc
+ ivWcAmlufUEY9ocfXWZIF13wm38WPXBYYN3Es=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716309421; x=1716914221;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=l5t+TWaZHUcegmOs6LsPYO4AE/XwHbz3XBHLP8lgcHw=;
- b=gOjH0zGqr7Xni/V8RPAzpNHm6KG3KpTcLd/AJFxobJPzc0Q+kY/4dMpNzta4phhTZM
- q0CWDVg9kkgo7xOqwAxbjxJr23SWY3E5vaNCVSCrz9frbLiEOFLi+9nPtcOXEnBKBz6O
- lV4bdlQ1LnlYUBP8FVgzKVhrn4RNO1NbHPpz7R73+E408jHNJBakJTsCdQ+aibjgMZ+n
- 9D2Q4Q+SQwqZZAuAAfsTF3OWxd/fGjikii7h7DutrMnK7e+sNYeTiEW+H4wMYVHqr90/
- wgyPB2LGwnVwxr5Up97MwrlkKrZrPdLEIIgxe8vsJxhvhzZilOH157ifa8nQc52ghgA3
- jo7Q==
-X-Gm-Message-State: AOJu0YyoP9IA/F8MfFBeApDWQM1h8Qwp54NI1QLP7sAJPlGLX8XnFSKK
- QQr9Zx0OHT2ewy4JCoYjMn9Jl1+0PR0NU3nU925HdibZMMnhBrCc3OPWtK/61wezGvfzFLYS0Ws
- MhxP9Ac2BOvRWgFEXjHby9Fa63wkyDPgWA8GCBDwPSLZ8ESl7vu083g==
-X-Google-Smtp-Source: AGHT+IFYP8zWXGt0f4ANyjVdZLjmrV9HISB7Ay4XC4JMnymIbYBwQjLcAtkMNGTAF3kZ1dholpSPjhGuV37hxk8YqS8=
-X-Received: by 2002:a17:907:9446:b0:a59:afdd:590a with SMTP id
- a640c23a62f3a-a5a2d65d66dmr3832845066b.56.1716309420926; Tue, 21 May 2024
- 09:37:00 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1716309492; x=1716914292;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=goszrdD+ZJM+VUybgZ9Nk1Hs2xqmqNwPR9kE6Vp8KoQ=;
+ b=E4UJygzucP0/Kbefv132gL1t6E+kJW8qCH0EPGLuYXucNYVjADRxwjwXQ9KXZjf6K6
+ tq1leVqKr8yPCH3vxmodLNIES6VgrZ3GxeP5FufD8mZpHDvBOkHaE+nXNl5/ov8y73kN
+ odxR2p4IhjATQUYPpcXb6nsPine2XYtUM/JcWC+e9CsHZNRtgiAO5pv8ypN9eq5cZVUJ
+ dNpAxVtPLNv1k3s+vynSGq3M86TF7a673A/8VdFFwtf/YbnL836PL6kk+bE7x90kqt0/
+ 8zCTk6GT26vChZbutt7TnMZU9cAFgcYJBNSKRZ0RIJF2N7YQsutv1E5n+l8hyF8f5zGn
+ 0j5w==
+X-Gm-Message-State: AOJu0Yzr1Ir7utPrbBRxhocF8AVtldr8VhtkKI5+W1IpUqcxyAZVxIr8
+ JTpSInPf0Edui9lR17RDjOgHCEciMVyv4524oH/BFcZ576fFB2+VJE4Dr/Egrt3Z5YB7OPYvjuV
+ 3ot0=
+X-Google-Smtp-Source: AGHT+IHeHdGDNdEoGn4tZ1hMNXAo5srfx5pCq5fd6k4uAaKVpPDGNmGRfLjXcPbfbBk0f+Ytu/m2AQ==
+X-Received: by 2002:a05:6214:3d99:b0:6a9:c11f:67ba with SMTP id
+ 6a1803df08f44-6a9c11f6d3cmr73876086d6.30.1716309491875; 
+ Tue, 21 May 2024 09:38:11 -0700 (PDT)
+Received: from bill-the-cat ([189.178.170.52])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6a15f185787sm125083586d6.45.2024.05.21.09.38.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 21 May 2024 09:38:11 -0700 (PDT)
+Date: Tue, 21 May 2024 10:38:09 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [v3 2/2] doc: process.rst: Document device tree resync rules
+Message-ID: <20240521163809.GW2568172@bill-the-cat>
+References: <20240517174930.1028063-1-trini@konsulko.com>
+ <20240517174930.1028063-2-trini@konsulko.com>
+ <faf64499-9203-4941-98aa-82e6e529c987@cherry.de>
 MIME-Version: 1.0
-References: <20240515205049.3005256-1-tharvey@gateworks.com>
- <CAC_iWjL2LwY7V4SbwRqsgjnYqnLEU1curr7ZXLLQWWmrTX=nTQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjL2LwY7V4SbwRqsgjnYqnLEU1curr7ZXLLQWWmrTX=nTQ@mail.gmail.com>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Tue, 21 May 2024 09:36:48 -0700
-Message-ID: <CAJ+vNU3A2BkNEGBvOKuXvXxW9bJSXW=Hyt3LxH1C+=gw0qd3Pg@mail.gmail.com>
-Subject: Re: [PATCH v2] fdt: automatically add /chosen/kaslr-seed if DM_RNG is
- enabled
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Devarsh Thakkar <devarsht@ti.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hugo Villeneuve <hvilleneuve@dimonoff.com>, Marek Vasut <marex@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Gp7jsOCT1Wi9zYew"
+Content-Disposition: inline
+In-Reply-To: <faf64499-9203-4941-98aa-82e6e529c987@cherry.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,381 +92,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, May 21, 2024 at 5:05=E2=80=AFAM Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Tim
->
-> On Wed, 15 May 2024 at 23:50, Tim Harvey <tharvey@gateworks.com> wrote:
-> >
-> > If RANDOMIZE_BASE is enabled in the Linux kernel instructing it to
-> > randomize the virtual address at which the kernel image is loaded, it
-> > expects entropy to be provided by the bootloader by populating
-> > /chosen/kaslr-seed with a 64-bit value from source of entropy at boot.
->
-> Since you'll send a v2, mind adding some description for UEFI on the
-> commit message?
-> efi_try_purge_kaslr_seed() has a comment of the behaviour
->
 
-Hi  Ilias,
+--Gp7jsOCT1Wi9zYew
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Ok, I will add the following to the commit log for clarity:
-Note that the Kernel's EFI STUB only relies on EFI_RNG_PROTOCOL for
-randomization and completely ignores the kaslr-seed for its own
-randomness needs (i.e the randomization of the physical placement of
-the kernel). It gets weeded out from the DTB that gets handed over via
-efi_install_fdt() as it would also mess up the measured boot DTB TPM
-measurements as well.
-
-Does the above mean that I don't need to worry about protecting the
-call to fdt_kaslrseed() with a check for MEASURED BOOT as
-efi_install_fdt/efi_try_purge_kaslr_seed always gets called in that
-case?
-
-Best Regards,
-
-Tim
-
-> Thanks
-> /Ilias
-> >
-> > If we have DM_RNG enabled populate this value automatically when
-> > fdt_chosen is called unless ARMV8_SEC_FIRMWARE_SUPPORT is enabled as
-> > it's implementation uses a different source of entropy.
-> >
-> > As this fdt node is added elsewhere create a library function and
-> > use it to deduplicate code.
-> >
-> > Note that the kalsrseed command (CMD_KASLRSEED) is likely pointless now
-> > but left in place in case boot scripts exist that rely on this command
-> > existing and returning success. An informational message is printed to
-> > alert users of this command that it is likely no longer needed.
-> >
-> > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+On Tue, May 21, 2024 at 11:27:36AM +0200, Quentin Schulz wrote:
+> Hi Tom,
+>=20
+> On 5/17/24 7:49 PM, Tom Rini wrote:
+> > Document the logic of when we do a full resync of the device trees used
+> > by OF_UPSTREAM as well as that cherry-picking is allowed as needed.
+> >=20
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
 > > ---
-> > v2:
-> >  - fix typo in commit msg
-> >  - use stack for seed to avoid unecessary malloc/free
-> >  - move to a library function and deduplicate code by using it elsewher=
-e
+> > Changes in v3:
+> > - Actually commit the changes I intended for v2
+> >=20
+> > Changes in v2:
+> > - Address Quentin's feedback
+> >=20
+> > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > Cc: Quentin Schulz <quentin.schulz@cherry.de>
 > > ---
-> >  board/xilinx/common/board.c | 35 -----------------------------
-> >  boot/fdt_support.c          | 10 +++++++++
-> >  boot/pxe_utils.c            | 35 +++--------------------------
-> >  cmd/kaslrseed.c             | 45 ++++++-------------------------------
-> >  include/kaslrseed.h         | 17 ++++++++++++++
-> >  lib/Makefile                |  1 +
-> >  lib/kaslrseed.c             | 34 ++++++++++++++++++++++++++++
-> >  7 files changed, 72 insertions(+), 105 deletions(-)
-> >  create mode 100644 include/kaslrseed.h
-> >  create mode 100644 lib/kaslrseed.c
-> >
-> > diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
-> > index 30a81376ac41..f741e8957818 100644
-> > --- a/board/xilinx/common/board.c
-> > +++ b/board/xilinx/common/board.c
-> > @@ -713,41 +713,6 @@ int ft_board_setup(void *blob, struct bd_info *bd)
-> >         if (IS_ENABLED(CONFIG_FDT_FIXUP_PARTITIONS) && IS_ENABLED(CONFI=
-G_NAND_ZYNQ))
-> >                 fdt_fixup_mtdparts(blob, nodes, ARRAY_SIZE(nodes));
-> >
-> > -       if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
-> > -               debug("No RNG device\n");
-> > -               return 0;
-> > -       }
-> > -
-> > -       if (dm_rng_read(dev, buf, n)) {
-> > -               debug("Reading RNG failed\n");
-> > -               return 0;
-> > -       }
-> > -
-> > -       if (!blob) {
-> > -               debug("No FDT memory address configured. Please configu=
-re\n"
-> > -                     "the FDT address via \"fdt addr <address>\" comma=
-nd.\n"
-> > -                     "Aborting!\n");
-> > -               return 0;
-> > -       }
-> > -
-> > -       ret =3D fdt_check_header(blob);
-> > -       if (ret < 0) {
-> > -               debug("fdt_chosen: %s\n", fdt_strerror(ret));
-> > -               return ret;
-> > -       }
-> > -
-> > -       nodeoffset =3D fdt_find_or_add_subnode(blob, 0, "chosen");
-> > -       if (nodeoffset < 0) {
-> > -               debug("Reading chosen node failed\n");
-> > -               return nodeoffset;
-> > -       }
-> > -
-> > -       ret =3D fdt_setprop(blob, nodeoffset, "kaslr-seed", buf, sizeof=
-(buf));
-> > -       if (ret < 0) {
-> > -               debug("Unable to set kaslr-seed on chosen node: %s\n", =
-fdt_strerror(ret));
-> > -               return ret;
-> > -       }
-> > -
-> >         return 0;
-> >  }
-> >  #endif
-> > diff --git a/boot/fdt_support.c b/boot/fdt_support.c
-> > index 874ca4d6f5af..3455d60d69dc 100644
-> > --- a/boot/fdt_support.c
-> > +++ b/boot/fdt_support.c
-> > @@ -8,6 +8,7 @@
-> >
-> >  #include <abuf.h>
-> >  #include <env.h>
-> > +#include <kaslrseed.h>
-> >  #include <log.h>
-> >  #include <mapmem.h>
-> >  #include <net.h>
-> > @@ -300,6 +301,15 @@ int fdt_chosen(void *fdt)
-> >         if (nodeoffset < 0)
-> >                 return nodeoffset;
-> >
-> > +       if (IS_ENABLED(CONFIG_DM_RNG) && !IS_ENABLED(ARMV8_SEC_FIRMWARE=
-_SUPPORT)) {
-> > +               err =3D fdt_kaslrseed(fdt);
-> > +               if (err) {
-> > +                       printf("WARNING: could not set kaslr-seed %s.\n=
-",
-> > +                              fdt_strerror(err));
-> > +                       return err;
-> > +               }
-> > +       }
-> > +
-> >         if (IS_ENABLED(CONFIG_BOARD_RNG_SEED) && !board_rng_seed(&buf))=
- {
-> >                 err =3D fdt_setprop(fdt, nodeoffset, "rng-seed",
-> >                                   abuf_data(&buf), abuf_size(&buf));
-> > diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-> > index 4b22bb6f525a..8d70233fc08d 100644
-> > --- a/boot/pxe_utils.c
-> > +++ b/boot/pxe_utils.c
-> > @@ -8,6 +8,7 @@
-> >  #include <dm.h>
-> >  #include <env.h>
-> >  #include <image.h>
-> > +#include <kaslrseed.h>
-> >  #include <log.h>
-> >  #include <malloc.h>
-> >  #include <mapmem.h>
-> > @@ -323,10 +324,6 @@ static void label_boot_kaslrseed(void)
-> >  #if CONFIG_IS_ENABLED(DM_RNG)
-> >         ulong fdt_addr;
-> >         struct fdt_header *working_fdt;
-> > -       size_t n =3D 0x8;
-> > -       struct udevice *dev;
-> > -       u64 *buf;
-> > -       int nodeoffset;
-> >         int err;
-> >
-> >         /* Get the main fdt and map it */
-> > @@ -342,35 +339,9 @@ static void label_boot_kaslrseed(void)
-> >         if (err <=3D 0)
-> >                 return;
-> >
-> > -       if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
-> > -               printf("No RNG device\n");
-> > -               return;
-> > -       }
-> > -
-> > -       nodeoffset =3D fdt_find_or_add_subnode(working_fdt, 0, "chosen"=
-);
-> > -       if (nodeoffset < 0) {
-> > -               printf("Reading chosen node failed\n");
-> > -               return;
-> > -       }
-> > -
-> > -       buf =3D malloc(n);
-> > -       if (!buf) {
-> > -               printf("Out of memory\n");
-> > -               return;
-> > -       }
-> > -
-> > -       if (dm_rng_read(dev, buf, n)) {
-> > -               printf("Reading RNG failed\n");
-> > -               goto err;
-> > -       }
-> > -
-> > -       err =3D fdt_setprop(working_fdt, nodeoffset, "kaslr-seed", buf,=
- sizeof(buf));
-> > -       if (err < 0) {
-> > +       err =3D fdt_kaslrseed(working_fdt);
-> > +       if (err < 0)
-> >                 printf("Unable to set kaslr-seed on chosen node: %s\n",=
- fdt_strerror(err));
-> > -               goto err;
-> > -       }
-> > -err:
-> > -       free(buf);
-> >  #endif
-> >         return;
-> >  }
-> > diff --git a/cmd/kaslrseed.c b/cmd/kaslrseed.c
-> > index e0d3c7fe7489..ea5c07d729cf 100644
-> > --- a/cmd/kaslrseed.c
-> > +++ b/cmd/kaslrseed.c
-> > @@ -9,33 +9,16 @@
-> >  #include <command.h>
-> >  #include <dm.h>
-> >  #include <hexdump.h>
-> > +#include <kaslrseed.h>
-> >  #include <malloc.h>
-> >  #include <rng.h>
-> >  #include <fdt_support.h>
-> >
-> >  static int do_kaslr_seed(struct cmd_tbl *cmdtp, int flag, int argc, ch=
-ar *const argv[])
-> >  {
-> > -       size_t n =3D 0x8;
-> > -       struct udevice *dev;
-> > -       u64 *buf;
-> > -       int nodeoffset;
-> > -       int ret =3D CMD_RET_SUCCESS;
-> > +       int err;
-> >
-> > -       if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
-> > -               printf("No RNG device\n");
-> > -               return CMD_RET_FAILURE;
-> > -       }
-> > -
-> > -       buf =3D malloc(n);
-> > -       if (!buf) {
-> > -               printf("Out of memory\n");
-> > -               return CMD_RET_FAILURE;
-> > -       }
-> > -
-> > -       if (dm_rng_read(dev, buf, n)) {
-> > -               printf("Reading RNG failed\n");
-> > -               return CMD_RET_FAILURE;
-> > -       }
-> > +       printf("Notice: a /chosen/kaslr-seed is automatically added to =
-the device-tree when booted via booti/bootm/bootz therefore using this comm=
-and is likely no longer needed");
-> >
-> >         if (!working_fdt) {
-> >                 printf("No FDT memory address configured. Please config=
-ure\n"
-> > @@ -44,27 +27,13 @@ static int do_kaslr_seed(struct cmd_tbl *cmdtp, int=
- flag, int argc, char *const
-> >                 return CMD_RET_FAILURE;
-> >         }
-> >
-> > -       ret =3D fdt_check_header(working_fdt);
-> > -       if (ret < 0) {
-> > -               printf("fdt_chosen: %s\n", fdt_strerror(ret));
-> > +       err =3D fdt_kaslrseed(working_fdt);
-> > +       if (err < 0) {
-> > +               printf("Unable to set kaslr-seed on chosen node: %s\n",=
- fdt_strerror(err));
-> >                 return CMD_RET_FAILURE;
-> >         }
-> >
-> > -       nodeoffset =3D fdt_find_or_add_subnode(working_fdt, 0, "chosen"=
-);
-> > -       if (nodeoffset < 0) {
-> > -               printf("Reading chosen node failed\n");
-> > -               return CMD_RET_FAILURE;
-> > -       }
-> > -
-> > -       ret =3D fdt_setprop(working_fdt, nodeoffset, "kaslr-seed", buf,=
- sizeof(buf));
-> > -       if (ret < 0) {
-> > -               printf("Unable to set kaslr-seed on chosen node: %s\n",=
- fdt_strerror(ret));
-> > -               return CMD_RET_FAILURE;
-> > -       }
-> > -
-> > -       free(buf);
-> > -
-> > -       return ret;
-> > +       return CMD_RET_SUCCESS;
-> >  }
-> >
-> >  U_BOOT_LONGHELP(kaslrseed,
-> > diff --git a/include/kaslrseed.h b/include/kaslrseed.h
-> > new file mode 100644
-> > index 000000000000..3fe82f418acf
-> > --- /dev/null
-> > +++ b/include/kaslrseed.h
-> > @@ -0,0 +1,17 @@
-> > +/* SPDX-License-Identifier: GPL-2.0+ */
-> > +/*
-> > + * Copyright 2024 Tim Harvey <tharvey@gateworks.com>
-> > + */
-> > +
-> > +#if !defined _KASLRSEED_H_
-> > +#define _KASLRSEED_H_
-> > +
-> > +/**
-> > + * fdt_kaslrseed() - create a 'kaslr-seed' node in chosen
-> > + *
-> > + * @blob:      fdt blob
-> > + * Return:     0 if OK, -ve on error
-> > + */
-> > +int fdt_kaslrseed(void *blob);
-> > +
-> > +#endif /* _KASLRSEED_H_ */
-> > diff --git a/lib/Makefile b/lib/Makefile
-> > index 2a76acf100d0..20a0242055fa 100644
-> > --- a/lib/Makefile
-> > +++ b/lib/Makefile
-> > @@ -149,6 +149,7 @@ obj-y +=3D date.o
-> >  obj-y +=3D rtc-lib.o
-> >  obj-$(CONFIG_LIB_ELF) +=3D elf.o
-> >
-> > +obj-$(CONFIG_DM_RNG) +=3D kaslrseed.o
-> >  obj-$(CONFIG_$(SPL_TPL_)SEMIHOSTING) +=3D semihosting.o
-> >
-> >  #
-> > diff --git a/lib/kaslrseed.c b/lib/kaslrseed.c
-> > new file mode 100644
-> > index 000000000000..ad06bee2b88d
-> > --- /dev/null
-> > +++ b/lib/kaslrseed.c
-> > @@ -0,0 +1,34 @@
-> > +// SPDX-License-Identifier: GPL-2.0+
-> > +/*
-> > + * Copyright 2024 Tim Harvey <tharvey@gateworks.com>
-> > + */
-> > +#include <dm.h>
-> > +#include <rng.h>
-> > +#include <fdt_support.h>
-> > +
-> > +int fdt_kaslrseed(void *fdt)
-> > +{
-> > +       struct udevice *dev;
-> > +       int nodeoffset;
-> > +       u64 data;
-> > +       int err;
-> > +
-> > +       err =3D fdt_check_header(fdt);
-> > +       if (err < 0)
-> > +               return err;
-> > +
-> > +       /* find or create "/chosen" node. */
-> > +       nodeoffset =3D fdt_find_or_add_subnode(fdt, 0, "chosen");
-> > +       if (nodeoffset < 0)
-> > +               return nodeoffset;
-> > +
-> > +       err =3D uclass_get_device(UCLASS_RNG, 0, &dev);
-> > +       if (!err)
-> > +               err =3D dm_rng_read(dev, &data, sizeof(data));
-> > +       if (!err)
-> > +               err =3D fdt_setprop(fdt, nodeoffset, "kaslr-seed", &dat=
-a, sizeof(data));
-> > +       if (err < 0)
-> > +               printf("WARNING: could not set kaslr-seed %s.\n", fdt_s=
-trerror(err));
-> > +
-> > +       return err;
-> > +}
-> > --
-> > 2.25.1
-> >
+> >   doc/develop/devicetree/control.rst |  9 ++++++---
+> >   doc/develop/process.rst            | 13 +++++++++++++
+> >   2 files changed, 19 insertions(+), 3 deletions(-)
+> >=20
+> > diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetre=
+e/control.rst
+> > index 4cc1457d4ea8..ca4fb0b5b10f 100644
+> > --- a/doc/develop/devicetree/control.rst
+> > +++ b/doc/develop/devicetree/control.rst
+> > @@ -113,9 +113,12 @@ SoC being used via Kconfig and set `DEFAULT_DEVICE=
+_TREE=3D<vendor>/<name>` when
+> >   prompted by Kconfig.
+> >   However, if `dts/upstream/` hasn't yet received devicetree source fil=
+e for your
+> > -newly added board support then you can add corresponding devicetree so=
+urce file
+> > -as `arch/<arch>/dts/<name>.dts`. To select that add `# CONFIG_OF_UPSTR=
+EAM is not
+> > -set` and set `DEFAULT_DEVICE_TREE=3D<name>` when prompted by Kconfig.
+> > +newly added board support then one option is that you can add the corr=
+esponding
+> > +devicetree source file as `arch/<arch>/dts/<name>.dts`. To select that=
+ add `#
+> > +CONFIG_OF_UPSTREAM is not set` and set `DEFAULT_DEVICE_TREE=3D<name>` =
+when
+>=20
+> I don't like the wording here because it implies we should modify the
+> defconfig by hand, which nobody should ever do.
+>=20
+> I could suggest:
+> """
+> To do that, unselect `OF_UPSTREAM` and set `DEFAULT_DEVICE_TREE=3D<name>`
+> through a Kconfig tool (e.g. `menuconfig`).
+> """
+>=20
+> In any case, this is wording is not added in this patch, so I guess we co=
+uld
+> fix it in another patch as well, making this remark not a "blocker".
+
+Yes, I agree that would be a better way to explain things here.
+
+--=20
+Tom
+
+--Gp7jsOCT1Wi9zYew
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZMzfEACgkQFHw5/5Y0
+tyzBXAwAl+7/cfBPcZAspS9hz3drTz0GoSOBW+gShaslEjZZS4Pk0wnaX9GTjax/
+Y/9DtwTnxM6BYdih2+gLSIs8gvSF2OgkjHYIvga7j5qIrbfGWaF385sD9OgwUUd7
+lQhBUGlCngnxq63Q+yc9sYpK3txsRipM0fsT7CTg9D29Gkc1xxSJ2EEj3EauBPzL
+SvoS6ZHCLaJ2watuOaGXqJ/7NqWnXukedO2Bvl5Y5a50QGn8JitMq2QNo+TyJpDP
+znV+2oecDHDYdCQRpsZTvAgNFCx3t/GX0THk+CagKPL9RTUcF7+nHCwkmA2R0O2Y
+v3NVSJV2QxpF78RFPP89VOY56KgQqiUBFaG2zS2UDuP4PPkK69whC+Pp1c+pSO8k
+4ZuoIwba4dzZ84au4XQFDbBJRna3ojgUdlW1ymkmqLgvGBibC0Z/OCds5RBzJnLN
+YA5f2fWhwsVZJwCPhXefoSVaxgIFRyXB4AfbnLQEOB7xxj5le0MTyD21viFV9wwk
+1Icgz9ng
+=II+g
+-----END PGP SIGNATURE-----
+
+--Gp7jsOCT1Wi9zYew--
