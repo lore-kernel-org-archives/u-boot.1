@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26895C25B75
-	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 07:14:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCE53C25B74
+	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 07:15:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D01548870F;
-	Tue, 21 May 2024 09:13:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 42CB788744;
+	Tue, 21 May 2024 09:14:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="MV4MZL/F";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="P46bUfWu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40DC78870B; Tue, 21 May 2024 09:13:55 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id 5CE3A88737; Tue, 21 May 2024 09:13:59 +0200 (CEST)
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [IPv6:2604:1380:40e1:4800::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1887488720
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 09:13:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B8118871D
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 09:13:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id E5FD861FF2;
+ by sin.source.kernel.org (Postfix) with ESMTP id 4A8D4CE0E90;
+ Tue, 21 May 2024 07:13:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0FDDFC32782;
  Tue, 21 May 2024 07:13:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1F5A5C4AF07;
- Tue, 21 May 2024 07:13:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1716275631;
- bh=24IoUxTaqgkiNJOTFPqB/d7BBeJxM5Hwmylm9R59qLs=;
+ s=k20201202; t=1716275633;
+ bh=2WVShhLd/mAQ4BLHQm+cBILxCcDGdEePcpU7WxN5c/I=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=MV4MZL/FxPucIkSffQmLhjsHgzeaQtQ9CCSYVZ5P7llHPoghuRobSxbI0pdWlVl70
- aFNGweNM1gOWYkkTet5bBD+O+xt5NKE11W2VXFQ1Ovxfsk2ArYLVUFaQfU+WIRClSc
- 6MLYMnPEtY0n558UAvWvKKOGTfqNEomPjNDcCdHzaidWTco6Xgf8nTRbu1IXp+WPFk
- 0XZGWxg9CN6hbwnXi+U9yANJM/indxv7B/1PrD1Rj+ypHoQugIu8RVmekSWt3ugekS
- IqA+El5sU1ET+yOACAx2DuD2cevmOrM/sQBrmS1ETsTSYeW2QJajQMDaEuplwb5wKq
- AFlhpk7/6M6Sw==
+ b=P46bUfWue47BsBForB4LGFvETo4NJnNgxgD7wA79Zm2ixESE9SELZ3wqfYxQHmXgg
+ T6JB7S9xLagTYskHrvlgUWqG9MSeGJye7Fqhrp94FkjyGbBruC6RCWERQjJXVTRoFf
+ wLjvOIoVSxNX9tedICtlQI0h9WC5asCpM3SDhqSFDCHAQL7u0HIGXSDKcS+qGgx6jI
+ vXbLIHAicXwjEv+6cJXuL6Iti9C3GrrvlbvGiVcd9/sFMTw/SK0WwRwdd2AlBjyDFI
+ 7pP8YHBE4xDlJ8csB0tuowwRwW1A+Ty8TpJgmyF9wYX0XJsgPks0Fk30N/ozKDi7xF
+ 5LbYEwOyG6ZEg==
 From: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
 To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
  Stefan Roese <sr@denx.de>
@@ -47,10 +47,9 @@ Cc: Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Nikita Kiryanov <nikita@compulab.co.il>,
  =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
-Subject: [PATCH 06/11] cmd: eeprom: Hide eeprom layout versioning behind a
- Kconfig option
-Date: Tue, 21 May 2024 09:13:30 +0200
-Message-ID: <20240521071335.4193-7-kabel@kernel.org>
+Subject: [PATCH 07/11] cmd: eeprom: Deduplicate parse_i2c_bus_addr() calls
+Date: Tue, 21 May 2024 09:13:31 +0200
+Message-ID: <20240521071335.4193-8-kabel@kernel.org>
 X-Mailer: git-send-email 2.44.1
 In-Reply-To: <20240521071335.4193-1-kabel@kernel.org>
 References: <20240521071335.4193-1-kabel@kernel.org>
@@ -73,129 +72,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a new Kconfig option EEPROM_LAYOUT_VERSIONS, and hide eeprom
-layout versionsing code behind it. Only print the relevant help in
-'eeprom' command usage if this option is enabled.
-
-Enable this new option for cm_fx6_defconfig and cm_t43_defconfig.
-These are the only boards using EEPROM layout versioning.
+Deduplicate the calls to parse_i2c_bus_addr().
 
 Signed-off-by: Marek Behún <kabel@kernel.org>
 ---
- cmd/Kconfig              |  9 ++++++++-
- cmd/eeprom.c             | 20 +++++++++++++++-----
- configs/cm_fx6_defconfig |  1 +
- configs/cm_t43_defconfig |  1 +
- 4 files changed, 25 insertions(+), 6 deletions(-)
+ cmd/eeprom.c | 36 +++++++++++++++++-------------------
+ 1 file changed, 17 insertions(+), 19 deletions(-)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index b026439c77..8c370993f6 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -803,9 +803,16 @@ config CMD_EEPROM_LAYOUT
- 			types of eeprom fields. Can be used for defining
- 			custom layouts.
- 
-+config EEPROM_LAYOUT_VERSIONS
-+	bool "Support specifying eeprom layout version"
-+	depends on CMD_EEPROM_LAYOUT
-+	help
-+	  Support specifying eeprom layout version in the 'eeprom' command
-+	  via the -l option.
-+
- config EEPROM_LAYOUT_HELP_STRING
- 	  string "Tells user what layout names are supported"
--	  depends on CMD_EEPROM_LAYOUT
-+	  depends on EEPROM_LAYOUT_VERSIONS
- 	  default "<not defined>"
- 	  help
- 	    Help printed with the LAYOUT VERSIONS part of the 'eeprom'
 diff --git a/cmd/eeprom.c b/cmd/eeprom.c
-index 0d604832e4..d610dc9931 100644
+index d610dc9931..12902e812e 100644
 --- a/cmd/eeprom.c
 +++ b/cmd/eeprom.c
-@@ -252,10 +252,12 @@ static int parse_i2c_bus_addr(int *i2c_bus, ulong *i2c_addr, int argc,
- 
- #ifdef CONFIG_CMD_EEPROM_LAYOUT
- 
-+#ifdef CONFIG_EEPROM_LAYOUT_VERSIONS
- __weak int eeprom_parse_layout_version(char *str)
- {
- 	return LAYOUT_VERSION_UNRECOGNIZED;
- }
-+#endif
- 
- static unsigned char eeprom_buf[CONFIG_SYS_EEPROM_SIZE];
- 
-@@ -359,7 +361,7 @@ int do_eeprom(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	if (action == EEPROM_ACTION_INVALID)
- 		return CMD_RET_USAGE;
- 
--#ifdef CONFIG_CMD_EEPROM_LAYOUT
-+#ifdef CONFIG_EEPROM_LAYOUT_VERSIONS
- 	if (action == EEPROM_PRINT || action == EEPROM_UPDATE) {
- 		if (!strcmp(argv[index], "-l")) {
- 			NEXT_PARAM(argc, index);
-@@ -415,6 +417,12 @@ int do_eeprom(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 				      field_name, field_value, addr, off, cnt);
+@@ -339,6 +339,21 @@ static int eeprom_execute_command(enum eeprom_action action, int i2c_bus,
+ 	return rcode;
  }
  
-+#ifdef CONFIG_EEPROM_LAYOUT_VERSIONS
-+#define EEPROM_LAYOUT_SPEC	"[-l <layout_version>] "
-+#else
-+#define EEPROM_LAYOUT_SPEC	""
-+#endif
++static int eeprom_action_expected_argc(enum eeprom_action action)
++{
++	switch (action) {
++	case EEPROM_READ:
++	case EEPROM_WRITE:
++		return 3;
++	case EEPROM_PRINT:
++		return 0;
++	case EEPROM_UPDATE:
++		return 2;
++	default:
++		return CMD_RET_USAGE;
++	}
++}
 +
- U_BOOT_CMD(
- 	eeprom,	8,	1,	do_eeprom,
- 	"EEPROM sub-system",
-@@ -423,16 +431,18 @@ U_BOOT_CMD(
- 	"       - read/write `cnt' bytes from `devaddr` EEPROM at offset `off'"
- #ifdef CONFIG_CMD_EEPROM_LAYOUT
- 	"\n"
--	"eeprom print [-l <layout_version>] [[bus] devaddr]\n"
-+	"eeprom print " EEPROM_LAYOUT_SPEC "[[bus] devaddr]\n"
- 	"       - Print layout fields and their data in human readable format\n"
--	"eeprom update [-l <layout_version>] [[bus] devaddr] field_name field_value\n"
-+	"eeprom update " EEPROM_LAYOUT_SPEC "[[bus] devaddr] field_name field_value\n"
- 	"       - Update a specific eeprom field with new data.\n"
--	"         The new data must be written in the same human readable format as shown by the print command.\n"
--	"\n"
-+	"         The new data must be written in the same human readable format as shown by the print command."
-+#ifdef CONFIG_EEPROM_LAYOUT_VERSIONS
-+	"\n\n"
- 	"LAYOUT VERSIONS\n"
- 	"The -l option can be used to force the command to interpret the EEPROM data using the chosen layout.\n"
- 	"If the -l option is omitted, the command will auto detect the layout based on the data in the EEPROM.\n"
- 	"The values which can be provided with the -l option are:\n"
- 	CONFIG_EEPROM_LAYOUT_HELP_STRING"\n"
+ #define NEXT_PARAM(argc, index)	{ (argc)--; (index)++; }
+ int do_eeprom(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ {
+@@ -371,25 +386,8 @@ int do_eeprom(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	}
  #endif
-+#endif
- );
-diff --git a/configs/cm_fx6_defconfig b/configs/cm_fx6_defconfig
-index a4d5f91b35..386616cc42 100644
---- a/configs/cm_fx6_defconfig
-+++ b/configs/cm_fx6_defconfig
-@@ -46,6 +46,7 @@ CONFIG_SYS_MAXARGS=32
- CONFIG_CMD_GREPENV=y
- CONFIG_CMD_EEPROM=y
- CONFIG_CMD_EEPROM_LAYOUT=y
-+CONFIG_EEPROM_LAYOUT_VERSIONS=y
- CONFIG_EEPROM_LAYOUT_HELP_STRING="v2, v3"
- CONFIG_SYS_I2C_EEPROM_BUS=2
- CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=4
-diff --git a/configs/cm_t43_defconfig b/configs/cm_t43_defconfig
-index 93e667292c..32f126a517 100644
---- a/configs/cm_t43_defconfig
-+++ b/configs/cm_t43_defconfig
-@@ -50,6 +50,7 @@ CONFIG_SYS_PROMPT="CM-T43 # "
- CONFIG_CMD_ASKENV=y
- CONFIG_CMD_EEPROM=y
- CONFIG_CMD_EEPROM_LAYOUT=y
-+CONFIG_EEPROM_LAYOUT_VERSIONS=y
- CONFIG_EEPROM_LAYOUT_HELP_STRING="v2, v3"
- CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=4
- CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+ 
+-	switch (action) {
+-	case EEPROM_READ:
+-	case EEPROM_WRITE:
+-		ret = parse_i2c_bus_addr(&i2c_bus, &i2c_addr, argc,
+-					 argv + index, 3);
+-		break;
+-	case EEPROM_PRINT:
+-		ret = parse_i2c_bus_addr(&i2c_bus, &i2c_addr, argc,
+-					 argv + index, 0);
+-		break;
+-	case EEPROM_UPDATE:
+-		ret = parse_i2c_bus_addr(&i2c_bus, &i2c_addr, argc,
+-					 argv + index, 2);
+-		break;
+-	default:
+-		/* Get compiler to stop whining */
+-		return CMD_RET_USAGE;
+-	}
+-
++	ret = parse_i2c_bus_addr(&i2c_bus, &i2c_addr, argc, argv + index,
++				 eeprom_action_expected_argc(action));
+ 	if (ret == CMD_RET_USAGE)
+ 		return ret;
+ 
 -- 
 2.44.1
 
