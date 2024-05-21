@@ -4,156 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B90ECC25B74
-	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 12:16:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E5A4C25B74
+	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 12:32:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2AE7888722;
-	Tue, 21 May 2024 14:16:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id C41368873A;
+	Tue, 21 May 2024 14:32:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="nwSVSJ6F";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Q0+VJUoH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 482668874D; Tue, 21 May 2024 14:16:32 +0200 (CEST)
-Received: from EUR01-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur01on0700.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe02::700])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4C4238874D; Tue, 21 May 2024 14:32:06 +0200 (CEST)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAA4B8871D;
- Tue, 21 May 2024 14:16:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id B807087527
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 14:32:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Lihkq8hJ52Es8w7hmhEOIuCPYaYWuLtWV3OXFpl87Ry144qi/Gzm/PdzhoS/zDkYPwm6bQvNLeEQbt8NVcxjNvdxCWv7IoVdQFtvNmRxrkHOMv62SZ8G2FD7nxZv7gmXeif8DR2YLG0zuNdM3kbidsHmCaMraewz6858rHFMF3+rxEQcw/Hu6IBrUa6uSPO1tG2Isf4JEfIr8puaQ32YtwNRaM8Yl5wfMu88avpG8Cli/3GiKJF6MpTIcZXfrxbZMWcef6VLA4qHM8Jy4+tw4rMexhCLsu6OuK8+pOY/rvn4+zUy7mJhE1VM3/AL88WibIJzMASK8Xtghc1eCBUR1w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LldQ64Sp3Hn0MRXEZmTAgQsA6zEp5oKJ8wwD95wFtjM=;
- b=HyccrmlIW6z2roc0RkEvV8veQTOYOPP8wVRg4Y6vAThntVP6oDpzT+EkmSbDxtUcTbV9fGVcZj8gxhq9HEyIR/HyWZRNmnS2OTng4V7H3M9q5jRH5Wm+Zjj+xNfasiWqcsKlI1AdInbHlZVaR/YBq0DDKfLvkFF2d8r1xmXfHtP0M7sAfYp3vnllMpM7zDO6GlMVf95S0kC8rzc4t+n3C/6CVYbVB/HkSqfBKdG86sD3jSfDt7ZMxsWC1sEVk70oVL75aW9d6+fosgc79tl8yGCOBDsO21RFOQUPyByd8wRymkr7sHA4n06ckEBce7L+3KGC1WU2j6j3DnHPjxrB9g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LldQ64Sp3Hn0MRXEZmTAgQsA6zEp5oKJ8wwD95wFtjM=;
- b=nwSVSJ6FTXGjNcaBwG8wj+93xU30qY1Ki8D7s+JBD/+ImvaMNMOHJlUdQMEmyQpv0XXEGeVQcUKwX45+7qwrdAEqaIBoPtZeVDxTyoKUucxoWK32LEEghM8k2hcErzOH+HBwOeRZK6OAbRLITN/pJJGLLL0elzWBkEgms9rgpV4=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from VE1PR04MB6589.eurprd04.prod.outlook.com (2603:10a6:803:128::25)
- by DB9PR04MB8364.eurprd04.prod.outlook.com (2603:10a6:10:24c::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7587.36; Tue, 21 May
- 2024 12:16:28 +0000
-Received: from VE1PR04MB6589.eurprd04.prod.outlook.com
- ([fe80::8476:1b2f:f236:db31]) by VE1PR04MB6589.eurprd04.prod.outlook.com
- ([fe80::8476:1b2f:f236:db31%6]) with mapi id 15.20.7587.030; Tue, 21 May 2024
- 12:16:28 +0000
-Message-ID: <770c99e9-a5f0-42a9-9904-25978268bcc4@cherry.de>
-Date: Tue, 21 May 2024 14:16:25 +0200
-User-Agent: Mozilla Thunderbird
-From: quentin.schulz@cherry.de
-To: Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de, u-boot-custodians@lists.denx.de,
- u-boot-board-maintainers@lists.denx.de
-Subject: Re: [ANN] U-Boot v2024.07-rc3 released
-References: <20240520160635.GQ2568172@bill-the-cat>
- <7fc715fc-eb51-45a5-b7f2-71668bfd3eba@cherry.de>
- <6e7ab24f-1c01-426b-a57f-85f836a13171@kwiboo.se>
-In-Reply-To: <6e7ab24f-1c01-426b-a57f-85f836a13171@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-X-ClientProxiedBy: WA1P291CA0015.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:19::13) To VE1PR04MB6589.eurprd04.prod.outlook.com
- (2603:10a6:803:128::25)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-51ff65b1e14so6102399e87.2
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 05:32:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1716294718; x=1716899518; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=RgZKVOKuCYi6X9B+Og26X53PPdpoI8shv+7fVsSXuaI=;
+ b=Q0+VJUoHXd5OTfXdqS8OjkneaC2aqSocnyRVjuVI0BqwoVSm9n9HOXzVr0eMA2Msv0
+ sM/QJngFbqMbvghbovR1gY9NB2Voym+VQ76jMpwP3UhXn+0YAy/ONolspVfd8xfLEvi/
+ 72OWhEylQ4ptHmIUFPHkJNtcd/HUJKsddVzvPst0+7EqH6FfB2HkuIV7URKASth8thOr
+ PyiAJZQiWVPzT4bClwREF1uhisKSSC+l1SPwyCkLgW1f159Ds2/4nk0vB2zZh/VVPx8B
+ kj6bcZGYpRB3XArdPYhC2FXzWU7IM8wD+Dplj/xA7t7uwbcZNtBbNNA69uas/Aiar01i
+ m7BQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716294718; x=1716899518;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RgZKVOKuCYi6X9B+Og26X53PPdpoI8shv+7fVsSXuaI=;
+ b=c3QBMz+eMKU2OxVOWnIaa8Bo5nsjy3jqwoMQ1YRE5St5DaDyN/IUOqivZ5I6xYmMZX
+ slCrPACL0El1fF7WLOGQcoEVfXE0pY3WEVICkiYpM3awdgxVzVG+XpJFW05rjwilck8z
+ rf9GSf+basr1KpUf4aSl6tfSial8E86rLoYRfFqpHlQZXXioKER3NQhoZp342mpJQE0A
+ LeBhTxFnN4LBSY/MOUJ8N3bB6jjJu/+ISYxqHRd8PtKbkO53yP4+0ZWkZPpJ6pnWrZWV
+ rbBNZ/QGSSQQx89ObZjkwClGdaYAVhGRDZqPhvuu2Xeu1bx8uYwNDYHKFpF9mN4tM245
+ oNKA==
+X-Gm-Message-State: AOJu0YzrbBBXWbz3NECYWvxRb/GNcjL7YlX4KjdnpS9+o6ZQeBiOTIgY
+ C4vt5jokYnkKETa8mRoNpDsvlYU9C655VNx8+Ta34XSCZbYTHm7X13/0c7qzD+PeqbUMdo0olzR
+ AXqvVpwY4Oettkumz2KKe1t7dt/apD18ntP/wqA==
+X-Google-Smtp-Source: AGHT+IHO7KMk4CzfQOxUH8HbB3RpQqOVDJ+f2/bgXFIqhA0uzH4KZ1WzX67gs5vz/Q9D0f6gxz3F+cudqKraKrJ1p84=
+X-Received: by 2002:a05:6512:52a:b0:51f:13e8:3729 with SMTP id
+ 2adb3069b0e04-5220fc78605mr18352125e87.20.1716294717879; Tue, 21 May 2024
+ 05:31:57 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: VE1PR04MB6589:EE_|DB9PR04MB8364:EE_
-X-MS-Office365-Filtering-Correlation-Id: b1fb3bba-97ca-4129-eebf-08dc798fd6a1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230031|366007|376005|1800799015;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?WDMvUko2YjdHdVdYcUZFdi9nK0NpOFdwbXY4d0M4b2JWWHN5STJXK05wMWtj?=
- =?utf-8?B?RVJlYWxhTStxOUZ4V0ZNWTROR28weThXRjQzVG5JeEt4N09TQ1ZPdHdCNXE3?=
- =?utf-8?B?V2FLcjV6ZkJJYUxrZFVlSzBUNmZ5TGRXeUlHVVJYZGxvckhIN0MyT09PUU5u?=
- =?utf-8?B?a2doQWM3YWZYY3pJa3o3eWpJTFdhVUFXNWVXVW1qbmpGTTYyRVN1L3hDSkV1?=
- =?utf-8?B?Q1Z3VytGWnd5am9RSCtFOEdrbTd4TVJxZGJGNjFzMW9nSitncHJjajFPR1c0?=
- =?utf-8?B?L2o2a2lpT2Nhdm5OejdCaHNHSkYrekpVWEp4VHppS1NuWkVKMWVPclNlSVRF?=
- =?utf-8?B?OEhaN01TZ1ptWHErU3hvRlZ4ZkxPbnpzQXNEdnZDSWYwN2UrU3BPN25TU1JS?=
- =?utf-8?B?Y3gzaStqSXluaTlEZjJKbjVUR0lJa1dMZFpxMVRaRVA2UUZTcGw1VW9raWlH?=
- =?utf-8?B?azZlbDV3YU40WlV5NjZYK2RYUzJXMTJIdjhtSWVaOHJHNkxTR1F2MXc2TlZC?=
- =?utf-8?B?cFlnTlp1K1hmdVBVNElsT1JzbFkrc0ZkcDM5cjhSMHhXOHJjcHl1cTdNcDFs?=
- =?utf-8?B?V0doWUdPUjVpaVUvV2JwdVUrWFhTSVhCZWZwZGVyYVZpNnVRQ0xLWDZ1L3hu?=
- =?utf-8?B?N0VjR2pjTVlvd2hPTmpWQThXRitxMThoUXY1T3N2d1FmVlVkOUxNcEdKOXdy?=
- =?utf-8?B?YWwzYWw0QW1KWWt3eGNFVWVtU0o5QmRvbDJGQzI5Yi9LbXdaQmpQNlJycXcy?=
- =?utf-8?B?NTAvM1gwaG1UeHZTZnhuTVhNbys0V0NIb1NpSmF3YTNvSEJPdHFzOXlNRDJS?=
- =?utf-8?B?NVFtalVwTnUxSUZycjVoQjAwdDRHelF4bStlTlBTbnVpRDU0Ykc0SUZ1U1NP?=
- =?utf-8?B?WXdCTGJQS2lPNWNtdXpOWW95S0Y3YjFhM3VkZG13L2NIeGZnQ2JpUG16VDM3?=
- =?utf-8?B?Tk9qblpzZ3VDU2xBVUlOeDEzM3JLOWFJVXYxVVNmc2ViUWlaMEZMZE5pcFJz?=
- =?utf-8?B?bUkvNisvWlkveUxHRXpFZm92aE15WCtXYXplTmZGNEJTTHZWbmRUbW0xQ01j?=
- =?utf-8?B?YzhhaGZIYWozQ2xqTkFGODV6SG5QaS90U1kvTURlcit5NnJiUlRoOUFObGNy?=
- =?utf-8?B?dWwwT1FWQWtQMkhlRDMvSnVtRkRlTEFTSGJTVlhUL0l2K2FJM2cvMFFycG0v?=
- =?utf-8?B?LzlPSURwdEdUVzhGeUNPK1NwM2pxZWNBbndLRDAwcmJlN2xSTklCbEdtc3Ru?=
- =?utf-8?B?cFcwWVNYeFY1VU5hTTN4akZ3c2h6cGxaR1FiYnZCNTVCVzQ5akcrYklYRmx0?=
- =?utf-8?B?bXVsNVlVNnFIUU1SVnBDbXR1cE1VSkFjaFdjMTlyMHJra0I4YUZsRzI3aW52?=
- =?utf-8?B?ZVRnclA2NjJtUDl3a2NlYnVLWURXenRsYm9Zcm5pV3Bod0VjbkNUSUU4Y1Uy?=
- =?utf-8?B?Y05qTGRNMVI3c2pWM0FDMTd5OTRHSitVUVF6c2lhdlM0ZjdseERaWjdpWjNu?=
- =?utf-8?B?dytPemV0azJPanBpcSt0eW9Vd0Vrb1E0blNZNWdONEZtaVgxRUNZYVJORzYy?=
- =?utf-8?B?WlhtVDRZeEVMUStuZUt4ZVBaWXRjQlRBN0xrZXpURjI5RmJUUC9SaExpNjl1?=
- =?utf-8?B?U29nWEZPOVB2ZXB1ZjNCdzdqZ1NQOEE9PQ==?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:VE1PR04MB6589.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366007)(376005)(1800799015); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OVgxNTZRTCtLdDJMVmN2bnMvUCtiODg3cGoyVXNEZFFzZmJKelBRNDF5ajRx?=
- =?utf-8?B?RVdHa1BtMmVFdW9kTlJJSWRlRTBUN3FWeEZuN0t3bTRDUFdvc2hjZzhJbGQ4?=
- =?utf-8?B?RUVCMHpBQWtoSXFKcjExaWo0bFA1ZGltRzBaSEgrOVFiK2Z6NTBiTGlNaE9R?=
- =?utf-8?B?NU9uaTYvQ2s3OTY0Wi9OS2ZpVTFwWkRnNnNNam1uTU5yK0J4NkI3alhZSG80?=
- =?utf-8?B?dDFXaXJWU1B5UlhGaVJpTi9FbmRoaUJpWDgvR0RQT2Jvc1R2RzNTN1ltVjZH?=
- =?utf-8?B?VDNBOFk3Vk90WnJpQmxwZ1d3YmhidW1udEduaEs3MHpiZ3FIQkhDa0ZGb1J4?=
- =?utf-8?B?eXc4VXFiS0J3NWFDOXNmV3dGSkdaZlpkYlV5WlFPbjIwdklpVDdOWXgwK1hH?=
- =?utf-8?B?WnpmVnJPejh1cVU4MVhRYzRTbTVNQXhwaTlTQUJ4QmRsaHR2QzNZRk5QanZl?=
- =?utf-8?B?K21JdU12ay9reEZRWEZTZ1JQQUlIdEJHcy85YVZwVVVuUEhzRFZpNDRoQTJU?=
- =?utf-8?B?LzNuSkFlK2QwbkdqV2dtdkErMjZSU0d5N1oxcHA1YS9TeVQ5VmlaZUFGSXZl?=
- =?utf-8?B?SU1TWUpzdWV0QW9kK0FhWHM0ZDZTc0VaN2hoSFZPNXl5TzdIaGtCUlBvYTNV?=
- =?utf-8?B?bmJaWUxqNHdxVG1EUDI1czJxTFRac3lBYjhhdFFyak1sMXlKanM0Y2lldXYv?=
- =?utf-8?B?cWJ5bHhSS3pqbmNBa2NNUlk2STAzaTRTL1F6Z1hUaWd3UUgzWWwwQm9sanlq?=
- =?utf-8?B?TFljK09UQWJ0U1QxWWtDa3BKSXBNWmNORmJDeitwSlEvbUZ4aUNEa0lhWGZk?=
- =?utf-8?B?czFsZjRaM3lWWDhITFdNWTd0S2ErdDhtT2g1dmVBdUZjakNKbFdpZllHN2da?=
- =?utf-8?B?UjlLd21BRXFQS1pUV0RtUElZL2pJWTFsNFNMNUdldlFMYlhPOFVBK1ZWL1dX?=
- =?utf-8?B?TXhpY1ZnM3NLbzY3S2ErcmpKWFZrNmZubXcxSThML2RXbFhhaWR5QTA4SnNo?=
- =?utf-8?B?UU1RaFRkZUZNVFJoaElSTEh0YW9BbHM1YTRyWFFmdlF1MTh2TUxIbFBWd2hG?=
- =?utf-8?B?RnlMaHp4TllKRGowWDM0a241RlVGTGxUNGVpSEtaV0RTSnZNd1hsKzdvWjNl?=
- =?utf-8?B?Zk1EUGtnbXFEaXFXMmE3OFlRWnR4VlIvUFFuVXZNUjRUazV0WXF6OG9LNmV4?=
- =?utf-8?B?OENtWkJ3bDFmVU9jYWd4VXNRWVB1YW1sLy9RMTRWZnV6QlloUUJlakE4R0VJ?=
- =?utf-8?B?dU9yTEdEZWUwS2doQ0VnQWU2djlmQ2hGTmNwaVZkcmFKakUwYzhuS0QxVXpG?=
- =?utf-8?B?UWllMUdoRVRYWjgya2hTSkRqKzhlM1QyTVQwak02aUFPZnZYdFJDS0JWZ1B4?=
- =?utf-8?B?VXRlY0xDbi9TNjNtRVQzSzY4Yy9pakJ6TkorYzMzRmtUYmtrbTRiNy9nbDNI?=
- =?utf-8?B?UWkwRy9qQ2RGd2JnOWltUklVRXk5bTZ1ckRFeXR3WVdFVUNvR3dRdHNlYktX?=
- =?utf-8?B?V0d6QU9ScXhINkFNYlVjZ0lhUFd5bXV3NDRTUzlRV1FTNUpPZG11MDMwcnh5?=
- =?utf-8?B?S3Mrc2FjMGg4V2ZuclV0dFNWVVl1QTRiaWVVUlRVVGxsWVJnTVFHWmttM2Q0?=
- =?utf-8?B?KzBEWkZNM0JkNXVnY0F2MWYvaTRtTm1wUTZDbFVvZ0h4NFNkckNQYzd5dTVO?=
- =?utf-8?B?OUYyUmlHNzU1cFY3MkZBbHZsY2h5b2dGd3hFOTdOazJtd01YeUNqT1hRVUJK?=
- =?utf-8?B?dDdpV3RWOE9oWmtiV05qb1pRS1V3cDc2K2RzU0doZHlvL0RoYXBzN2FEUXVh?=
- =?utf-8?B?ZlNkenY0ZXJWN09CV01wUk9IWk43eDRPWGlUTG80S3c4NzZrWjBseWhGUGll?=
- =?utf-8?B?RXlrYXBReCs3cUFKc1pNR1BiMVBDNklnbFNmTFR1SUwzMVpxM2JRZ2ZleVZO?=
- =?utf-8?B?LzhaK1RDMGNBdFRRMTFKc0g3VllENlEvMFJOdHRtenNvNm5ER1RlNjc1VVho?=
- =?utf-8?B?VE80aTRRSzZ5eGNTNFZjcFdRV3RuVmloNHcwako1a1NMMFlaUzhhTnVOb2dI?=
- =?utf-8?B?Mm5qUCtSVzNpbVdRNzhkaWg4VGwrYjUwRDZNV3h1bldOb2hiKzRMTXIyQ3VK?=
- =?utf-8?B?SVpOaG5TakRpRzVwVGpTTDZjamxOMGMweTNuTndkMDdtc2ZnQW1BZ055M1RR?=
- =?utf-8?B?Ymc9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: b1fb3bba-97ca-4129-eebf-08dc798fd6a1
-X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6589.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 May 2024 12:16:27.9741 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: WJWr+9BAu3NZXGkDY18zN29XG/AiHjLUmo3pTtuCzCn/nvgeesWv7HpqGoB2Mh2Kiir1gI7midKAC+B0L71Vub9mlq8JIpEZR87WcutnrT4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB8364
+References: <20240405001722.2876240-1-tharvey@gateworks.com>
+ <CAC_iWjL7nHxq7Yio6XqenxrMwfVBC-VK3UCDLX=4oNQWvcfTBQ@mail.gmail.com>
+ <CAJ+vNU1H4GZ7Nq1MEcqWgSkZjPo9u-TDRVapLnn5Kq+3TyD-bA@mail.gmail.com>
+ <CAC_iWjKA-bA=i6bzsnAvwn+JqtywbD8xWsQtECRjeswHBtT3fw@mail.gmail.com>
+ <CAC_iWjJS+JhdDH8xPApna9ho8f4XxmTUGRZGZUEgt62xBcLRVQ@mail.gmail.com>
+ <CAJ+vNU0ncveyq8M7PfQQrMEUr0z-qE5G6CDki9ms_4Ves=8G9g@mail.gmail.com>
+ <CAC_iWj+Mm9is765HanRaMSc7Bntx9NrXu6uM2BdNT6PJcrdR5A@mail.gmail.com>
+ <CAJ+vNU04G1y68ZCaS7+SEAWqCx+WPL99HQu8FmyGYduMS1PZRw@mail.gmail.com>
+ <CAC_iWjJXsJFGQmzCqsArM50wvkDBR0HsCdMcYHW-ZjenhkWjCA@mail.gmail.com>
+ <CAC_iWjJeP9gP_xyRULGsvvXtq=Po8kLiSUspGKYZaNrVy506oA@mail.gmail.com>
+In-Reply-To: <CAC_iWjJeP9gP_xyRULGsvvXtq=Po8kLiSUspGKYZaNrVy506oA@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 21 May 2024 15:31:21 +0300
+Message-ID: <CAC_iWjJjprcdP++R2jJNakDhcjAQjoD=rJE0ODjUhEKzt-VrBw@mail.gmail.com>
+Subject: Re: [PATCH v3] tpm-v2: allow algoirthm name to be configured for
+ pcr_read and pcr_extend
+To: Tim Harvey <tharvey@gateworks.com>, Eddie James <eajames@linux.ibm.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -170,118 +95,233 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+Hi Tim,
 
-On 5/21/24 1:57 PM, Jonas Karlman <jonas@kwiboo.se> wrote:
-> Hi Quentin,
-> 
-> On 2024-05-21 11:53, Quentin Schulz wrote:
-> > Hi all,
+> > > > > > > > > >
+> > > > > > > > > > -const enum tpm2_algorithms tpm2_supported_algorithms[4] = {
+> > > > > > > > > > -       TPM2_ALG_SHA1,
+> > > > > > > > > > -       ,
+> > > > > > > > > > -       TPM2_ALG_SHA384,
+> > > > > > > > > > -       TPM2_ALG_SHA512,
+> > > > > > > > > > -};
+> > > > > >
+> > > > > > The current tpm2_algorithm_to_mask() operates on those values and bits
+> > > > > > shifts based on the enum. Since you remove the enum above, you must
+> > > > > > also change the function implementation and return
+> > > > > > hash_algo_list.hash_mask
+> > > > > >
+> > > > >
+> > > > > That's already taken care of as the calls to tpm2_algorithm_to_mask()
+> > > > > in my patch were adjusted from:
+> > > > > tpm2_algorithm_to_mask(tpm2_supported_algorithms[i])
+> > > > > to
+> > > > > tpm2_algorithm_to_mask(hash_algo_list[i].hash_alg)
+> > > > >
+> > > > > The hash_alg is the value from the previous enum.
+> > > >
+> > > > The previous enums were defining TPM2_ALG_SHA1=1, TPM2_ALG_SHA256=2 etc
+> > > > The current values are different. On top of that the .hash_mask  entry
+> > > > of digest_info is never used. So you need to change
+> > > > tpm2_algorithm_to_mask() and directly return the hash_mask
+> > > >
+> > >
+> > > Hi Ilias,
+> > >
+> > > Just getting back to this. I don't agree with your assessment.
+> > >
+> > > The previous enum:
+> > > -const enum tpm2_algorithms tpm2_supported_algorithms[4] = {
+> > > -       TPM2_ALG_SHA1,
+> > > -       TPM2_ALG_SHA256,
+> > > -       TPM2_ALG_SHA384,
+> > > -       TPM2_ALG_SHA512,
+> > > -};
+> > >
+> > > is defining 4 values which equate to 0x04, 0x0B, 0x0C, 0x0D (not 1, 2,
+> > > 3, 4 as you say) which is what I'm putting in the hash_alg field. The
+> > > tpm2_algorithm_to_mask macro shifts those values (not the index into
+> > > the enum).
+> > >
+> > > So with the current code:
+> > > for (i = 0; i < ARRAY_SIZE(tpm2_supported_algorithms); i++) {
+> > >         int alg = tpm2_supported_algorithms[i];
+> > >         printf("alg:0x%02x mask=0x%02x\n", alg, tpm2_algorithm_to_mask(alg));
+> > > }
+> > > alg:0x04 mask=0x10
+> > > alg:0x0b mask=0x800
+> > > alg:0x0c mask=0x1000
+> > > alg:0x0d mask=0x2000
+> > >
+> > > With this proposed patch:
+> > > for (i = 0; i < ARRAY_SIZE(hash_algo_list); i++) {
+> > >         int alg = hash_algo_list[i].hash_alg;
+> > >         printf("alg:0x%02x mask=0x%02x %s\n", alg,
+> > > tpm2_algorithm_to_mask(alg), tpm2_algorithm_name(alg));
+> > > }
+> > > alg:0x04 mask=0x10 sha1
+> > > alg:0x0b mask=0x800 sha256
+> > > alg:0x0c mask=0x1000 sha384
+> > > alg:0x0d mask=0x2000 sha512
+> > >
+> > > Am I misunderstanding something else you are pointing out?
+> > >
+> > > Maybe it would be easier to compare if I named the new struct
+> > > tpm2_supported_algorithms?
 > >
-> > On 5/20/24 6:06 PM, Tom Rini wrote:
-> >> Hey all,
-> >>
-> >> It's release day and here is -rc3. At this point, I think we're firmly
-> >> on "bug fix and documentation" ground moving forward for changes to
-> >> v2024.07 and the next branch is open and ready for use and pull
-> >> requests.
-> >>
-> >> In terms of a changelog,
-> >> git log --merges v2024.07-rc2..v2024.07-rc3
-> >> contains what I've pulled but as always, better PR messages and tags
-> >> will provide better results here.
-> >>
-> >> I hope to remain on schedule and that means the rest of the rcs every
-> >> other Monday, and with final release on Monday, July 1st, 2024. Thanks
-> >> all!
-> >>
+> > Ok, I think we are looking at a preexisting bug, because the prints
+> > above make no sense to me.
 > >
-> > Just to let you know that Rockchip PX30 support is broken since
-> > https://source.denx.de/u-boot/u-boot/-/commit/1d01440b3f14f6648cd672da619489f635cb209c
-> > (at the very least on Ringneck, haven't tested on PX30 Mini-EVB yet).
+> > There was an enum in the current code
+> > const enum tpm2_algorithms tpm2_supported_algorithms[4] = {
+> >        TPM2_ALG_SHA1,
+> >        TPM2_ALG_SHA256,
+> >        TPM2_ALG_SHA384,
+> >        TPM2_ALG_SHA512,
+> > }
+> > But those values are defined in include/tpm-v2.h hence the enum values
+> > were not starting from 0...
 > >
-> > U-Boot proper pre-reloc seems to be running out of memory and we cannot
-> > reach U-Boot CLI anymore.
+> > Reading at the TCG spec [0] we should be adding any of the values
+> > defined below to HashAlgorithmBitMap.
+> > #define EFI_TCG2_BOOT_HASH_ALG_SHA1 0x00000001
+> > #define EFI_TCG2_BOOT_HASH_ALG_SHA256 0x00000002
+> > #define EFI_TCG2_BOOT_HASH_ALG_SHA384 0x00000004
+> > #define EFI_TCG2_BOOT_HASH_ALG_SHA512 0x00000008
+> > #define EFI_TCG2_BOOT_HASH_ALG_SM3_256 0x00000010
 > >
-> > I hope I'll have time to look into this before v2024.07 is released but
-> > cannot promise anything.
-> 
-> On Rockchip platform all DRAM is available at U-Boot proper pre-reloc,
-> so there is no need to limit SYS_MALLOC_F_LEN to a small amount.
-> 
-> Ringneck seem to use 8 KiB for pre-reloc malloc() pool, please try with
-> a 64 KiB pool, same as rk3308/rk3328/rk3399/rk356x/rk3588 all now use.
-> 
->    CONFIG_SYS_MALLOC_F_LEN=0x10000
-> 
+> > We used to do that in v2023.01. The patch below is on top of 2023.01
+> >
+> > diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
+> > index a525ebf75b58..7371c9e94b5c 100644
+> > --- a/lib/efi_loader/efi_tcg2.c
+> > +++ b/lib/efi_loader/efi_tcg2.c
+> > @@ -1628,6 +1628,7 @@ static efi_status_t create_specid_event(struct
+> > udevice *dev, void *buffer,
+> >                 u16 hash_alg = hash_algo_list[i].hash_alg;
+> >                 u16 hash_len = hash_algo_list[i].hash_len;
+> >
+> > +               printf("Trying to add %08x and %08x\n", hash_alg,
+> > alg_to_mask(hash_alg));
+> >                 if (active & alg_to_mask(hash_alg)) {
+> >                         put_unaligned_le16(hash_alg,
+> >
+> > &spec_event->digest_sizes[alg_count].algorithm_id);
+> >
+> > prints
+> >
+> > Trying to add 00000004 and 00000001
+> > Trying to add 0000000b and 00000002
+> > Trying to add 0000000c and 00000004
+> > Trying to add 0000000d and 00000008
+> >
+> > The values of 0x00000001, 0x00000002 etc are what's added to the eventlog
+> >
+> > But since 97707f12fdabf we are putting different values (which I think
+> > is wrong and not what the spec expects....)
+> > I also think Eddie intended to make tpm2_supported_algorithms an enum
+> > that starts from 0, but the values he used were already defined and
+> > that's how we missed it ...
+> >
+> > Eddie any idea if that's what happened?
+> >
+> > Tim, we will need to fix all this regardless.  The fix should be
+> > relatively simple, just return the newly added values instead of the
+> > algorithm_to_mask value, when adding it on the eventlog.
+> > Can you take a look at the spec and verify what I am seeing? At some
+> > point, we also need to add the value checking in self-tests, rather
+> > than only looking at the EFI return code.
+>
+> Apologies for the noise, I wasn't remembering the spec properly.
+> The hash values are only supposed to be used on getting the capability
+> and active PCR banks.
+>
+> Let me read this patch again
 
-This made it work, thanks for the hint.
+Ok, I figured it out. The bug is indeed there, but it's while reading
+and interpreting the TPM capabilities, instead of writing those.
+What I wrote above is still relevant and I still think Eddie wanted to
+define the enum as 0,1,2, etc instead of the values that are there.
 
-> malloc() pool size used by TPL/SPL should still work:
-> 
->    CONFIG_TPL_SYS_MALLOC_F_LEN=0x600
->    CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000
-> 
-> Also check the "Early malloc usage" from bdinfo cmd, should show how
-> much memory was actually allocated at pre-reloc, from a rk3308 board:
-> 
->    Early malloc usage: 2060 / 10000
-> 
+A simple way to reproduce the bug is checkout v2023.01 and add this patch:
 
-"""
-=> bdinfo
-boot_params = 0x0000000000000000
-DRAM bank   = 0x0000000000000000
--> start    = 0x0000000000200000
--> size     = 0x000000007fe00000
-flashstart  = 0x0000000000000000
-flashsize   = 0x0000000000000000
-flashoffset = 0x0000000000000000
-baudrate    = 115200 bps
-relocaddr   = 0x000000007ff53000
-reloc off   = 0x000000007fd53000
-Build       = 64-bit
-current eth = ethernet@ff360000
-ethaddr     = f6:3c:b5:0d:0a:13
-IP addr     = <NULL>
-fdt_blob    = 0x000000007df43bd0
-new_fdt     = 0x000000007df43bd0
-fdt_size    = 0x000000000000c1e0
-lmb_dump_all:
- memory.cnt = 0x1 / max = 0x10
- memory[0]	[0x200000-0x7fffffff], 0x7fe00000 bytes flags: 0
- reserved.cnt = 0x1 / max = 0x10
- reserved[0]	[0x7df3f580-0x7fffffff], 0x020c0a80 bytes flags: 0
-devicetree  = separate
-serial addr = 0x00000000ff030000
- width      = 0x0000000000000004
- shift      = 0x0000000000000002
- offset     = 0x0000000000000000
- clock      = 0x00000000016e3600
-arch_number = 0x0000000000000000
-TLB addr    = 0x000000007fff0000
-irq_sp      = 0x000000007df43bc0
-sp start    = 0x000000007df43bc0
-Early malloc usage: 2250 / 10000
-"""
+diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
+index a525ebf75b58..b06dd47575d3 100644
+--- a/lib/efi_loader/efi_tcg2.c
++++ b/lib/efi_loader/efi_tcg2.c
+@@ -617,6 +617,7 @@ static int tpm2_get_pcr_info(struct udevice *dev,
+u32 *supported_pcr,
+        }
 
-The default on PX30 for SYS_MALLOC_F_LEN is 0x400 (both from arch/arm/mach-rockchip/px30/Kconfig and Kconfig).
+        *pcr_banks = pcrs.count;
++       printf("ACTIVE BANKS 0x%08x\n", *active_pcr);
 
-The default for SPL_SYS_MALLOC_F_LEN is SYS_MALLOC_F_LEN.
+        return 0;
+ out:
 
-The default for TPL_SYS_MALLOC_F_LEN is SPL_SYS_MALLOC_F_LEN.
+If you load u-boot and initialize the TPM (e.g do a printenv -e),
+you'll get prints looking like this:
+ACTIVE BANKS 0x00000003
+when sha1 and sha256 banks are enabled
 
-I suggest we change the default SYS_MALLOC_F_LEN to be 0x20000 then, on PX30.
+If you apply a similar patch to -master the print looks like this
+(which doesn't match the TCG spec)
+ACTIVE BANKS 0x00000810
 
-Since we have forced TPL support on PX30, we can keep SPL_SYS_MALLOC_F_LEN is SYS_MALLOC_F_LEN, because we necessarily have DRAM support in SPL so we are much less limited in allocation.
+Now I understand the bug is completely irrelevant to your patches, but
+I can't pick it up before we fix it properly.
+I can either send a fix here, but it will take me some time to find
+free cycles, or you can send it as a prerequisite for your patches.
+That new patch will use the new TCG2_BOOT_HASH_ALG_SHA1/XXX you added
+and fix the algorithm checking before adding any capabilites on the
+cmd line.
 
-Since all PX30 boards have 0x600 for TPL_SYS_MALLOC_F_LEN I suggest to make this the default as well?
+Let me know what you prefer
 
-Anything against this?
+Thanks
+/Ilias
 
-I'm also a bit confused as to why we need to specify the size of the allocation pool pre-relocation? Why is this important?
-
-Thanks a lot for the hint, I can now work on migrating PX30 to OF_UPSTREAM :)
-
-Cheers,
-Quentin
+>
+> Thanks
+> /Ilias
+> >
+> >
+> > [0] 6.4.3 Related Definitions
+> > https://trustedcomputinggroup.org/wp-content/uploads/EFI-Protocol-Specification-rev13-160330final.pdf
+> >
+> > Thanks
+> > /Ilias
+> >
+> >
+> >
+> > >
+> > > Best Regards,
+> > >
+> > > Tim
+> > >
+> > > > Cheers
+> > > > /Ilias
+> > > > >
+> > > > > Best Regards,
+> > > > >
+> > > > > Tim
+> > > > >
+> > > > > > Cheers
+> > > > > > /Ilias
+> > > > > >
+> > > > > >
+> > > > > >
+> > > > > > > > > > -
+> > > > > > > > > >  int tcg2_get_active_pcr_banks(struct udevice *dev, u32 *active_pcr_banks)
+> > > > > > > > > >  {
+> > > > > > > > > >         u32 supported = 0;
+> > > > > > > > > > @@ -82,14 +75,14 @@ int tcg2_create_digest(struct udevice *dev, const u8 *input, u32 length,
+> > > > > > > > > >                 return rc;
+> > > > > > > > > >
+> > > > > > > > > >         digest_list->count = 0;
+> > > > > > > > > > -       for (i = 0; i < ARRAY_SIZE(tpm2_supported_algorithms); ++i) {
+> > > > > > > > > > +       for (i = 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
+> > > > > > > > > >                 u32 mask =
+> > > > > > > > > > -                       tpm2_algorithm_to_mask(tpm2_supported_algorithms[i]);
+> > > > > > > > > > +                       tpm2_algorithm_to_mask(hash_algo_list[i].hash_alg);
+> > > > > > > > > >
+> > > > > > > > > >                 if (!(active & mask))
