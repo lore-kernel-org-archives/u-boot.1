@@ -4,65 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97110C25B75
-	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 10:49:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12CF7C25B75
+	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 10:50:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7965388744;
-	Tue, 21 May 2024 12:48:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 861528871D;
+	Tue, 21 May 2024 12:50:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1716288539;
-	bh=ZbrnzVTU16NW4E80fAMmkC+CKzAovrnqhSW8SbXj9jI=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=yHhGzRLJVk9Y2MjxuUaTJK0CFjbur+FWuRjbFoxAWoH28eDSbAPoUAc7ZV2o7gl+W
-	 oFwKS+1lfZ/IOmNGTSUmmY6Ljkla06AAsj7Kk5y50xMKJ2xf068hdMrNWrlKgr5pDU
-	 Qw2lfeJlt7pYF1oIUhYU3abys63896CQ8joQ1Xl3y8OHVIj2XWlwK6deSVfhpBGkKi
-	 FLfRNBHSNYp+Sr8rY4SjAlCUJHae+qgDrxc/nSZ3I0peyh1MVqMgOnui3sjHq+GeCG
-	 y0cQDRAVdqgOKT3/0e54hiLhNquF9CSw4HyvqzJ11NYwsKoQ4J6QnDR/RNzoMH46EI
-	 yIRCd2h3rB80Q==
+	s=phobos-20191101; t=1716288615;
+	bh=zK5QHlDPS88gYSHqx0uBB8UyIBu8GFIzUxPs6uz313Y=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=JmVi6KFt83kC9EH9TJ0d8ALuCcyiM/qpC7vLdQTuGFMRO2ke050KSyKRzEyH87m+C
+	 r/ini0dOIOemFPzRNwLRtMmuz3/CO8Nv1JHuefT0YCWVwHnzTH88ru9xQWM9/ez81F
+	 eW0GOTHGwoldSD8kvIwQDyIiq44LYio1jTipj2hyvwmaoADvTMBEJBQz192JfcuXmC
+	 vYr/hdLXovE+gOR+o0AOGVEyRnVsOei0P0X5kHTFRl+QFwlCkdzpm9u2qvDii1mVpg
+	 UeMLRF3MOWNZflU9e2c48MEMhPZ0BaQcaYd6d7av4zzLhPnkl45hw03h/AVgf/fszg
+	 /V9DRTa40GkWQ==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 4975E88738;
- Tue, 21 May 2024 12:48:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id CFA3387FBC;
+ Tue, 21 May 2024 12:50:12 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1716288536;
- bh=ZbrnzVTU16NW4E80fAMmkC+CKzAovrnqhSW8SbXj9jI=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=gXxoPwIfe3ttcfIlefCefdO1IO3WaKnWDW0x9MQTLhB9dNX5aqV5To1dc2ftZHy1G
- zRp0rDFPP1B2wHL62qP5EBi/xWkMTF7XSXwjg+G5fl5Uew5h9HK8ZFtYadzc4PmVxU
- 3A0u0ir4ljXXXesmQJsslCS1AsnqrWl+KtXs8dOxq3fOp/0k2oNKK/Hs0YjXKu8X+R
- GB9l8Vy70lL2Fi7lncjieZLezbViuX4iZdv7rZDh22GSpjS2Gj5DjktQynrADx99xk
- qaOVm6KcIKiDd+ylpfsa2eFr5gb+ZKXuEc4q/CorC52sHU1jULvPEKCLYK7DIQTpmv
- nK3u5uw6t/r9g==
+ s=phobos-20191101; t=1716288613;
+ bh=zK5QHlDPS88gYSHqx0uBB8UyIBu8GFIzUxPs6uz313Y=;
+ h=From:To:Cc:Subject:Date:From;
+ b=EOwbCazbF4xctvSZw/2q4NvoQywJByCQv2GDoAH7Fv1eTuNPfPG7ww7Ggbj8RoCgK
+ shWmIq0NLceG4v7SRnUWPIwXrlUvC05WWSFsaet9T5H+m5csTDqWuE2jtkypiEQBhl
+ C0K+ic2LnPfkvt1zawDl6FsWH133W3Ya1ks0cMLNu0rohAadMnwXmrKCQSR0LVhfZB
+ ivATewq8uFoj9n3GNd3mhDiIO7eHstzbcSiR4j83w5gDcOx2enR4imRkbUIwqVeNNJ
+ ZvGBlq5k5Bkjg/Q0kaAy8/HcmRRCn59T3JHnhjL0evB9SNaSnZ2/xFhBvQ+DDOMqBQ
+ wyjk3ztuaX2kw==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
-Cc: anton.gres@ifm.com, ch@denx.de, Marek Vasut <marex@denx.de>,
- Tim Harvey <tharvey@gateworks.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Adam Ford <aford173@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Angus Ainslie <angus@akkea.ca>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Fabio Estevam <festevam@gmail.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Simon Glass <sjg@chromium.org>,
- Stefan Eichenberger <stefan.eichenberger@toradex.com>,
- Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>,
- kernel@puri.sm, u-boot@dh-electronics.com
-Subject: [PATCH v4 4/4] imx: hab: Use nxp_imx8mcst etype for i.MX8M flash.bin
- signing
-Date: Tue, 21 May 2024 12:48:26 +0200
-Message-ID: <20240521104834.11295-4-marex@denx.de>
+Cc: Olaf Mandel <o.mandel@menlosystems.com>, Marek Vasut <marex@denx.de>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>
+Subject: [PATCH] ARM: imx: mx5: Simplify TFTP server layout on MX53 Menlo board
+Date: Tue, 21 May 2024 12:49:38 +0200
+Message-ID: <20240521105000.11376-1-marex@denx.de>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240521104834.11295-1-marex@denx.de>
-References: <20240521104834.11295-1-marex@denx.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -81,355 +65,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update documentation and use nxp_imx8mcst binman etype for signing
-of flash.bin instead of previous horrible shell scripting.
+From: Olaf Mandel <o.mandel@menlosystems.com>
 
-Reviewed-by: Tim Harvey <tharvey@gateworks.com>
+By removing the "boot" directory in the "m53menlo/boot/fitImage" path,
+we simplify the TFTP server directory layout a bit. This also requires a
+change to the mmcload command as it (mis-)uses the same variable as the
+TFTP boot.
+
+Signed-off-by: Olaf Mandel <o.mandel@menlosystems.com>
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
 Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: Adam Ford <aford173@gmail.com>
-Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Cc: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
-Cc: Angus Ainslie <angus@akkea.ca>
-Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 Cc: Fabio Estevam <festevam@gmail.com>
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
-Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Stefan Eichenberger <stefan.eichenberger@toradex.com>
 Cc: Stefano Babic <sbabic@denx.de>
-Cc: Tim Harvey <tharvey@gateworks.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: kernel@puri.sm
-Cc: u-boot@dh-electronics.com
 Cc: u-boot@lists.denx.de
 ---
-V2: Document the automatic signing in case CONFIG_IMX_HAB is enabled
-V3: Document configuration of imx8mcst
-V4: - Restore CST_DIR/CSF_KEY/IMG_KEY/SRK_TABLE use in documentation
-    - Add RB from Tim
----
- doc/imx/habv4/csf_examples/mx8m/csf.sh        |  92 --------------
- doc/imx/habv4/csf_examples/mx8m/csf_fit.txt   |  30 -----
- doc/imx/habv4/csf_examples/mx8m/csf_spl.txt   |  33 -----
- doc/imx/habv4/guides/mx8m_spl_secure_boot.txt | 114 ++++++------------
- 4 files changed, 34 insertions(+), 235 deletions(-)
- delete mode 100644 doc/imx/habv4/csf_examples/mx8m/csf.sh
- delete mode 100644 doc/imx/habv4/csf_examples/mx8m/csf_fit.txt
- delete mode 100644 doc/imx/habv4/csf_examples/mx8m/csf_spl.txt
+ configs/m53menlo_defconfig | 2 +-
+ include/configs/m53menlo.h | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/doc/imx/habv4/csf_examples/mx8m/csf.sh b/doc/imx/habv4/csf_examples/mx8m/csf.sh
-deleted file mode 100644
-index cd3b2614a2f..00000000000
---- a/doc/imx/habv4/csf_examples/mx8m/csf.sh
-+++ /dev/null
-@@ -1,92 +0,0 @@
--#!/bin/sh
--
--# 0) Generate keys
--#
--# WARNING: ECDSA keys are only supported by HAB 4.5 and newer (i.e. i.MX8M Plus)
--#
--# cd /path/to/cst-3.3.1/keys/
--#    ./hab4_pki_tree.sh -existing-ca n -use-ecc n -kl 4096 -duration 10 -num-srk 4 -srk-ca y
--# cd /path/to/cst-3.3.1/crts/
--#   ../linux64/bin/srktool -h 4 -t SRK_1_2_3_4_table.bin -e SRK_1_2_3_4_fuse.bin -d sha256 -c ./SRK1_sha256_4096_65537_v3_ca_crt.pem,./SRK2_sha256_4096_65537_v3_ca_crt.pem,./SRK3_sha256_4096_65537_v3_ca_crt.pem,./SRK4_sha256_4096_65537_v3_ca_crt.pem -f 1
--
--# 1) Build U-Boot (e.g. for i.MX8MM)
--#
--# cp -Lv /path/to/arm-trusted-firmware/build/imx8mm/release/bl31.bin .
--# cp -Lv /path/to/firmware-imx-8.14/firmware/ddr/synopsys/ddr3* .
--# make -j imx8mm_board_defconfig
--# make -j`nproc` flash.bin
--
--# 2) Sign SPL and DRAM blobs
--
--cp doc/imx/habv4/csf_examples/mx8m/csf_spl.txt csf_spl.tmp
--cp doc/imx/habv4/csf_examples/mx8m/csf_fit.txt csf_fit.tmp
--
--# update File Paths from env vars
--if ! [ -r $CSF_KEY ]; then
--	echo "Error: \$CSF_KEY not found"
--	exit 1
--fi
--if ! [ -r $IMG_KEY ]; then
--	echo "Error: \$IMG_KEY not found"
--	exit 1
--fi
--if ! [ -r $SRK_TABLE ]; then
--	echo "Error: \$SRK_TABLE not found"
--	exit 1
--fi
--sed -i "s:\$CSF_KEY:$CSF_KEY:" csf_spl.tmp
--sed -i "s:\$IMG_KEY:$IMG_KEY:" csf_spl.tmp
--sed -i "s:\$SRK_TABLE:$SRK_TABLE:" csf_spl.tmp
--sed -i "s:\$CSF_KEY:$CSF_KEY:" csf_fit.tmp
--sed -i "s:\$IMG_KEY:$IMG_KEY:" csf_fit.tmp
--sed -i "s:\$SRK_TABLE:$SRK_TABLE:" csf_fit.tmp
--
--# update SPL Blocks
--spl_block_base=$(printf "0x%x" $(( $(sed -n "/CONFIG_SPL_TEXT_BASE=/ s@.*=@@p" .config) - 0x40)) )
--spl_block_size=$(printf "0x%x" $(stat -tc %s u-boot-spl-ddr.bin))
--sed -i "/Blocks = / s@.*@  Blocks = $spl_block_base 0x0 $spl_block_size \"flash.bin\"@" csf_spl.tmp
--
--# Generate CSF blob
--cst -i csf_spl.tmp -o csf_spl.bin
--
--# Patch CSF blob into flash.bin
--spl_csf_offset=$(xxd -s 24 -l 4 -e flash.bin | cut -d " " -f 2 | sed "s@^@0x@")
--spl_bin_offset=$(xxd -s 4 -l 4 -e flash.bin | cut -d " " -f 2 | sed "s@^@0x@")
--spl_dd_offset=$((${spl_csf_offset} - ${spl_bin_offset} + 0x40))
--dd if=csf_spl.bin of=flash.bin bs=1 seek=${spl_dd_offset} conv=notrunc
--
--# 3) Sign u-boot.itb
--
--# fitImage
--fit_block_base=$(printf "0x%x" $(sed -n "/CONFIG_SPL_LOAD_FIT_ADDRESS=/ s@.*=@@p" .config) )
--fit_block_offset=$(printf "0x%s" $(fdtget -t x u-boot.dtb /binman/imx-boot/uboot offset))
--fit_block_size=$(printf "0x%x" $(( ( ( $(stat -tc %s u-boot.itb) + 0x1000 - 0x1 ) & ~(0x1000 - 0x1)) + 0x20 )) )
--sed -i "/Blocks = / s@.*@  Blocks = $fit_block_base $fit_block_offset $fit_block_size \"flash.bin\"@" csf_fit.tmp
--
--# IVT
--ivt_ptr_base=$(printf "%08x" ${fit_block_base} | sed "s@\(..\)\(..\)\(..\)\(..\)@0x\4\3\2\1@")
--ivt_block_base=$(printf "%08x" $(( ${fit_block_base} + ${fit_block_size} - 0x20 )) | sed "s@\(..\)\(..\)\(..\)\(..\)@0x\4\3\2\1@")
--csf_block_base=$(printf "%08x" $(( ${fit_block_base} + ${fit_block_size} )) | sed "s@\(..\)\(..\)\(..\)\(..\)@0x\4\3\2\1@")
--ivt_block_offset=$((${fit_block_offset} + ${fit_block_size} - 0x20))
--csf_block_offset=$((${ivt_block_offset} + 0x20))
--
--echo "0xd1002041 ${ivt_block_base} 0x00000000 0x00000000 0x00000000 ${ivt_block_base} ${csf_block_base} 0x00000000" | xxd -r -p > ivt.bin
--dd if=ivt.bin of=flash.bin bs=1 seek=${ivt_block_offset} conv=notrunc
--
--# Generate CSF blob
--cst -i csf_fit.tmp -o csf_fit.bin
--
--# When loading flash.bin via USB, we must ensure that the file being
--# served is as large as the target expects (see
--# board_spl_fit_size_align()), otherwise the target will hang in
--# rom_api_download_image() waiting for the remaining bytes.
--#
--# Note that in order for dd to actually extend the file, one must not
--# pass conv=notrunc here. With a non-zero seek= argument, dd is
--# documented to preserve the contents of the file seeked past; in
--# particular, dd does not open the file with O_TRUNC.
--CSF_SIZE=$(sed -n "/CONFIG_CSF_SIZE=/ s@.*=@@p" .config)
--dd if=/dev/null of=csf_fit.bin bs=1 seek=$((CSF_SIZE - 0x20)) count=0
--
--# Patch CSF blob into flash.bin
--dd if=csf_fit.bin of=flash.bin bs=1 seek=${csf_block_offset} conv=notrunc
-diff --git a/doc/imx/habv4/csf_examples/mx8m/csf_fit.txt b/doc/imx/habv4/csf_examples/mx8m/csf_fit.txt
-deleted file mode 100644
-index 97f3eea573b..00000000000
---- a/doc/imx/habv4/csf_examples/mx8m/csf_fit.txt
-+++ /dev/null
-@@ -1,30 +0,0 @@
--[Header]
--  Version = 4.3
--  Hash Algorithm = sha256
--  Engine = CAAM
--  Engine Configuration = 0
--  Certificate Format = X509
--  Signature Format = CMS
--
--[Install SRK]
--  # SRK_TABLE is full path to SRK_1_2_3_4_table.bin
--  File = "$SRK_TABLE"
--  Source index = 0
--
--[Install CSFK]
--  # CSF_KEY is full path to CSF1_1_sha256_4096_65537_v3_usr_crt.pem
--  File = "$CSF_KEY"
--
--[Authenticate CSF]
--
--[Install Key]
--  Verification index = 0
--  Target Index = 2
--  # IMG_KEY is full path to IMG1_1_sha256_4096_65537_v3_usr_crt.pem
--  File = "$IMG_KEY"
--
--[Authenticate Data]
--  Verification index = 2
--  # FIXME:
--  # Line 1 -- fitImage
--  Blocks = CONFIG_SPL_LOAD_FIT_ADDRESS 0x57c00 0xffff "flash.bin"
-diff --git a/doc/imx/habv4/csf_examples/mx8m/csf_spl.txt b/doc/imx/habv4/csf_examples/mx8m/csf_spl.txt
-deleted file mode 100644
-index 88fa420a5fa..00000000000
---- a/doc/imx/habv4/csf_examples/mx8m/csf_spl.txt
-+++ /dev/null
-@@ -1,33 +0,0 @@
--[Header]
--  Version = 4.3
--  Hash Algorithm = sha256
--  Engine = CAAM
--  Engine Configuration = 0
--  Certificate Format = X509
--  Signature Format = CMS
--
--[Install SRK]
--  # SRK_TABLE is full path to SRK_1_2_3_4_table.bin
--  File = "$SRK_TABLE"
--  Source index = 0
--
--[Install CSFK]
--  # CSF_KEY is full path to CSF1_1_sha256_4096_65537_v3_usr_crt.pem
--  File = "$CSF_KEY"
--
--[Authenticate CSF]
--
--[Unlock]
--  Engine = CAAM
--  Features = MID
--
--[Install Key]
--  Verification index = 0
--  Target Index = 2
--  # IMG_KEY is full path to IMG1_1_sha256_4096_65537_v3_usr_crt.pem
--  File = "$IMG_KEY"
--
--[Authenticate Data]
--  Verification index = 2
--  # FIXME: Adjust start (first column) and size (third column) here
--  Blocks = 0x7e0fc0 0x0 0x306f0 "flash.bin"
-diff --git a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-index e16e5410bd9..257ffb45656 100644
---- a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-+++ b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-@@ -121,6 +121,9 @@ build configuration:
- - Defconfig:
- 
-   CONFIG_IMX_HAB=y
-+  CONFIG_FSL_CAAM=y
-+  CONFIG_ARCH_MISC_INIT=y
-+  CONFIG_SPL_CRYPTO=y
- 
- - Kconfig:
- 
-@@ -131,91 +134,42 @@ build configuration:
- 
- The CSF contains all the commands that the HAB executes during the secure
- boot. These commands instruct the HAB code on which memory areas of the image
--to authenticate, which keys to install, use and etc.
--
--CSF examples are available under doc/imx/habv4/csf_examples/ directory.
--
--CSF "Blocks" line for csf_spl.txt can be generated as follows:
--
--```
--spl_block_base=$(printf "0x%x" $(( $(sed -n "/CONFIG_SPL_TEXT_BASE=/ s@.*=@@p" .config) - 0x40)) )
--spl_block_size=$(printf "0x%x" $(stat -tc %s u-boot-spl-ddr.bin))
--sed -i "/Blocks = / s@.*@  Blocks = $spl_block_base 0x0 $spl_block_size \"flash.bin\"@" csf_spl.txt
--```
--
--The resulting line looks as follows:
--```
--  Blocks = 0x7e0fc0 0x0 0x306f0 "flash.bin"
--```
--
--The columns mean:
--  - CONFIG_SPL_TEXT_BASE - 0x40 -- Start address of signed data, in DRAM
--  - 0x0 -- Start address of signed data, in "flash.bin"
--  - 0x306f0 -- Length of signed data, in "flash.bin"
--  - Filename -- "flash.bin"
--
--To generate signature for the SPL part of flash.bin container, use CST:
--```
--cst -i csf_spl.tmp -o csf_spl.bin
--```
--
--The newly generated CST blob has to be patched into existing flash.bin
--container. Conveniently, flash.bin IVT contains physical address of the
--CSF blob. Remember, the SPL part of flash.bin container is loaded by the
--BootROM at CONFIG_SPL_TEXT_BASE - 0x40 , so the offset of CSF blob in
--the fitImage can be calculated and inserted into the flash.bin in the
--correct location as follows:
--```
--# offset = IVT_HEADER[6 = CSF address] - CONFIG_SPL_TEXT_BASE - 0x40
--spl_csf_offset=$(xxd -s 24 -l 4 -e flash.bin | cut -d " " -f 2 | sed "s@^@0x@")
--spl_bin_offset=$(xxd -s 4 -l 4 -e flash.bin | cut -d " " -f 2 | sed "s@^@0x@")
--spl_dd_offset=$((${spl_csf_offset} - ${spl_bin_offset} + 0x40))
--dd if=csf_spl.bin of=flash.bin bs=1 seek=${spl_dd_offset} conv=notrunc
--```
--
--CSF "Blocks" line for csf_fit.txt can be generated as follows:
--```
--# fitImage
--fit_block_base=$(printf "0x%x" $(sed -n "/CONFIG_SPL_LOAD_FIT_ADDRESS=/ s@.*=@@p" .config) )
--fit_block_offset=$(printf "0x%s" $(fdtget -t x u-boot.dtb /binman/imx-boot/uboot offset))
--fit_block_size=$(printf "0x%x" $(( ( ( $(stat -tc %s u-boot.itb) + 0x1000 - 0x1 ) & ~(0x1000 - 0x1)) + 0x20 )) )
--sed -i "/Blocks = / s@.*@  Blocks = $fit_block_base $fit_block_offset $fit_block_size \"flash.bin\"@" csf_fit.tmp
--```
--
--The fitImage part of flash.bin requires separate IVT. Generate the IVT and
--patch it into the correct aligned location of flash.bin as follows:
--```
--# IVT
--ivt_ptr_base=$(printf "%08x" ${fit_block_base} | sed "s@\(..\)\(..\)\(..\)\(..\)@0x\4\3\2\1@")
--ivt_block_base=$(printf "%08x" $(( ${fit_block_base} + ${fit_block_size} - 0x20 )) | sed "s@\(..\)\(..\)\(..\)\(..\)@0x\4\3\2\1@")
--csf_block_base=$(printf "%08x" $(( ${fit_block_base} + ${fit_block_size} )) | sed "s@\(..\)\(..\)\(..\)\(..\)@0x\4\3\2\1@")
--ivt_block_offset=$((${fit_block_offset} + ${fit_block_size} - 0x20))
--csf_block_offset=$((${ivt_block_offset} + 0x20))
--
--echo "0xd1002041 ${ivt_block_base} 0x00000000 0x00000000 0x00000000 ${ivt_block_base} ${csf_block_base} 0x00000000" | xxd -r -p > ivt.bin
--dd if=ivt.bin of=flash.bin bs=1 seek=${ivt_block_offset} conv=notrunc
--```
--
--To generate CSF signature for the fitImage part of flash.bin container, use CST:
--```
--cst -i csf_fit.tmp -o csf_fit.bin
--```
--
--Finally, patch the CSF signature into the fitImage right past the IVT:
--```
--dd if=csf_fit.bin of=flash.bin bs=1 seek=${csf_block_offset} conv=notrunc
--```
--
--The entire script is available in doc/imx/habv4/csf_examples/mx8m/csf.sh
--and can be used as follows to modify flash.bin to be signed
--(adjust paths as needed):
-+to authenticate, which keys to install, use and etc. The CSF is generated
-+using the CST Code Signing Tool based on input configuration file. This tool
-+input configuration file is generated using binman, and the tool is invoked
-+from binman as well.
-+
-+The SPL and fitImage sections of the generated image are signed separately.
-+The signing is activated by wrapping SPL and fitImage sections into nxp-imx8mcst
-+etype, which is done automatically in arch/arm/dts/imx8m{m,n,p,q}-u-boot.dtsi
-+in case CONFIG_IMX_HAB Kconfig symbol is enabled.
-+
-+Build of flash.bin target then produces a signed flash.bin automatically.
-+
-+The nxp-imx8mcst etype is configurable using either DT properties or environment
-+variables. The following DT properties and environment variables are supported.
-+Note that environment variables override DT properties.
-+
-++--------------------+-----------+------------------------------------------------------------------+
-+| DT property        | Variable  | Description                                                      |
-++====================+===========+==================================================================+
-+| nxp,loader-address |           | SPL base address                                                 |
-++--------------------+-----------+------------------------------------------------------------------+
-+| nxp,srk-table      | SRK_TABLE | full path to SRK_1_2_3_4_table.bin                               |
-++--------------------+-----------+------------------------------------------------------------------+
-+| nxp,csf-crt        | CSF_KEY   | full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem |
-++--------------------+-----------+------------------------------------------------------------------+
-+| nxp,img-crt        | IMG_KEY   | full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem |
-++--------------------+-----------+------------------------------------------------------------------+
-+
-+Environment variables can be set as follows to point the build process
-+to external key material:
- ```
- export CST_DIR=/usr/src/cst-3.3.1/
- export CSF_KEY=$CST_DIR/crts/CSF1_1_sha256_4096_65537_v3_usr_crt.pem
- export IMG_KEY=$CST_DIR/crts/IMG1_1_sha256_4096_65537_v3_usr_crt.pem
- export SRK_TABLE=$CST_DIR/crts/SRK_1_2_3_4_table.bin
--export PATH=$CST_DIR/linux64/bin:$PATH
--/bin/sh doc/imx/habv4/csf_examples/mx8m/csf.sh
-+make flash.bin
- ```
- 
- 1.4 Closing the device
+diff --git a/configs/m53menlo_defconfig b/configs/m53menlo_defconfig
+index 7c3f0dc1525..b06a614dde0 100644
+--- a/configs/m53menlo_defconfig
++++ b/configs/m53menlo_defconfig
+@@ -71,7 +71,7 @@ CONFIG_ENV_RANGE=0x80000
+ CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="boot/fitImage"
++CONFIG_BOOTFILE="fitImage"
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="FEC0"
+ CONFIG_USE_HOSTNAME=y
+diff --git a/include/configs/m53menlo.h b/include/configs/m53menlo.h
+index 1ecbba1b58f..9cf46b2c362 100644
+--- a/include/configs/m53menlo.h
++++ b/include/configs/m53menlo.h
+@@ -119,7 +119,7 @@
+ 	"addargs=run addcons addmisc addmtd\0"				\
+ 	"mmcload="							\
+ 		"mmc rescan || reset ; load mmc ${mmcdev}:${mmcpart} "	\
+-		"${kernel_addr_r} ${bootfile} || reset\0"		\
++		"${kernel_addr_r} boot/${bootfile} || reset\0"		\
+ 	"miscargs=nohlt panic=1\0"					\
+ 	"mmcargs=setenv bootargs root=/dev/mmcblk0p${mmcpart} rw "	\
+ 		"rootwait\0"						\
 -- 
 2.43.0
 
