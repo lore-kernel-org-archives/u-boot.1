@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C900C25B77
-	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 02:06:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A84CC25B77
+	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 02:31:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90807882DF;
-	Tue, 21 May 2024 04:06:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 32E94882DF;
+	Tue, 21 May 2024 04:31:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nQ/k0M6X";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Jrlw95xL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52B2187F7D; Tue, 21 May 2024 04:06:37 +0200 (CEST)
+ id D069388306; Tue, 21 May 2024 04:31:54 +0200 (CEST)
 Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
  [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C176882DF
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 04:06:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 90D3088027
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 04:31:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jcmvbkbc@gmail.com
 Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-1f0937479f8so90934715ad.3
- for <u-boot@lists.denx.de>; Mon, 20 May 2024 19:06:35 -0700 (PDT)
+ d9443c01a7336-1eecc71311eso94999075ad.3
+ for <u-boot@lists.denx.de>; Mon, 20 May 2024 19:31:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716257194; x=1716861994; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1716258711; x=1716863511; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LxcANeXuPmFqAmW02kqkJoUtHE29r1288KRizZqVabU=;
- b=nQ/k0M6XpYOKD49P5G3KAHC/1poONdanvKszm/fZQrtOBGLXX/WQQOnkEZUHAh61IQ
- cKJ4WrCGs3QnI51/gsh0M75kGKjzPL5Ye6/XdWjZdhW/KgtulfFk5Jg4FA4xlx834Sf+
- HyF3/WCWT5tmOS8jxGykqqmpYHMYQM2CAhAJSbv4LwoZuzjkC6/hGXqVgV42MwLBPq6p
- GD9H515IPxESYj5HcMSr+0TMyqkvBYMn3ZafPJT1GiMqyUaxRMMnf9bF9w+mh+gx3X2z
- 0rZLtVpF9WnGxHcalGEupK2snntjhuM91BYhPWPXEyK7qi1zdEvMXpyIsIsOkmBfjhEO
- uNOw==
+ bh=WjtvgQjVoGBFzQe3NlBH1WsS5ONTHZ8zstlnVBxx7+g=;
+ b=Jrlw95xLmj9vphtJ6cKRb05Xxf1AgPMyYM4z/iJCw7XPD5zkgYfdmA5kDUETD8iBkl
+ eIU6Yd49W8YLtrDzbbR58qbVvsEXgw92TjglBmrwuGT9iq+mMDrZt7ftTn5WS4C+nQ5S
+ QI9iOV/ogMEt6bDRVVDmSxxZivQ9SdGyYrHGPU/3vYXfpjYkdBNpH4Y8giZoz3jH6vS3
+ bIokWXDO65pPfGpIKUm7KLiuYjJiUzA/M2+d6D3il5K3WCRSX5DX9eWS3gJGtaAK7yGC
+ Ho+glkpx0nwqs7mnJE1JMX84PqDNzCrHWVg188KMYoLOW2GvnIE2YLuozqqknYy9GoPo
+ r7ZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716257194; x=1716861994;
+ d=1e100.net; s=20230601; t=1716258711; x=1716863511;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LxcANeXuPmFqAmW02kqkJoUtHE29r1288KRizZqVabU=;
- b=xHZ0pOItpQUkjbo3WPFvh1Eqb1UKhRweautTQcTeHRQMG5D7I4KxVMfMi818fEck+G
- YXLG7XinifGpOMH+HbtCUQkXUONdPxy8Q24XzYQMO4/26gcY9nPoFDBNnnwZAJAIF6kt
- vYLdryugI3obCKZm5/WnftTpxFik8tQIXOdOv8ijyLAohiR4eX54InBzxhegQBzcnU6N
- P2BSAoCrwEWvWD5cbBH5eo+fBy/qFT9jyWS/Ntk8/qdCm5yCeOQPu9xLijgpptf5avfA
- dTu9TLu6kwclGYJ/prSthndkzi5hHZtatbwlasX09GrODCnC3Q0OdfHYMV1BXwJPuuUi
- QO9A==
-X-Gm-Message-State: AOJu0Ywc5m1kIJbC4Wrap8rKdkSstYTE3YH09AXcLjp0nO+c1TgYhNV8
- LfyY+zl6SYuyOmleGwSjHv2KPaDP6toBm2BhVUYHbhn06ZFp2f2PGqSZ73ied4+pbsmIvTfDnHT
- ZjwmDIopEap8CCLCasrE0cLThsbY=
-X-Google-Smtp-Source: AGHT+IFDmQY7u06PihXp5cMVIKi0p+E2txA5DWB4jJ75J9GBVpqMe0IC6JrJFjO01YRyH1n0I4X11757RHxub7oRIYM=
-X-Received: by 2002:a17:90a:77c6:b0:2b8:ff5f:32df with SMTP id
- 98e67ed59e1d1-2b8ff5f33aamr23505135a91.34.1716257193640; Mon, 20 May 2024
- 19:06:33 -0700 (PDT)
+ bh=WjtvgQjVoGBFzQe3NlBH1WsS5ONTHZ8zstlnVBxx7+g=;
+ b=nelkbY1Wek1OAzR95KeL1fOYlABn1MaWOxmxb9ODdlw9huiIK/6Qe+kiolu/Gwwiq+
+ xq5y3pWcSmjdug2TfQQz/YhZq0fB/ZbvHProdDgGa+j82VlS3G0p9z7IAybVbLChPRty
+ lcFLiA9gh+Jfu4wtJ2yoe6PDBBYDg4lfUvAgvcvY6OcUpXlXeLZmRe1fseZ+gaPcBAvt
+ RTl5tlCBdJYWkHwKKj0yBJ/SeRZdCXdG7d3i82HHymtcO0S7Tw/J7eA+BBBTDbPXQvnL
+ fH7+aYfKG5kZsyzpYZOnBqylGB+j6PIswV4fuBlra8U8pebFnDZaWwwe/+0b4hzO1gD7
+ 8QFw==
+X-Gm-Message-State: AOJu0Yw6npVKm6EgZT4gljf0SZV2ifOse1YrBgBbBh6BXvdB/DkDtA23
+ AQ1TxALYofGuDVdtTV9YMdnn7kj0FuRTbjzDpVZ1fsFvXduu0Oojp/BtUYeOyd6agG1fstkmbQ1
+ WNeUr1uP++RuNPhwHPfKmLNBjW+8=
+X-Google-Smtp-Source: AGHT+IH9Xovi+EX07LWb8VJhb5mK/mYRUsPoWXNK/MAfmMi1I+DxTSZFA91o0pHf+B+gKdTujrCcPgbhkNQLnPxWxdI=
+X-Received: by 2002:a05:6a20:971a:b0:1a7:5780:1f4b with SMTP id
+ adf61e73a8af0-1afde0bc489mr35652914637.24.1716258710990; Mon, 20 May 2024
+ 19:31:50 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240519-qemu-xtensa-v1-0-8fff0cb11c19@flygoat.com>
- <20240519-qemu-xtensa-v1-5-8fff0cb11c19@flygoat.com>
-In-Reply-To: <20240519-qemu-xtensa-v1-5-8fff0cb11c19@flygoat.com>
+ <20240519-qemu-xtensa-v1-6-8fff0cb11c19@flygoat.com>
+In-Reply-To: <20240519-qemu-xtensa-v1-6-8fff0cb11c19@flygoat.com>
 From: Max Filippov <jcmvbkbc@gmail.com>
-Date: Mon, 20 May 2024 19:06:22 -0700
-Message-ID: <CAMo8BfJJfK9k5SQOcYzcWELyH=BGOb6Vqa8CLPaCNdUk3Qe_nQ@mail.gmail.com>
-Subject: Re: [PATCH 05/10] xtensa: Bring in semihosting headers and config
- options
+Date: Mon, 20 May 2024 19:31:40 -0700
+Message-ID: <CAMo8Bf+HoyoDiKBVDkWeB=NLVO2zuYWbquk+2rp3znsUEor6pw@mail.gmail.com>
+Subject: Re: [PATCH 06/10] drivers: serial: Add xtensa semihosting driver
 To: Jiaxun Yang <jiaxun.yang@flygoat.com>
 Cc: u-boot@lists.denx.de, Sean Anderson <sean.anderson@seco.com>, 
  Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>
@@ -93,18 +92,192 @@ X-Virus-Status: Clean
 On Sun, May 19, 2024 at 1:53=E2=80=AFPM Jiaxun Yang <jiaxun.yang@flygoat.co=
 m> wrote:
 >
-> They are all directly imported from Linux kernel.
+> Add xtensa semihosting driver.
 >
+> It can't use regular semihosting driver as Xtensa's has it's own
+> semihosting ABI.
+>
+> Note that semihosting supports puts in serial but I never managed to
+> get it work, so it's putc only for now.
+
+I wonder, what were the issues that you experienced?
+
 > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 > ---
->  arch/xtensa/Kconfig                              |  27 ++++++
->  arch/xtensa/include/asm/platform/simcall-gdbio.h |  34 +++++++
->  arch/xtensa/include/asm/platform/simcall-iss.h   |  73 +++++++++++++++
->  arch/xtensa/include/asm/platform/simcall.h       | 110 +++++++++++++++++=
+>  drivers/serial/Kconfig                     | 18 ++++++-
+>  drivers/serial/Makefile                    |  1 +
+>  drivers/serial/serial_xtensa_semihosting.c | 79 ++++++++++++++++++++++++=
 ++++++
->  4 files changed, 244 insertions(+)
+>  3 files changed, 97 insertions(+), 1 deletion(-)
+>
+> diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+> index 1fe4607598eb..3a1e5a6f2877 100644
+> --- a/drivers/serial/Kconfig
+> +++ b/drivers/serial/Kconfig
+> @@ -501,6 +501,15 @@ config DEBUG_UART_MT7620
+>           driver will be available until the real driver model serial is
+>           running.
+>
+> +config DEBUG_UART_XTENSA_SEMIHOSTING
+> +       bool "Xtensa semihosting"
+> +       depends on XTENSA_SEMIHOSTING_SERIAL
+> +       help
+> +         Select this to enable the debug UART using the Xtensa semihosti=
+ng driver.
+> +         This provides basic serial output from the console without need=
+ing to
+> +         start up driver model. The driver will be available until the r=
+eal
+> +         driver model serial is running.
+> +
+>  endchoice
+>
+>  config DEBUG_UART_BASE
+> @@ -936,7 +945,6 @@ config SH_SCIF_CLK_FREQ
+>  config SEMIHOSTING_SERIAL
+>         bool "Semihosting UART support"
+>         depends on SEMIHOSTING && !SERIAL_RX_BUFFER
+> -       imply SERIAL_PUTS
+>         help
+>           Select this to enable a serial UART using semihosting. Special =
+halt
+>           instructions will be issued which an external debugger (such as=
+ a
+> @@ -1115,6 +1123,14 @@ config XEN_SERIAL
+>           If built without DM support, then requires Xen
+>           to be built with CONFIG_VERBOSE_DEBUG.
+>
+> +config XTENSA_SEMIHOSTING_SERIAL
+> +       bool "Xtensa Semihosting UART support"
+> +       depends on DM_SERIAL
+> +       depends on XTENSA_SEMIHOSTING
+> +       imply SERIAL_PUTS
+> +       help
+> +         Select this to enable a serial UART using Xtensa semihosting.
+> +
+>  choice
+>         prompt "Console port"
+>         default 8xx_CONS_SMC1
+> diff --git a/drivers/serial/Makefile b/drivers/serial/Makefile
+> index dbe598b74064..78810f98367c 100644
+> --- a/drivers/serial/Makefile
+> +++ b/drivers/serial/Makefile
+> @@ -60,6 +60,7 @@ obj-$(CONFIG_MT7620_SERIAL) +=3D serial_mt7620.o
+>  obj-$(CONFIG_HTIF_CONSOLE) +=3D serial_htif.o
+>  obj-$(CONFIG_SIFIVE_SERIAL) +=3D serial_sifive.o
+>  obj-$(CONFIG_XEN_SERIAL) +=3D serial_xen.o
+> +obj-$(CONFIG_XTENSA_SEMIHOSTING_SERIAL) +=3D serial_xtensa_semihosting.o
+>  obj-$(CONFIG_S5P4418_PL011_SERIAL) +=3D serial_s5p4418_pl011.o
+>
+>  ifndef CONFIG_SPL_BUILD
+> diff --git a/drivers/serial/serial_xtensa_semihosting.c b/drivers/serial/=
+serial_xtensa_semihosting.c
+> new file mode 100644
+> index 000000000000..1bf3c18537e7
+> --- /dev/null
+> +++ b/drivers/serial/serial_xtensa_semihosting.c
+> @@ -0,0 +1,79 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
+> + */
+> +
+> +#include <dm.h>
+> +#include <malloc.h>
+> +#include <serial.h>
+> +
+> +#include <asm/platform/simcall.h>
+> +
+> +/**
+> + * struct simc_serial_priv - Semihosting serial private data
+> + * @counter: Counter used to fake pending every other call
+> + */
+> +struct simc_serial_priv {
+> +       unsigned int counter;
+> +};
+> +
+> +static int simc_serial_getc(struct udevice *dev)
+> +{
+> +       char ch =3D 0;
+> +
+> +       simc_read(0, &ch, sizeof(ch));
+> +
+> +       return ch;
+> +}
+> +
+> +static int simc_serial_putc(struct udevice *dev, const char ch)
+> +{
+> +       char str[2] =3D {0};
 
-Reviewed-by: Max Filippov <jcmvbkbc@gmail.com>
+Why does it need to be an array if only the first element is ever used?
+
+> +
+> +       str[0] =3D ch;
+> +       simc_write(1, str, 1);
+> +
+> +       return 0;
+> +}
+> +
+> +static int simc_serial_pending(struct udevice *dev, bool input)
+> +{
+> +       struct simc_serial_priv *priv =3D dev_get_priv(dev);
+> +
+> +       if (input)
+> +               return priv->counter++ & 1;
+
+This can result in blocking the whole CPU thread of the emulator when
+used with simcall-based semihosting and there's no input actually available=
+.
+Not sure how it would behave with the gdbio. I think something like
+the following:
+
+if (input) {
+    int res =3D simc_poll(0);
+    return res < 0 ? priv->counter++ & 1 : res;
+}
+
+could be used here to avoid that.
+
+> +       return false;
+> +}
+> +
+> +static const struct dm_serial_ops simc_serial_ops =3D {
+> +       .putc =3D simc_serial_putc,
+> +       .getc =3D simc_serial_getc,
+> +       .pending =3D simc_serial_pending,
+> +};
+> +
+> +U_BOOT_DRIVER(simc_serial) =3D {
+> +       .name   =3D "serial_xtensa_semihosting",
+> +       .id     =3D UCLASS_SERIAL,
+> +       .priv_auto =3D sizeof(struct simc_serial_priv),
+> +       .ops    =3D &simc_serial_ops,
+> +       .flags  =3D DM_FLAG_PRE_RELOC,
+> +};
+> +
+> +U_BOOT_DRVINFO(simc_serial) =3D {
+> +       .name =3D "serial_xtensa_semihosting",
+> +};
+> +
+> +#if CONFIG_IS_ENABLED(DEBUG_UART_XTENSA_SEMIHOSTING)
+> +#include <debug_uart.h>
+> +
+> +static inline void _debug_uart_init(void)
+> +{
+> +}
+> +
+> +static inline void _debug_uart_putc(int c)
+> +{
+> +       simc_serial_putc(NULL, c);
+> +}
+> +
+> +DEBUG_UART_FUNCS
+> +#endif
+>
+> --
+> 2.43.0
+>
+
 
 --=20
 Thanks.
