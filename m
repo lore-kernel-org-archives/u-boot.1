@@ -4,38 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BB01C25B74
-	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 17:40:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F9C2C25B74
+	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 17:41:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88A33887DA;
+	by phobos.denx.de (Postfix) with ESMTP id F005888778;
 	Tue, 21 May 2024 19:40:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9081F88778; Tue, 21 May 2024 19:40:13 +0200 (CEST)
-Received: from smtp-42a9.mail.infomaniak.ch (smtp-42a9.mail.infomaniak.ch
- [84.16.66.169])
+ id 41BC1887C6; Tue, 21 May 2024 19:40:14 +0200 (CEST)
+Received: from smtp-8fae.mail.infomaniak.ch (smtp-8fae.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::8fae])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9ED0288313
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 19:40:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5624088373
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 19:40:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
  [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4VkMCH271hzCbV;
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4VkMCH6cxKzXB;
  Tue, 21 May 2024 19:40:11 +0200 (CEST)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4VkMCG5X2rz84H; Tue, 21 May 2024 19:40:10 +0200 (CEST)
+ id 4VkMCH20sYz89H; Tue, 21 May 2024 19:40:11 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Tue, 21 May 2024 19:39:57 +0200
-Subject: [PATCH 04/10] rockchip: evb-px30: Use common bss and stack addresses
+Date: Tue, 21 May 2024 19:39:58 +0200
+Subject: [PATCH 05/10] rockchip: firefly-px30: Use common bss and stack
+ addresses
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240521-px30-2024-07-rc-v1-4-62109c84d44f@cherry.de>
+Message-Id: <20240521-px30-2024-07-rc-v1-5-62109c84d44f@cherry.de>
 References: <20240521-px30-2024-07-rc-v1-0-62109c84d44f@cherry.de>
 In-Reply-To: <20240521-px30-2024-07-rc-v1-0-62109c84d44f@cherry.de>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -80,14 +81,14 @@ match the other SoCs' using ROCKCHIP_COMMON_STACK_ADDR.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- configs/evb-px30_defconfig | 18 +++---------------
+ configs/firefly-px30_defconfig | 18 +++---------------
  1 file changed, 3 insertions(+), 15 deletions(-)
 
-diff --git a/configs/evb-px30_defconfig b/configs/evb-px30_defconfig
-index 73a3c6120e0..50ce1d7a9f3 100644
---- a/configs/evb-px30_defconfig
-+++ b/configs/evb-px30_defconfig
-@@ -2,26 +2,14 @@ CONFIG_ARM=y
+diff --git a/configs/firefly-px30_defconfig b/configs/firefly-px30_defconfig
+index 0a14b393667..063e4211fb7 100644
+--- a/configs/firefly-px30_defconfig
++++ b/configs/firefly-px30_defconfig
+@@ -2,27 +2,15 @@ CONFIG_ARM=y
  CONFIG_SKIP_LOWLEVEL_INIT=y
  CONFIG_COUNTER_FREQUENCY=24000000
  CONFIG_ARCH_ROCKCHIP=y
@@ -98,12 +99,13 @@ index 73a3c6120e0..50ce1d7a9f3 100644
  CONFIG_NR_DRAM_BANKS=1
 -CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
 -CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x400000
- CONFIG_DEFAULT_DEVICE_TREE="px30-evb"
+ CONFIG_DEFAULT_DEVICE_TREE="px30-firefly"
 -CONFIG_SPL_TEXT_BASE=0x00000000
  CONFIG_DM_RESET=y
  CONFIG_ROCKCHIP_PX30=y
 +# CONFIG_TPL_ROCKCHIP_COMMON_BOARD is not set
  CONFIG_TARGET_EVB_PX30=y
+ CONFIG_DEBUG_UART_CHANNEL=1
 -CONFIG_TPL_LIBGENERIC_SUPPORT=y
 +# CONFIG_TPL_LIBCOMMON_SUPPORT is not set
  CONFIG_SPL_DRIVERS_MISC=y
@@ -116,7 +118,7 @@ index 73a3c6120e0..50ce1d7a9f3 100644
  CONFIG_DEBUG_UART_BASE=0xFF160000
  CONFIG_DEBUG_UART_CLOCK=24000000
  CONFIG_SYS_LOAD_ADDR=0x800800
-@@ -39,9 +27,9 @@ CONFIG_SPL_MAX_SIZE=0x20000
+@@ -40,9 +28,9 @@ CONFIG_SPL_MAX_SIZE=0x20000
  CONFIG_SPL_PAD_TO=0x7f8000
  CONFIG_SPL_BOOTROM_SUPPORT=y
  # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
