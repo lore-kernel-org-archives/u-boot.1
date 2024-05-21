@@ -4,73 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A84CC25B77
-	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 02:31:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B3D2C25B77
+	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 03:06:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32E94882DF;
-	Tue, 21 May 2024 04:31:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 81A158831F;
+	Tue, 21 May 2024 05:06:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Jrlw95xL";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="a/CLQOxG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D069388306; Tue, 21 May 2024 04:31:54 +0200 (CEST)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
+ id 1F374886E2; Tue, 21 May 2024 05:06:11 +0200 (CEST)
+Received: from mail-vk1-xa36.google.com (mail-vk1-xa36.google.com
+ [IPv6:2607:f8b0:4864:20::a36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90D3088027
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 04:31:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 89B8388315
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 05:06:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jcmvbkbc@gmail.com
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-1eecc71311eso94999075ad.3
- for <u-boot@lists.denx.de>; Mon, 20 May 2024 19:31:52 -0700 (PDT)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-vk1-xa36.google.com with SMTP id
+ 71dfb90a1353d-4df344eecd7so1378983e0c.3
+ for <u-boot@lists.denx.de>; Mon, 20 May 2024 20:06:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716258711; x=1716863511; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1716260767; x=1716865567; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WjtvgQjVoGBFzQe3NlBH1WsS5ONTHZ8zstlnVBxx7+g=;
- b=Jrlw95xLmj9vphtJ6cKRb05Xxf1AgPMyYM4z/iJCw7XPD5zkgYfdmA5kDUETD8iBkl
- eIU6Yd49W8YLtrDzbbR58qbVvsEXgw92TjglBmrwuGT9iq+mMDrZt7ftTn5WS4C+nQ5S
- QI9iOV/ogMEt6bDRVVDmSxxZivQ9SdGyYrHGPU/3vYXfpjYkdBNpH4Y8giZoz3jH6vS3
- bIokWXDO65pPfGpIKUm7KLiuYjJiUzA/M2+d6D3il5K3WCRSX5DX9eWS3gJGtaAK7yGC
- Ho+glkpx0nwqs7mnJE1JMX84PqDNzCrHWVg188KMYoLOW2GvnIE2YLuozqqknYy9GoPo
- r7ZA==
+ bh=aToLeXjHPcFnq5kqSZ+gnOIG1R/ZufuP/Fczkw4UZ4w=;
+ b=a/CLQOxGFRdt/KDwWlJ73A6scTLz2KxRu/Sdno2GyN6dsrhhJaRgCXdh0X8StRBNSU
+ 1bmnKXUs7nyk9rC5/Qp6nvFTqCbQUlKQd2TVeK0f0OGL1D7GhiClod83tRcYrrigpZro
+ P6S/F/pb0+F66sOXN8COfqayY6S/862U0NtAPX7FW4Mj+SZ4UB3gBM3HlrB4MfBHk42+
+ +nxCfOncD0aUMlpZD5I4dGf7WWWmRYDhdL4aq6FQtzGI2QEQ35NbVDUXQXiQTZ4SUlzo
+ wxq7XR6qStsTPwfC1V5Nj1HUyFb3Ll7JPVd/9vpQk4M6Yl2gKEzHxTSNr7fllcW9XXEY
+ Wehg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716258711; x=1716863511;
+ d=1e100.net; s=20230601; t=1716260767; x=1716865567;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WjtvgQjVoGBFzQe3NlBH1WsS5ONTHZ8zstlnVBxx7+g=;
- b=nelkbY1Wek1OAzR95KeL1fOYlABn1MaWOxmxb9ODdlw9huiIK/6Qe+kiolu/Gwwiq+
- xq5y3pWcSmjdug2TfQQz/YhZq0fB/ZbvHProdDgGa+j82VlS3G0p9z7IAybVbLChPRty
- lcFLiA9gh+Jfu4wtJ2yoe6PDBBYDg4lfUvAgvcvY6OcUpXlXeLZmRe1fseZ+gaPcBAvt
- RTl5tlCBdJYWkHwKKj0yBJ/SeRZdCXdG7d3i82HHymtcO0S7Tw/J7eA+BBBTDbPXQvnL
- fH7+aYfKG5kZsyzpYZOnBqylGB+j6PIswV4fuBlra8U8pebFnDZaWwwe/+0b4hzO1gD7
- 8QFw==
-X-Gm-Message-State: AOJu0Yw6npVKm6EgZT4gljf0SZV2ifOse1YrBgBbBh6BXvdB/DkDtA23
- AQ1TxALYofGuDVdtTV9YMdnn7kj0FuRTbjzDpVZ1fsFvXduu0Oojp/BtUYeOyd6agG1fstkmbQ1
- WNeUr1uP++RuNPhwHPfKmLNBjW+8=
-X-Google-Smtp-Source: AGHT+IH9Xovi+EX07LWb8VJhb5mK/mYRUsPoWXNK/MAfmMi1I+DxTSZFA91o0pHf+B+gKdTujrCcPgbhkNQLnPxWxdI=
-X-Received: by 2002:a05:6a20:971a:b0:1a7:5780:1f4b with SMTP id
- adf61e73a8af0-1afde0bc489mr35652914637.24.1716258710990; Mon, 20 May 2024
- 19:31:50 -0700 (PDT)
+ bh=aToLeXjHPcFnq5kqSZ+gnOIG1R/ZufuP/Fczkw4UZ4w=;
+ b=mOf+joRBLN5wa1C0P1PE4UsuXRh+CL2nU321Iv1+LKUYpIkHwqOKYszKgB8OHpDSi3
+ 4pgkEUO1Wo+bmMLGEoNvNdg+u8qYx7iF0cOI09CGkhpLFxxuP/nEpZDdLA2tIhwqtY6Y
+ s2i9josEb+v9WN76Urtxv3mcN9SiIfGPw2kccXMhVBvLEmOzyQXKmJc9ESYNB1g4Yky6
+ ld8yXFt5Ei5qn0uUgW/vddHovks+nqXE1ug4sclRm5G0r+zMbCjTGMdIUHCsU4+Mm5lA
+ Di2eeOJd901BAfPgfvGQ4KOqAD3jUTqrHYMa4KeAlOiv6lyDI+onvOLoDBZTYhuLGOqt
+ reNA==
+X-Gm-Message-State: AOJu0YwC5KDrYrE1zirDtCeVIbk3j06zND9E6LFPfNwBiRfri9RrSgc1
+ V36EcVe6ZnEhdQllQhZCEc5oMtvqE2E5AnHCAavzVE9fIBagQYLAH+47UnfsNVUoiVep3IfOsxR
+ 2dvwHH41MgU1jMcIpUNP4CYc2Lwo=
+X-Google-Smtp-Source: AGHT+IGdq10p1k79iKKVzzoxo79URyXStCJqC4M5go5u2sWxXW3s6d82yXiX/U1PUjKmPoPIpFK7zWyPuJtrhvRatzU=
+X-Received: by 2002:a05:6122:1da8:b0:4d8:7339:4c35 with SMTP id
+ 71dfb90a1353d-4df88367d77mr26818863e0c.13.1716260767050; Mon, 20 May 2024
+ 20:06:07 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240519-qemu-xtensa-v1-0-8fff0cb11c19@flygoat.com>
- <20240519-qemu-xtensa-v1-6-8fff0cb11c19@flygoat.com>
-In-Reply-To: <20240519-qemu-xtensa-v1-6-8fff0cb11c19@flygoat.com>
-From: Max Filippov <jcmvbkbc@gmail.com>
-Date: Mon, 20 May 2024 19:31:40 -0700
-Message-ID: <CAMo8Bf+HoyoDiKBVDkWeB=NLVO2zuYWbquk+2rp3znsUEor6pw@mail.gmail.com>
-Subject: Re: [PATCH 06/10] drivers: serial: Add xtensa semihosting driver
-To: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Cc: u-boot@lists.denx.de, Sean Anderson <sean.anderson@seco.com>, 
- Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>
+References: <AQPxMmhcaeYN5rt7y4Jg392tXwS9syCQiDuYw33ZbtjOpANLCaGUAx9nP2YjKGSDSka8vM5BQkV9DepT_8Q0ipjQO18tbbk_gk8CgPFDnGI=@protonmail.com>
+In-Reply-To: <AQPxMmhcaeYN5rt7y4Jg392tXwS9syCQiDuYw33ZbtjOpANLCaGUAx9nP2YjKGSDSka8vM5BQkV9DepT_8Q0ipjQO18tbbk_gk8CgPFDnGI=@protonmail.com>
+From: E Shattow <lucent@gmail.com>
+Date: Mon, 20 May 2024 20:05:55 -0700
+Message-ID: <CANV2PTOj0RHJaZfo=XDryM4=W_6Gxg4qf+COwF1gCYrVAApNfw@mail.gmail.com>
+Subject: Re: [PATCH 2/2 v4] board: starfive: support Pine64 Star64 board
+To: H Bell <dmoo_dv@protonmail.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -89,196 +86,306 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, May 19, 2024 at 1:53=E2=80=AFPM Jiaxun Yang <jiaxun.yang@flygoat.co=
-m> wrote:
->
-> Add xtensa semihosting driver.
->
-> It can't use regular semihosting driver as Xtensa's has it's own
-> semihosting ABI.
->
-> Note that semihosting supports puts in serial but I never managed to
-> get it work, so it's putc only for now.
+Hi,
 
-I wonder, what were the issues that you experienced?
-
-> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+On Sun, May 19, 2024 at 9:43=E2=80=AFPM H Bell <dmoo_dv@protonmail.com> wro=
+te:
+>
+> Add documentation files
+>
+> Signed-off-by: Henry Bell <dmoo_dv@protonmail.com>
+> Cc: ycliang@andestech.com
+> Cc: heinrich.schuchardt@canonical.com
 > ---
->  drivers/serial/Kconfig                     | 18 ++++++-
->  drivers/serial/Makefile                    |  1 +
->  drivers/serial/serial_xtensa_semihosting.c | 79 ++++++++++++++++++++++++=
-++++++
->  3 files changed, 97 insertions(+), 1 deletion(-)
 >
-> diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
-> index 1fe4607598eb..3a1e5a6f2877 100644
-> --- a/drivers/serial/Kconfig
-> +++ b/drivers/serial/Kconfig
-> @@ -501,6 +501,15 @@ config DEBUG_UART_MT7620
->           driver will be available until the real driver model serial is
->           running.
+> Changes since v1
 >
-> +config DEBUG_UART_XTENSA_SEMIHOSTING
-> +       bool "Xtensa semihosting"
-> +       depends on XTENSA_SEMIHOSTING_SERIAL
-> +       help
-> +         Select this to enable the debug UART using the Xtensa semihosti=
-ng driver.
-> +         This provides basic serial output from the console without need=
-ing to
-> +         start up driver model. The driver will be available until the r=
-eal
-> +         driver model serial is running.
-> +
->  endchoice
+> - New patch
 >
->  config DEBUG_UART_BASE
-> @@ -936,7 +945,6 @@ config SH_SCIF_CLK_FREQ
->  config SEMIHOSTING_SERIAL
->         bool "Semihosting UART support"
->         depends on SEMIHOSTING && !SERIAL_RX_BUFFER
-> -       imply SERIAL_PUTS
->         help
->           Select this to enable a serial UART using semihosting. Special =
-halt
->           instructions will be issued which an external debugger (such as=
- a
-> @@ -1115,6 +1123,14 @@ config XEN_SERIAL
->           If built without DM support, then requires Xen
->           to be built with CONFIG_VERBOSE_DEBUG.
+> Changes since v2
 >
-> +config XTENSA_SEMIHOSTING_SERIAL
-> +       bool "Xtensa Semihosting UART support"
-> +       depends on DM_SERIAL
-> +       depends on XTENSA_SEMIHOSTING
-> +       imply SERIAL_PUTS
-> +       help
-> +         Select this to enable a serial UART using Xtensa semihosting.
-> +
->  choice
->         prompt "Console port"
->         default 8xx_CONS_SMC1
-> diff --git a/drivers/serial/Makefile b/drivers/serial/Makefile
-> index dbe598b74064..78810f98367c 100644
-> --- a/drivers/serial/Makefile
-> +++ b/drivers/serial/Makefile
-> @@ -60,6 +60,7 @@ obj-$(CONFIG_MT7620_SERIAL) +=3D serial_mt7620.o
->  obj-$(CONFIG_HTIF_CONSOLE) +=3D serial_htif.o
->  obj-$(CONFIG_SIFIVE_SERIAL) +=3D serial_sifive.o
->  obj-$(CONFIG_XEN_SERIAL) +=3D serial_xen.o
-> +obj-$(CONFIG_XTENSA_SEMIHOSTING_SERIAL) +=3D serial_xtensa_semihosting.o
->  obj-$(CONFIG_S5P4418_PL011_SERIAL) +=3D serial_s5p4418_pl011.o
+> - Remove extra params to
+> - Clarification on boot section
+> - Add entry on MAC adresses and how to correct them
 >
->  ifndef CONFIG_SPL_BUILD
-> diff --git a/drivers/serial/serial_xtensa_semihosting.c b/drivers/serial/=
-serial_xtensa_semihosting.c
+> Changes since v3
+>
+> - Rebase against d678a59d2d
+> ---
+>  doc/board/starfive/index.rst         |   1 +
+>  doc/board/starfive/pine64_star64.rst | 136 +++++++++++++++++++++++++++
+>  2 files changed, 137 insertions(+)
+>  create mode 100644 doc/board/starfive/pine64_star64.rst
+>
+> diff --git a/doc/board/starfive/index.rst b/doc/board/starfive/index.rst
+> index d369b986cc..72ab6ddfbf 100644
+> --- a/doc/board/starfive/index.rst
+> +++ b/doc/board/starfive/index.rst
+> @@ -8,4 +8,5 @@ StarFive
+>
+>     milk-v_mars
+>     milk-v_mars_cm
+> +   pine64_star64
+>     visionfive2
+> diff --git a/doc/board/starfive/pine64_star64.rst b/doc/board/starfive/pi=
+ne64_star64.rst
 > new file mode 100644
-> index 000000000000..1bf3c18537e7
+> index 0000000000..567d1207ba
 > --- /dev/null
-> +++ b/drivers/serial/serial_xtensa_semihosting.c
-> @@ -0,0 +1,79 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
-> + */
+> +++ b/doc/board/starfive/pine64_star64.rst
+> @@ -0,0 +1,136 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
 > +
-> +#include <dm.h>
-> +#include <malloc.h>
-> +#include <serial.h>
+> +Pine64 Star64
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 > +
-> +#include <asm/platform/simcall.h>
+> +U-Boot for the Star64 uses the same U-Boot binaries as the VisionFive 2 =
+board.
+> +In U-Boot SPL the actual board is detected and the device-tree patched
+> +accordingly.
 > +
-> +/**
-> + * struct simc_serial_priv - Semihosting serial private data
-> + * @counter: Counter used to fake pending every other call
-> + */
-> +struct simc_serial_priv {
-> +       unsigned int counter;
-> +};
+> +Building
+> +~~~~~~~~
 > +
-> +static int simc_serial_getc(struct udevice *dev)
-> +{
-> +       char ch =3D 0;
+> +1. Add the RISC-V toolchain to your PATH.
+> +2. Setup ARCH & cross compilation environment variable:
 > +
-> +       simc_read(0, &ch, sizeof(ch));
+> +.. code-block:: none
 > +
-> +       return ch;
-> +}
+> +   export CROSS_COMPILE=3D<riscv64 toolchain prefix>
 > +
-> +static int simc_serial_putc(struct udevice *dev, const char ch)
-> +{
-> +       char str[2] =3D {0};
+> +The M-mode software OpenSBI provides the supervisor binary interface (SB=
+I) and
+> +is responsible for the switch to S-Mode. It is a prerequisite to build U=
+-Boot.
+> +Support for the JH7110 was introduced in OpenSBI 1.2. It is recommended =
+to use
+> +a current release.
+> +
+> +.. code-block:: console
+> +
+> +       git clone https://github.com/riscv/opensbi.git
+> +       cd opensbi
+> +       make PLATFORM=3Dgeneric FW_TEXT_START=3D0x40000000
+> +
+> +Now build the U-Boot SPL and U-Boot proper.
+> +
+> +.. code-block:: console
+> +
+> +       cd <U-Boot-dir>
+> +       make starfive_visionfive2_defconfig
+> +       make OPENSBI=3D$(opensbi_dir)/build/platform/generic/firmware/fw_=
+dynamic.bin
+> +
+> +This will generate the U-Boot SPL image (spl/u-boot-spl.bin.normal.out) =
+as well
+> +as the FIT image (u-boot.itb) with OpenSBI and U-Boot.
+> +
+> +Device-tree selection
+> +~~~~~~~~~~~~~~~~~~~~~
+> +
+> +U-Boot will set variable $fdtfile to starfive/jh7110-pine64-star64.dtb.
+> +
+> +To overrule this selection the variable can be set manually and saved in=
+ the
+> +environment
+> +
+> +::
+> +
+> +    setenv fdtfile my_device-tree.dtb
+> +    env save
 
-Why does it need to be an array if only the first element is ever used?
+Nit: prefer consistent sub-command as:
+env set fdtfile my_device-tree.dtb
 
 > +
-> +       str[0] =3D ch;
-> +       simc_write(1, str, 1);
+> +or the configuration variable CONFIG_DEFAULT_FDT_FILE can be used to set=
+ to
+> +provide a default value.
 > +
-> +       return 0;
-> +}
+> +Boot source selection
+> +~~~~~~~~~~~~~~~~~~~~~
 > +
-> +static int simc_serial_pending(struct udevice *dev, bool input)
-> +{
-> +       struct simc_serial_priv *priv =3D dev_get_priv(dev);
-> +
-> +       if (input)
-> +               return priv->counter++ & 1;
 
-This can result in blocking the whole CPU thread of the emulator when
-used with simcall-based semihosting and there's no input actually available=
+> +The board provides the DIP switches (marked S1804) adjacent to the 40pin=
+ GPIO
+> +Bus for boot selection. The ``L`` (0) and ``H`` (1) silk screening to th=
+e side
+> +of the should be used to determine state (not the ``ON/ONKE`` markings
+> +physically on the component). ``GPIO_0`` is channel 2 on the switch, whi=
+le
+> +``GPIO_1`` is channel 1.
+
+Suggested: "Boot mode is selected by an MSEL-DIP marked S1804 and GPIO_0
+position adjacent to the 40pin GPIO header. ON/ONKE and number markings of =
+the
+MSEL-DIP are misleading; Instead refer to the ``L`` (0) and ``H`` (1)
+silkscreen for
+accurate selection."
+
+> +
+> ++ (QSPI) Flash: 00 ``??``
+> ++ SD: 01 ``??``
+> ++ EMMC: 10 ``??``
+> ++ UART: 11 ``??``
+> +
+> +Preparing the SD-Card
+> +~~~~~~~~~~~~~~~~~~~~~
+> +
+> +The device firmware loads U-Boot SPL (u-boot-spl.bin.normal.out) from th=
+e
+> +partition with type GUID 2E54B353-1271-4842-806F-E436D6AF6985. You are f=
+ree
+> +to choose any partition number.
+> +
+> +With the default configuration U-Boot SPL loads the U-Boot FIT image
+> +(u-boot.itb) from partition 2 (CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITIO=
+N=3D0x2).
+> +When formatting it is recommended to use GUID
+> +BC13C2FF-59E6-4262-A352-B275FD6F7172 for this partition.
+> +
+> +The FIT image (u-boot.itb) is a combination of OpenSBI's fw_dynamic.bin,
+> +u-boot-nodtb.bin and the device tree blob.
+> +
+> +Format the SD card (make sure the disk has GPT, otherwise use gdisk to s=
+witch)
+> +
+> +.. code-block:: bash
+> +
+> +       sudo sgdisk --clear \
+> +         --set-alignment=3D2 \
+> +         --new=3D1:4096:8191 --change-name=3D1:spl --typecode=3D1:2E54B3=
+53-1271-4842-806F-E436D6AF6985\
+> +         --new=3D2:8192:16383 --change-name=3D2:uboot --typecode=3D2:BC1=
+3C2FF-59E6-4262-A352-B275FD6F7172  \
+> +         --new=3D3:16384:1654784 --change-name=3D3:system --typecode=3D3=
+:EBD0A0A2-B9E5-4433-87C0-68B6B72699C7 \
+> +         /dev/sdb
+> +
+> +Copy U-Boot to the SD card
+> +
+> +.. code-block:: bash
+> +
+> +       sudo dd if=3Du-boot-spl.bin.normal.out of=3D/dev/sdb1
+> +       sudo dd if=3Du-boot.itb of=3D/dev/sdb2
+> +
+> +       sudo mount /dev/sdb3 /mnt/
+> +       sudo cp u-boot-spl.bin.normal.out /mnt/
+> +       sudo cp u-boot.itb /mnt/
+> +       sudo cp Image.gz /mnt/
+> +       sudo cp initramfs.cpio.gz /mnt/
+> +       sudo cp jh7110-starfive-visionfive-2.dtb /mnt/
+> +       sudo umount /mnt
+> +
+> +Booting
+> +~~~~~~~
+> +
+> +Once you plugin the sdcard and power up, you should see the U-Boot promp=
+t.
+> +
+> +MAC address issues
+
+nay "Product ID and MAC address issues"
+
+> +~~~~~~~~~~~~~~~~~~
+> +
+
+U-Boot requires valid EEPROM data to determine which board-specific fix-up =
+to
+apply at runtime. This affects the size of memory initialized, network
+mac address
+numbering, and tuning of the network PHYs.
+
+Star64 8gb and 4gb models follow a pattern where the last mac address bytes=
+ are
+a sum of  0x7558 and the serial number (lower port mac0), or a sum of 0x755=
+9 and
+the serial number (upper port mac1). As tested there are several 4gb model =
+units
+where the serial number and network mac address numbering was not made
+unique when compared to 8gb model units and even other 4gb model units.
+Some early Star64 boards shipped with an uninitialized EEPROM and no write
+protect pull-up resistor in place. Later units of all 4gb and 8gb models sh=
+aring
+the same serial number in EEPROM data will have this problem that the netwo=
+rk
+mac addresses are alike between different models and this may be corrected =
+by
+defeating the installed write protect pull-up resistor to write new
+values. As an
+alternative to defeating an installed write protect pull-up resistor
+there is a possible
+workaround to override mac addresses via U-Boot environment variables.
+
+It is required for any unit having uninitialized EEPROM and recommended for
+all later Star64 4gb model units (not properly serialized) to have decided =
+on a
+new 6-byte serial number. This serial number should be high enough to
+avoid collision with other JH7110 boards and low enough not to overflow i.e=
 .
-Not sure how it would behave with the gdbio. I think something like
-the following:
+between cafe00 and f00d00.
 
-if (input) {
-    int res =3D simc_poll(0);
-    return res < 0 ? priv->counter++ & 1 : res;
-}
+1. Prepare EEPROM data in memory
 
-could be used here to avoid that.
+1a. when there is no error to load existing data:
 
-> +       return false;
-> +}
+``mac read_eeprom``
+
+1b. when there is an error to load non-existing data:
+"DRAM:  Not a StarFive EEPROM data format - magic error"
+
+``mac initialize``
+
+2. Common Star64 values
+
+``mac vendor PINE64``
+``mac pcb_revision c1``
+``mac bom_revision A``
+
+3. Unique Star64 values
+
+# Year 2023 week 10 production date, 8GB DRAM, optional eMMC, serial cdef01
+mac product_id STAR64V1-2310-D008E000-00cdef01
+
+# Last three bytes mac0: 0x7558 + serial number 0xcdef01
+mac mac0_address 6c:cf:39:ce:64:59
+
+# Last three bytes mac1: 0x7559 + serial number 0xcdef01
+mac mac1_address 6c:cf:39:ce:64:5a
+
+4. Defeat write-protect pull-up resistor (if installed) and write
+
+# write to EEPROM and clear local copy
+mac write_eeprom
+
+MAC address override via U-Boot environment variables:
+
+> +The Star64 does not currently ship with unique serial numbers per-device=
+.
+> +Devices tested (all 4GiB RAM) have the same serial number of
+> +``STAR64V1-2310-D004E000-00000005`` and the mac addresses of
+> +``6c:cf:39:00:75:61`` (lower) and ``6c:cf:39:00:75:62`` (upper) port wil=
+l be
+> +assigned. Shipped models also have the EEPROM set as write protected, so=
+ it
+> +cannot be changed using ``mac`` commands.
 > +
-> +static const struct dm_serial_ops simc_serial_ops =3D {
-> +       .putc =3D simc_serial_putc,
-> +       .getc =3D simc_serial_getc,
-> +       .pending =3D simc_serial_pending,
-> +};
+> +The MAC addresses may be "set" as follows by writing as a custom config =
+to SPI
+> +(Change the last 3 bytes of MAC addreses as appropriate):
 > +
-> +U_BOOT_DRIVER(simc_serial) =3D {
-> +       .name   =3D "serial_xtensa_semihosting",
-> +       .id     =3D UCLASS_SERIAL,
-> +       .priv_auto =3D sizeof(struct simc_serial_priv),
-> +       .ops    =3D &simc_serial_ops,
-> +       .flags  =3D DM_FLAG_PRE_RELOC,
-> +};
+> +::
 > +
-> +U_BOOT_DRVINFO(simc_serial) =3D {
-> +       .name =3D "serial_xtensa_semihosting",
-> +};
-> +
-> +#if CONFIG_IS_ENABLED(DEBUG_UART_XTENSA_SEMIHOSTING)
-> +#include <debug_uart.h>
-> +
-> +static inline void _debug_uart_init(void)
-> +{
-> +}
-> +
-> +static inline void _debug_uart_putc(int c)
-> +{
-> +       simc_serial_putc(NULL, c);
-> +}
-> +
-> +DEBUG_UART_FUNCS
-> +#endif
->
+> +       env set ethaddr 6c:cf:39:00:75:63
+> +       env set eth1addr 6c:cf:39:00:75:64
+> +       env save
+> +       reset
 > --
-> 2.43.0
+> 2.44.0
+>
 >
 
+That feedback is a bit rough on the edges so hopefully some of that is usef=
+ul.
 
---=20
-Thanks.
--- Max
+-E
