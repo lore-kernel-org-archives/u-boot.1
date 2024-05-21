@@ -4,81 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B598C25B74
-	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 18:15:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0270C25B74
+	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 18:55:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0800688363;
-	Tue, 21 May 2024 20:15:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D2C9188388;
+	Tue, 21 May 2024 20:55:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YiYPf4zF";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="iogGhqrJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5474788381; Tue, 21 May 2024 20:15:41 +0200 (CEST)
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
- [IPv6:2607:f8b0:4864:20::734])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5A50F8837C; Tue, 21 May 2024 20:55:32 +0200 (CEST)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 297C18835C
- for <U-Boot@lists.denx.de>; Tue, 21 May 2024 20:15:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-792bc48f6beso301543385a.2
- for <U-Boot@lists.denx.de>; Tue, 21 May 2024 11:15:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1716315338; x=1716920138; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=z7MQImJGWLvE79Db8Uxq6Ydqkgo+iRKurs53u5ybezM=;
- b=YiYPf4zFvWU4mgL3EzpDED5CHsYrtWAUNKMUIaxcQ77lhISOjch+kdai1JkQtPO7U2
- S9ITWW3Je3sbqKokIdTJjebAaXYKHCqBBOcWupo7ivYMxZdhjPMVTsjzWkOTd+bJw7Td
- iEY9M5XbyBml+UVS8qP0SCk1vzGxQ03QmrrCg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716315338; x=1716920138;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=z7MQImJGWLvE79Db8Uxq6Ydqkgo+iRKurs53u5ybezM=;
- b=Q4Dk41A0R9zfzNrbAy2YNc6EJZehegbRO9yJQz+UsQU9DINUeu2XsPEKQnWPbjTdUR
- Y+A+UOnUDd9A1aHMx/NGTzMJeSJ+rI3SSEQE8ToUV/e4dHm1tjZmAlkgJcYdytH/ftVN
- zu/uoTo0v+UxRS8yMSvPH01/NHIbAT6Iz69OvPgC+T+0kK7GCcB7bmEQB8tQxVTsU8BD
- 1EdSOis9ddsFkuVMywzjUAs/bLWr7+U/K5N7/Fin5e3EzodXqlfSY/4TC0pDKX3T3DLS
- wCI70QfnA0lngljBvUZb+ZMr4/cHi6iePHqF8r++h8T+20vmNgBaE4TNLon9BMWwOSk0
- eYEg==
-X-Gm-Message-State: AOJu0YyCL1WbPjnK7RtemRvLXoco2r/nW0c7TYpdV5ZToXBBEp+eXL4X
- w9T5pq44G+3We8CHKflUHwmaiC551I9MBXoXVs3Hn3TEgKejuPwaTD6K1d4RpAsP6qnALaxBdGC
- XEok=
-X-Google-Smtp-Source: AGHT+IHoNg2JLEOZLjSjp/UH91D5q15C5O5KwZu5tQBog+i0n0we7fMR19+TgudkdMoDeArkWcfgxg==
-X-Received: by 2002:a05:620a:814:b0:792:bf91:3d41 with SMTP id
- af79cd13be357-792c7574b0fmr3484454285a.15.1716315337747; 
- Tue, 21 May 2024 11:15:37 -0700 (PDT)
-Received: from bill-the-cat ([189.178.170.52])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7930325d5d0sm605501785a.75.2024.05.21.11.15.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 May 2024 11:15:37 -0700 (PDT)
-Date: Tue, 21 May 2024 12:15:34 -0600
-From: Tom Rini <trini@konsulko.com>
-To: "Brunham, Kalen" <kalen.brunham@intel.com>
-Cc: "U-Boot@lists.denx.de" <U-Boot@lists.denx.de>
-Subject: Re: [PATCH 1/1] Added arm64 assembly for examples/api crt0
-Message-ID: <20240521181534.GD2568172@bill-the-cat>
-References: <DM4PR11MB5296B1B9F0CFC701A8B11284E3EE2@DM4PR11MB5296.namprd11.prod.outlook.com>
- <DM4PR11MB52961423BCE12552857A12A8E3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
- <20240521162543.GU2568172@bill-the-cat>
- <DM4PR11MB529670F5CFDA6B4EDA7B7206E3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
- <20240521164659.GZ2568172@bill-the-cat>
- <DM4PR11MB529668DA50F05F26AAD229F0E3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 6EAE28828E
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 20:55:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=linux.intel.com
+Authentication-Results: phobos.denx.de; spf=none
+ smtp.mailfrom=andriy.shevchenko@linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1716317730; x=1747853730;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:content-transfer-encoding:in-reply-to;
+ bh=yR+QUj6rhIgoasVKmpwOwj26jDMFHSm+Uh+6YCh7dDY=;
+ b=iogGhqrJ/TJy7d0l8RoyRedCTFwf0rh6LqXec0AvCbJkGP+cxW365chB
+ Yx4GMcqCpIlcS0tMdWfV71qfycdNeHBCfdWrt+aTsOTmsxAp+arM8bu7z
+ xDp/R4ob8Fy97v1u18O2pR5jxvXU0KSQ3W/Dq4U3bBpzDIxinXcRdUjf+
+ OjVAqH6dMcqYpdqleNXaTOcgM9jVrsb80qAbYcrmx+4cQ0JuTLCve1lC5
+ Z6JNm7576StvGcbnZ0HZtCntYawhG+76tuH9inOzCcQq1VPxj5Usa3Kj9
+ 5cZHonxOMTMYzBpUqLEhblMGhOnAIpNYszeEm2UeEIiX0Cgwyw9QxpJS7 g==;
+X-CSE-ConnectionGUID: nOcNTH+iTumkwkbFJtGV4g==
+X-CSE-MsgGUID: cwMIvy4cSWizB3lWmbU6eA==
+X-IronPort-AV: E=McAfee;i="6600,9927,11079"; a="12477668"
+X-IronPort-AV: E=Sophos;i="6.08,178,1712646000"; d="scan'208";a="12477668"
+Received: from fmviesa002.fm.intel.com ([10.60.135.142])
+ by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 21 May 2024 11:55:27 -0700
+X-CSE-ConnectionGUID: rR8gVRcrQ2WtryFSufRq/w==
+X-CSE-MsgGUID: tdGJ2NyWSY+TAvexHICMxg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.08,178,1712646000"; d="scan'208";a="56248795"
+Received: from smile.fi.intel.com ([10.237.72.54])
+ by fmviesa002.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 21 May 2024 11:55:22 -0700
+Received: from andy by smile.fi.intel.com with local (Exim 4.97)
+ (envelope-from <andriy.shevchenko@linux.intel.com>)
+ id 1s9Udr-00000009ktP-1iPC; Tue, 21 May 2024 21:55:19 +0300
+Date: Tue, 21 May 2024 21:55:19 +0300
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: "Kumar, Udit" <u-kumar1@ti.com>, vigneshr@ti.com, nm@ti.com,
+ joe.hershberger@ni.com, m-chawdhry@ti.com, afd@ti.com,
+ devarsht@ti.com, sjg@chromium.org, emanuele.ghidoli@toradex.com,
+ matthias.schiffer@ew.tq-group.com, a-bhatia1@ti.com,
+ vitor.soares@toradex.com, danishanwar@ti.com, bmeng.cn@gmail.com,
+ mkorpershoek@baylibre.com, s-vadapalli@ti.com, u-boot@lists.denx.de,
+ joao.goncalves@toradex.com, hnagalla@ti.com
+Subject: Re: [PATCH 0/4] Adding support to load secure firmware for HS devices
+Message-ID: <ZkzuF_DIklnGd70_@smile.fi.intel.com>
+References: <20240521105648.3780072-1-u-kumar1@ti.com>
+ <ZkyvvWotyQJQyz9k@smile.fi.intel.com>
+ <37ba74bf-21ea-4551-8631-c07d8ff2c0ea@ti.com>
+ <ZkzH2Sa4eGAxb2EB@smile.fi.intel.com>
+ <20240521162145.GT2568172@bill-the-cat>
+ <ZkzNa9TnTIixVnfJ@smile.fi.intel.com>
+ <20240521164541.GY2568172@bill-the-cat>
+ <ZkzehjK1AQ2tcPpw@smile.fi.intel.com>
+ <20240521175247.GB2568172@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="LaxymsCNTl+9Sp8F"
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <DM4PR11MB529668DA50F05F26AAD229F0E3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20240521175247.GB2568172@bill-the-cat>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,64 +97,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, May 21, 2024 at 11:52:47AM -0600, Tom Rini wrote:
+> On Tue, May 21, 2024 at 08:48:54PM +0300, Andy Shevchenko wrote:
+> > On Tue, May 21, 2024 at 10:45:41AM -0600, Tom Rini wrote:
+> > > On Tue, May 21, 2024 at 07:35:55PM +0300, Andy Shevchenko wrote:
+> > > > On Tue, May 21, 2024 at 10:21:45AM -0600, Tom Rini wrote:
+> > > > > On Tue, May 21, 2024 at 07:12:09PM +0300, Andy Shevchenko wrote:
+> > > > > > On Tue, May 21, 2024 at 08:59:17PM +0530, Kumar, Udit wrote:
+> > > > > > > On 5/21/2024 7:59 PM, Andy Shevchenko wrote:
+> > > > > > > > On Tue, May 21, 2024 at 04:26:44PM +0530, Udit Kumar wrote:
 
---LaxymsCNTl+9Sp8F
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+...
 
-On Tue, May 21, 2024 at 04:54:58PM +0000, Brunham, Kalen wrote:
+> > > > > > > > Are you Cc'ing random people with this?
+> > > > > > > > Please don't do it.
+> > > > > > > 
+> > > > > > > I used names names popped up while running get_maintainer.pl script of
+> > > > > > > u-boot
+> > > > > > > 
+> > > > > > > your email id was there for patch-3 of this series
+> > > > > > 
+> > > > > > Nice, the tool is broken. Please, work with the respective people to fix a tool
+> > > > > > or to tune it to avoid such mistakes in the future.
+> > > > > > 
+> > > > > > (Hint: I would first disable Git fallback completely)
+> > > > > 
+> > > > > So you were cc'd thanks to:
+> > > > > commit 5e541a05f70296dbad07fc1f4e8678ad207bb476
+> > > > > Author: Simon Glass <sjg@chromium.org>
+> > > > > Date:   Sun Jul 30 21:01:45 2023 -0600
+> > > > > 
+> > > > >     env: Use include/env for text-environment includes
+> > > > >     
+> > > > >     The 'environment' word is too long. We mostly use 'env' in U-Boot, so use
+> > > > >     that as the name of the include directory too.
+> > > > >     
+> > > > >     Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > >     Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com> # Intel Edison
+> > > > 
+> > > > Yeah, and it even explicitly stated what I reviewed from that code...
+> > > > 
+> > > > >     Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> > > > > 
+> > > > > And, I'm sorry because there are other contributors who get upset when git
+> > > > > fallback doesn't find them (because it also ages out after a year).
+> > > > > In this case there's not even a "tweak the threshold" option since
+> > > > > there's only a single commit to the file so you're in 100% of them.
+> > > > 
+> > > > Just an example of false positive by get_maintainer.pl :-(
+> > > > And a confirmation of what I said — tool is broken.
+> > > 
+> > > It's an imperfect tool, yes. A quick check shows that if you never want
+> > > to be cc'd from a git tag, you can add yourself to
+> > > .get_maintainer.ignore and you will still be matched for things you have
+> > > an explicit MAINTAINER entry for.
+> > 
+> > But this will kill me being a maintainer of U-Boot parts (regarding to
+> > a certain platform) which is not what I want.
+> 
+> With a quick local test, no, it still reported you for edison stuff
+> since that's not where the ignore list comes in.
 
-> Hi Tom,
->=20
-> Fundamentally I want to create standalone applications that can be
-> used to help debug low-level HW issues. The advantage to doing this in
-> U-Boot is to leverage existing drivers and other facilities. I agree
-> this is niche, but is something I saw one of our power-users do
-> recently and are looking to share with our customers. Unfortunately,
-> the Makefiles today make this more difficult than it should be, hence
-> the desire to change this. My current goal is to enable a user to use
-> the stock (unpatched) u-boot to minimally create a hello-world that
-> they can execute following the existing examples/standalone steps. =20
->=20
-> Are your plans to deprecate both API and Standalone?
+I see. Still looking at the rate of false positives so far from U-Boot project
+I don't see that a big hammer, like the proposed one, should be used. Better to
+teach people on how to use/tune the tool, it will be helpful in a long-term.
 
-So, the next set of questions become:
-- Why isn't it just part of U-Boot? Make your tool a new command
-  instead.
-- If for license reasons you can't, why not just start from some other
-  appropriate for your needs licensed skeleton and bootelf your tool?
+-- 
+With Best Regards,
+Andy Shevchenko
 
-We have long not done a great job with the U-Boot standalone API stuff,
-and for a number of years at this point a lot of the use cases it was
-used for could instead be filled by making an EFI application. There's a
-well defined API there, there's lots of examples, and frankly for the
-license related questions, makes a much nicer answer.
 
-That there's some power users out there making use of standalone to do
-useful things is news to me. Some of them speaking up and offering to
-be visible in maintaining it would be good (there's Coverity issues and
-lack of CI testing, which should be addressed).
-
---=20
-Tom
-
---LaxymsCNTl+9Sp8F
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZM5MIACgkQFHw5/5Y0
-tyzdzgwAqH9T6mWDgdF3j4T67sT8hLU6Q5NEYy2QoCf5IK4f2JrCE5y1Ap7amYi9
-PBxkPdkSj6Ex7T8+tnhvVBSNkHSalvY4WSWbot7Ez/XpaN7Z0/YQWG47o0pzSrTz
-dXBUV3O/vAztcqD9O1BveblSU3duJFTjbaRPDBSLxgY//Qey/d0rrozohhim3eVq
-SOrSY+BuGA0/Gq7matOQYcMp1smemuQ//Yp1h3V4A34Ke/ZROeqtZXR7jlsk4hI0
-lmfmgh9RjoeoSbDk9k3GEzFE4sWCh3XjqH8tHPfnmn8wv5KeaPd1WH757FootBjC
-JxxGSGJRXb3plK6FUBCe6LeYvYlpWqgjmZf2s/jx+5rW4Wegy24o8JPHHdy8MucO
-M8y/U0hDOeTk0Rc0fKN8IYF6dYTxU2mstKja7HeYo5aq/NKUM66p3XvdUDhIcN+E
-1DQsbLUNBE04Y6tj87tFtW3RJ/f45UXFH+szHM2GhdkHEiNirQX6KfPGz2+RCGMk
-NOgwjvFY
-=Kw1w
------END PGP SIGNATURE-----
-
---LaxymsCNTl+9Sp8F--
