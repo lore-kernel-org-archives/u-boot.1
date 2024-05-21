@@ -4,48 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBFA6C25B74
-	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 21:00:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7980C25B74
+	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 21:30:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12D6D88348;
-	Tue, 21 May 2024 23:00:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 1753A88341;
+	Tue, 21 May 2024 23:30:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="leRiKS3i";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D85258840C; Tue, 21 May 2024 23:00:04 +0200 (CEST)
-Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
+ id D170588287; Tue, 21 May 2024 23:30:53 +0200 (CEST)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78F7188348
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 23:00:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6278B8836D
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 23:30:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
- helo=tharvey.pdc.gateworks.com)
- by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1s9WaT-00Aflh-Lh;
- Tue, 21 May 2024 20:59:57 +0000
-From: Tim Harvey <tharvey@gateworks.com>
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Devarsh Thakkar <devarsht@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hugo Villeneuve <hvilleneuve@dimonoff.com>, Marek Vasut <marex@denx.de>,
- Tim Harvey <tharvey@gateworks.com>, Michal Simek <michal.simek@amd.com>,
- Andy Yan <andy.yan@rock-chips.com>, Akash Gajjar <gajjar04akash@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Chris Morgan <macromorgan@hotmail.com>
-Subject: [PATCH v3] fdt: automatically add /chosen/kaslr-seed if DM_RNG is
- enabled
-Date: Tue, 21 May 2024 13:59:55 -0700
-Message-Id: <20240521205955.3569600-1-tharvey@gateworks.com>
-X-Mailer: git-send-email 2.25.1
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: 647facb9-17b9-11ef-959b-00505699b430
+Received: from smtp.kpnmail.nl (unknown [10.31.155.5])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id 647facb9-17b9-11ef-959b-00505699b430;
+ Tue, 21 May 2024 23:30:49 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=content-type:mime-version:subject:to:from:message-id:date;
+ bh=OpEgtJQLYv2Uj0Ir/sg3K+53i4z1q2iVje8sS1eclQU=;
+ b=leRiKS3iXQDFJr3v97PTEFTYSTjGSyL6IMQmDHmnOoVhy3byITrd6Wl+BfqgDpyLRXWNSlrBlUdG0
+ hJvuE1h5Jfy4QTn6wczF2M3C6jc4SmKvtRXGS6sLotPp4wR/BCQOqm7OrQRAluGp+Px4YN28cLxwmQ
+ sxkbk34xNHC1CD8vzEO0nNOyeONvPjghs00b0ELUwWaaNrLcRNTb+P9ADDl0/omz0ccPzQtCDsVO17
+ TLBNeDNL3WQGyOL58LdV9VBhy0k0gb6MXIGbG/6yht79sCs9pZnlsYyJhQSCVr3imt68CO9JrQ/suv
+ iAl7MSjKE6EjKTAhNeOouwQrMf/Eblg==
+X-KPN-MID: 33|9ZR7e/82ZKmAUebuzBNONaurTvDcNgTOGjVnOgscF2vBRtGkGWmqhayakqDJ/zx
+ wSOqY7DTZLO1gWk2Hh8BAnllxLYzPuBrdOiR7wbGe5ak=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|PL6lf+pXTsrIknpZGJQBXL8KzUA7pSz0PBmFA84LO35pWCIG6bUFhcnWD6Z6p1P
+ MRAP2eToeOjVZNwYGVlAmjQ==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id 641f2269-17b9-11ef-8b48-00505699b758;
+ Tue, 21 May 2024 23:30:49 +0200 (CEST)
+Date: Tue, 21 May 2024 23:30:48 +0200
+Message-Id: <87zfsiettj.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: knaerzche@gmail.com, kever.yang@rock-chips.com, sjg@chromium.org,
+ philipp.tomsich@vrull.eu, trini@konsulko.com,
+ jbx6244@gmail.com, u-boot@lists.denx.de
+In-Reply-To: <6a783e8a-6ce5-4793-8309-a2715506f068@kwiboo.se> (message from
+ Jonas Karlman on Mon, 13 May 2024 00:23:33 +0200)
+Subject: Re: [PATCH 0/4] rockchip: Add gpio request() ops and drop PCIe
+ reset-gpios workaround
+References: <20240511112821.1156519-1-jonas@kwiboo.se>
+ <0e701fd8-b2c6-4ac4-9427-d984032470d1@gmail.com>
+ <6853e5ac-271f-4d19-b8fb-a2746b834b24@kwiboo.se>
+ <87bk5cglzj.fsf@bloch.sibelius.xs4all.nl>
+ <bea381f4-8e5c-4f72-982d-0e828ab950b4@kwiboo.se>
+ <87zfsug3ua.fsf@bloch.sibelius.xs4all.nl>
+ <6a783e8a-6ce5-4793-8309-a2715506f068@kwiboo.se>
+MIME-version: 1.0
+Content-type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -63,377 +85,234 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If RANDOMIZE_BASE is enabled in the Linux kernel instructing it to
-randomize the virtual address at which the kernel image is loaded, it
-expects entropy to be provided by the bootloader by populating
-/chosen/kaslr-seed with a 64-bit value from source of entropy at boot.
+> Date: Mon, 13 May 2024 00:23:33 +0200
+> From: Jonas Karlman <jonas@kwiboo.se>
 
-If we have DM_RNG enabled populate this value automatically when
-fdt_chosen is called. We skip this if ARMV8_SEC_FIRMWARE_SUPPORT
-is enabled as it's implementation uses a different source of entropy
-that is not yet implemented as DM_RNG. We also skip this if
-MEASURED_BOOT is enabled as in that case any modifications to the
-dt will cause measured boot to fail (although there are many other
-places the dt is altered).
+Hi Jonas,
 
-As this fdt node is added elsewhere create a library function and
-use it to deduplicate code. We will provide a parameter to specify the
-index of the rng device as well as a boolean to overwrite if present.
+Sorry for the delayed reply.  Last week was a bit busy here...
 
-For our automatic injection, we will use the first rng device and
-not overwrite if already present with a non-zero value (which may
-have been populated by an earlier boot stage). This way if a board
-specific ft_board_setup() function wants to customize this behavior
-it can call fdt_kaslrseed with a rng device index of its choosing and
-set overwrite true.
+> Hi Mark,
+> 
+> On 2024-05-12 22:41, Mark Kettenis wrote:
+> >> Date: Sat, 11 May 2024 22:55:18 +0200
+> >> From: Jonas Karlman <jonas@kwiboo.se>
+> >>
+> >> Hi Mark,
+> >>
+> >> On 2024-05-11 21:57, Mark Kettenis wrote:
+> >>>> Date: Sat, 11 May 2024 20:47:40 +0200
+> >>>> From: Jonas Karlman <jonas@kwiboo.se>
+> >>>
+> >>> Hi Jonas & Alex,
+> >>>
+> >>>> Hi Alex,
+> >>>>
+> >>>> On 2024-05-11 19:44, Alex Bee wrote:
+> >>>>> Hi Jonas,
+> >>>>>
+> >>>>> Am 11.05.24 um 13:28 schrieb Jonas Karlman:
+> >>>>>> This series add gpio request() and pinctrl gpio_request_enable() ops so
+> >>>>>> that a gpio requested pin automatically use gpio pinmux and U-Boot
+> >>>>>> behaves more similar to Linux kernel.
+> >>>>>
+> >>>>> I'm not sure that's a good idea.
+> >>>>> While linux does it the same way, we really shouldn't expect every 
+> >>>>> software/os/ … which uses DT (now or in future) to implicitly switch the 
+> >>>>> pin function when using a pin as gpio. So the real fix would probably be 
+> >>>>> to add the the correct pinctrl settings to the upstream DT of those 
+> >>>>> boards and sync it later on (not sure those if those SoCs already using 
+> >>>>> OF_UPSTREAM) and leave the -u-boot.dtsi-"hack" alone for now.
+> >>>
+> >>> I missed Alex's mail, but OpenBSD certainly is one of the OSes that
+> >>> could break if the pinctrl settings get removed.  We currently have no
+> >>> code to automatically mux the gpio pins on these Rockchip SoCs. I
+> >>> suppose as long as U-Boot probes the PCIe bus, the pins will already
+> >>> be muxed correctly and things will continue to work.  But I think
+> >>> there are certain boot scenarios where this won't happen.
+> >>
+> >> The control FDT on the known affected boards was only patched to prevent
+> >> the boards from a full device freeze when PCIe was enumerated. An OS
+> >> should probably not depend on a workaround made for U-Boot use.
+> > 
+> > Sure, but I think that means we should try to minimise the number of
+> > workarounds in U-Boot ;).
+> 
+> Agree, and something this series tries to accomplish, removing one "bad"
+> workaround so that once upstream DT is fixed and it trickle down to 
+> dts/upstream/ nothing else needs to be changed in U-Boot.
 
-Note that the kalsrseed command (CMD_KASLRSEED) is likely pointless now
-but left in place in case boot scripts exist that rely on this command
-existing and returning success. An informational message is printed to
-alert users of this command that it is likely no longer needed.
+To me it looks as if you're trying to replace an "incomplete" fix with
+a "questionable" workaround.
 
-Note that the Kernel's EFI STUB only relies on EFI_RNG_PROTOCOL for
-randomization and completely ignores the kaslr-seed for its own
-randomness needs (i.e the randomization of the physical placement of
-the kernel). It gets weeded out from the DTB that gets handed over via
-efi_install_fdt() as it would also mess up the measured boot DTB TPM
-measurements as well.
+> >> Is it common for *BDS to use the control FDT or is it more common that a
+> >> separate .dtb-file to be loaded during boot?
+> > 
+> > Not sure what the other BSDs do; at this point they're largely
+> > separate codebases that just share a common ancestry.  And I don't
+> > really like the term "control FDT"; in ideal world there should be
+> > just be a single FDT that gets used by the various firmware layers,
+> > U-Boot and the OS.  But yes, my goal is to make OpenBSD work with FDT
+> > provided by U-Boot without loading a separte .dtb file.
+> 
+> Thanks for the insights. Typically I test linux-next kernel using the
+> FDT provided by U-Boot. Any suggestions on how I can get a minimal
+> OpenBSD snapshot to boot on e.g. a RK356x board?
 
-Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-Cc: Michal Simek <michal.simek@amd.com>
-Cc: Andy Yan <andy.yan@rock-chips.com>
-Cc: Akash Gajjar <gajjar04akash@gmail.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Devarsh Thakkar <devarsht@ti.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Hugo Villeneuve <hvilleneuve@dimonoff.com>
-Cc: Marek Vasut <marex@denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Chris Morgan <macromorgan@hotmail.com>
----
-v3:
- - skip if CONFIG_MEASURED_BOOT
- - fix skip for CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT
- - pass in rng index and bool to specify overwrite
- - remove duplicate error strings printed outside of fdt_kaslrseed
- - added note to commit log about how EFI STUB weeds out kalsr-seed
+Very simple.  Just take it a "miniroot" image, e.g. the 7.5 release
+image:
 
-v2:
- - fix typo in commit msg
- - use stack for seed to avoid unecessary malloc/free
- - move to a library function and deduplicate code by using it
-   elsewhere
----
- board/xilinx/common/board.c | 35 -------------------------
- boot/fdt_support.c          |  6 +++++
- boot/pxe_utils.c            | 35 ++-----------------------
- cmd/kaslrseed.c             | 45 +++++---------------------------
- include/kaslrseed.h         | 19 ++++++++++++++
- lib/Makefile                |  1 +
- lib/kaslrseed.c             | 51 +++++++++++++++++++++++++++++++++++++
- 7 files changed, 85 insertions(+), 107 deletions(-)
- create mode 100644 include/kaslrseed.h
- create mode 100644 lib/kaslrseed.c
+  https://ftp.openbsd.org/pub/OpenBSD/7.5/arm64/miniroot75.img
 
-diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
-index 30a81376ac41..f741e8957818 100644
---- a/board/xilinx/common/board.c
-+++ b/board/xilinx/common/board.c
-@@ -713,41 +713,6 @@ int ft_board_setup(void *blob, struct bd_info *bd)
- 	if (IS_ENABLED(CONFIG_FDT_FIXUP_PARTITIONS) && IS_ENABLED(CONFIG_NAND_ZYNQ))
- 		fdt_fixup_mtdparts(blob, nodes, ARRAY_SIZE(nodes));
- 
--	if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
--		debug("No RNG device\n");
--		return 0;
--	}
--
--	if (dm_rng_read(dev, buf, n)) {
--		debug("Reading RNG failed\n");
--		return 0;
--	}
--
--	if (!blob) {
--		debug("No FDT memory address configured. Please configure\n"
--		      "the FDT address via \"fdt addr <address>\" command.\n"
--		      "Aborting!\n");
--		return 0;
--	}
--
--	ret = fdt_check_header(blob);
--	if (ret < 0) {
--		debug("fdt_chosen: %s\n", fdt_strerror(ret));
--		return ret;
--	}
--
--	nodeoffset = fdt_find_or_add_subnode(blob, 0, "chosen");
--	if (nodeoffset < 0) {
--		debug("Reading chosen node failed\n");
--		return nodeoffset;
--	}
--
--	ret = fdt_setprop(blob, nodeoffset, "kaslr-seed", buf, sizeof(buf));
--	if (ret < 0) {
--		debug("Unable to set kaslr-seed on chosen node: %s\n", fdt_strerror(ret));
--		return ret;
--	}
--
- 	return 0;
- }
- #endif
-diff --git a/boot/fdt_support.c b/boot/fdt_support.c
-index 874ca4d6f5af..b64cdd34825a 100644
---- a/boot/fdt_support.c
-+++ b/boot/fdt_support.c
-@@ -8,6 +8,7 @@
- 
- #include <abuf.h>
- #include <env.h>
-+#include <kaslrseed.h>
- #include <log.h>
- #include <mapmem.h>
- #include <net.h>
-@@ -300,6 +301,11 @@ int fdt_chosen(void *fdt)
- 	if (nodeoffset < 0)
- 		return nodeoffset;
- 
-+	if (IS_ENABLED(CONFIG_DM_RNG) &&
-+	    !IS_ENABLED(CONFIG_MEASURED_BOOT) &&
-+	    !IS_ENABLED(CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT))
-+		fdt_kaslrseed(fdt, 0, false);
-+
- 	if (IS_ENABLED(CONFIG_BOARD_RNG_SEED) && !board_rng_seed(&buf)) {
- 		err = fdt_setprop(fdt, nodeoffset, "rng-seed",
- 				  abuf_data(&buf), abuf_size(&buf));
-diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-index 4b22bb6f525a..35d5b9ed3ecc 100644
---- a/boot/pxe_utils.c
-+++ b/boot/pxe_utils.c
-@@ -8,6 +8,7 @@
- #include <dm.h>
- #include <env.h>
- #include <image.h>
-+#include <kaslrseed.h>
- #include <log.h>
- #include <malloc.h>
- #include <mapmem.h>
-@@ -323,10 +324,6 @@ static void label_boot_kaslrseed(void)
- #if CONFIG_IS_ENABLED(DM_RNG)
- 	ulong fdt_addr;
- 	struct fdt_header *working_fdt;
--	size_t n = 0x8;
--	struct udevice *dev;
--	u64 *buf;
--	int nodeoffset;
- 	int err;
- 
- 	/* Get the main fdt and map it */
-@@ -342,35 +339,7 @@ static void label_boot_kaslrseed(void)
- 	if (err <= 0)
- 		return;
- 
--	if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
--		printf("No RNG device\n");
--		return;
--	}
--
--	nodeoffset = fdt_find_or_add_subnode(working_fdt, 0, "chosen");
--	if (nodeoffset < 0) {
--		printf("Reading chosen node failed\n");
--		return;
--	}
--
--	buf = malloc(n);
--	if (!buf) {
--		printf("Out of memory\n");
--		return;
--	}
--
--	if (dm_rng_read(dev, buf, n)) {
--		printf("Reading RNG failed\n");
--		goto err;
--	}
--
--	err = fdt_setprop(working_fdt, nodeoffset, "kaslr-seed", buf, sizeof(buf));
--	if (err < 0) {
--		printf("Unable to set kaslr-seed on chosen node: %s\n", fdt_strerror(err));
--		goto err;
--	}
--err:
--	free(buf);
-+	fdt_kaslrseed(working_fdt, 0, true);
- #endif
- 	return;
- }
-diff --git a/cmd/kaslrseed.c b/cmd/kaslrseed.c
-index e0d3c7fe7489..958ecd8efabb 100644
---- a/cmd/kaslrseed.c
-+++ b/cmd/kaslrseed.c
-@@ -9,33 +9,16 @@
- #include <command.h>
- #include <dm.h>
- #include <hexdump.h>
-+#include <kaslrseed.h>
- #include <malloc.h>
- #include <rng.h>
- #include <fdt_support.h>
- 
- static int do_kaslr_seed(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- {
--	size_t n = 0x8;
--	struct udevice *dev;
--	u64 *buf;
--	int nodeoffset;
--	int ret = CMD_RET_SUCCESS;
-+	int err;
- 
--	if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
--		printf("No RNG device\n");
--		return CMD_RET_FAILURE;
--	}
--
--	buf = malloc(n);
--	if (!buf) {
--		printf("Out of memory\n");
--		return CMD_RET_FAILURE;
--	}
--
--	if (dm_rng_read(dev, buf, n)) {
--		printf("Reading RNG failed\n");
--		return CMD_RET_FAILURE;
--	}
-+	printf("Notice: a /chosen/kaslr-seed is automatically added to the device-tree when booted via booti/bootm/bootz therefore using this command is likely no longer needed");
- 
- 	if (!working_fdt) {
- 		printf("No FDT memory address configured. Please configure\n"
-@@ -44,27 +27,11 @@ static int do_kaslr_seed(struct cmd_tbl *cmdtp, int flag, int argc, char *const
- 		return CMD_RET_FAILURE;
- 	}
- 
--	ret = fdt_check_header(working_fdt);
--	if (ret < 0) {
--		printf("fdt_chosen: %s\n", fdt_strerror(ret));
-+	err = fdt_kaslrseed(working_fdt, 0, true);
-+	if (err < 0)
- 		return CMD_RET_FAILURE;
--	}
--
--	nodeoffset = fdt_find_or_add_subnode(working_fdt, 0, "chosen");
--	if (nodeoffset < 0) {
--		printf("Reading chosen node failed\n");
--		return CMD_RET_FAILURE;
--	}
--
--	ret = fdt_setprop(working_fdt, nodeoffset, "kaslr-seed", buf, sizeof(buf));
--	if (ret < 0) {
--		printf("Unable to set kaslr-seed on chosen node: %s\n", fdt_strerror(ret));
--		return CMD_RET_FAILURE;
--	}
--
--	free(buf);
- 
--	return ret;
-+	return CMD_RET_SUCCESS;
- }
- 
- U_BOOT_LONGHELP(kaslrseed,
-diff --git a/include/kaslrseed.h b/include/kaslrseed.h
-new file mode 100644
-index 000000000000..7f9911c59fa4
---- /dev/null
-+++ b/include/kaslrseed.h
-@@ -0,0 +1,19 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright 2024 Tim Harvey <tharvey@gateworks.com>
-+ */
-+
-+#if !defined _KASLRSEED_H_
-+#define _KASLRSEED_H_
-+
-+/**
-+ * fdt_kaslrseed() - create a 'kaslr-seed' node in chosen
-+ *
-+ * @blob:	fdt blob
-+ * @index:	index of UCLASS_RNG device to use
-+ * @overwrite:	do not overwrite existing non-zero node unless true
-+ * Return:	0 if OK, -ve on error
-+ */
-+int fdt_kaslrseed(void *blob, int index, bool overwrite);
-+
-+#endif /* _KASLRSEED_H_ */
-diff --git a/lib/Makefile b/lib/Makefile
-index 2a76acf100d0..20a0242055fa 100644
---- a/lib/Makefile
-+++ b/lib/Makefile
-@@ -149,6 +149,7 @@ obj-y += date.o
- obj-y += rtc-lib.o
- obj-$(CONFIG_LIB_ELF) += elf.o
- 
-+obj-$(CONFIG_DM_RNG) += kaslrseed.o
- obj-$(CONFIG_$(SPL_TPL_)SEMIHOSTING) += semihosting.o
- 
- #
-diff --git a/lib/kaslrseed.c b/lib/kaslrseed.c
-new file mode 100644
-index 000000000000..29d7ed2e7718
---- /dev/null
-+++ b/lib/kaslrseed.c
-@@ -0,0 +1,51 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2024 Tim Harvey <tharvey@gateworks.com>
-+ */
-+#include <dm.h>
-+#include <rng.h>
-+#include <fdt_support.h>
-+#include <dm/device_compat.h>
-+
-+int fdt_kaslrseed(void *fdt, int index, bool overwrite)
-+{
-+	struct udevice *dev;
-+	const u64 *orig;
-+	int nodeoffset;
-+	u64 data = 0;
-+	int len;
-+	int err;
-+
-+	err = fdt_check_header(fdt);
-+	if (err < 0)
-+		return err;
-+
-+	/* find or create "/chosen" node. */
-+	nodeoffset = fdt_find_or_add_subnode(fdt, 0, "chosen");
-+	if (nodeoffset < 0)
-+		return nodeoffset;
-+
-+	/* return without error if we are not overwriting and existing non-zero node */
-+	orig = fdt_getprop(fdt, nodeoffset, "kaslr-seed", &len);
-+	if (orig && len == sizeof(*orig))
-+		data = fdt64_to_cpu(*orig);
-+	if (data && !overwrite) {
-+		debug("not overwriting existing kaslr-seed\n");
-+		return 0;
-+	}
-+	err = uclass_get_device(UCLASS_RNG, index, &dev);
-+	if (err) {
-+		printf("No RNG device at index %d\n", index);
-+		return err;
-+	}
-+	err = dm_rng_read(dev, &data, sizeof(data));
-+	if (err) {
-+		dev_err(dev, "dm_rng_read failed: %d\n", err);
-+		return err;
-+	}
-+	err = fdt_setprop(fdt, nodeoffset, "kaslr-seed", &data, sizeof(data));
-+	if (err < 0)
-+		printf("WARNING: could not set kaslr-seed %s.\n", fdt_strerror(err));
-+
-+	return err;
-+}
--- 
-2.25.1
+and use dd to write it to a micro-SD card or a USB flash drive.  I
+usually put OpenBSD on a USB flash drive and U-Boot on a micro-SD card
+for testing.  If you prefer to use a micro-SD card, just use dd to
+write u-boot-rockchip.bin on top of the "miniroot" image.
 
+This will boot into the installer, but that is probably good enough
+for testing U-Boot.
+ 
+> >> To recap, the issue on e.g. ROCK 3A is that the upstream DT use pinctrl
+> >> to signal PCIE30X2 CLKREQn_M1/WAKEn_M1/PERSTn_M1 function, DT also
+> >> specify a reset-gpios prop pointing on PERSTn_M1. To me this seem like a
+> >> correct description of HW.
+> > 
+> > Actually I'm starting to think that it isn't.  If you look at table
+> > 11-11 in Part 2 of the RK3588 TRM (V1.0) you'll see that the
+> > pcie_perst_n signal is designated as input.  The corrsponding chapter
+> > is missing from the copy of the RK3568 TRM I have, but it is likely
+> > that the same applies to the PCIe conroller on the RK3568 SoC.  Now
+> > these PCIe controllers can function in either Root Complex (RC) or
+> > Endpoint (EP) mode.  And given the the pcie_perst_n signal is
+> > designated as input I think that means that the PERSTn_M1 function
+> > only makes sense when the controller is in EP mode.  So for the
+> > majority of the boards that use the PCIe controller in RC mode, the DT
+> > should only configure the CLKREQn_M1 and WAKEn_M1 functions and
+> > configure the pin that is used to output PERST# as a GPIO.
+> 
+> Thanks for this insights!
+> 
+> I can also clarify that the freeze only happens when a PCIe device is
+> not attached, removing the reset-gpio prop and leaving the pin in
+> PERSTn_M1 function my nvme drive is discovered correctly. Without
+> anything attached the device freeze during "pci enum".
+> 
+> > 
+> >> When U-Boot probe the PCIE30X2 device the pinctrl driver would
+> >> automatically configure CLKREQn_M1/WAKEn_M1/PERSTn_M1 function.
+> >>
+> >> When U-Boot RK PCIe driver try to use the reset-gpios pin the device
+> >> would freeze unless the PERSTn pin is first re-configured for gpio use.
+> >>
+> >> Current workaround in U-Boot throws away the existing upstream pinctrl
+> >> and replace it to only configure gpio func on the PERSTn pin. This also
+> >> leaves the CLKREQn and WAKEn to incorrectly use gpio func.
+> >>
+> >> With this series I try to cleanup the old workaround that I added without
+> >> much insight beyond: device no longer freeze and nvme "works" :-)
+> >>
+> >>>
+> >>> I've wondered in the past what the purpose of the gpio-ranges
+> >>> properties was.  I never considered that they could be used to
+> >>> automatically mux the pins for GPIO since the gpio-ranges mapping
+> >>> provides no indication of what the correct pin settings arefor the
+> >>> GPIO pins.
+> >>
+> >> The gpio-ranges prop is only used to provide details on how the pins are
+> >> mapped between gpio and pin controller. It is not used to change any
+> >> muxing. But the property is required to make the U-Boot helpers
+> >> pinctrl_gpio_request()/pinctrl_gpio_free() work and figure out what
+> >> pinctrl udevice to use if another driver use e.g. gpio_request_by_name()
+> >> to request use of a pin for gpio use.
+> > 
+> > But that means you rely on the Linux (and now U-Boot) driver
+> > interfaces.  What I was saying is that this is all rather implicit and
+> > not explicitly documented in the device tree bindings.
+> 
+> I fully understand this, however, from a developer perspective and
+> seeing how there is no API to configure pinmux from code but there is an
+> API to request and work with gpio, I would expect that the abstraction
+> layer handle anything needed to be able to use the returned gpio.
+> 
+> > 
+> >> Keep in mind that this series should not change any behavior except for
+> >> the special case when DT pinctrl may configure a pin for non-gpio
+> >> function and later U-Boot request the pin to be used for gpio.
+> > 
+> > To me such a case would be suspicious.  What would be the purpose of
+> > such a configuration?  And wouldn't this mean that you now implictly
+> > rely on the gpio being requested after the pinctl config has been
+> > applied?
+> 
+> Main purpose is to ensure the U-Boot gpio API works as expected for
+> debugging and development purposes. For final DTs I am expecting that
+> pinctrl is configured correctly.
+> 
+> Regards,
+> Jonas
+> 
+> > 
+> >>>> I fully agree that the pinctrl for the problematic boards should be
+> >>>> corrected in upstream DT, but that is a separate issue and should not
+> >>>> block adding support for the request()/gpio_request_enable() ops.
+> >>>>
+> >>>> While the pcie reset-gpios full board freeze that was my driving factor
+> >>>> to fully implement the gpio request() ops it is not the only use case,
+> >>>> using the gpio cmd on a pin that use a non-gpio pinmux is another.
+> >>>>
+> >>>> Or do you see any technical issue with having the gpio request() ops
+> >>>> implemented and having it ensure gpio pinmux is used on a gpio requested
+> >>>> pin? Similar to how gpio/pinctrl is behaving in Linux and on some other
+> >>>> platforms in U-Boot?
+> >>>
+> >>> Well, it removes the incentive to fix the upstream DTs and would make
+> >>> it harder to notice missing pinctrls in the DTs.
+> >>
+> >> I can understand that, but gpio pinmux is default so any missing pinctrl
+> >> would still cause issues, this changes nothing in that regard.
+> >>
+> >> This only affect if pinctrl exists and pin gets configured for non-gpio
+> >> function use. And later a driver/cmd tries to use such pin for gpio use.
+> >> Before this patch the use of gpio_request() would not change the pin mux
+> >> for gpio use. After this series when code explicily request a pin for
+> >> gpio use the pinctrl driver gets notified that it should change pinmux
+> >> of the pin for gpio use.
+> >>
+> >> Regards,
+> >> Jonas
+> >>
+> >>>
+> >>> Cheers,
+> >>>
+> >>> Mark
+> >>>
+> >>>>> Alex
+> >>>>>>
+> >>>>>> With the gpio and pinctrl ops implemented this series also remove a PCIe
+> >>>>>> reset-gpios related device lock-up workaround from board u-boot.dtsi.
+> >>>>>>
+> >>>>>> PX30, RK3066, RK3188, RK356x and RK3588 are the only SoCs that currently
+> >>>>>> define gpio-ranges props and is affected by this series.
+> >>>>>>
+> >>>>>> A follow up series adding support for the pinmux status cmd will also
+> >>>>>> add gpio-ranges props for remaining RK SoCs.
+> >>>>>>
+> >>>>>> Jonas Karlman (4):
+> >>>>>>    pinctrl: rockchip: Add gpio_request_enable() ops
+> >>>>>>    gpio: rockchip: Add request() ops
+> >>>>>>    rockchip: rk3568-rock-3a: Drop PCIe reset-gpios workaround
+> >>>>>>    rockchip: rk3568-radxa-e25: Drop PCIe reset-gpios workaround
+> >>>>>>
+> >>>>>>   arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi     | 12 -------
+> >>>>>>   arch/arm/dts/rk3568-rock-3a-u-boot.dtsi       | 12 -------
+> >>>>>>   drivers/gpio/rk_gpio.c                        | 10 ++++++
+> >>>>>>   .../pinctrl/rockchip/pinctrl-rockchip-core.c  | 31 +++++++++++++++++++
+> >>>>>>   4 files changed, 41 insertions(+), 24 deletions(-)
+> >>>>>>
+> >>>>>
+> >>>>
+> >>>>
+> >>
+> >>
+> 
+> 
