@@ -4,172 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B6B8C25B74
-	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 13:21:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90DE2C25B74
+	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 13:59:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 969DE88744;
-	Tue, 21 May 2024 15:21:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
+	by phobos.denx.de (Postfix) with ESMTP id B26CC88725;
+	Tue, 21 May 2024 15:59:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="FB1kJ11H";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LgLkZmm6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 213148875A; Tue, 21 May 2024 15:21:09 +0200 (CEST)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id F1A068873D; Tue, 21 May 2024 15:59:27 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09601881A5
- for <U-Boot@lists.denx.de>; Tue, 21 May 2024 15:21:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C6F58871D
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 15:59:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=intel.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kalen.brunham@intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1716297666; x=1747833666;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=z3lcwHKUVXB9Pal5Ijbu8zNeBCZcE/tkshg4PrBEe0I=;
- b=FB1kJ11HPhk/ozCYMk1c80lU+IZ/VWB2K00Qhgyz/S8w2LV+LoJ9XQGy
- H9k+x9iwwmINR/vEUY7Gaju36O6JX3SQ0TLVbpvE5Rb9lqv5XZ6mu7S5d
- hJkrXgAuYrNHuvix/NslW6+gMJ4PTBZPdeqDRH3p4UZF15ilVNVR1JSRj
- A6eqq6c9uSHmdgEEPkKlUckNmXT1FJHCD55m56u+NRVDUn71EzEsIOZvh
- JQNzTwmzT8W5P84d7vebgky1AlIkklLrcMSuDBjGxVcZS23J3FKMvtrwZ
- VK7aU7r0O652AKh+dPfU8SmPBypghWliaVAgZyZ3oX+zU5BNsj3tCEV8q g==;
-X-CSE-ConnectionGUID: FW/o3mpuSZi4YbPb0oNkgw==
-X-CSE-MsgGUID: YgEAycKzSsS3l9HAFtQCqg==
-X-IronPort-AV: E=McAfee;i="6600,9927,11078"; a="23158670"
-X-IronPort-AV: E=Sophos;i="6.08,177,1712646000"; d="scan'208";a="23158670"
-Received: from orviesa010.jf.intel.com ([10.64.159.150])
- by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 21 May 2024 06:21:04 -0700
-X-CSE-ConnectionGUID: HvddADEqRX6qkejZqTeA2w==
-X-CSE-MsgGUID: C5IBPtgZTXygvLDQVrNJAQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.08,177,1712646000"; d="scan'208";a="32777959"
-Received: from fmsmsx602.amr.corp.intel.com ([10.18.126.82])
- by orviesa010.jf.intel.com with ESMTP/TLS/AES256-GCM-SHA384;
- 21 May 2024 06:21:02 -0700
-Received: from fmsmsx610.amr.corp.intel.com (10.18.126.90) by
- fmsmsx602.amr.corp.intel.com (10.18.126.82) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Tue, 21 May 2024 06:21:03 -0700
-Received: from fmsedg602.ED.cps.intel.com (10.1.192.136) by
- fmsmsx610.amr.corp.intel.com (10.18.126.90) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39 via Frontend Transport; Tue, 21 May 2024 06:21:03 -0700
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com (104.47.57.169)
- by edgegateway.intel.com (192.55.55.71) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.39; Tue, 21 May 2024 06:21:03 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=mR6a3z8gOgZjpUoWPBlp+PHynoRlJWyG+2WCxyD9pD9eksLvUc/VAraITrcV/a6yyPVogUv2ZuXr3oMtLjW524eUDY5M1YwaNtG0OD3Y1FFwcIFjiOKXyQcIXgGLSWXE4DihtWRhdshtyR7e4IrnMhjkayXbGiNVDNZEBNmtzvQQ1Q9CdnvJ2PPj5LoQ9bRPossUJCZtDkr/oRsej1UhBqhUeJ2+YJqjW0vMdEF72psvxkoua0p8ocQiioLimE85UWwdEgI70ziqcFnigUEo+IwC7z1ZZebeUYDUVIoPyNtsFG9IH0tcIH8tSGq+YHkVNSRc02OlXAJJB2TvDB3hoA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UWfARLoDIBoxx2GuR1H8CSmIh/ostSFNF2UOWio7HD8=;
- b=i9tsQ27wbKr2Nzwnb8IFlEVfIUFuwt/8y4pE5Y9EDz6DBpShrRsxyhYno2rXpvZVzwQi5yAGAYomeL2QXkgJKc8GpZPIw1irASyUYn9YcBxcwv5cyQvyrx+AjqXz8NpyzeJ9gtLH4YiBTY/KaLvm/KVsAOT2mG0noj7ppK3j46tlxTIJlXmF3YVtOP/yZze2syPQJ9AhKBkQq9C69qliV0kgqYLUXTPbSabUtEQGW8o8/yYIvQvRpxAemwMq2QNIMfTU+MT22yu5l+YQPvXgEtt3W6SwkFWnbvOSwGZenQBqNBYTox9OxTTV3kHvAugN3V06912iut+XCP4Pp6NHuQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Received: from DM4PR11MB5296.namprd11.prod.outlook.com (2603:10b6:5:393::22)
- by SA2PR11MB5065.namprd11.prod.outlook.com (2603:10b6:806:115::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7587.36; Tue, 21 May
- 2024 13:21:01 +0000
-Received: from DM4PR11MB5296.namprd11.prod.outlook.com
- ([fe80::4976:d526:d3f2:d785]) by DM4PR11MB5296.namprd11.prod.outlook.com
- ([fe80::4976:d526:d3f2:d785%4]) with mapi id 15.20.7587.035; Tue, 21 May 2024
- 13:21:01 +0000
-From: "Brunham, Kalen" <kalen.brunham@intel.com>
-To: "U-Boot@lists.denx.de" <U-Boot@lists.denx.de>
-CC: "trini@konsulko.com" <trini@konsulko.com>
-Subject: RE: [PATCH 1/1] Added arm64 assembly for examples/api crt0
-Thread-Topic: [PATCH 1/1] Added arm64 assembly for examples/api crt0
-Thread-Index: Adqojlev93VX2sPCRR6waFJsm7XUJgC82DVQ
-Date: Tue, 21 May 2024 13:21:01 +0000
-Message-ID: <DM4PR11MB52961423BCE12552857A12A8E3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
-References: <DM4PR11MB5296B1B9F0CFC701A8B11284E3EE2@DM4PR11MB5296.namprd11.prod.outlook.com>
-In-Reply-To: <DM4PR11MB5296B1B9F0CFC701A8B11284E3EE2@DM4PR11MB5296.namprd11.prod.outlook.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DM4PR11MB5296:EE_|SA2PR11MB5065:EE_
-x-ms-office365-filtering-correlation-id: b5206d6e-2681-4554-c44f-08dc7998dc26
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230031|366007|1800799015|376005|38070700009;
-x-microsoft-antispam-message-info: =?us-ascii?Q?032Ze/wZ0XKUr5LFOtQlFhUFcx1n3gCjBPzfN2aiMxkOwtIQ7THGR6MxTNL1?=
- =?us-ascii?Q?6sHKP5cTSTCNT4KgTJ/eOaPHFJ+FCsRwc+DxkKxrDy5rWmG8bBwXCz5Av2HS?=
- =?us-ascii?Q?k7/OxnwSQt684+3ulDoIoZodp0e+3xEIaHWSn4RBXyC8mrzLTQjtmsOGsg3L?=
- =?us-ascii?Q?Qb295OQHt3iQqHmLOx4fIXye1xcA6nRQKWrLzXUxpQVxSpHlchwsD9S1pJNJ?=
- =?us-ascii?Q?Yg91Jp0P5BwLstBgTyRVSNwacWdUXCG2lO4X1GBLkTAtaQuhxtQHUsRynwhu?=
- =?us-ascii?Q?GOJcOp59RAVhc0NXWf7CcMXF47wOY2uQJSJlSzHNOHW16Vapu6CklYZkhfXc?=
- =?us-ascii?Q?qXd+W5+M1rKx6V4RMzo/lWbLlSYrV5nd1exDBcW7ZasZVmfD/0IWX55O7E6S?=
- =?us-ascii?Q?Nlcf9bEu/UrrT/Siu/Zu/ZG3uI0CgSiTO5d68KOdKvLS4s0PVBaQDAjkzk5O?=
- =?us-ascii?Q?u1ljMB7D4nhzl4/CCUTftP5+9SovA0FmOGuYp5UIwZHg/PMpskcIHClnxtUo?=
- =?us-ascii?Q?n7pNYwwfdCy4d7vb3Cs4TdwDKK42u0+GX2dNj5SoPVOCfKK+RdIVl6okuq6v?=
- =?us-ascii?Q?3fnJkERg3OFx9oQwtOjD2jB15qCXU8XFP42z5/Y2pepkmBJnUzXZev5vTqUB?=
- =?us-ascii?Q?qTW1w3YAWVtMu0nm2AQ448l4yv0WFT+/lCp2XjDp5a0FnBVYA7/RzwNq/4cc?=
- =?us-ascii?Q?37cCZISjzd752iIKFckQM6T3i5S65nOS/ti189eMCrVF3vLvCNMoo7jZlK4d?=
- =?us-ascii?Q?/EZyYNuoIdci2CDD9Pz75z7K85C0p5nrx/Q0LRaVGB0M2TOkfuAgUF6VvEwM?=
- =?us-ascii?Q?Lm76dKdyo6oOWGYvL2qQr83OLGhfIG11JUZl/lX9MGIwWDekRr5Zt9ntEq+x?=
- =?us-ascii?Q?W2BuH9VIbrNZ8uTdMfdJdQzyBP2/yB/+3m9Zdtf10sOjZEwHd5geE42KkW9h?=
- =?us-ascii?Q?yUxlc72ogEJOnzq3x4aTEgHGCz0IP+VG9k3aPC2vLjgMWM7ejo8stEL8uuMg?=
- =?us-ascii?Q?W/Enk7DgPNCHAJw5Er04FPNtmcVkbpbWqZxRA4pMLPZ6jAmyheCCiFjXBG01?=
- =?us-ascii?Q?sV6jtgIW2Majenle5a75Klskc7zPGs/7fgiPVPaGTdg03V8pJDPmulgtKoqw?=
- =?us-ascii?Q?eVsP56ll10PLAfTRTzYZKKxzxE9GvzfxIRa4329lgwkPYfu/D7R2C2VY892z?=
- =?us-ascii?Q?cyyQJVPDtQSkY3LHHJxTj3muW7GdTPuOrkikZU6pIH36m0Y7tT4HJ9Wy58Vj?=
- =?us-ascii?Q?4RF+1ubKTNKyr5GAE0MTjMXxHW7EWRxchu1n3Dh5TA=3D=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM4PR11MB5296.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366007)(1800799015)(376005)(38070700009); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?lGIZsfp6AgT/aWUX8L5DNYjNtLZVqAaSl+b7vgzEGrAoxzuSkEU+vXg3Qkjj?=
- =?us-ascii?Q?04p2uh/+31x9NBHagfeOq7kbVi9uM4643bh2EylAHaUMzDT9YIXgwB/ODAW+?=
- =?us-ascii?Q?o7iQdz2/kox1TpMv4+P1+dnSeB0kR2eMr+vOZygJeu5cnWz492p1FBGvGnh9?=
- =?us-ascii?Q?4ypgl8m4tzDael671As4m3ja2lO93DspaqW5H/HS5VjHVUvez7vzwTDPSQ6N?=
- =?us-ascii?Q?DVKrw6HsScobwkfR/zzAbG9uYhjKf+hCEF/3YBP3wKX2lfaVkI373fCAuIkd?=
- =?us-ascii?Q?S62qeEjwrquHQn0823ELc2fdHbpAWe3f3ORt1S4fgxqLH9jr/N2e2K/Q7awx?=
- =?us-ascii?Q?jA+7/rmcKdDRMgd3uMJueTDBBgXylZv8mJ9ELgqukxdzAaoyS0iBQ/7RGPHo?=
- =?us-ascii?Q?Qrkhr90FhgGDGLYM96j5VBW/GeS8tjqqkFK1zbkI2VH+FwrEvYlZvTCO14Ii?=
- =?us-ascii?Q?zfrDOOmvCUiXIG3900AA0WvTvmQsJlKafF3lf8k+e1wESw7KEUn4mSG8DE31?=
- =?us-ascii?Q?Uvhj02SC85XJ47s7OS+dhhoUwuEhRhBn4cWSGzVfh4wxNqvxdW+G7AHhd0QE?=
- =?us-ascii?Q?Em9NOLu0N9QiwKZKxVm5gSLh/51sxkSBhV7gCxIyhu69+oYYKP2EMtXw4OOP?=
- =?us-ascii?Q?XFueRxQSIQprFJwPYflre979kf5arew0I3aJYITRjrGFwUi21BwqgG7/BDbg?=
- =?us-ascii?Q?wcE/t7wZdAxO5DcuxiyC/m+EwDowdDi3cmQqwkIVX7J8g1Omx+/6OWQINzyG?=
- =?us-ascii?Q?3X2qeJrwy2OCFxJUvOLvebtQ9Q9jr8lMyKSZ6U+EjKOSyKaa1eoEk0Zv3ckG?=
- =?us-ascii?Q?NWPUOE2TAGbGO48A2RziPn6qerAIAwgFqwfz/tE4jp2CJUH9z27/Q6YtMW17?=
- =?us-ascii?Q?PKvYDMqlJSwit2glkL7l4RUy4d3q4HMgnfP6BmG8uLEHArgca8IIpwui7CPv?=
- =?us-ascii?Q?OZs6U4Z2CkRkFjviS1yvF+cPX+S5993j7I2kN39cFKndLs+9iVNWLm5axjJI?=
- =?us-ascii?Q?RAb5YO95NflS/Ah871q4GX1lQiSxT+oESDcECXsg28qfO66mGG1XaIk7JyYe?=
- =?us-ascii?Q?GjdaWjYnsRMnq4wabmAjuyNdlWcxPWLMBDjF0/oA6rrnOMVa4vOM62md6112?=
- =?us-ascii?Q?Ym0r6ZaX/5v5zXQmQWF842WSfjstXMS5cahH4Mw1aQ77846ztmMUUbXFuN7p?=
- =?us-ascii?Q?PDbpRbayoW0BXs3iIaZUgGHgcrk8zRUu1h7Woj/4Ew7ef94rlSlIy239Bgux?=
- =?us-ascii?Q?6nlwz7dCyhdoKpMbyYtb6jFq1cJIZbxtwgGj0WLuHipbUX/VK9CS1vCtUMg7?=
- =?us-ascii?Q?1XX7dq6YVI1n05qAIeUkGNjJfVQJf6YX76Q9FsvI4KAdc1FjSr6fKp57hGjN?=
- =?us-ascii?Q?UPDXplPw7j7z7SdEwnym5RlEgRkEOAuHUG4686yc3vKRbjC7pOBYvHVQ8EHw?=
- =?us-ascii?Q?q8HFdZlTtE0z46x0uLjlgPB6cjxLWvJ7V9jXdvbNUYwi2D1h45SNYUyHpSX8?=
- =?us-ascii?Q?AlQNFcKpjTOTBjENphw63iJfN3rb69z32h++A2jaY0bJKiuY65cwnNYbghh1?=
- =?us-ascii?Q?wAPLoSMJ8pyuZgivJhs7K28g8/KAcNcuGv8EB7jE?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-51f1e8eaee5so4806017e87.1
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 06:59:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1716299965; x=1716904765; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Q3M7sfh6tBaq5FGi5rp29ELOgO446EXwOzDVz6HNneA=;
+ b=LgLkZmm6/4RQipalmf3hhJAPWpyeC2WxXJIzS/ciW90yVw0zlHp9vvHhUAGTD08uQT
+ HE6muxv/A00E91nuiiaBo77mCpWDISR3ZGpHniZ3YAFMwNgPXuojPB8czDIF9EvlaTrg
+ Mga1DP3sVkJG2HNcib9BuaLjiyvKy2/Ha9+Vh5k5CJC6t2Kv9zxsqndWY9ewFqVPEgYO
+ fpfMCfLK+IxtCsdyZNJ7wkXH0tyouIrhJLsDCr8TKXFbexUN8x1b+xyIVVXxP+IuT9gH
+ wcaLGndM/jvX1PgSIo5JKJrYaWYMtIpwlxSUO1IAMn69x2GY75aVBwIa5k0pvOItPOxS
+ msZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716299965; x=1716904765;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Q3M7sfh6tBaq5FGi5rp29ELOgO446EXwOzDVz6HNneA=;
+ b=OXgP4hA4cs2eVJPQN082BhLyhLhEaVF/zxvl6MFHoYW8SARjGKkq+uRtORr3sdIzf4
+ SL9CxkcKKjj3W6DtKB7HMuHz9nCFBxW+VyT8BBJEUo0cDv1cvCFHRObnkII+U6JvM47L
+ 4iI/AnufRj/84OA3pw5FgfwVjm3P7aXXp8sTrdM1MRyeXdb2I5RX34vUg0Gpn3FLXIMb
+ MNSE7TfcE/Ryl/92BUDjyftEzxtjQfKvn6FvzWPuLS/NGHyaAvnsU9/r3X5r5C5QYDKt
+ 59Q415ysEI3p4IsGtJG3Q+klZStXpV5mFG5JQsjpTtJzDWTsjFsyCyAFF/InJo8bwdLl
+ 0rqg==
+X-Gm-Message-State: AOJu0YzhuRQOmMm7pQvpUIH/Dv2WeENLiv62XDFSgWOO3cCiuplfnPMq
+ UJ+BCKNCZChUCq2aS3OTftc6GxnpNHCbtTBIW4Gzqi61Kf29Ytb2AXOdgo0LKEpRVTMjUgdGoJt
+ v4jKQs+Q2oE4re6Q4kwGsKZYwRrRgBM8PB9xsDg==
+X-Google-Smtp-Source: AGHT+IE1OeRZrGUjN0jV+9PPZ8DIo88Gj64o8AYPDNo8PO+RjJD7nbw8C2ee8uhEqOj5Wvsu8ImbfK96moOZirQIVFs=
+X-Received: by 2002:a05:6512:68e:b0:516:c97d:96b4 with SMTP id
+ 2adb3069b0e04-524079a8708mr3464099e87.2.1716299964690; Tue, 21 May 2024
+ 06:59:24 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DM4PR11MB5296.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b5206d6e-2681-4554-c44f-08dc7998dc26
-X-MS-Exchange-CrossTenant-originalarrivaltime: 21 May 2024 13:21:01.4745 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: /e3BvAxxBZyb3Jx4yfvQgmj+WTFbd2/coTDiVVUkWVG5BwYqO54SnY8pKZLDsmEt+wIHR+sGmn44Sd1Xao3OaA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA2PR11MB5065
-X-OriginatorOrg: intel.com
+References: <20240517-mips-efi-v1-0-79096e3ca3b3@flygoat.com>
+ <20240517-mips-efi-v1-2-79096e3ca3b3@flygoat.com>
+In-Reply-To: <20240517-mips-efi-v1-2-79096e3ca3b3@flygoat.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 21 May 2024 16:58:48 +0300
+Message-ID: <CAC_iWjKKyUm=4NJVuWgUqmFR43TNcuxFKmaBJLAFKC2CQYbxJg@mail.gmail.com>
+Subject: Re: [PATCH 2/7] efi: Allow runtime relocate to be disabled
+To: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Cc: u-boot@lists.denx.de, Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -186,59 +87,308 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adding Tom Rini.=20
+Hi Jiaxun,
 
-Any update from others?
+On Fri, 17 May 2024 at 19:33, Jiaxun Yang <jiaxun.yang@flygoat.com> wrote:
+>
+> Allow runtime relocate to be disabled because on MIPS we
+> never do that. It's guaranteed that OS won't call
+> set_virtual_address_map and convert_pointer as well.
 
------Original Message-----
-From: Brunham, Kalen <kalen.brunham@intel.com>=20
-Sent: Friday, May 17, 2024 3:14 PM
-To: U-Boot@lists.denx.de
-Subject: [PATCH 1/1] Added arm64 assembly for examples/api crt0
+Who guarantees that? Is it only for Linux?
 
-I've encountered a problem when compiling the 'examples/api' directory for =
-ARM64 in U-boot. The problem lies in the assembly code in 'examples/api/crt=
-0.S' where the current CONFIG_ARM code is only 32-bit. When targeting ARM64=
-, a 64-bit version is necessary.
+>
+> On MIPS KSEG0 is always mapped to memory and there is no
+> way to disable it for kernel mode. Both EFI runtime and
+> kernel lays in this segment, so relocation is totally
+> unnecessary.
+>
+> Also U-Boot does not use traditional .dyn.rel to perform
+> relocation on MIPS, that makes implementation of runtime
+> relocation pretty hard.
 
-I have proposed a fix by including a 'CONFIG_ARM64' section in the assembly=
- code as shown below.  These changes have been check via https://github.com=
-/u-boot/u-boot/pull/538.
+It already works on other architectures so I suppose it's only a
+matter of adding it?
 
-Feedback is welcome.
-
----
-examples/api/crt0.S | 15 +++++++++++++++
-1 file changed, 15 insertions(+)
-
-diff --git a/examples/api/crt0.S b/examples/api/crt0.S index 57bba9d851..4c=
-23a54b21 100644
---- a/examples/api/crt0.S
-+++ b/examples/api/crt0.S
-@@ -24,6 +24,21 @@ syscall:
-                mtctr     %r11
-                bctr
-
-+#elif defined(CONFIG_ARM64)
-+
-+              .text
-+              .globl _start
-+_start:
-+              ldr           ip0, =3Dsearch_hint
-+              str           sp_el2, [ip0]
-+              b             main
-+
-+
-+              .globl syscall
-+syscall:
-+              ldr           ip0, =3Dsyscall_ptr
-+              ldr           pc_el2, [ip0]
-+
-#elif defined(CONFIG_ARM)
-
-               .text
---
-
-Signed-off-by: Kalen Brunham <kalen.brunham@intel.com>
-
-
+Thanks
+/Ilias
+>
+> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> ---
+>  include/efi_loader.h              | 26 ++++++++++++++++++--------
+>  lib/efi_loader/Kconfig            | 10 ++++++++++
+>  lib/efi_loader/efi_image_loader.c |  1 +
+>  lib/efi_loader/efi_memory.c       | 14 +++++++++++---
+>  lib/efi_loader/efi_runtime.c      | 11 ++++++++++-
+>  lib/efi_loader/efi_var_mem.c      |  6 +++++-
+>  lib/efi_selftest/Makefile         |  2 +-
+>  7 files changed, 56 insertions(+), 14 deletions(-)
+>
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index 9600941aa327..1ae62906e099 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -31,7 +31,7 @@ static inline void *guidcpy(void *dst, const void *src)
+>         return memcpy(dst, src, sizeof(efi_guid_t));
+>  }
+>
+> -#if CONFIG_IS_ENABLED(EFI_LOADER)
+> +#if CONFIG_IS_ENABLED(EFI_LOADER) && CONFIG_IS_ENABLED(EFI_RUNTIME_RELOCATE)
+>
+>  /**
+>   * __efi_runtime_data - declares a non-const variable for EFI runtime section
+> @@ -79,6 +79,23 @@ static inline void *guidcpy(void *dst, const void *src)
+>   */
+>  #define __efi_runtime __section(".text.efi_runtime")
+>
+> +/* Call this to relocate the runtime section to an address space */
+> +void efi_runtime_relocate(ulong offset, struct efi_mem_desc *map);
+> +
+> +#else /* CONFIG_IS_ENABLED(EFI_LOADER) && CONFIG_IS_ENABLED(EFI_RUNTIME_RELOCATE) */
+> +
+> +/* Without CONFIG_EFI_LOADER we don't have a runtime section, stub it out */
+> +#define __efi_runtime_data
+> +#define __efi_runtime_rodata
+> +#define __efi_runtime
+> +
+> +static inline void efi_runtime_relocate(ulong offset,
+> +                                       struct efi_mem_desc *map) {};
+> +
+> +#endif /* CONFIG_IS_ENABLED(EFI_LOADER) && CONFIG_IS_ENABLED(EFI_RUNTIME_RELOCATE) */
+> +
+> +#if CONFIG_IS_ENABLED(EFI_LOADER)
+> +
+>  /*
+>   * Call this with mmio_ptr as the _pointer_ to a pointer to an MMIO region
+>   * to make it available at runtime
+> @@ -101,10 +118,6 @@ efi_status_t efi_launch_capsules(void);
+>
+>  #else /* CONFIG_IS_ENABLED(EFI_LOADER) */
+>
+> -/* Without CONFIG_EFI_LOADER we don't have a runtime section, stub it out */
+> -#define __efi_runtime_data
+> -#define __efi_runtime_rodata
+> -#define __efi_runtime
+>  static inline efi_status_t efi_add_runtime_mmio(void *mmio_ptr, u64 len)
+>  {
+>         return EFI_SUCCESS;
+> @@ -118,7 +131,6 @@ static inline efi_status_t efi_launch_capsules(void)
+>  {
+>         return EFI_SUCCESS;
+>  }
+> -
+>  #endif /* CONFIG_IS_ENABLED(EFI_LOADER) */
+>
+>  #if CONFIG_IS_ENABLED(EFI_BINARY_EXEC)
+> @@ -641,8 +653,6 @@ efi_status_t efi_load_pe(struct efi_loaded_image_obj *handle,
+>                          struct efi_loaded_image *loaded_image_info);
+>  /* Called once to store the pristine gd pointer */
+>  void efi_save_gd(void);
+> -/* Call this to relocate the runtime section to an address space */
+> -void efi_runtime_relocate(ulong offset, struct efi_mem_desc *map);
+>  /* Call this to get image parameters */
+>  void efi_get_image_parameters(void **img_addr, size_t *img_size);
+>  /* Add a new object to the object list. */
+> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> index 430bb7f0f7dc..bc5ae9086ea2 100644
+> --- a/lib/efi_loader/Kconfig
+> +++ b/lib/efi_loader/Kconfig
+> @@ -359,6 +359,16 @@ config EFI_UNICODE_CAPITALIZATION
+>
+>  endif
+>
+> +config EFI_RUNTIME_RELOCATE
+> +       bool "Support relocation for EFI runtime service"
+> +       depends on ARM || X86 || RISCV || SANDBOX
+> +       default y
+> +       help
+> +         Select this option to enable relocation for EFI runtime service. It
+> +         enables set_virtual_address_map and convert_pointer runtime service.
+> +         It is required for OS on most architectures to make use of EFI runtime
+> +         services.
+> +
+>  config EFI_LOADER_BOUNCE_BUFFER
+>         bool "EFI Applications use bounce buffers for DMA operations"
+>         depends on ARM64
+> diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_image_loader.c
+> index 604243603289..cedc4d822fe7 100644
+> --- a/lib/efi_loader/efi_image_loader.c
+> +++ b/lib/efi_loader/efi_image_loader.c
+> @@ -50,6 +50,7 @@ static int machines[] = {
+>  #if defined(__riscv) && (__riscv_xlen == 64)
+>         IMAGE_FILE_MACHINE_RISCV64,
+>  #endif
+> +
+>         0 };
+>
+>  /**
+> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> index 12cf23fa3fa8..7a1959d2409a 100644
+> --- a/lib/efi_loader/efi_memory.c
+> +++ b/lib/efi_loader/efi_memory.c
+> @@ -908,8 +908,8 @@ __weak void efi_add_known_memory(void)
+>   */
+>  static void add_u_boot_and_runtime(void)
+>  {
+> -       unsigned long runtime_start, runtime_end, runtime_pages;
+> -       unsigned long runtime_mask = EFI_PAGE_MASK;
+> +       __maybe_unused unsigned long runtime_start, runtime_end, runtime_pages;
+> +       __maybe_unused unsigned long runtime_mask = EFI_PAGE_MASK;
+>         unsigned long uboot_start, uboot_pages;
+>         unsigned long uboot_stack_size = CONFIG_STACK_SIZE;
+>
+> @@ -918,7 +918,13 @@ static void add_u_boot_and_runtime(void)
+>                        uboot_stack_size) & ~EFI_PAGE_MASK;
+>         uboot_pages = ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
+>                        uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
+> -       efi_add_memory_map_pg(uboot_start, uboot_pages, EFI_BOOT_SERVICES_CODE,
+> +       /*
+> +        * In case runtime relocate is not enabled just mark whole U-Boot
+> +        * as EFI_RUNTIME_SERVICES_CODE because all are required at runtime.
+> +        */
+> +       efi_add_memory_map_pg(uboot_start, uboot_pages,
+> +                             CONFIG_IS_ENABLED(EFI_RUNTIME_RELOCATE) ?
+> +                             EFI_BOOT_SERVICES_CODE : EFI_RUNTIME_SERVICES_CODE,
+>                               false);
+>
+>  #if defined(__aarch64__)
+> @@ -930,6 +936,7 @@ static void add_u_boot_and_runtime(void)
+>         runtime_mask = SZ_64K - 1;
+>  #endif
+>
+> +#if CONFIG_IS_ENABLED(EFI_RUNTIME_RELOCATE)
+>         /*
+>          * Add Runtime Services. We mark surrounding boottime code as runtime as
+>          * well to fulfill the runtime alignment constraints but avoid padding.
+> @@ -940,6 +947,7 @@ static void add_u_boot_and_runtime(void)
+>         runtime_pages = (runtime_end - runtime_start) >> EFI_PAGE_SHIFT;
+>         efi_add_memory_map_pg(runtime_start, runtime_pages,
+>                               EFI_RUNTIME_SERVICES_CODE, false);
+> +#endif
+>  }
+>
+>  int efi_memory_init(void)
+> diff --git a/lib/efi_loader/efi_runtime.c b/lib/efi_loader/efi_runtime.c
+> index 011bcd04836d..9a6a131e5695 100644
+> --- a/lib/efi_loader/efi_runtime.c
+> +++ b/lib/efi_loader/efi_runtime.c
+> @@ -37,6 +37,7 @@ static LIST_HEAD(efi_runtime_mmio);
+>
+>  static efi_status_t __efi_runtime EFIAPI efi_unimplemented(void);
+>
+> +#if (CONFIG_IS_ENABLED(EFI_RUNTIME_RELOCATE))
+>  /*
+>   * TODO(sjg@chromium.org): These defines and structures should come from the ELF
+>   * header for each architecture (or a generic header) rather than being repeated
+> @@ -94,6 +95,7 @@ struct elf_rela {
+>  static __efi_runtime_data struct efi_mem_desc *efi_virtmap;
+>  static __efi_runtime_data efi_uintn_t efi_descriptor_count;
+>  static __efi_runtime_data efi_uintn_t efi_descriptor_size;
+> +#endif
+>
+>  /*
+>   * EFI runtime code lives in two stages. In the first stage, U-Boot and an EFI
+> @@ -546,7 +548,7 @@ static efi_status_t __efi_runtime EFIAPI efi_query_capsule_caps_unsupported(
+>   * Return:     true if the pointer points to a service function pointer in the
+>   *             runtime table
+>   */
+> -static bool efi_is_runtime_service_pointer(void *p)
+> +static bool __maybe_unused efi_is_runtime_service_pointer(void *p)
+>  {
+>         return (p >= (void *)&efi_runtime_services.get_time &&
+>                 p <= (void *)&efi_runtime_services.query_variable_info) ||
+> @@ -574,6 +576,7 @@ void efi_runtime_detach(void)
+>         efi_update_table_header_crc32(&efi_runtime_services.hdr);
+>  }
+>
+> +#if (CONFIG_IS_ENABLED(EFI_RUNTIME_RELOCATE))
+>  /**
+>   * efi_set_virtual_address_map_runtime() - change from physical to virtual
+>   *                                        mapping
+> @@ -910,6 +913,7 @@ static efi_status_t EFIAPI efi_set_virtual_address_map(
+>  out:
+>         return EFI_EXIT(ret);
+>  }
+> +#endif
+>
+>  /**
+>   * efi_add_runtime_mmio() - add memory-mapped IO region
+> @@ -987,8 +991,13 @@ struct efi_runtime_services __efi_runtime_data efi_runtime_services = {
+>         .set_time = &efi_set_time_boottime,
+>         .get_wakeup_time = (void *)&efi_unimplemented,
+>         .set_wakeup_time = (void *)&efi_unimplemented,
+> +#if (CONFIG_IS_ENABLED(EFI_RUNTIME_RELOCATE))
+>         .set_virtual_address_map = &efi_set_virtual_address_map,
+>         .convert_pointer = efi_convert_pointer,
+> +#else
+> +       .set_virtual_address_map = (void *)&efi_unimplemented,
+> +       .convert_pointer = (void *)&efi_unimplemented,
+> +#endif
+>         .get_variable = efi_get_variable,
+>         .get_next_variable_name = efi_get_next_variable_name,
+>         .set_variable = efi_set_variable,
+> diff --git a/lib/efi_loader/efi_var_mem.c b/lib/efi_loader/efi_var_mem.c
+> index 139e16aad7c6..7afad47b9e12 100644
+> --- a/lib/efi_loader/efi_var_mem.c
+> +++ b/lib/efi_loader/efi_var_mem.c
+> @@ -201,6 +201,7 @@ u64 __efi_runtime efi_var_mem_free(void)
+>                sizeof(struct efi_var_entry);
+>  }
+>
+> +#if CONFIG_IS_ENABLED(EFI_RUNTIME_RELOCATE)
+>  /**
+>   * efi_var_mem_notify_exit_boot_services() - SetVirtualMemoryMap callback
+>   *
+> @@ -213,12 +214,13 @@ efi_var_mem_notify_virtual_address_map(struct efi_event *event, void *context)
+>         efi_convert_pointer(0, (void **)&efi_var_buf);
+>         efi_current_var = NULL;
+>  }
+> +#endif
+>
+>  efi_status_t efi_var_mem_init(void)
+>  {
+>         u64 memory;
+>         efi_status_t ret;
+> -       struct efi_event *event;
+> +       struct efi_event *event __maybe_unused;
+>
+>         ret = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
+>                                  EFI_RUNTIME_SERVICES_DATA,
+> @@ -232,11 +234,13 @@ efi_status_t efi_var_mem_init(void)
+>         efi_var_buf->length = (uintptr_t)efi_var_buf->var -
+>                               (uintptr_t)efi_var_buf;
+>
+> +#if CONFIG_IS_ENABLED(EFI_RUNTIME_RELOCATE)
+>         ret = efi_create_event(EVT_SIGNAL_VIRTUAL_ADDRESS_CHANGE, TPL_CALLBACK,
+>                                efi_var_mem_notify_virtual_address_map, NULL,
+>                                NULL, &event);
+>         if (ret != EFI_SUCCESS)
+>                 return ret;
+> +#endif
+>         return ret;
+>  }
+>
+> diff --git a/lib/efi_selftest/Makefile b/lib/efi_selftest/Makefile
+> index 414701893f65..d707d921bc8e 100644
+> --- a/lib/efi_selftest/Makefile
+> +++ b/lib/efi_selftest/Makefile
+> @@ -37,7 +37,6 @@ efi_selftest_memory.o \
+>  efi_selftest_open_protocol.o \
+>  efi_selftest_register_notify.o \
+>  efi_selftest_reset.o \
+> -efi_selftest_set_virtual_address_map.o \
+>  efi_selftest_startimage_exit.o \
+>  efi_selftest_startimage_return.o \
+>  efi_selftest_textinput.o \
+> @@ -50,6 +49,7 @@ efi_selftest_variables.o \
+>  efi_selftest_variables_runtime.o \
+>  efi_selftest_watchdog.o
+>
+> +obj-$(CONFIG_EFI_RUNTIME_RELOCATE) += efi_selftest_set_virtual_address_map.o
+>  obj-$(CONFIG_EFI_ECPT) += efi_selftest_ecpt.o
+>  obj-$(CONFIG_NETDEVICES) += efi_selftest_snp.o
+>
+>
+> --
+> 2.34.1
+>
