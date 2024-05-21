@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2426FC25B74
-	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 10:57:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52E44C25B74
+	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 10:57:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 655538871E;
-	Tue, 21 May 2024 12:57:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CC4F68874F;
+	Tue, 21 May 2024 12:57:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bBtd5DiK";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bygX7Jk8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20F108812B; Tue, 21 May 2024 12:57:11 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 6F3478874F; Tue, 21 May 2024 12:57:19 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56C4B88748
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 12:57:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 662EA8875E
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 12:57:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44LAv0oF058129;
- Tue, 21 May 2024 05:57:00 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44LAv6Ri011507;
+ Tue, 21 May 2024 05:57:06 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1716289020;
- bh=uV3qOWgzW42YibrnRs74SCoaECUVLISftLC/RV3OfDY=;
- h=From:To:CC:Subject:Date;
- b=bBtd5DiKPs6hW9GUII74efbhzMcDrOJoxgfLtHhZTAn2NZGdU2TaBJ4RgaZ3A2unl
- 5KfuYfFyOozHoYbhbO1FRQ6I9PIQ4WYcl6Zt1TMv3XSBeVcg7T0rKWoR7Ba0YGHN6z
- usch/LNePmh40mGC4vuOCx7bVWcMHKXWnSNCCIW4=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44LAv0x5041761
+ s=ti-com-17Q1; t=1716289026;
+ bh=q3CEOC57Z8oUwXt58QLa9uxxBvev+38A2M6KMrGBpWY=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=bygX7Jk87abl8AcEogZHoWy7/TzEqcFQkZnVQFAxBm0gH85Gz3xy87aKd+AeOSmkR
+ UIqCrtfxJuNVhfaphVKsVdLWKIgP3wuBiAG53rWS5cF7d1HhWLarJEI5Okc8HjZdSK
+ B6W2BuZpBflP2o5yNAbObWrY2P+/+jaJrxMo0n/0=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44LAv63H013175
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 21 May 2024 05:57:00 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 21 May 2024 05:57:06 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 21
- May 2024 05:57:00 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ May 2024 05:57:05 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 21 May 2024 05:56:59 -0500
+ Frontend Transport; Tue, 21 May 2024 05:57:05 -0500
 Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
  (udit-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.18])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44LAurAf047424;
- Tue, 21 May 2024 05:56:54 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44LAurAg047424;
+ Tue, 21 May 2024 05:57:00 -0500
 From: Udit Kumar <u-kumar1@ti.com>
 To: <vigneshr@ti.com>, <nm@ti.com>, <trini@konsulko.com>
 CC: <joe.hershberger@ni.com>, <m-chawdhry@ti.com>, <afd@ti.com>,
@@ -60,10 +60,12 @@ CC: <joe.hershberger@ni.com>, <m-chawdhry@ti.com>, <afd@ti.com>,
  <mkorpershoek@baylibre.com>, <s-vadapalli@ti.com>,
  <u-boot@lists.denx.de>, <joao.goncalves@toradex.com>,
  <hnagalla@ti.com>, Udit Kumar <u-kumar1@ti.com>
-Subject: [PATCH 0/4] Adding support to load secure firmware for HS devices
-Date: Tue, 21 May 2024 16:26:44 +0530
-Message-ID: <20240521105648.3780072-1-u-kumar1@ti.com>
+Subject: [PATCH 1/4] include: mach-k3: move k3 security functions to security.h
+Date: Tue, 21 May 2024 16:26:45 +0530
+Message-ID: <20240521105648.3780072-2-u-kumar1@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240521105648.3780072-1-u-kumar1@ti.com>
+References: <20240521105648.3780072-1-u-kumar1@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -84,43 +86,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some use case needs rproc firmware to be loaded at u-boot stage,
-using following commands at u-boot shell, firmware could be loaded
+From: Manorit Chawdhry <m-chawdhry@ti.com>
 
-=> setenv dorprocboot 1
-=> run boot_rprocs
+ti_secure_image_post_process and ti_secure_image_check_binary is used
+for the authentication purposes in the current boot flow. Authentication
+of remoteproc firmware images require ti_secure_image_post_process to be
+available outside mach-k3.
 
-For Secure devices, secure version of rproc firmware should be loaded,
-which is appended by sec keyword[0].
-but currently non-secure firmware is loaded even for secure devices.
-So adding support for loading secure firmware on Secured devices.
-
-[0]: https://gist.github.com/uditkumarti/cd8bf6a448079b59145d17a0e8bf13b7
-
-Bootlogs:
-GP : https://gist.github.com/uditkumarti/23a00c313e1c28b62537aab733a585df#file-gp_device line 65 onwards
-HS : https://gist.github.com/uditkumarti/23a00c313e1c28b62537aab733a585df#file-hs-device line 60 onwards
-
-
-Manorit Chawdhry (3):
-  include: mach-k3: move k3 security functions to security.h
-  drivers: remoteproc: ti_k3 : enable secure booting with firmware
-    images
-  mach-k3: common.c: add a flag for booting authenticated rproc binaries
-
-Udit Kumar (1):
-  include: env: ti: Add support for secure firmwares
-
- arch/arm/mach-k3/common.c                |  4 +++-
+Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+---
  arch/arm/mach-k3/common.h                |  4 ++--
  arch/arm/mach-k3/include/mach/security.h | 11 +++++++++++
- drivers/remoteproc/ti_k3_dsp_rproc.c     |  4 ++++
- drivers/remoteproc/ti_k3_r5f_rproc.c     |  4 ++++
- include/env/ti/k3_rproc.env              |  6 +++++-
- include/env/ti/ti_common.env             |  1 +
- 7 files changed, 30 insertions(+), 4 deletions(-)
+ 2 files changed, 13 insertions(+), 2 deletions(-)
  create mode 100644 arch/arm/mach-k3/include/mach/security.h
 
+diff --git a/arch/arm/mach-k3/common.h b/arch/arm/mach-k3/common.h
+index 53aa186b31..7bd72da1de 100644
+--- a/arch/arm/mach-k3/common.h
++++ b/arch/arm/mach-k3/common.h
+@@ -2,12 +2,13 @@
+ /*
+  * K3: Architecture common definitions
+  *
+- * Copyright (C) 2018 Texas Instruments Incorporated - https://www.ti.com/
++ * Copyright (C) 2018-2024 Texas Instruments Incorporated - https://www.ti.com/
+  *	Lokesh Vutla <lokeshvutla@ti.com>
+  */
+ 
+ #include <asm/armv7_mpu.h>
+ #include <asm/hardware.h>
++#include <mach/security.h>
+ 
+ #define K3_FIREWALL_BACKGROUND_BIT (8)
+ 
+@@ -41,7 +42,6 @@ void spl_enable_cache(void);
+ void mmr_unlock(uintptr_t base, u32 partition);
+ bool is_rom_loaded_sysfw(struct rom_extended_boot_data *data);
+ enum k3_device_type get_device_type(void);
+-void ti_secure_image_post_process(void **p_image, size_t *p_size);
+ struct ti_sci_handle *get_ti_sci_handle(void);
+ void do_board_detect(void);
+ void ti_secure_image_check_binary(void **p_image, size_t *p_size);
+diff --git a/arch/arm/mach-k3/include/mach/security.h b/arch/arm/mach-k3/include/mach/security.h
+new file mode 100644
+index 0000000000..8502b57bd8
+--- /dev/null
++++ b/arch/arm/mach-k3/include/mach/security.h
+@@ -0,0 +1,11 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * K3: Security related definitions
++ *
++ * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
++ *	Manorit Chawdhry <m-chawdhry@ti.com>
++ */
++
++#include <linux/types.h>
++
++void ti_secure_image_post_process(void **p_image, size_t *p_size);
 -- 
 2.34.1
 
