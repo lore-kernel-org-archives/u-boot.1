@@ -4,76 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2FB7C25B74
-	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 17:47:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E0D5C25B74
+	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 17:49:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D36E8825A;
-	Tue, 21 May 2024 19:47:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 90A3D88395;
+	Tue, 21 May 2024 19:49:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UffjUNh3";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="G80R9e/t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E5DA7881C3; Tue, 21 May 2024 19:47:29 +0200 (CEST)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 84A5388395; Tue, 21 May 2024 19:49:05 +0200 (CEST)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.18])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C47E8825A
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 19:47:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-6aa93d19a25so3427756d6.3
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 10:47:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1716313645; x=1716918445; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=uJrQefT8bqLi50Pncn3af/GP2CYnIgrDIGjICpd5N+M=;
- b=UffjUNh39AT368b/+rH5GGFUT8weQc2B+WYVlC24G82+PfqUt3WuXk3bfQ5XPS5NnT
- cJXq6gZEIoEdMzF0pvoMNoZLWdIUADwHWARgJudQ1dtM7L/ruwFyqNPKop7O6Y3Hjr13
- lp50LQthMhC+PyzteAfhcxMXBIcT3ZVV3lKWk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716313645; x=1716918445;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uJrQefT8bqLi50Pncn3af/GP2CYnIgrDIGjICpd5N+M=;
- b=BZ0l7187X56k0qspUTFQjQQb1X40YfrkDC6xZVRj2Nd3JRt2O330XdMzjwdmfzbSK7
- jU7BzP096iOa0hZwoqpDbwToOk6QLA2glLMJkeEHrV5QK5OviTAE3AnAUAVmVJd/0Vok
- xI1VXiAkPbMz01XrMyn+hCztSqQ9+X/m7dbxWrs5oBAiFBaegQoqSp+/6MP+Mvtyk8w0
- asHpoXog6wyB24bLFaprj/m6z1vzcjZSTAI13oouScG5aXGp8JeBs7UYl4hhtl9zVAJ6
- aY1weaceZ0TyDvBQu+FjYomTS1wPsB6FMfoTqc2mWSceCPWL9VGXUST1tqyH7fe2aNQN
- itDg==
-X-Gm-Message-State: AOJu0YxjAm7AOp9+O9BRumK3P1wuRBhqcYmIt0zWkt/axsDwVg07QB5A
- vf3kwzGojCOYNfqLLMbTRzKqshS2r4LboO3RahyS0yJcvGodwD1IanIDW+g914s=
-X-Google-Smtp-Source: AGHT+IHYf7jCjrQtEw7+UD/5MmSfQWVg3ltNGnwhgmEAlDogZhtx5XHj9r/mINwpRM9iFuLz6t8Maw==
-X-Received: by 2002:a0c:ea83:0:b0:6a3:3433:c759 with SMTP id
- 6a1803df08f44-6a33433c786mr231880486d6.5.1716313644866; 
- Tue, 21 May 2024 10:47:24 -0700 (PDT)
-Received: from bill-the-cat ([189.178.170.52])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6a350b9cfdbsm74337196d6.24.2024.05.21.10.47.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 May 2024 10:47:24 -0700 (PDT)
-Date: Tue, 21 May 2024 11:47:21 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Andrea Calabrese <andrea.calabrese@amarulasolutions.com>
-Cc: u-boot@lists.denx.de, flavia.caforio@amarulasolutions.com,
- michael@amarulasolutions.com, linux-amarula@amarulasolutions.com
-Subject: Re: [PATCH] Add support for am623 from BSH
-Message-ID: <20240521174721.GA2568172@bill-the-cat>
-References: <20240521111547.106139-1-andrea.calabrese@amarulasolutions.com>
+ by phobos.denx.de (Postfix) with ESMTPS id E56F1881C3
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 19:49:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=linux.intel.com
+Authentication-Results: phobos.denx.de; spf=none
+ smtp.mailfrom=andriy.shevchenko@linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1716313743; x=1747849743;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:content-transfer-encoding:in-reply-to;
+ bh=BWLQibh1oqDAFwkWPsWf3Zcfk2tyYUWHPxoWXMBGNQQ=;
+ b=G80R9e/tHyzAw0uy3NmUuU8ek6dTMrpxj5mrs0Se0Ols9Rd0SMyWXrUm
+ VjaYxxfL0o7gJFD6VcaU+x22MnYDZkp0bkb0UXiA5SA94lB2HNoPFqLwP
+ sFfDBTsYkg/dNoGEGSn3zJlzPJ0oLwvf1rJRYgdkjYY6qIJgSTuv8OOjc
+ o2oLmyfx6vw7r/7EYaT+zKl4MFaDJpj3ZTJflreAPdY3PCZdU5dHGQ/39
+ Vu/txm77shWt9gSTepDH8VXpBAYhlwHCvHUKMFFmwHAT/Wipvk/rH6CZR
+ tyVXtC0yYwhL6iidkBux1vApY9NS3XNzc7SUQpXH8UzZom8bB5l+vq9ev Q==;
+X-CSE-ConnectionGUID: n42OXpu1T7a9JYj/2fgEfg==
+X-CSE-MsgGUID: Bk7bS6dUQ5SebZ6lTEnssg==
+X-IronPort-AV: E=McAfee;i="6600,9927,11079"; a="12319120"
+X-IronPort-AV: E=Sophos;i="6.08,178,1712646000"; d="scan'208";a="12319120"
+Received: from fmviesa007.fm.intel.com ([10.60.135.147])
+ by fmvoesa112.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 21 May 2024 10:49:01 -0700
+X-CSE-ConnectionGUID: V1OnhJrjTcyGwDLBN5qngA==
+X-CSE-MsgGUID: xjOYiwTFT6WFf9oMGDa1Sw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.08,178,1712646000"; d="scan'208";a="32928427"
+Received: from smile.fi.intel.com ([10.237.72.54])
+ by fmviesa007.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 21 May 2024 10:48:57 -0700
+Received: from andy by smile.fi.intel.com with local (Exim 4.97)
+ (envelope-from <andriy.shevchenko@linux.intel.com>)
+ id 1s9Tba-00000009jcD-1Vt5; Tue, 21 May 2024 20:48:54 +0300
+Date: Tue, 21 May 2024 20:48:54 +0300
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: "Kumar, Udit" <u-kumar1@ti.com>, vigneshr@ti.com, nm@ti.com,
+ joe.hershberger@ni.com, m-chawdhry@ti.com, afd@ti.com,
+ devarsht@ti.com, sjg@chromium.org, emanuele.ghidoli@toradex.com,
+ matthias.schiffer@ew.tq-group.com, a-bhatia1@ti.com,
+ vitor.soares@toradex.com, danishanwar@ti.com, bmeng.cn@gmail.com,
+ mkorpershoek@baylibre.com, s-vadapalli@ti.com, u-boot@lists.denx.de,
+ joao.goncalves@toradex.com, hnagalla@ti.com
+Subject: Re: [PATCH 0/4] Adding support to load secure firmware for HS devices
+Message-ID: <ZkzehjK1AQ2tcPpw@smile.fi.intel.com>
+References: <20240521105648.3780072-1-u-kumar1@ti.com>
+ <ZkyvvWotyQJQyz9k@smile.fi.intel.com>
+ <37ba74bf-21ea-4551-8631-c07d8ff2c0ea@ti.com>
+ <ZkzH2Sa4eGAxb2EB@smile.fi.intel.com>
+ <20240521162145.GT2568172@bill-the-cat>
+ <ZkzNa9TnTIixVnfJ@smile.fi.intel.com>
+ <20240521164541.GY2568172@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9dw+q9WVd25oEl2D"
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20240521111547.106139-1-andrea.calabrese@amarulasolutions.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20240521164541.GY2568172@bill-the-cat>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,168 +95,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, May 21, 2024 at 10:45:41AM -0600, Tom Rini wrote:
+> On Tue, May 21, 2024 at 07:35:55PM +0300, Andy Shevchenko wrote:
+> > On Tue, May 21, 2024 at 10:21:45AM -0600, Tom Rini wrote:
+> > > On Tue, May 21, 2024 at 07:12:09PM +0300, Andy Shevchenko wrote:
+> > > > On Tue, May 21, 2024 at 08:59:17PM +0530, Kumar, Udit wrote:
+> > > > > On 5/21/2024 7:59 PM, Andy Shevchenko wrote:
+> > > > > > On Tue, May 21, 2024 at 04:26:44PM +0530, Udit Kumar wrote:
 
---9dw+q9WVd25oEl2D
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+...
 
-On Tue, May 21, 2024 at 01:15:47PM +0200, Andrea Calabrese wrote:
+> > > > > > Are you Cc'ing random people with this?
+> > > > > > Please don't do it.
+> > > > > 
+> > > > > I used names names popped up while running get_maintainer.pl script of
+> > > > > u-boot
+> > > > > 
+> > > > > your email id was there for patch-3 of this series
+> > > > 
+> > > > Nice, the tool is broken. Please, work with the respective people to fix a tool
+> > > > or to tune it to avoid such mistakes in the future.
+> > > > 
+> > > > (Hint: I would first disable Git fallback completely)
+> > > 
+> > > So you were cc'd thanks to:
+> > > commit 5e541a05f70296dbad07fc1f4e8678ad207bb476
+> > > Author: Simon Glass <sjg@chromium.org>
+> > > Date:   Sun Jul 30 21:01:45 2023 -0600
+> > > 
+> > >     env: Use include/env for text-environment includes
+> > >     
+> > >     The 'environment' word is too long. We mostly use 'env' in U-Boot, so use
+> > >     that as the name of the include directory too.
+> > >     
+> > >     Signed-off-by: Simon Glass <sjg@chromium.org>
+> > >     Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com> # Intel Edison
+> > 
+> > Yeah, and it even explicitly stated what I reviewed from that code...
+> > 
+> > >     Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> > > 
+> > > And, I'm sorry because there are other contributors who get upset when git
+> > > fallback doesn't find them (because it also ages out after a year).
+> > > In this case there's not even a "tweak the threshold" option since
+> > > there's only a single commit to the file so you're in 100% of them.
+> > 
+> > Just an example of false positive by get_maintainer.pl :-(
+> > And a confirmation of what I said — tool is broken.
+> 
+> It's an imperfect tool, yes. A quick check shows that if you never want
+> to be cc'd from a git tag, you can add yourself to
+> .get_maintainer.ignore and you will still be matched for things you have
+> an explicit MAINTAINER entry for.
 
-> Added support for ARM chipsets r5 and a53, part of the am623 board.
-> Created the dtsi files, updated the kconfig and makefile and added the
-> dts files.
->=20
-> AM623-M3 is a low-cost board based on K3 AM623 SoC.
-> It supports the following interfaces:
-> - 256 MB LPDDR3 RAM
-> - x1 USB OTG Connector
-> - CC330x SimpleLink=E2=84=A2 Wi-Fi 6 and Bluetooth=C2=AE Low Energy compa=
-nion IC
-> - 512 Mbit OSPI flash
-> - x1 UART through UART-USB bridge
-> - x1 eMMC 4GB
->=20
-> Add basic support for AM623-M3.
->=20
-> Signed-off-by: Andrea Calabrese <andrea.calabrese@amarulasolutions.com>
-> Signed-off-by: Flavia Caforio <flavia.caforio@amarulasolutions.com>
+But this will kill me being a maintainer of U-Boot parts (regarding to
+a certain platform) which is not what I want.
 
-First, when can this use OF_UPSTREAM instead?
+-- 
+With Best Regards,
+Andy Shevchenko
 
-Next:
-> diff --git a/board/bsh/am623_ccm_m3/am623_ccm_m3.c b/board/bsh/am623_ccm_=
-m3/am623_ccm_m3.c
-> new file mode 100644
-> index 0000000000..5cf6dd48a9
-> --- /dev/null
-> +++ b/board/bsh/am623_ccm_m3/am623_ccm_m3.c
-> @@ -0,0 +1,237 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Board specific initialization for BSH AM62x based platform CCM-M3
-> + *
-> + * Copyright (C) 2020-2022 Texas Instruments Incorporated - https://www.=
-ti.com/
-> + *	Suman Anna <s-anna@ti.com>
-> + * Copyright (C) 2023 BSH Hausgeraete GmbH - https://www.bsh.com/
-> + *	Bode Michael <michael.bode@bshg.com>
-> + *
-> + */
-> +
-> +#include <common.h>
 
-Please rebase on top of current -next, and audit the rest of the
-includes in any C file you're adding.
-
-> diff --git a/configs/am62x_bsh-ccm-m3_a53_defconfig b/configs/am62x_bsh-c=
-cm-m3_a53_defconfig
-> new file mode 100644
-> index 0000000000..e927b2ab9a
-> --- /dev/null
-> +++ b/configs/am62x_bsh-ccm-m3_a53_defconfig
-
-Make sure all of the defconfig files are synced with "make
-savedefconfig" unless they're using #include.
-
-> diff --git a/include/configs/am62x_bsh-ccm-m3.h b/include/configs/am62x_b=
-sh-ccm-m3.h
-> new file mode 100644
-> index 0000000000..d97699faa7
-> --- /dev/null
-> +++ b/include/configs/am62x_bsh-ccm-m3.h
-> @@ -0,0 +1,203 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Configuration header file for K3 AM625 SoC family
-> + *
-> + * Copyright (C) 2020-2022 Texas Instruments Incorporated - https://www.=
-ti.com/
-> + *	Suman Anna <s-anna@ti.com>
-> + */
-> +
-> +#ifndef __CONFIG_BSH_AM625_EVM_H
-> +#define __CONFIG_BSH_AM625_EVM_H
-> +
-> +#include <config_distro_bootcmd.h>
-
-Please use bootstd.
-
-> +/*
-> + * We setup defaults based on constraints from the Linux kernel, which s=
-hould
-> + * also be safe elsewhere.  We have the default load at 32MB into DDR (f=
-or
-> + * the kernel), FDT above 128MB (the maximum location for the end of the
-> + * kernel), and the ramdisk 512KB above that (allowing for hopefully nev=
-er
-> + * seen large trees).  We say all of this must be within the first 256MB
-> + * as that will normally be within the kernel lowmem and thus visible via
-> + * bootm_size and we only run on platforms with 256MB or more of memory.
-> + *
-> + * As a temporary storage for DTBO blobs (which should be applied into D=
-TB
-> + * blob), we use the location 15.5 MB above the ramdisk. If someone want=
-s to
-> + * use ramdisk bigger than 15.5 MB, then DTBO can be loaded and applied =
-to DTB
-> + * blob before loading the ramdisk, as DTBO location is only used as a t=
-emporary
-> + * storage, and can be re-used after 'fdt apply' command is done.
-> + */
-> +
-> +#define DEFAULT_LINUX_BOOT_ENV \
-> +	"loadaddr=3D0x82000000\0" \
-> +	"kernel_addr_r=3D0x82000000\0" \
-> +	"fdtaddr=3D0x85000000\0" \
-> +	"dtboaddr=3D0x86000000\0" \
-> +	"fdt_addr_r=3D0x85000000\0" \
-> +	"fdtoverlay_addr_r=3D0x86000000\0" \
-> +	"rdaddr=3D0x85080000\0" \
-> +	"ramdisk_addr_r=3D0x85080000\0" \
-> +	"scriptaddr=3D0x80000000\0" \
-> +	"pxefile_addr_r=3D0x80100000\0" \
-> +	"bootm_size=3D0x4000000\0" \
-> +	"boot_fdt=3Dtry\0"
-> +
-> +#define DEFAULT_FIT_TI_ARGS \
-> +	"boot_fit=3D0\0" \
-> +	"addr_fit=3D0x8e000000\0" \
-> +	"name_fit=3DfitImage\0" \
-> +	"update_to_fit=3Dsetenv loadaddr ${addr_fit}; setenv bootfile ${name_fi=
-t}\0" \
-> +	"get_overlaystring=3D" \
-> +		"for overlay in $name_overlays;" \
-> +		"do;" \
-> +		"setenv overlaystring ${overlaystring}'#'${overlay};" \
-> +		"done;\0" \
-> +	"get_fit_config=3Dsetexpr name_fit_config gsub / _ conf-${fdtfile}\0" \
-> +	"run_fit=3Drun get_fit_config; bootm ${addr_fit}#${name_fit_config}${ov=
-erlaystring}\0" \
-
-And since you have a plain text environment none of this should be
-needed. Please audit the rest of the file for other extraneous stuff, I
-see other things too. Thanks.
-
---=20
-Tom
-
---9dw+q9WVd25oEl2D
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZM3iMACgkQFHw5/5Y0
-tyxB9Qv/ezGSDdSNWOXh0th9OkQknj4Z5lntUe9d/wvr4A/tDjl6mJq7fNihOzI0
-vscbL96AYtQDDHN7NdWrTCda7zdU7+5bjbgBWn5ZC4yKydCAA9zIfsxAMIvqhAVC
-Zlb+CvvMLiO0u9iI3+T0lkISQzzeuihGiQrmu3kjLjI/3O6TP2NRcLdZzVB0+ul4
-aElsAinEsCpEu80QmaHHWSVbcJ+w5fIWdYVPu0JlgxpgBoV+z21HE3t5ciRJEAcl
-di08GtRLCSlMe5XR0Mt4cQ/RbqiUI7bbMEdzbjHNBmLw9txiXGrGTIB+46JnDsBI
-VWPvKM3h2E5s7IlKmJ2Gc8a7bIM96sKgU4s71oZgXC7cyQZjaMSVzeN7OgIpsi/o
-jFg7PwAWg5+3nrEeRogXpMLTcn/V/xyLuRyicGchlaYAoIcK5GuEzzQGCtg2mMNs
-XRPjsnOaWl8rHnQONL8PMredEcFj0/+GiP0B0C7Q56krr5qvkqhH0KnqBgwOxokW
-8MetXhNC
-=pTf7
------END PGP SIGNATURE-----
-
---9dw+q9WVd25oEl2D--
