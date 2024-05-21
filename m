@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F4EEC25B78
-	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 08:47:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 526F0C25B78
+	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 08:47:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 60140880AE;
+	by phobos.denx.de (Postfix) with ESMTP id C05BB88176;
 	Tue, 21 May 2024 10:47:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="b9yYqOlP";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="mnzv645q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DDBAC880AD; Tue, 21 May 2024 10:47:12 +0200 (CEST)
+ id F1834880F1; Tue, 21 May 2024 10:47:12 +0200 (CEST)
 Received: from EUR05-AM6-obe.outbound.protection.outlook.com
  (mail-am6eur05on20601.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:2612::601])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7AFE880AE
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 10:47:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C76788119
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 10:47:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=gGypHAYT1kJH4Qv/hrX15OKmmJbpQyYluWxCY4zmgqNBpiDENEIqKoV/c+VXin8qyE72oxucUWWL1hSUyltFSBBGCrzdyPFwc5VaM3hWqrbThT2uieO42iJmvoOoe670dL+OiMuAy2dQMmpnYhGb20A2SCYmphQk8Z9TsXfgDd4gj2IFkaWcWqfxiw8h1dtLd+QMvDVLqYUZLU49csGPOJdkszjGDIL4xFV6HjUsq+8K3NcMjQ7igKKNXoMxZl/pu+dameZ2SkE47gp/po9arBwcc1LXbInd2xDd1bUSZm8+hM7o2p8cNfjQ7q8uKCtTxz50weGznF8RPE9XHigooQ==
+ b=LOkeB3xHan/aiqiffK+PbPq5ruPIkAdjXUOIVUNNf4Ddyh04Rhq5ylrheC2JK3kH6gMg3nLy+c7bXfKZ3tGMzlYtC4507e0Byf3ZG9fsNpQbtjGqYycQyyU9xI8ozAhx52gdnWClnawnFfKMjcfhMBL7BWNzKv9zexWDDPeXsWWxHW4FjrLq5rBaQBVUm5kz0NDRZAkJVofnZ7s/hmySBUD7BPfyDC2lbj8R/px8t0/XnzUBFnUmPRHWU3lpMnW7wY3eR0oGVzerUOuI1CfTkU3efkgGIMIWKh3twHRYlH4J7T18CujPzzfa43dNF8MsUpk07TXohkRwcjI62YlKFw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=d8Ho54t1NYrivQQdHSCIjPJ6sgPJW+rfNBLqf8IZyPQ=;
- b=NP+78zJd87CiaYWkG+q2w4Hox3r7DHSWHHi2YLaBJGY8R/84bTS74CuyArSlkwK9skvUUxZVhJqvHbdfoQgLS6ibg3mqScfdu/KOgkjvYi7zYB/Lq/4wSP7qkdNu7aR2QnWlANZMEmz+f7MkUNKFdt91ambiTN6eocmb36QLMMbJYcWWorKNlQvV+CqR4J2zvrYhfzD83JnJz5xUEbQsitUQLsTCYvs6IhOZd0IAXqjgq3USKBGMuKOldut2F5FvA3+c0uNZxAE3Ino+efou6tlsNzoIFdy/GeCwSpo2U6mTZo3XITRYFGI2CXg2N5JCHOlewLg1NrAr3dk+d1C0uw==
+ bh=d2nB+T4/zRGVvOJMKu042tyDRoQkadALfppjUa9tUfA=;
+ b=Zgx2L5Qzd9GJ/h0th0SNEsa8IjDYPJ5MFjvbdEVMTZFzG3ng5t01yUZLI+uZP0fuAJA5+W+AmeOOt9VDROHGobdLz5Fe0MdnpK34zuWBObylGJcazN/UbCmziOKEt8flqNsgwp1ECDfuHY32/znUhTWwsn/yWEQCPrbFnXYVS3WWv5olriXRc4cRo58d1DWXvey7jyBdillqPS+CHdmGa0oVDD14z2xEfTHFJrlvbJBDyAfc9/AZitM7WfN5EzbumwWnJHqz8kS5f9gJQ2r2nzi82VxwiGzeYNa87NFo0rDtQrTbLNSa71FTn5QTSt3dQJt/aglv+RsyYwWqtq41/w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
  dkim=pass header.d=prevas.dk; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=d8Ho54t1NYrivQQdHSCIjPJ6sgPJW+rfNBLqf8IZyPQ=;
- b=b9yYqOlPa1Uv1TmWuXrFWC6nA7nio3k2mKCTIrk04W/ijoYUqm/jUvL/U1sGhiAcFwUiGZkC1aUS09qAm3KN+devx1T9MWUdajQ1uGU71DgfGdQ5y189XXg6uKtCxjgXNqdKXmDZRQ0knF1HmXIRXih9C411oTQaAb7BeLth/6U=
+ bh=d2nB+T4/zRGVvOJMKu042tyDRoQkadALfppjUa9tUfA=;
+ b=mnzv645qMFvrLez1bVQucwkxs+nQRqvx/FIgKpkNqvLPrvVmAmiJPSPtjXmg50QGje3ZCnB/Az7F559OcDow5aH7BvhUdMiceGj9HY7pOZ2qWokDKLbDdF2ORNx1I/7IYtkqZlKCwRaKNoRFer763mALaN8uD3Mf3Luq6LlmJnQ=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=prevas.dk;
 Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
  by DU4PR10MB8709.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:56c::16)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7587.36; Tue, 21 May
- 2024 08:47:07 +0000
+ 2024 08:47:08 +0000
 Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::9fcc:5df3:197:6691]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::9fcc:5df3:197:6691%3]) with mapi id 15.20.7587.030; Tue, 21 May 2024
- 08:47:07 +0000
+ 08:47:08 +0000
 From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 To: u-boot@lists.denx.de
 Cc: Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Subject: [PATCH v4 1/3] cyclic: stop strdup'ing name in cyclic_register()
-Date: Tue, 21 May 2024 10:46:50 +0200
-Message-Id: <20240521084652.1726460-2-rasmus.villemoes@prevas.dk>
+Subject: [PATCH v4 2/3] wdt-uclass: prevent multiple cyclic_register calls
+Date: Tue, 21 May 2024 10:46:51 +0200
+Message-Id: <20240521084652.1726460-3-rasmus.villemoes@prevas.dk>
 X-Mailer: git-send-email 2.40.1.1.g1c60b9335d
 In-Reply-To: <20240521084652.1726460-1-rasmus.villemoes@prevas.dk>
 References: <20240521084652.1726460-1-rasmus.villemoes@prevas.dk>
@@ -71,76 +71,76 @@ X-ClientProxiedBy: MM0P280CA0056.SWEP280.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|DU4PR10MB8709:EE_
-X-MS-Office365-Filtering-Correlation-Id: 17fb19ff-9aa4-4b14-6b9b-08dc797298c8
+X-MS-Office365-Filtering-Correlation-Id: 43c13b05-688e-4258-3928-08dc79729933
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230031|366007|1800799015|52116005|376005|38350700005; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?r576zJdb0OyiC4846qAX5nbYnrcOLidFYS/1nhuCywSdRskTwJYuwI7qLQdH?=
- =?us-ascii?Q?g/dxl1OEhkGwhY+KGbOfWVMKz7sO9yv8kxYwUwXVdGcnoRwUKem4FMDzwkbb?=
- =?us-ascii?Q?L9SBRMQBRc/re5oeiyzP/yXilKLYUJ0HQ125+pqVzGN8fzjTKqaUBsO0oYBM?=
- =?us-ascii?Q?mtbqpoQuR1LRSLqf+jzWksqSr7SY89YZZgCrda1AWNpv3sBmTF+rWS1fi8q9?=
- =?us-ascii?Q?Rpb9UZEo/oSijY40jLT5yOLS6hQakI0AdwSi7qD9Pkv5s36l2zRLLKqsfV5y?=
- =?us-ascii?Q?P9pDDa3l5wQqATd7yha1kzYulhBUKfkqADvRowhomFIZBH07NBkTwa014wJg?=
- =?us-ascii?Q?QQdNwenThFJGduxFX48kwFsbePYsl29GFijYlJNlNIZPJoYUMp1iWylIbZ8p?=
- =?us-ascii?Q?vks3jxWLof6RpzWhpURlu8ZeOAN4S5qq7AnyuYPVLOLq2bbIoqj+3ypkkssz?=
- =?us-ascii?Q?JZ96ER03eTtnkw0jzMkR72an1CBnUWqJLnNksQ6vnHfCP+voTePoiZS+Wj8m?=
- =?us-ascii?Q?39lHvGymYPD43GfWZiR6UiwzKKE2bAnDEORQ7VNvRsMfxiXJSIA5l+R6xH2e?=
- =?us-ascii?Q?c6Mv9A6G2i0eAVBUMRsnLswilkC8JA1GfdL8YujK4oP1hzhp9ZxAo5jtdG0t?=
- =?us-ascii?Q?0STz8eqqnO3wn/nFWjj+U5F6DLRTo8RPHw6bcq3ZD24bHupFUKGTljof8RMB?=
- =?us-ascii?Q?vD3zc2wtDmGcOaB+uAgbKHoXGYPGXYjIcv6TEwRXgyErIu4UTH74FmChPxHq?=
- =?us-ascii?Q?dDym+0rkGPDOAdLl7rH9aPSA5xG68mme+p2dJlys/W65zpppQiXXPvjCiOLB?=
- =?us-ascii?Q?fCWVDwG5wbnfvVHFUg9UJb9E03gnKLWYoH0Go4CYdlCEbC2d/j9xqFdvVXQ3?=
- =?us-ascii?Q?5bNESfgbYK8rGKGw8hLZodRzy9uQmcBn9b9xmr457a+0j+8t1bbEgR2YXozJ?=
- =?us-ascii?Q?DEFWAn4ft46KSE5wk3dnSfyeTRSqVhuJj/hFrNPjVD6VXL0S5QZwdJfjkExY?=
- =?us-ascii?Q?hynSfX1Zl5JY/hSWK9G6xXjPvhriBqjMwae7Rw0EXHhUtp/R+IKQA3KqMjnU?=
- =?us-ascii?Q?LrQz7yPzFDL5yl/nkKVXKzHHN/Y+YbAgTSaC2fhv6MVM+9D88xjek3dW7A1K?=
- =?us-ascii?Q?r/umShDirgGrW0x3RGL4pIIrKuzHyGHypcg1zvcho+1FMNYFfWCZZdifwYw9?=
- =?us-ascii?Q?mR+klk7auzKlRY5+dq6BgUUCOX9LxlvsLSPGZw8GHGpCXAoTZRaNo5TTdVvb?=
- =?us-ascii?Q?s0w7dJIx57mvXq3+BLKCACoeiHxfPVZakyNEhcAlJ6Q0ruAZ1hicsmiLKhGS?=
- =?us-ascii?Q?Kkqoo6olzszV9oBg6ZtfYPf1JlWTFYQv0s+cCbLdkr8UQg=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?CxsygFyPpVLr2TYNl94IW8ZUZ/tbKsAS79PdXGRet2x5cIOZZWBDIJYu8e5C?=
+ =?us-ascii?Q?B55ibs9UgI/n5+rw45rsDe8vbdaQlJu0Bwod/ARsXbodELFRBRiB0uBd7EG7?=
+ =?us-ascii?Q?ksyIfi7dYHGFJIc9BxzYTKsuWppeGR9Ry8Y/CBN2ZSjlF6HipehWPYHQxvqV?=
+ =?us-ascii?Q?OUxJXPusoSb/xc3c1XUe4P+LQfxaEUBJV2saC0+JaTZZgXRYtSlJZO9eNe7j?=
+ =?us-ascii?Q?nXC+V4FnjlrN4vHX8C138JPWe3Kt/OT//XA3xewzzj0jUjYjJhTG1E+kIVOz?=
+ =?us-ascii?Q?QVB/Gvfo8m7SpPS0pX00sNcO0BUxk6x+qgd4QHUpMl+4P4CO1m1I0WwO16wq?=
+ =?us-ascii?Q?ZGkN821YZozl5TQjp8qx751o0jv6aWK05xjp0hS5eZZ96KaeKosl1fHw7beF?=
+ =?us-ascii?Q?OBdFLFJn3UspymBdlHrhbQsn+JLmfekeT3vf0SU3DFJbKY+1Ngxlm/aLXIz+?=
+ =?us-ascii?Q?hXcp7W1GTxkogR5rdqr+HYuTl0D4I0ruabIltKHLrnTF20NLDy86lXuG4Hr2?=
+ =?us-ascii?Q?Ts7dPGlh7oLDEJMRO5ayqwFPR7U+SQclYbmBK7MtrPHQaDa61ArhnerX80Ex?=
+ =?us-ascii?Q?nFzGJL99ThRpVezn5S7uWOl44YcnFP0m8WWjf4WUk0PMEMvlAbw6N3BfjvxS?=
+ =?us-ascii?Q?3jBXszsBJng42gPicsI6fzDFXU/zTGV80hdHCWRPXsLXmt7wSMO0CTTtWAF4?=
+ =?us-ascii?Q?pDogzXjp3Bh7kmbPiD3oIrE4ILn//uO0dZzgOM8z8zHINfNWoTAJDAzyeT6A?=
+ =?us-ascii?Q?0E2maizBkq6uTp9EqeJ73QcPXQLaKFtaQJ2rSimSOWaXQMPyKVeYCxQkUu+v?=
+ =?us-ascii?Q?jA5IjcxpQ22PDBGur+d1dVq1WMLco1gcfw1dMt/JJY0+WJepVqIlko4L3A72?=
+ =?us-ascii?Q?ZVmlLMNQqP2hy28NampwRo8KhG1XRJzvMLdr6YuG/GP6MMYwmSUbT+UItbVr?=
+ =?us-ascii?Q?XYWNS5z5SGAEP/h5m0AST5bykncLScpuPksG2X79ycc6PCmEZbhL7vLPaMPb?=
+ =?us-ascii?Q?idooWBp8klsRzML5Y4dBPtIzmoPrhqfLEf02OxBi+eSUJlQja+ZRy8hejov4?=
+ =?us-ascii?Q?uug3ug94Zb++6o0bijGTo9qz63oBPXGQ/NIr/+DV02WHtQPpjcYX0p0FpCPx?=
+ =?us-ascii?Q?YgE3jBtEX1YbnSPd10MN1uPdmpigsbC4U5GkdKWdkMMfexHfku0j75gPXlNR?=
+ =?us-ascii?Q?5eMD8r0gkDPkOPKaSl3wBZSbNG3+5nSoeHxEDTMQHR73KIaTNr/ZKz+pYI5s?=
+ =?us-ascii?Q?KRUKMEU/MFN4JAKJtqB+mjHpSU2YdKI0CaaveNgFCJeoB7SCKS1dPnKsQc3W?=
+ =?us-ascii?Q?7Au6EAshwgsHOvKh7WrAfM1OJFQPRo9Awr5eMXbrmZl7Ww=3D=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
  SFS:(13230031)(366007)(1800799015)(52116005)(376005)(38350700005); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?pT6Sqq8olYonldhkdwGz+UroKI0L0tInbHbnO9PIMLRH3c0FANRDOZ4n0t0Z?=
- =?us-ascii?Q?NFptFmpcUMpDkfb07nfHIeZI5wSnDT3UiTold03CzbthLEChDSUNoOeudQBE?=
- =?us-ascii?Q?2syPzYT5VPEHQK9IX7on2RxXnsl6dKZ/xjMCDBzt7C/lnS6FobTCcrA05Ymv?=
- =?us-ascii?Q?4EhYzkOZUTR+6lyX9f7CpExuRQbOcHmK++RPO7ND6OtI1LdZX7uC3GAwHuS7?=
- =?us-ascii?Q?zWQS/Od6efdNis5cyR1KyVZOj9l65pvnaaZ+m/ZazirDCcKk0nkjEt373ki4?=
- =?us-ascii?Q?35SVoXaNwCQfcyDkdxDTkX6xcsYMoC08P83SYRlEFckDjv6f0uy7CyOGJU2n?=
- =?us-ascii?Q?WhgSCbdWmQGP7BM4czX3+Yn82Tyhg5Fm3pAwU6ROuQqFoSxjKOqUE2CRrWL9?=
- =?us-ascii?Q?zK0Tkxmkcbi+9ROEoyPaSxwwhSSgvPrUinHO+jtswBouqaoVeCVxi1v38cyb?=
- =?us-ascii?Q?TmJTTTzoy68NxcQh9/rGD8MLJQNGAHBfNKYGfBpTCqnZE+WJorJS+Cfd2Qf1?=
- =?us-ascii?Q?U4Pd44VmCjplg+ApLSWHXJ38Gt0aPFTpBERmukjmnnXNqALtv0zm8z0rDxcn?=
- =?us-ascii?Q?UqfHPQPbt+EzlEoOo4oqYf7M5/5UZISZO/qoTpI5S/bDLDDj8GRwegx/PGrE?=
- =?us-ascii?Q?rbBb5Sy2tdTjPQjqV4tWqqcHpQPMnI1OrOZAb43PTAJ9WiiN5lhVH0RRdkWP?=
- =?us-ascii?Q?rIhRfY8hZVc8AeADPL4C/ilFwo8QXdYn+dEL8Dz+Dp88OxCx9sXiG6atsuKw?=
- =?us-ascii?Q?7r9tsXkKmDXP4N72s/4mAjbvTOUZqqLkNuRO+qQhv5Mexi/MBfygFWn56n20?=
- =?us-ascii?Q?93A8MoNbec589TeSGucnghb/T871nZLbbkihGXnTTesTwxlksaT8yINq70MG?=
- =?us-ascii?Q?45rb6x9+3GpPhawLCEns0I6DcL9bOckdRy6dY+4sytfCyTrTyGMcyc7G9ps3?=
- =?us-ascii?Q?SOyr2G0DKOdBnhcP5lnl+96LY4Nw47+TmNGdC6Smir+ZXMrEfK3Dq/TapNHU?=
- =?us-ascii?Q?vnkxNN4vO3qk6bwy5EtuSleRw1e9nqp6YNBEhmpZqwJRLx6lsAseToBohTOj?=
- =?us-ascii?Q?XLwdRAgpUiwA0qGxQM3VDfhmC//SjpeqYAQMmnQmAKUtnd3Rt7eX2EwcnLHM?=
- =?us-ascii?Q?A+krgwKHvXNG63QbBZvDPrdnFNToXWvQo6JfCcIqBvg2uuu1KVzZToqJpHkL?=
- =?us-ascii?Q?tx3Axcto4agUZv/4f7mFQMbzsC+GWQHqTEXXMydz+szm2L6hGbYoNNMX5WR4?=
- =?us-ascii?Q?TLumJhCJmxe3Gof7XDV/3nMXJAL2rtWsFGcoMMz+cuoLzRA+ZJMcevHuk4In?=
- =?us-ascii?Q?fdDmn6bAf8NgIe5tdOvbrrrTbFIEhG00fAP1rUn7KublC5FTzuVto6dkI0Cj?=
- =?us-ascii?Q?KKLpJ2htCtkTrzeTnidaZEewnfXmJH53Hc0opuw3HAeO6GmF/OXlSfHASqY7?=
- =?us-ascii?Q?Wuxt8aArrymG4yGt+RF0pI+9lYiQEsvPQDyrGXVd057Sy2H+KzzLtD0frK2w?=
- =?us-ascii?Q?cB8wL/eX1Tfbh80LrQ2EkG2AsIyE6do9RBCqlnDKoIhqZO4Qw79XE+8m/Esw?=
- =?us-ascii?Q?IJ437HHh7EWnEkl3nDST/WzsChQbkb4PmgUimRLYwOmbKRXKfX2En3hUd/da?=
- =?us-ascii?Q?sg=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?1b+mhC5n7yQzNOyhEKmlBHtDjqvvvlttC3GpCN8qccu2WZmGhTpB8bqp3BMD?=
+ =?us-ascii?Q?7MAuRJBvgpNYLhCpWfqFfLPL+3Kxc2pw9r9Uukdd1UyyppgpjHrBB1OFSaiZ?=
+ =?us-ascii?Q?kSqxh2DzSsuLI3KAvgSGB9pJ2pkHaDBVIUXMuXYxNnkbaDVjxicTa4ZfR3aS?=
+ =?us-ascii?Q?IZLMMh9bw8WY5aUHSzCznjhWhrFumNdJ3SkmH27cu3HtvDE0YjX85/+QUCN8?=
+ =?us-ascii?Q?Yyn3sCiZQm5GxknAv2BwE4VygH38WHqupm01n3BSa95MKGNPvjtpJKMjwH4g?=
+ =?us-ascii?Q?mJGPwsy18S0UUFin0ncH8SPbTH40RDW0TEiKemeIqEY2WYljsVXuz97Ntjkt?=
+ =?us-ascii?Q?QK1Iu+uy9FxDf4q0KthomnP4/xbXtYTGknlvaS8wGjmtwaExJxvL9h295/7r?=
+ =?us-ascii?Q?2tN5Ltp75pKT5547ERyjTcXboitcSZfpyNjfsREMuhifmm9XSC+ttxtiLOqx?=
+ =?us-ascii?Q?gfIxd3OQ9SXaA0FPSpBXnu2JcrXzmvepdyUL8c0c0L0kn2tgzuRNdMt3uTZN?=
+ =?us-ascii?Q?qn9gNZxUQfnTvlpuPJqBoK339juv9gnduabXFXGRFr+JVAX9qo6m33iBxtKi?=
+ =?us-ascii?Q?M8z8AXZAUo+gA4glI8vircJQt7LuEcP89huOl8xipmk/qnqHFQUX+bdAku/e?=
+ =?us-ascii?Q?3j9IcvWFl3Qe20FbxzKDb9tsXBGIIby5vTGeU36IICowW6hACKiSpgGCHMSm?=
+ =?us-ascii?Q?oo6FD0ssqKSsuk+yychP7a1oXAs9vHBbCxclKo2Z+11V8U+0AXWRac4eiqL6?=
+ =?us-ascii?Q?kflRqiOUFhAhsyNGGkLM7Emr5fzvb1xAHx88cwRKTaXoA4UKhsRSUsT+yKon?=
+ =?us-ascii?Q?mx8qew7snZ/Pu9yw3mwH7V1MoX3FXL+SjTTxFndg73ZaZoL9fwp+uZUi5zZG?=
+ =?us-ascii?Q?cmlWPrZ1cldnLOqraSU2rXAphlUey+VwtKN9YtU/M0Aa7IncBsBQTpfjxetj?=
+ =?us-ascii?Q?qd3vRBCHIZqDx4vygdC3ecA95waXYYXsg1zu6adiwSjTHJFDlZe7YyGPKRjd?=
+ =?us-ascii?Q?wenNYGR6XoIu5Ngb+56rGRzyq1z52Z68jZ3S7l2peSA2+xLk+Ja4w+w04rA2?=
+ =?us-ascii?Q?Esnnz2llK/PxyZfNib8Fxk2V+ei9akElQpe2nSPqlSmpXflBfmKn4kl7z+o1?=
+ =?us-ascii?Q?b1CAa21haD3pM+ocYJNSAqtfjG5SNyGgzfqpEj6GNLC+VKBOfs4xLwdm/gSO?=
+ =?us-ascii?Q?zTJH5QZXPHVOI2OxQOXgqru0d2OalMCuj48FKoNOEvPZHM/vMq3xVyIXvfrF?=
+ =?us-ascii?Q?KbAyO7kLrnpeSxA8oBLPnH9jSoZIDZvsQAprpDD0WpkJflZZPsBfvXrfqta5?=
+ =?us-ascii?Q?qHD8fFmemMp8ez5woOco8wU53NsSyxU2xXD8yMfaKnQoz7eRjxuN8dw4N1qv?=
+ =?us-ascii?Q?OLjk82u9bas7qPBRAIXDd0MsRUOB2DuPkNfjGeRTRu3jomC6dZsrT5la0W7Q?=
+ =?us-ascii?Q?a9AX7cRhkT95fyFGZITA9EtZGYlsllsf1mQ+rb9ig73slZD58ARwnEOjvZC0?=
+ =?us-ascii?Q?YdxaGGLU+/VDYL7Zrij3cMZ8Ip9bga0PEn7poZxf/3veqAuiH0noPmHvfhCP?=
+ =?us-ascii?Q?JxIzMkoGdwBeE4EoW33pFc6ZNFLBY/4bdQKLta6WfrzuPDrbHB8h/zBnnUhg?=
+ =?us-ascii?Q?lA=3D=3D?=
 X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 17fb19ff-9aa4-4b14-6b9b-08dc797298c8
+X-MS-Exchange-CrossTenant-Network-Message-Id: 43c13b05-688e-4258-3928-08dc79729933
 X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 May 2024 08:47:07.7873 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 May 2024 08:47:08.4389 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2s5trrngH2cxgGmI/wPeQdCqyaRtVUTmGK2jyRaf7FdXapXjKyShJ0OTGjguohTEDtk+0LOgMJam7fWsFzlIrc7CR9rnUy7LbqRSlxjFjSI=
+X-MS-Exchange-CrossTenant-UserPrincipalName: rbbqzdDf9HunoS7coHA7R49CAJ5g4DBZOwrWniawCIEQg87S6ewhfdhBNTVPpcRqXsACLBNqkqk4+/ZK9Kw1aMVi8jSGCFZuIxGNPOk8s48=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR10MB8709
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -158,47 +158,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We are not checking the return value of strdup(), nor
-freeing the string in cyclic_unregister().
+Currently, the cyclic_register() done in wdt_start() is not undone in
+wdt_stop(). Moreover, calling wdt_start multiple times (which is
+perfectly allowed on an already started device, e.g. to change the
+timeout value) will result in another struct cyclic_info being
+registered, referring to the same watchdog device.
 
-However, all current users either pass a string literal or the
-dev->name of the client device. So in all cases the name string will
-live at least as long as the cyclic_info is registered, so just make
-that a requirement.
+This can easily be seen on e.g. a wandboard:
+
+=> cyclic list
+function: watchdog@20bc000, cpu-time: 22 us, frequency: 1.01 times/s
+=> wdt list
+watchdog@20bc000 (imx_wdt)
+=> wdt dev watchdog@20bc000
+=> wdt start 50000
+WDT:   Started watchdog@20bc000 with servicing every 1000ms (50s timeout)
+=> cyclic list
+function: watchdog@20bc000, cpu-time: 37 us, frequency: 1.03 times/s
+function: watchdog@20bc000, cpu-time: 241 us, frequency: 1.01 times/s
+=> wdt start 12345
+WDT:   Started watchdog@20bc000 with servicing every 1000ms (12s timeout)
+=> cyclic list
+function: watchdog@20bc000, cpu-time: 36 us, frequency: 1.03 times/s
+function: watchdog@20bc000, cpu-time: 100 us, frequency: 1.04 times/s
+function: watchdog@20bc000, cpu-time: 299 us, frequency: 1.00 times/s
+
+So properly unregister the watchdog device from the cyclic framework
+in wdt_stop(). In wdt_start(), we cannot just skip the registration,
+as the (new) timeout value may mean that we have to ask the cyclic
+framework to call us more often. So if we're already running,
+first unregister the old cyclic instance.
 
 Reviewed-by: Stefan Roese <sr@denx.de>
 Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 ---
- common/cyclic.c  | 2 +-
- include/cyclic.h | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ drivers/watchdog/wdt-uclass.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/common/cyclic.c b/common/cyclic.c
-index a49bfc88f5c..c62e7fa7d19 100644
---- a/common/cyclic.c
-+++ b/common/cyclic.c
-@@ -40,7 +40,7 @@ struct cyclic_info *cyclic_register(cyclic_func_t func, uint64_t delay_us,
- 	/* Store values in struct */
- 	cyclic->func = func;
- 	cyclic->ctx = ctx;
--	cyclic->name = strdup(name);
-+	cyclic->name = name;
- 	cyclic->delay_us = delay_us;
- 	cyclic->start_time_us = timer_get_us();
- 	hlist_add_head(&cyclic->list, cyclic_get_list());
-diff --git a/include/cyclic.h b/include/cyclic.h
-index 44ad3cb6b80..38946216fb8 100644
---- a/include/cyclic.h
-+++ b/include/cyclic.h
-@@ -31,7 +31,7 @@
- struct cyclic_info {
- 	void (*func)(void *ctx);
- 	void *ctx;
--	char *name;
-+	const char *name;
- 	uint64_t delay_us;
- 	uint64_t start_time_us;
- 	uint64_t cpu_time_us;
+diff --git a/drivers/watchdog/wdt-uclass.c b/drivers/watchdog/wdt-uclass.c
+index c88312ec721..12850016c93 100644
+--- a/drivers/watchdog/wdt-uclass.c
++++ b/drivers/watchdog/wdt-uclass.c
+@@ -121,10 +121,11 @@ int wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
+ 		struct wdt_priv *priv = dev_get_uclass_priv(dev);
+ 		char str[16];
+ 
+-		priv->running = true;
+-
+ 		memset(str, 0, 16);
+ 		if (IS_ENABLED(CONFIG_WATCHDOG)) {
++			if (priv->running)
++				cyclic_unregister(priv->cyclic);
++
+ 			/* Register the watchdog driver as a cyclic function */
+ 			priv->cyclic = cyclic_register(wdt_cyclic,
+ 						       priv->reset_period * 1000,
+@@ -139,6 +140,7 @@ int wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
+ 			}
+ 		}
+ 
++		priv->running = true;
+ 		printf("WDT:   Started %s with%s servicing %s (%ds timeout)\n",
+ 		       dev->name, IS_ENABLED(CONFIG_WATCHDOG) ? "" : "out",
+ 		       str, (u32)lldiv(timeout_ms, 1000));
+@@ -159,6 +161,9 @@ int wdt_stop(struct udevice *dev)
+ 	if (ret == 0) {
+ 		struct wdt_priv *priv = dev_get_uclass_priv(dev);
+ 
++		if (IS_ENABLED(CONFIG_WATCHDOG) && priv->running)
++			cyclic_unregister(priv->cyclic);
++
+ 		priv->running = false;
+ 	}
+ 
 -- 
 2.40.1.1.g1c60b9335d
 
