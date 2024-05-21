@@ -4,92 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCC44C25B75
-	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 19:24:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA001C25B74
+	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 20:15:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11DD1883EA;
-	Tue, 21 May 2024 21:24:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A776A883B1;
+	Tue, 21 May 2024 22:15:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BfY8nRQ3";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Q017A5Tg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1648B883AF; Tue, 21 May 2024 21:24:01 +0200 (CEST)
-Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
- [IPv6:2607:f8b0:4864:20::b2c])
+ id A696D883AF; Tue, 21 May 2024 22:15:17 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD6B68836D
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 21:23:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6672188363
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 22:15:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2c.google.com with SMTP id
- 3f1490d57ef6-de607ab52f4so4093355276.2
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 12:23:58 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-574d1a1c36aso9085561a12.3
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 13:15:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1716319437; x=1716924237; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=8ZArKD0+FAjux2aqPiw+XygZqO85Y5mf4fjNx+0jGkI=;
- b=BfY8nRQ3LjCXZkH+eYnciXrJ5Sq1EoO7xURNT6HPz+kObITYVlZ9yqymcUKgXJ0jQC
- NLZh/Uvc0DAwdiOZRcIfnoFU3XA0j4VCjqlRimUaplM05uigIyr95HmlUfBMGSFr4J/v
- jchOH4b9s2w4jq/bbFLI8xu5O/+Qh6bd/A/SI=
+ d=amarulasolutions.com; s=google; t=1716322514; x=1716927314;
+ darn=lists.denx.de; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=fkiVTvyxSB4/75j0GuvVvPZIg+79guC/X6rggKHxqUY=;
+ b=Q017A5TgRjY6RaI6tSS/2QZX5iRWx3xWQkOAW9pInI794ToeICxWKUmxh4BfJyMSZj
+ YDBlb4Zf3X58BBKWdon9yuYlKiTioS8tgbt159Wn3FK3zmCLMpwmW9D0SurKNFc0dn7X
+ cS/b3pwHZ/PIgwcNUtcisQZgBUM56MqeXW2Zg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716319437; x=1716924237;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8ZArKD0+FAjux2aqPiw+XygZqO85Y5mf4fjNx+0jGkI=;
- b=ql271TELqHYNxB2AlDi+BAx3O01GvqhjGNr5182LFc9AZdBtXuaLjKSNmbuzQs+v1t
- 9KIIc96b4RouDFTx8d1vCmOx+ADD7qYcRDQJ7GbjB6rXqz/RAUa2wD66gzszOd0GDJ+W
- VCWIBya8Ddxs8NA/dt9ZEngbeinU3FmCBT04n80cExGPNTFw2uolpGGN9Kdn01HTYfm9
- FFqbPjLId3AV1FFJDwmPEaHRNVuNEDN+Qe6kJG8PoDHSCdiabaxNcSBzSxhHObnpmrBe
- 4t08qzHPFEbWk98tqkJ/3Pt23q8bmj6TTHWt4YMDzVl2M39CLF8MZAt1fvKgwcL3+/hG
- l/iA==
+ d=1e100.net; s=20230601; t=1716322514; x=1716927314;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fkiVTvyxSB4/75j0GuvVvPZIg+79guC/X6rggKHxqUY=;
+ b=D41pq5PecBGxf/48RJ3Ku9pUfhNCYU/qgtcoDgwX2oX32QtthgaLji2zOF3clXj70c
+ 2XrcLIVuuomKmraTcRoyTiOfY/MY8hxCiIIeNiCT0u5WAW+a/SR69+ZGUlA9Gu53EYfi
+ 6RTEdVmE9sqFv0Pk9QcTMOyIvOi5RJ8G6xfOMPoN85gobOz/Viqonfcn1T8T7xgIg1j5
+ jcBM4URt1aEsQB3M/I4VQaQAOI6dNtzJZ4fZyjCtAzQ6EaZyCfc3cgigaoxkjPXklnT1
+ DZF+TQKOGeyqP6eF+3kn10JHD4fgFynWJ3rzthc6zd5IoDni8d7AT7BYXMvV/HEdbbx+
+ ywZg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW34FelX0dEzHnI9WJ87fndMkQkoi6/mZrgsdyP/bsioa5FdaxW1K/RN653rXZod/XeYtngJisNtlxBGHT6hhvZWqOYNg==
-X-Gm-Message-State: AOJu0YwXh4mLD3VJd2jV/MKhMBwscv7fArENWlLNaFgVUZkPytq+Q8iP
- LpW+xSfCqcpFBGlX/BhyhQoqVP37h1lMO9Y16RKFzcut8Cjsps6TTxH2tUy1qh8=
-X-Google-Smtp-Source: AGHT+IHanbU1Ta1FaB2XveP20YU+C5v0/MNztElz50yCvoEqGJ2oa459EcurZj8I9V8ICSF7exxarA==
-X-Received: by 2002:a25:ab6f:0:b0:df4:dbb6:c128 with SMTP id
- 3f1490d57ef6-df4e0a7a44dmr65006276.12.1716319437591; 
- Tue, 21 May 2024 12:23:57 -0700 (PDT)
-Received: from bill-the-cat ([189.178.170.52])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6a15f185141sm125850456d6.30.2024.05.21.12.23.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 May 2024 12:23:57 -0700 (PDT)
-Date: Tue, 21 May 2024 13:23:52 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: "Kumar, Udit" <u-kumar1@ti.com>, vigneshr@ti.com, nm@ti.com,
- joe.hershberger@ni.com, m-chawdhry@ti.com, afd@ti.com,
- devarsht@ti.com, sjg@chromium.org, emanuele.ghidoli@toradex.com,
- matthias.schiffer@ew.tq-group.com, a-bhatia1@ti.com,
- vitor.soares@toradex.com, danishanwar@ti.com, bmeng.cn@gmail.com,
- mkorpershoek@baylibre.com, s-vadapalli@ti.com, u-boot@lists.denx.de,
- joao.goncalves@toradex.com, hnagalla@ti.com
-Subject: Re: [PATCH 0/4] Adding support to load secure firmware for HS devices
-Message-ID: <20240521192352.GE2568172@bill-the-cat>
-References: <20240521105648.3780072-1-u-kumar1@ti.com>
- <ZkyvvWotyQJQyz9k@smile.fi.intel.com>
- <37ba74bf-21ea-4551-8631-c07d8ff2c0ea@ti.com>
- <ZkzH2Sa4eGAxb2EB@smile.fi.intel.com>
- <20240521162145.GT2568172@bill-the-cat>
- <ZkzNa9TnTIixVnfJ@smile.fi.intel.com>
- <20240521164541.GY2568172@bill-the-cat>
- <ZkzehjK1AQ2tcPpw@smile.fi.intel.com>
- <20240521175247.GB2568172@bill-the-cat>
- <ZkzuF_DIklnGd70_@smile.fi.intel.com>
+ AJvYcCUNuesas+gEkbQZWDJbQfliokN8WGchVqlnb1FsM2NDJ5fH3Rm5YGvB1KmTK0dBe83AwNoCLkhQErbJWpCkhxViBjbkqQ==
+X-Gm-Message-State: AOJu0YxUalOr5gtp2yNRu9bCoBVNS5hEXxnR5/TFEZzakOclSjY5OHIX
+ AgFwyCwfUb60dPAOqQ7hr2iQwyOq8CpxgizRMBikkG4CklF9XZMt10+4bs6Pjn1r4rhfp9olKn3
+ z2xlRpbzzxVeTF4M8ViygoHXuu/7P/DExsW63i7gyWQjYXcIG
+X-Google-Smtp-Source: AGHT+IHQZuoXxxcZL9DnfuxA7jVhHZ/kLEDkX8TfHO+56v644DdVJ9XOVKLbPJyiNGJagchMz2J/wIYt5r7D8+dPgps=
+X-Received: by 2002:aa7:d294:0:b0:574:eb43:3865 with SMTP id
+ 4fb4d7f45d1cf-574eb433921mr13249006a12.32.1716322513650; Tue, 21 May 2024
+ 13:15:13 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2vT2vKfVj89aiYtM"
-Content-Disposition: inline
-In-Reply-To: <ZkzuF_DIklnGd70_@smile.fi.intel.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <ea0422cd-a8e6-3c36-f551-a0142893301b@marvell.com>
+ <CAFOYHZCAKtYiy=3X=u2+oqv3Wx8=W-vtV=+akbo+e479hPoX7A@mail.gmail.com>
+ <CAOf5uwm+Am-J6-yiCy0=N=FrcVpYGubtUfW9JT6YN3dp4-zutQ@mail.gmail.com>
+ <7f949d87-585b-8dd8-bd8b-d29766da4ad6@marvell.com>
+ <CAOf5uw=hsE9ffb0Czzp0B7Q0ZZTp=vHyoRW2oD-ENu_S+qF5CA@mail.gmail.com>
+ <06d001bc-0bd0-53e3-4408-21f6d6dac141@marvell.com>
+ <CAOf5uwktymi4uvZTBA5hJ6EfdyytteSUDM_b2TyPKFJsu2LLSQ@mail.gmail.com>
+ <89eef6cf-c2c1-24ac-225f-e104580e99b8@marvell.com>
+In-Reply-To: <89eef6cf-c2c1-24ac-225f-e104580e99b8@marvell.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Tue, 21 May 2024 22:15:01 +0200
+Message-ID: <CAOf5uw=ct9u=K-F_WHOaR0n7oKJ_Xq2MAOU4Aewg_0fLR+cAYw@mail.gmail.com>
+Subject: Re: [EXTERNAL] Re: [PATCH] mtd: nand: pxa3xx: Incorrect bitflip
+ return on page read
+To: Ravi Minnikanti <rminnikanti@marvell.com>
+Cc: Tom Rini <trini@konsulko.com>, Chris Packham <judge.packham@gmail.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ U-Boot-Denx <u-boot@lists.denx.de>, 
+ Heiko Schocher <hs@denx.de>, Stefan Roese <sr@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,122 +98,181 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Dario
 
---2vT2vKfVj89aiYtM
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Can you add to next pull?
 
-On Tue, May 21, 2024 at 09:55:19PM +0300, Andy Shevchenko wrote:
-> On Tue, May 21, 2024 at 11:52:47AM -0600, Tom Rini wrote:
-> > On Tue, May 21, 2024 at 08:48:54PM +0300, Andy Shevchenko wrote:
-> > > On Tue, May 21, 2024 at 10:45:41AM -0600, Tom Rini wrote:
-> > > > On Tue, May 21, 2024 at 07:35:55PM +0300, Andy Shevchenko wrote:
-> > > > > On Tue, May 21, 2024 at 10:21:45AM -0600, Tom Rini wrote:
-> > > > > > On Tue, May 21, 2024 at 07:12:09PM +0300, Andy Shevchenko wrote:
-> > > > > > > On Tue, May 21, 2024 at 08:59:17PM +0530, Kumar, Udit wrote:
-> > > > > > > > On 5/21/2024 7:59 PM, Andy Shevchenko wrote:
-> > > > > > > > > On Tue, May 21, 2024 at 04:26:44PM +0530, Udit Kumar wrot=
-e:
->=20
-> ...
->=20
-> > > > > > > > > Are you Cc'ing random people with this?
-> > > > > > > > > Please don't do it.
-> > > > > > > >=20
-> > > > > > > > I used names names popped up while running get_maintainer.p=
-l script of
-> > > > > > > > u-boot
-> > > > > > > >=20
-> > > > > > > > your email id was there for patch-3 of this series
-> > > > > > >=20
-> > > > > > > Nice, the tool is broken. Please, work with the respective pe=
-ople to fix a tool
-> > > > > > > or to tune it to avoid such mistakes in the future.
-> > > > > > >=20
-> > > > > > > (Hint: I would first disable Git fallback completely)
-> > > > > >=20
-> > > > > > So you were cc'd thanks to:
-> > > > > > commit 5e541a05f70296dbad07fc1f4e8678ad207bb476
-> > > > > > Author: Simon Glass <sjg@chromium.org>
-> > > > > > Date:   Sun Jul 30 21:01:45 2023 -0600
-> > > > > >=20
-> > > > > >     env: Use include/env for text-environment includes
-> > > > > >    =20
-> > > > > >     The 'environment' word is too long. We mostly use 'env' in =
-U-Boot, so use
-> > > > > >     that as the name of the include directory too.
-> > > > > >    =20
-> > > > > >     Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > >     Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel=
-=2Ecom> # Intel Edison
-> > > > >=20
-> > > > > Yeah, and it even explicitly stated what I reviewed from that cod=
-e...
-> > > > >=20
-> > > > > >     Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-> > > > > >=20
-> > > > > > And, I'm sorry because there are other contributors who get ups=
-et when git
-> > > > > > fallback doesn't find them (because it also ages out after a ye=
-ar).
-> > > > > > In this case there's not even a "tweak the threshold" option si=
-nce
-> > > > > > there's only a single commit to the file so you're in 100% of t=
-hem.
-> > > > >=20
-> > > > > Just an example of false positive by get_maintainer.pl :-(
-> > > > > And a confirmation of what I said =E2=80=94 tool is broken.
-> > > >=20
-> > > > It's an imperfect tool, yes. A quick check shows that if you never =
-want
-> > > > to be cc'd from a git tag, you can add yourself to
-> > > > .get_maintainer.ignore and you will still be matched for things you=
- have
-> > > > an explicit MAINTAINER entry for.
-> > >=20
-> > > But this will kill me being a maintainer of U-Boot parts (regarding to
-> > > a certain platform) which is not what I want.
-> >=20
-> > With a quick local test, no, it still reported you for edison stuff
-> > since that's not where the ignore list comes in.
->=20
-> I see. Still looking at the rate of false positives so far from U-Boot pr=
-oject
-> I don't see that a big hammer, like the proposed one, should be used. Bet=
-ter to
-> teach people on how to use/tune the tool, it will be helpful in a long-te=
-rm.
+Michael
 
-Long term, it would be best if nearly everything had a real MAINTAINERS
-entry. Short term, I don't know how to reconcile "I don't want to be
-found via git history" with "Why wasn't I cc'd on a patch? Oh, because I
-touched it more than a year ago? I don't like that!" in a way other
-than:
-- Encouraging people to add themselves to / expand existing MAINTAINERS
-  entries.
-- Add themselves to the ignore list if they don't want to be found for
-  other contributions they made.
+On Tue, May 21, 2024, 4:31=E2=80=AFPM Ravi Minnikanti <rminnikanti@marvell.=
+com>
+wrote:
 
---=20
-Tom
-
---2vT2vKfVj89aiYtM
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZM9MEACgkQFHw5/5Y0
-tyyGVgv7Brp+ADQj3L4ISDosUn1Z7vBrqM07n+nK3/GBWdQjJYlWCNw5rauAN/Xp
-CtnWBA/xgJ79fG0OBO4NDwePIN3u79CGHK6NJLMa68vuoBYkZymvtpu1lnrs8CD9
-hlOqX5SN0QoFhNqfrhFSt+OA6DZPUeaM7lCDVgNyUAfK2e2GBdgJEe24Hn2pMghp
-PFItYXTbC2ENeJneAENPJDtRzZqVrUt9KQd9F4yGPh7RDMRiuqT3OgRHRO8lQ3Kk
-Xylz5kJpauHsETsYYQ565vPI6ki7kNk1F28BQcImA3+M+mrGXbWvUONLana0lblO
-V81d3l15m0UAQ2yp2nvsJs2X8g18XavR0i/AcPu2rBuohEDAuRdBbHvY1wvriZyn
-hlz06GuiNSPkJt8fiDrrYGIriQVywbZvBsTxWwKTmCypOOtAh2H5bfiJJc6OZpU0
-YbMnOK+3xoXDhKqptG/igO0SARqwe61sVMVLTcRM/yKPlofhBYlovK10ouHiFZuV
-CGRWgb1F
-=Exu0
------END PGP SIGNATURE-----
-
---2vT2vKfVj89aiYtM--
+> Hi,
+>
+> Can you please merge this PR, if there are no more review comments?
+>
+> Thanks,
+> Ravi
+> On 5/6/24 11:28, Michael Nazzareno Trimarchi wrote:
+>
+> > ----------------------------------------------------------------------
+> > Hi Ravi
+> >
+> > On Mon, May 6, 2024 at 7:33=E2=80=AFPM Ravi Minnikanti <rminnikanti@mar=
+vell.com>
+> wrote:
+> >>
+> >> On 5/6/24 00:35, Michael Nazzareno Trimarchi wrote:
+> >>> Hi Ravi
+> >>>
+> >>> On Tue, Apr 30, 2024 at 6:25=E2=80=AFAM Ravi Minnikanti <
+> rminnikanti@marvell.com> wrote:
+> >>>>
+> >>>> On 4/29/24 09:59, Michael Nazzareno Trimarchi wrote:
+> >>>>
+> >>>>>
+> ----------------------------------------------------------------------
+> >>>>> On Mon, Apr 29, 2024 at 6:22=E2=80=AFPM Chris Packham <
+> judge.packham@gmail.com> wrote:
+> >>>>>>
+> >>>>>> On Sun, Apr 28, 2024 at 4:15=E2=80=AFAM Ravi Minnikanti <
+> rminnikanti@marvell.com> wrote:
+> >>>>>>>
+> >>>>>>> Once a page is read with higher bitflips all subsequent reads
+> >>>>>>> are returning the same bitflip value even though they have none.
+> >>>>>>> max_bitflip variable is not being reset to 0 across page reads.
+> >>>>>>>
+> >>>>>>> This is causing problems like incorrectly
+> >>>>>>> marking erase blocks bad by UBI and causing read failures.
+> >>>>>>>
+> >>>>>>> Verified the change with both MTD reads and UBI.
+> >>>>>>> This change is inline with other NFC drivers.
+> >>>>>>>
+> >>>>>>> Sample error log where a block is marked bad incorrectly:
+> >>>>>>>
+> >>>>>>> ubi0: fixable bit-flip detected at PEB 125
+> >>>>>>> ubi0: run torture test for PEB 125
+> >>>>>>> ubi0: fixable bit-flip detected at PEB 125
+> >>>>>>> ubi0 error: torture_peb: read problems on freshly erased PEB 125,
+> >>>>>>> must be bad
+> >>>>>>> ubi0 error: erase_worker: failed to erase PEB 125, error -5
+> >>>>>>> ubi0: mark PEB 125 as bad
+> >>>>>>>
+> >>>>>>> Signed-off-by: rminnikanti <rminnikanti@marvell.com>
+> >>>>>>
+> >>>>>> Looks good to me
+> >>>>>>
+> >>>>>> Reviewed-by: Chris Packham <judge.packham@gmail.com>
+> >>>>>>
+> >>>>>>> ---
+> >>>>>>>  drivers/mtd/nand/raw/pxa3xx_nand.c | 5 +++++
+> >>>>>>>  1 file changed, 5 insertions(+)
+> >>>>>>>
+> >>>>>>> diff --git a/drivers/mtd/nand/raw/pxa3xx_nand.c
+> b/drivers/mtd/nand/raw/pxa3xx_nand.c
+> >>>>>>> index 1d9a6d107b..d2a4faad56 100644
+> >>>>>>> --- a/drivers/mtd/nand/raw/pxa3xx_nand.c
+> >>>>>>> +++ b/drivers/mtd/nand/raw/pxa3xx_nand.c
+> >>>>>>> @@ -800,6 +800,11 @@ static void prepare_start_command(struct
+> pxa3xx_nand_info *info, int command)
+> >>>>>>>         info->ecc_err_cnt       =3D 0;
+> >>>>>>>         info->ndcb3             =3D 0;
+> >>>>>>>         info->need_wait         =3D 0;
+> >>>>>>> +       /*
+> >>>>>>> +        * Reset max_bitflips to zero. Once command is complete,
+> >>>>>>> +        * max_bitflips for this READ is returned in
+> ecc.read_page()
+> >>>>>>> +        */
+> >>>>>>> +       info->max_bitflips      =3D 0;
+> >>>>>>>
+> >>>>>
+> >>>>> Why this should not be put to 0 in read_page instead on
+> prepare_start_command?
+> >>>>>
+> >>>>> Michael
+> >>>>>
+> >>>>
+> >>>> ecc.read_page is invoked after the read command execution.
+> >>>> First chip->cmdfunc is executed with NAND_CMD_READ0 and then
+> ecc.read_page is invoked
+> >>>> to read the page from buffer. So, by the time read_page is invoked,
+> info->max_bitflips
+> >>>> must already have the bit flip value.
+> >>>>
+> >>>
+> >>> All the other implementation has a slight different way to handle.
+> >>> From what you said the reset should
+> >>> be done on for NAND_CMD_READ0 command and should be sufficient.
+> >>> Technically should be moved
+> >>> in switch and not unconditionally.
+> >>>
+> >>> Michael
+> >>>
+> >>
+> >> max_bitflip is not being reset to 0 across page reads.
+> >> Once a page is read with higher bitflips all subsequent reads
+> >> are returning the same bitflip value even though they have none.
+> >>
+> >> This is causing problems like incorrectly
+> >> marking erase blocks bad by UBI and read failures.
+> >>
+> >> Tested it with both MTD reads and UBI attach.
+> >> This change is inline with other NFC drivers.
+> >>
+> >> Sample error log where a block is marked bad incorrectly:
+> >>
+> >> ubi0: fixable bit-flip detected at PEB 125
+> >> ubi0: run torture test for PEB 125
+> >> ubi0: fixable bit-flip detected at PEB 125
+> >> ubi0 error: torture_peb: read problems on freshly erased PEB 125,
+> >> must be bad
+> >> ubi0 error: erase_worker: failed to erase PEB 125, error -5
+> >> ubi0: mark PEB 125 as bad
+> >>
+> >> Signed-off-by: rminnikanti <rminnikanti@marvell.com>
+> >> ---
+> >>  drivers/mtd/nand/raw/pxa3xx_nand.c | 5 +++++
+> >>  1 file changed, 5 insertions(+)
+> >>
+> >> diff --git a/drivers/mtd/nand/raw/pxa3xx_nand.c
+> b/drivers/mtd/nand/raw/pxa3xx_nand.c
+> >> index 1d9a6d107b..97f250483f 100644
+> >> --- a/drivers/mtd/nand/raw/pxa3xx_nand.c
+> >> +++ b/drivers/mtd/nand/raw/pxa3xx_nand.c
+> >> @@ -803,6 +803,11 @@ static void prepare_start_command(struct
+> pxa3xx_nand_info *info, int command)
+> >>
+> >>         switch (command) {
+> >>         case NAND_CMD_READ0:
+> >> +               /*
+> >> +                * Reset max_bitflips to zero. Once command is complet=
+e,
+> >> +                * max_bitflips for this READ is returned in
+> ecc.read_page()
+> >> +                */
+> >> +               info->max_bitflips =3D 0;
+> >>         case NAND_CMD_READOOB:
+> >>         case NAND_CMD_PAGEPROG:
+> >>                 if (!info->force_raw)
+> >> --
+> >> 2.17.1
+> >>
+> >> Thanks Michael. Fixed it.
+> >>
+> >>>> Thanks, Ravi.
+> >>>>
+> >>>>>>>         switch (command) {
+> >>>>>>>         case NAND_CMD_READ0:
+> >>>>>>> --
+> >>>>>>> 2.17.1
+> >>>>>
+> >>>>
+> >>>
+> >>>
+> >
+> > Acked-by: Michael Trimarchi <michael@amarulasolutions.com>
+> >
+> >
+> >
+>
