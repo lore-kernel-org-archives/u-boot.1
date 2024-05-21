@@ -4,77 +4,156 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0C6BC25B74
-	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 12:05:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B90ECC25B74
+	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 12:16:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFD2988722;
-	Tue, 21 May 2024 14:05:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2AE7888722;
+	Tue, 21 May 2024 14:16:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aBkrpIxX";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="nwSVSJ6F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C3EB8873C; Tue, 21 May 2024 14:05:09 +0200 (CEST)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 482668874D; Tue, 21 May 2024 14:16:32 +0200 (CEST)
+Received: from EUR01-DB5-obe.outbound.protection.outlook.com
+ (mail-db5eur01on0700.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe02::700])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E8F288722
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 14:05:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CAA4B8871D;
+ Tue, 21 May 2024 14:16:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-52327368e59so5977787e87.1
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 05:05:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716293106; x=1716897906; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Wf5iiSGYNU2DzGPbpIPerEtxV9NeqXlZyTeBcFZzC3Q=;
- b=aBkrpIxXt6rdSsU0SSk0ciZwk+r2pjX7I786puSEWKJI6Pp7lcNNXhmMOPM82jhaqe
- rPadvZw3mv0SUg0+YN8oNNYVXnCZctVWJ1xLvc4EJgPtFHK+G98R0w7ptRbKDkpPUYaz
- HqD7bMj0DYZiK2iGNovkRdU4yZkJWJh/Mh6tVqi3d5z5S52t1XicM2x8/L9RtM3rFYSQ
- EqCuwFd51N6EDA/N1tQ3+iTLXT+oCwrfexgOX47bTizHtX/i4vCBgK4IBNhNn7vAz09X
- z4JL9YFRgYgpGhvFLnfRrNrAtJu2ibJsToFPaxV8tMDvbRb5RineenoFACtR3jyu53hg
- 5Ojg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716293106; x=1716897906;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Wf5iiSGYNU2DzGPbpIPerEtxV9NeqXlZyTeBcFZzC3Q=;
- b=DY+vVONr/eTarCYA7xe8OnLbHbJWBTgyrWrvW+VZ47PA051MWUCcKSWzo6RpNOxcCq
- VRzw7I2dgdyOqmUOMIJVabuqt5m/oEwrnEE0jAJ1pEBjEklJUMB7DuLhTVA5qG4ZnzSd
- XydPKobLQ0xYF7fS3B5MsKgjAc1xadhmj+pnrGkB7D9fTgUGqoGbtbttlKKt3rxhgN3L
- oGjGr+6WxISo1ytLomA4hCvwFuyIW3cblwNrg1aT+UbM+SoPRB681fKV460r84NO1iVo
- RYTm81r94y2X5jwJVmdLbWnwFr50wVSc475QCIs/68N1AW8pZhciJwrJ6TR9ymCysZl+
- ZTrg==
-X-Gm-Message-State: AOJu0YyGt4kb73B7D++/mqnRR0dX7x6bfCrASwaRUNPjPidWRD7xTpLc
- lmW/5/ao3ob+PUyvYAm9ktaeGSYXddCHVlpKPQ9aDbQdYOAqaPXFeSUEfJ9XEBIO043zR+HRXFb
- hfT7qoVMNt4KF+MGbLNIJ8ZAbFwgGDcRDs7YObg==
-X-Google-Smtp-Source: AGHT+IH/ghsbkJtS5eubFnVa/mleQzguC53ch7I9tq260pjCiL6aH+a6lBQQf4kzdiyPgUrjzJ3gWygd+wvNL44csbk=
-X-Received: by 2002:a05:6512:280c:b0:51f:53e0:1bc3 with SMTP id
- 2adb3069b0e04-5220fc7af9amr25303500e87.25.1716293106455; Tue, 21 May 2024
- 05:05:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Lihkq8hJ52Es8w7hmhEOIuCPYaYWuLtWV3OXFpl87Ry144qi/Gzm/PdzhoS/zDkYPwm6bQvNLeEQbt8NVcxjNvdxCWv7IoVdQFtvNmRxrkHOMv62SZ8G2FD7nxZv7gmXeif8DR2YLG0zuNdM3kbidsHmCaMraewz6858rHFMF3+rxEQcw/Hu6IBrUa6uSPO1tG2Isf4JEfIr8puaQ32YtwNRaM8Yl5wfMu88avpG8Cli/3GiKJF6MpTIcZXfrxbZMWcef6VLA4qHM8Jy4+tw4rMexhCLsu6OuK8+pOY/rvn4+zUy7mJhE1VM3/AL88WibIJzMASK8Xtghc1eCBUR1w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=LldQ64Sp3Hn0MRXEZmTAgQsA6zEp5oKJ8wwD95wFtjM=;
+ b=HyccrmlIW6z2roc0RkEvV8veQTOYOPP8wVRg4Y6vAThntVP6oDpzT+EkmSbDxtUcTbV9fGVcZj8gxhq9HEyIR/HyWZRNmnS2OTng4V7H3M9q5jRH5Wm+Zjj+xNfasiWqcsKlI1AdInbHlZVaR/YBq0DDKfLvkFF2d8r1xmXfHtP0M7sAfYp3vnllMpM7zDO6GlMVf95S0kC8rzc4t+n3C/6CVYbVB/HkSqfBKdG86sD3jSfDt7ZMxsWC1sEVk70oVL75aW9d6+fosgc79tl8yGCOBDsO21RFOQUPyByd8wRymkr7sHA4n06ckEBce7L+3KGC1WU2j6j3DnHPjxrB9g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=LldQ64Sp3Hn0MRXEZmTAgQsA6zEp5oKJ8wwD95wFtjM=;
+ b=nwSVSJ6FTXGjNcaBwG8wj+93xU30qY1Ki8D7s+JBD/+ImvaMNMOHJlUdQMEmyQpv0XXEGeVQcUKwX45+7qwrdAEqaIBoPtZeVDxTyoKUucxoWK32LEEghM8k2hcErzOH+HBwOeRZK6OAbRLITN/pJJGLLL0elzWBkEgms9rgpV4=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from VE1PR04MB6589.eurprd04.prod.outlook.com (2603:10a6:803:128::25)
+ by DB9PR04MB8364.eurprd04.prod.outlook.com (2603:10a6:10:24c::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7587.36; Tue, 21 May
+ 2024 12:16:28 +0000
+Received: from VE1PR04MB6589.eurprd04.prod.outlook.com
+ ([fe80::8476:1b2f:f236:db31]) by VE1PR04MB6589.eurprd04.prod.outlook.com
+ ([fe80::8476:1b2f:f236:db31%6]) with mapi id 15.20.7587.030; Tue, 21 May 2024
+ 12:16:28 +0000
+Message-ID: <770c99e9-a5f0-42a9-9904-25978268bcc4@cherry.de>
+Date: Tue, 21 May 2024 14:16:25 +0200
+User-Agent: Mozilla Thunderbird
+From: quentin.schulz@cherry.de
+To: Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, u-boot-custodians@lists.denx.de,
+ u-boot-board-maintainers@lists.denx.de
+Subject: Re: [ANN] U-Boot v2024.07-rc3 released
+References: <20240520160635.GQ2568172@bill-the-cat>
+ <7fc715fc-eb51-45a5-b7f2-71668bfd3eba@cherry.de>
+ <6e7ab24f-1c01-426b-a57f-85f836a13171@kwiboo.se>
+In-Reply-To: <6e7ab24f-1c01-426b-a57f-85f836a13171@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+X-ClientProxiedBy: WA1P291CA0015.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:19::13) To VE1PR04MB6589.eurprd04.prod.outlook.com
+ (2603:10a6:803:128::25)
 MIME-Version: 1.0
-References: <20240515205049.3005256-1-tharvey@gateworks.com>
-In-Reply-To: <20240515205049.3005256-1-tharvey@gateworks.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 21 May 2024 15:04:29 +0300
-Message-ID: <CAC_iWjL2LwY7V4SbwRqsgjnYqnLEU1curr7ZXLLQWWmrTX=nTQ@mail.gmail.com>
-Subject: Re: [PATCH v2] fdt: automatically add /chosen/kaslr-seed if DM_RNG is
- enabled
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Devarsh Thakkar <devarsht@ti.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hugo Villeneuve <hvilleneuve@dimonoff.com>, Marek Vasut <marex@denx.de>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: VE1PR04MB6589:EE_|DB9PR04MB8364:EE_
+X-MS-Office365-Filtering-Correlation-Id: b1fb3bba-97ca-4129-eebf-08dc798fd6a1
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230031|366007|376005|1800799015;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?WDMvUko2YjdHdVdYcUZFdi9nK0NpOFdwbXY4d0M4b2JWWHN5STJXK05wMWtj?=
+ =?utf-8?B?RVJlYWxhTStxOUZ4V0ZNWTROR28weThXRjQzVG5JeEt4N09TQ1ZPdHdCNXE3?=
+ =?utf-8?B?V2FLcjV6ZkJJYUxrZFVlSzBUNmZ5TGRXeUlHVVJYZGxvckhIN0MyT09PUU5u?=
+ =?utf-8?B?a2doQWM3YWZYY3pJa3o3eWpJTFdhVUFXNWVXVW1qbmpGTTYyRVN1L3hDSkV1?=
+ =?utf-8?B?Q1Z3VytGWnd5am9RSCtFOEdrbTd4TVJxZGJGNjFzMW9nSitncHJjajFPR1c0?=
+ =?utf-8?B?L2o2a2lpT2Nhdm5OejdCaHNHSkYrekpVWEp4VHppS1NuWkVKMWVPclNlSVRF?=
+ =?utf-8?B?OEhaN01TZ1ptWHErU3hvRlZ4ZkxPbnpzQXNEdnZDSWYwN2UrU3BPN25TU1JS?=
+ =?utf-8?B?Y3gzaStqSXluaTlEZjJKbjVUR0lJa1dMZFpxMVRaRVA2UUZTcGw1VW9raWlH?=
+ =?utf-8?B?azZlbDV3YU40WlV5NjZYK2RYUzJXMTJIdjhtSWVaOHJHNkxTR1F2MXc2TlZC?=
+ =?utf-8?B?cFlnTlp1K1hmdVBVNElsT1JzbFkrc0ZkcDM5cjhSMHhXOHJjcHl1cTdNcDFs?=
+ =?utf-8?B?V0doWUdPUjVpaVUvV2JwdVUrWFhTSVhCZWZwZGVyYVZpNnVRQ0xLWDZ1L3hu?=
+ =?utf-8?B?N0VjR2pjTVlvd2hPTmpWQThXRitxMThoUXY1T3N2d1FmVlVkOUxNcEdKOXdy?=
+ =?utf-8?B?YWwzYWw0QW1KWWt3eGNFVWVtU0o5QmRvbDJGQzI5Yi9LbXdaQmpQNlJycXcy?=
+ =?utf-8?B?NTAvM1gwaG1UeHZTZnhuTVhNbys0V0NIb1NpSmF3YTNvSEJPdHFzOXlNRDJS?=
+ =?utf-8?B?NVFtalVwTnUxSUZycjVoQjAwdDRHelF4bStlTlBTbnVpRDU0Ykc0SUZ1U1NP?=
+ =?utf-8?B?WXdCTGJQS2lPNWNtdXpOWW95S0Y3YjFhM3VkZG13L2NIeGZnQ2JpUG16VDM3?=
+ =?utf-8?B?Tk9qblpzZ3VDU2xBVUlOeDEzM3JLOWFJVXYxVVNmc2ViUWlaMEZMZE5pcFJz?=
+ =?utf-8?B?bUkvNisvWlkveUxHRXpFZm92aE15WCtXYXplTmZGNEJTTHZWbmRUbW0xQ01j?=
+ =?utf-8?B?YzhhaGZIYWozQ2xqTkFGODV6SG5QaS90U1kvTURlcit5NnJiUlRoOUFObGNy?=
+ =?utf-8?B?dWwwT1FWQWtQMkhlRDMvSnVtRkRlTEFTSGJTVlhUL0l2K2FJM2cvMFFycG0v?=
+ =?utf-8?B?LzlPSURwdEdUVzhGeUNPK1NwM2pxZWNBbndLRDAwcmJlN2xSTklCbEdtc3Ru?=
+ =?utf-8?B?cFcwWVNYeFY1VU5hTTN4akZ3c2h6cGxaR1FiYnZCNTVCVzQ5akcrYklYRmx0?=
+ =?utf-8?B?bXVsNVlVNnFIUU1SVnBDbXR1cE1VSkFjaFdjMTlyMHJra0I4YUZsRzI3aW52?=
+ =?utf-8?B?ZVRnclA2NjJtUDl3a2NlYnVLWURXenRsYm9Zcm5pV3Bod0VjbkNUSUU4Y1Uy?=
+ =?utf-8?B?Y05qTGRNMVI3c2pWM0FDMTd5OTRHSitVUVF6c2lhdlM0ZjdseERaWjdpWjNu?=
+ =?utf-8?B?dytPemV0azJPanBpcSt0eW9Vd0Vrb1E0blNZNWdONEZtaVgxRUNZYVJORzYy?=
+ =?utf-8?B?WlhtVDRZeEVMUStuZUt4ZVBaWXRjQlRBN0xrZXpURjI5RmJUUC9SaExpNjl1?=
+ =?utf-8?B?U29nWEZPOVB2ZXB1ZjNCdzdqZ1NQOEE9PQ==?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:VE1PR04MB6589.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(366007)(376005)(1800799015); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OVgxNTZRTCtLdDJMVmN2bnMvUCtiODg3cGoyVXNEZFFzZmJKelBRNDF5ajRx?=
+ =?utf-8?B?RVdHa1BtMmVFdW9kTlJJSWRlRTBUN3FWeEZuN0t3bTRDUFdvc2hjZzhJbGQ4?=
+ =?utf-8?B?RUVCMHpBQWtoSXFKcjExaWo0bFA1ZGltRzBaSEgrOVFiK2Z6NTBiTGlNaE9R?=
+ =?utf-8?B?NU9uaTYvQ2s3OTY0Wi9OS2ZpVTFwWkRnNnNNam1uTU5yK0J4NkI3alhZSG80?=
+ =?utf-8?B?dDFXaXJWU1B5UlhGaVJpTi9FbmRoaUJpWDgvR0RQT2Jvc1R2RzNTN1ltVjZH?=
+ =?utf-8?B?VDNBOFk3Vk90WnJpQmxwZ1d3YmhidW1udEduaEs3MHpiZ3FIQkhDa0ZGb1J4?=
+ =?utf-8?B?eXc4VXFiS0J3NWFDOXNmV3dGSkdaZlpkYlV5WlFPbjIwdklpVDdOWXgwK1hH?=
+ =?utf-8?B?WnpmVnJPejh1cVU4MVhRYzRTbTVNQXhwaTlTQUJ4QmRsaHR2QzNZRk5QanZl?=
+ =?utf-8?B?K21JdU12ay9reEZRWEZTZ1JQQUlIdEJHcy85YVZwVVVuUEhzRFZpNDRoQTJU?=
+ =?utf-8?B?LzNuSkFlK2QwbkdqV2dtdkErMjZSU0d5N1oxcHA1YS9TeVQ5VmlaZUFGSXZl?=
+ =?utf-8?B?SU1TWUpzdWV0QW9kK0FhWHM0ZDZTc0VaN2hoSFZPNXl5TzdIaGtCUlBvYTNV?=
+ =?utf-8?B?bmJaWUxqNHdxVG1EUDI1czJxTFRac3lBYjhhdFFyak1sMXlKanM0Y2lldXYv?=
+ =?utf-8?B?cWJ5bHhSS3pqbmNBa2NNUlk2STAzaTRTL1F6Z1hUaWd3UUgzWWwwQm9sanlq?=
+ =?utf-8?B?TFljK09UQWJ0U1QxWWtDa3BKSXBNWmNORmJDeitwSlEvbUZ4aUNEa0lhWGZk?=
+ =?utf-8?B?czFsZjRaM3lWWDhITFdNWTd0S2ErdDhtT2g1dmVBdUZjakNKbFdpZllHN2da?=
+ =?utf-8?B?UjlLd21BRXFQS1pUV0RtUElZL2pJWTFsNFNMNUdldlFMYlhPOFVBK1ZWL1dX?=
+ =?utf-8?B?TXhpY1ZnM3NLbzY3S2ErcmpKWFZrNmZubXcxSThML2RXbFhhaWR5QTA4SnNo?=
+ =?utf-8?B?UU1RaFRkZUZNVFJoaElSTEh0YW9BbHM1YTRyWFFmdlF1MTh2TUxIbFBWd2hG?=
+ =?utf-8?B?RnlMaHp4TllKRGowWDM0a241RlVGTGxUNGVpSEtaV0RTSnZNd1hsKzdvWjNl?=
+ =?utf-8?B?Zk1EUGtnbXFEaXFXMmE3OFlRWnR4VlIvUFFuVXZNUjRUazV0WXF6OG9LNmV4?=
+ =?utf-8?B?OENtWkJ3bDFmVU9jYWd4VXNRWVB1YW1sLy9RMTRWZnV6QlloUUJlakE4R0VJ?=
+ =?utf-8?B?dU9yTEdEZWUwS2doQ0VnQWU2djlmQ2hGTmNwaVZkcmFKakUwYzhuS0QxVXpG?=
+ =?utf-8?B?UWllMUdoRVRYWjgya2hTSkRqKzhlM1QyTVQwak02aUFPZnZYdFJDS0JWZ1B4?=
+ =?utf-8?B?VXRlY0xDbi9TNjNtRVQzSzY4Yy9pakJ6TkorYzMzRmtUYmtrbTRiNy9nbDNI?=
+ =?utf-8?B?UWkwRy9qQ2RGd2JnOWltUklVRXk5bTZ1ckRFeXR3WVdFVUNvR3dRdHNlYktX?=
+ =?utf-8?B?V0d6QU9ScXhINkFNYlVjZ0lhUFd5bXV3NDRTUzlRV1FTNUpPZG11MDMwcnh5?=
+ =?utf-8?B?S3Mrc2FjMGg4V2ZuclV0dFNWVVl1QTRiaWVVUlRVVGxsWVJnTVFHWmttM2Q0?=
+ =?utf-8?B?KzBEWkZNM0JkNXVnY0F2MWYvaTRtTm1wUTZDbFVvZ0h4NFNkckNQYzd5dTVO?=
+ =?utf-8?B?OUYyUmlHNzU1cFY3MkZBbHZsY2h5b2dGd3hFOTdOazJtd01YeUNqT1hRVUJK?=
+ =?utf-8?B?dDdpV3RWOE9oWmtiV05qb1pRS1V3cDc2K2RzU0doZHlvL0RoYXBzN2FEUXVh?=
+ =?utf-8?B?ZlNkenY0ZXJWN09CV01wUk9IWk43eDRPWGlUTG80S3c4NzZrWjBseWhGUGll?=
+ =?utf-8?B?RXlrYXBReCs3cUFKc1pNR1BiMVBDNklnbFNmTFR1SUwzMVpxM2JRZ2ZleVZO?=
+ =?utf-8?B?LzhaK1RDMGNBdFRRMTFKc0g3VllENlEvMFJOdHRtenNvNm5ER1RlNjc1VVho?=
+ =?utf-8?B?VE80aTRRSzZ5eGNTNFZjcFdRV3RuVmloNHcwako1a1NMMFlaUzhhTnVOb2dI?=
+ =?utf-8?B?Mm5qUCtSVzNpbVdRNzhkaWg4VGwrYjUwRDZNV3h1bldOb2hiKzRMTXIyQ3VK?=
+ =?utf-8?B?SVpOaG5TakRpRzVwVGpTTDZjamxOMGMweTNuTndkMDdtc2ZnQW1BZ055M1RR?=
+ =?utf-8?B?Ymc9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: b1fb3bba-97ca-4129-eebf-08dc798fd6a1
+X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6589.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 May 2024 12:16:27.9741 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: WJWr+9BAu3NZXGkDY18zN29XG/AiHjLUmo3pTtuCzCn/nvgeesWv7HpqGoB2Mh2Kiir1gI7midKAC+B0L71Vub9mlq8JIpEZR87WcutnrT4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB8364
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,335 +170,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tim
+Hi Jonas,
 
-On Wed, 15 May 2024 at 23:50, Tim Harvey <tharvey@gateworks.com> wrote:
->
-> If RANDOMIZE_BASE is enabled in the Linux kernel instructing it to
-> randomize the virtual address at which the kernel image is loaded, it
-> expects entropy to be provided by the bootloader by populating
-> /chosen/kaslr-seed with a 64-bit value from source of entropy at boot.
+On 5/21/24 1:57 PM, Jonas Karlman <jonas@kwiboo.se> wrote:
+> Hi Quentin,
+> 
+> On 2024-05-21 11:53, Quentin Schulz wrote:
+> > Hi all,
+> >
+> > On 5/20/24 6:06 PM, Tom Rini wrote:
+> >> Hey all,
+> >>
+> >> It's release day and here is -rc3. At this point, I think we're firmly
+> >> on "bug fix and documentation" ground moving forward for changes to
+> >> v2024.07 and the next branch is open and ready for use and pull
+> >> requests.
+> >>
+> >> In terms of a changelog,
+> >> git log --merges v2024.07-rc2..v2024.07-rc3
+> >> contains what I've pulled but as always, better PR messages and tags
+> >> will provide better results here.
+> >>
+> >> I hope to remain on schedule and that means the rest of the rcs every
+> >> other Monday, and with final release on Monday, July 1st, 2024. Thanks
+> >> all!
+> >>
+> >
+> > Just to let you know that Rockchip PX30 support is broken since
+> > https://source.denx.de/u-boot/u-boot/-/commit/1d01440b3f14f6648cd672da619489f635cb209c
+> > (at the very least on Ringneck, haven't tested on PX30 Mini-EVB yet).
+> >
+> > U-Boot proper pre-reloc seems to be running out of memory and we cannot
+> > reach U-Boot CLI anymore.
+> >
+> > I hope I'll have time to look into this before v2024.07 is released but
+> > cannot promise anything.
+> 
+> On Rockchip platform all DRAM is available at U-Boot proper pre-reloc,
+> so there is no need to limit SYS_MALLOC_F_LEN to a small amount.
+> 
+> Ringneck seem to use 8 KiB for pre-reloc malloc() pool, please try with
+> a 64 KiB pool, same as rk3308/rk3328/rk3399/rk356x/rk3588 all now use.
+> 
+>    CONFIG_SYS_MALLOC_F_LEN=0x10000
+> 
 
-Since you'll send a v2, mind adding some description for UEFI on the
-commit message?
-efi_try_purge_kaslr_seed() has a comment of the behaviour
+This made it work, thanks for the hint.
 
-Thanks
-/Ilias
->
-> If we have DM_RNG enabled populate this value automatically when
-> fdt_chosen is called unless ARMV8_SEC_FIRMWARE_SUPPORT is enabled as
-> it's implementation uses a different source of entropy.
->
-> As this fdt node is added elsewhere create a library function and
-> use it to deduplicate code.
->
-> Note that the kalsrseed command (CMD_KASLRSEED) is likely pointless now
-> but left in place in case boot scripts exist that rely on this command
-> existing and returning success. An informational message is printed to
-> alert users of this command that it is likely no longer needed.
->
-> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-> ---
-> v2:
->  - fix typo in commit msg
->  - use stack for seed to avoid unecessary malloc/free
->  - move to a library function and deduplicate code by using it elsewhere
-> ---
->  board/xilinx/common/board.c | 35 -----------------------------
->  boot/fdt_support.c          | 10 +++++++++
->  boot/pxe_utils.c            | 35 +++--------------------------
->  cmd/kaslrseed.c             | 45 ++++++-------------------------------
->  include/kaslrseed.h         | 17 ++++++++++++++
->  lib/Makefile                |  1 +
->  lib/kaslrseed.c             | 34 ++++++++++++++++++++++++++++
->  7 files changed, 72 insertions(+), 105 deletions(-)
->  create mode 100644 include/kaslrseed.h
->  create mode 100644 lib/kaslrseed.c
->
-> diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
-> index 30a81376ac41..f741e8957818 100644
-> --- a/board/xilinx/common/board.c
-> +++ b/board/xilinx/common/board.c
-> @@ -713,41 +713,6 @@ int ft_board_setup(void *blob, struct bd_info *bd)
->         if (IS_ENABLED(CONFIG_FDT_FIXUP_PARTITIONS) && IS_ENABLED(CONFIG_NAND_ZYNQ))
->                 fdt_fixup_mtdparts(blob, nodes, ARRAY_SIZE(nodes));
->
-> -       if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
-> -               debug("No RNG device\n");
-> -               return 0;
-> -       }
-> -
-> -       if (dm_rng_read(dev, buf, n)) {
-> -               debug("Reading RNG failed\n");
-> -               return 0;
-> -       }
-> -
-> -       if (!blob) {
-> -               debug("No FDT memory address configured. Please configure\n"
-> -                     "the FDT address via \"fdt addr <address>\" command.\n"
-> -                     "Aborting!\n");
-> -               return 0;
-> -       }
-> -
-> -       ret = fdt_check_header(blob);
-> -       if (ret < 0) {
-> -               debug("fdt_chosen: %s\n", fdt_strerror(ret));
-> -               return ret;
-> -       }
-> -
-> -       nodeoffset = fdt_find_or_add_subnode(blob, 0, "chosen");
-> -       if (nodeoffset < 0) {
-> -               debug("Reading chosen node failed\n");
-> -               return nodeoffset;
-> -       }
-> -
-> -       ret = fdt_setprop(blob, nodeoffset, "kaslr-seed", buf, sizeof(buf));
-> -       if (ret < 0) {
-> -               debug("Unable to set kaslr-seed on chosen node: %s\n", fdt_strerror(ret));
-> -               return ret;
-> -       }
-> -
->         return 0;
->  }
->  #endif
-> diff --git a/boot/fdt_support.c b/boot/fdt_support.c
-> index 874ca4d6f5af..3455d60d69dc 100644
-> --- a/boot/fdt_support.c
-> +++ b/boot/fdt_support.c
-> @@ -8,6 +8,7 @@
->
->  #include <abuf.h>
->  #include <env.h>
-> +#include <kaslrseed.h>
->  #include <log.h>
->  #include <mapmem.h>
->  #include <net.h>
-> @@ -300,6 +301,15 @@ int fdt_chosen(void *fdt)
->         if (nodeoffset < 0)
->                 return nodeoffset;
->
-> +       if (IS_ENABLED(CONFIG_DM_RNG) && !IS_ENABLED(ARMV8_SEC_FIRMWARE_SUPPORT)) {
-> +               err = fdt_kaslrseed(fdt);
-> +               if (err) {
-> +                       printf("WARNING: could not set kaslr-seed %s.\n",
-> +                              fdt_strerror(err));
-> +                       return err;
-> +               }
-> +       }
-> +
->         if (IS_ENABLED(CONFIG_BOARD_RNG_SEED) && !board_rng_seed(&buf)) {
->                 err = fdt_setprop(fdt, nodeoffset, "rng-seed",
->                                   abuf_data(&buf), abuf_size(&buf));
-> diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-> index 4b22bb6f525a..8d70233fc08d 100644
-> --- a/boot/pxe_utils.c
-> +++ b/boot/pxe_utils.c
-> @@ -8,6 +8,7 @@
->  #include <dm.h>
->  #include <env.h>
->  #include <image.h>
-> +#include <kaslrseed.h>
->  #include <log.h>
->  #include <malloc.h>
->  #include <mapmem.h>
-> @@ -323,10 +324,6 @@ static void label_boot_kaslrseed(void)
->  #if CONFIG_IS_ENABLED(DM_RNG)
->         ulong fdt_addr;
->         struct fdt_header *working_fdt;
-> -       size_t n = 0x8;
-> -       struct udevice *dev;
-> -       u64 *buf;
-> -       int nodeoffset;
->         int err;
->
->         /* Get the main fdt and map it */
-> @@ -342,35 +339,9 @@ static void label_boot_kaslrseed(void)
->         if (err <= 0)
->                 return;
->
-> -       if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
-> -               printf("No RNG device\n");
-> -               return;
-> -       }
-> -
-> -       nodeoffset = fdt_find_or_add_subnode(working_fdt, 0, "chosen");
-> -       if (nodeoffset < 0) {
-> -               printf("Reading chosen node failed\n");
-> -               return;
-> -       }
-> -
-> -       buf = malloc(n);
-> -       if (!buf) {
-> -               printf("Out of memory\n");
-> -               return;
-> -       }
-> -
-> -       if (dm_rng_read(dev, buf, n)) {
-> -               printf("Reading RNG failed\n");
-> -               goto err;
-> -       }
-> -
-> -       err = fdt_setprop(working_fdt, nodeoffset, "kaslr-seed", buf, sizeof(buf));
-> -       if (err < 0) {
-> +       err = fdt_kaslrseed(working_fdt);
-> +       if (err < 0)
->                 printf("Unable to set kaslr-seed on chosen node: %s\n", fdt_strerror(err));
-> -               goto err;
-> -       }
-> -err:
-> -       free(buf);
->  #endif
->         return;
->  }
-> diff --git a/cmd/kaslrseed.c b/cmd/kaslrseed.c
-> index e0d3c7fe7489..ea5c07d729cf 100644
-> --- a/cmd/kaslrseed.c
-> +++ b/cmd/kaslrseed.c
-> @@ -9,33 +9,16 @@
->  #include <command.h>
->  #include <dm.h>
->  #include <hexdump.h>
-> +#include <kaslrseed.h>
->  #include <malloc.h>
->  #include <rng.h>
->  #include <fdt_support.h>
->
->  static int do_kaslr_seed(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
->  {
-> -       size_t n = 0x8;
-> -       struct udevice *dev;
-> -       u64 *buf;
-> -       int nodeoffset;
-> -       int ret = CMD_RET_SUCCESS;
-> +       int err;
->
-> -       if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
-> -               printf("No RNG device\n");
-> -               return CMD_RET_FAILURE;
-> -       }
-> -
-> -       buf = malloc(n);
-> -       if (!buf) {
-> -               printf("Out of memory\n");
-> -               return CMD_RET_FAILURE;
-> -       }
-> -
-> -       if (dm_rng_read(dev, buf, n)) {
-> -               printf("Reading RNG failed\n");
-> -               return CMD_RET_FAILURE;
-> -       }
-> +       printf("Notice: a /chosen/kaslr-seed is automatically added to the device-tree when booted via booti/bootm/bootz therefore using this command is likely no longer needed");
->
->         if (!working_fdt) {
->                 printf("No FDT memory address configured. Please configure\n"
-> @@ -44,27 +27,13 @@ static int do_kaslr_seed(struct cmd_tbl *cmdtp, int flag, int argc, char *const
->                 return CMD_RET_FAILURE;
->         }
->
-> -       ret = fdt_check_header(working_fdt);
-> -       if (ret < 0) {
-> -               printf("fdt_chosen: %s\n", fdt_strerror(ret));
-> +       err = fdt_kaslrseed(working_fdt);
-> +       if (err < 0) {
-> +               printf("Unable to set kaslr-seed on chosen node: %s\n", fdt_strerror(err));
->                 return CMD_RET_FAILURE;
->         }
->
-> -       nodeoffset = fdt_find_or_add_subnode(working_fdt, 0, "chosen");
-> -       if (nodeoffset < 0) {
-> -               printf("Reading chosen node failed\n");
-> -               return CMD_RET_FAILURE;
-> -       }
-> -
-> -       ret = fdt_setprop(working_fdt, nodeoffset, "kaslr-seed", buf, sizeof(buf));
-> -       if (ret < 0) {
-> -               printf("Unable to set kaslr-seed on chosen node: %s\n", fdt_strerror(ret));
-> -               return CMD_RET_FAILURE;
-> -       }
-> -
-> -       free(buf);
-> -
-> -       return ret;
-> +       return CMD_RET_SUCCESS;
->  }
->
->  U_BOOT_LONGHELP(kaslrseed,
-> diff --git a/include/kaslrseed.h b/include/kaslrseed.h
-> new file mode 100644
-> index 000000000000..3fe82f418acf
-> --- /dev/null
-> +++ b/include/kaslrseed.h
-> @@ -0,0 +1,17 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Copyright 2024 Tim Harvey <tharvey@gateworks.com>
-> + */
-> +
-> +#if !defined _KASLRSEED_H_
-> +#define _KASLRSEED_H_
-> +
-> +/**
-> + * fdt_kaslrseed() - create a 'kaslr-seed' node in chosen
-> + *
-> + * @blob:      fdt blob
-> + * Return:     0 if OK, -ve on error
-> + */
-> +int fdt_kaslrseed(void *blob);
-> +
-> +#endif /* _KASLRSEED_H_ */
-> diff --git a/lib/Makefile b/lib/Makefile
-> index 2a76acf100d0..20a0242055fa 100644
-> --- a/lib/Makefile
-> +++ b/lib/Makefile
-> @@ -149,6 +149,7 @@ obj-y += date.o
->  obj-y += rtc-lib.o
->  obj-$(CONFIG_LIB_ELF) += elf.o
->
-> +obj-$(CONFIG_DM_RNG) += kaslrseed.o
->  obj-$(CONFIG_$(SPL_TPL_)SEMIHOSTING) += semihosting.o
->
->  #
-> diff --git a/lib/kaslrseed.c b/lib/kaslrseed.c
-> new file mode 100644
-> index 000000000000..ad06bee2b88d
-> --- /dev/null
-> +++ b/lib/kaslrseed.c
-> @@ -0,0 +1,34 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright 2024 Tim Harvey <tharvey@gateworks.com>
-> + */
-> +#include <dm.h>
-> +#include <rng.h>
-> +#include <fdt_support.h>
-> +
-> +int fdt_kaslrseed(void *fdt)
-> +{
-> +       struct udevice *dev;
-> +       int nodeoffset;
-> +       u64 data;
-> +       int err;
-> +
-> +       err = fdt_check_header(fdt);
-> +       if (err < 0)
-> +               return err;
-> +
-> +       /* find or create "/chosen" node. */
-> +       nodeoffset = fdt_find_or_add_subnode(fdt, 0, "chosen");
-> +       if (nodeoffset < 0)
-> +               return nodeoffset;
-> +
-> +       err = uclass_get_device(UCLASS_RNG, 0, &dev);
-> +       if (!err)
-> +               err = dm_rng_read(dev, &data, sizeof(data));
-> +       if (!err)
-> +               err = fdt_setprop(fdt, nodeoffset, "kaslr-seed", &data, sizeof(data));
-> +       if (err < 0)
-> +               printf("WARNING: could not set kaslr-seed %s.\n", fdt_strerror(err));
-> +
-> +       return err;
-> +}
-> --
-> 2.25.1
->
+> malloc() pool size used by TPL/SPL should still work:
+> 
+>    CONFIG_TPL_SYS_MALLOC_F_LEN=0x600
+>    CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000
+> 
+> Also check the "Early malloc usage" from bdinfo cmd, should show how
+> much memory was actually allocated at pre-reloc, from a rk3308 board:
+> 
+>    Early malloc usage: 2060 / 10000
+> 
+
+"""
+=> bdinfo
+boot_params = 0x0000000000000000
+DRAM bank   = 0x0000000000000000
+-> start    = 0x0000000000200000
+-> size     = 0x000000007fe00000
+flashstart  = 0x0000000000000000
+flashsize   = 0x0000000000000000
+flashoffset = 0x0000000000000000
+baudrate    = 115200 bps
+relocaddr   = 0x000000007ff53000
+reloc off   = 0x000000007fd53000
+Build       = 64-bit
+current eth = ethernet@ff360000
+ethaddr     = f6:3c:b5:0d:0a:13
+IP addr     = <NULL>
+fdt_blob    = 0x000000007df43bd0
+new_fdt     = 0x000000007df43bd0
+fdt_size    = 0x000000000000c1e0
+lmb_dump_all:
+ memory.cnt = 0x1 / max = 0x10
+ memory[0]	[0x200000-0x7fffffff], 0x7fe00000 bytes flags: 0
+ reserved.cnt = 0x1 / max = 0x10
+ reserved[0]	[0x7df3f580-0x7fffffff], 0x020c0a80 bytes flags: 0
+devicetree  = separate
+serial addr = 0x00000000ff030000
+ width      = 0x0000000000000004
+ shift      = 0x0000000000000002
+ offset     = 0x0000000000000000
+ clock      = 0x00000000016e3600
+arch_number = 0x0000000000000000
+TLB addr    = 0x000000007fff0000
+irq_sp      = 0x000000007df43bc0
+sp start    = 0x000000007df43bc0
+Early malloc usage: 2250 / 10000
+"""
+
+The default on PX30 for SYS_MALLOC_F_LEN is 0x400 (both from arch/arm/mach-rockchip/px30/Kconfig and Kconfig).
+
+The default for SPL_SYS_MALLOC_F_LEN is SYS_MALLOC_F_LEN.
+
+The default for TPL_SYS_MALLOC_F_LEN is SPL_SYS_MALLOC_F_LEN.
+
+I suggest we change the default SYS_MALLOC_F_LEN to be 0x20000 then, on PX30.
+
+Since we have forced TPL support on PX30, we can keep SPL_SYS_MALLOC_F_LEN is SYS_MALLOC_F_LEN, because we necessarily have DRAM support in SPL so we are much less limited in allocation.
+
+Since all PX30 boards have 0x600 for TPL_SYS_MALLOC_F_LEN I suggest to make this the default as well?
+
+Anything against this?
+
+I'm also a bit confused as to why we need to specify the size of the allocation pool pre-relocation? Why is this important?
+
+Thanks a lot for the hint, I can now work on migrating PX30 to OF_UPSTREAM :)
+
+Cheers,
+Quentin
