@@ -4,57 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F418C25B74
-	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 11:29:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62DD0C25B75
+	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 11:55:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F79A87F7D;
-	Tue, 21 May 2024 13:29:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 86404880A1;
+	Tue, 21 May 2024 13:55:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="pRyPP+sc";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1716292504;
+	bh=BU3HEmWzng80hhgTqqC8PRA7Kne/OkzBOZDGB3PboEU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=n612Ig0ipscssE76nPoqybm+eLqVjT3KL1vi+vdNm4OhWdFdWr6e6fVCQ5eikUFq6
+	 JViS6YvRLp3imQnjdYST2csxN+tquJRLjLSwyMhU8GmfFh7VUriVPh84D9okUosLq0
+	 tXx9z64gX5r0WbmTmMSxNdjwFqHKaItbVA7q7Ass7ZIRW8ZRreODwWPvjpYZLj3/o5
+	 16rOOHN+elc2NFyMWrEmaYtDV1AR19AEcvXOUDypP8sO2iuOzrXD1pcQb6Q1i3+9an
+	 zU0Dc3fOb1qZ+90iJQsb2kW+YqQqeoMfQF+cLX1TKDeTmTNeDkOGNpkF2Yf84nue7r
+	 qye8Whfdlrxqw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAA9488080; Tue, 21 May 2024 13:29:13 +0200 (CEST)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
+ id BD63A8873A; Tue, 21 May 2024 13:55:03 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA026880AE
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 13:29:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 67FDA88080
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 13:55:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id D8C2E206C9;
- Tue, 21 May 2024 13:29:10 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1716290951;
- bh=EA/+lucwWGM8N4vMl4Dhm7Xzx1fL51iuHUs85dgJMgI=; h=From:To:Subject;
- b=pRyPP+scBQA62CF8v0EKmiOrYJuDIHuznpp7C3wqQHWsIQ+0AcJPBv9kAadBPDz4u
- 7H7aaCMauLx65JDecJDCkfCLfZj32wWAEJayufus961ASdoA8a2L53P2dxK8wcNOH3
- p9yEKDCvb8kUdT3kw69DcjDiVdFzwRtRIrGkwnhnMtV5pK1GRDYqsJtn57vHutN9ZO
- jIKX6n9MtW4Hu81Ma7PazJ7dGXSPvMtp0Nf46jDZoRNPzKxoFRkIpkynJ7leE6VZm2
- vl1mmUKUEzBvoVXwcO3wDJAQywSHSffvgg7OuDSEH5xwGa8eV2z9eV1DIpr2in+ToC
- DystGkMqDQPBg==
-Date: Tue, 21 May 2024 13:29:07 +0200
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Marek Vasut <marex@denx.de>, Francesco Dolcini <francesco@dolcini.it>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Philippe Schenker <philippe.schenker@toradex.com>,
- Martyn Welch <martyn.welch@collabora.com>, Stefano Babic <sbabic@denx.de>
-Subject: Re: [PATCH] ARM: imx: verdin-imx8mm: Set CAN oscillator frequency
- based on model
-Message-ID: <20240521112907.GA16302@francesco-nb>
-References: <20240521093923.8771-1-marex@denx.de>
- <20240521111916.GA14658@francesco-nb>
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4VkCY105dHz9srS;
+ Tue, 21 May 2024 13:55:01 +0200 (CEST)
+Message-ID: <97ec64c3-7323-4886-9623-77b4bc28dfff@denx.de>
+Date: Tue, 21 May 2024 13:54:58 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240521111916.GA14658@francesco-nb>
+Subject: Re: [PATCH v4 0/3] cyclic/watchdog patches
+Content-Language: en-US
+To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+References: <20240521084652.1726460-1-rasmus.villemoes@prevas.dk>
+ <ce12ad50-bd54-499e-965c-5693355a4e84@prevas.dk>
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <ce12ad50-bd54-499e-965c-5693355a4e84@prevas.dk>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,92 +69,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, May 21, 2024 at 01:19:24PM +0200, Francesco Dolcini wrote:
-> On Tue, May 21, 2024 at 11:39:05AM +0200, Marek Vasut wrote:
-> > The older i.MX8M Mini Verdin SoMs may came with 20 MHz SPI CAN controller
-> > oscillator, the newer SoMs always use 40 MHz oscillator. Handle both by
-> > overriding the oscillator frequency just before booting the kernel.
-> > 
-> > These are the known variants with 20 MHz oscillator:
-> > - 0055, V1.1A, V1.1B, V1.1C and V1.1D, use a 20MHz oscillator
-> > - 0059, V1.1A and V1.1B, use a 20MHz oscillator
-> > 
-> > Signed-off-by: Marek Vasut <marex@denx.de>
-> > ---
-> > Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-> > Cc: Fabio Estevam <festevam@gmail.com>
-> > Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
-> > Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-> > Cc: Philippe Schenker <philippe.schenker@toradex.com>
-> > Cc: Martyn Welch <martyn.welch@collabora.com>
-> > Cc: Stefano Babic <sbabic@denx.de>
-> > Cc: u-boot@lists.denx.de
-> > ---
-> >  board/toradex/verdin-imx8mm/verdin-imx8mm.c | 30 +++++++++++++++++++++
-> >  1 file changed, 30 insertions(+)
-> > 
-> > diff --git a/board/toradex/verdin-imx8mm/verdin-imx8mm.c b/board/toradex/verdin-imx8mm/verdin-imx8mm.c
-> > index 55c02653da6..b4a443ebfb0 100644
-> > --- a/board/toradex/verdin-imx8mm/verdin-imx8mm.c
-> > +++ b/board/toradex/verdin-imx8mm/verdin-imx8mm.c
-> > @@ -125,6 +125,36 @@ int board_phys_sdram_size(phys_size_t *size)
-> >  #if defined(CONFIG_OF_LIBFDT) && defined(CONFIG_OF_BOARD_SETUP)
-> >  int ft_board_setup(void *blob, struct bd_info *bd)
-> >  {
-> > +	const char *canoscpath = "/oscillator";
-> > +	int freq = 40000000;	/* 40 MHz is used on most variants */
-> > +	int canoscoff, ret;
-> > +
-> > +	canoscoff = fdt_path_offset(blob, canoscpath);
-> > +	if (canoscoff < 0)	/* No CAN oscillator found. */
-> > +		goto exit;
-> > +
-> > +	/*
-> > +	 * The actual "prodid" (PID4 in Toradex naming) that have the CAN
-> > +	 * functionality are 0055 and 0059.
-> This is nor correct, we have more, they just always use 40MHz.
+On 5/21/24 11:47, Rasmus Villemoes wrote:
+> On 21/05/2024 10.46, Rasmus Villemoes wrote:
+>> A bit of a mixed bag. I've been wanting to submit something like 3/3
+>> for a while. So when I stumbled on Marek's patch
+>> https://lore.kernel.org/u-boot/20240316201416.211480-1-marek.vasut+renesas@mailbox.org/
+>> , I got reminded of that plan, and I think that patch could be more
+>> readable if we adopt this model.
+>>
+>> While actually doing those mostly mechanical changes, I stumbled on
+>> two separate issues that probably want fixing regardless of the fate
+>> of 3/3.
+>>
+>> Mostly just compile-tested, and now also checked that at least the
+>> sandbox test runs succesfully, and that it builds both with and
+>> without CONFIG_CYCLIC.
 > 
-> I would rephrase this:
+> So I managed to trigger an azure test by pushing to github and creating
+> a dummy PR: https://github.com/u-boot/u-boot/pull/542
 > 
-> /*
->  * 20MHz CAN oscillator product variants:
->  * - 0055, V1.1A, V1.1B, V1.1C and V1.1D
->  * - 0059, V1.1A and V1.1B
->  */
+> That fails, and while it involves the cyclic framework, I'm pretty sure
+> these patches are not to blame, since the same error also exists in
+> other pipelines. It's an "expect" failure, because some watchdog
+> callback apparently sometimes takes more than 1ms, so the default 1000us
+> threshold is exceeded, and that prints a warning which breaks the "expect".
 > 
-> or in a different way, if you prefer, but you got the point.
+> An example is
 > 
-> > +	if ((tdx_hw_tag.ver_major == 1 && tdx_hw_tag.ver_minor == 1) &&
-> > +	    ((tdx_hw_tag.prodid == VERDIN_IMX8MMQ_IT &&
-> > +	      tdx_hw_tag.ver_assembly <= 1) ||	/* 0055 rev. A or B */
-> > +	     (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_WIFI_BT_IT &&
-> > +	      tdx_hw_tag.ver_assembly <= 4))) {	/* 0059 rev. A/B/C/D */
+> https://dev.azure.com/u-boot/u-boot/_build/results?buildId=8459&view=logs&j=a1270dec-081b-5c65-5cd5-5e915a842596&t=69f6cf72-86f3-551a-807d-f28f62a1426f&l=1055
+> .
 > 
-> ver_assembly is the hardware revision - 'A', e.g. 'A' is 0, 'D' is 3.
-> 
-> VERDIN_IMX8MMQ_IT is 0059
-> VERDIN_IMX8MMQ_WIFI_BT_IT is 0055
-> 
-> with that said, it should be
-> 
-> 	if ((tdx_hw_tag.ver_major == 1 && tdx_hw_tag.ver_minor == 1) &&
-> 	    ((tdx_hw_tag.prodid == VERDIN_IMX8MMQ_WIFI_BT_IT &&
-> 	      tdx_hw_tag.ver_assembly <= 1) ||	/* 0055 rev. A or B */
-> 	     (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_IT &&
-> 	      tdx_hw_tag.ver_assembly <= 3))) {	/* 0059 rev. A/B/C/D */
+> I don't know why it only/mostly seems to happen in clang builds, but I
+> think the fact that these happen quite frequently warrants either
+> bumping the threshold used in the CI builds quite a lot, or adding a
+> config option to suppress that warning/limit altogether for CI builds.
 
-whoops. I confused myself.
-What is correct is the table you have in the comment and the commit
-message.
+I've also seen CI build issues from time to time and restarting the
+build magically solved these issues. I'm all for making this CI
+build more stable, perhaps Tom has some ideas?
 
-What is wrong is the comment in this if branch, and this confused me
-(and probably also you, sorry).
+Regarding this cyclic patch:
 
-	if ((tdx_hw_tag.ver_major == 1 && tdx_hw_tag.ver_minor == 1) &&
-	    ((tdx_hw_tag.prodid == VERDIN_IMX8MMQ_IT &&
-	      tdx_hw_tag.ver_assembly <= 1) ||	/* 0059 rev. A or B */
-	     (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_WIFI_BT_IT &&
-	      tdx_hw_tag.ver_assembly <= 3))) {	/* 0055 rev. A/B/C/D */
+Still some problems, MIPS64 related at least, octeon_nic23 target:
 
-Francesco
+https://dev.azure.com/sr0718/0cded7c3-6e6a-4b57-8d0f-65c99496c42f/_apis/build/builds/357/logs/415
 
+Thanks,
+Stefan
