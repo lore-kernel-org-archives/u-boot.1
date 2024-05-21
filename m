@@ -4,57 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3E56C25B74
-	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 05:35:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F1BDC25B74
+	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 05:36:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F83988261;
-	Tue, 21 May 2024 07:35:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9C4DA88261;
+	Tue, 21 May 2024 07:36:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="LZmPUsVT";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Ci6JyU32";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 739CD8831F; Tue, 21 May 2024 07:35:10 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 7507E886EF; Tue, 21 May 2024 07:36:34 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AEC5D88233
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 07:35:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0786088233
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 07:36:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44L5YrRx128195;
- Tue, 21 May 2024 00:34:53 -0500
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44L5aJ6x049414;
+ Tue, 21 May 2024 00:36:19 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1716269693;
- bh=dIZkMGh8CUNS7WXxE7nUES2NuCMZCx1B0YzugM9i5Zg=;
+ s=ti-com-17Q1; t=1716269779;
+ bh=1X+7glWRIHD/Q0jk1Y1YSVtCi7R3YxOCpEAmzaP3mZc=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=LZmPUsVT7nlLqgpY7OgPMLwwOl+sMZ1yWTfGuXFlc8bouBoPMICCxTdubUEJ66pdN
- u81879hdunzJBUsQsRVDBQEEFmGczrc/xWgczr5730rFej/GNS+JbXyZOjnWndCRqR
- Izo3+6BkbaJBSb4EA3bIuo6wfdb+AoGXE8HIXBFs=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44L5Yrpt091519
+ b=Ci6JyU32f4YeqL0uyb9m1o8efPz64Nn0YoHulJEdFvhnE1fBTFUmP/U1VZIVGSWQR
+ 2fKXpgc093vaJdLVpYBM/RQGL/lTa9dl5Z3/2Fk8HuTeVkyxW8ccaqV8LoBa/2MKlF
+ k1ochF7Wv0tc4zMSArR+1+l8wCKe9d1X3qfS0PQ8=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44L5aJhV011767
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 21 May 2024 00:34:53 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 21 May 2024 00:36:19 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 21
- May 2024 00:34:53 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ May 2024 00:36:19 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 21 May 2024 00:34:53 -0500
+ Frontend Transport; Tue, 21 May 2024 00:36:18 -0500
 Received: from [172.24.227.220] (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.227.220])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44L5Yh9b035207;
- Tue, 21 May 2024 00:34:44 -0500
-Message-ID: <7f264a02-f80f-46fd-9aec-780b7bbe27bf@ti.com>
-Date: Tue, 21 May 2024 11:04:42 +0530
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44L5aB4X037745;
+ Tue, 21 May 2024 00:36:12 -0500
+Message-ID: <a9c7dae8-eb83-4d43-b81c-91b67dc2cef7@ti.com>
+Date: Tue, 21 May 2024 11:06:11 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 06/10] arm: mach-k3: am625_init: Probe AM65 CPSW NUSS
+Subject: Re: [PATCH v2 10/10] arch: arm: dts: k3-am62-sk-u-boot: Add missing
+ "bootph-all" property to phy_gmii_sel node
 To: Roger Quadros <rogerq@kernel.org>, =?UTF-8?Q?Marek_Beh=C3=BAn?=
  <kabel@kernel.org>, Michal Simek <michal.simek@amd.com>,
  Vignesh Raghavendra <vigneshr@ti.com>,
@@ -62,10 +63,9 @@ To: Roger Quadros <rogerq@kernel.org>, =?UTF-8?Q?Marek_Beh=C3=BAn?=
  Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
  Andreas Dannenberg <dannenberg@ti.com>,
  Devarsh Thakkar <devarsht@ti.com>, Bin Meng <bmeng@tinylab.org>,
- Sean Anderson <seanga2@gmail.com>, "Kishon
- Vijay Abraham I" <kishon@ti.com>, Nikhil M Jain <n-jain1@ti.com>, Wadim
- Egorov <w.egorov@phytec.de>, Joao Paulo Goncalves
- <joao.goncalves@toradex.com>, Mattijs Korpershoek
+ Sean Anderson <seanga2@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Wadim Egorov <w.egorov@phytec.de>, Joao Paulo
+ Goncalves <joao.goncalves@toradex.com>, Mattijs Korpershoek
  <mkorpershoek@baylibre.com>, Dhruva Gole <d-gole@ti.com>, Francesco Dolcini
  <francesco.dolcini@toradex.com>, Andrew Davis <afd@ti.com>, Maxime Ripard
  <mripard@kernel.org>, Neha Malcom Francis <n-francis@ti.com>, Simon Glass
@@ -74,13 +74,14 @@ To: Roger Quadros <rogerq@kernel.org>, =?UTF-8?Q?Marek_Beh=C3=BAn?=
  Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>
 References: <20240425120822.2048012-1-c-vankar@ti.com>
- <20240425120822.2048012-7-c-vankar@ti.com>
- <84312b9f-7b30-4da1-91a0-067e94cb420a@kernel.org>
- <29092012-e708-4676-99e3-cd8ef64cd701@ti.com>
- <25fb2205-77e8-42dd-a244-4114f028d2c7@kernel.org>
+ <20240425120822.2048012-11-c-vankar@ti.com>
+ <5ac873d5-e485-47d3-b5de-f537c1fb88b1@kernel.org>
+ <e3785fad-fb0d-4cf8-8787-0a91e6b52332@ti.com>
+ <e9911fd1-6a69-448d-9347-7d188ec46c74@ti.com>
+ <864a0203-409a-4db9-8248-14d04a6e71fc@kernel.org>
 Content-Language: en-US
 From: Chintan Vankar <c-vankar@ti.com>
-In-Reply-To: <25fb2205-77e8-42dd-a244-4114f028d2c7@kernel.org>
+In-Reply-To: <864a0203-409a-4db9-8248-14d04a6e71fc@kernel.org>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -102,84 +103,68 @@ X-Virus-Status: Clean
 
 
 
-On 20/05/24 17:42, Roger Quadros wrote:
+On 20/05/24 17:43, Roger Quadros wrote:
 > 
 > 
-> On 25/04/2024 15:59, Chintan Vankar wrote:
+> On 20/05/2024 09:04, Chintan Vankar wrote:
 >>
 >>
->> On 25/04/24 17:57, Roger Quadros wrote:
+>> On 25/04/24 18:06, Chintan Vankar wrote:
 >>>
 >>>
->>> On 25/04/2024 15:08, Chintan Vankar wrote:
->>>> From: Kishon Vijay Abraham I <kishon@ti.com>
+>>> On 25/04/24 18:01, Roger Quadros wrote:
 >>>>
->>>> In order to support Ethernet boot on AM62x, probe AM65 CPSW NUSS
->>>> driver in board_init_f().
 >>>>
->>>> Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
->>>> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
->>>> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
->>>> ---
+>>>> On 25/04/2024 15:08, Chintan Vankar wrote:
+>>>>> Add "bootph-all" property to CPSW MAC's PHY node phy_gmii_sel.
+>>>>>
+>>>>> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
+>>>>> ---
+>>>>>
+>>>>> Changes from v1 to v2:
+>>>>> - This patch is newly added in this series to enable CPSW MAC's PHY
+>>>>>     node "phy_gmii_sel". As per discussion at here:
+>>>>>     https://lore.kernel.org/r/20240112130127.rvvrhz7p4vmlyalh@smother/
+>>>>>     changes made by this patch can be dropped in the future when the
+>>>>>     DT-Sync is performed with am62-main.dtsi containing this change in
+>>>>>     the Linux DT which will match U-Boot's DT.
 >>>>
->>>> Link to v1:
->>>> https://lore.kernel.org/r/20240112064759.1801600-8-s-vadapalli@ti.com/
+>>>> I don't think bootph-all exists in am62-main.dtsi. It should come from
+>>>> board.dts
 >>>>
->>>> Changes from v1 to v2:
->>>> - No changes.
->>>>
->>>>    arch/arm/mach-k3/am625_init.c | 10 ++++++++++
->>>>    1 file changed, 10 insertions(+)
->>>>
->>>> diff --git a/arch/arm/mach-k3/am625_init.c b/arch/arm/mach-k3/am625_init.c
->>>> index 668f9a51ef..9bf61b1e83 100644
->>>> --- a/arch/arm/mach-k3/am625_init.c
->>>> +++ b/arch/arm/mach-k3/am625_init.c
->>>> @@ -277,6 +277,16 @@ void board_init_f(ulong dummy)
->>>>            if (ret)
->>>>                panic("DRAM init failed: %d\n", ret);
->>>>        }
->>>> +
->>>> +    if (IS_ENABLED(CONFIG_SPL_ETH) && IS_ENABLED(CONFIG_TI_AM65_CPSW_NUSS) &&
->>>> +        spl_boot_device() == BOOT_DEVICE_ETHERNET) {
->>>> +        struct udevice *cpswdev;
->>>> +
->>>> +        if (uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(am65_cpsw_nuss),
->>>> +                        &cpswdev))
->>>> +            printf("Failed to probe am65_cpsw_nuss driver\n");
->>>> +    }
->>>> +
 >>>
->>> This looks like a HACK.
->>> The network driver should be probed only when the networking feature is actually required.
+>>> Yes, I am having the same discussion at here:
+>>> https://lore.kernel.org/all/c13ac165-7cbd-4e53-914e-8c6bc28250e3@ti.com/
 >>>
 >>
->> Driver is probed only when the condition above
->> "spl_boot_device() == BOOT_DEVICE_ETHERNET" is true, which says Boot
->> device is Ethernet, and here we are booting with Ethernet so driver is
->> getting probed.
+>> Since I have posted patch which adds bootph-all property to
+>> "k3-am62x-sk-common.dtsi" at here:
+>> https://lore.kernel.org/r/20240430085048.3143665-1-c-vankar@ti.com/
+>> and it has no open comments and this series
+>> also does not have any open comments, so can it be merged ?
 > 
-> I think you misunderstood what I was saying as am625_init.c is not using
-> any Ethernet function it should not cause the Ethernet driver to probe.
-> 
-> Instead it should be probed by the networking use case.
-> 
-> What happens if you don't use this patch? Where is it failing?
+> Since bootph-all is being added to k3-am62x-sk-common.dtsi don't you have to drop patch 10
+> from this series?
 > 
 
-You are correct that it should be probed by the networking use case and
-we are using networking functionality of "Booting via Ethernet".
-Regarding its probing, I already had discussion that why do I have to
-probe it explicitly at here:
-https://lore.kernel.org/r/ee1d16fd-b99b-4b07-97bb-a896e179157a@ti.com/
-
-Now if I don't use this patch then Ethernet will not get initialized at
-SPL stage, and in "spl_net_load_image()" function, there will be an
-error saying "No Ethernet Found", and since we selected booting via
-Ethernet it will fail to boot.
+Yes you are correct, but that patch is not merged yet.
 
 >>
->>>>        spl_enable_cache();
->>>>          fixup_a53_cpu_freq_by_speed_grade();
->>>
+>>>>>
+>>>>>    arch/arm/dts/k3-am625-sk-u-boot.dtsi | 4 ++++
+>>>>>    1 file changed, 4 insertions(+)
+>>>>>
+>>>>> diff --git a/arch/arm/dts/k3-am625-sk-u-boot.dtsi b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
+>>>>> index fa778b0ff4..e9a1afde95 100644
+>>>>> --- a/arch/arm/dts/k3-am625-sk-u-boot.dtsi
+>>>>> +++ b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
+>>>>> @@ -46,3 +46,7 @@
+>>>>>    &cpsw_port2 {
+>>>>>        status = "disabled";
+>>>>>    };
+>>>>> +
+>>>>> +&phy_gmii_sel {
+>>>>> +    bootph-all;
+>>>>> +};
+>>>>
 > 
