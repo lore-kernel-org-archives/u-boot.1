@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD40BC25B78
-	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 17:41:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E2C8C25B78
+	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 17:41:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2764488802;
+	by phobos.denx.de (Postfix) with ESMTP id 8620D8880C;
 	Tue, 21 May 2024 19:40:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E2D6B887FD; Tue, 21 May 2024 19:40:15 +0200 (CEST)
-Received: from smtp-8fab.mail.infomaniak.ch (smtp-8fab.mail.infomaniak.ch
- [83.166.143.171])
+ id 8AA31887FE; Tue, 21 May 2024 19:40:16 +0200 (CEST)
+Received: from smtp-42a9.mail.infomaniak.ch (smtp-42a9.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::42a9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B8FA883A0
+ by phobos.denx.de (Postfix) with ESMTPS id AE08988373
  for <u-boot@lists.denx.de>; Tue, 21 May 2024 19:40:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
@@ -25,18 +25,18 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
  [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4VkMCK4yXhzBV5;
- Tue, 21 May 2024 19:40:13 +0200 (CEST)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4VkMCL1xjxzBV7;
+ Tue, 21 May 2024 19:40:14 +0200 (CEST)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4VkMCJ72nMz69h; Tue, 21 May 2024 19:40:12 +0200 (CEST)
+ id 4VkMCK4qPMz6DJ; Tue, 21 May 2024 19:40:13 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Tue, 21 May 2024 19:40:01 +0200
-Subject: [PATCH 08/10] rockchip: px30: make UART pinmux accessible to
- TPL/SPL DTB
+Date: Tue, 21 May 2024 19:40:02 +0200
+Subject: [PATCH 09/10] rockchip: evb-px30: do not remove pinctrl nodes from
+ SPL DTB
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240521-px30-2024-07-rc-v1-8-62109c84d44f@cherry.de>
+Message-Id: <20240521-px30-2024-07-rc-v1-9-62109c84d44f@cherry.de>
 References: <20240521-px30-2024-07-rc-v1-0-62109c84d44f@cherry.de>
 In-Reply-To: <20240521-px30-2024-07-rc-v1-0-62109c84d44f@cherry.de>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -69,47 +69,28 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-This adds the default pinmux for UART2 and UART5 to the TPL/SPL DTB (if
-not removed through the CONFIG_OF_SPL_REMOVE_PROPS symbol) as those two
-controllers are always made available to all boards.
+In order to be able to properly mux UART on PX30 EVB, the pinmux needs
+to be done at runtime, so let's not remove the pinctrl nodes from the
+SPL DTB.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- arch/arm/dts/px30-u-boot.dtsi | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+ configs/evb-px30_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/px30-u-boot.dtsi b/arch/arm/dts/px30-u-boot.dtsi
-index 046da022ffe..59fa9f43a97 100644
---- a/arch/arm/dts/px30-u-boot.dtsi
-+++ b/arch/arm/dts/px30-u-boot.dtsi
-@@ -33,11 +33,27 @@
- 	bootph-all;
- };
- 
-+&uart2m0_xfer {
-+	bootph-all;
-+};
-+
- &uart5 {
- 	clock-frequency = <24000000>;
- 	bootph-all;
- };
- 
-+&uart5_cts {
-+	bootph-all;
-+};
-+
-+&uart5_rts {
-+	bootph-all;
-+};
-+
-+&uart5_xfer {
-+	bootph-all;
-+};
-+
- &sdmmc {
- 	bootph-all;
- 
+diff --git a/configs/evb-px30_defconfig b/configs/evb-px30_defconfig
+index 50ce1d7a9f3..a5833ad6d09 100644
+--- a/configs/evb-px30_defconfig
++++ b/configs/evb-px30_defconfig
+@@ -51,7 +51,7 @@ CONFIG_CMD_USB_MASS_STORAGE=y
+ CONFIG_EFI_PARTITION_ENTRIES_NUMBERS=64
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_LIVE=y
+-CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_OF_SPL_REMOVE_PROPS="interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_REGMAP=y
 
 -- 
 2.45.1
