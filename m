@@ -4,93 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCCFCC25B74
-	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 14:43:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06FBFC25B74
+	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 15:25:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C56E88744;
-	Tue, 21 May 2024 16:43:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
+	by phobos.denx.de (Postfix) with ESMTP id 3976487F5C;
+	Tue, 21 May 2024 17:25:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="ETlTvxPJ";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="O1Ki8RtJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kRM8dT4w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 639118874F; Tue, 21 May 2024 16:42:59 +0200 (CEST)
-Received: from wfout5-smtp.messagingengine.com
- (wfout5-smtp.messagingengine.com [64.147.123.148])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5CEF087ED1; Tue, 21 May 2024 17:25:49 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0F4D884B0
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 16:42:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 132EE87ED1
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 17:25:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=flygoat.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailfout.west.internal (Postfix) with ESMTP id DDBB71C000D9;
- Tue, 21 May 2024 10:42:52 -0400 (EDT)
-Received: from imap44 ([10.202.2.94])
- by compute3.internal (MEProxy); Tue, 21 May 2024 10:42:53 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
- cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1716302572;
- x=1716388972; bh=cM37sUDbDj6CdieSWK64AXvXooXUnWKQvrbg1yv04SM=; b=
- ETlTvxPJYz7POaEXl0bAv28lDGVeZWOtpJul1OcVihRZ4iejfgK298FTyteosh6D
- NvDyhtiF1rW9OnnBhDIp0W6I3IFJQoRqxw40uFsCv+7ZBcDwWm9x3eLfNhc2LKKU
- /TNzDLhFRmw7+CXLfTm8/Sodx+Yge1IkXP746CHBTIwrhzp2o2A/61ZVLWF40GjA
- Xq4yf3u1+qBPSs4pc0wOzXR5Jc4H7tU4JhFEQfkW2OPk23c4eSvp1xJI8ItCsUzZ
- vhU8GjUH33yCVPiby6osyXPywcpX1Eoqx28bNFOc5MBEB8dx4iBJbzqr8LqMR43J
- J7LS6K1s+HZXePv0ZGd7iA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716302572; x=
- 1716388972; bh=cM37sUDbDj6CdieSWK64AXvXooXUnWKQvrbg1yv04SM=; b=O
- 1Ki8RtJkdtMaL5/ogcEruATwFuqo9QiIUl5Kzj4f3DWRK1In9knFJDXOyzgPj72R
- uN/Kuzd9708r7VZfp+PxyUfgs6kO6FtMqzoABWBcVrVPQyrN6ciVbUGfdoGkEX9P
- 9X+iMKSzh7Ny6LCpvdqcbOysVtH/aUacDPY3UIn5VfG0IxSywVnRIvFCHNvxH7LI
- 1t4anedUtxk7PI5F+lyo+g/PMo8ugzK9Lwr1rgV2XuocSqbGmeLiyq/ps4DeDmKR
- Mb9OB8yDhTa/HygTp6w0Fk8jB+LxhzTuIMq+KtJzsmdBEn2QpQWJI/UH7dTj/ZFV
- VLYDktmp2N7HyD8WMkIkg==
-X-ME-Sender: <xms:7LJMZqeIX9X655XdRD2xzb0Mkf3xe5oumCiIvr16b3F-vE9ox_xZ6w>
- <xme:7LJMZkNVXcIn2JGMF1Nkae2LCm6qEkFxKHsP15VFlwisNEgDrihCJHFzmLDbtQcrJ
- KgG-RYKkgWr5EWsyrY>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdeivddgjeejucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepofgfggfkjghffffhvfevufgtgfesthhqredtreerjeenucfhrhhomhepfdfl
- ihgrgihunhcujggrnhhgfdcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtoh
- hmqeenucggtffrrghtthgvrhhnpedufeegfeetudeghefftdehfefgveffleefgfehhfej
- ueegveethfduuddvieehgfenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmh
- grihhlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
-X-ME-Proxy: <xmx:7LJMZrjXe0d6WDSENpb5T9xIR2G1x8g-tM19NByuzwCtMpdQQXPdpg>
- <xmx:7LJMZn-VDWbHksk2m958oI5g1mgEzSOtOpZYMph1VRzF0mlmgUb_bw>
- <xmx:7LJMZmuFcNcXncMcWkhVcu7xxpFjMph2g64D8cw02V6tnf7W_NXnfQ>
- <xmx:7LJMZuGMURwnJA1VLv3d2pUbbFOqwYM49wG33d0Jj4nVCLqTHhvgVQ>
- <xmx:7LJMZoI5PJb2932oQh6mw75phdUJ-Obd2Ks3SG_e4bMNd1EWYlcVOxAX>
-Feedback-ID: ifd894703:Fastmail
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
- id 39C0236A0076; Tue, 21 May 2024 10:42:52 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.11.0-alpha0-480-g515a2f54a-fm-20240515.001-g515a2f54
+ spf=pass smtp.mailfrom=macroalpha82@gmail.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-6f0f7ec684cso2195443a34.0
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 08:25:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1716305145; x=1716909945; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=D9X8BRYo+k+qvAWoUks1k6cHw5L+R/UDYw6XyWHjHbg=;
+ b=kRM8dT4wgfH+5qM3MbXJQKOc/QLRgHj6sl6W3vlCWiPfFMqdfuTtqSzN2e1OhcAY3g
+ hGeH49c3k7EPtlnVKoJRxpjURjytaIRxeNRXvVMZyf7tsus+GyoiMFS3Lsh38a8BaMSf
+ CYkjzkCLApfvIjaia9RvDFU8HRxXMU8vcODpUB6GEUtNU2oEcecjy2Pd/tzosW7SAfsq
+ XMwF/vEogWGNkuMee2NU1yhgOdDD7O5/40Q/cyBDMlPFzXNJRLKAmhElwWqtBOo5LNEF
+ 1Cw+4MbNXgJqXfjH2nfL2PQmsFUZitYNbdKXO1KIrDO+dYltgbJR/ELX8goagJ3Y03rz
+ V1gw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716305145; x=1716909945;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=D9X8BRYo+k+qvAWoUks1k6cHw5L+R/UDYw6XyWHjHbg=;
+ b=Wrr95q0EE37Geh0HnJUEk6ph/mw5XrkWDkmTlkYYqslgg/AfD9YBxwYpj6//kV7G41
+ RWx7utditGGtHWYr7LbIg09JmdYuTzxZG/WQL+UxcsLeb7On6Grx/e58fF9Tom/sHmwP
+ 2j3Sbp99H9JQLSEX5g+boY5dSYmNnpyPWUsYFGUgLFwhzkgnKvp1ExNwhsuGna8TDcaM
+ FtgBmI8vYqG4ZUlJp2pDSZQpjFopOKD/LbUzPqcSmtMKZsCYSipQKs3JpIgSp7Cubp0D
+ xW6Yo3H/fENvKt8dvYKdTKFKVyZxsm8XynxqZCbRz0JiK+ScMZTS9LcLAkgDox9c6Y0Y
+ xsgQ==
+X-Gm-Message-State: AOJu0YzKhzvTVmjpP3B3BUpVw7Ikj5CIEnoBHQ+IkkVRAs6EgocrTsyb
+ wHiuPDVnft7UPiUHmSGLEvDLBtGmC9H1LN+1o30ezW+w2kkX5WNsGfBPVg==
+X-Google-Smtp-Source: AGHT+IFproYISjD3ddeqC0evOba22+guiq24WIMjiH4Pqzpwb2m7qgMQBTSbnHPTTNM++N2otznPow==
+X-Received: by 2002:a9d:3e07:0:b0:6f0:e3c9:9be8 with SMTP id
+ 46e09a7af769-6f0e92b3c8bmr32516014a34.23.1716305145472; 
+ Tue, 21 May 2024 08:25:45 -0700 (PDT)
+Received: from localhost.localdomain ([75.28.21.198])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-6f0fa18eb6asm3768790a34.41.2024.05.21.08.25.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 21 May 2024 08:25:45 -0700 (PDT)
+From: Chris Morgan <macroalpha82@gmail.com>
+To: u-boot@lists.denx.de
+Cc: kever.yang@rock-chips.com, jagan@edgeble.ai, jonas@kwiboo.se,
+ trini@konsulko.com, philipp.tomsich@vrull.eu, sjg@chromium.org,
+ Chris Morgan <macromorgan@hotmail.com>
+Subject: [PATCH V4] board: rockchip: add Powkiddy X55
+Date: Tue, 21 May 2024 10:25:33 -0500
+Message-Id: <20240521152533.230375-1-macroalpha82@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Message-Id: <7160e2f2-358c-4f3e-9865-1632ffea7975@app.fastmail.com>
-In-Reply-To: <CAC_iWjKKyUm=4NJVuWgUqmFR43TNcuxFKmaBJLAFKC2CQYbxJg@mail.gmail.com>
-References: <20240517-mips-efi-v1-0-79096e3ca3b3@flygoat.com>
- <20240517-mips-efi-v1-2-79096e3ca3b3@flygoat.com>
- <CAC_iWjKKyUm=4NJVuWgUqmFR43TNcuxFKmaBJLAFKC2CQYbxJg@mail.gmail.com>
-Date: Tue, 21 May 2024 15:42:33 +0100
-From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
-To: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, "Daniel Schwierzeck" <daniel.schwierzeck@gmail.com>, 
- "Tom Rini" <trini@konsulko.com>, "Heinrich Schuchardt" <xypron.glpk@gmx.de>
-Subject: Re: [PATCH 2/7] efi: Allow runtime relocate to be disabled
-Content-Type: text/plain;charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,63 +90,271 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Chris Morgan <macromorgan@hotmail.com>
 
+The Powkiddy X55 is a Rockchip RK3566 based handheld gaming device.
+UART, ADC, eMMC, and SDMMC are tested to work in U-Boot and this
+successfully boots mainline Linux.
 
-=E5=9C=A82024=E5=B9=B45=E6=9C=8821=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8B=E5=
-=8D=882:58=EF=BC=8CIlias Apalodimas=E5=86=99=E9=81=93=EF=BC=9A
-> Hi Jiaxun,
->
-> On Fri, 17 May 2024 at 19:33, Jiaxun Yang <jiaxun.yang@flygoat.com> wr=
-ote:
->>
->> Allow runtime relocate to be disabled because on MIPS we
->> never do that. It's guaranteed that OS won't call
->> set_virtual_address_map and convert_pointer as well.
->
-> Who guarantees that? Is it only for Linux?
-Hi Ilias,
+Kernel commit:
+e99adc97e21a ("arm64: dts: rockchip: Add Powkiddy X55")
 
-It's guarantee by all the existing implementations, ventoy,
-linux etc.
+Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
+---
 
-It's nearly impossible to run MIPS OS in virtual (or paged)
-segment. All MIPS OS and bootloaders are running in KSEG/XKPHYS
-segment, which directly mapping lower bits of virtual address
-into physical address. So I suppose set_virtual_address_map
-is unnecessary on MIPS because the mapping for U-Boot is
-always here and can't be disabled in hardware.
+Changes since V3:
+ - Removed sdmmc1 from the SPL-> U-Boot path, as long as we have sdmmc0
+   we should be okay with recovery options.
+ - Removed OF_UPSTREAM since that's now set across the board for
+   RK3568 devices.
 
->
->>
->> On MIPS KSEG0 is always mapped to memory and there is no
->> way to disable it for kernel mode. Both EFI runtime and
->> kernel lays in this segment, so relocation is totally
->> unnecessary.
->>
->> Also U-Boot does not use traditional .dyn.rel to perform
->> relocation on MIPS, that makes implementation of runtime
->> relocation pretty hard.
->
-> It already works on other architectures so I suppose it's only a
-> matter of adding it?
+Changes since V2:
+ - Refactored to use the upstream device tree from Linux.
+ - Removed logic for handling the adc button and instead simply try to
+   boot from sdmmc0 as a valid target first.
 
-MIPS is odd here, we are not compiling U-Boot with -fPIC, instead
-we use our own tools to generate relocation records and embedded
-them into U-Boot.
+---
+ arch/arm/dts/rk3566-powkiddy-x55-u-boot.dtsi |  9 +++
+ arch/arm/mach-rockchip/rk3568/Kconfig        |  6 ++
+ board/powkiddy/x55/Kconfig                   | 15 +++++
+ board/powkiddy/x55/MAINTAINERS               |  7 +++
+ board/powkiddy/x55/Makefile                  |  6 ++
+ board/powkiddy/x55/x55.c                     | 39 +++++++++++++
+ configs/powkiddy-x55-rk3566_defconfig        | 58 ++++++++++++++++++++
+ doc/board/rockchip/rockchip.rst              |  1 +
+ include/configs/powkiddy-x55-rk3566.h        | 12 ++++
+ 9 files changed, 153 insertions(+)
+ create mode 100644 arch/arm/dts/rk3566-powkiddy-x55-u-boot.dtsi
+ create mode 100644 board/powkiddy/x55/Kconfig
+ create mode 100644 board/powkiddy/x55/MAINTAINERS
+ create mode 100644 board/powkiddy/x55/Makefile
+ create mode 100644 board/powkiddy/x55/x55.c
+ create mode 100644 configs/powkiddy-x55-rk3566_defconfig
+ create mode 100644 include/configs/powkiddy-x55-rk3566.h
 
-Adding relocation support requires modifications to that tool
-"tools/mips-relocs.c" and also processing our own record format
-here.
+diff --git a/arch/arm/dts/rk3566-powkiddy-x55-u-boot.dtsi b/arch/arm/dts/rk3566-powkiddy-x55-u-boot.dtsi
+new file mode 100644
+index 0000000000..eadd3510fb
+--- /dev/null
++++ b/arch/arm/dts/rk3566-powkiddy-x55-u-boot.dtsi
+@@ -0,0 +1,9 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++
++#include "rk356x-u-boot.dtsi"
++
++/ {
++	chosen {
++		u-boot,spl-boot-order = &sdmmc0, &sdhci;
++	};
++};
+diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
+index af537d912a..014ebf9f0b 100644
+--- a/arch/arm/mach-rockchip/rk3568/Kconfig
++++ b/arch/arm/mach-rockchip/rk3568/Kconfig
+@@ -22,6 +22,11 @@ config TARGET_ODROID_M1_RK3568
+ 	help
+ 	  Hardkernel ODROID-M1 single board computer with a RK3568B2 SoC.
+ 
++config TARGET_POWKIDDY_X55_RK3566
++	bool "Powkiddy X55"
++	help
++	  Powkiddy X55 handheld gaming console with an RK3566 SoC.
++
+ config TARGET_QUARTZ64_RK3566
+ 	bool "Pine64 Quartz64"
+ 	help
+@@ -48,5 +53,6 @@ source "board/rockchip/evb_rk3568/Kconfig"
+ source "board/anbernic/rgxx3_rk3566/Kconfig"
+ source "board/hardkernel/odroid_m1/Kconfig"
+ source "board/pine64/quartz64_rk3566/Kconfig"
++source "board/powkiddy/x55/Kconfig"
+ 
+ endif
+diff --git a/board/powkiddy/x55/Kconfig b/board/powkiddy/x55/Kconfig
+new file mode 100644
+index 0000000000..a7b3ed4d0d
+--- /dev/null
++++ b/board/powkiddy/x55/Kconfig
+@@ -0,0 +1,15 @@
++if TARGET_POWKIDDY_X55_RK3566
++
++config SYS_BOARD
++	default "x55"
++
++config SYS_VENDOR
++	default "powkiddy"
++
++config SYS_CONFIG_NAME
++	default "powkiddy-x55-rk3566"
++
++config BOARD_SPECIFIC_OPTIONS
++	def_bool y
++
++endif
+diff --git a/board/powkiddy/x55/MAINTAINERS b/board/powkiddy/x55/MAINTAINERS
+new file mode 100644
+index 0000000000..01ae8da19d
+--- /dev/null
++++ b/board/powkiddy/x55/MAINTAINERS
+@@ -0,0 +1,7 @@
++X55
++M:	Chris Morgan <macromorgan@hotmail.com>
++S:	Maintained
++F:	board/powkiddy/x55
++F:	include/configs/powkiddy-x55-rk3566.h
++F:	configs/powkiddy-x55-rk3566_defconfig
++F:	arch/arm/dts/rk3566-powkiddy-x55-u-boot.dtsi
+diff --git a/board/powkiddy/x55/Makefile b/board/powkiddy/x55/Makefile
+new file mode 100644
+index 0000000000..55c8c16aa1
+--- /dev/null
++++ b/board/powkiddy/x55/Makefile
+@@ -0,0 +1,6 @@
++# SPDX-License-Identifier:     GPL-2.0+
++#
++# Copyright (c) 2023 Chris Morgan <macromorgan@hotmail.com>
++#
++
++obj-y += x55.o
+diff --git a/board/powkiddy/x55/x55.c b/board/powkiddy/x55/x55.c
+new file mode 100644
+index 0000000000..b2703e6382
+--- /dev/null
++++ b/board/powkiddy/x55/x55.c
+@@ -0,0 +1,39 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (c) 2023 Chris Morgan <macromorgan@hotmail.com>
++ */
++
++#include <asm/io.h>
++
++#define GPIO4_BASE		0xfe770000
++#define GPIO_SWPORT_DR_L	0x0000
++#define GPIO_SWPORT_DDR_L	0x0008
++#define GPIO_B4			BIT(12)
++#define GPIO_B5			BIT(13)
++#define GPIO_B6			BIT(14)
++
++#define GPIO_WRITEMASK(bits)	((bits) << 16)
++
++/*
++ * Start LED very early so user knows device is on. Set color
++ * to red.
++ */
++void spl_board_init(void)
++{
++	/* Set GPIO4_B4, GPIO4_B5, and GPIO4_B6 to output. */
++	writel(GPIO_WRITEMASK(GPIO_B6 | GPIO_B5 | GPIO_B4) | \
++	       (GPIO_B6 | GPIO_B5 | GPIO_B4),
++	       (GPIO4_BASE + GPIO_SWPORT_DDR_L));
++	/* Set GPIO4_B5 and GPIO4_B6 to 0 and GPIO4_B4 to 1. */
++	writel(GPIO_WRITEMASK(GPIO_B6 | GPIO_B5 | GPIO_B4) | GPIO_B4,
++	       (GPIO4_BASE + GPIO_SWPORT_DR_L));
++}
++
++int rk_board_late_init(void)
++{
++	/* Turn off red LED and turn on orange LED. */
++	writel(GPIO_WRITEMASK(GPIO_B6 | GPIO_B5 | GPIO_B4) | GPIO_B6,
++	       (GPIO4_BASE + GPIO_SWPORT_DR_L));
++
++	return 0;
++}
+diff --git a/configs/powkiddy-x55-rk3566_defconfig b/configs/powkiddy-x55-rk3566_defconfig
+new file mode 100644
+index 0000000000..2360bdbe84
+--- /dev/null
++++ b/configs/powkiddy-x55-rk3566_defconfig
+@@ -0,0 +1,58 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-powkiddy-x55"
++CONFIG_ROCKCHIP_RK3568=y
++CONFIG_SPL_SERIAL=y
++CONFIG_DEBUG_UART_BASE=0xFE660000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_DEBUG_UART=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-powkiddy-x55.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_MAX_SIZE=0x40000
++CONFIG_SPL_PAD_TO=0x7f8000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_SPL_ATF=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_PMIC=y
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_SPL_CLK=y
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_MISC=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_DM_PMIC=y
++CONFIG_PMIC_RK8XX=y
++CONFIG_REGULATOR_RK8XX=y
++CONFIG_PWM_ROCKCHIP=y
++CONFIG_SPL_RAM=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_SYSRESET=y
++CONFIG_ERRNO_STR=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index 9a726e9cde..924a8d0886 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -104,6 +104,7 @@ List of mainline supported Rockchip boards:
+      - Pine64 SOQuartz on Blade (soquartz-blade-rk3566)
+      - Pine64 SOQuartz on CM4-IO (soquartz-cm4-rk3566)
+      - Pine64 SOQuartz on Model A (soquartz-model-a-rk3566)
++     - Powkiddy X55 (powkiddy-x55-rk3566)
+      - Radxa CM3 IO Board (radxa-cm3-io-rk3566)
+ 
+ * rk3568
+diff --git a/include/configs/powkiddy-x55-rk3566.h b/include/configs/powkiddy-x55-rk3566.h
+new file mode 100644
+index 0000000000..4b25c6a877
+--- /dev/null
++++ b/include/configs/powkiddy-x55-rk3566.h
+@@ -0,0 +1,12 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++
++#ifndef __POWKIDDY_X55_RK3566_H
++#define __POWKIDDY_X55_RK3566_H
++
++#include <configs/rk3568_common.h>
++
++#define ROCKCHIP_DEVICE_SETTINGS \
++			"stdout=serial,vidconsole\0" \
++			"stderr=serial,vidconsole\0"
++
++#endif
+-- 
+2.34.1
 
-Given that set_virtual_address_map have no practice use on MIPS,
-I think the best way to handle it is to leave set_virtual_address_map
-alone.
-
-Thanks
->
-> Thanks
-> /Ilias
->>
-[...]
---=20
-- Jiaxun
