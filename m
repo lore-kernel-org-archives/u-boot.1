@@ -4,67 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8ACDC25B77
-	for <u-boot@archiver.kernel.org>; Mon, 20 May 2024 23:38:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C900C25B77
+	for <u-boot@archiver.kernel.org>; Tue, 21 May 2024 02:06:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24F1C88306;
-	Tue, 21 May 2024 01:38:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=jookia.org
+	by phobos.denx.de (Postfix) with ESMTP id 90807882DF;
+	Tue, 21 May 2024 04:06:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=jookia.org header.i=@jookia.org header.b="GFXwSuTe";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nQ/k0M6X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 066BA88047; Tue, 21 May 2024 01:38:04 +0200 (CEST)
-Received: from out-188.mta0.migadu.com (out-188.mta0.migadu.com
- [IPv6:2001:41d0:1004:224b::bc])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 52B2187F7D; Tue, 21 May 2024 04:06:37 +0200 (CEST)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CEBDF886B0
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 01:37:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=jookia.org
+ by phobos.denx.de (Postfix) with ESMTPS id 2C176882DF
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 04:06:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=contact@jookia.org
-X-Envelope-To: jagan@amarulasolutions.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jookia.org; s=key1;
- t=1716248279;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=OmZciaqB2vsrC5tVkHvRV66owm6yNvFdHQowp+OnwKA=;
- b=GFXwSuTeVybeRel2tOGrY5ek6aDLkMpA0HZHwd2Mz4++kBtY6QR3YTnR3Im4SL6pbzkw5Q
- SfttZwACfL/3QoWwJOUpP4/F4VMB7QORBV8xEp5U4cpiv6UgfPCJF+a3efDVYJUTwR4Iz+
- 3HgWPktjpMbvTthi7a+I5BsoHPyHsQ7xjX/5CpHskIAbMF4LdWdzYvwnxCYjqI4+lSxQCd
- t+xLinN+H9z0V41qdZ/95Yqq5rNYug+13cZoUZMFL2NY/JnxfokOG5udx1mfrzkcme+HNr
- jRbWDncvPVe6lT1LNYORfBNWZfrQQmoQnyNOxFvHbhBDyxgXaHifjhUBQTOLJw==
-X-Envelope-To: andre.przywara@arm.com
-X-Envelope-To: lukma@denx.de
-X-Envelope-To: seanga2@gmail.com
-X-Envelope-To: trini@konsulko.com
-X-Envelope-To: rick@andestech.com
-X-Envelope-To: ycliang@andestech.com
-X-Envelope-To: sumit.garg@linaro.org
-X-Envelope-To: u-boot@lists.denx.de
-Date: Tue, 21 May 2024 09:37:02 +1000
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: John Watts <contact@jookia.org>
-To: Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH RFC 3/4] pwm: sunxi: Add support Allwinner D1 PWM
-Message-ID: <ZkventDcGiisVtp6@titan>
-References: <20240518-pwm_d1-v1-0-311fc5fe2248@jookia.org>
- <20240518-pwm_d1-v1-3-311fc5fe2248@jookia.org>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jcmvbkbc@gmail.com
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-1f0937479f8so90934715ad.3
+ for <u-boot@lists.denx.de>; Mon, 20 May 2024 19:06:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1716257194; x=1716861994; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LxcANeXuPmFqAmW02kqkJoUtHE29r1288KRizZqVabU=;
+ b=nQ/k0M6XpYOKD49P5G3KAHC/1poONdanvKszm/fZQrtOBGLXX/WQQOnkEZUHAh61IQ
+ cKJ4WrCGs3QnI51/gsh0M75kGKjzPL5Ye6/XdWjZdhW/KgtulfFk5Jg4FA4xlx834Sf+
+ HyF3/WCWT5tmOS8jxGykqqmpYHMYQM2CAhAJSbv4LwoZuzjkC6/hGXqVgV42MwLBPq6p
+ GD9H515IPxESYj5HcMSr+0TMyqkvBYMn3ZafPJT1GiMqyUaxRMMnf9bF9w+mh+gx3X2z
+ 0rZLtVpF9WnGxHcalGEupK2snntjhuM91BYhPWPXEyK7qi1zdEvMXpyIsIsOkmBfjhEO
+ uNOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716257194; x=1716861994;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=LxcANeXuPmFqAmW02kqkJoUtHE29r1288KRizZqVabU=;
+ b=xHZ0pOItpQUkjbo3WPFvh1Eqb1UKhRweautTQcTeHRQMG5D7I4KxVMfMi818fEck+G
+ YXLG7XinifGpOMH+HbtCUQkXUONdPxy8Q24XzYQMO4/26gcY9nPoFDBNnnwZAJAIF6kt
+ vYLdryugI3obCKZm5/WnftTpxFik8tQIXOdOv8ijyLAohiR4eX54InBzxhegQBzcnU6N
+ P2BSAoCrwEWvWD5cbBH5eo+fBy/qFT9jyWS/Ntk8/qdCm5yCeOQPu9xLijgpptf5avfA
+ dTu9TLu6kwclGYJ/prSthndkzi5hHZtatbwlasX09GrODCnC3Q0OdfHYMV1BXwJPuuUi
+ QO9A==
+X-Gm-Message-State: AOJu0Ywc5m1kIJbC4Wrap8rKdkSstYTE3YH09AXcLjp0nO+c1TgYhNV8
+ LfyY+zl6SYuyOmleGwSjHv2KPaDP6toBm2BhVUYHbhn06ZFp2f2PGqSZ73ied4+pbsmIvTfDnHT
+ ZjwmDIopEap8CCLCasrE0cLThsbY=
+X-Google-Smtp-Source: AGHT+IFDmQY7u06PihXp5cMVIKi0p+E2txA5DWB4jJ75J9GBVpqMe0IC6JrJFjO01YRyH1n0I4X11757RHxub7oRIYM=
+X-Received: by 2002:a17:90a:77c6:b0:2b8:ff5f:32df with SMTP id
+ 98e67ed59e1d1-2b8ff5f33aamr23505135a91.34.1716257193640; Mon, 20 May 2024
+ 19:06:33 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240518-pwm_d1-v1-3-311fc5fe2248@jookia.org>
-X-Migadu-Flow: FLOW_OUT
+References: <20240519-qemu-xtensa-v1-0-8fff0cb11c19@flygoat.com>
+ <20240519-qemu-xtensa-v1-5-8fff0cb11c19@flygoat.com>
+In-Reply-To: <20240519-qemu-xtensa-v1-5-8fff0cb11c19@flygoat.com>
+From: Max Filippov <jcmvbkbc@gmail.com>
+Date: Mon, 20 May 2024 19:06:22 -0700
+Message-ID: <CAMo8BfJJfK9k5SQOcYzcWELyH=BGOb6Vqa8CLPaCNdUk3Qe_nQ@mail.gmail.com>
+Subject: Re: [PATCH 05/10] xtensa: Bring in semihosting headers and config
+ options
+To: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Cc: u-boot@lists.denx.de, Sean Anderson <sean.anderson@seco.com>, 
+ Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,596 +90,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, May 18, 2024 at 01:54:45PM +1000, John Watts wrote:
-> This driver documents and handles setting up PWM on the D1.
-> 
-> Signed-off-by: John Watts <contact@jookia.org>
+On Sun, May 19, 2024 at 1:53=E2=80=AFPM Jiaxun Yang <jiaxun.yang@flygoat.co=
+m> wrote:
+>
+> They are all directly imported from Linux kernel.
+>
+> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 > ---
->  drivers/pwm/Kconfig        |   6 +
->  drivers/pwm/Makefile       |   1 +
->  drivers/pwm/sunxi_pwm_d1.c | 542 +++++++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 549 insertions(+)
+>  arch/xtensa/Kconfig                              |  27 ++++++
+>  arch/xtensa/include/asm/platform/simcall-gdbio.h |  34 +++++++
+>  arch/xtensa/include/asm/platform/simcall-iss.h   |  73 +++++++++++++++
+>  arch/xtensa/include/asm/platform/simcall.h       | 110 +++++++++++++++++=
+++++++
+>  4 files changed, 244 insertions(+)
 
-Patch v9 of the kernel uses apb now instead of apb0, so this should be changed
-to fit once the kernel driver is merged.
+Reviewed-by: Max Filippov <jcmvbkbc@gmail.com>
 
-> 
-> diff --git a/drivers/pwm/Kconfig b/drivers/pwm/Kconfig
-> index 6e79868d0e..8c4c910ea7 100644
-> --- a/drivers/pwm/Kconfig
-> +++ b/drivers/pwm/Kconfig
-> @@ -112,6 +112,12 @@ config PWM_SUNXI
->  	  This PWM is found on H3, A64 and other Allwinner SoCs. It supports a
->  	  programmable period and duty cycle. A 16-bit counter is used.
->  
-> +config PWM_SUNXI_D1
-> +	bool "Enable support for the Allwinner D1 Sunxi PWM"
-> +	depends on DM_PWM
-> +	help
-> +	  This PWM is found on D1, T113-S3 and R329 SoCs.
-> +
->  config PWM_TI_EHRPWM
->  	bool "Enable support for EHRPWM PWM"
->  	depends on DM_PWM && ARCH_OMAP2PLUS
-> diff --git a/drivers/pwm/Makefile b/drivers/pwm/Makefile
-> index e4d10c8dc3..ea96e7159b 100644
-> --- a/drivers/pwm/Makefile
-> +++ b/drivers/pwm/Makefile
-> @@ -23,4 +23,5 @@ obj-$(CONFIG_PWM_SANDBOX)	+= sandbox_pwm.o
->  obj-$(CONFIG_PWM_SIFIVE)	+= pwm-sifive.o
->  obj-$(CONFIG_PWM_TEGRA)		+= tegra_pwm.o
->  obj-$(CONFIG_PWM_SUNXI)		+= sunxi_pwm.o
-> +obj-$(CONFIG_PWM_SUNXI_D1)	+= sunxi_pwm_d1.o
->  obj-$(CONFIG_PWM_TI_EHRPWM)	+= pwm-ti-ehrpwm.o
-> diff --git a/drivers/pwm/sunxi_pwm_d1.c b/drivers/pwm/sunxi_pwm_d1.c
-> new file mode 100644
-> index 0000000000..6c57bc6e85
-> --- /dev/null
-> +++ b/drivers/pwm/sunxi_pwm_d1.c
-> @@ -0,0 +1,542 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +// Copyright 2022 Jookia <contact@jookia.org>
-> +/*
-> + * The Allwinner D1's PWM channels are 16-bit counters with up to
-> + * 65537 cycles (yes, you read that correctly).
-> + *
-> + * Each channel must be programmed using three variables:
-> + * - The entire cycle count (used for the period)
-> + * - The active cycle count (the count of inactive cycles)
-> + * - The polarity (specifies if the signal is active high or low)
-> + * The cycle counts are at minimum 1 and at maximum 65536.
-> + *
-> + * The controller will output the number of entire cycles plus one
-> + * extra, with any cycles after the active cycle output as active.
-> + *
-> + * Consider a PWM period of 128 nanoseconds and a cycle period of 32.
-> + * Setting the entire cycle count to 3 and active cycle count to 4
-> + * gives an output like so:
-> + *
-> + * - Cycle 1 runs 0 to 32 nanoseconds, inactive
-> + * - Cycle 2 runs 32 to 64 nanoseconds, inactive
-> + * - Cycle 3 runs 64 to 96 nanoseconds, inactive
-> + * - Cycle 4 runs 96 to 128 nanoseconds, inactive
-> + * - Cycle 5 is skipped but would run 128 to 160 nanoseconds, active
-> + *
-> + * If we set the entire count to 4, cycle 5 would run and we wouldn't be
-> + * able to specify it as inactive as the active count only goes up to 4.
-> + *
-> + * In practice this means we want to set the entire cycle to be one less
-> + * then the actual number of cycles we want, so we can set the number of
-> + * active cycles to be up to maximum for a fully inactive signal.
-> + *
-> + * The PWM channels are paired and clocked together, resulting in a
-> + * cycle time found using the following formula:
-> + *
-> + * PWM0_CYCLE_NS = 1000000000 / (BUS_CLOCK / COMMON_DIV / PWM0_PRESCALER_K)
-> + * PWM1_CYCLE_NS = 1000000000 / (BUS_CLOCK / COMMON_DIV / PWM1_PRESCALER_K)
-> + *
-> + * This means both clocks should ideally be set at the same time and not
-> + * impact each other too much.
-> + */
-> +
-> +#include <dm.h>
-> +#include <dm/device_compat.h>
-> +#include <dm/devres.h>
-> +#include <clk.h>
-> +#include <reset.h>
-> +#include <pwm.h>
-> +#include <asm/io.h>
-> +
-> +/* PWM channel information */
-> +struct pwm_channel {
-> +	uint period_ns;
-> +	uint duty_ns;
-> +	bool polarity;
-> +	bool enable;
-> +	bool updated;
-> +};
-> +
-> +/* Timings found for a PWM channel */
-> +struct pwm_timings {
-> +	uint cycle_ns;
-> +	uint period_ns;
-> +	uint duty_ns;
-> +	uint clock_id;
-> +	uint common_div;
-> +	uint prescale_k;
-> +	uint entire_cycles;
-> +	uint active_cycles;
-> +	uint polarity;
-> +};
-> +
-> +/* Driver state */
-> +struct sunxi_pwm_d1_priv {
-> +	void *base;
-> +	struct clk *clk_bus;
-> +	struct clk *clk_srcs[3]; /* Last value must be NULL */
-> +	struct reset_ctl *reset;
-> +	int npwm;
-> +	struct pwm_channel *channels;
-> +};
-> +
-> +/* Divides a nanosecond value, rounding up for very low values */
-> +uint div_ns(uint ns, uint div)
-> +{
-> +	uint result = (ns / div);
-> +
-> +	/* If the number is less than 1000, round it to the nearest digit */
-> +	if (result < 1000)
-> +		result = (ns + (div - 1)) / div;
-> +
-> +	if (result < 1)
-> +		result = 1;
-> +
-> +	return result;
-> +}
-> +
-> +/* Checks if an error is relatively too large */
-> +int error_too_large(uint actual, uint target)
-> +{
-> +	/* For a target of zero we want zero */
-> +	if (target == 0)
-> +		return (actual == 0);
-> +
-> +	/* Don't overflow large numbers when we multiply by 100 */
-> +	while (actual > 1000) {
-> +		actual /= 100;
-> +		target /= 100;
-> +	}
-> +
-> +	int error_percent = (actual * 100) / target;
-> +
-> +	return (error_percent < 80 || 120 < error_percent);
-> +}
-> +
-> +/* Calculates the cycle nanoseconds from clock parameters */
-> +int get_cycle_ns(uint parent_hz, uint common_div, uint prescaler)
-> +{
-> +	return 1000000000 / ((parent_hz / common_div) / prescaler);
-> +}
-> +
-> +int find_channel_dividers(uint period_ns,
-> +			  uint parent_hz,
-> +			  struct pwm_timings *out)
-> +{
-> +	uint ideal_cycle_ns = div_ns(period_ns, 65536);
-> +	int common_div = out->common_div;
-> +	int prescaler = 1;
-> +	uint cycle_ns = 0;
-> +
-> +	for (;;) {
-> +		cycle_ns = get_cycle_ns(parent_hz, common_div, prescaler);
-> +		if (cycle_ns >= ideal_cycle_ns)
-> +			break;
-> +
-> +		prescaler *= 2;
-> +		if (prescaler > 256) {
-> +			if (common_div < 256) {
-> +				prescaler = 1;
-> +				common_div *= 2;
-> +			} else {
-> +				return -1;
-> +			}
-> +		}
-> +	}
-> +
-> +	out->common_div = common_div;
-> +	out->prescale_k = prescaler;
-> +	out->cycle_ns = cycle_ns;
-> +
-> +	return 0;
-> +}
-> +
-> +int find_channel_timings(const struct pwm_channel *in,
-> +			 struct pwm_timings *out,
-> +			 uint parent_hz)
-> +{
-> +	struct pwm_timings new = *out;
-> +
-> +	if (find_channel_dividers(in->period_ns, parent_hz, &new))
-> +		return -1;
-> +
-> +	new.entire_cycles = (in->period_ns / new.cycle_ns) - 1;
-> +	new.active_cycles = (in->duty_ns / new.cycle_ns);
-> +	new.period_ns = (new.entire_cycles + 1) * new.cycle_ns;
-> +	new.duty_ns = new.active_cycles * new.cycle_ns;
-> +	new.polarity = in->polarity;
-> +
-> +	if (error_too_large(new.period_ns, in->period_ns))
-> +		return -1;
-> +
-> +	if (in->duty_ns && error_too_large(new.duty_ns, in->duty_ns))
-> +		return -1;
-> +
-> +	*out = new;
-> +
-> +	return 0;
-> +}
-> +
-> +int find_pair_timings(const struct pwm_channel *channel0,
-> +		      const struct pwm_channel *channel1,
-> +		      struct pwm_timings *timings0,
-> +		      struct pwm_timings *timings1,
-> +		      int clock_hz)
-> +{
-> +	struct pwm_timings new0 = *timings0;
-> +	struct pwm_timings new1 = *timings1;
-> +	int err0 = 0;
-> +	int err1 = 0;
-> +
-> +	new0.common_div = 1;
-> +	new1.common_div = 1;
-> +
-> +	if (channel0->enable) {
-> +		err0 = find_channel_timings(channel0, &new0, clock_hz);
-> +		new1.common_div = new0.common_div;
-> +	}
-> +
-> +	if (channel1->enable) {
-> +		err1 = find_channel_timings(channel1, &new1, clock_hz);
-> +		new0 = *timings0;
-> +		new0.common_div = new1.common_div;
-> +	}
-> +
-> +	if (channel0->enable && channel1->enable) {
-> +		err0 = find_channel_timings(channel0, &new0, clock_hz);
-> +
-> +		if (new0.common_div != new1.common_div)
-> +			return -1;
-> +	}
-> +
-> +	if (err0 || err1)
-> +		return -1;
-> +
-> +	*timings0 = new0;
-> +	*timings1 = new1;
-> +
-> +	return 0;
-> +}
-> +
-> +int find_pair_timings_clocked(struct clk **clk_srcs,
-> +			      const struct pwm_channel *channel0,
-> +			      const struct pwm_channel *channel1,
-> +			      struct pwm_timings *timings0,
-> +			      struct pwm_timings *timings1)
-> +{
-> +	struct clk *clock = *clk_srcs;
-> +
-> +	for (int clock_id = 0; clock; clock = clk_srcs[++clock_id]) {
-> +		int clock_hz = clk_get_rate(clock);
-> +
-> +		if (clock_hz == 0 || IS_ERR_VALUE(clock_hz))
-> +			continue;
-> +
-> +		timings0->clock_id = clock_id;
-> +		timings1->clock_id = clock_id;
-> +
-> +		if (find_pair_timings(channel0, channel1,
-> +				      timings0, timings1,
-> +				      clock_hz))
-> +			continue;
-> +
-> +		return 0;
-> +	}
-> +
-> +	return -1;
-> +}
-> +
-> +#define PCGR(base) ((base) + 0x40)
-> +#define PCGR_CLK_GATE(channel) BIT(channel)
-> +
-> +#define PER(base) ((base) + 0x80)
-> +#define PER_ENABLE_PWM(channel) BIT(channel)
-> +
-> +#define PCCR(base, pair) ((base) + 0x20 + ((pair) * 2))
-> +#define PCCR_CLK_SRC(src) ((src) << 7)
-> +#define PCCR_CLK_SRC_MASK GENMASK(8, 7)
-> +#define PCCR_CLK_DIV_M(m) (m)
-> +#define PCCR_CLK_DIV_M_MASK GENMASK(3, 0)
-> +
-> +#define PCR(base, channel) ((base) + 0x100 + ((channel) * 0x20))
-> +#define PCR_PRESCAL_K(k) (k)
-> +#define PCR_PRESCAL_K_MASK GENMASK(7, 0)
-> +#define PCR_PWM_ACTIVE BIT(8)
-> +
-> +#define PPR(base, channel) ((base) + 0x104 + ((channel) * 0x20))
-> +#define PPR_ENTIRE_CYCLE(n) ((n) << 16)
-> +#define PPR_ENTIRE_CYCLE_MASK GENMASK(31, 16)
-> +#define PPR_ACT_CYCLE(n) (n)
-> +#define PPR_ACT_CYCLE_MASK GENMASK(15, 0)
-> +
-> +/* Like clrsetbits_le32 but with memory barriers */
-> +void clrsetreg(void *addr, u32 clear, u32 set)
-> +{
-> +	u32 val = readl(addr);
-> +
-> +	val &= ~clear;
-> +	val |= set;
-> +
-> +	writel(val, addr);
-> +}
-> +
-> +void disable_pair(void *base, int pair)
-> +{
-> +	u32 PER_clear = (PER_ENABLE_PWM(pair) | PER_ENABLE_PWM(pair + 1));
-> +	u32 PCGR_clear = (PCGR_CLK_GATE(pair) | PCGR_CLK_GATE(pair + 1));
-> +
-> +	clrsetreg(PER(base), PER_clear, 0);
-> +	clrsetreg(PCGR(base), PCGR_clear, 0);
-> +
-> +	log_debug("%s: pair %i, PCGR 0x%x, PER 0x%x\n",
-> +		  __func__, pair, readl(PCGR(base)), readl(PER(base)));
-> +}
-> +
-> +void enable_pair(void *base, int pair, int clk_src, int clk_div)
-> +{
-> +	int div_m = fls(clk_div) - 1;
-> +
-> +	u32 PCGR_set = (PCGR_CLK_GATE(pair) | PCGR_CLK_GATE(pair + 1));
-> +	u32 PCCR_clear = (PCCR_CLK_SRC_MASK | PCCR_CLK_DIV_M_MASK);
-> +	u32 PCCR_set = (PCCR_CLK_SRC(clk_src) | PCCR_CLK_DIV_M(div_m));
-> +
-> +	clrsetreg(PCGR(base), 0, PCGR_set);
-> +	clrsetreg(PCCR(base, pair), PCCR_clear, PCCR_set);
-> +
-> +	log_debug("%s: pair %i, clk_src %i, div_m %i, PCCR 0x%x\n",
-> +		  __func__, pair, clk_src, div_m, readl(PCCR(base, pair)));
-> +}
-> +
-> +void enable_channel(void *base, int channel, struct pwm_timings *timings)
-> +{
-> +	u32 pwm_active = (timings->polarity) ? 0 : PCR_PWM_ACTIVE;
-> +	u32 prescale = (timings->prescale_k - 1);
-> +	u32 entire_cycles = timings->entire_cycles;
-> +	u32 active_cycles = timings->active_cycles;
-> +
-> +	u32 PCR_clear = (PCR_PRESCAL_K_MASK | PCR_PWM_ACTIVE);
-> +	u32 PCR_set = (PCR_PRESCAL_K(prescale) | pwm_active);
-> +	u32 PPR_clear = (PPR_ENTIRE_CYCLE_MASK | PPR_ACT_CYCLE_MASK);
-> +	u32 PPR_set = (PPR_ENTIRE_CYCLE(entire_cycles) | PPR_ACT_CYCLE(active_cycles));
-> +	u32 PER_set = PER_ENABLE_PWM(channel);
-> +
-> +	clrsetreg(PCR(base, channel), PCR_clear, PCR_set);
-> +	clrsetreg(PPR(base, channel), PPR_clear, PPR_set);
-> +	clrsetreg(PER(base), 0, PER_set);
-> +
-> +	log_debug("%s: channel %u, clock_id %u, period_ns %u, duty_ns %u, common_div %u, prescale_k %u, entire_cycles %u, active_cycles %u, polarity %u, PCGR 0x%x, PCR 0x%x, PPR 0x%x, PER 0x%x\n",
-> +		  __func__, channel, timings->clock_id, timings->period_ns,
-> +		  timings->duty_ns, timings->common_div, timings->prescale_k,
-> +		  timings->entire_cycles, timings->active_cycles,
-> +		  timings->polarity, readl(PCGR(base)),
-> +		  readl(PCR(base, channel)), readl(PPR(base, channel)),
-> +		  readl(PER(base)));
-> +}
-> +
-> +int update_channel_pair(struct sunxi_pwm_d1_priv *priv, int pair)
-> +{
-> +	struct pwm_timings timings0 = {0};
-> +	struct pwm_timings timings1 = {0};
-> +	struct pwm_channel *channel0 = &priv->channels[pair + 0];
-> +	struct pwm_channel *channel1 = &priv->channels[pair + 1];
-> +	void *base = priv->base;
-> +
-> +	if (channel0->updated && channel1->updated)
-> +		return 0;
-> +
-> +	disable_pair(base, pair);
-> +
-> +	if (find_pair_timings_clocked(priv->clk_srcs, channel0, channel1, &timings0, &timings1))
-> +		return -1;
-> +
-> +	if (channel0->enable || channel1->enable)
-> +		enable_pair(base, pair, timings0.clock_id, timings0.common_div);
-> +
-> +	if (channel0->enable)
-> +		enable_channel(base, pair + 0, &timings0);
-> +
-> +	if (channel1->enable)
-> +		enable_channel(base, pair + 1, &timings1);
-> +
-> +	channel0->updated = true;
-> +	channel1->updated = true;
-> +
-> +	return 0;
-> +}
-> +
-> +static int update_channels(struct udevice *dev)
-> +{
-> +	struct sunxi_pwm_d1_priv *priv = dev_get_priv(dev);
-> +	int i;
-> +
-> +	for (i = 0; i < priv->npwm; i += 2) {
-> +		int ret = update_channel_pair(priv, i);
-> +
-> +		if (ret != 0)
-> +			return ret;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int sunxi_pwm_d1_set_invert(struct udevice *dev, uint channel_num,
-> +				   bool polarity)
-> +{
-> +	struct sunxi_pwm_d1_priv *priv = dev_get_priv(dev);
-> +	struct pwm_channel *channel;
-> +
-> +	if (channel_num >= priv->npwm)
-> +		return -EINVAL;
-> +
-> +	channel = &priv->channels[channel_num];
-> +	channel->updated = (channel->polarity == polarity);
-> +	channel->polarity = polarity;
-> +
-> +	return update_channels(dev);
-> +}
-> +
-> +static int sunxi_pwm_d1_set_config(struct udevice *dev, uint channel_num,
-> +				   uint period_ns, uint duty_ns)
-> +{
-> +	struct sunxi_pwm_d1_priv *priv = dev_get_priv(dev);
-> +	struct pwm_channel *channel;
-> +
-> +	if (channel_num >= priv->npwm)
-> +		return -EINVAL;
-> +
-> +	channel = &priv->channels[channel_num];
-> +	channel->updated = (channel->period_ns == period_ns && channel->duty_ns == duty_ns);
-> +	channel->period_ns = period_ns;
-> +	channel->duty_ns = duty_ns;
-> +
-> +	return update_channels(dev);
-> +}
-> +
-> +static int sunxi_pwm_d1_set_enable(struct udevice *dev, uint channel_num, bool enable)
-> +{
-> +	struct sunxi_pwm_d1_priv *priv = dev_get_priv(dev);
-> +	struct pwm_channel *channel;
-> +
-> +	if (channel_num >= priv->npwm)
-> +		return -EINVAL;
-> +
-> +	channel = &priv->channels[channel_num];
-> +	channel->updated = (channel->enable == enable);
-> +	channel->enable = enable;
-> +
-> +	return update_channels(dev);
-> +}
-> +
-> +static int sunxi_pwm_d1_of_to_plat(struct udevice *dev)
-> +{
-> +	struct sunxi_pwm_d1_priv *priv = dev_get_priv(dev);
-> +	struct clk *clk_hosc;
-> +	struct clk *clk_apb0;
-> +	int ret;
-> +
-> +	priv->base = dev_read_addr_ptr(dev);
-> +
-> +	if (!priv->base)  {
-> +		dev_err(dev, "Unset device tree offset?\n");
-> +		return -EINVAL;
-> +	}
-> +
-> +	priv->clk_bus = devm_clk_get(dev, "bus");
-> +
-> +	if (IS_ERR(priv->clk_bus)) {
-> +		dev_err(dev, "failed to get bus clock: %ld",
-> +			PTR_ERR(priv->clk_bus));
-> +		return PTR_ERR(priv->clk_bus);
-> +	}
-> +
-> +	ret = clk_enable(priv->clk_bus);
-> +
-> +	if (ret) {
-> +		dev_err(dev, "failed to enable bus clk: %d", ret);
-> +		return ret;
-> +	}
-> +
-> +	clk_hosc = devm_clk_get(dev, "hosc");
-> +
-> +	if (IS_ERR(clk_hosc)) {
-> +		dev_err(dev, "failed to get hosc clock: %ld",
-> +			PTR_ERR(clk_hosc));
-> +		return PTR_ERR(clk_hosc);
-> +	}
-> +
-> +	clk_apb0 = devm_clk_get(dev, "apb0");
-> +
-> +	if (IS_ERR(clk_apb0)) {
-> +		dev_err(dev, "failed to get apb0 clock: %ld",
-> +			PTR_ERR(clk_apb0));
-> +		return PTR_ERR(clk_apb0);
-> +	}
-> +
-> +	priv->clk_srcs[0] = clk_hosc;
-> +	priv->clk_srcs[1] = clk_apb0;
-> +	priv->clk_srcs[2] = NULL;
-> +
-> +	priv->reset = devm_reset_control_get(dev, NULL);
-> +
-> +	if (IS_ERR(priv->reset)) {
-> +		dev_err(dev, "failed to get reset: %ld",
-> +			PTR_ERR(priv->reset));
-> +		return PTR_ERR(priv->reset);
-> +	}
-> +
-> +	priv->npwm = 8;
-> +	ret = dev_read_u32(dev, "allwinner,pwm-channels", &priv->npwm);
-> +
-> +	if (ret < 0 && ret != -EINVAL) {
-> +		dev_err(dev, "failed to read allwinner,pwm-channels: %d",
-> +			ret);
-> +		return ret;
-> +	}
-> +
-> +	priv->channels = devm_kzalloc(dev,
-> +				      sizeof(struct pwm_channel) * priv->npwm,
-> +				      GFP_KERNEL);
-> +
-> +	if (!priv->channels) {
-> +		dev_err(dev, "failed to read allocate pwm channels");
-> +		return -ENOMEM;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int sunxi_pwm_d1_probe(struct udevice *dev)
-> +{
-> +	struct sunxi_pwm_d1_priv *priv = dev_get_priv(dev);
-> +	int ret;
-> +
-> +	ret = reset_deassert(priv->reset);
-> +
-> +	if (ret < 0) {
-> +		dev_err(dev, "failed to deassert reset: %d", ret);
-> +		return ret;
-> +	}
-> +
-> +	return update_channels(dev);
-> +}
-> +
-> +static const struct pwm_ops sunxi_pwm_d1_ops = {
-> +	.set_invert	= sunxi_pwm_d1_set_invert,
-> +	.set_config	= sunxi_pwm_d1_set_config,
-> +	.set_enable	= sunxi_pwm_d1_set_enable,
-> +};
-> +
-> +static const struct udevice_id sunxi_pwm_d1_ids[] = {
-> +	{ .compatible = "allwinner,sun20i-d1-pwm" },
-> +	{ }
-> +};
-> +
-> +U_BOOT_DRIVER(sunxi_pwm_d1) = {
-> +	.name	= "sunxi_pwm_d1",
-> +	.id	= UCLASS_PWM,
-> +	.of_match = sunxi_pwm_d1_ids,
-> +	.ops	= &sunxi_pwm_d1_ops,
-> +	.of_to_plat	= sunxi_pwm_d1_of_to_plat,
-> +	.probe		= sunxi_pwm_d1_probe,
-> +	.priv_auto	= sizeof(struct sunxi_pwm_d1_priv),
-> +};
-> 
-> -- 
-> 2.45.1
-> 
+--=20
+Thanks.
+-- Max
