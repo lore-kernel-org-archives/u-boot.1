@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A9CCC25B77
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 07:35:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 862E4C25B77
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 07:47:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5EBE5881C3;
-	Wed, 22 May 2024 09:35:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B5CFC8826D;
+	Wed, 22 May 2024 09:47:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="sYpzS2Pn";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="FUi/6h5b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 795AD88113; Wed, 22 May 2024 09:35:19 +0200 (CEST)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2009::601])
+ id 71D4F8825A; Wed, 22 May 2024 09:47:13 +0200 (CEST)
+Received: from NAM02-DM3-obe.outbound.protection.outlook.com
+ (mail-dm3nam02on20600.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2405::600])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E70CB881C3
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 09:35:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B4F18826D
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 09:47:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=C6SFyugAErGx3P2Xb2LCYhhe5J0DMbF9fxbeU8EapxsB+Ov0yBIX2fGzcOQhoyG95P38UlXg4IqCS4MzqxfduuvvFDYV7B/vsCT7gakydB/aPNtqHZFpsh9NKB5Kzan8NlmqKA0PiizbQU8fKnFbe7YjnGCGdcPmFurJO5FuQFLb84noZvm1YaKWqcRNCIMJP2brJPUZQnwnzj6DwZGT+WnttNrUZqdeM0XDlGTGBEf+ULjIEya285w8UZO8G942GhYngba1qQenR7qPqt7cion4A4O3WhBVKbbUFS9MWTP0I0a0SF3WzvpAVKgQDryaRp04HWO4oSJAFf/G/JgIRA==
+ b=R3E0PCBjNKkotoFzUKYwu0rKospnXRe6KuRIj+dO+IgIOKE0ajax+QKbn08KUc2UsB2t/YGrsX6hLTy/Ai9wpQ743uD0yD9lCjEOLQJnykPZtAfR1u59gg9T8CAOSOjMb0k+fxc2sUmZJFXVjpS3yA9CfTQy9YjxDSScRK3KCAmnQPTP9KfK8KcbWPamTEIbJuaPmqupNiJOZiEM53y7VprlsFCCAiQT8jswv+FMradMRpTweZhyr1d9flQjbogQ9qpaHgCyNPwvefEK6+a1GTwUYMLvqC4lURzkRZQYg5RRlynxWhS2F1AnMo3xXrwFMpI5RpaTHPQNcGnJRErGHg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PUrMICC1MVCsU5SLTvbBZUEtwgOYMv3SwKzdF1v03m4=;
- b=ah+faUu3dFB9MKlugkQJ2FB5qEK8Q7HNv2sXFhWiesiYKa3wn/k6coGAxEU1HII08TDbsamrULE3o59IFkxWiNyNd9L+Ej20wdfT93XOEpKJslajExpJqNXrHDByftEvVe+LHzgbflAg7GwNKA96gua1RrUYUFks60BZdkfFjb4nPAKpBPvqC+SxFzDON+kO5DrM0Z7rhXG//pVUYZgvw8O/A2Y7z+ZS9JsdyT4qfwIOO9fslAQ6puSVlY33gTXs+7pYFYGIRBeisCQGrwFtZx7pUDrFw7Zk8wwgeHnObWuhcCMxSb37Ok7M+9IV0iPbLgGxe3hxinyADpWOJ9FzVQ==
+ bh=02Y38rZuBMXlBmge/nyO1fLWUyMt+7C4NPiSriHhCp0=;
+ b=eP2nSSMUzxe3CyvQmeTtkM8A9ijNFK4YZHt2t98h2N7SoVcTqmyQZ5MNSPdz7fhpzkYBp6ji/eEHMU9mq7FRGwqWggV7ldBooXkZduAcTxSzHSPpMWhkcbA+oW5ix1ECPCPWlw8rwe9QHZyiMSi95yiEypSTI90muSnvUjA9lzUJppOU2UjL1kAuAMjQES6urGJmgbrJ4XRLPPROelrq+yarPOJ5ffT4kXI7eOR7BBKr5271rAVD6qnPaRvz7zEfUn7rLL3CSxH1ugz6UC5bDNC9U6hH3S1Lf5dEGixnnn+4oGErw6TeCsGdJDrcFkrtipkIDZewIoVlSPkamXTGbQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PUrMICC1MVCsU5SLTvbBZUEtwgOYMv3SwKzdF1v03m4=;
- b=sYpzS2Pno+uYTRj0h/Relxw/fPiyMFKJp7x1IdhVgNksfdxWW/9ttZRFtES6odkkua38PDNtN0ne5g8Xa8cJ7hzTf112l2Q+5zyIjEvtB/7quLaRg9dEakxz65yE94WWQ8LwgIaNL2ih8w//YWXfWJcpubwxd1lWhSsr08u58z0=
+ bh=02Y38rZuBMXlBmge/nyO1fLWUyMt+7C4NPiSriHhCp0=;
+ b=FUi/6h5bhg2G1DYaNbaFxfXhSJrwaAq4mYWlxjc6F3c8NyoHdvCXiDPmNWMJZHfdPgR7GtKlmMHhNsaiL1L/x8VYDoqyzESv/lnJamcv4GRPN933yZ3XV9WAdZ63M+Do1BdkKxccdkMfyORR1tanEs0LFvpouhKCmEIK9V5Tnvo=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by PH7PR12MB9255.namprd12.prod.outlook.com (2603:10b6:510:30c::19)
+ by SA1PR12MB8162.namprd12.prod.outlook.com (2603:10b6:806:33a::18)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7587.36; Wed, 22 May
- 2024 07:35:10 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7587.28; Wed, 22 May
+ 2024 07:47:05 +0000
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30%6]) with mapi id 15.20.7611.016; Wed, 22 May 2024
- 07:35:09 +0000
-Message-ID: <675fa9e4-f524-44ca-8c18-51580fadbb77@amd.com>
-Date: Wed, 22 May 2024 09:34:53 +0200
+ 07:47:05 +0000
+Message-ID: <5cf2c7a1-4766-4343-a037-3893a03f14df@amd.com>
+Date: Wed, 22 May 2024 09:46:48 +0200
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v3] fdt: automatically add /chosen/kaslr-seed if DM_RNG is
  enabled
@@ -64,7 +64,8 @@ Cc: Simon Glass <sjg@chromium.org>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Devarsh Thakkar <devarsht@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Hugo Villeneuve <hvilleneuve@dimonoff.com>, Marek Vasut <marex@denx.de>,
- Andy Yan <andy.yan@rock-chips.com>, Akash Gajjar <gajjar04akash@gmail.com>,
+ Michal Simek <michal.simek@amd.com>, Andy Yan <andy.yan@rock-chips.com>,
+ Akash Gajjar <gajjar04akash@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Chris Morgan <macromorgan@hotmail.com>
 References: <20240521205955.3569600-1-tharvey@gateworks.com>
@@ -117,95 +118,95 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
 In-Reply-To: <20240521205955.3569600-1-tharvey@gateworks.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR07CA0157.eurprd07.prod.outlook.com
- (2603:10a6:802:16::44) To SJ2PR12MB8109.namprd12.prod.outlook.com
+X-ClientProxiedBy: VI1PR04CA0105.eurprd04.prod.outlook.com
+ (2603:10a6:803:64::40) To SJ2PR12MB8109.namprd12.prod.outlook.com
  (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|PH7PR12MB9255:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7451a137-9fbd-4ba1-128f-08dc7a31b57c
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|SA1PR12MB8162:EE_
+X-MS-Office365-Filtering-Correlation-Id: 27612c7c-c31c-4743-484e-08dc7a335ff9
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230031|7416005|366007|1800799015|376005;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?bFg5eCtRV3V1RENxR1BnV3VITkt5MWV2THljbW8xQzlPT3M3ejloV210aXNO?=
- =?utf-8?B?cTFScGNqOEpjMGMvanBBekt0OHhxNnVOUWdiV3NRb05QTGptL1Y4dVVTbHRr?=
- =?utf-8?B?bnZoYkd0RHJYckw2RXdUdGVRejI3a2tUQW1UUDlESkozMzRpbXlnMnQwSUE3?=
- =?utf-8?B?c0RHRWpjMWRZQVUxM25sQWh3eFlUZThtRjVXRzlrL2NaTEJOU2xuakhqRWxI?=
- =?utf-8?B?S1l4a2dLWE1SeE55Z2w4bUlWNEhsUVZsczl6T3VKMm1VMnNRbTQwZFl0cXAy?=
- =?utf-8?B?Q1I4TDhDeEFOYmx1Sk0xUHhHakJJclNoWEdMREx3M2FUSVl5eVBCUUJDZWwy?=
- =?utf-8?B?Z0VqbTVSRUZ5Z0RYcGp6a3p3bmJIZEZqYm1aWWp4Mmp3eW1lM0t0aHBmTTV1?=
- =?utf-8?B?NGl2WWRobWZTcmVnQWR4WktONHpwdENZSjY0MkplbzViWjVVMmZGcmJhbnBn?=
- =?utf-8?B?bGhJTXN1UUNJcFdIbDBkWUZwRzBka1lnSmVERFNuYW1lN0JTVjFncCszYWIv?=
- =?utf-8?B?Qzd1UVJzdXRaUG9MZHcxaFdZOUN5anNWQjY5d1RZZ2V0VFdOc0dueVRUSjNT?=
- =?utf-8?B?K3hzd1hPVUswSDJoenV0eFV3YUZRczlKenE2OCt5bGNEaVNkNWtLU3NlaFpo?=
- =?utf-8?B?cWJXR0JuSlg4U1Fpb2dsUmJBajliTVVWa3p2OXp5OUF1WHZXZmk4alRuMEhM?=
- =?utf-8?B?RlY2UkVLUkdkaGNnNWhqVTY4dkJpNWVCWnRWaHJIYXNYUjVKcnhMSlRMdXBF?=
- =?utf-8?B?NmtnUU14TDRlL1VmQ203dXRpdEhWZGdUNHdaNVJ4TU1CdzdyUGN5UEhvNFhP?=
- =?utf-8?B?Z3MvRUhRVWNkREtycmdHOVdtL3JsY0trYVgrTDIrdFd2NVd0MDVmeXkva092?=
- =?utf-8?B?UDlVU0hYbUNJOW1KcWFvMzRVajJRZ29KVFY0eVBlb0lTZFpxWnQzdHRyZTFL?=
- =?utf-8?B?K1pYYm9CcjZCdmlobjQ0UkVLeVhyZUI4OXh6aXpIbkcycmludDEzNlljVnFy?=
- =?utf-8?B?cTJuQ2sxR2d3a25KazdaZ1cvWHZrSExlSVdlQUVrOVdlaXdvY3R0cU84K09W?=
- =?utf-8?B?Y2E2SGNLelFjUnpMVmtRSFpmclpnT3BaaS9mQTNKai8xazNCbnF1blhxWGVK?=
- =?utf-8?B?ZWpaM2lWdkl1cTkzQlhpY0hKdUwyOTdkYUNjSThPV0NselJEOVhiWHhTZjdv?=
- =?utf-8?B?RWswWUxPaDJYem9zMS9ua29TVVlNb2xhNDZNcDFueVNsNWdzbWxjVWg0MFJq?=
- =?utf-8?B?aWtvNGk3S2p0dlVXS1lDVWlXV0Z2YjNFSHUya2pqbnhrbzlJdEljMDRSaEJ1?=
- =?utf-8?B?YWtNQjZ3U0N4NFlUenp6TllJaWV5UTFkNk9QZHdHcndwYjhaYUpaVm5na3kx?=
- =?utf-8?B?RGRYVFFhNDZKZnpja0NaclhzQkpjcGlVdVJ4aDVMVlVteGJra2JRVVphM1VZ?=
- =?utf-8?B?YjZmQk1vMW5GU3g2QWtjRmhTaWRCdHc1bjI5UVphUWZVbGpLSUFYRU5FeW5D?=
- =?utf-8?B?U2lPN3YwK0hzL0ZhNTBmZ0ltc3V0aWZRK29hVUpSRnl6M0ZwWmQvRUxQcUx3?=
- =?utf-8?B?RWs4cVBieVRPTC80NlN1emNaR3BrVE1HYjZKemJPb1Y3bjlaampCeDdHcE9T?=
- =?utf-8?B?YXZZZkhCcTFCTllybTJwdHJ1VzBOQkJpcGhpcXh0WVRxV0tvQ0hQSFIxcjNz?=
- =?utf-8?B?THdKNmpVQ3hpT1pBakNMa1dPdXZuckpKT1VSQkxwZTBFZmlzd1UzTE5RPT0=?=
+X-Microsoft-Antispam: BCL:0;ARA:13230031|7416005|366007|376005|1800799015;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?aFVGQTNBYkx6VEphWGk2Tnd1QTRBVVpuRW91ZVJoUjR4UHBRYXRsQUdNQ0pZ?=
+ =?utf-8?B?UUpqT0V5TDBkZ2E4TnJrOHNqa3JISWZ1V3M3MnczM2dTRVhzbmViZlhKRDlV?=
+ =?utf-8?B?OXFMTlRhTmQyUmNJbjhvRGZuTVFhV2JqcG1BTDUxeHFvK0dLY0hoVVdoOWFx?=
+ =?utf-8?B?UDVCL3dUWmdmcmd5dHpxQmRWWTk1aGFhT0Vmckd2RTFRUmlnMWJkSzhqSXJV?=
+ =?utf-8?B?VW5zZXpKMGhHRmlvRFFkOVdLYmlGMU1XNU9TNlJJVXdRZG9ocjVXZ1Fub2JD?=
+ =?utf-8?B?bU03dGNYYk94eitvcFIvOHN6a3lLWDBvNUtpaG4vcVlnVDc4WGhWTzZ2QkJh?=
+ =?utf-8?B?YW9UV3lpZm1INUpkdHNXdmdJR3FTRStFU2ZST29QMGxxNUN1REdpaFdlQUJ4?=
+ =?utf-8?B?WDA2RGkya3lTZlBneTdMYk1uTkg5WHBibVU2endzZk9aQk5CVldQVncwVGZ3?=
+ =?utf-8?B?Vk9MMDM2VHNadVFMbnh3U2VqVEhRc21GUUl1YVN4VTZsa2ZTeVUrSEkrZFlm?=
+ =?utf-8?B?UTdpY3RUQktiaFdWK3d0V3EzRTVJS3R2WHFQSEp1a1FXdXBkckNRT0FUYkhp?=
+ =?utf-8?B?RHFPdjR3NnIvS3ZoNlBEQ1lvR3lYdzMvVldVdlltc0lDMWdUMGYram5idXlt?=
+ =?utf-8?B?SXU2WlNUM1pvZGlidVBZa0hoMFQvcHhJK3BDN3JTOWZVTmMrR1BtSjVkNHJS?=
+ =?utf-8?B?cWtHRDZ3OWZYYWMzNksvZ0g0M2Uxc0lYazkxaUNvVForNDlOYTQvMVhRc1h0?=
+ =?utf-8?B?SWFObFFORENvUFprZDNXbEM0c0VLVFlZb1VvNmhHTlM1UG01dnlRalorMjNQ?=
+ =?utf-8?B?eHpMQVpkdUdVNldhb2k3RXo2cUpBSEoxU1daQWg0VXUrVEhVdDZzc09xdVN5?=
+ =?utf-8?B?V0NYWmtibnFocVZVcm1Ud0RwM1hPbTlaSXRNNGhVbzRpcWtOeHlOOVFkYXJw?=
+ =?utf-8?B?RUpsMVRmNWFFeDNNKy92OTJlTU1kMVZ3TDExME9LbU1oSnJXczZ5dW1ZU2pC?=
+ =?utf-8?B?bFF4c3hJQS83RWhBbXZUY3NFVWlCSVBxVTVycVY0c3FDeFhyNGhIOGZoVXFo?=
+ =?utf-8?B?aWhCNHEyQVhTblA3S0pPR1RYb3ZtOS95Q2J2S256LzNlL1JFTy9SeCtqVE04?=
+ =?utf-8?B?OGRhTkl5UkNqZGRCRU1Nd2IrWWdiOUlEWXRTYXhEckliNlUxaGpRRXpNWVFk?=
+ =?utf-8?B?b3d0WGlDN1RmYmNNQ0IydzdkMmsvWnBVT2RVRldKemN0czBqYnp3RnZjQW5k?=
+ =?utf-8?B?WVVROC9XeFRjd25GK1I4L1dBdmpmTFYvQVlMcTdLc2tmUlZITmlQSzR6SnMx?=
+ =?utf-8?B?TkRJV1pYY3FoUzdqclIwRC8ra3pyNklBUk5GejAxQUdsN0tsUU0rUzVEUThZ?=
+ =?utf-8?B?enY5NENIcUZoR3JmVzRQanF3VnRHcXdmRzUvWXFsK2o5S2dqSU0zTmpuOTdz?=
+ =?utf-8?B?a2Y2b3FQOUdpWTBaU280aEprZ3c5ZS9oU1l5bjdpb1BHdGNQUGZrY1ZqTWNu?=
+ =?utf-8?B?UDBoRXlzcHBZbXEvc2NhQ0NxUG5QczZac01qNGhOM2NKdjZHQThzNHJvc000?=
+ =?utf-8?B?UVdSSVNTaTlyZUJ5cDhJSjg4VWlTcCtpaTZ2eFI5amt0b0tvRmc4RHVZSTBs?=
+ =?utf-8?B?cFg3YlZkYUVydlhaUDhUeS9YUWhxN212Ni9GcExPdFdXMWwxTEFlTElZT041?=
+ =?utf-8?B?ZEp4dHNKR3ZiTnBpU1FORVdIRC9GdzQwemNWN0lwdmJsL1lhL0lUOHhBPT0=?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(7416005)(366007)(1800799015)(376005); DIR:OUT; SFP:1101; 
+ SFS:(13230031)(7416005)(366007)(376005)(1800799015); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?U3diMDNjMU0yNXA5K0xwbmZSWlBBWk8rTzNHRzFiblhmbDBVcnNldm1QL3B0?=
- =?utf-8?B?aC9uTHBVa09MOVJjdnFjcEJhZTZyb2F6NEltbGMvdjczL245Y0YyT0RBVEJL?=
- =?utf-8?B?cHFKRi80cU9FY3NFbFMycU04Y0dIL2Zra1NJWm9qd0NvQU5Jcllaa2NCZXp3?=
- =?utf-8?B?bUFKbmpiTkZ5aS9IR1VCd3lYclF1V3RiSmtOV0x1SVFCNVVham0vY2thb2Jx?=
- =?utf-8?B?SUhYTTBmRUI5SlR1N0F2eUlyZUtWMllBNkpGZEEyenFoTlpKR2xaSVZMbnZ5?=
- =?utf-8?B?SkNPWm1xWlVLYk5ZUDR2SmlGOGxlbEFHQXM4SkJ4bnpvRFZ0RVRMT2JNRnU2?=
- =?utf-8?B?ak0rL1J1QXl0ejEzQ25VQVRHeWFmM2hnTHFpbENUY1JBLzUrUzZaa2ZJRlNT?=
- =?utf-8?B?R3ByYXFyNndkSklNRnpKMy9CT0lvaDhoZUF4dE1UcXJHaUlIYUdXMExXUFJG?=
- =?utf-8?B?UjFXYXQxSXhkV0Nkeis0YUtnY0xWbElIdnp0aW5XcVVZQ3B4T0FlQnVNK2pt?=
- =?utf-8?B?c0h1WWUxb2hhSjIvZUt3MW4zaFc0S1lzRlI5MjE4b1hCUXhxbEZkaGhMZ2tR?=
- =?utf-8?B?UEdvWXlmM0NrY0QrajkwU09wUVNXdXJmYS84dHRWTjdlNVN3b05GQUlvcktO?=
- =?utf-8?B?OHJGVUdhdVBVdW5oTGQ5NTFpakFRMVV2dWlRSER3WmpYdkNmZFRDRTJ3em9k?=
- =?utf-8?B?akF2VGZldEZ4ZEZRTmNTYU9kVVlrWkFaaFcwVmc2U3lwMkNrL2hlQ3ZOKzVt?=
- =?utf-8?B?QlpjYnZpalBmay96TmM2WWhZVlprdk5zREgySUNOajRpTWlqS1BCQjRob2NB?=
- =?utf-8?B?OWQrVDNHTlBHWTk3QURtQVRJZWx4Zms4aVM1a2RZVUozUk9YamxrSm5vUkpD?=
- =?utf-8?B?YnNKSXlKaEdEYXhiKzVMVGFpSkd1QWtNSUxPcmFoajA2Qk9vQUVpQ3JHbWk5?=
- =?utf-8?B?L1BldFlOcnBFbVQ4RVZQZUpJRFNWMUVqT0RmYVRNQXcrUW52ZnUxZTNGRkJw?=
- =?utf-8?B?ZHIzYnk3RTVOZ09kcWdsY2I5M0dabGpYUVEra0JheTgzOEs3dkg4QWY3azRS?=
- =?utf-8?B?S29wdlBiaTd2MlU2SmZ0OGpNUC9oeEJpOTFtVCtSaFVWNHFFOXkzSzcvMnhX?=
- =?utf-8?B?RGJvRE5ISlEyYnR3eVNBQzcyaWw5aXRFK2pmS25FSFk0TWN4NEdkNENLb0VW?=
- =?utf-8?B?d2hPUnpOVWtSaFo2Vll6dExVd0FYMU5pTGlBQTBLZldiN3ZuSjNjSG5QVklm?=
- =?utf-8?B?b29sVFZ6TDMybVZIeUlhMkU2bWdXZTI2MTdPM042MGRnYzMzNENPaHA1ajRo?=
- =?utf-8?B?Y3dSOG9wY0xRb0xadytWazVRNkVpcVJCemhlRUVGdkhvZ0dCRDkwY1lBWGND?=
- =?utf-8?B?cTk1dmNVYnVTL3FqdCt6L2VjK0hzYmI2ZDg5dCtTR2xMdEl1ZCtVZ1J5U2VF?=
- =?utf-8?B?THM0d1FiazFGZGsyREE1MGJMcDB1SlVxVERmcURaVkFCSUplRTBkdlBNZUUz?=
- =?utf-8?B?ZC9FUHhjb3haM1c3c3BqNnBObit2Z3J2ZWd2Q1hLdmdnS21CQThHRFpMdWdE?=
- =?utf-8?B?cjZvMktoRHZwN2tZNEhCb0NISEpLVC9wMEtOUWJ3MDUybGNPbWtWZEpyN29I?=
- =?utf-8?B?bzc4QkxWRG9CelhDRmRYMUpPVWZTL3hRcmhBTEVhbDJxNTFvam50Zjk0RFRj?=
- =?utf-8?B?Tm5XSEZZcGRvQ2VDVm5vT1hhOHpuYjR0eHJHYy92WDhteUk1TXZSQi9sdkVO?=
- =?utf-8?B?K2tYMmVaOWV2M2FzNFFuQ3NCR0doWUxsQ1ZVR1NGMmhMVnpTRnQ4OE5sWldV?=
- =?utf-8?B?WnhRbXl2VXExUVQwN20wb3R1QUM2VlgvTEhHRHRmV3JyTnZ0S0pBbnowRDFK?=
- =?utf-8?B?UWMwR2lVSENaYVlrSkZSVXNZUGtacGxVaXFHeWpNdmpEd2RmUGtqNkQ5VHZv?=
- =?utf-8?B?VDgyeFFyZGk0enRtUkQ4ek9WRlFQOFVPRkxBTmx0cGNXaHN5Rk5iU1p6OWs1?=
- =?utf-8?B?d1YxMi92Tmd1LzdlbWlWS3NBa3ovY2NtUXpIMFZ2bUh6WFI3N2dhZUpmQ0NK?=
- =?utf-8?B?RTByN2htVkk2Q1MvNmhFeTlWZk1GczFQVkpWU3dyUGRNcjJTTkN4WnBnUmlX?=
- =?utf-8?Q?jkUr1TmHBedx1R8VRcMc3Skwf?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dzB0SGJJUzlEbXpvTHRVc2YzUW9RNmNNdndTd05xRkVmM1RhYmp5akJETDls?=
+ =?utf-8?B?eXljK285ek5JWmZXVXh4OTRyUnZhK0ZUNlNWWm1YWHVFdmNoY25EdVFpUUxJ?=
+ =?utf-8?B?WTlnUGlHUUVSajlrUlNaSmVQSEtDSDZub2hVQ0dMazNab2RSSFpQdjduK0tx?=
+ =?utf-8?B?RE53bElCWjRzenBDVFFaN0ZLU0dYa3JJeC9aZFZORFUyMENUb0ZuVzlJdHE0?=
+ =?utf-8?B?MTVjZ2VvUE5DT2FUeWxkaVIzL0VlektBcno5b1RXK2txdSt1MVlXejdPWkt5?=
+ =?utf-8?B?WHlEalZmQ3pnOGR1MXRKQ3JndG1lNFkwa3p5WGkyUlFyWUpyUSsvWjNXbnQy?=
+ =?utf-8?B?K2NNN3hsMnVzQ01zclBibTZWSDRIdklCdHFpNFgvR05iSUtBSSsyZ21vbDgy?=
+ =?utf-8?B?bW1YWUYrY1NzNnp2c2pNVDFnbS9hUXo1U25scDZWQzdKTDd4RTVVTGhVbHR6?=
+ =?utf-8?B?NVMrWEpUellMN0p6VVpsZDRPT0Z1U2xYTkVxc0p5d1VZNGh6QTBxYXh2NHgw?=
+ =?utf-8?B?aGxmdFJIM3BEVHVZQ3Q1Z2YxVVA3MXhzczBJQ1FDTzF6eWlmZXg4dVVTS2RZ?=
+ =?utf-8?B?eGw1WjZEVU9odFZMSU5mR1pJOFNQR29uYUxndEhseTJjbHhWRm5jaDkrMGsz?=
+ =?utf-8?B?OGNBVXpXUmRiV045Z04xdDBEWEFGbWpLUGs4cWY5SzFRbUh3YWxheStUa3Rt?=
+ =?utf-8?B?VGl4cUVTcWE3ajRVOURoSXdIRDg3N3dsRXZzNTMrb1Naa3ZjamtmN3RNeFVI?=
+ =?utf-8?B?VDlHY3M0aldmVFV1QlBodUFoQkVpbnZQNjIyeW5qQkQ0Z3ZQajMra0c0Umlr?=
+ =?utf-8?B?Ty83WjVMLzc1a2E4dGpwYVpCVGpKbG5VMnF1WnBDeHZwNklJRGF1M2NsVWZk?=
+ =?utf-8?B?anNsZDVWQUV1SXJqV2ZHclFqQnA0cStjUkhjWm1Qb1hVWGkzQTdVWXdFNmRr?=
+ =?utf-8?B?VnRIMjF4OWd5VVAzUTJibUVJR2xablhUejRxN2lET2xuRUl4SURkNEd2OUlz?=
+ =?utf-8?B?eTlFVXlSVFkrSVlKMVl3SmVqTERyME4rZEE3dE91ZUtqVjY0Z1ZhM09EVnJQ?=
+ =?utf-8?B?Y1d6RUtHbWhBRDR0bUdnUEhIKzUxM3h0T3pYMHI3NmFBZSsxdTFDSG8wNlZV?=
+ =?utf-8?B?TDhtT1JwQ2FMRkF4QWMzY3gvODdSek1PTmtWYXR6MHpPNnFuSG5WZlpJWTdM?=
+ =?utf-8?B?eXdlTWlTT1lUSkwxMkNVQ0pBUFNFMWRNZTlLeVdFTzBuTmJuMUh3YmJhc0RY?=
+ =?utf-8?B?YU1HN0hOUnA0aVZBZ1NBM1d2dkFiV0I2UDNvbzBMNjZVUXBYMjdZTVVOWjND?=
+ =?utf-8?B?eUZQZ2F1TDB2ZG1OQTd5ZE1ua3pMMDN1b1ZjM3BlK3ViWXJaVjdOeWxyQWxq?=
+ =?utf-8?B?ZmpiLzRGL2RjeldhV0hBTm1CcG1EWlo2aWh6bWpFUVV6VnYxalhzRWpHYUVp?=
+ =?utf-8?B?dUFVNWQ4Q1hIZjltUGo5a1h5T2s2eEsrd1NkR3NHeGt0VnVESXhYV3VwL2Zy?=
+ =?utf-8?B?OHQ1blhOdUNoV0FHUlBSVlE0NmpBWUNwUVNrVjZTWHBieHBWUlFHYjQrSlFM?=
+ =?utf-8?B?RHh6dDFlZVd6YkVseGhmSFVLT0o1TzFrNGtpM0YvcDZSUmxkWWdEUXNwcGVt?=
+ =?utf-8?B?dFIrbHFVZWVha3JGTC8yRVNhcGZrTHdEcldva0swUy9wS1owZk5uUWV6U0hw?=
+ =?utf-8?B?eVZxQkl0UE85NUhEckJ3Vk9FRUVJaHczOGV4SVFMZzJ6TVpVclZ0SEVsMWRH?=
+ =?utf-8?B?MjVHSDdZb2dyZ2hvYWx4b3R0ZGJYRXdESVdmamRUQkJ3NWZUWUZzdUZHWUxK?=
+ =?utf-8?B?U1pIVUZjaUpUZDNLWUFCM2hVWTEyYUxvYmpmL0tCWlFELzlhVTJ4RFg5d05p?=
+ =?utf-8?B?Zm12M3ZUVkVWQUJyT0dYeFZNS0k4REFvRWdlMW9sQVArYTRqRllaRThMNHZ2?=
+ =?utf-8?B?Mis4WWIycUtrdXVJU3I5TjhwOVVUUXZKT1k2dGQ4alhrWkkzUmlHSk9FZ0ts?=
+ =?utf-8?B?UWtjSGE2cHVaNkdwWHJuWWxGSGYxa0grTG45SzFDNVNiWmdaL2pzTGh2ejRX?=
+ =?utf-8?B?ZnRzOVNYT3ZJZUhueFhPUTF4SVNFYjRSSVZHZGFNdTZZeFU5UVIwVXFGOUt2?=
+ =?utf-8?Q?G3JtwGz1Rb8ynd/etIKQYJ3V0?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7451a137-9fbd-4ba1-128f-08dc7a31b57c
+X-MS-Exchange-CrossTenant-Network-Message-Id: 27612c7c-c31c-4743-484e-08dc7a335ff9
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 May 2024 07:35:09.9098 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 May 2024 07:47:05.4056 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: lhgxIuipkvo5fPa3VPOVO1P6/1TEtNluqzhjBToPIcySucM/cTlJ0434EK0pZpn7
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB9255
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9WY+1tzJXJXVpSEuQyz4v8cTxW4Y1/OZsO/iVVTEd/EnS/IcU59XoPQBB46bSp8T
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB8162
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -308,302 +309,31 @@ On 5/21/24 22:59, Tim Harvey wrote:
 >   	if (IS_ENABLED(CONFIG_FDT_FIXUP_PARTITIONS) && IS_ENABLED(CONFIG_NAND_ZYNQ))
 >   		fdt_fixup_mtdparts(blob, nodes, ARRAY_SIZE(nodes));
 >   
-> -	if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
-> -		debug("No RNG device\n");
-> -		return 0;
-> -	}
-> -
-> -	if (dm_rng_read(dev, buf, n)) {
-> -		debug("Reading RNG failed\n");
-> -		return 0;
-> -	}
-> -
-> -	if (!blob) {
-> -		debug("No FDT memory address configured. Please configure\n"
-> -		      "the FDT address via \"fdt addr <address>\" command.\n"
-> -		      "Aborting!\n");
-> -		return 0;
-> -	}
-> -
-> -	ret = fdt_check_header(blob);
-> -	if (ret < 0) {
-> -		debug("fdt_chosen: %s\n", fdt_strerror(ret));
-> -		return ret;
-> -	}
-> -
-> -	nodeoffset = fdt_find_or_add_subnode(blob, 0, "chosen");
-> -	if (nodeoffset < 0) {
-> -		debug("Reading chosen node failed\n");
-> -		return nodeoffset;
-> -	}
-> -
-> -	ret = fdt_setprop(blob, nodeoffset, "kaslr-seed", buf, sizeof(buf));
-> -	if (ret < 0) {
-> -		debug("Unable to set kaslr-seed on chosen node: %s\n", fdt_strerror(ret));
-> -		return ret;
-> -	}
-> -
->   	return 0;
->   }
->   #endif
-> diff --git a/boot/fdt_support.c b/boot/fdt_support.c
-> index 874ca4d6f5af..b64cdd34825a 100644
-> --- a/boot/fdt_support.c
-> +++ b/boot/fdt_support.c
-> @@ -8,6 +8,7 @@
->   
->   #include <abuf.h>
->   #include <env.h>
-> +#include <kaslrseed.h>
->   #include <log.h>
->   #include <mapmem.h>
->   #include <net.h>
-> @@ -300,6 +301,11 @@ int fdt_chosen(void *fdt)
->   	if (nodeoffset < 0)
->   		return nodeoffset;
->   
-> +	if (IS_ENABLED(CONFIG_DM_RNG) &&
-> +	    !IS_ENABLED(CONFIG_MEASURED_BOOT) &&
-> +	    !IS_ENABLED(CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT))
-> +		fdt_kaslrseed(fdt, 0, false);
-> +
->   	if (IS_ENABLED(CONFIG_BOARD_RNG_SEED) && !board_rng_seed(&buf)) {
->   		err = fdt_setprop(fdt, nodeoffset, "rng-seed",
->   				  abuf_data(&buf), abuf_size(&buf));
-> diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-> index 4b22bb6f525a..35d5b9ed3ecc 100644
-> --- a/boot/pxe_utils.c
-> +++ b/boot/pxe_utils.c
-> @@ -8,6 +8,7 @@
->   #include <dm.h>
->   #include <env.h>
->   #include <image.h>
-> +#include <kaslrseed.h>
->   #include <log.h>
->   #include <malloc.h>
->   #include <mapmem.h>
-> @@ -323,10 +324,6 @@ static void label_boot_kaslrseed(void)
->   #if CONFIG_IS_ENABLED(DM_RNG)
->   	ulong fdt_addr;
->   	struct fdt_header *working_fdt;
-> -	size_t n = 0x8;
-> -	struct udevice *dev;
-> -	u64 *buf;
-> -	int nodeoffset;
->   	int err;
->   
->   	/* Get the main fdt and map it */
-> @@ -342,35 +339,7 @@ static void label_boot_kaslrseed(void)
->   	if (err <= 0)
->   		return;
->   
-> -	if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
-> -		printf("No RNG device\n");
-> -		return;
-> -	}
-> -
-> -	nodeoffset = fdt_find_or_add_subnode(working_fdt, 0, "chosen");
-> -	if (nodeoffset < 0) {
-> -		printf("Reading chosen node failed\n");
-> -		return;
-> -	}
-> -
-> -	buf = malloc(n);
-> -	if (!buf) {
-> -		printf("Out of memory\n");
-> -		return;
-> -	}
-> -
-> -	if (dm_rng_read(dev, buf, n)) {
-> -		printf("Reading RNG failed\n");
-> -		goto err;
-> -	}
-> -
-> -	err = fdt_setprop(working_fdt, nodeoffset, "kaslr-seed", buf, sizeof(buf));
-> -	if (err < 0) {
-> -		printf("Unable to set kaslr-seed on chosen node: %s\n", fdt_strerror(err));
-> -		goto err;
-> -	}
-> -err:
-> -	free(buf);
-> +	fdt_kaslrseed(working_fdt, 0, true);
->   #endif
->   	return;
->   }
-> diff --git a/cmd/kaslrseed.c b/cmd/kaslrseed.c
-> index e0d3c7fe7489..958ecd8efabb 100644
-> --- a/cmd/kaslrseed.c
-> +++ b/cmd/kaslrseed.c
-> @@ -9,33 +9,16 @@
->   #include <command.h>
->   #include <dm.h>
->   #include <hexdump.h>
-> +#include <kaslrseed.h>
->   #include <malloc.h>
->   #include <rng.h>
->   #include <fdt_support.h>
->   
->   static int do_kaslr_seed(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
->   {
-> -	size_t n = 0x8;
-> -	struct udevice *dev;
-> -	u64 *buf;
-> -	int nodeoffset;
-> -	int ret = CMD_RET_SUCCESS;
-> +	int err;
->   
-> -	if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
-> -		printf("No RNG device\n");
-> -		return CMD_RET_FAILURE;
-> -	}
-> -
-> -	buf = malloc(n);
-> -	if (!buf) {
-> -		printf("Out of memory\n");
-> -		return CMD_RET_FAILURE;
-> -	}
-> -
-> -	if (dm_rng_read(dev, buf, n)) {
-> -		printf("Reading RNG failed\n");
-> -		return CMD_RET_FAILURE;
-> -	}
-> +	printf("Notice: a /chosen/kaslr-seed is automatically added to the device-tree when booted via booti/bootm/bootz therefore using this command is likely no longer needed");
 
-missing \n here.
+one more thing here. Please also removed unused variables.
 
->   
->   	if (!working_fdt) {
->   		printf("No FDT memory address configured. Please configure\n"
-> @@ -44,27 +27,11 @@ static int do_kaslr_seed(struct cmd_tbl *cmdtp, int flag, int argc, char *const
->   		return CMD_RET_FAILURE;
->   	}
->   
-> -	ret = fdt_check_header(working_fdt);
-> -	if (ret < 0) {
-> -		printf("fdt_chosen: %s\n", fdt_strerror(ret));
-> +	err = fdt_kaslrseed(working_fdt, 0, true);
-> +	if (err < 0)
->   		return CMD_RET_FAILURE;
-> -	}
-> -
-> -	nodeoffset = fdt_find_or_add_subnode(working_fdt, 0, "chosen");
-> -	if (nodeoffset < 0) {
-> -		printf("Reading chosen node failed\n");
-> -		return CMD_RET_FAILURE;
-> -	}
-> -
-> -	ret = fdt_setprop(working_fdt, nodeoffset, "kaslr-seed", buf, sizeof(buf));
-> -	if (ret < 0) {
-> -		printf("Unable to set kaslr-seed on chosen node: %s\n", fdt_strerror(ret));
-> -		return CMD_RET_FAILURE;
-> -	}
-> -
-> -	free(buf);
->   
-> -	return ret;
-> +	return CMD_RET_SUCCESS;
->   }
->   
->   U_BOOT_LONGHELP(kaslrseed,
-> diff --git a/include/kaslrseed.h b/include/kaslrseed.h
-> new file mode 100644
-> index 000000000000..7f9911c59fa4
-> --- /dev/null
-> +++ b/include/kaslrseed.h
-> @@ -0,0 +1,19 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Copyright 2024 Tim Harvey <tharvey@gateworks.com>
-> + */
-> +
-> +#if !defined _KASLRSEED_H_
-> +#define _KASLRSEED_H_
-> +
-> +/**
-> + * fdt_kaslrseed() - create a 'kaslr-seed' node in chosen
-> + *
-> + * @blob:	fdt blob
-> + * @index:	index of UCLASS_RNG device to use
-> + * @overwrite:	do not overwrite existing non-zero node unless true
-> + * Return:	0 if OK, -ve on error
-> + */
-> +int fdt_kaslrseed(void *blob, int index, bool overwrite);
-> +
-> +#endif /* _KASLRSEED_H_ */
-> diff --git a/lib/Makefile b/lib/Makefile
-> index 2a76acf100d0..20a0242055fa 100644
-> --- a/lib/Makefile
-> +++ b/lib/Makefile
-> @@ -149,6 +149,7 @@ obj-y += date.o
->   obj-y += rtc-lib.o
->   obj-$(CONFIG_LIB_ELF) += elf.o
->   
-> +obj-$(CONFIG_DM_RNG) += kaslrseed.o
->   obj-$(CONFIG_$(SPL_TPL_)SEMIHOSTING) += semihosting.o
->   
->   #
-> diff --git a/lib/kaslrseed.c b/lib/kaslrseed.c
-> new file mode 100644
-> index 000000000000..29d7ed2e7718
-> --- /dev/null
-> +++ b/lib/kaslrseed.c
-> @@ -0,0 +1,51 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright 2024 Tim Harvey <tharvey@gateworks.com>
-> + */
-> +#include <dm.h>
-> +#include <rng.h>
-> +#include <fdt_support.h>
-> +#include <dm/device_compat.h>
-> +
-> +int fdt_kaslrseed(void *fdt, int index, bool overwrite)
-> +{
-> +	struct udevice *dev;
-> +	const u64 *orig;
-> +	int nodeoffset;
-> +	u64 data = 0;
-> +	int len;
-> +	int err;
+board/xilinx/common/board.c: In function 'ft_board_setup':
+board/xilinx/common/board.c:707:25: warning: unused variable 'ret' 
+[-Wunused-variable]
+   707 |         int nodeoffset, ret;
+       |                         ^~~
+board/xilinx/common/board.c:707:13: warning: unused variable 'nodeoffset' 
+[-Wunused-variable]
+   707 |         int nodeoffset, ret;
+       |             ^~~~~~~~~~
+   AS      arch/arm/cpu/armv8/cache.o
+board/xilinx/common/board.c:706:12: warning: unused variable 'buf' 
+[-Wunused-variable]
+   706 |         u8 buf[MAX_RAND_SIZE];
+       |            ^~~
+board/xilinx/common/board.c:705:25: warning: unused variable 'dev' 
+[-Wunused-variable]
+   705 |         struct udevice *dev;
+       |                         ^~~
+board/xilinx/common/board.c:704:16: warning: unused variable 'n' [-Wunused-variable]
+   704 |         size_t n = MAX_RAND_SIZE;
+       |                ^
 
-nit: you can just use
-
-int len, err, nodeoffset;
-
-> +
-> +	err = fdt_check_header(fdt);
-> +	if (err < 0)
-> +		return err;
-> +
-> +	/* find or create "/chosen" node. */
-> +	nodeoffset = fdt_find_or_add_subnode(fdt, 0, "chosen");
-> +	if (nodeoffset < 0)
-> +		return nodeoffset;
-> +
-> +	/* return without error if we are not overwriting and existing non-zero node */
-> +	orig = fdt_getprop(fdt, nodeoffset, "kaslr-seed", &len);
-> +	if (orig && len == sizeof(*orig))
-> +		data = fdt64_to_cpu(*orig);
-> +	if (data && !overwrite) {
-> +		debug("not overwriting existing kaslr-seed\n");
-> +		return 0;
-> +	}
-> +	err = uclass_get_device(UCLASS_RNG, index, &dev);
-> +	if (err) {
-> +		printf("No RNG device at index %d\n", index);
-> +		return err;
-> +	}
-> +	err = dm_rng_read(dev, &data, sizeof(data));
-> +	if (err) {
-> +		dev_err(dev, "dm_rng_read failed: %d\n", err);
-> +		return err;
-> +	}
-> +	err = fdt_setprop(fdt, nodeoffset, "kaslr-seed", &data, sizeof(data));
-> +	if (err < 0)
-> +		printf("WARNING: could not set kaslr-seed %s.\n", fdt_strerror(err));
-> +
-> +	return err;
-> +}
 
 Thanks,
 Michal
