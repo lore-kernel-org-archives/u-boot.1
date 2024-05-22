@@ -4,69 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C9CBC25B77
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 06:20:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 417C6C25B77
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 06:27:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9898088488;
-	Wed, 22 May 2024 08:20:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9EEF288813;
+	Wed, 22 May 2024 08:27:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="QpDLwdjv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IfFLDy+h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C578887C0; Wed, 22 May 2024 08:20:43 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 54CA18881A; Wed, 22 May 2024 08:27:49 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B528288412
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 08:20:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 45AD488488
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 08:27:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44M6KYGC014451;
- Wed, 22 May 2024 01:20:34 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1716358834;
- bh=24EUrj0RWUKdvDSvStaP0oCE+SDrCpuaGXI8SxHLdq8=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=QpDLwdjvXlecrOWmMubFmpjSqlvtBYdPe0wJm5QFJRY+4yxZaFqhldi9+mpKheCPX
- CgedvcbdcuZG9pFMx6BQerX+EQjKJ4QrjaPvwRbTiyVo+qktl1l1EIz5JigFousZpH
- xURzRyLWXgA5A7fwgM6VZoNkaq5Nn5N1r/3sNpZM=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44M6KYkv045908
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 22 May 2024 01:20:34 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 22
- May 2024 01:20:34 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 22 May 2024 01:20:33 -0500
-Received: from localhost (uda0497581.dhcp.ti.com [10.24.68.185])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44M6KXDW081774;
- Wed, 22 May 2024 01:20:33 -0500
-Date: Wed, 22 May 2024 11:50:32 +0530
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-To: Neha Malcom Francis <n-francis@ti.com>
-CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <sjg@chromium.org>,
- <alpernebiyasak@gmail.com>, <bb@ti.com>, <nm@ti.com>,
- <sumit.garg@linaro.org>, <michal.simek@amd.com>, <marex@denx.de>,
- <neil.armstrong@linaro.org>, <afd@ti.com>, <vigneshr@ti.com>,
- <kamlesh@ti.com>, <u-kumar1@ti.com>
-Subject: Re: [PATCH 1/3] arm: dts: k3-j721e-r5*: Introduce k3-j721e-r5.dtsi
-Message-ID: <20240522062032.vgfigufih5q7yc2j@uda0497581>
-References: <20240520095916.1809962-1-n-francis@ti.com>
- <20240520095916.1809962-2-n-francis@ti.com>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-420180b5838so28252205e9.2
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 23:27:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1716359266; x=1716964066; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=GtGgani6icIDiRCFHBiBnlxxVoSuR4KgryUsRn77dS0=;
+ b=IfFLDy+h9GLktis5vX9JiZ+CShCr0R/EL8zym9RkpZd+YIsC0krBoodvKXWWCUkxAV
+ VUH3/TaK0GbdFkJXvOEcolJvA2v2loEuzn1e89SrldPI05cqSU578+p4l6EApZmS5q8E
+ MfGTIGWfFYlhQw8NirDZ3Ye0M0ev0tvtI7HGIEUejN8nJ4bqLNO/vxEXzYoCjU1q/UfS
+ CgidQLM4rbGrr88BjhjcvcL+6q5SHrkj7qjzQpX3KTkwo2p0z/LuCdnyoI6AG/sUmxN3
+ QhctUO1Nlh7mC0U1TNvIQQZPKy2P0XL0av0+bzc9dQh817qmTH0AQNli16cL0Pb6p510
+ u0ng==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716359266; x=1716964066;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GtGgani6icIDiRCFHBiBnlxxVoSuR4KgryUsRn77dS0=;
+ b=TvElHtQ3uCbh8cRLp4P8TjX9/WvQMmkzqSEzTiXHVGX4AJzFBZchBTeR869OaeR0pN
+ bIM+y0CxZr5lEsgc1fK2aex/842TGzrRdYIrVFMzXOiEUaqs8Hp6KNSNoGWD040PP87p
+ oGL1E9k70YQkRq0McvY40EgLNPgt0QY2LMKowrlcSGlKGAyVf9DnVARjUxu6MHUd64Z0
+ fmldIs9vIPs4sbrP97XxTG6FU18t4JB1ggSrOJQsWWMRtq1G6BnMfIBvlysAKRYH/Imf
+ Vmw8KzXtj9wVHCD7HndUbfCa6uaH9sUQVBYAyoVStRitjU8uIEq3Gh1bB8KYU+6SZCSL
+ 7KrA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVU+BO0Kfx6FG8UfQy75g+2ik3OZcev2BhR8/aUUBChlbb18gNBln2whZHh6LsQkiCN7me3ToLZB+I5PJJ3tdmvoKnfVQ==
+X-Gm-Message-State: AOJu0YyF6OHzQgmfmI3YITgqvs6h7qyPZ9nKjYV8XyfNnw2qPcDQ4uLC
+ iDypo2o3lLvU+r3pnhPNAav7oaxJWVJUuqW6kOB5ij8Zljt8OJ6HBIERggKTEEY=
+X-Google-Smtp-Source: AGHT+IGgKp6fdtfEcnJXTrN4eRlpdSniao6zGvnzD4klaWjw30ZDSiSjLCmRQRDNhAR3+0S1QfRC/w==
+X-Received: by 2002:a1c:4b06:0:b0:41c:13f6:1eec with SMTP id
+ 5b1f17b1804b1-420fd2d9cf5mr9913825e9.3.1716359266625; 
+ Tue, 21 May 2024 23:27:46 -0700 (PDT)
+Received: from hera (ppp089210091242.access.hol.gr. [89.210.91.242])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-352b66ba0c5sm13977633f8f.27.2024.05.21.23.27.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 21 May 2024 23:27:46 -0700 (PDT)
+Date: Wed, 22 May 2024 09:27:43 +0300
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Shantur Rathore <i@shantur.com>, Bin Meng <bmeng@tinylab.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
+ Joao Marcos Costa <jmcosta944@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [RFC 09/14] efi_loader: do not install dtb if bootmgr fails
+Message-ID: <Zk2QXzEAGeFOmg59@hera>
+References: <20240426141321.232236-1-heinrich.schuchardt@canonical.com>
+ <20240426141321.232236-10-heinrich.schuchardt@canonical.com>
+ <Zk2N5-lqV1y7lZVv@hera>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20240520095916.1809962-2-n-francis@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+In-Reply-To: <Zk2N5-lqV1y7lZVv@hera>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,393 +99,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neha,
+On Wed, May 22, 2024 at 09:17:11AM +0300, Ilias Apalodimas wrote:
+> On Fri, Apr 26, 2024 at 04:13:16PM +0200, Heinrich Schuchardt wrote:
+> > If the UEFI boot manager fails there is no point in installing the
+> > device-tree as a configuration table.
+> >
+> > Unload image if device-tree cannot be installed.
+> >
+> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > ---
+> >  lib/efi_loader/efi_bootmgr.c | 14 ++++++++++----
+> >  1 file changed, 10 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+> > index c64cbe82402..d924810a94b 100644
+> > --- a/lib/efi_loader/efi_bootmgr.c
+> > +++ b/lib/efi_loader/efi_bootmgr.c
+> > @@ -1209,15 +1209,21 @@ efi_status_t efi_bootmgr_run(void *fdt)
+> >  		return CMD_RET_FAILURE;
+> >  	}
+> >
+> > -	ret = efi_install_fdt(fdt);
+> > -	if (ret != EFI_SUCCESS)
+> > -		return ret;
+> > -
+> >  	ret = efi_bootmgr_load(&handle, &load_options);
+> >  	if (ret != EFI_SUCCESS) {
+> >  		log_notice("EFI boot manager: Cannot load any image\n");
+> >  		return ret;
+> >  	}
+> >
+> > +	ret = efi_install_fdt(fdt);
+> > +	if (ret != EFI_SUCCESS) {
+> > +		if (EFI_CALL(efi_unload_image(*handle)) == EFI_SUCCESS)
 
-On 15:29-20240520, Neha Malcom Francis wrote:
-> Introduce k3-j721e-r5.dtsi to be used by board R5 DTS files. This
-> helps sync SoC changes across boards.
-> 
-> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-> ---
->  arch/arm/dts/k3-j721e-r5-beagleboneai64.dts   | 78 +-----------------
->  .../arm/dts/k3-j721e-r5-common-proc-board.dts | 75 +----------------
->  arch/arm/dts/k3-j721e-r5-sk.dts               | 75 +----------------
->  arch/arm/dts/k3-j721e-r5.dtsi                 | 80 +++++++++++++++++++
->  4 files changed, 83 insertions(+), 225 deletions(-)
->  create mode 100644 arch/arm/dts/k3-j721e-r5.dtsi
-> 
-> diff --git a/arch/arm/dts/k3-j721e-r5-beagleboneai64.dts b/arch/arm/dts/k3-j721e-r5-beagleboneai64.dts
-> index 43da4dafba8..4f97af4fd94 100644
-> --- a/arch/arm/dts/k3-j721e-r5-beagleboneai64.dts
-> +++ b/arch/arm/dts/k3-j721e-r5-beagleboneai64.dts
-> @@ -12,84 +12,8 @@
->  #include "k3-j721e-ddr.dtsi"
->  
->  #include "k3-j721e-beagleboneai64-u-boot.dtsi"
-> +#include "k3-j721e-r5.dtsi"
->  
-> -/ {
-> -	aliases {
-> -		remoteproc0 = &sysctrler;
-> -		remoteproc1 = &a72_0;
-> -	};
-> -
-> -	chosen {
-> -		tick-timer = &mcu_timer0;
-> -	};
-> -
-> -	a72_0: a72@0 {
-> -		compatible = "ti,am654-rproc";
-> -		reg = <0x0 0x00a90000 0x0 0x10>;
-> -		power-domains = <&k3_pds 61 TI_SCI_PD_EXCLUSIVE>,
-> -				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>,
-> -				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
-> -		resets = <&k3_reset 202 0>;
-> -		clocks = <&k3_clks 61 1>;
-> -		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>;
-> -		assigned-clock-rates = <2000000000>, <200000000>;
-> -		ti,sci = <&dmsc>;
-> -		ti,sci-proc-id = <32>;
-> -		ti,sci-host-id = <10>;
-> -		bootph-pre-ram;
-> -	};
-> -
-> -	dm_tifs: dm-tifs {
-> -		compatible = "ti,j721e-dm-sci";
-> -		ti,host-id = <3>;
-> -		ti,secure-host;
-> -		mbox-names = "rx", "tx";
-> -		mboxes= <&secure_proxy_mcu 21>,
-> -				<&secure_proxy_mcu 23>;
-> -		bootph-pre-ram;
-> -	};
-> -};
-> -
-> -&dmsc {
-> -	mboxes= <&secure_proxy_mcu 6>,
-> -		<&secure_proxy_mcu 8>,
-> -		<&secure_proxy_mcu 5>;
-> -	mbox-names = "rx", "tx", "notify";
-> -	ti,host-id = <4>;
-> -	ti,secure-host;
-> -};
-> -
-> -&mcu_timer0 {
-> -	status = "okay";
-> -	bootph-pre-ram;
-> -};
-> -
-> -&secure_proxy_mcu {
-> -	bootph-pre-ram;
-> -	/* We require this for boot handshake */
-> -	status = "okay";
-> -};
-> -
-> -&cbass_mcu_wakeup {
-> -	sysctrler: sysctrler {
-> -		compatible = "ti,am654-system-controller";
-> -		mboxes= <&secure_proxy_mcu 4>, <&secure_proxy_mcu 5>;
-> -		mbox-names = "tx", "rx";
-> -		bootph-pre-ram;
-> -	};
-> -};
-> -
-> -&mcu_ringacc {
-> -	ti,sci = <&dm_tifs>;
-> -};
-> -
-> -&mcu_udmap {
-> -	ti,sci = <&dm_tifs>;
-> -};
-> -
-> -&wkup_uart0_pins_default {
-> -	bootph-pre-ram;
-> -};
->  
->  &wkup_i2c0 {
->  	bootph-pre-ram;
-> diff --git a/arch/arm/dts/k3-j721e-r5-common-proc-board.dts b/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
-> index 9655ca21d02..c7e344350c8 100644
-> --- a/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
-> +++ b/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
-> @@ -10,76 +10,7 @@
->  #include "k3-j721e-ddr.dtsi"
->  #include "k3-j721e-common-proc-board-u-boot.dtsi"
->  
-> -/ {
-> -	chosen {
-> -		tick-timer = &mcu_timer0;
-> -	};
-> -
-> -	aliases {
-> -		remoteproc0 = &sysctrler;
-> -		remoteproc1 = &a72_0;
-> -	};
-> -
-> -	a72_0: a72@0 {
-> -		compatible = "ti,am654-rproc";
-> -		reg = <0x0 0x00a90000 0x0 0x10>;
-> -		power-domains = <&k3_pds 61 TI_SCI_PD_EXCLUSIVE>,
-> -				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>,
-> -				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
-> -		resets = <&k3_reset 202 0>;
-> -		clocks = <&k3_clks 61 1>;
-> -		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>;
-> -		assigned-clock-rates = <2000000000>, <200000000>;
-> -		ti,sci = <&dmsc>;
-> -		ti,sci-proc-id = <32>;
-> -		ti,sci-host-id = <10>;
-> -		bootph-pre-ram;
-> -	};
-> -
-> -	dm_tifs: dm-tifs {
-> -		compatible = "ti,j721e-dm-sci";
-> -		ti,host-id = <3>;
-> -		ti,secure-host;
-> -		mbox-names = "rx", "tx";
-> -		mboxes= <&secure_proxy_mcu 21>,
-> -			<&secure_proxy_mcu 23>;
-> -		bootph-pre-ram;
-> -	};
-> -};
-> -
-> -&mcu_timer0 {
-> -	status = "okay";
-> -	bootph-pre-ram;
-> -};
-> -
-> -&dmsc {
-> -	mboxes= <&secure_proxy_mcu 8>, <&secure_proxy_mcu 6>, <&secure_proxy_mcu 5>;
-> -	mbox-names = "tx", "rx", "notify";
-> -	ti,host-id = <4>;
-> -	ti,secure-host;
-> -};
-> -
-> -&secure_proxy_mcu {
-> -	bootph-pre-ram;
-> -	status = "okay";
-> -};
-> -
-> -&cbass_mcu_wakeup {
-> -	sysctrler: sysctrler {
-> -		bootph-pre-ram;
-> -		compatible = "ti,am654-system-controller";
-> -		mboxes= <&secure_proxy_mcu 4>, <&secure_proxy_mcu 5>;
-> -		mbox-names = "tx", "rx";
-> -	};
-> -};
-> -
-> -&mcu_ringacc {
-> -	ti,sci = <&dm_tifs>;
-> -};
-> -
-> -&mcu_udmap {
-> -	ti,sci = <&dm_tifs>;
-> -};
-> +#include "k3-j721e-r5.dtsi"
->  
->  &wkup_i2c0 {
->  	bootph-pre-ram;
-> @@ -111,10 +42,6 @@
->  	};
->  };
->  
-> -&wkup_uart0_pins_default {
-> -	bootph-pre-ram;
-> -};
-> -
->  &mcu_uart0_pins_default {
->  	bootph-pre-ram;
->  };
-> diff --git a/arch/arm/dts/k3-j721e-r5-sk.dts b/arch/arm/dts/k3-j721e-r5-sk.dts
-> index b0c108e9693..96a13b2cb2b 100644
-> --- a/arch/arm/dts/k3-j721e-r5-sk.dts
-> +++ b/arch/arm/dts/k3-j721e-r5-sk.dts
-> @@ -10,80 +10,7 @@
->  #include "k3-j721e-ddr.dtsi"
->  #include "k3-j721e-sk-u-boot.dtsi"
->  
-> -/ {
-> -	chosen {
-> -		tick-timer = &mcu_timer0;
-> -	};
-> -
-> -	aliases {
-> -		remoteproc0 = &sysctrler;
-> -		remoteproc1 = &a72_0;
-> -	};
-> -
-> -	a72_0: a72@0 {
-> -		compatible = "ti,am654-rproc";
-> -		reg = <0x0 0x00a90000 0x0 0x10>;
-> -		power-domains = <&k3_pds 61 TI_SCI_PD_EXCLUSIVE>,
-> -				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>,
-> -				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
-> -		resets = <&k3_reset 202 0>;
-> -		clocks = <&k3_clks 61 1>;
-> -		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>;
-> -		assigned-clock-rates = <2000000000>, <200000000>;
-> -		ti,sci = <&dmsc>;
-> -		ti,sci-proc-id = <32>;
-> -		ti,sci-host-id = <10>;
-> -		bootph-pre-ram;
-> -	};
-> -
-> -	dm_tifs: dm-tifs {
-> -		compatible = "ti,j721e-dm-sci";
-> -		ti,host-id = <3>;
-> -		ti,secure-host;
-> -		mbox-names = "rx", "tx";
-> -		mboxes= <&secure_proxy_mcu 21>,
-> -				<&secure_proxy_mcu 23>;
-> -		bootph-pre-ram;
-> -	};
-> -};
-> -
-> -&mcu_timer0 {
-> -	status = "okay";
-> -	bootph-pre-ram;
-> -};
-> -
-> -&secure_proxy_mcu {
-> -	bootph-pre-ram;
-> -	status = "okay";
-> -};
-> -
-> -&cbass_mcu_wakeup {
-> -	sysctrler: sysctrler {
-> -		bootph-pre-ram;
-> -		compatible = "ti,am654-system-controller";
-> -		mboxes= <&secure_proxy_mcu 4>, <&secure_proxy_mcu 5>;
-> -		mbox-names = "tx", "rx";
-> -	};
-> -};
-> -
-> -&dmsc {
-> -	mboxes= <&secure_proxy_mcu 8>, <&secure_proxy_mcu 6>, <&secure_proxy_mcu 5>;
-> -	mbox-names = "tx", "rx", "notify";
-> -	ti,host-id = <4>;
-> -	ti,secure-host;
-> -};
-> -
-> -&mcu_ringacc {
-> -	ti,sci = <&dm_tifs>;
-> -};
-> -
-> -&mcu_udmap {
-> -	ti,sci = <&dm_tifs>;
-> -};
-> -
-> -&wkup_uart0_pins_default {
-> -	bootph-pre-ram;
-> -};
-> +#include "k3-j721e-r5.dtsi"
->  
->  &mcu_uart0_pins_default {
->  	bootph-pre-ram;
-> diff --git a/arch/arm/dts/k3-j721e-r5.dtsi b/arch/arm/dts/k3-j721e-r5.dtsi
-> new file mode 100644
-> index 00000000000..fd0d921272c
-> --- /dev/null
-> +++ b/arch/arm/dts/k3-j721e-r5.dtsi
-> @@ -0,0 +1,80 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
-> + */
-> +
-> +/ {
-> +	chosen {
-> +		tick-timer = &mcu_timer0;
-> +	};
-> +
-> +	aliases {
-> +		remoteproc0 = &sysctrler;
-> +		remoteproc1 = &a72_0;
-> +	};
-> +
-> +	a72_0: a72@0 {
-> +		compatible = "ti,am654-rproc";
-> +		reg = <0x0 0x00a90000 0x0 0x10>;
-> +		power-domains = <&k3_pds 61 TI_SCI_PD_EXCLUSIVE>,
-> +				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>,
-> +				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
-> +		resets = <&k3_reset 202 0>;
-> +		clocks = <&k3_clks 61 1>;
-> +		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>;
-> +		assigned-clock-rates = <2000000000>, <200000000>;
-> +		ti,sci = <&dmsc>;
-> +		ti,sci-proc-id = <32>;
-> +		ti,sci-host-id = <10>;
-> +		bootph-pre-ram;
-> +	};
-> +
-> +	dm_tifs: dm-tifs {
-> +		compatible = "ti,j721e-dm-sci";
-> +		ti,host-id = <3>;
-> +		ti,secure-host;
-> +		mbox-names = "rx", "tx";
-> +		mboxes= <&secure_proxy_mcu 21>,
-> +			<&secure_proxy_mcu 23>;
-> +		bootph-pre-ram;
-> +	};
-> +};
-> +
-> +&mcu_timer0 {
-> +	status = "okay";
-> +	bootph-pre-ram;
-> +};
-> +
-> +&dmsc {
-> +	mboxes= <&secure_proxy_mcu 8>, <&secure_proxy_mcu 6>, <&secure_proxy_mcu 5>;
-> +	mbox-names = "tx", "rx", "notify";
-> +	ti,host-id = <4>;
-> +	ti,secure-host;
-> +};
-> +
-> +&secure_proxy_mcu {
-> +	bootph-pre-ram;
-> +	/* We require this for boot handshake */
-> +	status = "okay";
-> +};
-> +
-> +&cbass_mcu_wakeup {
-> +	sysctrler: sysctrler {
-> +		bootph-pre-ram;
-> +		compatible = "ti,am654-system-controller";
-> +		mboxes= <&secure_proxy_mcu 4>, <&secure_proxy_mcu 5>;
-> +		mbox-names = "tx", "rx";
-> +	};
-> +};
-> +
-> +&mcu_ringacc {
-> +	ti,sci = <&dm_tifs>;
-> +};
-> +
-> +&mcu_udmap {
-> +	ti,sci = <&dm_tifs>;
-> +};
-> +
-> +&wkup_uart0_pins_default {
-> +	bootph-pre-ram;
-> +};
+I missed this during the review. This should be efi_unload_image(handle)
 
-I think I just noticed that this node is only enabled in R5 dts for
-j721e, though not required for cleanup in this series as we'll be
-porting these tags to kernel anyways but the node is marked with
-bootph-all in -u-boot.dtsi and the pins are only marked bootph-pre-ram.
-Might be good to look at some other tags as well while porting these to
-kernel [0].
+With this fixed
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-Rest LGTM.
-
-Reviewed-by: Manorit Chawdhry <m-chawdhry@ti.com>
-
-[0]: https://lore.kernel.org/linux-arm-kernel/20240507-b4-upstream-bootph-all-v1-0-c6d52651856f@ti.com/
-
-Regards,
-Manorit
-
-> -- 
-> 2.34.1
-> 
+> > +			free(load_options);
+> > +		else
+> > +			log_err("Unloading image failed\n");
+> > +
+> > +		return ret;
+> > +	}
+> > +
+> >  	return do_bootefi_exec(handle, load_options);
+> >  }
+> > --
+> > 2.43.0
+> >
+>
+>
