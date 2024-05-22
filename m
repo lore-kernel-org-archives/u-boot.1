@@ -4,164 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE060C25B79
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 08:39:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FB1EC25B77
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 09:44:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 630A38845C;
-	Wed, 22 May 2024 10:39:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id CE0D887E96;
+	Wed, 22 May 2024 11:44:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ziswiler.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="B5OnkO5q";
+	dkim=pass (2048-bit key; unprotected) header.d=ziswiler.com header.i=marcel@ziswiler.com header.b="dGJE0wSa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67E4F88464; Wed, 22 May 2024 10:39:33 +0200 (CEST)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20716.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e1a::716])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4556D87ED1; Wed, 22 May 2024 11:44:20 +0200 (CEST)
+Received: from mout.perfora.net (mout.perfora.net [74.208.4.196])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C00388307
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 10:39:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 6851387E83
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 11:44:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=a9BaQasw2bBMBAkJyl5I4DS9p8dL2oZxCkz9g9jQxe4JOZUfLX5EBjdpcon+jv87dZKwjy07A8wg0hstzv8mOqfcBj7arxE+v927brXz2uqRKS/+/+xMTaz1FGf6jVpDLmMX5axkZd1S/XeTtIICf21ZD/K33X5SZ/ZSqgomCsEzBpDqvU01HZphuBB6hxcNaWrtcIWUp8CYzWsnKk3ovUr+6jFxVpiT1PKAyIsuAWn4Oid49dIFyRf35kYFMCE6uLKbZXzCOn0WrPCPbhHw/41cFW0Nls/7cgYebwJKYSENMeipFgVJ4mAmcw9H5P+id5w0so4MZQzH6QA9FxF1PA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=w0LZv3c0zFSJZopEW7u5QX08X/cnsVxo82kCLJ8g0VY=;
- b=oQIuoEXY1qidJHNsgekyVPoxv4Xh5sCGTTCGwqxCg8YJWxT5gEejYu+bPT2COs13UpK+uT07yNcBlwOJA4/4hfC7wfifuo3Gqw3HtexTdB36bnVG6gE9fXYR9jM78X6C4h3Ld1iLJPoSd7qhlkoU0tVYmVHFO4zQtqAmkhHadOCts39+a8Wh1EQNz2atRYoi95EQMSaENDwStUaALt19kE892dd40Xgvk26cDu0z4fhaHd07EH7m3Ug+GCMMBWMrpPI+Udt+/rClip0F9LWUNL/jBcXiIeuQ+iazKPWGnZ5XoX2kHlIhu1C6KgxEEpqYJKnDH9u0fWHHL/s8anoUJw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=w0LZv3c0zFSJZopEW7u5QX08X/cnsVxo82kCLJ8g0VY=;
- b=B5OnkO5q1sd3rTjs2rded1q4tAdZzIPg1+j5uLuv+T09oIZ+0AA3nITosnus+3xQtxEHY7n3w4jqB3ths+OaoTRdSIyPCMnFZo/n3kuLZg50v1XIUtrfHvn7IA4j+TP2G7HfcuBI4FM7+Si9L4tVE2ylbBZYFM533o7vyxPdGVc=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from VE1PR04MB6589.eurprd04.prod.outlook.com (2603:10a6:803:128::25)
- by PAXPR04MB9202.eurprd04.prod.outlook.com (2603:10a6:102:221::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7587.36; Wed, 22 May
- 2024 08:39:27 +0000
-Received: from VE1PR04MB6589.eurprd04.prod.outlook.com
- ([fe80::8476:1b2f:f236:db31]) by VE1PR04MB6589.eurprd04.prod.outlook.com
- ([fe80::8476:1b2f:f236:db31%6]) with mapi id 15.20.7587.030; Wed, 22 May 2024
- 08:39:27 +0000
-Message-ID: <c9a78f7a-5b63-4d37-93d4-2c6bd8db0076@cherry.de>
-Date: Wed, 22 May 2024 10:39:25 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/10] rockchip: px30: migrate to common bss and stack
- addresses + UART fixes for evb-px30
-To: Tom Rini <trini@konsulko.com>, Quentin Schulz <foss+uboot@0leil.net>
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com>,
- Heiko Stuebner <heiko.stuebner@cherry.de>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Suniel Mahesh <sunil@amarulasolutions.com>,
- Klaus Goger <klaus.goger@theobroma-systems.com>, jonas@kwiboo.se,
- u-boot@lists.denx.de
-References: <20240521-px30-2024-07-rc-v1-0-62109c84d44f@cherry.de>
- <20240521180444.GC2568172@bill-the-cat>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20240521180444.GC2568172@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR0102CA0101.eurprd01.prod.exchangelabs.com
- (2603:10a6:803:15::42) To VE1PR04MB6589.eurprd04.prod.outlook.com
- (2603:10a6:803:128::25)
+ dmarc=none (p=none dis=none) header.from=ziswiler.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marcel@ziswiler.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziswiler.com;
+ s=s1-ionos; t=1716371052; x=1716975852; i=marcel@ziswiler.com;
+ bh=G/ZK/Yazsd27hd+HEzJyQW4zl9Odp1DSFMRnT26cuaA=;
+ h=X-UI-Sender-Class:Message-ID:Subject:From:To:Cc:Date:In-Reply-To:
+ References:Content-Type:Content-Transfer-Encoding:MIME-Version:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=dGJE0wSaJSOHf/7xy7pB1CUYheTb3/NrsPbndC2sMSdtZ5ONS5psUAPJE6hamclp
+ 7bkaXb9lraz4W3+md1OJ1xPHj0dSqRMW43hE9CSYenumHsdJ6upim3MIykgrP8J3l
+ wNW666uoKrB6pMoSmu+reAvH/HRYweFtan7K+TbDFf5z3Lx6whz5P5Ci9gfGz90pu
+ MvpxWwaUYFhnlsY7O4z9BNVtAma88luV0IYP+zllqlopz1R8s9HPoYWN+25KKK41F
+ 1z7eINBmktfMwPtwNoasmvkReEGV7OKOIroRSpYAf9+ol7raQouqGwpunjMj8Pz9N
+ r2/z+pFX/Ln6WZdsQQ==
+X-UI-Sender-Class: 55c96926-9e95-11ee-ae09-1f7a4046a0f6
+Received: from [10.10.1.107] ([178.39.203.75]) by mrelay.perfora.net
+ (mreueus004 [74.208.5.2]) with ESMTPSA (Nemesis) id 1MILw8-1sLlCS1cyS-00EL3m; 
+ Wed, 22 May 2024 11:44:12 +0200
+Message-ID: <c2a6c91f87286f815289cccb1b92f9288d61728e.camel@ziswiler.com>
+Subject: Re: [PATCH] board: toradex: change maintainer to Francesco
+From: Marcel Ziswiler <marcel@ziswiler.com>
+To: Francesco Dolcini <francesco@dolcini.it>, Francesco Dolcini
+ <francesco.dolcini@toradex.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Date: Wed, 22 May 2024 11:44:07 +0200
+In-Reply-To: <20240522082848.21536-1-francesco@dolcini.it>
+References: <20240522082848.21536-1-francesco@dolcini.it>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.52.1 (by Flathub.org) 
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: VE1PR04MB6589:EE_|PAXPR04MB9202:EE_
-X-MS-Office365-Filtering-Correlation-Id: 44849109-e030-4176-a82a-08dc7a3ab0e9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230031|1800799015|376005|366007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?VHkzV2RTNmNPb1l0SENNSHJxZnh6WDNCY3JoOVFEckJqNEZKUnoxU1ZVS3FJ?=
- =?utf-8?B?bTBZVHVSc0xXSXdsT1FyZnlXTHdoR0JZb2t3Q1JXaGJrOWxkaW1jTEpzbDNx?=
- =?utf-8?B?YkZ2K3U0U0xWVldxMUxQR3hGdHp3NmFrRFdXbzF5U0dUYUQydTEzZjUxWFpl?=
- =?utf-8?B?SHlZMzVvUnEwQ2ZLR0pnRER2ZXVSdGtKaWNKTzlTZHBObTdBbllsakNFVjJx?=
- =?utf-8?B?OWRxb3lDdVJ6eVU4U2kxNnlBd0ZXNGFhdVlWYVZndDd2U2pTR3ExTFlXNEwz?=
- =?utf-8?B?NDJRNndxcWVucSswRFV3Z1ZJcDVPNzY1OFBMeUt4ejRhVjFtOCsvOUUrcE96?=
- =?utf-8?B?QmlqODZOd3V1QUZlS2l4aEd5Mkh1MnpRSkQwVk83Nlg4a1ZGNVd1eHhQa0s4?=
- =?utf-8?B?WWlGSWtPMkZTSDFKUnlOZE5BN0lCNDl1bGU4NTJ6K2w4Uk5PYzYyRTR5ajYw?=
- =?utf-8?B?SHA0SGVkQ1JBWVRuL1FocGpSdUNuK0ZZVGZvdHlXMmROcHZ0anhwT3ZGR1RZ?=
- =?utf-8?B?c3RoZzUwMkZTVFpWWUlLcCt2RWdqdlVhdWk5eGxpdmNtcXBWakVmYWtQMmJC?=
- =?utf-8?B?V2w3Rk1GSklMSWNxYWcvQWd2UlBjTGhmZ0NidUNrcE1DZ2grUmhkRjBXWGov?=
- =?utf-8?B?eWtlUE9qRDF0V1MzNSs2M0JkeFZWYUljT0ZUSVVlZGVVV3RoM1FCYVExU3M1?=
- =?utf-8?B?TjRrYkw3ZjFrTkVad29IS3dGTCtsSktaVHBwZUZzQWVYd201cG0zVldIaFda?=
- =?utf-8?B?ZFV1anlCZXB1U0d1WUtudkVNOU9tQ2pwck9NRmhUcGhtdzdvZk8zOEM5ck54?=
- =?utf-8?B?b2JEc0NJQ0hJRFZvVG9TVXNlRkd3QytPSHFGZGJrSlo0Y1NmTTFFajhxWDQ1?=
- =?utf-8?B?MnNwWXh5dzhIeE9JemZwZ01LbHJKdEs5WVlQTHhCbHJHUVpVSnNITGpGeGli?=
- =?utf-8?B?aGVHZ3hPRmhBNFh1MjhBZmd6M1I3MlIwd1dPa3puc29qeDRTZXFsVDV6QTZm?=
- =?utf-8?B?a0x6NXpaSVg2SHZlUnhyNnROaHdMYzJ6NnNwQytaQUprYWtmM2ZUN2d5cjFm?=
- =?utf-8?B?WFJ1OXMyQTJwUkg3eU0yK29hYkRtS0VFcjRLT3pSQTF5MCtzamhERG5hb3Q4?=
- =?utf-8?B?d0N2STdER0krUjkzYUJoSEVkK2JoL3ZqVFVCTmZvbnVqejYvYkhMNUJBTGdI?=
- =?utf-8?B?RDY1TU1HU3o1TGd6VUVEdDVHa2Zhb0dQZ2dvOXVIcW5FOUhkTDY2cnpTQ3V6?=
- =?utf-8?B?WnFLVnpSU3U0OFVlQzRVNDZXdUFzekFQbXZ5a2lQcCt1dG5XbkhNekJZR3RE?=
- =?utf-8?B?MngzWVhReTArOStBd0lHbmZxcEVKeS9wNktFdHRKVm04cFJUcmI4dnVTNkxK?=
- =?utf-8?B?RVdpVVdwSXB2YkVuSmU1aDdIMWg3dWtPYUVabFNBbUtvR3BDeXdCeGh0dWNu?=
- =?utf-8?B?U0dEOFZsZ1NmQjgvdmNVRXFDNGtpbGJSUzIxN3VLcmhRdnlnRlRvUE5kMTF6?=
- =?utf-8?B?VGhzK3dOVGVYOERKMVNiOXhVV0ZEWGI3WmlqaStXRVZTQys1c0lMTmxhY0xH?=
- =?utf-8?B?cFZFMjVzbTl1QWwrZWV6WkRsZG14b1lqakppcVlSQkpkaW4wanR3STRnZDNC?=
- =?utf-8?B?Y2hCSFpjQTZRbG9wTnU5VVh0ejZ4QzBLZ09RMVFSaTlRRkJVc2V3STVqSFJO?=
- =?utf-8?B?VWQ5cHRXOVlaOW12VGlyNDRPUERSSnBsMVZjRXBDSHpnSkNPM2hzTnl3PT0=?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:VE1PR04MB6589.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(1800799015)(376005)(366007); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?b1BhNWNSTyt5a2tuMndtRzdTblhpeGUxWG1pM0R1YnJobElldUFjRS8vbS8y?=
- =?utf-8?B?RWJyRnRnRmloQzhNMUwyZm1Jb0dRdkw4Nmc3R0N0TTMvSWk5bjZKcThTelV2?=
- =?utf-8?B?d1J6VFo4Q3p1cm93Tm03aEU0MDE1ZGJ5MWV5N3dITnVWV3Znb0g0RnBKbXUx?=
- =?utf-8?B?RWI3cjFERC9ESi9tZncwWm9aODlTK0hubkNVQnduYWdJWHV0dTBNcGJ3TmR0?=
- =?utf-8?B?NlY3VktQK1RvYjMwT085ZHVaaUVwUWdIVjFjRWhlRms0YzBwU1BkOHU1SHdj?=
- =?utf-8?B?UlZBU0FOeGFncjY5eGVCNjJnYURDZmhJeitkUVpZZmIxK2tkNk40WWhrd2dl?=
- =?utf-8?B?MkxTTk5Lb3J6QWZmbHdJeDhrWEwxL00vSmk0OWQyc01EQ0pJSlRyWDEyNjVl?=
- =?utf-8?B?bnlmdFd3VFV4d3NFM1dTd1pyWTdBeVZPR25kVTJFTjhnY3MzUXRWVTlYc015?=
- =?utf-8?B?MkcyN0Z3OXBWTmlIQkxNSGJaVCszUStESTVicUg2UFlwcE1SaU9FSHlOVHZ3?=
- =?utf-8?B?RkowSHpUVUxiekJzcHMzTHlmRThiSC9SUlo4eHVTRWhpRmVRVWZJVUpqMDc3?=
- =?utf-8?B?UGlEWjNWL1J3KzJIOGJZM2RCdXpiUzZUNEJyMXhseEplYVBFZysyN25vWVhC?=
- =?utf-8?B?M1k0Wkx2SmgzVHNGY0tZRCsyWjVqeGJTaHZmUEhsdjZNS3pjSkhrc1lIZVFO?=
- =?utf-8?B?emg2SXVobklsZVV4WWxKSVNPZHhZRGdzckRuNWxmSklRTjAwKy9sZXlqYXVV?=
- =?utf-8?B?cklqZ3RzWVlWb1VldHlpN2JDVHJOeG5vUXJBdHpydmYra1pJZi9wU1gwUk9y?=
- =?utf-8?B?eFpqYXk5cUdUd2w5RElYWTlNekxvWlA3aGFBVGlWQ2VJUi9UTXI5Mm1XckF0?=
- =?utf-8?B?c3kyek5DKytnSGdZM05NKytyVEppcXJDOEhUaERYZE52QWx5MThUMDhyZWQ1?=
- =?utf-8?B?a25ubUR3bWdkZFR2S0RBa3ZRa0d0M1B6WEgwZit6eHNJdUUyV01CWW1sVUlZ?=
- =?utf-8?B?WkdzWGNHT1lrQVB0cGRZREZmUXh5KzhqVnVjNktHS3hLbEtvLzVydWtJTXlK?=
- =?utf-8?B?Z2RjVFVLb3BCREt5Um1VcFl4bjJxUTNwdlZ1Nlg5UVpnUWYyS2RjZXRzOWh5?=
- =?utf-8?B?RStuaTZjOTJHOEl6N0szK3lUOHF3cHJSbXZRc255S0hqamd5Zlg5a3Z2UEE3?=
- =?utf-8?B?ZnNTOERFSFZ1QUl3bWFVM1M4NmluQ3BmOTZuanN3YzdaY2VINmFmSFhRcTdV?=
- =?utf-8?B?UVRFeHBaZEtNdWZ4aUIxR0lOd0tXMEtMTllUSUhnNXF2STI2S1Z1amdKcXhW?=
- =?utf-8?B?MjUrRzRsRk04c0MyRG5zbGwxM0RNVVI4Skgwa2krY01mYkRNVVZHSGtKVFgx?=
- =?utf-8?B?VVpJRm9sczRuZWFOdm4rcEhUZU5CRFBPeDN5ZDNwVWRDWEFXVnhpdGVWWVh6?=
- =?utf-8?B?WnhqSHlGQ0FzR3JWdzRMRW4xRHU4T3VtVWcvVnRCMFBlNEhWb1dVTTBYMnUy?=
- =?utf-8?B?a2tkczhxNVFaSjJVTUpSeFZFT1FEMzQzTzFRSDlZMENGMVV4dzh0MU9LaldY?=
- =?utf-8?B?VnJpcGhETFNBNHcyNGk0bVFQRTJ0QzZlZzNvZW84S2FrRDFEZCtlWU1JTkNW?=
- =?utf-8?B?ZVhYc2pwY1F1eDdJOHBXVGRKWko0ZkZUK3QvdEs2K0hKRE41L0FyZ2JWeTBx?=
- =?utf-8?B?TUZWWFFodUVVUnE0VDcwZHNuNE82aVFLUThaMnRGWVJkelRjYWxhSlZNMTB4?=
- =?utf-8?B?aDJIdU44c3pldjZYeGJyeXowdzZ2eExyMyswREdTY2w2STNNUXhBbEdGbnFj?=
- =?utf-8?B?UkFXSWlVcDVleno1WG9DSDhKRVI4SFI1OWdZRjF1WHZNZjdaYjJsc293MjA1?=
- =?utf-8?B?OERaYzljejJ3dVk1Qm51dVVkNTZRV0lnUi9aZTk4c3NBazZQS2RHWEFlV2dW?=
- =?utf-8?B?RnA3NHd6Z3FIMlpqSllDRS9MdGF5NTI2SGsvZFlnbVBQYmJaWTBhRzAzWGFL?=
- =?utf-8?B?SGwzQXZOUllucC8zdTdTdmN3RUtCckE2SHlxRVpOelp3TjdNTmU4OWhXbjZa?=
- =?utf-8?B?Z0VGbjM3VytuVjF0amRpanBLUURQNzFCdDBQbjBUOGhldm9ob0NyN3oxWWxu?=
- =?utf-8?B?NTNCYVlQWlJ3QzViZjk3c1BkSEdQUDRjN0t4UmtEQWVQUkNrVHJidHMrRk1a?=
- =?utf-8?Q?LDtrmKGHhvSyFD39IUNgN7I=3D?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 44849109-e030-4176-a82a-08dc7a3ab0e9
-X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6589.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 May 2024 08:39:27.5973 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: xHg5uJ/PxrHZYmS7KQ+fMw91XyyAJRaVAW5QGx2dzjUuGDYeGWNBBY5LjHOuOznKKj429A4bZe9okABY+7lHFguYcz2qJTm5Jr39+XRjw/8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB9202
+X-Provags-ID: V03:K1:DhMgnmUwXgu6ksZmRjRfqETjOpgozKbxGGvQA118n7VS8Yuaibf
+ QHnkvPIr989rIeGeXXL0Txf4fHzPGJjYHFDYjq3gZEZHdYeOULA3sF5XbrXn8elYK1B4Xa4
+ yC4Um0i1XPIiloibvI1TPfPOTDl0CBU2ZqNw5zJ99eyB7cQOUXSwKzKaJDmOBOoljlFVBr9
+ YnjDyJQFj/QM6P/nnlcGA==
+UI-OutboundReport: notjunk:1;M01:P0:z9dIhnLjKkc=;nVJqX//f/0uPH/ZeR+L1Xs8gnLh
+ i+vh0yye1EapBA9ijbtbuDb8LB23bJYYcOGiucpWu1jwdbypeLHU7ZDMmMh15zMmZg7y23JNR
+ Uk3J9bVa2DoWTSpVB8Ck9rgRej0NfhmnIPsXXaSdiZwRPesbsSFbaHNqVRpjytQmS7xQvkLrC
+ Lw+sKtY89s8Sfc5Xs3UDLyPB4BOtOcji8+9Bp3slfH4q8f/JFDbo70HcrFJGS+i73FjcSZ/5x
+ gSl+PqJRCU8uS4ARg/StDRl9JyF/SpTwqV9UelCjqtFY2B2sEUkIupKsKP93aTdaVUgWNe4yc
+ ZI6s1sxWucJP4rnXfZHlU7P8k2jzf7uml/wgPyRTJRDFtWkvaRuOVwX4NzL7iX7ZWJWIbbOIt
+ qwUDS/wum1lzysAdbT1TJEHBa7QHARFQ3HckteYBTzIJjWVRQTbBvGgvSUr0ujw0hGZm4Yvt5
+ AGCOcnGaCIm1KexSjGhFoYLg4U4k1VyStISFTsJcyTtuJK8zOaSsgFwNi7NFMDzrxnNy3oba3
+ 1Xuj/xVqStd2JsJ75esf8y38gALdk+eYOvv9cBg90oSSFvV0gJ/x3zjN12pW9Z2H5I1O+018s
+ wWfoXq9MsRMisYAP1s3Dde8zdCms/AiCd+cFPV/NldPpsDRETfb9TfHJ8IZoBiVXdJRiR8JR4
+ oQg3Kgy6Fq7KRb0BfNuOx9XIiMU7XgvHL5OmngSIFyQXR/kQ87M2Zr4Aqzo5R6c7+oUJIsTq6
+ FJBJAavAszb/OKv2bAOBuPLw4ycZyMwODs5hdHZ2V8o3kUNz2152YE=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -178,72 +87,212 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Wed, 2024-05-22 at 10:28 +0200, Francesco Dolcini wrote:
+> From: Francesco Dolcini <francesco.dolcini@toradex.com>
+>=20
+> Marcel is leaving Toradex and the email will start bouncing in a few
+> weeks, move maintainership to myself.
+>=20
+> Cc: Marcel Ziswiler <marcel@ziswiler.com>
+> Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 
-On 5/21/24 8:04 PM, Tom Rini wrote:
-> On Tue, May 21, 2024 at 07:39:53PM +0200, Quentin Schulz wrote:
->> PX30 Ringneck ran out of memory in the allocation pool of U-Boot proper
->> pre-reloc. Something needed to be done. Jonas did migrate a few SoCs
->> already to this common bss+stack addresses so it made sense to follow
->> the same route for one additional SoC: PX30.
->>
->> While at it, also fix a few issues related to UART on the PX30 Mini EVB
->> I could test.
->>
->> Boot (to U-Boot CLI) tested on PX30 Ringneck and PX30 Mini-EVB.
->>
->> Thanks to Jonas for hinting where to look at.
->>
->> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
->> ---
->> Quentin Schulz (10):
->>        rockchip: px30: default TPL_SYS_MALLOC_F_LEN to 0x600 on PX30 Kconfig level
->>        rockchip: Use common bss and stack addresses on PX30
->>        rockchip: ringneck_px30: Use common bss and stack addresses
->>        rockchip: evb-px30: Use common bss and stack addresses
->>        rockchip: firefly-px30: Use common bss and stack addresses
->>        rockchip: odroid-go2: Use common bss and stack addresses
->>        rockchip: px30-core-*: Use common bss and stack addresses
->>        rockchip: px30: make UART pinmux accessible to TPL/SPL DTB
->>        rockchip: evb-px30: do not remove pinctrl nodes from SPL DTB
->>        rockchip: evb-px30: make UART5 the debug UART
->>
->>   arch/arm/dts/px30-u-boot.dtsi                 | 16 ++++++++++++++++
->>   arch/arm/mach-rockchip/px30/Kconfig           |  8 +++++++-
->>   configs/evb-px30_defconfig                    | 23 +++++------------------
->>   configs/firefly-px30_defconfig                | 19 +++----------------
->>   configs/odroid-go2_defconfig                  | 19 +++----------------
->>   configs/px30-core-ctouch2-of10-px30_defconfig | 19 +++----------------
->>   configs/px30-core-ctouch2-px30_defconfig      | 19 +++----------------
->>   configs/px30-core-edimm2.2-px30_defconfig     | 19 +++----------------
->>   configs/ringneck-px30_defconfig               | 19 +++----------------
->>   9 files changed, 46 insertions(+), 115 deletions(-)
->> ---
->> base-commit: a7f0154c412859323396111dd0c09dbafbc153cb
->> change-id: 20240521-px30-2024-07-rc-7136f6241d29
-> 
-> As I assume we want to fix the platforms for v2024.07, is this the level
-> of config changes everyone is comfortable with on the platforms? Or
-> should we just go with the minimum for release and the rest to -next?
-> 
+Acked-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
 
-I can tell you that Ringneck doesn't work anymore on v2024.07-rc, but 
-the PX30 Mini EVB was still reaching U-Boot CLI without the changes. I 
-don't know about the other boards.
-
-So I could split this into two series, one for master, one for next.
-
-I could suggest: patch 1 to 3 in master, the rest in next. Patch 1 is 
-just moving things around. Patch 2 is doing nothing if nobody uses 
-ROCKCHIP_COMMON_STACK_ADDR and SPL_SHARES_INIT_SP_ADDR (which is the 
-case for px30 boards). Patch 3 is for fixing Ringneck, which I know is 
-broken.
-
-Heiko having access to the Odroid Go2, maybe he could test without my 
-patches and see if it reaches the CLI to know if we should pull it in 
-for master as well.
-
-Does this make sense?
-
-Thanks,
-Quentin
+> ---
+> =C2=A0board/toradex/apalis-imx8/MAINTAINERS=C2=A0=C2=A0=C2=A0=C2=A0 | 2 +=
+-
+> =C2=A0board/toradex/apalis-tk1/MAINTAINERS=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
+| 2 +-
+> =C2=A0board/toradex/apalis_imx6/MAINTAINERS=C2=A0=C2=A0=C2=A0=C2=A0 | 2 +=
+-
+> =C2=A0board/toradex/apalis_t30/MAINTAINERS=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
+| 2 +-
+> =C2=A0board/toradex/colibri-imx6ull/MAINTAINERS | 2 +-
+> =C2=A0board/toradex/colibri-imx8x/MAINTAINERS=C2=A0=C2=A0 | 2 +-
+> =C2=A0board/toradex/colibri_imx6/MAINTAINERS=C2=A0=C2=A0=C2=A0 | 2 +-
+> =C2=A0board/toradex/colibri_imx7/MAINTAINERS=C2=A0=C2=A0=C2=A0 | 2 +-
+> =C2=A0board/toradex/colibri_t20/MAINTAINERS=C2=A0=C2=A0=C2=A0=C2=A0 | 2 +=
+-
+> =C2=A0board/toradex/colibri_t30/MAINTAINERS=C2=A0=C2=A0=C2=A0=C2=A0 | 2 +=
+-
+> =C2=A0board/toradex/colibri_vf/MAINTAINERS=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
+| 2 +-
+> =C2=A0board/toradex/verdin-am62/MAINTAINERS=C2=A0=C2=A0=C2=A0=C2=A0 | 2 +=
+-
+> =C2=A0board/toradex/verdin-imx8mm/MAINTAINERS=C2=A0=C2=A0 | 2 +-
+> =C2=A0board/toradex/verdin-imx8mp/MAINTAINERS=C2=A0=C2=A0 | 2 +-
+> =C2=A014 files changed, 14 insertions(+), 14 deletions(-)
+>=20
+> diff --git a/board/toradex/apalis-imx8/MAINTAINERS b/board/toradex/apalis=
+-imx8/MAINTAINERS
+> index 198399c879ac..761034a516aa 100644
+> --- a/board/toradex/apalis-imx8/MAINTAINERS
+> +++ b/board/toradex/apalis-imx8/MAINTAINERS
+> @@ -1,5 +1,5 @@
+> =C2=A0Apalis iMX8
+> -M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> +M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+> =C2=A0W:	http://developer.toradex.com/software/linux/linux-software
+> =C2=A0S:	Maintained
+> =C2=A0F:	arch/arm/dts/fsl-imx8qm-apalis.dts
+> diff --git a/board/toradex/apalis-tk1/MAINTAINERS b/board/toradex/apalis-=
+tk1/MAINTAINERS
+> index e2c6f63dcc7d..393c8dcf8016 100644
+> --- a/board/toradex/apalis-tk1/MAINTAINERS
+> +++ b/board/toradex/apalis-tk1/MAINTAINERS
+> @@ -1,5 +1,5 @@
+> =C2=A0Apalis TK1
+> -M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> +M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+> =C2=A0S:	Maintained
+> =C2=A0F:	board/toradex/apalis-tk1/
+> =C2=A0F:	board/toradex/common/
+> diff --git a/board/toradex/apalis_imx6/MAINTAINERS b/board/toradex/apalis=
+_imx6/MAINTAINERS
+> index 0b2907bbe709..d84527c06783 100644
+> --- a/board/toradex/apalis_imx6/MAINTAINERS
+> +++ b/board/toradex/apalis_imx6/MAINTAINERS
+> @@ -1,5 +1,5 @@
+> =C2=A0Apalis iMX6
+> -M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> +M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+> =C2=A0W:	http://developer.toradex.com/software/linux/linux-software
+> =C2=A0W:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 https://www.toradex.com/community
+> =C2=A0S:	Maintained
+> diff --git a/board/toradex/apalis_t30/MAINTAINERS b/board/toradex/apalis_=
+t30/MAINTAINERS
+> index 097db7deb08f..368decf66744 100644
+> --- a/board/toradex/apalis_t30/MAINTAINERS
+> +++ b/board/toradex/apalis_t30/MAINTAINERS
+> @@ -1,5 +1,5 @@
+> =C2=A0Apalis T30
+> -M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> +M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+> =C2=A0S:	Maintained
+> =C2=A0F:	board/toradex/apalis_t30/
+> =C2=A0F:	board/toradex/common/
+> diff --git a/board/toradex/colibri-imx6ull/MAINTAINERS b/board/toradex/co=
+libri-imx6ull/MAINTAINERS
+> index ee6fe6c13ead..6c93e35cc65f 100644
+> --- a/board/toradex/colibri-imx6ull/MAINTAINERS
+> +++ b/board/toradex/colibri-imx6ull/MAINTAINERS
+> @@ -1,5 +1,5 @@
+> =C2=A0Colibri iMX6ULL
+> -M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> +M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+> =C2=A0W:	http://developer.toradex.com/software/linux/linux-software
+> =C2=A0W:	https://www.toradex.com/community
+> =C2=A0S:	Maintained
+> diff --git a/board/toradex/colibri-imx8x/MAINTAINERS b/board/toradex/coli=
+bri-imx8x/MAINTAINERS
+> index 8c9bf1f63f43..938c2ca0ca01 100644
+> --- a/board/toradex/colibri-imx8x/MAINTAINERS
+> +++ b/board/toradex/colibri-imx8x/MAINTAINERS
+> @@ -1,5 +1,5 @@
+> =C2=A0Colibri iMX8X
+> -M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> +M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+> =C2=A0W:	http://developer.toradex.com/software/linux/linux-software
+> =C2=A0S:	Maintained
+> =C2=A0F:	arch/arm/dts/fsl-imx8x-colibri.dts
+> diff --git a/board/toradex/colibri_imx6/MAINTAINERS b/board/toradex/colib=
+ri_imx6/MAINTAINERS
+> index 25d3a06a8523..c1067502c082 100644
+> --- a/board/toradex/colibri_imx6/MAINTAINERS
+> +++ b/board/toradex/colibri_imx6/MAINTAINERS
+> @@ -1,5 +1,5 @@
+> =C2=A0Colibri iMX6
+> -M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> +M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+> =C2=A0W:	http://developer.toradex.com/software/linux/linux-software
+> =C2=A0W:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 https://www.toradex.com/community
+> =C2=A0S:	Maintained
+> diff --git a/board/toradex/colibri_imx7/MAINTAINERS b/board/toradex/colib=
+ri_imx7/MAINTAINERS
+> index e4583d5a86a2..80770cc71a96 100644
+> --- a/board/toradex/colibri_imx7/MAINTAINERS
+> +++ b/board/toradex/colibri_imx7/MAINTAINERS
+> @@ -1,5 +1,5 @@
+> =C2=A0Colibri iMX7
+> -M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> +M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+> =C2=A0W:	http://developer.toradex.com/software/linux/linux-software
+> =C2=A0W:	https://www.toradex.com/community
+> =C2=A0S:	Maintained
+> diff --git a/board/toradex/colibri_t20/MAINTAINERS b/board/toradex/colibr=
+i_t20/MAINTAINERS
+> index d0c5b1133313..58842434024f 100644
+> --- a/board/toradex/colibri_t20/MAINTAINERS
+> +++ b/board/toradex/colibri_t20/MAINTAINERS
+> @@ -1,5 +1,5 @@
+> =C2=A0COLIBRI_T20
+> -M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> +M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+> =C2=A0S:	Maintained
+> =C2=A0F:	board/toradex/colibri_t20/
+> =C2=A0F:	board/toradex/common/
+> diff --git a/board/toradex/colibri_t30/MAINTAINERS b/board/toradex/colibr=
+i_t30/MAINTAINERS
+> index 006a0e55f113..73859fd25c2e 100644
+> --- a/board/toradex/colibri_t30/MAINTAINERS
+> +++ b/board/toradex/colibri_t30/MAINTAINERS
+> @@ -1,5 +1,5 @@
+> =C2=A0Colibri T30
+> -M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> +M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+> =C2=A0S:	Maintained
+> =C2=A0F:	board/toradex/colibri_t30/
+> =C2=A0F:	board/toradex/common/
+> diff --git a/board/toradex/colibri_vf/MAINTAINERS b/board/toradex/colibri=
+_vf/MAINTAINERS
+> index 2e1a74c2db75..a41bd165a7ca 100644
+> --- a/board/toradex/colibri_vf/MAINTAINERS
+> +++ b/board/toradex/colibri_vf/MAINTAINERS
+> @@ -1,5 +1,5 @@
+> =C2=A0Colibri VFxx
+> -M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> +M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+> =C2=A0W:	http://developer.toradex.com/software/linux/linux-software
+> =C2=A0W:	https://www.toradex.com/community
+> =C2=A0S:	Maintained
+> diff --git a/board/toradex/verdin-am62/MAINTAINERS b/board/toradex/verdin=
+-am62/MAINTAINERS
+> index 3e30d1d51121..3f69ea88c00e 100644
+> --- a/board/toradex/verdin-am62/MAINTAINERS
+> +++ b/board/toradex/verdin-am62/MAINTAINERS
+> @@ -8,6 +8,6 @@ F:	configs/verdin-am62_a53_defconfig
+> =C2=A0F:	configs/verdin-am62_r5_defconfig
+> =C2=A0F:	doc/board/toradex/verdin-am62.rst
+> =C2=A0F:	include/configs/verdin-am62.h
+> -M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> +M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+> =C2=A0S:	Maintained
+> =C2=A0W:	https://www.toradex.com/computer-on-modules/verdin-arm-family/ti=
+-am-62
+> diff --git a/board/toradex/verdin-imx8mm/MAINTAINERS b/board/toradex/verd=
+in-imx8mm/MAINTAINERS
+> index d567f0e1097d..0d58a73b9303 100644
+> --- a/board/toradex/verdin-imx8mm/MAINTAINERS
+> +++ b/board/toradex/verdin-imx8mm/MAINTAINERS
+> @@ -1,5 +1,5 @@
+> =C2=A0Verdin iMX8M Mini
+> -M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> +M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+> =C2=A0W:	https://www.toradex.com/computer-on-modules/verdin-arm-family/nx=
+p-imx-8m-mini
+> =C2=A0S:	Maintained
+> =C2=A0F:	arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi
+> diff --git a/board/toradex/verdin-imx8mp/MAINTAINERS b/board/toradex/verd=
+in-imx8mp/MAINTAINERS
+> index 9fe76d8e42f5..a68344885395 100644
+> --- a/board/toradex/verdin-imx8mp/MAINTAINERS
+> +++ b/board/toradex/verdin-imx8mp/MAINTAINERS
+> @@ -5,6 +5,6 @@ F:	board/toradex/common/
+> =C2=A0F:	configs/verdin-imx8mp_defconfig
+> =C2=A0F:	doc/board/toradex/verdin-imx8mp.rst
+> =C2=A0F:	include/configs/verdin-imx8mp.h
+> -M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> +M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+> =C2=A0S:	Maintained
+> =C2=A0W:	https://www.toradex.com/computer-on-modules/verdin-arm-family/nx=
+p-imx-8m-plus
