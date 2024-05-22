@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35432C25B77
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 11:37:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42FC1C25B7C
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 11:38:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8969A8882E;
-	Wed, 22 May 2024 13:37:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DAD0F88459;
+	Wed, 22 May 2024 13:37:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="LP5+Wh13";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Joxf9pIC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 901CB8882E; Wed, 22 May 2024 13:37:38 +0200 (CEST)
+ id 9E95C88831; Wed, 22 May 2024 13:37:39 +0200 (CEST)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 032DD8811D
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 13:37:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0748A8845C
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 13:37:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-choudhary@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44MBbU4p101433;
- Wed, 22 May 2024 06:37:30 -0500
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44MBbVYg101438;
+ Wed, 22 May 2024 06:37:31 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1716377850;
- bh=plGMdfHbCkvK/7b7g54vg/sPcDgoprYw4O4p8UR9TW4=;
+ s=ti-com-17Q1; t=1716377851;
+ bh=BDXtZonSP4XFIdaaXlp7qFakPRoccapinQr2nb/Bo2I=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=LP5+Wh13QaXax1dIhrp02RAYnapHeSeplp2rBsIV4TwSf1pzyiJRmnhxIc7Z9jYGv
- KyFMjRRpvrPVKIZuOJxzYbZpJOZgFWDljGMcQz2EanMSuX7qsibSkcIxxacgurmYpe
- 7GG/5jqIkO2qI0yUeGkcfhBD3uVGkA4DUvX0j5t0=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44MBbUf2007750
+ b=Joxf9pICo5gd+FLlmRL8+jkQSSrQ2+mwHIqS7Uso3LIKN0VtnAFlUMXTxQKxkZNcI
+ hNv9NfCJjVzv0WhE4+0qw7+PJZeTSvMfHSJQx1pRzdbwX3IfrXCS0qnUDWUUV4ggds
+ zTf4IehIqBDFIquoMAmyDvewppK/AMi5ugKMCE58=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44MBbVUP064626
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 22 May 2024 06:37:30 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 22 May 2024 06:37:31 -0500
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 22
- May 2024 06:37:30 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ May 2024 06:37:31 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 22 May 2024 06:37:30 -0500
+ Frontend Transport; Wed, 22 May 2024 06:37:31 -0500
 Received: from localhost (jayesh-hp-probook-440-g8-notebook-pc.dhcp.ti.com
  [172.24.227.6])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44MBbTZR078418;
- Wed, 22 May 2024 06:37:29 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44MBbUjK082035;
+ Wed, 22 May 2024 06:37:31 -0500
 From: Jayesh Choudhary <j-choudhary@ti.com>
 To: <trini@konsulko.com>, <u-boot@lists.denx.de>, <u-kumar1@ti.com>,
  <j-choudhary@ti.com>
@@ -59,10 +59,9 @@ CC: <a-bhatia1@ti.com>, <nm@ti.com>, <n-francis@ti.com>,
  <d.haller@phytec.de>, <hnagalla@ti.com>, <bb@ti.com>,
  <seanga2@gmail.com>, <sjg@chromium.org>, <clamor95@gmail.com>,
  <martyn.welch@collabora.com>, <m-chawdhry@ti.com>, <a-limaye@ti.com>
-Subject: [PATCH 1/7] arm: mach-k3: am62a_qos: Move common bit MACROS to k3_qos
- header file
-Date: Wed, 22 May 2024 17:07:20 +0530
-Message-ID: <20240522113726.302908-2-j-choudhary@ti.com>
+Subject: [PATCH 2/7] arm: mach-k3: j721e: Enable QoS for DSS
+Date: Wed, 22 May 2024 17:07:21 +0530
+Message-ID: <20240522113726.302908-3-j-choudhary@ti.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240522113726.302908-1-j-choudhary@ti.com>
 References: <20240522113726.302908-1-j-choudhary@ti.com>
@@ -86,186 +85,326 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-QoS bit mapping are common across all K3 SoCs so move those defines
-to common header file (k3_qos.h).
-This ensures that we do not define these for each SoC.
+Enable Quality of Service (QoS) blocks for Display SubSystem (DSS), by
+servicing the DSS - DDR traffic from the Real-Time (RT) queue. This is
+done by setting the DSS DMA orderID to greater than 7.
+ATYPE 3 is selected so that the traffic takes non-coherent path and does
+not have a conflict with coherent traffic from C7x (deep-learning
+applications).
+Before setting up the QoS, the ORDERID needs to be mapped to VBUSM sources
+using setup_navss_nb() function call that sets the threadmap for NBSS
+registers. (Section 10.2.10.1.2 "NB Parameters" in TRM[0])
+
+Section 3.3.2 "Quality of Service (QoS)" in the TRM[0] provide more
+details.
+
+[0]: https://www.ti.com/lit/zip/spruil1
 
 Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
 ---
- arch/arm/mach-k3/include/mach/k3-qos.h | 74 ++++++++++++++++++++++++++
- arch/arm/mach-k3/r5/am62ax/am62a_qos.h | 74 --------------------------
- 2 files changed, 74 insertions(+), 74 deletions(-)
+ arch/arm/mach-k3/j721e/j721e_init.c         |  28 +++++
+ arch/arm/mach-k3/r5/j721e/Makefile          |   1 +
+ arch/arm/mach-k3/r5/j721e/j721e_qos.h       |  96 +++++++++++++++
+ arch/arm/mach-k3/r5/j721e/j721e_qos_uboot.c | 125 ++++++++++++++++++++
+ 4 files changed, 250 insertions(+)
+ create mode 100644 arch/arm/mach-k3/r5/j721e/j721e_qos.h
+ create mode 100644 arch/arm/mach-k3/r5/j721e/j721e_qos_uboot.c
 
-diff --git a/arch/arm/mach-k3/include/mach/k3-qos.h b/arch/arm/mach-k3/include/mach/k3-qos.h
-index e00e1de5b9..6ed5704803 100644
---- a/arch/arm/mach-k3/include/mach/k3-qos.h
-+++ b/arch/arm/mach-k3/include/mach/k3-qos.h
-@@ -9,6 +9,80 @@
+diff --git a/arch/arm/mach-k3/j721e/j721e_init.c b/arch/arm/mach-k3/j721e/j721e_init.c
+index c2024f2500..e9ed8cb267 100644
+--- a/arch/arm/mach-k3/j721e/j721e_init.c
++++ b/arch/arm/mach-k3/j721e/j721e_init.c
+@@ -23,6 +23,22 @@
+ #include "../sysfw-loader.h"
+ #include "../common.h"
  
- #include <linux/kernel.h>
++/* NAVSS North Bridge (NB) registers */
++#define NAVSS0_NBSS_NB0_CFG_MMRS		0x03802000
++#define NAVSS0_NBSS_NB1_CFG_MMRS		0x03803000
++#define NAVSS0_NBSS_NB0_CFG_NB_THREADMAP	(NAVSS0_NBSS_NB0_CFG_MMRS + 0x10)
++#define NAVSS0_NBSS_NB1_CFG_NB_THREADMAP	(NAVSS0_NBSS_NB1_CFG_MMRS + 0x10)
++/*
++ * Thread Map for North Bridge Configuration
++ * Each bit is for each VBUSM source.
++ * Bit[0] maps orderID 0-7 to VBUSM.C thread number
++ * Bit[1] maps orderID 8-15 to VBUSM.C thread number
++ * When bit has value 0: VBUSM.C thread 0 (non-real time traffic)
++ * When bit has value 1: VBUSM.C thread 2 (real time traffic)
++ */
++#define NB_THREADMAP_BIT0				BIT(0)
++#define NB_THREADMAP_BIT1				BIT(1)
++
+ #ifdef CONFIG_K3_LOAD_SYSFW
+ struct fwl_data cbass_hc_cfg0_fwls[] = {
+ #if defined(CONFIG_TARGET_J721E_R5_EVM)
+@@ -124,6 +140,13 @@ void k3_mmc_restart_clock(void)
+ }
+ #endif
  
-+#define QOS_0	(0 << 0)
-+#define QOS_1	(1 << 0)
-+#define QOS_2	(2 << 0)
-+#define QOS_3	(3 << 0)
-+#define QOS_4	(4 << 0)
-+#define QOS_5	(5 << 0)
-+#define QOS_6	(6 << 0)
-+#define QOS_7	(7 << 0)
++/* Setup North Bridge registers to map ORDERID 8-15 to RT traffic */
++static void setup_navss_nb(void)
++{
++	writel(NB_THREADMAP_BIT1, (uintptr_t)NAVSS0_NBSS_NB0_CFG_NB_THREADMAP);
++	writel(NB_THREADMAP_BIT1, (uintptr_t)NAVSS0_NBSS_NB1_CFG_NB_THREADMAP);
++}
 +
-+#define ORDERID_0	(0 << 4)
-+#define ORDERID_1	(1 << 4)
-+#define ORDERID_2	(2 << 4)
-+#define ORDERID_3	(3 << 4)
-+#define ORDERID_4	(4 << 4)
-+#define ORDERID_5	(5 << 4)
-+#define ORDERID_6	(6 << 4)
-+#define ORDERID_7	(7 << 4)
-+#define ORDERID_8	(8 << 4)
-+#define ORDERID_9	(9 << 4)
-+#define ORDERID_10	(10 << 4)
-+#define ORDERID_11	(11 << 4)
-+#define ORDERID_12	(12 << 4)
-+#define ORDERID_13	(13 << 4)
-+#define ORDERID_14	(14 << 4)
-+#define ORDERID_15	(15 << 4)
+ /*
+  * This uninitialized global variable would normal end up in the .bss section,
+  * but the .bss is cleared between writing and reading this variable, so move
+@@ -288,6 +311,11 @@ void board_init_f(ulong dummy)
+ 		panic("DRAM init failed: %d\n", ret);
+ #endif
+ 	spl_enable_cache();
 +
-+#define ASEL_0	(0 << 8)
-+#define ASEL_1	(1 << 8)
-+#define ASEL_2	(2 << 8)
-+#define ASEL_3	(3 << 8)
-+#define ASEL_4	(4 << 8)
-+#define ASEL_5	(5 << 8)
-+#define ASEL_6	(6 << 8)
-+#define ASEL_7	(7 << 8)
-+#define ASEL_8	(8 << 8)
-+#define ASEL_9	(9 << 8)
-+#define ASEL_10	(10 << 8)
-+#define ASEL_11	(11 << 8)
-+#define ASEL_12	(12 << 8)
-+#define ASEL_13	(13 << 8)
-+#define ASEL_14	(14 << 8)
-+#define ASEL_15	(15 << 8)
++	if (IS_ENABLED(CONFIG_CPU_V7R))
++		setup_navss_nb();
 +
-+#define EPRIORITY_0	(0 << 12)
-+#define EPRIORITY_1	(1 << 12)
-+#define EPRIORITY_2	(2 << 12)
-+#define EPRIORITY_3	(3 << 12)
-+#define EPRIORITY_4	(4 << 12)
-+#define EPRIORITY_5	(5 << 12)
-+#define EPRIORITY_6	(6 << 12)
-+#define EPRIORITY_7	(7 << 12)
-+
-+#define VIRTID_0	(0 << 16)
-+#define VIRTID_1	(1 << 16)
-+#define VIRTID_2	(2 << 16)
-+#define VIRTID_3	(3 << 16)
-+#define VIRTID_4	(4 << 16)
-+#define VIRTID_5	(5 << 16)
-+#define VIRTID_6	(6 << 16)
-+#define VIRTID_7	(7 << 16)
-+#define VIRTID_8	(8 << 16)
-+#define VIRTID_9	(9 << 16)
-+#define VIRTID_10	(10 << 16)
-+#define VIRTID_11	(11 << 16)
-+#define VIRTID_12	(12 << 16)
-+#define VIRTID_13	(13 << 16)
-+#define VIRTID_14	(14 << 16)
-+#define VIRTID_15	(15 << 16)
-+
-+#define ATYPE_0	(0 << 28)
-+#define ATYPE_1	(1 << 28)
-+#define ATYPE_2	(2 << 28)
-+#define ATYPE_3	(3 << 28)
-+
- struct k3_qos_data {
- 	u32 reg;
- 	u32 val;
-diff --git a/arch/arm/mach-k3/r5/am62ax/am62a_qos.h b/arch/arm/mach-k3/r5/am62ax/am62a_qos.h
-index c74d69a28f..84a6dc7240 100644
---- a/arch/arm/mach-k3/r5/am62ax/am62a_qos.h
-+++ b/arch/arm/mach-k3/r5/am62ax/am62a_qos.h
-@@ -6,80 +6,6 @@
-  * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-  */
++	setup_qos();
+ }
  
--#define QOS_0	(0 << 0)
--#define QOS_1	(1 << 0)
--#define QOS_2	(2 << 0)
--#define QOS_3	(3 << 0)
--#define QOS_4	(4 << 0)
--#define QOS_5	(5 << 0)
--#define QOS_6	(6 << 0)
--#define QOS_7	(7 << 0)
--
--#define ORDERID_0	(0 << 4)
--#define ORDERID_1	(1 << 4)
--#define ORDERID_2	(2 << 4)
--#define ORDERID_3	(3 << 4)
--#define ORDERID_4	(4 << 4)
--#define ORDERID_5	(5 << 4)
--#define ORDERID_6	(6 << 4)
--#define ORDERID_7	(7 << 4)
--#define ORDERID_8	(8 << 4)
--#define ORDERID_9	(9 << 4)
--#define ORDERID_10	(10 << 4)
--#define ORDERID_11	(11 << 4)
--#define ORDERID_12	(12 << 4)
--#define ORDERID_13	(13 << 4)
--#define ORDERID_14	(14 << 4)
--#define ORDERID_15	(15 << 4)
--
--#define ASEL_0	(0 << 8)
--#define ASEL_1	(1 << 8)
--#define ASEL_2	(2 << 8)
--#define ASEL_3	(3 << 8)
--#define ASEL_4	(4 << 8)
--#define ASEL_5	(5 << 8)
--#define ASEL_6	(6 << 8)
--#define ASEL_7	(7 << 8)
--#define ASEL_8	(8 << 8)
--#define ASEL_9	(9 << 8)
--#define ASEL_10	(10 << 8)
--#define ASEL_11	(11 << 8)
--#define ASEL_12	(12 << 8)
--#define ASEL_13	(13 << 8)
--#define ASEL_14	(14 << 8)
--#define ASEL_15	(15 << 8)
--
--#define EPRIORITY_0	(0 << 12)
--#define EPRIORITY_1	(1 << 12)
--#define EPRIORITY_2	(2 << 12)
--#define EPRIORITY_3	(3 << 12)
--#define EPRIORITY_4	(4 << 12)
--#define EPRIORITY_5	(5 << 12)
--#define EPRIORITY_6	(6 << 12)
--#define EPRIORITY_7	(7 << 12)
--
--#define VIRTID_0	(0 << 16)
--#define VIRTID_1	(1 << 16)
--#define VIRTID_2	(2 << 16)
--#define VIRTID_3	(3 << 16)
--#define VIRTID_4	(4 << 16)
--#define VIRTID_5	(5 << 16)
--#define VIRTID_6	(6 << 16)
--#define VIRTID_7	(7 << 16)
--#define VIRTID_8	(8 << 16)
--#define VIRTID_9	(9 << 16)
--#define VIRTID_10	(10 << 16)
--#define VIRTID_11	(11 << 16)
--#define VIRTID_12	(12 << 16)
--#define VIRTID_13	(13 << 16)
--#define VIRTID_14	(14 << 16)
--#define VIRTID_15	(15 << 16)
--
--#define ATYPE_0	(0 << 28)
--#define ATYPE_1	(1 << 28)
--#define ATYPE_2	(2 << 28)
--#define ATYPE_3	(3 << 28)
--
- #define PULSAR_UL_WKUP_0_CPU0_RMST	0x45D14000
- #define PULSAR_UL_WKUP_0_CPU0_WMST	0x45D14400
- #define PULSAR_UL_WKUP_0_CPU0_PMST	0x45D14800
+ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+diff --git a/arch/arm/mach-k3/r5/j721e/Makefile b/arch/arm/mach-k3/r5/j721e/Makefile
+index 78325db402..07bfb0dd93 100644
+--- a/arch/arm/mach-k3/r5/j721e/Makefile
++++ b/arch/arm/mach-k3/r5/j721e/Makefile
+@@ -3,3 +3,4 @@
+ # Copyright (C) 2020 Texas Instruments Incorporated - https://www.ti.com/
+ obj-y += clk-data.o
+ obj-y += dev-data.o
++obj-y += j721e_qos_uboot.o
+diff --git a/arch/arm/mach-k3/r5/j721e/j721e_qos.h b/arch/arm/mach-k3/r5/j721e/j721e_qos.h
+new file mode 100644
+index 0000000000..9ec0b7c630
+--- /dev/null
++++ b/arch/arm/mach-k3/r5/j721e/j721e_qos.h
+@@ -0,0 +1,96 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Keystone3 Quality of service endpoint definitions
++ * Auto generated by K3 Resource Partitioning Tool
++ *
++ * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
++ */
++
++#define PULSAR_SL_MCU_0_MEMBDG_RMST0	0x45D10000
++#define PULSAR_SL_MCU_0_MEMBDG_WMST0	0x45D10400
++#define PULSAR_SL_MCU_0_CPU0_PMST	0x45D10800
++#define PULSAR_SL_MCU_0_MEMBDG_RMST1	0x45D11000
++#define PULSAR_SL_MCU_0_MEMBDG_WMST1	0x45D11400
++#define PULSAR_SL_MCU_0_CPU1_PMST	0x45D11800
++#define SA2_UL_MCU_0_CTXCACH_EXT_DMA	0x45D13000
++#define ICSS_G_MAIN_0_PR1_EXT_VBUSM	0x45D80000
++#define ICSS_G_MAIN_1_PR1_EXT_VBUSM	0x45D80400
++#define K3_C66_COREPAC_MAIN_0_C66_MDMA	0x45D81000
++#define K3_C66_COREPAC_MAIN_1_C66_MDMA	0x45D81400
++#define EMMCSD4SS_MAIN_0_EMMCSDSS_RD	0x45D82000
++#define EMMCSD4SS_MAIN_0_EMMCSDSS_WR	0x45D82400
++#define EMMCSD4SS_MAIN_1_EMMCSDSS_RD	0x45D82800
++#define EMMCSD4SS_MAIN_1_EMMCSDSS_WR	0x45D82C00
++#define PULSAR_SL_MAIN_0_MEMBDG_RMST0	0x45D84000
++#define PULSAR_SL_MAIN_0_MEMBDG_RMST1	0x45D84400
++#define PULSAR_SL_MAIN_0_MEMBDG_WMST0	0x45D84800
++#define PULSAR_SL_MAIN_0_MEMBDG_WMST1	0x45D84C00
++#define PULSAR_SL_MAIN_1_MEMBDG_RMST0	0x45D85000
++#define PULSAR_SL_MAIN_1_MEMBDG_RMST1	0x45D85400
++#define PULSAR_SL_MAIN_1_MEMBDG_WMST0	0x45D85800
++#define PULSAR_SL_MAIN_1_MEMBDG_WMST1	0x45D85C00
++#define COMPUTE_CLUSTER_J7ES_TB_VDC_MAIN_0_GIC_MEM_RD_VBUSM	0x45D86000
++#define COMPUTE_CLUSTER_J7ES_TB_VDC_MAIN_0_GIC_MEM_WR_VBUSM	0x45D86400
++#define K3_C66_COREPAC_MAIN_0_C66_CFG	0x45D87000
++#define K3_C66_COREPAC_MAIN_1_C66_CFG	0x45D87400
++#define SA2_UL_MAIN_0_CTXCACH_EXT_DMA	0x45D88800
++#define PULSAR_SL_MAIN_0_PBDG_RMST0	0x45D89800
++#define PULSAR_SL_MAIN_0_PBDG_RMST1	0x45D89C00
++#define PULSAR_SL_MAIN_0_PBDG_WMST0	0x45D8A000
++#define PULSAR_SL_MAIN_0_PBDG_WMST1	0x45D8A400
++#define PULSAR_SL_MAIN_1_PBDG_RMST0	0x45D8A800
++#define PULSAR_SL_MAIN_1_PBDG_RMST1	0x45D8AC00
++#define PULSAR_SL_MAIN_1_PBDG_WMST0	0x45D8B000
++#define PULSAR_SL_MAIN_1_PBDG_WMST1	0x45D8B400
++#define VPFE_MAIN_0_VBUSM_DMA	0x45D8C000
++#define VPE_MAIN_0_VPDMA_MST0	0x45D8C400
++#define VPE_MAIN_0_VPDMA_MST1	0x45D8C800
++#define PCIE_G4X2_MAIN_0_PCIE_MST_RD_HP	0x45D90000
++#define PCIE_G4X2_MAIN_0_PCIE_MST_RD_LP	0x45D90400
++#define PCIE_G4X2_MAIN_0_PCIE_MST_WR_HP	0x45D90800
++#define PCIE_G4X2_MAIN_0_PCIE_MST_WR_LP	0x45D90C00
++#define PCIE_G4X2_MAIN_1_PCIE_MST_RD_HP	0x45D91000
++#define PCIE_G4X2_MAIN_1_PCIE_MST_RD_LP	0x45D91400
++#define PCIE_G4X2_MAIN_1_PCIE_MST_WR_HP	0x45D91800
++#define PCIE_G4X2_MAIN_1_PCIE_MST_WR_LP	0x45D91C00
++#define PCIE_G4X2_MAIN_2_PCIE_MST_RD_HP	0x45D92000
++#define PCIE_G4X2_MAIN_2_PCIE_MST_RD_LP	0x45D92400
++#define PCIE_G4X2_MAIN_2_PCIE_MST_WR_HP	0x45D92800
++#define PCIE_G4X2_MAIN_2_PCIE_MST_WR_LP	0x45D92C00
++#define PCIE_G4X2_MAIN_3_PCIE_MST_RD_HP	0x45D93000
++#define PCIE_G4X2_MAIN_3_PCIE_MST_RD_LP	0x45D93400
++#define PCIE_G4X2_MAIN_3_PCIE_MST_WR_HP	0x45D93800
++#define PCIE_G4X2_MAIN_3_PCIE_MST_WR_LP	0x45D93C00
++#define USB3P0SS_16FFC_MAIN_0_MSTR0	0x45D98000
++#define USB3P0SS_16FFC_MAIN_0_MSTW0	0x45D98400
++#define USB3P0SS_16FFC_MAIN_1_MSTR0	0x45D98800
++#define USB3P0SS_16FFC_MAIN_1_MSTW0	0x45D98C00
++#define USB3P0SS_16FFC_MAIN_2_MSTR0	0x45D99000
++#define USB3P0SS_16FFC_MAIN_2_MSTW0	0x45D99400
++#define MLBSS2P0_MAIN_0_MLBSS_DMA_VBUSP	0x45D99C00
++#define EMMC8SS_16FFC_MAIN_0_EMMCSS_RD	0x45D9A000
++#define EMMC8SS_16FFC_MAIN_0_EMMCSS_WR	0x45D9A400
++#define UFSHCI2P1SS_16FFC_MAIN_0_UFSHCI_VBM_MST_RD	0x45D9B000
++#define UFSHCI2P1SS_16FFC_MAIN_0_UFSHCI_VBM_MST_WR	0x45D9B400
++#define UFSHCI2P1SS_16FFC_MAIN_1_UFSHCI_VBM_MST_RD	0x45D9B800
++#define UFSHCI2P1SS_16FFC_MAIN_1_UFSHCI_VBM_MST_WR	0x45D9BC00
++#define DEBUGSS_K3_WRAP_CV0_MAIN_0_VBUSMR	0x45DA0000
++#define DEBUGSS_K3_WRAP_CV0_MAIN_0_VBUSMW	0x45DA0400
++#define PULSAR_SL_MAIN_0_CPU0_PMST	0x45DA4000
++#define PULSAR_SL_MAIN_0_CPU1_PMST	0x45DA4400
++#define PULSAR_SL_MAIN_1_CPU0_PMST	0x45DA4800
++#define PULSAR_SL_MAIN_1_CPU1_PMST	0x45DA4C00
++#define DMPAC_TOP_MAIN_0_DATA_MST	0x45DC0000
++#define K3_D5520MP2_MAIN_0_M_VBUSM_R	0x45DC0400
++#define K3_D5520MP2_MAIN_0_M_VBUSM_W	0x45DC0800
++#define K3_VXE384MP2_MAIN_0_M_VBUSM_R	0x45DC0C00
++#define K3_VXE384MP2_MAIN_0_M_VBUSM_W	0x45DC1000
++#define VPAC_TOP_MAIN_0_DATA_MST_0	0x45DC1400
++#define VPAC_TOP_MAIN_0_DATA_MST_1	0x45DC1800
++#define VPAC_TOP_MAIN_0_LDC0_M_MST	0x45DC1C00
++#define K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA	0x45DC2000
++#define K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC	0x45DC2400
++#define J7_LASCAR_GPU_WRAP_MAIN_0_M0_VBUSM_R_ASYNC	0x45DC5000
++#define J7_LASCAR_GPU_WRAP_MAIN_0_M0_VBUSM_W_ASYNC	0x45DC5800
++#define J7_LASCAR_GPU_WRAP_MAIN_0_M1_VBUSM_R_ASYNC	0x45DC6000
++#define J7_LASCAR_GPU_WRAP_MAIN_0_M1_VBUSM_W_ASYNC	0x45DC6800
+diff --git a/arch/arm/mach-k3/r5/j721e/j721e_qos_uboot.c b/arch/arm/mach-k3/r5/j721e/j721e_qos_uboot.c
+new file mode 100644
+index 0000000000..c829057200
+--- /dev/null
++++ b/arch/arm/mach-k3/r5/j721e/j721e_qos_uboot.c
+@@ -0,0 +1,125 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * j721e Quality of Service (QoS) Configuration Data
++ * Auto generated from K3 Resource Partitioning tool
++ */
++
++#include <asm/arch/k3-qos.h>
++#include "j721e_qos.h"
++
++struct k3_qos_data qos_data[] = {
++	/* DSS_PIPE_VID1 - 2 endpoints, 2 channels */
++	{
++		.reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA + 0x100 + 0x4 * 0,
++		.val = ATYPE_3 | ORDERID_15,
++	},
++	{
++		.reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA + 0x100 + 0x4 * 1,
++		.val = ATYPE_3 | ORDERID_15,
++	},
++	{
++		.reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC + 0x100 + 0x4 * 0,
++		.val = ATYPE_3 | ORDERID_15,
++	},
++	{
++		.reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC + 0x100 + 0x4 * 1,
++		.val = ATYPE_3 | ORDERID_15,
++	},
++
++	/* DSS_PIPE_VIDL1 - 2 endpoints, 2 channels */
++	{
++		.reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA + 0x100 + 0x4 * 2,
++		.val = ATYPE_3 | ORDERID_15,
++	},
++	{
++		.reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA + 0x100 + 0x4 * 3,
++		.val = ATYPE_3 | ORDERID_15,
++	},
++	{
++		.reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC + 0x100 + 0x4 * 2,
++		.val = ATYPE_3 | ORDERID_15,
++	},
++	{
++		.reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC + 0x100 + 0x4 * 3,
++		.val = ATYPE_3 | ORDERID_15,
++	},
++
++	/* DSS_PIPE_VID2 - 2 endpoints, 2 channels */
++	{
++		.reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA + 0x100 + 0x4 * 4,
++		.val = ATYPE_3 | ORDERID_15,
++	},
++	{
++		.reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA + 0x100 + 0x4 * 5,
++		.val = ATYPE_3 | ORDERID_15,
++	},
++	{
++		.reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC + 0x100 + 0x4 * 4,
++		.val = ATYPE_3 | ORDERID_15,
++	},
++	{
++		.reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC + 0x100 + 0x4 * 5,
++		.val = ATYPE_3 | ORDERID_15,
++	},
++
++	/* DSS_PIPE_VIDL2 - 2 endpoints, 2 channels */
++	{
++		.reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA + 0x100 + 0x4 * 6,
++		.val = ATYPE_3 | ORDERID_15,
++	},
++	{
++		.reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA + 0x100 + 0x4 * 7,
++		.val = ATYPE_3 | ORDERID_15,
++	},
++	{
++		.reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC + 0x100 + 0x4 * 6,
++		.val = ATYPE_3 | ORDERID_15,
++	},
++	{
++		.reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC + 0x100 + 0x4 * 7,
++		.val = ATYPE_3 | ORDERID_15,
++	},
++
++	/* Following registers set 1:1 mapping for orderID MAP1/MAP2
++	 * remap registers. orderID x is remapped to orderID x again
++	 * This is to ensure orderID from MAP register is unchanged
++	 */
++
++	/* K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA - 2 groups */
++	{
++		.reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA + 0,
++		.val = 0x76543210,
++	},
++	{
++		.reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA + 4,
++		.val = 0xfedcba98,
++	},
++	{
++		.reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA + 8,
++		.val = 0x76543210,
++	},
++	{
++		.reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA + 12,
++		.val = 0xfedcba98,
++	},
++
++	/* K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC - 2 groups */
++	{
++		.reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC + 0,
++		.val = 0x76543210,
++	},
++	{
++		.reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC + 4,
++		.val = 0xfedcba98,
++	},
++	{
++		.reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC + 8,
++		.val = 0x76543210,
++	},
++	{
++		.reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC + 12,
++		.val = 0xfedcba98,
++	},
++};
++
++u32 qos_count = ARRAY_SIZE(qos_data);
 -- 
 2.25.1
 
