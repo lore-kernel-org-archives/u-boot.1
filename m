@@ -4,75 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BA37C25B78
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 16:17:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 502C2C25B78
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 16:20:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1134C8888E;
-	Wed, 22 May 2024 18:17:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id CA0DB88490;
+	Wed, 22 May 2024 18:20:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="qeuiPut1";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="SrOePPXD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5816A888B2; Wed, 22 May 2024 18:17:41 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 97DF98883C; Wed, 22 May 2024 18:20:54 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 263048888B
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 18:17:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8362088001
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 18:20:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-57824fa0a8fso2437552a12.0
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 09:17:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1716394658; x=1716999458; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=aDR1PtDnVHaZx6SSPSNXLMnKNlLf6peD7PkropwX0gA=;
- b=qeuiPut1HRAZUQ2AAO/XaDx4t7iiQ6VO2MCARZO7WeqRT8lUJoFukyazPz3fIakhff
- YXAnOpk/B1UXLvJX0tb8bfkKFfZN0j+AljLSN+bEzhvtLCRH/+Ps2iL1zqSb3KYh7LQy
- pkUAATQJ3fGz/masH5DHs2CzbFEEcfh3Q9djwFIN9/kyTvJrqOLY93ZYeCQBSYkMZr99
- 8S9n+V52s2Y+I2u7c15SqEO0Qgi/Uq/7NWx+j70cgfqqVarZN9vem1B8ZxOgoPk4Yk/O
- rUQNSWqx9kzkzLi8pgH8YLABolA9JNxCnlasynWhI7dg8AxV/hcxqkoKqVtQ8I1bgSL7
- 9iPw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716394658; x=1716999458;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=aDR1PtDnVHaZx6SSPSNXLMnKNlLf6peD7PkropwX0gA=;
- b=L74S4sRAiBmpGBJ4Hdbp5UoLRqU6wRBbJZGXRSyDjbu2vCY8TczgQyciUJVbAnGo4t
- XXEqd+QVaB4LGvEA6a87YfKAUPyLAnqNxmo6xU3162sG22UdYGKuq34s3rOcjTJxH80O
- fpKrfBsSRf53bI5C2IzeVGV7FCA6NOyoiPtuohdCr94FaCuaN5Ma8P5jg00Vy5T+yo4g
- naJNpjwjcB81enQqIYg2uCodhP5a/diJtz2nDYXbCZ7cH/pqmMdv5pty+yv3sXLx1Ugu
- Jg1gl1+NKmsBsm2J4JB8GPWRd1omE9QB8owR6sRZKcoVqHf14xqZCVgRCJE8620ENMca
- 3xdA==
-X-Gm-Message-State: AOJu0YyjtNKjMeF9MEm4Uzm2wI8V1WKsfulJl6Ji1LE/4e/uzkkrW8Ej
- KqfcWdTToqyRwZzs5iRIuzCEEERwqNFinMSC+p3RHJY3FM1S6ActlezCtfZi4Q1aQRhtVYkoCDa
- QivF8wY0bC+l0Cl/fFod5m1GMxYPzPAySRJpyKg==
-X-Google-Smtp-Source: AGHT+IHt8HjVM+kytHW2yBfhrKMAbLlTzanq1H+Qt2h3Q3vIaME7PGVdO06xAbXthSW1nko4QEIQnEda2kycmuvuFis=
-X-Received: by 2002:a17:906:c447:b0:a59:bae0:b12f with SMTP id
- a640c23a62f3a-a6228158869mr145746866b.57.1716394658301; Wed, 22 May 2024
- 09:17:38 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=2726=M2=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1716394838;
+ bh=Nf7x4lfY/ooBRkiz0H+T7/pq87KeoUFyveDlp2oi/60=;
+ b=SrOePPXDq2kknhzPkUbvaJgzGP2mSsrLTLLbqvigc/RQBM3t8T4BbmhR5ki2mFKoSstkfol/u
+ hvE9PNbKK7sTvh1zoKiSM52XCxF4/rcdGinYL0Jj+eb5xv5tch92gs0dk9bJ4wiVfEeHItrM5Eh
+ TJLhXl/t3FHoWPDeDnxiaX3CTtAaU10sGAlvFl6y23ESTJRAWY127an5p0mePG9TUooLRGoiwON
+ y9qLDyglmlTaqHybAEYKmgIIrkaffGhuwN7P30wk+QicGzQ38wTfFDVnR48vHpH8v9t4XthndQE
+ HcY/seSLcgmaqIOPokuf0/IeKM81P9M5HUxP/ynjruLQ==
+Message-ID: <d626c93a-5c56-4363-b1ac-4de8c03e2f6a@kwiboo.se>
+Date: Wed, 22 May 2024 18:20:28 +0200
 MIME-Version: 1.0
-References: <20240521213842.3587607-1-tharvey@gateworks.com>
- <CAC_iWjJOgBbT=HdYkAFsQLNoVeQybzQk33n+q2-DTf=h8f2K+w@mail.gmail.com>
-In-Reply-To: <CAC_iWjJOgBbT=HdYkAFsQLNoVeQybzQk33n+q2-DTf=h8f2K+w@mail.gmail.com>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Wed, 22 May 2024 09:17:26 -0700
-Message-ID: <CAJ+vNU3vNwUTO2+zU=1fXuiOgsETy81aJEiSQ70jx7o-M9TTkw@mail.gmail.com>
-Subject: Re: [PATCH 1/2 v4] tpm-v2: add support for mapping algorithm names to
- algos
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Eddie James <eajames@linux.ibm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/4] rockchip: Add gpio request() ops and drop PCIe
+ reset-gpios workaround
+To: Alex Bee <knaerzche@gmail.com>, Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Johan Jonker <jbx6244@gmail.com>, u-boot@lists.denx.de
+References: <20240511112821.1156519-1-jonas@kwiboo.se>
+ <0e701fd8-b2c6-4ac4-9427-d984032470d1@gmail.com>
+ <6853e5ac-271f-4d19-b8fb-a2746b834b24@kwiboo.se>
+ <1b3b8c24-a3d9-4c36-a72f-45baee63f385@gmail.com>
+ <1251aa97-43b4-485d-b1a7-161c14bc74fa@kwiboo.se>
+ <03c73683-faec-4ef3-8af8-caaf0ebbd0e6@gmail.com>
+ <96bfe653-3704-4f1b-a8be-6a9702f291b3@kwiboo.se>
+ <31fe0d7a-a295-4d29-900f-aa40b497bae2@gmail.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <31fe0d7a-a295-4d29-900f-aa40b497bae2@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 664e1b51b256dc6c98d9331c
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,419 +81,278 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, May 22, 2024 at 3:33=E2=80=AFAM Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Tim
->
-> Thanks for fixing this.
->
-> Can we replace tpm2_algorithm_to_mask() with hash_algo_list[i].hash_mask =
-in
-> - lib/tpm-v2.c lines 80, 205 250
-> - lib/efi_loader/efi_tcg2.c line 420
+On 2024-05-22 16:18, Alex Bee wrote:
+> Am 13.05.24 um 01:22 schrieb Jonas Karlman:
+>> On 2024-05-13 00:34, Alex Bee wrote:
+>>> Am 12.05.24 um 23:37 schrieb Jonas Karlman:
+>>>> Hi Alex,
+>>>>
+>>>> On 2024-05-12 21:49, Alex Bee wrote:
+>>>>> Am 11.05.24 um 20:47 schrieb Jonas Karlman:
+>>>>>> Hi Alex,
+>>>>>>
+>>>>>> On 2024-05-11 19:44, Alex Bee wrote:
+>>>>>>> Hi Jonas,
+>>>>>>>
+>>>>>>> Am 11.05.24 um 13:28 schrieb Jonas Karlman:
+>>>>>>>> This series add gpio request() and pinctrl gpio_request_enable() ops so
+>>>>>>>> that a gpio requested pin automatically use gpio pinmux and U-Boot
+>>>>>>>> behaves more similar to Linux kernel.
+>>>>>>> I'm not sure that's a good idea.
+>>>>>>> While linux does it the same way, we really shouldn't expect every
+>>>>>>> software/os/ … which uses DT (now or in future) to implicitly switch the
+>>>>>>> pin function when using a pin as gpio. So the real fix would probably be
+>>>>>>> to add the the correct pinctrl settings to the upstream DT of those
+>>>>>>> boards and sync it later on (not sure those if those SoCs already using
+>>>>>>> OF_UPSTREAM) and leave the -u-boot.dtsi-"hack" alone for now.
+>>>>>> I fully agree that the pinctrl for the problematic boards should be
+>>>>>> corrected in upstream DT, but that is a separate issue and should not
+>>>>>> block adding support for the request()/gpio_request_enable() ops.
+>>>>>>
+>>>>>> While the pcie reset-gpios full board freeze that was my driving factor
+>>>>>> to fully implement the gpio request() ops it is not the only use case,
+>>>>>> using the gpio cmd on a pin that use a non-gpio pinmux is another.
+>>>>>>
+>>>>>> Or do you see any technical issue with having the gpio request() ops
+>>>>>> implemented and having it ensure gpio pinmux is used on a gpio requested
+>>>>>> pin? Similar to how gpio/pinctrl is behaving in Linux and on some other
+>>>>>> platforms in U-Boot?
+>>>>> No, no general ("technical") issue with adding a .request hook to the gpio
+>>>>> driver. But now you are now moving the original workaround to an even more
+>>>>> invisible place which does things implicitly. Maybe just don't remove the
+>>>>> pinctrl from the boards u-boot-dtsi's - just replace it with
+>>>>>
+>>>>> &pcie30x2m1_pins {
+>>>>>        rockchip,pins =
+>>>>>                 <2 RK_PD4 4 &pcfg_pull_none>,
+>>>>>                 <2 RK_PD6 RK_FUNC_GPIO &pcfg_pull_none>,
+>>>>>                 <2 RK_PD5 4 &pcfg_pull_none>;
+>>>>> };
+>>>>>
+>>>>> Even if it would (now) work without. It, at least, documents that there are
+>>>>> things left to do for the upstream DT.
+>>>> This is what I was doing when testing PCIe on ROCK 3B, I would still like
+>>>> to drop the "bad" workaround for ROCK 3A and E25 and have it fixed in
+>>>> upstream DT and let it trickle back now that RK356x use OF_UPSTREAM.
+>>>>
+>>>> I do not see the point of keeping a workaround that no longer is needed,
+>>>> especially when there is plans to also adjust upstream DT.
+>>> Yeah, sure: but that certainly should be done/happen first, before it's
+>>> removed here. Everybody knows how long that takes, patches being forgotten
+>>> ....
+>> I am fully aware of patches being forgotten :-)
+>>
+>> Still, here I try to cleanup a bad workaround that I probably never should
+>> have added in the first place.
+> Why is it bad? It's incomplete and the correct pin configuration should
+> have been added to the upstream board DT in the first place. That's what
+> *-u-boot.dtsi are doing at times :)  It's not as worse as adding implicit
+> pin function switching to a driver to compensate the incomplete/incorrect
+> upstream board device tree, imho.
 
-Yes, that makes sense. I'll also remove the unnecessary variable from
-the stack in those cases:
+From my point-of-view the upstream pinctrl is more correct and I wrongly
+added a patch that completely disregarded existing pinctrl just to fix
+pci enumeration in U-Boot when no pci device is connected without
+thinking of how it could affect linux/bsd, hence why I now think that old
+workaround/hack is something bad and something I want to cleanup/remove.
+In my mind the current pinctrl use for pcie3 in U-Boot is describing the
+hw much worse than what is done in upstream Linux.
 
-diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
-index cf5d8de018a7..945aafb847d8 100644
---- a/lib/efi_loader/efi_tcg2.c
-+++ b/lib/efi_loader/efi_tcg2.c
-@@ -417,7 +417,7 @@ static efi_status_t tcg2_hash_pe_image(void *efi,
-u64 efi_size,
-        for (i =3D 0; i < ARRAY_SIZE(hash_algo_list); i++) {
-                u16 hash_alg =3D hash_algo_list[i].hash_alg;
+>>>>> What you were saying in reply to Mark's email is not completely true: Not
+>>>>> all pins are initialized with gpio func as default. It actually depends on
+>>>>> the pin which function the bootrom sets initially. In case of RK356x's
+>>>>> GPIO2_PD6 (the pin in question) it's BT656_D6M0 (func2), for instance. So,
+>>>>> in fact, you are changing it's function when implicitly setting it's func
+>>>>> to gpio (func0).
+>>>> Sure, bootrom will change pin func on some pins so that it e.g. can read
+>>>> from storage etc, but in general gpio mux is what most pins will use
+>>>> after POR.
+>>>>
+>>>> On my ROCK 3A I see the pcie30x2m1 pins using func0 (gpio) after POR:
+>>>>
+>>>>     => pinmux status
+>>>>     GPIO2_D4  : gpio
+>>>>     GPIO2_D5  : gpio
+>>>>     GPIO2_D6  : gpio
+>>>>
+>>>> And with this after a "pci enum":
+>>>>
+>>>>     => pinmux status
+>>>>     GPIO2_D4  : func-4
+>>>>     GPIO2_D5  : func-4
+>>>>     GPIO2_D6  : gpio
+>>>>
+>>>> Not sure why your board would use BT656_D6M0 (func2) after POR unless
+>>>> there is some other code writing to the IOMUX regs.
+>>> Oh, I haven't checked on an actual board - I trusted the TRM [0], page 253
+>>> GRF_GPIO2D_IOMUX_H[10:8] is (should be) 0x2. But (sadly) there are lot of
+>>> blobs involved. for RK35xx SoCs - so maybe something switches the func for
+>>> this pin for some reason.
+>>>> The only thing this series changes is that when a U-Boot drivers use e.g.
+>>>> gpio_request_by_name("reset-gpios") the referenced pin in DT will
+>>>> implicitly be configured for gpio func.
+>>>>
+>>>> I would still like to understand if there is any other reason, not
+>>>> related to dropping current "bad" PCIe DT workaround, to not to adopt
+>>>> this implicit configuration and match Linux kernel?
+>>> Generally speaking: device trees _must_ represent the actual hardware
+>>> completely independent from any driver or any software. They are NOT
+>>> helpers or configuration for drivers. Drivers can use them and have to
+>>> adapt to them - not vice versa. So: Being as explict as possible is a must.
+>> I am fully aware of this, and I would argue that the DT already is very
+>> explicit about the HW in regard to PCIe3x2.
+>>
+>> The pinctrl function/group explains what function needs to be activated to
+>> route PCIe3x2 related signals to the PCIe controller.
+>> And the reset-gpios explains what pin is used for PERST# signal.
+>>
+>> However, if we instead are too explicit in the pinctrl function/group and
+>> say that that the PERST# pin should use gpio iomux function, aren't we
+>> then actually just describing something that is relevant for software/driver?
+>>
+>> And actually ends up loosing information on how the pin can be configured
+>> to route the PERST# pin to the controller?
+>>
+>> And as Mark pointed out, the PERST# pin should probably be configured for
+>> gpio output when controller works in RC mode, and should use PERSTn func
+>> when controller works in EP mode.
+>>
+>> Guess that could/should possible be described as different pinctrl
+>> states or if I am not mistaken EP is described as a separate device
+>> using a different compatible.
+> Actually I wouldn't be too surprised if the "reset-gpios" property does
+> actually only exist to not have to define a extra pinctrl and the actual
+> reset-functionality (i.e. pulling the pin up / down by the driver) isn't
+> required at all. Though, untested. That would be similar to define a
+> "cd-gpios" property for a (sd) mmc-controller which is a similar workaround
+> for not switching the card detection pin to gpio func.
 
--               if (!(active & tpm2_algorithm_to_mask(hash_alg)))
-+               if (!(active & hash_algo_list[i].hash_mask))
-                        continue;
-                switch (hash_alg) {
-                case TPM2_ALG_SHA1:
-diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-index 2fc680a8adf8..a67daed2f3c1 100644
---- a/lib/tpm-v2.c
-+++ b/lib/tpm-v2.c
-@@ -76,10 +76,7 @@ int tcg2_create_digest(struct udevice *dev, const
-u8 *input, u32 length,
+From what I could test the driver need to mux the pin for gpio output
+use when we use the controller in RC mode and the pin should be muxed to
+pcie func when the controller is used in EP mode.
 
-        digest_list->count =3D 0;
-        for (i =3D 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
--               u32 mask =3D
--                       tpm2_algorithm_to_mask(hash_algo_list[i].hash_alg);
--
--               if (!(active & mask))
-+               if (!(active & hash_algo_list[i].hash_mask))
-                        continue;
+Leaving the pin muxed for pcie func when we use the controller in RC
+mode seem to make the board freeze.
 
-                switch (hash_algo_list[i].hash_alg) {
-@@ -191,7 +188,6 @@ static int tcg2_log_init(struct udevice *dev,
-struct tcg2_event_log *elog)
-        u32 count =3D 0;
-        u32 log_size;
-        u32 active;
--       u32 mask;
-        size_t i;
-        u16 len;
-        int rc;
-@@ -202,9 +198,7 @@ static int tcg2_log_init(struct udevice *dev,
-struct tcg2_event_log *elog)
+>>> At some point, it is planned, to split whole DT "subsystem" from the linux
+>>> kernel.
+>>> I also have a vague remembering (some mailing list discussion I can't find
+>>> right now), that this whole implicit function switching of pins is sort of
+>>> "not welcome" in linux anymore. So adding it here also is sort of a "step
+>>> back" from that POV.
+>> I was not expecting this much backlash on this series, so thanks for
+>> some concrete feedback on why we maybe should not add the gpio request()
+>> ops :-)
+> I did my best but couldn't find the discussion I had in mind. The context
+> was: pinctrl and gpio are different subsystems and one really shouldn't
+> configure the other. That makes sense, I guess. That it exists for Rockchip
+> in linux kernel might be related to the fact that this originally was a
+> single driver which was splited up later.
+> 
 
-        event_size =3D offsetof(struct tcg_efi_spec_id_event, digest_sizes)=
-;
-        for (i =3D 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
--               mask =3D tpm2_algorithm_to_mask(hash_algo_list[i].hash_alg)=
-;
--
--               if (!(active & mask))
-+               if (!(active & hash_algo_list[i].hash_mask))
-                        continue;
+From what I can find in the Linux pinctrl documentation it seem to suggest that
+the gpiolib driver should actually hide pinmuxing from a gpio consumer driver.
 
-                switch (hash_algo_list[i].hash_alg) {
-@@ -247,9 +241,7 @@ static int tcg2_log_init(struct udevice *dev,
-struct tcg2_event_log *elog)
+See "Pin control interaction with the GPIO subsystem":
 
-        count =3D 0;
-        for (i =3D 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
--               mask =3D tpm2_algorithm_to_mask(hash_algo_list[i].hash_alg)=
-;
--
--               if (!(active & mask))
-+               if (!(active & hash_algo_list[i].hash_mask))
-                        continue;
+"""
+NOTE that platforms and individual drivers shall NOT request GPIO pins
+to be controlled e.g. muxed in. Instead, implement a proper gpiolib
+driver and have that driver request proper muxing and other control for
+its pins.
+"""
 
-                len =3D hash_algo_list[i].hash_len;
+https://www.kernel.org/doc/html/latest/driver-api/pin-control.html#pin-control-interaction-with-the-gpio-subsystem
 
->
-> With these changes
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->
+And from "Drivers needing both pin control and GPIOs":
 
-Thanks,
+"""
+But there are also situations where it makes sense for the GPIO
+subsystem to communicate directly with the pinctrl subsystem, using the
+latter as a back-end. This is when the GPIO driver may call out to the
+functions described in the section Pin control interaction with the GPIO
+subsystem above. This only involves per-pin multiplexing, and will be
+completely hidden behind the gpiod_*() function namespace. In this case,
+the driver need not interact with the pin control subsystem at all.
 
-Tim
+If a pin control driver and a GPIO driver is dealing with the same pins
+and the use cases involve multiplexing, you MUST implement the pin
+controller as a back-end for the GPIO driver like this, unless your
+hardware design is such that the GPIO controller can override the pin
+controller’s multiplexing state through hardware without the need to
+interact with the pin control system.
+"""
 
->
-> On Wed, 22 May 2024 at 00:38, Tim Harvey <tharvey@gateworks.com> wrote:
-> >
-> > replace tpm2_supported_algorithms with an array of structures
-> > relating algorithm names, to TCG id's, digest length and mask values.
-> >
-> > While at it fix the tpm2_algorithm_to_mask to return the proper value.
-> >
-> > Fixes: 97707f12fdab ("tpm: Support boot measurements")
-> > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-> > Cc: Eddie James <eajames@linux.ibm.com>
-> > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > ---
-> > v4:
-> >  - new patch
-> > ---
-> >  include/tpm-v2.h          | 77 +++++++++++++++++++++++++++++++++++++--
-> >  lib/efi_loader/efi_tcg2.c |  4 +-
-> >  lib/tpm-v2.c              | 74 ++++++++++++++++++++++++++-----------
-> >  3 files changed, 128 insertions(+), 27 deletions(-)
-> >
-> > diff --git a/include/tpm-v2.h b/include/tpm-v2.h
-> > index 33dd103767c4..c9d5cb6d3e5a 100644
-> > --- a/include/tpm-v2.h
-> > +++ b/include/tpm-v2.h
-> > @@ -386,7 +386,54 @@ enum tpm2_algorithms {
-> >         TPM2_ALG_SM3_256        =3D 0x12,
-> >  };
-> >
-> > -extern const enum tpm2_algorithms tpm2_supported_algorithms[4];
-> > +/**
-> > + * struct digest_info - details of supported digests
-> > + *
-> > + * @hash_name:                 hash name
-> > + * @hash_alg:                  hash algorithm id
-> > + * @hash_mask:                 hash registry mask
-> > + * @hash_len:                  hash digest length
-> > + */
-> > +struct digest_info {
-> > +       const char *hash_name;
-> > +       u16 hash_alg;
-> > +       u32 hash_mask;
-> > +       u16 hash_len;
-> > +};
-> > +
-> > +/* Algorithm Registry */
-> > +#define TCG2_BOOT_HASH_ALG_SHA1    0x00000001
-> > +#define TCG2_BOOT_HASH_ALG_SHA256  0x00000002
-> > +#define TCG2_BOOT_HASH_ALG_SHA384  0x00000004
-> > +#define TCG2_BOOT_HASH_ALG_SHA512  0x00000008
-> > +#define TCG2_BOOT_HASH_ALG_SM3_256 0x00000010
-> > +
-> > +static const struct digest_info hash_algo_list[] =3D {
-> > +       {
-> > +               "sha1",
-> > +               TPM2_ALG_SHA1,
-> > +               TCG2_BOOT_HASH_ALG_SHA1,
-> > +               TPM2_SHA1_DIGEST_SIZE,
-> > +       },
-> > +       {
-> > +               "sha256",
-> > +               TPM2_ALG_SHA256,
-> > +               TCG2_BOOT_HASH_ALG_SHA256,
-> > +               TPM2_SHA256_DIGEST_SIZE,
-> > +       },
-> > +       {
-> > +               "sha384",
-> > +               TPM2_ALG_SHA384,
-> > +               TCG2_BOOT_HASH_ALG_SHA384,
-> > +               TPM2_SHA384_DIGEST_SIZE,
-> > +       },
-> > +       {
-> > +               "sha512",
-> > +               TPM2_ALG_SHA512,
-> > +               TCG2_BOOT_HASH_ALG_SHA512,
-> > +               TPM2_SHA512_DIGEST_SIZE,
-> > +       },
-> > +};
-> >
-> >  static inline u16 tpm2_algorithm_to_len(enum tpm2_algorithms a)
-> >  {
-> > @@ -404,8 +451,6 @@ static inline u16 tpm2_algorithm_to_len(enum tpm2_a=
-lgorithms a)
-> >         }
-> >  }
-> >
-> > -#define tpm2_algorithm_to_mask(a)      (1 << (a))
-> > -
-> >  /* NV index attributes */
-> >  enum tpm_index_attrs {
-> >         TPMA_NV_PPWRITE         =3D 1UL << 0,
-> > @@ -965,4 +1010,30 @@ u32 tpm2_enable_nvcommits(struct udevice *dev, ui=
-nt vendor_cmd,
-> >   */
-> >  u32 tpm2_auto_start(struct udevice *dev);
-> >
-> > +/**
-> > + * tpm2_name_to_algorithm() - Return an algorithm id given a supported
-> > + *                           algorithm name
-> > + *
-> > + * @name: algorithm name
-> > + * Return: enum tpm2_algorithms or -EINVAL
-> > + */
-> > +enum tpm2_algorithms tpm2_name_to_algorithm(const char *name);
-> > +
-> > +/**
-> > + * tpm2_algorithm_name() - Return an algorithm name string for a
-> > + *                        supported algorithm id
-> > + *
-> > + * @algorithm_id: algorithm defined in enum tpm2_algorithms
-> > + * Return: algorithm name string or ""
-> > + */
-> > +const char *tpm2_algorithm_name(enum tpm2_algorithms);
-> > +
-> > +/**
-> > + * tpm2_algorithm_to_mask() - Get a TCG hash mask for algorithm
-> > + *
-> > + * @hash_alg: TCG defined algorithm
-> > + * Return: TCG hashing algorithm bitmaps (or 0 if algo not supported)
-> > + */
-> > +u32 tpm2_algorithm_to_mask(enum tpm2_algorithms);
-> > +
-> >  #endif /* __TPM_V2_H */
-> > diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
-> > index b07e0099c27e..cf5d8de018a7 100644
-> > --- a/lib/efi_loader/efi_tcg2.c
-> > +++ b/lib/efi_loader/efi_tcg2.c
-> > @@ -414,8 +414,8 @@ static efi_status_t tcg2_hash_pe_image(void *efi, u=
-64 efi_size,
-> >         }
-> >
-> >         digest_list->count =3D 0;
-> > -       for (i =3D 0; i < ARRAY_SIZE(tpm2_supported_algorithms); i++) {
-> > -               u16 hash_alg =3D tpm2_supported_algorithms[i];
-> > +       for (i =3D 0; i < ARRAY_SIZE(hash_algo_list); i++) {
-> > +               u16 hash_alg =3D hash_algo_list[i].hash_alg;
-> >
-> >                 if (!(active & tpm2_algorithm_to_mask(hash_alg)))
-> >                         continue;
-> > diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-> > index 68eaaa639f89..2fc680a8adf8 100644
-> > --- a/lib/tpm-v2.c
-> > +++ b/lib/tpm-v2.c
-> > @@ -22,13 +22,6 @@
-> >
-> >  #include "tpm-utils.h"
-> >
-> > -const enum tpm2_algorithms tpm2_supported_algorithms[4] =3D {
-> > -       TPM2_ALG_SHA1,
-> > -       TPM2_ALG_SHA256,
-> > -       TPM2_ALG_SHA384,
-> > -       TPM2_ALG_SHA512,
-> > -};
-> > -
-> >  int tcg2_get_active_pcr_banks(struct udevice *dev, u32 *active_pcr_ban=
-ks)
-> >  {
-> >         u32 supported =3D 0;
-> > @@ -82,14 +75,14 @@ int tcg2_create_digest(struct udevice *dev, const u=
-8 *input, u32 length,
-> >                 return rc;
-> >
-> >         digest_list->count =3D 0;
-> > -       for (i =3D 0; i < ARRAY_SIZE(tpm2_supported_algorithms); ++i) {
-> > +       for (i =3D 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
-> >                 u32 mask =3D
-> > -                       tpm2_algorithm_to_mask(tpm2_supported_algorithm=
-s[i]);
-> > +                       tpm2_algorithm_to_mask(hash_algo_list[i].hash_a=
-lg);
-> >
-> >                 if (!(active & mask))
-> >                         continue;
-> >
-> > -               switch (tpm2_supported_algorithms[i]) {
-> > +               switch (hash_algo_list[i].hash_alg) {
-> >                 case TPM2_ALG_SHA1:
-> >                         sha1_starts(&ctx);
-> >                         sha1_update(&ctx, input, length);
-> > @@ -116,12 +109,12 @@ int tcg2_create_digest(struct udevice *dev, const=
- u8 *input, u32 length,
-> >                         break;
-> >                 default:
-> >                         printf("%s: unsupported algorithm %x\n", __func=
-__,
-> > -                              tpm2_supported_algorithms[i]);
-> > +                              hash_algo_list[i].hash_alg);
-> >                         continue;
-> >                 }
-> >
-> >                 digest_list->digests[digest_list->count].hash_alg =3D
-> > -                       tpm2_supported_algorithms[i];
-> > +                       hash_algo_list[i].hash_alg;
-> >                 memcpy(&digest_list->digests[digest_list->count].digest=
-, final,
-> >                        len);
-> >                 digest_list->count++;
-> > @@ -208,13 +201,13 @@ static int tcg2_log_init(struct udevice *dev, str=
-uct tcg2_event_log *elog)
-> >                 return rc;
-> >
-> >         event_size =3D offsetof(struct tcg_efi_spec_id_event, digest_si=
-zes);
-> > -       for (i =3D 0; i < ARRAY_SIZE(tpm2_supported_algorithms); ++i) {
-> > -               mask =3D tpm2_algorithm_to_mask(tpm2_supported_algorith=
-ms[i]);
-> > +       for (i =3D 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
-> > +               mask =3D tpm2_algorithm_to_mask(hash_algo_list[i].hash_=
-alg);
-> >
-> >                 if (!(active & mask))
-> >                         continue;
-> >
-> > -               switch (tpm2_supported_algorithms[i]) {
-> > +               switch (hash_algo_list[i].hash_alg) {
-> >                 case TPM2_ALG_SHA1:
-> >                 case TPM2_ALG_SHA256:
-> >                 case TPM2_ALG_SHA384:
-> > @@ -253,17 +246,17 @@ static int tcg2_log_init(struct udevice *dev, str=
-uct tcg2_event_log *elog)
-> >         put_unaligned_le32(count, &ev->number_of_algorithms);
-> >
-> >         count =3D 0;
-> > -       for (i =3D 0; i < ARRAY_SIZE(tpm2_supported_algorithms); ++i) {
-> > -               mask =3D tpm2_algorithm_to_mask(tpm2_supported_algorith=
-ms[i]);
-> > +       for (i =3D 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
-> > +               mask =3D tpm2_algorithm_to_mask(hash_algo_list[i].hash_=
-alg);
-> >
-> >                 if (!(active & mask))
-> >                         continue;
-> >
-> > -               len =3D tpm2_algorithm_to_len(tpm2_supported_algorithms=
-[i]);
-> > +               len =3D hash_algo_list[i].hash_len;
-> >                 if (!len)
-> >                         continue;
-> >
-> > -               put_unaligned_le16(tpm2_supported_algorithms[i],
-> > +               put_unaligned_le16(hash_algo_list[i].hash_alg,
-> >                                    &ev->digest_sizes[count].algorithm_i=
-d);
-> >                 put_unaligned_le16(len, &ev->digest_sizes[count].digest=
-_size);
-> >                 count++;
-> > @@ -304,7 +297,7 @@ static int tcg2_replay_eventlog(struct tcg2_event_l=
-og *elog,
-> >                 pos =3D offsetof(struct tcg_pcr_event2, digests) +
-> >                         offsetof(struct tpml_digest_values, count);
-> >                 count =3D get_unaligned_le32(log + pos);
-> > -               if (count > ARRAY_SIZE(tpm2_supported_algorithms) ||
-> > +               if (count > ARRAY_SIZE(hash_algo_list) ||
-> >                     (digest_list->count && digest_list->count !=3D coun=
-t))
-> >                         return 0;
-> >
-> > @@ -407,7 +400,7 @@ static int tcg2_log_parse(struct udevice *dev, stru=
-ct tcg2_event_log *elog)
-> >                 return 0;
-> >
-> >         count =3D get_unaligned_le32(&event->number_of_algorithms);
-> > -       if (count > ARRAY_SIZE(tpm2_supported_algorithms))
-> > +       if (count > ARRAY_SIZE(hash_algo_list))
-> >                 return 0;
-> >
-> >         calc_size =3D offsetof(struct tcg_efi_spec_id_event, digest_siz=
-es) +
-> > @@ -1110,7 +1103,7 @@ int tpm2_get_pcr_info(struct udevice *dev, u32 *s=
-upported_pcr, u32 *active_pcr,
-> >          * We only support 5 algorithms for now so check against that
-> >          * instead of TPM2_NUM_PCR_BANKS
-> >          */
-> > -       if (pcrs.count > ARRAY_SIZE(tpm2_supported_algorithms) ||
-> > +       if (pcrs.count > ARRAY_SIZE(hash_algo_list) ||
-> >             pcrs.count < 1) {
-> >                 printf("%s: too many pcrs: %u\n", __func__, pcrs.count)=
-;
-> >                 return -EMSGSIZE;
-> > @@ -1555,3 +1548,40 @@ u32 tpm2_enable_nvcommits(struct udevice *dev, u=
-int vendor_cmd,
-> >
-> >         return 0;
-> >  }
-> > +
-> > +enum tpm2_algorithms tpm2_name_to_algorithm(const char *name)
-> > +{
-> > +       size_t i;
-> > +
-> > +       for (i =3D 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
-> > +               if (!strcasecmp(name, hash_algo_list[i].hash_name))
-> > +                       return hash_algo_list[i].hash_alg;
-> > +       }
-> > +       printf("%s: unsupported algorithm %s\n", __func__, name);
-> > +
-> > +       return -EINVAL;
-> > +}
-> > +
-> > +const char *tpm2_algorithm_name(enum tpm2_algorithms algo)
-> > +{
-> > +       size_t i;
-> > +
-> > +       for (i =3D 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
-> > +               if (hash_algo_list[i].hash_alg =3D=3D algo)
-> > +                       return hash_algo_list[i].hash_name;
-> > +       }
-> > +
-> > +       return "";
-> > +}
-> > +
-> > +u32 tpm2_algorithm_to_mask(enum tpm2_algorithms algo)
-> > +{
-> > +       size_t i;
-> > +
-> > +       for (i =3D 0; i < ARRAY_SIZE(hash_algo_list); i++) {
-> > +               if (hash_algo_list[i].hash_alg =3D=3D algo)
-> > +                       return hash_algo_list[i].hash_mask;
-> > +       }
-> > +
-> > +       return 0;
-> > +}
-> > --
-> > 2.25.1
-> >
+https://www.kernel.org/doc/html/latest/driver-api/pin-control.html#drivers-needing-both-pin-control-and-gpios
+
+> 
+> Anyway: I hope we can agree on the point that the correct pinctrl settings
+> for the controller of this board should make it to the upstream device tree
+> in some way :D
+
+Fully agree that it should be correct in upstream, my point is that on
+one hand I actually think it already is correct in upstream and that
+changing the reset pin to use gpio func as default instead would then be
+done to assist software, and not correctly describe the hw.
+
+On the other hand, if I am not mistaken to use the controller in EP mode
+another compatible/device node needs to be described and if that is the
+case I can fully agree that the device node for RC mode could include
+pinctrl to mux the reset pin for gpio func.
+
+Regardless on what is to be done with pinctrl in DT, I still think it
+will be good to implement these gpio/pinctrl ops in U-Boot to closer
+match "a proper gpiolib driver" as suggested in the Linux pinctrl
+documentation where such driver request proper muxing and other control
+for its pins.
+
+Anyway, I will merge the two gpio/pinctrl series and rearrange patches,
+and also drop any DT changes in a v2.
+
+Regards,
+Jonas
+
+> 
+> Regards,
+> Alex
+>> Maybe I should just drop this and only keep the follow up series.
+>>
+>> Regards,
+>> Jonas
+>>
+>>> Alex
+>>>
+>>> [0]
+>>> https://opensource.rock-chips.com/images/2/26/Rockchip_RK3568_TRM_Part1_V1.3-20220930P.PDF
+>>>
+>>>> Regards,
+>>>> Jonas
+>>>>
+>>>>> Alex
+>>>>>
+>>>>>> Regards,
+>>>>>> Jonas
+>>>>>>
+>>>>>>> Alex
+>>>>>>>> With the gpio and pinctrl ops implemented this series also remove a PCIe
+>>>>>>>> reset-gpios related device lock-up workaround from board u-boot.dtsi.
+>>>>>>>>
+>>>>>>>> PX30, RK3066, RK3188, RK356x and RK3588 are the only SoCs that currently
+>>>>>>>> define gpio-ranges props and is affected by this series.
+>>>>>>>>
+>>>>>>>> A follow up series adding support for the pinmux status cmd will also
+>>>>>>>> add gpio-ranges props for remaining RK SoCs.
+>>>>>>>>
+>>>>>>>> Jonas Karlman (4):
+>>>>>>>>       pinctrl: rockchip: Add gpio_request_enable() ops
+>>>>>>>>       gpio: rockchip: Add request() ops
+>>>>>>>>       rockchip: rk3568-rock-3a: Drop PCIe reset-gpios workaround
+>>>>>>>>       rockchip: rk3568-radxa-e25: Drop PCIe reset-gpios workaround
+>>>>>>>>
+>>>>>>>>      arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi     | 12 -------
+>>>>>>>>      arch/arm/dts/rk3568-rock-3a-u-boot.dtsi       | 12 -------
+>>>>>>>>      drivers/gpio/rk_gpio.c                        | 10 ++++++
+>>>>>>>>      .../pinctrl/rockchip/pinctrl-rockchip-core.c  | 31 +++++++++++++++++++
+>>>>>>>>      4 files changed, 41 insertions(+), 24 deletions(-)
+>>>>>>>>
+
