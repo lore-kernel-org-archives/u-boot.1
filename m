@@ -4,73 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 054FAC25B74
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 00:17:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2B18C25B74
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 00:21:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D9A388441;
-	Wed, 22 May 2024 02:17:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 187DE8844E;
+	Wed, 22 May 2024 02:21:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iE7LslQF";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 8005488441; Wed, 22 May 2024 02:17:47 +0200 (CEST)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1716337294;
+	bh=NBfIA8IjVQZk94zbzALGq++Ui+W6ejbont8clGw/rVs=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=ASfzcREJq3kZrRG8BcqJDwkJaBNRTawS2TAQflojtzOdh3TuWNdRYhCAkgfCrznBo
+	 /KqsiTFba3BlTMa2Wd/45wxuu2m7evoW2pGGQe1FFeL5hnl7xrr5/JNczwkoug2joY
+	 FrL8WDSQOGaBKSXVbNIwjAcF9MTrMHdi/mBYAX9rf6PeVk8o/KdDuCkAQ+7IwS02Dr
+	 zgww00y8fGpEl1j3UDGAdCvVlYgKcSJ4gsoTFAK/Ma3adaPdOUp7guuKKcaSc+xMOL
+	 0bpx7T0E0me0pqhnXra+0uiTE0h6fU+kNFYNELUsbU07R7E2vBXRYg4sKW0uMKF/Mj
+	 ZBmslVYdiudvw==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7159288335
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 02:17:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-792b8d30075so366551685a.1
- for <u-boot@lists.denx.de>; Tue, 21 May 2024 17:17:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1716337064; x=1716941864; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=aByHzrbbP9VdhmqgahArQoJQx1fnsN0uwpVFR7NAlrA=;
- b=iE7LslQFamwU3OnoSTGaIH1/Zc1PWly9KtNzBK4cAGmPgVkd9B+q0et4aPmFKver2b
- 3mqm2IVcFZzsRm87Rykyp0BeF5mBN4S3JSCMK0x/JPWtTjDcLyKeFPeYC3g+75Wqg2YH
- v6cSKpS35goEYpwXtqv7G7nqyTYy5LZd75M9o=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716337064; x=1716941864;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=aByHzrbbP9VdhmqgahArQoJQx1fnsN0uwpVFR7NAlrA=;
- b=EPTDVUdLJ+t63mMs1mIPLteaB0M5HsOfpz9mU0UQ+xF1DtGLxiM4/9XEmnAVyXOmWL
- kLF+N1ZcZas+ItMXfxpurV7vg80KUG8Hy0piZ73yAjjH5TP5fm5lqMJF5vj6fZta2Vhz
- q7/+6hQEh9iyKY4N0uCIr+MFDQcPN4lIMyCP+1KmlpZHl6IjWpRg+w6RRMCazpMHnDgS
- 7AGtsGsoJxIwHXEPnAOrjXivnf1Gqjbh44FzBIalIdpoCNmnv3iMC4Ml6dFSESfp26Of
- nd/PSQlZpLrho3fzLFDt46eptydHpfBNPMnSN7Ze0Dmgfh/f/k05Mf5Ub8Sc+E6m28a4
- ECJA==
-X-Gm-Message-State: AOJu0YzeuknJqT7ZQtq+XM9NdfPFc76zsAYm6Ntvf9UlgW6MDf5DrouT
- U4Are82bE5ZHTRmWFHb5ZAjcCg2xXIfk+SqtiL6fa7RNNFw1ZzzaA37CYxPJhDRyYhNdPcqBRcN
- u
-X-Google-Smtp-Source: AGHT+IGfACik5cuhdy1Obkkxk+8bJDH3Fffkkl/OIGdlFAqqeM0tYzWN5uvsR9QCTVo3rkrqMf218A==
-X-Received: by 2002:a05:620a:294b:b0:793:116:55f0 with SMTP id
- af79cd13be357-794994424cemr71498685a.26.1716337064126; 
- Tue, 21 May 2024 17:17:44 -0700 (PDT)
-Received: from [127.0.1.1] ([189.178.170.52]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-792ff89358asm670250385a.50.2024.05.21.17.17.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 May 2024 17:17:43 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-In-Reply-To: <20240515073612.1511149-1-rasmus.villemoes@prevas.dk>
-References: <20240515073612.1511149-1-rasmus.villemoes@prevas.dk>
-Subject: Re: [PATCH 0/2] scripts/setlocalversion sync with linux 6.9
-Message-Id: <171633706301.1865062.11498265331779113962.b4-ty@konsulko.com>
-Date: Tue, 21 May 2024 18:17:43 -0600
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 58F7188464;
+ Wed, 22 May 2024 02:21:32 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1716337292;
+ bh=NBfIA8IjVQZk94zbzALGq++Ui+W6ejbont8clGw/rVs=;
+ h=From:To:Cc:Subject:Date:From;
+ b=VxZAB+lsUZ9owmSfdGgEA4weRqhNpjUaKyZr8hlzBkSw5KGuMoqAmPk1dNMQR/eiw
+ 3ETc0Ryd80E/H471zpGWOwtZjgURq+EZ4MKT8knmHLEa+hvzggXvsK2k5dQK+fYugV
+ CaEK9jf5iBEtJrVX80T57uwR62erQ20a+jU7QYSSwvx3dTzqyThSGkqSvusuqrMbSl
+ uq1thdOs+R3QgPwOmvsFazAI/Zvop7DkKoXiY0y61hUoyUgT1txAAByHBXMAyB62PN
+ jMYX8jU3mwX84PW+C3ehT+fopjv4adT6vreY32tfLhUp3W3Jz09FdqGu/cvCYmbSo8
+ 4o5Ecvr1/Sfpg==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Martyn Welch <martyn.welch@collabora.com>, Stefano Babic <sbabic@denx.de>
+Subject: [PATCH v2] ARM: imx: verdin-imx8mm: Set CAN oscillator frequency
+ based on model
+Date: Wed, 22 May 2024 02:21:14 +0200
+Message-ID: <20240522002122.50796-1-marex@denx.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,21 +68,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 15 May 2024 09:36:10 +0200, Rasmus Villemoes wrote:
+The older i.MX8M Mini Verdin SoMs may came with 20 MHz SPI CAN controller
+oscillator, the newer SoMs always use 40 MHz oscillator. Handle both by
+overriding the oscillator frequency just before booting the kernel.
 
-> The first commit is trivial cleanup. The second syncs
-> scripts/setlocalversion with linux 6.9, with just a one-line change on
-> top to account for a Kbuild change that U-Boot has not yet adopted.
-> 
-> Rasmus Villemoes (2):
->   Makefile: refactor ubootrelease target
->   scripts/setlocalversion: sync with linux v6.9
-> 
-> [...]
+These are the known variants with 20 MHz oscillator:
+- 0055, V1.1A, V1.1B, V1.1C and V1.1D, use a 20MHz oscillator
+- 0059, V1.1A and V1.1B, use a 20MHz oscillator
 
-Applied to u-boot/next, thanks!
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
+Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Cc: Martyn Welch <martyn.welch@collabora.com>
+Cc: Stefano Babic <sbabic@denx.de>
+Cc: u-boot@lists.denx.de
+---
+V2: - Update the comment in conditional statement
+    - Update ver_assembly check for 0055 rev.A/B/C/D
+---
+ board/toradex/verdin-imx8mm/verdin-imx8mm.c | 30 +++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
 
+diff --git a/board/toradex/verdin-imx8mm/verdin-imx8mm.c b/board/toradex/verdin-imx8mm/verdin-imx8mm.c
+index 55c02653da6..ef632d95f0a 100644
+--- a/board/toradex/verdin-imx8mm/verdin-imx8mm.c
++++ b/board/toradex/verdin-imx8mm/verdin-imx8mm.c
+@@ -125,6 +125,36 @@ int board_phys_sdram_size(phys_size_t *size)
+ #if defined(CONFIG_OF_LIBFDT) && defined(CONFIG_OF_BOARD_SETUP)
+ int ft_board_setup(void *blob, struct bd_info *bd)
+ {
++	const char *canoscpath = "/oscillator";
++	int freq = 40000000;	/* 40 MHz is used on most variants */
++	int canoscoff, ret;
++
++	canoscoff = fdt_path_offset(blob, canoscpath);
++	if (canoscoff < 0)	/* No CAN oscillator found. */
++		goto exit;
++
++	/*
++	 * The actual "prodid" (PID4 in Toradex naming) that have the CAN
++	 * functionality are 0055 and 0059. Special case 20 MHz variant
++	 * here:
++	 * - 0055, V1.1A, V1.1B, V1.1C and V1.1D, use a 20MHz oscillator
++	 * - 0059, V1.1A and V1.1B, use a 20MHz oscillator
++	 */
++	if ((tdx_hw_tag.ver_major == 1 && tdx_hw_tag.ver_minor == 1) &&
++	    ((tdx_hw_tag.prodid == VERDIN_IMX8MMQ_IT &&
++	      tdx_hw_tag.ver_assembly <= 1) ||	/* 0059 rev. A or B */
++	     (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_WIFI_BT_IT &&
++	      tdx_hw_tag.ver_assembly <= 3))) {	/* 0055 rev. A/B/C/D */
++		freq = 20000000;
++	}
++
++	ret = fdt_setprop_u32(blob, canoscoff, "clock-frequency", freq);
++	if (ret < 0) {
++		printf("Failed to set CAN oscillator clock-frequency, ret=%d\n",
++		       ret);
++	}
++
++exit:
+ 	return ft_common_board_setup(blob, bd);
+ }
+ #endif
 -- 
-Tom
-
+2.43.0
 
