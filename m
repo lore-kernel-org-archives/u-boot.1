@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61D50C41513
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 15:35:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F334C25B78
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 15:36:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C4158884D;
-	Wed, 22 May 2024 17:35:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8AFE688867;
+	Wed, 22 May 2024 17:35:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="kBcnkvOX";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="Hc1dT7Pg";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="vC9dJJ3X";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="lBhN3Hbl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7992A8886C; Wed, 22 May 2024 17:35:15 +0200 (CEST)
+ id 90CE888864; Wed, 22 May 2024 17:35:17 +0200 (CEST)
 Received: from wfhigh8-smtp.messagingengine.com
  (wfhigh8-smtp.messagingengine.com [64.147.123.159])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C77A88859
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 17:35:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9643187D43
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 17:35:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailfhigh.west.internal (Postfix) with ESMTP id AFDB51800096;
- Wed, 22 May 2024 11:35:11 -0400 (EDT)
+Received: from compute7.internal (compute7.nyi.internal [10.202.2.48])
+ by mailfhigh.west.internal (Postfix) with ESMTP id C4AA218000CA;
+ Wed, 22 May 2024 11:35:13 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Wed, 22 May 2024 11:35:12 -0400
+ by compute7.internal (MEProxy); Wed, 22 May 2024 11:35:14 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1716392111;
- x=1716478511; bh=aaofPGSPN/fFFqjj/Hw/a/dnQPu2GTSJ0E6PxgxgSw4=; b=
- kBcnkvOXwPjownPH6K/FVuR9oxiMnWvab0qNj7+iWyr4olwbJyfSOK2FwGgLKbn4
- KDqJ2B3/OwSuqiWCDYEy/J4zbDBnakmtVvm7aClLy8myo6uU2FiipARp2sOlkV0t
- 8Kb9mO/OqShav5u1u7GG/4Nd2wLIOvfpu4fWBcTUIjy0oDkwhbV2IJsjdXKC36Uu
- 4lraZBwn2x4AorEk8Gy+PP79VOeO28vnWxu2IQsM4MQGegjtvaTienHe2yTXba6d
- UNxr/Dc3Q4w1kvlg6RnQicJ05CHRSEI1uU9KVnyI7OU/opcphNQ9z1oU7DxVVuQs
- shYLoWZhXD1agEN3JvATRQ==
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1716392113;
+ x=1716478513; bh=/SMlxy0ah6f3vxG1KSvwXVBIM+uWG4uUkutFpE5Usyo=; b=
+ vC9dJJ3Xu1i5RJeVPhoegV4b/h1UeLy7LrUqWuOsiML76sEB1BtSKO1c752JHSFB
+ jgxW4V1Wg3nWaB+Q19ee9Vvwz86+ofEBXyfp1NxtIiz2Aw+FqgvXgqjLQFC7g7AH
+ 6q2wc1PWWXnizJ3mHWSNyX3C7OSvoTY3aL1D2/FgkFOyKZ3rBJWJvkSovsbdXvsx
+ PItGDPreC2vujNndALE9UiJckyxjGSqTHQyq5SRcUlnk2oMtcrX4S/b9okOUnmu9
+ 3YgDME8ZCCn498De+VbkELbRlb89C6qk7k7sp8Z+3/FIT+NDtgXiGbnqaDVNgf55
+ xX9pl6LWHMeAsrfNCdJ+lg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716392111; x=
- 1716478511; bh=aaofPGSPN/fFFqjj/Hw/a/dnQPu2GTSJ0E6PxgxgSw4=; b=H
- c1dT7PgRQTXcVGDJ62Zzgp7h9soZcuU4MY9Go12viEn40kAHKZbSZXUzP+gxUxuD
- Y3aWArpWQjxE+2WPkyjceBbhfI7Gi2HnrRgeQbQ8/pnAeweG0jGNd0q9mdCJ8FNY
- +GGGhCxftoqcWh0pX7W5hw7kjWP1WD0xrmkWtcU5dD5RvUfqsC6zvmEhOQdMBPEC
- s7/DGhWlNDocN75ahOUmapzto9CBXRIxOFmCsFT8MJ0m5Po1TP/lYf4FDm3xjF0g
- TbM2vopl/PpvnTg3hUIzL2CsPqclWCBSbkVYx+nmw0WtKi63FLYHmU6f4lBRku67
- wl4MSs9kZkr0BMgo9MF9Q==
-X-ME-Sender: <xms:rxBOZglSsH8RLNq9j-mvUA8Nzn_VQWMB2oXIllgtk0XEZQnqy-7GQA>
- <xme:rxBOZv0fCX55XO-dIrExQOX4FM_SSDR5peb_qmBE3nPPnt2vD3CzExDMzvPCSQCIy
- k8dEfDK-F-OP-dzGTU>
-X-ME-Received: <xmr:rxBOZupEPLdhL3wO5_PmhuFtDN57AUTDfvtgBZLfltT7CGNU46kx_l8>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716392113; x=
+ 1716478513; bh=/SMlxy0ah6f3vxG1KSvwXVBIM+uWG4uUkutFpE5Usyo=; b=l
+ BhN3HblbUdY8CJHXxusejJnFG8BGiQxeCClU9B2a2KxN80VLMYo8+D12GYbj1Fj0
+ hBB89baXTM8huG3dcexmLerfoGnd+Czsj1NVaqQq3E2e9OcnKEdXWk45i68I8UU+
+ DpI77duzb+ybvwIC8nD+G5iz5zXlbNPTzLAUufdFCAKAhbokRA6pgEqOZXaGy52K
+ ojTdZJFDbY4PNmrbHdFvMWhp8qvhUppYe28tqjsywAmzeSeEykx77jrpKGmKGEun
+ uUV1Fk4HGTfv5CH2TzuVVvf9Rh+ng3OMJNO6fGoqRO4dLpxQa/jh2KSa4mTCmHl3
+ 9dJwa4v7OcPwW6b34OtVg==
+X-ME-Sender: <xms:sRBOZn-Y10yXonc8tuephogad9SmrY4J0D_GB9kj3CB8RkW4VDtp1w>
+ <xme:sRBOZjsk2GmXGEqDYfn8i8LVvrGhFgpZOwEuZDRb_ZvKiOlo8G6eBFCbPtqb0tGIT
+ WKLo7nUHcy6Qy6u4Ao>
+X-ME-Received: <xmr:sRBOZlDHWMnnoodMHqVr5woJJb_C6wnq6D0llwJn5NwXtxz68uSaJ5c>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdeigedgvdegucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
@@ -68,21 +68,21 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdeigedgvdegucetufdoteggod
  cuggftrfgrthhtvghrnhepvdekiefhfeevkeeuveetfeelffekgedugefhtdduudeghfeu
  veegffegudekjeelnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilh
  hfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:rxBOZsn_LuMhAi27PjTII5B4u-9tZFVDsJ_5miLDm1MBAKuDzt_rhg>
- <xmx:rxBOZu1CYUwy8cScsEBcm3dL8fsqKIaw-zj_4mZ45fkgy4T2B1rdrQ>
- <xmx:rxBOZjsJ7aA1YHBsFtcZmgMmv1RMWQYA4ml2rxfNicSAtLyfE0sNdw>
- <xmx:rxBOZqWBOZrmQ6OCg_Z8q48UgR6UJHxHrXaXAGLdygN3S18oDBohig>
- <xmx:rxBOZopL6gN9WUmlpZoT-0ck5l4tZcbG60DYkbq54uwFiUMEVHVSTmLf>
+X-ME-Proxy: <xmx:sRBOZjcpguBbueHL8ADIvDyK3x-tfs4cwy6VvDHLvGRsErGRlIOUCg>
+ <xmx:sRBOZsO6anUqZF_SplhaulKl1Mq18bJ8qsK5O5Od_GotCoWixSeuaQ>
+ <xmx:sRBOZllT56hvGRxH5mYIWM8HUU4-Y2S_Jkao7NS8TvKfQceBNtZY_Q>
+ <xmx:sRBOZmsECjamyS4f1ix73NNe2QNykQ3AGNuWapjL6aEDIgdcpWbjTA>
+ <xmx:sRBOZoAb6JasLq6VqwB-LzdjLvx52WNRyw4Kv2wmLSAD4WTtZFvA6ZLV>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 22 May 2024 11:35:10 -0400 (EDT)
+ 22 May 2024 11:35:12 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Wed, 22 May 2024 16:34:47 +0100
-Subject: [PATCH 04/16] elf.h Define LoongArch bits
+Date: Wed, 22 May 2024 16:34:48 +0100
+Subject: [PATCH 05/16] image: Define IH_ARCH_LOONGARCH
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240522-loongarch-v1-4-1407e0b69678@flygoat.com>
+Message-Id: <20240522-loongarch-v1-5-1407e0b69678@flygoat.com>
 References: <20240522-loongarch-v1-0-1407e0b69678@flygoat.com>
 In-Reply-To: <20240522-loongarch-v1-0-1407e0b69678@flygoat.com>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
@@ -90,13 +90,13 @@ To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.denx.de, Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1043;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=974;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=xGPa1l/xKPdnjRCibaa5XkEFMwzEvG1IzJKtZ5Ki0i8=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhjQ/geUX683/+H6a/WXz0V1yn4Nmfg/nOFxyNkPG9Lzql
- i33F5Yf7ChlYRDjYpAVU2QJEVDq29B4ccH1B1l/YOawMoEMYeDiFICJrDnCyLCvN8a3Wrdyn4uI
- 9rWGd5xPg/6f/F+vJuQUWlizXG8GXykjQydTS+wFdftIuc0TvvApLL/24uoVA+NPHXVXXiRYHJ3
- syA0A
+ bh=Cbk/RHQVvZdLxetm00n1vu6tWG7iPrD118gN/Otkl0c=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhjQ/geWVxziEN7yJ5Ldhr5+zNvn7/aNWDrqiFjc+7F6XL
+ b7kfP7MjlIWBjEuBlkxRZYQAaW+DY0XF1x/kPUHZg4rE8gQBi5OAZiIphrDX9ljh7rr+E68nnun
+ QOFb819/+XqFvg1/9v2Vi61PvFww1ZXhN+v2sq9hMROyFtyfqVSvlJfPmL9GY2rCzJU3BLfeKsk
+ 4yAsA
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -115,40 +115,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-They all come from glibc's elf.h
+Allocate the next value to IH_ARCH_LOONGARCH.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- include/elf.h | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ boot/image.c    | 1 +
+ include/image.h | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/include/elf.h b/include/elf.h
-index a4ba74d8abeb..cb3bb20c4f2e 100644
---- a/include/elf.h
-+++ b/include/elf.h
-@@ -219,7 +219,8 @@ typedef struct {
- #define EM_MN10300	89		/* Matsushita MN10200 */
- #define EM_MN10200	90		/* Matsushita MN10200 */
- #define EM_PJ		91		/* picoJava */
--#define EM_NUM		92		/* number of machine types */
-+#define EM_LOONGARCH	258	/* LoongArch */
-+
+diff --git a/boot/image.c b/boot/image.c
+index 073931cd7a3f..8955a095713d 100644
+--- a/boot/image.c
++++ b/boot/image.c
+@@ -96,6 +96,7 @@ static const table_entry_t uimage_arch[] = {
+ 	{	IH_ARCH_X86_64,		"x86_64",	"AMD x86_64",	},
+ 	{	IH_ARCH_XTENSA,		"xtensa",	"Xtensa",	},
+ 	{	IH_ARCH_RISCV,		"riscv",	"RISC-V",	},
++	{	IH_ARCH_LOONGARCH,	"loongarch",	"LoongArch",	},
+ 	{	-1,			"",		"",		},
+ };
  
- /* Version */
- #define EV_NONE		0		/* Invalid */
-@@ -699,6 +700,12 @@ unsigned long elf_hash(const unsigned char *name);
- #define R_RISCV_64		2
- #define R_RISCV_RELATIVE	3
+diff --git a/include/image.h b/include/image.h
+index a2bfc7bb19a3..1dd6dfb82437 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -139,6 +139,7 @@ enum {
+ 	IH_ARCH_X86_64,			/* AMD x86_64, Intel and Via */
+ 	IH_ARCH_XTENSA,			/* Xtensa	*/
+ 	IH_ARCH_RISCV,			/* RISC-V */
++	IH_ARCH_LOONGARCH,		/* Loongson LoongArch */
  
-+/* LoongArch Relocations */
-+#define R_LARCH_NONE				0
-+#define R_LARCH_32				1
-+#define R_LARCH_64				2
-+#define R_LARCH_RELATIVE			3
-+
- #ifndef __ASSEMBLY__
- int valid_elf_image(unsigned long addr);
- unsigned long load_elf64_image_phdr(unsigned long addr);
+ 	IH_ARCH_COUNT,
+ };
 
 -- 
 2.43.0
