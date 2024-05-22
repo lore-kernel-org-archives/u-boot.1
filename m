@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76576C25B79
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 15:36:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 681D5C25B78
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 15:36:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15F2A88877;
+	by phobos.denx.de (Postfix) with ESMTP id 8C3EB88875;
 	Wed, 22 May 2024 17:35:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="57QIIsZh";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="AuYC0ugr";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="EpbBw/Gx";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="Yv1PU6eP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A34608887B; Wed, 22 May 2024 17:35:24 +0200 (CEST)
-Received: from wfhigh8-smtp.messagingengine.com
- (wfhigh8-smtp.messagingengine.com [64.147.123.159])
+ id C888D88859; Wed, 22 May 2024 17:35:25 +0200 (CEST)
+Received: from wfout5-smtp.messagingengine.com
+ (wfout5-smtp.messagingengine.com [64.147.123.148])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73DE488849
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 17:35:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A1F3B88864
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 17:35:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
 Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
- by mailfhigh.west.internal (Postfix) with ESMTP id A74C918000CA;
- Wed, 22 May 2024 11:35:18 -0400 (EDT)
+ by mailfout.west.internal (Postfix) with ESMTP id D6F351C0017A;
+ Wed, 22 May 2024 11:35:20 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute1.internal (MEProxy); Wed, 22 May 2024 11:35:19 -0400
+ by compute1.internal (MEProxy); Wed, 22 May 2024 11:35:21 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1716392118;
- x=1716478518; bh=gSJDQQngphACyjI3YnTZZco2KzieYEXd/43ZNMcoXgw=; b=
- 57QIIsZhDBQgzEOvrlEvP53EVnZ7w4dakWzF9ZvRM5+WvkQeGOBOrOrW/XKyYSE8
- rT9/jJSer4qOUq5h8ORHapMQNq8s1UTt+yjHCtgrDt5cnIFdVwZE6xWVt/XhjBnQ
- Fkm6CWfnGLnSW6ZA9wgk265TP1InG8fFR7xCxSri6LOAoniRvPKyhjmouEYCbzrF
- NyRgceUKvd6xpMu1vyMEwM4MYvqirtZc/OqFnOpWLKGeSA0/0VCh1IH94hPgYug6
- Ht4zqw2R5C08Ngvs9PRSa9nvJxDBQccfaENt4IR56plhb7+7jht1uR54uNmwCNVB
- piHG1oXFhtbc5iRutqyKeg==
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1716392120;
+ x=1716478520; bh=+Ps8UghFxAkpL/ydeuqyBbVHuTTEjQnbUC0BbyZo2YI=; b=
+ EpbBw/Gxq9ZE5E0N6wm/Bg1hqkyJIv4rDyAiqfj5hvMUhXWLcD1s3J3En8yYKyku
+ tBA82X22kt7dD3ueWc5BUO98h23dt69XoC6/pKRkH25DDgcugdA9TUhsZoIZ84e9
+ iBJ5cDbjo3JlurAv/6xdwiPjxa5S2hh5kIKUFFpAdZios4xmRi9tix8yNoyNoebn
+ biW7QskpiPFO/qFcOjUteUyo3d1pl7fDpg1YGdUhzszufaJ8QG7AA7NwiymwQ7Fb
+ RtioQNXCeNH77XX8jM8Jupt0gDMf8ZkceinWiWllXIkU6R7gp8P4kGUK+yXQDz5K
+ 3ECfRvFyXEJFwfO8hqRNZw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716392118; x=
- 1716478518; bh=gSJDQQngphACyjI3YnTZZco2KzieYEXd/43ZNMcoXgw=; b=A
- uYC0ugre2iLp7r1faIZWbbMBSzts00g/ZF0Q5mEJ0Y0607Kp2/XeL7+KEXLKXaMQ
- QbLxc4tgsL8hwHjq0J/HHJrbo5GkjXowdrV8VOpAQJNlK8T+6HULKdjtEBtBOZ+B
- X8CqdYWmNG5YptZ+ukpjIhQFjePt+E33JbEgilQ15L3RZo81DDtM8pHMkIessHN1
- iKPc9BA77ehj73KYvm8/Z/0D7tA2/EmICBi+fMt5aw0GmzL6YnU0Iii+kHAEDE+S
- E0+03XKMwc0qcqe016hNQCVnlaJdyMqjC4NJjGSOiTflzhosYFJVa3yHaRenEvCn
- dZBJqdix8o1H09Uew9Viw==
-X-ME-Sender: <xms:thBOZi_salrisEYwk7g9VHovmjJgQgRDUtAgpP_c46qJmsQPbYrtQg>
- <xme:thBOZivmAlVgHN3pDQmKJT3ic3rCjvzaYp-lbk5pg1ClMLy0TqCfbIwn0_aw1Q2Al
- dIA5bnC4W7_Oo9dkSI>
-X-ME-Received: <xmr:thBOZoD6Cj79bJJCeYVnfbS-jMii9ctYIApq4x3AZRaHw6RDQeL4EHE>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716392120; x=
+ 1716478520; bh=+Ps8UghFxAkpL/ydeuqyBbVHuTTEjQnbUC0BbyZo2YI=; b=Y
+ v1PU6ePG2o9tTAsCM/OJ0pqTPnA7dNB7uV5I0+/vkaKmnzrSB8MYLrsZTRLnPFwp
+ thO3o9+5EIRtL933nzemnS2W6JxTB4QUvfj+vNfbClBpRxKslm0KgqSfRDHyVpbf
+ gjCjBZ8SvUhD2oxX/l4sMK+SrLMJ9z/uJ0QYGcmZqKIMF1lNnu+pQZJSXrvBqOvh
+ elgECq3fvcX6KqSUyW96o8+kpKFAwIYx/rmci8YYHWdxJYDxuy6veT2s9NhZANPT
+ YOBY3xGCJhtDhitK10q7wFSUad6ItvaWXkRmQfrD/byZ6QiJVFKQZp6QaWgPBND3
+ eey+53R7lrx8gRo2Xb+lg==
+X-ME-Sender: <xms:uBBOZl5woQ0JZed06Qs7_b2OEn7AKkfO4d2FQA6UMw_PjaysNeez6g>
+ <xme:uBBOZi5oTzsFGRZS5r9Nshkuxuw9V84ChZKSlRzDj6TewCskzvf7s85EWMJHWBEAP
+ 3UB6JgTrXi5LpiDsk4>
+X-ME-Received: <xmr:uBBOZscHMX4Jy6YPIG7VcPHKDZGVQgje91MiRQ-RkgLlwCucEEAcu5Q>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdeigedgvdefucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
  cujfgurhephfffufggtgfgkfhfjgfvvefosehtjeertdertdejnecuhfhrohhmpeflihgr
  gihunhcujggrnhhguceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomheqne
- cuggftrfgrthhtvghrnhephfduhfekkeetieejheekueeuvdegkeeiudduhfejgfejiedu
- geekfedtvdffgeelnecuffhomhgrihhnpehsvghtjhhmphdrshgsnecuvehluhhsthgvrh
- fuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepjhhirgiguhhnrdihrghnghes
- fhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:thBOZqcUn3qwT5TPRzH--PjFD128stvzlcai_-D8rCwldYoi-VDExA>
- <xmx:thBOZnOZgTrC1D0R_Wkmm5O2P-LfKB3oyotkHiQMvR_JU3LnK6b8cQ>
- <xmx:thBOZklE9gnm8_P_lL_RQHLsNBLGFMIsdEzXU8mKlXGaxevmboxIVQ>
- <xmx:thBOZps6HjNqhKvacCmtmvwfLPKZO0nxqyx30j3UDP5IcD7CzBDULQ>
- <xmx:thBOZjC7txuI-hXQYwSY1E-JBqGwJRC-o1Ti0aaVxAbvjzjEIpUW_6nm>
+ cuggftrfgrthhtvghrnhepleeihfekffeggefhudeghefhvdegieetieevvdehffeitdff
+ leffhfdttedtjedtnecuffhomhgrihhnpehsmhhppghsvggtohhnuggrrhihrdhssgdpsh
+ htrghrthdrshgsnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhf
+ rhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
+X-ME-Proxy: <xmx:uBBOZuKFNMpbE9ZwAOE24GdhlTIJsRakDT1-9D-xI1WVzmKKktkD0Q>
+ <xmx:uBBOZpLRQe0RNVl2APKOoR1lNNCXghubrlEX7hOhNMZ37c7RjuYNhw>
+ <xmx:uBBOZnwDznaNkZU91CFcrI7ajSvGYWrcgfYZN77RLzXLVDtG2uorEA>
+ <xmx:uBBOZlJ1xt0M0KQlzzJfYuxcQuRZUn7LRMzJdguSeZm9bUaZgeM1tA>
+ <xmx:uBBOZh-p445Unz3VeuQSFrA7QPXW6axlhPURyKQQ4fTIBFD-yNjQsaSk>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 22 May 2024 11:35:17 -0400 (EDT)
+ 22 May 2024 11:35:19 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Wed, 22 May 2024 16:34:50 +0100
-Subject: [PATCH 07/16] LoongArch: lib: General routines
+Date: Wed, 22 May 2024 16:34:51 +0100
+Subject: [PATCH 08/16] LoongArch: CPU assembly routines
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240522-loongarch-v1-7-1407e0b69678@flygoat.com>
+Message-Id: <20240522-loongarch-v1-8-1407e0b69678@flygoat.com>
 References: <20240522-loongarch-v1-0-1407e0b69678@flygoat.com>
 In-Reply-To: <20240522-loongarch-v1-0-1407e0b69678@flygoat.com>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
@@ -91,13 +91,13 @@ To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.denx.de, Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7361;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7781;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=/jgoupNoHQtPyAkIVC+ESLPesLzwE03AbUz4ZuJBDVc=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhjQ/geUVbzdPkRe9KjrJ44DF5uLPd6JWpf569j7gU+zTC
- fndnzOWdpSyMIhxMciKKbKECCj1bWi8uOD6g6w/MHNYmUCGMHBxCsBEKm8wMvzfUhrjc9PRgzEt
- KEb82HaJgqhLOR0Gb1+H+26qa7vucoyR4c3n7fnu0y98m3jv6UYJV5vvws+mSxz8yK6/YGm4epT
- JPQYA
+ bh=7x4osc2i65jpyC29cz0I10iy6xxIbxx1NIwinlxLN04=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhjQ/geV/LuVEt5Y/+S7x7LNf5Ra5eJ7o95GcaeuPcEd/k
+ zBN/bGvo5SFQYyLQVZMkSVEQKlvQ+PFBdcfZP2BmcPKBDKEgYtTACZiv4KRYf+cet+gjiQ3JzkV
+ 052RjcKrGV/kazIGvjmdHpTpbvOrm+EPn1jtly6+vaLesyY+LXj9o6DQUqTmb1DDpzn2Ky7Ga4t
+ zAwA=
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -116,282 +116,299 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add some common library routines for the architecture.
+start.S for initialisation, smp_secondary routine for
+a spin-table like interface for secondary cpus.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- arch/loongarch/lib/Makefile      |  7 ++++
- arch/loongarch/lib/asm-offsets.c | 66 ++++++++++++++++++++++++++++++++++++
- arch/loongarch/lib/boot.c        | 14 ++++++++
- arch/loongarch/lib/cache.c       | 73 ++++++++++++++++++++++++++++++++++++++++
- arch/loongarch/lib/reset.c       | 14 ++++++++
- arch/loongarch/lib/setjmp.S      | 52 ++++++++++++++++++++++++++++
- 6 files changed, 226 insertions(+)
+ arch/loongarch/cpu/Makefile        |   4 +
+ arch/loongarch/cpu/cpu.c           |  28 ++++++
+ arch/loongarch/cpu/smp_secondary.S |  55 ++++++++++++
+ arch/loongarch/cpu/start.S         | 169 +++++++++++++++++++++++++++++++++++++
+ 4 files changed, 256 insertions(+)
 
-diff --git a/arch/loongarch/lib/Makefile b/arch/loongarch/lib/Makefile
-index 3dbed94cc624..3c17b9cd85af 100644
---- a/arch/loongarch/lib/Makefile
-+++ b/arch/loongarch/lib/Makefile
-@@ -3,3 +3,10 @@
+diff --git a/arch/loongarch/cpu/Makefile b/arch/loongarch/cpu/Makefile
+index 3dbed94cc624..d3c38a16d057 100644
+--- a/arch/loongarch/cpu/Makefile
++++ b/arch/loongarch/cpu/Makefile
+@@ -3,3 +3,7 @@
  # Copyright (C) 2024 Jiaxun yang <jiaxun.yang@flygoat.com>
  #
  
-+obj-$(CONFIG_CMD_GO) += boot.o
-+obj-y	+= cache.o
-+obj-y	+= interrupts.o
-+ifeq ($(CONFIG_$(SPL_)SYSRESET),)
-+obj-y	+= reset.o
-+endif
-+obj-y	+= setjmp.o
-diff --git a/arch/loongarch/lib/asm-offsets.c b/arch/loongarch/lib/asm-offsets.c
++extra-y = start.o
++
++obj-y += cpu.o
++obj-y += smp_secondary.o
+diff --git a/arch/loongarch/cpu/cpu.c b/arch/loongarch/cpu/cpu.c
 new file mode 100644
-index 000000000000..e3f4c629b63d
+index 000000000000..87c93c0cb20e
 --- /dev/null
-+++ b/arch/loongarch/lib/asm-offsets.c
-@@ -0,0 +1,66 @@
++++ b/arch/loongarch/cpu/cpu.c
+@@ -0,0 +1,28 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
-+ *
-+ * From arch/x86/lib/asm-offsets.c
-+ *
-+ * This program is used to generate definitions needed by
-+ * assembly language modules.
-+ */
-+
-+#include <asm/global_data.h>
-+#include <asm/ptrace.h>
-+#include <linux/kbuild.h>
-+
-+static void __used output_ptreg_defines(void)
-+{
-+	COMMENT("LoongArch pt_regs offsets.");
-+	OFFSET(PT_R0, pt_regs, regs[0]);
-+	OFFSET(PT_R1, pt_regs, regs[1]);
-+	OFFSET(PT_R2, pt_regs, regs[2]);
-+	OFFSET(PT_R3, pt_regs, regs[3]);
-+	OFFSET(PT_R4, pt_regs, regs[4]);
-+	OFFSET(PT_R5, pt_regs, regs[5]);
-+	OFFSET(PT_R6, pt_regs, regs[6]);
-+	OFFSET(PT_R7, pt_regs, regs[7]);
-+	OFFSET(PT_R8, pt_regs, regs[8]);
-+	OFFSET(PT_R9, pt_regs, regs[9]);
-+	OFFSET(PT_R10, pt_regs, regs[10]);
-+	OFFSET(PT_R11, pt_regs, regs[11]);
-+	OFFSET(PT_R12, pt_regs, regs[12]);
-+	OFFSET(PT_R13, pt_regs, regs[13]);
-+	OFFSET(PT_R14, pt_regs, regs[14]);
-+	OFFSET(PT_R15, pt_regs, regs[15]);
-+	OFFSET(PT_R16, pt_regs, regs[16]);
-+	OFFSET(PT_R17, pt_regs, regs[17]);
-+	OFFSET(PT_R18, pt_regs, regs[18]);
-+	OFFSET(PT_R19, pt_regs, regs[19]);
-+	OFFSET(PT_R20, pt_regs, regs[20]);
-+	OFFSET(PT_R21, pt_regs, regs[21]);
-+	OFFSET(PT_R22, pt_regs, regs[22]);
-+	OFFSET(PT_R23, pt_regs, regs[23]);
-+	OFFSET(PT_R24, pt_regs, regs[24]);
-+	OFFSET(PT_R25, pt_regs, regs[25]);
-+	OFFSET(PT_R26, pt_regs, regs[26]);
-+	OFFSET(PT_R27, pt_regs, regs[27]);
-+	OFFSET(PT_R28, pt_regs, regs[28]);
-+	OFFSET(PT_R29, pt_regs, regs[29]);
-+	OFFSET(PT_R30, pt_regs, regs[30]);
-+	OFFSET(PT_R31, pt_regs, regs[31]);
-+	OFFSET(PT_CRMD, pt_regs, csr_crmd);
-+	OFFSET(PT_PRMD, pt_regs, csr_prmd);
-+	OFFSET(PT_EUEN, pt_regs, csr_euen);
-+	OFFSET(PT_ECFG, pt_regs, csr_ecfg);
-+	OFFSET(PT_ESTAT, pt_regs, csr_estat);
-+	OFFSET(PT_ERA, pt_regs, csr_era);
-+	OFFSET(PT_BVADDR, pt_regs, csr_badvaddr);
-+	OFFSET(PT_ORIG_A0, pt_regs, orig_a0);
-+	DEFINE(PT_SIZE, sizeof(struct pt_regs));
-+	BLANK();
-+}
-+
-+int main(void)
-+{
-+	output_ptreg_defines();
-+	return 0;
-+}
-diff --git a/arch/loongarch/lib/boot.c b/arch/loongarch/lib/boot.c
-new file mode 100644
-index 000000000000..327be16bb59f
---- /dev/null
-+++ b/arch/loongarch/lib/boot.c
-@@ -0,0 +1,14 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
-+ */
-+
-+#include <asm/u-boot.h>
-+
-+unsigned long do_go_exec(ulong (*entry)(int, char * const []),
-+			 int argc, char *const argv[])
-+{
-+	cleanup_before_linux();
-+
-+	return entry(argc, argv);
-+}
-diff --git a/arch/loongarch/lib/cache.c b/arch/loongarch/lib/cache.c
-new file mode 100644
-index 000000000000..54566edef8a3
---- /dev/null
-+++ b/arch/loongarch/lib/cache.c
-@@ -0,0 +1,73 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
-+ */
-+
-+#include <cpu_func.h>
-+#include <asm/cache.h>
-+#include <asm/loongarch.h>
-+
-+void invalidate_icache_all(void)
-+{
-+	asm volatile ("\tibar 0\n"::);
-+}
-+
-+__weak void flush_dcache_all(void)
-+{
-+	asm volatile ("\tdbar 0\n"::);
-+}
-+
-+__weak void flush_dcache_range(unsigned long start, unsigned long end)
-+{
-+	/* Placeholder */
-+	flush_dcache_all();
-+}
-+
-+__weak void invalidate_icache_range(unsigned long start, unsigned long end)
-+{
-+	/* LoongArch mandatory hardware I-Cache coherence */
-+	invalidate_icache_all();
-+}
-+
-+__weak void invalidate_dcache_range(unsigned long start, unsigned long end)
-+{
-+	/* Placeholder */
-+	flush_dcache_all();
-+}
-+
-+__weak void cache_flush(void)
-+{
-+	/* Placeholder */
-+	flush_dcache_all();
-+}
-+
-+__weak void cache_invalidate(void)
-+{
-+	/* Placeholder */
-+	flush_dcache_all();
-+}
-+
-+__weak void flush_cache(unsigned long addr, unsigned long size)
-+{
-+	cache_flush();
-+}
-+
-+__weak void dcache_enable(void)
-+{
-+}
-+
-+__weak void dcache_disable(void)
-+{
-+}
-+
-+__weak int dcache_status(void)
-+{
-+	return 0;
-+}
-+
-+__weak void enable_caches(void)
-+{
-+	cache_invalidate();
-+	/* Enable cache for direct address translation mode */
-+	csr_xchg64(1 << CSR_CRMD_DACM_SHIFT, CSR_CRMD_DACM, LOONGARCH_CSR_CRMD);
-+}
-diff --git a/arch/loongarch/lib/reset.c b/arch/loongarch/lib/reset.c
-new file mode 100644
-index 000000000000..ddf29ee41d95
---- /dev/null
-+++ b/arch/loongarch/lib/reset.c
-@@ -0,0 +1,14 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
++ * Copyright (C) 2018, Bin Meng <bmeng.cn@gmail.com>
 + */
 +
 +#include <command.h>
++#include <cpu.h>
 +#include <cpu_func.h>
++#include <dm.h>
++#include <dm/lists.h>
++#include <event.h>
++#include <hang.h>
++#include <init.h>
++#include <log.h>
++#include <asm/system.h>
++#include <dm/uclass-internal.h>
++#include <linux/bitops.h>
 +
-+int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
++
++#if !CONFIG_IS_ENABLED(SYSRESET)
++void reset_cpu(void)
 +{
-+	reset_cpu();
++	printf("resetting ...\n");
 +
-+	return 0;
++	printf("reset not supported yet\n");
++	hang();
 +}
-diff --git a/arch/loongarch/lib/setjmp.S b/arch/loongarch/lib/setjmp.S
++#endif
+diff --git a/arch/loongarch/cpu/smp_secondary.S b/arch/loongarch/cpu/smp_secondary.S
 new file mode 100644
-index 000000000000..12981d0013fa
+index 000000000000..1d7f02babb48
 --- /dev/null
-+++ b/arch/loongarch/lib/setjmp.S
-@@ -0,0 +1,52 @@
++++ b/arch/loongarch/cpu/smp_secondary.S
+@@ -0,0 +1,55 @@
 +/* SPDX-License-Identifier: GPL-2.0+ */
 +/*
++ * Loop to run on secondary cores for LoongArch CPU
++ *
 + * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
 + */
 +
-+#include <config.h>
-+#include <asm/asm.h>
 +#include <linux/linkage.h>
++#include <asm/asm.h>
++#include <asm/loongarch.h>
++#include <asm/arch/entry-init.h>
 +
-+.pushsection .text.setjmp, "ax"
-+ENTRY(setjmp)
-+	LONG_S		s0, a0, 0
-+	LONG_S 		s1, a0, (1 * LONGSIZE)
-+	LONG_S		s2, a0, (2 * LONGSIZE)
-+	LONG_S		s3, a0, (3 * LONGSIZE)
-+	LONG_S		s4, a0, (4 * LONGSIZE)
-+	LONG_S		s5, a0, (5 * LONGSIZE)
-+	LONG_S		s6, a0, (6 * LONGSIZE)
-+	LONG_S		s7, a0, (7 * LONGSIZE)
-+	LONG_S		s8, a0, (8 * LONGSIZE)
-+	LONG_S		fp, a0, (9 * LONGSIZE)
-+	LONG_S		sp, a0, (10 * LONGSIZE)
-+	LONG_S		ra, a0, (11 * LONGSIZE)
++ENTRY(secondary_core_loop)
++	smp_secondary_setup
 +
-+	move		a0, zero
-+	ret
-+ENDPROC(setjmp)
-+.popsection
++	PTR_LI		t0, LOONGARCH_IOCSR_MBUF0
++	LONG_IOCSRWR	zero, t0
 +
-+.pushsection .text.longjmp, "ax"
-+ENTRY(longjmp)
-+	LONG_L		s0, a0, 0
-+	LONG_L 		s1, a0, (1 * LONGSIZE)
-+	LONG_L		s2, a0, (2 * LONGSIZE)
-+	LONG_L		s3, a0, (3 * LONGSIZE)
-+	LONG_L		s4, a0, (4 * LONGSIZE)
-+	LONG_L		s5, a0, (5 * LONGSIZE)
-+	LONG_L		s6, a0, (6 * LONGSIZE)
-+	LONG_L		s7, a0, (7 * LONGSIZE)
-+	LONG_L		s8, a0, (8 * LONGSIZE)
-+	LONG_L		fp, a0, (9 * LONGSIZE)
-+	LONG_L		sp, a0, (10 * LONGSIZE)
-+	LONG_L		ra, a0, (11 * LONGSIZE)
++	/* Enable IPI interrupt for wakeup */
++	LONG_LI		t0, ECFGF_IPI
++	csrxchg		t0, t0, LOONGARCH_CSR_ECFG
 +
-+	/* Move the return value in place, but return 1 if passed 0. */
-+	li.w		a0, 1
-+	beqz		a1, 1f
-+	move		a0, a1
++	LONG_LI		t0, 0xffffffff
++	li.w		t1, LOONGARCH_IOCSR_IPI_CLEAR
++	iocsrwr.w	t0, t1
++	li.w		t1, LOONGARCH_IOCSR_IPI_EN
++	iocsrwr.w	t0, t1
++
++	/* t1 for spin table */
++	PTR_LI		t1, LOONGARCH_IOCSR_MBUF0
++
 +1:
-+	jr		ra
-+ENDPROC(longjmp)
-+.popsection
++	/* Query spin table */
++	idle 0
++	nop
++	iocsrrd.w	t0, t1
++	beqz		t0, 1b
++
++	/* CLear IPI interrupt */
++	PTR_LI		t1, LOONGARCH_IOCSR_IPI_STATUS
++	iocsrrd.w	t0, t1
++	PTR_LI		t1, LOONGARCH_IOCSR_IPI_CLEAR
++	iocsrwr.w	t0, t1
++
++	/* Mask all interrupts */
++	LONG_LI		t0, ECFG0_IM
++	csrxchg		zero, t0, LOONGARCH_CSR_ECFG
++
++	/* Jump to secondary core */
++	PTR_LI		t1, LOONGARCH_IOCSR_MBUF0
++	LONG_IOCSRRD	t0, t1
++	/* If we ever return, put us back to the loop */
++	la.pcrel	ra, secondary_core_loop
++	jirl		zero, t0, 0
++END(secondary_core_loop)
+diff --git a/arch/loongarch/cpu/start.S b/arch/loongarch/cpu/start.S
+new file mode 100644
+index 000000000000..69d52c5d7f4a
+--- /dev/null
++++ b/arch/loongarch/cpu/start.S
+@@ -0,0 +1,169 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Startup Code for LoongArch CPU
++ *
++ * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
++ */
++
++#include <asm-offsets.h>
++#include <config.h>
++#include <elf.h>
++#include <system-constants.h>
++#include <asm/addrspace.h>
++#include <asm/asm.h>
++#include <asm/loongarch.h>
++#include <asm/arch/entry-init.h>
++
++#define BOOTCORE_ID		0
++
++.section .text
++.globl _start
++_start:
++	/* Allow arch specific setup code for MCSR stuff */
++	entry_setup
++
++	/* Disable interrupt */
++	LONG_LI		t0, CSR_CRMD_IE
++	csrxchg		zero, t0, LOONGARCH_CSR_CRMD
++
++	/* Configure reset ebase */
++	la.pcrel	t0, exception_entry
++	csrwr		t0, LOONGARCH_CSR_EENTRY
++
++	/* Setup direct map window for later use */
++	PTR_LI		t0, CSR_DMW0_INIT
++	csrwr		t0, LOONGARCH_CSR_DMWIN0
++	PTR_LI		t0, CSR_DMW1_INIT
++	csrwr		t0, LOONGARCH_CSR_DMWIN1
++
++	/* Branch out for nonboot core */
++	csrrd		t0, LOONGARCH_CSR_CPUID
++	andi		t0, t0, CSR_CPUID_COREID
++	LONG_LI		t1, BOOTCORE_ID
++	bne			t1, t0, secondary_core_loop
++
++/*
++ * Set stackpointer in internal/ex RAM to call board_init_f
++ */
++call_board_init_f:
++	PTR_LI		t0, (SYS_INIT_SP_ADDR & STACK_ALIGN)
++	move		sp, t0			/* save stack pointer */
++/*
++ * Now sp points to the right stack belonging to current CPU.
++ * It's essential before any function call, otherwise, we get data-race.
++ */
++
++call_board_init_f_0:
++	/* find top of reserve space */
++	PTR_LI		t1, 1
++	PTR_SLL		t1, t1, CONFIG_STACK_SIZE_SHIFT
++	PTR_SUB		a0, t0, t1		/* t1 -> size of all CPU stacks */
++	bl		board_init_f_alloc_reserve
++
++	/* Set global pointer to u0 ($r21) */
++	move		u0, a0
++	bl		board_init_f_init_reserve
++
++	/* Enable cache */
++	bl		enable_caches
++
++#ifdef CONFIG_DEBUG_UART
++	bl		debug_uart_init
++#endif
++
++	move		a0, zero		/* a0 <-- boot_flags = 0 */
++	la.pcrel	t5, board_init_f
++	jirl		ra, t5, 0		/* jump to board_init_f() */
++
++	move		sp, s0
++
++/*
++ * void relocate_code(addr_sp, gd, addr_moni)
++ *
++ * This "function" does not return, instead it continues in RAM
++ * after relocating the monitor code.
++ *
++ */
++.globl relocate_code
++relocate_code:
++	move		s2, a0			/* save addr_sp */
++	move		s3, a1			/* save addr of gd */
++	move		s4, a2			/* save addr of destination */
++
++/*
++ *Set up the stack
++ */
++stack_setup:
++	move		sp, s2
++	la.pcrel	t0, _start
++	PTR_SUB		t6, s4, t0		/* t6 <- relocation offset */
++	beq		t0, s4, clear_bss	/* skip relocation */
++
++	move		t1, s4			/* t1 <- scratch for copy_loop */
++	la.pcrel	t2, __bss_start		/* t2 <- source end address */
++
++copy_loop:
++	LONG_L		t5, t0, 0
++	PTR_ADDI	t0, t0, LONGSIZE
++	LONG_S		t5, t1, 0
++	PTR_ADDI	t1, t1, LONGSIZE
++	blt		t0, t2, copy_loop
++
++/*
++ * Update dynamic relocations after board_init_f
++ */
++fix_rela_dyn:
++	la.pcrel	t1, __rel_dyn_start
++	la.pcrel	t2, __rel_dyn_end
++	beq		t1, t2, clear_bss
++	PTR_ADD		t1, t1, t6		/* t1 <- rela_dyn_start in RAM */
++	PTR_ADD		t2, t2, t6		/* t2 <- rela_dyn_end in RAM */
++
++6:
++	PTR_L		t5, t1, PTRSIZE		/* t5 <-- relocation info:type */
++	PTR_LI		t3, R_LARCH_RELATIVE	/* reloc type R_LARCH_RELATIVE */
++	bne		t5, t3, 8f		/* skip non-RELATIVE entries */
++	PTR_L		t3, t1, 0
++	PTR_L		t5, t1, (PTRSIZE * 2)	/* t5 <-- addend */
++	PTR_ADD		t5, t5, t6		/* t5 <-- location to fix up in RAM */
++	PTR_ADD		t3, t3, t6		/* t3 <-- location to fix up in RAM */
++	PTR_S		t5, t3, 0
++8:
++	PTR_ADDI	t1, t1, (PTRSIZE * 3)
++	blt		t1, t2, 6b
++
++
++	/* Update exception entry */
++	la.pcrel	t0, exception_entry
++	PTR_ADD		t0, t0, t6
++	csrwr		t0, LOONGARCH_CSR_EENTRY
++
++clear_bss:
++	la.pcrel	t0, __bss_start		/* t0 <- rel __bss_start in FLASH */
++	PTR_ADD		t0, t0, t6		/* t0 <- rel __bss_start in RAM */
++	la.pcrel	t1, __bss_end		/* t1 <- rel __bss_end in FLASH */
++	PTR_ADD		t1, t1, t6		/* t1 <- rel __bss_end in RAM */
++
++clbss_l:
++	LONG_S		zero, t0, 0		/* clear loop... */
++	PTR_ADDI	t0, t0, LONGSIZE
++	blt		t0, t1, clbss_l
++
++
++/*
++ * We are done. Do not return, instead branch to second part of board
++ * initialization, now running from RAM.
++ */
++call_board_init_r:
++	bl		invalidate_icache_all
++	bl		flush_dcache_all
++	la.pcrel	t0, board_init_r        /* offset of board_init_r() */
++	PTR_ADD		t4, t0, t6		/* real address of board_init_r() */
++/*
++ * setup parameters for board_init_r
++ */
++	move		a0, s3			/* gd_t */
++	move		a1, s4			/* dest_addr */
++	move		s0, zero		/* fp == NULL */
++	jirl		ra, t4, 0		/* jump to board_init_r() */
++
 
 -- 
 2.43.0
