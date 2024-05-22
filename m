@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F819C25B78
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 23:38:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67CFBC25B78
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 23:38:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34A77888AB;
+	by phobos.denx.de (Postfix) with ESMTP id 8D41B888B7;
 	Thu, 23 May 2024 01:32:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="enFOo9bB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tYhm4UnK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 112D18857F; Thu, 23 May 2024 01:32:13 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 247A28858E; Thu, 23 May 2024 01:32:13 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6A3B885C9
- for <u-boot@lists.denx.de>; Thu, 23 May 2024 01:32:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B284D88589
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 01:32:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-6f0f5645c68so3338957a34.1
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 16:32:06 -0700 (PDT)
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-6ed3587b93bso3929517a34.1
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 16:32:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716420725; x=1717025525; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1716420726; x=1717025526; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=USy/FxJoc3CcVXZRxjRE8i0H1uQ2k9nCv79T/rPzTVI=;
- b=enFOo9bB7X8N7IhAqF7lAza+XXrmpq13AkzIp0tBhUopg7ledOkYAV/a7uAzxwd5rw
- FiGTvQDrkCeQgv2Fozm3i8BkVvFRpEFPsGu3Lu1Eq4k86IpEdx/5vLtqTOjpbalx7FZ8
- an73wQWjTpwEz89hgaIqdzO9viLnDzCl4v2CDQW8smmzohS3nx+1CaT3R5FePHMdZZ9S
- VPHRfmAWclLGWGLyKr2QgR5FczOjxfj4m9IpvWqHEW/1Qq6NW4cWhFiim8dwPgIRIWnY
- 21dYpXFqmHeLmd4lT9gYP3XJ4aNThdt1sj0BZp0HYIFxa5nF0UV3jbACbcIeiMP5E+6b
- b5qQ==
+ bh=tNm3zxNnxTGzaQjFGzkTXRPolvlW1D8U3GEIccFIC28=;
+ b=tYhm4UnKMVW4/XDsvCw2mGSmILzJTj3KWXELEHhMNRSVlzZlmJx95KemrJ3n+l+0Af
+ k/QFBbo0QZvAplhgzzlxbjFdu07V/JNPY6KdWNm6ZSex41duiAAZ9AiHO9CwZ5rE9V/j
+ YRLKHrAAbFMeEQc5NLmYlvcyu0jAKTpNLaI0OUM1A9djkKchlm/wKdpNCd/dMW5PVDcr
+ FGjyavPIdA0hCWsav0sNogN6tze0fw+7d07Q7tVSd/e9dRvwH6HAvMQuv2VWsvRw7F5o
+ 9wrg/8BW9ZTnCKeURldngKgFSNnKvCeUaQi13G0rBleOrWx68Ga6fUfi9E2l5I68YNSH
+ 8btA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716420725; x=1717025525;
+ d=1e100.net; s=20230601; t=1716420726; x=1717025526;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=USy/FxJoc3CcVXZRxjRE8i0H1uQ2k9nCv79T/rPzTVI=;
- b=L4EenWvK/FysQXPj9BoNnNu9NGpeFRpTZj9V/6cMYbrUVdkkcOqDgLghxNC2MB35QD
- kP4KurKmStD2drl1OrnetiUi5FFlI5NIYGBUmYMvkKbOKLhQHnUIh2b1M+cOBjzRv2YE
- oyUcbiFe0HJuWeL83RvMpkNDJvWxvIDwxoePSDmjq54qtcNA9VETJB7K55v3l73KEKRq
- 4IkGTI7HnGJRqAnvHh/D/nqwBqikwlvH88br47uSGYGm4dlQ8kZH7fnq34vRzY944eUn
- /iIxXIGNJYygfSeq1tr0Q3af9MvRuV/9tqGEJP6LjXkDQgICsZfDrkJgcvORiIN+CJTd
- oawA==
+ bh=tNm3zxNnxTGzaQjFGzkTXRPolvlW1D8U3GEIccFIC28=;
+ b=uRpzE2MWuh+XH0pyO/EhgvwarzG8LolKBB/mSxMrAnAqFIaHuALFZRbOdc+Ssdk68R
+ 4FFQAmk2Q0+w7GlNN8fidPJebedYx/Z9X3hyVUwf/aASmqeSJ0JTuZ4gNXfMqGf3W9mj
+ j/BOvo9Hj1+FY5UyBhGb7sIUMVHVCgtA6MoNGpYppMara7WDDtpsy2+w1MewCsoEMs0b
+ 2nRP8NQmdA884mzX8DjnEkhDcZABfk8aov4QOdfZAg05JlQCAwL6eFovn1J/keTuEUnU
+ LItq7t4prABUnuNPh6Rgnh0irrVR/LyrwPYaak2Cu4NR2ooethKMPzpCzoKyVyKZulPk
+ PEeg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU5dV2gv8eJd/PjbDosf2wDgIt2y4vNa7h22d/ypB4yEjZyMTmlAWnmK861hb6T7vH3lrMOytAook30jUW6ZL4Kefl9QA==
-X-Gm-Message-State: AOJu0YzofKt6IR7EWvdI3DDjH+esJ38Da9TSjB8Gt2TtUCo+OFxR7Trq
- egE1BHOBFMXATnH5EG5POf8q7kJG97nC3J6amQ3UbNeovfBZhtmH1eWA9zRXWQ8=
-X-Google-Smtp-Source: AGHT+IG0xbnz8icTEPgoWRcSYyTlzK+KuPZbDrCZczCDkH9pb7Lys5j4wcgcYfEFpkv1bE1/70EDFg==
-X-Received: by 2002:a9d:5c0b:0:b0:6f0:e6e2:83b0 with SMTP id
- 46e09a7af769-6f665471c57mr3712006a34.5.1716420725762; 
- Wed, 22 May 2024 16:32:05 -0700 (PDT)
+ AJvYcCV1iZG5g5kYH9PlzgIH+LSeJxqEYM5n1LezEo4S5/bfwJPVmrWLQVl4HCRIQzA9qwfVkraep7MbgGj978HUEhKtnfDChQ==
+X-Gm-Message-State: AOJu0Yy8s0XCPimtXySXLxWo4B5PUD2T2VPDgy9ZrAfbw4cgedTAlgmQ
+ HxsaygS+pqbARcRW3KQ0RsYLZOJU6fXzx1b7lZV5CuvDwMkYDxIqXoinMvAB842pJniGqmrU+FP
+ Yl+A=
+X-Google-Smtp-Source: AGHT+IGlbmrpw9xrqde2Nt0q/ECdlml4G21mpHz/B5+lqzzvs4B2xPmpfSEBsLroPI5wdREGSa3usw==
+X-Received: by 2002:a9d:6313:0:b0:6ee:4039:8412 with SMTP id
+ 46e09a7af769-6f6699127c7mr3352642a34.33.1716420726473; 
+ Wed, 22 May 2024 16:32:06 -0700 (PDT)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-6f0fdc57a9csm4206240a34.58.2024.05.22.16.32.05
+ 46e09a7af769-6f0ff995ccdsm4165473a34.34.2024.05.22.16.32.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 May 2024 16:32:05 -0700 (PDT)
+ Wed, 22 May 2024 16:32:06 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>,
  Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
@@ -77,10 +78,10 @@ Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Ferass El Hafidi <vitali64pmemail@protonmail.com>,
  Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com
-Subject: [PATCH 35/42] mmc: exynos_dw_mmc: Use CONFIG_IS_ENABLED() to check
- config options
-Date: Wed, 22 May 2024 18:31:28 -0500
-Message-Id: <20240522233135.26835-36-semen.protsenko@linaro.org>
+Subject: [PATCH 36/42] mmc: exynos_dw_mmc: Pull all init code into probe
+ function
+Date: Wed, 22 May 2024 18:31:29 -0500
+Message-Id: <20240522233135.26835-37-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240522233135.26835-1-semen.protsenko@linaro.org>
 References: <20240522233135.26835-1-semen.protsenko@linaro.org>
@@ -102,65 +103,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use CONFIG_IS_ENABLED() macro to check config options as recommended by
-checkpatch, instead of checking those with just #ifdef CONFIG_...
+There is no logical sense to split the initialization code between
+multiple functions. Pull both do_dwmci_init() and
+exynos_dwmci_core_init() into exynos_dwmmc_probe() to make the code more
+simple and obvious.
 
 No functional change.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
- drivers/mmc/exynos_dw_mmc.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ drivers/mmc/exynos_dw_mmc.c | 86 +++++++++++++++----------------------
+ 1 file changed, 35 insertions(+), 51 deletions(-)
 
 diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
-index e416fbe5397a..b7c3b356f0ac 100644
+index b7c3b356f0ac..19793e7ad460 100644
 --- a/drivers/mmc/exynos_dw_mmc.c
 +++ b/drivers/mmc/exynos_dw_mmc.c
-@@ -28,7 +28,7 @@
- /* Quirks */
- #define DWMCI_QUIRK_DISABLE_SMU		BIT(0)
- 
--#ifdef CONFIG_DM_MMC
-+#if CONFIG_IS_ENABLED(DM_MMC)
- #include <dm.h>
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -47,7 +47,7 @@ struct exynos_dwmmc_variant {
- 
- /* Exynos implmentation specific drver private data */
- struct dwmci_exynos_priv_data {
--#ifdef CONFIG_DM_MMC
-+#if CONFIG_IS_ENABLED(DM_MMC)
- 	struct dwmci_host host;
- #endif
- 	struct clk clk;
-@@ -59,7 +59,7 @@ struct dwmci_exynos_priv_data {
- static struct dwmci_exynos_priv_data *exynos_dwmmc_get_priv(
- 		struct dwmci_host *host)
- {
--#ifdef CONFIG_DM_MMC
-+#if CONFIG_IS_ENABLED(DM_MMC)
- 	return container_of(host, struct dwmci_exynos_priv_data, host);
- #else
- 	return host->priv;
-@@ -231,7 +231,7 @@ static int exynos_dwmci_core_init(struct dwmci_host *host)
- 	host->clksel = exynos_dwmci_clksel;
- 	host->get_mmc_clk = exynos_dwmci_get_clk;
- 
--#ifndef CONFIG_DM_MMC
-+#if !CONFIG_IS_ENABLED(DM_MMC)
- 	/* Add the mmc channel to be registered with mmc core */
- 	if (add_dwmci(host, DWMMC_MAX_FREQ, DWMMC_MIN_FREQ)) {
- 		printf("DWMMC%d registration failed\n", host->dev_index);
-@@ -338,7 +338,7 @@ static int exynos_dwmmc_of_to_plat(struct udevice *dev)
- 	return 0;
+@@ -209,55 +209,6 @@ static void exynos_dwmci_board_init(struct dwmci_host *host)
+ 		exynos_dwmci_clksel(host);
  }
  
--#ifdef CONFIG_DM_MMC
-+#if CONFIG_IS_ENABLED(DM_MMC)
- static int exynos_dwmmc_probe(struct udevice *dev)
+-static int exynos_dwmci_core_init(struct dwmci_host *host)
+-{
+-	unsigned long freq;
+-	int err;
+-
+-	if (host->bus_hz)
+-		freq = host->bus_hz;
+-	else
+-		freq = DWMMC_MAX_FREQ;
+-
+-	err = exynos_dwmmc_set_sclk(host, freq);
+-	if (err) {
+-		printf("DWMMC%d: failed to set clock rate on probe (%d); "
+-		       "continue anyway\n", host->dev_index, err);
+-	}
+-
+-	host->name = "EXYNOS DWMMC";
+-	host->board_init = exynos_dwmci_board_init;
+-	host->caps = MMC_MODE_DDR_52MHz;
+-	host->clksel = exynos_dwmci_clksel;
+-	host->get_mmc_clk = exynos_dwmci_get_clk;
+-
+-#if !CONFIG_IS_ENABLED(DM_MMC)
+-	/* Add the mmc channel to be registered with mmc core */
+-	if (add_dwmci(host, DWMMC_MAX_FREQ, DWMMC_MIN_FREQ)) {
+-		printf("DWMMC%d registration failed\n", host->dev_index);
+-		return -1;
+-	}
+-#endif
+-
+-	return 0;
+-}
+-
+-static int do_dwmci_init(struct dwmci_host *host)
+-{
+-#if CONFIG_IS_ENABLED(CPU_V7A)
+-	int flag, err;
+-
+-	flag = host->buswidth == 8 ? PINMUX_FLAG_8BIT_MODE : PINMUX_FLAG_NONE;
+-	err = exynos_pinmux_config(host->dev_id, flag);
+-	if (err) {
+-		printf("DWMMC%d not configure\n", host->dev_index);
+-		return err;
+-	}
+-#endif
+-
+-	return exynos_dwmci_core_init(host);
+-}
+-
+ static int exynos_dwmmc_of_to_plat(struct udevice *dev)
  {
- 	struct exynos_mmc_plat *plat = dev_get_plat(dev);
+ 	struct dwmci_exynos_priv_data *priv = dev_get_priv(dev);
+@@ -345,6 +296,7 @@ static int exynos_dwmmc_probe(struct udevice *dev)
+ 	struct mmc_uclass_priv *upriv = dev_get_uclass_priv(dev);
+ 	struct dwmci_exynos_priv_data *priv = dev_get_priv(dev);
+ 	struct dwmci_host *host = &priv->host;
++	unsigned long freq;
+ 	int err;
+ 
+ #if !CONFIG_IS_ENABLED(CPU_V7A)
+@@ -353,9 +305,41 @@ static int exynos_dwmmc_probe(struct udevice *dev)
+ 		return err;
+ #endif
+ 
+-	err = do_dwmci_init(host);
+-	if (err)
++#if CONFIG_IS_ENABLED(CPU_V7A)
++	int flag;
++
++	flag = host->buswidth == 8 ? PINMUX_FLAG_8BIT_MODE : PINMUX_FLAG_NONE;
++	err = exynos_pinmux_config(host->dev_id, flag);
++	if (err) {
++		printf("DWMMC%d not configure\n", host->dev_index);
+ 		return err;
++	}
++#endif
++
++	if (host->bus_hz)
++		freq = host->bus_hz;
++	else
++		freq = DWMMC_MAX_FREQ;
++
++	err = exynos_dwmmc_set_sclk(host, freq);
++	if (err) {
++		printf("DWMMC%d: failed to set clock rate on probe (%d); "
++		       "continue anyway\n", host->dev_index, err);
++	}
++
++	host->name = "EXYNOS DWMMC";
++	host->board_init = exynos_dwmci_board_init;
++	host->caps = MMC_MODE_DDR_52MHz;
++	host->clksel = exynos_dwmci_clksel;
++	host->get_mmc_clk = exynos_dwmci_get_clk;
++
++#if !CONFIG_IS_ENABLED(DM_MMC)
++	/* Add the mmc channel to be registered with mmc core */
++	if (add_dwmci(host, DWMMC_MAX_FREQ, DWMMC_MIN_FREQ)) {
++		printf("DWMMC%d registration failed\n", host->dev_index);
++		return -1;
++	}
++#endif
+ 
+ 	dwmci_setup_cfg(&plat->cfg, host, DWMMC_MAX_FREQ, DWMMC_MIN_FREQ);
+ 	host->mmc = &plat->mmc;
 -- 
 2.39.2
 
