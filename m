@@ -4,71 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61DA2C25B7A
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 11:38:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F05DC25B77
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 12:14:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B454888853;
-	Wed, 22 May 2024 13:37:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 7E70688473;
+	Wed, 22 May 2024 14:14:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kY3IRzrw";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58D368883D; Wed, 22 May 2024 13:37:45 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B614988490; Wed, 22 May 2024 14:14:55 +0200 (CEST)
+Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5BD3B8847C
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 13:37:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B240287E96
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 14:14:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-choudhary@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44MBbdqr103075;
- Wed, 22 May 2024 06:37:39 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1716377859;
- bh=Q4Wx5tL3oQ6uBjAepoU046mCyHfoU1eLDVg7ZTN9HkM=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=kY3IRzrwFSJLCvEpaX0qdjdEx+V4bJWhrTRjZRMgVzvhnPV8diBVzcpuYSkYgrD3J
- 2lu3uTQ5P+j9FR2eJKQTnQKRk14GrnASu/ykM0oHXscZCbi3GECMHvSTw5/g0JTV5i
- uAo5KRHV3fpjxbXTfqXxVcbb4czsoYFnTHrTvfjk=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44MBbdpK007821
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 22 May 2024 06:37:39 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 22
- May 2024 06:37:38 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 22 May 2024 06:37:38 -0500
-Received: from localhost (jayesh-hp-probook-440-g8-notebook-pc.dhcp.ti.com
- [172.24.227.6])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44MBbc8g082158;
- Wed, 22 May 2024 06:37:38 -0500
-From: Jayesh Choudhary <j-choudhary@ti.com>
-To: <trini@konsulko.com>, <u-boot@lists.denx.de>, <u-kumar1@ti.com>,
- <j-choudhary@ti.com>
-CC: <a-bhatia1@ti.com>, <nm@ti.com>, <n-francis@ti.com>,
- <joao.goncalves@toradex.com>, <afd@ti.com>, <j-humphreys@ti.com>,
- <d.haller@phytec.de>, <hnagalla@ti.com>, <bb@ti.com>,
- <seanga2@gmail.com>, <sjg@chromium.org>, <clamor95@gmail.com>,
- <martyn.welch@collabora.com>, <m-chawdhry@ti.com>, <a-limaye@ti.com>
-Subject: [PATCH 7/7] configs: j784s4_evm_r5_defconfig: Enable CONFIG_K3_QOS
-Date: Wed, 22 May 2024 17:07:26 +0530
-Message-ID: <20240522113726.302908-8-j-choudhary@ti.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240522113726.302908-1-j-choudhary@ti.com>
-References: <20240522113726.302908-1-j-choudhary@ti.com>
+ dmarc=fail (p=none dis=none) header.from=sntech.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
+Received: from i5e860cd9.versanet.de ([94.134.12.217] helo=diego.localnet)
+ by gloria.sntech.de with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
+ (envelope-from <heiko@sntech.de>)
+ id 1s9kro-0000KN-FB; Wed, 22 May 2024 14:14:48 +0200
+From: Heiko =?ISO-8859-1?Q?St=FCbner?= <heiko@sntech.de>
+To: Tom Rini <trini@konsulko.com>, Quentin Schulz <foss+uboot@0leil.net>,
+ u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Heiko Stuebner <heiko.stuebner@cherry.de>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Suniel Mahesh <sunil@amarulasolutions.com>,
+ Klaus Goger <klaus.goger@theobroma-systems.com>, jonas@kwiboo.se,
+ u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH 00/10] rockchip: px30: migrate to common bss and stack
+ addresses + UART fixes for evb-px30
+Date: Wed, 22 May 2024 14:14:47 +0200
+Message-ID: <2148002.OBFZWjSADL@diego>
+In-Reply-To: <c9a78f7a-5b63-4d37-93d4-2c6bd8db0076@cherry.de>
+References: <20240521-px30-2024-07-rc-v1-0-62109c84d44f@cherry.de>
+ <20240521180444.GC2568172@bill-the-cat>
+ <c9a78f7a-5b63-4d37-93d4-2c6bd8db0076@cherry.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,25 +63,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable CONFIG_K3_QOS to set QoS registers in R5 boot stage.
+Am Mittwoch, 22. Mai 2024, 10:39:25 CEST schrieb Quentin Schulz:
+> Hi Tom,
+> 
+> On 5/21/24 8:04 PM, Tom Rini wrote:
+> > On Tue, May 21, 2024 at 07:39:53PM +0200, Quentin Schulz wrote:
+> >> PX30 Ringneck ran out of memory in the allocation pool of U-Boot proper
+> >> pre-reloc. Something needed to be done. Jonas did migrate a few SoCs
+> >> already to this common bss+stack addresses so it made sense to follow
+> >> the same route for one additional SoC: PX30.
+> >>
+> >> While at it, also fix a few issues related to UART on the PX30 Mini EVB
+> >> I could test.
+> >>
+> >> Boot (to U-Boot CLI) tested on PX30 Ringneck and PX30 Mini-EVB.
+> >>
+> >> Thanks to Jonas for hinting where to look at.
+> >>
+> >> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> >> ---
+> >> Quentin Schulz (10):
+> >>        rockchip: px30: default TPL_SYS_MALLOC_F_LEN to 0x600 on PX30 Kconfig level
+> >>        rockchip: Use common bss and stack addresses on PX30
+> >>        rockchip: ringneck_px30: Use common bss and stack addresses
+> >>        rockchip: evb-px30: Use common bss and stack addresses
+> >>        rockchip: firefly-px30: Use common bss and stack addresses
+> >>        rockchip: odroid-go2: Use common bss and stack addresses
+> >>        rockchip: px30-core-*: Use common bss and stack addresses
+> >>        rockchip: px30: make UART pinmux accessible to TPL/SPL DTB
+> >>        rockchip: evb-px30: do not remove pinctrl nodes from SPL DTB
+> >>        rockchip: evb-px30: make UART5 the debug UART
+> >>
+> >>   arch/arm/dts/px30-u-boot.dtsi                 | 16 ++++++++++++++++
+> >>   arch/arm/mach-rockchip/px30/Kconfig           |  8 +++++++-
+> >>   configs/evb-px30_defconfig                    | 23 +++++------------------
+> >>   configs/firefly-px30_defconfig                | 19 +++----------------
+> >>   configs/odroid-go2_defconfig                  | 19 +++----------------
+> >>   configs/px30-core-ctouch2-of10-px30_defconfig | 19 +++----------------
+> >>   configs/px30-core-ctouch2-px30_defconfig      | 19 +++----------------
+> >>   configs/px30-core-edimm2.2-px30_defconfig     | 19 +++----------------
+> >>   configs/ringneck-px30_defconfig               | 19 +++----------------
+> >>   9 files changed, 46 insertions(+), 115 deletions(-)
+> >> ---
+> >> base-commit: a7f0154c412859323396111dd0c09dbafbc153cb
+> >> change-id: 20240521-px30-2024-07-rc-7136f6241d29
+> > 
+> > As I assume we want to fix the platforms for v2024.07, is this the level
+> > of config changes everyone is comfortable with on the platforms? Or
+> > should we just go with the minimum for release and the rest to -next?
+> > 
+> 
+> I can tell you that Ringneck doesn't work anymore on v2024.07-rc, but 
+> the PX30 Mini EVB was still reaching U-Boot CLI without the changes. I 
+> don't know about the other boards.
+> 
+> So I could split this into two series, one for master, one for next.
+> 
+> I could suggest: patch 1 to 3 in master, the rest in next. Patch 1 is 
+> just moving things around. Patch 2 is doing nothing if nobody uses 
+> ROCKCHIP_COMMON_STACK_ADDR and SPL_SHARES_INIT_SP_ADDR (which is the 
+> case for px30 boards). Patch 3 is for fixing Ringneck, which I know is 
+> broken.
+> 
+> Heiko having access to the Odroid Go2, maybe he could test without my 
+> patches and see if it reaches the CLI to know if we should pull it in 
+> for master as well.
 
-Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
----
- configs/j784s4_evm_r5_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+I did that yesterday evening. The Odroid Go2 also reached u-boot CLI
+and also booted without these changes. So I guess it's small enough
+or whatever.
 
-diff --git a/configs/j784s4_evm_r5_defconfig b/configs/j784s4_evm_r5_defconfig
-index f5fe743220..d1bcf792d7 100644
---- a/configs/j784s4_evm_r5_defconfig
-+++ b/configs/j784s4_evm_r5_defconfig
-@@ -6,6 +6,7 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
- CONFIG_SPL_LIBGENERIC_SUPPORT=y
- CONFIG_SOC_K3_J784S4=y
- CONFIG_K3_EARLY_CONS=y
-+CONFIG_K3_QOS=y
- CONFIG_TARGET_J784S4_R5_EVM=y
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x41c76000
--- 
-2.25.1
+So at least the Go2 is fine on 2024.07-rc3 either way with or without
+this series.
+
+Heiko
+
 
