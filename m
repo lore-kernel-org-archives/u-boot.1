@@ -4,84 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35B96C25B79
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 16:23:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90046C25B79
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 16:33:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B5B52888B5;
-	Wed, 22 May 2024 18:23:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DCDAF8885B;
+	Wed, 22 May 2024 18:33:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="awGf1uhK";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="NNVXGvfZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC3068883C; Wed, 22 May 2024 18:23:42 +0200 (CEST)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
+ id 333F8880CC; Wed, 22 May 2024 18:33:37 +0200 (CEST)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6158A888B5
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 18:23:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8413188287
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 18:33:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-520f9d559f6so8080537e87.3
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 09:23:40 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=monstr.eu
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-df4d8d9be36so799731276.1
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 09:33:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716395020; x=1716999820; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=8ojHLs+JhhpOF5zw26lpVT1WqCNiKD8AtsKULKH8XD8=;
- b=awGf1uhKQATD2dRIisfWqhL8lea2NrGwMnoCQp2hcEAA56X0uefoo7DM+bUSnx9XL4
- cerisD04ioW+CZa9qkwMMFXt8Jhe6+7URumejaFak2n4aSgOSGVOiSJZlkbdC+SQYoaD
- nR7fEaqjgAiyvfBW69YD+73mhVXqEQ/MnNPhRxIJEjDdHS2VhR7CbXdlO3DxNtV73Xlz
- VMDaZk+6AyJatq8aQWUtsYYh2LipAUmQFSowHYhhXavOfYVCSG9n7rafr8q7awVkx5yy
- XTOr4BBhmXMtoLfDvqkOEZ4fAkWZkaKm3H8Gcf6d0WKDCYGoeAYl37QnENo+JM8HbM7P
- Lmsw==
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1716395613; x=1717000413;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=R/+DfeTtMcGGEGSvzpMR0DuH5IaoDEnuYFDFf+yEbmA=;
+ b=NNVXGvfZF65n1gN32inIFxj/L/8kOsTDqQsngUMlgcs8AIUzo//GYVPe/2rjWMyloL
+ 1Vo8FGND5yCxWpT9nNQlw6XrZyzjZ28OD1o4fEMayEk5Z1mfmyjBvKbRl9oL5eaEPaI1
+ 88IDcxBQPWmMobsd/pfp1rymiQBbY8VPp5tIuDufI1UxirgFcdGzXhvhQnh5EEonU4nK
+ Xyik4aCzWcFRc1hQ1OzG8GlMkzk9YSjoYoJJANv+ynpLd6B7G3jnTDe8tisbHNBjr03s
+ UGv9Db6o5AcFN8VQsnCDYyfpSnRPfhyeBOcV7HuFvZMJA6sx++R7g4Y616Tqon3VE+84
+ eAWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716395020; x=1716999820;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=8ojHLs+JhhpOF5zw26lpVT1WqCNiKD8AtsKULKH8XD8=;
- b=xUl90bN9KTpAKzvzJtwEVgqI+IVS1Nl7l8gt62aVWqeOG0sYsgRwFy8hnAUiydBdTs
- u7KNDC0cIJFAH7TrvkJesqgQSDaOT0sEm01lXMQDh4G7AjDA+y/DGvLTYfJjenizi/8X
- aJjSGET8atvLpDkwqqfrvBpfFWs2HI5SAPY0HTkFlJJtRV2MQOkG2xVtlpEMbC9uh2/7
- wPjr9GDVffG+K3HgmQ5GXwPF+i5b3QeDx2W4ZFkDrRJEWZgO3YrRr4GK7zc82N8l6wZn
- wyVbNV0MUTVx2kCwNIiYYNRAT5yFGslQOjBEXgYJHVOn70PuN300oK4PNfELGsyhgAq4
- 1NYQ==
+ d=1e100.net; s=20230601; t=1716395613; x=1717000413;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=R/+DfeTtMcGGEGSvzpMR0DuH5IaoDEnuYFDFf+yEbmA=;
+ b=mJnf6MWhIdffrnMNNqibifFT9esUtzCPOpqXpJbOzaMES6HnV6MeG6nI2xHZaXwCBi
+ swfi97XRu39moo1gGqShJSMvJPf40rAq7/W5+wmvO5X3QWRiN5dP5nTzNtaOlrqToNWh
+ jAiagCLFv36QCr/l2IuWDlfUJEhMfR+/nVFXog0TbcCFza1cweVJBQ6jm61gucb1H2jc
+ 4/2GYaiFR0phmqIm5aG1/9InTtbEBjw9hQwvOPzXv7Fe9Jh1/KRMnnvANV9MF6aFySzP
+ 9qppkcs8LlbSnxkrr025oecqcN67yM1Iq0C/hRlFdLjT67Ie3OZLSFuhxZib3fzDPylX
+ kLsQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVRTvaj1gMpbLwwuHkdKDfm1E0hSA4HjqWdl4JfhmgTm1XuuRIoPwG/1t71+aOou82/bg4pwK3N57LMOaUtmVZ7IUKvxA==
-X-Gm-Message-State: AOJu0Yy1i1RUjOXl5clQToDc4aa/As+djEu8bqdYBvUQ9SouuezUqKRs
- m8Cip4++x6Fj+4oEynCTSeLQIAZZ1FRRQm4D5mwgB4hLjo/B/e/E6QpbHwcyT48=
-X-Google-Smtp-Source: AGHT+IGAzKoB0+GZVa6M+5Dn5rZkuijn8sFa7FElvaIFmfeA9D9MJNVxyl+uzzPgNsm74oZzsQf8kA==
-X-Received: by 2002:ac2:5e22:0:b0:51a:b933:b297 with SMTP id
- 2adb3069b0e04-526bd694d3cmr1490770e87.2.1716395019736; 
- Wed, 22 May 2024 09:23:39 -0700 (PDT)
-Received: from ?IPV6:2a02:8109:aa0d:be00::8bb3? ([2a02:8109:aa0d:be00::8bb3])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a5ceb46c33fsm885795666b.142.2024.05.22.09.23.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 22 May 2024 09:23:39 -0700 (PDT)
-Message-ID: <a3350841-09f1-4c89-acc4-a1e5b7d9d494@linaro.org>
-Date: Wed, 22 May 2024 18:23:38 +0200
+ AJvYcCVlwF0j0j7ANgRVqHfXLU2nUINblvSCQKWJzMtYLKGwRdTTlU64Npz/iNfV02cUNJXOlMbY0F6ksW4Can8vt4EzHSYqaQ==
+X-Gm-Message-State: AOJu0YywaI0Z5oIqapkijP37R724VlR1vcss5bivgtNsNo9a16609ObN
+ oplzZHX5WM3LxaE+hobsrR/iaBwmTbD1YJpPNjygZN8Ff5ylTGUwOhSKWaIwJiaDsbaDF7X4XEf
+ +wNpmfqPoegsz3fDBaDpn3t7gePdNakhUS+QU
+X-Google-Smtp-Source: AGHT+IH0C9vqCpAYEm7zfipKnTjvJEgPmxS3oFEeACpT6Kima27IC0JXcCBoMYoP+mMcnv2g3jTITR4NcrqW7DKOIAI=
+X-Received: by 2002:a5b:d4d:0:b0:df4:e089:d182 with SMTP id
+ 3f1490d57ef6-df4e0dd45dcmr1849573276.19.1716395613040; Wed, 22 May 2024
+ 09:33:33 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/5] clock: qcom: ipq4019: add ESS clock
-To: Robert Marko <robert.marko@sartura.hr>, trini@konsulko.com,
- neil.armstrong@linaro.org, sumit.garg@linaro.org, lukma@denx.de,
- seanga2@gmail.com, joe.hershberger@ni.com, rfried.dev@gmail.com,
- j4g8y7@gmail.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
-Cc: j.beck@linefinity.com
-References: <20240522101437.225880-1-robert.marko@sartura.hr>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240522101437.225880-1-robert.marko@sartura.hr>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20240521205955.3569600-1-tharvey@gateworks.com>
+ <5cf2c7a1-4766-4343-a037-3893a03f14df@amd.com>
+ <CAJ+vNU3O_cuo8i0w6XZGyrAs3zTqXRcrrpDsD61WfFt3C7AHLQ@mail.gmail.com>
+In-Reply-To: <CAJ+vNU3O_cuo8i0w6XZGyrAs3zTqXRcrrpDsD61WfFt3C7AHLQ@mail.gmail.com>
+From: Michal Simek <monstr@monstr.eu>
+Date: Wed, 22 May 2024 18:33:21 +0200
+Message-ID: <CAHTX3dJ7-Jcf5HNgB6NKomNEZj5CKhOJhTd89JLpgLMAiBv2OA@mail.gmail.com>
+Subject: Re: [PATCH v3] fdt: automatically add /chosen/kaslr-seed if DM_RNG is
+ enabled
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, 
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Devarsh Thakkar <devarsht@ti.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>, 
+ Marek Vasut <marex@denx.de>, Andy Yan <andy.yan@rock-chips.com>, 
+ Akash Gajjar <gajjar04akash@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Chris Morgan <macromorgan@hotmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,33 +102,150 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+st 22. 5. 2024 v 17:19 odes=C3=ADlatel Tim Harvey <tharvey@gateworks.com> n=
+apsal:
+>
+> On Wed, May 22, 2024 at 12:47=E2=80=AFAM Michal Simek <michal.simek@amd.c=
+om> wrote:
+> >
+> >
+> >
+> > On 5/21/24 22:59, Tim Harvey wrote:
+> > > If RANDOMIZE_BASE is enabled in the Linux kernel instructing it to
+> > > randomize the virtual address at which the kernel image is loaded, it
+> > > expects entropy to be provided by the bootloader by populating
+> > > /chosen/kaslr-seed with a 64-bit value from source of entropy at boot=
+.
+> > >
+> > > If we have DM_RNG enabled populate this value automatically when
+> > > fdt_chosen is called. We skip this if ARMV8_SEC_FIRMWARE_SUPPORT
+> > > is enabled as it's implementation uses a different source of entropy
+> > > that is not yet implemented as DM_RNG. We also skip this if
+> > > MEASURED_BOOT is enabled as in that case any modifications to the
+> > > dt will cause measured boot to fail (although there are many other
+> > > places the dt is altered).
+> > >
+> > > As this fdt node is added elsewhere create a library function and
+> > > use it to deduplicate code. We will provide a parameter to specify th=
+e
+> > > index of the rng device as well as a boolean to overwrite if present.
+> > >
+> > > For our automatic injection, we will use the first rng device and
+> > > not overwrite if already present with a non-zero value (which may
+> > > have been populated by an earlier boot stage). This way if a board
+> > > specific ft_board_setup() function wants to customize this behavior
+> > > it can call fdt_kaslrseed with a rng device index of its choosing and
+> > > set overwrite true.
+> > >
+> > > Note that the kalsrseed command (CMD_KASLRSEED) is likely pointless n=
+ow
+> > > but left in place in case boot scripts exist that rely on this comman=
+d
+> > > existing and returning success. An informational message is printed t=
+o
+> > > alert users of this command that it is likely no longer needed.
+> > >
+> > > Note that the Kernel's EFI STUB only relies on EFI_RNG_PROTOCOL for
+> > > randomization and completely ignores the kaslr-seed for its own
+> > > randomness needs (i.e the randomization of the physical placement of
+> > > the kernel). It gets weeded out from the DTB that gets handed over vi=
+a
+> > > efi_install_fdt() as it would also mess up the measured boot DTB TPM
+> > > measurements as well.
+> > >
+> > > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> > > Cc: Michal Simek <michal.simek@amd.com>
+> > > Cc: Andy Yan <andy.yan@rock-chips.com>
+> > > Cc: Akash Gajjar <gajjar04akash@gmail.com>
+> > > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > Cc: Simon Glass <sjg@chromium.org>
+> > > Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> > > Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> > > Cc: Devarsh Thakkar <devarsht@ti.com>
+> > > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > > Cc: Hugo Villeneuve <hvilleneuve@dimonoff.com>
+> > > Cc: Marek Vasut <marex@denx.de>
+> > > Cc: Tom Rini <trini@konsulko.com>
+> > > Cc: Chris Morgan <macromorgan@hotmail.com>
+> > > ---
+> > > v3:
+> > >   - skip if CONFIG_MEASURED_BOOT
+> > >   - fix skip for CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT
+> > >   - pass in rng index and bool to specify overwrite
+> > >   - remove duplicate error strings printed outside of fdt_kaslrseed
+> > >   - added note to commit log about how EFI STUB weeds out kalsr-seed
+> > >
+> > > v2:
+> > >   - fix typo in commit msg
+> > >   - use stack for seed to avoid unecessary malloc/free
+> > >   - move to a library function and deduplicate code by using it
+> > >     elsewhere
+> > > ---
+> > >   board/xilinx/common/board.c | 35 -------------------------
+> > >   boot/fdt_support.c          |  6 +++++
+> > >   boot/pxe_utils.c            | 35 ++-----------------------
+> > >   cmd/kaslrseed.c             | 45 +++++---------------------------
+> > >   include/kaslrseed.h         | 19 ++++++++++++++
+> > >   lib/Makefile                |  1 +
+> > >   lib/kaslrseed.c             | 51 ++++++++++++++++++++++++++++++++++=
++++
+> > >   7 files changed, 85 insertions(+), 107 deletions(-)
+> > >   create mode 100644 include/kaslrseed.h
+> > >   create mode 100644 lib/kaslrseed.c
+> > >
+> > > diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.=
+c
+> > > index 30a81376ac41..f741e8957818 100644
+> > > --- a/board/xilinx/common/board.c
+> > > +++ b/board/xilinx/common/board.c
+> > > @@ -713,41 +713,6 @@ int ft_board_setup(void *blob, struct bd_info *b=
+d)
+> > >       if (IS_ENABLED(CONFIG_FDT_FIXUP_PARTITIONS) && IS_ENABLED(CONFI=
+G_NAND_ZYNQ))
+> > >               fdt_fixup_mtdparts(blob, nodes, ARRAY_SIZE(nodes));
+> > >
+> >
+> > one more thing here. Please also removed unused variables.
+> >
+> > board/xilinx/common/board.c: In function 'ft_board_setup':
+> > board/xilinx/common/board.c:707:25: warning: unused variable 'ret'
+> > [-Wunused-variable]
+> >    707 |         int nodeoffset, ret;
+> >        |                         ^~~
+> > board/xilinx/common/board.c:707:13: warning: unused variable 'nodeoffse=
+t'
+> > [-Wunused-variable]
+> >    707 |         int nodeoffset, ret;
+> >        |             ^~~~~~~~~~
+> >    AS      arch/arm/cpu/armv8/cache.o
+> > board/xilinx/common/board.c:706:12: warning: unused variable 'buf'
+> > [-Wunused-variable]
+> >    706 |         u8 buf[MAX_RAND_SIZE];
+> >        |            ^~~
+> > board/xilinx/common/board.c:705:25: warning: unused variable 'dev'
+> > [-Wunused-variable]
+> >    705 |         struct udevice *dev;
+> >        |                         ^~~
+> > board/xilinx/common/board.c:704:16: warning: unused variable 'n' [-Wunu=
+sed-variable]
+> >    704 |         size_t n =3D MAX_RAND_SIZE;
+> >        |                ^
+> >
+>
+> Hi Michal,
+>
+> Thanks... missed those. What defconfig are you building that gets to
+> this codepath?
 
+xilinx_zynqmp_virt_defconfig
 
-On 22/05/2024 12:13, Robert Marko wrote:
-> ESS clock is the Ethernet Subsystem clock, so lets add it as its
-> already configured by SBL1.
-> 
-> Signed-off-by: Robert Marko <robert.marko@sartura.hr>
+>
+> I'll send a v4 after another day or so for others to respond.
+>
+> With these changes (and the previous response) do you have a rb or
+> tested-by tag for me?
 
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->   drivers/clk/qcom/clock-ipq4019.c | 3 +++
->   1 file changed, 3 insertions(+)
-> 
-> diff --git a/drivers/clk/qcom/clock-ipq4019.c b/drivers/clk/qcom/clock-ipq4019.c
-> index 0492e536e7..e416c9cdb0 100644
-> --- a/drivers/clk/qcom/clock-ipq4019.c
-> +++ b/drivers/clk/qcom/clock-ipq4019.c
-> @@ -125,6 +125,9 @@ static int ipq4019_clk_enable(struct clk *clk)
->   	case GCC_USB2_MOCK_UTMI_CLK:
->   		/* These clocks is already initialized by SBL1 */
->   		return 0;
-> +	case GCC_ESS_CLK:
-> +		/* This clock is already initialized by SBL1 */
-> +		return 0;
->   	default:
->   		return -EINVAL;
->   	}
+The rest looks good to me and no problem to provide tags.
 
--- 
-// Caleb (they/them)
+Thanks,
+Michal
