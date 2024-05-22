@@ -4,55 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92C32C25B77
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 06:39:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA573C25B77
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 07:09:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1057088460;
-	Wed, 22 May 2024 08:39:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 3255788005;
+	Wed, 22 May 2024 09:09:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="SfVO7bZ4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DS+2i6Bz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 78EFC88822; Wed, 22 May 2024 08:39:55 +0200 (CEST)
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8854488047; Wed, 22 May 2024 09:09:44 +0200 (CEST)
+Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
+ [IPv6:2607:f8b0:4864:20::52a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CECD88460
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 08:39:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 25FE687FDD
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 09:09:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 679671FE3C;
- Wed, 22 May 2024 08:39:52 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1716359992;
- bh=C717S4cnMnl0N7ZDz3oNno/ndqJnu+yRNum6n0ZPg1g=; h=From:To:Subject;
- b=SfVO7bZ4MwJjt4rDEa00cox2hpZ+XpzQD10cyhPIBU5SErz8xhn/p0p6+m/od7Seh
- cCyRRHlyXwbBtASQEw4vivSELWWP8GfYMEYIblPELj9pdU5UVPSxm7tQTChJesfQoF
- UU2F7G3IUQlZudDqYAH4TWJhKnREe0LUhZfepi4R9K7df2r+pMu6Wteso5YRmFU3eJ
- 9kbGHe+uOKgnAJRZrgVHOiJaQXtc9QUNsD3DJT79Jg0xHfo4ZttNBk0V3XsrfDQEMT
- lXZherutU0Y7z57JK/BnRDP3Pl2B/mdWiXesEecTcv0RYrwLoHh1arkN4KCyABnRJ8
- FEPEnEGi3JeKA==
-Date: Wed, 22 May 2024 08:39:48 +0200
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Martyn Welch <martyn.welch@collabora.com>, Stefano Babic <sbabic@denx.de>
-Subject: Re: [PATCH v2] ARM: imx: verdin-imx8mm: Set CAN oscillator frequency
- based on model
-Message-ID: <20240522063948.GA5278@francesco-nb>
-References: <20240522002122.50796-1-marex@denx.de>
+ spf=pass smtp.mailfrom=jcmvbkbc@gmail.com
+Received: by mail-pg1-x52a.google.com with SMTP id
+ 41be03b00d2f7-66986f58b43so468152a12.0
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 00:09:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1716361780; x=1716966580; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CWnOBnKRuXxqyy+QGKgT8Grjdx0vqcChxjcvL0Ozv+I=;
+ b=DS+2i6BzKbh9xO/HXMbFq26kbQA4puP2mUKVz6PzpzpuWT8j32BLbxgx9dUjZ1KGsS
+ 2IsOidowyXYQn24L9QJlg3JuehKsBPizehRh+46o/O98uvTwYFpAmb+uQBbtp7G7+j9/
+ /NZNNNKri0gSC45/PY0lUR39JCHjP7/Pnbi5CrPneEPHUYrjKaLFDEyggqbwfy0Dtalg
+ N+/8qI9n5QMFTbQSa8y3ctQBppQVuHIteUPWlSwnusrmvkUEzVuiYZ6ji0Q1gJQB7MLD
+ BPvUi7b/ROv8/CmnjkGqJQ1bwVCknXfT3/q6SCaXulH9x71u7nflPeObmxomCmSKiNWu
+ 7PGA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716361780; x=1716966580;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=CWnOBnKRuXxqyy+QGKgT8Grjdx0vqcChxjcvL0Ozv+I=;
+ b=BJ50fHPwOiG7wkAYTtQ92QkjkyHNOn5R5hTPm2sKOOTxGqz7CVzG/5V9RjJ/YogznN
+ pkBfNY7LWyxqyvsi8ABPy+/Pz3dI/p3PTkdRpdEPncxSJncrOeDs5mtpl1qAncFzGbao
+ uGbruteJyJjE7pE+eWLOW4WsHjgMCg00snbr57D6sE7lJyAuvgQCSDJPwkYjWO21Sz9h
+ 0Lbqso3Hru/lJXSdP+eZPJHfZSGEux3pMm/9Sa5Baeoin609fi8numzE36Q8+EOfRUyC
+ S5Q13eqiFxQ3EpsihNbo+NHwYHolLFfNCjKGLaKMmT/4VhW7D0o8dgXxd08kx5KZapvA
+ ZnMw==
+X-Gm-Message-State: AOJu0YwXt70P9zoM2lOLmd3XCk3PnHyQ/tzjnihgduzUK64iZ5ZV3ikz
+ 7gGc69vGudQWQUHVtwuyGlD9ujIinuxT4kfa7V1OYCZeb5qgEmUhrCzPsgFCFlFHZE0IK3aRSyg
+ fEWwgZ7b0H6doLOm3KlYC6NtJo3pVtV/F
+X-Google-Smtp-Source: AGHT+IFUlO3Jigo6CK9ZSGKnSmJasRcNEU4kNae+LP+OCyFTT9ItT+BES0DyCAC3qM3UcD9ZpiAVOXz7xvjbGn6M9ps=
+X-Received: by 2002:a17:90a:db4a:b0:2b0:763b:370e with SMTP id
+ 98e67ed59e1d1-2bd60426c81mr16018059a91.18.1716361780522; Wed, 22 May 2024
+ 00:09:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240522002122.50796-1-marex@denx.de>
+References: <20240519-qemu-xtensa-v1-0-8fff0cb11c19@flygoat.com>
+ <20240519-qemu-xtensa-v1-4-8fff0cb11c19@flygoat.com>
+ <CAMo8Bf+JNR-QSECNhaCWKVkU1s+m6-eUrqePzF=7XyezxDWu0g@mail.gmail.com>
+ <74e04a5a-5b16-49a2-a5e9-d0f7ee97484d@app.fastmail.com>
+ <CAMo8BfKVk544=8Wd=jSe+DyUhrDYqMF2EQgNuQOcubVdYFCVBw@mail.gmail.com>
+In-Reply-To: <CAMo8BfKVk544=8Wd=jSe+DyUhrDYqMF2EQgNuQOcubVdYFCVBw@mail.gmail.com>
+From: Max Filippov <jcmvbkbc@gmail.com>
+Date: Wed, 22 May 2024 00:09:29 -0700
+Message-ID: <CAMo8BfK7pB73k0yzJvfi2P4e8Rjz2huSGxVz1Ueh0dRAuDs+SA@mail.gmail.com>
+Subject: Re: [PATCH 04/10] xtensa: Define PLATFORM_ELFFLAGS
+To: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Cc: u-boot@lists.denx.de, Sean Anderson <sean.anderson@seco.com>, 
+ Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,63 +92,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, May 22, 2024 at 02:21:14AM +0200, Marek Vasut wrote:
-> The older i.MX8M Mini Verdin SoMs may came with 20 MHz SPI CAN controller
-> oscillator, the newer SoMs always use 40 MHz oscillator. Handle both by
-> overriding the oscillator frequency just before booting the kernel.
-> 
-> These are the known variants with 20 MHz oscillator:
-> - 0055, V1.1A, V1.1B, V1.1C and V1.1D, use a 20MHz oscillator
-> - 0059, V1.1A and V1.1B, use a 20MHz oscillator
-> 
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-> Cc: Fabio Estevam <festevam@gmail.com>
-> Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
-> Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-> Cc: Martyn Welch <martyn.welch@collabora.com>
-> Cc: Stefano Babic <sbabic@denx.de>
-> Cc: u-boot@lists.denx.de
-> ---
-> V2: - Update the comment in conditional statement
->     - Update ver_assembly check for 0055 rev.A/B/C/D
-> ---
->  board/toradex/verdin-imx8mm/verdin-imx8mm.c | 30 +++++++++++++++++++++
->  1 file changed, 30 insertions(+)
-> 
-> diff --git a/board/toradex/verdin-imx8mm/verdin-imx8mm.c b/board/toradex/verdin-imx8mm/verdin-imx8mm.c
-> index 55c02653da6..ef632d95f0a 100644
-> --- a/board/toradex/verdin-imx8mm/verdin-imx8mm.c
-> +++ b/board/toradex/verdin-imx8mm/verdin-imx8mm.c
-> @@ -125,6 +125,36 @@ int board_phys_sdram_size(phys_size_t *size)
->  #if defined(CONFIG_OF_LIBFDT) && defined(CONFIG_OF_BOARD_SETUP)
->  int ft_board_setup(void *blob, struct bd_info *bd)
->  {
-> +	const char *canoscpath = "/oscillator";
-> +	int freq = 40000000;	/* 40 MHz is used on most variants */
-> +	int canoscoff, ret;
-> +
-> +	canoscoff = fdt_path_offset(blob, canoscpath);
-> +	if (canoscoff < 0)	/* No CAN oscillator found. */
-> +		goto exit;
-> +
-> +	/*
-> +	 * The actual "prodid" (PID4 in Toradex naming) that have the CAN
-> +	 * functionality are 0055 and 0059. Special case 20 MHz variant
-> +	 * here:
-> +	 * - 0055, V1.1A, V1.1B, V1.1C and V1.1D, use a 20MHz oscillator
-> +	 * - 0059, V1.1A and V1.1B, use a 20MHz oscillator
-> +	 */
+On Tue, May 21, 2024 at 12:12=E2=80=AFAM Max Filippov <jcmvbkbc@gmail.com> =
+wrote:
+> On Mon, May 20, 2024 at 9:00=E2=80=AFAM Jiaxun Yang <jiaxun.yang@flygoat.=
+com> wrote:
+> > >> diff --git a/arch/xtensa/config.mk b/arch/xtensa/config.mk
+> > >> index b0809999e403..3ec936272f25 100644
+> > >> --- a/arch/xtensa/config.mk
+> > >> +++ b/arch/xtensa/config.mk
+> > >> @@ -7,3 +7,6 @@ PLATFORM_CPPFLAGS +=3D -D__XTENSA__ -mlongcalls -mfo=
+rce-no-pic \
+> > >>                      -ffunction-sections -fdata-sections
+> > >>
+> > >>  LDFLAGS_FINAL +=3D --gc-sections
+> > >> +
+> > >> +PLATFORM_ELFFLAGS +=3D -B xtensa -O elf32-xtensa-le
+> > >> +
+> > >
+> > > This fixes endianness as little for the whole architecture, but xtens=
+a cores
+> > > may be either little or big endian.
+> >
+> > Thanks for reviewing, I can just add a branch with ifdef CONFIG_SYS_BIG=
+_EDNIAN
+> > if you wish, but I think all CPUs U-Boot support are little endian only=
+?
+> >
+> > I have an ongoing series[1] fixing endian selection options, please let=
+ me know if
+> > U-Boot do work with big endian Xtensa.
+>
+> I had an impression that there's nothing endian-specific in the xtensa po=
+rt,
+> so it should work for both little- and big-endian cores. Let me test whet=
+her
+> it's true though (:
 
-Any reason why you ignored my suggestion here? The variants you list
-here are the only one with a 20MHz oscillator, and this is correct.
+Yep, I can confirm that. Importing big endian xtensa core files into the cu=
+rrent
+u-boot (I tested this one:
+  https://github.com/jcmvbkbc/xtensa-toolchain-build/blob/master/overlays/x=
+tensa_test_kc705_be.tar.gz
+matching cross-compiler is available here:
+  https://github.com/foss-xtensa/toolchain/releases/download/2019.03/x86_64=
+-2019.03-xtensa-test_kc705_be-elf.tar.gz
+)
+and building it for xtfpga produces a working image.
 
-What is not correct is that 0055/0059 are the only variant with CAN
-functionality. We have other "prodid" with CAN functionality.
-
-With that said, the code is correct, thanks. I appreciate you taking care
-of this.
-
-Francesco
-
+--=20
+Thanks.
+-- Max
