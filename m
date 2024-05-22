@@ -4,81 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA83BC25B79
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 18:36:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67759C25B78
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 18:39:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 461DF88464;
-	Wed, 22 May 2024 20:36:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E470C881C3;
+	Wed, 22 May 2024 20:39:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KDlca9NA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fRQ/SGwI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8505B87E0D; Wed, 22 May 2024 19:47:45 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 40D418849A; Wed, 22 May 2024 20:39:54 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 842C587E53
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 19:47:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 305DD87C83
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 20:39:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=vassilisamir@gmail.com
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-56e1bbdb362so8498190a12.1
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 10:47:43 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a59b097b202so797692266b.0
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 11:39:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716400063; x=1717004863; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Sp+wddFN+o6HcmwyDdF6R6CImpZUGCE+0rU+expnbbI=;
- b=KDlca9NAR27fOSdlX8wLGRFRjGHGwxv3A5HN4LJFyT4RW3wF05k4GTstsk7GYLJs37
- ojKQkXC3T4ksbeLlGeex/dssfk/YssPlw+smL4bEWlAknhBQV+SxTaFwEdg7tXmRz8Ar
- zLFiOlhNOSj/4cQumhwVh/KMneyM33Q/fsCVRexE6/y0vc+w2K7/pNK4p0EXaKlJWWEI
- i1IMifTYUaVY1nc9QZdxG/He7eZT/zMzZJaHI92AkobXib75+J6iRSFemQx4XuQUxoji
- cVgmJvqtFNxTJSL9osH8A6olWxtS948eivEMw7NrOoiXAfGuvLNY8ZQkQFQ3FPD8qC5H
- O+jQ==
+ d=linaro.org; s=google; t=1716403191; x=1717007991; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=U9yXwLtGczt7dDbcJSVaoRhctSi137MamISgqEPCINc=;
+ b=fRQ/SGwIKAz2h2a2V9ks2hgGJC/U/Gbv1JI+u1s3b/jMM8apzb76+OOAN1dXIqM8NH
+ eu+pC+nkzuaRffnkvcq9ks+FfNbpWRXAMPMhPPssKraHVknEYsA8seZKteKfpKgHsAA1
+ 2OupXdFDe7gu6nNpOy/v22+xGdBA0KQFP+EWgxPEvs6D11vZEKg2WnhnzXxKOqBbeIF6
+ 1PuLSud8HIdZVEMr9Q+D2JulDQ+jPRhJPV3708f9kGxFzdzRtcxvViajOB+8PbqjuOES
+ WlSxIyse/UXHKDCciVBfERk3B5e/dFJRqmqECbUcq/esSoond6absdub3atacHHnFzHc
+ wlgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716400063; x=1717004863;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Sp+wddFN+o6HcmwyDdF6R6CImpZUGCE+0rU+expnbbI=;
- b=XoV2gOwd7NKvvhtNYOMX2uDjmQczo9u51sIDUfLvhgNKJmOGsDNHjRAVVd84xk5Grs
- sOSv33YPktm+sxJAS9JTtoIo+loGk7wmz4bb1J5+KZFdOpmeg28NQ0l2PWkgAyuGknas
- +sfz957S7/LKmRm1j8fwc3uPlIjog6xO+dR3P/HaproLfaj1uqRCA1xrFqPdylWKg7kH
- iVLxr0OFaH1HpPI17TkE6GF8w4FNN1W4MFbf6s78cASuL2qhAy2U1KHGZAfcMAa7gZRj
- HzENY+UfUtFfKx3fnpKfU14gLzyZoX+Xkmcy1l+4jbN6RpMcd49YIhcLCd8FTQw20P+d
- quZg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVrpul5j6cPcdhdxkHTzgzRoX55tRCO60xlEssfPGkiOKgk2yDg3fYobjwGInxn1c07KsjaKX0uVPOjlFeQmCneDRD+Aw==
-X-Gm-Message-State: AOJu0YzKq3XeVNj5KIUkgndBU2Z+nnIcOo6l2FUZ05YIcmE86TnktrPd
- IWo6kM+6sQpV2Mn8n7HAm28rDQ1qJAc5BFWjVb/lPwRonrig4/XF
-X-Google-Smtp-Source: AGHT+IHfnZBuPPNASI1VoA3GO/Jriv04RtssV/BsmWeiSxbGzBYO+AVKaBRv2aZD7If2i6nD4UzDFQ==
-X-Received: by 2002:a17:906:75b:b0:a59:c5c2:a31c with SMTP id
- a640c23a62f3a-a622812a542mr263249666b.33.1716400062600; 
- Wed, 22 May 2024 10:47:42 -0700 (PDT)
-Received: from localhost.localdomain ([2a04:ee41:82:7577:cd60:c296:de6d:ffc9])
+ d=1e100.net; s=20230601; t=1716403191; x=1717007991;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=U9yXwLtGczt7dDbcJSVaoRhctSi137MamISgqEPCINc=;
+ b=LrScbqTXyusKhMuzRCemorP4Bkv75Bh8Vh1nX4nWQxxTV297n8UbQk48AIToYZnXHI
+ yYaVySNUDVu1qToSe9wb18Ze2beHA+FLyKFXiS6qzBJ4jBGyKTMD+QlYcgo8UwxtVEz0
+ UN7BF/kpciOK+CrC/hJGgph0OtgA44apCC1eCVHHebacW0X3+hjbHrAibaxV5L8+mBYR
+ 6FX/AzDfoQ/Jgz+mwj3EaJHvTHKbIzCPwwmmxyfGN17T4Qb6OTl9yppcbQWFNFb3uppP
+ e81y4i+FEVakK22ry8sDzC9iWpL5emCswe989CiRAjbQN91kHnZ4jKQKmOAqT9KWsEoO
+ MPpQ==
+X-Gm-Message-State: AOJu0Yzxudz/u0DynKVkRq+jf6l2fkyyE/MotybPbTkGhNc5ZInLNZe8
+ 5aAzZBq8o+s+93qlaTJKUf9Yo7CgC2CT1Z+WGFM4p9bohVYb6Cx4cbEf2cIaVuk=
+X-Google-Smtp-Source: AGHT+IHYTk7ZZo4haXqygO1kfeZRbkaGl0ZQH8llpEgQ+h+K+JgRZ20eVntorQX+MsB5pPdkYvAnnA==
+X-Received: by 2002:a17:907:6016:b0:a59:af54:1651 with SMTP id
+ a640c23a62f3a-a62281646d9mr158210366b.57.1716403191600; 
+ Wed, 22 May 2024 11:39:51 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:4ddc:8210:4043:e30f?
+ ([2a01:e0a:3cb:7bb0:4ddc:8210:4043:e30f])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a5a17b179casm1800697166b.203.2024.05.22.10.47.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 May 2024 10:47:42 -0700 (PDT)
-From: Vasileios Amoiridis <vassilisamir@gmail.com>
-To: michal.simek@amd.com,
-	trini@kosnulko.com
-Cc: ashok.reddy.soma@amd.com, venkatesh.abbarapu@amd.com, sr@denx.de,
- LPolak@arri.de, vasileios.amoiridis@cern.ch,
- santoshsagar.algapally@amd.com, u-boot@lists.denx.de
-Subject: [PATCH] xilinx: Add option to load environment from outside of boot
- media
-Date: Wed, 22 May 2024 19:47:38 +0200
-Message-Id: <20240522174738.73522-1-vassilisamir@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ a640c23a62f3a-a5a17b015ecsm1838373466b.177.2024.05.22.11.39.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 22 May 2024 11:39:51 -0700 (PDT)
+Message-ID: <71414bd6-680e-4d54-841a-29cbd36c8477@linaro.org>
+Date: Wed, 22 May 2024 20:39:50 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 22 May 2024 20:36:34 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 10/15] test: dm: dsa, eth: disable tests when
+ CONFIG_NET_LWIP=y
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>
+References: <cover.1716393035.git.jerome.forissier@linaro.org>
+ <52b126477a39fe8e0bdea9fd9ec70b0951aab88b.1716393035.git.jerome.forissier@linaro.org>
+ <CAC_iWj+7ieyyh=aUzuAT7Okjg=PHxb=NDyXy43nKSzeFw3zFwg@mail.gmail.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <CAC_iWj+7ieyyh=aUzuAT7Okjg=PHxb=NDyXy43nKSzeFw3zFwg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,260 +99,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
 
-Currently, if the environment is not in the current boot media, the
-env_get_location() is returning ENVL_UNKNOWN or ENVL_NOWHERE which
-is not true (i.e booting from FLASH with environment in eMMC). This
-commit adds an extra check to find the environment in the other
-supported boot media, keeping the same priority as of now.
 
-Signed-off-by: Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
----
- board/xilinx/versal-net/board.c | 21 +++++++++++++++++++--
- board/xilinx/versal/board.c     | 23 ++++++++++++++++++++---
- board/xilinx/zynq/board.c       | 31 +++++++++++++++++++++++++++----
- board/xilinx/zynqmp/zynqmp.c    | 31 +++++++++++++++++++++++++++----
- 4 files changed, 93 insertions(+), 13 deletions(-)
+On 5/22/24 20:07, Ilias Apalodimas wrote:
+> Hi Jerome,
+> 
+> On Wed, 22 May 2024 at 19:04, Jerome Forissier
+> <jerome.forissier@linaro.org> wrote:
+>>
+>> Some sandbox tests make strong assumptions on how the network stack is
+>> implemented. For example, the ping tests assume that ARP resolution
+>> occurs upon sending out the ICMP packet. This is not always the case
+>> with the lwIP stack which can cache ARP information.
+>> Therefore, disable these tests when CONFIG_NET_LWIP is enabled.
+> 
+> Is the ARP Caching the only issue?
 
-diff --git a/board/xilinx/versal-net/board.c b/board/xilinx/versal-net/board.c
-index da03024e16..5648d6685e 100644
---- a/board/xilinx/versal-net/board.c
-+++ b/board/xilinx/versal-net/board.c
-@@ -372,6 +372,21 @@ void reset_cpu(void)
- {
- }
- 
-+static enum env_location env_locations[] = {
-+#ifdef CONFIG_ENV_IS_IN_FAT
-+	ENVL_FAT,
-+#endif
-+#ifdef CONFIG_ENV_IS_IN_EXT4
-+	ENVL_EXT4,
-+#endif
-+#ifdef CONFIG_ENV_IS_IN_SPI_FLASH
-+	ENVL_SPI_FLASH,
-+#endif
-+#ifdef CONFIG_ENV_IS_NOWHERE
-+	ENVL_NOWHERE,
-+#endif
-+};
-+
- #if defined(CONFIG_ENV_IS_NOWHERE)
- enum env_location env_get_location(enum env_operation op, int prio)
- {
-@@ -389,17 +404,19 @@ enum env_location env_get_location(enum env_operation op, int prio)
- 			return ENVL_FAT;
- 		if (IS_ENABLED(CONFIG_ENV_IS_IN_EXT4))
- 			return ENVL_EXT4;
--		return ENVL_NOWHERE;
-+		break;
- 	case OSPI_MODE:
- 	case QSPI_MODE_24BIT:
- 	case QSPI_MODE_32BIT:
- 		if (IS_ENABLED(CONFIG_ENV_IS_IN_SPI_FLASH))
- 			return ENVL_SPI_FLASH;
--		return ENVL_NOWHERE;
-+		break;
- 	case JTAG_MODE:
- 	case SELECTMAP_MODE:
- 	default:
- 		return ENVL_NOWHERE;
- 	}
-+
-+	return env_locations[prio];
- }
- #endif
-diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c
-index 4f6d56119d..8aed2e97df 100644
---- a/board/xilinx/versal/board.c
-+++ b/board/xilinx/versal/board.c
-@@ -291,12 +291,27 @@ void reset_cpu(void)
- {
- }
- 
-+static enum env_location env_locations[] = {
-+#ifdef CONFIG_ENV_IS_IN_FAT
-+	ENVL_FAT,
-+#endif
-+#ifdef CONFIG_ENV_IS_IN_EXT4
-+	ENVL_EXT4,
-+#endif
-+#ifdef CONFIG_ENV_IS_IN_SPI_FLASH
-+	ENVL_SPI_FLASH,
-+#endif
-+#ifdef CONFIG_ENV_IS_NOWHERE
-+	ENVL_NOWHERE,
-+#endif
-+};
-+
- #if defined(CONFIG_ENV_IS_NOWHERE)
- enum env_location env_get_location(enum env_operation op, int prio)
- {
- 	u32 bootmode = versal_get_bootmode();
- 
--	if (prio)
-+	if (prio >= ARRAY_SIZE(env_locations))
- 		return ENVL_UNKNOWN;
- 
- 	switch (bootmode) {
-@@ -308,17 +323,19 @@ enum env_location env_get_location(enum env_operation op, int prio)
- 			return ENVL_FAT;
- 		if (IS_ENABLED(CONFIG_ENV_IS_IN_EXT4))
- 			return ENVL_EXT4;
--		return ENVL_NOWHERE;
-+		break;
- 	case OSPI_MODE:
- 	case QSPI_MODE_24BIT:
- 	case QSPI_MODE_32BIT:
- 		if (IS_ENABLED(CONFIG_ENV_IS_IN_SPI_FLASH))
- 			return ENVL_SPI_FLASH;
--		return ENVL_NOWHERE;
-+		break;
- 	case JTAG_MODE:
- 	case SELECTMAP_MODE:
- 	default:
- 		return ENVL_NOWHERE;
- 	}
-+
-+	return env_locations[prio];
- }
- #endif
-diff --git a/board/xilinx/zynq/board.c b/board/xilinx/zynq/board.c
-index 6c36591001..6fa5016cdd 100644
---- a/board/xilinx/zynq/board.c
-+++ b/board/xilinx/zynq/board.c
-@@ -134,11 +134,32 @@ int dram_init(void)
- }
- #endif
- 
-+static enum env_location env_locations[] = {
-+#ifdef CONFIG_ENV_IS_IN_FAT
-+	ENVL_FAT,
-+#endif
-+#ifdef CONFIG_ENV_IS_IN_EXT4
-+	ENVL_EXT4,
-+#endif
-+#ifdef CONFIG_ENV_IS_IN_NAND
-+	ENVL_NAND,
-+#endif
-+#ifdef CONFIG_ENV_IS_IN_UBI
-+	ENVL_UBI,
-+#endif
-+#ifdef CONFIG_ENV_IS_IN_SPI_FLASH
-+	ENVL_SPI_FLASH,
-+#endif
-+#ifdef CONFIG_ENV_IS_NOWHERE
-+	ENVL_NOWHERE,
-+#endif
-+};
-+
- enum env_location env_get_location(enum env_operation op, int prio)
- {
- 	u32 bootmode = zynq_slcr_get_boot_mode() & ZYNQ_BM_MASK;
- 
--	if (prio)
-+	if (prio >= ARRAY_SIZE(env_locations))
- 		return ENVL_UNKNOWN;
- 
- 	switch (bootmode) {
-@@ -147,22 +168,24 @@ enum env_location env_get_location(enum env_operation op, int prio)
- 			return ENVL_FAT;
- 		if (IS_ENABLED(CONFIG_ENV_IS_IN_EXT4))
- 			return ENVL_EXT4;
--		return ENVL_NOWHERE;
-+		break;
- 	case ZYNQ_BM_NAND:
- 		if (IS_ENABLED(CONFIG_ENV_IS_IN_NAND))
- 			return ENVL_NAND;
- 		if (IS_ENABLED(CONFIG_ENV_IS_IN_UBI))
- 			return ENVL_UBI;
--		return ENVL_NOWHERE;
-+		break;
- 	case ZYNQ_BM_NOR:
- 	case ZYNQ_BM_QSPI:
- 		if (IS_ENABLED(CONFIG_ENV_IS_IN_SPI_FLASH))
- 			return ENVL_SPI_FLASH;
--		return ENVL_NOWHERE;
-+		break;
- 	case ZYNQ_BM_JTAG:
- 	default:
- 		return ENVL_NOWHERE;
- 	}
-+
-+	return env_locations[prio];
- }
- 
- #if defined(CONFIG_SET_DFU_ALT_INFO)
-diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
-index f370fb7347..7e646d342b 100644
---- a/board/xilinx/zynqmp/zynqmp.c
-+++ b/board/xilinx/zynqmp/zynqmp.c
-@@ -588,12 +588,33 @@ int mmc_get_env_dev(void)
- 	return bootseq;
- }
- 
-+static enum env_location env_locations[] = {
-+#ifdef CONFIG_ENV_IS_IN_FAT
-+	ENVL_FAT,
-+#endif
-+#ifdef CONFIG_ENV_IS_IN_EXT4
-+	ENVL_EXT4,
-+#endif
-+#ifdef CONFIG_ENV_IS_IN_NAND
-+	ENVL_NAND,
-+#endif
-+#ifdef CONFIG_ENV_IS_IN_UBI
-+	ENVL_UBI,
-+#endif
-+#ifdef CONFIG_ENV_IS_IN_SPI_FLASH
-+	ENVL_SPI_FLASH,
-+#endif
-+#ifdef CONFIG_ENV_IS_NOWHERE
-+	ENVL_NOWHERE,
-+#endif
-+};
-+
- #if defined(CONFIG_ENV_IS_NOWHERE)
- enum env_location env_get_location(enum env_operation op, int prio)
- {
- 	u32 bootmode = zynqmp_get_bootmode();
- 
--	if (prio)
-+	if (prio >= ARRAY_SIZE(env_locations))
- 		return ENVL_UNKNOWN;
- 
- 	switch (bootmode) {
-@@ -605,22 +626,24 @@ enum env_location env_get_location(enum env_operation op, int prio)
- 			return ENVL_FAT;
- 		if (IS_ENABLED(CONFIG_ENV_IS_IN_EXT4))
- 			return ENVL_EXT4;
--		return ENVL_NOWHERE;
-+		break;
- 	case NAND_MODE:
- 		if (IS_ENABLED(CONFIG_ENV_IS_IN_NAND))
- 			return ENVL_NAND;
- 		if (IS_ENABLED(CONFIG_ENV_IS_IN_UBI))
- 			return ENVL_UBI;
--		return ENVL_NOWHERE;
-+		break;
- 	case QSPI_MODE_24BIT:
- 	case QSPI_MODE_32BIT:
- 		if (IS_ENABLED(CONFIG_ENV_IS_IN_SPI_FLASH))
- 			return ENVL_SPI_FLASH;
--		return ENVL_NOWHERE;
-+		break;
- 	case JTAG_MODE:
- 	default:
- 		return ENVL_NOWHERE;
- 	}
-+
-+	return env_locations[prio];
- }
- #endif
- 
+No, but I don't recall exactly what was wrong in addition to that.
 
-base-commit: a7f0154c412859323396111dd0c09dbafbc153cb
--- 
-2.34.1
+> U-Boot isn't supposed to use the network stack that much, so it might
+> be a better idea to disable arp-caching in LWIP (assuming it's
+> doable). We might even get a few size of bytes back
 
+If ARP_TABLE_SIZE is 0, there is no caching but in addition to that the
+lwIP stack does not work well. For example when requested to send an
+ICMP packet to an unknown IP (unknown as in "not yet resolved at the
+ethernet level" i.e., ARP) and assuming ARP_TABLE_SIZE is 1, it will
+automatically do the ARP request/response then proceed with ICMP send.
+However if ARP_TABLE_SIZE is 0, only the ARP resolution occurs and the
+ICMP packet won't go out. So I am not sure that 0 is a valid value.
+
+> 
+> Cheers
+> /Ilias
+>>
+>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+>> ---
+>>  test/dm/dsa.c | 2 ++
+>>  test/dm/eth.c | 4 ++++
+>>  2 files changed, 6 insertions(+)
+>>
+>> diff --git a/test/dm/dsa.c b/test/dm/dsa.c
+>> index c857106eaf..147e2a4afe 100644
+>> --- a/test/dm/dsa.c
+>> +++ b/test/dm/dsa.c
+>> @@ -59,6 +59,7 @@ static int dm_test_dsa_probe(struct unit_test_state *uts)
+>>
+>>  DM_TEST(dm_test_dsa_probe, UT_TESTF_SCAN_FDT);
+>>
+>> +#if !defined(CONFIG_NET_LWIP)
+>>  /* This test sends ping requests with the local address through each DSA port
+>>   * via the sandbox DSA master Eth.
+>>   */
+>> @@ -80,3 +81,4 @@ static int dm_test_dsa(struct unit_test_state *uts)
+>>  }
+>>
+>>  DM_TEST(dm_test_dsa, UT_TESTF_SCAN_FDT);
+>> +#endif /* !defined(CONFIG_NET_LWIP) */
+>> diff --git a/test/dm/eth.c b/test/dm/eth.c
+>> index bb3dcc6b95..cf97b1c1ab 100644
+>> --- a/test/dm/eth.c
+>> +++ b/test/dm/eth.c
+>> @@ -170,6 +170,7 @@ static int dm_test_ip6_make_lladdr(struct unit_test_state *uts)
+>>  DM_TEST(dm_test_ip6_make_lladdr, UT_TESTF_SCAN_FDT);
+>>  #endif
+>>
+>> +#if !defined(CONFIG_NET_LWIP)
+>>  static int dm_test_eth(struct unit_test_state *uts)
+>>  {
+>>         net_ping_ip = string_to_ip("1.1.2.2");
+>> @@ -298,6 +299,7 @@ static int dm_test_eth_act(struct unit_test_state *uts)
+>>         return 0;
+>>  }
+>>  DM_TEST(dm_test_eth_act, UT_TESTF_SCAN_FDT);
+>> +#endif /* !CONFIG_NET_LWIP */
+>>
+>>  /* Ensure that all addresses are loaded properly */
+>>  static int dm_test_ethaddr(struct unit_test_state *uts)
+>> @@ -332,6 +334,7 @@ static int dm_test_ethaddr(struct unit_test_state *uts)
+>>  }
+>>  DM_TEST(dm_test_ethaddr, UT_TESTF_SCAN_FDT);
+>>
+>> +#if !defined(CONFIG_NET_LWIP)
+>>  /* The asserts include a return on fail; cleanup in the caller */
+>>  static int _dm_test_eth_rotate1(struct unit_test_state *uts)
+>>  {
+>> @@ -616,6 +619,7 @@ static int dm_test_eth_async_ping_reply(struct unit_test_state *uts)
+>>  }
+>>
+>>  DM_TEST(dm_test_eth_async_ping_reply, UT_TESTF_SCAN_FDT);
+>> +#endif /* !CONFIG_NET_LWIP */
+>>
+>>  #if IS_ENABLED(CONFIG_IPV6_ROUTER_DISCOVERY)
+>>
+>> --
+>> 2.40.1
+>>
