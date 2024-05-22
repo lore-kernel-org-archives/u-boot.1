@@ -4,94 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47A87C25B78
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 14:11:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E36AC25B78
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 14:15:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 989588847C;
-	Wed, 22 May 2024 16:10:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9542888828;
+	Wed, 22 May 2024 16:15:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZKmtxZb1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IqRLFuf3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F06968871D; Wed, 22 May 2024 16:10:56 +0200 (CEST)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id 47A2A88836; Wed, 22 May 2024 16:15:33 +0200 (CEST)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA43187E0B
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 16:10:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1EC378847C
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 16:15:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-3c74b27179dso3766274b6e.1
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 07:10:54 -0700 (PDT)
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-6a8dcc794fdso4913526d6.0
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 07:15:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1716387053; x=1716991853; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1716387330; x=1716992130; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=fC1ijvXrKBXVJPlT+NHHbgFSmiWkus7Bs/k3wkrtV5c=;
- b=ZKmtxZb1xlrUgZYEOr0WPtwmCbAB8vw2hh8VrkuAnr9uCVzFCJ6O2qZNoFtnm7fe1r
- WsVd985MyDlXKadfiIJ4l6tre4vPCRZok5m/XPKB2bzO3kwdGtKvsDZTYZpzQGf3pBod
- rwZd00E/g5yO7A4iA71auZFzHPKiAWQk7tKMU=
+ bh=YaDEBQJ8Q0Z18GBRqUJlvfEVT7sBeQgmxlIiIG9KzfQ=;
+ b=IqRLFuf3fNAeohGJl7XKxmf4UfhBV2Qw8OTamTJm5pZ6AysGGVSqW2YptFjZFcqRxw
+ QyoPpfdEBUBXN3nFPPaG7Z2W8EXITxXYAQ9bquhGHT6uf+O9LrbdhPZUgBMXXRM4CbBb
+ MhnR7dtpwM2UA4eys2J9/HqUsOYhgVpNrw56I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716387053; x=1716991853;
+ d=1e100.net; s=20230601; t=1716387330; x=1716992130;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fC1ijvXrKBXVJPlT+NHHbgFSmiWkus7Bs/k3wkrtV5c=;
- b=bRGaY4ztXYSBhPT4HlT/d5WqI+Kc22j8SU1LvN3MVYF9uomVaFaIv2YeDj2D5xBoRw
- CzlkH9Y2uyIUxpcC3Ad9VHoUZGmdddnqlFN5k3tlwmCgM5GWWegx+PeEcbGCzCX1Zvj1
- dSr/MJhp4UJSR1bWId4wtOU5UoGvSrMVKY8hfCSgpIuntckL104iqH5lUmqDftUR+0qn
- DfYK7tuCiKAbFAMaCvhH74wiOfWjUP4GDrNbInt1aKJZx0VmKtGS2TgkYkt7P2iKwS45
- 1kLLr8uyE/5gyVUlRIK4KM6INb2Gzvp2stknyQ9b0Lne2Kw/woqHH9ZLqn2XRixwxi1C
- +jVA==
+ bh=YaDEBQJ8Q0Z18GBRqUJlvfEVT7sBeQgmxlIiIG9KzfQ=;
+ b=FdwRlMvcMumOdGeRKxbbJRzXefDE1UtAdOR2utyAis9hpDpL7tBVJPdIaiujEJS4jV
+ BZedqdILSzMkAkVTTC29lg0vVtR+K5QmEK5lvu2PJl2eaQiF3sjuUwFfb3OZy7tuuUTg
+ E9Nmq+iybLAbUKspwEgil1TYTZGbwyz2H8DfS9vqcIYR4Cd1nYi1NDkGjK2uWwD8Kka9
+ I+ohQWsza8DBIyD5AXS1whFSKnZZ+E3NW7pskRVyMg2HXdHLEvjp5yapXI4e8vpOH2w9
+ bZOAXTx7rn+JjL5RjVi5ZOdkwqf/qS9yY9uiCRhpZj1/94K5nvZR+L8MgD5pqBtw6KLe
+ o1fQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWOF3ddfXeANNmobuFOmY4PwcZgK+WQyihYfaBc4NdybstPoIRb+1YJA5+2PJWN+zf3Tydf4iv7DoQ7au45RuSYnxipQg==
-X-Gm-Message-State: AOJu0YynaF6JYntIaL2WJpi+IvlVTjE6nvrjwBvv6Gf/DlH9qVf+Zns+
- Pz2liEQst0OD5wxYM+Md09vFDjy/5VY2W+C5LjMvU67fJYSkbudjugmcC0ybRls=
-X-Google-Smtp-Source: AGHT+IGq4s4Trd55NNL6ldvqpzDx26JSYaSfYC1TznVGlYzHmGdTxSPLhMr4iefUnZa9UjdSO78udw==
-X-Received: by 2002:a05:6808:f02:b0:3c9:63d1:6fce with SMTP id
- 5614622812f47-3cdba016eaamr2434970b6e.40.1716387053402; 
- Wed, 22 May 2024 07:10:53 -0700 (PDT)
+ AJvYcCXb0G5cPfFXej2axZqe/sHwAQRZMSpDsWszg86NsgDGy1GhHJAvCytj2R9p/zZ7R+uHB+4ZQUTm55dk9QopJkxTUviv+Q==
+X-Gm-Message-State: AOJu0Yyk/hm624pdWgB/r/I7ryoRApVUqSRnV6BwaAUmW9WRFla6aFma
+ KKb7E2Vai2k/phi72r/USVcjR44ahaepsdvYvqX2kneAGAxL+88UNl6uEmKDID0=
+X-Google-Smtp-Source: AGHT+IEtEiq6fzERpJmYNfETLYiEeS22IhIatlt4NoqIy7kXcKZ1is2QNbbWpkvjUpd7P/ZIfEZ5ig==
+X-Received: by 2002:a05:6214:5902:b0:6aa:12cc:5adb with SMTP id
+ 6a1803df08f44-6ab8087cde2mr19072656d6.33.1716387329830; 
+ Wed, 22 May 2024 07:15:29 -0700 (PDT)
 Received: from bill-the-cat ([189.178.170.52])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-793003beff1sm726225585a.95.2024.05.22.07.10.50
+ 6a1803df08f44-6a15f1cd266sm133500886d6.80.2024.05.22.07.15.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 May 2024 07:10:52 -0700 (PDT)
-Date: Wed, 22 May 2024 08:10:48 -0600
+ Wed, 22 May 2024 07:15:29 -0700 (PDT)
+Date: Wed, 22 May 2024 08:15:24 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Jon Humphreys <j-humphreys@ti.com>, Neha Malcom Francis <n-francis@ti.com>
-Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>, Simon Glass <sjg@chromium.org>,
- Nikhil M Jain <n-jain1@ti.com>, Andrew Davis <afd@ti.com>,
- Maxime Ripard <mripard@kernel.org>,
- Siddharth Vadapalli <s-vadapalli@ti.com>,
- Roger Quadros <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 4/7] dts: beagleplay: binman: Include firmware
- capsules binman nodes
-Message-ID: <20240522141048.GG2568172@bill-the-cat>
-References: <20240419212819.170033-1-j-humphreys@ti.com>
- <20240419212819.170033-5-j-humphreys@ti.com>
- <20240510173200.GV2568172@bill-the-cat>
- <86o78yd1ud.fsf@udb0321960.dhcp.ti.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>,
+ Quentin Schulz <foss+uboot@0leil.net>
+Cc: Heiko =?iso-8859-1?Q?St=FCbner?= <heiko@sntech.de>,
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Heiko Stuebner <heiko.stuebner@cherry.de>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Suniel Mahesh <sunil@amarulasolutions.com>,
+ Klaus Goger <klaus.goger@theobroma-systems.com>, jonas@kwiboo.se
+Subject: Re: [PATCH 00/10] rockchip: px30: migrate to common bss and stack
+ addresses + UART fixes for evb-px30
+Message-ID: <20240522141524.GH2568172@bill-the-cat>
+References: <20240521-px30-2024-07-rc-v1-0-62109c84d44f@cherry.de>
+ <20240521180444.GC2568172@bill-the-cat>
+ <c9a78f7a-5b63-4d37-93d4-2c6bd8db0076@cherry.de>
+ <2148002.OBFZWjSADL@diego>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="tJuio3RYH97FrlMv"
+ protocol="application/pgp-signature"; boundary="87gEAgqaTJFRnYBk"
 Content-Disposition: inline
-In-Reply-To: <86o78yd1ud.fsf@udb0321960.dhcp.ti.com>
+In-Reply-To: <2148002.OBFZWjSADL@diego>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,90 +104,123 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---tJuio3RYH97FrlMv
-Content-Type: text/plain; charset=us-ascii
+--87gEAgqaTJFRnYBk
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, May 21, 2024 at 09:20:26PM -0500, Jon Humphreys wrote:
-> Tom Rini <trini@konsulko.com> writes:
+On Wed, May 22, 2024 at 02:14:47PM +0200, Heiko St=FCbner wrote:
+> Am Mittwoch, 22. Mai 2024, 10:39:25 CEST schrieb Quentin Schulz:
+> > Hi Tom,
+> >=20
+> > On 5/21/24 8:04 PM, Tom Rini wrote:
+> > > On Tue, May 21, 2024 at 07:39:53PM +0200, Quentin Schulz wrote:
+> > >> PX30 Ringneck ran out of memory in the allocation pool of U-Boot pro=
+per
+> > >> pre-reloc. Something needed to be done. Jonas did migrate a few SoCs
+> > >> already to this common bss+stack addresses so it made sense to follow
+> > >> the same route for one additional SoC: PX30.
+> > >>
+> > >> While at it, also fix a few issues related to UART on the PX30 Mini =
+EVB
+> > >> I could test.
+> > >>
+> > >> Boot (to U-Boot CLI) tested on PX30 Ringneck and PX30 Mini-EVB.
+> > >>
+> > >> Thanks to Jonas for hinting where to look at.
+> > >>
+> > >> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> > >> ---
+> > >> Quentin Schulz (10):
+> > >>        rockchip: px30: default TPL_SYS_MALLOC_F_LEN to 0x600 on PX30=
+ Kconfig level
+> > >>        rockchip: Use common bss and stack addresses on PX30
+> > >>        rockchip: ringneck_px30: Use common bss and stack addresses
+> > >>        rockchip: evb-px30: Use common bss and stack addresses
+> > >>        rockchip: firefly-px30: Use common bss and stack addresses
+> > >>        rockchip: odroid-go2: Use common bss and stack addresses
+> > >>        rockchip: px30-core-*: Use common bss and stack addresses
+> > >>        rockchip: px30: make UART pinmux accessible to TPL/SPL DTB
+> > >>        rockchip: evb-px30: do not remove pinctrl nodes from SPL DTB
+> > >>        rockchip: evb-px30: make UART5 the debug UART
+> > >>
+> > >>   arch/arm/dts/px30-u-boot.dtsi                 | 16 ++++++++++++++++
+> > >>   arch/arm/mach-rockchip/px30/Kconfig           |  8 +++++++-
+> > >>   configs/evb-px30_defconfig                    | 23 +++++----------=
+--------
+> > >>   configs/firefly-px30_defconfig                | 19 +++------------=
+----
+> > >>   configs/odroid-go2_defconfig                  | 19 +++------------=
+----
+> > >>   configs/px30-core-ctouch2-of10-px30_defconfig | 19 +++------------=
+----
+> > >>   configs/px30-core-ctouch2-px30_defconfig      | 19 +++------------=
+----
+> > >>   configs/px30-core-edimm2.2-px30_defconfig     | 19 +++------------=
+----
+> > >>   configs/ringneck-px30_defconfig               | 19 +++------------=
+----
+> > >>   9 files changed, 46 insertions(+), 115 deletions(-)
+> > >> ---
+> > >> base-commit: a7f0154c412859323396111dd0c09dbafbc153cb
+> > >> change-id: 20240521-px30-2024-07-rc-7136f6241d29
+> > >=20
+> > > As I assume we want to fix the platforms for v2024.07, is this the le=
+vel
+> > > of config changes everyone is comfortable with on the platforms? Or
+> > > should we just go with the minimum for release and the rest to -next?
+> > >=20
+> >=20
+> > I can tell you that Ringneck doesn't work anymore on v2024.07-rc, but=
+=20
+> > the PX30 Mini EVB was still reaching U-Boot CLI without the changes. I=
+=20
+> > don't know about the other boards.
+> >=20
+> > So I could split this into two series, one for master, one for next.
+> >=20
+> > I could suggest: patch 1 to 3 in master, the rest in next. Patch 1 is=
+=20
+> > just moving things around. Patch 2 is doing nothing if nobody uses=20
+> > ROCKCHIP_COMMON_STACK_ADDR and SPL_SHARES_INIT_SP_ADDR (which is the=20
+> > case for px30 boards). Patch 3 is for fixing Ringneck, which I know is=
+=20
+> > broken.
+> >=20
+> > Heiko having access to the Odroid Go2, maybe he could test without my=
+=20
+> > patches and see if it reaches the CLI to know if we should pull it in=
+=20
+> > for master as well.
 >=20
-> > On Fri, Apr 19, 2024 at 04:28:16PM -0500, Jonathan Humphreys wrote:
-> >
-> >> Fill in the BeaglePlay's capsule GUID properties of the base binman ca=
-psule
-> >> nodes.
-> >>=20
-> >> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
-> >> ---
-> >>  arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi | 27 ++++++++++++++++++++
-> >>  arch/arm/dts/k3-am625-r5-beagleplay.dts      | 15 +++++++++++
-> >>  2 files changed, 42 insertions(+)
-> >
-> > This series introduces failure to build in CI, and it's a little tricky
-> > to replicate locally, depending on your environment. You first need to
-> > NOT have BINMAN_INDIRS set and instead be using fake binaries. Second,
-> > it seems python version dependent perhaps? I don't see this on my host,
-> > but by:
-> > - Using the CI container
-> > - Setting up a virtualenv inside of it
-> > - pip install -r tools/buildman/requirements.txt
-> > I get:
-> > $ ./tools/buildman/buildman --keep-outputs --reproducible-builds -dvel =
---force-build -PEWM --output /tmp/am62x_beagleplay_r5 --board am62x_beaglep=
-lay_r5
-> > Building current source for 1 boards (1 thread, 12 jobs per thread)
-> >        arm:  +   am62x_beagleplay_r5
-> > +(am62x_beagleplay_r5) Image 'tiboot3-am62x-gp-evm.bin' is missing opti=
-onal external blobs but is still functional: ti-fs-gp.bin
-> > +(am62x_beagleplay_r5)
-> > +(am62x_beagleplay_r5) /binman/tiboot3-am62x-gp-evm.bin/ti-fs-gp.bin (t=
-i-sysfw/ti-fs-firmware-am62x-gp.bin):
-> > +(am62x_beagleplay_r5)    Missing blob
-> > +(am62x_beagleplay_r5) binman: object of type 'NoneType' has no len()
-> > +(am62x_beagleplay_r5) make[1]: *** [Makefile:1126: .binman_stamp] Erro=
-r 1
-> > +(am62x_beagleplay_r5) make: *** [Makefile:177: sub-make] Error 2
-> >     0    0    1 /1              am62x_beagleplay_r5
+> I did that yesterday evening. The Odroid Go2 also reached u-boot CLI
+> and also booted without these changes. So I guess it's small enough
+> or whatever.
 >=20
-> Tom, this is failing in the CI container because the container is missing
-> the mkeficapsule tool.
->=20
-> To solve this, we just need to add it to the CI container.
->=20
-> My understanding of binman's handling of missing bintools is that it shou=
-ld
-> gracefully continue with fake data, so that buildman can successfully test
-> out builds for boards even when you don't have all the required bintools.
-> If I have that correct, I can also create a patch to properly handle this
-> when using mkeficapsule. But I want to verify this is the desired behavio=
-r,
-> since mkeficapsule isn't a unique or vendor specific tool, so shouldn't we
-> require it as part of the U-Boot build environment and err out if it is
-> missing?
+> So at least the Go2 is fine on 2024.07-rc3 either way with or without
+> this series.
 
-Perhaps it's a binman issue since we build mkeficapsule or at least
-should be? Neha?
+OK, thanks. I'll grab 1-3 for master shortly then.
 
 --=20
 Tom
 
---tJuio3RYH97FrlMv
+--87gEAgqaTJFRnYBk
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZN/N0ACgkQFHw5/5Y0
-tyzJfAwAiYdVxHWOyC8DO7ktHHZtwYqtNKLMnRpmy/uKvUNuGtPeTHQ837PxK2Ms
-CVHDXRCDSaGAVl2ZaaMHk5rK26NVg1z9624O8iXHfiFx1mN8cN8wGN6BhNPhIX6i
-GgZ7jCaQcwRSFoaK/qKRaQTAFn03uVkohS+MVkEmy5rlyHnA9KG+OhqOhU4CI5jZ
-6XOR38ZRkTe608DqPBfd2VKvdyuZy8aT8paaKI9UdcGP0UEXx4ZM0QUkLz0zcC6Y
-qNCG+EYD9rT7mN4jDm+iE9HtdXFKOGaMHnEC8cH+OeJwnHrKv8gOvGCMP/OUj3LD
-12gALJ3fKpgdTPCtpoS2oplAtQpYr5CnGXhLUcaHfPkGshYJ7jUsPwjT9LDvrbbe
-+hilua7v4eI+rZD0P425xZpkGS7YyN1s0iFwIL8mOKW62IKKblnFIXh7itVSSoXR
-lBNaZ6ELNmu2JZiuLGJ+qYpUZg3HmgSYYiiQs/JPY/F36D0zCIp8Jwd8lDYXYjye
-brPltDUQ
-=sO2F
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZN/fwACgkQFHw5/5Y0
+tyxCngv/S4TCBeCGuTzvQMKNalz+0C5Xb96Ciw4SI87v/CpqiGWB7KaNSy9ZxnzD
+He0wLcJ/A1dw7vt0HgC/+UuF7h4IHWWNMnE13yBL7EE0JkhsCdSQ9j9N47Hksfki
+C3BpSY7E5iJ5zUqOK/qHMHVNhSJ/N+vqKM6P5uiSzSaMf1AMlbSGONfEmEzZfHZX
+0ArEX/ZjD+VWhc5a0HJ1oZNK8Hb2wOcv4RrGi833mnGWCrsZJhBbkadi9AxVu54S
+mdos41ghnyJeZbcUAvxkx9BnKNNuVMMLXeJ6kkmTI1HpsH4PUC6w41YEQts99tkj
+1GtHmPZRD9pyi5Suic9YpUbRNgNk76Myj4+qfPvu2TY8SlB8mC38HC/gbe6xeJ6w
+vUFOrV0AlPSc/LZXktA7EMG+VdgT/R0Dg/dgIlDgWgjitYWqDepMWizj8ZaUIj+a
+O90JB3bRg2gfNvoQhyWEyBVzkcXW3FSIx3YhZMPAPuPnOIz0X1MHMFEWxrT91sBE
+1BIcNbIW
+=djIM
 -----END PGP SIGNATURE-----
 
---tJuio3RYH97FrlMv--
+--87gEAgqaTJFRnYBk--
