@@ -4,99 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 899D3C25B79
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 17:09:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF4F5C25B79
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 17:09:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D65B2888C4;
-	Wed, 22 May 2024 19:08:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5209F8888B;
+	Wed, 22 May 2024 19:08:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="z+aZxmXn";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="J7GLKuim";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="RJCIzPBk";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="IeMuzP0W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3BD588889; Wed, 22 May 2024 19:08:14 +0200 (CEST)
-Received: from wfout6-smtp.messagingengine.com
- (wfout6-smtp.messagingengine.com [64.147.123.149])
+ id ED9428887C; Wed, 22 May 2024 19:08:16 +0200 (CEST)
+Received: from wfhigh1-smtp.messagingengine.com
+ (wfhigh1-smtp.messagingengine.com [64.147.123.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 958DC88889
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 19:08:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D6DDD8889F
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 19:08:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailfout.west.internal (Postfix) with ESMTP id C70081C0017E;
- Wed, 22 May 2024 13:08:10 -0400 (EDT)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailfhigh.west.internal (Postfix) with ESMTP id 14E3F180012A;
+ Wed, 22 May 2024 13:08:13 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute5.internal (MEProxy); Wed, 22 May 2024 13:08:11 -0400
+ by compute3.internal (MEProxy); Wed, 22 May 2024 13:08:13 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1716397690;
- x=1716484090; bh=BgBmoo4ZW19jUMSq82MZUSevSPvpq+L95ODfWky9iI0=; b=
- z+aZxmXnTBwEUXn842G4zUI4KqC6NjrXnZYeAMG4kK9qBqqpLOuh/wWceZtbBxhu
- tH/JxwnG6uy9E+xYPxkoABvPxNXyIaDwENbf8ITXi0H+/LCIT9CYoAmOb+viYwDq
- YHadLpZG7AOot4XGeBOamCF06OhLTjlbdq4RERB8jaz9tFIsoycrOE2HS/mQXIg/
- MLVJLCpk4gXTBQiJ5zoJp2eW36e6AN4YDgQD+Ry+POjq/7AB382VwK+2Tde5uv7v
- hVl9/mVbFIBlDpsw7bGs5wWTe/G6ZyRpDBF/eg4GgdrJPd8/GF31hgv+n3yfUyor
- pa8bAx8tM8NThZyTh/LLaw==
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1716397692;
+ x=1716484092; bh=O/BFss53bjUyOb2sMzU3ESRDq2BnIwXPpQa8FP+a4iQ=; b=
+ RJCIzPBkakCgoA5Q9/SUUwCIykALfyzZGQ2A2plG3aM+M5C6eZ5RywlqZhhjHPeH
+ z/wJJ9SJtkbhSmXkJ8eXGBl2hcKEsn1bf3FO7OQnRwro+87AFKqjykH7mEUYBFBa
+ I3BgCHWH8uRmVCLuzDkGWazKdgCZV9fabyV53Z/Ka/r4ZihoqhmCCo5WUsBgds3G
+ FYEVOBFkzMM71LXVyc1pc16Wlq/5FgDBnkQ1y0lOf47nIiLvT1rWJUmY9FHKDxNP
+ EjlSVVj1OOgtcVKzPjffZtRXdLDrO/4nVlzbWkU4TGf6sLFvI8lBQHBmHEDtbL5U
+ FgU5pmEmqyLHmxNF2fzXrQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716397690; x=
- 1716484090; bh=BgBmoo4ZW19jUMSq82MZUSevSPvpq+L95ODfWky9iI0=; b=J
- 7GLKuimVsEhVOg4IoC91vGCYsMLKiIjCRy1XtmgFg2v3Z75/b0dqjmiSJMUb5xeu
- xHn/Qp9Hz+GKSItjqWK/243RqnbHJZYOXH1bVMwb/2YT3qe4ShWc7Z9D7GzqLcPe
- CzzmNCWLmtVyJwzyaFe5cg/vLTRhVBLHIvE7Oyteo1QYT2fbbI5oR8WnoS2vua4p
- a1YHCpEJa0icM4QTCnOGO80ahyoTQrbo5M3Fr4zOk0Int85GAg2bixd+IK+/c/sy
- cZ6U1X59hih+E+DimYGDEoz1FfJwTUmqXFmSmgr2XyByhLLhDa2YhvFsU/g/RKs2
- hc4Pn3WzyybpW8RQkgsvg==
-X-ME-Sender: <xms:eiZOZnUJ-sysrSe9s3wEB-Ecv4PgI8NuE3Rb5Z9yz-usBzUoYWqzeQ>
- <xme:eiZOZvlAx2DN5bS1yc4nwO-HwimfmMwnK889hPPjzswhGtJ7ri9NsLkFzQtOLXlOJ
- lyCAdhM8KOjc2CwwgE>
-X-ME-Received: <xmr:eiZOZja4IgQpj3zzssAMh2G-IYQHmj8SAQcNYBSokS_kqgNsz0O_jTk>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716397692; x=
+ 1716484092; bh=O/BFss53bjUyOb2sMzU3ESRDq2BnIwXPpQa8FP+a4iQ=; b=I
+ eMuzP0Wk5cfPrbhQDo255isJWUC5wCGGCfksGCOCOXJkxz0RS/ZHLIiaQ/MSm42J
+ g9vOPKMM+sORzyVwq8Z552EVZm9DdwyjQChWn4WUO+zFWLoM/nrT8Q8xDDxAExvS
+ y2Z0wbRC1xRw7TJcLu3ELvxzkJHQuDNBNWl3iN6/xmij4YY4BkgyHZAGNB2nawQ9
+ XmQ8G5bZcIx81e5G0fxhvz56L6lvLNDGdRvy3ikSJj5EPv0ObiNThlftwyPWUsje
+ EpZb4p/xDFQ7gUWPahKTkN0qPrTeJ3thwtkeq1FP48Fe4NV+kFzMgisvWplfciTO
+ fE/qiT7QmpYYYNE8gjixA==
+X-ME-Sender: <xms:fCZOZgSUMs1ixdtYirD1i7qMA-XegaPya2VWEe1Zru99dHsC6wTkEg>
+ <xme:fCZOZty5KgO1wnhDuqq66bB8dwvQLWc1La1RTf8-Wmp2ugUKPhdE1etYQ5GiVi6Nl
+ 4lxf81tlnp2PURj7co>
+X-ME-Received: <xmr:fCZOZt0iXdK-iHjcIhctlP40fd5ktAOpq3SA7lFII98RYLUlevjwgqo>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdeigedgfeegucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
  cujfgurhephfffufggtgfgkfhfjgfvvefosehtjeertdertdejnecuhfhrohhmpeflihgr
  gihunhcujggrnhhguceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomheqne
  cuggftrfgrthhtvghrnhepvdekiefhfeevkeeuveetfeelffekgedugefhtdduudeghfeu
- veegffegudekjeelnecuvehluhhsthgvrhfuihiivgepudenucfrrghrrghmpehmrghilh
+ veegffegudekjeelnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilh
  hfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:eiZOZiVf9N5aWJTYixbDYoTOi3t5jipivsCvRZPmniLl7vApwZrXpg>
- <xmx:eiZOZhmF54NhgN4CXvil_VdN2h-trw5fl5ZiIK8tLAaVgGQtpyEX1w>
- <xmx:eiZOZve9Gg0TGhzz2KDBbzo18nb1PyU41tv1UjoHeV_jNxHAn79O1Q>
- <xmx:eiZOZrFdYF9WDkBIqiYb_M4nvvd36d98T56pyZpJPhwNAD_IsT55qQ>
- <xmx:eiZOZva1ANRlzaQLf9PTq906UWiMXQ3ItgdltszvUQ1bfLZCe6VrzRp5>
+X-ME-Proxy: <xmx:fCZOZkDSmU2T7Z3yRBlvgvVTOCAqsl6Bq3D7btkwTwKdGp_MFCQcJw>
+ <xmx:fCZOZpjJp8xEKhz796M_3C_1V1S493e8xokS730yCNpzkr2bcHGXig>
+ <xmx:fCZOZgoClgt37ZpzjNd4pR1zuId7pl3WGVSy9aK0NLsDJPvtoWfKuw>
+ <xmx:fCZOZshribRHN2z6yUwaVBAk34X54c10BgQ1b2iQ_PyqEyPicJryZA>
+ <xmx:fCZOZkUCPbybSbEjOdquvp0Owdv2etdLvHF1JJNwhLAduMuUvUNhf8WY>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 22 May 2024 13:08:09 -0400 (EDT)
+ 22 May 2024 13:08:11 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Wed, 22 May 2024 18:08:01 +0100
-Subject: [PATCH v2 05/10] xtensa: Bring in semihosting headers and config
- options
+Date: Wed, 22 May 2024 18:08:02 +0100
+Subject: [PATCH v2 06/10] drivers: serial: Add xtensa semihosting driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240522-qemu-xtensa-v2-5-04bf7e42b10b@flygoat.com>
+Message-Id: <20240522-qemu-xtensa-v2-6-04bf7e42b10b@flygoat.com>
 References: <20240522-qemu-xtensa-v2-0-04bf7e42b10b@flygoat.com>
 In-Reply-To: <20240522-qemu-xtensa-v2-0-04bf7e42b10b@flygoat.com>
 To: u-boot@lists.denx.de, Sean Anderson <sean.anderson@seco.com>
 Cc: Max Filippov <jcmvbkbc@gmail.com>, Tom Rini <trini@konsulko.com>, 
  Sumit Garg <sumit.garg@linaro.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7883;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4613;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=FzNG8EIa/nZaYMqf7GuI53aG1tx+4YP/Y3v1KObQ53U=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhjQ/tbyyxhKdHiaby0ZP1pW8Utk5rfXyvcajX/6Ufuq4e
- dI+bW5fRykLgxgXg6yYIkuIgFLfhsaLC64/yPoDM4eVCWQIAxenAEykn4vhf+ECAd7uV9Wc+dlS
- s0wiXx53+nRM+cqy+/znwt3mBgkf2M3IcJPxYe3W5gmvxa5v+f18wp8blq0ln6967V1TbvM1oW/
- uZD4A
+ bh=GxVMTr9Ga6KZJcmaAHT0zf8pt7UdaQEr6X2GnjSxYNo=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhjQ/tTyvngD/iccvrN+g1tfrLcR207qiU7lzv43F3vlXS
+ v8W86V2lLIwiHExyIopsoQIKPVtaLy44PqDrD8wc1iZQIYwcHEKwESCtzD8zyhjCC7V+3Ir/6Db
+ lhl/0g2/ar5Yd8Xr2c3rZ/nf7WEWqWP4Zyxa5bLEP9dr+X6pP9H8P4NvHdmYwjC/L9X+icaJjE+
+ PGAA=
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -115,290 +114,175 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-They are all directly imported from Linux kernel.
+Add xtensa semihosting driver.
 
-Reviewed-by: Max Filippov <jcmvbkbc@gmail.com>
+It can't use regular semihosting driver as Xtensa's has it's own
+semihosting ABI.
+
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- arch/xtensa/Kconfig                              |  27 ++++++
- arch/xtensa/include/asm/platform/simcall-gdbio.h |  34 +++++++
- arch/xtensa/include/asm/platform/simcall-iss.h   |  73 +++++++++++++++
- arch/xtensa/include/asm/platform/simcall.h       | 110 +++++++++++++++++++++++
- 4 files changed, 244 insertions(+)
+v2:
+	- Fix simc_serial_pending implementation
+	- Get puts work
+---
+ drivers/serial/Kconfig                     | 18 +++++-
+ drivers/serial/Makefile                    |  1 +
+ drivers/serial/serial_xtensa_semihosting.c | 92 ++++++++++++++++++++++++++++++
+ 3 files changed, 110 insertions(+), 1 deletion(-)
 
-diff --git a/arch/xtensa/Kconfig b/arch/xtensa/Kconfig
-index 8f668cc67ed0..4afd56bca095 100644
---- a/arch/xtensa/Kconfig
-+++ b/arch/xtensa/Kconfig
-@@ -41,6 +41,33 @@ config SPL_SYS_DCACHE_OFF
+diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+index 1fe4607598eb..3a1e5a6f2877 100644
+--- a/drivers/serial/Kconfig
++++ b/drivers/serial/Kconfig
+@@ -501,6 +501,15 @@ config DEBUG_UART_MT7620
+ 	  driver will be available until the real driver model serial is
+ 	  running.
+ 
++config DEBUG_UART_XTENSA_SEMIHOSTING
++	bool "Xtensa semihosting"
++	depends on XTENSA_SEMIHOSTING_SERIAL
++	help
++	  Select this to enable the debug UART using the Xtensa semihosting driver.
++	  This provides basic serial output from the console without needing to
++	  start up driver model. The driver will be available until the real
++	  driver model serial is running.
++
+ endchoice
+ 
+ config DEBUG_UART_BASE
+@@ -936,7 +945,6 @@ config SH_SCIF_CLK_FREQ
+ config SEMIHOSTING_SERIAL
+ 	bool "Semihosting UART support"
+ 	depends on SEMIHOSTING && !SERIAL_RX_BUFFER
+-	imply SERIAL_PUTS
  	help
- 	  Do not enable data cache in SPL.
+ 	  Select this to enable a serial UART using semihosting. Special halt
+ 	  instructions will be issued which an external debugger (such as a
+@@ -1115,6 +1123,14 @@ config XEN_SERIAL
+ 	  If built without DM support, then requires Xen
+ 	  to be built with CONFIG_VERBOSE_DEBUG.
  
-+config XTENSA_SEMIHOSTING
-+	bool "Support semihosting"
-+	help
-+	  Enable Xtensa semihosting debugging support.
-+
-+choice
-+	prompt "Semihosting interface"
-+	default XTENSA_SIMCALL_ISS
++config XTENSA_SEMIHOSTING_SERIAL
++	bool "Xtensa Semihosting UART support"
++	depends on DM_SERIAL
 +	depends on XTENSA_SEMIHOSTING
++	imply SERIAL_PUTS
 +	help
-+	  Choose semihosting interface that will be used for serial port,
-+	  block device and networking.
++	  Select this to enable a serial UART using Xtensa semihosting.
 +
-+config XTENSA_SIMCALL_ISS
-+	bool "simcall"
-+	help
-+	  Use simcall instruction. simcall is only available on simulators,
-+	  it does nothing on hardware.
-+
-+config XTENSA_SIMCALL_GDBIO
-+	bool "GDBIO"
-+	help
-+	  Use break instruction. It is available on real hardware when GDB
-+	  is attached to it via JTAG.
-+
-+endchoice
-+
- source "board/cadence/xtfpga/Kconfig"
+ choice
+ 	prompt "Console port"
+ 	default 8xx_CONS_SMC1
+diff --git a/drivers/serial/Makefile b/drivers/serial/Makefile
+index dbe598b74064..78810f98367c 100644
+--- a/drivers/serial/Makefile
++++ b/drivers/serial/Makefile
+@@ -60,6 +60,7 @@ obj-$(CONFIG_MT7620_SERIAL) += serial_mt7620.o
+ obj-$(CONFIG_HTIF_CONSOLE) += serial_htif.o
+ obj-$(CONFIG_SIFIVE_SERIAL) += serial_sifive.o
+ obj-$(CONFIG_XEN_SERIAL) += serial_xen.o
++obj-$(CONFIG_XTENSA_SEMIHOSTING_SERIAL) += serial_xtensa_semihosting.o
+ obj-$(CONFIG_S5P4418_PL011_SERIAL) += serial_s5p4418_pl011.o
  
- endmenu
-diff --git a/arch/xtensa/include/asm/platform/simcall-gdbio.h b/arch/xtensa/include/asm/platform/simcall-gdbio.h
+ ifndef CONFIG_SPL_BUILD
+diff --git a/drivers/serial/serial_xtensa_semihosting.c b/drivers/serial/serial_xtensa_semihosting.c
 new file mode 100644
-index 000000000000..e642860e25a8
+index 000000000000..0e59a9bfdc75
 --- /dev/null
-+++ b/arch/xtensa/include/asm/platform/simcall-gdbio.h
-@@ -0,0 +1,34 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/* Copyright (C) 2021 Cadence Design Systems Inc. */
-+
-+#ifndef _XTENSA_PLATFORM_ISS_SIMCALL_GDBIO_H
-+#define _XTENSA_PLATFORM_ISS_SIMCALL_GDBIO_H
-+
++++ b/drivers/serial/serial_xtensa_semihosting.c
+@@ -0,0 +1,92 @@
++// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ *  System call like services offered by the GDBIO host.
++ * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
 + */
 +
-+#define SYS_open	-2
-+#define SYS_close	-3
-+#define SYS_read	-4
-+#define SYS_write	-5
-+#define SYS_lseek	-6
++#include <dm.h>
++#include <malloc.h>
++#include <serial.h>
 +
-+static int errno;
++#include <asm/platform/simcall.h>
 +
-+static inline int __simc(int a, int b, int c, int d)
-+{
-+	register int a1 asm("a2") = a;
-+	register int b1 asm("a6") = b;
-+	register int c1 asm("a3") = c;
-+	register int d1 asm("a4") = d;
-+	__asm__ __volatile__ (
-+			"break 1, 14\n"
-+			: "+r"(a1), "+r"(c1)
-+			: "r"(b1), "r"(d1)
-+			: "memory");
-+	errno = c1;
-+	return a1;
-+}
-+
-+#endif /* _XTENSA_PLATFORM_ISS_SIMCALL_GDBIO_H */
-diff --git a/arch/xtensa/include/asm/platform/simcall-iss.h b/arch/xtensa/include/asm/platform/simcall-iss.h
-new file mode 100644
-index 000000000000..5a1e7a1f182e
---- /dev/null
-+++ b/arch/xtensa/include/asm/platform/simcall-iss.h
-@@ -0,0 +1,73 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/* Copyright (C) 2021 Cadence Design Systems Inc. */
-+
-+#ifndef _XTENSA_PLATFORM_ISS_SIMCALL_ISS_H
-+#define _XTENSA_PLATFORM_ISS_SIMCALL_ISS_H
-+
-+/*
-+ *  System call like services offered by the simulator host.
++/**
++ * struct simc_serial_priv - Semihosting serial private data
++ * @counter: Counter used to fake pending every other call
 + */
++struct simc_serial_priv {
++	unsigned int counter;
++};
 +
-+#define SYS_nop		0	/* unused */
-+#define SYS_exit	1	/*x*/
-+#define SYS_fork	2
-+#define SYS_read	3	/*x*/
-+#define SYS_write	4	/*x*/
-+#define SYS_open	5	/*x*/
-+#define SYS_close	6	/*x*/
-+#define SYS_rename	7	/*x 38 - waitpid */
-+#define SYS_creat	8	/*x*/
-+#define SYS_link	9	/*x (not implemented on WIN32) */
-+#define SYS_unlink	10	/*x*/
-+#define SYS_execv	11	/* n/a - execve */
-+#define SYS_execve	12	/* 11 - chdir */
-+#define SYS_pipe	13	/* 42 - time */
-+#define SYS_stat	14	/* 106 - mknod */
-+#define SYS_chmod	15
-+#define SYS_chown	16	/* 202 - lchown */
-+#define SYS_utime	17	/* 30 - break */
-+#define SYS_wait	18	/* n/a - oldstat */
-+#define SYS_lseek	19	/*x*/
-+#define SYS_getpid	20
-+#define SYS_isatty	21	/* n/a - mount */
-+#define SYS_fstat	22	/* 108 - oldumount */
-+#define SYS_time	23	/* 13 - setuid */
-+#define SYS_gettimeofday 24	/*x 78 - getuid (not implemented on WIN32) */
-+#define SYS_times	25	/*X 43 - stime (Xtensa-specific implementation) */
-+#define SYS_socket      26
-+#define SYS_sendto      27
-+#define SYS_recvfrom    28
-+#define SYS_select_one  29      /* not compatible select, one file descriptor at the time */
-+#define SYS_bind        30
-+#define SYS_ioctl	31
-+
-+#define SYS_iss_argc	1000	/* returns value of argc */
-+#define SYS_iss_argv_size 1001	/* bytes needed for argv & arg strings */
-+#define SYS_iss_set_argv 1002	/* saves argv & arg strings at given addr */
-+
-+/*
-+ * SYS_select_one specifiers
-+ */
-+
-+#define  XTISS_SELECT_ONE_READ    1
-+#define  XTISS_SELECT_ONE_WRITE   2
-+#define  XTISS_SELECT_ONE_EXCEPT  3
-+
-+static int errno;
-+
-+static inline int __simc(int a, int b, int c, int d)
++static int simc_serial_getc(struct udevice *dev)
 +{
-+	register int a1 asm("a2") = a;
-+	register int b1 asm("a3") = b;
-+	register int c1 asm("a4") = c;
-+	register int d1 asm("a5") = d;
-+	__asm__ __volatile__ (
-+			"simcall\n"
-+			: "+r"(a1), "+r"(b1)
-+			: "r"(c1), "r"(d1)
-+			: "memory");
-+	errno = b1;
-+	return a1;
++	char ch = 0;
++
++	simc_read(0, &ch, sizeof(ch));
++
++	return ch;
 +}
 +
-+#endif /* _XTENSA_PLATFORM_ISS_SIMCALL_ISS_H */
-diff --git a/arch/xtensa/include/asm/platform/simcall.h b/arch/xtensa/include/asm/platform/simcall.h
-new file mode 100644
-index 000000000000..a1cb269e68f0
---- /dev/null
-+++ b/arch/xtensa/include/asm/platform/simcall.h
-@@ -0,0 +1,110 @@
-+/*
-+ * include/asm-xtensa/platform-iss/simcall.h
-+ *
-+ * This file is subject to the terms and conditions of the GNU General Public
-+ * License.  See the file "COPYING" in the main directory of this archive
-+ * for more details.
-+ *
-+ * Copyright (C) 2001 Tensilica Inc.
-+ * Copyright (C) 2017 - 2021 Cadence Design Systems Inc.
-+ */
-+
-+#ifndef _XTENSA_PLATFORM_ISS_SIMCALL_H
-+#define _XTENSA_PLATFORM_ISS_SIMCALL_H
-+
-+#include <linux/bug.h>
-+
-+#ifdef CONFIG_XTENSA_SIMCALL_ISS
-+#include <asm/platform/simcall-iss.h>
-+#endif
-+#ifdef CONFIG_XTENSA_SIMCALL_GDBIO
-+#include <asm/platform/simcall-gdbio.h>
-+#endif
-+
-+static inline int simc_exit(int exit_code)
++static int simc_serial_putc(struct udevice *dev, const char ch)
 +{
-+#ifdef SYS_exit
-+	return __simc(SYS_exit, exit_code, 0, 0);
-+#else
-+	WARN_ONCE(1, "%s: not implemented\n", __func__);
-+	return -1;
-+#endif
-+}
++	char str[2] = {0};
 +
-+static inline int simc_open(const char *file, int flags, int mode)
-+{
-+	return __simc(SYS_open, (int) file, flags, mode);
-+}
++	str[0] = ch;
++	simc_write(1, str, 1);
 +
-+static inline int simc_close(int fd)
-+{
-+	return __simc(SYS_close, fd, 0, 0);
-+}
-+
-+static inline int simc_ioctl(int fd, int request, void *arg)
-+{
-+#ifdef SYS_ioctl
-+	return __simc(SYS_ioctl, fd, request, (int) arg);
-+#else
-+	WARN_ONCE(1, "%s: not implemented\n", __func__);
-+	return -1;
-+#endif
-+}
-+
-+static inline int simc_read(int fd, void *buf, size_t count)
-+{
-+	return __simc(SYS_read, fd, (int) buf, count);
-+}
-+
-+static inline int simc_write(int fd, const void *buf, size_t count)
-+{
-+	return __simc(SYS_write, fd, (int) buf, count);
-+}
-+
-+static inline int simc_poll(int fd)
-+{
-+#ifdef SYS_select_one
-+	long timeval[2] = { 0, 0 };
-+
-+	return __simc(SYS_select_one, fd, XTISS_SELECT_ONE_READ, (int)&timeval);
-+#else
-+	WARN_ONCE(1, "%s: not implemented\n", __func__);
-+	return -1;
-+#endif
-+}
-+
-+static inline int simc_lseek(int fd, uint32_t off, int whence)
-+{
-+	return __simc(SYS_lseek, fd, off, whence);
-+}
-+
-+static inline int simc_argc(void)
-+{
-+#ifdef SYS_iss_argc
-+	return __simc(SYS_iss_argc, 0, 0, 0);
-+#else
-+	WARN_ONCE(1, "%s: not implemented\n", __func__);
 +	return 0;
-+#endif
 +}
 +
-+static inline int simc_argv_size(void)
++static int simc_serial_pending(struct udevice *dev, bool input)
 +{
-+#ifdef SYS_iss_argv_size
-+	return __simc(SYS_iss_argv_size, 0, 0, 0);
-+#else
-+	WARN_ONCE(1, "%s: not implemented\n", __func__);
-+	return 0;
-+#endif
++	struct simc_serial_priv *priv = dev_get_priv(dev);
++
++	if (input) {
++		int res = simc_poll(0);
++		return res < 0 ? priv->counter++ & 1 : res;
++	}
++
++	return false;
 +}
 +
-+static inline void simc_argv(void *buf)
++static ssize_t smh_serial_puts(struct udevice *dev, const char *s, size_t len)
 +{
-+#ifdef SYS_iss_set_argv
-+	__simc(SYS_iss_set_argv, (int)buf, 0, 0);
-+#else
-+	WARN_ONCE(1, "%s: not implemented\n", __func__);
-+#endif
++	int ret;
++
++	ret = simc_write(1, s, len);
++
++	return ret;
 +}
 +
-+#endif /* _XTENSA_PLATFORM_ISS_SIMCALL_H */
++static const struct dm_serial_ops simc_serial_ops = {
++	.putc = simc_serial_putc,
++	.puts = smh_serial_puts,
++	.getc = simc_serial_getc,
++	.pending = simc_serial_pending,
++};
++
++U_BOOT_DRIVER(simc_serial) = {
++	.name	= "serial_xtensa_semihosting",
++	.id	= UCLASS_SERIAL,
++	.priv_auto = sizeof(struct simc_serial_priv),
++	.ops	= &simc_serial_ops,
++	.flags	= DM_FLAG_PRE_RELOC,
++};
++
++U_BOOT_DRVINFO(simc_serial) = {
++	.name = "serial_xtensa_semihosting",
++};
++
++#if CONFIG_IS_ENABLED(DEBUG_UART_XTENSA_SEMIHOSTING)
++#include <debug_uart.h>
++
++static inline void _debug_uart_init(void)
++{
++}
++
++static inline void _debug_uart_putc(int c)
++{
++	simc_serial_putc(NULL, c);
++}
++
++DEBUG_UART_FUNCS
++#endif
 
 -- 
 2.43.0
