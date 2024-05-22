@@ -4,42 +4,173 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55C96C25B7A
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 17:31:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F86DC25B78
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 18:03:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE7FF88869;
-	Wed, 22 May 2024 19:31:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
+	by phobos.denx.de (Postfix) with ESMTP id 7AE6F87F8B;
+	Wed, 22 May 2024 20:03:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 82AF688860; Wed, 22 May 2024 19:31:42 +0200 (CEST)
-Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 444B588877
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 19:31:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=sntech.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
-Received: from i5e860cd9.versanet.de ([94.134.12.217] helo=phil.lan)
- by gloria.sntech.de with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <heiko@sntech.de>)
- id 1s9poP-00025v-M2; Wed, 22 May 2024 19:31:37 +0200
-From: Heiko Stuebner <heiko@sntech.de>
-To: kever.yang@rock-chips.com,
-	philipp.tomsich@vrull.eu,
-	sjg@chromium.org
-Cc: lukma@denx.de, seanga2@gmail.com, zhangqing@rock-chips.com,
- u-boot@lists.denx.de, Heiko Stuebner <heiko.stuebner@cherry.de>,
- Andy Yan <andy.yan@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: [PATCH v2] clk: rockchip: rk3588: Set SPLL frequency during SPL stage
-Date: Wed, 22 May 2024 19:31:29 +0200
-Message-Id: <20240522173129.1053395-1-heiko@sntech.de>
-X-Mailer: git-send-email 2.39.2
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="Dgx5bax1";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 5F6B088013; Wed, 22 May 2024 20:03:28 +0200 (CEST)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ (mail-db8eur05on20708.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e1a::708])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id EB90687F5C
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 20:03:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=egae5SCHC4Musa6Muiy7jlRdBlTwx6ljmb7HdG/mLPYL0JfXb2tQeZpX9tmLRovcAsGcwRw5x0T/R5oDybJJc+QQgqzDhA5qS6LR4OVHN7C/ubpr4F44doQSqlWnDWqs2VXQ6VaOM1LUSwhJz00TtzIOtfN0LIyaRk/nOkCB8bOVX19jqUxuYgz+BNp5r2/bYuYkJ465QLoqBnGSnNTgeNCdVZtf6TXZVGo/JS51xZr5Z2QWeJABKZjeuH1E5YCmMmcTgzR07AIrSQten8aGayaaU4xFCyiKVu7T8dI7ozxYjdO3CMfZ5LnUB7Gt+oAOcaz6X6JsYdl6wCti0pBPvw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=t/+GsULx9kQveFe1xI7eoXJS+PNsRhWlMGfFNHkvwO0=;
+ b=nlUYs7CjqwOKpn72cDuRxgcT/8M/FWjieen102VFlts88vjA1DGdWgKZzfAGN4wjoCWRHkgfLBKp8S8VZviA4JgWDS5n1gycYDltzL+7oMRi4RVYSRf391r5iIlXH7SG0/mWLQ+jDufpfbo8TasUIW35QCGZ0ryWuyZdQJdjfmwg7n9FtatGsSbNstdi21avzAyUQw1Dm0hCtwtgBz7lbjVtSXTJxzG9Ob1D3MsF0hfnk6srCJu7/Sp7UnYrUCGT6IDZRMx/23Obba/qKR3XUBD5VobypIbuJYbW1Enqtv/VwFkZl+ZPq09HisY5vQYG0Jbiq4yjnZfpfR0+2FDeWw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=t/+GsULx9kQveFe1xI7eoXJS+PNsRhWlMGfFNHkvwO0=;
+ b=Dgx5bax1uHNyuDCGULN7rjEnu46oOPQgwv6QKcNkd9uztfXqiPvm2TCpNVLgoCVwYg0EhOnNWzboKw5ibvauF6MSrqiIoTedfLRJ2iOpsxBXssXweQiFciZOz8LRkQYDaIxhQ2I0713UDVqb/AZznrjOmrvjODLfSBuL8DQbRpQ=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from VE1PR04MB6589.eurprd04.prod.outlook.com (2603:10a6:803:128::25)
+ by DB9PR04MB9330.eurprd04.prod.outlook.com (2603:10a6:10:36e::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7587.36; Wed, 22 May
+ 2024 18:03:23 +0000
+Received: from VE1PR04MB6589.eurprd04.prod.outlook.com
+ ([fe80::8476:1b2f:f236:db31]) by VE1PR04MB6589.eurprd04.prod.outlook.com
+ ([fe80::8476:1b2f:f236:db31%6]) with mapi id 15.20.7587.030; Wed, 22 May 2024
+ 18:03:23 +0000
+Message-ID: <7e603c4d-bf76-4b38-894c-30d2cf128217@cherry.de>
+Date: Wed, 22 May 2024 20:03:20 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] board: rockchip: add ArmSoM Sige7 Rk3588 board
+To: Jianfeng Liu <liujianfeng1994@gmail.com>, u-boot@lists.denx.de
+Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christopher Obbard <chris.obbard@collabora.com>,
+ Elon Zhang <zhangzj@rock-chips.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>, Jagan Teki <jagan@edgeble.ai>,
+ John Clark <inindev@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Joshua Riek <jjriek@verizon.net>, Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Massimo Pegorer <massimo.pegorer+oss@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Sam Edwards <cfsworks@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Tianling Shen <cnsztl@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Weizhao Ouyang <weizhao.ouyang@arm.com>
+References: <20240522165801.1871915-1-liujianfeng1994@gmail.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20240522165801.1871915-1-liujianfeng1994@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR0902CA0057.eurprd09.prod.outlook.com
+ (2603:10a6:802:1::46) To VE1PR04MB6589.eurprd04.prod.outlook.com
+ (2603:10a6:803:128::25)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: VE1PR04MB6589:EE_|DB9PR04MB9330:EE_
+X-MS-Office365-Filtering-Correlation-Id: 36722195-9bc7-4ab2-425e-08dc7a89787b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230031|366007|1800799015|376005|7416005;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?a2FtVnVYakxua2lSUGZHMmFPSGhjbEpXbVRvU0xPa05CSjhtVndydVN3endU?=
+ =?utf-8?B?cUgrRWFzRnVycnVWOGZFY3BEYnY0NG1weXMzbGU3UlIvVnMxU2UyNUVITzBr?=
+ =?utf-8?B?Z0tZSlBpNnNXclJGK05zL052QjlCSTcwcHQvMFM0d21NQWgyUXp0Mm5FdEwr?=
+ =?utf-8?B?SHlPSVUrSWlaOFM1UUhhc093akk5aU85blB1bmxQZ0F0SkpmSC9rWFNwYlY3?=
+ =?utf-8?B?WjhZdlRRbWo2UGR3RWEwY29nSGt1ZTNYU1lJV3hpaU5TR3JKSGJDb2hnbXRS?=
+ =?utf-8?B?QmM4djhXaUdpcWhPQTBIemJES3U3Z3JtMVlqUGU0ZlBBSk1ta3R0ZnBIYmNi?=
+ =?utf-8?B?VTc1Vjl3Z08zNjFUR0drUnFuV1N1QWNWckVONFFCUUd6djNSeVRlS1NDN0tJ?=
+ =?utf-8?B?MnVhdURmcTFqNnpnRTlBdWY5bG80S2NVak9MQlF2Rk45VEtlNGVHRVJIc2xU?=
+ =?utf-8?B?Mkk4RnF1TitSdE9DbkpIbkp3aFNuYWJFaFFHWWFkUDhtSlJ4d1M1d1o1OEpS?=
+ =?utf-8?B?T081MlRwcFU1NDZxaWxKMm1tMEZFTXdFc0ZiWlJuQzB4QWtmTTBaajJTaS9i?=
+ =?utf-8?B?T1FGM1Mydy9uOGxWaHJaNnNjQ3BxZGlkOFJxT090YTY2cHR1bmVQTkdrcmRz?=
+ =?utf-8?B?TmFZTjY3dk51d3pXb2o4UmJGMVJSeTNDMkRDTlR5SUUvQmxHYzBBdzVSS3dt?=
+ =?utf-8?B?V0lpcHVRcjVsekFrMVNZU1lBTUxBejB4UkQxWU1mbjlEZmhxWnBOdThOQUQz?=
+ =?utf-8?B?R2JUMlpxMGVPcVFkV3NDVU9DRGtHZWpLRklwQWtrOU85QmhkMHd4SDVVNEdk?=
+ =?utf-8?B?OENCcWdPbVBSYk5IbkR6MTBEVmcxaC9icUZxVjlwNFNnMWhiY05MVm1EaTY5?=
+ =?utf-8?B?K1A3QkNMM0o4YXA5TEtnemcrRFVmcmpwdVRHald0UHh6UWdXNk1wNkFnWkxV?=
+ =?utf-8?B?eUdva2JzdWlTcEI4T0Y4cVBxNjdVUmxQVGxEdnByWU1mOGxrK1l2Y0FSbTBD?=
+ =?utf-8?B?NE8rZnp6VzU5SzE0ajJTZUtwemY0KzNKWG4zUUlRZFh3Q3lPYVFzM1UveU1S?=
+ =?utf-8?B?TS9Bc3h5RGoyL1VHV2VlNUQ5L1JQbjc1WHhYN3lyM0pKaGZoalFBTnQrTEJ6?=
+ =?utf-8?B?Z0xDeGJUWGdiSjFLd3BEbzdFcEUwT3ZHNTdoYi92VXVwN24zU25IVXlycDhx?=
+ =?utf-8?B?a3lENHVkYjBCb0xRbDdLRW1wRVFLckJkeFlVaHdBaFdxRUpuazdNbDM2Yk5L?=
+ =?utf-8?B?OUxQbHhHb3ZES2pKYjE4SDc5OXZUdDVLMVNJNENvcXk5c3ErNlVEcGlJVFlz?=
+ =?utf-8?B?T2ZEUVpjcU9ITjJwVDNPQlE3eW92NUxMOVRwbnpRUUJ1dGk5Skt1SU1jNy9Q?=
+ =?utf-8?B?REUrMS9Yc0l0U0NXYVFocmdwZks4MEQ2b2pDakpQdTk3MVJUbFRsN2syNHJh?=
+ =?utf-8?B?YVl4d290WFZwSXN6WEd3MGQrTENEeFpUTTArM0hHMEZyUTNWdmd4TmJxQjgx?=
+ =?utf-8?B?bEtPR0l4TVM1R1VNcU5rL2I4d1VVWHpDMXZRc3l1cWVVWEtzb2xlOWM3akIr?=
+ =?utf-8?B?UTRPQi9IVVJQS0tBNnNQb1FZMk9FZ0d3WFQ1MzRkK1kreEZvUzA2SWtoTVMw?=
+ =?utf-8?Q?Rk4K31lttwo9J8LNvJlb3q+K88z4z/ud0+dIgoJwImh0=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:VE1PR04MB6589.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(366007)(1800799015)(376005)(7416005); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MEU5TC81aEJoTVhXUDNqdEhUNG1kVlpFQWJLMTUwcjU1V3lFQytLcVR5OGN0?=
+ =?utf-8?B?K2hQVHhldkJSb3VvblRwT0hpNXovU0YvYUJzTkVBcHZsWnJ1UC9XbTU2V3la?=
+ =?utf-8?B?bW1ZRmlibExSOUk3NTkwTTBXd1BPNmRJMmJRTWl6TnpEK0pReGlXV0xsY3Ew?=
+ =?utf-8?B?THFrYW5DZm5LNUxaY25zK0dNRVB0dGZyMnYwVzd6NEFDVFZkZWlpMGxRNzJN?=
+ =?utf-8?B?MjFabXlIUk0vMmRQUzNnR0k3Q3hKZFByZzNQRHVzNS80NDlJaHdUdm56YWxz?=
+ =?utf-8?B?bFdGMUdqQkUrSUQ0OVdNNmFsYS80aWtOd3hkRFJ1OThCME5WSzNRT1dzTk1k?=
+ =?utf-8?B?ZkxUV1hmTmZEWWFiVk93R2V2cEd1TjhzYVZCbUF6RFc1S1dOQ0dUZ1dmMVFj?=
+ =?utf-8?B?UUlLY0tsb20xZXdaeDdYR0c4YVdjajFORWUrbjVScVpLb2owYmxOK21pc2or?=
+ =?utf-8?B?Q0VmcENrUHhabTZXUmVNZ1hkdnBhM3JIRyt6R2l0SUgvQmlFSDhSK2NwbnpT?=
+ =?utf-8?B?dm9DZGlyYlhjWmkrZU04RVJUZ1BKd1JtbVQrcW1KSkViRmNLbnpVUHQrVVYx?=
+ =?utf-8?B?cG90MlF5L2tHUWFDVms2c1dGNFRHb2tibERmTDNuZGJBSzFmdVZ6WEZHUEVN?=
+ =?utf-8?B?QjRzcktaeGUzZE1NdEdJY05xWVRGTzRNVGYyQ3dXNTRoSXo1WC9FMDBsWFpt?=
+ =?utf-8?B?aUczRTB6VmZROXAxekh3YVlzN0libFJFaGlRZXlPTlV6YjliVHh1RUV4REln?=
+ =?utf-8?B?UlNqSXR5N3BUS2xJMG1BM3c4M2NWQm4wK20vVXdmUXAzMGV3NDF1UnFlOFcx?=
+ =?utf-8?B?OTZNMHFuZnZpejcvaXpHR1VJN0d2WncxcDl1ZGgvd1ZuUDNhMHQzMlpMKyt3?=
+ =?utf-8?B?c0hkYkxBcTFyZTIwOG9Ddm1wYkJCRGFnU3k4VzdCbmZrT20vTVZZY3RnTVRl?=
+ =?utf-8?B?dHVyaXJQdVFxeFFxN1ZIcUFPYmpnLzY4azBpMVE4NnJFM2hBU09rcE9tTjJk?=
+ =?utf-8?B?Vk82THFEczBHNEVtb2lzOHN2cHROK2VMU1dVcGJVM1hYcDZLcU9ZRTRDamRY?=
+ =?utf-8?B?Vi9uSjBLZjlvQXoranpMWTFNUi95bHpRekhpQ2FXVXd4TVZUODVTdlZYVHk1?=
+ =?utf-8?B?T05MOVJFaFRpZ1F2emE5RUhlNVladndua01PVElJaVlBMmNyTllSbk53TFgv?=
+ =?utf-8?B?TzU5ckZMamtzRnN2M29IdTFBcklMZmF6TTBGZS81R1FkNmVVeVkvRkN2WEVZ?=
+ =?utf-8?B?SUJTZlExZnBVcjIzK2FEd293b0pJa3hWRytId04vT2xzRjJQYlFIWDM1MDZ4?=
+ =?utf-8?B?TUVyUVFUSk9jLzlTV2VzbEwvMk1DbElqTS9pSHJBK1JFMDFmejBoajBZNnhH?=
+ =?utf-8?B?TUJjeXo0K05sSnVseVNFa2lJcTRxWkpLQzJsQ3NySHBNVjIzRS9qZGdqSXVm?=
+ =?utf-8?B?WUdQb25kRkhIODhOQm9uQnFzQlZoR1BhVDNaMHVIcmYwMjMzTmdVd1Y5SnNo?=
+ =?utf-8?B?NG5UNk1LOFJKTWtqdE5iUVdUWFF0T29UMU9NZjVrUkN0MmYvVXBkemlrUXNL?=
+ =?utf-8?B?eGgveEZLOE02RzdhcmJzMWRvNWhJWTUwa0xlaUxlMXdMUnVESW1ZeVovUlZZ?=
+ =?utf-8?B?cjdOV2phQVN6b1RCTnBlWk1zNHVYYUNuclgzUk9xT29VdWpvRE9IalRMUzY5?=
+ =?utf-8?B?aHFwVXR6Q2krUHlRazFlRldYUVY0NENicCtIWVI2NktVR2FuUWs2MGovSUhm?=
+ =?utf-8?B?WWx1MVhaWHVpaFd1Z3FLRkhXaVhZSUpZZ25YbHMydlJFcm9GZTJNczRGZEpB?=
+ =?utf-8?B?bWdzRTFPVDNQWHBCQlphOGNEaVRROWxUeEw5TUlrbjI2SmZPZVZlNElSVzN1?=
+ =?utf-8?B?eWl6cC9NNmlpR3JPdTI2WDRISm5MbUFVc1I0OE80R2FJQkNHYm1jQ1Jhbmdw?=
+ =?utf-8?B?R1ExL0xReHFpUktlY3FpOUNLOURzMHhuenhhMENUaXgzamZmWFhMV056aUhq?=
+ =?utf-8?B?OThCM04yOE51eUdTT1RoS1JnMzN5dFdIS3lNVHlQTzZSZ240dndSWnNtaFJJ?=
+ =?utf-8?B?TEUwTUh3Tkk4Y0Fmb1d3bisvc0Jva1RJc0EzbGlMVjRGdWExV3RpeWxGMnZu?=
+ =?utf-8?B?RkNVSERnQjcwNXQ3MHByZDVTM3lKWXpuTEhNYXRVbC91K2FNTThMemQ2UHBw?=
+ =?utf-8?Q?G6/mIvpIwUFwDR4FufbTOP0=3D?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 36722195-9bc7-4ab2-425e-08dc7a89787b
+X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6589.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 May 2024 18:03:23.1590 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: aJ83Wzyl3y/pqrG1E1sG0lL/RqfRi6sPW65B3dVJzGDGdWYivBTWuELTP0v7N13vN8HNY/zraB77gMj56QInMDuag+EuELJneoQJ+aVNC+k=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB9330
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -56,134 +187,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Heiko Stuebner <heiko.stuebner@cherry.de>
+Hi Jianfeng Liu,
 
-All parts expect the SPLL to run at 702MHz. In U-Boot it's the SPLL_HZ
-declaring this rate and in the kernel it's a fixed clock definition.
+On 5/22/24 6:58 PM, Jianfeng Liu wrote:
+[...]
+> Note that these commits:
+> - e18e5e8188f2 (arm64: dts: rockchip: add USBDP phys on rk3588)
+> - 6fca4edb93d3 (arm64: dts: rockchip: Add rk3588 GPU node)
+> are not synced to u-boot, so I remove usb3 drd nodes and gpu from kernel
+> devicetree.
+[...]> diff --git 
+a/dts/upstream/src/arm64/rockchip/rk3588-armsom-sige7.dts 
+b/dts/upstream/src/arm64/rockchip/rk3588-armsom-sige7.dts
+> new file mode 100644
+> index 0000000000..c7b46536ec
+> --- /dev/null
+> +++ b/dts/upstream/src/arm64/rockchip/rk3588-armsom-sige7.dts
 
-While everything is expecting 702MHz, the SPLL is not running that
-frequency when coming from the bootrom though, instead it's running
-at 351MHz and the vendor-u-boot just sets it to the expected frequency.
+Sorry, I failed to explain properly what was expected.
 
-The SPLL itself is located inside the secure-BUSCRU and in theory
-accessible as an SCMI clock, though this requires an unknown amount
-of cooperation from trusted-firmware to set at a later stage, though
-during the SPL stage we can still access the relevant CRU directly.
+dts/upstream should never be touched except with 
+dts/update-dts-subtree.sh script.
 
-The SPLL is for example necessary for the DSI controllers to produce
-output.
+Sadly, your board is not supported in v6.9 yet, only in the upcoming 
+v6.10 :/
 
-As the SPLL is "just" another rk3588 pll, just set the desired rate
-directly during the SPL stage.
+So we have two options, we keep the dts in arch/arm/dts/ like you used 
+to do, until we merge v6.10 dts in U-Boot (probably for v2024.10?), or 
+we cherry-pick the changes for your board with dts/update-dts-subtree.sh 
+script, see the instructions in the docs Tom has started writing: 
+https://lore.kernel.org/u-boot/20240517174930.1028063-2-trini@konsulko.com/. 
+I would very much like to see someone starting to look into the second 
+option :)
 
-Tested on rk3588-rock5b and rk3588-tiger by reading back the PLL rate
-and also observing working DSI output with this change.
+However... it seems we'll likely need to also cherry-pick patches for 
+the GPU (should probably be straightforward as nothing would be using 
+the GPU anyway in U-Boot) and the USBDP PHY... but this one we would 
+need to update all -u-boot.dtsi for rk3588(s) boards that have it 
+already to make it use the new label/DT, make sure that the driver still 
+works... etc. Maybe not a small feat, but someone will have to do it at 
+some point anyway :)
 
-Fixes: 6737771600d4 ("rockchip: rk3588: Add support for sdmmc clocks in SPL")
-Suggested-by: Andy Yan <andy.yan@rock-chips.com>
-Signed-off-by: Heiko Stuebner <heiko.stuebner@cherry.de>
-Cc: Jonas Karlman <jonas@kwiboo.se>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
----
-changes in v2:
-- use correct name for SBUSCRU
-- use dedicated constants for SBUSCRU registers
-- add comment to make it explicit that the SPLL is in a different CRU
+You'd be the first one to do this cherry-picking into dts/upstream, so 
+it'd be really interesting to us if you could provide feedback on what 
+is unclear/not working, etc... so we can update the documentation or fix 
+tools if they were to be insufficient.
 
- .../include/asm/arch-rockchip/cru_rk3588.h    |  4 +++
- drivers/clk/rockchip/clk_rk3588.c             | 30 +++++++++++++++++--
- 2 files changed, 31 insertions(+), 3 deletions(-)
-
-diff --git a/arch/arm/include/asm/arch-rockchip/cru_rk3588.h b/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
-index a4507e5fdd7..a0e54d39654 100644
---- a/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
-+++ b/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
-@@ -29,6 +29,7 @@ enum rk3588_pll_id {
- 	V0PLL,
- 	AUPLL,
- 	PPLL,
-+	SPLL,
- 	PLL_COUNT,
- };
- 
-@@ -150,6 +151,9 @@ struct pll_rate_table {
- #define RK3588_DSU_CLKGATE_CON(x)	((x) * 0x4 + RK3588_DSU_CRU_BASE + 0x800)
- #define RK3588_DSU_SOFTRST_CON(x)	((x) * 0x4 + RK3588_DSU_CRU_BASE + 0xa00)
- 
-+#define RK3588_SBUSCRU_SPLL_CON(x)	((x) * 0x4 + 0x220)
-+#define RK3588_SBUSCRU_MODE_CON0	0x280
-+
- enum {
- 	/* CRU_CLK_SEL8_CON */
- 	ACLK_LOW_TOP_ROOT_SRC_SEL_SHIFT		= 14,
-diff --git a/drivers/clk/rockchip/clk_rk3588.c b/drivers/clk/rockchip/clk_rk3588.c
-index 4c611a39049..c41c9be6aa3 100644
---- a/drivers/clk/rockchip/clk_rk3588.c
-+++ b/drivers/clk/rockchip/clk_rk3588.c
-@@ -37,6 +37,7 @@ static struct rockchip_pll_rate_table rk3588_pll_rates[] = {
- 	RK3588_PLL_RATE(786000000, 1, 131, 2, 0),
- 	RK3588_PLL_RATE(742500000, 4, 495, 2, 0),
- 	RK3588_PLL_RATE(722534400, 8, 963, 2, 24850),
-+	RK3588_PLL_RATE(702000000, 3, 351, 2, 0),
- 	RK3588_PLL_RATE(600000000, 2, 200, 2, 0),
- 	RK3588_PLL_RATE(594000000, 2, 198, 2, 0),
- 	RK3588_PLL_RATE(200000000, 3, 400, 4, 0),
-@@ -65,6 +66,15 @@ static struct rockchip_pll_clock rk3588_pll_clks[] = {
- 		     RK3588_MODE_CON0, 0, 15, 0, rk3588_pll_rates),
- 	[PPLL] = PLL(pll_rk3588, PLL_PPLL, RK3588_PMU_PLL_CON(128),
- 		     RK3588_MODE_CON0, 10, 15, 0, rk3588_pll_rates),
-+#ifdef CONFIG_SPL_BUILD
-+	/*
-+	 * The SPLL is part of the SBUSCRU, not the main CRU and as
-+	 * such only directly accessible during the SPL stage.
-+	 */
-+	[SPLL] = PLL(pll_rk3588, 0, RK3588_SBUSCRU_SPLL_CON(0),
-+		     RK3588_SBUSCRU_MODE_CON0, 0, 15, 0, rk3588_pll_rates),
-+#endif
-+
- };
- 
- #ifndef CONFIG_SPL_BUILD
-@@ -2044,6 +2054,7 @@ U_BOOT_DRIVER(rockchip_rk3588_cru) = {
- 
- #ifdef CONFIG_SPL_BUILD
- #define SCRU_BASE			0xfd7d0000
-+#define SBUSCRU_BASE			0xfd7d8000
- 
- static ulong rk3588_scru_clk_get_rate(struct clk *clk)
- {
-@@ -2118,15 +2129,28 @@ static ulong rk3588_scru_clk_set_rate(struct clk *clk, ulong rate)
- 	return rk3588_scru_clk_get_rate(clk);
- }
- 
-+static int rk3588_scru_clk_probe(struct udevice *dev)
-+{
-+	int ret;
-+
-+	ret = rockchip_pll_set_rate(&rk3588_pll_clks[SPLL],
-+				    (void *)SBUSCRU_BASE, SPLL, SPLL_HZ);
-+	if (ret)
-+		debug("%s setting spll rate failed %d\n", __func__, ret);
-+
-+	return 0;
-+}
-+
- static const struct clk_ops rk3588_scru_clk_ops = {
- 	.get_rate = rk3588_scru_clk_get_rate,
- 	.set_rate = rk3588_scru_clk_set_rate,
- };
- 
- U_BOOT_DRIVER(rockchip_rk3588_scru) = {
--	.name = "rockchip_rk3588_scru",
--	.id = UCLASS_CLK,
--	.ops = &rk3588_scru_clk_ops,
-+	.name	= "rockchip_rk3588_scru",
-+	.id	= UCLASS_CLK,
-+	.ops	= &rk3588_scru_clk_ops,
-+	.probe	= rk3588_scru_clk_probe,
- };
- 
- static int rk3588_scmi_spl_glue_bind(struct udevice *dev)
--- 
-2.39.2
-
+Looking forward to your next patch,
+Cheers,
+Quentin
