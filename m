@@ -4,72 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95EA9C25B78
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 21:42:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE647C25B78
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 21:52:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 23C9B884A9;
-	Wed, 22 May 2024 23:42:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3687A884B8;
+	Wed, 22 May 2024 23:52:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lXIGLZnu";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="e6VrJ75j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98037884B3; Wed, 22 May 2024 23:42:30 +0200 (CEST)
-Received: from mail-vk1-xa2d.google.com (mail-vk1-xa2d.google.com
- [IPv6:2607:f8b0:4864:20::a2d])
+ id 41DF6884BC; Wed, 22 May 2024 23:52:28 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09B5688464
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 23:42:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E11E3884B3
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 23:52:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-vk1-xa2d.google.com with SMTP id
- 71dfb90a1353d-4df6e7414fdso477906e0c.0
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 14:42:27 -0700 (PDT)
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-627ebbe7720so11318627b3.0
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 14:52:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716414147; x=1717018947; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2mhUfUsue4Iis2qOA1TyH7U1SRR0VtKVtwCt2uOsgxw=;
- b=lXIGLZnuNxxSlMqmRvRSkJGPppXkQBERlVELEk7Ztim8feFxIDqAIENuKE0bMTWTmO
- VK7qpp2JYIj4R0mVdC0JMtdKCVBFNW0qZnf+p0se6qk+OxBbUKCxz7/EDHDVHltBgjoi
- NedJAmr6UJdrx7QaGKWpYI3OMBqnIdD1S0rI7euxsZ3YGZO0P6ZCOTWoXPiOZ8NVOava
- y1ZaFH9WmwzfAhIeLlcR/N1r3KjngndQWC+O+pdW2//QYcm6vb2dWI306+4FMbO3zRrI
- lrDicsnspWHdLozD/GrCy6eYViW4C1GxU8qilEI74O5IDBG43LHhjOdVfY7fy2134O2K
- EIsA==
+ d=gmail.com; s=20230601; t=1716414744; x=1717019544; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=O1eWu/R4JxMZxwTddc2qokQfyWN4iUhXSBuyRxacmL4=;
+ b=e6VrJ75jcO2ENdUch48tAsDbPU2wJowjZfiEDLTIDoX+fZfsGUHXAp1IxssaCQ33Sx
+ C53V8rHgz4tzoaypYg1L4/ZYuBzNc1ZTisKK45wS/NhlY72xLfzJZGRKxeV6FuRVcti3
+ dItO+2qy9824qFwwEbtoem/kaMK11Qeg91bxwkS12XvoaUsEy36TxxrwjdAEt119+edo
+ TKCPpVMqDmxGEDcuzKf9EoZ7xlCjdHTj1HqwKxfii81fFcdaRjBwyidD0OXAX/y8kb4D
+ 3C5DhTY790tT58MvLaMZgeFWJCEiMG9K+7zFE5fRSMjAxK2nL4eHgydcu9OVoGqvAH3e
+ lcBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716414147; x=1717018947;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2mhUfUsue4Iis2qOA1TyH7U1SRR0VtKVtwCt2uOsgxw=;
- b=JX/KG+yt1JWp1vDfWf5zIEzAn6K2wgWLOGWtvTockQoOEPt35nHjypAj4+RsX96/2L
- 3I2yw/3Za8WQUaYoeFrg+3vg45eNoXm/ufRInNT/gWYiZj8nzeBvLQZHXFViSpU51AKT
- HLMBe1iLpQbdsgxmVx5uM+vnOiiHB/uyoXBEKHBIhZwM6YMpiWnLl7IL+jLu6FStYmA2
- 7j0QmEDTyux0N+zf9GtXaEOnWSt30IXeOZTaAIchgo7X4os9nwqWMMwXSbOqWHH28bJA
- vRcgIq7732qWcjiYLZEFKJpc4TISWqsT9OvM1gdwbYWz6oG59lYjDG6fTPK5Sv4+r6+d
- lkew==
-X-Gm-Message-State: AOJu0YysOor50xY/AsXT1diTefT1oodOzGM3f1lyxsZjbjEbLcNKus1t
- 9kSsc6rnyRawOR+Ux/k5lp18mAl0YnYO3ITHUn0LHtBfG6VWQhZDTHH/OfeLQxdwi6OShAsW97X
- 5MpQn6Ng00KFtPpKWahfKvforZ3/nwg==
-X-Google-Smtp-Source: AGHT+IEqnztM6kxv9f5pBOvfcBmvt1QjInZFJJqpDzbtQXeEY+PU0z2hXLzKJA+IgsIo0+HMyJC0s+CMqEDE+7VSen4=
-X-Received: by 2002:a05:6122:1d92:b0:4d3:4ac2:29f4 with SMTP id
- 71dfb90a1353d-4e2130d305fmr3282293e0c.2.1716414146704; Wed, 22 May 2024
- 14:42:26 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1716414744; x=1717019544;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=O1eWu/R4JxMZxwTddc2qokQfyWN4iUhXSBuyRxacmL4=;
+ b=fjKBxPzYNShRTxReqrlc94mEa+vIRJ8RdSzSVaBR9wuiSpHWEKuFd4QQscwCotAHfa
+ jIpg4fS8X5ZnSR7wGfU0dX1+dfs9tSGOZOQGqH7zP0Cx7NugIeru8OTCLRajmYRSXv8w
+ VzHFO11BTAPmAoC5KWlxshmJQSOARsNIeIA/dqQHiHiQ4Tpy4DvDwFM7hne/I9Y8ExM2
+ dKQJjiTPea4zmMjRoQ/YmBiqZGLeunMnBqImp2aDAI9nzZ6xedAAj2TPQD600VBkdxTZ
+ 6HK901PtgByQk2P4wtZGXRGz6o8LEjukVMC4HIwDx8Xxy0+4rEBkOgRfZSi+wm02UVcd
+ WhpQ==
+X-Gm-Message-State: AOJu0Yy+o2bQjQmZJQvSxyjud457AnlnnlzByTvpEWIIw9q9MbcaKoQO
+ PE9GPLSQ/CD+jnbHwnZURxHJCox81MqUQgLCuVK9ZOcXQoL6UJPaJjiSYw==
+X-Google-Smtp-Source: AGHT+IGNn3untVZy29///RsFQogojfJj7LyNH2aJYpqd0a7zrx/n4Y1BLe5TXZXiLvvUPptA4G+1Kg==
+X-Received: by 2002:a81:7286:0:b0:61b:330e:3f25 with SMTP id
+ 00721157ae682-627e46cb96bmr30719557b3.30.1716414743951; 
+ Wed, 22 May 2024 14:52:23 -0700 (PDT)
+Received: from localhost.localdomain
+ (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
+ by smtp.gmail.com with ESMTPSA id
+ 00721157ae682-6209e348ab0sm60719497b3.90.2024.05.22.14.52.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 May 2024 14:52:23 -0700 (PDT)
+From: Tony Dinh <mibodhi@gmail.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>,
+	Stefan Roese <sr@denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Tony Dinh <mibodhi@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tim Harvey <tharvey@gateworks.com>
+Subject: [PATCH] arm: dts: mvebu: Migrate to upstream DT for Synology DS116
+ (Armada 385) board
+Date: Wed, 22 May 2024 14:51:59 -0700
+Message-Id: <20240522215200.16199-1-mibodhi@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <6Yk7L2-xTxcUnQdR0tk_SVFsR-REvvBdSSzDPivTKNeM_3-wlFKeIQtDp1cJTjjOoO9P54bPe_q51mO1PvGF7e6Q-Tqo0k-F2QoLP6Tn8ss=@protonmail.com>
-In-Reply-To: <6Yk7L2-xTxcUnQdR0tk_SVFsR-REvvBdSSzDPivTKNeM_3-wlFKeIQtDp1cJTjjOoO9P54bPe_q51mO1PvGF7e6Q-Tqo0k-F2QoLP6Tn8ss=@protonmail.com>
-From: E Shattow <lucent@gmail.com>
-Date: Wed, 22 May 2024 14:42:15 -0700
-Message-ID: <CANV2PTMsbNkPXmUNCbytxfQP8u9qr7=NdYMbfrO3V-_cj6vRFg@mail.gmail.com>
-Subject: Re: [PATCH 2/2 v5] board: starfive: support Pine64 Star64 board
-To: H Bell <dmoo_dv@protonmail.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,302 +97,349 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, May 22, 2024 at 12:13=E2=80=AFPM H Bell <dmoo_dv@protonmail.com> wr=
-ote:
->
-> Add documentation files
->
-> Signed-off-by: Henry Bell <dmoo_dv@protonmail.com>
-> Cc: ycliang@andestech.com
-> Cc: heinrich.schuchardt@canonical.com
-> ---
->
-> Changes since v1
->
-> - New patch
->
-> Changes since v2
->
-> - Remove extra params to
-> - Clarification on boot section
-> - Add entry on MAC adresses and how to correct them
->
-> Changes since v3
->
-> - Rebase against d678a59d2d
->
-> Changes since v4
->
-> - Rework and expand docs on boot selection switches and overriding
->   MAC addresses
-> - Fix warnings and underline width
-> ---
->  doc/board/starfive/index.rst         |   1 +
->  doc/board/starfive/pine64_star64.rst | 201 +++++++++++++++++++++++++++
->  2 files changed, 202 insertions(+)
->  create mode 100644 doc/board/starfive/pine64_star64.rst
->
-> diff --git a/doc/board/starfive/index.rst b/doc/board/starfive/index.rst
-> index d369b986cc..72ab6ddfbf 100644
-> --- a/doc/board/starfive/index.rst
-> +++ b/doc/board/starfive/index.rst
-> @@ -8,4 +8,5 @@ StarFive
->
->     milk-v_mars
->     milk-v_mars_cm
-> +   pine64_star64
->     visionfive2
-> diff --git a/doc/board/starfive/pine64_star64.rst b/doc/board/starfive/pi=
-ne64_star64.rst
-> new file mode 100644
-> index 0000000000..52e9a90791
-> --- /dev/null
-> +++ b/doc/board/starfive/pine64_star64.rst
-> @@ -0,0 +1,201 @@
-> +.. SPDX-License-Identifier: GPL-2.0+
-> +
-> +Pine64 Star64
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +
-> +U-Boot for the Star64 uses the same U-Boot binaries as the VisionFive 2 =
-board.
-> +In U-Boot SPL the actual board is detected and the device-tree patched
-> +accordingly.
-> +
-> +Building
-> +~~~~~~~~
-> +
-> +1. Add the RISC-V toolchain to your PATH.
-> +2. Setup ARCH & cross compilation environment variable:
-> +
-> +.. code-block:: none
-> +
-> +   export CROSS_COMPILE=3D<riscv64 toolchain prefix>
-> +
-> +The M-mode software OpenSBI provides the supervisor binary interface (SB=
-I) and
-> +is responsible for the switch to S-Mode. It is a prerequisite to build U=
--Boot.
-> +Support for the JH7110 was introduced in OpenSBI 1.2. It is recommended =
-to use
-> +a current release.
-> +
-> +.. code-block:: console
-> +
-> +       git clone https://github.com/riscv/opensbi.git
-> +       cd opensbi
-> +       make PLATFORM=3Dgeneric FW_TEXT_START=3D0x40000000
-> +
-> +Now build the U-Boot SPL and U-Boot proper.
-> +
-> +.. code-block:: console
-> +
-> +       cd <U-Boot-dir>
-> +       make starfive_visionfive2_defconfig
-> +       make OPENSBI=3D$(opensbi_dir)/build/platform/generic/firmware/fw_=
-dynamic.bin
-> +
-> +This will generate the U-Boot SPL image (spl/u-boot-spl.bin.normal.out) =
-as well
-> +as the FIT image (u-boot.itb) with OpenSBI and U-Boot.
-> +
-> +Device-tree selection
-> +~~~~~~~~~~~~~~~~~~~~~
-> +
-> +U-Boot will set variable $fdtfile to starfive/jh7110-pine64-star64.dtb.
-> +
-> +To overrule this selection the variable can be set manually and saved in=
- the
-> +environment
-> +
-> +::
-> +
-> +    env set fdtfile my_device-tree.dtb
-> +    env save
-> +
-> +or the configuration variable CONFIG_DEFAULT_FDT_FILE can be used to set=
- to
-> +provide a default value.
-> +
-> +Boot source selection
-> +~~~~~~~~~~~~~~~~~~~~~
-> +
-> +Boot mode is selected by an MSEL-DIP marked S1804 and GPIO_0 position ad=
-jacent
-> +to the 40pin GPIO header. ON/ONKE and number markings of the MSEL-DIP ar=
-e
-> +misleading; Instead refer to the ``L`` (0) and ``H`` (1) silkscreen for
-> +accurate selection.
-> +
-> ++ (QSPI) Flash: 00
-> ++ SD: 01
-> ++ EMMC: 10
-> ++ UART: 11
-> +
-> +Preparing the SD-Card
-> +~~~~~~~~~~~~~~~~~~~~~
-> +
-> +The device firmware loads U-Boot SPL (u-boot-spl.bin.normal.out) from th=
-e
-> +partition with type GUID 2E54B353-1271-4842-806F-E436D6AF6985. You are f=
-ree
-> +to choose any partition number.
-> +
-> +With the default configuration U-Boot SPL loads the U-Boot FIT image
-> +(u-boot.itb) from partition 2 (CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITIO=
-N=3D0x2).
-> +When formatting it is recommended to use GUID
-> +BC13C2FF-59E6-4262-A352-B275FD6F7172 for this partition.
-> +
-> +The FIT image (u-boot.itb) is a combination of OpenSBI's fw_dynamic.bin,
-> +u-boot-nodtb.bin and the device tree blob.
-> +
-> +Format the SD card (make sure the disk has GPT, otherwise use gdisk to s=
-witch)
-> +
-> +.. code-block:: bash
-> +
-> +       sudo sgdisk --clear \
-> +         --set-alignment=3D2 \
-> +         --new=3D1:4096:8191 --change-name=3D1:spl --typecode=3D1:2E54B3=
-53-1271-4842-806F-E436D6AF6985\
-> +         --new=3D2:8192:16383 --change-name=3D2:uboot --typecode=3D2:BC1=
-3C2FF-59E6-4262-A352-B275FD6F7172  \
-> +         --new=3D3:16384:1654784 --change-name=3D3:system --typecode=3D3=
-:EBD0A0A2-B9E5-4433-87C0-68B6B72699C7 \
-> +         /dev/sdb
-> +
-> +Copy U-Boot to the SD card
-> +
-> +.. code-block:: bash
-> +
-> +       sudo dd if=3Du-boot-spl.bin.normal.out of=3D/dev/sdb1
-> +       sudo dd if=3Du-boot.itb of=3D/dev/sdb2
-> +
-> +       sudo mount /dev/sdb3 /mnt/
-> +       sudo cp u-boot-spl.bin.normal.out /mnt/
-> +       sudo cp u-boot.itb /mnt/
-> +       sudo cp Image.gz /mnt/
-> +       sudo cp initramfs.cpio.gz /mnt/
-> +       sudo cp jh7110-starfive-visionfive-2.dtb /mnt/
-> +       sudo umount /mnt
-> +
-> +Booting
-> +~~~~~~~
-> +
-> +Once you plugin the sdcard and power up, you should see the U-Boot promp=
-t.
-> +
-> +Serial Number and MAC address issues
-> +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> +
-> +U-Boot requires valid EEPROM data to determine which board-specific fix-=
-up to
-> +apply at runtime. This affects the size of memory initialized, network m=
-ac
-> +address numbering, and tuning of the network PHYs.
-> +
-> +The Star64 does not currently ship with unique serial numbers per-device=
-.
-> +Devices follow a pattern where the last mac address bytes are a sum of 0=
-x7558
-> +and the serial number (lower port mac0), or a sum of 0x7559 and the seri=
-al
-> +number (upper port mac1).
-> +
-> +As tested there are several 4gb model units where the serial number and =
-network
-> +mac addresses collide with other devices (serial
-> +``STAR64V1-2310-D004E000-00000005``, MACs ``6c:cf:39:00:75:61``,
-> +``6c:cf:39:00:75:62``)
-> +
-> +Some early Star64 boards shipped with an uninitialized EEPROM and no wri=
-te
-> +protect pull-up resistor in place. Later units of all 4gb and 8gb models
-> +sharing the same serial number in EEPROM data will have this problem tha=
-t the
-> +network mac addresses are alike between different models and this may be
-> +corrected by defeating the write protect resistor to write new values. A=
-s an
-> +alternative to this, it may be worked around by overriding the mac addre=
-sses
-> +via U-Boot environment variables.
-> +
-> +It is required for any unit having uninitialized EEPROM and recommended =
-for
-> +all later Star64 4gb model units (not properly serialized) to have decid=
-ed on a
-> +new 6-byte serial number. This serial number should be high enough to
-> +avoid collision with other JH7110 boards and low enough not to overflow =
-i.e.
-> +between ``cafe00`` and ``f00d00``.
-> +
-> +Update EEPROM values
-> +^^^^^^^^^^^^^^^^^^^^
-> +
-> +1. Prepare EEPROM data in memory
-> +
-> +::
-> +
-> +       ## When there is no error to load existing data:
-> +       mac read_eeprom
-> +
-> +       ## When there is an error to load non-existing data:
-> +       # "DRAM:  Not a StarFive EEPROM data format - magic error"
-> +       mac initialize
-> +
-> +2. Set Star64 values
-> +
-> +::
-> +
-> +       ## Common values
-> +       mac vendor PINE64
-> +       mac pcb_revision c1
-> +       mac bom_revision A
-> +
-> +       ## Device-specific values
-> +       # Year 2023 week 10 production date, 8GB DRAM, optional eMMC, ser=
-ial cdef01
-> +       mac product_id STAR64V1-2310-D008E000-00cdef01
-> +
-> +       # Last three bytes mac0: 0x7558 + serial number 0xcdef01
-> +       mac mac0_address 6c:cf:39:ce:64:59
-> +
-> +       # Last three bytes mac1: 0x7559 + serial number 0xcdef01
-> +       mac mac1_address 6c:cf:39:ce:64:5a
-> +
-> +3. Defeat write-protect pull-up resistor (if installed) and write to EEP=
-ROM
-> +
-> +::
-> +
-> +       mac write_eeprom
-> +
-> +Set Variables in U-Boot
-> +^^^^^^^^^^^^^^^^^^^^^^^
-> +
-> +.. note:: Changing just the serial number will not alter your MAC addres=
-s
-> +
-> +The MAC addresses may be "set" as follows by writing as a custom config =
-to SPI
-> +(Change the last 3 bytes of MAC addreses as appropriate):
-> +
-> +::
-> +
-> +       env set serial# STAR64V1-2310-D008E000-00cdef01
-> +       env set ethaddr 6c:cf:39:ce:64:59
-> +       env set eth1addr 6c:cf:39:ce:64:5a
-> +       env save
-> +       reset
-> --
-> 2.44.0
->
->
+Enable OF_UPSTREAM to use upstream DT and add marvell/ prefix to the
+DEFAULT_DEVICE_TREE in DS116 defconfig. Remove current DTS in
+arch/arm/dts/ directory.
 
-I understand setting $serial# environment variable to be more
-illustrative than prescriptive. I think this should be a comment to
-guide the setting of ethaddr and eth1addr but not itself be set by the
-user. With that:
+Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+---
 
-Reviewed-by: E Shattow <lucent@gmail.com>
+ arch/arm/dts/Makefile                      |   1 -
+ arch/arm/dts/armada-385-synology-ds116.dts | 291 ---------------------
+ configs/ds116_defconfig                    |   3 +-
+ 3 files changed, 2 insertions(+), 293 deletions(-)
+ delete mode 100644 arch/arm/dts/armada-385-synology-ds116.dts
+
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index a5c82ebf7a..75f7e616b4 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -155,7 +155,6 @@ dtb-$(CONFIG_ARCH_MVEBU) +=			\
+ 	armada-385-atl-x530.dtb			\
+ 	armada-385-atl-x530DP.dtb		\
+ 	armada-385-db-88f6820-amc.dtb		\
+-	armada-385-synology-ds116.dtb		\
+ 	armada-385-thecus-n2350.dtb		\
+ 	armada-385-turris-omnia.dtb		\
+ 	armada-388-clearfog.dtb			\
+diff --git a/arch/arm/dts/armada-385-synology-ds116.dts b/arch/arm/dts/armada-385-synology-ds116.dts
+deleted file mode 100644
+index 82a0373f7f..0000000000
+--- a/arch/arm/dts/armada-385-synology-ds116.dts
++++ /dev/null
+@@ -1,291 +0,0 @@
+-// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+-/*
+- * Device Tree file for Synology DS116 NAS
+- *
+- * Copyright (C) 2017 Willy Tarreau <w@1wt.eu>
+- */
+-
+-/dts-v1/;
+-#include "armada-385.dtsi"
+-#include <dt-bindings/gpio/gpio.h>
+-
+-/ {
+-	model = "Synology DS116";
+-	compatible = "marvell,a385-gp", "marvell,armada385", "marvell,armada380";
+-
+-	chosen {
+-		stdout-path = "serial0:115200n8";
+-	};
+-
+-	memory {
+-		device_type = "memory";
+-		reg = <0x00000000 0x40000000>; /* 1 GB */
+-	};
+-
+-	soc {
+-		ranges = <MBUS_ID(0xf0, 0x01) 0 0xf1000000 0x100000
+-			  MBUS_ID(0x01, 0x1d) 0 0xfff00000 0x100000
+-			  MBUS_ID(0x09, 0x19) 0 0xf1100000 0x10000
+-			  MBUS_ID(0x09, 0x15) 0 0xf1110000 0x10000
+-			  MBUS_ID(0x0c, 0x04) 0 0xf1200000 0x100000>;
+-
+-		internal-regs {
+-			i2c@11000 {
+-				pinctrl-names = "default";
+-				pinctrl-0 = <&i2c0_pins>;
+-				status = "okay";
+-				clock-frequency = <100000>;
+-
+-				eeprom@57 {
+-					compatible = "atmel,24c64";
+-					reg = <0x57>;
+-				};
+-			};
+-
+-			serial@12000 {
+-				pinctrl-names = "default";
+-				pinctrl-0 = <&uart0_pins>;
+-				status = "okay";
+-			};
+-
+-			serial@12100 {
+-				/* A PIC16F1829 is connected to uart1 at 9600 bps,
+-				 * and takes single-character orders :
+-				 *   "1" : power off // already handled by the poweroff node
+-				 *   "2" : short beep
+-				 *   "3" : long beep
+-				 *   "4" : turn the power LED ON
+-				 *   "5" : flash the power LED
+-				 *   "6" : turn the power LED OFF
+-				 *   "7" : turn the status LED OFF
+-				 *   "8" : turn the status LED ON
+-				 *   "9" : flash the status LED
+-				 *   "A" : flash the motherboard LED (D8)
+-				 *   "B" : turn the motherboard LED OFF
+-				 *   "C" : hard reset
+-				 */
+-				pinctrl-names = "default";
+-				pinctrl-0 = <&uart1_pins>;
+-				status = "okay";
+-			};
+-
+-			poweroff@12100 {
+-				compatible = "synology,power-off";
+-				reg = <0x12100 0x100>;
+-				clocks = <&coreclk 0>;
+-			};
+-
+-			ethernet@70000 {
+-				pinctrl-names = "default";
+-				phy = <&phy0>;
+-				phy-mode = "sgmii";
+-				buffer-manager = <&bm>;
+-				bm,pool-long = <0>;
+-				status = "okay";
+-			};
+-
+-			mdio@72004 {
+-				pinctrl-names = "default";
+-				pinctrl-0 = <&mdio_pins>;
+-
+-				phy0: ethernet-phy@1 {
+-					reg = <1>;
+-				};
+-			};
+-
+-			sata@a8000 {
+-				pinctrl-names = "default";
+-				pinctrl-0 = <&sata0_pins>;
+-				status = "okay";
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-
+-				sata0: sata-port@0 {
+-					reg = <0>;
+-					target-supply = <&reg_5v_sata0>;
+-				};
+-			};
+-
+-			bm@c8000 {
+-				status = "okay";
+-			};
+-
+-			usb3@f0000 {
+-				usb-phy = <&usb3_0_phy>;
+-				status = "okay";
+-			};
+-
+-			usb3@f8000 {
+-				usb-phy = <&usb3_1_phy>;
+-				status = "okay";
+-			};
+-		};
+-
+-		bm-bppi {
+-			status = "okay";
+-		};
+-
+-		gpio-fan {
+-			compatible = "gpio-fan";
+-			gpios = <&gpio1 18 GPIO_ACTIVE_HIGH>,
+-				<&gpio1 17 GPIO_ACTIVE_HIGH>,
+-				<&gpio1 16 GPIO_ACTIVE_HIGH>;
+-			gpio-fan,speed-map = <   0 0
+-					      1500 1
+-					      2500 2
+-					      3000 3
+-					      3400 4
+-					      3700 5
+-					      3900 6
+-					      4000 7>;
+-			#cooling-cells = <2>;
+-		};
+-
+-		gpio-leds {
+-			compatible = "gpio-leds";
+-
+-			/* The green part is on gpio0.20 which is also used by
+-			 * sata0, and accesses to SATA disk 0 make it blink so it
+-			 * doesn't need to be declared here.
+-			 */
+-			orange {
+-				gpios = <&gpio0 13 GPIO_ACTIVE_HIGH>;
+-				label = "ds116:orange:disk";
+-				default-state = "off";
+-			};
+-		};
+-	};
+-
+-	usb3_0_phy: usb3_0_phy {
+-		compatible = "usb-nop-xceiv";
+-		vcc-supply = <&reg_usb3_0_vbus>;
+-		#phy-cells = <0>;
+-	};
+-
+-	usb3_1_phy: usb3_1_phy {
+-		compatible = "usb-nop-xceiv";
+-		vcc-supply = <&reg_usb3_1_vbus>;
+-		#phy-cells = <0>;
+-	};
+-
+-	reg_usb3_0_vbus: usb3-vbus0 {
+-		compatible = "regulator-fixed";
+-		regulator-name = "usb3-vbus0";
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&xhci0_vbus_pins>;
+-		regulator-min-microvolt = <5000000>;
+-		regulator-max-microvolt = <5000000>;
+-		enable-active-high;
+-		gpio = <&gpio1 26 GPIO_ACTIVE_HIGH>;
+-	};
+-
+-	reg_usb3_1_vbus: usb3-vbus1 {
+-		compatible = "regulator-fixed";
+-		regulator-name = "usb3-vbus1";
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&xhci1_vbus_pins>;
+-		regulator-min-microvolt = <5000000>;
+-		regulator-max-microvolt = <5000000>;
+-		enable-active-high;
+-		gpio = <&gpio1 27 GPIO_ACTIVE_HIGH>;
+-	};
+-
+-	reg_sata0: pwr-sata0 {
+-		compatible = "regulator-fixed";
+-		regulator-name = "pwr_en_sata0";
+-		regulator-min-microvolt = <12000000>;
+-		regulator-max-microvolt = <12000000>;
+-		enable-active-high;
+-		regulator-boot-on;
+-		gpio = <&gpio0 15 GPIO_ACTIVE_HIGH>;
+-	};
+-
+-	reg_5v_sata0: v5-sata0 {
+-		compatible = "regulator-fixed";
+-		regulator-name = "v5.0-sata0";
+-		regulator-min-microvolt = <5000000>;
+-		regulator-max-microvolt = <5000000>;
+-		vin-supply = <&reg_sata0>;
+-	};
+-
+-	reg_12v_sata0: v12-sata0 {
+-		compatible = "regulator-fixed";
+-		regulator-name = "v12.0-sata0";
+-		regulator-min-microvolt = <12000000>;
+-		regulator-max-microvolt = <12000000>;
+-		vin-supply = <&reg_sata0>;
+-	};
+-};
+-
+-&spi0 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&spi0_pins>;
+-	status = "okay";
+-
+-	spi-flash@0 {
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		compatible = "macronix,mx25l6405d", "jedec,spi-nor";
+-		reg = <0>; /* Chip select 0 */
+-		spi-max-frequency = <50000000>;
+-		m25p,fast-read;
+-
+-		/* Note: there is a redboot partition table despite u-boot
+-		 * being used. The names presented here are the same as those
+-		 * found in the FIS directory. There is also a small device
+-		 * tree in the last 64kB of the RedBoot partition which is not
+-		 * enumerated. The MAC address and the serial number are listed
+-		 * in the "vendor" partition.
+-		 */
+-		partition@0 {
+-			label = "RedBoot";
+-			reg = <0x00000000 0x000f0000>;
+-			read-only;
+-		};
+-
+-		partition@c0000 {
+-			label = "zImage";
+-			reg = <0x000f0000 0x002d0000>;
+-		};
+-
+-		partition@390000 {
+-			label = "rd.gz";
+-			reg = <0x003c0000 0x00410000>;
+-		};
+-
+-		partition@7d0000 {
+-			label = "vendor";
+-			reg = <0x007d0000 0x00010000>;
+-			read-only;
+-		};
+-
+-		partition@7e0000 {
+-			label = "RedBoot config";
+-			reg = <0x007e0000 0x00010000>;
+-			read-only;
+-		};
+-
+-		partition@7f0000 {
+-			label = "FIS directory";
+-			reg = <0x007f0000 0x00010000>;
+-			read-only;
+-		};
+-	};
+-};
+-
+-&pinctrl {
+-	/* use only one pin for UART1, as mpp20 is used by sata0 */
+-	uart1_pins: uart-pins-1 {
+-		marvell,pins = "mpp19";
+-		marvell,function = "ua1";
+-	};
+-
+-	xhci0_vbus_pins: xhci0_vbus_pins {
+-		marvell,pins = "mpp58";
+-		marvell,function = "gpio";
+-	};
+-	xhci1_vbus_pins: xhci1_vbus_pins {
+-		marvell,pins = "mpp59";
+-		marvell,function = "gpio";
+-	};
+-};
+diff --git a/configs/ds116_defconfig b/configs/ds116_defconfig
+index 1fc7380216..bcc5f00fe5 100644
+--- a/configs/ds116_defconfig
++++ b/configs/ds116_defconfig
+@@ -16,7 +16,7 @@ CONFIG_SF_DEFAULT_SPEED=50000000
+ CONFIG_ENV_SIZE=0x10000
+ CONFIG_ENV_OFFSET=0x7E0000
+ CONFIG_ENV_SECT_SIZE=0x10000
+-CONFIG_DEFAULT_DEVICE_TREE="armada-385-synology-ds116"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/armada-385-synology-ds116"
+ CONFIG_SPL_TEXT_BASE=0x40000030
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_STACK=0x4002c000
+@@ -56,6 +56,7 @@ CONFIG_CMD_CACHE=y
+ CONFIG_CMD_TIME=y
+ CONFIG_CMD_MTDPARTS=y
+ CONFIG_MTDPARTS_DEFAULT="mtdparts=spi0.0:1m(u-boot),7040k(kernel),64k(u-boot-env),-(data)"
++CONFIG_OF_UPSTREAM=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_VERSION_VARIABLE=y
+-- 
+2.39.2
+
