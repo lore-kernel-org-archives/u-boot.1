@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90C39C25B78
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 15:36:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9EB0C25B79
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 15:36:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFF748887B;
-	Wed, 22 May 2024 17:35:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5E61488864;
+	Wed, 22 May 2024 17:35:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="xoBxGMRk";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="ATkHOO7b";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="vuak5Plf";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="B9Fe8TI4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5357F88876; Wed, 22 May 2024 17:35:27 +0200 (CEST)
+ id AE29988885; Wed, 22 May 2024 17:35:29 +0200 (CEST)
 Received: from wfhigh8-smtp.messagingengine.com
  (wfhigh8-smtp.messagingengine.com [64.147.123.159])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D7DC48887B
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 17:35:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0999F88891
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 17:35:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
- by mailfhigh.west.internal (Postfix) with ESMTP id 185B218000CA;
- Wed, 22 May 2024 11:35:23 -0400 (EDT)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailfhigh.west.internal (Postfix) with ESMTP id 3F3CC180009D;
+ Wed, 22 May 2024 11:35:25 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute6.internal (MEProxy); Wed, 22 May 2024 11:35:23 -0400
+ by compute5.internal (MEProxy); Wed, 22 May 2024 11:35:25 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1716392122;
- x=1716478522; bh=QeKrxQAWS5qruFDoJBthIVdWNmrAd1aQ0MdxODBErh4=; b=
- xoBxGMRkc3QSvoTNbfJfuzM8GUaMNz3lQvFJjffXctywDOQIV8cCXnDv7sCZiCzw
- 5xOSbTzVgl669pMLC3aOk0uJTRgoj/mro6s7+qlkzqDKHf4eD3SV2XGBVvg4c0TH
- 7QI3PqtJ9b0TbXsfEkgDgYBaCXAZzveGMqvybVU9T4kbPJySC7dwzq/Cb+kDNCnK
- dwWQ+qqkcakF+wo1pNxFhZnlNUXnstTjHt3c/U+vre6oYYPJ0D4Oe/4KloR2So5M
- AxBzlPHchxMnZbunzOLAZxKSiU1iveucNHbgOU91/F4TQaTXxKKVZjyMnOF81pPC
- thNfhGu2HKoAtKcR5FM7tw==
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1716392124;
+ x=1716478524; bh=1WGSNtDTmd/zzftDbP/UFQs5Dr+dM9TUNgJ/a3JnUgE=; b=
+ vuak5PlfZmyLT4iaALB5gzC9PoBNIktHXiCMRd8VhRICVAHUFaRPrFzDsgDyM1Mi
+ 3BaHKEHa/0QW25W6QyEaRnK5nWOi1Vr/7AIVgPCaSW2Nhwll1VKLx+ZLXNMkqi3M
+ tyGSQsa/aJ3glq4N+B+KRsF5W1XgmAR9n+yHrwmC25bAEZaS/QGCh+yfOjG9ET/b
+ 2izxtdHaIx2b8E8/QJ1W/u63evheVlqmwshgrsUEE43fMNx31i5IHpnkM269qJWQ
+ zWpn91e0gmaqMVIX5RJQxldKygAdIDtp9PxamM4g2AubbU0Y4dDZJg+mA8mqpr8b
+ mkV3NfnC55LflZLHK1X9jg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716392122; x=
- 1716478522; bh=QeKrxQAWS5qruFDoJBthIVdWNmrAd1aQ0MdxODBErh4=; b=A
- TkHOO7bgK/UkIWCG5C3Rv3pwzPBvbcMMgvjNuhE1Z1UD1sANKTGqDplz7s2iD3Y7
- lHdzeswoz/B02WmLJBCZuCYEob1FNs2f9loJlJw2Gc1VdA8RTcn3IV2L6moOySOj
- FZegzjUj/J6dI48JXk7wQr9Eeq3MNE9IucXHoEYG9MljJLPOUAfXxuSlS5V1PVhP
- 8FFFx7l7m88BmKoghDcWHmExWtXs8TUWTgDxK09iZ3RAWXAVcFFET9rHd/iB8fu8
- VAo1mHUORxlKJsRLim+QAtfxQ+ATdCqcPgcq9+OH+v2uJ3OuVptmIVW5Bz2kf3kW
- +ycZXJVVuBx9JPNjuzO+Q==
-X-ME-Sender: <xms:uhBOZiGiLPNaJrtnY1tDxpMrMHtqNnGzRW6ooAYKPpMchFc6puUTcg>
- <xme:uhBOZjXKDAAmbZhmAvqbweitlUdPPlM_dvZVX1Y37cMEUXB_kw6sTBdE0uW0Fo-FV
- 2tGA4cinGk3tuAzN5s>
-X-ME-Received: <xmr:uhBOZsIOWtk5p4PYlTttr1T8i7q9wzkOsfS-q9uecR-reWhLx9CJcrU>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716392124; x=
+ 1716478524; bh=1WGSNtDTmd/zzftDbP/UFQs5Dr+dM9TUNgJ/a3JnUgE=; b=B
+ 9Fe8TI4tfb+r/ay7fL8aDN7Bd4t3knbfPOP7Yyq1qPAqCQEGNA6Q/oUHRpQ0tpW4
+ ci27vgaQKZUIIv0CrBTmPHdnAvUitOEkFSarJtHO1USsZFTfnAoGxDtB3WoTuDmX
+ 3DLMXyN1OnW53r3maGsxgn4cO8WQHSqAojTxhyv41NC7ZXQBRPQgnbMH1ITz12Xk
+ i+aVwzxxMR2zCHMuwTZcOkCqcFUrlVq8WA+WD3y+FUe4pwJY/26uqKBPGeXJfXA0
+ cNfqBncOjN5+nuzmL7bJfNAanBmOeMmry3EaF5Pm9nPIJhT3XrirTf8SFDxsWJgd
+ Rq1/6LGc8x+Fv/s0+yNtA==
+X-ME-Sender: <xms:vBBOZkrdl5tG3R7wkb8D8BTUmHvHmjyKONI3LpkNCAAzAir5ZJsvxQ>
+ <xme:vBBOZqrQpyS6lPosmwjGnThWhue8YMDn5RMAFX2u8_qgnuGU76LUgGGB3muUzlfrp
+ IkJ20KK-dlhTgb94es>
+X-ME-Received: <xmr:vBBOZpPsBCGT9dj4fmw_fP18totCdySYwS16GlIN12eGiNfgqqhTEEc>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdeigedgvdegucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
  cujfgurhephfffufggtgfgkfhfjgfvvefosehtjeertdertdejnecuhfhrohhmpeflihgr
  gihunhcujggrnhhguceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomheqne
- cuggftrfgrthhtvghrnheptdegveehieejffevvefhgfehveejudduvddvuddtfefhhefh
- veejgfegtedtuedvnecuffhomhgrihhnpehgvghnvgigrdhssgenucevlhhushhtvghruf
- hiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjihgrgihunhdrhigrnhhgsehf
- lhihghhorghtrdgtohhm
-X-ME-Proxy: <xmx:uhBOZsEAVpBJVgL_tgwxx-A6zDdveZT-2ycyxp5obQs7mgD-HbVYJg>
- <xmx:uhBOZoV8ewXZVaywAzodRintkLIajUqem3iKwvMylYSN0GyZgeQ-ew>
- <xmx:uhBOZvMe9ujmDXrXC2m1hLVG4SASJg9M-ZvEIn-PnqQccptM9zS9TA>
- <xmx:uhBOZv0QOwXprIrX62sJ1h0PfL5-2CsItsovJehN73toCwFBaqBz0w>
- <xmx:uhBOZqLR-plQZig2LWDvDd_hTTmFfS4-HTBk4Oxodq3O6pkscwfZR9M9>
+ cuggftrfgrthhtvghrnhepvedujefhfffhveekhfffkeetvefgteejkeeutdduieehieeg
+ feejtdelveejtedunecuffhomhgrihhnpehkvghrnhgvlhdrohhrghenucevlhhushhtvg
+ hrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjihgrgihunhdrhigrnhhg
+ sehflhihghhorghtrdgtohhm
+X-ME-Proxy: <xmx:vBBOZr44DFIUWSm4BXL_cYy5rd68LW5MQs07fvgrclMta_8DLM0iwQ>
+ <xmx:vBBOZj6hmjnEjoAu5XltdlQY3UgkzEKxTIEgMkpW_SiAILNmoWAMXA>
+ <xmx:vBBOZrj3wl3r4yL-KmBax7jjK8ZpJySSkC04S_QYBS3mpIcFnmt0pw>
+ <xmx:vBBOZt5a0HYOU1s9I-8xiSlFN867MiH9wyWw7fZZK0e7XtgjAs2ETA>
+ <xmx:vBBOZgspP2JL1RmF4u5XRr0fCtKUdDKfLaW3HoHsw9IRSavdnlKwgJDZ>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 22 May 2024 11:35:21 -0400 (EDT)
+ 22 May 2024 11:35:23 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Wed, 22 May 2024 16:34:52 +0100
-Subject: [PATCH 09/16] LoongArch: Exception handling
+Date: Wed, 22 May 2024 16:34:53 +0100
+Subject: [PATCH 10/16] LoongArch: Boot Image bits
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240522-loongarch-v1-9-1407e0b69678@flygoat.com>
+Message-Id: <20240522-loongarch-v1-10-1407e0b69678@flygoat.com>
 References: <20240522-loongarch-v1-0-1407e0b69678@flygoat.com>
 In-Reply-To: <20240522-loongarch-v1-0-1407e0b69678@flygoat.com>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
@@ -91,13 +91,13 @@ To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.denx.de, Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=11894;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=8247;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=q348s87cO4rEBLZUXXVHdkIdwsYuP1b91isCSztojhk=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhjQ/geVbS/etcGuRNk7xu1292TVwVe78fZ9uPGkXv3Bb7
- J72jc0BHaUsDGJcDLJiiiwhAkp9GxovLrj+IOsPzBxWJpAhDFycAjAR/ZmMDGvu7MwSuby05HIK
- T8V+6XPCrT847rMIpqdM46kSuyr+dCkjw9X7HkbBn1xlwvYHVm1YUPJD+9yao89fxsXO92btN60
- 1YQEA
+ bh=CZHH2nyZvRKNNA1tQ6SUHk/TORpBnX1stisBLrasCvQ=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhjQ/geU7rtotmL/p/OqysOoPUst3nTS6mP1sdybfh4s//
+ 1+drrmwsqOUhUGMi0FWTJElRECpb0PjxQXXH2T9gZnDygQyhIGLUwAmMoGLkWFzhoC5R+eFApvv
+ /dIcmp4P3+fN5ddcljr5g/aPX9fX+Roy/E/wZOr+5t9exvcgTa3h0NMuU0l59YfSExa4MxvN2Pz
+ enw8A
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -116,445 +116,305 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add exception entry assembly code, import stackframe.h
-from Linux, provide debug prints when exception happens.
+Implement loading and booting functions for LoongArch
+standard kernel image as per spec.
 
+LoongArch kernel do expect us to fake a efi systemtable
+for passing fdt to kernel, we don't need to implement any
+EFI functions for kernel because it won't look into anything
+beside devicetree from that table if we tell kernel we are
+not efi compatible by setting a0 boot argument to zero.
+
+Link: https://docs.kernel.org/arch/loongarch/booting.html
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- arch/loongarch/Kconfig                  |   3 +
- arch/loongarch/cpu/Makefile             |   2 +-
- arch/loongarch/cpu/genex.S              |  21 ++++
- arch/loongarch/include/asm/stackframe.h | 175 +++++++++++++++++++++++++++++
- arch/loongarch/lib/interrupts.c         | 189 ++++++++++++++++++++++++++++++++
- 5 files changed, 389 insertions(+), 1 deletion(-)
+ arch/loongarch/lib/Makefile |   2 +
+ arch/loongarch/lib/bootm.c  | 177 ++++++++++++++++++++++++++++++++++++++++++++
+ arch/loongarch/lib/image.c  |  66 +++++++++++++++++
+ cmd/Kconfig                 |   2 +-
+ 4 files changed, 246 insertions(+), 1 deletion(-)
 
-diff --git a/arch/loongarch/Kconfig b/arch/loongarch/Kconfig
-index 4e8e9d4ee88b..109d37d8e2c7 100644
---- a/arch/loongarch/Kconfig
-+++ b/arch/loongarch/Kconfig
-@@ -30,6 +30,9 @@ config DMA_ADDR_T_64BIT
- 	bool
- 	default y if 64BIT
+diff --git a/arch/loongarch/lib/Makefile b/arch/loongarch/lib/Makefile
+index 3c17b9cd85af..e65e66357a9b 100644
+--- a/arch/loongarch/lib/Makefile
++++ b/arch/loongarch/lib/Makefile
+@@ -3,6 +3,8 @@
+ # Copyright (C) 2024 Jiaxun yang <jiaxun.yang@flygoat.com>
+ #
  
-+config SHOW_REGS
-+	bool "Show registers on unhandled exception"
-+
- config STACK_SIZE_SHIFT
- 	int
- 	default 14
-diff --git a/arch/loongarch/cpu/Makefile b/arch/loongarch/cpu/Makefile
-index d3c38a16d057..6b3dd7ad7d69 100644
---- a/arch/loongarch/cpu/Makefile
-+++ b/arch/loongarch/cpu/Makefile
-@@ -6,4 +6,4 @@
- extra-y = start.o
- 
- obj-y += cpu.o
--obj-y += smp_secondary.o
-+obj-y += smp_secondary.o genex.o
-diff --git a/arch/loongarch/cpu/genex.S b/arch/loongarch/cpu/genex.S
++obj-$(CONFIG_CMD_BOOTM) += bootm.o
++obj-$(CONFIG_CMD_BOOTI) += bootm.o image.o
+ obj-$(CONFIG_CMD_GO) += boot.o
+ obj-y	+= cache.o
+ obj-y	+= interrupts.o
+diff --git a/arch/loongarch/lib/bootm.c b/arch/loongarch/lib/bootm.c
 new file mode 100644
-index 000000000000..18d183a352b9
+index 000000000000..90d96fb47ffd
 --- /dev/null
-+++ b/arch/loongarch/cpu/genex.S
-@@ -0,0 +1,21 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Exception entry for LoongArch CPU
-+ *
-+ * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
-+ */
-+
-+#include <linux/linkage.h>
-+#include <asm/asm.h>
-+#include <asm/loongarch.h>
-+#include <asm/stackframe.h>
-+
-+.align 12
-+ENTRY(exception_entry)
-+	BACKUP_T0T1
-+	SAVE_ALL
-+	move		a0, sp
-+	la.pcrel	t0, do_exceptions
-+	jirl		ra, t0, 0
-+	RESTORE_ALL_AND_RET
-+END(exception_entry)
-diff --git a/arch/loongarch/include/asm/stackframe.h b/arch/loongarch/include/asm/stackframe.h
-new file mode 100644
-index 000000000000..932150afdfaf
---- /dev/null
-+++ b/arch/loongarch/include/asm/stackframe.h
-@@ -0,0 +1,175 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (C) 2020-2022 Loongson Technology Corporation Limited
-+ * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
-+ */
-+#ifndef _ASM_STACKFRAME_H
-+#define _ASM_STACKFRAME_H
-+
-+#include <asm/addrspace.h>
-+#include <asm/asm.h>
-+#include <generated/asm-offsets.h>
-+#include <asm/loongarch.h>
-+
-+/* Make the addition of cfi info a little easier. */
-+	.macro cfi_rel_offset reg offset=0 docfi=0
-+	.if \docfi
-+	.cfi_rel_offset \reg, \offset
-+	.endif
-+	.endm
-+
-+	.macro cfi_st reg offset=0 docfi=0
-+	cfi_rel_offset \reg, \offset, \docfi
-+	LONG_S	\reg, sp, \offset
-+	.endm
-+
-+	.macro cfi_restore reg offset=0 docfi=0
-+	.if \docfi
-+	.cfi_restore \reg
-+	.endif
-+	.endm
-+
-+	.macro cfi_ld reg offset=0 docfi=0
-+	LONG_L	\reg, sp, \offset
-+	cfi_restore \reg \offset \docfi
-+	.endm
-+
-+	.macro BACKUP_T0T1
-+	csrwr	t0, EXCEPTION_KS0
-+	csrwr	t1, EXCEPTION_KS1
-+	.endm
-+
-+	.macro RELOAD_T0T1
-+	csrrd   t0, EXCEPTION_KS0
-+	csrrd   t1, EXCEPTION_KS1
-+	.endm
-+
-+	.macro	SAVE_TEMP docfi=0
-+	RELOAD_T0T1
-+	cfi_st	t0, PT_R12, \docfi
-+	cfi_st	t1, PT_R13, \docfi
-+	cfi_st	t2, PT_R14, \docfi
-+	cfi_st	t3, PT_R15, \docfi
-+	cfi_st	t4, PT_R16, \docfi
-+	cfi_st	t5, PT_R17, \docfi
-+	cfi_st	t6, PT_R18, \docfi
-+	cfi_st	t7, PT_R19, \docfi
-+	cfi_st	t8, PT_R20, \docfi
-+	.endm
-+
-+	.macro	SAVE_STATIC docfi=0
-+	cfi_st	s0, PT_R23, \docfi
-+	cfi_st	s1, PT_R24, \docfi
-+	cfi_st	s2, PT_R25, \docfi
-+	cfi_st	s3, PT_R26, \docfi
-+	cfi_st	s4, PT_R27, \docfi
-+	cfi_st	s5, PT_R28, \docfi
-+	cfi_st	s6, PT_R29, \docfi
-+	cfi_st	s7, PT_R30, \docfi
-+	cfi_st	s8, PT_R31, \docfi
-+	.endm
-+
-+	.macro	SAVE_SOME docfi=0
-+	PTR_ADDI sp, sp, -PT_SIZE
-+	.if \docfi
-+	.cfi_def_cfa sp, 0
-+	.endif
-+	cfi_st	t0, PT_R3, \docfi
-+	cfi_rel_offset  sp, PT_R3, \docfi
-+	LONG_S	zero, sp, PT_R0
-+	csrrd	t0, LOONGARCH_CSR_PRMD
-+	LONG_S	t0, sp, PT_PRMD
-+	csrrd	t0, LOONGARCH_CSR_CRMD
-+	LONG_S	t0, sp, PT_CRMD
-+	csrrd	t0, LOONGARCH_CSR_EUEN
-+	LONG_S  t0, sp, PT_EUEN
-+	csrrd	t0, LOONGARCH_CSR_ECFG
-+	LONG_S	t0, sp, PT_ECFG
-+	csrrd	t0, LOONGARCH_CSR_ESTAT
-+	PTR_S	t0, sp, PT_ESTAT
-+	cfi_st	ra, PT_R1, \docfi
-+	cfi_st	a0, PT_R4, \docfi
-+	cfi_st	a1, PT_R5, \docfi
-+	cfi_st	a2, PT_R6, \docfi
-+	cfi_st	a3, PT_R7, \docfi
-+	cfi_st	a4, PT_R8, \docfi
-+	cfi_st	a5, PT_R9, \docfi
-+	cfi_st	a6, PT_R10, \docfi
-+	cfi_st	a7, PT_R11, \docfi
-+	csrrd	ra, LOONGARCH_CSR_ERA
-+	LONG_S	ra, sp, PT_ERA
-+	.if \docfi
-+	.cfi_rel_offset ra, PT_ERA
-+	.endif
-+	cfi_st	tp, PT_R2, \docfi
-+	cfi_st	fp, PT_R22, \docfi
-+	/* Save U0 for sanity */
-+	cfi_st  u0, PT_R21, \docfi
-+	.endm
-+
-+	.macro	SAVE_ALL docfi=0
-+	SAVE_SOME \docfi
-+	SAVE_TEMP \docfi
-+	SAVE_STATIC \docfi
-+	.endm
-+
-+	.macro	RESTORE_TEMP docfi=0
-+	cfi_ld	t0, PT_R12, \docfi
-+	cfi_ld	t1, PT_R13, \docfi
-+	cfi_ld	t2, PT_R14, \docfi
-+	cfi_ld	t3, PT_R15, \docfi
-+	cfi_ld	t4, PT_R16, \docfi
-+	cfi_ld	t5, PT_R17, \docfi
-+	cfi_ld	t6, PT_R18, \docfi
-+	cfi_ld	t7, PT_R19, \docfi
-+	cfi_ld	t8, PT_R20, \docfi
-+	.endm
-+
-+	.macro	RESTORE_STATIC docfi=0
-+	cfi_ld	s0, PT_R23, \docfi
-+	cfi_ld	s1, PT_R24, \docfi
-+	cfi_ld	s2, PT_R25, \docfi
-+	cfi_ld	s3, PT_R26, \docfi
-+	cfi_ld	s4, PT_R27, \docfi
-+	cfi_ld	s5, PT_R28, \docfi
-+	cfi_ld	s6, PT_R29, \docfi
-+	cfi_ld	s7, PT_R30, \docfi
-+	cfi_ld	s8, PT_R31, \docfi
-+	.endm
-+
-+	.macro	RESTORE_SOME docfi=0
-+	LONG_L	a0, sp, PT_PRMD
-+	andi    a0, a0, 0x3	/* extract pplv bit */
-+	beqz    a0, 8f
-+	cfi_ld  u0, PT_R21, \docfi
-+8:
-+	LONG_L	a0, sp, PT_ERA
-+	csrwr	a0, LOONGARCH_CSR_ERA
-+	LONG_L	a0, sp, PT_PRMD
-+	csrwr	a0, LOONGARCH_CSR_PRMD
-+	cfi_ld	ra, PT_R1, \docfi
-+	cfi_ld	a0, PT_R4, \docfi
-+	cfi_ld	a1, PT_R5, \docfi
-+	cfi_ld	a2, PT_R6, \docfi
-+	cfi_ld	a3, PT_R7, \docfi
-+	cfi_ld	a4, PT_R8, \docfi
-+	cfi_ld	a5, PT_R9, \docfi
-+	cfi_ld	a6, PT_R10, \docfi
-+	cfi_ld	a7, PT_R11, \docfi
-+	cfi_ld	tp, PT_R2, \docfi
-+	cfi_ld	fp, PT_R22, \docfi
-+	.endm
-+
-+	.macro	RESTORE_SP_AND_RET docfi=0
-+	cfi_ld	sp, PT_R3, \docfi
-+	ertn
-+	.endm
-+
-+	.macro	RESTORE_ALL_AND_RET docfi=0
-+	RESTORE_STATIC \docfi
-+	RESTORE_TEMP \docfi
-+	RESTORE_SOME \docfi
-+	RESTORE_SP_AND_RET \docfi
-+	.endm
-+
-+#endif /* _ASM_STACKFRAME_H */
-diff --git a/arch/loongarch/lib/interrupts.c b/arch/loongarch/lib/interrupts.c
-new file mode 100644
-index 000000000000..886c71034c3c
---- /dev/null
-+++ b/arch/loongarch/lib/interrupts.c
-@@ -0,0 +1,189 @@
++++ b/arch/loongarch/lib/bootm.c
+@@ -0,0 +1,177 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
 + */
 +
-+#include <linux/compat.h>
-+#include <linux/bitfield.h>
-+#include <linux/linkage.h>
++#include <bootstage.h>
++#include <bootm.h>
++#include <command.h>
++#include <dm.h>
++#include <efi.h>
++#include <efi_api.h>
++#include <fdt_support.h>
 +#include <hang.h>
-+#include <interrupt.h>
-+#include <irq_func.h>
++#include <log.h>
++#include <linux/sizes.h>
++#include <memalign.h>
 +#include <asm/global_data.h>
-+#include <asm/ptrace.h>
-+#include <asm/system.h>
-+#include <asm/regdef.h>
-+#include <asm/loongarch.h>
++#include <dm/root.h>
++#include <image.h>
++#include <asm/byteorder.h>
++#include <dm/device.h>
++#include <dm/root.h>
++#include <u-boot/zlib.h>
 +
 +DECLARE_GLOBAL_DATA_PTR;
 +
-+static struct resume_data *resume;
++static const efi_guid_t efi_guid_fdt = EFI_FDT_GUID;
 +
-+void set_resume(struct resume_data *data)
++__weak void board_quiesce_devices(void)
 +{
-+	resume = data;
 +}
 +
-+static void show_regs(struct pt_regs *regs)
++/**
++ * announce_and_cleanup() - Print message and prepare for kernel boot
++ *
++ * @fake: non-zero to do everything except actually boot
++ */
++static void announce_and_cleanup(int fake)
 +{
-+#if IS_ENABLED(CONFIG_SHOW_REGS)
-+	const int field = 2 * sizeof(unsigned long);
-+
-+#define GPR_FIELD(x) field, regs->regs[x]
-+	printf("pc %0*lx ra %0*lx tp %0*lx sp %0*lx\n",
-+	       field, regs->csr_era, GPR_FIELD(1), GPR_FIELD(2), GPR_FIELD(3));
-+	printf("a0 %0*lx a1 %0*lx a2 %0*lx a3 %0*lx\n",
-+	       GPR_FIELD(4), GPR_FIELD(5), GPR_FIELD(6), GPR_FIELD(7));
-+	printf("a4 %0*lx a5 %0*lx a6 %0*lx a7 %0*lx\n",
-+	       GPR_FIELD(8), GPR_FIELD(9), GPR_FIELD(10), GPR_FIELD(11));
-+	printf("t0 %0*lx t1 %0*lx t2 %0*lx t3 %0*lx\n",
-+	       GPR_FIELD(12), GPR_FIELD(13), GPR_FIELD(14), GPR_FIELD(15));
-+	printf("t4 %0*lx t5 %0*lx t6 %0*lx t7 %0*lx\n",
-+	       GPR_FIELD(16), GPR_FIELD(17), GPR_FIELD(18), GPR_FIELD(19));
-+	printf("t8 %0*lx u0 %0*lx s9 %0*lx s0 %0*lx\n",
-+	       GPR_FIELD(20), GPR_FIELD(21), GPR_FIELD(22), GPR_FIELD(23));
-+	printf("s1 %0*lx s2 %0*lx s3 %0*lx s4 %0*lx\n",
-+	       GPR_FIELD(24), GPR_FIELD(25), GPR_FIELD(26), GPR_FIELD(27));
-+	printf("s5 %0*lx s6 %0*lx s7 %0*lx s8 %0*lx\n",
-+	       GPR_FIELD(28), GPR_FIELD(29), GPR_FIELD(30), GPR_FIELD(31));
++	printf("\nStarting kernel ...%s\n\n", fake ?
++		"(fake run for tracing)" : "");
++	bootstage_mark_name(BOOTSTAGE_ID_BOOTM_HANDOFF, "start_kernel");
++#if CONFIG_IS_ENABLED(BOOTSTAGE_FDT)
++	bootstage_fdt_add_report();
 +#endif
-+}
++#if CONFIG_IS_ENABLED(BOOTSTAGE_REPORT)
++	bootstage_report();
++#endif
 +
-+static void __maybe_unused show_backtrace(struct pt_regs *regs)
-+{
-+	uintptr_t *fp = (uintptr_t *)regs->regs[0x16];
-+	unsigned int count = 0;
-+	ulong ra;
++#if CONFIG_IS_ENABLED(USB_DEVICE)
++	udc_disconnect();
++#endif
 +
-+	printf("\nbacktrace:\n");
++	board_quiesce_devices();
 +
 +	/*
-+	 * there are a few entry points where the s0 register is
-+	 * set to gd, so to avoid changing those, just abort if
-+	 * the value is the same.
++	 * Call remove function of all devices with a removal flag set.
++	 * This may be useful for last-stage operations, like cancelling
++	 * of DMA operation or releasing device internal buffers.
 +	 */
-+	while (fp != NULL && fp != (uintptr_t *)gd) {
-+		ra = fp[-1];
-+		printf("%3d: fp: " REG_FMT " ra: " REG_FMT,
-+		       count, (ulong)fp, ra);
++	dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL);
 +
-+		if (gd && gd->flags & GD_FLG_RELOC)
-+			printf(" - ra: " REG_FMT " reloc adjusted\n",
-+			       ra - gd->reloc_off);
-+		else
-+			printf("\n");
++	cleanup_before_linux();
++}
 +
-+		fp = (uintptr_t *)fp[-2];
-+		count++;
++/* LoongArch do expect a EFI style systab */
++static int generate_systab(struct bootm_headers *images)
++{
++	const int nr_cfgtab = 1;
++	struct bd_info *kbd = images->kbd;
++	struct efi_system_table *systab;
++	struct efi_configuration_table *cfgtab;
++	size_t table_size = sizeof(struct efi_system_table) +
++			    nr_cfgtab * sizeof(struct efi_configuration_table);
++
++	systab = memalign(SZ_64K, table_size);
++	if (!systab) {
++		log_warning("Failed to allocate memory for systab\n");
++		return -ENOMEM;
 +	}
-+}
++	memset(systab, 0, table_size);
 +
-+static const char *humanize_exc_name(unsigned int ecode, unsigned int esubcode)
-+{
-+	/*
-+	 * LoongArch users and developers are probably more familiar with
-+	 * those names found in the ISA manual, so we are going to print out
-+	 * the latter. This will require some mapping.
-+	 */
-+	switch (ecode) {
-+	case EXCCODE_RSV: return "INT";
-+	case EXCCODE_TLBL: return "PIL";
-+	case EXCCODE_TLBS: return "PIS";
-+	case EXCCODE_TLBI: return "PIF";
-+	case EXCCODE_TLBM: return "PME";
-+	case EXCCODE_TLBNR: return "PNR";
-+	case EXCCODE_TLBNX: return "PNX";
-+	case EXCCODE_TLBPE: return "PPI";
-+	case EXCCODE_ADE:
-+		switch (esubcode) {
-+		case EXSUBCODE_ADEF: return "ADEF";
-+		case EXSUBCODE_ADEM: return "ADEM";
-+		}
-+		break;
-+	case EXCCODE_ALE: return "ALE";
-+	case EXCCODE_BCE: return "BCE";
-+	case EXCCODE_SYS: return "SYS";
-+	case EXCCODE_BP: return "BRK";
-+	case EXCCODE_INE: return "INE";
-+	case EXCCODE_IPE: return "IPE";
-+	case EXCCODE_FPDIS: return "FPD";
-+	case EXCCODE_LSXDIS: return "SXD";
-+	case EXCCODE_LASXDIS: return "ASXD";
-+	case EXCCODE_FPE:
-+		switch (esubcode) {
-+		case EXCSUBCODE_FPE: return "FPE";
-+		case EXCSUBCODE_VFPE: return "VFPE";
-+		}
-+		break;
-+	case EXCCODE_WATCH:
-+		switch (esubcode) {
-+		case EXCSUBCODE_WPEF: return "WPEF";
-+		case EXCSUBCODE_WPEM: return "WPEM";
-+		}
-+		break;
-+	case EXCCODE_BTDIS: return "BTD";
-+	case EXCCODE_BTE: return "BTE";
-+	case EXCCODE_GSPR: return "GSPR";
-+	case EXCCODE_HVC: return "HVC";
-+	case EXCCODE_GCM:
-+		switch (esubcode) {
-+		case EXCSUBCODE_GCSC: return "GCSC";
-+		case EXCSUBCODE_GCHC: return "GCHC";
-+		}
-+		break;
-+	/*
-+	 * The manual did not mention the EXCCODE_SE case, but print out it
-+	 * nevertheless.
-+	 */
-+	case EXCCODE_SE: return "SE";
-+	}
++	cfgtab = (void *)systab + sizeof(struct efi_system_table);
 +
-+	return "???";
-+}
++	systab->hdr.signature = EFI_SYSTEM_TABLE_SIGNATURE;
++	systab->hdr.headersize = sizeof(struct efi_system_table);
++	systab->nr_tables = nr_cfgtab;
++	systab->tables = cfgtab;
++	systab->hdr.crc32 = crc32(0, (const unsigned char *)systab,
++				systab->hdr.headersize);
 +
-+asmlinkage void do_exceptions(struct pt_regs *regs)
-+{
-+	unsigned int ecode = FIELD_GET(CSR_ESTAT_EXC, regs->csr_estat);
-+	unsigned int esubcode = FIELD_GET(CSR_ESTAT_ESUBCODE, regs->csr_estat);
++	cfgtab[0].guid = efi_guid_fdt;
++	cfgtab[0].table = images->ft_addr;
 +
-+	printf("Unhandled exception: %s\n", humanize_exc_name(ecode, esubcode));
++	kbd->bi_boot_params = (phys_addr_t)systab;
 +
-+	printf("ERA: " REG_FMT " ra: " REG_FMT "\n",
-+	       regs->csr_era, regs->regs[1]);
-+	/* Print relocation adjustments, but only if gd is initialized */
-+	if (gd && gd->flags & GD_FLG_RELOC)
-+		printf("ERA: " REG_FMT " ra: " REG_FMT " reloc adjusted\n",
-+		       regs->csr_era - gd->reloc_off, regs->regs[1] - gd->reloc_off);
-+
-+	printf("CRMD: " REG_FMT "\n", regs->csr_crmd);
-+	if (ecode >= EXCCODE_TLBL && ecode <= EXCCODE_ALE)
-+		printf("BADV: " REG_FMT "\n", regs->csr_badvaddr);
-+
-+	printf("\n");
-+	show_regs(regs);
-+
-+	if (CONFIG_IS_ENABLED(FRAMEPOINTER))
-+		show_backtrace(regs);
-+
-+	panic("\n");
-+}
-+
-+int interrupt_init(void)
-+{
 +	return 0;
 +}
 +
-+/*
-+ * enable interrupts
-+ */
-+void enable_interrupts(void)
++static void boot_prep_linux(struct bootm_headers *images)
 +{
++	if (CONFIG_IS_ENABLED(OF_LIBFDT) && IS_ENABLED(CONFIG_LMB) && images->ft_len) {
++		debug("using: FDT\n");
++		if (image_setup_linux(images)) {
++			printf("FDT creation failed! hanging...");
++			hang();
++		}
++		if (generate_systab(images)) {
++			printf("Failed to generate EFI systab\n");
++			hang();
++		}
++	} else {
++		printf("Device tree not found or missing FDT support\n");
++		hang();
++	}
 +}
 +
-+/*
-+ * disable interrupts
-+ */
-+int disable_interrupts(void)
++static void boot_jump_linux(struct bootm_headers *images, int flag)
 +{
++	void (*kernel)(ulong efi_boot, char *argc, void *dtb);
++	int fake = (flag & BOOTM_STATE_OS_FAKE_GO);
++
++	kernel = (void (*)(ulong efi_boot, char *argc, void *dtb))images->ep;
++
++	bootstage_mark(BOOTSTAGE_ID_RUN_OS);
++
++	debug("## Transferring control to kernel (at address %08lx) ...\n",
++	      (ulong)kernel);
++
++	announce_and_cleanup(fake);
++
++	if (!fake) {
++		if (CONFIG_IS_ENABLED(OF_LIBFDT) && images->ft_len) {
++			kernel(0, NULL, (void *)images->kbd->bi_boot_params);
++		}
++	}
++}
++
++int do_bootm_linux(int flag, struct bootm_info *bmi)
++{
++	struct bootm_headers *images = bmi->images;
++
++	if (flag & BOOTM_STATE_OS_BD_T || flag & BOOTM_STATE_OS_CMDLINE)
++		return -1;
++
++	if (flag & BOOTM_STATE_OS_PREP) {
++		boot_prep_linux(images);
++		return 0;
++	}
++
++	if (flag & (BOOTM_STATE_OS_GO | BOOTM_STATE_OS_FAKE_GO)) {
++		boot_jump_linux(images, flag);
++		return 0;
++	}
++
++	boot_prep_linux(images);
++	boot_jump_linux(images, flag);
 +	return 0;
 +}
++
++int do_bootm_vxworks(int flag, struct bootm_info *bmi)
++{
++	return do_bootm_linux(flag, bmi);
++}
++
++static ulong get_sp(void)
++{
++	ulong ret;
++
++	asm("move %0, $sp" : "=r"(ret) : );
++	return ret;
++}
++
++void arch_lmb_reserve(struct lmb *lmb)
++{
++	arch_lmb_reserve_generic(lmb, get_sp(), gd->ram_top, 4096);
++}
+diff --git a/arch/loongarch/lib/image.c b/arch/loongarch/lib/image.c
+new file mode 100644
+index 000000000000..a10a35f6e90c
+--- /dev/null
++++ b/arch/loongarch/lib/image.c
+@@ -0,0 +1,66 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
++ *
++ * Based on riscv/lib/image.c
++ */
++
++#include <image.h>
++#include <mapmem.h>
++#include <errno.h>
++#include <asm/global_data.h>
++#include <linux/sizes.h>
++#include <linux/stddef.h>
++#include <asm/addrspace.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++#define LINUX_LOONGARCH_IMAGE_MAGIC	0x818223cd
++
++struct linux_image_h {
++	uint32_t	code0;			/* Executable code */
++	uint32_t	code1;			/* Executable code */
++	uint64_t	kernel_entry;	/* Kernel entry point */
++	uint64_t	image_size;		/* Effective Image size */
++	uint64_t	load_offset;	/* load offset */
++	uint64_t	res1;			/* reserved */
++	uint64_t	res2;			/* reserved */
++	uint64_t	res3;			/* reserved */
++	uint32_t	magic;			/* Magic number */
++	uint32_t	pe_header;		/* Offset to the PE header */
++};
++
++int booti_setup(ulong image, ulong *relocated_addr, ulong *size, ulong *ep,
++		bool force_reloc)
++{
++	struct linux_image_h *lhdr;
++	phys_addr_t ep_phys;
++
++	lhdr = (struct linux_image_h *)map_sysmem(image, 0);
++
++	if (lhdr->magic != LINUX_LOONGARCH_IMAGE_MAGIC) {
++		puts("Bad Linux LoongArch Image magic!\n");
++		return -EINVAL;
++	}
++
++	if (lhdr->image_size == 0) {
++		puts("Image lacks image_size field, error!\n");
++		return -EINVAL;
++	}
++
++	*size = lhdr->image_size;
++	if (force_reloc ||
++	    (gd->ram_base <= image && image < gd->ram_base + gd->ram_size)) {
++		*relocated_addr = gd->ram_base + lhdr->load_offset;
++	} else {
++		*relocated_addr = image;
++	}
++
++	/* To workaround kernel supplying DMW based virtual address */
++	ep_phys = TO_PHYS(lhdr->kernel_entry);
++	*ep = *relocated_addr + (ep_phys - lhdr->load_offset);
++
++	unmap_sysmem(lhdr);
++
++	return 0;
++}
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index b026439c7731..97a5c2a1da7f 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -328,7 +328,7 @@ config CMD_BOOTZ
+ 
+ config CMD_BOOTI
+ 	bool "booti"
+-	depends on ARM64 || RISCV || SANDBOX
++	depends on ARM64 || LOONGARCH || RISCV || SANDBOX
+ 	default y
+ 	help
+ 	  Boot an AArch64 Linux Kernel image from memory.
 
 -- 
 2.43.0
