@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F203C25B78
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 16:06:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7E5EC25B78
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 16:08:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA80688854;
-	Wed, 22 May 2024 18:06:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 359F98885B;
+	Wed, 22 May 2024 18:08:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sL+sTtao";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="WDCtdKNw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE84887F19; Wed, 22 May 2024 18:06:45 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5CE0988870; Wed, 22 May 2024 18:08:19 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4A8D88854
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 18:06:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3768287F19
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 18:08:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-51f40b5e059so7336538e87.0
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 09:06:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716394003; x=1716998803; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=D13nBv7LSY+DHtSjumEY2rg/MSTJbkrdO1Z4wHMsg/A=;
- b=sL+sTtaoC8Fs0ybXYclfuSVF6UJAo9RDgPbyqmqB7gAETsG2wFoLndRijBW9B1Vrc7
- hcIA8ikvA6PVDoOkXR8s1U8U53xZlXBd5SIeEZlYnN0Stev+SkLuFP7fdZmANdwqvF+5
- gPCCfH24sGrwtGZROGMxGleLD3GtPgrH1/RkfM/NsJwb3ABVVdtGdmVJ/fXcxr/no5sf
- KbGn+dEBHXBaQ85RJpH/pP4pbXo8XGY9egu1ffB2u1czF02QAQNIvXcfB4/KpGAEs7gx
- CYomI12r37AihbB6ILOcfW8o2+w+i4rBVdqanI4iRfM3wYSNceZvH07vLcNYyMmJfr4X
- v8kA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716394003; x=1716998803;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=D13nBv7LSY+DHtSjumEY2rg/MSTJbkrdO1Z4wHMsg/A=;
- b=D6QjFTHIX5GgGJV2cKHnf4LA8gfkRVICHCzsU+uJbfr8bsW+yV2T6b5mmmGdP0NynD
- eYePjeWdPBsK4iVh01+uUXpL+CWtKhHgGL5c6eZGiNNU+IfUX5UIvVZKhckeX7SGz5iK
- I+syv8dpL6vv0fwq9pRFjIj9GR5DLj0wQklKwyblSLoDMI72Eht/s9VEncl7+nhzAB9D
- Gnn+wW5bg0dAp0ygV0JFzxyYMbJFLimKIGzjwc0FS3K4pbiGZPgr794xFwmM5DwObwnN
- 3X7SdXDTY11CG9M0Afd/+CB/h0JOi4pFWYjW9Y2lbMZoqI0sFelaKQXakCKC7YEed5UH
- l39w==
-X-Gm-Message-State: AOJu0YyTlHey63ENRxZTyufBQYOpVYJEFhUy4EW7T/Gm71y3PBmOAFrJ
- 2Jax2bv+3M8KjzgCW6Wq5gQ7LqsS0YbhYe9wYsJ4CsXm057En2/ROCl0F4F217UIXI4XmRYYQHe
- Xi04xGTa/VrMM0q+e+Xtcwjuniy3oJvxYpFX1YA==
-X-Google-Smtp-Source: AGHT+IEeVWnrg8CCnz4mZP+g+y/2s7mjYzzuOzMyFK2oomsuNKnF+nNPHMQiWpMDA0QrJXFvh0aAnOxIutABRUsYhXg=
-X-Received: by 2002:ac2:5e22:0:b0:51a:b933:b297 with SMTP id
- 2adb3069b0e04-526bd694d3cmr1460567e87.2.1716394002879; Wed, 22 May 2024
- 09:06:42 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44MG8BNg051468;
+ Wed, 22 May 2024 11:08:11 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1716394091;
+ bh=PiPpFy6gorQoP2NELSIekxxGnhIH0WYOxM4Aou97b0E=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=WDCtdKNwizXZJPn/X7Zp3rtpDsllGCxdD+ZLNjfBxr8jWtn+5vO5Szu22UbIHx9sq
+ YU5t2QHm/gCk/peSKUJ+59unnLkIfKuuDcjs/R3fRk7wZS7XM0g/NB1DxINYOJfFSo
+ mHHizPGHM0AvrS4OSYA9lDieTyfgUozyFZruDHqw=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44MG8A46111683
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 22 May 2024 11:08:10 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 22
+ May 2024 11:08:10 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 22 May 2024 11:08:10 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44MG8Ah3005835;
+ Wed, 22 May 2024 11:08:10 -0500
+Message-ID: <cb53651f-a823-41b8-81e5-c3939bd33764@ti.com>
+Date: Wed, 22 May 2024 11:08:09 -0500
 MIME-Version: 1.0
-References: <cover.1716393035.git.jerome.forissier@linaro.org>
- <c5bfc875954340d5dffb57c6bce0b4a9a99f6051.1716393035.git.jerome.forissier@linaro.org>
-In-Reply-To: <c5bfc875954340d5dffb57c6bce0b4a9a99f6051.1716393035.git.jerome.forissier@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 22 May 2024 19:06:07 +0300
-Message-ID: <CAC_iWj+4QpvzQm5Qk07jyU-vYEsO=BC3u2pH7keBnj8Uj_j-bg@mail.gmail.com>
-Subject: Re: [PATCH 11/15] cmd: bdinfo: enable -e when CONFIG_CMD_NET_LWIP=y
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>, 
- Maxim Uvarov <muvarov@gmail.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, 
- Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Nikhil M Jain <n-jain1@ti.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] arm: dts: k3-am642-evm-u-boot: Add remoteproc-name
+ for PRU cores
+To: MD Danish Anwar <danishanwar@ti.com>, Judith Mendez <jm@ti.com>, Kamlesh
+ Gurudasani <kamlesh@ti.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>, Siddharth
+ Vadapalli <s-vadapalli@ti.com>, Simon Glass <sjg@chromium.org>, Neha Malcom
+ Francis <n-francis@ti.com>, Nishanth Menon <nm@ti.com>, Roger Quadros
+ <rogerq@kernel.org>, Vignesh Raghavendra <vigneshr@ti.com>, Tom Rini
+ <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>
+References: <20240522063652.3759497-1-danishanwar@ti.com>
+ <20240522063652.3759497-2-danishanwar@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20240522063652.3759497-2-danishanwar@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,41 +88,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 22 May 2024 at 19:04, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
->
-> Support "bdinfo -e" when lwIP is selected.
->
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+On 5/22/24 1:36 AM, MD Danish Anwar wrote:
+> Add remoteproc-name property for PRU cores.
+> 
+> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
 > ---
->  cmd/bdinfo.c | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
->
-> diff --git a/cmd/bdinfo.c b/cmd/bdinfo.c
-> index 79106caeec..690fb894bf 100644
-> --- a/cmd/bdinfo.c
-> +++ b/cmd/bdinfo.c
-> @@ -152,7 +152,7 @@ static int bdinfo_print_all(struct bd_info *bd)
->         bdinfo_print_num_l("relocaddr", gd->relocaddr);
->         bdinfo_print_num_l("reloc off", gd->reloc_off);
->         printf("%-12s= %u-bit\n", "Build", (uint)sizeof(void *) * 8);
-> -       if (IS_ENABLED(CONFIG_CMD_NET))
-> +       if (IS_ENABLED(CONFIG_CMD_NET) || IS_ENABLED(CONFIG_CMD_NET_LWIP))
->                 print_eth();
->         bdinfo_print_num_l("fdt_blob", (ulong)map_to_sysmem(gd->fdt_blob));
->         bdinfo_print_num_l("new_fdt", (ulong)map_to_sysmem(gd->new_fdt));
-> @@ -198,7 +198,8 @@ int do_bdinfo(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
->                 case 'a':
->                         return bdinfo_print_all(bd);
->                 case 'e':
-> -                       if (!IS_ENABLED(CONFIG_CMD_NET))
-> +                       if (!IS_ENABLED(CONFIG_CMD_NET) &&
-> +                           !IS_ENABLED(CONFIG_CMD_NET_LWIP))
->                                 return CMD_RET_USAGE;
->                         print_eth();
->                         return CMD_RET_SUCCESS;
-> --
-> 2.40.1
->
+>   arch/arm/dts/k3-am642-evm-u-boot.dtsi | 44 +++++++++++++++++++++++++++
+>   1 file changed, 44 insertions(+)
+> 
+> diff --git a/arch/arm/dts/k3-am642-evm-u-boot.dtsi b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
+> index 705b3baa81..25ddace74e 100644
+> --- a/arch/arm/dts/k3-am642-evm-u-boot.dtsi
+> +++ b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
+> @@ -11,6 +11,50 @@
+>   	};
+>   };
+>   
+> +&pru0_0 {
+> +	remoteproc-name = "pru0_0";
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Why do we need all these? Looks like we fallback to using `dev->name` if
+these are not set, does that not work for us here?
+
+Andrew
+
+> +};
+> +
+> +&rtu0_0 {
+> +	remoteproc-name = "rtu0_0";
+> +};
+> +
+> +&tx_pru0_0 {
+> +	remoteproc-name = "tx_pru0_0";
+> +};
+> +
+> +&pru0_1 {
+> +	remoteproc-name = "pru0_1";
+> +};
+> +
+> +&rtu0_1 {
+> +	remoteproc-name = "rtu0_1";
+> +};
+> +
+> +&tx_pru0_1 {
+> +	remoteproc-name = "tx_pru0_1";
+> +};
+> +
+> +&pru1_0 {
+> +	remoteproc-name = "pru1_0";
+> +};
+> +
+> +&rtu1_0 {
+> +	remoteproc-name = "rtu1_0";
+> +};
+> +
+> +&tx_pru1_0 {
+> +	remoteproc-name = "tx_pru1_0";
+> +};
+> +
+> +&pru1_1 {
+> +	remoteproc-name = "pru1_1";
+> +};
+> +
+> +&rtu1_1 {
+> +	remoteproc-name = "rtu1_1";
+> +};
+> +
+>   &main_timer0 {
+>   	clock-frequency = <200000000>;
+>   };
