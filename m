@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55828C25B7A
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 09:51:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF5A7C25B77
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 09:52:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8C9188473;
-	Wed, 22 May 2024 11:51:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4DA8688472;
+	Wed, 22 May 2024 11:52:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="DT3Q4HmG";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tvFim1SG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 263B688491; Wed, 22 May 2024 11:51:10 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 22F7F88473; Wed, 22 May 2024 11:52:29 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB50B88472
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 11:51:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2369C88464
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 11:52:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44M9oxn8058748;
- Wed, 22 May 2024 04:50:59 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44M9qK2h073670;
+ Wed, 22 May 2024 04:52:20 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1716371459;
- bh=qGSUgrbwEDpcU8OtY205rZeNKSEptLftef/GImeHcGg=;
+ s=ti-com-17Q1; t=1716371540;
+ bh=lkNTeP1NXGZz+A+HQMWr+0x0C7RB7/ZOsQ2ydrZ1UhM=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=DT3Q4HmGFtNnHhCRmSPQPiD1mUgRTCzJwtzoi/lWKxAWHNWCZJ6+J78CzoBmP/0vN
- LdyZ1v9jw0TSsIX8zVt6cK+a7Eol6nFYxzdSL6QEziOw3A8g8o7pUps1mShYAmBw+0
- CjL+sx33cBtjtGYpFXLESdJKCR3O6oTWUbOExxVs=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44M9oxfs057132
+ b=tvFim1SGweiGo5JF4rLWK+BWxuOlxT4Y4FXmPyA6H3wCLa+nJHl/J1spcWTmV3k//
+ 2staBnJVQU9UUGV4UCpbSEM0aY/f6Ib5agDtHb1QrKtzewvvC844NvtJFGbKwISDKH
+ Ts6EZRoL+G98GKDk1hT8DeuDRSBCbMATC2oi1qiM=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44M9qKXj003494
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 22 May 2024 04:50:59 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 22 May 2024 04:52:20 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 22
- May 2024 04:50:59 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ May 2024 04:52:19 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 22 May 2024 04:50:59 -0500
+ Frontend Transport; Wed, 22 May 2024 04:52:19 -0500
 Received: from localhost (dhruva.dhcp.ti.com [172.24.227.68])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44M9owWG046757;
- Wed, 22 May 2024 04:50:59 -0500
-Date: Wed, 22 May 2024 15:20:58 +0530
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44M9qJeD044076;
+ Wed, 22 May 2024 04:52:19 -0500
+Date: Wed, 22 May 2024 15:22:18 +0530
 From: Dhruva Gole <d-gole@ti.com>
 To: Wadim Egorov <w.egorov@phytec.de>
 CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>, <nm@ti.com>,
@@ -58,14 +58,15 @@ CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>, <nm@ti.com>,
  <m-chawdhry@ti.com>, <n-jain1@ti.com>, <afd@ti.com>,
  <joao.goncalves@toradex.com>, <michael@amarulasolutions.com>,
  <festevam@gmail.com>, <sjg@chromium.org>
-Subject: Re: [PATCH v2 1/5] board: phytec: Make AM6 SoM detection depend on I2C
-Message-ID: <20240522095058.uwgiafx4gn7dm42i@dhruva>
+Subject: Re: [PATCH v2 2/5] board: phytec: Fix function definitions in AM6x
+ SOM detection
+Message-ID: <20240522095218.bwp22lgrdwgv5dbr@dhruva>
 References: <20240522075505.3339347-1-w.egorov@phytec.de>
- <20240522075505.3339347-2-w.egorov@phytec.de>
+ <20240522075505.3339347-3-w.egorov@phytec.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20240522075505.3339347-2-w.egorov@phytec.de>
+In-Reply-To: <20240522075505.3339347-3-w.egorov@phytec.de>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,18 +84,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-On May 22, 2024 at 09:55:01 +0200, Wadim Egorov wrote:
-> SoM detection is using I2C driver model functions.
-> Let's depend on I2C.
+On May 22, 2024 at 09:55:02 +0200, Wadim Egorov wrote:
+> Functions are declared as phytec_am6* and not phytec_am62*.
+> Update the definitions to match the declarations.
+> 
+> Fixes: 9d152c23279c ("board: phytec: Add SOM detection for AM6x")
 > 
 > Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
 > Tested-by: John Ma <jma@phytec.com>
 > ---
+>  board/phytec/common/am6_som_detection.c | 18 +++++++++---------
+>  1 file changed, 9 insertions(+), 9 deletions(-)
 
 Reviewed-by: Dhruva Gole <d-gole@ti.com>
 
+[...]
 
 -- 
 Best regards,
