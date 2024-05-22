@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B2EDC25B77
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 11:38:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C828C25B7A
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 11:38:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3EB8D8883B;
-	Wed, 22 May 2024 13:37:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9CD4388845;
+	Wed, 22 May 2024 13:37:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Nv2GqNAu";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xTwC3AUI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2AB3588837; Wed, 22 May 2024 13:37:41 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 9C67F88845; Wed, 22 May 2024 13:37:42 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F0058882F
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 13:37:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 123BE88831
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 13:37:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-choudhary@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44MBbXIM083643;
- Wed, 22 May 2024 06:37:33 -0500
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44MBbYhQ101456;
+ Wed, 22 May 2024 06:37:34 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1716377853;
- bh=9Y8GZv+TG1KU9dM2DEWdqG6znJLDGiV9V/sXf8HJPGQ=;
+ s=ti-com-17Q1; t=1716377854;
+ bh=otdTBcoRtCf34svglGda5Bqj/C4r182/VDZ6a7KyUac=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=Nv2GqNAuQR7R4n0MIISJhkqCtOD9U/QOV3Fz0VEiEn1OF39YqwVBc6MNTr/A/eaCf
- KdcYBU6wLQCR4UdBslOOTvHt/k15pcMVLvhaNcUyArpexfm3kyLG4YUT6y5eoMlq0k
- R6tu+KHSKdAGSiGL8kwrU0uOwzMCsyfl5jWVWcr0=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44MBbXGt007772
+ b=xTwC3AUIevbjU1rEaYGRkyJSnrjzvVvTxuG5O9DDzfs+kSV/kw/k2PwfwWSyNO8f5
+ JqCE7JfGoi9Zx/+3n1DoyYYn4qRGDR+bzZGImcnqKFqN2CWA/0kMdfR9d5PwXqMHT7
+ AgGOTvHPUqJwgK38CTNDLPmJ6/ZQWGLSbmA/uSgk=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44MBbYNE055234
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 22 May 2024 06:37:33 -0500
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 22 May 2024 06:37:34 -0500
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 22
- May 2024 06:37:33 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ May 2024 06:37:34 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 22 May 2024 06:37:32 -0500
+ Frontend Transport; Wed, 22 May 2024 06:37:34 -0500
 Received: from localhost (jayesh-hp-probook-440-g8-notebook-pc.dhcp.ti.com
  [172.24.227.6])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44MBbWPC078469;
- Wed, 22 May 2024 06:37:32 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44MBbX9i078484;
+ Wed, 22 May 2024 06:37:34 -0500
 From: Jayesh Choudhary <j-choudhary@ti.com>
 To: <trini@konsulko.com>, <u-boot@lists.denx.de>, <u-kumar1@ti.com>,
  <j-choudhary@ti.com>
@@ -59,9 +59,9 @@ CC: <a-bhatia1@ti.com>, <nm@ti.com>, <n-francis@ti.com>,
  <d.haller@phytec.de>, <hnagalla@ti.com>, <bb@ti.com>,
  <seanga2@gmail.com>, <sjg@chromium.org>, <clamor95@gmail.com>,
  <martyn.welch@collabora.com>, <m-chawdhry@ti.com>, <a-limaye@ti.com>
-Subject: [PATCH 3/7] arm: mach-k3: j721s2: Enable QoS for DSS
-Date: Wed, 22 May 2024 17:07:22 +0530
-Message-ID: <20240522113726.302908-4-j-choudhary@ti.com>
+Subject: [PATCH 4/7] arm: mach-k3: j784s4: Enable QoS for DSS
+Date: Wed, 22 May 2024 17:07:23 +0530
+Message-ID: <20240522113726.302908-5-j-choudhary@ti.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240522113726.302908-1-j-choudhary@ti.com>
 References: <20240522113726.302908-1-j-choudhary@ti.com>
@@ -98,25 +98,25 @@ registers. (Section 10.2.9.2.10 "Quality of Service" in TRM[0])
 Section 3.2.1 "Quality of Service (QoS)" in the TRM[0] provide more
 details.
 
-[0]: https://www.ti.com/lit/zip/spruj28
+[0]: https://www.ti.com/lit/zip/spruj52
 
 Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
 ---
- arch/arm/mach-k3/j721s2/j721s2_init.c         |  30 +++++
- arch/arm/mach-k3/r5/j721s2/Makefile           |   1 +
- arch/arm/mach-k3/r5/j721s2/j721s2_qos.h       |  79 +++++++++++++
- arch/arm/mach-k3/r5/j721s2/j721s2_qos_uboot.c | 109 ++++++++++++++++++
- 4 files changed, 219 insertions(+)
- create mode 100644 arch/arm/mach-k3/r5/j721s2/j721s2_qos.h
- create mode 100644 arch/arm/mach-k3/r5/j721s2/j721s2_qos_uboot.c
+ arch/arm/mach-k3/j784s4/j784s4_init.c         |  30 +++++
+ arch/arm/mach-k3/r5/j784s4/Makefile           |   1 +
+ arch/arm/mach-k3/r5/j784s4/j784s4_qos.h       |  83 +++++++++++++
+ arch/arm/mach-k3/r5/j784s4/j784s4_qos_uboot.c | 109 ++++++++++++++++++
+ 4 files changed, 223 insertions(+)
+ create mode 100644 arch/arm/mach-k3/r5/j784s4/j784s4_qos.h
+ create mode 100644 arch/arm/mach-k3/r5/j784s4/j784s4_qos_uboot.c
 
-diff --git a/arch/arm/mach-k3/j721s2/j721s2_init.c b/arch/arm/mach-k3/j721s2/j721s2_init.c
-index fe9766e9b4..05453fcad4 100644
---- a/arch/arm/mach-k3/j721s2/j721s2_init.c
-+++ b/arch/arm/mach-k3/j721s2/j721s2_init.c
-@@ -22,6 +22,24 @@
- #include "../sysfw-loader.h"
- #include "../common.h"
+diff --git a/arch/arm/mach-k3/j784s4/j784s4_init.c b/arch/arm/mach-k3/j784s4/j784s4_init.c
+index 1ce13e0f49..07b5d7d750 100644
+--- a/arch/arm/mach-k3/j784s4/j784s4_init.c
++++ b/arch/arm/mach-k3/j784s4/j784s4_init.c
+@@ -23,6 +23,24 @@
+ 
+ #define J784S4_MAX_DDR_CONTROLLERS	4
  
 +/* NAVSS North Bridge (NB) */
 +#define NAVSS0_NBSS_NB0_CFG_MMRS		0x03702000
@@ -136,11 +136,11 @@ index fe9766e9b4..05453fcad4 100644
 +#define NB_THREADMAP_BIT1				BIT(1)
 +#define NB_THREADMAP_BIT2				BIT(2)
 +
- struct fwl_data cbass_hc_cfg0_fwls[] = {
- 	{ "PCIE0_CFG", 2577, 7 },
- 	{ "EMMC8SS0_CFG", 2579, 4 },
-@@ -123,6 +141,13 @@ void k3_mmc_restart_clock(void)
- 	}
+ struct fwl_data infra_cbass0_fwls[] = {
+ 	{ "PSC0", 5, 1 },
+ 	{ "PLL_CTRL0", 6, 1 },
+@@ -94,6 +112,13 @@ static void ctrl_mmr_unlock(void)
+ 	mmr_unlock(CTRL_MMR0_BASE, 7);
  }
  
 +/* Setup North Bridge registers to map ORDERID 10-15 to RT traffic */
@@ -153,9 +153,9 @@ index fe9766e9b4..05453fcad4 100644
  /*
   * This uninitialized global variable would normal end up in the .bss section,
   * but the .bss is cleared between writing and reading this variable, so move
-@@ -295,6 +320,11 @@ void board_init_f(ulong dummy)
- 	do_dt_magic();
- #endif
+@@ -210,6 +235,11 @@ void board_init_f(ulong dummy)
+ {
+ 	k3_spl_init();
  	k3_mem_init();
 +
 +	if (IS_ENABLED(CONFIG_CPU_V7R))
@@ -163,23 +163,23 @@ index fe9766e9b4..05453fcad4 100644
 +
 +	setup_qos();
  }
- #endif
  
-diff --git a/arch/arm/mach-k3/r5/j721s2/Makefile b/arch/arm/mach-k3/r5/j721s2/Makefile
-index 8588c5e4c3..89c0284b56 100644
---- a/arch/arm/mach-k3/r5/j721s2/Makefile
-+++ b/arch/arm/mach-k3/r5/j721s2/Makefile
-@@ -3,3 +3,4 @@
- # Copyright (C) 2021 Texas Instruments Incorporated - https://www.ti.com/
+ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+diff --git a/arch/arm/mach-k3/r5/j784s4/Makefile b/arch/arm/mach-k3/r5/j784s4/Makefile
+index 9ce88305f5..0fd6cabd3f 100644
+--- a/arch/arm/mach-k3/r5/j784s4/Makefile
++++ b/arch/arm/mach-k3/r5/j784s4/Makefile
+@@ -5,3 +5,4 @@
+ 
  obj-y += clk-data.o
  obj-y += dev-data.o
-+obj-y += j721s2_qos_uboot.o
-diff --git a/arch/arm/mach-k3/r5/j721s2/j721s2_qos.h b/arch/arm/mach-k3/r5/j721s2/j721s2_qos.h
++obj-y += j784s4_qos_uboot.o
+diff --git a/arch/arm/mach-k3/r5/j784s4/j784s4_qos.h b/arch/arm/mach-k3/r5/j784s4/j784s4_qos.h
 new file mode 100644
-index 0000000000..ab3e4773a4
+index 0000000000..5851f889fe
 --- /dev/null
-+++ b/arch/arm/mach-k3/r5/j721s2/j721s2_qos.h
-@@ -0,0 +1,79 @@
++++ b/arch/arm/mach-k3/r5/j784s4/j784s4_qos.h
+@@ -0,0 +1,83 @@
 +/* SPDX-License-Identifier: GPL-2.0+ */
 +/*
 + * Keystone3 Quality of service endpoint definitions
@@ -218,6 +218,10 @@ index 0000000000..ab3e4773a4
 +#define SA2_UL_MAIN_0_CTXCACH_EXT_DMA	0x45D9BC00
 +#define VUSR_DUAL_MAIN_0_V0_M	0x45D9C000
 +#define VUSR_DUAL_MAIN_0_V1_M	0x45D9C400
++#define PCIE_G3X4_128_MAIN_2_PCIE_MST_RD	0x45D9CC00
++#define PCIE_G3X4_128_MAIN_3_PCIE_MST_WR	0x45D9D400
++#define PCIE_G3X4_128_MAIN_2_PCIE_MST_WR	0x45D9D800
++#define PCIE_G3X4_128_MAIN_3_PCIE_MST_RD	0x45D9DC00
 +#define DEBUGSS_K3_WRAP_CV0_MAIN_0_VBUSMR	0x45DA0000
 +#define DEBUGSS_K3_WRAP_CV0_MAIN_0_VBUSMW	0x45DA0400
 +#define PULSAR_SL_MAIN_1_CPU0_RMST	0x45DA8000
@@ -259,20 +263,20 @@ index 0000000000..ab3e4773a4
 +#define PULSAR_SL_MAIN_2_PBDG_WMST0	0x45DCB400
 +#define PULSAR_SL_MAIN_2_PBDG_RMST1	0x45DCB800
 +#define PULSAR_SL_MAIN_2_PBDG_WMST1	0x45DCBC00
-diff --git a/arch/arm/mach-k3/r5/j721s2/j721s2_qos_uboot.c b/arch/arm/mach-k3/r5/j721s2/j721s2_qos_uboot.c
+diff --git a/arch/arm/mach-k3/r5/j784s4/j784s4_qos_uboot.c b/arch/arm/mach-k3/r5/j784s4/j784s4_qos_uboot.c
 new file mode 100644
-index 0000000000..e8ad87bdac
+index 0000000000..2713741733
 --- /dev/null
-+++ b/arch/arm/mach-k3/r5/j721s2/j721s2_qos_uboot.c
++++ b/arch/arm/mach-k3/r5/j784s4/j784s4_qos_uboot.c
 @@ -0,0 +1,109 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * j721s2 Quality of Service (QoS) Configuration Data
++ * j784s4 Quality of Service (QoS) Configuration Data
 + * Auto generated from K3 Resource Partitioning tool
 + */
 +
 +#include <asm/arch/k3-qos.h>
-+#include "j721s2_qos.h"
++#include "j784s4_qos.h"
 +
 +struct k3_qos_data qos_data[] = {
 +	/* DSS_PIPE_VID1 - 2 endpoints, 2 channels */
