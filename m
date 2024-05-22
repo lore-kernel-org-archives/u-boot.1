@@ -4,129 +4,182 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CF69C25B7A
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 13:15:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20CCFC25B7A
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 13:26:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6CB4287FC7;
-	Wed, 22 May 2024 15:15:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 81390882A9;
+	Wed, 22 May 2024 15:26:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="0qa/q5av";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="Mocb+jln";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C06E882DA; Wed, 22 May 2024 15:15:30 +0200 (CEST)
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2414::600])
+ id 63366882A9; Wed, 22 May 2024 15:26:03 +0200 (CEST)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06F1387FBC
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 15:15:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F229B87FC7
+ for <U-Boot@lists.denx.de>; Wed, 22 May 2024 15:25:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=love.kumar@amd.com
+ spf=pass smtp.mailfrom=kalen.brunham@intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1716384357; x=1747920357;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=BSZLrHJa+SyqesaEfeD0AomFbKMAD4HibzMPWKsEyas=;
+ b=Mocb+jlnEa9JQAUr+KB0t8FKTHmfrozBFJiK36jOW4UHEd3seBe2uqLI
+ xhfmp5RCcSHz+L5x54/1nC9D0XDym4ruXX9Qtkb9F3uTQ1JGck61wu5SB
+ PbIx1SaDzZ/v7uDYL2vaqWCY0Wm/QSjImzQlJZ8jS1cxYww83KXNXjJlU
+ a2zRDT+PkTws6fp5k65mwXPonbM3+ePXDAoTvEUvvlOxvCpnaY6DWfb44
+ PR6Ipc7EDPh9lZAKKiaz6NtkXbeihPXlIKQ3Mc32ykI9tSI2BDyHa6d5k
+ f54k8sfR3+2w6M7/3aiaakISKVeXh/6v6N1lgEpsID/NQrIFFDjihXa1S Q==;
+X-CSE-ConnectionGUID: SSund64rQ2yvh/YduxQpZg==
+X-CSE-MsgGUID: zlSmzfh5QHGmUZMmToHAkg==
+X-IronPort-AV: E=McAfee;i="6600,9927,11079"; a="38018976"
+X-IronPort-AV: E=Sophos;i="6.08,179,1712646000"; d="scan'208";a="38018976"
+Received: from fmviesa001.fm.intel.com ([10.60.135.141])
+ by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 22 May 2024 06:25:55 -0700
+X-CSE-ConnectionGUID: RRxm2Z6DSvWPcdx63Q9plA==
+X-CSE-MsgGUID: dwbE9ilQQ2eDYGlhWLgmKQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.08,179,1712646000"; d="scan'208";a="64515805"
+Received: from orsmsx601.amr.corp.intel.com ([10.22.229.14])
+ by fmviesa001.fm.intel.com with ESMTP/TLS/AES256-GCM-SHA384;
+ 22 May 2024 06:25:55 -0700
+Received: from orsmsx602.amr.corp.intel.com (10.22.229.15) by
+ ORSMSX601.amr.corp.intel.com (10.22.229.14) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Wed, 22 May 2024 06:25:54 -0700
+Received: from ORSEDG601.ED.cps.intel.com (10.7.248.6) by
+ orsmsx602.amr.corp.intel.com (10.22.229.15) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39 via Frontend Transport; Wed, 22 May 2024 06:25:54 -0700
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (104.47.55.100)
+ by edgegateway.intel.com (134.134.137.102) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.39; Wed, 22 May 2024 06:25:53 -0700
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=KsUsD4n0/v1s6/3q5yImQhL/CdtTDHvYUJdVtHE2cSAfun83YTzbPbPlFem7wR1KDH5Fx/RJZpajonXV5J1rZieiVGwTheYjMyFAh+U/uq6WYYRYjmsZaz4lpUyc199NRitwbI+3/mVKMWctGMVGv8rV3/xzIA+QmkiP09x3naLEy/mPxnxBAvT+HEXc+3oFwplFHxB7GRjms5WEoub35y7Q476FrXFPsNDsz1J4vsKFUV4ZK+fdkxPrIEB9yRt8s3aL0buwpXPxVexoNnl57Fw1Z4PNM4ROWJ5x9qxQH0/27C9H+ombzBQL7iTywcmTbuRSah47K2fSstHtYMh8xQ==
+ b=UsiVuQlMh3dDZBV9UfBY5j98FNlI9HMWzrEpbzIQeNyzaju+GR+1izdm1Vd1bkoZj9Q+pLHx6h/L631RN/6bBrlzoMPBRfZnK/GEBxI1qLtt5gk9/00k989iwTiKOLriu2UKWeDEZ9wXnf6/e1VaA+x1WfU4udzWcIFKCttLiFT67qNW086eHdvB+Azk45EB+d3rhOzTPiEbCMWiYzHCvA1vRj6CbvlpHobEyo6sEYOjWO2lJm/A75UzDbqxCY7ZdpR6E4TlRmqxfK5wqV/2iSYSCSe1V43iQ0MvKofOvjsH4cS0SStBNgTqlgGe7d5C9YWdMp3xX0QycC3KLWR2JQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+UPdacQQYvuFa/Gujypv3fjUYAo+WwL5MAp0sNkmS1A=;
- b=dwyCh8xm6yemQ6hvYAzAXKKReDqYSOxEyRVXrEVAdYu0eU7KrfFitloCDSemM9amQ/uau34kmDAOOOO5PL0bZGrQkY1yMfqQGanbdvqz/0eTOAdvKB/0K517lSqEBXGLg03SG4lFgkzFuWvPAqurEGQEgs49x2JClmRQNrGaSu8GLWlT6LJe7iNcw5ffdr+c4IBaN75XXiI1EcM+/I6IVRhioekIUbx1VnK/E5iJp+FJFRbCCVNQsHrptihpmbXK8TJpA4juipEq40hfkL2LtyOTTwGapA70TRJ0jxmEStE9Ar80OM7X3LFYzpgt1jAP7+3hFBadgfXRTWhCcEEjww==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+UPdacQQYvuFa/Gujypv3fjUYAo+WwL5MAp0sNkmS1A=;
- b=0qa/q5avpg5Nf7sUwrBvZlsdyf1MRjml4aa7zbIqU2nLPOtwfZ66mVo5aTzlzQTL4rfChbB0PCfXk7rd78bqdMBUWYM9D4w7LvH6QrNPbi6QL+02FZIByksbb/VrQl4GjksnWQbkH9x1uu6SyvDGeHlHUwbvehzG+u9dy0eODP0=
-Received: from MW4PR03CA0142.namprd03.prod.outlook.com (2603:10b6:303:8c::27)
- by IA0PR12MB8932.namprd12.prod.outlook.com (2603:10b6:208:492::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7611.19; Wed, 22 May
- 2024 13:15:23 +0000
-Received: from MWH0EPF000971E8.namprd02.prod.outlook.com
- (2603:10b6:303:8c:cafe::ae) by MW4PR03CA0142.outlook.office365.com
- (2603:10b6:303:8c::27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7587.34 via Frontend
- Transport; Wed, 22 May 2024 13:15:23 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- MWH0EPF000971E8.mail.protection.outlook.com (10.167.243.68) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7611.14 via Frontend Transport; Wed, 22 May 2024 13:15:22 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 22 May
- 2024 08:15:21 -0500
-Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
- Transport; Wed, 22 May 2024 08:15:19 -0500
-From: Love Kumar <love.kumar@amd.com>
-To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <swarren@nvidia.com>
-CC: <michal.simek@amd.com>, <git@xilinx.com>
-Subject: [PATCH] test/py: Add support to enable check for bad pattern
-Date: Wed, 22 May 2024 18:45:13 +0530
-Message-ID: <60e9180b7eba8f97410a320d9ac69101479991d3.1716383488.git.love.kumar@amd.com>
-X-Mailer: git-send-email 2.25.1
+ bh=enpS1Q1N/FIM8NfkP1uj0kkNvC3B6y5owb6n9Z9esPM=;
+ b=HtPaKg/Ml+WMSlcMKGI1ph7AqOFK5y+FIjJHfOiGTscE6qsMUsGulZxUcmQ3IgZT53rgLswYZSKvuIJVkcUByArSRGNhykH+1HL8RvvtzHRr+lwf38nu/q1P0mbgQDS39K4oRzhSL5QsnE93UQZ9nNK6al5rZl0VydtYnFXM4XXjxxiTEi0oTURiW0/zcFDdx61OsoU3iBlgvl2HUGj9Qgo063AUsANx0PR8a5ccU/sNfQiq/BZNx4DXMgxc5O5rWVoIVlDJ/4jpVbu8iZbw+JZhNSL6ZwHl5GaYhPT++eUdiCwrQLAFDfIpjL9F/K5gymEE/TPkwUXFD9ZK+4ojyQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Received: from DM4PR11MB5296.namprd11.prod.outlook.com (2603:10b6:5:393::22)
+ by SJ2PR11MB7425.namprd11.prod.outlook.com (2603:10b6:a03:4c0::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7587.35; Wed, 22 May
+ 2024 13:25:51 +0000
+Received: from DM4PR11MB5296.namprd11.prod.outlook.com
+ ([fe80::a82f:27ae:a8d9:6a81]) by DM4PR11MB5296.namprd11.prod.outlook.com
+ ([fe80::a82f:27ae:a8d9:6a81%5]) with mapi id 15.20.7611.016; Wed, 22 May 2024
+ 13:25:51 +0000
+From: "Brunham, Kalen" <kalen.brunham@intel.com>
+To: Tom Rini <trini@konsulko.com>
+CC: "U-Boot@lists.denx.de" <U-Boot@lists.denx.de>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>
+Subject: RE: [PATCH 1/1] Added arm64 assembly for examples/api crt0
+Thread-Topic: [PATCH 1/1] Added arm64 assembly for examples/api crt0
+Thread-Index: Adqojlev93VX2sPCRR6waFJsm7XUJgC82DVQAAZzj4AAAJoS0AAAJBKAAAAadUAAAv2KAAAEUXCAAAc8cQAAHE4P8A==
+Date: Wed, 22 May 2024 13:25:51 +0000
+Message-ID: <DM4PR11MB5296918A0447369D6B27891DE3EB2@DM4PR11MB5296.namprd11.prod.outlook.com>
+References: <DM4PR11MB5296B1B9F0CFC701A8B11284E3EE2@DM4PR11MB5296.namprd11.prod.outlook.com>
+ <DM4PR11MB52961423BCE12552857A12A8E3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
+ <20240521162543.GU2568172@bill-the-cat>
+ <DM4PR11MB529670F5CFDA6B4EDA7B7206E3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
+ <20240521164659.GZ2568172@bill-the-cat>
+ <DM4PR11MB529668DA50F05F26AAD229F0E3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
+ <20240521181534.GD2568172@bill-the-cat>
+ <DM4PR11MB5296769279BCDD505F614E6BE3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
+ <20240521234624.GF2568172@bill-the-cat>
+In-Reply-To: <20240521234624.GF2568172@bill-the-cat>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DM4PR11MB5296:EE_|SJ2PR11MB7425:EE_
+x-ms-office365-filtering-correlation-id: 2baabfbb-f62c-43e8-b383-08dc7a62b36a
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230031|1800799015|366007|376005|38070700009;
+x-microsoft-antispam-message-info: =?us-ascii?Q?72nBlK4KyldM3Q5r9uu2q/BMrdUTYiFTKoBmSH7SfEsEYfLMgYmSXltrV0VU?=
+ =?us-ascii?Q?EnfiYGbrz0v90et4ZwbiPPaE5Or0l3W/oe1y3VA/mhGVHrVI4lzA0YAxxLik?=
+ =?us-ascii?Q?jq0WaKAHRsD7J1ZSR/kp2tnM3DJpX+YYLVjen8DalvP0/H1bPyM+qoOsIrjQ?=
+ =?us-ascii?Q?eT/scgg1XQDSLFZiH84mRKyJbHUx93eXomUYeAl4TLXt4KjLreRHW+t/xSC1?=
+ =?us-ascii?Q?7G0dYh4hXooSTrr+/BOXfsAMcaGZkG4nfwN8oB2cEgYge1AazOhhAF3VJKt9?=
+ =?us-ascii?Q?Am37Wp+UDVUDzIoeMMKqMCqOJTjbYQcxKmIoi6tEwFDVuZwpVo8SNoSgTIcW?=
+ =?us-ascii?Q?A3FD4s92Wa1eRH6dKngruxK5g5unU88b2EUmJUqNgf3UIe8GnPlTqwMe3SXS?=
+ =?us-ascii?Q?R6AKTvdzd/Ycc1JXNr/5wJUhL1/tYrKqakDJZbSwMEtWSuJaQP5ziN/yG+59?=
+ =?us-ascii?Q?ucZgVGYarOrG3mitS884qIqyP9iMaajY5UQb4Ig29GIhy0JJko9X7PC/gvjT?=
+ =?us-ascii?Q?qk8H4QqeK75ql0uYb2XRSiXtO0XtzzpkN+6JyR2py5OGKVEN7D16dEnUHogx?=
+ =?us-ascii?Q?q0QsZsC5akX2cD5Vr5rUFmMsIjBwu8Y2BbWUBynD5EVio5kD1iJgQ4j5c7j7?=
+ =?us-ascii?Q?CaPNvg1k/jGEYkhZu9QYhQFjPNtlXLQCVSK/bdvOM0mrSbhbc/K8k6Iwnx/K?=
+ =?us-ascii?Q?BkWKD0RsHwoZUxmNPqgVtCzIR9pICBb5DnNx9Vnfse+DCI6ntoGlJhNFqz1j?=
+ =?us-ascii?Q?/fWzLTzLfaZZtDyV26zC7LIdBWcCHDbrXfRgG14CE8k78UPA+Jd9YU+/U2k3?=
+ =?us-ascii?Q?nXLFCBvzR9DVAyBKpqcqpQTX1M/S8+uaAcwzpjR51rg0VvPkTrS+GPAbvIne?=
+ =?us-ascii?Q?hIY0F3Lr+g7m6pU3Gggw968OtwUndg/WwRmqdFxxPhBKdxA/YDVss2ZuPnyU?=
+ =?us-ascii?Q?0qqmiji67KRk17yXzPDlChmsMaZON/CGO4naQplNLy6MGlFbilgeOdcZUg+X?=
+ =?us-ascii?Q?m9aHvckUO26l0NTsycWI50eCQRXmAcDk/E5H0PUF5UFjCOikEd2GG+M7pUwJ?=
+ =?us-ascii?Q?EoxNV5vf4tuTHWt6ZHRA1gXiRSRSOXSqvXlKHAceN61YxGlcyER9vNgkDVP1?=
+ =?us-ascii?Q?cTtjndSoRrpYMRzUvDpOkbI/koY2Tq4Q4I9h9aixgGxG4YNiBDLLDp5t9uIJ?=
+ =?us-ascii?Q?nJV4dAPExhXHPvSRwKGvC/PiBw0DGzA2rkf77XQ2ze7Nq4Lw/4iDlHiEZwS0?=
+ =?us-ascii?Q?AeerZKK/nGLK0k3/ry0b4AAg1r1bPYnnSa7V4rSv8MNENKJB4Ztz/FHRTjxW?=
+ =?us-ascii?Q?JnvKG5ynvWBElaCAiVZvWANDxMmFhrR0Px61WUj6hQGpHQ=3D=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM4PR11MB5296.namprd11.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(1800799015)(366007)(376005)(38070700009); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?K9OH6QPNGDvVYpR/tZxItbahQJMvUNDs0Stq+SMV0VoFImVJZgg5u6SVMLeF?=
+ =?us-ascii?Q?AbuRAjSLcEGZPSFcOWLEhwTMPp/EXkcVyrtbGRU9xAqonHU/tYpbMRVoDfoB?=
+ =?us-ascii?Q?uZH8CH47Pouk85+TDQeOz+xCd5CNcGcQYCpVLqy7CCyg+cQ30GUMnRdDDld0?=
+ =?us-ascii?Q?O/OcJgfdmUPGhOkwElnDo8coQMkAAjNB11spQv23kbIzShHyv84xjZm0Gum+?=
+ =?us-ascii?Q?3rVB943oo3YNeHlDUkrXdTJqn8rxjy3HEWzam7GDIug3Syg9lVKpN/w8sDX2?=
+ =?us-ascii?Q?7t1UUnVItv//QOAHZ+9PjWEdHDKFcehoij9U2ho0zeGrNk+HTCNE87k0R5oV?=
+ =?us-ascii?Q?T7EgmHHZQTKNzHoMcYh4ggTexpp6mhqIRHow/mCQLZqUsAv4fuw5dls5fPmL?=
+ =?us-ascii?Q?Tjwi9Nic0ixglGWIFMMv7BZs4SkL+Hr1hxM+fyqfXTuHNptLTnkDrRfZDloO?=
+ =?us-ascii?Q?kU8bC2iri+VoLelwKfjQP+wj+SDdHIi6n/YfjPHWcD7JJ70tzQ4s3MmkQR+g?=
+ =?us-ascii?Q?Lp0jCX1/2wWz0whPKoBi7q1QT50IwD3cFAip4UdLu7qkSgHzktuStc2BlSs1?=
+ =?us-ascii?Q?dRXAdnr8u3dqopj1HHUHa0ftENwNwa7CBe5C7q+d5zQdAtHawCyilLdTOhe5?=
+ =?us-ascii?Q?KUzzDZr/uvB3C72MTWqb8wkDac7hNwaW0l8zZkYm1Wb+SycR6uELC6P4EhRI?=
+ =?us-ascii?Q?zd7DRcI/8JKm7Und7xlQAiAMZevKY/xWAvlASdAn1r2UUqg8aMJgsT0t01sp?=
+ =?us-ascii?Q?pRWfPDzoGcYzOiBpBWQ3ZP45R30Oq4rcTSobuDxmDzO2lkcjXAW3uPBsdggD?=
+ =?us-ascii?Q?zuqENKG7s41dYb5ET9G/2NAIrjqhJtcduFNaZFhX+7OsRQQZN8bfUZYUCc1Q?=
+ =?us-ascii?Q?sYJGmarI1qI6y93XTen6g0VS/cuNil/sGfu1jmrTylfB/Ezkz192/s6xv6mk?=
+ =?us-ascii?Q?yroKvmvxGqRZEACHOPoAW8P7REQnncExbKzo+IRzHxkQOdz9Gm2AKPQvL2my?=
+ =?us-ascii?Q?hqKXjZLiPCcHEyuNnhQbv36xEQ6Wk+HlhMJrzolectGDFaEkiFMiIP2Pk0ob?=
+ =?us-ascii?Q?1rV1GJJ9ywBGIMfHECwDWXZYIzc0Gvbahv8fLDy82OnSsM9RiEUn3vtPkdlf?=
+ =?us-ascii?Q?YGBhqIXGG6zCE06i3eHrFpneUwNop29uRfeWsQXpUBcbnAhNQghYx/5r3bVe?=
+ =?us-ascii?Q?riy/z8yVVOyYG5ZQ3sxeRSGg1CrsAozf+3iD9exF4QaX/eQO5WkIN7fNGbXe?=
+ =?us-ascii?Q?ag1A3shoJOMqHwruObTL4Mq5p/lcs1QFRqUS/Ncs31DR9ozIN6DXHmgzNtko?=
+ =?us-ascii?Q?hXu+RpTyLiUN8xUxtlgOpY58Ky6JGiNIwYIosBcLjeOuNAxlVlzO5kScvjvw?=
+ =?us-ascii?Q?GX8gUmIH4ieht+OUObJBzkNN6r8L0r4xtcUvXzRBNeesD2pqv9TnHqafkkFj?=
+ =?us-ascii?Q?jgVR/bk0CKF5RVMzXNYfe2DEwh84Wy4F4n2RztThed0TVdd0vTSRS/PeVjk8?=
+ =?us-ascii?Q?+RUdAlBcFId+E1ksYkzxwAWhFf59lJXKAOgvfrk1xKLkkeE6XvmpLJGG0LuP?=
+ =?us-ascii?Q?WlSRcGKeMYN4k3Zr+B4bNZJdVEkF/bYiQglDVXGE?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB03.amd.com: love.kumar@amd.com does not designate
- permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000971E8:EE_|IA0PR12MB8932:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1eca80ec-a399-4eec-ad48-08dc7a613cbf
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230031|36860700004|82310400017|376005|1800799015; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?QDK5SDvDhL9qayp7Nq3LD7eYxdcd+D+oSjPbArauZHyvbGFnNkQCaqJU+jtp?=
- =?us-ascii?Q?ExRgNsH3qsF3rwG5zKh8mg6LJ4sOfr4t464qaGRIrp0fgweMHWSdiKn0FxU5?=
- =?us-ascii?Q?rj7NCzrJfQ+IzH1DtZsOk7TRbeosrxO5ws36aTwT5Yw5dBUMB8fWVYyeuris?=
- =?us-ascii?Q?QkhkNgRYKXbVYBP2jM+DhsnJh5hJp4xm/fcS18F2Uc/Lm3N3zA5dpdd2E4TW?=
- =?us-ascii?Q?X0EAx0mrXwaMuDWlyVmcPzYhVBaryWplaxbvPBqNEFD/VEPq6vLck+59wkJj?=
- =?us-ascii?Q?SwLQtz1pEDSjG2v1OVTIoVQJv+bhdLJ9sGWLVg/aQKWCmySUOc5qSlmj6rXl?=
- =?us-ascii?Q?sXS2d2Rhf2ZX/ZX5MWHcYTyORWJ881NIFSSn50Xj2PM1ouexEn6iGWgyPFjG?=
- =?us-ascii?Q?W39qIBHhSwGk0HH4D5irqO6qFWSNwa/4cANV62uyK4h1z7Ll+oWAjdayWeMk?=
- =?us-ascii?Q?LhdSQMfBQtmB/EPjTeL3cMY8fJLtIm69GiVL7GDiVSniyjEyC+c/2k9oqU7J?=
- =?us-ascii?Q?HkoKgDEVPXf9U6B6lXO1MfAJ3tdgoTmrwFix0A/pp+94fz19/VtgdN3W346k?=
- =?us-ascii?Q?cCjUGsKQypqrlREt9iUmoD6Os22YcFHq+4q1P0MyJRG70mF6CvvNARdIygjT?=
- =?us-ascii?Q?WDb8Z1UVAKNhaRV3RW0PuZf760J7QPpe1hkHA7KvSk9kRjeq7rpr+0zQ1fzG?=
- =?us-ascii?Q?xHZ2vAFKkf2aeUUvLm5o8Tn2TocP7MCIorjDgu3ix7hWYJHT9EIoWVs3E3wR?=
- =?us-ascii?Q?id9h0XZjPFjsH2PF+j6PfJj30ROnHG+ciYHteV7bOO69dfk/B9/CBUAqcyFd?=
- =?us-ascii?Q?go1lF7s6apoy1oWPAytgRkyouFSKLV61cLLiJHb/bEM4cBUSftjTklBRrqmD?=
- =?us-ascii?Q?HKGHXAuSgNq9ys8qTeFFW4iN/O3aEzfpXjXV8o5JRUoGQRtrQ5baPD9mMAoU?=
- =?us-ascii?Q?wxSNBq60Sd1xwy7Bt9Or+WRgs9wWiVnUNTYtPAT0TrqcZenV96thLiD/eEM6?=
- =?us-ascii?Q?Ls+yBIXAQsq9wajVIDDcwkDwuSoZpikCoSRfNByXjM5j0sSWB6+Mbc/e0TTH?=
- =?us-ascii?Q?L5dSoTtwY+4KwR67k3gL4z7t+xHRMigAd33UQfGYqkfahgZKdwfriX0hdEoE?=
- =?us-ascii?Q?96e4na9rTNKZ/dnXvvGobXpY4F/dQmhhfqybxtAoaBMWsh8Im4uBGPGQ7MZa?=
- =?us-ascii?Q?+4jsqocnwrvRdpW7iAhYEqruFhTS76lgID4dGLzFWS+HfyvPRhivwlHnUgIr?=
- =?us-ascii?Q?SbGejMLIx+eCLlf3HdsG+8Jo11IggWf+NsO/hcrBy5/MMCCa50Xvlp46gtkb?=
- =?us-ascii?Q?YPrpdVf4twB6bK7oq43nt8lGDYkSvg5WXsXI+4mBbjeR1rV4xF8XugP5JXRb?=
- =?us-ascii?Q?i+UgIlTq7BfJ05be7egSRIETL8sC?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(36860700004)(82310400017)(376005)(1800799015); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 May 2024 13:15:22.7972 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1eca80ec-a399-4eec-ad48-08dc7a613cbf
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000971E8.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8932
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR11MB5296.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2baabfbb-f62c-43e8-b383-08dc7a62b36a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 22 May 2024 13:25:51.4970 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: S03lRfcXsYfGtrfXSDwFpLpcgso7OhKEWDRllXG7lezy3y9ewhgzmeTt+61LG+HiJZZzU0b//OP0BO70FTu8fQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR11MB7425
+X-OriginatorOrg: intel.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -143,84 +196,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Executing a u-boot command may raise an error or extra bad pattern,
-beyond the default bad patterns. Providing a way to enable the console
-output error check in test.
+Hi Tom,
 
-For example, description for OS boot test:
-import re
-check_type = 'kernel_boot_error'
-check_pattern = re.compile('ERROR -2: can't get kernel image!')
-with u_boot_console.enable_check(check_type, check_pattern):
-    u_boot_console.run_command('<boot command>')
+I'm using a defconfig that does not enable any of the configs listed on the=
+ default likes for config BLK (MMC, USB, SCSI, etc.), but I do have DM enab=
+led. I cannot however enable BLK as CONFIG_BLK=3Dy is ignored. My current h=
+ypothesis is that BLK is being forced to N by the select BLK in other Kconf=
+ig files, but I'm not sure.=20
 
-Signed-off-by: Love Kumar <love.kumar@amd.com>
----
- test/py/u_boot_console_base.py | 44 ++++++++++++++++++++++++++++++++++
- 1 file changed, 44 insertions(+)
+Here's the Kconfig for drivers/block:
 
-diff --git a/test/py/u_boot_console_base.py b/test/py/u_boot_console_base.py
-index 26b6de07f88f..2f882fb53fc5 100644
---- a/test/py/u_boot_console_base.py
-+++ b/test/py/u_boot_console_base.py
-@@ -57,6 +57,32 @@ class ConsoleDisableCheck(object):
-         self.console.disable_check_count[self.check_type] -= 1
-         self.console.eval_bad_patterns()
- 
-+class ConsoleEnableCheck(object):
-+    """Context manager (for Python's with statement) that temporarily enables
-+    the specified console output error check. This is useful when executing a
-+    command that might raise an extra bad pattern, beyond the default bad
-+    patterns, in order to validate that the extra bad pattern is actually
-+    detected. This class is used internally by ConsoleBase::enable_check(); it
-+    is not intended for direct usage."""
-+
-+    def __init__(self, console, check_type, check_pattern):
-+        self.console = console
-+        self.check_type = check_type
-+        self.check_pattern = check_pattern
-+
-+    def __enter__(self):
-+        global bad_pattern_defs
-+        self.default_bad_patterns = bad_pattern_defs
-+        bad_pattern_defs += ((self.check_type, self.check_pattern),)
-+        self.console.disable_check_count = {pat[PAT_ID]: 0 for pat in bad_pattern_defs}
-+        self.console.eval_bad_patterns()
-+
-+    def __exit__(self, extype, value, traceback):
-+        global bad_pattern_defs
-+        bad_pattern_defs = self.default_bad_patterns
-+        self.console.disable_check_count = {pat[PAT_ID]: 0 for pat in bad_pattern_defs}
-+        self.console.eval_bad_patterns()
-+
- class ConsoleSetupTimeout(object):
-     """Context manager (for Python's with statement) that temporarily sets up
-     timeout for specific command. This is useful when execution time is greater
-@@ -499,6 +525,24 @@ class ConsoleBase(object):
- 
-         return ConsoleDisableCheck(self, check_type)
- 
-+    def enable_check(self, check_type, check_pattern):
-+        """Temporarily enable an error check of U-Boot's output.
-+
-+        Create a new context manager (for use with the "with" statement) which
-+        temporarily enables a particular console output error check. The
-+        arguments form a new element of bad_pattern_defs defined above.
-+
-+        Args:
-+            check_type: The type of error-check or bad pattern to enable.
-+            check_pattern: The regexes for text error pattern or bad pattern
-+                to be checked.
-+
-+        Returns:
-+            A context manager object.
-+        """
-+
-+        return ConsoleEnableCheck(self, check_type, check_pattern)
-+
-     def temporary_timeout(self, timeout):
-         """Temporarily set up different timeout for commands.
- 
--- 
-2.25.1
+config BLK
+	bool # "Support block devices"
+	depends on DM
+	default y if MMC || USB || SCSI || NVME || IDE || AHCI || SATA
+	default y if EFI_MEDIA || VIRTIO_BLK || PVBLOCK
 
+My current flow is:
+make mrproper
+make socfpga_agilex5_defconfig
+./scripts/kconfig/merge_config.sh -O ./ ./.config ../../my_uboot_config.txt
+
+Here my_uboot_config.txt hsd:
+
+CONFIG_MMC=3Dn
+CONFIG_USB=3Dn
+CONFIG_DM_MMC=3Dn
+CONFIG_SPL_DM_MMC=3Dn
+CONFIG_BLK=3Dy
+CONFIG_EFI_LOADER=3Dy
+CONFIG_CMD_BOOTEFI=3Dy
+CONFIG_EFI_LOADER=3Dy
+CONFIG_CMD_BOOTEFI_HELLO_COMPILE=3Dy
+CONFIG_CMD_BOOTEFI_HELLO=3Dy
+
+The only way I was able to get BLK set to Y was to add another default like=
+ || DM_SPI_FLASH, since I do enable SPI flash in this config.=20
+
+Thanks.
+
+-----Original Message-----
+From: Tom Rini <trini@konsulko.com>=20
+Sent: Tuesday, May 21, 2024 7:46 PM
+To: Brunham, Kalen <kalen.brunham@intel.com>
+Cc: U-Boot@lists.denx.de; Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH 1/1] Added arm64 assembly for examples/api crt0
+
+On Tue, May 21, 2024 at 11:28:10PM +0000, Brunham, Kalen wrote:
+
+> Hi Tom,
+>=20
+> Thanks for the feedback. I've been able to build the EFI "hello world"
+> application, but did notice the logic for CONFIG BLK prevents it from=20
+> being directly enabled even when the dependencies are met, which is=20
+> why it didn't immediately work for me. Do you know the maintainer of=20
+> drivers/block/Kconfig that I could review a patch with?
+
+Can you please elaborate on what problem you see? Thanks.
+
+--
+Tom
