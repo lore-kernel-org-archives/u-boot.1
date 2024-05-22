@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B603CC25B78
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 16:23:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35B96C25B79
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 16:23:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 497D08888B;
-	Wed, 22 May 2024 18:23:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B5B52888B5;
+	Wed, 22 May 2024 18:23:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lrDN9Oz7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="awGf1uhK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FCEC888AE; Wed, 22 May 2024 18:23:18 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id DC3068883C; Wed, 22 May 2024 18:23:42 +0200 (CEST)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 238368883C
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 18:23:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6158A888B5
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 18:23:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-574b3d6c0f3so11487959a12.0
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 09:23:16 -0700 (PDT)
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-520f9d559f6so8080537e87.3
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 09:23:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716394995; x=1716999795; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1716395020; x=1716999820; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=N4dIN9ClRqCvdtARPFO/gtO58Q90HGV6ZeRViVM+BnQ=;
- b=lrDN9Oz782PpB7zf04KClufDRVOt6EGdEKrvQFy9VGyRRkAzer1JxocIt8VmVeFvlP
- rC85QUzOr1flFXAWs80qOL/DpOjcQY7DDLp7DvqZlIvSVGsc7q0NevIoMqejash96HBk
- si+B2iWfqj+qLAYp1806+CArOGex1o3x2Mjo4XTKmWxK4WYATkxlvFQt+0mdj9jgQWo0
- J0mBZNTJOqR/zIfT3C0ohyhQMSiynKizkb6WkXpqeKGg0gV7uGOfpnOhtZTIVaxNeIHA
- UzY1aEe8LhbJowg+IRFZnWNTkzLclGl3QgTwPXSZBQv0jpmf20E/tj5zj77CPMqVRMql
- TfSw==
+ bh=8ojHLs+JhhpOF5zw26lpVT1WqCNiKD8AtsKULKH8XD8=;
+ b=awGf1uhKQATD2dRIisfWqhL8lea2NrGwMnoCQp2hcEAA56X0uefoo7DM+bUSnx9XL4
+ cerisD04ioW+CZa9qkwMMFXt8Jhe6+7URumejaFak2n4aSgOSGVOiSJZlkbdC+SQYoaD
+ nR7fEaqjgAiyvfBW69YD+73mhVXqEQ/MnNPhRxIJEjDdHS2VhR7CbXdlO3DxNtV73Xlz
+ VMDaZk+6AyJatq8aQWUtsYYh2LipAUmQFSowHYhhXavOfYVCSG9n7rafr8q7awVkx5yy
+ XTOr4BBhmXMtoLfDvqkOEZ4fAkWZkaKm3H8Gcf6d0WKDCYGoeAYl37QnENo+JM8HbM7P
+ Lmsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716394995; x=1716999795;
+ d=1e100.net; s=20230601; t=1716395020; x=1716999820;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=N4dIN9ClRqCvdtARPFO/gtO58Q90HGV6ZeRViVM+BnQ=;
- b=G/LbEyMGhCK6rVNwWfzwVijpjh/M77+txCoqid6o0fUg2EEkTs+iLfPcblXv0DBrvG
- RnVn0hnjY4xTWv8VsJuWCyVxvqgLZlw1400eWycdUNevbfXlPf44nExmL/s4deNYpiay
- EmKVeJETUMKE0+JOVWvFoceWw0fKqLNQxbeaDu8tuOTw0jDZLcnvu+tOah85STghIlrV
- rIzDnqmebuvUqVhdz+F116A21PlxWKwVBGl4HVVpYrTaDMr6cC65HI3ITCHxvrW+tYfW
- LFt+GwHCFQcEXbyeoS+95DCRphpKKCivULH48m7y1wnVRs7C7bpRSSqFFj/7Z3Q5K4Lm
- iL6g==
+ bh=8ojHLs+JhhpOF5zw26lpVT1WqCNiKD8AtsKULKH8XD8=;
+ b=xUl90bN9KTpAKzvzJtwEVgqI+IVS1Nl7l8gt62aVWqeOG0sYsgRwFy8hnAUiydBdTs
+ u7KNDC0cIJFAH7TrvkJesqgQSDaOT0sEm01lXMQDh4G7AjDA+y/DGvLTYfJjenizi/8X
+ aJjSGET8atvLpDkwqqfrvBpfFWs2HI5SAPY0HTkFlJJtRV2MQOkG2xVtlpEMbC9uh2/7
+ wPjr9GDVffG+K3HgmQ5GXwPF+i5b3QeDx2W4ZFkDrRJEWZgO3YrRr4GK7zc82N8l6wZn
+ wyVbNV0MUTVx2kCwNIiYYNRAT5yFGslQOjBEXgYJHVOn70PuN300oK4PNfELGsyhgAq4
+ 1NYQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXAlFch6a4CRZWHGgMNoQcnv0GmUeuuvCzaxB9VIYoZVV+cRFA0iYH5vpIHB5pfwNXHCf82UJ1y03Df4/yHK7rgtJsVQw==
-X-Gm-Message-State: AOJu0YyO3wee0bOv7hSlv4uTUt4+BbMoCa4KIBgcRU6jmnLESSGnKyGp
- H2agt+A5zrxO7HyD8h1bhb96WY8AXiURAB9VWiQDQMy+QZqI+E9PFhNwe3eXWD0=
-X-Google-Smtp-Source: AGHT+IEPsvjINPFKGVhTBZn5Xzjii2iNdqjUduYmWSSHDe2LKtF/9i/Oz2g6Y5BAxoDoF//LsD1SqA==
-X-Received: by 2002:a50:d74e:0:b0:56e:99e:1fac with SMTP id
- 4fb4d7f45d1cf-57832c4b0a0mr1734135a12.39.1716394995603; 
- Wed, 22 May 2024 09:23:15 -0700 (PDT)
+ AJvYcCVRTvaj1gMpbLwwuHkdKDfm1E0hSA4HjqWdl4JfhmgTm1XuuRIoPwG/1t71+aOou82/bg4pwK3N57LMOaUtmVZ7IUKvxA==
+X-Gm-Message-State: AOJu0Yy1i1RUjOXl5clQToDc4aa/As+djEu8bqdYBvUQ9SouuezUqKRs
+ m8Cip4++x6Fj+4oEynCTSeLQIAZZ1FRRQm4D5mwgB4hLjo/B/e/E6QpbHwcyT48=
+X-Google-Smtp-Source: AGHT+IGAzKoB0+GZVa6M+5Dn5rZkuijn8sFa7FElvaIFmfeA9D9MJNVxyl+uzzPgNsm74oZzsQf8kA==
+X-Received: by 2002:ac2:5e22:0:b0:51a:b933:b297 with SMTP id
+ 2adb3069b0e04-526bd694d3cmr1490770e87.2.1716395019736; 
+ Wed, 22 May 2024 09:23:39 -0700 (PDT)
 Received: from ?IPV6:2a02:8109:aa0d:be00::8bb3? ([2a02:8109:aa0d:be00::8bb3])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5733c322c85sm18642278a12.84.2024.05.22.09.23.14
+ a640c23a62f3a-a5ceb46c33fsm885795666b.142.2024.05.22.09.23.38
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 22 May 2024 09:23:15 -0700 (PDT)
-Message-ID: <6045b81b-6fe2-4435-89fa-04a535c1d25d@linaro.org>
-Date: Wed, 22 May 2024 18:23:13 +0200
+ Wed, 22 May 2024 09:23:39 -0700 (PDT)
+Message-ID: <a3350841-09f1-4c89-acc4-a1e5b7d9d494@linaro.org>
+Date: Wed, 22 May 2024 18:23:38 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/5] clock: qcom: ipq4019: add missing networking resets
+Subject: Re: [PATCH 1/5] clock: qcom: ipq4019: add ESS clock
 To: Robert Marko <robert.marko@sartura.hr>, trini@konsulko.com,
  neil.armstrong@linaro.org, sumit.garg@linaro.org, lukma@denx.de,
  seanga2@gmail.com, joe.hershberger@ni.com, rfried.dev@gmail.com,
  j4g8y7@gmail.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
 Cc: j.beck@linefinity.com
 References: <20240522101437.225880-1-robert.marko@sartura.hr>
- <20240522101437.225880-3-robert.marko@sartura.hr>
 Content-Language: en-US
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240522101437.225880-3-robert.marko@sartura.hr>
+In-Reply-To: <20240522101437.225880-1-robert.marko@sartura.hr>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -102,35 +101,30 @@ X-Virus-Status: Clean
 
 
 On 22/05/2024 12:13, Robert Marko wrote:
-> IPQ4019 has more networking related resets that will be required for future
-> wired networking support, so lets add them.
-> 
-> This syncs the driver with Linux.
+> ESS clock is the Ethernet Subsystem clock, so lets add it as its
+> already configured by SBL1.
 > 
 > Signed-off-by: Robert Marko <robert.marko@sartura.hr>
 
 Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->   drivers/clk/qcom/clock-ipq4019.c | 6 ++++++
->   1 file changed, 6 insertions(+)
+>   drivers/clk/qcom/clock-ipq4019.c | 3 +++
+>   1 file changed, 3 insertions(+)
 > 
 > diff --git a/drivers/clk/qcom/clock-ipq4019.c b/drivers/clk/qcom/clock-ipq4019.c
-> index e416c9cdb0..2773bbc2d4 100644
+> index 0492e536e7..e416c9cdb0 100644
 > --- a/drivers/clk/qcom/clock-ipq4019.c
 > +++ b/drivers/clk/qcom/clock-ipq4019.c
-> @@ -205,6 +205,12 @@ static const struct qcom_reset_map gcc_ipq4019_resets[] = {
->   	[GCC_TCSR_BCR] = {0x22000, 0},
->   	[GCC_MPM_BCR] = {0x24000, 0},
->   	[GCC_SPDM_BCR] = {0x25000, 0},
-> +	[ESS_MAC1_ARES] = {0x1200C, 0},
-> +	[ESS_MAC2_ARES] = {0x1200C, 1},
-> +	[ESS_MAC3_ARES] = {0x1200C, 2},
-> +	[ESS_MAC4_ARES] = {0x1200C, 3},
-> +	[ESS_MAC5_ARES] = {0x1200C, 4},
-> +	[ESS_PSGMII_ARES] = {0x1200C, 5},
->   };
->   
->   static struct msm_clk_data ipq4019_clk_data = {
+> @@ -125,6 +125,9 @@ static int ipq4019_clk_enable(struct clk *clk)
+>   	case GCC_USB2_MOCK_UTMI_CLK:
+>   		/* These clocks is already initialized by SBL1 */
+>   		return 0;
+> +	case GCC_ESS_CLK:
+> +		/* This clock is already initialized by SBL1 */
+> +		return 0;
+>   	default:
+>   		return -EINVAL;
+>   	}
 
 -- 
 // Caleb (they/them)
