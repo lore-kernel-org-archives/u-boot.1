@@ -4,67 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 502C2C25B78
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 16:20:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0C28C25B78
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 16:21:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA0DB88490;
-	Wed, 22 May 2024 18:20:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 4F73688877;
+	Wed, 22 May 2024 18:21:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="SrOePPXD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="d+P4npP9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97DF98883C; Wed, 22 May 2024 18:20:54 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 55E088889B; Wed, 22 May 2024 18:21:49 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8362088001
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 18:20:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D0958883C
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 18:21:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=2726=M2=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1716394838;
- bh=Nf7x4lfY/ooBRkiz0H+T7/pq87KeoUFyveDlp2oi/60=;
- b=SrOePPXDq2kknhzPkUbvaJgzGP2mSsrLTLLbqvigc/RQBM3t8T4BbmhR5ki2mFKoSstkfol/u
- hvE9PNbKK7sTvh1zoKiSM52XCxF4/rcdGinYL0Jj+eb5xv5tch92gs0dk9bJ4wiVfEeHItrM5Eh
- TJLhXl/t3FHoWPDeDnxiaX3CTtAaU10sGAlvFl6y23ESTJRAWY127an5p0mePG9TUooLRGoiwON
- y9qLDyglmlTaqHybAEYKmgIIrkaffGhuwN7P30wk+QicGzQ38wTfFDVnR48vHpH8v9t4XthndQE
- HcY/seSLcgmaqIOPokuf0/IeKM81P9M5HUxP/ynjruLQ==
-Message-ID: <d626c93a-5c56-4363-b1ac-4de8c03e2f6a@kwiboo.se>
-Date: Wed, 22 May 2024 18:20:28 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a59cdd185b9so233897566b.1
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 09:21:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1716394907; x=1716999707; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=KuemEA8dKTYgxjIrGD5OpC6XaHbmakNYKreN2CoJF+Y=;
+ b=d+P4npP93bBJecEuMd0wVbCEu67ye52y/veZbFNS4c3+zypf+3E7d+DaTZGkKu8unJ
+ rekz794YYCgeA+V+5EXhQ4DoZie3yQFg1Ih1uJB5K08O0et98wNOlb8o7HLjAATGDQzz
+ jN4SbH4HseGR/gb2OHwHU3RrHhgeA9EKBqfvwIZIt+0bSDmV/VUkRA0bLq794x+VefHr
+ tUbRKvv3Suy2TZEeV1KX5s9HxTuerm0SFi45M38xGwGBuO5le+YlpbXd97iqRsAdH9i7
+ b56GWOwbTKGaU9iBAneRSCVIV/lCfeR7T/E4eV6/nAsltMOIhSF4Icakoo/B0idt22pS
+ nruw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716394907; x=1716999707;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=KuemEA8dKTYgxjIrGD5OpC6XaHbmakNYKreN2CoJF+Y=;
+ b=ZSoCcfY4FJNdCiwMqFiLFgMAziGMhVLMQfbPuyGniSqy3nc5lc4Pbzp1x+HamnTVJk
+ Wl02mZG/K6JT8mvog+CHPEBpdwegULbyTBE8cApeuqoBxMCmE/8aFcQufnrLHpd8Le53
+ mTIztHkiDDt7JmmD4tV6bD3t8Dg33QcbUfwasUW2DwiP8jCrUSFCK9AohGjvRMo9T6U6
+ 8zjEUBDObGUYzmzGjq7+mrARr448P4ywZ/Udl5lDnnBE/8qeu4ZIOy3DV3XfJOCARlaq
+ IN1/XT6zm12F2S7F5DBbvrPNqBZHH3SqXO58ufMfeYO5OKPe80WX3d/zROtW7ObVwy8M
+ 8byg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUI+YKXL3q3vIRZUZFGotz2HJWhdEa0GbCoQzxbJAzXyUjo+YFYpCqR7RbocmWMa7Z5txL6pGkADYLstKhw+R9yuhJJFw==
+X-Gm-Message-State: AOJu0YxsLRbR4xwUVwN6dmlJ1YA337eFcKXdoyyCRss0tM78wjBxhtak
+ dA4A6Gofy2vcavKk3U4TXK8dHm7nHh3gQfKfioLplV53PiwiUUtUMnhc21QrXKs=
+X-Google-Smtp-Source: AGHT+IHM2nq1T0KcEbqBLoj80kWR4UoSTdnYrAMrYXSo0Asux4LMVgTWM9Uwpjh3Wksq1twnmX1IeQ==
+X-Received: by 2002:a17:906:3ac2:b0:a5a:24ab:f5e with SMTP id
+ a640c23a62f3a-a62232b6411mr193243266b.25.1716394906689; 
+ Wed, 22 May 2024 09:21:46 -0700 (PDT)
+Received: from ?IPV6:2a02:8109:aa0d:be00::8bb3? ([2a02:8109:aa0d:be00::8bb3])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a5a178923fesm1800167966b.64.2024.05.22.09.21.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 22 May 2024 09:21:46 -0700 (PDT)
+Message-ID: <65635268-b146-4413-a926-af13687b9e7d@linaro.org>
+Date: Wed, 22 May 2024 18:21:43 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/4] rockchip: Add gpio request() ops and drop PCIe
- reset-gpios workaround
-To: Alex Bee <knaerzche@gmail.com>, Mark Kettenis <mark.kettenis@xs4all.nl>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Johan Jonker <jbx6244@gmail.com>, u-boot@lists.denx.de
-References: <20240511112821.1156519-1-jonas@kwiboo.se>
- <0e701fd8-b2c6-4ac4-9427-d984032470d1@gmail.com>
- <6853e5ac-271f-4d19-b8fb-a2746b834b24@kwiboo.se>
- <1b3b8c24-a3d9-4c36-a72f-45baee63f385@gmail.com>
- <1251aa97-43b4-485d-b1a7-161c14bc74fa@kwiboo.se>
- <03c73683-faec-4ef3-8af8-caaf0ebbd0e6@gmail.com>
- <96bfe653-3704-4f1b-a8be-6a9702f291b3@kwiboo.se>
- <31fe0d7a-a295-4d29-900f-aa40b497bae2@gmail.com>
+Subject: Re: [PATCH 5/5] arm: dts: add IPQ4019 ESS EDMA U-Boot additions
+To: Robert Marko <robert.marko@sartura.hr>, trini@konsulko.com,
+ neil.armstrong@linaro.org, sumit.garg@linaro.org, lukma@denx.de,
+ seanga2@gmail.com, joe.hershberger@ni.com, rfried.dev@gmail.com,
+ j4g8y7@gmail.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
+Cc: j.beck@linefinity.com
+References: <20240522101437.225880-1-robert.marko@sartura.hr>
+ <20240522101437.225880-5-robert.marko@sartura.hr>
 Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <31fe0d7a-a295-4d29-900f-aa40b497bae2@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 664e1b51b256dc6c98d9331c
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20240522101437.225880-5-robert.marko@sartura.hr>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,278 +99,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2024-05-22 16:18, Alex Bee wrote:
-> Am 13.05.24 um 01:22 schrieb Jonas Karlman:
->> On 2024-05-13 00:34, Alex Bee wrote:
->>> Am 12.05.24 um 23:37 schrieb Jonas Karlman:
->>>> Hi Alex,
->>>>
->>>> On 2024-05-12 21:49, Alex Bee wrote:
->>>>> Am 11.05.24 um 20:47 schrieb Jonas Karlman:
->>>>>> Hi Alex,
->>>>>>
->>>>>> On 2024-05-11 19:44, Alex Bee wrote:
->>>>>>> Hi Jonas,
->>>>>>>
->>>>>>> Am 11.05.24 um 13:28 schrieb Jonas Karlman:
->>>>>>>> This series add gpio request() and pinctrl gpio_request_enable() ops so
->>>>>>>> that a gpio requested pin automatically use gpio pinmux and U-Boot
->>>>>>>> behaves more similar to Linux kernel.
->>>>>>> I'm not sure that's a good idea.
->>>>>>> While linux does it the same way, we really shouldn't expect every
->>>>>>> software/os/ … which uses DT (now or in future) to implicitly switch the
->>>>>>> pin function when using a pin as gpio. So the real fix would probably be
->>>>>>> to add the the correct pinctrl settings to the upstream DT of those
->>>>>>> boards and sync it later on (not sure those if those SoCs already using
->>>>>>> OF_UPSTREAM) and leave the -u-boot.dtsi-"hack" alone for now.
->>>>>> I fully agree that the pinctrl for the problematic boards should be
->>>>>> corrected in upstream DT, but that is a separate issue and should not
->>>>>> block adding support for the request()/gpio_request_enable() ops.
->>>>>>
->>>>>> While the pcie reset-gpios full board freeze that was my driving factor
->>>>>> to fully implement the gpio request() ops it is not the only use case,
->>>>>> using the gpio cmd on a pin that use a non-gpio pinmux is another.
->>>>>>
->>>>>> Or do you see any technical issue with having the gpio request() ops
->>>>>> implemented and having it ensure gpio pinmux is used on a gpio requested
->>>>>> pin? Similar to how gpio/pinctrl is behaving in Linux and on some other
->>>>>> platforms in U-Boot?
->>>>> No, no general ("technical") issue with adding a .request hook to the gpio
->>>>> driver. But now you are now moving the original workaround to an even more
->>>>> invisible place which does things implicitly. Maybe just don't remove the
->>>>> pinctrl from the boards u-boot-dtsi's - just replace it with
->>>>>
->>>>> &pcie30x2m1_pins {
->>>>>        rockchip,pins =
->>>>>                 <2 RK_PD4 4 &pcfg_pull_none>,
->>>>>                 <2 RK_PD6 RK_FUNC_GPIO &pcfg_pull_none>,
->>>>>                 <2 RK_PD5 4 &pcfg_pull_none>;
->>>>> };
->>>>>
->>>>> Even if it would (now) work without. It, at least, documents that there are
->>>>> things left to do for the upstream DT.
->>>> This is what I was doing when testing PCIe on ROCK 3B, I would still like
->>>> to drop the "bad" workaround for ROCK 3A and E25 and have it fixed in
->>>> upstream DT and let it trickle back now that RK356x use OF_UPSTREAM.
->>>>
->>>> I do not see the point of keeping a workaround that no longer is needed,
->>>> especially when there is plans to also adjust upstream DT.
->>> Yeah, sure: but that certainly should be done/happen first, before it's
->>> removed here. Everybody knows how long that takes, patches being forgotten
->>> ....
->> I am fully aware of patches being forgotten :-)
->>
->> Still, here I try to cleanup a bad workaround that I probably never should
->> have added in the first place.
-> Why is it bad? It's incomplete and the correct pin configuration should
-> have been added to the upstream board DT in the first place. That's what
-> *-u-boot.dtsi are doing at times :)  It's not as worse as adding implicit
-> pin function switching to a driver to compensate the incomplete/incorrect
-> upstream board device tree, imho.
+Hi Robert,
 
-From my point-of-view the upstream pinctrl is more correct and I wrongly
-added a patch that completely disregarded existing pinctrl just to fix
-pci enumeration in U-Boot when no pci device is connected without
-thinking of how it could affect linux/bsd, hence why I now think that old
-workaround/hack is something bad and something I want to cleanup/remove.
-In my mind the current pinctrl use for pcie3 in U-Boot is describing the
-hw much worse than what is done in upstream Linux.
+Thanks for the patches.
 
->>>>> What you were saying in reply to Mark's email is not completely true: Not
->>>>> all pins are initialized with gpio func as default. It actually depends on
->>>>> the pin which function the bootrom sets initially. In case of RK356x's
->>>>> GPIO2_PD6 (the pin in question) it's BT656_D6M0 (func2), for instance. So,
->>>>> in fact, you are changing it's function when implicitly setting it's func
->>>>> to gpio (func0).
->>>> Sure, bootrom will change pin func on some pins so that it e.g. can read
->>>> from storage etc, but in general gpio mux is what most pins will use
->>>> after POR.
->>>>
->>>> On my ROCK 3A I see the pcie30x2m1 pins using func0 (gpio) after POR:
->>>>
->>>>     => pinmux status
->>>>     GPIO2_D4  : gpio
->>>>     GPIO2_D5  : gpio
->>>>     GPIO2_D6  : gpio
->>>>
->>>> And with this after a "pci enum":
->>>>
->>>>     => pinmux status
->>>>     GPIO2_D4  : func-4
->>>>     GPIO2_D5  : func-4
->>>>     GPIO2_D6  : gpio
->>>>
->>>> Not sure why your board would use BT656_D6M0 (func2) after POR unless
->>>> there is some other code writing to the IOMUX regs.
->>> Oh, I haven't checked on an actual board - I trusted the TRM [0], page 253
->>> GRF_GPIO2D_IOMUX_H[10:8] is (should be) 0x2. But (sadly) there are lot of
->>> blobs involved. for RK35xx SoCs - so maybe something switches the func for
->>> this pin for some reason.
->>>> The only thing this series changes is that when a U-Boot drivers use e.g.
->>>> gpio_request_by_name("reset-gpios") the referenced pin in DT will
->>>> implicitly be configured for gpio func.
->>>>
->>>> I would still like to understand if there is any other reason, not
->>>> related to dropping current "bad" PCIe DT workaround, to not to adopt
->>>> this implicit configuration and match Linux kernel?
->>> Generally speaking: device trees _must_ represent the actual hardware
->>> completely independent from any driver or any software. They are NOT
->>> helpers or configuration for drivers. Drivers can use them and have to
->>> adapt to them - not vice versa. So: Being as explict as possible is a must.
->> I am fully aware of this, and I would argue that the DT already is very
->> explicit about the HW in regard to PCIe3x2.
->>
->> The pinctrl function/group explains what function needs to be activated to
->> route PCIe3x2 related signals to the PCIe controller.
->> And the reset-gpios explains what pin is used for PERST# signal.
->>
->> However, if we instead are too explicit in the pinctrl function/group and
->> say that that the PERST# pin should use gpio iomux function, aren't we
->> then actually just describing something that is relevant for software/driver?
->>
->> And actually ends up loosing information on how the pin can be configured
->> to route the PERST# pin to the controller?
->>
->> And as Mark pointed out, the PERST# pin should probably be configured for
->> gpio output when controller works in RC mode, and should use PERSTn func
->> when controller works in EP mode.
->>
->> Guess that could/should possible be described as different pinctrl
->> states or if I am not mistaken EP is described as a separate device
->> using a different compatible.
-> Actually I wouldn't be too surprised if the "reset-gpios" property does
-> actually only exist to not have to define a extra pinctrl and the actual
-> reset-functionality (i.e. pulling the pin up / down by the driver) isn't
-> required at all. Though, untested. That would be similar to define a
-> "cd-gpios" property for a (sd) mmc-controller which is a similar workaround
-> for not switching the card detection pin to gpio func.
+On 22/05/2024 12:13, Robert Marko wrote:
+> IPQ4019 ESS EDMA support is not yet in upstream Linux, and even when
+> eventually it is merged the node will not be compatible with U-Boot driver
+> as the Linux driver properly models the internal switch.
 
-From what I could test the driver need to mux the pin for gpio output
-use when we use the controller in RC mode and the pin should be muxed to
-pcie func when the controller is used in EP mode.
+Is this going to cause dtc compile errors when the node eventually does 
+land upstream and gets pulled into U-Boot?
 
-Leaving the pin muxed for pcie func when we use the controller in RC
-mode seem to make the board freeze.
+How hard would it be to adjust the U-Boot driver to work with the 
+upstream bindings?
 
->>> At some point, it is planned, to split whole DT "subsystem" from the linux
->>> kernel.
->>> I also have a vague remembering (some mailing list discussion I can't find
->>> right now), that this whole implicit function switching of pins is sort of
->>> "not welcome" in linux anymore. So adding it here also is sort of a "step
->>> back" from that POV.
->> I was not expecting this much backlash on this series, so thanks for
->> some concrete feedback on why we maybe should not add the gpio request()
->> ops :-)
-> I did my best but couldn't find the discussion I had in mind. The context
-> was: pinctrl and gpio are different subsystems and one really shouldn't
-> configure the other. That makes sense, I guess. That it exists for Rockchip
-> in linux kernel might be related to the fact that this originally was a
-> single driver which was splited up later.
+Kind regards,
 > 
-
-From what I can find in the Linux pinctrl documentation it seem to suggest that
-the gpiolib driver should actually hide pinmuxing from a gpio consumer driver.
-
-See "Pin control interaction with the GPIO subsystem":
-
-"""
-NOTE that platforms and individual drivers shall NOT request GPIO pins
-to be controlled e.g. muxed in. Instead, implement a proper gpiolib
-driver and have that driver request proper muxing and other control for
-its pins.
-"""
-
-https://www.kernel.org/doc/html/latest/driver-api/pin-control.html#pin-control-interaction-with-the-gpio-subsystem
-
-And from "Drivers needing both pin control and GPIOs":
-
-"""
-But there are also situations where it makes sense for the GPIO
-subsystem to communicate directly with the pinctrl subsystem, using the
-latter as a back-end. This is when the GPIO driver may call out to the
-functions described in the section Pin control interaction with the GPIO
-subsystem above. This only involves per-pin multiplexing, and will be
-completely hidden behind the gpiod_*() function namespace. In this case,
-the driver need not interact with the pin control subsystem at all.
-
-If a pin control driver and a GPIO driver is dealing with the same pins
-and the use cases involve multiplexing, you MUST implement the pin
-controller as a back-end for the GPIO driver like this, unless your
-hardware design is such that the GPIO controller can override the pin
-controller’s multiplexing state through hardware without the need to
-interact with the pin control system.
-"""
-
-https://www.kernel.org/doc/html/latest/driver-api/pin-control.html#drivers-needing-both-pin-control-and-gpios
-
+> So, lets add the U-Boot additions DTSI for ESS EDMA for now.
 > 
-> Anyway: I hope we can agree on the point that the correct pinctrl settings
-> for the controller of this board should make it to the upstream device tree
-> in some way :D
-
-Fully agree that it should be correct in upstream, my point is that on
-one hand I actually think it already is correct in upstream and that
-changing the reset pin to use gpio func as default instead would then be
-done to assist software, and not correctly describe the hw.
-
-On the other hand, if I am not mistaken to use the controller in EP mode
-another compatible/device node needs to be described and if that is the
-case I can fully agree that the device node for RC mode could include
-pinctrl to mux the reset pin for gpio func.
-
-Regardless on what is to be done with pinctrl in DT, I still think it
-will be good to implement these gpio/pinctrl ops in U-Boot to closer
-match "a proper gpiolib driver" as suggested in the Linux pinctrl
-documentation where such driver request proper muxing and other control
-for its pins.
-
-Anyway, I will merge the two gpio/pinctrl series and rearrange patches,
-and also drop any DT changes in a v2.
-
-Regards,
-Jonas
-
+> Signed-off-by: Robert Marko <robert.marko@sartura.hr>
+> ---
+>   arch/arm/dts/qcom-ipq4019-u-boot.dtsi | 27 +++++++++++++++++++++++++++
+>   1 file changed, 27 insertions(+)
+>   create mode 100644 arch/arm/dts/qcom-ipq4019-u-boot.dtsi
 > 
-> Regards,
-> Alex
->> Maybe I should just drop this and only keep the follow up series.
->>
->> Regards,
->> Jonas
->>
->>> Alex
->>>
->>> [0]
->>> https://opensource.rock-chips.com/images/2/26/Rockchip_RK3568_TRM_Part1_V1.3-20220930P.PDF
->>>
->>>> Regards,
->>>> Jonas
->>>>
->>>>> Alex
->>>>>
->>>>>> Regards,
->>>>>> Jonas
->>>>>>
->>>>>>> Alex
->>>>>>>> With the gpio and pinctrl ops implemented this series also remove a PCIe
->>>>>>>> reset-gpios related device lock-up workaround from board u-boot.dtsi.
->>>>>>>>
->>>>>>>> PX30, RK3066, RK3188, RK356x and RK3588 are the only SoCs that currently
->>>>>>>> define gpio-ranges props and is affected by this series.
->>>>>>>>
->>>>>>>> A follow up series adding support for the pinmux status cmd will also
->>>>>>>> add gpio-ranges props for remaining RK SoCs.
->>>>>>>>
->>>>>>>> Jonas Karlman (4):
->>>>>>>>       pinctrl: rockchip: Add gpio_request_enable() ops
->>>>>>>>       gpio: rockchip: Add request() ops
->>>>>>>>       rockchip: rk3568-rock-3a: Drop PCIe reset-gpios workaround
->>>>>>>>       rockchip: rk3568-radxa-e25: Drop PCIe reset-gpios workaround
->>>>>>>>
->>>>>>>>      arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi     | 12 -------
->>>>>>>>      arch/arm/dts/rk3568-rock-3a-u-boot.dtsi       | 12 -------
->>>>>>>>      drivers/gpio/rk_gpio.c                        | 10 ++++++
->>>>>>>>      .../pinctrl/rockchip/pinctrl-rockchip-core.c  | 31 +++++++++++++++++++
->>>>>>>>      4 files changed, 41 insertions(+), 24 deletions(-)
->>>>>>>>
+> diff --git a/arch/arm/dts/qcom-ipq4019-u-boot.dtsi b/arch/arm/dts/qcom-ipq4019-u-boot.dtsi
+> new file mode 100644
+> index 0000000000..f70ef5c9a5
+> --- /dev/null
+> +++ b/arch/arm/dts/qcom-ipq4019-u-boot.dtsi
+> @@ -0,0 +1,27 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+> +/ {
+> +	soc {
+> +		edma: edma@c080000 {
+> +			compatible = "qcom,ess-edma";
+> +			reg = <0xc080000 0x8000>, <0x98000 0x800>, <0xc000000 0x80000>;
+> +			reg-names = "edma", "psgmii_phy", "switch";
+> +			#address-cells = <1>;
+> +			#size-cells = <1>;
+> +			resets = <&gcc ESS_PSGMII_ARES>, <&gcc ESS_RESET>;
+> +			reset-names = "psgmii", "ess";
+> +			clocks = <&gcc GCC_ESS_CLK>;
+> +			clock-names = "ess";
+> +			status = "disabled";
+> +
+> +			switch_ports: switch-ports {
+> +				phy-mode = "psgmii";
+> +			};
+> +		};
+> +	};
+> +};
+> +
+> +&mdio {
+> +	psgmiiphy: psgmii-phy@5 {
+> +		reg = <5>;
+> +	};
+> +};
 
+-- 
+// Caleb (they/them)
