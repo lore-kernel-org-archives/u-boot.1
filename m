@@ -4,71 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BDEFC25B77
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 05:57:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6908DC25B77
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 05:57:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59FE68826D;
-	Wed, 22 May 2024 07:57:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C005688486;
+	Wed, 22 May 2024 07:57:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bo3GsUSJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="z7dyYJw+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50F8288466; Wed, 22 May 2024 07:57:01 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E57CC88488; Wed, 22 May 2024 07:57:29 +0200 (CEST)
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [IPv6:2a00:1450:4864:20::236])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A149F881C3
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 07:56:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B7E2E881C3
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 07:57:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44M5uq2w003222;
- Wed, 22 May 2024 00:56:52 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1716357412;
- bh=exsIzTe+Jn+Xtw2VtZBxU6jQT2UtC40JEWTAm8JkHIs=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=bo3GsUSJtFq/DfqjapUK7ugx0VBg2zjz24wH+2lM3z/xOW+sDfedXVOKj5t+zHxnz
- Xhd8Xen2NZDTw5OsfzRWQCen79138OqWaNGAdGaEmaWlANL3xd2bBzs7YZQ1608BWm
- tAHsXaDUpJ9O5t2aooLV2Haksl1sE7SGK7hfZhpY=
-Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44M5uq9C109009
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 22 May 2024 00:56:52 -0500
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 22
- May 2024 00:56:52 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 22 May 2024 00:56:52 -0500
-Received: from [10.24.69.25] (danish-tpc.dhcp.ti.com [10.24.69.25])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44M5un9N046612;
- Wed, 22 May 2024 00:56:50 -0500
-Message-ID: <95a3d60d-94bc-456f-8f2b-17f9ad45d11a@ti.com>
-Date: Wed, 22 May 2024 11:26:49 +0530
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2e72b8931caso31965351fa.0
+ for <u-boot@lists.denx.de>; Tue, 21 May 2024 22:57:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1716357447; x=1716962247; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=oYI2aMN8R9uU5/6yWQIwX4a0ilibNW7NIX8cBsU7vEs=;
+ b=z7dyYJw+ihKDD672Qr2WKtHPsEpQFb6LXNOPEUh8wNmk66W1nQ7irRNZU9kXR1OKS4
+ DyJS6LjEMl3oQwkTvx0AjL/qE7I4thK60Q3JtqsCQlX+P8AIiEKqknh261sYCkeJfMdm
+ +/W4MkKXLhsZAzVBlBFAcX1dU7rG0EVqDWTLViiGoicjNjJSViW5L5/MIaOJhNwlPTzo
+ RdKG3xywcC7+KaMQmk8a3oj0nsU1lCfsLxjymL7dgrrykmZPJFZn2mZSMeVfOXsyx9Bj
+ ACcfqQ9rzW4aDxUHq1bcKXHqw810C2APkBV+t37BnDHeEGw8d2Vt4OSTrQJ+c7jd4pmw
+ Ax8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716357447; x=1716962247;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=oYI2aMN8R9uU5/6yWQIwX4a0ilibNW7NIX8cBsU7vEs=;
+ b=ceOLPvFq9FvKVXatpSuRuPEinkpiUIpLQX5GWMsQwd9PY8FEcNs5CQmc70QmS6961c
+ mnjr15u+EptGowHsd5ZEk0KjhkQF0atEU6IOvwFC6BvT/NXHhpZCGFoyCOPitP7W11C3
+ rT70rck90kLmMeSsjLLvoKB3sFWw2lz8fDOnbFZnY/5H2eIAuAL8rBuOBEbkCuXpYi3T
+ XFj6cPEdImkbdBsIrJ0fosQ2g1vzS/ULwtTHKAqO0rEeBcU242ph+bXWijUR0K/lokyz
+ i8lA4ommhydlbb/CfqGBvx0YWjFL7mn3OGsdqDLHhunUjFsrkhTnckPDPiOfPIl3Ox98
+ 1Tmg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXbh1bzwC4AaWF/529pLIGda6e3zFvLQOKG/8f87mhTR5wpXau3oxMdKZfeFYNfv4G0z5BkTYetDh/yN33HMf2Ho3Yh5g==
+X-Gm-Message-State: AOJu0Yy6QFksWFYw/KiqQNg32FIZupg/HMGKtxAaZX2lRcUOimurnzti
+ da7YSHCEx50jrayZ6GLj9eq43DPQU2GpBbaeHgdyLvYxuGj3RfGf0GY91EXjvL+9/sfbocNwn7g
+ M
+X-Google-Smtp-Source: AGHT+IGkunnxXyU/YMzUEJtkzG4XFEb2VhDvm0MkaIQLOL6KUNMNCnrmJRzNIsDUw3bG7gocIv4pcg==
+X-Received: by 2002:a05:600c:c2:b0:419:f9ae:e50 with SMTP id
+ 5b1f17b1804b1-420fd375f0dmr6570515e9.37.1716357426134; 
+ Tue, 21 May 2024 22:57:06 -0700 (PDT)
+Received: from hera (ppp089210091242.access.hol.gr. [89.210.91.242])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-41fe518a8fasm460687415e9.33.2024.05.21.22.57.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 21 May 2024 22:57:05 -0700 (PDT)
+Date: Wed, 22 May 2024 08:57:03 +0300
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Shantur Rathore <i@shantur.com>, Bin Meng <bmeng@tinylab.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
+ Joao Marcos Costa <jmcosta944@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [RFC 02/14] efi_loader: library function efi_dp_merge
+Message-ID: <Zk2JL2bqBLbe6tSk@hera>
+References: <20240426141321.232236-1-heinrich.schuchardt@canonical.com>
+ <20240426141321.232236-3-heinrich.schuchardt@canonical.com>
+ <CAC_iWjKg9NDKnoNa-V+H+5OOJe2uYsHb0vXM0+-QdCxUctiksg@mail.gmail.com>
+ <aac7887b-b123-4006-bbcd-4549e8e44a54@canonical.com>
+ <CAC_iWjL4umEBcEkZtjeWgfnrHV3oB3qECD0xYAY6qjphKb4umg@mail.gmail.com>
+ <a17e0a7e-8269-4d1d-aaaa-a944655b90f4@canonical.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/2] Add AM64x Support to PRUSS and PRU_RPROC driver
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-CC: Nishanth Menon <nm@ti.com>, <u-boot@lists.denx.de>, <srk@ti.com>, Vignesh
- Raghavendra <vigneshr@ti.com>, <r-gunasekaran@ti.com>, Roger Quadros
- <rogerq@kernel.org>
-References: <20240430104633.1445311-1-danishanwar@ti.com>
- <171536955294.3410219.3302090701043655645.b4-ty@konsulko.com>
- <26c9c7f5-1544-46b2-a3fd-3a4d01c2d813@ti.com>
- <20240521163923.GX2568172@bill-the-cat>
-From: MD Danish Anwar <danishanwar@ti.com>
-In-Reply-To: <20240521163923.GX2568172@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <a17e0a7e-8269-4d1d-aaaa-a944655b90f4@canonical.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,59 +103,177 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Tue, May 14, 2024 at 02:49:47PM +0200, Heinrich Schuchardt wrote:
+> On 4/26/24 17:47, Ilias Apalodimas wrote:
+> > Hi Heinrich
+> >
+> > On Fri, 26 Apr 2024 at 17:53, Heinrich Schuchardt
+> > <heinrich.schuchardt@canonical.com> wrote:
+> > >
+> > > On 26.04.24 16:30, Ilias Apalodimas wrote:
+> > > > Hi Heinrich,
+> > > >
+> > > > On Fri, 26 Apr 2024 at 17:13, Heinrich Schuchardt
+> > > > <heinrich.schuchardt@canonical.com> wrote:
+> > > > >
+> > > > > Provide a function to append a device_path to a list of device paths
+> > > > > that is separated by final end nodes.
+> > > > >
+> > > > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > > > > ---
+> > > > >    include/efi_loader.h             |  3 +++
+> > > > >    lib/efi_loader/efi_device_path.c | 31 +++++++++++++++++++++++++++++++
+> > > > >    2 files changed, 34 insertions(+)
+> > > > >
+> > > > > diff --git a/include/efi_loader.h b/include/efi_loader.h
+> > > > > index 9600941aa32..a7d7b8324f1 100644
+> > > > > --- a/include/efi_loader.h
+> > > > > +++ b/include/efi_loader.h
+> > > > > @@ -944,6 +944,9 @@ struct efi_load_option {
+> > > > >
+> > > > >    struct efi_device_path *efi_dp_from_lo(struct efi_load_option *lo,
+> > > > >                                          const efi_guid_t *guid);
+> > > > > +struct efi_device_path *efi_dp_merge(const struct efi_device_path *dp1,
+> > > > > +                                    efi_uintn_t *size,
+> > > > > +                                    const struct efi_device_path *dp2);
+> > > > >    struct efi_device_path *efi_dp_concat(const struct efi_device_path *dp1,
+> > > > >                                         const struct efi_device_path *dp2,
+> > > > >                                         bool split_end_node);
+> > > > > diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
+> > > > > index 46aa59b9e40..16cbe41d32f 100644
+> > > > > --- a/lib/efi_loader/efi_device_path.c
+> > > > > +++ b/lib/efi_loader/efi_device_path.c
+> > > > > @@ -270,6 +270,37 @@ struct efi_device_path *efi_dp_dup(const struct efi_device_path *dp)
+> > > > >           return ndp;
+> > > > >    }
+> > > > >
+> > > > > +/**
+> > > > > + * efi_dp_merge() - Concatenate two device paths separated by final end node
+> > > > > + *
+> > > > > + * @dp1:       first device path
+> > > > > + * @size:      pointer to length of @dp1, total size on return
+> > > > > + * @dp2:       second device path
+> > > > > + *
+> > > > > + * Return:     concatenated device path or NULL
+> > > > > + */
+> > > > > +struct efi_device_path *efi_dp_merge(const struct efi_device_path *dp1,
+> > > > > +                                    efi_uintn_t *size,
+> > > > > +                                    const struct efi_device_path *dp2)
+> > > > > +{
+> > > > > +       efi_uintn_t len, len1, len2;
+> > > > > +       struct efi_device_path *dp;
+> > > > > +       u8 *p;
+> > > > > +
+> > > > > +       len1 = *size;
+> > > > > +       len2 = efi_dp_size(dp2) + sizeof(END);
+> > > > > +       len = len1 + len2;
+> > > > > +       dp = efi_alloc(len);
+> > > > > +       if (!dp)
+> > > > > +               return NULL;
+> > > > > +       memcpy(dp, dp1, len1);
+> > > > > +       p = (u8 *)dp + len1;
+> > > > > +       memcpy(p, dp2, len2);
+> > > > > +       *size = len;
+> > > >
+> > > > Can't we just use efi_dp_concat()?
+> > >
+> > > efi_dp_concat cannot be used to put a device-path end-node in between
+> > > two device-paths that are concatenated. We need that separator in the
+> > > load options.
+> >
+> > I am not sure I am following you. It's been a few years so please bear
+> > with me until I manage to re-read that code and page it back to
+> > memory.
+> >
+> > What I remember though is that the format of the DP looks like this:
+> >
+> > Loaded image DP - end node - initrd GUID DP (without and end node) -
+> > initrd - end of device path.
+> > So to jump from the special initrd GUID to the actual DP that contains
+> > the initrd you need to do an efi_dp_next(). Also, efi_dp_concat() will
+> > inject an end node with a DEVICE_PATH_SUB_TYPE_END type if the third
+> > argument is 'true'.
+> >
+> > What am I missing?
+>
+> Let us assume
+>
+> dp1 = /vmlinux/endnode/initrd/endnode
+> dp2 = /dtb/endnode
+>
+> and we invoke dp_concat(dp1, dp2, true):
+>
+> sz1 is calculated via the efi_dp_size() function which looks for the *first*
+> device-path end node.
+>
+> sz1 = efi_dp_size(dp1) = sizeof(/vmlinux)
+>
+> sz1 will not include initrd and its endnode.
+>
+> So dp_concat(/vmlinux/endnode/initrd/endnode, /dtb/endnode, true)
+> will return:
+>
+> /vmlinux/endnode/dtb/endnode
+>
+> but in our boot option we want
+>
+> /vmlinux/endnode/initrd/endnode/dtb/endnode
 
-On 21/05/24 10:09 pm, Tom Rini wrote:
-> On Tue, May 21, 2024 at 02:31:44PM +0530, MD Danish Anwar wrote:
->> Hi Tom,
->>
->> On 11/05/24 1:02 am, Tom Rini wrote:
->>> On Tue, 30 Apr 2024 16:16:31 +0530, MD Danish Anwar wrote:
->>>
->>>> This series adds AM64x related compatibles to PRUSS and PRU_RPROC drivers.
->>>> This series is a prerequisite for ICSSG Ethernet driver.
->>>>
->>>> Once Support for AM64x is added to PRUSS and PRU_RPROC driver, I'll send
->>>> another series to enable ICSSG Ethernet driver for AM64x as well.
->>>>
->>>> MD Danish Anwar (2):
->>>>   remoteproc: pru: Add support for AM64x PRU / RTU cores
->>>>   soc: ti: pruss: Add support for AM64x
->>>>
->>>> [...]
->>>
->>> Applied to u-boot/next, thanks!
->>>
->>
->> I was working on the latest u-boot/next (d4781422d1 (origin/next) "Merge
->> tag 'v2024.07-rc3' into next") and I don't see this series being part of
->> u-boot/next.
->>
->> I checked the git logs, you had merged this series but on 18th may you
->> committed [1] ("Revert "Merge patch series "arm: dts: am62-beagleplay:
->> Fix Beagleplay Ethernet""") which reverts bunch of changes and as part
->> of this commit, this series was also reverted.
->>
->> Now when I am trying to verify ICSSG, it doesn't work as this series is
->> not part of u-boot/next anymore.
->>
->> Can you please pull / merge this series again to u-boot/next? Or do I
->> need to send these patches for merge again?
->>
->> Please let me know.
->>
->> [1]
->> https://source.denx.de/u-boot/u-boot/-/commit/d678a59d2d719da9e807495b4b021501f2836ca5
-> 
-> Please re-post based on current next, sorry for the rework.
-> 
+Correct,
 
-I see that now this series is part of u-boot/next. Your commit [1] has
-restored the changes. Thanks for that.
+> I introduced an new function efi_dp_merge().
+> Instead we could change the arguments to:
+>
+>
+> * @sz1:
+> * * 0 to concatenate
+> * * 1 to concatenate with end node added as separator
+> * * size of dp1 excluding last end node to concatenate with end node as
+> *   separator in case dp1 contains an end node
+> struct
+> efi_device_path *efi_dp_concat(const struct efi_device_path *dp1,
+>                                const struct efi_device_path *dp2,
+>                                size_t sz1)
+>
+> and replace
+>
+> sz1 = efi_dp_size(dp1);
+>
+> by
+>
+> if (sz1 < sizeof(struct efi_device_path)
+> 	sz1 = efi_dp_size(dp1);
+>
+> Best regards
 
-[1]
-https://source.denx.de/u-boot/u-boot/-/commit/03de305ec48b0bb28554372abb40ccd46dbe0bf9
+Yes please, I like this more.  we already have enough efi_dp_xxx
 
--- 
-Thanks and Regards,
-Danish
+Thanks
+/Ilias
+>
+> Heinrich
+>
+> >
+> > Thanks
+> > /Ilias
+> >
+> > >
+> > > Best regards
+> > >
+> > > Heinrich
+> > >
+> > > >
+> > > > Thanks
+> > > > /Ilias
+> > > > > +
+> > > > > +       return dp;
+> > > > > +}
+> > > > > +
+> > > > >    /**
+> > > > >     * efi_dp_concat() - Concatenate two device paths and add and terminate them
+> > > > >     *                   with an end node.
+> > > > > --
+> > > > > 2.43.0
+> > > > >
+> > >
+>
