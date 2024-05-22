@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A73DFC25B7C
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 23:37:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF363C25B7C
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 23:37:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC4FE8854E;
-	Thu, 23 May 2024 01:32:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0D52288828;
+	Thu, 23 May 2024 01:32:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="H9ztOLXi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RGnfh5vy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 027FE88551; Thu, 23 May 2024 01:32:11 +0200 (CEST)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id 8D186884F1; Thu, 23 May 2024 01:32:11 +0200 (CEST)
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
+ [IPv6:2607:f8b0:4864:20::c2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34FCF88593
+ by phobos.denx.de (Postfix) with ESMTPS id E61B3885A3
  for <u-boot@lists.denx.de>; Thu, 23 May 2024 01:32:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-3c9a0042e7dso2817619b6e.0
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-5b2e93fddafso681780eaf.0
  for <u-boot@lists.denx.de>; Wed, 22 May 2024 16:32:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1716420723; x=1717025523; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=leXg5M9IJZvGZQdRki2akuLu9l5aNtTu1JiIhuyNyJg=;
- b=H9ztOLXiDSgbc8/JcHddVMKvIIUJ0Gd0DmkdWPEn2B+nYMkRjaT9xngKRtm8HKrcBU
- inzVFveGQBKDxW9YNNxm+XSZPWl/hriFCEd6yXgJLbmmFIv85S4KZjqH/olgN+EEuAWc
- unviKbuzyJ12JU5IhcCKrt6BT80LTZnrVlt+qVp18Dju/CWccUOljPot1Vb/5+IzsORP
- Ng0LoebYAcM4krg86TwqyN4q0JKeds5XZ+iD956G7io4FBgUFcVxhdsCiE5ivxTM1+KR
- ZMvaubrubC/bDK0ph2Mr16vhr2S2YNXj4blYLd3L89uNk9rVFfZiTrcr2dS+wMy6EZL9
- fgRg==
+ bh=EFUZEz59WZt7THpMWPnZBiu5col5B90eUJjjXBJTJnU=;
+ b=RGnfh5vyPik1Qk0Dv2sx0zYnwlQ9lnSnG11TZHj/Wv2KHTCbtkhdi/+bg2d3VL0/61
+ gLOydjZCvdtsIU4s7ZR9KAHY/5orNEyLUPxfMWRBvNhMonBtiVXNwAk23TYZSQ8ZGXH6
+ E4Y3uahcCQ7i/hgSfGkcOkQWcqt9mpudRirJ+1DtsBCDDAHGEWa5C/sm1UmaBxc18YEM
+ 8ZQSifAOlZieOn9L+lM8gosx676XaHreACj9YdD26+eEDJCO4thioimEqpQq6VPUkF8T
+ c04uuzzSyzZ9aMGIzGxl4viPp6MO5DEIafz8cUVgPfEaWe9re7B0zj1hH2EJHAqDjK7r
+ YtRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1716420723; x=1717025523;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=leXg5M9IJZvGZQdRki2akuLu9l5aNtTu1JiIhuyNyJg=;
- b=EOwpgU1oPiTBcLwOn2gpq1ZBLA9vwdERlqs9gXycRr1o0nJ6W4GIaLEd1cRy/tk73L
- u8uSAHX22i8SGIgth4bAeqDlhQqIB8ZOaJu89F9i64l/6vbjQx25kZ2aOVuPmMEtYf5/
- sZmHppqph76jw5Mxmd4o3Sgrnd/W9NdQWXhWyPlU+U8q2lMsQH00kkcp7cN8bAIJ1OyA
- TVqCpJ/Be1KMiqWaFX2LO1tSSAPDR0gGuZ3bCbvI+o6tpbuzlF7eOfBEPx4hTE9Muf1y
- cYQsWacWaNXg6/7w5bDVh6PyoXNGezexwp5I+d2oYslLR0nHSbJEUq2qAMn6ocJsXBXC
- J3tQ==
+ bh=EFUZEz59WZt7THpMWPnZBiu5col5B90eUJjjXBJTJnU=;
+ b=iuzCNPHsG8giMynzXKn4dlvB/RzKvVBR+w93I/+vU/7ydIiv9U1AD+S8Tns82oQw0M
+ k6v6nMQcwc39R3IZX2KBRopBfUIyX2NDUVtNvsNCd/WNKLAHMDL7PfQ7nJp6EzY0d26M
+ mLe7zU9MYSucJ/47nTX1hdJ+jFDlpS4NHzj9CLmyy4H1i91cp1L3Kv20AkG3zXJo5IiJ
+ EMMCiodFncEbi+HOwRovNjsvksHtohFZr0XvLOrrJDQQRsIUuFtZ6GT/fnrmltWDnyha
+ iVTW0AhWpIEPsduRPmcjZ89HvNPzabrZvBKMr+pcGUd7fB8PDkEnQ1sJ1CP8p/964N6I
+ Dphg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXrsIPzKkTvCIf82SvPbJWwQXdKB1+HlQ4efYTfv333i+f6ucX+Tb3AWqxv6xVuk78W1FUY5j7J9v4Zmxf/ZrBkYrI2xw==
-X-Gm-Message-State: AOJu0YwK2EjxKGwr3c1t6OY+96+ihGCeHjG6S5WzW39pQHrVgx7uufTW
- 2QTG+L80Iyq/rdrWGoX7kxCOTW8vq+z8Y6ljSmO0dsbdAHP9wAOVKnF0Pg3yVPk=
-X-Google-Smtp-Source: AGHT+IE8b20sSHRU/tA8i10VvBPycczbsHSM6bSvnfq84hZ8KeCUMA5mVT7cUhJ+RSPUCIRRv8/Uqg==
-X-Received: by 2002:a05:6808:2393:b0:3c9:7a7b:a7cd with SMTP id
- 5614622812f47-3cdbb525531mr4261577b6e.51.1716420722896; 
- Wed, 22 May 2024 16:32:02 -0700 (PDT)
+ AJvYcCURapaMoCQufDzTSKSzlcK8EgpnjUsZHT0pzTZuASYwnR9E4gNJ6IikhUd5MeR2of3E/2ib5CCFCHXz9utEwb+PREvg8g==
+X-Gm-Message-State: AOJu0YzCQU0a1ynj0YOYT/zU+JulmKdQZz9v2Hjf/iwWMfWnmSTxWaTO
+ qcauQKwkeNzPSm1e3jZuZOR/s6GUuq455vYs1LEzMC8Z/Afz5KTdePubLI4Gsyg=
+X-Google-Smtp-Source: AGHT+IHHC5iSOTfXRiIkjFzse4S9Q0eV2t0SQ315w6fieIZuAgYq3oPLzow66dfaIaUKaSvV7WGzRg==
+X-Received: by 2002:a05:6820:1507:b0:5b7:339f:ba5c with SMTP id
+ 006d021491bc7-5b7fc4f4935mr359340eaf.1.1716420723676; 
+ Wed, 22 May 2024 16:32:03 -0700 (PDT)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3c9cb0ef7desm2148993b6e.56.2024.05.22.16.32.02
+ 006d021491bc7-5b291865d8asm5609942eaf.11.2024.05.22.16.32.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 May 2024 16:32:02 -0700 (PDT)
+ Wed, 22 May 2024 16:32:03 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>,
  Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
@@ -77,10 +77,10 @@ Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Ferass El Hafidi <vitali64pmemail@protonmail.com>,
  Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com
-Subject: [PATCH 31/42] mmc: exynos_dw_mmc: Read and use DDR timing when
- available
-Date: Wed, 22 May 2024 18:31:24 -0500
-Message-Id: <20240522233135.26835-32-semen.protsenko@linaro.org>
+Subject: [PATCH 32/42] mmc: exynos_dw_mmc: Set requested freq in get_mmc_clk()
+ callback
+Date: Wed, 22 May 2024 18:31:25 -0500
+Message-Id: <20240522233135.26835-33-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240522233135.26835-1-semen.protsenko@linaro.org>
 References: <20240522233135.26835-1-semen.protsenko@linaro.org>
@@ -102,62 +102,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-DDR timing values should be defined in "samsung,dw-mshc-ddr-timing" dts
-property, and used when DDR MMC mode is selected. Read that value from
-dts and use it. If it's not available, use SDR timing values instead.
-This change is following upstream Linux kernel implementation.
+By now exynos_dw_mmc driver was relying on the correct CIU clock
+frequency being set on driver init. But dw_mmc core is actually trying
+to change CIU clock rate dynamically, on init and in set_ios() callback,
+which it's requesting via host->get_mmc_clk() callback (the name is
+misleading: although it's called "get_mmc_clk()", it can actually
+request both get and set operations). Implement setting the requested
+rate for CIU clock in Exynos driver to achieve the correct dw_mmc core
+driver operation at all times. DDR mode requires the clock to be twice
+as fast (when 8 bit bus is used), so handle this too, to make DDR
+function properly.
+
+This change makes the eMMC throughput on E850-96 board twice as fast.
+That's because "clock-frequency" is set to 800 MHz in E850-96 device
+tree, but for DDR52 mode it should be 416 MHz (and TRM states it should
+be 400 MHz for DDR50/8bit mode). The dw_mmc core is requesting 52 MHz
+bus_hz for DDR52 mode, and DDR+8bit mode means it should be x2 fast, so:
+
+    f_ciu = 2 * ciu_div * f_bus = 2 * 4 * 52e6 = 416 MHz,
+
+where f_ciu   - freq of clock fed to DW MMC block from CMU (SDCLKIN), Hz
+      f_bus   - freq of clock fed to the card (CCLKIN), Hz
+      ciu_div - value of internal divider (in DW MMC block).
+
+Another way to work that around would be overriding the
+"clock-frequency" property in corresponding dts. But setting the clock
+frequency dynamically as it's done here looks much neater.
+
+This implementation follows what's done in Linux kernel dw_mmc-exynos
+driver in .set_ios() callback for MMC_TIMING_MMC_DDR52 case.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
- drivers/mmc/exynos_dw_mmc.c | 20 +++++++++++++++++++-
- 1 file changed, 19 insertions(+), 1 deletion(-)
+ drivers/mmc/exynos_dw_mmc.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
 diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
-index 91300f67b9fe..d3708ecb6407 100644
+index d3708ecb6407..938fd51a2ac6 100644
 --- a/drivers/mmc/exynos_dw_mmc.c
 +++ b/drivers/mmc/exynos_dw_mmc.c
-@@ -53,6 +53,7 @@ struct dwmci_exynos_priv_data {
- #endif
- 	struct clk clk;
- 	u32 sdr_timing;
-+	u32 ddr_timing;
- 	const struct exynos_dwmmc_variant *chip;
- };
+@@ -170,7 +170,17 @@ unsigned int exynos_dwmci_get_clk(struct dwmci_host *host, uint freq)
+ 	u8 clk_div;
+ 	int err;
  
-@@ -128,8 +129,14 @@ static int exynos_dwmmc_set_sclk(struct dwmci_host *host, unsigned long rate)
- static int exynos_dwmci_clksel(struct dwmci_host *host)
- {
- 	struct dwmci_exynos_priv_data *priv = exynos_dwmmc_get_priv(host);
-+	u32 timing;
- 
--	dwmci_writel(host, priv->chip->clksel, priv->sdr_timing);
-+	if (host->mmc->selected_mode == MMC_DDR_52)
-+		timing = priv->ddr_timing;
-+	else
-+		timing = priv->sdr_timing;
++	/* Should be double rate for DDR mode */
++	if (host->mmc->selected_mode == MMC_DDR_52 && host->mmc->bus_width == 8)
++		freq *= 2;
 +
-+	dwmci_writel(host, priv->chip->clksel, timing);
- 
- 	return 0;
- }
-@@ -305,6 +312,17 @@ static int exynos_dwmmc_of_to_plat(struct udevice *dev)
- 			priv->sdr_timing = DWMMC_MMC2_SDR_TIMING_VAL;
- 	}
- 
-+	err = dev_read_u32_array(dev, "samsung,dw-mshc-ddr-timing", timing, 2);
+ 	clk_div = exynos_dwmmc_get_ciu_div(host);
++	err = exynos_dwmmc_set_sclk(host, freq * clk_div);
 +	if (err) {
-+		debug("DWMMC%d: Can't get ddr-timings, using sdr-timings\n",
-+		      host->dev_index);
-+		priv->ddr_timing = priv->sdr_timing;
-+	} else {
-+		priv->ddr_timing = DWMCI_SET_SAMPLE_CLK(timing[0]) |
-+				   DWMCI_SET_DRV_CLK(timing[1]) |
-+				   DWMCI_SET_DIV_RATIO(div);
++		printf("DWMMC%d: failed to set clock rate (%d); "
++		       "continue anyway\n", host->dev_index, err);
 +	}
 +
- 	host->fifo_depth = dev_read_u32_default(dev, "fifo-depth", 0);
- 	host->bus_hz = dev_read_u32_default(dev, "clock-frequency", 0);
- 
+ 	err = exynos_dwmmc_get_sclk(host, &sclk);
+ 	if (err) {
+ 		printf("DWMMC%d: failed to get clock rate (%d)\n",
 -- 
 2.39.2
 
