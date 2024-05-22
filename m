@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C91DFC25B78
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 23:39:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89D20C25B7C
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 23:39:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C5AC88856;
+	by phobos.denx.de (Postfix) with ESMTP id 65E458889B;
 	Thu, 23 May 2024 01:32:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oKD/vBJr";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PZDLTFyu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29DAB8852E; Thu, 23 May 2024 01:32:15 +0200 (CEST)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
+ id 4E5D08851F; Thu, 23 May 2024 01:32:15 +0200 (CEST)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84C2F88540
- for <u-boot@lists.denx.de>; Thu, 23 May 2024 01:32:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B3248851F
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 01:32:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-6f264d5dadaso2333350a34.0
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 16:32:10 -0700 (PDT)
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-6f0ede03023so613515a34.0
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 16:32:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716420729; x=1717025529; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1716420730; x=1717025530; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZQPz2+ExiBkKve2C//Dmghqi0uDNxl/Xy8ITjx56b7w=;
- b=oKD/vBJrEHeFtGMojdvq/+yBhli1OZQqv/7qw1jba7dq6MeGR1RxTxMyakY0B3rXJa
- HsBJYgyXKWMj9zjSKb3+G2NYHFT54wvQYoOo6lQYuOlXLenrvLHNnHZ+Igcx/TdMU8PB
- 2AFMFJkETDIsJVp+45tLwToCDsQtzAEIVXphyI+WuOa0t2Nj6HsxD4rYg/Pdz8XhTw68
- xq6mzrLPtEwm7zny2UZdDkAEiRrlt7mhLWWrPoEnQxHlE/yOftNbOAKGF324+xIuQoMB
- GiGj9yxWl6Efzf6iv6pBsAnQmr2f2yCGRJMJTJ6RcPy/+xDQ9GJ8MipePQSgChJGmLEx
- 6ONg==
+ bh=Qjtx61ChieQWPWpf4GPgql1HGNGU26CgOdDr++TN9mw=;
+ b=PZDLTFyuNadIoeVXcdEdSWZRyKuaBb4e/sMcsmKDn/9jAnh7JeGFRIEC7nDr046STF
+ YiI3/aRyFZaWAHytF06AZ8qhe32z13cSVId10RuFxCfE5OOZ8ybPGjUSITeQUSAxaKM2
+ QIGe4dLqWJN/GaTKzUsJ5stUhWGeErkHuFsUu5y4Aolf6YH3P9WLqlgAfxpKXy9Mmehk
+ oiV4Sa5UT8MWlGTqPqv1zyDY5S8lLIH0KKweOxk1RJEsJYVt4m4y/pcHNUzniK71fZhB
+ Lp44NyrBPTHzO5btzcG6m5be81rvW6vsi+mkYXEo2HTqd3KpoGD7coWSiKo7UFCaikwa
+ AiKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716420729; x=1717025529;
+ d=1e100.net; s=20230601; t=1716420730; x=1717025530;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZQPz2+ExiBkKve2C//Dmghqi0uDNxl/Xy8ITjx56b7w=;
- b=UUJ/MYpmO3pCHFTwUOWIl1J9v+0Sx4nBEjGjRZ3nDhFxwhVSOGb9FqI/jP9gc21NdN
- afmuYgVDZs0xRZn/cI/FAv7QkRNc/dlUczVOhomE8clgMUitLjF24C1+fEEBminIhdbi
- v0YdK0XDQdK+vAF6lGQRYj+MuMwR+cL90emYbzgOFbD4MUq1BwaJyxv6r+PCeBFkEjZb
- gEVTCU4m3DjHdt+qV/vDLG6XRhRE3OcLGaDWEqEoZOM6sUnKOEUIkvP0ZtASUNrx7bHr
- GUTwUNLm8vMojxDh32LVKHVudJE/WqhLtx1c9MMaKaTVbj+T7l1hOkbC33+xUjor2wBK
- Rj8Q==
+ bh=Qjtx61ChieQWPWpf4GPgql1HGNGU26CgOdDr++TN9mw=;
+ b=uTbNIgjvvAqdGS1CxN4aMhuyDi8Pzzk8cA7bXaZUIz8ZrQmhTCy9fA3ZrIperRQJDW
+ 8+hYrQ/+xosrBKkQKeTCpH14oBQdLsaZgSnm2vxbanDmHtmNzEn5e8Yq7kNZIf/Y7ZMW
+ 1+YF/VbbZp4A3srv4ymVd+8XYv5rUp1nwTAGAluCiDyllw4DwWWStGGieAVqjtsYuQey
+ f3m2KhkVSn7x23sYR8MfHuc4GNTFW4wLH5AovIaz2EsGuHpjdMHIxrwSwsxBDTwAohZ0
+ ZwkaPCc53atG500LtuHJKzfzVa8hZ35aRLAUkwuBCLmH+IdBqGO6xfVj52IbmG9bSECt
+ IuKA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX9u7PIKw4mJRlhYVk/AUtdl+rxRRqkvXkD6PsifyY/oH1T7ndlE60YSWhl6B1Qpf8Uc1Yn0D+qXSv3TELUPIigMQy9PQ==
-X-Gm-Message-State: AOJu0YzxRMDvDJvZvSQf2L2fOqysU1DRWjrDJv3hXmgWxT61zhXhFB+A
- NnzqKNblXeHY/CIP1RhGjcY+LWRJSwnvhY0F7875J8Zs93ZydHFu3ONYL8CqE8E=
-X-Google-Smtp-Source: AGHT+IGloMC5ZJN/ZeMrZivWZKz955usFI/oqgVTwEPsfXzJZyC/b0x9XYWsu+jMQZY8QjmttNf3bA==
-X-Received: by 2002:a05:6830:1d65:b0:6f0:5ea6:975 with SMTP id
- 46e09a7af769-6f665a3bc2bmr3567305a34.7.1716420729337; 
- Wed, 22 May 2024 16:32:09 -0700 (PDT)
+ AJvYcCXXPVfCcdqL1KwYLV2cRk8RRvP+P+2eBRlZIVI21dq8B7Ij808gcxdDZHU+7B8CX00zXEIilZMJEcVWvh9qlJ0XkVlYng==
+X-Gm-Message-State: AOJu0Yy1ze0gAs9CocFj4tyad26XcW0Is5+HBKyz+RplXPNSx/5T736h
+ Ck7eB5h9MVnkXPqsVgbau3llnVSgGN3zeJutxWjcKKoA90O3fh1I0CoYqEyfHPk=
+X-Google-Smtp-Source: AGHT+IHrL7zrHkfZgu4aMMbynYEbBJL5KKDof7iPHFM3vG73tcL8lAl2A+kD+dIUyLkNHHZg1+miTw==
+X-Received: by 2002:a05:6830:f96:b0:6f1:248a:b5ba with SMTP id
+ 46e09a7af769-6f7d65af20bmr332042a34.18.1716420730172; 
+ Wed, 22 May 2024 16:32:10 -0700 (PDT)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-6f0e8785495sm4985385a34.16.2024.05.22.16.32.09
+ 46e09a7af769-6f13ebc152csm1984544a34.47.2024.05.22.16.32.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Wed, 22 May 2024 16:32:09 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
@@ -77,10 +77,9 @@ Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Ferass El Hafidi <vitali64pmemail@protonmail.com>,
  Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com
-Subject: [PATCH 40/42] arm: dts: exynos: Remove outdated DW MMC properties in
- all Exynos dts
-Date: Wed, 22 May 2024 18:31:33 -0500
-Message-Id: <20240522233135.26835-41-semen.protsenko@linaro.org>
+Subject: [PATCH 41/42] configs: e850-96: Enable MMC
+Date: Wed, 22 May 2024 18:31:34 -0500
+Message-Id: <20240522233135.26835-42-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240522233135.26835-1-semen.protsenko@linaro.org>
 References: <20240522233135.26835-1-semen.protsenko@linaro.org>
@@ -102,355 +101,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Upstream properties were added to device trees to follow current Linux
-kernel. DW MMC driver was updated accordingly. Safely remove outdated
-MMC properties. Details on removed properties are as follows:
-
-* samsung,removable: replaced by non-removable
-* samsung,bus-width: replaced by bus-width
-* samsung,timing:
-  - replaced by samsung,dw-mshc-ciu-div and samsung,dw-mshc-sdr-timing
-    in dw_mmc nodes
-  - removed from sdhci nodes (it's neither described in bindings, nor
-    it's used in s5p_sdhci.c driver)
-* fifoth_val: replaced by fifo-depth
-* bus_hz: replaced by clock-frequency
-* div: the fixed CIU clock divider value was moved to the chip data in
-  exynos_dw_mmc.c driver
-
-No functional change.
+Enable MMC subsystem and DW MMC driver support to make eMMC functional.
+Also enable a couple of related commands so the user can make use of
+eMMC from U-Boot shell.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
- arch/arm/dts/exynos4210-origen.dts         |  2 --
- arch/arm/dts/exynos4210-trats.dts          |  4 ----
- arch/arm/dts/exynos4210-universal_c210.dts |  4 ----
- arch/arm/dts/exynos4412-odroid.dts         |  8 --------
- arch/arm/dts/exynos4412-trats2.dts         | 12 ------------
- arch/arm/dts/exynos5250-arndale.dts        |  4 ----
- arch/arm/dts/exynos5250-smdk5250.dts       |  6 ------
- arch/arm/dts/exynos5250-snow.dts           |  6 ------
- arch/arm/dts/exynos5250-spring.dts         |  3 ---
- arch/arm/dts/exynos5420-smdk5420.dts       |  6 ------
- arch/arm/dts/exynos5422-odroidxu3.dts      |  2 --
- arch/arm/dts/exynos54xx.dtsi               |  6 ------
- 12 files changed, 63 deletions(-)
+ configs/e850-96_defconfig | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/exynos4210-origen.dts b/arch/arm/dts/exynos4210-origen.dts
-index a4915de2c49c..40289c8c4aaf 100644
---- a/arch/arm/dts/exynos4210-origen.dts
-+++ b/arch/arm/dts/exynos4210-origen.dts
-@@ -25,9 +25,7 @@
- };
- 
- &sdhci2 {
--	samsung,bus-width = <4>;
- 	bus-width = <4>;
--	samsung,timing = <1 2 3>;
- 	cd-gpios = <&gpk2 2 0>;
- 	status = "okay";
- };
-diff --git a/arch/arm/dts/exynos4210-trats.dts b/arch/arm/dts/exynos4210-trats.dts
-index 4fbdf4730994..88e9c0ed2bb0 100644
---- a/arch/arm/dts/exynos4210-trats.dts
-+++ b/arch/arm/dts/exynos4210-trats.dts
-@@ -240,17 +240,13 @@
- };
- 
- &sdhci0 {
--	samsung,bus-width = <8>;
- 	bus-width = <8>;
--	samsung,timing = <1 3 3>;
- 	pwr-gpios = <&gpk0 2 0>;
- 	status = "okay";
- };
- 
- &sdhci2 {
--	samsung,bus-width = <4>;
- 	bus-width = <4>;
--	samsung,timing = <1 2 3>;
- 	cd-gpios = <&gpx3 4 0>;
- 	status = "okay";
- };
-diff --git a/arch/arm/dts/exynos4210-universal_c210.dts b/arch/arm/dts/exynos4210-universal_c210.dts
-index 1b3ac1fee15f..c87b92be609d 100644
---- a/arch/arm/dts/exynos4210-universal_c210.dts
-+++ b/arch/arm/dts/exynos4210-universal_c210.dts
-@@ -235,17 +235,13 @@
- };
- 
- &sdhci0 {
--	samsung,bus-width = <8>;
- 	bus-width = <8>;
--	samsung,timing = <1 3 3>;
- 	pwr-gpios = <&gpk0 2 0>;
- 	status = "okay";
- };
- 
- &sdhci2 {
--	samsung,bus-width = <4>;
- 	bus-width = <4>;
--	samsung,timing = <1 2 3>;
- 	cd-gpios = <&gpx3 4 0>;
- 	status = "okay";
- };
-diff --git a/arch/arm/dts/exynos4412-odroid.dts b/arch/arm/dts/exynos4412-odroid.dts
-index 24e96ed05868..6822c6aaaa8a 100644
---- a/arch/arm/dts/exynos4412-odroid.dts
-+++ b/arch/arm/dts/exynos4412-odroid.dts
-@@ -234,26 +234,18 @@
- };
- 
- &sdhci2 {
--	samsung,bus-width = <4>;
--	samsung,timing = <1 2 3>;
- 	cd-inverted;
- 	cd-gpios = <&gpk2 2 0>;
- 	status = "okay";
- };
- 
- &mshc_0 {
--	samsung,bus-width = <8>;
- 	bus-width = <8>;
--	samsung,timing = <2 1 0>;
- 	samsung,dw-mshc-ciu-div = <0>;
- 	samsung,dw-mshc-sdr-timing = <2 1>;
--	samsung,removable = <0>;
- 	non-removable;
--	fifoth_val = <0x203f0040>;
- 	fifo-depth = <0x80>;
- 	clock-frequency = <400000000>;
--	bus_hz = <400000000>;
--	div = <0x3>;
- 	index = <4>;
- 	status = "okay";
- };
-diff --git a/arch/arm/dts/exynos4412-trats2.dts b/arch/arm/dts/exynos4412-trats2.dts
-index 30758ffa1ef9..2b71d328cd0e 100644
---- a/arch/arm/dts/exynos4412-trats2.dts
-+++ b/arch/arm/dts/exynos4412-trats2.dts
-@@ -108,9 +108,7 @@
- 	};
- 
- 	sdhci@12510000 {
--		samsung,bus-width = <8>;
- 		bus-width = <8>;
--		samsung,timing = <1 3 3>;
- 		pwr-gpios = <&gpk0 4 0>;
- 		status = "disabled";
- 	};
-@@ -432,33 +430,23 @@
- };
- 
- &sdhci0 {
--	samsung,bus-width = <8>;
- 	bus-width = <8>;
--	samsung,timing = <1 3 3>;
- 	pwr-gpios = <&gpk0 4 0>;
- 	status = "disabled";
- };
- 
- &sdhci2 {
--	samsung,bus-width = <4>;
- 	bus-width = <4>;
--	samsung,timing = <1 2 3>;
- 	cd-gpios = <&gpk2 2 0>;
- 	status = "okay";
- };
- 
- &mshc_0 {
--	samsung,bus-width = <8>;
- 	bus-width = <8>;
--	samsung,timing = <2 1 0>;
- 	samsung,dw-mshc-ciu-div = <0>;
- 	samsung,dw-mshc-sdr-timing = <2 1>;
--	samsung,removable = <0>;
- 	non-removable;
--	fifoth_val = <0x203f0040>;
- 	clock-frequency = <400000000>;
--	bus_hz = <400000000>;
--	div = <0x3>;
- 	index = <4>;
- 	fifo-depth = <0x80>;
- 	status = "okay";
-diff --git a/arch/arm/dts/exynos5250-arndale.dts b/arch/arm/dts/exynos5250-arndale.dts
-index 7f84589c97a2..4c894f1712fa 100644
---- a/arch/arm/dts/exynos5250-arndale.dts
-+++ b/arch/arm/dts/exynos5250-arndale.dts
-@@ -27,9 +27,7 @@
- 	};
- 
- 	mmc@12200000 {
--		samsung,bus-width = <8>;
- 		bus-width = <8>;
--		samsung,timing = <1 3 3>;
- 		samsung,dw-mshc-ciu-div = <3>;
- 		samsung,dw-mshc-sdr-timing = <1 3>;
- 	};
-@@ -39,9 +37,7 @@
- 	};
- 
- 	mmc@12220000 {
--		samsung,bus-width = <4>;
- 		bus-width = <4>;
--		samsung,timing = <1 2 3>;
- 		samsung,dw-mshc-ciu-div = <3>;
- 		samsung,dw-mshc-sdr-timing = <1 2>;
- 	};
-diff --git a/arch/arm/dts/exynos5250-smdk5250.dts b/arch/arm/dts/exynos5250-smdk5250.dts
-index 882db2d1f608..f9f54cb63871 100644
---- a/arch/arm/dts/exynos5250-smdk5250.dts
-+++ b/arch/arm/dts/exynos5250-smdk5250.dts
-@@ -145,12 +145,9 @@
- 	};
- 
- 	mmc@12200000 {
--		samsung,bus-width = <8>;
- 		bus-width = <8>;
--		samsung,timing = <1 3 3>;
- 		samsung,dw-mshc-ciu-div = <3>;
- 		samsung,dw-mshc-sdr-timing = <1 3>;
--		samsung,removable = <0>;
- 		non-removable;
- 	};
- 
-@@ -159,12 +156,9 @@
- 	};
- 
- 	mmc@12220000 {
--		samsung,bus-width = <4>;
- 		bus-width = <4>;
--		samsung,timing = <1 2 3>;
- 		samsung,dw-mshc-ciu-div = <3>;
- 		samsung,dw-mshc-sdr-timing = <1 2>;
--		samsung,removable = <1>;
- 	};
- 
- 	mmc@12230000 {
-diff --git a/arch/arm/dts/exynos5250-snow.dts b/arch/arm/dts/exynos5250-snow.dts
-index bcf04d5c07c0..ab7b5212ba7c 100644
---- a/arch/arm/dts/exynos5250-snow.dts
-+++ b/arch/arm/dts/exynos5250-snow.dts
-@@ -301,12 +301,9 @@
- 	};
- 
- 	mmc@12200000 {
--		samsung,bus-width = <8>;
- 		bus-width = <8>;
--		samsung,timing = <1 3 3>;
- 		samsung,dw-mshc-ciu-div = <3>;
- 		samsung,dw-mshc-sdr-timing = <1 3>;
--		samsung,removable = <0>;
- 		non-removable;
- 	};
- 
-@@ -315,12 +312,9 @@
- 	};
- 
- 	mmc@12220000 {
--		samsung,bus-width = <4>;
- 		bus-width = <4>;
--		samsung,timing = <1 2 3>;
- 		samsung,dw-mshc-ciu-div = <3>;
- 		samsung,dw-mshc-sdr-timing = <1 2>;
--		samsung,removable = <1>;
- 	};
- 
- 	mmc@12230000 {
-diff --git a/arch/arm/dts/exynos5250-spring.dts b/arch/arm/dts/exynos5250-spring.dts
-index 7270a546a795..9c478837ba44 100644
---- a/arch/arm/dts/exynos5250-spring.dts
-+++ b/arch/arm/dts/exynos5250-spring.dts
-@@ -103,12 +103,9 @@
- 	};
- 
- 	mmc@12200000 {
--		samsung,bus-width = <8>;
- 		bus-width = <8>;
--		samsung,timing = <1 3 3>;
- 		samsung,dw-mshc-ciu-div = <3>;
- 		samsung,dw-mshc-sdr-timing = <1 3>;
--		samsung,removable = <0>;
- 		non-removable;
- 	};
- 
-diff --git a/arch/arm/dts/exynos5420-smdk5420.dts b/arch/arm/dts/exynos5420-smdk5420.dts
-index 1f27baafebaf..6ba1306e862a 100644
---- a/arch/arm/dts/exynos5420-smdk5420.dts
-+++ b/arch/arm/dts/exynos5420-smdk5420.dts
-@@ -106,12 +106,9 @@
- 	};
- 
- 	mmc@12200000 {
--		samsung,bus-width = <8>;
- 		bus-width = <8>;
--		samsung,timing = <1 3 3>;
- 		samsung,dw-mshc-ciu-div = <3>;
- 		samsung,dw-mshc-sdr-timing = <1 3>;
--		samsung,removable = <0>;
- 		non-removable;
- 		samsung,pre-init;
- 	};
-@@ -121,12 +118,9 @@
- 	};
- 
- 	mmc@12220000 {
--		samsung,bus-width = <4>;
- 		bus-width = <4>;
--		samsung,timing = <1 2 3>;
- 		samsung,dw-mshc-ciu-div = <3>;
- 		samsung,dw-mshc-sdr-timing = <1 2>;
--		samsung,removable = <1>;
- 	};
- 
- 	mmc@12230000 {
-diff --git a/arch/arm/dts/exynos5422-odroidxu3.dts b/arch/arm/dts/exynos5422-odroidxu3.dts
-index 767b3e415d58..ef25cf774470 100644
---- a/arch/arm/dts/exynos5422-odroidxu3.dts
-+++ b/arch/arm/dts/exynos5422-odroidxu3.dts
-@@ -280,12 +280,10 @@
- 	};
- 
- 	mmc@12200000 {
--		fifoth_val = <0x201f0020>;
- 		fifo-depth = <0x40>;
- 	};
- 
- 	mmc@12220000 {
--		fifoth_val = <0x201f0020>;
- 		fifo-depth = <0x40>;
- 	};
- 
-diff --git a/arch/arm/dts/exynos54xx.dtsi b/arch/arm/dts/exynos54xx.dtsi
-index fd74166c7e48..5915ed697791 100644
---- a/arch/arm/dts/exynos54xx.dtsi
-+++ b/arch/arm/dts/exynos54xx.dtsi
-@@ -119,12 +119,9 @@
- 	};
- 
- 	mmc@12200000 {
--		samsung,bus-width = <8>;
- 		bus-width = <8>;
--		samsung,timing = <1 3 3>;
- 		samsung,dw-mshc-ciu-div = <3>;
- 		samsung,dw-mshc-sdr-timing = <1 3>;
--		samsung,removable = <0>;
- 		non-removable;
- 		samsung,pre-init;
- 	};
-@@ -134,12 +131,9 @@
- 	};
- 
- 	mmc@12220000 {
--		samsung,bus-width = <4>;
- 		bus-width = <4>;
--		samsung,timing = <1 2 3>;
- 		samsung,dw-mshc-ciu-div = <3>;
- 		samsung,dw-mshc-sdr-timing = <1 2>;
--		samsung,removable = <1>;
- 	};
- 
- 	mmc@12230000 {
+diff --git a/configs/e850-96_defconfig b/configs/e850-96_defconfig
+index bb41635ff784..17054f25fe6b 100644
+--- a/configs/e850-96_defconfig
++++ b/configs/e850-96_defconfig
+@@ -9,11 +9,19 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xf8c00000
+ CONFIG_DEFAULT_DEVICE_TREE="exynos850-e850-96"
+ CONFIG_SYS_LOAD_ADDR=0x80000000
++CONFIG_ANDROID_BOOT_IMAGE=y
+ # CONFIG_AUTOBOOT is not set
+ # CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_HUSH_PARSER=y
++CONFIG_CMD_ABOOTIMG=y
++CONFIG_CMD_CLK=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PART=y
++CONFIG_CMD_TIME=y
+ # CONFIG_NET is not set
+ CONFIG_CLK_EXYNOS850=y
+-# CONFIG_MMC is not set
++CONFIG_MMC_DW=y
+ CONFIG_SOC_SAMSUNG=y
+ CONFIG_EXYNOS_PMU=y
+ CONFIG_EXYNOS_USI=y
 -- 
 2.39.2
 
