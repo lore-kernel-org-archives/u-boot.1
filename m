@@ -4,74 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E2D8C25B79
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 08:28:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18B41C25B79
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 08:28:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3384787F95;
-	Wed, 22 May 2024 10:28:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 9563788414;
+	Wed, 22 May 2024 10:28:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="GdRNculJ";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="lHtdLPt7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1EA6787E95; Wed, 22 May 2024 10:28:25 +0200 (CEST)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 205BB8845E; Wed, 22 May 2024 10:28:57 +0200 (CEST)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EBA687FDD
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 10:28:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CE6C87FDD
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 10:28:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1716366503; x=1718958503;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4Vrp2xFh9EYT55v0YBGO4Th9+/pRrCG53P5FWboOHtg=;
- b=GdRNculJzmPPTedalq3XESZ4wfJ0FlfnESVNVtWUZZN1JMzcn4EXt6afmIe/gpCR
- JrAb3C0Lp8bBTF6uGJWkQG6RZKq5B/nomdNiABhzpJkj4UNeLEVTqN+TL6LFewef
- kkcUReZpXis4kQ3QH8gBUN82BIWzHfmfFvKLIZstOgA=;
-X-AuditID: ac14000a-03e52700000021bc-ee-664daca7b917
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id A5.41.08636.7ACAD466;
- Wed, 22 May 2024 10:28:23 +0200 (CEST)
-Received: from [172.25.39.28] (172.25.0.11) by Berlix.phytec.de (172.25.0.12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 22 May
- 2024 10:28:22 +0200
-Message-ID: <5af6fad4-244b-4b89-b201-cd04c9c1df42@phytec.de>
-Date: Wed, 22 May 2024 10:28:21 +0200
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb.pivistrello.it (93-49-2-63.ip317.fastwebnet.it
+ [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id B50421FB57;
+ Wed, 22 May 2024 10:28:53 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1716366534;
+ bh=USfRVbzdPlm7BSUn7GUxmnY9KjXe1BxBMKUpLe1JOWs=; h=From:To:Subject;
+ b=lHtdLPt7j2QGW5w5RN93NDEVUC/a6V/NhLrMs1Lhkz7hYs+G7qntLR9LhqaU1MO1r
+ oxTiZQBJ3cbJpf3kJMpdm8Op616nPIeD728yPBNUDSip+OuW9NmWpu0s1aAhll0kDO
+ t//Fed+ZxLOQyeFLFzZMzeLsoIzxR8X2SigHP8IZKFHI2G55K4nEIFGTBDC3aKuk7O
+ BSGzpXnmoK6SPhQ5Yv/KwW9K79+pSNjBPD/sCL7u1mlpta2pjMEmXagwH5ym/dVQkt
+ W1Q8AXMA3sV+kMLF5ZgmpPt7owVnKrLg0M3KnLgYzRDyLoUOmxIZq7tbEg+Zxdo1Mu
+ AYFaNR+qQH8uQ==
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Marcel Ziswiler <marcel@ziswiler.com>
+Subject: [PATCH] board: toradex: change maintainer to Francesco
+Date: Wed, 22 May 2024 10:28:48 +0200
+Message-Id: <20240522082848.21536-1-francesco@dolcini.it>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [Upstream] [PATCH 0/6] PHYTEC SOM Detection API v3
-To: Daniel Schultz <d.schultz@phytec.de>, <u-boot@lists.denx.de>,
- <upstream@lists.phytec.de>
-References: <20240522061827.601699-1-d.schultz@phytec.de>
-Content-Language: en-US
-From: Wadim Egorov <w.egorov@phytec.de>
-In-Reply-To: <20240522061827.601699-1-d.schultz@phytec.de>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrGLMWRmVeSWpSXmKPExsWyRpKBR3f5Gt80gxf7WC3e7u1kt+h+p+7A
- 5HH2zg5Gj/7uFtYApigum5TUnMyy1CJ9uwSujNX72ArOcVR0v2pna2B8yNbFyMkhIWAisbL5
- H2MXIxeHkMASJon5eyezQzh3GSXuP5/MDFLFK2AjsfrcXbAOFgFVidvfN7BCxAUlTs58wgJi
- iwrIS9y/NYMdxBYWsJe4sHAJWK+IQJzEul2vmUBsIQFLia+v/4HVMAuIS9x6Mh8sziagLnFn
- wzewmZwCVhK3Z69nhKixkFj85iBUvbzE9rdzmCHmyEu8uLScBeIDeYlp514zQ9ihElu/bGea
- wCg0C8l5s5Csm4Vk7CwkYxcwsqxiFMrNTM5OLcrM1ivIqCxJTdZLSd3ECAprEQauHYx9czwO
- MTJxMB5ilOBgVhLhjV7pmybEm5JYWZValB9fVJqTWnyIUZqDRUmcd3VHcKqQQHpiSWp2ampB
- ahFMlomDU6qBcYt/8pYjafEPGndybNhZlm/1jqHYYMsbWS7GI+6/3/ue2bExOWmu3082l9DP
- MYX2v3bEyloo64Xte93Bn/+y9I2EP/f0QKXbEupFl90vi5fvVHsjuJRvztZ12771XgyIl46O
- 0rpxJOjdLN3EE3Vmkx/oqzP8Zb/6/ljbzRi9qNrqD+v3LBbNVWIpzkg01GIuKk4EAM2Vt3lZ
- AgAA
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,30 +65,186 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Francesco Dolcini <francesco.dolcini@toradex.com>
 
+Marcel is leaving Toradex and the email will start bouncing in a few
+weeks, move maintainership to myself.
 
-Am 22.05.24 um 08:18 schrieb Daniel Schultz:
-> This patch series adds support for the EEPROM v3 API.
-> 
-> V3 is backwards compatible to V2 and therefore, the V2 image still
-> exists at the beginning. Only the API version changed from 2 to 3.
-> 
-> V3 is a block-based memory layout organized as singled-linked list
-> with different types of blocks. This is a more flexible approach and
-> allows us to extend it by more block types in the future.
-> 
-> The V3 data starts with a 8-byte large header which defines the
-> block count (u8), V3 subversion (u8) and data payload length (u16).
-> Additionally the header contains a CRC8 checksum a 3 reserved bytes.
-> 
-> Each block starts with a 4-byte large header which defined the
-> block type (u8), the absolute address of the next block (u16) and a
-> CRC8 checksum. The content itself is defined via the block type and
-> we currently have 2 different types:
-> 
-> 1) MAC: Contains the Ethernet interface number (u8), MAC address
->          (6 x u8) and a CRC8 checksum.
+Cc: Marcel Ziswiler <marcel@ziswiler.com>
+Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+---
+ board/toradex/apalis-imx8/MAINTAINERS     | 2 +-
+ board/toradex/apalis-tk1/MAINTAINERS      | 2 +-
+ board/toradex/apalis_imx6/MAINTAINERS     | 2 +-
+ board/toradex/apalis_t30/MAINTAINERS      | 2 +-
+ board/toradex/colibri-imx6ull/MAINTAINERS | 2 +-
+ board/toradex/colibri-imx8x/MAINTAINERS   | 2 +-
+ board/toradex/colibri_imx6/MAINTAINERS    | 2 +-
+ board/toradex/colibri_imx7/MAINTAINERS    | 2 +-
+ board/toradex/colibri_t20/MAINTAINERS     | 2 +-
+ board/toradex/colibri_t30/MAINTAINERS     | 2 +-
+ board/toradex/colibri_vf/MAINTAINERS      | 2 +-
+ board/toradex/verdin-am62/MAINTAINERS     | 2 +-
+ board/toradex/verdin-imx8mm/MAINTAINERS   | 2 +-
+ board/toradex/verdin-imx8mp/MAINTAINERS   | 2 +-
+ 14 files changed, 14 insertions(+), 14 deletions(-)
 
-For this series,
+diff --git a/board/toradex/apalis-imx8/MAINTAINERS b/board/toradex/apalis-imx8/MAINTAINERS
+index 198399c879ac..761034a516aa 100644
+--- a/board/toradex/apalis-imx8/MAINTAINERS
++++ b/board/toradex/apalis-imx8/MAINTAINERS
+@@ -1,5 +1,5 @@
+ Apalis iMX8
+-M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
++M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+ W:	http://developer.toradex.com/software/linux/linux-software
+ S:	Maintained
+ F:	arch/arm/dts/fsl-imx8qm-apalis.dts
+diff --git a/board/toradex/apalis-tk1/MAINTAINERS b/board/toradex/apalis-tk1/MAINTAINERS
+index e2c6f63dcc7d..393c8dcf8016 100644
+--- a/board/toradex/apalis-tk1/MAINTAINERS
++++ b/board/toradex/apalis-tk1/MAINTAINERS
+@@ -1,5 +1,5 @@
+ Apalis TK1
+-M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
++M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+ S:	Maintained
+ F:	board/toradex/apalis-tk1/
+ F:	board/toradex/common/
+diff --git a/board/toradex/apalis_imx6/MAINTAINERS b/board/toradex/apalis_imx6/MAINTAINERS
+index 0b2907bbe709..d84527c06783 100644
+--- a/board/toradex/apalis_imx6/MAINTAINERS
++++ b/board/toradex/apalis_imx6/MAINTAINERS
+@@ -1,5 +1,5 @@
+ Apalis iMX6
+-M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
++M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+ W:	http://developer.toradex.com/software/linux/linux-software
+ W:      https://www.toradex.com/community
+ S:	Maintained
+diff --git a/board/toradex/apalis_t30/MAINTAINERS b/board/toradex/apalis_t30/MAINTAINERS
+index 097db7deb08f..368decf66744 100644
+--- a/board/toradex/apalis_t30/MAINTAINERS
++++ b/board/toradex/apalis_t30/MAINTAINERS
+@@ -1,5 +1,5 @@
+ Apalis T30
+-M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
++M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+ S:	Maintained
+ F:	board/toradex/apalis_t30/
+ F:	board/toradex/common/
+diff --git a/board/toradex/colibri-imx6ull/MAINTAINERS b/board/toradex/colibri-imx6ull/MAINTAINERS
+index ee6fe6c13ead..6c93e35cc65f 100644
+--- a/board/toradex/colibri-imx6ull/MAINTAINERS
++++ b/board/toradex/colibri-imx6ull/MAINTAINERS
+@@ -1,5 +1,5 @@
+ Colibri iMX6ULL
+-M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
++M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+ W:	http://developer.toradex.com/software/linux/linux-software
+ W:	https://www.toradex.com/community
+ S:	Maintained
+diff --git a/board/toradex/colibri-imx8x/MAINTAINERS b/board/toradex/colibri-imx8x/MAINTAINERS
+index 8c9bf1f63f43..938c2ca0ca01 100644
+--- a/board/toradex/colibri-imx8x/MAINTAINERS
++++ b/board/toradex/colibri-imx8x/MAINTAINERS
+@@ -1,5 +1,5 @@
+ Colibri iMX8X
+-M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
++M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+ W:	http://developer.toradex.com/software/linux/linux-software
+ S:	Maintained
+ F:	arch/arm/dts/fsl-imx8x-colibri.dts
+diff --git a/board/toradex/colibri_imx6/MAINTAINERS b/board/toradex/colibri_imx6/MAINTAINERS
+index 25d3a06a8523..c1067502c082 100644
+--- a/board/toradex/colibri_imx6/MAINTAINERS
++++ b/board/toradex/colibri_imx6/MAINTAINERS
+@@ -1,5 +1,5 @@
+ Colibri iMX6
+-M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
++M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+ W:	http://developer.toradex.com/software/linux/linux-software
+ W:      https://www.toradex.com/community
+ S:	Maintained
+diff --git a/board/toradex/colibri_imx7/MAINTAINERS b/board/toradex/colibri_imx7/MAINTAINERS
+index e4583d5a86a2..80770cc71a96 100644
+--- a/board/toradex/colibri_imx7/MAINTAINERS
++++ b/board/toradex/colibri_imx7/MAINTAINERS
+@@ -1,5 +1,5 @@
+ Colibri iMX7
+-M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
++M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+ W:	http://developer.toradex.com/software/linux/linux-software
+ W:	https://www.toradex.com/community
+ S:	Maintained
+diff --git a/board/toradex/colibri_t20/MAINTAINERS b/board/toradex/colibri_t20/MAINTAINERS
+index d0c5b1133313..58842434024f 100644
+--- a/board/toradex/colibri_t20/MAINTAINERS
++++ b/board/toradex/colibri_t20/MAINTAINERS
+@@ -1,5 +1,5 @@
+ COLIBRI_T20
+-M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
++M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+ S:	Maintained
+ F:	board/toradex/colibri_t20/
+ F:	board/toradex/common/
+diff --git a/board/toradex/colibri_t30/MAINTAINERS b/board/toradex/colibri_t30/MAINTAINERS
+index 006a0e55f113..73859fd25c2e 100644
+--- a/board/toradex/colibri_t30/MAINTAINERS
++++ b/board/toradex/colibri_t30/MAINTAINERS
+@@ -1,5 +1,5 @@
+ Colibri T30
+-M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
++M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+ S:	Maintained
+ F:	board/toradex/colibri_t30/
+ F:	board/toradex/common/
+diff --git a/board/toradex/colibri_vf/MAINTAINERS b/board/toradex/colibri_vf/MAINTAINERS
+index 2e1a74c2db75..a41bd165a7ca 100644
+--- a/board/toradex/colibri_vf/MAINTAINERS
++++ b/board/toradex/colibri_vf/MAINTAINERS
+@@ -1,5 +1,5 @@
+ Colibri VFxx
+-M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
++M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+ W:	http://developer.toradex.com/software/linux/linux-software
+ W:	https://www.toradex.com/community
+ S:	Maintained
+diff --git a/board/toradex/verdin-am62/MAINTAINERS b/board/toradex/verdin-am62/MAINTAINERS
+index 3e30d1d51121..3f69ea88c00e 100644
+--- a/board/toradex/verdin-am62/MAINTAINERS
++++ b/board/toradex/verdin-am62/MAINTAINERS
+@@ -8,6 +8,6 @@ F:	configs/verdin-am62_a53_defconfig
+ F:	configs/verdin-am62_r5_defconfig
+ F:	doc/board/toradex/verdin-am62.rst
+ F:	include/configs/verdin-am62.h
+-M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
++M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+ S:	Maintained
+ W:	https://www.toradex.com/computer-on-modules/verdin-arm-family/ti-am-62
+diff --git a/board/toradex/verdin-imx8mm/MAINTAINERS b/board/toradex/verdin-imx8mm/MAINTAINERS
+index d567f0e1097d..0d58a73b9303 100644
+--- a/board/toradex/verdin-imx8mm/MAINTAINERS
++++ b/board/toradex/verdin-imx8mm/MAINTAINERS
+@@ -1,5 +1,5 @@
+ Verdin iMX8M Mini
+-M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
++M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+ W:	https://www.toradex.com/computer-on-modules/verdin-arm-family/nxp-imx-8m-mini
+ S:	Maintained
+ F:	arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi
+diff --git a/board/toradex/verdin-imx8mp/MAINTAINERS b/board/toradex/verdin-imx8mp/MAINTAINERS
+index 9fe76d8e42f5..a68344885395 100644
+--- a/board/toradex/verdin-imx8mp/MAINTAINERS
++++ b/board/toradex/verdin-imx8mp/MAINTAINERS
+@@ -5,6 +5,6 @@ F:	board/toradex/common/
+ F:	configs/verdin-imx8mp_defconfig
+ F:	doc/board/toradex/verdin-imx8mp.rst
+ F:	include/configs/verdin-imx8mp.h
+-M:	Marcel Ziswiler <marcel.ziswiler@toradex.com>
++M:	Francesco Dolcini <francesco.dolcini@toradex.com>
+ S:	Maintained
+ W:	https://www.toradex.com/computer-on-modules/verdin-arm-family/nxp-imx-8m-plus
+-- 
+2.39.2
 
-Tested-by: Wadim Egorov <w.egorov@phytec.de>
