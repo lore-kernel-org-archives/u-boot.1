@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3642C25B7A
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 14:51:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72B2EC25B7A
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 14:51:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B14588828;
+	by phobos.denx.de (Postfix) with ESMTP id 9CCDD88858;
 	Wed, 22 May 2024 16:50:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="N7IgFsxv";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="pe1o7D8d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21C7C887D9; Wed, 22 May 2024 08:18:45 +0200 (CEST)
+ id 6C88A887D9; Wed, 22 May 2024 08:18:46 +0200 (CEST)
 Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34B5A87F4B
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 08:18:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DE1288488
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 08:18:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=D.Schultz@phytec.de
 DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1716358722; x=1718950722;
+ q=dns/txt; i=@phytec.de; t=1716358724; x=1718950724;
  h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Hg/B9MIOzPGGGYO9eGASDZvDHPUCzcPePe6MYi0u3ws=;
- b=N7IgFsxv9E8e95QQdfraf8ieDJ+ZDdHwBtE5rdOMRyJ0MU8DO8abdrybgrKt9fRj
- mXyY6WYkGSGI4hBy/Ywa8Om/THtsq542XbfEHI/hmzCfLvuPR++EEHCvA8HnwQCe
- HAaqluSDlsvUvgtu2T71Rt+NZd6yP2SI8bgv9EBfJQ0=;
-X-AuditID: ac14000a-03251700000021bc-59-664d8e429fab
+ bh=L00Wl2tUij1ZYslBNNDwznEnRdpzkczpwu8n8l2sttE=;
+ b=pe1o7D8dN4WeLguT99ycGPqONSzSG2qtmpw8x0BZQNoe5JUQJwJgggdOyQjEn1on
+ LwvIGPlhPG0idEtAb9TdZMvldFgUGCUCPFC0MtKvtpSXCCRnAyX/EcdeMgIswKzC
+ lOp2ScVCJcJzKszrNOHd6MZJbbu4TiX6uCK1MHojCms=;
+X-AuditID: ac14000a-03e52700000021bc-5a-664d8e446f86
 Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
  (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 3D.00.08636.24E8D466;
- Wed, 22 May 2024 08:18:42 +0200 (CEST)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 6D.00.08636.44E8D466;
+ Wed, 22 May 2024 08:18:44 +0200 (CEST)
 Received: from ls-radium.phytec (172.25.0.11) by Berlix.phytec.de
  (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 22 May
- 2024 08:18:41 +0200
+ 2024 08:18:43 +0200
 From: Daniel Schultz <d.schultz@phytec.de>
 To: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
 CC: Daniel Schultz <d.schultz@phytec.de>
-Subject: [PATCH 0/6] PHYTEC SOM Detection API v3
-Date: Tue, 21 May 2024 23:18:21 -0700
-Message-ID: <20240522061827.601699-1-d.schultz@phytec.de>
+Subject: [PATCH 1/6] board: phytec: common: Move eeprom read to new function
+Date: Tue, 21 May 2024 23:18:22 -0700
+Message-ID: <20240522061827.601699-2-d.schultz@phytec.de>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20240522061827.601699-1-d.schultz@phytec.de>
+References: <20240522061827.601699-1-d.schultz@phytec.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.25.0.11]
 X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
  (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrELMWRmVeSWpSXmKPExsWyRpKBR9epzzfN4PRBa4u3ezvZLbrfqTsw
- eZy9s4PRo7+7hTWAKYrLJiU1J7MstUjfLoEr4+3UB8wFu/kr9l04xdTAOImni5GTQ0LAROLz
- ianMXYxcHEICS5gkGnYeZoRw7jNKXN3XwQRSxSagJXFny1xmEFtEwExi0drzbF2MHBzMAhoS
- 7c/ASoQFDCRmTTkHZrMIqEo0L3nJAmLzClhK/Ou5ywqxTF5i5qXv7BBxQYmTM5+A1TADxZu3
- zmaGsCUkDr54AWYLCShIzN42mRGmd9q518wQdqjE1i/bmSYwCsxCMmoWklGzkIxawMi8ilEo
- NzM5O7UoM1uvIKOyJDVZLyV1EyMoHEUYuHYw9s3xOMTIxMF4iFGCg1lJhHfTFs80Id6UxMqq
- 1KL8+KLSnNTiQ4zSHCxK4ryrO4JThQTSE0tSs1NTC1KLYLJMHJxSDYxqdo9/vjy/RPtnB+uk
- jRO5zUX0Z0603c9yjmO+1uzLjzL3tO3p9slLkQ6UchaqdOt794vhq9EGQ6cIT+4jzhm7liZv
- t2s3ab745ftfu4errdlX8kVKpFtnVklZs/FqZl7M8dqqY+M7K23x5kf1HDPEAljV09e8WT7L
- 9ddRz593Xmr/1DLpuq7EUpyRaKjFXFScCADfzHMLNQIAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrBLMWRmVeSWpSXmKPExsWyRpKBR9elzzfN4OplQYu3ezvZLbrfqTsw
+ eZy9s4PRo7+7hTWAKYrLJiU1J7MstUjfLoEro32mcUGLUMX0P3UNjOf4uhg5OSQETCS23ehk
+ 72Lk4hASWMIk8eD+VFYI5z6jxLn9y5hBqtgEtCTubJkLZosImEksWnuerYuRg4NZQEOi/RkT
+ SFhYwEfi/69/YCUsAqoSU1sPgMV5BSwl1s38xwaxTF5i5qXv7CA2p4CVxO3Z6xlBbCGgmq+v
+ /7FD1AtKnJz5hAXEZgaqb946mxnClpA4+OIFM0S9gsTsbZMZYWZOO/eaGcIOldj6ZTvTBEah
+ WUhGzUIyahaSUQsYmVcxCuVmJmenFmVm6xVkVJakJuulpG5iBIWuCAPXDsa+OR6HGJk4GA8x
+ SnAwK4nwbtrimSbEm5JYWZValB9fVJqTWnyIUZqDRUmcd3VHcKqQQHpiSWp2ampBahFMlomD
+ U6qBsXnaZ9ftj1a8mNk+4d21Kq/tORZeoVlPgtNWeoc3PLul5RU+JyzzFT+bps1+ZQ1ZFpYG
+ hnlzch8xr24t1y3fVH3ke1yEs/uma7ulZvWtK1U7Kvllce0k1VPr9l7m3qS/8dzOzl980fza
+ eoxnewyqCs/+fj7j9NM383nOFkpsvDthZ9/n73mPtiqxFGckGmoxFxUnAgAMqSWGSwIAAA==
 X-Mailman-Approved-At: Wed, 22 May 2024 16:50:43 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,47 +87,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series adds support for the EEPROM v3 API.
+We need to read multiple times from different offsets in API v3.
+Move the EEPROM read logic into a dedicated function to make it
+usable multiple times.
 
-V3 is backwards compatible to V2 and therefore, the V2 image still
-exists at the beginning. Only the API version changed from 2 to 3.
+Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
+---
+ board/phytec/common/phytec_som_detection.c | 38 ++++++++++++++--------
+ 1 file changed, 24 insertions(+), 14 deletions(-)
 
-V3 is a block-based memory layout organized as singled-linked list
-with different types of blocks. This is a more flexible approach and
-allows us to extend it by more block types in the future.
-
-The V3 data starts with a 8-byte large header which defines the
-block count (u8), V3 subversion (u8) and data payload length (u16).
-Additionally the header contains a CRC8 checksum a 3 reserved bytes.
-
-Each block starts with a 4-byte large header which defined the
-block type (u8), the absolute address of the next block (u16) and a
-CRC8 checksum. The content itself is defined via the block type and
-we currently have 2 different types:
-
-1) MAC: Contains the Ethernet interface number (u8), MAC address
-        (6 x u8) and a CRC8 checksum.
-
-Daniel Schultz (6):
-  board: phytec: common: Move eeprom read to new function
-  board: phytec: common: Define PHYTEC_API2_DATA_LEN
-  board: phytec: common: Move API v2 init to new function
-  board: phytec: common: Add API v3
-  board: phytec: common: k3: Set MAC
-  configs: phycore_am62x_a53_defconfig: Enable CONFIG_ENV_OVERWRITE
-
- board/phytec/common/Kconfig                   |   9 +
- board/phytec/common/Makefile                  |   2 +-
- board/phytec/common/k3/board.c                |  23 ++
- board/phytec/common/phytec_som_detection.c    | 228 +++++++++++++++---
- board/phytec/common/phytec_som_detection.h    |   9 +
- .../common/phytec_som_detection_blocks.c      | 105 ++++++++
- .../common/phytec_som_detection_blocks.h      |  61 +++++
- configs/phycore_am62x_a53_defconfig           |   1 +
- 8 files changed, 408 insertions(+), 30 deletions(-)
- create mode 100644 board/phytec/common/phytec_som_detection_blocks.c
- create mode 100644 board/phytec/common/phytec_som_detection_blocks.h
-
+diff --git a/board/phytec/common/phytec_som_detection.c b/board/phytec/common/phytec_som_detection.c
+index b14bb3dbb7f..a089fe9bc90 100644
+--- a/board/phytec/common/phytec_som_detection.c
++++ b/board/phytec/common/phytec_som_detection.c
+@@ -47,16 +47,9 @@ int phytec_eeprom_data_setup(struct phytec_eeprom_data *data,
+ 	return ret;
+ }
+ 
+-int phytec_eeprom_data_init(struct phytec_eeprom_data *data,
+-			    int bus_num, int addr)
++int phytec_eeprom_read(u8 *data, int bus_num, int addr, int size, int offset)
+ {
+-	int ret, i;
+-	unsigned int crc;
+-	u8 *ptr;
+-	const unsigned int payload_size = sizeof(struct phytec_eeprom_payload);
+-
+-	if (!data)
+-		data = &eeprom_data;
++	int ret;
+ 
+ #if CONFIG_IS_ENABLED(DM_I2C)
+ 	struct udevice *dev;
+@@ -64,19 +57,36 @@ int phytec_eeprom_data_init(struct phytec_eeprom_data *data,
+ 	ret = i2c_get_chip_for_busnum(bus_num, addr, 2, &dev);
+ 	if (ret) {
+ 		pr_err("%s: i2c EEPROM not found: %i.\n", __func__, ret);
+-		goto err;
++		return ret;
+ 	}
+ 
+-	ret = dm_i2c_read(dev, 0, (uint8_t *)data, payload_size);
++	ret = dm_i2c_read(dev, offset, (uint8_t *)data, size);
+ 	if (ret) {
+ 		pr_err("%s: Unable to read EEPROM data: %i\n", __func__, ret);
+-		goto err;
++		return ret;
+ 	}
+ #else
+ 	i2c_set_bus_num(bus_num);
+-	ret = i2c_read(addr, 0, 2, (uint8_t *)data,
+-		       sizeof(struct phytec_eeprom_data));
++	ret = i2c_read(addr, offset, 2, (uint8_t *)data, size);
+ #endif
++	return ret;
++}
++
++int phytec_eeprom_data_init(struct phytec_eeprom_data *data,
++			    int bus_num, int addr)
++{
++	int ret, i;
++	unsigned int crc;
++	u8 *ptr;
++	const unsigned int payload_size = sizeof(struct phytec_eeprom_payload);
++
++	if (!data)
++		data = &eeprom_data;
++
++	ret = phytec_eeprom_read((u8 *)data, bus_num, addr,
++				 payload_size, 0);
++	if (ret)
++		goto err;
+ 
+ 	if (data->payload.api_rev == 0xff) {
+ 		pr_err("%s: EEPROM is not flashed. Prototype?\n", __func__);
 -- 
 2.25.1
 
