@@ -4,76 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA11EC25B78
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 21:35:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 123CCC25B78
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 21:40:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7097881C3;
-	Wed, 22 May 2024 23:35:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9615688489;
+	Wed, 22 May 2024 23:40:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Q+MQe3Fs";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nWtbVTU9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E21BF88422; Wed, 22 May 2024 23:35:49 +0200 (CEST)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
+ id 7D215884B6; Wed, 22 May 2024 23:40:33 +0200 (CEST)
+Received: from mail-vs1-xe2f.google.com (mail-vs1-xe2f.google.com
+ [IPv6:2607:f8b0:4864:20::e2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CFB187C7E
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 23:35:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 439F788464
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 23:40:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=r.stratiienko@gmail.com
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-2e3fa13f018so70033641fa.3
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 14:35:47 -0700 (PDT)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-vs1-xe2f.google.com with SMTP id
+ ada2fe7eead31-481398a7381so467731137.3
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 14:40:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716413747; x=1717018547; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1716414030; x=1717018830; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TsE08N/hUMKhUWSG8nI2cbEsA++e1gBiMjMxxGTtGhk=;
- b=Q+MQe3Fs0DKsml7vidkDeU4L3O3gAX/eQT6HDNy0MfysC+EXXlxEHO98QKiIcae8VI
- 2WHUfi0zFI2RLwfvaLonn9BdPrUWwsv5e9ShnmdOvFZWBAs0ksV6dQIcsfTHXoWv5rF9
- KpY/pJqciX4xJGhoR0wtTq+s8XdnoG5mW3N86qPXggWwH6aV9M1NCwVqt6sD0QJPapt6
- 7dM9zxHqHs1Kwpz9co2Bbmr6OS3++JGqBipRy31Jic47898KJGGa5ihaBc+FxY3SEYRi
- 1YXg0W9QGbar/Do7XU/ZCLUZDMJ6kYK58Q+W6elHSEz/OIUi8O9qQXJir1OHqIu5JHPK
- C55w==
+ bh=3VtLA35ytLSteel0Nfbs3l4nvuBUVouE/q5dgpX1ypg=;
+ b=nWtbVTU9AmOEp2RbnvKSCMn5g+zoM3tp01rhJPKGv9/SaJW1IR8EyY3ZI+IGPWu8EF
+ LzsnqiX+HuoPKpqkS7gzS/pypkrQ+bw01gs9y+y/XYJygjG5S9W5G7Zk9zg9MvULkl3U
+ urNIK08o9dgVpX8fe6cV4Hcc3CJQ0w/ddEBVR8Epn26XO+bA3ekOil2sCop3eUv8U106
+ iUzOlWujLglDS6ZnLVJUJNFBImVdg1oSxDpQPRVb4oBQLlXCY7PZJv1Mc6XCMTdOMZyd
+ uPB0yqXOwjBXL20ZHT35k+PnW6XnNEPBKPv3jJrH+qZZGXMMVTbnd9VQOmj8VbiRmv2e
+ XLnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716413747; x=1717018547;
+ d=1e100.net; s=20230601; t=1716414030; x=1717018830;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TsE08N/hUMKhUWSG8nI2cbEsA++e1gBiMjMxxGTtGhk=;
- b=c6QaP51TqMJLG0S44SSxkujBhtQeFEED2ySSaJysKoqKw0Ggyl+tDBsEvsG/mzt8Uh
- mi8lZioSHxm0zYX2VleBSy5ZK+zTgIIFw09zsan/xXztsSY6CkUvIo1KZ89kD3kkzoNq
- c3+CEJea27SHkbxU4S1NxovoNr2op3/VIp6z3Xg+wBdz/hOGOrT0MROio0o4FM1GFrQX
- FaP0avCLyPZoIUHWjYFXMRJVIl/I3A4gmDVoaSzPiMTapLSOVEcwuGMTa5bLh3UOId6l
- DTByz1DtmUwP1Y0evkr9+crFCxxz8ZyeZWSVsMbrBbU+ugHV0n6JeATjCgPdFk5JA52n
- 4CEw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWQlZ7lEwUr2kRBDC/OmGBb/EJuKXFL4aksnR8wuNDV7XHvnC8ePTBXg2r2RLTispI4pI4awZypxBqV8G+pcyMczvuylw==
-X-Gm-Message-State: AOJu0Yw7sC+7rwjl/U7iC34sM093N22wsmKuGKrpH01DfOYMMZqCCLyk
- AN4bEEb6xCvM9kJbQjuMSiJUdn+ZFSIFQVzHIjdf3kCOqmIppzNe7EWnj0e84kDyZFA8RksirEV
- BYVoITPykVHDYzkcTJu+UzSMPkH8=
-X-Google-Smtp-Source: AGHT+IFJZEcfM2XNEpfl8OwuW/dLNmnbgApUvoG+LC92N29sLLnMH5onf01gNNa8cSXNuJNSFwum9k+SYyFjKX2qZBo=
-X-Received: by 2002:a2e:6a0e:0:b0:2e0:dc93:52ef with SMTP id
- 38308e7fff4ca-2e9494f5017mr21680881fa.26.1716413746478; Wed, 22 May 2024
- 14:35:46 -0700 (PDT)
+ bh=3VtLA35ytLSteel0Nfbs3l4nvuBUVouE/q5dgpX1ypg=;
+ b=IoIyvZoVkFD8fab+U8ALiaexiHZ5HX/2WffKb2SahPDgOMwtp6kTkfdeOw5brm9h2Y
+ mOuSLs2knRSxqjxwSJRQOHJPoYF+wC9U89L9Na8HEWbP18M3eooJLN9S78dN2pDqKrWf
+ Iz+l3ZWD3s7TerwZqgzUW9S+t62wzOfpgDMCBISWxeyq+rJSd7jK8zINP3GfNY8J1Hb3
+ QiWVaEJhF4b+ifc6nijrj6YLz/RJxzlWLV1aJBH1tcQl/iJ2gr5116Bn8ov/0RozkeIC
+ p7mMdiJvj+LVFYCk0XGGDjFKHNAP9Bi5JkB/apejXYq6CXZ0M+0rWd1eaSZyqBlJmPf4
+ akZA==
+X-Gm-Message-State: AOJu0Yzgz5j9QfvDJN1ofFkKejWlgUIH2x3fZpLQVntARkDO8+widrub
+ mksHU0SeRHxpBcSqE+nh90HNJmd7b+m4aa/Yd9YynLYpCmfQb9CJ/VumIgPS8iJ0bUghT8hiyFk
+ j+EoNbSgsdomkZ3M67iruOxWSwqU=
+X-Google-Smtp-Source: AGHT+IF5eWVic9oN6KxTpXggwlZzsEH+pGqkXCgi3RHyJQQsVROZj31QcqCndHAzMRea7F62Bsfm35IpHCO5tiwEXVQ=
+X-Received: by 2002:a05:6102:f14:b0:47e:d89:6ae1 with SMTP id
+ ada2fe7eead31-48900909ce4mr2917135137.12.1716414030040; Wed, 22 May 2024
+ 14:40:30 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240519125337.2557883-1-r.stratiienko@gmail.com>
- <874japzz3s.fsf@baylibre.com>
-In-Reply-To: <874japzz3s.fsf@baylibre.com>
-From: Roman Stratiienko <r.stratiienko@gmail.com>
-Date: Thu, 23 May 2024 00:35:35 +0300
-Message-ID: <CAGphcd=ewtSE8VkfX=c4CL6-L7wj9badr3v_2Ep9QvJqHjZEiw@mail.gmail.com>
-Subject: Re: [PATCH] abootimg: Add init_boot image support
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: sjg@chromium.org, eajames@linux.ibm.com, xypron.glpk@gmx.de, 
- ilias.apalodimas@linaro.org, paulerwan.rio@gmail.com, u-boot@lists.denx.de, 
- igor.opaniuk@gmail.com
+References: <dcEaD5-kc_SzXGz7v_bxIV4C3Rqg0b0x2bWGjCclG5pS_sL_tWoxtWu7VQqu_2SOx0LN3h9bHcaqsa_l-PiOQAMkZpiJ9G4SQta-kfPDuJw=@protonmail.com>
+In-Reply-To: <dcEaD5-kc_SzXGz7v_bxIV4C3Rqg0b0x2bWGjCclG5pS_sL_tWoxtWu7VQqu_2SOx0LN3h9bHcaqsa_l-PiOQAMkZpiJ9G4SQta-kfPDuJw=@protonmail.com>
+From: E Shattow <lucent@gmail.com>
+Date: Wed, 22 May 2024 14:40:17 -0700
+Message-ID: <CANV2PTOBdVQfaecSRVhtXM76daDVdB142SbG03bZ1rrSPKTvpA@mail.gmail.com>
+Subject: Re: [PATCH 1/2 v5] board: starfive: support Pine64 Star64 board
+To: H Bell <dmoo_dv@protonmail.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -92,223 +86,208 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mattijs,
+On Wed, May 22, 2024 at 12:13=E2=80=AFPM H Bell <dmoo_dv@protonmail.com> wr=
+ote:
+>
+> Similar to the Milk-V Mars, The Star64 board contains few differences to =
+the
+> VisionFive 2 boards, so can be part of the same U-boot build.
+>
+> Signed-off-by: Henry Bell <dmoo_dv@protonmail.com>
+> Cc: ycliang@andestech.com
+> Cc: heinrich.schuchardt@canonical.com
+> ---
+>
+> Changes since v1
+>
+> - Fix typos on naming
+> - Create pine64_star64 struct to be populated with PHY values once confir=
+med
+>
+> Changes since v2
+>
+> - Set delays to 0
+> - Add missing 10/100/1000 clocks across the two devices
+> - Set all uA values to 2910
+>
+> Changes since v3
+>
+> - Rebase against d678a59d2d
+>
+> Changes since v4
+>
+> - Fix up delay values
+> ---
+>  board/starfive/visionfive2/spl.c              | 89 +++++++++++++++++++
+>  .../visionfive2/starfive_visionfive2.c        |  4 +
+>  2 files changed, 93 insertions(+)
+>
+> diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfive=
+2/spl.c
+> index b555189556..b794b73b6b 100644
+> --- a/board/starfive/visionfive2/spl.c
+> +++ b/board/starfive/visionfive2/spl.c
+> @@ -86,6 +86,43 @@ static const struct starfive_vf2_pro starfive_verb[] =
+=3D {
+>                 "tx-internal-delay-ps", "0"},
+>  };
+>
+> +static const struct starfive_vf2_pro star64_pine64[] =3D {
+> +       {"/soc/ethernet@16030000", "starfive,tx-use-rgmii-clk", NULL},
+> +       {"/soc/ethernet@16040000", "starfive,tx-use-rgmii-clk", NULL},
+> +
+> +       {"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+> +               "motorcomm,tx-clk-adj-enabled", NULL},
+> +       {"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+> +               "motorcomm,tx-clk-10-inverted", NULL},
+> +       {"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+> +               "motorcomm,tx-clk-100-inverted", NULL},
+> +       {"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+> +               "motorcomm,tx-clk-1000-inverted", NULL},
+> +       {"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+> +               "motorcomm,rx-clk-drv-microamp", "2910"},
+> +       {"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+> +               "motorcomm,rx-data-drv-microamp", "2910"},
+> +       {"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+> +               "rx-internal-delay-ps", "1900"},
+> +       {"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+> +               "tx-internal-delay-ps", "1500"},
+> +
+> +       {"/soc/ethernet@16040000/mdio/ethernet-phy@1",
+> +               "motorcomm,tx-clk-adj-enabled", NULL},
+> +       {"/soc/ethernet@16040000/mdio/ethernet-phy@1",
+> +               "motorcomm,tx-clk-10-inverted", NULL},
+> +       {"/soc/ethernet@16040000/mdio/ethernet-phy@1",
+> +               "motorcomm,tx-clk-100-inverted", NULL},
+> +       {"/soc/ethernet@16040000/mdio/ethernet-phy@1",
+> +               "motorcomm,rx-clk-drv-microamp", "2910"},
+> +       {"/soc/ethernet@16040000/mdio/ethernet-phy@1",
+> +               "motorcomm,rx-data-drv-microamp", "2910"},
+> +       {"/soc/ethernet@16040000/mdio/ethernet-phy@1",
+> +               "rx-internal-delay-ps", "0"},
 
-Thank you for your review.
+> +       {"/soc/ethernet@16040000/mdio/ethernet-phy@1",
+> +               "tx-internal-delay-ps", "300"},
 
-=D1=81=D1=80, 22 =D0=BC=D0=B0=D1=8F 2024=E2=80=AF=D0=B3. =D0=B2 17:43, Matt=
-ijs Korpershoek <mkorpershoek@baylibre.com>:
->
-> Hi Roman,
->
-> Thank you for the patch.
->
-> On dim., mai 19, 2024 at 12:53, Roman Stratiienko <r.stratiienko@gmail.co=
-m> wrote:
->
-> > Quote from [1]:
-> >
-> > "For devices launching with Android 13, the generic ramdisk is removed
-> > from the boot image and placed in a separate init_boot image.
-> > This change leaves the boot image with only the GKI kernel."
-> >
-> > [1]: https://source.android.com/docs/core/architecture/partitions/gener=
-ic-boot
-> > Signed-off-by: Roman Stratiienko <r.stratiienko@gmail.com>
-> > ---
-> >  boot/image-board.c |  5 ++++-
-> >  cmd/abootimg.c     | 26 +++++++++++++++++++++-----
-> >  include/image.h    |  7 +++++++
-> >  3 files changed, 32 insertions(+), 6 deletions(-)
->
-> This patch does not apply on:
-> - next: 7d24c3e06fa9 ("Merge patch series "scripts/setlocalversion sync w=
-ith linux 6.9"")
-> - master: a7f0154c4128 ("Prepare v2024.07-rc3")
->
-> Please consider rebasing when resending.
+Note this 300uS value for tx-internal-delay-ps differs from
+pre-loaded firmware on Star64:
+ ethernet-phy@1 tx_delay_sel =3D <0x00>;
 
-V2 Rebased
+I would prefer to this (even if it is wrong) same as the pre-loaded
+firmware has done. Tuning patches can be applied in some
+future series. Is there a noticeable difference in function to change
+this value from how the pre-loaded firmware does this?
 
+> +};
+> +
+>  void spl_fdt_fixup_mars(void *fdt)
+>  {
+>         static const char compat[] =3D "milkv,mars\0starfive,jh7110";
+> @@ -250,6 +287,56 @@ void spl_fdt_fixup_version_b(void *fdt)
+>         }
+>  }
 >
-> More review below
+> +void spl_fdt_fixup_star64(void *fdt)
+> +{
+> +       static const char compat[] =3D "pine64,star64\0starfive,jh7110";
+> +       u32 phandle;
+> +       u8 i;
+> +       int offset;
+> +       int ret;
+> +
+> +       fdt_setprop(fdt, fdt_path_offset(fdt, "/"), "compatible", compat,=
+ sizeof(compat));
+> +       fdt_setprop_string(fdt, fdt_path_offset(fdt, "/"), "model",
+> +                          "Pine64 Star64");
+> +
+> +       /* gmac0 */
+> +       offset =3D fdt_path_offset(fdt, "/soc/clock-controller@17000000")=
+;
+> +       phandle =3D fdt_get_phandle(fdt, offset);
+> +       offset =3D fdt_path_offset(fdt, "/soc/ethernet@16030000");
+> +
+> +       fdt_setprop_u32(fdt, offset, "assigned-clocks", phandle);
+> +       fdt_appendprop_u32(fdt, offset, "assigned-clocks", JH7110_AONCLK_=
+GMAC0_TX);
+> +       fdt_setprop_u32(fdt, offset,  "assigned-clock-parents", phandle);
+> +       fdt_appendprop_u32(fdt, offset,  "assigned-clock-parents",
+> +                          JH7110_AONCLK_GMAC0_RMII_RTX);
+> +
+> +       /* gmac1 */
+> +       offset =3D fdt_path_offset(fdt, "/soc/clock-controller@13020000")=
+;
+> +       phandle =3D fdt_get_phandle(fdt, offset);
+> +       offset =3D fdt_path_offset(fdt, "/soc/ethernet@16040000");
+> +
+> +       fdt_setprop_u32(fdt, offset, "assigned-clocks", phandle);
+> +       fdt_appendprop_u32(fdt, offset, "assigned-clocks", JH7110_SYSCLK_=
+GMAC1_TX);
+> +       fdt_setprop_u32(fdt, offset,  "assigned-clock-parents", phandle);
+> +       fdt_appendprop_u32(fdt, offset,  "assigned-clock-parents",
+> +                          JH7110_SYSCLK_GMAC1_RMII_RTX);
+> +
+> +       for (i =3D 0; i < ARRAY_SIZE(star64_pine64); i++) {
+> +               offset =3D fdt_path_offset(fdt, star64_pine64[i].path);
+> +
+> +               if (star64_pine64[i].value)
+> +                       ret =3D fdt_setprop_u32(fdt, offset,  star64_pine=
+64[i].name,
+> +                                             dectoul(star64_pine64[i].va=
+lue, NULL));
+> +               else
+> +                       ret =3D fdt_setprop_empty(fdt, offset, star64_pin=
+e64[i].name);
+> +
+> +               if (ret) {
+> +                       pr_err("%s set prop %s fail.\n", __func__, star64=
+_pine64[i].name);
+> +                               break;
+> +               }
+> +       }
+> +}
+> +
+>  void spl_perform_fixups(struct spl_image_info *spl_image)
+>  {
+>         u8 version;
+> @@ -278,6 +365,8 @@ void spl_perform_fixups(struct spl_image_info *spl_im=
+age)
+>                         spl_fdt_fixup_version_b(spl_image->fdt_addr);
+>                 break;
+>                 };
+> +       } else if (!strncmp(product_id, "STAR64", 6)) {
+> +               spl_fdt_fixup_star64(spl_image->fdt_addr);
+>         } else {
+>                 pr_err("Unknown product %s\n", product_id);
+>         };
+> diff --git a/board/starfive/visionfive2/starfive_visionfive2.c b/board/st=
+arfive/visionfive2/starfive_visionfive2.c
+> index 6be5348962..f6114602f8 100644
+> --- a/board/starfive/visionfive2/starfive_visionfive2.c
+> +++ b/board/starfive/visionfive2/starfive_visionfive2.c
+> @@ -27,6 +27,8 @@ DECLARE_GLOBAL_DATA_PTR;
+>         "starfive/jh7110-starfive-visionfive-2-v1.2a.dtb"
+>  #define FDTFILE_VISIONFIVE2_1_3B \
+>         "starfive/jh7110-starfive-visionfive-2-v1.3b.dtb"
+> +#define FDTFILE_PINE64_STAR64 \
+> +       "starfive/jh7110-pine64-star64.dtb"
 >
-> >
-> > diff --git a/boot/image-board.c b/boot/image-board.c
-> > index 75f6906cd5..715654ff01 100644
-> > --- a/boot/image-board.c
-> > +++ b/boot/image-board.c
-> > @@ -414,9 +414,12 @@ static int select_ramdisk(struct bootm_headers *im=
-ages, const char *select, u8 a
-> >                       int ret;
-> >                       if (IS_ENABLED(CONFIG_CMD_ABOOTIMG)) {
-> >                               void *boot_img =3D map_sysmem(get_abootim=
-g_addr(), 0);
-> > +                             void *init_boot_img =3D map_sysmem(get_ai=
-nit_bootimg_addr(), 0);
-> >                               void *vendor_boot_img =3D map_sysmem(get_=
-avendor_bootimg_addr(), 0);
-> > +                             void *ramdisk_img =3D (init_boot_img =3D=
-=3D -1) ? boot_img :
-> > +                                                                      =
-   init_boot_img;
+>  /* enable U74-mc hart1~hart4 prefetcher */
+>  static void enable_prefetcher(void)
+> @@ -87,6 +89,8 @@ static void set_fdtfile(void)
+>                         fdtfile =3D FDTFILE_VISIONFIVE2_1_3B;
+>                         break;
+>                 }
+> +       } else if (!strncmp(product_id, "STAR64", 6)) {
+> +               fdtfile =3D FDTFILE_PINE64_STAR64;
+>         } else {
+>                 log_err("Unknown product\n");
+>                 return;
+> --
+> 2.44.0
 >
-> This line introduces a build warning:
 >
-> ../boot/image-board.c: In function =E2=80=98select_ramdisk=E2=80=99:
-> ../boot/image-board.c:412:68: warning: comparison between pointer and int=
-eger
->   412 |                                 void *ramdisk_img =3D (init_boot_=
-img =3D=3D -1) ? boot_img :
->       |                                                                  =
-  ^~
->
-> Can we please fix it in v2 ?
 
-Fixed
+With that note about phy1 tx-internal-delay-ps (I have no Star64 to test my=
+self)
 
->
-> >
-> > -                             ret =3D android_image_get_ramdisk(boot_im=
-g, vendor_boot_img,
-> > +                             ret =3D android_image_get_ramdisk(ramdisk=
-_img, vendor_boot_img,
-> >                                                               rd_datap,=
- rd_lenp);
-> >                               unmap_sysmem(vendor_boot_img);
->
-> Can we please add unmap_sysmem(init_boot_img); here as well ?
-
-Done.
-
->
-> >                               unmap_sysmem(boot_img);
-> > diff --git a/cmd/abootimg.c b/cmd/abootimg.c
-> > index e68c523705..7c450a3b2d 100644
-> > --- a/cmd/abootimg.c
-> > +++ b/cmd/abootimg.c
-> > @@ -17,6 +17,7 @@
-> >
-> >  /* Please use abootimg_addr() macro to obtain the boot image address *=
-/
-> >  static ulong _abootimg_addr =3D -1;
-> > +static ulong _ainit_bootimg_addr =3D -1;
-> >  static ulong _avendor_bootimg_addr =3D -1;
-> >
-> >  ulong get_abootimg_addr(void)
-> > @@ -24,6 +25,11 @@ ulong get_abootimg_addr(void)
-> >       return (_abootimg_addr =3D=3D -1 ? image_load_addr : _abootimg_ad=
-dr);
-> >  }
-> >
-> > +ulong get_ainit_bootimg_addr(void)
-> > +{
-> > +     return _ainit_bootimg_addr;
-> > +}
-> > +
-> >  ulong get_avendor_bootimg_addr(void)
-> >  {
-> >       return _avendor_bootimg_addr;
-> > @@ -209,7 +215,7 @@ static int do_abootimg_addr(struct cmd_tbl *cmdtp, =
-int flag, int argc,
-> >       char *endp;
-> >       ulong img_addr;
-> >
-> > -     if (argc < 2 || argc > 3)
-> > +     if (argc < 2 || argc > 4)
-> >               return CMD_RET_USAGE;
-> >
-> >       img_addr =3D hextoul(argv[1], &endp);
-> > @@ -220,16 +226,26 @@ static int do_abootimg_addr(struct cmd_tbl *cmdtp=
-, int flag, int argc,
-> >
-> >       _abootimg_addr =3D img_addr;
-> >
-> > -     if (argc =3D=3D 3) {
-> > +     if (argc > 2) {
-> >               img_addr =3D simple_strtoul(argv[2], &endp, 16);
-> >               if (*endp !=3D '\0') {
-> > -                     printf("Error: Wrong vendor image address\n");
-> > +                     printf("Error: Wrong vendor_boot image address\n"=
-);
->
-> Nitpick: this seems like a harmless change but could be done in a
-> separate patch.
->
-> To me, it's fine to include this hunk, but can we mention it in the
-> commit message?
->
-> Something along the lines as "While at it, update wrong error handling
-> message when vendor_boot cannot be loaded".
-
-Added.
-
->
-> >                       return CMD_RET_FAILURE;
-> >               }
-> >
-> >               _avendor_bootimg_addr =3D img_addr;
-> >       }
-> >
-> > +     if (argc =3D=3D 4) {
-> > +             img_addr =3D simple_strtoul(argv[3], &endp, 16);
-> > +             if (*endp !=3D '\0') {
-> > +                     printf("Error: Wrong init_boot image address\n");
-> > +                     return CMD_RET_FAILURE;
-> > +             }
-> > +
-> > +             _ainit_bootimg_addr =3D img_addr;
-> > +     }
-> > +
-> >       return CMD_RET_SUCCESS;
-> >  }
-> >
-> > @@ -346,7 +362,7 @@ fail:
-> >  }
-> >
-> >  static struct cmd_tbl cmd_abootimg_sub[] =3D {
-> > -     U_BOOT_CMD_MKENT(addr, 3, 1, do_abootimg_addr, "", ""),
-> > +     U_BOOT_CMD_MKENT(addr, 4, 1, do_abootimg_addr, "", ""),
-> >       U_BOOT_CMD_MKENT(dump, 2, 1, do_abootimg_dump, "", ""),
-> >       U_BOOT_CMD_MKENT(get, 5, 1, do_abootimg_get, "", ""),
-> >       U_BOOT_CMD_MKENT(load, 5, 1, do_abootimg_load, "", ""),
-> > @@ -375,7 +391,7 @@ static int do_abootimg(struct cmd_tbl *cmdtp, int f=
-lag, int argc,
-> >  U_BOOT_CMD(
-> >       abootimg, CONFIG_SYS_MAXARGS, 0, do_abootimg,
-> >       "manipulate Android Boot Image",
-> > -     "addr <boot_img_addr> [<vendor_boot_img_addr>]>\n"
-> > +     "addr <boot_img_addr> [<vendor_boot_img_addr> [<init_boot_img_add=
-r>]]\n"
-> >       "    - set the address in RAM where boot image is located\n"
-> >       "      ($loadaddr is used by default)\n"
->
-> Please include the help text update in the documentation:
-> doc/android/boot-image.rst
-
-That documentation does not mention 'abootimg addr' command at the moment.
-I do not see an easy way to add it in a way that makes sense.
-
->
-> >       "abootimg dump dtb\n"
-> > diff --git a/include/image.h b/include/image.h
-> > index be3c73a72e..b1fd6b3149 100644
-> > --- a/include/image.h
-> > +++ b/include/image.h
-> > @@ -1982,6 +1982,13 @@ bool is_android_vendor_boot_image_header(const v=
-oid *vendor_boot_img);
-> >   */
-> >  ulong get_abootimg_addr(void);
-> >
-> > +/**
-> > + * get_ainit_bootimg_addr() - Get Android init boot image address
-> > + *
-> > + * Return: Android init boot image address
-> > + */
-> > +ulong get_ainit_bootimg_addr(void);
-> > +
-> >  /**
-> >   * get_avendor_bootimg_addr() - Get Android vendor boot image address
-> >   *
-> > --
-> > 2.40.1
+Reviewed-by: E Shattow <lucent@gmail.com>
