@@ -4,80 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69A33C25B78
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 23:10:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11286C25B78
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 23:31:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C34E884D7;
-	Thu, 23 May 2024 01:10:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6998E884EA;
+	Thu, 23 May 2024 01:31:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hvGsgI3s";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pwY4B/F+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F28E884D7; Thu, 23 May 2024 01:10:54 +0200 (CEST)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
+ id 65FBF884DB; Thu, 23 May 2024 01:31:40 +0200 (CEST)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40986884DC
- for <u-boot@lists.denx.de>; Thu, 23 May 2024 01:10:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C15587F52
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 01:31:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-792ce7a2025so74114485a.0
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 16:10:52 -0700 (PDT)
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-3d036c7545dso144970b6e.0
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 16:31:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1716419451; x=1717024251; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=tzn6VPjWSWcw6Sym8+SKxjFlaboVBt/IVWBZaaLVkXg=;
- b=hvGsgI3sKr7ndiCItbw/F5kva94kiFy3El0B0s/Bbixq9J61mKai8vtAYS3QGxOu7X
- wggWFQqGsSddzjvJZQbPA9nnyMeB6gaut1VqrN4lOn9E8RmFnPVfQXgryd3ntARQY8w4
- 1rol1P9H6hZv/94llDOZ0QkybnAcDf84GcZUc=
+ d=linaro.org; s=google; t=1716420696; x=1717025496; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=4KSpedqgJQD6xKgk5TShLlZWAESt7hzLzIv8k44vm1M=;
+ b=pwY4B/F+9d8T6dDy8D67AcF3tbT0aKT1WphIHtoy97/2oDFa6EEY7axyqXLfVfzKvq
+ uA8C3nvgtc3ill2GKKPNgkQeslW+UiZVx/B9hU3izVd0Ni043c1VoYthIf+Zida3LVvR
+ /EugNoljW+vrqBPZolcaTGtvS6xh8FQwOIU31tSF7Y/pmFxWF22ifuz+3irI4XR0AjZ6
+ yrr3APj9UZleMcXoPU99m8JlHMZIqGcHg/bWKJd19dwjebbiwYor50iACII3fTVQxmdK
+ C6+S+7BCuIt1nb/9YsVqhTSN+yggKRY9sLv1vtlXnHTuKHTqQvOw1YJ8HKNr59y+/1ea
+ qu6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716419451; x=1717024251;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tzn6VPjWSWcw6Sym8+SKxjFlaboVBt/IVWBZaaLVkXg=;
- b=ewIHx8Fhl5Rw3m1BSH+eKorSZwqSK5oqbRkXT+ZG3RqpAeBDdj6uWsZDrh9+9kKkBb
- ykUFntzkRsGfdKp/3ecum+jHAALYtNTUjZiwY5ZKDSszoKxqIVEKWbhpZGC5NBWhBUp+
- gsWMxzj3M2gA9xWnINwH4KRkgPJQIpvVkKYJIabiHDvriAM1NOJODLz8S1BVPAEjuwwk
- jHcIVn7QtVHjsSzHtLKsJywrF51T1gSgJL4RwSBJ5TZCxDEZhkK5dJY5nycrDYLj2Es2
- pJRZJdMmNKeTHUMv2QeiG07Nh2HlwsJ6HWKtd1/4Wo3I/xiUIA7CVSxGh2wo7D3OPQo8
- N0Cg==
-X-Gm-Message-State: AOJu0YxpmtGBNhQAZhYqgKqv4JSgi28jVEcOwEoJcmk66MZHBX+RUWe1
- tyUt2KGUzNuqeVw948Ytn/aHzF/bL09BVKofsk1QEdkRZV6CeCmunJmUvYDsuAY=
-X-Google-Smtp-Source: AGHT+IGPorljzHmrySEiwnbOGEClCEnjGcSxroY0yhfceiRYRRsH9F0c8Ckn5Rd2HEh+AwybWw7jpA==
-X-Received: by 2002:ae9:c203:0:b0:792:9da4:9edc with SMTP id
- af79cd13be357-79499454edcmr322437185a.34.1716419451065; 
- Wed, 22 May 2024 16:10:51 -0700 (PDT)
-Received: from bill-the-cat ([189.178.170.52])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-792bf2ffe59sm1431552885a.83.2024.05.22.16.10.49
+ d=1e100.net; s=20230601; t=1716420696; x=1717025496;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=4KSpedqgJQD6xKgk5TShLlZWAESt7hzLzIv8k44vm1M=;
+ b=O6HG8rKLEyzp250jgrvtUBDlm7llutlp2OUh6Q+bj3lHa1ZdypRCvmgQ1Rm3UVN9TK
+ PjEH6ruygRggAGU+cAgCUE8ZZBuiehpKzy329YrgjB4FFRUoOz4fWO/HuhVVKx6FQRWe
+ BPp5FU9Adu/giRzscBJ4+69F+ZFDfuMzAv8eLxjD6AdnMeCyX/g6wV4qgQV2jDY3eQyS
+ j/5BYsqTct7zheXhI0Qslw8o9WujdkPy65r7G3HWOby9TKYkWKokOd06oPori0VQ1A8E
+ KljbIAuze5sIsBaX4tjxueJEWLYmgy0soJB413LTFLYEvH8L+kbk+yFxOakteYjIrloL
+ bxCA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXyE/gk+cmYb1Cpj/NFtEG2O+0poGwchKFXtFNpfzQk9auDApkEBXlZ4XsPPOUxIktB+6QOwV+wtHjmlb/uZuREIa0uDA==
+X-Gm-Message-State: AOJu0YxqFoHFc1Gk0gyXKycIf2yef2JgXqAusgeIqPDNyY4O72dNzMj4
+ Tp8ym6IIQZUMpiWtCCWrWqUOchgqUx09R+9CGAlAlf5h1e8gpQMFHN7SSiWt9s8=
+X-Google-Smtp-Source: AGHT+IFTr2LTnyN3UzSsyQ6cpHtGjQezSucCktwQJSKt4BCZhe8eFtNF4fHU3FuirNu3ymiO8ShsAg==
+X-Received: by 2002:a05:6808:2387:b0:3c9:b384:3145 with SMTP id
+ 5614622812f47-3d046795c63mr382609b6e.19.1716420696161; 
+ Wed, 22 May 2024 16:31:36 -0700 (PDT)
+Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-3c9caba28c1sm2171466b6e.3.2024.05.22.16.31.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 May 2024 16:10:50 -0700 (PDT)
-Date: Wed, 22 May 2024 17:10:47 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sean Anderson <seanga2@gmail.com>
-Subject: Re: [PATCH 10/15] test: dm: dsa, eth: disable tests when
- CONFIG_NET_LWIP=y
-Message-ID: <20240522231047.GL2568172@bill-the-cat>
-References: <cover.1716393035.git.jerome.forissier@linaro.org>
- <52b126477a39fe8e0bdea9fd9ec70b0951aab88b.1716393035.git.jerome.forissier@linaro.org>
+ Wed, 22 May 2024 16:31:35 -0700 (PDT)
+From: Sam Protsenko <semen.protsenko@linaro.org>
+To: Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Simon Glass <sjg@chromium.org>
+Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Yang Xiwen <forbidden405@outlook.com>,
+ Ferass El Hafidi <vitali64pmemail@protonmail.com>,
+ Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
+ uboot-snps-arc@synopsys.com
+Subject: [PATCH 00/42] mmc: dw_mmc: Enable eMMC on E850-96 board
+Date: Wed, 22 May 2024 18:30:53 -0500
+Message-Id: <20240522233135.26835-1-semen.protsenko@linaro.org>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="CVeiqGJbXySCsTGs"
-Content-Disposition: inline
-In-Reply-To: <52b126477a39fe8e0bdea9fd9ec70b0951aab88b.1716393035.git.jerome.forissier@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,109 +98,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Bring 64-bit support to dw_mmc core and Exynos dw_mmc drivers, and
+enable it on E850-96 board. Additionally do some related cleanups and
+device tree updates.
 
---CVeiqGJbXySCsTGs
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+64-bit version of DesignWare MMC can be often found on modern ARM64
+chips. It's different from its older 32-bit version (which is already
+implemented in U-Boot): some new registers were added, existing
+register addresses are changed, DMA descriptor table is different, etc.
 
-On Wed, May 22, 2024 at 06:00:10PM +0200, Jerome Forissier wrote:
+Exynos DW MMC driver was updated too: ARM64 Exynos chips implement their
+clock drivers using CCF framework, pinmux configuration is done at
+startup in DM capable pinctrl drivers, device tree properties were
+changed w.r.t. their upstream (Linux kernel) counterparts. CLKSEL
+register address is also different on 64-bit Exynos platforms.
 
-> Some sandbox tests make strong assumptions on how the network stack is
-> implemented. For example, the ping tests assume that ARP resolution
-> occurs upon sending out the ICMP packet. This is not always the case
-> with the lwIP stack which can cache ARP information.
-> Therefore, disable these tests when CONFIG_NET_LWIP is enabled.
->=20
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> ---
->  test/dm/dsa.c | 2 ++
->  test/dm/eth.c | 4 ++++
->  2 files changed, 6 insertions(+)
->=20
-> diff --git a/test/dm/dsa.c b/test/dm/dsa.c
-> index c857106eaf..147e2a4afe 100644
-> --- a/test/dm/dsa.c
-> +++ b/test/dm/dsa.c
-> @@ -59,6 +59,7 @@ static int dm_test_dsa_probe(struct unit_test_state *ut=
-s)
-> =20
->  DM_TEST(dm_test_dsa_probe, UT_TESTF_SCAN_FDT);
-> =20
-> +#if !defined(CONFIG_NET_LWIP)
->  /* This test sends ping requests with the local address through each DSA=
- port
->   * via the sandbox DSA master Eth.
->   */
-> @@ -80,3 +81,4 @@ static int dm_test_dsa(struct unit_test_state *uts)
->  }
-> =20
->  DM_TEST(dm_test_dsa, UT_TESTF_SCAN_FDT);
-> +#endif /* !defined(CONFIG_NET_LWIP) */
-> diff --git a/test/dm/eth.c b/test/dm/eth.c
-> index bb3dcc6b95..cf97b1c1ab 100644
-> --- a/test/dm/eth.c
-> +++ b/test/dm/eth.c
-> @@ -170,6 +170,7 @@ static int dm_test_ip6_make_lladdr(struct unit_test_s=
-tate *uts)
->  DM_TEST(dm_test_ip6_make_lladdr, UT_TESTF_SCAN_FDT);
->  #endif
-> =20
-> +#if !defined(CONFIG_NET_LWIP)
->  static int dm_test_eth(struct unit_test_state *uts)
->  {
->  	net_ping_ip =3D string_to_ip("1.1.2.2");
-> @@ -298,6 +299,7 @@ static int dm_test_eth_act(struct unit_test_state *ut=
-s)
->  	return 0;
->  }
->  DM_TEST(dm_test_eth_act, UT_TESTF_SCAN_FDT);
-> +#endif /* !CONFIG_NET_LWIP */
-> =20
->  /* Ensure that all addresses are loaded properly */
->  static int dm_test_ethaddr(struct unit_test_state *uts)
-> @@ -332,6 +334,7 @@ static int dm_test_ethaddr(struct unit_test_state *ut=
-s)
->  }
->  DM_TEST(dm_test_ethaddr, UT_TESTF_SCAN_FDT);
-> =20
-> +#if !defined(CONFIG_NET_LWIP)
->  /* The asserts include a return on fail; cleanup in the caller */
->  static int _dm_test_eth_rotate1(struct unit_test_state *uts)
->  {
-> @@ -616,6 +619,7 @@ static int dm_test_eth_async_ping_reply(struct unit_t=
-est_state *uts)
->  }
-> =20
->  DM_TEST(dm_test_eth_async_ping_reply, UT_TESTF_SCAN_FDT);
-> +#endif /* !CONFIG_NET_LWIP */
-> =20
->  #if IS_ENABLED(CONFIG_IPV6_ROUTER_DISCOVERY)
+The patch series was tested on E850-96 board by running mainline Linux
+kernel with Debian rootfs from eMMC ("boot" partition) with these
+commands:
 
-This seems like a lot of test disabling to me. And since a medium term
-goal would be to then drop the old network stack, a more nuanced
-approach is needed here. If not if/else'ing within the test, rewriting
-tests to cover the concept being tested needs to be done I think.
+8<-------------------------------------------------------------------->8
+env set fdtaddr 0x8a000000
+env set bootaddr 0x94000000
+env set boot_kerneladdr 0x94000800
+part start mmc 0 boot boot_start
+part size mmc 0 boot boot_size
+mmc read $bootaddr $boot_start $boot_size
+abootimg addr $bootaddr
+abootimg get dtb --index=0 dtb_start dtb_size
+cp.b $dtb_start $fdtaddr $dtb_size
+fdt addr $fdtaddr 0x100000
+cp.b $boot_kerneladdr $loadaddr 2aaaa00
+env set bootargs console=ttySAC0,115200n8 printk.devkmsg=on \
+                 root=/dev/mmcblk0p12 rootwait rw
+booti $loadaddr - $fdtaddr
+8<-------------------------------------------------------------------->8
 
---=20
-Tom
+For E850-96 eMMC to function properly in DDR mode, the pending patch [1]
+has to be applied. Otherwise it won't be possible for exynos_dw_mmc
+driver to change CIU clock rate from 200 MHz up to 400 MHz, and MMC will
+fall back to SDR mode, which makes eMMC throughput twice as slower. With
+patch [1] applied, 'mmc info' reports this:
 
---CVeiqGJbXySCsTGs
-Content-Type: application/pgp-signature; name="signature.asc"
+    Bus Speed: 52000000
+    Mode: MMC DDR52 (52MHz)
 
------BEGIN PGP SIGNATURE-----
+and 'clk dump' shows CIU clock rate to be ~400 MHz (after first mmc
+operation, e.g. 'part start' or 'mmc read'):
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZOe3cACgkQFHw5/5Y0
-tyztYwwAsBYPRy7sBBS7soy2KC8oNglK5yupHxg1JhNNIU8Zy9U5dKxevuuqUk0M
-uEBLWqwXOYb4SeiwMVKSoIH65uPzoXJqhWDvknWE/pU4uqbJvokgbc1395ediYYg
-DpecH/oHc+bhmkJ2UUtoy1JLmw59d+XvF1QgXqeOovSIkutqkYAf2xcLznhPZLSC
-j79C9TpT9z40K9OPb9csmw4Xih/xt3fhuzu+G7Xm7IHzFCfYly01cNj974fVRyT8
-zqwbgPcf8P1DsbWvndapLley8F6PLZ05B+Sw08Cj7XWLOSD+1EKG7P/LH68STPNK
-d0XELC1woQQhtlxBm4MfzmL7c9H+wpOS6Abjc233FaiPQptpC9bysS5YdMxeWJVC
-M9fCMoKRW+aO+YpanBpmjZTARTxK6V9ajV0WKRryI7Ty3hGg0N9GaKtXJkiho84g
-iYTUu3sekOfcFp1jAmnIddWul826Kzg5KBynRf27xU6ShHVxI+hWad89pmgYS9mG
-UPpPXO7o
-=IcFj
------END PGP SIGNATURE-----
+    399750000    gout_mmc_embd_sdclkin
 
---CVeiqGJbXySCsTGs--
+Which makes sense, because dw_mmc requests to set CCLKIN = 52 MHz (with
+DDR/8-bit mode), and exynos_dw_mmc tries to set CIU clock rate to:
+
+    SDCLKIN = 2 * ciu_div * CCLKIN = 2 * 4 * 52 MHz = 416 MHz,
+
+and the closest possible value the clock driver can set is 399.75 MHz,
+which works just fine.
+
+For Exynos4 and Exynos5 (ARM32) boards, this patch series was only build
+tested (manually and with buildman). The build is clean (no errors or
+warnings), but I don't have any Exynos4/Exynos5 boards at my disposal,
+so I can't actually verify MMC operation there.
+
+[1] https://lists.denx.de/pipermail/u-boot/2024-March/547719.html
+
+Sam Protsenko (42):
+  mmc: dw_mmc: Remove common.h
+  mmc: dw_mmc: Remove unused version field from struct dwmci_host
+  mmc: dw_mmc: Move struct idmac to dw_mmc.c
+  mmc: dw_mmc: Extract waiting for data busy into a separate routine
+  mmc: dw_mmc: Extract FIFO init into a separate routine
+  mmc: dw_mmc: Extract clock on/off code into a separate routine
+  mmc: dw_mmc: Extract FIFO data transfer into a separate routine
+  mmc: dw_mmc: Extract DMA transfer handling code into a separate
+    routine
+  mmc: dw_mmc: Extract setting the DMA descriptor into a separate
+    routine
+  mmc: dw_mmc: Improve 32-bit IDMAC descriptor namings
+  mmc: dw_mmc: Add support for 64-bit IDMAC
+  mmc: dw_mmc: Replace fifoth_val property with fifo-depth
+  mmc: dw_mmc: Fix kernel-doc comments in dwmmc.h
+  mmc: dw_mmc: Use CONFIG_IS_ENABLED() to check config options
+  mmc: dw_mmc: Improve coding style
+  arm: dts: exynos: Add upstream DW MMC properties to all Exynos dts
+  dt-bindings: exynos: Update bindings doc for DW MMC controller
+  arm: exynos: Add header guard for dwmmc.h
+  mmc: exynos_dw_mmc: Fix obtaining the base address of controller
+  mmc: exynos_dw_mmc: Fix getting private data in
+    exynos_dwmci_board_init()
+  mmc: exynos_dw_mmc: Don't call pinmux functions on ARM64 chips
+  mmc: exynos_dw_mmc: Obtain and use CIU clock via CCF API
+  mmc: exynos_dw_mmc: Use .of_to_plat for device tree parsing
+  mmc: exynos_dw_mmc: Convert to use livetree API
+  mmc: exynos_dw_mmc: Read upstream SDR timing properties
+  mmc: exynos_dw_mmc: Abstract CLKSEL register
+  mmc: exynos_dw_mmc: Refactor fixed CIU clock divider
+  mmc: exynos_dw_mmc: Read common bus-width property
+  mmc: exynos_dw_mmc: Read common clock-frequency property
+  mmc: exynos_dw_mmc: Move quirks from struct dwmci_host to chip data
+  mmc: exynos_dw_mmc: Read and use DDR timing when available
+  mmc: exynos_dw_mmc: Set requested freq in get_mmc_clk() callback
+  mmc: exynos_dw_mmc: Add support for ARM64 Exynos chips
+  mmc: exynos_dw_mmc: Remove common.h
+  mmc: exynos_dw_mmc: Use CONFIG_IS_ENABLED() to check config options
+  mmc: exynos_dw_mmc: Pull all init code into probe function
+  mmc: exynos_dw_mmc: Don't call dwmci_setup_cfg() after add_dwmci()
+  mmc: exynos_dw_mmc: Use dev->name as driver's displayed name
+  mmc: exynos_dw_mmc: Improve coding style
+  arm: dts: exynos: Remove outdated DW MMC properties in all Exynos dts
+  configs: e850-96: Enable MMC
+  doc: samsung: Mention enabled eMMC in E850-96 board doc
+
+ arch/arm/dts/exynos4210-origen.dts         |   3 +-
+ arch/arm/dts/exynos4210-trats.dts          |   6 +-
+ arch/arm/dts/exynos4210-universal_c210.dts |   6 +-
+ arch/arm/dts/exynos4412-odroid.dts         |  14 +-
+ arch/arm/dts/exynos4412-trats2.dts         |  20 +-
+ arch/arm/dts/exynos5250-arndale.dts        |  10 +-
+ arch/arm/dts/exynos5250-smdk5250.dts       |  13 +-
+ arch/arm/dts/exynos5250-snow.dts           |  13 +-
+ arch/arm/dts/exynos5250-spring.dts         |   7 +-
+ arch/arm/dts/exynos5420-smdk5420.dts       |  13 +-
+ arch/arm/dts/exynos5422-odroidxu3.dts      |   4 +-
+ arch/arm/dts/exynos54xx.dtsi               |  13 +-
+ arch/arm/mach-exynos/include/mach/dwmmc.h  |  40 +-
+ configs/e850-96_defconfig                  |  10 +-
+ doc/board/samsung/e850-96.rst              |   5 +-
+ doc/device-tree-bindings/exynos/dwmmc.txt  |  46 +-
+ drivers/mmc/ca_dw_mmc.c                    |   2 +-
+ drivers/mmc/dw_mmc.c                       | 535 +++++++++++++--------
+ drivers/mmc/exynos_dw_mmc.c                | 362 +++++++++-----
+ drivers/mmc/ftsdc010_mci.h                 |   1 -
+ drivers/mmc/hi6220_dw_mmc.c                |   7 +-
+ drivers/mmc/nexell_dw_mmc.c                |   5 +-
+ drivers/mmc/rockchip_dw_mmc.c              |   5 +-
+ drivers/mmc/s5p_sdhci.c                    |   2 +-
+ drivers/mmc/snps_dw_mmc.c                  |   6 +-
+ drivers/mmc/socfpga_dw_mmc.c               |   4 +-
+ include/dwmmc.h                            | 246 +++++-----
+ 27 files changed, 858 insertions(+), 540 deletions(-)
+
+-- 
+2.39.2
+
