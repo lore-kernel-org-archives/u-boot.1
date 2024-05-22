@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7304C25B79
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 15:37:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5B3AC25B78
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 15:37:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88ADF8889D;
-	Wed, 22 May 2024 17:35:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E824E888A6;
+	Wed, 22 May 2024 17:35:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="lm893cqy";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="I0p087HQ";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="Nhjb3QHe";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="VPFZ6L0x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2DE488897; Wed, 22 May 2024 17:35:35 +0200 (CEST)
+ id 03F9E88859; Wed, 22 May 2024 17:35:38 +0200 (CEST)
 Received: from wfhigh8-smtp.messagingengine.com
  (wfhigh8-smtp.messagingengine.com [64.147.123.159])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D7B48888B
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 17:35:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BF77A8888C
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 17:35:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
- by mailfhigh.west.internal (Postfix) with ESMTP id CFE201800132;
- Wed, 22 May 2024 11:35:31 -0400 (EDT)
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
+ by mailfhigh.west.internal (Postfix) with ESMTP id EFAE11800116;
+ Wed, 22 May 2024 11:35:33 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute1.internal (MEProxy); Wed, 22 May 2024 11:35:32 -0400
+ by compute6.internal (MEProxy); Wed, 22 May 2024 11:35:34 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1716392131;
- x=1716478531; bh=yFk4y9nrxj8qXvfM1UImgJEXeDGhg0pkvSHCg2jKqZU=; b=
- lm893cqydiyRFkJscz2DKPS+YT1psGnSllDvyfUVz+G15XpQyT4OaH0zgHPuIwY3
- 8IG4LM+KdvvVgX8nZXQIPZz4nKrWMNvj1dlAPH/O1wL4CSk0LDSI8iOKBqTZJ0PZ
- betFLWoFKZL1pSAplmay4QmjfnaK7PAI2jW0R/L4JBxXx8EZlqobzP0I7ZFjEZAs
- /VQsxGllVQU1GU5MiShBKpR02OFA2hUimoffuqxGPDdoYZ9NOGQz7jLuVFOFDB7k
- TpyQPVJUd0NXRvV1qmCtkU3TUFfl5qM9V8iw/M+J8d4Xq5Dgk1SQHsUqOAkJU/ve
- szU4DFTgqcLYhQvFlLXIXw==
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1716392133;
+ x=1716478533; bh=XoHmMChd3rbnALLWKIivIIIe0iRQJmFakZM3C+iBhWY=; b=
+ Nhjb3QHeye5CkfEm6gD/h5CBwHP7m/sCKTiOD069ekD9JZS/WWw7gUjNxJm7pm/E
+ hCpZkwitx6VJJonEj2AvOW/wZAuaWWbbWkRlAWQyojdbwZHDWJPuS0AzkuRjeKZu
+ edHA5AG8WNX4VuTIjliATkXQ0RICqEkPeod3+UubiwdWpi8AyJIubdJyDV2Hz/+A
+ AIZDHV6O6NyEqc5D0p7f9QOrK4a0LbnS9mz4YfA+EWwLEjAPTaqvajOpi1YS9U6v
+ bqum/SElFs++dQ774McncigPcXH1XrxfIVVEIrVEmkBDM+QKVJHl7/p8CQYK6o4U
+ aNKiLNr47aW7AaSKnXPITw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716392131; x=
- 1716478531; bh=yFk4y9nrxj8qXvfM1UImgJEXeDGhg0pkvSHCg2jKqZU=; b=I
- 0p087HQrKK5Xw6wAE8KmH2Ax39eqrIbSlvkRBA8Tzqoy4H0oZZScv0cz/Y/uT1wd
- au5lkkGyESvhBqBmLniAZBhBWnRiKaNFMrFmuCh43F+lfauUhqfPacCQCVZRNRTe
- cTXVk3vlRXY2ex2Y4R8uP8TPlVDrBTmRE3dHG6ZRyVzNvTngejklo+Hw62D8To0o
- xI0ZElye/aUqHxCGnk5pR/gaN8/8x70TkDhJ2GcFjiuKBbAST/5BPIAp97lMm4G4
- B8lEi/nZ10KEdLCiuny5WGL3ZsL/wpNm5QUTwMgA1VtUHTGu6OZConPC5znS99b/
- MZttynnM64Son1ZNa+LNQ==
-X-ME-Sender: <xms:wxBOZkYfcWwMMtuYfeSZPXgY_7C66WCGpZiIQJYQR2kdzUPHSbg--w>
- <xme:wxBOZvZQwZ6XzinuJ_wuE_MbtxagPsTGKzF8pYFIcIZlb6bqs5wBF58l3mPYd-GWy
- 1bcI5J5J-KC5ZoAGgQ>
-X-ME-Received: <xmr:wxBOZu_UNDVDR9IFS1CxHBxTA-c28C7vOiJoZ9mQctOwKy0mUty96JA>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdeigedgvdefucetufdoteggodetrfdotf
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716392133; x=
+ 1716478533; bh=XoHmMChd3rbnALLWKIivIIIe0iRQJmFakZM3C+iBhWY=; b=V
+ PFZ6L0xLQGUlt9Uxvwe0wbQ35zBWg/Py0HayAV2YaBszlvXhkbzSei13Ety8mQfq
+ j+JBT4xi1+HzUVv52WKhEmGQHIEFih1tusiL80UpWr+mVpbKzLks10csGPegs+m2
+ ae7YPJGKZuz6lLqbEZHM2wzPAAKa3uL3Exg7nq59akNWodD5sUPo6A7wuEdSw85q
+ HErVnFQiRJQzUnNX2AohK+aFKwPR54qOjp/4ooUUbbj6piE+pbR3X9Tfum7mpTea
+ N0duKy2ArFglxgyKjlGp5LsXliC4RAF7gEVqsUwo0z4m+AjVCvMzKIVS9TSnHqs5
+ cAR8cm0KxcC/YkbBhQIWw==
+X-ME-Sender: <xms:xRBOZif6bjBPWTht4jZzVPCSzghMOqdOCYm8p_eD6mqpk7xTaVF9NA>
+ <xme:xRBOZsOo6Qn1XWOV5kPA0Uij4SDtWuwlYvVA6l4AkfM6gMQ7crEoyyfm07jQlGu14
+ x9HiGmA8Kwo4Zp5c9I>
+X-ME-Received: <xmr:xRBOZjhlQMtRFD1z4ZqWinBQYmA-1bTYOF2bL3CbACWcX7feYVB9coE>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdeigedgvdegucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
  cujfgurhephfffufggtgfgkfhfjgfvvefosehtjeertdertdejnecuhfhrohhmpeflihgr
  gihunhcujggrnhhguceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomheqne
  cuggftrfgrthhtvghrnhepvdekiefhfeevkeeuveetfeelffekgedugefhtdduudeghfeu
- veegffegudekjeelnecuvehluhhsthgvrhfuihiivgepvdenucfrrghrrghmpehmrghilh
+ veegffegudekjeelnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilh
  hfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:wxBOZurPBPJWmWR2Dkdnjvkw0wTu3SLEHSvqv--MLl0UQxgyxa5BWA>
- <xmx:wxBOZvqG1DIHhtF5yBqymHNVgrT3ZHXvRQLwWUI7De8yrSLNxVGXbw>
- <xmx:wxBOZsSwIFF-l2m1vKOGNaEZNlShTOlU7wR883ES-5QN3n5FWSvzug>
- <xmx:wxBOZvrsCElKfsJOpm1otr836jySNyPkmFdY4_RlONgGLQwkqLUJLw>
- <xmx:wxBOZgfiHIKYtcFzsQ2VyjxPR98iBJu1vzPWS0ekVod1WXTAv9XmhYTq>
+X-ME-Proxy: <xmx:xRBOZv_U3onh4izd86Ivio9m3oGz_rjcX0YR-IN07dAUF8JV9yE_kA>
+ <xmx:xRBOZuuOlaAKBFUeeHIJGaiws5PHr0eAOStFy4SbvJKEr_3aMeVCCA>
+ <xmx:xRBOZmGYn8mY24fl5mOEQqf4jIuASwCR-uYg4BXsZ7E1dLXiFGu0gw>
+ <xmx:xRBOZtOY5EUOESToOSByixdzHYOHcz8bQz6RG1S8p9lbpLz1oOst-w>
+ <xmx:xRBOZig3O8-sLiqsESbiUL9axepXr1GLmKvsRQLTi6oik18Iz9834CKK>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 22 May 2024 11:35:30 -0400 (EDT)
+ 22 May 2024 11:35:32 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Wed, 22 May 2024 16:34:56 +0100
-Subject: [PATCH 13/16] timer: Add loongarch_timer driver
+Date: Wed, 22 May 2024 16:34:57 +0100
+Subject: [PATCH 14/16] board: emulation: Add qemu-loongarch
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240522-loongarch-v1-13-1407e0b69678@flygoat.com>
+Message-Id: <20240522-loongarch-v1-14-1407e0b69678@flygoat.com>
 References: <20240522-loongarch-v1-0-1407e0b69678@flygoat.com>
 In-Reply-To: <20240522-loongarch-v1-0-1407e0b69678@flygoat.com>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
@@ -90,13 +90,13 @@ To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.denx.de, Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4126;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=8449;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=w3O6McbACadWE3Uk+5OBAe9YV8rsQ6cMZ6k75IFSZs0=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhjQ/geXL54bP/7x74czJqqu2vGpntr/AE+Kjd3L25vfTp
- tUt2HpZpqOUhUGMi0FWTJElRECpb0PjxQXXH2T9gZnDygQyhIGLUwAmEv2CkeGm4D+naPXesA/n
- ZJJOBa99dnFhgcfW+gkTn+2c+izCbGkmUMXTt5bXrrF0pAkKx95LX97MXJvx6e+/+2y3upeftH/
- 0gQsA
+ bh=vqfb87WviAEJUyt6GltxUrU/SVMrmmPNx21zjgMRYXk=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhjQ/geUPpt3+GHernsN0veP2zYc3CP2++PeO/A/ztEeLF
+ MI/TduT01HKwiDGxSArpsgSIqDUt6Hx4oLrD7L+wMxhZQIZwsDFKQATufiH4b/7rZ47l/1jndfI
+ y79iMvshznj72tswgy+GGu6cGS8uftBhZDgsKlU2cZ4Fu1qJQ7TfbXVzAbEp+15pbj7w2+aUXsk
+ zdwYA
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -115,165 +115,319 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement a timer driver for LoongArch architecture driver.
-
-It's synced in hardware for every core in a system, and frequency
-information can be gathered from CPUCFG instruction.
-
-It is not described in fdt, thus I have to declare a DRVINFO
-for it.
+Yet another generic QEMU VIRT machine.
+QEMU placed FDT in memory before launching U-Boot, so we
+can just obtian FDT here.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- drivers/timer/Kconfig           |   8 +++
- drivers/timer/Makefile          |   1 +
- drivers/timer/loongarch_timer.c | 112 ++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 121 insertions(+)
+ arch/loongarch/Kconfig                            |  5 ++
+ arch/loongarch/dts/qemu-loongarch64.dts           |  9 +++
+ board/emulation/qemu-loongarch/Kconfig            | 68 ++++++++++++++++++
+ board/emulation/qemu-loongarch/MAINTAINERS        |  7 ++
+ board/emulation/qemu-loongarch/Makefile           |  6 ++
+ board/emulation/qemu-loongarch/qemu-loongarch.c   | 84 +++++++++++++++++++++++
+ board/emulation/qemu-loongarch/qemu-loongarch.env |  6 ++
+ configs/qemu-loongarch64_defconfig                | 36 ++++++++++
+ include/configs/qemu-loongarch.h                  | 13 ++++
+ 9 files changed, 234 insertions(+)
 
-diff --git a/drivers/timer/Kconfig b/drivers/timer/Kconfig
-index 60519c3b536c..e85c74a537ad 100644
---- a/drivers/timer/Kconfig
-+++ b/drivers/timer/Kconfig
-@@ -340,4 +340,12 @@ config STARFIVE_TIMER
- 	  Select this to enable support for the timer found on
- 	  Starfive SoC.
+diff --git a/arch/loongarch/Kconfig b/arch/loongarch/Kconfig
+index 5254afb2cd05..6cf7ad9b3a4f 100644
+--- a/arch/loongarch/Kconfig
++++ b/arch/loongarch/Kconfig
+@@ -7,9 +7,14 @@ config SYS_ARCH
+ choice
+ 	prompt "Target select"
  
-+config LOONGARCH_TIMER
-+	bool "LoongArch CPU timer support"
-+	depends on TIMER
-+	depends on LOONGARCH
-+	help
-+	  Select this to enable support for the timer found on
-+	  LoongArch CPUs.
++config TARGET_QEMU_LOONGARCH_VIRT
++	bool "Support QEMU Virt Board"
++	select BOARD_LATE_INIT
 +
- endmenu
-diff --git a/drivers/timer/Makefile b/drivers/timer/Makefile
-index b93145e8d437..632d7ac8fd83 100644
---- a/drivers/timer/Makefile
-+++ b/drivers/timer/Makefile
-@@ -35,3 +35,4 @@ obj-$(CONFIG_MCHP_PIT64B_TIMER)	+= mchp-pit64b-timer.o
- obj-$(CONFIG_IMX_GPT_TIMER)	+= imx-gpt-timer.o
- obj-$(CONFIG_XILINX_TIMER)	+= xilinx-timer.o
- obj-$(CONFIG_STARFIVE_TIMER)	+= starfive-timer.o
-+obj-$(CONFIG_LOONGARCH_TIMER)	+= loongarch_timer.o
-diff --git a/drivers/timer/loongarch_timer.c b/drivers/timer/loongarch_timer.c
+ endchoice
+ 
+ # board-specific options below
++source "board/emulation/qemu-loongarch/Kconfig"
+ 
+ # platform-specific options below
+ source "arch/loongarch/cpu/generic/Kconfig"
+diff --git a/arch/loongarch/dts/qemu-loongarch64.dts b/arch/loongarch/dts/qemu-loongarch64.dts
 new file mode 100644
-index 000000000000..4b9f9307511f
+index 000000000000..39d303798fcb
 --- /dev/null
-+++ b/drivers/timer/loongarch_timer.c
-@@ -0,0 +1,112 @@
++++ b/arch/loongarch/dts/qemu-loongarch64.dts
+@@ -0,0 +1,9 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
++ */
++
++/dts-v1/;
++
++/ {
++};
+diff --git a/board/emulation/qemu-loongarch/Kconfig b/board/emulation/qemu-loongarch/Kconfig
+new file mode 100644
+index 000000000000..188cd6967bfd
+--- /dev/null
++++ b/board/emulation/qemu-loongarch/Kconfig
+@@ -0,0 +1,68 @@
++if TARGET_QEMU_LOONGARCH_VIRT
++
++config SYS_BOARD
++	default "qemu-loongarch"
++
++config SYS_VENDOR
++	default "emulation"
++
++config SYS_CPU
++	default "generic"
++
++config SYS_CONFIG_NAME
++	default "qemu-loongarch"
++
++config TEXT_BASE
++	default 0x1c000000
++
++config BOARD_SPECIFIC_OPTIONS # dummy
++	def_bool y
++	select GENERIC_LOONGARCH
++	imply AHCI
++	imply BOARD_LATE_INIT
++	imply PCI_INIT_R
++	imply CMD_PCI
++	imply CMD_POWEROFF
++	imply CMD_SCSI
++	imply CMD_PING
++	imply CMD_EXT2
++	imply CMD_EXT4
++	imply CMD_FAT
++	imply CMD_FS_GENERIC
++	imply DOS_PARTITION
++	imply ISO_PARTITION
++	imply EFI_PARTITION
++	imply SCSI_AHCI
++	imply AHCI_PCI
++	imply E1000
++	imply PCI
++	imply NVME_PCI
++	imply PCIE_ECAM_GENERIC
++	imply DM_RNG
++	imply DM_RTC
++	imply QFW
++	imply QFW_MMIO
++	imply SCSI
++	imply SYS_NS16550
++	imply SYSRESET
++	imply SYSRESET_CMD_POWEROFF
++	imply SYSRESET_SYSCON
++	imply VIRTIO_MMIO
++	imply VIRTIO_PCI
++	imply VIRTIO_NET
++	imply VIRTIO_BLK
++	imply MTD_NOR_FLASH
++	imply CFI_FLASH
++	imply OF_HAS_PRIOR_STAGE
++	imply VIDEO
++	imply VIDEO_BOCHS
++	imply SYS_WHITE_ON_BLACK
++	imply USB
++	imply USB_XHCI_HCD
++	imply USB_XHCI_PCI
++	imply USB_KEYBOARD
++	imply CMD_USB
++	imply UFS
++	imply UFS_PCI
++
++endif
+diff --git a/board/emulation/qemu-loongarch/MAINTAINERS b/board/emulation/qemu-loongarch/MAINTAINERS
+new file mode 100644
+index 000000000000..0ecd8201fb96
+--- /dev/null
++++ b/board/emulation/qemu-loongarch/MAINTAINERS
+@@ -0,0 +1,7 @@
++QEMU LOONGARCH 'VIRT' BOARD
++M:	Jiaxun Yang <jiaxun.yang@flygoat.com>
++S:	Maintained
++F:	board/emulation/qemu-loongarch/
++F:	board/emulation/common/
++F:	include/configs/qemu-loongarch.h
++F:	configs/qemu-loongarch64_defconfig
+diff --git a/board/emulation/qemu-loongarch/Makefile b/board/emulation/qemu-loongarch/Makefile
+new file mode 100644
+index 000000000000..a928b90780e9
+--- /dev/null
++++ b/board/emulation/qemu-loongarch/Makefile
+@@ -0,0 +1,6 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright (C) 2024 Jiaxun yang <jiaxun.yang@flygoat.com>
++#
++
++obj-y	+= qemu-loongarch.o
+diff --git a/board/emulation/qemu-loongarch/qemu-loongarch.c b/board/emulation/qemu-loongarch/qemu-loongarch.c
+new file mode 100644
+index 000000000000..5cedd2c7479e
+--- /dev/null
++++ b/board/emulation/qemu-loongarch/qemu-loongarch.c
+@@ -0,0 +1,84 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
 + */
 +
 +#include <dm.h>
-+#include <errno.h>
-+#include <timer.h>
-+#include <asm/loongarch.h>
++#include <dm/ofnode.h>
++#include <env.h>
++#include <fdtdec.h>
++#include <image.h>
++#include <lmb.h>
++#include <log.h>
++#include <spl.h>
++#include <init.h>
++#include <usb.h>
++#include <virtio_types.h>
++#include <virtio.h>
 +
-+static u64 notrace loongarch_timer_get_count(struct udevice *dev)
++DECLARE_GLOBAL_DATA_PTR;
++
++#if IS_ENABLED(CONFIG_MTD_NOR_FLASH)
++int is_flash_available(void)
 +{
-+	u32 hi, lo;
++	if (!ofnode_equal(ofnode_by_compatible(ofnode_null(), "cfi-flash"),
++			  ofnode_null()))
++		return 1;
 +
-+	if (IS_ENABLED(CONFIG_64BIT))
-+		return drdtime();
-+
-+	do {
-+		hi = rdtimeh();
-+		lo = rdtimel();
-+	} while (hi != rdtimeh());
-+
-+	return ((u64)hi << 32) | lo;
-+}
-+
-+static unsigned int loongarch_timer_get_freq_cpucfg(void)
-+{
-+	unsigned int res;
-+	unsigned int base_freq;
-+	unsigned int cfm, cfd;
-+
-+	res = read_cpucfg(LOONGARCH_CPUCFG2);
-+	if (!(res & CPUCFG2_LLFTP))
-+		return 0;
-+
-+	base_freq = read_cpucfg(LOONGARCH_CPUCFG4);
-+	res = read_cpucfg(LOONGARCH_CPUCFG5);
-+	cfm = res & 0xffff;
-+	cfd = (res >> 16) & 0xffff;
-+
-+	if (!base_freq || !cfm || !cfd)
-+		return 0;
-+
-+	return (base_freq * cfm / cfd);
-+}
-+
-+#if IS_ENABLED(CONFIG_TIMER_EARLY)
-+/**
-+ * timer_early_get_rate() - Get the timer rate before driver model
-+ */
-+unsigned long notrace timer_early_get_rate(void)
-+{
-+	return loongarch_timer_get_freq_cpucfg();
-+}
-+
-+/**
-+ * timer_early_get_count() - Get the timer count before driver model
-+ *
-+ */
-+u64 notrace timer_early_get_count(void)
-+{
-+	return loongarch_timer_get_count(NULL);
++	return 0;
 +}
 +#endif
 +
-+#if CONFIG_IS_ENABLED(BOOTSTAGE)
-+ulong timer_get_boot_us(void)
++phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
 +{
-+	int ret;
-+	u64 ticks = 0;
-+	u32 rate;
++	/* Limit RAM used by U-Boot to the DDR low region */
++	if (gd->ram_top > 0x10000000)
++		return 0x10000000;
 +
-+	ret = dm_timer_init();
-+	if (!ret) {
-+		rate = timer_get_rate(gd->timer);
-+		timer_get_count(gd->timer, &ticks);
-+	} else {
-+		rate = loongarch_timer_get_freq_cpucfg();
-+		ticks = loongarch_timer_get_count(NULL);
-+	}
-+
-+	/* Below is converted from time(us) = (tick / rate) * 10000000 */
-+	return lldiv(ticks * 1000, (rate / 1000));
++	return gd->ram_top;
 +}
-+#endif
 +
-+static int loongarch_timer_bind(struct udevice *dev)
++int board_init(void)
 +{
-+	struct timer_dev_priv *uc_priv = dev_get_uclass_priv(dev);
-+	u32 rate;
++	return 0;
++}
 +
-+	rate = loongarch_timer_get_freq_cpucfg();
-+	uc_priv->clock_rate = rate;
++#define addr_alloc(lmb, size) lmb_alloc(lmb, size, SZ_64K)
++
++int board_late_init(void)
++{
++	struct lmb lmb;
++	u32 status = 0;
++
++	lmb_init_and_reserve(&lmb, gd->bd, (void *)gd->fdt_blob);
++
++	status |= env_set_hex("kernel_addr_r", addr_alloc(&lmb, SZ_128M));
++	status |= env_set_hex("ramdisk_addr_r", addr_alloc(&lmb, SZ_128M));
++	status |= env_set_hex("kernel_comp_addr_r", addr_alloc(&lmb, SZ_64M));
++	status |= env_set_hex("kernel_comp_size", SZ_64M);
++	status |= env_set_hex("scriptaddr", addr_alloc(&lmb, SZ_4M));
++	status |= env_set_hex("pxefile_addr_r", addr_alloc(&lmb, SZ_4M));
++	status |= env_set_hex("fdt_addr_r", addr_alloc(&lmb, SZ_2M));
++
++	if (status)
++		log_warning("late_init: Failed to set run time variables\n");
++
++	/* start usb so that usb keyboard can be used as input device */
++	if (CONFIG_IS_ENABLED(USB_KEYBOARD))
++		usb_init();
++
++	/*
++	 * Make sure virtio bus is enumerated so that peripherals
++	 * on the virtio bus can be discovered by their drivers
++	 */
++	virtio_init();
 +
 +	return 0;
 +}
 +
-+static const struct timer_ops loongarch_timer_ops = {
-+	.get_count = loongarch_timer_get_count,
-+};
++void *board_fdt_blob_setup(int *err)
++{
++	*err = 0;
++	/* Stored the DTB address there during our init */
++	return (void *)(ulong)0x100000;
++}
+diff --git a/board/emulation/qemu-loongarch/qemu-loongarch.env b/board/emulation/qemu-loongarch/qemu-loongarch.env
+new file mode 100644
+index 000000000000..2d130510607d
+--- /dev/null
++++ b/board/emulation/qemu-loongarch/qemu-loongarch.env
+@@ -0,0 +1,6 @@
 +
-+U_BOOT_DRIVER(loongarch_timer) = {
-+	.name = "loongarch_timer",
-+	.id = UCLASS_TIMER,
-+	.probe = loongarch_timer_bind,
-+	.ops = &loongarch_timer_ops,
-+	.flags = DM_FLAG_PRE_RELOC,
-+};
++stdin=serial,usbkbd
++stdout=serial,vidconsole
++stderr=serial,vidconsole
 +
-+U_BOOT_DRVINFO(loongarch_timer) = {
-+	.name = "loongarch_timer",
-+};
++boot_targets=qfw usb scsi virtio nvme dhcp
+diff --git a/configs/qemu-loongarch64_defconfig b/configs/qemu-loongarch64_defconfig
+new file mode 100644
+index 000000000000..d7f9c4338486
+--- /dev/null
++++ b/configs/qemu-loongarch64_defconfig
+@@ -0,0 +1,36 @@
++CONFIG_LOONGARCH=y
++CONFIG_SYS_MALLOC_LEN=0x800000
++CONFIG_SYS_MALLOC_F_LEN=0x4000
++CONFIG_NR_DRAM_BANKS=8
++CONFIG_ENV_SIZE=0x20000
++CONFIG_DEFAULT_DEVICE_TREE="qemu-loongarch64"
++CONFIG_DM_RESET=y
++CONFIG_SYS_LOAD_ADDR=0x02000000
++CONFIG_SHOW_REGS=y
++# CONFIG_OF_BOARD_FIXUP is not set
++CONFIG_SYS_PCI_64BIT=y
++CONFIG_FIT=y
++CONFIG_BOOTSTD_FULL=y
++CONFIG_SYS_BOOTM_LEN=0x4000000
++CONFIG_USE_BOOTARGS=y
++CONFIG_BOOTARGS_SUBST=y
++CONFIG_DISPLAY_CPUINFO=y
++CONFIG_DISPLAY_BOARDINFO=y
++# CONFIG_CMD_MII is not set
++CONFIG_CMD_2048=y
++CONFIG_CMD_RTC=y
++CONFIG_CMD_TIME=y
++CONFIG_CMD_SYSBOOT=y
++CONFIG_CMD_QFW=y
++CONFIG_PARTITION_TYPE_GUID=y
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_BLKMAP=y
++CONFIG_EFI_MEDIA=y
++CONFIG_DM_MMC=y
++CONFIG_DM_MTD=y
++CONFIG_FLASH_SHOW_PROGRESS=0
++CONFIG_SYS_MAX_FLASH_BANKS=2
++CONFIG_PCI_REGION_MULTI_ENTRY=y
++CONFIG_DM_REBOOT_MODE=y
++CONFIG_RESET_SYSCON=y
++CONFIG_HEXDUMP=y
+diff --git a/include/configs/qemu-loongarch.h b/include/configs/qemu-loongarch.h
+new file mode 100644
+index 000000000000..c1af4fee83ff
+--- /dev/null
++++ b/include/configs/qemu-loongarch.h
+@@ -0,0 +1,13 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (c) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
++ */
++
++#ifndef __CONFIG_H
++#define __CONFIG_H
++
++/* Those values are chosen by LoongArchQemuPkg */
++#define CFG_SYS_INIT_RAM_ADDR	0x10000
++#define CFG_SYS_INIT_RAM_SIZE	0x10000
++
++#endif
 
 -- 
 2.43.0
