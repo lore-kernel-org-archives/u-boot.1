@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66447C25B78
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 06:37:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23A31C25B77
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 06:37:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF7BF88822;
-	Wed, 22 May 2024 08:37:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 58B8688835;
+	Wed, 22 May 2024 08:37:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Mc/aiQjo";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="N2OX5rES";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56DB288473; Wed, 22 May 2024 08:37:06 +0200 (CEST)
+ id 2DE9788826; Wed, 22 May 2024 08:37:08 +0200 (CEST)
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B71C8845C
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 08:37:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D25F48881C
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 08:37:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44M6awb8024959;
- Wed, 22 May 2024 01:36:58 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44M6b2AX024973;
+ Wed, 22 May 2024 01:37:02 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1716359818;
- bh=g9z7nfIzqhPMx2pYPGSKk6c30G4wHGgCxy6LkC/Wzfs=;
+ s=ti-com-17Q1; t=1716359822;
+ bh=h2iRrgQOI+/5OMVqCG0XrCtyverrR62sKmBaHq2xcFU=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=Mc/aiQjoIkq93f4XpdD4o8MjbgwpMatwfsI32NNEAD2mck26fX7m0xK6AfIZ74jp5
- C8rsnWxI5wwSWqmzNssL3OtMkXJfchOqzZbzKVAu2PR9j7y0XJpX86BIF6MNkHGCyQ
- FN1UJZfxClBau6Aq51TcUcaYSPOgLlI93CLFg3J0=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44M6awh4055732
+ b=N2OX5rESbRWSWL2+jP6ShbptFwmHOZzhMV0pjoetL1trXSorCpG6dy9/8zRKM3K/j
+ FgvpmM4BaMOJTQ40DCShZbb8xl1CbAQDoniUC2+cOe31BrGtaaejWT3XjC47n07JWT
+ gLdK6DQYPZSQWeVexc2y4Ed+3EIJs7cXizeYACcg=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44M6b2Se013977
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 22 May 2024 01:36:58 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 22 May 2024 01:37:02 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 22
- May 2024 01:36:57 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ May 2024 01:37:02 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 22 May 2024 01:36:57 -0500
+ Frontend Transport; Wed, 22 May 2024 01:37:01 -0500
 Received: from fllv0122.itg.ti.com (fllv0122.itg.ti.com [10.247.120.72])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44M6avmj108040;
- Wed, 22 May 2024 01:36:57 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44M6b1xD114454;
+ Wed, 22 May 2024 01:37:01 -0500
 Received: from localhost (danish-tpc.dhcp.ti.com [10.24.69.25])
- by fllv0122.itg.ti.com (8.14.7/8.14.7) with ESMTP id 44M6av6n009968;
- Wed, 22 May 2024 01:36:57 -0500
+ by fllv0122.itg.ti.com (8.14.7/8.14.7) with ESMTP id 44M6b1FA009980;
+ Wed, 22 May 2024 01:37:01 -0500
 From: MD Danish Anwar <danishanwar@ti.com>
 To: Judith Mendez <jm@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Nikhil M
  Jain <n-jain1@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Jonathan
@@ -62,10 +62,10 @@ To: Judith Mendez <jm@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Nikhil M
  Nishanth Menon <nm@ti.com>, Roger Quadros <rogerq@kernel.org>,
  Vignesh Raghavendra <vigneshr@ti.com>, Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, <srk@ti.com>
-Subject: [PATCH 1/3] arm: dts: k3-am642-evm-u-boot: Add remoteproc-name for
- PRU cores
-Date: Wed, 22 May 2024 12:06:50 +0530
-Message-ID: <20240522063652.3759497-2-danishanwar@ti.com>
+Subject: [PATCH 3/3] board: ti: am64x: Set storage_interface and fw_dev_part
+ ENVs
+Date: Wed, 22 May 2024 12:06:52 +0530
+Message-ID: <20240522063652.3759497-4-danishanwar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240522063652.3759497-1-danishanwar@ti.com>
 References: <20240522063652.3759497-1-danishanwar@ti.com>
@@ -89,68 +89,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add remoteproc-name property for PRU cores.
+When ICSSG driver is enabled (CONFIG_TI_ICSSG_PRUETH=y) set
+storage_interface and fw_dev_part env variables.
+
+These variables need be set appropriately in order to load different
+ICSSG firmwares needed for ICSSG driver. By default the storage
+interface is mmc and the partition is 1:2. User can modify this based on
+their needs.
 
 Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
 ---
- arch/arm/dts/k3-am642-evm-u-boot.dtsi | 44 +++++++++++++++++++++++++++
- 1 file changed, 44 insertions(+)
+ board/ti/am64x/am64x.env | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/arch/arm/dts/k3-am642-evm-u-boot.dtsi b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
-index 705b3baa81..25ddace74e 100644
---- a/arch/arm/dts/k3-am642-evm-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
-@@ -11,6 +11,50 @@
- 	};
- };
- 
-+&pru0_0 {
-+	remoteproc-name = "pru0_0";
-+};
+diff --git a/board/ti/am64x/am64x.env b/board/ti/am64x/am64x.env
+index 9a8812d4ee..8ad805a613 100644
+--- a/board/ti/am64x/am64x.env
++++ b/board/ti/am64x/am64x.env
+@@ -39,3 +39,8 @@ usbboot=setenv boot usb;
+ 	run get_kern_usb;
+ 	run get_fdt_usb;
+ 	run run_kern;
 +
-+&rtu0_0 {
-+	remoteproc-name = "rtu0_0";
-+};
-+
-+&tx_pru0_0 {
-+	remoteproc-name = "tx_pru0_0";
-+};
-+
-+&pru0_1 {
-+	remoteproc-name = "pru0_1";
-+};
-+
-+&rtu0_1 {
-+	remoteproc-name = "rtu0_1";
-+};
-+
-+&tx_pru0_1 {
-+	remoteproc-name = "tx_pru0_1";
-+};
-+
-+&pru1_0 {
-+	remoteproc-name = "pru1_0";
-+};
-+
-+&rtu1_0 {
-+	remoteproc-name = "rtu1_0";
-+};
-+
-+&tx_pru1_0 {
-+	remoteproc-name = "tx_pru1_0";
-+};
-+
-+&pru1_1 {
-+	remoteproc-name = "pru1_1";
-+};
-+
-+&rtu1_1 {
-+	remoteproc-name = "rtu1_1";
-+};
-+
- &main_timer0 {
- 	clock-frequency = <200000000>;
- };
++#if CONFIG_TI_ICSSG_PRUETH
++storage_interface=mmc
++fw_dev_part=1:2
++#endif
 -- 
 2.34.1
 
