@@ -4,84 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 257EAC25B78
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 15:19:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF882C25B78
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 15:21:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7868388823;
-	Wed, 22 May 2024 17:19:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 0D9BE8857E;
+	Wed, 22 May 2024 17:21:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="LbtXmQOR";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="y2Bj5BMo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 180E588831; Wed, 22 May 2024 17:19:08 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 791BE88836; Wed, 22 May 2024 17:21:41 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E4C188823
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 17:19:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E7BF787C75
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 17:21:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-51f99f9e0faso7978597e87.2
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 08:19:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1716391144; x=1716995944; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/uQsHFRPp0IBbloUXmDPU07cQtFEZZH3lQzal1gen7E=;
- b=LbtXmQORaXvwmoNUpbBVIAHRZwo+RDg2I1umDA14yqAGG1KIWYa+JYuxpofXiMxTzS
- o1S5mu/JY8PSmBOzSwYGNVVtbbsQLGPcrrbbqEHPP86o3a/NHjS16amq2GxwnJqgBal0
- V6mxYpw+/tTGI3cmptKnRvm6EL1bwByBAi39AxFxhYNikm4AXBBtOjZ053R1InHh2C9N
- 4Nb5jDfCQGbIDFuHHFlVKGgIOXlOAyJTN+gi/FmEKLjYuqKHf9YFih81uXwZ8t6pMQEP
- OBHJbRvamIF5osm6g/YHHayKxXs2bpt0KQb4rGFYBu6KFTR/v5MtbLFN9VQx9wSdSmwk
- Qgeg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716391144; x=1716995944;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/uQsHFRPp0IBbloUXmDPU07cQtFEZZH3lQzal1gen7E=;
- b=RrH/BBPjkjp9Y7B21NBnndOyO8mCSPF4xZvfpdCvbFjuDxPqLXED5wrbOezcSEq2EW
- VtrRSzYhegXFiVAlJK6ecP5fHb7ZIbY0Oo41T9k5bQtpWljJHHAsQCG325Ip6PhJYSBF
- vBKVbF0ouyT7m57+IwS+zOFcokP5jKQv/t0iM0H0NGZnFX4MA8D9/kJV9vR5X16GywRq
- POAjW3eC8RhixgoY0ISLYnWwIxPV4Gm7id/XfbUPoif3OO0MT6sOZMB+ci1sHNQr5uQd
- HfSqlB4dszrUqQwySoh9gTisoYVI6fLC9B7Qm2Vnu0TcjGWyLoqOIMlyCvRFlpmxpo4w
- Ze9A==
-X-Gm-Message-State: AOJu0YxVJjOI5cOYOinX2ySH4bwidv0gwx80Hq3PEhk9PSVmuj3Z2hZY
- SOh2prxCgfsKTuOQ6r+CE2eFWK1aAMCJq8DXahiTyntwcYmF2tMSLXeJNZVO7OtkV4Cuc1/p4MN
- 4jGTzmIR6kAWE2PKDFnTYltCNzauKdQG/RUsdWEzlMMBQf3az+e4=
-X-Google-Smtp-Source: AGHT+IG94nVaaCvJ1jPFMRe1uz81w+u6MgSHIoOvHUJiwTe0JtunQtHzGipIyhhL5qIBbr8yy8Hk25lMjs8v2aGxMvQ=
-X-Received: by 2002:ac2:4650:0:b0:523:b261:3dde with SMTP id
- 2adb3069b0e04-526be210a62mr1566962e87.41.1716391144466; Wed, 22 May 2024
- 08:19:04 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44MFLUXF034587;
+ Wed, 22 May 2024 10:21:30 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1716391290;
+ bh=3/35BJ1NA6c2uCpQDXdoaOcd2XC+MBTgDZCYMyKqeQQ=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=y2Bj5BModGHBXc+jvvS6X9+kJTGz3TYDNUX+j/1GwKmAHF8xid8W1CY5/JvrxTS3P
+ gaFmfRJMcYX6fWV5n8IhQyBDx8Wv23hK+EaS/lhEIP1SCh45i+tJISIl7rTnL7H1cX
+ 8oK3JFSYohpk77X/wG9sNp1YTJAJJGero/5/wOX0=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44MFLUbO074565
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 22 May 2024 10:21:30 -0500
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 22
+ May 2024 10:21:29 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 22 May 2024 10:21:29 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44MFLTGY060897;
+ Wed, 22 May 2024 10:21:29 -0500
+Message-ID: <d444e122-59d2-44eb-9dde-fb8ec373920e@ti.com>
+Date: Wed, 22 May 2024 10:21:28 -0500
 MIME-Version: 1.0
-References: <20240521205955.3569600-1-tharvey@gateworks.com>
- <5cf2c7a1-4766-4343-a037-3893a03f14df@amd.com>
-In-Reply-To: <5cf2c7a1-4766-4343-a037-3893a03f14df@amd.com>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Wed, 22 May 2024 08:18:52 -0700
-Message-ID: <CAJ+vNU3O_cuo8i0w6XZGyrAs3zTqXRcrrpDsD61WfFt3C7AHLQ@mail.gmail.com>
-Subject: Re: [PATCH v3] fdt: automatically add /chosen/kaslr-seed if DM_RNG is
- enabled
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Devarsh Thakkar <devarsht@ti.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hugo Villeneuve <hvilleneuve@dimonoff.com>, 
- Marek Vasut <marex@denx.de>, Andy Yan <andy.yan@rock-chips.com>, 
- Akash Gajjar <gajjar04akash@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Chris Morgan <macromorgan@hotmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/7] arm: mach-k3: am62a_qos: Move common bit MACROS to
+ k3_qos header file
+To: Jayesh Choudhary <j-choudhary@ti.com>, <trini@konsulko.com>,
+ <u-boot@lists.denx.de>, <u-kumar1@ti.com>
+CC: <a-bhatia1@ti.com>, <nm@ti.com>, <n-francis@ti.com>,
+ <joao.goncalves@toradex.com>, <j-humphreys@ti.com>,
+ <d.haller@phytec.de>, <hnagalla@ti.com>, <bb@ti.com>,
+ <seanga2@gmail.com>, <sjg@chromium.org>, <clamor95@gmail.com>,
+ <martyn.welch@collabora.com>, <m-chawdhry@ti.com>, <a-limaye@ti.com>
+References: <20240522113726.302908-1-j-choudhary@ti.com>
+ <20240522113726.302908-2-j-choudhary@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20240522113726.302908-2-j-choudhary@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,134 +86,202 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, May 22, 2024 at 12:47=E2=80=AFAM Michal Simek <michal.simek@amd.com=
-> wrote:
->
->
->
-> On 5/21/24 22:59, Tim Harvey wrote:
-> > If RANDOMIZE_BASE is enabled in the Linux kernel instructing it to
-> > randomize the virtual address at which the kernel image is loaded, it
-> > expects entropy to be provided by the bootloader by populating
-> > /chosen/kaslr-seed with a 64-bit value from source of entropy at boot.
-> >
-> > If we have DM_RNG enabled populate this value automatically when
-> > fdt_chosen is called. We skip this if ARMV8_SEC_FIRMWARE_SUPPORT
-> > is enabled as it's implementation uses a different source of entropy
-> > that is not yet implemented as DM_RNG. We also skip this if
-> > MEASURED_BOOT is enabled as in that case any modifications to the
-> > dt will cause measured boot to fail (although there are many other
-> > places the dt is altered).
-> >
-> > As this fdt node is added elsewhere create a library function and
-> > use it to deduplicate code. We will provide a parameter to specify the
-> > index of the rng device as well as a boolean to overwrite if present.
-> >
-> > For our automatic injection, we will use the first rng device and
-> > not overwrite if already present with a non-zero value (which may
-> > have been populated by an earlier boot stage). This way if a board
-> > specific ft_board_setup() function wants to customize this behavior
-> > it can call fdt_kaslrseed with a rng device index of its choosing and
-> > set overwrite true.
-> >
-> > Note that the kalsrseed command (CMD_KASLRSEED) is likely pointless now
-> > but left in place in case boot scripts exist that rely on this command
-> > existing and returning success. An informational message is printed to
-> > alert users of this command that it is likely no longer needed.
-> >
-> > Note that the Kernel's EFI STUB only relies on EFI_RNG_PROTOCOL for
-> > randomization and completely ignores the kaslr-seed for its own
-> > randomness needs (i.e the randomization of the physical placement of
-> > the kernel). It gets weeded out from the DTB that gets handed over via
-> > efi_install_fdt() as it would also mess up the measured boot DTB TPM
-> > measurements as well.
-> >
-> > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-> > Cc: Michal Simek <michal.simek@amd.com>
-> > Cc: Andy Yan <andy.yan@rock-chips.com>
-> > Cc: Akash Gajjar <gajjar04akash@gmail.com>
-> > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > Cc: Simon Glass <sjg@chromium.org>
-> > Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> > Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> > Cc: Devarsh Thakkar <devarsht@ti.com>
-> > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > Cc: Hugo Villeneuve <hvilleneuve@dimonoff.com>
-> > Cc: Marek Vasut <marex@denx.de>
-> > Cc: Tom Rini <trini@konsulko.com>
-> > Cc: Chris Morgan <macromorgan@hotmail.com>
-> > ---
-> > v3:
-> >   - skip if CONFIG_MEASURED_BOOT
-> >   - fix skip for CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT
-> >   - pass in rng index and bool to specify overwrite
-> >   - remove duplicate error strings printed outside of fdt_kaslrseed
-> >   - added note to commit log about how EFI STUB weeds out kalsr-seed
-> >
-> > v2:
-> >   - fix typo in commit msg
-> >   - use stack for seed to avoid unecessary malloc/free
-> >   - move to a library function and deduplicate code by using it
-> >     elsewhere
-> > ---
-> >   board/xilinx/common/board.c | 35 -------------------------
-> >   boot/fdt_support.c          |  6 +++++
-> >   boot/pxe_utils.c            | 35 ++-----------------------
-> >   cmd/kaslrseed.c             | 45 +++++---------------------------
-> >   include/kaslrseed.h         | 19 ++++++++++++++
-> >   lib/Makefile                |  1 +
-> >   lib/kaslrseed.c             | 51 ++++++++++++++++++++++++++++++++++++=
-+
-> >   7 files changed, 85 insertions(+), 107 deletions(-)
-> >   create mode 100644 include/kaslrseed.h
-> >   create mode 100644 lib/kaslrseed.c
-> >
-> > diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
-> > index 30a81376ac41..f741e8957818 100644
-> > --- a/board/xilinx/common/board.c
-> > +++ b/board/xilinx/common/board.c
-> > @@ -713,41 +713,6 @@ int ft_board_setup(void *blob, struct bd_info *bd)
-> >       if (IS_ENABLED(CONFIG_FDT_FIXUP_PARTITIONS) && IS_ENABLED(CONFIG_=
-NAND_ZYNQ))
-> >               fdt_fixup_mtdparts(blob, nodes, ARRAY_SIZE(nodes));
-> >
->
-> one more thing here. Please also removed unused variables.
->
-> board/xilinx/common/board.c: In function 'ft_board_setup':
-> board/xilinx/common/board.c:707:25: warning: unused variable 'ret'
-> [-Wunused-variable]
->    707 |         int nodeoffset, ret;
->        |                         ^~~
-> board/xilinx/common/board.c:707:13: warning: unused variable 'nodeoffset'
-> [-Wunused-variable]
->    707 |         int nodeoffset, ret;
->        |             ^~~~~~~~~~
->    AS      arch/arm/cpu/armv8/cache.o
-> board/xilinx/common/board.c:706:12: warning: unused variable 'buf'
-> [-Wunused-variable]
->    706 |         u8 buf[MAX_RAND_SIZE];
->        |            ^~~
-> board/xilinx/common/board.c:705:25: warning: unused variable 'dev'
-> [-Wunused-variable]
->    705 |         struct udevice *dev;
->        |                         ^~~
-> board/xilinx/common/board.c:704:16: warning: unused variable 'n' [-Wunuse=
-d-variable]
->    704 |         size_t n =3D MAX_RAND_SIZE;
->        |                ^
->
+On 5/22/24 6:37 AM, Jayesh Choudhary wrote:
+> QoS bit mapping are common across all K3 SoCs so move those defines
+> to common header file (k3_qos.h).
+> This ensures that we do not define these for each SoC.
+> 
+> Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
+> ---
+>   arch/arm/mach-k3/include/mach/k3-qos.h | 74 ++++++++++++++++++++++++++
+>   arch/arm/mach-k3/r5/am62ax/am62a_qos.h | 74 --------------------------
+>   2 files changed, 74 insertions(+), 74 deletions(-)
+> 
+> diff --git a/arch/arm/mach-k3/include/mach/k3-qos.h b/arch/arm/mach-k3/include/mach/k3-qos.h
+> index e00e1de5b9..6ed5704803 100644
+> --- a/arch/arm/mach-k3/include/mach/k3-qos.h
+> +++ b/arch/arm/mach-k3/include/mach/k3-qos.h
+> @@ -9,6 +9,80 @@
+>   
+>   #include <linux/kernel.h>
+>   
+> +#define QOS_0	(0 << 0)
+> +#define QOS_1	(1 << 0)
+> +#define QOS_2	(2 << 0)
+> +#define QOS_3	(3 << 0)
+> +#define QOS_4	(4 << 0)
+> +#define QOS_5	(5 << 0)
+> +#define QOS_6	(6 << 0)
+> +#define QOS_7	(7 << 0)
+> +
+> +#define ORDERID_0	(0 << 4)
+> +#define ORDERID_1	(1 << 4)
+> +#define ORDERID_2	(2 << 4)
+> +#define ORDERID_3	(3 << 4)
+> +#define ORDERID_4	(4 << 4)
+> +#define ORDERID_5	(5 << 4)
+> +#define ORDERID_6	(6 << 4)
+> +#define ORDERID_7	(7 << 4)
+> +#define ORDERID_8	(8 << 4)
+> +#define ORDERID_9	(9 << 4)
+> +#define ORDERID_10	(10 << 4)
+> +#define ORDERID_11	(11 << 4)
+> +#define ORDERID_12	(12 << 4)
+> +#define ORDERID_13	(13 << 4)
+> +#define ORDERID_14	(14 << 4)
+> +#define ORDERID_15	(15 << 4)
+> +
+> +#define ASEL_0	(0 << 8)
+> +#define ASEL_1	(1 << 8)
+> +#define ASEL_2	(2 << 8)
+> +#define ASEL_3	(3 << 8)
+> +#define ASEL_4	(4 << 8)
+> +#define ASEL_5	(5 << 8)
+> +#define ASEL_6	(6 << 8)
+> +#define ASEL_7	(7 << 8)
+> +#define ASEL_8	(8 << 8)
+> +#define ASEL_9	(9 << 8)
+> +#define ASEL_10	(10 << 8)
+> +#define ASEL_11	(11 << 8)
+> +#define ASEL_12	(12 << 8)
+> +#define ASEL_13	(13 << 8)
+> +#define ASEL_14	(14 << 8)
+> +#define ASEL_15	(15 << 8)
+> +
+> +#define EPRIORITY_0	(0 << 12)
+> +#define EPRIORITY_1	(1 << 12)
+> +#define EPRIORITY_2	(2 << 12)
+> +#define EPRIORITY_3	(3 << 12)
+> +#define EPRIORITY_4	(4 << 12)
+> +#define EPRIORITY_5	(5 << 12)
+> +#define EPRIORITY_6	(6 << 12)
+> +#define EPRIORITY_7	(7 << 12)
+> +
+> +#define VIRTID_0	(0 << 16)
+> +#define VIRTID_1	(1 << 16)
+> +#define VIRTID_2	(2 << 16)
+> +#define VIRTID_3	(3 << 16)
+> +#define VIRTID_4	(4 << 16)
+> +#define VIRTID_5	(5 << 16)
+> +#define VIRTID_6	(6 << 16)
+> +#define VIRTID_7	(7 << 16)
+> +#define VIRTID_8	(8 << 16)
+> +#define VIRTID_9	(9 << 16)
+> +#define VIRTID_10	(10 << 16)
+> +#define VIRTID_11	(11 << 16)
+> +#define VIRTID_12	(12 << 16)
+> +#define VIRTID_13	(13 << 16)
+> +#define VIRTID_14	(14 << 16)
+> +#define VIRTID_15	(15 << 16)
 
-Hi Michal,
 
-Thanks... missed those. What defconfig are you building that gets to
-this codepath?
+This all seem like it could be made into some macro, something like
 
-I'll send a v4 after another day or so for others to respond.
+#define K3_QOS(qos, orderid, asel, epriority, virtid, atype) \
+	(qos     << 0 | \
+	 orderid << 4 | \
+	 asel    << 8 | \
+etc..
 
-With these changes (and the previous response) do you have a rb or
-tested-by tag for me?
+Then use that instead of raw values. That might also make it more clear
+we are setting the other values to 0 when we are setting these registers:
 
-Best Regards,
+.val = K3_QOS(0, 15, 0, 0, 0, 3),
 
-Tim
+Andrew
+
+
+> +
+> +#define ATYPE_0	(0 << 28)
+> +#define ATYPE_1	(1 << 28)
+> +#define ATYPE_2	(2 << 28)
+> +#define ATYPE_3	(3 << 28)
+> +
+>   struct k3_qos_data {
+>   	u32 reg;
+>   	u32 val;
+> diff --git a/arch/arm/mach-k3/r5/am62ax/am62a_qos.h b/arch/arm/mach-k3/r5/am62ax/am62a_qos.h
+> index c74d69a28f..84a6dc7240 100644
+> --- a/arch/arm/mach-k3/r5/am62ax/am62a_qos.h
+> +++ b/arch/arm/mach-k3/r5/am62ax/am62a_qos.h
+> @@ -6,80 +6,6 @@
+>    * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
+>    */
+>   
+> -#define QOS_0	(0 << 0)
+> -#define QOS_1	(1 << 0)
+> -#define QOS_2	(2 << 0)
+> -#define QOS_3	(3 << 0)
+> -#define QOS_4	(4 << 0)
+> -#define QOS_5	(5 << 0)
+> -#define QOS_6	(6 << 0)
+> -#define QOS_7	(7 << 0)
+> -
+> -#define ORDERID_0	(0 << 4)
+> -#define ORDERID_1	(1 << 4)
+> -#define ORDERID_2	(2 << 4)
+> -#define ORDERID_3	(3 << 4)
+> -#define ORDERID_4	(4 << 4)
+> -#define ORDERID_5	(5 << 4)
+> -#define ORDERID_6	(6 << 4)
+> -#define ORDERID_7	(7 << 4)
+> -#define ORDERID_8	(8 << 4)
+> -#define ORDERID_9	(9 << 4)
+> -#define ORDERID_10	(10 << 4)
+> -#define ORDERID_11	(11 << 4)
+> -#define ORDERID_12	(12 << 4)
+> -#define ORDERID_13	(13 << 4)
+> -#define ORDERID_14	(14 << 4)
+> -#define ORDERID_15	(15 << 4)
+> -
+> -#define ASEL_0	(0 << 8)
+> -#define ASEL_1	(1 << 8)
+> -#define ASEL_2	(2 << 8)
+> -#define ASEL_3	(3 << 8)
+> -#define ASEL_4	(4 << 8)
+> -#define ASEL_5	(5 << 8)
+> -#define ASEL_6	(6 << 8)
+> -#define ASEL_7	(7 << 8)
+> -#define ASEL_8	(8 << 8)
+> -#define ASEL_9	(9 << 8)
+> -#define ASEL_10	(10 << 8)
+> -#define ASEL_11	(11 << 8)
+> -#define ASEL_12	(12 << 8)
+> -#define ASEL_13	(13 << 8)
+> -#define ASEL_14	(14 << 8)
+> -#define ASEL_15	(15 << 8)
+> -
+> -#define EPRIORITY_0	(0 << 12)
+> -#define EPRIORITY_1	(1 << 12)
+> -#define EPRIORITY_2	(2 << 12)
+> -#define EPRIORITY_3	(3 << 12)
+> -#define EPRIORITY_4	(4 << 12)
+> -#define EPRIORITY_5	(5 << 12)
+> -#define EPRIORITY_6	(6 << 12)
+> -#define EPRIORITY_7	(7 << 12)
+> -
+> -#define VIRTID_0	(0 << 16)
+> -#define VIRTID_1	(1 << 16)
+> -#define VIRTID_2	(2 << 16)
+> -#define VIRTID_3	(3 << 16)
+> -#define VIRTID_4	(4 << 16)
+> -#define VIRTID_5	(5 << 16)
+> -#define VIRTID_6	(6 << 16)
+> -#define VIRTID_7	(7 << 16)
+> -#define VIRTID_8	(8 << 16)
+> -#define VIRTID_9	(9 << 16)
+> -#define VIRTID_10	(10 << 16)
+> -#define VIRTID_11	(11 << 16)
+> -#define VIRTID_12	(12 << 16)
+> -#define VIRTID_13	(13 << 16)
+> -#define VIRTID_14	(14 << 16)
+> -#define VIRTID_15	(15 << 16)
+> -
+> -#define ATYPE_0	(0 << 28)
+> -#define ATYPE_1	(1 << 28)
+> -#define ATYPE_2	(2 << 28)
+> -#define ATYPE_3	(3 << 28)
+> -
+>   #define PULSAR_UL_WKUP_0_CPU0_RMST	0x45D14000
+>   #define PULSAR_UL_WKUP_0_CPU0_WMST	0x45D14400
+>   #define PULSAR_UL_WKUP_0_CPU0_PMST	0x45D14800
