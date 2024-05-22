@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B0F8C25B79
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 15:35:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BDB2C25B79
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 15:35:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF02788851;
-	Wed, 22 May 2024 17:35:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5B90388858;
+	Wed, 22 May 2024 17:35:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="kprPCtc4";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="HcE5HwS5";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="PpJF8w8I";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="cXnrtIO6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9890388836; Wed, 22 May 2024 17:35:09 +0200 (CEST)
+ id 32CB488858; Wed, 22 May 2024 17:35:11 +0200 (CEST)
 Received: from wfout5-smtp.messagingengine.com
  (wfout5-smtp.messagingengine.com [64.147.123.148])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65EF887CDB
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 17:35:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3455787AD2
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 17:35:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
- by mailfout.west.internal (Postfix) with ESMTP id 3F38A1C00176;
- Wed, 22 May 2024 11:35:05 -0400 (EDT)
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+ by mailfout.west.internal (Postfix) with ESMTP id 6250E1C0017B;
+ Wed, 22 May 2024 11:35:07 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute4.internal (MEProxy); Wed, 22 May 2024 11:35:05 -0400
+ by compute1.internal (MEProxy); Wed, 22 May 2024 11:35:07 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1716392104;
- x=1716478504; bh=C9xIworzKuIheF3D6pKKb12BpumbLfp4RV6PHRCuaHw=; b=
- kprPCtc4MDnwEq7TIxSzOCdJwH37JRQB/dnT08/Kc3nhHJyujWQuB9iaN9hDmQAW
- SR9wwn2Ef2WYFumo0n6Rlh+AVED1ETY1KBG+YarxJGs2z6KhSMBD0iW85//lAxZa
- +oZM//QvRQzWiHgUHa9QTTuX5HUpmYj7hFzxUgEXV66/EZZRg2erpS8ov0M9ZMY+
- tZasZyl1UJzoG9rhUH85gYvmjoyNcLQdsH588eG2fI3ecnstmslavaAF8EKH/5ys
- fULM/Tac2onTRs20SIO4wcn2sS2+7evIWzPUZPqB5Vi16cuwHOuy4LILTUPUJh3p
- 5zJH1UAEMMhQTe495pl94Q==
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1716392107;
+ x=1716478507; bh=SyfO/qDpqlXwbz8kGJnhz6Sm1vKfY4dYGC8PEM21yik=; b=
+ PpJF8w8Ioz5hNyuRRiApPwAf4BcWTfGcGhspEkIgfjkWmda/vGa4pUPe3dh7U832
+ fOfL2uT5fMRAYPczuCEDcxm28R1AuaMM3YNhUSYUD7UNuc8wx9mXQrDu4SrcnkXL
+ ZamDzmuTbpeDuyxZKe9+xn/oFy+saNjNIIUfxbUcFUo2GUGJrbEY6uaKqKhisajS
+ 5SFDaO4tNFYunxSv0OnTzYOzbnvI8+r++OYGgMrU1BCXMvGodGuvzQtmyzff2Ie/
+ uNZzr82LSU6K8kp+vXdmTrgnlHccfP+v08h0XBmh+9sswFvfXObL1w48WWaaDdje
+ pJ/lIcKJLzztq4sqclCqkA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716392104; x=
- 1716478504; bh=C9xIworzKuIheF3D6pKKb12BpumbLfp4RV6PHRCuaHw=; b=H
- cE5HwS5KUPlOTSXv/lr+YMzq+4NUGCpCckSN1d01E9A4QX0ZyyG7JKfYNw/+awws
- Lz86VzHuXFEB6jEvHIHBdhPkxq296I3c7Emkl12TgcN68WgTYCAxB2kHK0e/mG6e
- Vl0zDyr5Qp96eAUalRVP48FGOF7Hsh33Od4K6VXK8h8pwOVwlwulD0KpPPCAIyUq
- nWE42tNVuGoy547pTBkYLoz42C6fWaPEYy0qyDLVrNN8zn61GZ+CgntsOpzZKmBE
- W4RvYceCUcd85IR8jHOXqRb4c2UZwq/Xo9Ct1x8mPhVIYH/yDoLs6iXijHWliIhK
- Y34XnQLr9I0uqTXmvACTw==
-X-ME-Sender: <xms:qBBOZpWCm4byoxawWvlGGHNvU-XLwIrLXilVHHXLC4qZOK5eKTHiUw>
- <xme:qBBOZpmT2uauYsCRAh3JMlnis9vdCo1UmjHec0zZwd8Plf7C8owzNYH4iJa3q2trV
- QSr94y9wbrgxXCtmwU>
-X-ME-Received: <xmr:qBBOZlamGGI72dPgAE5WEARe6OkDgAl-AUDNww6cvnj-mObtXFHD36A>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdeigedgvdegucetufdoteggodetrfdotf
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716392107; x=
+ 1716478507; bh=SyfO/qDpqlXwbz8kGJnhz6Sm1vKfY4dYGC8PEM21yik=; b=c
+ XnrtIO6VVrTwSgAeKxMjv7F0ItYqA4Axc53qbVnnlqyixrrFR/DubpZl+Ugd4iFU
+ 4JITXAJOClAzcbpVOhhwwQ62un5FWWAGtIsuN2skOHkMFe6XyJOdzWMraK0HxWcn
+ L8WdfNgTw/N0IoHwrgGXQ7m57A5cd2+S51wtOpLHqLISsVMzrpqJjeiUPLqKvo5l
+ +VQE6xo7e0bi2xejcWhcinYdPcJ5Djr3gduuQHn6j96X4S7g425IAFhTv5nVy2y7
+ zg7ZajbxIpj5R0HFOFY48J6i7WUF8ujSGeW/QheAOHuxYnotW05BFyxPXzhQ48mN
+ DS38+UurBpMhICJDRcT1A==
+X-ME-Sender: <xms:qhBOZkBNI99TnJjsF-2q58zWkWEnTCMacoISTccQTV1VsNlvV2a5mA>
+ <xme:qhBOZmiAZbhEnOxysPDK7ei8tfqz4yjw-ENLQXAcj5N5dAm43zSNkY1_GzqsSYjAO
+ 0hicy8JzrE5_SEe8rA>
+X-ME-Received: <xmr:qhBOZnl01Tu6YALd0LM2HI_FMTI0Ea7VKqndLXlbLU8srRB74EJ8iZM>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdeigedgvdefucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
  cujfgurhephfffufggtgfgkfhfjgfvvefosehtjeertdertdejnecuhfhrohhmpeflihgr
@@ -68,21 +68,21 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdeigedgvdegucetufdoteggod
  cuggftrfgrthhtvghrnhepvdekiefhfeevkeeuveetfeelffekgedugefhtdduudeghfeu
  veegffegudekjeelnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilh
  hfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:qBBOZsWCGxq28Vc_uDQAcWCxPmW4DRqs2LCKNQzfmKJhZm_JOXWL5A>
- <xmx:qBBOZjlwE3WMb4C5M72Fqm7nvAAxgDccq1RVewshOnObmadZxvQUWg>
- <xmx:qBBOZpeajLMlP_jvj1dXXGNfzVJESHlvv2LqKvQkXRqETWWCZJKCHA>
- <xmx:qBBOZtENk60NWQNAuF4eqLmDQWCih_74CrQlMfhhbeZsmpkjL7dltA>
- <xmx:qBBOZha3chtzL4mtgf5328fkH0ZEkrFutBQj1xrl4lhMkJoQ6AEHhEr2>
+X-ME-Proxy: <xmx:qhBOZqy59tLJjwiRzTgqtXl-Lju8LzpYmO2tAmFVwOSWsaNZfSDL_Q>
+ <xmx:qhBOZpRasQz02lxpP92JesCVouFmJfAYsbv99rW80kfqFdbBaJJkqQ>
+ <xmx:qhBOZlYlOxjz-V7F1laZN3BfEOaR5umPpfZt1sCEB0NTOYbrtnLt8g>
+ <xmx:qhBOZiS7n-Yf83MSRATvlL4GiJY5bYZggTGfXzHwIK6dzxG1gJzWzw>
+ <xmx:qxBOZoGC_poIzxVIeBNNn-sX039bAAAZrGFQaXUcPW2GOFYhgvdoPQ_5>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 22 May 2024 11:35:03 -0400 (EDT)
+ 22 May 2024 11:35:05 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Wed, 22 May 2024 16:34:44 +0100
-Subject: [PATCH 01/16] lib: fdtdec: Handle multiple memory nodes
+Date: Wed, 22 May 2024 16:34:45 +0100
+Subject: [PATCH 02/16] linux/io.h: Use map_physmem to implement ioremap
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240522-loongarch-v1-1-1407e0b69678@flygoat.com>
+Message-Id: <20240522-loongarch-v1-2-1407e0b69678@flygoat.com>
 References: <20240522-loongarch-v1-0-1407e0b69678@flygoat.com>
 In-Reply-To: <20240522-loongarch-v1-0-1407e0b69678@flygoat.com>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
@@ -90,13 +90,13 @@ To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.denx.de, Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5085;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1124;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=BknJt5GVc51vSr9yIp4GJqL+wk7/OpvsOtohY8ir8JE=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhjQ/geUH3QM+s3d/rlU9eMDrpnRHeuGWmc2nnlgseht08
- 2qk0Y+EjlIWBjEuBlkxRZYQAaW+DY0XF1x/kPUHZg4rE8gQBi5OAZhIIifD/+ylUtLqjoVWHHNf
- fQvYFpSutcq7YGWJK5eSSwvn++N6CowM9y7wrCm6sU1ApcZj+/Vqt6PW9jv3Cdzdf0DvaZb4Xe0
- 7HAA=
+ bh=djYYs4kbOkIoMpk8/VSpZY8R5qyTqgu0CkC0gl4DHoQ=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhjQ/geU+OcWWb6akbhf7L1foEfh067QYm2reluuT99vzX
+ 7J78n9aRykLgxgXg6yYIkuIgFLfhsaLC64/yPoDM4eVCWQIAxenAEzE5AfDPzUhyW7noNkXji9f
+ kfsoME9ZOLrDhOXehPlJKdwigVqe5xj+O5/lUUpw/d+os1jyekrk43tX494rn8k49E47bBsT7wl
+ RTgA=
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -115,195 +115,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Current code only tries to fetch the first memory node found in
-fdt tree and determine memory banks from multiple reg properties.
+ioremap API is here to be compatible with Linux drivers,
+to maintain compatibility we need to ensure we are using
+the same way to determine virtual address for IO devices
+from physical address.
 
-Linux do allow multiple memory nodes in devicetree, rework
-fdtdec_setup_mem_size_base_lowest and fdtdec_setup_memory_banksize
-to iterate over all memory nodes.
+map_physmem is U-Boot's standard way for doing the trick,
+we should follow that. For architectures VA == PA it has
+no impact, for MIPS it has it's own ioremap implementation
+in asm/io.h anyway.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- lib/fdtdec.c | 137 ++++++++++++++++++++++++++++++++++++-----------------------
- 1 file changed, 83 insertions(+), 54 deletions(-)
+ include/linux/io.h | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-index b2c59ab3818b..403b363043d6 100644
---- a/lib/fdtdec.c
-+++ b/lib/fdtdec.c
-@@ -1075,90 +1075,119 @@ ofnode get_next_memory_node(ofnode mem)
- 	return mem;
- }
- 
-+static void sort_memory_banks(int num)
-+{
-+	int i, j;
-+	phys_addr_t tmp_start;
-+	phys_size_t tmp_size;
-+	struct bd_info *bd = gd->bd;
-+
-+	for (i = 0; i < num - 1; i++) {
-+		for (j = i + 1; j < num; j++) {
-+			if (bd->bi_dram[i].start > bd->bi_dram[j].start) {
-+				tmp_start = bd->bi_dram[i].start;
-+				tmp_size = bd->bi_dram[i].size;
-+				bd->bi_dram[i].start = bd->bi_dram[j].start;
-+				bd->bi_dram[i].size = bd->bi_dram[j].size;
-+				bd->bi_dram[j].start = tmp_start;
-+				bd->bi_dram[j].size = tmp_size;
-+			}
-+		}
-+	}
-+}
-+
- int fdtdec_setup_memory_banksize(void)
+diff --git a/include/linux/io.h b/include/linux/io.h
+index 79847886be95..ada6525a1c6a 100644
+--- a/include/linux/io.h
++++ b/include/linux/io.h
+@@ -59,11 +59,12 @@ static inline void iowrite64(u64 value, volatile void __iomem *addr)
+ static inline void __iomem *ioremap(resource_size_t offset,
+ 				    resource_size_t size)
  {
--	int bank, ret, reg = 0;
--	struct resource res;
-+	int bank = 0;
- 	ofnode mem = ofnode_null();
- 
--	mem = get_next_memory_node(mem);
--	if (!ofnode_valid(mem)) {
--		debug("%s: Missing /memory node\n", __func__);
--		return -EINVAL;
--	}
-+	while (true) {
-+		struct resource res;
-+		int reg = 0;
- 
--	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
--		ret = ofnode_read_resource(mem, reg++, &res);
--		if (ret < 0) {
--			reg = 0;
--			mem = get_next_memory_node(mem);
--			if (!ofnode_valid(mem))
--				break;
-+		mem = get_next_memory_node(mem);
-+		if (!ofnode_valid(mem))
-+			break;
- 
--			ret = ofnode_read_resource(mem, reg++, &res);
-+		while (true) {
-+			int ret = ofnode_read_resource(mem, reg, &res);
- 			if (ret < 0)
- 				break;
--		}
- 
--		if (ret != 0)
--			return -EINVAL;
-+			if (bank >= CONFIG_VAL(NR_DRAM_BANKS))
-+				goto too_may_memory_banks;
- 
--		gd->bd->bi_dram[bank].start = (phys_addr_t)res.start;
--		gd->bd->bi_dram[bank].size =
--			(phys_size_t)(res.end - res.start + 1);
-+			gd->bd->bi_dram[bank].start = (phys_addr_t)res.start;
-+			gd->bd->bi_dram[bank].size =
-+				(phys_size_t)(res.end - res.start + 1);
- 
--		debug("%s: DRAM Bank #%d: start = 0x%llx, size = 0x%llx\n",
--		      __func__, bank,
--		      (unsigned long long)gd->bd->bi_dram[bank].start,
--		      (unsigned long long)gd->bd->bi_dram[bank].size);
-+			log_debug("%s: DRAM Bank #%d %s.%d: start = 0x%llx, size = 0x%llx\n",
-+				  __func__, bank, ofnode_get_name(mem), reg,
-+				 (unsigned long long)gd->bd->bi_dram[bank].start,
-+				 (unsigned long long)gd->bd->bi_dram[bank].size);
-+			reg++;
-+			bank++;
-+		}
- 	}
- 
-+	if (!bank) {
-+		log_warning("%s: Missing /memory node\n", __func__);
-+		return -EINVAL;
-+	}
-+
-+	sort_memory_banks(bank);
-+
- 	return 0;
-+
-+too_may_memory_banks:
-+	log_warning("%s: Too many memory banks\n", __func__);
-+	return -EINVAL;
+-	return (void __iomem *)(unsigned long)offset;
++	return (void __iomem *)map_physmem(offset, size, MAP_NOCACHE);
  }
  
- int fdtdec_setup_mem_size_base_lowest(void)
+ static inline void iounmap(void __iomem *addr)
  {
--	int bank, ret, reg = 0;
--	struct resource res;
--	unsigned long base;
--	phys_size_t size;
-+	int bank = 0;
- 	ofnode mem = ofnode_null();
-+	__maybe_unused const char *final_name;
-+	__maybe_unused int final_reg;
- 
- 	gd->ram_base = (unsigned long)~0;
- 
--	mem = get_next_memory_node(mem);
--	if (!ofnode_valid(mem)) {
--		debug("%s: Missing /memory node\n", __func__);
--		return -EINVAL;
--	}
-+	while (true) {
-+		struct resource res;
-+		phys_size_t base, size;
-+		int reg = 0;
- 
--	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
--		ret = ofnode_read_resource(mem, reg++, &res);
--		if (ret < 0) {
--			reg = 0;
--			mem = get_next_memory_node(mem);
--			if (!ofnode_valid(mem))
--				break;
-+		mem = get_next_memory_node(mem);
-+		if (!ofnode_valid(mem))
-+			break;
- 
--			ret = ofnode_read_resource(mem, reg++, &res);
-+		while (true) {
-+			int ret = ofnode_read_resource(mem, reg, &res);
- 			if (ret < 0)
- 				break;
-+			base = res.start;
-+			size = res.end - res.start + 1;
-+			if (gd->ram_base > base && size) {
-+				gd->ram_base = base;
-+				gd->ram_size = size;
-+				final_name = ofnode_get_name(mem);
-+				final_reg = reg;
-+			}
-+			reg++;
-+			bank++;
- 		}
-+	}
- 
--		if (ret != 0)
--			return -EINVAL;
--
--		base = (unsigned long)res.start;
--		size = (phys_size_t)(res.end - res.start + 1);
--
--		if (gd->ram_base > base && size) {
--			gd->ram_base = base;
--			gd->ram_size = size;
--			debug("%s: Initial DRAM base %lx size %lx\n",
--			      __func__, base, (unsigned long)size);
--		}
-+	if (!bank) {
-+		log_warning("%s: Missing /memory node\n", __func__);
-+		return -EINVAL;
- 	}
- 
-+	log_debug("%s: Initial DRAM %s.%d: base %lx size %lx\n",
-+		  __func__, final_name, final_reg,
-+		  (ulong)gd->ram_base, (ulong)gd->ram_size);
-+
- 	return 0;
++	return unmap_physmem(addr, MAP_NOCACHE);
  }
+ #endif
  
 
 -- 
