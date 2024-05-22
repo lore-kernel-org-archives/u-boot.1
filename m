@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 200C1C25B78
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 20:19:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F147C25B78
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 21:26:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D0428824A;
-	Wed, 22 May 2024 22:18:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 06D3F87C7E;
+	Wed, 22 May 2024 23:26:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="a/Zq5NM9";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eYuS2hT9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 986928825A; Wed, 22 May 2024 22:18:56 +0200 (CEST)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 61FB388459; Wed, 22 May 2024 23:26:56 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 182A3881C3
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 22:18:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B45A87C75
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 23:26:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 80D99CE1300;
- Wed, 22 May 2024 20:18:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4C770C2BBFC;
- Wed, 22 May 2024 20:18:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1716409128;
- bh=mFxl5kECD+/JbOLOFgUMXECdEdfXiYnEuzwyIJbNL64=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=a/Zq5NM9Y/w2uRbPuuHd4ciHcqyuABEcUIGfLHIPuVHjPZ9HdAKjdf2EkZEvHdD1V
- GdPcXb6bUshtDwENiNQgj27rqo/pbxbi1W4gldfpu14TDywlDFH/a/1Tafe+5R/oyq
- t3VehSQUnn6aIPi/DR1F4hV5ybFRXKiQm3yJh7GEpjoPO2vX/694hr0pkkFyiXO1s0
- dGPXNvEc66nL7WQM4J+mGh7M5HCBkLaocFROntTdKlyoTxVtA3WL7nzXTS7fCrEb3H
- QrmHvpemWd08kzvQzPJbn/UkB3mRUjiQ01U89jRyLQad0raG057Sr6xlArbBs98MWX
- nql408cOoxD8g==
-Message-ID: <d68c8045-116a-49c0-9e74-d6a366e6f008@kernel.org>
-Date: Wed, 22 May 2024 23:18:40 +0300
+ spf=pass smtp.mailfrom=r.stratiienko@gmail.com
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4202ca70289so46818915e9.1
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 14:26:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1716413213; x=1717018013; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=mjr+1c7EaKXHBlIF9oH+HqSVGufWrJWNbiUNaSaCmd4=;
+ b=eYuS2hT9oRvnteN6smfMrOQPu9Ok3hp74+i/CJu58ji4mCT8277NQ/9p4UN3Ve0CpZ
+ +o17OUKop04xIr25OeQG64InJfzTFBp4qvjxSBlLntWMw/bY2GeS2dDNWNQ3dGGDzI5w
+ VXZl9J4g1r4n7zWuRtzeTtnvbUk7XMocDvT5RC64EUC2M2qKENs6914i7n01b/vzlnNR
+ KMPBvxrV9XjIg3MJVmmf3ZMsMzwS/cl6E1zUofwZMHlvdNmoav0qAuwBelLd+kc01MgJ
+ /yRTkmFi6q5hri+3J4Rop1eYN4l5F7yfahjJ3ZsJmhvUY/MTkq3C+mGZh5jCtXQVnA4Z
+ G+6Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716413213; x=1717018013;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=mjr+1c7EaKXHBlIF9oH+HqSVGufWrJWNbiUNaSaCmd4=;
+ b=A+29/SviszjlK9vff3JstoVjc3gIsoPyeaWw4e8ddcjtItKinDyWRfN6G7BpDsGhIz
+ zlr3bhcTiZzTUK+pXU1tPu2YTFAaI6w/Ag3c7/8+YtDAt59R+sbRWGkgnzzRJO18tpBT
+ x269ja92SOFzSGbMAnqN0MsX800U2UQw/m/nGqmqmNdX9T5Hhm+6WKJ6Q25W/ND/TI7y
+ ceVzvE+Rlo1SFOFslv3l3G2g/7uyO22TcIczZFLsMn/EbJsPz1WL3nKMwoDhOihpzxSN
+ 58ix9nAWfcE9Y0UDsiP0MqMpbuJdEAtkuxPQwwNWaQmQI161hkJTOwAH6h1vkjpqCFzC
+ d/kA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWeMmkaDoiVMc82yAM9z9D/8MMmUEn8/YFkayD1J7dxVdk7Rfo1MnEmSQ258RqZaKhW6pEhScmM3F0EnMvPFrbAJ912JA==
+X-Gm-Message-State: AOJu0YxYf/Fam7a/pvypBVRUIRBw/TsEzte424pVcH7moaC5GesjTxuA
+ qCmn31zFzBESPljOHwLXQtnSX+nYPlFBQbk/mkcqPpanvcnRNYOX
+X-Google-Smtp-Source: AGHT+IHjtevz4lMPRuQTwYVOWEgs7kHMEnG07huWmzh0TM0KDEUHNE7s+z179YjWkSVTy2VkFeWOGA==
+X-Received: by 2002:a5d:558d:0:b0:349:8ae9:b030 with SMTP id
+ ffacd0b85a97d-354d8cc8f7amr2485186f8f.10.1716413213153; 
+ Wed, 22 May 2024 14:26:53 -0700 (PDT)
+Received: from roman-envy-fast.. ([46.172.77.250])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42100f163a8sm5569325e9.13.2024.05.22.14.26.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 May 2024 14:26:52 -0700 (PDT)
+From: Roman Stratiienko <r.stratiienko@gmail.com>
+To: sjg@chromium.org, marek.vasut+renesas@mailbox.org, r.stratiienko@gmail.com,
+ laurent.pinchart@ideasonboard.com, eajames@linux.ibm.com,
+ paulerwan.rio@gmail.com, xypron.glpk@gmx.de, u-boot@lists.denx.de,
+ mkorpershoek@baylibre.com, igor.opaniuk@gmail.com
+Subject: [PATCH v2] abootimg: Add init_boot image support
+Date: Wed, 22 May 2024 21:26:45 +0000
+Message-Id: <20240522212645.87250-1-r.stratiienko@gmail.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 06/10] arm: mach-k3: am625_init: Probe AM65 CPSW NUSS
-To: Chintan Vankar <c-vankar@ti.com>, =?UTF-8?Q?Marek_Beh=C3=BAn?=
- <kabel@kernel.org>, Michal Simek <michal.simek@amd.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, MD Danish Anwar <danishanwar@ti.com>,
- Udit Kumar <u-kumar1@ti.com>,
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
- Andreas Dannenberg <dannenberg@ti.com>, Devarsh Thakkar <devarsht@ti.com>,
- Bin Meng <bmeng@tinylab.org>, Sean Anderson <seanga2@gmail.com>,
- Kishon Vijay Abraham I <kishon@ti.com>, Nikhil M Jain <n-jain1@ti.com>,
- Wadim Egorov <w.egorov@phytec.de>,
- Joao Paulo Goncalves <joao.goncalves@toradex.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Dhruva Gole
- <d-gole@ti.com>, Francesco Dolcini <francesco.dolcini@toradex.com>,
- Andrew Davis <afd@ti.com>, Maxime Ripard <mripard@kernel.org>,
- Neha Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>,
- Siddharth Vadapalli <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20240425120822.2048012-1-c-vankar@ti.com>
- <20240425120822.2048012-7-c-vankar@ti.com>
- <84312b9f-7b30-4da1-91a0-067e94cb420a@kernel.org>
- <29092012-e708-4676-99e3-cd8ef64cd701@ti.com>
- <25fb2205-77e8-42dd-a244-4114f028d2c7@kernel.org>
- <7f264a02-f80f-46fd-9aec-780b7bbe27bf@ti.com>
-Content-Language: en-US
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <7f264a02-f80f-46fd-9aec-780b7bbe27bf@ti.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,120 +91,149 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Quote from [1]:
 
+"For devices launching with Android 13, the generic ramdisk is removed
+from the boot image and placed in a separate init_boot image.
+This change leaves the boot image with only the GKI kernel."
 
-On 21/05/2024 08:34, Chintan Vankar wrote:
-> 
-> 
-> On 20/05/24 17:42, Roger Quadros wrote:
->>
->>
->> On 25/04/2024 15:59, Chintan Vankar wrote:
->>>
->>>
->>> On 25/04/24 17:57, Roger Quadros wrote:
->>>>
->>>>
->>>> On 25/04/2024 15:08, Chintan Vankar wrote:
->>>>> From: Kishon Vijay Abraham I <kishon@ti.com>
->>>>>
->>>>> In order to support Ethernet boot on AM62x, probe AM65 CPSW NUSS
->>>>> driver in board_init_f().
->>>>>
->>>>> Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
->>>>> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
->>>>> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
->>>>> ---
->>>>>
->>>>> Link to v1:
->>>>> https://lore.kernel.org/r/20240112064759.1801600-8-s-vadapalli@ti.com/
->>>>>
->>>>> Changes from v1 to v2:
->>>>> - No changes.
->>>>>
->>>>>    arch/arm/mach-k3/am625_init.c | 10 ++++++++++
->>>>>    1 file changed, 10 insertions(+)
->>>>>
->>>>> diff --git a/arch/arm/mach-k3/am625_init.c b/arch/arm/mach-k3/am625_init.c
->>>>> index 668f9a51ef..9bf61b1e83 100644
->>>>> --- a/arch/arm/mach-k3/am625_init.c
->>>>> +++ b/arch/arm/mach-k3/am625_init.c
->>>>> @@ -277,6 +277,16 @@ void board_init_f(ulong dummy)
->>>>>            if (ret)
->>>>>                panic("DRAM init failed: %d\n", ret);
->>>>>        }
->>>>> +
->>>>> +    if (IS_ENABLED(CONFIG_SPL_ETH) && IS_ENABLED(CONFIG_TI_AM65_CPSW_NUSS) &&
->>>>> +        spl_boot_device() == BOOT_DEVICE_ETHERNET) {
->>>>> +        struct udevice *cpswdev;
->>>>> +
->>>>> +        if (uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(am65_cpsw_nuss),
->>>>> +                        &cpswdev))
->>>>> +            printf("Failed to probe am65_cpsw_nuss driver\n");
->>>>> +    }
->>>>> +
->>>>
->>>> This looks like a HACK.
->>>> The network driver should be probed only when the networking feature is actually required.
->>>>
->>>
->>> Driver is probed only when the condition above
->>> "spl_boot_device() == BOOT_DEVICE_ETHERNET" is true, which says Boot
->>> device is Ethernet, and here we are booting with Ethernet so driver is
->>> getting probed.
->>
->> I think you misunderstood what I was saying as am625_init.c is not using
->> any Ethernet function it should not cause the Ethernet driver to probe.
->>
->> Instead it should be probed by the networking use case.
->>
->> What happens if you don't use this patch? Where is it failing?
->>
-> 
-> You are correct that it should be probed by the networking use case and
-> we are using networking functionality of "Booting via Ethernet".
-> Regarding its probing, I already had discussion that why do I have to
-> probe it explicitly at here:
-> https://lore.kernel.org/r/ee1d16fd-b99b-4b07-97bb-a896e179157a@ti.com/
-> 
-> Now if I don't use this patch then Ethernet will not get initialized at
-> SPL stage, and in "spl_net_load_image()" function, there will be an
-> error saying "No Ethernet Found", and since we selected booting via
-> Ethernet it will fail to boot.
+While at it, update wrong error handling message when vendor_boot
+cannot be loaded.
 
-OK Now I see the problem.
+[1]: https://source.android.com/docs/core/architecture/partitions/generic-boot
+Signed-off-by: Roman Stratiienko <r.stratiienko@gmail.com>
+---
+ boot/image-board.c | 13 ++++++++++---
+ cmd/abootimg.c     | 26 +++++++++++++++++++++-----
+ include/image.h    |  7 +++++++
+ 3 files changed, 38 insertions(+), 8 deletions(-)
 
-in am65-cpsw-nuss.c the following is defined:
-
-> U_BOOT_DRIVER(am65_cpsw_nuss) = {
->         .name   = "am65_cpsw_nuss",
->         .id     = UCLASS_MISC,
->         .of_match = am65_cpsw_nuss_ids,
->         .probe  = am65_cpsw_probe_nuss,
->         .priv_auto = sizeof(struct am65_cpsw_common),
-> };
-> 
-> U_BOOT_DRIVER(am65_cpsw_nuss_port) = {
->         .name   = "am65_cpsw_nuss_port",
->         .id     = UCLASS_ETH,
->         .probe  = am65_cpsw_port_probe,
->         .ops    = &am65_cpsw_ops,
->         .priv_auto      = sizeof(struct am65_cpsw_priv),
->         .plat_auto      = sizeof(struct eth_pdata),
->         .flags = DM_FLAG_ALLOC_PRIV_DMA | DM_FLAG_OS_PREPARE,
-> };
-
-Now I suppose spl_net_load_image() tries to probe all UCLASS_ETH devices
-which should call am65_cpsw_port_probe() but it fails to probe am65_cpsw_probe_nuss().
-
-This limitation was introduced by commit
-38922b1f4acc ("net: ti: am65-cpsw: Add support for multi port independent MAC mode")
-
-which says "Since top level driver is now UCLASS_MISC, board
-files would need to instantiate this driver explicitly.
-
-I wonder if there can be a better solution to this?
-
+diff --git a/boot/image-board.c b/boot/image-board.c
+index b7884b8c5d..f212401304 100644
+--- a/boot/image-board.c
++++ b/boot/image-board.c
+@@ -406,13 +406,20 @@ static int select_ramdisk(struct bootm_headers *images, const char *select, u8 a
+ 		if (IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE)) {
+ 			int ret;
+ 			if (IS_ENABLED(CONFIG_CMD_ABOOTIMG)) {
+-				void *boot_img = map_sysmem(get_abootimg_addr(), 0);
++				ulong boot_img = get_abootimg_addr();
++				ulong init_boot_img = get_ainit_bootimg_addr();
+ 				void *vendor_boot_img = map_sysmem(get_avendor_bootimg_addr(), 0);
++				void *ramdisk_img;
+ 
+-				ret = android_image_get_ramdisk(boot_img, vendor_boot_img,
++				if (init_boot_img == -1)
++					ramdisk_img = map_sysmem(boot_img, 0);
++				else
++					ramdisk_img = map_sysmem(init_boot_img, 0);
++
++				ret = android_image_get_ramdisk(ramdisk_img, vendor_boot_img,
+ 								rd_datap, rd_lenp);
+ 				unmap_sysmem(vendor_boot_img);
+-				unmap_sysmem(boot_img);
++				unmap_sysmem(ramdisk_img);
+ 			} else {
+ 				void *ptr = map_sysmem(images->os.start, 0);
+ 
+diff --git a/cmd/abootimg.c b/cmd/abootimg.c
+index 69c7390dbe..9e965c1fb7 100644
+--- a/cmd/abootimg.c
++++ b/cmd/abootimg.c
+@@ -16,6 +16,7 @@
+ 
+ /* Please use abootimg_addr() macro to obtain the boot image address */
+ static ulong _abootimg_addr = -1;
++static ulong _ainit_bootimg_addr = -1;
+ static ulong _avendor_bootimg_addr = -1;
+ 
+ ulong get_abootimg_addr(void)
+@@ -23,6 +24,11 @@ ulong get_abootimg_addr(void)
+ 	return (_abootimg_addr == -1 ? image_load_addr : _abootimg_addr);
+ }
+ 
++ulong get_ainit_bootimg_addr(void)
++{
++	return _ainit_bootimg_addr;
++}
++
+ ulong get_avendor_bootimg_addr(void)
+ {
+ 	return _avendor_bootimg_addr;
+@@ -210,7 +216,7 @@ static int do_abootimg_addr(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	char *endp;
+ 	ulong img_addr;
+ 
+-	if (argc < 2 || argc > 3)
++	if (argc < 2 || argc > 4)
+ 		return CMD_RET_USAGE;
+ 
+ 	img_addr = hextoul(argv[1], &endp);
+@@ -221,16 +227,26 @@ static int do_abootimg_addr(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ 	_abootimg_addr = img_addr;
+ 
+-	if (argc == 3) {
++	if (argc > 2) {
+ 		img_addr = simple_strtoul(argv[2], &endp, 16);
+ 		if (*endp != '\0') {
+-			printf("Error: Wrong vendor image address\n");
++			printf("Error: Wrong vendor_boot image address\n");
+ 			return CMD_RET_FAILURE;
+ 		}
+ 
+ 		_avendor_bootimg_addr = img_addr;
+ 	}
+ 
++	if (argc == 4) {
++		img_addr = simple_strtoul(argv[3], &endp, 16);
++		if (*endp != '\0') {
++			printf("Error: Wrong init_boot image address\n");
++			return CMD_RET_FAILURE;
++		}
++
++		_ainit_bootimg_addr = img_addr;
++	}
++
+ 	return CMD_RET_SUCCESS;
+ }
+ 
+@@ -347,7 +363,7 @@ fail:
+ }
+ 
+ static struct cmd_tbl cmd_abootimg_sub[] = {
+-	U_BOOT_CMD_MKENT(addr, 3, 1, do_abootimg_addr, "", ""),
++	U_BOOT_CMD_MKENT(addr, 4, 1, do_abootimg_addr, "", ""),
+ 	U_BOOT_CMD_MKENT(dump, 2, 1, do_abootimg_dump, "", ""),
+ 	U_BOOT_CMD_MKENT(get, 5, 1, do_abootimg_get, "", ""),
+ 	U_BOOT_CMD_MKENT(load, 5, 1, do_abootimg_load, "", ""),
+@@ -376,7 +392,7 @@ static int do_abootimg(struct cmd_tbl *cmdtp, int flag, int argc,
+ U_BOOT_CMD(
+ 	abootimg, CONFIG_SYS_MAXARGS, 0, do_abootimg,
+ 	"manipulate Android Boot Image",
+-	"addr <boot_img_addr> [<vendor_boot_img_addr>]>\n"
++	"addr <boot_img_addr> [<vendor_boot_img_addr> [<init_boot_img_addr>]]\n"
+ 	"    - set the address in RAM where boot image is located\n"
+ 	"      ($loadaddr is used by default)\n"
+ 	"abootimg dump dtb\n"
+diff --git a/include/image.h b/include/image.h
+index 96df2b99a7..7d8ff40c3f 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -1982,6 +1982,13 @@ bool is_android_vendor_boot_image_header(const void *vendor_boot_img);
+  */
+ ulong get_abootimg_addr(void);
+ 
++/**
++ * get_ainit_bootimg_addr() - Get Android init boot image address
++ *
++ * Return: Android init boot image address
++ */
++ulong get_ainit_bootimg_addr(void);
++
+ /**
+  * get_avendor_bootimg_addr() - Get Android vendor boot image address
+  *
 -- 
-cheers,
--roger
+2.40.1
+
