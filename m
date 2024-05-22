@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0F4DC25B7A
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 08:38:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15FE8C25B79
+	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 08:38:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35E5787F19;
-	Wed, 22 May 2024 10:38:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 93EFC88476;
+	Wed, 22 May 2024 10:38:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VvUC4ZQj";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="iXPpl7fr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E24888047; Wed, 22 May 2024 10:38:15 +0200 (CEST)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D6EFF8857E; Wed, 22 May 2024 10:38:41 +0200 (CEST)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51B6E87EF6
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 10:38:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F184588473
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 10:38:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jcmvbkbc@gmail.com
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-1e3c3aa8938so110105275ad.1
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 01:38:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716367091; x=1716971891; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UZdIaDZYHhj++HYwV3TD2/ZOSsi4DRxGPSxL//J2vFs=;
- b=VvUC4ZQjb+WRi5i9fteD1y7lvyRs8NR2Ps3ej+vfeIlNqJ1IZnz53osf5S5U4Zs0VP
- nBNm2eNZTqs/Cr/eeViPXUCFbJypQEKTnbHAe9vzirAKy5R4RRIOT8r0f80FH7GxFgMY
- bkm3086UdsvpGpJLgZH7AjqsD/yC84iKyXflS9LeYNxB1QriqESah5l/PQOFSF3HY2Bg
- DYDm+DHFtaCd+lqaNMMJ/PwmOSUEd689p/zCbCCvh8GNB6w/tU4fsXTXmDOAoJqz+SbA
- TZ6zeSy219IVd0FVGwKU38WLi+wH+1OrB6YqMroFl9FJKApdVqfo6GldgksxQ87ZN+0T
- WWww==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716367091; x=1716971891;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UZdIaDZYHhj++HYwV3TD2/ZOSsi4DRxGPSxL//J2vFs=;
- b=qJ/M8afYWy5xiBGXVWnlPM8RJ48NPcU9oyPouaV08VzsrwGeB3f6yyb7oAX1bO/1Zq
- kYDDGuargu8wsDpQWA1rofIlZnnj+Twhi8lV9vX6t1iOzrc4C1gSddvFRn/qXVdqNeK6
- f+FOTIeY/uEoUtqwmQtKFNVVTZj86Is08eMG02R/vfnX/AFnZDw1/r7jmOWg8manrq/d
- KXx0iQXQA0wxAg4scyy244/bpDmqdxAYMO6u5DO9F8YjScXZsrsv68KbX8GmS/Kd/5aV
- G7MrEN34dBQg4kcLk2IfSZ16WLLw2JP3lqdYG1udgWi/qtiXoF0OQzUjD9Js/Bae8EJ0
- x4iQ==
-X-Gm-Message-State: AOJu0Yz3rNSKEnt8BHZTSOzEO/bpbzUq1qw/AQeRzRyrP9fzDEyJi1ca
- oYjjuOGi8Ny88ilUTGZW2VMAm+kyIVqpHEGH96kky9kbxvFr2DxQ9706YFj+8950vPpxitjCzC+
- Aa8A3LF06TBYFrxDbCZvHSXezQFmsLA==
-X-Google-Smtp-Source: AGHT+IFUDnYhLKhF1k/l3c+MyT7UT7SD46nnUUi9CQ+QQ5M7JxNBVQ3CVHiwv80sX+ALPmEWIqo298sWRDEztPSvjY0=
-X-Received: by 2002:a17:90b:46cf:b0:2b4:b306:ffbc with SMTP id
- 98e67ed59e1d1-2bd9f4531f6mr1333725a91.17.1716367090781; Wed, 22 May 2024
- 01:38:10 -0700 (PDT)
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1716367119; x=1718959119;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=ft7Qp7GedcNd3bNPR7R03BmPZrCwIK3nkB+5znbZkUE=;
+ b=iXPpl7frSGEIn1Vhg4dV1hn8QNyEkk6WUkLlcS6VmfIhVPxBdVc3O8zGrbFS8s3K
+ yQQHwHzSwqeqgKv1L1mx07gB2minIE3dJhCLiyjgxUMPWgXXsYkvyOjfrJ6NO7LK
+ jAM1/2q0l0NtCfpITKobZQDU6HCuM/wnf0fwWM47GCY=;
+X-AuditID: ac14000a-03e52700000021bc-b9-664daf0f9365
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 02.61.08636.F0FAD466;
+ Wed, 22 May 2024 10:38:39 +0200 (CEST)
+Received: from [172.25.39.28] (172.25.0.11) by Berlix.phytec.de (172.25.0.12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 22 May
+ 2024 10:38:39 +0200
+Message-ID: <0b9dc73f-f391-4598-bec1-7f0501d36c00@phytec.de>
+Date: Wed, 22 May 2024 10:38:38 +0200
 MIME-Version: 1.0
-References: <20240519-qemu-xtensa-v1-0-8fff0cb11c19@flygoat.com>
- <20240519-qemu-xtensa-v1-9-8fff0cb11c19@flygoat.com>
- <CAMo8BfJXXozimNR8s2w+Fx8DZjMxT=t-039M+EKX9Ysb+-kwYw@mail.gmail.com>
- <2f58b7b9-fc0d-4bb2-bb34-cacc62cbefce@app.fastmail.com>
-In-Reply-To: <2f58b7b9-fc0d-4bb2-bb34-cacc62cbefce@app.fastmail.com>
-From: Max Filippov <jcmvbkbc@gmail.com>
-Date: Wed, 22 May 2024 01:37:58 -0700
-Message-ID: <CAMo8BfKMsyJhgMFHov_OzX8_8zvsi71YDT0TVkhy2ZpWi6Z8yg@mail.gmail.com>
-Subject: Re: [PATCH 09/10] board: emulation: New board qemu-xtensa
-To: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Cc: u-boot@lists.denx.de, Sean Anderson <sean.anderson@seco.com>, 
- Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [Upstream] [PATCH 5/6] board: phytec: common: k3: Set MAC
+To: Daniel Schultz <d.schultz@phytec.de>, <u-boot@lists.denx.de>,
+ <upstream@lists.phytec.de>
+References: <20240522061827.601699-1-d.schultz@phytec.de>
+ <20240522061827.601699-6-d.schultz@phytec.de>
+Content-Language: en-US
+From: Wadim Egorov <w.egorov@phytec.de>
+In-Reply-To: <20240522061827.601699-6-d.schultz@phytec.de>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrKLMWRmVeSWpSXmKPExsWyRpKBR5d/vW+awc+f+hZv93ayW3S/U3dg
+ 8jh7ZwejR393C2sAUxSXTUpqTmZZapG+XQJXxr2PbSwFd3kqJu2vamDs4Opi5OSQEDCRmLxu
+ LnsXIxeHkMASJokFByexQDh3GSXaNk5n7WLk4OAVsJG4NCMFpIFFQFVi85PZbCA2r4CgxMmZ
+ T1hAbFEBeYn7t2awg9jCAm4SMyZdAouLCMRJrNv1mgnEFhLIlHi5ajMziM0sIC5x68l8sDib
+ gLrEnQ3fWEFsTgEriaUHP7JA1FhILH5zkB3ClpfY/nYOM8QceYkXl5azQDwgLzHt3GtmCDtU
+ YuuX7UwTGIVmITlvFpJ1s5CMnYVk7AJGllWMQrmZydmpRZnZegUZlSWpyXopqZsYQUEtwsC1
+ g7FvjschRiYOxkOMEhzMSiK80St904R4UxIrq1KL8uOLSnNSiw8xSnOwKInzru4IThUSSE8s
+ Sc1OTS1ILYLJMnFwSjUwagvz39Td/sFJ6uUst17j0//5ZF9w312nF7VxW//VNOkdr16/cGDb
+ ZT61Jdjl2W6p/ROn9ca92fQ+zLDCeTG34ZdNwhnu3Fu/qvzTedT0QOuDwObCt0pPAsNZvha/
+ an26TOeart1jvtOpBz4aC5VwXWFiXWakLamwOc6m47KPLOsT8+Tt/07PUWIpzkg01GIuKk4E
+ ACjH4y9YAgAA
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,43 +89,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, May 21, 2024 at 1:20=E2=80=AFAM Jiaxun Yang <jiaxun.yang@flygoat.co=
-m> wrote:
-> =E5=9C=A82024=E5=B9=B45=E6=9C=8821=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8A=
-=E5=8D=888:35=EF=BC=8CMax Filippov=E5=86=99=E9=81=93=EF=BC=9A
-> >> +++ b/board/emulation/qemu-xtensa/MAINTAINERS
-> >> @@ -0,0 +1,7 @@
-> >> +QEMU XTENSA 'VIRT' BOARD
-> >> +M:     Jiaxun Yang <jiaxun.yang@flygoat.com>
-> >> +S:     Maintained
-> >> +F:     board/emulation/qemu-xtensa/
-> >> +F:     board/emulation/common/
-> >> +F:     include/configs/qemu-riscv.h
-> >
-> > This must be qemu-xtensa.h, right?
->
-> Ah yes :-)
->
-> Do you mind me to give you a M: entry?
 
-Sure you can add me as a co-maintainer for this board.
 
-> > I'm not sure what CFG_SYS_IO_BASE means for the virt machine, but
-> > it looks like in the noMMU case SDRAM is going to overlap the
-> > IO range with the above base addresses and sizes. And from QEMU
-> > monitor I see the following address space distribution in the virt
-> > machine with a noMMU core:
->
-> So CFG_SYS_IO_BASE means physical address left for I/O with 1:1 mapping
-> from virtual address. for PTP MMU I handled it in:
->
-> [PATCH 03/10] xtensa: Implement phys virt conversion for PTP_MMU
->
-> Can you confirm if noMMU core is doing the same on VA-PA mapping?
+Am 22.05.24 um 08:18 schrieb Daniel Schultz:
+> Read the EEPROM API v3 content and set all available
+> MAC-Addresses to the environment.
+> 
+> Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
+> ---
+>   board/phytec/common/k3/board.c | 23 +++++++++++++++++++++++
+>   1 file changed, 23 insertions(+)
+> 
+> diff --git a/board/phytec/common/k3/board.c b/board/phytec/common/k3/board.c
+> index 9cb168c36cb..f21e154d4fe 100644
+> --- a/board/phytec/common/k3/board.c
+> +++ b/board/phytec/common/k3/board.c
+> @@ -8,6 +8,8 @@
+>   #include <spl.h>
+>   #include <asm/arch/hardware.h>
+>   
+> +#include "../am6_som_detection.h"
+> +
+>   #if IS_ENABLED(CONFIG_ENV_IS_IN_FAT) || IS_ENABLED(CONFIG_ENV_IS_IN_MMC)
+>   int mmc_get_env_dev(void)
+>   {
+> @@ -68,6 +70,27 @@ int board_late_init(void)
+>   		break;
+>   	};
+>   
+> +	if (IS_ENABLED(CONFIG_PHYTEC_SOM_DETECTION_BLOCKS)) {
+> +		struct phytec_api3_element *block_element;
+> +		struct phytec_eeprom_data data;
+> +		int ret;
+> +
+> +		ret = phytec_eeprom_data_setup(&data, 0, EEPROM_ADDR);
+> +		if (ret || !data.valid)
+> +			return 0;
 
-So far all xtensa cores except those that have MMUv2 (like dc232b) come
-out of reset with identity mapping between virtual and physical addresses.
+Don't you want to return an error or at least print a warning?
 
---=20
-Thanks.
--- Max
+Apart from that,
+
+Reviewed-by: Wadim Egorov <w.egorov@phytec.de>
+
+> +
+> +		PHYTEC_API3_FOREACH_BLOCK(block_element, &data) {
+> +			switch (block_element->block_type) {
+> +			case PHYTEC_API3_BLOCK_MAC:
+> +				phytec_blocks_add_mac_to_env(block_element);
+> +				break;
+> +			default:
+> +				debug("%s: Unknown block type %i\n", __func__,
+> +				      block_element->block_type);
+> +			}
+> +		}
+> +	}
+> +
+>   	return 0;
+>   }
+>   #endif
