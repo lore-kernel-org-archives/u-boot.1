@@ -4,48 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31DC1C25B7C
-	for <u-boot@archiver.kernel.org>; Wed, 22 May 2024 23:39:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90883C25B78
+	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 02:47:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B978987D74;
-	Thu, 23 May 2024 01:39:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gentoo.org
+	by phobos.denx.de (Postfix) with ESMTP id AFF2288496;
+	Thu, 23 May 2024 04:47:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 700B283333; Thu, 23 May 2024 01:39:41 +0200 (CEST)
-Received: from smtp.gentoo.org (dev.gentoo.org
- [IPv6:2001:470:ea4a:1:5054:ff:fec7:86e4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0151882A9
- for <u-boot@lists.denx.de>; Thu, 23 May 2024 01:39:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=gentoo.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dlan@gentoo.org
-Date: Wed, 22 May 2024 23:39:15 +0000
-From: Yixun Lan <dlan@gentoo.org>
-To: Kongyang Liu <seashell11234455@gmail.com>
-Cc: u-boot@lists.denx.de, Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Greg Malysa <greg.malysa@timesys.com>,
- Ian Roberts <ian.roberts@timesys.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, Lukasz Majewski <lukma@denx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Michal Simek <michal.simek@amd.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Samuel Holland <samuel@sholland.org>, Sean Anderson <seanga2@gmail.com>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>
-Subject: Re: [PATCH 2/4] clk: sophgo: cv1800b: Add clock controller driver
- for cv1800b SoC
-Message-ID: <20240522233915.GA1990099@ofsar>
-References: <20240519150736.13203-1-seashell11234455@gmail.com>
- <20240519150736.13203-3-seashell11234455@gmail.com>
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iGDMX2oE";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 1343288507; Thu, 23 May 2024 04:47:06 +0200 (CEST)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id F35D188013
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 04:47:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-69b24162dd6so28965176d6.2
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 19:47:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1716432423; x=1717037223; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=t4diRKla7QUWH38kV/hHzWTeA9rsucxKXN7ZS2HsnAk=;
+ b=iGDMX2oErFrtfYxjdCkVR5v2iysCUl03F1sh9ysqelSQoKru7uo/7vYW99UepfQswU
+ xFF3g1f20/gJc/dU/OfnVt+vuh82es4GKiGwrwbHq/BEEP5cbg3uVan1UHdR0s6MyHt3
+ mETOMemttOGSydG7/Lxn+CXZF1+lgkoVHlc9Y=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716432423; x=1717037223;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=t4diRKla7QUWH38kV/hHzWTeA9rsucxKXN7ZS2HsnAk=;
+ b=r3sZOzCK61seLXkAGwosoUNd1EXvlG7ObEYmd2z+eOwv8uprASRz2ba2nQ2J8LFpvr
+ ljyuYDK663tqjj45Ih5LQj8SgQugzDDS/PLbp7LcVS973tpTuv1+2tc16AOmvOkKzWJ2
+ ITtDGMzKA5ojAU8QNZi4TMqzA7XlzmQ12kKZIiNtnrto73+Bf7D1sf/lopyqOYcKFii0
+ w2Rv1HDqPUT1ywbzfjg/F94NTjoZgQhkMQUls0w2/hZbdRsXCc9fqNaYiSDOAdOYNpC9
+ APA/wQ+fYVUK1+f9vIEBys1JHNOnAkb5uHj43WXmuzHfGYnYTnwhUx7a/F/l+AFuZdPy
+ q9qw==
+X-Gm-Message-State: AOJu0YyVX5SSQYwWwzQhu6l0Hf5g5Kxwol1WnUlNsNSZoniWPopVFd/8
+ G4FLhMQnAZyYAgmx9NV27hsBRr+4/oyjxeOgtwZrBfxb5eaDwS6+qcf+sL8as0Q=
+X-Google-Smtp-Source: AGHT+IEFhk9So9q1Mv8UODl80KEDhmzDoQnJKCBk3TVYhMa4JKq916QLGraQjGuvP9h2nnd4MzKvjg==
+X-Received: by 2002:a0c:f9c7:0:b0:6ab:8588:df9a with SMTP id
+ 6a1803df08f44-6ab8588e12dmr26156656d6.13.1716432422834; 
+ Wed, 22 May 2024 19:47:02 -0700 (PDT)
+Received: from [127.0.1.1] ([189.178.170.52]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6a35c7e4cbbsm75936356d6.128.2024.05.22.19.46.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 May 2024 19:47:02 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Raymond Mao <raymond.mao@linaro.org>
+Cc: Alexey Brodkin <alexey.brodkin@synopsys.com>, 
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, Phil Sutter <phil@nwl.cc>, 
+ Tony Dinh <mibodhi@gmail.com>, 
+ Walter Schweizer <swwa@users.sourceforge.net>, 
+ Mario Six <mario.six@gdsys.cc>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Nishanth Menon <nm@ti.com>, 
+ Jonathan Humphreys <j-humphreys@ti.com>, Roger Quadros <rogerq@kernel.org>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
+ Eddie James <eajames@linux.ibm.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Jassi Brar <jaswinder.singh@linaro.org>, 
+ Masami Hiramatsu <masami.hiramatsu@linaro.org>, 
+ Michal Simek <michal.simek@amd.com>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Etienne Carriere <etienne.carriere@foss.st.com>, 
+ uboot-snps-arc@synopsys.com
+In-Reply-To: <20240516211156.1819939-1-raymond.mao@linaro.org>
+References: <20240516211156.1819939-1-raymond.mao@linaro.org>
+Subject: Re: [PATCH v3 0/4] Clean-up patch set for MbedTLS integration
+Message-Id: <171643241953.2070952.15187034126360931450.b4-ty@konsulko.com>
+Date: Wed, 22 May 2024 20:46:59 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240519150736.13203-3-seashell11234455@gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,74 +106,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kongyang:
+On Thu, 16 May 2024 14:11:48 -0700, Raymond Mao wrote:
 
-I've got one compiling error
-
-On 23:07 Sun 19 May     , Kongyang Liu wrote:
-> Add clock controller driver for sophgo cv1800b SoC
+> This patch set is picked from the previously posted serie:
+> "[RFC] Integrate MbedTLS v3.6 LTS with U-Boot"
 > 
-> Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
-> ---
+> They are not directly related to MbedTLS integration, but the
+> prerequisite for a few clean-up, refactoring and minor fixes.
 > 
->  drivers/clk/Kconfig              |   1 +
->  drivers/clk/Makefile             |   1 +
->  drivers/clk/sophgo/Kconfig       |  14 +
->  drivers/clk/sophgo/Makefile      |   6 +
->  drivers/clk/sophgo/clk-common.h  |  74 +++
->  drivers/clk/sophgo/clk-cv1800b.c | 794 +++++++++++++++++++++++++++++++
->  drivers/clk/sophgo/clk-cv1800b.h | 123 +++++
->  drivers/clk/sophgo/clk-ip.c      | 594 +++++++++++++++++++++++
->  drivers/clk/sophgo/clk-ip.h      | 288 +++++++++++
->  drivers/clk/sophgo/clk-pll.c     | 284 +++++++++++
->  drivers/clk/sophgo/clk-pll.h     |  74 +++
->  11 files changed, 2253 insertions(+)
->  create mode 100644 drivers/clk/sophgo/Kconfig
->  create mode 100644 drivers/clk/sophgo/Makefile
->  create mode 100644 drivers/clk/sophgo/clk-common.h
->  create mode 100644 drivers/clk/sophgo/clk-cv1800b.c
->  create mode 100644 drivers/clk/sophgo/clk-cv1800b.h
->  create mode 100644 drivers/clk/sophgo/clk-ip.c
->  create mode 100644 drivers/clk/sophgo/clk-ip.h
->  create mode 100644 drivers/clk/sophgo/clk-pll.c
->  create mode 100644 drivers/clk/sophgo/clk-pll.h
+> For V2, the linker script patch is dropped and added one patch
+> to move the snprintf to stdio.h
 > 
+> [...]
 
-...
-
-> +static ulong cv1800b_ipll_set_rate(struct clk *clk, ulong rate)
-> +{
-> +	struct cv1800b_clk_ipll *pll = to_clk_ipll(clk);
-> +	ulong parent_rate = clk_get_parent_rate(clk);
-> +	u32 pre_div, post_div, div;
-> +	u32 pre_div_sel, post_div_sel, div_sel;
-> +	ulong new_rate, best_rate = 0;
-> +	u32 mode, ictrl;
-> +	u32 test, val;
-> +
-> +	FOR_RANGE(pre_div, PLL_PRE_DIV)
-> +	{
-> +		FOR_RANGE(post_div, PLL_POST_DIV)
-> +		{
-> +			FOR_RANGE(div, PLL_DIV)
-> +			{
-> +				new_rate = DIV_ROUND_DOWN_ULL(parent_rate * div
-                                                                          ~~~~~~
-							     miss a comma here
-> +							      pre_div * post_div);
-> +				if (rate - new_rate < rate - best_rate) {
-> +					best_rate = new_rate;
-> +					pre_div_sel = pre_div;
-> +					post_div_sel = post_div;
-> +					div_sel = div;
-> +				}
-> +			}
-> +		}
-> +	}
-> +
-> +	FOR_RANGE(mode, PLL_MODE)
+Applied to u-boot/next, thanks!
 
 -- 
-Yixun Lan (dlan)
-Gentoo Linux Developer
-GPG Key ID AABEFD55
+Tom
+
+
