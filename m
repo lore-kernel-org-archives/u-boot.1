@@ -4,96 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B23FC25B7D
-	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 16:26:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C016DC25B75
+	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 16:26:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CFE4A885D0;
-	Thu, 23 May 2024 18:26:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
+	by phobos.denx.de (Postfix) with ESMTP id 5241B885E2;
+	Thu, 23 May 2024 18:26:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="RjE6g1Za";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="e3RwbwyY";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Wvf1P1JH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1986B885D7; Thu, 23 May 2024 18:26:09 +0200 (CEST)
-Received: from wfhigh8-smtp.messagingengine.com
- (wfhigh8-smtp.messagingengine.com [64.147.123.159])
+ id 16B7D885E1; Thu, 23 May 2024 18:26:32 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FFDF876D3
- for <u-boot@lists.denx.de>; Thu, 23 May 2024 18:26:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BCA26876D3
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 18:26:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=flygoat.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailfhigh.west.internal (Postfix) with ESMTP id 4382618001A2;
- Thu, 23 May 2024 12:26:04 -0400 (EDT)
-Received: from imap44 ([10.202.2.94])
- by compute3.internal (MEProxy); Thu, 23 May 2024 12:26:04 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
- cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1716481563;
- x=1716567963; bh=IBAfeI47RCiOBqsAHT4tPpI1B2Z5foCp3hdCwwmj0vY=; b=
- RjE6g1ZawF8AvjsEj+XIQgXX7Uye3wxa75TH+F4mh6tWZ8iOlITQi4KUsxSO7w5f
- vpIhlxlKZVgAIZcMcCiQuxPJtxkhuTR/+5atRRf79WeYNuxfNtGo8AkUQCPzHJpK
- gDoiFzp+MVkFBABCACKz3BzqS25vXvFpfkPEKzbU+z34IWsQn3Zja+W2qHoP0EAz
- xoqE2BCYSfE7BzsdmGCWm1bJJ44rl+qj6ROPgjtrU4mIxnAQBf6bz/6y6MunP7Bk
- 6f8Vk9w0tWfgg4iDwbHDBPXiZdE2QEP9XV1KL3FqpzRM63t/vL0A2AASfFPhDugl
- pHGLhgy1GWuRLHPzgZQIUQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716481563; x=
- 1716567963; bh=IBAfeI47RCiOBqsAHT4tPpI1B2Z5foCp3hdCwwmj0vY=; b=e
- 3RwbwyYHFH44HkchAzZtjab6dwT3uX/DLOWhw53ZMN9mSCouqtjDILkibEJZIN/8
- DJawLlJmUPIsLv/lh2/o0e1MNBmGyLUOfgr9TyErPQu5omWK3Vnoo8H+rmQj/iNq
- WxLT/V9+Vn/TKyLA8pS+aOAFmOhoQ/qF/oexJUY2JGxssR14EI9QiWYglFVuPlQO
- o38dZAo2G/Uu4cgXy+kWlJiC9l8hhgp4J2IpYUnSqa/MpyBcdLLyX6zGq/JCiWZD
- h+wi/TPUcBhHkE0cjgX+iQapzx586ZGluK7EDugI2hEsqoU2zswvb+zxtUbZh2gX
- EBlOwHsi/jhpK8eyr8W2g==
-X-ME-Sender: <xms:G25PZm5x1m3EixbQPQI8CVF1gkjoorB3QZLuVq6G5FKo5BGBsUvfnQ>
- <xme:G25PZv47lavfZnebTjSXlI1l0L2bfSgQBXMgyh2j5xzKwGU5mDiC77MFMrYnhJQo9
- MOoRHqnrYqO9KXkR6Q>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdeiiedgleelucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- goufhushhpvggtthffohhmrghinhculdegledmnecujfgurhepofgfggfkjghffffhvfev
- ufgtgfesthhqredtreerjeenucfhrhhomhepfdflihgrgihunhcujggrnhhgfdcuoehjih
- grgihunhdrhigrnhhgsehflhihghhorghtrdgtohhmqeenucggtffrrghtthgvrhhnpefg
- ffetteehtdekhefghfefvdeuveeghfetledvhfduvdejgfelheffkeetffdtgfenucffoh
- hmrghinhepghhithhhuhgsrdhiohdpihgrnhgrrdhorhhgnecuvehluhhsthgvrhfuihii
- vgeptdenucfrrghrrghmpehmrghilhhfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhi
- hgohgrthdrtghomh
-X-ME-Proxy: <xmx:G25PZlcX-auGb9FDRmhBY2M3_xxQEr9y3oDT2XIwwpYhTKDkv0BHiA>
- <xmx:G25PZjKGHj9014uWqe71NQ1b7_-RrmkPhL7RdtVRS53JYU8Uy7RqwQ>
- <xmx:G25PZqLT65qyiOxW21oh5JaF6el42n8TOxoSp4rGPGBildvE-cgmig>
- <xmx:G25PZkxEy-wRw0C82R7WNI7qH_OiF8kTjHFNzCPRjKZ14lf25gM-zA>
- <xmx:G25PZvGWrkg5RSVjLk5lomRbfPDEj-qJOKj5V628x3lgdfZux8tOyha1>
-Feedback-ID: ifd894703:Fastmail
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
- id 9A95036A0078; Thu, 23 May 2024 12:26:03 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.11.0-alpha0-480-g515a2f54a-fm-20240515.001-g515a2f54
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1716481585; x=1717086385; i=xypron.glpk@gmx.de;
+ bh=QboHKGMMjVZQcW5N4AacFMK4RxtHoqKBSo5qXq4v05s=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=Wvf1P1JHNijVJLY8qTzINjx9qxfBnKcYqhmE0OLiXXJgc0Di53ZJ7K9Np5S8DXBM
+ yEya8g5Fvt+nWHNaW9mA7fmeyzNiCsndkHJXzF1c2eqI2Y6jbxXwt++mMAyjafCOS
+ HOMpCgloW7D4wCXwDrII3B9PDayB6FW/TWNdS//PISXhA6CpwwTXCQAgA4ISa4gP6
+ NL+cEYaFckUR6dWIEzfrodpz3uLqTMZa912/WqTi/k/KRhcVwWryGae/P1nHWYD8f
+ pdHwW4UCosKG4azllntq82qn7Z58qYwCQcAz78xM8dkyGCajIjPz25PQA+WQnOiqT
+ /+PVAsyPf+oIg7AY4A==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.126] ([62.143.245.32]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MvbFs-1sQC1P2NpW-00sh4Z; Thu, 23
+ May 2024 18:26:25 +0200
+Message-ID: <fc95549e-fd0b-462d-b290-2612de601297@gmx.de>
+Date: Thu, 23 May 2024 18:26:25 +0200
 MIME-Version: 1.0
-Message-Id: <5282715a-c11d-46de-bf95-a7d3044e652e@app.fastmail.com>
-In-Reply-To: <304f9e83-45eb-4f8e-98f3-2658aac5c20b@gmx.de>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 16/16] efi: LoongArch: Implement everything
+To: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>
 References: <20240522-loongarch-v1-0-1407e0b69678@flygoat.com>
- <20240522-loongarch-v1-15-1407e0b69678@flygoat.com>
- <304f9e83-45eb-4f8e-98f3-2658aac5c20b@gmx.de>
-Date: Thu, 23 May 2024 17:25:45 +0100
-From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
-To: "Heinrich Schuchardt" <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de, "Simon Glass" <sjg@chromium.org>,
- "Tom Rini" <trini@konsulko.com>,
- "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH 15/16] efi: LoongArch: Define LoongArch bits everywhere
-Content-Type: text/plain;charset=utf-8
+ <20240522-loongarch-v1-16-1407e0b69678@flygoat.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240522-loongarch-v1-16-1407e0b69678@flygoat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:LnY6MoWxJhNrEPE3Y21SExlFpRuHlifaThC+iKSAJYIadbVSaAA
+ J0dXR2M7UpXW9rxbe4IQ3IA08qN1JYTxmctxMoL53vY9XnqF4DbpgO2Xh94cmK9Cg9YYek0
+ g3M3DGlFOe9TgvB25pB8Coof4seX5FWX7Zy5mZI41znQMfGam7UpFX6oA1b55ZlPryDC/Pu
+ hkRf4HGkWDesx9q/JB5pw==
+UI-OutboundReport: notjunk:1;M01:P0:X3oflwTx254=;xJclPxKfj1qd2JBeNvZpkrsWOGk
+ /bUiLKrdQv1yBjLeL+eJc9KKysisOEvI4SuswUkdidcRqN0+Itn+PE6MDXcW25RkPMve1MzYk
+ XVdj7ENa7Cv5hj4LYUmxBLD/nqX9suF16qUMgMYDj4k7G3It3wlE3015Du/bWv6us1Gd5W7GN
+ hJcDMJK/tkcBvIMJsRccm10mfTkPg9qb9P4qshxmjjfrAUqYlQjd2nztUHpJBbDObvc+e1nFr
+ J6SYl/t91eg5iydSbWdHc0qBy+CwJeCjlL3Pm8DPTAxTMjRx0l8efZZGrpaRGeHMc0dNDLmnA
+ RPh5geEz/WQ1LXAuDRuOy6+d/VeR+o8Zk5qgSzIvEyxWXTMqvK5JIIqqGS3ZuCaZiPUql1/y3
+ QXhhlHHhYMhCavd/DgDabKaXegLOXGNU283q2dSG66DiavKsenQKboBdsGb3ekd1Ney/ZFaN5
+ Q2SUZViNjk+ZxSFVKTF/hhVnizN9pEOMiNvHX4TDvfb5ApoqZAq+9SW9mUls+04iQrYVexX/X
+ 7VrlPKzcWrguG6gMsQDKGPCZjKjnkKIAymZGpHcOPixyX2oapJIKCJaAYKDbyhrxkDp8QepUz
+ kZCS8QPWrhVSWPfsxA4A8CEuXDB+sE51rA90naark0JfxxBaeQEq09lZimUnlgVtMq4Rd3YYG
+ N5wmrVVZ5v5OxlXprr3Z+PRyRv5CKObbYabGx3F+8OAURC71zD05MFqB/H65NysPiL0ZKVjgW
+ S6Lp8p4UO12L2lAjxm3VBz6coRhnvqz1v91wDYlakYeYuf984DFCwiqSw1MYXETCHdri0xATz
+ 036iOJtZIH3WxvIfwyfspIIic/B98nPbsUHC1Lh1q5REo=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,73 +91,459 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 22.05.24 17:34, Jiaxun Yang wrote:
+> Implement crt, reloc, linker scripts, wire things up in
+> Makefiles and Kconfig.
+>
+> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> ---
+>   arch/loongarch/config.mk                 |   4 +
+>   arch/loongarch/lib/Makefile              |  12 ++
+>   arch/loongarch/lib/crt0_loongarch_efi.S  | 182 +++++++++++++++++++++++=
+++++++++
+>   arch/loongarch/lib/elf_loongarch_efi.lds |  76 +++++++++++++
+>   arch/loongarch/lib/reloc_loongarch_efi.c | 107 ++++++++++++++++++
+>   lib/efi_loader/Kconfig                   |   2 +-
+>   6 files changed, 382 insertions(+), 1 deletion(-)
+>
+> diff --git a/arch/loongarch/config.mk b/arch/loongarch/config.mk
+> index 7c247400e361..bae4566e9b62 100644
+> --- a/arch/loongarch/config.mk
+> +++ b/arch/loongarch/config.mk
+> @@ -21,3 +21,7 @@ endif
+>   PLATFORM_CPPFLAGS	+=3D -fpic
+>   PLATFORM_RELFLAGS	+=3D -fno-common -ffunction-sections -fdata-sections
+>   LDFLAGS_u-boot		+=3D --gc-sections -static -pie
+> +
+> +EFI_LDS				:=3D elf_loongarch_efi.lds
+> +EFI_CRT0			:=3D crt0_loongarch_efi.o
+> +EFI_RELOC			:=3D reloc_loongarch_efi.o
+> diff --git a/arch/loongarch/lib/Makefile b/arch/loongarch/lib/Makefile
+> index e65e66357a9b..17d2b1160b41 100644
+> --- a/arch/loongarch/lib/Makefile
+> +++ b/arch/loongarch/lib/Makefile
+> @@ -12,3 +12,15 @@ ifeq ($(CONFIG_$(SPL_)SYSRESET),)
+>   obj-y	+=3D reset.o
+>   endif
+>   obj-y	+=3D setjmp.o
+> +
+> +# For building EFI apps
+> +CFLAGS_NON_EFI :=3D -fstack-protector-strong
+> +CFLAGS_$(EFI_CRT0) :=3D $(CFLAGS_EFI)
+> +CFLAGS_REMOVE_$(EFI_CRT0) :=3D $(CFLAGS_NON_EFI)
+> +
+> +CFLAGS_$(EFI_RELOC) :=3D $(CFLAGS_EFI)
+> +CFLAGS_REMOVE_$(EFI_RELOC) :=3D $(CFLAGS_NON_EFI)
+> +
+> +extra-$(CONFIG_CMD_BOOTEFI_HELLO_COMPILE) +=3D $(EFI_CRT0) $(EFI_RELOC)
+> +extra-$(CONFIG_CMD_BOOTEFI_SELFTEST) +=3D $(EFI_CRT0) $(EFI_RELOC)
+> +extra-$(CONFIG_EFI) +=3D $(EFI_CRT0) $(EFI_RELOC)
+> diff --git a/arch/loongarch/lib/crt0_loongarch_efi.S b/arch/loongarch/li=
+b/crt0_loongarch_efi.S
+> new file mode 100644
+> index 000000000000..5be47045ad8a
+> --- /dev/null
+> +++ b/arch/loongarch/lib/crt0_loongarch_efi.S
+> @@ -0,0 +1,182 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * crt0-efi-loongarch.S - PE/COFF header for LoongArch EFI applications
+> + *
+> + * Copright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
+> + */
+> +
+> +#include <asm-generic/pe.h>
+> +#include <asm/asm.h>
+> +
+> +#ifdef __loongarch64
+> +#define PE_MACHINE	IMAGE_FILE_MACHINE_LOONGARCH64
+> +#define PE_MAGIC    IMAGE_NT_OPTIONAL_HDR64_MAGIC
+> +#define IMG_CHARACTERISTICS \
+> +	(IMAGE_FILE_EXECUTABLE_IMAGE | \
+> +	 IMAGE_FILE_LINE_NUMS_STRIPPED | \
+> +	 IMAGE_FILE_LOCAL_SYMS_STRIPPED | \
+> +	 IMAGE_FILE_LARGE_ADDRESS_AWARE | \
+> +	 IMAGE_FILE_DEBUG_STRIPPED)
+> +#else
+> +#define PE_MACHINE	IMAGE_FILE_MACHINE_LOONGARCH32
+> +#define PE_MAGIC    IMAGE_NT_OPTIONAL_HDR32_MAGIC
+> +#define IMG_CHARACTERISTICS \
+> +	(IMAGE_FILE_EXECUTABLE_IMAGE | \
+> +	 IMAGE_FILE_LINE_NUMS_STRIPPED | \
+> +	 IMAGE_FILE_LOCAL_SYMS_STRIPPED | \
+> +	 IMAGE_FILE_DEBUG_STRIPPED)
+> +#endif
+> +
+> +	.section	.text.head
+> +
+> +	/*
+> +	 * Magic "MZ" signature for PE/COFF
+> +	 */
+> +	.globl	ImageBase
+> +ImageBase:
+> +	.short	IMAGE_DOS_SIGNATURE		/* 'MZ' */
+> +	.skip	58
+> +	.long	pe_header - ImageBase		/* Offset to the PE header */
+> +pe_header:
+> +	.long	IMAGE_NT_SIGNATURE		/* 'PE' */
+> +coff_header:
+> +	.short	PE_MACHINE			/* LoongArch 64/32-bit */
+> +	.short	3				/* nr_sections */
+> +	.long	0				/* TimeDateStamp */
+> +	.long	0				/* PointerToSymbolTable */
+> +	.long	0				/* NumberOfSymbols */
+> +	.short	section_table - optional_header	/* SizeOfOptionalHeader */
+> +	.short	IMG_CHARACTERISTICS		/* Characteristics */
+> +optional_header:
+> +	.short	PE_MAGIC			/* PE32(+) format */
+> +	.byte	0x02				/* MajorLinkerVersion */
+> +	.byte	0x14				/* MinorLinkerVersion */
+> +	.long	_edata - _start			/* SizeOfCode */
+> +	.long	0				/* SizeOfInitializedData */
+> +	.long	0				/* SizeOfUninitializedData */
+> +	.long	_start - ImageBase		/* AddressOfEntryPoint */
+> +	.long	_start - ImageBase		/* BaseOfCode */
+> +#ifndef __loongarch64
+> +	.long	0				/* BaseOfData */
+> +#endif
+> +
+> +extra_header_fields:
+> +	LONG	0
+> +	.long	0x200				/* SectionAlignment */
+> +	.long	0x200				/* FileAlignment */
+> +	.short	0				/* MajorOperatingSystemVersion */
+> +	.short	0				/* MinorOperatingSystemVersion */
+> +	.short	1				/* MajorImageVersion */
+> +	.short	0				/* MinorImageVersion */
+> +	.short	0				/* MajorSubsystemVersion */
+> +	.short	0				/* MinorSubsystemVersion */
+> +	.long	0				/* Win32VersionValue */
+> +
+> +	.long	_edata - ImageBase		/* SizeOfImage */
+> +
+> +	/*
+> +	 * Everything before the kernel image is considered part of the header
+> +	 */
+> +	.long	_start - ImageBase		/* SizeOfHeaders */
+> +	.long	0				/* CheckSum */
+> +	.short	IMAGE_SUBSYSTEM_EFI_APPLICATION /* Subsystem */
+> +#if CONFIG_VENDOR_EFI
+> +	.short	0				/* DllCharacteristics */
+> +#else
+> +	.short	IMAGE_DLLCHARACTERISTICS_NX_COMPAT
+> +#endif
+> +	LONG	0				/* SizeOfStackReserve */
+> +	LONG	0				/* SizeOfStackCommit */
+> +	LONG	0				/* SizeOfHeapReserve */
+> +	LONG	0				/* SizeOfHeapCommit */
+> +
+> +	.long	0				/* LoaderFlags */
+> +	.long	0x6				/* NumberOfRvaAndSizes */
+> +
+> +	.quad	0				/* ExportTable */
+> +	.quad	0				/* ImportTable */
+> +	.quad	0				/* ResourceTable */
+> +	.quad	0				/* ExceptionTable */
+> +	.quad	0				/* CertificationTable */
+> +	.quad	0				/* BaseRelocationTable */
+> +
+> +	/* Section table */
+> +section_table:
+> +
+> +	/*
+> +	 * The EFI application loader requires a relocation section
+> +	 * because EFI applications must be relocatable.  This is a
+> +	 * dummy section as far as we are concerned.
+> +	 */
+> +	.ascii	".reloc"
+> +	.byte	0
+> +	.byte	0			/* end of 0 padding of section name */
+> +	.long	0
+> +	.long	0
+> +	.long	0			/* SizeOfRawData */
+> +	.long	0			/* PointerToRawData */
+> +	.long	0			/* PointerToRelocations */
+> +	.long	0			/* PointerToLineNumbers */
+> +	.short	0			/* NumberOfRelocations */
+> +	.short	0			/* NumberOfLineNumbers */
+> +	.long	0x42100040		/* Characteristics (section flags) */
+> +
+> +
+> +	.ascii	".text"
+> +	.byte	0
+> +	.byte	0
+> +	.byte	0			/* end of 0 padding of section name */
+> +	.long	_etext - _start		/* VirtualSize */
+> +	.long	_start - ImageBase	/* VirtualAddress */
+> +	.long	_etext - _start		/* SizeOfRawData */
+> +	.long	_start - ImageBase	/* PointerToRawData */
+> +	.long	0			/* PointerToRelocations (0 for executables) */
+> +	.long	0			/* PointerToLineNumbers (0 for executables) */
+> +	.short	0			/* NumberOfRelocations  (0 for executables) */
+> +	.short	0			/* NumberOfLineNumbers  (0 for executables) */
+> +	/* Characteristics (section flags) */
+> +	.long	(IMAGE_SCN_MEM_READ | \
+> +		 IMAGE_SCN_MEM_EXECUTE | \
+> +		 IMAGE_SCN_CNT_CODE)
+> +
+> +	.ascii	".data"
+> +	.byte	0
+> +	.byte	0
+> +	.byte	0			/* end of 0 padding of section name */
+> +	.long	_edata - _data		/* VirtualSize */
+> +	.long	_data - ImageBase	/* VirtualAddress */
+> +	.long	_edata - _data		/* SizeOfRawData */
+> +	.long	_data - ImageBase	/* PointerToRawData */
+> +	.long	0			/* PointerToRelocations */
+> +	.long	0			/* PointerToLineNumbers */
+> +	.short	0			/* NumberOfRelocations */
+> +	.short	0			/* NumberOfLineNumbers */
+> +	/* Characteristics (section flags) */
+> +	.long	(IMAGE_SCN_MEM_WRITE | \
+> +		 IMAGE_SCN_MEM_READ | \
+> +		 IMAGE_SCN_CNT_INITIALIZED_DATA)
+> +
+> +	.align		12
+> +	.globl	_start
+> +	.type	_start, @function
+> +_start:
+> +	PTR_ADDI	sp, sp, -(3 * LONGSIZE)
+> +	LONG_S		ra, sp, 0
+> +	LONG_S		a0, sp, (1 * LONGSIZE)
+> +	LONG_S		a1, sp, (2 * LONGSIZE)
+> +
+> +	move		a2, a0		/* a2: ImageHandle */
+> +	move		a3, a1		/* a3: SystemTable */
+> +	la.local	a0, ImageBase	/* a0: ImageBase */
+> +	la.local	a1, _DYNAMIC	/* a1: DynamicSection */
+> +	bl 	  	_relocate
+> +	bnez		a0, 0f
+> +
+> +	LONG_L		a0, sp, (1 * LONGSIZE)
+> +	LONG_L		a1, sp, (2 * LONGSIZE)
+> +	bl		efi_main
+> +
+> +0:	LONG_L		ra, sp, 0
+> +	PTR_ADDI	sp, sp, (3 * LONGSIZE)
+> +	jr			ra
+> +	.end	  _start
+> diff --git a/arch/loongarch/lib/elf_loongarch_efi.lds b/arch/loongarch/l=
+ib/elf_loongarch_efi.lds
+> new file mode 100644
+> index 000000000000..050e5a52a0b3
+> --- /dev/null
+> +++ b/arch/loongarch/lib/elf_loongarch_efi.lds
+> @@ -0,0 +1,76 @@
+> +/* SPDX-License-Identifier: BSD-2-Clause */
+> +/*
+> + * U-Boot LoongArch
+> + *
+> + * Modified from arch/riscv/lib/elf_riscv64_efi.lds
+> + */
+> +
+> +OUTPUT_ARCH(loongarch)
+> +
+> +PHDRS
+> +{
+> +	data PT_LOAD FLAGS(3); /* SHF_WRITE | SHF_ALLOC */
+> +}
+> +
+> +ENTRY(_start)
+> +SECTIONS
+> +{
+> +	.text 0x0 : {
+> +		_text =3D .;
+> +		*(.text.head)
+> +		*(.text)
+> +		*(.text.*)
+> +		*(.gnu.linkonce.t.*)
+> +		*(.srodata)
+> +		*(.rodata*)
+> +		. =3D ALIGN(16);
+> +		*(.dynamic);
+> +		. =3D ALIGN(512);
+> +	}
+> +	.rela.dyn : { *(.rela.dyn) }
+> +	.rela.plt : { *(.rela.plt) }
+> +	.rela.got : { *(.rela.got) }
+> +	.rela.data : { *(.rela.data) *(.rela.data*) }
+> +	_etext =3D .;
+> +	_text_size =3D . - _text;
+> +	. =3D ALIGN(4096);
+> +	.data : {
+> +		_data =3D .;
+> +		*(.sdata)
+> +		*(.data)
+> +		*(.data1)
+> +		*(.data.*)
+> +		*(.got.plt)
+> +		*(.got)
+> +
+> +		/*
+> +		 * The EFI loader doesn't seem to like a .bss section, so we
+> +		 * stick it all into .data:
+> +		 */
+> +		. =3D ALIGN(16);
+> +		_bss =3D .;
+> +		*(.sbss)
+> +		*(.scommon)
+> +		*(.dynbss)
+> +		*(.bss)
+> +		*(.bss.*)
+> +		*(COMMON)
+> +		. =3D ALIGN(512);
+> +		_bss_end =3D .;
+> +		_edata =3D .;
+> +	} :data
+> +	_data_size =3D _edata - _data;
+> +
+> +	. =3D ALIGN(4096);
+> +	.dynsym   : { *(.dynsym) }
+> +	. =3D ALIGN(4096);
+> +	.dynstr   : { *(.dynstr) }
+> +	. =3D ALIGN(4096);
+> +	.note.gnu.build-id : { *(.note.gnu.build-id) }
+> +	/DISCARD/ : {
+> +		*(.rel.reloc)
+> +		*(.eh_frame)
+> +		*(.note.GNU-stack)
+> +	}
+> +	.comment 0 : { *(.comment) }
+> +}
+> diff --git a/arch/loongarch/lib/reloc_loongarch_efi.c b/arch/loongarch/l=
+ib/reloc_loongarch_efi.c
+> new file mode 100644
+> index 000000000000..32a7d792103d
+> --- /dev/null
+> +++ b/arch/loongarch/lib/reloc_loongarch_efi.c
 
+The code seems to be very similar for all architectures. I wonder if one
+implementation could cover them all.
 
-=E5=9C=A82024=E5=B9=B45=E6=9C=8823=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8B=E5=
-=8D=885:14=EF=BC=8CHeinrich Schuchardt=E5=86=99=E9=81=93=EF=BC=9A
-[...]
-> Looking at
-> https://loongson.github.io/LoongArch-Documentation/LoongArch-toolchain=
--conventions-EN.html:
->
-> There the following symbols are mentioned:
->
-> __loongarch__
-> __loongarch_grlen
->
->
-> Table 15.
-> C/C++ Built-in Macros Provided for Compatibility with Historical Code
-> marks __loongarch64 as deprecated.
+Best regards
 
-Thanks, will use new macros instead.
+Heinrich
 
+> @@ -0,0 +1,107 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/* reloc_loongarch.c - position independent ELF shared object relocator
+> +   Copyright (C) 2018 Alexander Graf <agraf@suse.de>
+> +   Copyright (C) 2014 Linaro Ltd. <ard.biesheuvel@linaro.org>
+> +   Copyright (C) 1999 Hewlett-Packard Co.
+> +	Contributed by David Mosberger <davidm@hpl.hp.com>.
+> +
+> +    All rights reserved.
+> +
+> +    Redistribution and use in source and binary forms, with or without
+> +    modification, are permitted provided that the following conditions
+> +    are met:
+> +
+> +    * Redistributions of source code must retain the above copyright
+> +      notice, this list of conditions and the following disclaimer.
+> +    * Redistributions in binary form must reproduce the above
+> +      copyright notice, this list of conditions and the following
+> +      disclaimer in the documentation and/or other materials
+> +      provided with the distribution.
+> +    * Neither the name of Hewlett-Packard Co. nor the names of its
+> +      contributors may be used to endorse or promote products derived
+> +      from this software without specific prior written permission.
+> +
+> +    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
+> +    CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+> +    INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+> +    MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+> +    DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+> +    BE LIABLE FOR ANYDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY,
+> +    OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+> +    PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+> +    PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+> +    THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR
+> +    TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
+> +    THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+> +    SUCH DAMAGE.
+> +*/
+> +
+> +#include <efi.h>
+> +
+> +#include <elf.h>
+> +
+> +#ifdef __loongarch64
+> +#define Elf_Dyn		Elf64_Dyn
+> +#define Elf_Rela	Elf64_Rela
+> +#define ELF_R_TYPE	ELF64_R_TYPE
+> +#else
+> +#define Elf_Dyn		Elf32_Dyn
+> +#defiggne Elf_Rela	Elf32_Rela
+> +#define ELF_R_TYPE	ELF32_R_TYPE
+> +#endif
+> +
+> +efi_status_t EFIAPI _relocate(long ldbase, Elf_Dyn *dyn)
+> +{
+> +	long relsz =3D 0, relent =3D 0;
+> +	Elf_Rela *rel =3D 0;
+> +	unsigned long *addr;
+> +	int i;
+> +
+> +	for (i =3D 0; dyn[i].d_tag !=3D DT_NULL; ++i) {
+> +		switch (dyn[i].d_tag) {
+> +		case DT_RELA:
+> +			rel =3D (Elf_Rela *)
+> +				((unsigned long)dyn[i].d_un.d_ptr
+> +					+ ldbase);
+> +			break;
+> +		case DT_RELASZ:
+> +			relsz =3D dyn[i].d_un.d_val;
+> +			break;
+> +		case DT_RELAENT:
+> +			relent =3D dyn[i].d_un.d_val;
+> +			break;
+> +		case DT_PLTGOT:
+> +			addr =3D (unsigned long *)
+> +				((unsigned long)dyn[i].d_un.d_ptr
+> +					+ ldbase);
+> +			break;
+> +		default:
+> +			break;
+> +		}
+> +	}
+> +
+> +	if (!rel && relent =3D=3D 0)
+> +		return EFI_SUCCESS;
+> +
+> +	if (!rel || relent =3D=3D 0)
+> +		return EFI_LOAD_ERROR;
+> +
+> +	while (relsz > 0) {
+> +		/* apply the relocs */
+> +		switch (ELF_R_TYPE(rel->r_info)) {
+> +		case R_LARCH_NONE:
+> +			break;
+> +		case R_LARCH_RELATIVE:
+> +			addr =3D (unsigned long *)
+> +				(ldbase + rel->r_offset);
+> +			*addr +=3D ldbase;
+> +			break;
+> +		default:
+> +			break;
+> +		}
+> +		rel =3D (Elf_Rela *)((char *)rel + relent);
+> +		relsz -=3D relent;
+> +	}
+> +	return EFI_SUCCESS;
+> +}
+> +
+> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> index 430bb7f0f7dc..1d82a062a215 100644
+> --- a/lib/efi_loader/Kconfig
+> +++ b/lib/efi_loader/Kconfig
+> @@ -5,7 +5,7 @@ config EFI_LOADER
+>   			SYS_CPU =3D arm1176 || \
+>   			SYS_CPU =3D armv7   || \
+>   			SYS_CPU =3D armv8)  || \
+> -		X86 || RISCV || SANDBOX)
+> +		X86 || RISCV || LOONGARCH || SANDBOX)
+>   	# We need EFI_STUB_64BIT to be set on x86_64 with EFI_STUB
+>   	depends on !EFI_STUB || !X86_64 || EFI_STUB_64BIT
+>   	# We need EFI_STUB_32BIT to be set on x86_32 with EFI_STUB
 >
->> +#define BOOTENV_EFI_PXE_ARCH "0x27"
->> +#define BOOTENV_EFI_PXE_VCI "PXEClient:Arch:00039:UNDI:003000"
->
-> Where are the 32bit defines?
 
-Since we don't have CONFIG_ARCH_LA32 in U-Boot yet I leave 32 bit alone.
-Those will need to be added when we get 32-bit ready.
-
->
-> Cf.
-> https://www.iana.org/assignments/dhcpv6-parameters/dhcpv6-parameters.x=
-html
->
-> 0x00 0x25 	LoongArch 32-bit UEFI
-> 0x00 0x26 	LoongArch 32-bit UEFI boot from http
-> 0x00 0x27 	LoongArch 64-bit UEFI
-> 0x00 0x28 	LoongArch 64-bit UEFI boot from http
->
-[...]
->> +#elif defined(CONFIG_LOONGARCH)
->> +	asm volatile ("break 0xf\n");
->
-> Can we use an undefined instruction here as for the other architecture=
-s,
-> please.
-
-LoongArch have way too many hidden opcodes that is not documented & will
-not trigger exception. It's pretty hard for me to identify an opcode that
-can trigger exception on all hardware (and including future hardware).
-
-Meanwhile, breakpoint instruction with an invalid hint can always genera=
-te
-an SIGILL.
-
-Thanks
->
-> Best regards
->
-> Heinrich
->
->>   #elif defined(CONFIG_SANDBOX)
->>   #if (HOST_ARCH =3D=3D HOST_ARCH_ARM || HOST_ARCH =3D=3D HOST_ARCH_A=
-ARCH64)
->>   	asm volatile (".word 0xe7f7defb\n");
->>
-
---=20
-- Jiaxun
