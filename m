@@ -4,66 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5AC0C25B79
-	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 05:07:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE189C25B75
+	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 05:38:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E55C8852F;
-	Thu, 23 May 2024 07:06:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 048548852F;
+	Thu, 23 May 2024 07:38:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ghawC3SF";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Disjpys+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6D4C8852E; Thu, 23 May 2024 07:06:02 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id EC87588528; Thu, 23 May 2024 07:38:32 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78A768856D
- for <u-boot@lists.denx.de>; Thu, 23 May 2024 07:06:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E294A8853F
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 07:38:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-k6@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44N55wIY088782;
- Thu, 23 May 2024 00:05:58 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1716440758;
- bh=g1bijHJ1LZ4jS5KdM49rCPcqQmqeBsfAJJUyHI+qI84=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=ghawC3SF6s2RSGnDik93h6zK1vj9OTHwfZyf3ea7U1HAxrKinydPd2VwdiAudxWEK
- p9zpn+s30YpUrhgkoHA+fHKj0HGAPpl7v3Gz3y1NZQluIAB/CVbH0h6BODyKSzupH6
- CZPpEcFkqL4ZIF0eNCdLiUM1lmw+p+QAjwCEK1C8=
-Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44N55wp1074443
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 23 May 2024 00:05:58 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 23
- May 2024 00:05:57 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 23 May 2024 00:05:57 -0500
-Received: from santhoshkumark.dhcp.ti.com (santhoshkumark.dhcp.ti.com
- [172.24.227.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44N55UHE018652;
- Thu, 23 May 2024 00:05:55 -0500
-From: Santhosh Kumar K <s-k6@ti.com>
-To: <trini@konsulko.com>, <nm@ti.com>, <vigneshr@ti.com>, <bb@ti.com>,
- <u-kumar1@ti.com>, <m-chawdhry@ti.com>
-CC: <u-boot@lists.denx.de>, <n-francis@ti.com>, <s-k6@ti.com>
-Subject: [PATCH v3 8/8] arm: dts: k3-*-ddr: Add ss_cfg reg entry
-Date: Thu, 23 May 2024 10:34:30 +0530
-Message-ID: <20240523050430.455201-9-s-k6@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240523050430.455201-1-s-k6@ti.com>
-References: <20240523050430.455201-1-s-k6@ti.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=seashell11234455@gmail.com
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-420180b5838so35672125e9.2
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 22:38:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1716442709; x=1717047509; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Pnpf4Np0JHxM6OIJ71eqBMjFlS81PlRLqk1uti0l7ho=;
+ b=Disjpys+Rx5+cqNvDOKARF6TnH7X95MdrTsUZ8eH0ls7+j7py13HNL8INBa2fPpcT7
+ PSlOIxeGuo9asjBVzJsulMv4uI+P7F6YgR2pzX8B4Af1f8TJrSK9JT1YuTc8NpjeUYhD
+ CsQq3SvhKOl4MAw0LwohvBGEmV9AKpMXDp4Ay71/Xnf4GC1MBu/vl9MWHVjiXi7o/VES
+ 8OvJ+gstvfJyhRZQJY2rOl4M9QP+E0aSzN/9f/scd3L0QKPgw5TTFvYdSFE/s3uLMwDX
+ xxEHFfsYemGY7Eh/aUyCn4//H8mNihmLwfTrBoFlzgPeM4pNTnPTSlZ5/mFD+0t97BiJ
+ 9kIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716442709; x=1717047509;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Pnpf4Np0JHxM6OIJ71eqBMjFlS81PlRLqk1uti0l7ho=;
+ b=Idqt/j8LRJ2TmQgRAOKc1PNEYlVwAxISWEXUNyR5g/UHYWQGHf0gcLaLewpUn0kyw7
+ UzKwGcjDqsE6lIc3ffCY+Hbbb3Iyux3a0jpdQklMYuQY9XPJUS1mLI6rpMXDCp/XPRF4
+ ZiRoCRWWz5LmW9oxX9Oy1W4KAU8iGj1+1zqylv5129GFJ39ft16Sxwa2dmao4Jd86OhH
+ 2WT+7IbtzF7TXtSTEvbGFYnYplslfrcIyp/MarB7bq0so87tnN59iCdhWj7eR41SsJHL
+ Cxh+TnMyxWiGHkv/G1apgqHojmhLPG5b1V6PglqzjxC1XycibqFiKGGKHkfd9a5J8DCt
+ SU1A==
+X-Gm-Message-State: AOJu0YzS51yWDbWH1h021yvrq2J+PPFzRAOWAyCb18omyXV9UAs0hPN9
+ Qnrl+aNJeS89VfgjkXWIWUvAOwViRe5rxIgNJ/PEn5Dg7BbCEJz0HGWTkffNh4Ce+DNIo33MuxP
+ 6oDl8GNr/TGkDxYbbruhsqn1ZPrQ=
+X-Google-Smtp-Source: AGHT+IGUnyL9eH8MdeliGsqyq86I25kWEK6jaWUPG9xVXHFg9ZBx5UajvJpX+A/DbujA2VzhEQBirXcXKNwHjH+QTxM=
+X-Received: by 2002:a05:600c:1c22:b0:421:1d8:add4 with SMTP id
+ 5b1f17b1804b1-42101d8af99mr8963725e9.35.1716442708807; Wed, 22 May 2024
+ 22:38:28 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20240519150736.13203-1-seashell11234455@gmail.com>
+ <20240519150736.13203-3-seashell11234455@gmail.com>
+ <20240522233915.GA1990099@ofsar>
+In-Reply-To: <20240522233915.GA1990099@ofsar>
+From: Kongyang Liu <seashell11234455@gmail.com>
+Date: Thu, 23 May 2024 13:38:16 +0800
+Message-ID: <CAOKwTdroHBDH7AQA5Ryts6zAseOBA-idi=318eFrCUGn84QAfw@mail.gmail.com>
+Subject: Re: [PATCH 2/4] clk: sophgo: cv1800b: Add clock controller driver for
+ cv1800b SoC
+To: Yixun Lan <dlan@gentoo.org>
+Cc: u-boot@lists.denx.de, Arturs Artamonovs <arturs.artamonovs@analog.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Greg Malysa <greg.malysa@timesys.com>, 
+ Ian Roberts <ian.roberts@timesys.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Lukasz Majewski <lukma@denx.de>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Michal Simek <michal.simek@amd.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Samuel Holland <samuel@sholland.org>, 
+ Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Utsav Agarwal <utsav.agarwal@analog.com>, 
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,137 +100,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add ss_cfg memory region which maps the DDRSS configuration region
-for the memory controller node.
+Yixun Lan <dlan@gentoo.org> =E4=BA=8E2024=E5=B9=B45=E6=9C=8823=E6=97=A5=E5=
+=91=A8=E5=9B=9B 07:39=E5=86=99=E9=81=93=EF=BC=9A
+>
+> Hi Kongyang:
+>
+> I've got one compiling error
+>
+> On 23:07 Sun 19 May     , Kongyang Liu wrote:
+> > Add clock controller driver for sophgo cv1800b SoC
+> >
+> > Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
+> > ---
+> >
+> >  drivers/clk/Kconfig              |   1 +
+> >  drivers/clk/Makefile             |   1 +
+> >  drivers/clk/sophgo/Kconfig       |  14 +
+> >  drivers/clk/sophgo/Makefile      |   6 +
+> >  drivers/clk/sophgo/clk-common.h  |  74 +++
+> >  drivers/clk/sophgo/clk-cv1800b.c | 794 +++++++++++++++++++++++++++++++
+> >  drivers/clk/sophgo/clk-cv1800b.h | 123 +++++
+> >  drivers/clk/sophgo/clk-ip.c      | 594 +++++++++++++++++++++++
+> >  drivers/clk/sophgo/clk-ip.h      | 288 +++++++++++
+> >  drivers/clk/sophgo/clk-pll.c     | 284 +++++++++++
+> >  drivers/clk/sophgo/clk-pll.h     |  74 +++
+> >  11 files changed, 2253 insertions(+)
+> >  create mode 100644 drivers/clk/sophgo/Kconfig
+> >  create mode 100644 drivers/clk/sophgo/Makefile
+> >  create mode 100644 drivers/clk/sophgo/clk-common.h
+> >  create mode 100644 drivers/clk/sophgo/clk-cv1800b.c
+> >  create mode 100644 drivers/clk/sophgo/clk-cv1800b.h
+> >  create mode 100644 drivers/clk/sophgo/clk-ip.c
+> >  create mode 100644 drivers/clk/sophgo/clk-ip.h
+> >  create mode 100644 drivers/clk/sophgo/clk-pll.c
+> >  create mode 100644 drivers/clk/sophgo/clk-pll.h
+> >
+>
+> ...
+>
+> > +static ulong cv1800b_ipll_set_rate(struct clk *clk, ulong rate)
+> > +{
+> > +     struct cv1800b_clk_ipll *pll =3D to_clk_ipll(clk);
+> > +     ulong parent_rate =3D clk_get_parent_rate(clk);
+> > +     u32 pre_div, post_div, div;
+> > +     u32 pre_div_sel, post_div_sel, div_sel;
+> > +     ulong new_rate, best_rate =3D 0;
+> > +     u32 mode, ictrl;
+> > +     u32 test, val;
+> > +
+> > +     FOR_RANGE(pre_div, PLL_PRE_DIV)
+> > +     {
+> > +             FOR_RANGE(post_div, PLL_POST_DIV)
+> > +             {
+> > +                     FOR_RANGE(div, PLL_DIV)
+> > +                     {
+> > +                             new_rate =3D DIV_ROUND_DOWN_ULL(parent_ra=
+te * div
+>                                                                          =
+ ~~~~~~
+>                                                              miss a comma=
+ here
 
-Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
-Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
----
- arch/arm/dts/k3-am62a-ddr.dtsi  |  7 ++++---
- arch/arm/dts/k3-j721s2-ddr.dtsi | 12 ++++++++----
- arch/arm/dts/k3-j784s4-ddr.dtsi | 24 ++++++++++++++++--------
- 3 files changed, 28 insertions(+), 15 deletions(-)
+I will fix it.
 
-diff --git a/arch/arm/dts/k3-am62a-ddr.dtsi b/arch/arm/dts/k3-am62a-ddr.dtsi
-index 8629ea45b847..42e41f78505a 100644
---- a/arch/arm/dts/k3-am62a-ddr.dtsi
-+++ b/arch/arm/dts/k3-am62a-ddr.dtsi
-@@ -4,11 +4,12 @@
-  */
- 
- / {
--	memorycontroller: memory-controller@f308000 {
-+	memorycontroller: memory-controller@f300000 {
- 		compatible = "ti,am62a-ddrss";
- 		reg = <0x00 0x0f308000 0x00 0x4000>,
--		      <0x00 0x43014000 0x00 0x100>;
--		reg-names = "cfg", "ctrl_mmr_lp4";
-+		      <0x00 0x43014000 0x00 0x100>,
-+		      <0x00 0x0f300000 0x00 0x200>;
-+		reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 		ti,ddr-freq1 = <DDRSS_PLL_FREQUENCY_1>;
- 		ti,ddr-freq2 = <DDRSS_PLL_FREQUENCY_2>;
- 		ti,ddr-fhs-cnt = <DDRSS_PLL_FHS_CNT>;
-diff --git a/arch/arm/dts/k3-j721s2-ddr.dtsi b/arch/arm/dts/k3-j721s2-ddr.dtsi
-index 345e2b84f9e8..9764085163c4 100644
---- a/arch/arm/dts/k3-j721s2-ddr.dtsi
-+++ b/arch/arm/dts/k3-j721s2-ddr.dtsi
-@@ -5,6 +5,8 @@
- 
- &main_navss {
- 	ranges = <0x00 0x00114000 0x00 0x00114000 0x00 0x00000100>, // ctrl_mmr_lpr
-+		 <0x00 0x02980000 0x00 0x02980000 0x00 0x00000200>, // ss cfg 0
-+		 <0x00 0x029a0000 0x00 0x029a0000 0x00 0x00000200>, // ss cfg 1
- 		 <0x00 0x02990000 0x00 0x02990000 0x00 0x00004000>, // ddr0 cfg
- 		 <0x00 0x029b0000 0x00 0x029b0000 0x00 0x00004000>, // ddr1 cfg
- 		 <0x00 0x30000000 0x00 0x30000000 0x00 0x0c400000>;
-@@ -24,8 +26,9 @@
- 		memorycontroller0: memorycontroller@2990000 {
- 			compatible = "ti,j721s2-ddrss";
- 			reg = <0x0 0x02990000 0x0 0x4000>,
--			      <0x0 0x0114000 0x0 0x100>;
--			reg-names = "cfg", "ctrl_mmr_lp4";
-+			      <0x0 0x0114000 0x0 0x100>,
-+			      <0x0 0x02980000 0x0 0x200>;
-+			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 			power-domains = <&k3_pds 138 TI_SCI_PD_SHARED>,
- 				<&k3_pds 96 TI_SCI_PD_SHARED>;
- 			clocks = <&k3_clks 138 0>, <&k3_clks 43 2>;
-@@ -2232,8 +2235,9 @@
- 		memorycontroller1: memorycontroller@29b0000 {
- 			compatible = "ti,j721s2-ddrss";
- 			reg = <0x0 0x029b0000 0x0 0x4000>,
--			      <0x0 0x0114000 0x0 0x100>;
--			reg-names = "cfg", "ctrl_mmr_lp4";
-+			      <0x0 0x0114000 0x0 0x100>,
-+			      <0x0 0x029a0000 0x0 0x200>;
-+			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 			power-domains = <&k3_pds 139 TI_SCI_PD_SHARED>,
- 				<&k3_pds 97 TI_SCI_PD_SHARED>;
- 			clocks = <&k3_clks 139 0>, <&k3_clks 43 2>;
-diff --git a/arch/arm/dts/k3-j784s4-ddr.dtsi b/arch/arm/dts/k3-j784s4-ddr.dtsi
-index 1c3242b0870c..fc74c539331e 100644
---- a/arch/arm/dts/k3-j784s4-ddr.dtsi
-+++ b/arch/arm/dts/k3-j784s4-ddr.dtsi
-@@ -9,6 +9,10 @@
- 		 <0x00 0x029b0000 0x00 0x029b0000 0x00 0x00004000>, // ddr1 cfg
- 		 <0x00 0x029d0000 0x00 0x029d0000 0x00 0x00004000>, // ddr2 cfg
- 		 <0x00 0x029f0000 0x00 0x029f0000 0x00 0x00004000>, // ddr3 cfg
-+		 <0x00 0x02980000 0x00 0x02980000 0x00 0x00000200>, // ss cfg 0
-+		 <0x00 0x029a0000 0x00 0x029a0000 0x00 0x00000200>, // ss cfg 1
-+		 <0x00 0x029c0000 0x00 0x029c0000 0x00 0x00000200>, // ss cfg 2
-+		 <0x00 0x029e0000 0x00 0x029e0000 0x00 0x00000200>, // ss cfg 3
- 		 <0x00 0x30000000 0x00 0x30000000 0x00 0x0c400000>;
- 
- 	msmc0: msmc {
-@@ -26,8 +30,9 @@
- 		memorycontroller0: memorycontroller@2990000 {
- 			compatible = "ti,j721s2-ddrss";
- 			reg = <0x0 0x02990000 0x0 0x4000>,
--			      <0x0 0x0114000 0x0 0x100>;
--			reg-names = "cfg", "ctrl_mmr_lp4";
-+			      <0x0 0x0114000 0x0 0x100>,
-+			      <0x0 0x02980000 0x0 0x200>;
-+			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 			power-domains = <&k3_pds 191 TI_SCI_PD_SHARED>,
- 				<&k3_pds 131 TI_SCI_PD_SHARED>;
- 			clocks = <&k3_clks 191 1>, <&k3_clks 78 2>;
-@@ -2234,8 +2239,9 @@
- 		memorycontroller1: memorycontroller@29b0000 {
- 			compatible = "ti,j721s2-ddrss";
- 			reg = <0x0 0x029b0000 0x0 0x4000>,
--			      <0x0 0x0114000 0x0 0x100>;
--			reg-names = "cfg", "ctrl_mmr_lp4";
-+			      <0x0 0x0114000 0x0 0x100>,
-+			      <0x0 0x029a0000 0x0 0x200>;
-+			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 			power-domains = <&k3_pds 192 TI_SCI_PD_SHARED>,
- 				<&k3_pds 132 TI_SCI_PD_SHARED>;
- 			clocks = <&k3_clks 192 1>, <&k3_clks 78 2>;
-@@ -4442,8 +4448,9 @@
- 		memorycontroller2: memorycontroller@29d0000 {
- 			compatible = "ti,j721s2-ddrss";
- 			reg = <0x0 0x029d0000 0x0 0x4000>,
--			      <0x0 0x0114000 0x0 0x100>;
--			reg-names = "cfg", "ctrl_mmr_lp4";
-+			      <0x0 0x0114000 0x0 0x100>,
-+			      <0x0 0x029c0000 0x0 0x200>;
-+			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 			power-domains = <&k3_pds 193 TI_SCI_PD_SHARED>,
- 				<&k3_pds 133 TI_SCI_PD_SHARED>;
- 			clocks = <&k3_clks 193 1>, <&k3_clks 78 2>;
-@@ -6650,8 +6657,9 @@
- 		memorycontroller3: memorycontroller@29f0000 {
- 			compatible = "ti,j721s2-ddrss";
- 			reg = <0x0 0x029f0000 0x0 0x4000>,
--			      <0x0 0x0114000 0x0 0x100>;
--			reg-names = "cfg", "ctrl_mmr_lp4";
-+			      <0x0 0x0114000 0x0 0x100>,
-+			      <0x0 0x29e0000 0x0 0x200>;
-+			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 			power-domains = <&k3_pds 194 TI_SCI_PD_SHARED>,
- 				<&k3_pds 139 TI_SCI_PD_SHARED>;
- 			clocks = <&k3_clks 194 1>, <&k3_clks 78 2>;
--- 
-2.34.1
-
+> > +                                                           pre_div * p=
+ost_div);
+> > +                             if (rate - new_rate < rate - best_rate) {
+> > +                                     best_rate =3D new_rate;
+> > +                                     pre_div_sel =3D pre_div;
+> > +                                     post_div_sel =3D post_div;
+> > +                                     div_sel =3D div;
+> > +                             }
+> > +                     }
+> > +             }
+> > +     }
+> > +
+> > +     FOR_RANGE(mode, PLL_MODE)
+>
+> --
+> Yixun Lan (dlan)
+> Gentoo Linux Developer
+> GPG Key ID AABEFD55
