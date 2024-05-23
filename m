@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23988C25B75
-	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 07:16:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3570FC25B75
+	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 07:27:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DA83884EA;
-	Thu, 23 May 2024 09:16:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 694648857A;
+	Thu, 23 May 2024 09:27:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="mjasKzIf";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zuiscQEa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAF3C884EC; Thu, 23 May 2024 09:16:31 +0200 (CEST)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
+ id B8D0B8857A; Thu, 23 May 2024 09:27:22 +0200 (CEST)
+Received: from mail-vs1-xe32.google.com (mail-vs1-xe32.google.com
+ [IPv6:2607:f8b0:4864:20::e32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8244B884D5
- for <u-boot@lists.denx.de>; Thu, 23 May 2024 09:16:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 58AD388544
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 09:27:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2e73359b979so36693521fa.1
- for <u-boot@lists.denx.de>; Thu, 23 May 2024 00:16:29 -0700 (PDT)
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-vs1-xe32.google.com with SMTP id
+ ada2fe7eead31-47f2f9f2ac8so653307137.2
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 00:27:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1716448589; x=1717053389;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:to:from
- :from:to:cc:subject:date:message-id:reply-to;
- bh=GEhTaqxFAfbDC9U2l3kpIMWVNFw03xR90yUaqx7W4rc=;
- b=mjasKzIfjeS7P5bBcKBxiMzGn5hgQCp47Jq8kFU9KxThwG44vlE9E4fHP5La8W3kW9
- b52tmhWHYG2E/Xvcxv7NdojdaLvkamOYbkItFX8IAddi9/silXMCux2VTGSkVOS9WDRj
- lTEmsCB1GFQWcPPylj8vwXZ8VhjacznDHYvQrZhM+kqQpLdwvphpzlhVLOY96oAadhaP
- XOFBYVvVyy1zvArUE8jHSxvVx/oO3hPSCHO/Kg4vNmY8RZ2M4SO7I0rlSOrYfRKXhNSh
- 27rtZMRzRnVaK9MLJZ79+RUeUwdkyqsHCF0cAAMtRDyfGgJruci0kbfIoQlXS1uMW5Ht
- uZkg==
+ d=linaro.org; s=google; t=1716449239; x=1717054039; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=QRpW5sXgI8tHIZg/iw7nu5mFmxpzfKfiguqEpGWmMfU=;
+ b=zuiscQEamxjbn/OXjRytb4UOtQE+I7Bha9wgcTW/KBivD7Kbiy31DTvrbCxzQUTlfP
+ i6j07laS5SQupWwG1kD+h3NU8MwNEpUvyFfNQW/a9ETRNC/q3rw5yIV1B8yBgH8D0lyO
+ ZdfXIxvcDm0BIB4upNydBubAnEiM1gIUb8etQfqlWv1zSPPuj2VjHhjaQMX6AuY/Kx5S
+ 9hju0AdbXQEdCeGerWzIuOSQU9h2h1vu0f/tu9FvCzX9OK26PwlU/YrhZkKxx5LNQK9B
+ 0ZqF/J+gTYglPdtb2kaptIGyQGnzt6Q3Zz1rUl9NrBrhL6gcB5Bt+8HNTGo4j5wAmeRP
+ T5ag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716448589; x=1717053389;
- h=mime-version:message-id:date:references:in-reply-to:subject:to:from
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=GEhTaqxFAfbDC9U2l3kpIMWVNFw03xR90yUaqx7W4rc=;
- b=V5wkpMnmNicrOPCqfxDU6Ss+iKKgYoJk1eWA3EpmIX4TxZm4wSUqCO8l524hfC4xS9
- rec7bQBPXePRVv5YNbMLkRPwIsz4aNr8MoXpHuHbjKENi4OyRmr1xjTMvx/y5cukTg7O
- hE5mMQbfN4iX1cM0RO9Kn4mWy57N4uW1q09azzzX42Zsfejwutxe7B6F0hqMPf9K/LLz
- f49Er3VYUlWwifbXzmDXzsLWNNJOlyNfMPf4XvZ82CgI0UQY2ZYlqAOEQBD0AiD2KgV/
- FPm5yWhmbt9j4HaIPc1tJkLbc3N0xLgc37oXlpKZAPNydEtnUBpzUxPjUlQQUvDOBOUm
- yC3g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXIYQ/5EFEkHhPD+fUqq7N3Ts1zwA0yR93oOqwrGxxcCwnr+FROMtSF1XwNVhHVWcbuGc7A2fW0o4QcOCfvchbrHQSJng==
-X-Gm-Message-State: AOJu0YymB/5g/XdYkGkGhfv490A+SJ9Q4yhL2kpEMgRlgoiiWx5MPIY2
- 2Lw2i3xhuGm+fC9fdrobSsOGkE6iwk11Ge1DeU3Rvotc5KLd9Nc6gLXH/h9e8mg=
-X-Google-Smtp-Source: AGHT+IHBoALmsTza4JvWQRLHhznFjeSCMHWK1Oi+qsNVvtP9ITctSRTwj8qDzO51uOnoYpmZbg788w==
-X-Received: by 2002:a2e:9e49:0:b0:2d4:50b2:62e9 with SMTP id
- 38308e7fff4ca-2e9494bda09mr23693861fa.14.1716448588740; 
- Thu, 23 May 2024 00:16:28 -0700 (PDT)
-Received: from localhost (lfbn-tou-1-402-59.w86-206.abo.wanadoo.fr.
- [86.206.229.59]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-354faf3fa68sm571572f8f.116.2024.05.23.00.16.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 May 2024 00:16:28 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Roman Stratiienko <r.stratiienko@gmail.com>, sjg@chromium.org,
- marek.vasut+renesas@mailbox.org, r.stratiienko@gmail.com,
- laurent.pinchart@ideasonboard.com, ilias.apalodimas@linaro.org,
- xypron.glpk@gmx.de, eajames@linux.ibm.com, paulerwan.rio@gmail.com,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v3] abootimg: Add init_boot image support
-In-Reply-To: <20240523070606.91108-1-r.stratiienko@gmail.com>
-References: <20240523070606.91108-1-r.stratiienko@gmail.com>
-Date: Thu, 23 May 2024 09:16:25 +0200
-Message-ID: <87v835xak6.fsf@baylibre.com>
+ d=1e100.net; s=20230601; t=1716449239; x=1717054039;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=QRpW5sXgI8tHIZg/iw7nu5mFmxpzfKfiguqEpGWmMfU=;
+ b=vd9JsKBxYbJgf89sxqABhYmC+lDtBrjmbMu3GB2s3j/CGc2zDluqoGjLrM8H/+1quG
+ XVidjx6ROLxJGa1nWvObojfcePvdS/TBqxe50YUY9o7nUeZOLV5u9WbiKZGlm7Hmd75M
+ tMYLlm989RSwpnkb3/ylrwS9NFVjnmGY6Wk7oXN7Upf7vNqsBY5GjDmFg4uocy8M8513
+ CRQYITO1ibQLD55CrTVvT7R9i5xXkKvoA2IndIhBJhgmlZIId3Isit35Z+dobx/WVkjL
+ vqVm/dYufDS598MC/M6mOPYRYXy0IiQc4Nwd/1cegCqXL5Tqtc4yCY1h2HAK/3nf20fa
+ sWGQ==
+X-Gm-Message-State: AOJu0YzDu9/P7IxgeBmcC3XoJeSxQrnqGGZcucoNByP0eScD3boLW0Ai
+ kWAsroLCATrOQ6ruHJaMaNTceuwCLfhmtKc9SiJzjUAt4GYnAToQKQsN1knd94RGP5acmdZdoyB
+ EJk1u6am9js8ylFmv+oCuckxpppAmz8t0nNXlenRvJsAEvpWokKo=
+X-Google-Smtp-Source: AGHT+IGUz21RtH6525se/vhjfysu9hW1Azuq2rFChc2/gZg5nuFL2RHG+rPAAHyEqYdlGQqYxo0ADCDX/RJwLdNiykQ=
+X-Received: by 2002:a05:6102:162c:b0:47e:5c2e:5695 with SMTP id
+ ada2fe7eead31-4890a2aa797mr4529307137.23.1716449239065; Thu, 23 May 2024
+ 00:27:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
+References: <20240522215200.16199-1-mibodhi@gmail.com>
+In-Reply-To: <20240522215200.16199-1-mibodhi@gmail.com>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Thu, 23 May 2024 12:57:07 +0530
+Message-ID: <CAFA6WYMb1vK_ZtECYmWesVBrd8ssOs123owarF1pEcqNE2R9vA@mail.gmail.com>
+Subject: Re: [PATCH] arm: dts: mvebu: Migrate to upstream DT for Synology
+ DS116 (Armada 385) board
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>,
+ Tom Rini <trini@konsulko.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Michal Simek <michal.simek@amd.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tim Harvey <tharvey@gateworks.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,29 +92,356 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Roman,
-
-Thank you for the patch.
-
-On jeu., mai 23, 2024 at 07:06, Roman Stratiienko <r.stratiienko@gmail.com> wrote:
-
-> Quote from [1]:
+On Thu, 23 May 2024 at 03:22, Tony Dinh <mibodhi@gmail.com> wrote:
 >
-> "For devices launching with Android 13, the generic ramdisk is removed
-> from the boot image and placed in a separate init_boot image.
-> This change leaves the boot image with only the GKI kernel."
+> Enable OF_UPSTREAM to use upstream DT and add marvell/ prefix to the
+> DEFAULT_DEVICE_TREE in DS116 defconfig. Remove current DTS in
+> arch/arm/dts/ directory.
 >
-> While at it, update wrong error handling message when vendor_boot
-> cannot be loaded.
+> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+> ---
 >
-> [1]: https://source.android.com/docs/core/architecture/partitions/generic-boot
-> Signed-off-by: Roman Stratiienko <r.stratiienko@gmail.com>
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>  arch/arm/dts/Makefile                      |   1 -
+>  arch/arm/dts/armada-385-synology-ds116.dts | 291 ---------------------
+>  configs/ds116_defconfig                    |   3 +-
+>  3 files changed, 2 insertions(+), 293 deletions(-)
+>  delete mode 100644 arch/arm/dts/armada-385-synology-ds116.dts
+>
 
-To confirm, v3 applies without any conflicts.
+Acked-by: Sumit Garg <sumit.garg@linaro.org>
 
-This series was initially assigned to Tom on patchwork, so it's up to
-him to see when he wants to pick this up.
+-Sumit
 
-[...]
-
+> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> index a5c82ebf7a..75f7e616b4 100644
+> --- a/arch/arm/dts/Makefile
+> +++ b/arch/arm/dts/Makefile
+> @@ -155,7 +155,6 @@ dtb-$(CONFIG_ARCH_MVEBU) +=                 \
+>         armada-385-atl-x530.dtb                 \
+>         armada-385-atl-x530DP.dtb               \
+>         armada-385-db-88f6820-amc.dtb           \
+> -       armada-385-synology-ds116.dtb           \
+>         armada-385-thecus-n2350.dtb             \
+>         armada-385-turris-omnia.dtb             \
+>         armada-388-clearfog.dtb                 \
+> diff --git a/arch/arm/dts/armada-385-synology-ds116.dts b/arch/arm/dts/armada-385-synology-ds116.dts
+> deleted file mode 100644
+> index 82a0373f7f..0000000000
+> --- a/arch/arm/dts/armada-385-synology-ds116.dts
+> +++ /dev/null
+> @@ -1,291 +0,0 @@
+> -// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+> -/*
+> - * Device Tree file for Synology DS116 NAS
+> - *
+> - * Copyright (C) 2017 Willy Tarreau <w@1wt.eu>
+> - */
+> -
+> -/dts-v1/;
+> -#include "armada-385.dtsi"
+> -#include <dt-bindings/gpio/gpio.h>
+> -
+> -/ {
+> -       model = "Synology DS116";
+> -       compatible = "marvell,a385-gp", "marvell,armada385", "marvell,armada380";
+> -
+> -       chosen {
+> -               stdout-path = "serial0:115200n8";
+> -       };
+> -
+> -       memory {
+> -               device_type = "memory";
+> -               reg = <0x00000000 0x40000000>; /* 1 GB */
+> -       };
+> -
+> -       soc {
+> -               ranges = <MBUS_ID(0xf0, 0x01) 0 0xf1000000 0x100000
+> -                         MBUS_ID(0x01, 0x1d) 0 0xfff00000 0x100000
+> -                         MBUS_ID(0x09, 0x19) 0 0xf1100000 0x10000
+> -                         MBUS_ID(0x09, 0x15) 0 0xf1110000 0x10000
+> -                         MBUS_ID(0x0c, 0x04) 0 0xf1200000 0x100000>;
+> -
+> -               internal-regs {
+> -                       i2c@11000 {
+> -                               pinctrl-names = "default";
+> -                               pinctrl-0 = <&i2c0_pins>;
+> -                               status = "okay";
+> -                               clock-frequency = <100000>;
+> -
+> -                               eeprom@57 {
+> -                                       compatible = "atmel,24c64";
+> -                                       reg = <0x57>;
+> -                               };
+> -                       };
+> -
+> -                       serial@12000 {
+> -                               pinctrl-names = "default";
+> -                               pinctrl-0 = <&uart0_pins>;
+> -                               status = "okay";
+> -                       };
+> -
+> -                       serial@12100 {
+> -                               /* A PIC16F1829 is connected to uart1 at 9600 bps,
+> -                                * and takes single-character orders :
+> -                                *   "1" : power off // already handled by the poweroff node
+> -                                *   "2" : short beep
+> -                                *   "3" : long beep
+> -                                *   "4" : turn the power LED ON
+> -                                *   "5" : flash the power LED
+> -                                *   "6" : turn the power LED OFF
+> -                                *   "7" : turn the status LED OFF
+> -                                *   "8" : turn the status LED ON
+> -                                *   "9" : flash the status LED
+> -                                *   "A" : flash the motherboard LED (D8)
+> -                                *   "B" : turn the motherboard LED OFF
+> -                                *   "C" : hard reset
+> -                                */
+> -                               pinctrl-names = "default";
+> -                               pinctrl-0 = <&uart1_pins>;
+> -                               status = "okay";
+> -                       };
+> -
+> -                       poweroff@12100 {
+> -                               compatible = "synology,power-off";
+> -                               reg = <0x12100 0x100>;
+> -                               clocks = <&coreclk 0>;
+> -                       };
+> -
+> -                       ethernet@70000 {
+> -                               pinctrl-names = "default";
+> -                               phy = <&phy0>;
+> -                               phy-mode = "sgmii";
+> -                               buffer-manager = <&bm>;
+> -                               bm,pool-long = <0>;
+> -                               status = "okay";
+> -                       };
+> -
+> -                       mdio@72004 {
+> -                               pinctrl-names = "default";
+> -                               pinctrl-0 = <&mdio_pins>;
+> -
+> -                               phy0: ethernet-phy@1 {
+> -                                       reg = <1>;
+> -                               };
+> -                       };
+> -
+> -                       sata@a8000 {
+> -                               pinctrl-names = "default";
+> -                               pinctrl-0 = <&sata0_pins>;
+> -                               status = "okay";
+> -                               #address-cells = <1>;
+> -                               #size-cells = <0>;
+> -
+> -                               sata0: sata-port@0 {
+> -                                       reg = <0>;
+> -                                       target-supply = <&reg_5v_sata0>;
+> -                               };
+> -                       };
+> -
+> -                       bm@c8000 {
+> -                               status = "okay";
+> -                       };
+> -
+> -                       usb3@f0000 {
+> -                               usb-phy = <&usb3_0_phy>;
+> -                               status = "okay";
+> -                       };
+> -
+> -                       usb3@f8000 {
+> -                               usb-phy = <&usb3_1_phy>;
+> -                               status = "okay";
+> -                       };
+> -               };
+> -
+> -               bm-bppi {
+> -                       status = "okay";
+> -               };
+> -
+> -               gpio-fan {
+> -                       compatible = "gpio-fan";
+> -                       gpios = <&gpio1 18 GPIO_ACTIVE_HIGH>,
+> -                               <&gpio1 17 GPIO_ACTIVE_HIGH>,
+> -                               <&gpio1 16 GPIO_ACTIVE_HIGH>;
+> -                       gpio-fan,speed-map = <   0 0
+> -                                             1500 1
+> -                                             2500 2
+> -                                             3000 3
+> -                                             3400 4
+> -                                             3700 5
+> -                                             3900 6
+> -                                             4000 7>;
+> -                       #cooling-cells = <2>;
+> -               };
+> -
+> -               gpio-leds {
+> -                       compatible = "gpio-leds";
+> -
+> -                       /* The green part is on gpio0.20 which is also used by
+> -                        * sata0, and accesses to SATA disk 0 make it blink so it
+> -                        * doesn't need to be declared here.
+> -                        */
+> -                       orange {
+> -                               gpios = <&gpio0 13 GPIO_ACTIVE_HIGH>;
+> -                               label = "ds116:orange:disk";
+> -                               default-state = "off";
+> -                       };
+> -               };
+> -       };
+> -
+> -       usb3_0_phy: usb3_0_phy {
+> -               compatible = "usb-nop-xceiv";
+> -               vcc-supply = <&reg_usb3_0_vbus>;
+> -               #phy-cells = <0>;
+> -       };
+> -
+> -       usb3_1_phy: usb3_1_phy {
+> -               compatible = "usb-nop-xceiv";
+> -               vcc-supply = <&reg_usb3_1_vbus>;
+> -               #phy-cells = <0>;
+> -       };
+> -
+> -       reg_usb3_0_vbus: usb3-vbus0 {
+> -               compatible = "regulator-fixed";
+> -               regulator-name = "usb3-vbus0";
+> -               pinctrl-names = "default";
+> -               pinctrl-0 = <&xhci0_vbus_pins>;
+> -               regulator-min-microvolt = <5000000>;
+> -               regulator-max-microvolt = <5000000>;
+> -               enable-active-high;
+> -               gpio = <&gpio1 26 GPIO_ACTIVE_HIGH>;
+> -       };
+> -
+> -       reg_usb3_1_vbus: usb3-vbus1 {
+> -               compatible = "regulator-fixed";
+> -               regulator-name = "usb3-vbus1";
+> -               pinctrl-names = "default";
+> -               pinctrl-0 = <&xhci1_vbus_pins>;
+> -               regulator-min-microvolt = <5000000>;
+> -               regulator-max-microvolt = <5000000>;
+> -               enable-active-high;
+> -               gpio = <&gpio1 27 GPIO_ACTIVE_HIGH>;
+> -       };
+> -
+> -       reg_sata0: pwr-sata0 {
+> -               compatible = "regulator-fixed";
+> -               regulator-name = "pwr_en_sata0";
+> -               regulator-min-microvolt = <12000000>;
+> -               regulator-max-microvolt = <12000000>;
+> -               enable-active-high;
+> -               regulator-boot-on;
+> -               gpio = <&gpio0 15 GPIO_ACTIVE_HIGH>;
+> -       };
+> -
+> -       reg_5v_sata0: v5-sata0 {
+> -               compatible = "regulator-fixed";
+> -               regulator-name = "v5.0-sata0";
+> -               regulator-min-microvolt = <5000000>;
+> -               regulator-max-microvolt = <5000000>;
+> -               vin-supply = <&reg_sata0>;
+> -       };
+> -
+> -       reg_12v_sata0: v12-sata0 {
+> -               compatible = "regulator-fixed";
+> -               regulator-name = "v12.0-sata0";
+> -               regulator-min-microvolt = <12000000>;
+> -               regulator-max-microvolt = <12000000>;
+> -               vin-supply = <&reg_sata0>;
+> -       };
+> -};
+> -
+> -&spi0 {
+> -       pinctrl-names = "default";
+> -       pinctrl-0 = <&spi0_pins>;
+> -       status = "okay";
+> -
+> -       spi-flash@0 {
+> -               #address-cells = <1>;
+> -               #size-cells = <1>;
+> -               compatible = "macronix,mx25l6405d", "jedec,spi-nor";
+> -               reg = <0>; /* Chip select 0 */
+> -               spi-max-frequency = <50000000>;
+> -               m25p,fast-read;
+> -
+> -               /* Note: there is a redboot partition table despite u-boot
+> -                * being used. The names presented here are the same as those
+> -                * found in the FIS directory. There is also a small device
+> -                * tree in the last 64kB of the RedBoot partition which is not
+> -                * enumerated. The MAC address and the serial number are listed
+> -                * in the "vendor" partition.
+> -                */
+> -               partition@0 {
+> -                       label = "RedBoot";
+> -                       reg = <0x00000000 0x000f0000>;
+> -                       read-only;
+> -               };
+> -
+> -               partition@c0000 {
+> -                       label = "zImage";
+> -                       reg = <0x000f0000 0x002d0000>;
+> -               };
+> -
+> -               partition@390000 {
+> -                       label = "rd.gz";
+> -                       reg = <0x003c0000 0x00410000>;
+> -               };
+> -
+> -               partition@7d0000 {
+> -                       label = "vendor";
+> -                       reg = <0x007d0000 0x00010000>;
+> -                       read-only;
+> -               };
+> -
+> -               partition@7e0000 {
+> -                       label = "RedBoot config";
+> -                       reg = <0x007e0000 0x00010000>;
+> -                       read-only;
+> -               };
+> -
+> -               partition@7f0000 {
+> -                       label = "FIS directory";
+> -                       reg = <0x007f0000 0x00010000>;
+> -                       read-only;
+> -               };
+> -       };
+> -};
+> -
+> -&pinctrl {
+> -       /* use only one pin for UART1, as mpp20 is used by sata0 */
+> -       uart1_pins: uart-pins-1 {
+> -               marvell,pins = "mpp19";
+> -               marvell,function = "ua1";
+> -       };
+> -
+> -       xhci0_vbus_pins: xhci0_vbus_pins {
+> -               marvell,pins = "mpp58";
+> -               marvell,function = "gpio";
+> -       };
+> -       xhci1_vbus_pins: xhci1_vbus_pins {
+> -               marvell,pins = "mpp59";
+> -               marvell,function = "gpio";
+> -       };
+> -};
+> diff --git a/configs/ds116_defconfig b/configs/ds116_defconfig
+> index 1fc7380216..bcc5f00fe5 100644
+> --- a/configs/ds116_defconfig
+> +++ b/configs/ds116_defconfig
+> @@ -16,7 +16,7 @@ CONFIG_SF_DEFAULT_SPEED=50000000
+>  CONFIG_ENV_SIZE=0x10000
+>  CONFIG_ENV_OFFSET=0x7E0000
+>  CONFIG_ENV_SECT_SIZE=0x10000
+> -CONFIG_DEFAULT_DEVICE_TREE="armada-385-synology-ds116"
+> +CONFIG_DEFAULT_DEVICE_TREE="marvell/armada-385-synology-ds116"
+>  CONFIG_SPL_TEXT_BASE=0x40000030
+>  CONFIG_SPL_SERIAL=y
+>  CONFIG_SPL_STACK=0x4002c000
+> @@ -56,6 +56,7 @@ CONFIG_CMD_CACHE=y
+>  CONFIG_CMD_TIME=y
+>  CONFIG_CMD_MTDPARTS=y
+>  CONFIG_MTDPARTS_DEFAULT="mtdparts=spi0.0:1m(u-boot),7040k(kernel),64k(u-boot-env),-(data)"
+> +CONFIG_OF_UPSTREAM=y
+>  CONFIG_ENV_OVERWRITE=y
+>  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>  CONFIG_VERSION_VARIABLE=y
+> --
+> 2.39.2
+>
