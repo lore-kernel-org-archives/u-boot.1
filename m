@@ -4,82 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C9B6C25B75
-	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 17:43:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F5CDC25B75
+	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 20:08:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93B3087FEE;
-	Thu, 23 May 2024 19:43:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7CD97885FB;
+	Thu, 23 May 2024 22:08:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Nyd81t24";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="mxwn6xco";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8839E8811D; Thu, 23 May 2024 19:43:20 +0200 (CEST)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6DF07885C5; Thu, 23 May 2024 22:08:20 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5681A87E0D
- for <u-boot@lists.denx.de>; Thu, 23 May 2024 19:43:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 065778861D
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 22:08:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-3c99e6b8b1fso4159306b6e.1
- for <u-boot@lists.denx.de>; Thu, 23 May 2024 10:43:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1716486197; x=1717090997; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Uh986r/vnTV8wafUBVOYOoRrnIkey7+bagnkhOZVeFs=;
- b=Nyd81t245ql9xJjfjQ3osPFxOAHBOW7BUY6TEFgyU9KdF+aaMuGtYud0i3pxiCwOnV
- dv5YQ4J+zi4yybmyfXSkZF2skhYn3cOgaQelbnd6BEJOxGXsQhmtQULVsGO1mAaK1/gS
- VYbefS9NaSS81/ZhwTweHBgcEgUyhIvdCvWNE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716486197; x=1717090997;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Uh986r/vnTV8wafUBVOYOoRrnIkey7+bagnkhOZVeFs=;
- b=lZU8nrkaQlduw9WWo+l1M9y00ApfTgYH4B0bHOwIZhqpMFL/qFzRbq+NpVhb861vM7
- DIrl/PO8qoi9hNu65NmAxvNqsTXOnXyOEV2+ZR7qrVgL7XCfMbs/vMvGS36iq1YEL8Xu
- 2mRGiT8nBnlAw+fn8kl3hl+rwl6Gs35bPuuywU82so7KJH4gMuCK7rS4bl3NviGzooDz
- DPw5lkPXpSUfguCdI3dr1SBUC6EnJeNQyobnir1GLDmkmZjuZSgQrxwWsEDhqETiLFcM
- mXEcYVh+oM8Ki20g0neHj2JTHIMGZdIISvKIt4C4OaghHY+5yYs/9PiNieqv+L7b7zyV
- Bnfg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXgvhu/9FIC+iH6AQtI1LQijHfdyr1/fRfn6T5oWf6pwtUcbfjhdFf/YFojxC/QM54St+wIhwi3CRDpgdkmiQGOLUngvg==
-X-Gm-Message-State: AOJu0Yx3PnCETzgOmHTqxEJR0QTGSLddQSrBcjIG+xu1yCIqLgHxvNUg
- Wq6adI0fU9/mXDSSsD1FKRYFHRve/etdd+e/V8Zo2WMCoTd3GUmiQJdfwG4gCPZdn3X0IwujNY2
- L
-X-Google-Smtp-Source: AGHT+IGiiHTBE6OvWyuda7YuZBtv7oPQuaNlwd65QckoUrppPc0VobgbHw2pozIqVpdCPTu0NWFfew==
-X-Received: by 2002:aca:1206:0:b0:3c8:533f:95a6 with SMTP id
- 5614622812f47-3d1a774aca3mr41631b6e.53.1716486196919; 
- Thu, 23 May 2024 10:43:16 -0700 (PDT)
-Received: from bill-the-cat ([189.178.170.52])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7930325d5d0sm804760285a.75.2024.05.23.10.43.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 May 2024 10:43:16 -0700 (PDT)
-Date: Thu, 23 May 2024 11:43:13 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Bryan Brattlof <bb@ti.com>
-Cc: Andrew Davis <afd@ti.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH] arm: mach-k3: am62p: Fixup TF-A/OP-TEE reserved-memory
- node in FDT
-Message-ID: <20240523174313.GU2568172@bill-the-cat>
-References: <20240520-am62p-fdt-fix-v1-1-49845dcb3667@ti.com>
- <82b2503d-fda4-45fd-a576-2a5f3606587a@ti.com>
- <20240523171224.b3oi5hhngok7webk@bryanbrattlof.com>
- <20240523172256.4mciukajb5g2uizc@bryanbrattlof.com>
+ spf=pass smtp.mailfrom=j-humphreys@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44NK8BJs126696;
+ Thu, 23 May 2024 15:08:11 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1716494891;
+ bh=SL8A7RsFds/Y3POyHElILpCCRr4XT1SJBo4otYsTdWc=;
+ h=From:To:CC:Subject:In-Reply-To:References:Date;
+ b=mxwn6xcogPVZ1vIasvve+AxGu9WtxM62VKyqAO8DJiUFQdxibIGrjk2OjmHq8FLGe
+ tih/eOoh52G+j4LH5rEAnGJhRmsmItPTbOgx4RNCbopXnaXAl/4vY5iFx0D0xkI0IR
+ EpKY2g9mOPSirBjbOSALGanW42CCrfj8LtRM0x6g=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44NK8Bc0022814
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 23 May 2024 15:08:11 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 23
+ May 2024 15:08:11 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 23 May 2024 15:08:11 -0500
+Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44NK8BeX119940;
+ Thu, 23 May 2024 15:08:11 -0500
+From: Jon Humphreys <j-humphreys@ti.com>
+To: Martyn Welch <martyn.welch@collabora.com>, Tom Rini <trini@konsulko.com>, 
+ Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>
+CC: Sjoerd Simons <sjoerd@collabora.com>, Alexander Sverdlin
+ <alexander.sverdlin@siemens.com>, Mattijs Korpershoek
+ <mkorpershoek@baylibre.com>,
+ Martyn Welch <martyn.welch@collabora.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH v5 4/6] configs: am62x_evm_*: Enable USB and DFU support
+In-Reply-To: <20240506143846.1252377-5-martyn.welch@collabora.com>
+References: <20240506143846.1252377-1-martyn.welch@collabora.com>
+ <20240506143846.1252377-5-martyn.welch@collabora.com>
+Date: Thu, 23 May 2024 15:08:11 -0500
+Message-ID: <86h6eocmvo.fsf@udb0321960.dhcp.ti.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="JSGYUmzkK0Y7Xzco"
-Content-Disposition: inline
-In-Reply-To: <20240523172256.4mciukajb5g2uizc@bryanbrattlof.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,76 +82,144 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Martyn Welch <martyn.welch@collabora.com> writes:
 
---JSGYUmzkK0Y7Xzco
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> From: Sjoerd Simons <sjoerd@collabora.com>
+>
+> Provide config fragments to enable USB host as well as USB gadget and DFU
+> support for a53 and r5. This relevant fragment is included into the
+> am62x EVM a53 defconfig. For the r5, due to the smaller available size,
+> the config fragment also disables support for persistent storage to free
+> up space for USB support. This fragment needs to be included is DFU
+> booting is desired.
+>
+> The CONFIG_DFU_SF option is placed in the defconfig rather than the
+> fragment as this is known not to be supported on all boards that can
+> support DFU.
+>
+> Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
+> Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
+> ---
+> Changes in v5:
+> - Switch to config fragment for a53 most DFU configuration
+>
+> Changes in v4:
+> - Move R5 dfu config to a config fragment rather then a full defconfig
+> - Don't enable XHCI for the R5 SPL, unneeded
+>
+> Changes in v3:
+> - Run savedefconfig to adjust to more recent u-boot
+>
+> Changes in v2:
+> - Create a seperate defconfig for R5
+>
+>
+>
+>  configs/am62x_a53_usbdfu.config | 30 ++++++++++++++++++++++++++++++
+>  configs/am62x_evm_a53_defconfig |  2 ++
+>  configs/am62x_r5_usbdfu.config  | 28 ++++++++++++++++++++++++++++
+>  3 files changed, 60 insertions(+)
+>  create mode 100644 configs/am62x_a53_usbdfu.config
+>  create mode 100644 configs/am62x_r5_usbdfu.config
+>
+> diff --git a/configs/am62x_a53_usbdfu.config b/configs/am62x_a53_usbdfu.config
+> new file mode 100644
+> index 0000000000..3a19cf2328
+> --- /dev/null
+> +++ b/configs/am62x_a53_usbdfu.config
+> @@ -0,0 +1,29 @@
+> +CONFIG_SYS_MALLOC_LEN=0x2000000
+> +CONFIG_SPL_ENV_SUPPORT=y
+> +CONFIG_SPL_RAM_SUPPORT=y
+> +CONFIG_SPL_RAM_DEVICE=y
+> +CONFIG_SPL_USB_GADGET=y
+> +CONFIG_SPL_DFU=y
+> +CONFIG_CMD_DFU=y
+> +CONFIG_CMD_USB=y
+> +CONFIG_SYSCON=y
+> +CONFIG_SPL_SYSCON=y
+> +CONFIG_DFU_MMC=y
+> +CONFIG_DFU_RAM=y
+> +CONFIG_SYS_DFU_DATA_BUF_SIZE=0x5000
+> +CONFIG_SYS_DFU_MAX_FILE_SIZE=0x800000
+> +CONFIG_USB=y
+> +CONFIG_DM_USB_GADGET=y
+> +CONFIG_SPL_DM_USB_GADGET=y
+> +CONFIG_USB_XHCI_HCD=y
+> +CONFIG_USB_XHCI_DWC3=y
+> +CONFIG_USB_DWC3=y
+> +CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_SPL_USB_DWC3_GENERIC=y
+> +CONFIG_SPL_USB_DWC3_AM62=y
+> +CONFIG_USB_DWC3_AM62=y
+> +CONFIG_USB_GADGET=y
+> +CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
+> +CONFIG_USB_GADGET_VENDOR_NUM=0x0451
+> +CONFIG_USB_GADGET_PRODUCT_NUM=0x6165
+> +CONFIG_USB_GADGET_DOWNLOAD=y
+> diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defconfig
+> index 6c708dcb05..16294a6a79 100644
+> --- a/configs/am62x_evm_a53_defconfig
+> +++ b/configs/am62x_evm_a53_defconfig
+> @@ -68,6 +68,7 @@ CONFIG_SPL_OF_TRANSLATE=y
+>  CONFIG_CLK=y
+>  CONFIG_SPL_CLK=y
+>  CONFIG_CLK_TI_SCI=y
+> +CONFIG_DFU_SF=y
+>  CONFIG_DMA_CHANNELS=y
+>  CONFIG_TI_K3_NAVSS_UDMA=y
+>  CONFIG_TI_SCI_PROTOCOL=y
+> @@ -111,3 +112,5 @@ CONFIG_SPL_SYSRESET=y
+>  CONFIG_SYSRESET_TI_SCI=y
+>  CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
+>  CONFIG_EFI_SET_TIME=y
+> +
+> +#include <configs/am62x_a53_usbdfu.config>
+> diff --git a/configs/am62x_r5_usbdfu.config b/configs/am62x_r5_usbdfu.config
+> new file mode 100644
+> index 0000000000..772bb2ab93
+> --- /dev/null
+> +++ b/configs/am62x_r5_usbdfu.config
+> @@ -0,0 +1,28 @@
+> +CONFIG_SPL_ENV_SUPPORT=y
+> +CONFIG_SYSCON=y
+> +CONFIG_SPL_SYSCON=y
+> +CONFIG_SYS_DFU_DATA_BUF_SIZE=0x5000
+> +CONFIG_MISC=y
+> +CONFIG_USB=y
+> +CONFIG_DM_USB_GADGET=y
+> +CONFIG_SPL_DM_USB_GADGET=y
+> +CONFIG_USB_DWC3=y
+> +CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_SPL_USB_DWC3_GENERIC=y
+> +CONFIG_SPL_USB_DWC3_AM62=y
+> +CONFIG_USB_GADGET=y
+> +CONFIG_SPL_USB_GADGET=y
+> +CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
+> +CONFIG_USB_GADGET_VENDOR_NUM=0x0451
+> +CONFIG_USB_GADGET_PRODUCT_NUM=0x6165
+> +CONFIG_USB_GADGET_DOWNLOAD=y
+> +CONFIG_SPL_DFU=y
+> +# CONFIG_SPL_MMC is not set
+> +# CONFIG_SPL_FS_FAT is not set
+> +# CONFIG_SPL_LIBDISK_SUPPORT is not set
+> +# CONFIG_SPL_SPI is not set
+> +# CONFIG_SPL_SYS_MALLOC is not set
+> +# CONFIG_CMD_GPT is not set
+> +# CONFIG_CMD_MMC is not set
+> +# CONFIG_CMD_FAT is not set
+> +# CONFIG_MMC_SDHCI is not set
+> -- 
+> 2.43.0
 
-On Thu, May 23, 2024 at 12:22:56PM -0500, Bryan Brattlof wrote:
-> On May 23, 2024 thus sayeth Bryan Brattlof:
-> > On May 23, 2024 thus sayeth Andrew Davis:
-> > > On 5/23/24 11:43 AM, Bryan Brattlof wrote:
-> > > > The address we load TFA and OPTEE is configurable by the
-> > > > CONFIG_K3_{ATF,OPTEE)_LOAD_ADDR, but the DT node reservations remain
-> > > > static which can cause some confusion about where exactly these fir=
-mware
-> > > > are exactly. Fix this by updating the reserved-memory{} nodes when =
-the
-> > > > loaded address does not match the address in DT.
-> > > >=20
-> > > > Reported-by: Andrew Davis <afd@ti.com>
-> > > > Signed-off-by: Bryan Brattlof <bb@ti.com>
-> > > > ---
-> > > > Hello everyone,
-> > > >=20
-> > > > This is a little fixup to avoid any confusion once we're in the ker=
-nel.
-> > > > Because TF-A can be configured in U-Boot to be anywhere we want, we=
- need
-> > > > up update the reserved-memory{} node with this change.
-> > > >=20
-> > > > Thanks for reviewing
-> > > > ~Bryan
-> > > > ---
-> > > >   arch/arm/mach-k3/Makefile       |  1 +
-> > > >   arch/arm/mach-k3/am62p5_fdt.c   | 16 ++++++++++++++++
-> > >=20
-> > > You'll want to rebase this on -next, these _fdt.c files all got moved
-> > > into directories for each SoC.
-> > >=20
-> >=20
-> > Ah! my bad, you're right this belongs in -next. v2 incoming momentarily
-> >=20
->=20
-> Wait no on second thought, this needs to be in v2024.07 also. I'll leave=
-=20
-> this for Tom for -master and maybe send out another version for -next to=
-=20
-> preempt the merge conflict for v2024.10?
+Hi all, it appears that this patch breaks OSPI DFU on the board.  In
+particular, changing the CONFIG_SYS_DFU_DATA_BUF_SIZE seems to be the
+culprit.
 
-If this needs to go in master then git should hopefully do the right
-thing when I merge the next rc tag in.
+I see the error as a DFU timeout when applying capsules.
 
---=20
-Tom
+  SF: Detected s28hs512t with page size 256 Bytes, erase size 256 KiB, total 64 MiB
+  ############jedec_spi_nor flash@0: flash operation timed out
+  #DFU write failed
 
---JSGYUmzkK0Y7Xzco
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZPgC4ACgkQFHw5/5Y0
-tyxn4Av/eWl2w5cjvAM4KeKubjXaGZthqir3OmXnoZrn91OObLlUtJmEIBEeXcRi
-m8nOKOuWpYeNM8KwD47kVF4LberlXdGkc3KK8UscfEetpFDuTFLvy6RRvrJVLmtv
-36ttDyEKeA2c/DNjsxSf0wJ6R+1VaV+pllLagH4IGa7xL3RrIoat+UqhQM/C0Nae
-AXhPJdEuATStj0yxU0zObr1GkrxoyPxmWlPhQhH05QmW3e2hJjLqnk8uzI0LiEI3
-FvgB1c5CQYAE1bleuiDf+hWyCdxmByNZ5fGydL5/tRtrxW5AoMgYcIRJEW3wpKqp
-+FmzX+4AsGXzrYE+fXPpd81sTD8kKcghXMLIUqM5Pzkm1ZqyLEctoiVDzTSf/SDb
-pa1QlkiPa1XHeckuYlN7vjBPqspUXxthiTwtNsFzGfWcw4oNZUq52kTkQL4nyE5Y
-oK/oC1IcCOWPeGk4Q8D+yBaW1Gu3CAialgag3Kh9cXq+MyhFzqSDVQWL/friU1w/
-KJXdypIq
-=M8lX
------END PGP SIGNATURE-----
-
---JSGYUmzkK0Y7Xzco--
+Jon
