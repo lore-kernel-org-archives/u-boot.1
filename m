@@ -4,97 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46789C25B7C
-	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 15:17:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E9C8C25B75
+	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 15:25:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 953E188253;
-	Thu, 23 May 2024 17:17:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B5A70884EA;
+	Thu, 23 May 2024 17:25:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DPBGcJRT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mycgvMyO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A642E87FC7; Thu, 23 May 2024 17:17:48 +0200 (CEST)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
+ id EC82A884EA; Thu, 23 May 2024 17:25:47 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F34E88253
- for <u-boot@lists.denx.de>; Thu, 23 May 2024 17:17:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 791AC884C9
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 17:25:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-792b8ebc4eeso463493285a.1
- for <u-boot@lists.denx.de>; Thu, 23 May 2024 08:17:46 -0700 (PDT)
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-6f855b2499cso355182a34.1
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 08:25:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1716477465; x=1717082265; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1716477944; x=1717082744; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=LFQIWHk5yHGRpzJ8SZ79g3kW4nMijOoEgwihpYJOoDY=;
- b=DPBGcJRTiYSmmdXHfb8fyqIX7SKE1TZMQGHtn982DcrzNILuWUIFvv0H06iSpDYt33
- Mt1vA3f1OYdnBWurwq3HIkH+yIYumFRjrkyJdL/aQWAU8WMTTWCThbs7ffbb9LfJIp6q
- 2bmXpbTarAcsiyUUL3iu8GslEoHBxGl4MHnSQ=
+ bh=cQiH5Q5u1DB9CwuCDLk23ouRhwhJy88DH9jp9ZTrMbY=;
+ b=mycgvMyOAxmNBR1ooSNsyy6yGbozxT1rq/lDY72TcSEHiNi1rVCSDHHGxaxRaJGb/G
+ jCruu+JdfHgslm4GpkcNywCd9ruumfXSzRnz9jPoolCOp7nkAL8NDGR80c4PScjao2DN
+ x+hEKO/xZLWRl66LP16eg1Bs2Qf3hvUlvB4SM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716477465; x=1717082265;
+ d=1e100.net; s=20230601; t=1716477944; x=1717082744;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LFQIWHk5yHGRpzJ8SZ79g3kW4nMijOoEgwihpYJOoDY=;
- b=ElO3tIwI4wYCHRUT6uP1VB8e7SFwzGr3piDMDWnO86q49B3osshW1QJ7yqqeR5ZKEz
- jocrhU6wUpw1g2uejKCM2QVDiWeOoNiayR4btyoEc6/8c3SO5kXAqOiwtO09ZHJBox0i
- CGQAFXbqHvsuMvKIHEtQqNOSmjgvM1N+6hMKaACTbdEZwHsweolLYH3ynqOGRYVIVnEZ
- +pHUviGDOiz4FLyYbu77N5baoyxwgQgrj3qiMEpc+N1bzlmbGcDXQEUkefYsyecuJBNH
- 5DhhYPSRTaWJ3Q2HUNyn0iZdkRmWhQZXak96v0cqNKz103sYKP1E8ItuLn8O/VTAmKU+
- pA/w==
+ bh=cQiH5Q5u1DB9CwuCDLk23ouRhwhJy88DH9jp9ZTrMbY=;
+ b=SUCKrD8QJtPHP0YhAVm3rp2y1/XMelqjhqWPV+8cmUVruA/dl13ZuHt0AXCJA9GW3Y
+ 10YbrdmMpuhpcONCCRWYulvNOnWtsUooDSZH8xGqbzifE8L6fPJHM+iwx/oRruv9xLA4
+ SDtPtjaL0rqeZD3y5CEUWoHkzqFJ3Pc3CR5L5NNTtfy+/BPz4By67eEo4DnsvJNu+dRx
+ iACGks8DxEDvyOcT2AmkWrzsJMSoEDbczBslGT9BE0lVyNIgtvmsunzrUxa1QIunTrZY
+ dm4TwqxnF6/YNKD1F42gNdfprlHq+wj0jnNjz3SMTHJE5f2wYbZxSHLbSDTxk1WIYB88
+ rECw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVMGjFbJiwtEd4Fkof8LxGbdDPlTLCLlaGewqiWNOdD9TjRVK+POmK3klUahQUBYGI+3035vItMrAOTPIww8YquAtgryQ==
-X-Gm-Message-State: AOJu0YyXYjM5dhDfeQgpybvrFtKD01QKR+43jxJqoCH83X9XxjBu71Nm
- P8VQQhbmf04lmDYCVTGzTmbEV/qi+KeZ7PrjcqA3g5Iq37ArI9dMFOlXi3lfdwI=
-X-Google-Smtp-Source: AGHT+IEeMyf7fEf9lxcZMP38trY4xNZBCUJL7yk3/vRSSix622XLqQFGo5ObLuwWv17cQgknJL+arQ==
-X-Received: by 2002:a05:620a:6209:b0:792:909e:cc76 with SMTP id
- af79cd13be357-794994c4d56mr470336785a.77.1716477464986; 
- Thu, 23 May 2024 08:17:44 -0700 (PDT)
+ AJvYcCV6CSdgpn9Izt5K+xdSx5m7No6n4/ZJF3+aJGioor5Jga/ZiG3gDnsfsmfZHnuq/9BQgBh0p8YpKorl8LDTvAOIYfvTpQ==
+X-Gm-Message-State: AOJu0YyhEqkT53mPBTiWG8zUV/9CIp/Dj8GxumYEMpw2WEdk9T26F0K7
+ jRV3dEUAjOweNjPo6nreDsAUkZowOBTeREM+nnLINraKVZ+US0415JZb7l+P11c=
+X-Google-Smtp-Source: AGHT+IH5hjrxm34j5yj9f0lXtN6L+G6rqsW2OluRHR6PUN0vwsVrLPhkPyXM1GhyKsvtVpWzKp647g==
+X-Received: by 2002:a05:6358:7f1e:b0:18e:3ec:94cb with SMTP id
+ e5c5f4694b2df-19791e07119mr640969455d.14.1716477944100; 
+ Thu, 23 May 2024 08:25:44 -0700 (PDT)
 Received: from bill-the-cat ([189.178.170.52])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7931062091asm672391085a.47.2024.05.23.08.17.42
+ 6a1803df08f44-6a15f1d9dd2sm144051586d6.129.2024.05.23.08.25.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 May 2024 08:17:44 -0700 (PDT)
-Date: Thu, 23 May 2024 09:17:40 -0600
+ Thu, 23 May 2024 08:25:43 -0700 (PDT)
+Date: Thu, 23 May 2024 09:25:40 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Jon Humphreys <j-humphreys@ti.com>
-Cc: Neha Malcom Francis <n-francis@ti.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>, Simon Glass <sjg@chromium.org>,
- Nikhil M Jain <n-jain1@ti.com>, Andrew Davis <afd@ti.com>,
- Maxime Ripard <mripard@kernel.org>,
- Siddharth Vadapalli <s-vadapalli@ti.com>,
- Roger Quadros <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+To: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 4/7] dts: beagleplay: binman: Include firmware
- capsules binman nodes
-Message-ID: <20240523151740.GQ2568172@bill-the-cat>
-References: <20240419212819.170033-1-j-humphreys@ti.com>
- <20240419212819.170033-5-j-humphreys@ti.com>
- <20240510173200.GV2568172@bill-the-cat>
- <86o78yd1ud.fsf@udb0321960.dhcp.ti.com>
- <20240522141048.GG2568172@bill-the-cat>
- <86jzjlcgjw.fsf@udb0321960.dhcp.ti.com>
+Subject: Re: [PATCH 00/16] LoongArch initial support
+Message-ID: <20240523152540.GR2568172@bill-the-cat>
+References: <20240522-loongarch-v1-0-1407e0b69678@flygoat.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="tuRg/F5jQvlnq4oR"
+ protocol="application/pgp-signature"; boundary="DhxTyTF7kq03gaYX"
 Content-Disposition: inline
-In-Reply-To: <86jzjlcgjw.fsf@udb0321960.dhcp.ti.com>
+In-Reply-To: <20240522-loongarch-v1-0-1407e0b69678@flygoat.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -113,122 +93,49 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---tuRg/F5jQvlnq4oR
-Content-Type: text/plain; charset=us-ascii
+--DhxTyTF7kq03gaYX
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, May 22, 2024 at 11:12:35PM -0500, Jon Humphreys wrote:
-> Tom Rini <trini@konsulko.com> writes:
->=20
-> > On Tue, May 21, 2024 at 09:20:26PM -0500, Jon Humphreys wrote:
-> >> Tom Rini <trini@konsulko.com> writes:
-> >>=20
-> >> > On Fri, Apr 19, 2024 at 04:28:16PM -0500, Jonathan Humphreys wrote:
-> >> >
-> >> >> Fill in the BeaglePlay's capsule GUID properties of the base binman=
- capsule
-> >> >> nodes.
-> >> >>=20
-> >> >> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
-> >> >> ---
-> >> >>  arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi | 27 ++++++++++++++++=
-++++
-> >> >>  arch/arm/dts/k3-am625-r5-beagleplay.dts      | 15 +++++++++++
-> >> >>  2 files changed, 42 insertions(+)
-> >> >
-> >> > This series introduces failure to build in CI, and it's a little tri=
-cky
-> >> > to replicate locally, depending on your environment. You first need =
-to
-> >> > NOT have BINMAN_INDIRS set and instead be using fake binaries. Secon=
-d,
-> >> > it seems python version dependent perhaps? I don't see this on my ho=
-st,
-> >> > but by:
-> >> > - Using the CI container
-> >> > - Setting up a virtualenv inside of it
-> >> > - pip install -r tools/buildman/requirements.txt
-> >> > I get:
-> >> > $ ./tools/buildman/buildman --keep-outputs --reproducible-builds -dv=
-el --force-build -PEWM --output /tmp/am62x_beagleplay_r5 --board am62x_beag=
-leplay_r5
-> >> > Building current source for 1 boards (1 thread, 12 jobs per thread)
-> >> >        arm:  +   am62x_beagleplay_r5
-> >> > +(am62x_beagleplay_r5) Image 'tiboot3-am62x-gp-evm.bin' is missing o=
-ptional external blobs but is still functional: ti-fs-gp.bin
-> >> > +(am62x_beagleplay_r5)
-> >> > +(am62x_beagleplay_r5) /binman/tiboot3-am62x-gp-evm.bin/ti-fs-gp.bin=
- (ti-sysfw/ti-fs-firmware-am62x-gp.bin):
-> >> > +(am62x_beagleplay_r5)    Missing blob
-> >> > +(am62x_beagleplay_r5) binman: object of type 'NoneType' has no len()
-> >> > +(am62x_beagleplay_r5) make[1]: *** [Makefile:1126: .binman_stamp] E=
-rror 1
-> >> > +(am62x_beagleplay_r5) make: *** [Makefile:177: sub-make] Error 2
-> >> >     0    0    1 /1              am62x_beagleplay_r5
-> >>=20
-> >> Tom, this is failing in the CI container because the container is miss=
-ing
-> >> the mkeficapsule tool.
-> >>=20
-> >> To solve this, we just need to add it to the CI container.
-> >>=20
-> >> My understanding of binman's handling of missing bintools is that it s=
-hould
-> >> gracefully continue with fake data, so that buildman can successfully =
-test
-> >> out builds for boards even when you don't have all the required bintoo=
-ls.
-> >> If I have that correct, I can also create a patch to properly handle t=
-his
-> >> when using mkeficapsule. But I want to verify this is the desired beha=
-vior,
-> >> since mkeficapsule isn't a unique or vendor specific tool, so shouldn'=
-t we
-> >> require it as part of the U-Boot build environment and err out if it is
-> >> missing?
-> >
-> > Perhaps it's a binman issue since we build mkeficapsule or at least
-> > should be? Neha?
-> >
->=20
-> Never mind - I figured it out.
->=20
-> The mkeficapsule tools is built by u-boot if TOOLS_MKEFICAPSULE config is
-> set. I didn't explicitly set it because it is implied by
-> EFI_CAPSULE_ON_DISK config. But this is only set for the A core u-boot, as
-> that is what would apply the capsules. SPL running on the R cores does not
-> need this. But that then means that the R core u-boot builds don't have
-> TOOLS_MKEFICAPSULE set and if that is all that is being built (as in the
-> case of buildman), the mkeficapsule tool isn't built and so is missing.
->=20
-> So I need to explicitly set TOOLS_MKEFICAPSULE in the R core defconfigs.
-> I'll repost the patches.
+On Wed, May 22, 2024 at 04:34:43PM +0100, Jiaxun Yang wrote:
 
-Interesting. My next thought here is that whatever symbol is allowing
-for "make a capsule" should be select'ing TOOLS_MKEFICAPSULE and so the
-current logic is a bit flawed. I'm just not sure off-hand where it
-should be instead, do you have some ideas now? Thanks.
+> Hi all,
+>=20
+> Sorry for flooding the mailing list recently, yet another huge RFC series=
+ ahead.
+>=20
+> So after working on MIPS, arm64be and Xtensa I'm now on LoongArch, as sug=
+gested
+> by=A0Heinrich.
+
+My big feedback here, and it applies to all of your other series as
+well, is to please update CI to make use of and test this. On the Docker
+side, update tools/docker/Dockerfile as needed. For Azure, you can tell
+it to use a different image and then follow the documentation on
+https://docs.u-boot.org/en/latest/develop/ci_testing.html and for GitLab
+you can at least use their "linter" to make sure that your additions
+have the correct syntax. Thanks.
 
 --=20
 Tom
 
---tuRg/F5jQvlnq4oR
+--DhxTyTF7kq03gaYX
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZPXg0ACgkQFHw5/5Y0
-tyyH5AwAo2dX54GqptTlxfuMmN7xyxaK6BplzA45x/JuJkW7MOeZhB0Oa2d2qdhr
-ufvaH5dLyWmV+J9RxCaISdEuZhD9Ou1F6FMcHTAlvHVBU/PzdqQqmu9TB9Q967RQ
-H5haFjWMfnSVvQ66zmqzfMlo3NKLNDUmTDa9KiWYu/fySXSUUKLipZRm83k0K5Mg
-jCttVPD+Q3e2wdFkIK5iniNx21By8bCKBFUuiWvEXhr+T9pccSYk9icjCzwa7PD+
-dSD3TjiZHJG7Jcn8bHGOj/kP4tnpwWmgimfFrC6mOyfV2eJWPbG/gTwHQyAkq0pZ
-vglfiRi0rFQENiNvAPhzHnjccXOPruZF2XvdIqKHI8Yu5xMVHB0Q8PKdbs+NfYQH
-IGxCgCNHCTQPo29x8PwJAVz/dLvWWYDyy/7o2WgP6nWsNf7rx338NwyKHbmaU3aP
-esI/NFUwBBMrKVc01/8jjm9S6IHZz9+9LfVh9kL1MHfRj3oSPF92FKS0BBFNPJsd
-5zg7wJvd
-=cWeZ
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZPX/QACgkQFHw5/5Y0
+tyy6FQv/VrIi1y96XZzUDMoOtY4GoogjU8/BfwzjFMRrzX6Y3hiDSSD1qzBa2KXP
+sRV0a0Zsw/qMfVvnKRUH464WSZtjlsV3AK8yp8Nv1+JLYVD26dg40sEfpopJRQbm
+SYWkO+LnDoxbGcb7rHj4A7e+H7pLiCu3OaFsbb73wbQVBtr9/kyj48ZovOnVoyR2
+MXSBBgqaiCTk9+osACikdZYl9V+HxU/Qv/I8HH8TMmCrGa+TxdENb7ThvgjVfvIO
+NtuhG31JsnPRiIuDVvfhryZO4JckabrZG/7DDGNbTEgS79j5JY2PlSP2IoPSuymZ
+dvCybSZpPltApzN60c/S9arUBdecq7TW8m9xZgZcNdrdujgVa8kbc8nAV3yHDu5j
+6A7tgYJ80VZww68Uf1T/pISoAF9CwC78g6cAVy85wdcO1qRbUzUtRph7FWChLuoW
+/wpUanwB3WjmNxdPo9bqT3YS2MNRBYGG6Tm0yJULEG3+jBLxh5UdE6lOlyvwcH5x
+auQTFAgu
+=W+E0
 -----END PGP SIGNATURE-----
 
---tuRg/F5jQvlnq4oR--
+--DhxTyTF7kq03gaYX--
