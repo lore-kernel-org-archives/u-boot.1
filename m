@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB10AC25B75
-	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 15:02:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6928FC25B7C
+	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 15:03:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D69387FC7;
-	Thu, 23 May 2024 17:02:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7EEBA885B7;
+	Thu, 23 May 2024 17:02:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="U1pFRR/p";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jj615gaB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB6ED87E9B; Thu, 23 May 2024 17:02:46 +0200 (CEST)
-Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
- [IPv6:2607:f8b0:4864:20::836])
+ id 0EC5F885B7; Thu, 23 May 2024 17:02:53 +0200 (CEST)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8514B87FC7
- for <u-boot@lists.denx.de>; Thu, 23 May 2024 17:02:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F0E89885AE
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 17:02:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x836.google.com with SMTP id
- d75a77b69052e-43e06d21a06so14971531cf.3
- for <u-boot@lists.denx.de>; Thu, 23 May 2024 08:02:44 -0700 (PDT)
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-7948b50225bso192105885a.3
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 08:02:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1716476563; x=1717081363; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1716476570; x=1717081370; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=WTsw13iqihOG0Vm1E2rT9UmhDMNZt9vtlIVAjqQarEE=;
- b=U1pFRR/pqrqm8yDBznbtdEc+4enYh7aD1GAli4w+pDyHCW0hn1TrjavUFniKzT40jf
- hteemq93RfAqi0oDOCyZ5pROJ1DYOVejzZTLkyLoyz3vbOUkd/YqT8FJ71uFSZ5XtCwG
- O4HgzRmDfuJTfUMtmSJdyQ/5ZLjr5T84cfGx8=
+ bh=i54WjWnwg8cd0BGONh/yFN8eOs2aTph6DoJZQz1WjjM=;
+ b=jj615gaBE+rE++ilhZcmqo5b5dvJJJbIV7ZZzgG+A1JDnVEUCTcsD+qq7+5+sORGCS
+ NocS2UzLnMe3nqAiigjTJnxu1ewEMd/KJRMIE1G/QpYtbuE80cW9TDbpjhCOqoZD67mZ
+ 8OL+mkiA/kJvctjKvDu0oRNIaKcCf/6kbXUuU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716476563; x=1717081363;
+ d=1e100.net; s=20230601; t=1716476570; x=1717081370;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WTsw13iqihOG0Vm1E2rT9UmhDMNZt9vtlIVAjqQarEE=;
- b=KbusYufeusjT93WiRXEB+YEg0QFhXVken3rmf4ATT+klMygXyGdAJWteHRJY3Fw9c6
- fJHL053kv2wtoFsAytPp1w84vqrZXIRmFQOY0djNwc9tW30Zii4bBQcowZjZ+7mnqm+n
- /wRThxHvoCZcKj2+3tSzvi3IOhAxUGM40KyjRpgUVVhblfWKgmm/Nrttkd1ALeo4APAC
- HlycDQC3WY1DxaZ3vPdysExZ0g551DJNbwFHyH+e9ITSyiUbJV4NEUTlOjhG5ljxwv0k
- W2xGT9EJ44bcOfR+v03F8PfQeSUjEApOl8KomqKqHJzCgxmekp+AdazoZ6csTSFBxHV5
- AOPg==
-X-Gm-Message-State: AOJu0Yw5J9X2bDwZbOJMBSE//SNpmQLPnu2hXEg+vmh0gKI8x/aWg3AX
- 6nYNdsBvRb6U9nR30M9g6tKXJyca5sbU60ZGvDOIhSHPpl4tM0xTBfZiLeWBSMU=
-X-Google-Smtp-Source: AGHT+IEZeCa6qrVcZsySlBt/EZumM+P9l/+lHKW6vwFnkgaqOT4rz83A8GPL7q1JcvhJGKJHg+/7Qw==
-X-Received: by 2002:a05:622a:1ba6:b0:43e:607:f4d3 with SMTP id
- d75a77b69052e-43f9e194f2fmr47375391cf.48.1716476562960; 
- Thu, 23 May 2024 08:02:42 -0700 (PDT)
+ bh=i54WjWnwg8cd0BGONh/yFN8eOs2aTph6DoJZQz1WjjM=;
+ b=G8wm/PrqlLjJyf5nGEaqGJQ/4GCjXemFdz6d1DW+dtBURFkRtd5xtqwn4j9ofNryfY
+ zo+vSBbag41UT+1+/qAZ3QeXiMUM7qV6Ov+FKDOX72x6bNKRbSjLDoR8mSCUxpj9hQ2T
+ /JThiaVzunCnPd4OA9p4y5Hw3buCabvwTvSMRG+zx4wWHWaNMf4YLlTLkqvnoj2rNuUW
+ 5MY3BbW3p+hqT8ZKHddVoT1drtRmZwEM8JXs76qzAE469TTRocsDk4qunqwn1dpRhLfM
+ P0vElup4HxXbPF4BDb+tTRf2/vQfbTKlrZkSbHmq7YxuG4m+8EeievShbsnGDLaXVAAw
+ 0jWA==
+X-Gm-Message-State: AOJu0YxfhLw5i4bWbYwFh1/wOqgIcnMw52LsU66MCel/ysQ+1LEbDAxD
+ V8TpLgW/vYc1INQyUDjN7QioMOLl/DHP9m6uT94bL0BtefjrEarW84TZTPuw1j4=
+X-Google-Smtp-Source: AGHT+IE1xlVNh/iUfHJ1X9z+ZJ3Vxu3OG+Pf/tunqj9c8HKQbypB573A+ePxCdGX89krimWxol2L+g==
+X-Received: by 2002:a05:620a:2681:b0:792:ba9e:d730 with SMTP id
+ af79cd13be357-7949935aa11mr677266085a.0.1716476569879; 
+ Thu, 23 May 2024 08:02:49 -0700 (PDT)
 Received: from bill-the-cat ([189.178.170.52])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-43df5513017sm186182301cf.46.2024.05.23.08.02.41
+ af79cd13be357-792bf27f870sm1497607785a.28.2024.05.23.08.02.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 May 2024 08:02:42 -0700 (PDT)
-Date: Thu, 23 May 2024 09:02:39 -0600
+ Thu, 23 May 2024 08:02:49 -0700 (PDT)
+Date: Thu, 23 May 2024 09:02:46 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Jerome Forissier <jerome.forissier@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sean Anderson <seanga2@gmail.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: Re: [PATCH 02/15] net-lwip: import lwIP library under lib/lwip
-Message-ID: <20240523150239.GN2568172@bill-the-cat>
+ Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng@tinylab.org>
+Subject: Re: [PATCH 12/15] configs: add qemu_arm64_lwip_defconfig
+Message-ID: <20240523150246.GO2568172@bill-the-cat>
 References: <cover.1716393035.git.jerome.forissier@linaro.org>
- <3b93c2b7f753633fb27864a2667d022848b2ff28.1716393035.git.jerome.forissier@linaro.org>
+ <67ac1063406f022ccc35b94ba41317b6e9ee8b3e.1716393035.git.jerome.forissier@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="D1+1ef3XF0fWnSnR"
+ protocol="application/pgp-signature"; boundary="FadpvYBONqlzKZ/7"
 Content-Disposition: inline
-In-Reply-To: <3b93c2b7f753633fb27864a2667d022848b2ff28.1716393035.git.jerome.forissier@linaro.org>
+In-Reply-To: <67ac1063406f022ccc35b94ba41317b6e9ee8b3e.1716393035.git.jerome.forissier@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,69 +94,56 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---D1+1ef3XF0fWnSnR
+--FadpvYBONqlzKZ/7
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, May 22, 2024 at 06:00:02PM +0200, Jerome Forissier wrote:
+On Wed, May 22, 2024 at 06:00:12PM +0200, Jerome Forissier wrote:
 
-> Import the Lightweight IP (lwIP) library as lib/lwip. The code is built
-> when CONFIG_NET_LWIP=3Dy.
->=20
-> The lwIP code was imported with the following commands:
->=20
->  (cd /tmp && git clone https://git.savannah.gnu.org/git/lwip.git -b STABL=
-E-2_2_0_RELEASE)
->  mkdir -p lib/lwip
->  cp -R /tmp/lwip/src/{api,core,include} lib/lwip/
->  mkdir -p lib/lwip/netif && cp /tmp/lwip/src/netif/ethernet.c lib/lwip/ne=
-tif/
->  mkdir -p lib/lwip/apps/tftp && cp /tmp/lwip/src/apps/tftp/tftp.c lib/lwi=
-p/apps/tftp/
->  mkdir -p lib/lwip/apps/http && cp /tmp/lwip/src/apps/http/http_client.c =
-lib/lwip/apps/http/
->=20
-> The list of object files added to lib/liwip/Makefile was given by:
->=20
->  (cd lib/lwip && find . -name \*.c | sort | sed 's@\./@\t@' | sed 's/\.c$=
-/.o \\/') >>lib/liwip/Makefile
->=20
-> These files are adaptation layers written specially for U-Boot:
->=20
->   lib/lwip/u-boot/arch/cc.h
->   lib/lwip/u-boot/arch/sys_arch.h (empty)
->   lib/lwip/u-boot/limits.h (empty)
->   lib/lwip/u-boot/lwipopts.h
->=20
-> They were initially contributed by Maxim in a previous RFC patch series.
+> Add qemu_arm64_lwip_defconfig which was created from
+> qemu_arm64_defconfig with CONFIG_NET_LWIP enabled.
 >=20
 > Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> Co-developed-by: Maxim Uvarov <muvarov@gmail.com>
-> Cc: Maxim Uvarov <muvarov@gmail.com>
+> ---
+>  configs/qemu_arm64_lwip_defconfig | 70 +++++++++++++++++++++++++++++++
+>  1 file changed, 70 insertions(+)
+>  create mode 100644 configs/qemu_arm64_lwip_defconfig
+>=20
+> diff --git a/configs/qemu_arm64_lwip_defconfig b/configs/qemu_arm64_lwip_=
+defconfig
+> new file mode 100644
+> index 0000000000..c8dadbce37
+> --- /dev/null
+> +++ b/configs/qemu_arm64_lwip_defconfig
+> @@ -0,0 +1,70 @@
+> +CONFIG_ARM=3Dy
+> +CONFIG_POSITION_INDEPENDENT=3Dy
+> +CONFIG_ARCH_QEMU=3Dy
 
-As I believe I've said before, this needs to be a subtree moving
-forward.
+Setting aside that I would like lwip to default to y, at least in the
+first few iterations (so that testing is easier), this should be using
+the #include method rather than duplicating the whole config.
 
 --=20
 Tom
 
---D1+1ef3XF0fWnSnR
+--FadpvYBONqlzKZ/7
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZPWo8ACgkQFHw5/5Y0
-tyzL5Av5AX4tXXHVydz7KD1658+sVHkmRcyHqNH5Xf27mnpcXeoUm4U7wzvVy6SW
-ULe3IaPvsqh03wCa8vg2PDakALeuWzm+wefbYfTNgfjPN7O4bR7m6LND3atkis0p
-ElgRSAP9QfeuqMW1I75gKtJwfPALqmjoQEHgep+IxdnPnhaTmTJ129HY35hf/beY
-gG/XeT0rOamzcCovdt9mGCQWx4BAm2S16R4Ij2klKnZwI78Z/ugid04IA94propT
-TJCAVfBqr0nQr/pgIn7ywfkC7UPPvi0VTEIlDxNHt2hFV8oEqkiUOSAWoQJ8s93J
-JeFK7E+HtOzy3ry+x0x56+LYk7SrgRNTIjHmM/FWviQ7Lcfj16642mt//52r8gIh
-/1PkLjzEpxStQGkVTPf+YlltRjlYOWD37lDHyBd4JXjuctBFKa45Ob+X3xhhsrfu
-1KLiS5eFQ9OGV6aCIi5pPg0FL+JbCoAKoqy7eG209EcW9FQrth+GIR5D58klEodb
-jplYJGBE
-=2UNN
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZPWpYACgkQFHw5/5Y0
+tyx0Egv/YFSBWwonfHDHjjbSNqjJPTujD6RpqCYEdK+Syl7CTD+5PSG5123rwuY0
+5auxCj1m8MmsI+aGj5KPaMyUoFqaJMBboIYhxwTPTDfEDprb6EyyOhAPe5r/JPL/
+M7ZUEhrYIz5f/M7I5xGlA2e1l/CKnObk5eW0eVflfC3BEuE+mSmfU9qCoaRuO+gB
+F7NnHUDMtnBo5jI+DzQTMNv47RjA3Q1GKG+1tJ++ToPoAyenMitaR1ZylBauPgpY
+CKplzXm1ICM53Ax2oXJAz9q40ejH60QRQC5YO0xKi/VWC0LFVrxowICW/lQYSCRc
+ODONCCNpx2cXu1+AWvatWFtoLjnUF0Rr/9X8j8UU/QzphVXzWx+xoI0IZDsbLzep
+v+wIXxatyxI+7ULQ0UkT+YUQVzVBTyztQnqHnywCtvjsXIV25i2PQnuQLzHsn3/6
+7KUsAVPmjt8hmBycSc0Yiswl+hiA+DdydP77ZRralAfEOkQJ5gHveLaDFgn15ZFI
+6aTW+afe
+=nnPe
 -----END PGP SIGNATURE-----
 
---D1+1ef3XF0fWnSnR--
+--FadpvYBONqlzKZ/7--
