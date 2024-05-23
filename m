@@ -4,78 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31CBEC25B75
-	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 04:12:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB9A8C25B75
+	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 05:05:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91C8F884EA;
-	Thu, 23 May 2024 06:12:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D44FF88528;
+	Thu, 23 May 2024 07:05:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Rn/SZoUG";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RJqv029/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFBE6884B2; Thu, 23 May 2024 06:12:51 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 3F4BB88532; Thu, 23 May 2024 07:05:40 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9DEA888013
- for <u-boot@lists.denx.de>; Thu, 23 May 2024 06:12:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E722F88522
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 07:05:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44N4CaiT078829;
- Wed, 22 May 2024 23:12:36 -0500
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-k6@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44N55Y9K006970;
+ Thu, 23 May 2024 00:05:34 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1716437556;
- bh=J6ID91glU6Vjr3XSJKNiMPmVZbjwAfw6qTQcI/XMDvU=;
- h=From:To:CC:Subject:In-Reply-To:References:Date;
- b=Rn/SZoUGFBpwrdOrwWj8VXy2DFvcY/IyfGZ+HdzKpKWiq4lR7gtvVbdXM47BEzdSZ
- ncj5+50hSSUi+3sB0G6WKEOj/pvMXn/LgJ+z3p1rfsbIQBNiA9qYspw24ru+bd/6sa
- gXyVzH1NbOhcxpnOXRoFp6EGUatSVgQ1W7h44gjk=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44N4CatK037417
+ s=ti-com-17Q1; t=1716440734;
+ bh=iHPBGGX+9N9k6AlRQXqRdazb0Fq3ssiURm8sX5zDlV8=;
+ h=From:To:CC:Subject:Date;
+ b=RJqv029/UHVRDhGXOY0UsNUp0AtEYz5SfUjrwhqQommJMpnLNjChtFWvOLzctZhCL
+ R6+3hiJZdnYdQmKwL6ewl+4F7d2ZHAItzN/dBaPjRvNU2IYxEX0HZtGNSrUOFAelrZ
+ avvL1GOx15zP4J/ThCE6mLowkf8qIGooCsHC76bY=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44N55YGN074301
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 22 May 2024 23:12:36 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 22
- May 2024 23:12:35 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 23 May 2024 00:05:34 -0500
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 23
+ May 2024 00:05:34 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 22 May 2024 23:12:35 -0500
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44N4CZ3t067064;
- Wed, 22 May 2024 23:12:35 -0500
-From: Jon Humphreys <j-humphreys@ti.com>
-To: Tom Rini <trini@konsulko.com>, Neha Malcom Francis <n-francis@ti.com>
-CC: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
- <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
- "Heinrich Schuchardt" <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>,
- "Christian Gmeiner" <christian.gmeiner@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>, Simon Glass <sjg@chromium.org>,
- Nikhil M Jain <n-jain1@ti.com>, "Andrew Davis" <afd@ti.com>,
- Maxime Ripard <mripard@kernel.org>, "Siddharth Vadapalli"
- <s-vadapalli@ti.com>, Roger Quadros <rogerq@kernel.org>, "Bryan Brattlof"
- <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Robert Nelson
- <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>, Sughosh Ganu
- <sughosh.ganu@linaro.org>, Masahisa Kojima <kojima.masahisa@socionext.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH v2 4/7] dts: beagleplay: binman: Include firmware
- capsules binman nodes
-In-Reply-To: <20240522141048.GG2568172@bill-the-cat>
-References: <20240419212819.170033-1-j-humphreys@ti.com>
- <20240419212819.170033-5-j-humphreys@ti.com>
- <20240510173200.GV2568172@bill-the-cat>
- <86o78yd1ud.fsf@udb0321960.dhcp.ti.com>
- <20240522141048.GG2568172@bill-the-cat>
-Date: Wed, 22 May 2024 23:12:35 -0500
-Message-ID: <86jzjlcgjw.fsf@udb0321960.dhcp.ti.com>
+ Frontend Transport; Thu, 23 May 2024 00:05:33 -0500
+Received: from santhoshkumark.dhcp.ti.com (santhoshkumark.dhcp.ti.com
+ [172.24.227.241])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44N55UH6018652;
+ Thu, 23 May 2024 00:05:31 -0500
+From: Santhosh Kumar K <s-k6@ti.com>
+To: <trini@konsulko.com>, <nm@ti.com>, <vigneshr@ti.com>, <bb@ti.com>,
+ <u-kumar1@ti.com>, <m-chawdhry@ti.com>
+CC: <u-boot@lists.denx.de>, <n-francis@ti.com>, <s-k6@ti.com>
+Subject: [PATCH v3 0/8] Inline ECC Series
+Date: Thu, 23 May 2024 10:34:22 +0530
+Message-ID: <20240523050430.455201-1-s-k6@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
@@ -94,76 +78,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tom Rini <trini@konsulko.com> writes:
+Hello,
 
-> On Tue, May 21, 2024 at 09:20:26PM -0500, Jon Humphreys wrote:
->> Tom Rini <trini@konsulko.com> writes:
->> 
->> > On Fri, Apr 19, 2024 at 04:28:16PM -0500, Jonathan Humphreys wrote:
->> >
->> >> Fill in the BeaglePlay's capsule GUID properties of the base binman capsule
->> >> nodes.
->> >> 
->> >> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
->> >> ---
->> >>  arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi | 27 ++++++++++++++++++++
->> >>  arch/arm/dts/k3-am625-r5-beagleplay.dts      | 15 +++++++++++
->> >>  2 files changed, 42 insertions(+)
->> >
->> > This series introduces failure to build in CI, and it's a little tricky
->> > to replicate locally, depending on your environment. You first need to
->> > NOT have BINMAN_INDIRS set and instead be using fake binaries. Second,
->> > it seems python version dependent perhaps? I don't see this on my host,
->> > but by:
->> > - Using the CI container
->> > - Setting up a virtualenv inside of it
->> > - pip install -r tools/buildman/requirements.txt
->> > I get:
->> > $ ./tools/buildman/buildman --keep-outputs --reproducible-builds -dvel --force-build -PEWM --output /tmp/am62x_beagleplay_r5 --board am62x_beagleplay_r5
->> > Building current source for 1 boards (1 thread, 12 jobs per thread)
->> >        arm:  +   am62x_beagleplay_r5
->> > +(am62x_beagleplay_r5) Image 'tiboot3-am62x-gp-evm.bin' is missing optional external blobs but is still functional: ti-fs-gp.bin
->> > +(am62x_beagleplay_r5)
->> > +(am62x_beagleplay_r5) /binman/tiboot3-am62x-gp-evm.bin/ti-fs-gp.bin (ti-sysfw/ti-fs-firmware-am62x-gp.bin):
->> > +(am62x_beagleplay_r5)    Missing blob
->> > +(am62x_beagleplay_r5) binman: object of type 'NoneType' has no len()
->> > +(am62x_beagleplay_r5) make[1]: *** [Makefile:1126: .binman_stamp] Error 1
->> > +(am62x_beagleplay_r5) make: *** [Makefile:177: sub-make] Error 2
->> >     0    0    1 /1              am62x_beagleplay_r5
->> 
->> Tom, this is failing in the CI container because the container is missing
->> the mkeficapsule tool.
->> 
->> To solve this, we just need to add it to the CI container.
->> 
->> My understanding of binman's handling of missing bintools is that it should
->> gracefully continue with fake data, so that buildman can successfully test
->> out builds for boards even when you don't have all the required bintools.
->> If I have that correct, I can also create a patch to properly handle this
->> when using mkeficapsule. But I want to verify this is the desired behavior,
->> since mkeficapsule isn't a unique or vendor specific tool, so shouldn't we
->> require it as part of the U-Boot build environment and err out if it is
->> missing?
->
-> Perhaps it's a binman issue since we build mkeficapsule or at least
-> should be? Neha?
->
+This series is to:
 
-Never mind - I figured it out.
+Add support for Inline ECC in DDR for AM64X, AM62X, AM62AX, AM62PX,
+J721S2 and J784S4 devices.
 
-The mkeficapsule tools is built by u-boot if TOOLS_MKEFICAPSULE config is
-set. I didn't explicitly set it because it is implied by
-EFI_CAPSULE_ON_DISK config. But this is only set for the A core u-boot, as
-that is what would apply the capsules. SPL running on the R cores does not
-need this. But that then means that the R core u-boot builds don't have
-TOOLS_MKEFICAPSULE set and if that is all that is being built (as in the
-case of buildman), the mkeficapsule tool isn't built and so is missing.
+(1/8) Enable ECC priming with BIST engine
+(2/8) Add a function to store base address and size of RAM's banks
+      in a 64-bit device private data
+(3/8) Setup the ECC region start and range
+(4/8) Enable ECC 1-bit error, 2-bit error and multiple-bit
+      error interrupts
+(5/8) Add CONFIG_K3_INLINE_ECC
+(6/8) Set NR_DRAM_BANKS to 2
+(7/8) Pull Redundant DDR functions to a common location and Fixup
+      DDR size when ECC is enabled
+(8/8) Add ss_cfg reg entry
 
-So I need to explicitly set TOOLS_MKEFICAPSULE in the R core defconfigs.
-I'll repost the patches.
+Changes since v2:
+Removed 'default n' in Kconfig as that is default setting
 
-Thanks for catching the bug,
-Jon
+v2: https://lore.kernel.org/u-boot/20240510084707.1903133-1-s-k6@ti.com/
 
-> -- 
-> Tom
+Changes since v1:
+Add support for J7* devices.
+
+v1: https://lore.kernel.org/u-boot/20240131060213.1128024-1-s-k6@ti.com/
+
+Test Results:
+https://gist.github.com/santhosh21/53c6f285640c4b6dfb3420d84975d12a
+
+This series contains changes that grab the memory node from the DTS
+to set/modify DRAM bank sizes. A kernel patch has been sent [1]
+setting the required nodes to be available at bootloader stage. This
+patch series can be merged only after the DTS changes have been
+reflected in U-Boot either via OF_UPSTREAM (for devices that have
+moved to it) or via a sync to U-Boot patch.
+
+[1] https://lore.kernel.org/all/20240506110203.3230255-1-n-francis@ti.com/
+
+Thanks and Regards,
+Santhosh.
+
+Georgi Vlaev (1):
+  ram: k3-ddrss: Use the DDR controller BIST engine for ECC priming
+
+Neha Malcom Francis (2):
+  drivers: ram: Kconfig: Add CONFIG_K3_INLINE_ECC
+  configs: j7*_evm_r5_defconfig: Set NR_DRAM_BANKS to 2
+
+Santhosh Kumar K (5):
+  ram: k3-ddrss: Add k3_ddrss_ddr_bank_base_size_calc() to solve
+    'calculations restricted to 32 bits' issue
+  ram: k3-ddrss: Setup ECC region start and range
+  ram: k3-ddrss: Enable ECC interrupts
+  board: ti: Pull redundant DDR functions to a common location and Fixup
+    DDR size when ECC is enabled
+  arm: dts: k3-*-ddr: Add ss_cfg reg entry
+
+ arch/arm/dts/k3-am62a-ddr.dtsi  |   7 +-
+ arch/arm/dts/k3-j721s2-ddr.dtsi |  12 +-
+ arch/arm/dts/k3-j784s4-ddr.dtsi |  24 ++--
+ board/ti/am62ax/evm.c           |  17 +--
+ board/ti/am62px/evm.c           |  18 +--
+ board/ti/am62x/evm.c            |  63 ++--------
+ board/ti/am64x/evm.c            |  73 ++---------
+ board/ti/am65x/evm.c            |  29 +----
+ board/ti/common/Makefile        |   1 +
+ board/ti/common/k3-ddr-init.c   |  89 +++++++++++++
+ board/ti/common/k3-ddr-init.h   |  15 +++
+ board/ti/j721e/evm.c            |  29 +----
+ board/ti/j721s2/evm.c           |  35 ++----
+ board/ti/j784s4/evm.c           |  17 +--
+ configs/j7200_evm_r5_defconfig  |   1 +
+ configs/j721e_evm_r5_defconfig  |   1 +
+ configs/j721s2_evm_r5_defconfig |   1 +
+ configs/j784s4_evm_r5_defconfig |   1 +
+ drivers/ram/Kconfig             |  10 ++
+ drivers/ram/k3-ddrss/k3-ddrss.c | 214 +++++++++++++++++++++++++++-----
+ 20 files changed, 390 insertions(+), 267 deletions(-)
+ create mode 100644 board/ti/common/k3-ddr-init.c
+ create mode 100644 board/ti/common/k3-ddr-init.h
+
+-- 
+2.34.1
+
