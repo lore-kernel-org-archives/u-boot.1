@@ -4,86 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A4F9C25B7C
-	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 15:32:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 293EDC25B75
+	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 15:39:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2DCF87EBD;
-	Thu, 23 May 2024 17:32:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8757A87F41;
+	Thu, 23 May 2024 17:39:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="r09v6A9s";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="iWjbPDEa";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="jtGaM5hh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2472E87F52; Thu, 23 May 2024 17:32:47 +0200 (CEST)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 53E8287ED1; Thu, 23 May 2024 17:39:19 +0200 (CEST)
+Received: from wfout4-smtp.messagingengine.com
+ (wfout4-smtp.messagingengine.com [64.147.123.147])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4141287E88
- for <U-Boot@lists.denx.de>; Thu, 23 May 2024 17:32:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 39914877AF
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 17:39:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-69b782287f9so11601866d6.0
- for <U-Boot@lists.denx.de>; Thu, 23 May 2024 08:32:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1716478363; x=1717083163; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=J4nWq6AKpnNyvG0Izs7zMLPkpQJqO2BMmVH8Q3gHeaQ=;
- b=r09v6A9sew+jFqtAUuVB1LP6/YuBfUiopxJbZr2p4NuNq26ZhVfsvSkhnrlryIh5WB
- 66/epZezRXlISoQyU4m89XfEf94tQy/LsDrXXxuwlg2LJTmwYmwarJHcxO51CVX7LDNh
- l2Kyi+SuS6uZeMOMzSgV0R7hQp75d5jp1lyIg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716478363; x=1717083163;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=J4nWq6AKpnNyvG0Izs7zMLPkpQJqO2BMmVH8Q3gHeaQ=;
- b=SO0x5bOSxw+DZ4V6ZjLp0ZPk7OkWc+A5xVDZXMfM6BDEJ6pJAZ042aUyFR8L021y8+
- jfSlwLq4/4oPMVEoGdDPZrG+W90z6lgChhDqRMw08dox/nf5wFVFlJvXBrkrwc0i/R+D
- h4y5UiOmybCEhuKJj70WQiQ0ZFXzDmlzv1HM7+54Fbixul5tSzo+nRA6WI79a+bNnO2q
- SA/KPkK/hZHUbzJmhdnr4U+QKUSNe92DMj9uaep6ODbHQni8v2//IEutha/bjgb/0IN3
- Izss9AeVhCRzDPiPVjGH650V/CkeBMpb4Uy/J+SgQGAAK/unlOe/ReJhtnzWun59x2aH
- LWZA==
-X-Gm-Message-State: AOJu0YwUH+XyKNmDXSfuDEgB3T4QxpM2TGKV1c70zt7NPf8VcSa3TR6i
- A2/Eiz9zxfbi42+qS/1uHUVuDSDpXmNNUuS4izj9npUoOWlX3hSIwbfyW38edG0KqL6PLcR8jQp
- q
-X-Google-Smtp-Source: AGHT+IEz4SwnXgaog1M3dnvuOJ5EmnujASX0Pu0Rmbzg5gusgmRQDmvufxjcP5QEBYf5vTRTpMaSEw==
-X-Received: by 2002:a05:6214:3986:b0:6aa:5098:8846 with SMTP id
- 6a1803df08f44-6ab7f35358dmr57354676d6.14.1716478362753; 
- Thu, 23 May 2024 08:32:42 -0700 (PDT)
-Received: from bill-the-cat ([189.178.170.52])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6ab93037dabsm6104846d6.28.2024.05.23.08.32.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 May 2024 08:32:42 -0700 (PDT)
-Date: Thu, 23 May 2024 09:32:39 -0600
-From: Tom Rini <trini@konsulko.com>
-To: "Brunham, Kalen" <kalen.brunham@intel.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: "U-Boot@lists.denx.de" <U-Boot@lists.denx.de>
-Subject: Re: [PATCH 1/1] Added arm64 assembly for examples/api crt0
-Message-ID: <20240523153239.GS2568172@bill-the-cat>
-References: <20240521162543.GU2568172@bill-the-cat>
- <DM4PR11MB529670F5CFDA6B4EDA7B7206E3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
- <20240521164659.GZ2568172@bill-the-cat>
- <DM4PR11MB529668DA50F05F26AAD229F0E3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
- <20240521181534.GD2568172@bill-the-cat>
- <DM4PR11MB5296769279BCDD505F614E6BE3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
- <20240521234624.GF2568172@bill-the-cat>
- <DM4PR11MB5296918A0447369D6B27891DE3EB2@DM4PR11MB5296.namprd11.prod.outlook.com>
- <20240522143908.GI2568172@bill-the-cat>
- <DM4PR11MB52968E794BE8B0A882A519A6E3EB2@DM4PR11MB5296.namprd11.prod.outlook.com>
+ spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailfout.west.internal (Postfix) with ESMTP id 792E51C001AD;
+ Thu, 23 May 2024 11:39:11 -0400 (EDT)
+Received: from imap44 ([10.202.2.94])
+ by compute3.internal (MEProxy); Thu, 23 May 2024 11:39:11 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
+ cc:cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1716478751;
+ x=1716565151; bh=vuV32L97REH+FgP4WQHEW1n3PhvT8qX0u28udyt10d8=; b=
+ iWjbPDEa2lyyW4fTXZ1gcgvfgbSS7/bHSEuCoUVmFw1/QHc2PcMRn+NK8ERjWYKi
+ DOAQQo3fUAlb8j7Ygy7HT/ddCSzLwjfiaKe831w119bhNU8fe3Y7qsIjezNJjaKd
+ E3MczcKRFmYuYcXl63kXSSKqY3oTKtVqdnxmhnlGZafsYJNDnaYki2JdobAmnsR3
+ dPpXq/kSTh3KmZUOOXzQFaXgMxA0PHgGsh0oumiT4E9+hgZKMy1xCfwSwPdZemgB
+ UTlFJjhRCjj7ijxnmxRlshT+T3lqq/xAMhDUEb0qE1I5ucomwj7EKRJsnFACvPZd
+ SIjm3Iv5DmfiDjc6U7Cfww==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716478751; x=
+ 1716565151; bh=vuV32L97REH+FgP4WQHEW1n3PhvT8qX0u28udyt10d8=; b=j
+ tGaM5hhFKvgskEW4U7Utc8lSgIUezm5SbqviV1JoncyPgRfu1zJ7HL43Fy7osTBg
+ ZShEvKOCwwKGjnKEpsxVK5WEnySTc0BOQ3DVatHYbKhHZ5ZRTmWsvreCSH63/mBS
+ O3g+7QrVomQOYGfNToTTwHBJyb5LneY3au8EnjoNLuOCdRYI1NxRz5cyrPw1ONlw
+ 3xik95WHvJofi04ADlMaeQtw4PmP5KsJQVt696X3jfkSv4FFWLWAYhLGhsEFe485
+ fvjxWiRzmKiW/+aEUR6R+crryl4APFh+5P/gbVgLAJ/tGeiLS047CoCtwn9KgRUj
+ oxpjZV1uED63QNjfTNqCw==
+X-ME-Sender: <xms:HmNPZl_ic7pFJih_tketiltTLbzdpFlh42PTyF1bOTi2JuppPmdTSg>
+ <xme:HmNPZpvYQtqwLXDZ9046o1MUoba0hn70v_yNi52AI8N_Y-Qdd-qRsDcrnrfi_ZzXv
+ vtJ8nu4Q2FanC2ORWg>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdeiiedgledtucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhepofgfggfkjghffffhvfevufgtgfesthhqredtreerjeenucfhrhhomhepfdfl
+ ihgrgihunhcujggrnhhgfdcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtoh
+ hmqeenucggtffrrghtthgvrhhnpeeujeduheeltdeffefgfeffhfevgefggefhffeftdeu
+ uddvtdekuedvkedvtdfhieenucffohhmrghinhepuhdqsghoohhtrdhorhhgnecuvehluh
+ hsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepjhhirgiguhhnrdih
+ rghnghesfhhlhihgohgrthdrtghomh
+X-ME-Proxy: <xmx:HmNPZjDUVQ0YRyAvgR-IYIVYoZsYEagwoFHrbRz0oaABGlrg2l-1yQ>
+ <xmx:HmNPZpfkUUsgPRFa76oAQmq3mdrfioNBob9oXBjJni6DKhANWF30lA>
+ <xmx:HmNPZqPCtY7ygkuU9_ERfEIw3Lf6BnsuUovqRpnaNkMGp6zqPVrP9A>
+ <xmx:HmNPZrntbFknI6xLwstQocSdNg_cNGKhnO-tPAvr03JBoMxGT7SHYg>
+ <xmx:H2NPZnoMVwwlcVdar3jVyQqYPQWROeJT-nygQ1C_mW7oCSD6aCOGOlU2>
+Feedback-ID: ifd894703:Fastmail
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id C190E36A0074; Thu, 23 May 2024 11:39:10 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.11.0-alpha0-480-g515a2f54a-fm-20240515.001-g515a2f54
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9ZJ2HibkFYxPCliW"
-Content-Disposition: inline
-In-Reply-To: <DM4PR11MB52968E794BE8B0A882A519A6E3EB2@DM4PR11MB5296.namprd11.prod.outlook.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Message-Id: <36b2a4a8-9a37-44b8-9630-bb48a862e60d@app.fastmail.com>
+In-Reply-To: <20240523152540.GR2568172@bill-the-cat>
+References: <20240522-loongarch-v1-0-1407e0b69678@flygoat.com>
+ <20240523152540.GR2568172@bill-the-cat>
+Date: Thu, 23 May 2024 16:38:52 +0100
+From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
+To: "Tom Rini" <trini@konsulko.com>
+Cc: "Simon Glass" <sjg@chromium.org>,
+ "Heinrich Schuchardt" <xypron.glpk@gmx.de>,
+ "Ilias Apalodimas" <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 00/16] LoongArch initial support
+Content-Type: text/plain;charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,58 +109,45 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---9ZJ2HibkFYxPCliW
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, May 22, 2024 at 05:22:24PM +0000, Brunham, Kalen wrote:
+=E5=9C=A82024=E5=B9=B45=E6=9C=8823=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8B=E5=
+=8D=884:25=EF=BC=8CTom Rini=E5=86=99=E9=81=93=EF=BC=9A
+> On Wed, May 22, 2024 at 04:34:43PM +0100, Jiaxun Yang wrote:
+>
+>> Hi all,
+>>=20
+>> Sorry for flooding the mailing list recently, yet another huge RFC se=
+ries ahead.
+>>=20
+>> So after working on MIPS, arm64be and Xtensa I'm now on LoongArch, as=
+ suggested
+>> by=C2=A0Heinrich.
+>
+> My big feedback here, and it applies to all of your other series as
+> well, is to please update CI to make use of and test this. On the Dock=
+er
+> side, update tools/docker/Dockerfile as needed. For Azure, you can tell
+> it to use a different image and then follow the documentation on
+> https://docs.u-boot.org/en/latest/develop/ci_testing.html and for GitL=
+ab
+> you can at least use their "linter" to make sure that your additions
+> have the correct syntax. Thanks.
 
-> Hi Tom,
->=20
-> BLK is currently a dependency for EFI_LOADER as shown in the snippet from=
- lib/efi_loader/Kconfig below. Perhaps the question is why EFI_LOADER requi=
-res a block device? If I remove this depends on BLK line, then I can enable=
- EFI and successfully simulate the EFI hello world on my test design.=20
->=20
->=20
-> config EFI_LOADER
-> 	bool "Support running UEFI applications"
-> 	depends on OF_LIBFDT && ( \
-> 		ARM && (SYS_CPU =3D arm1136 || \
-> 			SYS_CPU =3D arm1176 || \
-> 			SYS_CPU =3D armv7   || \
-> 			SYS_CPU =3D armv8)  || \
-> 		X86 || RISCV || SANDBOX)
-> 	# We need EFI_STUB_64BIT to be set on x86_64 with EFI_STUB
-> 	depends on !EFI_STUB || !X86_64 || EFI_STUB_64BIT
-> 	# We need EFI_STUB_32BIT to be set on x86_32 with EFI_STUB
-> 	depends on !EFI_STUB || !X86 || X86_64 || EFI_STUB_32BIT
-> 	depends on BLK
-> 	depends on !EFI_APP
-> 	default y if !ARM || SYS_CPU =3D armv7 || SYS_CPU =3D armv8
+Hi Tom,
 
-Do you recall why this is Heinrich?
+Thanks for the feedback, I thought CI is for custodians only :-)
+
+Do you mean I should include azure/gitlab pipeline file to create
+pipeline for those new qemu targets?
+
+Thanks
+
+>
+> --=20
+> Tom
+>
+> =E9=99=84=E4=BB=B6:
+> * signature.asc
 
 --=20
-Tom
-
---9ZJ2HibkFYxPCliW
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZPYZcACgkQFHw5/5Y0
-tywClgwAjHxIgvtIQTq7F+efoS0GqwOewQSVqoXrjg8Dys/PMSc3/BDNkxGOEkoE
-+zDrmp5etRo2M9OzdmVT+x+iR2TgN8Ys5GNqSisMA+oxnh1NA95IzjXfBRMcPRzO
-juIiGvRmfjZB8LyjGPW1V4osfeyFi5lnrzWGFuQbRHQaFKyUofw+aKOQPS54xgUp
-e1DPAfEDHiQq9CvrmfPHyfQ16n1IT6/jHIct3fiPlAtzrBpmmXEt7CLdFxEX79rY
-Igfbc8iLh9h6p8V9mHaxmXuhfkGgGENFiy6UsUMm8vG/LUcUb1cWW+yvQaUL4KbC
-Vn1gv7/Vj2SkvW0lZIicOoFrfbY0exnmiLiGHm7O7hSOc7N87UT2MC0Yu0XuD97g
-zD+VgWuZPajvpAbgzJ62ltUWR7o1BgyJ3PorQQOGhXMX1Hg3sdaqs48BG8Vqto7F
-vd0K89+zxEkerOvz/RasP5Yv2mI55EYnMSehd302KRR7SNNfhDmZ/LsLK9NFWBs0
-ySxQYSwX
-=zvlI
------END PGP SIGNATURE-----
-
---9ZJ2HibkFYxPCliW--
+- Jiaxun
