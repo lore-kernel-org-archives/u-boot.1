@@ -4,41 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD941C25B79
-	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 03:50:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 630A9C25B79
+	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 03:50:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3479188585;
-	Thu, 23 May 2024 05:49:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D68128852E;
+	Thu, 23 May 2024 05:50:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="XYw82rPg";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="MuwVJ7yH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6548C88542; Thu, 23 May 2024 05:49:54 +0200 (CEST)
-Received: from mail-m49241.qiye.163.com (mail-m49241.qiye.163.com
- [45.254.49.241])
+ id DFDCE881C3; Thu, 23 May 2024 05:50:04 +0200 (CEST)
+Received: from mail-m49214.qiye.163.com (mail-m49214.qiye.163.com
+ [45.254.49.214])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBEFD8857A
- for <u-boot@lists.denx.de>; Thu, 23 May 2024 05:49:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0EBFD8852E
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 05:50:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=XYw82rPgjZujhp4ZnZ7iPwgoZ6W0WqpQEB0yg0I8U0so+aJbjvGfIo+AzWoiXCTaW4XlpU/G8XlYR2fJ5/MqfLyl6bX4dovsSlV5K57Fw4wf9tugKa4B7PVAUx6H9BrIqsIRkBDfFlYpNOm8MBJtnWa9abxChMniDE/XUqW4iZ0=;
+ b=MuwVJ7yHEXab9YTefXlef2Hxe3rVKMCYy+4hqGTA3D4LpdBVxgkYLBaqW3iwLU9QSIgNo2HIDvJGVTJ0R4M7Rx4lsmN8EiwUIHkPBpO7knU5DJPeYoE96+C6Et+80lCPurybFgj9WrYDKHQJolxqRyw2BIiYaePREnnq2LJdrMU=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=70EKtqUOIxJJ0B1jQ6Vw16PS8HoAokXsDoV+NIiF9qU=;
+ bh=E8eHEUX8RJsHBN5PBvPPEDsuG6j++XH+s0sbPfl+h14=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 22DFC9002B5;
- Thu, 23 May 2024 11:49:18 +0800 (CST)
-Message-ID: <70c33524-68a9-4451-9fe6-bf3e617c61c2@rock-chips.com>
-Date: Thu, 23 May 2024 11:49:17 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 1AFCB9002C6;
+ Thu, 23 May 2024 11:49:11 +0800 (CST)
+Message-ID: <532df25b-2688-4ab4-aa72-54a5b25f0946@rock-chips.com>
+Date: Thu, 23 May 2024 11:49:11 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 10/10] rockchip: evb-px30: make UART5 the debug UART
+Subject: Re: [PATCH 09/10] rockchip: evb-px30: do not remove pinctrl nodes
+ from SPL DTB
 To: Quentin Schulz <foss+uboot@0leil.net>, Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Heiko Stuebner <heiko.stuebner@cherry.de>,
@@ -49,21 +50,21 @@ To: Quentin Schulz <foss+uboot@0leil.net>, Tom Rini <trini@konsulko.com>,
 Cc: jonas@kwiboo.se, u-boot@lists.denx.de,
  Quentin Schulz <quentin.schulz@cherry.de>
 References: <20240521-px30-2024-07-rc-v1-0-62109c84d44f@cherry.de>
- <20240521-px30-2024-07-rc-v1-10-62109c84d44f@cherry.de>
+ <20240521-px30-2024-07-rc-v1-9-62109c84d44f@cherry.de>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240521-px30-2024-07-rc-v1-10-62109c84d44f@cherry.de>
+In-Reply-To: <20240521-px30-2024-07-rc-v1-9-62109c84d44f@cherry.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQx8dSFZPQktKGhhKT0sYSh1VEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUxOVUpLS1VKQk
- tLWQY+
-X-HM-Tid: 0a8fa391497f03a9kunm22dfc9002b5
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUhOSFZMH0pDSx1DSEgZTk1VEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
+ kG
+X-HM-Tid: 0a8fa391326f03a9kunm1afcb9002c6
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Kxg6DAw5DDNDHxxML04WGUJK
- TBRPFD5VSlVKTEpNT0hNSk5CSkJLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJQk5CNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NBw6KAw5FjMCDxwiL0k3GQE0
+ QihPCkNVSlVKTEpNT0hNSk5ISU5CVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFISkhONwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,9 +85,9 @@ X-Virus-Status: Clean
 On 2024/5/22 01:40, Quentin Schulz wrote:
 > From: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> In the Device Tree, UART5 is the system UART, but in the defconfig it
-> currently is UART2. Let's sync the two by making the defconfig use UART5
-> as well.
+> In order to be able to properly mux UART on PX30 EVB, the pinmux needs
+> to be done at runtime, so let's not remove the pinctrl nodes from the
+> SPL DTB.
 >
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -98,16 +99,16 @@ Thanks,
 >   1 file changed, 1 insertion(+), 1 deletion(-)
 >
 > diff --git a/configs/evb-px30_defconfig b/configs/evb-px30_defconfig
-> index a5833ad6d09..abe545625a5 100644
+> index 50ce1d7a9f3..a5833ad6d09 100644
 > --- a/configs/evb-px30_defconfig
 > +++ b/configs/evb-px30_defconfig
-> @@ -10,7 +10,7 @@ CONFIG_ROCKCHIP_PX30=y
->   CONFIG_TARGET_EVB_PX30=y
->   # CONFIG_TPL_LIBCOMMON_SUPPORT is not set
->   CONFIG_SPL_DRIVERS_MISC=y
-> -CONFIG_DEBUG_UART_BASE=0xFF160000
-> +CONFIG_DEBUG_UART_BASE=0xff178000
->   CONFIG_DEBUG_UART_CLOCK=24000000
->   CONFIG_SYS_LOAD_ADDR=0x800800
->   CONFIG_DEBUG_UART=y
+> @@ -51,7 +51,7 @@ CONFIG_CMD_USB_MASS_STORAGE=y
+>   CONFIG_EFI_PARTITION_ENTRIES_NUMBERS=64
+>   CONFIG_SPL_OF_CONTROL=y
+>   CONFIG_OF_LIVE=y
+> -CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+> +CONFIG_OF_SPL_REMOVE_PROPS="interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+>   CONFIG_ENV_IS_IN_MMC=y
+>   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>   CONFIG_REGMAP=y
 >
