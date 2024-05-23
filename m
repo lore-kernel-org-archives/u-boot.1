@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DA65C25B75
-	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 06:56:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB39AC25B75
+	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 07:06:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D504D884CA;
-	Thu, 23 May 2024 08:56:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3D619884D5;
+	Thu, 23 May 2024 09:06:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mH34PzH0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="M1C8VI3P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99C97884CA; Thu, 23 May 2024 08:56:27 +0200 (CEST)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
+ id 064A7884D5; Thu, 23 May 2024 09:06:37 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 411778850B
- for <u-boot@lists.denx.de>; Thu, 23 May 2024 08:56:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BA4DA88311
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 09:06:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=r.stratiienko@gmail.com
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-2e45c0a8360so63852021fa.3
- for <u-boot@lists.denx.de>; Wed, 22 May 2024 23:56:25 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-42011507a57so53026065e9.1
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 00:06:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716447384; x=1717052184; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=P3RcoLdODu7GTYq9KFOx0PlOhPie+dH4XuBAKiv3XTc=;
- b=mH34PzH0MW0I1/P+el492NMlUslOqcbx7jDn8Uvdpe208Ko05pGYRDjlZnyPUzuhpI
- 8a3GAIxovvVZ4uA+LU+tTxGLQyBnLubKkRo/BDQ57mzubeXtSeGjLJOpfGLB9SLSjxuj
- QQqjRdVsAo+xop7SjSWVgkhLQMtxDo84vhAKzTWsKhcOC6yKO8tuaAEXdruhnRt6Fz7P
- XlVZyXuld12B61bulhPcyd4QfW1CgEVFldTxLsBkmHEufL669o9WfOEjscXIArrO3z/g
- WKx9Lc9NcjHhtP3VuNuLMlKHxpp7F6/XA7Et/stDDdkRmcPbcw1P8R9AvQE2hdsQkhc1
- Eo2w==
+ d=gmail.com; s=20230601; t=1716447994; x=1717052794; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=96HdcaiyT2BFMdG0K6ujroSV8yXNCtnJwndaGl3F/Hc=;
+ b=M1C8VI3PDxssZMxH9SJufjJxX2SqtW43yeus5UXGcwxQbgDevaqMK9h26GJoJ7s5ja
+ EoX+3WzYepRGPUpVYI6tCeMdKXRYLOt5H4iitN/PAQ6c+RQncma0uuXetuE3lyUtKpEA
+ iY26/g15eAAuxfm4OCxWlkB8pxdDWAGyX+bg3jWG3FD012KbdnXPmVACX/Rj8udOUsYJ
+ ji861S2dNpYoDic8v6GEWpz87c8SDNJ+Y73NuV0QjW0EzAqrdsjPZao1llnJMXF58OPn
+ 4+z/qAque2Orz01xDmw7+y/KCWwHr3BmUs/k398iR9yOhwGjgP3u1DYHIgjF7fsDOL6i
+ G6Aw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716447384; x=1717052184;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=P3RcoLdODu7GTYq9KFOx0PlOhPie+dH4XuBAKiv3XTc=;
- b=jCeWICGsC2jdx7rEMh2klWSm/w5QceLe11AOkDNUa8c7FI2KO4/Up4mFyg4QRtEOod
- 3lAoxz0UbqbxKBI93yfWIsGpbIPXumGGCgIeBAMro1XPcbn3YD8XVS0V1SL8vKd1NxyW
- bIYuRWSkUXAGC9yJDbrw8H0i5EqDfVFOQqS0sYU7jhBhpfQO/woEnzQh+fcvf3Ai8lva
- aarq3EhLX5PgofRPAvzwHVBwcv22pdxmn47458wYAbGi0x5bEUwhttmmOAIq86VwZDyW
- Mx54YQLWOrGtQZgHLjf3hczG4x4CX68S/xPeoQChmKcKyeYVqtWUAtqrAb8n5GDoxDbU
- aLxQ==
+ d=1e100.net; s=20230601; t=1716447994; x=1717052794;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=96HdcaiyT2BFMdG0K6ujroSV8yXNCtnJwndaGl3F/Hc=;
+ b=Jw0di0cSD2Tph5XuE7pWyP46g9KvqZux0OaYLYKyku3n3oL8OI4XKplDyHStE6rDQw
+ EPnEGp71LIpAfBUwE9rUe+AEU13oAWiSsumhFa8JU6aCWMMb9CRZAUEW2NN8jBwOmiOu
+ pTpYkLIInGXaZupY0358nqNCcfAfsWY3HUNnPStH3X9UfstYTIoeAAgy6gX8MSDlUNUe
+ MXJpKEtethH0J5zbS17VHW5C80UGR2MazUWY/LL4zICGwIbKLspAwm8GwlvHtPR/GK/V
+ umEUmzapVlG8JFsaYptp10WM7CBRDqCUhyPf4K9XoZrLcGkxGLq+dqpzr97ckJImPX2C
+ SwbQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWtCdzQ5QA0HOx+8rGiPM1DgS4ysNo+uBK+hvvdGfgUoj1i4YfDCcgSf3yRHe8eESnRiHAzWgHjdfQ76sBe//ITudMRLA==
-X-Gm-Message-State: AOJu0YyCdRy/bO/9IzZHvK6nRmAzeRHdNIVLQQyyd6imnBZFovk+5dEM
- rUeKlKBxcOxoctjS7z6CHVmrbQ5ivRheVfCgE7MzJPVSpXZRTpEOe+O9+oExlJ8J5BT44dGcVYm
- QPzgq+EpqZxjd5KYQ+9z6SG44ydU=
-X-Google-Smtp-Source: AGHT+IE93z5S8EfOJQzybsIAiYZwlYd2oF9auzfxsrAIdik/Q0bI2zhh6ECDA6KXcos/XVPTF/zH88zOKxNTrMhVLbM=
-X-Received: by 2002:a2e:9088:0:b0:2e1:adc4:47f6 with SMTP id
- 38308e7fff4ca-2e94944138fmr23679781fa.6.1716447384313; Wed, 22 May 2024
- 23:56:24 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240522212645.87250-1-r.stratiienko@gmail.com>
- <87y181xc6c.fsf@baylibre.com>
-In-Reply-To: <87y181xc6c.fsf@baylibre.com>
+ AJvYcCWm0PxbE+aANqIUNSoMNJF+j0uQBJ8jb/1lADV2Or7S+1waGuZHpwXxG+ax3JXU5tViCbRoIecsEKddXogvYZ7AkMQNrQ==
+X-Gm-Message-State: AOJu0YwEs57ENhwzJt1mM+c7wxsT25urWSSuZTjEYQ8cxujtAPkHtSnc
+ R6hsC6vjMgKD5yUacMbVaYKC5aOy3wXuZIsTbMzRRyXYfS6iI0wLn/rEWA==
+X-Google-Smtp-Source: AGHT+IEpp9khebPvcYkHb5FlmcIgw5Rvu6kPjNlAdT3dCTKi8rrIjcqqzPOITW2fl+g78m9xYPusVQ==
+X-Received: by 2002:a05:600c:2245:b0:41b:855b:5d26 with SMTP id
+ 5b1f17b1804b1-420fd2dd906mr31451685e9.2.1716447993945; 
+ Thu, 23 May 2024 00:06:33 -0700 (PDT)
+Received: from roman-envy-fast.. ([46.172.77.250])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3502b896a89sm35650035f8f.31.2024.05.23.00.06.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 23 May 2024 00:06:33 -0700 (PDT)
 From: Roman Stratiienko <r.stratiienko@gmail.com>
-Date: Thu, 23 May 2024 09:56:13 +0300
-Message-ID: <CAGphcdn99CyoHvphk2VAzGLp4qmws5kN2KN5sKCoUZenZ+idwQ@mail.gmail.com>
-Subject: Re: [PATCH v2] abootimg: Add init_boot image support
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: sjg@chromium.org, marek.vasut+renesas@mailbox.org, 
- laurent.pinchart@ideasonboard.com, eajames@linux.ibm.com, 
- paulerwan.rio@gmail.com, xypron.glpk@gmx.de, u-boot@lists.denx.de, 
- igor.opaniuk@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: sjg@chromium.org, marek.vasut+renesas@mailbox.org, r.stratiienko@gmail.com,
+ laurent.pinchart@ideasonboard.com, ilias.apalodimas@linaro.org,
+ xypron.glpk@gmx.de, eajames@linux.ibm.com, paulerwan.rio@gmail.com,
+ u-boot@lists.denx.de, mkorpershoek@baylibre.com
+Subject: [PATCH v3] abootimg: Add init_boot image support
+Date: Thu, 23 May 2024 07:06:07 +0000
+Message-Id: <20240523070606.91108-1-r.stratiienko@gmail.com>
+X-Mailer: git-send-email 2.40.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,95 +91,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D1=87=D1=82, 23 =D0=BC=D0=B0=D1=8F 2024=E2=80=AF=D0=B3. =D0=B2 09:41, Matt=
-ijs Korpershoek <mkorpershoek@baylibre.com>:
->
-> Hi Roman,
->
-> Thank you for the patch.
->
-> On mer., mai 22, 2024 at 21:26, Roman Stratiienko <r.stratiienko@gmail.co=
-m> wrote:
->
-> > Quote from [1]:
-> >
-> > "For devices launching with Android 13, the generic ramdisk is removed
-> > from the boot image and placed in a separate init_boot image.
-> > This change leaves the boot image with only the GKI kernel."
-> >
-> > While at it, update wrong error handling message when vendor_boot
-> > cannot be loaded.
-> >
-> > [1]: https://source.android.com/docs/core/architecture/partitions/gener=
-ic-boot
-> > Signed-off-by: Roman Stratiienko <r.stratiienko@gmail.com>
->
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
->
-> Note: this patch still does not apply on master nor next:
->
-> $ ~/work/upstream/u-boot/ git show --pretty=3D'%h ("%s")' HEAD --no-patch
-> a7f0154c4128 ("Prepare v2024.07-rc3")
->
-> $ ~/work/upstream/u-boot/ b4 shazam -s -l 20240522212645.87250-1-r.strati=
-ienko@gmail.com
->
-> [...]
->
-> Total patches: 1
-> ---
-> Applying: abootimg: Add init_boot image support
-> Patch failed at 0001 abootimg: Add init_boot image support
-> error: sha1 information is lacking or useless (cmd/abootimg.c).
-> error: could not build fake ancestor
-> hint: Use 'git am --show-current-patch=3Ddiff' to see the failed patch
-> hint: When you have resolved this problem, run "git am --continue".
-> hint: If you prefer to skip this patch, run "git am --skip" instead.
-> hint: To restore the original branch and stop patching, run "git am --abo=
-rt".
-> hint: Disable this message with "git config advice.mergeConflict false"
->
-> - master: a7f0154c4128 ("Prepare v2024.07-rc3")
-> - next: 377e91c162ab ("Merge patch series "Clean-up patch set for MbedTLS=
- integration"")
->
-> Looking further down below, we can see that this patch has the "abootimg
-> load" command, which is introduced in these series:
-> https://lore.kernel.org/r/20240519191856.2582174-1-r.stratiienko@gmail.co=
-m
->
-> Please consider rebasing on either master or next before sending.
+Quote from [1]:
 
-Ahh. I see. Sorry for the inconvenience. I will rebase and send v3.
+"For devices launching with Android 13, the generic ramdisk is removed
+from the boot image and placed in a separate init_boot image.
+This change leaves the boot image with only the GKI kernel."
 
->
->
-> > ---
-> >  boot/image-board.c | 13 ++++++++++---
-> >  cmd/abootimg.c     | 26 +++++++++++++++++++++-----
-> >  include/image.h    |  7 +++++++
-> >  3 files changed, 38 insertions(+), 8 deletions(-)
->
-> [...]
->
-> >
-> >
-> >  static struct cmd_tbl cmd_abootimg_sub[] =3D {
-> > -     U_BOOT_CMD_MKENT(addr, 3, 1, do_abootimg_addr, "", ""),
-> > +     U_BOOT_CMD_MKENT(addr, 4, 1, do_abootimg_addr, "", ""),
-> >       U_BOOT_CMD_MKENT(dump, 2, 1, do_abootimg_dump, "", ""),
-> >       U_BOOT_CMD_MKENT(get, 5, 1, do_abootimg_get, "", ""),
-> >       U_BOOT_CMD_MKENT(load, 5, 1, do_abootimg_load, "", ""),
-> > @@ -376,7 +392,7 @@ static int do_abootimg(struct cmd_tbl *cmdtp, int f=
-lag, int argc,
-> >  U_BOOT_CMD(
-> >       abootimg, CONFIG_SYS_MAXARGS, 0, do_abootimg,
-> >       "manipulate Android Boot Image",
-> > -     "addr <boot_img_addr> [<vendor_boot_img_addr>]>\n"
-> > +     "addr <boot_img_addr> [<vendor_boot_img_addr> [<init_boot_img_add=
-r>]]\n"
-> >       "    - set the address in RAM where boot image is located\n"
-> >       "      ($loadaddr is used by default)\n"
-> >       "abootimg dump dtb\n"
->
-> [...]
+While at it, update wrong error handling message when vendor_boot
+cannot be loaded.
+
+[1]: https://source.android.com/docs/core/architecture/partitions/generic-boot
+Signed-off-by: Roman Stratiienko <r.stratiienko@gmail.com>
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+---
+
+Changes in v2:
+- Addressed review comments v1
+
+Changes in v3:
+- Rebased on top of latest u-boot/next
+
+ boot/image-board.c | 13 ++++++++++---
+ cmd/abootimg.c     | 26 +++++++++++++++++++++-----
+ include/image.h    |  7 +++++++
+ 3 files changed, 38 insertions(+), 8 deletions(-)
+
+diff --git a/boot/image-board.c b/boot/image-board.c
+index b7884b8c5d..f212401304 100644
+--- a/boot/image-board.c
++++ b/boot/image-board.c
+@@ -406,13 +406,20 @@ static int select_ramdisk(struct bootm_headers *images, const char *select, u8 a
+ 		if (IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE)) {
+ 			int ret;
+ 			if (IS_ENABLED(CONFIG_CMD_ABOOTIMG)) {
+-				void *boot_img = map_sysmem(get_abootimg_addr(), 0);
++				ulong boot_img = get_abootimg_addr();
++				ulong init_boot_img = get_ainit_bootimg_addr();
+ 				void *vendor_boot_img = map_sysmem(get_avendor_bootimg_addr(), 0);
++				void *ramdisk_img;
+ 
+-				ret = android_image_get_ramdisk(boot_img, vendor_boot_img,
++				if (init_boot_img == -1)
++					ramdisk_img = map_sysmem(boot_img, 0);
++				else
++					ramdisk_img = map_sysmem(init_boot_img, 0);
++
++				ret = android_image_get_ramdisk(ramdisk_img, vendor_boot_img,
+ 								rd_datap, rd_lenp);
+ 				unmap_sysmem(vendor_boot_img);
+-				unmap_sysmem(boot_img);
++				unmap_sysmem(ramdisk_img);
+ 			} else {
+ 				void *ptr = map_sysmem(images->os.start, 0);
+ 
+diff --git a/cmd/abootimg.c b/cmd/abootimg.c
+index 88c77d9992..327712a536 100644
+--- a/cmd/abootimg.c
++++ b/cmd/abootimg.c
+@@ -14,6 +14,7 @@
+ 
+ /* Please use abootimg_addr() macro to obtain the boot image address */
+ static ulong _abootimg_addr = -1;
++static ulong _ainit_bootimg_addr = -1;
+ static ulong _avendor_bootimg_addr = -1;
+ 
+ ulong get_abootimg_addr(void)
+@@ -21,6 +22,11 @@ ulong get_abootimg_addr(void)
+ 	return (_abootimg_addr == -1 ? image_load_addr : _abootimg_addr);
+ }
+ 
++ulong get_ainit_bootimg_addr(void)
++{
++	return _ainit_bootimg_addr;
++}
++
+ ulong get_avendor_bootimg_addr(void)
+ {
+ 	return _avendor_bootimg_addr;
+@@ -179,7 +185,7 @@ static int do_abootimg_addr(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	char *endp;
+ 	ulong img_addr;
+ 
+-	if (argc < 2 || argc > 3)
++	if (argc < 2 || argc > 4)
+ 		return CMD_RET_USAGE;
+ 
+ 	img_addr = hextoul(argv[1], &endp);
+@@ -190,16 +196,26 @@ static int do_abootimg_addr(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ 	_abootimg_addr = img_addr;
+ 
+-	if (argc == 3) {
++	if (argc > 2) {
+ 		img_addr = simple_strtoul(argv[2], &endp, 16);
+ 		if (*endp != '\0') {
+-			printf("Error: Wrong vendor image address\n");
++			printf("Error: Wrong vendor_boot image address\n");
+ 			return CMD_RET_FAILURE;
+ 		}
+ 
+ 		_avendor_bootimg_addr = img_addr;
+ 	}
+ 
++	if (argc == 4) {
++		img_addr = simple_strtoul(argv[3], &endp, 16);
++		if (*endp != '\0') {
++			printf("Error: Wrong init_boot image address\n");
++			return CMD_RET_FAILURE;
++		}
++
++		_ainit_bootimg_addr = img_addr;
++	}
++
+ 	return CMD_RET_SUCCESS;
+ }
+ 
+@@ -243,7 +259,7 @@ static int do_abootimg_dump(struct cmd_tbl *cmdtp, int flag, int argc,
+ }
+ 
+ static struct cmd_tbl cmd_abootimg_sub[] = {
+-	U_BOOT_CMD_MKENT(addr, 3, 1, do_abootimg_addr, "", ""),
++	U_BOOT_CMD_MKENT(addr, 4, 1, do_abootimg_addr, "", ""),
+ 	U_BOOT_CMD_MKENT(dump, 2, 1, do_abootimg_dump, "", ""),
+ 	U_BOOT_CMD_MKENT(get, 5, 1, do_abootimg_get, "", ""),
+ };
+@@ -271,7 +287,7 @@ static int do_abootimg(struct cmd_tbl *cmdtp, int flag, int argc,
+ U_BOOT_CMD(
+ 	abootimg, CONFIG_SYS_MAXARGS, 0, do_abootimg,
+ 	"manipulate Android Boot Image",
+-	"addr <boot_img_addr> [<vendor_boot_img_addr>]>\n"
++	"addr <boot_img_addr> [<vendor_boot_img_addr> [<init_boot_img_addr>]]\n"
+ 	"    - set the address in RAM where boot image is located\n"
+ 	"      ($loadaddr is used by default)\n"
+ 	"abootimg dump dtb\n"
+diff --git a/include/image.h b/include/image.h
+index acffd17e0d..c5b288f62b 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -1970,6 +1970,13 @@ bool is_android_vendor_boot_image_header(const void *vendor_boot_img);
+  */
+ ulong get_abootimg_addr(void);
+ 
++/**
++ * get_ainit_bootimg_addr() - Get Android init boot image address
++ *
++ * Return: Android init boot image address
++ */
++ulong get_ainit_bootimg_addr(void);
++
+ /**
+  * get_avendor_bootimg_addr() - Get Android vendor boot image address
+  *
+-- 
+2.40.1
+
