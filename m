@@ -4,83 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 949E0C25B75
-	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 09:27:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71596C25B75
+	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 10:51:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AD6F884FF;
-	Thu, 23 May 2024 11:27:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id A479B884B2;
+	Thu, 23 May 2024 12:51:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="BhxSh8H4";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Up3ubXgB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5E8D88516; Thu, 23 May 2024 11:27:17 +0200 (CEST)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id A9761884EA; Thu, 23 May 2024 12:51:47 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4AE8884FE
- for <u-boot@lists.denx.de>; Thu, 23 May 2024 11:27:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 50AF388496
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 12:51:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2e73359b8fbso41245191fa.2
- for <u-boot@lists.denx.de>; Thu, 23 May 2024 02:27:15 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5751237a79bso9114223a12.2
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 03:51:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1716456435; x=1717061235;
+ d=amarulasolutions.com; s=google; t=1716461505; x=1717066305;
  darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=F9WRkOnxyqKaEMc6jXlTD6ifS2asOMvR3L984Hxj99A=;
- b=BhxSh8H4QZlwoFXjN9uXcftA/KYF/mSeZruyC5HDEt8e5tAyWpE6rDaOsH7Zs4THAi
- fAuqxnuoNAFG4GO6D/rXP5TBwOwyCLC7rxCydTxUmg4j0aq50FDz7jt9lT2zNcdBB6AO
- adC75WiEZJEndvNKTHVJDg0gMyEiCSvpQ7GtrFUQ31iennH7FH9btNXSMyxfyEQ7wmPl
- Tpp6EviwNaVSxEhTZdvX1VoK+zQ0nX++BZS6LRUXqrNjYyiWt9aoSI/3NspjrteRS6yS
- p+RArjHZndXaFKZZ64knZG8exblgdfhhCPd33WoyMcE2exIH3Re2h6DEWhteDrONcVHE
- jioA==
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vXzkOjrMl0hojpjiGEGAwQco1/JHlXrKty+yGLUt8mo=;
+ b=Up3ubXgBH0chdeqcWwbYdi6tvTz5G3j+hkI9vjNSbR871BWptYE/Mq/FDtyrbmWyy1
+ M+phCC0UVz18h97oeNhdEMeCmEui5Cl+40L4Dgr+bmznTTOTy2fhGkOX+FGx0dpbJcnT
+ jz97rohGMrLdfF5WQSLPaQLu1UQFRAlewFH0E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716456435; x=1717061235;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=F9WRkOnxyqKaEMc6jXlTD6ifS2asOMvR3L984Hxj99A=;
- b=ZPdzKJ/g8Rr7/kFFa2qEX3lMJXU5L6Ex8PKWOYkHRc0KNEWrvpRCXOVEywckx1U9vr
- PySvW4Or2HCO7M+tiSRPrhAbz73AJxcO0VJ1RQoufs9sXRyLSPSLcHCN4bv+piRmy3fJ
- IOlI1aDhjSfe/5WJx09gg8eaqXv1ahsT5gO8VDHw75rtfxo/Ddl2LbFfDrNspfvzBLXs
- d2p0gb81CEF7TVbRNW0nECYi/sWBus/7/7dKj1b4tUIRnGrjjBNwYiI7RhkWc32J+osx
- 7yl3RJ9qVe5XpIupgo48c7tGhsK+PwPzipwf5INYvkm+E9XvXqHZiCff8qXjNjmD8jvx
- uAcA==
+ d=1e100.net; s=20230601; t=1716461505; x=1717066305;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vXzkOjrMl0hojpjiGEGAwQco1/JHlXrKty+yGLUt8mo=;
+ b=tIGES0DOlBhP6bGXKRNCQJwvMtv57gKRscy5y4t8GLojsHIIK2p/JMScKhyATsy8Jb
+ WL4cbXpDdWXoqwOSG2faemZZQXB1otI+QDJwdVaHOIUQ64HcD8ApUvY4YYQKlxOX02K1
+ xYyxD3MPu3u2J/Gi4Lgp1g7THV2q9zM3+T866C21lwhQnLDYi0hM3tfjTlQy6aMcS0Zd
+ +psPfJEc7Xk0YkieZDzHeD063gBIorCvlv0DcpCJ4rtPL3B89luZHcQ64zAzZ9I9Opc5
+ u2gJ973IfsHffIuNxl84rNR6c1aPfeUxaAmDOp2yEPDkJm6kIbhpGJVZnO96AJUqZbo2
+ KCOw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWgRQrk0FFmqlaqQ8wKelbia3dE4PNsk0OlOf0GblC8Y8TpFE0dXcPWRP2blkyOBPGwCsIO70eYSdmjBQFrT1YbwyFgOA==
-X-Gm-Message-State: AOJu0Yzz5ee1D/v+IIMg7DSEHJtkqCGsGXGrA6qG4GNl5YLn2+EE7PRN
- fqeMUdDZ046qIaS0Tsb+fytPIwhX2US7Q1JilOZHW6sqc8ftmWzGKd9Zhy8kLTA=
-X-Google-Smtp-Source: AGHT+IHxbxvb8c18UcqQeeoRx/pYasBO537A1yzWIxthSqFtb8DHHJGqfN2zdYYhcTudPgAhFHEFjA==
-X-Received: by 2002:a2e:9bc7:0:b0:2da:a73:4f29 with SMTP id
- 38308e7fff4ca-2e9494fa890mr40308781fa.30.1716456434949; 
- Thu, 23 May 2024 02:27:14 -0700 (PDT)
-Received: from mkorpershoek-xps13.local
- (lfbn-tou-1-402-59.w86-206.abo.wanadoo.fr. [86.206.229.59])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42100fb99e8sm19570375e9.43.2024.05.23.02.27.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 May 2024 02:27:14 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Date: Thu, 23 May 2024 11:27:09 +0200
-Subject: [PATCH] image: Set load_end on partial loads
+ AJvYcCWBt+eB2ALUA8EnNmBSdlzw6yXLlsEGrZsggKzEUmA4O31D/p6MgAxJ9obuMs3/0TIoivR+wckzPEZ84E27qNogJq6vTg==
+X-Gm-Message-State: AOJu0Yz0DvtKhST2s6Bjtrcl3/yMuU1Cidfppkcs+zhve1uFHz95QOmC
+ k7FDF2BmmKS3m7eswYmDklnDUaGvAPnsBtsKdc7+v2hmDVZR+PGTJgEop9/VLNmS59hrmxzFgAA
+ tJCzPyvtfQKmw9KeoxiCgb3lHEKwiXd6J/Kjr0A==
+X-Google-Smtp-Source: AGHT+IFeqXEvYHi8f1URd5GJJt6HAbJA5N6Io12oyrnXK9vz4Q8NUox0uttAf0YPraWrEXb3V7n1LXRmu3p/g0Um418=
+X-Received: by 2002:a17:906:b184:b0:a59:bacc:b082 with SMTP id
+ a640c23a62f3a-a62281cafabmr269276166b.60.1716461504617; Thu, 23 May 2024
+ 03:51:44 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240523-image-partial-decomp-v1-1-af036235963a@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAOwLT2YC/x2MQQqAIBAAvxJ7bsG0IvtKdFhyq4Uy0Ygg+nvSc
- QZmHkgchRP0xQORL0ly+AxVWcC0kl8YxWUGrXStGm1QdsoyUDyFNnQ8HXtA17aqZms7NgQ5DZF
- nuf/tML7vB8ti/ItmAAAA
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-X-Mailer: b4 0.14-dev-b6b73
+References: <20240325144148.3738195-1-avromanov@salutedevices.com>
+ <20240506135755.pgpttzekxd6g3css@cab-wsm-0029881>
+ <CAOf5uwmV8s-mcNM42nC664uW=+s0waiJsr911UfmxJ32XJgJAQ@mail.gmail.com>
+ <20240523104925.fwzfztgigojhjw6s@cab-wsm-0029881.sigma.sbrf.ru>
+In-Reply-To: <20240523104925.fwzfztgigojhjw6s@cab-wsm-0029881.sigma.sbrf.ru>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Thu, 23 May 2024 12:51:33 +0200
+Message-ID: <CAOf5uwkBq2yPyC982b6LJKoRk6B1+J8-ecj5xZbzyzFk-M7AeA@mail.gmail.com>
+Subject: Re: [PATCH v2 0/6] Introduce UBI block device
+To: Alexey Romanov <avromanov@salutedevices.com>
+Cc: "dario.binacchi@amarulasolutions.com"
+ <dario.binacchi@amarulasolutions.com>, 
+ "frieder.schrempf@kontron.de" <frieder.schrempf@kontron.de>,
+ "kmpark@infradead.org" <kmpark@infradead.org>, 
+ "hs@denx.de" <hs@denx.de>, "joe.hershberger@ni.com" <joe.hershberger@ni.com>,
+ "dunaev@tecon.ru" <dunaev@tecon.ru>, 
+ "sjg@chromium.org" <sjg@chromium.org>, "bmeng@tinylab.org" <bmeng@tinylab.org>,
+ "xypron.glpk@gmx.de" <xypron.glpk@gmx.de>,
+ "tobias@waldekranz.com" <tobias@waldekranz.com>, 
+ "jpewhacker@gmail.com" <jpewhacker@gmail.com>, 
+ "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>, 
+ "kever.yang@rock-chips.com" <kever.yang@rock-chips.com>,
+ "jbx6244@gmail.com" <jbx6244@gmail.com>, 
+ "abdellatif.elkhlifi@arm.com" <abdellatif.elkhlifi@arm.com>, 
+ "mikhail.kshevetskiy@iopsys.eu" <mikhail.kshevetskiy@iopsys.eu>, 
+ "jagan@amarulasolutions.com" <jagan@amarulasolutions.com>,
+ kernel <kernel@sberdevices.ru>, 
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,57 +107,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When decompressing, it's possible that the algorithm only performs
-a partial decompression.
-This usually happens when CONFIG_SYS_BOOTM_LEN is too small for
-the uncompressed image.
+Hi
 
-When that happens, image_decomp() returns an error and *load_end == load.
-The error is then handled by handle_decomp_error().
+We queue them this afternoon
 
-handle_decomp_error() expects the number of uncompressed bytes in
-uncomp_size but receives *load_end - load == load - load == 0.
+Michael
 
-Because of this, handle_decomp_error does not report the expected
-"Image too large: increase CONFIG_SYS_BOOTM_LEN" error message.
+On Thu, May 23, 2024 at 12:49=E2=80=AFPM Alexey Romanov
+<avromanov@salutedevices.com> wrote:
+>
+>
+> Hi Michael,
+>
+> On Mon, May 06, 2024 at 03:59:52PM +0200, Michael Nazzareno Trimarchi wro=
+te:
+> > Hi Alexey
+> >
+> > Sorry will will put on CI
+>
+> Any news?
+>
+> >
+> > Michael
+> >
+> > On Mon, May 6, 2024 at 3:58=E2=80=AFPM Alexey Romanov
+> > <avromanov@salutedevices.com> wrote:
+> > >
+> > > Hello! Ping.
+> > >
+> > > On Mon, Mar 25, 2024 at 05:41:42PM +0300, Alexey Romanov wrote:
+> > > > Hello!
+> > > >
+> > > > This series adds support for the UBI block device, which
+> > > > allows to read/write data block by block. For example,
+> > > > it can now be used for BCB or Android AB command:
+> > > >
+> > > >   $ bcb load ubi 0 part_name
+> > > >
+> > > > Tested only on SPI NAND, so bind is made only for
+> > > > SPI NAND drivers. Can be used with mtdblock device [1].
+> > > >
+> > > > ---
+> > > >
+> > > > Changes V1 -> V2 [2]:
+> > > >
+> > > >  - Rebased over mtdblock v2 patchset [3].
+> > > >  - Compile UBI partitions support only if CONFIG_BLK option
+> > > >    is enabled.
+> > > >
+> > > > - Links:
+> > > >
+> > > >   [1] https://lore.kernel.org/all/20240227100441.1811047-1-avromano=
+v@salutedevices.com/
+> > > >   [2] https://lore.kernel.org/all/20240306134906.1179285-1-avromano=
+v@salutedevices.com/
+> > > >   [3] https://lore.kernel.org/all/20240307130726.1582487-1-avromano=
+v@salutedevices.com/
+> > > >
+> > > > Alexey Romanov (6):
+> > > >   ubi: allow to read from volume with offset
+> > > >   ubi: allow to write to volume with offset
+> > > >   drivers: introduce UBI block abstraction
+> > > >   disk: don't try search for partition type if already set
+> > > >   disk: support UBI partitions
+> > > >   spinand: bind UBI block
+> > > >
+> > > >  cmd/ubi.c                   |  77 +++++++++++++++++++--
+> > > >  disk/part.c                 |   7 ++
+> > > >  drivers/block/blk-uclass.c  |   1 +
+> > > >  drivers/mtd/nand/spi/core.c |   8 ++-
+> > > >  drivers/mtd/ubi/Makefile    |   1 +
+> > > >  drivers/mtd/ubi/block.c     | 130 ++++++++++++++++++++++++++++++++=
+++++
+> > > >  drivers/mtd/ubi/part.c      |  99 +++++++++++++++++++++++++++
+> > > >  env/ubi.c                   |  16 ++---
+> > > >  include/part.h              |   2 +
+> > > >  include/ubi_uboot.h         |   8 ++-
+> > > >  10 files changed, 332 insertions(+), 17 deletions(-)
+> > > >  create mode 100644 drivers/mtd/ubi/block.c
+> > > >  create mode 100644 drivers/mtd/ubi/part.c
+> > > >
+> > > > --
+> > > > 2.34.1
+> > > >
+> > >
+> > > --
+> > > Thank you,
+> > > Alexey
+> >
+> >
+> >
+> > --
+> > Michael Nazzareno Trimarchi
+> > Co-Founder & Chief Executive Officer
+> > M. +39 347 913 2170
+> > michael@amarulasolutions.com
+> > __________________________________
+> >
+> > Amarula Solutions BV
+> > Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+> > T. +31 (0)85 111 9172
+> > info@amarulasolutions.com
+> > www.amarulasolutions.com
+>
+> --
+> Thank you,
+> Alexey
 
-Modify the image_decomp() logic to always report the decompressed size,
-even when a partial decompression happened.
 
-Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
----
-This has been tested on an AM62X SK EVM board with a big lz4 image and
-the default CONFIG_SYS_BOOTM_LEN of 0x800000.
 
-This has also been tested on sandbox using:
-=> ut compression
----
- boot/image.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
 
-diff --git a/boot/image.c b/boot/image.c
-index 073931cd7a3f..4f48e6eb563d 100644
---- a/boot/image.c
-+++ b/boot/image.c
-@@ -531,10 +531,10 @@ int image_decomp(int comp, ulong load, ulong image_start, int type,
- 		printf("Unimplemented compression type %d\n", comp);
- 		return ret;
- 	}
--	if (ret)
--		return ret;
- 
- 	*load_end = load + image_len;
-+	if (ret)
-+		return ret;
- 
- 	return 0;
- }
-
----
-base-commit: a7f0154c412859323396111dd0c09dbafbc153cb
-change-id: 20240523-image-partial-decomp-d6604e998e3a
-
-Best regards,
--- 
-Mattijs Korpershoek <mkorpershoek@baylibre.com>
-
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
