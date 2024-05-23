@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEEEBC25B75
-	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 06:33:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 046DDC25B75
+	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 06:40:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9CCE88311;
-	Thu, 23 May 2024 08:33:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 2572B882DB;
+	Thu, 23 May 2024 08:40:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="QCqciCVK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NON7H0oJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18D6988519; Thu, 23 May 2024 08:33:38 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D24118830C; Thu, 23 May 2024 08:40:44 +0200 (CEST)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B740881A9
- for <u-boot@lists.denx.de>; Thu, 23 May 2024 08:33:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 66B7788208
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 08:40:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44N6XTtd024759;
- Thu, 23 May 2024 01:33:29 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1716446009;
- bh=wc2ZHSLX1WBoB8B9NBwy/0IupjldUDHQsMURQWRVgWw=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=QCqciCVKhw8uGlv8VWh4dsY2tmqzGW+aT3Cz1K/wU0agJI8YZje+JYv9oaoLzYavJ
- 8TkM+z3FhuGWQ5Perjtb+2L0qGPdFlmmVRrlPtU/m34s4oZY2DsyRlB1rhRGHVpvAV
- zvSEpe3YBbIiDdGUMF4YkYDkQKQRv66i1XcIHvqI=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44N6XT4M130022
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 23 May 2024 01:33:29 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 23
- May 2024 01:33:29 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 23 May 2024 01:33:29 -0500
-Received: from [10.249.135.225] ([10.249.135.225])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44N6XOML032311;
- Thu, 23 May 2024 01:33:25 -0500
-Message-ID: <5cda289f-1d14-41f6-84e3-ff1d1034be13@ti.com>
-Date: Thu, 23 May 2024 12:03:23 +0530
+ spf=pass smtp.mailfrom=seashell11234455@gmail.com
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-244bdd730dcso2719880fac.0
+ for <u-boot@lists.denx.de>; Wed, 22 May 2024 23:40:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1716446440; x=1717051240; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Xe9SKWuJu7mNsggkfz7SvnD5i3UrY4tEQYKmE+YMwfw=;
+ b=NON7H0oJHmPP3ipV62xs1VBM0uRxtksxQ3VrfoUGKfxM00XHDIOAp4Un/4hQPaQKTM
+ EA+7vgQiOFt2gNXAc1xJxHlp8lh3GPN0r1s4LZ36XNBH7EOUrYSNBdwybuJK/dxmf3zI
+ Nd0woXSc+hUxnW5t8v0fmN1Imrzk1Katho1xyNAzz+rzxFkY4pdZ9W8Ob7Xra/IXuSap
+ 0o3RHJFx5jAYJm5MKx8gEoeP0UtAHHXS4SsqbAoct3hrmDCGxc/OpaXOCqZnWEs4wzkD
+ ky8RMSVG4FEN0Y1no/jjWZcIhwMP2RYVtA/q59904H9jce3L9k7IBELfI2c2ph4pJzlO
+ +W9Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716446440; x=1717051240;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Xe9SKWuJu7mNsggkfz7SvnD5i3UrY4tEQYKmE+YMwfw=;
+ b=eLLWMZQ4Tw3+4kDZCux6NsZ6TheRObWofS7h0abnXdEXB1Yq61XwlAEcroZgL9xEVR
+ +N8fIOfcNVYgEQMYAI5BnP9g94KjCl+MYKbb4QvMIjJV/GmN5zflD389LarGmpjfCs4b
+ pGYljbSXTFOzo/mqkjBCl/5MCfBnC9fa2s5NBgw3mG35XwqAkUQGcArW+ALuTzn8YVBZ
+ ZF7z028zFRba71bj3+I3smgDz53eB4J+wE+tr12ZexxHwwe5wVFF8+LzzvuAJ3OlZBPd
+ PqgcK/gOBh7q8vhznic/LZ5dy6sgFN3XFQBxBg6DSk4APVKvYHviZGUNnJ5IUEWGQt8f
+ N2dQ==
+X-Gm-Message-State: AOJu0YzAUZEtI2bPuMmIs2eA8tFiySgjTErVaAXa+mCuuMm8WGkMcLsp
+ 4rPeeZy9a2HDhghg4TO9dZWwtjFO2qxRXPT++oG3M+NzUoLBRiEvL9JxjYwntz0=
+X-Google-Smtp-Source: AGHT+IFs//YNjO3DBjclDKgn2sEELmlbnMDGLYzbtR0WsgOJBEsi4jwyiq9cfDQ2RwzhOYH22/lS8g==
+X-Received: by 2002:a05:6870:c194:b0:23c:8254:2e41 with SMTP id
+ 586e51a60fabf-24c6882224emr4291833fac.0.1716446439904; 
+ Wed, 22 May 2024 23:40:39 -0700 (PDT)
+Received: from localhost.localdomain ([117.135.90.188])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-6f4d2aa01dasm24048524b3a.92.2024.05.22.23.40.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 May 2024 23:40:39 -0700 (PDT)
+From: Kongyang Liu <seashell11234455@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Leo Yu-Chi Liang <ycliang@andestech.com>,
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH] doc: board: sophgo: milkv_duo: Update Milk-V Duo documentation
+Date: Thu, 23 May 2024 14:40:19 +0800
+Message-ID: <20240523064025.17602-1-seashell11234455@gmail.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] arm: dts: k3-am642-evm-u-boot: Add remoteproc-name
- for PRU cores
-To: Andrew Davis <afd@ti.com>, MD Danish Anwar <danishanwar@ti.com>, Judith
- Mendez <jm@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Nikhil M Jain
- <n-jain1@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Jonathan Humphreys
- <j-humphreys@ti.com>, Siddharth Vadapalli <s-vadapalli@ti.com>, Simon Glass
- <sjg@chromium.org>, Neha Malcom Francis <n-francis@ti.com>, Nishanth Menon
- <nm@ti.com>, Roger Quadros <rogerq@kernel.org>, Vignesh Raghavendra
- <vigneshr@ti.com>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <srk@ti.com>
-References: <20240522063652.3759497-1-danishanwar@ti.com>
- <20240522063652.3759497-2-danishanwar@ti.com>
- <cb53651f-a823-41b8-81e5-c3939bd33764@ti.com>
-Content-Language: en-US
-From: "Anwar, Md Danish" <a0501179@ti.com>
-In-Reply-To: <cb53651f-a823-41b8-81e5-c3939bd33764@ti.com>
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,116 +89,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andrew,
+Add detailed steps for compiling U-Boot and OpenSBI, generating the
+firmware package with fiptool, and booting the board.
 
-On 5/22/2024 9:38 PM, Andrew Davis wrote:
-> On 5/22/24 1:36 AM, MD Danish Anwar wrote:
->> Add remoteproc-name property for PRU cores.
->>
->> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
->> ---
->>   arch/arm/dts/k3-am642-evm-u-boot.dtsi | 44 +++++++++++++++++++++++++++
->>   1 file changed, 44 insertions(+)
->>
->> diff --git a/arch/arm/dts/k3-am642-evm-u-boot.dtsi
->> b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
->> index 705b3baa81..25ddace74e 100644
->> --- a/arch/arm/dts/k3-am642-evm-u-boot.dtsi
->> +++ b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
->> @@ -11,6 +11,50 @@
->>       };
->>   };
->>   +&pru0_0 {
->> +    remoteproc-name = "pru0_0";
-> 
-> Why do we need all these? Looks like we fallback to using `dev->name` if
-> these are not set, does that not work for us here?
-> 
+Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
+---
 
-Yes we will fallback to `dev->name` if `remoteproc-name` is not set but
-in our case two different PRU cores will have same `dev->name`. As a
-result the API rproc_name_is_unique() will return false and as a result
-the probe will fail for the PRU cores.
+ doc/board/sophgo/milkv_duo.rst | 41 +++++++++++++++++++++++++---------
+ 1 file changed, 30 insertions(+), 11 deletions(-)
 
-Example: In k3-am64-main.dtsi, both pru0_0 [1] and pru1_0 [2] will have
-dev->name as "pru@34000" same goes for rtu and txpru as well.
-
-		pru0_0: pru@34000 {
-			compatible = "ti,am642-pru";
-			reg = <0x34000 0x3000>,
-			      <0x22000 0x100>,
-			      <0x22400 0x100>;
-			reg-names = "iram", "control", "debug";
-			firmware-name = "am64x-pru0_0-fw";
-		};
-
-		pru1_0: pru@34000 {
-			compatible = "ti,am642-pru";
-			reg = <0x34000 0x4000>,
-			      <0x22000 0x100>,
-			      <0x22400 0x100>;
-			reg-names = "iram", "control", "debug";
-			firmware-name = "am64x-pru1_0-fw";
-		};
-
-To avoid this, we are setting the "remoteproc-name" property in
--u-boot.dtsi. Same is done for AM65x as well [3].
-
-[1]
-https://elixir.bootlin.com/u-boot/v2024.07-rc3/source/dts/upstream/src/arm64/ti/k3-am64-main.dtsi#L1276
-[2]
-https://elixir.bootlin.com/u-boot/v2024.07-rc3/source/dts/upstream/src/arm64/ti/k3-am64-main.dtsi#L1417
-[3]
-https://elixir.bootlin.com/u-boot/v2024.07-rc3/source/arch/arm/dts/k3-am654-base-board-u-boot.dtsi#L168
-
-> Andrew
-> 
->> +};
->> +
->> +&rtu0_0 {
->> +    remoteproc-name = "rtu0_0";
->> +};
->> +
->> +&tx_pru0_0 {
->> +    remoteproc-name = "tx_pru0_0";
->> +};
->> +
->> +&pru0_1 {
->> +    remoteproc-name = "pru0_1";
->> +};
->> +
->> +&rtu0_1 {
->> +    remoteproc-name = "rtu0_1";
->> +};
->> +
->> +&tx_pru0_1 {
->> +    remoteproc-name = "tx_pru0_1";
->> +};
->> +
->> +&pru1_0 {
->> +    remoteproc-name = "pru1_0";
->> +};
->> +
->> +&rtu1_0 {
->> +    remoteproc-name = "rtu1_0";
->> +};
->> +
->> +&tx_pru1_0 {
->> +    remoteproc-name = "tx_pru1_0";
->> +};
->> +
->> +&pru1_1 {
->> +    remoteproc-name = "pru1_1";
->> +};
->> +
->> +&rtu1_1 {
->> +    remoteproc-name = "rtu1_1";
->> +};
->> +
->>   &main_timer0 {
->>       clock-frequency = <200000000>;
->>   };
-
+diff --git a/doc/board/sophgo/milkv_duo.rst b/doc/board/sophgo/milkv_duo.rst
+index cb2ed1ad98..a88db5b903 100644
+--- a/doc/board/sophgo/milkv_duo.rst
++++ b/doc/board/sophgo/milkv_duo.rst
+@@ -20,31 +20,50 @@ Building
+ .. code-block:: console
+ 
+    export CROSS_COMPILE=<riscv64 toolchain prefix>
++
++3. Compile U-Boot
++
++.. code-block:: console
++
+    cd <U-Boot-dir>
+    make milkv_duo_defconfig
+    make
+ 
+-This will generate u-boot-dtb.bin
++This will generate u-boot.bin and u-boot.dtb
+ 
+-Booting
+-~~~~~~~
+-Currently, we rely on vendor FSBL(First Stage Boot Loader) to initialize the
+-clock and load the u-boot image, then bootup from it.
++4. Compile OpenSBI
++
++.. code-block:: console
+ 
+-Alternatively, to run u-boot-dtb.bin on top of FSBL, follow these steps:
++   cd <OpenSBI-dir>
++   make PLATFORM=generic FW_FDT_PATH=<Your U-Boot Path>/u-boot.dtb
+ 
+-1. Use the vendor-provided tool to create a unified fip.bin file containing
+-   FSBL, OpenSBI, and U-Boot.
++This will generate fw_dynamic.bin
+ 
+-2. Place the generated fip.bin file into the FAT partition of the SD card.
++4. Generate firmware image package
+ 
+-3. Insert the SD card into the board and power it on.
++Fiptool(https://github.com/sophgo/fiptool) is used to generate fip file.
++
++.. code-block:: console
++
++   git clone https://github.com/sophgo/fiptool
++   cd fiptool
++   ./fiptool \
++      --fsbl data/fsbl/cv180x.bin \
++      --opensbi <OpenSBI-dir>/fw_dynamic.bin \
++      --uboot <U-Boot-dir>/u-boot.bin \
++
++This will generate fip.bin
++
++Booting
++~~~~~~~
++1. Place the generated fip.bin file into the FAT partition of the SD card.
++2. Insert the SD card into the board and power it on.
+ 
+ The board will automatically execute the FSBL from the fip.bin file.
+ Subsequently, it will transition to OpenSBI, and finally, OpenSBI will invoke
+ U-Boot.
+ 
+-
+ Sample boot log from Milk-V Duo board
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ .. code-block:: none
 -- 
-Thanks and Regards,
-Md Danish Anwar
+2.41.0
+
