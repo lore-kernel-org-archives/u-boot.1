@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2205CC25B75
-	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 17:00:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90B87C25B75
+	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 17:00:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73E9788600;
-	Thu, 23 May 2024 18:59:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D24FB880DE;
+	Thu, 23 May 2024 18:59:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA659885E2; Thu, 23 May 2024 18:59:49 +0200 (CEST)
-Received: from smtp-bc0b.mail.infomaniak.ch (smtp-bc0b.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::bc0b])
+ id F3B8087ABC; Thu, 23 May 2024 18:59:51 +0200 (CEST)
+Received: from smtp-42a8.mail.infomaniak.ch (smtp-42a8.mail.infomaniak.ch
+ [84.16.66.168])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5DB1880DE
- for <u-boot@lists.denx.de>; Thu, 23 May 2024 18:59:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0BA59880DE
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 18:59:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
  [10.4.36.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4VlZCl4Bbcz7m7;
- Thu, 23 May 2024 18:59:47 +0200 (CEST)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4VlZCn5Fqpzrd8;
+ Thu, 23 May 2024 18:59:49 +0200 (CEST)
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4VlZCk67y4z9Lf; Thu, 23 May 2024 18:59:46 +0200 (CEST)
+ id 4VlZCn075bz8Qy; Thu, 23 May 2024 18:59:48 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Thu, 23 May 2024 18:59:34 +0200
-Subject: [PATCH v2 1/3] rockchip: px30: default TPL_SYS_MALLOC_F_LEN to
- 0x600 on PX30 Kconfig level
+Date: Thu, 23 May 2024 18:59:36 +0200
+Subject: [PATCH v2 3/3] rockchip: ringneck_px30: Use common bss and stack
+ addresses
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240523-px30-2024-07-rc-v2-1-e46782d5520c@cherry.de>
+Message-Id: <20240523-px30-2024-07-rc-v2-3-e46782d5520c@cherry.de>
 References: <20240523-px30-2024-07-rc-v2-0-e46782d5520c@cherry.de>
 In-Reply-To: <20240523-px30-2024-07-rc-v2-0-e46782d5520c@cherry.de>
 To: Simon Glass <sjg@chromium.org>, 
@@ -69,124 +69,68 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-This is the kind of setting that typically doesn't need to be changed
-between boards based on the same SoC, so let's make it the default in
-PX30 Kconfig so we don't have to care about it in the defconfig if we
-don't want to.
+U-Boot proper pre-reloc is currently running out of memory and it is
+thus impossible to boot into U-Boot CLI.
 
-Reviewed-by: Heiko Stuebner <heiko@sntech.de>
+Fix this by migrating to the common bss and stack addresses for PX30,
+which drastically increases the size of the pre-reloc allocation pool (8
+times bigger now). The memory layout in SPL and U-Boot proper now
+match the other SoCs' using ROCKCHIP_COMMON_STACK_ADDR.
+
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Tested-by: Heiko Stuebner <heiko@sntech.de>
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- arch/arm/mach-rockchip/px30/Kconfig           | 3 +++
- configs/evb-px30_defconfig                    | 1 -
- configs/firefly-px30_defconfig                | 1 -
- configs/odroid-go2_defconfig                  | 1 -
- configs/px30-core-ctouch2-of10-px30_defconfig | 1 -
- configs/px30-core-ctouch2-px30_defconfig      | 1 -
- configs/px30-core-edimm2.2-px30_defconfig     | 1 -
- configs/ringneck-px30_defconfig               | 1 -
- 8 files changed, 3 insertions(+), 7 deletions(-)
+ configs/ringneck-px30_defconfig | 18 +++---------------
+ 1 file changed, 3 insertions(+), 15 deletions(-)
 
-diff --git a/arch/arm/mach-rockchip/px30/Kconfig b/arch/arm/mach-rockchip/px30/Kconfig
-index 23f8f430c4a..e39472604c3 100644
---- a/arch/arm/mach-rockchip/px30/Kconfig
-+++ b/arch/arm/mach-rockchip/px30/Kconfig
-@@ -83,6 +83,9 @@ config TPL_TEXT_BASE
- config TPL_STACK
- 	default 0xff0e4fff
- 
-+config TPL_SYS_MALLOC_F_LEN
-+	default 0x600
-+
- config DEBUG_UART_CHANNEL
- 	int "Mux channel to use for debug UART2/UART3"
- 	depends on DEBUG_UART_BOARD_INIT
-diff --git a/configs/evb-px30_defconfig b/configs/evb-px30_defconfig
-index 07c56a45ec0..73a3c6120e0 100644
---- a/configs/evb-px30_defconfig
-+++ b/configs/evb-px30_defconfig
-@@ -16,7 +16,6 @@ CONFIG_ROCKCHIP_PX30=y
- CONFIG_TARGET_EVB_PX30=y
- CONFIG_TPL_LIBGENERIC_SUPPORT=y
- CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_TPL_SYS_MALLOC_F_LEN=0x600
- CONFIG_SPL_STACK_R_ADDR=0x600000
- CONFIG_SPL_STACK=0x400000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/firefly-px30_defconfig b/configs/firefly-px30_defconfig
-index e5377dcdf3d..0a14b393667 100644
---- a/configs/firefly-px30_defconfig
-+++ b/configs/firefly-px30_defconfig
-@@ -17,7 +17,6 @@ CONFIG_TARGET_EVB_PX30=y
- CONFIG_DEBUG_UART_CHANNEL=1
- CONFIG_TPL_LIBGENERIC_SUPPORT=y
- CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_TPL_SYS_MALLOC_F_LEN=0x600
- CONFIG_SPL_STACK_R_ADDR=0x600000
- CONFIG_SPL_STACK=0x400000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/odroid-go2_defconfig b/configs/odroid-go2_defconfig
-index 99d7149a44c..3c1abb83ed9 100644
---- a/configs/odroid-go2_defconfig
-+++ b/configs/odroid-go2_defconfig
-@@ -19,7 +19,6 @@ CONFIG_TARGET_ODROID_GO2=y
- CONFIG_DEBUG_UART_CHANNEL=1
- CONFIG_TPL_LIBGENERIC_SUPPORT=y
- CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_TPL_SYS_MALLOC_F_LEN=0x600
- CONFIG_SPL_STACK_R_ADDR=0x600000
- CONFIG_SPL_STACK=0x400000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/px30-core-ctouch2-of10-px30_defconfig b/configs/px30-core-ctouch2-of10-px30_defconfig
-index a2801ec7796..87a39e115df 100644
---- a/configs/px30-core-ctouch2-of10-px30_defconfig
-+++ b/configs/px30-core-ctouch2-of10-px30_defconfig
-@@ -17,7 +17,6 @@ CONFIG_TARGET_PX30_CORE=y
- CONFIG_DEBUG_UART_CHANNEL=1
- CONFIG_TPL_LIBGENERIC_SUPPORT=y
- CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_TPL_SYS_MALLOC_F_LEN=0x600
- CONFIG_SPL_STACK_R_ADDR=0x600000
- CONFIG_SPL_STACK=0x400000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/px30-core-ctouch2-px30_defconfig b/configs/px30-core-ctouch2-px30_defconfig
-index cc33e275742..7162c117beb 100644
---- a/configs/px30-core-ctouch2-px30_defconfig
-+++ b/configs/px30-core-ctouch2-px30_defconfig
-@@ -17,7 +17,6 @@ CONFIG_TARGET_PX30_CORE=y
- CONFIG_DEBUG_UART_CHANNEL=1
- CONFIG_TPL_LIBGENERIC_SUPPORT=y
- CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_TPL_SYS_MALLOC_F_LEN=0x600
- CONFIG_SPL_STACK_R_ADDR=0x600000
- CONFIG_SPL_STACK=0x400000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/px30-core-edimm2.2-px30_defconfig b/configs/px30-core-edimm2.2-px30_defconfig
-index 99e1b2fc7ae..1182f60358f 100644
---- a/configs/px30-core-edimm2.2-px30_defconfig
-+++ b/configs/px30-core-edimm2.2-px30_defconfig
-@@ -17,7 +17,6 @@ CONFIG_TARGET_PX30_CORE=y
- CONFIG_DEBUG_UART_CHANNEL=1
- CONFIG_TPL_LIBGENERIC_SUPPORT=y
- CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_TPL_SYS_MALLOC_F_LEN=0x600
- CONFIG_SPL_STACK_R_ADDR=0x600000
- CONFIG_SPL_STACK=0x400000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
 diff --git a/configs/ringneck-px30_defconfig b/configs/ringneck-px30_defconfig
-index 67a44eda684..0df1b8a59ac 100644
+index 0df1b8a59ac..94179dca3ae 100644
 --- a/configs/ringneck-px30_defconfig
 +++ b/configs/ringneck-px30_defconfig
-@@ -17,7 +17,6 @@ CONFIG_ROCKCHIP_PX30=y
+@@ -2,27 +2,15 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
+ CONFIG_COUNTER_FREQUENCY=24000000
+ CONFIG_ARCH_ROCKCHIP=y
+-CONFIG_TEXT_BASE=0x00200000
+-CONFIG_SYS_MALLOC_F_LEN=0x2000
+ CONFIG_SPL_GPIO=y
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+ CONFIG_NR_DRAM_BANKS=2
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x400000
+ CONFIG_DEFAULT_DEVICE_TREE="px30-ringneck-haikou"
+-CONFIG_SPL_TEXT_BASE=0x00000000
+ CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_PX30=y
++# CONFIG_TPL_ROCKCHIP_COMMON_BOARD is not set
  CONFIG_TARGET_RINGNECK_PX30=y
- CONFIG_TPL_LIBGENERIC_SUPPORT=y
+-CONFIG_TPL_LIBGENERIC_SUPPORT=y
++# CONFIG_TPL_LIBCOMMON_SUPPORT is not set
  CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_TPL_SYS_MALLOC_F_LEN=0x600
- CONFIG_SPL_STACK_R_ADDR=0x600000
- CONFIG_SPL_STACK=0x400000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_STACK_R_ADDR=0x600000
+-CONFIG_SPL_STACK=0x400000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x4000000
+-CONFIG_SPL_BSS_MAX_SIZE=0x4000
+-CONFIG_SPL_STACK_R=y
+ CONFIG_DEBUG_UART_BASE=0xFF030000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_SYS_LOAD_ADDR=0x800800
+@@ -41,11 +29,11 @@ CONFIG_SPL_PAD_TO=0x0
+ CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_BOOTROM_SUPPORT=y
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+ CONFIG_SPL_SYS_MALLOC=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x200
+ CONFIG_SPL_ATF=y
+ # CONFIG_TPL_FRAMEWORK is not set
++# CONFIG_TPL_SYS_MALLOC_SIMPLE is not set
+ # CONFIG_CMD_BOOTD is not set
+ # CONFIG_CMD_ELF is not set
+ # CONFIG_CMD_IMI is not set
 
 -- 
 2.45.1
