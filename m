@@ -4,93 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA95BC25B75
-	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 07:40:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 949E0C25B75
+	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 09:27:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DFA5881C3;
-	Thu, 23 May 2024 09:40:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7AD6F884FF;
+	Thu, 23 May 2024 11:27:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="I8RpJ3iB";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="BhxSh8H4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D84A881C3; Thu, 23 May 2024 09:40:36 +0200 (CEST)
-Received: from mail-ua1-x92f.google.com (mail-ua1-x92f.google.com
- [IPv6:2607:f8b0:4864:20::92f])
+ id C5E8D88516; Thu, 23 May 2024 11:27:17 +0200 (CEST)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0AB3D88263
- for <u-boot@lists.denx.de>; Thu, 23 May 2024 09:40:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B4AE8884FE
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 11:27:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x92f.google.com with SMTP id
- a1e0cc1a2514c-8032187ea09so354933241.3
- for <u-boot@lists.denx.de>; Thu, 23 May 2024 00:40:33 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2e73359b8fbso41245191fa.2
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 02:27:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716450033; x=1717054833; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=iwZcsELBlCO5DXVXwAU+THj+aAobxissCS0tGjemweE=;
- b=I8RpJ3iBq+RLjaiOPvkc5iTkqPsJmM/mbc3oRDOVAX+O7Klxbrl4L4cJm9ZJvcVT9m
- 3CiibauZBDltDN9JgaTpLCaep42V6VYdSARdpgaLhofeYubfeyVwMzYEA8yILjlhkCl9
- 0U++quuifFLXDg5mkRfQ65KD0lgX+V8CJdNq+KexIEnZt7VmXtX8l7+dpjogSy77Vq7t
- sfAYoX5wTwnuLqJUexzCY4/uUogE5+R1Lx0SndpI3Uumh5zVdhH9o3HbgPHg3NzJsBYb
- cT0qPic7c3vbO9L2hd75IJma7YIumDljnK1a4xOdFSjkvqVlNKcxVLsnCJPVnhj+xrFL
- mtYQ==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1716456435; x=1717061235;
+ darn=lists.denx.de; 
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=F9WRkOnxyqKaEMc6jXlTD6ifS2asOMvR3L984Hxj99A=;
+ b=BhxSh8H4QZlwoFXjN9uXcftA/KYF/mSeZruyC5HDEt8e5tAyWpE6rDaOsH7Zs4THAi
+ fAuqxnuoNAFG4GO6D/rXP5TBwOwyCLC7rxCydTxUmg4j0aq50FDz7jt9lT2zNcdBB6AO
+ adC75WiEZJEndvNKTHVJDg0gMyEiCSvpQ7GtrFUQ31iennH7FH9btNXSMyxfyEQ7wmPl
+ Tpp6EviwNaVSxEhTZdvX1VoK+zQ0nX++BZS6LRUXqrNjYyiWt9aoSI/3NspjrteRS6yS
+ p+RArjHZndXaFKZZ64knZG8exblgdfhhCPd33WoyMcE2exIH3Re2h6DEWhteDrONcVHE
+ jioA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716450033; x=1717054833;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1716456435; x=1717061235;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=iwZcsELBlCO5DXVXwAU+THj+aAobxissCS0tGjemweE=;
- b=ChXY/l/5ZK9wgt/ijzrKJXFUdoJJ33Z/fwV33NFOyNhaeWvQr0Z8OV84vyTl50XZpb
- gEBlQoDZSQKAs2HyxiVuxK5SJP8zz4IxTA85a+qUaSSiuXglCa89lQl90txrUU1MkcWY
- 7651BHvhN//pc1o+hXJ9naEyFaR5ISflrSdqT16REwAA51Tu6fwsaHDS3xdAiQJ2CKFu
- PolFljaQOJtlU68n4v7UYUfN7Eaex3lI135S6PnauANzzzWpPO+PY+HvUevhiqtiHPEA
- GkzGHUhdMyuL3UfJEXGPhLMBKvI7CBzclNXwEheOAPQ0wVZqUijHuxkvuqsyqnZw8bdJ
- 5TnA==
+ bh=F9WRkOnxyqKaEMc6jXlTD6ifS2asOMvR3L984Hxj99A=;
+ b=ZPdzKJ/g8Rr7/kFFa2qEX3lMJXU5L6Ex8PKWOYkHRc0KNEWrvpRCXOVEywckx1U9vr
+ PySvW4Or2HCO7M+tiSRPrhAbz73AJxcO0VJ1RQoufs9sXRyLSPSLcHCN4bv+piRmy3fJ
+ IOlI1aDhjSfe/5WJx09gg8eaqXv1ahsT5gO8VDHw75rtfxo/Ddl2LbFfDrNspfvzBLXs
+ d2p0gb81CEF7TVbRNW0nECYi/sWBus/7/7dKj1b4tUIRnGrjjBNwYiI7RhkWc32J+osx
+ 7yl3RJ9qVe5XpIupgo48c7tGhsK+PwPzipwf5INYvkm+E9XvXqHZiCff8qXjNjmD8jvx
+ uAcA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVsKSzH63SsghxodLnwNRwNF0xuW4/NbcBVtyIYIq3Qm1ZX2Ug6F+FjLZWIqoriYJ8zrR7yq8XbEWUwN+xypIHtbGurZQ==
-X-Gm-Message-State: AOJu0Yx3tnGaKCo8r+mU1xe5Lkn3AuwSB5+iWv/NrAROBWDcfa8inImX
- Vz5ZcXpOSB+6XHK2bcrNxLf0M9pL+qbBr/WLSWeNXbyQ209Px1NHfvLbswD6Z7TtNMt8cIEiADj
- oO9JJfPo1idPeQnhbNeQrhWJqT5kmtZKmwM7mkA==
-X-Google-Smtp-Source: AGHT+IEO9yaWQnHf3rTunB5FM73ogTDZONo5Vd2wGZNYLjIPUDo14HPNq1ex1pS3OYREwWRVJ1yS9++8Oo1270GjQhY=
-X-Received: by 2002:a05:6102:370a:b0:485:eaef:a2b7 with SMTP id
- ada2fe7eead31-4890a002339mr4455075137.8.1716450032846; Thu, 23 May 2024
- 00:40:32 -0700 (PDT)
+ AJvYcCWgRQrk0FFmqlaqQ8wKelbia3dE4PNsk0OlOf0GblC8Y8TpFE0dXcPWRP2blkyOBPGwCsIO70eYSdmjBQFrT1YbwyFgOA==
+X-Gm-Message-State: AOJu0Yzz5ee1D/v+IIMg7DSEHJtkqCGsGXGrA6qG4GNl5YLn2+EE7PRN
+ fqeMUdDZ046qIaS0Tsb+fytPIwhX2US7Q1JilOZHW6sqc8ftmWzGKd9Zhy8kLTA=
+X-Google-Smtp-Source: AGHT+IHxbxvb8c18UcqQeeoRx/pYasBO537A1yzWIxthSqFtb8DHHJGqfN2zdYYhcTudPgAhFHEFjA==
+X-Received: by 2002:a2e:9bc7:0:b0:2da:a73:4f29 with SMTP id
+ 38308e7fff4ca-2e9494fa890mr40308781fa.30.1716456434949; 
+ Thu, 23 May 2024 02:27:14 -0700 (PDT)
+Received: from mkorpershoek-xps13.local
+ (lfbn-tou-1-402-59.w86-206.abo.wanadoo.fr. [86.206.229.59])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42100fb99e8sm19570375e9.43.2024.05.23.02.27.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 23 May 2024 02:27:14 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Date: Thu, 23 May 2024 11:27:09 +0200
+Subject: [PATCH] image: Set load_end on partial loads
 MIME-Version: 1.0
-References: <20240522165801.1871915-1-liujianfeng1994@gmail.com>
- <7e603c4d-bf76-4b38-894c-30d2cf128217@cherry.de>
-In-Reply-To: <7e603c4d-bf76-4b38-894c-30d2cf128217@cherry.de>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Thu, 23 May 2024 13:10:21 +0530
-Message-ID: <CAFA6WYNZh4BH6y_h_BkkVgHi3rNvsWd++mC2BDwqOF-NB8eHtQ@mail.gmail.com>
-Subject: Re: [PATCH v2] board: rockchip: add ArmSoM Sige7 Rk3588 board
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Jianfeng Liu <liujianfeng1994@gmail.com>, u-boot@lists.denx.de, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Christopher Obbard <chris.obbard@collabora.com>,
- Elon Zhang <zhangzj@rock-chips.com>, 
- Eugen Hristev <eugen.hristev@collabora.com>, Jagan Teki <jagan@edgeble.ai>, 
- John Clark <inindev@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Joshua Riek <jjriek@verizon.net>, Kever Yang <kever.yang@rock-chips.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Massimo Pegorer <massimo.pegorer+oss@gmail.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michal Simek <michal.simek@amd.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Nicolas Frattaroli <frattaroli.nicolas@gmail.com>, 
- Philipp Tomsich <philipp.tomsich@theobroma-systems.com>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Sam Edwards <cfsworks@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Tianling Shen <cnsztl@gmail.com>,
- Tom Rini <trini@konsulko.com>, Weizhao Ouyang <weizhao.ouyang@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20240523-image-partial-decomp-v1-1-af036235963a@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAOwLT2YC/x2MQQqAIBAAvxJ7bsG0IvtKdFhyq4Uy0Ygg+nvSc
+ QZmHkgchRP0xQORL0ly+AxVWcC0kl8YxWUGrXStGm1QdsoyUDyFNnQ8HXtA17aqZms7NgQ5DZF
+ nuf/tML7vB8ti/ItmAAAA
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+X-Mailer: b4 0.14-dev-b6b73
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,63 +97,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 22 May 2024 at 23:33, Quentin Schulz <quentin.schulz@cherry.de> wrote:
->
-> Hi Jianfeng Liu,
->
-> On 5/22/24 6:58 PM, Jianfeng Liu wrote:
-> [...]
-> > Note that these commits:
-> > - e18e5e8188f2 (arm64: dts: rockchip: add USBDP phys on rk3588)
-> > - 6fca4edb93d3 (arm64: dts: rockchip: Add rk3588 GPU node)
-> > are not synced to u-boot, so I remove usb3 drd nodes and gpu from kernel
-> > devicetree.
-> [...]> diff --git
-> a/dts/upstream/src/arm64/rockchip/rk3588-armsom-sige7.dts
-> b/dts/upstream/src/arm64/rockchip/rk3588-armsom-sige7.dts
-> > new file mode 100644
-> > index 0000000000..c7b46536ec
-> > --- /dev/null
-> > +++ b/dts/upstream/src/arm64/rockchip/rk3588-armsom-sige7.dts
->
-> Sorry, I failed to explain properly what was expected.
->
-> dts/upstream should never be touched except with
-> dts/update-dts-subtree.sh script.
->
-> Sadly, your board is not supported in v6.9 yet, only in the upcoming
-> v6.10 :/
->
-> So we have two options, we keep the dts in arch/arm/dts/ like you used
-> to do, until we merge v6.10 dts in U-Boot (probably for v2024.10?), or
-> we cherry-pick the changes for your board with dts/update-dts-subtree.sh
-> script, see the instructions in the docs Tom has started writing:
-> https://lore.kernel.org/u-boot/20240517174930.1028063-2-trini@konsulko.com/.
-> I would very much like to see someone starting to look into the second
-> option :)
->
-> However... it seems we'll likely need to also cherry-pick patches for
-> the GPU (should probably be straightforward as nothing would be using
-> the GPU anyway in U-Boot) and the USBDP PHY... but this one we would
-> need to update all -u-boot.dtsi for rk3588(s) boards that have it
-> already to make it use the new label/DT, make sure that the driver still
-> works... etc. Maybe not a small feat, but someone will have to do it at
-> some point anyway :)
->
-> You'd be the first one to do this cherry-picking into dts/upstream, so
-> it'd be really interesting to us if you could provide feedback on what
-> is unclear/not working, etc... so we can update the documentation or fix
-> tools if they were to be insufficient.
+When decompressing, it's possible that the algorithm only performs
+a partial decompression.
+This usually happens when CONFIG_SYS_BOOTM_LEN is too small for
+the uncompressed image.
 
-+1
+When that happens, image_decomp() returns an error and *load_end == load.
+The error is then handled by handle_decomp_error().
 
-Although it is very much similar to normal cherry-picking patches, the
-dts/update-dts-subtree.sh script is just there to hide the git subtree
-specific details.
+handle_decomp_error() expects the number of uncompressed bytes in
+uncomp_size but receives *load_end - load == load - load == 0.
 
--Sumit
+Because of this, handle_decomp_error does not report the expected
+"Image too large: increase CONFIG_SYS_BOOTM_LEN" error message.
 
->
-> Looking forward to your next patch,
-> Cheers,
-> Quentin
+Modify the image_decomp() logic to always report the decompressed size,
+even when a partial decompression happened.
+
+Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+---
+This has been tested on an AM62X SK EVM board with a big lz4 image and
+the default CONFIG_SYS_BOOTM_LEN of 0x800000.
+
+This has also been tested on sandbox using:
+=> ut compression
+---
+ boot/image.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/boot/image.c b/boot/image.c
+index 073931cd7a3f..4f48e6eb563d 100644
+--- a/boot/image.c
++++ b/boot/image.c
+@@ -531,10 +531,10 @@ int image_decomp(int comp, ulong load, ulong image_start, int type,
+ 		printf("Unimplemented compression type %d\n", comp);
+ 		return ret;
+ 	}
+-	if (ret)
+-		return ret;
+ 
+ 	*load_end = load + image_len;
++	if (ret)
++		return ret;
+ 
+ 	return 0;
+ }
+
+---
+base-commit: a7f0154c412859323396111dd0c09dbafbc153cb
+change-id: 20240523-image-partial-decomp-d6604e998e3a
+
+Best regards,
+-- 
+Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
