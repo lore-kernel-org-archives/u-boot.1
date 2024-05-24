@@ -4,80 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6EC9C25B7A
-	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 16:23:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 990AFC25B74
+	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 16:25:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80987888BB;
-	Fri, 24 May 2024 18:22:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 29CFC88647;
+	Fri, 24 May 2024 18:25:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="acJg/H8m";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="L9ie0/z2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06C0788552; Fri, 24 May 2024 18:22:33 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id 41DF38866B; Fri, 24 May 2024 18:25:51 +0200 (CEST)
+Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
+ [IPv6:2607:f8b0:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADADB888CF
- for <u-boot@lists.denx.de>; Fri, 24 May 2024 18:22:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 258A888640
+ for <u-boot@lists.denx.de>; Fri, 24 May 2024 18:25:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-351da5838fcso7124669f8f.1
- for <u-boot@lists.denx.de>; Fri, 24 May 2024 09:22:27 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-64ecc2f111dso460678a12.2
+ for <u-boot@lists.denx.de>; Fri, 24 May 2024 09:25:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716567747; x=1717172547; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=g5LQ34e0u0fQ4V1UZEMkRab/H5C2HjlEu6IA+JOTL3U=;
- b=acJg/H8mamvnwALPzhpVB/UHqYU6CX99xFuMZjFWDU7WN0ca7g3plMTIvOO9gFmSlI
- H54bSToNse2E81UsRLQltL8F+1I9nEYuVGMb83HK//u5jHu8kqinu9GIUL9sRZaLq2QS
- IUiBC6kZrBx5LGHG3njZFSCo+Innh+zfh1hD9IYAv/Ce8DZO/M2+Q5L2d+ahVjwKIDiM
- aOrIbPak02WmaG1D8roZjMmb/m89zYSoKTvvodwnau55AFVPNjY+0N6HUvoPdrtTTwFw
- p3fI+RbsZ9p2vH1LCVzGUp1b23SoOauTsubgx/CW7GtFIXl6UGqKndJf6cDO/OTz2xor
- JPhA==
+ d=gmail.com; s=20230601; t=1716567946; x=1717172746; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=bOAQ/nofC37E29elLvdSe/cxZKvf2fTsmrLAPfHtBE0=;
+ b=L9ie0/z2nyXgtvhQ6k4Dz+7XepCIhC9MAg59ZS5yilFD7FjbFQZ/N7+6WV98sgMM9M
+ 1oV2L/YlNne4A72YJg37vTgFmZCtNiyQpS6BRjmDCKdFsgjV+wW4dnoHeg5poUXlPnLK
+ tkqxnMeo5kZ5J4kwz9W2nzfpXQjWw9CoKnsaTxCleP4D2if4mK8d7/UlUJ33i+sqsvVj
+ bHfhuhluhL0YuE1+lJN/n1toflvOhw5qSAQ4pY38Hku9eVWIc86QeLfYXJ8OrQlxTs+q
+ xLMs6sCSe9NzcRcbvKWe7reu813g4ah4tAdElWTlYo1wOOBYWJZKDbleqGkgSvGf3C7o
+ HPiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716567747; x=1717172547;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=g5LQ34e0u0fQ4V1UZEMkRab/H5C2HjlEu6IA+JOTL3U=;
- b=vNOZO1QgMqYWHlc/J4R9V57W5jzuscY7W4lJ5ggMuxlB3mjvyL3lIHmlSc2+r+NdkU
- LnrWaXCzJkGm/6R365nc4mh3bQgb/ej+VwRs+YcpK3C1hl7eziTkmHrDGjYjRbE/YCWj
- OFDbrc7lxiS/M6vtLe76do/PmlCjQDR5t2Iei7apno3RdxsSJbof4WhyuaRy1neageOE
- mo4FIpIZNEixdDWFnRWWwTINAZp+Iy/AeTh8XEC/w3DQCS7Tnx4d7/b45Hq3TL1C7/E+
- U0uUrrkympVT891HDMdDdmurNgixSBWFbcF+yJchw4VmTlU+Uz3j7ZVZCh9x35hLuht1
- RQ/g==
-X-Gm-Message-State: AOJu0YxQIhoG9MwpDh/OSK+bHzCggHSZotPdepSk8l3yc7g3u3kIEcxf
- 8rTbWtD9YapDxeAYuY/afEJiuA6B4TBkJqKCPg9WNUD1xLnMgrQYvwGGiRvJPJGGT6uFz0GtBbC
- RtrLp430z
-X-Google-Smtp-Source: AGHT+IHHxFawf3JHDXOQcnUvNDv8V4ApHm3jj4F2vEsfaHc88DzQJuGUSt0O2vPiqfBHbhT15dq9KQ==
-X-Received: by 2002:adf:f38f:0:b0:352:9e0c:f9d3 with SMTP id
- ffacd0b85a97d-3552219d081mr1789472f8f.31.1716567747100; 
- Fri, 24 May 2024 09:22:27 -0700 (PDT)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:80fe:af01:c137:b43b])
+ d=1e100.net; s=20230601; t=1716567946; x=1717172746;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bOAQ/nofC37E29elLvdSe/cxZKvf2fTsmrLAPfHtBE0=;
+ b=mytVQ1Cm2f+R2s0bDkEUWRf3gqzaYYR8waj/+iGmdOhfB/VfIrTZ2AW5cTPZ9/l0ty
+ AY1lIYXb1DlFAqeql2NPzt7dRPcHVu4oUEbStPebyJ5f+gy/O/g9ZcF9pqZamDEy2IYZ
+ G6EUSnIkqtgJdetGH9k8Lk0zXe9ax9Z5dHCwcM8wQ5mNQ0uZNrtSEHvb4jpMIxsMtAIQ
+ CBjK8ExxctOeLEC6clGjfCC3WbZaLod8kLyWYTbColASSylfY8yqKBwod/3eDBfFLUT9
+ 5iWk86BaFRgOuJMdXEom3nD3j6XaS+Bx95cfl/+jxYoIuCmvfZSbK5TYsx/2Zc3M0Tzr
+ eZmw==
+X-Gm-Message-State: AOJu0YwKMg/+8DvGg5o/OYdScbLiyRHDxzIQsq0Q3u6roEv51UyF2cD4
+ tLQDgqrW9U0l+m1ZSQBbud2nI35NaqTfD2g3O4Ww97QZxNmXtVl2WpFJgU7c
+X-Google-Smtp-Source: AGHT+IGQLlNidrwAWP5f+Hk/e8XuzYg1b57WKe3/Ra0jNQLNh25/svoaGNv9FsgxuCMi93cmfilGSw==
+X-Received: by 2002:a17:902:d4c8:b0:1f3:10e8:1e0 with SMTP id
+ d9443c01a7336-1f4486d301fmr29993385ad.2.1716567946395; 
+ Fri, 24 May 2024 09:25:46 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:65e7:ae86:b16e:97f5])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3557a1c918csm1928465f8f.77.2024.05.24.09.22.26
+ d9443c01a7336-1f44c9a8db7sm15779005ad.222.2024.05.24.09.25.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 May 2024 09:22:26 -0700 (PDT)
-From: Jerome Forissier <jerome.forissier@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Leo Yu-Chi Liang <ycliang@andestech.com>
-Subject: [PATCH v2 14/14] CI: add qemu_arm64_lwip to the test matrix
-Date: Fri, 24 May 2024 18:20:08 +0200
-Message-Id: <d6ccd2f98ab4334b046bf1471008ad192a77f003.1716566960.git.jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <cover.1716566960.git.jerome.forissier@linaro.org>
-References: <cover.1716566960.git.jerome.forissier@linaro.org>
+ Fri, 24 May 2024 09:25:45 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] Please pull u-boot-imx-next-20240524
+Date: Fri, 24 May 2024 13:25:41 -0300
+Message-Id: <20240524162541.552282-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -96,39 +88,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Build and run qemu_arm64_lwip_defconfig in CI. This tests the lightweight
-IP (lwIP) implementation of the dhcp, tftpboot and ping commands.
+Hi Tom,
 
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
----
- .azure-pipelines.yml | 7 +++++++
- 1 file changed, 7 insertions(+)
+Please pull from u-boot-imx/next, thanks.
 
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index 27f69583c65..b036999210f 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -199,6 +199,10 @@ stages:
-           cd \${WORK_DIR}
-           git config --global --add safe.directory \${WORK_DIR}
-           git clone --depth=1 https://source.denx.de/u-boot/u-boot-test-hooks /tmp/uboot-test-hooks
-+          # qemu_arm64_lwip_defconfig is the same as qemu_arm64 but with NET_LWIP enabled.
-+          # The test config and the boardenv file from qemu_arm64 can be re-used so create symlinks
-+          ln -s conf.qemu_arm64_na /tmp/uboot-test-hooks/bin/travis-ci/conf.qemu_arm64_lwip_na
-+          ln -s u_boot_boardenv_qemu_arm64_na.py /tmp/uboot-test-hooks/py/travis-ci/u_boot_boardenv_qemu_arm64_lwip_na.py
-           ln -s travis-ci /tmp/uboot-test-hooks/bin/\`hostname\`
-           ln -s travis-ci /tmp/uboot-test-hooks/py/\`hostname\`
-           grub-mkimage --prefix=\"\" -o ~/grub_x86.efi -O i386-efi normal echo lsefimmap lsefi lsefisystab efinet tftp minicmd
-@@ -371,6 +375,9 @@ stages:
-         qemu_arm64:
-           TEST_PY_BD: "qemu_arm64"
-           TEST_PY_TEST_SPEC: "not sleep"
-+        qemu_arm64_lwip:
-+          TEST_PY_BD: "qemu_arm64_lwip"
-+          TEST_PY_TEST_SPEC: "test_net_dhcp_lwip or test_net_ping_lwip or test_net_tftpboot_lwip"
-         qemu_m68k:
-           TEST_PY_BD: "M5208EVBE"
-           TEST_PY_ID: "--id qemu"
--- 
-2.40.1
+The following changes since commit 377e91c162ab09ec20f96f966f380cb55c590edd:
 
+  Merge patch series "Clean-up patch set for MbedTLS integration" (2024-05-22 08:55:35 -0600)
+
+are available in the Git repository at:
+
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-next-20240524
+
+for you to fetch changes up to 7457dc6f183303aaf2d58fff0a622e6791aba33c:
+
+  imx: hab: add documentation about the required keys/certs (2024-05-24 11:33:15 -0300)
+
+u-boot-imx-master-20240524
+--------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/20834
+
+- Allow signing i.MX8M flash.bin via binman, which is a much more elegant
+solution that using scripts.
+- Improve i.MX8M HAB documentation.
+- Increase PHY auto-negotiation timeout to 20s on MX8Menlo
+- Add bmode support for the MX53 Menlo board.
+- Update Update iMX8MM Menlo board configuration
+----------------------------------------------------------------
+Claudius Heine (1):
+      imx: hab: add documentation about the required keys/certs
+
+Marek Vasut (8):
+      binman: Add nxp_imx8mcst etype for i.MX8M flash.bin signing
+      ARM: dts: imx: Introduce SPL and FIT labels to i.MX8M DTs binman nodes
+      ARM: dts: imx: Wrap i.MX8M binman SPL and FIT nodes in CST node if IMX_HAB enabled
+      imx: hab: Use nxp_imx8mcst etype for i.MX8M flash.bin signing
+      ARM: imx: Add doc/imx/ to i.MX MAINTAINERS entry
+      ARM: imx: Increase PHY auto-negotiation timeout to 20s on MX8Menlo
+      ARM: dts: imx8mm: Update iMX8MM Menlo board configuration
+      ARM: imx: mx5: Enable BMODE command on MX53 Menlo board
+
+Olaf Mandel (1):
+      ARM: imx: mx5: Simplify TFTP server layout on MX53 Menlo board
+
+ .gitignore                                      |   2 +
+ MAINTAINERS                                     |   1 +
+ Makefile                                        |   2 +-
+ arch/arm/dts/imx8mm-u-boot.dtsi                 | 195 ++++++++++++----------
+ arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi |   8 +-
+ arch/arm/dts/imx8mn-u-boot.dtsi                 | 209 +++++++++++++-----------
+ arch/arm/dts/imx8mp-dhcom-u-boot.dtsi           | 124 +++++++-------
+ arch/arm/dts/imx8mp-rsb3720-a1-u-boot.dtsi      |  26 ++-
+ arch/arm/dts/imx8mp-u-boot.dtsi                 | 172 ++++++++++---------
+ arch/arm/dts/imx8mq-librem5-r4-u-boot.dtsi      |  10 +-
+ arch/arm/dts/imx8mq-u-boot.dtsi                 | 182 ++++++++++++---------
+ configs/imx8mm-mx8menlo_defconfig               |  28 +++-
+ configs/m53menlo_defconfig                      |   3 +-
+ doc/imx/habv4/csf_examples/mx8m/csf.sh          |  92 -----------
+ doc/imx/habv4/csf_examples/mx8m/csf_fit.txt     |  30 ----
+ doc/imx/habv4/csf_examples/mx8m/csf_spl.txt     |  33 ----
+ doc/imx/habv4/guides/mx8m_spl_secure_boot.txt   | 131 ++++++---------
+ include/configs/imx8mm-mx8menlo.h               |   3 +
+ include/configs/m53menlo.h                      |   2 +-
+ tools/binman/btool/cst.py                       |  48 ++++++
+ tools/binman/etype/nxp_imx8mcst.py              | 164 +++++++++++++++++++
+ 21 files changed, 799 insertions(+), 666 deletions(-)
+ delete mode 100644 doc/imx/habv4/csf_examples/mx8m/csf.sh
+ delete mode 100644 doc/imx/habv4/csf_examples/mx8m/csf_fit.txt
+ delete mode 100644 doc/imx/habv4/csf_examples/mx8m/csf_spl.txt
+ create mode 100644 tools/binman/btool/cst.py
+ create mode 100644 tools/binman/etype/nxp_imx8mcst.py
