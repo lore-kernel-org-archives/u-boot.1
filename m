@@ -4,84 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CA53C25B7A
-	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 12:20:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2131C25B74
+	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 12:21:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B67988653;
-	Fri, 24 May 2024 14:20:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 18B8E88676;
+	Fri, 24 May 2024 14:20:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="J28FUWe6";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xDqHNyIT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 294B188660; Fri, 24 May 2024 14:20:53 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 584C688653; Fri, 24 May 2024 14:20:53 +0200 (CEST)
+Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
+ [IPv6:2607:f8b0:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28DCF8861D
+ by phobos.denx.de (Postfix) with ESMTPS id 2651A88552
  for <u-boot@lists.denx.de>; Fri, 24 May 2024 14:20:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-578517c8b49so1050081a12.3
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-681bee6bb13so539948a12.1
  for <u-boot@lists.denx.de>; Fri, 24 May 2024 05:20:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716553250; x=1717158050; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=PRPsnqSNxtJBAAap2v1L9s2J5FAs1YvOem8RXTgIaEE=;
- b=J28FUWe6CfCUfhjWpmsUk7JUHqViwGzvNm175tzSxJVqMaLRKgdpttmj3d03iV9Kyy
- fKcNkdYDKWCfBJ6NzZyOSbuj2j1L2EDfRuo/tQ8LU50keB71DsEazPrSjNZlv2wjS0gI
- lSwE4INVHdE8/gvwUEZoxNMaTKgfdLiJBT7BqKcO37jCqIZVwkswHH4ZIcp3+FKnaWAa
- 07Z4ERieGjpEi8Slc8KLwhvvzva2mb9rqg/X2HxCa7h9Dz8G4EOKWanxeLvI+nn/KxUt
- Q5ExbPAhbRUpZ4BzeTDcZWvcZ2EZccpVl6g6k+uMKORcO4fWBgIW/ewJeR+1g2Nj8c3k
- +BGQ==
+ d=linaro.org; s=google; t=1716553249; x=1717158049; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=QPEqAyyCBKRw79f2lAbX8TjBJioKsSIU7xEvGoWFY0A=;
+ b=xDqHNyIT+MFNOTUy0qC2wIskk5tHtAwCzk3n2s6y4IkW9IGo/2xUfAaYpK3JXngKpE
+ wvudJVDJPyTbP4Oz7AwJgq13UtZ53+Hsr6KGduvIkNyOwiL/pTfOXD/j2/vLLNSR2vAj
+ tw2DaA6z5RpqQmWy7bH/ZdJZXHtj3votWZfNKL/Sdwx5pH3BaJB0O7lRzz8Z3BCgcorj
+ 4yxSY+aPuK+D3qnBIbM5KSGgnnyoAajAHG0V+QaQ82RrMmw5YzfwBOIgYgKiDkWedUiv
+ SZS27IuYew0UApvQjSk+S+f0VEU8cjTk5Z1LMWP+kLFYNXfJFTpMxb+H0KyiJwIdSD9I
+ Sg4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716553250; x=1717158050;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=PRPsnqSNxtJBAAap2v1L9s2J5FAs1YvOem8RXTgIaEE=;
- b=dxU3xL4h2YtG/SLngLBwGy5zeB4Py6wU7YK0aWtvGqiIgFVdnnSfE9gYzsPa4cWDyH
- T3FQIgtVBWM4Lfh7FnmVREpQPGAojQhhThPIt7E2vP8sFVPQeSi2+y/1FDBfkKrJtEIP
- jo+34ofzQAEXZzV8YTQUgQlqG9GhA0djJndKzlgjtNvurSgCeuLHyeoeFRk9i7pQbJGO
- cb1qYokLsiS4/RJCP0Oheb3T/uVPuFPoxyf/YajG4nSLAGgKxXdWd1XDBqfVuYJuqMbu
- Fh7CXo/uwpYxrashYCUEX+8ERrRg3XG1kRq8X99HBawdOFEXjkHUybogxKo30cMvDUsf
- Di2A==
+ d=1e100.net; s=20230601; t=1716553249; x=1717158049;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=QPEqAyyCBKRw79f2lAbX8TjBJioKsSIU7xEvGoWFY0A=;
+ b=O+i6pnLOnh20LqNPxB3Ad3j8VTYdOO+PWWHQZpajr2PaT0o8KP66YshjP5UborwWYP
+ NfgC0UdkvXvIVCtRPhdPnrDwHswsoqHTam/fWuQjKOT1Ev2ucpQohEZ7w6Mjlewdqhos
+ lCU0z29OdWaeRktwSTab8yD/Rg7EMrfUg30h7KigYeV+rV2f8NU8DWUGd6bPHfiOxA0Y
+ uhYkXqZZ8F9tPkDpU7sKbJL+T196uSeM/KAcA6lwWO/eX2vPOVqod48X+qIRH1rVp/3T
+ 9OaukELy+LazTNtBkj+kmMigU3jrmP5FDmtB7yGlZSJTL8d/ksI965bCT6lVK3NJ0he6
+ 8zbA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUmRPDZx13QjL0mK6EZgUe8FQqWun4AVPRNijyy055uqwoqtADh54IBIz4fmdDL9pJFXSgfoEtLqYICrcrHextejhdVqQ==
-X-Gm-Message-State: AOJu0YyeJRiIXYxIzxVsSWb6PHxmBrzluLjt4Q/rGVmo2qA4s7sNhg8a
- H2MZyT20Djt57R5eTYsH8IyajsuTeDiTZvBzlocl2Pi96Pd+E3JNrv9BVM9D6Pg=
-X-Google-Smtp-Source: AGHT+IEAwriixRkOmvNJVjwHkybDYd+AsZ+IzQLee0k2ETjekufMIg+03fuCMBrcOn4qFJfk7rZ+pA==
-X-Received: by 2002:a50:ccd3:0:b0:573:4f61:ca9c with SMTP id
- 4fb4d7f45d1cf-57862e12a13mr223483a12.4.1716553250574; 
- Fri, 24 May 2024 05:20:50 -0700 (PDT)
-Received: from ?IPV6:2a02:8109:aa0d:be00::8bb3? ([2a02:8109:aa0d:be00::8bb3])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-578572e7aafsm1353821a12.46.2024.05.24.05.20.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 24 May 2024 05:20:50 -0700 (PDT)
-Message-ID: <6f354bbf-3062-4a2d-b0a5-b8559fbfe26a@linaro.org>
-Date: Fri, 24 May 2024 14:20:49 +0200
+ AJvYcCXFc5hHAQCL2DXl6qtGB18Eam/zr9K32HOWvvrs/06cFk2lfqc8TGSemhkYiV/uyAiIi17jc6EBIV+JtC0PFcxXrh/ELw==
+X-Gm-Message-State: AOJu0YzmuLIWHoVZnrvIW+nvHzRsds/Bf418smRAyk86Oi3nSXEy76Ax
+ 0npTS+mq7yrAYZNW24Kzgc5jGGobHb5sjspehszTWV4sv2H30Kqn8wMxiZReqqnle9XzJqg6yzG
+ vq8VqHQ7UlNKKJvFgcIrcN9msQBmq9K7N1FlY3HxUOKGLR7ZxDmE=
+X-Google-Smtp-Source: AGHT+IHYvrATguHGwUMoN4fHY8sCivrxf6f2G7OOqfPH45K5KhREynHQ1Skt2H5x2uADCVTfEZJNjdxhRXOP3xqriWM=
+X-Received: by 2002:a17:90a:f109:b0:2bd:d67b:6bf3 with SMTP id
+ 98e67ed59e1d1-2bddcf226famr6918349a91.20.1716553249545; Fri, 24 May 2024
+ 05:20:49 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 1/4] lib: uuid: add UUID v5 support
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de
 References: <20240426-b4-dynamic-uuid-v1-0-e8154e00ec44@linaro.org>
- <20240426-b4-dynamic-uuid-v1-1-e8154e00ec44@linaro.org>
- <CAC_iWj+WsO_dx84UHpv02b9cxNtzHYeCjZLP5VyVw9AbXet-yg@mail.gmail.com>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAC_iWj+WsO_dx84UHpv02b9cxNtzHYeCjZLP5VyVw9AbXet-yg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ <20240426-b4-dynamic-uuid-v1-2-e8154e00ec44@linaro.org>
+ <CAC_iWjKZe+0EMC76TxdtBZju99QAApodqEZHdaKJt1E-mMw6ow@mail.gmail.com>
+ <c5c79a74-19ad-459e-8c42-c7a9fc31614a@linaro.org>
+In-Reply-To: <c5c79a74-19ad-459e-8c42-c7a9fc31614a@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 24 May 2024 15:20:13 +0300
+Message-ID: <CAC_iWjJPfB4G5uc_Xm1Tod2gBgd4M7TiOgn-Rf7zChDKSqV=tQ@mail.gmail.com>
+Subject: Re: [PATCH RFC 2/4] efi: add a helper to generate dynamic UUIDs
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,82 +91,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 24 May 2024 at 15:17, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>
+>
+>
+> On 24/05/2024 08:37, Ilias Apalodimas wrote:
+> > [...]
+> >
+> >
+> >>   config EFI_CAPSULE_FIRMWARE_MANAGEMENT
+> >> diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
+> >> index de0d49ebebda..9ef67d1b4405 100644
+> >> --- a/lib/efi_loader/efi_capsule.c
+> >> +++ b/lib/efi_loader/efi_capsule.c
+> >> @@ -19,8 +19,9 @@
+> >>   #include <mapmem.h>
+> >>   #include <sort.h>
+> >>   #include <sysreset.h>
+> >>   #include <asm/global_data.h>
+> >> +#include <uuid.h>
+> >>
+> >>   #include <crypto/pkcs7.h>
+> >>   #include <crypto/pkcs7_parser.h>
+> >>   #include <linux/err.h>
+> >> @@ -403,8 +404,40 @@ out:
+> >>          return status;
+> >>   }
+> >>   #endif /* CONFIG_EFI_CAPSULE_AUTHENTICATE */
+> >>
+> >> +#if CONFIG_IS_ENABLED(EFI_CAPSULE_DYNAMIC_UUIDS)
+> >> +int efi_capsule_update_info_gen_ids(efi_guid_t *namespace, const char *soc, const char *model, const char *compatible)
+> >> +{
+> >> +       int i;
+> >
+> > Perhaps irrelevant to this patch, but do we need to define the name
+> > space in platform code?
+> > Can't we just put it on a Kconfig and do the dynamic UUIID generation
+> > in efi_capsule.c?
+>
+> Having the namespace be a kconfig option probably makes sense, then it
+> could be the thing vendors have to populate for their production boards
+> (and they could just have one for all of their products across many
+> architectures). So by setting one option they'd have totally unique
+> GUIDs for everything.
 
+Exactly and you would be able to reuse the entire machinery without
+having to add platform code, since the GUID population would live in
+the the efi firmware parts
 
-On 24/05/2024 08:01, Ilias Apalodimas wrote:
-> [...]
-> 
->>   #include <dm/uclass.h>
->>   #include <rng.h>
->> +#include <u-boot/sha1.h>
->>
->>   int uuid_str_valid(const char *uuid)
->>   {
->>          int i, valid;
->> @@ -368,8 +369,40 @@ void uuid_bin_to_str(const unsigned char *uuid_bin, char *uuid_str,
->>                  }
->>          }
->>   }
->>
->> +#if CONFIG_IS_ENABLED(UUID_GEN_V5)
->> +void gen_uuid_v5(struct uuid *namespace, struct uuid *uuid, ...)
->> +{
->> +       sha1_context ctx;
->> +       va_list args;
->> +       const u8 *data;
->> +       u8 hash[SHA1_SUM_LEN];
->> +
->> +       sha1_starts(&ctx);
->> +       /* Hash the namespace UUID as salt */
->> +       sha1_update(&ctx, (char *)namespace, UUID_BIN_LEN);
->> +       va_start(args, uuid);
-> 
-> Should we use sha1 here? Is it described somewhere in UUIDv5 requirements?
-> If not I'd rather have a sha256
-
-The spec says sha1 yeah, this doesn't need to be cryptographically 
-secure (the inputs are generally known) but just not have collisions.
-
-That said, we don't need to be spec compliant - just consistent. So I'm 
-fine either way. I'd err on the side of what's fastest to compute (if 
-that even matters here).
-> 
->> +
->> +       while ((data = va_arg(args, const u8 *)))
->> +               sha1_update(&ctx, (char *)data, va_arg(args, int));
-> 
-> sha1_update second argument is an unsigned int
-
-Ah thanks.
-> 
->> +
->> +       va_end(args);
->> +       sha1_finish(&ctx, hash);
->> +
->> +       /* Truncate the hash into output UUID and convert it to big endian */
->> +       cpu_to_be32_array((u32 *)uuid, (u32 *)hash, 4);
->> +
->> +       /* Configure variant/version bits */
->> +       clrsetbits_be16(&uuid->time_hi_and_version,
->> +                       UUID_VERSION_MASK,
->> +                       5 << UUID_VERSION_SHIFT);
->> +       clrsetbits_8(&uuid->clock_seq_hi_and_reserved,
->> +                    UUID_VARIANT_MASK,
->> +                    UUID_VARIANT << UUID_VARIANT_SHIFT);
->> +}
->> +#endif
->> +
->>   #if defined(CONFIG_RANDOM_UUID) || defined(CONFIG_CMD_UUID)
->>   void gen_rand_uuid(unsigned char *uuid_bin)
->>   {
->>          u32 ptr[4];
->>
->> --
->> 2.44.0
->>
-> 
-> Thanks
-> /Ilias
-
--- 
-// Caleb (they/them)
+Cheers
+/Ilias
+>
+> >
+> > Thanks
+> > /Ilias
+> >> +
+> >> +       if (!soc || !model || !compatible) {
+> >> +               log_err("%s: soc, model, or compatible not defined\n", __func__);
+> >> +               return -EINVAL;
+> >> +       }
+> >> +
+> >> +       if (!update_info.num_images) {
+> >> +               log_err("%s: no fw_images, make sure update_info.num_images is set\n", __func__);
+> >> +               return -ENODATA;
+> >> +       }
+> >> +
+> >> +       for (i = 0; i < update_info.num_images; i++) {
+> >> +               gen_uuid_v5((struct uuid*)namespace,
+> >> +                           (struct uuid *)&update_info.images[i].image_type_id,
+> >> +                           soc, strlen(soc),
+> >> +                           model, strlen(model),
+> >> +                           compatible, strlen(compatible),
+> >> +                           update_info.images[i].fw_name, u16_strlen(update_info.images[i].fw_name),
+> >> +                           NULL);
+> >> +
+> >> +               log_debug("Image %ls generated UUID %pUs\n", update_info.images[i].fw_name,
+> >> +                         &update_info.images[i].image_type_id);
+> >> +       }
+> >> +
+> >> +       return 0;
+> >> +}
+> >> +#endif
+> >> +
+> >>   static __maybe_unused bool fwu_empty_capsule(struct efi_capsule_header *capsule)
+> >>   {
+> >>          return !guidcmp(&capsule->capsule_guid,
+> >>                          &fwu_guid_os_request_fw_revert) ||
+> >>
+> >> --
+> >> 2.44.0
+> >>
+>
+> --
+> // Caleb (they/them)
