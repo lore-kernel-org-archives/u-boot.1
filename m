@@ -4,128 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D926BC25B74
-	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 11:24:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 202D1C25B7C
+	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 11:42:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D35588665;
-	Fri, 24 May 2024 13:23:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
+	by phobos.denx.de (Postfix) with ESMTP id 51E6788664;
+	Fri, 24 May 2024 13:42:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="jH5P8CTF";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BACE3885C5; Fri, 24 May 2024 13:23:33 +0200 (CEST)
-Received: from MRZP264CU002.outbound.protection.outlook.com
- (mail-francesouthazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::1])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 2864488489; Fri, 24 May 2024 13:42:40 +0200 (CEST)
+Received: from smtp-8fab.mail.infomaniak.ch (smtp-8fab.mail.infomaniak.ch
+ [83.166.143.171])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EBAD883DF
- for <u-boot@lists.denx.de>; Fri, 24 May 2024 13:23:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=softathome.com
+ by phobos.denx.de (Postfix) with ESMTPS id 22CE788254
+ for <u-boot@lists.denx.de>; Fri, 24 May 2024 13:42:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.henrys_ext@softathome.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=E6cayf+DtJPwDEwFk8X9COlxMVVCvYSGXtZmLefFlMvBrD5NT+LbeenDBhfvshsx3h1liBCCV9crn1nu7aFIfx55U+CcLAFDYKMLQQ24kwZ4LiI3lWt1+v4SXe2mwKn3dv4W2PWVc/ITCaEQt4KX39R3Opmb0ityIkLC3IHzEiepT3oo9efs3N7XiwobTcZ+/i9HCsxlGMOTm3gPeTkVyV5nk6vB+I21Tm+AW88m2zmGGLbV88er0Z/Ia6fuPx1JybiKIwdwuQWZbPQWv87Bn+iN4jm80xsZpeaXJat+JiEu7tnuMMcOzb3MpU8XJOYveONLLpDubnyltRrsSX1s2g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MnnBkTSsGCbnnQks60Sfhs9230kTLvwBxmD3QlGgVGs=;
- b=TaqSf2rJrjGjvvI/ELG3D1pf0ma4rzXbVKhcqgdHan2o4Qgtv4c2plCiBj6kRnx8YHBGHCjeZhxvb00h+hQ5rvykLdgXrY2PR2Hr26a6E7M+ldZM1xfdhEoVdUjZ3KVbWk6i7Rz5PouC932JRKYp9tWh3f2wfKOLVxYGXRx58hIukCl81tOvjt63pafFLJ/1xr/q39e+Q8+yRQnS7OGu4Tvj/WF98fHgvFIj4DwaNtPVkidOgzuZnZzNeEu/hPP9JEDz3gSYEu/LN/LNo8OrttKOxr2+Iasf9iCaX20Y2ehE8ch4DAr8YJp9sRGQlCaG96C2NiXEC+fFe9QYHAp+TQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 149.6.166.170) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=softathome.com;
- dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MnnBkTSsGCbnnQks60Sfhs9230kTLvwBxmD3QlGgVGs=;
- b=jH5P8CTFinLrPFXYOnIAeZsbIRd2gHIgZTOEST+sQ6uW7RBohQ+LIkNV+w53/CRexyQnuXHgPglM/dzUIUq47JWbwBfzU575OhDRQaWaX0rM0rzbDOEWYzQa9MyXH2YY0y2eLE20GMZbtORAWvfN7AkK1gc6ncuoeM/7Sc89e5SV+9/KuVZnps46QLxJp7IwpeuN136W7P6tG7AJ2VIRtJCTYo9gsYUBo/JbtHjSk7hXhwUnFDXGtgELJiAkVZ3EQ5/002IJCtspGyCY2dx13GV1u1NxD25KPdq9pCs3q8OuhUgnqRvRmTQhOrjMgnaQ9Jcb0TPr9XDKKg2mEvPC9Q==
-Received: from GVAP278CA0002.CHEP278.PROD.OUTLOOK.COM (2603:10a6:710:20::12)
- by PAZP264MB2702.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1f4::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7611.22; Fri, 24 May
- 2024 11:23:27 +0000
-Received: from PA3PEPF000089B9.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:710:20:cafe::8f) by GVAP278CA0002.outlook.office365.com
- (2603:10a6:710:20::12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7611.22 via Frontend
- Transport; Fri, 24 May 2024 11:23:27 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
- smtp.mailfrom=softathome.com; dkim=none (message not signed)
- header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
-Received-SPF: Pass (protection.outlook.com: domain of softathome.com
- designates 149.6.166.170 as permitted sender)
- receiver=protection.outlook.com; client-ip=149.6.166.170;
- helo=proxy.softathome.com; pr=C
-Received: from proxy.softathome.com (149.6.166.170) by
- PA3PEPF000089B9.mail.protection.outlook.com (10.167.242.21) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.7611.14
- via Frontend Transport; Fri, 24 May 2024 11:23:27 +0000
-Received: from sahess08-ThinkPad-T580.softathome.com (unknown [192.168.72.220])
- by proxy.softathome.com (Postfix) with ESMTPSA id E70E3200DA;
- Fri, 24 May 2024 13:23:26 +0200 (CEST)
-From: Paul HENRYS <paul.henrys_ext@softathome.com>
-To: u-boot@lists.denx.de
-Cc: Paul HENRYS <paul.henrys_ext@softathome.com>
-Subject: [PATCH 2/3] tools: binman: Add a property to pass a key directory to
- mkimage
-Date: Fri, 24 May 2024 13:23:19 +0200
-Message-Id: <20240524112320.103304-3-paul.henrys_ext@softathome.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240524112320.103304-1-paul.henrys_ext@softathome.com>
-References: <20240524112320.103304-1-paul.henrys_ext@softathome.com>
+ dmarc=none (p=none dis=none) header.from=0leil.net
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
+ [10.7.10.108])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Vm37K5FVWzjn;
+ Fri, 24 May 2024 13:42:37 +0200 (CEST)
+Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4Vm37J4F6PzSCw; Fri, 24 May 2024 13:42:36 +0200 (CEST)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Subject: [PATCH next 0/5] rockchip: display PMIC variant properly + misc
+ fixes for Theobroma boards
+Date: Fri, 24 May 2024 13:42:21 +0200
+Message-Id: <20240524-misc-tsd-v1-0-b7bde1344b9e@cherry.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA3PEPF000089B9:EE_|PAZP264MB2702:EE_
-Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: e9404a60-018e-43a3-f2a8-08dc7be3eec0
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230031|36860700004|376005|1800799015|82310400017; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?KQa6o057Omw23nEUmLR2C6o4jp5zYJk3zNbtSTp0KhFO4Cy6WtIfXwwNRDrU?=
- =?us-ascii?Q?lCJ58vhavpi4o9EX+a21jG9TcH6301Ihf6LNyuQPEsJNh8HmDKOfwavP+dmW?=
- =?us-ascii?Q?0zgO4CygX4uTWU3DypYyj4Um/fI2ezg6Jm4UBK7erhS7JdFvHxqmwRfzJJ3M?=
- =?us-ascii?Q?TtywvEcRh0PNF32Iw7rf7Nanbzkl0Qu3VZEpbd8Hj6WBmWOrUYYM1kwsO9AY?=
- =?us-ascii?Q?2piTztf6JGWxkzMkufT/VW2zg8dtammcazHR4qhTPxDOjIx+68HG5MYQzHnh?=
- =?us-ascii?Q?O+QSq01+rkYdOimSWz9kQL69pnJ2xl0IVQ49du6QpgKVdVr/d92DQ3dvF74y?=
- =?us-ascii?Q?Su3KNT9R+78dzU+DiT7fhTHmD6/ZYc87CB9HtoC6CjVjXiBTXmJUiLnkxFH0?=
- =?us-ascii?Q?pjaFHiLBthjJF3aSUy8A+aWgc14XXtWVMHiGmnxG/tLAXmJdsI7+j5fB7R3L?=
- =?us-ascii?Q?wO1gqYZ8tH/IhxL/iJZNifOHbDQ2ktD6NV/rbLoX8ZGe2EFuuwsKbo20KPTd?=
- =?us-ascii?Q?1kFYHnXVXYzNQoG7RbKw9WdiQt94374xGARn6DSAPYYK/ckx4/cxOix2MzUp?=
- =?us-ascii?Q?ijC8O47tWXooAgjAO4da5q8Zl2CWE4KewDTkLv/gKJUCj5Y6+iYDs7KV57Iw?=
- =?us-ascii?Q?OVxTTbJSI0BeGJU9v9wBfCIOuMSZTF+vQrQpOfwp9wx54LV3u9d+tqEsyJ3Y?=
- =?us-ascii?Q?aIaw1J6AanAtacYuEFP2UYxz5AOXodeSKZRqQDvxetRnXdQTKOMGuZ4Vif18?=
- =?us-ascii?Q?iSzGhCc3qyiS9swXLxFl6EI2TfV+J/0ytcOwh9uQQfAuANoGQm0DY6wbnOGr?=
- =?us-ascii?Q?7gxYklGL4KlKp5sjbQsx6ce3OAuoE/Pb0MR0S+hISwFmzTdRwzUt2yt8Z6uB?=
- =?us-ascii?Q?F6oJaum1+5voDXv9bufOPsd/c6xVDD94YiVB9AGAFqNg4Ukgi27uJ+knQP9X?=
- =?us-ascii?Q?K3bwl9EnH5qqsF4drOf94iBrhAH7fQM6Cg0KhYGDHIQG2dPxhumzM61CWWwG?=
- =?us-ascii?Q?1nJtbwae7vLuySj+iuOfBKH2VL61keQRHBdemBWbMAQqSFlAdRv6IZRJF2r9?=
- =?us-ascii?Q?XImbULdI+d+cRQSAaM+288zQ1LGrJX4BOA+O211BkQ8vzRsZWNbylTnYBGjq?=
- =?us-ascii?Q?voQHJhUg+MJZfQighINAY2DIpC0kusyErL7kzxfErGeJ78v8pLPZQrUoa6Z+?=
- =?us-ascii?Q?w01a2j377MPvb/TzcnDWD+r90TY4SN8B38D6uDLBMWxkGbYj673KcgXzxrjb?=
- =?us-ascii?Q?Q1W73m3gwDhgN+z9DxEoqt02PsD1ZUcx25gvKDQgXUcsWVPE5Bh74Gu6pynn?=
- =?us-ascii?Q?h8w3TqAVDfHaNH21oOtwy5w8yQ6GJ6zZAgwZoaa04ooJsyob1HioKqTLDqAt?=
- =?us-ascii?Q?rC6wm+eQt1Jtc2Xvsw5sOx/cJdtY?=
-X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(36860700004)(376005)(1800799015)(82310400017); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 May 2024 11:23:27.2714 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e9404a60-018e-43a3-f2a8-08dc7be3eec0
-X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
- Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: PA3PEPF000089B9.FRAP264.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAZP264MB2702
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAB19UGYC/x3MQQqAIBBA0avIrBNUFKSrRAuxqWaRhSMhiHdPW
+ j74/AaMmZBhFg0yvsR0pwE9CYhnSAdK2obBKGOVM1ZexFEW3iQq75yOSkcfYORPxp3qv1ogYS2
+ w9v4BdunNl2AAAAA=
+To: Klaus Goger <klaus.goger@theobroma-systems.com>, 
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
+ Heiko Stuebner <heiko.stuebner@cherry.de>, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>
+Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.13.0
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -142,60 +65,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The property 'fit,keys-directory' can be added to the configuration file
-passed to binman to specify a directory where keys are stored and can be
-used by mkimage to sign and cipher data.
+This fixes how the Rockchip PMIC variant is shown for all but RK808 by
+stripping the LSB.
 
-Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
+Also fix the size of the environment on Jaguar to match the default
+(smaller) size.
+
+Fix SPL_PAD_TO on Ringneck.
+
+Remove duplicated default value of ENV_OFFSET in puma defconfig.
+
+Remove unnecessary override of the fit offset in u-boot dtsi for Puma
+and Ringneck.
+
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- tools/binman/btool/mkimage.py | 5 ++++-
- tools/binman/etype/fit.py     | 3 +++
- 2 files changed, 7 insertions(+), 1 deletion(-)
+Quentin Schulz (5):
+      rockchip: jaguar-rk3588: use default env size for Rockchip on MMC
+      rockchip: rk3399-puma: remove default value from defconfig
+      rockchip: rk3399-puma: remove unnecessary simple-bin:fit:offset override
+      rockchip: px30-ringneck: Update SPL_PAD_TO Kconfig option
+      power: rk8xx: properly print all supported PMICs name
 
-diff --git a/tools/binman/btool/mkimage.py b/tools/binman/btool/mkimage.py
-index 39a4c8c1432..dbcf8daac30 100644
---- a/tools/binman/btool/mkimage.py
-+++ b/tools/binman/btool/mkimage.py
-@@ -22,7 +22,7 @@ class Bintoolmkimage(bintool.Bintool):
- 
-     # pylint: disable=R0913
-     def run(self, reset_timestamp=False, output_fname=None, external=False,
--            pad=None, align=None):
-+            pad=None, align=None, keys_dir=None):
-         """Run mkimage
- 
-         Args:
-@@ -34,6 +34,7 @@ class Bintoolmkimage(bintool.Bintool):
-                 other things to be easily added later, if required, such as
-                 signatures
-             align: Bytes to use for alignment of the FIT and its external data
-+            keys_dir: directory where keys are stored
-             version: True to get the mkimage version
-         """
-         args = []
-@@ -45,6 +46,8 @@ class Bintoolmkimage(bintool.Bintool):
-             args += ['-B', f'{align:x}']
-         if reset_timestamp:
-             args.append('-t')
-+        if keys_dir:
-+            args += ['-k', keys_dir]
-         if output_fname:
-             args += ['-F', output_fname]
-         return self.run_cmd(*args)
-diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
-index 2c14b15b03c..08fc08ec767 100644
---- a/tools/binman/etype/fit.py
-+++ b/tools/binman/etype/fit.py
-@@ -460,6 +460,9 @@ class Entry_fit(Entry_section):
-         align = self._fit_props.get('fit,align')
-         if align is not None:
-             args.update({'align': fdt_util.fdt32_to_cpu(align.value)})
-+        keys_dir = self._fit_props.get('fit,keys-directory')
-+        if keys_dir is not None:
-+            args.update({'keys_dir': keys_dir.value})
-         if self.mkimage.run(reset_timestamp=True, output_fname=output_fname,
-                             **args) is None:
-             if not self.GetAllowMissing():
+ arch/arm/dts/px30-ringneck-haikou-u-boot.dtsi | 8 --------
+ arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi   | 6 ------
+ configs/jaguar-rk3588_defconfig               | 1 -
+ configs/puma-rk3399_defconfig                 | 1 -
+ configs/ringneck-px30_defconfig               | 2 +-
+ drivers/power/pmic/rk8xx.c                    | 4 ++--
+ 6 files changed, 3 insertions(+), 19 deletions(-)
+---
+base-commit: 8887ffb625f65475fd6619f8b05fb7a5a12b016b
+change-id: 20240524-misc-tsd-e08551c01c8a
+
+Best regards,
 -- 
-2.25.1
+Quentin Schulz <quentin.schulz@cherry.de>
 
