@@ -4,99 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD842C25B75
-	for <u-boot@archiver.kernel.org>; Thu, 23 May 2024 22:12:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00FFEC25B75
+	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 01:48:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49EA88862A;
-	Fri, 24 May 2024 00:12:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0CD5B884EA;
+	Fri, 24 May 2024 03:48:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CW7DazGz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Z2hosl5N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 00D4488630; Fri, 24 May 2024 00:12:32 +0200 (CEST)
-Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
- [IPv6:2607:f8b0:4864:20::833])
+ id 169A888565; Fri, 24 May 2024 03:48:49 +0200 (CEST)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B239388582
- for <u-boot@lists.denx.de>; Fri, 24 May 2024 00:12:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE0358854B
+ for <U-Boot@lists.denx.de>; Fri, 24 May 2024 03:48:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x833.google.com with SMTP id
- d75a77b69052e-43fb094da40so1373921cf.0
- for <u-boot@lists.denx.de>; Thu, 23 May 2024 15:12:29 -0700 (PDT)
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6a8691d736cso19071936d6.0
+ for <U-Boot@lists.denx.de>; Thu, 23 May 2024 18:48:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1716502348; x=1717107148; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1716515325; x=1717120125; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=O26+C3WJhvFblqd4U1ynR7IzUkT29zqzEwPvMu1sj/g=;
- b=CW7DazGz7QiRKUbCm+h2ZTT7nJaJXLT0g3rNiy0ft57PSm9NQThsQjCNrgr1bT5UPj
- 274afcCQTEQJIKvhCS/9CEeMhIIJsp8Cc3xOErjyx3FlDdss1PWwpgGOrMCPYoag0z52
- OYB05+9YpsYBjdoYXFkw1pfYTRybPRAxT5g5E=
+ bh=x5pBbJm2OJs0yR19IGEiFhltVn/o0khVx9cxAAbExXc=;
+ b=Z2hosl5NGrt8yltiOKtxZ22UcYLHbI+Fx3iqh7WiLtntHiURGASwdY2ozYgfk89kPN
+ RHH1K43m29+ooxl58bHKVZpUsUjkvt9dGNXVaeivF3Mf2mYdFS6QWDvcL4uF5b5qt/M8
+ /y/G+lTaEwNwZSoWBD1CsDd7JkomRWUldW05U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716502348; x=1717107148;
+ d=1e100.net; s=20230601; t=1716515325; x=1717120125;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=O26+C3WJhvFblqd4U1ynR7IzUkT29zqzEwPvMu1sj/g=;
- b=h6a9WXmX51UfsBOeR+oaAmaEmJbAzGk+SxMopt1xAvdvWAv9XKf1+fKN8rwJqhD6Jw
- NEOKZTL+JdxQcWZAOedQfu/gaFaXHXfv/jjt3rFhXNJyH1XTZVp9Ymh0mX7cnTb/mzLN
- gYKO87k1aVO0bFgwrXq4q0jWdOOuZstJcqUlwV0neU7B54Fh8S6rfU8VrBwBCNxBZ4GN
- i+lyqWXI09a4FF+EmZ1QPXuwRC9ACgEqhaJvLw80cBaou+l42Sxknn2l1C8cH5RdDqfJ
- oTdUou8MtB6mFKWrJR6QkL0tkU5Qh3mt/cwhVWqxJABg1tEF1Jw/4LHvAAqsfVqm17AP
- jJwg==
+ bh=x5pBbJm2OJs0yR19IGEiFhltVn/o0khVx9cxAAbExXc=;
+ b=w5QbdPgkq7OiQEeWgrTqvK0Pk9MVz0VzwgOcRNGt4lKcZli99t0ZUCdko3DWgdrSfI
+ GsmRZopMkdJFnoqTo92qJN09IrdbGz5CfiNxoV5w2oLOcRvQ4hdmFRMrWkbXapxW6BBl
+ 8ZXD2keS+Z6wL/r+cIo1sDAaTnVPNSZXTnyMqnYJjHhY4nOq8/bv81RJuFzJi6DdccqT
+ FfuXMg8TTLJOzLK6pAVxXFEdSWDtc5P7g002d18kxEQHSRcmdX4eLswOwqd/C+TCA0Yo
+ MBo2wn92Mg/XSduj8AShn5OpsBSGcFz3uMmBx/Hw+JpJzJ0Rw3Bh4SM6iy0gLsaGenOf
+ 5Xqw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXzUegQkG71L/5JPFFpB5m1aiPm2v/S4PB0nY4wG//YmouXQcD+hDqtgU5uPZF5zn7PxItzvbyPRO/8sFz6PGEOkUN3xw==
-X-Gm-Message-State: AOJu0YyVHafbXDiyjuFfLA4tW1UPGqp+5dKpzBQT09sEuxliFrSYRXhO
- Jh8K2qWu8ajNjd0nYiMrKpGFRxzSSbrO9C4bpPSbVwP0ruuB2XjtNlAdeVKIqeU=
-X-Google-Smtp-Source: AGHT+IHyHKseYy+FOvTCwXGJIULJgx3FZFZoV89Qpgk+yrR3xUKpdl9xshoc0hu1eMugRQeJzF6q5w==
-X-Received: by 2002:a05:6214:5293:b0:6a9:d5c:73fd with SMTP id
- 6a1803df08f44-6ab8f3282famr56797776d6.2.1716502348384; 
- Thu, 23 May 2024 15:12:28 -0700 (PDT)
+ AJvYcCVJtKxjdjGgmd9D0JGV991IR5+wtr6K/fWWK9T7NoCLulhgO4ocB3n6nGCSowwY+bVXmkPixni7Y9gkdxP48NvX3emIlA==
+X-Gm-Message-State: AOJu0Yz8phKe/CLLhdLH6QLhp5RgaHCc/XgTjwwjzVFnNDaUCwZDYtgB
+ nNG0o/DhM7nNVx4TbVJHE0tITNgSrvBdkEqN2GHzwxFVracp3lR5gPLHzF97+4E=
+X-Google-Smtp-Source: AGHT+IGmdj5U8XPKr1mzqL0GTMBG/NZc9Cu1BZRRWnmjdc/MrZraQWKi6RJO69666uV7TRwEcmx/Pw==
+X-Received: by 2002:a05:6214:5010:b0:6a0:f0eb:1679 with SMTP id
+ 6a1803df08f44-6ab8f33c6b4mr68185136d6.8.1716515325225; 
+ Thu, 23 May 2024 18:48:45 -0700 (PDT)
 Received: from bill-the-cat ([189.178.170.52])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6ac071048a3sm921176d6.69.2024.05.23.15.12.25
+ 6a1803df08f44-6ac070c8792sm2490636d6.11.2024.05.23.18.48.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 May 2024 15:12:27 -0700 (PDT)
-Date: Thu, 23 May 2024 16:12:23 -0600
+ Thu, 23 May 2024 18:48:44 -0700 (PDT)
+Date: Thu, 23 May 2024 19:48:42 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Jon Humphreys <j-humphreys@ti.com>
-Cc: Neha Malcom Francis <n-francis@ti.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>, Simon Glass <sjg@chromium.org>,
- Nikhil M Jain <n-jain1@ti.com>, Andrew Davis <afd@ti.com>,
- Maxime Ripard <mripard@kernel.org>,
- Siddharth Vadapalli <s-vadapalli@ti.com>,
- Roger Quadros <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 4/7] dts: beagleplay: binman: Include firmware
- capsules binman nodes
-Message-ID: <20240523221223.GV2568172@bill-the-cat>
-References: <20240419212819.170033-1-j-humphreys@ti.com>
- <20240419212819.170033-5-j-humphreys@ti.com>
- <20240510173200.GV2568172@bill-the-cat>
- <86o78yd1ud.fsf@udb0321960.dhcp.ti.com>
- <20240522141048.GG2568172@bill-the-cat>
- <86jzjlcgjw.fsf@udb0321960.dhcp.ti.com>
- <20240523151740.GQ2568172@bill-the-cat>
- <86ed9sck19.fsf@udb0321960.dhcp.ti.com>
+To: "Brunham, Kalen" <kalen.brunham@intel.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ "U-Boot@lists.denx.de" <U-Boot@lists.denx.de>
+Subject: Re: [PATCH 1/1] Added arm64 assembly for examples/api crt0
+Message-ID: <20240524014842.GW2568172@bill-the-cat>
+References: <20240521164659.GZ2568172@bill-the-cat>
+ <DM4PR11MB529668DA50F05F26AAD229F0E3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
+ <20240521181534.GD2568172@bill-the-cat>
+ <DM4PR11MB5296769279BCDD505F614E6BE3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
+ <20240521234624.GF2568172@bill-the-cat>
+ <DM4PR11MB5296918A0447369D6B27891DE3EB2@DM4PR11MB5296.namprd11.prod.outlook.com>
+ <20240522143908.GI2568172@bill-the-cat>
+ <DM4PR11MB52968E794BE8B0A882A519A6E3EB2@DM4PR11MB5296.namprd11.prod.outlook.com>
+ <20240523153239.GS2568172@bill-the-cat>
+ <DM4PR11MB5296B8B0051B23A2AD03544CE3F42@DM4PR11MB5296.namprd11.prod.outlook.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="PQWBHp2JKlnbIfJG"
+ protocol="application/pgp-signature"; boundary="47Y1gwoULuECYVht"
 Content-Disposition: inline
-In-Reply-To: <86ed9sck19.fsf@udb0321960.dhcp.ti.com>
+In-Reply-To: <DM4PR11MB5296B8B0051B23A2AD03544CE3F42@DM4PR11MB5296.namprd11.prod.outlook.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -115,143 +102,78 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---PQWBHp2JKlnbIfJG
+--47Y1gwoULuECYVht
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, May 23, 2024 at 04:09:38PM -0500, Jon Humphreys wrote:
-> Tom Rini <trini@konsulko.com> writes:
->=20
-> > On Wed, May 22, 2024 at 11:12:35PM -0500, Jon Humphreys wrote:
-> >> Tom Rini <trini@konsulko.com> writes:
-> >>=20
-> >> > On Tue, May 21, 2024 at 09:20:26PM -0500, Jon Humphreys wrote:
-> >> >> Tom Rini <trini@konsulko.com> writes:
-> >> >>=20
-> >> >> > On Fri, Apr 19, 2024 at 04:28:16PM -0500, Jonathan Humphreys wrot=
-e:
-> >> >> >
-> >> >> >> Fill in the BeaglePlay's capsule GUID properties of the base bin=
-man capsule
-> >> >> >> nodes.
-> >> >> >>=20
-> >> >> >> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
-> >> >> >> ---
-> >> >> >>  arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi | 27 +++++++++++++=
-+++++++
-> >> >> >>  arch/arm/dts/k3-am625-r5-beagleplay.dts      | 15 +++++++++++
-> >> >> >>  2 files changed, 42 insertions(+)
-> >> >> >
-> >> >> > This series introduces failure to build in CI, and it's a little =
-tricky
-> >> >> > to replicate locally, depending on your environment. You first ne=
-ed to
-> >> >> > NOT have BINMAN_INDIRS set and instead be using fake binaries. Se=
-cond,
-> >> >> > it seems python version dependent perhaps? I don't see this on my=
- host,
-> >> >> > but by:
-> >> >> > - Using the CI container
-> >> >> > - Setting up a virtualenv inside of it
-> >> >> > - pip install -r tools/buildman/requirements.txt
-> >> >> > I get:
-> >> >> > $ ./tools/buildman/buildman --keep-outputs --reproducible-builds =
--dvel --force-build -PEWM --output /tmp/am62x_beagleplay_r5 --board am62x_b=
-eagleplay_r5
-> >> >> > Building current source for 1 boards (1 thread, 12 jobs per threa=
-d)
-> >> >> >        arm:  +   am62x_beagleplay_r5
-> >> >> > +(am62x_beagleplay_r5) Image 'tiboot3-am62x-gp-evm.bin' is missin=
-g optional external blobs but is still functional: ti-fs-gp.bin
-> >> >> > +(am62x_beagleplay_r5)
-> >> >> > +(am62x_beagleplay_r5) /binman/tiboot3-am62x-gp-evm.bin/ti-fs-gp.=
-bin (ti-sysfw/ti-fs-firmware-am62x-gp.bin):
-> >> >> > +(am62x_beagleplay_r5)    Missing blob
-> >> >> > +(am62x_beagleplay_r5) binman: object of type 'NoneType' has no l=
-en()
-> >> >> > +(am62x_beagleplay_r5) make[1]: *** [Makefile:1126: .binman_stamp=
-] Error 1
-> >> >> > +(am62x_beagleplay_r5) make: *** [Makefile:177: sub-make] Error 2
-> >> >> >     0    0    1 /1              am62x_beagleplay_r5
-> >> >>=20
-> >> >> Tom, this is failing in the CI container because the container is m=
-issing
-> >> >> the mkeficapsule tool.
-> >> >>=20
-> >> >> To solve this, we just need to add it to the CI container.
-> >> >>=20
-> >> >> My understanding of binman's handling of missing bintools is that i=
-t should
-> >> >> gracefully continue with fake data, so that buildman can successful=
-ly test
-> >> >> out builds for boards even when you don't have all the required bin=
-tools.
-> >> >> If I have that correct, I can also create a patch to properly handl=
-e this
-> >> >> when using mkeficapsule. But I want to verify this is the desired b=
-ehavior,
-> >> >> since mkeficapsule isn't a unique or vendor specific tool, so shoul=
-dn't we
-> >> >> require it as part of the U-Boot build environment and err out if i=
-t is
-> >> >> missing?
-> >> >
-> >> > Perhaps it's a binman issue since we build mkeficapsule or at least
-> >> > should be? Neha?
-> >> >
-> >>=20
-> >> Never mind - I figured it out.
-> >>=20
-> >> The mkeficapsule tools is built by u-boot if TOOLS_MKEFICAPSULE config=
- is
-> >> set. I didn't explicitly set it because it is implied by
-> >> EFI_CAPSULE_ON_DISK config. But this is only set for the A core u-boot=
-, as
-> >> that is what would apply the capsules. SPL running on the R cores does=
- not
-> >> need this. But that then means that the R core u-boot builds don't have
-> >> TOOLS_MKEFICAPSULE set and if that is all that is being built (as in t=
-he
-> >> case of buildman), the mkeficapsule tool isn't built and so is missing.
-> >>=20
-> >> So I need to explicitly set TOOLS_MKEFICAPSULE in the R core defconfig=
-s.
-> >> I'll repost the patches.
-> >
-> > Interesting. My next thought here is that whatever symbol is allowing
-> > for "make a capsule" should be select'ing TOOLS_MKEFICAPSULE and so the
-> > current logic is a bit flawed. I'm just not sure off-hand where it
-> > should be instead, do you have some ideas now? Thanks.
->=20
-> There is no config that indicates that capsules will be generated for the
-> resulting binary. The only thing I can think of is to scan the board's DTB
-> for the presence of a capsule binman node, and then set the
-> TOOLS_MKEFICAPSULE config. But this seems very complicated to do at
-> build time.
+On Thu, May 23, 2024 at 04:01:31PM +0000, Brunham, Kalen wrote:
 
-Yeah, that's the wrong direction I think. We should perhaps just make
-TOOLS_MKEFICAPSULE default y if EFI_LOADER instead.
+> I can see that efi_device_path.c and efi_disk.c both #include blk.h.=20
+
+OK, yes. But what I'm asking of Heinrich is, can we easily and cleanly
+make that support conditional? Or is there some underlying requirement
+at play here?
+
+>=20
+> -----Original Message-----
+> From: Tom Rini <trini@konsulko.com>=20
+> Sent: Thursday, May 23, 2024 11:33 AM
+> To: Brunham, Kalen <kalen.brunham@intel.com>; Heinrich Schuchardt <xypron=
+=2Eglpk@gmx.de>
+> Cc: U-Boot@lists.denx.de
+> Subject: Re: [PATCH 1/1] Added arm64 assembly for examples/api crt0
+>=20
+> On Wed, May 22, 2024 at 05:22:24PM +0000, Brunham, Kalen wrote:
+>=20
+> > Hi Tom,
+> >=20
+> > BLK is currently a dependency for EFI_LOADER as shown in the snippet fr=
+om lib/efi_loader/Kconfig below. Perhaps the question is why EFI_LOADER req=
+uires a block device? If I remove this depends on BLK line, then I can enab=
+le EFI and successfully simulate the EFI hello world on my test design.=20
+> >=20
+> >=20
+> > config EFI_LOADER
+> > 	bool "Support running UEFI applications"
+> > 	depends on OF_LIBFDT && ( \
+> > 		ARM && (SYS_CPU =3D arm1136 || \
+> > 			SYS_CPU =3D arm1176 || \
+> > 			SYS_CPU =3D armv7   || \
+> > 			SYS_CPU =3D armv8)  || \
+> > 		X86 || RISCV || SANDBOX)
+> > 	# We need EFI_STUB_64BIT to be set on x86_64 with EFI_STUB
+> > 	depends on !EFI_STUB || !X86_64 || EFI_STUB_64BIT
+> > 	# We need EFI_STUB_32BIT to be set on x86_32 with EFI_STUB
+> > 	depends on !EFI_STUB || !X86 || X86_64 || EFI_STUB_32BIT
+> > 	depends on BLK
+> > 	depends on !EFI_APP
+> > 	default y if !ARM || SYS_CPU =3D armv7 || SYS_CPU =3D armv8
+>=20
+> Do you recall why this is Heinrich?
+>=20
+> --=20
+> Tom
 
 --=20
 Tom
 
---PQWBHp2JKlnbIfJG
+--47Y1gwoULuECYVht
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZPv0QACgkQFHw5/5Y0
-tyxuBAwAjsuld86fU3zHIgbuB0xRNmcjCLpMffW7GC0mG6gf55qH5JtWfmB+3lst
-8DBihu9HkSZPKNpDxyGm9KsKr4FkjXcckZ+f/O3FpnWH90G5GpormA5wjQmPyXs9
-XQwFYXVQWdGjkDMFI3aPwRwHNnnKcG053Cl+O/DrQIpcoKjFQbkIdwMNmcvwYKbg
-cSP/CRvUiKpbY2MPxkqM8tG/Zi/OcGzD79SLU7OO13ARljTq/X9qxapybZjk8sm5
-6Bm0PNHnytwsbnOk1FBRC8BHefn/Ex9bjIH8zy5nFzi5wA6psFQ1a88ZuWLmERJ4
-9X8k3Tm29pHa+mjI+lmeDM5wRtPb0sxHrqaWfwWk4WRTiZPXk3eo0R98zgY26NsZ
-SUndfNSOGoMmiesTt0eHYcCfcZHx65S6QzAq7SgQ6Q9CshTb3kxJruPE82U3g1jR
-CDjMoKoTq5XEeUFZDJ1vcQJ7P7mUJRxFktgJmZSWe1VZPLxtwhznWZewkQRtD+7p
-r562WFsu
-=aJsl
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZP8fYACgkQFHw5/5Y0
+tyxvHwv/REoGV7/X6bPDgGCvBcqRIkhbk7ZRaqczERSFszhAcFbyiYrP2+DrtU9m
+OqyG7MXQOzYpKxUSnPxvxP6AgCyIdXaBMNn4DHo2ix7R+n2IscCVdJkL5DeUCEek
+pMTMyLmKZ9F7uxSjgomM04qT2KFM0GPNjY24rOC0idhnczpDZ/LhEihYY0XmfyB5
+9b76PkeZf3GAwoqK3Ump9w9OFmDiebnm4h0Ov3m/QNBHBw/fY+l3WWk3oUGZPjzl
+sQUpy/n89eDpG8dCyprhaFo1ZAq3/mgmetVmIHZs79jd014XS+voMRFZdWGhwzkb
+cSJjl9E52lZWV2zj1peatBYPVXdQT6CAqipaECBhxmRvuVcINERDhqc9lGaTn6Zz
+T9jJQH92TyDy0hFvTGUZeh4uJzFP1nvIOjyf0NJuk34Fcr76STv/4ZjiGWkDWAtL
+3Ico+QyaiXHQU77rThZfPxYKsSgoID8oMEvVxuQXs/WzPsfeSw8wx9ntxIqp/uLB
+xR3NOq0L
+=3EaU
 -----END PGP SIGNATURE-----
 
---PQWBHp2JKlnbIfJG--
+--47Y1gwoULuECYVht--
