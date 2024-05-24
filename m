@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AE45C25B7A
-	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 16:30:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B548DC25B74
+	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 16:30:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9513688640;
-	Fri, 24 May 2024 18:30:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4B80F88646;
+	Fri, 24 May 2024 18:30:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eYWwIoBv";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jKWRIpcj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5444888D3; Fri, 24 May 2024 18:30:00 +0200 (CEST)
-Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
- [IPv6:2607:f8b0:4864:20::532])
+ id 9F75588640; Fri, 24 May 2024 18:30:33 +0200 (CEST)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4724C88278
- for <u-boot@lists.denx.de>; Fri, 24 May 2024 18:29:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A50888646
+ for <u-boot@lists.denx.de>; Fri, 24 May 2024 18:30:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x532.google.com with SMTP id
- 41be03b00d2f7-67628045856so179664a12.2
- for <u-boot@lists.denx.de>; Fri, 24 May 2024 09:29:58 -0700 (PDT)
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-1f4528d63d5so571085ad.0
+ for <u-boot@lists.denx.de>; Fri, 24 May 2024 09:30:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716568197; x=1717172997; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1716568229; x=1717173029; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6u8kf4hKo0RL486jvdvMWcT+hooe4Of+uVQevmDSyQM=;
- b=eYWwIoBvJBgUQxWY48/LpQVPKDaiS3cYqhs3nDdOID30UE3fzW1IhPQK6vEWd8gBG2
- 9vUXDmW+Nso69ywJYIs+lUVV11NdRxjTRASLyiosSBKUTkrBFQKxVlPLNWa1Ihec0xnJ
- TEtgyEQNHr5z4h8o2+36GqlnEbfL15AWJ0RJKbfZSma79jMahusln0cJN927E4lUht3W
- SYl0LGSiTHGlYGAVCF6c8R+xBtfndcd3VVfvCw+eWDe4xDuT8gYd/J6NZAQcH1wXb6wq
- 6yF+ksxe3YJIpeMPRIkD0sNW5B3w0FY+D5xEzpBBb76OaBNo12+pFHMEDsFj6S4CRJ7c
- i1XQ==
+ bh=GJ8+bRiqo7o2aCU196bpBf+ra+jnqexRyNFRtC9wuIk=;
+ b=jKWRIpcjglJjfC92lKPmsRtPvYqCFU1CyqV+U2XcI1toJ8QvrzyTBE6eLKWhfMyIjh
+ pXL8jAPxeXOg7e029aiX2hYTl2DetnJt/RoRgEccXp5gOYAstNZdep5GT5UXcGZZHpdd
+ aYi8GiIdJ0WRwXH+oOQa9Pyog2XMaq3PXZU+a0xK6q+J/aD/XYhqChzSjCo5L+5G8xPG
+ VehM3GkDM6AYg+hgjBE0kvHY/BCrYqAfYAtvRAmTGKZYH6t0rM3OjCmY4+RKu5tgRdw5
+ VtDgGaetLzUBFjV6nuqPinf4PI6UspExD9samNOYLv7pqald9j+SALUF9bBn1bj+5wlj
+ bBzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716568197; x=1717172997;
+ d=1e100.net; s=20230601; t=1716568229; x=1717173029;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6u8kf4hKo0RL486jvdvMWcT+hooe4Of+uVQevmDSyQM=;
- b=jKPOyKnrhL/7/JXKIno+bnFP301WFbimi380SoScLNOwsekw4yov0S2gUmfMPu5rnt
- 03l7ct/SJj7fx75xIeupZi55xX5ZRFpltC2cdY7ip4gs3rTXhJIJt/AHra/bgMpa3Hjf
- DcwzpP6RmJH/jAC5l8fnyIA+UFfFxAu+Cq5CwvbXjviVmIq4nBtEgLptNNXHi46cQrOl
- 246OQ/H0U5pv1knfSOQ+qUqBbcdLGZwRfU/ugw7Rla5A+/OmKYgVS5cWTRdXhMI/+LsG
- j3AuXgS9zDWjH4ikaZEwh1kUO68O/kPNlcg58swDioImt95Ue0glNbsipYeU3b3w4UrT
- oGgg==
-X-Gm-Message-State: AOJu0Yw02XP6ChA3LjKgYRWnqwdT+jdh1D9+//kqEcUgICNVR73IMRzZ
- r7QEHLf0zVZoiW+gkr3S41BMjKFTYiqvrv2x3iUflUn6hFm8SKUgl88B0In13qgIudMTfix9g40
- 6LpMryYq2XT63M0fzlJRfHdL0hVI=
-X-Google-Smtp-Source: AGHT+IFuSJOCivNDVIbcm3gIfC+WVfGsAMo/+FXWQzilUz703ZewzGgvIHUuRgvfuZAL1nwNpNunrM3VtD2MwpQ+OrQ=
-X-Received: by 2002:a17:90a:6d22:b0:2bd:df8b:4ad7 with SMTP id
- 98e67ed59e1d1-2bf5f407f12mr2573766a91.4.1716568196616; Fri, 24 May 2024
- 09:29:56 -0700 (PDT)
+ bh=GJ8+bRiqo7o2aCU196bpBf+ra+jnqexRyNFRtC9wuIk=;
+ b=ZeWe6lNc05rWkd6CtyicWbRav3T3ss8wJcFzBJPeIUbi3DXuz+ugsHNHSTf9KYsGvQ
+ ql64dMKI4SHOrOv/unISZbxvHr+KPJHa+65XW11AH6cCFdNnDlq+OqoBWRl5TtfUz1OL
+ TbYph2iMHnI6VtY+Iddxy3m8mhWU4tkPn0ObAaF0uZen3cUNaBAoaJQeu2ZJCj9LaOGv
+ jWRg7zYfmNFA4DyJ16Z7c17U0etZymYWlAbzP284aUE1KoyjO0MXrfQV1DoN9/qt5sL9
+ xmq2JZWI2Jz/hI8wBfEMdPpjOUqr3xgghFjvVC9d1afegWfFFMaFIX1OW8k/N3vJ+YjF
+ XrIA==
+X-Gm-Message-State: AOJu0YzjN0BzjalOTtogRzBA0BW+CHXZtRyouq8kPvdPkTFGVGYE17/h
+ nLt52emHHB0+wti11WKIvJi8VH3ELucHkjN/yo/rfR+67RSuwZNl5ZkQdQi0VaCM1ZeuMElbhTd
+ vji9rnNEoOXwQLPDJ5KY65pws1Zk=
+X-Google-Smtp-Source: AGHT+IF43Mw540qHnbVqXvY6MOn5WrKVkYgbMJZTrEmo56elI2k+48JSM4oHTSLblqDG85ALr5OSqaAmgZBm84wt/yc=
+X-Received: by 2002:a05:6a21:33a7:b0:1af:dbc6:6fe7 with SMTP id
+ adf61e73a8af0-1b212eac1e4mr3759836637.5.1716568229027; Fri, 24 May 2024
+ 09:30:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240521094216.8919-1-marex@denx.de>
-In-Reply-To: <20240521094216.8919-1-marex@denx.de>
+References: <20240521105000.11376-1-marex@denx.de>
+In-Reply-To: <20240521105000.11376-1-marex@denx.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 24 May 2024 13:29:45 -0300
-Message-ID: <CAOMZO5Dx3RLhPQkfJSjBvFrjy9p4SBQSsZTyu8GjDYwsMRKykA@mail.gmail.com>
-Subject: Re: [PATCH] ARM: imx: mx5: Enable BMODE command on MX53 Menlo board
+Date: Fri, 24 May 2024 13:30:17 -0300
+Message-ID: <CAOMZO5DLeNuFy2e9rdQ70GaYQJYinhN9vQECFkAXavYv4H-cQA@mail.gmail.com>
+Subject: Re: [PATCH] ARM: imx: mx5: Simplify TFTP server layout on MX53 Menlo
+ board
 To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Stefano Babic <sbabic@denx.de>
+Cc: u-boot@lists.denx.de, Olaf Mandel <o.mandel@menlosystems.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Stefano Babic <sbabic@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -88,11 +89,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, May 21, 2024 at 6:42=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
+On Tue, May 21, 2024 at 7:50=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
 >
-> The board can do primary/secondary boot switching, enable the bmode comma=
-nd.
+> From: Olaf Mandel <o.mandel@menlosystems.com>
 >
+> By removing the "boot" directory in the "m53menlo/boot/fitImage" path,
+> we simplify the TFTP server directory layout a bit. This also requires a
+> change to the mmcload command as it (mis-)uses the same variable as the
+> TFTP boot.
+>
+> Signed-off-by: Olaf Mandel <o.mandel@menlosystems.com>
 > Signed-off-by: Marek Vasut <marex@denx.de>
 
 Applied, thanks.
