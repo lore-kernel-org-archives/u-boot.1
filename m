@@ -4,102 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 790F5C25B74
-	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 09:26:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96E18C25B74
+	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 09:39:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 034CF88545;
-	Fri, 24 May 2024 11:26:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id BE2FE881D3;
+	Fri, 24 May 2024 11:39:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="lRMdnFwQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ptf+KPZc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0931D88545; Fri, 24 May 2024 11:26:02 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C61578823C; Fri, 24 May 2024 11:39:20 +0200 (CEST)
+Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
+ [IPv6:2607:f8b0:4864:20::532])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4137187DAB
- for <u-boot@lists.denx.de>; Fri, 24 May 2024 11:25:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 7CF35881C3
+ for <u-boot@lists.denx.de>; Fri, 24 May 2024 11:39:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avkrasnov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 8295A120009;
- Fri, 24 May 2024 12:25:58 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 8295A120009
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1716542758;
- bh=U1rMIJVSxMkvuUs8aPey9Bkq3G/clU2j8+eNGRIdOZU=;
- h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
- b=lRMdnFwQ92EeO5aL/ceE47olnZKrY34NO7y0YxRMS1JDoHI5b42rHt6UXeIzyhU8A
- x4IOx6arRb2Dn/wkyGXTrFz4BU4E3ejtXbS7GYNJwrRKa+VpWyrEsInP/DdDWeavn1
- MGPQyO4hUgZmEogUR5y6A5+sCCrcZ6ZD3QtKsLa+hIHjPI6HyfvTa12K2GUxbDC17U
- eA+XQpcDQ3eRJv9KUunRkfjknlGsVrJneDnScLmrF3ADlrIsQGmuuyIRk85v925PUi
- M2ILpLJ1MRPNNyXqfKQUIKhQO3uy3CMqoMEajVeThrRl4mtTa3K00cTEe1MjHFDsB8
- aeF2isofx6VVw==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
- [172.16.192.103])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Fri, 24 May 2024 12:25:58 +0300 (MSK)
-Received: from [172.28.160.201] (100.64.160.123) by
- p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Fri, 24 May 2024 12:25:57 +0300
-Message-ID: <b10fefbf-ac0e-b285-4809-578cffee7291@salutedevices.com>
-Date: Fri, 24 May 2024 12:14:44 +0300
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pg1-x532.google.com with SMTP id
+ 41be03b00d2f7-657a07878easo2869400a12.0
+ for <u-boot@lists.denx.de>; Fri, 24 May 2024 02:39:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1716543557; x=1717148357; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=hDR+heX0jzf+tSCaACG9M46iihcSyR2hZY4IsLpvqKc=;
+ b=ptf+KPZcxNA51Z4mzB/TjOsA5ISUIgtCAA7ssigknleW7J0ZBrbrN9Q2K1GZhhByms
+ 3k0uJKSGUt4MlCuoFwXgW4YIa6XJWnWC7nB+pzabipNMsfOFPb4wwkFxwGP4MhV1tHLk
+ n+uMSK1Q+sLFSQLjoC9yNnR9XmoOFDV2S7oBYmxrXSB+d7Fb2CWwNkhwP+o0EFU3EyxC
+ Rwl0GyGbDJjawcNp1YGPLEzJ5/cE7x+HVVhuTusXkfHVk6JO7ZGkpzAAHqKHRAYLFR2W
+ XY9oS5jl7XYIeSdkfpAb71uT2qYkfXouenOhDtosza4W4tk2ZE43XtjY4ULQdCG1PQlD
+ Xr9A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716543557; x=1717148357;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hDR+heX0jzf+tSCaACG9M46iihcSyR2hZY4IsLpvqKc=;
+ b=CN9m0+sGY7FvYEfhel3x2uAVRtsRpem6lLzXSobxY7P0Ze8u0flDluHQLzdyo/rkir
+ 9no8VC8+FpYbHfdPGSEzL29kB4rAv5bH5v8MnhRdTpX/hAmsYLR/gaLlNRbVDEx5uaqg
+ YeppFWydeK4KwffJ4IA6/UgxBY3YPQvgwVtjipFM47zMA8O6KrTiAxuUmGaamu4kmaZV
+ 8OOAb877tfeULCbXrEuZlq9pZI6rRo6z+caAlIPuK0HDEe5fPw56jkrOEJlARKhx3aim
+ 3IrJuqkydvdEYWlDvYp0dWlV+eQpy8pSZ+vgkC3GEbkJM4yKIpq7Zr3uW0ajzujf7uPD
+ 21dg==
+X-Gm-Message-State: AOJu0YyAouvkq/oGIw+bgOzNeBchR8Wn0ZU/TCnlhl8FA9+GUD/roMrH
+ AsdVLlBfZZ6QxPKKYRaQmXmNqby/Wl/7q9IU/hyjfTElVAvlr8BkGXyjZB/53PByeKJqnWhqGSl
+ 5SaRIst+IqY/DBzotNAlJpfDFXr7Mx6A40xnLiw==
+X-Google-Smtp-Source: AGHT+IFEaMVQFUxoyHACpV8/H09REitS5J55oL4pP823r0fu+nMtc1oIyCEtucRLuH9WLtAtfaFqXgXYfcQ6mY3sSp0=
+X-Received: by 2002:a17:90b:1916:b0:2bf:5f75:9c2b with SMTP id
+ 98e67ed59e1d1-2bf5f759d74mr1821605a91.32.1716543557018; Fri, 24 May 2024
+ 02:39:17 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Subject: Re: [PATCH v1] mtd: rawnand: macronix: OTP access for MX30LFxG18AC
-Content-Language: en-US
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-CC: <u-boot@lists.denx.de>, <kernel@sberdevices.ru>, Michael Nazzareno
- Trimarchi <michael@amarulasolutions.com>, <oxffffaa@gmail.com>, Miquel Raynal
- <miquel.raynal@bootlin.com>, Jaime Liao <jaimeliao.tw@gmail.com>, Jaime Liao
- <jaimeliao@mxic.com.tw>
-References: <20231130112405.92196-1-avkrasnov@salutedevices.com>
- <fa9fc4cc-892c-7c11-877b-330bf173f3bd@salutedevices.com>
- <f79d88f4-0d2e-1d78-065a-5a1f2f2deacf@salutedevices.com>
- <c150440e-191d-bce8-3b99-401186be507f@salutedevices.com>
- <180478dc-23ec-952d-e1ae-6f16d98bd16c@salutedevices.com>
- <969ce8dc-3726-cf66-3241-5eb06f9cb85f@salutedevices.com>
- <CAOf5uw=2hicHHOP1caASJoqmOpZ9vvE3ZMnVQqXxQ0eqbm-CMg@mail.gmail.com>
- <3142650d-4868-c6cf-2555-301e41fadbe4@salutedevices.com>
- <CAOf5uwkmPq4pU0RY-fQtt7Qn5dzpHSf7rr_z5yrepmgP4wRADw@mail.gmail.com>
- <CABGWkvqxBRhjRFC3szz_WGJmHyzx1ihRADr04f47k+8SRqjFBQ@mail.gmail.com>
-From: Arseniy Krasnov <avkrasnov@salutedevices.com>
-In-Reply-To: <CABGWkvqxBRhjRFC3szz_WGJmHyzx1ihRADr04f47k+8SRqjFBQ@mail.gmail.com>
+References: <cover.1716393035.git.jerome.forissier@linaro.org>
+ <8c97a1e0a572fde6a764c2d20bd0fc1376e1cf90.1716393035.git.jerome.forissier@linaro.org>
+In-Reply-To: <8c97a1e0a572fde6a764c2d20bd0fc1376e1cf90.1716393035.git.jerome.forissier@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 24 May 2024 12:38:40 +0300
+Message-ID: <CAC_iWjJaaG3_sQLbzJAz6-wnVYy4ifgDxwGBrbXgEv8GXOw-Rg@mail.gmail.com>
+Subject: Re: [PATCH 08/15] net-lwip: import net command from cmd/net.c
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>, 
+ Maxim Uvarov <muvarov@gmail.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
- p-i-exch-sc-m02.sberdevices.ru (172.16.192.103)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 185460 [May 24 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.4
-X-KSMG-AntiSpam-Envelope-From: avkrasnov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 20 0.3.20
- 743589a8af6ec90b529f2124c2bbfc3ce1d2f20f, {Tracking_uf_ne_domains},
- {Tracking_from_domain_doesnt_match_to}, 100.64.160.123:7.1.2;
- smtp.sberdevices.ru:5.0.1,7.1.1; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
- salutedevices.com:7.1.1;
- 127.0.0.199:7.1.2, FromAlignment: s, ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean, bases: 2024/05/24 07:33:00
-X-KSMG-LinksScanning: Clean, bases: 2024/05/24 07:33:00
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/05/24 05:57:00 #25251437
-X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,81 +87,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dario!
+On Wed, 22 May 2024 at 19:04, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+> Add support for "net list" and "net stats" to net-lwip/ by copying the
+> code from cmd/net.c.
+>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> ---
+>  cmd/net-lwip.c     | 98 ++++++++++++++++++++++++++++++++++++++++++++++
+>  include/net-lwip.h | 50 +++++++++++++++++++++++
+>  2 files changed, 148 insertions(+)
+>
+> diff --git a/cmd/net-lwip.c b/cmd/net-lwip.c
+> index 2926399bd0..20d0d61176 100644
+> --- a/cmd/net-lwip.c
+> +++ b/cmd/net-lwip.c
+> @@ -2,6 +2,10 @@
+>  /* Copyright (C) 2024 Linaro Ltd. */
+>
+>  #include <command.h>
+> +#include <dm/device.h>
+> +#include <dm/uclass.h>
+> +#include <linux/compat.h>
+> +#include <linux/ethtool.h>
+>  #include <net-lwip.h>
+>
+>  #if defined(CONFIG_CMD_DHCP_LWIP)
+> @@ -43,3 +47,97 @@ U_BOOT_CMD(
+>         "[loadAddress] URL"
+>  );
+>  #endif
+> +
+> +static int do_net_list(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> +{
+> +       const struct udevice *current = eth_get_dev();
+> +       unsigned char env_enetaddr[ARP_HLEN];
+> +       const struct udevice *dev;
+> +       struct uclass *uc;
+> +
+> +       uclass_id_foreach_dev(UCLASS_ETH, dev, uc) {
+> +               eth_env_get_enetaddr_by_index("eth", dev_seq(dev), env_enetaddr);
+> +               printf("eth%d : %s %pM %s\n", dev_seq(dev), dev->name, env_enetaddr,
+> +                      current == dev ? "active" : "");
+> +       }
+> +       return CMD_RET_SUCCESS;
+> +}
+> +
 
-Sorry, is this patch ok?
+Some of these functions seem to be a c/p from cmd/net.c
+Carve the common ones out in cmd/net-common.c and reuse them please
 
-Thanks
+[...]
 
-On 18.04.2024 09:55, Dario Binacchi wrote:
-> Arseniy, Michael, All
-> 
-> On Wed, Apr 17, 2024 at 8:44 PM Michael Nazzareno Trimarchi
-> <michael@amarulasolutions.com> wrote:
->>
->> Hi
->>
->> Dario did you add those patches in CI and test them again?
->>
->> Michael
->>
->> On Wed, Apr 17, 2024 at 8:44 PM Arseniy Krasnov
->> <avkrasnov@salutedevices.com> wrote:
->>>
->>> Hello,
->>>
->>> Sorry, pls ping
->>>
->>> Thanks, Arseniy
->>>
->>> On 13.03.2024 09:46, Michael Nazzareno Trimarchi wrote:
->>>> Hi  Dario
->>>>
->>>> Can apply this series and put in CI?
-> 
-> Sorry, but I mistakenly tagged it as 'superseded'.
-> I just pushed it to my nand-next branch and I'm running the CI now.
-> 
-> Thanks and regards,
-> Dario
-> 
->>>>
->>>> Michael
->>>>
->>>> On Wed, Mar 13, 2024 at 7:43 AM Arseniy Krasnov
->>>> <avkrasnov@salutedevices.com> wrote:
->>>>>
->>>>> Sorry, please ping
->>>>>
->>>>> Thanks, Arseniy
->>>>>
->>>>> On 11.02.2024 02:16, Arseniy Krasnov wrote:
->>>>>> Sorry, pls ping
->>>>>>
->>>>>> Thanks, Arseniy
->>>>>>
->>>>>> On 08.01.2024 21:33, Arseniy Krasnov wrote:
->>>>>>> Sorry, pls ping
->>>>>>>
->>>>>>> Thanks, Arseniy
->>>>
->>>>
->>>>
->>
->>
->>
->> --
->> Michael Nazzareno Trimarchi
->> Co-Founder & Chief Executive Officer
->> M. +39 347 913 2170
->> michael@amarulasolutions.com
->> __________________________________
->>
->> Amarula Solutions BV
->> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
->> T. +31 (0)85 111 9172
->> info@amarulasolutions.com
->> www.amarulasolutions.com
-> 
-> 
-> 
+Cheers
+/Ilias
