@@ -4,103 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93825C25B7A
-	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 13:03:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99B6CC25B74
+	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 13:06:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42A538867C;
-	Fri, 24 May 2024 15:02:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
+	by phobos.denx.de (Postfix) with ESMTP id E73B188545;
+	Fri, 24 May 2024 15:06:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="diEMDR7P";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="EJXjYIkc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NixMxMxH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65F788866B; Fri, 24 May 2024 15:02:48 +0200 (CEST)
-Received: from fout6-smtp.messagingengine.com (fout6-smtp.messagingengine.com
- [103.168.172.149])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id ED59F88552; Fri, 24 May 2024 15:06:26 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5294088545
- for <u-boot@lists.denx.de>; Fri, 24 May 2024 15:02:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D52288246
+ for <u-boot@lists.denx.de>; Fri, 24 May 2024 15:06:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=flygoat.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
- by mailfout.nyi.internal (Postfix) with ESMTP id 3119413800A5;
- Fri, 24 May 2024 09:02:45 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute4.internal (MEProxy); Fri, 24 May 2024 09:02:45 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
- cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1716555765;
- x=1716642165; bh=ZTaZUK7/86g1HklojfwukLlDKKBScmkHO/S+A4oHDAQ=; b=
- diEMDR7PZhVhlyQ9Cso52R77GHsaxQjjgnxH9nAZ9CQyRgDBRvUYBogx0rSKCaNA
- 2oHUxjJDzYoOCfyXqG/qyp42HkSd8kEfGYCJfSQ0grTQMVdRcphW99s02V0uWjFE
- QbWee1DjvfmbpnCX6fX9HpBwKe1Z8fW52WH+rLHOCqhJYQkvcxMBCfaSAf0jDILz
- Z52JzbxPkbr+HwWsiJ36vjmTHmjXZjhPasoSHPmDshiI/Vta2P31mbX4LvMH5U3c
- pUYNRUdDdnmkNvqVlqAxhIUJV1X17/wytklp9y6VjdbdiydlTDWVDXsL5MeWyo6J
- dX6S3XMXNcKBwmFtq/TWzQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716555765; x=
- 1716642165; bh=ZTaZUK7/86g1HklojfwukLlDKKBScmkHO/S+A4oHDAQ=; b=E
- JXjYIkcbDGvy0VTZTOTU3g9Z7xG5YFMHAV50ZduZT6xNPE/ni669GjweyffB/7nm
- NLibwQoI6f6wzmkYy2bo4t/gErkrFyX/2oY3XhVvXkLaeWzWOzCU9bG2LyLwqb4q
- fVPd9Mj9hblZaDf7K/nGMlS/nXmR488ywha5wuS9jU8Jcx3923EkhUHf+pCGcDCB
- bz+LBaClDEr4E+RUNV0GwJIfJLYVKnzowcgaSo0HFvKjtVhpw7nR9WT9ILEi2sVl
- /M5aRD6ym0rEVPKpqQB9HQTdZF4ZkzkIPdmIKJjJMXx80W+RnSIT4Oi9FsktsLAF
- efmXJlTFJg82sBzVWr1iw==
-X-ME-Sender: <xms:9I9QZkHSu2gylK1QkIFDZ85H-1g68yM27tBvT46Kq-yZXftR3PmQMw>
- <xme:9I9QZtUHwdBwiRIGJioUNfjDmmpp1iRoYwxj7Dmnj0xqHDqcpxu83ML8tMI4fS7DT
- vezswedhVqs8O1zpCU>
-X-ME-Received: <xmr:9I9QZuIL9jRV3LLuaaqsCcV9x3QQKMrKkIUbtFMCYagaT0LeuqutFcU>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdeikedgheeiucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhephfffufggtgfgkfhfjgfvvefosehtjeertdertdejnecuhfhrohhmpeflihgr
- gihunhcujggrnhhguceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomheqne
- cuggftrfgrthhtvghrnhepvdekiefhfeevkeeuveetfeelffekgedugefhtdduudeghfeu
- veegffegudekjeelnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilh
- hfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:9I9QZmGHq9Bf8BgqIWTJEqO_clXAPdGus9LCaW7bcmo-EntwrF4swQ>
- <xmx:9I9QZqWOWRybWVCdzQzcI4-DYb0REKH3_IBkI7IVobgn47SpYjyn2Q>
- <xmx:9I9QZpOWTJ9bqzihC91arGtWYPqE7BWSSw-cTo5-5BT6y-gieI8yBQ>
- <xmx:9I9QZh3ABV8deVKEAn-3fN4GZA3lLJHhkkG8vCbyb1hheKD9Jv-97Q>
- <xmx:9Y9QZsJJNmDpMEtT_dzLPpIYeRYNkSBLEeQaqA_QxgShEbidLzB3Z8MQ>
-Feedback-ID: ifd894703:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 24 May 2024 09:02:43 -0400 (EDT)
-From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Fri, 24 May 2024 14:02:40 +0100
-Subject: [PATCH v2 2/2] efi: gop: Mark pixel_format as BLTONLY if we have
- sync hook
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-354e0d4db6cso1877175f8f.0
+ for <u-boot@lists.denx.de>; Fri, 24 May 2024 06:06:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1716555984; x=1717160784; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=nVjljqST71AgJTZ1A6rovcNnZ5PvYx8SRPuPg6Q8uhM=;
+ b=NixMxMxH2r1HIBWvEeYu7jft9s2e1aDXc9R3dHCr/3brh2rezLjUrhdqLAVDOyGV5C
+ VSjEmUDPA2jGYET5ul+h3jN/yX2PHANlHrNWf+PvWGyFmc4JmYFyNh27dcLmKBCWJzZn
+ GNzBUcSUo5T2XfJRVd3lAGY33PMDGjakXal/Iy099c3neZ1yN2412cNv1EiuBmT5ATai
+ IEMFoVMPwf+xt+ORHZP4OBIHA4O4zmAhctF68sT9NggyxF0Zobuiumuc3H8HP1b/jpYK
+ F9bovLlB016whL0247cUy3USOa8L4ESI1oxwaYsczK2apCTYJbofTbaRWoAIaioMTAKL
+ puCg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716555984; x=1717160784;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=nVjljqST71AgJTZ1A6rovcNnZ5PvYx8SRPuPg6Q8uhM=;
+ b=w7toug+PMMdPhzdD0RTm6uj26HZNr1e1ZFHXieRmw+fxMz1Fdp9eAVRYcHSU9XV42t
+ TfRP0ROcR24AHn2N7pmoGBqQ1S0y/aGZYImaNn+t/Z7MzO7u/Vob868Bh3p7KqfA+nZi
+ lCibaVy9pA8250sKdNS1Ozd3TT+JRg3ZFjcSHrYARuqf9hOOIGSfNH004NYE5gXStI1a
+ P50hrvXrjQ8qPqxzDOTsdSYlhV/VPbJwZiUSBm+fbIAK5JOS5pn0Ay1wABBA9/oKJ27h
+ qjZ1DouAJ3H/kRryDeMnHdgVogWBqKLwc82EAmVus8JzmfgfkWChV3g/JJowKxe0z5oB
+ Q2GQ==
+X-Gm-Message-State: AOJu0Yyo5uC3nnWqlRKYcLatagQC2dcWSoY65GtoRKat8GDAh5TnlJxQ
+ 2xUkhpukPLH1ZjCtuYTO7cpb1joh0eSpuuRsOodH66HyZHLWudSzCVf7p2PGz5o=
+X-Google-Smtp-Source: AGHT+IEK37YmKw8LnQZU09Z+OGBAOwuLmFHWqRrPH05cnRuiCjPHI8Ykh0KCXtFQD59Z4TDICkPOTg==
+X-Received: by 2002:a05:6000:b46:b0:34e:81ab:463f with SMTP id
+ ffacd0b85a97d-35506d5d0b0mr2014056f8f.20.1716555983799; 
+ Fri, 24 May 2024 06:06:23 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:4db2:46ef:25c5:9c4c?
+ ([2a01:e0a:3cb:7bb0:4db2:46ef:25c5:9c4c])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-35579d7dd42sm1572654f8f.22.2024.05.24.06.06.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 24 May 2024 06:06:23 -0700 (PDT)
+Message-ID: <c3c9968e-f8e1-43ab-b44e-e9f7eed343c3@linaro.org>
+Date: Fri, 24 May 2024 15:06:22 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 08/15] net-lwip: import net command from cmd/net.c
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>, Tom Rini <trini@konsulko.com>
+References: <cover.1716393035.git.jerome.forissier@linaro.org>
+ <8c97a1e0a572fde6a764c2d20bd0fc1376e1cf90.1716393035.git.jerome.forissier@linaro.org>
+ <CAC_iWjJaaG3_sQLbzJAz6-wnVYy4ifgDxwGBrbXgEv8GXOw-Rg@mail.gmail.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <CAC_iWjJaaG3_sQLbzJAz6-wnVYy4ifgDxwGBrbXgEv8GXOw-Rg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240524-virtio_gpu-v2-2-b198c35b1fd2@flygoat.com>
-References: <20240524-virtio_gpu-v2-0-b198c35b1fd2@flygoat.com>
-In-Reply-To: <20240524-virtio_gpu-v2-0-b198c35b1fd2@flygoat.com>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>
-X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2103;
- i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=n0PfKlj9sdcRHBiKej668zfdWxMZBo3eyaEs3iHrcTc=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhrSA/g/PU73f7fJfybA/OFl3ls/ZCSYCyx2KTr24axCpd
- /RA0mrxjlIWBjEuBlkxRZYQAaW+DY0XF1x/kPUHZg4rE8gQBi5OAZiIow4jQ9PJbTk3nr+e5Omx
- Qe29xL7wRz7W++PTnj5/epb51Tsj/YmMDLfsPGOPHQ6aI6a/SI6Tv2SBH3M1+/aE3H0SGYLVIim
- MXAA=
-X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
- fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,70 +97,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If a video device has a video_sync hook, it means some software
-intervene is required to scanout framebuffer up on change.
 
-That means EFI application can't just use it as raw framebuffer,
-it should call BLT operation to let U-Boot help with scanout.
 
-Mark pixel format as BLTONLY as per UEFI spec to reflect this
-nature.
+On 5/24/24 11:38, Ilias Apalodimas wrote:
+> On Wed, 22 May 2024 at 19:04, Jerome Forissier
+> <jerome.forissier@linaro.org> wrote:
+>>
+>> Add support for "net list" and "net stats" to net-lwip/ by copying the
+>> code from cmd/net.c.
+>>
+>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+>> ---
+>>  cmd/net-lwip.c     | 98 ++++++++++++++++++++++++++++++++++++++++++++++
+>>  include/net-lwip.h | 50 +++++++++++++++++++++++
+>>  2 files changed, 148 insertions(+)
+>>
+>> diff --git a/cmd/net-lwip.c b/cmd/net-lwip.c
+>> index 2926399bd0..20d0d61176 100644
+>> --- a/cmd/net-lwip.c
+>> +++ b/cmd/net-lwip.c
+>> @@ -2,6 +2,10 @@
+>>  /* Copyright (C) 2024 Linaro Ltd. */
+>>
+>>  #include <command.h>
+>> +#include <dm/device.h>
+>> +#include <dm/uclass.h>
+>> +#include <linux/compat.h>
+>> +#include <linux/ethtool.h>
+>>  #include <net-lwip.h>
+>>
+>>  #if defined(CONFIG_CMD_DHCP_LWIP)
+>> @@ -43,3 +47,97 @@ U_BOOT_CMD(
+>>         "[loadAddress] URL"
+>>  );
+>>  #endif
+>> +
+>> +static int do_net_list(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>> +{
+>> +       const struct udevice *current = eth_get_dev();
+>> +       unsigned char env_enetaddr[ARP_HLEN];
+>> +       const struct udevice *dev;
+>> +       struct uclass *uc;
+>> +
+>> +       uclass_id_foreach_dev(UCLASS_ETH, dev, uc) {
+>> +               eth_env_get_enetaddr_by_index("eth", dev_seq(dev), env_enetaddr);
+>> +               printf("eth%d : %s %pM %s\n", dev_seq(dev), dev->name, env_enetaddr,
+>> +                      current == dev ? "active" : "");
+>> +       }
+>> +       return CMD_RET_SUCCESS;
+>> +}
+>> +
+> 
+> Some of these functions seem to be a c/p from cmd/net.c
+> Carve the common ones out in cmd/net-common.c and reuse them please
 
-Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
----
-v2:
-	- Remove an unused variable
----
- include/efi_api.h        | 1 +
- lib/efi_loader/efi_gop.c | 8 +++++++-
- 2 files changed, 8 insertions(+), 1 deletion(-)
-
-diff --git a/include/efi_api.h b/include/efi_api.h
-index ab40b1b5ddf6..3eaefb322878 100644
---- a/include/efi_api.h
-+++ b/include/efi_api.h
-@@ -1399,6 +1399,7 @@ struct efi_hii_config_access_protocol {
- #define EFI_GOT_RGBA8		0
- #define EFI_GOT_BGRA8		1
- #define EFI_GOT_BITMASK		2
-+#define EFI_GOT_BLTONLY		3
- 
- struct efi_gop_mode_info {
- 	u32 version;
-diff --git a/lib/efi_loader/efi_gop.c b/lib/efi_loader/efi_gop.c
-index 41e12fa72460..c9244376c09a 100644
---- a/lib/efi_loader/efi_gop.c
-+++ b/lib/efi_loader/efi_gop.c
-@@ -471,6 +471,7 @@ efi_status_t efi_gop_register(void)
- 	struct udevice *vdev;
- 	struct video_priv *priv;
- 	struct video_uc_plat *plat;
-+	struct video_ops *ops;
- 
- 	/* We only support a single video output device for now */
- 	if (uclass_first_device_err(UCLASS_VIDEO, &vdev)) {
-@@ -485,6 +486,7 @@ efi_status_t efi_gop_register(void)
- 	row = video_get_ysize(vdev);
- 
- 	plat = dev_get_uclass_plat(vdev);
-+	ops = video_get_ops(vdev);
- 	fb_base = IS_ENABLED(CONFIG_VIDEO_COPY) ? plat->copy_base : plat->base;
- 	fb_size = plat->size;
- 
-@@ -529,7 +531,11 @@ efi_status_t efi_gop_register(void)
- 	gopobj->info.version = 0;
- 	gopobj->info.width = col;
- 	gopobj->info.height = row;
--	if (bpix == VIDEO_BPP32)
-+
-+	if (ops && ops->video_sync) {
-+		/* Applications can't really use it as framebuffer */
-+		gopobj->info.pixel_format = EFI_GOT_BLTONLY;
-+	} else if (bpix == VIDEO_BPP32)
- 	{
- 		if (format == VIDEO_X2R10G10B10) {
- 			gopobj->info.pixel_format = EFI_GOT_BITMASK;
+Totally makes sense. Done in upcoming v2.
 
 -- 
-2.43.0
+Jerome
 
+> 
+> [...]
+> 
+> Cheers
+> /Ilias
