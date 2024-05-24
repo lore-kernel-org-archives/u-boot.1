@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75391C25B74
-	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 13:28:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 534F1C25B74
+	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 13:31:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF91B884D5;
-	Fri, 24 May 2024 15:28:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 7CC3E88542;
+	Fri, 24 May 2024 15:31:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="dG3xcYBW";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="gLGfi4B/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A1CF88542; Fri, 24 May 2024 15:28:27 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 11D398864F; Fri, 24 May 2024 15:31:48 +0200 (CEST)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46D34884CD
- for <u-boot@lists.denx.de>; Fri, 24 May 2024 15:28:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4202ca70318so61890695e9.1
- for <u-boot@lists.denx.de>; Fri, 24 May 2024 06:28:25 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id E2B22884CD
+ for <u-boot@lists.denx.de>; Fri, 24 May 2024 15:31:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-df771fa2b8bso851736276.2
+ for <u-boot@lists.denx.de>; Fri, 24 May 2024 06:31:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1716557304; x=1717162104;
+ d=amarulasolutions.com; s=google; t=1716557504; x=1717162304;
  darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=R0iCQYi4daNCn30n0xh+kXcuBo3wyqG63DCvkayoFsg=;
- b=dG3xcYBWaM7DgqbHVRrcgoNZak44dzJH5y0zdKYPdAIbHQLa0BzDil9rr4oTRL/+AM
- eOAAd/I7A5sDQZcuxHqDfL9oaSlAisq9pMeBgJew+RMsB+Qur1jsIMSQ5A6ymnuQgqKg
- 3Z+HdfBvqvAYfgiuoYGPgrw3W0yneZkXXPS8Z7xUfr729ZvFZxDuy9rdNn8oA7nfzFAD
- ir/07vL1516VdNeNkSnPZ1OFEhW71mWKllP3b93biKsRCnEfeFZKVR2pS3EbRnZMuTBh
- CbUyxTItmT37KWKk5R+G7rDvh+fjjIU/VE6Iqkmp8k7iA+GXNqfs7Mx7AfrVjrIz/AEK
- dVUg==
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=E9ETYomwjOOKaZUm9Y6vDiHhtweSkMhDD8jB2Lj75gc=;
+ b=gLGfi4B/8NntgiJd9KGf2anxfMSIVrCHjsVTthh9mp3lS75+Km7H+DBUwwDdxZCM5s
+ PtQ7euJQ2MHZgjEF784VQUySHiimpX6maD6o9XmSCoVD+Zvg7L9yapjm9BkKt5kdwNp9
+ jxFIDtiKBOfVRePhqS0RSXk7H4iJv0+Hn6Xzs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716557304; x=1717162104;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=R0iCQYi4daNCn30n0xh+kXcuBo3wyqG63DCvkayoFsg=;
- b=bRILyfxkeQzD+U3I2nqd6PmksDcoKxn+oAx13ESJt/FABd1uJYz+0dUmLPor7NRZsy
- APAA82odkCpuZnoLg7Rx2SW4qTkzREDcH0u1muSnPEWtv/iNgt0Vw0/ybjCbJQcPGzND
- Ptr4YUHWl71jMULBOEfBUDNuW9b8s86J4XWGBNhAFzZ99TEtr+KJIPRqRkhSPngSWUJK
- zsB3dKkt8hVvNZnYeWSRTYaMqiAqrwTwvG9y+NrZyaKjnZKieSogg/ug2CwRvSwwTFOu
- H+fiwiQACUvKFEx0RGDjpAmwPfZ139agnqv0LuPrDMHbHLL6prFsNMQGaCUvynbLE+Qi
- 7S5A==
-X-Gm-Message-State: AOJu0YxcVTRhURNGI1IHzLXH411GEzcww5kswp8zRjCrs9lnBqvyqwLJ
- YJPvPuJ1fxt1zHl1CQgJ5O/Lp0/92XRW3orOXfjxdK4yRWK91ghi/5FTehDcXkM=
-X-Google-Smtp-Source: AGHT+IEXPg6PWQxwEG+virqBkRnLPIZ6nA7Kk3JB/xpckYFhJgdNcWufJlKS4+UlzeHFiUULeBImtg==
-X-Received: by 2002:a05:600c:2187:b0:41a:9fc2:a6b1 with SMTP id
- 5b1f17b1804b1-421089d4473mr19590195e9.22.1716557304585; 
- Fri, 24 May 2024 06:28:24 -0700 (PDT)
-Received: from mkorpershoek-xps13.local
- (lfbn-tou-1-402-59.w86-206.abo.wanadoo.fr. [86.206.229.59])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4210897bc02sm20874915e9.22.2024.05.24.06.28.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 May 2024 06:28:24 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Date: Fri, 24 May 2024 15:28:21 +0200
-Subject: [PATCH] doc: cmd: bootmeth: Fix extlinunx -> extlinux typo
+ d=1e100.net; s=20230601; t=1716557504; x=1717162304;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=E9ETYomwjOOKaZUm9Y6vDiHhtweSkMhDD8jB2Lj75gc=;
+ b=gsW+whVVHa9aaHV14W003+ayqxEU4PdiETe33wHt9ZtyROtOVHXDuygyPM5SJ+NI+h
+ 52EN3AeADsYMy/n91qgbSUfK2DpSxjOnaaosDBB7ZZEvjxC9zSs02cIxmsvMutUh9twq
+ cRAp+VJq6J9zR1s3IdeaE7ZCoNjHSktSv5pHkAhP9tsAq/E/bt7WrEsw2o9XcfuIZemK
+ XrNA8GNa/KV6o0+msG8QW9wkuO522zZs8GLxnTyESapEjsl1FlStTgevGuHTGJ/5pJ/g
+ PeGs5GS4kWSRXx7Tl7G10rvB9Ne9Y5+FlMq6Faaj+ZY6qVmxPSBewuFuR9X+/qPLRHCp
+ waNQ==
+X-Gm-Message-State: AOJu0Yyhrv8oKwWjioyfnwUlaJpeuxP/Ithklqk3y3aw5pk/pHrKKHNw
+ FB9ROZ4czRtukdhBPM6AM7D86RwJ+SD+StgoJHtW/ybrTMLZvsNFLMVSFENqCikuI0c/gaLkBay
+ TrtBXXDHDBAIGcSgINaCPXlp27ZIKeyB/yHfxGw==
+X-Google-Smtp-Source: AGHT+IGajvqVkLoepaV8Zyf48qSIXmJvgY1HJLyv/L20AGyTW+Hk+Io48zCPsNw2/XFYisEiOwbfxrU9nEIP6bvILSM=
+X-Received: by 2002:a25:7486:0:b0:dc6:ff6b:71b2 with SMTP id
+ 3f1490d57ef6-df77215e2ddmr2388595276.4.1716557504625; Fri, 24 May 2024
+ 06:31:44 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240524-bootflow-doc-typo-v1-1-d8e64a40e2b1@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAPSVUGYC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIxMDUyMT3aT8/JK0nPxy3ZT8ZN2SyoJ8XUtjY8s0C7PkNGMTAyWgvoKi1LT
- MCrCZ0bG1tQCVFjfqYwAAAA==
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-X-Mailer: b4 0.14-dev-b6b73
+References: <20231130112405.92196-1-avkrasnov@salutedevices.com>
+ <fa9fc4cc-892c-7c11-877b-330bf173f3bd@salutedevices.com>
+ <f79d88f4-0d2e-1d78-065a-5a1f2f2deacf@salutedevices.com>
+ <c150440e-191d-bce8-3b99-401186be507f@salutedevices.com>
+ <180478dc-23ec-952d-e1ae-6f16d98bd16c@salutedevices.com>
+ <969ce8dc-3726-cf66-3241-5eb06f9cb85f@salutedevices.com>
+ <CAOf5uw=2hicHHOP1caASJoqmOpZ9vvE3ZMnVQqXxQ0eqbm-CMg@mail.gmail.com>
+ <3142650d-4868-c6cf-2555-301e41fadbe4@salutedevices.com>
+ <CAOf5uwkmPq4pU0RY-fQtt7Qn5dzpHSf7rr_z5yrepmgP4wRADw@mail.gmail.com>
+ <CABGWkvqxBRhjRFC3szz_WGJmHyzx1ihRADr04f47k+8SRqjFBQ@mail.gmail.com>
+ <b10fefbf-ac0e-b285-4809-578cffee7291@salutedevices.com>
+In-Reply-To: <b10fefbf-ac0e-b285-4809-578cffee7291@salutedevices.com>
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Date: Fri, 24 May 2024 15:31:33 +0200
+Message-ID: <CABGWkvrX2Xv0hEgbNXZrO8rrC_kHay5djo0DULxoA8o1wX0OUA@mail.gmail.com>
+Subject: Re: [PATCH v1] mtd: rawnand: macronix: OTP access for MX30LFxG18AC
+To: Arseniy Krasnov <avkrasnov@salutedevices.com>
+Cc: u-boot@lists.denx.de, kernel@sberdevices.ru, 
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, oxffffaa@gmail.com,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Jaime Liao <jaimeliao.tw@gmail.com>,
+ Jaime Liao <jaimeliao@mxic.com.tw>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,32 +98,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix a trivial typo in the bootmeth documentation.
+Hi Arseniy,
 
-Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
----
- doc/usage/cmd/bootmeth.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Fri, May 24, 2024 at 11:25=E2=80=AFAM Arseniy Krasnov
+<avkrasnov@salutedevices.com> wrote:
+>
+> Hi Dario!
+>
+> Sorry, is this patch ok?
 
-diff --git a/doc/usage/cmd/bootmeth.rst b/doc/usage/cmd/bootmeth.rst
-index 2903977ee54d..bac9fdf85cdc 100644
---- a/doc/usage/cmd/bootmeth.rst
-+++ b/doc/usage/cmd/bootmeth.rst
-@@ -48,7 +48,7 @@ The format looks like this:
- =====  ===  ==================  =================================
- Order  Seq  Name                Description
- =====  ===  ==================  =================================
--    0    0  extlinunx           Extlinux boot from a block device
-+    0    0  extlinux            Extlinux boot from a block device
-     1    1  efi                 EFI boot from an .efi file
-     2    2  pxe                 PXE boot from a network device
-     3    3  sandbox             Sandbox boot for testing
+Sorry, I told you I was testing it but I forgot to tell you that
+testing was successfully
+completed for this patch.
 
----
-base-commit: a7f0154c412859323396111dd0c09dbafbc153cb
-change-id: 20240524-bootflow-doc-typo-9339f86cf340
+Thanks and regards,
+Dario
 
-Best regards,
--- 
-Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>
+> Thanks
+>
+> On 18.04.2024 09:55, Dario Binacchi wrote:
+> > Arseniy, Michael, All
+> >
+> > On Wed, Apr 17, 2024 at 8:44=E2=80=AFPM Michael Nazzareno Trimarchi
+> > <michael@amarulasolutions.com> wrote:
+> >>
+> >> Hi
+> >>
+> >> Dario did you add those patches in CI and test them again?
+> >>
+> >> Michael
+> >>
+> >> On Wed, Apr 17, 2024 at 8:44=E2=80=AFPM Arseniy Krasnov
+> >> <avkrasnov@salutedevices.com> wrote:
+> >>>
+> >>> Hello,
+> >>>
+> >>> Sorry, pls ping
+> >>>
+> >>> Thanks, Arseniy
+> >>>
+> >>> On 13.03.2024 09:46, Michael Nazzareno Trimarchi wrote:
+> >>>> Hi  Dario
+> >>>>
+> >>>> Can apply this series and put in CI?
+> >
+> > Sorry, but I mistakenly tagged it as 'superseded'.
+> > I just pushed it to my nand-next branch and I'm running the CI now.
+> >
+> > Thanks and regards,
+> > Dario
+> >
+> >>>>
+> >>>> Michael
+> >>>>
+> >>>> On Wed, Mar 13, 2024 at 7:43=E2=80=AFAM Arseniy Krasnov
+> >>>> <avkrasnov@salutedevices.com> wrote:
+> >>>>>
+> >>>>> Sorry, please ping
+> >>>>>
+> >>>>> Thanks, Arseniy
+> >>>>>
+> >>>>> On 11.02.2024 02:16, Arseniy Krasnov wrote:
+> >>>>>> Sorry, pls ping
+> >>>>>>
+> >>>>>> Thanks, Arseniy
+> >>>>>>
+> >>>>>> On 08.01.2024 21:33, Arseniy Krasnov wrote:
+> >>>>>>> Sorry, pls ping
+> >>>>>>>
+> >>>>>>> Thanks, Arseniy
+> >>>>
+> >>>>
+> >>>>
+> >>
+> >>
+> >>
+> >> --
+> >> Michael Nazzareno Trimarchi
+> >> Co-Founder & Chief Executive Officer
+> >> M. +39 347 913 2170
+> >> michael@amarulasolutions.com
+> >> __________________________________
+> >>
+> >> Amarula Solutions BV
+> >> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+> >> T. +31 (0)85 111 9172
+> >> info@amarulasolutions.com
+> >> www.amarulasolutions.com
+> >
+> >
+> >
 
+
+
+--=20
+
+Dario Binacchi
+
+Senior Embedded Linux Developer
+
+dario.binacchi@amarulasolutions.com
+
+__________________________________
+
+
+Amarula Solutions SRL
+
+Via Le Canevare 30, 31100 Treviso, Veneto, IT
+
+T. +39 042 243 5310
+info@amarulasolutions.com
+
+www.amarulasolutions.com
