@@ -4,48 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86D18C25B7A
-	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 11:47:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 731ACC25B7A
+	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 11:57:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63AB18883C;
-	Fri, 24 May 2024 13:47:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id AB93C88283;
+	Fri, 24 May 2024 13:57:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=northern.tech
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=northern.tech header.i=@northern.tech header.b="EZG4325n";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3B9D88442; Fri, 24 May 2024 13:47:05 +0200 (CEST)
-Received: from smtp-1909.mail.infomaniak.ch (smtp-1909.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::1909])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 672718830C; Fri, 24 May 2024 13:57:09 +0200 (CEST)
+Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
+ [IPv6:2a00:1450:4864:20::22f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 787FE88676
- for <u-boot@lists.denx.de>; Fri, 24 May 2024 13:46:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E1458827A
+ for <u-boot@lists.denx.de>; Fri, 24 May 2024 13:57:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=northern.tech
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
- [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Vm3DL0ClqzwVT;
- Fri, 24 May 2024 13:46:58 +0200 (CEST)
-Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Vm3DK3yv4zDjM; Fri, 24 May 2024 13:46:57 +0200 (CEST)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Fri, 24 May 2024 13:46:37 +0200
-Subject: [PATCH 3/3] rockchip: theobroma: update URLs to point to CHERRY
- website
+ spf=pass smtp.mailfrom=kristian.amlie@northern.tech
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-2e8a8ff4083so28989071fa.1
+ for <u-boot@lists.denx.de>; Fri, 24 May 2024 04:57:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=northern.tech; s=google; t=1716551826; x=1717156626; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=c7sakWDb6krQFg7SBLwSqzRR6tLdHrIrhG4PS/CwqrE=;
+ b=EZG4325nsolj0dCwVSGCXdVPMbYvbSCPNvxTorlLY7+D/nLh9lhHgYX/kcmGT2vagh
+ pWeaAJU6BY43ns1alSmtIJQdAuPCyLOPPNIQhJDzlAQZkxBC+QAS5gcNbAHll8JwTPCD
+ EXHQ8sDAwRf14B8DzQSsKC0Cu/mDjrbiPuBTOAPblNr486f03mvpGsj15hM7DfFxBsXj
+ NdlFuHWrAdNTUImOxGa3g5v9O/neAn+pqdADhYKwEbHF5Ro3fjIXGsRS/27CAIRA/8m9
+ TfPiIJOub0+a95rk9xaEVNyVR+lsJIfE52fsQmJeDIFXVVcT/TqJykv3je2qfQIspeGn
+ bYEA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716551826; x=1717156626;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=c7sakWDb6krQFg7SBLwSqzRR6tLdHrIrhG4PS/CwqrE=;
+ b=i7TnAAzZ4fMkc8L8Io6QW5fneSQKvSwUQNJ+Jy+zplTrzLOEi6vpBdc+AuEW0zsoBF
+ 1j3U6jhwT0a1vOoWPr3isrpiHyfYDP7qIMakvmTzDsNgs4Oqpl9BBGeMAmspbJkCkyf7
+ dQNSyN3bh5qka7GIiExTLtSruSyUiNClaWTe/gKNNewZSORk+uFlG/Jlust9kTx02jg1
+ 5+ZTHGCQ9LpY+wYvDu7yBkj9DMzWALd16WUqw5kdWNOI9oCnZAE9bKZuQp7/JhSi2xgN
+ gTB2CgTPkYcFyBqDtEQh8XEnOZlKHgLD5wsekaDB464V2dRgMoZ0HaKnygrfnF1Ygp6P
+ 7q6g==
+X-Gm-Message-State: AOJu0YwgmPWxMF0Y53ZjVniM/nk20KnwsMYMa08Npp+9KvCC000GbCuz
+ 1KA9eR1gs+xs6csXx4wjPQmTYbBVbwZd4mMlzuUMWYllUVvFQYmOxbR2JTU5AE5NPw2lV/wKs0t
+ S2M4c+I8mQfcXKN7OF5ZJbz3dbrro3kFG4UzpPypnEydd8n1LVR7qeA==
+X-Google-Smtp-Source: AGHT+IFIkFdq9pTeXmlH0XLVIoM6ifjCEL5h8/2iR782KEAkySsM2E7rvicm/zNk5SuVuox9UZjr4g==
+X-Received: by 2002:a2e:2205:0:b0:2e9:58d9:6d8 with SMTP id
+ 38308e7fff4ca-2e958d90769mr8353101fa.7.1716551826488; 
+ Fri, 24 May 2024 04:57:06 -0700 (PDT)
+Received: from kristian-Mender-T460s.forskningsparken.no
+ ([2a02:d140:c013:1837:18dd:629f:7a9d:453a])
+ by smtp.googlemail.com with ESMTPSA id
+ 38308e7fff4ca-2e95bcd8e73sm1728231fa.45.2024.05.24.04.57.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 24 May 2024 04:57:06 -0700 (PDT)
+From: Kristian Amlie <kristian.amlie@northern.tech>
+To: u-boot@lists.denx.de
+Subject: [PATCH 1/1] Update maintainer for Versatile Express.
+Date: Fri, 24 May 2024 13:57:05 +0200
+Message-Id: <20240524115705.2816843-1-kristian.amlie@northern.tech>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240524-tsd-to-cherry-v1-3-3002bed55f19@cherry.de>
-References: <20240524-tsd-to-cherry-v1-0-3002bed55f19@cherry.de>
-In-Reply-To: <20240524-tsd-to-cherry-v1-0-3002bed55f19@cherry.de>
-To: Tom Rini <trini@konsulko.com>, Heiko Stuebner <heiko.stuebner@cherry.de>, 
- Klaus Goger <klaus.goger@cherry.de>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>
-Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.13.0
-X-Infomaniak-Routing: alpha
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,54 +88,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
-
-Most of the current URLs should be redirected but some aren't already,
-so let's anticipate more IT hiccups by migrating to new URLs.
-
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+Signed-off-by: Kristian Amlie <kristian.amlie@northern.tech>
 ---
- board/theobroma-systems/jaguar_rk3588/MAINTAINERS | 4 ++--
- board/theobroma-systems/puma_rk3399/MAINTAINERS   | 4 ++--
- board/theobroma-systems/ringneck_px30/MAINTAINERS | 3 ++-
- 3 files changed, 6 insertions(+), 5 deletions(-)
+ board/armltd/vexpress/MAINTAINERS | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/board/theobroma-systems/jaguar_rk3588/MAINTAINERS b/board/theobroma-systems/jaguar_rk3588/MAINTAINERS
-index d14edadefe2..ab7051b427f 100644
---- a/board/theobroma-systems/jaguar_rk3588/MAINTAINERS
-+++ b/board/theobroma-systems/jaguar_rk3588/MAINTAINERS
-@@ -9,5 +9,5 @@ F:	doc/board/theobroma-systems/
- F:	include/configs/jaguar_rk3588.h
- F:	arch/arm/dts/rk3588-jaguar*
- F:	configs/jaguar-rk3588_defconfig
--W:	https://theobroma-systems.com/product/jaguar-sbc-rk3588/
--T:	git git://git.theobroma-systems.com/jaguar-u-boot.git
-+W:	https://embedded.cherry.de/product/jaguar-sbc-rk3588/
-+T:	git git://git.embedded.cherry.de/jaguar-u-boot.git
-diff --git a/board/theobroma-systems/puma_rk3399/MAINTAINERS b/board/theobroma-systems/puma_rk3399/MAINTAINERS
-index 2b409f16963..2536e348887 100644
---- a/board/theobroma-systems/puma_rk3399/MAINTAINERS
-+++ b/board/theobroma-systems/puma_rk3399/MAINTAINERS
-@@ -8,5 +8,5 @@ F:	doc/board/theobroma-systems
- F:	include/configs/puma_rk3399.h
- F:	arch/arm/dts/rk3399-puma*
- F:	configs/puma-rk3399_defconfig
--W:	https://www.theobroma-systems.com/rk3399-q7/tech-specs
--T:	git git://git.theobroma-systems.com/puma-u-boot.git
-+W:	https://embedded.cherry.de/product/puma-som-rk3399-q7/
-+T:	git git://git.embedded.cherry.de/puma-u-boot.git
-diff --git a/board/theobroma-systems/ringneck_px30/MAINTAINERS b/board/theobroma-systems/ringneck_px30/MAINTAINERS
-index bf4bc452823..2aff91f4207 100644
---- a/board/theobroma-systems/ringneck_px30/MAINTAINERS
-+++ b/board/theobroma-systems/ringneck_px30/MAINTAINERS
-@@ -8,4 +8,5 @@ F:	doc/board/theobroma-systems/
- F:	include/configs/ringneck_px30.h
- F:	arch/arm/dts/px30-ringneck*
- F:	configs/ringneck-px30_defconfig
--W:	https://theobroma-systems.com/product/ringneck-som-px30-uq7/
-+W:	https://embedded.cherry.de/product/ringneck-som-px30-uq7/
-+T:	git git://git.embedded.cherry.de/ringneck-u-boot.git
-
+diff --git a/board/armltd/vexpress/MAINTAINERS b/board/armltd/vexpress/MAINTAINERS
+index 2b3e4916a5..7a54c6b560 100644
+--- a/board/armltd/vexpress/MAINTAINERS
++++ b/board/armltd/vexpress/MAINTAINERS
+@@ -1,5 +1,5 @@
+ VERSATILE EXPRESS BOARDS
+-M:	Kristian Amlie <kristian.amlie@northern.tech>
++M:	Josef Holzmayr <josef.holzmayr@northern.tech>
+ S:	Maintained
+ F:	board/armltd/vexpress/
+ F:	include/configs/vexpress_ca9x4.h
 -- 
-2.45.1
+2.34.1
 
