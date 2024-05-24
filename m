@@ -4,87 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00FFEC25B75
-	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 01:48:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A393FC25B74
+	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 05:04:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CD5B884EA;
-	Fri, 24 May 2024 03:48:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id CF758881F6;
+	Fri, 24 May 2024 07:04:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Z2hosl5N";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oQCTna1X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 169A888565; Fri, 24 May 2024 03:48:49 +0200 (CEST)
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
+ id 384A288624; Fri, 24 May 2024 07:04:26 +0200 (CEST)
+Received: from mail-ua1-x929.google.com (mail-ua1-x929.google.com
+ [IPv6:2607:f8b0:4864:20::929])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE0358854B
- for <U-Boot@lists.denx.de>; Fri, 24 May 2024 03:48:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DCEEE881F6
+ for <u-boot@lists.denx.de>; Fri, 24 May 2024 07:04:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-6a8691d736cso19071936d6.0
- for <U-Boot@lists.denx.de>; Thu, 23 May 2024 18:48:46 -0700 (PDT)
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x929.google.com with SMTP id
+ a1e0cc1a2514c-80324bcb9ebso615261241.0
+ for <u-boot@lists.denx.de>; Thu, 23 May 2024 22:04:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1716515325; x=1717120125; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=x5pBbJm2OJs0yR19IGEiFhltVn/o0khVx9cxAAbExXc=;
- b=Z2hosl5NGrt8yltiOKtxZ22UcYLHbI+Fx3iqh7WiLtntHiURGASwdY2ozYgfk89kPN
- RHH1K43m29+ooxl58bHKVZpUsUjkvt9dGNXVaeivF3Mf2mYdFS6QWDvcL4uF5b5qt/M8
- /y/G+lTaEwNwZSoWBD1CsDd7JkomRWUldW05U=
+ d=linaro.org; s=google; t=1716527063; x=1717131863; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=v3tJyhRA7Wq2r2RyW/OhTOU8Vp47DA8vFq1CpbB+78Q=;
+ b=oQCTna1XTjfUrbD4YrGg+GO5zje1Gz4EICOTEilSCgmX0/fHE3aP2xp7VdBnMiuYsi
+ yIT18ELA8EbMsVe7leXQGm45ZIseXP1aHzHcexMJwX+l3DvVqkpUUsSsG/IEx0bARuCr
+ 2RraJADWIVcMUUwy30+gI4ts+QDx5jSYAwac4Rk6gHPK5cJjiFzW5EzG/W/+DPDHl5Ow
+ YvN255UvKx5NvSGqzmEZIMbQJGnTYGxQRf/++YaouDXbyOd+iTwjq3Ahzds/1ZoZ3C0P
+ ijee51ngegHn1HFWVJX2fDDy5vqf8bDhEgGs84Pybgqf4O59s0HDoNJx6H0V1uljk7IF
+ zsxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716515325; x=1717120125;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=x5pBbJm2OJs0yR19IGEiFhltVn/o0khVx9cxAAbExXc=;
- b=w5QbdPgkq7OiQEeWgrTqvK0Pk9MVz0VzwgOcRNGt4lKcZli99t0ZUCdko3DWgdrSfI
- GsmRZopMkdJFnoqTo92qJN09IrdbGz5CfiNxoV5w2oLOcRvQ4hdmFRMrWkbXapxW6BBl
- 8ZXD2keS+Z6wL/r+cIo1sDAaTnVPNSZXTnyMqnYJjHhY4nOq8/bv81RJuFzJi6DdccqT
- FfuXMg8TTLJOzLK6pAVxXFEdSWDtc5P7g002d18kxEQHSRcmdX4eLswOwqd/C+TCA0Yo
- MBo2wn92Mg/XSduj8AShn5OpsBSGcFz3uMmBx/Hw+JpJzJ0Rw3Bh4SM6iy0gLsaGenOf
- 5Xqw==
+ d=1e100.net; s=20230601; t=1716527063; x=1717131863;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=v3tJyhRA7Wq2r2RyW/OhTOU8Vp47DA8vFq1CpbB+78Q=;
+ b=QNp3rkeY2fZ9YmA6zKKa5+aJSYhGztpuHwPzJv0DO6ZZH0/QGB/dBIvHU38zJREjyD
+ AMu5dd9kcpRv+q1Y43sk2QuuJG9bmiCrsbUieRTzI0pptwFAo9XCrrS4DiNkUmtNwTa5
+ Sr6u4HwFoIclmMgtOnQEsFypsX/m4QnneXqjF84RbOlWPglCVWqpiL6o8Wk4UEeMAzi2
+ 2czsOcYkGE6N8pJN+7N3IC7Pa2cy6XIYOT0sYzlZUMxMnTx8v+L1hJVANnJJeHQgqUpV
+ 04PDFckrxcxtu0of4DniqazEEiagTof5bryhiNxkVWC35NAa/OmpwlN9Mw9dJ+MMrmzF
+ dasg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVJtKxjdjGgmd9D0JGV991IR5+wtr6K/fWWK9T7NoCLulhgO4ocB3n6nGCSowwY+bVXmkPixni7Y9gkdxP48NvX3emIlA==
-X-Gm-Message-State: AOJu0Yz8phKe/CLLhdLH6QLhp5RgaHCc/XgTjwwjzVFnNDaUCwZDYtgB
- nNG0o/DhM7nNVx4TbVJHE0tITNgSrvBdkEqN2GHzwxFVracp3lR5gPLHzF97+4E=
-X-Google-Smtp-Source: AGHT+IGmdj5U8XPKr1mzqL0GTMBG/NZc9Cu1BZRRWnmjdc/MrZraQWKi6RJO69666uV7TRwEcmx/Pw==
-X-Received: by 2002:a05:6214:5010:b0:6a0:f0eb:1679 with SMTP id
- 6a1803df08f44-6ab8f33c6b4mr68185136d6.8.1716515325225; 
- Thu, 23 May 2024 18:48:45 -0700 (PDT)
-Received: from bill-the-cat ([189.178.170.52])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6ac070c8792sm2490636d6.11.2024.05.23.18.48.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 May 2024 18:48:44 -0700 (PDT)
-Date: Thu, 23 May 2024 19:48:42 -0600
-From: Tom Rini <trini@konsulko.com>
-To: "Brunham, Kalen" <kalen.brunham@intel.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- "U-Boot@lists.denx.de" <U-Boot@lists.denx.de>
-Subject: Re: [PATCH 1/1] Added arm64 assembly for examples/api crt0
-Message-ID: <20240524014842.GW2568172@bill-the-cat>
-References: <20240521164659.GZ2568172@bill-the-cat>
- <DM4PR11MB529668DA50F05F26AAD229F0E3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
- <20240521181534.GD2568172@bill-the-cat>
- <DM4PR11MB5296769279BCDD505F614E6BE3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
- <20240521234624.GF2568172@bill-the-cat>
- <DM4PR11MB5296918A0447369D6B27891DE3EB2@DM4PR11MB5296.namprd11.prod.outlook.com>
- <20240522143908.GI2568172@bill-the-cat>
- <DM4PR11MB52968E794BE8B0A882A519A6E3EB2@DM4PR11MB5296.namprd11.prod.outlook.com>
- <20240523153239.GS2568172@bill-the-cat>
- <DM4PR11MB5296B8B0051B23A2AD03544CE3F42@DM4PR11MB5296.namprd11.prod.outlook.com>
+ AJvYcCVllH9QoGLWRH/EL6vR8cha/P27hn/DNSjUyA/GRS4CGPmJUPvfZ8H616+XCeB8mlyyElCCMC29sIVOflnYKH0Z48hoTA==
+X-Gm-Message-State: AOJu0YzNvkzDztg//mmrwh8OgfoCMh+chw40ALOMNdhSQ9qS7nyGBWHV
+ bWO6haGQtij4PI8YQ74vYDZEsEKq0pb+8CYCnprR29MAFWLhWzjKYIA2Pg2BpRI74PKhwBeUXPd
+ bu/p1ha5o/hE5BBKHtiVXBh5jdc/33HJwaicSDA==
+X-Google-Smtp-Source: AGHT+IGC/3ul3M8NfIHNCcxmeg+VCF8qlws7usLTroFIKiG00+h0a/xahSVfcu7L0fzNwW4tUDt6G8r/pDuyZJPRNuQ=
+X-Received: by 2002:a05:6102:4c4b:b0:48a:370c:dea8 with SMTP id
+ ada2fe7eead31-48a3851f0b3mr1449871137.9.1716527062690; Thu, 23 May 2024
+ 22:04:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="47Y1gwoULuECYVht"
-Content-Disposition: inline
-In-Reply-To: <DM4PR11MB5296B8B0051B23A2AD03544CE3F42@DM4PR11MB5296.namprd11.prod.outlook.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240523173815.63628-1-robert.marko@sartura.hr>
+ <20240523173815.63628-2-robert.marko@sartura.hr>
+In-Reply-To: <20240523173815.63628-2-robert.marko@sartura.hr>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Fri, 24 May 2024 10:34:11 +0530
+Message-ID: <CAFA6WYMvu99gXxdtPc5kv4FZw=u5vX5oeRCyXdpQQbau3Xytgg@mail.gmail.com>
+Subject: Re: [PATCH v2 2/5] dt-bindings: clock: qcom: ipq4019: drop downstream
+ file
+To: Robert Marko <robert.marko@sartura.hr>
+Cc: trini@konsulko.com, caleb.connolly@linaro.org, neil.armstrong@linaro.org, 
+ lukma@denx.de, seanga2@gmail.com, joe.hershberger@ni.com, 
+ rfried.dev@gmail.com, u-boot-qcom@groups.io, u-boot@lists.denx.de, 
+ j.beck@linefinity.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,79 +92,201 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, 23 May 2024 at 23:08, Robert Marko <robert.marko@sartura.hr> wrote:
+>
+> IPQ4019 clock dt-bindings are available in Linux upstream, and we can just
+> use those instead of carrying a downstream file that matches the upstream one
+> anyway.
+>
+> Signed-off-by: Robert Marko <robert.marko@sartura.hr>
+> ---
+> Changes in v2:
+> * Drop the downstream dt-bindings header as it matches the upstream Linux one
+>
+>  include/dt-bindings/clock/qcom,gcc-ipq4019.h | 169 -------------------
+>  1 file changed, 169 deletions(-)
+>  delete mode 100644 include/dt-bindings/clock/qcom,gcc-ipq4019.h
+>
 
---47Y1gwoULuECYVht
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 
-On Thu, May 23, 2024 at 04:01:31PM +0000, Brunham, Kalen wrote:
+-Sumit
 
-> I can see that efi_device_path.c and efi_disk.c both #include blk.h.=20
-
-OK, yes. But what I'm asking of Heinrich is, can we easily and cleanly
-make that support conditional? Or is there some underlying requirement
-at play here?
-
->=20
-> -----Original Message-----
-> From: Tom Rini <trini@konsulko.com>=20
-> Sent: Thursday, May 23, 2024 11:33 AM
-> To: Brunham, Kalen <kalen.brunham@intel.com>; Heinrich Schuchardt <xypron=
-=2Eglpk@gmx.de>
-> Cc: U-Boot@lists.denx.de
-> Subject: Re: [PATCH 1/1] Added arm64 assembly for examples/api crt0
->=20
-> On Wed, May 22, 2024 at 05:22:24PM +0000, Brunham, Kalen wrote:
->=20
-> > Hi Tom,
-> >=20
-> > BLK is currently a dependency for EFI_LOADER as shown in the snippet fr=
-om lib/efi_loader/Kconfig below. Perhaps the question is why EFI_LOADER req=
-uires a block device? If I remove this depends on BLK line, then I can enab=
-le EFI and successfully simulate the EFI hello world on my test design.=20
-> >=20
-> >=20
-> > config EFI_LOADER
-> > 	bool "Support running UEFI applications"
-> > 	depends on OF_LIBFDT && ( \
-> > 		ARM && (SYS_CPU =3D arm1136 || \
-> > 			SYS_CPU =3D arm1176 || \
-> > 			SYS_CPU =3D armv7   || \
-> > 			SYS_CPU =3D armv8)  || \
-> > 		X86 || RISCV || SANDBOX)
-> > 	# We need EFI_STUB_64BIT to be set on x86_64 with EFI_STUB
-> > 	depends on !EFI_STUB || !X86_64 || EFI_STUB_64BIT
-> > 	# We need EFI_STUB_32BIT to be set on x86_32 with EFI_STUB
-> > 	depends on !EFI_STUB || !X86 || X86_64 || EFI_STUB_32BIT
-> > 	depends on BLK
-> > 	depends on !EFI_APP
-> > 	default y if !ARM || SYS_CPU =3D armv7 || SYS_CPU =3D armv8
->=20
-> Do you recall why this is Heinrich?
->=20
-> --=20
-> Tom
-
---=20
-Tom
-
---47Y1gwoULuECYVht
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZP8fYACgkQFHw5/5Y0
-tyxvHwv/REoGV7/X6bPDgGCvBcqRIkhbk7ZRaqczERSFszhAcFbyiYrP2+DrtU9m
-OqyG7MXQOzYpKxUSnPxvxP6AgCyIdXaBMNn4DHo2ix7R+n2IscCVdJkL5DeUCEek
-pMTMyLmKZ9F7uxSjgomM04qT2KFM0GPNjY24rOC0idhnczpDZ/LhEihYY0XmfyB5
-9b76PkeZf3GAwoqK3Ump9w9OFmDiebnm4h0Ov3m/QNBHBw/fY+l3WWk3oUGZPjzl
-sQUpy/n89eDpG8dCyprhaFo1ZAq3/mgmetVmIHZs79jd014XS+voMRFZdWGhwzkb
-cSJjl9E52lZWV2zj1peatBYPVXdQT6CAqipaECBhxmRvuVcINERDhqc9lGaTn6Zz
-T9jJQH92TyDy0hFvTGUZeh4uJzFP1nvIOjyf0NJuk34Fcr76STv/4ZjiGWkDWAtL
-3Ico+QyaiXHQU77rThZfPxYKsSgoID8oMEvVxuQXs/WzPsfeSw8wx9ntxIqp/uLB
-xR3NOq0L
-=3EaU
------END PGP SIGNATURE-----
-
---47Y1gwoULuECYVht--
+> diff --git a/include/dt-bindings/clock/qcom,gcc-ipq4019.h b/include/dt-bindings/clock/qcom,gcc-ipq4019.h
+> deleted file mode 100644
+> index 7e8a7be6dc..0000000000
+> --- a/include/dt-bindings/clock/qcom,gcc-ipq4019.h
+> +++ /dev/null
+> @@ -1,169 +0,0 @@
+> -/* Copyright (c) 2015 The Linux Foundation. All rights reserved.
+> - *
+> - * Permission to use, copy, modify, and/or distribute this software for any
+> - * purpose with or without fee is hereby granted, provided that the above
+> - * copyright notice and this permission notice appear in all copies.
+> - *
+> - * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+> - * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+> - * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+> - * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+> - * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+> - * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+> - * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+> - *
+> - */
+> -#ifndef __QCOM_CLK_IPQ4019_H__
+> -#define __QCOM_CLK_IPQ4019_H__
+> -
+> -#define GCC_DUMMY_CLK                                  0
+> -#define AUDIO_CLK_SRC                                  1
+> -#define BLSP1_QUP1_I2C_APPS_CLK_SRC                    2
+> -#define BLSP1_QUP1_SPI_APPS_CLK_SRC                    3
+> -#define BLSP1_QUP2_I2C_APPS_CLK_SRC                    4
+> -#define BLSP1_QUP2_SPI_APPS_CLK_SRC                    5
+> -#define BLSP1_UART1_APPS_CLK_SRC                       6
+> -#define BLSP1_UART2_APPS_CLK_SRC                       7
+> -#define GCC_USB3_MOCK_UTMI_CLK_SRC                     8
+> -#define GCC_APPS_CLK_SRC                               9
+> -#define GCC_APPS_AHB_CLK_SRC                           10
+> -#define GP1_CLK_SRC                                    11
+> -#define GP2_CLK_SRC                                    12
+> -#define GP3_CLK_SRC                                    13
+> -#define SDCC1_APPS_CLK_SRC                             14
+> -#define FEPHY_125M_DLY_CLK_SRC                         15
+> -#define WCSS2G_CLK_SRC                                 16
+> -#define WCSS5G_CLK_SRC                                 17
+> -#define GCC_APSS_AHB_CLK                               18
+> -#define GCC_AUDIO_AHB_CLK                              19
+> -#define GCC_AUDIO_PWM_CLK                              20
+> -#define GCC_BLSP1_AHB_CLK                              21
+> -#define GCC_BLSP1_QUP1_I2C_APPS_CLK                    22
+> -#define GCC_BLSP1_QUP1_SPI_APPS_CLK                    23
+> -#define GCC_BLSP1_QUP2_I2C_APPS_CLK                    24
+> -#define GCC_BLSP1_QUP2_SPI_APPS_CLK                    25
+> -#define GCC_BLSP1_UART1_APPS_CLK                       26
+> -#define GCC_BLSP1_UART2_APPS_CLK                       27
+> -#define GCC_DCD_XO_CLK                                 28
+> -#define GCC_GP1_CLK                                    29
+> -#define GCC_GP2_CLK                                    30
+> -#define GCC_GP3_CLK                                    31
+> -#define GCC_BOOT_ROM_AHB_CLK                           32
+> -#define GCC_CRYPTO_AHB_CLK                             33
+> -#define GCC_CRYPTO_AXI_CLK                             34
+> -#define GCC_CRYPTO_CLK                                 35
+> -#define GCC_ESS_CLK                                    36
+> -#define GCC_IMEM_AXI_CLK                               37
+> -#define GCC_IMEM_CFG_AHB_CLK                           38
+> -#define GCC_PCIE_AHB_CLK                               39
+> -#define GCC_PCIE_AXI_M_CLK                             40
+> -#define GCC_PCIE_AXI_S_CLK                             41
+> -#define GCC_PCNOC_AHB_CLK                              42
+> -#define GCC_PRNG_AHB_CLK                               43
+> -#define GCC_QPIC_AHB_CLK                               44
+> -#define GCC_QPIC_CLK                                   45
+> -#define GCC_SDCC1_AHB_CLK                              46
+> -#define GCC_SDCC1_APPS_CLK                             47
+> -#define GCC_SNOC_PCNOC_AHB_CLK                         48
+> -#define GCC_SYS_NOC_125M_CLK                           49
+> -#define GCC_SYS_NOC_AXI_CLK                            50
+> -#define GCC_TCSR_AHB_CLK                               51
+> -#define GCC_TLMM_AHB_CLK                               52
+> -#define GCC_USB2_MASTER_CLK                            53
+> -#define GCC_USB2_SLEEP_CLK                             54
+> -#define GCC_USB2_MOCK_UTMI_CLK                         55
+> -#define GCC_USB3_MASTER_CLK                            56
+> -#define GCC_USB3_SLEEP_CLK                             57
+> -#define GCC_USB3_MOCK_UTMI_CLK                         58
+> -#define GCC_WCSS2G_CLK                                 59
+> -#define GCC_WCSS2G_REF_CLK                             60
+> -#define GCC_WCSS2G_RTC_CLK                             61
+> -#define GCC_WCSS5G_CLK                                 62
+> -#define GCC_WCSS5G_REF_CLK                             63
+> -#define GCC_WCSS5G_RTC_CLK                             64
+> -#define GCC_APSS_DDRPLL_VCO                            65
+> -#define GCC_SDCC_PLLDIV_CLK                            66
+> -#define GCC_FEPLL_VCO                                  67
+> -#define GCC_FEPLL125_CLK                               68
+> -#define GCC_FEPLL125DLY_CLK                            69
+> -#define GCC_FEPLL200_CLK                               70
+> -#define GCC_FEPLL500_CLK                               71
+> -#define GCC_FEPLL_WCSS2G_CLK                           72
+> -#define GCC_FEPLL_WCSS5G_CLK                           73
+> -#define GCC_APSS_CPU_PLLDIV_CLK                                74
+> -#define GCC_PCNOC_AHB_CLK_SRC                          75
+> -
+> -#define WIFI0_CPU_INIT_RESET                           0
+> -#define WIFI0_RADIO_SRIF_RESET                         1
+> -#define WIFI0_RADIO_WARM_RESET                         2
+> -#define WIFI0_RADIO_COLD_RESET                         3
+> -#define WIFI0_CORE_WARM_RESET                          4
+> -#define WIFI0_CORE_COLD_RESET                          5
+> -#define WIFI1_CPU_INIT_RESET                           6
+> -#define WIFI1_RADIO_SRIF_RESET                         7
+> -#define WIFI1_RADIO_WARM_RESET                         8
+> -#define WIFI1_RADIO_COLD_RESET                         9
+> -#define WIFI1_CORE_WARM_RESET                          10
+> -#define WIFI1_CORE_COLD_RESET                          11
+> -#define USB3_UNIPHY_PHY_ARES                           12
+> -#define USB3_HSPHY_POR_ARES                            13
+> -#define USB3_HSPHY_S_ARES                              14
+> -#define USB2_HSPHY_POR_ARES                            15
+> -#define USB2_HSPHY_S_ARES                              16
+> -#define PCIE_PHY_AHB_ARES                              17
+> -#define PCIE_AHB_ARES                                  18
+> -#define PCIE_PWR_ARES                                  19
+> -#define PCIE_PIPE_STICKY_ARES                          20
+> -#define PCIE_AXI_M_STICKY_ARES                         21
+> -#define PCIE_PHY_ARES                                  22
+> -#define PCIE_PARF_XPU_ARES                             23
+> -#define PCIE_AXI_S_XPU_ARES                            24
+> -#define PCIE_AXI_M_VMIDMT_ARES                         25
+> -#define PCIE_PIPE_ARES                                 26
+> -#define PCIE_AXI_S_ARES                                        27
+> -#define PCIE_AXI_M_ARES                                        28
+> -#define ESS_RESET                                      29
+> -#define GCC_BLSP1_BCR                                  30
+> -#define GCC_BLSP1_QUP1_BCR                             31
+> -#define GCC_BLSP1_UART1_BCR                            32
+> -#define GCC_BLSP1_QUP2_BCR                             33
+> -#define GCC_BLSP1_UART2_BCR                            34
+> -#define GCC_BIMC_BCR                                   35
+> -#define GCC_TLMM_BCR                                   36
+> -#define GCC_IMEM_BCR                                   37
+> -#define GCC_ESS_BCR                                    38
+> -#define GCC_PRNG_BCR                                   39
+> -#define GCC_BOOT_ROM_BCR                               40
+> -#define GCC_CRYPTO_BCR                                 41
+> -#define GCC_SDCC1_BCR                                  42
+> -#define GCC_SEC_CTRL_BCR                               43
+> -#define GCC_AUDIO_BCR                                  44
+> -#define GCC_QPIC_BCR                                   45
+> -#define GCC_PCIE_BCR                                   46
+> -#define GCC_USB2_BCR                                   47
+> -#define GCC_USB2_PHY_BCR                               48
+> -#define GCC_USB3_BCR                                   49
+> -#define GCC_USB3_PHY_BCR                               50
+> -#define GCC_SYSTEM_NOC_BCR                             51
+> -#define GCC_PCNOC_BCR                                  52
+> -#define GCC_DCD_BCR                                    53
+> -#define GCC_SNOC_BUS_TIMEOUT0_BCR                      54
+> -#define GCC_SNOC_BUS_TIMEOUT1_BCR                      55
+> -#define GCC_SNOC_BUS_TIMEOUT2_BCR                      56
+> -#define GCC_SNOC_BUS_TIMEOUT3_BCR                      57
+> -#define GCC_PCNOC_BUS_TIMEOUT0_BCR                     58
+> -#define GCC_PCNOC_BUS_TIMEOUT1_BCR                     59
+> -#define GCC_PCNOC_BUS_TIMEOUT2_BCR                     60
+> -#define GCC_PCNOC_BUS_TIMEOUT3_BCR                     61
+> -#define GCC_PCNOC_BUS_TIMEOUT4_BCR                     62
+> -#define GCC_PCNOC_BUS_TIMEOUT5_BCR                     63
+> -#define GCC_PCNOC_BUS_TIMEOUT6_BCR                     64
+> -#define GCC_PCNOC_BUS_TIMEOUT7_BCR                     65
+> -#define GCC_PCNOC_BUS_TIMEOUT8_BCR                     66
+> -#define GCC_PCNOC_BUS_TIMEOUT9_BCR                     67
+> -#define GCC_TCSR_BCR                                   68
+> -#define GCC_QDSS_BCR                                   69
+> -#define GCC_MPM_BCR                                    70
+> -#define GCC_SPDM_BCR                                   71
+> -
+> -#endif
+> --
+> 2.45.1
+>
