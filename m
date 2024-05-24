@@ -4,78 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C349CC25B7A
-	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 15:38:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44A3DC25B7C
+	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 15:38:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33EA0884D5;
-	Fri, 24 May 2024 17:38:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 944418884D;
+	Fri, 24 May 2024 17:38:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uF7gusJC";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cqSbPP+y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E17888851; Fri, 24 May 2024 17:38:26 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 57C558884D; Fri, 24 May 2024 17:38:28 +0200 (CEST)
+Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
+ [IPv6:2607:f8b0:4864:20::833])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6043884C6
- for <u-boot@lists.denx.de>; Fri, 24 May 2024 17:38:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D37C388651
+ for <u-boot@lists.denx.de>; Fri, 24 May 2024 17:38:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44OFc5Yf108793;
- Fri, 24 May 2024 10:38:05 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1716565085;
- bh=Qe5aeEu8J1gJ8iPi5YU3/8rpHFj2L+8p0mp5YTLWJgE=;
- h=From:To:CC:Subject:In-Reply-To:References:Date;
- b=uF7gusJCVdVTw9GmyIpOu2JDP8mOHC6TSBzGGdSuF06keHN4P2tcb9d09rZd80V+b
- vadARZS6Or32Oao/I05cCWjBmNV9J+enk7FLTCBCx2PRhjkwKYGVz6Qza/VzDfxuQ5
- e8FxUjgvrnL+Pmf9gKCOZhNEASolXYKUKqwuQyAk=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44OFc5eq079475
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 24 May 2024 10:38:05 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 24
- May 2024 10:38:04 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 24 May 2024 10:38:04 -0500
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44OFc4Hg091703;
- Fri, 24 May 2024 10:38:04 -0500
-From: Jon Humphreys <j-humphreys@ti.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Roger Quadros
- <rogerq@kernel.org>
-CC: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
- <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
- "Heinrich Schuchardt" <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>,
- "Christian Gmeiner" <christian.gmeiner@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>, Simon Glass <sjg@chromium.org>,
- Nikhil M Jain <n-jain1@ti.com>, "Neha Malcom Francis"
- <n-francis@ti.com>, Andrew Davis <afd@ti.com>, "Maxime Ripard"
- <mripard@kernel.org>, Siddharth Vadapalli <s-vadapalli@ti.com>, Bryan
- Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
- "Robert Nelson" <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
- Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- "Masahisa Kojima" <kojima.masahisa@socionext.com>, Marcel Ziswiler
- <marcel.ziswiler@toradex.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH v4 15/19] board: am62px: Define capsule update firmware
- info
-In-Reply-To: <Zk--WFQJC-wi5zE5@hera>
-References: <20240509164123.1753050-1-j-humphreys@ti.com>
- <20240509164123.1753050-16-j-humphreys@ti.com> <Zk--WFQJC-wi5zE5@hera>
-Date: Fri, 24 May 2024 10:38:04 -0500
-Message-ID: <86bk4vcjab.fsf@udb0321960.dhcp.ti.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x833.google.com with SMTP id
+ d75a77b69052e-43fb02e28a2so6002621cf.0
+ for <u-boot@lists.denx.de>; Fri, 24 May 2024 08:38:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1716565105; x=1717169905; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=pB+T1eh19rc5pxKEefw+kpnJ6eFv1D4vva4V4QENqZA=;
+ b=cqSbPP+y6a+7fnSnbXD0yoauFP6Ajl1bCzPPnoJTprHXa2I1qargPcX6nEa4H6q76t
+ vSLNSevjabDcQv76N+tsJoLcpxNO2T5Q5on35mQqJYMXBH071ZDO10nS6Lg36A2TcVp5
+ 9kqIsm8ayBP84vxzP2ok2SfU3qOPnrphFT70w=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716565105; x=1717169905;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pB+T1eh19rc5pxKEefw+kpnJ6eFv1D4vva4V4QENqZA=;
+ b=ksDLf2wjzIMzXCDuxZT8+7hHe+dZ05fUGWjScSOyrL1lYqJvsuOkvueuFjl8KrAkNn
+ t+S81U5AjHJuyD5gD1IakA8BHP861DuHQagPe62PNU9TceGuOpSkIi53L0SUnGzJXMji
+ R0UGkhUPyBcYcOodbgOBg6NYiAZLvWbIHGjLUqB2oFWwDPiVOo8MJXov/KyqhTS8GVzJ
+ nZH+uI6m26I0Jk/GYCvUFanfjDwFbN71xeOOPX1VkcYNGfRLtgYFpnUnOZnjq5dGDjUn
+ RgLyBJz65n5TZ4KEruRL4PaeYNDKUzQ7FqZvoeSd16aIMPQuBskp0RZ94rDHf40KtmRN
+ lHIw==
+X-Gm-Message-State: AOJu0YzcoYoB44hr9xpgcMp+Fee7j3L0YVTDZjHj75EFhUoS4DRD6ekm
+ RtpBjV2kXh29cf6q7SW68JekYIiMOfYnBXZxAujlOCSiPNp1spCuQwbFK6OaHro=
+X-Google-Smtp-Source: AGHT+IH9pfVa75QNF9SqPv0ivUavluxRURFGeqAphsN5bHEb2s5AhiiybntR+KpJDEbuo4m9pLvqjA==
+X-Received: by 2002:a05:622a:144d:b0:43a:7c0d:8921 with SMTP id
+ d75a77b69052e-43fb0f094e7mr27691511cf.53.1716565104652; 
+ Fri, 24 May 2024 08:38:24 -0700 (PDT)
+Received: from bill-the-cat ([189.178.170.52])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-43fb18325bcsm9014321cf.53.2024.05.24.08.38.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 24 May 2024 08:38:24 -0700 (PDT)
+Date: Fri, 24 May 2024 09:38:21 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng@tinylab.org>
+Subject: Re: [PATCH 12/15] configs: add qemu_arm64_lwip_defconfig
+Message-ID: <20240524153821.GB2568172@bill-the-cat>
+References: <cover.1716393035.git.jerome.forissier@linaro.org>
+ <67ac1063406f022ccc35b94ba41317b6e9ee8b3e.1716393035.git.jerome.forissier@linaro.org>
+ <20240523150246.GO2568172@bill-the-cat>
+ <0684e59c-523b-4b6f-9ed2-138122c8c127@linaro.org>
+ <20240524150808.GZ2568172@bill-the-cat>
+ <50cc2e57-a582-494e-a6a4-94ff5efea422@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="RB0T67lkkvJToIil"
+Content-Disposition: inline
+In-Reply-To: <50cc2e57-a582-494e-a6a4-94ff5efea422@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,114 +97,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
 
-> Hi Jonathan
->
-> Thanks for working on this
->
-> On Thu, May 09, 2024 at 11:41:19AM -0500, Jonathan Humphreys wrote:
->> Define the firmware components updatable via EFI capsule update, including
->> defining capsule GUIDs for the various firmware components for the AM62px
->> SK.
->>
->> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
->> ---
->>  board/ti/am62px/evm.c        | 32 ++++++++++++++++++++++++++++++++
->>  include/configs/am62px_evm.h | 24 ++++++++++++++++++++++++
->>  2 files changed, 56 insertions(+)
->>
->> diff --git a/board/ti/am62px/evm.c b/board/ti/am62px/evm.c
->> index 97a95ce8cc2..6d0f66e5dc0 100644
->> --- a/board/ti/am62px/evm.c
->> +++ b/board/ti/am62px/evm.c
->> @@ -6,6 +6,7 @@
->>   *
->>   */
->>
->> +#include <efi_loader.h>
->>  #include <asm/arch/hardware.h>
->>  #include <asm/io.h>
->>  #include <dm/uclass.h>
->> @@ -13,6 +14,37 @@
->>  #include <fdt_support.h>
->>  #include <spl.h>
->>
->> +struct efi_fw_image fw_images[] = {
->
-> It's better if we add an
-> #if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
-> for both of the structs that follow (and it applies to all your patches)
->
+--RB0T67lkkvJToIil
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Ilias, thanks for the reviews.
+On Fri, May 24, 2024 at 05:30:45PM +0200, Jerome Forissier wrote:
+>=20
+>=20
+> On 5/24/24 17:08, Tom Rini wrote:
+> > On Fri, May 24, 2024 at 12:09:33PM +0200, Jerome Forissier wrote:
+> >>
+> >>
+> >> On 5/23/24 17:02, Tom Rini wrote:
+> >>> On Wed, May 22, 2024 at 06:00:12PM +0200, Jerome Forissier wrote:
+> >>>
+> >>>> Add qemu_arm64_lwip_defconfig which was created from
+> >>>> qemu_arm64_defconfig with CONFIG_NET_LWIP enabled.
+> >>>>
+> >>>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> >>>> ---
+> >>>>  configs/qemu_arm64_lwip_defconfig | 70 ++++++++++++++++++++++++++++=
++++
+> >>>>  1 file changed, 70 insertions(+)
+> >>>>  create mode 100644 configs/qemu_arm64_lwip_defconfig
+> >>>>
+> >>>> diff --git a/configs/qemu_arm64_lwip_defconfig b/configs/qemu_arm64_=
+lwip_defconfig
+> >>>> new file mode 100644
+> >>>> index 0000000000..c8dadbce37
+> >>>> --- /dev/null
+> >>>> +++ b/configs/qemu_arm64_lwip_defconfig
+> >>>> @@ -0,0 +1,70 @@
+> >>>> +CONFIG_ARM=3Dy
+> >>>> +CONFIG_POSITION_INDEPENDENT=3Dy
+> >>>> +CONFIG_ARCH_QEMU=3Dy
+> >>>
+> >>> Setting aside that I would like lwip to default to y, at least in the
+> >>> first few iterations (so that testing is easier),
+> >>
+> >> I could certainly do this. By creating a new defconfig, my goal was to
+> >> minimize the impacts on existing use cases.
+> >=20
+> > Yes but then it makes it harder to out of the box see what the deltas
+> > are.
+> >=20
+> >>> this should be using
+> >>> the #include method rather than duplicating the whole config.
+> >>
+> >> I've done that for v2. Let me know if you still prefer I change
+> >> qemu_arm64_defconfig instead.
+> >=20
+> > This is fine for v2, yeah. Once that's posted I'll grab everything and:
+> > - Throw it at the small HW lab I have
+> > - Enable it by default for everyone and throw it at CI
+>=20
+> At this point you can expect quite a few failures (unresolved symbols to
+> begin with) because so many parts of the network-related code peek & poke
+> various parts of the net implementation without formally depending on NET
+> (i.e., !NET_LWIP). Some more work is clearly needed to port to lwIP, how
+> much is probably something the CI run will help understand.
 
-I had this protected in #if's in an earlier patch set, as you suggest here.
-However, in those reviews, Roger recommended that we don't do that and put
-conditions around the use of it in set_dfu_alt_info().
+OK, thanks for setting expectations. And FYI if you hadn't seen:
+https://docs.u-boot.org/en/latest/develop/ci_testing.html you can
+trigger them yourself, but Azure sometimes just has issues if we get a
+slow runner sometimes.
 
-https://lore.kernel.org/all/b19f02e0-a80a-46d6-8296-5d516577766a@kernel.org/
+--=20
+Tom
 
-I assume the reasoning is to reduce #if's in the code and rely on the
-compiler to be smart enough to remove dead data. (Roger, speak up if I
-misrepresent you.)
+--RB0T67lkkvJToIil
+Content-Type: application/pgp-signature; name="signature.asc"
 
-I'm ok to do either way.  What is the preferred way in U-Boot?
+-----BEGIN PGP SIGNATURE-----
 
-Thanks
-Jon
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZQtGYACgkQFHw5/5Y0
+tyzoYwv+KyDNNFb2nL8JsksyiWeolkVATdyG9v0ILKvQOC96ovBYWo22pCebiLvq
+zY/fg1xfu7EbQJJ57hSZCFpvwk02VfcaWYwE2VuJvIuKDnxgCL+SMXlRc5Zxhd2c
+CBRrjiKYfJHziIPg7BbjvRJdeAqo3p+LXJlBxKFlcIfREWuyuGB2czmZ3Ly/Z+JL
+qzDprFx9QB1ggdxcRQPeCrAt01yYdFTRikemlfj8azGH60FkDqxeK70Ox2sFAOs6
+v6IiRaU7Ez+oV3nvgmUcco8m/2SE1KifDFvrbRVen3EXJ6YqysDmBTAPZ03OMiMt
+qrUurHD96l5wmexvXKafH8x3HVFMHeI8K94ylT5pW1FS8cCmAdbGqOz+3aCj+82I
+LtilRI2zjL9XEjJVETiAWoS0zOXGctnniltZ4hADCJ8GXEtyBoC2F01jaEHTRZIb
+vjXG/w2SeOL2aQCUaSUXTw92224ShYdKgsOoSVLk/zCbP76m/LI/bleX7VJOhdWe
+HiOnOWoW
+=B8Me
+-----END PGP SIGNATURE-----
 
->> +	{
->> +		.image_type_id = AM62PX_SK_TIBOOT3_IMAGE_GUID,
->> +		.fw_name = u"AM62PX_SK_TIBOOT3",
->> +		.image_index = 1,
->> +	},
->> +	{
->> +		.image_type_id = AM62PX_SK_SPL_IMAGE_GUID,
->> +		.fw_name = u"AM62PX_SK_SPL",
->> +		.image_index = 2,
->> +	},
->> +	{
->> +		.image_type_id = AM62PX_SK_UBOOT_IMAGE_GUID,
->> +		.fw_name = u"AM62PX_SK_UBOOT",
->> +		.image_index = 3,
->> +	}
->> +};
->> +
->> +struct efi_capsule_update_info update_info = {
->> +	.dfu_string = "sf 0:0=tiboot3.bin raw 0 80000;"
->> +	"tispl.bin raw 80000 200000;u-boot.img raw 280000 400000",
->> +	.num_images = ARRAY_SIZE(fw_images),
->> +	.images = fw_images,
->> +};
->
-> I haven't worked on any TI platforms lately so I cant say much about the
-> naming and the flash regions. The definition seems correct
->
->
->> +
->> +void set_dfu_alt_info(char *interface, char *devstr)
->> +{
->> +	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
->> +		env_set("dfu_alt_info", update_info.dfu_string);
->> +}
->
-> There's a CONFIG_SET_DFU_ALT_INFO symbol. This better if we add a check here
-> as well
->
->> +
->>  int board_init(void)
->>  {
->>  	return 0;
->> diff --git a/include/configs/am62px_evm.h b/include/configs/am62px_evm.h
->> index 06b12860e21..57a1ba9dc3c 100644
->> --- a/include/configs/am62px_evm.h
->> +++ b/include/configs/am62px_evm.h
->> @@ -8,6 +8,30 @@
->>  #ifndef __CONFIG_AM62PX_EVM_H
->>  #define __CONFIG_AM62PX_EVM_H
->>
-> [...]
->
-> Regards
-> /Ilias
+--RB0T67lkkvJToIil--
