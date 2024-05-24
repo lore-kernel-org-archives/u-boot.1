@@ -4,85 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7720C25B74
-	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 16:11:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE5A6C25B74
+	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 16:21:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 23F0A88640;
-	Fri, 24 May 2024 18:11:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2A32988640;
+	Fri, 24 May 2024 18:21:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YfOJvCEX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="j5d7Q4R0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAA7788646; Fri, 24 May 2024 18:11:29 +0200 (CEST)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id 8A87188869; Fri, 24 May 2024 18:21:05 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9D6C88552
- for <u-boot@lists.denx.de>; Fri, 24 May 2024 18:11:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A83088552
+ for <u-boot@lists.denx.de>; Fri, 24 May 2024 18:21:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-43fb8cbf86bso567611cf.1
- for <u-boot@lists.denx.de>; Fri, 24 May 2024 09:11:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4202c1d19d5so63555815e9.2
+ for <u-boot@lists.denx.de>; Fri, 24 May 2024 09:21:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1716567085; x=1717171885; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=GIrPwwyteN2yfDJSUqiv9V8I7KVBLdE3HGzeuk3AB18=;
- b=YfOJvCEXHcwLrL0xbkQO7RpG5+7V3NovUcUkdUiBU4nJOcRjMzfnE/auE4DLeMDdzg
- vlT1X9b/g0OCRE11sTi+aUi9OM+RhnnfUmXt1u+hyrWoSmZjzAmqhiAvElPw207bgqST
- 5xhEUn9CpE/8j2W+TD62jxetKWPT10SQ5JJzQ=
+ d=linaro.org; s=google; t=1716567661; x=1717172461; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=aN/OGmhcHxzLji0Q9EVY/Mqvytb+m0Y4/G9d9Y3TYLI=;
+ b=j5d7Q4R0q4Pzf/B12Rm94b0YS3xN4oy3Ori8kHXohROcOEZ0yxj2/l/qEPX/oHDyw1
+ qcuI9ntGRKapGDWvLJKqK7ZA7BSY9WqnRA6emBQhT4JSHX7I817mXJ/S8ogi8T5T/JV9
+ 0CLDpkdKwirlte9V8P7yADKlAH4P2gZsgvv8yBqr+1wvE3ou7SUMer0xBBi6GQ3ZRH/J
+ yUU0XWbyMzQaad+bWEKGfoHr06AjvdiEtzdwZIFZBEgJ2jwaYG5edX1LFdFnvMC3v2Ky
+ JMACylhoM3NI/DHyEevtg5DcivNW6hqj+7fsZaZAONikZBx5gCVqHsH8hWHuDhVxH/TM
+ cxcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716567085; x=1717171885;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GIrPwwyteN2yfDJSUqiv9V8I7KVBLdE3HGzeuk3AB18=;
- b=ouhyMYWfGrIpeUzKpx2TokgZnXZEzzm6R5c9vlo2cNYGuO2i52axYXaNuXrVK1kdlH
- Nss5A0xM8umf0lkxLu63umqZ5MYtDJd4shyiSiTOSsLpjXsvUvwdjjoAgXxvRfH8Iona
- au/tnuiYRYD4M/uocO2G1r2Vwfq7+zxEgowPqDOm9qXHWrvFpkt/8C8W7JNibboOBLEg
- zFYnb26dmtsyg6pxRazidtL7rGdOEGjn1tyqv5VAtCxREJLBYAdj7CxSTUMkFL2I4C/t
- v7U3BBrQhZvo0jaiZ1Tb+Q99u9GSc0YXnd8VFkhgZsSH3mGa7YGHld5bvA/ZCONW0PfM
- VHfg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXH5op95smWrWTwkpUTOd2rHurNfnBymarX6t5GPjgEjh36H84h7t50vfZxQcFoRzTI0l2ty9tr5M8/0Vzmx+ntg2lkpA==
-X-Gm-Message-State: AOJu0YxfzO5crB9psmGuIoYrh4ZWJbtJR0sBj/gPcqMBplPC7MYHxLZT
- 35dvgA1xi4jmEzFXKEADDE6ACPWieAGWUj/dPgyy7+x4QVi/XQ801+Y34xQSCaw=
-X-Google-Smtp-Source: AGHT+IEAmqaxXZEN5pbgHVYa3dA1veq8ybIveygDQWsbooJccq1veA0FeJMXNtVrWDMauf0tiEjIcA==
-X-Received: by 2002:ac8:7dcf:0:b0:43e:3bc9:b5ef with SMTP id
- d75a77b69052e-43fb0e45116mr28285641cf.25.1716567084664; 
- Fri, 24 May 2024 09:11:24 -0700 (PDT)
-Received: from bill-the-cat ([189.178.170.52])
+ d=1e100.net; s=20230601; t=1716567661; x=1717172461;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=aN/OGmhcHxzLji0Q9EVY/Mqvytb+m0Y4/G9d9Y3TYLI=;
+ b=WV3xBil3jmZQQKbP05FCV8u6s7Qs+hfo3bj+j7V12iLf+2cp/v9OpShNE8kHrO2+UQ
+ RQuVyUIWnaAi77pi8TG02BW9obmnkydRGutYMSzB/PELo8dBvgVc+fSrkUd5ybxO1dP7
+ I9N/GmO7IXMNRIpqDKxKvWXItTidm//zkv4zza/BS+QQohoIBRmHr1riiZQhd7SAn1ie
+ Mfl8sLbBMbRT7FWX2PFF9mA1Ib1SrbnvE6Q26NU9FdcvZ0d9XLQ/bVz4h1fvqXJzfxhm
+ W+BtbTEx6fJVUDlkyhgctDrqGeJrQl5pXAoubL+7m+Bhu3qhedm74owz9MMg9sQIZkKj
+ 0AWw==
+X-Gm-Message-State: AOJu0Yz5iJE9otAABZNUGWAi1N73PUyo24v3WQBjnX5S4oynARs4FT0T
+ aN2t8GJiNbsY/2hgDddWe3yhTGMCE3hT6GbQTWUkZYZ+MANR+2pghsVhTsSF/XAgIzVjPbdu5ZJ
+ W4txUyo2j
+X-Google-Smtp-Source: AGHT+IHoXw+SlmUbCeRaS5jwCxkiq5II8+vBbANtPLybZaPwAb1LIcHrnbqY47gpuQ+2VIbAejLsIw==
+X-Received: by 2002:a05:600c:4592:b0:41a:bdaf:8c78 with SMTP id
+ 5b1f17b1804b1-421089b2201mr24621355e9.8.1716567660710; 
+ Fri, 24 May 2024 09:21:00 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:80fe:af01:c137:b43b])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-43fb16bff5bsm9278921cf.3.2024.05.24.09.11.23
+ ffacd0b85a97d-3557a1c918csm1928465f8f.77.2024.05.24.09.21.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 May 2024 09:11:24 -0700 (PDT)
-Date: Fri, 24 May 2024 10:11:21 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jagan Teki <jagan@amarulasolutions.com>
-Cc: Michal Simek <michal.simek@amd.com>,
- "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "git (AMD-Xilinx)" <git@amd.com>
-Subject: Re: [PATCH v11 0/8] spi-nor: Add parallel and stacked memories support
-Message-ID: <20240524161121.GC2568172@bill-the-cat>
-References: <20240304031046.25998-1-venkatesh.abbarapu@amd.com>
- <SA1PR12MB8697F03FAFE69E8FE81F397598E42@SA1PR12MB8697.namprd12.prod.outlook.com>
- <20240507154836.GV2568172@bill-the-cat>
- <4250e775-1269-4929-8451-d8056c6f2f23@amd.com>
- <20240524152646.GA2568172@bill-the-cat>
- <CAMty3ZCyNHYC=tyWZap5CDRnFos-hK1U68AFdPGv3jMpWct2TQ@mail.gmail.com>
+ Fri, 24 May 2024 09:21:00 -0700 (PDT)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>
+Subject: [PATCH v2 00/14] Introduce the lwIP network stack
+Date: Fri, 24 May 2024 18:19:54 +0200
+Message-Id: <cover.1716566960.git.jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="10Gfoua2bg0UDJE+"
-Content-Disposition: inline
-In-Reply-To: <CAMty3ZCyNHYC=tyWZap5CDRnFos-hK1U68AFdPGv3jMpWct2TQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,63 +91,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
+library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
+stack [2] [3] as an alternative to the current implementation in net/,
+selectable with Kconfig, and ultimately keep only lwIP if possible. Some
+reasons for doing so are:
+- Make the support of HTTPS in the wget command easier. Javier T. (CC'd)
+has some additional lwIP and Mbed TLS patches to do so. With that it
+becomes possible to fetch and launch a distro installer such as Debian
+etc. directly from the U-Boot shell.
+- Possibly benefit from additional features implemented in lwIP
+- Less code to maintain in U-Boot
 
---10Gfoua2bg0UDJE+
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The first patch introduces a new Kconfig symbol: NET_LWIP, which selects
+the lwIP implementation instead of the current one (NET). Contrary to the
+approach chosen by Maxim in [1], NET_LWIP and NET cannot be enabled
+simultaneously. The rationale is we want to start from a clean state and
+not pull potentially duplicated functionality from both stacks. Note
+however that a few files are still built in net/, they are the ones
+related to ethernet device management and the ethernet bootflow.
 
-On Fri, May 24, 2024 at 09:37:58PM +0530, Jagan Teki wrote:
-> On Fri, May 24, 2024 at 8:56=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
-te:
-> >
-> > On Fri, May 24, 2024 at 04:09:00PM +0200, Michal Simek wrote:
-> > >
-> > >
-> > > On 5/7/24 17:48, Tom Rini wrote:
-> > > > On Tue, May 07, 2024 at 04:15:14AM +0000, Abbarapu, Venkatesh wrote:
-> > > >
-> > > > > + Tom Rini
-> > > > >
-> > > > > Do you have any comments for this series?
-> > > >
-> > > > Seems likely fine. Jagan, do you have time to put this in a PR for
-> > > > -next? Thanks.
-> > >
-> > > No reaction for quite a long time. Can you take it directly to next b=
-ranch?
-> > > Or do you want me to send you pull request to get this to regression =
-and see
-> > > if this breaks someone else?
-> >
-> > I will (am now) taking a look directly, thanks for the reminder and your
-> > patience.
->=20
-> Will clear this weekend, if not if you are already on it. let me know.
+The second patch imports the lwIP code as a Git subtree under
+lib/lwip/lwip. Some glue code is added under lib/lwip/u-boot.
 
-I'm picking this up for next now (once CI and builds complete and
-results look good) but please pick up everything else outstanding SPI
-related, thanks.
+The third patch introduces the Makefile to build lwIP when
+CONFIG_NET_LWIP=y.
 
---=20
-Tom
+The subsequent patches implement various network-oriented commands and
+features: dhcp, dns, ping, tftpboot, wget.
 
---10Gfoua2bg0UDJE+
-Content-Type: application/pgp-signature; name="signature.asc"
+NET_LWIP is not enabled by default because it lacks functionality compared
+to NET and many CI tests would fail to run or even build.
 
------BEGIN PGP SIGNATURE-----
+Some tests (dm dsa/eth) are disabled when NET_LWIP is selected because
+they make strong assumptions on how the network stack is implemented and
+how the packet flow occurs. For example, an ARP exchange is expected
+when an ICMP packet goes out, but with lwIP no exchange will occur if the
+host IP is already in the the ARP cache.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZQvB4ACgkQFHw5/5Y0
-tyzq0AwAs9kqD0+9YxEHCb3cnBiTpHScarYWWvrqXhfbLXSwq1jzsbreTlp+7uWS
-Pi0B0T6b6SuZw/7Na3uxkaqa4ueTrVxv63jinDLaqfShMiDb9EjTUiQtYPmcgmZw
-9mE3ptdfLz4KakeLPV40nawY31t4cioxTeJv1ACQzBBqJ4sR/M+cddIPsOA18SJn
-wHF3cfLuKOX6q/KvvpS9deVjwvH4/vo0IKKJPRYLSEbs4UYchiRO5n0qRCfshZSu
-3uYtWG9fzqcku3rzw00uSq3ozRq8/v1Jvo8A9ySlnqumLP7/9U5Ok1Ypx+4RluqX
-A/jkza07Ur3fsGCqcYJ/4yxxdpJ4A+gwU6EThdpjxvrLW9JuaGg9NCadkWySiNn6
-LDIMQdW9h0ru25IltAjrZZvJVRC7NTDU9dx0TvHJhv0+yQ75TopmzXRV21dkcdNF
-q8BL5HGRqWfidZaUbHb63B0tjpGT7b5jsZD8ffYE5ksBE49f2mZIkXCiYU3rsNI0
-I65Zltpj
-=LB3t
------END PGP SIGNATURE-----
+Due to the above and in order to provide some level of testing, a new QEMU
+configuration is introduced (qemu_arm64_lwip_defconfig) which is the same
+as qemu_arm64_lwip_defconfig but with NET_LWIP and CMD_*_LWIP enabled.
+Tests are added to test/py/tests/test_net.py for that configuration.
 
---10Gfoua2bg0UDJE+--
+Changes in v2:
+
+** Address comments from Ilias A.
+
+- "net-lwip: add wget command"
+Implement the wget_with_dns() function to do most of the wget work and
+call it from do_wget(). This allows to simplify patch "net-lwip: add
+support for EFI_HTTP_BOOT".
+
+- "net-lwip: import net command from cmd/net.c"
+Move a few functions from cmd/net.c to a new file cmd/net-common.c
+rather than duplicating then in cmd/net-lwip.c.
+
+- "net-lwip: add support for EFI_HTTP_BOOT"
+Since wget_with_dns() is now implemented in "net-lwip: add wget command",
+just enable the wget command when the lwIP stack is enabled and
+EFI_HTTP_BOOT is requested.
+
+** Address comments from Tom R.
+
+- "net-lwip: add DHCP support and dhcp commmand",
+  "net-lwip: add TFTP support and tftpboot command",
+  "net-lwip: add ping command",
+  "net-lwip: add dns command",
+  "net-lwip: add wget command"
+Do not introduce new CMD_XXX_LWIP symbols and use existing CMD_XXX
+instead.
+
+- "configs: add qemu_arm64_lwip_defconfig"
+Use #include <configs/qemu_arm64_defconfig>.
+
+- "net-lwip: import lwIP library under lib/lwip"
+Patch removed and replaced by the introduction of a Git subtree:
+"Squashed 'lib/lwip/lwip/' content from commit 0a0452b2c3".
+
+Note that I have not yet addressed your comments on "test: dm: dsa,
+eth: disable tests when CONFIG_NET_LWIP=y"). I need some more time
+for that and I think running CI on this v2 will help better understand
+what is needed for v3.
+
+** Miscellaneous improvements
+
+- "net: introduce alternative implementation as net-lwip/":
+
+* Make DFU_OVER_TFTP not DFU_TFTP incompatible with NET_LWIP. It seems
+quite natural to supplement "depends on NET" with "&& !NET_LWIP".
+* Make PROT_*_LWIP not visible by removing the Kconfig prompt.
+
+
+[1] https://lore.kernel.org/all/20231127125726.3735-1-maxim.uvarov@linaro.org/
+[2] https://www.nongnu.org/lwip/
+[3] https://en.wikipedia.org/wiki/LwIP
+
+CC: Javier Tia <javier.tia@linaro.org>
+
+Jerome Forissier (14):
+  net: introduce alternative implementation as net-lwip/
+  Squashed 'lib/lwip/lwip/' content from commit 0a0452b2c39
+  net-lwip: build lwIP
+  net-lwip: add DHCP support and dhcp commmand
+  net-lwip: add TFTP support and tftpboot command
+  net-lwip: add ping command
+  net-lwip: add dns command
+  net-lwip: add wget command
+  test: dm: dsa, eth: disable tests when CONFIG_NET_LWIP=y
+  cmd: bdinfo: enable -e when CONFIG_CMD_NET_LWIP=y
+  configs: add qemu_arm64_lwip_defconfig
+  test/py: net: add _lwip variants of dhcp, ping and tftpboot tests
+  MAINTAINERS: net-lwip: add myself as a maintainer
+  CI: add qemu_arm64_lwip to the test matrix
+
+-- 
+2.40.1
