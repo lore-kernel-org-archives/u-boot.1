@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44A3DC25B7C
-	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 15:38:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7720C25B74
+	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 16:11:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 944418884D;
-	Fri, 24 May 2024 17:38:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 23F0A88640;
+	Fri, 24 May 2024 18:11:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cqSbPP+y";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YfOJvCEX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 57C558884D; Fri, 24 May 2024 17:38:28 +0200 (CEST)
-Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
- [IPv6:2607:f8b0:4864:20::833])
+ id AAA7788646; Fri, 24 May 2024 18:11:29 +0200 (CEST)
+Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
+ [IPv6:2607:f8b0:4864:20::82b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D37C388651
- for <u-boot@lists.denx.de>; Fri, 24 May 2024 17:38:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E9D6C88552
+ for <u-boot@lists.denx.de>; Fri, 24 May 2024 18:11:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x833.google.com with SMTP id
- d75a77b69052e-43fb02e28a2so6002621cf.0
- for <u-boot@lists.denx.de>; Fri, 24 May 2024 08:38:25 -0700 (PDT)
+Received: by mail-qt1-x82b.google.com with SMTP id
+ d75a77b69052e-43fb8cbf86bso567611cf.1
+ for <u-boot@lists.denx.de>; Fri, 24 May 2024 09:11:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1716565105; x=1717169905; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1716567085; x=1717171885; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=pB+T1eh19rc5pxKEefw+kpnJ6eFv1D4vva4V4QENqZA=;
- b=cqSbPP+y6a+7fnSnbXD0yoauFP6Ajl1bCzPPnoJTprHXa2I1qargPcX6nEa4H6q76t
- vSLNSevjabDcQv76N+tsJoLcpxNO2T5Q5on35mQqJYMXBH071ZDO10nS6Lg36A2TcVp5
- 9kqIsm8ayBP84vxzP2ok2SfU3qOPnrphFT70w=
+ bh=GIrPwwyteN2yfDJSUqiv9V8I7KVBLdE3HGzeuk3AB18=;
+ b=YfOJvCEXHcwLrL0xbkQO7RpG5+7V3NovUcUkdUiBU4nJOcRjMzfnE/auE4DLeMDdzg
+ vlT1X9b/g0OCRE11sTi+aUi9OM+RhnnfUmXt1u+hyrWoSmZjzAmqhiAvElPw207bgqST
+ 5xhEUn9CpE/8j2W+TD62jxetKWPT10SQ5JJzQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716565105; x=1717169905;
+ d=1e100.net; s=20230601; t=1716567085; x=1717171885;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pB+T1eh19rc5pxKEefw+kpnJ6eFv1D4vva4V4QENqZA=;
- b=ksDLf2wjzIMzXCDuxZT8+7hHe+dZ05fUGWjScSOyrL1lYqJvsuOkvueuFjl8KrAkNn
- t+S81U5AjHJuyD5gD1IakA8BHP861DuHQagPe62PNU9TceGuOpSkIi53L0SUnGzJXMji
- R0UGkhUPyBcYcOodbgOBg6NYiAZLvWbIHGjLUqB2oFWwDPiVOo8MJXov/KyqhTS8GVzJ
- nZH+uI6m26I0Jk/GYCvUFanfjDwFbN71xeOOPX1VkcYNGfRLtgYFpnUnOZnjq5dGDjUn
- RgLyBJz65n5TZ4KEruRL4PaeYNDKUzQ7FqZvoeSd16aIMPQuBskp0RZ94rDHf40KtmRN
- lHIw==
-X-Gm-Message-State: AOJu0YzcoYoB44hr9xpgcMp+Fee7j3L0YVTDZjHj75EFhUoS4DRD6ekm
- RtpBjV2kXh29cf6q7SW68JekYIiMOfYnBXZxAujlOCSiPNp1spCuQwbFK6OaHro=
-X-Google-Smtp-Source: AGHT+IH9pfVa75QNF9SqPv0ivUavluxRURFGeqAphsN5bHEb2s5AhiiybntR+KpJDEbuo4m9pLvqjA==
-X-Received: by 2002:a05:622a:144d:b0:43a:7c0d:8921 with SMTP id
- d75a77b69052e-43fb0f094e7mr27691511cf.53.1716565104652; 
- Fri, 24 May 2024 08:38:24 -0700 (PDT)
+ bh=GIrPwwyteN2yfDJSUqiv9V8I7KVBLdE3HGzeuk3AB18=;
+ b=ouhyMYWfGrIpeUzKpx2TokgZnXZEzzm6R5c9vlo2cNYGuO2i52axYXaNuXrVK1kdlH
+ Nss5A0xM8umf0lkxLu63umqZ5MYtDJd4shyiSiTOSsLpjXsvUvwdjjoAgXxvRfH8Iona
+ au/tnuiYRYD4M/uocO2G1r2Vwfq7+zxEgowPqDOm9qXHWrvFpkt/8C8W7JNibboOBLEg
+ zFYnb26dmtsyg6pxRazidtL7rGdOEGjn1tyqv5VAtCxREJLBYAdj7CxSTUMkFL2I4C/t
+ v7U3BBrQhZvo0jaiZ1Tb+Q99u9GSc0YXnd8VFkhgZsSH3mGa7YGHld5bvA/ZCONW0PfM
+ VHfg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXH5op95smWrWTwkpUTOd2rHurNfnBymarX6t5GPjgEjh36H84h7t50vfZxQcFoRzTI0l2ty9tr5M8/0Vzmx+ntg2lkpA==
+X-Gm-Message-State: AOJu0YxfzO5crB9psmGuIoYrh4ZWJbtJR0sBj/gPcqMBplPC7MYHxLZT
+ 35dvgA1xi4jmEzFXKEADDE6ACPWieAGWUj/dPgyy7+x4QVi/XQ801+Y34xQSCaw=
+X-Google-Smtp-Source: AGHT+IEAmqaxXZEN5pbgHVYa3dA1veq8ybIveygDQWsbooJccq1veA0FeJMXNtVrWDMauf0tiEjIcA==
+X-Received: by 2002:ac8:7dcf:0:b0:43e:3bc9:b5ef with SMTP id
+ d75a77b69052e-43fb0e45116mr28285641cf.25.1716567084664; 
+ Fri, 24 May 2024 09:11:24 -0700 (PDT)
 Received: from bill-the-cat ([189.178.170.52])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-43fb18325bcsm9014321cf.53.2024.05.24.08.38.23
+ d75a77b69052e-43fb16bff5bsm9278921cf.3.2024.05.24.09.11.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 May 2024 08:38:24 -0700 (PDT)
-Date: Fri, 24 May 2024 09:38:21 -0600
+ Fri, 24 May 2024 09:11:24 -0700 (PDT)
+Date: Fri, 24 May 2024 10:11:21 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng@tinylab.org>
-Subject: Re: [PATCH 12/15] configs: add qemu_arm64_lwip_defconfig
-Message-ID: <20240524153821.GB2568172@bill-the-cat>
-References: <cover.1716393035.git.jerome.forissier@linaro.org>
- <67ac1063406f022ccc35b94ba41317b6e9ee8b3e.1716393035.git.jerome.forissier@linaro.org>
- <20240523150246.GO2568172@bill-the-cat>
- <0684e59c-523b-4b6f-9ed2-138122c8c127@linaro.org>
- <20240524150808.GZ2568172@bill-the-cat>
- <50cc2e57-a582-494e-a6a4-94ff5efea422@linaro.org>
+To: Jagan Teki <jagan@amarulasolutions.com>
+Cc: Michal Simek <michal.simek@amd.com>,
+ "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "git (AMD-Xilinx)" <git@amd.com>
+Subject: Re: [PATCH v11 0/8] spi-nor: Add parallel and stacked memories support
+Message-ID: <20240524161121.GC2568172@bill-the-cat>
+References: <20240304031046.25998-1-venkatesh.abbarapu@amd.com>
+ <SA1PR12MB8697F03FAFE69E8FE81F397598E42@SA1PR12MB8697.namprd12.prod.outlook.com>
+ <20240507154836.GV2568172@bill-the-cat>
+ <4250e775-1269-4929-8451-d8056c6f2f23@amd.com>
+ <20240524152646.GA2568172@bill-the-cat>
+ <CAMty3ZCyNHYC=tyWZap5CDRnFos-hK1U68AFdPGv3jMpWct2TQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="RB0T67lkkvJToIil"
+ protocol="application/pgp-signature"; boundary="10Gfoua2bg0UDJE+"
 Content-Disposition: inline
-In-Reply-To: <50cc2e57-a582-494e-a6a4-94ff5efea422@linaro.org>
+In-Reply-To: <CAMty3ZCyNHYC=tyWZap5CDRnFos-hK1U68AFdPGv3jMpWct2TQ@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,91 +100,62 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---RB0T67lkkvJToIil
-Content-Type: text/plain; charset=us-ascii
+--10Gfoua2bg0UDJE+
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, May 24, 2024 at 05:30:45PM +0200, Jerome Forissier wrote:
+On Fri, May 24, 2024 at 09:37:58PM +0530, Jagan Teki wrote:
+> On Fri, May 24, 2024 at 8:56=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
+te:
+> >
+> > On Fri, May 24, 2024 at 04:09:00PM +0200, Michal Simek wrote:
+> > >
+> > >
+> > > On 5/7/24 17:48, Tom Rini wrote:
+> > > > On Tue, May 07, 2024 at 04:15:14AM +0000, Abbarapu, Venkatesh wrote:
+> > > >
+> > > > > + Tom Rini
+> > > > >
+> > > > > Do you have any comments for this series?
+> > > >
+> > > > Seems likely fine. Jagan, do you have time to put this in a PR for
+> > > > -next? Thanks.
+> > >
+> > > No reaction for quite a long time. Can you take it directly to next b=
+ranch?
+> > > Or do you want me to send you pull request to get this to regression =
+and see
+> > > if this breaks someone else?
+> >
+> > I will (am now) taking a look directly, thanks for the reminder and your
+> > patience.
 >=20
->=20
-> On 5/24/24 17:08, Tom Rini wrote:
-> > On Fri, May 24, 2024 at 12:09:33PM +0200, Jerome Forissier wrote:
-> >>
-> >>
-> >> On 5/23/24 17:02, Tom Rini wrote:
-> >>> On Wed, May 22, 2024 at 06:00:12PM +0200, Jerome Forissier wrote:
-> >>>
-> >>>> Add qemu_arm64_lwip_defconfig which was created from
-> >>>> qemu_arm64_defconfig with CONFIG_NET_LWIP enabled.
-> >>>>
-> >>>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> >>>> ---
-> >>>>  configs/qemu_arm64_lwip_defconfig | 70 ++++++++++++++++++++++++++++=
-+++
-> >>>>  1 file changed, 70 insertions(+)
-> >>>>  create mode 100644 configs/qemu_arm64_lwip_defconfig
-> >>>>
-> >>>> diff --git a/configs/qemu_arm64_lwip_defconfig b/configs/qemu_arm64_=
-lwip_defconfig
-> >>>> new file mode 100644
-> >>>> index 0000000000..c8dadbce37
-> >>>> --- /dev/null
-> >>>> +++ b/configs/qemu_arm64_lwip_defconfig
-> >>>> @@ -0,0 +1,70 @@
-> >>>> +CONFIG_ARM=3Dy
-> >>>> +CONFIG_POSITION_INDEPENDENT=3Dy
-> >>>> +CONFIG_ARCH_QEMU=3Dy
-> >>>
-> >>> Setting aside that I would like lwip to default to y, at least in the
-> >>> first few iterations (so that testing is easier),
-> >>
-> >> I could certainly do this. By creating a new defconfig, my goal was to
-> >> minimize the impacts on existing use cases.
-> >=20
-> > Yes but then it makes it harder to out of the box see what the deltas
-> > are.
-> >=20
-> >>> this should be using
-> >>> the #include method rather than duplicating the whole config.
-> >>
-> >> I've done that for v2. Let me know if you still prefer I change
-> >> qemu_arm64_defconfig instead.
-> >=20
-> > This is fine for v2, yeah. Once that's posted I'll grab everything and:
-> > - Throw it at the small HW lab I have
-> > - Enable it by default for everyone and throw it at CI
->=20
-> At this point you can expect quite a few failures (unresolved symbols to
-> begin with) because so many parts of the network-related code peek & poke
-> various parts of the net implementation without formally depending on NET
-> (i.e., !NET_LWIP). Some more work is clearly needed to port to lwIP, how
-> much is probably something the CI run will help understand.
+> Will clear this weekend, if not if you are already on it. let me know.
 
-OK, thanks for setting expectations. And FYI if you hadn't seen:
-https://docs.u-boot.org/en/latest/develop/ci_testing.html you can
-trigger them yourself, but Azure sometimes just has issues if we get a
-slow runner sometimes.
+I'm picking this up for next now (once CI and builds complete and
+results look good) but please pick up everything else outstanding SPI
+related, thanks.
 
 --=20
 Tom
 
---RB0T67lkkvJToIil
+--10Gfoua2bg0UDJE+
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZQtGYACgkQFHw5/5Y0
-tyzoYwv+KyDNNFb2nL8JsksyiWeolkVATdyG9v0ILKvQOC96ovBYWo22pCebiLvq
-zY/fg1xfu7EbQJJ57hSZCFpvwk02VfcaWYwE2VuJvIuKDnxgCL+SMXlRc5Zxhd2c
-CBRrjiKYfJHziIPg7BbjvRJdeAqo3p+LXJlBxKFlcIfREWuyuGB2czmZ3Ly/Z+JL
-qzDprFx9QB1ggdxcRQPeCrAt01yYdFTRikemlfj8azGH60FkDqxeK70Ox2sFAOs6
-v6IiRaU7Ez+oV3nvgmUcco8m/2SE1KifDFvrbRVen3EXJ6YqysDmBTAPZ03OMiMt
-qrUurHD96l5wmexvXKafH8x3HVFMHeI8K94ylT5pW1FS8cCmAdbGqOz+3aCj+82I
-LtilRI2zjL9XEjJVETiAWoS0zOXGctnniltZ4hADCJ8GXEtyBoC2F01jaEHTRZIb
-vjXG/w2SeOL2aQCUaSUXTw92224ShYdKgsOoSVLk/zCbP76m/LI/bleX7VJOhdWe
-HiOnOWoW
-=B8Me
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZQvB4ACgkQFHw5/5Y0
+tyzq0AwAs9kqD0+9YxEHCb3cnBiTpHScarYWWvrqXhfbLXSwq1jzsbreTlp+7uWS
+Pi0B0T6b6SuZw/7Na3uxkaqa4ueTrVxv63jinDLaqfShMiDb9EjTUiQtYPmcgmZw
+9mE3ptdfLz4KakeLPV40nawY31t4cioxTeJv1ACQzBBqJ4sR/M+cddIPsOA18SJn
+wHF3cfLuKOX6q/KvvpS9deVjwvH4/vo0IKKJPRYLSEbs4UYchiRO5n0qRCfshZSu
+3uYtWG9fzqcku3rzw00uSq3ozRq8/v1Jvo8A9ySlnqumLP7/9U5Ok1Ypx+4RluqX
+A/jkza07Ur3fsGCqcYJ/4yxxdpJ4A+gwU6EThdpjxvrLW9JuaGg9NCadkWySiNn6
+LDIMQdW9h0ru25IltAjrZZvJVRC7NTDU9dx0TvHJhv0+yQ75TopmzXRV21dkcdNF
+q8BL5HGRqWfidZaUbHb63B0tjpGT7b5jsZD8ffYE5ksBE49f2mZIkXCiYU3rsNI0
+I65Zltpj
+=LB3t
 -----END PGP SIGNATURE-----
 
---RB0T67lkkvJToIil--
+--10Gfoua2bg0UDJE+--
