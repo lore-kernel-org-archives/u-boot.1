@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77ECCC25B74
-	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 09:24:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3976C25B79
+	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 09:25:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E57A088657;
-	Fri, 24 May 2024 11:24:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4F4AE88661;
+	Fri, 24 May 2024 11:24:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 403FE885FB; Fri, 24 May 2024 11:24:00 +0200 (CEST)
-Received: from smtp-190c.mail.infomaniak.ch (smtp-190c.mail.infomaniak.ch
- [185.125.25.12])
+ id C9030885FB; Fri, 24 May 2024 11:24:00 +0200 (CEST)
+Received: from smtp-bc08.mail.infomaniak.ch (smtp-bc08.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::bc08])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6D2388635
- for <u-boot@lists.denx.de>; Fri, 24 May 2024 11:23:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DC02F884BE
+ for <u-boot@lists.denx.de>; Fri, 24 May 2024 11:23:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
  [10.4.36.107])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Vm03K3HmQzqs9;
- Fri, 24 May 2024 11:23:57 +0200 (CEST)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Vm03L3NDJzss1;
+ Fri, 24 May 2024 11:23:58 +0200 (CEST)
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Vm03J6mq1zvWH; Fri, 24 May 2024 11:23:56 +0200 (CEST)
+ id 4Vm03K3CVQzwq0; Fri, 24 May 2024 11:23:57 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Fri, 24 May 2024 11:23:29 +0200
-Subject: [PATCH next v2 4/8] rockchip: px30-core-*: Use common bss and
- stack addresses
+Date: Fri, 24 May 2024 11:23:30 +0200
+Subject: [PATCH next v2 5/8] rockchip: px30: make UART pinmux accessible to
+ TPL/SPL DTB
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240524-px30-of_upstream-v2-4-fdc7887097a2@cherry.de>
+Message-Id: <20240524-px30-of_upstream-v2-5-fdc7887097a2@cherry.de>
 References: <20240524-px30-of_upstream-v2-0-fdc7887097a2@cherry.de>
 In-Reply-To: <20240524-px30-of_upstream-v2-0-fdc7887097a2@cherry.de>
 To: Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
@@ -67,159 +67,48 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-U-Boot proper pre-reloc is currently running out of memory on PX30
-Ringneck and it is thus impossible to boot into U-Boot CLI. It is
-assumed the same problem can be seen on other PX30 boards though I
-cannot guarantee it since I don't have access to them.
-
-Fix this by migrating to the common bss and stack addresses for PX30,
-which drastically increases the size of the pre-reloc allocation pool (8
-times bigger now). The memory layout in SPL and U-Boot proper now
-match the other SoCs' using ROCKCHIP_COMMON_STACK_ADDR.
+This adds the default pinmux for UART2 and UART5 to the TPL/SPL DTB (if
+not removed through the CONFIG_OF_SPL_REMOVE_PROPS symbol) as those two
+controllers are always made available to all boards.
 
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- configs/px30-core-ctouch2-of10-px30_defconfig | 18 +++---------------
- configs/px30-core-ctouch2-px30_defconfig      | 18 +++---------------
- configs/px30-core-edimm2.2-px30_defconfig     | 18 +++---------------
- 3 files changed, 9 insertions(+), 45 deletions(-)
+ arch/arm/dts/px30-u-boot.dtsi | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
-diff --git a/configs/px30-core-ctouch2-of10-px30_defconfig b/configs/px30-core-ctouch2-of10-px30_defconfig
-index 87a39e115df..dd005f20ff8 100644
---- a/configs/px30-core-ctouch2-of10-px30_defconfig
-+++ b/configs/px30-core-ctouch2-of10-px30_defconfig
-@@ -2,27 +2,15 @@ CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
--CONFIG_TEXT_BASE=0x00200000
--CONFIG_SYS_MALLOC_F_LEN=0x2000
--CONFIG_SPL_LIBCOMMON_SUPPORT=y
--CONFIG_SPL_LIBGENERIC_SUPPORT=y
- CONFIG_NR_DRAM_BANKS=1
--CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x400000
- CONFIG_DEFAULT_DEVICE_TREE="px30-engicam-px30-core-ctouch2-of10"
--CONFIG_SPL_TEXT_BASE=0x00000000
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_PX30=y
-+# CONFIG_TPL_ROCKCHIP_COMMON_BOARD is not set
- CONFIG_TARGET_PX30_CORE=y
- CONFIG_DEBUG_UART_CHANNEL=1
--CONFIG_TPL_LIBGENERIC_SUPPORT=y
-+# CONFIG_TPL_LIBCOMMON_SUPPORT is not set
- CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_SPL_STACK_R_ADDR=0x600000
--CONFIG_SPL_STACK=0x400000
--CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
--CONFIG_SPL_BSS_START_ADDR=0x4000000
--CONFIG_SPL_BSS_MAX_SIZE=0x4000
--CONFIG_SPL_STACK_R=y
- CONFIG_DEBUG_UART_BASE=0xFF160000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_SYS_LOAD_ADDR=0x800800
-@@ -40,9 +28,9 @@ CONFIG_SPL_MAX_SIZE=0x20000
- CONFIG_SPL_PAD_TO=0x7f8000
- CONFIG_SPL_BOOTROM_SUPPORT=y
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
--# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
- CONFIG_SPL_ATF=y
- # CONFIG_TPL_FRAMEWORK is not set
-+# CONFIG_TPL_SYS_MALLOC_SIMPLE is not set
- # CONFIG_TPL_BANNER_PRINT is not set
- # CONFIG_CMD_BOOTD is not set
- # CONFIG_CMD_ELF is not set
-diff --git a/configs/px30-core-ctouch2-px30_defconfig b/configs/px30-core-ctouch2-px30_defconfig
-index 7162c117beb..f6559fbae3a 100644
---- a/configs/px30-core-ctouch2-px30_defconfig
-+++ b/configs/px30-core-ctouch2-px30_defconfig
-@@ -2,27 +2,15 @@ CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
--CONFIG_TEXT_BASE=0x00200000
--CONFIG_SYS_MALLOC_F_LEN=0x2000
--CONFIG_SPL_LIBCOMMON_SUPPORT=y
--CONFIG_SPL_LIBGENERIC_SUPPORT=y
- CONFIG_NR_DRAM_BANKS=1
--CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x400000
- CONFIG_DEFAULT_DEVICE_TREE="px30-engicam-px30-core-ctouch2"
--CONFIG_SPL_TEXT_BASE=0x00000000
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_PX30=y
-+# CONFIG_TPL_ROCKCHIP_COMMON_BOARD is not set
- CONFIG_TARGET_PX30_CORE=y
- CONFIG_DEBUG_UART_CHANNEL=1
--CONFIG_TPL_LIBGENERIC_SUPPORT=y
-+# CONFIG_TPL_LIBCOMMON_SUPPORT is not set
- CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_SPL_STACK_R_ADDR=0x600000
--CONFIG_SPL_STACK=0x400000
--CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
--CONFIG_SPL_BSS_START_ADDR=0x4000000
--CONFIG_SPL_BSS_MAX_SIZE=0x4000
--CONFIG_SPL_STACK_R=y
- CONFIG_DEBUG_UART_BASE=0xFF160000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_SYS_LOAD_ADDR=0x800800
-@@ -40,9 +28,9 @@ CONFIG_SPL_MAX_SIZE=0x20000
- CONFIG_SPL_PAD_TO=0x7f8000
- CONFIG_SPL_BOOTROM_SUPPORT=y
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
--# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
- CONFIG_SPL_ATF=y
- # CONFIG_TPL_FRAMEWORK is not set
-+# CONFIG_TPL_SYS_MALLOC_SIMPLE is not set
- # CONFIG_TPL_BANNER_PRINT is not set
- # CONFIG_CMD_BOOTD is not set
- # CONFIG_CMD_ELF is not set
-diff --git a/configs/px30-core-edimm2.2-px30_defconfig b/configs/px30-core-edimm2.2-px30_defconfig
-index 1182f60358f..a099e9378c9 100644
---- a/configs/px30-core-edimm2.2-px30_defconfig
-+++ b/configs/px30-core-edimm2.2-px30_defconfig
-@@ -2,27 +2,15 @@ CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
--CONFIG_TEXT_BASE=0x00200000
--CONFIG_SYS_MALLOC_F_LEN=0x2000
--CONFIG_SPL_LIBCOMMON_SUPPORT=y
--CONFIG_SPL_LIBGENERIC_SUPPORT=y
- CONFIG_NR_DRAM_BANKS=1
--CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x400000
- CONFIG_DEFAULT_DEVICE_TREE="px30-engicam-px30-core-edimm2.2"
--CONFIG_SPL_TEXT_BASE=0x00000000
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_PX30=y
-+# CONFIG_TPL_ROCKCHIP_COMMON_BOARD is not set
- CONFIG_TARGET_PX30_CORE=y
- CONFIG_DEBUG_UART_CHANNEL=1
--CONFIG_TPL_LIBGENERIC_SUPPORT=y
-+# CONFIG_TPL_LIBCOMMON_SUPPORT is not set
- CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_SPL_STACK_R_ADDR=0x600000
--CONFIG_SPL_STACK=0x400000
--CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
--CONFIG_SPL_BSS_START_ADDR=0x4000000
--CONFIG_SPL_BSS_MAX_SIZE=0x4000
--CONFIG_SPL_STACK_R=y
- CONFIG_DEBUG_UART_BASE=0xFF160000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_SYS_LOAD_ADDR=0x800800
-@@ -40,9 +28,9 @@ CONFIG_SPL_MAX_SIZE=0x20000
- CONFIG_SPL_PAD_TO=0x7f8000
- CONFIG_SPL_BOOTROM_SUPPORT=y
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
--# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
- CONFIG_SPL_ATF=y
- # CONFIG_TPL_FRAMEWORK is not set
-+# CONFIG_TPL_SYS_MALLOC_SIMPLE is not set
- # CONFIG_TPL_BANNER_PRINT is not set
- # CONFIG_CMD_BOOTD is not set
- # CONFIG_CMD_ELF is not set
+diff --git a/arch/arm/dts/px30-u-boot.dtsi b/arch/arm/dts/px30-u-boot.dtsi
+index 046da022ffe..59fa9f43a97 100644
+--- a/arch/arm/dts/px30-u-boot.dtsi
++++ b/arch/arm/dts/px30-u-boot.dtsi
+@@ -33,11 +33,27 @@
+ 	bootph-all;
+ };
+ 
++&uart2m0_xfer {
++	bootph-all;
++};
++
+ &uart5 {
+ 	clock-frequency = <24000000>;
+ 	bootph-all;
+ };
+ 
++&uart5_cts {
++	bootph-all;
++};
++
++&uart5_rts {
++	bootph-all;
++};
++
++&uart5_xfer {
++	bootph-all;
++};
++
+ &sdmmc {
+ 	bootph-all;
+ 
 
 -- 
 2.45.1
