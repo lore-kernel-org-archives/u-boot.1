@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FEB5C25B7A
-	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 11:43:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5888DC25B74
+	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 11:43:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED41A88679;
-	Fri, 24 May 2024 13:42:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 695D98866D;
+	Fri, 24 May 2024 13:42:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8415D88254; Fri, 24 May 2024 13:42:42 +0200 (CEST)
-Received: from smtp-190c.mail.infomaniak.ch (smtp-190c.mail.infomaniak.ch
- [IPv6:2001:1600:4:17::190c])
+ id D855988294; Fri, 24 May 2024 13:42:43 +0200 (CEST)
+Received: from smtp-42ab.mail.infomaniak.ch (smtp-42ab.mail.infomaniak.ch
+ [84.16.66.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C10988270
- for <u-boot@lists.denx.de>; Fri, 24 May 2024 13:42:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0440A885C5
+ for <u-boot@lists.denx.de>; Fri, 24 May 2024 13:42:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
  [10.7.10.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Vm37N0zz7zhFb;
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Vm37N4jQ1znCk;
  Fri, 24 May 2024 13:42:40 +0200 (CEST)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Vm37M47kMzSdg; Fri, 24 May 2024 13:42:39 +0200 (CEST)
+ id 4Vm37N0tGvzQwq; Fri, 24 May 2024 13:42:40 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Fri, 24 May 2024 13:42:25 +0200
-Subject: [PATCH next 4/5] rockchip: px30-ringneck: Update SPL_PAD_TO
- Kconfig option
+Date: Fri, 24 May 2024 13:42:26 +0200
+Subject: [PATCH next 5/5] power: rk8xx: properly print all supported PMICs name
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240524-misc-tsd-v1-4-b7bde1344b9e@cherry.de>
+Message-Id: <20240524-misc-tsd-v1-5-b7bde1344b9e@cherry.de>
 References: <20240524-misc-tsd-v1-0-b7bde1344b9e@cherry.de>
 In-Reply-To: <20240524-misc-tsd-v1-0-b7bde1344b9e@cherry.de>
 To: Klaus Goger <klaus.goger@theobroma-systems.com>, 
@@ -66,59 +65,38 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-On px30-ringneck the FIT payload is located at sector 0x200 compared to
-the more Rockchip common sector 0x4000 offset:
-	SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x200
+The ID of the PMIC is stored in the 2 16b registers but the only part
+that matters right now is the 3 MSB, which make the 3 digits (in hex) of
+the part number.
 
-Because FIT payload is located at sector 0x200 and the TPL+SPL is
-located at sector 64, the combined size of TPL+SPL cannot take up more
-than 224KiB:
-	(0x200 - 64) x 512 = 0x38000 (224 KiB)
+Right now, only RK808 was properly displayed, with this all currently
+supported PMICs should display the proper part number.
 
-Adjust SPL_PAD_TO to match the used 0x200 sector offset.
-
-While at it, update the px30-ringneck-u-boot.dtsi to remove the now
-unnecessary override of simple-bin:fit:offset since SPL_PAD_TO matches
-with the current formula.
+Tested on RK806 (RK3588 Jaguar), RK808 (RK3399 Puma) and RK809 (PX30
+Ringneck).
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- arch/arm/dts/px30-ringneck-haikou-u-boot.dtsi | 8 --------
- configs/ringneck-px30_defconfig               | 2 +-
- 2 files changed, 1 insertion(+), 9 deletions(-)
+ drivers/power/pmic/rk8xx.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/dts/px30-ringneck-haikou-u-boot.dtsi b/arch/arm/dts/px30-ringneck-haikou-u-boot.dtsi
-index e04766ad09c..29ea2763636 100644
---- a/arch/arm/dts/px30-ringneck-haikou-u-boot.dtsi
-+++ b/arch/arm/dts/px30-ringneck-haikou-u-boot.dtsi
-@@ -15,14 +15,6 @@
- 	};
- };
+diff --git a/drivers/power/pmic/rk8xx.c b/drivers/power/pmic/rk8xx.c
+index 12ff26a0855..fe85fb13543 100644
+--- a/drivers/power/pmic/rk8xx.c
++++ b/drivers/power/pmic/rk8xx.c
+@@ -277,10 +277,10 @@ static int rk8xx_probe(struct udevice *dev)
+ 		return ret;
  
--&binman {
--	simple-bin {
--		fit {
--			offset = <((CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR - 64) * 512)>;
--		};
--	};
--};
--
- &emmc_clk {
- 	bootph-all;
- };
-diff --git a/configs/ringneck-px30_defconfig b/configs/ringneck-px30_defconfig
-index dedf35d4347..a22d25e0089 100644
---- a/configs/ringneck-px30_defconfig
-+++ b/configs/ringneck-px30_defconfig
-@@ -25,7 +25,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/px30-ringneck-haikou.dtb"
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_MISC_INIT_R=y
- CONFIG_SPL_MAX_SIZE=0x20000
--CONFIG_SPL_PAD_TO=0x0
-+CONFIG_SPL_PAD_TO=0x38000
- CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_BOOTROM_SUPPORT=y
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+ 	priv->variant = ((msb << 8) | lsb) & RK8XX_ID_MSK;
+-	show_variant = priv->variant;
++	/* All currently supported PMICs store the variant in the 3 MSB */
++	show_variant = priv->variant >> 4;
+ 	switch (priv->variant) {
+ 	case RK808_ID:
+-		show_variant = 0x808;	/* RK808 hardware ID is 0 */
+ 		break;
+ 	case RK805_ID:
+ 	case RK816_ID:
 
 -- 
 2.45.1
