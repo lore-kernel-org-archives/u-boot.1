@@ -4,97 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D0AAC25B74
-	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 12:31:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28666C25B74
+	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 13:02:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CADB888DD;
-	Fri, 24 May 2024 14:28:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 78B3C88653;
+	Fri, 24 May 2024 15:02:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="gGYjjI8A";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="IEK6XgHy";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="olDdqdcj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBAE088640; Fri, 24 May 2024 13:13:57 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 3882A8865D; Fri, 24 May 2024 15:02:46 +0200 (CEST)
+Received: from fhigh4-smtp.messagingengine.com
+ (fhigh4-smtp.messagingengine.com [103.168.172.155])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 710558864F
- for <u-boot@lists.denx.de>; Fri, 24 May 2024 13:13:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 54A3C88545
+ for <u-boot@lists.denx.de>; Fri, 24 May 2024 15:02:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id EE3A8120017;
- Fri, 24 May 2024 14:13:54 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru EE3A8120017
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1716549234;
- bh=mu3gm4pd7Rh8rtEjzlL+vwpOO4N5GeidRHVmHGX6S+I=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=gGYjjI8AbK5MKudWYTc8CxXqMcJEtaE+AR4zSAaxfQD0va9W4SrWDQweX0gei4K/+
- hLnGLaNOgPDPWNpJ/At3t4EEN50HHVe09oNw5b5fdBq35MPkoKWEoFOSfY549c1J5n
- 52iJYFyRQvHekVZuoFfBN32A+Xad4+VSIS/gQAbx2qWQkNSWAKru9jG99CFmbi4thL
- IN/acROLGhGZIDwB6zAz610bWuHWUf8Bi4K9/4pyRA24mmI2w3zSmSryZTGWnBPlly
- 9G77O4ZY3kOE1t+dd8JgRWziSW/+YHPw7CCd774oo3LcODzqTbsBNtPTqPXP8sL04F
- 9A83QojD3g31Q==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
- [172.16.192.103])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Fri, 24 May 2024 14:13:54 +0300 (MSK)
-Received: from user-A520M-DS3H.sberdevices.ru (100.64.160.123) by
- p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Fri, 24 May 2024 14:13:53 +0300
-From: Alexey Romanov <avromanov@salutedevices.com>
-To: <dario.binacchi@amarulasolutions.com>, <michael@amarulasolutions.com>,
- <frieder.schrempf@kontron.de>, <kmpark@infradead.org>, <hs@denx.de>,
- <joe.hershberger@ni.com>, <dunaev@tecon.ru>, <sjg@chromium.org>,
- <bmeng@tinylab.org>, <xypron.glpk@gmx.de>, <tobias@waldekranz.com>,
- <jpewhacker@gmail.com>, <marek.vasut+renesas@mailbox.org>,
- <kever.yang@rock-chips.com>, <jbx6244@gmail.com>,
- <abdellatif.elkhlifi@arm.com>, <mikhail.kshevetskiy@iopsys.eu>,
- <jagan@amarulasolutions.com>
-CC: <kernel@salutedevices.com>, <u-boot@lists.denx.de>, Alexey Romanov
- <avromanov@salutedevices.com>
-Subject: [PATCH v3 6/6] spinand: bind UBI block
-Date: Fri, 24 May 2024 14:13:19 +0300
-Message-ID: <20240524111319.3512009-7-avromanov@salutedevices.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240524111319.3512009-1-avromanov@salutedevices.com>
-References: <20240524111319.3512009-1-avromanov@salutedevices.com>
+ dmarc=pass (p=none dis=none) header.from=flygoat.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id 059F11140083;
+ Fri, 24 May 2024 09:02:42 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+ by compute4.internal (MEProxy); Fri, 24 May 2024 09:02:42 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
+ cc:cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:message-id:mime-version:reply-to
+ :subject:subject:to:to; s=fm2; t=1716555762; x=1716642162; bh=os
+ On4B9QTW6Q4sue7adG3dpXC8viQ7abevhm634vj6s=; b=IEK6XgHyGOfVCeS9xy
+ 3+Gq4nPsQxBNu4Xpy5IkLJXRSghvUzaUw4lJPMqBvLag1D/0NPpZtw9TS0Zfz0kH
+ 9aDP8pzvoH5U2muhsIzLf7L3v1VkaUea1LHAQx0ltFd0UuOg08XoWGXFvhHfHSjf
+ 1JLTRqh/HZVGhqMLWNGAyEHQ7atLDSDVpvi0kqKYYR8DpaYaOZbVgOd9511lksLS
+ ncYHjYjT95g67hMIsDggflBuwlBXjfiWP8gg08fKV3kOAqFFRzHLFzLLCuNKBzO6
+ xxTvWwGUhUpT3Xb/yrPSw6ggBd1h77sjhNVwi8BPdJpqIRH+QxozSTK98IpD8ho4
+ h3ag==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:message-id:mime-version:reply-to:subject
+ :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+ :x-sasl-enc; s=fm1; t=1716555762; x=1716642162; bh=osOn4B9QTW6Q4
+ sue7adG3dpXC8viQ7abevhm634vj6s=; b=olDdqdcj0rSD8L/cx0mRwWIOFvE7k
+ UO4C0xMf6gSp79qLd3tmmObRYchsQ6w2PKB5Mwo1gRB71sD4CJmoA3V4xovDea5O
+ uhVYlZ36QQq1DsoAd4nscNRkZ6+wgMhBf0PzuyI5IlrOglnAGD/1rALx4gyvC9a4
+ 6p8cFaMgz3K21avC0LFrEaWbOlQrIqnnvWeTUZ1FZP8Of6WdTwZ83BGqrBF1jU1V
+ 1hEJdyCxsOJcZ+nP54B4M4KBDl4t9FN0h7wMgrQ/R93KJ6uNlX8d5keaQ/XqbkNA
+ uk+7vcin7gGBD3rpOpk75jDUlZYkkQUcRXfp9BG4Dj/WtDAFW5sYPAwRA==
+X-ME-Sender: <xms:8Y9QZqGIZ0dFeXva64kdv8Tj8miHB_vQXZR35iWNIqopl_t8mWSyqg>
+ <xme:8Y9QZrXuN0Y3xUhMT382VXhegKLP6S_BdutjOpvzqpcXLb6odcso2hCUYDIl4j_BU
+ b0LsKEZwpnQANyCkh8>
+X-ME-Received: <xmr:8Y9QZkKZgyJtpgkomKTADERUuLdi87uVFjDSWQdULNGmiaL_mwl2ojI>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdeikedgheeiucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhephffufffkgggtgffvvefosehtjeertdertdejnecuhfhrohhmpeflihgrgihu
+ nhcujggrnhhguceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomheqnecugg
+ ftrfgrthhtvghrnhepgfevffejteegjeeflefgkeetleekhfeugfegvdeuueejkeejteek
+ kedvfffffedunecuffhomhgrihhnpehkvghrnhgvlhdrohhrghenucevlhhushhtvghruf
+ hiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjihgrgihunhdrhigrnhhgsehf
+ lhihghhorghtrdgtohhm
+X-ME-Proxy: <xmx:8Y9QZkH5dLdMvVCWhhQR3WjiqKxGNlXG4ygf4scTG8bV9wP8pR7qkQ>
+ <xmx:8Y9QZgVL7payXgqVcpia2ad688Fayq09QB3IOstyW35wf2orTygtWQ>
+ <xmx:8Y9QZnMLX1rX9dq35AQLPbbaF34YTi4yZZP6Ysv38rKOkbBCR491-g>
+ <xmx:8Y9QZn3DYpnktWJq6dqMvWqR9wFozj3jC8Dform_jGfn1D3VNTL5NA>
+ <xmx:8Y9QZiJYvOTkLPbCRMCnSt17TUxkX9vm6GQSIIwFqsvpLHrvvGz6IECd>
+Feedback-ID: ifd894703:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 24 May 2024 09:02:40 -0400 (EDT)
+From: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Subject: [PATCH v2 0/2] virtio_gpu driver and relevant fix
+Date: Fri, 24 May 2024 14:02:38 +0100
+Message-Id: <20240524-virtio_gpu-v2-0-b198c35b1fd2@flygoat.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
- p-i-exch-sc-m02.sberdevices.ru (172.16.192.103)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 185463 [May 24 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.4
-X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 20 0.3.20
- 743589a8af6ec90b529f2124c2bbfc3ce1d2f20f,
- {Tracking_from_domain_doesnt_match_to}, 127.0.0.199:7.1.2;
- 100.64.160.123:7.1.2; salutedevices.com:7.1.1; smtp.sberdevices.ru:5.0.1,7.1.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s,
- ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/05/24 05:57:00 #25251437
-X-KSMG-AntiVirus-Status: Clean, skipped
-X-Mailman-Approved-At: Fri, 24 May 2024 14:28:51 +0200
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAO6PUGYC/03M0QqDIBiG4VuJ/3gOU0vZ0e5jxNAy+2HLUCeL6
+ N7ngsEO3w++Z4NoA9oIl2qDYDNG9HMJdqqgn/TsLMGhNDDKBG1qTjKGhP7ulhfRxojBtqpRVEE
+ 5LMGO+D6wW1d6wph8WA8719/1x8h/JteEkpY33CgpJOvldXyszut07v0Tun3fPy4zef2mAAAA
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1537;
+ i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
+ bh=C1jhz7MjZ5+PwfHg82hbAbv7EpWuDZTPFAJMb2nckyY=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhrSA/g9tgs4qJ3S+f+zbp/h0t9kmgceKfhyTBC6HvvpzZ
+ OX/x8IrOkpZGMS4GGTFFFlCBJT6NjReXHD9QdYfmDmsTCBDGLg4BWAiDj8YGaYsfPRO5mSH1VO3
+ Xz1eT3Y7JSj/OyIkJCH7vePeqe6vM4wZ/llo/vB5kf5WOzPGzstRcM2Fr453PVymM54PC1Q/9KY
+ gkhcA
+X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
+ fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,42 +117,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-UBI block is virtual block device, which is an abstraction
-over MTD layer. Therefore it is logical to use it in combination
-with MTD drivers.
+Hi all,
 
-Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
+This series added support for virtio-gpu device, it has been
+tested on QEMU riscv64 and aarch64.
+
+I also fixed a problem in EFI GOP so it works with EFI applications
+as well.
+
+There is a problem remaining. virtio_init() is being called too
+late to allow virtio-gpu to be selected as a vidconsole. My current
+appraoch is to register virtio_init in init_sequence_r, just after
+pci_init. Is this a viable approach? Should I introduce a config
+like CONFIG_VIRTIO_INIT_R to allow it to be selected by boards?
+
+Thanks
+
+Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- drivers/mtd/nand/spi/core.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+Changes in v2:
+- Fix left over in previous version (endian, unused variable)
+- Fix Kconfig text
+- Link to v1: https://lore.kernel.org/r/20240517-virtio_gpu-v1-0-6353b87472c7@flygoat.com
 
-diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
-index dd880adf31..c47f6c1b46 100644
---- a/drivers/mtd/nand/spi/core.c
-+++ b/drivers/mtd/nand/spi/core.c
-@@ -27,6 +27,7 @@
- #include <watchdog.h>
- #include <spi.h>
- #include <spi-mem.h>
-+#include <ubi_uboot.h>
- #include <dm/device_compat.h>
- #include <dm/devres.h>
- #include <dm/uclass.h>
-@@ -1182,8 +1183,13 @@ static int spinand_bind(struct udevice *dev)
- {
- 	if (blk_enabled()) {
- 		struct spinand_plat *plat = dev_get_plat(dev);
-+		int ret;
-+
-+		ret = mtd_bind(dev, &plat->mtd);
-+		if (ret)
-+			return ret;
- 
--		return mtd_bind(dev, &plat->mtd);
-+		return ubi_bind(dev);
- 	}
- 
- 	return 0;
+---
+Jiaxun Yang (2):
+      virtio: New virtio_gpu driver
+      efi: gop: Mark pixel_format as BLTONLY if we have sync hook
+
+ drivers/virtio/Kconfig         |  29 +++
+ drivers/virtio/Makefile        |   1 +
+ drivers/virtio/virtio-uclass.c |   1 +
+ drivers/virtio/virtio_gpu.c    | 302 +++++++++++++++++++++++++++++
+ drivers/virtio/virtio_gpu.h    | 428 +++++++++++++++++++++++++++++++++++++++++
+ include/efi_api.h              |   1 +
+ include/virtio.h               |   4 +-
+ lib/efi_loader/efi_gop.c       |   8 +-
+ 8 files changed, 772 insertions(+), 2 deletions(-)
+---
+base-commit: 21aa37ec1cd4a12e01e0e863ec9e99d703ce4d52
+change-id: 20240513-virtio_gpu-abb4de685808
+
+Best regards,
 -- 
-2.34.1
+Jiaxun Yang <jiaxun.yang@flygoat.com>
 
