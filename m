@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAFA6C25B7A
-	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 12:29:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7F7AC25B7A
+	for <u-boot@archiver.kernel.org>; Fri, 24 May 2024 12:29:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E4E18884D;
+	by phobos.denx.de (Postfix) with ESMTP id 6E29A88860;
 	Fri, 24 May 2024 14:28:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="AFW9Ue2X";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="EcpU+JTH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C4BE88647; Fri, 24 May 2024 12:29:42 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ id 6B44B88642; Fri, 24 May 2024 12:29:47 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9AA6788640
- for <u-boot@lists.denx.de>; Fri, 24 May 2024 12:29:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B35887E88
+ for <u-boot@lists.denx.de>; Fri, 24 May 2024 12:29:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id EE1B0120002;
- Fri, 24 May 2024 13:29:38 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru EE1B0120002
+Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id C67BB100006;
+ Fri, 24 May 2024 13:29:44 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru C67BB100006
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1716546578;
- bh=HvQGkgRge1UqOnAcxMIiNYqM+gY/Tn/WjCa5gsVDjQs=;
+ s=mail; t=1716546584;
+ bh=//PawAQuVV6n2pSWxm1H+utPkPr8j39Xd0EeDHK1DmI=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=AFW9Ue2X1miRlVNHIgd08VGl7tmy8GiRI+stRyBQvwHw+faL9k2Cohhd7aHt2ShtN
- Bmmloc8/BBQX22jyheeZJCWmgXqxU7fZ1cwBLH+3P4AyxBnLOycsabSwUwmoFaQN+H
- QEMffOlr1UGOqqCEjqHOCnsoW4rPFazNMFfAACUyC4I1ieAJ/J4iwWB4FAS/CRWtNg
- F94OLjYsXJXlDvQJGuypRoib7kb/TNdcNSPaA/hD29pIW2DbhvJ9XpBWcHlLnRMWV3
- wDJI5FEfHy3YyomWp7YkkRgxjKJtU3d7su8b0NfMdngt5xTQ/Ffetl4+FgCyBAOit8
- zwAkh+Ffdj5yA==
+ b=EcpU+JTHDyBU+0QvLFol46Vb4U3wdo9bKH1WIMS5EJhbc9RePf3VXak+b1zX4C35v
+ kopp+lmyjX4tLGR/bfBpe1J0SbyWwUz6ZkVRAcNbRXk5f3l7MJHeiVBXjt7Hw+sOeX
+ JBdmu8Ywud//zBrMBKTVm/01PcgXWYIT5E5CbuuP44W++MeiYYa3ITzbO8Awl9gXL2
+ t1WWcohSHEal5qjir+iIHSUkOFjmd5fo4FmFrDTWtQQcA+aBHptp0P0oZUL6g4tT+7
+ 2dBNZwpDSB+pPhSXi5/fvo+4TIo/q+QfEp6HzP1tJTJMmhSCVj1qONzY8iTRAAIUgT
+ z8+ogbLjG+GMg==
 Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
  [172.16.192.103])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Fri, 24 May 2024 13:29:38 +0300 (MSK)
+ Fri, 24 May 2024 13:29:44 +0300 (MSK)
 Received: from user-A520M-DS3H.sberdevices.ru (100.64.160.123) by
  p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Fri, 24 May 2024 13:29:37 +0300
+ 15.2.1118.40; Fri, 24 May 2024 13:29:43 +0300
 From: Alexey Romanov <avromanov@salutedevices.com>
 To: <dario.binacchi@amarulasolutions.com>, <michael@amarulasolutions.com>,
  <frieder.schrempf@kontron.de>, <xypron.glpk@gmx.de>,
@@ -59,9 +59,9 @@ To: <dario.binacchi@amarulasolutions.com>, <michael@amarulasolutions.com>,
  <mikhail.kshevetskiy@iopsys.eu>, <patrice.chotard@foss.st.com>
 CC: <kernel@salutedevices.com>, <u-boot@lists.denx.de>, Alexey Romanov
  <avromanov@salutedevices.com>
-Subject: [PATCH v4 1/3] disk: support MTD partitions
-Date: Fri, 24 May 2024 13:29:18 +0300
-Message-ID: <20240524102920.2631731-2-avromanov@salutedevices.com>
+Subject: [PATCH v4 2/3] drivers: introduce mtdblock abstraction
+Date: Fri, 24 May 2024 13:29:19 +0300
+Message-ID: <20240524102920.2631731-3-avromanov@salutedevices.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240524102920.2631731-1-avromanov@salutedevices.com>
 References: <20240524102920.2631731-1-avromanov@salutedevices.com>
@@ -82,9 +82,9 @@ X-KSMG-AntiSpam-Method: none
 X-KSMG-AntiSpam-Auth: dkim=none
 X-KSMG-AntiSpam-Info: LuaCore: 20 0.3.20
  743589a8af6ec90b529f2124c2bbfc3ce1d2f20f,
- {Tracking_from_domain_doesnt_match_to},
+ {Tracking_from_domain_doesnt_match_to}, smtp.sberdevices.ru:5.0.1,7.1.1;
  d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 100.64.160.123:7.1.2;
- salutedevices.com:7.1.1; smtp.sberdevices.ru:7.1.1,5.0.1;
+ salutedevices.com:7.1.1;
  127.0.0.199:7.1.2, FromAlignment: s, ApMailHostAddress: 100.64.160.123
 X-MS-Exchange-Organization-SCL: -1
 X-KSMG-AntiSpam-Interceptor-Info: scan successful
@@ -110,147 +110,305 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add new MTD partition driver, which can be useful with
-mtdblock driver combination.
+MTD block - abstraction over MTD subsystem, allowing
+to read and write in blocks using BLK UCLASS.
 
 Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
 ---
- disk/part.c           |  3 +-
- drivers/mtd/Kconfig   |  1 +
- drivers/mtd/mtdpart.c | 69 +++++++++++++++++++++++++++++++++++++++++++
- include/part.h        |  3 ++
- 4 files changed, 75 insertions(+), 1 deletion(-)
+ drivers/block/blk-uclass.c |   1 +
+ drivers/mtd/Makefile       |   1 +
+ drivers/mtd/mtdblock.c     | 227 +++++++++++++++++++++++++++++++++++++
+ include/linux/mtd/mtd.h    |  12 ++
+ 4 files changed, 241 insertions(+)
+ create mode 100644 drivers/mtd/mtdblock.c
 
-diff --git a/disk/part.c b/disk/part.c
-index 65289a31e3..75f854bea7 100644
---- a/disk/part.c
-+++ b/disk/part.c
-@@ -305,7 +305,8 @@ static void print_part_header(const char *type, struct blk_desc *desc)
- 	CONFIG_IS_ENABLED(DOS_PARTITION) || \
- 	CONFIG_IS_ENABLED(ISO_PARTITION) || \
- 	CONFIG_IS_ENABLED(AMIGA_PARTITION) || \
--	CONFIG_IS_ENABLED(EFI_PARTITION)
-+	CONFIG_IS_ENABLED(EFI_PARTITION) || \
-+	CONFIG_IS_ENABLED(MTD_PARTITIONS)
- 	printf("\nPartition Map for %s device %d  --   Partition Type: %s\n\n",
- 	       uclass_get_name(desc->uclass_id), desc->devnum, type);
- #endif /* any CONFIG_..._PARTITION */
-diff --git a/drivers/mtd/Kconfig b/drivers/mtd/Kconfig
-index 2ec5f4d892..b00cb25828 100644
---- a/drivers/mtd/Kconfig
-+++ b/drivers/mtd/Kconfig
-@@ -2,6 +2,7 @@ menu "MTD Support"
+diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
+index 77066da352..ab0a9105c9 100644
+--- a/drivers/block/blk-uclass.c
++++ b/drivers/block/blk-uclass.c
+@@ -37,6 +37,7 @@ static struct {
+ 	{ UCLASS_PVBLOCK, "pvblock" },
+ 	{ UCLASS_BLKMAP, "blkmap" },
+ 	{ UCLASS_RKMTD, "rkmtd" },
++	{ UCLASS_MTD, "mtd" },
+ };
  
- config MTD_PARTITIONS
- 	bool
-+	select PARTITIONS
+ static enum uclass_id uclass_name_to_iftype(const char *uclass_idname)
+diff --git a/drivers/mtd/Makefile b/drivers/mtd/Makefile
+index c2fc80b10f..f7eab71bcd 100644
+--- a/drivers/mtd/Makefile
++++ b/drivers/mtd/Makefile
+@@ -26,6 +26,7 @@ obj-y += onenand/
+ obj-y += spi/
+ obj-$(CONFIG_MTD_UBI) += ubi/
+ obj-$(CONFIG_NVMXIP) += nvmxip/
++obj-$(CONFIG_BLK) += mtdblock.o
  
- config MTD
- 	bool "Enable MTD layer"
-diff --git a/drivers/mtd/mtdpart.c b/drivers/mtd/mtdpart.c
-index 4886392a1c..67244869f2 100644
---- a/drivers/mtd/mtdpart.c
-+++ b/drivers/mtd/mtdpart.c
-@@ -21,6 +21,8 @@
- 
- #include <common.h>
- #include <malloc.h>
-+#include <memalign.h>
+ #SPL/TPL build
+ else
+diff --git a/drivers/mtd/mtdblock.c b/drivers/mtd/mtdblock.c
+new file mode 100644
+index 0000000000..33c9c56a4c
+--- /dev/null
++++ b/drivers/mtd/mtdblock.c
+@@ -0,0 +1,227 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * MTD block - abstraction over MTD subsystem, allowing
++ * to read and write in blocks using BLK UCLASS.
++ *
++ * - Read algorithm:
++ *
++ *   1. Convert start block number to start address.
++ *   2. Read block_dev->blksz bytes using mtd_read() and
++ *      add to start address pointer block_dev->blksz bytes,
++ *      until the requested number of blocks have been read.
++ *
++ * - Write algorithm:
++ *
++ *   1. Convert start block number to start address.
++ *   2. Round this address down by mtd->erasesize.
++ *
++ *   Erase addr      Start addr
++ *      |                |
++ *      v                v
++ *      +----------------+----------------+----------------+
++ *      |     blksz      |      blksz     |      blksz     |
++ *      +----------------+----------------+----------------+
++ *
++ *   3. Calculate offset between this two addresses.
++ *   4. Read mtd->erasesize bytes using mtd_read() into
++ *      temporary buffer from erase address.
++ *
++ *   Erase addr      Start addr
++ *      |                |
++ *      v                v
++ *      +----------------+----------------+----------------+
++ *      |     blksz      |      blksz     |      blksz     |
++ *      +----------------+----------------+----------------+
++ *      ^
++ *      |
++ *      |
++ *   mtd_read()
++ *   from here
++ *
++ *   5. Copy data from user buffer to temporary buffer with offset,
++ *      calculated at step 3.
++ *   6. Erase and write mtd->erasesize bytes at erase address
++ *      pointer using mtd_erase/mtd_write().
++ *   7. Add to erase address pointer mtd->erasesize bytes.
++ *   8. goto 1 until the requested number of blocks have
++ *      been written.
++ *
++ * (C) Copyright 2024 SaluteDevices, Inc.
++ *
++ * Author: Alexey Romanov <avromanov@salutedevices.com>
++ */
++
++#include <blk.h>
 +#include <part.h>
- #include <linux/bug.h>
- #include <linux/errno.h>
- #include <linux/compat.h>
-@@ -1055,3 +1057,70 @@ uint64_t mtd_get_device_size(const struct mtd_info *mtd)
- 	return mtd->size;
- }
- EXPORT_SYMBOL_GPL(mtd_get_device_size);
++#include <dm/device.h>
++#include <dm/device-internal.h>
++#include <linux/mtd/mtd.h>
 +
-+static struct mtd_info *mtd_get_partition_by_index(struct mtd_info *mtd, int index)
++int mtd_bind(struct udevice *dev, struct mtd_info **mtd)
 +{
-+	struct mtd_info *part;
-+	int i = 0;
++	struct blk_desc *bdesc;
++	struct udevice *bdev;
++	int ret;
 +
-+	list_for_each_entry(part, &mtd->partitions, node)
-+		if (i++ == index)
-+			return part;
-+
-+	debug("Partition with idx=%d not found on MTD device %s\n", index, mtd->name);
-+	return NULL;
-+}
-+
-+static int part_get_info_mtd(struct blk_desc *dev_desc, int part_idx,
-+			     struct disk_partition *info)
-+{
-+	struct mtd_info *master = blk_desc_to_mtd(dev_desc);
-+	struct mtd_info *part;
-+
-+	if (!master) {
-+		pr_err("MTD device is NULL\n");
-+		return -EINVAL;
++	ret = blk_create_devicef(dev, "mtd_blk", "blk", UCLASS_MTD,
++				 dev_seq(dev), 512, 0, &bdev);
++	if (ret) {
++		pr_err("Cannot create block device\n");
++		return ret;
 +	}
 +
-+	part = mtd_get_partition_by_index(master, part_idx);
-+	if (!part) {
-+		debug("Failed to find partition with idx=%d\n", part_idx);
-+		return -EINVAL;
-+	}
-+
-+	snprintf(info->name, PART_NAME_LEN, part->name);
-+	info->start = part->offset / dev_desc->blksz;
-+	info->size = part->size / dev_desc->blksz;
-+	info->blksz = dev_desc->blksz;
++	bdesc = dev_get_uclass_plat(bdev);
++	dev_set_priv(bdev, mtd);
++	bdesc->bdev = bdev;
++	bdesc->part_type = PART_TYPE_MTD;
 +
 +	return 0;
 +}
 +
-+static void part_print_mtd(struct blk_desc *dev_desc)
++static ulong mtd_blk_read(struct udevice *dev, lbaint_t start, lbaint_t blkcnt,
++			  void *dst)
 +{
-+	struct mtd_info *master = blk_desc_to_mtd(dev_desc);
-+	struct mtd_info *part;
++	struct blk_desc *block_dev = dev_get_uclass_plat(dev);
++	struct mtd_info *mtd = blk_desc_to_mtd(block_dev);
++	unsigned int sect_size = block_dev->blksz;
++	lbaint_t cur = start;
++	ulong read_cnt = 0;
 +
-+	list_for_each_entry(part, &master->partitions, node)
-+		printf("- 0x%012llx-0x%012llx : \"%s\"\n",
-+		       part->offset, part->offset + part->size, part->name);
++	while (read_cnt < blkcnt) {
++		int ret;
++		loff_t sect_start = cur * sect_size;
++		size_t retlen;
++
++		ret = mtd_read(mtd, sect_start, sect_size, &retlen, dst);
++		if (ret)
++			return ret;
++
++		if (retlen != sect_size) {
++			pr_err("mtdblock: failed to read block 0x" LBAF "\n", cur);
++			return -EIO;
++		}
++
++		cur++;
++		dst += sect_size;
++		read_cnt++;
++	}
++
++	return read_cnt;
 +}
 +
-+static int part_test_mtd(struct blk_desc *dev_desc)
++static int mtd_erase_write(struct mtd_info *mtd, uint64_t start, const void *src)
 +{
-+	ALLOC_CACHE_ALIGN_BUFFER(unsigned char, buffer, dev_desc->blksz);
++	int ret;
++	size_t retlen;
++	struct erase_info erase = { 0 };
 +
-+	if (blk_dread(dev_desc, 0, 1, (ulong *)buffer) != 1)
-+		return -1;
++	erase.mtd = mtd;
++	erase.addr = start;
++	erase.len = mtd->erasesize;
++
++	ret = mtd_erase(mtd, &erase);
++	if (ret)
++		return ret;
++
++	ret = mtd_write(mtd, start, mtd->erasesize, &retlen, src);
++	if (ret)
++		return ret;
++
++	if (retlen != mtd->erasesize) {
++		pr_err("mtdblock: failed to read block at 0x%llx\n", start);
++		return -EIO;
++	}
 +
 +	return 0;
 +}
 +
-+U_BOOT_PART_TYPE(mtd) = {
-+	.name		= "MTD",
-+	.part_type	= PART_TYPE_MTD,
-+	.max_entries	= MTD_ENTRY_NUMBERS,
-+	.get_info	= part_get_info_ptr(part_get_info_mtd),
-+	.print		= part_print_ptr(part_print_mtd),
-+	.test		= part_test_mtd,
++static ulong mtd_blk_write(struct udevice *dev, lbaint_t start, lbaint_t blkcnt,
++			   const void *src)
++{
++	struct blk_desc *block_dev = dev_get_uclass_plat(dev);
++	struct mtd_info *mtd = blk_desc_to_mtd(block_dev);
++	unsigned int sect_size = block_dev->blksz;
++	lbaint_t cur = start, blocks_todo = blkcnt;
++	ulong write_cnt = 0;
++	u8 *buf;
++	int ret = 0;
++
++	buf = malloc(mtd->erasesize);
++	if (!buf)
++		return -ENOMEM;
++
++	while (blocks_todo > 0) {
++		loff_t sect_start = cur * sect_size;
++		loff_t erase_start = ALIGN_DOWN(sect_start, mtd->erasesize);
++		u32 offset = sect_start - erase_start;
++		size_t cur_size = min_t(size_t,  mtd->erasesize - offset,
++					blocks_todo * sect_size);
++		size_t retlen;
++		lbaint_t written;
++
++		ret = mtd_read(mtd, erase_start, mtd->erasesize, &retlen, buf);
++		if (ret)
++			goto out;
++
++		if (retlen != mtd->erasesize) {
++			pr_err("mtdblock: failed to read block 0x" LBAF "\n", cur);
++			ret = -EIO;
++			goto out;
++		}
++
++		memcpy(buf + offset, src, cur_size);
++
++		ret = mtd_erase_write(mtd, erase_start, buf);
++		if (ret)
++			goto out;
++
++		written = cur_size / sect_size;
++
++		blocks_todo -= written;
++		cur += written;
++		src += cur_size;
++		write_cnt += written;
++	}
++
++out:
++	free(buf);
++
++	if (ret)
++		return ret;
++
++	return write_cnt;
++}
++
++static int mtd_blk_probe(struct udevice *dev)
++{
++	struct blk_desc *bdesc;
++	struct mtd_info *mtd;
++	int ret;
++
++	ret = device_probe(dev);
++	if (ret) {
++		pr_err("Probing %s failed (err=%d)\n", dev->name, ret);
++		return ret;
++	}
++
++	bdesc = dev_get_uclass_plat(dev);
++	mtd = blk_desc_to_mtd(bdesc);
++
++	if (mtd_type_is_nand(mtd))
++		pr_warn("MTD device '%s' is NAND, please use UBI devices instead\n",
++			mtd->name);
++
++	return 0;
++}
++
++static const struct blk_ops mtd_blk_ops = {
++	.read = mtd_blk_read,
++	.write = mtd_blk_write,
 +};
-diff --git a/include/part.h b/include/part.h
-index 32ee404885..40419fdf2f 100644
---- a/include/part.h
-+++ b/include/part.h
-@@ -30,12 +30,15 @@ struct block_drvr {
- #define PART_TYPE_ISO		0x03
- #define PART_TYPE_AMIGA		0x04
- #define PART_TYPE_EFI		0x05
-+#define PART_TYPE_MTD		0x06
- 
- /* maximum number of partition entries supported by search */
- #define DOS_ENTRY_NUMBERS	8
- #define ISO_ENTRY_NUMBERS	64
- #define MAC_ENTRY_NUMBERS	64
- #define AMIGA_ENTRY_NUMBERS	8
-+#define MTD_ENTRY_NUMBERS	64
 +
- /*
-  * Type string for U-Boot bootable partitions
-  */
++U_BOOT_DRIVER(mtd_blk) = {
++	.name = "mtd_blk",
++	.id = UCLASS_BLK,
++	.ops = &mtd_blk_ops,
++	.probe = mtd_blk_probe,
++};
+diff --git a/include/linux/mtd/mtd.h b/include/linux/mtd/mtd.h
+index 7a66c7af74..97eb4f57ca 100644
+--- a/include/linux/mtd/mtd.h
++++ b/include/linux/mtd/mtd.h
+@@ -26,6 +26,9 @@
+ #include <dm/device.h>
+ #endif
+ #include <dm/ofnode.h>
++#if IS_ENABLED(CONFIG_BLK)
++#include <blk.h>
++#endif
+ 
+ #define MAX_MTD_DEVICES 32
+ #endif
+@@ -412,6 +415,15 @@ int mtd_write(struct mtd_info *mtd, loff_t to, size_t len, size_t *retlen,
+ int mtd_panic_write(struct mtd_info *mtd, loff_t to, size_t len, size_t *retlen,
+ 		    const u_char *buf);
+ 
++#if IS_ENABLED(CONFIG_BLK)
++static inline struct mtd_info *blk_desc_to_mtd(struct blk_desc *bdesc)
++{
++	return *((struct mtd_info **)dev_get_priv(bdesc->bdev));
++}
++
++int mtd_bind(struct udevice *dev, struct mtd_info **mtd);
++#endif
++
+ int mtd_read_oob(struct mtd_info *mtd, loff_t from, struct mtd_oob_ops *ops);
+ int mtd_write_oob(struct mtd_info *mtd, loff_t to, struct mtd_oob_ops *ops);
+ 
 -- 
 2.34.1
 
