@@ -4,61 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21596C25B78
-	for <u-boot@archiver.kernel.org>; Sat, 25 May 2024 13:35:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 046ABC25B78
+	for <u-boot@archiver.kernel.org>; Sat, 25 May 2024 15:10:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE494882D7;
-	Sat, 25 May 2024 15:35:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2A5D188052;
+	Sat, 25 May 2024 17:10:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="lODRpIzY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IG4dQngD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D90E7882F1; Sat, 25 May 2024 15:35:29 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E780E882C4; Sat, 25 May 2024 17:09:58 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CBED882D7
- for <u-boot@lists.denx.de>; Sat, 25 May 2024 15:35:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id DD49087F69
+ for <u-boot@lists.denx.de>; Sat, 25 May 2024 17:09:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5785d466c82so1902689a12.3
+ for <u-boot@lists.denx.de>; Sat, 25 May 2024 08:09:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1716649796; x=1717254596; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=v770EqQPwYNn7MpgSLpmNbq4V2esVCXgdbmA/D6Fef0=;
+ b=IG4dQngDJag18BqbvzJadDI5aphAooiWJIaaRQfl1jHNVyMJvle8sr8cpvflHaRjx4
+ MIy8z1xgOAuHcyFEIeviZAfWvNon4nHOoWsZxN/7aPZvLKFol7LLD4xaSHgEn8Ve75Tr
+ g1TZo4Gnur8jBGL3SL84wmJS5LUHncVEKrJL4jXs0EWaFDi5oXT1VIgfjGHlRTtlvwSW
+ c0mdz2WRshRZVGlf7uDeKMtaBMdG7Cb5EZIZ2g0yxjC/WHbFChk+zT8vit+OyEpe5yVS
+ KsLmDAYqz8MW6lUXwGqDKk3r17IhZoHTtp/Hb8nCRs4Tzhpj8zEy5Ec8oav04vkMkuFZ
+ MHUA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716649796; x=1717254596;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=v770EqQPwYNn7MpgSLpmNbq4V2esVCXgdbmA/D6Fef0=;
+ b=RL8mbIol/v491rI8/UNOOfbWPeVJolOFhG44F9Rl2bAsbROcZOvNOlsclfZ7ODx2f4
+ ISq5P+5y0apP8teCkKHEksbakxLtpbNYk3bHCyyYCI7+fpVsB37swobvIKD2DiiKIcHv
+ Di8sThbsOZmxX18T8lNaxFsqo/TH8PHPJtgQWKqwxKJ1ShjJTcFBgHoBRewEz1B9arJ/
+ LD7aZKTafS7An9I1SnfZUuU00hAnYUIKO7xKwgVxIn3lvx0atSlgwODoyQZ/uiLmvKp1
+ eTLIaWFkJdXnjhadlp41oAF0iRoE8ZMe6wnZO7pRApp8JvH75fo6gbXt9+tgwXUczJnU
+ h0dQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUpipPYMU39VIpwDIMRGFOSAGOUlf8JPdlaUKO7ohKoG1aEP9KQ47aAHK9oOqEGUZcLUOrY87bpgDwSiUiYyAScWlIexA==
+X-Gm-Message-State: AOJu0YyebDmvg5kgXCjeChFuXpZz+fcT0WNSjA/ulQZUsxhA2ns/S5PI
+ MVELX8PI8Bcer43/DtmXZAhyTuiT4amplsLWUtSx0gi9Xz6ASVeISDErIfiS1to=
+X-Google-Smtp-Source: AGHT+IGix+ksECZNN3iUZpebYWWs7YKpKbsDyMpHu/4rGM1PpiUwH74+556eYuyCttxjd+wOh//dSw==
+X-Received: by 2002:a17:906:640a:b0:a59:b543:c9f9 with SMTP id
+ a640c23a62f3a-a6264179c04mr337517966b.7.1716649796198; 
+ Sat, 25 May 2024 08:09:56 -0700 (PDT)
+Received: from hera (ppp089210091242.access.hol.gr. [89.210.91.242])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a626cc8b9b7sm261097766b.151.2024.05.25.08.09.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 25 May 2024 08:09:55 -0700 (PDT)
+Date: Sat, 25 May 2024 18:09:52 +0300
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Matthias Brugger <mbrugger@suse.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH] Revert "arm: dts: bcm283x: Add minimal smbios information"
+Message-ID: <ZlH_QIcVzwqHUbxh@hera>
+References: <20240514130724.1474507-1-pbrobinson@gmail.com>
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1716644126;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=alKwGAdXgAKHRJ3odPCjRZ072+9aCVWezf5e530d2C0=;
- b=lODRpIzYZc7r+U49s1YxFMBHhEmTBb967JprtImkKMm6oYOLsBWpy/Eq/0tSMkD6BPY3dC
- q/fQcNWT1Q5rYq1yjUYWWS4BIAhU4x4zB7p0kKDIXXICD8w4i00AafqM7cw/XsXv9C93Pr
- eWL3gPGdUDj9tjvCO6Zjo6FmY/oOyPUcdmmE/3EfTxR23BGpgb5bRDnw2btbPJxSB3HTrG
- 7cnxfLvD3PEAoHmNaJ+IA0EgNj1kIRRlqu8Yn/tp03qeNRiXmDX0cHjMkrDTxBN1e7QKcL
- jbjwGLO/1O6PLe6rQ0Vwl5x17pd8OXYtYY+vnCAUJ72ItpIFGkdGxIbZ8zWfRg==
-Date: Sat, 25 May 2024 15:35:25 +0200
-From: Dragan Simic <dsimic@manjaro.org>
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: Klaus Goger <klaus.goger@theobroma-systems.com>, Quentin Schulz
- <quentin.schulz@theobroma-systems.com>, Heiko Stuebner
- <heiko.stuebner@cherry.de>, Tom Rini <trini@konsulko.com>, Simon Glass
- <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, Kever Yang
- <kever.yang@rock-chips.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH next 5/5] power: rk8xx: properly print all supported PMICs
- name
-In-Reply-To: <20240524-misc-tsd-v1-5-b7bde1344b9e@cherry.de>
-References: <20240524-misc-tsd-v1-0-b7bde1344b9e@cherry.de>
- <20240524-misc-tsd-v1-5-b7bde1344b9e@cherry.de>
-Message-ID: <ba4d0ca90c26db5ec3ba2780664a8899@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240514130724.1474507-1-pbrobinson@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,54 +93,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Quentin,
-
-Thanks for fixing this issue!  Please see my comments below.
-
-On 2024-05-24 13:42, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@cherry.de>
-> 
-> The ID of the PMIC is stored in the 2 16b registers but the only part
-> that matters right now is the 3 MSB, which make the 3 digits (in hex) 
-> of
-> the part number.
-> 
-> Right now, only RK808 was properly displayed, with this all currently
-> supported PMICs should display the proper part number.
-> 
-> Tested on RK806 (RK3588 Jaguar), RK808 (RK3399 Puma) and RK809 (PX30
-> Ringneck).
-> 
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+On Tue, May 14, 2024 at 02:07:19PM +0100, Peter Robinson wrote:
+> This reverts commit 33041972727e84d3f95e26c83322521f61827584.
+>
+> With the ability to generate this SMBIOS details autmotically the
+> small amount of details that this patch provided are generated
+> automatically so this is now obsolete so we can just drop it.
+>
+> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
 > ---
->  drivers/power/pmic/rk8xx.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/power/pmic/rk8xx.c b/drivers/power/pmic/rk8xx.c
-> index 12ff26a0855..fe85fb13543 100644
-> --- a/drivers/power/pmic/rk8xx.c
-> +++ b/drivers/power/pmic/rk8xx.c
-> @@ -277,10 +277,10 @@ static int rk8xx_probe(struct udevice *dev)
->  		return ret;
-> 
->  	priv->variant = ((msb << 8) | lsb) & RK8XX_ID_MSK;
-> -	show_variant = priv->variant;
-> +	/* All currently supported PMICs store the variant in the 3 MSB */
-> +	show_variant = priv->variant >> 4;
+>  arch/arm/dts/bcm283x-u-boot.dtsi | 19 -------------------
+>  1 file changed, 19 deletions(-)
+>
+> diff --git a/arch/arm/dts/bcm283x-u-boot.dtsi b/arch/arm/dts/bcm283x-u-boot.dtsi
+> index 8c17c6f6a52..ec0f93dd850 100644
+> --- a/arch/arm/dts/bcm283x-u-boot.dtsi
+> +++ b/arch/arm/dts/bcm283x-u-boot.dtsi
+> @@ -6,25 +6,6 @@
+>   * (C) Copyright 2016 Fabian Vogt <fvogt@suse.com>
+>   */
+>
+> -/ {
+> -	smbios {
+> -		compatible = "u-boot,sysinfo-smbios";
+> -		smbios {
+> -			system {
+> -				manufacturer = "raspberrypi";
+> -				product = "rpi";
+> -			};
+> -			baseboard {
+> -				manufacturer = "raspberrypi";
+> -				product = "rpi";
+> -			};
+> -			chassis {
+> -				manufacturer = "raspberrypi";
+> -			};
+> -		};
+> -	};
+> -};
+> -
+>  &uart0 {
+>  	skip-init;
+>  	bootph-all;
+> --
+> 2.45.0
+>
 
-It would be better to use bitfield_shift() to produce the shift
-value from RK8XX_ID_MSK, instead of using 4 as the hardcoded value.
-Or even better, just use bitfield_extract_by_mask() directly.
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
->  	switch (priv->variant) {
->  	case RK808_ID:
-> -		show_variant = 0x808;	/* RK808 hardware ID is 0 */
->  		break;
->  	case RK805_ID:
->  	case RK816_ID:
-
-I'd suggest that show_variant is also used in the following line,
-instead of priv-variant, for consistency with the printing of the
-known PMIC variant:
-
-315    printf("Unknown PMIC: RK%x!!\n", priv->variant);
