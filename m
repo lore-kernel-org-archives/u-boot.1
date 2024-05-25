@@ -4,79 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 046ABC25B78
-	for <u-boot@archiver.kernel.org>; Sat, 25 May 2024 15:10:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA44AC25B78
+	for <u-boot@archiver.kernel.org>; Sat, 25 May 2024 16:21:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A5D188052;
-	Sat, 25 May 2024 17:10:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0C9AC881DB;
+	Sat, 25 May 2024 18:21:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IG4dQngD";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="TBYmTqC+";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="AVmn/Lma";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E780E882C4; Sat, 25 May 2024 17:09:58 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D75EC88289; Sat, 25 May 2024 18:21:05 +0200 (CEST)
+Received: from fhigh5-smtp.messagingengine.com
+ (fhigh5-smtp.messagingengine.com [103.168.172.156])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD49087F69
- for <u-boot@lists.denx.de>; Sat, 25 May 2024 17:09:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2D6CB88093
+ for <U-Boot@lists.denx.de>; Sat, 25 May 2024 18:21:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5785d466c82so1902689a12.3
- for <u-boot@lists.denx.de>; Sat, 25 May 2024 08:09:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716649796; x=1717254596; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=v770EqQPwYNn7MpgSLpmNbq4V2esVCXgdbmA/D6Fef0=;
- b=IG4dQngDJag18BqbvzJadDI5aphAooiWJIaaRQfl1jHNVyMJvle8sr8cpvflHaRjx4
- MIy8z1xgOAuHcyFEIeviZAfWvNon4nHOoWsZxN/7aPZvLKFol7LLD4xaSHgEn8Ve75Tr
- g1TZo4Gnur8jBGL3SL84wmJS5LUHncVEKrJL4jXs0EWaFDi5oXT1VIgfjGHlRTtlvwSW
- c0mdz2WRshRZVGlf7uDeKMtaBMdG7Cb5EZIZ2g0yxjC/WHbFChk+zT8vit+OyEpe5yVS
- KsLmDAYqz8MW6lUXwGqDKk3r17IhZoHTtp/Hb8nCRs4Tzhpj8zEy5Ec8oav04vkMkuFZ
- MHUA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716649796; x=1717254596;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=v770EqQPwYNn7MpgSLpmNbq4V2esVCXgdbmA/D6Fef0=;
- b=RL8mbIol/v491rI8/UNOOfbWPeVJolOFhG44F9Rl2bAsbROcZOvNOlsclfZ7ODx2f4
- ISq5P+5y0apP8teCkKHEksbakxLtpbNYk3bHCyyYCI7+fpVsB37swobvIKD2DiiKIcHv
- Di8sThbsOZmxX18T8lNaxFsqo/TH8PHPJtgQWKqwxKJ1ShjJTcFBgHoBRewEz1B9arJ/
- LD7aZKTafS7An9I1SnfZUuU00hAnYUIKO7xKwgVxIn3lvx0atSlgwODoyQZ/uiLmvKp1
- eTLIaWFkJdXnjhadlp41oAF0iRoE8ZMe6wnZO7pRApp8JvH75fo6gbXt9+tgwXUczJnU
- h0dQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUpipPYMU39VIpwDIMRGFOSAGOUlf8JPdlaUKO7ohKoG1aEP9KQ47aAHK9oOqEGUZcLUOrY87bpgDwSiUiYyAScWlIexA==
-X-Gm-Message-State: AOJu0YyebDmvg5kgXCjeChFuXpZz+fcT0WNSjA/ulQZUsxhA2ns/S5PI
- MVELX8PI8Bcer43/DtmXZAhyTuiT4amplsLWUtSx0gi9Xz6ASVeISDErIfiS1to=
-X-Google-Smtp-Source: AGHT+IGix+ksECZNN3iUZpebYWWs7YKpKbsDyMpHu/4rGM1PpiUwH74+556eYuyCttxjd+wOh//dSw==
-X-Received: by 2002:a17:906:640a:b0:a59:b543:c9f9 with SMTP id
- a640c23a62f3a-a6264179c04mr337517966b.7.1716649796198; 
- Sat, 25 May 2024 08:09:56 -0700 (PDT)
-Received: from hera (ppp089210091242.access.hol.gr. [89.210.91.242])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a626cc8b9b7sm261097766b.151.2024.05.25.08.09.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 May 2024 08:09:55 -0700 (PDT)
-Date: Sat, 25 May 2024 18:09:52 +0300
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Matthias Brugger <mbrugger@suse.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH] Revert "arm: dts: bcm283x: Add minimal smbios information"
-Message-ID: <ZlH_QIcVzwqHUbxh@hera>
-References: <20240514130724.1474507-1-pbrobinson@gmail.com>
+ spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id C97EB11400AE;
+ Sat, 25 May 2024 12:21:01 -0400 (EDT)
+Received: from imap44 ([10.202.2.94])
+ by compute3.internal (MEProxy); Sat, 25 May 2024 12:21:01 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
+ cc:cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1716654061;
+ x=1716740461; bh=idCGMyqbIIDw1hhiZqaNjhp/OZy9oAMeeNFJQHRYuk8=; b=
+ TBYmTqC+ptgFlfdI+Qi2cNYL8Z1WWjRQ/KFho0yn96NSMJStxV7Oghoh97TK2CJb
+ BCl/KjPLUCHgO3YuEO1YvKs0YYqB3fDl4+V+SvNm7i67kq9dKMZMSy0SzaIBU4I2
+ /WLt/jtGjBmJnNZsTtYvhzgBCfvB8hJkwdjWrktU5MIPYsrhpetBBYw3hyPJFIs/
+ IHmEKOK6GahG/W3OoSZ3Sl82iU3A7Ria7fEb272zQhTC3xk9SLrU43tgXwLkrUKs
+ aMVuM7b/fs5Pj1H8nGB7pWf+oiMHFIv5uMf3+Nt3PK+WDXjKLfgUggRW7ZaL9b2P
+ ZJAt3FSRlV/EGgiKxo3LCg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1716654061; x=
+ 1716740461; bh=idCGMyqbIIDw1hhiZqaNjhp/OZy9oAMeeNFJQHRYuk8=; b=A
+ Vmn/LmaFFBWpqTBjq8BRWDFeLj9p/XSbyvbEeNDXXqjhEN9MGbeWEpkHtxqj5L6N
+ CAjyKzb7sP/G3ynQwrTsd/Yh0RWYX6MNxc3RUhL9iJ0mds/+ojo3r8NObMSpD/hc
+ SgTNocra4bWolDsbgRYW56upKy9ahgLkQbSOyZAakWOv38rW2gK4owJWHdqSf7TB
+ HXlzL6V1ZaGy07SEp6vgEsDnhPAHbp6Rl3H9STHo4wi1cIexyVJ8UdkheucEP+Z6
+ 8YrzycF40CVTKO2eSXdrSTvCcdxVlp+FsrXhHVfx7AZxafURJC8WZ5Yj7ndfUzl1
+ zhc4Cpz0yKo62hbPV84IA==
+X-ME-Sender: <xms:7Q9SZgzqmLcc5n8EKcDag4fkPt81AWYIB4sKg19DHwHByy5a9Wo-ow>
+ <xme:7Q9SZkSLaAHgEu_SnFrKIJk4QRBcY39MqpV-fIxYj9VtquAvUOFCjzW43HLld5v98
+ DN7Y94lzaxh8-f1hOQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdejtddgleeiucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhepofgfggfkjghffffhvfevufgtgfesthhqredtreerjeenucfhrhhomhepfdfl
+ ihgrgihunhcujggrnhhgfdcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtoh
+ hmqeenucggtffrrghtthgvrhhnpedufeegfeetudeghefftdehfefgveffleefgfehhfej
+ ueegveethfduuddvieehgfenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmh
+ grihhlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
+X-ME-Proxy: <xmx:7Q9SZiW8stjb6kRBRYFp0X8s5aS_tmCqKy3KtPs0IO9ukt1RP2X3Lg>
+ <xmx:7Q9SZujFIqZkkNFPkagUkXVQZeCiHzLTGMIlkJrQLllw0hLKj7nYfQ>
+ <xmx:7Q9SZiB4wNjgQIe1b5HAkRWoc3hh62T9EyvRIbQXR8KC7-rqoHOC0Q>
+ <xmx:7Q9SZvKBRjQZhtACMQGXljz9HqZcOnig9W53O6J0DxMZVwn0Qg35GQ>
+ <xmx:7Q9SZl-CLsvFzH2MmDRCsRZoSGR-ABDfHKdioPTbea4ycIZjgRIWWdg7>
+Feedback-ID: ifd894703:Fastmail
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id 51BDD36A0074; Sat, 25 May 2024 12:21:01 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.11.0-alpha0-480-g515a2f54a-fm-20240515.001-g515a2f54
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240514130724.1474507-1-pbrobinson@gmail.com>
+Message-Id: <d5887c6d-fc80-4f89-be51-db9b8da3863f@app.fastmail.com>
+In-Reply-To: <20240521181534.GD2568172@bill-the-cat>
+References: <DM4PR11MB5296B1B9F0CFC701A8B11284E3EE2@DM4PR11MB5296.namprd11.prod.outlook.com>
+ <DM4PR11MB52961423BCE12552857A12A8E3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
+ <20240521162543.GU2568172@bill-the-cat>
+ <DM4PR11MB529670F5CFDA6B4EDA7B7206E3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
+ <20240521164659.GZ2568172@bill-the-cat>
+ <DM4PR11MB529668DA50F05F26AAD229F0E3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
+ <20240521181534.GD2568172@bill-the-cat>
+Date: Sat, 25 May 2024 17:20:43 +0100
+From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
+To: "Tom Rini" <trini@konsulko.com>,
+ "Brunham, Kalen" <kalen.brunham@intel.com>,
+ "Heinrich Schuchardt" <xypron.glpk@gmx.de>,
+ "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
+Cc: "U-Boot@lists.denx.de" <U-Boot@lists.denx.de>
+Subject: Re: [PATCH 1/1] Added arm64 assembly for examples/api crt0
+Content-Type: text/plain;charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,51 +113,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, May 14, 2024 at 02:07:19PM +0100, Peter Robinson wrote:
-> This reverts commit 33041972727e84d3f95e26c83322521f61827584.
->
-> With the ability to generate this SMBIOS details autmotically the
-> small amount of details that this patch provided are generated
-> automatically so this is now obsolete so we can just drop it.
->
-> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
-> ---
->  arch/arm/dts/bcm283x-u-boot.dtsi | 19 -------------------
->  1 file changed, 19 deletions(-)
->
-> diff --git a/arch/arm/dts/bcm283x-u-boot.dtsi b/arch/arm/dts/bcm283x-u-boot.dtsi
-> index 8c17c6f6a52..ec0f93dd850 100644
-> --- a/arch/arm/dts/bcm283x-u-boot.dtsi
-> +++ b/arch/arm/dts/bcm283x-u-boot.dtsi
-> @@ -6,25 +6,6 @@
->   * (C) Copyright 2016 Fabian Vogt <fvogt@suse.com>
->   */
->
-> -/ {
-> -	smbios {
-> -		compatible = "u-boot,sysinfo-smbios";
-> -		smbios {
-> -			system {
-> -				manufacturer = "raspberrypi";
-> -				product = "rpi";
-> -			};
-> -			baseboard {
-> -				manufacturer = "raspberrypi";
-> -				product = "rpi";
-> -			};
-> -			chassis {
-> -				manufacturer = "raspberrypi";
-> -			};
-> -		};
-> -	};
-> -};
-> -
->  &uart0 {
->  	skip-init;
->  	bootph-all;
-> --
-> 2.45.0
->
 
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
+=E5=9C=A82024=E5=B9=B45=E6=9C=8821=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8B=E5=
+=8D=887:15=EF=BC=8CTom Rini=E5=86=99=E9=81=93=EF=BC=9A
+[...]
+>
+> We have long not done a great job with the U-Boot standalone API stuff,
+> and for a number of years at this point a lot of the use cases it was
+> used for could instead be filled by making an EFI application. There's=
+ a
+> well defined API there, there's lots of examples, and frankly for the
+> license related questions, makes a much nicer answer.
+
+Hi Tom + U-Boot EFI folks,
+
+Sorry for chime in here.
+
+AFAIK there are quite a lot of users of U-Boot API in MIPS world, mostly=
+ for
+Bare mental applications to perform chip diagnostic or programming stuff.
+
+But I'd agree that there is no benefit to maintain ABI stuff in upstream
+for long run.
+
+However, I think people still need an API-like interface for those simple
+applications, while many architectures are not supported by U-Boot EFI f=
+or
+now.
+
+Sadly, most architectures are not covered by UEFI spec, some of them are
+violating fundamental assumptions of UEFI spec, like no 1:1 PA VA mapping
+or simply being Big Endian.
+
+Do you think it's a good idea to port EFI support to as many architectur=
+es
+as possible, and produce U-Boot supplements to UEFI spec to cover those
+details? I'm happy to look into it.
+
+Thanks
+
+>
+> That there's some power users out there making use of standalone to do
+> useful things is news to me. Some of them speaking up and offering to
+> be visible in maintaining it would be good (there's Coverity issues and
+> lack of CI testing, which should be addressed).
+>
+> --=20
+> Tom
+>
+> =E9=99=84=E4=BB=B6:
+> * signature.asc
+
+--=20
+- Jiaxun
