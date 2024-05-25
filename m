@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25752C25B78
-	for <u-boot@archiver.kernel.org>; Sat, 25 May 2024 20:01:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FA34C25B78
+	for <u-boot@archiver.kernel.org>; Sat, 25 May 2024 20:02:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5447A8831D;
-	Sat, 25 May 2024 22:00:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0F29D882BE;
+	Sat, 25 May 2024 22:02:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 015BE882A3; Sat, 25 May 2024 22:00:56 +0200 (CEST)
+ id CA8858830C; Sat, 25 May 2024 22:02:56 +0200 (CEST)
 Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABB99882AF
- for <u-boot@lists.denx.de>; Sat, 25 May 2024 22:00:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 709B3882A3
+ for <u-boot@lists.denx.de>; Sat, 25 May 2024 22:02:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
@@ -25,19 +25,25 @@ Authentication-Results: phobos.denx.de;
 Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
  helo=tharvey.pdc.gateworks.com)
  by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1sAxZS-0045NF-O1;
- Sat, 25 May 2024 20:00:50 +0000
+ (envelope-from <tharvey@gateworks.com>) id 1sAxbP-0049q1-9X;
+ Sat, 25 May 2024 20:02:51 +0000
 From: Tim Harvey <tharvey@gateworks.com>
 To: u-boot@lists.denx.de,
-	Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Miquel Raynal <miquel.raynal@bootlin.com>,
- Jorge Ramirez-Ortiz <jorge@foundries.io>, Adam Ford <aford173@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Tim Harvey <tharvey@gateworks.com>, Eddie James <eajames@linux.ibm.com>
-Subject: [PATCH v5 1/2] tpm-v2: add support for mapping algorithm names to
- algos
-Date: Sat, 25 May 2024 13:00:48 -0700
-Message-Id: <20240525200049.3904124-1-tharvey@gateworks.com>
+	Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>, Marek Vasut <marex@denx.de>,
+ Tim Harvey <tharvey@gateworks.com>, Michal Simek <michal.simek@amd.com>,
+ Andy Yan <andy.yan@rock-chips.com>, Akash Gajjar <gajjar04akash@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Chris Morgan <macromorgan@hotmail.com>
+Subject: [PATCH v4] fdt: automatically add /chosen/kaslr-seed if DM_RNG is
+ enabled
+Date: Sat, 25 May 2024 13:02:49 -0700
+Message-Id: <20240525200249.3904352-1-tharvey@gateworks.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -57,313 +63,389 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-replace tpm2_supported_algorithms with an array of structures
-relating algorithm names, to TCG id's, digest length and mask values.
+If RANDOMIZE_BASE is enabled in the Linux kernel instructing it to
+randomize the virtual address at which the kernel image is loaded, it
+expects entropy to be provided by the bootloader by populating
+/chosen/kaslr-seed with a 64-bit value from source of entropy at boot.
 
-While at it fix the tpm2_algorithm_to_mask to return the proper value.
+If we have DM_RNG enabled populate this value automatically when
+fdt_chosen is called. We skip this if ARMV8_SEC_FIRMWARE_SUPPORT
+is enabled as it's implementation uses a different source of entropy
+that is not yet implemented as DM_RNG. We also skip this if
+MEASURED_BOOT is enabled as in that case any modifications to the
+dt will cause measured boot to fail (although there are many other
+places the dt is altered).
 
-Fixes: 97707f12fdab ("tpm: Support boot measurements")
+As this fdt node is added elsewhere create a library function and
+use it to deduplicate code. We will provide a parameter to specify the
+index of the rng device as well as a boolean to overwrite if present.
+
+For our automatic injection, we will use the first rng device and
+not overwrite if already present with a non-zero value (which may
+have been populated by an earlier boot stage). This way if a board
+specific ft_board_setup() function wants to customize this behavior
+it can call fdt_kaslrseed with a rng device index of its choosing and
+set overwrite true.
+
+Note that the kalsrseed command (CMD_KASLRSEED) is likely pointless now
+but left in place in case boot scripts exist that rely on this command
+existing and returning success. An informational message is printed to
+alert users of this command that it is likely no longer needed.
+
+Note that the Kernel's EFI STUB only relies on EFI_RNG_PROTOCOL for
+randomization and completely ignores the kaslr-seed for its own
+randomness needs (i.e the randomization of the physical placement of
+the kernel). It gets weeded out from the DTB that gets handed over via
+efi_install_fdt() as it would also mess up the measured boot DTB TPM
+measurements as well.
+
 Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Eddie James <eajames@linux.ibm.com>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Andy Yan <andy.yan@rock-chips.com>
+Cc: Akash Gajjar <gajjar04akash@gmail.com>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Devarsh Thakkar <devarsht@ti.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Hugo Villeneuve <hvilleneuve@dimonoff.com>
+Cc: Marek Vasut <marex@denx.de>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Chris Morgan <macromorgan@hotmail.com>
 ---
-v5:
- - use hash_len from struct vs calling more expensive tpm2_algorithm_to_mask function
- - collected rb tag
 v4:
- - new patch
-
-merge: replace various calls to tomp2_algorithm_to_mask to struct dereference
+ - add missing /n to notice in kaslrseed cmd
+ - combine ints in declaration
+ - remove unused vars from board/xilinx/common/board.c ft_board_setup
+v3:
+ - skip if CONFIG_MEASURED_BOOT
+ - fix skip for CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT
+ - pass in rng index and bool to specify overwrite
+ - remove duplicate error strings printed outside of fdt_kaslrseed
+ - added note to commit log about how EFI STUB weeds out kalsr-seed
+v2:
+ - fix typo in commit msg
+ - use stack for seed to avoid unecessary malloc/free
+ - move to a library function and deduplicate code by using it
+   elsewhere
 ---
- include/tpm-v2.h          | 77 ++++++++++++++++++++++++++++++++++--
- lib/efi_loader/efi_tcg2.c |  6 +--
- lib/tpm-v2.c              | 82 +++++++++++++++++++++++++--------------
- 3 files changed, 129 insertions(+), 36 deletions(-)
+ board/xilinx/common/board.c | 40 ------------------------------
+ boot/fdt_support.c          |  6 +++++
+ boot/pxe_utils.c            | 35 ++------------------------
+ cmd/kaslrseed.c             | 45 +++++-----------------------------
+ include/kaslrseed.h         | 19 ++++++++++++++
+ lib/Makefile                |  1 +
+ lib/kaslrseed.c             | 49 +++++++++++++++++++++++++++++++++++++
+ 7 files changed, 83 insertions(+), 112 deletions(-)
+ create mode 100644 include/kaslrseed.h
+ create mode 100644 lib/kaslrseed.c
 
-diff --git a/include/tpm-v2.h b/include/tpm-v2.h
-index 33dd103767c4..c9d5cb6d3e5a 100644
---- a/include/tpm-v2.h
-+++ b/include/tpm-v2.h
-@@ -386,7 +386,54 @@ enum tpm2_algorithms {
- 	TPM2_ALG_SM3_256	= 0x12,
- };
- 
--extern const enum tpm2_algorithms tpm2_supported_algorithms[4];
-+/**
-+ * struct digest_info - details of supported digests
-+ *
-+ * @hash_name:			hash name
-+ * @hash_alg:			hash algorithm id
-+ * @hash_mask:			hash registry mask
-+ * @hash_len:			hash digest length
-+ */
-+struct digest_info {
-+	const char *hash_name;
-+	u16 hash_alg;
-+	u32 hash_mask;
-+	u16 hash_len;
-+};
-+
-+/* Algorithm Registry */
-+#define TCG2_BOOT_HASH_ALG_SHA1    0x00000001
-+#define TCG2_BOOT_HASH_ALG_SHA256  0x00000002
-+#define TCG2_BOOT_HASH_ALG_SHA384  0x00000004
-+#define TCG2_BOOT_HASH_ALG_SHA512  0x00000008
-+#define TCG2_BOOT_HASH_ALG_SM3_256 0x00000010
-+
-+static const struct digest_info hash_algo_list[] = {
-+	{
-+		"sha1",
-+		TPM2_ALG_SHA1,
-+		TCG2_BOOT_HASH_ALG_SHA1,
-+		TPM2_SHA1_DIGEST_SIZE,
-+	},
-+	{
-+		"sha256",
-+		TPM2_ALG_SHA256,
-+		TCG2_BOOT_HASH_ALG_SHA256,
-+		TPM2_SHA256_DIGEST_SIZE,
-+	},
-+	{
-+		"sha384",
-+		TPM2_ALG_SHA384,
-+		TCG2_BOOT_HASH_ALG_SHA384,
-+		TPM2_SHA384_DIGEST_SIZE,
-+	},
-+	{
-+		"sha512",
-+		TPM2_ALG_SHA512,
-+		TCG2_BOOT_HASH_ALG_SHA512,
-+		TPM2_SHA512_DIGEST_SIZE,
-+	},
-+};
- 
- static inline u16 tpm2_algorithm_to_len(enum tpm2_algorithms a)
+diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
+index 30a81376ac41..0b43407b9e94 100644
+--- a/board/xilinx/common/board.c
++++ b/board/xilinx/common/board.c
+@@ -701,11 +701,6 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+ #define MAX_RAND_SIZE 8
+ int ft_board_setup(void *blob, struct bd_info *bd)
  {
-@@ -404,8 +451,6 @@ static inline u16 tpm2_algorithm_to_len(enum tpm2_algorithms a)
- 	}
- }
- 
--#define tpm2_algorithm_to_mask(a)	(1 << (a))
+-	size_t n = MAX_RAND_SIZE;
+-	struct udevice *dev;
+-	u8 buf[MAX_RAND_SIZE];
+-	int nodeoffset, ret;
 -
- /* NV index attributes */
- enum tpm_index_attrs {
- 	TPMA_NV_PPWRITE		= 1UL << 0,
-@@ -965,4 +1010,30 @@ u32 tpm2_enable_nvcommits(struct udevice *dev, uint vendor_cmd,
-  */
- u32 tpm2_auto_start(struct udevice *dev);
+ 	static const struct node_info nodes[] = {
+ 		{ "arm,pl353-nand-r2p1", MTD_DEV_TYPE_NAND, },
+ 	};
+@@ -713,41 +708,6 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+ 	if (IS_ENABLED(CONFIG_FDT_FIXUP_PARTITIONS) && IS_ENABLED(CONFIG_NAND_ZYNQ))
+ 		fdt_fixup_mtdparts(blob, nodes, ARRAY_SIZE(nodes));
  
-+/**
-+ * tpm2_name_to_algorithm() - Return an algorithm id given a supported
-+ *			      algorithm name
-+ *
-+ * @name: algorithm name
-+ * Return: enum tpm2_algorithms or -EINVAL
-+ */
-+enum tpm2_algorithms tpm2_name_to_algorithm(const char *name);
-+
-+/**
-+ * tpm2_algorithm_name() - Return an algorithm name string for a
-+ *			   supported algorithm id
-+ *
-+ * @algorithm_id: algorithm defined in enum tpm2_algorithms
-+ * Return: algorithm name string or ""
-+ */
-+const char *tpm2_algorithm_name(enum tpm2_algorithms);
-+
-+/**
-+ * tpm2_algorithm_to_mask() - Get a TCG hash mask for algorithm
-+ *
-+ * @hash_alg: TCG defined algorithm
-+ * Return: TCG hashing algorithm bitmaps (or 0 if algo not supported)
-+ */
-+u32 tpm2_algorithm_to_mask(enum tpm2_algorithms);
-+
- #endif /* __TPM_V2_H */
-diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
-index b07e0099c27e..945aafb847d8 100644
---- a/lib/efi_loader/efi_tcg2.c
-+++ b/lib/efi_loader/efi_tcg2.c
-@@ -414,10 +414,10 @@ static efi_status_t tcg2_hash_pe_image(void *efi, u64 efi_size,
- 	}
- 
- 	digest_list->count = 0;
--	for (i = 0; i < ARRAY_SIZE(tpm2_supported_algorithms); i++) {
--		u16 hash_alg = tpm2_supported_algorithms[i];
-+	for (i = 0; i < ARRAY_SIZE(hash_algo_list); i++) {
-+		u16 hash_alg = hash_algo_list[i].hash_alg;
- 
--		if (!(active & tpm2_algorithm_to_mask(hash_alg)))
-+		if (!(active & hash_algo_list[i].hash_mask))
- 			continue;
- 		switch (hash_alg) {
- 		case TPM2_ALG_SHA1:
-diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-index 68eaaa639f89..a67daed2f3c1 100644
---- a/lib/tpm-v2.c
-+++ b/lib/tpm-v2.c
-@@ -22,13 +22,6 @@
- 
- #include "tpm-utils.h"
- 
--const enum tpm2_algorithms tpm2_supported_algorithms[4] = {
--	TPM2_ALG_SHA1,
--	TPM2_ALG_SHA256,
--	TPM2_ALG_SHA384,
--	TPM2_ALG_SHA512,
--};
+-	if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
+-		debug("No RNG device\n");
+-		return 0;
+-	}
 -
- int tcg2_get_active_pcr_banks(struct udevice *dev, u32 *active_pcr_banks)
- {
- 	u32 supported = 0;
-@@ -82,14 +75,11 @@ int tcg2_create_digest(struct udevice *dev, const u8 *input, u32 length,
- 		return rc;
- 
- 	digest_list->count = 0;
--	for (i = 0; i < ARRAY_SIZE(tpm2_supported_algorithms); ++i) {
--		u32 mask =
--			tpm2_algorithm_to_mask(tpm2_supported_algorithms[i]);
+-	if (dm_rng_read(dev, buf, n)) {
+-		debug("Reading RNG failed\n");
+-		return 0;
+-	}
 -
--		if (!(active & mask))
-+	for (i = 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
-+		if (!(active & hash_algo_list[i].hash_mask))
- 			continue;
- 
--		switch (tpm2_supported_algorithms[i]) {
-+		switch (hash_algo_list[i].hash_alg) {
- 		case TPM2_ALG_SHA1:
- 			sha1_starts(&ctx);
- 			sha1_update(&ctx, input, length);
-@@ -116,12 +106,12 @@ int tcg2_create_digest(struct udevice *dev, const u8 *input, u32 length,
- 			break;
- 		default:
- 			printf("%s: unsupported algorithm %x\n", __func__,
--			       tpm2_supported_algorithms[i]);
-+			       hash_algo_list[i].hash_alg);
- 			continue;
- 		}
- 
- 		digest_list->digests[digest_list->count].hash_alg =
--			tpm2_supported_algorithms[i];
-+			hash_algo_list[i].hash_alg;
- 		memcpy(&digest_list->digests[digest_list->count].digest, final,
- 		       len);
- 		digest_list->count++;
-@@ -198,7 +188,6 @@ static int tcg2_log_init(struct udevice *dev, struct tcg2_event_log *elog)
- 	u32 count = 0;
- 	u32 log_size;
- 	u32 active;
--	u32 mask;
- 	size_t i;
- 	u16 len;
- 	int rc;
-@@ -208,13 +197,11 @@ static int tcg2_log_init(struct udevice *dev, struct tcg2_event_log *elog)
- 		return rc;
- 
- 	event_size = offsetof(struct tcg_efi_spec_id_event, digest_sizes);
--	for (i = 0; i < ARRAY_SIZE(tpm2_supported_algorithms); ++i) {
--		mask = tpm2_algorithm_to_mask(tpm2_supported_algorithms[i]);
+-	if (!blob) {
+-		debug("No FDT memory address configured. Please configure\n"
+-		      "the FDT address via \"fdt addr <address>\" command.\n"
+-		      "Aborting!\n");
+-		return 0;
+-	}
 -
--		if (!(active & mask))
-+	for (i = 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
-+		if (!(active & hash_algo_list[i].hash_mask))
- 			continue;
- 
--		switch (tpm2_supported_algorithms[i]) {
-+		switch (hash_algo_list[i].hash_alg) {
- 		case TPM2_ALG_SHA1:
- 		case TPM2_ALG_SHA256:
- 		case TPM2_ALG_SHA384:
-@@ -253,17 +240,15 @@ static int tcg2_log_init(struct udevice *dev, struct tcg2_event_log *elog)
- 	put_unaligned_le32(count, &ev->number_of_algorithms);
- 
- 	count = 0;
--	for (i = 0; i < ARRAY_SIZE(tpm2_supported_algorithms); ++i) {
--		mask = tpm2_algorithm_to_mask(tpm2_supported_algorithms[i]);
+-	ret = fdt_check_header(blob);
+-	if (ret < 0) {
+-		debug("fdt_chosen: %s\n", fdt_strerror(ret));
+-		return ret;
+-	}
 -
--		if (!(active & mask))
-+	for (i = 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
-+		if (!(active & hash_algo_list[i].hash_mask))
- 			continue;
- 
--		len = tpm2_algorithm_to_len(tpm2_supported_algorithms[i]);
-+		len = hash_algo_list[i].hash_len;
- 		if (!len)
- 			continue;
- 
--		put_unaligned_le16(tpm2_supported_algorithms[i],
-+		put_unaligned_le16(hash_algo_list[i].hash_alg,
- 				   &ev->digest_sizes[count].algorithm_id);
- 		put_unaligned_le16(len, &ev->digest_sizes[count].digest_size);
- 		count++;
-@@ -304,7 +289,7 @@ static int tcg2_replay_eventlog(struct tcg2_event_log *elog,
- 		pos = offsetof(struct tcg_pcr_event2, digests) +
- 			offsetof(struct tpml_digest_values, count);
- 		count = get_unaligned_le32(log + pos);
--		if (count > ARRAY_SIZE(tpm2_supported_algorithms) ||
-+		if (count > ARRAY_SIZE(hash_algo_list) ||
- 		    (digest_list->count && digest_list->count != count))
- 			return 0;
- 
-@@ -407,7 +392,7 @@ static int tcg2_log_parse(struct udevice *dev, struct tcg2_event_log *elog)
- 		return 0;
- 
- 	count = get_unaligned_le32(&event->number_of_algorithms);
--	if (count > ARRAY_SIZE(tpm2_supported_algorithms))
-+	if (count > ARRAY_SIZE(hash_algo_list))
- 		return 0;
- 
- 	calc_size = offsetof(struct tcg_efi_spec_id_event, digest_sizes) +
-@@ -1110,7 +1095,7 @@ int tpm2_get_pcr_info(struct udevice *dev, u32 *supported_pcr, u32 *active_pcr,
- 	 * We only support 5 algorithms for now so check against that
- 	 * instead of TPM2_NUM_PCR_BANKS
- 	 */
--	if (pcrs.count > ARRAY_SIZE(tpm2_supported_algorithms) ||
-+	if (pcrs.count > ARRAY_SIZE(hash_algo_list) ||
- 	    pcrs.count < 1) {
- 		printf("%s: too many pcrs: %u\n", __func__, pcrs.count);
- 		return -EMSGSIZE;
-@@ -1555,3 +1540,40 @@ u32 tpm2_enable_nvcommits(struct udevice *dev, uint vendor_cmd,
- 
+-	nodeoffset = fdt_find_or_add_subnode(blob, 0, "chosen");
+-	if (nodeoffset < 0) {
+-		debug("Reading chosen node failed\n");
+-		return nodeoffset;
+-	}
+-
+-	ret = fdt_setprop(blob, nodeoffset, "kaslr-seed", buf, sizeof(buf));
+-	if (ret < 0) {
+-		debug("Unable to set kaslr-seed on chosen node: %s\n", fdt_strerror(ret));
+-		return ret;
+-	}
+-
  	return 0;
  }
+ #endif
+diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+index 874ca4d6f5af..b64cdd34825a 100644
+--- a/boot/fdt_support.c
++++ b/boot/fdt_support.c
+@@ -8,6 +8,7 @@
+ 
+ #include <abuf.h>
+ #include <env.h>
++#include <kaslrseed.h>
+ #include <log.h>
+ #include <mapmem.h>
+ #include <net.h>
+@@ -300,6 +301,11 @@ int fdt_chosen(void *fdt)
+ 	if (nodeoffset < 0)
+ 		return nodeoffset;
+ 
++	if (IS_ENABLED(CONFIG_DM_RNG) &&
++	    !IS_ENABLED(CONFIG_MEASURED_BOOT) &&
++	    !IS_ENABLED(CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT))
++		fdt_kaslrseed(fdt, 0, false);
 +
-+enum tpm2_algorithms tpm2_name_to_algorithm(const char *name)
+ 	if (IS_ENABLED(CONFIG_BOARD_RNG_SEED) && !board_rng_seed(&buf)) {
+ 		err = fdt_setprop(fdt, nodeoffset, "rng-seed",
+ 				  abuf_data(&buf), abuf_size(&buf));
+diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
+index 4b22bb6f525a..35d5b9ed3ecc 100644
+--- a/boot/pxe_utils.c
++++ b/boot/pxe_utils.c
+@@ -8,6 +8,7 @@
+ #include <dm.h>
+ #include <env.h>
+ #include <image.h>
++#include <kaslrseed.h>
+ #include <log.h>
+ #include <malloc.h>
+ #include <mapmem.h>
+@@ -323,10 +324,6 @@ static void label_boot_kaslrseed(void)
+ #if CONFIG_IS_ENABLED(DM_RNG)
+ 	ulong fdt_addr;
+ 	struct fdt_header *working_fdt;
+-	size_t n = 0x8;
+-	struct udevice *dev;
+-	u64 *buf;
+-	int nodeoffset;
+ 	int err;
+ 
+ 	/* Get the main fdt and map it */
+@@ -342,35 +339,7 @@ static void label_boot_kaslrseed(void)
+ 	if (err <= 0)
+ 		return;
+ 
+-	if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
+-		printf("No RNG device\n");
+-		return;
+-	}
+-
+-	nodeoffset = fdt_find_or_add_subnode(working_fdt, 0, "chosen");
+-	if (nodeoffset < 0) {
+-		printf("Reading chosen node failed\n");
+-		return;
+-	}
+-
+-	buf = malloc(n);
+-	if (!buf) {
+-		printf("Out of memory\n");
+-		return;
+-	}
+-
+-	if (dm_rng_read(dev, buf, n)) {
+-		printf("Reading RNG failed\n");
+-		goto err;
+-	}
+-
+-	err = fdt_setprop(working_fdt, nodeoffset, "kaslr-seed", buf, sizeof(buf));
+-	if (err < 0) {
+-		printf("Unable to set kaslr-seed on chosen node: %s\n", fdt_strerror(err));
+-		goto err;
+-	}
+-err:
+-	free(buf);
++	fdt_kaslrseed(working_fdt, 0, true);
+ #endif
+ 	return;
+ }
+diff --git a/cmd/kaslrseed.c b/cmd/kaslrseed.c
+index e0d3c7fe7489..ebe4058d7ac6 100644
+--- a/cmd/kaslrseed.c
++++ b/cmd/kaslrseed.c
+@@ -9,33 +9,16 @@
+ #include <command.h>
+ #include <dm.h>
+ #include <hexdump.h>
++#include <kaslrseed.h>
+ #include <malloc.h>
+ #include <rng.h>
+ #include <fdt_support.h>
+ 
+ static int do_kaslr_seed(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ {
+-	size_t n = 0x8;
+-	struct udevice *dev;
+-	u64 *buf;
+-	int nodeoffset;
+-	int ret = CMD_RET_SUCCESS;
++	int err;
+ 
+-	if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
+-		printf("No RNG device\n");
+-		return CMD_RET_FAILURE;
+-	}
+-
+-	buf = malloc(n);
+-	if (!buf) {
+-		printf("Out of memory\n");
+-		return CMD_RET_FAILURE;
+-	}
+-
+-	if (dm_rng_read(dev, buf, n)) {
+-		printf("Reading RNG failed\n");
+-		return CMD_RET_FAILURE;
+-	}
++	printf("Notice: a /chosen/kaslr-seed is automatically added to the device-tree when booted via booti/bootm/bootz therefore using this command is likely no longer needed\n");
+ 
+ 	if (!working_fdt) {
+ 		printf("No FDT memory address configured. Please configure\n"
+@@ -44,27 +27,11 @@ static int do_kaslr_seed(struct cmd_tbl *cmdtp, int flag, int argc, char *const
+ 		return CMD_RET_FAILURE;
+ 	}
+ 
+-	ret = fdt_check_header(working_fdt);
+-	if (ret < 0) {
+-		printf("fdt_chosen: %s\n", fdt_strerror(ret));
++	err = fdt_kaslrseed(working_fdt, 0, true);
++	if (err < 0)
+ 		return CMD_RET_FAILURE;
+-	}
+-
+-	nodeoffset = fdt_find_or_add_subnode(working_fdt, 0, "chosen");
+-	if (nodeoffset < 0) {
+-		printf("Reading chosen node failed\n");
+-		return CMD_RET_FAILURE;
+-	}
+-
+-	ret = fdt_setprop(working_fdt, nodeoffset, "kaslr-seed", buf, sizeof(buf));
+-	if (ret < 0) {
+-		printf("Unable to set kaslr-seed on chosen node: %s\n", fdt_strerror(ret));
+-		return CMD_RET_FAILURE;
+-	}
+-
+-	free(buf);
+ 
+-	return ret;
++	return CMD_RET_SUCCESS;
+ }
+ 
+ U_BOOT_LONGHELP(kaslrseed,
+diff --git a/include/kaslrseed.h b/include/kaslrseed.h
+new file mode 100644
+index 000000000000..7f9911c59fa4
+--- /dev/null
++++ b/include/kaslrseed.h
+@@ -0,0 +1,19 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright 2024 Tim Harvey <tharvey@gateworks.com>
++ */
++
++#if !defined _KASLRSEED_H_
++#define _KASLRSEED_H_
++
++/**
++ * fdt_kaslrseed() - create a 'kaslr-seed' node in chosen
++ *
++ * @blob:	fdt blob
++ * @index:	index of UCLASS_RNG device to use
++ * @overwrite:	do not overwrite existing non-zero node unless true
++ * Return:	0 if OK, -ve on error
++ */
++int fdt_kaslrseed(void *blob, int index, bool overwrite);
++
++#endif /* _KASLRSEED_H_ */
+diff --git a/lib/Makefile b/lib/Makefile
+index 2a76acf100d0..20a0242055fa 100644
+--- a/lib/Makefile
++++ b/lib/Makefile
+@@ -149,6 +149,7 @@ obj-y += date.o
+ obj-y += rtc-lib.o
+ obj-$(CONFIG_LIB_ELF) += elf.o
+ 
++obj-$(CONFIG_DM_RNG) += kaslrseed.o
+ obj-$(CONFIG_$(SPL_TPL_)SEMIHOSTING) += semihosting.o
+ 
+ #
+diff --git a/lib/kaslrseed.c b/lib/kaslrseed.c
+new file mode 100644
+index 000000000000..5ba3700e9e06
+--- /dev/null
++++ b/lib/kaslrseed.c
+@@ -0,0 +1,49 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright 2024 Tim Harvey <tharvey@gateworks.com>
++ */
++#include <dm.h>
++#include <rng.h>
++#include <fdt_support.h>
++#include <dm/device_compat.h>
++
++int fdt_kaslrseed(void *fdt, int index, bool overwrite)
 +{
-+	size_t i;
++	int len, err, nodeoffset;
++	struct udevice *dev;
++	const u64 *orig;
++	u64 data = 0;
 +
-+	for (i = 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
-+		if (!strcasecmp(name, hash_algo_list[i].hash_name))
-+			return hash_algo_list[i].hash_alg;
++	err = fdt_check_header(fdt);
++	if (err < 0)
++		return err;
++
++	/* find or create "/chosen" node. */
++	nodeoffset = fdt_find_or_add_subnode(fdt, 0, "chosen");
++	if (nodeoffset < 0)
++		return nodeoffset;
++
++	/* return without error if we are not overwriting and existing non-zero node */
++	orig = fdt_getprop(fdt, nodeoffset, "kaslr-seed", &len);
++	if (orig && len == sizeof(*orig))
++		data = fdt64_to_cpu(*orig);
++	if (data && !overwrite) {
++		debug("not overwriting existing kaslr-seed\n");
++		return 0;
 +	}
-+	printf("%s: unsupported algorithm %s\n", __func__, name);
-+
-+	return -EINVAL;
-+}
-+
-+const char *tpm2_algorithm_name(enum tpm2_algorithms algo)
-+{
-+	size_t i;
-+
-+	for (i = 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
-+		if (hash_algo_list[i].hash_alg == algo)
-+			return hash_algo_list[i].hash_name;
++	err = uclass_get_device(UCLASS_RNG, index, &dev);
++	if (err) {
++		printf("No RNG device at index %d\n", index);
++		return err;
 +	}
-+
-+	return "";
-+}
-+
-+u32 tpm2_algorithm_to_mask(enum tpm2_algorithms algo)
-+{
-+	size_t i;
-+
-+	for (i = 0; i < ARRAY_SIZE(hash_algo_list); i++) {
-+		if (hash_algo_list[i].hash_alg == algo)
-+			return hash_algo_list[i].hash_mask;
++	err = dm_rng_read(dev, &data, sizeof(data));
++	if (err) {
++		dev_err(dev, "dm_rng_read failed: %d\n", err);
++		return err;
 +	}
++	err = fdt_setprop(fdt, nodeoffset, "kaslr-seed", &data, sizeof(data));
++	if (err < 0)
++		printf("WARNING: could not set kaslr-seed %s.\n", fdt_strerror(err));
 +
-+	return 0;
++	return err;
 +}
 -- 
 2.25.1
