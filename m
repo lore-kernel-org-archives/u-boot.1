@@ -4,84 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A983FC25B78
-	for <u-boot@archiver.kernel.org>; Sat, 25 May 2024 19:14:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6A5DC25B78
+	for <u-boot@archiver.kernel.org>; Sat, 25 May 2024 20:00:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE79188286;
-	Sat, 25 May 2024 21:14:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E3F0E882AF;
+	Sat, 25 May 2024 22:00:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sdAnpUX6";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DED10882A3; Sat, 25 May 2024 21:14:50 +0200 (CEST)
-Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
- [IPv6:2607:f8b0:4864:20::532])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E30D2882CD; Sat, 25 May 2024 22:00:55 +0200 (CEST)
+Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3D1087E3F
- for <U-Boot@lists.denx.de>; Sat, 25 May 2024 21:14:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AA963882A3
+ for <u-boot@lists.denx.de>; Sat, 25 May 2024 22:00:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x532.google.com with SMTP id
- 41be03b00d2f7-681907af4e7so1503218a12.1
- for <U-Boot@lists.denx.de>; Sat, 25 May 2024 12:14:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716664487; x=1717269287; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SIxtJm59W5A4mHaa5/NFsw/nYi0ZH0zuAVoSIozfr7I=;
- b=sdAnpUX6Vj0ECS5s4DPV3XSGGzHN8xVEIlmUCkjIqeMm8QhPww95HM/HzLAbjdD82w
- mkyIQzNWBsup6BBTs2BcYFIqkRCUEpNDs5R0DCBpNU6LLcRGMEsaQAh331gTYHIrjcqq
- GFh+fCn3Kj+e41+wLOz5iKRRotsQ//oFkaReyvawrq0TPmqZ87WFAINi9RNAJl1Ai7ZD
- BOxyplWHqbpf+IPR7GmWNRTE9mkb1pLBL03JEKrnlu+k8nkrZEUzJ7gva3SGjWnNmlFL
- IjiVp2dl2d3HvftbQAtnK8NWoPmHGhpSTk4dsyO9EneYtXvOvzx929Bjl+2uswY2JhhV
- lWcQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716664487; x=1717269287;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=SIxtJm59W5A4mHaa5/NFsw/nYi0ZH0zuAVoSIozfr7I=;
- b=FUjMSHvx13qbB4g3dj3yuhtCWwqO9yPbbkF0y4AyZR+Dhx4VenxsqrZ4AZPn0aem1x
- Hh6S2vlOroyJ3XCgfKmFGP1oEdzmBfBezQSok6Tmh1SKe7ZVyoUCIOHk5VQB23pWcBEQ
- YP7D3QsK+VshBwGMg1AuDJ7Uqy9MNJgaWGaHKeX4KMQLB0DFVe11xUktcTh0A4NMZlG5
- b/44yt6k6YoMmvHyscvSSrfC5OowbCOzKJoUmbfUqcDpESEGA3PzibNPD0Gju5r5bhrm
- yxLQGN6DbkW+iKhhNJtkgc5JPGKM31CIHLmtoa4NUR/0wlyjkcDfsoBRWbSUS/SidZrr
- XdNg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUV6zAi09sjjF6qaJsQx022Ija5usCqg7GQr+QzxIya1unPlKFRl8OtBGox3LZdJvegj2aQZ1R3Z0x3/O1pRZ6hkxSbCA==
-X-Gm-Message-State: AOJu0YyxDhF69gpjxX2bi73srqap9mWrWvajVkVpk43HwMlya6choByf
- Rqh2ChGNz9qsKKAb2BBxp2eisTsGaHm44rHDeJfr0qFVv+PSl21PBy+u8aM5ikQMmg3pjtYE1eA
- J3hYpzItG2eoSYVYgpYpsf2QHPl1IS4d8FKBTcw==
-X-Google-Smtp-Source: AGHT+IE/IUDJT6urzwMmbiQd/fSV26mqJUf4bFswooPVX+KQhYmS2F7FYqxwpwEjIymtxrF+59yp39xDaijbKiDwx9Q=
-X-Received: by 2002:a17:903:1248:b0:1e4:4000:a576 with SMTP id
- d9443c01a7336-1f4498ecf8cmr57399185ad.43.1716664487084; Sat, 25 May 2024
- 12:14:47 -0700 (PDT)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
+ helo=tharvey.pdc.gateworks.com)
+ by finn.localdomain with esmtp (Exim 4.95)
+ (envelope-from <tharvey@gateworks.com>) id 1sAxZT-0045NF-9V;
+ Sat, 25 May 2024 20:00:51 +0000
+From: Tim Harvey <tharvey@gateworks.com>
+To: u-boot@lists.denx.de,
+	Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Miquel Raynal <miquel.raynal@bootlin.com>,
+ Jorge Ramirez-Ortiz <jorge@foundries.io>, Adam Ford <aford173@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Tim Harvey <tharvey@gateworks.com>
+Subject: [PATCH v5 2/2] tpm-v2: allow algorithm name to be configured for
+ pcr_read and pcr_extend
+Date: Sat, 25 May 2024 13:00:49 -0700
+Message-Id: <20240525200049.3904124-2-tharvey@gateworks.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20240525200049.3904124-1-tharvey@gateworks.com>
+References: <20240525200049.3904124-1-tharvey@gateworks.com>
 MIME-Version: 1.0
-References: <DM4PR11MB5296B1B9F0CFC701A8B11284E3EE2@DM4PR11MB5296.namprd11.prod.outlook.com>
- <DM4PR11MB52961423BCE12552857A12A8E3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
- <20240521162543.GU2568172@bill-the-cat>
- <DM4PR11MB529670F5CFDA6B4EDA7B7206E3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
- <20240521164659.GZ2568172@bill-the-cat>
- <DM4PR11MB529668DA50F05F26AAD229F0E3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
- <20240521181534.GD2568172@bill-the-cat>
- <d5887c6d-fc80-4f89-be51-db9b8da3863f@app.fastmail.com>
-In-Reply-To: <d5887c6d-fc80-4f89-be51-db9b8da3863f@app.fastmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sat, 25 May 2024 22:14:09 +0300
-Message-ID: <CAC_iWjLbY6+FaUYQw2Zv5y5byCnXRHxfzvrFf1dMyJX+ANP9VQ@mail.gmail.com>
-Subject: Re: [PATCH 1/1] Added arm64 assembly for examples/api crt0
-To: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Cc: Tom Rini <trini@konsulko.com>, "Brunham, Kalen" <kalen.brunham@intel.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- "U-Boot@lists.denx.de" <U-Boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,73 +59,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jiaxun
+For pcr_read and pcr_extend commands allow the digest algorithm to be
+specified by an additional argument. If not specified it will default to
+SHA256 for backwards compatibility.
 
-On Sat, 25 May 2024 at 19:21, Jiaxun Yang <jiaxun.yang@flygoat.com> wrote:
->
->
->
-> =E5=9C=A82024=E5=B9=B45=E6=9C=8821=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8B=
-=E5=8D=887:15=EF=BC=8CTom Rini=E5=86=99=E9=81=93=EF=BC=9A
-> [...]
-> >
-> > We have long not done a great job with the U-Boot standalone API stuff,
-> > and for a number of years at this point a lot of the use cases it was
-> > used for could instead be filled by making an EFI application. There's =
-a
-> > well defined API there, there's lots of examples, and frankly for the
-> > license related questions, makes a much nicer answer.
->
-> Hi Tom + U-Boot EFI folks,
->
-> Sorry for chime in here.
->
-> AFAIK there are quite a lot of users of U-Boot API in MIPS world, mostly =
-for
-> Bare mental applications to perform chip diagnostic or programming stuff.
->
-> But I'd agree that there is no benefit to maintain ABI stuff in upstream
-> for long run.
->
-> However, I think people still need an API-like interface for those simple
-> applications, while many architectures are not supported by U-Boot EFI fo=
-r
-> now.
->
-> Sadly, most architectures are not covered by UEFI spec, some of them are
-> violating fundamental assumptions of UEFI spec, like no 1:1 PA VA mapping
-> or simply being Big Endian.
->
-> Do you think it's a good idea to port EFI support to as many architecture=
-s
-> as possible, and produce U-Boot supplements to UEFI spec to cover those
-> details? I'm happy to look into it.
+Additionally update test_tpm2.py for the changes in output in pcr_read
+which now shows the algo and algo length in the output.
 
-I personally think U-Boot is a nice alternative to EDK2 for smaller
-devices (and doesn't have to rely on the PI spec as well).
-The EFI spec does have some architecture specific wording for the
-supported platforms, so I would guess adding more would be possible.
-But I haven't checked the extent of changes that are going to be
-needed.
+A follow-on to this could be to extend all PCR banks with the detected
+algo when the <digest_algo> argument is 'auto'.
 
-In any case, I am happy to help
+Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+v5:
+ - fix typo in commit description
+ - collected rb tag
+v4:
+ - update test_tpm2.py as required by changes in pcr_read output
+ - split out moving algos to an array of structs to its own patch
+   and encorporate a fix for tpm2_algorithm_to_mask
+v3:
+ - replace tpm2_supported_algorithms with struct and use this to
+   relate hash algoirthm details
+v2:
+ - use tpm2_algorithm_to_len
+ - use enum tpm2_algorithms
+ - make function names and parameter names more consistent with existing
+   tpm-v2 functions
+ - fix various spelling errors
+---
+ cmd/tpm-v2.c               | 49 +++++++++++++++++++++++++++-----------
+ test/py/tests/test_tpm2.py |  2 +-
+ 2 files changed, 36 insertions(+), 15 deletions(-)
 
-Cheers
-/Ilias
->
-> Thanks
->
-> >
-> > That there's some power users out there making use of standalone to do
-> > useful things is news to me. Some of them speaking up and offering to
-> > be visible in maintaining it would be good (there's Coverity issues and
-> > lack of CI testing, which should be addressed).
-> >
-> > --
-> > Tom
-> >
-> > =E9=99=84=E4=BB=B6:
-> > * signature.asc
->
-> --
-> - Jiaxun
+diff --git a/cmd/tpm-v2.c b/cmd/tpm-v2.c
+index 7e479b9dfe36..2343b4d9cb9e 100644
+--- a/cmd/tpm-v2.c
++++ b/cmd/tpm-v2.c
+@@ -99,11 +99,19 @@ static int do_tpm2_pcr_extend(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	struct tpm_chip_priv *priv;
+ 	u32 index = simple_strtoul(argv[1], NULL, 0);
+ 	void *digest = map_sysmem(simple_strtoul(argv[2], NULL, 0), 0);
++	int algo = TPM2_ALG_SHA256;
++	int algo_len;
+ 	int ret;
+ 	u32 rc;
+ 
+-	if (argc != 3)
++	if (argc < 3 || argc > 4)
+ 		return CMD_RET_USAGE;
++	if (argc == 4) {
++		algo = tpm2_name_to_algorithm(argv[3]);
++		if (algo < 0)
++			return CMD_RET_FAILURE;
++	}
++	algo_len = tpm2_algorithm_to_len(algo);
+ 
+ 	ret = get_tpm(&dev);
+ 	if (ret)
+@@ -116,8 +124,12 @@ static int do_tpm2_pcr_extend(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	if (index >= priv->pcr_count)
+ 		return -EINVAL;
+ 
+-	rc = tpm2_pcr_extend(dev, index, TPM2_ALG_SHA256, digest,
+-			     TPM2_DIGEST_LEN);
++	rc = tpm2_pcr_extend(dev, index, algo, digest, algo_len);
++	if (!rc) {
++		printf("PCR #%u extended with %d byte %s digest\n", index,
++		       algo_len, tpm2_algorithm_name(algo));
++		print_byte_string(digest, algo_len);
++	}
+ 
+ 	unmap_sysmem(digest);
+ 
+@@ -127,15 +139,23 @@ static int do_tpm2_pcr_extend(struct cmd_tbl *cmdtp, int flag, int argc,
+ static int do_tpm_pcr_read(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			   char *const argv[])
+ {
++	enum tpm2_algorithms algo = TPM2_ALG_SHA256;
+ 	struct udevice *dev;
+ 	struct tpm_chip_priv *priv;
+ 	u32 index, rc;
++	int algo_len;
+ 	unsigned int updates;
+ 	void *data;
+ 	int ret;
+ 
+-	if (argc != 3)
++	if (argc < 3 || argc > 4)
+ 		return CMD_RET_USAGE;
++	if (argc == 4) {
++		algo = tpm2_name_to_algorithm(argv[3]);
++		if (algo < 0)
++			return CMD_RET_FAILURE;
++	}
++	algo_len = tpm2_algorithm_to_len(algo);
+ 
+ 	ret = get_tpm(&dev);
+ 	if (ret)
+@@ -151,11 +171,12 @@ static int do_tpm_pcr_read(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ 	data = map_sysmem(simple_strtoul(argv[2], NULL, 0), 0);
+ 
+-	rc = tpm2_pcr_read(dev, index, priv->pcr_select_min, TPM2_ALG_SHA256,
+-			   data, TPM2_DIGEST_LEN, &updates);
++	rc = tpm2_pcr_read(dev, index, priv->pcr_select_min, algo,
++			   data, algo_len, &updates);
+ 	if (!rc) {
+-		printf("PCR #%u content (%u known updates):\n", index, updates);
+-		print_byte_string(data, TPM2_DIGEST_LEN);
++		printf("PCR #%u %s %d byte content (%u known updates):\n", index,
++		       tpm2_algorithm_name(algo), algo_len, updates);
++		print_byte_string(data, algo_len);
+ 	}
+ 
+ 	unmap_sysmem(data);
+@@ -415,14 +436,14 @@ U_BOOT_CMD(tpm2, CONFIG_SYS_MAXARGS, 1, do_tpm, "Issue a TPMv2.x command",
+ "    <hierarchy> is one of:\n"
+ "        * TPM2_RH_LOCKOUT\n"
+ "        * TPM2_RH_PLATFORM\n"
+-"pcr_extend <pcr> <digest_addr>\n"
+-"    Extend PCR #<pcr> with digest at <digest_addr>.\n"
++"pcr_extend <pcr> <digest_addr> [<digest_algo>]\n"
++"    Extend PCR #<pcr> with digest at <digest_addr> with digest_algo.\n"
+ "    <pcr>: index of the PCR\n"
+-"    <digest_addr>: address of a 32-byte SHA256 digest\n"
+-"pcr_read <pcr> <digest_addr>\n"
+-"    Read PCR #<pcr> to memory address <digest_addr>.\n"
++"    <digest_addr>: address of digest of digest_algo type (defaults to SHA256)\n"
++"pcr_read <pcr> <digest_addr> [<digest_algo>]\n"
++"    Read PCR #<pcr> to memory address <digest_addr> with <digest_algo>.\n"
+ "    <pcr>: index of the PCR\n"
+-"    <digest_addr>: address to store the a 32-byte SHA256 digest\n"
++"    <digest_addr>: address of digest of digest_algo type (defaults to SHA256)\n"
+ "get_capability <capability> <property> <addr> <count>\n"
+ "    Read and display <count> entries indexed by <capability>/<property>.\n"
+ "    Values are 4 bytes long and are written at <addr>.\n"
+diff --git a/test/py/tests/test_tpm2.py b/test/py/tests/test_tpm2.py
+index 1d654cd4a23b..75f5d31fc675 100644
+--- a/test/py/tests/test_tpm2.py
++++ b/test/py/tests/test_tpm2.py
+@@ -257,7 +257,7 @@ def test_tpm2_pcr_read(u_boot_console):
+     updates = int(re.findall(r'\d+', str)[0])
+ 
+     # Check the output value
+-    assert 'PCR #10 content' in read_pcr
++    assert 'PCR #10 sha256 32 byte content' in read_pcr
+     assert '00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00' in read_pcr
+ 
+ @pytest.mark.buildconfigspec('cmd_tpm_v2')
+-- 
+2.25.1
+
