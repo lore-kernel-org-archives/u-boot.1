@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5B75C25B78
-	for <u-boot@archiver.kernel.org>; Sat, 25 May 2024 21:53:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBF2EC25B75
+	for <u-boot@archiver.kernel.org>; Sun, 26 May 2024 08:07:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D1B0882C4;
-	Sat, 25 May 2024 23:53:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CF1998826B;
+	Sun, 26 May 2024 10:07:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kUAzXcmm";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KwozFRFR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB5B5882AF; Sat, 25 May 2024 23:53:34 +0200 (CEST)
-Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
- [IPv6:2607:f8b0:4864:20::c34])
+ id C1E2888224; Sun, 26 May 2024 10:07:04 +0200 (CEST)
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [IPv6:2a00:1450:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBF0B8830C
- for <u-boot@lists.denx.de>; Sat, 25 May 2024 23:53:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A11FE88224
+ for <u-boot@lists.denx.de>; Sun, 26 May 2024 10:07:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oo1-xc34.google.com with SMTP id
- 006d021491bc7-5b2cc8c4b8aso5594985eaf.1
- for <u-boot@lists.denx.de>; Sat, 25 May 2024 14:53:32 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=net147@gmail.com
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-2e95b03e0d6so19820271fa.1
+ for <u-boot@lists.denx.de>; Sun, 26 May 2024 01:07:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716674011; x=1717278811; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/OYSheNlORPwPczKReckMZu0fQE2svMGFa1U+qR/sdo=;
- b=kUAzXcmmektlXHwhMatHhJfjgfYNVh44ymjzWoCoFz+npKc2HX0KR7aYOvb+LtYjI9
- Uy/f+vokbfDt7XZ8F2tt5OKUykJW6oRSFjT6gM/ARRBOLg5MrAr6KrCCiTkclhyeyx4N
- SMEGtrA1ya2rolA2+bU6Ty8sXDTi/HCcA+4uTPJhoqaqWyDWGseDaAY4mQiG+JBqZOE0
- GOdhxHE6mbi8/euiCNRgfrVSX5wPMmmiZdu20epnzXvxb9G8ni/pedXowIpIWetvLP3a
- BqzWHn4SPvSiSQoOAWyH2uLM8vnqNDAfbK12luQYq53e22nFg4nCMfLXLPxBGPnymIqa
- W73A==
+ d=gmail.com; s=20230601; t=1716710822; x=1717315622; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=aUSq5ALakaO4c9sqkL7smNAa5A9xC1W3iGhprz+8+Bo=;
+ b=KwozFRFRuW7eWQo72cNWTwKM3h9u+ldxjb4+0CWdx8PR72/dTjN8uvs8mahRPDaG7v
+ Pik+zfWWATqUEjmtVyPew+pRgVvovOO3ixkV7lJpJtvwkSngRgOx1erlLkb6Tw0nFFWe
+ hB3Ne1NyjStgOnlXY5VP+qZcPgs30FcnBNy2Ei1k/HeIJdoUmuLjQSXgzY1Qn71xKNTo
+ xKNXn8JYpkbOuDhbvCYSSgUQF1+aLsKTxOIOlgPQ2Y1U50zc4hcfBsrFdLt2gu4Kov7b
+ NrYdY9A9YqseZqb4qEL2J7dlYh9x+Eki+NJ1q7IiMHvDHMEBb6wvOQ47HAXWQ4h4awd2
+ +8xg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716674011; x=1717278811;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1716710822; x=1717315622;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/OYSheNlORPwPczKReckMZu0fQE2svMGFa1U+qR/sdo=;
- b=JzoMY/mERoIBBz5BUWTZ3YSc56vllx1Ehx93B5oH2F2flbNQXAoqn5hQmcZUXNzH3O
- MIYfouDHVXhSwPrDVwTMGf1ZnYBWH4BBlFDbzsT14Fz7PADgEhWlCafdaV+ySnG8dILw
- 4YIgx1AzUfIE9m8kYIOhW+nrOSVqbzCVFJKTDokWEVtfSyA7SJs2q2Z2+Vl58g2SsmLk
- 4enhErwy5fp+w+QBNHJuB3t1oYeCenOddt8DMbUzOmsuWV7/ropcIebsWrQf4JOri0pE
- ZOvkw6SxAwn20E8S7f2qgwXq/hxxkxMEluO/AVld3PVRHcOB3qIVPlJYzKBU3NacxHWw
- dDyQ==
-X-Gm-Message-State: AOJu0YwN1UnMn3PdhYZjPBvPiRKQlXJxIwNrN8rD4Z3j/h4X/2MqV+hp
- K4NSY9bUlniiQ98q6ER660ItZ5AYH9+FASeeQbSql5qcIW6d/P0P6C7ByTPMNAE=
-X-Google-Smtp-Source: AGHT+IHvgYXK1VI5MlkUEcI/WAK0neLiYUmql0saIy4LG+ncuoWoAaNIvNwPCqzGDz8YIRsua1j3xQ==
-X-Received: by 2002:a4a:7609:0:b0:5b9:70f8:4b82 with SMTP id
- 006d021491bc7-5b970f856cdmr4838582eaf.9.1716674011404; 
- Sat, 25 May 2024 14:53:31 -0700 (PDT)
-Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5b96c4d5377sm927429eaf.24.2024.05.25.14.53.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 May 2024 14:53:31 -0700 (PDT)
-From: Sam Protsenko <semen.protsenko@linaro.org>
-To: Tom Rini <trini@konsulko.com>,
-	Minkyu Kang <mk7.kang@samsung.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH] arm: exynos: Map iRAM APM area for Exynos850 SoC
-Date: Sat, 25 May 2024 16:53:30 -0500
-Message-Id: <20240525215330.16609-1-semen.protsenko@linaro.org>
-X-Mailer: git-send-email 2.39.2
+ bh=aUSq5ALakaO4c9sqkL7smNAa5A9xC1W3iGhprz+8+Bo=;
+ b=KqyXzhA+GcyU6BOW47W7yjY3v9RyDVlP5qcjx6JC9z3XYk1i6vHklRPvdH5rvqfMNh
+ 0JlLVeo+Al6Wp6djRv0r/FaDkR4Ph4jY6dDkig5dpbh0fWTEcTjs04FBUJVfLNt1qoqH
+ 4sCrMhHoOhUVaT3oJYWoHCS6kthuL5nsZCmu9knaKyLTdfez26XWqLAWojPn3/IpDSky
+ 5rPSxgHEzoCw7D9jCiIGvu/83jMFJJafzBi7iNKchBMXApJ9NfppJ393GUjXjSeH/VM+
+ /L6SNC15y6DELtIREsWYpMzg+GFfJfg8G0WKvtMjaXqFqrh0gB/2FUoKieVuTC68bFP9
+ /DiQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVJaFvAcWJGx527S1oHqVUCjd64WTW9m5xkQfRemihqhUWegQK7l8/0UyDIskacsIckG6ycGXxfundf63WlJhnZmnI/qg==
+X-Gm-Message-State: AOJu0Yzgfg4rc3/MIGJKpTl+JJm9Tg8YaOD9gSe0GEpJt3MargjkmiNI
+ GkaqNppbIy6NBsrBM/NTEPgxakpBtX9GcI6ZErokQJTWv+WqTk0wgsTfrD00S5DDFhSWCGEADmR
+ s5Mza0sNeQ5/2NWfwojg9iwh8jaU=
+X-Google-Smtp-Source: AGHT+IG2V+QL4/tzCl/WAtC0qXh6YXnmUcMoehY7XlKCHrNrys6keozZ2Md84vnNq1FboyrkncWDcfvBB31w0ddcgoM=
+X-Received: by 2002:a05:6512:48d2:b0:522:2990:7134 with SMTP id
+ 2adb3069b0e04-527f14d560emr2601409e87.33.1716710821531; Sun, 26 May 2024
+ 01:07:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20220226070551.9833-1-jnhuang95@gmail.com>
+ <20220226070551.9833-3-jnhuang95@gmail.com>
+ <CANwerB2SBe1+0sW1OXHEfSMA1z-vyAvLfAqVOKdsM-ap=KYbCA@mail.gmail.com>
+ <a9f890d4-555b-488f-85f8-8b22fdfd257b@linux.alibaba.com>
+In-Reply-To: <a9f890d4-555b-488f-85f8-8b22fdfd257b@linux.alibaba.com>
+From: Jonathan Liu <net147@gmail.com>
+Date: Sun, 26 May 2024 18:06:50 +1000
+Message-ID: <CANwerB1G8n57AfQ3CaH82CBPzQ8nvV=-Y5xRK6sVdnUZdj+SKw@mail.gmail.com>
+Subject: Re: [PATCH v4 2/5] lib/lz4: update LZ4 decompressor module
+To: Gao Xiang <hsiangkao@linux.alibaba.com>
+Cc: Huang Jianan <jnhuang95@gmail.com>, u-boot@lists.denx.de,
+ trini@konsulko.com, linux-erofs@lists.ozlabs.org, xiang@kernel.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,34 +90,202 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This iRAM APM area is needed for I3C access to PMIC via APM block.
-Without this mapping any access to APM iRAM leads to "Synchronous Abort"
-exception.
+Hi Gao,
 
-Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
----
- arch/arm/mach-exynos/mmu-arm64.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+On Sat, 25 May 2024 at 02:52, Gao Xiang <hsiangkao@linux.alibaba.com> wrote:
+>
+> Hi,
+>
+> On 2024/5/24 22:26, Jonathan Liu wrote:
+> > Hi Jianan,
+> >
+> > On Sat, 26 Feb 2022 at 18:05, Huang Jianan <jnhuang95@gmail.com> wrote:
+> >>
+> >> Update the LZ4 compression module based on LZ4 v1.8.3 in order to
+> >> use the newest LZ4_decompress_safe_partial() which can now decode
+> >> exactly the nb of bytes requested.
+> >>
+> >> Signed-off-by: Huang Jianan <jnhuang95@gmail.com>
+> >
+> > I noticed after this commit LZ4 decompression is slower.
+> > ulz4fn function call takes 1.209670 seconds with this commit.
+> > After reverting this commit, the ulz4fn function call takes 0.587032 seconds.
+> >
+> > I am decompressing a LZ4 compressed kernel (compressed with lz4 v1.9.4
+> > using -9 option for maximum compression) on RK3399.
+> >
+> > Any ideas why it is slower with this commit and how the performance
+> > regression can be fixed?
+>
+> Just the quick glance, I think the issue may be due to memcpy/memmove
+> since it seems the main difference between these two codebases
+> (I'm not sure which LZ4 version the old codebase was based on) and
+> the new version mainly relies on memcpy/memmove instead of its own
+> versions.
+>
 
-diff --git a/arch/arm/mach-exynos/mmu-arm64.c b/arch/arm/mach-exynos/mmu-arm64.c
-index 30e522804fbf..4c154950f73b 100644
---- a/arch/arm/mach-exynos/mmu-arm64.c
-+++ b/arch/arm/mach-exynos/mmu-arm64.c
-@@ -101,6 +101,14 @@ struct mm_region *mem_map = exynos7880_mem_map;
- 
- static struct mm_region exynos850_mem_map[] = {
- 	{
-+		/* iRAM */
-+		.virt = 0x02000000UL,
-+		.phys = 0x02000000UL,
-+		.size = SZ_2M,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRE) |
-+			 PTE_BLOCK_NON_SHARE |
-+			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-+	}, {
- 		/* Peripheral block */
- 		.virt = 0x10000000UL,
- 		.phys = 0x10000000UL,
--- 
-2.39.2
+> Would you mind to check the assembly how memcpy/memset is generated
+> on your platform?
 
+Here is the assembly (-mcpu=cortex-a72.cortex-a53 -march=armv8-a+crc+crypto):
+000000000028220c <memset>:
+#if !CONFIG_IS_ENABLED(TINY_MEMSET)
+        unsigned long cl = 0;
+        int i;
+
+        /* do it one word at a time (32 bits or 64 bits) while possible */
+        if ( ((ulong)s & (sizeof(*sl) - 1)) == 0) {
+  28220c:       f2400803        ands    x3, x0, #0x7
+  282210:       540002c1        b.ne    282268 <memset+0x5c>  // b.any
+                for (i = 0; i < sizeof(*sl); i++) {
+                        cl <<= 8;
+                        cl |= c & 0xff;
+  282214:       92401c26        and     x6, x1, #0xff
+        unsigned long cl = 0;
+  282218:       d2800004        mov     x4, #0x0                        // #0
+  28221c:       52800105        mov     w5, #0x8                        // #8
+                        cl |= c & 0xff;
+  282220:       aa0420c4        orr     x4, x6, x4, lsl #8
+                for (i = 0; i < sizeof(*sl); i++) {
+  282224:       710004a5        subs    w5, w5, #0x1
+  282228:       54ffffc1        b.ne    282220 <memset+0x14>  // b.any
+                }
+                while (count >= sizeof(*sl)) {
+  28222c:       cb030045        sub     x5, x2, x3
+  282230:       f1001cbf        cmp     x5, #0x7
+  282234:       54000148        b.hi    28225c <memset+0x50>  // b.pmore
+  282238:       d343fc43        lsr     x3, x2, #3
+  28223c:       928000e4        mov     x4, #0xfffffffffffffff8         // #-8
+  282240:       9b047c63        mul     x3, x3, x4
+  282244:       8b030042        add     x2, x2, x3
+  282248:       cb030003        sub     x3, x0, x3
+        unsigned long *sl = (unsigned long *) s;
+  28224c:       d2800004        mov     x4, #0x0                        // #0
+                        count -= sizeof(*sl);
+                }
+        }
+#endif  /* fill 8 bits at a time */
+        s8 = (char *)sl;
+        while (count--)
+  282250:       eb04005f        cmp     x2, x4
+  282254:       540000e1        b.ne    282270 <memset+0x64>  // b.any
+                *s8++ = c;
+
+        return s;
+}
+  282258:       d65f03c0        ret
+                        *sl++ = cl;
+  28225c:       f8236804        str     x4, [x0, x3]
+                        count -= sizeof(*sl);
+  282260:       91002063        add     x3, x3, #0x8
+  282264:       17fffff2        b       28222c <memset+0x20>
+        unsigned long *sl = (unsigned long *) s;
+  282268:       aa0003e3        mov     x3, x0
+  28226c:       17fffff8        b       28224c <memset+0x40>
+                *s8++ = c;
+  282270:       38246861        strb    w1, [x3, x4]
+  282274:       91000484        add     x4, x4, #0x1
+  282278:       17fffff6        b       282250 <memset+0x44>
+
+000000000028227c <memcpy>:
+__used void * memcpy(void *dest, const void *src, size_t count)
+{
+        unsigned long *dl = (unsigned long *)dest, *sl = (unsigned long *)src;
+        char *d8, *s8;
+
+        if (src == dest)
+  28227c:       eb01001f        cmp     x0, x1
+  282280:       54000100        b.eq    2822a0 <memcpy+0x24>  // b.none
+                return dest;
+
+        /* while all data is aligned (common case), copy a word at a time */
+        if ( (((ulong)dest | (ulong)src) & (sizeof(*dl) - 1)) == 0) {
+  282284:       aa010003        orr     x3, x0, x1
+  282288:       f2400863        ands    x3, x3, #0x7
+  28228c:       54000120        b.eq    2822b0 <memcpy+0x34>  // b.none
+  282290:       aa0003e4        mov     x4, x0
+  282294:       d2800003        mov     x3, #0x0                        // #0
+                }
+        }
+        /* copy the reset one byte at a time */
+        d8 = (char *)dl;
+        s8 = (char *)sl;
+        while (count--)
+  282298:       eb03005f        cmp     x2, x3
+  28229c:       540001e1        b.ne    2822d8 <memcpy+0x5c>  // b.any
+                *d8++ = *s8++;
+
+        return dest;
+}
+  2822a0:       d65f03c0        ret
+                        *dl++ = *sl++;
+  2822a4:       f8636824        ldr     x4, [x1, x3]
+  2822a8:       f8236804        str     x4, [x0, x3]
+                        count -= sizeof(*dl);
+  2822ac:       91002063        add     x3, x3, #0x8
+                while (count >= sizeof(*dl)) {
+  2822b0:       cb030044        sub     x4, x2, x3
+  2822b4:       f1001c9f        cmp     x4, #0x7
+  2822b8:       54ffff68        b.hi    2822a4 <memcpy+0x28>  // b.pmore
+  2822bc:       d343fc43        lsr     x3, x2, #3
+  2822c0:       928000e4        mov     x4, #0xfffffffffffffff8         // #-8
+  2822c4:       9b047c63        mul     x3, x3, x4
+  2822c8:       8b030042        add     x2, x2, x3
+  2822cc:       cb030004        sub     x4, x0, x3
+  2822d0:       cb030021        sub     x1, x1, x3
+  2822d4:       17fffff0        b       282294 <memcpy+0x18>
+                *d8++ = *s8++;
+  2822d8:       38636825        ldrb    w5, [x1, x3]
+  2822dc:       38236885        strb    w5, [x4, x3]
+  2822e0:       91000463        add     x3, x3, #0x1
+  2822e4:       17ffffed        b       282298 <memcpy+0x1c>
+
+
+I tried enabling CONFIG_USE_ARCH_MEMCPY=y, CONFIG_USE_ARCH_MEMSET=y in
+the .config (but leaving it disabled in SPL/TPL) and it results in
+Synchronous Abort:
+U-Boot SPL 2024.04 (Apr 02 2024 - 10:58:58 +0000)
+Trying to boot from MMC1
+NOTICE:  BL31: v1.3(release):8f40012ab
+NOTICE:  BL31: Built : 14:20:53, Feb 16 2023
+NOTICE:  BL31: Rockchip release version: v1.1
+INFO:    GICv3 with legacy support detected. ARM GICV3 driver initialized in EL3
+INFO:    Using opteed sec cpu_context!
+INFO:    boot cpu mask: 0
+INFO:    plat_rockchip_pmu_init(1203): pd status 3e
+INFO:    BL31: Initializing runtime services
+WARNING: No OPTEE provided by BL2 boot loader, Booting device without
+OPTEE initialization. SMC`s destined for OPTEE will return SMC_UNK
+ERROR:   Error initializing runtime service opteed_fast
+INFO:    BL31: Preparing for EL3 exit to normal world
+INFO:    Entry point address = 0x200000
+INFO:    SPSR = 0x3c9
+"Synchronous Abort" handler, esr 0x96000021, far 0x2957e1
+elr: 000000000020233c lr : 000000000026a388
+x0 : 00000000002fbf38 x1 : 00000000002957e1
+x2 : 0000000000000008 x3 : 0000000000000065
+x4 : 00000000002957e9 x5 : 00000000002fbf40
+x6 : 0000000000000065 x7 : 0000000000000003
+x8 : 00000000002c7960 x9 : 000000000000ffd0
+x10: 00000000002fbc5c x11: 00000000000132e8
+x12: 00000000002fbce8 x13: 00000000002c7960
+x14: 00000000002c7960 x15: 0000000000000000
+x16: 0000000000000000 x17: 0000000000000000
+x18: 00000000002fbe30 x19: 0000000000000007
+x20: 00000000002957d8 x21: 0000000000000009
+x22: 000000000029d189 x23: 0000000000000020
+x24: 00000000002fbf38 x25: 00000000002957e7
+x26: 00000000002957b2 x27: 0000000000007fff
+x28: 0000000000000000 x29: 00000000002fbcc0
+
+Code: a9001c06 a93f34ac d65f03c0 361800c2 (f9400026)
+Resetting CPU ...
+
+resetting ...
+
+>
+> Thanks,
+> Gao Xiang
+
+Regards,
+Jonathan
