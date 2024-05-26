@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBF2EC25B75
-	for <u-boot@archiver.kernel.org>; Sun, 26 May 2024 08:07:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 757A8C25B75
+	for <u-boot@archiver.kernel.org>; Sun, 26 May 2024 12:19:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF1998826B;
-	Sun, 26 May 2024 10:07:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9C2158800D;
+	Sun, 26 May 2024 14:19:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KwozFRFR";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YO7ZVIut";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1E2888224; Sun, 26 May 2024 10:07:04 +0200 (CEST)
-Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
- [IPv6:2a00:1450:4864:20::234])
+ id 626768817B; Sun, 26 May 2024 14:19:02 +0200 (CEST)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A11FE88224
- for <u-boot@lists.denx.de>; Sun, 26 May 2024 10:07:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6198F87EBD
+ for <u-boot@lists.denx.de>; Sun, 26 May 2024 14:18:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=net147@gmail.com
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-2e95b03e0d6so19820271fa.1
- for <u-boot@lists.denx.de>; Sun, 26 May 2024 01:07:02 -0700 (PDT)
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jnhuang95@gmail.com
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-62a088f80f6so16489847b3.0
+ for <u-boot@lists.denx.de>; Sun, 26 May 2024 05:18:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716710822; x=1717315622; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1716725938; x=1717330738; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=aUSq5ALakaO4c9sqkL7smNAa5A9xC1W3iGhprz+8+Bo=;
- b=KwozFRFRuW7eWQo72cNWTwKM3h9u+ldxjb4+0CWdx8PR72/dTjN8uvs8mahRPDaG7v
- Pik+zfWWATqUEjmtVyPew+pRgVvovOO3ixkV7lJpJtvwkSngRgOx1erlLkb6Tw0nFFWe
- hB3Ne1NyjStgOnlXY5VP+qZcPgs30FcnBNy2Ei1k/HeIJdoUmuLjQSXgzY1Qn71xKNTo
- xKNXn8JYpkbOuDhbvCYSSgUQF1+aLsKTxOIOlgPQ2Y1U50zc4hcfBsrFdLt2gu4Kov7b
- NrYdY9A9YqseZqb4qEL2J7dlYh9x+Eki+NJ1q7IiMHvDHMEBb6wvOQ47HAXWQ4h4awd2
- +8xg==
+ bh=+7/yqqV4fvCMwT/nb7pNdFIuAIxY/5zMbVmiGBnrhhU=;
+ b=YO7ZVIutUx6Swc8qQOI1pQpxSdkCrvW4R2bgGP5mCKJ2LaXWAOFXINIiZoVrt+BXoW
+ 7S7CUfsW66irFIIN9le5GJFy5Y+0AafyYGSbHrWxKsQCFgzY5SlcKsUcmU3QSWIg90R6
+ /PF1WfBdGNwjuMKrPc3JpS8TQ4d9Ta/hQImeadZvUV+e2XvQe6Qnm/RnttBjcdH4EZ+O
+ QAXrOyMNWDGTGURYtGWU2Ey8+16TcRCLaiytu70inMhG7wuML8Xi6E8Us89qUramIOED
+ mApsQzSNc/xCPr9JHsInmMqC9LLMVzI4CXvs09NExEmwvjIb1c8Okry8zVcHD2Toq+1H
+ P5ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716710822; x=1717315622;
+ d=1e100.net; s=20230601; t=1716725938; x=1717330738;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=aUSq5ALakaO4c9sqkL7smNAa5A9xC1W3iGhprz+8+Bo=;
- b=KqyXzhA+GcyU6BOW47W7yjY3v9RyDVlP5qcjx6JC9z3XYk1i6vHklRPvdH5rvqfMNh
- 0JlLVeo+Al6Wp6djRv0r/FaDkR4Ph4jY6dDkig5dpbh0fWTEcTjs04FBUJVfLNt1qoqH
- 4sCrMhHoOhUVaT3oJYWoHCS6kthuL5nsZCmu9knaKyLTdfez26XWqLAWojPn3/IpDSky
- 5rPSxgHEzoCw7D9jCiIGvu/83jMFJJafzBi7iNKchBMXApJ9NfppJ393GUjXjSeH/VM+
- /L6SNC15y6DELtIREsWYpMzg+GFfJfg8G0WKvtMjaXqFqrh0gB/2FUoKieVuTC68bFP9
- /DiQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVJaFvAcWJGx527S1oHqVUCjd64WTW9m5xkQfRemihqhUWegQK7l8/0UyDIskacsIckG6ycGXxfundf63WlJhnZmnI/qg==
-X-Gm-Message-State: AOJu0Yzgfg4rc3/MIGJKpTl+JJm9Tg8YaOD9gSe0GEpJt3MargjkmiNI
- GkaqNppbIy6NBsrBM/NTEPgxakpBtX9GcI6ZErokQJTWv+WqTk0wgsTfrD00S5DDFhSWCGEADmR
- s5Mza0sNeQ5/2NWfwojg9iwh8jaU=
-X-Google-Smtp-Source: AGHT+IG2V+QL4/tzCl/WAtC0qXh6YXnmUcMoehY7XlKCHrNrys6keozZ2Md84vnNq1FboyrkncWDcfvBB31w0ddcgoM=
-X-Received: by 2002:a05:6512:48d2:b0:522:2990:7134 with SMTP id
- 2adb3069b0e04-527f14d560emr2601409e87.33.1716710821531; Sun, 26 May 2024
- 01:07:01 -0700 (PDT)
+ bh=+7/yqqV4fvCMwT/nb7pNdFIuAIxY/5zMbVmiGBnrhhU=;
+ b=IN4dl67n7c0K+uVOyBLuVMRmK5yb00jde41Q68Op1bu0UJLXkwy9BENuy3MwSsjv6O
+ DLeLcpfFslf7Ph/Kf6JQ9BrVRu66PsXB0s5BXhxwLOWh3hW2B+8iK4bFnEilbkmgIqZK
+ yIRBztVxrTEI2NIFtU4n4DzysAX8KHil3/fkhlk6v5tmxGUTW87y86f5Gh0Gq8QNa9pa
+ yalyJhsfYG59ubWN7GTJcivx5yBsZX5VvhVSO7sjzKW32/AKVOp4l8DmASdux2W4h7sL
+ XE4nci+TgKFWWqr+xCxkl8eMWAQGnO27xWUsahcNpmFHYJq1CFJuNRszIkrInuDuRC8o
+ zQyQ==
+X-Gm-Message-State: AOJu0YwfVeW0m31xp+q+rFp5n1noFR5L+HdIIgtf23giAGG7vBd9rEov
+ Zv+lo/RPGX1ESVo30zwSXfWh4RKrPBbplhwF9IcEqsuMj0nm9QcUx3RBuyDmZ3u1ZSkoVnx7Qhu
+ QV23Cih42qzsAM5ETeytCTp9PaoQ=
+X-Google-Smtp-Source: AGHT+IHOuAAv6EiQgMzalyTyA/WlNVzy889P156PVLrK+erFHJRqnQ6Z2m1nlwGAobUCant/lbfqYiE/ZIqDjCJ8i4I=
+X-Received: by 2002:a05:690c:6e07:b0:622:f7df:aa0a with SMTP id
+ 00721157ae682-6283496bccemr68852227b3.22.1716725937912; Sun, 26 May 2024
+ 05:18:57 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220226070551.9833-1-jnhuang95@gmail.com>
  <20220226070551.9833-3-jnhuang95@gmail.com>
  <CANwerB2SBe1+0sW1OXHEfSMA1z-vyAvLfAqVOKdsM-ap=KYbCA@mail.gmail.com>
  <a9f890d4-555b-488f-85f8-8b22fdfd257b@linux.alibaba.com>
-In-Reply-To: <a9f890d4-555b-488f-85f8-8b22fdfd257b@linux.alibaba.com>
-From: Jonathan Liu <net147@gmail.com>
-Date: Sun, 26 May 2024 18:06:50 +1000
-Message-ID: <CANwerB1G8n57AfQ3CaH82CBPzQ8nvV=-Y5xRK6sVdnUZdj+SKw@mail.gmail.com>
+ <CANwerB1G8n57AfQ3CaH82CBPzQ8nvV=-Y5xRK6sVdnUZdj+SKw@mail.gmail.com>
+In-Reply-To: <CANwerB1G8n57AfQ3CaH82CBPzQ8nvV=-Y5xRK6sVdnUZdj+SKw@mail.gmail.com>
+From: Jianan Huang <jnhuang95@gmail.com>
+Date: Sun, 26 May 2024 20:18:50 +0800
+Message-ID: <CAJfKizq3sof9dh=KSdoJBvgydSK7AUy3_ns6ms8pchyOrLE+0A@mail.gmail.com>
 Subject: Re: [PATCH v4 2/5] lib/lz4: update LZ4 decompressor module
-To: Gao Xiang <hsiangkao@linux.alibaba.com>
-Cc: Huang Jianan <jnhuang95@gmail.com>, u-boot@lists.denx.de,
- trini@konsulko.com, linux-erofs@lists.ozlabs.org, xiang@kernel.org
+To: Jonathan Liu <net147@gmail.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, linux-erofs@lists.ozlabs.org, 
+ xiang@kernel.org, Gao Xiang <hsiangkao@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,42 +91,142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jonathan,
+
+Could you please try the following patch ? It replaces all memcpy() calls
+in lz4 with __builtin_memcpy().
+
+diff --git a/lib/lz4.c b/lib/lz4.c
+index d365dc727c..2afe31c1c3 100644
+--- a/lib/lz4.c
++++ b/lib/lz4.c
+@@ -34,6 +34,8 @@
+ #include <asm/unaligned.h>
+ #include <u-boot/lz4.h>
+
++#define LZ4_memcpy(dst, src, size) __builtin_memcpy(dst, src, size)
++
+ #define FORCE_INLINE inline __attribute__((always_inline))
+
+ static FORCE_INLINE u16 LZ4_readLE16(const void *src)
+@@ -215,7 +217,7 @@ static FORCE_INLINE int LZ4_decompress_generic(
+    && likely((endOnInput ? ip < shortiend : 1) &
+      (op <= shortoend))) {
+  /* Copy the literals */
+- memcpy(op, ip, endOnInput ? 16 : 8);
++ LZ4_memcpy(op, ip, endOnInput ? 16 : 8);
+  op += length; ip += length;
+
+  /*
+@@ -234,9 +236,9 @@ static FORCE_INLINE int LZ4_decompress_generic(
+     (offset >= 8) &&
+     (dict == withPrefix64k || match >= lowPrefix)) {
+  /* Copy the match. */
+- memcpy(op + 0, match + 0, 8);
+- memcpy(op + 8, match + 8, 8);
+- memcpy(op + 16, match + 16, 2);
++ LZ4_memcpy(op + 0, match + 0, 8);
++ LZ4_memcpy(op + 8, match + 8, 8);
++ LZ4_memcpy(op + 16, match + 16, 2);
+  op += length + MINMATCH;
+  /* Both stages worked, load the next token. */
+  continue;
+@@ -416,7 +418,7 @@ _copy_match:
+  size_t const copySize = (size_t)(lowPrefix - match);
+  size_t const restSize = length - copySize;
+
+- memcpy(op, dictEnd - copySize, copySize);
++ LZ4_memcpy(op, dictEnd - copySize, copySize);
+  op += copySize;
+  if (restSize > (size_t)(op - lowPrefix)) {
+  /* overlap copy */
+@@ -426,7 +428,7 @@ _copy_match:
+  while (op < endOfMatch)
+  *op++ = *copyFrom++;
+  } else {
+- memcpy(op, lowPrefix, restSize);
++ LZ4_memcpy(op, lowPrefix, restSize);
+  op += restSize;
+  }
+  }
+@@ -452,7 +454,7 @@ _copy_match:
+  while (op < copyEnd)
+  *op++ = *match++;
+  } else {
+- memcpy(op, match, mlen);
++ LZ4_memcpy(op, match, mlen);
+  }
+  op = copyEnd;
+  if (op == oend)
+@@ -466,7 +468,7 @@ _copy_match:
+  op[2] = match[2];
+  op[3] = match[3];
+  match += inc32table[offset];
+- memcpy(op + 4, match, 4);
++ LZ4_memcpy(op + 4, match, 4);
+  match -= dec64table[offset];
+  } else {
+  LZ4_copy8(op, match);
+diff --git a/lib/lz4_wrapper.c b/lib/lz4_wrapper.c
+index 4d48e7b0e8..e09c8d7057 100644
+--- a/lib/lz4_wrapper.c
++++ b/lib/lz4_wrapper.c
+@@ -80,7 +80,7 @@ int ulz4fn(const void *src, size_t srcn, void *dst,
+size_t *dstn)
+
+  if (block_header & LZ4F_BLOCKUNCOMPRESSED_FLAG) {
+  size_t size = min((ptrdiff_t)block_size, (ptrdiff_t)(end - out));
+- memcpy(out, in, size);
++ LZ4_memcpy(out, in, size);
+  out += size;
+  if (size < block_size) {
+  ret = -ENOBUFS; /* output overrun */
+
+
+Thanks,
+
+Jianan
+On 2024/5/26 16:06, Jonathan Liu wrote:
+
 Hi Gao,
 
-On Sat, 25 May 2024 at 02:52, Gao Xiang <hsiangkao@linux.alibaba.com> wrote:
->
-> Hi,
->
-> On 2024/5/24 22:26, Jonathan Liu wrote:
-> > Hi Jianan,
-> >
-> > On Sat, 26 Feb 2022 at 18:05, Huang Jianan <jnhuang95@gmail.com> wrote:
-> >>
-> >> Update the LZ4 compression module based on LZ4 v1.8.3 in order to
-> >> use the newest LZ4_decompress_safe_partial() which can now decode
-> >> exactly the nb of bytes requested.
-> >>
-> >> Signed-off-by: Huang Jianan <jnhuang95@gmail.com>
-> >
-> > I noticed after this commit LZ4 decompression is slower.
-> > ulz4fn function call takes 1.209670 seconds with this commit.
-> > After reverting this commit, the ulz4fn function call takes 0.587032 seconds.
-> >
-> > I am decompressing a LZ4 compressed kernel (compressed with lz4 v1.9.4
-> > using -9 option for maximum compression) on RK3399.
-> >
-> > Any ideas why it is slower with this commit and how the performance
-> > regression can be fixed?
->
-> Just the quick glance, I think the issue may be due to memcpy/memmove
-> since it seems the main difference between these two codebases
-> (I'm not sure which LZ4 version the old codebase was based on) and
-> the new version mainly relies on memcpy/memmove instead of its own
-> versions.
->
+On Sat, 25 May 2024 at 02:52, Gao Xiang <hsiangkao@linux.alibaba.com>
+<hsiangkao@linux.alibaba.com> wrote:
 
-> Would you mind to check the assembly how memcpy/memset is generated
-> on your platform?
+Hi,
+
+On 2024/5/24 22:26, Jonathan Liu wrote:
+
+Hi Jianan,
+
+On Sat, 26 Feb 2022 at 18:05, Huang Jianan <jnhuang95@gmail.com>
+<jnhuang95@gmail.com> wrote:
+
+Update the LZ4 compression module based on LZ4 v1.8.3 in order to
+use the newest LZ4_decompress_safe_partial() which can now decode
+exactly the nb of bytes requested.
+
+Signed-off-by: Huang Jianan <jnhuang95@gmail.com> <jnhuang95@gmail.com>
+
+I noticed after this commit LZ4 decompression is slower.
+ulz4fn function call takes 1.209670 seconds with this commit.
+After reverting this commit, the ulz4fn function call takes 0.587032 seconds.
+
+I am decompressing a LZ4 compressed kernel (compressed with lz4 v1.9.4
+using -9 option for maximum compression) on RK3399.
+
+Any ideas why it is slower with this commit and how the performance
+regression can be fixed?
+
+Just the quick glance, I think the issue may be due to memcpy/memmove
+since it seems the main difference between these two codebases
+(I'm not sure which LZ4 version the old codebase was based on) and
+the new version mainly relies on memcpy/memmove instead of its own
+versions.
+
+
+Would you mind to check the assembly how memcpy/memset is generated
+on your platform?
 
 Here is the assembly (-mcpu=cortex-a72.cortex-a53 -march=armv8-a+crc+crypto):
 000000000028220c <memset>:
@@ -283,9 +384,9 @@ Resetting CPU ...
 
 resetting ...
 
->
-> Thanks,
-> Gao Xiang
+
+Thanks,
+Gao Xiang
 
 Regards,
 Jonathan
