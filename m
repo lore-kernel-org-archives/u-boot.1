@@ -4,80 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89C6EC25B74
-	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 09:44:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFF18C25B74
+	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 09:45:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED0AF87F8E;
-	Mon, 27 May 2024 11:44:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 59C1F8824B;
+	Mon, 27 May 2024 11:45:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=NetBSD.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PDfPeQJV";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89CDF8808A; Mon, 27 May 2024 11:44:51 +0200 (CEST)
-Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
- [IPv6:2607:f8b0:4864:20::42d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0EA09882A2; Mon, 27 May 2024 11:45:26 +0200 (CEST)
+Received: from mail.duskware.de (mail.duskware.de
+ [IPv6:2a00:19e0:3004:291::144])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D7F087DCA
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 11:44:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0BE6988229
+ for <u-boot@lists.denx.de>; Mon, 27 May 2024 11:45:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=fail (p=none dis=none) header.from=NetBSD.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-6f8ecafd28cso2419481b3a.3
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 02:44:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716803088; x=1717407888; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7hW7nGjbMTFf9GUas/sCBf8rDDq8/SNsM43+0viab5s=;
- b=PDfPeQJVxs8V2W/9cI8GVfyIqA4egkUw5jMEwLIZxuN6C5ZVKL7onMZucl5ll654dX
- nHNqwquNPjAmiOmUG99e/sdKZEBrUtzto6MDIVU82X/UyDtkZIzlZXZr0DNDXBM/f5ZN
- at1pWFQVmqDGaU8MN7xJbuWsj1Svi8DwnZKlMS61WRplR/AM50LHJj0XPCP1Hj9UgElS
- uJiSImn6X8SU19RGi+IZXvwizzTZjvEKyUXIKrE0+70+GbHIkq+GKfWsS0DHVgCQG5ki
- adTfg42oo2iSVGBHYVR/nkwec53ypEv7uSdtb3ctkVRPnm74Z8tJCdqVxNwA5ulFAx5k
- c3cw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716803088; x=1717407888;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=7hW7nGjbMTFf9GUas/sCBf8rDDq8/SNsM43+0viab5s=;
- b=SYjKqar0UGY3sYX8rpc40q+BhsyVpNkAdbXGT9KmiCyFSuIot1qfzl0b05r+6uKNI9
- F4/hC34U2zOo516m7BQEG4ikhd/EaK9TKv9kom0H3noiRWuAq/QJTrLg7yynGI9249Np
- aTiy2bWW1ZSObF9X7VKtDcDKFzQ4iBM6OEH2+RGFHc0qVHEgOazfnC/O6D3SVtLm9AUI
- CIAmV7/KNg5YfoIsNPCdHPeWWHkQKnCVtc3f0VPNORoXYnTFYrlR5hNzrqLV/ixUuy/V
- 2izpQPscnhbA+q1nl0KN5TljhCQJosU6VRGSHhmtmkqlXiSyRMDw22l/Td7Vc7H8pKMD
- dhTw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUclaCFoWBsfUbLVRzb/y486IBCNxX+RVzXtRXXJs5hY6naMVYeYtrcNTbf7x8xTk2v8T+wV/W48aEi4niorSf/gBAn8w==
-X-Gm-Message-State: AOJu0YwgiTncZKESZBvbKxr+AoWvwsDGwYcIyJLSQvCSxqf3DccY9NBm
- U0pV0f23C90tWM2zcgUlIjovi+xLBiNbfUMsXFaYRFnqV7RowBXAFp8RqQIPhK4VuAn/su/ZgJT
- U3gOq9TP7e9GB/1zdOn9UF6KeHqukVSW46sTO6g==
-X-Google-Smtp-Source: AGHT+IGoC53DlKsXLvYUnZQg2jCJ5aF4abC2EJdZqCaWwkAqOIPyyFUEeNgVrHn3IvE6iZouUdvl7iSnScoqLyUFfAk=
-X-Received: by 2002:a05:6a00:8013:b0:6f8:cbfb:3ba9 with SMTP id
- d2e1a72fcca58-6f8f2d6e2e8mr9649588b3a.12.1716803087685; Mon, 27 May 2024
- 02:44:47 -0700 (PDT)
+ spf=pass smtp.mailfrom=martin@duskware.de
+Received: by mail.duskware.de (Postfix, from userid 205)
+ id 87DCDA7DC0; Mon, 27 May 2024 11:45:22 +0200 (CEST)
+Date: Mon, 27 May 2024 11:45:22 +0200
+From: Martin Husemann <martin@NetBSD.org>
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Francesco Dolcini <francesco@dolcini.it>, u-boot@lists.denx.de,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>
+Subject: Re: [PATCH v2 00/14] Introduce the lwIP network stack
+Message-ID: <20240527094522.GA22281@mail.duskware.de>
+References: <cover.1716566960.git.jerome.forissier@linaro.org>
+ <20240527092301.GA7851@francesco-nb>
+ <23a33323-35d8-4ece-b57b-cdfbc318d3c4@linaro.org>
 MIME-Version: 1.0
-References: <20240525200049.3904124-1-tharvey@gateworks.com>
- <20240525200049.3904124-2-tharvey@gateworks.com>
- <20240527105910.3bb425d1@xps-13>
-In-Reply-To: <20240527105910.3bb425d1@xps-13>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 27 May 2024 12:44:11 +0300
-Message-ID: <CAC_iWjKGijjMXoop2i97Rpc+ZzSWWb6Vbd9XxW9WKqvcRwJwhQ@mail.gmail.com>
-Subject: Re: [PATCH v5 2/2] tpm-v2: allow algorithm name to be configured for
- pcr_read and pcr_extend
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de, 
- Jorge Ramirez-Ortiz <jorge@foundries.io>, Adam Ford <aford173@gmail.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <23a33323-35d8-4ece-b57b-cdfbc318d3c4@linaro.org>
+User-Agent: Mutt/1.7.2 (2016-11-26)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,38 +57,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Miquel
+On Mon, May 27, 2024 at 11:36:26AM +0200, Jerome Forissier wrote:
+> You're correct. The point I am making is about using a secure
+> (authenticated) connection, and I should have clarified that. While using
+> HTTPS might not be critical on a local network, things are different when
+> downloading from the internet (think man-in-the-middle attacks).
 
-On Mon, 27 May 2024 at 11:59, Miquel Raynal <miquel.raynal@bootlin.com> wro=
-te:
->
-> Hi Tim,
->
-> tharvey@gateworks.com wrote on Sat, 25 May 2024 13:00:49 -0700:
->
-> > For pcr_read and pcr_extend commands allow the digest algorithm to be
-> > specified by an additional argument. If not specified it will default t=
-o
-> > SHA256 for backwards compatibility.
-> >
-> > Additionally update test_tpm2.py for the changes in output in pcr_read
-> > which now shows the algo and algo length in the output.
-> >
-> > A follow-on to this could be to extend all PCR banks with the detected
-> > algo when the <digest_algo> argument is 'auto'.
-> >
-> > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-> > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->
-> LGTM,
->
-> Reviewed-by: Miquel Raynal <miquel.raynal@bootlin.com>
+(Sorry if this sounds like nitpkicking, but I am genuinely curious)
+How is it supposed to work?
 
-Thanks for taking the time, unfortunately I've already queued these
-for Tom and your r-b is missing
+You need not only https but also verify the presented certificate chain,
+and for that you need up-to-date root certificates (e.g. the bundle
+available from mozilla).
 
-Thanks
-/Ilias
->
-> Thanks,
-> Miqu=C3=A8l
+This sounds a bit outside the scope of u-boot to me (or you should 
+avoid the man-in-the-middle argument, which leaves the still valid
+"sites stop offering plain http" argument).
+
+If you really worry about man-in-the-middle you need to download via
+https in an environment that does certificate validation, and then
+even better verify the hash of the downloaded image. After that you
+can offer the image locally - via http, https or tftp - for installations.
+
+Martin
