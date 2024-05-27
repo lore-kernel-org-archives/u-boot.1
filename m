@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55CC9C25B74
-	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 17:18:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00378C25B74
+	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 17:18:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1399D8839A;
+	by phobos.denx.de (Postfix) with ESMTP id 76104883A0;
 	Mon, 27 May 2024 19:17:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XJAPPFf0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LLEdjDdR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0CC5288379; Mon, 27 May 2024 19:17:57 +0200 (CEST)
-Received: from mail-ej1-x644.google.com (mail-ej1-x644.google.com
- [IPv6:2a00:1450:4864:20::644])
+ id B93E087DAB; Mon, 27 May 2024 19:17:57 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E6CE88348
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 19:17:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B70387DAB
+ for <u-boot@lists.denx.de>; Mon, 27 May 2024 19:17:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x644.google.com with SMTP id
- a640c23a62f3a-a6269ad71b6so604766b.2
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 10:17:53 -0700 (PDT)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-a59a352bbd9so1332666b.1
+ for <u-boot@lists.denx.de>; Mon, 27 May 2024 10:17:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716830273; x=1717435073; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1716830275; x=1717435075; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=0QfO737z6DOD0wWRlb9ceCcoSJqVSVQy4j6kmKeEOIU=;
- b=XJAPPFf0lgOTicJD4yqM/UNLAKgzInXlzedXdtqWOufTffctL5p6BsLRu6SDvY0w89
- yuaQcqxgMz1MImTJlqs1eo3z/04F20KfoWRrIkOl5lhpjoMVpxwpSaWugflGSMFUAanX
- bi+kKThbv76Fqb+o1lKMQviYw2M3PXwZqSM/1c2xAAHKv2cVEUQ7TGYfYrqHiCfyF5HO
- jhH/rmuVHmx8zIZfHEiJtb/xux9ajQQEjEB9f2NbdGzml4USmwmBBykoB9PvVrcHNhx6
- T+WDyes87XHy3wRgIML89yQIyPhJQHwhqhdYUbMk9EnHeazjoPLG0OjSN9kRh5dxaMVr
- joTg==
+ :reply-to; bh=TajqXz5uKy7T9xe3F+Q4vB1gyPUhstwuDhj/02ms4uk=;
+ b=LLEdjDdRt9X/+g5ptZYr3b3asdLj1T4qGPc19TcEzAQhXqb6uTJ1VFOQPCZpT18y+O
+ 9A1c/W7yGwX4wlg2IhibayGZi9YanFXA7fpDe3Ag6urKF3TdsTKKL67AERZnO5bVkH71
+ gRWuTTfCDDALjQbWmk9OkRCTmqm/DGaT8UE+UZXMMrbFqUDCji5N0Ve40PM221XRZBuV
+ J05E5OGJk/RCLkQcN4k06D0AbyyzN/m0EbGVpL3//nP4KjF09HcmX/jnHJ7G8PM87Kpc
+ Ugl7qEIf2tQJ0Jjb7M8+2mTxYh/7O/2MMsTbJ+TCpOAGI+6kdoExNivoWUUV1Pm7+prx
+ LQKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716830273; x=1717435073;
+ d=1e100.net; s=20230601; t=1716830275; x=1717435075;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0QfO737z6DOD0wWRlb9ceCcoSJqVSVQy4j6kmKeEOIU=;
- b=dA5l3rxQsSghxylrc8HDiTChKmgBGv750AKiXJns6tJNp5OqE+sfLfZV9p0fu64/f2
- eZA31Ha2nXkLfIoL6iYhF0hlSvuLbC0RpCfn3fzgsMYeo0Xe3BEa7djrLPEfogb65c1Q
- 11nB1MTEX0IrKpLF0DnLc9up+/A5LID5U2Ah/XNqqga7p5zWUBB2BlvhhoTo224HvnT1
- 9tW98YfCUqNk6MMIgDFoO3rVn8DlPiPsES+fZUMAhERHVAx3t1HJdESaWF0zCFt4zi1F
- eYXa67Rj+0pW/6LFSOsYtjqvQLsYrBusQ0lY/U9xWOCX2vGRhhXyayg2oV0FY76GHs6H
- /RQQ==
+ bh=TajqXz5uKy7T9xe3F+Q4vB1gyPUhstwuDhj/02ms4uk=;
+ b=xSukbXfEd+kmgy8ACBqjiOfnkTwa76CDzo/XnK+e8MF51htteCtTUhjj89JZBFRn2/
+ eXOWetZUinqEXwRuYIGW0uZvmQOH2n0tPN6OLoVUvKnyWlF4x5jw6jywlYOh/AS7G9RG
+ gY0m4+GCXJt5iIAzwZb4jytd1lSvY0fiK1JscnkeJIxFbjIkzTt4XrblMKqMB8lGIZN/
+ QESOnsnLSKkkqzKZ+09RX8dctdeuba9B4Erxbv+UVbzga8+m1gWF9gKVUVpsMq8PDmlG
+ TnGoobY93UcuU2hTeerW+XD0mnKMPFNHGRhSVmp6Qq58p/w9/ETS2CTsH4etpi3iiOAq
+ F6fw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUhBKWtX6aNwdK3lEvVKjrvTSYpRHspQEcybKTVs4IpkTso0PfI7pgmjRfiyeyw2ZMTNgQ+KFfotGn1H+S1EWJyuIzCEw==
-X-Gm-Message-State: AOJu0YxrwMbJx7fCwusQ85uJtafgsavlO4Og6NHzEXVN1K7zXk1eskyU
- QFPaRtLaiSLnIz6HGBN+BOGHKUYHba8XvGXX1Jd8rAtVB7g1Ix3axMOyLphQkUs=
-X-Google-Smtp-Source: AGHT+IGQLfbPQKO/DnpvOjbNGrDfYTj/hHVghdo5nPZSLaxlid/1HpgCPrti0BNoiy+bZRi6lDW8qA==
-X-Received: by 2002:a17:906:2189:b0:a59:ca33:683f with SMTP id
- a640c23a62f3a-a62642dac81mr634196666b.28.1716830272754; 
- Mon, 27 May 2024 10:17:52 -0700 (PDT)
+ AJvYcCUcKHT85rJr7qz1EDt+BRfgfmm1PrtHC14LLURwNo3P8w8aUfpi5K1JrDOSl9NV1/7fy4178fWLxKbWBYLSpZFZDYgAnw==
+X-Gm-Message-State: AOJu0Yyq2Gd32nKlKzlZ1FqhhXy4TIF5GZrIXKriK73DA35rYZEE5Y/1
+ ZynRCLruyu415cO/R8TCAC84SnQHbrGSHeM9fgRwWdKWtA+c0pkPWuXLv4oxZAc=
+X-Google-Smtp-Source: AGHT+IGcEVCpsJPl9geQyKLzZxljsokD6KvAMqRDaYZbN7E5NX14sos5Af0glhbHQcWM8KqG9Pbn1A==
+X-Received: by 2002:a17:906:714e:b0:a5a:6f71:7bd9 with SMTP id
+ a640c23a62f3a-a623e8db7c7mr1149960066b.14.1716830274804; 
+ Mon, 27 May 2024 10:17:54 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::8bb3])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a626cc8b874sm509469266b.163.2024.05.27.10.17.51
+ a640c23a62f3a-a626cc8b874sm509469266b.163.2024.05.27.10.17.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 May 2024 10:17:52 -0700 (PDT)
+ Mon, 27 May 2024 10:17:54 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 27 May 2024 19:17:49 +0200
-Subject: [PATCH v2 1/8] dfu: add scsi backend
+Date: Mon, 27 May 2024 19:17:51 +0200
+Subject: [PATCH v2 3/8] mmc: msm_sdhci: work around a bug when writing
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240527-b4-qcom-capsule-updates-v2-1-47583d7ad428@linaro.org>
+Message-Id: <20240527-b4-qcom-capsule-updates-v2-3-47583d7ad428@linaro.org>
 References: <20240527-b4-qcom-capsule-updates-v2-0-47583d7ad428@linaro.org>
 In-Reply-To: <20240527-b4-qcom-capsule-updates-v2-0-47583d7ad428@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -83,21 +83,21 @@ To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
  u-boot-qcom@groups.io
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=17387;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=986;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=10JnSNcfpbK8Z+rmVvEbnvEijFXCmw+wQQLdlUAUxfI=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmVMA99w5735Vw+XMAKlQSLoL8xpsprp0oLypKL
- 8hSwY+1C8iJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZlTAPQAKCRAFgzErGV9k
- to94D/4jPN0NCczm/xTs5WQnie+7v1RALIzOsWIGpTRY/pB9vZ2wyHxZyHlKO/0/hTQQFjJJA4w
- ThPCUyKZZzOdtsBJBAgmwwfXLEXxujGl4aEzcwqG0ETO3sHHrysFAO9WnHTQvfnQJS3msRoKxRC
- KO0AS65K3j/kOkoXTg7EOGw9Cx1SivCttB8aUzeMMQZ6X+RJ2GiT8lkw89KJzpldAHk//Hu+D4s
- YeBJVMLyq1dN7YYr+NoH/siXICutCU/6+MhyhIzD2uO40B6m/uSlpuTfQg2xDf7Q0rPuLfeYwFc
- keKSc0elo5tiCUVlEJ/ybTeR4BBzYduMKLtD7wJ8HmphLnDfHGMBkfc2u8CTYEHYBTKctOxR3gz
- OI9ae7DkN9gDsVKVfuONSJ7r0kuaOoxcvm2+3qlUGyVqor+52Ue4VcLx8TVBFO4y0aJkq+3BINg
- MmLcv8K6PwdOE8Mvt4NSXLmZeKJDCVDSLz2JgBUoAAZFxqUCqKbkw0u6EqjiwQ6rN1Z2wEC1ZJL
- zVjtCWOOEogBK0p0UpAe//DNN1Lf+gfQLS73wUT0nvx5LVGc8xezGDqdsH9x60e7urOvryXNUkn
- kXiqXFAGwDouIwtfjnYDgWBUIfXQp6cXwo4MU7jV7SQr1xIpdNJAImEg9zcDQM1YqMJtgGLh37+
- Eo2tfqRLxeb6lwA==
+ bh=bXkm5zNNG/TPVcsDJJEaNdVNsrhwM9K8G4lc11zkT1Y=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmVMA957au07gEifRJUA/QhE3wSSjcySafBXeke
+ hiGrZ2uRMaJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZlTAPQAKCRAFgzErGV9k
+ tmxcD/9YxnFKUOc349eb4knSU0a/XJB6KolIi+1KDpWa47eB4bxPs4cBNJSRKIqt/jIDacb71ZG
+ 2SeDMhyxpefEW0XNMBdyDltue/jmG/0LV5eCa2rjr6VejsGfdtpxIo0jcPNfHEfTaWtvvZglLlM
+ tcShUkSRxcD01F4esDyS+ITNVRSmIBTyC6kaXM5/NijuzcXY0R0JMRToe5tH/aXM0UjVKFBtSfq
+ /z8OfFwRUIX250E99aKq97DiSiEk/dTpKLcc7KFLpaiAwlzAizPLgfebVOZ2f5TU5171NrGFooS
+ Q8eKxqwd+o5rn/P1JUzIhovVnhv2e5KbL63E2eEdKlEuMMZ5e8wSKuJ7dc/TmXe59gj7RDTn8nq
+ sjgU/CswB565SOMJXERMmnM9wwgiwsBEUew6j8orFultyBQ81QpJXZNXHgRX7jZL6Kk/O6uwg01
+ f6lrgG8dNHq34ZvlJQzBbanXa2J3warzkCp0bTf3s1iwttzKIYhHiX18UCkOGz2fsUIhQ7Bay6r
+ TNMMfq9BmQ0NH3znXwk62ARmfyAD+uxr5cAK2/PDZ1NRVPkMVWs92a0BGtgj4ldvHfRK09E2o8w
+ XefbKqbc7cGA6y/IfR+Y10ptTbZvZ86v4u3i9gd7c8qujLuyDqCCJ0l8/nqvepoEVw/2HLe1TW8
+ 2hoKEOhcuzE5r1g==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -116,645 +116,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is extremely similar to the MMC backend, but there are some notable
-differences.
+For some unknown reason, writes of larger than 1 block always fail with
+a checksum error on Qualcomm v5 controllers.
 
-Works with a DFU string like
-
-    scsi 4=u-boot-bin part 11
-
-Where "4" is the SCSI dev number (sequential LUN across all SCSI devices)
-and "11" is the partition number.
+Until this is resolved, work around the issue by setting b_max to 1 for
+these controllers.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- doc/usage/dfu.rst      |  31 ++++
- drivers/dfu/Kconfig    |   7 +
- drivers/dfu/Makefile   |   1 +
- drivers/dfu/dfu.c      |   5 +-
- drivers/dfu/dfu_scsi.c | 437 +++++++++++++++++++++++++++++++++++++++++++++++++
- include/dfu.h          |  26 +++
- 6 files changed, 506 insertions(+), 1 deletion(-)
+ drivers/mmc/msm_sdhci.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/doc/usage/dfu.rst b/doc/usage/dfu.rst
-index 8cc09c308d82..dc4f8d672f99 100644
---- a/doc/usage/dfu.rst
-+++ b/doc/usage/dfu.rst
-@@ -166,8 +166,38 @@ mmc
+diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
+index 4ce0de6c47d8..fc3e8d101b6e 100644
+--- a/drivers/mmc/msm_sdhci.c
++++ b/drivers/mmc/msm_sdhci.c
+@@ -195,8 +195,15 @@ static int msm_sdc_probe(struct udevice *dev)
+ 		return ret;
+ 	host->mmc->priv = &prv->host;
+ 	upriv->mmc = host->mmc;
  
-     Please note that this means the user will be able to execute any
-     arbitrary commands just like in the u-boot's shell.
- 
-+scsi
-+    for UFS storage::
++	/*
++	 * FIXME: v5 controllers have a bug in U-Boot that causes all writes
++	 * greater than 1 block to fail. Work around this by setting b_max to 1.
++	 */
++	if (var_info->mci_removed)
++		plat->cfg.b_max = 1;
 +
-+        dfu 0 scsi <dev>
-+
-+    each element in *dfu_alt_info* being
-+
-+    * <name> raw <offset> <size>     raw access to SCSI LUN
-+    * <name> part <part_id>          raw access to partition
-+    * <name> fat <part_id>           file in FAT partition
-+    * <name> ext4 <part_id>          file in EXT4 partition
-+    * <name> skip 0 0                ignore flashed data
-+    * <name> script 0 0              execute commands in shell
-+
-+    with
-+
-+    size
-+        is the size of the access area (hexadecimal without "0x")
-+        or 0 which means whole device
-+    partid
-+        is the GPT or DOS partition index.
-+    dev
-+        is the SCSI LU (Logical Unit) index (decimal only)
-+
-+    A value of environment variable *dfu_alt_info* for UFS could be::
-+
-+        u-boot part 4;bl2 raw 0x1e 0x1d
-+
-+    See mmc section above for details on the skip and script types.
-+
- nand
-     raw slc nand device::
- 
-          dfu 0 nand <dev>
-@@ -277,8 +307,9 @@ alternate list separated by '&' with the same format for each <alt>::
- 
-     mmc <dev>=<alt1>;....;<altN>
-     nand <dev>=<alt1>;....;<altN>
-     ram <dev>=<alt1>;....;<altN>
-+    scsi <dev>=<alt1>;....;<altN>
-     sf <dev>=<alt1>;....;<altN>
-     mtd <dev>=<alt1>;....;<altN>
-     virt <dev>=<alt1>;....;<altN>
- 
-diff --git a/drivers/dfu/Kconfig b/drivers/dfu/Kconfig
-index 0360d9da1427..158c660e6c4e 100644
---- a/drivers/dfu/Kconfig
-+++ b/drivers/dfu/Kconfig
-@@ -86,8 +86,15 @@ config DFU_VIRT
- 	  This option enables using DFU to read and write to VIRTUAL device
- 	  used at board level to manage specific behavior
- 	  (OTP update for example).
- 
-+config DFU_SCSI
-+	bool "SCSI flash back end for DFU"
-+	help
-+	  This option enables using DFU to read and write to SCSI devices
-+	  used at board level to manage specific behavior
-+	  (OTP update for example).
-+
- config SET_DFU_ALT_INFO
- 	bool "Dynamic set of DFU alternate information"
- 	help
- 	  This option allows to call the function set_dfu_alt_info to
-diff --git a/drivers/dfu/Makefile b/drivers/dfu/Makefile
-index dfbf64da6677..3b3ba0994b3a 100644
---- a/drivers/dfu/Makefile
-+++ b/drivers/dfu/Makefile
-@@ -10,4 +10,5 @@ obj-$(CONFIG_$(SPL_)DFU_NAND) += dfu_nand.o
- obj-$(CONFIG_$(SPL_)DFU_RAM) += dfu_ram.o
- obj-$(CONFIG_$(SPL_)DFU_SF) += dfu_sf.o
- obj-$(CONFIG_$(SPL_)DFU_WRITE_ALT) += dfu_alt.o
- obj-$(CONFIG_$(SPL_)DFU_VIRT) += dfu_virt.o
-+obj-$(CONFIG_$(SPL_)DFU_SCSI) += dfu_scsi.o
-diff --git a/drivers/dfu/dfu.c b/drivers/dfu/dfu.c
-index 540d48fab77d..c81fa7724268 100644
---- a/drivers/dfu/dfu.c
-+++ b/drivers/dfu/dfu.c
-@@ -547,8 +547,11 @@ static int dfu_fill_entity(struct dfu_entity *dfu, char *s, int alt,
- 			return -1;
- 	} else if (strcmp(interface, "virt") == 0) {
- 		if (dfu_fill_entity_virt(dfu, devstr, argv, argc))
- 			return -1;
-+	} else if (strcmp(interface, "scsi") == 0) {
-+		if (dfu_fill_entity_scsi(dfu, devstr, argv, argc))
-+			return -1;
- 	} else {
- 		printf("%s: Device %s not (yet) supported!\n",
- 		       __func__,  interface);
- 		return -1;
-@@ -643,9 +646,9 @@ int dfu_config_entities(char *env, char *interface, char *devstr)
- 
- const char *dfu_get_dev_type(enum dfu_device_type t)
- {
- 	const char *const dev_t[] = {NULL, "eMMC", "OneNAND", "NAND", "RAM",
--				     "SF", "MTD", "VIRT"};
-+				     "SF", "MTD", "VIRT", "SCSI"};
- 	return dev_t[t];
+ 	return sdhci_probe(dev);
  }
  
- const char *dfu_get_layout(enum dfu_layout l)
-diff --git a/drivers/dfu/dfu_scsi.c b/drivers/dfu/dfu_scsi.c
-new file mode 100644
-index 000000000000..63c3bcffe769
---- /dev/null
-+++ b/drivers/dfu/dfu_scsi.c
-@@ -0,0 +1,437 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * DFU SCSI backend (based on MMC backend).
-+ *
-+ * Copyright (C) 2012 Samsung Electronics
-+ *   author: Lukasz Majewski <l.majewski@samsung.com>
-+ * Copyright (C) 2024 Linaro Ltd.
-+ */
-+
-+#define LOG_DEBUG
-+
-+#include <log.h>
-+#include <malloc.h>
-+#include <errno.h>
-+#include <div64.h>
-+#include <dfu.h>
-+#include <ext4fs.h>
-+#include <fat.h>
-+#include <scsi.h>
-+#include <part.h>
-+#include <command.h>
-+#include <linux/printk.h>
-+
-+static unsigned char *dfu_file_buf;
-+static u64 dfu_file_buf_len;
-+static u64 dfu_file_buf_offset;
-+
-+#define scsi_get_blk_desc(dev) ((struct blk_desc *)dev_get_uclass_plat(dev))
-+
-+#define find_scsi_device(dev_num, scsi) blk_get_device(UCLASS_SCSI, dev_num, scsi)
-+
-+static int scsi_block_op(enum dfu_op op, struct dfu_entity *dfu, u64 offset, void *buf, long *len)
-+{
-+	struct udevice *scsi;
-+	u32 blk_start, blk_count, n = 0;
-+	int ret;
-+
-+	ret = find_scsi_device(dfu->data.scsi.lun, &scsi);
-+	if (ret < 0) {
-+		pr_err("Device SCSI %d - not found!", dfu->data.scsi.lun);
-+		return -ENODEV;
-+	}
-+
-+	/*
-+	 * We must ensure that we work in lba_blk_size chunks, so ALIGN
-+	 * this value.
-+	 */
-+	*len = ALIGN(*len, dfu->data.scsi.lba_blk_size);
-+
-+	blk_start = dfu->data.scsi.lba_start + (u32)lldiv(offset, dfu->data.scsi.lba_blk_size);
-+	blk_count = *len / dfu->data.scsi.lba_blk_size;
-+	if (blk_start + blk_count > dfu->data.scsi.lba_start + dfu->data.scsi.lba_size) {
-+		puts("Request would exceed designated area!\n");
-+		return -EINVAL;
-+	}
-+
-+	debug("%s: %s dev: %d start: %d cnt: %d buf: 0x%p\n", __func__,
-+	      op == DFU_OP_READ ? "scsi READ" : "scsi WRITE", dfu->data.scsi.lun, blk_start,
-+	      blk_count, buf);
-+	switch (op) {
-+	case DFU_OP_READ:
-+		n = blk_dread(scsi_get_blk_desc(scsi), blk_start, blk_count, buf);
-+		break;
-+	case DFU_OP_WRITE:
-+		n = blk_dwrite(scsi_get_blk_desc(scsi), blk_start, blk_count, buf);
-+		break;
-+	default:
-+		pr_err("Operation not supported\n");
-+	}
-+
-+	if (n != blk_count) {
-+		pr_err("scsi block operation failed");
-+		return -EIO;
-+	}
-+
-+	return 0;
-+}
-+
-+static int scsi_file_op(enum dfu_op op, struct dfu_entity *dfu, u64 offset, void *buf, u64 *len)
-+{
-+	char dev_part_str[8];
-+	int ret;
-+	int fstype;
-+	loff_t size = 0;
-+
-+	switch (dfu->layout) {
-+	case DFU_FS_FAT:
-+		fstype = FS_TYPE_FAT;
-+		break;
-+	case DFU_FS_EXT4:
-+		fstype = FS_TYPE_EXT;
-+		break;
-+	case DFU_SKIP:
-+		return 0;
-+	default:
-+		printf("%s: Layout (%s) not (yet) supported!\n", __func__,
-+		       dfu_get_layout(dfu->layout));
-+		return -1;
-+	}
-+
-+	snprintf(dev_part_str, sizeof(dev_part_str), "%d:%d", dfu->data.scsi.dev,
-+		 dfu->data.scsi.part);
-+
-+	ret = fs_set_blk_dev("scsi", dev_part_str, fstype);
-+	if (ret) {
-+		puts("dfu: fs_set_blk_dev error!\n");
-+		return ret;
-+	}
-+
-+	switch (op) {
-+	case DFU_OP_READ:
-+		ret = fs_read(dfu->name, (size_t)buf, offset, *len, &size);
-+		if (ret) {
-+			puts("dfu: fs_read error!\n");
-+			return ret;
-+		}
-+		*len = size;
-+		break;
-+	case DFU_OP_WRITE:
-+		ret = fs_write(dfu->name, (size_t)buf, offset, *len, &size);
-+		if (ret) {
-+			puts("dfu: fs_write error!\n");
-+			return ret;
-+		}
-+		break;
-+	case DFU_OP_SIZE:
-+		ret = fs_size(dfu->name, &size);
-+		if (ret) {
-+			puts("dfu: fs_size error!\n");
-+			return ret;
-+		}
-+		*len = size;
-+		break;
-+	default:
-+		return -1;
-+	}
-+
-+	return ret;
-+}
-+
-+static int scsi_file_buf_write(struct dfu_entity *dfu, u64 offset, void *buf, long *len)
-+{
-+	int ret = 0;
-+
-+	if (offset == 0) {
-+		dfu_file_buf_len = 0;
-+		dfu_file_buf_offset = 0;
-+	}
-+
-+	/* Add to the current buffer. */
-+	if (dfu_file_buf_len + *len > CONFIG_SYS_DFU_MAX_FILE_SIZE)
-+		*len = CONFIG_SYS_DFU_MAX_FILE_SIZE - dfu_file_buf_len;
-+	memcpy(dfu_file_buf + dfu_file_buf_len, buf, *len);
-+	dfu_file_buf_len += *len;
-+
-+	if (dfu_file_buf_len == CONFIG_SYS_DFU_MAX_FILE_SIZE) {
-+		ret = scsi_file_op(DFU_OP_WRITE, dfu, dfu_file_buf_offset, dfu_file_buf,
-+				   &dfu_file_buf_len);
-+		dfu_file_buf_offset += dfu_file_buf_len;
-+		dfu_file_buf_len = 0;
-+	}
-+
-+	return ret;
-+}
-+
-+static int scsi_file_buf_write_finish(struct dfu_entity *dfu)
-+{
-+	int ret = scsi_file_op(DFU_OP_WRITE, dfu, dfu_file_buf_offset, dfu_file_buf,
-+			       &dfu_file_buf_len);
-+
-+	/* Now that we're done */
-+	dfu_file_buf_len = 0;
-+	dfu_file_buf_offset = 0;
-+
-+	return ret;
-+}
-+
-+int dfu_write_medium_scsi(struct dfu_entity *dfu, u64 offset, void *buf, long *len)
-+{
-+	int ret = -1;
-+
-+	switch (dfu->layout) {
-+	case DFU_RAW_ADDR:
-+		ret = scsi_block_op(DFU_OP_WRITE, dfu, offset, buf, len);
-+		break;
-+	case DFU_FS_FAT:
-+	case DFU_FS_EXT4:
-+		ret = scsi_file_buf_write(dfu, offset, buf, len);
-+		break;
-+	case DFU_SCRIPT:
-+		ret = run_command_list(buf, *len, 0);
-+		break;
-+	case DFU_SKIP:
-+		ret = 0;
-+		break;
-+	default:
-+		printf("%s: Layout (%s) not (yet) supported!\n", __func__,
-+		       dfu_get_layout(dfu->layout));
-+	}
-+
-+	return ret;
-+}
-+
-+int dfu_flush_medium_scsi(struct dfu_entity *dfu)
-+{
-+	int ret = 0;
-+
-+	switch (dfu->layout) {
-+	case DFU_FS_FAT:
-+	case DFU_FS_EXT4:
-+		ret = scsi_file_buf_write_finish(dfu);
-+		break;
-+	case DFU_SCRIPT:
-+		/* script may have changed the dfu_alt_info */
-+		dfu_reinit_needed = true;
-+		break;
-+	case DFU_RAW_ADDR:
-+	case DFU_SKIP:
-+		break;
-+	default:
-+		printf("%s: Layout (%s) not (yet) supported!\n", __func__,
-+		       dfu_get_layout(dfu->layout));
-+	}
-+
-+	return ret;
-+}
-+
-+int dfu_get_medium_size_scsi(struct dfu_entity *dfu, u64 *size)
-+{
-+	int ret;
-+
-+	switch (dfu->layout) {
-+	case DFU_RAW_ADDR:
-+		*size = dfu->data.scsi.lba_size * dfu->data.scsi.lba_blk_size;
-+		return 0;
-+	case DFU_FS_FAT:
-+	case DFU_FS_EXT4:
-+		ret = scsi_file_op(DFU_OP_SIZE, dfu, 0, NULL, size);
-+		if (ret < 0)
-+			return ret;
-+		return 0;
-+	case DFU_SCRIPT:
-+	case DFU_SKIP:
-+		return 0;
-+	default:
-+		printf("%s: Layout (%s) not (yet) supported!\n", __func__,
-+		       dfu_get_layout(dfu->layout));
-+		return -1;
-+	}
-+}
-+
-+static int scsi_file_buf_read(struct dfu_entity *dfu, u64 offset, void *buf, long *len)
-+{
-+	int ret;
-+
-+	if (offset == 0 || offset >= dfu_file_buf_offset + dfu_file_buf_len ||
-+	    offset + *len < dfu_file_buf_offset) {
-+		u64 file_len = CONFIG_SYS_DFU_MAX_FILE_SIZE;
-+
-+		ret = scsi_file_op(DFU_OP_READ, dfu, offset, dfu_file_buf, &file_len);
-+		if (ret < 0)
-+			return ret;
-+		dfu_file_buf_len = file_len;
-+		dfu_file_buf_offset = offset;
-+	}
-+	if (offset + *len > dfu_file_buf_offset + dfu_file_buf_len)
-+		return -EINVAL;
-+
-+	/* Add to the current buffer. */
-+	memcpy(buf, dfu_file_buf + offset - dfu_file_buf_offset, *len);
-+
-+	return 0;
-+}
-+
-+int dfu_read_medium_scsi(struct dfu_entity *dfu, u64 offset, void *buf, long *len)
-+{
-+	int ret = -1;
-+
-+	switch (dfu->layout) {
-+	case DFU_RAW_ADDR:
-+		ret = scsi_block_op(DFU_OP_READ, dfu, offset, buf, len);
-+		break;
-+	case DFU_FS_FAT:
-+	case DFU_FS_EXT4:
-+		ret = scsi_file_buf_read(dfu, offset, buf, len);
-+		break;
-+	default:
-+		printf("%s: Layout (%s) not (yet) supported!\n", __func__,
-+		       dfu_get_layout(dfu->layout));
-+	}
-+
-+	return ret;
-+}
-+
-+void dfu_free_entity_scsi(struct dfu_entity *dfu)
-+{
-+	if (dfu_file_buf) {
-+		free(dfu_file_buf);
-+		dfu_file_buf = NULL;
-+	}
-+}
-+
-+/*
-+ * @param s Parameter string containing space-separated arguments:
-+ *	1st:
-+ *		raw	(raw read/write)
-+ *		fat	(files)
-+ *		ext4	(^)
-+ *		part	(partition image)
-+ *	2nd and 3rd:
-+ *		lba_start and lba_size, for raw write
-+ *		scsi_dev and scsi_part, for filesystems and part
-+ */
-+int dfu_fill_entity_scsi(struct dfu_entity *dfu, char *devstr, char **argv, int argc)
-+{
-+	const char *entity_type;
-+	ssize_t second_arg;
-+	ssize_t third_arg = -1;
-+	struct udevice *scsi;
-+	struct blk_desc *blk_dev;
-+	int ret;
-+	char *s;
-+
-+	if (argc < 2) {
-+		pr_err("Need at least one argument\n");
-+		return -EINVAL;
-+	}
-+
-+	dfu->data.scsi.lun = dectoul(devstr, &s);
-+	if (*s)
-+		return -EINVAL;
-+
-+	entity_type = argv[0];
-+	/*
-+	 * Base 0 means we'll accept (prefixed with 0x or 0) base 16, 8,
-+	 * with default 10.
-+	 */
-+	second_arg = simple_strtol(argv[1], &s, 0);
-+	if (*s)
-+		return -EINVAL;
-+	if (argc >= 3) {
-+		third_arg = simple_strtoul(argv[2], &s, 0);
-+		if (*s)
-+			return -EINVAL;
-+	}
-+
-+	if (scsi_scan(false)) {
-+		pr_err("Couldn't init scsi device.\n");
-+		return -ENODEV;
-+	}
-+
-+	ret = find_scsi_device(dfu->data.scsi.lun, &scsi);
-+	if (ret < 0) {
-+		pr_err("Couldn't find scsi device no. %d.\n", dfu->data.scsi.lun);
-+		return -ENODEV;
-+	}
-+
-+	blk_dev = scsi_get_blk_desc(scsi);
-+	if (!blk_dev) {
-+		pr_err("Couldn't get block device for scsi device no. %d.\n", dfu->data.scsi.lun);
-+		return -ENODEV;
-+	}
-+
-+	/* if it's NOT a raw write */
-+	if (strcmp(entity_type, "raw")) {
-+		dfu->data.scsi.dev = (second_arg != -1) ? second_arg : dfu->data.scsi.lun;
-+		dfu->data.scsi.part = third_arg;
-+	}
-+
-+	if (!strcmp(entity_type, "raw")) {
-+		dfu->layout = DFU_RAW_ADDR;
-+		dfu->data.scsi.lba_start = second_arg;
-+		if (third_arg < 0) {
-+			pr_err("raw requires two arguments\n");
-+			return -EINVAL;
-+		}
-+		dfu->data.scsi.lba_size = third_arg;
-+		dfu->data.scsi.lba_blk_size = blk_dev->blksz;
-+
-+		/*
-+		 * In case the size is zero (i.e. scsi raw 0x10 0),
-+		 * assume the user intends to use whole device.
-+		 */
-+		if (third_arg == 0)
-+			dfu->data.scsi.lba_size = blk_dev->lba;
-+
-+	} else if (!strcmp(entity_type, "part")) {
-+		struct disk_partition partinfo;
-+		int scsipart = second_arg;
-+
-+		if (third_arg >= 0) {
-+			pr_err("part only accepts one argument\n");
-+			return -EINVAL;
-+		}
-+
-+		if (part_get_info(blk_dev, scsipart, &partinfo) != 0) {
-+			pr_err("Couldn't find part #%d on scsi device #%d\n", scsipart,
-+			       dfu->data.scsi.lun);
-+			return -ENODEV;
-+		}
-+
-+		dfu->layout = DFU_RAW_ADDR;
-+		dfu->data.scsi.lba_start = partinfo.start;
-+		dfu->data.scsi.lba_size = partinfo.size;
-+		dfu->data.scsi.lba_blk_size = partinfo.blksz;
-+	} else if (!strcmp(entity_type, "fat")) {
-+		dfu->layout = DFU_FS_FAT;
-+	} else if (!strcmp(entity_type, "ext4")) {
-+		dfu->layout = DFU_FS_EXT4;
-+	} else if (!strcmp(entity_type, "skip")) {
-+		dfu->layout = DFU_SKIP;
-+	} else if (!strcmp(entity_type, "script")) {
-+		dfu->layout = DFU_SCRIPT;
-+	} else {
-+		pr_err("Memory layout (%s) not supported!\n", entity_type);
-+		return -ENODEV;
-+	}
-+
-+	dfu->dev_type = DFU_DEV_SCSI;
-+	dfu->get_medium_size = dfu_get_medium_size_scsi;
-+	dfu->read_medium = dfu_read_medium_scsi;
-+	dfu->write_medium = dfu_write_medium_scsi;
-+	dfu->flush_medium = dfu_flush_medium_scsi;
-+	dfu->inited = 0;
-+	dfu->free_entity = dfu_free_entity_scsi;
-+
-+	/* Check if file buffer is ready */
-+	if (!dfu_file_buf) {
-+		dfu_file_buf = memalign(CONFIG_SYS_CACHELINE_SIZE, CONFIG_SYS_DFU_MAX_FILE_SIZE);
-+		if (!dfu_file_buf) {
-+			pr_err("Could not memalign 0x%x bytes\n", CONFIG_SYS_DFU_MAX_FILE_SIZE);
-+			return -ENOMEM;
-+		}
-+	}
-+
-+	return 0;
-+}
-diff --git a/include/dfu.h b/include/dfu.h
-index fa1918cd6635..d7f365a7f1ce 100644
---- a/include/dfu.h
-+++ b/include/dfu.h
-@@ -23,8 +23,9 @@ enum dfu_device_type {
- 	DFU_DEV_RAM,
- 	DFU_DEV_SF,
- 	DFU_DEV_MTD,
- 	DFU_DEV_VIRT,
-+	DFU_DEV_SCSI,
- };
- 
- enum dfu_layout {
- 	DFU_RAW_ADDR = 1,
-@@ -98,8 +99,20 @@ struct sf_internal_data {
- struct virt_internal_data {
- 	int dev_num;
- };
- 
-+struct scsi_internal_data {
-+	int lun;
-+
-+	/* RAW programming */
-+	unsigned int lba_start;
-+	unsigned int lba_size;
-+	unsigned int lba_blk_size;
-+
-+	/* FAT/EXT */
-+	unsigned int dev; // Always 0???
-+	unsigned int part;
-+};
- 
- #if defined(CONFIG_DFU_NAME_MAX_SIZE)
- #define DFU_NAME_SIZE			CONFIG_DFU_NAME_MAX_SIZE
- #else
-@@ -126,8 +139,9 @@ struct dfu_entity {
- 		struct nand_internal_data nand;
- 		struct ram_internal_data ram;
- 		struct sf_internal_data sf;
- 		struct virt_internal_data virt;
-+		struct scsi_internal_data scsi;
- 	} data;
- 
- 	int (*get_medium_size)(struct dfu_entity *dfu, u64 *size);
- 
-@@ -516,8 +530,20 @@ static inline int dfu_fill_entity_virt(struct dfu_entity *dfu, char *devstr,
- 	return -1;
- }
- #endif
- 
-+#if CONFIG_IS_ENABLED(DFU_SCSI)
-+int dfu_fill_entity_scsi(struct dfu_entity *dfu, char *devstr,
-+			 char **argv, int argc);
-+#else
-+static inline int dfu_fill_entity_scsi(struct dfu_entity *dfu, char *devstr,
-+				       char **argv, int argc)
-+{
-+	puts("SCSI support not available!\n");
-+	return -1;
-+}
-+#endif
-+
- extern bool dfu_reinit_needed;
- 
- #if CONFIG_IS_ENABLED(DFU_WRITE_ALT)
- /**
+ static int msm_sdc_remove(struct udevice *dev)
 
 -- 
 2.45.0
