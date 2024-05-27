@@ -4,87 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AB8FC25B74
-	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 12:45:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D7E3C25B74
+	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 12:47:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4A80882EF;
-	Mon, 27 May 2024 14:45:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 16E67882EF;
+	Mon, 27 May 2024 14:47:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=edgeble.ai
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pj36C1qn";
+	dkim=pass (2048-bit key; unprotected) header.d=edgeble-ai.20230601.gappssmtp.com header.i=@edgeble-ai.20230601.gappssmtp.com header.b="g3FDGLlI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E5D28833D; Mon, 27 May 2024 14:45:06 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 9EDF5881E7; Mon, 27 May 2024 09:51:36 +0200 (CEST)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1916E87EF6
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 14:45:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F1DA88221
+ for <u-boot@lists.denx.de>; Mon, 27 May 2024 09:51:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a6302bdb54aso90193266b.0
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 05:45:04 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=edgeble.ai
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anand@edgeble.ai
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2e96f298fbdso18607951fa.1
+ for <u-boot@lists.denx.de>; Mon, 27 May 2024 00:51:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716813903; x=1717418703; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Szrz/uvkpOZ4F5mTgsUaY4J9/vHL6m1175BZWirA7lU=;
- b=pj36C1qnpl54jIJGApSggKKw3BxAz1tLP1+7oRPT9FrY9cKLyEaLLuyUSJHIHjlNvn
- ZqZYlVx0dx9UYFTkdu9CaGs0Jd0muC0x6q05sHtVCSV9bEvAl/0Uat1buZrfQoOfd+w7
- yWDImv6PkM69mMt2Tu+NWGeoJCFCLZ/tky33Laxkx6BcvN1hnasXJ0akUPMNoLpKgnL9
- C1EJOPulQtwLnx/cgzbRsSG3KZElFtZNzOCPRTzLIjE03oIrL+YS6S2fNlzLAoFxu0A8
- UhRxrttoEsc4xqi2Qt1YNqA/9ldGZUhaWfZHnzXLAKeEzXr27muHhTKYnswiWhzvdFDK
- QDaQ==
+ d=edgeble-ai.20230601.gappssmtp.com; s=20230601; t=1716796293; x=1717401093;
+ darn=lists.denx.de; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=l6GbLcV5yGEx3oTjoFTZBI4RSumz8I7dsHqwwgPBoag=;
+ b=g3FDGLlI1F1Buax5kUKdqyhsFfnyi6G9/aE1JQRw7Gkhb1Kefk3h2Tj1dLkzwo72u3
+ KHxw4sfIMopHttrgrkj/bda7kODSy2miMpgdQORxL7iz+16bWazl/kPia9A+i8Lq/F5V
+ kwchlWYkQyHcGkBrrBz2oVLARx4gjwM8toKSoBXOlYERbWLX5oj3ScjJBw7zeG9hh45Q
+ /U/AowuX/DzNMBECb7XYZtwP6rMQJkCe9+dBVVHskuq6NGmy21wHzZ0YOnvi8DFbmjPW
+ pkufx/ea46Tdh+q0RRaJio1pw7r5YP/6nWJc2m+4UgBNK8tz8be7YRZh556I37OTK05k
+ VoJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716813903; x=1717418703;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Szrz/uvkpOZ4F5mTgsUaY4J9/vHL6m1175BZWirA7lU=;
- b=OxiyuIndfk22z95yOprzoqt0lWcz2nMm5JciAe2inxQ7YSy7t252UGXjq/iKkrvw1s
- /UBaypzLb+2WxyQXAwVAmRcb7Eo1107z/bR9K7ISqty2SZfiSCTLTRbHJrCRozKwCXKJ
- PZUFbWuDImvVmKmf5d1gQyDnK/CZfuRPcaX6XEO+lwZOCeZFUMKGiq5GlYE0jH4W+LR+
- oPD4FDEbAg10zNQQ4oErhve55Ay1Fqxf4iutD8CLZiwu42TN76+2wKoEYKOOVoZghNar
- 3s8LziHVUd5Atj58681rfsbcEGGZ6UeyFvXg1669Lle7/LuvTifKokVo3u/0YyW0/iZp
- CpWw==
+ d=1e100.net; s=20230601; t=1716796293; x=1717401093;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=l6GbLcV5yGEx3oTjoFTZBI4RSumz8I7dsHqwwgPBoag=;
+ b=SC/23TIy6pmPwl+sJYjLFx3dA/53N3OgSIuWRGxcP1hKU0hmlZrqQmJ3e8/NTzOcLI
+ 0FNf5tzx3tx7AMYn3v8Jbo1D1FUBhLSF7Za/Aq6f0oOpLkMyqCNMh/SRbp7Nl7fXsieF
+ qoPD6DVroEVKOfjS+yCSTwnUUuuxGHjaJ6QUtJ74DXi+I8oNoeet8jzeH2BChF1v22AF
+ KInR5P34DYOcpUextl/W94XvbZk+byRWecIwqd+P0bMZ+VOjt9k/cdoVre2Fu+92PaNl
+ Zf1+luqdke/g9ttzRdfg/3ZOk2azVTvq5htYWpZRQKkCgOJJ6nNxcrXrSkuDVJv9ZkJk
+ mkPw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWtt+l5uCTcVeuGFZAFxcYnDtIz0e3kgQMdwbggMDJpf21R6TKOyOBgryeMMX2oOE6+NJHplMOaVKDKuuL/rThg+hLCVQ==
-X-Gm-Message-State: AOJu0YwUQysP/EIqkU+9LGW13xwSNn+JKmUcY6TLj/6fhCbTTxnmYH6h
- W1qNX1duZ3PThM8l+EVuYYgz0m0T/vp5Hx5namIDhwHYjggM67iS/2KbOtOihTI=
-X-Google-Smtp-Source: AGHT+IHgP9EJMsF+RoOpXcMKpplGjdCBtjok6lj5ZvKtgkCyMfInvlfw9n6dKaQ2gzBQR+uxQSQdRA==
-X-Received: by 2002:a17:906:6402:b0:a62:3228:b374 with SMTP id
- a640c23a62f3a-a62642d888amr587608066b.6.1716813903467; 
- Mon, 27 May 2024 05:45:03 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:6677:431e:31d2:9da9?
- ([2a01:e0a:3cb:7bb0:6677:431e:31d2:9da9])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a626cc8c860sm485849766b.168.2024.05.27.05.45.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 May 2024 05:45:03 -0700 (PDT)
-Message-ID: <ce97ef0a-29d1-4735-b44b-0ce517bb82d7@linaro.org>
-Date: Mon, 27 May 2024 14:45:01 +0200
+ AJvYcCWhgoDAJoapTqqZTB5b89SMbPtCLhfKQGzruOcTh7cXb8yOVv4LTFucBQEGJGir28N9rwaj8azIhFNvSPSKT0hBsScTHw==
+X-Gm-Message-State: AOJu0YzGIKU6KWeRP5iB2/7nyv2lzDRboUQAbDUm2tJoGwoexXnp/baM
+ 05dLIDaOGOaomKaOIHCfQX6AKQS7PZrH81I/Ho6mhsB9eikISWkrBWBMg5AOQl8gHv26vfGwlBD
+ 8DoNt/cd/ptrp7UkYN2zdgWcAIz1lXCA5ScEEtg==
+X-Google-Smtp-Source: AGHT+IHCM/ZCxXC6vQdKszgWb8pRt0blSfE6ftqnmB/8ZR+R7teqYA0bsDrQ6rmpMmO06w9RP7lDJVVtm7etbj+d6ZQ=
+X-Received: by 2002:a19:6912:0:b0:51d:998e:e0c1 with SMTP id
+ 2adb3069b0e04-5296410ad52mr5897188e87.13.1716796293540; Mon, 27 May 2024
+ 00:51:33 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 00/14] Introduce the lwIP network stack
-To: Martin Husemann <martin@NetBSD.org>
-Cc: Francesco Dolcini <francesco@dolcini.it>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>
-References: <cover.1716566960.git.jerome.forissier@linaro.org>
- <20240527092301.GA7851@francesco-nb>
- <23a33323-35d8-4ece-b57b-cdfbc318d3c4@linaro.org>
- <20240527094522.GA22281@mail.duskware.de>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20240527094522.GA22281@mail.duskware.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20240527063915.6205-1-jagan@edgeble.ai>
+In-Reply-To: <20240527063915.6205-1-jagan@edgeble.ai>
+From: Anand Moon <anand@edgeble.ai>
+Date: Mon, 27 May 2024 13:21:24 +0530
+Message-ID: <CACF1qnfPgq-QV22HwdQ42c+g8aMiGqtj=Y4bjqa8c2HgpUb60g@mail.gmail.com>
+Subject: Re: [PATCH 1/2] arm64: dts: rockchip: Fix spl-boot-order for
+ edgeble-ncm6b
+To: Jagan Teki <jagan@edgeble.ai>
+Cc: Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Mon, 27 May 2024 14:47:49 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,49 +92,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/27/24 11:45, Martin Husemann wrote:
-> On Mon, May 27, 2024 at 11:36:26AM +0200, Jerome Forissier wrote:
->> You're correct. The point I am making is about using a secure
->> (authenticated) connection, and I should have clarified that. While using
->> HTTPS might not be critical on a local network, things are different when
->> downloading from the internet (think man-in-the-middle attacks).
-> 
-> (Sorry if this sounds like nitpkicking, but I am genuinely curious)
+Hi Jagan,
 
-No worries. Well-defined use cases are certainly essential to
-proper implementations.
+On Mon, 27 May 2024 at 12:09, Jagan Teki <jagan@edgeble.ai> wrote:
+>
+> Edgeble NCM6B SoM has built-in eMMC so make sdhci has first boot
+> priority.
+>
+> Fix it for NCM6A, NCM6B SoM.
+>
+> Signed-off-by: Jagan Teki <jagan@edgeble.ai>
 
-> How is it supposed to work?
-> 
-> You need not only https but also verify the presented certificate chain,
-> and for that you need up-to-date root certificates (e.g. the bundle
-> available from mozilla).
+Reviewed-by: Anand Moon <anand@edgeble.ai>
 
-Yes. I will let Javier comment further since he's more directly
-concerned with that part.
 
-> This sounds a bit outside the scope of u-boot to me
 
-Maybe, maybe not. I would argue it is a matter of deployment policy.
-For example assume the device is an IP camera or some other IoT thing
-that comes with the bare minimum to boot and fetch its OS on first
-power up. No guarantee about what is on the local network -- just
-plain internet access. https would be quite helpful in such a case.
-
-> (or you should 
-> avoid the man-in-the-middle argument, which leaves the still valid
-> "sites stop offering plain http" argument).
-
-As long as there is at least one valid argument then I'm fine :)
-
-> If you really worry about man-in-the-middle you need to download via
-> https in an environment that does certificate validation, and then
-> even better verify the hash of the downloaded image. After that you
-> can offer the image locally - via http, https or tftp - for installations.
-
-That certainly would work but again, isn't it a decision to be made
-by the device manufacturer or more generally the one who builds u-boot
-for the device?
-
--- 
-Jerome
+> ---
+>  arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi |  6 +-----
+>  arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi | 11 ++++++-----
+>  2 files changed, 7 insertions(+), 10 deletions(-)
+>
+> diff --git a/arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi b/arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi
+> index dd0058262b..88f3f7eee2 100644
+> --- a/arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi
+> @@ -6,12 +6,8 @@
+>  #include "rk3588-u-boot.dtsi"
+>
+>  / {
+> -       aliases {
+> -               mmc0 = &sdmmc;
+> -       };
+> -
+>         chosen {
+> -               u-boot,spl-boot-order = &sdmmc;
+> +               u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
+>         };
+>  };
+>
+> diff --git a/arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi b/arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi
+> index a45b3f5e86..289578803e 100644
+> --- a/arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi
+> @@ -6,11 +6,12 @@
+>  #include "rk3588j-u-boot.dtsi"
+>
+>  / {
+> -       aliases {
+> -               mmc0 = &sdmmc;
+> -       };
+> -
+>         chosen {
+> -               u-boot,spl-boot-order = &sdmmc;
+> +               u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
+>         };
+>  };
+> +
+> +&sdmmc {
+> +       bus-width = <4>;
+> +       status = "okay";
+> +};
+> --
+> 2.34.1
+>
