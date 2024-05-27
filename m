@@ -4,82 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95AD5C25B74
-	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 09:36:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89C6EC25B74
+	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 09:44:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E800E87D57;
-	Mon, 27 May 2024 11:36:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ED0AF87F8E;
+	Mon, 27 May 2024 11:44:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QZlLK3xy";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PDfPeQJV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 895FE87DCD; Mon, 27 May 2024 11:36:30 +0200 (CEST)
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [IPv6:2a00:1450:4864:20::230])
+ id 89CDF8808A; Mon, 27 May 2024 11:44:51 +0200 (CEST)
+Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
+ [IPv6:2607:f8b0:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AD2B87837
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 11:36:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D7F087DCA
+ for <u-boot@lists.denx.de>; Mon, 27 May 2024 11:44:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-2e9819a630fso3100111fa.1
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 02:36:28 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-6f8ecafd28cso2419481b3a.3
+ for <u-boot@lists.denx.de>; Mon, 27 May 2024 02:44:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716802588; x=1717407388; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=fE9Owo6ncNgRR9kAQWkM4wy25q7n3HEgKtqszrIPuIs=;
- b=QZlLK3xyBM1PCOYK/GWt4910t0GX46ciL8o6MhMRZXxoP5PxAi7AX20XADdssic45Z
- 93/gjJoQ84NPWnLC5zk1w1mABdLZ2BNJqACLE2SxefyGSeHc0fQ/g03QweK28OPeqAnF
- uC+ZAjWgnsJ0P7/tqq49rayTihWNiUNFLnO+CeCpBSf6FFKxnxdxo+xUA8LfhsTBgHG4
- DkUEyJ9jnkJ9FhRaY3TJ3GfF8tKPiwxSaUiZatvHgW67ivk9Gv8QNQbajVd11hmoHnoY
- jGxwvdpl21LfnZZ0od0B1DzFLsgp8NiQEmZl7HoYb1az+Pg5VlDp5cWdXabHfO6FbvTI
- qbyQ==
+ d=linaro.org; s=google; t=1716803088; x=1717407888; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7hW7nGjbMTFf9GUas/sCBf8rDDq8/SNsM43+0viab5s=;
+ b=PDfPeQJVxs8V2W/9cI8GVfyIqA4egkUw5jMEwLIZxuN6C5ZVKL7onMZucl5ll654dX
+ nHNqwquNPjAmiOmUG99e/sdKZEBrUtzto6MDIVU82X/UyDtkZIzlZXZr0DNDXBM/f5ZN
+ at1pWFQVmqDGaU8MN7xJbuWsj1Svi8DwnZKlMS61WRplR/AM50LHJj0XPCP1Hj9UgElS
+ uJiSImn6X8SU19RGi+IZXvwizzTZjvEKyUXIKrE0+70+GbHIkq+GKfWsS0DHVgCQG5ki
+ adTfg42oo2iSVGBHYVR/nkwec53ypEv7uSdtb3ctkVRPnm74Z8tJCdqVxNwA5ulFAx5k
+ c3cw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716802588; x=1717407388;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=fE9Owo6ncNgRR9kAQWkM4wy25q7n3HEgKtqszrIPuIs=;
- b=hOexOowVUGe4bZJ/ETyGZ8oMGLxbwbQ9eFYQretNhixtUGdC2XCN37XV3HQTAnAHCT
- K7k/LXxTQVYu8k2NbhnW2IArQKRpnO7WThi4U/U2Jxv5uNqgMjyoq9Szf+9fo4FArV0l
- j6c4lcRTCpokemToQa67+Yhlbc1goQ/6JWuY4ILoOZAOfG+gmMow9n52Wo/FcVxNPRng
- ZqXt8TL2BGOUwi0UwXgtyBVuQDRMJTFcvMCH+VtgD9S1OiNoHhCuzMGFMNbIdYElBgBI
- v8B3AugiOMHkFK1bD70mMt0blNe/rlwxS09T9RYIDawlJXmhvMZlaAdwUG1ap80NnO7v
- hjnA==
-X-Gm-Message-State: AOJu0YwSY7cc+GX3c+9hwsT5c+CSK8YI9l0V8yBopu9MrHy0UbmWs80R
- lV4K8UoBzgXenZTqp3lJUZ2yfjfF9nO6Fch3IQB0ChNckbN4kTp0qzOSsSoSKiM=
-X-Google-Smtp-Source: AGHT+IHhryp+UZn6CCKfb+lngjWpRfOhtifqME88MBc8+Tn0rTkUxZQVhD8zy6EbaG6WAFNCzSRDQA==
-X-Received: by 2002:a2e:8788:0:b0:2e1:cb0f:4e1e with SMTP id
- 38308e7fff4ca-2e95b0416d4mr71153401fa.2.1716802587651; 
- Mon, 27 May 2024 02:36:27 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:6677:431e:31d2:9da9?
- ([2a01:e0a:3cb:7bb0:6677:431e:31d2:9da9])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a626c817b0asm473676766b.3.2024.05.27.02.36.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 May 2024 02:36:27 -0700 (PDT)
-Message-ID: <23a33323-35d8-4ece-b57b-cdfbc318d3c4@linaro.org>
-Date: Mon, 27 May 2024 11:36:26 +0200
+ d=1e100.net; s=20230601; t=1716803088; x=1717407888;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=7hW7nGjbMTFf9GUas/sCBf8rDDq8/SNsM43+0viab5s=;
+ b=SYjKqar0UGY3sYX8rpc40q+BhsyVpNkAdbXGT9KmiCyFSuIot1qfzl0b05r+6uKNI9
+ F4/hC34U2zOo516m7BQEG4ikhd/EaK9TKv9kom0H3noiRWuAq/QJTrLg7yynGI9249Np
+ aTiy2bWW1ZSObF9X7VKtDcDKFzQ4iBM6OEH2+RGFHc0qVHEgOazfnC/O6D3SVtLm9AUI
+ CIAmV7/KNg5YfoIsNPCdHPeWWHkQKnCVtc3f0VPNORoXYnTFYrlR5hNzrqLV/ixUuy/V
+ 2izpQPscnhbA+q1nl0KN5TljhCQJosU6VRGSHhmtmkqlXiSyRMDw22l/Td7Vc7H8pKMD
+ dhTw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUclaCFoWBsfUbLVRzb/y486IBCNxX+RVzXtRXXJs5hY6naMVYeYtrcNTbf7x8xTk2v8T+wV/W48aEi4niorSf/gBAn8w==
+X-Gm-Message-State: AOJu0YwgiTncZKESZBvbKxr+AoWvwsDGwYcIyJLSQvCSxqf3DccY9NBm
+ U0pV0f23C90tWM2zcgUlIjovi+xLBiNbfUMsXFaYRFnqV7RowBXAFp8RqQIPhK4VuAn/su/ZgJT
+ U3gOq9TP7e9GB/1zdOn9UF6KeHqukVSW46sTO6g==
+X-Google-Smtp-Source: AGHT+IGoC53DlKsXLvYUnZQg2jCJ5aF4abC2EJdZqCaWwkAqOIPyyFUEeNgVrHn3IvE6iZouUdvl7iSnScoqLyUFfAk=
+X-Received: by 2002:a05:6a00:8013:b0:6f8:cbfb:3ba9 with SMTP id
+ d2e1a72fcca58-6f8f2d6e2e8mr9649588b3a.12.1716803087685; Mon, 27 May 2024
+ 02:44:47 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 00/14] Introduce the lwIP network stack
-To: Francesco Dolcini <francesco@dolcini.it>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>
-References: <cover.1716566960.git.jerome.forissier@linaro.org>
- <20240527092301.GA7851@francesco-nb>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20240527092301.GA7851@francesco-nb>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20240525200049.3904124-1-tharvey@gateworks.com>
+ <20240525200049.3904124-2-tharvey@gateworks.com>
+ <20240527105910.3bb425d1@xps-13>
+In-Reply-To: <20240527105910.3bb425d1@xps-13>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 27 May 2024 12:44:11 +0300
+Message-ID: <CAC_iWjKGijjMXoop2i97Rpc+ZzSWWb6Vbd9XxW9WKqvcRwJwhQ@mail.gmail.com>
+Subject: Re: [PATCH v5 2/2] tpm-v2: allow algorithm name to be configured for
+ pcr_read and pcr_extend
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de, 
+ Jorge Ramirez-Ortiz <jorge@foundries.io>, Adam Ford <aford173@gmail.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,34 +94,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Francesco,
+Hi Miquel
 
+On Mon, 27 May 2024 at 11:59, Miquel Raynal <miquel.raynal@bootlin.com> wro=
+te:
+>
+> Hi Tim,
+>
+> tharvey@gateworks.com wrote on Sat, 25 May 2024 13:00:49 -0700:
+>
+> > For pcr_read and pcr_extend commands allow the digest algorithm to be
+> > specified by an additional argument. If not specified it will default t=
+o
+> > SHA256 for backwards compatibility.
+> >
+> > Additionally update test_tpm2.py for the changes in output in pcr_read
+> > which now shows the algo and algo length in the output.
+> >
+> > A follow-on to this could be to extend all PCR banks with the detected
+> > algo when the <digest_algo> argument is 'auto'.
+> >
+> > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>
+> LGTM,
+>
+> Reviewed-by: Miquel Raynal <miquel.raynal@bootlin.com>
 
-On 5/27/24 11:23, Francesco Dolcini wrote:
-> Hello Jerome,
-> 
-> On Fri, May 24, 2024 at 06:19:54PM +0200, Jerome Forissier wrote:
->> - Make the support of HTTPS in the wget command easier. Javier T. (CC'd)
->> has some additional lwIP and Mbed TLS patches to do so. With that it
->> becomes possible to fetch and launch a distro installer such as Debian
->> etc. directly from the U-Boot shell.
-> 
-> Why this is enabling this use case? Or it is just that currently,
-> without TLS, is not supposed to be something you should do?
-> I am a little bit confused reading this sentence, since to me this is
-> already possible using tftp.
+Thanks for taking the time, unfortunately I've already queued these
+for Tom and your r-b is missing
 
-You're correct. The point I am making is about using a secure
-(authenticated) connection, and I should have clarified that. While using
-HTTPS might not be critical on a local network, things are different when
-downloading from the internet (think man-in-the-middle attacks). Also,
-many web sites are switching off HTTP in favor of HTTPS so it could be
-that your favorite distro becomes unavailable without it.
-
-Thanks,
--- 
-Jerome
-
-> 
-> Francesco
-> 
+Thanks
+/Ilias
+>
+> Thanks,
+> Miqu=C3=A8l
