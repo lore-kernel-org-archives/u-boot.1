@@ -4,79 +4,125 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A076C25B74
-	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 07:37:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B04CC25B78
+	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 07:58:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 027328820B;
-	Mon, 27 May 2024 09:37:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 0F93388228;
+	Mon, 27 May 2024 09:58:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="bq/XGqzX";
+	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="U7NR2MPt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D31188228; Mon, 27 May 2024 09:37:22 +0200 (CEST)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
+ id 3457B88229; Mon, 27 May 2024 09:58:31 +0200 (CEST)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EF76881E7
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 09:37:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-627f46fbe14so46610947b3.2
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 00:37:19 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B23D8820B
+ for <u-boot@lists.denx.de>; Mon, 27 May 2024 09:58:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=suse.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mbrugger@suse.com
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2e72224c395so85952481fa.3
+ for <u-boot@lists.denx.de>; Mon, 27 May 2024 00:58:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1716795438; x=1717400238;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=B+9m0pksCorFLFrdKXdEvUagoobBkCvZEaMJvcZ+DEA=;
- b=bq/XGqzX9nhO+WxQBHDOXNn+TEi3glBBrJ979g3+eUN39PgxFx8YMx44RTeQenYPUq
- CLe34qBoIW1SfdxbeRJaY8iu5Q3JInPAPwlcddBG73wu3hM4Y9gMl5i2rXJTxa+9UvZU
- ZD/sDjKfjnRFJAn1PJf9kCnyFiSPZOLfxIiTM=
+ d=suse.com; s=google; t=1716796708; x=1717401508; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from
+ :content-language:references:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=lblQRap/8v5tjmg/Di/XWbWQghLM05q7B8wQfwC4ofk=;
+ b=U7NR2MPtKOaOLv8HBBLvx2seRACmGUlUEnYKZKjXnEmJANOaKqo5cSI/5No8DF75j8
+ wOiKidn3Sk3Js7dR7QL1+XkybSDocDGTae7sxrH0QD+3UjbIRhrz5ytJLb26Kqft/ekh
+ UEBZ1ji8a2/LoiZMYtoeb+4aEwu/9EZSRxHeq6ISygcNOSJosJLFOf/nVqYd20bDNDnj
+ mO7KnWLslYPr7JawYOja/TQq5ObbKbhhOT7H4Ghhd+/iUlt0QDMzQ6X/XnyQ3RKUQQu3
+ lmmxvMeLg4L4LirTcKR8oLZV2JUmH9+Tng8isI+1YeMo4STcl13Rrn/QWXwHp73Vhdnq
+ iSNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716795438; x=1717400238;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=B+9m0pksCorFLFrdKXdEvUagoobBkCvZEaMJvcZ+DEA=;
- b=LASnQSyYsZG0hRrA0U/FjAawCS7eJiKc1JjmbmqnmXA9zqXCgoiM5av0zGXl466d6+
- XkdSsm9KP1sB2tH0azkmM88dGaiVLQ+9oPfdT+jf8zKizzQdWS7ONqpp0H9kbFJbjnUx
- r4ITjTFZFWDqsAzJuTkJddUCUaK0Zz4nZ27O/jpKxBCp9hKyUTgnhchfvZqI27D1PN4B
- dCLC4XuV9CLQPiUJW8G4FA8lmsrtXGhmZWQJlM9y0r3V21L2Pxo7bx0zPMMS6DyeJCBr
- 1aACfJBUJG6MKokgI3tJXCXB5cCtQl1YzB5ovL/pdyfrxXvJ1dTiZIDtoTTMl5fqA7ql
- 71oQ==
+ d=1e100.net; s=20230601; t=1716796708; x=1717401508;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from
+ :content-language:references:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=lblQRap/8v5tjmg/Di/XWbWQghLM05q7B8wQfwC4ofk=;
+ b=onu3wkcxKDVOk7JO9IujQFxiA7xtkjIGzRbifFa3jxiUEjXJcUkavvEuSFu1YeoX+H
+ g/vjVrB1OJf0u3L1oL9wIOMXhmrn7tXzy+5kxTmcd7DcdcC5yhOMuSFHpW/X+H879Edd
+ Ie8WuS6Bl0vZHxq0r2GTp6YznsfWdnyCzTeAfXuSdbr/S/gMKAVSVcBsyfCKvb767Mm1
+ hofoQIEm2C6IcBdlu49qLCv1xwFYWz/CeYd/HPtrhXpR9E2t+0KpJAtEd1FVURl5sqgt
+ Aa2Kl390ymId969tY/r8AuneI0IpczKide58k8gzU9yEhGzDcE0a5Re039n6lJnJXZra
+ fWHQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVDRxS8GkrdHZtlPnmd+jgd1+HzV0Mg7LStKSwI3O3HvPT3U+JmQWXVah3+zPEo5gO6Mfe4NXcIt/uflLm4wz7n8MHxhA==
-X-Gm-Message-State: AOJu0Yw2lf2JwhxnhwCG1uUyvdqmgRTWVDevfSaUX3r/W486sw0jKlJb
- Q7MO5PPPfRwfCgeBbtzvIG2pVXZ/gWvSsC5Xs+r+mAgObrB02lNaRZOg1JQz3dWHYkVcM5VH/mQ
- Gu3jsdcE70EsfKpowBTUpLwiQJdpnIUKHXfqd7w==
-X-Google-Smtp-Source: AGHT+IFZGpe3pi5jXQLgNL2RV5lrrhwHiln4g6BrAS0qxdRxGBDzZNHrzdOODsVZrY3isUi0JOajOad4v95bdtQDfbo=
-X-Received: by 2002:a81:924e:0:b0:610:b464:9f1a with SMTP id
- 00721157ae682-62a08fa8ce9mr78337577b3.45.1716795438123; Mon, 27 May 2024
- 00:37:18 -0700 (PDT)
+ AJvYcCXKPehtcRyfnnu6uWCZioeLagmNcVsXgXtSdjkfqTpZQgaqhqQ4bs76v6PaMmb6pHqtBdqnSp6mMoQPyiI9A7qQsWsVAA==
+X-Gm-Message-State: AOJu0YzNH3Du4sxl0re6SVp89hgQZRScasj/lUKXxzz8kcm66/rKKM4X
+ jyAxeF3yTzT0fxufaTdfBBuBEqn2mRDw5ldy0BphyTFvn0peF6ePBL4Pl8k/9kE=
+X-Google-Smtp-Source: AGHT+IH3LvmO7oKhz0igAWjwRc1OMCWom9nV9O7qLltV9YBG/WjuWNcQ7Y2OZtfTDsitZfmfLbM9ow==
+X-Received: by 2002:a2e:beab:0:b0:2e2:7f2:9f9d with SMTP id
+ 38308e7fff4ca-2e95b0bdc6amr62968441fa.24.1716796708200; 
+ Mon, 27 May 2024 00:58:28 -0700 (PDT)
+Received: from [192.168.2.177] ([207.188.161.25])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42100ef1207sm131307315e9.10.2024.05.27.00.58.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 27 May 2024 00:58:27 -0700 (PDT)
+Message-ID: <3e653c2c-ab2e-46bd-8385-c264d9cdc9bc@suse.com>
+Date: Mon, 27 May 2024 09:58:26 +0200
 MIME-Version: 1.0
-References: <20240524102920.2631731-1-avromanov@salutedevices.com>
-In-Reply-To: <20240524102920.2631731-1-avromanov@salutedevices.com>
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Date: Mon, 27 May 2024 09:37:07 +0200
-Message-ID: <CABGWkvpHE_Vxu-sWz_XB-2zm3LEaHZu_4WY6javZW9NxkuAp_w@mail.gmail.com>
-Subject: Re: [PATCH v4 0/3] Introduce mtdblock device
-To: Alexey Romanov <avromanov@salutedevices.com>
-Cc: michael@amarulasolutions.com, frieder.schrempf@kontron.de, 
- xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, sjg@chromium.org, 
- bmeng@tinylab.org, tobias@waldekranz.com, jpewhacker@gmail.com, 
- marek.vasut+renesas@mailbox.org, kever.yang@rock-chips.com, jbx6244@gmail.com, 
- abdellatif.elkhlifi@arm.com, michal.simek@amd.com, 
- mikhail.kshevetskiy@iopsys.eu, patrice.chotard@foss.st.com, 
- kernel@salutedevices.com, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] Revert "arm: dts: bcm283x: Add minimal smbios information"
+To: Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20240514130724.1474507-1-pbrobinson@gmail.com>
+Content-Language: en-US, ca-ES, es-ES
+From: Matthias Brugger <mbrugger@suse.com>
+Autocrypt: addr=mbrugger@suse.com; keydata=
+ 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
+ PVrr2NoUqi/bxI8fFQJD1jVj8K0=
+In-Reply-To: <20240514130724.1474507-1-pbrobinson@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,146 +139,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexey,
 
-The CI still detects some errors when applying both series:
-- Introduce mtdblock device
-- Introduce UBI block device
 
-As an example:
+On 14/05/2024 15:07, Peter Robinson wrote:
+> This reverts commit 33041972727e84d3f95e26c83322521f61827584.
+> 
+> With the ability to generate this SMBIOS details autmotically the
+> small amount of details that this patch provided are generated
+> automatically so this is now obsolete so we can just drop it.
+> 
+> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
 
-+/opt/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/../lib/gcc/arm-linux-gnueabi/=
-13.2.0/../../../../arm-linux-gnueabi/bin/ld:
-/tmp/ccOTHlvl.ltrans4.ltrans.o: in function `mtd_blk_read':
-6816+drivers/mtd/mtdblock.c:95:(.text.mtd_blk_read+0x40): undefined
-reference to `mtd_read'
-6817+/opt/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/../lib/gcc/arm-linux-gnue=
-abi/13.2.0/../../../../arm-linux-gnueabi/bin/ld:
-/tmp/ccOTHlvl.ltrans4.ltrans.o: in function `mtd_blk_write':
-6818+drivers/mtd/mtdblock.c:162:(.text.mtd_blk_write+0x9a): undefined
-reference to `mtd_read'
-6819+/opt/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/../lib/gcc/arm-linux-gnue=
-abi/13.2.0/../../../../arm-linux-gnueabi/bin/ld:
-drivers/mtd/mtdblock.c:122:(.text.mtd_blk_write+0xf4): undefined
-reference to `mtd_erase'
-6820+/opt/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/../lib/gcc/arm-linux-gnue=
-abi/13.2.0/../../../../arm-linux-gnueabi/bin/ld:
-/tmp/ccOTHlvl.ltrans4.ltrans.o:drivers/mtd/mtdblock.c:126:(.text.mtd_blk_wr=
-ite+0x110):
-undefined reference to `mtd_write'
-6821+collect2: error: ld returned 1 exit status
-6822+/opt/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/../lib/gcc/arm-linux-gnue=
-abi/13.2.0/../../../../arm-linux-gnueabi/bin/ld:
-/tmp/ccaNKMBK.ltrans2.ltrans.o: in function `mtd_blk_read':
-6823+drivers/mtd/mtdblock.c:95:(.text.mtd_blk_read+0x36): undefined
-reference to `mtd_read'
-6824+/opt/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/../lib/gcc/arm-linux-gnue=
-abi/13.2.0/../../../../arm-linux-gnueabi/bin/ld:
-/tmp/ccaNKMBK.ltrans2.ltrans.o: in function `mtd_blk_write':
-6825+drivers/mtd/mtdblock.c:162:(.text.mtd_blk_write+0x88): undefined
-reference to `mtd_read'
-6826+/opt/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/../lib/gcc/arm-linux-gnue=
-abi/13.2.0/../../../../arm-linux-gnueabi/bin/ld:
-drivers/mtd/mtdblock.c:122:(.text.mtd_blk_write+0xe0): undefined
-reference to `mtd_erase'
-6827+/opt/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/../lib/gcc/arm-linux-gnue=
-abi/13.2.0/../../../../arm-linux-gnueabi/bin/ld:
-/tmp/ccaNKMBK.ltrans2.ltrans.o:drivers/mtd/mtdblock.
+Acked-by: Matthias Brugger <mbrugger@suse.com>
 
-Furthermore, I need to fix something in applying the patches.
-So, please rebase your series on master and run the tests locally:
-Please read tools/buildman/buildman.rst and .gitlab-ci.yml to get info.
-
-Thanks and regards,
-Dario
-
-On Fri, May 24, 2024 at 12:29=E2=80=AFPM Alexey Romanov
-<avromanov@salutedevices.com> wrote:
->
-> Hello!
->
-> This series adds support for the mtdblock device, which
-> allows to read/write data block by block. For example,
-> it can now be used for BCB or Android AB command:
->
->   $ bcb load mtd 0 part_name
->
-> Tested only on SPI NAND, so bind is made only for
-> SPI NAND drivers.
->
 > ---
->
-> Changes V1 -> V2 [1]:
->
->   - Drop patch [2].
->   - Add warning if bind NAND mtdblock device.
->   - Move documentation of mtdblock implementation
->     from commit message to the source code.
->   - Remove __maybe_unused from mtd partition functions
->     description.
->   - Use blk_enabled() instead of #ifdefs.
->
-> Changes V2 -> V3 [2]:
->
->   - Rebased over [3].
->   - Rename mtd_bread/bwrite -> mtd_blk_read/write.
->   - Fix GPL-2.0 license short name definiton in headers.
->   - Add empty line after MTD_ENTRY_NUMBERS define.
->
-> Changes V3 -> V4 [4]:
->
->   - Fix build warnings: use LBAF printf format string for lbaint_t types.
->
-> Links:
->
->   - [1] https://lore.kernel.org/all/20240227100441.1811047-1-avromanov@sa=
-lutedevices.com/
->   - [2] https://lore.kernel.org/all/20240227100441.1811047-5-avromanov@sa=
-lutedevices.com/
->   - [3] https://lore.kernel.org/u-boot/20240403114047.84030-1-heinrich.sc=
-huchardt@canonical.com/T/#u
->   - [4] https://lore.kernel.org/all/20240404105813.1520732-1-avromanov@sa=
-lutedevices.com/
->
->
-> Alexey Romanov (3):
->   disk: support MTD partitions
->   drivers: introduce mtdblock abstraction
->   spinand: bind mtdblock
->
->  disk/part.c                 |   3 +-
->  drivers/block/blk-uclass.c  |   1 +
->  drivers/mtd/Kconfig         |   1 +
->  drivers/mtd/Makefile        |   1 +
->  drivers/mtd/mtdblock.c      | 227 ++++++++++++++++++++++++++++++++++++
->  drivers/mtd/mtdpart.c       |  69 +++++++++++
->  drivers/mtd/nand/spi/core.c |  20 ++++
->  include/linux/mtd/mtd.h     |  12 ++
->  include/part.h              |   3 +
->  9 files changed, 336 insertions(+), 1 deletion(-)
->  create mode 100644 drivers/mtd/mtdblock.c
->
-> --
-> 2.34.1
->
-
-
---=20
-
-Dario Binacchi
-
-Senior Embedded Linux Developer
-
-dario.binacchi@amarulasolutions.com
-
-__________________________________
-
-
-Amarula Solutions SRL
-
-Via Le Canevare 30, 31100 Treviso, Veneto, IT
-
-T. +39 042 243 5310
-info@amarulasolutions.com
-
-www.amarulasolutions.com
+>   arch/arm/dts/bcm283x-u-boot.dtsi | 19 -------------------
+>   1 file changed, 19 deletions(-)
+> 
+> diff --git a/arch/arm/dts/bcm283x-u-boot.dtsi b/arch/arm/dts/bcm283x-u-boot.dtsi
+> index 8c17c6f6a52..ec0f93dd850 100644
+> --- a/arch/arm/dts/bcm283x-u-boot.dtsi
+> +++ b/arch/arm/dts/bcm283x-u-boot.dtsi
+> @@ -6,25 +6,6 @@
+>    * (C) Copyright 2016 Fabian Vogt <fvogt@suse.com>
+>    */
+>   
+> -/ {
+> -	smbios {
+> -		compatible = "u-boot,sysinfo-smbios";
+> -		smbios {
+> -			system {
+> -				manufacturer = "raspberrypi";
+> -				product = "rpi";
+> -			};
+> -			baseboard {
+> -				manufacturer = "raspberrypi";
+> -				product = "rpi";
+> -			};
+> -			chassis {
+> -				manufacturer = "raspberrypi";
+> -			};
+> -		};
+> -	};
+> -};
+> -
+>   &uart0 {
+>   	skip-init;
+>   	bootph-all;
