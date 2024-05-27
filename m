@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBAD4C25B78
-	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 17:19:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C35CDC25B74
+	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 17:19:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA1678824B;
-	Mon, 27 May 2024 19:18:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0F200883A5;
+	Mon, 27 May 2024 19:18:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MwVlPRHf";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zkjv5vD6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB3748837D; Mon, 27 May 2024 19:18:01 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id BEFE08837C; Mon, 27 May 2024 19:18:03 +0200 (CEST)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEF11883A7
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 19:17:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3EA988824B
+ for <u-boot@lists.denx.de>; Mon, 27 May 2024 19:18:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a5dcb5a0db4so764166b.2
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 10:17:59 -0700 (PDT)
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2e95a1d5ee2so67168051fa.0
+ for <u-boot@lists.denx.de>; Mon, 27 May 2024 10:18:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716830279; x=1717435079; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1716830280; x=1717435080; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=HdY/KRsi3dVlIZusk479FdyYE2jpaJHVs9ewzf9en8E=;
- b=MwVlPRHfU9X/hHi3fiJ0uNuVA92bMFoLBrypWjVEyFsx8aPxt+Aqw54LWJ15h2yq0x
- seX7uNw+vvkWI5+aVcTyyBIObOtNBsgGuLyk6MR8h0NRZsxOrkOabdT0tEBYXiMUAeia
- VZNVDB5yCfNwxP1QZh44+iD98RVhEPPy1HCppQwMWzZ55OpoqSdkcPfvCOwlU9xoMUhD
- 69/pznoyeqUFSw+FuWE/XXy1nc49D1PvyTk88RKJrBVjhk5L5wwdB2U9i7Gu4/5NG6yL
- fcoBDC2slKeyfnqWtXXKZe6s841NTr+BnvHPGpA5NB8kX9PmUYQJtX5xlmIewBHXxMRg
- gOJw==
+ :reply-to; bh=55O1ljQr/VZ6FjQQPUiTQTuEOls6xKyTMN6AV8avyHQ=;
+ b=zkjv5vD6cRwMVndRV+VoKmywKto2izPo1hVlMugfzuUaNw4Q1eBOc5Y8r8uh0ZQEkJ
+ 8YZDo4PylAhUqgpjuUusaJjBCqdonwNFgprpObR+abfdZvVL9/lmRJPkKPit8zeGTxqt
+ cbclcR2wUcLysjSYDneju8TCOFhkX2efpGnzRif+D256tT17KlcMNS+MLuOuv6+dLAVv
+ i8UFI5NArFB+hly2KMDy0kBZXz7QA2TAAJfyZKnTjzzuFf/YLf+5dUOO0zCh5yrwPJN4
+ GSoUOo1+4mArS+KUL5lmQIrUYr3HD4KyDdtw4nlfb6HywCxqiUx4/Xtc3AY3mTL0Zb1p
+ DGLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716830279; x=1717435079;
+ d=1e100.net; s=20230601; t=1716830280; x=1717435080;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HdY/KRsi3dVlIZusk479FdyYE2jpaJHVs9ewzf9en8E=;
- b=A1G4PBmzzUyIUDHXEFbcw6lyEEOAzYG6rUtstkwTNo8IBiHAokGN6Nrp0OBdT0aaXu
- N3XvOHXlQB5g2DU3L6wFCHKWqqFbb2c66MPuiZQ6Z2BfkyU0X0hzdIZh5lpiFq3cgGtk
- OI9arZmE14vKfUOzputa9d/tBZivEW84jRn3g0bgV5UCm05P8QwZtDpYAEUjEy6DNLDv
- IORfJ3DCJNns9al+4F+fTSw6hu1J3cwrTS7LarAAxsvlvRhXv0GwPoUaQDss14QNdxk7
- bCgBho+yZdbusGzA1pYD86hCqK3BlGUQ19vyb4WqwWoPAmyN5wLAMPt8eqwXYin2scFP
- VE8g==
+ bh=55O1ljQr/VZ6FjQQPUiTQTuEOls6xKyTMN6AV8avyHQ=;
+ b=tD1qf+DJJzXY1arD0LZrtm0tgnDy+CP43UpAxTE3tnl+gBZcdBxPhUCX6dJuGkH10Z
+ QO3hyCFNCXL2L8QUPeRaF1v1k0cCg/f9P3ddttJJskY/CwcjAtuRwXTbGO3zbwWwfdxz
+ hPzr1EuYaW46RnJ/ou70s40DmFgrLougEgGCmC5KYfW93qiZ7Y2KR7jzmkepHQUO8QuK
+ X0+eqbsNSsqOnx6725SNImUpHilSRYKt46GL/c3StJh9iODLHPQ1oWKV8rzt3+h2QlQi
+ 2Y5bZsLZtKGEbptJ3DjynHQDdedPS/0mO41K/HE31lbAM0AyeB2+VgdS9gWLY/PYyBpW
+ EhrQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW93sLzOhWmxfKH4IbsSFYv5olm4FIev1FlD7uHyu2ZpOCFts+uHSu1CEdzfdEjgygstr3U6qElHqQ/sxi/V2SCppecAA==
-X-Gm-Message-State: AOJu0YzOtOgZc+yyp/8N6sRvc2+BW5c8qlW2SH3GWRWU2Zk8qExOlJ+k
- mPVR1t+8sNGat12HSA9SOzfmXMh80wITmF2KOTvyE8B7+JiOzmwF1lbMgWUWqXw=
-X-Google-Smtp-Source: AGHT+IFfPM7/UuDwwTk71/5oYXDAHOY4cdYGkZ0KVl2lALvpF3jzsOViXtYuNpjJgJJyRaxzHheg6w==
-X-Received: by 2002:a17:906:68c6:b0:a59:a7b7:2b9e with SMTP id
- a640c23a62f3a-a62641aaefdmr559239566b.8.1716830279461; 
- Mon, 27 May 2024 10:17:59 -0700 (PDT)
+ AJvYcCUPmfpCLso1z0h9ZoxJtSsrq06Bnc8Ivqrk/3C+iJ9tFZfpj1FhQKCe4iomSSIuIyd6n1KLcFSw85Rqg3oC2v6vg3Ouzw==
+X-Gm-Message-State: AOJu0YwNx3rObBmptrtgHUa5BjYevsOcKgb4qGfXoFKBJ1BnxMU8NVvn
+ Ieyx6kT00HLDvYH9vysjB2ZhyEuYWd3IWjP4fRVPCgXRGAlolw5zqhoSOzaRtO4=
+X-Google-Smtp-Source: AGHT+IH4meV+oVou9g0kyJOkmKI2MpWPHavjz2SmRgN/xQC70TRSu29wRGmOBO3MnXUG0GF4pEwBEA==
+X-Received: by 2002:a2e:b784:0:b0:2e0:6313:fe3a with SMTP id
+ 38308e7fff4ca-2e95b256875mr82607801fa.35.1716830280639; 
+ Mon, 27 May 2024 10:18:00 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::8bb3])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a626cc8b874sm509469266b.163.2024.05.27.10.17.58
+ a640c23a62f3a-a626cc8b874sm509469266b.163.2024.05.27.10.17.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 May 2024 10:17:58 -0700 (PDT)
+ Mon, 27 May 2024 10:18:00 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 27 May 2024 19:17:55 +0200
-Subject: [PATCH v2 7/8] mach-snapdragon: bump up heap size
+Date: Mon, 27 May 2024 19:17:56 +0200
+Subject: [PATCH v2 8/8] qcom_defconfig: enable capsule update support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240527-b4-qcom-capsule-updates-v2-7-47583d7ad428@linaro.org>
+Message-Id: <20240527-b4-qcom-capsule-updates-v2-8-47583d7ad428@linaro.org>
 References: <20240527-b4-qcom-capsule-updates-v2-0-47583d7ad428@linaro.org>
 In-Reply-To: <20240527-b4-qcom-capsule-updates-v2-0-47583d7ad428@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -83,21 +83,21 @@ To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
  u-boot-qcom@groups.io
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=807;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1806;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=P6SpwaCCPSCMWCbOveOVcwb/sHGrgjoIg93D2sF3FYk=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmVMA+HU6JWxPOpKiXyhPIb/kUbHFsP+Z+V5jyC
- O+zjk/fZrCJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZlTAPgAKCRAFgzErGV9k
- tuD3D/9BLkwSAwv0qmYmrwERtqyncMGHBhwUiHB4tVPE+4wIzRCAbjwlt2R0lBjdOvCEXrAg+db
- UmMPBKs5WfxOPMho/5sy7wA0X1S0M2OJUkJCQumme1086Eau+oEOVQcF/jAyadApdB4AU2Nej3/
- t31q54IgQwFMqkQmZuEUO4Id/xvGogT4p/sE6MCPwRpc03IZNaR8qjFid8bGlVlYFSvfLar4Wm3
- YwMvML5nqxXy6SdMzP8oLxYAUfpozagVrAxpOQASVdZxlyVHZxZwBjDgaAVIvME/56mFCYIlIAi
- 5jKOi001hZeHp8vCC7PGuqsIc8jWwnuauL8bp/sMYRqIy5aY2/n6duCoowpLBvsovn/141q1at1
- BEn2ebS+J2ylSfHFUEtLQMyE9SPvplrHTzx5QCgY8iqr/6CUyy+BZRvBTLtVhdogaNyTy2dMKIa
- tOP4wsXz9Rwstm+SsNmrqx7phfNkAHDGlnj4lsM0cZD0tL+Gftlhxkpbh4J5qPX38mL5I2NjQvy
- Q5Z22eprwyVW3BjeDVEyRoOSrHkEMJWKZMVF4BVfaHTEIMHLRdoa1Obe75f20UEC4TZpIneprLz
- GA/eFwbyiLPMHTZo7DjjY2LT1PkxoCFTjnpibeNzhAl6E8ElyHuTYbAlthTcflvjSZeNrk9TWp+
- L5/f/FqvGAQI+yw==
+ bh=VNSLJAo9B7sSe22NgfOx2tIo486F6kDAs5FBx9s0o8k=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmVMA+HUtpryZi6RJyne3OJ6GmJ7o+FQhSCFoJn
+ Knvde6WgZyJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZlTAPgAKCRAFgzErGV9k
+ tgN8D/4uSuGPZ1FvSDU6ubgZXJ90ToBAY+X+PdX3+Lt6O0dd+z3plShoePT6Mxc350Ocv7jNSDx
+ MyvK/97phsI5lsZDWaQpfYPOuzwVCIw9vN1qNPKCxgVnkYz3p4hN+PZ0EKI3wqbWd060/Ub7Cfs
+ /jXZdeFE4E5wMvtq5ZxBLTKfplXPiPHaOiycSRzOiOzOYEiJKyD6OmUn1UveOXd2AafXzJbFjhh
+ f4WNThMiZbrcTcqgGbgyJG1QyV7Ck8LJeWx9XIFewkpCU8jaMSr/+3O+5OtEE9hiJr2/dBnJdCz
+ oJLS0OWAMy66BcN3Pq/Y3QvV4j7PrnctqysZREhKVofripsThFCZ3Q9TlER6loLHfAWJbYRBkbd
+ 3ckaMKwGLNFgfrELHCkxofVGei+IR7X20WbaeW7J8ggsVAIC5oOpk/nSVBKdUBKeFGkRlR/tHZc
+ q0W+8mFAEmH/eDVwXCvO4kaZ9WGU/fi3aGMpiKn9ooZshoycFZxVrOvUUTNK5HCQUQJgzF6Y+IW
+ fZ4UP9PRcMAn5aM3aLGn1oxFS9Cb+IrD1Iypn8L1fPZqMShV1PPd927W5tBc75mvS31vKIOvUU+
+ u7EyEpxTpuP1OpkLeppTIkO3AUpSojlfdYbrdidD4YHsIK8vQ3jLsTB5UWlOMh5OKOLHTzOu+8g
+ ZwYCGVJwsxum6JQ==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -116,30 +116,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For capsule updates we need more heap space for the DFU buffer. Give
-ourselves a whole 8MiB!
+Enable all the necessary options for capsule updates to work, as well as
+a few additional EFI features.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/mach-snapdragon/Kconfig | 3 +++
- 1 file changed, 3 insertions(+)
+ configs/qcom_defconfig | 13 +++++++++++--
+ 1 file changed, 11 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-index 536960b83c3b..5023c906bed8 100644
---- a/arch/arm/mach-snapdragon/Kconfig
-+++ b/arch/arm/mach-snapdragon/Kconfig
-@@ -10,8 +10,11 @@ config SYS_VENDOR
- 	  Allows to specify vendor for the Snapdragon SoCs based boards.
- 	  Based on this option board/<CONFIG_SYS_VENDOR>/<CONFIG_SYS_BOARD>
- 	  will be used as the custom board directory.
- 
-+config SYS_MALLOC_LEN
-+	default 0x800000
-+
- config SYS_MALLOC_F_LEN
- 	default 0x2000
- 
- config SPL_SYS_MALLOC_F
+diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+index f2dfced4bc1e..3a0ada9fd418 100644
+--- a/configs/qcom_defconfig
++++ b/configs/qcom_defconfig
+@@ -19,33 +19,38 @@ CONFIG_LOG_MAX_LEVEL=9
+ CONFIG_LOG_DEFAULT_LEVEL=4
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_CMD_BOOTMENU=y
++CONFIG_CMD_NVEDIT_EFI=y
+ CONFIG_CMD_EEPROM=y
+ CONFIG_SYS_I2C_EEPROM_BUS=2
+ CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
+ CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=5
+ # CONFIG_CMD_BIND is not set
+ CONFIG_CMD_CLK=y
++CONFIG_CMD_DFU=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_UFS=y
+ CONFIG_CMD_USB=y
+ CONFIG_CMD_CAT=y
+ CONFIG_CMD_BMP=y
++CONFIG_CMD_EFIDEBUG=y
+ CONFIG_CMD_LOG=y
+ CONFIG_OF_LIVE=y
+ CONFIG_BUTTON_QCOM_PMIC=y
+ CONFIG_CLK=y
++CONFIG_CLK_STUB=y
+ CONFIG_CLK_QCOM_QCM2290=y
+ CONFIG_CLK_QCOM_QCS404=y
+ CONFIG_CLK_QCOM_SDM845=y
+ CONFIG_CLK_QCOM_SM6115=y
+ CONFIG_CLK_QCOM_SM8250=y
+ CONFIG_CLK_QCOM_SM8550=y
+ CONFIG_CLK_QCOM_SM8650=y
+-CONFIG_CLK_STUB=y
++CONFIG_DFU_MMC=y
++CONFIG_SYS_DFU_DATA_BUF_SIZE=0x200000
+ CONFIG_MSM_GPIO=y
+ CONFIG_QCOM_PMIC_GPIO=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_QUP=y
+@@ -105,6 +110,10 @@ CONFIG_VIDEO=y
+ CONFIG_VIDEO_FONT_16X32=y
+ CONFIG_SYS_WHITE_ON_BLACK=y
+ CONFIG_NO_FB_CLEAR=y
+ CONFIG_VIDEO_SIMPLE=y
+-CONFIG_HEXDUMP=y
++CONFIG_SYMBOL_LOOKUP=y
++CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
++CONFIG_EFI_CAPSULE_ON_DISK=y
++CONFIG_EFI_IGNORE_OSINDICATIONS=y
++CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+ CONFIG_LMB_MAX_REGIONS=64
 
 -- 
 2.45.0
