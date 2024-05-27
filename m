@@ -4,56 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 144C4C25B74
-	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 06:14:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 219FAC25B74
+	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 06:15:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 286D787D5F;
-	Mon, 27 May 2024 08:14:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 8DF3387D5F;
+	Mon, 27 May 2024 08:15:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1716790455;
-	bh=In4KfhjlzmVbyRKmIftnN6/BurAkIsEgeGggq5xEtAc=;
-	h=Date:Subject:From:To:Cc:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=C8DLEx6q514z0Yf8Zc09ixKPo+7X9Ggaid/PMDdFIki+OCjOIsL/fyeUGXHOLXkkZ
-	 iAezyjM3WojQ0yEZT++/pAxYoxpuq+FVdo0O/f5kE2SCMTKqM08jtvSsNm/UAq+uWW
-	 iW+KshdFLh3BeblOhMYbRmXRxwmRftwjZ8XwFSkMyw3Rj9NvajYKYlQBrhYve59MD1
-	 Hojm8bYwNqPFxkNef0qHa5kPY86QfZqIJ3AtTtR6L1JiSpf60HzkAVc2HXORa6Q1JV
-	 KOUDQNEM0771rObSY76CVy3iu0vhU+F60mRqI+LggiPn42Bc0HA29NzviDJpbw4Dj8
-	 uAfgPfMJqvueg==
-Received: from [192.168.1.107] (82-131-156-226.pool.digikabel.hu
- [82.131.156.226])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yrqcAG8Y";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 52A4688228; Mon, 27 May 2024 08:15:10 +0200 (CEST)
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [IPv6:2a00:1450:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 63A0787F4B;
- Mon, 27 May 2024 08:14:12 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1716790453;
- bh=In4KfhjlzmVbyRKmIftnN6/BurAkIsEgeGggq5xEtAc=;
- h=Date:Subject:From:To:Cc:Reply-To:References:In-Reply-To:From;
- b=hmB8uhtcmPuuMI1sJJVg/C3E7NQ8Jm3ksql8J5EMpe7NHADyyOTUk4sWzVvR+xuHH
- 5/wHqG4p8Chyx922UJd1cHdhj0o8pNgu9q3ofGI/4dh1LZt3CE3XDF4nahgzWnvhJs
- xnaazGUcNyYnMfTePwj/8qZOye+MFo9X7teTapY0880YcLULoXI4yrPK02k5HeU19G
- HGtdgfNAgvC7jHJOsChcmXhdOTkEuYW4Y4GhdGfjt9qRPrYHBPsVtd5Kcs6ECrCrn4
- QlJqdR9j1v3hD7uJqK/0AZwMMxIItKSOGNInO3EkOA5F19A6ZQ5bP7sZKLck6WFv+4
- zROYluLwVpRiQ==
-Message-ID: <2f9b3e7f-5830-ec03-7ada-6b1fb605d5ee@denx.de>
-Date: Mon, 27 May 2024 08:13:51 +0200
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id AB32887C75
+ for <u-boot@lists.denx.de>; Mon, 27 May 2024 08:15:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-2e72224c395so85206561fa.3
+ for <u-boot@lists.denx.de>; Sun, 26 May 2024 23:15:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1716790507; x=1717395307; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=dwxI66VAYJF0FDH3lf4LfwD2O50HJxN/ySLMQfQdVr0=;
+ b=yrqcAG8Yz9XYCM+OIARNugx5HFW9sz+wkKVJPdG+zbPGKUGQQnCJoDE7qieiAbB/iE
+ JP0WgSWyN3qGJWT9D+xjO4MZyzHtL/4YqYhaMOF7OKCFogZaD6bHrwAZWwy5j30jV+32
+ Ut5UlBxMSJ+DkPet0gBpMJ6Xz7Nr4U8R7w7Q0IwvT8tAakrTWGXXDWztJvM0Tj3LHYv4
+ khr6SVI77u9x08aQ915/DCYfMwTAfypv646aKo7vcrei6wbE+oL3SqYbb6bxqLMg8aRe
+ mIVl46/04XP/ujPHgM4zPYCx7/Y8KHKIdy7ScsImrCSnCpleyqoRvyuGe1YVvcSszPXT
+ 8JTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716790507; x=1717395307;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dwxI66VAYJF0FDH3lf4LfwD2O50HJxN/ySLMQfQdVr0=;
+ b=qCKx/XKXgx0wVJ3ddHRq7ZHIkRFOIbh/VdVulEOGmx/kWRztOjh8C7Zf0dmDElqxXw
+ tHg4LjGKK+liP3U1jSdFvxwknclBWYndRQfawgk0mTH1tCh8B9QQ3AiD2W1K3AoISMsQ
+ giaf92OwggB8cAzGglz1RGoXe5cba46PuVdsyKW6crYeYBqsRy8KIv6lvYwV4KRlg+aW
+ vZRlfzXlgpWHpN48OQk6BkZk+gixi3zrVIftHHtn3B+BxvieEsTrmrplGlvfPP9IxXwo
+ ks1zzStYM0WUp4pAOF8heGx65ISnO2i3EttmkipKjD0Q6/sf9D13fBdH2LOjKIqRSNwT
+ D+Qw==
+X-Gm-Message-State: AOJu0YzUpfpqZ3G3Q6eMwNH2sd/rY5d/qv6tAONZeYEQsyNweEaWwtO/
+ 0Y6ULSKhOIurgz0bXDDwSWuS84d55jPhEdVTDTWwW+hCC6a9tBHNjhHXXnoLR4Jix2kt9n1fyvm
+ l
+X-Google-Smtp-Source: AGHT+IE9tSD314DBF5fZYLd+9KptTL/AsqmDDf8yT8pyIKpRxbs4R7r+NrjToETCRSkmsAMCqHnwNA==
+X-Received: by 2002:a2e:9f43:0:b0:2d8:8eb4:11a6 with SMTP id
+ 38308e7fff4ca-2e95b08c1b7mr49767911fa.12.1716790506975; 
+ Sun, 26 May 2024 23:15:06 -0700 (PDT)
+Received: from localhost.localdomain (ppp089210091242.access.hol.gr.
+ [89.210.91.242]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-358a33e6f03sm2794517f8f.36.2024.05.26.23.15.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 26 May 2024 23:15:06 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: u-boot@lists.denx.de,
+	trini@konsulko.com
+Cc: ilias.apalodimas@linaro.org,
+	tharvey@gateworks.com
+Subject: Pull request for tpm-master-27052024
+Date: Mon, 27 May 2024 09:15:04 +0300
+Message-ID: <20240527061504.19822-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.45.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH] fs: ubifs: Add support for ZSTD decompression
-Content-Language: en-US
-From: Heiko Schocher <hs@denx.de>
-To: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>, u-boot@lists.denx.de
-Cc: Ben Dooks <ben.dooks@sifive.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>
-References: <20240430102358.11163-1-piotr.wojtaszczyk@timesys.com>
- <c02ef9dd-669a-9ea5-b764-c03ddff7ee75@denx.de>
-In-Reply-To: <c02ef9dd-669a-9ea5-b764-c03ddff7ee75@denx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -66,91 +86,60 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Piotr,
+Hi Tom
 
-On 06.05.24 16:07, Heiko Schocher wrote:
-> Hello Piotr,
-> 
-> On 30.04.24 12:23, Piotr Wojtaszczyk wrote:
->> Signed-off-by: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
->> ---
->>
->>   fs/ubifs/ubifs-media.h |  2 ++
->>   fs/ubifs/ubifs.c       | 55 ++++++++++++++++++++++++++++++++++++++++--
->>   2 files changed, 55 insertions(+), 2 deletions(-)
-> 
-> Looks good to me, thanks!
-> 
-> Acked-by: Heiko Schocher <hs@denx.de>
+I know it's not early in the release and although this contains a new feature
+apart from fixes, I prefer this going into -master. The added feature
+is on a TPM cmd and is harmless. If you only want the fixes please let me
+know and I'll send the rest in -next
 
-Just tried to apply your patch (sorry for being so late) and checkpatch
-dropped some warnings, see below. Could you please fix them?
+The following changes since commit a7f0154c412859323396111dd0c09dbafbc153cb:
 
-Thanks!
+  Prepare v2024.07-rc3 (2024-05-20 10:05:16 -0600)
 
-bye,
-Heiko
-[1] checkpatch warnings
+are available in the Git repository at:
 
-WARNING: Missing commit description - Add an appropriate one
+  https://source.denx.de/u-boot/custodians/u-boot-tpm/ tags/tpm-master-27052024
 
-WARNING: Use 'if (IS_ENABLED(CONFIG...))' instead of '#if or #ifdef' where possible
-#160: FILE: fs/ubifs/ubifs.c:30:
-+#if IS_ENABLED(CONFIG_ZSTD)
+for you to fetch changes up to 89aa8463cdf3919ca4f04fc24ec8b154ff56d97e:
 
-WARNING: Use 'if (IS_ENABLED(CONFIG...))' instead of '#if or #ifdef' where possible
-#172: FILE: fs/ubifs/ubifs.c:50:
-+#if IS_ENABLED(CONFIG_ZSTD)
+  tpm-v2: allow algorithm name to be configured for pcr_read and pcr_extend (2024-05-27 09:00:27 +0300)
 
-CHECK: Alignment should match open parenthesis
-#174: FILE: fs/ubifs/ubifs.c:52:
-+static int zstd_decompress_wrapper(const unsigned char *in, size_t in_len,
-+                          unsigned char *out, size_t *out_len)
+The CI https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/20873
+had no issues
 
-WARNING: braces {} are not necessary for single statement blocks
-#183: FILE: fs/ubifs/ubifs.c:61:
-+       if (ret < 0) {
-+               return ret;
-+       }
+Please consider pulling
 
-WARNING: Use 'if (IS_ENABLED(CONFIG...))' instead of '#if or #ifdef' where possible
-#199: FILE: fs/ubifs/ubifs.c:99:
-+#if IS_ENABLED(CONFIG_ZSTD)
+Thanks
+/Ilias
 
-CHECK: Please don't use multiple blank lines
-#212: FILE: fs/ubifs/ubifs.c:112:
-+
-+
+----------------------------------------------------------------
+Tim fixed
+- An inconsistency in the reported active PCR banks.
+  This was only affecting EFI applications requesting the
+  active PCR banks from the TPM.
+- Adjusted the error message when a reset GPIO for the TPM
+  was not found. It now prints a reasonable error message,
+  instead of just printing that GPIO was not found
+- Enhanced the tpm command functionality. We can now define the
+  algorithm(sha1, 256 etc) we want to use while extending or
+  reading PCRs
 
-CHECK: Alignment should match open parenthesis
-#231: FILE: fs/ubifs/ubifs.c:215:
-+               ubifs_err(c, "%s compression is not compiled in",
-+                               compr->name ? compr->name : "unknown");
+----------------------------------------------------------------
+Tim Harvey (3):
+      tpm: display warning if using gpio reset with TPM
+      tpm-v2: add support for mapping algorithm names to algos
+      tpm-v2: allow algorithm name to be configured for pcr_read and pcr_extend
 
-WARNING: Use 'if (IS_ENABLED(CONFIG...))' instead of '#if or #ifdef' where possible
-#239: FILE: fs/ubifs/ubifs.c:280:
-+#if IS_ENABLED(CONFIG_ZSTD)
-
-total: 0 errors, 6 warnings, 3 checks, 101 lines checked
-
-NOTE: For some of the reported defects, checkpatch may be able to
-       mechanically convert to the typical style using --fix or --fix-inplace.
-
-mbox has style problems, please review.
-
-NOTE: Ignored message types: COMPLEX_MACRO CONSIDER_KSTRTO ENOSYS MINMAX 
-MULTISTATEMENT_MACRO_USE_DO_WHILE NETWORKING_BLOCK_COMMENT_STYLE PREFER_ETHER_ADDR_COPY USLEEP_RANGE
-
-NOTE: If any of the errors are false positives, please report
-       them to the maintainer, see CHECKPATCH in MAINTAINERS.
-Wende an: fs: ubifs: Add support for ZSTD decompression
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+ cmd/tpm-v2.c               | 49 +++++++++++++++++++--------
+ drivers/tpm/tpm2_tis_spi.c | 21 +++++++-----
+ include/tpm-v2.h           | 77 +++++++++++++++++++++++++++++++++++++++++--
+ lib/efi_loader/efi_tcg2.c  |  6 ++--
+ lib/tpm-v2.c               | 82 +++++++++++++++++++++++++++++-----------------
+ test/py/tests/test_tpm2.py |  2 +-
+ 6 files changed, 177 insertions(+), 60 deletions(-)
