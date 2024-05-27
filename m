@@ -4,74 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BA70C25B78
-	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 20:18:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E572EC25B74
+	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 21:34:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 049E888385;
-	Mon, 27 May 2024 22:18:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 13D9887B1A;
+	Mon, 27 May 2024 23:33:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Za+OAhht";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LiV6OX5R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CCD778838E; Mon, 27 May 2024 22:18:19 +0200 (CEST)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id 78EA987D87; Mon, 27 May 2024 23:33:57 +0200 (CEST)
+Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
+ [IPv6:2607:f8b0:4864:20::832])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 613B786FCE
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 22:18:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A28187AD2
+ for <u-boot@lists.denx.de>; Mon, 27 May 2024 23:33:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-3d19dfb3dceso88844b6e.1
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 13:18:17 -0700 (PDT)
+Received: by mail-qt1-x832.google.com with SMTP id
+ d75a77b69052e-43fb0f2daadso749881cf.3
+ for <u-boot@lists.denx.de>; Mon, 27 May 2024 14:33:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1716841096; x=1717445896; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1716845634; x=1717450434; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=UAhrhuXZ9YQoDznmW7ZTJ8I+QXXW96p/fRh0YLVp7Hw=;
- b=Za+OAhht5aSpZdo6FSt9xGPgRQbuFbbDXbWYBm/N7fkwZzSXcZ0OIKk4vFAaVRUC9C
- tJl65809xSsvVIN2rAXTivnex6BOhqcenTaZm78OCJZXo9sB7zsZp9iTv9UQyOVIcp/S
- u4Ga4YFCoHKrxb5uS8EzD8wU40cm6U7eWu89Y=
+ bh=zrONe/EFWyCI1eKvp64j48+4/0bf+PcvS1oyOLCrLD0=;
+ b=LiV6OX5Rhrtyo+mu6Rwb+Vt4u27REEWCz95FD2XjHeRdj+tlblriTOPTOGBgDTjzDE
+ XK/79OD3Yj+7eBfeJRjy5RnL0eXotM/R2fZrHAqe9bWy43d0Pv5t1wXQ/92PxPEa7CYD
+ 7xDkGk4KUHsb2Jnt+a4rnOnlXditAKj0Uld50=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716841096; x=1717445896;
+ d=1e100.net; s=20230601; t=1716845634; x=1717450434;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UAhrhuXZ9YQoDznmW7ZTJ8I+QXXW96p/fRh0YLVp7Hw=;
- b=l9J6xHt1BiSffQqew+mzlP/hsXyJVE5hnmks+y3K4ICiIK20fJlUp4yP9/nqYZ3brO
- eYwUP3SSmRdXRKIR5EjJBc8cpYY7mWdbMyVyWq2tJFnjXmEAvGFIf60lAOmw8X7c3hBg
- NonQezkt4IO5Kpho0y/sElLb18BQdbXNaN1cVH1JJAt4FBL46JfXFJ03v2p0sfnyGVej
- KJOTOxrKU+ew4NBGWLsEEi4NwO8pgxrTbSqon4a7xSOGn1mZB+9ylP15bLJWFvC9wJxP
- sPgc3QEef3nYq0FYy3XZIGjdlhUT3kPxH4Dan8W0OzsnSe9484RAc3nncgyjMeVjz8jH
- huug==
-X-Gm-Message-State: AOJu0YyCJ4QU4nOr+Ltl8wrxZNrAxW8MpcoQ8wlvT5hsEN3zIBvOUIVo
- Qc+cSS7QIYvul32EySASKyw2+GwOjmAKMq7FWzd56RUcMWclXS55LOsf6mwUvWs=
-X-Google-Smtp-Source: AGHT+IHkYyvHPJsqwbhm2Q0RxmSS2y6Vokap7+qwWcLniJ7Cg/lODrFrSWUyfa9YEXzQXIWFGVxycg==
-X-Received: by 2002:a05:6808:15a9:b0:3c8:6468:73f6 with SMTP id
- 5614622812f47-3d1a85ec475mr13022033b6e.43.1716841096036; 
- Mon, 27 May 2024 13:18:16 -0700 (PDT)
+ bh=zrONe/EFWyCI1eKvp64j48+4/0bf+PcvS1oyOLCrLD0=;
+ b=FSYa5WxqkeUFX2QAE7vFxUJVZ4lOJbKv1B8VKqvPM8G/OFCY4a4HqxSQputwXy6zIo
+ 9ulkmjZmRVNwfcmEpAzIJzBAdncPso31bD5TmdCVh18LowkMEbPW8+cIJ41Wi+d3C24i
+ xwriihlN4s3cJpR/i+XJtrAywfv1asfg7RChaed/CWigCl5fkurifi650+cm7FhP2iC1
+ neNpb79mZGC/yxMAD53PqFiv9EzLoDZlCgXDEACl6cCaZ1D2K6jfJKa/wlOyEUTSRvD+
+ KDl3QQJHiJ8CSzcoiXUK7gjEWHX847RCxqtdAGjZUbwNwpH21c+6pNC4s8wvbYa7CcHh
+ 2CEw==
+X-Gm-Message-State: AOJu0Yw+fyWRewheu23Lodcof9v7Ny3nrnJNNKHGgnU4Sv/hdRRf3V74
+ mrCZeZ6N8MGH6gj/TM7keQV6Oirpog8ZSWFWUmd5ktNfhaY+HeshRyNZAZKi5Y0Aq8mXd5pNfOT
+ x
+X-Google-Smtp-Source: AGHT+IFo/Zpk1ZajvW3TOAwcnC7fWnIAiZSOa9WnhWB5gzJ8Vz2NypekC/CMdG/HnXOyY44S4Xwqwg==
+X-Received: by 2002:a05:622a:389:b0:43a:a89d:ee8 with SMTP id
+ d75a77b69052e-43fb0e88d31mr106653891cf.58.1716845634120; 
+ Mon, 27 May 2024 14:33:54 -0700 (PDT)
 Received: from bill-the-cat ([189.178.170.52])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6ad69b3650csm25733496d6.122.2024.05.27.13.18.15
+ d75a77b69052e-43fb16bffecsm37605131cf.1.2024.05.27.14.33.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 May 2024 13:18:15 -0700 (PDT)
-Date: Mon, 27 May 2024 14:18:13 -0600
+ Mon, 27 May 2024 14:33:53 -0700 (PDT)
+Date: Mon, 27 May 2024 15:33:50 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, tharvey@gateworks.com
-Subject: Re: Pull request for tpm-master-27052024
-Message-ID: <20240527201813.GL2568172@bill-the-cat>
-References: <20240527061504.19822-1-ilias.apalodimas@linaro.org>
+To: Benjamin Schneider <bschnei@gmail.com>
+Cc: u-boot@lists.denx.de, Benjamin Schneider <ben@bens.haus>,
+ Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
+ Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Subject: Re: [PATCH] configs: add mvebu_espressobin_ultra-88f3720_defconfig
+Message-ID: <20240527213350.GM2568172@bill-the-cat>
+References: <20240527190737.49025-1-ben@bens.haus>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="1FK69R6GL3nbGTD0"
+ protocol="application/pgp-signature"; boundary="JjA18GuE7butWGwM"
 Content-Disposition: inline
-In-Reply-To: <20240527061504.19822-1-ilias.apalodimas@linaro.org>
+In-Reply-To: <20240527190737.49025-1-ben@bens.haus>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,67 +94,44 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---1FK69R6GL3nbGTD0
+--JjA18GuE7butWGwM
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, May 27, 2024 at 09:15:04AM +0300, Ilias Apalodimas wrote:
+On Mon, May 27, 2024 at 12:07:35PM -0700, Benjamin Schneider wrote:
 
-> Hi Tom
+> Add support for a Marvell Armada 3720 device variant
 >=20
-> I know it's not early in the release and although this contains a new fea=
-ture
-> apart from fixes, I prefer this going into -master. The added feature
-> is on a TPM cmd and is harmless. If you only want the fixes please let me
-> know and I'll send the rest in -next
+> Signed-off-by: Benjamin Schneider <ben@bens.haus>
+> ---
 >=20
-> The following changes since commit a7f0154c412859323396111dd0c09dbafbc153=
-cb:
->=20
->   Prepare v2024.07-rc3 (2024-05-20 10:05:16 -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-tpm/ tags/tpm-master-27=
-052024
->=20
-> for you to fetch changes up to 89aa8463cdf3919ca4f04fc24ec8b154ff56d97e:
->=20
->   tpm-v2: allow algorithm name to be configured for pcr_read and pcr_exte=
-nd (2024-05-27 09:00:27 +0300)
->=20
-> The CI https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/20=
-873
-> had no issues
->=20
-> Please consider pulling
->=20
-> Thanks
-> /Ilias
->=20
+>  .../mvebu_espressobin_ultra-88f3720_defconfig | 106 ++++++++++++++++++
+>  1 file changed, 106 insertions(+)
+>  create mode 100644 configs/mvebu_espressobin_ultra-88f3720_defconfig
 
-Applied to u-boot/master, thanks!
+You need to update the relevant MAINTAINERS file too:
+board/Marvell/mvebu_armada-37xx/MAINTAINERS
 
 --=20
 Tom
 
---1FK69R6GL3nbGTD0
+--JjA18GuE7butWGwM
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZU6oUACgkQFHw5/5Y0
-tyxqpgwAkDjHcEFOkEKiWdKlWezKBvUGVOO7R0yNLhM5wSbX/XvKBhLNOdQO0eyj
-biMnmwnLGTLqUXcmUiETmi2lKV51TN3nW1ppD90XyOy8OmLzPzAudPagMz1lsjYQ
-K4MGFd1r2w50VkFzdNXLuD9jiNRwYYy2nuZtDKk0K+F+9nMzpdRZyirZlKxG2l/N
-EPnSmykl5LOYIHkGLD+JkUWELKncfWiyStWdhoxrXfomsT+zRbSa6AdcJB+FmHb1
-TKdt4QJ3ZUcQubgYxJSi6DmsRVyOL416UAw9ucUM/RyN6xuYiZdJ0dPsy1SRKeLE
-a+soEc9qCM13ACl6VL404e2Iza0A2kc5+1a2qqWPP/6d9Ly/9tunvupBx1iocOyf
-VSVUdPKkBsmBnSwIZLXd7u6U+KBMXdGD7Dl6G4z5VhAdTwyWmiuj21JpIGZEIqNB
-/I4fHvhHbZggbMDNTbreovstej8H/XYRorcNqPnZeR5O6RY5u15rfMptVE7R3GDi
-fDn8vFJf
-=vRVI
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZU/DsACgkQFHw5/5Y0
+tyxUOQwAhpysIdscf4tpUWeieHCZ70rYtU/dgaK14uokNZ4++aCr2JZt8m+Js7nb
+bgMeH0F3dghkUajFmXjx0vPm6NFp5IywfFeBI+UYgCbEYVWERZSfBewX5t/7B+2J
+QDOg9OoUVIaj1wdS0FjfFq+fJIZwcuqsBoYaNgTtAE0n/LRTQIh0ghDzddP/6RmA
+/wjzHsSaO/saybQ6d/c7q+gUw2BkBO5FyEJ41NtLr7ysERhn7JRlYA3EXxlTKoy5
+4XITqzgm0Pz4fzQVW/EfF34EXc71KnSMU+VA8aYe7KyOrQsQXOAL1zqZC+7ryfV5
+EdmMJ9BQnXY9q5fW98LMoNlU2eTTXM60YuDzGoHh9sQLN6BevDAQwxWVOJzKvuUC
+A50IdS4DsqXJ5xpw24vmgUEG6uLpjnGssFCjxYcXXRMt0zpdL7uVx120Mmg9uRj0
+ZWlbPtdp+5vO01mmwMVu53NZQLI9iW7DUbfSXIGfZdoSt1zpFMQgOd3AJDbplZpz
+huhIfZ1x
+=1WjF
 -----END PGP SIGNATURE-----
 
---1FK69R6GL3nbGTD0--
+--JjA18GuE7butWGwM--
