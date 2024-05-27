@@ -4,78 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AA72C25B74
-	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 12:48:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1024DC25B7C
+	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 12:48:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7581788356;
+	by phobos.denx.de (Postfix) with ESMTP id D274988361;
 	Mon, 27 May 2024 14:47:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=edgeble.ai
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=edgeble-ai.20230601.gappssmtp.com header.i=@edgeble-ai.20230601.gappssmtp.com header.b="kkqF4mjG";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="csQyZVgh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67C5E88221; Mon, 27 May 2024 09:51:43 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 6E7AA87D74; Mon, 27 May 2024 10:58:05 +0200 (CEST)
+Received: from mail-vs1-xe35.google.com (mail-vs1-xe35.google.com
+ [IPv6:2607:f8b0:4864:20::e35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D2DF881E7
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 09:51:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CF447882AB
+ for <u-boot@lists.denx.de>; Mon, 27 May 2024 10:58:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=edgeble.ai
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anand@edgeble.ai
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-57869599ed5so1751321a12.2
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 00:51:41 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=liujianfeng1994@gmail.com
+Received: by mail-vs1-xe35.google.com with SMTP id
+ ada2fe7eead31-48a395d85d4so725240137.0
+ for <u-boot@lists.denx.de>; Mon, 27 May 2024 01:58:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=edgeble-ai.20230601.gappssmtp.com; s=20230601; t=1716796301; x=1717401101;
- darn=lists.denx.de; 
+ d=gmail.com; s=20230601; t=1716800281; x=1717405081; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=GHGUy2JevXhuqB4SmnSjeLXdWdWubLr9fAsYgTYTH0Y=;
- b=kkqF4mjGiYbaHsrPkNqB7EBnnteqgMJUUG+JvD1LLigsTBqks3pTCYVRT42oYRgHPJ
- PwWOwHbvHCrdJsfc1Vt57yFC5Mpfymc2diyx/FKyuwVPXhmBd2A6RFLADmF1OfyBf5kJ
- 4hSBFkvzwu7Qu31CGd6s5bD+3VvibbuMvglSi8kG510CwCio44brQeTcfdrWsfLECMh2
- zvAR99XSgrqWcRGSW+vg7fo2VI9cTr39SbzAPSjg0iEB+WRydgYFL/ga3U6JVM80bq6L
- aqWrNKifmR41kpKY/73R8PbSl5RQVq4o0v0SQmSOj+INRhhW+x2aR+awuF81BnZ9znAL
- n4cQ==
+ bh=ktyWdAC3D+l+bJUVH07zDbe4ynXJnIzhMV+YLYti5Vo=;
+ b=csQyZVghiD5PqvCfrh2+UIjylPYTHSpVfUIbe5I81zZz7Kx0PvJAaziSgHJzpl52Ms
+ v17lkKUyy3ApwT2fOGunP/MC+ceLvXhEB2/uj690StXCKy/n/HqqVE9uOXb/o0xEzYkw
+ Wr3w7RvXgfNZbEinRCDXMNdxAFZjZMdJFC9uqXJ6MILdcZ7HhyJf8uwA0Cu1GtN/Dxmn
+ rQwon4Jg0rPfiESAx4wmJhwpjOYe0fcE+Ych9/i3m7AHcjSZ2uAjWaJ3xj8q5K7z79EC
+ /Qa2+TQ/edA39lZ+xFRfFNdrKxhnyOSL1jU+mbqvJ6DE51K/lZ38iAhvaTFIiSYAet7P
+ gP2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716796301; x=1717401101;
+ d=1e100.net; s=20230601; t=1716800281; x=1717405081;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=GHGUy2JevXhuqB4SmnSjeLXdWdWubLr9fAsYgTYTH0Y=;
- b=lOrt0R8p613D9hgdmWWXcJcyN6YEM62GP7zWMLQet9CG05VO6lDrUoJIOXhA15iziC
- RSHHLHZ+YXCq5HjMD1xxI+sOjojcA//g7FKsG9PheadP2/88MGyDWXw5AzrVozCKma8J
- h1INPqytV9M5A4MJ/Kr0/yKXrOhYvT8cqKLf/w71AV9y+NBmXxJ++r+Nh6vsHOb3Defn
- NITIf3kJuA23qYjRZHCZv8BjTf9dHOc8waalEN14dJNtN+edScosZW6PKqdzVFj6SKRm
- a54tdbQbP4rGYWA0QfLz0umsCut23UNLNgChj3mta52l+9qcSIUR8O87HgN7fe1RSpge
- Yf6w==
+ bh=ktyWdAC3D+l+bJUVH07zDbe4ynXJnIzhMV+YLYti5Vo=;
+ b=pQsaL82CVGOJUzEnLd+8n5XHqN41JnZZdvMlkujynNzQZTXEJGPFW7aDcHTq/3db8k
+ MaNLt998NAHQd5l1Arcr0cAspTM5MLHkrs7/zCDTQZN+PJsRM5oXsfkhkEmLaTi+y/6W
+ 6DPAlMiGjF0iRVz1HfqkxzOKDQKeZSdlSvZpg3lJTd07RV9+QCt3Y00njwInoa/l4udx
+ xWVGYRhWma903kuZi3Npw6d01sNltZJ8zLQLBxsWox1qnOT82Ffh6gWaMZAvQUnRHfHt
+ UZ/HSsqsmKQMYyzMh6Qs0x8AtUXbJpVkh08SdQyrXjNES4lepRfXU2e476K7+h89WB2T
+ ap5g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUDUZiJGGTKVEPgWxE635kkuJEN+tHFzdX0EPC6sBI3pLfnhLmvUpRJMR7S6ZUYnDg7PRyh5Nyq2mpGWXWw+532quqDFQ==
-X-Gm-Message-State: AOJu0Yx1jF5UWrTI0NfNJijA12bqynW0vN4e5k2dQBPh/4oKH7BVwnvp
- GKmo4KW43V7+2IGsJI+m4Ymk11QTOKqH1X2JS/jkCrWQI+Gt3cvP866cR7XiPC38TC9MKwvfkq2
- EPpTa9K2atch9S0w+J+quHqJWUVATY6wkdyikOA==
-X-Google-Smtp-Source: AGHT+IHICi4l6G2aBr/kMVkhHbXwAh3Rld06EFfF4Vi1rdWg0hnFwoTkjGaG3zkYpJeWwOjQ58/Ct21RZTD4gHM/qGY=
-X-Received: by 2002:a50:9f2b:0:b0:578:57bd:3be0 with SMTP id
- 4fb4d7f45d1cf-57857bd3c1bmr4921466a12.16.1716796300760; Mon, 27 May 2024
- 00:51:40 -0700 (PDT)
+ AJvYcCXDxPdcjOG2jP75sSRU6WFY1a2eVGdmhz83mEfjAsKXRTZK5N4636xLJz7mJUYiNTVPw49wGcrJG8k3xD5+gZv4/jYxfA==
+X-Gm-Message-State: AOJu0YyGJ6LGgDLe/dnfs2OPBgS9EShKnWl30DflvPbsGgfvp5IbK5P9
+ jCHBZgl4BdUQaTXGw1LE+wVNosrAOg9Qh6Gvkw9bC8uJMfEF+Beb0g4BluZKdoNpYD308WHwkR4
+ qkSndPTsjKF0+ZnKzAwS4uJPiwGo=
+X-Google-Smtp-Source: AGHT+IHZjfiujgkMP8alWpGKCNjsmYXs8BedTXWeIQJnc4BWxXeiwRbtrgHwd2lb1MI5GzvujxHJ25Yop9vRbKUHAcY=
+X-Received: by 2002:a05:6102:d89:b0:47b:620b:c2a3 with SMTP id
+ ada2fe7eead31-48a64697b3cmr1390198137.32.1716800281561; Mon, 27 May 2024
+ 01:58:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240527063915.6205-1-jagan@edgeble.ai>
- <20240527063915.6205-2-jagan@edgeble.ai>
-In-Reply-To: <20240527063915.6205-2-jagan@edgeble.ai>
-From: Anand Moon <anand@edgeble.ai>
-Date: Mon, 27 May 2024 13:21:32 +0530
-Message-ID: <CACF1qncXJnunQQ6QcgXj5Gi6yZ_u0z9FwJOsz4QmsK8YueBcDA@mail.gmail.com>
-Subject: Re: [PATCH 2/2] rockchip: rk3588-edgeble: Add USB OTG support
-To: Jagan Teki <jagan@edgeble.ai>
-Cc: Kever Yang <kever.yang@rock-chips.com>,
+References: <20240522165801.1871915-1-liujianfeng1994@gmail.com>
+ <7e603c4d-bf76-4b38-894c-30d2cf128217@cherry.de>
+ <CAFA6WYNZh4BH6y_h_BkkVgHi3rNvsWd++mC2BDwqOF-NB8eHtQ@mail.gmail.com>
+In-Reply-To: <CAFA6WYNZh4BH6y_h_BkkVgHi3rNvsWd++mC2BDwqOF-NB8eHtQ@mail.gmail.com>
+From: Jianfeng Liu <liujianfeng1994@gmail.com>
+Date: Mon, 27 May 2024 16:57:51 +0800
+Message-ID: <CACQ+3oZs6xt5d3aFCBB3vesMqj3ebOoAqxkg=26Z3JMX5dU-vg@mail.gmail.com>
+Subject: Re: [PATCH v2] board: rockchip: add ArmSoM Sige7 Rk3588 board
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Christopher Obbard <chris.obbard@collabora.com>,
+ Elon Zhang <zhangzj@rock-chips.com>, 
+ Eugen Hristev <eugen.hristev@collabora.com>, Jagan Teki <jagan@edgeble.ai>, 
+ John Clark <inindev@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Joshua Riek <jjriek@verizon.net>, Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Massimo Pegorer <massimo.pegorer+oss@gmail.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>, 
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>, 
  Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Sam Edwards <cfsworks@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, Tianling Shen <cnsztl@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Weizhao Ouyang <weizhao.ouyang@arm.com>
 X-Mailman-Approved-At: Mon, 27 May 2024 14:47:49 +0200
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,156 +110,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-hi Jagan,
+Hi all,
+>However... it seems we'll likely need to also cherry-pick patches for
+>the GPU (should probably be straightforward as nothing would be using
+>the GPU anyway in U-Boot) and the USBDP PHY... but this one we would
+>need to update all -u-boot.dtsi for rk3588(s) boards that have it
+>already to make it use the new label/DT, make sure that the driver still
+>works... etc. Maybe not a small feat, but someone will have to do it at
+>some point anyway :)
+Kernel v6.10-rc1 is released and now u-boot is not synced to v6.9.
+What about syncing with this procedure:
+1, Sync upstream dts to v6.9 with command update-dts-subtree.sh pull.
+2, Cherrypick all commits of rk3588s.dtsi from v6.10-rc1.
+3, Cherrypick all commits of rk3588*.dts* from v6.10-rc1, which will
+include dts of new board armsom-sige7.
+4, Add armsom-sige7 to u-boot.
 
-On Mon, 27 May 2024 at 12:09, Jagan Teki <jagan@edgeble.ai> wrote:
->
-> Add support for USB OTG with UMS to program eMMC.
->
-> Add it for Edgeble NCM6A, NCM6B.
->
-> Signed-off-by: Jagan Teki <jagan@edgeble.ai>
-
-Reviewed-by: Anand Moon <anand@edgeble.ai>
-
-
-> ---
->  .../dts/rk3588-edgeble-neu6a-io-u-boot.dtsi    | 18 ++++++++++++++++++
->  .../dts/rk3588-edgeble-neu6b-io-u-boot.dtsi    | 18 ++++++++++++++++++
->  configs/neu6a-io-rk3588_defconfig              |  9 +++++++++
->  configs/neu6b-io-rk3588_defconfig              |  9 +++++++++
->  4 files changed, 54 insertions(+)
->
-> diff --git a/arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi b/arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi
-> index 88f3f7eee2..534d9f8a2c 100644
-> --- a/arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi
-> @@ -15,3 +15,21 @@
->         bus-width = <4>;
->         status = "okay";
->  };
-> +
-> +&u2phy0 {
-> +       status = "okay";
-> +};
-> +
-> +&u2phy0_otg {
-> +       status = "okay";
-> +};
-> +
-> +&usbdp_phy0 {
-> +       status = "okay";
-> +};
-> +
-> +&usb_host0_xhci {
-> +       dr_mode = "peripheral";
-> +       maximum-speed = "high-speed";
-> +       status = "okay";
-> +};
-> diff --git a/arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi b/arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi
-> index 289578803e..b3d17a60ce 100644
-> --- a/arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi
-> @@ -15,3 +15,21 @@
->         bus-width = <4>;
->         status = "okay";
->  };
-> +
-> +&u2phy0 {
-> +       status = "okay";
-> +};
-> +
-> +&u2phy0_otg {
-> +       status = "okay";
-> +};
-> +
-> +&usbdp_phy0 {
-> +       status = "okay";
-> +};
-> +
-> +&usb_host0_xhci {
-> +       dr_mode = "peripheral";
-> +       maximum-speed = "high-speed";
-> +       status = "okay";
-> +};
-> diff --git a/configs/neu6a-io-rk3588_defconfig b/configs/neu6a-io-rk3588_defconfig
-> index ac281e6539..6e50d06458 100644
-> --- a/configs/neu6a-io-rk3588_defconfig
-> +++ b/configs/neu6a-io-rk3588_defconfig
-> @@ -24,6 +24,7 @@ CONFIG_SPL_PAD_TO=0x7f8000
->  CONFIG_SPL_ATF=y
->  CONFIG_CMD_GPT=y
->  CONFIG_CMD_MMC=y
-> +CONFIG_CMD_USB_MASS_STORAGE=y
->  # CONFIG_CMD_SETEXPR is not set
->  # CONFIG_SPL_DOS_PARTITION is not set
->  CONFIG_SPL_OF_CONTROL=y
-> @@ -33,6 +34,7 @@ CONFIG_SPL_DM_SEQ_ALIAS=y
->  CONFIG_SPL_REGMAP=y
->  CONFIG_SPL_SYSCON=y
->  CONFIG_SPL_CLK=y
-> +# CONFIG_USB_FUNCTION_FASTBOOT is not set
->  CONFIG_ROCKCHIP_GPIO=y
->  CONFIG_SYS_I2C_ROCKCHIP=y
->  CONFIG_MISC=y
-> @@ -42,6 +44,8 @@ CONFIG_MMC_DW_ROCKCHIP=y
->  CONFIG_MMC_SDHCI=y
->  CONFIG_MMC_SDHCI_SDMA=y
->  CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PHY_ROCKCHIP_USBDP=y
->  CONFIG_SPL_PINCTRL=y
->  CONFIG_PWM_ROCKCHIP=y
->  CONFIG_SPL_RAM=y
-> @@ -49,4 +53,9 @@ CONFIG_BAUDRATE=1500000
->  CONFIG_DEBUG_UART_SHIFT=2
->  CONFIG_SYS_NS16550_MEM32=y
->  CONFIG_SYSRESET=y
-> +CONFIG_USB=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_USB_GADGET=y
-> +CONFIG_USB_GADGET_DOWNLOAD=y
->  CONFIG_ERRNO_STR=y
-> diff --git a/configs/neu6b-io-rk3588_defconfig b/configs/neu6b-io-rk3588_defconfig
-> index c01e5fb0d0..f2eb650f19 100644
-> --- a/configs/neu6b-io-rk3588_defconfig
-> +++ b/configs/neu6b-io-rk3588_defconfig
-> @@ -24,6 +24,7 @@ CONFIG_SPL_PAD_TO=0x7f8000
->  CONFIG_SPL_ATF=y
->  CONFIG_CMD_GPT=y
->  CONFIG_CMD_MMC=y
-> +CONFIG_CMD_USB_MASS_STORAGE=y
->  # CONFIG_CMD_SETEXPR is not set
->  # CONFIG_SPL_DOS_PARTITION is not set
->  CONFIG_SPL_OF_CONTROL=y
-> @@ -33,6 +34,7 @@ CONFIG_SPL_DM_SEQ_ALIAS=y
->  CONFIG_SPL_REGMAP=y
->  CONFIG_SPL_SYSCON=y
->  CONFIG_SPL_CLK=y
-> +# CONFIG_USB_FUNCTION_FASTBOOT is not set
->  CONFIG_ROCKCHIP_GPIO=y
->  CONFIG_SYS_I2C_ROCKCHIP=y
->  CONFIG_MISC=y
-> @@ -42,6 +44,8 @@ CONFIG_MMC_DW_ROCKCHIP=y
->  CONFIG_MMC_SDHCI=y
->  CONFIG_MMC_SDHCI_SDMA=y
->  CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PHY_ROCKCHIP_USBDP=y
->  CONFIG_SPL_PINCTRL=y
->  CONFIG_PWM_ROCKCHIP=y
->  CONFIG_SPL_RAM=y
-> @@ -49,4 +53,9 @@ CONFIG_BAUDRATE=1500000
->  CONFIG_DEBUG_UART_SHIFT=2
->  CONFIG_SYS_NS16550_MEM32=y
->  CONFIG_SYSRESET=y
-> +CONFIG_USB=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_USB_GADGET=y
-> +CONFIG_USB_GADGET_DOWNLOAD=y
->  CONFIG_ERRNO_STR=y
-> --
-> 2.34.1
->
+Best regards,
+Jianfeng
