@@ -4,102 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C35CDC25B74
-	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 17:19:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6FFAC25B74
+	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 18:07:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F200883A5;
-	Mon, 27 May 2024 19:18:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 06CD287DD3;
+	Mon, 27 May 2024 20:07:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zkjv5vD6";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="NcwDpuKu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEFE08837C; Mon, 27 May 2024 19:18:03 +0200 (CEST)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5473C87E3F; Mon, 27 May 2024 20:07:08 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EA988824B
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 19:18:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E9CE587DCD
+ for <u-boot@lists.denx.de>; Mon, 27 May 2024 20:07:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2e95a1d5ee2so67168051fa.0
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 10:18:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716830280; x=1717435080; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=55O1ljQr/VZ6FjQQPUiTQTuEOls6xKyTMN6AV8avyHQ=;
- b=zkjv5vD6cRwMVndRV+VoKmywKto2izPo1hVlMugfzuUaNw4Q1eBOc5Y8r8uh0ZQEkJ
- 8YZDo4PylAhUqgpjuUusaJjBCqdonwNFgprpObR+abfdZvVL9/lmRJPkKPit8zeGTxqt
- cbclcR2wUcLysjSYDneju8TCOFhkX2efpGnzRif+D256tT17KlcMNS+MLuOuv6+dLAVv
- i8UFI5NArFB+hly2KMDy0kBZXz7QA2TAAJfyZKnTjzzuFf/YLf+5dUOO0zCh5yrwPJN4
- GSoUOo1+4mArS+KUL5lmQIrUYr3HD4KyDdtw4nlfb6HywCxqiUx4/Xtc3AY3mTL0Zb1p
- DGLA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716830280; x=1717435080;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=55O1ljQr/VZ6FjQQPUiTQTuEOls6xKyTMN6AV8avyHQ=;
- b=tD1qf+DJJzXY1arD0LZrtm0tgnDy+CP43UpAxTE3tnl+gBZcdBxPhUCX6dJuGkH10Z
- QO3hyCFNCXL2L8QUPeRaF1v1k0cCg/f9P3ddttJJskY/CwcjAtuRwXTbGO3zbwWwfdxz
- hPzr1EuYaW46RnJ/ou70s40DmFgrLougEgGCmC5KYfW93qiZ7Y2KR7jzmkepHQUO8QuK
- X0+eqbsNSsqOnx6725SNImUpHilSRYKt46GL/c3StJh9iODLHPQ1oWKV8rzt3+h2QlQi
- 2Y5bZsLZtKGEbptJ3DjynHQDdedPS/0mO41K/HE31lbAM0AyeB2+VgdS9gWLY/PYyBpW
- EhrQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUPmfpCLso1z0h9ZoxJtSsrq06Bnc8Ivqrk/3C+iJ9tFZfpj1FhQKCe4iomSSIuIyd6n1KLcFSw85Rqg3oC2v6vg3Ouzw==
-X-Gm-Message-State: AOJu0YwNx3rObBmptrtgHUa5BjYevsOcKgb4qGfXoFKBJ1BnxMU8NVvn
- Ieyx6kT00HLDvYH9vysjB2ZhyEuYWd3IWjP4fRVPCgXRGAlolw5zqhoSOzaRtO4=
-X-Google-Smtp-Source: AGHT+IH4meV+oVou9g0kyJOkmKI2MpWPHavjz2SmRgN/xQC70TRSu29wRGmOBO3MnXUG0GF4pEwBEA==
-X-Received: by 2002:a2e:b784:0:b0:2e0:6313:fe3a with SMTP id
- 38308e7fff4ca-2e95b256875mr82607801fa.35.1716830280639; 
- Mon, 27 May 2024 10:18:00 -0700 (PDT)
-Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::8bb3])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a626cc8b874sm509469266b.163.2024.05.27.10.17.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 May 2024 10:18:00 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 27 May 2024 19:17:56 +0200
-Subject: [PATCH v2 8/8] qcom_defconfig: enable capsule update support
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=921e=M7=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1716833187;
+ bh=ZkkvWb919ErG3/AmJJybiv/b6nfjzXB9K1zrTIVlftI=;
+ b=NcwDpuKu6s+guHm5zJaTbys9PVEdp6bSA5G1TGd8I6M1D+Z8KM0sFExtWgHZgkC9QpZeobsEJ
+ z+7Zst870Vpk9BEVAiftlyEXvDM1AZm5zFA7OVIEcfp00prR7b7Drn5NULhsGicyCCRvwKgg497
+ kE74beOdS9z/6Q05tuINchh27GjQZy3h0hi2YUP2oSdSz/EaDREeS5vmGo9MuV+VLX/XpoRJJLF
+ hfpOxXRjpnfJ3COeiMa5QWZvCntmZVu/r05YeBtlgMYnaZHi/vt9LgGJaNPWuMEl2HX9izKbwhI
+ 2RrXFrSfsG2biNOKhQTYKsMp7jAbrXivgtxUHGd7mrew==
+Message-ID: <874c1629-5e6c-411c-affc-4a084fe9cb7b@kwiboo.se>
+Date: Mon, 27 May 2024 20:06:19 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 0/7] add ArmSoM Sige7 Rk3588 board
+To: Jianfeng Liu <liujianfeng1994@gmail.com>
+Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, Boris Brezillon
+ <boris.brezillon@collabora.com>, Caleb Connolly
+ <caleb.connolly@linaro.org>, Christopher Obbard
+ <chris.obbard@collabora.com>, Diederik de Haas <didi.debian@cknow.org>,
+ Eugen Hristev <eugen.hristev@collabora.com>, FUKAUMI Naoki
+ <naoki@radxa.com>, Heiko Stuebner <heiko@sntech.de>, Jagan Teki
+ <jagan@edgeble.ai>, John Clark <inindev@gmail.com>, Joshua Riek
+ <jjriek@verizon.net>, Kever Yang <kever.yang@rock-chips.com>, Marek Vasut
+ <marex@denx.de>, Massimo Pegorer <massimo.pegorer+oss@gmail.com>, Mattijs
+ Korpershoek <mkorpershoek@baylibre.com>, Michal Simek
+ <michal.simek@amd.com>, Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Quentin Schulz
+ <quentin.schulz@theobroma-systems.com>, Sebastian Reichel
+ <sebastian.reichel@collabora.com>, Simon Glass <sjg@chromium.org>, Sumit
+ Garg <sumit.garg@linaro.org>, Tianling Shen <cnsztl@gmail.com>, Tom Rini
+ <trini@konsulko.com>, Weizhao Ouyang <weizhao.ouyang@arm.com>,
+ u-boot@lists.denx.de
+References: <20240527170214.283988-1-liujianfeng1994@gmail.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20240527170214.283988-1-liujianfeng1994@gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240527-b4-qcom-capsule-updates-v2-8-47583d7ad428@linaro.org>
-References: <20240527-b4-qcom-capsule-updates-v2-0-47583d7ad428@linaro.org>
-In-Reply-To: <20240527-b4-qcom-capsule-updates-v2-0-47583d7ad428@linaro.org>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Lukasz Majewski <lukma@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
- u-boot-qcom@groups.io
-X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1806;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=VNSLJAo9B7sSe22NgfOx2tIo486F6kDAs5FBx9s0o8k=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmVMA+HUtpryZi6RJyne3OJ6GmJ7o+FQhSCFoJn
- Knvde6WgZyJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZlTAPgAKCRAFgzErGV9k
- tgN8D/4uSuGPZ1FvSDU6ubgZXJ90ToBAY+X+PdX3+Lt6O0dd+z3plShoePT6Mxc350Ocv7jNSDx
- MyvK/97phsI5lsZDWaQpfYPOuzwVCIw9vN1qNPKCxgVnkYz3p4hN+PZ0EKI3wqbWd060/Ub7Cfs
- /jXZdeFE4E5wMvtq5ZxBLTKfplXPiPHaOiycSRzOiOzOYEiJKyD6OmUn1UveOXd2AafXzJbFjhh
- f4WNThMiZbrcTcqgGbgyJG1QyV7Ck8LJeWx9XIFewkpCU8jaMSr/+3O+5OtEE9hiJr2/dBnJdCz
- oJLS0OWAMy66BcN3Pq/Y3QvV4j7PrnctqysZREhKVofripsThFCZ3Q9TlER6loLHfAWJbYRBkbd
- 3ckaMKwGLNFgfrELHCkxofVGei+IR7X20WbaeW7J8ggsVAIC5oOpk/nSVBKdUBKeFGkRlR/tHZc
- q0W+8mFAEmH/eDVwXCvO4kaZ9WGU/fi3aGMpiKn9ooZshoycFZxVrOvUUTNK5HCQUQJgzF6Y+IW
- fZ4UP9PRcMAn5aM3aLGn1oxFS9Cb+IrD1Iypn8L1fPZqMShV1PPd927W5tBc75mvS31vKIOvUU+
- u7EyEpxTpuP1OpkLeppTIkO3AUpSojlfdYbrdidD4YHsIK8vQ3jLsTB5UWlOMh5OKOLHTzOu+8g
- ZwYCGVJwsxum6JQ==
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 6654cba16d5775985ce00faf
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,71 +87,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable all the necessary options for capsule updates to work, as well as
-a few additional EFI features.
+Hi Jianfeng,
 
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- configs/qcom_defconfig | 13 +++++++++++--
- 1 file changed, 11 insertions(+), 2 deletions(-)
+On 2024-05-27 19:02, Jianfeng Liu wrote:
+> Devicetree of ArmSoM Sige7 is merged to kernel v6.10-rc1 with USBDP and
+> GPU nodes. So I use update-dts-subtree.sh to pick related commits of
+> rk3588s.dtsi, and then pick the commit of ArmSoM Sige7's devicetree.
+> I also did run command:
+> ./dts/update-dts-subtree.sh pull v6.10-rc1-dts
+> based on my work but there is a merge conflict of file:
+> dts/upstream/Bindings/Makefile
+> I think this should not be related to my work.
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index f2dfced4bc1e..3a0ada9fd418 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -19,33 +19,38 @@ CONFIG_LOG_MAX_LEVEL=9
- CONFIG_LOG_DEFAULT_LEVEL=4
- # CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_CMD_BOOTMENU=y
-+CONFIG_CMD_NVEDIT_EFI=y
- CONFIG_CMD_EEPROM=y
- CONFIG_SYS_I2C_EEPROM_BUS=2
- CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
- CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=5
- # CONFIG_CMD_BIND is not set
- CONFIG_CMD_CLK=y
-+CONFIG_CMD_DFU=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_UFS=y
- CONFIG_CMD_USB=y
- CONFIG_CMD_CAT=y
- CONFIG_CMD_BMP=y
-+CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_LOG=y
- CONFIG_OF_LIVE=y
- CONFIG_BUTTON_QCOM_PMIC=y
- CONFIG_CLK=y
-+CONFIG_CLK_STUB=y
- CONFIG_CLK_QCOM_QCM2290=y
- CONFIG_CLK_QCOM_QCS404=y
- CONFIG_CLK_QCOM_SDM845=y
- CONFIG_CLK_QCOM_SM6115=y
- CONFIG_CLK_QCOM_SM8250=y
- CONFIG_CLK_QCOM_SM8550=y
- CONFIG_CLK_QCOM_SM8650=y
--CONFIG_CLK_STUB=y
-+CONFIG_DFU_MMC=y
-+CONFIG_SYS_DFU_DATA_BUF_SIZE=0x200000
- CONFIG_MSM_GPIO=y
- CONFIG_QCOM_PMIC_GPIO=y
- CONFIG_DM_I2C=y
- CONFIG_SYS_I2C_QUP=y
-@@ -105,6 +110,10 @@ CONFIG_VIDEO=y
- CONFIG_VIDEO_FONT_16X32=y
- CONFIG_SYS_WHITE_ON_BLACK=y
- CONFIG_NO_FB_CLEAR=y
- CONFIG_VIDEO_SIMPLE=y
--CONFIG_HEXDUMP=y
-+CONFIG_SYMBOL_LOOKUP=y
-+CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
-+CONFIG_EFI_CAPSULE_ON_DISK=y
-+CONFIG_EFI_IGNORE_OSINDICATIONS=y
-+CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
- CONFIG_LMB_MAX_REGIONS=64
+I have only received the cover letter and patch 7/7 but have two quick
+notes:
 
--- 
-2.45.0
+This seem to be missing 2 patches from v6.10-rc1-dts for rk3588s.dtsi:
+- f6835a60a8a2 ("arm64: dts: rockchip: reorder usb2phy properties for rk3588")
+- ea9a34aa0d78 ("arm64: dts: rockchip: add rk3588 pcie and php IOMMUs")
+
+Probably better to fully sync the rk3588/rk3588s.dtsi-files to the
+v6.10-rc1-dts state.
+
+Also please add a commit that removes the usbdpphy-grf, usb2phy-grf,
+usbdp-phy, vo-grf and usb-grf related nodes from rk3588-u-boot.dtsi and
+rk3588s-u-boot.dtsi. The usb nodes in rk3588 -u-boot.dtsi-files should
+be obsolete after this series.
+
+Regards,
+Jonas
+
+> 
+> Changes in v3:
+> - Use update-dts-subtree.sh to pick upstream dts
+> 
+> Changes in v2:
+> - Fix alphabetical order of MAINTAINERS
+> - Use arch/arm/dts/rk3588-armsom-sige7* in board MAINTAINERS
+> - Remove spi flash related config
+> - Move kernel dts to dts/upstream/src/arm64/rockchip/
+> 
+> Boris Brezillon (1):
+>   arm64: dts: rockchip: Add rk3588 GPU node
+> 
+> Diederik de Haas (1):
+>   arm64: dts: rockchip: Fix ordering of nodes on rk3588s
+> 
+> Jianfeng Liu (2):
+>   arm64: dts: rockchip: Add ArmSom Sige7 board
+>   board: rockchip: add ArmSoM Sige7 Rk3588 board
+> 
+> Sebastian Reichel (3):
+>   arm64: dts: rockchip: fix usb2phy nodename for rk3588
+>   arm64: dts: rockchip: add USBDP phys on rk3588
+>   arm64: dts: rockchip: add USB3 DRD controllers on rk3588
+> 
+>  MAINTAINERS                                   |   1 +
+>  arch/arm/dts/rk3588-armsom-sige7-u-boot.dtsi  |  28 +
+>  arch/arm/mach-rockchip/rk3588/Kconfig         |  26 +
+>  board/armsom/sige7-rk3588/Kconfig             |  12 +
+>  board/armsom/sige7-rk3588/MAINTAINERS         |   7 +
+>  configs/sige7-rk3588_defconfig                |  93 +++
+>  doc/board/rockchip/rockchip.rst               |   1 +
+>  .../arm64/rockchip/rk3588-armsom-sige7.dts    | 721 ++++++++++++++++++
+>  dts/upstream/src/arm64/rockchip/rk3588.dtsi   |  72 ++
+>  dts/upstream/src/arm64/rockchip/rk3588s.dtsi  | 337 +++++---
+>  include/configs/sige7-rk3588.h                |  15 +
+>  11 files changed, 1215 insertions(+), 98 deletions(-)
+>  create mode 100644 arch/arm/dts/rk3588-armsom-sige7-u-boot.dtsi
+>  create mode 100644 board/armsom/sige7-rk3588/Kconfig
+>  create mode 100644 board/armsom/sige7-rk3588/MAINTAINERS
+>  create mode 100644 configs/sige7-rk3588_defconfig
+>  create mode 100644 dts/upstream/src/arm64/rockchip/rk3588-armsom-sige7.dts
+>  create mode 100644 include/configs/sige7-rk3588.h
+> 
 
