@@ -4,106 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D97AC25B74
-	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 21:34:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A606C25B74
+	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 21:34:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7580088307;
+	by phobos.denx.de (Postfix) with ESMTP id DBC3C88378;
 	Mon, 27 May 2024 23:34:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="X7BORRuo";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="D18ksH69";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AED6B87A09; Mon, 27 May 2024 17:34:44 +0200 (CEST)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
+ id 2F9FC87D1A; Mon, 27 May 2024 19:02:35 +0200 (CEST)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83AC788268
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 17:34:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F336187E95
+ for <u-boot@lists.denx.de>; Mon, 27 May 2024 19:02:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-6ad86f3cc34so3797826d6.1
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 08:34:41 -0700 (PDT)
+ spf=pass smtp.mailfrom=liujianfeng1994@gmail.com
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-1f44b59f8daso22933635ad.2
+ for <u-boot@lists.denx.de>; Mon, 27 May 2024 10:02:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1716824080; x=1717428880; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=CK6nGuKIObCb639REc5vgXdy2ui3LrFVSBO3YUUvlc4=;
- b=X7BORRuoahwg1SSt6vENJRGAp+mQbo1Y4osbR2x6H2G2cTMX5fUAem68t/JuufbL8w
- E4J+OH+pXeSzeH2vdjYPWbMVcq+ZXRW7YrVQ9FpgEEI/6yu+yMo1R3NdgMCqOlkcmT/F
- nAYrENAv8AQJGOwvI8HXjB4v5V1yMNs5r+bp4=
+ d=gmail.com; s=20230601; t=1716829351; x=1717434151; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=B1UkOGVUB/j5ZaiE03JzefRbnIkrH36feC+aiIE7/P4=;
+ b=D18ksH69cZlmts1i4JXfFnbQCkGGYlDs4+q5WNA25hB2BrgbC5eU/XxHcDfpeFGDp4
+ xSOxAHSW5WLLgsbaqn6eTAt/UfJY5P6tpdepJ+iK1kh8Nzk5M3Hsy20C9oLT+Rw64Bqc
+ iUwFdod+y7NLPC1LuRVtoU2f6NscS6aMDcbHSCLguXYJes6YIWs+LhBjTEYI5FV5LxSm
+ Q3NMdync9nbsigPFgMNEsZx8gvcVKZAM8+qcTNk5DLLLwh6hIrLlkvb/wOS2twrYiGhf
+ M3EBggEF6zsatPR3PgcLdGMkA8EZDrnRqsu4C6IwHgOvF+0zlTAaN+jVIhyPafAVHVxf
+ z+bQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716824080; x=1717428880;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CK6nGuKIObCb639REc5vgXdy2ui3LrFVSBO3YUUvlc4=;
- b=D7xsEt5l2u589cfVVRRDiuPxA9lQSmRg8MFjLiCTqjGi0X7UYvh7Pr8j3VCFDosyEQ
- +pBSjku0UVN+XZ4sF/aOXHZrInHRhBmk1ALmBu6CoezkurK1+g5komIYIrn0qFd+fcxO
- dvtfWWLESaUWLhBAgl/+0OOvdI562f/yXqoUWnkLt84qXyMDr19ObdICupTs9T2FmsMS
- lR5/h1kTdqXxxXYIKbxQTbrDHGV1iApmZ8IeHl7RX0S0cHMPxLcpLtzZ/CZHTQ4OQqQy
- YUSi2L8JRxP0tdIIcgWUY2BlXLpTzjM7cXpJKQKzMcXYhN1vh6DJwkdUh5Y6o0nOdwNa
- lkrA==
-X-Gm-Message-State: AOJu0Yxv/9YOSJ06TAMYMZwYiD0koBBmNaptQdWVsgyhT4iuid+L5ftH
- 35dI+uCY23LlB2TSc4iDgsUtSOcVu5QAAYZ168LvbtT1raMX2G02uspHuzOfCDM=
-X-Google-Smtp-Source: AGHT+IF4nmQq+gyDdZrd1PsRY6tD/HWTIgDt7SRyvoqhdcdzMVKsccOSgVtak7KAWxT5r73uY3raug==
-X-Received: by 2002:a05:6214:434a:b0:6ad:6cd7:72c6 with SMTP id
- 6a1803df08f44-6ad6cd77574mr85893186d6.15.1716824080179; 
- Mon, 27 May 2024 08:34:40 -0700 (PDT)
-Received: from bill-the-cat ([189.178.170.52])
+ d=1e100.net; s=20230601; t=1716829351; x=1717434151;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=B1UkOGVUB/j5ZaiE03JzefRbnIkrH36feC+aiIE7/P4=;
+ b=E9i/Nf5GNc21UF3L/tykxp0oUSvsWg4VUQmNdoU4F8AiMM1M5OQXd7nH0PqD+0VdQx
+ ikCB2Lt/zYRh/E05lX5t86EUxVOWXSX2RkVJHeWclDX3RtSCFYTmL2zzR7XCs3W4G2B7
+ Z297/sPC4Ikwtc4ptXIJppexLc2JBefL9l98kKu5KT4uQFLpuQ1FOSbRL7IXQ1HRt/ZG
+ jeMfTMHIa1WAdpoWEgjXvAhaUx3EzBVWYQY4ptVByUa2ecZg/xDmas564Wq6C56OSqSw
+ V162XkAJQKv2YFk+XGnkBZrZfo4h62lM0jaSYRcdc1hMZXX4ptn2OK9vyAjfoI67DY8u
+ g77A==
+X-Gm-Message-State: AOJu0YzVitHIkMeGpCMW1cSK93jARQnuco1rl1iuJEty3qrP+0HfR6PX
+ XP1/Yal9YVesHZhlvchC+kft7uHT16hTVsUPZFcrqWltd/cFNEOtfKeyoOo8o8g=
+X-Google-Smtp-Source: AGHT+IGyxhVGOR9GcJZ3+4OEIbbcnZIIMQ1LehqpbzepoTPKjkV/XO7GA6djrDOyy4EaxUpFxEjaPA==
+X-Received: by 2002:a17:902:f687:b0:1f3:5346:35f4 with SMTP id
+ d9443c01a7336-1f44873dd4dmr102924665ad.35.1716829351110; 
+ Mon, 27 May 2024 10:02:31 -0700 (PDT)
+Received: from localhost.localdomain ([221.220.133.99])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6ad653e0a21sm27285796d6.81.2024.05.27.08.34.36
+ d9443c01a7336-1f44c757845sm63462095ad.5.2024.05.27.10.02.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 May 2024 08:34:39 -0700 (PDT)
-Date: Mon, 27 May 2024 09:34:34 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Mon, 27 May 2024 10:02:30 -0700 (PDT)
+From: Jianfeng Liu <liujianfeng1994@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Jianfeng Liu <liujianfeng1994@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Boris Brezillon <boris.brezillon@collabora.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christopher Obbard <chris.obbard@collabora.com>,
+ Diederik de Haas <didi.debian@cknow.org>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ FUKAUMI Naoki <naoki@radxa.com>, Heiko Stuebner <heiko@sntech.de>,
+ Jagan Teki <jagan@edgeble.ai>, John Clark <inindev@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Joshua Riek <jjriek@verizon.net>,
+ Kever Yang <kever.yang@rock-chips.com>, Marek Vasut <marex@denx.de>,
+ Massimo Pegorer <massimo.pegorer+oss@gmail.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Marek Vasut <marex@denx.de>,
- Simon Glass <sjg@chromium.org>, Greg Malysa <greg.malysa@timesys.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Shengyu Qu <wiagn233@outlook.com>,
- John Keeping <jkeeping@inmusicbrands.com>,
- Jesse Taube <mr.bossman075@gmail.com>,
- Sumit Garg <sumit.garg@linaro.org>, Bryan Brattlof <bb@ti.com>,
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Samuel Dionne-Riel <samuel@dionne-riel.com>,
- Joshua Watt <jpewhacker@gmail.com>, Sean Anderson <sean.anderson@seco.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Samuel Holland <samuel@sholland.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Alexey Romanov <avromanov@salutedevices.com>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Ion Agorria <ion@agorria.com>,
- Yanhong Wang <yanhong.wang@starfivetech.com>,
+ Michal Simek <michal.simek@amd.com>,
  Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, Baruch Siach <baruch@tkos.co.il>
-Subject: Re: [PATCH v2 01/14] net: introduce alternative implementation as
- net-lwip/
-Message-ID: <20240527153434.GH2568172@bill-the-cat>
-References: <cover.1716566960.git.jerome.forissier@linaro.org>
- <923f66b4a74d9c91c6d661e96dced8e1cbcdc7e0.1716566960.git.jerome.forissier@linaro.org>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Tianling Shen <cnsztl@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Weizhao Ouyang <weizhao.ouyang@arm.com>
+Subject: [PATCH v3 0/7] add ArmSoM Sige7 Rk3588 board
+Date: Tue, 28 May 2024 01:02:07 +0800
+Message-Id: <20240527170214.283988-1-liujianfeng1994@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Raoil4yn9fn3z+i9"
-Content-Disposition: inline
-In-Reply-To: <923f66b4a74d9c91c6d661e96dced8e1cbcdc7e0.1716566960.git.jerome.forissier@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Mon, 27 May 2024 23:34:36 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -121,86 +110,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Devicetree of ArmSoM Sige7 is merged to kernel v6.10-rc1 with USBDP and
+GPU nodes. So I use update-dts-subtree.sh to pick related commits of
+rk3588s.dtsi, and then pick the commit of ArmSoM Sige7's devicetree.
+I also did run command:
+./dts/update-dts-subtree.sh pull v6.10-rc1-dts
+based on my work but there is a merge conflict of file:
+dts/upstream/Bindings/Makefile
+I think this should not be related to my work.
 
---Raoil4yn9fn3z+i9
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Changes in v3:
+- Use update-dts-subtree.sh to pick upstream dts
 
-On Fri, May 24, 2024 at 06:19:55PM +0200, Jerome Forissier wrote:
+Changes in v2:
+- Fix alphabetical order of MAINTAINERS
+- Use arch/arm/dts/rk3588-armsom-sige7* in board MAINTAINERS
+- Remove spi flash related config
+- Move kernel dts to dts/upstream/src/arm64/rockchip/
 
-> Prepare the introduction of the lwIP (lightweight IP) TCP/IP stack by
-> adding a new net-lwip/ directory and the NET_LWIP symbol. At this
-> point, enabling NET_LWIP simply disables NET. Subsequent commits will
-> introduce the lwIP code, re-work the NETDEVICE integration and port
-> some of the NET commands and features to lwIP.
->=20
-> SPL_NET cannot be enabled when NET_LWIP=3Dy. SPL_NET pulls some symbols
-> that are part of NET (such as arp_init(), arp_timeout_check(),
-> arp_receive(), net_arp_wait_packet_ip()). lwIP support in SPL may be
-> added later.
->=20
-> Similarly, DFU_TFTP is not compatible with NET_LWIP because it depends
-> on net_loop(), tftp_timeout_ms, tftp_timeout_count_max. Let's add a
-> dependency on !NET_LWIP for now.
->=20
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-[snip]
-> diff --git a/Kconfig b/Kconfig
-> index 82df59f176e..758256ab121 100644
-> --- a/Kconfig
-> +++ b/Kconfig
-> @@ -747,6 +747,8 @@ source "env/Kconfig"
-> =20
->  source "net/Kconfig"
-> =20
-> +source "net-lwip/Kconfig"
-> +
->  source "drivers/Kconfig"
-> =20
->  source "fs/Kconfig"
+Boris Brezillon (1):
+  arm64: dts: rockchip: Add rk3588 GPU node
 
-I think we need to instead rework this to a choice statement instead so
-that in the end we have something like:
-choice "Networking stack"
-config NO_NET
-  bool "No networking support"
-config NET
-  bool "Legacy U-Boot networking stack"
-config NET_LWIP
-  bool "Use lwIP for networking stack"
+Diederik de Haas (1):
+  arm64: dts: rockchip: Fix ordering of nodes on rk3588s
 
-if NET_LEGACY
-source "net/Kconfig"
-endif
+Jianfeng Liu (2):
+  arm64: dts: rockchip: Add ArmSom Sige7 board
+  board: rockchip: add ArmSoM Sige7 Rk3588 board
 
-if NET_LWIP
-source "net-lwip/Kconfig"
-endif
+Sebastian Reichel (3):
+  arm64: dts: rockchip: fix usb2phy nodename for rk3588
+  arm64: dts: rockchip: add USBDP phys on rk3588
+  arm64: dts: rockchip: add USB3 DRD controllers on rk3588
 
-And then SPL_NET still depends on !NET_LWIP for now and we sort out the
-problems with different networking stacks in SPL vs full U-Boot later
-on.
+ MAINTAINERS                                   |   1 +
+ arch/arm/dts/rk3588-armsom-sige7-u-boot.dtsi  |  28 +
+ arch/arm/mach-rockchip/rk3588/Kconfig         |  26 +
+ board/armsom/sige7-rk3588/Kconfig             |  12 +
+ board/armsom/sige7-rk3588/MAINTAINERS         |   7 +
+ configs/sige7-rk3588_defconfig                |  93 +++
+ doc/board/rockchip/rockchip.rst               |   1 +
+ .../arm64/rockchip/rk3588-armsom-sige7.dts    | 721 ++++++++++++++++++
+ dts/upstream/src/arm64/rockchip/rk3588.dtsi   |  72 ++
+ dts/upstream/src/arm64/rockchip/rk3588s.dtsi  | 337 +++++---
+ include/configs/sige7-rk3588.h                |  15 +
+ 11 files changed, 1215 insertions(+), 98 deletions(-)
+ create mode 100644 arch/arm/dts/rk3588-armsom-sige7-u-boot.dtsi
+ create mode 100644 board/armsom/sige7-rk3588/Kconfig
+ create mode 100644 board/armsom/sige7-rk3588/MAINTAINERS
+ create mode 100644 configs/sige7-rk3588_defconfig
+ create mode 100644 dts/upstream/src/arm64/rockchip/rk3588-armsom-sige7.dts
+ create mode 100644 include/configs/sige7-rk3588.h
 
---=20
-Tom
+-- 
+2.34.1
 
---Raoil4yn9fn3z+i9
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZUqAYACgkQFHw5/5Y0
-tyyvpQv/T4ZJywYNFHMA9h2sSodFAzRp/I0g6RplVQ9XZeAwJGUZUJcHDg8ztaLi
-eoNBvJyplEKWGcTMp7t0EmjqRzfnJvhbmqyLwsgAFEvyXzTYurwO0Ef6LN+4FWXw
-8lvv6J8WHekL2oe0fNvw+UCduO8WcKOoiTg1XsjWrABqEpjzStlgRgF/XH+MTEzL
-DQ0yj0ovV4vTSM5AF6PDidydzFIIdwXFwx32VLPGQCnfveWMFvei4lxdLppixM5l
-y6Vfus/Awsd41LYogGOTUV03l94PuDbTRbjvEYambkhsGkx7VUmC0p9tO24EwM4O
-BQDiIfrbZ/0kqzKlV5UBsDq3OfZywQWfjILgHN/awHN3OcKcln+Op7h0A7oDo8Fz
-/tK8zBtR8bax3NcowdoTkazdsTKSOsR0Jyt3ENOI3awhyIJh3DLbtvZhqzMbzIGD
-XHNkWiRgfTLAyMdufNF3xyAlUZq62DjwsI+ospLCfKH3oTY0nvb5wrT5HaWzXd5y
-zYhi1Gxc
-=CLZk
------END PGP SIGNATURE-----
-
---Raoil4yn9fn3z+i9--
