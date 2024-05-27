@@ -4,81 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A18FAC25B74
-	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 18:15:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F24E2C25B78
+	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 18:35:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE06E881A9;
-	Mon, 27 May 2024 20:15:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 671DF88113;
+	Mon, 27 May 2024 20:35:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="THJY8UYR";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="G1kKcV1c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 988AC88256; Mon, 27 May 2024 20:15:04 +0200 (CEST)
-Received: from mail-ua1-x92d.google.com (mail-ua1-x92d.google.com
- [IPv6:2607:f8b0:4864:20::92d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 156AE88020; Mon, 27 May 2024 20:35:20 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B0AD8813F
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 20:15:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B343087DAB
+ for <u-boot@lists.denx.de>; Mon, 27 May 2024 20:35:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-ua1-x92d.google.com with SMTP id
- a1e0cc1a2514c-80327fdd618so15557241.3
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 11:15:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716833701; x=1717438501; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wH4qeGhsKfmECBD8IgmJT0C6sksNVp2p//9Ox29+E+s=;
- b=THJY8UYRwhlXe6AtyQZvh8Bxb9JMA1qt/5TknDazHvALp1CbG+cWZ+iX0EehQQOodn
- q0Dl9Ce3bqYNZz3+1Td3uEcECsFg2quteHr5mInsusUOzoVwMUd1jX7kgZxs5XF8+yHS
- V3nEC3BArKliOHTiINzgHAPMo0BwfwXt+BU7c14jk6fM5LFfETde026nnBH4+ISzuA4Y
- Sry8PzQ6u/+GDRaOvAm4Z4x6CKdZCPyVmF5mVQl+ueRPuJfx5JxM2BqNaLk+WOKyk0o4
- d5EWgYh8KZ8iqokG5idwyV3nk47DdXynxLPb621J7eh820Ew0Tk0sBE3oWJROQrgptC3
- Aldw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716833701; x=1717438501;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wH4qeGhsKfmECBD8IgmJT0C6sksNVp2p//9Ox29+E+s=;
- b=T4EzjPICfRzRHdZxPMSXPVv7JPZK3cbBvBoCfxyRVPKOA9Ebze8NE3ncvedmQEpCA9
- ZEPxUWevgqC0gCOY9qzn6i3YhC+x9oe+rr373BqBeIqUIJw2FrNN6aMIOTDYuGgdBmxa
- WMI+vQzmlM/LvjBPKAZsTAuy0foPFg5K/mEn5Kl1HB784qAzCeO0V/r2rOPMjUWyuVT9
- rArcAdLd2mFEz7yd0Bcc9bt+IFfSxjaitmO3SllRlFbgELPAC7A5NYQ+wsthG8wAnqT0
- Dppw6qBpY/4NdjR5t5vTVSsY0d0lWBjpfjv9FNme+kSpd8RBs5mdv5ss0ETSBfkWFJRH
- V3Vw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVKu7Kqzc8aMkVYbl04G0Cj8zgipPHeOGZp+MH6QBoZx9P9PkI9YFt82jmwQFaRGn4uA8s6uLq03j6H5AA9DcAimHkXcw==
-X-Gm-Message-State: AOJu0YwdI2TIkdaIurBVg/SW4/+pqQf6zZlP93i38rKZaZy0GwbAy3eb
- HRSht+C0my0TokJYEoGqMOhx6IrsoDVU0Edp5zVJGH39o5gpGJlzrnRyYuIJUg5M26OLaaZvmPF
- NGiQgp4D7fJOC8pgqkPXXYFWEtVk=
-X-Google-Smtp-Source: AGHT+IHngPOUDmR7Ov5R8xZUGzeSZuZJp89I+wwDjegS85FT210TlkDufNKmwPfeoxSUqe6TMNL0VfzTR8KPAHciiaU=
-X-Received: by 2002:a05:6102:12cf:b0:48a:3550:a0d5 with SMTP id
- ada2fe7eead31-48a38506538mr8194252137.5.1716833701139; Mon, 27 May 2024
- 11:15:01 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=921e=M7=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1716834891;
+ bh=GX/BCbsenaRBIEqaF/dbtLQhSIYz+69Dy3qGO+GTwIw=;
+ b=G1kKcV1cA0NIEcnBLhGiwFAWAC+ZP84CHblL6fQJXxFkzfS/pSVKqzZoMpKbgbAJZpBOjG74N
+ ZFiqh0aP3TBNZdSePHp3n4jx3GR1ZdePyCt5U/g7rRv1/szKu3UzJdN4jIvtUw1fTqNeYc4ER2X
+ ELukdtYqi8WFva7K83H4refVdOvG7fCHgNdgFr0/oYQfnQGwwa4tmj3cK8C2TwQFhTceQBZIBx3
+ u2JeL5wgzxwkk3IsZJYTxOCcwXdUR6tHsXEpxgldF5bZdQmw/glzvR1WGviEaLthWJ6o+VqlPiz
+ oPTNNpfH/3lMTg66ZFjYI0PlHA412W7XMkbyigMLejKw==
+Message-ID: <a4429a8a-eb07-486c-91d1-00731a908a5f@kwiboo.se>
+Date: Mon, 27 May 2024 20:34:44 +0200
 MIME-Version: 1.0
-References: <20240527104730.20244-1-matthias.bgg@kernel.org>
-In-Reply-To: <20240527104730.20244-1-matthias.bgg@kernel.org>
-From: E Shattow <lucent@gmail.com>
-Date: Mon, 27 May 2024 11:14:49 -0700
-Message-ID: <CANV2PTOMZrZg9E8qY-AEJzupLxipsppqy5VEygPkDJsw+JHB+A@mail.gmail.com>
-Subject: Re: [PATCH] riscv: dts: jh7110: Update qspi node with upstream
-To: matthias.bgg@kernel.org
-Cc: rick@andestech.com, ycliang@andestech.com, trini@konsulko.com, 
- minda.chen@starfivetech.com, heinrich.schuchardt@canonical.com, 
- jh80.chung@samsung.com, xingyu.wu@starfivetech.com, u-boot@lists.denx.de, 
- mason.huo@starfivetech.com, duwe@suse.de, hal.feng@starfivetech.com, 
- yanhong.wang@starfivetech.com, Matthias Brugger <mbrugger@suse.com>, 
- Chanho Park <chanho61.park@samsung.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- "Leon M. Busch-George" <leon@georgemail.eu>, Nam Cao <namcao@linutronix.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 7/7] board: rockchip: add ArmSoM Sige7 Rk3588 board
+To: Jianfeng Liu <liujianfeng1994@gmail.com>
+Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, Caleb Connolly
+ <caleb.connolly@linaro.org>, Christopher Obbard
+ <chris.obbard@collabora.com>, Eugen Hristev <eugen.hristev@collabora.com>,
+ FUKAUMI Naoki <naoki@radxa.com>, Jagan Teki <jagan@edgeble.ai>, John Clark
+ <inindev@gmail.com>, Joshua Riek <jjriek@verizon.net>, Kever Yang
+ <kever.yang@rock-chips.com>, Marek Vasut <marex@denx.de>, Massimo Pegorer
+ <massimo.pegorer+oss@gmail.com>, Mattijs Korpershoek
+ <mkorpershoek@baylibre.com>, Michal Simek <michal.simek@amd.com>, Nicolas
+ Frattaroli <frattaroli.nicolas@gmail.com>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Quentin Schulz
+ <quentin.schulz@theobroma-systems.com>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Tianling Shen <cnsztl@gmail.com>, Tom
+ Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20240527170214.283988-1-liujianfeng1994@gmail.com>
+ <20240527170214.283988-8-liujianfeng1994@gmail.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20240527170214.283988-8-liujianfeng1994@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 6654d24a6b7f69199002a5b6
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,128 +84,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Jianfeng,
 
-On Mon, May 27, 2024 at 3:47=E2=80=AFAM <matthias.bgg@kernel.org> wrote:
->
-> From: Matthias Brugger <mbrugger@suse.com>
->
-> Upstream node uses a specific SoC compatible to make the kernel driver
-> work. Copy over the upstream node to fullfill that need.
->
-> Signed-off-by: Matthias Brugger <mbrugger@suse.com>
+On 2024-05-27 19:02, Jianfeng Liu wrote:
+> ArmSoM Sige7 is a Rockchip RK3588 based SBC (Single Board Computer) by
+> ArmSoM.
+> 
+> There are two variants depending on the DRAM size : 8G and 16G.
+> 
+> Specification:
+> 
+>     Rockchip Rk3588 SoC
+>     4x ARM Cortex-A76, 4x ARM Cortex-A55
+>     8/16GB memory LPDDR4x
+>     Mali G610MC4 GPU
+>     2x MIPI CSI 2 multiple lanes connector
+>     64GB/128GB on board eMMC
+>     uSD slot
+>     1x USB 2.0 Type-A, 1x USB 3.0 Type-A, 1x USB 3.0 Type-C
+>     1x HDMI 2.1 output
+>     2x 2.5 Gbps Ethernet port
+>     40-pin IO header including UART, SPI and I2C
+>     USB PD over USB Type-C
+>     Size: 92mm x 62mm
+> 
+> Kernel commit:
+> 81c828a67c78 (arm64: dts: rockchip: Add ArmSom Sige7 board)
+> 
+> Signed-off-by: Jianfeng Liu <liujianfeng1994@gmail.com>
 > ---
->
->  .../jh7110-starfive-visionfive-2-u-boot.dtsi  |  2 +-
->  .../dts/jh7110-starfive-visionfive-2.dtsi     | 29 ++++++++++++++++---
->  arch/riscv/dts/jh7110.dtsi                    | 19 +++++++-----
->  3 files changed, 37 insertions(+), 13 deletions(-)
->
-> diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi b/ar=
-ch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi
-> index 3012466b305..a69d8fcb391 100644
-> --- a/arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi
-> +++ b/arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi
-> @@ -40,7 +40,7 @@
->  &qspi {
->         bootph-pre-ram;
->
-> -       nor-flash@0 {
-> +       nor_flash@0 {
->                 bootph-pre-ram;
->         };
->  };
-> diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi b/arch/risc=
-v/dts/jh7110-starfive-visionfive-2.dtsi
-> index e11babc1cde..375449b73a8 100644
-> --- a/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
-> +++ b/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
-> @@ -305,17 +305,38 @@
->  };
->
->  &qspi {
-> -       spi-max-frequency =3D <250000000>;
-> +       #address-cells =3D <1>;
-> +       #size-cells =3D <0>;
->         status =3D "okay";
->
-> -       nor-flash@0 {
-> +       nor_flash: nor_flash@0 {
->                 compatible =3D "jedec,spi-nor";
-> -               reg=3D<0>;
-> -               spi-max-frequency =3D <100000000>;
-> +               reg =3D <0>;
-> +               cdns,read-delay =3D <5>;
-> +               spi-max-frequency =3D <12000000>;
->                 cdns,tshsl-ns =3D <1>;
->                 cdns,tsd2d-ns =3D <1>;
->                 cdns,tchsh-ns =3D <1>;
->                 cdns,tslch-ns =3D <1>;
+> 
+> Changes in v3:
+> - Use update-dts-subtree.sh to pick upstream dts
+> 
+> Changes in v2:
+> - Fix alphabetical order of MAINTAINERS
+> - Use arch/arm/dts/rk3588-armsom-sige7* in board MAINTAINERS
+> - Remove spi flash related config
+> - Move kernel dts to dts/upstream/src/arm64/rockchip/
+> 
+>  MAINTAINERS                                  |  1 +
+>  arch/arm/dts/rk3588-armsom-sige7-u-boot.dtsi | 28 ++++++
+>  arch/arm/mach-rockchip/rk3588/Kconfig        | 26 ++++++
+>  board/armsom/sige7-rk3588/Kconfig            | 12 +++
+>  board/armsom/sige7-rk3588/MAINTAINERS        |  7 ++
+>  configs/sige7-rk3588_defconfig               | 93 ++++++++++++++++++++
+>  doc/board/rockchip/rockchip.rst              |  1 +
+>  include/configs/sige7-rk3588.h               | 15 ++++
+>  8 files changed, 183 insertions(+)
+>  create mode 100644 arch/arm/dts/rk3588-armsom-sige7-u-boot.dtsi
+>  create mode 100644 board/armsom/sige7-rk3588/Kconfig
+>  create mode 100644 board/armsom/sige7-rk3588/MAINTAINERS
+>  create mode 100644 configs/sige7-rk3588_defconfig
+>  create mode 100644 include/configs/sige7-rk3588.h
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 6c861b529df..fffcf898bf1 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -534,6 +534,7 @@ F:	arch/arm/include/asm/arch-rockchip/
+>  F:	arch/arm/mach-rockchip/
+>  F:	board/amarula/vyasa-rk3288/
+>  F:	board/anbernic/rgxx3_rk3566/
+> +F:	board/armsom/sige7-rk3588/
+>  F:	board/chipspark/popmetal_rk3288
+>  F:	board/engicam/px30_core/
+>  F:	board/firefly/
+> diff --git a/arch/arm/dts/rk3588-armsom-sige7-u-boot.dtsi b/arch/arm/dts/rk3588-armsom-sige7-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..2c984d01471
+> --- /dev/null
+> +++ b/arch/arm/dts/rk3588-armsom-sige7-u-boot.dtsi
+> @@ -0,0 +1,28 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +/*
+> + * Copyright (c) 2024 ArmSoM Technology Co., Ltd.
+> + */
 > +
-> +               partitions {
-> +                       compatible =3D "fixed-partitions";
-> +                       #address-cells =3D <1>;
-> +                       #size-cells =3D <1>;
+> +#include "rk3588-u-boot.dtsi"
 > +
-> +                       spl@0 {
-> +                               reg =3D <0x0 0x80000>;
-> +                       };
-> +                       uboot-env@f0000 {
-> +                               reg =3D <0xf0000 0x10000>;
-> +                       };
-> +                       uboot@100000 {
-> +                               reg =3D <0x100000 0x400000>;
-> +                       };
-> +                       reserved-data@600000 {
-> +                               reg =3D <0x600000 0xa00000>;
-> +                       };
-> +               };
->         };
->  };
->
-> diff --git a/arch/riscv/dts/jh7110.dtsi b/arch/riscv/dts/jh7110.dtsi
-> index 2cdc683d49b..2b331e58497 100644
-> --- a/arch/riscv/dts/jh7110.dtsi
-> +++ b/arch/riscv/dts/jh7110.dtsi
-> @@ -480,19 +480,22 @@
->                 };
->
->                 qspi: spi@13010000 {
-> -                       compatible =3D "cdns,qspi-nor";
-> -                       reg =3D <0x0 0x13010000 0x0 0x10000
-> -                               0x0 0x21000000 0x0 0x400000>;
-> -                       clocks =3D <&syscrg JH7110_SYSCLK_QSPI_REF>;
-> -                       clock-names =3D "clk_ref";
-> +                       compatible =3D "starfive,jh7110-qspi", "cdns,qspi=
--nor";
-> +                       reg =3D <0x0 0x13010000 0x0 0x10000>,
-> +                             <0x0 0x21000000 0x0 0x400000>;
-> +                       interrupts =3D <25>;
-> +                       clocks =3D <&syscrg JH7110_SYSCLK_QSPI_REF>,
-> +                                <&syscrg JH7110_SYSCLK_QSPI_AHB>,
-> +                                <&syscrg JH7110_SYSCLK_QSPI_APB>;
-> +                       clock-names =3D "ref", "ahb", "apb";
->                         resets =3D <&syscrg JH7110_SYSRST_QSPI_APB>,
->                                  <&syscrg JH7110_SYSRST_QSPI_AHB>,
->                                  <&syscrg JH7110_SYSRST_QSPI_REF>;
-> -                       reset-names =3D "rst_apb", "rst_ahb", "rst_ref";
-> +                       reset-names =3D "qspi", "qspi-ocp", "rstc_ref";
->                         cdns,fifo-depth =3D <256>;
->                         cdns,fifo-width =3D <4>;
-> -                       #address-cells =3D <1>;
-> -                       #size-cells =3D <0>;
-> +                       cdns,trigger-address =3D <0x0>;
-> +                       status =3D "disabled";
->                 };
->
->                 syscrg: clock-controller@13020000 {
-> --
-> 2.44.0
->
+> +&sdhci {
+> +	cap-mmc-highspeed;
+> +	mmc-hs200-1_8v;
+> +};
 
-Please consider OF_UPSTREAM. Linux Kernel has now merged the Milk-V
-Mars dts patch series which introduces a jh7110-common.dtsi and also
-the PLDA PCIe HOST patch set is queued for-next, so it is a good time
-to do so.
+The sdhci node should not be needed, mmc-hs200-1_8v is already defined
+in the upstream DT and cap-mmc-highspeed modes only work if HS200 can
+first be initialized.
 
--E
+> +
+> +&u2phy1 {
+> +	status = "okay";
+> +};
+> +
+> +&u2phy1_otg {
+> +	status = "okay";
+> +};
+> +
+> +&usbdp_phy1 {
+> +	status = "okay";
+> +};
+> +
+> +&usb_host1_xhci {
+> +	dr_mode = "host";
+> +	status = "okay";
+> +};
+
+These usb related nodes is already defined in main DT, please remove.
+
+Regards,
+Jonas
+
+[snip]
