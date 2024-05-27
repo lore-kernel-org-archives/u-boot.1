@@ -4,57 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C5C2C25B7D
-	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 10:47:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EFC3C25B74
+	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 11:48:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5CB50882A2;
-	Mon, 27 May 2024 12:47:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 46E2C882AF;
+	Mon, 27 May 2024 13:48:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="pxq+UdGb";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="WoxiNHpe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90D57881EC; Mon, 27 May 2024 12:47:49 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 93F36882E2; Mon, 27 May 2024 13:48:08 +0200 (CEST)
+Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net
+ [IPv6:2001:4b98:dc4:8::221])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 663F988176
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 12:47:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4EFB487F52
+ for <u-boot@lists.denx.de>; Mon, 27 May 2024 13:48:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=matthias.bgg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 1DB49614EA;
- Mon, 27 May 2024 10:47:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4D0E8C2BBFC;
- Mon, 27 May 2024 10:47:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1716806865;
- bh=pZiBeYwTq/I72iAmYuVEtH4962fAZDJeqWawOF3lkEQ=;
- h=From:To:Cc:Subject:Date:From;
- b=pxq+UdGb8DtS9F8i3Zn+UK7a5HKgY7HU6t1RPkW/QXfObfwQ2B+wcylFKSfWLWoEP
- 8H7bLOlI2nNarE6m3FM+R7quAU2ak89ryL5l9LW9fgEem1s5x7X7AamwAoU+t2OlTx
- +y0eZpvn80Tvrm8F5GCoB4H8GzA8VJ1Aeh1h7PFt+hec2mlSuyaAGfwIVPPQkzk9/v
- p8knbtDYTl39vEgyitX7jEAzM9eaDUs7Cb0Bbh/wYfM1o7O9xJQlfmu0t1adwTOnhs
- iauJaYTOwvzXlZXaHtZ0WKeDS0vxD+tK20QK42bpyw4SutfpLtyoEsotYjLsJkGMhl
- +KZnnMlhOIR8A==
-From: matthias.bgg@kernel.org
-To: rick@andestech.com, ycliang@andestech.com, trini@konsulko.com,
- minda.chen@starfivetech.com, heinrich.schuchardt@canonical.com
-Cc: jh80.chung@samsung.com, xingyu.wu@starfivetech.com, u-boot@lists.denx.de,
- mason.huo@starfivetech.com, duwe@suse.de, hal.feng@starfivetech.com,
- yanhong.wang@starfivetech.com, Matthias Brugger <mbrugger@suse.com>,
- Chanho Park <chanho61.park@samsung.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- "Leon M. Busch-George" <leon@georgemail.eu>, Nam Cao <namcao@linutronix.de>
-Subject: [PATCH] riscv: dts: jh7110: Update qspi node with upstream
-Date: Mon, 27 May 2024 12:47:10 +0200
-Message-ID: <20240527104730.20244-1-matthias.bgg@kernel.org>
-X-Mailer: git-send-email 2.44.0
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 6B3F6240002;
+ Mon, 27 May 2024 11:48:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1716810485;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Y8XH0sw0bMUSi0XPIfmWpBvlMKRPZ4NyfuamHAvUFnU=;
+ b=WoxiNHpeNLmFgvsEQOOg3HztoHUoFj5hi4YNSOm09LSPrwk5G7hxIoRlj0FQAwXJ+bDoB+
+ Wle75IETWZPMrlLZ32u6vW3fSykFUs7ysJal0Q7j+4TcxDQTElpnGsl/3mhI5pFHyGlYYG
+ K66807ahJlba+515qZqjMZi7BsXE4cFjwzoZz2M8dQwT+xGOo35Cyoi9PEaJtGeMG7bqwl
+ +4s8ZmBLrv3nWsKf93Tggulwbtlyf0gvllqNpfd5qT96HnIT/l6/cS9ujwADt9hwzI1mQE
+ C1UMcEX9CmMUjMozEWPf1wqyhGxE0KXsd8DiPDvtEGsei0CahWpIGyfhWJ8M0A==
+Date: Mon, 27 May 2024 13:48:04 +0200
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de, Jorge
+ Ramirez-Ortiz <jorge@foundries.io>, Adam Ford <aford173@gmail.com>, Rasmus
+ Villemoes <rasmus.villemoes@prevas.dk>
+Subject: Re: [PATCH v5 2/2] tpm-v2: allow algorithm name to be configured
+ for pcr_read and pcr_extend
+Message-ID: <20240527134804.1bf788a8@xps-13>
+In-Reply-To: <CAC_iWjKGijjMXoop2i97Rpc+ZzSWWb6Vbd9XxW9WKqvcRwJwhQ@mail.gmail.com>
+References: <20240525200049.3904124-1-tharvey@gateworks.com>
+ <20240525200049.3904124-2-tharvey@gateworks.com>
+ <20240527105910.3bb425d1@xps-13>
+ <CAC_iWjKGijjMXoop2i97Rpc+ZzSWWb6Vbd9XxW9WKqvcRwJwhQ@mail.gmail.com>
+Organization: Bootlin
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-GND-Sasl: miquel.raynal@bootlin.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,114 +76,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Matthias Brugger <mbrugger@suse.com>
+Hi Ilias,
 
-Upstream node uses a specific SoC compatible to make the kernel driver
-work. Copy over the upstream node to fullfill that need.
+ilias.apalodimas@linaro.org wrote on Mon, 27 May 2024 12:44:11 +0300:
 
-Signed-off-by: Matthias Brugger <mbrugger@suse.com>
----
+> Hi Miquel
+>=20
+> On Mon, 27 May 2024 at 11:59, Miquel Raynal <miquel.raynal@bootlin.com> w=
+rote:
+> >
+> > Hi Tim,
+> >
+> > tharvey@gateworks.com wrote on Sat, 25 May 2024 13:00:49 -0700:
+> > =20
+> > > For pcr_read and pcr_extend commands allow the digest algorithm to be
+> > > specified by an additional argument. If not specified it will default=
+ to
+> > > SHA256 for backwards compatibility.
+> > >
+> > > Additionally update test_tpm2.py for the changes in output in pcr_read
+> > > which now shows the algo and algo length in the output.
+> > >
+> > > A follow-on to this could be to extend all PCR banks with the detected
+> > > algo when the <digest_algo> argument is 'auto'.
+> > >
+> > > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> > > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org> =20
+> >
+> > LGTM,
+> >
+> > Reviewed-by: Miquel Raynal <miquel.raynal@bootlin.com> =20
+>=20
+> Thanks for taking the time, unfortunately I've already queued these
+> for Tom and your r-b is missing
 
- .../jh7110-starfive-visionfive-2-u-boot.dtsi  |  2 +-
- .../dts/jh7110-starfive-visionfive-2.dtsi     | 29 ++++++++++++++++---
- arch/riscv/dts/jh7110.dtsi                    | 19 +++++++-----
- 3 files changed, 37 insertions(+), 13 deletions(-)
+Maybe it's not a big deal to force push your branch? Otherwise please
+consider letting a bit more time to the reviewers next time. 2 days
+over the weekend is definitely not enough if you refuse to update your
+branch.
 
-diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi b/arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi
-index 3012466b305..a69d8fcb391 100644
---- a/arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi
-+++ b/arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi
-@@ -40,7 +40,7 @@
- &qspi {
- 	bootph-pre-ram;
- 
--	nor-flash@0 {
-+	nor_flash@0 {
- 		bootph-pre-ram;
- 	};
- };
-diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi b/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
-index e11babc1cde..375449b73a8 100644
---- a/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
-+++ b/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
-@@ -305,17 +305,38 @@
- };
- 
- &qspi {
--	spi-max-frequency = <250000000>;
-+	#address-cells = <1>;
-+	#size-cells = <0>;
- 	status = "okay";
- 
--	nor-flash@0 {
-+	nor_flash: nor_flash@0 {
- 		compatible = "jedec,spi-nor";
--		reg=<0>;
--		spi-max-frequency = <100000000>;
-+		reg = <0>;
-+		cdns,read-delay = <5>;
-+		spi-max-frequency = <12000000>;
- 		cdns,tshsl-ns = <1>;
- 		cdns,tsd2d-ns = <1>;
- 		cdns,tchsh-ns = <1>;
- 		cdns,tslch-ns = <1>;
-+
-+		partitions {
-+			compatible = "fixed-partitions";
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+
-+			spl@0 {
-+				reg = <0x0 0x80000>;
-+			};
-+			uboot-env@f0000 {
-+				reg = <0xf0000 0x10000>;
-+			};
-+			uboot@100000 {
-+				reg = <0x100000 0x400000>;
-+			};
-+			reserved-data@600000 {
-+				reg = <0x600000 0xa00000>;
-+			};
-+		};
- 	};
- };
- 
-diff --git a/arch/riscv/dts/jh7110.dtsi b/arch/riscv/dts/jh7110.dtsi
-index 2cdc683d49b..2b331e58497 100644
---- a/arch/riscv/dts/jh7110.dtsi
-+++ b/arch/riscv/dts/jh7110.dtsi
-@@ -480,19 +480,22 @@
- 		};
- 
- 		qspi: spi@13010000 {
--			compatible = "cdns,qspi-nor";
--			reg = <0x0 0x13010000 0x0 0x10000
--				0x0 0x21000000 0x0 0x400000>;
--			clocks = <&syscrg JH7110_SYSCLK_QSPI_REF>;
--			clock-names = "clk_ref";
-+			compatible = "starfive,jh7110-qspi", "cdns,qspi-nor";
-+			reg = <0x0 0x13010000 0x0 0x10000>,
-+			      <0x0 0x21000000 0x0 0x400000>;
-+			interrupts = <25>;
-+			clocks = <&syscrg JH7110_SYSCLK_QSPI_REF>,
-+				 <&syscrg JH7110_SYSCLK_QSPI_AHB>,
-+				 <&syscrg JH7110_SYSCLK_QSPI_APB>;
-+			clock-names = "ref", "ahb", "apb";
- 			resets = <&syscrg JH7110_SYSRST_QSPI_APB>,
- 				 <&syscrg JH7110_SYSRST_QSPI_AHB>,
- 				 <&syscrg JH7110_SYSRST_QSPI_REF>;
--			reset-names = "rst_apb", "rst_ahb", "rst_ref";
-+			reset-names = "qspi", "qspi-ocp", "rstc_ref";
- 			cdns,fifo-depth = <256>;
- 			cdns,fifo-width = <4>;
--			#address-cells = <1>;
--			#size-cells = <0>;
-+			cdns,trigger-address = <0x0>;
-+			status = "disabled";
- 		};
- 
- 		syscrg: clock-controller@13020000 {
--- 
-2.44.0
-
+Thanks,
+Miqu=C3=A8l
