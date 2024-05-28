@@ -4,84 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FCFBC25B78
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 17:57:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5683DC25B78
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 19:15:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75EA188422;
-	Tue, 28 May 2024 19:57:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8B5D788571;
+	Tue, 28 May 2024 21:15:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HV+sRN0z";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UXsTrU//";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D42C088445; Tue, 28 May 2024 19:57:02 +0200 (CEST)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
+ id B9F7488555; Tue, 28 May 2024 21:15:20 +0200 (CEST)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC33C883F4
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 19:57:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 92A5288555
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 21:15:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-529597d77b4so1458719e87.0
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 10:57:00 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-2bf196037a7so232621a91.1
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 12:15:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716919020; x=1717523820; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=yYpiU4fsTk9n+yKg9M6/lPft5+fnKar0qXgpqwvRYTs=;
- b=HV+sRN0zeh1fVbxWzQnqzzHzPnYKOTmYGL3R3i1Qj0x0mv+wYC/iiVU1mihiwVN3kt
- gT7eKtUbGdGfw2S9atTHhuzLsBLhzTMj5YmAxf9NfDB2QAkb/Db5MlK5C+hadAcOxwow
- vmGNtB2Krnz3iyKcv+qDGZp9lWBG63SM7EmxPoIzMHkEmf8DALdIZnKtFxv7pOQFPyIh
- bs/FKb0glsEBnSoJ3CwJ70wXH83CLRnAR9zFT6tjeEmpYHMIMXDlWQVqBw+EAH3tkHhC
- tIYs7QbVKLZHVVVDibuNdnA8B5Vlrve8esAcWr3zf+PVTjWvT9PQRMMuFde4KSPdXYsW
- fPsg==
+ d=gmail.com; s=20230601; t=1716923717; x=1717528517; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=UC7yxqpyjmhSjoo97An3s2I7CS2+n9Ltr90L1w2oRSo=;
+ b=UXsTrU//uWigRdXtLu6eoOPvi3uHq4ufQMIQQ5qI6mP7kd2QUWRHrfNxYz35iPT2DC
+ wQdOldY7Od9A6VNp0NVj65X5g60KUFRTET/RRPAZwuSaZIeVRCbIXrIFgIgfsADFuOHf
+ 796U84eHu01m/10snAwQoI0qfgHeXdcj8bhCPL/ffrs9PSrH6lmYda3m6wflWCd4oS5U
+ IuzzcIyXeecTW2QVGsgazGqI0EKdoeoDPZGQXjYPA7+rJ+p0m3+OeXJ9qP+0nXEIVbD3
+ PTvv6c82gjazRQv8EylucD6rGrzfCFGkQNqc+w/8bFUoH3Iba5ZOceBW3wHjufvLAywv
+ U4Ww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716919020; x=1717523820;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1716923717; x=1717528517;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=yYpiU4fsTk9n+yKg9M6/lPft5+fnKar0qXgpqwvRYTs=;
- b=czisOJTFtkuIRtZx5Rhv5wdN4fnCpcv22XscExoXW8yGCFhHaPH+23ubHxr4PZEN2B
- v46SUPWJPzoDbKnJUtUV97ZG/sZozgldjXtsCnAUszQVVV6WmbC8F7x+9Z4h7MlqTkD0
- +6oGmwb8KmHY7doxsAOJEIKlb0XHhsHRYVFs43dpRxSyQ8Ttph63mwo4MyK9XTpfuhKp
- dhB+KczEF1rxKNpgNTWylVabql3l9hV9/bPsnRLzdT6uVxylDoT26ujHDVDjv/QDiWuX
- tJgF0AevTE10uVfMGjtPDTK6RgJeVKrZDPPr7YnjBGcBzGIAAgHNQ8Y+fKfGNlYPh/NS
- fmvQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVikF13wp8LHBEqOxNz84Sje6yVzd4qKRAGy4r8YGS3CznhjT4DPcUcNcAKFpxOdWFOhOjftKXAR1hQeD/MQO3fYA8sbw==
-X-Gm-Message-State: AOJu0YxtWKLkjVjLgoqQbuSw212oVO489eXo66YoUa9M+r4NKzWfxmC2
- MmXNFvvuGd0l21L/O4M4nSis8tV9ixv6jOUHjLjOsb6uBobjiGdNvyELHlPuVfzyuWwp1Ia5AMQ
- 7IVFLZxT8RNZirIlNecx4SCKqB+1AzmsWETrnWw==
-X-Google-Smtp-Source: AGHT+IGw9jxid7/T9yXv3fx7DACfRgPwonU754nGhVr3yyoD7MPUWJqn2hncFcXdirS2E1RjgW+/5LNVaFDWv1o6hr8=
-X-Received: by 2002:a19:ca1a:0:b0:522:29f5:3b09 with SMTP id
- 2adb3069b0e04-529667cf9eemr7141995e87.47.1716919019773; Tue, 28 May 2024
- 10:56:59 -0700 (PDT)
+ bh=UC7yxqpyjmhSjoo97An3s2I7CS2+n9Ltr90L1w2oRSo=;
+ b=BNZoUKCMa//WmjR+ClGHgYX090aoXVyTtdL5F+eMzHQvRNCWnPK3CCvIcd30+D0lCR
+ uawZc/weMIsuwGDnyoE2g2FkFxgtzoc0snVGyCT21712I+Y3cfr/lXQ87jd4vs78shR1
+ DQEYaORu0iTHdkm8gtn1VCpnU4ViEMQaz8eu++dwuhENpkfMuAFIMVRSMMAYYYeSnDgy
+ jJwp4KIUO0wdnFRz6q3hMLlRK3ZwJcH8St9/bZn/knxJGrxMvfiB/CcPl8Qd5EoVVZRi
+ TxoNSIJ/j2jaR/QuRbgrxQ/wVCVcUMC5CMAdd6qtn0fGyvX/x+7yDdNJDT2AfKk39C24
+ Xs2Q==
+X-Gm-Message-State: AOJu0YwS407GNKI5xanwMuy4OICkN/OczdTsWr0Zs2rE4Q4frHrtwcdK
+ +pJu+4u3sgaCnvpjeVnAZTCFuuCSQktGirXl4KZwES4Se1SiOOOY
+X-Google-Smtp-Source: AGHT+IENcpPkDWGpB65tkHZRnw552zKSc4MgrD5QUASpkPJiFqSAdEsmhjYKudFbfzt97hvX5L7P+Q==
+X-Received: by 2002:a17:90a:be0b:b0:2af:d64:4887 with SMTP id
+ 98e67ed59e1d1-2bf5f50f7c2mr12233184a91.4.1716923716911; 
+ Tue, 28 May 2024 12:15:16 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:dfd9:2d9b:ff9d:4f57])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2bf92de8b86sm6127952a91.45.2024.05.28.12.15.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 May 2024 12:15:16 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: paul.liu@linaro.org
+Cc: u-boot@lists.denx.de,
+	Fabio Estevam <festevam@denx.de>
+Subject: [PATCH 1/2] imx8mm-cl-iot-gate: Add support for Samsung 4GB DDR
+Date: Tue, 28 May 2024 16:15:09 -0300
+Message-Id: <20240528191510.1366328-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240528144252.179247-1-heinrich.schuchardt@canonical.com>
- <20240528144252.179247-2-heinrich.schuchardt@canonical.com>
- <CAC_iWjJFiSrPZveDDhX7wW9J-gBiTCUw2jXpw9MG_+K3nsGaEA@mail.gmail.com>
- <9bcf8dff-1c67-477c-b425-cbb79f5ecfc3@canonical.com>
- <CAC_iWjLwRsgWK33q76rwqg0ovE4h80SHZTjjUqPUsPMgdh7SbQ@mail.gmail.com>
- <ea4d7ee9-811b-4713-9fc1-f5084d8c2d05@canonical.com>
-In-Reply-To: <ea4d7ee9-811b-4713-9fc1-f5084d8c2d05@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 28 May 2024 20:56:22 +0300
-Message-ID: <CAC_iWj+RLCUzMD8VEvpQ-2bFFUGC4AWWkkaRY0f69=2wzV0O=g@mail.gmail.com>
-Subject: Re: [PATCH v2 1/8] efi_loader: allow concatenation with contained end
- node
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Shantur Rathore <i@shantur.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Raymond Mao <raymond.mao@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Bin Meng <bmeng@tinylab.org>, Mark Kettenis <kettenis@openbsd.org>, 
- Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,82 +89,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 28 May 2024 at 19:59, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> On 28.05.24 18:18, Ilias Apalodimas wrote:
-> > [...]
-> >
-> >>>> -               unsigned sz2 = efi_dp_size(dp2);
-> >>>> +               size_t sz1;
-> >>>> +               size_t sz2 = efi_dp_size(dp2);
-> >>>>                   void *p;
-> >>>>
-> >>>> +               if (split_end_node < sizeof(struct efi_device_path))
-> >>>
-> >>> Can we be more explicit here pls? Someone might misuse this in the future
-> >>> split_end_node < =1 ? And we can document we can use values up to
-> >>> sizeof(struct efi_device_path) if we ever need extra functionality
-> >>
-> >> size_t split_end_node cannot be negative.
-> >>
-> >> The case split_end_node == 0 is handled below. What are you missing?
-> >
-> > someone misusing it and passing a value of '3' for example and print
-> > an error if the value is
-> > 1 < value < sizeof(struct efi_device_path)
->
-> I would like to avoid over-engineering. How about
->
-> -               if (split_end_node < sizeof(struct efi_device_path))
-> +               if (split_end_node < 2)
->
-> and changing the function description to refer to >= 2?
+From: Fabio Estevam <festevam@denx.de>
 
-Nop, in that case, I prefer what's already there, simply because
-values between 0 < sizeof(struct efi_device_path) will be used for
-functionality similar to the one we have for 0,1 in the future
+Newer versions of the imx8mm-cl-iot-gate boards may come populated with a
+Samsung 4GB DDR model.
 
-Thanks
-/Ilias
->
-> Best regards
->
-> Heinrich
->
-> >
-> > Thanks
-> > /Ilias
-> >>
-> >> Best regards
-> >>
-> >> Heinrich
-> >>
-> >>>
-> >>>> +                       sz1 = efi_dp_size(dp1);
-> >>>> +               else
-> >>>> +                       sz1 = split_end_node;
-> >>>> +
-> >>>>                   if (split_end_node)
-> >>>>                           end_size = 2 * sizeof(END);
-> >>>>                   else
-> >>>> diff --git a/lib/efi_loader/efi_device_path_utilities.c b/lib/efi_loader/efi_device_path_utilities.c
-> >>>> index c95dbfa9b5f..ac250bbfcc9 100644
-> >>>> --- a/lib/efi_loader/efi_device_path_utilities.c
-> >>>> +++ b/lib/efi_loader/efi_device_path_utilities.c
-> >>>> @@ -76,7 +76,7 @@ static struct efi_device_path * EFIAPI append_device_path(
-> >>>>           const struct efi_device_path *src2)
-> >>>>    {
-> >>>>           EFI_ENTRY("%pD, %pD", src1, src2);
-> >>>> -       return EFI_EXIT(efi_dp_concat(src1, src2, false));
-> >>>> +       return EFI_EXIT(efi_dp_concat(src1, src2, 0));
-> >>>>    }
-> >>>>
-> >>>>    /*
-> >>>> --
-> >>>> 2.43.0
-> >>>>
-> >>>
-> >>> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> >>
->
+Add support for it.
+
+Signed-off-by: Fabio Estevam <festevam@denx.de>
+---
+ board/compulab/imx8mm-cl-iot-gate/ddr/ddr.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/board/compulab/imx8mm-cl-iot-gate/ddr/ddr.c b/board/compulab/imx8mm-cl-iot-gate/ddr/ddr.c
+index b230478b611a..f1048a1ab2ab 100644
+--- a/board/compulab/imx8mm-cl-iot-gate/ddr/ddr.c
++++ b/board/compulab/imx8mm-cl-iot-gate/ddr/ddr.c
+@@ -47,7 +47,9 @@ struct lpddr4_desc {
+ static const struct lpddr4_desc lpddr4_array[] = {
+ 	{ .name = "Nanya",	.id = 0x05000010, .subind = 0xff,
+ 	  .size = 2048, .count = 1, .timing = &ucm_dram_timing_01061010},
+-	{ .name = "Samsung",	.id = 0x01061010, .subind = 0xff,
++	{ .name = "Samsung",	.id = 0x01061010, .subind = 0x04,
++	  .size = 4096, .count = 1, .timing = &ucm_dram_timing_ff000110},
++	{ .name = "Samsung",	.id = 0x01061010, .subind = 0x02,
+ 	  .size = 2048, .count = 1, .timing = &ucm_dram_timing_01061010},
+ 	{ .name = "Kingston",	.id = 0xff000010, .subind = 0x04,
+ 	  .size = 4096, .count = 1, .timing = &ucm_dram_timing_ff000110},
+-- 
+2.34.1
+
