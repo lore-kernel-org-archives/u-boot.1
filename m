@@ -4,80 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0B40C25B78
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 07:32:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92FD0C25B7E
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 07:37:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FE9C87F31;
-	Tue, 28 May 2024 09:32:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id E8AE688096;
+	Tue, 28 May 2024 09:37:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="RY8yXm/2";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="C32DTmwD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A1DB88405; Tue, 28 May 2024 09:32:54 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 48DA4883FB; Tue, 28 May 2024 09:37:36 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29F61879F2
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 09:32:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B266687F31
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 09:37:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-42108856c33so20697185e9.1
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 00:32:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1716881571; x=1717486371;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:to:from
- :from:to:cc:subject:date:message-id:reply-to;
- bh=mgUZ78+iFCTuzva8xLRi4B19HHV1NSzyNmw9z92ogaA=;
- b=RY8yXm/2tEgdbis+TgYymQgVILc8g5cjFVD3mQMwJWitV7FrPRAjWJkgeJxVdoUR9a
- v9BAZYHSkU8NaJvrx0wBOtn8NEa4MdtVPdpjjBBCx7gDk7IbTXTNPb97Dm/sFjVVTU3u
- OEWtu84aBpWF8YAGGoJMzCDdATYooqaYwByjpqlMQoKb5aKZ/TtMrTzA4D8ZBx5MwwUr
- GvuF5EetVFUjyFkrXMbo230K9SG43Tr1hwg6CQi+NckyFAjk8Vubww8SEfr0hE9E0xRP
- Ipai6eAkS0OW+8nyzNBQX6Gyo1tEx+SYoSjx7n3rGXOLwYAije3rbSNO8caMf/9f+6st
- Xm2A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716881571; x=1717486371;
- h=mime-version:message-id:date:references:in-reply-to:subject:to:from
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=mgUZ78+iFCTuzva8xLRi4B19HHV1NSzyNmw9z92ogaA=;
- b=Q6pRXRAgcqF/T2cEG87WYfyTftKNpw8i2HJQ0xXWZu1xsEaq0HwTSdnEthdakz5yYk
- XO8T74WFq5N4StoeSvkryiPM7VA0LbavLc4tZgdchGrIxu3NytKJA8jzSWxnYnaO/Odr
- DoKvQw9BLsP2VPBAWMWfEd6bT8adClxs0a57kU6gbIzYsYiHNh0c1pGDLGCBrH6YRebe
- Kh6Q1HNeUCNLUijd/hG0qf0QgeEQiUTt6fLJStox4zgt2H84Dc/dZy3CTULa8smyqnFy
- pojodVxsykaLslzmDG4XD7xtUYfArvZDfsBfzwmxMG3M9R/Ftp7nersOuQYP0gQX05HE
- RMrw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXesfcW3dAmjNoe0qSYvsxnU2DXw+qmftN52d0hBTLfeK/l4byvf+7b2ymeJaWtNJnQJYNGt4cdV/AocF3QXRgBE3V1SQ==
-X-Gm-Message-State: AOJu0YzJkKM9t4pkBbUKavXQ0l6X7j7q4t8lg3txqyQBLxBVWbbdY2tX
- 7/ZuRbjfhVHVmtE4h7BWP6rTUmZzU8bzepXFs5Fo9SFwVLJv3AGNexnHxKMLyMU=
-X-Google-Smtp-Source: AGHT+IFZEi0Fjh5G+/eVNdk07jlCs4GhOAvsBMsY96XBdYmY/Flv3CvxKCKXIPotzRLxEHYnNceq3g==
-X-Received: by 2002:a05:6000:1151:b0:354:ece6:d9b9 with SMTP id
- ffacd0b85a97d-35506d5bfd3mr10037634f8f.15.1716881571504; 
- Tue, 28 May 2024 00:32:51 -0700 (PDT)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-359efaf5402sm3542528f8f.78.2024.05.28.00.32.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 May 2024 00:32:51 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Roman Stratiienko <r.stratiienko@gmail.com>, r.stratiienko@gmail.com,
- igor.opaniuk@gmail.com, dsimic@manjaro.org, sjg@chromium.org,
- ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, eajames@linux.ibm.com,
- marek.vasut+renesas@mailbox.org, paulerwan.rio@gmail.com,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 2/3] avb: Implement get_preloaded_partition callback
-In-Reply-To: <20240519191856.2582174-3-r.stratiienko@gmail.com>
-References: <20240519191856.2582174-1-r.stratiienko@gmail.com>
- <20240519191856.2582174-3-r.stratiienko@gmail.com>
-Date: Tue, 28 May 2024 09:32:48 +0200
-Message-ID: <87ttiigzmn.fsf@baylibre.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44S7bUMe100999;
+ Tue, 28 May 2024 02:37:30 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1716881850;
+ bh=02pDd0JXDce2Mq6Kk4TlQryMgZ/o3qxC7oR0tGiWzjs=;
+ h=From:To:CC:Subject:Date;
+ b=C32DTmwDWHaXMMnjxuwdIuP7Ybq1UXiPLeFFznXCTgYifLyz8e59Wj3HY/MIgSAxU
+ 5dk3l9EB8Im7g/k39lJsPP1M0h6UXpZArzRQLP8s96q+plfn2Dh462841k8hCFZuxn
+ /LlZguc1OL6h3+7rpp2eWYbbm8JB4Ey3O0/+1sb0=
+Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44S7bU2N015766
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 28 May 2024 02:37:30 -0500
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 28
+ May 2024 02:37:30 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 28 May 2024 02:37:30 -0500
+Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44S7bRse005794;
+ Tue, 28 May 2024 02:37:28 -0500
+From: Neha Malcom Francis <n-francis@ti.com>
+To: <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <nm@ti.com>, <m-chawdhry@ti.com>,
+ <sjg@chromium.org>, <u-kumar1@ti.com>, <n-francis@ti.com>
+Subject: [PATCH] arm: dts: k3-j721e-r5-common-proc-board: Set parent clock for
+ clock ID 342
+Date: Tue, 28 May 2024 13:07:27 +0530
+Message-ID: <20240528073727.4057843-1-n-francis@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,74 +79,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Roman,
+From: Apurva Nandan <a-nandan@ti.com>
 
-Thank you for the patch.
+This virtual clock mux configuration enables the use of dynamic frequency
+scaling on A72 clock ID 202 by setting up the required register.
 
-On dim., mai 19, 2024 at 19:18, Roman Stratiienko <r.stratiienko@gmail.com> wrote:
+Signed-off-by: Apurva Nandan <a-nandan@ti.com>
+Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+---
+Boot logs:
+https://gist.github.com/nehamalcom/138d25fe32d4d80af3e0e4c19c1b18e0
 
-> AVB can reuse already loaded images instead of loading them
-> from the disk.
->
-> The get_preloaded_partition now looks for the env. variables
-> set by the 'abootimg load' to find the correct partition in RAM.
->
-> Signed-off-by: Roman Stratiienko <r.stratiienko@gmail.com>
-> ---
->  common/avb_verify.c | 53 +++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 53 insertions(+)
->
-> diff --git a/common/avb_verify.c b/common/avb_verify.c
-> index cff9117d92..d2626e8844 100644
-> --- a/common/avb_verify.c
-> +++ b/common/avb_verify.c
-> @@ -6,6 +6,7 @@
->  #include <avb_verify.h>
->  #include <blk.h>
->  #include <cpu_func.h>
-> +#include <env.h>
->  #include <image.h>
->  #include <malloc.h>
->  #include <part.h>
-> @@ -595,6 +596,55 @@ static AvbIOResult read_from_partition(AvbOps *ops,
->  			   num_bytes, buffer, out_num_read, IO_READ);
->  }
->  
-> +#ifdef CONFIG_ANDROID_BOOT_IMAGE
-> +/**
-> + * get_preloaded_partition() - Gets the starting pointer of a partition that
-> + * is pre-loaded in memory, and save it to |out_pointer|.
-> + *
-> + * If the partition is not pre-loaded in memory, the out_pointer shall not be
-> + * modified.
-> + *
-> + * @ops: contains AVB ops handlers
-> + * @partition: partition name, NUL-terminated UTF-8 string
+ arch/arm/dts/k3-j721e-r5-common-proc-board.dts | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-NUL -> NULL
+diff --git a/arch/arm/dts/k3-j721e-r5-common-proc-board.dts b/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
+index 9655ca21d02..25e4b4c7663 100644
+--- a/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
++++ b/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
+@@ -28,7 +28,8 @@
+ 				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
+ 		resets = <&k3_reset 202 0>;
+ 		clocks = <&k3_clks 61 1>;
+-		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>;
++		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>, <&k3_clks 342 0>;
++		assigned-clock-parents= <0>, <0>, <&k3_clks 342 2>;
+ 		assigned-clock-rates = <2000000000>, <200000000>;
+ 		ti,sci = <&dmsc>;
+ 		ti,sci-proc-id = <32>;
+-- 
+2.34.1
 
-> + * @num_bytes: amount of bytes to read
-> + * @out_pointer: pointer to the starting address of the partition
-> + * @out_num_bytes_preloaded: amount of bytes pre-loaded in memory
-> + *
-> + * @return:
-> + *      AVB_IO_RESULT_OK, if partition was found or was not found
-
-Add:
-
-           AVB_IO_RESULT_ERROR_IO, if partition size is smaller than requested
-
-With both small remarks addressed, please add:
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-
-> + *
-> + */
-> +static AvbIOResult get_preloaded_partition(AvbOps *ops, const char *partition, size_t num_bytes,
-> +					   uint8_t **out_pointer, size_t *out_num_bytes_preloaded)
-> +{
-
-[...]
-
-> -- 
-> 2.40.1
