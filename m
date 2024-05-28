@@ -4,82 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8745C25B78
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 07:22:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0B40C25B78
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 07:32:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14795883FB;
-	Tue, 28 May 2024 09:22:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1FE9C87F31;
+	Tue, 28 May 2024 09:32:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="nfFNEL09";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="RY8yXm/2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0479388402; Tue, 28 May 2024 09:22:46 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id 3A1DB88405; Tue, 28 May 2024 09:32:54 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4324883FA
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 09:22:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 29F61879F2
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 09:32:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-35507a3a038so296960f8f.0
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 00:22:43 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-42108856c33so20697185e9.1
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 00:32:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1716880963; x=1717485763;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1716881571; x=1717486371;
  darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=M1HElasoNknCnfiSjDOPfykLzqxoGBx0O1MB8fLGkrk=;
- b=nfFNEL09iZkyRHWWtvjva/BzrzDzIxQIgQAA3HkJTcdc7Vd8LV8/jxX3G9hgc0FL60
- eO5xieewVK9Tw5j1rgSKge3Wjxh8K81sLl2UFDWYUJh72mkAxsJ6+PcKACRatbkeSx5K
- FpzD6ibU4fcKIY9lM0nYC1bYjV0/RQlwdp3NAkyGT8H6PZG8Y3gt1ndcdFi9xNPqjOAj
- tXVPxKatoCvWwExmmftPC+paLqt/QRYKSRMRcEW7I/JMlGiPbxW/0M6Qo0isdwsVoKUU
- 96gfmQPhjTdArnkM4lkg+w2DvfD2IDvkWo9EWYazAMu+5zC+0zn8y/PhFKUV3NPnVppW
- GOCQ==
+ h=mime-version:message-id:date:references:in-reply-to:subject:to:from
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=mgUZ78+iFCTuzva8xLRi4B19HHV1NSzyNmw9z92ogaA=;
+ b=RY8yXm/2tEgdbis+TgYymQgVILc8g5cjFVD3mQMwJWitV7FrPRAjWJkgeJxVdoUR9a
+ v9BAZYHSkU8NaJvrx0wBOtn8NEa4MdtVPdpjjBBCx7gDk7IbTXTNPb97Dm/sFjVVTU3u
+ OEWtu84aBpWF8YAGGoJMzCDdATYooqaYwByjpqlMQoKb5aKZ/TtMrTzA4D8ZBx5MwwUr
+ GvuF5EetVFUjyFkrXMbo230K9SG43Tr1hwg6CQi+NckyFAjk8Vubww8SEfr0hE9E0xRP
+ Ipai6eAkS0OW+8nyzNBQX6Gyo1tEx+SYoSjx7n3rGXOLwYAije3rbSNO8caMf/9f+6st
+ Xm2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716880963; x=1717485763;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:to:from:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=M1HElasoNknCnfiSjDOPfykLzqxoGBx0O1MB8fLGkrk=;
- b=CQcXkVrc4NnzLAPGNGkvivepye8PKXLODOQAc/qxqhWeHFNA4oQ3U8R9wyAf1dshHk
- GWAamAD3c7FDfAmCU+1Xtx7x01gE8JGUp9kt56QG7aAgokX9FN5PTcWEoUJu7VCyizPY
- kamBgF0Kvb3u937e5sgpcAbte1TlwuRDVpMX3t1Z+Y8MP84Y0e3Gc2pfdjhRLVAIdFJP
- 51jU6YVzGftDiM3bZGK0qZ6pu7V4AdyuRV9YKB/yvnQ8ZUn4ilEHFaTwBNN5JfP03cqd
- N9e1A3ZSm0whIUtZgklai4h0hKD78Pj0j+CqQAYuMXp7WZfT5zYY5D67Grn8okjgkYZF
- lHuQ==
+ d=1e100.net; s=20230601; t=1716881571; x=1717486371;
+ h=mime-version:message-id:date:references:in-reply-to:subject:to:from
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=mgUZ78+iFCTuzva8xLRi4B19HHV1NSzyNmw9z92ogaA=;
+ b=Q6pRXRAgcqF/T2cEG87WYfyTftKNpw8i2HJQ0xXWZu1xsEaq0HwTSdnEthdakz5yYk
+ XO8T74WFq5N4StoeSvkryiPM7VA0LbavLc4tZgdchGrIxu3NytKJA8jzSWxnYnaO/Odr
+ DoKvQw9BLsP2VPBAWMWfEd6bT8adClxs0a57kU6gbIzYsYiHNh0c1pGDLGCBrH6YRebe
+ Kh6Q1HNeUCNLUijd/hG0qf0QgeEQiUTt6fLJStox4zgt2H84Dc/dZy3CTULa8smyqnFy
+ pojodVxsykaLslzmDG4XD7xtUYfArvZDfsBfzwmxMG3M9R/Ftp7nersOuQYP0gQX05HE
+ RMrw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWApDsDIqWziKJ9RtIJuUoT0SHk57o8P+nQulm28Oi4H2dmJ5VQX0VvIzB3YlYkmoAgqfipCmqCiAtTDv1z2elYjtRmQA==
-X-Gm-Message-State: AOJu0YzyKyDDEu+8e8UC8xPVwmKZmEiVyKp0S3KjRGhblWNIc6EcZ6uA
- cdKdX7wDqAgoutHNtatzGSXwZvoweP3Zzp+lEOu+xY/cpLRKkriwUDm+h89VDMU=
-X-Google-Smtp-Source: AGHT+IHCQ1niXL7hytALYwJELSYdkCIUvoU2wsNCD/LfTt0yBWvk4oej6z4JmW0QjPmygVImKipGsQ==
-X-Received: by 2002:adf:a45b:0:b0:354:de3f:b7cd with SMTP id
- ffacd0b85a97d-35526c272a9mr10698111f8f.24.1716880963152; 
- Tue, 28 May 2024 00:22:43 -0700 (PDT)
+ AJvYcCXesfcW3dAmjNoe0qSYvsxnU2DXw+qmftN52d0hBTLfeK/l4byvf+7b2ymeJaWtNJnQJYNGt4cdV/AocF3QXRgBE3V1SQ==
+X-Gm-Message-State: AOJu0YzJkKM9t4pkBbUKavXQ0l6X7j7q4t8lg3txqyQBLxBVWbbdY2tX
+ 7/ZuRbjfhVHVmtE4h7BWP6rTUmZzU8bzepXFs5Fo9SFwVLJv3AGNexnHxKMLyMU=
+X-Google-Smtp-Source: AGHT+IFZEi0Fjh5G+/eVNdk07jlCs4GhOAvsBMsY96XBdYmY/Flv3CvxKCKXIPotzRLxEHYnNceq3g==
+X-Received: by 2002:a05:6000:1151:b0:354:ece6:d9b9 with SMTP id
+ ffacd0b85a97d-35506d5bfd3mr10037634f8f.15.1716881571504; 
+ Tue, 28 May 2024 00:32:51 -0700 (PDT)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3557a1c93a5sm10915161f8f.70.2024.05.28.00.22.42
+ ffacd0b85a97d-359efaf5402sm3542528f8f.78.2024.05.28.00.32.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 May 2024 00:22:42 -0700 (PDT)
+ Tue, 28 May 2024 00:32:51 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 To: Roman Stratiienko <r.stratiienko@gmail.com>, r.stratiienko@gmail.com,
  igor.opaniuk@gmail.com, dsimic@manjaro.org, sjg@chromium.org,
  ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, eajames@linux.ibm.com,
  marek.vasut+renesas@mailbox.org, paulerwan.rio@gmail.com,
  u-boot@lists.denx.de
-Subject: Re: [PATCH 1/3] abootcmd: Add load subcommand
-In-Reply-To: <20240519191856.2582174-2-r.stratiienko@gmail.com>
+Subject: Re: [PATCH 2/3] avb: Implement get_preloaded_partition callback
+In-Reply-To: <20240519191856.2582174-3-r.stratiienko@gmail.com>
 References: <20240519191856.2582174-1-r.stratiienko@gmail.com>
- <20240519191856.2582174-2-r.stratiienko@gmail.com>
-Date: Tue, 28 May 2024 09:22:37 +0200
-Message-ID: <87wmneh03m.fsf@baylibre.com>
+ <20240519191856.2582174-3-r.stratiienko@gmail.com>
+Date: Tue, 28 May 2024 09:32:48 +0200
+Message-ID: <87ttiigzmn.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,194 +98,70 @@ Hi Roman,
 
 Thank you for the patch.
 
-On dim., mai 19, 2024 at 19:18, Roman Stratiienko <r.stratiienko@gmail.com>=
- wrote:
+On dim., mai 19, 2024 at 19:18, Roman Stratiienko <r.stratiienko@gmail.com> wrote:
 
-> What it does:
-> 1. Allocates the memory in HEAP to fit the partition
-> 2. Loads partition into memory. In the following patch of this series,
->    loading will be optimized to avoid loading an empty space.
-> 3. Sets buffer start and buffer size value into environment variables
->    abootimg_<partition>_ptr and abootimg_<partition>_size, respectively.
->     and duplicate them as
->    abootimg_<partition>_<slot>_ptr and abootimg_<partition>_<slot>_size.
->    The latter two are needed to access by the AVB get_preloaded_partition.
->    (see the next patch).
+> AVB can reuse already loaded images instead of loading them
+> from the disk.
 >
-> Before this command, the boot script developer was responsible for
-> allocating the memory manually by choosing the start and the end,
-> which is far from good.
->
-> Usage example:
->
->     abootcmd load mmc 0 boot a
-
-Should this be: abootimg load mmc 0 boot a ?
-
+> The get_preloaded_partition now looks for the env. variables
+> set by the 'abootimg load' to find the correct partition in RAM.
 >
 > Signed-off-by: Roman Stratiienko <r.stratiienko@gmail.com>
 > ---
->  cmd/abootimg.c | 84 +++++++++++++++++++++++++++++++++++++++++++++++++-
->  1 file changed, 83 insertions(+), 1 deletion(-)
+>  common/avb_verify.c | 53 +++++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 53 insertions(+)
 >
-> diff --git a/cmd/abootimg.c b/cmd/abootimg.c
-> index a5321bab6a..808c9c4941 100644
-> --- a/cmd/abootimg.c
-> +++ b/cmd/abootimg.c
-> @@ -8,7 +8,9 @@
->  #include <common.h>
->  #include <command.h>
+> diff --git a/common/avb_verify.c b/common/avb_verify.c
+> index cff9117d92..d2626e8844 100644
+> --- a/common/avb_verify.c
+> +++ b/common/avb_verify.c
+> @@ -6,6 +6,7 @@
+>  #include <avb_verify.h>
+>  #include <blk.h>
+>  #include <cpu_func.h>
+> +#include <env.h>
 >  #include <image.h>
-> +#include <malloc.h>
->  #include <mapmem.h>
-> +#include <part.h>
->=20=20
->  #define abootimg_addr() \
->  	(_abootimg_addr =3D=3D -1 ? image_load_addr : _abootimg_addr)
-> @@ -259,10 +261,81 @@ static int do_abootimg_dump(struct cmd_tbl *cmdtp, =
-int flag, int argc,
->  	return CMD_RET_SUCCESS;
+>  #include <malloc.h>
+>  #include <part.h>
+> @@ -595,6 +596,55 @@ static AvbIOResult read_from_partition(AvbOps *ops,
+>  			   num_bytes, buffer, out_num_read, IO_READ);
 >  }
->=20=20
-> +static int do_abootimg_load(struct cmd_tbl *cmdtp, int flag, int argc,
-> +			    char *const argv[])
+>  
+> +#ifdef CONFIG_ANDROID_BOOT_IMAGE
+> +/**
+> + * get_preloaded_partition() - Gets the starting pointer of a partition that
+> + * is pre-loaded in memory, and save it to |out_pointer|.
+> + *
+> + * If the partition is not pre-loaded in memory, the out_pointer shall not be
+> + * modified.
+> + *
+> + * @ops: contains AVB ops handlers
+> + * @partition: partition name, NUL-terminated UTF-8 string
+
+NUL -> NULL
+
+> + * @num_bytes: amount of bytes to read
+> + * @out_pointer: pointer to the starting address of the partition
+> + * @out_num_bytes_preloaded: amount of bytes pre-loaded in memory
+> + *
+> + * @return:
+> + *      AVB_IO_RESULT_OK, if partition was found or was not found
+
+Add:
+
+           AVB_IO_RESULT_ERROR_IO, if partition size is smaller than requested
+
+With both small remarks addressed, please add:
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+> + *
+> + */
+> +static AvbIOResult get_preloaded_partition(AvbOps *ops, const char *partition, size_t num_bytes,
+> +					   uint8_t **out_pointer, size_t *out_num_bytes_preloaded)
 > +{
-> +	int time_start =3D get_timer(0);
 
-On -next branch (where the patch will be applied), I see the following
-build error:
+[...]
 
-cmd/abootimg.c: In function =E2=80=98do_abootimg_load=E2=80=99:
-cmd/abootimg.c:279:26: error: implicit declaration of function =E2=80=98get=
-_timer=E2=80=99 [-Wimplicit-function-declaration]
-  279 |         int time_start =3D get_timer(0);
-      |                          ^~~~~~~~~
-
-Please add the missing include: #include <time.h>
-
-Base: 7e52d6ccfb76 ("Merge patch series "FWU: Add support for FWU metadata =
-version 2"")
-
-> +	struct blk_desc *desc;
-> +	struct disk_partition info;
-> +	char buf[512] =3D { 0 };
-> +	void *addr;
-> +	int ret;
-> +
-> +	if (argc < 4)
-> +		return CMD_RET_USAGE;
-> +	if (argc > 5)
-> +		return CMD_RET_USAGE;
-
-Can we please do this in a single line, like done in other commands such
-as do_abootimg_addr()?
-
-> +
-> +	ret =3D blk_get_device_by_str(argv[1], argv[2], &desc);
-> +	if (ret < 0) {
-> +		printf("Error: Failed to get device %s %s\n", argv[1], argv[2]);
-> +		return CMD_RET_FAILURE;
-> +	}
-> +
-> +	if (argc =3D=3D 5)
-> +		sprintf(buf, "%s_%s", argv[3], argv[4]);
-> +	else
-> +		sprintf(buf, "%s", argv[3]);
-> +
-> +	ret =3D part_get_info_by_name(desc, buf, &info);
-> +	if (ret < 0) {
-> +		printf("Error: Failed to get partition %s\n", buf);
-> +		return CMD_RET_FAILURE;
-> +	}
-> +
-> +	addr =3D (void *)memalign(4096, info.size * info.blksz);
-
-Why 4096? If this is a known number, can we use a define for it please?
-
-> +	if (!addr) {
-> +		printf("Error: Failed to allocate memory\n");
-> +		return CMD_RET_FAILURE;
-> +	}
-> +
-> +	ret =3D blk_dread(desc, info.start, info.size, addr);
-> +	if (ret < 0) {
-> +		printf("Error: Failed to read partition %s\n", buf);
-> +		goto fail;
-> +	}
-> +
-> +	sprintf(buf, "abootimg_%s_ptr", argv[3]);
-> +	env_set_hex(buf, (ulong)addr);
-> +
-> +	sprintf(buf, "abootimg_%s_size", argv[3]);
-> +	env_set_hex(buf, info.size * info.blksz);
-> +
-> +	if (argc =3D=3D 5) {
-> +		sprintf(buf, "abootimg_%s_%s_ptr", argv[3], argv[4]);
-> +		env_set_hex(buf, (ulong)addr);
-> +
-> +		sprintf(buf, "abootimg_%s_%s_size", argv[3], argv[4]);
-> +		env_set_hex(buf, info.size * info.blksz);
-> +	}
-> +
-> +	int time_end =3D get_timer(0);
-> +
-> +	printf("Loaded '%s' partition to address 0x%p (size: 0x%x) in %lu ms\n",
-> +	       argv[3], addr, info.size * info.blksz, time_end - time_start);
-
-This causes warnings on -next when building sandbox:
-$ make sandbox_defconfig
-$ make
-
-cmd/abootimg.c:339:65: warning: format =E2=80=98%x=E2=80=99 expects argumen=
-t of type =E2=80=98unsigned int=E2=80=99, but argument 4 has type =E2=80=98=
-long unsigned int=E2=80=99 [-Wformat=3D]
-  339 |         printf("Loaded '%s' partition to address 0x%p (size: 0x%x) =
-in %lu ms\n",
-      |                                                                ~^
-      |                                                                 |
-      |                                                                 uns=
-igned int
-      |                                                                %lx
-  340 |                argv[3], addr, info.size * info.blksz, time_end - ti=
-me_start);
-      |                               ~~~~~~~~~~~~~~~~~~~~~~
-      |                                         |
-
-
-> +
-> +	return CMD_RET_SUCCESS;
-> +
-> +fail:
-> +	free(addr);
-> +	return CMD_RET_FAILURE;
-> +}
-> +
->  static struct cmd_tbl cmd_abootimg_sub[] =3D {
->  	U_BOOT_CMD_MKENT(addr, 4, 1, do_abootimg_addr, "", ""),
->  	U_BOOT_CMD_MKENT(dump, 2, 1, do_abootimg_dump, "", ""),
->  	U_BOOT_CMD_MKENT(get, 5, 1, do_abootimg_get, "", ""),
-> +	U_BOOT_CMD_MKENT(load, 5, 1, do_abootimg_load, "", ""),
->  };
->=20=20
->  static int do_abootimg(struct cmd_tbl *cmdtp, int flag, int argc,
-> @@ -305,5 +378,14 @@ U_BOOT_CMD(
->  	"    - get address and size (hex) of DT blob in the image by index\n"
->  	"      <num>: index number of desired DT blob in DTB area\n"
->  	"      [addr_var]: variable name to contain DT blob address\n"
-> -	"      [size_var]: variable name to contain DT blob size"
-> +	"      [size_var]: variable name to contain DT blob size\n"
-> +	"abootimg load interface dev partition [slot_name]\n"
-> +	"    - load boot image from device partition\n"
-> +	"      memory is allocated in heap\n"
-> +	"      address is stored in $abootimg_<partition>_ptr\n"
-> +	"      size is stored in $abootimg_<partition>_size\n"
-> +	"      interface: interface type (e.g. mmc, usb)\n"
-> +	"      dev: device number (e.g. 0, 1)\n"
-> +	"      partition: partition number (e.g. boot, dtb)\n"
-
-"partition name" instead of "partition number"?
-
-> +	"      slot_suffix: slot name (e.g. a, b)"
->  );
-> --=20
+> -- 
 > 2.40.1
