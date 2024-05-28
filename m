@@ -4,97 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DBA4C25B78
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 08:32:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8047C25B7E
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 08:35:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD8878848A;
-	Tue, 28 May 2024 10:32:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6AAC588445;
+	Tue, 28 May 2024 10:35:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zVPPUJOF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="e+u3nmeH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DEE1488460; Tue, 28 May 2024 10:32:06 +0200 (CEST)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
+ id 77A3388418; Tue, 28 May 2024 10:35:09 +0200 (CEST)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B58B788458
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 10:32:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8ACE588441
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 10:35:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2e95a1eff78so6509301fa.0
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 01:32:04 -0700 (PDT)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-354ba5663c9so404338f8f.0
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 01:35:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716885124; x=1717489924; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=CD/V2oiNsUpOHKjezbUTUwiLCQwPADw8OLXT/uFcZdg=;
- b=zVPPUJOFJ1gpbfxPLGBLW16bWE2c3hAkNL/wi04cXXEKNGHltYFKXzd+mV2IRjcM61
- QrialesXJH4GoMyPmtd01hBBNBtt8FzGDgt0BvaLTgPL9Z8mcbFszC6ETH+ZxAf3oQf5
- 60MnX6g6I8CQdpn8vncsTEnkwI6KQvLfyw780B1fSB+PJHvjYv/+GxSZZCeBlDDnq4QG
- 1QPYm1ed1ucLGxm/bWH95+Gl78CHGZl5EPgQ9W5WkIvTBFk1L+mjKxOz3fm4i23B8DOJ
- mNQn9w+U9uWUZnm21q5FqgNUjzqxXZG47SRnxwjo/PxFdOxSaiWSZ9SJKiPocIkflZEi
- 47Iw==
+ d=linaro.org; s=google; t=1716885305; x=1717490105; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=kVQB5ZBz5/WJEBlYx9gP0Yo61aobCxqH47fDiuwoehA=;
+ b=e+u3nmeHDMICrMG3PqXudLa7cDw7EGa0km2qVlQLg+grMicbY9qusieIklnmr4E8rf
+ fop+OYGpVQh5F4gKQjF2qxNhjAC3R6FjgJtpYaI/25wm4uHDSUccNh/wKB9ycQviENVD
+ F3MHPrj82MJ3OvDnXgDwgiklZtVNFtGehJsjyRQiE6w6od+WjrDJ0BzNLgo2ExwVBDzP
+ e4YaOulcKQUzubSexLKTSP/F1Bbe8G2ARsTjaodac+YDAY8EeD7hSIvzAnJYHTFcLs24
+ 1UXPLtlPhxVvBXrAZmNKb2+0R7m4z2wwfJ6hhw0lkFxZUTeaiYI5DtwmBkPHFvj8kK2C
+ thng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716885124; x=1717489924;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CD/V2oiNsUpOHKjezbUTUwiLCQwPADw8OLXT/uFcZdg=;
- b=UnozMUV4ahEe1lo4ML2T9FuHPK7qUfQfUNsxCt/0lOdUA7ldqg2DVJRRGDejZcNsuE
- d43SEEzxWYcrM2zNDj2M/6psZ82dFX9CClYrbKh7Gf/cmuI6qSGZiDkyz5UE+mZG4a09
- SaRTPCjXgzxPGxckyPejoqF3saLdcmNAtVZ+5QKFbwf4oXr84X7E56CX/mMTFowXif29
- PXI2NIYs8YzYgk1KD+Puyk+PFDVIAgcF5+FOgCKtobgG+fB1+SgeQGT58zMr465QK0hK
- gGDNGJEFUPYefhp8rDzxmqMWxBiCyyMvNcSfd48IuIh/zLWrV6CqYaKF/pV4wgBuyrjF
- uY+Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXVXFFWSgGG5qH8zWgO+s+eTo5DvP1U+fU17dsliDXrPnalhTcZ5D8wB0N6bePBJZyXskn/9kUxR/U7jmiUMNnMZ4y8PQ==
-X-Gm-Message-State: AOJu0YwRN2GZoUGUoSyBeLhaBySX22JvJfPg8AHYq6i0Akbs7cjrFVf6
- 1RBMH0c/fEd4+t8aE26q+vUUJB5BU69aPjg1o/LNDEQw7u4/e6xPqbt+FQChiG+VIOTAHpg2srn
- X
-X-Google-Smtp-Source: AGHT+IH3o9EnDBKQ+H/FfRcvgzLOHRCV6cJ+YV0BmvMg1n5Y8GwXQB7NcLm/oZqGrz+vgHPpr0HtBg==
-X-Received: by 2002:a05:651c:b0d:b0:2e9:6d4f:e57 with SMTP id
- 38308e7fff4ca-2e96d4f143dmr81983071fa.11.1716885123927; 
- Tue, 28 May 2024 01:32:03 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1716885305; x=1717490105;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=kVQB5ZBz5/WJEBlYx9gP0Yo61aobCxqH47fDiuwoehA=;
+ b=h7qjCw4N+G5XsA1HXJ4ediz45NPgnamDO3fyzOGJyOZXwPYDYl+/4GPrNi5+zxeo/B
+ VB5YwILvXJREZUYhRnuhHGEYQ89hgQS0BSzxTHnWpzIGnkgcmE0e8oIHzzktRJLAKqiA
+ rxNQ02vhy0gcQ7DP/WSDaLEEFdje/SSe5cEZXPZ8VHYKsN/y8/UHqcXbU+32IId8SJ0J
+ gcxAi9UgxTzSXtAQeJEyDhsZh/sB7kxY1MaVOA5ElaGjeJ95/AGdfuCqu3Y5S7h+sEad
+ PimE6prQm+k2w0j0LCanr4tBddmCiQKfFU2cH78lZgpGMuUysIsRFVlrJ0bhMEXjeVdF
+ z7ng==
+X-Gm-Message-State: AOJu0YzGGth5l1kBNciWcRo5jwUtbU6Mx8+tUNUQonP70ToGJynbr/cn
+ CVLzpdA0q/8RKt1+uxp2aeH0LaZHfrjA39U6PbkfLufWK/wvUzSknoehh36ZBnc=
+X-Google-Smtp-Source: AGHT+IFqoLQNoZj4d3sAsymKc0/qvSGwtIu8Z9FI44ff+JCXdMsLltF5st1EhTkmENVNUPjCZn1ALQ==
+X-Received: by 2002:adf:f506:0:b0:355:433:8f80 with SMTP id
+ ffacd0b85a97d-35526c569f7mr7215241f8f.33.1716885304791; 
+ Tue, 28 May 2024 01:35:04 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42100ee7f1dsm167122035e9.7.2024.05.28.01.32.03
+ ffacd0b85a97d-358ffe5de1esm5234527f8f.34.2024.05.28.01.35.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 May 2024 01:32:03 -0700 (PDT)
+ Tue, 28 May 2024 01:35:04 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Tue, 28 May 2024 10:31:57 +0200
-Subject: [PATCH 5/5] pinctrl: qcom: sm8650: add special pins pins
- configuration data
+Date: Tue, 28 May 2024 10:35:03 +0200
+Subject: [PATCH] usb: dwc3: gadget: fix crash in dwc3_gadget_giveback()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240528-topic-sm8x50-pinctrl-pinconf-v1-5-54d1e9ad7dfa@linaro.org>
-References: <20240528-topic-sm8x50-pinctrl-pinconf-v1-0-54d1e9ad7dfa@linaro.org>
-In-Reply-To: <20240528-topic-sm8x50-pinctrl-pinconf-v1-0-54d1e9ad7dfa@linaro.org>
-To: Caleb Connolly <caleb.connolly@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
- Neil Armstrong <neil.armstrong@linaro.org>
+Message-Id: <20240528-topic-sm8x50-dwc3-gadget-crash-fix-v1-1-58434ab4b3d3@linaro.org>
+X-B4-Tracking: v=1; b=H4sIADaXVWYC/x2NywqEMAwAf0Vy3kC2rSD+yuKhpGnNwQeNuIL47
+ 1v2OHOYucGkqhiM3Q1VTjXd1gbvVwc8x7UIamoMjlyg3g14bLsy2jJcPWH6sscSU5EDuUabMeu
+ FOVKgkDOL99BCe5Wm/5PP9Dw/lr4qBHQAAAA=
+To: Lukasz Majewski <lukma@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, 
+ Marek Szyprowski <m.szyprowski@samsung.com>
+Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2477;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1593;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=GyUjNQLaqtuAEqtoXOgHoCzKRLac7lezt88J6C48HlY=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBmVZZ/KaGNcurp8h6y6q4kHq2KXkvONLxxwaPCgkU6
- ZspyKx+JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZlWWfwAKCRB33NvayMhJ0aN0D/
- 9j5PbFmfggnEsJTnoDwWdxQGVfsmAGTyxTIYncgDGB9c3HOhllR7APPTJvC3mmoX3Y59R8dRo8V7k4
- ZW2BJJfdM0l3YjJcMpBKEck5qi8m4sXyv3Q0WRG36QiXP1QPx8qrN05qtLqh00TVSWuH6bVVUBV1+d
- QC1ixwy5CuxnZKdTCM0tZsw9NmP4qt/pHEdTgUrSU1OtiFU8Kb3FAD1bsEDUFQoCZ0A3r1K7CQ6wFf
- hFf17OQCmrIt07kZL7qHIcIZ/1CSqeXMq21+DKZIZqmVlR7lbfOs56Iw4u52ZnYCznbdp0zROc3OCt
- DzsDNP3j2YJ7b289N/7ht0lc9+5NmKsfTIF3D0PSccK9wrIkr+THF/DtfeB3/AdxlousEjE71lK9Zi
- 1mOVHRwcW68dpLNzlsWVLvPHwVbyEXynZ07GDt40F9MOaCgKDZnuGCqmrZPevfqQwOTVwKuQFMLOTe
- Qf+vCucIdHO9btGEh+uWXGZKeidGC67qFwRZwOoesAOLInh7a/Natgy7BY4KdmXaRAjPPzVj/6oDXn
- 3O6jXgpEPl+mJzVqkClATcoc6uZ1wcr3SX9pRp1Fukry4mqv9uyg1FUdDdoJOyK3JXFNN2sqUjoQja
- 379jy02tBulXN/WUsArD50Q4esEeAF6MrGyFEo2HYoOZGdWC7PgJ8ssW534A==
+ bh=B5v3p5TfjpucgwVaRmabxLJsVbrZ2qBAHNeqCVZ+8EQ=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBmVZc3LMXx7uOk71tX6sXkfMFvHjcSoLucPORZoybK
+ mdM270yJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZlWXNwAKCRB33NvayMhJ0W78D/
+ oCk+FQ9q9uLbHzANA3J3ywHgiIWHhuvWjVjWiZYKmps6D3pduUCy41fdUaqMEe6srtqPUgZvt/uqCV
+ N9ivLp3x4Kok6lnOIO93A4NkAoWkyPgqybRhknD+oc2EkIn0wNkRfLVEruY05Hb6HdsO+yVCji+ucD
+ AWJV/JqC+U+2NAkVuGNcPIwPnyTfI/z2zJoN+jMSPoM+XkGIOdqU71iGulIOxkllWU7PjVSR75AxCa
+ ezDvW3PqyYAdJo38wp2oTe8iniNETAbJntMW06MWN6h1MhqQvDhYGc8rrpP9hD2at2kzDpUF6B6NHQ
+ KplA7OjSozQyqiz1FGiS46VvdR4YQUtCAFwAi3gMTSLIsCSR/XlXOz44WKKCZoCUKQ/7WUBEqh4Pua
+ yOnMYbMJikshKeG1OAVsNSuK0yS6keav05KVFzK83Fe/0PG5tFwSjQoZyFUFLXYTJs3002pC7VW4wT
+ kps3hK1CE/VL/L4aL3qW8mDC4LktOWfBPI6R9PWF5zOP7JkNVG8sHWipYsa4hh0ulOpiS8vDWUm6/T
+ slc1SkLErzL//ny6Zfd8b+gIjnHklG0Y+2721b8UKK9iGrKu5WbtqV50SdoyhT3LXqjBXyJiNxXrqz
+ jPkepbYXKhmzTfEtUGYQ16B7ruDak5+cR+ZOGwEDfxVaYy0at6Hbbkjnlqdw==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -113,83 +111,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the special pins configuration data to allow setup the bias
-of the UFS and SDCard pins on the SM8650 SoC.
+If the ep0 stalls or request are dequeued when gagdet is stopped,
+the request dma may not be mapped yet and dwc3_flush_cache() may be
+called with a NULL pointer.
 
+Check req->request.dma before calling dwc3_flush_cache() and later
+the usb_gadget_unmap_request() functions since it means that
+usb_gadget_map_request() hasn't been called yet.
+
+Fixes: fd15b58c1a9 ("dwc3: flush cache only if there is a buffer attached to a request")
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/pinctrl/qcom/pinctrl-sm8650.c | 42 ++++++++++++++++++++++++++++-------
- 1 file changed, 34 insertions(+), 8 deletions(-)
+ drivers/usb/dwc3/gadget.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/pinctrl/qcom/pinctrl-sm8650.c b/drivers/pinctrl/qcom/pinctrl-sm8650.c
-index d6cc1bbdda8..58fc94e71ac 100644
---- a/drivers/pinctrl/qcom/pinctrl-sm8650.c
-+++ b/drivers/pinctrl/qcom/pinctrl-sm8650.c
-@@ -18,6 +18,37 @@ static const struct pinctrl_function msm_pinctrl_functions[] = {
- 	{"gpio", 0},
- };
+diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
+index fab32575647..92c7c6d08b7 100644
+--- a/drivers/usb/dwc3/gadget.c
++++ b/drivers/usb/dwc3/gadget.c
+@@ -248,7 +248,7 @@ void dwc3_gadget_giveback(struct dwc3_ep *dep, struct dwc3_request *req,
  
-+#define SDC_QDSD_PINGROUP(pg_name, ctl, pull, drv)	\
-+	{					        \
-+		.name = pg_name,			\
-+		.ctl_reg = ctl,				\
-+		.io_reg = 0,				\
-+		.pull_bit = pull,			\
-+		.drv_bit = drv,				\
-+		.oe_bit = -1,				\
-+		.in_bit = -1,				\
-+		.out_bit = -1,				\
-+	}
-+
-+#define UFS_RESET(pg_name, ctl, io)			\
-+	{					        \
-+		.name = pg_name,			\
-+		.ctl_reg = ctl,				\
-+		.io_reg = io,				\
-+		.pull_bit = 3,				\
-+		.drv_bit = 0,				\
-+		.oe_bit = -1,				\
-+		.in_bit = -1,				\
-+		.out_bit = 0,				\
-+	}
-+
-+static const struct msm_special_pin_data msm_special_pins_data[] = {
-+	[0] = UFS_RESET("ufs_reset", 0xde004, 0xdf000),
-+	[1] = SDC_QDSD_PINGROUP("sdc2_clk", 0xd6000, 14, 6),
-+	[2] = SDC_QDSD_PINGROUP("sdc2_cmd", 0xd6000, 11, 3),
-+	[3] = SDC_QDSD_PINGROUP("sdc2_data", 0xd6000, 9, 0),
-+};
-+
- static const char *sm8650_get_function_name(struct udevice *dev,
- 						 unsigned int selector)
- {
-@@ -27,15 +58,9 @@ static const char *sm8650_get_function_name(struct udevice *dev,
- static const char *sm8650_get_pin_name(struct udevice *dev,
- 					unsigned int selector)
- {
--	static const char *special_pins_names[] = {
--		"ufs_reset",
--		"sdc2_clk",
--		"sdc2_cmd",
--		"sdc2_data",
--	};
--
- 	if (selector >= 210 && selector <= 213)
--		snprintf(pin_name, MAX_PIN_NAME_LEN, special_pins_names[selector - 210]);
-+		snprintf(pin_name, MAX_PIN_NAME_LEN,
-+			 msm_special_pins_data[selector - 210].name);
- 	else
- 		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
+ 	list_del(&req->list);
+ 	req->trb = NULL;
+-	if (req->request.length)
++	if (req->request.dma && req->request.length)
+ 		dwc3_flush_cache((uintptr_t)req->request.dma, req->request.length);
  
-@@ -52,6 +77,7 @@ static struct msm_pinctrl_data sm8650_data = {
- 	.pin_data = {
- 		.pin_count = 214,
- 		.special_pins_start = 210,
-+		.special_pins_data = msm_special_pins_data,
- 	},
- 	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
- 	.get_function_name = sm8650_get_function_name,
+ 	if (req->request.status == -EINPROGRESS)
+@@ -256,7 +256,7 @@ void dwc3_gadget_giveback(struct dwc3_ep *dep, struct dwc3_request *req,
+ 
+ 	if (dwc->ep0_bounced && dep->number == 0)
+ 		dwc->ep0_bounced = false;
+-	else
++	else if (req->request.dma)
+ 		usb_gadget_unmap_request(&dwc->gadget, &req->request,
+ 				req->direction);
+ 
 
+---
+base-commit: 7e52d6ccfb76e2afc2d183b357abe2a2e2f948cf
+change-id: 20240528-topic-sm8x50-dwc3-gadget-crash-fix-fa0404ffce33
+
+Best regards,
 -- 
-2.34.1
+Neil Armstrong <neil.armstrong@linaro.org>
 
