@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BDD8C25B78
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 11:51:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9451C25B78
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 12:31:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C0B487D33;
-	Tue, 28 May 2024 13:51:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D0016883B9;
+	Tue, 28 May 2024 14:31:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="o+UWVr9Q";
+	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="RBT77pVX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8590C87EAC; Tue, 28 May 2024 13:51:01 +0200 (CEST)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
+ id A74CD883B9; Tue, 28 May 2024 14:31:46 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E68C87AD2
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 13:50:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5314D88361
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 14:31:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-1f480624d10so5791075ad.1
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 04:50:59 -0700 (PDT)
+ spf=pass smtp.mailfrom=robert.marko@sartura.hr
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-421205e8cdeso5308885e9.1
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 05:31:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716897058; x=1717501858; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LHim6GJKr/d6ob363g6M3Xrcvq2PkDFhv3r1tmUAyFI=;
- b=o+UWVr9Q9vHo2bUMp42hSeKUvKDUvqqCgd8We2SKO6ap2nEx50ViO458iyp4cRNZFh
- i/zkZbbzSmmr/J3bRGsoegTgn3oTU3w7NnuKbzrSW/MAa0ojZ42q+WZ8MOj1ejT2xlzY
- pVNu6qLwL0u78sO1DSzlb7trdHgScfCIo5X9dyvHgTpfohdPfiY9kwnJ5vw1g2V47I2R
- b/CF6kPUtJBLlqgQtZtpiCwikrQGM27FxY9jS0FEdYz3s+RZlOCIeS80T9ofGa9vpzHy
- pVVNgqA2AOZbjqLVOXGP66m8aUs+rxEH0tzVQYNmlbghoEdXv2nzj+g61mqptpu+bozZ
- IP2w==
+ d=sartura.hr; s=sartura; t=1716899502; x=1717504302; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Y3iNEwhDpABS1fUgE/PaLasUi/VDZqxUXYqsWbeEfeM=;
+ b=RBT77pVXYlxnbS48n98Fkyg0DBwoh7iZKETwCZsounV5hNdSwBXyggpSongSOBBxKx
+ 2wCf90Z08W8YzevQJNM/XrXowuRJga2SwMQMLKsPTPz8d5chnYIsbhC7Bcp4QEsiIuIJ
+ 94Z36ArZTh/ZUJyvQFSW4YaRQQj7/UfcCX+TsKbzdq/BxdZiEF7AcmXVeBeP2eDKmqdp
+ /IvJo+TAxvf/4nuBs2crJUOgbbeADTBj9HmKvfd2KQ3Wd7e0sj3c4rkswYmMkmNTAOI9
+ dYwgiQZYn5flMd5cZBWvMR/JPhwybXQ7Laua7DGBZ6Mw8Hl5+4IcUPVW/eFgjfvQwgHg
+ UZIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716897058; x=1717501858;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1716899502; x=1717504302;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=LHim6GJKr/d6ob363g6M3Xrcvq2PkDFhv3r1tmUAyFI=;
- b=ccji/6oDKmXDHkjI3gyjBaLKAgI2EE6iAU74R9Y6CCv9T7BDzeGt7v0v6qEjO2QAEN
- mD4KFdBP3Ca7mOzR5YN/jo2v9364RR+9jp51lbx94RBCFc2L/aj5TND/LlM30+ckNtXI
- XVg8cZ/3Lg9AoIsvcDBTuiGtHJOuFP3/0YekRhX5ZYTmfvvMwrvc3MJCCpo6p4v31hQJ
- Rn4O0Y5EQF+LuU1o1cG8UqgHPxsSTmvdneMl4Ac9b+kk/4ax1QDzCKCJSoWoiWqgNxDW
- Kl5v/b5h8+ofbjM5I/se9G4yPFVmQYx6j9BjLIziAqCVkNJYw0V6kTbJyF8HsN3cSwYF
- O/fA==
+ bh=Y3iNEwhDpABS1fUgE/PaLasUi/VDZqxUXYqsWbeEfeM=;
+ b=bEUiHeUigz119r5rlWW/MqvghDz1k/u3e/L/Og5NejED3cYBCP8DifCP3Um0gjZlSg
+ 7Jeybv5VxQ8SjTPwlAVcYGTXV4fKu6zBoZDFbBSyBWUzBtGcBiusibFwDadYTwFalQ/x
+ PyhM1n2CBkuGAB2s7A0Ip8TA4SnY1Go0OuZwnk8vFBH7vu0W9cOUJ96w9TJ9RQw0MMte
+ JdgI3a7OaXePFOGHw3DNj7wwem2bCQYoD8uRbBta4mz9SXAObOo/9lRwNMbmfN1i+kn1
+ sjthTU3wwOpAwQPav1869b2rigpEc9sKvrEbvf3pwyMDfIFuW3wQhmXbQT/qEgej92mV
+ G9Gg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWF9v4B7VA0W9KmZtB+WX3mISgM8uQrVNJ32wyT7hPRpI9Tzx1bSoPdzwo4gH3u+KNMJrX3itT59wv7s4rni4mbS1+EbQ==
-X-Gm-Message-State: AOJu0YyJehsvf9JPdLw7ZvZ1WRCKRu0WAAlUgTRPS2hKtW+ujVjVSjZU
- QK3eMmv8pOJi96xnhWDLhlVYIxReJXkGSdvZFoEIe1hWadTB3dAm26zKiMdk3csweASB1rVIrOE
- PqFM3k5tzHzNOV87Bs6uK9JrALzvsfFRY2KuJMg==
-X-Google-Smtp-Source: AGHT+IGSJNvF3rjPO+L1X75Ig25eGTtA/tCfaqcT9w0PlmOFUhxI29EYdkkUZMuHTuwOQigtGRthkgPJK149ihlJNkE=
-X-Received: by 2002:a17:902:ec91:b0:1f4:a6cb:db3d with SMTP id
- d9443c01a7336-1f4a6cbdd7fmr61253525ad.44.1716897057648; Tue, 28 May 2024
- 04:50:57 -0700 (PDT)
+ AJvYcCWg2QBhh9eOA2uVMRZVN0ZirHfIjtkoFidVgyBpzwp1QZLspp4RQYbO99v+ODN/C8SbJfhonaxRjrZsMn/tK9aPJHsYSg==
+X-Gm-Message-State: AOJu0YwNaB+fKJoJeSYZpiCDx1eAL5sD1fRBR6Z3G8lBaWHXi53BEIF+
+ XdBp5MQqh9Yn40UcIq61+fHBEC50VqbdQPbmKRUgHA5qoTw9askTpExieRGcst0=
+X-Google-Smtp-Source: AGHT+IETbZnxPZeYebPFvGVLe9BnD8EN09t0VK81Y1qzwLlo1CGunnK0CApvj5Hq7Ok+Vgg4pa5fcw==
+X-Received: by 2002:a7b:ca48:0:b0:420:182e:eb46 with SMTP id
+ 5b1f17b1804b1-42108aa7bc5mr126354595e9.38.1716899501418; 
+ Tue, 28 May 2024 05:31:41 -0700 (PDT)
+Received: from fedora.. (dh207-15-56.xnet.hr. [88.207.15.56])
+ by smtp.googlemail.com with ESMTPSA id
+ 5b1f17b1804b1-4210896f442sm139708725e9.11.2024.05.28.05.31.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 May 2024 05:31:40 -0700 (PDT)
+From: Robert Marko <robert.marko@sartura.hr>
+To: lukma@denx.de, seanga2@gmail.com, caleb.connolly@linaro.org,
+ neil.armstrong@linaro.org, trini@konsulko.com, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+Cc: j.beck@linefinity.com,
+	Robert Marko <robert.marko@sartura.hr>
+Subject: [PATCH] clock: qcom: ipq4019: add I2C clocks
+Date: Tue, 28 May 2024 14:31:04 +0200
+Message-ID: <20240528123137.170414-1-robert.marko@sartura.hr>
+X-Mailer: git-send-email 2.45.1
 MIME-Version: 1.0
-References: <cover.1716566960.git.jerome.forissier@linaro.org>
- <20240527092301.GA7851@francesco-nb>
- <23a33323-35d8-4ece-b57b-cdfbc318d3c4@linaro.org>
- <20240527094522.GA22281@mail.duskware.de>
- <ce97ef0a-29d1-4735-b44b-0ce517bb82d7@linaro.org>
- <20240527124757.GE6853@mail.duskware.de>
-In-Reply-To: <20240527124757.GE6853@mail.duskware.de>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 28 May 2024 14:50:20 +0300
-Message-ID: <CAC_iWjKpRLA6y-CaOMQp+dDSzVFk6XFDD90QZQw4DivO6AtGzg@mail.gmail.com>
-Subject: Re: [PATCH v2 00/14] Introduce the lwIP network stack
-To: Martin Husemann <martin@netbsd.org>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Francesco Dolcini <francesco@dolcini.it>, 
- u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>, 
- Maxim Uvarov <muvarov@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,28 +93,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all
+I2C clocks are not initialized by the SBL, so lets add support for clocks
+required by both of the QUP I2C controllers.
 
-On Mon, 27 May 2024 at 15:47, Martin Husemann <martin@netbsd.org> wrote:
->
-> On Mon, May 27, 2024 at 02:45:01PM +0200, Jerome Forissier wrote:
-> > That certainly would work but again, isn't it a decision to be made
-> > by the device manufacturer or more generally the one who builds u-boot
-> > for the device?
->
-> Very true, and if you get the verification part working, your full solution
-> is better!
+BLSP1 AHB clock is already initialized by SBL, but QUP I2C driver is
+requesting it so we have to add it to the enable list.
 
-Just to chime in a bit on the why. HTTPs is one of the options we can
-easily plug in with LWIP & mbedTLS. But apart from that, getting a
-richer TCP/IP stack that has been used for years in RTOSes is a win on
-its own.
+Based off QCS404 clock driver.
 
-We can now easily add multiple net-based applications without having
-to implement the underlying TCP/IP stack.  LWIP is a very slight
-increase in size (~1%) and the advantages are well worth it.
+Signed-off-by: Robert Marko <robert.marko@sartura.hr>
+---
+ drivers/clk/qcom/clock-ipq4019.c | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
-Cheers
-/Ilias
->
-> Martin
+diff --git a/drivers/clk/qcom/clock-ipq4019.c b/drivers/clk/qcom/clock-ipq4019.c
+index fca7626ada..73dbd25811 100644
+--- a/drivers/clk/qcom/clock-ipq4019.c
++++ b/drivers/clk/qcom/clock-ipq4019.c
+@@ -16,6 +16,12 @@
+ 
+ #include "clock-qcom.h"
+ 
++/* I2C controller clock control registerss */
++#define BLSP1_QUP1_I2C_APPS_CBCR	(0x2008)
++#define BLSP1_QUP1_I2C_APPS_CMD_RCGR	(0x200C)
++#define BLSP1_QUP2_I2C_APPS_CBCR	(0x3010)
++#define BLSP1_QUP2_I2C_APPS_CMD_RCGR	(0x3000)
++
+ static ulong ipq4019_clk_set_rate(struct clk *clk, ulong rate)
+ {
+ 	switch (clk->id) {
+@@ -29,7 +35,22 @@ static ulong ipq4019_clk_set_rate(struct clk *clk, ulong rate)
+ 
+ static int ipq4019_clk_enable(struct clk *clk)
+ {
++	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
++
+ 	switch (clk->id) {
++	case GCC_BLSP1_AHB_CLK:
++		/* This clock is already initialized by SBL1 */
++		return 0;
++	case GCC_BLSP1_QUP1_I2C_APPS_CLK:
++		clk_enable_cbc(priv->base + BLSP1_QUP1_I2C_APPS_CBCR);
++		clk_rcg_set_rate(priv->base, BLSP1_QUP1_I2C_APPS_CMD_RCGR, 0,
++				 CFG_CLK_SRC_CXO);
++		return 0;
++	case GCC_BLSP1_QUP2_I2C_APPS_CLK:
++		clk_enable_cbc(priv->base + BLSP1_QUP2_I2C_APPS_CBCR);
++		clk_rcg_set_rate(priv->base, BLSP1_QUP2_I2C_APPS_CMD_RCGR, 0,
++				 CFG_CLK_SRC_CXO);
++		return 0;
+ 	case GCC_BLSP1_QUP1_SPI_APPS_CLK: /*SPI1*/
+ 		/* This clock is already initialized by SBL1 */
+ 		return 0;
+-- 
+2.45.1
+
