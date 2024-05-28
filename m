@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98D12C25B78
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 14:17:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BA57C25B78
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 14:18:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3456A8852A;
-	Tue, 28 May 2024 16:17:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DD8B48852C;
+	Tue, 28 May 2024 16:18:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QKkzN5ew";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="I3/Vszt1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF78B88543; Tue, 28 May 2024 16:17:52 +0200 (CEST)
-Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
- [IPv6:2607:f8b0:4864:20::735])
+ id 168F088578; Tue, 28 May 2024 16:18:13 +0200 (CEST)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79C39884D1
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 16:17:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 05C18884D1
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 16:18:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qk1-x735.google.com with SMTP id
- af79cd13be357-794ab181ff7so55160785a.2
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 07:17:50 -0700 (PDT)
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-794ab10d07aso36419485a.2
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 07:18:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716905869; x=1717510669; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1716905890; x=1717510690; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hdkuRqczP+Um9XGzlJSI5B1JzrYXX6wTmt/qz3Jwsf4=;
- b=QKkzN5ewKmsnt+CU0AmRsccGmOKsbrWx8V81XqvaME/c5ckQT7g4M/K67S3r36fk5F
- R18v179hQgaoVOnkBU/iXRGNVlrC1eYGZrtnB2mLGuzGyOJPfqNvtJjVqgeOTzhEuhSM
- zi2I8GGDveYUdccampebREqMCkp0kxtwTV3aUxgz1Opk1zw48wf+p/+SWcF8eqUS4/Ih
- kLzNSfj8rCQVFOtVl3yMrXcXpKkKmZtFW6ifo/xtnzpuhFNbPYRvjGOwcGi8EuaUT+tc
- 0MaHgqYPWcHcwMdfDvr6l0FSPCKuT/C9cvu3Wq0OahI55WjEqyI/FTViDMKvicz5Q4a2
- 0XJg==
+ bh=M8lEFZrxfeB3Ykqa16cfNu3YtuZ3QYMBcCmnl3dOm34=;
+ b=I3/Vszt1jVcmrNlTSNBRAH0gRHc9NfbsS9jYy0ioYGZ5r2EHrGTuTRbD3IFpUMAGbd
+ GEJ36ly5g+wuUUyard6fu12RqFFhIvDLOEnYfdUU76HwrBZHdTPKk0ASpMoFyNv43nSf
+ Lg1CigJ9ewc3EYXw5ZQ/kD4WKwE91SwoGXFFu3/zez6mCb1omocUhepzjzVj6yi9kPBa
+ Ip/x55DSaSf23jiqsDL7h0DFw0vOlF/DM3i/Gf0ZA/0M6nTWRSgaK9MxnnU/2YxQQyaT
+ GDf7uiECjOr9pP22KBqV19740TCM8SpseOZn4rEuUxaZ/8ncSffsyxkbHh5sQqxcF5Sk
+ ZWng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716905869; x=1717510669;
+ d=1e100.net; s=20230601; t=1716905890; x=1717510690;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hdkuRqczP+Um9XGzlJSI5B1JzrYXX6wTmt/qz3Jwsf4=;
- b=b5dBjHBnKpAiY1UqiHvbzc+eh0xfLnbCDJXmWUExaJny5YZ7N0Fvbogix6FpDzokX7
- 7hUlxekIh1VvgA6ZLtxC6ZNQtPlE5eWEet1/gdf+hp1K9LMTzZq/mfoEfiw/RttINNy3
- 2nox7y39NZJgWRbkeWyyTSHYgO2qae1glJTtEU/j3EeB4CaJmXuGjlCL/cwBq0OO0u3V
- xrmW4Gy13kfk7idy13dELA76XGMSsqdf6ZZwjDrzZUVJggQ8rorbMYuOL6O8i2avl0AR
- 4atCxWWTbycpqfDidI8eNlEDY38+WxekiIiuctJBkQdN3wRxU5rGRuEEI0q2DCEaOHfI
- LpUA==
-X-Gm-Message-State: AOJu0YwbjoTUmdACLj6QPf8mXa1UGBT15gNORFjxAH2ZxycjyPitxsgv
- 1qFk7+vwgdj9FhFVB/h8YF9G29978niBNH8gYc7NwJEJerJrk7/kXW/xkXi0IgcwGwkWPCVglr+
- Q1CY=
-X-Google-Smtp-Source: AGHT+IEEwhEWl09ISivE/QfuA0chQmkLM3z9jNT3BSA75A/qeKafMAz0Z2kmhO8hHpouzOdsEKjLAQ==
-X-Received: by 2002:a05:620a:e87:b0:793:fdb:ca4 with SMTP id
- af79cd13be357-794ab099db0mr1143999985a.35.1716905868758; 
- Tue, 28 May 2024 07:17:48 -0700 (PDT)
+ bh=M8lEFZrxfeB3Ykqa16cfNu3YtuZ3QYMBcCmnl3dOm34=;
+ b=a/WBP73J/gt0Nz+hvgE4zDSWUMuZaPcn1RH+OdwjUyTe78sFIYGCJVYefWdp9gEJ3q
+ HNkZSQqP6F3z5yh4qBb0WpKrWSWSsz3wLr97onOu7v8iEk9kLWLi1Ytds4uoGwGDcEXW
+ HR4dDMAwHvIz/83VzpqOkWdulJtIr/OGQdIJ5HtYKpZW/nmiQm0AMnirhB9iLPegpdPz
+ JPvKeY91pYrVVkDdS0vt9cmUpzB/MWQsrHlmPNLeaygPV965BDQki1WexaRYGEG6sTEm
+ W9mUE2Ct842PmECGX0C7bEHr1281IHgPqhwQUZIK7lFIe3uOzcDQKleew15UtzVnoW6E
+ 0ooA==
+X-Gm-Message-State: AOJu0YyMHHg/gE1+6vDAWE5VBDSIxhgQ2PfaLh/FQRZJzjeQtebyFDYI
+ 52U3tFTpTVKHu5QGswp5/2aEZxmEUWco4oSuq+a/BA6CtzL0ykxJpjUTzVO4Vd/I/79lsgkcMwY
+ b57U=
+X-Google-Smtp-Source: AGHT+IEkTxDYJFO6dtibkS7bulq+/L0fgnEwTQviHcaITk73F4H58jRjnvt67Br+ZaFabQQL2cB/zA==
+X-Received: by 2002:a05:620a:88f:b0:792:dd4c:a550 with SMTP id
+ af79cd13be357-794ab1223e2mr1168098585a.71.1716905889673; 
+ Tue, 28 May 2024 07:18:09 -0700 (PDT)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-794abcc5844sm381033685a.53.2024.05.28.07.17.46
+ af79cd13be357-794abcc5844sm381033685a.53.2024.05.28.07.18.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 May 2024 07:17:48 -0700 (PDT)
+ Tue, 28 May 2024 07:18:09 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
@@ -73,25 +73,25 @@ Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  Michal Simek <michal.simek@amd.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sean Anderson <seanga2@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
  "Leon M. Busch-George" <leon@georgemail.eu>,
- Sergei Antonov <saproj@gmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilya Lukin <4.shket@gmail.com>, Sergei Antonov <saproj@gmail.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, Bin Meng <bmeng@tinylab.org>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>,
+ Alexander Gendin <agendin@matrox.com>,
  Manorit Chawdhry <m-chawdhry@ti.com>,
- =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: [PATCH v3 21/25] mbedtls: add RSA helper layer on MbedTLS
-Date: Tue, 28 May 2024 07:09:32 -0700
-Message-Id: <20240528140955.1960172-22-raymond.mao@linaro.org>
+Subject: [PATCH v3 22/25] lib/rypto: Adapt rsa_helper to MbedTLS
+Date: Tue, 28 May 2024 07:09:33 -0700
+Message-Id: <20240528140955.1960172-23-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240528140955.1960172-1-raymond.mao@linaro.org>
 References: <20240528140955.1960172-1-raymond.mao@linaro.org>
@@ -113,137 +113,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add RSA helper layer on top on MbedTLS PK and RSA library.
+Previous patch has introduced MbedTLS porting layer for RSA helper,
+here to adjust the makefile accordingly.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
 Changes in v2
 - Initial patch.
 Changes in v3
-- None.
+- Update commit message.
 
- lib/mbedtls/Makefile     |  1 +
- lib/mbedtls/rsa_helper.c | 99 ++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 100 insertions(+)
- create mode 100644 lib/mbedtls/rsa_helper.c
+ lib/crypto/Makefile | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
-index f0b8a1c4003..dab110891af 100644
---- a/lib/mbedtls/Makefile
-+++ b/lib/mbedtls/Makefile
-@@ -27,6 +27,7 @@ x509_mbedtls-$(CONFIG_$(SPL_)ASYMMETRIC_PUBLIC_KEY_SUBTYPE) += public_key.o
- x509_mbedtls-$(CONFIG_$(SPL_)X509_CERTIFICATE_PARSER) += x509_cert_parser.o
- x509_mbedtls-$(CONFIG_$(SPL_)PKCS7_MESSAGE_PARSER) += pkcs7_parser.o
- x509_mbedtls-$(CONFIG_$(SPL_)MSCODE_PARSER) += mscode_parser.o
-+x509_mbedtls-$(CONFIG_$(SPL_)RSA_PUBLIC_KEY_PARSER) += rsa_helper.o
+diff --git a/lib/crypto/Makefile b/lib/crypto/Makefile
+index e3232019df2..866a9a3f059 100644
+--- a/lib/crypto/Makefile
++++ b/lib/crypto/Makefile
+@@ -11,6 +11,7 @@ ifneq ($(CONFIG_MBEDTLS_LIB_X509), y)
+ obj-$(CONFIG_$(SPL_)ASYMMETRIC_PUBLIC_KEY_SUBTYPE) += public_key.o
+ endif
  
- obj-$(CONFIG_MBEDTLS_LIB_CRYPTO) += mbedtls_lib_crypto.o
- mbedtls_lib_crypto-y := \
-diff --git a/lib/mbedtls/rsa_helper.c b/lib/mbedtls/rsa_helper.c
-new file mode 100644
-index 00000000000..956e550c856
---- /dev/null
-+++ b/lib/mbedtls/rsa_helper.c
-@@ -0,0 +1,99 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * RSA helper functions using MbedTLS
-+ *
-+ * Copyright (c) 2024 Linaro Limited
-+ * Author: Raymond Mao <raymond.mao@linaro.org>
-+ */
-+
-+#include <linux/err.h>
-+#include <crypto/internal/rsa.h>
-+#include <external/mbedtls/library/common.h>
-+#include <external/mbedtls/include/mbedtls/pk.h>
-+#include <external/mbedtls/include/mbedtls/rsa.h>
-+#include <external/mbedtls/include/mbedtls/asn1.h>
-+
-+/**
-+ * rsa_parse_pub_key() - decodes the BER encoded buffer and stores in the
-+ *                       provided struct rsa_key, pointers to the raw key as is,
-+ *                       so that the caller can copy it or MPI parse it, etc.
-+ *
-+ * @rsa_key:	struct rsa_key key representation
-+ * @key:	key in BER format
-+ * @key_len:	length of key
-+ *
-+ * Return:	0 on success or error code in case of error
-+ */
-+int rsa_parse_pub_key(struct rsa_key *rsa_key, const void *key,
-+		      unsigned int key_len)
-+{
-+	int ret = 0;
-+	mbedtls_pk_context pk;
-+	mbedtls_rsa_context *rsa;
-+
-+	mbedtls_pk_init(&pk);
-+
-+	ret = mbedtls_pk_parse_public_key(&pk, (const unsigned char *)key,
-+					  key_len);
-+	if (ret) {
-+		pr_err("Failed to parse public key, ret:-0x%04x\n",
-+		       (unsigned int)-ret);
-+		ret = -EINVAL;
-+		goto clean_pubkey;
-+	}
-+
-+	/* Ensure that it is a RSA key */
-+	if (mbedtls_pk_get_type(&pk) != MBEDTLS_PK_RSA) {
-+		pr_err("Non-RSA keys are not supported\n");
-+		ret = -EKEYREJECTED;
-+		goto clean_pubkey;
-+	}
-+
-+	/* Get RSA key context */
-+	rsa = mbedtls_pk_rsa(pk);
-+	if (!rsa) {
-+		pr_err("Failed to get RSA key context, ret:-0x%04x\n",
-+		       (unsigned int)-ret);
-+		ret = -EINVAL;
-+		goto clean_pubkey;
-+	}
-+
-+	/* Parse modulus (n) */
-+	rsa_key->n_sz = mbedtls_mpi_size(&rsa->N);
-+	rsa_key->n = kzalloc(rsa_key->n_sz, GFP_KERNEL);
-+	if (!rsa_key->n) {
-+		ret = -ENOMEM;
-+		goto clean_pubkey;
-+	}
-+	ret = mbedtls_mpi_write_binary(&rsa->N, (unsigned char *)rsa_key->n,
-+				       rsa_key->n_sz);
-+	if (ret) {
-+		pr_err("Failed to parse modulus (n), ret:-0x%04x\n",
-+		       (unsigned int)-ret);
-+		ret = -EINVAL;
-+		goto clean_modulus;
-+	}
-+
-+	/* Parse public exponent (e) */
-+	rsa_key->e_sz = mbedtls_mpi_size(&rsa->E);
-+	rsa_key->e = kzalloc(rsa_key->e_sz, GFP_KERNEL);
-+	if (!rsa_key->e) {
-+		ret = -ENOMEM;
-+		goto clean_modulus;
-+	}
-+	ret = mbedtls_mpi_write_binary(&rsa->E, (unsigned char *)rsa_key->e,
-+				       rsa_key->e_sz);
-+	if (!ret)
-+		return 0;
-+
-+	pr_err("Failed to parse public exponent (e), ret:-0x%04x\n",
-+	       (unsigned int)-ret);
-+	ret = -EINVAL;
-+
-+	kfree(rsa_key->e);
-+clean_modulus:
-+	kfree(rsa_key->n);
-+clean_pubkey:
-+	mbedtls_pk_free(&pk);
-+	return ret;
-+}
++ifneq ($(CONFIG_MBEDTLS_LIB_X509), y)
+ #
+ # RSA public key parser
+ #
+@@ -28,6 +29,7 @@ $(obj)/rsa_helper.o: $(obj)/rsapubkey.asn1.h
+ ifdef CONFIG_SPL_BUILD
+ CFLAGS_rsa_helper.o += -I$(obj)
+ endif
++endif
+ 
+ ifneq ($(CONFIG_MBEDTLS_LIB_X509), y)
+ #
 -- 
 2.25.1
 
