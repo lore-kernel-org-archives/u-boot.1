@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06513C25B7C
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 10:00:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A80C6C25B78
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 10:00:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 449FC88494;
-	Tue, 28 May 2024 12:00:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8D81E8845C;
+	Tue, 28 May 2024 12:00:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aZ+asYfH";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CLBa6W9n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E774087C75; Tue, 28 May 2024 12:00:02 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id D18AF884A1; Tue, 28 May 2024 12:00:04 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7B178843D
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 12:00:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A5918845C
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 12:00:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a63359aaacaso73360366b.1
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 03:00:00 -0700 (PDT)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5789733769dso4125303a12.1
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 03:00:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716890400; x=1717495200; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1716890401; x=1717495201; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5EvEiVOFrs4z6rXpWhwzsENvMSMZyz0DyRz34qm8nD4=;
- b=aZ+asYfHPz+8ItCjUap8HKLM7MgVkl8HdZhtPSsrlNWHeFvra83AnYrxL/TX8pWiGk
- Y24hh28Qh73Is/LIMwLmbTH0+gbQXSkYp8WZ1h3oFpUE73bSO9NyobNk6twGZJZhxhys
- 8gr93Fh6lBNXIppsWU4cqkoG4KIIspzg5NmrRhYX+CBxDYRObqnZspfYmjF5/IU/xRty
- 5f2sGs8NUImDtV4rXNza7lUq1WtKbZwwljzizDABmecoPZKgdnsk2gm/5AqRp/rUZX3s
- jSfnp9xFmaCNutTk5VWx1HRPc4AevEL//cJZpLVvwYzROy0iqVHjczAAWVvVO/vBv3Up
- Cc7w==
+ bh=zn4qHRIEXQRZCGdD33LaWO+TFK6M/LsyWODLoP7skpw=;
+ b=CLBa6W9nTLi7xdje/HO5eW4aBuUIn1m8JzoDaAalzI+NAWf7TM3fx4M2IwtqKTueES
+ jcxPN1MlB4cvfZD1Vjc2OnM1FJoz7CVevxE42FfV2wS98jMc6ZowlIRSX2ghN/+D1yId
+ 9DEF3er2gWEBxOxlbM2GG+JIB9uKtVuNjeS0wiOwokYyd8kJr/nUOqkE6xrVzeR298Ur
+ XNC1qioLK17i7xW0XL55EDDRRPG4daLkZc0wP5NlFJhQ2OOduojExOyPQqo6vwTM1ilY
+ A1Cx7egwHy7n68Ljpv9kUvJFJctXORf47mEDJiP37iBHDYZE2BOuFwtjEVbUV1q0OvIZ
+ Mzwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716890400; x=1717495200;
+ d=1e100.net; s=20230601; t=1716890401; x=1717495201;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5EvEiVOFrs4z6rXpWhwzsENvMSMZyz0DyRz34qm8nD4=;
- b=AfFF4wLit+8vlxrugJypCHlokpC1bmerJFuUaIebzP8iRbeeNzqRl7DOzrJwehzQ6Z
- a/Xxn0tZl0p9qI8vkLNXKK1OtCG0EDtJJkNJVNLxUmEEFfwicLfW52dC1qIV2fQa151E
- Scoywuln/uArltE5vztm9JlHxnZAshR8TgBwaIH5DPlUT3+Az9u0FZLRRiPjzHPozWbg
- WBJKqgg6qf0n8Xk4yZL5wBZRlQV+R25vHbXnNxYfofdSt7AeK96qH7nABgNtvoWMKbQQ
- /yGlnCGH8HiaJsuqYSWHIB4PCS2O+wHKt5NZxNhtp2C6JF0t2ok+q5Xh8kkz3FpU2LR1
- W1Bw==
+ bh=zn4qHRIEXQRZCGdD33LaWO+TFK6M/LsyWODLoP7skpw=;
+ b=WgZVz8RqzlE2Y8CSxtXTIFAHaYYNo1x3lFr2RnAxDhUH7QCotG7Se3mKK1ZZQ6c9lv
+ ZfN2TgrKfgqM3S3DPT0VkIjk907TeWlkaVTq0HD8BweKapzQV5a7rdaXBZ6BuJbg0Aoq
+ +lccUP08fKDKpxR9yZrXLLiGFMi8W/wouoEPgvXH/HcP3ZIVxNoIdCYeKidPY810Ef10
+ 8OVxyBzbvDStRdM4MFa+drSGosjlAnLYZw+NbJrtM/RRAqyjt2ZHwE6C+ojrdTPkATCb
+ aMckSWMxvb8jIcsL/eJydWbYnsS5beYxpEqxHDyR6XH4L7SMJpNU7q7cQ51QGbjUZVTy
+ 7F6A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWgkCs3mHrTDaFZRJV+BDTSwoQ8JkeBCLcYNF4Lk1mKvlZg16vMYt6iqyOxnyy6hnmp6g+Rvz2JdX6PjOcdtDEfWSCykQ==
-X-Gm-Message-State: AOJu0YymiUsqQY+Y3HQPj27nXSjMLFwPSxdIM0zV70jf4p1pWXJFYmSA
- fews8HXQ7exI+CSZVTCZb1AxG7oMBacsmqgHsYtGCy0YupnNsDVI
-X-Google-Smtp-Source: AGHT+IFRUhc3AT6v8unG1G6bJC6rPLH2nm/Mvw5NbJ5IJkpSuQWDNVIv9GsJunSWTiir5BR36A55Bw==
-X-Received: by 2002:a17:906:c113:b0:a62:a9ca:2111 with SMTP id
- a640c23a62f3a-a62a9ca25admr715510566b.11.1716890400213; 
- Tue, 28 May 2024 03:00:00 -0700 (PDT)
+ AJvYcCX/4KQRAfWB6/qYItrf+yRaHSYnWyL9uOadstgP9RnPv1OsfPm22SaMmlUFhPaF+9kypBx0n1SS0l4M+UL/9q1fnSRZyw==
+X-Gm-Message-State: AOJu0YyC8uXUmS5mPgX9P3Om5o28I2EGUoTilrUKmBxC5FiAQnB7gosm
+ tPKKcGmlVPzVpTuDzu5CzVQycLdG991ZrKbwJyzKlnpXVsttFw/D
+X-Google-Smtp-Source: AGHT+IHq68W5hWy5gSNJV9eVt2UuhEsG+jdfRkAp5sWz9kvs9tA0rKKQJAUY5ecPWrFbVCfVZWUEqA==
+X-Received: by 2002:a17:906:a04e:b0:a62:44e1:3f56 with SMTP id
+ a640c23a62f3a-a6244e14068mr1159231466b.37.1716890401327; 
+ Tue, 28 May 2024 03:00:01 -0700 (PDT)
 Received: from emanuele-nb.corp.toradex.com (31-10-206-125.static.upc.ch.
  [31.10.206.125]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a634da2e2absm33239266b.87.2024.05.28.02.59.59
+ a640c23a62f3a-a634da2e2absm33239266b.87.2024.05.28.03.00.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 May 2024 02:59:59 -0700 (PDT)
+ Tue, 28 May 2024 03:00:00 -0700 (PDT)
 From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
 To: Francesco Dolcini <francesco.dolcini@toradex.com>
 Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
  Marcel Ziswiler <marcel.ziswiler@toradex.com>, u-boot@lists.denx.de,
  Fabio Estevam <festevam@gmail.com>
-Subject: [PATCH v1 1/5] board: toradex: verdin-imx8mm: add 4 GB lpddr4 memory
- support
-Date: Tue, 28 May 2024 11:59:37 +0200
-Message-Id: <20240528095941.872693-2-ghidoliemanuele@gmail.com>
+Subject: [PATCH v1 2/5] board: toradex: verdin-imx8mm: increase maximum
+ addressable ram to 4GB
+Date: Tue, 28 May 2024 11:59:38 +0200
+Message-Id: <20240528095941.872693-3-ghidoliemanuele@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240528095941.872693-1-ghidoliemanuele@gmail.com>
 References: <20240528095941.872693-1-ghidoliemanuele@gmail.com>
@@ -98,83 +98,45 @@ X-Virus-Status: Clean
 
 From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
-Add support for MT53E512M32D1ZW-046 IT:C memory.
-This 4 GB memory has 17 row bits instead of 16 and requires 380 ns of
-tRFC (tRFCab) instead of 280 ns due to increased channel density to 16 Gb.
-Both modifications are retro-compatible with previous memories.
+Add support for SKUs with higher memory sizes.
+Actual memory size is auto-detected.
 
 Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 ---
- board/toradex/verdin-imx8mm/lpddr4_timing.c | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+ board/toradex/verdin-imx8mm/verdin-imx8mm.c | 2 +-
+ include/configs/verdin-imx8mm.h             | 6 ++++--
+ 2 files changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/board/toradex/verdin-imx8mm/lpddr4_timing.c b/board/toradex/verdin-imx8mm/lpddr4_timing.c
-index 4dfec679b116..eece226b5131 100644
---- a/board/toradex/verdin-imx8mm/lpddr4_timing.c
-+++ b/board/toradex/verdin-imx8mm/lpddr4_timing.c
-@@ -18,7 +18,7 @@ struct dram_cfg_param ddr_ddrc_cfg[] = {
- 	{0x3d400000, 0xa1080020},
- 	{0x3d400020, 0x202},
- 	{0x3d400024, 0x3a980},
--	{0x3d400064, 0x2d00d2},
-+	{0x3d400064, 0x2d011d},
- 	{0x3d4000d0, 0xc00305ba},
- 	{0x3d4000d4, 0x940000},
- 	{0x3d4000dc, 0xd4002d},
-@@ -34,7 +34,7 @@ struct dram_cfg_param ddr_ddrc_cfg[] = {
- 	{0x3d40011c, 0x402},
- 	{0x3d400130, 0x20600},
- 	{0x3d400134, 0xc100002},
--	{0x3d400138, 0xd8},
-+	{0x3d400138, 0x123},
- 	{0x3d400144, 0x96004b},
- 	{0x3d400180, 0x2ee0017},
- 	{0x3d400184, 0x2605b8e},
-@@ -56,7 +56,7 @@ struct dram_cfg_param ddr_ddrc_cfg[] = {
- 	{0x3d400204, 0x80808},
- 	{0x3d400214, 0x7070707},
- 	{0x3d400218, 0x7070707},
--	{0x3d40021c, 0xf0f},
-+	{0x3d40021c, 0xf07},
- 	{0x3d400250, 0x29001701},
- 	{0x3d400254, 0x2c},
- 	{0x3d40025c, 0x4000030},
-@@ -71,7 +71,7 @@ struct dram_cfg_param ddr_ddrc_cfg[] = {
- 	{0x3d402020, 0x0},
- 	{0x3d402024, 0x7d00},
- 	{0x3d402050, 0x20d040},
--	{0x3d402064, 0x6001c},
-+	{0x3d402064, 0x60026},
- 	{0x3d4020dc, 0x840000},
- 	{0x3d4020e0, 0x310000},
- 	{0x3d4020e8, 0x66004d},
-@@ -86,7 +86,7 @@ struct dram_cfg_param ddr_ddrc_cfg[] = {
- 	{0x3d40211c, 0x302},
- 	{0x3d402130, 0x20300},
- 	{0x3d402134, 0xa100002},
--	{0x3d402138, 0x1d},
-+	{0x3d402138, 0x27},
- 	{0x3d402144, 0x14000a},
- 	{0x3d402180, 0x640004},
- 	{0x3d402190, 0x3818200},
-@@ -96,7 +96,7 @@ struct dram_cfg_param ddr_ddrc_cfg[] = {
- 	{0x3d403020, 0x0},
- 	{0x3d403024, 0x1f40},
- 	{0x3d403050, 0x20d040},
--	{0x3d403064, 0x30007},
-+	{0x3d403064, 0x3000A},
- 	{0x3d4030dc, 0x840000},
- 	{0x3d4030e0, 0x310000},
- 	{0x3d4030e8, 0x66004d},
-@@ -111,7 +111,7 @@ struct dram_cfg_param ddr_ddrc_cfg[] = {
- 	{0x3d40311c, 0x302},
- 	{0x3d403130, 0x20300},
- 	{0x3d403134, 0xa100002},
--	{0x3d403138, 0x8},
-+	{0x3d403138, 0xA},
- 	{0x3d403144, 0x50003},
- 	{0x3d403180, 0x190004},
- 	{0x3d403190, 0x3818200},
+diff --git a/board/toradex/verdin-imx8mm/verdin-imx8mm.c b/board/toradex/verdin-imx8mm/verdin-imx8mm.c
+index 55c02653da68..31e8d5fb04b5 100644
+--- a/board/toradex/verdin-imx8mm/verdin-imx8mm.c
++++ b/board/toradex/verdin-imx8mm/verdin-imx8mm.c
+@@ -117,7 +117,7 @@ int board_phys_sdram_size(phys_size_t *size)
+ 	if (!size)
+ 		return -EINVAL;
+ 
+-	*size = get_ram_size((void *)PHYS_SDRAM, PHYS_SDRAM_SIZE);
++	*size = get_ram_size((void *)PHYS_SDRAM, PHYS_SDRAM_SIZE + PHYS_SDRAM_2_SIZE);
+ 
+ 	return 0;
+ }
+diff --git a/include/configs/verdin-imx8mm.h b/include/configs/verdin-imx8mm.h
+index 34238d3b505c..12d2b6823058 100644
+--- a/include/configs/verdin-imx8mm.h
++++ b/include/configs/verdin-imx8mm.h
+@@ -58,8 +58,10 @@
+ #define CFG_SYS_SDRAM_BASE           0x40000000
+ 
+ /* SDRAM configuration */
+-#define PHYS_SDRAM                      0x40000000
+-#define PHYS_SDRAM_SIZE			SZ_2G /* 2GB DDR */
++#define PHYS_SDRAM                   0x40000000
++#define PHYS_SDRAM_SIZE              (long)(SZ_2G + SZ_1G)
++#define PHYS_SDRAM_2                 0x100000000
++#define PHYS_SDRAM_2_SIZE            (long)(SZ_1G)
+ 
+ /* USB Configs */
+ #define CFG_MXC_USB_PORTSC	(PORT_PTS_UTMI | PORT_PTS_PTW)
 -- 
 2.34.1
 
