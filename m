@@ -4,69 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA7E1C25B78
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 07:49:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54EC3C25B78
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 07:50:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66CCF88361;
-	Tue, 28 May 2024 09:48:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id D3C0A8824B;
+	Tue, 28 May 2024 09:50:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jMGy6xWo";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="umT2EDki";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2022388414; Tue, 28 May 2024 09:48:58 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 72F3088361; Tue, 28 May 2024 09:50:02 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A92E587F31
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 09:48:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5631F87F31
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 09:50:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44S7mrDt108514;
- Tue, 28 May 2024 02:48:53 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1716882533;
- bh=I0evMr+hEQcujlZvW3+S0zM5Nk2Ob+lzn8xgsjEkTNE=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=jMGy6xWoSZkSivjDaiOLSer1NNjTR6uTkntCm9vMFFVjyd2RGjDhWV20PS6/NBUzh
- uXJ55FMtde6HTKhAqEvaXi7snmb4bdaXYMTl/3Xc9S/9G6l7v+qV536WogEaso1Vh/
- 3agrZrGqJnNSjSh6QwlcigniRoawWIoifLmRn6To=
-Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44S7mrlq036779
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 28 May 2024 02:48:53 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 28
- May 2024 02:48:52 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 28 May 2024 02:48:52 -0500
-Received: from [172.24.227.36]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44S7mnCG022020;
- Tue, 28 May 2024 02:48:50 -0500
-Message-ID: <b3949600-5eab-48f8-a279-f952fdf81225@ti.com>
-Date: Tue, 28 May 2024 13:18:49 +0530
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-355080e6ff9so394149f8f.2
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 00:50:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1716882600; x=1717487400;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:to:from
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=cODXekoyEBFr0QmTm6E79RLEhHPogK/VnKynCNwAOTU=;
+ b=umT2EDkiroAAnBGKRCzDh5KKl2+GAlFOehv8RWabxuBCxJgHWH7W326+KRj1qmQG88
+ 404jDu5sqg7Quk6FmILpQAfhd7mYAJjNJwjSe1ABfkK7H2dkdm34vFjmOro870jErJG/
+ 9kl+d7ypNqpnrbdaoxwAjDu+8OT36lQ5b5mq5lalkqNaLr+7Pl4SY5bOsrQaiOpeZ+Oy
+ 2qGDIXtz4D0Kip3VybSFQ2FY2E+h0IulRrPWX6esAZs+fBtd2IvVRvaV03ClyGqsai6D
+ VC3cs2BxmxXuKtY+h6n6FHRz9SvGQCpE091P821WRy1tCm/a2a+fitBCnIFgX1sOvOx7
+ w0UA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716882600; x=1717487400;
+ h=mime-version:message-id:date:references:in-reply-to:subject:to:from
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=cODXekoyEBFr0QmTm6E79RLEhHPogK/VnKynCNwAOTU=;
+ b=rIo8MDCKqup6dpOSDE8hSFRvs58xY3lhiAHb31/hYp5MlwQBVO/iDWOM2OWeHmmNMo
+ QcYZ6K4MIR899srvCY2jd/E/MnPDQmPjAKGYNZagJVthz+XcqpDCP5/bzdRZWgko7/Mk
+ qZ81bcIzfd9XWbO3nG7JBoullhbIHSUFm2PhE04d66/pb3EJIYBib03ncW4rhNwxyHAA
+ rgavUIm5zwDzi/M8GC7arQpcUM+0Qiti45dhiijsPJ/c2g+FIg1smM4cjnyL8ZaiYEXj
+ 9AuBP91ZH4qiTItSjG0ejkcOnwTwswseicwJ8fMgC7AMoYdc301NK+DxoNIrVwtbnKTR
+ YUcg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX32KQCJnhBTwU1NkaiFOwdLQ321v6t2ms4kIgxESfFjjLTC46eS8fuGbPJbtnUh40N7qSm1Ar7cb4kFWePxobcdloKoA==
+X-Gm-Message-State: AOJu0YyZkaoZlza4eYn7gu/LykgcSNOnRfMvngqw/nLw6IRCGflJR6Uj
+ yRI1ddBpgIuIrrThqeFZS5gEyIL3mRFLSvmh5LUzvEr1x2tArfRO1Lgz4mzuR3w=
+X-Google-Smtp-Source: AGHT+IEBzDyZXClybiWTKW3Bdjk1/AQ317BbFLweU4Yv0VN5Rtmfr7hhKyRWMH41B5KICLWEZufehQ==
+X-Received: by 2002:adf:e40c:0:b0:354:e8f3:2a32 with SMTP id
+ ffacd0b85a97d-35529c3c0bcmr7340147f8f.22.1716882599748; 
+ Tue, 28 May 2024 00:49:59 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-35579d7da64sm11126130f8f.4.2024.05.28.00.49.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 May 2024 00:49:59 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Roman Stratiienko <r.stratiienko@gmail.com>, r.stratiienko@gmail.com,
+ igor.opaniuk@gmail.com, dsimic@manjaro.org, sjg@chromium.org,
+ ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, eajames@linux.ibm.com,
+ marek.vasut+renesas@mailbox.org, paulerwan.rio@gmail.com,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH 3/3] abootimg: Implement smart image load feature
+In-Reply-To: <20240519191856.2582174-4-r.stratiienko@gmail.com>
+References: <20240519191856.2582174-1-r.stratiienko@gmail.com>
+ <20240519191856.2582174-4-r.stratiienko@gmail.com>
+Date: Tue, 28 May 2024 09:49:56 +0200
+Message-ID: <87r0dmgyu3.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: dts: k3-j721e-r5-common-proc-board: Set parent clock
- for clock ID 342
-To: Manorit Chawdhry <m-chawdhry@ti.com>
-CC: <trini@konsulko.com>, <u-boot@lists.denx.de>, <nm@ti.com>,
- <sjg@chromium.org>, <u-kumar1@ti.com>
-References: <20240528073727.4057843-1-n-francis@ti.com>
- <20240528074432.c6zbd3iwmsvnn5rv@uda0497581>
-Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20240528074432.c6zbd3iwmsvnn5rv@uda0497581>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,57 +94,194 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Manorit
+Hi Roman,
 
-On 28/05/24 13:14, Manorit Chawdhry wrote:
-> Hi Neha,
-> 
-> On 13:07-20240528, Neha Malcom Francis wrote:
->> From: Apurva Nandan <a-nandan@ti.com>
->>
->> This virtual clock mux configuration enables the use of dynamic frequency
->> scaling on A72 clock ID 202 by setting up the required register.
->>
->> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
->> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
->> ---
->> Boot logs:
->> https://gist.github.com/nehamalcom/138d25fe32d4d80af3e0e4c19c1b18e0
->>
->>   arch/arm/dts/k3-j721e-r5-common-proc-board.dts | 3 ++-
->>   1 file changed, 2 insertions(+), 1 deletion(-)
->>
->> diff --git a/arch/arm/dts/k3-j721e-r5-common-proc-board.dts b/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
->> index 9655ca21d02..25e4b4c7663 100644
->> --- a/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
->> +++ b/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
->> @@ -28,7 +28,8 @@
->>   				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
->>   		resets = <&k3_reset 202 0>;
->>   		clocks = <&k3_clks 61 1>;
->> -		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>;
->> +		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>, <&k3_clks 342 0>;
->> +		assigned-clock-parents= <0>, <0>, <&k3_clks 342 2>;
-> 
-> I think it would be better to base this patch on top of your j721e
-> of_upstream series. There you have introduced k3-j721e-r5.dtsi [0] and I
-> feel it would be better to put this change on that file maybe.
-> 
-> [0]: https://lore.kernel.org/u-boot/20240520095916.1809962-2-n-francis@ti.com/
-> 
+Thank you for the patch.
 
-I'll line this up after OF_UPSTREAM is taken in or requires a next version 
-whichever happens first. Thanks for the review!
+On dim., mai 19, 2024 at 19:18, Roman Stratiienko <r.stratiienko@gmail.com> wrote:
 
-> Regards,
-> Manorit
->>   		assigned-clock-rates = <2000000000>, <200000000>;
->>   		ti,sci = <&dmsc>;
->>   		ti,sci-proc-id = <32>;
->> -- 
->> 2.34.1
->>
+> Load only part of the boot partition that contains valuable
+> information, thus improving the boot time.
+>
+> Signed-off-by: Roman Stratiienko <r.stratiienko@gmail.com>
+> ---
+>  boot/image-android.c | 70 ++++++++++++++++++++++++++++++++++++++++++++
+>  cmd/abootimg.c       | 40 ++++++++++++++++++++++---
+>  include/image.h      | 12 ++++++++
+>  3 files changed, 118 insertions(+), 4 deletions(-)
+>
+> diff --git a/boot/image-android.c b/boot/image-android.c
+> index da8003f370..d00a896a40 100644
+> --- a/boot/image-android.c
+> +++ b/boot/image-android.c
+> @@ -204,6 +204,76 @@ bool android_image_get_data(const void *boot_hdr, const void *vendor_boot_hdr,
+>  	return true;
+>  }
+>  
+> +/**
+> + * android_image_get_valuable_size() - get the size of the android image
+> + *
+> + * This function checks if the image is Android boot image and returns the
+> + * valuable size of the image.
+> + *
+> + * @hdr_addr: Boot image header address (boot or vendor_boot)
+> + *
+> + * @return size of the image on success, 0 on failure
+> + */
+> +size_t android_image_get_valuable_size(const void *hdr_addr)
 
--- 
-Thanking You
-Neha Malcom Francis
+Can't we use a ssize_t to return a negative error code?
+0 as error seems odd and not what is used in most functions in boot/image-android.c
+
+> +{
+> +	int version, size;
+> +
+> +	if (is_android_boot_image_header(hdr_addr)) {
+> +		const struct andr_boot_img_hdr_v0 *hdr = hdr_addr;
+> +
+> +		version = ((struct andr_boot_img_hdr_v0 *)hdr_addr)->header_version;
+> +		if (version > 2) {
+> +			const struct andr_boot_img_hdr_v3 *hdr = hdr_addr;
+> +
+> +			size = ALIGN(hdr->header_size, ANDR_GKI_PAGE_SIZE);
+> +			size += ALIGN(hdr->kernel_size, ANDR_GKI_PAGE_SIZE);
+> +			size += ALIGN(hdr->ramdisk_size, ANDR_GKI_PAGE_SIZE);
+> +
+> +			if (version > 3)
+> +				size += ALIGN(hdr->signature_size, ANDR_GKI_PAGE_SIZE);
+> +
+> +			return size;
+> +		}
+> +
+> +		size = hdr->page_size;
+> +		size += ALIGN(hdr->kernel_size, hdr->page_size);
+> +		size += ALIGN(hdr->ramdisk_size, hdr->page_size);
+> +		size += ALIGN(hdr->second_size, hdr->page_size);
+> +
+> +		if (version > 0)
+> +			size += ALIGN(hdr->recovery_dtbo_size, hdr->page_size);
+> +
+> +		if (version > 1)
+> +			size += ALIGN(hdr->dtb_size, hdr->page_size);
+> +
+> +		return size;
+> +	}
+> +
+> +	if (is_android_vendor_boot_image_header(hdr_addr)) {
+> +		const struct andr_vnd_boot_img_hdr *hdr = hdr_addr;
+> +
+> +		version = ((struct andr_vnd_boot_img_hdr *)hdr_addr)->header_version;
+> +		if (version < 3) {
+> +			printf("Vendor boot image header version %d is not supported\n", version);
+> +
+> +			return 0;
+> +		}
+> +
+> +		size = ALIGN(hdr->header_size, hdr->page_size);
+> +		size += ALIGN(hdr->vendor_ramdisk_size, hdr->page_size);
+> +		size += ALIGN(hdr->dtb_size, hdr->page_size);
+> +
+> +		if (version > 3) {
+> +			size += ALIGN(hdr->vendor_ramdisk_table_size, hdr->page_size);
+> +			size += ALIGN(hdr->bootconfig_size, hdr->page_size);
+> +		}
+> +
+> +		return size;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+>  static ulong android_image_get_kernel_addr(struct andr_image_data *img_data)
+>  {
+>  	/*
+> diff --git a/cmd/abootimg.c b/cmd/abootimg.c
+> index 808c9c4941..fe7c5c5e2c 100644
+> --- a/cmd/abootimg.c
+> +++ b/cmd/abootimg.c
+> @@ -182,6 +182,35 @@ static int abootimg_get_dtb(int argc, char *const argv[])
+>  	return CMD_RET_USAGE;
+>  }
+>  
+> +static int abootimg_smart_load(struct blk_desc *desc, struct disk_partition *info, void *addr)
+> +{
+> +	int ret, size;
+> +
+> +	ret = blk_dread(desc, info->start, 4096 / info->blksz, addr);
+
+Why 4096? Can we use #define for this or reuse an exising definition?
+
+> +	if (ret < 0) {
+> +		printf("Error: Failed to read partition\n");
+> +		return CMD_RET_FAILURE;
+> +	}
+> +
+> +	size = android_image_get_valuable_size(addr);
+> +	if (size == 0)
+> +		return 0;
+> +
+> +	ret = blk_dread(desc, info->start, DIV_ROUND_UP(size, info->blksz), addr);
+> +	if (ret < 0) {
+> +		printf("Error: Failed to read partition\n");
+> +		return CMD_RET_FAILURE;
+> +	}
+> +
+> +	memset(addr + size, 0, info->size * info->blksz - size);
+> +
+> +	printf("Loaded Android boot image using smart load (%d/%d MB)\n",
+
+Why only boot image? Should this be more generic be passing the
+partition name instead?
+
+> +	       (int)DIV_ROUND_UP(size, 1024 * 1024),
+> +	       (int)DIV_ROUND_UP(info->size * info->blksz, 1024 * 1024));
+> +
+> +	return size;
+> +}
+> +
+>  static int do_abootimg_addr(struct cmd_tbl *cmdtp, int flag, int argc,
+>  			    char *const argv[])
+>  {
+> @@ -299,10 +328,13 @@ static int do_abootimg_load(struct cmd_tbl *cmdtp, int flag, int argc,
+>  		return CMD_RET_FAILURE;
+>  	}
+>  
+> -	ret = blk_dread(desc, info.start, info.size, addr);
+> -	if (ret < 0) {
+> -		printf("Error: Failed to read partition %s\n", buf);
+> -		goto fail;
+> +	ret = abootimg_smart_load(desc, &info, addr);
+> +	if (ret <= 0) {
+> +		ret = blk_dread(desc, info.start, info.size, addr);
+> +		if (ret < 0) {
+> +			printf("Error: Failed to read partition %s\n", buf);
+> +			goto fail;
+> +		}
+>  	}
+>  
+>  	sprintf(buf, "abootimg_%s_ptr", argv[3]);
+> diff --git a/include/image.h b/include/image.h
+> index c5b288f62b..7d8ff40c3f 100644
+> --- a/include/image.h
+> +++ b/include/image.h
+> @@ -1826,6 +1826,18 @@ struct andr_image_data;
+>  bool android_image_get_data(const void *boot_hdr, const void *vendor_boot_hdr,
+>  			    struct andr_image_data *data);
+>  
+> +/**
+> + * android_image_get_valuable_size() - get the size of the android image
+> + *
+> + * This function checks if the image is Android boot image and returns the
+> + * valuable size of the image.
+> + *
+> + * @hdr_addr: Boot image header address (boot or vendor_boot)
+> + *
+> + * @return size of the image on success, 0 on failure
+> + */
+> +size_t android_image_get_valuable_size(const void *hdr_addr);
+> +
+>  struct andr_boot_img_hdr_v0;
+>  
+>  /**
+> -- 
+> 2.40.1
