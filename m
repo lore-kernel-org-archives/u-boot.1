@@ -4,77 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5145BC25B7E
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 07:47:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA7E1C25B78
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 07:49:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3EB788361;
-	Tue, 28 May 2024 09:47:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 66CCF88361;
+	Tue, 28 May 2024 09:48:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TQp7yzKM";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jMGy6xWo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E088588361; Tue, 28 May 2024 09:47:39 +0200 (CEST)
-Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
- [IPv6:2607:f8b0:4864:20::52c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2022388414; Tue, 28 May 2024 09:48:58 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E831587F31
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 09:47:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A92E587F31
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 09:48:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-68187c5534cso350044a12.0
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 00:47:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716882455; x=1717487255; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=S9Dds5Vkq9YvtNTrPC+g03NcFI52IUr7tMMYu/R6zfU=;
- b=TQp7yzKMOUbuZSzIvKAktboQM5w4EivEDbQAP/TR/pFtYUGAWdaOdKWObuo8PT1Fxt
- RTCQk337m5XCnOl/SsxuLjTkDZEt4H1ix1E5jSUSTKlQy/FLRA3hziZskUskDCasmfZC
- EfNfKNanOVEOum03Asi8tNh31oMqQSlqRKnwcrVMktWQ3QZAmWsZHjkzYtbT9XfOYR9n
- GwZzXnavg9YLb05crrszcxZ1UJn0BrHZTzOFR5kRe6IxqyTBaGxzNdBEZyHlhSnxoySo
- 391zUyBCa1TumcPaYYAL5Suc3dZyC4rWks+opf3BX1Ql8Efjo8cvnHtnezwEXuiHXzvR
- AoNA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716882455; x=1717487255;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=S9Dds5Vkq9YvtNTrPC+g03NcFI52IUr7tMMYu/R6zfU=;
- b=e2SI0ikVpaMqB3/tBt28XFaDDHBVK/buxflT4snD9Fwe5ggr5cgmwKAEqEEdOfN7ef
- wE7/8jxLSW977B02otV5m7wTSqL4KkdXNv5F3OtDjISNrT7+EVU+Ae/eC0lK5mnEG8jS
- k5D6EA9p/jcKc2d68/QiT8repjZzcUutOS9cuM7vvIFXX27Hr+eOzag39NTcQhoajrvw
- oXBjvCO4VKENerTBhUDZb2tqqxM3ZkzVG0SHMRu4tNvCisqBUvuLS9TI4ibMDDEMowoo
- 3dlu/Y/Fvtb/Lg4VNqiyGBEdbNH9Y7v29Yjr4hhw772BSGBnF26Q0H+TSv8GNVSsn/Bv
- 4JVg==
-X-Gm-Message-State: AOJu0Yz+6xKwktw9a+1RDxX3PBtnMmfVVcJoIkZRETePjdLy1uMmLIil
- uwRip/SEKYv3axEEDh1SDnYV4KFCSWUqM2zmqp4Q+cOwIpESq2acP9odj/2G8XLwpLnxX4AhXOR
- Mccww3gfs0KCZ5iXrwaYJqlGA0W5D0TVPWQdm2g==
-X-Google-Smtp-Source: AGHT+IEjxz7vS7mUfron7e+1tiCnn3wiYPO3jknaE0Qi+igq4hOiyrvf9pX5r5gp4vOhnjkDt+Iqr/4vtGOkxOEge7Y=
-X-Received: by 2002:a17:90b:438a:b0:2bf:597d:f1d5 with SMTP id
- 98e67ed59e1d1-2bf5e4738famr10441074a91.5.1716882455420; Tue, 28 May 2024
- 00:47:35 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44S7mrDt108514;
+ Tue, 28 May 2024 02:48:53 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1716882533;
+ bh=I0evMr+hEQcujlZvW3+S0zM5Nk2Ob+lzn8xgsjEkTNE=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=jMGy6xWoSZkSivjDaiOLSer1NNjTR6uTkntCm9vMFFVjyd2RGjDhWV20PS6/NBUzh
+ uXJ55FMtde6HTKhAqEvaXi7snmb4bdaXYMTl/3Xc9S/9G6l7v+qV536WogEaso1Vh/
+ 3agrZrGqJnNSjSh6QwlcigniRoawWIoifLmRn6To=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44S7mrlq036779
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 28 May 2024 02:48:53 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 28
+ May 2024 02:48:52 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 28 May 2024 02:48:52 -0500
+Received: from [172.24.227.36]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44S7mnCG022020;
+ Tue, 28 May 2024 02:48:50 -0500
+Message-ID: <b3949600-5eab-48f8-a279-f952fdf81225@ti.com>
+Date: Tue, 28 May 2024 13:18:49 +0530
 MIME-Version: 1.0
-References: <20240528061827.183403-1-ilias.apalodimas@linaro.org>
- <e8082f27-e1e9-406a-84ea-b9f35de077b7@collabora.com>
- <CAC_iWjLS-igrVSqUJj2voe6f34X__hKkBG5GJoa96YL7oq2Xeg@mail.gmail.com>
-In-Reply-To: <CAC_iWjLS-igrVSqUJj2voe6f34X__hKkBG5GJoa96YL7oq2Xeg@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 28 May 2024 10:46:57 +0300
-Message-ID: <CAC_iWjJNc=AP-6tgGts3wchGKJ0oX9P5KYwtW9BpYVNMJHcVmg@mail.gmail.com>
-Subject: Re: [PATCH] arm: move _end to linker symbols
-To: Eugen Hristev <eugen.hristev@collabora.com>
-Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, CFSworks@gmail.com, 
- trini@konsulko.com, sbabic@denx.de, festevam@gmail.com, uboot-imx@nxp.com, 
- ryan_chen@aspeedtech.com, chiawei_wang@aspeedtech.com, BMC-SW@aspeedtech.com, 
- joel@jms.id.au, sjg@chromium.org, philipp.tomsich@vrull.eu, 
- kever.yang@rock-chips.com, michal.simek@amd.com, aford173@gmail.com
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: dts: k3-j721e-r5-common-proc-board: Set parent clock
+ for clock ID 342
+To: Manorit Chawdhry <m-chawdhry@ti.com>
+CC: <trini@konsulko.com>, <u-boot@lists.denx.de>, <nm@ti.com>,
+ <sjg@chromium.org>, <u-kumar1@ti.com>
+References: <20240528073727.4057843-1-n-francis@ti.com>
+ <20240528074432.c6zbd3iwmsvnn5rv@uda0497581>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20240528074432.c6zbd3iwmsvnn5rv@uda0497581>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,37 +83,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-[...]
+Hi Manorit
 
-> > > -             *(.__end)
-> > > -     } >.sram
-> > > -
-> > > +     _end = .;
-> >
-> > Does this have any kind of consequence in terms of checking the offset of .end vs
-> > the SRAM size ? (.sram)
->
-> The value of _end does grow by 16b on the SPL for the kria boards, but
-> it doesn't seem to cause issues.
-> I can only find a single assert on those checks in
-> arch/microblaze/cpu/u-boot-spl.lds. Anything else you spotted?
->
-> Keeping in mind that the code used to be like that before that linker
-> bug -- defining a linker symbol instead of a section, I don't think
-> anything will blow up
+On 28/05/24 13:14, Manorit Chawdhry wrote:
+> Hi Neha,
+> 
+> On 13:07-20240528, Neha Malcom Francis wrote:
+>> From: Apurva Nandan <a-nandan@ti.com>
+>>
+>> This virtual clock mux configuration enables the use of dynamic frequency
+>> scaling on A72 clock ID 202 by setting up the required register.
+>>
+>> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
+>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+>> ---
+>> Boot logs:
+>> https://gist.github.com/nehamalcom/138d25fe32d4d80af3e0e4c19c1b18e0
+>>
+>>   arch/arm/dts/k3-j721e-r5-common-proc-board.dts | 3 ++-
+>>   1 file changed, 2 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/arch/arm/dts/k3-j721e-r5-common-proc-board.dts b/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
+>> index 9655ca21d02..25e4b4c7663 100644
+>> --- a/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
+>> +++ b/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
+>> @@ -28,7 +28,8 @@
+>>   				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
+>>   		resets = <&k3_reset 202 0>;
+>>   		clocks = <&k3_clks 61 1>;
+>> -		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>;
+>> +		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>, <&k3_clks 342 0>;
+>> +		assigned-clock-parents= <0>, <0>, <&k3_clks 342 2>;
+> 
+> I think it would be better to base this patch on top of your j721e
+> of_upstream series. There you have introduced k3-j721e-r5.dtsi [0] and I
+> feel it would be better to put this change on that file maybe.
+> 
+> [0]: https://lore.kernel.org/u-boot/20240520095916.1809962-2-n-francis@ti.com/
+> 
 
-Also if you compile with -O2 instead of -Os the final binary and the
-_end memory address remain unchanged. So I assume the changes in the
-_end offset is due to compiler optimizations since the .end section is
-removed
+I'll line this up after OF_UPSTREAM is taken in or requires a next version 
+whichever happens first. Thanks for the review!
 
-Cheers
-/Ilias
->
-> /Ilias
->
-> >
-> > >       _image_binary_end = .;
-> > >
-> > >       .bss :
-> >
+> Regards,
+> Manorit
+>>   		assigned-clock-rates = <2000000000>, <200000000>;
+>>   		ti,sci = <&dmsc>;
+>>   		ti,sci-proc-id = <32>;
+>> -- 
+>> 2.34.1
+>>
+
+-- 
+Thanking You
+Neha Malcom Francis
