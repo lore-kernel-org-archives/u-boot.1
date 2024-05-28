@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAE98C25B79
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 08:04:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42289C25B78
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 08:04:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65AD987F8D;
-	Tue, 28 May 2024 10:04:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C861488422;
+	Tue, 28 May 2024 10:04:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cZn7hefS";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KEXIXusU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72F7587F31; Tue, 28 May 2024 10:04:44 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 857BB87F31; Tue, 28 May 2024 10:04:51 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A1A987F8D
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 10:04:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A19B88422
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 10:04:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-421124a04d6so3821455e9.3
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 01:04:41 -0700 (PDT)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-420180b5838so2429665e9.2
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 01:04:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716883480; x=1717488280; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1716883489; x=1717488289; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=G4Jd0Mf5Rpg0fX74qYCq1SFuzFA70otscf/0i4j5V9Y=;
- b=cZn7hefSgGDrsaO85ycFE8nHU2RMBcA1ctyc2bRJTaSxRkaRrYBFKAQpZ4mCfMMdYJ
- DA+/NYLPt3LGQDq2eGG0VcRjOrCPlOcr3eWt/DKE3WZb9dq1ScwgZzEGO2uNGB3MPMK9
- HJlBKN1TBCOCxJW7f3rmj4fREXejQYEc++yLsVktcVvqCIZePnpfq+RL+kpvzYMfpy6h
- grdqSI9kD4v7g/EOprZt7du47uGT6/UN6Y2CU+ZVNE5fCE04lwztRl7rQvIZmarjmdt/
- 4eJy0V1ddbnxwJlrfMAJ1BFDCXSrTVdVMTyDRxAqB1r8s5215TUSGPL8DJdkAKpwJhLP
- NtNQ==
+ :reply-to; bh=7rusyuOfqBleAOYo997npLkc6mFrsRzNXOR+NxmHMS0=;
+ b=KEXIXusU3EwI62PorEDnMxfvRTpeELRlxO8I/WQArricDjHVGxzctb07aoxaNC2J+w
+ Av0Yl2P0xFWrg3UO3qZRejrjynW2rd2FTmVWfU5xgMxt7QmtCMnWO6bb/7AY23/ESlgX
+ ucneDQxA8IHfWj8WLc8EilG0zIOWgXbtHgKdNsbiw0n4mnaBzZN2qwttlyhMwP4uJrB7
+ wI6sIqYqRaYeQ+u6iRafMPvSelGqH/XotCXrVILahwpVcHB7OnGVBcOWn9w4i3F7TXDa
+ KsYWys39tBcwt3Efmniumqwu1LXttiP0+/jjtqGaJ9HL4rjkowSmQMGIxMjbGDhO3rwU
+ 6b2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716883480; x=1717488280;
+ d=1e100.net; s=20230601; t=1716883489; x=1717488289;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=G4Jd0Mf5Rpg0fX74qYCq1SFuzFA70otscf/0i4j5V9Y=;
- b=FZQun5+G6u0w9j53y8IA/Ut2UjvY6g2QCjG1hERA5R7LM0D7gvjTY/nVAaVIZjO3jQ
- NLaJAYDDUpCKV0UYt8q81Dz6Yanx1eLFXSEZuD3olEjj6Q7fK08Ae0NSognx4lQWMKd0
- uGGTbQKP1U4hS3i56Qgv9IOvXIV6ebOhPoQ9wRPcmJXytccmhmo+HbwcbdYCjJOkhYcc
- RTsGAmaBS4Elip1Lw8EggAhq5R3Vgk5aYCl9Eq64maDWfbo/bRTCWEakD/4qZQV1CSz1
- opQWjJqChwug11stFcg+OWdM7+SptANGfUa/k4dEOywMEdCAqZsNOd2L+Rdhhjq9fV+z
- KKnQ==
+ bh=7rusyuOfqBleAOYo997npLkc6mFrsRzNXOR+NxmHMS0=;
+ b=pYf+D7VxvmDZWtzoH13Dnpsmj9hcwmHrZ1TodoKfXBlM/D4mkD0lBRhZChQ5eK1iMM
+ jDqd4UMSUu/SECs6fTN2Irl8fT3AzkzZmp/18pG2qVvLckQAINKEJDD00eRkZQnc94Cz
+ jd6iEmpzpDsshy2FucxryDg/6ZPb5wRdg3tgMCzQHZFVWknWxUDoTnAqiIEKGdj7vyiX
+ 0mk1H4KkoWt6C203tOvMh8N4KtC5ULEJ2+GLWh5fkU5a0A1cMoDoPABhVkd4Zkk7kmlt
+ 1BSZc+2Gi71FOr3ITWs73adOf+WTj2MVzVpH2zadw4ECwDwMUlBMCvtWu2Ivz6cM9EEx
+ x6vQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUNxq7eqHM0Ez2vblhBnin0AlDM++wGfN8AX5XrSmWGkDO5vrIxQUrCq3bDq9guWxpfz0zch7TO1C/2tBlPxVRv6IN0Zw==
-X-Gm-Message-State: AOJu0YyqWHg+kKJi29GuIufQwvneThkJoHfpUCEO/PfVp4RBHEkQOryH
- liG467QOJSCFah4q07bsGAueh6WHZykLYeUYqGVUUci8o9/Ia88asag8rq3vAKU=
-X-Google-Smtp-Source: AGHT+IFBcPB5zcAnu1rhathsemBPOGeRkCWc1ukXghzFb0BJyu7jhe4Si1FPmV6ACimb7Hq116EovQ==
-X-Received: by 2002:adf:eac6:0:b0:354:f386:d44 with SMTP id
- ffacd0b85a97d-3552f4fdb02mr8305152f8f.69.1716883480356; 
- Tue, 28 May 2024 01:04:40 -0700 (PDT)
+ AJvYcCUOy9Xh79aCgg8iAiQEhvvDILudOHXWTb5WGBrgAjAb4hctV7pmmZLyqZIoKqsGU21t8aZx/q3JiYKJl8UuP+XTm5aLkg==
+X-Gm-Message-State: AOJu0YxYPn/x6Dp1hPUPhiD8PQ2Fs1J/ZHrQBsm626dY4alo1P/nCqLV
+ jgaZ/qds2lYIoZcAoOhZuVuVJtsK+OxJbYkB+LO4qs6gij7wSaCZnCQ/y9ZeAVA=
+X-Google-Smtp-Source: AGHT+IF21YHHYO/mTepU9k9/P/0voCesJpN98gZsUSloYkioVOQFPH6bUN27UT3pgtpHc3YXBzl+Yg==
+X-Received: by 2002:a1c:4b15:0:b0:41a:aa6:b59e with SMTP id
+ 5b1f17b1804b1-421089d50abmr116017875e9.5.1716883488760; 
+ Tue, 28 May 2024 01:04:48 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:982:cbb0:8f19:f965:3f93:6385?
  ([2a01:e0a:982:cbb0:8f19:f965:3f93:6385])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-35579f9649esm10876531f8f.29.2024.05.28.01.04.39
+ 5b1f17b1804b1-42108966b58sm133277755e9.3.2024.05.28.01.04.47
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 May 2024 01:04:40 -0700 (PDT)
-Message-ID: <31fc866e-6f84-4694-b6fc-d0e6f59e4bec@linaro.org>
-Date: Tue, 28 May 2024 10:04:39 +0200
+ Tue, 28 May 2024 01:04:48 -0700 (PDT)
+Message-ID: <d1ac1d84-dff1-40d8-bc9f-e2cd8b8c279f@linaro.org>
+Date: Tue, 28 May 2024 10:04:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 6/8] mach-snapdragon: use SYSRESET_PSCI
+Subject: Re: [PATCH v2 7/8] mach-snapdragon: bump up heap size
 To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
  <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Lukasz Majewski <lukma@denx.de>,
@@ -82,7 +82,7 @@ To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
  u-boot-qcom@groups.io
 References: <20240527-b4-qcom-capsule-updates-v2-0-47583d7ad428@linaro.org>
- <20240527-b4-qcom-capsule-updates-v2-6-47583d7ad428@linaro.org>
+ <20240527-b4-qcom-capsule-updates-v2-7-47583d7ad428@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -109,7 +109,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20240527-b4-qcom-capsule-updates-v2-6-47583d7ad428@linaro.org>
+In-Reply-To: <20240527-b4-qcom-capsule-updates-v2-7-47583d7ad428@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -130,54 +130,30 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 27/05/2024 19:17, Caleb Connolly wrote:
-> Capsule updates depend on SYSRESET, which we currently don't select but
-> instead use a custom reset_cpu() implementation which just calls
-> psci_reset().
-> 
-> Clean this up, drop our custom function and require PSCI reset.
-> 
-> There are some Qualcomm platforms that either can or do run without PSCI
-> support, but we didn't handle these properly before anyway.
+> For capsule updates we need more heap space for the DFU buffer. Give
+> ourselves a whole 8MiB!
 > 
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->   arch/arm/Kconfig                 | 2 ++
->   arch/arm/mach-snapdragon/board.c | 5 -----
->   2 files changed, 2 insertions(+), 5 deletions(-)
+>   arch/arm/mach-snapdragon/Kconfig | 3 +++
+>   1 file changed, 3 insertions(+)
 > 
-> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> index 39ad03acd2e4..0d5161358e33 100644
-> --- a/arch/arm/Kconfig
-> +++ b/arch/arm/Kconfig
-> @@ -1084,8 +1084,10 @@ config ARCH_SNAPDRAGON
->   	select OF_CONTROL
->   	select OF_SEPARATE
->   	select SMEM
->   	select SPMI
-> +	select SYSRESET
-> +	select SYSRESET_PSCI
->   	select BOARD_LATE_INIT
->   	select OF_BOARD
->   	select SAVE_PREV_BL_FDT_ADDR
->   	select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK
-> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> index c4a3394706e6..b0d9a65bb8f5 100644
-> --- a/arch/arm/mach-snapdragon/board.c
-> +++ b/arch/arm/mach-snapdragon/board.c
-> @@ -106,13 +106,8 @@ void *board_fdt_blob_setup(int *err)
+> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+> index 536960b83c3b..5023c906bed8 100644
+> --- a/arch/arm/mach-snapdragon/Kconfig
+> +++ b/arch/arm/mach-snapdragon/Kconfig
+> @@ -10,8 +10,11 @@ config SYS_VENDOR
+>   	  Allows to specify vendor for the Snapdragon SoCs based boards.
+>   	  Based on this option board/<CONFIG_SYS_VENDOR>/<CONFIG_SYS_BOARD>
+>   	  will be used as the custom board directory.
 >   
->   	return (void *)fdt;
->   }
+> +config SYS_MALLOC_LEN
+> +	default 0x800000
+> +
+>   config SYS_MALLOC_F_LEN
+>   	default 0x2000
 >   
-> -void reset_cpu(void)
-> -{
-> -	psci_system_reset();
-> -}
-> -
->   /*
->    * Some Qualcomm boards require GPIO configuration when switching USB modes.
->    * Support setting this configuration via pinctrl state.
->    */
+>   config SPL_SYS_MALLOC_F
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
