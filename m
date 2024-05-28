@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43568C25B78
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 11:14:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 158B1C25B7C
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 11:14:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 137C788422;
+	by phobos.denx.de (Postfix) with ESMTP id 72BC8884D5;
 	Tue, 28 May 2024 13:13:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="bj8SXqdS";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="a3na2h7N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 249B3884A6; Tue, 28 May 2024 13:13:48 +0200 (CEST)
+ id 2A615884A9; Tue, 28 May 2024 13:13:48 +0200 (CEST)
 Received: from EUR05-VI1-obe.outbound.protection.outlook.com
  (mail-vi1eur05on20600.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:2613::600])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10653884B0
+ by phobos.denx.de (Postfix) with ESMTPS id 5ABBB884BC
  for <u-boot@lists.denx.de>; Tue, 28 May 2024 13:13:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=HAstItF5oFrWvxSi3zpw8xFSDqRYsAYwBtKv08BPJNwlBmgjBQRBbvvSwon0NOne4tsvJZWwlK9Soye095R3rmw/Zk5VzoT9WiuQvwsNhVjktQFfKeRzG8u7D2fkonn2KaIZPBYgm6iOFXvf7Xviic//bknBhcKBuXrj7WcJ8ywWKLxIMAbORqIAo/pAlNyEHWk/a4ikxsUYRM1d5VSy+R1YZm9VZVOaNwU8YrvX6YAVGxl5MUk045GVPrvz2PXRQhLEQJrShmqH6GsaYyd5iu+q8rgfGTnwNP79I+h/4tRjbCxU+nfUP+NhO8EPtYTpVY4pqYEAPmJVggLw7LV1zQ==
+ b=i408BU3CbhvjXZMWWW+0hfEtYvKpcouS+DCnu3xEAIU49uXFbu/tBTlHy4RJl/szgqmJ8jFndiSj8EyOKBlkIxHYBafFwvD1s3oygcIakwJwCyWm8DKdjE70nrms6yXXm2Keni+RiDY1ycCq5BAwU9bEUZ9b6fe3lFnhQg6JJ/6LprVUQEkxPIH9Scjj05DTrUJTkYaXKdZZ5hgxcuiibo8qj6Dt/nWr4uVMpsCiI0ACpO43HNYwgBBc2/GhqdX7uzkO/jZnO7vtrLpUmsj/4UNOhrfatZC5SB85OjjNTX/uvQlzv63I4bzhb43jkQX9fl99zF13LoGLAjq0zIRwpA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Sl4Om/d9Pk8FAZqpm8tqeXWMrgXp8SXwwbRrfZRSLaw=;
- b=XLU8GrhpETz5UYWmTY+jDH42mYyWjvglOBS7bJBX34/wfS/U1cjD7A6K/m66RixGNaBxc3oGlUX6G+tcl7ms/0J6hiqJRSOkKvSnkPul9U1Y2Lvidvzt8cYnUm8nyFZmzJrrpGgMgJI3xKjaTPPnJhCAje3cndJIVLj3DUPUr8V4cLLUUrDYg9vZn5e69evoL96W9JR6D/YEqfDm1r4zZNj6Vfb8+Ljj/7O2R1wO6PRya45zk/SmOE1vOE/RnsWXarL7AMpF3pEPH+JJeqWu2bMUX/rnb5Peu+jYTgXJXp4Wc3Mjkh8Ngme999qZ1PPJ/6pbAf+fK7GRGdpadiLmyw==
+ bh=S82znkxlQVa2L7tkzFkJ9AGMaWDV4J14SKGHKfatmWU=;
+ b=XpctFNlc3giprA1wckr6vbsF7nLZhsEiHlFBQt90QFGYGxEHEtyRvd9nw4sWfl0LKEp+n1BKVdTLxMDFaPYwZS+bumFxdrUerh+qBDniHyc+xCypd76jXFJ2f/M9yhqMSI7/NfHmFuIouZeeXioeYWKRFgKF+K9IG2HP6rEhOSKnAhCKj/aUfyxmNIYA63/ISj/NaXLghadjywlmzIDxg54VUuU2wqcjGzHHhThmstGZCLmIdaN9Nwm3xk2I76RAvj8mp3nSt+SCOjgefKsbzPzNxvGSs84MASzlSHQmE+qX04aw+7NDE2NYGbXXf5pAteRK2dVLComVGgoM25B3qg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
  dkim=pass header.d=prevas.dk; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Sl4Om/d9Pk8FAZqpm8tqeXWMrgXp8SXwwbRrfZRSLaw=;
- b=bj8SXqdScZdGxnbJYgMEthlqYSwIren0lS5x3Sw7DB0ax+RKlJw/IMndJgxNRIe799ib/4ELvjgFqQY+ur25BXG438BlGz5PsmcyvIAEb7q96jVyW2hA5PDyXWSLMuTc+9NVVvQDEIM9kwKY+y/46QvKeoVeRwHQx8PqF/pyv/k=
+ bh=S82znkxlQVa2L7tkzFkJ9AGMaWDV4J14SKGHKfatmWU=;
+ b=a3na2h7NxI17LtfneknycR5MgIsXDsj+oA3Q5NNwa8cHIObORPeAPh0r3Op3R5PnNOOftnZD9XGELWICsuOz7x8qaW8hmQAMFFB/rMrQ0VJutl+NSU6MEit1fVbQZCUwKECQ7DMHBIHffegapFDUcj2uaFOuY70k3jfLjh14c64=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=prevas.dk;
 Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
  by GV2PR10MB7079.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:df::16)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7587.36; Tue, 28 May
- 2024 11:13:38 +0000
+ 2024 11:13:36 +0000
 Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::9fcc:5df3:197:6691]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::9fcc:5df3:197:6691%3]) with mapi id 15.20.7611.016; Tue, 28 May 2024
- 11:13:38 +0000
+ 11:13:36 +0000
 From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 To: u-boot@lists.denx.de
 Cc: Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Subject: [PATCH 4/7] sh4: move reset_cpu() from watchdog.c to cpu.c
-Date: Tue, 28 May 2024 13:13:22 +0200
-Message-Id: <20240528111325.2163560-5-rasmus.villemoes@prevas.dk>
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Christophe Leroy <christophe.leroy@csgroup.eu>,
+ Huan Wang <alison.wang@nxp.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Subject: [PATCH 0/7] watchdog_reset cleanup
+Date: Tue, 28 May 2024 13:13:18 +0200
+Message-Id: <20240528111325.2163560-1-rasmus.villemoes@prevas.dk>
 X-Mailer: git-send-email 2.40.1.1.g1c60b9335d
-In-Reply-To: <20240528111325.2163560-1-rasmus.villemoes@prevas.dk>
-References: <20240528111325.2163560-1-rasmus.villemoes@prevas.dk>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: MM0P280CA0066.SWEP280.PROD.OUTLOOK.COM (2603:10a6:190:8::9)
@@ -71,76 +71,76 @@ X-ClientProxiedBy: MM0P280CA0066.SWEP280.PROD.OUTLOOK.COM (2603:10a6:190:8::9)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|GV2PR10MB7079:EE_
-X-MS-Office365-Filtering-Correlation-Id: c4dceeb5-244b-43d8-3cce-08dc7f07392f
+X-MS-Office365-Filtering-Correlation-Id: b929df69-93f3-4a79-4b84-08dc7f073767
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230031|1800799015|366007|52116005|376005|38350700005; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?2KMqVOcluKXJ7FC5UsdpahT3NK6EfSa4pFw8tiQcoIR5OJY9b40T8jXSk5nt?=
- =?us-ascii?Q?/DByTYjMO2Ekx+SUN39lHT7uqwybcRLqMN2pMJzjfod7N26MhBocXJxma/Dw?=
- =?us-ascii?Q?75B3p2rXJOy0BALE+MkvXWi/jKOHMb6r/+ZHQ+yFYDrDWSrU8a7pWvY7BTy3?=
- =?us-ascii?Q?/vQyZCBDh/lcKFhcEh8kn6qn73JXOZAC/KPmkt96uUllmzIMK71/64VzIj7F?=
- =?us-ascii?Q?BMQ4AAvh/7FWG5qmImt9QAfpepRBkaQtXsJNzb4Hm42t5v+DlitUvC79W491?=
- =?us-ascii?Q?7grZOZsJKl1+udYV3EpwtfEjXSUh7IJfpq9AZ2wjvH39IfUKwHJj09znWhaq?=
- =?us-ascii?Q?I7KkV1bketpHx8y5Ki+Z/oAWNpsLvI70CKzTbKdrx73WVRc4DS+e/62FppX3?=
- =?us-ascii?Q?rCqn/6rzhfi+MQUdukMk2T6GTB9BsSRRRUnqwSw9b7cGgCSBBxNEkejB9caR?=
- =?us-ascii?Q?ZhkoAPlLAIkzQPb8DumyH2vTXIs2+7DB4WeqYUZgTvkSHK6XlHKNECU0mAou?=
- =?us-ascii?Q?H+vY751lgBatAJ39YD8aPcBEE7WU7gaF2hffy36WDwubrft0z1/GHkonfHiM?=
- =?us-ascii?Q?bLmsnnLaMg2sWo4QW90NBVkgausEEC6vuzcYWNAsj69J9Yq+H2JUcjzVAR34?=
- =?us-ascii?Q?0LSUg/2Ojg11k7rcVPJskGdnf5XDqY72IWdwYP7+BnLfUDlhjQ0lV8VojETT?=
- =?us-ascii?Q?X4xM7GopEa+yVyHaNMHO0FZvsq/7v1lCZK4Hb0kM25lmH/c8p29yIyG0pkFm?=
- =?us-ascii?Q?p9+Jsf/7Y3+dNSXIRSQJQlPV9fdsTyVpCjYMUZVuotpe6i/Qy1x34qgmePOP?=
- =?us-ascii?Q?acZ9qyakxoavLpgaXQCTzDP3qjFAxD1a4Z21qFxFnFvc7AOX7eJ3Zcr9n4hs?=
- =?us-ascii?Q?f9/k+NJQYTd9c7k+lIx4B1vnfmGpNn2GqPUqWwglMV0yLuqiJqGBbKDwFcnN?=
- =?us-ascii?Q?9PV6cn0ypFGZcu+eBu2AoQeCoc/2+QWMusLW2MzBeu+cgIDpwk4BX5ViJHBS?=
- =?us-ascii?Q?ppCt/cMM92oOOVwSveAC4KTmD/IRkS0qwnFsD1rsHBTYxhuptezrP6yNjfoZ?=
- =?us-ascii?Q?tHeVddydipu9T0xVat6RvS7nd9+0EpYNePwcVRfo+Ww6feepPpMt1vZ3ESpb?=
- =?us-ascii?Q?uBk2mFwic+tRvvD2rJJk4UoGjBOcqvTRueymjMoYZpVcNsPfUovj2pWpDTZE?=
- =?us-ascii?Q?q5uWMbBFgclNnIApF3CAAi5uMqi77aGetkQjo//qXuMqNx1FNMt5op1S1l0Y?=
- =?us-ascii?Q?349t2P8QUWhWSY5bk8j9oZE4qgV6evmeibS8QjaNniHUk7GY+aiVDIgK8hs8?=
- =?us-ascii?Q?M3vms412hJnk2m3BV0RCvzkPTjpzIa0aUNjBPE9V7FaXcg=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?HRfZYnG77Weu+e4PEp58qUd7Rp0gL7TxlTkF17tJQ8hwaA5Ec1quwFC8dJ3B?=
+ =?us-ascii?Q?b02XI/4yI+CoT2X6wmTOwcd8Eo9BteuUBGZMss4F17xB3SGQz7/0JDcLV/qf?=
+ =?us-ascii?Q?kxDwFzVLiU7LELQak3K1Ls73eclFOQQB7fc/juPlcQv7LnQZuyEBgi5M8788?=
+ =?us-ascii?Q?sL+1Z2YVTdwUPgkgP0pnAN0nXOqdkZIXkwylrxwICDaUEg/Km5lHR9lIYpfi?=
+ =?us-ascii?Q?YTRE2N7fc45Fk0QQ7jyy8SxSNCZ72mLvBYnZp2dVNs6GqH7DAR9NBS3cqJz1?=
+ =?us-ascii?Q?PJ4y++sZnj975XPJ0etbf5XDRY/IE4D4QdLWNWBdgGhBpZXWOjH1qs21v9ph?=
+ =?us-ascii?Q?lNwPrqcYElmqLY3HGLyzWnpUqrtvx7/AtSLoAHDTA1FXgFevhjQsXXNyeJZV?=
+ =?us-ascii?Q?M25JIxrgCv+Kc7AJDpp/yjSf4Gm3ofhAxTpBNUZvT/RHgov46MwGL8oNKlwT?=
+ =?us-ascii?Q?jD2pdIzzcGp4TNAqevt64XVA5nys1/wB+Jln5WvpP/VJkV4c9kpCvomqbbRx?=
+ =?us-ascii?Q?Jjz4tM6Ce0Xq6Zmkbqw88UoN7cOh9EW7Gx45Kd0dEBJTqMUxNtQh+GJ8Plym?=
+ =?us-ascii?Q?1dPdtoGex7F1OELwsWjuuB8ALGwer3RYee7ZjsLuAtxi3/qeq3LG1JkGfZF4?=
+ =?us-ascii?Q?26j7yNnD57RNqUkVo96/U4IuDO1DblP1S31/ZfF9KRLGT/4yuFHCZ4cCDOdz?=
+ =?us-ascii?Q?ik7su/vwk+3jY3RuOWdEbU0/RRPzQZQEiyAVfkDD2EAhj3XwwKDO4A9ChR3d?=
+ =?us-ascii?Q?iT8r4z9F0FbUnFMwgIbv1KpwwclzGhtYDSlq2/TbvNR5SWWgfeaNS8weIWu1?=
+ =?us-ascii?Q?ar8eovdrhN5JVPPkNjQAZDiZDKcZCRJj5mgVRxC+sIM9yvxXlGRVhzom7S5b?=
+ =?us-ascii?Q?LMsxWizsAk2WyXOHB5IOqgQywry+6Bm45BQwgv7qxZUZ9Km6Uu3Ekrlowj1R?=
+ =?us-ascii?Q?ULUFHxJ2JEVNIWJw8W8R6zfiOO7Y5vxQewVZVu1XFlM5nbnvkSfk4x+gLMwL?=
+ =?us-ascii?Q?S4ZRkvfUu8dzQxuWQAJ4eV/2g7z4LGa6+Jsen4qXAF6GOX73d0w/bE3WX1WC?=
+ =?us-ascii?Q?g+k07nStLb2xI51wJ9OsNoLnTIgvLi0jrFCHsDgXU8SmGvS9Rk6b0ak9HT9v?=
+ =?us-ascii?Q?vnawcYb75aw6sAoALFDM6hH0LCVilbG7mnpi3qMk/paEJ002nU8ke/l3KVfP?=
+ =?us-ascii?Q?05nGrSZ/yDFcHgasBSTcaSHLTS5Rbz+OxbW/LmRJz300wtmCi220xglcpjNf?=
+ =?us-ascii?Q?KTWOvcgPR7ilZpA0ZdYkkF+s5nER/amszFVowY02d4si7EOKRGK9ubpxn2XN?=
+ =?us-ascii?Q?78iIR/EUqSjgbQdAQ+KvprINhq/GYw58xfL3doqxmVaCZw=3D=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
  SFS:(13230031)(1800799015)(366007)(52116005)(376005)(38350700005); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?7BJzddsHcCU99/WNuARlFD0GKm8O1HJ/ICnum7RxVyIBoQYzjPBhsHFJnp/m?=
- =?us-ascii?Q?WuNl9FPYTmu3lob8HxapDRhZyEt6T0PlcIk2MtYQ/uRLKW10eIL1y4VPQNuB?=
- =?us-ascii?Q?1z+8kiZSTxmU40bxq87/nqDl8cYtWWvXKWZ7WhVWPVwkRSSdcV/B6JkYVyvj?=
- =?us-ascii?Q?mK9Wy9QqS8cV7GBsbWCVTEWxCOY7LiHjoy3OLpBruAYZ9zzIffZlZbDkDqm5?=
- =?us-ascii?Q?xcNokyjp72y/2vlQqlHEcSA3wIXja8CYYrynOwmJhjHCmiotY1Ex1HCl+mt8?=
- =?us-ascii?Q?t1eBF7Dut4FSH9zZ4fYmzYAOa3YexG4vqZi9Fjbhk1OOGUis9hIS6iEcn960?=
- =?us-ascii?Q?2sbRfh+cIJ510nPWP6A03lQfZp33zHBCygySOL+RfsfEWhopwv6gBd04XZlR?=
- =?us-ascii?Q?4JGgP3pB/cZgBqSpo1rmYU7mvobjesoy3lAVG0J3TJvmNbxuk+FtbnI71WAx?=
- =?us-ascii?Q?zjOob/Mx/Q0yCtHAwHCV5OdeCJlx+YYdQGfMbkUFeuWcRX/xnY3W9uHlL9cL?=
- =?us-ascii?Q?V8BkfiUg9b2a5fsLZ7XW4EbwlHTI53Hkrydqq1WxsiE/DjVLONS0o8xXgrwF?=
- =?us-ascii?Q?DWyKAzDEpbBVmGFP0IJnMYiqL3ukbZ41mqYmS4Z0GSXMkmwoz+r3KrDVf3pS?=
- =?us-ascii?Q?0WQW2S9j2QrGd6nx5Ehq8D4F/5ZPtVjnHBlztuYP+uF1sHZc+kl7jGhoFDGT?=
- =?us-ascii?Q?TX50et2GgpAFaKXuUX8UcXboggIwP36WvZB2+Mf8xK1tDVZvkc3NTcMlpFQX?=
- =?us-ascii?Q?9BMWWErk5yBv9XMI5KDhLjJUspv8aie9vkTefyCcQ8B4Qxf70ctuTJ459lvu?=
- =?us-ascii?Q?mg9ODQDRGtEkWhHGEFzTTpa+TEZ+GUiZiK+BEYbYSliMN76liQ7XFWWEhsDf?=
- =?us-ascii?Q?xbnv+ElLRHyaj9p17VMWFZzUYIRIixb2q7T36KKL4gIn1MNHiZ1HMAuZSMYo?=
- =?us-ascii?Q?zfX0/7kBFUpRZIapHoqUrgpBE26vuo71/q98scLdkCx4O/GGvAp8nBZgA01r?=
- =?us-ascii?Q?dl7WzdZUOYP0ejY76ZVpn6LgA9+X02vHYabDomGj596ILLK74zaigHiJPhtO?=
- =?us-ascii?Q?TyTpmexdomw3jo/JPv//VGIx8AVjuCd99PfCoKXDX9sOaGWUZ1kOqh6/b229?=
- =?us-ascii?Q?4oxASsylEL6z8tSSGiOWGSLuPPRtk25Tc8+G/wTsjxCIZEXfdWqQz0yaywXu?=
- =?us-ascii?Q?qQKGNpNY+VlsIAK4TksY3DVL6LLxOBFIsMEK4PlwzQTHJKDZJJF4+XK56enJ?=
- =?us-ascii?Q?h0aXR6DITniYxlidgmqRlfA4ltMG6ZwPeUo08JWVm/5YUvNrw5ARLyYL4EBQ?=
- =?us-ascii?Q?yX+Jt+izyLHqvSrUeB+0/xjvIlgPzFmWyaJguEPgerHWO3hu61ImLdbrW0fp?=
- =?us-ascii?Q?6xdIsQ73zAZ4hv3kfLy4/KZnVA6eFsx1I6J8aq5t9anTQ0UytciJxi3Lq0FN?=
- =?us-ascii?Q?od3CGx/Mtwz1nLVu64wv7SBOJq5BTnzy3GdwrQ0FVxPg0waoRnDlqegH8TTp?=
- =?us-ascii?Q?5kh1SmNDmVuVwjTLV3Yb+uVL7XimhPtjDEOt8vhQajMzBtFWccjMgEaR6fT/?=
- =?us-ascii?Q?V0ZdLP1K7qbnOYjm/s5hJ7CUws/tdoQDXR/6OL+sBhBZxAvdYc3uYejZhBe7?=
- =?us-ascii?Q?fg=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?9jr9N+f+gVGKUWhZujwDIkpehd//2N8UB079bBgXzb5fTM/UK+MPGznQZekf?=
+ =?us-ascii?Q?W3b4+uaPba9i65MBGn66wbc28ccXL2wAzJ7/+fH/b0R6m8P3fOC94w6S1F8O?=
+ =?us-ascii?Q?u36H0Effdoz6pvtS6GSIMH4AZbYELnEJ+XO+54oQLAaqWw1SCi9VTALCnX1B?=
+ =?us-ascii?Q?o6Ak/UKJt7Rnnwsk61+mwNI16a9BG7JztoPkvzwgSoOrt6YY4lE16Akv1eaI?=
+ =?us-ascii?Q?wSWqepuCyLu30pJ6auED86hgQppQFVD5EUbW/OIi8SAqqZMQs+m8pYaTxT67?=
+ =?us-ascii?Q?gzHT9MJArwMT1zW+ij2Xhhp5oZ71Ha031/aZAoREyKKIHnlCWLbW4YVBYqMU?=
+ =?us-ascii?Q?fksYLbIqWJ3+HZI+3ZLrjDf+CynN3tvVjM1bt9Rf4ZAH4nHuzcnFHlc9cm7M?=
+ =?us-ascii?Q?8mf5EjsXQxHQvo0eAt6PPOU3ScZKy9I+GhvfkXjtiyyHxXSMZufooTfRGEQw?=
+ =?us-ascii?Q?sso+92wdwdrjlWlOZlaPKTj3UXrl1rGsxiVXS276bY39IEwRDbw0GxbubuIm?=
+ =?us-ascii?Q?dBH5fI7STFxL0KsxbVt2E7k5KQrXzu+5oJMf+AgkFl72ytBfcKyjlNCxYt6E?=
+ =?us-ascii?Q?bpYy9XFuyqoAUhb+IjuPcirFIJ1yNzMSx58Egth6WZ2efwiJku1nSjoUKByA?=
+ =?us-ascii?Q?WoVxUu5wjbnlmjrronxR9mCZ38X+Udxkb035ZPbmNBu4zDHnVDn+0em+TQRq?=
+ =?us-ascii?Q?0MB6s8yFkuGTnkpno1ZjKlUXcAqSycJUQOeilHJ9KQfhv8B5ZxEyAvmCgh4Y?=
+ =?us-ascii?Q?xmpLZq+cSAgwijpZULgTjVLQYUpxVfOdmqEYfoBZe92k98mKrWDkPl0KLEvj?=
+ =?us-ascii?Q?ZHyMUP4K4NkJjU3zmYv/dcYVoxNKuEsbrbfwUXeQITa+IiUNwnQ/jzf7BNCe?=
+ =?us-ascii?Q?pJn2oPcVm50ywo1y7Zi0DOwmbzFO2H3L0f10eFwcDhwG/Yi9l2KtO+6Eh1vI?=
+ =?us-ascii?Q?q2frQK3fkuhhjbEAsflOx2PfZSwQq6PZZfZWPv5oBZqMxsGRb0+zQRZIjegs?=
+ =?us-ascii?Q?lNyetR/7ShGBAPCsYE85jbcVL4wq3KbSFzrP2gguR6+HYHpN7AoINiz4yUcT?=
+ =?us-ascii?Q?6JQQIqFoqsOxXFeJNhgmMgdIUOEgAEGNwpaM5uBgliaKukCYtu7lK9dKKJy9?=
+ =?us-ascii?Q?3NYPqcG1EInR/D7HK7y/1H1D0QFuYGnJROOz2acoae6v13y1NbS2bey/0pG2?=
+ =?us-ascii?Q?BtneYO82UVms91Ixr0+ZHw/Suq758xDUdLbQrOEqUajUF89F7H7qWA6nHvOc?=
+ =?us-ascii?Q?NAJDwfOLaSfU+vY4hUaREX12a43UAJkxGeVtG8afd9NB/bSjbq343Si7cdLr?=
+ =?us-ascii?Q?iMtogBOYrq3G8yefLucm6Wgp535apBu3qyv0t93JDP6vWD+gH96uQW2nEUOv?=
+ =?us-ascii?Q?SQWEfHajOOyeMuG1i5NdiY+o3zJ0M1mA6Q5E/GKEh7xmVw6VcSnRJsSo3Hrn?=
+ =?us-ascii?Q?Jl0i07aWxTHAx5PMhdSXWrs91zpSZofpEgSZUVAJSpuOWsHtyeZD7jKRpwz6?=
+ =?us-ascii?Q?mkxN3+g9260lcRJIcelaNOsy4CUAArWjMhonILuOtnor1SnNjA8aux7YSogL?=
+ =?us-ascii?Q?h6UVB0u0ialHz/57JGeHcpu8pELkByGBTwwbfpYT1SU+EkaACUxZa9me1TDy?=
+ =?us-ascii?Q?vA=3D=3D?=
 X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: c4dceeb5-244b-43d8-3cce-08dc7f07392f
+X-MS-Exchange-CrossTenant-Network-Message-Id: b929df69-93f3-4a79-4b84-08dc7f073767
 X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 May 2024 11:13:38.2214 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 May 2024 11:13:35.2666 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 7kC3I8gGM9dnWVdD/63fyY6wT32YeyFZJEixTLNrrxiD+k+BAca8MbySJotteGrBeFkQb8dmYiI1RlNYlhb35w+2QjjRo+oR1F4UGIv14d4=
+X-MS-Exchange-CrossTenant-UserPrincipalName: y64ANa+vDD506O4PS+Ba7r/cztyeRxILjGC5IMftZhQRjldkpV7GpM9PUJo5McwswZs05gYsxY/ypdmeokRd1f9OWofapco7BE8kP1fF7q8=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR10MB7079
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -158,56 +158,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The next patch will remove all the other code from watchdog.c, which
-would leave just this function in there. It seems just as natural for
-this function to be defined in cpu.c, allowing us to delete watchdog.c
-completely.
+watchdog_reset is no more. That is, it is no longer called from
+anywhere, so any leftover definitions are just dead weight, and
+references in comments need to be updated.
 
+I don't have access to any m68k, sh or powerpc boards. Only lightly
+compile-tested.
+
+Apart from the two sh4 patches, these are independent of each other
+and can be applied individually.
+
+Cc: Angelo Dureghello <angelo@kernel-space.org>
+Cc: Christophe Leroy <christophe.leroy@csgroup.eu>
+Cc: Huan Wang <alison.wang@nxp.com>
 Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
----
- arch/sh/cpu/sh4/cpu.c      | 10 ++++++++++
- arch/sh/cpu/sh4/watchdog.c |  9 ---------
- 2 files changed, 10 insertions(+), 9 deletions(-)
 
-diff --git a/arch/sh/cpu/sh4/cpu.c b/arch/sh/cpu/sh4/cpu.c
-index 1b2f50dbe6e..6b52737028d 100644
---- a/arch/sh/cpu/sh4/cpu.c
-+++ b/arch/sh/cpu/sh4/cpu.c
-@@ -11,6 +11,16 @@
- #include <net.h>
- #include <netdev.h>
- #include <asm/processor.h>
-+#include <asm/system.h>
-+
-+void reset_cpu(void)
-+{
-+	/* Address error with SR.BL=1 first. */
-+	trigger_address_error();
-+
-+	while (1)
-+		;
-+}
- 
- int checkcpu(void)
- {
-diff --git a/arch/sh/cpu/sh4/watchdog.c b/arch/sh/cpu/sh4/watchdog.c
-index bf403d3c520..a891333392f 100644
---- a/arch/sh/cpu/sh4/watchdog.c
-+++ b/arch/sh/cpu/sh4/watchdog.c
-@@ -50,12 +50,3 @@ int watchdog_disable(void)
- 	return 0;
- }
- #endif
--
--void reset_cpu(void)
--{
--	/* Address error with SR.BL=1 first. */
--	trigger_address_error();
--
--	while (1)
--		;
--}
+Rasmus Villemoes (7):
+  m68k: remove dead code
+  wdt-uclass: watchdog_reset cleanup
+  serial: ns16550: fix comment to mention schedule instead of
+    watchdog_reset
+  sh4: move reset_cpu() from watchdog.c to cpu.c
+  sh4: remove watchdog.c file
+  powerpc: mpc83xx: remove unused watchdog_reset() function
+  powerpc: mpc85xx: remove dead watchdog-related code
+
+ arch/m68k/cpu/mcf52x2/cpu.c    | 108 ---------------------------------
+ arch/powerpc/cpu/mpc83xx/cpu.c |  15 -----
+ arch/powerpc/cpu/mpc85xx/cpu.c |  31 ----------
+ arch/sh/cpu/sh4/Makefile       |   2 +-
+ arch/sh/cpu/sh4/cpu.c          |  10 +++
+ arch/sh/cpu/sh4/watchdog.c     |  61 -------------------
+ drivers/serial/ns16550.c       |   8 +--
+ drivers/watchdog/wdt-uclass.c  |  19 +-----
+ include/watchdog.h             |   3 -
+ 9 files changed, 17 insertions(+), 240 deletions(-)
+ delete mode 100644 arch/sh/cpu/sh4/watchdog.c
+
 -- 
 2.40.1.1.g1c60b9335d
 
