@@ -4,114 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD464C25B79
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 08:05:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E83BDC25B79
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 08:13:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 418E988412;
-	Tue, 28 May 2024 10:05:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6DC6788361;
+	Tue, 28 May 2024 10:13:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="R0foHlG1";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="djZe/J/1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64ED18842E; Tue, 28 May 2024 10:05:11 +0200 (CEST)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C300B88412; Tue, 28 May 2024 10:13:08 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77E6087F31
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 10:05:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A46087F8D
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 10:13:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-351da5838fcso512905f8f.1
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 01:05:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716883509; x=1717488309; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=QY+9OwkTgcAQ8yfNt52lEm/R6KnrhEN9i2VAzhufzE4=;
- b=R0foHlG1k4SQYTEmXI0cNiW6qsuXx5NaWHqET1qGH4DH10xLzX36eZBMZZRLfHKePB
- 6MGiSByb6gGk+bbtIcDalmAC0m2u/s4rVqFvdT/e2OQCDK96WWowe1+f/I2aTUsliwQg
- jcEQkD8fhixLrYpcxWEKIta6gzJUZSPSiMIMUtzLr2OZ86tRtN++jyl3ftpDL1QTjVxY
- DAe/dgLrn8fB07aij6MyefcegL5in7dDPwmL8Ql54jRTilGqnxZHQKpIpEYdnRLrIOqu
- 24Rxbhnl4GByphy8NmKIZ0YHp4yroJiF9VraCV+ZxknNzgpupHi8qKzitK9ngc8Amhes
- KxdQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716883509; x=1717488309;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=QY+9OwkTgcAQ8yfNt52lEm/R6KnrhEN9i2VAzhufzE4=;
- b=C+s03hT57PRNTp2TWFDKkg69rQHs8YfmLdXfzT4frD+1jTSvJ2dHT92TmfiQ+iEoAB
- EO/Ib/A6/vZ3dzEBdan3bb4hGPN7uI0nXwOb29+f8SqxPHcE5KgWRQKKiJG2XtaqvgCq
- D2yB6kz9ubTVdEJ2+lHOZ+aFv6C3mEp6W3nzOYQn2HkcPIE0geHImZoUuiRBMomULfxO
- LEWj1QJZPAmJ113CrZGwnNjaondVtBf/ABm8y0fLJqwHh21eEfS/Q4CiYkGNPKMrVq6B
- hjIlzKcYP44rSTG4MmQLkhg+wUFzRLYdxIwibdh4bAmz+Nl0eKSmAIvTlmWyJqjT+CBX
- SmBg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW4hCWvw1XbvnjyapU0tDAYf/wnn08ngUCb6lv70TJ5viA1fsPSSABrhV2Xb0AT7pu+ygaQgjfvebxS4z+7TL4OmbeqVw==
-X-Gm-Message-State: AOJu0YyQgtVByLo5djMYBAyA3hICfBUigitLZ7wp3apAwwk4Mt62F2+B
- EYzcElNbh1sAsBMftM/gHuQY/oLx+J5mOlpN7OUSipkB4eMlrvhn4Lldz8ke4P4=
-X-Google-Smtp-Source: AGHT+IEVaZbS5FzK051VaMvxpErLIwIgRdV/ML2P58q3x77XdyzYwhaelX4p8X0zhYnXBs5B637NKQ==
-X-Received: by 2002:adf:e102:0:b0:35b:1d7a:4866 with SMTP id
- ffacd0b85a97d-35b1d7a4a0cmr865061f8f.10.1716883508858; 
- Tue, 28 May 2024 01:05:08 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:8f19:f965:3f93:6385?
- ([2a01:e0a:982:cbb0:8f19:f965:3f93:6385])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3557a0909a7sm10918826f8f.55.2024.05.28.01.05.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 May 2024 01:05:08 -0700 (PDT)
-Message-ID: <65d4927c-dbdd-475e-ad2f-495083b21a7c@linaro.org>
-Date: Tue, 28 May 2024 10:05:07 +0200
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44S8D47G116154;
+ Tue, 28 May 2024 03:13:04 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1716883984;
+ bh=bLFt5QI4+xx3Jr9dCSszSVYZa3vteb9+jqoR25b8ePQ=;
+ h=From:Subject:Date:To:CC;
+ b=djZe/J/1ke3Pa2ThdIAQINpDlW6pEYtvnXvQyugPsC27zGQIU3LtPlyDaCTL1P5Ut
+ 2MhJmfEWehYf/yTEN//gxd/N8v3IlMoGiXMmY0Tqe91Zku8MtNAk05tG4RveP6rs2d
+ qzd8B2hSGUU+/HyId6MP3Fy6lOQPnQp3Oe8XZt7w=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44S8D4xF119011
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 28 May 2024 03:13:04 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 28
+ May 2024 03:13:04 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 28 May 2024 03:13:04 -0500
+Received: from [127.0.1.1] (uda0497581.dhcp.ti.com [10.24.68.185])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44S8Cxul066670;
+ Tue, 28 May 2024 03:13:00 -0500
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+Subject: [PATCH v2 0/7] Add AVS support for J721S2
+Date: Tue, 28 May 2024 13:42:59 +0530
+Message-ID: <20240528-b4-upstream-j721s2-avs-v2-0-df940f2309d0@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 5/8] qcom_defconfig: savedefconfig
-To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
- <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Sumit Garg <sumit.garg@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-References: <20240527-b4-qcom-capsule-updates-v2-0-47583d7ad428@linaro.org>
- <20240527-b4-qcom-capsule-updates-v2-5-47583d7ad428@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20240527-b4-qcom-capsule-updates-v2-5-47583d7ad428@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAuSVWYC/3WNyw6CMBBFf4XM2jHt8GblfxgWtRQZEx7pYKMh/
+ LsV1y7PTe45G4jz7ASaZAPvAgvPUwQ6JWAHM90dchcZSFGmdKrwluFzkdU7M+KjJC2EJghWVld
+ ll/aOCgPxvHjX8+sQX9vIA8s6+/fRCfq7/pSkin/KoDHmylxlqc3ruqgvK5/tPEK77/sHiOAXR
+ 7kAAAA=
+To: Jaehoon Chung <jh80.chung@samsung.com>
+CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Keerthy J
+ <j-keerthy@ti.com>, Udit Kumar <u-kumar1@ti.com>, Aniket Limaye
+ <a-limaye@ti.com>, Tom Rini <trini@konsulko.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Andrew Davis <afd@ti.com>,
+ Nishanth Menon <nm@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>
+X-Mailer: b4 0.13-dev
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1716883980; l=1607;
+ i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
+ bh=N8Q/jncUjbRA5+qOFd5H/xdsH+dWx4ZZ5iVnHACGe3U=;
+ b=aTdHso8CUDlKDw9h1O07N6yqRdQrlLJAHdS107T8jU5Yn+ynqfmtMm75ZRhOlHYSWwZguL+sE
+ jNnhUDh55++C0FBmWZbetrn/etWOv4px7owdYyoGw8H4v14H968O50B
+X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
+ pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,61 +87,46 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 27/05/2024 19:17, Caleb Connolly wrote:
-> run savedefconfig
-> 
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->   configs/qcom_defconfig | 5 ++---
->   1 file changed, 2 insertions(+), 3 deletions(-)
-> 
-> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-> index 65f13ae7a089..f2dfced4bc1e 100644
-> --- a/configs/qcom_defconfig
-> +++ b/configs/qcom_defconfig
-> @@ -1,17 +1,18 @@
->   CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_POSITION_INDEPENDENT=y
-> +CONFIG_SYS_INIT_SP_BSS_OFFSET=1572864
->   CONFIG_ARCH_SNAPDRAGON=y
->   CONFIG_DEFAULT_DEVICE_TREE="qcom/sdm845-db845c"
->   CONFIG_SYS_LOAD_ADDR=0xA0000000
-> -CONFIG_SYS_INIT_SP_BSS_OFFSET=1572864
->   CONFIG_BUTTON_CMD=y
->   CONFIG_FIT=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_BOOTSTD_FULL=y
->   # CONFIG_BOOTMETH_VBE is not set
->   CONFIG_BOOTDELAY=1
-> +CONFIG_OF_BOARD_SETUP=y
->   CONFIG_USE_PREBOOT=y
->   CONFIG_SAVE_PREV_BL_INITRAMFS_START_ADDR=y
->   CONFIG_SYS_CBSIZE=512
->   CONFIG_LOG_MAX_LEVEL=9
-> @@ -33,9 +34,8 @@ CONFIG_CMD_USB=y
->   CONFIG_CMD_CAT=y
->   CONFIG_CMD_BMP=y
->   CONFIG_CMD_LOG=y
->   CONFIG_OF_LIVE=y
-> -CONFIG_OF_BOARD_SETUP=y
->   CONFIG_BUTTON_QCOM_PMIC=y
->   CONFIG_CLK=y
->   CONFIG_CLK_QCOM_QCM2290=y
->   CONFIG_CLK_QCOM_QCS404=y
-> @@ -106,6 +106,5 @@ CONFIG_VIDEO_FONT_16X32=y
->   CONFIG_SYS_WHITE_ON_BLACK=y
->   CONFIG_NO_FB_CLEAR=y
->   CONFIG_VIDEO_SIMPLE=y
->   CONFIG_HEXDUMP=y
-> -CONFIG_GENERATE_SMBIOS_TABLE=y
->   CONFIG_LMB_MAX_REGIONS=64
-> 
+This series adds support for AVS on J721S2.
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+AVS Test for J721S2: https://gist.github.com/manorit2001/d7690ded6ef685aa8ffa5b16746cc529
+Boot Test results: https://gist.github.com/manorit2001/6775d721b3df5a690497d94d012b93c4
+
+Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+---
+Changes in v2:
+- Move AVS Initialization point to after do_dt_magic
+  ( Otherwise AM68 unknowingly ends up probing AVS and fails )
+- Rebase on top of OF_UPSTREAM Support
+- Link to v1: https://lore.kernel.org/r/20240206-b4-upstream-j721s2-avs-v1-0-b75043c59969@ti.com
+
+---
+Manorit Chawdhry (7):
+      power: pmic: tps65941: Add DM_PMIC dependency
+      drivers: misc: k3_avs: Use soc_match_device instead of compatible.
+      drivers: misc: k3_avs: Check return code while programming AVS
+      drivers: misc: k3_avs: Add AVS Support for J721S2.
+      arm: mach-k3: j721s2_init: Initialize AVS Class 0
+      arm: dts: j721s2: Add VTM node in R5
+      configs: j721s2_evm_r5_defconfig: Add AVS Configs
+
+ arch/arm/dts/k3-j721s2-r5-common-proc-board.dts |   9 +
+ arch/arm/mach-k3/j721s2/j721s2_init.c           |  10 ++
+ configs/am68_sk_r5_defconfig                    |   4 +
+ configs/j721s2_evm_r5_defconfig                 |   6 +
+ drivers/misc/k3_avs.c                           | 216 ++++++++++++++----------
+ drivers/power/pmic/Kconfig                      |   1 +
+ 6 files changed, 159 insertions(+), 87 deletions(-)
+---
+base-commit: 377e91c162ab09ec20f96f966f380cb55c590edd
+change-id: 20240130-b4-upstream-j721s2-avs-8c187d3fe26a
+
+Best regards,
+-- 
+Manorit Chawdhry <m-chawdhry@ti.com>
+
