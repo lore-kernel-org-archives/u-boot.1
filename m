@@ -4,76 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3232C25B78
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 07:01:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8745C25B78
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 07:22:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12B4E883F6;
-	Tue, 28 May 2024 09:01:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 14795883FB;
+	Tue, 28 May 2024 09:22:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CVdW112M";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="nfFNEL09";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B856988400; Tue, 28 May 2024 09:01:00 +0200 (CEST)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
+ id 0479388402; Tue, 28 May 2024 09:22:46 +0200 (CEST)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49060883F6
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 09:00:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C4324883FA
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 09:22:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-1f48b825d8cso3390115ad.2
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 00:00:58 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-35507a3a038so296960f8f.0
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 00:22:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716879657; x=1717484457; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=aReyPg2Ww2CNAYoRAq2IJeoGGudUSdS6aHzTUJb1h1M=;
- b=CVdW112MODaQ025VfPrnsw/S0z8RfNqWDpgUmarBKZoHyCnu9pI8ieqDVYbAEoQUBa
- 3HU33vKmRpVaW+jLzjbEe59L8bU6zXP77VNOdY5/JxD744m7GoPeR/3n8L9cDf4v9XuW
- H91UjR2kG/q2QxiYp43BDtMMytg4A9fguJUOzKCqrThyPLxQ8rbqKGzgTDW98HtL7Aq9
- LaVlk0ientTkjZx5cNwN6MYwLxKIGlZ3y2wTNb8ccj6fr4rd0ooQgHADespMv7hvPHnl
- wKGHSzEubp6TMfLOM0uHTsHPQAcdtgx9CYClAlcVpXoVJAjUm3QoM6awHABp1n0QyS8M
- Hawg==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1716880963; x=1717485763;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=M1HElasoNknCnfiSjDOPfykLzqxoGBx0O1MB8fLGkrk=;
+ b=nfFNEL09iZkyRHWWtvjva/BzrzDzIxQIgQAA3HkJTcdc7Vd8LV8/jxX3G9hgc0FL60
+ eO5xieewVK9Tw5j1rgSKge3Wjxh8K81sLl2UFDWYUJh72mkAxsJ6+PcKACRatbkeSx5K
+ FpzD6ibU4fcKIY9lM0nYC1bYjV0/RQlwdp3NAkyGT8H6PZG8Y3gt1ndcdFi9xNPqjOAj
+ tXVPxKatoCvWwExmmftPC+paLqt/QRYKSRMRcEW7I/JMlGiPbxW/0M6Qo0isdwsVoKUU
+ 96gfmQPhjTdArnkM4lkg+w2DvfD2IDvkWo9EWYazAMu+5zC+0zn8y/PhFKUV3NPnVppW
+ GOCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716879657; x=1717484457;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=aReyPg2Ww2CNAYoRAq2IJeoGGudUSdS6aHzTUJb1h1M=;
- b=WLy4P17DQVokHqFftyegf2gJota62H8m+luJ4pANyrgBNfV6PHVW2FH2FlkzESyXOT
- P8YDwIJWeIEhlTbKP0Q5FNzU/Z+Q0nNbrhiL/6AcUjgw3b4TMY7w/uW2HG/E0mHa6B7B
- RYlBU11sm5fpwl38/vWXXkB/BWDdBe/aK0vCi2jV0ZousqsWR2LE+BFiT/yWYvNbChSE
- 7CyQxf0pgJ5ysL6IBg/+tYxqCXVjax0pCUHgBQDC7UeBKXGhcKU5SLZQcRV6i72/c7g3
- or2QQA6iGYKj3mPZC17wCjWnsZ3RglCL6plHAV6rLIzwfYtgVUQf3xudfSdK/shUO757
- FDbg==
-X-Gm-Message-State: AOJu0YygbJjXF5A0+HIialqUSyfe9yfW7rB/Dp8xKq5gVo+E9X6d6xSw
- yXaoJQcvBL0LmiASl07zPfFdx9BnWjV+FOq3RsyhL6dhTimnyG1irDpH1krCxfapPwlZvTXTW0G
- N8mkJtWC35vi4yRQV941OV+qE1d9ZksrB6DrtZw==
-X-Google-Smtp-Source: AGHT+IHmSVLLF0dmd5CVvVJRaM5y3UH3TWCis8NtWI9aUItND6+nWLds8cCbVhZiP1ohW4eyXKLawGtbhMlwuosfQbY=
-X-Received: by 2002:a17:903:1211:b0:1f2:fb02:3dfd with SMTP id
- d9443c01a7336-1f4486b95c1mr149931055ad.11.1716879656622; Tue, 28 May 2024
- 00:00:56 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1716880963; x=1717485763;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:to:from:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=M1HElasoNknCnfiSjDOPfykLzqxoGBx0O1MB8fLGkrk=;
+ b=CQcXkVrc4NnzLAPGNGkvivepye8PKXLODOQAc/qxqhWeHFNA4oQ3U8R9wyAf1dshHk
+ GWAamAD3c7FDfAmCU+1Xtx7x01gE8JGUp9kt56QG7aAgokX9FN5PTcWEoUJu7VCyizPY
+ kamBgF0Kvb3u937e5sgpcAbte1TlwuRDVpMX3t1Z+Y8MP84Y0e3Gc2pfdjhRLVAIdFJP
+ 51jU6YVzGftDiM3bZGK0qZ6pu7V4AdyuRV9YKB/yvnQ8ZUn4ilEHFaTwBNN5JfP03cqd
+ N9e1A3ZSm0whIUtZgklai4h0hKD78Pj0j+CqQAYuMXp7WZfT5zYY5D67Grn8okjgkYZF
+ lHuQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWApDsDIqWziKJ9RtIJuUoT0SHk57o8P+nQulm28Oi4H2dmJ5VQX0VvIzB3YlYkmoAgqfipCmqCiAtTDv1z2elYjtRmQA==
+X-Gm-Message-State: AOJu0YzyKyDDEu+8e8UC8xPVwmKZmEiVyKp0S3KjRGhblWNIc6EcZ6uA
+ cdKdX7wDqAgoutHNtatzGSXwZvoweP3Zzp+lEOu+xY/cpLRKkriwUDm+h89VDMU=
+X-Google-Smtp-Source: AGHT+IHCQ1niXL7hytALYwJELSYdkCIUvoU2wsNCD/LfTt0yBWvk4oej6z4JmW0QjPmygVImKipGsQ==
+X-Received: by 2002:adf:a45b:0:b0:354:de3f:b7cd with SMTP id
+ ffacd0b85a97d-35526c272a9mr10698111f8f.24.1716880963152; 
+ Tue, 28 May 2024 00:22:43 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3557a1c93a5sm10915161f8f.70.2024.05.28.00.22.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 May 2024 00:22:42 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Roman Stratiienko <r.stratiienko@gmail.com>, r.stratiienko@gmail.com,
+ igor.opaniuk@gmail.com, dsimic@manjaro.org, sjg@chromium.org,
+ ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, eajames@linux.ibm.com,
+ marek.vasut+renesas@mailbox.org, paulerwan.rio@gmail.com,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH 1/3] abootcmd: Add load subcommand
+In-Reply-To: <20240519191856.2582174-2-r.stratiienko@gmail.com>
+References: <20240519191856.2582174-1-r.stratiienko@gmail.com>
+ <20240519191856.2582174-2-r.stratiienko@gmail.com>
+Date: Tue, 28 May 2024 09:22:37 +0200
+Message-ID: <87wmneh03m.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20240528061827.183403-1-ilias.apalodimas@linaro.org>
- <e8082f27-e1e9-406a-84ea-b9f35de077b7@collabora.com>
-In-Reply-To: <e8082f27-e1e9-406a-84ea-b9f35de077b7@collabora.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 28 May 2024 10:00:19 +0300
-Message-ID: <CAC_iWjLS-igrVSqUJj2voe6f34X__hKkBG5GJoa96YL7oq2Xeg@mail.gmail.com>
-Subject: Re: [PATCH] arm: move _end to linker symbols
-To: Eugen Hristev <eugen.hristev@collabora.com>
-Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, CFSworks@gmail.com, 
- trini@konsulko.com, sbabic@denx.de, festevam@gmail.com, uboot-imx@nxp.com, 
- ryan_chen@aspeedtech.com, chiawei_wang@aspeedtech.com, BMC-SW@aspeedtech.com, 
- joel@jms.id.au, sjg@chromium.org, philipp.tomsich@vrull.eu, 
- kever.yang@rock-chips.com, michal.simek@amd.com, aford173@gmail.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,246 +96,198 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Eugen
+Hi Roman,
 
+Thank you for the patch.
 
-On Tue, 28 May 2024 at 09:40, Eugen Hristev <eugen.hristev@collabora.com> wrote:
+On dim., mai 19, 2024 at 19:18, Roman Stratiienko <r.stratiienko@gmail.com>=
+ wrote:
+
+> What it does:
+> 1. Allocates the memory in HEAP to fit the partition
+> 2. Loads partition into memory. In the following patch of this series,
+>    loading will be optimized to avoid loading an empty space.
+> 3. Sets buffer start and buffer size value into environment variables
+>    abootimg_<partition>_ptr and abootimg_<partition>_size, respectively.
+>     and duplicate them as
+>    abootimg_<partition>_<slot>_ptr and abootimg_<partition>_<slot>_size.
+>    The latter two are needed to access by the AVB get_preloaded_partition.
+>    (see the next patch).
 >
-> On 5/28/24 09:18, Ilias Apalodimas wrote:
-> > commit 6e2228fb052b ("Merge patch series "Clean up arm linker scripts")
-> > was cleaning up linker scripts for armv7 and v8 but was leaving
-> > _end and __secure_stack_start/end.
-> >
-> > commit d0b5d9da5de2 ("arm: make _end compiler-generated")
-> > was moving _end to be compiler generated. _end is defined as c variable
-> > in its own section to force the compiler emit relative a reference.
-> > However, defining those in the linker script will do the same thing
-> > since [0].
-> >
-> > So let's remove the special sections from the linker scripts, the
-> > variable definitions from sections.c and define them as a symbols.
-> > It's worth noting that _image_binary_end symbol is now redundant and
-> > can be removed in the future.
-> >
-> > - SPL
-> >
-> > The .end section has been removed from the new binary
-> > [ 5] .end
-> >      PROGBITS         00000000fffdf488  000000000002f488  0
-> >      0000000000000000 0000000000000000  0                 1
-> >      [0000000000000003]: WRITE, ALLOC
-> >
-> > $~ bloat-o-meter kria_old/spl/u-boot-spl krina_new/spl/u-boot-spl
-> > add/remove: 0/0 grow/shrink: 0/0 up/down: 0/0 (0)
-> > Function                                     old     new   delta
-> > Total: Before=115980, After=115980, chg +0.00%
-> >
-> > $~ readelf -sW kria_old/u-boot kria_new/u-boot | grep -w _end
-> >  12047: 000000000813a0f0     0 OBJECT  GLOBAL DEFAULT   11 _end
-> >  12047: 000000000813a118     0 NOTYPE  GLOBAL DEFAULT   11 _end
-> >
-> > $~ readelf -sW kria_old/spl/u-boot-spl kria_new/spl/u-boot-spl | grep -w _end
-> >   1605: 00000000fffdf488     0 OBJECT  GLOBAL DEFAULT    5 _end
-> >   1603: 00000000fffdf498     0 NOTYPE  GLOBAL DEFAULT    4 _end
-> >
-> > $~ readelf -sW old/u-boot new/u-boot | grep -w _end
-> >   8847: 0000000000103710     0 OBJECT  GLOBAL DEFAULT   11 _end
-> >   8847: 0000000000103738     0 NOTYPE  GLOBAL DEFAULT   11 _end
-> >
-> > $~ readelf -sW old_v7/u-boot new_v7/u-boot | grep -w _end
-> >  10638: 000da824     0 OBJECT  GLOBAL DEFAULT   10 _end
-> >  10637: 000da84c     0 NOTYPE  GLOBAL DEFAULT   10 _end
-> >
-> > - For both QEMU instances
-> > $~ bloat-o-meter old/u-boot new/u-boot
-> > add/remove: 0/0 grow/shrink: 1/0 up/down: 20/0 (20)
-> > Function                                     old     new   delta
-> > version_string                                50      70     +20
-> > Total: Before=656915, After=656935, chg +0.00%
-> >
-> > [0] binutils commit 6b3b0ab89663 ("Make linker assigned symbol dynamic only for shared object")
-> >
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > ---
-> >  arch/arm/cpu/arm1136/u-boot-spl.lds            | 6 +-----
-> >  arch/arm/cpu/arm926ejs/mxs/u-boot-spl.lds      | 6 +-----
-> >  arch/arm/cpu/armv8/u-boot-spl.lds              | 7 +------
-> >  arch/arm/cpu/u-boot-spl.lds                    | 6 +-----
-> >  arch/arm/cpu/u-boot.lds                        | 6 +-----
-> >  arch/arm/lib/sections.c                        | 1 -
-> >  arch/arm/mach-aspeed/ast2600/u-boot-spl.lds    | 6 +-----
-> >  arch/arm/mach-at91/arm926ejs/u-boot-spl.lds    | 7 +------
-> >  arch/arm/mach-at91/armv7/u-boot-spl.lds        | 7 +------
-> >  arch/arm/mach-omap2/u-boot-spl.lds             | 7 +------
-> >  arch/arm/mach-rockchip/u-boot-tpl-v8.lds       | 7 +------
-> >  arch/arm/mach-zynq/u-boot.lds                  | 6 +-----
-> >  board/davinci/da8xxevm/u-boot-spl-da850evm.lds | 7 +------
-> >  board/samsung/common/exynos-uboot-spl.lds      | 6 +-----
-> >  14 files changed, 13 insertions(+), 72 deletions(-)
-> >
-> > diff --git a/arch/arm/cpu/arm1136/u-boot-spl.lds b/arch/arm/cpu/arm1136/u-boot-spl.lds
-> > index f83988fd7e6a..b7af29183a97 100644
-> > --- a/arch/arm/cpu/arm1136/u-boot-spl.lds
-> > +++ b/arch/arm/cpu/arm1136/u-boot-spl.lds
-> > @@ -33,11 +33,7 @@ SECTIONS
-> >       .data : { *(SORT_BY_ALIGNMENT(.data*)) } >.sram
-> >       . = ALIGN(4);
-> >       __image_copy_end = .;
-> > -
-> > -     .end :
-> > -     {
-> > -             *(.__end)
-> > -     }
-> > +     _end = .;
-> >
-> >       .bss :
-> >       {
-> > diff --git a/arch/arm/cpu/arm926ejs/mxs/u-boot-spl.lds b/arch/arm/cpu/arm926ejs/mxs/u-boot-spl.lds
-> > index 7e20448f8108..7c6309246f8b 100644
-> > --- a/arch/arm/cpu/arm926ejs/mxs/u-boot-spl.lds
-> > +++ b/arch/arm/cpu/arm926ejs/mxs/u-boot-spl.lds
-> > @@ -49,11 +49,7 @@ SECTIONS
-> >               __bss_end = .;
-> >       }
-> >
-> > -     .end :
-> > -     {
-> > -             *(.__end)
-> > -     }
-> > -
-> > +     _end = .;
-> >       _image_binary_end = .;
-> >
-> >       .dynsym _image_binary_end : { *(.dynsym) }
-> > diff --git a/arch/arm/cpu/armv8/u-boot-spl.lds b/arch/arm/cpu/armv8/u-boot-spl.lds
-> > index ef8af67e11c3..215cedd69a8c 100644
-> > --- a/arch/arm/cpu/armv8/u-boot-spl.lds
-> > +++ b/arch/arm/cpu/armv8/u-boot-spl.lds
-> > @@ -53,12 +53,7 @@ SECTIONS
-> >
-> >       . = ALIGN(8);
-> >       __image_copy_end = .;
-> > -
-> > -     .end : {
-> > -             . = ALIGN(8);
-> > -             *(.__end)
-> > -     } >.sram
-> > -
-> > +     _end = .;
-> >       _image_binary_end = .;
-> >
-> >       .bss : {
-> > diff --git a/arch/arm/cpu/u-boot-spl.lds b/arch/arm/cpu/u-boot-spl.lds
-> > index 9ed62395a9c5..eee463a1b1c6 100644
-> > --- a/arch/arm/cpu/u-boot-spl.lds
-> > +++ b/arch/arm/cpu/u-boot-spl.lds
-> > @@ -53,12 +53,8 @@ SECTIONS
-> >               __rel_dyn_end = .;
-> >       }
-> >
-> > -     .end :
-> > -     {
-> > -             *(.__end)
-> > -     }
-> > -
-> >       _image_binary_end = .;
-> > +     _end = .;
-> >
-> >       .bss __rel_dyn_start (OVERLAY) : {
-> >               __bss_start = .;
-> > diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
-> > index 707b19795f08..2f50087f57a9 100644
-> > --- a/arch/arm/cpu/u-boot.lds
-> > +++ b/arch/arm/cpu/u-boot.lds
-> > @@ -166,11 +166,7 @@ SECTIONS
-> >               __rel_dyn_end = .;
-> >       }
-> >
-> > -     .end :
-> > -     {
-> > -             *(.__end)
-> > -     }
-> > -
-> > +     _end = .;
-> >       _image_binary_end = .;
-> >
-> >       /*
-> > diff --git a/arch/arm/lib/sections.c b/arch/arm/lib/sections.c
-> > index db5463b2bbbc..07efabaa7dc8 100644
-> > --- a/arch/arm/lib/sections.c
-> > +++ b/arch/arm/lib/sections.c
-> > @@ -23,4 +23,3 @@ char __secure_start[0] __section(".__secure_start");
-> >  char __secure_end[0] __section(".__secure_end");
-> >  char __secure_stack_start[0] __section(".__secure_stack_start");
-> >  char __secure_stack_end[0] __section(".__secure_stack_end");
-> > -char _end[0] __section(".__end");
-> > diff --git a/arch/arm/mach-aspeed/ast2600/u-boot-spl.lds b/arch/arm/mach-aspeed/ast2600/u-boot-spl.lds
-> > index ada6570d9712..9502a7384b53 100644
-> > --- a/arch/arm/mach-aspeed/ast2600/u-boot-spl.lds
-> > +++ b/arch/arm/mach-aspeed/ast2600/u-boot-spl.lds
-> > @@ -61,11 +61,7 @@ SECTIONS
-> >               __rel_dyn_end = .;
-> >       } > .nor
-> >
-> > -     .end :
-> > -     {
-> > -             *(.__end)
-> > -     } > .nor
-> > -
-> > +     _end = .;
-> >       _image_binary_end = .;
-> >
-> >       .bss : {
-> > diff --git a/arch/arm/mach-at91/arm926ejs/u-boot-spl.lds b/arch/arm/mach-at91/arm926ejs/u-boot-spl.lds
-> > index 1a8bf94dee0c..09cf838cf96e 100644
-> > --- a/arch/arm/mach-at91/arm926ejs/u-boot-spl.lds
-> > +++ b/arch/arm/mach-at91/arm926ejs/u-boot-spl.lds
-> > @@ -33,12 +33,7 @@ SECTIONS
-> >
-> >       . = ALIGN(4);
-> >       __image_copy_end = .;
-> > -
-> > -     .end :
-> > -     {
-> > -             *(.__end)
-> > -     } >.sram
-> > -
-> > +     _end = .;
-> >       _image_binary_end = .;
-> >
-> >       .bss :
-> > diff --git a/arch/arm/mach-at91/armv7/u-boot-spl.lds b/arch/arm/mach-at91/armv7/u-boot-spl.lds
-> > index 6ca725fc4ce0..460a91d93ec4 100644
-> > --- a/arch/arm/mach-at91/armv7/u-boot-spl.lds
-> > +++ b/arch/arm/mach-at91/armv7/u-boot-spl.lds
-> > @@ -40,12 +40,7 @@ SECTIONS
-> >
-> >       . = ALIGN(4);
-> >       __image_copy_end = .;
-> > -
-> > -     .end :
-> > -     {
-> > -             *(.__end)
-> > -     } >.sram
-> > -
-> > +     _end = .;
+> Before this command, the boot script developer was responsible for
+> allocating the memory manually by choosing the start and the end,
+> which is far from good.
 >
-> Does this have any kind of consequence in terms of checking the offset of .end vs
-> the SRAM size ? (.sram)
+> Usage example:
+>
+>     abootcmd load mmc 0 boot a
 
-The value of _end does grow by 16b on the SPL for the kria boards, but
-it doesn't seem to cause issues.
-I can only find a single assert on those checks in
-arch/microblaze/cpu/u-boot-spl.lds. Anything else you spotted?
-
-Keeping in mind that the code used to be like that before that linker
-bug -- defining a linker symbol instead of a section, I don't think
-anything will blow up
-
-/Ilias
+Should this be: abootimg load mmc 0 boot a ?
 
 >
-> >       _image_binary_end = .;
-> >
-> >       .bss :
+> Signed-off-by: Roman Stratiienko <r.stratiienko@gmail.com>
+> ---
+>  cmd/abootimg.c | 84 +++++++++++++++++++++++++++++++++++++++++++++++++-
+>  1 file changed, 83 insertions(+), 1 deletion(-)
 >
+> diff --git a/cmd/abootimg.c b/cmd/abootimg.c
+> index a5321bab6a..808c9c4941 100644
+> --- a/cmd/abootimg.c
+> +++ b/cmd/abootimg.c
+> @@ -8,7 +8,9 @@
+>  #include <common.h>
+>  #include <command.h>
+>  #include <image.h>
+> +#include <malloc.h>
+>  #include <mapmem.h>
+> +#include <part.h>
+>=20=20
+>  #define abootimg_addr() \
+>  	(_abootimg_addr =3D=3D -1 ? image_load_addr : _abootimg_addr)
+> @@ -259,10 +261,81 @@ static int do_abootimg_dump(struct cmd_tbl *cmdtp, =
+int flag, int argc,
+>  	return CMD_RET_SUCCESS;
+>  }
+>=20=20
+> +static int do_abootimg_load(struct cmd_tbl *cmdtp, int flag, int argc,
+> +			    char *const argv[])
+> +{
+> +	int time_start =3D get_timer(0);
+
+On -next branch (where the patch will be applied), I see the following
+build error:
+
+cmd/abootimg.c: In function =E2=80=98do_abootimg_load=E2=80=99:
+cmd/abootimg.c:279:26: error: implicit declaration of function =E2=80=98get=
+_timer=E2=80=99 [-Wimplicit-function-declaration]
+  279 |         int time_start =3D get_timer(0);
+      |                          ^~~~~~~~~
+
+Please add the missing include: #include <time.h>
+
+Base: 7e52d6ccfb76 ("Merge patch series "FWU: Add support for FWU metadata =
+version 2"")
+
+> +	struct blk_desc *desc;
+> +	struct disk_partition info;
+> +	char buf[512] =3D { 0 };
+> +	void *addr;
+> +	int ret;
+> +
+> +	if (argc < 4)
+> +		return CMD_RET_USAGE;
+> +	if (argc > 5)
+> +		return CMD_RET_USAGE;
+
+Can we please do this in a single line, like done in other commands such
+as do_abootimg_addr()?
+
+> +
+> +	ret =3D blk_get_device_by_str(argv[1], argv[2], &desc);
+> +	if (ret < 0) {
+> +		printf("Error: Failed to get device %s %s\n", argv[1], argv[2]);
+> +		return CMD_RET_FAILURE;
+> +	}
+> +
+> +	if (argc =3D=3D 5)
+> +		sprintf(buf, "%s_%s", argv[3], argv[4]);
+> +	else
+> +		sprintf(buf, "%s", argv[3]);
+> +
+> +	ret =3D part_get_info_by_name(desc, buf, &info);
+> +	if (ret < 0) {
+> +		printf("Error: Failed to get partition %s\n", buf);
+> +		return CMD_RET_FAILURE;
+> +	}
+> +
+> +	addr =3D (void *)memalign(4096, info.size * info.blksz);
+
+Why 4096? If this is a known number, can we use a define for it please?
+
+> +	if (!addr) {
+> +		printf("Error: Failed to allocate memory\n");
+> +		return CMD_RET_FAILURE;
+> +	}
+> +
+> +	ret =3D blk_dread(desc, info.start, info.size, addr);
+> +	if (ret < 0) {
+> +		printf("Error: Failed to read partition %s\n", buf);
+> +		goto fail;
+> +	}
+> +
+> +	sprintf(buf, "abootimg_%s_ptr", argv[3]);
+> +	env_set_hex(buf, (ulong)addr);
+> +
+> +	sprintf(buf, "abootimg_%s_size", argv[3]);
+> +	env_set_hex(buf, info.size * info.blksz);
+> +
+> +	if (argc =3D=3D 5) {
+> +		sprintf(buf, "abootimg_%s_%s_ptr", argv[3], argv[4]);
+> +		env_set_hex(buf, (ulong)addr);
+> +
+> +		sprintf(buf, "abootimg_%s_%s_size", argv[3], argv[4]);
+> +		env_set_hex(buf, info.size * info.blksz);
+> +	}
+> +
+> +	int time_end =3D get_timer(0);
+> +
+> +	printf("Loaded '%s' partition to address 0x%p (size: 0x%x) in %lu ms\n",
+> +	       argv[3], addr, info.size * info.blksz, time_end - time_start);
+
+This causes warnings on -next when building sandbox:
+$ make sandbox_defconfig
+$ make
+
+cmd/abootimg.c:339:65: warning: format =E2=80=98%x=E2=80=99 expects argumen=
+t of type =E2=80=98unsigned int=E2=80=99, but argument 4 has type =E2=80=98=
+long unsigned int=E2=80=99 [-Wformat=3D]
+  339 |         printf("Loaded '%s' partition to address 0x%p (size: 0x%x) =
+in %lu ms\n",
+      |                                                                ~^
+      |                                                                 |
+      |                                                                 uns=
+igned int
+      |                                                                %lx
+  340 |                argv[3], addr, info.size * info.blksz, time_end - ti=
+me_start);
+      |                               ~~~~~~~~~~~~~~~~~~~~~~
+      |                                         |
+
+
+> +
+> +	return CMD_RET_SUCCESS;
+> +
+> +fail:
+> +	free(addr);
+> +	return CMD_RET_FAILURE;
+> +}
+> +
+>  static struct cmd_tbl cmd_abootimg_sub[] =3D {
+>  	U_BOOT_CMD_MKENT(addr, 4, 1, do_abootimg_addr, "", ""),
+>  	U_BOOT_CMD_MKENT(dump, 2, 1, do_abootimg_dump, "", ""),
+>  	U_BOOT_CMD_MKENT(get, 5, 1, do_abootimg_get, "", ""),
+> +	U_BOOT_CMD_MKENT(load, 5, 1, do_abootimg_load, "", ""),
+>  };
+>=20=20
+>  static int do_abootimg(struct cmd_tbl *cmdtp, int flag, int argc,
+> @@ -305,5 +378,14 @@ U_BOOT_CMD(
+>  	"    - get address and size (hex) of DT blob in the image by index\n"
+>  	"      <num>: index number of desired DT blob in DTB area\n"
+>  	"      [addr_var]: variable name to contain DT blob address\n"
+> -	"      [size_var]: variable name to contain DT blob size"
+> +	"      [size_var]: variable name to contain DT blob size\n"
+> +	"abootimg load interface dev partition [slot_name]\n"
+> +	"    - load boot image from device partition\n"
+> +	"      memory is allocated in heap\n"
+> +	"      address is stored in $abootimg_<partition>_ptr\n"
+> +	"      size is stored in $abootimg_<partition>_size\n"
+> +	"      interface: interface type (e.g. mmc, usb)\n"
+> +	"      dev: device number (e.g. 0, 1)\n"
+> +	"      partition: partition number (e.g. boot, dtb)\n"
+
+"partition name" instead of "partition number"?
+
+> +	"      slot_suffix: slot name (e.g. a, b)"
+>  );
+> --=20
+> 2.40.1
