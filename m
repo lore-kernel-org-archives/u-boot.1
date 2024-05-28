@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D57CC25B7C
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 14:43:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D51CC25B78
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 14:43:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D59D98852A;
-	Tue, 28 May 2024 16:43:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3D5F088518;
+	Tue, 28 May 2024 16:43:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="g81jkNvZ";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="IECBsEyU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1247B88511; Tue, 28 May 2024 16:43:20 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id AEFA088544; Tue, 28 May 2024 16:43:22 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A5498851A
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 16:43:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9FB1B88511
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 16:43:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,51 +31,51 @@ Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 7E605400FB
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 14:43:16 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 32DA03FE69
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 14:43:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1716907396;
- bh=TCxnXSmYcr1hOqTEwm3+Z3/dfEnxnT34RoPW9S96tho=;
+ s=20210705; t=1716907391;
+ bh=DK/9LxDeIDuS4ru83BjcxMmuU7IUkU0CGJmVl8peNak=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=g81jkNvZKUnQh9jN0YWjl/XEtTyaHVuNrKZcm71PzOxsJYUIJKsAHeBW6+PtOiYPH
- QB0Qigu/qDMFJ9z92k5X+bcli9aOXwJdupUW358byTmFU5o8efagH+tErto0uYeREC
- 1eKvmVkzrX5EUi1JiMHBEbu8wSYmG7ln/8XnGuTphvuCX/tobsAyCAVyhevDwCnwuY
- G8JMqNOBuMTpv3eh2ZSpJ0Bzcdwe9UBJNx/72DAqUe4wG1lLFFhmT3Zy/NDksPjRsh
- 4I7N+ahb6awQD4cv9fHNxUsBOw2oZmJcZjK9zW5mVC6F3RNubxG5JxEcXS9Udk7oeR
- fz8hMfvIyCHkw==
+ b=IECBsEyU0YmdzQpWA6D74sGZrlHgVtzSHVt19fTInzKpjTWjKPxle4vlBLSF5kRSo
+ /CC4fR/gTTq5F+1fsDlqNqlh6JHJGShOgmCiVgKAwEQASRxeAmVWnQnOx0JrRWhF+O
+ od6vjxIkt868W0daQ+Qpo2dYAvKrLlLnmuaRwLvMTZGjm28lgFXVQk5JP2S5kAGzjT
+ IcRG8wBAZt/zkWwsL4MWlAKqzCfbZiq31WskpbFwAhySdZGYXGfvo2l245YcQlNjFS
+ s/t8++z4S6n6PJJ3Q/F0xGK3Vgbh5HX5ATWvyBgMgCQlk1fe42lyjrli782WFuGNm+
+ 3LK6jnADTA+iw==
 Received: by mail-ed1-f69.google.com with SMTP id
- 4fb4d7f45d1cf-578697a21a4so205748a12.0
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 07:43:16 -0700 (PDT)
+ 4fb4d7f45d1cf-579fd68b42aso139381a12.3
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 07:43:11 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716907394; x=1717512194;
+ d=1e100.net; s=20230601; t=1716907385; x=1717512185;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TCxnXSmYcr1hOqTEwm3+Z3/dfEnxnT34RoPW9S96tho=;
- b=KhMrcNzs1j/skeYX5glwqCua2G5eEhLUIXijD2xXW+pOtj+7cNefCKCCVJknnLoYKo
- 1FSr4eSbYgHZp4NAULbTlz1AAyS9leME/t7n9M2jicd9+EIZlLE1AF1mzJS2wNGmUi2F
- BdVzfXF0qAAyVipwZt/f2MoX3sm8eKwEkppStCC0N5FQ6HPifL54kehqjihukeyuuzsG
- 4guj75ieHzxw/yLvsolJdewPycf1hl+MqHBiVA+rHTx2CCieYZsNKEKzwyMyz1h5QPjP
- QgB0BA4Fk7rVntSjzEYAxenjJ4uAI4DBuCB+hchDxcRpVEpsQos2w+pnY7xhDH3FcgRa
- FAlA==
+ bh=DK/9LxDeIDuS4ru83BjcxMmuU7IUkU0CGJmVl8peNak=;
+ b=ZzVv36FO9WHNvt8Dum9dOkoxUSZyqDp7c/FXgQ7q8odqlW2p7S0DXLoCLVIDDgaYO6
+ 3C8PIAyyEhhetBxWDOjOlT3o8Z3tQRWStvXYujzdTmpaAEWvBwyjxAO6ZLvHandhi6o3
+ E8CprONZz675xA7bzNQn/tNH4muQBIp7lAKgKjlm7fPk4IwA5w5lOQrgednqyDOkICag
+ OCvf+98+qtq/VXC/VfSfFETJCYAi+C2rT6dtvxRaDxHDQ0jqJKoxwXwmyl3Se3DHMIQn
+ 4sCKlkwhiLUyT+MlAPhQuUWVSoHRuTTwD2wUZ1rdshFBs+0sbHRRYyRl2HaEXfglgOCI
+ lAbQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVRSh1NqVUWMlVIvtpvQZyzB3zGmp0M//Hks1a3DOS86dYbRkqqKupX1J9gGHK69UbaaUbtcfEg7ggQBegiM5l6yBCA5w==
-X-Gm-Message-State: AOJu0Yxy3xB34Q/9t7Djh9aANVdvpvUN42Pw6PY0Eiw7VG2ZTkfgdyFI
- DtFfUCGsnoDvCf+yxUYvszSKg+YlMtFW1eKPpwTU3kJbi03Dx2/Pho7An/cCpqvNqiWl3Cs9rI7
- olkfaAzTQ9RpkN9ipd/wpvNDaWrqcer7HIjTlqmVEbi4B7lT93Dpc+JQtLdQ74kCzWuU=
-X-Received: by 2002:a50:cc0c:0:b0:579:73b7:b4cc with SMTP id
- 4fb4d7f45d1cf-57973b7b9fcmr7330071a12.2.1716907394649; 
- Tue, 28 May 2024 07:43:14 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGQqCJ96aeK3OiG4AqwIuTiBwRhgJZqQjsso7CKPpt/Fm3ftvrG2mA8nsseSa7s2PpbHQPjCw==
-X-Received: by 2002:a50:cc0c:0:b0:579:73b7:b4cc with SMTP id
- 4fb4d7f45d1cf-57973b7b9fcmr7330049a12.2.1716907394369; 
- Tue, 28 May 2024 07:43:14 -0700 (PDT)
+ AJvYcCVFZ3Dletm2Eg4E1kLf57yF/UDsgy+8bFOHTd3FQURyAgkNcx09iAYxEpQ/kJYgj35ecJBnOknNm0EUqf3YsaRfrQil2A==
+X-Gm-Message-State: AOJu0YypviPPojADgdTl3uSy9FXiQb3p5Sro89wErvm4USDj6PSfM7SO
+ smmXHTA3Cem/BjKyb7CqgzMQY+1mUflDgmrjyHDGdHke53+TGl0A1ixGW2wxhrWjwHFHUpe3II8
+ FDMWxcoT9nLt5LR0crCHFTM2u2AnG8ddt5mNAJufzAhj4sqomtGWb2e3OU9BJTu93sbs=
+X-Received: by 2002:a50:9b44:0:b0:572:9c4c:2503 with SMTP id
+ 4fb4d7f45d1cf-57851a4eb8cmr7646585a12.38.1716907385697; 
+ Tue, 28 May 2024 07:43:05 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IES9S/kMfoNCies7UtDwb96LoqI8tAURlUaHzxmwdVI8wVUn6blDXN9dvjEaAAWG5fZfldBKA==
+X-Received: by 2002:a50:9b44:0:b0:572:9c4c:2503 with SMTP id
+ 4fb4d7f45d1cf-57851a4eb8cmr7646568a12.38.1716907385238; 
+ Tue, 28 May 2024 07:43:05 -0700 (PDT)
 Received: from workstation5.. ([2a00:20:d00b:f75d:fdbe:9c2a:66b:5f2b])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-578f47126f0sm4914986a12.91.2024.05.28.07.43.12
+ 4fb4d7f45d1cf-578f47126f0sm4914986a12.91.2024.05.28.07.43.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 May 2024 07:43:13 -0700 (PDT)
+ Tue, 28 May 2024 07:43:04 -0700 (PDT)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
@@ -85,9 +85,9 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Bin Meng <bmeng@tinylab.org>, Mark Kettenis <kettenis@openbsd.org>,
  Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 8/8] efi_loader: load distro dtb in bootmgr
-Date: Tue, 28 May 2024 16:42:52 +0200
-Message-ID: <20240528144252.179247-9-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 2/8] cmd: eficonfig: add support for setting fdt
+Date: Tue, 28 May 2024 16:42:46 +0200
+Message-ID: <20240528144252.179247-3-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240528144252.179247-1-heinrich.schuchardt@canonical.com>
 References: <20240528144252.179247-1-heinrich.schuchardt@canonical.com>
@@ -109,122 +109,277 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If no device-tree is specified, try to load a device-tree from the boot
-device use the $fdtfile concatenated to either of the paths '/dtb/', '/',
-'/dtb/current/'.
+We already support creating a load option where the device-path
+field contains the concatenation of the binary device-path and
+optionally the device path of the initrd which we expose via the
+EFI_LOAD_FILE2_PROTOCOL.
+
+Allow to append another device-path pointing to the device-tree
+identified by the device-tree GUID.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
 v2:
-	no change
+	Carve out a function efi_load_option_dp_join() which we can
+	use both for the eficonfig and the efidebug command.
+	Rename variables id_dp, final_dp_size.
 ---
- include/efi_loader.h         |  2 ++
- lib/efi_loader/efi_bootmgr.c | 13 +++++++++--
- lib/efi_loader/efi_fdt.c     | 44 ++++++++++++++++++++++++++++++++++++
- 3 files changed, 57 insertions(+), 2 deletions(-)
+ cmd/eficonfig.c             | 79 ++++++++++++++++++++++++++++---------
+ include/efi_loader.h        | 14 +++++++
+ lib/efi_loader/efi_helper.c | 44 +++++++++++++++++++++
+ 3 files changed, 119 insertions(+), 18 deletions(-)
 
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index ab7bed22971..6c993e1a694 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -1205,4 +1205,6 @@ efi_status_t efi_load_option_dp_join(struct efi_device_path **dp,
+diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
+index b13d9a3d2d9..a12df1e7d59 100644
+--- a/cmd/eficonfig.c
++++ b/cmd/eficonfig.c
+@@ -62,6 +62,7 @@ struct eficonfig_filepath_info {
+ struct eficonfig_boot_option {
+ 	struct eficonfig_select_file_info file_info;
+ 	struct eficonfig_select_file_info initrd_info;
++	struct eficonfig_select_file_info fdt_info;
+ 	unsigned int boot_index;
+ 	u16 *description;
+ 	u16 *optional_data;
+@@ -1308,6 +1309,10 @@ static efi_status_t eficonfig_show_boot_option(struct eficonfig_boot_option *bo,
+ 	if (ret != EFI_SUCCESS)
+ 		goto out;
  
- int efi_get_distro_fdt_name(char *fname, int size, int seq);
- 
-+void efi_load_distro_fdt(void **fdt, efi_uintn_t *fdt_size);
++	ret = prepare_file_selection_entry(efi_menu, "Fdt File: ", &bo->fdt_info);
++	if (ret != EFI_SUCCESS)
++		goto out;
 +
- #endif /* _EFI_LOADER_H */
-diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index b08d6e97ea3..68440542a37 100644
---- a/lib/efi_loader/efi_bootmgr.c
-+++ b/lib/efi_loader/efi_bootmgr.c
-@@ -1249,7 +1249,8 @@ efi_status_t efi_bootmgr_run(void *fdt)
- 	efi_handle_t handle;
- 	void *load_options;
+ 	ret = create_boot_option_entry(efi_menu, "Optional Data: ", bo->optional_data,
+ 				       eficonfig_boot_add_optional_data, bo);
+ 	if (ret != EFI_SUCCESS)
+@@ -1388,27 +1393,44 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
  	efi_status_t ret;
--	void *fdt_lo;
-+	void *fdt_lo, *fdt_distro = NULL;
-+	efi_uintn_t fdt_size;
+ 	char *tmp = NULL, *p;
+ 	struct efi_load_option lo = {0};
+-	efi_uintn_t final_dp_size;
++	efi_uintn_t dp_size;
+ 	struct efi_device_path *dp = NULL;
+ 	efi_uintn_t size = load_option_size;
+-	struct efi_device_path *final_dp = NULL;
+ 	struct efi_device_path *device_dp = NULL;
+ 	struct efi_device_path *initrd_dp = NULL;
++	struct efi_device_path *fdt_dp = NULL;
+ 	struct efi_device_path *initrd_device_dp = NULL;
++	struct efi_device_path *fdt_device_dp = NULL;
  
- 	/* Initialize EFI drivers */
- 	ret = efi_init_obj_list();
-@@ -1269,6 +1270,10 @@ efi_status_t efi_bootmgr_run(void *fdt)
- 			return ret;
- 		if (fdt_lo)
- 			fdt = fdt_lo;
-+		if (!fdt) {
-+			efi_load_distro_fdt(&fdt_distro, &fdt_size);
-+			fdt = fdt_distro;
+-	const struct efi_initrd_dp id_dp = {
++	const struct efi_initrd_dp initrd_prefix = {
+ 		.vendor = {
+ 			{
+ 			DEVICE_PATH_TYPE_MEDIA_DEVICE,
+ 			DEVICE_PATH_SUB_TYPE_VENDOR_PATH,
+-			sizeof(id_dp.vendor),
++			sizeof(initrd_prefix.vendor),
+ 			},
+ 			EFI_INITRD_MEDIA_GUID,
+ 		},
+ 		.end = {
+ 			DEVICE_PATH_TYPE_END,
+ 			DEVICE_PATH_SUB_TYPE_END,
+-			sizeof(id_dp.end),
++			sizeof(initrd_prefix.end),
 +		}
++	};
++
++	const struct efi_initrd_dp fdt_prefix = {
++		.vendor = {
++			{
++			DEVICE_PATH_TYPE_MEDIA_DEVICE,
++			DEVICE_PATH_SUB_TYPE_VENDOR_PATH,
++			sizeof(fdt_prefix.vendor),
++			},
++			EFI_FDT_GUID,
++		},
++		.end = {
++			DEVICE_PATH_TYPE_END,
++			DEVICE_PATH_SUB_TYPE_END,
++			sizeof(initrd_prefix.end),
+ 		}
+ 	};
+ 
+@@ -1424,6 +1446,12 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
+ 		goto out;
  	}
  
- 	/*
-@@ -1277,8 +1282,12 @@ efi_status_t efi_bootmgr_run(void *fdt)
- 	 */
- 	ret = efi_install_fdt(fdt);
- 
--	if (!IS_ENABLED(CONFIG_GENERATE_ACPI_TABLE))
-+	if (!IS_ENABLED(CONFIG_GENERATE_ACPI_TABLE)) {
- 		free(fdt_lo);
-+		if (fdt_distro)
-+			efi_free_pages((uintptr_t)fdt_distro,
-+				       efi_size_in_pages(fdt_size));
++	bo->fdt_info.current_path = calloc(1, EFICONFIG_FILE_PATH_BUF_SIZE);
++	if (!bo->fdt_info.current_path) {
++		ret =  EFI_OUT_OF_RESOURCES;
++		goto out;
 +	}
++
+ 	bo->description = calloc(1, EFICONFIG_DESCRIPTION_MAX * sizeof(u16));
+ 	if (!bo->description) {
+ 		ret =  EFI_OUT_OF_RESOURCES;
+@@ -1456,13 +1484,20 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
+ 		if (lo.file_path)
+ 			fill_file_info(lo.file_path, &bo->file_info, device_dp);
  
- 	if (ret != EFI_SUCCESS) {
- 		if (EFI_CALL(efi_unload_image(handle)) == EFI_SUCCESS)
-diff --git a/lib/efi_loader/efi_fdt.c b/lib/efi_loader/efi_fdt.c
-index 0edf0c1e2fc..86ba00c2bdd 100644
---- a/lib/efi_loader/efi_fdt.c
-+++ b/lib/efi_loader/efi_fdt.c
-@@ -71,3 +71,47 @@ int efi_get_distro_fdt_name(char *fname, int size, int seq)
+-		/* Initrd file path(optional) is placed at second instance. */
++		/* Initrd file path (optional) is placed at second instance. */
+ 		initrd_dp = efi_dp_from_lo(&lo, &efi_lf2_initrd_guid);
+ 		if (initrd_dp) {
+ 			fill_file_info(initrd_dp, &bo->initrd_info, initrd_device_dp);
+ 			efi_free_pool(initrd_dp);
+ 		}
  
- 	return 0;
- }
++		/* Fdt file path (optional) is placed as third instance. */
++		fdt_dp = efi_dp_from_lo(&lo, &efi_guid_fdt);
++		if (fdt_dp) {
++			fill_file_info(fdt_dp, &bo->fdt_info, fdt_device_dp);
++			efi_free_pool(fdt_dp);
++		}
 +
-+/**
-+ * efi_load_distro_fdt() - load distro device-tree
-+ *
-+ * @fdt:	on return device-tree, must be freed via efi_free_pages()
-+ * @fdt_size:	buffer size
-+ */
-+void efi_load_distro_fdt(void **fdt, efi_uintn_t *fdt_size)
-+{
-+	struct efi_device_path *rem, *dp;
-+	efi_status_t  ret;
-+	efi_handle_t device;
+ 		if (size > 0)
+ 			memcpy(bo->optional_data, lo.optional_data, size);
+ 	}
+@@ -1484,26 +1519,31 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
+ 			ret = EFI_OUT_OF_RESOURCES;
+ 			goto out;
+ 		}
+-		initrd_dp = efi_dp_concat((const struct efi_device_path *)&id_dp,
++		initrd_dp = efi_dp_concat((const struct efi_device_path *)&initrd_prefix,
+ 					  dp, 0);
+ 		efi_free_pool(dp);
+ 	}
+ 
++	if (bo->fdt_info.dp_volume) {
++		dp = eficonfig_create_device_path(bo->fdt_info.dp_volume,
++						  bo->fdt_info.current_path);
++		if (!dp) {
++			ret = EFI_OUT_OF_RESOURCES;
++			goto out;
++		}
++		fdt_dp = efi_dp_concat((const struct efi_device_path *)&fdt_prefix,
++				       dp, 0);
++		efi_free_pool(dp);
++	}
 +
-+	*fdt = NULL;
-+
-+	dp = efi_get_dp_from_boot(NULL);
-+	if (!dp)
-+		return;
-+	device = efi_dp_find_obj(dp, NULL, &rem);
-+	ret = efi_search_protocol(device, &efi_simple_file_system_protocol_guid,
-+				  NULL);
+ 	dp = eficonfig_create_device_path(bo->file_info.dp_volume, bo->file_info.current_path);
+ 	if (!dp) {
+ 		ret = EFI_OUT_OF_RESOURCES;
+ 		goto out;
+ 	}
+-	final_dp_size = efi_dp_size(dp) + sizeof(END);
+-	if (initrd_dp) {
+-		final_dp = efi_dp_concat(dp, initrd_dp, 1);
+-		final_dp_size += efi_dp_size(initrd_dp) + sizeof(END);
+-	} else {
+-		final_dp = efi_dp_dup(dp);
+-	}
+-	efi_free_pool(dp);
+ 
+-	if (!final_dp)
++	ret = efi_load_option_dp_join(&dp, &dp_size, initrd_dp, fdt_dp);
 +	if (ret != EFI_SUCCESS)
-+		goto err;
-+	memcpy(rem, &END, sizeof(END));
+ 		goto out;
+ 
+ 	if (utf16_utf8_strlen(bo->optional_data)) {
+@@ -1515,17 +1555,20 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
+ 		utf16_utf8_strncpy(&p, bo->optional_data, u16_strlen(bo->optional_data));
+ 	}
+ 
+-	ret = eficonfig_set_boot_option(varname, final_dp, final_dp_size, bo->description, tmp);
++	ret = eficonfig_set_boot_option(varname, dp, dp_size, bo->description, tmp);
+ out:
+ 	free(tmp);
+ 	free(bo->optional_data);
+ 	free(bo->description);
+ 	free(bo->file_info.current_path);
+ 	free(bo->initrd_info.current_path);
++	free(bo->fdt_info.current_path);
+ 	efi_free_pool(device_dp);
+ 	efi_free_pool(initrd_device_dp);
+ 	efi_free_pool(initrd_dp);
+-	efi_free_pool(final_dp);
++	efi_free_pool(fdt_device_dp);
++	efi_free_pool(fdt_dp);
++	efi_free_pool(dp);
+ 
+ 	return ret;
+ }
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index ddf2e41a95c..1236eecff0f 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -1185,4 +1185,18 @@ efi_status_t efi_disk_get_device_name(const efi_handle_t handle, char *buf, int
+  */
+ void efi_add_known_memory(void);
+ 
++/**
++ * efi_load_option_dp_join() - join device-paths for load option
++ *
++ * @dp:		in: binary device-path, out: joined device-path
++ * @dp_size:	size of joined device-path
++ * @initrd_dp:	initrd device-path or NULL
++ * @fdt_dp:	device-tree device-path or NULL
++ * Return:	status_code
++ */
++efi_status_t efi_load_option_dp_join(struct efi_device_path **dp,
++				     size_t *dp_size,
++				     struct efi_device_path *initrd_dp,
++				     struct efi_device_path *fdt_dp);
 +
-+	/* try the various available names */
-+	for (int seq = 0; ; ++seq) {
-+		struct efi_device_path *file;
-+		char buf[255];
+ #endif /* _EFI_LOADER_H */
+diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+index 73d0279e843..348612c3dad 100644
+--- a/lib/efi_loader/efi_helper.c
++++ b/lib/efi_loader/efi_helper.c
+@@ -99,6 +99,50 @@ err:
+ 	return NULL;
+ }
+ 
++/**
++ * efi_load_option_dp_join() - join device-paths for load option
++ *
++ * @dp:		in: binary device-path, out: joined device-path
++ * @dp_size:	size of joined device-path
++ * @initrd_dp:	initrd device-path or NULL
++ * @fdt_dp:	device-tree device-path or NULL
++ * Return:	status_code
++ */
++efi_status_t efi_load_option_dp_join(struct efi_device_path **dp,
++				     size_t *dp_size,
++				     struct efi_device_path *initrd_dp,
++				     struct efi_device_path *fdt_dp)
++{
++	if (!dp)
++		return EFI_INVALID_PARAMETER;
 +
-+		if (efi_get_distro_fdt_name(buf, sizeof(buf), seq))
-+			break;
-+		file = efi_dp_from_file(dp, buf);
-+		if (!file)
-+			break;
-+		ret = efi_load_image_from_path(true, file, fdt, fdt_size);
-+		efi_free_pool(file);
-+		if (ret == EFI_SUCCESS)
-+			break;
++	*dp_size = efi_dp_size(*dp);
++
++	if (initrd_dp) {
++		struct efi_device_path *tmp_dp = *dp;
++
++		*dp = efi_dp_concat(tmp_dp, initrd_dp, *dp_size);
++		efi_free_pool(tmp_dp);
++		if (!*dp)
++			return EFI_OUT_OF_RESOURCES;
++		*dp_size += efi_dp_size(initrd_dp) + sizeof(END);
 +	}
 +
-+err:
-+	efi_free_pool(dp);
++	if (fdt_dp) {
++		struct efi_device_path *tmp_dp = *dp;
++
++		*dp = efi_dp_concat(tmp_dp, fdt_dp, *dp_size);
++		efi_free_pool(tmp_dp);
++		if (!dp)
++			return EFI_OUT_OF_RESOURCES;
++		*dp_size += efi_dp_size(fdt_dp) + sizeof(END);
++	}
++
++	*dp_size += sizeof(END);
++
++	return EFI_SUCCESS;
 +}
++
+ const struct guid_to_hash_map {
+ 	efi_guid_t guid;
+ 	const char algo[32];
 -- 
 2.43.0
 
