@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87F2BC25B78
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 14:14:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED313C25B7C
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 14:15:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14F248852C;
-	Tue, 28 May 2024 16:14:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7D9AA884D1;
+	Tue, 28 May 2024 16:15:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DzpC+Yea";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fuWiWZ6W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63C2888531; Tue, 28 May 2024 16:14:39 +0200 (CEST)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
+ id 8EB7788540; Tue, 28 May 2024 16:15:00 +0200 (CEST)
+Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
+ [IPv6:2607:f8b0:4864:20::72f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2C0588485
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 16:14:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 638CB88485
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 16:14:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-794ab13bb88so60894085a.2
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 07:14:36 -0700 (PDT)
+Received: by mail-qk1-x72f.google.com with SMTP id
+ af79cd13be357-794db1ee9f1so9121685a.0
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 07:14:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716905675; x=1717510475; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1716905697; x=1717510497; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=K3YFkGknxU6YGQou9JqyOONMy4mdn5MMDgVfPLYXXXY=;
- b=DzpC+YeaqIk+jPcalTQbInPh+Tfc+QS5Cltc1jxBstI5yIwevG01pylyWZBRfAauxL
- CClPQckGqsSaWo5dbJn3wawmYY7TPfUebT0hmJnTG2s96GpddvBpL9ER75ghVUvZoncJ
- fzd+sBJrnWFsOnRVDW92o3CZQLdCEbtOCGfguzIyXREQRWuD8TIoC+RabB6tv5/bE/rs
- oph+XhHu9AcQV/6TPMChZZ9JVW+M4m8sPN1rdaPFF3As4G7B7uTsG3jXx6bmBWK2HUMj
- YdqD3jKyC2Zt8UVAJYMDPS0543Z+OJJ37yM+gyqjkRXpVNE7xU5PHEY/xjRVTmyw27Kn
- DlqA==
+ bh=DlZHj2LaMV4wNeQ7EE0kPl41+f3nkiFlyYFPBdvqsnM=;
+ b=fuWiWZ6WN724NZoJDCpNWG6jKiDyXqArdQVumvkZEm0PcmjL33OeDMXY262cb1+3k+
+ J0Eeg8D0WhXXiwMWo2kBP6NvDZEMScDZBFS4a9Unz+SEw0cdYsH3pjDyBVvIQ8cdaEpH
+ lB+DDFsWM6SUZnaeoIdeM8b1G0VX3PLfZ+NNEAbT8LuDoAcubNFPrB2uumwoGEV/60UC
+ TuCwdZQ8FnnjLxajkGJOhNMTogNWM0jKP8tgFDVbRZq9xkoRW8aGACIdWWbU1eCh1ur+
+ bleIH79PzbpfhnF7kxkyQow7FhoaoHUJKlaX3Om5qAcx8Zt7JxMEgr1KRcQH1Bfx2o8y
+ MEiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716905675; x=1717510475;
+ d=1e100.net; s=20230601; t=1716905697; x=1717510497;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=K3YFkGknxU6YGQou9JqyOONMy4mdn5MMDgVfPLYXXXY=;
- b=tdgLDR8pw0V82NV6WSikdtwX8PlOE57qy5YkntJt1BSQqcH+8N/qy1rG+utGg+fT1H
- TrMoUdCMPcXJAFizrC88IfRgnu96j6mABDzSP1rZcSl+jtaAqCHZOUgcRLGDND0lgSsW
- kkBpSLcF4cAknE0nsWHU2MkcxYMd3hBqydG89EMXUC90dJBfPO+dSf9EPE3ldD351kAI
- z9oidH26/Ivm2nbVXANlXZDfJn7iWcclMbAgfmXprVv0NR59gI8kJzAMjTIcVbVGWScb
- DzRdKpHY0VLrnN4uJ6oFFkVJ3JIyqd7jSnwfa3SzcQOfe8mAZFYDMlTN5gPOAE9HCIeh
- IsyA==
-X-Gm-Message-State: AOJu0YyNDoNn7s5l1JepvBWtxh/crxEd1YHo84pYjRchK6sH4Jp/LkYM
- sJPDLIqNTVbjfyEPV0jTeXn+RsFIzE6PYNffYy8vgzJtMCwJQopXWgtf7CaTICf3nmQYrhXMxlL
- +jdQ=
-X-Google-Smtp-Source: AGHT+IHvirzl5ZOrQkE2bnM55nE8Q9RzByGpXvOhIwKBcdm9R3TU46fWO2igN9uJWyFnag+RMRH2/w==
-X-Received: by 2002:a05:620a:29c9:b0:793:1c4:a1ed with SMTP id
- af79cd13be357-794ab097b3dmr1666400885a.43.1716905675312; 
- Tue, 28 May 2024 07:14:35 -0700 (PDT)
+ bh=DlZHj2LaMV4wNeQ7EE0kPl41+f3nkiFlyYFPBdvqsnM=;
+ b=UsvaFoiFbnIyFYOdXNJ0xtlIVKLdXiNUZWP15ewE4dMto4yOFC+OHZKg1jcxo0KCLi
+ JGX1uRf7RyI0D++ibEKiTuZN/tZp7IQ+Ff+4bqTeM18uqFODBx1q6WrQ2lwFB83wJr99
+ QgMWpM2oR1p9ykkZcHkj3TVb9MOL08i+7MJFaDY5v0tegE0tkhD4V9MulMt+MycOBsD7
+ Dwa5PtvhHvYFg3U2BuG06R7imChjxt/b4b1nbvskbKxaDO3UrhfZs4UkaNe/6FShkIsn
+ 5skc1dsxPAGnP/bi8xW8ffaLyWdwc6T/7h6YgWL0tYGXcJJ8byzB9OFZyaaCU7WU1Nvo
+ lhzw==
+X-Gm-Message-State: AOJu0Yyd7Bzl/clVfOh0uV3iKXFqh59GMrnhDIkr7sX5mlYgHCTAruD7
+ bqehIiXYdceqUb57o9gnPl9z/nA9w7gouDFRg6e9Q7jy2uBUvNuxhNq7Njr60J0WO4D+eKpXLQV
+ /1i0=
+X-Google-Smtp-Source: AGHT+IH7RIdXJ9uKCmzwLsI0/3sgilWoR9GbUCLmb7bofm6aJWzm9I6yXkhCT+2a/o61speE0RacJw==
+X-Received: by 2002:a05:620a:e85:b0:792:9148:95a with SMTP id
+ af79cd13be357-794ab122388mr1132384085a.72.1716905696696; 
+ Tue, 28 May 2024 07:14:56 -0700 (PDT)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-794abcc5844sm381033685a.53.2024.05.28.07.14.33
+ af79cd13be357-794abcc5844sm381033685a.53.2024.05.28.07.14.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 May 2024 07:14:35 -0700 (PDT)
+ Tue, 28 May 2024 07:14:56 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
@@ -73,24 +73,24 @@ Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  Michal Simek <michal.simek@amd.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sean Anderson <seanga2@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
  "Leon M. Busch-George" <leon@georgemail.eu>,
- Ilya Lukin <4.shket@gmail.com>, Sergei Antonov <saproj@gmail.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilya Lukin <4.shket@gmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Sergei Antonov <saproj@gmail.com>, Bin Meng <bmeng@tinylab.org>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>,
  Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>,
+ Alexander Gendin <agendin@matrox.com>, Eddie James <eajames@linux.ibm.com>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: [PATCH v3 12/25] mbedtls/external: update MbedTLS PKCS7 test suites
-Date: Tue, 28 May 2024 07:09:23 -0700
-Message-Id: <20240528140955.1960172-13-raymond.mao@linaro.org>
+Subject: [PATCH v3 13/25] mbedtls: add public key porting layer
+Date: Tue, 28 May 2024 07:09:24 -0700
+Message-Id: <20240528140955.1960172-14-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240528140955.1960172-1-raymond.mao@linaro.org>
 References: <20240528140955.1960172-1-raymond.mao@linaro.org>
@@ -112,41 +112,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the PKCS7 test suites for multiple certs.
-
-The PR for this patch is at:
-https://github.com/Mbed-TLS/mbedtls/pull/9001
-
-For enabling EFI loader PKCS7 features with MbedTLS build,
-we need this patch on top of MbedTLS v3.6.0 before it is merged into
-the next MbedTLS LTS release.
+Add porting layer for public key on top of MbedTLS X509 library.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
 Changes in v2
-- None.
+- Move the porting layer to MbedTLS dir.
 Changes in v3
-- Update commit message.
+- None.
 
- .../external/mbedtls/tests/suites/test_suite_pkcs7.data       | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ lib/mbedtls/Makefile     |   4 ++
+ lib/mbedtls/public_key.c | 105 +++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 109 insertions(+)
+ create mode 100644 lib/mbedtls/public_key.c
 
-diff --git a/lib/mbedtls/external/mbedtls/tests/suites/test_suite_pkcs7.data b/lib/mbedtls/external/mbedtls/tests/suites/test_suite_pkcs7.data
-index d3b83cdf0aa..2dd1c56109f 100644
---- a/lib/mbedtls/external/mbedtls/tests/suites/test_suite_pkcs7.data
-+++ b/lib/mbedtls/external/mbedtls/tests/suites/test_suite_pkcs7.data
-@@ -14,9 +14,9 @@ PKCS7 Signed Data Parse with zero signers
- depends_on:MBEDTLS_MD_CAN_SHA256
- pkcs7_parse:"data_files/pkcs7_data_no_signers.der":MBEDTLS_PKCS7_SIGNED_DATA
+diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
+index b8eda9638f4..cd0144eac1c 100644
+--- a/lib/mbedtls/Makefile
++++ b/lib/mbedtls/Makefile
+@@ -21,6 +21,10 @@ hash_mbedtls-$(CONFIG_$(SPL_)SHA1) += sha1.o
+ hash_mbedtls-$(CONFIG_$(SPL_)SHA256) += sha256.o
+ hash_mbedtls-$(CONFIG_$(SPL_)SHA512) += sha512.o
  
--PKCS7 Signed Data Parse Fail with multiple certs #4
-+PKCS7 Signed Data Parse Pass with multiple certs #4
- depends_on:MBEDTLS_MD_CAN_SHA256:MBEDTLS_RSA_C
--pkcs7_parse:"data_files/pkcs7_data_multiple_certs_signed.der":MBEDTLS_ERR_PKCS7_FEATURE_UNAVAILABLE
-+pkcs7_parse:"data_files/pkcs7_data_multiple_certs_signed.der":MBEDTLS_PKCS7_SIGNED_DATA
- 
- PKCS7 Signed Data Parse Fail with corrupted cert #5.0
- depends_on:MBEDTLS_MD_CAN_SHA256:MBEDTLS_RSA_C
++# x509 libraries
++obj-$(CONFIG_MBEDTLS_LIB_X509) += x509_mbedtls.o
++x509_mbedtls-$(CONFIG_$(SPL_)ASYMMETRIC_PUBLIC_KEY_SUBTYPE) += public_key.o
++
+ obj-$(CONFIG_MBEDTLS_LIB_CRYPTO) += mbedtls_lib_crypto.o
+ mbedtls_lib_crypto-y := \
+ 	$(MBEDTLS_LIB_DIR)/aes.o \
+diff --git a/lib/mbedtls/public_key.c b/lib/mbedtls/public_key.c
+new file mode 100644
+index 00000000000..2297b4397ba
+--- /dev/null
++++ b/lib/mbedtls/public_key.c
+@@ -0,0 +1,105 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Public key helper functions using MbedTLS X509 library
++ *
++ * Copyright (c) 2024 Linaro Limited
++ * Author: Raymond Mao <raymond.mao@linaro.org>
++ */
++
++#include <linux/compat.h>
++#include <crypto/public_key.h>
++
++void public_key_free(struct public_key *key)
++{
++	if (key) {
++		kfree(key->key);
++		kfree(key->params);
++		kfree(key);
++	}
++}
++
++void public_key_signature_free(struct public_key_signature *sig)
++{
++	int i;
++
++	if (sig) {
++		for (i = 0; i < ARRAY_SIZE(sig->auth_ids); i++)
++			kfree(sig->auth_ids[i]);
++		kfree(sig->s);
++		kfree(sig->digest);
++		kfree(sig);
++	}
++}
++
++int public_key_verify_signature(const struct public_key *pkey,
++				const struct public_key_signature *sig)
++{
++	mbedtls_md_type_t mb_hash_algo;
++	mbedtls_pk_context pk_ctx;
++	int ret;
++
++	if (!pkey || !sig || pkey->key_is_private)
++		return -EINVAL;
++
++	/*
++	 * ECRDSA (Elliptic Curve RedDSA) from Red Hat is not supported by
++	 * MbedTLS
++	 */
++	if (strcmp(pkey->pkey_algo, "rsa")) {
++		pr_err("Encryption is not RSA: %s\n", sig->pkey_algo);
++		return -EINVAL;
++	}
++
++	/*
++	 * Can be pkcs1 or raw, but pkcs1 is expected.
++	 * This is just for argument checking, not necessarily passed to MbedTLS,
++	 * For RSA signatures, MbedTLS typically supports the PKCS#1 v1.5
++	 * (aka. pkcs1) encoding by default.
++	 * The library internally handles the details of decoding and verifying
++	 * the signature according to the expected encoding for the specified algorithm.
++	 */
++	if (strcmp(sig->encoding, "pkcs1")) {
++		pr_err("Encoding %s is not supported, only supports pkcs1\n",
++		       sig->encoding);
++		return -EINVAL;
++	}
++
++	if (!strcmp(sig->hash_algo, "sha1"))
++		mb_hash_algo = MBEDTLS_MD_SHA1;
++	else if (!strcmp(sig->hash_algo, "sha224"))
++		mb_hash_algo = MBEDTLS_MD_SHA224;
++	else if (!strcmp(sig->hash_algo, "sha256"))
++		mb_hash_algo = MBEDTLS_MD_SHA256;
++	else if (!strcmp(sig->hash_algo, "sha384"))
++		mb_hash_algo = MBEDTLS_MD_SHA384;
++	else if (!strcmp(sig->hash_algo, "sha512"))
++		mb_hash_algo = MBEDTLS_MD_SHA512;
++	else	/* Unknown or unsupported hash algorithm */
++		return -EINVAL;
++	/* Initialize the mbedtls_pk_context with RSA key type */
++	mbedtls_pk_init(&pk_ctx);
++
++	/* Parse the DER-encoded public key */
++	ret = mbedtls_pk_parse_public_key(&pk_ctx, pkey->key, pkey->keylen);
++	if (ret) {
++		pr_err("Failed to parse public key, ret:-0x%04x\n",
++		       (unsigned int)-ret);
++		ret = -EINVAL;
++		goto err_key;
++	}
++
++	/* Ensure that it is a RSA key */
++	if (mbedtls_pk_get_type(&pk_ctx) != MBEDTLS_PK_RSA) {
++		pr_err("Only RSA keys are supported\n");
++		ret = -EKEYREJECTED;
++		goto err_key;
++	}
++
++	/* Verify the hash */
++	ret = mbedtls_pk_verify(&pk_ctx, mb_hash_algo, sig->digest,
++				sig->digest_size, sig->s, sig->s_size);
++
++err_key:
++	mbedtls_pk_free(&pk_ctx);
++	return ret;
++}
 -- 
 2.25.1
 
