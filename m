@@ -4,75 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4D26C27C44
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 21:30:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92F6BC25B78
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 22:21:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA5EC883F4;
-	Tue, 28 May 2024 23:30:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C801E88543;
+	Wed, 29 May 2024 00:21:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YbIY28g8";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IW3C3iRO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D240884F1; Tue, 28 May 2024 23:30:35 +0200 (CEST)
-Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
- [IPv6:2607:f8b0:4864:20::c2e])
+ id 8BA408844E; Tue, 28 May 2024 19:05:04 +0200 (CEST)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E282883A0
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 23:30:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 620CF8846C
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 19:05:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-5b96a78639aso753312eaf.1
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 14:30:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=liujianfeng1994@gmail.com
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1f48b825d8cso7660295ad.2
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 10:05:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1716931832; x=1717536632; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=waJjbDLygqkSEDGg9raxbmIepkQl1GmKTj6JTR89rHg=;
- b=YbIY28g8cVSFsLMV/J+5xmyZZznRjHjOxwrgbbYyewEfQVeGqeSN/hZUc7RQZZK0mA
- mdtxflFLsQz+Bsvv8P8i1+ICeIE9SCKLKhxQYh4wP66jkQ4esQBeIUJOnEJdUWt66dz5
- Dvwug7h1vrbwymUCpYW0zQH8qqN9noJYN7P3o=
+ d=gmail.com; s=20230601; t=1716915900; x=1717520700; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=IoZOv0zgDmq/P8GC+hzYCDvDdLh+kfJAEIlXV6/ldbw=;
+ b=IW3C3iROCtrwvta7e49rsLlifXrsRm2IjKDUJcV3T6Aq+a+W5k07vWcXiCvD7S3vKc
+ Nxw8K72tKayrGtgENTvtHpVkhtf2q682YavnzKIJ4QhcbTqJrJ3GpAbFi9rvST9tJHk7
+ 4+reKRmp0oMrjP06vowjimSPhfF6S5P1YGkk8h4TGn5F4M4T5wVzsFXsxYdwdfstElsI
+ MCcDO9yk5B+KjDT6/rWHI2hiA4aE5llo1OysUlGwyliI0Ibiqb/0nO69XOQJ4lJhwYwL
+ F+Yh6iaSabqEAVKdnBw8GGkGAYz1fDl1ikl0n4fm5lPs6YzKCufoBC6M0kQpeZ4EjlcC
+ UGBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716931832; x=1717536632;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=waJjbDLygqkSEDGg9raxbmIepkQl1GmKTj6JTR89rHg=;
- b=LiHjeZEJthGhMIfKvkPudDxvo52gWMNSbc5zwtNcYI8RmXOdvhv4FIC7oF8phyYLfm
- xRg2p6wdZRc+hE/dyXu0f4zZE8mdh32ovrS9jMsnDs5DGkGMet/PK9ZGnRZuhxh7Pq3v
- ZidZEbRCbH8nWbh77wDhMYHVOYiBD0zNW442Ug/tu6NSVukgdKgoEwk0SJxsfftM0Niw
- LZMUwD1tqtRg48Y+uRd11u4omMHd/ALb4HyCXD/dY+Eh3mlgKMPr9TtyriyR+okRfCLN
- IXmQdwQlAwOmIyBg0CB6zE7IxWqIaNyWaw6LoQjT+tV8Is8e8tQ8rzKucBq1+ViLuF9I
- I1Fw==
-X-Gm-Message-State: AOJu0Yw7NKNp4UJJxKhBNZja4btHiWdilHEunzc0wQG1q+7Cwb6Doaln
- bWN6vVPOqOJwdoKFuBuhuTBVB0agjd0y1nlrXV1E8eQn7x1JkHM8mGqfyzRAYZw=
-X-Google-Smtp-Source: AGHT+IF6X3v/T4VO0YMInpwfSZPICju+xzCxPW8+1Zn/tef4GyqGBuW0poqULDxWpQqzm0C1R+LcAQ==
-X-Received: by 2002:a05:6820:551:b0:5b2:3782:7848 with SMTP id
- 006d021491bc7-5b961c730e4mr15342984eaf.6.1716931831474; 
- Tue, 28 May 2024 14:30:31 -0700 (PDT)
-Received: from oliver.lan ([2806:370:558f:4a42:867a:7a66:2d67:2a53])
+ d=1e100.net; s=20230601; t=1716915900; x=1717520700;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=IoZOv0zgDmq/P8GC+hzYCDvDdLh+kfJAEIlXV6/ldbw=;
+ b=Mcbak9vHoDh+GpRfgGO9vy7VAjZo5dXlug9ucRN1QNGpnMAdN4jzCTWoL2ZWlriQk4
+ UKHZMcNmsasncohtN/kumBa9rDasb+y2Kq5rwzaDH06JlTLYFSBAQDPhmWVsQ2EhTJ//
+ Xwu9tDJrJv4N8jUYAPLD8AvpqNL/7t+uJVY242yffSNd7HDoB7jBFx88O9IjGYOxARYi
+ pFkoXy9WeNo55fbLMyebuba02HP4fKs043XdZ2Kk/mF7DYZVfy191vL0B0uOiaNUIILS
+ u2rvN0os09CAxWnLSseUmhCwhi6iyk1TcjTdToZLDKYW5X14oKlsi8h8Tdl3F4ITKObC
+ +cXw==
+X-Gm-Message-State: AOJu0YxoDYUPqJ7N+5VGdMh4uOT0lCiDOwJ6Tydk+s8dfge3tG76lvBz
+ L0g3F04VWRmyhLIaEO0p1vrWhaiy3NeYNHNwACl3WxgslBfPByvRVT2Y6yh43Irh+Q==
+X-Google-Smtp-Source: AGHT+IEQDRaDDcCbrmLxELL2OmZrDlvs+5ZI2tBOycShrTRKxs5fXI1lsm1+vUY64Ye0+BRqwPWFqA==
+X-Received: by 2002:a17:902:e74c:b0:1f4:6252:db95 with SMTP id
+ d9443c01a7336-1f46252ddbbmr135914685ad.5.1716915900323; 
+ Tue, 28 May 2024 10:05:00 -0700 (PDT)
+Received: from localhost.localdomain ([221.220.133.99])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5b96c461f1dsm2328216eaf.7.2024.05.28.14.30.30
+ d9443c01a7336-1f47efff203sm53037705ad.241.2024.05.28.10.04.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 May 2024 14:30:30 -0700 (PDT)
-Date: Tue, 28 May 2024 15:30:24 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Love Kumar <love.kumar@amd.com>
-Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com
-Subject: Re: [PATCH v5] test/py: net_boot: Add test cases for net boot
-Message-ID: <20240528213024.GA546015@oliver.lan>
-References: <eedb4599e11ffed72cd0866fa02d4b144e3192ad.1716886448.git.love.kumar@amd.com>
+ Tue, 28 May 2024 10:04:59 -0700 (PDT)
+From: Jianfeng Liu <liujianfeng1994@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Jianfeng Liu <liujianfeng1994@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Boris Brezillon <boris.brezillon@collabora.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christopher Obbard <chris.obbard@collabora.com>,
+ Diederik de Haas <didi.debian@cknow.org>,
+ Elon Zhang <zhangzj@rock-chips.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ FUKAUMI Naoki <naoki@radxa.com>, Heiko Stuebner <heiko@sntech.de>,
+ Jagan Teki <jagan@edgeble.ai>, John Clark <inindev@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Joseph Chen <chenjh@rock-chips.com>,
+ Joshua Riek <jjriek@verizon.net>, Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marex@denx.de>,
+ Massimo Pegorer <massimo.pegorer+oss@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
+ Niklas Cassel <cassel@kernel.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Sam Edwards <cfsworks@gmail.com>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Tom Fitzhenry <tom@tom-fitzhenry.me.uk>, Tom Rini <trini@konsulko.com>,
+ Weizhao Ouyang <weizhao.ouyang@arm.com>
+Subject: [PATCH v4 00/10] add ArmSoM Sige7 Rk3588 board
+Date: Wed, 29 May 2024 01:03:56 +0800
+Message-Id: <20240528170406.353616-1-liujianfeng1994@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="1Kk34XnBfh5gcKIx"
-Content-Disposition: inline
-In-Reply-To: <eedb4599e11ffed72cd0866fa02d4b144e3192ad.1716886448.git.love.kumar@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 29 May 2024 00:21:20 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,107 +114,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series also introduces dts commits of rk3588s.dtsi and rk3588.dtsi
+from v6.10-rc1-dts.
+Then dts of ArmSoM Sige7 is picked from upstream.
+I also remove obsolete usb3 nodes of rk3588-u-boot.dtsi and
+rk3588-u-boot.dtsi.
 
---1Kk34XnBfh5gcKIx
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Changes in v4:
+- Pick all commits of rk3588s.dtsi and rk3588.dtsi from v6.10-rc1-dts
+- Remove obsolete USB3 DRD nodes in u-boot.dtsi of rk3588s/rk3588
+- Remove sdhci and usb nodes from rk3588-armsom-sige7-u-boot.dtsi
 
-On Tue, May 28, 2024 at 02:33:17PM +0530, Love Kumar wrote:
+Changes in v3:
+- Use update-dts-subtree.sh to pick upstream dts
 
-> Add tests for booting image using tftpboot/pxe boot commands, tftpboot
-> boot case loads the FIT image into DDR and boots using bootm command
-> whereas pxe boot cases downloads the pxe configuration file from the
-> TFTP server and interprets it to boot the images mentioned in the pxe
-> configurations file.
-> This test relies on boardenv_* containing configuration values including
-> the parameter 'pattern'. tftpboot/pxe boot cases boots the Linux till the
-> boot log pattern value is matched. For example, if the parameter
-> 'pattern' is defined as 'login:', it will boot till login prompt.
+Changes in v2:
+- Fix alphabetical order of MAINTAINERS
+- Use arch/arm/dts/rk3588-armsom-sige7* in board MAINTAINERS
+- Remove spi flash related config
+- Move kernel dts to dts/upstream/src/arm64/rockchip/
 
-Good news is that the kernel test is working for me now. Bad news is the
-PXE test fails, but good news is I figure out the problem.
+Boris Brezillon (1):
+  arm64: dts: rockchip: Add rk3588 GPU node
 
-[snip]
-> +def setup_tftpboot_boot(u_boot_console):
-> +    f =3D u_boot_console.config.env.get('env__net_tftp_bootable_file', N=
-one)
-> +    if not f:
-> +        pytest.skip('No TFTP bootable file to read')
-> +
-> +    test_net.test_net_dhcp(u_boot_console)
-> +    if not test_net.net_set_up:
-> +        test_net.test_net_setup_static(u_boot_console)
+Diederik de Haas (1):
+  arm64: dts: rockchip: Fix ordering of nodes on rk3588s
 
-This works for me, and matches how other tests are written. However:
+Jianfeng Liu (3):
+  arm64: dts: rockchip: Add ArmSom Sige7 board
+  rockchip: rk3588: Remove USB3 DRD nodes in u-boot.dtsi
+  board: rockchip: add ArmSoM Sige7 Rk3588 board
 
-[snip]
-> +def setup_pxe_boot(u_boot_console):
-> +    f =3D u_boot_console.config.env.get('env__net_pxe_bootable_file', No=
-ne)
-> +    if not f:
-> +        pytest.skip('No PXE bootable file to read')
-> +
-> +    test_net.test_net_dhcp(u_boot_console)
-> +    test_net.test_net_setup_static(u_boot_console)
-> +    return f
+Niklas Cassel (1):
+  arm64: dts: rockchip: add rk3588 pcie and php IOMMUs
 
-This doesn't check for if dhcp worked and skips the test when DHCP works
-but there's no static config, which is how my lab is. For v6 we should
-have a setup_networking function that both the TFTP and PXE tests call
-in to that does what I suggested above. And what I suggested above
-would be a good clean-up to the xilinx-specific tests.
+Sebastian Reichel (4):
+  arm64: dts: rockchip: fix usb2phy nodename for rk3588
+  arm64: dts: rockchip: reorder usb2phy properties for rk3588
+  arm64: dts: rockchip: add USBDP phys on rk3588
+  arm64: dts: rockchip: add USB3 DRD controllers on rk3588
 
-That said, with a local fixup so that my network is configured, and
-having pxelinux.cfg/01-b8-27-eb-fc-64-a6 (the first file pxe boot looks
-for on my test Pi), pxeboot.cfg/default and pxeboot.cfg/default-arm all
-configured from the examples given in the test itself, I get:
------------------------------------- Captured stdout call -----------------=
---------------------
-U-Boot> setenv autoload no
-U-Boot> U-Boot> dhcp
-Waiting for Ethernet connection... done.
-BOOTP broadcast 1
-BOOTP broadcast 2
-DHCP client bound to address 192.168.1.100 (255 ms)
-U-Boot> U-Boot> pxe get
-missing environment variable: pxeuuid
-Retrieving file: pxelinux.cfg/01-b8-27-eb-fc-64-a6
-Waiting for Ethernet connection... done.
-Using smsc95xx_eth device
-TFTP from server 192.168.1.10; our IP address is 192.168.1.100
-Filename 'pxelinux.cfg/01-b8-27-eb-fc-64-a6'.
-Load address: 0x2500000
-Loading: ##################################################  64 Bytes
-         0 Bytes/s
-done
-Bytes transferred =3D 64 (40 hex)
-Config file '<NULL>' found
-U-Boot>
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D short test summary info =3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D
+ MAINTAINERS                                   |   1 +
+ arch/arm/dts/rk3588-armsom-sige7-u-boot.dtsi  |   6 +
+ arch/arm/dts/rk3588-u-boot.dtsi               |  74 --
+ arch/arm/dts/rk3588s-u-boot.dtsi              |  85 ---
+ arch/arm/mach-rockchip/rk3588/Kconfig         |  26 +
+ board/armsom/sige7-rk3588/Kconfig             |  12 +
+ board/armsom/sige7-rk3588/MAINTAINERS         |   7 +
+ configs/sige7-rk3588_defconfig                |  93 +++
+ doc/board/rockchip/rockchip.rst               |   1 +
+ .../arm64/rockchip/rk3588-armsom-sige7.dts    | 721 ++++++++++++++++++
+ dts/upstream/src/arm64/rockchip/rk3588.dtsi   |  72 ++
+ dts/upstream/src/arm64/rockchip/rk3588s.dtsi  | 377 ++++++---
+ include/configs/sige7-rk3588.h                |  15 +
+ 13 files changed, 1225 insertions(+), 265 deletions(-)
+ create mode 100644 arch/arm/dts/rk3588-armsom-sige7-u-boot.dtsi
+ create mode 100644 board/armsom/sige7-rk3588/Kconfig
+ create mode 100644 board/armsom/sige7-rk3588/MAINTAINERS
+ create mode 100644 configs/sige7-rk3588_defconfig
+ create mode 100644 dts/upstream/src/arm64/rockchip/rk3588-armsom-sige7.dts
+ create mode 100644 include/configs/sige7-rk3588.h
 
---=20
-Tom
+-- 
+2.34.1
 
---1Kk34XnBfh5gcKIx
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZWTO0ACgkQFHw5/5Y0
-tywm5wv/RvZh/87ps5hlXPNnxlRXSYWcuZxR5qyRuDNDlWSj3JPZFAWo+p0mtbcJ
-X75I8nn9R8tN3Kz74dtmtneMR3SJp6r08r9i2KzSdQqXNbtmcPTSd3U/gwg3Pk37
-spxJwXt79bHDfvJsnqqLahytXt4RAKXROkcPSROeSSE3oHlh+2D8cScxoCLDDOeN
-Jg2zw8awknw74rQXMNU5C+RdUZ+tCNBEF6cCIYk7YSKO8QfmqGB8OvKUyHxkr093
-FcySDFYKWQnHd1P8WuHm4Nde+RdPItc/9tpXF1xEsnlKYIriXomxDjTSIyJd7Ull
-mwBw9KkBSgpURN+XskioLn9mRZA8bRHEc7WJdHpZxV9n6OLtHr+T8mEyaLlBOO2J
-UdCTCVzB6tPsQtaEfRyaMMqQaTESPbl3z7mKjpBxZiiejfPwB6cYSigoEGlFCAnd
-0V6xaa3xIl3baD2qjFgOrQfv+AlvqOpjImXgMod5xBeJywgClgPTOu2HFD/GSvOC
-tCOodWXS
-=6F34
------END PGP SIGNATURE-----
-
---1Kk34XnBfh5gcKIx--
