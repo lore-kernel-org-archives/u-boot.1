@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFD3CC27C43
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 22:22:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54E6CC27C43
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 22:22:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32EE0885C7;
+	by phobos.denx.de (Postfix) with ESMTP id 8B780885D2;
 	Wed, 29 May 2024 00:21:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YM09jUrh";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XTwhAdku";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E12C884DB; Tue, 28 May 2024 19:05:45 +0200 (CEST)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id 63820884DB; Tue, 28 May 2024 19:05:51 +0200 (CEST)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDFAF8844E
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 19:05:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D6DB38844E
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 19:05:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=liujianfeng1994@gmail.com
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1f47f07acd3so9641195ad.0
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 10:05:42 -0700 (PDT)
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-1f47f07acd3so9642805ad.0
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 10:05:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716915941; x=1717520741; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1716915947; x=1717520747; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qJpyztKIK8vF0S7eCHU5v8uNEEFqTTVPD34i9ho0PRY=;
- b=YM09jUrhAwLb1Wqg7eU1s08FcON4pqQqOp/Wt3ZV6OGeH1DruO33Db9en17TDaBaux
- jdyXO0ul+tA6VFd0tbRlcPcoIzGJxce6uJLhr9/zI3eRv4yWRuLbkmIqlTzRGnKSVNSA
- i1oaZPsTRQK87k3d6d/8WIX8SsC/oNIwjjePwbQma8hQwQtIEd2vapU2cLD7xRBKVGNt
- 3n/3dR7JC54omUTclMA5qTB9bU8lVyH39V87KqDJEf2iJ1E7+vup0Wwq7DDMw4kuEqaQ
- vcqWxogcd7ajc/pU/SuyqNJqsqjeIcyr78Tzsh1J7lUZf3FajYPB3DXj7mHV4lQf6Bv3
- IAVw==
+ bh=tyutPEpvl5BVcbdAsDb7NHG0/3uXq4tpfe5W7CpHykI=;
+ b=XTwhAdkuDeExFVn7bTf0DKxj4gSHlMORuCsA52J+GJrz54EM/LSd0qEF/aZJXtCzyF
+ z6jVWqoMwx93TRaYukR01HzQc8zCb28ZncxrQADTKSlahepIDiqGgvytMKNOC0Yhj7Ww
+ U1FgCevc73H1gsLxA1kH2BbKSdQGJkYKG6qM8vRD+ocbdr08cLaoXAgQtu5j8uIwJBG7
+ CABUySFNlK8ADy/7kL2QCDFOd87QpylARc22FT07c9oSxjNm8CPWFFJVB2+8v3Ln4+de
+ aAPCTHkbyY3d1fq49q7HxBD2IpmipqafQy7XkaO4jJ5OItV+0ihc9qpHFzxkZHcJH6yU
+ VXeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716915941; x=1717520741;
+ d=1e100.net; s=20230601; t=1716915947; x=1717520747;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qJpyztKIK8vF0S7eCHU5v8uNEEFqTTVPD34i9ho0PRY=;
- b=Uq8AKjnRbj5kgLj0HTGcKcfPibhP5nUsW5dvZAWrokg3pPkInqTZtXQhdTyJgj+nWw
- ddZ+H/5RnBsrX414iiiagB1xZf2miKdVd6zDOEko9WhGZonM1SZMMkxnhcgrZER5BMoB
- 9sqtS8s693Yz/nPd2a3aGLHHbxMXeHr/U4LfPWM0nIhbigZRsql2C1QYstkDVggjjGR6
- lSTT2NwSykSeT0g32mr7ZyZUZXd84l3WBc9ej4neGuQKiYy7n/9Hl2mf+rqM0db7NaFo
- qeIiipQ0+lxj4yhrOFRLHX0LIAJk7XVs3unDES1ZLRVFc9/ApY4fRDjCPhjTrDM86B9Y
- +8PQ==
-X-Gm-Message-State: AOJu0Yw0V4ChwwtH0aKJ72TFJOa8LiUa4887ulK8LQP5CSNOHCozKluv
- sRlThgkgPEFgr5UyPbAV5y7QXCeaskgrRUoFriPF15uC7QO356KTX0JtqY/BjK0yEg==
-X-Google-Smtp-Source: AGHT+IFSHJuHtwnNuCACspJbag9yeCpD5tFmSfE9eU+EaviY6exNUqXuPQS6c9d1RZ7A25sNFkfoAA==
-X-Received: by 2002:a17:902:ce84:b0:1f4:aa72:1c7 with SMTP id
- d9443c01a7336-1f4aa72038fmr61663365ad.26.1716915940801; 
- Tue, 28 May 2024 10:05:40 -0700 (PDT)
+ bh=tyutPEpvl5BVcbdAsDb7NHG0/3uXq4tpfe5W7CpHykI=;
+ b=mVb9M77jMu7uCSQcSDiqgk266BRoNV5X2Xqn/OkYtAQVc8SS/GJhYfCoXVB34zXgoT
+ jNl8FNiQX/ZVnbNYF13eS+fkGBMMoyDtR3+XBTGneUf93nPiRS1kXH9ve3Cgf/Q9SQ8A
+ srGlRLqnsZP9a7JQ4nJKM1UY9hEd4L+QdUHuJ7eeTjStQ2ZhVnvDpxvqmMb8E5Jnr1T/
+ gwIn0COfVzcSRDpu9vYgMLJek4MmwNWO2NR0XDqkrRtWo2ylaT2jHoXVDm0F/WqhXNXG
+ Vq/H8ym2+PzV84WVobLS2u2fnLdWgH8Wfk3Kj/QUYx2CSn27Xx5AqbRblBbH0PCLt6XW
+ 6sPg==
+X-Gm-Message-State: AOJu0YyLGyvRHYASTFN29z2ZxCs709iElKVc7aAomTqeNPwzJ5eXZ9bg
+ lceeCC6lIfa7VtvOW8SYSKlQW2mn+r4W0e1G/kljrrO8Luv5vYSLdnOYMQxgdZERsg==
+X-Google-Smtp-Source: AGHT+IEqoC1KZy6PKWsocmFaj3JFR93XRIHt7+JGiI6y+6yudKhb++czu+O7evpCcnktsdkHlaLzng==
+X-Received: by 2002:a17:903:1211:b0:1f2:fb02:3dfd with SMTP id
+ d9443c01a7336-1f4486b95c1mr167868345ad.11.1716915947090; 
+ Tue, 28 May 2024 10:05:47 -0700 (PDT)
 Received: from localhost.localdomain ([221.220.133.99])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f47efff203sm53037705ad.241.2024.05.28.10.05.35
+ d9443c01a7336-1f47efff203sm53037705ad.241.2024.05.28.10.05.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 May 2024 10:05:40 -0700 (PDT)
+ Tue, 28 May 2024 10:05:46 -0700 (PDT)
 From: Jianfeng Liu <liujianfeng1994@gmail.com>
 To: u-boot@lists.denx.de
-Cc: Sebastian Reichel <sebastian.reichel@collabora.com>,
- Heiko Stuebner <heiko@sntech.de>, Jianfeng Liu <liujianfeng1994@gmail.com>,
+Cc: Niklas Cassel <cassel@kernel.org>, Heiko Stuebner <heiko@sntech.de>,
+ Jianfeng Liu <liujianfeng1994@gmail.com>,
  Boris Brezillon <boris.brezillon@collabora.com>,
  Diederik de Haas <didi.debian@cknow.org>,
- Kever Yang <kever.yang@rock-chips.com>, Niklas Cassel <cassel@kernel.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 06/10] arm64: dts: rockchip: add USB3 DRD controllers on
- rk3588
-Date: Wed, 29 May 2024 01:04:02 +0800
-Message-Id: <20240528170406.353616-7-liujianfeng1994@gmail.com>
+ Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v4 07/10] arm64: dts: rockchip: add rk3588 pcie and php IOMMUs
+Date: Wed, 29 May 2024 01:04:03 +0800
+Message-Id: <20240528170406.353616-8-liujianfeng1994@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240528170406.353616-1-liujianfeng1994@gmail.com>
 References: <20240528170406.353616-1-liujianfeng1994@gmail.com>
@@ -99,90 +100,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Sebastian Reichel <sebastian.reichel@collabora.com>
+From: Niklas Cassel <cassel@kernel.org>
 
-Add both USB3 dual-role controllers to the RK3588 devicetree.
+The mmu600_pcie is connected with the five PCIe controllers.
+The mmu600_php is connected with the USB3 controller, the GMAC
+controllers, and the SATA controllers.
 
-Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
-Link: https://lore.kernel.org/r/20240408225109.128953-8-sebastian.reichel@collabora.com
+See 8.2 Block Diagram, in rk3588 TRM (Technical Reference Manual).
+
+The IOMMUs are disabled by default, as further patches are needed to
+program the SID/SSIDs in to the IOMMUs.
+
+iommu: Default domain type: Translated
+iommu: DMA domain TLB invalidation policy: strict mode
+arm-smmu-v3 fc900000.iommu: ias 48-bit, oas 48-bit (features 0x001c1eaf)
+arm-smmu-v3 fc900000.iommu: allocated 65536 entries for cmdq
+arm-smmu-v3 fc900000.iommu: allocated 32768 entries for evtq
+arm-smmu-v3 fc900000.iommu: msi_domain absent - falling back to wired irqs
+
+Additionally, the IOMMU correctly triggers an IOMMU fault when
+a PCIe device performs a write (since the device hasn't been
+assigned a SID/SSID):
+arm-smmu-v3 fc900000.iommu: event 0x02 received:
+arm-smmu-v3 fc900000.iommu:      0x0000010000000002
+arm-smmu-v3 fc900000.iommu:      0x0000000000000000
+arm-smmu-v3 fc900000.iommu:      0x0000000000000000
+arm-smmu-v3 fc900000.iommu:      0x0000000000000000
+
+While this doesn't provide much value as is, having the devices as
+disabled in the device tree will allow developers to see that the rk3588
+actually has IOMMUs on the SoC.
+
+Signed-off-by: Niklas Cassel <cassel@kernel.org>
+Link: https://lore.kernel.org/r/20240502140231.477049-2-cassel@kernel.org
 Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 
-[ upstream commit: 33f393a2a990e16f56931ca708295f31d2b44415 ]
+[ upstream commit: cd81d3a0695cc54ad6ac0ef4bbb67a7c8f55d592 ]
 
-(cherry picked from commit c7ed588e14f7dd04a92fb55f12680f94c7b14edf)
+(cherry picked from commit ea9a34aa0d786cbf4b87f1ba528e69b07219738f)
 Signed-off-by: Jianfeng Liu <liujianfeng1994@gmail.com>
 ---
 
 (no changes since v1)
 
- dts/upstream/src/arm64/rockchip/rk3588.dtsi  | 20 ++++++++++++++++++
- dts/upstream/src/arm64/rockchip/rk3588s.dtsi | 22 ++++++++++++++++++++
- 2 files changed, 42 insertions(+)
+ dts/upstream/src/arm64/rockchip/rk3588s.dtsi | 24 ++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
 
-diff --git a/dts/upstream/src/arm64/rockchip/rk3588.dtsi b/dts/upstream/src/arm64/rockchip/rk3588.dtsi
-index 4fdd047c9eb..5984016b5f9 100644
---- a/dts/upstream/src/arm64/rockchip/rk3588.dtsi
-+++ b/dts/upstream/src/arm64/rockchip/rk3588.dtsi
-@@ -7,6 +7,26 @@
- #include "rk3588-pinctrl.dtsi"
- 
- / {
-+	usb_host1_xhci: usb@fc400000 {
-+		compatible = "rockchip,rk3588-dwc3", "snps,dwc3";
-+		reg = <0x0 0xfc400000 0x0 0x400000>;
-+		interrupts = <GIC_SPI 221 IRQ_TYPE_LEVEL_HIGH 0>;
-+		clocks = <&cru REF_CLK_USB3OTG1>, <&cru SUSPEND_CLK_USB3OTG1>,
-+			 <&cru ACLK_USB3OTG1>;
-+		clock-names = "ref_clk", "suspend_clk", "bus_clk";
-+		dr_mode = "otg";
-+		phys = <&u2phy1_otg>, <&usbdp_phy1 PHY_TYPE_USB3>;
-+		phy-names = "usb2-phy", "usb3-phy";
-+		phy_type = "utmi_wide";
-+		power-domains = <&power RK3588_PD_USB>;
-+		resets = <&cru SRST_A_USB3OTG1>;
-+		snps,dis_enblslpm_quirk;
-+		snps,dis-u2-freeclk-exists-quirk;
-+		snps,dis-del-phy-power-chg-quirk;
-+		snps,dis-tx-ipgap-linecheck-quirk;
-+		status = "disabled";
-+	};
-+
- 	pcie30_phy_grf: syscon@fd5b8000 {
- 		compatible = "rockchip,rk3588-pcie3-phy-grf", "syscon";
- 		reg = <0x0 0xfd5b8000 0x0 0x10000>;
 diff --git a/dts/upstream/src/arm64/rockchip/rk3588s.dtsi b/dts/upstream/src/arm64/rockchip/rk3588s.dtsi
-index 9063c0bb0f0..b0a59ec5183 100644
+index b0a59ec5183..6ac5ac8b48a 100644
 --- a/dts/upstream/src/arm64/rockchip/rk3588s.dtsi
 +++ b/dts/upstream/src/arm64/rockchip/rk3588s.dtsi
-@@ -492,6 +492,28 @@
- 		};
+@@ -579,6 +579,30 @@
+ 		status = "disabled";
  	};
  
-+	usb_host0_xhci: usb@fc000000 {
-+		compatible = "rockchip,rk3588-dwc3", "snps,dwc3";
-+		reg = <0x0 0xfc000000 0x0 0x400000>;
-+		interrupts = <GIC_SPI 220 IRQ_TYPE_LEVEL_HIGH 0>;
-+		clocks = <&cru REF_CLK_USB3OTG0>, <&cru SUSPEND_CLK_USB3OTG0>,
-+			 <&cru ACLK_USB3OTG0>;
-+		clock-names = "ref_clk", "suspend_clk", "bus_clk";
-+		dr_mode = "otg";
-+		phys = <&u2phy0_otg>, <&usbdp_phy0 PHY_TYPE_USB3>;
-+		phy-names = "usb2-phy", "usb3-phy";
-+		phy_type = "utmi_wide";
-+		power-domains = <&power RK3588_PD_USB>;
-+		resets = <&cru SRST_A_USB3OTG0>;
-+		snps,dis_enblslpm_quirk;
-+		snps,dis-u1-entry-quirk;
-+		snps,dis-u2-entry-quirk;
-+		snps,dis-u2-freeclk-exists-quirk;
-+		snps,dis-del-phy-power-chg-quirk;
-+		snps,dis-tx-ipgap-linecheck-quirk;
++	mmu600_pcie: iommu@fc900000 {
++		compatible = "arm,smmu-v3";
++		reg = <0x0 0xfc900000 0x0 0x200000>;
++		interrupts = <GIC_SPI 369 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 371 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 374 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 367 IRQ_TYPE_LEVEL_HIGH 0>;
++		interrupt-names = "eventq", "gerror", "priq", "cmdq-sync";
++		#iommu-cells = <1>;
 +		status = "disabled";
 +	};
 +
- 	usb_host0_ehci: usb@fc800000 {
- 		compatible = "rockchip,rk3588-ehci", "generic-ehci";
- 		reg = <0x0 0xfc800000 0x0 0x40000>;
++	mmu600_php: iommu@fcb00000 {
++		compatible = "arm,smmu-v3";
++		reg = <0x0 0xfcb00000 0x0 0x200000>;
++		interrupts = <GIC_SPI 381 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 383 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 386 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 379 IRQ_TYPE_LEVEL_HIGH 0>;
++		interrupt-names = "eventq", "gerror", "priq", "cmdq-sync";
++		#iommu-cells = <1>;
++		status = "disabled";
++	};
++
+ 	pmu1grf: syscon@fd58a000 {
+ 		compatible = "rockchip,rk3588-pmugrf", "syscon", "simple-mfd";
+ 		reg = <0x0 0xfd58a000 0x0 0x10000>;
 -- 
 2.34.1
 
