@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C9C8C25B7C
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 14:44:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD269C25B78
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 14:44:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CB398852C;
-	Tue, 28 May 2024 16:43:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 090558855E;
+	Tue, 28 May 2024 16:43:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="VPZ6riqm";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="kMoh5KvX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC74188551; Tue, 28 May 2024 16:43:28 +0200 (CEST)
+ id B2C4588527; Tue, 28 May 2024 16:43:28 +0200 (CEST)
 Received: from smtp-relay-internal-0.canonical.com
  (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABCA488527
+ by phobos.denx.de (Postfix) with ESMTPS id A89DD88511
  for <u-boot@lists.denx.de>; Tue, 28 May 2024 16:43:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
@@ -31,51 +31,51 @@ Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id A457F3FE71
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id B94253FE74
  for <u-boot@lists.denx.de>; Tue, 28 May 2024 14:43:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
  s=20210705; t=1716907392;
- bh=Z+svJFno7rV/a1Uk9Yjll36iC+GPnWEK4XRLqRC0WWc=;
+ bh=Sv8DZRuOYkTNVYLtyUOTprroh1cnJaiNP+uqaV+JtVc=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=VPZ6riqmISCO4lZMQGgyhl67K4FrNSWUZn7dy7+wNd479Twk3ZcwjSk6cFRxTO9GD
- qIj/mOzCiNuxqO503B3aKVdPCg5yKdFQfoN0aCQcSkSckLO0MwpMRYUdDt0CQWTTnr
- 4fgaIlP4r14l8GjrV+qz+Oizs0NzfR9bNW1doEe/L8FQd9/XL1kBuiGVD2cDQ3QBHn
- 4V4ZfinTSRd4uZavdIcmfxUgydurd3+Nf7yorn9uWje02HD30Z9/9Qiu1J7JMCxy8d
- SkI/ocbeJNFgHnqV3TLxduCHcb20dpc+xYcBxQykTibnoSOKI09tcr6xU7XR7V/zAW
- HkSx5IJhWd1+Q==
+ b=kMoh5KvXPujuITIgdPN3mYrXh454wXW1sFmfKBIavSa0QKugTQNsZkDiWLCWFiWRJ
+ Eeb5nqD8H12JOFVBZ8o85wtnVYSSAMvXiyrLeUXG7R8o27LUz2lYh0BCyLc6NRTJwk
+ W+8YBXWfjpB9Ti2z1g/g6j5gSeI+K/SNBOO+fpHV/EVRiuUPSgRdtgJmEtJWtlrgHI
+ puZ9vrY+lJ3lWEV1fTDN8efGGRGdltwcY5VKAWY3q8/izTs3cY6cZrdCITRx++s/ya
+ xOYf1PUH9+HXh7gL+k7nmJdsdM7JiTdAqVzmbEDXgtGhGhaMX9DESIb9qpgRlLqjl6
+ lDDNjW6DbuiVA==
 Received: by mail-ed1-f69.google.com with SMTP id
- 4fb4d7f45d1cf-579e712c317so539957a12.2
+ 4fb4d7f45d1cf-57865139b7dso2867438a12.1
  for <u-boot@lists.denx.de>; Tue, 28 May 2024 07:43:12 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716907384; x=1717512184;
+ d=1e100.net; s=20230601; t=1716907387; x=1717512187;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Z+svJFno7rV/a1Uk9Yjll36iC+GPnWEK4XRLqRC0WWc=;
- b=hV6ZSDYTeCfCkjTMRb3QouvAhkNBnj5fHxhBK4/oLl6eP31YjTKkcrIaVxdifFw3NV
- ncuYgrna+ag5DRiwfRGrwVl/WceIqerX4XsNstWLCrmAIwrwZyh9oC1pZaph9wynWHuF
- F2HWK4xtLmrdJeHi2mcZg7AJ5MqlVYR41XPHy9vVLVHueWn+P903VKJ5d+puLSoKkp9U
- 6BMaX5WL2Cxo9jGtJDIZxl+/XexjwrEdvy230zrQtTrM8klntN3a+hIUw6IrLyW/nOeU
- cMSL2pTUbljNlA2rhvpZl0BIDpWUJjCNvSiceFHO03ir0XPJMasaxE4CVNSeNYkWDIf2
- J2Rw==
+ bh=Sv8DZRuOYkTNVYLtyUOTprroh1cnJaiNP+uqaV+JtVc=;
+ b=UeFFqCs6fgrJZe66VNPVYLbQB8C2EsXidEfvFphFnqlyugTMLYb8x3MF3R9Z+YIvsa
+ at1nT3eaUm5sGLLlmV1/15CuJE4rJEBQLjQj4IxaDML4UIeYQBBCep6kI5Z1U0KDwAk0
+ xqwiM/asKJw3129veC0uqBXCRAlNMh2fv6aQ+FAL0LDloBm8PSRFHBxXuo6ksN0Z9iKJ
+ KEgaSaDEoq1fW5yIzL/1LghFX8uMP6X1zFdjDIih63s5o7S8T3QpIfMkzhaff0KKeGKx
+ RsPUOqZAKOgOq1Lwoqp6pkLW106BSUJ9YvH4uKZfcS/JfhQMHZkBRtS/dny9/rJ1/1B1
+ Iplg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUYQyPtR+FmzKjA2ca2bH3B5O274/lJ6wLA+QG0emUmQ12aLRCqCyk5Q8Y8fMRyVCM9pJeDcU+GgKXWGvgE2OHtfBAYIA==
-X-Gm-Message-State: AOJu0Yw5neo14BHbpoLhtAAWOdH+Pt0Rw0TKcH4pN08RfWA+QabpbVyo
- aXiMuomIAnXUNHzvlDSy+m2kWIiNQwwangZopbgh4CBdvOrPJpSDAWSLfrhIceF3Q6yALuuEuc5
- 86p4EWKrYnenSmaZB9Q73VrVMhO+wV4PeDQ/CUW1KdEEiJrzHNCC6D13Lk1FhUnN8SX0=
-X-Received: by 2002:a50:d617:0:b0:578:6198:d6fa with SMTP id
- 4fb4d7f45d1cf-579c4905902mr5445334a12.2.1716907384176; 
- Tue, 28 May 2024 07:43:04 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHAa2hugTxJ12BDPZzaJwkff4ynbye9XXQV66szukQFnCA6uT4LVrN4OIrr9TCmQmXT0T2UNQ==
-X-Received: by 2002:a50:d617:0:b0:578:6198:d6fa with SMTP id
- 4fb4d7f45d1cf-579c4905902mr5445322a12.2.1716907383898; 
- Tue, 28 May 2024 07:43:03 -0700 (PDT)
+ AJvYcCX0rlEwWm2F4gePXJeelDL34mTZRp0WaLCrW5NCT9Yn/7L5NLNq67aARaCelc1A44RKWY+JmsQYV91x9MWJsNJnV8D80Q==
+X-Gm-Message-State: AOJu0YwGNew7NTtIESATWWD4TTWK/cUjvyqVyERkHLv3Oghc7hsTRVk8
+ BYNsuMUYmjzNCihedmsnRxYHCxRfKzZUF09il1fyoI70kEARRd0Ifb7KaMYwh66nKmeOwG/lct1
+ Dgv7KM+Th593EyLGjjJWb2/B66zkDzcbno7NtBZ7X+jBVpQGQ2CxQ5KepS001pzrbs0o=
+X-Received: by 2002:a50:9e2e:0:b0:579:fd26:2ece with SMTP id
+ 4fb4d7f45d1cf-579fd2630b2mr603303a12.13.1716907387079; 
+ Tue, 28 May 2024 07:43:07 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHQzXeXjjtZoL0MmaHoM8QFq94CpiW1/coTlNi0qkZlDnwxNI0Y5WiAGddGbe8KByqu5Wa14Q==
+X-Received: by 2002:a50:9e2e:0:b0:579:fd26:2ece with SMTP id
+ 4fb4d7f45d1cf-579fd2630b2mr603284a12.13.1716907386740; 
+ Tue, 28 May 2024 07:43:06 -0700 (PDT)
 Received: from workstation5.. ([2a00:20:d00b:f75d:fdbe:9c2a:66b:5f2b])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-578f47126f0sm4914986a12.91.2024.05.28.07.43.02
+ 4fb4d7f45d1cf-578f47126f0sm4914986a12.91.2024.05.28.07.43.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 May 2024 07:43:03 -0700 (PDT)
+ Tue, 28 May 2024 07:43:06 -0700 (PDT)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
@@ -85,9 +85,9 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Bin Meng <bmeng@tinylab.org>, Mark Kettenis <kettenis@openbsd.org>,
  Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 1/8] efi_loader: allow concatenation with contained end node
-Date: Tue, 28 May 2024 16:42:45 +0200
-Message-ID: <20240528144252.179247-2-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 3/8] cmd: efidebug: add support for setting fdt
+Date: Tue, 28 May 2024 16:42:47 +0200
+Message-ID: <20240528144252.179247-4-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240528144252.179247-1-heinrich.schuchardt@canonical.com>
 References: <20240528144252.179247-1-heinrich.schuchardt@canonical.com>
@@ -109,190 +109,281 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allow appending a device-path to a device-path that contains an end node
-as separator. We need this feature for creating boot options specifying
-kernel, initrd, and dtb.
+We already support creating a load option where the device-path
+field contains the concatenation of the binary device-path and
+optionally the device path of the initrd which we expose via the
+EFI_LOAD_FILE2_PROTOCOL.
+
+Allow to append another device-path pointing to the device-tree
+identified by the device-tree GUID.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
 v2:
-	update efi_dp_concat() instead of new function efi_dp_merge()
+	Rename create_initrd_dp() to create_lo_dp_part().
+	Use enum as parameter for create_lo_dp_part().
+	Use function efi_load_option_dp_join() to avoid code duplication.
 ---
- cmd/eficonfig.c                            |  6 +++---
- cmd/efidebug.c                             |  4 ++--
- include/efi_loader.h                       |  2 +-
- lib/efi_loader/efi_bootbin.c               |  2 +-
- lib/efi_loader/efi_bootmgr.c               |  2 +-
- lib/efi_loader/efi_boottime.c              |  2 +-
- lib/efi_loader/efi_device_path.c           | 20 +++++++++++++-------
- lib/efi_loader/efi_device_path_utilities.c |  2 +-
- 8 files changed, 23 insertions(+), 17 deletions(-)
+ cmd/efidebug.c | 130 +++++++++++++++++++++++++++++++++++--------------
+ 1 file changed, 93 insertions(+), 37 deletions(-)
 
-diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
-index 0ba92c60e03..b13d9a3d2d9 100644
---- a/cmd/eficonfig.c
-+++ b/cmd/eficonfig.c
-@@ -531,7 +531,7 @@ struct efi_device_path *eficonfig_create_device_path(struct efi_device_path *dp_
- 	dp = efi_dp_shorten(dp_volume);
- 	if (!dp)
- 		dp = dp_volume;
--	dp = efi_dp_concat(dp, &fp->dp, false);
-+	dp = efi_dp_concat(dp, &fp->dp, 0);
- 	free(buf);
- 
- 	return dp;
-@@ -1485,7 +1485,7 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
- 			goto out;
- 		}
- 		initrd_dp = efi_dp_concat((const struct efi_device_path *)&id_dp,
--					  dp, false);
-+					  dp, 0);
- 		efi_free_pool(dp);
- 	}
- 
-@@ -1496,7 +1496,7 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
- 	}
- 	final_dp_size = efi_dp_size(dp) + sizeof(END);
- 	if (initrd_dp) {
--		final_dp = efi_dp_concat(dp, initrd_dp, true);
-+		final_dp = efi_dp_concat(dp, initrd_dp, 1);
- 		final_dp_size += efi_dp_size(initrd_dp) + sizeof(END);
- 	} else {
- 		final_dp = efi_dp_dup(dp);
 diff --git a/cmd/efidebug.c b/cmd/efidebug.c
-index c2c525f2351..762027daf8a 100644
+index 762027daf8a..966b4b83361 100644
 --- a/cmd/efidebug.c
 +++ b/cmd/efidebug.c
-@@ -697,7 +697,7 @@ struct efi_device_path *create_initrd_dp(const char *dev, const char *part,
+@@ -654,38 +654,80 @@ static int do_efi_show_tables(struct cmd_tbl *cmdtp, int flag,
+ }
+ 
+ /**
+- * create_initrd_dp() - create a special device for our Boot### option
++ * enum efi_lo_dp_part - part of device path in load option
++ */
++enum efi_lo_dp_part {
++	/** @EFI_LO_DP_PART_BINARY: binary */
++	EFI_LO_DP_PART_BINARY,
++	/** @EFI_LO_DP_PART_INITRD: initial RAM disk */
++	EFI_LO_DP_PART_INITRD,
++	/** EFI_LP_DP_PART_FDT: device-tree */
++	EFI_LP_DP_PART_FDT,
++};
++
++/**
++ * create_lo_dp() - create a special device path for our Boot### option
+  *
+  * @dev:	device
+  * @part:	disk partition
+  * @file:	filename
+  * @shortform:	create short form device path
++ * @type:	part of device path to be created
+  * Return:	pointer to the device path or ERR_PTR
+  */
+ static
+-struct efi_device_path *create_initrd_dp(const char *dev, const char *part,
+-					 const char *file, int shortform)
++struct efi_device_path *create_lo_dp_part(const char *dev, const char *part,
++					  const char *file, bool shortform,
++					  enum efi_lo_dp_part type)
+ 
+ {
+ 	struct efi_device_path *tmp_dp = NULL, *tmp_fp = NULL, *short_fp = NULL;
+-	struct efi_device_path *initrd_dp = NULL;
++	struct efi_device_path *dp = NULL;
++	const struct efi_device_path *dp_prefix;
+ 	efi_status_t ret;
+-	const struct efi_initrd_dp id_dp = {
++	const struct efi_initrd_dp fdt_dp = {
++		.vendor = {
++			{
++			DEVICE_PATH_TYPE_MEDIA_DEVICE,
++			DEVICE_PATH_SUB_TYPE_VENDOR_PATH,
++			sizeof(fdt_dp.vendor),
++			},
++			EFI_FDT_GUID,
++		},
++		.end = {
++			DEVICE_PATH_TYPE_END,
++			DEVICE_PATH_SUB_TYPE_END,
++			sizeof(fdt_dp.end),
++		}
++	};
++	const struct efi_initrd_dp initrd_dp = {
+ 		.vendor = {
+ 			{
+ 			DEVICE_PATH_TYPE_MEDIA_DEVICE,
+ 			DEVICE_PATH_SUB_TYPE_VENDOR_PATH,
+-			sizeof(id_dp.vendor),
++			sizeof(initrd_dp.vendor),
+ 			},
+ 			EFI_INITRD_MEDIA_GUID,
+ 		},
+ 		.end = {
+ 			DEVICE_PATH_TYPE_END,
+ 			DEVICE_PATH_SUB_TYPE_END,
+-			sizeof(id_dp.end),
++			sizeof(initrd_dp.end),
+ 		}
+ 	};
+ 
++	switch (type) {
++	case EFI_LO_DP_PART_INITRD:
++		dp_prefix = &initrd_dp.vendor.dp;
++		break;
++	case EFI_LP_DP_PART_FDT:
++		dp_prefix = &fdt_dp.vendor.dp;
++		break;
++	default:
++		dp_prefix = NULL;
++		break;
++	}
++
+ 	ret = efi_dp_from_name(dev, part, file, &tmp_dp, &tmp_fp);
+ 	if (ret != EFI_SUCCESS) {
+ 		printf("Cannot create device path for \"%s %s\"\n", part, file);
+@@ -696,13 +739,12 @@ struct efi_device_path *create_initrd_dp(const char *dev, const char *part,
+ 	if (!short_fp)
  		short_fp = tmp_fp;
  
- 	initrd_dp = efi_dp_concat((const struct efi_device_path *)&id_dp,
--				  short_fp, false);
-+				  short_fp, 0);
+-	initrd_dp = efi_dp_concat((const struct efi_device_path *)&id_dp,
+-				  short_fp, 0);
++	dp = efi_dp_concat(dp_prefix, short_fp, 0);
  
  out:
  	efi_free_pool(tmp_dp);
-@@ -917,7 +917,7 @@ static int do_efi_boot_add(struct cmd_tbl *cmdtp, int flag,
+ 	efi_free_pool(tmp_fp);
+-	return initrd_dp;
++	return dp;
+ }
+ 
+ /**
+@@ -793,9 +835,8 @@ static int do_efi_boot_add(struct cmd_tbl *cmdtp, int flag,
+ 	efi_guid_t guid;
+ 	u16 *label;
+ 	struct efi_device_path *file_path = NULL;
+-	struct efi_device_path *fp_free = NULL;
+-	struct efi_device_path *final_fp = NULL;
+ 	struct efi_device_path *initrd_dp = NULL;
++	struct efi_device_path *fdt_dp = NULL;
+ 	struct efi_load_option lo;
+ 	void *data = NULL;
+ 	efi_uintn_t size;
+@@ -843,22 +884,31 @@ static int do_efi_boot_add(struct cmd_tbl *cmdtp, int flag,
+ 			lo.label = label; /* label will be changed below */
+ 
+ 			/* file path */
+-			ret = efi_dp_from_name(argv[3], argv[4], argv[5],
+-					       NULL, &fp_free);
+-			if (ret != EFI_SUCCESS) {
+-				printf("Cannot create device path for \"%s %s\"\n",
+-				       argv[3], argv[4]);
++			file_path = create_lo_dp_part(argv[3], argv[4], argv[5],
++						      shortform,
++						      EFI_LO_DP_PART_BINARY);
++			argc -= 5;
++			argv += 5;
++			break;
++		case 'd':
++			shortform = 1;
++			fallthrough;
++		case 'D':
++			if (argc < 3 || fdt_dp) {
++				r = CMD_RET_USAGE;
++				goto out;
++			}
++
++			fdt_dp = create_lo_dp_part(argv[1], argv[2], argv[3],
++						   shortform,
++						   EFI_LP_DP_PART_FDT);
++			if (!fdt_dp) {
++				printf("Cannot add a device-tree\n");
+ 				r = CMD_RET_FAILURE;
+ 				goto out;
+ 			}
+-			if (shortform)
+-				file_path = efi_dp_shorten(fp_free);
+-			if (!file_path)
+-				file_path = fp_free;
+-			fp_size += efi_dp_size(file_path) +
+-				sizeof(struct efi_device_path);
+-			argc -= 5;
+-			argv += 5;
++			argc -= 3;
++			argv += 3;
+ 			break;
+ 		case 'i':
+ 			shortform = 1;
+@@ -869,8 +919,9 @@ static int do_efi_boot_add(struct cmd_tbl *cmdtp, int flag,
+ 				goto out;
+ 			}
+ 
+-			initrd_dp = create_initrd_dp(argv[1], argv[2], argv[3],
+-						     shortform);
++			initrd_dp = create_lo_dp_part(argv[1], argv[2], argv[3],
++						      shortform,
++						      EFI_LO_DP_PART_INITRD);
+ 			if (!initrd_dp) {
+ 				printf("Cannot add an initrd\n");
+ 				r = CMD_RET_FAILURE;
+@@ -878,8 +929,6 @@ static int do_efi_boot_add(struct cmd_tbl *cmdtp, int flag,
+ 			}
+ 			argc -= 3;
+ 			argv += 3;
+-			fp_size += efi_dp_size(initrd_dp) +
+-				sizeof(struct efi_device_path);
+ 			break;
+ 		case 's':
+ 			if (argc < 1 || lo.optional_data) {
+@@ -897,7 +946,6 @@ static int do_efi_boot_add(struct cmd_tbl *cmdtp, int flag,
+ 						     &file_path, &fp_size);
+ 				if (r != CMD_RET_SUCCESS)
+ 					goto out;
+-				fp_free = file_path;
+ 				argc -= 3;
+ 				argv += 3;
+ 			} else{
+@@ -917,14 +965,14 @@ static int do_efi_boot_add(struct cmd_tbl *cmdtp, int flag,
  		goto out;
  	}
  
--	final_fp = efi_dp_concat(file_path, initrd_dp, true);
-+	final_fp = efi_dp_concat(file_path, initrd_dp, 1);
- 	if (!final_fp) {
+-	final_fp = efi_dp_concat(file_path, initrd_dp, 1);
+-	if (!final_fp) {
++	ret = efi_load_option_dp_join(&file_path, &fp_size, initrd_dp, fdt_dp);
++	if (ret != EFI_SUCCESS) {
  		printf("Cannot create final device path\n");
  		r = CMD_RET_FAILURE;
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 9600941aa32..ddf2e41a95c 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -946,7 +946,7 @@ struct efi_device_path *efi_dp_from_lo(struct efi_load_option *lo,
- 				       const efi_guid_t *guid);
- struct efi_device_path *efi_dp_concat(const struct efi_device_path *dp1,
- 				      const struct efi_device_path *dp2,
--				      bool split_end_node);
-+				      size_t split_end_node);
- struct efi_device_path *search_gpt_dp_node(struct efi_device_path *device_path);
- efi_status_t efi_deserialize_load_option(struct efi_load_option *lo, u8 *data,
- 					 efi_uintn_t *size);
-diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-index b7910f78fb6..a87006b3c0e 100644
---- a/lib/efi_loader/efi_bootbin.c
-+++ b/lib/efi_loader/efi_bootbin.c
-@@ -150,7 +150,7 @@ efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size)
- 		msg_path = file_path;
- 	} else {
- 		file_path = efi_dp_concat(bootefi_device_path,
--					  bootefi_image_path, false);
-+					  bootefi_image_path, 0);
- 		msg_path = bootefi_image_path;
- 		log_debug("Loaded from disk\n");
+ 		goto out;
  	}
-diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index 7da3139f917..b0bf21cf841 100644
---- a/lib/efi_loader/efi_bootmgr.c
-+++ b/lib/efi_loader/efi_bootmgr.c
-@@ -130,7 +130,7 @@ static efi_status_t try_load_from_file_path(efi_handle_t *fs_handles,
- 		if (!dp)
- 			continue;
  
--		dp = efi_dp_concat(dp, fp, false);
-+		dp = efi_dp_concat(dp, fp, 0);
- 		if (!dp)
- 			continue;
+-	lo.file_path = final_fp;
++	lo.file_path = file_path;
+ 	lo.file_path_length = fp_size;
  
-diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
-index 1951291747c..630c5f52c4f 100644
---- a/lib/efi_loader/efi_boottime.c
-+++ b/lib/efi_loader/efi_boottime.c
-@@ -1816,7 +1816,7 @@ efi_status_t efi_setup_loaded_image(struct efi_device_path *device_path,
- 	if (device_path) {
- 		info->device_handle = efi_dp_find_obj(device_path, NULL, NULL);
+ 	size = efi_serialize_load_option(&lo, (u8 **)&data);
+@@ -945,9 +993,9 @@ static int do_efi_boot_add(struct cmd_tbl *cmdtp, int flag,
  
--		dp = efi_dp_concat(device_path, file_path, false);
-+		dp = efi_dp_concat(device_path, file_path, 0);
- 		if (!dp) {
- 			ret = EFI_OUT_OF_RESOURCES;
- 			goto failure;
-diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
-index aec224d8466..c8c8d54f733 100644
---- a/lib/efi_loader/efi_device_path.c
-+++ b/lib/efi_loader/efi_device_path.c
-@@ -276,10 +276,11 @@ struct efi_device_path *efi_dp_dup(const struct efi_device_path *dp)
-  *
-  * @dp1:	    First device path
-  * @dp2:	    Second device path
-- * @split_end_node: If true the two device paths will be concatenated and
-- *                  separated by an end node (DEVICE_PATH_SUB_TYPE_END).
-- *		    If false the second device path will be concatenated to the
-- *		    first one as-is.
-+ * @split_end_node:
-+ * * 0 to concatenate
-+ * * 1 to concatenate with end node added as separator
-+ * * size of dp1 excluding last end node to concatenate with end node as
-+ *   separator in case dp1 contains an end node
-  *
-  * Return:
-  * concatenated device path or NULL. Caller must free the returned value
-@@ -287,7 +288,7 @@ struct efi_device_path *efi_dp_dup(const struct efi_device_path *dp)
- struct
- efi_device_path *efi_dp_concat(const struct efi_device_path *dp1,
- 			       const struct efi_device_path *dp2,
--			       bool split_end_node)
-+			       size_t split_end_node)
+ out:
+ 	free(data);
+-	efi_free_pool(final_fp);
+ 	efi_free_pool(initrd_dp);
+-	efi_free_pool(fp_free);
++	efi_free_pool(fdt_dp);
++	efi_free_pool(file_path);
+ 	free(lo.label);
+ 
+ 	return r;
+@@ -1009,7 +1057,8 @@ static int do_efi_boot_rm(struct cmd_tbl *cmdtp, int flag,
+  */
+ static void show_efi_boot_opt_data(u16 *varname16, void *data, size_t *size)
  {
- 	struct efi_device_path *ret;
- 	size_t end_size;
-@@ -301,10 +302,15 @@ efi_device_path *efi_dp_concat(const struct efi_device_path *dp1,
- 		ret = efi_dp_dup(dp1);
- 	} else {
- 		/* both dp1 and dp2 are non-null */
--		unsigned sz1 = efi_dp_size(dp1);
--		unsigned sz2 = efi_dp_size(dp2);
-+		size_t sz1;
-+		size_t sz2 = efi_dp_size(dp2);
- 		void *p;
+-	struct efi_device_path *initrd_path = NULL;
++	struct efi_device_path *fdt_path;
++	struct efi_device_path *initrd_path;
+ 	struct efi_load_option lo;
+ 	efi_status_t ret;
  
-+		if (split_end_node < sizeof(struct efi_device_path))
-+			sz1 = efi_dp_size(dp1);
-+		else
-+			sz1 = split_end_node;
+@@ -1038,6 +1087,12 @@ static void show_efi_boot_opt_data(u16 *varname16, void *data, size_t *size)
+ 		efi_free_pool(initrd_path);
+ 	}
+ 
++	fdt_path = efi_dp_from_lo(&lo, &efi_guid_fdt);
++	if (fdt_path) {
++		printf("  device-tree path: %pD\n", fdt_path);
++		efi_free_pool(fdt_path);
++	}
 +
- 		if (split_end_node)
- 			end_size = 2 * sizeof(END);
- 		else
-diff --git a/lib/efi_loader/efi_device_path_utilities.c b/lib/efi_loader/efi_device_path_utilities.c
-index c95dbfa9b5f..ac250bbfcc9 100644
---- a/lib/efi_loader/efi_device_path_utilities.c
-+++ b/lib/efi_loader/efi_device_path_utilities.c
-@@ -76,7 +76,7 @@ static struct efi_device_path * EFIAPI append_device_path(
- 	const struct efi_device_path *src2)
- {
- 	EFI_ENTRY("%pD, %pD", src1, src2);
--	return EFI_EXIT(efi_dp_concat(src1, src2, false));
-+	return EFI_EXIT(efi_dp_concat(src1, src2, 0));
- }
- 
- /*
+ 	printf("  data:\n");
+ 	print_hex_dump("    ", DUMP_PREFIX_OFFSET, 16, 1,
+ 		       lo.optional_data, *size, true);
+@@ -1565,8 +1620,9 @@ U_BOOT_LONGHELP(efidebug,
+ 	"\n"
+ 	"efidebug boot add - set UEFI BootXXXX variable\n"
+ 	"  -b|-B <bootid> <label> <interface> <devnum>[:<part>] <file path>\n"
++	"  -d|-D <interface> <devnum>[:<part>] <device-tree file path>\n"
+ 	"  -i|-I <interface> <devnum>[:<part>] <initrd file path>\n"
+-	"  (-b, -i for short form device path)\n"
++	"  (-b, -d, -i for short form device path)\n"
+ #if (IS_ENABLED(CONFIG_EFI_HTTP_BOOT))
+ 	"  -u <bootid> <label> <uri>\n"
+ #endif
 -- 
 2.43.0
 
