@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A617C25B7C
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 14:11:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 172E6C25B7C
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 14:12:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D305884C8;
-	Tue, 28 May 2024 16:11:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 93A45884FC;
+	Tue, 28 May 2024 16:12:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="r+/1Afp+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NoS53RKq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64082884EF; Tue, 28 May 2024 16:11:41 +0200 (CEST)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
+ id A223B88507; Tue, 28 May 2024 16:12:06 +0200 (CEST)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D1D887D70
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 16:11:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AF37087D70
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 16:12:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-79305314956so64457085a.3
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 07:11:39 -0700 (PDT)
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-79305314956so64506385a.3
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 07:12:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716905498; x=1717510298; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1716905521; x=1717510321; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nxhaA6lR0BhMLSj/nBxoiLf8pbp5N0odf9jomF0F48A=;
- b=r+/1Afp+Zl8pdGRYmPq8jFuPKJSLiLO8TNWZS7/QKzVmulkkXw7HHmrhzbiQOWRhOm
- KrT+fJVVmc3q/tO/Vh/blyJHSqgf2WBRlIqh0Aa6RF+Yeo+YpGLzQIl661+48zTWlkMP
- pveJKDankiQqTMCtZnc0jyhUC5YH0CImINXY5TdlbkxXitxtiKZeqfO8Ofl4/6TOIMuT
- Nsw7YH/QflqcksY8LMlXK9zGfuG15bI4Zrd3Licnvh9wJot0UaAxNQTkILAEV9Z2hC9o
- L5NUM6PrQPcFAaarjGXy5e2FpiU3jcpbZKl0ddM5BwYAmUdDzrRYcNQoRIispQ9kX4dR
- fuxw==
+ bh=Qw3TLJbcSAsyJPIevwW8NWsuLme8RxOkU0dw+aOO6BU=;
+ b=NoS53RKqpBB00fsQcBffUeQ63nrbGXH8gaDgcaskX9YqTUMrt9LTOjZlR52DrVqZLV
+ ic7pRyBLlvFmTnbWFSNWWuUaZfq6gkmi3gSfHNfgFpcjx6/YXltaZiXyCujMko+Oo8ll
+ vQQoMjWNXqJsMHHVsvkvVYmo0B4P7S5Tu7d/1Oqe11n44AlUsRfJLUaqCoFMdxDMui1s
+ KbexR+bIZs3BcF3LYP9MaG1pFML6nDkKoVckaGV+tjPqhjNx/S4zMiVCzxQiutC8sJA6
+ RaUaqzmlf0ViHdTfb0Opqyv/NgQZ1FcaZQ574DLfTeFkZqAhs9la9MNphNLC72ckjkp7
+ yCqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716905498; x=1717510298;
+ d=1e100.net; s=20230601; t=1716905521; x=1717510321;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=nxhaA6lR0BhMLSj/nBxoiLf8pbp5N0odf9jomF0F48A=;
- b=fq0mSX0C9QY8KR6uYZ74SYzgtmgbioUWVaNHriAJKNGTECkQ6kONHVFH8upobzyxXU
- 9aMxs9EZO9guewxBmP/YtNr7Wnj564iylQWtiCjCrs5FHbJKDRHvK0rs3g+ub6R6bjsB
- K61avDba40ivhKdqBerWn8gaA5RVEZlTFUO0w00BsdSgZfa6NKps7LPvVos693HUjXNP
- Ac1IaKyNr3VJTW8fDQqkY57+TdVPZy6ecjtbvxGsg+9VcFfDPk2dlZzEA3aJyAqLBBEy
- wKSDPN5dflSMDKRQ2N80n55S9zK/JWjNlrAupYj2PU9fZuNOhsjeuuCgzl0XWffRn8FA
- nodw==
-X-Gm-Message-State: AOJu0YzaRxqq/VQIkizECmzYk3+I8Har2PJ4Tsn/edse6UFKd/aAz7U8
- zhMpQjc8Fz3xJgq3e8xUWs43syuxs6NxOuj75C/gOkyXsqgMF6c4d2BwhZV9sfFZi5U6gyiAxBC
- l5dk=
-X-Google-Smtp-Source: AGHT+IEEbHqe8WAE1B/f/V3PfxwDBOfK1QuaiajWiX7cPSg+OQMfamFTQeKRn3fIALzOHLECKuRG8Q==
-X-Received: by 2002:a05:620a:d4c:b0:794:afb0:6bcb with SMTP id
- af79cd13be357-794afb06bf0mr1036231385a.42.1716905497750; 
- Tue, 28 May 2024 07:11:37 -0700 (PDT)
+ bh=Qw3TLJbcSAsyJPIevwW8NWsuLme8RxOkU0dw+aOO6BU=;
+ b=PklVr4HNI4lBn5aW8WuH7QflQ7UbGBiObzIkiWELgTX+ckS7lnnCP6+DDNvJwR5BlK
+ QYMMmAJusi5rgoIvPBAHqEyGkxlbtSxCSI1Nx5jUDRLD0YAy04gpsX25Jet1YiQSHDYH
+ UtX9R+gVp7fERV6ZvgsCktr3LCdS9b8713bPQ5ll8A7163IbsLxBpPJrLf1Ho8FUU3pF
+ Auhcyf4kQBQbC+7F1UUa9yE65uzTFTP0PJDkPcutY+jIeeMv9TrCbk645zGYDy+kTWY7
+ UqegJdMLb7+NKlCUJFjF1mIOLJ1u/xAlN/kPBKsWKzsCZ8rbKG7ZihnWLXVtuwQluKdm
+ lMSA==
+X-Gm-Message-State: AOJu0YyEPvpvIGlre01NMFRSokqhlUFylOkXZFFgBzI0IoD96WCFIeyn
+ YML0E/kg72fEjKIdEL2/A7lOsivp5ig3h62Cmwrk+VIdAKQT8wC5bqU1FLyQmtWtfI6vcsx2pz9
+ je6s=
+X-Google-Smtp-Source: AGHT+IEZDKkzBRnbsUB4p2Q8f63d+W/9xXnBPVNyWGWiuDEZbtvb+VgDamwoWTkksdJojkw18qQBMg==
+X-Received: by 2002:a05:620a:2f8:b0:78d:6e0a:3d67 with SMTP id
+ af79cd13be357-794ab09dcffmr1288061185a.44.1716905521170; 
+ Tue, 28 May 2024 07:12:01 -0700 (PDT)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-794abcc5844sm381033685a.53.2024.05.28.07.11.35
+ af79cd13be357-794abcc5844sm381033685a.53.2024.05.28.07.11.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 May 2024 07:11:37 -0700 (PDT)
+ Tue, 28 May 2024 07:12:00 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
@@ -73,26 +73,24 @@ Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  Michal Simek <michal.simek@amd.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sean Anderson <seanga2@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
  "Leon M. Busch-George" <leon@georgemail.eu>,
- Igor Opaniuk <igor.opaniuk@gmail.com>, Ilya Lukin <4.shket@gmail.com>,
+ Ilya Lukin <4.shket@gmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
  Sergei Antonov <saproj@gmail.com>, Bin Meng <bmeng@tinylab.org>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Alexander Gendin <agendin@matrox.com>,
- =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
- Eddie James <eajames@linux.ibm.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Alexander Gendin <agendin@matrox.com>, Eddie James <eajames@linux.ibm.com>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: [PATCH v3 04/25] lib: Adapt digest header files to MbedTLS
-Date: Tue, 28 May 2024 07:09:15 -0700
-Message-Id: <20240528140955.1960172-5-raymond.mao@linaro.org>
+Subject: [PATCH v3 05/25] md5: Remove md5 non-watchdog API
+Date: Tue, 28 May 2024 07:09:16 -0700
+Message-Id: <20240528140955.1960172-6-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240528140955.1960172-1-raymond.mao@linaro.org>
 References: <20240528140955.1960172-1-raymond.mao@linaro.org>
@@ -114,235 +112,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adapt digest header files to support both original libs and MbedTLS
-by switching on/off MBEDTLS_LIB_CRYPTO
-
-FIXME:
-`IS_ENABLED` or `CONFIG_IS_ENABLED` is not applicable here, since
-including <linux/kconfig.h> causes undefined reference on schedule()
-with sandbox build.
-As <linux/kconfig.h> includes <generated/autoconf.h> which enables
-`CONFIG_HW_WATCHDOG` and `CONFIG_WATCHDOG` but no schedule() are
-defined in sandbox build.
-`#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)` is a workaround.
+We don't need an API specially for non-watchdog since md5_wd supports
+it by enabling CONFIG_HW_WATCHDOG or CONFIG_WATCHDOG.
+Set 0x10000 as default chunk size for MD5.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
-Changes in v2
-- Initial patch.
 Changes in v3
-- Remove the changes that were done in previous clean-up patch set.
+- Initial patch.
 
- include/u-boot/md5.h    |  7 +++++++
- include/u-boot/sha1.h   | 21 ++++++++++++++++++++-
- include/u-boot/sha256.h | 20 ++++++++++++++++++++
- include/u-boot/sha512.h | 22 +++++++++++++++++++---
- lib/Makefile            |  6 +++++-
- 5 files changed, 71 insertions(+), 5 deletions(-)
+ board/friendlyarm/nanopi2/board.c |  3 ++-
+ board/intel/edison/edison.c       |  3 ++-
+ board/xilinx/zynq/bootimg.c       |  2 +-
+ include/u-boot/md5.h              |  7 +------
+ lib/md5.c                         | 15 ---------------
+ 5 files changed, 6 insertions(+), 24 deletions(-)
 
+diff --git a/board/friendlyarm/nanopi2/board.c b/board/friendlyarm/nanopi2/board.c
+index 393c5a447d6..f203499f544 100644
+--- a/board/friendlyarm/nanopi2/board.c
++++ b/board/friendlyarm/nanopi2/board.c
+@@ -264,7 +264,8 @@ static void make_ether_addr(u8 *addr)
+ 	hash[6] = readl(PHY_BASEADDR_ECID + 0x08);
+ 	hash[7] = readl(PHY_BASEADDR_ECID + 0x0c);
+ 
+-	md5((unsigned char *)&hash[4], 64, (unsigned char *)hash);
++	md5_wd((unsigned char *)&hash[4], 64, (unsigned char *)hash,
++	       MD5_DEF_CHUNK_SZ);
+ 
+ 	hash[0] ^= hash[2];
+ 	hash[1] ^= hash[3];
+diff --git a/board/intel/edison/edison.c b/board/intel/edison/edison.c
+index 11e7f74e47c..1583d11c74d 100644
+--- a/board/intel/edison/edison.c
++++ b/board/intel/edison/edison.c
+@@ -33,7 +33,8 @@ static void assign_serial(void)
+ 	if (!mmc)
+ 		return;
+ 
+-	md5((unsigned char *)mmc->cid, sizeof(mmc->cid), ssn);
++	md5_wd((unsigned char *)mmc->cid, sizeof(mmc->cid), ssn,
++	       MD5_DEF_CHUNK_SZ);
+ 
+ 	snprintf(usb0addr, sizeof(usb0addr), "02:00:86:%02x:%02x:%02x",
+ 		 ssn[13], ssn[14], ssn[15]);
+diff --git a/board/xilinx/zynq/bootimg.c b/board/xilinx/zynq/bootimg.c
+index 2f55078dd76..4b2245c0618 100644
+--- a/board/xilinx/zynq/bootimg.c
++++ b/board/xilinx/zynq/bootimg.c
+@@ -136,7 +136,7 @@ int zynq_validate_partition(u32 start_addr, u32 len, u32 chksum_off)
+ 
+ 	memcpy(&checksum[0], (u32 *)chksum_off, MD5_CHECKSUM_SIZE);
+ 
+-	md5_wd((u8 *)start_addr, len, &calchecksum[0], 0x10000);
++	md5_wd((u8 *)start_addr, len, &calchecksum[0], MD5_DEF_CHUNK_SZ);
+ 
+ 	if (!memcmp(checksum, calchecksum, MD5_CHECKSUM_SIZE))
+ 		return 0;
 diff --git a/include/u-boot/md5.h b/include/u-boot/md5.h
-index c465925ea8d..3cfd33a8e56 100644
+index 3cfd33a8e56..3cb87328175 100644
 --- a/include/u-boot/md5.h
 +++ b/include/u-boot/md5.h
-@@ -6,10 +6,16 @@
- #ifndef _MD5_H
- #define _MD5_H
- 
-+#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
-+#include <external/mbedtls/include/mbedtls/md5.h>
-+#endif
+@@ -12,6 +12,7 @@
  #include "compiler.h"
  
  #define MD5_SUM_LEN	16
++#define MD5_DEF_CHUNK_SZ 0x10000
  
-+#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
-+typedef mbedtls_md5_context MD5Context;
-+#else
- typedef struct MD5Context {
- 	__u32 buf[4];
- 	__u32 bits[2];
-@@ -18,6 +24,7 @@ typedef struct MD5Context {
- 		__u32 in32[16];
- 	};
- } MD5Context;
-+#endif
- 
- void MD5Init(MD5Context *ctx);
+ #if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
+ typedef mbedtls_md5_context MD5Context;
+@@ -30,12 +31,6 @@ void MD5Init(MD5Context *ctx);
  void MD5Update(MD5Context *ctx, unsigned char const *buf, unsigned int len);
-diff --git a/include/u-boot/sha1.h b/include/u-boot/sha1.h
-index 09fee594d26..ee46fe947a0 100644
---- a/include/u-boot/sha1.h
-+++ b/include/u-boot/sha1.h
-@@ -14,6 +14,21 @@
- #ifndef _SHA1_H
- #define _SHA1_H
+ void MD5Final(unsigned char digest[16], MD5Context *ctx);
  
-+#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
-+/*
-+ * FIXME:
-+ * MbedTLS define the members of "mbedtls_sha256_context" as private,
-+ * but "state" needs to be access by arch/arm/cpu/armv8/sha1_ce_glue.
-+ * MBEDTLS_ALLOW_PRIVATE_ACCESS needs to be enabled to allow the external
-+ * access.
-+ * Directly including <external/mbedtls/library/common.h> is not allowed,
-+ * since this will include <malloc.h> and break the sandbox test.
-+ */
-+#define MBEDTLS_ALLOW_PRIVATE_ACCESS
-+
-+#include <external/mbedtls/include/mbedtls/sha1.h>
-+#endif
-+
- #ifdef __cplusplus
- extern "C" {
- #endif
-@@ -24,6 +39,9 @@ extern "C" {
- 
- extern const uint8_t sha1_der_prefix[];
- 
-+#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
-+typedef mbedtls_sha1_context sha1_context;
-+#else
- /**
-  * \brief	   SHA-1 context structure
-  */
-@@ -34,13 +52,14 @@ typedef struct
-     unsigned char buffer[64];	/*!< data block being processed */
+-/*
+- * Calculate and store in 'output' the MD5 digest of 'len' bytes at
+- * 'input'. 'output' must have enough space to hold 16 bytes.
+- */
+-void md5 (unsigned char *input, int len, unsigned char output[16]);
+-
+ /*
+  * Calculate and store in 'output' the MD5 digest of 'len' bytes at 'input'.
+  * 'output' must have enough space to hold 16 bytes. If 'chunk' Trigger the
+diff --git a/lib/md5.c b/lib/md5.c
+index 34343cf8e23..2d8977b2e85 100644
+--- a/lib/md5.c
++++ b/lib/md5.c
+@@ -262,21 +262,6 @@ MD5Transform(__u32 buf[4], __u32 const in[16])
+ 	buf[3] += d;
  }
- sha1_context;
-+#endif
  
- /**
-  * \brief	   SHA-1 context setup
-  *
-  * \param ctx	   SHA-1 context to be initialized
-  */
--void sha1_starts( sha1_context *ctx );
-+void sha1_starts(sha1_context *ctx);
- 
- /**
-  * \brief	   SHA-1 process buffer
-diff --git a/include/u-boot/sha256.h b/include/u-boot/sha256.h
-index 9aa1251789a..e2b7fdd41c8 100644
---- a/include/u-boot/sha256.h
-+++ b/include/u-boot/sha256.h
-@@ -1,6 +1,22 @@
- #ifndef _SHA256_H
- #define _SHA256_H
- 
-+#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
-+/*
-+ * FIXME:
-+ * MbedTLS define the members of "mbedtls_sha256_context" as private,
-+ * but "state" needs to be access by arch/arm/cpu/armv8/sha256_ce_glue.
-+ * MBEDTLS_ALLOW_PRIVATE_ACCESS needs to be enabled to allow the external
-+ * access.
-+ * Directly including <external/mbedtls/library/common.h> is not allowed,
-+ * since this will include <malloc.h> and break the sandbox test.
-+ */
-+#define MBEDTLS_ALLOW_PRIVATE_ACCESS
-+
-+#include <external/mbedtls/include/mbedtls/sha256.h>
-+#endif
-+
-+#define SHA224_SUM_LEN	28
- #define SHA256_SUM_LEN	32
- #define SHA256_DER_LEN	19
- 
-@@ -9,11 +25,15 @@ extern const uint8_t sha256_der_prefix[];
- /* Reset watchdog each time we process this many bytes */
- #define CHUNKSZ_SHA256	(64 * 1024)
- 
-+#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
-+typedef mbedtls_sha256_context sha256_context;
-+#else
- typedef struct {
- 	uint32_t total[2];
- 	uint32_t state[8];
- 	uint8_t buffer[64];
- } sha256_context;
-+#endif
- 
- void sha256_starts(sha256_context * ctx);
- void sha256_update(sha256_context *ctx, const uint8_t *input, uint32_t length);
-diff --git a/include/u-boot/sha512.h b/include/u-boot/sha512.h
-index 516729d7750..a0c0de89d60 100644
---- a/include/u-boot/sha512.h
-+++ b/include/u-boot/sha512.h
-@@ -1,6 +1,10 @@
- #ifndef _SHA512_H
- #define _SHA512_H
- 
-+#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
-+#include <external/mbedtls/include/mbedtls/sha512.h>
-+#endif
-+
- #define SHA384_SUM_LEN          48
- #define SHA384_DER_LEN          19
- #define SHA512_SUM_LEN          64
-@@ -10,11 +14,16 @@
- #define CHUNKSZ_SHA384	(16 * 1024)
- #define CHUNKSZ_SHA512	(16 * 1024)
- 
-+#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
-+typedef mbedtls_sha512_context sha384_context;
-+typedef mbedtls_sha512_context sha512_context;
-+#else
- typedef struct {
- 	uint64_t state[SHA512_SUM_LEN / 8];
- 	uint64_t count[2];
- 	uint8_t buf[SHA512_BLOCK_SIZE];
- } sha512_context;
-+#endif
- 
- extern const uint8_t sha512_der_prefix[];
- 
-@@ -27,12 +36,19 @@ void sha512_csum_wd(const unsigned char *input, unsigned int ilen,
- 
- extern const uint8_t sha384_der_prefix[];
- 
-+#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
-+void sha384_starts(sha512_context *ctx);
-+void
-+sha384_update(sha512_context *ctx, const uint8_t *input, uint32_t length);
-+void sha384_finish(sha512_context *ctx, uint8_t digest[SHA384_SUM_LEN]);
-+void sha384_csum_wd(const unsigned char *input, unsigned int length,
-+		    unsigned char *output, unsigned int chunk_sz);
-+#else
- void sha384_starts(sha512_context * ctx);
- void sha384_update(sha512_context *ctx, const uint8_t *input, uint32_t length);
- void sha384_finish(sha512_context * ctx, uint8_t digest[SHA384_SUM_LEN]);
- 
- void sha384_csum_wd(const unsigned char *input, unsigned int ilen,
--		unsigned char *output, unsigned int chunk_sz);
+-/*
+- * Calculate and store in 'output' the MD5 digest of 'len' bytes at
+- * 'input'. 'output' must have enough space to hold 16 bytes.
+- */
+-void
+-md5 (unsigned char *input, int len, unsigned char output[16])
+-{
+-	MD5Context context;
+-
+-	MD5Init(&context);
+-	MD5Update(&context, input, len);
+-	MD5Final(output, &context);
+-}
 -
 -
-+		    unsigned char *output, unsigned int chunk_sz);
-+#endif
- #endif /* _SHA512_H */
-diff --git a/lib/Makefile b/lib/Makefile
-index a4600b09f49..3534b3301ae 100644
---- a/lib/Makefile
-+++ b/lib/Makefile
-@@ -69,14 +69,18 @@ obj-$(CONFIG_$(SPL_TPL_)CRC16) += crc16.o
- obj-y += crypto/
- 
- obj-$(CONFIG_$(SPL_TPL_)ACPI) += acpi/
--obj-$(CONFIG_$(SPL_)MD5) += md5.o
- obj-$(CONFIG_ECDSA) += ecdsa/
- obj-$(CONFIG_$(SPL_)RSA) += rsa/
- obj-$(CONFIG_HASH) += hash-checksum.o
- obj-$(CONFIG_BLAKE2) += blake2/blake2b.o
-+
-+ifneq ($(CONFIG_MBEDTLS_LIB_CRYPTO), y)
-+obj-$(CONFIG_$(SPL_)MD5) += md5.o
- obj-$(CONFIG_$(SPL_)SHA1) += sha1.o
- obj-$(CONFIG_$(SPL_)SHA256) += sha256.o
- obj-$(CONFIG_$(SPL_)SHA512) += sha512.o
-+endif
-+
- obj-$(CONFIG_CRYPT_PW) += crypt/
- obj-$(CONFIG_$(SPL_)ASN1_DECODER) += asn1_decoder.o
- 
+ /*
+  * Calculate and store in 'output' the MD5 digest of 'len' bytes at 'input'.
+  * 'output' must have enough space to hold 16 bytes. If 'chunk' Trigger the
 -- 
 2.25.1
 
