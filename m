@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73E25C25B78
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 14:10:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E85BCC25B7C
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 14:10:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EEB90884C8;
-	Tue, 28 May 2024 16:10:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7F719884DC;
+	Tue, 28 May 2024 16:10:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="E5rIf1Eq";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ur/ZE1qM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50D48884CE; Tue, 28 May 2024 16:10:33 +0200 (CEST)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
+ id 1FDC3884E1; Tue, 28 May 2024 16:10:56 +0200 (CEST)
+Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
+ [IPv6:2607:f8b0:4864:20::72f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3655E87D70
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 16:10:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A3EDD87D70
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 16:10:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-794ab4480beso61009585a.1
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 07:10:31 -0700 (PDT)
+Received: by mail-qk1-x72f.google.com with SMTP id
+ af79cd13be357-79305314956so64352985a.3
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 07:10:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716905430; x=1717510230; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1716905452; x=1717510252; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EQUyzEG/JRZtm3EFLCUqEKsysGKnPQx+WzNp+6B1dHo=;
- b=E5rIf1EqXso/Ebc0i019oV9PeI04yf4dXyfdXwaEQKEbtYSntELsBYRz8p1KdeI3gg
- 48R0uwG3ZyoQbryGVybvvdL2T+unSrbQJeGjWghd+kWXoKORTXv2P1IKlUmkzfvDRIzL
- DDpaXsIUz1FpCuB7hWvfmX8A97s3eZhPx4c/bhtsrmkXB/zfNdPiRj7igWZlcq8z+JoW
- h4nvtwUbb3grbdXNGxH9uDIcxDdt7uxsId3FNpYPK4oCP8xwJltZwl/DoofgOqL71Gn+
- a228MwWUsi6txHLLryLpUPm4ybiqxehJ8pdN6F3wK5Jj5B0PVGKaf1cADi4NXESmyptA
- buuw==
+ bh=tZEwdNwjpNENzFRgO5U6hLJD2qYPrnUjuSv8rKmZAeQ=;
+ b=ur/ZE1qMg18aX4TT+leR+1Race73+QEzI711WK5M1bpuj+DbT1y1AQmUsoDQ5e7kA+
+ S2zQivCxcJx8/EhecwZQSQQO+jULFZw8kUOcrZntguBvYvBQQTfTpgqOske61+j/TIiM
+ 39W7iUAutial6YVEkvUayns6ZJ+YUuFyYixQfHBCtUzZjZRk8wgns8GKtvoYxq/5V6By
+ MWXs3w3DXSDd3VrzniQwpXbJLYkNbJAwDBLl6HNbBxlhqTEmENW7Kh741s+90ckVrS0v
+ F/9OcIZckUQY3bBfBB+kCOdfnJwBil6/3hNwKWcrlUr9M1WasRsBZ7L+fX0t82jNSSqL
+ WRwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716905430; x=1717510230;
+ d=1e100.net; s=20230601; t=1716905452; x=1717510252;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EQUyzEG/JRZtm3EFLCUqEKsysGKnPQx+WzNp+6B1dHo=;
- b=cUDp43RAmB2WZL5YS6FPfNBybRRwe8jcRjoRv9Nrk2JtldDTJBKiY8/llXG+x6ASzY
- +GEAy9iLTB3AwHxNs3MoUJxpnzCa2VVt+vm4wSKKy7t3EqOfzIaL5MhVGLQM8NdHvrf/
- qz/gccpWFxq3fDPlZhm4YccF82ZDlAzolu6JTY4EdMMywjSzLdRPEe0Q6a0rvBTX57am
- lIzwFxgbsFykvZMgZY1+eCP1PYDnaCMmuV4ayWQRUaJwMfpT97+/MdCn3/yHLgFk8dYs
- ngrkRW6YV1tfQrcoB9HFtvjbw4eSg/CM+/KbmAlJdHydi3tJFyL/qmdGN3R2wtbmb37a
- p3Ng==
-X-Gm-Message-State: AOJu0YzyaxJoEJKzTuuTZnry+fzSVV44Cy+1bCeMRcFF63OcnHXKgg9H
- GxCxVTCjnuhsYg2Vb/Y7tzAT1s8MBxazOzBrWgz3t8QsHAxllzlTe26j/jvv7xU8ViPw2sCePpJ
- nT6Q=
-X-Google-Smtp-Source: AGHT+IHpaZ1oJOCUpDQCoAzxLjFJoEcYkkD5NfCdUC/3GTLWx/jT55MVmsE6O4fRQXJiHRs6BblqZQ==
-X-Received: by 2002:a05:620a:460a:b0:790:9929:3325 with SMTP id
- af79cd13be357-794ab0f66bfmr1673181285a.51.1716905429780; 
- Tue, 28 May 2024 07:10:29 -0700 (PDT)
+ bh=tZEwdNwjpNENzFRgO5U6hLJD2qYPrnUjuSv8rKmZAeQ=;
+ b=FKgmcGMJbjvjeW4kONVRQ7dW7ZstyMBkkMIKpPq8FHaHc5t+kJAa7z9351kSK5dlvc
+ BpWxPrBqwekysjl01sdvLnk4vL19dPj5GAHB7AsGiIo56gmIFM13DkKpOUutG96QJhDl
+ QyLc9qsTyvqz8CW5azxIr3J6E69RpZKk7CModTaoRwmdEhURFhTMXA7EZoRV0cCHGeOb
+ RW7EErLiELgBi+qLP6bT7pyKMBJ8zd20g04QY37WD7qIBytKbLdGqlbbMKox0TK4IqzV
+ ngYkffUw9RXJLeW/x4EJ5N6hMWc20gJUuGwqZWcNoIQKxQihyrWmLLPjzlw8m9GuaN/O
+ zdvg==
+X-Gm-Message-State: AOJu0YwojkzbEUIy7yXwXv2/4kn/y59G/6YGgQlToiwBR4Fiu5IAyAvF
+ 9DFs2dEKtikWMIzpJjaiMhgCxOUWhmOv3avu6b8LG/eX0qp4aSeWzUwTb9Th7FfgsdY+rXwcNsI
+ 1jUs=
+X-Google-Smtp-Source: AGHT+IEwOxcEmaGklXVHwgQy1QF+uoGy2A0NaN3R1d8Pxzqd5LSqmWQTk7kOCL7Z7MEbbn9LiT00lg==
+X-Received: by 2002:a05:620a:2952:b0:792:9a4b:dcd4 with SMTP id
+ af79cd13be357-794ab09e87cmr1461149485a.45.1716905452228; 
+ Tue, 28 May 2024 07:10:52 -0700 (PDT)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-794abcc5844sm381033685a.53.2024.05.28.07.10.27
+ af79cd13be357-794abcc5844sm381033685a.53.2024.05.28.07.10.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 May 2024 07:10:29 -0700 (PDT)
+ Tue, 28 May 2024 07:10:52 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Stefan Bosch <stefan_b@posteo.net>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  Michal Simek <michal.simek@amd.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
  Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sean Anderson <seanga2@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
  "Leon M. Busch-George" <leon@georgemail.eu>,
- Ilya Lukin <4.shket@gmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Sergei Antonov <saproj@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng@tinylab.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, Sergei Antonov <saproj@gmail.com>,
+ Ilya Lukin <4.shket@gmail.com>, Bin Meng <bmeng@tinylab.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Alexander Gendin <agendin@matrox.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Alexander Gendin <agendin@matrox.com>, Eddie James <eajames@linux.ibm.com>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: [PATCH v3 01/25] CI: Exclude MbedTLS subtree for CONFIG checks
-Date: Tue, 28 May 2024 07:09:12 -0700
-Message-Id: <20240528140955.1960172-2-raymond.mao@linaro.org>
+Subject: [PATCH v3 02/25] mbedtls: Add script to update MbedTLS subtree
+Date: Tue, 28 May 2024 07:09:13 -0700
+Message-Id: <20240528140955.1960172-3-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240528140955.1960172-1-raymond.mao@linaro.org>
 References: <20240528140955.1960172-1-raymond.mao@linaro.org>
@@ -112,50 +112,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since MbedTLS is an external repo with its own coding style,
-exclude it from Azure and gitlab CI CONFIG checks.
+lib/mbedtls/update-mbedtls-subtree.sh is a wrapper of git subtree
+commands.
+Usage from U-Boot top directory, run:
+
+$ ./lib/mbedtls/update-mbedtls-subtree.sh pull <release-tag>
+$ ./lib/mbedtls/update-mbedtls-subtree.sh pick <commit-id>
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 Changes in v2
 - Initial patch.
 Changes in v3
 - None.
 
- .azure-pipelines.yml | 3 ++-
- .gitlab-ci.yml       | 3 ++-
- 2 files changed, 4 insertions(+), 2 deletions(-)
+ lib/mbedtls/update-mbedtls-subtree.sh | 50 +++++++++++++++++++++++++++
+ 1 file changed, 50 insertions(+)
+ create mode 100755 lib/mbedtls/update-mbedtls-subtree.sh
 
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index 27f69583c65..c8052771fa8 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -65,7 +65,8 @@ stages:
-       # have no matches.
-       - script: git grep -E '^#[[:blank:]]*(define|undef)[[:blank:]]*CONFIG_'
-                   :^doc/ :^arch/arm/dts/ :^scripts/kconfig/lkc.h
--                  :^include/linux/kconfig.h :^tools/ :^dts/upstream/ &&
-+                  :^include/linux/kconfig.h :^tools/ :^dts/upstream/
-+                  :^lib/mbedtls/external :^lib/mbedtls/mbedtls_def_config.h &&
-                   exit 1 || exit 0
- 
-   - job: docs
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 165f765a833..a8f7f1940f3 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -156,7 +156,8 @@ check for new CONFIG symbols outside Kconfig:
-     # have no matches.
-     - git grep -E '^#[[:blank:]]*(define|undef)[[:blank:]]*CONFIG_'
-         :^doc/ :^arch/arm/dts/ :^scripts/kconfig/lkc.h
--        :^include/linux/kconfig.h :^tools/ :^dts/upstream/ &&
-+        :^include/linux/kconfig.h :^tools/ :^dts/upstream/
-+        :^lib/mbedtls/external :^lib/mbedtls/mbedtls_def_config.h &&
-         exit 1 || exit 0
- 
- # build documentation
+diff --git a/lib/mbedtls/update-mbedtls-subtree.sh b/lib/mbedtls/update-mbedtls-subtree.sh
+new file mode 100755
+index 00000000000..f208e54a5af
+--- /dev/null
++++ b/lib/mbedtls/update-mbedtls-subtree.sh
+@@ -0,0 +1,50 @@
++#!/bin/sh
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright 2024 Linaro Ltd.
++#
++# Usage: from the top level U-Boot source tree, run:
++# $ ./lib/mbedtls/update-mbedtls-subtree.sh pull <release-tag>
++# $ ./lib/mbedtls/update-mbedtls-subtree.sh pick <commit-id>
++#
++# The script will pull changes from MbedTLS repo into U-Boot
++# as a subtree located as <U-Boot>/lib/mbedtls/external/mbedtls sub-directory.
++# It will automatically create a squash/merge commit listing the commits
++# imported.
++
++set -e
++
++merge_commit_msg=$(cat << EOF
++Subtree merge tag '$2' of MbedTLS repo [1] into lib/mbedtls/external/mbedtls
++
++[1] https://github.com/Mbed-TLS/mbedtls.git
++EOF
++)
++
++remote_add_and_fetch() {
++    if ! git remote get-url mbedtls_upstream 2>/dev/null
++    then
++        echo "Warning: Script automatically adds new git remote via:"
++        echo "    git remote add mbedtls_upstream \\"
++        echo "        https://github.com/Mbed-TLS/mbedtls.git"
++        git remote add mbedtls_upstream \
++            https://github.com/Mbed-TLS/mbedtls.git
++    fi
++    git fetch mbedtls_upstream master
++}
++
++if [ "$1" = "pull" ]
++then
++    remote_add_and_fetch
++    git subtree pull --prefix lib/mbedtls/external/mbedtls mbedtls_upstream \
++        "$2" --squash -m "${merge_commit_msg}"
++elif [ "$1" = "pick" ]
++then
++    remote_add_and_fetch
++    git cherry-pick -x --strategy=subtree \
++        -Xsubtree=lib/mbedtls/external/mbedtls/ "$2"
++else
++    echo "usage: $0 <op> <ref>"
++    echo "  <op>     pull or pick"
++    echo "  <ref>    release tag [pull] or commit id [pick]"
++fi
 -- 
 2.25.1
 
