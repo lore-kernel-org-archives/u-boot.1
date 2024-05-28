@@ -4,76 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74B12C25B7C
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 13:28:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B30C7C25B78
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 13:35:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFFE3884EA;
-	Tue, 28 May 2024 15:28:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 37AB58841F;
+	Tue, 28 May 2024 15:35:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LKOHIo0h";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="KAbBr4wh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E221884E9; Tue, 28 May 2024 15:28:32 +0200 (CEST)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 81F48884E9; Tue, 28 May 2024 15:35:28 +0200 (CEST)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCC74884C6
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 15:28:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CACB883A0
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 15:35:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=net147@gmail.com
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2e78fe9fc2bso11055661fa.3
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 06:28:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716902909; x=1717507709; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=851Bpl66xmepJBlGBhWINBaFuhCapRgAz/9+B3VulDc=;
- b=LKOHIo0hBmwht1H50fhM/bSsjq5WHyUsi3CrGHb/mbBkFsgFS50KyAuGwIN5TR2EBg
- P45940hjmdlVPogEl9HrsH4kdScHmY6Nxr9vJa3SHpKpoXRiYQa5djsFgbqD/uXMVCY5
- Wl0+mlGk5dGq9jIGpO3T6lR1/OpVMveblIaB4H1fbbWVpTovSIDqqB7dCGnnJbkkJ2GL
- ck5+4tw6z4bFKHKTrqWFt49otYyE00aK2PnzFWurPBLLWJK4Eg4b3dmQARsLTbDTWOQf
- rksy30cbEGbozhI5SzVwjnCCiF8iQBbY+2YqL71TaL94QRqdljwkaogjEzDerb0chVHe
- YiDw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716902909; x=1717507709;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=851Bpl66xmepJBlGBhWINBaFuhCapRgAz/9+B3VulDc=;
- b=HYxpGxvUiEgFO4BrNMb9AEoRokhgXeMKi4upwz3fPwC+bybsRK63VwIJWN2azPFH23
- PS+aIgmRTQxqiykKKZj27lRWU/jZMebXmJboXUi2SFoP7ro5HU5vxbEclYSbc24cAYzW
- aiFnz8abQQ/9uWukhXaR+WfVkF5g3860LXMPHZFBSN+WYrRGdSp/8eY+8Pt7X91pdJ51
- VuT3zX3UoeLX24XXYBT9qONEfKMmr5Fgt6Ul4AUaXbwXOk2jPrDo2/ATRv4TtF7vXNU5
- IhyMQi1RB/qiMU2RQFeAymwX0B93vO4H/pXqkL6gg5QZzPBx4Qhj3xnUlSGL78zIr7XZ
- ZEnA==
-X-Gm-Message-State: AOJu0YwJ/pL4FitRCF6dJBTUuKRYGcg9tfUvooq3PidVTqpe4/AjsPRY
- DRQH9dH2KXrlL0PyB3jt/wwzD+D42COMd9IzyqrsCgceAOjYU5yGvzB9ezCebanjNMWOB8JtfEa
- 7wGVBVh0rxbokUMoJAOaMKfpNj6X2Ho+q
-X-Google-Smtp-Source: AGHT+IHA//Uu9Vikr1uycs1bdnWUBV35A0M2TGWzULMCDRhokdG8I2ZUJjhYFBMUh0NmdDDpWnLpsnzOkLMfm5gaqdA=
-X-Received: by 2002:a05:651c:234:b0:2e9:8471:f88e with SMTP id
- 38308e7fff4ca-2e98471fd3cmr22014211fa.19.1716902908607; Tue, 28 May 2024
- 06:28:28 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=phytec.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=T.Remmet@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1716903326; x=1719495326;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=msgZLdvc5is+pUl95izHVaQYxCMLP9w1rFRQfOEZIdc=;
+ b=KAbBr4whv64OXRrlzW9GtAP/qMdvTb7LK7ET6q1xi+bce0ehKnWlDT9lowN1mVpt
+ e9xlrJopAQkXsInl95a5fwYbPq9qS3f4ypaOIa/VZUevpx6GGFP3gn6pPTWk883X
+ Yc3DWar4sqRZVggc5bPtaXdns1csV4r9ap4HBVI/bHE=;
+X-AuditID: ac14000a-03251700000021bc-25-6655dd9e0188
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 72.E8.08636.E9DD5566;
+ Tue, 28 May 2024 15:35:26 +0200 (CEST)
+Received: from llp-tremmet2.phytec.de (172.25.0.11) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Tue, 28 May
+ 2024 15:35:25 +0200
+From: Teresa Remmet <t.remmet@phytec.de>
+To: <u-boot@lists.denx.de>
+CC: Yannic Moog <y.moog@phytec.de>, Fabio Estevam <festevam@gmail.com>, Tom
+ Rini <trini@konsulko.com>, Benjamin Hahn <B.Hahn@phytec.de>, Yashwanth
+ Varakala <y.varakala@phytec.de>, Wadim Egorov <w.egorov@phytec.de>,
+ <upstream@lists.phytec.de>
+Subject: [PATCH 0/4] Support all phyCORE-i.MX8MP RAM variants
+Date: Tue, 28 May 2024 15:35:11 +0200
+Message-ID: <20240528133515.307315-1-t.remmet@phytec.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20220226070551.9833-1-jnhuang95@gmail.com>
- <20220226070551.9833-3-jnhuang95@gmail.com>
- <CANwerB2SBe1+0sW1OXHEfSMA1z-vyAvLfAqVOKdsM-ap=KYbCA@mail.gmail.com>
- <a9f890d4-555b-488f-85f8-8b22fdfd257b@linux.alibaba.com>
- <CANwerB1G8n57AfQ3CaH82CBPzQ8nvV=-Y5xRK6sVdnUZdj+SKw@mail.gmail.com>
- <CAJfKizq3sof9dh=KSdoJBvgydSK7AUy3_ns6ms8pchyOrLE+0A@mail.gmail.com>
-In-Reply-To: <CAJfKizq3sof9dh=KSdoJBvgydSK7AUy3_ns6ms8pchyOrLE+0A@mail.gmail.com>
-From: Jonathan Liu <net147@gmail.com>
-Date: Tue, 28 May 2024 23:28:16 +1000
-Message-ID: <CANwerB0vB6BgChgjQ389tno4rxaxtGCQv8ssvtjLHSZbUPGVXA@mail.gmail.com>
-Subject: Re: [PATCH v4 2/5] lib/lz4: update LZ4 decompressor module
-To: Jianan Huang <jnhuang95@gmail.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, linux-erofs@lists.ozlabs.org, 
- xiang@kernel.org, Gao Xiang <hsiangkao@linux.alibaba.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrOLMWRmVeSWpSXmKPExsWyRpKBR3fe3dA0g7kvhC0eXvW3mDppM7vF
+ 272d7Bbd79QdWDx2zrrL7vHqwCp2j7N3djB69He3sAawRHHZpKTmZJalFunbJXBlLF+zl7ng
+ NGfF57MHmRoYL7F3MXJySAiYSDTOmsPUxcjFISSwhEni8udZzBDOU0aJs3NXs4FUsQloSDxd
+ cZoJxBYRkJJ42bkRrIhZ4DujxJyF/WCjhAVsJVYcaAErYhFQleh6fJgRxOYVsJD48+MaE8Q6
+ eYn9B88yQ8QFJU7OfMICYjMDxZu3zmaGsCUkDr54AWYLAcV3XTrJCNM77dxrZgg7VOLIptVM
+ ExgFZiEZNQvJqFlIRi1gZF7FKJSbmZydWpSZrVeQUVmSmqyXkrqJERS4IgxcOxj75ngcYmTi
+ YDzEKMHBrCTCe2ZSaJoQb0piZVVqUX58UWlOavEhRmkOFiVx3tUdwalCAumJJanZqakFqUUw
+ WSYOTqkGRj11h7ywdYcNiksv7NkkOmlG7dImxdlvkup5pnxK7D3whOnUDsaFF0KPqPXukuTb
+ x7XCQXuv8W8vR+5NMap3Jp6+yfK0LGAX20dxicY1TxeHu+Q9VuLfJW+eKM222KVG4+sSB5aq
+ x8Z/3J76aO970/2b3VjGMNTqI9u7+nzXjHiB93t+zPHZosRSnJFoqMVcVJwIAJM2QQ9KAgAA
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,378 +87,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jianan,
+Add support for several RAM sizes and speed grades for phyCORE-i.MX8MP.
 
-Here are the LZ4 decompression times I got running "time unlz4 ..." on
-Rock 4 SE with RK3399 CPU.
+We have support with this series for:
+- 1GB 1.5GHz
+- 1GB 2GHz
+- 2GB 1.5GHz (was supported before)
+- 2GB 2GHz (was supported before)
+- 4GB 1.5GHz
+- 4GB 2GHz
+- 8GB 2GHz
 
-v2024.04: 1.329 seconds
-v2024.04 with 26c7fdadcb7 ("lib/lz4: update LZ4 decompressor module")
-reverted: 0.665 seconds
-v2024.04 with your patch: 1.216 seconds
+RAM size and speed grade is detected and set using EEPROM data on default.
+Alternative it is possible to set fix RAM size and speed over Kconfig.
 
-I managed to get better performance by optimizing it myself.
-v2024.04 with my patch: 0.785 seconds
+Teresa
 
-With my patch, it makes no difference if I use __builtin_memcpy or
-memcpy in lz4.c and lz4_wrapper.c so I just left it using memcpy.
-It is still slower than reverting the LZ4 update though.
+Benjamin Hahn (1):
+  board: phycore_imx8mp: enable setting 2GHz timings without RAM size
 
-My patch:
---- a/lib/lz4.c
-+++ b/lib/lz4.c
-@@ -41,6 +41,16 @@ static FORCE_INLINE u16 LZ4_readLE16(const void *src)
-        return get_unaligned_le16(src);
- }
+Teresa Remmet (3):
+  board: phytec: phycore-imx8mp: spl: Fix syle issue
+  board: phytec: phycore_imx8mp: Add support for different RAM sizes
+  board: phytec: phycore_imx8mp: Make RAM size configuration fix
 
-+static FORCE_INLINE void LZ4_copy2(void *dst, const void *src)
-+{
-+ put_unaligned(get_unaligned((const u16 *)src), (u16 *)dst);
-+}
-+
-+static FORCE_INLINE void LZ4_copy4(void *dst, const void *src)
-+{
-+ put_unaligned(get_unaligned((const u32 *)src), (u32 *)dst);
-+}
-+
- static FORCE_INLINE void LZ4_copy8(void *dst, const void *src)
- {
-        put_unaligned(get_unaligned((const u64 *)src), (u64 *)dst);
-@@ -215,7 +225,10 @@ static FORCE_INLINE int LZ4_decompress_generic(
-                   && likely((endOnInput ? ip < shortiend : 1) &
-                             (op <= shortoend))) {
-                        /* Copy the literals */
--                   memcpy(op, ip, endOnInput ? 16 : 8);
-+                 LZ4_copy8(op, ip);
-+                 if (endOnInput)
-+                         LZ4_copy8(op + 8, ip + 8);
-+
-                        op += length; ip += length;
+ board/phytec/phycore_imx8mp/Kconfig          |  67 ++++++++
+ board/phytec/phycore_imx8mp/lpddr4_timing.c  | 153 +++++++++++++++++++
+ board/phytec/phycore_imx8mp/lpddr4_timing.h  |  16 ++
+ board/phytec/phycore_imx8mp/phycore-imx8mp.c |  11 ++
+ board/phytec/phycore_imx8mp/spl.c            | 136 +++++++++--------
+ include/configs/phycore_imx8mp.h             |   4 +-
+ 6 files changed, 322 insertions(+), 65 deletions(-)
+ create mode 100644 board/phytec/phycore_imx8mp/lpddr4_timing.h
 
-                        /*
-@@ -234,9 +247,9 @@ static FORCE_INLINE int LZ4_decompress_generic(
-                            (offset >= 8) &&
-                            (dict == withPrefix64k || match >= lowPrefix)) {
-                                /* Copy the match. */
--                           memcpy(op + 0, match + 0, 8);
--                           memcpy(op + 8, match + 8, 8);
--                           memcpy(op + 16, match + 16, 2);
-+                         LZ4_copy8(op, match);
-+                         LZ4_copy8(op + 8, match + 8);
-+                         LZ4_copy2(op + 16, match + 16);
-                                op += length + MINMATCH;
-                                /* Both stages worked, load the next token. */
-                                continue;
-@@ -466,7 +479,7 @@ _copy_match:
-                        op[2] = match[2];
-                        op[3] = match[3];
-                        match += inc32table[offset];
--                   memcpy(op + 4, match, 4);
-+                 LZ4_copy4(op + 4, match);
-                        match -= dec64table[offset];
-                } else {
-                        LZ4_copy8(op, match);
+-- 
+2.34.1
 
-Let me know if you have any further suggestions.
-
-Thanks.
-
-Regards,
-Jonathan
-
-On Sun, 26 May 2024 at 22:18, Jianan Huang <jnhuang95@gmail.com> wrote:
->
-> Hi Jonathan,
->
-> Could you please try the following patch ? It replaces all memcpy() calls in lz4 with __builtin_memcpy().
->
-> diff --git a/lib/lz4.c b/lib/lz4.c
-> index d365dc727c..2afe31c1c3 100644
-> --- a/lib/lz4.c
-> +++ b/lib/lz4.c
-> @@ -34,6 +34,8 @@
->  #include <asm/unaligned.h>
->  #include <u-boot/lz4.h>
->
-> +#define LZ4_memcpy(dst, src, size) __builtin_memcpy(dst, src, size)
-> +
->  #define FORCE_INLINE inline __attribute__((always_inline))
->
->  static FORCE_INLINE u16 LZ4_readLE16(const void *src)
-> @@ -215,7 +217,7 @@ static FORCE_INLINE int LZ4_decompress_generic(
->     && likely((endOnInput ? ip < shortiend : 1) &
->       (op <= shortoend))) {
->   /* Copy the literals */
-> - memcpy(op, ip, endOnInput ? 16 : 8);
-> + LZ4_memcpy(op, ip, endOnInput ? 16 : 8);
->   op += length; ip += length;
->
->   /*
-> @@ -234,9 +236,9 @@ static FORCE_INLINE int LZ4_decompress_generic(
->      (offset >= 8) &&
->      (dict == withPrefix64k || match >= lowPrefix)) {
->   /* Copy the match. */
-> - memcpy(op + 0, match + 0, 8);
-> - memcpy(op + 8, match + 8, 8);
-> - memcpy(op + 16, match + 16, 2);
-> + LZ4_memcpy(op + 0, match + 0, 8);
-> + LZ4_memcpy(op + 8, match + 8, 8);
-> + LZ4_memcpy(op + 16, match + 16, 2);
->   op += length + MINMATCH;
->   /* Both stages worked, load the next token. */
->   continue;
-> @@ -416,7 +418,7 @@ _copy_match:
->   size_t const copySize = (size_t)(lowPrefix - match);
->   size_t const restSize = length - copySize;
->
-> - memcpy(op, dictEnd - copySize, copySize);
-> + LZ4_memcpy(op, dictEnd - copySize, copySize);
->   op += copySize;
->   if (restSize > (size_t)(op - lowPrefix)) {
->   /* overlap copy */
-> @@ -426,7 +428,7 @@ _copy_match:
->   while (op < endOfMatch)
->   *op++ = *copyFrom++;
->   } else {
-> - memcpy(op, lowPrefix, restSize);
-> + LZ4_memcpy(op, lowPrefix, restSize);
->   op += restSize;
->   }
->   }
-> @@ -452,7 +454,7 @@ _copy_match:
->   while (op < copyEnd)
->   *op++ = *match++;
->   } else {
-> - memcpy(op, match, mlen);
-> + LZ4_memcpy(op, match, mlen);
->   }
->   op = copyEnd;
->   if (op == oend)
-> @@ -466,7 +468,7 @@ _copy_match:
->   op[2] = match[2];
->   op[3] = match[3];
->   match += inc32table[offset];
-> - memcpy(op + 4, match, 4);
-> + LZ4_memcpy(op + 4, match, 4);
->   match -= dec64table[offset];
->   } else {
->   LZ4_copy8(op, match);
-> diff --git a/lib/lz4_wrapper.c b/lib/lz4_wrapper.c
-> index 4d48e7b0e8..e09c8d7057 100644
-> --- a/lib/lz4_wrapper.c
-> +++ b/lib/lz4_wrapper.c
-> @@ -80,7 +80,7 @@ int ulz4fn(const void *src, size_t srcn, void *dst, size_t *dstn)
->
->   if (block_header & LZ4F_BLOCKUNCOMPRESSED_FLAG) {
->   size_t size = min((ptrdiff_t)block_size, (ptrdiff_t)(end - out));
-> - memcpy(out, in, size);
-> + LZ4_memcpy(out, in, size);
->   out += size;
->   if (size < block_size) {
->   ret = -ENOBUFS; /* output overrun */
->
->
-> Thanks,
->
-> Jianan
->
-> On 2024/5/26 16:06, Jonathan Liu wrote:
->
-> Hi Gao,
->
-> On Sat, 25 May 2024 at 02:52, Gao Xiang <hsiangkao@linux.alibaba.com> wrote:
->
-> Hi,
->
-> On 2024/5/24 22:26, Jonathan Liu wrote:
->
-> Hi Jianan,
->
-> On Sat, 26 Feb 2022 at 18:05, Huang Jianan <jnhuang95@gmail.com> wrote:
->
-> Update the LZ4 compression module based on LZ4 v1.8.3 in order to
-> use the newest LZ4_decompress_safe_partial() which can now decode
-> exactly the nb of bytes requested.
->
-> Signed-off-by: Huang Jianan <jnhuang95@gmail.com>
->
-> I noticed after this commit LZ4 decompression is slower.
-> ulz4fn function call takes 1.209670 seconds with this commit.
-> After reverting this commit, the ulz4fn function call takes 0.587032 seconds.
->
-> I am decompressing a LZ4 compressed kernel (compressed with lz4 v1.9.4
-> using -9 option for maximum compression) on RK3399.
->
-> Any ideas why it is slower with this commit and how the performance
-> regression can be fixed?
->
-> Just the quick glance, I think the issue may be due to memcpy/memmove
-> since it seems the main difference between these two codebases
-> (I'm not sure which LZ4 version the old codebase was based on) and
-> the new version mainly relies on memcpy/memmove instead of its own
-> versions.
->
-> Would you mind to check the assembly how memcpy/memset is generated
-> on your platform?
->
-> Here is the assembly (-mcpu=cortex-a72.cortex-a53 -march=armv8-a+crc+crypto):
-> 000000000028220c <memset>:
-> #if !CONFIG_IS_ENABLED(TINY_MEMSET)
->         unsigned long cl = 0;
->         int i;
->
->         /* do it one word at a time (32 bits or 64 bits) while possible */
->         if ( ((ulong)s & (sizeof(*sl) - 1)) == 0) {
->   28220c:       f2400803        ands    x3, x0, #0x7
->   282210:       540002c1        b.ne    282268 <memset+0x5c>  // b.any
->                 for (i = 0; i < sizeof(*sl); i++) {
->                         cl <<= 8;
->                         cl |= c & 0xff;
->   282214:       92401c26        and     x6, x1, #0xff
->         unsigned long cl = 0;
->   282218:       d2800004        mov     x4, #0x0                        // #0
->   28221c:       52800105        mov     w5, #0x8                        // #8
->                         cl |= c & 0xff;
->   282220:       aa0420c4        orr     x4, x6, x4, lsl #8
->                 for (i = 0; i < sizeof(*sl); i++) {
->   282224:       710004a5        subs    w5, w5, #0x1
->   282228:       54ffffc1        b.ne    282220 <memset+0x14>  // b.any
->                 }
->                 while (count >= sizeof(*sl)) {
->   28222c:       cb030045        sub     x5, x2, x3
->   282230:       f1001cbf        cmp     x5, #0x7
->   282234:       54000148        b.hi    28225c <memset+0x50>  // b.pmore
->   282238:       d343fc43        lsr     x3, x2, #3
->   28223c:       928000e4        mov     x4, #0xfffffffffffffff8         // #-8
->   282240:       9b047c63        mul     x3, x3, x4
->   282244:       8b030042        add     x2, x2, x3
->   282248:       cb030003        sub     x3, x0, x3
->         unsigned long *sl = (unsigned long *) s;
->   28224c:       d2800004        mov     x4, #0x0                        // #0
->                         count -= sizeof(*sl);
->                 }
->         }
-> #endif  /* fill 8 bits at a time */
->         s8 = (char *)sl;
->         while (count--)
->   282250:       eb04005f        cmp     x2, x4
->   282254:       540000e1        b.ne    282270 <memset+0x64>  // b.any
->                 *s8++ = c;
->
->         return s;
-> }
->   282258:       d65f03c0        ret
->                         *sl++ = cl;
->   28225c:       f8236804        str     x4, [x0, x3]
->                         count -= sizeof(*sl);
->   282260:       91002063        add     x3, x3, #0x8
->   282264:       17fffff2        b       28222c <memset+0x20>
->         unsigned long *sl = (unsigned long *) s;
->   282268:       aa0003e3        mov     x3, x0
->   28226c:       17fffff8        b       28224c <memset+0x40>
->                 *s8++ = c;
->   282270:       38246861        strb    w1, [x3, x4]
->   282274:       91000484        add     x4, x4, #0x1
->   282278:       17fffff6        b       282250 <memset+0x44>
->
-> 000000000028227c <memcpy>:
-> __used void * memcpy(void *dest, const void *src, size_t count)
-> {
->         unsigned long *dl = (unsigned long *)dest, *sl = (unsigned long *)src;
->         char *d8, *s8;
->
->         if (src == dest)
->   28227c:       eb01001f        cmp     x0, x1
->   282280:       54000100        b.eq    2822a0 <memcpy+0x24>  // b.none
->                 return dest;
->
->         /* while all data is aligned (common case), copy a word at a time */
->         if ( (((ulong)dest | (ulong)src) & (sizeof(*dl) - 1)) == 0) {
->   282284:       aa010003        orr     x3, x0, x1
->   282288:       f2400863        ands    x3, x3, #0x7
->   28228c:       54000120        b.eq    2822b0 <memcpy+0x34>  // b.none
->   282290:       aa0003e4        mov     x4, x0
->   282294:       d2800003        mov     x3, #0x0                        // #0
->                 }
->         }
->         /* copy the reset one byte at a time */
->         d8 = (char *)dl;
->         s8 = (char *)sl;
->         while (count--)
->   282298:       eb03005f        cmp     x2, x3
->   28229c:       540001e1        b.ne    2822d8 <memcpy+0x5c>  // b.any
->                 *d8++ = *s8++;
->
->         return dest;
-> }
->   2822a0:       d65f03c0        ret
->                         *dl++ = *sl++;
->   2822a4:       f8636824        ldr     x4, [x1, x3]
->   2822a8:       f8236804        str     x4, [x0, x3]
->                         count -= sizeof(*dl);
->   2822ac:       91002063        add     x3, x3, #0x8
->                 while (count >= sizeof(*dl)) {
->   2822b0:       cb030044        sub     x4, x2, x3
->   2822b4:       f1001c9f        cmp     x4, #0x7
->   2822b8:       54ffff68        b.hi    2822a4 <memcpy+0x28>  // b.pmore
->   2822bc:       d343fc43        lsr     x3, x2, #3
->   2822c0:       928000e4        mov     x4, #0xfffffffffffffff8         // #-8
->   2822c4:       9b047c63        mul     x3, x3, x4
->   2822c8:       8b030042        add     x2, x2, x3
->   2822cc:       cb030004        sub     x4, x0, x3
->   2822d0:       cb030021        sub     x1, x1, x3
->   2822d4:       17fffff0        b       282294 <memcpy+0x18>
->                 *d8++ = *s8++;
->   2822d8:       38636825        ldrb    w5, [x1, x3]
->   2822dc:       38236885        strb    w5, [x4, x3]
->   2822e0:       91000463        add     x3, x3, #0x1
->   2822e4:       17ffffed        b       282298 <memcpy+0x1c>
->
->
-> I tried enabling CONFIG_USE_ARCH_MEMCPY=y, CONFIG_USE_ARCH_MEMSET=y in
-> the .config (but leaving it disabled in SPL/TPL) and it results in
-> Synchronous Abort:
-> U-Boot SPL 2024.04 (Apr 02 2024 - 10:58:58 +0000)
-> Trying to boot from MMC1
-> NOTICE:  BL31: v1.3(release):8f40012ab
-> NOTICE:  BL31: Built : 14:20:53, Feb 16 2023
-> NOTICE:  BL31: Rockchip release version: v1.1
-> INFO:    GICv3 with legacy support detected. ARM GICV3 driver initialized in EL3
-> INFO:    Using opteed sec cpu_context!
-> INFO:    boot cpu mask: 0
-> INFO:    plat_rockchip_pmu_init(1203): pd status 3e
-> INFO:    BL31: Initializing runtime services
-> WARNING: No OPTEE provided by BL2 boot loader, Booting device without
-> OPTEE initialization. SMC`s destined for OPTEE will return SMC_UNK
-> ERROR:   Error initializing runtime service opteed_fast
-> INFO:    BL31: Preparing for EL3 exit to normal world
-> INFO:    Entry point address = 0x200000
-> INFO:    SPSR = 0x3c9
-> "Synchronous Abort" handler, esr 0x96000021, far 0x2957e1
-> elr: 000000000020233c lr : 000000000026a388
-> x0 : 00000000002fbf38 x1 : 00000000002957e1
-> x2 : 0000000000000008 x3 : 0000000000000065
-> x4 : 00000000002957e9 x5 : 00000000002fbf40
-> x6 : 0000000000000065 x7 : 0000000000000003
-> x8 : 00000000002c7960 x9 : 000000000000ffd0
-> x10: 00000000002fbc5c x11: 00000000000132e8
-> x12: 00000000002fbce8 x13: 00000000002c7960
-> x14: 00000000002c7960 x15: 0000000000000000
-> x16: 0000000000000000 x17: 0000000000000000
-> x18: 00000000002fbe30 x19: 0000000000000007
-> x20: 00000000002957d8 x21: 0000000000000009
-> x22: 000000000029d189 x23: 0000000000000020
-> x24: 00000000002fbf38 x25: 00000000002957e7
-> x26: 00000000002957b2 x27: 0000000000007fff
-> x28: 0000000000000000 x29: 00000000002fbcc0
->
-> Code: a9001c06 a93f34ac d65f03c0 361800c2 (f9400026)
-> Resetting CPU ...
->
-> resetting ...
->
-> Thanks,
-> Gao Xiang
->
-> Regards,
-> Jonathan
