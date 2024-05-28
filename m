@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3E93C25B79
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 08:32:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F226BC25B79
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 08:32:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B20E988445;
-	Tue, 28 May 2024 10:32:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 182638845D;
+	Tue, 28 May 2024 10:32:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="u5H6rRdE";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CXrWUglu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8D8A8845C; Tue, 28 May 2024 10:32:04 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 5491A88440; Tue, 28 May 2024 10:32:05 +0200 (CEST)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7337788440
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 10:32:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4EAED88402
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 10:32:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-4211a86f124so4320255e9.0
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 01:32:02 -0700 (PDT)
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-52965199234so607576e87.2
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 01:32:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1716885122; x=1717489922; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ls49B4+5tvTEi6VVvn1gKRbdfX9kUtVC689eYq/FhUM=;
- b=u5H6rRdEg2B/v45Dk+1ze0y1oTUPvyN6Aizku9EdMo5eWi6Pkixa/bn4WVFGBRl8t0
- 3rjRx095ByuZKaW0wFjGAkaXddnQuf+bZ/f6xNolpNvb3Mj7KEgp5/x/ea5YdIX0+n1y
- lVcnjubRCwWDN56UwRXCSXRzP8PeNz0EVNBtJVTzqiiVhXY58wC4SsEW/GWr85WlQGzw
- vcF2ZgViKWuekxASUNeCAKHb/vEhPT1jr0e075DaNqXBW1T9M9NFtUl/qIR4RwAhveAD
- p8PFYNohdEzG7MHE6EGUZ34RoYN4vb5lt56ad/HASKF0RBMrPiWjWf4BVcfpmkO/9faS
- iLBA==
+ :reply-to; bh=KCIP0Gs6++BTUw1xvrVqee19gMALZn3da7WEmnh7Zeg=;
+ b=CXrWUgluAM8EhxEQiynek0uA6FwViGjy6iD3ZKpRRfEBeH86nFKrwqYFYIbB16TGYW
+ olrd+aVknKno5blbV6QbsMPaoXoCXWhmVix/QxsnbWxPZ8g0pgMzkxusal+bfzudbxU4
+ sbhkwg47nbmnzygimy+2P0R3HM1D+VMLJVHmYhx5DhnzteLZcHal9apVOhtlCTlEeu+o
+ juzTqyGGMDw4XhqqBQDeMMfDbTlWZuAwQ14ihJnRAzjK7PNWuILbm98Tuwe0bgACxKhA
+ wkSThLD7Ep4tuAkgXPdNVoFfJ2kPbx2cCAWcfE6bdelX12z0bj+alq12rt+nNPefRgMt
+ L5zA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1716885122; x=1717489922;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ls49B4+5tvTEi6VVvn1gKRbdfX9kUtVC689eYq/FhUM=;
- b=ha/5f+6jwaVGlKcr5mwkFKBRtNyL9BJuhvtWUJaJAQCfRtnfn2s3sVoaMJLyvh5K3+
- fV+5YEvYA7N8vw8jPuwHIFN7fHHqabIzX6xOGtJxJ719D3tMfMOVkjUUVbjJX3CkbULy
- vNeJ4JmA2Q37sxcrDDPXL9Ds9R2xeKi6mD5UGUxVcOV4giBzQJf5CJmUg5FwVnH/rs2Q
- g9DzbHi1ZqC0kUN0jbq9OHQyM3YvN8kQ6hBrahNyLoYWeRKKaSCCFLGE5Tg/42bfi5QQ
- NNcXcCKF+tX6eQINpfGypQFTz2HviYy36gRYe27LgUPulsfxIil5ZjQhM5z+miNGJg2U
- LC6g==
+ bh=KCIP0Gs6++BTUw1xvrVqee19gMALZn3da7WEmnh7Zeg=;
+ b=PHPdBibTRHa1fsUz2ln5MaXpkjQE1PDDdzVX+URWxWwDhKdz9GZwYFnx0yEeDnwo3q
+ pRoe1rl30fmwQ7z0e0CiS30OoDijVdamiLwFEgOFPaGjlBS/BB5Prkvs9Ilz8hg70OJQ
+ 0MwT7dG/+NkXhVWjmLeM0ev/D0QxR0shzq9Ah4SPoFBWC6wJW4Xvo82q4Mpg4XWYr2tp
+ jx0csFmsKWyXdULI3oGVDaRFdww3bcWKnaQB4PHp+DzA7qhvlyHorWJVyHLjdD80LvUI
+ FVqHmUxbV/mp+HH8s0Lu1eSuSPPFbV1k/MWaHZiwoeibVGX77srCRr4JzFxBKteNuy4G
+ 7+ZA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXZxGHuAJ3RXmvrr6kjUR5UYIzUsXfBMZ3OvvfCOukzBJvL0aX3Et7kLf258SJ9wqavhZDOs//fUIXtSn7XTxN3XoiOEw==
-X-Gm-Message-State: AOJu0Yz/edoHeRrPThnDcfkTpRAangY17o49WoMUCyaxvYcXwqOMX9Sa
- tuf4EC4OAB6x/T7/KzEdTwp9pK1XrE7ouwApWb2gt5ByzPGk4vUMe2KHcu71lDs=
-X-Google-Smtp-Source: AGHT+IEsYKNw30n91W5amD3QZsY6OvlyGf3GTaBL+xhcgYmXeU47l4AwQm0u1QGiD8R7k6/tUES7nw==
-X-Received: by 2002:a05:600c:3145:b0:419:f9ae:e50 with SMTP id
- 5b1f17b1804b1-42108a2145bmr86154985e9.37.1716885121705; 
- Tue, 28 May 2024 01:32:01 -0700 (PDT)
+ AJvYcCU6dhMq5u4NZ0eiqyqAZyfRb5PybLnkvbYP9Cx9KxKhPS6OCjL+mcWDKw5dswYxuj04bJJ2ZamsEoAL34x9rluT6bHbDQ==
+X-Gm-Message-State: AOJu0Ywp5y3tKr1YnQ8eBfR1U4aDJewYsQrCJtjLRTOxHWa4tb+G7g7g
+ Xs9aAASSpymcUxVq4ulkKbM61+tWjBqwUdBWwJ46FS+nZqfhmlYssCKQCRuyX8E=
+X-Google-Smtp-Source: AGHT+IE3HKU6d+CIcrK1L0lgBSxdWDCmup75OdYHC9rTzVXcBNfiANrISkMA915IbM74uPdATL/3Fw==
+X-Received: by 2002:ac2:4206:0:b0:520:f419:272b with SMTP id
+ 2adb3069b0e04-529644ebeadmr7044692e87.5.1716885122423; 
+ Tue, 28 May 2024 01:32:02 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
  5b1f17b1804b1-42100ee7f1dsm167122035e9.7.2024.05.28.01.32.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 May 2024 01:32:01 -0700 (PDT)
+ Tue, 28 May 2024 01:32:02 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Tue, 28 May 2024 10:31:54 +0200
-Subject: [PATCH 2/5] arm: mach-snapdragon: gpio: introduce msm_special_pin_data
+Date: Tue, 28 May 2024 10:31:55 +0200
+Subject: [PATCH 3/5] pinctrl: qcom: add support setting pin configuration
+ for special pins
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240528-topic-sm8x50-pinctrl-pinconf-v1-2-54d1e9ad7dfa@linaro.org>
+Message-Id: <20240528-topic-sm8x50-pinctrl-pinconf-v1-3-54d1e9ad7dfa@linaro.org>
 References: <20240528-topic-sm8x50-pinctrl-pinconf-v1-0-54d1e9ad7dfa@linaro.org>
 In-Reply-To: <20240528-topic-sm8x50-pinctrl-pinconf-v1-0-54d1e9ad7dfa@linaro.org>
 To: Caleb Connolly <caleb.connolly@linaro.org>, 
@@ -79,20 +80,20 @@ To: Caleb Connolly <caleb.connolly@linaro.org>,
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
  Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1356;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2105;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=peCV0h8P6z0PbDEmT1d31btpJwWRLaTftm13hTAtKBc=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBmVZZ94yuS1jPMOKsy3dcWoKZhC16CLRzt6YL+LlZh
- xsDVLneJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZlWWfQAKCRB33NvayMhJ0aTREA
- CBGrzeOpeqyGxzpN3Y4JG7tVj9yBPxO/xNFTRSpfomTUy1YAEnvKK1nPXtizMuwuXaq9YHkYB9CTQG
- xDVz/vbwV6GnWhl576R9tV0r75LDAtFhLK2vO2Mo9IyHoBpcGJD7/pEUwqsw8IeOhKZ1LdsNisnuHb
- 3yyOGm0fLe2jFzAgphjyI9p5BbsMENJR3YYCBAdY73e6pZzRr8Oi0dzXPc/QO8PU7oNVVZfDzb72gf
- 81I0TmgwnJrbfpmsl/lX549jNowNPu6res6e7pqfkm21Q43aWx11AxbtccqlFr/qxi+DYUCheNIAzm
- sdaYxpUcFH8BdrfroCJQlOPXk10kzEWOZamm7QQRl7n2jeZ4w3SKlMMu8tCl842gCTCIzglYCm7PVJ
- N6jWoGyHiPUaMJXdubxTOPJSYEuJ4t7qWZ20ntY68tdlAP5PC7QJsXBj20uOQM/k/RwNigl2NLZEo4
- EmCkFPQMdk4l0KlYSAUG6/OAseukVc/OTMZu63ogdV0TimTTazFTnBZleeVspQ3QCVmzQgftSu8Cmf
- t9Z/DlUR5JgWEEb2upjYx0Bqd6upYIASU66pCmmIaShc6XD0LecgBPQUUqF1yH2fneA1y5MG4xeIB0
- hQm3pGjfA6BXjqJCIn2SZK6hL9l9ZaHwVN64N77TzYl7mVtkmwK/6ZJbWTNQ==
+ bh=t0JY5Z1xwZbceiy2/eEC28IVIyPnjXNY/kQlrmTeXbQ=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBmVZZ+vXHqOVZLfbntpN7NpF7jZMAIcetO9i5z66vw
+ 3iDo8VCJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZlWWfgAKCRB33NvayMhJ0eA4D/
+ 9dFIsy2BbMi7GocpP3u31+c963Fpk/TrCO0qmiN6iYd3VfRWtxUzRcfP2fTQMQD+M6JHf09/2XwwEA
+ W4szTSIV/BbwfugypheOsOk5b5aBoDhnzTN+60WxpYFAKB/Ql+PC54E7MKnml58PdixNN6EtczmKRy
+ TJEBdgTN42zvO/ptgjdP5I4VlYATCdml8iRhnNmN/QfcO04h6WteMkZwI+sf9L9LLHZcBYPr21e0UM
+ xj/D/3h1i9hPG4Pxge3JOESqTa7NgrEcR1LrUEktmhdkftdOhDlordHwAkcNrtXI+EZz1guwepGYhc
+ rOhJGpyZhqizTshKSFtXnz+g/FqSSZXCr1fgqrXuYgxwGDniexRSFK+rnYLx+tgVEWtYjkXVVOMmOr
+ +YkswnU2oL/G2xeX6QZX+i5xX9zZUxHm6ZFgYZglgBGuHa7UqMHod9psMzhUEW+al6c128IMP/CoXT
+ VrI9Htk32dKTiD6OVUAXjmhxH1tfvCH0dpVZVLoPqpXnuA+yF9HrmUt35qFQTTMdlTBwQP4DGaFYiO
+ CO7YbVHZY5kzyZvDjVXQyZOIVILYLnSMsk76eSU8YfFZ/3SQ2Rl+tDgQpHhbBwUhL9YtpWjkydKlnk
+ Ak97lKss90gIZHw9QLY6uzLbOPlS14nw3nYbj2w17QiifBIKBXUHmDXUa7+A==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -111,49 +112,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In order to help setup pin configuration for special pins (UFS, SDCard),
-introduce the msm_special_pin_data struct largely inspired from the
-Linux conterpart but with only U-Boot required fields.
-
-This struct is added to the pins_data to allow specifying the special
-pins data for each SoC.
+Use the previously introduced msm_special_pin_data to setup the special
+pins configuration if the SoC driver have them specified.
 
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- arch/arm/mach-snapdragon/include/mach/gpio.h | 16 +++++++++++++++-
- 1 file changed, 15 insertions(+), 1 deletion(-)
+ drivers/pinctrl/qcom/pinctrl-qcom.c | 37 +++++++++++++++++++++++++++++++++++--
+ 1 file changed, 35 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/mach-snapdragon/include/mach/gpio.h b/arch/arm/mach-snapdragon/include/mach/gpio.h
-index 53c6ae06490..cc8f405e20b 100644
---- a/arch/arm/mach-snapdragon/include/mach/gpio.h
-+++ b/arch/arm/mach-snapdragon/include/mach/gpio.h
-@@ -10,11 +10,25 @@
- #include <asm/types.h>
- #include <stdbool.h>
+diff --git a/drivers/pinctrl/qcom/pinctrl-qcom.c b/drivers/pinctrl/qcom/pinctrl-qcom.c
+index 4f4e9a83949..26a3fba194a 100644
+--- a/drivers/pinctrl/qcom/pinctrl-qcom.c
++++ b/drivers/pinctrl/qcom/pinctrl-qcom.c
+@@ -103,14 +103,47 @@ static int msm_pinmux_set(struct udevice *dev, unsigned int pin_selector,
+ 	return 0;
+ }
  
-+struct msm_special_pin_data {
-+	char *name;
++static int msm_pinconf_set_special(struct msm_pinctrl_priv *priv, unsigned int pin_selector,
++				   unsigned int param, unsigned int argument)
++{
++	unsigned int offset = pin_selector - priv->data->pin_data.special_pins_start;
++	const struct msm_special_pin_data *data;
 +
-+	u32 ctl_reg;
-+	u32 io_reg;
++	if (!priv->data->pin_data.special_pins_data)
++		return 0;
 +
-+	unsigned pull_bit:5;
-+	unsigned drv_bit:5;
++	data = &priv->data->pin_data.special_pins_data[offset];
 +
-+	unsigned oe_bit:5;
-+	unsigned in_bit:5;
-+	unsigned out_bit:5;
-+};
++	switch (param) {
++	case PIN_CONFIG_DRIVE_STRENGTH:
++		argument = (argument / 2) - 1;
++		clrsetbits_le32(priv->base + data->ctl_reg,
++				GENMASK(2, 0) << data->drv_bit,
++				argument << data->drv_bit);
++		break;
++	case PIN_CONFIG_BIAS_DISABLE:
++		clrbits_le32(priv->base + data->ctl_reg,
++			     TLMM_GPIO_PULL_MASK << data->pull_bit);
++		break;
++	case PIN_CONFIG_BIAS_PULL_UP:
++		clrsetbits_le32(priv->base + data->ctl_reg,
++				TLMM_GPIO_PULL_MASK << data->pull_bit,
++				argument << data->pull_bit);
++		break;
++	default:
++		return 0;
++	}
 +
- struct msm_pin_data {
- 	int pin_count;
- 	const unsigned int *pin_offsets;
--	/* Index of first special pin, these are ignored for now */
- 	unsigned int special_pins_start;
-+	const struct msm_special_pin_data *special_pins_data;
- };
++	return 0;
++}
++
+ static int msm_pinconf_set(struct udevice *dev, unsigned int pin_selector,
+ 			   unsigned int param, unsigned int argument)
+ {
+ 	struct msm_pinctrl_priv *priv = dev_get_priv(dev);
  
- static inline u32 qcom_pin_offset(const unsigned int *offs, unsigned int selector)
+-	/* Always NOP for special pins */
+ 	if (qcom_is_special_pin(&priv->data->pin_data, pin_selector))
+-		return 0;
++		return msm_pinconf_set_special(priv, pin_selector, param, argument);
+ 
+ 	switch (param) {
+ 	case PIN_CONFIG_DRIVE_STRENGTH:
 
 -- 
 2.34.1
