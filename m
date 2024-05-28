@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41E23C25B78
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 08:14:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 550ABC25B78
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 08:29:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E8968845B;
-	Tue, 28 May 2024 10:13:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id AFA6F88418;
+	Tue, 28 May 2024 10:29:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="n9D3uIg8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UwgXBzxb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C5928843A; Tue, 28 May 2024 10:13:36 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D75B088428; Tue, 28 May 2024 10:29:39 +0200 (CEST)
+Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
+ [IPv6:2607:f8b0:4864:20::429])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBC6388485
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 10:13:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5347588402
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 10:29:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44S8DWx3009759;
- Tue, 28 May 2024 03:13:32 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1716884012;
- bh=qSyf+5SmlaZDgnGNsNdJmhh7AbMd8xZfA/I88nlkkNo=;
- h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=n9D3uIg8X247besMCvmlE9i2b8SBaQvWKMERQ/4lGYO6/fEktQh1MOtxu28uz2GqK
- HkbPhSsGpgSfNjuYrp8PEtx4rO1/3wwXkMjG/WkGdYk3xViiiu2pSXeG6elD+4JJHt
- tp3OmQNYLaHChGiaSkANjMqgrjYQytBShz6g+Sds=
-Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44S8DW4X039056
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 28 May 2024 03:13:32 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 28
- May 2024 03:13:32 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 28 May 2024 03:13:32 -0500
-Received: from [127.0.1.1] (uda0497581.dhcp.ti.com [10.24.68.185])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44S8Cxus066670;
- Tue, 28 May 2024 03:13:28 -0500
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-Date: Tue, 28 May 2024 13:43:06 +0530
-Subject: [PATCH v2 7/7] configs: j721s2_evm_r5_defconfig: Add AVS Configs
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-6f8ecafd28cso402046b3a.3
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 01:29:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1716884976; x=1717489776; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=29VM3WZ8dmsUHbERM5GnF1ewc+RDYroCmJSXo7UPmBM=;
+ b=UwgXBzxblQifJvex5Y7xpP2K1TZnxcKmiosz+DkegIV7CT6tK+UyNcXhov3bQ5ixuz
+ fKaR0pKPSrMEPbIVrxegIH47bSGwHGqfq+zoMO7HrnhQqcmoApigZ3tS05c72aoWY4LS
+ sEYZMuK6uNu+Dc8pY/j/Ag/5OfZLvYso5g7KnoLwPLGs+oVqt86uSPzgXnQKsFCngtxx
+ qYQEq03J79PpaDTw5oJHXoZNBPF2zRMIx40ObHlPim4iCVhGOeA02HsMZPjOd43nxTcS
+ DUryci6VA1ZvibTRW0EOI3o7OYq8WuKRzO09Hg/xNE+QG5RvEfzvaLjtHiX+22ri/3VW
+ LNag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716884976; x=1717489776;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=29VM3WZ8dmsUHbERM5GnF1ewc+RDYroCmJSXo7UPmBM=;
+ b=FRhGgWNADjKvfsiFeUDtTf6CRUbsfyPIUOf5x9Lpo/WKnTFXj/mQEZGxPORBJwp9hk
+ qnrqTrHIkY4Cx2IJ4L7+x/SwVSNI+3h7Fu6CzVXUvZm+7Ij12YkM3cIAsR5SZTtTRz2/
+ w+V6EBi6Tr3tbEYQPcp8NNer59amJPC7OFtp2lVeLWWzfQ4ly2y83JEfkhsYFgrBYaBj
+ 6kmvuLTQqE1vzyxQYqNqQryiCMbj7A4eXbswXPAUcT8ZORS9G+OnyMgvDkDGh9HM7yvI
+ LHux8uS0+c4S1bNLeHQQ6S3TSrsNfMuI6Z/3kTrK6VYd27x7rX4J/NJMDxQNJL++1Bus
+ iH2A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVIFRGAIHYxNfEDexLQjYwbye9q/Aj83skK/0xy49GmU9u04gcjfeclRPGGBmrMsa1yYjJIDZHojA8hY9DnXItM3rL4Vg==
+X-Gm-Message-State: AOJu0YyOFfiRQrSpTywLDqVREYZkxOH18vWov57MsM2wJTgqXjEXNyiE
+ L5djJfSz59BVQmdTzasfgg8g29jkQE/oL9GgU7inn4P+SQxS2oHbaC1w4cr6fB5XGumf8g94XIo
+ 4XYXIXnrZQgqsGxvbipcpwudFZdcyGlHAtvIMFw==
+X-Google-Smtp-Source: AGHT+IE0h2tC3jlDR/sqeegxsj0oqN9cQaufT/YOvQRykAxZreT+hrrh4Wkk15zkKL4nWsjSGQpmfXPrMnLeS6QyBEU=
+X-Received: by 2002:a05:6a00:f90:b0:6f0:c828:87ef with SMTP id
+ d2e1a72fcca58-6f8f2a4a294mr13232642b3a.3.1716884975751; Tue, 28 May 2024
+ 01:29:35 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20240528-b4-upstream-j721s2-avs-v2-7-df940f2309d0@ti.com>
-References: <20240528-b4-upstream-j721s2-avs-v2-0-df940f2309d0@ti.com>
-In-Reply-To: <20240528-b4-upstream-j721s2-avs-v2-0-df940f2309d0@ti.com>
-To: Jaehoon Chung <jh80.chung@samsung.com>
-CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Keerthy J
- <j-keerthy@ti.com>, Udit Kumar <u-kumar1@ti.com>, Aniket Limaye
- <a-limaye@ti.com>, Tom Rini <trini@konsulko.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Andrew Davis <afd@ti.com>,
- Nishanth Menon <nm@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>
-X-Mailer: b4 0.13-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1716883980; l=1498;
- i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
- bh=PfzTadO7DQ+gD1tpMwIkMko/12Etvg/l+Q+3vdqlF5E=;
- b=CH+sEwcnaCC0tabPI9ErOx+9Jw/jtB2U/ynJnH6W3kyoGQrq6AhmTHDMgegxroHWtfx9ov3xu
- nO+PNespKanAyGJYh+wt8ktslNWb+LNHxjZvovH9YWZelyTP2ATJBRL
-X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
- pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20240527-b4-qcom-capsule-updates-v2-0-47583d7ad428@linaro.org>
+ <20240527-b4-qcom-capsule-updates-v2-6-47583d7ad428@linaro.org>
+In-Reply-To: <20240527-b4-qcom-capsule-updates-v2-6-47583d7ad428@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 28 May 2024 11:28:59 +0300
+Message-ID: <CAC_iWjKy+4Ch6HwymkV_HHpNsUsEtOv4XDfnCmgAhKvyA7ki_w@mail.gmail.com>
+Subject: Re: [PATCH v2 6/8] mach-snapdragon: use SYSRESET_PSCI
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,54 +92,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add AVS and PMIC regulator configs
+On Mon, 27 May 2024 at 20:17, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>
+> Capsule updates depend on SYSRESET, which we currently don't select but
+> instead use a custom reset_cpu() implementation which just calls
+> psci_reset().
+>
+> Clean this up, drop our custom function and require PSCI reset.
+>
+> There are some Qualcomm platforms that either can or do run without PSCI
+> support, but we didn't handle these properly before anyway.
+>
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>  arch/arm/Kconfig                 | 2 ++
+>  arch/arm/mach-snapdragon/board.c | 5 -----
+>  2 files changed, 2 insertions(+), 5 deletions(-)
+>
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> index 39ad03acd2e4..0d5161358e33 100644
+> --- a/arch/arm/Kconfig
+> +++ b/arch/arm/Kconfig
+> @@ -1084,8 +1084,10 @@ config ARCH_SNAPDRAGON
+>         select OF_CONTROL
+>         select OF_SEPARATE
+>         select SMEM
+>         select SPMI
+> +       select SYSRESET
+> +       select SYSRESET_PSCI
+>         select BOARD_LATE_INIT
+>         select OF_BOARD
+>         select SAVE_PREV_BL_FDT_ADDR
+>         select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK
+> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+> index c4a3394706e6..b0d9a65bb8f5 100644
+> --- a/arch/arm/mach-snapdragon/board.c
+> +++ b/arch/arm/mach-snapdragon/board.c
+> @@ -106,13 +106,8 @@ void *board_fdt_blob_setup(int *err)
+>
+>         return (void *)fdt;
+>  }
+>
+> -void reset_cpu(void)
+> -{
+> -       psci_system_reset();
+> -}
+> -
+>  /*
+>   * Some Qualcomm boards require GPIO configuration when switching USB modes.
+>   * Support setting this configuration via pinctrl state.
+>   */
+>
+> --
+> 2.45.0
+>
 
-Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
----
- configs/am68_sk_r5_defconfig    | 4 ++++
- configs/j721s2_evm_r5_defconfig | 6 ++++++
- 2 files changed, 10 insertions(+)
-
-diff --git a/configs/am68_sk_r5_defconfig b/configs/am68_sk_r5_defconfig
-index e9b6882c1f68..f4800ef1b8ac 100644
---- a/configs/am68_sk_r5_defconfig
-+++ b/configs/am68_sk_r5_defconfig
-@@ -5,6 +5,10 @@ CONFIG_ARCH_K3=y
- CONFIG_SOC_K3_J721S2=y
- CONFIG_TARGET_J721S2_R5_EVM=y
- 
-+CONFIG_K3_AVS0=n
-+CONFIG_DM_REGULATOR_TPS65941=n
-+CONFIG_PMIC_TPS65941=n
-+
- CONFIG_DEFAULT_DEVICE_TREE="k3-am68-sk-r5-base-board"
- CONFIG_SPL_OF_LIST="k3-am68-sk-r5-base-board"
- CONFIG_OF_LIST="k3-am68-sk-r5-base-board"
-diff --git a/configs/j721s2_evm_r5_defconfig b/configs/j721s2_evm_r5_defconfig
-index 3c958cafbe8f..f8a42a9a2ef6 100644
---- a/configs/j721s2_evm_r5_defconfig
-+++ b/configs/j721s2_evm_r5_defconfig
-@@ -111,6 +111,7 @@ CONFIG_DM_MAILBOX=y
- CONFIG_K3_SEC_PROXY=y
- CONFIG_FS_LOADER=y
- CONFIG_SPL_FS_LOADER=y
-+CONFIG_K3_AVS0=y
- CONFIG_SUPPORT_EMMC_BOOT=y
- CONFIG_SPL_MMC_HS400_SUPPORT=y
- CONFIG_MMC_SDHCI=y
-@@ -140,6 +141,11 @@ CONFIG_SPL_PINCTRL=y
- CONFIG_PINCTRL_SINGLE=y
- CONFIG_POWER_DOMAIN=y
- CONFIG_TI_POWER_DOMAIN=y
-+CONFIG_DM_PMIC=y
-+CONFIG_PMIC_TPS65941=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_SPL_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_TPS65941=y
- CONFIG_K3_SYSTEM_CONTROLLER=y
- CONFIG_REMOTEPROC_TI_K3_ARM64=y
- CONFIG_RESET_TI_SCI=y
-
--- 
-2.43.2
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
