@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5716C25B79
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 08:04:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAE98C25B79
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 08:04:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0171688412;
-	Tue, 28 May 2024 10:04:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 65AD987F8D;
+	Tue, 28 May 2024 10:04:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="s/j11xqN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cZn7hefS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F30D88418; Tue, 28 May 2024 10:04:06 +0200 (CEST)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
+ id 72F7587F31; Tue, 28 May 2024 10:04:44 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CD9587F8D
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 10:04:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A1A987F8D
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 10:04:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2e95a883101so5750101fa.3
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 01:04:04 -0700 (PDT)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-421124a04d6so3821455e9.3
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 01:04:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716883443; x=1717488243; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1716883480; x=1717488280; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=W8moefeEYB+tMXPSiBG1kG/xJz6XTjKtKP0Cbuw1Zc8=;
- b=s/j11xqNpN9DVbNALzWOtCV64jimaAX1IT6hvx0dHQT6kfLTgTWf/LufSAAMAnF4Pf
- zUN/vh+Ek4K01nbbu0BC2QLB/d1ppttwNid9PHm1zIm14OUXGCyfKHc3N01Gud7bu1iC
- Aj5sTQ8Vx8lxyBK7Er2MFLF0cGTEMfgseTu/snoLqfYtR5tevXFxUX9vou9SRaKpHVSS
- BhmCwVsAs1yh535NzvY87n4mQrytlIwWjB9Eye49Q6qeC/uhqCNVnTBrwcx9VqtZhzT7
- StHCsaqpR1IpK1i+/RDVhakBRW1R8yJmKV+tqZbwGzi2Am77pomMkZ2uY1H+/QfwZkp6
- UTNA==
+ :reply-to; bh=G4Jd0Mf5Rpg0fX74qYCq1SFuzFA70otscf/0i4j5V9Y=;
+ b=cZn7hefSgGDrsaO85ycFE8nHU2RMBcA1ctyc2bRJTaSxRkaRrYBFKAQpZ4mCfMMdYJ
+ DA+/NYLPt3LGQDq2eGG0VcRjOrCPlOcr3eWt/DKE3WZb9dq1ScwgZzEGO2uNGB3MPMK9
+ HJlBKN1TBCOCxJW7f3rmj4fREXejQYEc++yLsVktcVvqCIZePnpfq+RL+kpvzYMfpy6h
+ grdqSI9kD4v7g/EOprZt7du47uGT6/UN6Y2CU+ZVNE5fCE04lwztRl7rQvIZmarjmdt/
+ 4eJy0V1ddbnxwJlrfMAJ1BFDCXSrTVdVMTyDRxAqB1r8s5215TUSGPL8DJdkAKpwJhLP
+ NtNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716883443; x=1717488243;
+ d=1e100.net; s=20230601; t=1716883480; x=1717488280;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=W8moefeEYB+tMXPSiBG1kG/xJz6XTjKtKP0Cbuw1Zc8=;
- b=DW+biaf74TvOZwOjL8847o0OgTzz7Uo3ciu0YWUxQKLWqhmFZWLOGRS9gweLdg+3Av
- +DQoe8s1pU7uNi8sgMztR9GDVqg8cNERx6x6n/mMydWhAECV1QAtD26SeK1PV+85sx85
- 9O9wGer7jSKzlhk5HE25eBNKlcrmizAt1GwqOAj4t2CH4AjNScoustB5vKGZxBLw+5MM
- +6Og+igBH/02da4HWJOo7nTLGiUUDNZQewK3ggrWL82G3LfVJPJacxU0OJLCgGUfehPX
- BCw0Y6v1O67Az7EIneQwBUp3fFB9eyiylkXQO0rg1dhsbPT7prL2ufKXNNEPInfEqjCi
- nEqw==
+ bh=G4Jd0Mf5Rpg0fX74qYCq1SFuzFA70otscf/0i4j5V9Y=;
+ b=FZQun5+G6u0w9j53y8IA/Ut2UjvY6g2QCjG1hERA5R7LM0D7gvjTY/nVAaVIZjO3jQ
+ NLaJAYDDUpCKV0UYt8q81Dz6Yanx1eLFXSEZuD3olEjj6Q7fK08Ae0NSognx4lQWMKd0
+ uGGTbQKP1U4hS3i56Qgv9IOvXIV6ebOhPoQ9wRPcmJXytccmhmo+HbwcbdYCjJOkhYcc
+ RTsGAmaBS4Elip1Lw8EggAhq5R3Vgk5aYCl9Eq64maDWfbo/bRTCWEakD/4qZQV1CSz1
+ opQWjJqChwug11stFcg+OWdM7+SptANGfUa/k4dEOywMEdCAqZsNOd2L+Rdhhjq9fV+z
+ KKnQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXuAYA8XzBt5Jt6TlZEsPfWmd0+f6l4m4hzRlctsE5dHjuSqON2hKmz7PElpNH3ezuLlRGkVHTdYe+0fdRh4Jb/u9AgkA==
-X-Gm-Message-State: AOJu0YwV+6xGim5dpOD2f5KUEWmNmrr1OZ8cyIv1nkWztoKuhU9PmTC/
- LPBt+UF30tEICynZTnTRFmn0faCAsrovow81AE9Z2G9jMbZ+XqNAGkpK1i6xE6A=
-X-Google-Smtp-Source: AGHT+IHaGvDYFOhnBrwEctYmvWXlcRjs+Lm9Z/rWw0ledNvfG1VsjmmkKu/84+1qsnoATi2fF/5RQA==
-X-Received: by 2002:a2e:9808:0:b0:2dc:bd75:41ba with SMTP id
- 38308e7fff4ca-2e95b0cc3b9mr66857551fa.27.1716883443119; 
- Tue, 28 May 2024 01:04:03 -0700 (PDT)
+ AJvYcCUNxq7eqHM0Ez2vblhBnin0AlDM++wGfN8AX5XrSmWGkDO5vrIxQUrCq3bDq9guWxpfz0zch7TO1C/2tBlPxVRv6IN0Zw==
+X-Gm-Message-State: AOJu0YyqWHg+kKJi29GuIufQwvneThkJoHfpUCEO/PfVp4RBHEkQOryH
+ liG467QOJSCFah4q07bsGAueh6WHZykLYeUYqGVUUci8o9/Ia88asag8rq3vAKU=
+X-Google-Smtp-Source: AGHT+IFBcPB5zcAnu1rhathsemBPOGeRkCWc1ukXghzFb0BJyu7jhe4Si1FPmV6ACimb7Hq116EovQ==
+X-Received: by 2002:adf:eac6:0:b0:354:f386:d44 with SMTP id
+ ffacd0b85a97d-3552f4fdb02mr8305152f8f.69.1716883480356; 
+ Tue, 28 May 2024 01:04:40 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:982:cbb0:8f19:f965:3f93:6385?
  ([2a01:e0a:982:cbb0:8f19:f965:3f93:6385])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42100fb99e8sm165636865e9.43.2024.05.28.01.04.02
+ ffacd0b85a97d-35579f9649esm10876531f8f.29.2024.05.28.01.04.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 May 2024 01:04:02 -0700 (PDT)
-Message-ID: <5d67ec7a-b938-46f1-b919-c9733fbf230d@linaro.org>
-Date: Tue, 28 May 2024 10:04:01 +0200
+ Tue, 28 May 2024 01:04:40 -0700 (PDT)
+Message-ID: <31fc866e-6f84-4694-b6fc-d0e6f59e4bec@linaro.org>
+Date: Tue, 28 May 2024 10:04:39 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 3/8] mmc: msm_sdhci: work around a bug when writing
+Subject: Re: [PATCH v2 6/8] mach-snapdragon: use SYSRESET_PSCI
 To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
  <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Lukasz Majewski <lukma@denx.de>,
@@ -82,7 +82,7 @@ To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
  u-boot-qcom@groups.io
 References: <20240527-b4-qcom-capsule-updates-v2-0-47583d7ad428@linaro.org>
- <20240527-b4-qcom-capsule-updates-v2-3-47583d7ad428@linaro.org>
+ <20240527-b4-qcom-capsule-updates-v2-6-47583d7ad428@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -109,7 +109,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20240527-b4-qcom-capsule-updates-v2-3-47583d7ad428@linaro.org>
+In-Reply-To: <20240527-b4-qcom-capsule-updates-v2-6-47583d7ad428@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -130,37 +130,54 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 27/05/2024 19:17, Caleb Connolly wrote:
-> For some unknown reason, writes of larger than 1 block always fail with
-> a checksum error on Qualcomm v5 controllers.
+> Capsule updates depend on SYSRESET, which we currently don't select but
+> instead use a custom reset_cpu() implementation which just calls
+> psci_reset().
 > 
-> Until this is resolved, work around the issue by setting b_max to 1 for
-> these controllers.
+> Clean this up, drop our custom function and require PSCI reset.
+> 
+> There are some Qualcomm platforms that either can or do run without PSCI
+> support, but we didn't handle these properly before anyway.
 > 
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->   drivers/mmc/msm_sdhci.c | 7 +++++++
->   1 file changed, 7 insertions(+)
+>   arch/arm/Kconfig                 | 2 ++
+>   arch/arm/mach-snapdragon/board.c | 5 -----
+>   2 files changed, 2 insertions(+), 5 deletions(-)
 > 
-> diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
-> index 4ce0de6c47d8..fc3e8d101b6e 100644
-> --- a/drivers/mmc/msm_sdhci.c
-> +++ b/drivers/mmc/msm_sdhci.c
-> @@ -195,8 +195,15 @@ static int msm_sdc_probe(struct udevice *dev)
->   		return ret;
->   	host->mmc->priv = &prv->host;
->   	upriv->mmc = host->mmc;
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> index 39ad03acd2e4..0d5161358e33 100644
+> --- a/arch/arm/Kconfig
+> +++ b/arch/arm/Kconfig
+> @@ -1084,8 +1084,10 @@ config ARCH_SNAPDRAGON
+>   	select OF_CONTROL
+>   	select OF_SEPARATE
+>   	select SMEM
+>   	select SPMI
+> +	select SYSRESET
+> +	select SYSRESET_PSCI
+>   	select BOARD_LATE_INIT
+>   	select OF_BOARD
+>   	select SAVE_PREV_BL_FDT_ADDR
+>   	select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK
+> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+> index c4a3394706e6..b0d9a65bb8f5 100644
+> --- a/arch/arm/mach-snapdragon/board.c
+> +++ b/arch/arm/mach-snapdragon/board.c
+> @@ -106,13 +106,8 @@ void *board_fdt_blob_setup(int *err)
 >   
-> +	/*
-> +	 * FIXME: v5 controllers have a bug in U-Boot that causes all writes
-> +	 * greater than 1 block to fail. Work around this by setting b_max to 1.
-> +	 */
-> +	if (var_info->mci_removed)
-> +		plat->cfg.b_max = 1;
-> +
->   	return sdhci_probe(dev);
+>   	return (void *)fdt;
 >   }
 >   
->   static int msm_sdc_remove(struct udevice *dev)
+> -void reset_cpu(void)
+> -{
+> -	psci_system_reset();
+> -}
+> -
+>   /*
+>    * Some Qualcomm boards require GPIO configuration when switching USB modes.
+>    * Support setting this configuration via pinctrl state.
+>    */
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
