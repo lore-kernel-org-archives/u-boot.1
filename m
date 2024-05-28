@@ -4,80 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BFA1C25B7C
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 16:49:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82695C25B78
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 16:59:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B317A885AE;
-	Tue, 28 May 2024 18:47:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=timesys.com
+	by phobos.denx.de (Postfix) with ESMTP id E0184880DB;
+	Tue, 28 May 2024 18:59:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=timesys-com.20230601.gappssmtp.com header.i=@timesys-com.20230601.gappssmtp.com header.b="BV2gohe1";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="cvmHw/ji";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6200884D2; Tue, 28 May 2024 17:05:47 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0AA5888349; Tue, 28 May 2024 18:59:21 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33CFC884B2
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 17:05:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 051548704E
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 18:59:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=timesys.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=piotr.wojtaszczyk@timesys.com
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5785fc9c543so1173610a12.1
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 08:05:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=timesys-com.20230601.gappssmtp.com; s=20230601; t=1716908744; x=1717513544;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=CcOzxDgGeRgB7BQXzVC58bAHiXPeoVyqs/yJF9csQgA=;
- b=BV2gohe17jPdLWCiL+mNJqmgq5D70hItw7y0wszkvT3si6q+UvteGmX5ezIX6tUKH1
- 00tAhjlNVRAffSey6sXFQ7Vi+OUNMcLsAZMsRlyH5VQQuVH1/ICwWvsBf5dFuwqDh2Z0
- H9/nt+Txli6o0i9CavR3fqOjnBzxfQZVCGgeZBUt57U/+CkpDLxMok7kusATVuNGLiTu
- NLsxOI1p0bhHHMtWvPAeVkJa4Jfs1HWdU7ZxJCmR4M3Kts60BKmOhiBn/oPdfUnpW7Tx
- nq6xCzR1YpwLzaBP6Dht5wk5R5pVIDYbBMNXYeOLzETv2Mm9VIfzC5NQTVb99OWUNo+b
- CsxQ==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 844F1400F8
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 16:59:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1716915558;
+ bh=pmuaDO6zjTM4TnFL8LIIZne+W8so2M9m4beWkpbdOfk=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=cvmHw/jiS58wM1Ok5cQnLvdPZfpkRusmqSgpgf5EMl4MbE+BVEgl4TN+MceCBsWiB
+ bUBfBQhhceW9/ugwuT+whid5W6c7kOplmkaI3Cc5aTlxkmiYqEYfCqzS8hx1/Ik/zc
+ yBzkEms0PBWzE4sq6FgqZ3FiiLaSinC5VUFJJSAGnV5INXDUof6Zjx/6JqDpKckPv/
+ 0SoR3z6CLuqlSieBGvF+1k/xocadG+JN76jA+dPVivCRvZrgcipLe7DSAqnO7nWqbO
+ ypzGrtF/dDwM51GRYnNdV2FZka/XLmWhbBC/9n8rw893Stlq0Kc/CWALvTRQGKRmNa
+ 2lAbarXGZKmcw==
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-354f28306dfso817319f8f.0
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 09:59:18 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716908744; x=1717513544;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=CcOzxDgGeRgB7BQXzVC58bAHiXPeoVyqs/yJF9csQgA=;
- b=c/u6oCb+LvTeKfPl3XxgATd/alYCX0G7C8wievqJl5egtOjnNNi7OTWtx7ztlCH5iM
- wq/PoyyGjLRQmTh+tHUfAFOaVEwVRAggD3STUgvty66VNHZGANnzRyaCfdwH9VRqBFU6
- GIowRfuyV+EYNPEIJenYsfLZwf0I01QTG8Zgvz+dKYW1cmcZXW1dyjNbtHuZrTH/fKmZ
- L+SrJZgKCruAUBjhsuMtmxaG9Fk47zKjYvcOJ9LhsvXFcQG7asl63DGlv0b0zj60RLBY
- LKey8OnIgNKQWqpCgqFfEfAvMNabEuEE0tbcFX5m/hM76XozKnv8YJOhEdCSyxzSO1Er
- M8sg==
-X-Gm-Message-State: AOJu0Yw54Ol+btOvqU607XV6ypUueWNyW2fU4au9gaeRD6jk4Eraigz6
- BKRuD47JCx1oV6sRkSnWqzeMRAkH03sNRIse6hQ374C022PovxJow922OjpmI0ArsM05anZJzLW
- FS+gN1Q==
-X-Google-Smtp-Source: AGHT+IGK7oYUtJzq0HOpteE4kndSKQFfGPvdTnwNX0ih+5K6trO1H1L7F93Gqj8YRPgQ7Anfu4Ek/g==
-X-Received: by 2002:a50:ab5a:0:b0:579:f08c:105b with SMTP id
- 4fb4d7f45d1cf-579f08c10a4mr3004722a12.35.1716908744115; 
- Tue, 28 May 2024 08:05:44 -0700 (PDT)
-Received: from localhost.localdomain ([91.216.213.152])
+ d=1e100.net; s=20230601; t=1716915558; x=1717520358;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=pmuaDO6zjTM4TnFL8LIIZne+W8so2M9m4beWkpbdOfk=;
+ b=EC3QJQtKhqh3PKAFKMadfZQLO6RZ6uvMG2iFOFHrQkqQRuq7MDyGZv4i5sOTwm3Sw4
+ XtlP/FFdU0ZStb8GcrlsBYphn4TDJPi91UWC9lGSw3cg0Jd2M3IDHVUX8xde1dtvj7gx
+ 1k2x7WbvzchjHOrBGEFxE8HPSsggTCHrKxMN9iA1RxEptYjzHwbCsPQxTLQTxtR3+TMz
+ nlFf5XCyBOwgQtuXcS1P0+ZN80zBYeyRBw2ieAXata1neMcnrIg9TcU8pQqrAnxWK7km
+ Udbo9UxEWZ9QLbsiaXFKm4toE7X0p8CZdT47re3+hBA2oaD337ivOHhAt+SV2PBw0BDP
+ E2YQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXaHMdyzqkQ/cBPQFJLm+DjqoDVL2HCr5q2eJd7HCtGD24QY2aGN0z8R6v+hY2d2Ns0xgzw/7hS7NrTWh9RbkEnzrMbww==
+X-Gm-Message-State: AOJu0YxWLqP0VBIjILbsDkOk1DD+mOa2F2qe1rm/40BglMWU4aILWmeZ
+ byE+R4JY+u85fV1s6ENRPggmavABau7rMY8H03fYxD0y/lmaHAZM1qdyf+iShI+XXc7TetJyAzD
+ g9E3FzDMaqwxZCEZL6mo7K7taVhydSRZKelc43MHU7lbiHuQYY961HaapCuldxqBuEc0=
+X-Received: by 2002:adf:fe92:0:b0:34c:fd82:6b03 with SMTP id
+ ffacd0b85a97d-35526c380bemr9325304f8f.19.1716915558033; 
+ Tue, 28 May 2024 09:59:18 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGzZbRMj0q/iVusa34EUClrjfObRgV1JV2vVyfa1NqACroeANyT5EQhfS/OiMESWLWcDCAvKA==
+X-Received: by 2002:adf:fe92:0:b0:34c:fd82:6b03 with SMTP id
+ ffacd0b85a97d-35526c380bemr9325289f8f.19.1716915557584; 
+ Tue, 28 May 2024 09:59:17 -0700 (PDT)
+Received: from ?IPV6:2a00:20:d00b:f75d:fdbe:9c2a:66b:5f2b?
+ ([2a00:20:d00b:f75d:fdbe:9c2a:66b:5f2b])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5786957ec9esm5219812a12.1.2024.05.28.08.05.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 May 2024 08:05:43 -0700 (PDT)
-From: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
-To: u-boot@lists.denx.de
-Cc: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>,
- Ben Dooks <ben.dooks@sifive.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] fs: ubifs: Add support for ZSTD decompression
-Date: Tue, 28 May 2024 17:05:28 +0200
-Message-Id: <20240528150528.1982853-1-piotr.wojtaszczyk@timesys.com>
-X-Mailer: git-send-email 2.25.1
+ ffacd0b85a97d-3557a090c20sm12147404f8f.62.2024.05.28.09.59.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 28 May 2024 09:59:16 -0700 (PDT)
+Message-ID: <ea4d7ee9-811b-4713-9fc1-f5084d8c2d05@canonical.com>
+Date: Tue, 28 May 2024 18:59:15 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 28 May 2024 18:47:36 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/8] efi_loader: allow concatenation with contained end
+ node
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Shantur Rathore <i@shantur.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, Bin Meng
+ <bmeng@tinylab.org>, Mark Kettenis <kettenis@openbsd.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
+References: <20240528144252.179247-1-heinrich.schuchardt@canonical.com>
+ <20240528144252.179247-2-heinrich.schuchardt@canonical.com>
+ <CAC_iWjJFiSrPZveDDhX7wW9J-gBiTCUw2jXpw9MG_+K3nsGaEA@mail.gmail.com>
+ <9bcf8dff-1c67-477c-b425-cbb79f5ecfc3@canonical.com>
+ <CAC_iWjLwRsgWK33q76rwqg0ovE4h80SHZTjjUqPUsPMgdh7SbQ@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAC_iWjLwRsgWK33q76rwqg0ovE4h80SHZTjjUqPUsPMgdh7SbQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,129 +116,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ZSTD can be a better tradeoff between NAND IO operations and decompression
-speed giving a better boot time.
+On 28.05.24 18:18, Ilias Apalodimas wrote:
+> [...]
+> 
+>>>> -               unsigned sz2 = efi_dp_size(dp2);
+>>>> +               size_t sz1;
+>>>> +               size_t sz2 = efi_dp_size(dp2);
+>>>>                   void *p;
+>>>>
+>>>> +               if (split_end_node < sizeof(struct efi_device_path))
+>>>
+>>> Can we be more explicit here pls? Someone might misuse this in the future
+>>> split_end_node < =1 ? And we can document we can use values up to
+>>> sizeof(struct efi_device_path) if we ever need extra functionality
+>>
+>> size_t split_end_node cannot be negative.
+>>
+>> The case split_end_node == 0 is handled below. What are you missing?
+> 
+> someone misusing it and passing a value of '3' for example and print
+> an error if the value is
+> 1 < value < sizeof(struct efi_device_path)
 
-Signed-off-by: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
----
+I would like to avoid over-engineering. How about
 
- fs/ubifs/ubifs-media.h |  2 ++
- fs/ubifs/ubifs.c       | 53 ++++++++++++++++++++++++++++++++++++++++--
- 2 files changed, 53 insertions(+), 2 deletions(-)
+-               if (split_end_node < sizeof(struct efi_device_path))
++               if (split_end_node < 2)
 
-diff --git a/fs/ubifs/ubifs-media.h b/fs/ubifs/ubifs-media.h
-index 2b5b26a01b..299d80f928 100644
---- a/fs/ubifs/ubifs-media.h
-+++ b/fs/ubifs/ubifs-media.h
-@@ -320,12 +320,14 @@ enum {
-  * UBIFS_COMPR_NONE: no compression
-  * UBIFS_COMPR_LZO: LZO compression
-  * UBIFS_COMPR_ZLIB: ZLIB compression
-+ * UBIFS_COMPR_ZSTD: ZSTD compression
-  * UBIFS_COMPR_TYPES_CNT: count of supported compression types
-  */
- enum {
- 	UBIFS_COMPR_NONE,
- 	UBIFS_COMPR_LZO,
- 	UBIFS_COMPR_ZLIB,
-+	UBIFS_COMPR_ZSTD,
- 	UBIFS_COMPR_TYPES_CNT,
- };
- 
-diff --git a/fs/ubifs/ubifs.c b/fs/ubifs/ubifs.c
-index a509584e5d..ff3945e7fd 100644
---- a/fs/ubifs/ubifs.c
-+++ b/fs/ubifs/ubifs.c
-@@ -27,6 +27,11 @@
- #include <linux/err.h>
- #include <linux/lzo.h>
- 
-+#if IS_ENABLED(CONFIG_ZSTD)
-+#include <linux/zstd.h>
-+#include <abuf.h>
-+#endif
-+
- DECLARE_GLOBAL_DATA_PTR;
- 
- /* compress.c */
-@@ -42,6 +47,25 @@ static int gzip_decompress(const unsigned char *in, size_t in_len,
- 		      (unsigned long *)out_len, 0, 0);
- }
- 
-+#if IS_ENABLED(CONFIG_ZSTD)
-+static int zstd_decompress_wrapper(const unsigned char *in, size_t in_len,
-+				   unsigned char *out, size_t *out_len)
-+{
-+	struct abuf abuf_in, abuf_out;
-+	int ret;
-+
-+	abuf_init_set(&abuf_in, (void *)in, in_len);
-+	abuf_init_set(&abuf_out, (void *)out, *out_len);
-+
-+	ret = zstd_decompress(&abuf_in, &abuf_out);
-+	if (ret < 0)
-+		return ret;
-+
-+	*out_len = ret;
-+	return 0;
-+}
-+#endif
-+
- /* Fake description object for the "none" compressor */
- static struct ubifs_compressor none_compr = {
- 	.compr_type = UBIFS_COMPR_NONE,
-@@ -71,8 +95,21 @@ static struct ubifs_compressor zlib_compr = {
- 	.decompress = gzip_decompress,
- };
- 
-+#if IS_ENABLED(CONFIG_ZSTD)
-+static struct ubifs_compressor zstd_compr = {
-+	.compr_type = UBIFS_COMPR_ZSTD,
-+#ifndef __UBOOT__
-+	.comp_mutex = &zstd_enc_mutex,
-+	.decomp_mutex = &zstd_dec_mutex,
-+#endif
-+	.name = "zstd",
-+	.capi_name = "zstd",
-+	.decompress = zstd_decompress_wrapper,
-+};
-+#endif
-+
- /* All UBIFS compressors */
--struct ubifs_compressor *ubifs_compressors[UBIFS_COMPR_TYPES_CNT];
-+struct ubifs_compressor *ubifs_compressors[UBIFS_COMPR_TYPES_CNT] = {NULL};
- 
- 
- #ifdef __UBOOT__
-@@ -166,8 +203,14 @@ int ubifs_decompress(const struct ubifs_info *c, const void *in_buf,
- 
- 	compr = ubifs_compressors[compr_type];
- 
-+	if (unlikely(!compr)) {
-+		ubifs_err(c, "compression type %d is not compiled in", compr_type);
-+		return -EINVAL;
-+	}
-+
- 	if (unlikely(!compr->capi_name)) {
--		ubifs_err(c, "%s compression is not compiled in", compr->name);
-+		ubifs_err(c, "%s compression is not compiled in",
-+			  compr->name ? compr->name : "unknown");
- 		return -EINVAL;
- 	}
- 
-@@ -232,6 +275,12 @@ int __init ubifs_compressors_init(void)
- 	if (err)
- 		return err;
- 
-+#if IS_ENABLED(CONFIG_ZSTD)
-+	err = compr_init(&zstd_compr);
-+	if (err)
-+		return err;
-+#endif
-+
- 	err = compr_init(&none_compr);
- 	if (err)
- 		return err;
--- 
-2.25.1
+and changing the function description to refer to >= 2?
+
+Best regards
+
+Heinrich
+
+> 
+> Thanks
+> /Ilias
+>>
+>> Best regards
+>>
+>> Heinrich
+>>
+>>>
+>>>> +                       sz1 = efi_dp_size(dp1);
+>>>> +               else
+>>>> +                       sz1 = split_end_node;
+>>>> +
+>>>>                   if (split_end_node)
+>>>>                           end_size = 2 * sizeof(END);
+>>>>                   else
+>>>> diff --git a/lib/efi_loader/efi_device_path_utilities.c b/lib/efi_loader/efi_device_path_utilities.c
+>>>> index c95dbfa9b5f..ac250bbfcc9 100644
+>>>> --- a/lib/efi_loader/efi_device_path_utilities.c
+>>>> +++ b/lib/efi_loader/efi_device_path_utilities.c
+>>>> @@ -76,7 +76,7 @@ static struct efi_device_path * EFIAPI append_device_path(
+>>>>           const struct efi_device_path *src2)
+>>>>    {
+>>>>           EFI_ENTRY("%pD, %pD", src1, src2);
+>>>> -       return EFI_EXIT(efi_dp_concat(src1, src2, false));
+>>>> +       return EFI_EXIT(efi_dp_concat(src1, src2, 0));
+>>>>    }
+>>>>
+>>>>    /*
+>>>> --
+>>>> 2.43.0
+>>>>
+>>>
+>>> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>>
 
