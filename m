@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A80C6C25B78
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 10:00:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91F4BC25B7C
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 10:00:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D81E8845C;
+	by phobos.denx.de (Postfix) with ESMTP id EF0AB88489;
 	Tue, 28 May 2024 12:00:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CLBa6W9n";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Xt3AKlIv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D18AF884A1; Tue, 28 May 2024 12:00:04 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id D6D968845C; Tue, 28 May 2024 12:00:04 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A5918845C
+ by phobos.denx.de (Postfix) with ESMTPS id AF7D08844E
  for <u-boot@lists.denx.de>; Tue, 28 May 2024 12:00:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5789733769dso4125303a12.1
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-579cd80450fso3277742a12.0
  for <u-boot@lists.denx.de>; Tue, 28 May 2024 03:00:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716890401; x=1717495201; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1716890402; x=1717495202; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zn4qHRIEXQRZCGdD33LaWO+TFK6M/LsyWODLoP7skpw=;
- b=CLBa6W9nTLi7xdje/HO5eW4aBuUIn1m8JzoDaAalzI+NAWf7TM3fx4M2IwtqKTueES
- jcxPN1MlB4cvfZD1Vjc2OnM1FJoz7CVevxE42FfV2wS98jMc6ZowlIRSX2ghN/+D1yId
- 9DEF3er2gWEBxOxlbM2GG+JIB9uKtVuNjeS0wiOwokYyd8kJr/nUOqkE6xrVzeR298Ur
- XNC1qioLK17i7xW0XL55EDDRRPG4daLkZc0wP5NlFJhQ2OOduojExOyPQqo6vwTM1ilY
- A1Cx7egwHy7n68Ljpv9kUvJFJctXORf47mEDJiP37iBHDYZE2BOuFwtjEVbUV1q0OvIZ
- Mzwg==
+ bh=TUhgo7vzr5uWqNY/zLlafWR0bopXL1LEQh6Ai7ZHEFE=;
+ b=Xt3AKlIvkL7D3XRzrCnnK3i1B1Oj1hqjHLX5I9cq/YGqVpg0S5KbYhK1oEg45C3/m5
+ Xzo3QMpRDFCe7boa57wIH6muWNl2WA1Gxf2qiReL1Ms+II1gj/Lz87J6pxhrS2oymw71
+ oaZ1R+GZrZvdQ7IJVUkXOy8jxUHAh1/r8BHOiSrVnnh0SjUPeNicjc39xt3E41FCUQkr
+ DX885Axs3gPY4t4u0mF1fHBtPxbEB18B5CAfWHiFEWvOOHejhgPI/Yn4GuPMxutu8oQ/
+ fJg/6RTmdN9sPMVYI0yAso1PD6V+BTGcHxUCTThtn3mcr0VNMGrn6Yk4UIB0QJK6+jvA
+ 61iA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716890401; x=1717495201;
+ d=1e100.net; s=20230601; t=1716890402; x=1717495202;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zn4qHRIEXQRZCGdD33LaWO+TFK6M/LsyWODLoP7skpw=;
- b=WgZVz8RqzlE2Y8CSxtXTIFAHaYYNo1x3lFr2RnAxDhUH7QCotG7Se3mKK1ZZQ6c9lv
- ZfN2TgrKfgqM3S3DPT0VkIjk907TeWlkaVTq0HD8BweKapzQV5a7rdaXBZ6BuJbg0Aoq
- +lccUP08fKDKpxR9yZrXLLiGFMi8W/wouoEPgvXH/HcP3ZIVxNoIdCYeKidPY810Ef10
- 8OVxyBzbvDStRdM4MFa+drSGosjlAnLYZw+NbJrtM/RRAqyjt2ZHwE6C+ojrdTPkATCb
- aMckSWMxvb8jIcsL/eJydWbYnsS5beYxpEqxHDyR6XH4L7SMJpNU7q7cQ51QGbjUZVTy
- 7F6A==
+ bh=TUhgo7vzr5uWqNY/zLlafWR0bopXL1LEQh6Ai7ZHEFE=;
+ b=dEM5V63SqSKP2/NW9zf21dfGNEZn4bn/fRHxDvnmAEX05R3UeyLUx4Zsugj4Rsk8M0
+ rVVuAaGlX2EU7T45FB8/Ysntzvm5b2JoVHwsrvo1f+hd/xRpaMq2YzZaNLRaHHvQ9Bmp
+ GbU+02ZhK0GZzkyDrTh9Rek4OGr/8f4tU27p4iTn5BefsSwFVmQeLSjHJkn7O92ex8Sq
+ +DLnd/hmHWD5Vop83qLJUrmwwC8rARTuzt4IXyfoTEXY7eHpJci5N0ePMvsw+EcFA6tc
+ NFC6wNZXHDjhshYP6TwTKOrLMdwRtIyaHFXLhX/QuUaeOuznlVeXcSYfeUkCiEhpuFIk
+ xjwQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX/4KQRAfWB6/qYItrf+yRaHSYnWyL9uOadstgP9RnPv1OsfPm22SaMmlUFhPaF+9kypBx0n1SS0l4M+UL/9q1fnSRZyw==
-X-Gm-Message-State: AOJu0YyC8uXUmS5mPgX9P3Om5o28I2EGUoTilrUKmBxC5FiAQnB7gosm
- tPKKcGmlVPzVpTuDzu5CzVQycLdG991ZrKbwJyzKlnpXVsttFw/D
-X-Google-Smtp-Source: AGHT+IHq68W5hWy5gSNJV9eVt2UuhEsG+jdfRkAp5sWz9kvs9tA0rKKQJAUY5ecPWrFbVCfVZWUEqA==
-X-Received: by 2002:a17:906:a04e:b0:a62:44e1:3f56 with SMTP id
- a640c23a62f3a-a6244e14068mr1159231466b.37.1716890401327; 
+ AJvYcCVZLu54TAr+uqWT+gkuflCwxldOE9+9fZ0dT/SYocrnAbe8jU9lXpTrOqtcTKQML37Jpl+LVrG5K4CX1VVhgYZkhsxzxw==
+X-Gm-Message-State: AOJu0YyJmPdREj+xwPovZGn+ipR0AqgXrrJ3Ezgc0JpJmcACy0BRzHeZ
+ EBp8AiDZafJm5M3Y5qMuVrFP/Lh0iFwxC8OG1G9MbmIN7WkgxERb
+X-Google-Smtp-Source: AGHT+IG1vgPDX7HUUh+tuwfkss9lWyZkdDagjIFZl3M/Mhlwlo+mipXLCYi9s21WEK/zUm5q4lMh5w==
+X-Received: by 2002:a17:906:b88e:b0:a63:38bb:b92a with SMTP id
+ a640c23a62f3a-a6338bbbf62mr129080366b.10.1716890401887; 
  Tue, 28 May 2024 03:00:01 -0700 (PDT)
 Received: from emanuele-nb.corp.toradex.com (31-10-206-125.static.upc.ch.
  [31.10.206.125]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a634da2e2absm33239266b.87.2024.05.28.03.00.00
+ a640c23a62f3a-a634da2e2absm33239266b.87.2024.05.28.03.00.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 May 2024 03:00:00 -0700 (PDT)
+ Tue, 28 May 2024 03:00:01 -0700 (PDT)
 From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
 To: Francesco Dolcini <francesco.dolcini@toradex.com>
 Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
  Marcel Ziswiler <marcel.ziswiler@toradex.com>, u-boot@lists.denx.de,
  Fabio Estevam <festevam@gmail.com>
-Subject: [PATCH v1 2/5] board: toradex: verdin-imx8mm: increase maximum
- addressable ram to 4GB
-Date: Tue, 28 May 2024 11:59:38 +0200
-Message-Id: <20240528095941.872693-3-ghidoliemanuele@gmail.com>
+Subject: [PATCH v1 3/5] toradex: tdx-cfg-block: add aquila am69 sku 0088 pid4
+Date: Tue, 28 May 2024 11:59:39 +0200
+Message-Id: <20240528095941.872693-4-ghidoliemanuele@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240528095941.872693-1-ghidoliemanuele@gmail.com>
 References: <20240528095941.872693-1-ghidoliemanuele@gmail.com>
@@ -98,45 +97,38 @@ X-Virus-Status: Clean
 
 From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
-Add support for SKUs with higher memory sizes.
-Actual memory size is auto-detected.
+Add new PID4 0088 Aquila AM69 Octa 32GB WB IT to config block handling.
 
 Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 ---
- board/toradex/verdin-imx8mm/verdin-imx8mm.c | 2 +-
- include/configs/verdin-imx8mm.h             | 6 ++++--
- 2 files changed, 5 insertions(+), 3 deletions(-)
+ board/toradex/common/tdx-cfg-block.c | 1 +
+ board/toradex/common/tdx-cfg-block.h | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/board/toradex/verdin-imx8mm/verdin-imx8mm.c b/board/toradex/verdin-imx8mm/verdin-imx8mm.c
-index 55c02653da68..31e8d5fb04b5 100644
---- a/board/toradex/verdin-imx8mm/verdin-imx8mm.c
-+++ b/board/toradex/verdin-imx8mm/verdin-imx8mm.c
-@@ -117,7 +117,7 @@ int board_phys_sdram_size(phys_size_t *size)
- 	if (!size)
- 		return -EINVAL;
+diff --git a/board/toradex/common/tdx-cfg-block.c b/board/toradex/common/tdx-cfg-block.c
+index dcf00d2b6325..f0d5a82b864c 100644
+--- a/board/toradex/common/tdx-cfg-block.c
++++ b/board/toradex/common/tdx-cfg-block.c
+@@ -158,6 +158,7 @@ const struct toradex_som toradex_modules[] = {
+ 	[85] = { "Apalis iMX6Q 2GB IT",                  TARGET_IS_ENABLED(APALIS_IMX6)     },
+ 	[86] = { "Verdin iMX8M Mini DualLite 2GB IT",    TARGET_IS_ENABLED(VERDIN_IMX8MM)   },
+ 	[87] = { "Verdin iMX8M Mini Quad 2GB IT",        TARGET_IS_ENABLED(VERDIN_IMX8MM)   },
++	[88] = { "Aquila AM69 Octa 32GB WB IT",          TARGET_IS_ENABLED(AQUILA_AM69_A72) },
+ };
  
--	*size = get_ram_size((void *)PHYS_SDRAM, PHYS_SDRAM_SIZE);
-+	*size = get_ram_size((void *)PHYS_SDRAM, PHYS_SDRAM_SIZE + PHYS_SDRAM_2_SIZE);
+ struct pid4list {
+diff --git a/board/toradex/common/tdx-cfg-block.h b/board/toradex/common/tdx-cfg-block.h
+index 183ee0f2dc99..277f8bc6bb4c 100644
+--- a/board/toradex/common/tdx-cfg-block.h
++++ b/board/toradex/common/tdx-cfg-block.h
+@@ -113,6 +113,7 @@ enum {
+ 	APALIS_IMX6Q_IT_NOWINCE, /* 85 */
+ 	VERDIN_IMX8MMDL_2G_IT,
+ 	VERDIN_IMX8MMQ_2G_IT_NO_CAN,
++	AQUILA_AM69O_32G_WIFI_BT_IT,
+ };
  
- 	return 0;
- }
-diff --git a/include/configs/verdin-imx8mm.h b/include/configs/verdin-imx8mm.h
-index 34238d3b505c..12d2b6823058 100644
---- a/include/configs/verdin-imx8mm.h
-+++ b/include/configs/verdin-imx8mm.h
-@@ -58,8 +58,10 @@
- #define CFG_SYS_SDRAM_BASE           0x40000000
- 
- /* SDRAM configuration */
--#define PHYS_SDRAM                      0x40000000
--#define PHYS_SDRAM_SIZE			SZ_2G /* 2GB DDR */
-+#define PHYS_SDRAM                   0x40000000
-+#define PHYS_SDRAM_SIZE              (long)(SZ_2G + SZ_1G)
-+#define PHYS_SDRAM_2                 0x100000000
-+#define PHYS_SDRAM_2_SIZE            (long)(SZ_1G)
- 
- /* USB Configs */
- #define CFG_MXC_USB_PORTSC	(PORT_PTS_UTMI | PORT_PTS_PTW)
+ enum {
 -- 
 2.34.1
 
