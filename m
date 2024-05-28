@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9986C25B74
-	for <u-boot@archiver.kernel.org>; Mon, 27 May 2024 21:36:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E33D2C25B78
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 06:18:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00BE9883DC;
-	Mon, 27 May 2024 23:34:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E92AA883F1;
+	Tue, 28 May 2024 08:18:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CVWhjBxQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vbl7HRr5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 45EDC881BF; Mon, 27 May 2024 21:07:47 +0200 (CEST)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
+ id 809C4883FE; Tue, 28 May 2024 08:18:35 +0200 (CEST)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DF7F87666
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 21:07:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 42212883F1
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 08:18:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bschnei@gmail.com
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-1f4a52b94c3so918995ad.3
- for <u-boot@lists.denx.de>; Mon, 27 May 2024 12:07:42 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2e968e77515so4841891fa.0
+ for <u-boot@lists.denx.de>; Mon, 27 May 2024 23:18:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716836860; x=1717441660; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1716877112; x=1717481912; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=DQL10tbBLdLdA6bBbuA18kF3Def+OhScAQla2F3tZLk=;
- b=CVWhjBxQXrBPc5goTvbAfRvFqQqxgBn2+ZVBrkFcjM1LIjJExXs7k52ZoeK6mgIS4u
- g39dyH/dCvLvI/xvEURbzxUzf0Kpla9RqJ5jhXgNanCVVem7dbtGeOu9Fs/5VChIqMbk
- NGlOI/4wNLiVR8ogMAY8rcwHoIHPpiIMANBdMdij+cnuutxGha1nlV1QUxzrmcfbRLBt
- Dkdkjg9vtPE3iQEAyZdbAyvH0vvUGhd2mw1f6daAdgQyqPCmKaHteiDn22GebE4LWTRu
- /bIaS5RGHQ2cCO9Gg+JoiykEIpfm0gbWLCqIDFaet1uESLoL0B6XDmQ35oZYPPe5lEcU
- QaQw==
+ bh=WbJfbba4+7V4GIyn1bpcZ++8bK5qZss2u6h7Svoem1E=;
+ b=vbl7HRr54TFdVLttK0bEj0Z3nz69D48Ukx7Fyo3g4PaYvjcqqIYNzSgFVujlbihrjj
+ 7mti6Ml9ChVFcJtfa9TRuBjBQ66rZf+OJ/30llhGL7D4XEMkK4aawDYdb3kXJ/qc50OV
+ 62SzwewCHf9hB/1fQW85ah5+oDvf8LUFzH8TuV+aa2S1+Ra4B0NPfbbc7IH793SmW04y
+ yUxzGHyNf4nqs7zupQGfft4ORJfToNDcsBum17o+nUvzKjgGApgjifspVqRzfHG43PuS
+ m7152rReRD8a2RPTAuu1/2Dwux/ulSfNqZ1rJO7uwOMosMsB0HnVdI0zxLs6B4jGTVGc
+ +nVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716836860; x=1717441660;
+ d=1e100.net; s=20230601; t=1716877112; x=1717481912;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DQL10tbBLdLdA6bBbuA18kF3Def+OhScAQla2F3tZLk=;
- b=qzpO7WuR/fqHOVKF+LPNvXvjvj8j5G8G6R8GCFGZUqvGYpS+roYtf5Lbas31le2+k+
- P7Q+Nn/CtKC6MAb0//hW6DJBzKaeVqzZzk+bLyJoUVxExXm7vfLy5xO/LMO4I+NEjWs1
- DGgcYIOBn+5oo0cbXCmSWBM5btSRISowlzh6AwFFEKMDBLIp4Jg60QRT5HTezfoLH6Ul
- fw33QkqsX0cHmNN+8NnNdSP9MiN+b7A/7/XgHG3uc0tQCaVKG6Lsv7NrCRs+wYrYMazW
- dokdp0/1abS06NNLmdPu49zoA89ukKDpl7EJRCeUTiUa8WWOZAlwl5r5Foe0pV9pmlCa
- G6cA==
-X-Gm-Message-State: AOJu0YyjSTz092tJeD0sGXpb4uLx/G+40k8GgVhZY/2DF707e63EUw+f
- yY9ldEduL0HfP31Lgr4C9/o6MKeKHdFB1MAXBkeMSshBRoHKi3LMSEqCajgwf/4=
-X-Google-Smtp-Source: AGHT+IFTaE8cC2fbKZjHE92cR9ML702u5t9iwAQMGDZOkO8sUOxkYYJIz7gFCbgbTJ3hgo1UoHTzmw==
-X-Received: by 2002:a17:902:e809:b0:1f3:135c:f717 with SMTP id
- d9443c01a7336-1f4486b9e24mr110800375ad.14.1716836860464; 
- Mon, 27 May 2024 12:07:40 -0700 (PDT)
-Received: from desky.home.arpa ([2605:59c8:790:a501:68f8:2663:7493:e90b])
+ bh=WbJfbba4+7V4GIyn1bpcZ++8bK5qZss2u6h7Svoem1E=;
+ b=geWU3ky01PFqoKI2hsmbxQMIocMRxPsxcpW+AgOQ+pRDIdXI4AV5nu7wNWD9bR6ZrL
+ 54tXsAQFSljCgeBA/m5KerMycuIPzYzZ8+uRb781vB3vwvUZMXBrnXflMNFlst0hauPx
+ cHENCzwmvmk9aCymWVwjxzoHgiaOhnRtTk2+JunxgiJjFjAqOEzNt7Lr8Gxm8KYE3rLC
+ LsNUoYEjC6fntlRV4yYWbCT9myUt3tyuBjC+ZiDBV4k2fdQN4BeYIkdpiitAECWQTTg+
+ rjIyX4FvSAKh4ftOEfMtb1ViGmJztXvnPWgK7m9qWTE6TNuI8MticW+/coD635D1Zii8
+ BXcQ==
+X-Gm-Message-State: AOJu0YysJIMt8gebM32S0hueSx5mpChbj9WNLmtUt/pEPMTKUT+ZRKgt
+ mK29mPfMac6Fp1zrXNL4hm4UwIzT1An19/rR2NaeWat1+zQ+vnOx+O/ZnbOFH0TI1ACxSXVyPo4
+ W
+X-Google-Smtp-Source: AGHT+IFeeDQu5EZcJNdGOT9kYlVOzRp+Y45CKtu3i8zw2o4qkkZucWfEFy4dZYTqOn/azpw7wDKG1Q==
+X-Received: by 2002:a2e:9613:0:b0:2e9:8b66:684 with SMTP id
+ 38308e7fff4ca-2e98b66071fmr91391fa.3.1716877112284; 
+ Mon, 27 May 2024 23:18:32 -0700 (PDT)
+Received: from hades.. (ppp089210091242.access.hol.gr. [89.210.91.242])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f44c759d0bsm64649555ad.41.2024.05.27.12.07.39
+ 5b1f17b1804b1-42100f1ad4bsm163039255e9.19.2024.05.27.23.18.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 May 2024 12:07:40 -0700 (PDT)
-From: Benjamin Schneider <bschnei@gmail.com>
-X-Google-Original-From: Benjamin Schneider <ben@bens.haus>
-To: u-boot@lists.denx.de
-Cc: Benjamin Schneider <ben@bens.haus>,
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Subject: [PATCH] configs: add mvebu_espressobin_ultra-88f3720_defconfig
-Date: Mon, 27 May 2024 12:07:35 -0700
-Message-ID: <20240527190737.49025-1-ben@bens.haus>
-X-Mailer: git-send-email 2.45.1
+ Mon, 27 May 2024 23:18:31 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: u-boot@lists.denx.de, xypron.glpk@gmx.de, CFSworks@gmail.com,
+ trini@konsulko.com
+Cc: sbabic@denx.de, festevam@gmail.com, uboot-imx@nxp.com,
+ ryan_chen@aspeedtech.com, chiawei_wang@aspeedtech.com,
+ BMC-SW@aspeedtech.com, joel@jms.id.au, eugen.hristev@collabora.com,
+ sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
+ michal.simek@amd.com, aford173@gmail.com,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: [PATCH] arm: move _end to linker symbols
+Date: Tue, 28 May 2024 09:18:27 +0300
+Message-Id: <20240528061827.183403-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 27 May 2024 23:34:36 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,128 +95,314 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for a Marvell Armada 3720 device variant
+commit 6e2228fb052b ("Merge patch series "Clean up arm linker scripts")
+was cleaning up linker scripts for armv7 and v8 but was leaving
+_end and __secure_stack_start/end.
 
-Signed-off-by: Benjamin Schneider <ben@bens.haus>
+commit d0b5d9da5de2 ("arm: make _end compiler-generated")
+was moving _end to be compiler generated. _end is defined as c variable
+in its own section to force the compiler emit relative a reference.
+However, defining those in the linker script will do the same thing
+since [0].
+
+So let's remove the special sections from the linker scripts, the
+variable definitions from sections.c and define them as a symbols.
+It's worth noting that _image_binary_end symbol is now redundant and
+can be removed in the future.
+
+- SPL
+
+The .end section has been removed from the new binary
+[ 5] .end
+     PROGBITS         00000000fffdf488  000000000002f488  0
+     0000000000000000 0000000000000000  0                 1
+     [0000000000000003]: WRITE, ALLOC
+
+$~ bloat-o-meter kria_old/spl/u-boot-spl krina_new/spl/u-boot-spl
+add/remove: 0/0 grow/shrink: 0/0 up/down: 0/0 (0)
+Function                                     old     new   delta
+Total: Before=115980, After=115980, chg +0.00%
+
+$~ readelf -sW kria_old/u-boot kria_new/u-boot | grep -w _end
+ 12047: 000000000813a0f0     0 OBJECT  GLOBAL DEFAULT   11 _end
+ 12047: 000000000813a118     0 NOTYPE  GLOBAL DEFAULT   11 _end
+
+$~ readelf -sW kria_old/spl/u-boot-spl kria_new/spl/u-boot-spl | grep -w _end
+  1605: 00000000fffdf488     0 OBJECT  GLOBAL DEFAULT    5 _end
+  1603: 00000000fffdf498     0 NOTYPE  GLOBAL DEFAULT    4 _end
+
+$~ readelf -sW old/u-boot new/u-boot | grep -w _end
+  8847: 0000000000103710     0 OBJECT  GLOBAL DEFAULT   11 _end
+  8847: 0000000000103738     0 NOTYPE  GLOBAL DEFAULT   11 _end
+
+$~ readelf -sW old_v7/u-boot new_v7/u-boot | grep -w _end
+ 10638: 000da824     0 OBJECT  GLOBAL DEFAULT   10 _end
+ 10637: 000da84c     0 NOTYPE  GLOBAL DEFAULT   10 _end
+
+- For both QEMU instances
+$~ bloat-o-meter old/u-boot new/u-boot
+add/remove: 0/0 grow/shrink: 1/0 up/down: 20/0 (20)
+Function                                     old     new   delta
+version_string                                50      70     +20
+Total: Before=656915, After=656935, chg +0.00%
+
+[0] binutils commit 6b3b0ab89663 ("Make linker assigned symbol dynamic only for shared object")
+
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
+ arch/arm/cpu/arm1136/u-boot-spl.lds            | 6 +-----
+ arch/arm/cpu/arm926ejs/mxs/u-boot-spl.lds      | 6 +-----
+ arch/arm/cpu/armv8/u-boot-spl.lds              | 7 +------
+ arch/arm/cpu/u-boot-spl.lds                    | 6 +-----
+ arch/arm/cpu/u-boot.lds                        | 6 +-----
+ arch/arm/lib/sections.c                        | 1 -
+ arch/arm/mach-aspeed/ast2600/u-boot-spl.lds    | 6 +-----
+ arch/arm/mach-at91/arm926ejs/u-boot-spl.lds    | 7 +------
+ arch/arm/mach-at91/armv7/u-boot-spl.lds        | 7 +------
+ arch/arm/mach-omap2/u-boot-spl.lds             | 7 +------
+ arch/arm/mach-rockchip/u-boot-tpl-v8.lds       | 7 +------
+ arch/arm/mach-zynq/u-boot.lds                  | 6 +-----
+ board/davinci/da8xxevm/u-boot-spl-da850evm.lds | 7 +------
+ board/samsung/common/exynos-uboot-spl.lds      | 6 +-----
+ 14 files changed, 13 insertions(+), 72 deletions(-)
 
- .../mvebu_espressobin_ultra-88f3720_defconfig | 106 ++++++++++++++++++
- 1 file changed, 106 insertions(+)
- create mode 100644 configs/mvebu_espressobin_ultra-88f3720_defconfig
-
-diff --git a/configs/mvebu_espressobin_ultra-88f3720_defconfig b/configs/mvebu_espressobin_ultra-88f3720_defconfig
-new file mode 100644
-index 0000000000..d1be090731
---- /dev/null
-+++ b/configs/mvebu_espressobin_ultra-88f3720_defconfig
-@@ -0,0 +1,106 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_CPU_INIT=y
-+CONFIG_ARCH_MVEBU=y
-+CONFIG_TEXT_BASE=0x00000000
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xff0000
-+CONFIG_TARGET_MVEBU_ARMADA_37XX=y
-+CONFIG_SF_DEFAULT_SPEED=40000000
-+CONFIG_ENV_SIZE=0x10000
-+CONFIG_ENV_OFFSET=0x3F0000
-+CONFIG_ENV_SECT_SIZE=0x10000
-+CONFIG_DM_GPIO=y
-+CONFIG_OF_UPSTREAM=y
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/armada-3720-espressobin-ultra"
-+CONFIG_SYS_LOAD_ADDR=0x6000000
-+CONFIG_PCI=y
-+CONFIG_AHCI=y
-+# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-+CONFIG_DISTRO_DEFAULTS=y
-+CONFIG_OF_BOARD_SETUP=y
-+CONFIG_USE_PREBOOT=y
-+CONFIG_SYS_CONSOLE_INFO_QUIET=y
-+# CONFIG_DISPLAY_CPUINFO is not set
-+# CONFIG_DISPLAY_BOARDINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_BOARD_EARLY_INIT_F=y
-+CONFIG_BOARD_LATE_INIT=y
-+CONFIG_SYS_MAXARGS=32
-+CONFIG_CMD_FUSE=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_MTD=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_SATA=y
-+CONFIG_CMD_SPI=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_WDT=y
-+CONFIG_CMD_TFTPPUT=y
-+CONFIG_CMD_CACHE=y
-+CONFIG_CMD_TIME=y
-+CONFIG_CMD_BTRFS=y
-+CONFIG_CMD_EXT4_WRITE=y
-+CONFIG_CMD_SQUASHFS=y
-+CONFIG_CMD_FS_UUID=y
-+CONFIG_MAC_PARTITION=y
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_IS_IN_SPI_FLASH=y
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_ARP_TIMEOUT=200
-+CONFIG_NET_RETRY_COUNT=50
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_AHCI_PCI=y
-+CONFIG_AHCI_MVEBU=y
-+CONFIG_LBA48=y
-+CONFIG_SYS_64BIT_LBA=y
-+CONFIG_CLK=y
-+CONFIG_CLK_MVEBU=y
-+CONFIG_DM_I2C=y
-+CONFIG_SYS_I2C_MV=y
-+CONFIG_MISC=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_XENON=y
-+CONFIG_MTD=y
-+CONFIG_DM_MTD=y
-+CONFIG_SPI_FLASH_GIGADEVICE=y
-+CONFIG_SPI_FLASH_ISSI=y
-+CONFIG_SPI_FLASH_MACRONIX=y
-+CONFIG_SPI_FLASH_SPANSION=y
-+CONFIG_SPI_FLASH_STMICRO=y
-+CONFIG_SPI_FLASH_WINBOND=y
-+CONFIG_SPI_FLASH_MTD=y
-+CONFIG_PHY_MARVELL=y
-+CONFIG_PHY_FIXED=y
-+CONFIG_PHY_GIGE=y
-+CONFIG_DM_DSA=y
-+CONFIG_MV88E6XXX=y
-+CONFIG_MVNETA=y
-+CONFIG_MVMDIO=y
-+CONFIG_NVME_PCI=y
-+CONFIG_PCI_AARDVARK=y
-+CONFIG_PHY=y
-+CONFIG_MVEBU_COMPHY_SUPPORT=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCTRL_ARMADA_37XX=y
-+CONFIG_DM_REGULATOR_GPIO=y
-+CONFIG_DEFAULT_ENV_IS_RW=y
-+CONFIG_MVEBU_A3700_UART=y
-+CONFIG_MVEBU_A3700_SPI=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_EHCI_HCD=y
-+# CONFIG_WATCHDOG_AUTOSTART is not set
-+CONFIG_WDT=y
-+CONFIG_WDT_ARMADA_37XX=y
-+CONFIG_SHA1=y
-+CONFIG_DM_RTC=y
-+CONFIG_RTC_PCF8563=y
-+# CONFIG_DEBUG_UART=y
-+# CONFIG_DEBUG_UART_BASE=0xd0012000
-+# CONFIG_DEBUG_UART_CLOCK=25804800
-+# CONFIG_DEBUG_UART_SHIFT=2
-+# CONFIG_DEBUG_UART_ANNOUNCE=y
-\ No newline at end of file
+diff --git a/arch/arm/cpu/arm1136/u-boot-spl.lds b/arch/arm/cpu/arm1136/u-boot-spl.lds
+index f83988fd7e6a..b7af29183a97 100644
+--- a/arch/arm/cpu/arm1136/u-boot-spl.lds
++++ b/arch/arm/cpu/arm1136/u-boot-spl.lds
+@@ -33,11 +33,7 @@ SECTIONS
+ 	.data : { *(SORT_BY_ALIGNMENT(.data*)) } >.sram
+ 	. = ALIGN(4);
+ 	__image_copy_end = .;
+-
+-	.end :
+-	{
+-		*(.__end)
+-	}
++	_end = .;
+ 
+ 	.bss :
+ 	{
+diff --git a/arch/arm/cpu/arm926ejs/mxs/u-boot-spl.lds b/arch/arm/cpu/arm926ejs/mxs/u-boot-spl.lds
+index 7e20448f8108..7c6309246f8b 100644
+--- a/arch/arm/cpu/arm926ejs/mxs/u-boot-spl.lds
++++ b/arch/arm/cpu/arm926ejs/mxs/u-boot-spl.lds
+@@ -49,11 +49,7 @@ SECTIONS
+ 		__bss_end = .;
+ 	}
+ 
+-	.end :
+-	{
+-		*(.__end)
+-	}
+-
++	_end = .;
+ 	_image_binary_end = .;
+ 
+ 	.dynsym _image_binary_end : { *(.dynsym) }
+diff --git a/arch/arm/cpu/armv8/u-boot-spl.lds b/arch/arm/cpu/armv8/u-boot-spl.lds
+index ef8af67e11c3..215cedd69a8c 100644
+--- a/arch/arm/cpu/armv8/u-boot-spl.lds
++++ b/arch/arm/cpu/armv8/u-boot-spl.lds
+@@ -53,12 +53,7 @@ SECTIONS
+ 
+ 	. = ALIGN(8);
+ 	__image_copy_end = .;
+-
+-	.end : {
+-		. = ALIGN(8);
+-		*(.__end)
+-	} >.sram
+-
++	_end = .;
+ 	_image_binary_end = .;
+ 
+ 	.bss : {
+diff --git a/arch/arm/cpu/u-boot-spl.lds b/arch/arm/cpu/u-boot-spl.lds
+index 9ed62395a9c5..eee463a1b1c6 100644
+--- a/arch/arm/cpu/u-boot-spl.lds
++++ b/arch/arm/cpu/u-boot-spl.lds
+@@ -53,12 +53,8 @@ SECTIONS
+ 		__rel_dyn_end = .;
+ 	}
+ 
+-	.end :
+-	{
+-		*(.__end)
+-	}
+-
+ 	_image_binary_end = .;
++	_end = .;
+ 
+ 	.bss __rel_dyn_start (OVERLAY) : {
+ 		__bss_start = .;
+diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
+index 707b19795f08..2f50087f57a9 100644
+--- a/arch/arm/cpu/u-boot.lds
++++ b/arch/arm/cpu/u-boot.lds
+@@ -166,11 +166,7 @@ SECTIONS
+ 		__rel_dyn_end = .;
+ 	}
+ 
+-	.end :
+-	{
+-		*(.__end)
+-	}
+-
++	_end = .;
+ 	_image_binary_end = .;
+ 
+ 	/*
+diff --git a/arch/arm/lib/sections.c b/arch/arm/lib/sections.c
+index db5463b2bbbc..07efabaa7dc8 100644
+--- a/arch/arm/lib/sections.c
++++ b/arch/arm/lib/sections.c
+@@ -23,4 +23,3 @@ char __secure_start[0] __section(".__secure_start");
+ char __secure_end[0] __section(".__secure_end");
+ char __secure_stack_start[0] __section(".__secure_stack_start");
+ char __secure_stack_end[0] __section(".__secure_stack_end");
+-char _end[0] __section(".__end");
+diff --git a/arch/arm/mach-aspeed/ast2600/u-boot-spl.lds b/arch/arm/mach-aspeed/ast2600/u-boot-spl.lds
+index ada6570d9712..9502a7384b53 100644
+--- a/arch/arm/mach-aspeed/ast2600/u-boot-spl.lds
++++ b/arch/arm/mach-aspeed/ast2600/u-boot-spl.lds
+@@ -61,11 +61,7 @@ SECTIONS
+ 		__rel_dyn_end = .;
+ 	} > .nor
+ 
+-	.end :
+-	{
+-		*(.__end)
+-	} > .nor
+-
++	_end = .;
+ 	_image_binary_end = .;
+ 
+ 	.bss : {
+diff --git a/arch/arm/mach-at91/arm926ejs/u-boot-spl.lds b/arch/arm/mach-at91/arm926ejs/u-boot-spl.lds
+index 1a8bf94dee0c..09cf838cf96e 100644
+--- a/arch/arm/mach-at91/arm926ejs/u-boot-spl.lds
++++ b/arch/arm/mach-at91/arm926ejs/u-boot-spl.lds
+@@ -33,12 +33,7 @@ SECTIONS
+ 
+ 	. = ALIGN(4);
+ 	__image_copy_end = .;
+-
+-	.end :
+-	{
+-		*(.__end)
+-	} >.sram
+-
++	_end = .;
+ 	_image_binary_end = .;
+ 
+ 	.bss :
+diff --git a/arch/arm/mach-at91/armv7/u-boot-spl.lds b/arch/arm/mach-at91/armv7/u-boot-spl.lds
+index 6ca725fc4ce0..460a91d93ec4 100644
+--- a/arch/arm/mach-at91/armv7/u-boot-spl.lds
++++ b/arch/arm/mach-at91/armv7/u-boot-spl.lds
+@@ -40,12 +40,7 @@ SECTIONS
+ 
+ 	. = ALIGN(4);
+ 	__image_copy_end = .;
+-
+-	.end :
+-	{
+-		*(.__end)
+-	} >.sram
+-
++	_end = .;
+ 	_image_binary_end = .;
+ 
+ 	.bss :
+diff --git a/arch/arm/mach-omap2/u-boot-spl.lds b/arch/arm/mach-omap2/u-boot-spl.lds
+index 1d6e5d45b468..3bb759d8a1c8 100644
+--- a/arch/arm/mach-omap2/u-boot-spl.lds
++++ b/arch/arm/mach-omap2/u-boot-spl.lds
+@@ -39,12 +39,7 @@ SECTIONS
+ 
+ 	. = ALIGN(4);
+ 	__image_copy_end = .;
+-
+-	.end :
+-	{
+-		*(.__end)
+-	}
+-
++	_end = .;
+ 	_image_binary_end = .;
+ 
+ 	.bss :
+diff --git a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds b/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
+index ad32654085b3..958a1b70aefe 100644
+--- a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
++++ b/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
+@@ -46,12 +46,7 @@ SECTIONS
+ 
+ 	. = ALIGN(8);
+ 	__image_copy_end = .;
+-
+-	.end : {
+-		. = ALIGN(8);
+-		*(.__end)
+-	}
+-
++	_end = .;
+ 	_image_binary_end = .;
+ 
+ 	.bss ALIGN(8) : {
+diff --git a/arch/arm/mach-zynq/u-boot.lds b/arch/arm/mach-zynq/u-boot.lds
+index 3e0c96c50556..f52523edf490 100644
+--- a/arch/arm/mach-zynq/u-boot.lds
++++ b/arch/arm/mach-zynq/u-boot.lds
+@@ -68,11 +68,7 @@ SECTIONS
+ 		__rel_dyn_end = .;
+ 	}
+ 
+-	.end :
+-	{
+-		*(.__end)
+-	}
+-
++	_end = .;
+ 	_image_binary_end = .;
+ 
+ /*
+diff --git a/board/davinci/da8xxevm/u-boot-spl-da850evm.lds b/board/davinci/da8xxevm/u-boot-spl-da850evm.lds
+index 7e0f09f3b5b1..56d6f4f114b9 100644
+--- a/board/davinci/da8xxevm/u-boot-spl-da850evm.lds
++++ b/board/davinci/da8xxevm/u-boot-spl-da850evm.lds
+@@ -46,12 +46,7 @@ SECTIONS
+ 	} >.sram
+ 
+ 	__image_copy_end = .;
+-
+-	.end :
+-	{
+-		*(.__end)
+-	}
+-
++	_end = .;
+ 	_image_binary_end = .;
+ 
+ 	.bss :
+diff --git a/board/samsung/common/exynos-uboot-spl.lds b/board/samsung/common/exynos-uboot-spl.lds
+index 73cd97a1b1de..9d3b57e98dbb 100644
+--- a/board/samsung/common/exynos-uboot-spl.lds
++++ b/board/samsung/common/exynos-uboot-spl.lds
+@@ -41,11 +41,7 @@ SECTIONS
+ 	. = ALIGN(4);
+ 
+ 	__image_copy_end = .;
+-
+-	.end :
+-	{
+-		*(.__end)
+-	} >.sram
++	_end = .;
+ 
+ 	.bss :
+ 	{
 -- 
-2.45.1
+2.40.1
 
