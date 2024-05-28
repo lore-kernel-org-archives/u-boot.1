@@ -4,95 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8047C25B7E
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 08:35:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A056FC25B78
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 08:36:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6AAC588445;
-	Tue, 28 May 2024 10:35:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EB7548846C;
+	Tue, 28 May 2024 10:36:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="e+u3nmeH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bwMkKyui";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77A3388418; Tue, 28 May 2024 10:35:09 +0200 (CEST)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id 6208588418; Tue, 28 May 2024 10:36:26 +0200 (CEST)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8ACE588441
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 10:35:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 611C688445
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 10:36:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-354ba5663c9so404338f8f.0
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 01:35:05 -0700 (PDT)
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2e716e302bdso6420311fa.1
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 01:36:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716885305; x=1717490105; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1716885384; x=1717490184; darn=lists.denx.de;
  h=cc:to:message-id:content-transfer-encoding:mime-version:subject
  :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=kVQB5ZBz5/WJEBlYx9gP0Yo61aobCxqH47fDiuwoehA=;
- b=e+u3nmeHDMICrMG3PqXudLa7cDw7EGa0km2qVlQLg+grMicbY9qusieIklnmr4E8rf
- fop+OYGpVQh5F4gKQjF2qxNhjAC3R6FjgJtpYaI/25wm4uHDSUccNh/wKB9ycQviENVD
- F3MHPrj82MJ3OvDnXgDwgiklZtVNFtGehJsjyRQiE6w6od+WjrDJ0BzNLgo2ExwVBDzP
- e4YaOulcKQUzubSexLKTSP/F1Bbe8G2ARsTjaodac+YDAY8EeD7hSIvzAnJYHTFcLs24
- 1UXPLtlPhxVvBXrAZmNKb2+0R7m4z2wwfJ6hhw0lkFxZUTeaiYI5DtwmBkPHFvj8kK2C
- thng==
+ bh=ONLevqx63BYWdNaxUe7ag17CBQ3vtm2NsbiE6YYH5Jc=;
+ b=bwMkKyui22WBllhLSALtap0i0FyOMNjuvusrOFX3iH1houdOFbTuG2PAgsjigobBOc
+ WWfXDeJ+IDnVpABsIgz95cYek+442dr4KisM3pA6w2Q6xQJex440U90hQ2n3dXxVAN43
+ cp0IpvjE+ZU/o2g6d0fnNHVvi4ixgFRxcsUY6S4/8kkU7qGaKnWbtw5pOKluZB3VLjJQ
+ el43FA1RGq06YFgkHLsTvpSBq6Ar4MX6+kIsjmudhB2awfF1hGtFvgGE/4PFFw7JW0y5
+ B8Ra9JQPh67D5pfAeuqJnqHx/YAa6ofllEHvR39BSWk70FtkEU6QZeYM57g2/TUQz+7f
+ UAQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716885305; x=1717490105;
+ d=1e100.net; s=20230601; t=1716885384; x=1717490184;
  h=cc:to:message-id:content-transfer-encoding:mime-version:subject
  :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=kVQB5ZBz5/WJEBlYx9gP0Yo61aobCxqH47fDiuwoehA=;
- b=h7qjCw4N+G5XsA1HXJ4ediz45NPgnamDO3fyzOGJyOZXwPYDYl+/4GPrNi5+zxeo/B
- VB5YwILvXJREZUYhRnuhHGEYQ89hgQS0BSzxTHnWpzIGnkgcmE0e8oIHzzktRJLAKqiA
- rxNQ02vhy0gcQ7DP/WSDaLEEFdje/SSe5cEZXPZ8VHYKsN/y8/UHqcXbU+32IId8SJ0J
- gcxAi9UgxTzSXtAQeJEyDhsZh/sB7kxY1MaVOA5ElaGjeJ95/AGdfuCqu3Y5S7h+sEad
- PimE6prQm+k2w0j0LCanr4tBddmCiQKfFU2cH78lZgpGMuUysIsRFVlrJ0bhMEXjeVdF
- z7ng==
-X-Gm-Message-State: AOJu0YzGGth5l1kBNciWcRo5jwUtbU6Mx8+tUNUQonP70ToGJynbr/cn
- CVLzpdA0q/8RKt1+uxp2aeH0LaZHfrjA39U6PbkfLufWK/wvUzSknoehh36ZBnc=
-X-Google-Smtp-Source: AGHT+IFqoLQNoZj4d3sAsymKc0/qvSGwtIu8Z9FI44ff+JCXdMsLltF5st1EhTkmENVNUPjCZn1ALQ==
-X-Received: by 2002:adf:f506:0:b0:355:433:8f80 with SMTP id
- ffacd0b85a97d-35526c569f7mr7215241f8f.33.1716885304791; 
- Tue, 28 May 2024 01:35:04 -0700 (PDT)
+ bh=ONLevqx63BYWdNaxUe7ag17CBQ3vtm2NsbiE6YYH5Jc=;
+ b=Jnei963IDWLvCig0r662QweuxC7Z7wTlw96BcQKsnp22hn38+nKnTA/sE+uroV2N7T
+ icReDfyMURLB7wTbZ1KG06HcJfx7gNgoYbtvgrnYgJX+sUBQ8JPCTZrTHI7juFe6RpbQ
+ QyI61Ik6T9dhV3fqBadIgk0sIqjhNayT8M5NlaUSDUk94aZ72BrxUGPasy7QRDCK1WE9
+ bNL8vXe+ksailu8XJ679277vfwuYAETT4jxhL1Zdl0RAPV6BmYLjR2rwUouXGgUHsAJb
+ R5BjbREMkJgBX1xmrka57O03Qq7DjiFhJl0ySiEwsfr0xN0UD/xJXTM0qE48pIfNHrmR
+ q0kw==
+X-Gm-Message-State: AOJu0YxW/r7x7q+mSOdKfyW6NRDrHjT1GzDYF0QWGn68K2d+9Be8KaMi
+ 2Vur8tyotf+O3u1kwHl2aZQnXoGx+ZRfFa5+E3um5UkOIg6n+NEjjsodEEPJhWk=
+X-Google-Smtp-Source: AGHT+IHSlLwf04hu3wYV6yDqJ7fSUs56NNjSQ+Oti6piJ7Lpd2uY+q7rl1prU/FR+xrLDCTJ2r5WPw==
+X-Received: by 2002:a05:651c:1031:b0:2d8:e05f:633e with SMTP id
+ 38308e7fff4ca-2e95b0416a6mr66431591fa.1.1716885383448; 
+ Tue, 28 May 2024 01:36:23 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-358ffe5de1esm5234527f8f.34.2024.05.28.01.35.04
+ 5b1f17b1804b1-4210896f442sm133246975e9.11.2024.05.28.01.36.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 May 2024 01:35:04 -0700 (PDT)
+ Tue, 28 May 2024 01:36:23 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Tue, 28 May 2024 10:35:03 +0200
-Subject: [PATCH] usb: dwc3: gadget: fix crash in dwc3_gadget_giveback()
+Date: Tue, 28 May 2024 10:36:21 +0200
+Subject: [PATCH] ufs: core: remove link_startup_again logic
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240528-topic-sm8x50-dwc3-gadget-crash-fix-v1-1-58434ab4b3d3@linaro.org>
-X-B4-Tracking: v=1; b=H4sIADaXVWYC/x2NywqEMAwAf0Vy3kC2rSD+yuKhpGnNwQeNuIL47
- 1v2OHOYucGkqhiM3Q1VTjXd1gbvVwc8x7UIamoMjlyg3g14bLsy2jJcPWH6sscSU5EDuUabMeu
- FOVKgkDOL99BCe5Wm/5PP9Dw/lr4qBHQAAAA=
-To: Lukasz Majewski <lukma@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, 
- Marek Szyprowski <m.szyprowski@samsung.com>
+Message-Id: <20240528-topic-sm8x50-ufs-core-link-startup-again-v1-1-146ca43e80b6@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAISXVWYC/x3NwQrCMAyA4VcZORvoyqbTVxEPNaYzqG1JOhmMv
+ bvF43f5/w2MVdjg0m2g/BWTnBr6Qwf0DGlmlEczeOcHN/oJay5CaJ9pHR0u0ZCyMr4lvdBq0Lo
+ UDHOQhHfyFM/uRP1xgJYrylHW/+p62/cfEOznSXoAAAA=
+To: Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1593;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1422;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=B5v3p5TfjpucgwVaRmabxLJsVbrZ2qBAHNeqCVZ+8EQ=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBmVZc3LMXx7uOk71tX6sXkfMFvHjcSoLucPORZoybK
- mdM270yJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZlWXNwAKCRB33NvayMhJ0W78D/
- oCk+FQ9q9uLbHzANA3J3ywHgiIWHhuvWjVjWiZYKmps6D3pduUCy41fdUaqMEe6srtqPUgZvt/uqCV
- N9ivLp3x4Kok6lnOIO93A4NkAoWkyPgqybRhknD+oc2EkIn0wNkRfLVEruY05Hb6HdsO+yVCji+ucD
- AWJV/JqC+U+2NAkVuGNcPIwPnyTfI/z2zJoN+jMSPoM+XkGIOdqU71iGulIOxkllWU7PjVSR75AxCa
- ezDvW3PqyYAdJo38wp2oTe8iniNETAbJntMW06MWN6h1MhqQvDhYGc8rrpP9hD2at2kzDpUF6B6NHQ
- KplA7OjSozQyqiz1FGiS46VvdR4YQUtCAFwAi3gMTSLIsCSR/XlXOz44WKKCZoCUKQ/7WUBEqh4Pua
- yOnMYbMJikshKeG1OAVsNSuK0yS6keav05KVFzK83Fe/0PG5tFwSjQoZyFUFLXYTJs3002pC7VW4wT
- kps3hK1CE/VL/L4aL3qW8mDC4LktOWfBPI6R9PWF5zOP7JkNVG8sHWipYsa4hh0ulOpiS8vDWUm6/T
- slc1SkLErzL//ny6Zfd8b+gIjnHklG0Y+2721b8UKK9iGrKu5WbtqV50SdoyhT3LXqjBXyJiNxXrqz
- jPkepbYXKhmzTfEtUGYQ16B7ruDak5+cR+ZOGwEDfxVaYy0at6Hbbkjnlqdw==
+ bh=M8rk0mLXc2wwQ5GRo8+tlC0WJdOZXZZ5CqZ67aRWgtk=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBmVZeGhkxemWMBBYevPHN0jDew0ojfZSK7qxnL6F/Q
+ nzpNX4yJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZlWXhgAKCRB33NvayMhJ0aRlEA
+ CxB9HsXml5PEYWDoVTe6SVkKExIzb/AaqKX32+0hRf8XvE99O23wbRGTLA3LEUhiS555gFQT3zO53k
+ GivvGxpv9sQZsvcCfXxZKEVTF2KyxB69UUOUrosRcLSi65Lc57YwJYL2IlU7/Gs8jMDEYzuA0QJsDQ
+ pHsk7aAGst2dgk3mrcc655s1CC5J6fRKvHwsbmTTL8MOyLzhpiHz2HGkVSDZBBhtS31vX/VL9s6YEl
+ m/6Ec7s+uSsdRkXkyOl/Q5XiVYeFUUNzZqwp8VHXawrpT9/ZIOXWSzIXoOLKUt5Luw/xOZLKAWLmVa
+ q5Aw8bfQEtkOYCXAdSnChCtaZwouV4SXhsS4PJQqazYmhCVFzhfPjJJjD43w8sHcTW3JSTQtRwCwL/
+ qmASrPrY2ynRLpQhdrSIlfeLn+CcXbKwNnBXm10b2pd+oc3pHe55xx6v1QPKIJufhiunKZ7NieKOxS
+ IFPjvyyVN2/LL3eYLqXegBOAP0bM45ZeV+4y+MPtdXCz1oZlxHuLuO//rTr8J9FYa91272ilLjMhR4
+ u3tzZ1imv5ETSAS4YMNRA435Ln19zjYxQ0/94dB7ElVBiqSbbz7mOBazp6KxBee2e0nGZ8ahFa+CAx
+ iWkmVDvYhlPuj9RNXbnRPvshmTfWmp2Rjg5W/pJoCQ56m62qx/5Npzkg3UUQ==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -111,46 +109,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If the ep0 stalls or request are dequeued when gagdet is stopped,
-the request dma may not be mapped yet and dwc3_flush_cache() may be
-called with a NULL pointer.
+The link_startup_again logic was added in Linux to handle device
+that were set in LinkDown state, which should not be the case since U-boot
+doesn't set LinkDown state are init, and Linux sets the device active
+in ufshcd_init() for the first link startup.
 
-Check req->request.dma before calling dwc3_flush_cache() and later
-the usb_gadget_unmap_request() functions since it means that
-usb_gadget_map_request() hasn't been called yet.
+While it worked to far, it breaks link startup for Qualcomm Controllers v5,
+let's just remove the logic.
 
-Fixes: fd15b58c1a9 ("dwc3: flush cache only if there is a buffer attached to a request")
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/usb/dwc3/gadget.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/ufs/ufs.c | 8 --------
+ 1 file changed, 8 deletions(-)
 
-diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
-index fab32575647..92c7c6d08b7 100644
---- a/drivers/usb/dwc3/gadget.c
-+++ b/drivers/usb/dwc3/gadget.c
-@@ -248,7 +248,7 @@ void dwc3_gadget_giveback(struct dwc3_ep *dep, struct dwc3_request *req,
+diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
+index be64bf971f1..28c244b70e5 100644
+--- a/drivers/ufs/ufs.c
++++ b/drivers/ufs/ufs.c
+@@ -456,9 +456,7 @@ static int ufshcd_link_startup(struct ufs_hba *hba)
+ {
+ 	int ret;
+ 	int retries = DME_LINKSTARTUP_RETRIES;
+-	bool link_startup_again = true;
  
- 	list_del(&req->list);
- 	req->trb = NULL;
--	if (req->request.length)
-+	if (req->request.dma && req->request.length)
- 		dwc3_flush_cache((uintptr_t)req->request.dma, req->request.length);
+-link_startup:
+ 	do {
+ 		ufshcd_ops_link_startup_notify(hba, PRE_CHANGE);
  
- 	if (req->request.status == -EINPROGRESS)
-@@ -256,7 +256,7 @@ void dwc3_gadget_giveback(struct dwc3_ep *dep, struct dwc3_request *req,
+@@ -484,12 +482,6 @@ link_startup:
+ 		/* failed to get the link up... retire */
+ 		goto out;
  
- 	if (dwc->ep0_bounced && dep->number == 0)
- 		dwc->ep0_bounced = false;
--	else
-+	else if (req->request.dma)
- 		usb_gadget_unmap_request(&dwc->gadget, &req->request,
- 				req->direction);
+-	if (link_startup_again) {
+-		link_startup_again = false;
+-		retries = DME_LINKSTARTUP_RETRIES;
+-		goto link_startup;
+-	}
+-
+ 	/* Mark that link is up in PWM-G1, 1-lane, SLOW-AUTO mode */
+ 	ufshcd_init_pwr_info(hba);
  
 
 ---
 base-commit: 7e52d6ccfb76e2afc2d183b357abe2a2e2f948cf
-change-id: 20240528-topic-sm8x50-dwc3-gadget-crash-fix-fa0404ffce33
+change-id: 20240528-topic-sm8x50-ufs-core-link-startup-again-bc2cf907c164
 
 Best regards,
 -- 
