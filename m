@@ -4,79 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA5E4C25B7E
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 19:15:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4D26C27C44
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 21:30:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E136C88555;
-	Tue, 28 May 2024 21:15:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id EA5EC883F4;
+	Tue, 28 May 2024 23:30:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Auc4aGGP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YbIY28g8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2096E88580; Tue, 28 May 2024 21:15:23 +0200 (CEST)
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
+ id 4D240884F1; Tue, 28 May 2024 23:30:35 +0200 (CEST)
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CBA788577
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 21:15:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0E282883A0
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 23:30:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-2bdd6b73a3aso211589a91.3
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 12:15:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-5b96a78639aso753312eaf.1
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 14:30:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716923719; x=1717528519; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=K/HvvPjT5jS6DJlBWw5Ho5w7l50LcdfY3UoLqOzPGUk=;
- b=Auc4aGGP8Vq+OCJQ5N+3vioLmNjqc32e4CZZYyO02R9ZIAY/Gn+5K+5T1X6vqVMUHM
- 3QN0F05B+zXEwx6gXnTokVl4Yky8u/B7IHI9gtrnyGqjP0GFosEpgfbQj3mcDj9WsOrR
- mbdV+o07RE8aFEs0zZlELOb5JImYXBtRM+HpdEPPArPfuYZ6U0kTDmwSTkgTqt6k1vxF
- WH2O4fgH5ZAX+iKowu0XFolldl0yJlW+oehTspklDbA0kf78vVoICrhAuLbLmPyvRRzN
- x+suu15s/+93rQlorxcl1GNjeReE42ElOb+gcAWue30llTs9arQRVD4bBHZs3GJn3yrf
- ZUWg==
+ d=konsulko.com; s=google; t=1716931832; x=1717536632; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=waJjbDLygqkSEDGg9raxbmIepkQl1GmKTj6JTR89rHg=;
+ b=YbIY28g8cVSFsLMV/J+5xmyZZznRjHjOxwrgbbYyewEfQVeGqeSN/hZUc7RQZZK0mA
+ mdtxflFLsQz+Bsvv8P8i1+ICeIE9SCKLKhxQYh4wP66jkQ4esQBeIUJOnEJdUWt66dz5
+ Dvwug7h1vrbwymUCpYW0zQH8qqN9noJYN7P3o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716923719; x=1717528519;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=K/HvvPjT5jS6DJlBWw5Ho5w7l50LcdfY3UoLqOzPGUk=;
- b=i1wP/sXdy+5O9Zqo3wavIgdgBr1F9Me0rkTJlDr59GiHJjcxGMSg5HR4NiYGeJoD5y
- 5id2WTKqXhwG1BKJMsI0AMIZUoYnZqnOo6VFG+j2APQsOJlykM4tJHdGUPvH7upIa7U+
- hj2Yq1JifJuC8ZFnGALopcgq+4O7/s19gJ+8+JtuIxsczEkjN76tOAGs/aOCUY6udBPx
- D8BqcX3dyhJqf65T9tRcZAaVXqKePkMNkyO8PjZtqv4KQdpvrK8VwfpaAXr2+iv0eCv0
- 6Ca0y1U4vvYhFnkuB1U3MLm0o6E/3Jj3EhJRjt/o6ON6tHSjE6NP+L+a1/MWr3ELOGdx
- MIdQ==
-X-Gm-Message-State: AOJu0YwFyWG86I7sv+vTkuI4duFAlvMp/5vbYQUEVUS/f4IAPKklAwS3
- LtT7In+bWdKS8QSvmJk0m6jJf+ClUbyqcoNl6e8ne5jS0OeyZODV
-X-Google-Smtp-Source: AGHT+IHhIfa9dZhbPBNSj9OiZQJMKiAfXsgKo4cRSa7ygCrOUTqGN/IkRWgt0TUdXIe7iKc+d0+A2A==
-X-Received: by 2002:a17:90a:53c6:b0:2bf:9370:5a55 with SMTP id
- 98e67ed59e1d1-2bf93705c30mr8954817a91.2.1716923718832; 
- Tue, 28 May 2024 12:15:18 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:dfd9:2d9b:ff9d:4f57])
+ d=1e100.net; s=20230601; t=1716931832; x=1717536632;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=waJjbDLygqkSEDGg9raxbmIepkQl1GmKTj6JTR89rHg=;
+ b=LiHjeZEJthGhMIfKvkPudDxvo52gWMNSbc5zwtNcYI8RmXOdvhv4FIC7oF8phyYLfm
+ xRg2p6wdZRc+hE/dyXu0f4zZE8mdh32ovrS9jMsnDs5DGkGMet/PK9ZGnRZuhxh7Pq3v
+ ZidZEbRCbH8nWbh77wDhMYHVOYiBD0zNW442Ug/tu6NSVukgdKgoEwk0SJxsfftM0Niw
+ LZMUwD1tqtRg48Y+uRd11u4omMHd/ALb4HyCXD/dY+Eh3mlgKMPr9TtyriyR+okRfCLN
+ IXmQdwQlAwOmIyBg0CB6zE7IxWqIaNyWaw6LoQjT+tV8Is8e8tQ8rzKucBq1+ViLuF9I
+ I1Fw==
+X-Gm-Message-State: AOJu0Yw7NKNp4UJJxKhBNZja4btHiWdilHEunzc0wQG1q+7Cwb6Doaln
+ bWN6vVPOqOJwdoKFuBuhuTBVB0agjd0y1nlrXV1E8eQn7x1JkHM8mGqfyzRAYZw=
+X-Google-Smtp-Source: AGHT+IF6X3v/T4VO0YMInpwfSZPICju+xzCxPW8+1Zn/tef4GyqGBuW0poqULDxWpQqzm0C1R+LcAQ==
+X-Received: by 2002:a05:6820:551:b0:5b2:3782:7848 with SMTP id
+ 006d021491bc7-5b961c730e4mr15342984eaf.6.1716931831474; 
+ Tue, 28 May 2024 14:30:31 -0700 (PDT)
+Received: from oliver.lan ([2806:370:558f:4a42:867a:7a66:2d67:2a53])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2bf92de8b86sm6127952a91.45.2024.05.28.12.15.17
+ 006d021491bc7-5b96c461f1dsm2328216eaf.7.2024.05.28.14.30.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 May 2024 12:15:18 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: paul.liu@linaro.org
-Cc: u-boot@lists.denx.de,
-	Fabio Estevam <festevam@denx.de>
-Subject: [PATCH 2/2] imx8mm-cl-iot-gate: Add support for the Realtek RTL8211E
- PHY
-Date: Tue, 28 May 2024 16:15:10 -0300
-Message-Id: <20240528191510.1366328-2-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240528191510.1366328-1-festevam@gmail.com>
-References: <20240528191510.1366328-1-festevam@gmail.com>
+ Tue, 28 May 2024 14:30:30 -0700 (PDT)
+Date: Tue, 28 May 2024 15:30:24 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Love Kumar <love.kumar@amd.com>
+Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com
+Subject: Re: [PATCH v5] test/py: net_boot: Add test cases for net boot
+Message-ID: <20240528213024.GA546015@oliver.lan>
+References: <eedb4599e11ffed72cd0866fa02d4b144e3192ad.1716886448.git.love.kumar@amd.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="1Kk34XnBfh5gcKIx"
+Content-Disposition: inline
+In-Reply-To: <eedb4599e11ffed72cd0866fa02d4b144e3192ad.1716886448.git.love.kumar@amd.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,178 +89,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
 
-Newer imx8mm-cl-iot-gate versions are populated with a Realtek RTL8211E
-PHY instead of the Atheros AR8033.
+--1Kk34XnBfh5gcKIx
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Adapted Compulab's patch from:
-https://github.com/compulab-yokneam/meta-bsp-imx8mm/blob/iot-gate-imx8_5.10.72/recipes-bsp/u-boot/compulab/imx8mm/0125-imx8mm-net-enable-phy-Realtek-RTL8211E.patch
+On Tue, May 28, 2024 at 02:33:17PM +0530, Love Kumar wrote:
 
-to support both PHYs in U-Boot.
+> Add tests for booting image using tftpboot/pxe boot commands, tftpboot
+> boot case loads the FIT image into DDR and boots using bootm command
+> whereas pxe boot cases downloads the pxe configuration file from the
+> TFTP server and interprets it to boot the images mentioned in the pxe
+> configurations file.
+> This test relies on boardenv_* containing configuration values including
+> the parameter 'pattern'. tftpboot/pxe boot cases boots the Linux till the
+> boot log pattern value is matched. For example, if the parameter
+> 'pattern' is defined as 'login:', it will boot till login prompt.
 
-Signed-off-by: Fabio Estevam <festevam@denx.de>
----
- .../imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c   | 106 +++++++++++++++++-
- include/configs/imx8mm-cl-iot-gate.h          |   2 +-
- 2 files changed, 104 insertions(+), 4 deletions(-)
+Good news is that the kernel test is working for me now. Bad news is the
+PXE test fails, but good news is I figure out the problem.
 
-diff --git a/board/compulab/imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c b/board/compulab/imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c
-index af070ec315c4..bf196e062bd0 100644
---- a/board/compulab/imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c
-+++ b/board/compulab/imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c
-@@ -9,6 +9,7 @@
- #include <efi_loader.h>
- #include <env.h>
- #include <extension_board.h>
-+#include <fdt_support.h>
- #include <hang.h>
- #include <i2c.h>
- #include <init.h>
-@@ -31,6 +32,8 @@
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-+static int fec_phyaddr = -1;
-+
- #if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
- struct efi_fw_image fw_images[] = {
- #if defined(CONFIG_TARGET_IMX8MM_CL_IOT_GATE)
-@@ -110,10 +113,72 @@ static int setup_fec(void)
- 	return 0;
- }
- 
-+#define FDT_PHYADDR "/soc@0/bus@30800000/ethernet@30be0000/mdio/ethernet-phy@0"
-+#define FLIP_32B(val) (((val >> 24) & 0xff) | ((val << 8) & 0xff0000) | ((val >> 8) & 0xff00) | ((val << 24) & 0xff000000))
-+static int fdt_set_fec_phy_addr(void *blob)
-+{
-+	u32 val;
-+
-+	if (fec_phyaddr < 0)
-+		return -EINVAL;
-+
-+	val = FLIP_32B(fec_phyaddr);
-+	return fdt_find_and_setprop(blob, FDT_PHYADDR, "reg", (const void *)&val,
-+				    sizeof(val), 0);
-+}
-+
-+int ft_board_setup(void *blob, struct bd_info *bd)
-+{
-+	fdt_set_fec_phy_addr(blob);
-+	return 0;
-+}
-+
-+/*
-+ * These are specific ID, purposed to distiguish between PHY vendors.
-+ * These values are not equal to real vendors' OUI (half of MAC address)
-+ */
-+#define OUI_PHY_ATHEROS 0x1374
-+#define OUI_PHY_REALTEK 0x0732
-+
- int board_phy_config(struct phy_device *phydev)
- {
--	if (IS_ENABLED(CONFIG_FEC_MXC)) {
-+	unsigned int model, rev, oui;
-+	int phyid1, phyid2;
-+	unsigned int reg;
-+
-+	if (!IS_ENABLED(CONFIG_FEC_MXC))
-+		return 0;
-+
-+	phyid1 = phy_read(phydev, MDIO_DEVAD_NONE, MII_PHYSID1);
-+	if (phyid1 < 0) {
-+		printf("%s: PHYID1 registry read fail %i\n", __func__, phyid1);
-+		return phyid1;
-+	}
-+
-+	phyid2 = phy_read(phydev, MDIO_DEVAD_NONE, MII_PHYSID2);
-+	if (phyid2 < 0) {
-+		printf("%s: PHYID2 registry read fail %i\n", __func__, phyid2);
-+		return phyid2;
-+	}
-+
-+	reg = phyid2 | phyid1 << 16;
-+	if (reg == 0xffff) {
-+		printf("%s: There is no device @%i\n", __func__, phydev->addr);
-+		return -ENODEV;
-+	}
-+
-+	rev = reg & 0xf;
-+	reg >>= 4;
-+	model = reg & 0x3f;
-+	reg >>= 6;
-+	oui = reg;
-+	debug("%s: PHY @0x%x OUI 0x%06x model 0x%x rev 0x%x\n",
-+	      __func__, phydev->addr, oui, model, rev);
-+
-+	switch (oui) {
-+	case OUI_PHY_ATHEROS:
- 		/* enable rgmii rxc skew and phy mode select to RGMII copper */
-+		printf("phy: AR803x@%x\t", phydev->addr);
- 		phy_write(phydev, MDIO_DEVAD_NONE, 0x1d, 0x1f);
- 		phy_write(phydev, MDIO_DEVAD_NONE, 0x1e, 0x8);
- 
-@@ -121,10 +186,45 @@ int board_phy_config(struct phy_device *phydev)
- 		phy_write(phydev, MDIO_DEVAD_NONE, 0x1e, 0x82ee);
- 		phy_write(phydev, MDIO_DEVAD_NONE, 0x1d, 0x05);
- 		phy_write(phydev, MDIO_DEVAD_NONE, 0x1e, 0x100);
-+		break;
-+	case OUI_PHY_REALTEK:
-+		printf("phy: RTL8211E@%x\t", phydev->addr);
-+		/* RTL8211E-VB-CG - add TX and RX delay */
-+		unsigned short val;
-+
-+		phy_write(phydev, MDIO_DEVAD_NONE, 0x1f, 0x07);
-+		phy_write(phydev, MDIO_DEVAD_NONE, 0x1e, 0xa4);
-+		val = phy_read(phydev, MDIO_DEVAD_NONE, 0x1c);
-+		val |= (0x1 << 13) | (0x1 << 12) | (0x1 << 11);
-+		phy_write(phydev, MDIO_DEVAD_NONE, 0x1c, val);
-+		/* LEDs: set to extension page */
-+		phy_write(phydev, MDIO_DEVAD_NONE, 0x1f, 0x0007);
-+		/* extension Page44 */
-+		phy_write(phydev, MDIO_DEVAD_NONE, 0x1e, 0x002c);
-+		phy_write(phydev, MDIO_DEVAD_NONE, 0x1c, 0x0430);//LCR
-+		phy_write(phydev, MDIO_DEVAD_NONE, 0x1a, 0x0010);//LACR
-+		/*
-+		 * To disable EEE LED mode (blinking .4s/2s)
-+		 * Extension Page5
-+		 */
-+		phy_write(phydev, MDIO_DEVAD_NONE, 0x1f, 0x0005);
-+		phy_write(phydev, MDIO_DEVAD_NONE, 0x05, 0x8b82);//magic const
-+		phy_write(phydev, MDIO_DEVAD_NONE, 0x06, 0x052b);//magic const
-+
-+		phy_write(phydev, MDIO_DEVAD_NONE, 0x1f, 0x00);// Back to Page0
- 
--		if (phydev->drv->config)
--			phydev->drv->config(phydev);
-+		break;
-+	default:
-+		printf("%s: ERROR: unknown PHY @0x%x OUI 0x%06x model 0x%x rev 0x%x\n",
-+		       __func__, phydev->addr, oui, model, rev);
-+		return -ENOSYS;
- 	}
-+
-+	fec_phyaddr = phydev->addr;
-+
-+	if (phydev->drv->config)
-+		phydev->drv->config(phydev);
-+
- 	return 0;
- }
- 
-diff --git a/include/configs/imx8mm-cl-iot-gate.h b/include/configs/imx8mm-cl-iot-gate.h
-index 09d87cf214bf..0c547027ba69 100644
---- a/include/configs/imx8mm-cl-iot-gate.h
-+++ b/include/configs/imx8mm-cl-iot-gate.h
-@@ -136,7 +136,7 @@
- #define CFG_SYS_FSL_USDHC_NUM	2
- #define CFG_SYS_FSL_ESDHC_ADDR	0
- 
--#define CFG_FEC_MXC_PHYADDR		0
-+#define CFG_FEC_MXC_PHYADDR		-1 /* Auto search of PHY on MII */
- 
- /* USB Configs */
- #define CFG_MXC_USB_PORTSC	(PORT_PTS_UTMI | PORT_PTS_PTW)
--- 
-2.34.1
+[snip]
+> +def setup_tftpboot_boot(u_boot_console):
+> +    f =3D u_boot_console.config.env.get('env__net_tftp_bootable_file', N=
+one)
+> +    if not f:
+> +        pytest.skip('No TFTP bootable file to read')
+> +
+> +    test_net.test_net_dhcp(u_boot_console)
+> +    if not test_net.net_set_up:
+> +        test_net.test_net_setup_static(u_boot_console)
 
+This works for me, and matches how other tests are written. However:
+
+[snip]
+> +def setup_pxe_boot(u_boot_console):
+> +    f =3D u_boot_console.config.env.get('env__net_pxe_bootable_file', No=
+ne)
+> +    if not f:
+> +        pytest.skip('No PXE bootable file to read')
+> +
+> +    test_net.test_net_dhcp(u_boot_console)
+> +    test_net.test_net_setup_static(u_boot_console)
+> +    return f
+
+This doesn't check for if dhcp worked and skips the test when DHCP works
+but there's no static config, which is how my lab is. For v6 we should
+have a setup_networking function that both the TFTP and PXE tests call
+in to that does what I suggested above. And what I suggested above
+would be a good clean-up to the xilinx-specific tests.
+
+That said, with a local fixup so that my network is configured, and
+having pxelinux.cfg/01-b8-27-eb-fc-64-a6 (the first file pxe boot looks
+for on my test Pi), pxeboot.cfg/default and pxeboot.cfg/default-arm all
+configured from the examples given in the test itself, I get:
+------------------------------------ Captured stdout call -----------------=
+--------------------
+U-Boot> setenv autoload no
+U-Boot> U-Boot> dhcp
+Waiting for Ethernet connection... done.
+BOOTP broadcast 1
+BOOTP broadcast 2
+DHCP client bound to address 192.168.1.100 (255 ms)
+U-Boot> U-Boot> pxe get
+missing environment variable: pxeuuid
+Retrieving file: pxelinux.cfg/01-b8-27-eb-fc-64-a6
+Waiting for Ethernet connection... done.
+Using smsc95xx_eth device
+TFTP from server 192.168.1.10; our IP address is 192.168.1.100
+Filename 'pxelinux.cfg/01-b8-27-eb-fc-64-a6'.
+Load address: 0x2500000
+Loading: ##################################################  64 Bytes
+         0 Bytes/s
+done
+Bytes transferred =3D 64 (40 hex)
+Config file '<NULL>' found
+U-Boot>
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D short test summary info =3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D
+
+--=20
+Tom
+
+--1Kk34XnBfh5gcKIx
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZWTO0ACgkQFHw5/5Y0
+tywm5wv/RvZh/87ps5hlXPNnxlRXSYWcuZxR5qyRuDNDlWSj3JPZFAWo+p0mtbcJ
+X75I8nn9R8tN3Kz74dtmtneMR3SJp6r08r9i2KzSdQqXNbtmcPTSd3U/gwg3Pk37
+spxJwXt79bHDfvJsnqqLahytXt4RAKXROkcPSROeSSE3oHlh+2D8cScxoCLDDOeN
+Jg2zw8awknw74rQXMNU5C+RdUZ+tCNBEF6cCIYk7YSKO8QfmqGB8OvKUyHxkr093
+FcySDFYKWQnHd1P8WuHm4Nde+RdPItc/9tpXF1xEsnlKYIriXomxDjTSIyJd7Ull
+mwBw9KkBSgpURN+XskioLn9mRZA8bRHEc7WJdHpZxV9n6OLtHr+T8mEyaLlBOO2J
+UdCTCVzB6tPsQtaEfRyaMMqQaTESPbl3z7mKjpBxZiiejfPwB6cYSigoEGlFCAnd
+0V6xaa3xIl3baD2qjFgOrQfv+AlvqOpjImXgMod5xBeJywgClgPTOu2HFD/GSvOC
+tCOodWXS
+=6F34
+-----END PGP SIGNATURE-----
+
+--1Kk34XnBfh5gcKIx--
