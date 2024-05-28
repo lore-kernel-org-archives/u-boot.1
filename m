@@ -4,80 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54EC3C25B78
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 07:50:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5716C25B79
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 08:04:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3C0A8824B;
-	Tue, 28 May 2024 09:50:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 0171688412;
+	Tue, 28 May 2024 10:04:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="umT2EDki";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="s/j11xqN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72F3088361; Tue, 28 May 2024 09:50:02 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 0F30D88418; Tue, 28 May 2024 10:04:06 +0200 (CEST)
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [IPv6:2a00:1450:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5631F87F31
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 09:50:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0CD9587F8D
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 10:04:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-355080e6ff9so394149f8f.2
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 00:50:00 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-2e95a883101so5750101fa.3
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 01:04:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1716882600; x=1717487400;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:to:from
- :from:to:cc:subject:date:message-id:reply-to;
- bh=cODXekoyEBFr0QmTm6E79RLEhHPogK/VnKynCNwAOTU=;
- b=umT2EDkiroAAnBGKRCzDh5KKl2+GAlFOehv8RWabxuBCxJgHWH7W326+KRj1qmQG88
- 404jDu5sqg7Quk6FmILpQAfhd7mYAJjNJwjSe1ABfkK7H2dkdm34vFjmOro870jErJG/
- 9kl+d7ypNqpnrbdaoxwAjDu+8OT36lQ5b5mq5lalkqNaLr+7Pl4SY5bOsrQaiOpeZ+Oy
- 2qGDIXtz4D0Kip3VybSFQ2FY2E+h0IulRrPWX6esAZs+fBtd2IvVRvaV03ClyGqsai6D
- VC3cs2BxmxXuKtY+h6n6FHRz9SvGQCpE091P821WRy1tCm/a2a+fitBCnIFgX1sOvOx7
- w0UA==
+ d=linaro.org; s=google; t=1716883443; x=1717488243; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=W8moefeEYB+tMXPSiBG1kG/xJz6XTjKtKP0Cbuw1Zc8=;
+ b=s/j11xqNpN9DVbNALzWOtCV64jimaAX1IT6hvx0dHQT6kfLTgTWf/LufSAAMAnF4Pf
+ zUN/vh+Ek4K01nbbu0BC2QLB/d1ppttwNid9PHm1zIm14OUXGCyfKHc3N01Gud7bu1iC
+ Aj5sTQ8Vx8lxyBK7Er2MFLF0cGTEMfgseTu/snoLqfYtR5tevXFxUX9vou9SRaKpHVSS
+ BhmCwVsAs1yh535NzvY87n4mQrytlIwWjB9Eye49Q6qeC/uhqCNVnTBrwcx9VqtZhzT7
+ StHCsaqpR1IpK1i+/RDVhakBRW1R8yJmKV+tqZbwGzi2Am77pomMkZ2uY1H+/QfwZkp6
+ UTNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716882600; x=1717487400;
- h=mime-version:message-id:date:references:in-reply-to:subject:to:from
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=cODXekoyEBFr0QmTm6E79RLEhHPogK/VnKynCNwAOTU=;
- b=rIo8MDCKqup6dpOSDE8hSFRvs58xY3lhiAHb31/hYp5MlwQBVO/iDWOM2OWeHmmNMo
- QcYZ6K4MIR899srvCY2jd/E/MnPDQmPjAKGYNZagJVthz+XcqpDCP5/bzdRZWgko7/Mk
- qZ81bcIzfd9XWbO3nG7JBoullhbIHSUFm2PhE04d66/pb3EJIYBib03ncW4rhNwxyHAA
- rgavUIm5zwDzi/M8GC7arQpcUM+0Qiti45dhiijsPJ/c2g+FIg1smM4cjnyL8ZaiYEXj
- 9AuBP91ZH4qiTItSjG0ejkcOnwTwswseicwJ8fMgC7AMoYdc301NK+DxoNIrVwtbnKTR
- YUcg==
+ d=1e100.net; s=20230601; t=1716883443; x=1717488243;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=W8moefeEYB+tMXPSiBG1kG/xJz6XTjKtKP0Cbuw1Zc8=;
+ b=DW+biaf74TvOZwOjL8847o0OgTzz7Uo3ciu0YWUxQKLWqhmFZWLOGRS9gweLdg+3Av
+ +DQoe8s1pU7uNi8sgMztR9GDVqg8cNERx6x6n/mMydWhAECV1QAtD26SeK1PV+85sx85
+ 9O9wGer7jSKzlhk5HE25eBNKlcrmizAt1GwqOAj4t2CH4AjNScoustB5vKGZxBLw+5MM
+ +6Og+igBH/02da4HWJOo7nTLGiUUDNZQewK3ggrWL82G3LfVJPJacxU0OJLCgGUfehPX
+ BCw0Y6v1O67Az7EIneQwBUp3fFB9eyiylkXQO0rg1dhsbPT7prL2ufKXNNEPInfEqjCi
+ nEqw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX32KQCJnhBTwU1NkaiFOwdLQ321v6t2ms4kIgxESfFjjLTC46eS8fuGbPJbtnUh40N7qSm1Ar7cb4kFWePxobcdloKoA==
-X-Gm-Message-State: AOJu0YyZkaoZlza4eYn7gu/LykgcSNOnRfMvngqw/nLw6IRCGflJR6Uj
- yRI1ddBpgIuIrrThqeFZS5gEyIL3mRFLSvmh5LUzvEr1x2tArfRO1Lgz4mzuR3w=
-X-Google-Smtp-Source: AGHT+IEBzDyZXClybiWTKW3Bdjk1/AQ317BbFLweU4Yv0VN5Rtmfr7hhKyRWMH41B5KICLWEZufehQ==
-X-Received: by 2002:adf:e40c:0:b0:354:e8f3:2a32 with SMTP id
- ffacd0b85a97d-35529c3c0bcmr7340147f8f.22.1716882599748; 
- Tue, 28 May 2024 00:49:59 -0700 (PDT)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-35579d7da64sm11126130f8f.4.2024.05.28.00.49.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 May 2024 00:49:59 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Roman Stratiienko <r.stratiienko@gmail.com>, r.stratiienko@gmail.com,
- igor.opaniuk@gmail.com, dsimic@manjaro.org, sjg@chromium.org,
- ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, eajames@linux.ibm.com,
- marek.vasut+renesas@mailbox.org, paulerwan.rio@gmail.com,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 3/3] abootimg: Implement smart image load feature
-In-Reply-To: <20240519191856.2582174-4-r.stratiienko@gmail.com>
-References: <20240519191856.2582174-1-r.stratiienko@gmail.com>
- <20240519191856.2582174-4-r.stratiienko@gmail.com>
-Date: Tue, 28 May 2024 09:49:56 +0200
-Message-ID: <87r0dmgyu3.fsf@baylibre.com>
+ AJvYcCXuAYA8XzBt5Jt6TlZEsPfWmd0+f6l4m4hzRlctsE5dHjuSqON2hKmz7PElpNH3ezuLlRGkVHTdYe+0fdRh4Jb/u9AgkA==
+X-Gm-Message-State: AOJu0YwV+6xGim5dpOD2f5KUEWmNmrr1OZ8cyIv1nkWztoKuhU9PmTC/
+ LPBt+UF30tEICynZTnTRFmn0faCAsrovow81AE9Z2G9jMbZ+XqNAGkpK1i6xE6A=
+X-Google-Smtp-Source: AGHT+IHaGvDYFOhnBrwEctYmvWXlcRjs+Lm9Z/rWw0ledNvfG1VsjmmkKu/84+1qsnoATi2fF/5RQA==
+X-Received: by 2002:a2e:9808:0:b0:2dc:bd75:41ba with SMTP id
+ 38308e7fff4ca-2e95b0cc3b9mr66857551fa.27.1716883443119; 
+ Tue, 28 May 2024 01:04:03 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:982:cbb0:8f19:f965:3f93:6385?
+ ([2a01:e0a:982:cbb0:8f19:f965:3f93:6385])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42100fb99e8sm165636865e9.43.2024.05.28.01.04.02
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 28 May 2024 01:04:02 -0700 (PDT)
+Message-ID: <5d67ec7a-b938-46f1-b919-c9733fbf230d@linaro.org>
+Date: Tue, 28 May 2024 10:04:01 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v2 3/8] mmc: msm_sdhci: work around a bug when writing
+To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Sumit Garg <sumit.garg@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
+References: <20240527-b4-qcom-capsule-updates-v2-0-47583d7ad428@linaro.org>
+ <20240527-b4-qcom-capsule-updates-v2-3-47583d7ad428@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20240527-b4-qcom-capsule-updates-v2-3-47583d7ad428@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,199 +123,44 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Roman,
-
-Thank you for the patch.
-
-On dim., mai 19, 2024 at 19:18, Roman Stratiienko <r.stratiienko@gmail.com> wrote:
-
-> Load only part of the boot partition that contains valuable
-> information, thus improving the boot time.
->
-> Signed-off-by: Roman Stratiienko <r.stratiienko@gmail.com>
+On 27/05/2024 19:17, Caleb Connolly wrote:
+> For some unknown reason, writes of larger than 1 block always fail with
+> a checksum error on Qualcomm v5 controllers.
+> 
+> Until this is resolved, work around the issue by setting b_max to 1 for
+> these controllers.
+> 
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->  boot/image-android.c | 70 ++++++++++++++++++++++++++++++++++++++++++++
->  cmd/abootimg.c       | 40 ++++++++++++++++++++++---
->  include/image.h      | 12 ++++++++
->  3 files changed, 118 insertions(+), 4 deletions(-)
->
-> diff --git a/boot/image-android.c b/boot/image-android.c
-> index da8003f370..d00a896a40 100644
-> --- a/boot/image-android.c
-> +++ b/boot/image-android.c
-> @@ -204,6 +204,76 @@ bool android_image_get_data(const void *boot_hdr, const void *vendor_boot_hdr,
->  	return true;
->  }
->  
-> +/**
-> + * android_image_get_valuable_size() - get the size of the android image
-> + *
-> + * This function checks if the image is Android boot image and returns the
-> + * valuable size of the image.
-> + *
-> + * @hdr_addr: Boot image header address (boot or vendor_boot)
-> + *
-> + * @return size of the image on success, 0 on failure
-> + */
-> +size_t android_image_get_valuable_size(const void *hdr_addr)
+>   drivers/mmc/msm_sdhci.c | 7 +++++++
+>   1 file changed, 7 insertions(+)
+> 
+> diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
+> index 4ce0de6c47d8..fc3e8d101b6e 100644
+> --- a/drivers/mmc/msm_sdhci.c
+> +++ b/drivers/mmc/msm_sdhci.c
+> @@ -195,8 +195,15 @@ static int msm_sdc_probe(struct udevice *dev)
+>   		return ret;
+>   	host->mmc->priv = &prv->host;
+>   	upriv->mmc = host->mmc;
+>   
+> +	/*
+> +	 * FIXME: v5 controllers have a bug in U-Boot that causes all writes
+> +	 * greater than 1 block to fail. Work around this by setting b_max to 1.
+> +	 */
+> +	if (var_info->mci_removed)
+> +		plat->cfg.b_max = 1;
+> +
+>   	return sdhci_probe(dev);
+>   }
+>   
+>   static int msm_sdc_remove(struct udevice *dev)
+> 
 
-Can't we use a ssize_t to return a negative error code?
-0 as error seems odd and not what is used in most functions in boot/image-android.c
-
-> +{
-> +	int version, size;
-> +
-> +	if (is_android_boot_image_header(hdr_addr)) {
-> +		const struct andr_boot_img_hdr_v0 *hdr = hdr_addr;
-> +
-> +		version = ((struct andr_boot_img_hdr_v0 *)hdr_addr)->header_version;
-> +		if (version > 2) {
-> +			const struct andr_boot_img_hdr_v3 *hdr = hdr_addr;
-> +
-> +			size = ALIGN(hdr->header_size, ANDR_GKI_PAGE_SIZE);
-> +			size += ALIGN(hdr->kernel_size, ANDR_GKI_PAGE_SIZE);
-> +			size += ALIGN(hdr->ramdisk_size, ANDR_GKI_PAGE_SIZE);
-> +
-> +			if (version > 3)
-> +				size += ALIGN(hdr->signature_size, ANDR_GKI_PAGE_SIZE);
-> +
-> +			return size;
-> +		}
-> +
-> +		size = hdr->page_size;
-> +		size += ALIGN(hdr->kernel_size, hdr->page_size);
-> +		size += ALIGN(hdr->ramdisk_size, hdr->page_size);
-> +		size += ALIGN(hdr->second_size, hdr->page_size);
-> +
-> +		if (version > 0)
-> +			size += ALIGN(hdr->recovery_dtbo_size, hdr->page_size);
-> +
-> +		if (version > 1)
-> +			size += ALIGN(hdr->dtb_size, hdr->page_size);
-> +
-> +		return size;
-> +	}
-> +
-> +	if (is_android_vendor_boot_image_header(hdr_addr)) {
-> +		const struct andr_vnd_boot_img_hdr *hdr = hdr_addr;
-> +
-> +		version = ((struct andr_vnd_boot_img_hdr *)hdr_addr)->header_version;
-> +		if (version < 3) {
-> +			printf("Vendor boot image header version %d is not supported\n", version);
-> +
-> +			return 0;
-> +		}
-> +
-> +		size = ALIGN(hdr->header_size, hdr->page_size);
-> +		size += ALIGN(hdr->vendor_ramdisk_size, hdr->page_size);
-> +		size += ALIGN(hdr->dtb_size, hdr->page_size);
-> +
-> +		if (version > 3) {
-> +			size += ALIGN(hdr->vendor_ramdisk_table_size, hdr->page_size);
-> +			size += ALIGN(hdr->bootconfig_size, hdr->page_size);
-> +		}
-> +
-> +		return size;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
->  static ulong android_image_get_kernel_addr(struct andr_image_data *img_data)
->  {
->  	/*
-> diff --git a/cmd/abootimg.c b/cmd/abootimg.c
-> index 808c9c4941..fe7c5c5e2c 100644
-> --- a/cmd/abootimg.c
-> +++ b/cmd/abootimg.c
-> @@ -182,6 +182,35 @@ static int abootimg_get_dtb(int argc, char *const argv[])
->  	return CMD_RET_USAGE;
->  }
->  
-> +static int abootimg_smart_load(struct blk_desc *desc, struct disk_partition *info, void *addr)
-> +{
-> +	int ret, size;
-> +
-> +	ret = blk_dread(desc, info->start, 4096 / info->blksz, addr);
-
-Why 4096? Can we use #define for this or reuse an exising definition?
-
-> +	if (ret < 0) {
-> +		printf("Error: Failed to read partition\n");
-> +		return CMD_RET_FAILURE;
-> +	}
-> +
-> +	size = android_image_get_valuable_size(addr);
-> +	if (size == 0)
-> +		return 0;
-> +
-> +	ret = blk_dread(desc, info->start, DIV_ROUND_UP(size, info->blksz), addr);
-> +	if (ret < 0) {
-> +		printf("Error: Failed to read partition\n");
-> +		return CMD_RET_FAILURE;
-> +	}
-> +
-> +	memset(addr + size, 0, info->size * info->blksz - size);
-> +
-> +	printf("Loaded Android boot image using smart load (%d/%d MB)\n",
-
-Why only boot image? Should this be more generic be passing the
-partition name instead?
-
-> +	       (int)DIV_ROUND_UP(size, 1024 * 1024),
-> +	       (int)DIV_ROUND_UP(info->size * info->blksz, 1024 * 1024));
-> +
-> +	return size;
-> +}
-> +
->  static int do_abootimg_addr(struct cmd_tbl *cmdtp, int flag, int argc,
->  			    char *const argv[])
->  {
-> @@ -299,10 +328,13 @@ static int do_abootimg_load(struct cmd_tbl *cmdtp, int flag, int argc,
->  		return CMD_RET_FAILURE;
->  	}
->  
-> -	ret = blk_dread(desc, info.start, info.size, addr);
-> -	if (ret < 0) {
-> -		printf("Error: Failed to read partition %s\n", buf);
-> -		goto fail;
-> +	ret = abootimg_smart_load(desc, &info, addr);
-> +	if (ret <= 0) {
-> +		ret = blk_dread(desc, info.start, info.size, addr);
-> +		if (ret < 0) {
-> +			printf("Error: Failed to read partition %s\n", buf);
-> +			goto fail;
-> +		}
->  	}
->  
->  	sprintf(buf, "abootimg_%s_ptr", argv[3]);
-> diff --git a/include/image.h b/include/image.h
-> index c5b288f62b..7d8ff40c3f 100644
-> --- a/include/image.h
-> +++ b/include/image.h
-> @@ -1826,6 +1826,18 @@ struct andr_image_data;
->  bool android_image_get_data(const void *boot_hdr, const void *vendor_boot_hdr,
->  			    struct andr_image_data *data);
->  
-> +/**
-> + * android_image_get_valuable_size() - get the size of the android image
-> + *
-> + * This function checks if the image is Android boot image and returns the
-> + * valuable size of the image.
-> + *
-> + * @hdr_addr: Boot image header address (boot or vendor_boot)
-> + *
-> + * @return size of the image on success, 0 on failure
-> + */
-> +size_t android_image_get_valuable_size(const void *hdr_addr);
-> +
->  struct andr_boot_img_hdr_v0;
->  
->  /**
-> -- 
-> 2.40.1
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
