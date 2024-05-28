@@ -4,87 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10F4DC25B78
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 16:27:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BFC3C25B78
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 16:47:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78FE3882B4;
-	Tue, 28 May 2024 18:27:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B812B88431;
+	Tue, 28 May 2024 18:47:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KUHDhGwl";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="h7tMXfeK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A05588549; Tue, 28 May 2024 18:27:23 +0200 (CEST)
-Received: from mail-ej1-x643.google.com (mail-ej1-x643.google.com
- [IPv6:2a00:1450:4864:20::643])
+ id AE0AA883FB; Tue, 28 May 2024 08:02:02 +0200 (CEST)
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
+ [IPv6:2607:f8b0:4864:20::1035])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF4FB87E96
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 18:27:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 90EE5883A0
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 08:02:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x643.google.com with SMTP id
- a640c23a62f3a-a6265d3ba8fso106694166b.0
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 09:27:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=meljbao@gmail.com
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-2bf196037a7so99419a91.1
+ for <u-boot@lists.denx.de>; Mon, 27 May 2024 23:02:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716913640; x=1717518440; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=hXmAQOHBLbGEwqVNfymi5CC0CJ/S1IDwhSQs7u4Urus=;
- b=KUHDhGwldBkDBTedDk0g7M+B31wYoBjJ2nAuCFb7QfHT7RI99fKf4DP/pSQFq4bF6Y
- ALHJ/9zuFTPKRgsFVj5IUpMqVwL2pSXw/1t+av2obx6w8vhh3ei/15RZtxB8JP4ooxup
- hSrk3ReAHKTKFbl8W75yXgKwJsGuudR1Y1b4Uw0eYVXGty3SGhLiKIKl1g0n7vSCzGGG
- /E6G4adQzi1QpMeKFqcxJo4j9gtD5K7yH+O4IYxglg6khkxk/Qp9qB9uVrs6Fabm/jST
- KUVwVQW3++9b7HBzn2m9QMHdFIYJVn0nOufuDMf5J6nBgGM/5P4w5rt5+sw7rQ73PpFp
- U0Ug==
+ d=gmail.com; s=20230601; t=1716876118; x=1717480918; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=k+MAQJYl4mCmbGf5zOSquDLah5NskZuka44kJ9lWLjc=;
+ b=h7tMXfeKjGIqdiPWjNyF4N9cRwVd+NEwfIQehCsLLT3BWUD4a5/UXp2Xi2HfyUezvE
+ FxoH0cuUA+QQiiqMyEQ6wUb7uZXFRE74NWoPwD59PxBbWyDUT+SfbdI0gSg218gPLGom
+ 4gadYiU5JULToX2dxmKg8n93VuCcMazMB3XcgcJJMUojF24GaG7qxRPZxHVdTvZPQ+lv
+ rJLr6P/AsIT9WsI1TJ+62SQkBTGGW3W1IHzoWe44cS0qz8JwL04CGCd4abxeZWMYGLRU
+ izVRLZfQZxsUaSmJXIYKvqgQY0LV43Ze1G7NxJmpyzj3MpZwSmzOaGYigqLWOOXKfMmP
+ OFVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716913640; x=1717518440;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hXmAQOHBLbGEwqVNfymi5CC0CJ/S1IDwhSQs7u4Urus=;
- b=VJsXqobzrw2cKf4OIhcbxj6JeQ7INNxS87vBgOZL3yrAIls+fxyLoeyBRR/Kx1ihq5
- GnTD6QoXO7xhMeMDcxqKRuNnfP5PJdTPaclMUXILG+Yhj5suiaRyIwct7JdRmrgX0Zka
- 91LfWrjboSOdQWQgWdJK5vo28iMUR2eQWfjl+2fUIDrOLaf3DdclvRxcI7uSb6MZ+stA
- BJNWzuS6zj7KRpja7Mx0vnwsAa7DpeJQBBCwO1mBNsXzTiN1zpcFqkcCINqBVWqoOUdl
- rLAkUvtNRZmnsiQU7TZGukxZzOJcE6ZMdhZURLd8jK2//8YIwTBy1BoB6KQI16hqTqJr
- UHHQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWp2Jmm5UGSm77e1JKd52Eof8Gr+QYBqeMqQCC9c9fmXLjrr+CLsU+Owvj0ZlT6L7M41dLxRjfQ+eQDFRC0Nmpp+wu7wQ==
-X-Gm-Message-State: AOJu0YwmOfGhJ9tYJHloAWIuuAT4Ib3Hw4MZyty+sXEC3tPghbxQD5yd
- mapYt8mcVPJyXvlNT4czKkKhdqNcwJcMzj0FxGu2DfDJGebXCUyq/A3pKfHP8vc=
-X-Google-Smtp-Source: AGHT+IEAE/0nc0pjnj8ljqrEZvSNPg7S2jBaLXAuJG/m37b7//gyeWwyTPYXU9qEQ9h123wo6hZz9A==
-X-Received: by 2002:a17:906:1db2:b0:a51:8d60:215a with SMTP id
- a640c23a62f3a-a62641dff4cmr906363966b.27.1716913640286; 
- Tue, 28 May 2024 09:27:20 -0700 (PDT)
-Received: from ?IPV6:2a02:8109:aa0d:be00::8bb3? ([2a02:8109:aa0d:be00::8bb3])
+ d=1e100.net; s=20230601; t=1716876118; x=1717480918;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=k+MAQJYl4mCmbGf5zOSquDLah5NskZuka44kJ9lWLjc=;
+ b=ZluG7yL7NHniHgMhJE53OEYTFysiA1w/fhEeAI0y0+s/KpF3iPEvhCNkSvnmzYDup0
+ iyWsUUsrd211ea+kUkzxiKv61ePihOONoEzlFLLUkLARs0IQN5GPL9YTrP/tszpT4+Y9
+ +Oc9sRiEkm3/p9sbN0YPbgoB3wS8Lt7zX06da2/7LzAIH2vj/T5PAFZAMtq8zi1SMGkh
+ AFnP1BpxlXRhFLLPkYSyLKCLvVTXUi1JJkU4VH4VNJcSSKU3vkmpBWjPL7SOF9U4vjUt
+ XCwPSR7e8c6frnsX4fN5Y8k+TQLkAu3tNg+/gF+M0G///35fpjxVf0pJdvGh6At8VJIk
+ 7hVQ==
+X-Gm-Message-State: AOJu0Yytk3fcyY42fcEXmnSlM14zU0d7Ex3/Y46cqM0lORBqtZGp5XgS
+ Uy+SkWbi3ZksYFUInEd73qtGlIYd6q65R4j38gBO/Xs0klBZcB5AcNkKAtIhAks=
+X-Google-Smtp-Source: AGHT+IE9EAj/0qg3uqfsx/B11N3PDkGaVr3ATO/RAJTbrjuFjEbddBLhiMdid35+KMHogZiJvPOIDA==
+X-Received: by 2002:a17:902:e801:b0:1f2:fbc8:643c with SMTP id
+ d9443c01a7336-1f448f2e808mr125011805ad.3.1716876118114; 
+ Mon, 27 May 2024 23:01:58 -0700 (PDT)
+Received: from localhost.localdomain ([112.96.224.116])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a631220b5b4sm189795566b.5.2024.05.28.09.27.19
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 May 2024 09:27:19 -0700 (PDT)
-Message-ID: <ba1e4253-fcca-4d37-8cb1-810a51caea58@linaro.org>
-Date: Tue, 28 May 2024 18:27:18 +0200
+ d9443c01a7336-1f48fccb7c3sm35180735ad.228.2024.05.27.23.01.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 May 2024 23:01:57 -0700 (PDT)
+From: linjunbao <meljbao@gmail.com>
+To: u-boot@lists.denx.de
+Cc: linjunbao <meljbao@gmail.com>
+Subject: [PATCH] mmc: return immediately once the dwmci data transfer fails
+Date: Tue, 28 May 2024 14:01:49 +0800
+Message-Id: <20240528060149.674310-1-meljbao@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/8] dfu: add scsi backend
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Lukasz Majewski <lukma@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-References: <20240527-b4-qcom-capsule-updates-v2-0-47583d7ad428@linaro.org>
- <20240527-b4-qcom-capsule-updates-v2-1-47583d7ad428@linaro.org>
- <87le3ugv33.fsf@baylibre.com>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <87le3ugv33.fsf@baylibre.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Tue, 28 May 2024 18:47:36 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,57 +89,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Originally, when the host is in dma mode, the return status of
+dwmci_data_transfer() gets overlapped by the latter DWMCI_IDINTEN query.
+When the data transfer fails and the query succeeds, the failure gets
+escaped. Add quick return when data transfer fails.
 
+Signed-off-by: linjunbao <meljbao@gmail.com>
+---
 
-On 28/05/2024 11:10, Mattijs Korpershoek wrote:
-> Hi Caleb,
-> 
-> Thank you for the patch.
-> 
-> On lun., mai 27, 2024 at 19:17, Caleb Connolly <caleb.connolly@linaro.org> wrote:
-> 
->> This is extremely similar to the MMC backend, but there are some notable
->> differences.
->>
->> Works with a DFU string like
->>
->>      scsi 4=u-boot-bin part 11
->>
->> Where "4" is the SCSI dev number (sequential LUN across all SCSI devices)
->> and "11" is the partition number >>
->> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->> ---
->>   doc/usage/dfu.rst      |  31 ++++
->>   drivers/dfu/Kconfig    |   7 +
->>   drivers/dfu/Makefile   |   1 +
->>   drivers/dfu/dfu.c      |   5 +-
->>   drivers/dfu/dfu_scsi.c | 437 +++++++++++++++++++++++++++++++++++++++++++++++++
->>   include/dfu.h          |  26 +++
->>   6 files changed, 506 insertions(+), 1 deletion(-)
-> 
-> I reviewed this here [1]. I could not find any response on that thread.
-> Could you please respond there or address the remarks for v3, please?
+ drivers/mmc/dw_mmc.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-
-Hi Mattijs,
-
-So sorry about that, will address your feedback in v3.
-
-Thanks,
-> 
-> [1] https://lore.kernel.org/r/87o7a94pe1.fsf@baylibre.com
-> 
->>
->> diff --git a/doc/usage/dfu.rst b/doc/usage/dfu.rst
->> index 8cc09c308d82..dc4f8d672f99 100644
->> --- a/doc/usage/dfu.rst
->> +++ b/doc/usage/dfu.rst
->> @@ -166,8 +166,38 @@ mmc
-> 
-> [...]
-> 
->> -- 
->> 2.45.0
-
+diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
+index e103664145..e04872c432 100644
+--- a/drivers/mmc/dw_mmc.c
++++ b/drivers/mmc/dw_mmc.c
+@@ -372,6 +372,10 @@ static int dwmci_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
+ 
+ 	if (data) {
+ 		ret = dwmci_data_transfer(host, data);
++		if (ret) {
++			debug("DWMCI data transfer fail.\n");
++			return ret;
++		}
+ 
+ 		/* only dma mode need it */
+ 		if (!host->fifo_mode) {
 -- 
-// Caleb (they/them)
+2.25.1
+
