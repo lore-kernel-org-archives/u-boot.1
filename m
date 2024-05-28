@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22E21C25B78
-	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 14:13:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F3F0C41513
+	for <u-boot@archiver.kernel.org>; Tue, 28 May 2024 14:13:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ABD3888518;
-	Tue, 28 May 2024 16:13:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 27F658852C;
+	Tue, 28 May 2024 16:13:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eMptoyQ2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fMmhBh2Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66E6F87D70; Tue, 28 May 2024 16:13:34 +0200 (CEST)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
+ id 2B62D884FC; Tue, 28 May 2024 16:13:56 +0200 (CEST)
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
+ [IPv6:2001:4860:4864:20::2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C52C08851A
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 16:13:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A076487D70
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 16:13:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-794ba2d4601so55625485a.1
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 07:13:31 -0700 (PDT)
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-24d8b372911so477971fac.1
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 07:13:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716905610; x=1717510410; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1716905632; x=1717510432; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=70ry7HkK8TOFybDv8f56cSwKEfMwuHNT39A+GeFUOt4=;
- b=eMptoyQ2GS8skaFQGn6moGOVvJZgbFJz3KUkyRtSxo9DK+cVmGGvjiA5h8YQrfQwLi
- KMr6hHtjQ9H0MWGMPAbQGYAGySi4AiEx9sAAVUhHdFjKyLpVFYadxc8igNfTz9frhxEi
- O8wLEAazqLU5Qo8Mj2UQhzcOB6CMTi/VkiO2b+5fkSpVIdJqELQha26lD+7LWFotWlYw
- WX4bB+mH0a/cdwaXSceimRwp3VcFeEjEExxb9bYsXgUN35FDoz8HjzV8P9cxRRsT2fRY
- bX5PNVqqycnEszl7qa5FudAkHr/g1eg7h0Ib6FXeVPJXH4ONvBXAiBbUIV2fiLw5GGfl
- gCSQ==
+ bh=C6Wz8UW2xPSjHSMEKzjHp4HFA0YTmrYpKYklCtu/X8o=;
+ b=fMmhBh2Z4BrvuaD63oEZjr53cqQ3oTaCPYZBiIibflhCu3fuyF+UFjFnog4QvmqIG3
+ 7KpGss1qBchSNbpRHhAWigfz8jood5N4kaYViobqcaryfvtUEPST4kbOH92kPK3GEMeO
+ PVch3fzYkeM9UttgsZCU5ajov4dpaO6YoN82pIiuDlPn/smAWUzIEDKvcov+TWTudcqC
+ ltOLB1pPg9MqLnPKVxrWjbga9sA13WLXpbSTDWvySdAq4MzZRIWHucWkUbfGAA0TSZoA
+ FR9maZYJdp5+YoLB9fltqjC9P9F2eR5r7BYA0xR+60KOZqCCJ0IEY+eZuVg1Xc3DJFWf
+ Ct7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716905610; x=1717510410;
+ d=1e100.net; s=20230601; t=1716905632; x=1717510432;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=70ry7HkK8TOFybDv8f56cSwKEfMwuHNT39A+GeFUOt4=;
- b=bTTT+eW6MaAdzMqxzPykjIETSYK8+0YNRNGwT2141fbuXHNlaQ6SaML4kJ5Ofbx0FB
- G0qReivc3maNnX1OguHt3Evqnemxp3MvBqFMX/8Lv7/5xq2DpSDKUbDSjkpFRLFJrEFT
- X79u8zIxa2QDqAC6+Qtpew8nEKPZazOJPr2d6J7mLGWsFkZDqSvVprDTpkYpo1nmysUJ
- DQCWoMwjfyiD5G2kR9Eu8K73o9ikggEP9pycYeloy2EWdQALcEujlB8WpksK73r/F5za
- 548ZFQZLguBnKhc3GA0KVu+FAQkfYDbqKFMdx3V6ygncFIIHLudKvXD8kJsM97vgkQ+A
- e00Q==
-X-Gm-Message-State: AOJu0YwbB7XGbCuJEmcpFbEBH0wtCAaO3NzeeZ/H8be8+KFG01s46Zzn
- yQTs8B5KURBTKPWZ84GVHN8GUvD2TIKORf2mkbNv2dZI3EDBP+AVkkbFIsqiV+e2et5E5Y5gmw4
- LgdY=
-X-Google-Smtp-Source: AGHT+IHT8VUKdrHwP3llglyzRdNSo6rd+dJ6x1M/Li8rCxot63qmRlLtB1BdOJXcid2Lgl283bH+GQ==
-X-Received: by 2002:a05:620a:8427:b0:794:b6fc:c493 with SMTP id
- af79cd13be357-794b6fcc5e3mr845655885a.74.1716905610368; 
- Tue, 28 May 2024 07:13:30 -0700 (PDT)
+ bh=C6Wz8UW2xPSjHSMEKzjHp4HFA0YTmrYpKYklCtu/X8o=;
+ b=eJF8hUuCiLC8XKhrJIb91Fn639DoedKiNh8eSlgLmGS6a2003pgNz2YYe9nYYfsjg9
+ U4oqfTget/+MrU61zRM2r372ku0yUhG0aFOkzZgW+E+N4uxj++WCSoG0KBi4Twgcjc7w
+ OeyV4AcB6jsRGqUdMTSNkxiaa+ImCmyXz9JAevo06Hj/TBlC7uFGEK0BuEQw1+yR7AXk
+ 5dXPDjC29D6S7BlPIuB+ZMVP/RTn948srKfqZLMvlMRsVPu9yHUvu+k506DZcU3//y32
+ kwela98ux/9gYfZRqEzOD87rBPklrH30ITTVaKLMJT2fKXXUbHW4n+qtkATfmGR+aFF7
+ oRLQ==
+X-Gm-Message-State: AOJu0YwahEKAN8+0TTCcJpDoMNxJ/vSkuzfu8vAyhj+PDLVIaV780JJ3
+ W1GhGQc89IrUOe97pCtQAdTYN3gK9thnMQodHY38KwJ+bUPAMSqOWobOpsre8ynjWvZcbyrjPDw
+ X0rw=
+X-Google-Smtp-Source: AGHT+IF2JJ096KnxE+lfZfcriCjDu87niBpKc6C6pKrYHVQoX5qg51jEfuIQ3w/nsvEQHL8JeFMbUg==
+X-Received: by 2002:a05:6870:40c9:b0:24f:e3f0:ef60 with SMTP id
+ 586e51a60fabf-24fe3f259e5mr7904195fac.0.1716905631886; 
+ Tue, 28 May 2024 07:13:51 -0700 (PDT)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-794abcc5844sm381033685a.53.2024.05.28.07.13.28
+ af79cd13be357-794abcc5844sm381033685a.53.2024.05.28.07.13.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 May 2024 07:13:30 -0700 (PDT)
+ Tue, 28 May 2024 07:13:51 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
@@ -81,18 +81,17 @@ Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
  "Leon M. Busch-George" <leon@georgemail.eu>,
- Ilya Lukin <4.shket@gmail.com>, Sergei Antonov <saproj@gmail.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>, Bin Meng <bmeng@tinylab.org>,
+ Sergei Antonov <saproj@gmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilya Lukin <4.shket@gmail.com>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Alexander Gendin <agendin@matrox.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>,
+ Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: [PATCH v3 09/25] mbedtls/external: support Microsoft Authentication
- Code
-Date: Tue, 28 May 2024 07:09:20 -0700
-Message-Id: <20240528140955.1960172-10-raymond.mao@linaro.org>
+Subject: [PATCH v3 10/25] mbedtls/external: support PKCS9 Authenticate
+ Attributes
+Date: Tue, 28 May 2024 07:09:21 -0700
+Message-Id: <20240528140955.1960172-11-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240528140955.1960172-1-raymond.mao@linaro.org>
 References: <20240528140955.1960172-1-raymond.mao@linaro.org>
@@ -114,10 +113,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Populate Microsoft Authentication Code from the content data
-into PKCS7 decoding context if it exists in a PKCS7 message.
-Add OIDs for describing objects using for Microsoft Authentication
-Code.
+Populate PKCS9 Authenticate Attributes from signer info if it exists
+in a PKCS7 message.
+Add OIDs for describing objects using for Authenticate Attributes.
 
 The PR for this patch is at:
 https://github.com/Mbed-TLS/mbedtls/pull/9001
@@ -133,189 +131,93 @@ Changes in v2
 Changes in v3
 - Update commit message.
 
- .../external/mbedtls/include/mbedtls/oid.h    | 30 ++++++++++
- .../external/mbedtls/include/mbedtls/pkcs7.h  | 10 ++++
- lib/mbedtls/external/mbedtls/library/pkcs7.c  | 60 +++++++++++++++----
- 3 files changed, 90 insertions(+), 10 deletions(-)
+ .../external/mbedtls/include/mbedtls/oid.h    |  5 +++++
+ .../external/mbedtls/include/mbedtls/pkcs7.h  | 11 +++++++++++
+ lib/mbedtls/external/mbedtls/library/pkcs7.c  | 19 ++++++++++++++++++-
+ 3 files changed, 34 insertions(+), 1 deletion(-)
 
 diff --git a/lib/mbedtls/external/mbedtls/include/mbedtls/oid.h b/lib/mbedtls/external/mbedtls/include/mbedtls/oid.h
-index fdc25ebf885..2ee982808fa 100644
+index 2ee982808fa..43cef99f1e3 100644
 --- a/lib/mbedtls/external/mbedtls/include/mbedtls/oid.h
 +++ b/lib/mbedtls/external/mbedtls/include/mbedtls/oid.h
-@@ -352,6 +352,36 @@
- #define MBEDTLS_OID_PKCS12_PBE_SHA1_RC2_128_CBC     MBEDTLS_OID_PKCS12_PBE "\x05" /**< pbeWithSHAAnd128BitRC2-CBC OBJECT IDENTIFIER ::= {pkcs-12PbeIds 5} */
- #define MBEDTLS_OID_PKCS12_PBE_SHA1_RC2_40_CBC      MBEDTLS_OID_PKCS12_PBE "\x06" /**< pbeWithSHAAnd40BitRC2-CBC OBJECT IDENTIFIER ::= {pkcs-12PbeIds 6} */
+@@ -238,6 +238,11 @@
+ #define MBEDTLS_OID_RSA_SHA_OBS         "\x2B\x0E\x03\x02\x1D"
  
-+/*
-+ * MicroSoft Authenticate Code OIDs
-+ */
-+#define MBEDTLS_OID_PRIVATE_ENTERPRISE              MBEDTLS_OID_INTERNET "\x04\x01" /* {iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) */
-+#define MBEDTLS_OID_MICROSOFT                       "\x82\x37"  /* {microsoft(311)} */
-+/*
-+ * OID_msIndirectData: (1.3.6.1.4.1.311.2.1.4)
-+ * {iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) microsoft(311) 2(2) 1(1) 4(4)}
-+ */
-+#define MBEDTLS_OID_MICROSOFT_INDIRECTDATA  MBEDTLS_OID_PRIVATE_ENTERPRISE MBEDTLS_OID_MICROSOFT \
-+    "\x02\x01\x04"
-+/*
-+ * OID_msStatementType: (1.3.6.1.4.1.311.2.1.11)
-+ * {iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) microsoft(311) 2(2) 1(1) 11(11)}
-+ */
-+#define MBEDTLS_OID_MICROSOFT_STATETYPE  MBEDTLS_OID_PRIVATE_ENTERPRISE MBEDTLS_OID_MICROSOFT \
-+    "\x02\x01\x0b"
-+/*
-+ * OID_msSpOpusInfo: (1.3.6.1.4.1.311.2.1.12)
-+ * {iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) microsoft(311) 2(2) 1(1) 12(12)}
-+ */
-+#define MBEDTLS_OID_MICROSOFT_SPOPUSINFO  MBEDTLS_OID_PRIVATE_ENTERPRISE MBEDTLS_OID_MICROSOFT \
-+    "\x02\x01\x0b"
-+/*
-+ * OID_msPeImageDataObjId: (1.3.6.1.4.1.311.2.1.15)
-+ * {iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) microsoft(311) 2(2) 1(1) 15(15)}
-+ */
-+#define MBEDTLS_OID_MICROSOFT_PEIMAGEDATA  MBEDTLS_OID_PRIVATE_ENTERPRISE MBEDTLS_OID_MICROSOFT \
-+    "\x02\x01\x0f"
-+
- /*
-  * EC key algorithms from RFC 5480
-  */
+ #define MBEDTLS_OID_PKCS9_EMAIL         MBEDTLS_OID_PKCS9 "\x01" /**< emailAddress AttributeType ::= { pkcs-9 1 } */
++#define MBEDTLS_OID_PKCS9_CONTENTTYPE   MBEDTLS_OID_PKCS9 "\x03" /**< contentType AttributeType ::= { pkcs-9 3 } */
++#define MBEDTLS_OID_PKCS9_MESSAGEDIGEST MBEDTLS_OID_PKCS9 "\x04" /**< messageDigest AttributeType ::= { pkcs-9 4 } */
++#define MBEDTLS_OID_PKCS9_SIGNINGTIME   MBEDTLS_OID_PKCS9 "\x05" /**< signingTime AttributeType ::= { pkcs-9 5 } */
++#define MBEDTLS_OID_PKCS9_SMIMECAP      MBEDTLS_OID_PKCS9 "\x0f" /**< smimeCapabilites AttributeType ::= { pkcs-9 15 } */
++#define MBEDTLS_OID_PKCS9_SMIMEAA       MBEDTLS_OID_PKCS9 "\x10\x02\x0b" /**< smimeCapabilites AttributeType ::= { pkcs-9 16 2 11} */
+ 
+ /* RFC 4055 */
+ #define MBEDTLS_OID_RSASSA_PSS          MBEDTLS_OID_PKCS1 "\x0a" /**< id-RSASSA-PSS ::= { pkcs-1 10 } */
 diff --git a/lib/mbedtls/external/mbedtls/include/mbedtls/pkcs7.h b/lib/mbedtls/external/mbedtls/include/mbedtls/pkcs7.h
-index e9b482208e6..9e29b74af70 100644
+index 9e29b74af70..a88a5e858fc 100644
 --- a/lib/mbedtls/external/mbedtls/include/mbedtls/pkcs7.h
 +++ b/lib/mbedtls/external/mbedtls/include/mbedtls/pkcs7.h
-@@ -132,12 +132,22 @@ typedef struct mbedtls_pkcs7_signed_data {
+@@ -102,6 +102,16 @@ typedef enum {
  }
- mbedtls_pkcs7_signed_data;
+ mbedtls_pkcs7_type;
  
-+/* Content Data for MicroSoft Authentication Code using in U-Boot Secure Boot */
-+typedef struct mbedtls_pkcs7_conten_data {
-+    int data_type;  /* Type of Data */
-+    size_t data_len;    /* Length of Data */
-+    size_t data_hdrlen; /* Length of Data ASN.1 header */
-+    void *data;     /* Content Data */
++/*
++ * Authenticate Attributes for MicroSoft Authentication Code using in U-Boot
++ * Secure Boot
++ */
++typedef struct mbedtls_pkcs7_authattrs {
++    size_t data_len;
++    void *data;
 +}
-+mbedtls_pkcs7_conten_data;
++mbedtls_pkcs7_authattrs;
 +
  /**
-  * Structure holding PKCS #7 structure, only signed data for now
+  * Structure holding PKCS #7 signer info
   */
- typedef struct mbedtls_pkcs7 {
-     mbedtls_pkcs7_buf MBEDTLS_PRIVATE(raw);
-     mbedtls_pkcs7_signed_data MBEDTLS_PRIVATE(signed_data);
-+    mbedtls_pkcs7_conten_data content_data;
+@@ -113,6 +123,7 @@ typedef struct mbedtls_pkcs7_signer_info {
+     mbedtls_x509_buf MBEDTLS_PRIVATE(alg_identifier);
+     mbedtls_x509_buf MBEDTLS_PRIVATE(sig_alg_identifier);
+     mbedtls_x509_buf MBEDTLS_PRIVATE(sig);
++    mbedtls_pkcs7_authattrs authattrs;
+     struct mbedtls_pkcs7_signer_info *MBEDTLS_PRIVATE(next);
  }
- mbedtls_pkcs7;
- 
+ mbedtls_pkcs7_signer_info;
 diff --git a/lib/mbedtls/external/mbedtls/library/pkcs7.c b/lib/mbedtls/external/mbedtls/library/pkcs7.c
-index 3aac662ba69..0c2436b56b7 100644
+index 0c2436b56b7..da73fb341d6 100644
 --- a/lib/mbedtls/external/mbedtls/library/pkcs7.c
 +++ b/lib/mbedtls/external/mbedtls/library/pkcs7.c
-@@ -29,6 +29,13 @@
- #include <time.h>
- #endif
- 
-+enum OID {
-+    /* PKCS#7 {iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-7(7)} */
-+    MBEDTLS_OID_DATA = 13,          /* 1.2.840.113549.1.7.1 */
-+    /* Microsoft Authenticode & Software Publishing */
-+    MBEDTLS_OID_MS_INDIRECTDATA = 24,        /* 1.3.6.1.4.1.311.2.1.4 */
-+};
-+
- /**
-  * Initializes the mbedtls_pkcs7 structure.
-  */
-@@ -449,7 +456,7 @@ cleanup:
-  *      signerInfos SignerInfos }
-  */
- static int pkcs7_get_signed_data(unsigned char *buf, size_t buflen,
--                                 mbedtls_pkcs7_signed_data *signed_data)
-+                                 mbedtls_pkcs7 *pkcs7)
- {
-     unsigned char *p = buf;
-     unsigned char *end = buf + buflen;
-@@ -457,6 +464,7 @@ static int pkcs7_get_signed_data(unsigned char *buf, size_t buflen,
+@@ -288,6 +288,7 @@ static int pkcs7_get_signer_info(unsigned char **p, unsigned char *end,
+     unsigned char *end_signer, *end_issuer_and_sn;
+     int asn1_ret = 0, ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
      size_t len = 0;
-     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
-     mbedtls_md_type_t md_alg;
-+    mbedtls_pkcs7_signed_data *signed_data = &pkcs7->signed_data;
++    unsigned char *tmp_p;
  
-     ret = mbedtls_asn1_get_tag(&p, end, &len, MBEDTLS_ASN1_CONSTRUCTED
-                                | MBEDTLS_ASN1_SEQUENCE);
-@@ -493,25 +501,57 @@ static int pkcs7_get_signed_data(unsigned char *buf, size_t buflen,
-     if (ret != 0) {
-         return ret;
-     }
--    if (MBEDTLS_OID_CMP(MBEDTLS_OID_PKCS7_DATA, &content_type)) {
-+
-+    /*
-+     * We should only support 1.2.840.113549.1.7.1 (PKCS7 DATA) and
-+     * 1.3.6.1.4.1.311.2.1.4 (MicroSoft Authentication Code) that is for
-+     * U-Boot Secure Boot
-+     */
-+    if (!MBEDTLS_OID_CMP(MBEDTLS_OID_PKCS7_DATA, &content_type)) {
-+        pkcs7->content_data.data_type = MBEDTLS_OID_DATA;
-+    } else if (!MBEDTLS_OID_CMP(MBEDTLS_OID_MICROSOFT_INDIRECTDATA,
-+                                &content_type)) {
-+        pkcs7->content_data.data_type = MBEDTLS_OID_MS_INDIRECTDATA;
-+    } else {
-         return MBEDTLS_ERR_PKCS7_INVALID_CONTENT_INFO;
-     }
- 
-     if (p != end_content_info) {
-+        unsigned char *tmp_p = p;
-+
-         /* Determine if valid content is present */
-         ret = mbedtls_asn1_get_tag(&p,
-                                    end_content_info,
-                                    &len,
--                                   MBEDTLS_ASN1_CONSTRUCTED | MBEDTLS_ASN1_CONTEXT_SPECIFIC);
-+                                   MBEDTLS_ASN1_CONSTRUCTED |
-+                                   MBEDTLS_ASN1_CONTEXT_SPECIFIC);
-+        if (ret != 0 || p + len != end_content_info) {
-+            return MBEDTLS_ERROR_ADD(MBEDTLS_ERR_PKCS7_INVALID_CONTENT_INFO,
-+                                     ret);
-+        }
-+
-+        /*
-+         * U-Boot Secure Boot needs to calculate the digest of MicroSoft
-+         * Authentication Code during verifying an EFI image.
-+         * Thus we need to save the context of Content Data.
-+         */
-+        pkcs7->content_data.data_hdrlen = p - tmp_p;
-+        /* Parse the content data from a sequence */
-+        ret = mbedtls_asn1_get_tag(&p, end_content_info, &len,
-+                                   MBEDTLS_ASN1_CONSTRUCTED |
-+                                   MBEDTLS_ASN1_SEQUENCE);
-         if (ret != 0) {
--            return MBEDTLS_ERROR_ADD(MBEDTLS_ERR_PKCS7_INVALID_CONTENT_INFO, ret);
-+            /* TODO: Other Content Data formats are not supported at the moment */
-+            return MBEDTLS_ERR_PKCS7_FEATURE_UNAVAILABLE;
-+        } else if (p + len != end_content_info) {
-+            return MBEDTLS_ERROR_ADD(MBEDTLS_ERR_PKCS7_INVALID_CONTENT_INFO,
-+                                     ret);
-         }
-+
-+        pkcs7->content_data.data = p;
-+        pkcs7->content_data.data_len = len;
-+
-         p += len;
--        if (p != end_content_info) {
--            return MBEDTLS_ERROR_ADD(MBEDTLS_ERR_PKCS7_INVALID_CONTENT_INFO, ret);
--        }
--        /* Valid content is present - this is not supported */
--        return MBEDTLS_ERR_PKCS7_FEATURE_UNAVAILABLE;
-     }
- 
-     /* Look for certificates, there may or may not be any */
-@@ -624,7 +664,7 @@ int mbedtls_pkcs7_parse_der(mbedtls_pkcs7 *pkcs7, const unsigned char *buf,
-     }
- 
- try_data:
--    ret = pkcs7_get_signed_data(p, len, &pkcs7->signed_data);
-+    ret = pkcs7_get_signed_data(p, len, pkcs7);
-     if (ret != 0) {
+     asn1_ret = mbedtls_asn1_get_tag(p, end, &len, MBEDTLS_ASN1_CONSTRUCTED
+                                     | MBEDTLS_ASN1_SEQUENCE);
+@@ -349,7 +350,23 @@ static int pkcs7_get_signer_info(unsigned char **p, unsigned char *end,
          goto out;
      }
+ 
+-    /* Assume authenticatedAttributes is nonexistent */
++    /* Save authenticatedAttributes if present */
++    if (*p < end_signer &&
++        **p == (MBEDTLS_ASN1_CONTEXT_SPECIFIC | MBEDTLS_ASN1_CONSTRUCTED | 0)) {
++        tmp_p = *p;
++
++        ret = mbedtls_asn1_get_tag(p, end_signer, &len,
++                                   MBEDTLS_ASN1_CONTEXT_SPECIFIC |
++                                   MBEDTLS_ASN1_CONSTRUCTED | 0);
++        if (ret != 0) {
++            goto out;
++        }
++
++        signer->authattrs.data = tmp_p;
++        signer->authattrs.data_len = len + *p - tmp_p;
++        *p += len;
++    }
++
+     ret = pkcs7_get_digest_algorithm(p, end_signer, &signer->sig_alg_identifier);
+     if (ret != 0) {
+         goto out;
 -- 
 2.25.1
 
