@@ -4,87 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9641C25B75
-	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 19:04:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8668DC25B75
+	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 19:42:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A63D8860D;
-	Wed, 29 May 2024 21:04:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8196688611;
+	Wed, 29 May 2024 21:42:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kSSDgLyi";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FMOLT/PI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7E0488658; Wed, 29 May 2024 21:04:03 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 872E48864C; Wed, 29 May 2024 21:42:20 +0200 (CEST)
+Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
+ [IPv6:2607:f8b0:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F397F88652
- for <u-boot@lists.denx.de>; Wed, 29 May 2024 21:04:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D7657885E1
+ for <u-boot@lists.denx.de>; Wed, 29 May 2024 21:42:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a635a74e0deso131566b.0
- for <u-boot@lists.denx.de>; Wed, 29 May 2024 12:04:01 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-70223dffaf6so131588b3a.1
+ for <u-boot@lists.denx.de>; Wed, 29 May 2024 12:42:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1717009441; x=1717614241; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=/Os4+frbVCkY9GCBSTlAcrgNPIOcknJcWyYNFEVco10=;
- b=kSSDgLyiHlwcp7Z7Dat3BhZhyLOo/zBVvMc8sW5UF8IOwfJTyizKSiXO0TbyUqRAol
- RueZVHKmvispJAOzY+yre21fm22Q6nNC4VZKPHT5pVwXgoI8XJatJM2naT+3+Hkdt2NU
- qz8bnCq6iw2N5gm8hJtsmARMOf+/ShZevXCTqqgchR3fEVFI1x/JMbSZjrQEbm3gEgGP
- O2MaLDp+KPY0MTe7zyqoa1R7SnqHF3JzASz2qGBMqlbS6tR+7EnsQxrfcm7kkqkwSl8e
- 9BGkxgXGW1ckemC+cIRez64uvDS6BRi0wQhkg22Y13MAk8GwFM/VKyoIi92xsJzbse7t
- YZZg==
+ d=linaro.org; s=google; t=1717011736; x=1717616536; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=sNUNdM9DnCiyUfn14ULt+nOfY2IIS9s74o9Cf33HKUI=;
+ b=FMOLT/PIJZ3/pzhbg9V1twilmzuLMeLhHq2HcWI30AGIMrmsopqMrCheUoajURBpJ9
+ /R7DuERydNug+Hxrt996JtTYvM9qWRghfs2JTb4M8mZ3vOCrly6uTbs2VIzkukXMLi6G
+ imiQ4/bjgx9t+lPIWIFuO0ybwy/CrVyHzvSqRhpFqj1W10gqXGidi2RSQCRJSvdA2YCS
+ Z/Ej/B5qanbnj/UHBoFETNtgHSbmT2QuzZLyQMYkmxYWShtspgbxAVPGz5othgnE1JfD
+ b/XGx8cfGO+GwhKVetb5t+WmCrkEUaqMBzWYatrjtXLWi40bHRalHw6CTnXhgFwaCCpY
+ vsAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717009441; x=1717614241;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=/Os4+frbVCkY9GCBSTlAcrgNPIOcknJcWyYNFEVco10=;
- b=C7dEXax4iovq/xVFJmUZ68HK1tvOh9Z9fEy+DocSAUFcwohaVnHoORdLSYS2aUuD/4
- XrgWDnkD480XolykrU3F9Lrs1cYfbRiPrkJxRQHm8V5atzi736McissG+sj2q3vjZ/tO
- YWpOF6EHI2Y4ZkS6FQkAu10ToIQk3Ctot9gyXoqqcBKU8bK8W8a0d5xidCAHp60fy/o8
- x3VDtN9J5yGw9rrfzb3GY1/beduqiifzlQEY1pMP1ZZh4Ifts7wdmC4pwVYg6gK0nDdv
- kKGECZLacGS1O4bH9aHImrYMu37cM9Tm6zu9OjaEP1MvjMJ0b7V+k0kQbIeKR+qSL3Oy
- CI5g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXg/yQGc9OvXGYHmv1fr85PYVQu7M2KZNUV1YhgyaVpQuZ0HywFRvi0Fp5rT8sQrgCkg9MYt0ADmD5IjWTUF4C2GuPS6A==
-X-Gm-Message-State: AOJu0YwHEaDSR+VAVzHQUSkFuMt9xH4P+GYnhlLk6Fl9C9b0JLGRWyWu
- ThfDOKeY0vboFGZJL/IXKODL8eTgEyxCUIUZinAUgtqLjhp1WFBu/qqHVONJ1jYKMbOrufFogUx
- Y7Q4y0w==
-X-Google-Smtp-Source: AGHT+IHlGiDUzkgOUvT2QHbwKgiaYNcvhcRiHsvr0BGSL9lmNtnYZd3o/hojWMrMTe4N3Klvx+kdJQ==
-X-Received: by 2002:a17:907:1382:b0:a63:5421:85b0 with SMTP id
- a640c23a62f3a-a65e9215827mr4942766b.75.1717009441335; 
- Wed, 29 May 2024 12:04:01 -0700 (PDT)
-Received: from ?IPV6:2a02:8109:aa0d:be00::8bb3? ([2a02:8109:aa0d:be00::8bb3])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a6331c86c76sm235398366b.44.2024.05.29.12.04.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 29 May 2024 12:04:01 -0700 (PDT)
-Message-ID: <b10fbb50-18fb-4483-a90a-22ec11db94d1@linaro.org>
-Date: Wed, 29 May 2024 21:03:59 +0200
+ d=1e100.net; s=20230601; t=1717011736; x=1717616536;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=sNUNdM9DnCiyUfn14ULt+nOfY2IIS9s74o9Cf33HKUI=;
+ b=mdmyPruO0F/gVpBPjZfOjVNv/YXKLIBxG1PBi65yPjoW7HNoH7M+X+971M1BbTSzcd
+ gXOdEV/iBIveWz7/ZIhTicgjN7LFRekrTAgynLJ/FyE2KllF+Ps2Qo1nMWzmqx27QKgd
+ WxuLYVCl6Pwu6wrkx733URQi+PYuyHxBgCEMyoS0pjLVqDnWGe79D9Ja8Tl8YX7ij2PF
+ vFw0ZQBMu7jFJcf+68Vd/0fXAMGXwcrKgllPJ8Ye+L5uii3oSP8H7yvhYUiNpCMTQxrI
+ ODTD2Y3DMsMXciEr4AwXJcg5OpL20Bn4lIlmyULOTabwkCZB0RsgqgGNcR2WdIW/gJl9
+ PplQ==
+X-Gm-Message-State: AOJu0YxgchG+OVO0zYhKZtoN+lTM233bhpWvMqtJu6u8CEJXUJKQaiM9
+ Ky11fVPgGJXy9Js25XfCitrsE0R+g+POkg7x0rIav1+FVe+9OuoaIXPEQmlTxJ6F65jyBmINUUM
+ 5/t4nAaJkRUCuWjeEqAGJpcb9KQir3Zv0yUIkjQ==
+X-Google-Smtp-Source: AGHT+IER3G2RLPhxFwDmu+TsNBNZGkv8ZLpNK4IxRxuGlCWCd22tCxL0JqulrWddXl58h3czzJh44zH5sLru+QPfTz8=
+X-Received: by 2002:a05:6a00:6c9c:b0:6ed:60a4:777b with SMTP id
+ d2e1a72fcca58-70231106e91mr62b3a.8.1717011735940; Wed, 29 May 2024 12:42:15
+ -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/7] efi: CapsuleUpdate: support for dynamic UUIDs
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+References: <20240528140955.1960172-1-raymond.mao@linaro.org>
+ <20240528140955.1960172-4-raymond.mao@linaro.org>
+ <20240529165814.GQ2568172@bill-the-cat>
+ <CAEfUkU+zKyaqc5tFy0rN3ofm3pRuckZX6PbD00VNtWQc5COZyA@mail.gmail.com>
+ <20240529180129.GB3714513@bill-the-cat>
+ <CAEfUkUJj5Y+uVmRXx+=DP-6O7dpNcMjSA1jADKaJo07RSsBjHw@mail.gmail.com>
+ <20240529184255.GC3714513@bill-the-cat>
+In-Reply-To: <20240529184255.GC3714513@bill-the-cat>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Wed, 29 May 2024 15:42:04 -0400
+Message-ID: <CAEfUkUJOD=KEnUo=7BD14mW2yfq8ZnGREqMgOQfx2pkWxLvtzQ@mail.gmail.com>
+Subject: Re: [PATCH v3 03/25] mbedtls: add mbedtls into the build system
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Stefan Bosch <stefan_b@posteo.net>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Mario Six <mario.six@gdsys.cc>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jesse Taube <mr.bossman075@gmail.com>,
+ Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Ilya Lukin <4.shket@gmail.com>, Sergei Antonov <saproj@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
  Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de
-References: <20240529-b4-dynamic-uuid-v2-0-c26f31057bbe@linaro.org>
- <CAFLszTj8vfZVW+0YPqcg6ST3MndW=mFJkOz3dJXuFb=P1HP3kw@mail.gmail.com>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAFLszTj8vfZVW+0YPqcg6ST3MndW=mFJkOz3dJXuFb=P1HP3kw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,14 +109,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
-> 
-> How about using the compatible string, instead of a GUID? Is that possible?
+On Wed, 29 May 2024 at 14:43, Tom Rini <trini@konsulko.com> wrote:
 
-Could you elaborate?
-> 
-> Regards,
-> Simon
+> On Wed, May 29, 2024 at 02:38:10PM -0400, Raymond Mao wrote:
+> > Hi Tom,
+> >
+> > On Wed, 29 May 2024 at 14:01, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > > On Wed, May 29, 2024 at 01:42:16PM -0400, Raymond Mao wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Wed, 29 May 2024 at 12:58, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > > On Tue, May 28, 2024 at 07:09:14AM -0700, Raymond Mao wrote:
+> > > > >
+> > > > > > Port mbedtls with dummy libc header files.
+> > > > > > Add mbedtls default config header file.
+> > > > > > Optimize mbedtls default config by disabling unused features to
+> > > > > > reduce the target size.
+> > > > > > Add mbedtls kbuild makefile.
+> > > > > > Add Kconfig and mbedtls config submenu.
+> > > > > [snip]
+> > > > > > diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+> > > > > > new file mode 100644
+> > > > > > index 00000000000..d6e77d56871
+> > > > > > --- /dev/null
+> > > > > > +++ b/lib/mbedtls/Kconfig
+> > > > > > @@ -0,0 +1,25 @@
+> > > > > > +menuconfig MBEDTLS_LIB
+> > > > > > +     bool "Use mbedtls libraries"
+> > > > > > +     select MBEDTLS_LIB_CRYPTO
+> > > > > > +     select MBEDTLS_LIB_X509
+> > > > > > +     help
+> > > > > > +       Enable mbedtls libraries
+> > > > > > +
+> > > > > > +if MBEDTLS_LIB
+> > > > > > +
+> > > > > > +config MBEDTLS_LIB_CRYPTO
+> > > > > > +     bool "Crypto library"
+> > > > > > +     help
+> > > > > > +       Enable mbedtls crypto library
+> > > > > > +
+> > > > > > +config MBEDTLS_LIB_X509
+> > > > > > +     bool "X509 library"
+> > > > > > +     help
+> > > > > > +       Enable mbedtls X509 library
+> > > > > > +
+> > > > > > +config MBEDTLS_LIB_TLS
+> > > > > > +     bool "TLS library"
+> > > > > > +     help
+> > > > > > +       Enable mbedtls TLS library
+> > > > > > +
+> > > > > > +endif # MBEDTLS_LIB
+> > > > >
+> > > > > We need much more granularity here, and to re-think some existing
+> > > > > symbols too perhaps. What we should be able to do is pick mbedTLS
+> or
+> > > > > "legacy SW implementation" or "HW implementation" for the various
+> > > > > algorithms, and that in turn can have some higher level grouping
+> to it.
+> > > > > This should then negate a bunch of the Makefile work you're doing
+> as we
+> > > > > won't have CONFIG_SHA256 enabled as we'll have
+> > > CONFIG_MBEDTLS_LIB_SHA256
+> > > > > or whatever enabled.
+> > > > >
+> > > >
+> > > > I think we should use CONFIG_MBEDTLS_LIB_[CRYPTO,X509,TLS] for
+> high-level
+> > > > grouping.
+> > > > Underneath, the CONFIG_SHA[1,256,512] switches (and other crypto
+> options)
+> > > > can be
+> > > > used as sub build options in both MbedTLS and "legacy libs".
+> > > >
+> > > > Take hash as an example, if the users prefer to use MbedTLS other
+> than
+> > > > "legacy libs" for
+> > > > hash operation, CONFIG_MBEDTLS_LIB_CRYPTO should be defined as the
+> main
+> > > > switch
+> > > > (the users can still prefer to use "legacy libs" for X509 by
+> > > > keeping  CONFIG_MBEDTLS_LIB_X509
+> > > > disabled).
+> > > > Then enable the algorithms they need (e.g. CONFIG_SHA256) - the
+> algorithm
+> > > > options works
+> > > > for both MbedTLS and "legacy libs".
+> > > >
+> > > > HW implementations with MbedTLS (aka, Alternative algorithms in
+> MbedTLS)
+> > > is
+> > > > another
+> > > > topic which is not covered in this patch set (It needs to migrate
+> each
+> > > > vendor's solution under
+> > > > MbedTLS alternative algorithm).
+> > > > Current patch set is focused on SW implementation with MbedTLS.
+> > >
+> > > The "easy" problem with what's in v3 is that X509 and CRYPTO are
+> > > select'd under the main heading.
+> >
+> > Not sure if I get what you mentioned, currently all MbedTLS options are
+> > under
+> > Library routines > Security support
+> > Do you think we should keep them in other places?
+> >
+> >
+> > > The harder problem is that we
+> > > intentionally have granularity for SHA256, SHA512, etc, etc and all of
+> > > that goes away with the current Kconfig option if you select mbedTLS.
+> We
+> > > need to bring that back. And we shouldn't need to have all of the ifneq
+> > > statements in Makefiles because both CONFIG_SHA256 and
+> > > CONFIG_MBEDLTS_LIB_CRYPTO_SHA256 will not be true (Or possibly,
+> > > CONFIG_SHA256 gates things U-Boot's internal API for sha256'ing
+> > > something and CONFIG_LEGACY_SHA256 controls building lib/sha256.c).
+> > >
+> > > I think we should not introduce new ones like CONFIG_LEGACY_,
+> > CONFIG_SHA[1,256,512] should be used no matter whether MbedTLS is
+> > enabled or not.
+> > I understand your concern, I will bring CONFIG_SHA[1,256,512] back when
+> > MbedTLS is enabled. Those options should control the options in the
+> MbedTLS
+> > default config file.
+>
+> My concern is that we do not have the correct level of granularity, and
+> that can partly be seen by the number of ifneq(...) statements being
+> added around already conditional logic. We should have almost none of
+> those, in the end, is what I'm saying. We have a mechanism for
+> configuring the build, Kconfig, and that should drive the decisions as
+> much as possible.
+>
+> The `ifneq(ONFIG_MBEDTLS_LIB_*)` statements are due to the fact that we
+still
+need lib/Makefile and lib/crypto/Makefile when building hash and x509
+stuffs with
+MbedTLS enabled.
+To address this, I guess we have to first refactor all "legacy libs" that
+will be replaced
+by MbedTLS:
+Move md5, sha* from lib to to a new dir lib/hash and move public_key,
+rsapubkey*,
+rsa_helper, x509*, pkcs7*,mscode* from lib/crypto to a new dir lib/x509.
+When they are all independent modules with separated Makefile, we can remove
+`ifneq(ONFIG_MBEDTLS_LIB_*)` and all can be driven in lib/Makefile.
 
--- 
-// Caleb (they/them)
+Is that something you expect?
+If yes I can do this for v4, or put it into another prerequisite/refactor
+series.
+
+Regards,
+Raymond
