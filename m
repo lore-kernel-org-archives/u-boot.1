@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7F26C25B75
-	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 16:32:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAD47C25B7C
+	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 16:33:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83A058860D;
+	by phobos.denx.de (Postfix) with ESMTP id DE2BF88658;
 	Wed, 29 May 2024 18:32:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ODhg+mL7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mNtApH5M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B0298860D; Wed, 29 May 2024 18:29:57 +0200 (CEST)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id 003C98860B; Wed, 29 May 2024 18:30:01 +0200 (CEST)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B61488615
- for <u-boot@lists.denx.de>; Wed, 29 May 2024 18:29:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E5D9188606
+ for <u-boot@lists.denx.de>; Wed, 29 May 2024 18:29:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-3d1d3c7f7c6so737976b6e.3
- for <u-boot@lists.denx.de>; Wed, 29 May 2024 09:29:55 -0700 (PDT)
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6ada6a476c2so2519876d6.2
+ for <u-boot@lists.denx.de>; Wed, 29 May 2024 09:29:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1717000194; x=1717604994; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1717000199; x=1717604999; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4UfF5KNH0GY+EsEcAMx338y3ntSiP7OHAJVIqsgB2Tg=;
- b=ODhg+mL7HGyuhNJr9E8RbkkeaF8QWHMLliQ+CrEyU/GiKMd8LFixNoWYh2lFLc2p/o
- xrAQMO5Z4ZzRyExdGuDzPcDUFp8B52oG271ECZsSaatHkiQnGDEOkox0QVH3NpVouqkQ
- In6Cd4vQ+XO5xUb2OUmFf64s2bS2VTC5MsZ+Y=
+ bh=2tt8YtqpTmRDOdcxcIpam0z1KV7ews6HfuweLXaFc38=;
+ b=mNtApH5MAiiN13BFmnQ07YC9M3bZKwWnlppguD/IgvnjGU6zCEeU1PKfcbYvXoIY5e
+ EGk4Gb6dGk7u/KRx7gH4KoSCe/d9bKDo2JxIzSCNE8o6VPYoGkmatCEObK0/GLoonJBU
+ dCDUFY9YdLRx/Q3yZ26QswopOCgSFtUwIIkq8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717000194; x=1717604994;
+ d=1e100.net; s=20230601; t=1717000199; x=1717604999;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=4UfF5KNH0GY+EsEcAMx338y3ntSiP7OHAJVIqsgB2Tg=;
- b=g+5VHkBUKfXLG6m3nWyUAz4eYmNh+vzzB+zUQEmRZq0fLh5O29rLyCHFPI2jiF0AAm
- JhDDVxsCSn61utHRDrLkhiMfxo8UXLA8/TO1o6OF8+3PeaGGOEOT3OLe2yrvBc/lZl6U
- OFtXxoyg0OmQC2Js+zMXBz1isCOLi3RVUMG+XzAK+4HMb32dsQ3Nj0fTBXCQIQwdKZdT
- +Jh2Etb9sBfhrnCDk38CNR7sqjCn1DwNrXWAa+6UJDywEquNf0coX4/i4o9uKpUWuGgf
- Q7EDcDTh1sKbc2b6kul8v5Jb3OoUTKA60GkRGv5obJPcS4SFpIIFDKBdpDYFc/Gsm/Ez
- UlMg==
-X-Gm-Message-State: AOJu0YwKWkUSzagD+vXQJUhPpueuRIVt3WuUKhS1Ga/7isLWIjZcZZKg
- GT1vMg+INTV3Ne+v9yvM3f9tuBvQdyjuPO5GSqyq5BhSWx9fOE+zeq25nKPZ+nT65tT2k2mqeZD
- Xpn2F01O1MDOezZjzHq5PTQXw4qrkJb7iRAQT4N71DybgL7o=
-X-Google-Smtp-Source: AGHT+IG3pbJHrWJqJ6HRtEDnKyeZ7v1PnOcsLDktlwfQSlLORZ2O2aTWVxYpWqLHSXUOVnsGtvD3XyZzD4jDmz7ImWc=
-X-Received: by 2002:a05:6808:6096:b0:3d1:d4d9:d9dd with SMTP id
- 5614622812f47-3d1d4d9dc1dmr3699140b6e.53.1717000194017; Wed, 29 May 2024
- 09:29:54 -0700 (PDT)
+ bh=2tt8YtqpTmRDOdcxcIpam0z1KV7ews6HfuweLXaFc38=;
+ b=NOzuU903qSq/iSL4lorBkXkfJP/gHhCAe2iwDH3OKrGLlZ5xSziyQbDGod8917Xo3o
+ zysMtfRzm1f+KURI/VCv9qXS0OQ5i/+EXeK0UqG1g+r3wlbmJeh9qUP9YJ6+csjI1Gtq
+ bOPPrIdN+ua22pzcQPQYLtFzBNNv9U92bLaZZ2uM4cmRIDUNXU5oSzzBnhEp5GO/uEAC
+ q+fGlRYNsRemTJzHLeYOj3U7z6drSB4iRIpI0HB1OQgH0ud4YpvdNn5BBtAMA7w0G4hq
+ N95Hrk5lyhdv2NZ9tC+JY4Wu5z4nsC4uo7Q20jVDiPyvUpWrYy+Us49g1ex2yD8wRkR5
+ mWbQ==
+X-Gm-Message-State: AOJu0YxjFCCn1kV/kqqf4AzPRqw4C9x7pRR07NOcOeMCY9t7XVh3oy4R
+ EucZxHZ4K+wL+pyl3lXmrv9csvL1m3gZTuQhqiIoWAoXREoORuKjwOcqxKzcJluvfPMx79UT7rm
+ lCKlKi3nTnRtC8nqAECrRa0/8Wi1MlHzzupbCpzedoAIneHY=
+X-Google-Smtp-Source: AGHT+IGn4WraX6qxrm1mQZAWbWCOlcaR8oF8tTGQJgrsDp21TCjOYBlC1k8jSsfFYnecyhwWL5KtbyW0XnzGAdh4Aqo=
+X-Received: by 2002:a05:6214:3909:b0:6ad:a31b:1ad5 with SMTP id
+ 6a1803df08f44-6ada31b1c39mr16289936d6.59.1717000198801; Wed, 29 May 2024
+ 09:29:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240527200417.2108290-1-rasmus.villemoes@prevas.dk>
-In-Reply-To: <20240527200417.2108290-1-rasmus.villemoes@prevas.dk>
+References: <20240524-bootflow-doc-typo-v1-1-d8e64a40e2b1@baylibre.com>
+In-Reply-To: <20240524-bootflow-doc-typo-v1-1-d8e64a40e2b1@baylibre.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 May 2024 10:29:43 -0600
-Message-ID: <CAFLszThQPiyH+3L07=aufMLocL3YGiHaL20LMCvmx=BV28+7NA@mail.gmail.com>
-Subject: Re: [PATCH] global_data.h: drop write-only field dm_root_f
-To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Date: Wed, 29 May 2024 10:29:47 -0600
+Message-ID: <CAFLszThnZsc6FJH936JGigAoH_ePtNAxkfh2vJd+-p9jO3o=5g@mail.gmail.com>
+Subject: Re: [PATCH] doc: cmd: bootmeth: Fix extlinunx -> extlinux typo
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Wed, 29 May 2024 18:32:00 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -82,26 +83,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 27 May 2024 at 14:04, Rasmus Villemoes
-<rasmus.villemoes@prevas.dk> wrote:
+On Fri, 24 May 2024 at 07:28, Mattijs Korpershoek
+<mkorpershoek@baylibre.com> wrote:
 >
-> The dm_root_f field seems to be entirely write-only and hence
-> redundant, unless 'git grep' fails to find some access generated via
-> preprocessor token concatenation or similar.
+> Fix a trivial typo in the bootmeth documentation.
 >
-> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 > ---
->  common/board_r.c                  | 3 +--
->  include/asm-generic/global_data.h | 4 ----
->  test/dm/core.c                    | 1 -
->  3 files changed, 1 insertion(+), 7 deletions(-)
->
-
-It is used for accessing the pre-relocation devices in case that is
-useful / possible. But it seems that we haven't had many use cases, so
-I am OK with dropping this and adding it back later if needed.
+>  doc/usage/cmd/bootmeth.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Regards,
-Simon
