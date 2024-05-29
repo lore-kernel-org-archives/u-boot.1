@@ -4,70 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFBA5C25B75
-	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 04:29:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24F01C25B75
+	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 05:33:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C7EE884B4;
-	Wed, 29 May 2024 06:29:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 1596387F3F;
+	Wed, 29 May 2024 07:33:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RXtmLxC3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rE6PjYbS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54571883D3; Wed, 29 May 2024 06:29:35 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 29E3C87F33; Wed, 29 May 2024 07:33:15 +0200 (CEST)
+Received: from mail-vs1-xe29.google.com (mail-vs1-xe29.google.com
+ [IPv6:2607:f8b0:4864:20::e29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0442688253
- for <u-boot@lists.denx.de>; Wed, 29 May 2024 06:29:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EFC548857C
+ for <u-boot@lists.denx.de>; Wed, 29 May 2024 07:33:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44T4TVE3108399;
- Tue, 28 May 2024 23:29:31 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1716956971;
- bh=m9EvBV2le1ifgdK01zX2mqrKaMUI1K8TK9li51ZnPvE=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=RXtmLxC30SL1z8mNFmSCzTV+IFfORQy7K84u0l+LQb5uGawPWhIx5nD0FYNLt0n0y
- jMqjEp7Tm62ai5Wb0N7KTcnA1DkEO+YEEYQg4ASYin1vR1ELbUqyCVs6Q4/k+npX/O
- 5WWbLiJkAhAxhlrQf/HKAVvyIufSGPyZSLVZFoj8=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44T4TVod114114
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 28 May 2024 23:29:31 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 28
- May 2024 23:29:30 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 28 May 2024 23:29:30 -0500
-Received: from [10.249.141.75] ([10.249.141.75])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44T4TQgh061069;
- Tue, 28 May 2024 23:29:27 -0500
-Message-ID: <7eea6c58-9a75-4453-be2f-043f7abc20e8@ti.com>
-Date: Wed, 29 May 2024 09:59:26 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-vs1-xe29.google.com with SMTP id
+ ada2fe7eead31-48a39b54e22so583600137.3
+ for <u-boot@lists.denx.de>; Tue, 28 May 2024 22:33:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1716960792; x=1717565592; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=/pNJ6JiRB5CiMQ2kbPTYEz5ZAn3vWj1i4ThL7npZjYI=;
+ b=rE6PjYbSQzaFjEAifbb0r+W1bpIDQfI898m+mztLDrbwpC1OlrSMCNRoWret3dObC9
+ OpOUeEtdtGFa78UNC4hlrZw8bINrclHVVilk10KUW92dCxko51Loy0axHpYR8SMfimcP
+ 1cbFokbHArYG/UEfpZz0QTciMd9kzykW6fQYRHX2BwoWuBIcJjVn6e/spQqdh22TcWHR
+ p9xPZH8bz6GeczP4nac0iT0YQBOVm0PT6oUc6gTRtKnWarhfjqcf+sJEvgxpazil9oBf
+ Sk5/+4QwnnYmC1GY4+SrCzGMYuViJC7LcsVgiCGVgKjHJef8Of5pMBL7mvWXhP6LOeX+
+ WkXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716960792; x=1717565592;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/pNJ6JiRB5CiMQ2kbPTYEz5ZAn3vWj1i4ThL7npZjYI=;
+ b=oUscRtjgqL1AzHy9WyP4YW4mthRvtDzHahYkbHyNEc/bpPwFNxikZAlukk+WyD2v34
+ +R8TeW+DCfiLGc9LqqwfPuo0vyUGsZHXvG+NPRSzUsFdQJ01xj1WUbmhr99Tae0N4/gv
+ U+lIsZZjILIQKr/M+eYV01hpc6erg4oi3OuWI8EnqDp+xG7xEqxGuNyKbtsIKWlh00yW
+ XYZqDGcqDjTuJ2LkgdSzyiLyoc/pj10DQKTFHiBJ9P6t1uHU+lEgecwKJs3SMIOmHb1M
+ VhHFKxRFPs3xH4auhjmH4iEDk6tQAysEhlQq7105ARhyppO1zRbdvft/yyBTf5MAG+jU
+ XSmw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVKlR8+inmZq6f4VUkt8pqFA5rr1MjuQyXTsrkehAMcmXBIv1lwaY0kxoDcHXR5Qd1/XDO4kHKnh1VrXgJxh8TD0SK/ig==
+X-Gm-Message-State: AOJu0YyLj0+Y3/+y3L5zbYJ80+KMVp3Ylb4QyUsMX6CF83lrFx0IRdOi
+ 7aK6cl26eWx5ypKMUavBzKo8Dw4Bm48nL92eaUeX5xOsM5LwpTyq2JsDjwHsHLlzIvaTYS1UrVL
+ ii6W5f6//1t8ld9WrKWppxU0moD441Y2b35emMQ==
+X-Google-Smtp-Source: AGHT+IHZ8WxoQXvxw6AoXzQh8GiFD07JV0s555erOK9nu3GiF224BCgpME7iYahoB4QnVrd0qWT/d/VXXa4pth3hVnE=
+X-Received: by 2002:a67:ec4d:0:b0:47b:6d0b:e893 with SMTP id
+ ada2fe7eead31-48a386a4939mr14516747137.28.1716960791710; Tue, 28 May 2024
+ 22:33:11 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 7/7] configs: j721s2_evm_r5_defconfig: Add AVS Configs
-To: Manorit Chawdhry <m-chawdhry@ti.com>, Jaehoon Chung
- <jh80.chung@samsung.com>
-CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Keerthy J
- <j-keerthy@ti.com>, Aniket Limaye <a-limaye@ti.com>, Tom Rini
- <trini@konsulko.com>, Vignesh Raghavendra <vigneshr@ti.com>, Andrew Davis
- <afd@ti.com>, Nishanth Menon <nm@ti.com>
-References: <20240528-b4-upstream-j721s2-avs-v2-0-df940f2309d0@ti.com>
- <20240528-b4-upstream-j721s2-avs-v2-7-df940f2309d0@ti.com>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20240528-b4-upstream-j721s2-avs-v2-7-df940f2309d0@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20240528-topic-sm8x50-pinctrl-pinconf-v1-0-54d1e9ad7dfa@linaro.org>
+ <20240528-topic-sm8x50-pinctrl-pinconf-v1-1-54d1e9ad7dfa@linaro.org>
+In-Reply-To: <20240528-topic-sm8x50-pinctrl-pinconf-v1-1-54d1e9ad7dfa@linaro.org>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Wed, 29 May 2024 11:03:00 +0530
+Message-ID: <CAFA6WYPA1a7F52VKpwnS4cFQ_wbYk5niz6mW48u21rB4TqVc1Q@mail.gmail.com>
+Subject: Re: [PATCH 1/5] pinctrl: qcom: add support for bias-pull-down
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,57 +89,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Neil,
 
-On 5/28/2024 1:43 PM, Manorit Chawdhry wrote:
-> Add AVS and PMIC regulator configs
+On Tue, 28 May 2024 at 14:02, Neil Armstrong <neil.armstrong@linaro.org> wrote:
 >
-> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> Add support for bias-pull-down as an alternate of bias-pull-up.
+
+nit: s/alternate/alternative/
+
+>
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 > ---
->   configs/am68_sk_r5_defconfig    | 4 ++++
->   configs/j721s2_evm_r5_defconfig | 6 ++++++
->   2 files changed, 10 insertions(+)
+>  drivers/pinctrl/qcom/pinctrl-qcom.c | 1 +
+>  1 file changed, 1 insertion(+)
 >
-> diff --git a/configs/am68_sk_r5_defconfig b/configs/am68_sk_r5_defconfig
-> index e9b6882c1f68..f4800ef1b8ac 100644
-> --- a/configs/am68_sk_r5_defconfig
-> +++ b/configs/am68_sk_r5_defconfig
-> @@ -5,6 +5,10 @@ CONFIG_ARCH_K3=y
->   CONFIG_SOC_K3_J721S2=y
->   CONFIG_TARGET_J721S2_R5_EVM=y
->   
-> +CONFIG_K3_AVS0=n
-> +CONFIG_DM_REGULATOR_TPS65941=n
-> +CONFIG_PMIC_TPS65941=n
-> +
+> diff --git a/drivers/pinctrl/qcom/pinctrl-qcom.c b/drivers/pinctrl/qcom/pinctrl-qcom.c
+> index 3c3336e7635..4f4e9a83949 100644
+> --- a/drivers/pinctrl/qcom/pinctrl-qcom.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-qcom.c
+> @@ -44,6 +44,7 @@ static const struct pinconf_param msm_conf_params[] = {
+>         { "drive-strength", PIN_CONFIG_DRIVE_STRENGTH, 2 },
+>         { "bias-disable", PIN_CONFIG_BIAS_DISABLE, 0 },
+>         { "bias-pull-up", PIN_CONFIG_BIAS_PULL_UP, 3 },
+> +       { "bias-pull-down", PIN_CONFIG_BIAS_PULL_UP, 1 },
 
-Extra line
+Did you mean PIN_CONFIG_BIAS_PULL_DOWN here instead?
 
+-Sumit
 
->   CONFIG_DEFAULT_DEVICE_TREE="k3-am68-sk-r5-base-board"
->   CONFIG_SPL_OF_LIST="k3-am68-sk-r5-base-board"
->   CONFIG_OF_LIST="k3-am68-sk-r5-base-board"
-> diff --git a/configs/j721s2_evm_r5_defconfig b/configs/j721s2_evm_r5_defconfig
-> index 3c958cafbe8f..f8a42a9a2ef6 100644
-> --- a/configs/j721s2_evm_r5_defconfig
-> +++ b/configs/j721s2_evm_r5_defconfig
-> @@ -111,6 +111,7 @@ CONFIG_DM_MAILBOX=y
->   CONFIG_K3_SEC_PROXY=y
->   CONFIG_FS_LOADER=y
->   CONFIG_SPL_FS_LOADER=y
-> +CONFIG_K3_AVS0=y
->   CONFIG_SUPPORT_EMMC_BOOT=y
->   CONFIG_SPL_MMC_HS400_SUPPORT=y
->   CONFIG_MMC_SDHCI=y
-> @@ -140,6 +141,11 @@ CONFIG_SPL_PINCTRL=y
->   CONFIG_PINCTRL_SINGLE=y
->   CONFIG_POWER_DOMAIN=y
->   CONFIG_TI_POWER_DOMAIN=y
-> +CONFIG_DM_PMIC=y
-> +CONFIG_PMIC_TPS65941=y
-> +CONFIG_DM_REGULATOR=y
-> +CONFIG_SPL_DM_REGULATOR=y
-> +CONFIG_DM_REGULATOR_TPS65941=y
->   CONFIG_K3_SYSTEM_CONTROLLER=y
->   CONFIG_REMOTEPROC_TI_K3_ARM64=y
->   CONFIG_RESET_TI_SCI=y
+>         { "output-high", PIN_CONFIG_OUTPUT, 1, },
+>         { "output-low", PIN_CONFIG_OUTPUT, 0, },
+>  };
+>
+> --
+> 2.34.1
 >
