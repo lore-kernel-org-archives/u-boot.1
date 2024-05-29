@@ -4,62 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF52EC25B75
-	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 13:25:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B50ADC27C43
+	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 13:25:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0EF21885E1;
+	by phobos.denx.de (Postfix) with ESMTP id 6A8BD8860E;
 	Wed, 29 May 2024 15:25:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="lXLlC44t";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="y3APvVCs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6618D88582; Wed, 29 May 2024 15:25:03 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 26C77885E1; Wed, 29 May 2024 15:25:04 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 563E788582
+ by phobos.denx.de (Postfix) with ESMTPS id EA7C5885F7
  for <u-boot@lists.denx.de>; Wed, 29 May 2024 15:25:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-choudhary@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44TDOsNJ001482;
- Wed, 29 May 2024 08:24:54 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44TDOuWU053735;
+ Wed, 29 May 2024 08:24:56 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1716989095;
- bh=hidAU3ussgKUj3fCsAUcATz2sBq6GGSxRuaKnCs2e38=;
+ s=ti-com-17Q1; t=1716989096;
+ bh=DvX2gaQWlhycN1dEcAV3zE10OagLNXgsw1/855rvT1A=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=lXLlC44tvDQ6QWw6pvL2s7YK0i0051Ib6EJmmtX4cqKy3QXtJy6AGaSJqaB3EtqET
- +/Pwp8KCI4XwQjSLRhokse1MceLzmFMJR6kALL/FrxkoEaGHW3ZF8+ZcIoBzwBgACj
- PNz/lZALkY0m3/7AeSvmZwAfVNYD+8vCJvyBESQ0=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44TDOsFE006722
+ b=y3APvVCsVBeLw+sTk0G1b/pIk4jpJ5fNPoaCwSf7M4pK4821JY4hUssNRgnu3q6s8
+ hkW83dBnwi+HfYEZS5KgeXKCr0e5ziKhtIr7SPR6b1lEGcQmICWc7xUpSG2R+CmYnF
+ E/VNphKCc8QU/HYFP0aBqKdFxUSywgOFna8yW0kQ=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44TDOtg8019867
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 29 May 2024 08:24:54 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 29 May 2024 08:24:56 -0500
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 29
- May 2024 08:24:54 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ May 2024 08:24:55 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 29 May 2024 08:24:54 -0500
+ Frontend Transport; Wed, 29 May 2024 08:24:55 -0500
 Received: from localhost (jayesh-hp-probook-440-g8-notebook-pc.dhcp.ti.com
  [172.24.227.102])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44TDOrxW002206;
- Wed, 29 May 2024 08:24:53 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44TDOs5K002230;
+ Wed, 29 May 2024 08:24:55 -0500
 From: Jayesh Choudhary <j-choudhary@ti.com>
 To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <jh80.chung@samsung.com>,
  <lukma@denx.de>, <seanga2@gmail.com>, <vaishnav.a@ti.com>,
  <n-francis@ti.com>, <u-kumar1@ti.com>, <sumit.garg@linaro.org>,
  <afd@ti.com>, <j-choudhary@ti.com>
 CC: <vigneshr@ti.com>, <nm@ti.com>, <bb@ti.com>, <rogerq@kernel.org>
-Subject: [PATCH 03/14] soc: add info to identify the J722S SoC family
-Date: Wed, 29 May 2024 18:54:37 +0530
-Message-ID: <20240529132448.459330-4-j-choudhary@ti.com>
+Subject: [PATCH 04/14] clk: ti: clk-k3: use IS_ENABLED macro and fix the
+ clock-data order
+Date: Wed, 29 May 2024 18:54:38 +0530
+Message-ID: <20240529132448.459330-5-j-choudhary@ti.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240529132448.459330-1-j-choudhary@ti.com>
 References: <20240529132448.459330-1-j-choudhary@ti.com>
@@ -83,50 +84,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Include the part number for TI's j722s family of SoC
-to identify it during boot.
+Use IS_ENABLED macro for the platform clock-data list and add them
+in alphabetical order.
 
-Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
+Reviewed-by: Bryan Brattlof <bb@ti.com>
 Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
 ---
- arch/arm/mach-k3/include/mach/hardware.h | 2 ++
- drivers/soc/soc_ti_k3.c                  | 3 +++
- 2 files changed, 5 insertions(+)
+ drivers/clk/ti/clk-k3.c | 41 +++++++++++++++++++++--------------------
+ 1 file changed, 21 insertions(+), 20 deletions(-)
 
-diff --git a/arch/arm/mach-k3/include/mach/hardware.h b/arch/arm/mach-k3/include/mach/hardware.h
-index c3aaded8dc..26c5bfcf76 100644
---- a/arch/arm/mach-k3/include/mach/hardware.h
-+++ b/arch/arm/mach-k3/include/mach/hardware.h
-@@ -55,6 +55,7 @@
- #define JTAG_ID_PARTNO_J7200	0xbb6d
- #define JTAG_ID_PARTNO_J721E	0xbb64
- #define JTAG_ID_PARTNO_J721S2	0xbb75
-+#define JTAG_ID_PARTNO_J722S    0xbba0
- #define JTAG_ID_PARTNO_J784S4	0xbb80
+diff --git a/drivers/clk/ti/clk-k3.c b/drivers/clk/ti/clk-k3.c
+index 41e5022ea0..9e17755c24 100644
+--- a/drivers/clk/ti/clk-k3.c
++++ b/drivers/clk/ti/clk-k3.c
+@@ -59,6 +59,24 @@ static void clk_add_map(struct ti_clk_data *data, struct clk *clk,
+ }
  
- #define K3_SOC_ID(id, ID) \
-@@ -72,6 +73,7 @@ K3_SOC_ID(am65x, AM65X)
- K3_SOC_ID(j7200, J7200)
- K3_SOC_ID(j721e, J721E)
- K3_SOC_ID(j721s2, J721S2)
-+K3_SOC_ID(j722s, J722S)
- 
- #define K3_SEC_MGR_SYS_STATUS		0x44234100
- #define SYS_STATUS_DEV_TYPE_SHIFT	0
-diff --git a/drivers/soc/soc_ti_k3.c b/drivers/soc/soc_ti_k3.c
-index 0838808515..f948914d21 100644
---- a/drivers/soc/soc_ti_k3.c
-+++ b/drivers/soc/soc_ti_k3.c
-@@ -47,6 +47,9 @@ static const char *get_family_string(u32 idreg)
- 	case JTAG_ID_PARTNO_J721S2:
- 		family = "J721S2";
- 		break;
-+	case JTAG_ID_PARTNO_J722S:
-+		family = "J722S";
-+		break;
- 	case JTAG_ID_PARTNO_J784S4:
- 		family = "J784S4";
- 		break;
+ static const struct soc_attr ti_k3_soc_clk_data[] = {
++#if IS_ENABLED(CONFIG_SOC_K3_AM625)
++	{
++		.family = "AM62X",
++		.data = &am62x_clk_platdata,
++	},
++#endif
++#if IS_ENABLED(CONFIG_SOC_K3_AM62A7)
++	{
++		.family = "AM62AX",
++		.data = &am62ax_clk_platdata,
++	},
++#endif
++#if IS_ENABLED(CONFIG_SOC_K3_AM62P5)
++	{
++		.family = "AM62PX",
++		.data = &am62px_clk_platdata,
++	},
++#endif
+ #if IS_ENABLED(CONFIG_SOC_K3_J721E)
+ 	{
+ 		.family = "J721E",
+@@ -68,35 +86,18 @@ static const struct soc_attr ti_k3_soc_clk_data[] = {
+ 		.family = "J7200",
+ 		.data = &j7200_clk_platdata,
+ 	},
+-#elif CONFIG_SOC_K3_J721S2
++#endif
++#if IS_ENABLED(CONFIG_SOC_K3_J721S2)
+ 	{
+ 		.family = "J721S2",
+ 		.data = &j721s2_clk_platdata,
+ 	},
+ #endif
+-#ifdef CONFIG_SOC_K3_AM625
+-	{
+-		.family = "AM62X",
+-		.data = &am62x_clk_platdata,
+-	},
+-#endif
+-#ifdef CONFIG_SOC_K3_AM62A7
+-	{
+-		.family = "AM62AX",
+-		.data = &am62ax_clk_platdata,
+-	},
+-#endif
+-#ifdef CONFIG_SOC_K3_J784S4
++#if IS_ENABLED(CONFIG_SOC_K3_J784S4)
+ 	{
+ 		.family = "J784S4",
+ 		.data = &j784s4_clk_platdata,
+ 	},
+-#endif
+-#ifdef CONFIG_SOC_K3_AM62P5
+-	{
+-		.family = "AM62PX",
+-		.data = &am62px_clk_platdata,
+-	},
+ #endif
+ 	{ /* sentinel */ }
+ };
 -- 
 2.25.1
 
