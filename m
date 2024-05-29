@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E30BC27C43
-	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 14:49:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2E7AC25B75
+	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 14:50:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73FBF88619;
+	by phobos.denx.de (Postfix) with ESMTP id D59AB88649;
 	Wed, 29 May 2024 16:49:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Yr3qypCd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="D95VpD3l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6346D88619; Wed, 29 May 2024 16:49:07 +0200 (CEST)
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
+ id 51FFB88641; Wed, 29 May 2024 16:49:08 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 064EF88623
- for <u-boot@lists.denx.de>; Wed, 29 May 2024 16:49:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 01BAD88602
+ for <u-boot@lists.denx.de>; Wed, 29 May 2024 16:49:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-529b4011070so2624744e87.1
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-57883b25b50so2500895a12.2
  for <u-boot@lists.denx.de>; Wed, 29 May 2024 07:49:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716994144; x=1717598944; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1716994145; x=1717598945; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=DiS6tkUpaxndkmQtKOrLUpeZedTPdW0/QJrv/eROMxw=;
- b=Yr3qypCdIUPd1m/IuAGiSzgtllOri1iZ9ELBLVFzc0E3/K8IBJ71Qhh+gCDCcRP1Oj
- LCUGc00XooSTUvWboHi9z/IvKG8eShlNvE6SqZL9ta3f1TWPZ0wC+UTDFuNQ3H/meBkn
- MvzaPv3RxESJHd8rSZ57rk7KZtLAZ0/YM2jzZkm3FkxSAwhban1xCz+gNwyTMv0Hv/bf
- CDRUAmhhFZjORFlimIYIjMEHI8WOsT/y86uJwT1VjaQYPErHMegKAaYDCyaYaJ0QOGWo
- w7jJkMI+2BYWJgqOyxNy3Q5tM74jTMChG7jVpIjYkYLT5Dg3I1U82esQSimsRvf/aPsd
- dVcQ==
+ :reply-to; bh=5TqztJQmgbCIjWAIrDa+3qg6yWYJjKnXV3xAvJ7iRaw=;
+ b=D95VpD3lml69K5QIVka6kzUXgG20nnAfGs3mtA0jAk9gCxA0TmQpQqW4UWUx8hp+LR
+ +tUfGQ7NF09t06pa221BMGA3FzdYAOJsV2WS4oMJP/yu1HmnKeP7R2tterI8JywoKWqI
+ J/2afZEXq51URr+8sPjL0UApvsCnWxG+AsAKs9BNr7DF9vuIcJGQ6bM0OtN1LM91D5vX
+ 8yjbhNRcaFZq6zdvJNrQzWQ3r3eww+sHPAFbDvicEVcxF1nkdmxTdEf/cFjazT9wB4su
+ XWShtArqXUn7cVrX0r2sOGpZL7kGWpL+2fxk5627v8JJcu+xGjfst5FWadrnJEr1jZrc
+ qQOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716994144; x=1717598944;
+ d=1e100.net; s=20230601; t=1716994145; x=1717598945;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DiS6tkUpaxndkmQtKOrLUpeZedTPdW0/QJrv/eROMxw=;
- b=YT7pasMDI+E6QW3X2jxYjSqeuTsJP7311sKuR6mwf+MS34jr6szPUXCe6SQPpbQ9RI
- 7dqEg5Aj0n6UYYioX3uHTJplQqV4VCG6AL8HlDeA6JfekCg93njsnh3pR6Mg2fs0Gpga
- 75t4WCvGIH3EMgUJIy7t2e9FTEKn1Ubfvj4GSzLRehvAzhXFy0COJZx8Ko3sGKES/W3U
- gmMYB2V8uAagshcEUGeqVsQ6SzGo0aUUVxuyVpmMWL4zR3kzNdYng1kRselC+0NBzemf
- DbxsVPemdshNQ9dtSSw/e2fbuHV+vZPL3b4GfbyWx0L0T9LrMge0/zC6f/XZCNCThbJN
- 5HwA==
+ bh=5TqztJQmgbCIjWAIrDa+3qg6yWYJjKnXV3xAvJ7iRaw=;
+ b=FkBtMgqN2X9aJ6SGflg9OAjyhHgU5GrDRolJ0w/Wofcn1yXI7hvgzjm+lIgoaoGZN/
+ z48M5n/AIvyQJe88zF9QUr5Ceg8O6zhkE9Wbrt5baXgyDmDZMdgYTa5LkcNUoJX1Fog6
+ DGivMuMhbs7j0IQ4SbdyBFGL0FEnFpD4w/2pOduqYB5YVi9wa55Orb94NRnag9d9wR+E
+ QxFhQIbLyCngsivmnRJEGzlmlfnazW3DnidvLgxSPS2cXmyuFuJaYNUeR4OH8J7KBOGL
+ IQLdz5iVNs8thyczgOn3HHJK/1Nh5Cg3hKPJ0hEoAGEmvo8+BboGl7xFhs2j4MNzIKXC
+ or0A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVSZf/0ZrwchJ5bpj5hi6VAv8F6BFDYPbqY9VTxu1wGWjRWMkbXDvpg95uOosJlD9I8D8rx258zjYINmYKHzfHXShbWWQ==
-X-Gm-Message-State: AOJu0YzaaqaOU1c356guIO22ifoySaNeRzVo5jNHbqcX9dsU2zUSo9Z0
- oxnzDZZLFmp8XeLTIT9Kt7ZuR28UEnyov22cbR4vZXpFY5BN9tln+WwPiP/Ggvw=
-X-Google-Smtp-Source: AGHT+IGyxqs/3NynEA4KyOweJimi6jo83v0XV6OOg3eXeA8iVk6PqYPevANHLe2iOuUEdB/i+a4KYw==
-X-Received: by 2002:a05:6512:3994:b0:522:2a2c:759e with SMTP id
- 2adb3069b0e04-5296420479emr11207888e87.6.1716994144203; 
- Wed, 29 May 2024 07:49:04 -0700 (PDT)
+ AJvYcCWjuSDQM/c7SAeW4486bd/0yc/dJEXf2F/BK+FC+VxQeDDSErdaKTaStDHuSLtda4nbNGueunKd8Y+7Mxb/SyyF8uGzEg==
+X-Gm-Message-State: AOJu0YydDY9UIzohBrmPjma1q4ZPBck/Pd+e0HaWskplt7BazyKVAYkz
+ XFKGyRbiCYwRIPvtWU9aK0pnUoqPIGnhpgssOwxj/U5A1HW/kYjZTqVwOM5yg9k=
+X-Google-Smtp-Source: AGHT+IF1cBHPZ++Cx5H2HvMyGJyKtbZYsN8Wr2ayKpKbdEEeYnpSDEt87TysbW1ntBReq4V3VlJHCQ==
+X-Received: by 2002:a50:c048:0:b0:570:3b8:a990 with SMTP id
+ 4fb4d7f45d1cf-57851a5156fmr9925777a12.39.1716994145442; 
+ Wed, 29 May 2024 07:49:05 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::8bb3])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-578638009b1sm6922029a12.17.2024.05.29.07.49.03
+ 4fb4d7f45d1cf-578638009b1sm6922029a12.17.2024.05.29.07.49.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 May 2024 07:49:03 -0700 (PDT)
+ Wed, 29 May 2024 07:49:04 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Wed, 29 May 2024 16:48:53 +0200
-Subject: [PATCH v2 4/7] sandbox: switch to dynamic UUIDs
+Date: Wed, 29 May 2024 16:48:54 +0200
+Subject: [PATCH v2 5/7] lib: uuid: supporting building as part of host
+ tools
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240529-b4-dynamic-uuid-v2-4-c26f31057bbe@linaro.org>
+Message-Id: <20240529-b4-dynamic-uuid-v2-5-c26f31057bbe@linaro.org>
 References: <20240529-b4-dynamic-uuid-v2-0-c26f31057bbe@linaro.org>
 In-Reply-To: <20240529-b4-dynamic-uuid-v2-0-c26f31057bbe@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
@@ -82,21 +83,21 @@ To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
 Cc: Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de, 
  Caleb Connolly <caleb.connolly@linaro.org>
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=12323;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5253;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=ebvcIW8ENg3nKp4MgxtFbZceBlrQGRzQUXlv6yEpMtU=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmV0BaOF9IPnBV4Zghz/JzLJoa3zp5Kw8U0BC1u
- xOd4tr+fhGJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZldAWgAKCRAFgzErGV9k
- ttDBD/9Do821MEwW/qOvK6R0YvMnMH/LBqUGIhSjJUa3mANBvl76d4fS/13WXUAH/b/s6dtDoY0
- AY4m8TjYgDuC43Q9cYAhakT1jiBW1SwAhPgydYFNq225ptN5lL+46t0TDbdZ6ma5j4mGOq8Jedq
- ZX5bFWTHWC6XOwBDzHY4l58FkpY2gJwBx8kcj+d2RqqwAH/m9WRGOjZtHchs9cF1+YchOU9fRbE
- 1XXx8bTr6wpA3zbEojjZTe1SWwwm6vLLEaYCj8P4Wi22wGNaGYuxA2KfiSFVKmpbBrRpOoQCwXD
- xpNcuEF9AAqunBpAT7RdfeRqDCJ34VTEt8u4HMK9mdbZVvgeKZk8FJo/r8qNGkj8laobnEYkfG7
- mw6ovECNYgSUat+jGtka4twJYcfyAgnHWkJ8n2jBf9ULxEFLt12LoqKNhi8JWeWVCBjrQAvmLc2
- vNzL8QF1HliYvtsjHpmA5YrUwwgjMFL5ZGn6AY2Z3ckWM5LoGmZC1m6SV8XK3RE3zW9T0YjstcU
- gHzFTqOxe8AQSnXgm0vS8M4IYQZ+b1BKEMSp0DiTqJdnXLJaFXa+6Ny7fK/hTJ3gabIWDI1LR8v
- a05MW+URh1MhPHPTnOVG/o8EuZDVhAWsh5eQrzRQctHzyE27Laqf2Bw90s27IYHe0umLfs7VdL3
- XHFxgMj2Ldy6L9A==
+ bh=QHdfRbm/u+JL8Udsf5R9COkCKzsesq/AtWafMSX79IM=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmV0BaS6NQFBRWNqgou2Ldd6s3SOv7GHmQTgLvi
+ 9Fk898gOq6JAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZldAWgAKCRAFgzErGV9k
+ tsquD/0cP6cm0JP19dbFrWmpcL3XdRVPIkaEYwG+kZuYhizg3d7hNP1sA13GE53h3SkGgzH0B59
+ JYnfaHXhqP86N2Ylc2ziJc0cspaexjype+FMHtOOmT6EmHSNqcEvc0BS9qeSb4bmcjN9vhqIrtK
+ iI7z4J6qK6L8vSGcmEzvI7ILYIzu+5P2MmB/AOuqsjUmoF1avrHCElI4B701JbV4P+HGMGRAKoZ
+ zFJid8+s69EOf9+9/lUujkmwLIT0KCnxQNJvqArGtGZW1vNEz3/WPQf5tgP8tHrp4gwKG2DcT1O
+ kin5XG3/unBimu3o27RJwNAql0FyLDSAu5wuXS3LIYtatNYmcwFhZEHpmpZoX147cHndYWyo65t
+ Ek/IDICa3kjmzZUCd3zocDAYT2Gt6tZv/W4IUkLjWiXGXLmNqbdtg33gT58tER5MAt1JXqx8ihm
+ zZv973GzTuU3aKRqRFPJwAmMCNfLUT7x4LzJtlifAqOvk1eRq15S8AZTDUmJsJIq50nP1RVZJdi
+ kvf0aiG1kbeehpB+zg89qgXalje97sRKsZBwwHZxJDSVehTLUtuvPArfHyTsIsTBiFHvPs3hF+O
+ diXCcfASQgoxpJUp+XflgNIlMdDNbF1Vl0sd0p6iZ9cCz7NHAB+7geRIufPBPb632tzqtQXZCSq
+ BjolrEsV0uOqAdQ==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -115,271 +116,186 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Migrate sandbox over to generating it's capsule update image GUIDs
-dynamically from the namespace and board/image info. Update the
-reference and tests to use the new GUIDs.
+Adjust the UUID library code so that it can be compiled as part of a
+host tool.
+
+This removes the one redundant log_debug() call, as well as the
+incorrectly defined LOG_CATEGORY.
+
+In general this is a fairly trivial change, just adjusting includes and
+disabling list_guid.
+
+This will be used by a new genguid tool to generate v5 GUIDs that match
+those generated by U-Boot at runtime.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/Kconfig                                             |  1 +
- board/sandbox/sandbox.c                                  | 16 ----------------
- configs/sandbox_defconfig                                |  1 +
- configs/sandbox_flattree_defconfig                       |  1 +
- include/sandbox_efi_capsule.h                            |  6 +++---
- .../tests/test_efi_capsule/test_capsule_firmware_fit.py  |  2 +-
- .../tests/test_efi_capsule/test_capsule_firmware_raw.py  |  8 ++++----
- .../test_efi_capsule/test_capsule_firmware_signed_fit.py |  2 +-
- .../test_efi_capsule/test_capsule_firmware_signed_raw.py |  4 ++--
- test/py/tests/test_efi_capsule/version.dts               |  6 +++---
- tools/binman/etype/efi_capsule.py                        |  2 +-
- tools/binman/ftest.py                                    |  2 +-
- 12 files changed, 19 insertions(+), 32 deletions(-)
+ include/uuid.h |  4 ++--
+ lib/uuid.c     | 44 ++++++++++++++++++++++++++++++--------------
+ 2 files changed, 32 insertions(+), 16 deletions(-)
 
-diff --git a/arch/Kconfig b/arch/Kconfig
-index abd406d48841..0558c90540b6 100644
---- a/arch/Kconfig
-+++ b/arch/Kconfig
-@@ -164,8 +164,9 @@ config SANDBOX
- 	select SYS_CACHE_SHIFT_4
- 	select IRQ
- 	select SUPPORT_EXTENSION_SCAN if CMDLINE
- 	select SUPPORT_ACPI
-+	select EFI_CAPSULE_DYNAMIC_UUIDS if EFI_HAVE_CAPSULE_SUPPORT
- 	imply BITREVERSE
- 	select BLOBLIST
- 	imply LTO
- 	imply CMD_DM
-diff --git a/board/sandbox/sandbox.c b/board/sandbox/sandbox.c
-index 802596569c64..d97945e58fcf 100644
---- a/board/sandbox/sandbox.c
-+++ b/board/sandbox/sandbox.c
-@@ -31,36 +31,20 @@
+diff --git a/include/uuid.h b/include/uuid.h
+index 539affaa47b9..b38b20d957ef 100644
+--- a/include/uuid.h
++++ b/include/uuid.h
+@@ -69,10 +69,10 @@ struct uuid {
+ } __packed;
+ 
+ /* Bits of a bitmask specifying the output format for GUIDs */
+ #define UUID_STR_FORMAT_STD	0
+-#define UUID_STR_FORMAT_GUID	BIT(0)
+-#define UUID_STR_UPPER_CASE	BIT(1)
++#define UUID_STR_FORMAT_GUID	0x1
++#define UUID_STR_UPPER_CASE	0x2
+ 
+ /* Use UUID_STR_LEN + 1 for string space */
+ #define UUID_STR_LEN		36
+ #define UUID_BIN_LEN		sizeof(struct uuid)
+diff --git a/lib/uuid.c b/lib/uuid.c
+index 6ef006cca1da..b6ad3dd06f6f 100644
+--- a/lib/uuid.c
++++ b/lib/uuid.c
+@@ -6,25 +6,38 @@
+  * Authors:
+  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
   */
- gd_t *gd;
  
- #if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
--/* GUIDs for capsule updatable firmware images */
--#define SANDBOX_UBOOT_IMAGE_GUID \
--	EFI_GUID(0x09d7cf52, 0x0720, 0x4710, 0x91, 0xd1, \
--		 0x08, 0x46, 0x9b, 0x7f, 0xe9, 0xc8)
+-#define LOG_CATEGOT LOGC_CORE
 -
--#define SANDBOX_UBOOT_ENV_IMAGE_GUID \
--	EFI_GUID(0x5a7021f5, 0xfef2, 0x48b4, 0xaa, 0xba, \
--		 0x83, 0x2e, 0x77, 0x74, 0x18, 0xc0)
--
--#define SANDBOX_FIT_IMAGE_GUID \
--	EFI_GUID(0x3673b45d, 0x6a7c, 0x46f3, 0x9e, 0x60, \
--		 0xad, 0xab, 0xb0, 0x3f, 0x79, 0x37)
--
- struct efi_fw_image fw_images[] = {
- #if defined(CONFIG_EFI_CAPSULE_FIRMWARE_RAW)
- 	{
--		.image_type_id = SANDBOX_UBOOT_IMAGE_GUID,
- 		.fw_name = u"SANDBOX-UBOOT",
- 		.image_index = 1,
- 	},
- 	{
--		.image_type_id = SANDBOX_UBOOT_ENV_IMAGE_GUID,
- 		.fw_name = u"SANDBOX-UBOOT-ENV",
- 		.image_index = 2,
- 	},
- #elif defined(CONFIG_EFI_CAPSULE_FIRMWARE_FIT)
- 	{
--		.image_type_id = SANDBOX_FIT_IMAGE_GUID,
- 		.fw_name = u"SANDBOX-FIT",
- 		.image_index = 1,
- 	},
++#ifndef USE_HOSTCC
+ #include <command.h>
+ #include <efi_api.h>
+ #include <env.h>
+ #include <rand.h>
+ #include <time.h>
+-#include <uuid.h>
+-#include <linux/ctype.h>
+-#include <errno.h>
+ #include <asm/io.h>
+ #include <part_efi.h>
+ #include <malloc.h>
+ #include <dm/uclass.h>
+ #include <rng.h>
++#include <linux/ctype.h>
++#include <hexdump.h>
++#else
++#include <stdarg.h>
++#include <stdint.h>
++#include <eficapsule.h>
++#include <ctype.h>
++#endif
++#include <linux/types.h>
++#include <errno.h>
++#include <linux/kconfig.h>
++#include <uuid.h>
+ #include <u-boot/sha1.h>
+ 
++#ifdef USE_HOSTCC
++/* polyfill hextoul to avoid pulling in strto.c */
++#define hextoul(cp, endp) strtoul(cp, endp, 16)
++#endif
++
+ int uuid_str_valid(const char *uuid)
+ {
+ 	int i, valid;
+ 
+@@ -51,8 +64,9 @@ int uuid_str_valid(const char *uuid)
+ static const struct {
+ 	const char *string;
+ 	efi_guid_t guid;
+ } list_guid[] = {
++#ifndef USE_HOSTCC
+ #ifdef CONFIG_PARTITION_TYPE_GUID
+ 	{"system",	PARTITION_SYSTEM_GUID},
+ 	{"mbr",		LEGACY_MBR_PARTITION_GUID},
+ 	{"msft",	PARTITION_MSFT_RESERVED_GUID},
+@@ -231,8 +245,9 @@ static const struct {
+ 	{ "EFI_MEMORY_TYPE", EFI_MEMORY_TYPE },
+ 	{ "EFI_MEM_STATUS_CODE_REC", EFI_MEM_STATUS_CODE_REC },
+ 	{ "EFI_GUID_EFI_ACPI1", EFI_GUID_EFI_ACPI1 },
  #endif
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index 93b52f2de5cf..58775b271600 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -349,8 +349,9 @@ CONFIG_TPM=y
- CONFIG_ERRNO_STR=y
- CONFIG_GETOPT=y
- CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
- CONFIG_EFI_CAPSULE_ON_DISK=y
-+CONFIG_EFI_CAPSULE_NAMESPACE_UUID="09D7CF52-0720-4710-91D1-08469B7FE9C8"
- CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
- CONFIG_EFI_CAPSULE_AUTHENTICATE=y
- CONFIG_EFI_CAPSULE_ESL_FILE="board/sandbox/capsule_pub_esl_good.esl"
- CONFIG_EFI_SECURE_BOOT=y
-diff --git a/configs/sandbox_flattree_defconfig b/configs/sandbox_flattree_defconfig
-index 6bf8874e722e..85ae63da8881 100644
---- a/configs/sandbox_flattree_defconfig
-+++ b/configs/sandbox_flattree_defconfig
-@@ -224,8 +224,9 @@ CONFIG_TPM=y
- CONFIG_ZSTD=y
- CONFIG_ERRNO_STR=y
- CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
- CONFIG_EFI_CAPSULE_ON_DISK=y
-+CONFIG_EFI_CAPSULE_NAMESPACE_UUID="09d7cf52-0720-4710-91d1-08469b7fe9c8"
- CONFIG_EFI_CAPSULE_FIRMWARE_FIT=y
- CONFIG_EFI_CAPSULE_AUTHENTICATE=y
- CONFIG_EFI_CAPSULE_ESL_FILE="board/sandbox/capsule_pub_esl_good.esl"
- CONFIG_UNIT_TEST=y
-diff --git a/include/sandbox_efi_capsule.h b/include/sandbox_efi_capsule.h
-index 3e288e8a84a2..25ac496ea24f 100644
---- a/include/sandbox_efi_capsule.h
-+++ b/include/sandbox_efi_capsule.h
-@@ -5,11 +5,11 @@
- 
- #if !defined(_SANDBOX_EFI_CAPSULE_H_)
- #define _SANDBOX_EFI_CAPSULE_H_
- 
--#define SANDBOX_UBOOT_IMAGE_GUID	"09d7cf52-0720-4710-91d1-08469b7fe9c8"
--#define SANDBOX_UBOOT_ENV_IMAGE_GUID	"5a7021f5-fef2-48b4-aaba-832e777418c0"
--#define SANDBOX_FIT_IMAGE_GUID		"3673b45d-6a7c-46f3-9e60-adabb03f7937"
-+#define SANDBOX_UBOOT_IMAGE_GUID	"fd5db83c-12f3-a46b-80a9-e3007c7ff56e"
-+#define SANDBOX_UBOOT_ENV_IMAGE_GUID	"935fe837-fac8-4394-c008-737d8852c60d"
-+#define SANDBOX_FIT_IMAGE_GUID		"ffd97379-0956-fa94-c003-8bfcf5cc097b"
- #define SANDBOX_INCORRECT_GUID		"058b7d83-50d5-4c47-a195-60d86ad341c4"
- 
- #define UBOOT_FIT_IMAGE			"u-boot_bin_env.itb"
- 
-diff --git a/test/py/tests/test_efi_capsule/test_capsule_firmware_fit.py b/test/py/tests/test_efi_capsule/test_capsule_firmware_fit.py
-index 11bcdc2bb293..746da4602085 100644
---- a/test/py/tests/test_efi_capsule/test_capsule_firmware_fit.py
-+++ b/test/py/tests/test_efi_capsule/test_capsule_firmware_fit.py
-@@ -146,9 +146,9 @@ class TestEfiCapsuleFirmwareFit():
-                 verify_content(u_boot_console, '100000', 'u-boot:Old')
-                 verify_content(u_boot_console, '150000', 'u-boot-env:Old')
-             else:
-                 # ensure that SANDBOX_UBOOT_IMAGE_GUID is in the ESRT.
--                assert '3673B45D-6A7C-46F3-9E60-ADABB03F7937' in ''.join(output)
-+                assert '5AF91295-5A99-F62B-80D7-E9574DE87170' in ''.join(output)
-                 assert 'ESRT: fw_version=5' in ''.join(output)
-                 assert 'ESRT: lowest_supported_fw_version=3' in ''.join(output)
- 
-                 verify_content(u_boot_console, '100000', 'u-boot:New')
-diff --git a/test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py b/test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py
-index a5b5c8a3853a..1866b8086573 100644
---- a/test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py
-+++ b/test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py
-@@ -133,12 +133,12 @@ class TestEfiCapsuleFirmwareRaw:
-                 'env set dfu_alt_info "sf 0:0=u-boot-bin raw 0x100000 0x50000;u-boot-env raw 0x150000 0x200000"',
-                 'efidebug capsule esrt'])
- 
-             # ensure that SANDBOX_UBOOT_ENV_IMAGE_GUID is in the ESRT.
--            assert '5A7021F5-FEF2-48B4-AABA-832E777418C0' in ''.join(output)
-+            assert '935FE837-FAC8-4394-C008-737D8852C60D' in ''.join(output)
- 
-             # ensure that SANDBOX_UBOOT_IMAGE_GUID is in the ESRT.
--            assert '09D7CF52-0720-4710-91D1-08469B7FE9C8' in ''.join(output)
-+            assert 'FD5DB83C-12F3-A46B-80A9-E3007C7FF56E' in ''.join(output)
- 
-             check_file_removed(u_boot_console, disk_img, capsule_files)
- 
-             expected = 'u-boot:Old' if capsule_auth else 'u-boot:New'
-@@ -187,14 +187,14 @@ class TestEfiCapsuleFirmwareRaw:
-                 verify_content(u_boot_console, '100000', 'u-boot:Old')
-                 verify_content(u_boot_console, '150000', 'u-boot-env:Old')
-             else:
-                 # ensure that SANDBOX_UBOOT_IMAGE_GUID is in the ESRT.
--                assert '09D7CF52-0720-4710-91D1-08469B7FE9C8' in ''.join(output)
-+                assert 'FD5DB83C-12F3-A46B-80A9-E3007C7FF56E' in ''.join(output)
-                 assert 'ESRT: fw_version=5' in ''.join(output)
-                 assert 'ESRT: lowest_supported_fw_version=3' in ''.join(output)
- 
-                 # ensure that SANDBOX_UBOOT_ENV_IMAGE_GUID is in the ESRT.
--                assert '5A7021F5-FEF2-48B4-AABA-832E777418C0' in ''.join(output)
-+                assert '935FE837-FAC8-4394-C008-737D8852C60D' in ''.join(output)
-                 assert 'ESRT: fw_version=10' in ''.join(output)
-                 assert 'ESRT: lowest_supported_fw_version=7' in ''.join(output)
- 
-                 verify_content(u_boot_console, '100000', 'u-boot:New')
-diff --git a/test/py/tests/test_efi_capsule/test_capsule_firmware_signed_fit.py b/test/py/tests/test_efi_capsule/test_capsule_firmware_signed_fit.py
-index 44a58baa3106..a4e0a3bc73f5 100644
---- a/test/py/tests/test_efi_capsule/test_capsule_firmware_signed_fit.py
-+++ b/test/py/tests/test_efi_capsule/test_capsule_firmware_signed_fit.py
-@@ -156,9 +156,9 @@ class TestEfiCapsuleFirmwareSignedFit():
-                 'u-boot-env raw 0x150000 0x200000"',
-                 'efidebug capsule esrt'])
- 
-             # ensure that SANDBOX_UBOOT_IMAGE_GUID is in the ESRT.
--            assert '3673B45D-6A7C-46F3-9E60-ADABB03F7937' in ''.join(output)
-+            assert 'FD5DB83C-12F3-A46B-80A9-E3007C7FF56E' in ''.join(output)
-             assert 'ESRT: fw_version=5' in ''.join(output)
-             assert 'ESRT: lowest_supported_fw_version=3' in ''.join(output)
- 
-             verify_content(u_boot_console, '100000', 'u-boot:New')
-diff --git a/test/py/tests/test_efi_capsule/test_capsule_firmware_signed_raw.py b/test/py/tests/test_efi_capsule/test_capsule_firmware_signed_raw.py
-index 83a10e160b8c..260c71860632 100644
---- a/test/py/tests/test_efi_capsule/test_capsule_firmware_signed_raw.py
-+++ b/test/py/tests/test_efi_capsule/test_capsule_firmware_signed_raw.py
-@@ -150,14 +150,14 @@ class TestEfiCapsuleFirmwareSignedRaw():
-                 'u-boot-env raw 0x150000 0x200000"',
-                 'efidebug capsule esrt'])
- 
-             # ensure that SANDBOX_UBOOT_IMAGE_GUID is in the ESRT.
--            assert '09D7CF52-0720-4710-91D1-08469B7FE9C8' in ''.join(output)
-+            assert 'FD5DB83C-12F3-A46B-80A9-E3007C7FF56E' in ''.join(output)
-             assert 'ESRT: fw_version=5' in ''.join(output)
-             assert 'ESRT: lowest_supported_fw_version=3' in ''.join(output)
- 
-             # ensure that SANDBOX_UBOOT_ENV_IMAGE_GUID is in the ESRT.
--            assert '5A7021F5-FEF2-48B4-AABA-832E777418C0' in ''.join(output)
-+            assert '935FE837-FAC8-4394-C008-737D8852C60D' in ''.join(output)
-             assert 'ESRT: fw_version=10' in ''.join(output)
-             assert 'ESRT: lowest_supported_fw_version=7' in ''.join(output)
- 
-             verify_content(u_boot_console, '100000', 'u-boot:New')
-diff --git a/test/py/tests/test_efi_capsule/version.dts b/test/py/tests/test_efi_capsule/version.dts
-index 07850cc6064c..3f0698bf7280 100644
---- a/test/py/tests/test_efi_capsule/version.dts
-+++ b/test/py/tests/test_efi_capsule/version.dts
-@@ -7,18 +7,18 @@
- 	firmware-version {
- 		image1 {
- 			lowest-supported-version = <3>;
- 			image-index = <1>;
--			image-type-id = "09D7CF52-0720-4710-91D1-08469B7FE9C8";
-+			image-type-id = "FD5DB83C-12F3-A46B-80A9-E3007C7FF56E";
- 		};
- 		image2 {
- 			lowest-supported-version = <7>;
- 			image-index = <2>;
--			image-type-id = "5A7021F5-FEF2-48B4-AABA-832E777418C0";
-+			image-type-id = "935FE837-FAC8-4394-C008-737D8852C60D";
- 		};
- 		image3 {
- 			lowest-supported-version = <3>;
- 			image-index = <1>;
--			image-type-id = "3673B45D-6A7C-46F3-9E60-ADABB03F7937";
-+			image-type-id = "FFD97379-0956-FA94-C003-8BFCF5CC097B";
- 		};
- 	};
++#endif /* !USE_HOSTCC */
  };
-diff --git a/tools/binman/etype/efi_capsule.py b/tools/binman/etype/efi_capsule.py
-index e32037178221..da1f9b0a381a 100644
---- a/tools/binman/etype/efi_capsule.py
-+++ b/tools/binman/etype/efi_capsule.py
-@@ -23,9 +23,9 @@ def get_binman_test_guid(type_str):
-     Returns:
-         The actual GUID value (str)
-     """
-     TYPE_TO_GUID = {
--        'binman-test' : '09d7cf52-0720-4710-91d1-08469b7fe9c8'
-+        'binman-test' : 'fd5db83c-12f3-a46b-80a9-e3007c7ff56e'
-     }
  
-     return TYPE_TO_GUID[type_str]
+ int uuid_guid_get_bin(const char *guid_str, unsigned char *guid_bin)
+ {
+@@ -266,9 +281,8 @@ int uuid_str_to_bin(const char *uuid_str, unsigned char *uuid_bin,
+ 	uint32_t tmp32;
+ 	uint64_t tmp64;
  
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index 8a44bc051b36..dc602b95ecd5 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -123,9 +123,9 @@ TEE_ADDR = 0x5678
+ 	if (!uuid_str_valid(uuid_str)) {
+-		log_debug("not valid\n");
+ #ifdef CONFIG_PARTITION_TYPE_GUID
+ 		if (!uuid_guid_get_bin(uuid_str, uuid_bin))
+ 			return 0;
+ #endif
+@@ -297,19 +311,19 @@ int uuid_str_to_bin(const char *uuid_str, unsigned char *uuid_bin,
  
- # Firmware Management Protocol(FMP) GUID
- FW_MGMT_GUID = '6dcbd5ed-e82d-4c44-bda1-7194199ad92a'
- # Image GUID specified in the DTS
--CAPSULE_IMAGE_GUID = '09d7cf52-0720-4710-91d1-08469b7fe9c8'
-+CAPSULE_IMAGE_GUID = 'fd5db83c-12f3-a46b-80a9-e3007c7ff56e'
- # Windows cert GUID
- WIN_CERT_TYPE_EFI_GUID = '4aafd29d-68df-49ee-8aa9-347d375665a7'
- # Empty capsule GUIDs
- EMPTY_CAPSULE_ACCEPT_GUID = '0c996046-bcc0-4d04-85ec-e1fcedf1c6f8'
+ 	tmp16 = cpu_to_be16(hextoul(uuid_str + 19, NULL));
+ 	memcpy(uuid_bin + 8, &tmp16, 2);
+ 
+-	tmp64 = cpu_to_be64(simple_strtoull(uuid_str + 24, NULL, 16));
++	tmp64 = cpu_to_be64(hextoul(uuid_str + 24, NULL));
+ 	memcpy(uuid_bin + 10, (char *)&tmp64 + 2, 6);
+ 
+ 	return 0;
+ }
+ 
+ int uuid_str_to_le_bin(const char *uuid_str, unsigned char *uuid_bin)
+ {
+-	u16 tmp16;
+-	u32 tmp32;
+-	u64 tmp64;
++	uint16_t tmp16;
++	uint32_t tmp32;
++	uint64_t tmp64;
+ 
+ 	if (!uuid_str_valid(uuid_str) || !uuid_bin)
+ 		return -EINVAL;
+ 
+@@ -324,22 +338,22 @@ int uuid_str_to_le_bin(const char *uuid_str, unsigned char *uuid_bin)
+ 
+ 	tmp16 = cpu_to_le16(hextoul(uuid_str + 19, NULL));
+ 	memcpy(uuid_bin + 8, &tmp16, 2);
+ 
+-	tmp64 = cpu_to_le64(simple_strtoull(uuid_str + 24, NULL, 16));
++	tmp64 = cpu_to_le64(hextoul(uuid_str + 24, NULL));
+ 	memcpy(uuid_bin + 10, &tmp64, 6);
+ 
+ 	return 0;
+ }
+ 
+ void uuid_bin_to_str(const unsigned char *uuid_bin, char *uuid_str,
+ 		     int str_format)
+ {
+-	const u8 uuid_char_order[UUID_BIN_LEN] = {0, 1, 2, 3, 4, 5, 6, 7, 8,
++	const uint8_t uuid_char_order[UUID_BIN_LEN] = {0, 1, 2, 3, 4, 5, 6, 7, 8,
+ 						  9, 10, 11, 12, 13, 14, 15};
+-	const u8 guid_char_order[UUID_BIN_LEN] = {3, 2, 1, 0, 5, 4, 7, 6, 8,
++	const uint8_t guid_char_order[UUID_BIN_LEN] = {3, 2, 1, 0, 5, 4, 7, 6, 8,
+ 						  9, 10, 11, 12, 13, 14, 15};
+-	const u8 *char_order;
++	const uint8_t *char_order;
+ 	const char *format;
+ 	int i;
+ 
+ 	/*
+@@ -405,8 +419,9 @@ void gen_uuid_v5(const struct uuid *namespace, struct uuid *uuid, ...)
+ 	uuid->clock_seq_hi_and_reserved |= UUID_VARIANT << UUID_VARIANT_SHIFT;
+ }
+ #endif
+ 
++#ifndef USE_HOSTCC
+ #if defined(CONFIG_RANDOM_UUID) || defined(CONFIG_CMD_UUID)
+ void gen_rand_uuid(unsigned char *uuid_bin)
+ {
+ 	u32 ptr[4];
+@@ -494,4 +509,5 @@ U_BOOT_CMD(guid, CONFIG_SYS_MAXARGS, 1, do_uuid,
+ 	   "e.g. guid guid_env"
+ );
+ #endif /* CONFIG_CMD_UUID */
+ #endif /* CONFIG_RANDOM_UUID || CONFIG_CMD_UUID */
++#endif /* !USE_HOSTCC */
 
 -- 
 2.45.0
