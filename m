@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94115C27C43
-	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 15:06:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E87FC27C43
+	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 15:17:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 276B7885E8;
-	Wed, 29 May 2024 17:06:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 64B2F88047;
+	Wed, 29 May 2024 17:17:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pf2xH8EO";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dEzKnkpB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A3C288623; Wed, 29 May 2024 17:06:52 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 7433488253; Wed, 29 May 2024 17:17:39 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1613A885E1
- for <u-boot@lists.denx.de>; Wed, 29 May 2024 17:06:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C61A87F33
+ for <u-boot@lists.denx.de>; Wed, 29 May 2024 17:17:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44TF6fw5078650;
- Wed, 29 May 2024 10:06:41 -0500
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44TFHPHF084777;
+ Wed, 29 May 2024 10:17:25 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1716995201;
- bh=hWKjOGYeFRWMVygSUwamnbXVs+rOy/BDo+d30HrqcSE=;
+ s=ti-com-17Q1; t=1716995845;
+ bh=h1IKGetlizYd3WNfeosGZlHHKMVVLYInECn+g/BlfoY=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=pf2xH8EOpEalHzHb67CZD3RroUWN9OzhNchjRNHHhZZifjx1xRLuYH5VpT0kYk6qy
- 8TTX906+I3QvAFkKfGBdgvSIvqEIrYr2ZHQzd7FuSK+t92h4ByoOcGQWLLSUMOFep1
- XvwLAXiJcr7Yrt3NZkwXvIpf8UpoNH36INELAudw=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44TF6f9T004218
+ b=dEzKnkpBjXRMkcD+gfavLZdZru4tQeqZjDn1zw4rupJC/s7zqYqdASb4tueFdoDL7
+ ubgOoiqoTgIVcRGDdeXKi0FxzmUIMdzHFbtiCMAkkkqRAVrpvAsnF4dT6ck29dS8Ni
+ XsntvptgkZUAk+DKc2560zhK8WBaJt7kS/a27+Rc=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44TFHPDJ060652
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 29 May 2024 10:06:41 -0500
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 29 May 2024 10:17:25 -0500
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 29
- May 2024 10:06:40 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ May 2024 10:17:25 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 29 May 2024 10:06:40 -0500
+ Frontend Transport; Wed, 29 May 2024 10:17:25 -0500
 Received: from [10.249.42.149] ([10.249.42.149])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44TF6eSe041769;
- Wed, 29 May 2024 10:06:40 -0500
-Message-ID: <15dc7e43-53c7-44ca-8cfc-e075e99d64e3@ti.com>
-Date: Wed, 29 May 2024 10:06:40 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44TFHOQ2058099;
+ Wed, 29 May 2024 10:17:24 -0500
+Message-ID: <b2ce04a2-a50b-42bb-8421-b6bf4c426218@ti.com>
+Date: Wed, 29 May 2024 10:17:24 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 03/14] soc: add info to identify the J722S SoC family
+Subject: Re: [PATCH 09/14] arch: mach-k3: Introduce basic files to support
+ J722S SoC family
 To: Jayesh Choudhary <j-choudhary@ti.com>, <u-boot@lists.denx.de>,
  <trini@konsulko.com>, <jh80.chung@samsung.com>, <lukma@denx.de>,
  <seanga2@gmail.com>, <vaishnav.a@ti.com>, <n-francis@ti.com>,
  <u-kumar1@ti.com>, <sumit.garg@linaro.org>
 CC: <vigneshr@ti.com>, <nm@ti.com>, <bb@ti.com>, <rogerq@kernel.org>
 References: <20240529132448.459330-1-j-choudhary@ti.com>
- <20240529132448.459330-4-j-choudhary@ti.com>
+ <20240529132448.459330-10-j-choudhary@ti.com>
 Content-Language: en-US
 From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20240529132448.459330-4-j-choudhary@ti.com>
+In-Reply-To: <20240529132448.459330-10-j-choudhary@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -84,51 +85,588 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 5/29/24 8:24 AM, Jayesh Choudhary wrote:
-> Include the part number for TI's j722s family of SoC
-> to identify it during boot.
+> Introduce the basic functions and definitions needed to properly
+> initialize TI J722S family of SoCs.
 > 
+> Co-developed-by: Vaishnav Achath <vaishnav.a@ti.com>
 > Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
 > Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
 > ---
->   arch/arm/mach-k3/include/mach/hardware.h | 2 ++
->   drivers/soc/soc_ti_k3.c                  | 3 +++
->   2 files changed, 5 insertions(+)
+>   arch/arm/mach-k3/Kconfig                      |   7 +-
+>   arch/arm/mach-k3/Makefile                     |   1 +
+>   arch/arm/mach-k3/include/mach/hardware.h      |   4 +
+>   .../arm/mach-k3/include/mach/j722s_hardware.h |  83 ++++++
+>   arch/arm/mach-k3/include/mach/j722s_spl.h     |  49 ++++
+>   arch/arm/mach-k3/include/mach/spl.h           |   4 +
+>   arch/arm/mach-k3/j722s/Kconfig                |  32 ++
+>   arch/arm/mach-k3/j722s/Makefile               |   6 +
+>   arch/arm/mach-k3/j722s/j722s_init.c           | 277 ++++++++++++++++++
+>   9 files changed, 462 insertions(+), 1 deletion(-)
+>   create mode 100644 arch/arm/mach-k3/include/mach/j722s_hardware.h
+>   create mode 100644 arch/arm/mach-k3/include/mach/j722s_spl.h
+>   create mode 100644 arch/arm/mach-k3/j722s/Kconfig
+>   create mode 100644 arch/arm/mach-k3/j722s/Makefile
+>   create mode 100644 arch/arm/mach-k3/j722s/j722s_init.c
 > 
+> diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
+> index 2bb970c2d4..f3f42b3921 100644
+> --- a/arch/arm/mach-k3/Kconfig
+> +++ b/arch/arm/mach-k3/Kconfig
+> @@ -25,6 +25,9 @@ config SOC_K3_J721E
+>   config SOC_K3_J721S2
+>   	bool "TI's K3 based J721S2 SoC Family Support"
+>   
+> +config SOC_K3_J722S
+> +	bool "TI's K3 based J722S SoC Family Support"
+> +
+>   config SOC_K3_J784S4
+>   	bool "TI's K3 based J784S4 SoC Family Support"
+>   
+> @@ -84,6 +87,7 @@ config SYS_K3_BOOT_PARAM_TABLE_INDEX
+>   	default 0x43c3f290 if SOC_K3_AM62A7 && CPU_V7R
+>   	default 0x7000f290 if SOC_K3_AM62A7 && ARM64
+>   	default 0x43c4f290 if SOC_K3_AM62P5
+> +	default 0x43c7f290 if SOC_K3_J722S
+>   	help
+>   	  Address at which ROM stores the value which determines if SPL
+>   	  is booted up by primary boot media or secondary boot media.
+> @@ -122,7 +126,7 @@ config K3_EARLY_CONS_IDX
+>   
+>   config K3_ATF_LOAD_ADDR
+>   	hex "Load address of ATF image"
+> -	default 0x80000000 if (SOC_K3_AM625 || SOC_K3_AM62A7 || SOC_K3_AM62P5)
+> +	default 0x80000000 if (SOC_K3_AM625 || SOC_K3_AM62A7 || SOC_K3_AM62P5 || SOC_K3_J722S)
+
+You may need to fixup the DT if it uses the old address. You'll
+need to do the same as done for AM62p here:
+
+https://patchwork.ozlabs.org/project/uboot/patch/20240520-am62p-fdt-fix-v1-1-49845dcb3667@ti.com/
+
+Andrew
+
+>   	default 0x70000000
+>   	help
+>   	  The load address for the ATF image. This value is used to build the
+> @@ -163,6 +167,7 @@ source "arch/arm/mach-k3/am62ax/Kconfig"
+>   source "arch/arm/mach-k3/am62px/Kconfig"
+>   source "arch/arm/mach-k3/j721e/Kconfig"
+>   source "arch/arm/mach-k3/j721s2/Kconfig"
+> +source "arch/arm/mach-k3/j722s/Kconfig"
+>   source "arch/arm/mach-k3/j784s4/Kconfig"
+>   
+>   endif
+> diff --git a/arch/arm/mach-k3/Makefile b/arch/arm/mach-k3/Makefile
+> index 2b3ebd5c53..8c4f6786a5 100644
+> --- a/arch/arm/mach-k3/Makefile
+> +++ b/arch/arm/mach-k3/Makefile
+> @@ -14,4 +14,5 @@ obj-$(CONFIG_SOC_K3_AM642) += am64x/
+>   obj-$(CONFIG_SOC_K3_AM654) += am65x/
+>   obj-$(CONFIG_SOC_K3_J721E) += j721e/
+>   obj-$(CONFIG_SOC_K3_J721S2) += j721s2/
+> +obj-$(CONFIG_SOC_K3_J722S) += j722s/
+>   obj-$(CONFIG_SOC_K3_J784S4) += j784s4/
 > diff --git a/arch/arm/mach-k3/include/mach/hardware.h b/arch/arm/mach-k3/include/mach/hardware.h
-> index c3aaded8dc..26c5bfcf76 100644
+> index 26c5bfcf76..86e3e6b355 100644
 > --- a/arch/arm/mach-k3/include/mach/hardware.h
 > +++ b/arch/arm/mach-k3/include/mach/hardware.h
-> @@ -55,6 +55,7 @@
->   #define JTAG_ID_PARTNO_J7200	0xbb6d
->   #define JTAG_ID_PARTNO_J721E	0xbb64
->   #define JTAG_ID_PARTNO_J721S2	0xbb75
-> +#define JTAG_ID_PARTNO_J722S    0xbba0
-
-All the others use tab, you used spaces here. Personally I like spaces
-for alignment, but unless you fix all the others, stick with tab for now.
-
->   #define JTAG_ID_PARTNO_J784S4	0xbb80
+> @@ -36,6 +36,10 @@
+>   #include "j721s2_hardware.h"
+>   #endif
 >   
->   #define K3_SOC_ID(id, ID) \
-> @@ -72,6 +73,7 @@ K3_SOC_ID(am65x, AM65X)
->   K3_SOC_ID(j7200, J7200)
->   K3_SOC_ID(j721e, J721E)
->   K3_SOC_ID(j721s2, J721S2)
-> +K3_SOC_ID(j722s, J722S)
+> +#ifdef CONFIG_SOC_K3_J722S
+> +#include "j722s_hardware.h"
+> +#endif
+> +
+>   #ifdef CONFIG_SOC_K3_J784S4
+>   #include "j784s4_hardware.h"
+>   #endif
+> diff --git a/arch/arm/mach-k3/include/mach/j722s_hardware.h b/arch/arm/mach-k3/include/mach/j722s_hardware.h
+> new file mode 100644
+> index 0000000000..8d0bec2206
+> --- /dev/null
+> +++ b/arch/arm/mach-k3/include/mach/j722s_hardware.h
+> @@ -0,0 +1,83 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * K3: J722S SoC definitions, structures etc.
+> + *
+> + * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
+> + */
+> +
+> +#ifndef __ASM_ARCH_J722S_HARDWARE_H
+> +#define __ASM_ARCH_J722S_HARDWARE_H
+> +
+> +#include <config.h>
+> +#ifndef __ASSEMBLY__
+> +#include <linux/bitops.h>
+> +#endif
+> +
+> +#define PADCFG_MMR0_BASE			0x04080000
+> +#define PADCFG_MMR1_BASE			0x000f0000
+> +#define CTRL_MMR0_BASE				0x00100000
+> +#define MCU_CTRL_MMR0_BASE			0x04500000
+> +#define WKUP_CTRL_MMR0_BASE			0x43000000
+> +
+> +#define CTRLMMR_MAIN_DEVSTAT			(WKUP_CTRL_MMR0_BASE + 0x30)
+> +#define MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK	GENMASK(6, 3)
+> +#define MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT	3
+> +#define MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK	GENMASK(9, 7)
+> +#define MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT	7
+> +#define MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK	GENMASK(12, 10)
+> +#define MAIN_DEVSTAT_BACKUP_BOOTMODE_SHIFT	10
+> +#define MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK	BIT(13)
+> +#define MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_SHIFT	13
+> +
+> +/* Primary Bootmode MMC Config macros */
+> +#define MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK	0x4
+> +#define MAIN_DEVSTAT_PRIMARY_MMC_PORT_SHIFT	2
+> +#define MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK	0x1
+> +#define MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_SHIFT	0
+> +
+> +/* Primary Bootmode USB Config macros */
+> +#define MAIN_DEVSTAT_PRIMARY_USB_MODE_SHIFT	1
+> +#define MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK	0x02
+> +
+> +/* Backup Bootmode USB Config macros */
+> +#define MAIN_DEVSTAT_BACKUP_USB_MODE_MASK	0x01
+> +
+> +/*
+> + * The CTRL_MMR0 memory space is divided into several equally-spaced
+> + * partitions, so defining the partition size allows us to determine
+> + * register addresses common to those partitions.
+> + */
+> +#define CTRL_MMR0_PARTITION_SIZE		0x4000
+> +
+> +/*
+> + * CTRL_MMR0, WKUP_CTRL_MMR0, and MCU_CTRL_MMR0 lock/kick-mechanism
+> + * shared register definitions. The same registers are also used for
+> + * PADCFG_MMR lock/kick-mechanism.
+> + */
+> +#define CTRLMMR_LOCK_KICK0			0x1008
+> +#define CTRLMMR_LOCK_KICK0_UNLOCK_VAL		0x68ef3490
+> +#define CTRLMMR_LOCK_KICK1			0x100c
+> +#define CTRLMMR_LOCK_KICK1_UNLOCK_VAL		0xd172bc5a
+> +
+> +#define MCU_CTRL_LFXOSC_CTRL			(MCU_CTRL_MMR0_BASE + 0x8038)
+> +#define MCU_CTRL_LFXOSC_TRIM			(MCU_CTRL_MMR0_BASE + 0x803c)
+> +#define MCU_CTRL_LFXOSC_32K_DISABLE_VAL		BIT(7)
+> +
+> +#define MCU_CTRL_DEVICE_CLKOUT_32K_CTRL		(MCU_CTRL_MMR0_BASE + 0x8058)
+> +#define MCU_CTRL_DEVICE_CLKOUT_LFOSC_SELECT_VAL	(0x3)
+> +
+> +#define ROM_EXTENDED_BOOT_DATA_INFO		0x43c7f1e0
+> +
+> +#define K3_BOOT_PARAM_TABLE_INDEX_OCRAM		0x7000F290
+> +
+> +#define TI_SRAM_SCRATCH_BOARD_EEPROM_START	0x43c30000
+> +
+> +#if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
+> +
+> +static const u32 put_device_ids[] = {};
+> +
+> +static const u32 put_core_ids[] = {};
+> +
+> +#endif
+> +
+> +#endif /* __ASM_ARCH_J722S_HARDWARE_H */
+> diff --git a/arch/arm/mach-k3/include/mach/j722s_spl.h b/arch/arm/mach-k3/include/mach/j722s_spl.h
+> new file mode 100644
+> index 0000000000..eab8c511b7
+> --- /dev/null
+> +++ b/arch/arm/mach-k3/include/mach/j722s_spl.h
+> @@ -0,0 +1,49 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
+> + */
+> +
+> +#ifndef _ASM_ARCH_J722S_SPL_H_
+> +#define _ASM_ARCH_J722S_SPL_H_
+> +
+> +/* Primary BootMode devices */
+> +#define BOOT_DEVICE_SPI_NAND		0x00
+> +#define BOOT_DEVICE_RAM			0xFF
+> +#define BOOT_DEVICE_OSPI		0x01
+> +#define BOOT_DEVICE_QSPI		0x02
+> +#define BOOT_DEVICE_SPI			0x03
+> +#define BOOT_DEVICE_CPGMAC		0x04
+> +#define BOOT_DEVICE_ETHERNET_RGMII	0x04
+> +#define BOOT_DEVICE_ETHERNET_RMII	0x05
+> +#define BOOT_DEVICE_I2C			0x06
+> +#define BOOT_DEVICE_UART		0x07
+> +#define BOOT_DEVICE_MMC			0x08
+> +#define BOOT_DEVICE_EMMC		0x09
+> +
+> +#define BOOT_DEVICE_USB			0x2A
+> +#define BOOT_DEVICE_DFU			0x0A
+> +#define BOOT_DEVICE_GPMC_NAND		0x0B
+> +#define BOOT_DEVICE_GPMC_NOR		0x0C
+> +#define BOOT_DEVICE_XSPI		0x0E
+> +#define BOOT_DEVICE_NOBOOT		0x0F
+> +
+> +/* U-Boot used aliases */
+> +#define BOOT_DEVICE_ETHERNET		0x04
+> +#define BOOT_DEVICE_SPINAND		0x10
+> +#define BOOT_DEVICE_MMC2		0x08
+> +#define BOOT_DEVICE_MMC1		0x09
+> +/* Invalid */
+> +#define BOOT_DEVICE_MMC2_2		0x1F
+> +
+> +/* Backup BootMode devices */
+> +#define BACKUP_BOOT_DEVICE_DFU		0x01
+> +#define BACKUP_BOOT_DEVICE_UART		0x03
+> +#define BACKUP_BOOT_DEVICE_ETHERNET	0x04
+> +#define BACKUP_BOOT_DEVICE_MMC		0x05
+> +#define BACKUP_BOOT_DEVICE_SPI		0x06
+> +#define BACKUP_BOOT_DEVICE_I2C		0x07
+> +#define BACKUP_BOOT_DEVICE_USB		0x09
+> +
+> +#define K3_PRIMARY_BOOTMODE		0x0
+> +
+> +#endif /* _ASM_ARCH_J722S_SPL_H_ */
+> diff --git a/arch/arm/mach-k3/include/mach/spl.h b/arch/arm/mach-k3/include/mach/spl.h
+> index 8394277922..ac1a34502e 100644
+> --- a/arch/arm/mach-k3/include/mach/spl.h
+> +++ b/arch/arm/mach-k3/include/mach/spl.h
+> @@ -38,4 +38,8 @@
+>   #include "am62p_spl.h"
+>   #endif
 >   
->   #define K3_SEC_MGR_SYS_STATUS		0x44234100
->   #define SYS_STATUS_DEV_TYPE_SHIFT	0
-> diff --git a/drivers/soc/soc_ti_k3.c b/drivers/soc/soc_ti_k3.c
-> index 0838808515..f948914d21 100644
-> --- a/drivers/soc/soc_ti_k3.c
-> +++ b/drivers/soc/soc_ti_k3.c
-> @@ -47,6 +47,9 @@ static const char *get_family_string(u32 idreg)
->   	case JTAG_ID_PARTNO_J721S2:
->   		family = "J721S2";
->   		break;
-> +	case JTAG_ID_PARTNO_J722S:
-> +		family = "J722S";
-> +		break;
->   	case JTAG_ID_PARTNO_J784S4:
->   		family = "J784S4";
->   		break;
+> +#ifdef CONFIG_SOC_K3_J722S
+> +#include "j722s_spl.h"
+> +#endif
+> +
+>   #endif /* _ASM_ARCH_SPL_H_ */
+> diff --git a/arch/arm/mach-k3/j722s/Kconfig b/arch/arm/mach-k3/j722s/Kconfig
+> new file mode 100644
+> index 0000000000..9d450d8dc4
+> --- /dev/null
+> +++ b/arch/arm/mach-k3/j722s/Kconfig
+> @@ -0,0 +1,32 @@
+> +# SPDX-License-Identifier: GPL-2.0+
+> +#
+> +# Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
+> +#
+> +
+> +if SOC_K3_J722S
+> +
+> +choice
+> +	prompt "TI K3 J722S based boards"
+> +	optional
+> +
+> +config TARGET_J722S_A53_EVM
+> +	bool "TI K3 based J722S EVM running on A53"
+> +	select ARM64
+> +	select BINMAN
+> +
+> +config TARGET_J722S_R5_EVM
+> +	bool "TI K3 based J722S EVM running on R5"
+> +	select CPU_V7R
+> +	select SYS_THUMB_BUILD
+> +	select K3_LOAD_SYSFW
+> +	select RAM
+> +	select SPL_RAM
+> +	select K3_DDRSS
+> +	select BINMAN
+> +	imply SYS_K3_SPL_ATF
+> +
+> +endchoice
+> +
+> +source "board/ti/j722s/Kconfig"
+> +
+> +endif
+> diff --git a/arch/arm/mach-k3/j722s/Makefile b/arch/arm/mach-k3/j722s/Makefile
+> new file mode 100644
+> index 0000000000..f962333a0c
+> --- /dev/null
+> +++ b/arch/arm/mach-k3/j722s/Makefile
+> @@ -0,0 +1,6 @@
+> +# SPDX-License-Identifier: GPL-2.0+
+> +#
+> +# Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
+> +#	Jayesh Choudhary <j-choudhary@ti.com>
+> +
+> +obj-$(CONFIG_SPL_BUILD) += j722s_init.o
+> diff --git a/arch/arm/mach-k3/j722s/j722s_init.c b/arch/arm/mach-k3/j722s/j722s_init.c
+> new file mode 100644
+> index 0000000000..1124f6f7fd
+> --- /dev/null
+> +++ b/arch/arm/mach-k3/j722s/j722s_init.c
+> @@ -0,0 +1,277 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * J722S: SoC specific initialization
+> + *
+> + * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
+> + */
+> +
+> +#include <spl.h>
+> +#include <asm/io.h>
+> +#include <asm/arch/hardware.h>
+> +#include <dm.h>
+> +#include <dm/uclass-internal.h>
+> +#include <dm/pinctrl.h>
+> +
+> +#include "../sysfw-loader.h"
+> +#include "../common.h"
+> +
+> +struct fwl_data cbass_main_fwls[] = {
+> +	{ "FSS_DAT_REG3", 7, 8 },
+> +};
+> +
+> +/*
+> + * This uninitialized global variable would normal end up in the .bss section,
+> + * but the .bss is cleared between writing and reading this variable, so move
+> + * it to the .data section.
+> + */
+> +u32 bootindex __section(".data");
+> +static struct rom_extended_boot_data bootdata __section(".data");
+> +
+> +static void store_boot_info_from_rom(void)
+> +{
+> +	bootindex = *(u32 *)(CONFIG_SYS_K3_BOOT_PARAM_TABLE_INDEX);
+> +	memcpy(&bootdata, (uintptr_t *)ROM_EXTENDED_BOOT_DATA_INFO,
+> +	       sizeof(struct rom_extended_boot_data));
+> +}
+> +
+> +static void ctrl_mmr_unlock(void)
+> +{
+> +	/* Unlock all WKUP_CTRL_MMR0 module registers */
+> +	mmr_unlock(WKUP_CTRL_MMR0_BASE, 0);
+> +	mmr_unlock(WKUP_CTRL_MMR0_BASE, 1);
+> +	mmr_unlock(WKUP_CTRL_MMR0_BASE, 2);
+> +	mmr_unlock(WKUP_CTRL_MMR0_BASE, 3);
+> +	mmr_unlock(WKUP_CTRL_MMR0_BASE, 4);
+> +	mmr_unlock(WKUP_CTRL_MMR0_BASE, 5);
+> +	mmr_unlock(WKUP_CTRL_MMR0_BASE, 6);
+> +	mmr_unlock(WKUP_CTRL_MMR0_BASE, 7);
+> +
+> +	/* Unlock all CTRL_MMR0 module registers */
+> +	mmr_unlock(CTRL_MMR0_BASE, 0);
+> +	mmr_unlock(CTRL_MMR0_BASE, 1);
+> +	mmr_unlock(CTRL_MMR0_BASE, 2);
+> +	mmr_unlock(CTRL_MMR0_BASE, 4);
+> +	mmr_unlock(CTRL_MMR0_BASE, 5);
+> +	mmr_unlock(CTRL_MMR0_BASE, 6);
+> +
+> +	/* Unlock all MCU_CTRL_MMR0 module registers */
+> +	mmr_unlock(MCU_CTRL_MMR0_BASE, 0);
+> +	mmr_unlock(MCU_CTRL_MMR0_BASE, 1);
+> +	mmr_unlock(MCU_CTRL_MMR0_BASE, 2);
+> +	mmr_unlock(MCU_CTRL_MMR0_BASE, 3);
+> +	mmr_unlock(MCU_CTRL_MMR0_BASE, 4);
+> +	mmr_unlock(MCU_CTRL_MMR0_BASE, 6);
+> +
+> +	/* Unlock PADCFG_CTRL_MMR padconf registers */
+> +	mmr_unlock(PADCFG_MMR0_BASE, 1);
+> +	mmr_unlock(PADCFG_MMR1_BASE, 1);
+> +}
+> +
+> +void board_init_f(ulong dummy)
+> +{
+> +	struct udevice *dev;
+> +	int ret;
+> +
+> +	if (IS_ENABLED(CONFIG_CPU_V7R))
+> +		setup_k3_mpu_regions();
+> +
+> +	/*
+> +	 * Cannot delay this further as there is a chance that
+> +	 * K3_BOOT_PARAM_TABLE_INDEX can be over written by SPL MALLOC section.
+> +	 */
+> +	store_boot_info_from_rom();
+> +
+> +	ctrl_mmr_unlock();
+> +
+> +	/* Init DM early */
+> +	ret = spl_early_init();
+> +	if (ret)
+> +		panic("spl_early_init() failed: %d\n", ret);
+> +
+> +	/*
+> +	 * Process pinctrl for the serial0 a.k.a. WKUP_UART0 module and continue
+> +	 * regardless of the result of pinctrl. Do this without probing the
+> +	 * device, but instead by searching the device that would request the
+> +	 * given sequence number if probed. The UART will be used by the DM
+> +	 * firmware image for various purposes and TIFS depends on us to
+> +	 * initialize its pin settings.
+> +	 */
+> +	ret = uclass_find_device_by_seq(UCLASS_SERIAL, 0, &dev);
+> +	if (!ret)
+> +		pinctrl_select_state(dev, "default");
+> +
+> +	if (IS_ENABLED(CONFIG_K3_EARLY_CONS)) {
+> +		/*
+> +		 * Allow establishing an early console as required for example
+> +		 * when doing a UART-based boot. Note that this console may not
+> +		 * "survive" through a SYSFW PM-init step and will need a re-init
+> +		 * in some way due to changing module clock frequencies.
+> +		 */
+> +		ret = early_console_init();
+> +		if (ret)
+> +			panic("early_console_init() failed: %d\n", ret);
+> +	}
+> +
+> +	if (IS_ENABLED(CONFIG_K3_LOAD_SYSFW)) {
+> +		/*
+> +		 * Configure and start up system controller firmware. Provide
+> +		 * the U-Boot console init function to the SYSFW post-PM
+> +		 * configuration callback hook, effectively switching on (or
+> +		 * over) the console output.
+> +		 */
+> +		ret = is_rom_loaded_sysfw(&bootdata);
+> +		if (!ret)
+> +			panic("ROM has not loaded TIFS firmware\n");
+> +
+> +		k3_sysfw_loader(true, NULL, NULL);
+> +	}
+> +
+> +	/*
+> +	 * Force probe of clk_k3 driver here to ensure basic default clock
+> +	 * configuration is always done.
+> +	 */
+> +	if (IS_ENABLED(CONFIG_SPL_CLK_K3)) {
+> +		ret = uclass_get_device_by_driver(UCLASS_CLK,
+> +						  DM_DRIVER_GET(ti_clk),
+> +						  &dev);
+> +		if (ret)
+> +			printf("Failed to initialize clk-k3!\n");
+> +	}
+> +
+> +	preloader_console_init();
+> +
+> +	/* Output System Firmware version info */
+> +	k3_sysfw_print_ver();
+> +
+> +	if (IS_ENABLED(CONFIG_CPU_V7R)) {
+> +		/* Disable ROM configured firewalls right after loading sysfw */
+> +		remove_fwl_configs(cbass_main_fwls, ARRAY_SIZE(cbass_main_fwls));
+> +	}
+> +
+> +	if (IS_ENABLED(CONFIG_K3_AM62A_DDRSS)) {
+> +		ret = uclass_get_device(UCLASS_RAM, 0, &dev);
+> +		if (ret)
+> +			panic("DRAM init failed: %d\n", ret);
+> +	}
+> +
+> +	debug("j722s_init: %s done\n", __func__);
+> +}
+> +
+> +static u32 __get_backup_bootmedia(u32 devstat)
+> +{
+> +	u32 bkup_bootmode = (devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK) >>
+> +				MAIN_DEVSTAT_BACKUP_BOOTMODE_SHIFT;
+> +	u32 bkup_bootmode_cfg =
+> +			(devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK) >>
+> +				MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_SHIFT;
+> +
+> +	switch (bkup_bootmode) {
+> +	case BACKUP_BOOT_DEVICE_UART:
+> +		return BOOT_DEVICE_UART;
+> +
+> +	case BACKUP_BOOT_DEVICE_USB:
+> +		return BOOT_DEVICE_USB;
+> +
+> +	case BACKUP_BOOT_DEVICE_ETHERNET:
+> +		return BOOT_DEVICE_ETHERNET;
+> +
+> +	case BACKUP_BOOT_DEVICE_MMC:
+> +		if (bkup_bootmode_cfg)
+> +			return BOOT_DEVICE_MMC2;
+> +		return BOOT_DEVICE_MMC1;
+> +
+> +	case BACKUP_BOOT_DEVICE_SPI:
+> +		return BOOT_DEVICE_SPI;
+> +
+> +	case BACKUP_BOOT_DEVICE_I2C:
+> +		return BOOT_DEVICE_I2C;
+> +
+> +	case BACKUP_BOOT_DEVICE_DFU:
+> +		if (bkup_bootmode_cfg & MAIN_DEVSTAT_BACKUP_USB_MODE_MASK)
+> +			return BOOT_DEVICE_USB;
+> +		return BOOT_DEVICE_DFU;
+> +	};
+> +
+> +	return BOOT_DEVICE_RAM;
+> +}
+> +
+> +static u32 __get_primary_bootmedia(u32 devstat)
+> +{
+> +	u32 bootmode = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
+> +				MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
+> +	u32 bootmode_cfg = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
+> +				MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
+> +
+> +	switch (bootmode) {
+> +	case BOOT_DEVICE_OSPI:
+> +		fallthrough;
+> +	case BOOT_DEVICE_QSPI:
+> +		fallthrough;
+> +	case BOOT_DEVICE_XSPI:
+> +		fallthrough;
+> +	case BOOT_DEVICE_SPI:
+> +		return BOOT_DEVICE_SPI;
+> +
+> +	case BOOT_DEVICE_ETHERNET_RGMII:
+> +		fallthrough;
+> +	case BOOT_DEVICE_ETHERNET_RMII:
+> +		return BOOT_DEVICE_ETHERNET;
+> +
+> +	case BOOT_DEVICE_EMMC:
+> +		return BOOT_DEVICE_MMC1;
+> +
+> +	case BOOT_DEVICE_SPI_NAND:
+> +		return BOOT_DEVICE_SPINAND;
+> +
+> +	case BOOT_DEVICE_MMC:
+> +		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK) >>
+> +				MAIN_DEVSTAT_PRIMARY_MMC_PORT_SHIFT)
+> +			return BOOT_DEVICE_MMC2;
+> +		return BOOT_DEVICE_MMC1;
+> +
+> +	case BOOT_DEVICE_DFU:
+> +		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK) >>
+> +		    MAIN_DEVSTAT_PRIMARY_USB_MODE_SHIFT)
+> +			return BOOT_DEVICE_USB;
+> +		return BOOT_DEVICE_DFU;
+> +
+> +	case BOOT_DEVICE_NOBOOT:
+> +		return BOOT_DEVICE_RAM;
+> +	}
+> +
+> +	return bootmode;
+> +}
+> +
+> +u32 spl_boot_device(void)
+> +{
+> +	u32 devstat = readl(CTRLMMR_MAIN_DEVSTAT);
+> +	u32 bootmedia;
+> +
+> +	if (bootindex == K3_PRIMARY_BOOTMODE)
+> +		bootmedia = __get_primary_bootmedia(devstat);
+> +	else
+> +		bootmedia = __get_backup_bootmedia(devstat);
+> +
+> +	debug("j722s_init: %s: devstat = 0x%x bootmedia = 0x%x bootindex = %d\n",
+> +	      __func__, devstat, bootmedia, bootindex);
+> +	return bootmedia;
+> +}
+> +
+> +u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+> +{
+> +	u32 devstat = readl(CTRLMMR_MAIN_DEVSTAT);
+> +	u32 bootmode = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
+> +				MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
+> +	u32 bootmode_cfg = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
+> +			    MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
+> +
+> +	switch (bootmode) {
+> +	case BOOT_DEVICE_EMMC:
+> +		return MMCSD_MODE_EMMCBOOT;
+> +	case BOOT_DEVICE_MMC:
+> +		if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
+> +			return MMCSD_MODE_RAW;
+> +	default:
+> +		return MMCSD_MODE_FS;
+> +	}
+> +}
