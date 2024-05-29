@@ -4,63 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E6C8C25B75
-	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 13:25:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5C31C25B75
+	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 13:26:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C661288624;
-	Wed, 29 May 2024 15:25:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3118C88606;
+	Wed, 29 May 2024 15:25:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CaT8kZc5";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="NcuCHhS0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DE4B885E1; Wed, 29 May 2024 15:25:05 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 696338861D; Wed, 29 May 2024 15:25:07 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E76088582
- for <u-boot@lists.denx.de>; Wed, 29 May 2024 15:25:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 31963880F5
+ for <u-boot@lists.denx.de>; Wed, 29 May 2024 15:25:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-choudhary@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44TDOvAb001492;
- Wed, 29 May 2024 08:24:57 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44TDOxAg102647;
+ Wed, 29 May 2024 08:24:59 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1716989097;
- bh=C2PyGDcwKBV4xCBh0myM4PeGQZjTIHuv0wJb2n33wG8=;
+ s=ti-com-17Q1; t=1716989099;
+ bh=bgfHt8r4gECitaKn7Qmewv+7pkdFR5IWFQFLHNV4lgM=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=CaT8kZc5AQU4TyieQeCkiRVVUTLchANlCksdS27/cnIofYGHUlROmFkKhiB9kPLiU
- rtKHkG5Jeg2SjVAG63zLs7QCzRmbOb9QH//4Dhn890MHhkN+j0CQFZ1N9yZQArxKd1
- UVnGlhcJ7IY/IfUf34vgPpfrobQ/yQVVT03rViqA=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44TDOvxZ117024
+ b=NcuCHhS07Rh7TgwJAoydU5XVmzRU0IIfBUSLqACjlcESCLRtsT0nIYFVkZOPt8L38
+ SEf7xS16qRogy4IeSgDvYEfcdF/obj6FAJWSmsDVyszGQfDbrgBryb+NYZdup3C6KP
+ vuk5xBcVJajMB2ckC++jDR9uc/D9xraitk2W2FDs=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44TDOxnx019884
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 29 May 2024 08:24:57 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 29 May 2024 08:24:59 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 29
- May 2024 08:24:57 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ May 2024 08:24:58 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 29 May 2024 08:24:57 -0500
+ Frontend Transport; Wed, 29 May 2024 08:24:58 -0500
 Received: from localhost (jayesh-hp-probook-440-g8-notebook-pc.dhcp.ti.com
  [172.24.227.102])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44TDOu28045023;
- Wed, 29 May 2024 08:24:56 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44TDOv4D045052;
+ Wed, 29 May 2024 08:24:58 -0500
 From: Jayesh Choudhary <j-choudhary@ti.com>
 To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <jh80.chung@samsung.com>,
  <lukma@denx.de>, <seanga2@gmail.com>, <vaishnav.a@ti.com>,
  <n-francis@ti.com>, <u-kumar1@ti.com>, <sumit.garg@linaro.org>,
  <afd@ti.com>, <j-choudhary@ti.com>
 CC: <vigneshr@ti.com>, <nm@ti.com>, <bb@ti.com>, <rogerq@kernel.org>
-Subject: [PATCH 05/14] power: domain: ti: Fix the order for platform data
- entries
-Date: Wed, 29 May 2024 18:54:39 +0530
-Message-ID: <20240529132448.459330-6-j-choudhary@ti.com>
+Subject: [PATCH 06/14] arm: mach-k3: r5: Makefile: Fix the order for entries
+Date: Wed, 29 May 2024 18:54:40 +0530
+Message-ID: <20240529132448.459330-7-j-choudhary@ti.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240529132448.459330-1-j-choudhary@ti.com>
 References: <20240529132448.459330-1-j-choudhary@ti.com>
@@ -84,72 +83,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the power domain platform data entries in alphabetical order.
+Add the entries in alphabetical order.
 
 Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
 ---
- drivers/power/domain/ti-power-domain.c | 36 +++++++++++++-------------
- 1 file changed, 18 insertions(+), 18 deletions(-)
+ arch/arm/mach-k3/r5/Makefile | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/power/domain/ti-power-domain.c b/drivers/power/domain/ti-power-domain.c
-index b059dd3737..362fae86a2 100644
---- a/drivers/power/domain/ti-power-domain.c
-+++ b/drivers/power/domain/ti-power-domain.c
-@@ -71,6 +71,24 @@ static void lpsc_write(u32 val, struct ti_lpsc *lpsc, u32 reg)
- }
+diff --git a/arch/arm/mach-k3/r5/Makefile b/arch/arm/mach-k3/r5/Makefile
+index 1cfc8e3ade..f1e61c8548 100644
+--- a/arch/arm/mach-k3/r5/Makefile
++++ b/arch/arm/mach-k3/r5/Makefile
+@@ -3,13 +3,13 @@
+ # Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
+ #	Andrew Davis <afd@ti.com>
  
- static const struct soc_attr ti_k3_soc_pd_data[] = {
-+#if IS_ENABLED(CONFIG_SOC_K3_AM625)
-+	{
-+		.family = "AM62X",
-+		.data = &am62x_pd_platdata,
-+	},
-+#endif
-+#if IS_ENABLED(CONFIG_SOC_K3_AM62A7)
-+	{
-+		.family = "AM62AX",
-+		.data = &am62ax_pd_platdata,
-+	},
-+#endif
-+#if IS_ENABLED(CONFIG_SOC_K3_AM62P5)
-+	{
-+		.family = "AM62PX",
-+		.data = &am62px_pd_platdata,
-+	},
-+#endif
- #if IS_ENABLED(CONFIG_SOC_K3_J721E)
- 	{
- 		.family = "J721E",
-@@ -87,29 +105,11 @@ static const struct soc_attr ti_k3_soc_pd_data[] = {
- 		.data = &j721s2_pd_platdata,
- 	},
- #endif
--#if IS_ENABLED(CONFIG_SOC_K3_AM625)
--	{
--		.family = "AM62X",
--		.data = &am62x_pd_platdata,
--	},
--#endif
--#if IS_ENABLED(CONFIG_SOC_K3_AM62A7)
--	{
--		.family = "AM62AX",
--		.data = &am62ax_pd_platdata,
--	},
--#endif
- #if IS_ENABLED(CONFIG_SOC_K3_J784S4)
- 	{
- 		.family = "J784S4",
- 		.data = &j784s4_pd_platdata,
- 	},
--#endif
--#if IS_ENABLED(CONFIG_SOC_K3_AM62P5)
--	{
--		.family = "AM62PX",
--		.data = &am62px_pd_platdata,
--	},
- #endif
- 	{ /* sentinel */ }
- };
++obj-$(CONFIG_SOC_K3_AM625) += am62x/
++obj-$(CONFIG_SOC_K3_AM62A7) += am62ax/
++obj-$(CONFIG_SOC_K3_AM62P5) += am62px/
+ obj-$(CONFIG_SOC_K3_J721E) += j721e/
+ obj-$(CONFIG_SOC_K3_J721E) += j7200/
+ obj-$(CONFIG_SOC_K3_J721S2) += j721s2/
+-obj-$(CONFIG_SOC_K3_AM625) += am62x/
+-obj-$(CONFIG_SOC_K3_AM62A7) += am62ax/
+ obj-$(CONFIG_SOC_K3_J784S4) += j784s4/
+-obj-$(CONFIG_SOC_K3_AM62P5) += am62px/
+ 
+ obj-y += common.o
+ obj-y += lowlevel_init.o
 -- 
 2.25.1
 
