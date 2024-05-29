@@ -4,67 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAD47C25B7C
-	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 16:33:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6859EC25B7C
+	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 16:33:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE2BF88658;
-	Wed, 29 May 2024 18:32:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4BBE188663;
+	Wed, 29 May 2024 18:32:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mNtApH5M";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="A6Cm3DbQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 003C98860B; Wed, 29 May 2024 18:30:01 +0200 (CEST)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
+ id 380DA8860B; Wed, 29 May 2024 18:30:04 +0200 (CEST)
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5D9188606
- for <u-boot@lists.denx.de>; Wed, 29 May 2024 18:29:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2727988210
+ for <u-boot@lists.denx.de>; Wed, 29 May 2024 18:30:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-6ada6a476c2so2519876d6.2
- for <u-boot@lists.denx.de>; Wed, 29 May 2024 09:29:59 -0700 (PDT)
+Received: by mail-qt1-x836.google.com with SMTP id
+ d75a77b69052e-43fdc0bea19so10529881cf.0
+ for <u-boot@lists.denx.de>; Wed, 29 May 2024 09:30:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1717000199; x=1717604999; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1717000201; x=1717605001; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=2tt8YtqpTmRDOdcxcIpam0z1KV7ews6HfuweLXaFc38=;
- b=mNtApH5MAiiN13BFmnQ07YC9M3bZKwWnlppguD/IgvnjGU6zCEeU1PKfcbYvXoIY5e
- EGk4Gb6dGk7u/KRx7gH4KoSCe/d9bKDo2JxIzSCNE8o6VPYoGkmatCEObK0/GLoonJBU
- dCDUFY9YdLRx/Q3yZ26QswopOCgSFtUwIIkq8=
+ bh=4/6v9FsZK3UhMAv/5Y9pIhxZWac9gX1QupA8QykS+20=;
+ b=A6Cm3DbQfaGtVzm1AMpgeGaGCVfcpOjggr6XtdhWHcRA5dsMjUxMUt/nTmt5/gLwTk
+ uEXEOYFyttLiZYHYWisadGfMoGcQK4aMdy08P7cDDtYRCcbobQmvM6NTk0EdcNLQ7dub
+ MNSobcSaVXXN0r0cZMeIuEc9rvqI0kJpZblh4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717000199; x=1717604999;
+ d=1e100.net; s=20230601; t=1717000201; x=1717605001;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=2tt8YtqpTmRDOdcxcIpam0z1KV7ews6HfuweLXaFc38=;
- b=NOzuU903qSq/iSL4lorBkXkfJP/gHhCAe2iwDH3OKrGLlZ5xSziyQbDGod8917Xo3o
- zysMtfRzm1f+KURI/VCv9qXS0OQ5i/+EXeK0UqG1g+r3wlbmJeh9qUP9YJ6+csjI1Gtq
- bOPPrIdN+ua22pzcQPQYLtFzBNNv9U92bLaZZ2uM4cmRIDUNXU5oSzzBnhEp5GO/uEAC
- q+fGlRYNsRemTJzHLeYOj3U7z6drSB4iRIpI0HB1OQgH0ud4YpvdNn5BBtAMA7w0G4hq
- N95Hrk5lyhdv2NZ9tC+JY4Wu5z4nsC4uo7Q20jVDiPyvUpWrYy+Us49g1ex2yD8wRkR5
- mWbQ==
-X-Gm-Message-State: AOJu0YxjFCCn1kV/kqqf4AzPRqw4C9x7pRR07NOcOeMCY9t7XVh3oy4R
- EucZxHZ4K+wL+pyl3lXmrv9csvL1m3gZTuQhqiIoWAoXREoORuKjwOcqxKzcJluvfPMx79UT7rm
- lCKlKi3nTnRtC8nqAECrRa0/8Wi1MlHzzupbCpzedoAIneHY=
-X-Google-Smtp-Source: AGHT+IGn4WraX6qxrm1mQZAWbWCOlcaR8oF8tTGQJgrsDp21TCjOYBlC1k8jSsfFYnecyhwWL5KtbyW0XnzGAdh4Aqo=
-X-Received: by 2002:a05:6214:3909:b0:6ad:a31b:1ad5 with SMTP id
- 6a1803df08f44-6ada31b1c39mr16289936d6.59.1717000198801; Wed, 29 May 2024
- 09:29:58 -0700 (PDT)
+ bh=4/6v9FsZK3UhMAv/5Y9pIhxZWac9gX1QupA8QykS+20=;
+ b=J8JzEMuLe+Ek4T2p1tPgEeRRVwN4lQRDFuHbnK9fQ5YzrdMyT3qjbvkSldgLAo7jA4
+ yP90y5JISSVbVadbTXFmjtgZCkJLAJs2fraqyM2fRbo/GxcVH6WX/YoQEQ2tTjli6PLd
+ NF/n4HB7hj+WQ1m1Gcim17TQY0U+AemDnZKeDg18PUwVs+nJJuFsn7Mly/v1cAg8kogr
+ 20uHXLKAR+umlZ6wkHljYJiixdMvz1QBXVtAV5D0cI2qKSsFkFFnzKvRGxQN9ALgY/6z
+ hkuF8rDaJvCKZpWkDCL/s/fJjQ7fHTZNQ+5xYc1oGJYiZLctTBq0nd2n1Yas5Gl39MKq
+ kUNA==
+X-Gm-Message-State: AOJu0YyHceYPrqflkrSZSDiX0LkS14xc/9aFETc0StJXZ940mR+3/37e
+ hkomKs7aJ5JJdDRCpc4O20Yy6KGQCg2Lkdy2+VqUuM0xSTj9zWUPBj5v7uP/vAXLItbtD0W6JZD
+ rOCJOYpNj9MgxHuGWUVeKbdIjLWd2aVuUinIu
+X-Google-Smtp-Source: AGHT+IG6iKPnOXwD1H+0R/YITSD0xHlNobr0BrDnyfmy6TzO0yaGoUQ6kITo0Bgw2G5LDbaDRnmaCRhq3f4o//wrl1A=
+X-Received: by 2002:a05:6214:5f01:b0:6aa:5a46:5dd3 with SMTP id
+ 6a1803df08f44-6abcd107c22mr203346046d6.58.1717000201055; Wed, 29 May 2024
+ 09:30:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240524-bootflow-doc-typo-v1-1-d8e64a40e2b1@baylibre.com>
-In-Reply-To: <20240524-bootflow-doc-typo-v1-1-d8e64a40e2b1@baylibre.com>
+References: <20240525081053.2818481-1-net147@gmail.com>
+In-Reply-To: <20240525081053.2818481-1-net147@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 May 2024 10:29:47 -0600
-Message-ID: <CAFLszThnZsc6FJH936JGigAoH_ePtNAxkfh2vJd+-p9jO3o=5g@mail.gmail.com>
-Subject: Re: [PATCH] doc: cmd: bootmeth: Fix extlinunx -> extlinux typo
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Tom Rini <trini@konsulko.com>
+Date: Wed, 29 May 2024 10:29:50 -0600
+Message-ID: <CAFLszTizGyw3WYKu22Y1sPaUrmCnpoBVfVuOM-Ra97fEnd+byg@mail.gmail.com>
+Subject: Re: [PATCH] sandbox: enable support for the unlz4 command
+To: Jonathan Liu <net147@gmail.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Wed, 29 May 2024 18:32:00 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -83,14 +82,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 24 May 2024 at 07:28, Mattijs Korpershoek
-<mkorpershoek@baylibre.com> wrote:
+On Sat, 25 May 2024 at 02:11, Jonathan Liu <net147@gmail.com> wrote:
 >
-> Fix a trivial typo in the bootmeth documentation.
+> This does not work with sandbox at present. Fix it up to use map_sysmem()
+> to convert an address to a pointer.
 >
-> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Signed-off-by: Jonathan Liu <net147@gmail.com>
 > ---
->  doc/usage/cmd/bootmeth.rst | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  cmd/unlz4.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
