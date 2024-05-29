@@ -4,93 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C7A5C25B75
-	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 16:58:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DD1AC25B75
+	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 17:22:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C22F388633;
-	Wed, 29 May 2024 18:58:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DD8CB8854B;
+	Wed, 29 May 2024 19:22:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="brLSK/X7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uxD9lMPc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74C6788637; Wed, 29 May 2024 18:58:24 +0200 (CEST)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
+ id 6971388611; Wed, 29 May 2024 19:22:15 +0200 (CEST)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 492A2885E1
- for <u-boot@lists.denx.de>; Wed, 29 May 2024 18:58:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F3E7F88544
+ for <u-boot@lists.denx.de>; Wed, 29 May 2024 19:22:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-3c9b94951d5so1009170b6e.3
- for <u-boot@lists.denx.de>; Wed, 29 May 2024 09:58:22 -0700 (PDT)
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-794cbdc2314so382285a.2
+ for <u-boot@lists.denx.de>; Wed, 29 May 2024 10:22:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1717001901; x=1717606701; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1717003332; x=1717608132; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=shJT1P8C7c+Qt7etA69tDGneXCGhLKncXtw/wAHDKIw=;
- b=brLSK/X7gkVTXiKa8Gl43qYR99Xm29cRa/mqU81ptQrD5q2rXLp23qV3769Z+tMkum
- 37d+17Ug9ipZh37LEfl2Jp0fCsNbh8sHJ16ybQHu4SnkRL/etr30YKSDiCIOSYHTvxaQ
- WhNVpVyan/52eNatP/Dm/jLvdFaTmgKz0fAm0=
+ bh=qbLIyneqUsuudiCAb/yYdLY86zGpWBmGkGsSwCWVavE=;
+ b=uxD9lMPcKQd3Ee6XbwuQgZ2ltBCoPXxKyPg5i0UcoUfOEy2DrpEVBeo1mMYTI5Gid2
+ sTaYZTYL8hf0EZTT62lqq8QkH26N4laSSkYDCHzKqBkaEy92QvqC984oZa68+KOi4OAi
+ EVB9g4i/ltF4PSy160JEoslD4KRJls0iu0wPw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717001901; x=1717606701;
+ d=1e100.net; s=20230601; t=1717003332; x=1717608132;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=shJT1P8C7c+Qt7etA69tDGneXCGhLKncXtw/wAHDKIw=;
- b=uor6uTZWuDpBvy/8XRTwMJhBVl3D3E/I/zbB9PworjKXRL7TTS+qhgpuT7Z7DdVaxh
- COxp08ZQb+kaS4xj1fghsPeiK1WpdCZtVvScOCjge2Jf6qOQVQfmaYfQuAft601d30+N
- 6PaAVWe39Q8N+u2DERgx/czX7bBrJkw5FfxOmkLUdNCJRysnhuw8cB2IYp6sSouJz/Du
- JWtRAHcddKVb7WONtxfEgzBXHSgBKOGsgVMS1ZrD+kccfEZAI+myjNIcXDtx4yQB+xNy
- BB/yRWNnFMrCRWFktvnHWB8mgktfQeaRYH7owFFsr/BESguu/Zk++ZX5y2VCeixZmWA/
- drPQ==
-X-Gm-Message-State: AOJu0YyremDcxUMRIJP07lRRBin/mlnMztBxzSitz6xeMfm+t98dR9jG
- 2JSzVCGxClUlGgd8BJVrG5/GaPTH4LRoP4dZYXuj1zgYtvarhGDXjEk8+Wz+VcM=
-X-Google-Smtp-Source: AGHT+IFrmM7Y9ijCstPVsgQLb3/0+D1iQp/N/gPk6uKGVhjOYY44iz+tgqDvEfQOjBiPCA+6fhU9ZQ==
-X-Received: by 2002:a05:6808:b03:b0:3c9:6894:bcfa with SMTP id
- 5614622812f47-3d1a909bb52mr13937258b6e.53.1717001899619; 
- Wed, 29 May 2024 09:58:19 -0700 (PDT)
+ bh=qbLIyneqUsuudiCAb/yYdLY86zGpWBmGkGsSwCWVavE=;
+ b=jpoBo3xT07a87XgNMOY/W+qUsw+52mUHWXsd27zA5b5NCl62GkspI+H33ArMHaQtwU
+ l/RCnpfvT6o7gCBwjdsQ/ETzP5fpaD3UcvY/W0FeRmkEDp1BOna5xXW7ZLNAI3bfrgSU
+ Am4TgjMThfVtfkb1WKVK8ZsZjNvbZlztA7z8ZzHCuxn0BEX4qnCtFTB0aO24j1FsTQS+
+ Rb4kqRyU2Y+yF+c8+UVnt2jnFXRDsiYO7UEmolghrCVzkBjUgL8OCKXtumAfdeqYjSui
+ 9IyDC4jlxiiDo14YX4t245ztPZlQq6YxVFtIn7wqR5NsAuJAOXD8Dyp8szjUtDZoUpcx
+ Eilg==
+X-Gm-Message-State: AOJu0YxK/HkgmA92WEnltTv4qJ/oIqEjwXIDgfjM1dzKqJXzx5MRaxi8
+ +7lKwQAZkEJcuRIwcInm17H7YkiPJA1zHy0hNA+mESp8Qj5w4RQYarwjORhMyMJf+3oLtLk/R4J
+ C
+X-Google-Smtp-Source: AGHT+IHjf9CGRQaN2GXUydnllfiAH8cB8vUPHSszW/MZp3LYpo3bLgX5gdnws8R1OxfDfdOehvnXNg==
+X-Received: by 2002:a05:620a:1023:b0:793:fab:b503 with SMTP id
+ af79cd13be357-794ab135bbdmr1650600985a.64.1717003326764; 
+ Wed, 29 May 2024 10:22:06 -0700 (PDT)
 Received: from bill-the-cat ([189.177.150.58])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6ad82416b56sm30202286d6.31.2024.05.29.09.58.16
+ af79cd13be357-794abca8ae4sm488793385a.16.2024.05.29.10.22.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 May 2024 09:58:19 -0700 (PDT)
-Date: Wed, 29 May 2024 10:58:14 -0600
+ Wed, 29 May 2024 10:22:06 -0700 (PDT)
+Date: Wed, 29 May 2024 11:22:03 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, Stefan Bosch <stefan_b@posteo.net>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilya Lukin <4.shket@gmail.com>, Sergei Antonov <saproj@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: Re: [PATCH v3 03/25] mbedtls: add mbedtls into the build system
-Message-ID: <20240529165814.GQ2568172@bill-the-cat>
-References: <20240528140955.1960172-1-raymond.mao@linaro.org>
- <20240528140955.1960172-4-raymond.mao@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH] doc/sphinx, test/py: Update requests module to 2.32.0
+Message-ID: <20240529172203.GA3714513@bill-the-cat>
+References: <20240521223253.1858188-1-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="z7EJfXSokcxWCdDX"
+ protocol="application/pgp-signature"; boundary="8amuuryiGbuqBW+6"
 Content-Disposition: inline
-In-Reply-To: <20240528140955.1960172-4-raymond.mao@linaro.org>
+In-Reply-To: <20240521223253.1858188-1-trini@konsulko.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,82 +91,43 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---z7EJfXSokcxWCdDX
+--8amuuryiGbuqBW+6
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, May 28, 2024 at 07:09:14AM -0700, Raymond Mao wrote:
+On Tue, May 21, 2024 at 04:32:53PM -0600, Tom Rini wrote:
 
-> Port mbedtls with dummy libc header files.
-> Add mbedtls default config header file.
-> Optimize mbedtls default config by disabling unused features to
-> reduce the target size.
-> Add mbedtls kbuild makefile.
-> Add Kconfig and mbedtls config submenu.
-[snip]
-> diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
-> new file mode 100644
-> index 00000000000..d6e77d56871
-> --- /dev/null
-> +++ b/lib/mbedtls/Kconfig
-> @@ -0,0 +1,25 @@
-> +menuconfig MBEDTLS_LIB
-> +	bool "Use mbedtls libraries"
-> +	select MBEDTLS_LIB_CRYPTO
-> +	select MBEDTLS_LIB_X509
-> +	help
-> +	  Enable mbedtls libraries
-> +
-> +if MBEDTLS_LIB
-> +
-> +config MBEDTLS_LIB_CRYPTO
-> +	bool "Crypto library"
-> +	help
-> +	  Enable mbedtls crypto library
-> +
-> +config MBEDTLS_LIB_X509
-> +	bool "X509 library"
-> +	help
-> +	  Enable mbedtls X509 library
-> +
-> +config MBEDTLS_LIB_TLS
-> +	bool "TLS library"
-> +	help
-> +	  Enable mbedtls TLS library
-> +
-> +endif # MBEDTLS_LIB
+> The issue described in https://github.com/psf/requests/pull/6655 has
+> been assigned as a security issue. While unlikely to be exploited in our
+> usage, update to the current release to fix it.
+>=20
+> Reported-by: GitHub dependabot
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 
-We need much more granularity here, and to re-think some existing
-symbols too perhaps. What we should be able to do is pick mbedTLS or
-"legacy SW implementation" or "HW implementation" for the various
-algorithms, and that in turn can have some higher level grouping to it.
-This should then negate a bunch of the Makefile work you're doing as we
-won't have CONFIG_SHA256 enabled as we'll have CONFIG_MBEDTLS_LIB_SHA256
-or whatever enabled.
-
-This will then, I hope, make it easier to see and adjust the almost 58kB
-size growth on qemu_arm64 with this series. Thanks.
+I'm NAK'ing this version of the patch as upstream has now "yanked"
+2.23.0 and 2.23.1, and 2.23.2 was released on May 21st and 2.23.3 today.
+I'll revisit this issue later once things seem to have settled down.
 
 --=20
 Tom
 
---z7EJfXSokcxWCdDX
+--8amuuryiGbuqBW+6
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZXXp0ACgkQFHw5/5Y0
-tyzx5Av/dzojkejj9a/K6UNatMkBgnHKPCm8hajAmoE2LViQlZIcj/S+y7TIaq8E
-DUfI11jt+QD+mrBRPbGFvpQqEnn7B07xbJ7thraM+1QRKBc4l09JGOAyKR/5vJUz
-aDSwmNPZFbEsX+h8DBSjFgn8hWFIpT1domVglC/LWeUSfzztQznE91mfrJUqqo8Z
-n2ezONv1CuiCaFR+JKXPyII0JezLo37GRIXn+P+hS5sNz+vOzMszYj3hnzjv6unI
-DCL2GRifFe1XEZdcdDdX0gzFkuGJ0JP9oIZMT3/DR3zqF+Cbkz/00EbbdmRXuvVU
-kwZvYZj4aenWMPH7GANBuYtmsEghq3hxsRUFZRoTPwoBgE4G9i/TrOEZR9ePA5jQ
-K2do8RQqP+XE11p8EBsHxrtymlNk7SV95hEsMbywejuobVMWltxNGO+/cwNG2qnF
-T3snI/hT3QetHYFbhlT885MjoMmdi76/DJG3Jxyr5BEytXr5emNXpHWEUxkemZxQ
-qCT2pBq2
-=bLUr
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZXZDgACgkQFHw5/5Y0
+tyx2Zgv+Px5QFwrCzeaHFbSBG5jPMqI2jAmxPTKjSPbk3VmmC7Uvf9Xg1KMn13ud
+jyPodhKkaL6hQqZAnio2PucxhVzqDOBCT3Wajmva8SEu2/zu0hMVDNjVsU+mpnqq
+BMMOo9TCTxFgBdHz0/fq/1PKrbHxna1ConBDwJLEoAFtxQfyIPjkcuPj805lef5e
+ID09Rt1BkwXga0fM9k8f+3EUbqnuQelb8YjBde1fWZX3a/dxtEdrtsKYGzGw4vC8
+6hR1mECTb8XfUHzwGQCEHknGbtr3teXn0LmCf0G5acoRWTNXBy7exGXHKRb44dfY
+qvWYucxDBGfjf34d/oqzI2NplvAEnJ0RFu0n+c4yc9WDVIYLTHXV59x/aEyDC5LP
+KafdyeUTfAl+uDTO2430v0knDF8ExrKw1/0uf6+rM8Z1OHCfecFvEgbI7lEP0pLy
+5cGKlnhnmLbeXCbCmgDCD9FxAjF5lBdxeR80HqBbf6eH6ccsh0zIU9XapwFcSyAc
+3i9BxwA4
+=oOyl
 -----END PGP SIGNATURE-----
 
---z7EJfXSokcxWCdDX--
+--8amuuryiGbuqBW+6--
