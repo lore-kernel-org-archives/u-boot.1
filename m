@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 374C6C25B75
-	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 18:55:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C6DDC25B75
+	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 19:02:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B023288626;
-	Wed, 29 May 2024 20:55:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B01828860D;
+	Wed, 29 May 2024 21:02:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mJwtT+GL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qy6c+hnZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A33AF8844E; Wed, 29 May 2024 20:55:19 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id CF3CB88626; Wed, 29 May 2024 21:02:16 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C97F88650
- for <u-boot@lists.denx.de>; Wed, 29 May 2024 20:55:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C476D8854B
+ for <u-boot@lists.denx.de>; Wed, 29 May 2024 21:02:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a6267643794so121444666b.2
- for <u-boot@lists.denx.de>; Wed, 29 May 2024 11:55:16 -0700 (PDT)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a59a609dd3fso8915766b.0
+ for <u-boot@lists.denx.de>; Wed, 29 May 2024 12:02:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1717008916; x=1717613716; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1717009334; x=1717614134; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Dsd1KHcCIaJfmjhULjfWq6NQq/DL8Z55szLQp6sjmUM=;
- b=mJwtT+GLorUDZBopDy6jQjMXdphSRz6Vw5qNUF7TAei7rr8HzfCZ2tzfewdvLLTw2n
- VMO0MlGYIEQ6heXS8bjdrub8dD89auIpBD5QUrYeu04Qv9ZIHdMADQDFA6BfWbywM1z0
- dQzPmanLOItCTLrPgi/gYZAUXy/Dqg7AH0ipEHw/5t8n5HC/Ywf0gM1EtgrZQw28+JcH
- +S26glDvB9IegcG1WOD/9qIxrwgT61+6szXkj3Has3w4E1fW0x5U1iicDSdgj9iFuDc+
- yFZrc+UvAXcVPhXdL/O9DsCxF0XIvaak9Dn1BSny+0YImjUlWm5hVFe10gkbHMypweBr
- /Kiw==
+ bh=JXhe6IjUT71GEHCmutQaC2+/1yu6puBwUmEvGNZoWZc=;
+ b=qy6c+hnZ6D2O9nFLF3or9yd0Nz/EZ1aBgNc3rb9b68j+wru7jp4RiQhL75BZhaO69n
+ Yufynq+fERZte4D3SM7ibdno1TYPi/ymgkUItjwIv9dk2+SQhJRBDX10ekBE/IZLwjwy
+ MbFbn9Rz91zoyAmp+IuPQtdm3qke1d0xeaSaVbXTXieBO8vWgkz4dfe9xyupehhYcg2h
+ CsNbXXtvj27OPq9QGWmRx9FkKzF1YLepzr0LwbQVipLZx0j6NQOFBCNdX2XttbbgtR/O
+ ff9Y+0iNv3UFpztLbzBgFXchfaSDLdPViVFJBGt9SdUL6bnXoWqlJVF1pK67HW1LsD/6
+ ZfGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717008916; x=1717613716;
+ d=1e100.net; s=20230601; t=1717009334; x=1717614134;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Dsd1KHcCIaJfmjhULjfWq6NQq/DL8Z55szLQp6sjmUM=;
- b=qwxTRzJ55pDG7Xq8m/FsZGUdRHde4Wag5GDBp+OAClrZ0UH29uzjBDjcWpQnoor1qS
- Tf3dkILQCzCYyVCZN26GDOTcBfmAqDXNI/2WzyTtYRWmi19LDVPBD1XRiasy+kcdNB83
- jePHYcO7oLiw4HRVxKXSQuH74qfw/UQGj//Y7+QebthMPUlIeKdzhD+HVCts6itBgp+r
- pchSTnCc/Vq4cG3c39e068Hq1YCqBzTixs6sw9tq9GusEJnU3t9xMBE6pshQJlmrhpBe
- 2J4L6sBYvmrOCm/U4yr+Omq7VxSI2PHinpBoX1Xv3mbXXYzKQmRhOFs1/27epE0GtFpa
- V6/w==
+ bh=JXhe6IjUT71GEHCmutQaC2+/1yu6puBwUmEvGNZoWZc=;
+ b=HRnzuZXfIt/WZfX5tnffO3S0fd3hseQa/5GpsuuqyyT5MwrvcS/mor64peRnlG7DsJ
+ 9hoIjyaDKB4YPrj+8LEGcpamvYGFMC71Tq7+lFiUF+eemZiIloNn7AJcRzJKfV5i1FX8
+ KB26y1EL7MZMcAEQzvrpg6N9CDYugkbjqbr2UslvnVBS5J3AbeE2IgGe/oM5HkkCq5I4
+ Wk8WiDQmt47f1Ed0IzHfdyskNF+PgDzDrrlE5vZzpDRKXyeEdoL+xvK4eRLOXR8Kl5im
+ Ya37lDVf12ex4h5/XhFeFSdq+l6KP+eTsNNf8fL/KHUaOdbJdHmDv3dbSrSAvFewZRNO
+ dvqQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWwdTPFl6ivKBMpX7TMd0QQbJe0h7vjNfnfFbgo6+QwwAM/C/0jsk+7nCYBW9/DBRypw8PcHC7QVYHczZ7Irof1s1M8mw==
-X-Gm-Message-State: AOJu0YxjTM3mDIFejzBBeTPolBRK92JZtrgv+hFFzsb/2gGqATLKxory
- +RsYb17vdkSfpm9rJ0qxLdt0oXRKP/ngHEWdoGzWNlMShwDkhKZMUl85+rWizO0=
-X-Google-Smtp-Source: AGHT+IERs/SYRpMTpn3h16NehLHdP8BfDRIjEKLnnkAvIQ0NJNHpXqJ1JZQw3hPBAiaB23uN4eMyCQ==
-X-Received: by 2002:a50:d749:0:b0:572:a770:1371 with SMTP id
- 4fb4d7f45d1cf-57a17961a11mr9154a12.42.1717008915794; 
- Wed, 29 May 2024 11:55:15 -0700 (PDT)
+ AJvYcCXu7TM0EvRQwpKu6vdUb8uVrUWoZMQ7uLh+yQ0nagi9C9lXJi5mIusbgAXWPul+5qWr4ZPpzJWVT0fnVk0lRnAaCgBE3w==
+X-Gm-Message-State: AOJu0Yx4NtCWXHR1oz0v/uoGnsMyAtFPK4kYpCB8BcfBc+MDMWlMowLP
+ niItBEuQ5uqF2sISOxgd3Kwk3gygT/yNNCGAht6Zo27jrhGcnNpcGQU7R72rTqU=
+X-Google-Smtp-Source: AGHT+IHJxYyUMNc4CTvyxp6B3zzmJ+mNAh3YEScDOJLMIPbWSrCBZvykIWzbC1g1VgQ6LmdSUX8BSw==
+X-Received: by 2002:a17:906:48d8:b0:a65:ab74:1e98 with SMTP id
+ a640c23a62f3a-a65ab74325bmr155229166b.9.1717009334112; 
+ Wed, 29 May 2024 12:02:14 -0700 (PDT)
 Received: from ?IPV6:2a02:8109:aa0d:be00::8bb3? ([2a02:8109:aa0d:be00::8bb3])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-578524bae15sm8791731a12.86.2024.05.29.11.55.14
+ a640c23a62f3a-a626c934fd8sm740362166b.47.2024.05.29.12.02.13
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 29 May 2024 11:55:15 -0700 (PDT)
-Message-ID: <a58ab575-3a61-47fd-a0b7-1f7b0c1e8b40@linaro.org>
-Date: Wed, 29 May 2024 20:55:13 +0200
+ Wed, 29 May 2024 12:02:13 -0700 (PDT)
+Message-ID: <fd581f3d-00a9-4389-a9e5-e1fb8b5b213a@linaro.org>
+Date: Wed, 29 May 2024 21:02:10 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/7] lib: uuid: add UUID v5 support
+Subject: Re: [PATCH v2 6/7] tools: add genguid tool
 To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -78,11 +78,11 @@ Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de
 References: <20240529-b4-dynamic-uuid-v2-0-c26f31057bbe@linaro.org>
- <20240529-b4-dynamic-uuid-v2-1-c26f31057bbe@linaro.org>
- <CAFLszTj2Ea8_oFaewsZ8bjNe3T3T9dfYbvFJ6wsw88B1HqDG8A@mail.gmail.com>
+ <20240529-b4-dynamic-uuid-v2-6-c26f31057bbe@linaro.org>
+ <CAFLszTgtJi+QE4Ry70jDJbqg3rgTMXEqbt-RROQ1kQwR1Qv-Ag@mail.gmail.com>
 Content-Language: en-US
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAFLszTj2Ea8_oFaewsZ8bjNe3T3T9dfYbvFJ6wsw88B1HqDG8A@mail.gmail.com>
+In-Reply-To: <CAFLszTgtJi+QE4Ry70jDJbqg3rgTMXEqbt-RROQ1kQwR1Qv-Ag@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -108,117 +108,29 @@ On 29/05/2024 18:30, Simon Glass wrote:
 > 
 > On Wed, 29 May 2024 at 08:49, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >>
->> Add support for generate version 5 UUIDs, these are determistic and work
-> 
-> spelling
-
-Thanks
-> 
->> by hashing a "namespace" UUID together with some unique data. One intended
->> usecase is to allow for dynamically generate payload UUIDs for UEFI
->> capsule updates, so that supported boards can have their own UUIDs
->> without needing to hardcode them.
+>> Add a tool that can generate GUIDs that match those generated internally
+>> by U-Boot for capsule update fw_images.
+>>
+>> Dynamic UUIDs in U-Boot work by taking a namespace UUID and hashing it
+>> with the board model, compatible, and fw_image name.
+>>
+>> This tool accepts the same inputs and will produce the same GUID as
+>> U-Boot would at runtime.
 >>
 >> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 >> ---
->>   include/uuid.h | 17 +++++++++++++++++
->>   lib/Kconfig    |  8 ++++++++
->>   lib/uuid.c     | 37 +++++++++++++++++++++++++++++++++++++
->>   3 files changed, 62 insertions(+)
->>
+>>   tools/Makefile  |   3 ++
+>>   tools/genguid.c | 154 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+>>   2 files changed, 157 insertions(+)
 > 
-> Can you please mention the tests for this? I believe they are in your
-> last commit?
+> Where is this tool used? Can you add a man page and test?
 
-Yeah will do.
-> 
->> diff --git a/include/uuid.h b/include/uuid.h
->> index f5a941250f48..539affaa47b9 100644
->> --- a/include/uuid.h
->> +++ b/include/uuid.h
->> @@ -10,8 +10,9 @@
->>   #ifndef __UUID_H__
->>   #define __UUID_H__
->>
->>   #include <linux/bitops.h>
->> +#include <linux/kconfig.h>
->>
->>   /*
->>    * UUID - Universally Unique IDentifier - 128 bits unique number.
->>    *        There are 5 versions and one variant of UUID defined by RFC4122
->> @@ -142,8 +143,24 @@ void gen_rand_uuid(unsigned char *uuid_bin);
->>    * @param          - uuid output type: UUID - 0, GUID - 1
->>    */
->>   void gen_rand_uuid_str(char *uuid_str, int str_format);
->>
->> +#if IS_ENABLED(CONFIG_UUID_GEN_V5)
->> +/**
->> + * gen_uuid_v5() - generate UUID v5 from namespace and other seed data.
->> + *
->> + * @namespace:   pointer to UUID namespace salt
->> + * @uuid:        pointer to allocated UUID output
->> + * @...:         NULL terminated list of seed data as pairs of pointers
->> + *               to data and their lengths
->> + */
->> +void gen_uuid_v5(const struct uuid *namespace, struct uuid *uuid, ...);
->> +#else
->> +static inline void gen_uuid_v5(const struct uuid *namespace, struct uuid *uuid, ...)
->> +{
->> +}
->> +#endif
->> +
-[...]
->> +#if IS_ENABLED(CONFIG_UUID_GEN_V5)
->> +void gen_uuid_v5(const struct uuid *namespace, struct uuid *uuid, ...)
-> 
-> Is this in a header file somewhere? It needs a function comment there.
+It currently doesn't have any users, it just allows for pre-generating 
+GUIDs ahead of time for a given board. It might be hooked up to vendor 
+tooling or some usecase like that.
 
-Yes, see directly above where I add it to include/uuid.h
-
-Kind regards,
-> 
->> +{
->> +       sha1_context ctx;
->> +       va_list args;
->> +       const uint8_t *data;
->> +       uint8_t hash[SHA1_SUM_LEN];
->> +       uint32_t tmp;
->> +
->> +       sha1_starts(&ctx);
->> +       /* Hash the namespace UUID as salt */
->> +       sha1_update(&ctx, (unsigned char *)namespace, UUID_BIN_LEN);
->> +       va_start(args, uuid);
->> +
->> +       while ((data = va_arg(args, const uint8_t *))) {
->> +               size_t len = va_arg(args, size_t);
->> +
->> +               sha1_update(&ctx, data, len);
->> +       }
->> +
->> +       va_end(args);
->> +       sha1_finish(&ctx, hash);
->> +
->> +       /* Truncate the hash into output UUID, it is already big endian */
->> +       memcpy(uuid, hash, sizeof(*uuid));
->> +
->> +       /* Configure variant/version bits */
->> +       tmp = be32_to_cpu(uuid->time_hi_and_version);
->> +       tmp = (tmp & ~UUID_VERSION_MASK) | (5 << UUID_VERSION_SHIFT);
->> +       uuid->time_hi_and_version = cpu_to_be32(tmp);
->> +
->> +       uuid->clock_seq_hi_and_reserved &= UUID_VARIANT_MASK;
->> +       uuid->clock_seq_hi_and_reserved |= UUID_VARIANT << UUID_VARIANT_SHIFT;
->> +}
->> +#endif
->> +
->>   #if defined(CONFIG_RANDOM_UUID) || defined(CONFIG_CMD_UUID)
->>   void gen_rand_uuid(unsigned char *uuid_bin)
->>   {
->>          u32 ptr[4];
->>
->> --
->> 2.45.0
->>
+I've somehow escaped learning Groff before now heh, I can give it a go 
+and write a test.
 > 
 > Regards,
 > Simon
