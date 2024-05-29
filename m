@@ -4,90 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2D6BC25B78
-	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 02:47:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B4C3C25B75
+	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 04:21:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B91B88590;
-	Wed, 29 May 2024 04:47:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=testtoast.com
+	by phobos.denx.de (Postfix) with ESMTP id B1D4D88590;
+	Wed, 29 May 2024 06:21:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=testtoast.com header.i=@testtoast.com header.b="nPnzWxFF";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="TET9+Ue6";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZiQmXkUQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26AD4885C6; Wed, 29 May 2024 04:47:53 +0200 (CEST)
-Received: from fhigh8-smtp.messagingengine.com
- (fhigh8-smtp.messagingengine.com [103.168.172.159])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 509DF883B9; Wed, 29 May 2024 06:21:49 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7227C88554
- for <u-boot@lists.denx.de>; Wed, 29 May 2024 04:47:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F34588210
+ for <u-boot@lists.denx.de>; Wed, 29 May 2024 06:21:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=testtoast.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ryan@testtoast.com
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailfhigh.nyi.internal (Postfix) with ESMTP id 430E811400E1;
- Tue, 28 May 2024 22:47:49 -0400 (EDT)
-Received: from imap47 ([10.202.2.97])
- by compute5.internal (MEProxy); Tue, 28 May 2024 22:47:49 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=testtoast.com;
- h=cc:cc:content-type:content-type:date:date:from:from
- :in-reply-to:in-reply-to:message-id:mime-version:references
- :reply-to:subject:subject:to:to; s=fm1; t=1716950869; x=
- 1717037269; bh=BvBDPauIC1DYkzBNK1wKsa/FTIBZeyAC9LV4tlQkQ+4=; b=n
- PnzWxFFsOYYFpviKOvCSRMSzhokRr7xXLNf7jxo7tDlOXStYG0GsaiPmbQpBj14X
- GBgt2XxnFEuyQJVfOFetQUS6hWur8fRHsT37R/EhAl15HU6aKV/YVB7U1SV+6Nkm
- tOPBGaRRwC9sazVZL7bu86VyRVGMBhy3j1c/5fFiaO9UY8YHRSftXkogcynVz82j
- OMKQYrxM5nHDW0hnik5i4dWLh8zzna3zBXrUtXXwOUaKUIGD6oFruyukhVO8kwld
- cUaEolmVgpia1Wo2Krr2DyvvpUd+CepAFijNp7Dnr6N3tOcQOMiAE4aOu+LkA590
- 7pwKhslRT6cNs9tb0AJcw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:content-type:date:date
- :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
- :message-id:mime-version:references:reply-to:subject:subject:to
- :to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm1; t=1716950869; x=1717037269; bh=BvBDPauIC1DYkzBNK1wKsa/FTIBZ
- eyAC9LV4tlQkQ+4=; b=TET9+Ue6JY2LdlHIlacDrkKQcP4B23ZS3nA2NoMrUnND
- +9r1uukYqafRU+DIoLKsdihf62O3ISA5hePLXNLBy4bB2ULXu09eOhgib7smRUyG
- YSoAgXvUx4vj68RC4URGv0VGCs/rLXvPwzpbT6Axa0yDzCpN663mAbxu0moaMppa
- bH8ZOxD3B6mtJ9kFLwTmc3LcsSBylIAnxUjHZScnvqMdnpF0Cd0zJXacUiV/M+Lm
- ZkTM4Z8TphCnN73ViKd5B1q8g6kO1xTqSJkLD1Wow5jG6jybj+MTA7o4VH0cH0r+
- hHYrqYMAXThmMtzl5pIkB04HI4HbG8Oe9ZJ/oDTtxA==
-X-ME-Sender: <xms:VJdWZiVMawFH1FZFSF8pSw77D1EFYgLrrZkmt_XmFo3qKUT30uJydQ>
- <xme:VJdWZunFKpFmQ0xso5U_556C7hTC9PXzcmNfAAh76Z72h9fptWqqb2kxQyNBVH7Je
- bR_fRGXu_XHOjMnCQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdejledgiedvucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepofgfggfkjghffffhvfevufgtsehttdertderredtnecuhfhrohhmpedftfih
- rghnucghrghlkhhlihhnfdcuoehrhigrnhesthgvshhtthhorghsthdrtghomheqnecugg
- ftrfgrthhtvghrnhephedvveeigedujeeufeegffehhfffveduhfeijefgtdffteelgfet
- ueevieduieejnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrh
- homheprhihrghnsehtvghsthhtohgrshhtrdgtohhm
-X-ME-Proxy: <xmx:VJdWZmbyMbUFZc-Tezk_WzLuCQU70SpM3LlhbiCUZIEhzWAvfMYA0w>
- <xmx:VJdWZpVF9zSQtIxl05-MxzvSkgqlQ-lPkOeW1bHrLSzVRAdSA95Wkg>
- <xmx:VJdWZslCbE1lTq-7mSbU_ZsoOa2j006Ms23y6hoLm1nNbMmOKGnBhg>
- <xmx:VJdWZuehS5uyDqFDNnCpi-SzjGzplB6slwEeDxKLF-DVfgFp_r4TkA>
- <xmx:VZdWZtC01HEiE2XQ0dljeyOtCY2YqCmpozWyP1FQsRLYZobN-XmS4q9Y>
-Feedback-ID: idc0145fc:Fastmail
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
- id D1DEFA60078; Tue, 28 May 2024 22:47:48 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.11.0-alpha0-491-g033e30d24-fm-20240520.001-g033e30d2
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44T4LiVx088646;
+ Tue, 28 May 2024 23:21:44 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1716956504;
+ bh=tMlBXwKvoKMD+6xdZAx1Lf+szs4TYbyuUgaZxS85mVc=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=ZiQmXkUQcuXKv8ntfo21C6LYZsLIK43r4pv0kJhW03yBvXQrxzOsA7Iw8bWnFCbXo
+ dt3W1/y0zuZT6KdzYWTd1WMHNpSHVnIk3hBLypEr2MmMzQaC7XqTA2hR0W1YNV+Oz5
+ Z02qmGGM+O5TqtrmxYIlOdGmXgyaSO58EvvV43R4=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44T4LiFe108621
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 28 May 2024 23:21:44 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 28
+ May 2024 23:21:44 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 28 May 2024 23:21:44 -0500
+Received: from [10.249.141.75] ([10.249.141.75])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44T4LdGr048704;
+ Tue, 28 May 2024 23:21:40 -0500
+Message-ID: <c1821e3d-4f15-4ce9-8301-20a4b57185d9@ti.com>
+Date: Wed, 29 May 2024 09:51:39 +0530
 MIME-Version: 1.0
-Message-Id: <e71e336b-a621-4c11-93b5-2485fe24bbaa@app.fastmail.com>
-In-Reply-To: <20240509231316.11391-1-andre.przywara@arm.com>
-References: <20240509231316.11391-1-andre.przywara@arm.com>
-Date: Wed, 29 May 2024 14:47:28 +1200
-From: "Ryan Walklin" <ryan@testtoast.com>
-To: "Andre Przywara" <andre.przywara@arm.com>,
- "Jagan Teki" <jagan@amarulasolutions.com>
-Cc: u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
- "Chris Morgan" <macromorgan@hotmail.com>
-Subject: Re: [PATCH] sunxi: spl: h616: fix booting from high MMC offset
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/7] drivers: misc: k3_avs: Use soc_match_device
+ instead of compatible.
+To: Manorit Chawdhry <m-chawdhry@ti.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>
+CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Keerthy J
+ <j-keerthy@ti.com>, Aniket Limaye <a-limaye@ti.com>, Tom Rini
+ <trini@konsulko.com>, Vignesh Raghavendra <vigneshr@ti.com>, Andrew Davis
+ <afd@ti.com>, Nishanth Menon <nm@ti.com>
+References: <20240528-b4-upstream-j721s2-avs-v2-0-df940f2309d0@ti.com>
+ <20240528-b4-upstream-j721s2-avs-v2-2-df940f2309d0@ti.com>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20240528-b4-upstream-j721s2-avs-v2-2-df940f2309d0@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,20 +85,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Manorit
+
+On 5/28/2024 1:43 PM, Manorit Chawdhry wrote:
+> vd_data remains the same for most of the SoCs but there are some
+> differences in power domains and clocks that don't need a change to
+> compatible and can be handled at SoC level.
+>
+> Change the data population logic from compatible to soc_match_device to
+> add support for newer devices.
+>
+> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> ---
+>   drivers/misc/k3_avs.c | 189 +++++++++++++++++++++++++++-----------------------
+>   1 file changed, 103 insertions(+), 86 deletions(-)
+>
+> diff --git a/drivers/misc/k3_avs.c b/drivers/misc/k3_avs.c
+> index 87471cc3b16a..a0d7bb7595b3 100644
+> --- a/drivers/misc/k3_avs.c
+> +++ b/drivers/misc/k3_avs.c
+> @@ -12,6 +12,7 @@
+>   #include <asm/io.h>
+>   #include <i2c.h>
+>   #include <k3-avs.h>
+> +#include <soc.h>
+>   #include <dm/device_compat.h>
+>   #include <linux/bitops.h>
+>   #include <linux/delay.h>
+> @@ -111,6 +112,95 @@ static u32 am6_efuse_xlate(struct k3_avs_privdata *priv, int idx, int opp)
+>   	return 300000 + 20000 * val;
+>   }
+>   
+> [..]
+> +const struct soc_attr vtm_soc_list[] = {
+> +	{ .family = "AM65X", .data = (void *)&am654_vd_config },
+> +	{ .family = "J721E", .data = (void *)&j721e_vd_config },
+> +	{ .family = "J7200", .data = (void *)&j721e_vd_config },
+> +	{}
+> +};
+
+We may end up updating this driver for each SOC family,
+
+Even if VTM IP remain same in two SOC family.
+
+In my view, driver should be specific to IP not specific to SOC or SOC 
+family.
 
 
-On Fri, 10 May 2024, at 11:13 AM, Andre Przywara wrote:
-
-> Extend the existing offset calculation code to consider the different
-> sector offset when running on an H616 SoC. This allows to load U-Boot
-> on any H616 device when the SPL is not located at 8KB.
-
-Thanks Andre,
-
-Confirmed with an H700-based board and u-boot at the 512-sector/256KB offset.
-
-Tested-by: Ryan Walklin <ryan@testtoast.com>
-
-Regards,
-
-Ryan
+> [..]
+>
