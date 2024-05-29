@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B50ADC27C43
-	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 13:25:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E6C8C25B75
+	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 13:25:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A8BD8860E;
-	Wed, 29 May 2024 15:25:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C661288624;
+	Wed, 29 May 2024 15:25:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="y3APvVCs";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CaT8kZc5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26C77885E1; Wed, 29 May 2024 15:25:04 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 9DE4B885E1; Wed, 29 May 2024 15:25:05 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA7C5885F7
- for <u-boot@lists.denx.de>; Wed, 29 May 2024 15:25:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E76088582
+ for <u-boot@lists.denx.de>; Wed, 29 May 2024 15:25:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-choudhary@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44TDOuWU053735;
- Wed, 29 May 2024 08:24:56 -0500
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44TDOvAb001492;
+ Wed, 29 May 2024 08:24:57 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1716989096;
- bh=DvX2gaQWlhycN1dEcAV3zE10OagLNXgsw1/855rvT1A=;
+ s=ti-com-17Q1; t=1716989097;
+ bh=C2PyGDcwKBV4xCBh0myM4PeGQZjTIHuv0wJb2n33wG8=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=y3APvVCsVBeLw+sTk0G1b/pIk4jpJ5fNPoaCwSf7M4pK4821JY4hUssNRgnu3q6s8
- hkW83dBnwi+HfYEZS5KgeXKCr0e5ziKhtIr7SPR6b1lEGcQmICWc7xUpSG2R+CmYnF
- E/VNphKCc8QU/HYFP0aBqKdFxUSywgOFna8yW0kQ=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44TDOtg8019867
+ b=CaT8kZc5AQU4TyieQeCkiRVVUTLchANlCksdS27/cnIofYGHUlROmFkKhiB9kPLiU
+ rtKHkG5Jeg2SjVAG63zLs7QCzRmbOb9QH//4Dhn890MHhkN+j0CQFZ1N9yZQArxKd1
+ UVnGlhcJ7IY/IfUf34vgPpfrobQ/yQVVT03rViqA=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44TDOvxZ117024
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 29 May 2024 08:24:56 -0500
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 29 May 2024 08:24:57 -0500
+Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 29
- May 2024 08:24:55 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ May 2024 08:24:57 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 29 May 2024 08:24:55 -0500
+ Frontend Transport; Wed, 29 May 2024 08:24:57 -0500
 Received: from localhost (jayesh-hp-probook-440-g8-notebook-pc.dhcp.ti.com
  [172.24.227.102])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44TDOs5K002230;
- Wed, 29 May 2024 08:24:55 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44TDOu28045023;
+ Wed, 29 May 2024 08:24:56 -0500
 From: Jayesh Choudhary <j-choudhary@ti.com>
 To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <jh80.chung@samsung.com>,
  <lukma@denx.de>, <seanga2@gmail.com>, <vaishnav.a@ti.com>,
  <n-francis@ti.com>, <u-kumar1@ti.com>, <sumit.garg@linaro.org>,
  <afd@ti.com>, <j-choudhary@ti.com>
 CC: <vigneshr@ti.com>, <nm@ti.com>, <bb@ti.com>, <rogerq@kernel.org>
-Subject: [PATCH 04/14] clk: ti: clk-k3: use IS_ENABLED macro and fix the
- clock-data order
-Date: Wed, 29 May 2024 18:54:38 +0530
-Message-ID: <20240529132448.459330-5-j-choudhary@ti.com>
+Subject: [PATCH 05/14] power: domain: ti: Fix the order for platform data
+ entries
+Date: Wed, 29 May 2024 18:54:39 +0530
+Message-ID: <20240529132448.459330-6-j-choudhary@ti.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240529132448.459330-1-j-choudhary@ti.com>
 References: <20240529132448.459330-1-j-choudhary@ti.com>
@@ -84,79 +84,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use IS_ENABLED macro for the platform clock-data list and add them
-in alphabetical order.
+Add the power domain platform data entries in alphabetical order.
 
-Reviewed-by: Bryan Brattlof <bb@ti.com>
 Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
 ---
- drivers/clk/ti/clk-k3.c | 41 +++++++++++++++++++++--------------------
- 1 file changed, 21 insertions(+), 20 deletions(-)
+ drivers/power/domain/ti-power-domain.c | 36 +++++++++++++-------------
+ 1 file changed, 18 insertions(+), 18 deletions(-)
 
-diff --git a/drivers/clk/ti/clk-k3.c b/drivers/clk/ti/clk-k3.c
-index 41e5022ea0..9e17755c24 100644
---- a/drivers/clk/ti/clk-k3.c
-+++ b/drivers/clk/ti/clk-k3.c
-@@ -59,6 +59,24 @@ static void clk_add_map(struct ti_clk_data *data, struct clk *clk,
+diff --git a/drivers/power/domain/ti-power-domain.c b/drivers/power/domain/ti-power-domain.c
+index b059dd3737..362fae86a2 100644
+--- a/drivers/power/domain/ti-power-domain.c
++++ b/drivers/power/domain/ti-power-domain.c
+@@ -71,6 +71,24 @@ static void lpsc_write(u32 val, struct ti_lpsc *lpsc, u32 reg)
  }
  
- static const struct soc_attr ti_k3_soc_clk_data[] = {
+ static const struct soc_attr ti_k3_soc_pd_data[] = {
 +#if IS_ENABLED(CONFIG_SOC_K3_AM625)
 +	{
 +		.family = "AM62X",
-+		.data = &am62x_clk_platdata,
++		.data = &am62x_pd_platdata,
 +	},
 +#endif
 +#if IS_ENABLED(CONFIG_SOC_K3_AM62A7)
 +	{
 +		.family = "AM62AX",
-+		.data = &am62ax_clk_platdata,
++		.data = &am62ax_pd_platdata,
 +	},
 +#endif
 +#if IS_ENABLED(CONFIG_SOC_K3_AM62P5)
 +	{
 +		.family = "AM62PX",
-+		.data = &am62px_clk_platdata,
++		.data = &am62px_pd_platdata,
 +	},
 +#endif
  #if IS_ENABLED(CONFIG_SOC_K3_J721E)
  	{
  		.family = "J721E",
-@@ -68,35 +86,18 @@ static const struct soc_attr ti_k3_soc_clk_data[] = {
- 		.family = "J7200",
- 		.data = &j7200_clk_platdata,
- 	},
--#elif CONFIG_SOC_K3_J721S2
-+#endif
-+#if IS_ENABLED(CONFIG_SOC_K3_J721S2)
- 	{
- 		.family = "J721S2",
- 		.data = &j721s2_clk_platdata,
+@@ -87,29 +105,11 @@ static const struct soc_attr ti_k3_soc_pd_data[] = {
+ 		.data = &j721s2_pd_platdata,
  	},
  #endif
--#ifdef CONFIG_SOC_K3_AM625
+-#if IS_ENABLED(CONFIG_SOC_K3_AM625)
 -	{
 -		.family = "AM62X",
--		.data = &am62x_clk_platdata,
+-		.data = &am62x_pd_platdata,
 -	},
 -#endif
--#ifdef CONFIG_SOC_K3_AM62A7
+-#if IS_ENABLED(CONFIG_SOC_K3_AM62A7)
 -	{
 -		.family = "AM62AX",
--		.data = &am62ax_clk_platdata,
+-		.data = &am62ax_pd_platdata,
 -	},
 -#endif
--#ifdef CONFIG_SOC_K3_J784S4
-+#if IS_ENABLED(CONFIG_SOC_K3_J784S4)
+ #if IS_ENABLED(CONFIG_SOC_K3_J784S4)
  	{
  		.family = "J784S4",
- 		.data = &j784s4_clk_platdata,
+ 		.data = &j784s4_pd_platdata,
  	},
 -#endif
--#ifdef CONFIG_SOC_K3_AM62P5
+-#if IS_ENABLED(CONFIG_SOC_K3_AM62P5)
 -	{
 -		.family = "AM62PX",
--		.data = &am62px_clk_platdata,
+-		.data = &am62px_pd_platdata,
 -	},
  #endif
  	{ /* sentinel */ }
