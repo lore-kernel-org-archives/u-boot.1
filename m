@@ -4,69 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24C96C25B75
-	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 13:27:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 563D8C25B75
+	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 13:36:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 571B3885AF;
-	Wed, 29 May 2024 15:25:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id AB9CE884FF;
+	Wed, 29 May 2024 15:36:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UhVjUt8V";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="zvnEwvmH";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="Y7zIvq3l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E087884FF; Wed, 29 May 2024 15:25:21 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 705B28854B; Wed, 29 May 2024 15:36:49 +0200 (CEST)
+Received: from wfout4-smtp.messagingengine.com
+ (wfout4-smtp.messagingengine.com [64.147.123.147])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 67D1A88635
- for <u-boot@lists.denx.de>; Wed, 29 May 2024 15:25:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 813BE8844E
+ for <u-boot@lists.denx.de>; Wed, 29 May 2024 15:36:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-choudhary@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44TDPBlA049047;
- Wed, 29 May 2024 08:25:11 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1716989111;
- bh=SkgAJi130ftxTMkykocGahbISOracnyzAX6I2RZntAs=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=UhVjUt8V1dywtAIidAPMt0tTUzA5VDxLIUT1rxuPQAu7LTnqFynY4poRr0zCgLDnH
- +Fo0DXeoScXwI1X8myxTNKW4KOMfjzJJOcu6AQX2TmAi3KiWF0x/xXYSk/mkI6T6Dx
- cz/rfhitNtmw1n6Dcik73F7WPKhT4nWkkWkeJOXc=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44TDPB4F068500
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 29 May 2024 08:25:11 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 29
- May 2024 08:25:10 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 29 May 2024 08:25:10 -0500
-Received: from localhost (jayesh-hp-probook-440-g8-notebook-pc.dhcp.ti.com
- [172.24.227.102])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44TDPAx0046170;
- Wed, 29 May 2024 08:25:10 -0500
-From: Jayesh Choudhary <j-choudhary@ti.com>
-To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <jh80.chung@samsung.com>,
- <lukma@denx.de>, <seanga2@gmail.com>, <vaishnav.a@ti.com>,
- <n-francis@ti.com>, <u-kumar1@ti.com>, <sumit.garg@linaro.org>,
- <afd@ti.com>, <j-choudhary@ti.com>
-CC: <vigneshr@ti.com>, <nm@ti.com>, <bb@ti.com>, <rogerq@kernel.org>
-Subject: [PATCH 14/14] doc: board: ti: Add J722S-EVM documentation
-Date: Wed, 29 May 2024 18:54:48 +0530
-Message-ID: <20240529132448.459330-15-j-choudhary@ti.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240529132448.459330-1-j-choudhary@ti.com>
-References: <20240529132448.459330-1-j-choudhary@ti.com>
+ spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+ by mailfout.west.internal (Postfix) with ESMTP id DFBD61C00114;
+ Wed, 29 May 2024 09:36:41 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute4.internal (MEProxy); Wed, 29 May 2024 09:36:42 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
+ cc:cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:message-id:mime-version:reply-to
+ :subject:subject:to:to; s=fm2; t=1716989801; x=1717076201; bh=4S
+ oU/pVCUAedlGy1X80gejayGFRQwefcFPKjtOpl20s=; b=zvnEwvmHthDYBMp4Iu
+ zg/CzhBx0c6J7jfpXPoMZ3frLEMC7RZxwQgJkk0ITD8wzNqVcGY0UVTyXB9RXdcf
+ aKFb+mokODT+cXYx1knw8idyDGjaYTfGp5l3q3asJmlyCGur/BcM4b231IcM/Sgz
+ foFkJfQn0QG8/0sraXiTHAs2+zgF8x/f+atlQfUZ1gBel4kRISB+0igYS3H20MXV
+ 9SmGi8ijRHAJRhbTp0cIrhdzgvd5LhhIt8KtQyXguwFsnY5crdwsvzWyejIsGTkQ
+ Hn6pX+tGP7hAFv2Sy3hOlqF6tVdV+id7EobQY83AC7HfHY5amKVI47+UaYu3q/3L
+ K/mQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:message-id:mime-version:reply-to:subject
+ :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+ :x-sasl-enc; s=fm1; t=1716989801; x=1717076201; bh=4SoU/pVCUAedl
+ Gy1X80gejayGFRQwefcFPKjtOpl20s=; b=Y7zIvq3l1XyaOD+EFxLRZVvYgOSLe
+ K7gELMpCKy+uN3Rlmnizm9zuvwObXvRaJS9hLC8pBhNhmOagA7H1yL8UmIY5a5cA
+ YzT5H8j4wZYju5VnszRwwY0dQ+fdyOacvPI5RaujHKXOa9ER66H08yMqdNtc2/Gq
+ UUzLEMF3AKmLWLUOwx7Z/jwdbgKdr7NmOQZ8AJF5FE2uLRwfLWTP/k5ZOGJP1Yd7
+ maRRaRpRrVNJNHXlqbaDe3OLhRnWNxK99RriVbXpCxtAjw4i+vNG9N2lQJdIlhIB
+ ueWUMoBkvEeGcjeOOYeVmv8BoE228NzbqXR7HvwTPEDccBqN3b4Z3Z6EQ==
+X-ME-Sender: <xms:aS9XZqJhJIQgLYV_Jluh6qXPr33aAKcEwlBTpzQ4TruLxAjTRzTBAw>
+ <xme:aS9XZiI6g7hUrr4y-0OVVB2a8DEll8aDTvPGPPAcUxMDmrUo8gTQA6x9obgpO5jX5
+ y_TUqes7ShwnCW25Ck>
+X-ME-Received: <xmr:aS9XZquk0oATCqsyIACTHrtlDBVFdhGEemRUbk8CFJJGUx_oT8iqFq8>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdekuddgieegucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhephfffufggtgfgkffvvefosehtjeertdertdejnecuhfhrohhmpeflihgrgihu
+ nhcujggrnhhguceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomheqnecugg
+ ftrfgrthhtvghrnhephfffgeejgfejieeugffgudegvdekffevgeeuteetgeejveeiteei
+ vedvffehlefgnecuffhomhgrihhnpehkvghrnhgvlhdrohhrghenucevlhhushhtvghruf
+ hiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjihgrgihunhdrhigrnhhgsehf
+ lhihghhorghtrdgtohhm
+X-ME-Proxy: <xmx:aS9XZvYqKXbOWPw7JHSMr7Anz3lKGcazILmSi80S9QQwd36eHzgJng>
+ <xmx:aS9XZhYTLHdxoZ11KPFIqszCq5ONWPLfClVlkabmN_LWo8SAzoqdAA>
+ <xmx:aS9XZrCAGIRWrzpKfTvkuv78oePs1l8L6VCXO2omnmPikpm-Uh0x_w>
+ <xmx:aS9XZnZ86va0KyDKURvLTQb2fN0NcM8-m8UVFNBcHLgb4mTHLaDepA>
+ <xmx:aS9XZkyKMECkWEOyC4evARvuOJyx9DUXqI2gB_8IaTG0tbv2seE3j1CY>
+Feedback-ID: ifd894703:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 29 May 2024 09:36:40 -0400 (EDT)
+From: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Date: Wed, 29 May 2024 14:36:39 +0100
+Subject: [PATCH] doc: Add UEFI supplement document
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20240529-efi-spec-v1-1-0668e4d19683@flygoat.com>
+X-B4-Tracking: v=1; b=H4sIAGYvV2YC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIxMDUyNL3dS0TN3igtRkXYPURDNTc0sLUyNzIyWg8oIioFQF2Kjo2NpaAD1
+ KcEZaAAAA
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4700;
+ i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
+ bh=lsCFOcxW4VQ4QhtXUrJO7/m8R+0AF0yBaqVsa354dgs=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhrRw/Qze+ZetrXn/Pr456+NRD+FL+TPbAts/fmRi4Mu1W
+ mP9yWlFRykLgxgXg6yYIkuIgFLfhsaLC64/yPoDM4eVCWQIAxenAEzELIbhf22Nn+axwNSeX+0b
+ T319xtrDoq+z1mWR7ucrRhcEP1YdvMnI0L9wpshKG65AwSk3qtt9uDf+U5n6bJ29/Cy3f6vmPFa
+ fzQ4A
+X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
+ fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,293 +116,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce basic documentation for the J722S-EVM.
+Add UEFI supplement document to define some behaviours
+on architectures not covered by the original specification.
 
-Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
+Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- doc/board/ti/j722s_evm.rst | 260 +++++++++++++++++++++++++++++++++++++
- doc/board/ti/k3.rst        |   1 +
- 2 files changed, 261 insertions(+)
- create mode 100644 doc/board/ti/j722s_evm.rst
+Hi all,
 
-diff --git a/doc/board/ti/j722s_evm.rst b/doc/board/ti/j722s_evm.rst
+This document is in response to discussion at [1]. It is produced
+based on my attempt to port U-Boot UEFI to MIPS and Xtensa. I also
+plan to try m68k.
+
+Please review
+
+Thanks
+[1]: https://lore.kernel.org/u-boot/CAC_iWjLbY6+FaUYQw2Zv5y5byCnXRHxfzvrFf1dMyJX+ANP9VQ@mail.gmail.com/
+---
+ doc/develop/uefi/index.rst           |  1 +
+ doc/develop/uefi/uefi_supplement.rst | 73 ++++++++++++++++++++++++++++++++++++
+ 2 files changed, 74 insertions(+)
+
+diff --git a/doc/develop/uefi/index.rst b/doc/develop/uefi/index.rst
+index e26b1fbe05c5..a274fff88754 100644
+--- a/doc/develop/uefi/index.rst
++++ b/doc/develop/uefi/index.rst
+@@ -11,6 +11,7 @@ can be run an UEFI payload.
+    :maxdepth: 2
+ 
+    uefi.rst
++   uefi_supplement.rst
+    u-boot_on_efi.rst
+    iscsi.rst
+    fwu_updates.rst
+diff --git a/doc/develop/uefi/uefi_supplement.rst b/doc/develop/uefi/uefi_supplement.rst
 new file mode 100644
-index 0000000000..10b243908a
+index 000000000000..cb20cd290912
 --- /dev/null
-+++ b/doc/board/ti/j722s_evm.rst
-@@ -0,0 +1,260 @@
-+.. SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
-+.. sectionauthor:: Jayesh Choudhary <j-choudhary@ti.com>
++++ b/doc/develop/uefi/uefi_supplement.rst
+@@ -0,0 +1,73 @@
++.. SPDX-License-Identifier: GPL-2.0+
++.. Copyright (c) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
 +
-+J722S-EVM Platform
-+==================
++U-Boot Supplement to UEFI Specifications
++========================================
 +
-+The J722S is a family of  application processors built for Automotive and
-+Linux Application development. J722S family of SoCs is a superset of the
-+AM62P SoC family and shares similar memory map, thus the nodes are being
-+reused from AM62P includes instead of duplicating the definitions.
-+
-+Some highlights of J722S SoC (in addition to AM62P SoC features) are:
-+
-+* Two Cortex-R5F for Functional Safety or general-purpose usage and
-+  two C7x floating point vector DSP with Matrix Multiply Accelerator
-+  for deep learning.
-+
-+* Vision Processing Accelerator (VPAC) with image signal processor
-+  and Depth and Motion Processing Accelerator (DMPAC).
-+
-+* 7xUARTs, 3xSPI, 5xI2C, 2xUSB2, 2xCAN-FD, 3xMMC and SD, GPMC for
-+  NAND/FPGA connection, OSPI memory controller, 5xMcASP for audio,
-+  4xCSI-RX for Camera, 1 PCIe Gen3 controller, USB3.0 eCAP/eQEP,
-+  ePWM, among other peripherals.
-+
-+For those interested, more details about this SoC can be found in the
-+Technical Reference Manual here: https://www.ti.com/lit/zip/sprujb3
-+
-+Boot Flow:
++Motivation
 +----------
 +
-+The bootflow is exactly the same as all SoCs in the am62xxx extended SoC
-+family. Below is the pictorial representation:
++The UEFI specifications are designed to be platform-independent, enabling the
++implementation of UEFI-like API support across various architectures. However,
++some platform-dependent aspects and constraints remain. This document provides
++a supplement to the UEFI specifications for U-Boot, clarifying these platform
++dependent details for architectures not covered by the original specifications.
 +
-+.. image:: img/boot_diagram_k3_current.svg
-+  :alt: Boot flow diagram
-+
-+- Here TIFS acts as master and provides all the critical services. R5/A53
-+  requests TIFS to get these services done as shown in the above diagram.
-+
-+Sources:
-+--------
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_boot_sources
-+    :end-before: .. k3_rst_include_end_boot_sources
-+
-+Build procedure:
-+----------------
-+
-+0. Setup the environment variables:
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_common_env_vars_desc
-+    :end-before: .. k3_rst_include_end_common_env_vars_desc
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_board_env_vars_desc
-+    :end-before: .. k3_rst_include_end_board_env_vars_desc
-+
-+Set the variables corresponding to this platform:
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_common_env_vars_defn
-+    :end-before: .. k3_rst_include_end_common_env_vars_defn
-+
-+.. code-block:: bash
-+
-+ $ export UBOOT_CFG_CORTEXR=j722s_evm_r5_defconfig
-+ $ export UBOOT_CFG_CORTEXA=j722s_evm_a53_defconfig
-+ $ export TFA_BOARD=lite
-+ $ export OPTEE_PLATFORM=k3-am62x
-+ $ export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
-+
-+.. j722s_evm_rst_include_start_build_steps
-+
-+1. Trusted Firmware-A:
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_tfa
-+    :end-before: .. k3_rst_include_end_build_steps_tfa
-+
-+
-+2. OP-TEE:
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_optee
-+    :end-before: .. k3_rst_include_end_build_steps_optee
-+
-+3. U-Boot:
-+
-+* 3.1 R5:
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_spl_r5
-+    :end-before: .. k3_rst_include_end_build_steps_spl_r5
-+
-+* 3.2 A53:
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_uboot
-+    :end-before: .. k3_rst_include_end_build_steps_uboot
-+.. j722s_evm_rst_include_end_build_steps
-+
-+Target Images
-+--------------
-+
-+In order to boot we need tiboot3.bin, tispl.bin and u-boot.img.  Each SoC
-+variant (HS-FS, HS-SE) requires a different source for these files.
-+
-+ - HS-FS
-+
-+        * tiboot3-j722s-hs-fs-evm.bin from step 3.1
-+        * tispl.bin, u-boot.img from step 3.2
-+
-+ - HS-SE
-+
-+        * tiboot3-j722s-hs-evm.bin from step 3.1
-+        * tispl.bin, u-boot.img from step 3.2
-+
-+Image formats:
-+--------------
-+
-+- tiboot3.bin
-+
-+.. image:: img/multi_cert_tiboot3.bin.svg
-+  :alt: tiboot3.bin image format
-+
-+- tispl.bin
-+
-+.. image:: img/dm_tispl.bin.svg
-+  :alt: tispl.bin image format
-+
-+A53 SPL DDR Memory Layout
++Architectural Conventions
 +-------------------------
 +
-+.. j722s_evm_rst_include_start_ddr_mem_layout
++The UEFI specifications cover IA32, X64, ARM, AARCH64, RISC-V, LoongArch, and
++Itanium architectures. This document extends the UEFI specifications to include
++all architectures supported by U-Boot.
 +
-+This provides an overview memory usage in A53 SPL stage.
++The following conventions are used for these architectures:
 +
-+.. list-table::
-+   :widths: 16 16 16
-+   :header-rows: 1
++- For architectures with multiple ABIs, we adhere to the calling conventions
++  used by the Linux kernel for the same architecture.
 +
-+   * - Region
-+     - Start Address
-+     - End Address
++- Optional CPU registers (floating-point, SIMD) are excluded from calling
++  conventions. However, the UEFI payload should be able to utilize them if
++  available.
 +
-+   * - EMPTY
-+     - 0x80000000
-+     - 0x80080000
++- Control is handed over to the UEFI payload at the privilege level used
++  by the Linux kernel for the same architecture.
 +
-+   * - TEXT BASE
-+     - 0x80080000
-+     - 0x800d8000
++- Identity mapping (i.e., VA == PA mapping) is preferred for UEFI. However,
++  this may not be possible for some architectures. In such cases, if the
++  processor supports a default linear translation, it should be used.
 +
-+   * - EMPTY
-+     - 0x800d8000
-+     - 0x80477660
++- Endianness: UEFI specifications enforce little-endian architectures.
++  However, U-Boot supports both little-endian and big-endian architectures.
++  For big-endian architectures, UEFI data structures should be stored in
++  native endianness, with exceptions explicitly specified.
 +
-+   * - STACK
-+     - 0x80477660
-+     - 0x80477e60
++UEFI Images
++-----------
 +
-+   * - GD
-+     - 0x80477e60
-+     - 0x80478000
++The UEFI specifications define the PE/COFF image format for UEFI applications.
++U-Boot extends this format as follows:
 +
-+   * - MALLOC
-+     - 0x80478000
-+     - 0x80480000
++- **PE32+ Machine Type**: UEFI specifications define machine types for supported
++  architectures. For machines not covered by UEFI specifications, we use the
++  machine type defined by the Microsoft PE/COFF specification if possible.
++  Otherwise, we use the ``IMAGE_FILE_MACHINE_UNKNOWN`` (0) machine type.
++  U-Boot should always accept ``IMAGE_FILE_MACHINE_UNKNOWN`` as a valid
++  machine type.
 +
-+   * - EMPTY
-+     - 0x80480000
-+     - 0x80a00000
++- **Header Endianness**: PE/COFF header data fields are always stored as
++  little-endian, regardless of the target architecture's endianness.
 +
-+   * - BSS
-+     - 0x80a00000
-+     - 0x80a80000
++- **DOS Stub**: To accommodate various boot image formats, we relax the requirement
++  for a DOS stub in the UEFI image. U-Boot should accept UEFI images without a DOS
++  stub and MZ signature. However, U-Boot still expects the PE/COFF header at the
++  file offset specified at offset 0x3C.
 +
-+   * - BLOBS
-+     - 0x80a80000
-+     - 0x80d00400
++I/O Device Access
++-----------------
 +
-+   * - EMPTY
-+     - 0x80d00400
-+     - 0x81000000
-+.. j722s_evm_rst_include_end_ddr_mem_layout
++UEFI specifications define the EFI_DEVICE_IO_PROTOCOL and EFI_PCI_IO_PROTOCOL
++for accessing I/O devices. U-Boot extends these specifications as follows:
 +
-+Switch Setting for Boot Mode
-+----------------------------
-+
-+Boot Mode pins provide means to select the boot mode and options before the
-+device is powered up. After every POR, they are the main source to populate
-+the Boot Parameter Tables.
-+
-+The following table shows some common boot modes used on J722S-EVM
-+platform. More details can be found in the Technical Reference Manual:
-+https://www.ti.com/lit/zip/sprujb3 under the `Boot Mode Pins` section.
-+
-+.. note::
-+
-+   This device is very new. Currently only UART boot is available while
-+   we continue to add support for the other bootmodes.
-+
-+.. list-table:: Boot Modes
-+   :widths: 16 16 16
-+   :header-rows: 1
-+
-+   * - Switch Label
-+     - SW3: 12345678
-+     - SW4: 12345678
-+
-+   * - SD
-+     - 11000010
-+     - 01000000
-+
-+   * - OSPI
-+     - 11001110
-+     - 00000000
-+
-+   * - EMMC
-+     - 11010010
-+     - 00000000
-+
-+   * - UART
-+     - 11011100
-+     - 00000000
-+
-+   * - USB DFU
-+     - 11001010
-+     - 00000000
-+
-+For SW2 and SW1, the switch state in the "ON" position = 1.
-+
-+Debugging U-Boot
-+----------------
-+
-+See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
-+detailed setup information.
-+
-+.. warning::
-+
-+  **OpenOCD support after**: v0.12.0
-+
-+  While support for the entire K3 generation including the am62xxx
-+  extended family was added before v0.12.0, the tcl scripts for the
-+  am62px have been accepted and will be available in the next release of
-+  OpenOCD. It may be necessary to build OpenOCD from source depending on
-+  the version your distribution has packaged.
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_openocd_connect_XDS110
-+    :end-before: .. k3_rst_include_end_openocd_connect_XDS110
-+
-+To start OpenOCD and connect to the board
-+
-+.. code-block:: bash
-+
-+  openocd -f board/ti_j722sevm.cfg
-diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-index a1c01d1cf0..eba0f0e3e4 100644
---- a/doc/board/ti/k3.rst
-+++ b/doc/board/ti/k3.rst
-@@ -42,6 +42,7 @@ K3 Based SoCs
-    ../beagle/j721e_beagleboneai64
-    j721e_evm
-    j721s2_evm
-+   j722s_evm
-    j784s4_evm
- 
- Boot Flow Overview
++- All I/O access is performed using the CPU's native endianness.
++  For big-endian architectures, U-Boot should convert data to/from little-endian
++  before/after accessing I/O devices.
+
+---
+base-commit: 46ff00bea5dd2dd247d5e2fdadbf5dcf8653cd9a
+change-id: 20240529-efi-spec-0ea657985272
+
+Best regards,
 -- 
-2.25.1
+Jiaxun Yang <jiaxun.yang@flygoat.com>
 
