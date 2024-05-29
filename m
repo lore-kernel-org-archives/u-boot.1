@@ -4,80 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 077E2C27C43
-	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 00:38:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2D6BC25B78
+	for <u-boot@archiver.kernel.org>; Wed, 29 May 2024 02:47:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01473885B5;
-	Wed, 29 May 2024 02:38:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0B91B88590;
+	Wed, 29 May 2024 04:47:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=testtoast.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gUVzDjEF";
+	dkim=pass (2048-bit key; unprotected) header.d=testtoast.com header.i=@testtoast.com header.b="nPnzWxFF";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="TET9+Ue6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66D9A885BC; Wed, 29 May 2024 02:38:26 +0200 (CEST)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 26AD4885C6; Wed, 29 May 2024 04:47:53 +0200 (CEST)
+Received: from fhigh8-smtp.messagingengine.com
+ (fhigh8-smtp.messagingengine.com [103.168.172.159])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57BC3884E5
- for <u-boot@lists.denx.de>; Wed, 29 May 2024 02:38:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7227C88554
+ for <u-boot@lists.denx.de>; Wed, 29 May 2024 04:47:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-529682e013dso1778266e87.3
- for <u-boot@lists.denx.de>; Tue, 28 May 2024 17:38:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716943103; x=1717547903; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PEiNQj+D7OMYLHH1j9mBYCwOEu7lmNXcqbIZr0Y4KA0=;
- b=gUVzDjEFABhpmY/7VLacw+wAtncC0qQOsOj0g6QQqR9NILoIuMEae00O8kr6eAuEtw
- eE/2lo9WGbD5312INC9P3TgL9t6iDlniA+XlBNiqhkxaekVAPhMlbZ6fub6Lt3hLiQq5
- sALMDJ0pq+Y913Ku0Y1mM1iUnZGc2VrD8cCt3m/Z3tOew4pu3E4TU3/7BPayuTj+o3Hp
- d5+/sVKJDKkv3X66FCdfLcYA/A/f61Z5lZYuTgEze8zSC9FUsYWtVnxJUqNhbsDovgdr
- wZ+UGYPYEnkxIB5z1emzsjCwQ8BVfW10ctqV92oKyHfaHAqeo1IoB+B1Z2bZn6CGGMg6
- YK+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716943103; x=1717547903;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PEiNQj+D7OMYLHH1j9mBYCwOEu7lmNXcqbIZr0Y4KA0=;
- b=hnnRHu64aJKFlR0kwCNfNBgBtMNe1t5TIzeNvR0nibvfQSoA058OxnnNRO9Pr5ZCti
- 9syAc/RwAC8KpIV291/KRL2cDmAzOfbcM7OEANeJlWxF+RKXEsW3jjKBZL/NKBBv6tz9
- A24vWdL3fvo8e3hY+IpAbcmgkZ1HiwilQfSAfTcP6chrJMtt5npN8XhvX1yzvjRXXXZD
- PEGy24XMA+fE20UCJCgeev7pwKtkFkZaypSu9+wqH0ncv1pDTvQcM4Tgr4yHTEQkmSEm
- Dn62lzAu6p85vjE4DwwTPr53/Vak3pn7ke3RXosIH0iAv+PpI7G4NqzwBmBU7GJcgSfQ
- KCAQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXKQuGCeC8v6F5xMcg5KKdaAT0WNOcK4LT/nJx9jihZnpX03djlIjesRFEvYRxhnLylKJ9PxzU/0b5rvuAm3TtzwqJm/A==
-X-Gm-Message-State: AOJu0Yy0ZcVwxq3daa8cGLgLKbWlJEus/3LY2awzEtnuwhljkkH4+eDh
- LiAwQzIP5TUM/6l4SwCD9qdKxIiYl8STmZjitX9Hvxssiz0A6iOry2FPxJT5wt7ZrXCj7GshMtT
- DMu3sHEipfZMbeMi5WtZUQ2jZIBo=
-X-Google-Smtp-Source: AGHT+IEzVfAVnl/82aWu4wNpL8VhmoOEOm5X63vbAxi+xJ1J5FwjUXx1Y8TU/gfMdvulzzgaRZ/oEJS1qspnqa0ZvsQ=
-X-Received: by 2002:ac2:47f9:0:b0:51b:6ed6:af3f with SMTP id
- 2adb3069b0e04-529649c5dbdmr7859144e87.16.1716943103411; Tue, 28 May 2024
- 17:38:23 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=testtoast.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ryan@testtoast.com
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id 430E811400E1;
+ Tue, 28 May 2024 22:47:49 -0400 (EDT)
+Received: from imap47 ([10.202.2.97])
+ by compute5.internal (MEProxy); Tue, 28 May 2024 22:47:49 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=testtoast.com;
+ h=cc:cc:content-type:content-type:date:date:from:from
+ :in-reply-to:in-reply-to:message-id:mime-version:references
+ :reply-to:subject:subject:to:to; s=fm1; t=1716950869; x=
+ 1717037269; bh=BvBDPauIC1DYkzBNK1wKsa/FTIBZeyAC9LV4tlQkQ+4=; b=n
+ PnzWxFFsOYYFpviKOvCSRMSzhokRr7xXLNf7jxo7tDlOXStYG0GsaiPmbQpBj14X
+ GBgt2XxnFEuyQJVfOFetQUS6hWur8fRHsT37R/EhAl15HU6aKV/YVB7U1SV+6Nkm
+ tOPBGaRRwC9sazVZL7bu86VyRVGMBhy3j1c/5fFiaO9UY8YHRSftXkogcynVz82j
+ OMKQYrxM5nHDW0hnik5i4dWLh8zzna3zBXrUtXXwOUaKUIGD6oFruyukhVO8kwld
+ cUaEolmVgpia1Wo2Krr2DyvvpUd+CepAFijNp7Dnr6N3tOcQOMiAE4aOu+LkA590
+ 7pwKhslRT6cNs9tb0AJcw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:content-type:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:subject:subject:to
+ :to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+ fm1; t=1716950869; x=1717037269; bh=BvBDPauIC1DYkzBNK1wKsa/FTIBZ
+ eyAC9LV4tlQkQ+4=; b=TET9+Ue6JY2LdlHIlacDrkKQcP4B23ZS3nA2NoMrUnND
+ +9r1uukYqafRU+DIoLKsdihf62O3ISA5hePLXNLBy4bB2ULXu09eOhgib7smRUyG
+ YSoAgXvUx4vj68RC4URGv0VGCs/rLXvPwzpbT6Axa0yDzCpN663mAbxu0moaMppa
+ bH8ZOxD3B6mtJ9kFLwTmc3LcsSBylIAnxUjHZScnvqMdnpF0Cd0zJXacUiV/M+Lm
+ ZkTM4Z8TphCnN73ViKd5B1q8g6kO1xTqSJkLD1Wow5jG6jybj+MTA7o4VH0cH0r+
+ hHYrqYMAXThmMtzl5pIkB04HI4HbG8Oe9ZJ/oDTtxA==
+X-ME-Sender: <xms:VJdWZiVMawFH1FZFSF8pSw77D1EFYgLrrZkmt_XmFo3qKUT30uJydQ>
+ <xme:VJdWZunFKpFmQ0xso5U_556C7hTC9PXzcmNfAAh76Z72h9fptWqqb2kxQyNBVH7Je
+ bR_fRGXu_XHOjMnCQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdejledgiedvucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhepofgfggfkjghffffhvfevufgtsehttdertderredtnecuhfhrohhmpedftfih
+ rghnucghrghlkhhlihhnfdcuoehrhigrnhesthgvshhtthhorghsthdrtghomheqnecugg
+ ftrfgrthhtvghrnhephedvveeigedujeeufeegffehhfffveduhfeijefgtdffteelgfet
+ ueevieduieejnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrh
+ homheprhihrghnsehtvghsthhtohgrshhtrdgtohhm
+X-ME-Proxy: <xmx:VJdWZmbyMbUFZc-Tezk_WzLuCQU70SpM3LlhbiCUZIEhzWAvfMYA0w>
+ <xmx:VJdWZpVF9zSQtIxl05-MxzvSkgqlQ-lPkOeW1bHrLSzVRAdSA95Wkg>
+ <xmx:VJdWZslCbE1lTq-7mSbU_ZsoOa2j006Ms23y6hoLm1nNbMmOKGnBhg>
+ <xmx:VJdWZuehS5uyDqFDNnCpi-SzjGzplB6slwEeDxKLF-DVfgFp_r4TkA>
+ <xmx:VZdWZtC01HEiE2XQ0dljeyOtCY2YqCmpozWyP1FQsRLYZobN-XmS4q9Y>
+Feedback-ID: idc0145fc:Fastmail
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id D1DEFA60078; Tue, 28 May 2024 22:47:48 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.11.0-alpha0-491-g033e30d24-fm-20240520.001-g033e30d2
 MIME-Version: 1.0
-References: <20240528144252.179247-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240528144252.179247-1-heinrich.schuchardt@canonical.com>
-From: E Shattow <lucent@gmail.com>
-Date: Tue, 28 May 2024 17:38:11 -0700
-Message-ID: <CANV2PTOAc50sXtz2V6s7bgnEk02TV_7+VArxBpHhF_tCGNjsmA@mail.gmail.com>
-Subject: Re: [PATCH v2 0/8] efi_loader: improve device-tree loading
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>, Shantur Rathore <i@shantur.com>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Raymond Mao <raymond.mao@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, Bin Meng <bmeng@tinylab.org>, 
- Mark Kettenis <kettenis@openbsd.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Message-Id: <e71e336b-a621-4c11-93b5-2485fe24bbaa@app.fastmail.com>
+In-Reply-To: <20240509231316.11391-1-andre.przywara@arm.com>
+References: <20240509231316.11391-1-andre.przywara@arm.com>
+Date: Wed, 29 May 2024 14:47:28 +1200
+From: "Ryan Walklin" <ryan@testtoast.com>
+To: "Andre Przywara" <andre.przywara@arm.com>,
+ "Jagan Teki" <jagan@amarulasolutions.com>
+Cc: u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
+ "Chris Morgan" <macromorgan@hotmail.com>
+Subject: Re: [PATCH] sunxi: spl: h616: fix booting from high MMC offset
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,69 +104,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On Tue, May 28, 2024 at 7:43=E2=80=AFAM Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> In U-Boot EFI boot options can already specify both an EFI binary and
-> an initrd. With this series we can additionally define the matching
-> device-tree to be loaded in the boot option.
->
-> With the last patch the boot manager will fall back the device-tree
-> specified by $fdtfile in directories '/dtb/', '/', or '/dtb/current/'
-> on the boot device if no device-tree is specified in the boot
-> option or via a bootefi command parameter.
->
 
-As tested the $fdtfile environment variable has no effect on
-global EFI boot when i.e. EFI/BOOT/BOOTRISCV64.EFI
-on EFI System Partition and no user-added boot option;
-$fdtfile env variable is not used with "mmc 0" or whichever
-global boot option is enabled by default in the boot order.
+On Fri, 10 May 2024, at 11:13 AM, Andre Przywara wrote:
 
-Adding a boot option for EFI/BOOT/BOOTRISCV64.EFI
-and giving this priority in the boot order allows $fdtfile to
-be effective here. This is consistent with what is described
-by the series. Would the global EFI boot also get support
-for $fdtfile either with this or a later series?
+> Extend the existing offset calculation code to consider the different
+> sector offset when running on an H616 SoC. This allows to load U-Boot
+> on any H616 device when the SPL is not located at 8KB.
 
-> v2:
->         Update efi_dp_concat() instead of new function efi_dp_merge().
->         Carve out a function efi_load_option_dp_join() which we can
->         use both for the eficonfig and the efidebug command.
->         Rename variables id_dp, final_dp_size.
->         Rename create_initrd_dp() to create_lo_dp_part().
->         Use enum as parameter for create_lo_dp_part().
->         Put all related changes into one patch.
->
-> Heinrich Schuchardt (8):
->   efi_loader: allow concatenation with contained end node
->   cmd: eficonfig: add support for setting fdt
->   cmd: efidebug: add support for setting fdt
->   efi_loader: load device-tree specified in boot option
->   efi_loader: move distro_efi_get_fdt_name()
->   efi_loader: return binary from efi_dp_from_lo()
->   efi_loader: export efi_load_image_from_path
->   efi_loader: load distro dtb in bootmgr
->
->  boot/bootmeth_efi.c                        |  60 +---------
->  cmd/eficonfig.c                            |  83 +++++++++----
->  cmd/efidebug.c                             | 130 +++++++++++++++------
->  include/efi_loader.h                       |  24 +++-
->  lib/efi_loader/Makefile                    |   1 +
->  lib/efi_loader/efi_bootbin.c               |   2 +-
->  lib/efi_loader/efi_bootmgr.c               |  75 +++++++++++-
->  lib/efi_loader/efi_boottime.c              |   3 +-
->  lib/efi_loader/efi_device_path.c           |  40 ++++---
->  lib/efi_loader/efi_device_path_utilities.c |   2 +-
->  lib/efi_loader/efi_fdt.c                   | 117 +++++++++++++++++++
->  lib/efi_loader/efi_helper.c                |  44 +++++++
->  12 files changed, 445 insertions(+), 136 deletions(-)
->  create mode 100644 lib/efi_loader/efi_fdt.c
->
-> --
-> 2.43.0
->
+Thanks Andre,
 
-Tested-by: E Shattow <lucent@gmail.com>
+Confirmed with an H700-based board and u-boot at the 512-sector/256KB offset.
+
+Tested-by: Ryan Walklin <ryan@testtoast.com>
+
+Regards,
+
+Ryan
