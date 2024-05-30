@@ -4,66 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01918C25B75
-	for <u-boot@archiver.kernel.org>; Thu, 30 May 2024 01:39:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72324C25B75
+	for <u-boot@archiver.kernel.org>; Thu, 30 May 2024 02:18:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20E3388678;
-	Thu, 30 May 2024 03:39:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 9E10A88683;
+	Thu, 30 May 2024 04:18:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1717033172;
-	bh=+rfJmo/KABInbAJdGlj7kmqA7gGhNU3RqlnodCdpCMI=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=f/rsB/5WNzFLHA5YJLgjDcScbMd7h9NLWyrzqWvlxMyzSvokbjmY2p2mRfpiudN9O
-	 jRdUM2UfHUoQExq0fiJmzzRorSWYv0IJU/4ioXsf0N3e0MH/E19Pm1s0L/+aGRDjXK
-	 TmTSKH2acS7hcRAPT01G8CxeNFi/TL1l6JRXQ76yt1uvuoSnjru5JyO6IqV0VfgfKn
-	 JvJAD6XrZsut65QGCI5zK5ceIuPTKlBO13uuUE0eClcxqcMNDnkFBSY/PpRZthUOgj
-	 fKuVw5tfl5POM9C20npdhP7BHUSCm2CcP1wQEMVpmzIxTNPrIcNmGeg3gz5FHFyLOS
-	 eXfeWU1Tztz/Q==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Lgjb1Y/s";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id AEB4E88683; Thu, 30 May 2024 04:18:22 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 340CD87EF7;
- Thu, 30 May 2024 03:39:28 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1717033170;
- bh=+rfJmo/KABInbAJdGlj7kmqA7gGhNU3RqlnodCdpCMI=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=vzBHoXAnGz1jDcPae95D12ecS/fomccd3yq5FA/ItwrlK+xcZyGZjP9sDVGkBLiSF
- 3GS36OMin+Ts+y/opOKOUss0j41uyj2/pn0MhlUr7hAN+qmyb50JNql8i+vZq+5oQ3
- UHCNjute3JHw6PchUOKcPSBCWn2toTZu1wG1AHPcGqUUDIW5/hWbR66FyMODt7Iwoi
- vNEOgQspvLucH/N4S6KiVTgG5YpdF1N56Y0mf036yhwg5h78JKmE/iER+JlrmFdfId
- PmDXhTNM/EX525mI9lQ95dWARPHUbQGb/yRAv4NciuGXdn9hHbNskpO+DXtrS1ySo1
- fJ28xvL+C2KAA==
-Message-ID: <744a2f92-18d1-4830-98c0-c6c686cd11ef@denx.de>
-Date: Thu, 30 May 2024 03:39:27 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 8E5FD88673
+ for <u-boot@lists.denx.de>; Thu, 30 May 2024 04:18:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44U2ICut013865;
+ Wed, 29 May 2024 21:18:12 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1717035492;
+ bh=o/4z7l42JdliHZS+rUCQAOmCeWgzpJkAKHdj0t6xfM4=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=Lgjb1Y/sSnlKyGzI2sQFNZcHvOgDdYBoMMZTi11R57Lim3S1PsqGH6sjSPlJEdmf6
+ R3M1zaVq7HngWPNwJZsl5HAj1MEzXqZ/H51MVw77XNpb7yp+1mFcllHeP4y3VXUEAb
+ 9/reltCmR6vzZQPYDSRSdpTNV0M9D2q/Ls4WmK0g=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44U2IC3k024165
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 29 May 2024 21:18:12 -0500
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 29
+ May 2024 21:18:12 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 29 May 2024 21:18:12 -0500
+Received: from [172.24.227.36]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44U2I8D8093023;
+ Wed, 29 May 2024 21:18:08 -0500
+Message-ID: <0444fa69-0c41-46ed-989c-49bc92a378d1@ti.com>
+Date: Thu, 30 May 2024 07:48:07 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] fdt: automatically add /chosen/kaslr-seed if DM_RNG is
- enabled
-To: Simon Glass <sjg@chromium.org>, Tim Harvey <tharvey@gateworks.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Devarsh Thakkar <devarsht@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hugo Villeneuve <hvilleneuve@dimonoff.com>,
- Michal Simek <michal.simek@amd.com>, Andy Yan <andy.yan@rock-chips.com>,
- Akash Gajjar <gajjar04akash@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Chris Morgan <macromorgan@hotmail.com>
-References: <20240525200249.3904352-1-tharvey@gateworks.com>
- <CAFLszTifTgSGjAZ-t7-7q6FYRjQ1kfH6hn2dw-hb0PK-2Z3WRg@mail.gmail.com>
- <CAJ+vNU1yQaLgW5f1tSHiZtbWQ_7GPs87GV3FHNK3uvCiFpLvZw@mail.gmail.com>
- <CAFLszTjwuDeQ=xxF8cpMoHmpVPVDkeKKM1a8QRGmVLFzCU=ZSA@mail.gmail.com>
+Subject: Re: [PATCH 01/14] arm: mach-k3: Sort CONFIG_SOC* and K3_SOC_ID entries
+To: Jayesh Choudhary <j-choudhary@ti.com>, <u-boot@lists.denx.de>,
+ <trini@konsulko.com>, <jh80.chung@samsung.com>, <lukma@denx.de>,
+ <seanga2@gmail.com>, <vaishnav.a@ti.com>, <u-kumar1@ti.com>,
+ <sumit.garg@linaro.org>, <afd@ti.com>
+CC: <vigneshr@ti.com>, <nm@ti.com>, <bb@ti.com>, <rogerq@kernel.org>
+References: <20240529132448.459330-1-j-choudhary@ti.com>
+ <20240529132448.459330-2-j-choudhary@ti.com>
 Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAFLszTjwuDeQ=xxF8cpMoHmpVPVDkeKKM1a8QRGmVLFzCU=ZSA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20240529132448.459330-2-j-choudhary@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,46 +84,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/29/24 7:05 PM, Simon Glass wrote:
-
-[...]
-
->>>> that is not yet implemented as DM_RNG. We also skip this if
->>>> MEASURED_BOOT is enabled as in that case any modifications to the
->>>> dt will cause measured boot to fail (although there are many other
->>>> places the dt is altered).
->>>>
->>>> As this fdt node is added elsewhere create a library function and
->>>> use it to deduplicate code. We will provide a parameter to specify the
->>>> index of the rng device as well as a boolean to overwrite if present.
->>>>
->>>> For our automatic injection, we will use the first rng device and
->>>> not overwrite if already present with a non-zero value (which may
->>>> have been populated by an earlier boot stage). This way if a board
->>>> specific ft_board_setup() function wants to customize this behavior
->>>> it can call fdt_kaslrseed with a rng device index of its choosing and
->>>> set overwrite true.
->>>
->>> I suggest creating a sysinfo driver which can provide the RNG device.
->>
->> I'm not really clear what you mean but that seems out of scope for
->> this patch. If/when someone needs to extend the functionality of
->> specifying one of many RNG's perhaps they can follow that approach.
+On 29/05/24 18:54, Jayesh Choudhary wrote:
+> Sort CONFIG_SOC* and K3_SOC_ID alphabetically.
 > 
-> The thing is, you are creating a way to specify the RNG which will
-> presumably lead to different vendors all doing it a different way.
+> Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
+> ---
+>   arch/arm/mach-k3/include/mach/hardware.h | 37 ++++++++++++------------
+>   1 file changed, 19 insertions(+), 18 deletions(-)
 > 
-> Specifically, fdt_kaslrseed() takes a device number (would be better
-> to take a struct udevice, BTW).
-> 
-> Instead, I think you should define the standard way that the chosen
-> RNG should be specified by the board. The sysinfo driver can provide a
-> way to do this. Then boards can handle this themselves, using sysinfo,
-> rather than directly calling a function in the fixup. After all, we
-> want the fixup flow to be as generic as possible.
+> diff --git a/arch/arm/mach-k3/include/mach/hardware.h b/arch/arm/mach-k3/include/mach/hardware.h
+> index c724450638..c3aaded8dc 100644
+> --- a/arch/arm/mach-k3/include/mach/hardware.h
+> +++ b/arch/arm/mach-k3/include/mach/hardware.h
+> @@ -8,37 +8,38 @@
+>   
+>   #include <asm/io.h>
+>   
+> -#ifdef CONFIG_SOC_K3_AM654
+> -#include "am6_hardware.h"
+> +#ifdef CONFIG_SOC_K3_AM625
+> +#include "am62_hardware.h"
+>   #endif
+>   
+> -#ifdef CONFIG_SOC_K3_J721E
+> -#include "j721e_hardware.h"
+> +#ifdef CONFIG_SOC_K3_AM62A7
+> +#include "am62a_hardware.h"
+>   #endif
+>   
+> -#ifdef CONFIG_SOC_K3_J721S2
+> -#include "j721s2_hardware.h"
+> +#ifdef CONFIG_SOC_K3_AM62P5
+> +#include "am62p_hardware.h"
+>   #endif
+>   
+>   #ifdef CONFIG_SOC_K3_AM642
+>   #include "am64_hardware.h"
+>   #endif
+>   
+> -#ifdef CONFIG_SOC_K3_AM625
+> -#include "am62_hardware.h"
+> +#ifdef CONFIG_SOC_K3_AM654
+> +#include "am6_hardware.h"
+>   #endif
+>   
+> -#ifdef CONFIG_SOC_K3_AM62A7
+> -#include "am62a_hardware.h"
+> +#ifdef CONFIG_SOC_K3_J721E
+> +#include "j721e_hardware.h"
+> +#endif
+> +
+> +#ifdef CONFIG_SOC_K3_J721S2
+> +#include "j721s2_hardware.h"
+>   #endif
+>   
+>   #ifdef CONFIG_SOC_K3_J784S4
+>   #include "j784s4_hardware.h"
+>   #endif
+>   
+> -#ifdef CONFIG_SOC_K3_AM62P5
+> -#include "am62p_hardware.h"
+> -#endif
+>   
+>   /* Assuming these addresses and definitions stay common across K3 devices */
+>   #define CTRLMMR_WKUP_JTAG_ID	(WKUP_CTRL_MMR0_BASE + 0x14)
+> @@ -63,14 +64,14 @@ static inline bool soc_is_##id(void) \
+>   		JTAG_ID_PARTNO_MASK) >> JTAG_ID_PARTNO_SHIFT; \
+>   	return soc == JTAG_ID_PARTNO_##ID; \
+>   }
+> -K3_SOC_ID(am65x, AM65X)
+> -K3_SOC_ID(j721e, J721E)
+> -K3_SOC_ID(j7200, J7200)
+> -K3_SOC_ID(am64x, AM64X)
+> -K3_SOC_ID(j721s2, J721S2)
+>   K3_SOC_ID(am62x, AM62X)
+>   K3_SOC_ID(am62ax, AM62AX)
+>   K3_SOC_ID(am62px, AM62PX)
+> +K3_SOC_ID(am64x, AM64X)
+> +K3_SOC_ID(am65x, AM65X)
+> +K3_SOC_ID(j7200, J7200)
+> +K3_SOC_ID(j721e, J721E)
+> +K3_SOC_ID(j721s2, J721S2)
+>   
+>   #define K3_SEC_MGR_SYS_STATUS		0x44234100
+>   #define SYS_STATUS_DEV_TYPE_SHIFT	0
 
-I think this patch simply picks up the first RNG that is available, 
-pulls a number out of it, and uses that as the KASLR seed in DT. That's 
-what the implementation(s) seems to be doing so far, this patch is a 
-deduplication only, so maybe we should retain the original behavior 
-first, and do architectural changes in follow up patch(es) ?
+Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
+
+-- 
+Thanking You
+Neha Malcom Francis
