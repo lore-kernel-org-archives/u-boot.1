@@ -4,75 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2803DC25B74
-	for <u-boot@archiver.kernel.org>; Thu, 30 May 2024 11:43:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BA1FC25B74
+	for <u-boot@archiver.kernel.org>; Thu, 30 May 2024 11:52:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DBE9886E1;
-	Thu, 30 May 2024 13:42:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DADAD886E1;
+	Thu, 30 May 2024 13:52:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="upElKJWr";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Nf+dRA3h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BAFAB886E3; Thu, 30 May 2024 13:42:57 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id BE771886E4; Thu, 30 May 2024 13:52:20 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C92D88499
- for <u-boot@lists.denx.de>; Thu, 30 May 2024 13:42:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3971E8864C
+ for <u-boot@lists.denx.de>; Thu, 30 May 2024 13:52:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-choudhary@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44UBgoe2086414;
- Thu, 30 May 2024 06:42:50 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44UBqDhb026321;
+ Thu, 30 May 2024 06:52:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1717069370;
- bh=AUxF3sTIoRrFurxebgYpUsW6TmPj/G3OUj09o62iFw4=;
+ s=ti-com-17Q1; t=1717069933;
+ bh=pWQiIQ9b0mVhRJvMoWof1hhETtFIuOa8er4OR+xP+aY=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=upElKJWrGRpcosOaDPBqAlC90SL9R+jz39hnx2lQgrzKZr61Kj7Xqk4E2uqbg/rll
- XW/1sGPxJy2NGwMyF3nNzGi8pdA1b76Sg6F8N/0iqGaqb2ZHPB4d4AAqhp8DzKjgwK
- ea/cxVwfyC0IXIvjfC1PhvMuBGQFkha4S0M3hZWo=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44UBgoSK127917
+ b=Nf+dRA3h2Jfiipri+JyzGmE/pJeB4cC3Q7g3N6Zwjt3P7PEWpac6WiRLXgpcUr2yl
+ JCypxRfHLgQ3N/rF5gt6qnj0sNuREXP8gG8wO/7mtVUU3OUPMc0Ggpaj7uKlgB/w1g
+ l/bMvFkHDUYPJgDXC6sZ7DtNjXlYinVT6HsEak8s=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44UBqCff010432
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 30 May 2024 06:42:50 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 30 May 2024 06:52:12 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 30
- May 2024 06:42:49 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ May 2024 06:52:12 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 30 May 2024 06:42:49 -0500
+ Frontend Transport; Thu, 30 May 2024 06:52:12 -0500
 Received: from [172.24.227.102]
  (jayesh-hp-probook-440-g8-notebook-pc.dhcp.ti.com [172.24.227.102])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44UBgheL009971;
- Thu, 30 May 2024 06:42:44 -0500
-Message-ID: <d684873b-e9c8-4fae-9b5e-2b91e953f806@ti.com>
-Date: Thu, 30 May 2024 17:12:42 +0530
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44UBq6bR022199;
+ Thu, 30 May 2024 06:52:07 -0500
+Message-ID: <5795080b-6ebc-477d-abd3-1935668a067b@ti.com>
+Date: Thu, 30 May 2024 17:22:06 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/7] arm: mach-k3: am62a_qos: Move common bit MACROS to
- k3_qos header file
-To: Tom Rini <trini@konsulko.com>, Andrew Davis <afd@ti.com>
-CC: <u-boot@lists.denx.de>, <u-kumar1@ti.com>, <a-bhatia1@ti.com>, <nm@ti.com>,
- <n-francis@ti.com>, <joao.goncalves@toradex.com>, <j-humphreys@ti.com>,
+Subject: Re: [PATCH 2/7] arm: mach-k3: j721e: Enable QoS for DSS
+To: Andrew Davis <afd@ti.com>, <trini@konsulko.com>
+CC: <a-bhatia1@ti.com>, <nm@ti.com>, <n-francis@ti.com>,
+ <joao.goncalves@toradex.com>, <j-humphreys@ti.com>,
  <d.haller@phytec.de>, <hnagalla@ti.com>, <bb@ti.com>,
  <seanga2@gmail.com>, <sjg@chromium.org>, <clamor95@gmail.com>,
  <martyn.welch@collabora.com>, <m-chawdhry@ti.com>, <a-limaye@ti.com>,
- <sebin.francis@ti.com>
+ <sebin.francis@ti.com>, <u-kumar1@ti.com>, <u-boot@lists.denx.de>
 References: <20240522113726.302908-1-j-choudhary@ti.com>
- <20240522113726.302908-2-j-choudhary@ti.com>
- <d444e122-59d2-44eb-9dde-fb8ec373920e@ti.com>
- <20240522230659.GK2568172@bill-the-cat>
+ <20240522113726.302908-3-j-choudhary@ti.com>
+ <e5ef2268-a992-4ef6-8447-7d2d94580104@ti.com>
 Content-Language: en-US
 From: Jayesh Choudhary <j-choudhary@ti.com>
-In-Reply-To: <20240522230659.GK2568172@bill-the-cat>
+In-Reply-To: <e5ef2268-a992-4ef6-8447-7d2d94580104@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,127 +88,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom, Andrew,
+Hello Andrew,
 
-On 23/05/24 04:36, Tom Rini wrote:
-> On Wed, May 22, 2024 at 10:21:28AM -0500, Andrew Davis wrote:
->> On 5/22/24 6:37 AM, Jayesh Choudhary wrote:
->>> QoS bit mapping are common across all K3 SoCs so move those defines
->>> to common header file (k3_qos.h).
->>> This ensures that we do not define these for each SoC.
->>>
->>> Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
->>> ---
->>>    arch/arm/mach-k3/include/mach/k3-qos.h | 74 ++++++++++++++++++++++++++
->>>    arch/arm/mach-k3/r5/am62ax/am62a_qos.h | 74 --------------------------
->>>    2 files changed, 74 insertions(+), 74 deletions(-)
->>>
->>> diff --git a/arch/arm/mach-k3/include/mach/k3-qos.h b/arch/arm/mach-k3/include/mach/k3-qos.h
->>> index e00e1de5b9..6ed5704803 100644
->>> --- a/arch/arm/mach-k3/include/mach/k3-qos.h
->>> +++ b/arch/arm/mach-k3/include/mach/k3-qos.h
->>> @@ -9,6 +9,80 @@
->>>    #include <linux/kernel.h>
->>> +#define QOS_0	(0 << 0)
->>> +#define QOS_1	(1 << 0)
->>> +#define QOS_2	(2 << 0)
->>> +#define QOS_3	(3 << 0)
->>> +#define QOS_4	(4 << 0)
->>> +#define QOS_5	(5 << 0)
->>> +#define QOS_6	(6 << 0)
->>> +#define QOS_7	(7 << 0)
->>> +
->>> +#define ORDERID_0	(0 << 4)
->>> +#define ORDERID_1	(1 << 4)
->>> +#define ORDERID_2	(2 << 4)
->>> +#define ORDERID_3	(3 << 4)
->>> +#define ORDERID_4	(4 << 4)
->>> +#define ORDERID_5	(5 << 4)
->>> +#define ORDERID_6	(6 << 4)
->>> +#define ORDERID_7	(7 << 4)
->>> +#define ORDERID_8	(8 << 4)
->>> +#define ORDERID_9	(9 << 4)
->>> +#define ORDERID_10	(10 << 4)
->>> +#define ORDERID_11	(11 << 4)
->>> +#define ORDERID_12	(12 << 4)
->>> +#define ORDERID_13	(13 << 4)
->>> +#define ORDERID_14	(14 << 4)
->>> +#define ORDERID_15	(15 << 4)
->>> +
->>> +#define ASEL_0	(0 << 8)
->>> +#define ASEL_1	(1 << 8)
->>> +#define ASEL_2	(2 << 8)
->>> +#define ASEL_3	(3 << 8)
->>> +#define ASEL_4	(4 << 8)
->>> +#define ASEL_5	(5 << 8)
->>> +#define ASEL_6	(6 << 8)
->>> +#define ASEL_7	(7 << 8)
->>> +#define ASEL_8	(8 << 8)
->>> +#define ASEL_9	(9 << 8)
->>> +#define ASEL_10	(10 << 8)
->>> +#define ASEL_11	(11 << 8)
->>> +#define ASEL_12	(12 << 8)
->>> +#define ASEL_13	(13 << 8)
->>> +#define ASEL_14	(14 << 8)
->>> +#define ASEL_15	(15 << 8)
->>> +
->>> +#define EPRIORITY_0	(0 << 12)
->>> +#define EPRIORITY_1	(1 << 12)
->>> +#define EPRIORITY_2	(2 << 12)
->>> +#define EPRIORITY_3	(3 << 12)
->>> +#define EPRIORITY_4	(4 << 12)
->>> +#define EPRIORITY_5	(5 << 12)
->>> +#define EPRIORITY_6	(6 << 12)
->>> +#define EPRIORITY_7	(7 << 12)
->>> +
->>> +#define VIRTID_0	(0 << 16)
->>> +#define VIRTID_1	(1 << 16)
->>> +#define VIRTID_2	(2 << 16)
->>> +#define VIRTID_3	(3 << 16)
->>> +#define VIRTID_4	(4 << 16)
->>> +#define VIRTID_5	(5 << 16)
->>> +#define VIRTID_6	(6 << 16)
->>> +#define VIRTID_7	(7 << 16)
->>> +#define VIRTID_8	(8 << 16)
->>> +#define VIRTID_9	(9 << 16)
->>> +#define VIRTID_10	(10 << 16)
->>> +#define VIRTID_11	(11 << 16)
->>> +#define VIRTID_12	(12 << 16)
->>> +#define VIRTID_13	(13 << 16)
->>> +#define VIRTID_14	(14 << 16)
->>> +#define VIRTID_15	(15 << 16)
->>
->>
->> This all seem like it could be made into some macro, something like
->>
->> #define K3_QOS(qos, orderid, asel, epriority, virtid, atype) \
->> 	(qos     << 0 | \
->> 	 orderid << 4 | \
->> 	 asel    << 8 | \
->> etc..
->>
->> Then use that instead of raw values. That might also make it more clear
->> we are setting the other values to 0 when we are setting these registers:
->>
->> .val = K3_QOS(0, 15, 0, 0, 0, 3),
+On 22/05/24 21:14, Andrew Davis wrote:
+> On 5/22/24 6:37 AM, Jayesh Choudhary wrote:
+>> Enable Quality of Service (QoS) blocks for Display SubSystem (DSS), by
+>> servicing the DSS - DDR traffic from the Real-Time (RT) queue. This is
+>> done by setting the DSS DMA orderID to greater than 7.
+>> ATYPE 3 is selected so that the traffic takes non-coherent path and does
 > 
-> This sounds good to me too and to be clear, move in one patch, clean up
-> macro follow-up patch in this series.
+> So this is the part I'm not sure about, this change is not just a 
+> performance
+> adjustment, it can and does break things. The ORDERID setting is fine 
+> with me,
+> but changing ATYPE should be done in a separate patch so it can be 
+> debated on
+> its own.
+>
+>> not have a conflict with coherent traffic from C7x (deep-learning
+>> applications).
+>> Before setting up the QoS, the ORDERID needs to be mapped to VBUSM 
+>> sources
+>> using setup_navss_nb() function call that sets the threadmap for NBSS
+>> registers. (Section 10.2.10.1.2 "NB Parameters" in TRM[0])
+>>
+>> Section 3.3.2 "Quality of Service (QoS)" in the TRM[0] provide more
+>> details.
+>>
+>> [0]: https://www.ti.com/lit/zip/spruil1
+>>
+>> Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
+>> ---
+>>   arch/arm/mach-k3/j721e/j721e_init.c         |  28 +++++
+>>   arch/arm/mach-k3/r5/j721e/Makefile          |   1 +
+>>   arch/arm/mach-k3/r5/j721e/j721e_qos.h       |  96 +++++++++++++++
+>>   arch/arm/mach-k3/r5/j721e/j721e_qos_uboot.c | 125 ++++++++++++++++++++
+>>   4 files changed, 250 insertions(+)
+>>   create mode 100644 arch/arm/mach-k3/r5/j721e/j721e_qos.h
+>>   create mode 100644 arch/arm/mach-k3/r5/j721e/j721e_qos_uboot.c
+>>
+>> diff --git a/arch/arm/mach-k3/j721e/j721e_init.c 
+>> b/arch/arm/mach-k3/j721e/j721e_init.c
+>> index c2024f2500..e9ed8cb267 100644
+>> --- a/arch/arm/mach-k3/j721e/j721e_init.c
+>> +++ b/arch/arm/mach-k3/j721e/j721e_init.c
+
+
+[...]
+
+>> diff --git a/arch/arm/mach-k3/r5/j721e/j721e_qos_uboot.c 
+>> b/arch/arm/mach-k3/r5/j721e/j721e_qos_uboot.c
+>> new file mode 100644
+>> index 0000000000..c829057200
+>> --- /dev/null
+>> +++ b/arch/arm/mach-k3/r5/j721e/j721e_qos_uboot.c
+>> @@ -0,0 +1,125 @@
+>> +// SPDX-License-Identifier: GPL-2.0+
+>> +/*
+>> + * j721e Quality of Service (QoS) Configuration Data
+>> + * Auto generated from K3 Resource Partitioning tool
+>> + */
+>> +
+>> +#include <asm/arch/k3-qos.h>
+>> +#include "j721e_qos.h"
+>> +
+>> +struct k3_qos_data qos_data[] = {
+>> +    /* DSS_PIPE_VID1 - 2 endpoints, 2 channels */
+>> +    {
+>> +        .reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA + 0x100 + 0x4 * 0,
+> 
+> 0x100 being the instance, and 0x4 * x being the specific device register 
+> right?
+> That could be encoded in a macro (the "Resource Partitioning tool" would
+> be updated to generate that too).
+> 
+> Andrew
 > 
 
-Okay so 1st patch will be similar to this.
-And in the next patch, macros will be defined and cleanup for
-arch/arm/mach-k3/r5/am62a/am62ax_qos_uboot.c will be done in an atomic
-step.
-Rest of the platforms will be added after that.
+Okay both val and reg could be updated.
 
-Also, just for clarity, this implies changes in k3-resource-partitioning
-tool which would be generating these files.
-So is it okay to post v2 with manual changes here and then picking up
-the changes in the tool later according to the final file template that
-we settle on?
+>> +        .val = ATYPE_3 | ORDERID_15,
+>> +    },
+>> +    {
+>> +        .reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA + 0x100 + 0x4 * 1,
+>> +        .val = ATYPE_3 | ORDERID_15,
+>> +    },
 
-Warm Regards,
-Jayesh
+[...]
 
+>> +
+>> +    /* Following registers set 1:1 mapping for orderID MAP1/MAP2
+>> +     * remap registers. orderID x is remapped to orderID x again
+>> +     * This is to ensure orderID from MAP register is unchanged
+>> +     */
+>> +
+>> +    /* K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA - 2 groups */
+>> +    {
+>> +        .reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA + 0,
+>> +        .val = 0x76543210,
+>> +    },
+>> +    {
+>> +        .reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA + 4,
+>> +        .val = 0xfedcba98,
+>> +    },
 
+ From the looks of it, these register and val can also be encoded as
+K3_QOS_GROUP_REG and K3_QOS_GROUP_VAL_HIGH (0xfedcba98) and
+K3_QOS_GROUP_VAL_LOW (0x76543210)????
+
+[...]
+
+>> +
+>> +u32 qos_count = ARRAY_SIZE(qos_data);
