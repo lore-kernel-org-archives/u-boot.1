@@ -4,83 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CE4DC25B74
-	for <u-boot@archiver.kernel.org>; Thu, 30 May 2024 13:00:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 812F4C25B74
+	for <u-boot@archiver.kernel.org>; Thu, 30 May 2024 13:50:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 240AA88716;
-	Thu, 30 May 2024 15:00:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6C41288705;
+	Thu, 30 May 2024 15:50:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Br4N8dc2";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="V7rZ56Tj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88DBB88716; Thu, 30 May 2024 15:00:18 +0200 (CEST)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id 455C387873; Thu, 30 May 2024 06:48:22 +0200 (CEST)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7969D8870F
- for <u-boot@lists.denx.de>; Thu, 30 May 2024 15:00:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E1EE886BB
+ for <u-boot@lists.denx.de>; Thu, 30 May 2024 06:48:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-794ab13bb88so61159185a.2
- for <u-boot@lists.denx.de>; Thu, 30 May 2024 06:00:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=bschnei@gmail.com
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-6f8d2ec8652so299007a34.3
+ for <u-boot@lists.denx.de>; Wed, 29 May 2024 21:48:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1717074015; x=1717678815; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KnjSQ/fBhru2wkn3qsCnQl2LEmh2Ufp9GOPTTG6aih4=;
- b=Br4N8dc2KZvKvoqjdpLBBUK32wi6X6AHB8lyCaw30uB6vDtuz3t4pVMMv/ad/O31T8
- LCWMl4i98YFR7HiOJIZr9ogE1/kWQVVyMBI0aY6LcVRIcbP2ebw6z65JN2SgB6IBAr3r
- GSSj1eSZB30bDqJhRXyK5+xP3d6wDxYzYuSm4=
+ d=gmail.com; s=20230601; t=1717044498; x=1717649298; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ARk/qrgpEENasaPDgijgzrOcLaHA+RIAfls3h7yYgAs=;
+ b=V7rZ56TjwmV975qW6/fNGnzBKYDgQTzz32lyjR4mjCHdWPlpEEx6yEAiX/1oDn2B+W
+ ykrJeqcrEANh5JinEtgADSUBIn1mjqTsTPdnduHecfAslkgWydkP1K5UNGRO0DwJXMGm
+ GvsuKI+TJBC/tef+mtirB2VMoULC8aCTPsjCXPYQKwdBzZBr062DvoXiNXePH6mnELk7
+ hobOC4O134tMvin24XCkO//RdLJMihB5cxpdUab5oZrEBWJPyKq4mxZfBuTjum5Ac4km
+ 92GYzv8YAyucKZZEpU3bV9OI8PD/N5pECZaed6/w5RBKy/wDAq4xLkngqVZrLA/EFICD
+ eW9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717074015; x=1717678815;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KnjSQ/fBhru2wkn3qsCnQl2LEmh2Ufp9GOPTTG6aih4=;
- b=w2ES5nKOkcVCTrae26wD6YusEIUQZVcjRGHG4kdHeQRbO4szODr0PzJgmDS1TrtqZO
- 5ehFzDSwLA/tqxf9/hy2SHVeO0EcAc+mFq84KWORoodvTlXt0KBj6f/6Zt614iZ36E4n
- 9LSFBDuZb9h69RapUJQQt9MZ3usSdrwKqYQQzm6tl5lCJ47BWYS+yqttVhpz86UxPAbK
- i3yiR8StxKR6kMZ9YofVFGXTGDKBof4tPDglYtiK0VCoShaDTSpiYtaqZ9eTbdeBsEYh
- AjMN+Yz6vHL34/x4XV7H47gSwNRnTJKjrktIiuKAd+tGOMBerb9PectYRrsF51ahMo0c
- ByIw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUbqBKEhewivmCf332emgwqYfI7hhSGJH1XVdrsgpTNqvCAmm3wzp0rxO2CUpmxyTKYMzoWaZJc0/MJTd3wzUDfnRhUdg==
-X-Gm-Message-State: AOJu0Yxqy28hNknZs/Wayw739jRHDXrzoa1FbJhP6g1PR8k+KcKhv8v+
- 3obLsFW4Vy8yj/6T64ht5U0wNNd0QbVv+NYu/XWjka9En1jn7DD6X92p44ykUJ0=
-X-Google-Smtp-Source: AGHT+IHkGka5BAp/KNkMx5JIw5u8+S5fUzhjI/37PtEDnwt6px3SDvaOzxSrZFu69A4TjLoJkK1cAA==
-X-Received: by 2002:a05:620a:218b:b0:78f:182:5e20 with SMTP id
- af79cd13be357-794e9d9a6d5mr219272285a.7.1717074015013; 
- Thu, 30 May 2024 06:00:15 -0700 (PDT)
-Received: from bill-the-cat ([189.177.150.58])
+ d=1e100.net; s=20230601; t=1717044498; x=1717649298;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ARk/qrgpEENasaPDgijgzrOcLaHA+RIAfls3h7yYgAs=;
+ b=Psl6gxDKA5mRSo8Cv6BgU7yxwHGhSWRNZDYydQRDy9UH3iEr1Rj7sftrdmmGWd5f+0
+ 9BkDtx8dWFk58zstL3lTQibKrjEFvde3jZCn9QbmF1MEqtQKJV1q/p+PNNfmjDPZv+al
+ hJ266t+QLcJPk/1A4tQ6yGSDheESsI0iEq+aTeHGFrPhcVBbVx993IdMrXDKS1hi2Xkb
+ hNcuhSED8X2O4ybLz9IxgRfLNiS5xFrv+hxFBMOKSyET5sfGcikJxWlkzjjJks6tDOs5
+ RQRp3/e/n9O2/lh+jg9MklEBXWE6liMaIVpGbAlwZEIPmUej0SJU/AYGi3e/tSaCfRpF
+ DtVg==
+X-Gm-Message-State: AOJu0YwGHyKEaOWoKHISuXcga/f1r8Gci1d3suH+u0/w2aQRTvA+0m8p
+ VH9BDwopDuSWEJ/DdzJpsQESwtq5L0qvkoUEQzW2bdghL3zmmU2ph8EqHrHHXOI=
+X-Google-Smtp-Source: AGHT+IGma/1t4Ma1FJfTcJD7Z4WBHzJoOFQ6KNUpqTv08c4d1CXRAFV3VEEAaTIudut7XrMSSh3/Ow==
+X-Received: by 2002:a05:6871:7988:b0:24f:d5fa:615e with SMTP id
+ 586e51a60fabf-25060bf9fdamr1411042fac.27.1717044498256; 
+ Wed, 29 May 2024 21:48:18 -0700 (PDT)
+Received: from desky.home.arpa ([2605:59c8:790:a501:f1ba:ae8f:59a9:41e3])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-794abd0740csm553018985a.81.2024.05.30.06.00.13
+ d2e1a72fcca58-6f8fc373c92sm9039039b3a.96.2024.05.29.21.48.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 May 2024 06:00:14 -0700 (PDT)
-Date: Thu, 30 May 2024 07:00:10 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: Heiko Stuebner <heiko.stuebner@cherry.de>,
- Klaus Goger <klaus.goger@cherry.de>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH 3/3] rockchip: theobroma: update URLs to point to CHERRY
- website
-Message-ID: <20240530130010.GL3714513@bill-the-cat>
-References: <20240524-tsd-to-cherry-v1-0-3002bed55f19@cherry.de>
- <20240524-tsd-to-cherry-v1-3-3002bed55f19@cherry.de>
+ Wed, 29 May 2024 21:48:17 -0700 (PDT)
+From: Benjamin Schneider <bschnei@gmail.com>
+X-Google-Original-From: Benjamin Schneider <ben@bens.haus>
+To: u-boot@lists.denx.de
+Cc: Benjamin Schneider <ben@bens.haus>,
+ Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
+ Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Subject: [PATCH v3] configs: add mvebu_espressobin_ultra-88f3720_defconfig
+Date: Wed, 29 May 2024 21:47:51 -0700
+Message-ID: <20240530044815.176360-1-ben@bens.haus>
+X-Mailer: git-send-email 2.45.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Hc/gXMEbRQc/zZyr"
-Content-Disposition: inline
-In-Reply-To: <20240524-tsd-to-cherry-v1-3-3002bed55f19@cherry.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 30 May 2024 15:50:06 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,42 +94,144 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add support for a Marvell Armada 3720 device variant
 
---Hc/gXMEbRQc/zZyr
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Benjamin Schneider <ben@bens.haus>
+---
 
-On Fri, May 24, 2024 at 01:46:37PM +0200, Quentin Schulz wrote:
+Changes in v3:
+- Fix typo in MAINTAINERS
 
-> From: Quentin Schulz <quentin.schulz@cherry.de>
->=20
-> Most of the current URLs should be redirected but some aren't already,
-> so let's anticipate more IT hiccups by migrating to new URLs.
->=20
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+ board/Marvell/mvebu_armada-37xx/MAINTAINERS   |   5 +
+ .../mvebu_espressobin_ultra-88f3720_defconfig | 106 ++++++++++++++++++
+ 2 files changed, 111 insertions(+)
+ create mode 100644 configs/mvebu_espressobin_ultra-88f3720_defconfig
 
-Applied to u-boot/master, thanks!
+diff --git a/board/Marvell/mvebu_armada-37xx/MAINTAINERS b/board/Marvell/mvebu_armada-37xx/MAINTAINERS
+index 9b0afeef10..e96499e161 100644
+--- a/board/Marvell/mvebu_armada-37xx/MAINTAINERS
++++ b/board/Marvell/mvebu_armada-37xx/MAINTAINERS
+@@ -9,3 +9,8 @@ ESPRESSOBin BOARD
+ M:	Konstantin Porotchkin <kostap@marvell.com>
+ S:	Maintained
+ F:	configs/mvebu_espressobin-88f3720_defconfig
++
++ESPRESSOBin Ultra BOARD
++M:	Ben Schneider <ben@bens.haus>
++S:	Maintained
++F:	configs/mvebu_espressobin_ultra-88f3720_defconfig
+diff --git a/configs/mvebu_espressobin_ultra-88f3720_defconfig b/configs/mvebu_espressobin_ultra-88f3720_defconfig
+new file mode 100644
+index 0000000000..c6ffaaabca
+--- /dev/null
++++ b/configs/mvebu_espressobin_ultra-88f3720_defconfig
+@@ -0,0 +1,106 @@
++CONFIG_ARM=y
++CONFIG_ARCH_CPU_INIT=y
++CONFIG_ARCH_MVEBU=y
++CONFIG_TEXT_BASE=0x00000000
++CONFIG_NR_DRAM_BANKS=1
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xff0000
++CONFIG_TARGET_MVEBU_ARMADA_37XX=y
++CONFIG_SF_DEFAULT_SPEED=40000000
++CONFIG_ENV_SIZE=0x10000
++CONFIG_ENV_OFFSET=0x3F0000
++CONFIG_ENV_SECT_SIZE=0x10000
++CONFIG_DM_GPIO=y
++CONFIG_OF_UPSTREAM=y
++CONFIG_DEFAULT_DEVICE_TREE="marvell/armada-3720-espressobin-ultra"
++CONFIG_SYS_LOAD_ADDR=0x6000000
++CONFIG_PCI=y
++CONFIG_AHCI=y
++# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
++CONFIG_DISTRO_DEFAULTS=y
++CONFIG_OF_BOARD_SETUP=y
++CONFIG_USE_PREBOOT=y
++CONFIG_SYS_CONSOLE_INFO_QUIET=y
++# CONFIG_DISPLAY_CPUINFO is not set
++# CONFIG_DISPLAY_BOARDINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_BOARD_EARLY_INIT_F=y
++CONFIG_BOARD_LATE_INIT=y
++CONFIG_SYS_MAXARGS=32
++CONFIG_CMD_FUSE=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_MTD=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_SATA=y
++CONFIG_CMD_SPI=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_WDT=y
++CONFIG_CMD_TFTPPUT=y
++CONFIG_CMD_CACHE=y
++CONFIG_CMD_TIME=y
++CONFIG_CMD_BTRFS=y
++CONFIG_CMD_EXT4_WRITE=y
++CONFIG_CMD_SQUASHFS=y
++CONFIG_CMD_FS_UUID=y
++CONFIG_MAC_PARTITION=y
++CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_IS_IN_SPI_FLASH=y
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_ARP_TIMEOUT=200
++CONFIG_NET_RETRY_COUNT=50
++CONFIG_NET_RANDOM_ETHADDR=y
++CONFIG_AHCI_PCI=y
++CONFIG_AHCI_MVEBU=y
++CONFIG_LBA48=y
++CONFIG_SYS_64BIT_LBA=y
++CONFIG_CLK=y
++CONFIG_CLK_MVEBU=y
++CONFIG_DM_I2C=y
++CONFIG_SYS_I2C_MV=y
++CONFIG_MISC=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_XENON=y
++CONFIG_MTD=y
++CONFIG_DM_MTD=y
++CONFIG_SPI_FLASH_GIGADEVICE=y
++CONFIG_SPI_FLASH_ISSI=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_SPI_FLASH_SPANSION=y
++CONFIG_SPI_FLASH_STMICRO=y
++CONFIG_SPI_FLASH_WINBOND=y
++CONFIG_SPI_FLASH_MTD=y
++CONFIG_PHY_MARVELL=y
++CONFIG_PHY_FIXED=y
++CONFIG_PHY_GIGE=y
++CONFIG_DM_DSA=y
++CONFIG_MV88E6XXX=y
++CONFIG_MVNETA=y
++CONFIG_MVMDIO=y
++CONFIG_NVME_PCI=y
++CONFIG_PCI_AARDVARK=y
++CONFIG_PHY=y
++CONFIG_MVEBU_COMPHY_SUPPORT=y
++CONFIG_PINCTRL=y
++CONFIG_PINCTRL_ARMADA_37XX=y
++CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_DEFAULT_ENV_IS_RW=y
++CONFIG_MVEBU_A3700_UART=y
++CONFIG_MVEBU_A3700_SPI=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_EHCI_HCD=y
++# CONFIG_WATCHDOG_AUTOSTART is not set
++CONFIG_WDT=y
++CONFIG_WDT_ARMADA_37XX=y
++CONFIG_SHA1=y
++CONFIG_DM_RTC=y
++CONFIG_RTC_PCF8563=y
++# CONFIG_DEBUG_UART=y
++# CONFIG_DEBUG_UART_BASE=0xd0012000
++# CONFIG_DEBUG_UART_CLOCK=25804800
++# CONFIG_DEBUG_UART_SHIFT=2
++# CONFIG_DEBUG_UART_ANNOUNCE=y
+-- 
+2.45.1
 
---=20
-Tom
-
---Hc/gXMEbRQc/zZyr
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZYeFoACgkQFHw5/5Y0
-tywmcAwAll0B7KnzxmcvQxKhMMYWo9CNjks/9oz7fqY3MFeK1wx7dVKHSW8IGcaH
-HEFvly67ggSKXJMeEFToIAu5BAXxvYqKx8rdKP4EzPZaGF4N8xb9tzwpeERcvJi/
-CZgITWxGEXykDlAsMSsStnMqwzzWWqN3w6MMESv/7QwR1T3y3P9233eNWHrLrP1v
-gA1nFk1oRIg2hILtwK4ap7jB1VBYbh9HuvFh1QXqI/kHESF3x/oRvOC7ooA9sG5r
-+d+tjm0Z7A4/d1onCkf2Z1QAOu3kNx49emy0KwAerTzNLb/MIV9c/k7y055deVcw
-tmXjt1+EF83r60CJgY2hIbmBB8/MIVau1IlK+UmKeLGEDR95ZOJvVY1C2e58oA7F
-mVkhRorsZyYcpYRJdzz9dtujbKPlbRmBB5ctSvk+wTuIaTmupTK5shZcAyGgvNSr
-wXAU+C38wqQYdYwWDZgvk5oSKrVS9152Rm8d6PhRoG8HacR/jOC8vqHhPsY8JPVc
-nd4m/8II
-=i40I
------END PGP SIGNATURE-----
-
---Hc/gXMEbRQc/zZyr--
