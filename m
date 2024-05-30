@@ -4,136 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10DF4C25B74
-	for <u-boot@archiver.kernel.org>; Thu, 30 May 2024 10:39:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCDFCC25B74
+	for <u-boot@archiver.kernel.org>; Thu, 30 May 2024 10:42:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45A8288681;
-	Thu, 30 May 2024 12:39:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 3B6A288681;
+	Thu, 30 May 2024 12:42:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Kx4iQt7S";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="HYbqqNkJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12ED08867C; Thu, 30 May 2024 12:39:35 +0200 (CEST)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20619.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e88::619])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D767688684; Thu, 30 May 2024 12:42:20 +0200 (CEST)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D9BD88681
- for <u-boot@lists.denx.de>; Thu, 30 May 2024 12:39:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C3F48867C
+ for <u-boot@lists.denx.de>; Thu, 30 May 2024 12:42:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=lwDdUjb7jxHgEKaGJhYRi7+uK0SBp24a7og7pPzLJHHSsb65MHLUkjIERfyXl/g1YD5mWoIsY1dJLStrv7S2s2HhzgmtTn2D2oGhyC0G2BOvECL0Q+aquONYU+mkXuq2ZsiOZKmeX9d4Z0MoLVHKV9e4I/NU7FQmk3nIPouRBAWRZ6gDZSLaMbU0Ult7L4h2r7sgQjueyb8HN9zorwjqPzfKWtLCByd22YewjxZr2O7hefX1rxyWHJXqOOvvXh/HZ9QzN9LSQWbE5WywFlr0qu+STSBABeXFIa4WDEbTrrhOfrSFhjxDxy5tmgwFQa5KWqVgsUBfGWu0RuKbeRwxBw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yOkpnpUZPnpjRo0QWRhBdalOPcInVnCRUdBde42Usso=;
- b=QH/F4WAKkSKESPsqz8ERRQQKUCBp6U0l+99MbV7VMVSsYkhB42yqeKqMBlUy8TNM6vnKpJ/Q4+kRMqPH46FP9J/erT8+lVWVQuV3PdHhpxkMJKAjKRkSFBY1/FuRNkT/xKTMeTqxKc2K4jvr/EjvMo5SJMvLC7LLP2+/GYfsiDQzGh2LXGBgroSVORypdx5LbQODw1r9iw4ayNQ9DSGh05VTPxu0sVxP5oYSBuTladW8qe19DbgsYK2qzv+ZlzjwgjyrGtMYGB3RCQUeWiO0M10oYyXhIiN++LC5tcN6SLzZ+baK+GBw8qXHQ5wraAFcVxNdgoL484I2Z+W6w7ydsw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yOkpnpUZPnpjRo0QWRhBdalOPcInVnCRUdBde42Usso=;
- b=Kx4iQt7SDqugqZYPOEhJNI1B6KUe3vyvB4cXdul+B/OHaH2FcohIUuTQVRttJ/bXvSg+7PclaclHsd0fGhhEKG/E41KLl7O/ZGBA+Aa0qDVw0Xgg1Bkjh3wQhbOPQbZiJuBeTPEsNxOoSk54GMMEfY+rTl8d3lKKOUNQwX+DJMY=
-Received: from DM6PR01CA0017.prod.exchangelabs.com (2603:10b6:5:296::22) by
- BY5PR12MB4033.namprd12.prod.outlook.com (2603:10b6:a03:213::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.21; Thu, 30 May
- 2024 10:39:27 +0000
-Received: from DS2PEPF00003439.namprd02.prod.outlook.com
- (2603:10b6:5:296:cafe::52) by DM6PR01CA0017.outlook.office365.com
- (2603:10b6:5:296::22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.21 via Frontend
- Transport; Thu, 30 May 2024 10:39:27 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS2PEPF00003439.mail.protection.outlook.com (10.167.18.36) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7633.15 via Frontend Transport; Thu, 30 May 2024 10:39:27 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Thu, 30 May
- 2024 05:39:25 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Laurent Pinchart <laurent.pinchart@ideasonboard.com>, Piyush Mehta
- <piyush.mehta@amd.com>, Radhey Shyam Pandey <radhey.shyam.pandey@amd.com>,
- Tanmay Shah <tanmay.shah@amd.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] arm64: zynqmp: Update rproc node
-Date: Thu, 30 May 2024 12:39:23 +0200
-Message-ID: <d8247a46f486a612f85767de9b832ad33fa980fe.1717065556.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.40.1
+ dmarc=none (p=none dis=none) header.from=monstr.eu
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-62a2424ec50so6718737b3.3
+ for <u-boot@lists.denx.de>; Thu, 30 May 2024 03:42:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1717065737; x=1717670537;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GSNxBU7hYRlUbG4eCNuayU1ctM8LGUiuMclBCwnvVb8=;
+ b=HYbqqNkJ9X3CNo50cwPVGe0AfdJglRDybGBjtY5yFKs0zzqbwcwW6By391b8P9S2Gh
+ 5F6iREoOk7WpwV0ca1iQskT6Vyevx9kLmWxjL4VnB7PVb9kbVWVlUQXkYP6/61GvoPB1
+ yecTkVPYGRCIvVJG9beZknlO4hJfK+ld4E6zFKIYwxVnOtFQQIv6nlBtrnyabIsHbrD2
+ 9iDW58Nc3EK3X8evakpPnmE4JC2eLf1XBw3/FVzwboccaF43/PE/TCeKf5ivmpu23HgM
+ h9YtOELrS4wOzb1ALoBmls+X0ycuH4/Cwukprged6odop7xy4wAYh4Z6L4Vm/WnMr7Y2
+ oeHg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717065737; x=1717670537;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=GSNxBU7hYRlUbG4eCNuayU1ctM8LGUiuMclBCwnvVb8=;
+ b=iktWPZkHxpiFICqsqZIYS5izCHzmzhymGf6PE7hMaW/jJRu4qqb2uyEbDGZ2g089eG
+ wQywCV+VeSw/FDT500eH08jobjEeA3AAZZwLec2yiY9vrT12qdT6Ba15pMIykXe4gRhF
+ 2kr/3UDabOE9Jfq6Uy6IbHMMj1phe+2SgjKxc45fCZwZSQHSzx+cWudCrZQLhcR12A/3
+ VOm8ZP4WKlVLBWBqE7qym9SIjTvlTE24YL34bHRopgUB9641Qi/ntzsaISrWTGUS4VwT
+ iJUltQhm4aviPLIZe6gG4J8N8Y4aR8ZB0ZpbPszmsM6s/iChKxnjP2TCEj09DgOodTiz
+ QG4A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVHDKp7ex7h0ACk4fuZMxiQlBDlkFGVROwsO19xrGHnLuxzTY6+UZoXiPr1uFzHIadeCmAgk/ocemCpjPG4+lyFcToa/Q==
+X-Gm-Message-State: AOJu0YyIzyFfEB+SgtXzTVO0sV4YxW87r6LBd6Z+xYl2GbTb/hg1+y5L
+ e4pkb4/EDKGnJxJ+op+YKL2feIy9exBOk74Q6YKRXIaGCoBpk25L3UFgIZq2YXdFkH+h3pLipqO
+ 328PZ/DzhAB1BFMu4nIxURu1gVAiYG7xUrbEh
+X-Google-Smtp-Source: AGHT+IEt7o5G12huZHsLe6BzR3J7MnQzMnekaThEGzaRVUxdxja3IWCKd5Q7ujkxlX8JuCLDEBdEo5JNtuAJMTXiL7c=
+X-Received: by 2002:a0d:fe81:0:b0:627:e963:2bcf with SMTP id
+ 00721157ae682-62c6bd4fa20mr15272727b3.51.1717065737308; Thu, 30 May 2024
+ 03:42:17 -0700 (PDT)
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4068; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=wf9A1mlHfZc8wEzz6iJxKl8WkKmrwAEbjf3Fb9VYwCw=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhrSI8NADcwNa3rNmvJx8RyObjee43ob1GSxdjF5vFuuf3
- ppWdbSzI5aFQZCJQVZMkUXa5sqZvZUzpghfPCwHM4eVCWQIAxenAEzkmibD/NpnZbMvnv/ocoz5
- 970VyS4a2VfPcTDML+z+I6ey6U7L24u2O8+FPpy3WmTKXwA=
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS2PEPF00003439:EE_|BY5PR12MB4033:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3086d1f7-d92f-4e41-78ae-08dc8094c7d8
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230031|82310400017|36860700004|376005|1800799015; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?qBE2sedheEnWZburmhLOLB0XE/ZTcGKx3E7Rb4/i9RJHkSS7qX4UbdwHvJ0j?=
- =?us-ascii?Q?Vhe2jQt3KN0O1slQU3hUkwhEBo8ZfGGccvUwEgdpdBL9OG+94sLHBllvHklv?=
- =?us-ascii?Q?QgLwpv25IjH6HNJOPyPvlT5NjE5uZ95sc1VvAztB3LijpmU945l6BykMfl6j?=
- =?us-ascii?Q?SLJalduSbwFhRM7l/BcpJLQcgFP38POBxzLJiqw9z6is47VKgHeCVjL8UNag?=
- =?us-ascii?Q?THdudJVmN15/kamKGX+El8uv28ULr/EVyDJQmhBz9M4+FOkVC7BprBw9ZxBG?=
- =?us-ascii?Q?p/9enW9oxvlF2RkfDg6I8iAMaqywt7rmXB5DC/IQXuEOLgmP2IsQbCoKlJkd?=
- =?us-ascii?Q?WhUtq3pZJCZL2JPFcg2z4ZU9F2kcbeqYsaJo4KSl2fb2jyrbabFfPgmtI+c5?=
- =?us-ascii?Q?xFEhFykqo4ZccWPaOiYY+3SoQn54zVFXVR9rfG6Ut9jh9/BzJ7Chnf9MFqCp?=
- =?us-ascii?Q?N5y6rqPb/adzOZe+2+w7SNJl0UxySh39CIFHUAvU3uZTYV6D3T0aOpSt/fIU?=
- =?us-ascii?Q?++ixtLs/Q1vmFGfny6J4zFHR/OW3f0xF9pVGVgq1R97SxU8Xv5zQhpcvNn1V?=
- =?us-ascii?Q?lH+yxqEwcvY0o6vo4e9+CagXMS9W646St2HFbfciGSOD9ALziqF1l3PnedJS?=
- =?us-ascii?Q?N/sTsT6GQjUL0N/aVc71G3enPwb0PNxlMSZlDRqIwCcvGl25pbmNfUxijCwE?=
- =?us-ascii?Q?5k20TEZ8g38jSNvX4igt5CRkV0kLvHEv82No4fkdb/PQ9CEV/zLo/NIcoPdi?=
- =?us-ascii?Q?uLn8uCps5lZem3C8h448EFjxBKNaO+/kqAkvyVpl4j1xihUH0IwCH3DA8RaP?=
- =?us-ascii?Q?a5HCR2Kj9CIcM0SPBfZAZf+3/p9v0bD8NWb++lMmsMQeR8eG8JTcqNxlGTDs?=
- =?us-ascii?Q?qa/Yif3/1xoCFZ46SJygAHQtHwv2s3RoklyOxsiguIe9o6ItdGaxPTmJBvsu?=
- =?us-ascii?Q?8g5fe/sK1ko93A14Ao6PNov80LSjOvxVSQ0XeQ2UiwMCBX/oUyOoNO+J/w0r?=
- =?us-ascii?Q?k5SUgGJInw7L//M+vgrLduR8Vu/z8t8C206Y/W9tkIO/9XPal5KLgEAxkr0e?=
- =?us-ascii?Q?Y2c+lKT+ET9yJXOXjUPIkNNxclVJt+WFS0FwqyIOJlEuOG3zln15veO6nShE?=
- =?us-ascii?Q?ndUbVQPFmgcwQ7AtmSklQ+e0CqDZ7yV9mT24N5NLdENUxSi1l74Dvq9uquWq?=
- =?us-ascii?Q?7sGTl3PBJrmAqBjrtV+DPyvrbAs13eL1Uwz0ZT7YqXCirRSmsyfF1Um3XK2w?=
- =?us-ascii?Q?twCiF1jSzrOwuhKjaPOJFHCwsUac8LVFThrhXt+9aLH3Pcn2UUmozjhfrI13?=
- =?us-ascii?Q?sR5bOtUk+YVgxZlQLkJ9UWPPkCdChbpPM2jgYCCQKpsH87/wbGpJcASwgz8j?=
- =?us-ascii?Q?htYeX+k=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(82310400017)(36860700004)(376005)(1800799015); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 May 2024 10:39:27.5198 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3086d1f7-d92f-4e41-78ae-08dc8094c7d8
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF00003439.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4033
+References: <20240327121153.2455126-1-lukas.funke-oss@weidmueller.com>
+ <476510ce-8a1a-4ed1-ae98-04beb9c75607@amd.com>
+ <3e51141e-6c0d-4955-a9dc-89d2c5e94279@amd.com>
+ <070937d2-ee25-4a63-a4fd-56a073353887@weidmueller.com>
+In-Reply-To: <070937d2-ee25-4a63-a4fd-56a073353887@weidmueller.com>
+From: Michal Simek <monstr@monstr.eu>
+Date: Thu, 30 May 2024 12:42:06 +0200
+Message-ID: <CAHTX3d+02QMB7_B+eVu_Qj_mEfxToBCo1jBBaNy3FK8-2D_Q6w@mail.gmail.com>
+Subject: Re: [PATCH v3 0/2] Introduce spl_soc_init() for SoC specific
+ initialization
+To: Lukas Funke <lukas.funke-oss@weidmueller.com>
+Cc: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,138 +93,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-remoteproc node should be updated to be aligned with the latest dt-schema.
+Hi,
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
+p=C3=A1 3. 5. 2024 v 8:10 odes=C3=ADlatel Lukas Funke
+<lukas.funke-oss@weidmueller.com> napsal:
+>
+> Hi Michal,
+>
+> On 10.04.2024 09:06, Michal Simek wrote:
+> > Hi,
+> >
+> > On 4/8/24 14:59, Michal Simek wrote:
+> >>
+> >>
+> >> On 3/27/24 13:11, lukas.funke-oss@weidmueller.com wrote:
+> >>> From: Lukas Funke <lukas.funke@weidmueller.com>
+> >>>
+> >>>
+> >>> Currently some vendors use spl_board_init() for their SoC
+> >>> specific initialization. This prohibits board developers from adding
+> >>> board init code using said function. This series introduces a new
+> >>> function in order to separate SoC init code from board init code.
+> >>>
+> >>>
+> >>> Changes in v3:
+> >>>   - Rephrase Kconfig description and correct minor typo
+> >>>
+> >>> Changes in v2:
+> >>>   - Change spl_arch_init() to spl_soc_init()
+> >>>
+> >>> Lukas Funke (2):
+> >>>    spl: Introduce SoC specific init function
+> >>>    arm64: zynq(mp): Rename spl_board_init() to spl_soc_init()
+> >>>
+> >>>   arch/arm/Kconfig           | 4 ++--
+> >>>   arch/arm/mach-zynq/spl.c   | 4 ++--
+> >>>   arch/arm/mach-zynqmp/spl.c | 4 ++--
+> >>>   common/spl/Kconfig         | 7 +++++++
+> >>>   common/spl/spl.c           | 3 +++
+> >>>   include/spl.h              | 8 ++++++++
+> >>>   6 files changed, 24 insertions(+), 6 deletions(-)
+> >>>
+> >>
+> >> Applied.
+> >
+> > Actually I need to drop these two patches.
+> > I pushed it to CI and got this error.
+> >
+> > Building current source for 1 boards (1 thread, 32 jobs per thread)
+> >     riscv64:  +   sifive_unleashed
+> > +In file included from board/sifive/unleashed/spl.c:17:
+> > +include/asm/arch/spl.h:12:5: error: conflicting types for
+> > 'spl_soc_init'; have 'int(void)'
+> > +   12 | int spl_soc_init(void);
+> > +      |     ^~~~~~~~~~~~
+> > +In file included from board/sifive/unleashed/spl.c:10:
+> > +include/spl.h:825:6: note: previous declaration of 'spl_soc_init' with
+> > type 'void(void)'
+> > +  825 | void spl_soc_init(void);
+> > +      |      ^~~~~~~~~~~~
+> > +make[3]: *** [scripts/Makefile.build:257:
+> > spl/board/sifive/unleashed/spl.o] Error 1
+> > +make[2]: *** [scripts/Makefile.spl:533: spl/board/sifive/unleashed]
+> > Error 2
+> > +make[1]: *** [Makefile:2055: spl/u-boot-spl] Error 2
+> > +make: *** [Makefile:177: sub-make] Error 2
+> >
+> > And it is valid because Risc-V guys are already using it.
+>
+> The issue should be fixed on master. The function name was changed from
+> spl_soc_init to spl_dram_init. The patch should apply now. Could you
+> give it another try?
+
+Looks good now.
+
+Applied.
+M
+
 ---
-
-Once we push all dts to Linux we can change to OF_UPSTREAM but till that
-time we need to keep DTSes in sync.
----
- arch/arm/dts/zynqmp.dtsi                      | 67 +++++++++++++++++--
- include/dt-bindings/power/xlnx-zynqmp-power.h | 17 ++---
- 2 files changed, 68 insertions(+), 16 deletions(-)
-
-diff --git a/arch/arm/dts/zynqmp.dtsi b/arch/arm/dts/zynqmp.dtsi
-index 53a606c340a4..34f592c1a85f 100644
---- a/arch/arm/dts/zynqmp.dtsi
-+++ b/arch/arm/dts/zynqmp.dtsi
-@@ -314,19 +314,76 @@
- 		ranges;
- 	};
- 
--	remoteproc {
-+	rproc_lockstep: remoteproc@ffe00000 {
- 		compatible = "xlnx,zynqmp-r5fss";
- 		xlnx,cluster-mode = <1>;
-+		xlnx,tcm-mode = <1>;
- 
--		r5f-0 {
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+
-+		ranges = <0x0 0x0 0x0 0xffe00000 0x0 0x10000>,
-+			 <0x0 0x20000 0x0 0xffe20000 0x0 0x10000>,
-+			 <0x0 0x10000 0x0 0xffe10000 0x0 0x10000>,
-+			 <0x0 0x30000 0x0 0xffe30000 0x0 0x10000>;
-+
-+		r5f@0 {
-+			compatible = "xlnx,zynqmp-r5f";
-+			reg = <0x0 0x0 0x0 0x10000>,
-+			      <0x0 0x20000 0x0 0x10000>,
-+			      <0x0 0x10000 0x0 0x10000>,
-+			      <0x0 0x30000 0x0 0x10000>;
-+			reg-names = "atcm0", "btcm0", "atcm1", "btcm1";
-+			power-domains = <&zynqmp_firmware PD_RPU_0>,
-+					<&zynqmp_firmware PD_R5_0_ATCM>,
-+					<&zynqmp_firmware PD_R5_0_BTCM>,
-+					<&zynqmp_firmware PD_R5_1_ATCM>,
-+					<&zynqmp_firmware PD_R5_1_BTCM>;
-+			memory-region = <&rproc_0_fw_image>;
-+		};
-+
-+		r5f@1 {
-+			compatible = "xlnx,zynqmp-r5f";
-+			reg = <0x1 0x0 0x0 0x10000>, <0x1 0x20000 0x0 0x10000>;
-+			reg-names = "atcm0", "btcm0";
-+			power-domains = <&zynqmp_firmware PD_RPU_1>,
-+					<&zynqmp_firmware PD_R5_1_ATCM>,
-+					<&zynqmp_firmware PD_R5_1_BTCM>;
-+			memory-region = <&rproc_1_fw_image>;
-+		};
-+	};
-+
-+	rproc_split: remoteproc-split@ffe00000 {
-+		status = "disabled";
-+		compatible = "xlnx,zynqmp-r5fss";
-+		xlnx,cluster-mode = <0>;
-+		xlnx,tcm-mode = <0>;
-+
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+
-+		ranges = <0x0 0x0 0x0 0xffe00000 0x0 0x10000>,
-+			 <0x0 0x20000 0x0 0xffe20000 0x0 0x10000>,
-+			 <0x1 0x0 0x0 0xffe90000 0x0 0x10000>,
-+			 <0x1 0x20000 0x0 0xffeb0000 0x0 0x10000>;
-+
-+		r5f@0 {
- 			compatible = "xlnx,zynqmp-r5f";
--			power-domains = <&zynqmp_firmware PD_RPU_0>;
-+			reg = <0x0 0x0 0x0 0x10000>, <0x0 0x20000 0x0 0x10000>;
-+			reg-names = "atcm0", "btcm0";
-+			power-domains = <&zynqmp_firmware PD_RPU_0>,
-+					<&zynqmp_firmware PD_R5_0_ATCM>,
-+					<&zynqmp_firmware PD_R5_0_BTCM>;
- 			memory-region = <&rproc_0_fw_image>;
- 		};
- 
--		r5f-1 {
-+		r5f@1 {
- 			compatible = "xlnx,zynqmp-r5f";
--			power-domains = <&zynqmp_firmware PD_RPU_1>;
-+			reg = <0x1 0x0 0x0 0x10000>, <0x1 0x20000 0x0 0x10000>;
-+			reg-names = "atcm0", "btcm0";
-+			power-domains = <&zynqmp_firmware PD_RPU_1>,
-+					<&zynqmp_firmware PD_R5_1_ATCM>,
-+					<&zynqmp_firmware PD_R5_1_BTCM>;
- 			memory-region = <&rproc_1_fw_image>;
- 		};
- 	};
-diff --git a/include/dt-bindings/power/xlnx-zynqmp-power.h b/include/dt-bindings/power/xlnx-zynqmp-power.h
-index e7eb0960480a..618024cbb20d 100644
---- a/include/dt-bindings/power/xlnx-zynqmp-power.h
-+++ b/include/dt-bindings/power/xlnx-zynqmp-power.h
-@@ -6,16 +6,12 @@
- #ifndef _DT_BINDINGS_ZYNQMP_POWER_H
- #define _DT_BINDINGS_ZYNQMP_POWER_H
- 
--#define		PD_RPU_0	6
--#define		PD_RPU_1	7
--#define		PD_OCM_BANK_0	11
--#define		PD_OCM_BANK_1	12
--#define		PD_OCM_BANK_2	13
--#define		PD_OCM_BANK_3	14
--#define		PD_TCM_BANK_0	15
--#define		PD_TCM_BANK_1	16
--#define		PD_TCM_BANK_2	17
--#define		PD_TCM_BANK_3	18
-+#define		PD_RPU_0	7
-+#define		PD_RPU_1	8
-+#define		PD_R5_0_ATCM	15
-+#define		PD_R5_0_BTCM	16
-+#define		PD_R5_1_ATCM	17
-+#define		PD_R5_1_BTCM	18
- #define		PD_USB_0	22
- #define		PD_USB_1	23
- #define		PD_TTC_0	24
-@@ -45,6 +41,5 @@
- #define		PD_CAN_1	48
- #define		PD_GPU		58
- #define		PD_PCIE		59
--#define		PD_PL		69
- 
- #endif
--- 
-2.40.1
-
+Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+w: www.monstr.eu p: +42-0-721842854
+Maintainer of Linux kernel - Xilinx Microblaze
+Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP ARM64 SoCs
+U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal SoCs
