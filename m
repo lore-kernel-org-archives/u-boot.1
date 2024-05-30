@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BA1FC25B74
-	for <u-boot@archiver.kernel.org>; Thu, 30 May 2024 11:52:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4553CC25B74
+	for <u-boot@archiver.kernel.org>; Thu, 30 May 2024 12:18:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DADAD886E1;
-	Thu, 30 May 2024 13:52:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 858EF886E8;
+	Thu, 30 May 2024 14:18:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Nf+dRA3h";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="t+MJsYSE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE771886E4; Thu, 30 May 2024 13:52:20 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 5F26B886EE; Thu, 30 May 2024 14:18:36 +0200 (CEST)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3971E8864C
- for <u-boot@lists.denx.de>; Thu, 30 May 2024 13:52:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C97E7886AE
+ for <u-boot@lists.denx.de>; Thu, 30 May 2024 14:18:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-choudhary@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44UBqDhb026321;
- Thu, 30 May 2024 06:52:13 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1717069933;
- bh=pWQiIQ9b0mVhRJvMoWof1hhETtFIuOa8er4OR+xP+aY=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=Nf+dRA3h2Jfiipri+JyzGmE/pJeB4cC3Q7g3N6Zwjt3P7PEWpac6WiRLXgpcUr2yl
- JCypxRfHLgQ3N/rF5gt6qnj0sNuREXP8gG8wO/7mtVUU3OUPMc0Ggpaj7uKlgB/w1g
- l/bMvFkHDUYPJgDXC6sZ7DtNjXlYinVT6HsEak8s=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44UBqCff010432
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 30 May 2024 06:52:12 -0500
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 30
- May 2024 06:52:12 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 30 May 2024 06:52:12 -0500
-Received: from [172.24.227.102]
- (jayesh-hp-probook-440-g8-notebook-pc.dhcp.ti.com [172.24.227.102])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44UBq6bR022199;
- Thu, 30 May 2024 06:52:07 -0500
-Message-ID: <5795080b-6ebc-477d-abd3-1935668a067b@ti.com>
-Date: Thu, 30 May 2024 17:22:06 +0530
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1717071513; x=1719663513;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=EhGbi+XpgHpIhv2r8rScMYY8oEIT5/2mBCXcvZEJo2U=;
+ b=t+MJsYSEpphjbHGkg4ubEKownBqgdzEvSvNdD5EG660VnZzs0JqVm+KcirL1A3Pp
+ hntiJfyN1z1XU5ItCw+LJkV1i5OiIYEA7PPIg4lePNdU9nFyVoLmfLlneeR89h4m
+ Bov1//1xbKm4iM+SsmD+78k+X9+R/i9+bnCJFZCQxZw=;
+X-AuditID: ac14000a-03e52700000021bc-04-66586e99feef
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 8A.62.08636.99E68566;
+ Thu, 30 May 2024 14:18:33 +0200 (CEST)
+Received: from [172.25.39.28] (172.25.0.11) by Berlix.phytec.de (172.25.0.12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Thu, 30 May
+ 2024 14:18:32 +0200
+Message-ID: <89aba782-fbc2-463e-ae93-f38dca3da534@phytec.de>
+Date: Thu, 30 May 2024 14:18:31 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/7] arm: mach-k3: j721e: Enable QoS for DSS
-To: Andrew Davis <afd@ti.com>, <trini@konsulko.com>
-CC: <a-bhatia1@ti.com>, <nm@ti.com>, <n-francis@ti.com>,
- <joao.goncalves@toradex.com>, <j-humphreys@ti.com>,
- <d.haller@phytec.de>, <hnagalla@ti.com>, <bb@ti.com>,
- <seanga2@gmail.com>, <sjg@chromium.org>, <clamor95@gmail.com>,
- <martyn.welch@collabora.com>, <m-chawdhry@ti.com>, <a-limaye@ti.com>,
- <sebin.francis@ti.com>, <u-kumar1@ti.com>, <u-boot@lists.denx.de>
-References: <20240522113726.302908-1-j-choudhary@ti.com>
- <20240522113726.302908-3-j-choudhary@ti.com>
- <e5ef2268-a992-4ef6-8447-7d2d94580104@ti.com>
+Subject: Re: [PATCH v3 7/8] board: ti: Pull redundant DDR functions to a
+ common location and Fixup DDR size when ECC is enabled
+To: Santhosh Kumar K <s-k6@ti.com>, <trini@konsulko.com>, <nm@ti.com>,
+ <vigneshr@ti.com>, <bb@ti.com>, <u-kumar1@ti.com>, <m-chawdhry@ti.com>
+CC: <u-boot@lists.denx.de>, <n-francis@ti.com>
+References: <20240523050430.455201-1-s-k6@ti.com>
+ <20240523050430.455201-8-s-k6@ti.com>
 Content-Language: en-US
-From: Jayesh Choudhary <j-choudhary@ti.com>
-In-Reply-To: <e5ef2268-a992-4ef6-8447-7d2d94580104@ti.com>
+From: Wadim Egorov <w.egorov@phytec.de>
+In-Reply-To: <20240523050430.455201-8-s-k6@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrFLMWRmVeSWpSXmKPExsWyRpKBR3dmXkSawfl/LBZz3xxgtbj0INXi
+ 5I1Wdos3P84yWax/sonNYuqkzewWb/d2sltM2zuD2eL/2Q/sDpwerw6sYvc4e2cHo8fxG9uZ
+ ApijuGxSUnMyy1KL9O0SuDJWnvvCWtDuUNG6tKaBcZFxFyMnh4SAicSBeTeZQWwhgSVMEht3
+ c3cxcgHZdxklJk+6D5bgFbCReDn7DCOIzSKgKvFrz3QWiLigxMmZT8BsUQF5ifu3ZrCDNAsL
+ NDJKPH3cCeaICPQzSnScbWUFqWIW0JNYcuQeK8S6SIn3k86zQ8TFJW49mc8EYrMJqEvc2fAN
+ qIaDg1PASGLWYk6IEguJxW8OQpXLS2x/OwfqanmJF5eWs0B8Iy8x7dxrZgg7VOLIptVMExiF
+ ZyG5dRaSbbOQjJ2FZOwCRpZVjEK5mcnZqUWZ2XoFGZUlqcl6KambGEHxI8LAtYOxb47HIUYm
+ DsZDjBIczEoivL/SI9KEeFMSK6tSi/Lji0pzUosPMUpzsCiJ867uCE4VEkhPLEnNTk0tSC2C
+ yTJxcEo1MPYKhS+fayy6sFRchWtS3EZZhYZdIRNjMrqeXTis7rA81vAhz78H4Z0R7U//ndhT
+ ODFrVvSd0ukBXmribhtSDVLdOSfdv3PvSoFX6X7xRWK+fOHf9XKm1ni6RyVkMy0OWlvsYWhk
+ nZTy6n716ewDF2rXbzt5XO/Y243L56n03v5r2iIx6cWSbiWW4oxEQy3mouJEAJQux52NAgAA
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,115 +91,306 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Andrew,
+Hi Santhosh,
 
-On 22/05/24 21:14, Andrew Davis wrote:
-> On 5/22/24 6:37 AM, Jayesh Choudhary wrote:
->> Enable Quality of Service (QoS) blocks for Display SubSystem (DSS), by
->> servicing the DSS - DDR traffic from the Real-Time (RT) queue. This is
->> done by setting the DSS DMA orderID to greater than 7.
->> ATYPE 3 is selected so that the traffic takes non-coherent path and does
+thanks for this series!
+
+Am 23.05.24 um 07:04 schrieb Santhosh Kumar K:
+> As there are few redundant functions in board/ti/*/evm.c files, pull
+> them to a common location of access to reuse and include the common file
+> to access the functions.
 > 
-> So this is the part I'm not sure about, this change is not just a 
-> performance
-> adjustment, it can and does break things. The ORDERID setting is fine 
-> with me,
-> but changing ATYPE should be done in a separate patch so it can be 
-> debated on
-> its own.
->
->> not have a conflict with coherent traffic from C7x (deep-learning
->> applications).
->> Before setting up the QoS, the ORDERID needs to be mapped to VBUSM 
->> sources
->> using setup_navss_nb() function call that sets the threadmap for NBSS
->> registers. (Section 10.2.10.1.2 "NB Parameters" in TRM[0])
->>
->> Section 3.3.2 "Quality of Service (QoS)" in the TRM[0] provide more
->> details.
->>
->> [0]: https://www.ti.com/lit/zip/spruil1
->>
->> Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
->> ---
->>   arch/arm/mach-k3/j721e/j721e_init.c         |  28 +++++
->>   arch/arm/mach-k3/r5/j721e/Makefile          |   1 +
->>   arch/arm/mach-k3/r5/j721e/j721e_qos.h       |  96 +++++++++++++++
->>   arch/arm/mach-k3/r5/j721e/j721e_qos_uboot.c | 125 ++++++++++++++++++++
->>   4 files changed, 250 insertions(+)
->>   create mode 100644 arch/arm/mach-k3/r5/j721e/j721e_qos.h
->>   create mode 100644 arch/arm/mach-k3/r5/j721e/j721e_qos_uboot.c
->>
->> diff --git a/arch/arm/mach-k3/j721e/j721e_init.c 
->> b/arch/arm/mach-k3/j721e/j721e_init.c
->> index c2024f2500..e9ed8cb267 100644
->> --- a/arch/arm/mach-k3/j721e/j721e_init.c
->> +++ b/arch/arm/mach-k3/j721e/j721e_init.c
-
-
+> Call k3-ddrss driver through fixup_ddr_driver_for_ecc() to fixup the
+> device tree and resize the available amount of DDR, if ECC is enabled.
+> Otherwise, fixup the device tree using the regular
+> fdt_fixup_memory_banks().
+> 
+> Also call dram_init_banksize() after every call to
+> fixup_ddr_driver_for_ecc() is made so that gd->bd is populated
+> correctly.
+> 
+> Ensure that fixup_ddr_driver_for_ecc() is agnostic to the number of DDR
+> controllers present.
+> 
+> Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> ---
 [...]
+> +++ b/board/ti/common/k3-ddr-init.c
+> @@ -0,0 +1,89 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (C) 2023, Texas Instruments Incorporated - https://www.ti.com/
+> + */
+> +
+> +#include <fdt_support.h>
+> +#include <dm/uclass.h>
+> +#include <k3-ddrss.h>
+> +#include <spl.h>
+> +
+> +#include "k3-ddr-init.h"
+> +
+> +int dram_init(void)
+> +{
+> +	s32 ret;
+> +
+> +	ret = fdtdec_setup_mem_size_base_lowest();
+> +	if (ret)
+> +		printf("Error setting up mem size and base. %d\n", ret);
+> +
+> +	return ret;
+> +}
+> +
+> +int dram_init_banksize(void)
+> +{
+> +	s32 ret;
+> +
+> +	ret = fdtdec_setup_memory_banksize();
+> +	if (ret)
+> +		printf("Error setting up memory banksize. %d\n", ret);
+> +
+> +	return ret;
+> +}
 
->> diff --git a/arch/arm/mach-k3/r5/j721e/j721e_qos_uboot.c 
->> b/arch/arm/mach-k3/r5/j721e/j721e_qos_uboot.c
->> new file mode 100644
->> index 0000000000..c829057200
->> --- /dev/null
->> +++ b/arch/arm/mach-k3/r5/j721e/j721e_qos_uboot.c
->> @@ -0,0 +1,125 @@
->> +// SPDX-License-Identifier: GPL-2.0+
->> +/*
->> + * j721e Quality of Service (QoS) Configuration Data
->> + * Auto generated from K3 Resource Partitioning tool
->> + */
->> +
->> +#include <asm/arch/k3-qos.h>
->> +#include "j721e_qos.h"
->> +
->> +struct k3_qos_data qos_data[] = {
->> +    /* DSS_PIPE_VID1 - 2 endpoints, 2 channels */
->> +    {
->> +        .reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA + 0x100 + 0x4 * 0,
-> 
-> 0x100 being the instance, and 0x4 * x being the specific device register 
-> right?
-> That could be encoded in a macro (the "Resource Partitioning tool" would
-> be updated to generate that too).
-> 
-> Andrew
-> 
+I'm wondering if we can generalize more.
 
-Okay both val and reg could be updated.
+What do you say if we keep dram_init() & dram_init_banksize() in the 
+board code and move fixup_ddr_driver_for_ecc() & fixup_memory_node() to 
+mach-k3 and make them available for all K3 based boards?
 
->> +        .val = ATYPE_3 | ORDERID_15,
->> +    },
->> +    {
->> +        .reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA + 0x100 + 0x4 * 1,
->> +        .val = ATYPE_3 | ORDERID_15,
->> +    },
+It looks like I will reuse the code for our boards and I assume other 
+vendors too.
 
-[...]
+Regards,
+Wadim
 
->> +
->> +    /* Following registers set 1:1 mapping for orderID MAP1/MAP2
->> +     * remap registers. orderID x is remapped to orderID x again
->> +     * This is to ensure orderID from MAP register is unchanged
->> +     */
->> +
->> +    /* K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA - 2 groups */
->> +    {
->> +        .reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA + 0,
->> +        .val = 0x76543210,
->> +    },
->> +    {
->> +        .reg = K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA + 4,
->> +        .val = 0xfedcba98,
->> +    },
-
- From the looks of it, these register and val can also be encoded as
-K3_QOS_GROUP_REG and K3_QOS_GROUP_VAL_HIGH (0xfedcba98) and
-K3_QOS_GROUP_VAL_LOW (0x76543210)????
-
-[...]
-
->> +
->> +u32 qos_count = ARRAY_SIZE(qos_data);
+> +
+> +#if defined(CONFIG_SPL_BUILD)
+> +
+> +void fixup_ddr_driver_for_ecc(struct spl_image_info *spl_image)
+> +{
+> +	struct udevice *dev;
+> +	int ret, ctr = 1;
+> +
+> +	dram_init_banksize();
+> +
+> +	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
+> +	if (ret)
+> +		panic("Cannnot get RAM device for ddr size fixup: %d\n", ret);
+> +
+> +	ret = k3_ddrss_ddr_fdt_fixup(dev, spl_image->fdt_addr, gd->bd);
+> +	if (ret)
+> +		printf("Error fixing up ddr node for ECC use! %d\n", ret);
+> +
+> +	dram_init_banksize();
+> +
+> +	ret = uclass_next_device_err(&dev);
+> +
+> +	while (!ret) {
+> +		ret = k3_ddrss_ddr_fdt_fixup(dev, spl_image->fdt_addr, gd->bd);
+> +		if (ret)
+> +			printf("Error fixing up ddr node %d for ECC use! %d\n", ctr, ret);
+> +
+> +		dram_init_banksize();
+> +		ret = uclass_next_device_err(&dev);
+> +		ctr++;
+> +	}
+> +}
+> +
+> +void fixup_memory_node(struct spl_image_info *spl_image)
+> +{
+> +	u64 start[CONFIG_NR_DRAM_BANKS];
+> +	u64 size[CONFIG_NR_DRAM_BANKS];
+> +	int bank;
+> +	int ret;
+> +
+> +	dram_init();
+> +	dram_init_banksize();
+> +
+> +	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+> +		start[bank] = gd->bd->bi_dram[bank].start;
+> +		size[bank] = gd->bd->bi_dram[bank].size;
+> +	}
+> +
+> +	ret = fdt_fixup_memory_banks(spl_image->fdt_addr, start, size,
+> +				     CONFIG_NR_DRAM_BANKS);
+> +
+> +	if (ret)
+> +		printf("Error fixing up memory node! %d\n", ret);
+> +}
+> +
+> +#endif
+> diff --git a/board/ti/common/k3-ddr-init.h b/board/ti/common/k3-ddr-init.h
+> new file mode 100644
+> index 000000000000..9d1826815dfd
+> --- /dev/null
+> +++ b/board/ti/common/k3-ddr-init.h
+> @@ -0,0 +1,15 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Copyright (C) 2023, Texas Instruments Incorporated - https://www.ti.com/
+> + */
+> +
+> +#ifndef __K3_DDR_INIT_H
+> +#define __K3_DDR_INIT_H
+> +
+> +int dram_init(void);
+> +int dram_init_banksize(void);
+> +
+> +void fixup_ddr_driver_for_ecc(struct spl_image_info *spl_image);
+> +void fixup_memory_node(struct spl_image_info *spl_image);
+> +
+> +#endif /* __K3_DDR_INIT_H */
+> diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
+> index 539eaf47186a..e0cd8529bc2b 100644
+> --- a/board/ti/j721e/evm.c
+> +++ b/board/ti/j721e/evm.c
+> @@ -17,6 +17,7 @@
+>   
+>   #include "../common/board_detect.h"
+>   #include "../common/fdt_ops.h"
+> +#include "../common/k3-ddr-init.h"
+>   
+>   #define board_is_j721e_som()	(board_ti_k3_is("J721EX-PM1-SOM") || \
+>   				 board_ti_k3_is("J721EX-PM2-SOM"))
+> @@ -37,17 +38,6 @@ int board_init(void)
+>   	return 0;
+>   }
+>   
+> -int dram_init(void)
+> -{
+> -#ifdef CONFIG_PHYS_64BIT
+> -	gd->ram_size = 0x100000000;
+> -#else
+> -	gd->ram_size = 0x80000000;
+> -#endif
+> -
+> -	return 0;
+> -}
+> -
+>   phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+>   {
+>   #ifdef CONFIG_PHYS_64BIT
+> @@ -59,23 +49,6 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+>   	return gd->ram_top;
+>   }
+>   
+> -int dram_init_banksize(void)
+> -{
+> -	/* Bank 0 declares the memory available in the DDR low region */
+> -	gd->bd->bi_dram[0].start = 0x80000000;
+> -	gd->bd->bi_dram[0].size = 0x80000000;
+> -	gd->ram_size = 0x80000000;
+> -
+> -#ifdef CONFIG_PHYS_64BIT
+> -	/* Bank 1 declares the memory available in the DDR high region */
+> -	gd->bd->bi_dram[1].start = 0x880000000;
+> -	gd->bd->bi_dram[1].size = 0x80000000;
+> -	gd->ram_size = 0x100000000;
+> -#endif
+> -
+> -	return 0;
+> -}
+> -
+>   #ifdef CONFIG_SPL_LOAD_FIT
+>   int board_fit_config_name_match(const char *name)
+>   {
+> diff --git a/board/ti/j721s2/evm.c b/board/ti/j721s2/evm.c
+> index 5a0281d6b483..fca30107cddb 100644
+> --- a/board/ti/j721s2/evm.c
+> +++ b/board/ti/j721s2/evm.c
+> @@ -24,6 +24,7 @@
+>   
+>   #include "../common/board_detect.h"
+>   #include "../common/fdt_ops.h"
+> +#include "../common/k3-ddr-init.h"
+>   
+>   DECLARE_GLOBAL_DATA_PTR;
+>   
+> @@ -32,17 +33,6 @@ int board_init(void)
+>   	return 0;
+>   }
+>   
+> -int dram_init(void)
+> -{
+> -#ifdef CONFIG_PHYS_64BIT
+> -	gd->ram_size = 0x100000000;
+> -#else
+> -	gd->ram_size = 0x80000000;
+> -#endif
+> -
+> -	return 0;
+> -}
+> -
+>   phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+>   {
+>   #ifdef CONFIG_PHYS_64BIT
+> @@ -54,22 +44,17 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+>   	return gd->ram_top;
+>   }
+>   
+> -int dram_init_banksize(void)
+> +#if defined(CONFIG_SPL_BUILD)
+> +void spl_perform_fixups(struct spl_image_info *spl_image)
+>   {
+> -	/* Bank 0 declares the memory available in the DDR low region */
+> -	gd->bd->bi_dram[0].start = 0x80000000;
+> -	gd->bd->bi_dram[0].size = 0x7fffffff;
+> -	gd->ram_size = 0x80000000;
+> -
+> -#ifdef CONFIG_PHYS_64BIT
+> -	/* Bank 1 declares the memory available in the DDR high region */
+> -	gd->bd->bi_dram[1].start = 0x880000000;
+> -	gd->bd->bi_dram[1].size = 0x37fffffff;
+> -	gd->ram_size = 0x400000000;
+> -#endif
+> -
+> -	return 0;
+> +	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
+> +		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
+> +			fixup_ddr_driver_for_ecc(spl_image);
+> +	} else {
+> +		fixup_memory_node(spl_image);
+> +	}
+>   }
+> +#endif
+>   
+>   #ifdef CONFIG_TI_I2C_BOARD_DETECT
+>   /*
+> diff --git a/board/ti/j784s4/evm.c b/board/ti/j784s4/evm.c
+> index aed0ea5b9495..73056a16dd5f 100644
+> --- a/board/ti/j784s4/evm.c
+> +++ b/board/ti/j784s4/evm.c
+> @@ -10,6 +10,7 @@
+>   #include <init.h>
+>   #include <spl.h>
+>   #include "../common/fdt_ops.h"
+> +#include "../common/k3-ddr-init.h"
+>   
+>   DECLARE_GLOBAL_DATA_PTR;
+>   
+> @@ -18,15 +19,17 @@ int board_init(void)
+>   	return 0;
+>   }
+>   
+> -int dram_init(void)
+> +#if defined(CONFIG_SPL_BUILD)
+> +void spl_perform_fixups(struct spl_image_info *spl_image)
+>   {
+> -	return fdtdec_setup_mem_size_base();
+> -}
+> -
+> -int dram_init_banksize(void)
+> -{
+> -	return fdtdec_setup_memory_banksize();
+> +	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
+> +		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
+> +			fixup_ddr_driver_for_ecc(spl_image);
+> +	} else {
+> +		fixup_memory_node(spl_image);
+> +	}
+>   }
+> +#endif
+>   
+>   #ifdef CONFIG_BOARD_LATE_INIT
+>   int board_late_init(void)
