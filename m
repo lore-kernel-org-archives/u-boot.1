@@ -4,86 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09042C27C43
-	for <u-boot@archiver.kernel.org>; Thu, 30 May 2024 14:11:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E2C2C25B74
+	for <u-boot@archiver.kernel.org>; Thu, 30 May 2024 14:37:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D91F88700;
-	Thu, 30 May 2024 16:11:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 85CAC8870F;
+	Thu, 30 May 2024 16:37:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PHAuWNLl";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UZhShvir";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17D9C88705; Thu, 30 May 2024 16:11:30 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 67AA588710; Thu, 30 May 2024 16:37:17 +0200 (CEST)
+Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
+ [IPv6:2607:f8b0:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5E8A886FD
- for <u-boot@lists.denx.de>; Thu, 30 May 2024 16:11:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C8A08870D
+ for <u-boot@lists.denx.de>; Thu, 30 May 2024 16:37:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a635a74e031so113582866b.0
- for <u-boot@lists.denx.de>; Thu, 30 May 2024 07:11:27 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pg1-x52a.google.com with SMTP id
+ 41be03b00d2f7-681ad081695so697148a12.3
+ for <u-boot@lists.denx.de>; Thu, 30 May 2024 07:37:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1717078287; x=1717683087; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Z/suQd3aS+8HlyYRhEFjecabepj4JkSHW35Rx0kaguM=;
- b=PHAuWNLlbYA4fj+E6FF9m4cnDXmNCzemgTuYKcEHWt2T9BWmr2IcYrhapOljuZMAtK
- E3iUi5OsGUJzaX2SoGv8ePo7aL54wLzmktnrV042JUTY7KebFsQkqKC/xA3ni+HCyId1
- oC+qz9X04lSwWHA3JMkul3nwV0JozZPN8WEq17zP0u6xtMZnCyL/AiYBCYDSlIZOyGYA
- 3C7PZTMwxTLX6z/OP54KZvK9ciN2sQDhdCJ4TSX6xLlaIDIQT8ZN3zG2NE48k20dbbol
- xsKx894zaVGGh7DQXKpddKhPCLyNj9054fSR5fyBPVR3XffSenlJMRoajGrRpeMP2SFe
- fgiA==
+ d=linaro.org; s=google; t=1717079833; x=1717684633; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=BFCx+zs7AGeiNIsEUOyBnWqQ8QJBuAKetIjy+RSAXKs=;
+ b=UZhShvirqhvnev9yviJ8mLMt62kwlwoHnqa22TjjrIb6OR9H004imC+psrCjKMXq4q
+ SMnf+8pLJokr3fr6GpOpzq7WOwjdQzPgxUF3PlkhGGmMOlzl6iQGOD4711lwoSiHzfkN
+ idy9/MMxUyHMAwdlOrCl0tV/r7fkXh7qIY1waKbNOAa+Sapn+JWevQuuD1u3aTr3I54H
+ XNzQHWAfID5idxjsitrZMtGyZeQ+FMrKVkNeBqOqq+++VAhCey40REfV2Wt7e2nKg/qf
+ WZMATO+LtPp4eMMGB2t3mVB8cNHL2rR9vVfBy8m0M1Ihh3Mkc2/6sR8IZiOTkjWytvxE
+ qzlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717078287; x=1717683087;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Z/suQd3aS+8HlyYRhEFjecabepj4JkSHW35Rx0kaguM=;
- b=s23B4gYxX7fEDRCAWfliWd/OQ+5zYuSrgESIoR9PaZTirMrcC6IS9V7PbNA3grcrHf
- 5+FkZ3hcXcquR9rdGjcM8BDP/KyWTj7biQPRICCPOYMI/vtMyTtXykEOkegUw0n+8W0o
- RvQk4Caep1hKBpDKYYC/GmEy3bUOZ2/8lwXenpe/0Besi6M97VQIzhHbxlR4ZeZgEMfV
- lnZcstZytzKlJklTPtkLK5SMQMZOsPAUEtidoiarxueToWEG29B9ofl1z5Uvr89N317U
- 3acrm/6MnUrE6T7CyOKachyt1Q9oQ61EAjit6L8LTUfERcY2rrlD0r7s9DKa4Hp8KrI1
- m9tA==
-X-Gm-Message-State: AOJu0YxfwhjJgG0FbsZ4h/kPk1vzNzubSNvV6n8G0Ljnjh6z1RXfn53X
- DaAY33A6KGRgtC5db3XrebpKuAhpirm0TgB+PWvNDoTnJ8HI9uadAID03EB84ak=
-X-Google-Smtp-Source: AGHT+IHc56S+CVs1MLxZp99Pb9T8wrWysvevyLZLBH/6sPEMLuKbyBcl1yzlS5S0Ut09pApDsXG0Uw==
-X-Received: by 2002:a17:906:60d:b0:a63:2698:2163 with SMTP id
- a640c23a62f3a-a65e8d35e25mr271768566b.7.1717078287181; 
- Thu, 30 May 2024 07:11:27 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:e866:9218:1a26:c042?
- ([2a01:e0a:3cb:7bb0:e866:9218:1a26:c042])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a62baf15294sm608479666b.23.2024.05.30.07.11.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 May 2024 07:11:26 -0700 (PDT)
-Message-ID: <1b104b1a-f6cd-4d16-b1e9-9f87ef483443@linaro.org>
-Date: Thu, 30 May 2024 16:11:25 +0200
+ d=1e100.net; s=20230601; t=1717079833; x=1717684633;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=BFCx+zs7AGeiNIsEUOyBnWqQ8QJBuAKetIjy+RSAXKs=;
+ b=EQkmR37Ah3NB/MVkOKW8VTK1Q/t3aE/lUtawbpBqH8peOv92X7gyXF9H2fR6j+eqQQ
+ RmEnB4l1ixXQY8pdnWsg61LhgKtVDyfDYMs68zkc6W3sFgQreSiyX/eXGaeq3ht02562
+ 7RA8QvljuYLFRAo/pOXmd92uKBO4aNLwYDjMp/8O7aGiPuq9WyTkdvfjGXlboaK6b1OL
+ GMzc7UaZZ+D60lBnS4vFHdoDcQmxNhvMEU8KP0rtOZPsH0Du7Jtsxu3mAe7SFtUbxX1A
+ l8Wv3+3Dy8j5UqYdJJbXGVBFSDaYaluD0DcGhWuuhpAVUgDuVyAn/nSwbM0ot6bzrWQn
+ mNaA==
+X-Gm-Message-State: AOJu0YyKEqLD1HFvoxue8miFRnfhMLPi0jqL4558fxPwBooDiaoQBBM4
+ a4N6ZJDwNH2EKYuPdMVHr+Qy5twhXxvP0sm+2fLaUcc+awEMzW8huaI/LkIzSMqul1PhaeLq9nL
+ pkcQAYaWxPiMTcFpp/1cCwhKm8E8ffEhwpSh8SQ==
+X-Google-Smtp-Source: AGHT+IE9izH3/BzLcQa4QknsJmsYdU8BE/8x0VAkrfyeFJ/XuTvDebRm6cZEdEZKHpSs2Vlx4kp/psZEX5i3TN3zz28=
+X-Received: by 2002:a17:90b:17c6:b0:2c1:a068:ba83 with SMTP id
+ 98e67ed59e1d1-2c1ab9dfe48mr2438974a91.11.1717079832722; Thu, 30 May 2024
+ 07:37:12 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 12/14] test/py: net: add _lwip variants of dhcp, ping
- and tftpboot tests
-To: Maxim Uvarov <muvarov@gmail.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Tom Rini <trini@konsulko.com>,
- Love Kumar <love.kumar@amd.com>, Maxim Uvarov <maxim.uvarov@linaro.org>,
- Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>
-References: <cover.1716566960.git.jerome.forissier@linaro.org>
- <9acc7630e5768ab9af673981a78ffb84b47aa62e.1716566960.git.jerome.forissier@linaro.org>
- <CAJGZr0JN3SLGfjRunLpvstBEfpOr6tHgt4h0K5_1Cayn+5WKOw@mail.gmail.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CAJGZr0JN3SLGfjRunLpvstBEfpOr6tHgt4h0K5_1Cayn+5WKOw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20240528140955.1960172-1-raymond.mao@linaro.org>
+ <20240528140955.1960172-4-raymond.mao@linaro.org>
+ <20240529165814.GQ2568172@bill-the-cat>
+ <CAEfUkU+zKyaqc5tFy0rN3ofm3pRuckZX6PbD00VNtWQc5COZyA@mail.gmail.com>
+ <20240529180129.GB3714513@bill-the-cat>
+ <CAEfUkUJj5Y+uVmRXx+=DP-6O7dpNcMjSA1jADKaJo07RSsBjHw@mail.gmail.com>
+ <20240529184255.GC3714513@bill-the-cat>
+ <CAEfUkUJOD=KEnUo=7BD14mW2yfq8ZnGREqMgOQfx2pkWxLvtzQ@mail.gmail.com>
+ <20240529194715.GD3714513@bill-the-cat>
+In-Reply-To: <20240529194715.GD3714513@bill-the-cat>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Thu, 30 May 2024 10:37:00 -0400
+Message-ID: <CAEfUkUK=NPS-_Jhi7==93YQUxkhOd-DjTn7AS4m9QCfGo86G3g@mail.gmail.com>
+Subject: Re: [PATCH v3 03/25] mbedtls: add mbedtls into the build system
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Stefan Bosch <stefan_b@posteo.net>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jesse Taube <mr.bossman075@gmail.com>,
+ Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Ilya Lukin <4.shket@gmail.com>, Sergei Antonov <saproj@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,104 +111,211 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
+On Wed, 29 May 2024 at 15:47, Tom Rini <trini@konsulko.com> wrote:
 
-On 5/28/24 11:53, Maxim Uvarov wrote:
-> пт, 24 мая 2024 г. в 19:22, Jerome Forissier <jerome.forissier@linaro.org>:
->>
->> WHen NET_LWIP is enabled, the dhcp/ping/tftpboot commands are enabled
->> via CMD_DHCP_LWIP, CMD_PING_LWIP and CMD_TFTPBOOT_LWIP, respectively;
->> therefore the config annotations in the Python test scripts need to be
->> cmd_dhcp_lwip, cmd_ping_lwip and cmd_tftpboot_lwip.
->>
->> The console output of the tftpboot command with lwIP is slightly
->> different from the non-lwIP implementation. This is taken care of in
->> test_net_tftpboot().
->>
->> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
->> ---
->>  test/py/tests/test_net.py | 21 +++++++++++++++++----
->>  1 file changed, 17 insertions(+), 4 deletions(-)
->>
->> diff --git a/test/py/tests/test_net.py b/test/py/tests/test_net.py
->> index 038a473b239..ba30780903f 100644
->> --- a/test/py/tests/test_net.py
->> +++ b/test/py/tests/test_net.py
->> @@ -127,6 +127,10 @@ def test_net_dhcp(u_boot_console):
->>      global net_set_up
->>      net_set_up = True
->>
->> +@pytest.mark.buildconfigspec('cmd_dhcp_lwip')
->> +def test_net_dhcp_lwip(u_boot_console):
->> +    test_net_dhcp(u_boot_console)
->> +
->>  @pytest.mark.buildconfigspec('cmd_dhcp')
->>  @pytest.mark.buildconfigspec('cmd_mii')
->>  def test_net_dhcp_abort(u_boot_console):
->> @@ -230,6 +234,10 @@ def test_net_ping(u_boot_console):
->>      output = u_boot_console.run_command('ping $serverip')
->>      assert 'is alive' in output
->>
->> +@pytest.mark.buildconfigspec('cmd_ping_lwip')
->> +def test_net_ping_lwip(u_boot_console):
->> +    test_net_ping(u_boot_console)
->> +
->>  @pytest.mark.buildconfigspec('IPV6_ROUTER_DISCOVERY')
->>  def test_net_network_discovery(u_boot_console):
->>      """Test the network discovery feature of IPv6.
->> @@ -255,7 +263,7 @@ def test_net_network_discovery(u_boot_console):
->>      assert '0000:0000:0000:0000:0000:0000:0000:0000' not in output
->>
->>  @pytest.mark.buildconfigspec('cmd_net')
->> -def test_net_tftpboot(u_boot_console):
->> +def test_net_tftpboot(u_boot_console, lwip = False):
->>      """Test the tftpboot command.
->>
->>      A file is downloaded from the TFTP server, its size and optionally its
->> @@ -279,10 +287,11 @@ def test_net_tftpboot(u_boot_console):
->>          output = u_boot_console.run_command('tftpboot %s' % (fn))
->>      else:
->>          output = u_boot_console.run_command('tftpboot %x %s' % (addr, fn))
->> -    expected_text = 'Bytes transferred = '
->>      sz = f.get('size', None)
->> -    if sz:
->> -        expected_text += '%d' % sz
->> +    if lwip:
->> +        expected_text = f'{sz} bytes transferred'
-> 
-> Why not change patch 5 to print with capital character to match this pattern?
+> On Wed, May 29, 2024 at 03:42:04PM -0400, Raymond Mao wrote:
+> > Hi Tom,
+> >
+> > On Wed, 29 May 2024 at 14:43, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > > On Wed, May 29, 2024 at 02:38:10PM -0400, Raymond Mao wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Wed, 29 May 2024 at 14:01, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > > On Wed, May 29, 2024 at 01:42:16PM -0400, Raymond Mao wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Wed, 29 May 2024 at 12:58, Tom Rini <trini@konsulko.com>
+> wrote:
+> > > > > >
+> > > > > > > On Tue, May 28, 2024 at 07:09:14AM -0700, Raymond Mao wrote:
+> > > > > > >
+> > > > > > > > Port mbedtls with dummy libc header files.
+> > > > > > > > Add mbedtls default config header file.
+> > > > > > > > Optimize mbedtls default config by disabling unused features
+> to
+> > > > > > > > reduce the target size.
+> > > > > > > > Add mbedtls kbuild makefile.
+> > > > > > > > Add Kconfig and mbedtls config submenu.
+> > > > > > > [snip]
+> > > > > > > > diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+> > > > > > > > new file mode 100644
+> > > > > > > > index 00000000000..d6e77d56871
+> > > > > > > > --- /dev/null
+> > > > > > > > +++ b/lib/mbedtls/Kconfig
+> > > > > > > > @@ -0,0 +1,25 @@
+> > > > > > > > +menuconfig MBEDTLS_LIB
+> > > > > > > > +     bool "Use mbedtls libraries"
+> > > > > > > > +     select MBEDTLS_LIB_CRYPTO
+> > > > > > > > +     select MBEDTLS_LIB_X509
+> > > > > > > > +     help
+> > > > > > > > +       Enable mbedtls libraries
+> > > > > > > > +
+> > > > > > > > +if MBEDTLS_LIB
+> > > > > > > > +
+> > > > > > > > +config MBEDTLS_LIB_CRYPTO
+> > > > > > > > +     bool "Crypto library"
+> > > > > > > > +     help
+> > > > > > > > +       Enable mbedtls crypto library
+> > > > > > > > +
+> > > > > > > > +config MBEDTLS_LIB_X509
+> > > > > > > > +     bool "X509 library"
+> > > > > > > > +     help
+> > > > > > > > +       Enable mbedtls X509 library
+> > > > > > > > +
+> > > > > > > > +config MBEDTLS_LIB_TLS
+> > > > > > > > +     bool "TLS library"
+> > > > > > > > +     help
+> > > > > > > > +       Enable mbedtls TLS library
+> > > > > > > > +
+> > > > > > > > +endif # MBEDTLS_LIB
+> > > > > > >
+> > > > > > > We need much more granularity here, and to re-think some
+> existing
+> > > > > > > symbols too perhaps. What we should be able to do is pick
+> mbedTLS
+> > > or
+> > > > > > > "legacy SW implementation" or "HW implementation" for the
+> various
+> > > > > > > algorithms, and that in turn can have some higher level
+> grouping
+> > > to it.
+> > > > > > > This should then negate a bunch of the Makefile work you're
+> doing
+> > > as we
+> > > > > > > won't have CONFIG_SHA256 enabled as we'll have
+> > > > > CONFIG_MBEDTLS_LIB_SHA256
+> > > > > > > or whatever enabled.
+> > > > > > >
+> > > > > >
+> > > > > > I think we should use CONFIG_MBEDTLS_LIB_[CRYPTO,X509,TLS] for
+> > > high-level
+> > > > > > grouping.
+> > > > > > Underneath, the CONFIG_SHA[1,256,512] switches (and other crypto
+> > > options)
+> > > > > > can be
+> > > > > > used as sub build options in both MbedTLS and "legacy libs".
+> > > > > >
+> > > > > > Take hash as an example, if the users prefer to use MbedTLS other
+> > > than
+> > > > > > "legacy libs" for
+> > > > > > hash operation, CONFIG_MBEDTLS_LIB_CRYPTO should be defined as
+> the
+> > > main
+> > > > > > switch
+> > > > > > (the users can still prefer to use "legacy libs" for X509 by
+> > > > > > keeping  CONFIG_MBEDTLS_LIB_X509
+> > > > > > disabled).
+> > > > > > Then enable the algorithms they need (e.g. CONFIG_SHA256) - the
+> > > algorithm
+> > > > > > options works
+> > > > > > for both MbedTLS and "legacy libs".
+> > > > > >
+> > > > > > HW implementations with MbedTLS (aka, Alternative algorithms in
+> > > MbedTLS)
+> > > > > is
+> > > > > > another
+> > > > > > topic which is not covered in this patch set (It needs to migrate
+> > > each
+> > > > > > vendor's solution under
+> > > > > > MbedTLS alternative algorithm).
+> > > > > > Current patch set is focused on SW implementation with MbedTLS.
+> > > > >
+> > > > > The "easy" problem with what's in v3 is that X509 and CRYPTO are
+> > > > > select'd under the main heading.
+> > > >
+> > > > Not sure if I get what you mentioned, currently all MbedTLS options
+> are
+> > > > under
+> > > > Library routines > Security support
+> > > > Do you think we should keep them in other places?
+> > > >
+> > > >
+> > > > > The harder problem is that we
+> > > > > intentionally have granularity for SHA256, SHA512, etc, etc and
+> all of
+> > > > > that goes away with the current Kconfig option if you select
+> mbedTLS.
+> > > We
+> > > > > need to bring that back. And we shouldn't need to have all of the
+> ifneq
+> > > > > statements in Makefiles because both CONFIG_SHA256 and
+> > > > > CONFIG_MBEDLTS_LIB_CRYPTO_SHA256 will not be true (Or possibly,
+> > > > > CONFIG_SHA256 gates things U-Boot's internal API for sha256'ing
+> > > > > something and CONFIG_LEGACY_SHA256 controls building lib/sha256.c).
+> > > > >
+> > > > > I think we should not introduce new ones like CONFIG_LEGACY_,
+> > > > CONFIG_SHA[1,256,512] should be used no matter whether MbedTLS is
+> > > > enabled or not.
+> > > > I understand your concern, I will bring CONFIG_SHA[1,256,512] back
+> when
+> > > > MbedTLS is enabled. Those options should control the options in the
+> > > MbedTLS
+> > > > default config file.
+> > >
+> > > My concern is that we do not have the correct level of granularity, and
+> > > that can partly be seen by the number of ifneq(...) statements being
+> > > added around already conditional logic. We should have almost none of
+> > > those, in the end, is what I'm saying. We have a mechanism for
+> > > configuring the build, Kconfig, and that should drive the decisions as
+> > > much as possible.
+> >
+> > The `ifneq(ONFIG_MBEDTLS_LIB_*)` statements are due to the fact that we
+> > still
+> > need lib/Makefile and lib/crypto/Makefile when building hash and x509
+> > stuffs with
+> > MbedTLS enabled.
+> > To address this, I guess we have to first refactor all "legacy libs" that
+> > will be replaced
+> > by MbedTLS:
+> > Move md5, sha* from lib to to a new dir lib/hash and move public_key,
+> > rsapubkey*,
+> > rsa_helper, x509*, pkcs7*,mscode* from lib/crypto to a new dir lib/x509.
+> > When they are all independent modules with separated Makefile, we can
+> remove
+> > `ifneq(ONFIG_MBEDTLS_LIB_*)` and all can be driven in lib/Makefile.
+> >
+> > Is that something you expect?
+> > If yes I can do this for v4, or put it into another prerequisite/refactor
+> > series.
+>
+> We should not need to do that because we should not have CONFIG_SHA256
+> set if we are not building lib/sha256.c at that stage, is what I'm
+> saying. CONFIG_LEGACY_SHA256 should control it and CONFIG_SHA256 should
+> control the API and CONFIG_MBEDTLS_LIB_CRYPTO_SHA256 should control the
+> mbedTLS version, and this should either expand on, or if needed
+> update/rework, the mechanism that lets us also have say
+> CONFIG_ARMV8_CE_SHA256 for using that HW based version of the support.
+>
+>
+But in this case we have to introduce two new Kconfigs for each algorithm -
+CONFIG_LEGACY_<alg> and CONFIG_MBEDTLS_LIB_CRYPTO_<alg>.
+CONFIG_<alg> is still there, so we have totally 3 Kconfigs for one hash alg
+which
+seems adding too much complexity.
 
-I thought unifying the messages of wget and tftp would be a good idea. With
-this series, both commands print hash signs followed by:
-"xxx bytes transferred (yy MB/s)".
+Moreover, this means allowing the user to select algorithms mix up with
+MbedTLS
+and legacy ones, for example, user can select both CONFIG_LEGACY_SHA1
+and CONFIG_MBEDTLS_LIB_CRYPTO_SHA256 at the same time.
+It means to build both legacy lib and MbedTLS which does not make sense.
 
-Would a patch updating the tftp message when the legacy stack is used be
-acceptable?
+Why we don't have the CONFIG_MBEDTLS_LIB_CRYPTO as the higher level
+switch and keep CONFIG_<alg> as it was to select the algorithms?
+We still have the same granularity with this I think - and yes I will put
+CONFIG_<alg>
+in the MbedTLS config file so that it can control only the selected
+algorithms to be
+built.
+The only downside I can see here is adding a few
+`ifneq(ONFIG_MBEDTLS_LIB_*)`
+in lib/Makefile and lib/crypto/Makefile, but all the rest of things are
+straightforward and
+clean.
 
--- 
-Jerome
-
-> BR,
-> Maxim.
-> 
->> +    else:
->> +        expected_text = f'Bytes transferred = {sz}'
->>      assert expected_text in output
->>
->>      expected_crc = f.get('crc32', None)
->> @@ -295,6 +304,10 @@ def test_net_tftpboot(u_boot_console):
->>      output = u_boot_console.run_command('crc32 $fileaddr $filesize')
->>      assert expected_crc in output
->>
->> +@pytest.mark.buildconfigspec("cmd_net_lwip")
->> +def test_net_tftpboot_lwip(u_boot_console):
->> +    test_net_tftpboot(u_boot_console, True)
->> +
->>  @pytest.mark.buildconfigspec('cmd_nfs')
->>  def test_net_nfs(u_boot_console):
->>      """Test the nfs command.
->> --
->> 2.40.1
->>
-> 
-> 
+Thanks.
+Regards,
+Raymond
