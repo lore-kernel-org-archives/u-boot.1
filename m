@@ -4,95 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E913DC25B74
-	for <u-boot@archiver.kernel.org>; Thu, 30 May 2024 15:48:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E0F9C25B74
+	for <u-boot@archiver.kernel.org>; Thu, 30 May 2024 16:04:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26522886DB;
-	Thu, 30 May 2024 17:48:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A0CCA886AB;
+	Thu, 30 May 2024 18:04:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lZ05wgmv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xFBi/+y3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F4B7886DB; Thu, 30 May 2024 17:48:23 +0200 (CEST)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
+ id A05D588706; Thu, 30 May 2024 18:04:50 +0200 (CEST)
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94199883FA
- for <u-boot@lists.denx.de>; Thu, 30 May 2024 17:48:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EBD1788552
+ for <u-boot@lists.denx.de>; Thu, 30 May 2024 18:04:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-2bd816ecaf5so86632a91.2
- for <u-boot@lists.denx.de>; Thu, 30 May 2024 08:48:20 -0700 (PDT)
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-6c27b1f2d3aso73043a12.2
+ for <u-boot@lists.denx.de>; Thu, 30 May 2024 09:04:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1717084099; x=1717688899; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1717085086; x=1717689886; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ivCZKnr5fwc971XDX3BNDZKG39sOq0AE/J1GdJdT+mE=;
- b=lZ05wgmvYad+cW06DC7avwfrZS8slDr0FYkuSi5JCk2SBQfK0+0GyZ0hirC11pip9o
- PsQQiOK5mX4+D+1gao8WJJ1wMcZDndr582fNUl9gK+C+5ch3iR5tPcOjHbB7xQYCSw2D
- CL/26fdK592zGn7srSYBpIH+I0bBkEI8OlQOim6CO0Gok7az5vjSPLBkcblRoR8g5JvY
- 4v0QoBT0wuoPfDcooozHUbbs1w5h2du5f3KfYgDbSsB1bBhv4Eorv23NaYgjNV0ek81p
- PWaP9ESqumxSoSRPJ9A3OsIieob0JDhXb353dxRvxFWjdu/uW3wnJcodVF2oDkZatrMa
- Dj6g==
+ bh=nAViT/p2bz/ScNFNmfHLA7RCxUku/1czdm0IpFSziWI=;
+ b=xFBi/+y33rTyBf0rQQfjIeSI7qAkxYIp2FHth+4U7W61JJucBdkiOD/Qi/qsj+iGSM
+ WSVE5mOd48r5Jq9jqFehC32cUPZJ1tjt7TY3j48q3LCblCx6yS8mzQR0GiByXE4BjY8m
+ r0ai2AIBGWNm7ZGDjSg5+sMQFecBPnOsE+CuBLHi2z6PnPkIS++WeWvRJhorreGVenAW
+ buiz4tCGZ9lE+gZWxnompJPPZMe3UHoksMT4Q+wSKqyH+IcLUMyyIeK3hIC4vOru9CqX
+ +GEwOh5aviBQuztn+VT0KagoqJJLWpjm4MCQQXHTvoplJdMLRYQNltpAWQ9ecw1wvyGj
+ iYCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717084099; x=1717688899;
+ d=1e100.net; s=20230601; t=1717085086; x=1717689886;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ivCZKnr5fwc971XDX3BNDZKG39sOq0AE/J1GdJdT+mE=;
- b=P9zF2B3Z/BC9emurm2+6ZN7ygpkRIku0c45RjptzqbtDKEhWVp0jCSxP381H4h9SNG
- 9vn9YTaWvaaQ/+9S84NKux2QQ3dCOUfatPBNAiED8ysh0VhJxY+hD/p88JnHeuca1atw
- ZJIkw0Teig01yPp3Ig6m5mBcz9acJnYcGIi7/nMR/6AiIWOgCdkM4URZmVXcFNySaKZC
- 6mFCfq+uYcW8DnRxa0x+Eic7kOLzrHY/VPT4gDLrxCDQWc+qbDdYtJ7dGEF4gW2GsicK
- Asb0k7fH4ldOAKuEYz+Mieg3KhJNuzFmTypZzOnOg1L1ExmG1oALoaQMnFsJLiXjyN4e
- EEdw==
-X-Gm-Message-State: AOJu0YzTpCkXmabjYoHaArq69SF8o2zS8vvkpW99uoJuFhP+WPit0fY1
- 5g5hiprv9U/XDrw+p8hLFFJexkqQ35dmm1gE66FJgekRvWd99LfPNfMSEl1EmmB3/o3tTZy+1uY
- I5UeqpdIcf4ZofGUytTDQnx8d5Z5dNl4qh7x8BA==
-X-Google-Smtp-Source: AGHT+IGPHkRU25Y3k9G2VLo7CYKcTbZ16h8D7jDxQ8eR3929hl+5HjozV8ln3cS1yui8kfGNKP6yod19U7X5Cd79IsI=
-X-Received: by 2002:a17:90b:3c90:b0:2b9:ab0b:c5b with SMTP id
- 98e67ed59e1d1-2c1ab9facf0mr2261207a91.17.1717084098972; Thu, 30 May 2024
- 08:48:18 -0700 (PDT)
+ bh=nAViT/p2bz/ScNFNmfHLA7RCxUku/1czdm0IpFSziWI=;
+ b=p16CNkoLEGFxBuJJ9e7PVA+F4mCJL9jZC1qin7buYEB2lOz2AC1jFm6ZLAIsXBxo2R
+ sR4ddhzK20PjE3oZO5XAiI9/v+0OQNrrrR27mZo8cJWTSvzzGekhypmU5odzDLqoUMIN
+ ktVt33vuHiNljNn9nIBF4PhKOjx/tN6xeYtM+MvltvVB/LUw+aiOL6ip3NOIpUgNGMbI
+ oJk46YbeiWmPSnGsy1gqL/nEhMBW5nFLsNm9G5Kl9y2MgbpabESfa910QDEoWCS8Gx7c
+ 6rnjNGLzR3aywwArEMT8KQxF3TFp5i7Z55m6PqnHKLM9Srm3PSQ6e8cD7XqvJWtw9CZj
+ lIKg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU9+zJhDKepKKLqLY/8KMVbpox08A3VtvtZuGIvUQA87S01fQnoLO1e9pbYryIGOopzY6AIzmvTFY5n0PGpCpCV481Jkw==
+X-Gm-Message-State: AOJu0Yy9WNscvQIi/i06NP3Nm3OOxXiFvuwqLZRDd8NZtByHy8GcqPyT
+ SCLmkxBbF8HRLA4Kkirf2kGXgciLNQgSan0qNACB1ZU6mm+AcBcM0PosoD/3lyaYotxYLSv2E0w
+ nr3tIKpgdUXFJJ1iypQUUQSLARNZ9cDT9gSe7mw==
+X-Google-Smtp-Source: AGHT+IEkT7WxA5W8/VkIZ+6Q6/AvUeCfJIB5N9ElKt4aek8bhgACtFPrXiXXA8tuOI5DRjltoDo6+F5xaZPg7EWztyw=
+X-Received: by 2002:a17:90a:a596:b0:2b3:b97e:c09f with SMTP id
+ 98e67ed59e1d1-2c1abc4315fmr2557571a91.31.1717085085998; Thu, 30 May 2024
+ 09:04:45 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240528140955.1960172-1-raymond.mao@linaro.org>
- <20240528140955.1960172-4-raymond.mao@linaro.org>
- <20240529165814.GQ2568172@bill-the-cat>
- <CAEfUkU+zKyaqc5tFy0rN3ofm3pRuckZX6PbD00VNtWQc5COZyA@mail.gmail.com>
- <20240529180129.GB3714513@bill-the-cat>
- <CAEfUkUJj5Y+uVmRXx+=DP-6O7dpNcMjSA1jADKaJo07RSsBjHw@mail.gmail.com>
- <20240529184255.GC3714513@bill-the-cat>
- <CAEfUkUJOD=KEnUo=7BD14mW2yfq8ZnGREqMgOQfx2pkWxLvtzQ@mail.gmail.com>
- <20240529194715.GD3714513@bill-the-cat>
- <CAEfUkUK=NPS-_Jhi7==93YQUxkhOd-DjTn7AS4m9QCfGo86G3g@mail.gmail.com>
-In-Reply-To: <CAEfUkUK=NPS-_Jhi7==93YQUxkhOd-DjTn7AS4m9QCfGo86G3g@mail.gmail.com>
+References: <20240509164123.1753050-1-j-humphreys@ti.com>
+ <20240509164123.1753050-16-j-humphreys@ti.com>
+ <Zk--WFQJC-wi5zE5@hera> <86bk4vcjab.fsf@udb0321960.dhcp.ti.com>
+In-Reply-To: <86bk4vcjab.fsf@udb0321960.dhcp.ti.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 30 May 2024 18:47:42 +0300
-Message-ID: <CAC_iWjJk8BHZgTcYAS-Jj1_iEq_XVGoKc6yZ0qQ2tnq1V0AMeA@mail.gmail.com>
-Subject: Re: [PATCH v3 03/25] mbedtls: add mbedtls into the build system
-To: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Stefan Bosch <stefan_b@posteo.net>, 
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Jesse Taube <mr.bossman075@gmail.com>,
- Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
- Igor Opaniuk <igor.opaniuk@gmail.com>, 
- Ilya Lukin <4.shket@gmail.com>, Sergei Antonov <saproj@gmail.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>, 
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+Date: Thu, 30 May 2024 19:04:09 +0300
+Message-ID: <CAC_iWjLMERkDYF_-Eu5mg13q_PjjfjcwgsTGxJ_SB6h6PdzXEA@mail.gmail.com>
+Subject: Re: [PATCH v4 15/19] board: am62px: Define capsule update firmware
+ info
+To: Jon Humphreys <j-humphreys@ti.com>
+Cc: Roger Quadros <rogerq@kernel.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Kamlesh Gurudasani <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>, 
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>, 
+ Simon Glass <sjg@chromium.org>, Nikhil M Jain <n-jain1@ti.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
+ Maxime Ripard <mripard@kernel.org>, 
+ Siddharth Vadapalli <s-vadapalli@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, 
+ Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
+ Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,152 +104,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi both,
+Hi Jon,
 
-[...]
-
->> > > > > > >
->> > > > > > > We need much more granularity here, and to re-think some existing
->> > > > > > > symbols too perhaps. What we should be able to do is pick mbedTLS
->> > > or
->> > > > > > > "legacy SW implementation" or "HW implementation" for the various
->> > > > > > > algorithms, and that in turn can have some higher level grouping
->> > > to it.
->> > > > > > > This should then negate a bunch of the Makefile work you're doing
->> > > as we
->> > > > > > > won't have CONFIG_SHA256 enabled as we'll have
->> > > > > CONFIG_MBEDTLS_LIB_SHA256
->> > > > > > > or whatever enabled.
->> > > > > > >
->> > > > > >
->> > > > > > I think we should use CONFIG_MBEDTLS_LIB_[CRYPTO,X509,TLS] for
->> > > high-level
->> > > > > > grouping.
->> > > > > > Underneath, the CONFIG_SHA[1,256,512] switches (and other crypto
->> > > options)
->> > > > > > can be
->> > > > > > used as sub build options in both MbedTLS and "legacy libs".
->> > > > > >
->> > > > > > Take hash as an example, if the users prefer to use MbedTLS other
->> > > than
->> > > > > > "legacy libs" for
->> > > > > > hash operation, CONFIG_MBEDTLS_LIB_CRYPTO should be defined as the
->> > > main
->> > > > > > switch
->> > > > > > (the users can still prefer to use "legacy libs" for X509 by
->> > > > > > keeping  CONFIG_MBEDTLS_LIB_X509
->> > > > > > disabled).
->> > > > > > Then enable the algorithms they need (e.g. CONFIG_SHA256) - the
->> > > algorithm
->> > > > > > options works
->> > > > > > for both MbedTLS and "legacy libs".
->> > > > > >
->> > > > > > HW implementations with MbedTLS (aka, Alternative algorithms in
->> > > MbedTLS)
->> > > > > is
->> > > > > > another
->> > > > > > topic which is not covered in this patch set (It needs to migrate
->> > > each
->> > > > > > vendor's solution under
->> > > > > > MbedTLS alternative algorithm).
->> > > > > > Current patch set is focused on SW implementation with MbedTLS.
->> > > > >
->> > > > > The "easy" problem with what's in v3 is that X509 and CRYPTO are
->> > > > > select'd under the main heading.
->> > > >
->> > > > Not sure if I get what you mentioned, currently all MbedTLS options are
->> > > > under
->> > > > Library routines > Security support
->> > > > Do you think we should keep them in other places?
->> > > >
->> > > >
->> > > > > The harder problem is that we
->> > > > > intentionally have granularity for SHA256, SHA512, etc, etc and all of
->> > > > > that goes away with the current Kconfig option if you select mbedTLS.
->> > > We
->> > > > > need to bring that back. And we shouldn't need to have all of the ifneq
->> > > > > statements in Makefiles because both CONFIG_SHA256 and
->> > > > > CONFIG_MBEDLTS_LIB_CRYPTO_SHA256 will not be true (Or possibly,
->> > > > > CONFIG_SHA256 gates things U-Boot's internal API for sha256'ing
->> > > > > something and CONFIG_LEGACY_SHA256 controls building lib/sha256.c).
->> > > > >
->> > > > > I think we should not introduce new ones like CONFIG_LEGACY_,
->> > > > CONFIG_SHA[1,256,512] should be used no matter whether MbedTLS is
->> > > > enabled or not.
->> > > > I understand your concern, I will bring CONFIG_SHA[1,256,512] back when
->> > > > MbedTLS is enabled. Those options should control the options in the
->> > > MbedTLS
->> > > > default config file.
->> > >
->> > > My concern is that we do not have the correct level of granularity, and
->> > > that can partly be seen by the number of ifneq(...) statements being
->> > > added around already conditional logic. We should have almost none of
->> > > those, in the end, is what I'm saying. We have a mechanism for
->> > > configuring the build, Kconfig, and that should drive the decisions as
->> > > much as possible.
->> >
->> > The `ifneq(ONFIG_MBEDTLS_LIB_*)` statements are due to the fact that we
->> > still
->> > need lib/Makefile and lib/crypto/Makefile when building hash and x509
->> > stuffs with
->> > MbedTLS enabled.
->> > To address this, I guess we have to first refactor all "legacy libs" that
->> > will be replaced
->> > by MbedTLS:
->> > Move md5, sha* from lib to to a new dir lib/hash and move public_key,
->> > rsapubkey*,
->> > rsa_helper, x509*, pkcs7*,mscode* from lib/crypto to a new dir lib/x509.
->> > When they are all independent modules with separated Makefile, we can remove
->> > `ifneq(ONFIG_MBEDTLS_LIB_*)` and all can be driven in lib/Makefile.
->> >
->> > Is that something you expect?
->> > If yes I can do this for v4, or put it into another prerequisite/refactor
->> > series.
->>
->> We should not need to do that because we should not have CONFIG_SHA256
->> set if we are not building lib/sha256.c at that stage, is what I'm
->> saying. CONFIG_LEGACY_SHA256 should control it and CONFIG_SHA256 should
->> control the API and CONFIG_MBEDTLS_LIB_CRYPTO_SHA256 should control the
->> mbedTLS version, and this should either expand on, or if needed
->> update/rework, the mechanism that lets us also have say
->> CONFIG_ARMV8_CE_SHA256 for using that HW based version of the support.
->>
+On Fri, 24 May 2024 at 18:38, Jon Humphreys <j-humphreys@ti.com> wrote:
 >
-> But in this case we have to introduce two new Kconfigs for each algorithm -
-> CONFIG_LEGACY_<alg> and CONFIG_MBEDTLS_LIB_CRYPTO_<alg>.
-> CONFIG_<alg> is still there, so we have totally 3 Kconfigs for one hash alg which
-> seems adding too much complexity.
+> Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
+>
+> > Hi Jonathan
+> >
+> > Thanks for working on this
+> >
+> > On Thu, May 09, 2024 at 11:41:19AM -0500, Jonathan Humphreys wrote:
+> >> Define the firmware components updatable via EFI capsule update, including
+> >> defining capsule GUIDs for the various firmware components for the AM62px
+> >> SK.
+> >>
+> >> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
+> >> ---
+> >>  board/ti/am62px/evm.c        | 32 ++++++++++++++++++++++++++++++++
+> >>  include/configs/am62px_evm.h | 24 ++++++++++++++++++++++++
+> >>  2 files changed, 56 insertions(+)
+> >>
+> >> diff --git a/board/ti/am62px/evm.c b/board/ti/am62px/evm.c
+> >> index 97a95ce8cc2..6d0f66e5dc0 100644
+> >> --- a/board/ti/am62px/evm.c
+> >> +++ b/board/ti/am62px/evm.c
+> >> @@ -6,6 +6,7 @@
+> >>   *
+> >>   */
+> >>
+> >> +#include <efi_loader.h>
+> >>  #include <asm/arch/hardware.h>
+> >>  #include <asm/io.h>
+> >>  #include <dm/uclass.h>
+> >> @@ -13,6 +14,37 @@
+> >>  #include <fdt_support.h>
+> >>  #include <spl.h>
+> >>
+> >> +struct efi_fw_image fw_images[] = {
+> >
+> > It's better if we add an
+> > #if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
+> > for both of the structs that follow (and it applies to all your patches)
+> >
+>
+> Ilias, thanks for the reviews.
+>
+> I had this protected in #if's in an earlier patch set, as you suggest here.
+> However, in those reviews, Roger recommended that we don't do that and put
+> conditions around the use of it in set_dfu_alt_info().
+>
 
-I haven't looked at your v4 yet, but I think Tom is on the right path here.
-Yes, it might be a bit more work, but in the long run, it's going to
-be easier to maintain both in Makefiles and code.
-
-I think Tom is saying
-The API should be gated by CONFIG_SHA1, CONFIG_SHA256 etc
-the individual implementation musty carry their own symbols e.g
-CONFIG_MBEDTLS_SHA256
-CONFIG_LEGACY_SHA256 etc.
-
-If any of those are selected you turn on CONFIG_SHA256
+Hmm but the function prototype itself is on an ifdef. If you want to
+remove the ifdef you got to do it everywhere
 
 Thanks
 /Ilias
 
+> https://lore.kernel.org/all/b19f02e0-a80a-46d6-8296-5d516577766a@kernel.org/
 >
-> Moreover, this means allowing the user to select algorithms mix up with MbedTLS
-> and legacy ones, for example, user can select both CONFIG_LEGACY_SHA1
-> and CONFIG_MBEDTLS_LIB_CRYPTO_SHA256 at the same time.
-> It means to build both legacy lib and MbedTLS which does not make sense.
+> I assume the reasoning is to reduce #if's in the code and rely on the
+> compiler to be smart enough to remove dead data. (Roger, speak up if I
+> misrepresent you.)
 >
-> Why we don't have the CONFIG_MBEDTLS_LIB_CRYPTO as the higher level
-> switch and keep CONFIG_<alg> as it was to select the algorithms?
-> We still have the same granularity with this I think - and yes I will put CONFIG_<alg>
-> in the MbedTLS config file so that it can control only the selected algorithms to be
-> built.
-> The only downside I can see here is adding a few `ifneq(ONFIG_MBEDTLS_LIB_*)`
-> in lib/Makefile and lib/crypto/Makefile, but all the rest of things are straightforward and
-> clean.
+> I'm ok to do either way.  What is the preferred way in U-Boot?
 >
-> Thanks.
-> Regards,
-> Raymond
+> Thanks
+> Jon
+>
+> >> +    {
+> >> +            .image_type_id = AM62PX_SK_TIBOOT3_IMAGE_GUID,
+> >> +            .fw_name = u"AM62PX_SK_TIBOOT3",
+> >> +            .image_index = 1,
+> >> +    },
+> >> +    {
+> >> +            .image_type_id = AM62PX_SK_SPL_IMAGE_GUID,
+> >> +            .fw_name = u"AM62PX_SK_SPL",
+> >> +            .image_index = 2,
+> >> +    },
+> >> +    {
+> >> +            .image_type_id = AM62PX_SK_UBOOT_IMAGE_GUID,
+> >> +            .fw_name = u"AM62PX_SK_UBOOT",
+> >> +            .image_index = 3,
+> >> +    }
+> >> +};
+> >> +
+> >> +struct efi_capsule_update_info update_info = {
+> >> +    .dfu_string = "sf 0:0=tiboot3.bin raw 0 80000;"
+> >> +    "tispl.bin raw 80000 200000;u-boot.img raw 280000 400000",
+> >> +    .num_images = ARRAY_SIZE(fw_images),
+> >> +    .images = fw_images,
+> >> +};
+> >
+> > I haven't worked on any TI platforms lately so I cant say much about the
+> > naming and the flash regions. The definition seems correct
+> >
+> >
+> >> +
+> >> +void set_dfu_alt_info(char *interface, char *devstr)
+> >> +{
+> >> +    if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
+> >> +            env_set("dfu_alt_info", update_info.dfu_string);
+> >> +}
+> >
+> > There's a CONFIG_SET_DFU_ALT_INFO symbol. This better if we add a check here
+> > as well
+> >
+> >> +
+> >>  int board_init(void)
+> >>  {
+> >>      return 0;
+> >> diff --git a/include/configs/am62px_evm.h b/include/configs/am62px_evm.h
+> >> index 06b12860e21..57a1ba9dc3c 100644
+> >> --- a/include/configs/am62px_evm.h
+> >> +++ b/include/configs/am62px_evm.h
+> >> @@ -8,6 +8,30 @@
+> >>  #ifndef __CONFIG_AM62PX_EVM_H
+> >>  #define __CONFIG_AM62PX_EVM_H
+> >>
+> > [...]
+> >
+> > Regards
+> > /Ilias
