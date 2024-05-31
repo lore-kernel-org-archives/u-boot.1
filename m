@@ -4,59 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58997C25B75
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 21:55:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFB45C25B75
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 22:21:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E235088804;
-	Fri, 31 May 2024 23:55:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 217A9887E2;
+	Sat,  1 Jun 2024 00:21:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="SM8192Vg";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="V6Hrumgc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A681882CD; Fri, 31 May 2024 23:55:24 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BDDA088607; Sat,  1 Jun 2024 00:21:45 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF3CA8880B
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 23:55:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id DD525881AD
+ for <u-boot@lists.denx.de>; Sat,  1 Jun 2024 00:21:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=j-humphreys@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44VMLYMw017863;
+ Fri, 31 May 2024 17:21:34 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1717194094;
+ bh=IXnYIo5gKpmmJYUBOvYzMLbPuUV1w4sU5b81/zNmkx8=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=V6HrumgcNeWorfEAh/VHQOT9FALrLklWmQ63K5Gx7Udwmo05taSamNjfyzVRb3J1i
+ Szj7LNyHBvMDIF0WnL6r2u8isqc2UJDtHwCh5+CT5RPA1WmxbCEeGfryk38emaKIlS
+ WfZMK6t2eJStnWfz1Zsa24LjpfrNUKWi41Ek4UL0=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44VMLYPE005568
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 31 May 2024 17:21:34 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 31
+ May 2024 17:21:33 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 31 May 2024 17:21:33 -0500
+Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44VMLXD4026049;
+ Fri, 31 May 2024 17:21:33 -0500
+From: Jonathan Humphreys <j-humphreys@ti.com>
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
+ <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>, Christian Gmeiner
+ <christian.gmeiner@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>, Simon Glass <sjg@chromium.org>,
+ Nikhil M Jain <n-jain1@ti.com>, Neha Malcom Francis
+ <n-francis@ti.com>, Andrew Davis <afd@ti.com>, Maxime Ripard
+ <mripard@kernel.org>, Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Roger Quadros <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
+ Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>
+CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
+Subject: [PATCH v5 04/23] configs: am64x: Enable EFI capsule update
+Date: Fri, 31 May 2024 17:20:59 -0500
+Message-ID: <20240531222118.2618041-5-j-humphreys@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240531222118.2618041-1-j-humphreys@ti.com>
+References: <20240531222118.2618041-1-j-humphreys@ti.com>
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1717192521;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=/18gLwrIgcvQzjhKr51ct/faBKAw6IBSPTj7tSKnQb8=;
- b=SM8192Vg3LMks9Ipg8aguugArh5DAb0Y0lYwr+kig9cfTkTzS8vR5e8MERKY84rRa61bZk
- H1K1ZTR/M1xfXW5Z5o34xua5kDVj6TzdcsWw6diE+5EgKiG+MEp05HurJqL4dzF8Hx1QAB
- UIiZkL3FAk5twZ4uwAoA8Xzi1amZ+BtYW9R9FPM0LWBQCjjNfQlvZHYrr/hdZNIG+XGml6
- /yrBoN5Mc09/G2135TPnbCM7soz7deGeTB8xkfne7XL+43q15oCLbxMb01zJmPRqkKPhg6
- lrczMMCSbOc6NSJTwpDFBvW4ET/YlbwqMjwNsE0OKo0O3xSho2KHkDo+kj4mTw==
-Date: Fri, 31 May 2024 23:55:21 +0200
-From: Dragan Simic <dsimic@manjaro.org>
-To: Anand Moon <linux.amoon@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Kever
- Yang <kever.yang@rock-chips.com>, Jagan Teki <jagan@edgeble.ai>, Jonas
- Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>, Anand
- Moon <anand@edgeble.ai>, u-boot@lists.denx.de
-Subject: Re: [PATCH RFC v2 22/23] sysreset: rockchip: use fst reset for ARM64
- SOC
-In-Reply-To: <20240531141837.13189-23-linux.amoon@gmail.com>
-References: <20240531141837.13189-1-linux.amoon@gmail.com>
- <20240531141837.13189-23-linux.amoon@gmail.com>
-Message-ID: <7f5f6b4870ef298939d389a1a82c6b09@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,39 +93,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Anand,
+Enable on disk, raw capsule update.
 
-On 2024-05-31 16:18, Anand Moon wrote:
-> From: Kever Yang <kever.yang@rock-chips.com>
-> 
-> Rockchip ARM64 SOC will change cpu entry, only fst reset can reset it.
-> 
-> Cc: Jagan Teki <jagan@edgeble.ai>
-> Signed-off-by: Kever Yang <kever.yang@rock-chips.com>
-> ---
->  drivers/sysreset/sysreset_rockchip.c | 5 +++++
->  1 file changed, 5 insertions(+)
-> 
-> diff --git a/drivers/sysreset/sysreset_rockchip.c
-> b/drivers/sysreset/sysreset_rockchip.c
-> index f353f9b4c7..17aa191349 100644
-> --- a/drivers/sysreset/sysreset_rockchip.c
-> +++ b/drivers/sysreset/sysreset_rockchip.c
-> @@ -22,7 +22,12 @@ int rockchip_sysreset_request(struct udevice *dev,
-> enum sysreset_t type)
-> 
->  	switch (type) {
->  	case SYSRESET_WARM:
-> +#ifdef CONFIG_ARM64
-> +		/* Rockchip 64bit SOC need fst reset for cpu reset entry */
+Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
+---
+ configs/am64x_evm_a53_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-s/Rockchip 64bit SOC need fst reset for cpu reset entry
-  /Rockchip 64-bit SoCs need FST reset for CPU reset entry/
+diff --git a/configs/am64x_evm_a53_defconfig b/configs/am64x_evm_a53_defconfig
+index e000549d6d0..c9bdd7b54cc 100644
+--- a/configs/am64x_evm_a53_defconfig
++++ b/configs/am64x_evm_a53_defconfig
+@@ -178,3 +178,5 @@ CONFIG_USB_FUNCTION_MASS_STORAGE=y
+ CONFIG_SPL_DFU=y
+ CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
+ CONFIG_EFI_SET_TIME=y
++CONFIG_EFI_CAPSULE_ON_DISK=y
++CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+-- 
+2.34.1
 
-> +		writel(0xfdb9, cru_base + offset->glb_srst_fst_value);
-> +#else
->  		writel(0xeca8, cru_base + offset->glb_srst_snd_value);
-> +#endif
->  		break;
->  	case SYSRESET_COLD:
->  		writel(0xfdb9, cru_base + offset->glb_srst_fst_value);
