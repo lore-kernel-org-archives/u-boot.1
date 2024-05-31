@@ -4,91 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DEEDC25B75
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 09:30:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71545C25B75
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 10:00:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DD20883FA;
-	Fri, 31 May 2024 11:30:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C97348856E;
+	Fri, 31 May 2024 12:00:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nu5AM9J3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="b0EdsJn+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8C4C8856E; Fri, 31 May 2024 11:30:44 +0200 (CEST)
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
- [IPv6:2607:f8b0:4864:20::1034])
+ id 22462885FE; Fri, 31 May 2024 12:00:13 +0200 (CEST)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3122F883A0
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 11:30:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DB7E1880DB
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 12:00:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-2c034676e02so1334226a91.1
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 02:30:42 -0700 (PDT)
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-7023df18408so961529b3a.2
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 03:00:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1717147840; x=1717752640; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1717149609; x=1717754409; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=mdLJlzQaPeiNh0sM3/+kvNBJnozajqkGyT/tU1JJBOM=;
- b=nu5AM9J3dXLB2A2Bo3bOZdgCIGXqN40ESj1J9GSKffiUxbuHbyhfbsGCkvtawFGdPi
- s+ci52hZt/RzePJ0V+NCRuJpdJzbBIEmqM6tL/nFnPBYj4Lf9bOR48FgxyViG9/KHK/y
- NRpHbsv564Dyg6PiS7zBXfFZZe4TjDwjCufbfoJPrGJJj3A9o7e/E8SkESmR4e01eA7R
- 8EePSkJAI0Ds0epVu1bioOrzCdUOsITuyQ/VlOPIR9QtausxjqSK+XutP257BDgfct/+
- nH0EczNbPhqPabAgTHL5EXs5CsI7xLyPobEtiABupiocCIb5NDcvoEgm6O9tRZviaXne
- CpiQ==
+ bh=NGD5IYbzoW0ieWajw9USuTDh+EaW4abRmJRvJ+o716s=;
+ b=b0EdsJn+mbOVYmT6UR+SXXGTbHMCNp+dTwwt6T3ef0lLxLCuqufdmM2XAXNE94S0Y0
+ k8gz07y2edkOvNTwqF5oOzFyg0Ltl80a11T9+yqLJ8OL9CujJxu3CiRAsUfs0Xj7snUW
+ ZLJ/fMOcphs2KwJFrlPQJefezAMIbsC+EpnWVF4Ey+XOmmIXAoWClDuTkkVHylGiBj30
+ nexsnKruwx/1sBQvVsdvcMTT756EKdbND460uVHDnlqjixqK+ZzKRPN8a8gyCuBEXU9+
+ O92uK6U8V2j3ivjQr++M5CiEIOhKdoolYs7GGqov8pLcPzeylQkpR0GbrsylsZ5VuVLw
+ GVoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717147840; x=1717752640;
+ d=1e100.net; s=20230601; t=1717149609; x=1717754409;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=mdLJlzQaPeiNh0sM3/+kvNBJnozajqkGyT/tU1JJBOM=;
- b=Y/XJl2yh9AXiDn6i+BneCspnonIGj6QyWvhvfpFuUqgfa6qEVifC6XztOwFehVq6h9
- amMQGAC7PBO4GlXcRMRHPciRTTQF+yInamYY2UQIj2FMHAR/ostRkxtdDUvArmb54Y+f
- 0O3jpKxrtjK+OTPeHOiSLXFmsplrZFf94Kk9ji90Nk8XimeALvXXovhjquScLwX5mmIQ
- k/nGlveT5yU9+ZIqt92e7d3mO3m2MhtNHwG4JJ0lJBZsVaCeHCdKuQmX0ZZYTz1rH5Zg
- 9FJYty9QZQCHJ9Fby+hROZC0LvG+8K8Q3zu1yLL9gnQSTjEQifmPAbba9SAyoDv/GzAT
- tsdA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXDX0wmcy7aJputUDXRCb3QiGPVD//L/KlQIor5KWdNEG344mawAZ8afmu8+b2lWxCtpsGTQfY1lPI6szECX+14BH61vg==
-X-Gm-Message-State: AOJu0YwvyK25QbzsWzF0r4rjW3+uqmCuKPGZF59PL8TY3t3cTXkGCVhl
- HttIGVwx6sry/wj89m7niZZo99kQg6VRgZv6G1D43hMnJQk60n32x9XZhqOfIrMPRoyEUjQHOG8
- RYmStdOK+3ZAbxo5aUSgPzwJrNgbhtNaHQ8w97g==
-X-Google-Smtp-Source: AGHT+IFbG0DMuClaJl5MUDozIaQMTC07N23G7MVv8ZHCkUA5S3t7xelX88TZcfVvbMHEYX0oCxO8Qiv2rgu2ijb/07U=
-X-Received: by 2002:a17:90a:f6d7:b0:2b3:d512:d487 with SMTP id
- 98e67ed59e1d1-2c1dc5ccd70mr1224045a91.39.1717147840533; Fri, 31 May 2024
- 02:30:40 -0700 (PDT)
+ bh=NGD5IYbzoW0ieWajw9USuTDh+EaW4abRmJRvJ+o716s=;
+ b=A8J110J34iNfReNsq2+LYStW1cDnWW+ZpenYjmpSnONA5b8D9+rdDZHr972ECkK3Zy
+ p/wqdZ3kzcQF/gbSHwPXrNMB3TryuJBE/vbt+kaGNGeMfNXRXVACR9WuAAU3UdTTuo+s
+ z1s4knGwSmPjYEXqrkKRWh2rBFo3hbDR1GnhlzYZn6q7jWidOfO19GnVK33ee13e+PBs
+ M8KudF75OczR3CzoYgebIYxJgIM2gdh3PRx6rw1rS3ImvXd9rmACj0g+HKw42EfUAR+t
+ BLDyOe4jvfY27XD1fQZ6QDz1SxrWKMfXzgWJMIm4fC98nLKXX6a6cizOtE1AkbYNrYuv
+ SG8Q==
+X-Gm-Message-State: AOJu0YzXSrYt31LZYl2OW1Vwzlbr64EkZ5NwDeoV0M21GMyb47Pf20Js
+ 8tx6czowVEaPTTFMhcsr/nQ7meWoZCURT29IPvhJqkWgSC1bV9iJWFFVMCFNDsXHk1ZqOK/Pb+i
+ Cx4DcXzyz1Tu3xuuMwQNViHfQxM/fYoKOC66ADg==
+X-Google-Smtp-Source: AGHT+IEjQ0hHwgSQjIdYnGUZ3mXL9/J8smVaAPbjNuKVJOKiVEFMpKi81VoALLDIu/y55XaRWN2F7NRsRpWefyCOjH4=
+X-Received: by 2002:a05:6a20:1581:b0:1a9:dd82:a42a with SMTP id
+ adf61e73a8af0-1b26f18576fmr1650694637.31.1717149608685; Fri, 31 May 2024
+ 03:00:08 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240509164123.1753050-1-j-humphreys@ti.com>
- <20240509164123.1753050-16-j-humphreys@ti.com>
- <Zk--WFQJC-wi5zE5@hera> <86bk4vcjab.fsf@udb0321960.dhcp.ti.com>
- <CAC_iWjLMERkDYF_-Eu5mg13q_PjjfjcwgsTGxJ_SB6h6PdzXEA@mail.gmail.com>
- <86ikyufwq3.fsf@udb0321960.dhcp.ti.com>
-In-Reply-To: <86ikyufwq3.fsf@udb0321960.dhcp.ti.com>
+References: <20240528140955.1960172-1-raymond.mao@linaro.org>
+ <20240528140955.1960172-22-raymond.mao@linaro.org>
+In-Reply-To: <20240528140955.1960172-22-raymond.mao@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 31 May 2024 12:30:03 +0300
-Message-ID: <CAC_iWjKRezCL1cXfB5Zy233XvP59js_MxcogaqcBCUV5gpQcvQ@mail.gmail.com>
-Subject: Re: [PATCH v4 15/19] board: am62px: Define capsule update firmware
- info
-To: Jon Humphreys <j-humphreys@ti.com>
-Cc: Roger Quadros <rogerq@kernel.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Kamlesh Gurudasani <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>, 
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>, 
- Simon Glass <sjg@chromium.org>, Nikhil M Jain <n-jain1@ti.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
- Maxime Ripard <mripard@kernel.org>, 
- Siddharth Vadapalli <s-vadapalli@ti.com>, Bryan Brattlof <bb@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, 
- Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
- Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, u-boot@lists.denx.de
+Date: Fri, 31 May 2024 12:59:32 +0300
+Message-ID: <CAC_iWj+16ytziB5tT+hRF5gkyh+Mm_U9fWEdo6r4w72rzVmghg@mail.gmail.com>
+Subject: Re: [PATCH v3 21/25] mbedtls: add RSA helper layer on MbedTLS
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Stefan Bosch <stefan_b@posteo.net>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
+ Michal Simek <michal.simek@amd.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Simon Glass <sjg@chromium.org>, Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jesse Taube <mr.bossman075@gmail.com>,
+ Bryan Brattlof <bb@ti.com>, 
+ "Leon M. Busch-George" <leon@georgemail.eu>, Sergei Antonov <saproj@gmail.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
+ Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>, 
+ Manorit Chawdhry <m-chawdhry@ti.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,156 +104,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 31 May 2024 at 07:10, Jon Humphreys <j-humphreys@ti.com> wrote:
+Hi Raymond,
+
+[...]
+
+> +
+> +/**
+> + * rsa_parse_pub_key() - decodes the BER encoded buffer and stores in the
+> + *                       provided struct rsa_key, pointers to the raw key as is,
+> + *                       so that the caller can copy it or MPI parse it, etc.
+> + *
+> + * @rsa_key:   struct rsa_key key representation
+> + * @key:       key in BER format
+> + * @key_len:   length of key
+> + *
+> + * Return:     0 on success or error code in case of error
+> + */
+> +int rsa_parse_pub_key(struct rsa_key *rsa_key, const void *key,
+> +                     unsigned int key_len)
+> +{
+> +       int ret = 0;
+> +       mbedtls_pk_context pk;
+> +       mbedtls_rsa_context *rsa;
+> +
+> +       mbedtls_pk_init(&pk);
+> +
+> +       ret = mbedtls_pk_parse_public_key(&pk, (const unsigned char *)key,
+> +                                         key_len);
+> +       if (ret) {
+> +               pr_err("Failed to parse public key, ret:-0x%04x\n",
+> +                      (unsigned int)-ret);
+> +               ret = -EINVAL;
+> +               goto clean_pubkey;
+> +       }
+> +
+> +       /* Ensure that it is a RSA key */
+> +       if (mbedtls_pk_get_type(&pk) != MBEDTLS_PK_RSA) {
+> +               pr_err("Non-RSA keys are not supported\n");
+> +               ret = -EKEYREJECTED;
+> +               goto clean_pubkey;
+> +       }
+> +
+> +       /* Get RSA key context */
+> +       rsa = mbedtls_pk_rsa(pk);
+> +       if (!rsa) {
+> +               pr_err("Failed to get RSA key context, ret:-0x%04x\n",
+> +                      (unsigned int)-ret);
+
+Why do we need to cast the result here? Just print ret
+Also, would it make sense to create a mapping between mbedTLS API
+errors and internal error codes?
+instead of doing ret -EINVAL etc  we could have something like
+ret = mbedtls_to_errno(ret);
+
+> +               ret = -EINVAL;
+> +               goto clean_pubkey;
+> +       }
+> +
+> +       /* Parse modulus (n) */
+> +       rsa_key->n_sz = mbedtls_mpi_size(&rsa->N);
+> +       rsa_key->n = kzalloc(rsa_key->n_sz, GFP_KERNEL);
+> +       if (!rsa_key->n) {
+> +               ret = -ENOMEM;
+> +               goto clean_pubkey;
+> +       }
+> +       ret = mbedtls_mpi_write_binary(&rsa->N, (unsigned char *)rsa_key->n,
+> +                                      rsa_key->n_sz);
+> +       if (ret) {
+> +               pr_err("Failed to parse modulus (n), ret:-0x%04x\n",
+> +                      (unsigned int)-ret);
+
+Same here
+
+> +               ret = -EINVAL;
+> +               goto clean_modulus;
+> +       }
+> +
+> +       /* Parse public exponent (e) */
+> +       rsa_key->e_sz = mbedtls_mpi_size(&rsa->E);
+> +       rsa_key->e = kzalloc(rsa_key->e_sz, GFP_KERNEL);
+> +       if (!rsa_key->e) {
+> +               ret = -ENOMEM;
+> +               goto clean_modulus;
+> +       }
+> +       ret = mbedtls_mpi_write_binary(&rsa->E, (unsigned char *)rsa_key->e,
+> +                                      rsa_key->e_sz);
+> +       if (!ret)
+> +               return 0;
+> +
+> +       pr_err("Failed to parse public exponent (e), ret:-0x%04x\n",
+> +              (unsigned int)-ret);
+
+ and here
+
+> +       ret = -EINVAL;
+> +
+> +       kfree(rsa_key->e);
+> +clean_modulus:
+> +       kfree(rsa_key->n);
+> +clean_pubkey:
+> +       mbedtls_pk_free(&pk);
+> +       return ret;
+> +}
+> --
+> 2.25.1
 >
-> Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
->
-> > Hi Jon,
-> >
-> > On Fri, 24 May 2024 at 18:38, Jon Humphreys <j-humphreys@ti.com> wrote:
-> >>
-> >> Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
-> >>
-> >> > Hi Jonathan
-> >> >
-> >> > Thanks for working on this
-> >> >
-> >> > On Thu, May 09, 2024 at 11:41:19AM -0500, Jonathan Humphreys wrote:
-> >> >> Define the firmware components updatable via EFI capsule update, including
-> >> >> defining capsule GUIDs for the various firmware components for the AM62px
-> >> >> SK.
-> >> >>
-> >> >> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
-> >> >> ---
-> >> >>  board/ti/am62px/evm.c        | 32 ++++++++++++++++++++++++++++++++
-> >> >>  include/configs/am62px_evm.h | 24 ++++++++++++++++++++++++
-> >> >>  2 files changed, 56 insertions(+)
-> >> >>
-> >> >> diff --git a/board/ti/am62px/evm.c b/board/ti/am62px/evm.c
-> >> >> index 97a95ce8cc2..6d0f66e5dc0 100644
-> >> >> --- a/board/ti/am62px/evm.c
-> >> >> +++ b/board/ti/am62px/evm.c
-> >> >> @@ -6,6 +6,7 @@
-> >> >>   *
-> >> >>   */
-> >> >>
-> >> >> +#include <efi_loader.h>
-> >> >>  #include <asm/arch/hardware.h>
-> >> >>  #include <asm/io.h>
-> >> >>  #include <dm/uclass.h>
-> >> >> @@ -13,6 +14,37 @@
-> >> >>  #include <fdt_support.h>
-> >> >>  #include <spl.h>
-> >> >>
-> >> >> +struct efi_fw_image fw_images[] = {
-> >> >
-> >> > It's better if we add an
-> >> > #if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
-> >> > for both of the structs that follow (and it applies to all your patches)
-> >> >
-> >>
-> >> Ilias, thanks for the reviews.
-> >>
-> >> I had this protected in #if's in an earlier patch set, as you suggest here.
-> >> However, in those reviews, Roger recommended that we don't do that and put
-> >> conditions around the use of it in set_dfu_alt_info().
-> >>
-> >
-> > Hmm but the function prototype itself is on an ifdef. If you want to
-> > remove the ifdef you got to do it everywhere
-> >
->
-> Are you referring to set_dfu_alt_info() which is guarded by
-> CONFIG_SET_DFU_ALT_INFO?
-
-Yes
-
->
-> If so, that is separate but I can add a CONFIG_SET_DFU_ALT_INFO guard
-> around the definition, for now. But IMO it is a bit of a mess because it's
-> use and board specific defs are guarded by CONFIG_SET_DFU_ALT_INFO but the
-> weak/default definition is guarded by CONFIG_EFI_CAPSULE_FIRMWARE, which
-> causes problems because the configs are not always the same for all builds.
-
-Indeed
-
-> I was wanting to fix that too so I might do that as a separate patch and
-> make that patch a prerequisite for this series, which then allows me to
-> remove the definitions of set_dfu_alt_info() in this series.
->
-
-We can clean it up later sure, but for now put it under an IS_ENABLED
-so we have the same mess everywhere :)
-
 Thanks
 /Ilias
-> Jon
->
-> > Thanks
-> > /Ilias
-> >
-> >> https://lore.kernel.org/all/b19f02e0-a80a-46d6-8296-5d516577766a@kernel.org/
-> >>
-> >> I assume the reasoning is to reduce #if's in the code and rely on the
-> >> compiler to be smart enough to remove dead data. (Roger, speak up if I
-> >> misrepresent you.)
-> >>
-> >> I'm ok to do either way.  What is the preferred way in U-Boot?
-> >>
-> >> Thanks
-> >> Jon
-> >>
-> >> >> +    {
-> >> >> +            .image_type_id = AM62PX_SK_TIBOOT3_IMAGE_GUID,
-> >> >> +            .fw_name = u"AM62PX_SK_TIBOOT3",
-> >> >> +            .image_index = 1,
-> >> >> +    },
-> >> >> +    {
-> >> >> +            .image_type_id = AM62PX_SK_SPL_IMAGE_GUID,
-> >> >> +            .fw_name = u"AM62PX_SK_SPL",
-> >> >> +            .image_index = 2,
-> >> >> +    },
-> >> >> +    {
-> >> >> +            .image_type_id = AM62PX_SK_UBOOT_IMAGE_GUID,
-> >> >> +            .fw_name = u"AM62PX_SK_UBOOT",
-> >> >> +            .image_index = 3,
-> >> >> +    }
-> >> >> +};
-> >> >> +
-> >> >> +struct efi_capsule_update_info update_info = {
-> >> >> +    .dfu_string = "sf 0:0=tiboot3.bin raw 0 80000;"
-> >> >> +    "tispl.bin raw 80000 200000;u-boot.img raw 280000 400000",
-> >> >> +    .num_images = ARRAY_SIZE(fw_images),
-> >> >> +    .images = fw_images,
-> >> >> +};
-> >> >
-> >> > I haven't worked on any TI platforms lately so I cant say much about the
-> >> > naming and the flash regions. The definition seems correct
-> >> >
-> >> >
-> >> >> +
-> >> >> +void set_dfu_alt_info(char *interface, char *devstr)
-> >> >> +{
-> >> >> +    if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
-> >> >> +            env_set("dfu_alt_info", update_info.dfu_string);
-> >> >> +}
-> >> >
-> >> > There's a CONFIG_SET_DFU_ALT_INFO symbol. This better if we add a check here
-> >> > as well
-> >> >
-> >> >> +
-> >> >>  int board_init(void)
-> >> >>  {
-> >> >>      return 0;
-> >> >> diff --git a/include/configs/am62px_evm.h b/include/configs/am62px_evm.h
-> >> >> index 06b12860e21..57a1ba9dc3c 100644
-> >> >> --- a/include/configs/am62px_evm.h
-> >> >> +++ b/include/configs/am62px_evm.h
-> >> >> @@ -8,6 +8,30 @@
-> >> >>  #ifndef __CONFIG_AM62PX_EVM_H
-> >> >>  #define __CONFIG_AM62PX_EVM_H
-> >> >>
-> >> > [...]
-> >> >
-> >> > Regards
-> >> > /Ilias
