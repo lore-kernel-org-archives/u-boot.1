@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AED6C25B7E
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 14:22:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D63BC25B7E
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 14:22:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6951E8881C;
-	Fri, 31 May 2024 16:19:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CAFDA887CA;
+	Fri, 31 May 2024 16:19:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IkyMDgub";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RBtDs4cx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2040885AF; Fri, 31 May 2024 16:19:48 +0200 (CEST)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
+ id 3DB35887CA; Fri, 31 May 2024 16:19:51 +0200 (CEST)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA277885AF
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 16:19:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 065B0885AF
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 16:19:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-2c1e7708cfdso408041a91.2
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 07:19:45 -0700 (PDT)
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-7024494f7daso828494b3a.3
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 07:19:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717165184; x=1717769984; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1717165187; x=1717769987; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oUREERFwT0ls5EHqqOzhZahlrhWa0aQVWUmaWt/iQzo=;
- b=IkyMDgubB3F9CYfOJbYU6AqtXg/WnpHKZwwUqHNRvll6FsijW+P7HJ7JwhWZ3dflzX
- QGxsNOwKHo7sFQyEzuKkdS9FOmzxoHen+wtYm/1QUcKYX0YZ3IsOpRQOtu7DG365teF3
- /DcjOE4BM0UdGoU0dYC5qeE0br4hQ491g/YCsb0VFdP2J8kMWCY0TNGr6Zut5WAMa7Jb
- ac758TdJUAYihubBEvfsunFiPqqYGn16kN4AsK840CbrdO9Ddsgsw/ZDd9S435pqeUHm
- i1fq4lhauqzfzOiR1UXOWzEM/k+0msHnykhv+e08j+NB5/LJoYWh3dp9JN4k55d4D4cD
- dsiA==
+ bh=4AWX+a3danwXJxw0C2h1AHaIWUTXEtDLrKB2P+bsdZg=;
+ b=RBtDs4cxljk6LNGq0jo2Xn0EyMh4MxgEEOsOeqcS/lKXeNbEexqp19sTem2TJ7cPa/
+ sK3fnNQfFCumPGJGllDy1QQvCaX0ATCBg1oMeTYLeaptTsG6IqFAdiS5CA+yz8JejOk3
+ 0BiIsTexO4FV/lQ5P22UWfuSqRdtrmvtlbkGQs0uQdBcpxvAsVvymusY+o7N5Rh/g7Ap
+ Bp2aolZW2knYxlU6lcqcmeErH6xu/wjZtBgzGD4E6YlXrnV89ITvTFws8L+wbgbb/6FB
+ WZfdsvodhuEOUHVH94OmxbvdEoL0J8+0a03JBDh4Zonie1YDEdLGd2pDTtbN4kToLwB6
+ IVcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717165184; x=1717769984;
+ d=1e100.net; s=20230601; t=1717165187; x=1717769987;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oUREERFwT0ls5EHqqOzhZahlrhWa0aQVWUmaWt/iQzo=;
- b=DrfdwDwByO84oyuRWRufP6GHo+KCSvVMl2RPf5E4imhy2ffQpLS7RSj3NGpaJA+sEb
- oDmfyzB2WyxFtRY8vPtDAQy11Xg9iWcJ4+i8iijz9PSLZ8DI2kvfelrL9TFfREmuT5Fo
- dUqwXB87AHF+fOitJ7vwYpMmnQatlNfu4E6iy/CvelKiXZ3jt6gZF1hBDbDIfnE+JZPX
- 6I0gVANgxLKI8zRiQ39fEMKbmNSf02j3zCnREuQPCaaGVzpD/CJQFsc9eRhVP/3yKqzt
- x1W3JaQ4YiUnN32PCMfT7ANudpISEj5BHJVs0jn9OiNAUqM/LGdzK8ijgmx/rAx+3Q9y
- ySDA==
+ bh=4AWX+a3danwXJxw0C2h1AHaIWUTXEtDLrKB2P+bsdZg=;
+ b=rHdAoGd1qZRkc0tHfryiN3J77oUqPLFFWQEJiVW4tePmf7tuoXKYmVNRxyEsCCbUnY
+ 8OWv0ruLOA/OzKemFh61dboA7XvNPCbtuN/aYBNVhY6rb5+ALGqTuzNUm2xQxYa0yCTt
+ 57/M8HTvZBJsKfiu1F8iro3tbaIIOih6p7y3+jxXKJOG3d+uwJJVudb9Da6/ZP25XdTd
+ f1bve/LIG9rE4+JI8GLZEzQEggFDIGEgu8tzxZZ5rihQB7tKuQwhvDzfGwIMLPlmlz07
+ ZMcdKG4jpblrHfEcSpLr6qZdE7Ol7JAypmOHiT15xHcR6WYCgFOSlenoOiVGt0P+YsQY
+ IEKg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVx/m6J/7lJUDUViWHf0F8+B6Jyw2vaxgDM5xiWoF+OM2K9be6ggAAHhizIkc6vCcUq2C3iVrurN4GpbEYOwasDgd/4JA==
-X-Gm-Message-State: AOJu0YwRFi1R6GsFcTQ3JK9oDTvQ10DZuGHRLwEfq4nsV0DUUrj1Zy4i
- 1MiUbPfW2OUmK//GmwmbZnz9DpDPjCw9wSNAujMXBHswTy4Yif7f
-X-Google-Smtp-Source: AGHT+IGw8r/J/O/pawu4xoaCb9IZI8+owHJRfnHkymAAij5Qr7hGC+iFQDsZIoa2XIUV67Xo6S08Kg==
-X-Received: by 2002:a17:90a:bf07:b0:2bd:e639:686c with SMTP id
- 98e67ed59e1d1-2c1dc58fa20mr2089494a91.23.1717165184205; 
- Fri, 31 May 2024 07:19:44 -0700 (PDT)
+ AJvYcCW8OX6lrEXV/gJW/8XkCF6X7ktMw6AAGxOGAzvoQVzZBc6F/JOIS7wtw2pzErqYxP77sTD6yPJmAzjTBG0eymqhgfQPbg==
+X-Gm-Message-State: AOJu0YzaCtWKJGzaRqHl1kpngJKNMyeHcjGCkkSzpkq3Aw6Adxa6dIW2
+ zeqNpk29EzgibrHYalxYTTdUjfz908Fk3X+8/DRW7WTbyddQIy55
+X-Google-Smtp-Source: AGHT+IFczivMPbf2K/LDv4TgxUjb52+A4Od3z2cHROZ+A+rVi0DJlbGZevC9V9lYy9UPh6V60RSWFQ==
+X-Received: by 2002:a05:6a21:339c:b0:1af:cfc2:8069 with SMTP id
+ adf61e73a8af0-1b26f0f19f9mr2491757637.4.1717165187440; 
+ Fri, 31 May 2024 07:19:47 -0700 (PDT)
 Received: from localhost.localdomain ([113.30.217.222])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2c1a775ccedsm3563935a91.1.2024.05.31.07.19.41
+ 98e67ed59e1d1-2c1a775ccedsm3563935a91.1.2024.05.31.07.19.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 May 2024 07:19:43 -0700 (PDT)
+ Fri, 31 May 2024 07:19:47 -0700 (PDT)
 From: Anand Moon <linux.amoon@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Kever Yang <kever.yang@rock-chips.com>, Jagan Teki <jagan@edgeble.ai>,
  Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>
 Cc: Anand Moon <anand@edgeble.ai>, Anand Moon <linux.amoon@gmail.com>,
  u-boot@lists.denx.de
-Subject: [PATCH RFC v2 16/23] rockchip: RK3368: Read the reset cause from
- clock reset unit for RK3368 SoC
-Date: Fri, 31 May 2024 19:48:30 +0530
-Message-ID: <20240531141837.13189-17-linux.amoon@gmail.com>
+Subject: [PATCH RFC v2 17/23] rockchip: RK3368: Enable display cpuinfo support
+ on all boards
+Date: Fri, 31 May 2024 19:48:31 +0530
+Message-ID: <20240531141837.13189-18-linux.amoon@gmail.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240531141837.13189-1-linux.amoon@gmail.com>
 References: <20240531141837.13189-1-linux.amoon@gmail.com>
@@ -99,42 +99,67 @@ X-Virus-Status: Clean
 
 From: Anand Moon <anand@edgeble.ai>
 
-Read the reset cause from clock reset unit for RK3368 SoC.
+Enable DISPLAY_CPUINFO options to support on all RK3368 boards.
+Its used to determine the reset cause of the board.
 
 Cc: Jagan Teki <jagan@edgeble.ai>
 Signed-off-by: Anand Moon <anand@edgeble.ai>
 Signed-off-by: Anand Moon <linux.amoon@gmail.com>
 ---
- arch/arm/include/asm/arch-rockchip/cru.h | 2 ++
- arch/arm/mach-rockchip/cpu-info.c        | 2 ++
- 2 files changed, 4 insertions(+)
+ configs/evb-px5_defconfig      | 1 -
+ configs/geekbox_defconfig      | 1 -
+ configs/lion-rk3368_defconfig  | 1 -
+ configs/sheep-rk3368_defconfig | 1 -
+ 4 files changed, 4 deletions(-)
 
-diff --git a/arch/arm/include/asm/arch-rockchip/cru.h b/arch/arm/include/asm/arch-rockchip/cru.h
-index 6fe73ad0cc..9cdd960fb1 100644
---- a/arch/arm/include/asm/arch-rockchip/cru.h
-+++ b/arch/arm/include/asm/arch-rockchip/cru.h
-@@ -25,6 +25,8 @@
- #include <asm/arch-rockchip/cru_px30.h>
- #elif defined(CONFIG_ROCKCHIP_RK3308)
- #include <asm/arch-rockchip/cru_rk3308.h>
-+#elif defined(CONFIG_ROCKCHIP_RK3368)
-+#include <asm/arch-rockchip/cru_rk3368.h>
- #endif
- 
- /* CRU_GLB_RST_ST */
-diff --git a/arch/arm/mach-rockchip/cpu-info.c b/arch/arm/mach-rockchip/cpu-info.c
-index dbc126c862..b9d2756a70 100644
---- a/arch/arm/mach-rockchip/cpu-info.c
-+++ b/arch/arm/mach-rockchip/cpu-info.c
-@@ -28,6 +28,8 @@ char *get_reset_cause(void)
- 	struct rockchip_cru *cru = rockchip_get_cru();
- #elif IS_ENABLED(CONFIG_ROCKCHIP_RK3308)
- 	struct rk3308_cru *cru = rockchip_get_cru();
-+#elif IS_ENABLED(CONFIG_ROCKCHIP_RK3368)
-+	struct rk3368_cru *cru = rockchip_get_cru();
- #endif
- 	char *cause = NULL;
- 
+diff --git a/configs/evb-px5_defconfig b/configs/evb-px5_defconfig
+index ccd3883153..9be143487e 100644
+--- a/configs/evb-px5_defconfig
++++ b/configs/evb-px5_defconfig
+@@ -37,7 +37,6 @@ CONFIG_SPL_BOOTSTAGE=y
+ CONFIG_BOOTSTAGE_REPORT=y
+ CONFIG_BOOTSTAGE_FDT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3368-px5-evb.dtb"
+-# CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+diff --git a/configs/geekbox_defconfig b/configs/geekbox_defconfig
+index 8f4be79831..de526ae14d 100644
+--- a/configs/geekbox_defconfig
++++ b/configs/geekbox_defconfig
+@@ -15,7 +15,6 @@ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_SYS_LOAD_ADDR=0x800800
+ CONFIG_DEBUG_UART=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3368-geekbox.dtb"
+-# CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_REGMAP=y
+diff --git a/configs/lion-rk3368_defconfig b/configs/lion-rk3368_defconfig
+index a4a7f1a5cb..e5bcc13038 100644
+--- a/configs/lion-rk3368_defconfig
++++ b/configs/lion-rk3368_defconfig
+@@ -34,7 +34,6 @@ CONFIG_SPL_BOOTSTAGE=y
+ CONFIG_BOOTSTAGE_REPORT=y
+ CONFIG_BOOTSTAGE_FDT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3368-lion-haikou.dtb"
+-# CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+diff --git a/configs/sheep-rk3368_defconfig b/configs/sheep-rk3368_defconfig
+index a591b2741d..5e58877012 100644
+--- a/configs/sheep-rk3368_defconfig
++++ b/configs/sheep-rk3368_defconfig
+@@ -15,7 +15,6 @@ CONFIG_SYS_LOAD_ADDR=0x800800
+ CONFIG_DEBUG_UART=y
+ CONFIG_ANDROID_BOOT_IMAGE=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3368-sheep.dtb"
+-# CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_CMD_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
 -- 
 2.44.0
 
