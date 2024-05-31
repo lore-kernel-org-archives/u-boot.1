@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7215C25B75
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 16:32:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3057DC27C4F
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 16:44:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58B64882CD;
-	Fri, 31 May 2024 18:32:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 82D2A887B1;
+	Fri, 31 May 2024 18:44:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Zs0eqCbV";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="bhIStOLw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE93E882F1; Fri, 31 May 2024 18:32:47 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id 144B9887C9; Fri, 31 May 2024 18:44:36 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CF9988284
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 18:32:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BDA92882F1
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 18:44:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id C007E6290C;
- Fri, 31 May 2024 16:32:43 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5C445C116B1;
- Fri, 31 May 2024 16:32:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1717173163;
- bh=15NkxmH+izFvjZhpPNqR/wYJHUP47bUyIJhsLT1zziI=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Zs0eqCbVwvGfKYVSO9Ye6TbSPrS8Hje9FJUq9xrMF/cVwCSY17IMUG6pRrtoDJrdy
- xZUG6KkNvlGy5FcMfS3Tl1oPdHfH1XUqTojTPaJ/ycK50V1pNuGkI8Cpgb0iErgrQ8
- dsKG/BiikeDnMyxzj6WwD5aEd3ucZu6lJ42uE1EfsJhpAY5A8xDcS4OhNSDdOPkP6g
- TwCskHs28hV+yIRK+Kd1JEGfxB5ou75t5W1c3ke+1hZJ/4neFTMQ/XKB9KAgLHWsex
- ysmbDuUXo0bgarV8KDoIU6lHA9CDDEn4Lc02renbI7k175TdFs2gURamOmF7e9wTHS
- THuOQwP71d5Nw==
-Message-ID: <95fad9de-5fd3-4dd4-8a13-850dc81da26d@kernel.org>
-Date: Fri, 31 May 2024 19:32:37 +0300
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=7f33=ND=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1717173861;
+ bh=MCt4jzQjr9JCzN1wGXzdzPdX9qXI6cse28O+HcR8++0=;
+ b=bhIStOLwpZRTvgv1LbrLKtC2xq3CoKe9/GKMIyuQs5QyNtsdviyxUeFrR/v/+VXwP3Oaav1pl
+ Et9bw0A6qkoFphPRzBV4qpZCVcKiNIBt8TUFYa5Qu8M/0cf/fdLszSuYrcc2GB+3e2PdnGl+XSr
+ ebLQ6pWN1BkatkECLFE29IqayEDvmH0L4UAztf+HrGOFTC142QjifCwrllseG1jrvdTL2x0tQlK
+ I2Pk08nXABMCbbe/pL0cS6EKsteSZfprA79wZa8/sqQ5fB+xGg/22D8fD8gx6AMeBDlmL41sED2
+ 0JitwG6gScHcRViph7P0FeUOudc0U6fRTVYBdRfVKbtQ==
+Message-ID: <99479aa4-6bdf-4265-b30f-ab571ec3adca@kwiboo.se>
+Date: Fri, 31 May 2024 18:44:14 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/3] arm: dts: am62-beagleplay: Fix Beagleplay Ethernet
-To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Nishanth Menon <nm@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>, Wadim Egorov <w.egorov@phytec.de>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Simon Glass <sjg@chromium.org>
-Cc: srk@ti.com, s-vadapalli@ti.com, vigneshr@ti.com, r-gunasekaran@ti.com,
- danishanwar@ti.com, u-boot@lists.denx.de
-References: <20240513-for-2024-07-beagleplay-eth-v2-0-a9bf457c3bb8@kernel.org>
- <171622056331.1577131.5584438868595064237.b4-ty@konsulko.com>
+Subject: Re: [PATCH RFC v2 22/23] sysreset: rockchip: use fst reset for ARM64
+ SOC
+To: Anand Moon <linux.amoon@gmail.com>, Kever Yang <kever.yang@rock-chips.com>
+Cc: Anand Moon <anand@edgeble.ai>, Tom Rini <trini@konsulko.com>, Simon
+ Glass <sjg@chromium.org>, Jagan Teki <jagan@edgeble.ai>, Quentin Schulz
+ <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+References: <20240531141837.13189-1-linux.amoon@gmail.com>
+ <20240531141837.13189-23-linux.amoon@gmail.com>
 Content-Language: en-US
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <171622056331.1577131.5584438868595064237.b4-ty@konsulko.com>
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20240531141837.13189-23-linux.amoon@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 6659fe6436515b5bc7dd9f87
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,30 +75,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Anand and Kever,
 
-On 20/05/2024 18:56, Tom Rini wrote:
-> On Mon, 13 May 2024 15:13:53 +0300, Roger Quadros wrote:
+On 2024-05-31 16:18, Anand Moon wrote:
+> From: Kever Yang <kever.yang@rock-chips.com>
 > 
->> Sync AM62 device tree files with Linux v6.9 and
->> add in the missing bits in -u-boot.dtsi to get CPSW
->> Ethernet working.
->>
->> CI testing
->> https://github.com/u-boot/u-boot/pull/534
->>
->> [...]
+> Rockchip ARM64 SOC will change cpu entry, only fst reset can reset it.
+
+What is this trying to fix? And what SoCs is affected?
+
+My arm64 RK SoCs seem to reset using warm reset (second global reset).
+
 > 
-> Applied to u-boot/next, thanks!
+> Cc: Jagan Teki <jagan@edgeble.ai>
+> Signed-off-by: Kever Yang <kever.yang@rock-chips.com>
+> ---
+>  drivers/sysreset/sysreset_rockchip.c | 5 +++++
+>  1 file changed, 5 insertions(+)
 > 
+> diff --git a/drivers/sysreset/sysreset_rockchip.c b/drivers/sysreset/sysreset_rockchip.c
+> index f353f9b4c7..17aa191349 100644
+> --- a/drivers/sysreset/sysreset_rockchip.c
+> +++ b/drivers/sysreset/sysreset_rockchip.c
+> @@ -22,7 +22,12 @@ int rockchip_sysreset_request(struct udevice *dev, enum sysreset_t type)
+>  
+>  	switch (type) {
+>  	case SYSRESET_WARM:
+> +#ifdef CONFIG_ARM64
+> +		/* Rockchip 64bit SOC need fst reset for cpu reset entry */
+> +		writel(0xfdb9, cru_base + offset->glb_srst_fst_value);
+> +#else
+>  		writel(0xeca8, cru_base + offset->glb_srst_snd_value);
+> +#endif
 
-I see that this series was applied to u-boot master as well
-and then later reverted by commit d678a59d2d719da9e807495b4b021501f2836ca5
-as it was based on u-boot/next
+If this is needed maybe use something like this and let it fall through
+to SYSRESET_COLD?
 
-Can I re-send this series based on u-boot/master so it can be still applied to master?
-Without this Ethernet is broken on beagleplay.
+  if (!IS_ENABLED(CONFIG_ARM64)) {
+	writel(0xeca8, cru_base + offset->glb_srst_snd_value);
+	break;
+  }
 
--- 
-cheers,
--roger
+Regards,
+Jonas
+
+>  		break;
+>  	case SYSRESET_COLD:
+>  		writel(0xfdb9, cru_base + offset->glb_srst_fst_value);
+
