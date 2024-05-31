@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D6A6C27C4F
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 22:23:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6616CC25B75
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 22:23:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F20B988817;
-	Sat,  1 Jun 2024 00:21:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5AB988885D;
+	Sat,  1 Jun 2024 00:21:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qSC2tvdV";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qFE81REE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA27488853; Sat,  1 Jun 2024 00:21:51 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 0F09688851; Sat,  1 Jun 2024 00:21:52 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B78968880F
- for <u-boot@lists.denx.de>; Sat,  1 Jun 2024 00:21:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 293248831F
+ for <u-boot@lists.denx.de>; Sat,  1 Jun 2024 00:21:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44VMLYoB127031;
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44VMLYXt113697;
  Fri, 31 May 2024 17:21:34 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1717194094;
- bh=rMhAjGkn2Lny++Ef4En9B8kIfNp7ueDs0YsEkvoGh/0=;
+ bh=XFt7mowSCo5gmKM1tT1wbXaxFS4F5/2lBODaQdjptYc=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=qSC2tvdVp7DmMaFlv7K6/zpgL4ycGkIkj15WwSs2Uj/kFt6fXeiX2V05IabYUuLfu
- cm59NGJGONetz9sDV50E/ES2qcFf36pu+uQ7ciCvQiXkXsd+FU1rzk6GNENij2RgHz
- cUkffm7otkIf+65Uk4MktwcDlY8nJwWRJBg0Lhb0=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44VMLYUx006210
+ b=qFE81REE62dPJtgutpOBd6bCVCyifKYqaYYcq5lBzaT/JwVrtPwmk2ZZXGcMW0f1r
+ 415otfx/DBDJFlbmLidyjZQ8HlDmyKmbYqCgcx+JehIEF7scPof80eEPZTzGFY7Szg
+ mcbCAWXcG0vJXP9vqkRK9RY2LbeLjm79HsfZpzdA=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44VMLYEK089487
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Fri, 31 May 2024 17:21:34 -0500
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 31
- May 2024 17:21:33 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ May 2024 17:21:34 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 31 May 2024 17:21:33 -0500
+ Frontend Transport; Fri, 31 May 2024 17:21:34 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44VMLXXp026043;
- Fri, 31 May 2024 17:21:33 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44VMLYpa026082;
+ Fri, 31 May 2024 17:21:34 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Heinrich Schuchardt
@@ -67,10 +67,9 @@ To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ilias Apalodimas
  <ilias.apalodimas@linaro.org>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH v5 02/23] doc: ti: k3: Correct spelling mistakes and improve
- clarity
-Date: Fri, 31 May 2024 17:20:57 -0500
-Message-ID: <20240531222118.2618041-3-j-humphreys@ti.com>
+Subject: [PATCH v5 21/23] board: sk-am69: Define capsule update firmware info
+Date: Fri, 31 May 2024 17:21:16 -0500
+Message-ID: <20240531222118.2618041-22-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240531222118.2618041-1-j-humphreys@ti.com>
 References: <20240531222118.2618041-1-j-humphreys@ti.com>
@@ -94,54 +93,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Few cosmetic fixes for clarity and spelling mistakes.
+Define the firmware components updatable via EFI capsule update, including
+defining capsule GUIDs for the various firmware components for the AM69
+SK.
+
+TODO: possibly make the struct's sk specific.
+TODO: add doc commit (and make sure doc is sk/NOR specific, and add OSIP
+boot mode)
+TODO: update doc to show sk defconfig when building
 
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- doc/board/ti/k3.rst | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ board/ti/j784s4/evm.c        | 34 ++++++++++++++++++++++++++++++++++
+ include/configs/j784s4_evm.h | 24 ++++++++++++++++++++++++
+ 2 files changed, 58 insertions(+)
 
-diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-index a1c01d1cf02..927f3976d34 100644
---- a/doc/board/ti/k3.rst
-+++ b/doc/board/ti/k3.rst
-@@ -51,14 +51,14 @@ For all K3 SoCs the first core started will be inside the Security
- Management Subsystem (SMS) which will secure the device and start a core
- in the wakeup domain to run the ROM code. ROM will then initialize the
- boot media needed to load the binaries packaged inside `tiboot3.bin`,
--including a 32bit U-Boot SPL, (called the wakup SPL) that ROM will jump
-+including a 32bit U-Boot SPL, (called the wakeup SPL) that ROM will jump
- to after it has finished loading everything into internal SRAM.
+diff --git a/board/ti/j784s4/evm.c b/board/ti/j784s4/evm.c
+index aed0ea5b949..548dbd5925d 100644
+--- a/board/ti/j784s4/evm.c
++++ b/board/ti/j784s4/evm.c
+@@ -7,12 +7,46 @@
+  *
+  */
  
- .. image:: img/boot_flow_01.svg
-   :alt: Boot flow up to wakeup domain SPL
++#include <efi_loader.h>
+ #include <init.h>
+ #include <spl.h>
+ #include "../common/fdt_ops.h"
  
- The wakeup SPL, running on a wakeup domain core, will initialize DDR and
--any peripherals needed load the larger binaries inside the `tispl.bin`
-+any peripherals needed to load the larger binaries inside the `tispl.bin`
- into DDR.  Once loaded the wakeup SPL will start one of the 'big'
- application cores inside the main domain to initialize the main domain,
- starting with Trusted Firmware-A (TF-A), before moving on to start
-@@ -94,7 +94,7 @@ essentially 4 unique but very similar flows:
- * Combined binary with a split firmware: (eg: AM62)
+ DECLARE_GLOBAL_DATA_PTR;
  
- For devices that utilize the split binary approach, ROM is not capable
--of loading the firmware into the SoC requiring the wakeup domain's
-+of loading the firmware into the SoC, requiring the wakeup domain's
- U-Boot SPL to load the firmware.
++struct efi_fw_image fw_images[] = {
++	{
++		.image_type_id = AM69_SK_TIBOOT3_IMAGE_GUID,
++		.fw_name = u"AM69_SK_TIBOOT3",
++		.image_index = 1,
++	},
++	{
++		.image_type_id = AM69_SK_SPL_IMAGE_GUID,
++		.fw_name = u"AM69_SK_SPL",
++		.image_index = 2,
++	},
++	{
++		.image_type_id = AM69_SK_UBOOT_IMAGE_GUID,
++		.fw_name = u"AM69_SK_UBOOT",
++		.image_index = 3,
++	}
++};
++
++struct efi_capsule_update_info update_info = {
++	.dfu_string = "sf 0:0=tiboot3.bin raw 0 80000;"
++	"tispl.bin raw 80000 200000;u-boot.img raw 280000 400000",
++	.num_images = ARRAY_SIZE(fw_images),
++	.images = fw_images,
++};
++
++#if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
++void set_dfu_alt_info(char *interface, char *devstr)
++{
++	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
++		env_set("dfu_alt_info", update_info.dfu_string);
++}
++#endif
++
+ int board_init(void)
+ {
+ 	return 0;
+diff --git a/include/configs/j784s4_evm.h b/include/configs/j784s4_evm.h
+index 4a2ccdce144..53eb2bff221 100644
+--- a/include/configs/j784s4_evm.h
++++ b/include/configs/j784s4_evm.h
+@@ -9,6 +9,30 @@
+ #ifndef __CONFIG_J784S4_EVM_H
+ #define __CONFIG_J784S4_EVM_H
  
- Devices with a split firmware will have two firmwares loaded into the
-@@ -114,8 +114,8 @@ K3 HS-SE (High Security - Security Enforced) devices enforce an
- authenticated boot flow for secure boot. HS-FS (High Security - Field
- Securable) is the state of a K3 device before it has been eFused with
- customer security keys.  In the HS-FS state the authentication still can
--function as in HS-SE but as there are no customer keys to verify the
--signatures against the authentication will pass for certificates signed
-+function as in HS-SE, but as there are no customer keys to verify the
-+signatures against, the authentication will pass for certificates signed
- with any key.
++/**
++ * define AM69_SK_TIBOOT3_IMAGE_GUID - firmware GUID for AM69 SK tiboot3.bin
++ * define AM69_SK_SPL_IMAGE_GUID     - firmware GUID for AM69 SK SPL
++ * define AM69_SK_UBOOT_IMAGE_GUID   - firmware GUID for AM69 SK UBOOT
++ *
++ * These GUIDs are used in capsules updates to identify the corresponding
++ * firmware object.
++ *
++ * Board developers using this as a starting reference should
++ * define their own GUIDs to ensure that firmware repositories (like
++ * LVFS) do not confuse them.
++ */
++#define AM69_SK_TIBOOT3_IMAGE_GUID \
++	EFI_GUID(0xadf49ec5, 0x61bb, 0x4dbe, 0x8b, 0x8d,	\
++		 0x39, 0xdf, 0x4d, 0x7e, 0xbf, 0x46)
++
++#define AM69_SK_SPL_IMAGE_GUID \
++	EFI_GUID(0x787f0059, 0x63a1, 0x461c, 0xa1, 0x8e, \
++		 0x9d, 0x83, 0x83, 0x45, 0xfe, 0x8e)
++
++#define AM69_SK_UBOOT_IMAGE_GUID \
++	EFI_GUID(0x9300505d, 0x6ec5, 0x4ff8, 0x99, 0xe4, \
++		 0x54, 0x59, 0xa0, 0x4b, 0xe6, 0x17)
++
+ /* Now for the remaining common defines */
+ #include <configs/ti_armv7_common.h>
  
- Chain of trust
 -- 
 2.34.1
 
