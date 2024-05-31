@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27308C25B75
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 14:19:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55C59C25B75
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 14:19:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3932E887CA;
-	Fri, 31 May 2024 16:19:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A73F5887B9;
+	Fri, 31 May 2024 16:19:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dgZFAz3V";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BZ1OiXUD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47579887BA; Fri, 31 May 2024 16:19:00 +0200 (CEST)
+ id 5EB8E885AF; Fri, 31 May 2024 16:19:04 +0200 (CEST)
 Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
  [IPv6:2607:f8b0:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8425887B7
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 16:18:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1AFF3887C4
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 16:19:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=linux.amoon@gmail.com
 Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-6c5bcb8e8edso301926a12.2
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 07:18:57 -0700 (PDT)
+ 41be03b00d2f7-6bce380ebc2so1782122a12.0
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 07:19:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717165136; x=1717769936; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1717165139; x=1717769939; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=t6CwE8ETx3ULNcFmrHKZVtIh7eAr69PsZXV1eM76lFE=;
- b=dgZFAz3Vfxn5wSkNetnTgpEFiP/6K4beYujYu/rtzTEZdtvJzMgcJce+ZaVflnzlFu
- 5+CzqPEf4sPidbN8TpEqx0OTi/yH5QxEAM/kWbEtHsaRE8U8rqpRw/wQWYHOyBPSGLQ6
- 6HhZl9UFhwqtc/fP0tf7MIAPGkcTUrWOaLsNHqlc1Oj/gbT7oGtmjI9bkYT2NqeFVc48
- gvBTx2W76PvyVZM/m2nOesU6+S0cedjult6MTy4D6KJtD9d+1FHii4CWfCLSyMrEK7Qj
- i7iBM30GDZ7J+Gt27ebudEDQI8euvV6Iy9v6qBhCERXVJzjlILfL+oCMbsMyxsguAuyn
- FGTA==
+ bh=fqU0YFx6cSRjVw2zD+R0tht6d4TzcGxYEhidKZzMmv8=;
+ b=BZ1OiXUD5fkkWaQPfSoENLGPl26dU2nDIApJ5xpRGpP/MZ9ZQMmjOgTWOeWtnHiEm6
+ XSMk3F7uYtqZVYZGRiHihLPUqHV7q4YCYXt7B6M0OXec04Cl7dVc9uicuLThal8MCK/O
+ cXH1Hs5GmIcvHstYksJh5KN0j/V/M1cNAmt0N1u48zEXrPWLPGWKZe7+FaL9aEU42n47
+ +IbI3lGpGOo8bZd42nZI+E8b1bSoAZAeTN7AncZe7q32rFMUqdnnNpq0GLtcsgUWp57J
+ Pyw7iWplmqgQUxcWajERf+YkhqQsg2owUo+B8ZCX1wP/RQEX6RQzacFHWqQZv9vx7H2X
+ Cs1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717165136; x=1717769936;
+ d=1e100.net; s=20230601; t=1717165139; x=1717769939;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=t6CwE8ETx3ULNcFmrHKZVtIh7eAr69PsZXV1eM76lFE=;
- b=M0mm3mMwL1izx7p115J3mk/oXk3X7QsCQDqRmS1c4Zjmg50MX/tgMlNm3tbcZAz4yd
- bEBfoX0uMmzkS8rbKzzvQ7eycKp2HiD3PVCY0tCYRPxj7EFdSd5xjG1z15GbjrQUY9b+
- pQX/w21agBRNK7YlFXyy8JJCPKY19WRTKebffp//vurpRJvs3ODh3ffqkF0O25evdXaa
- 3oQrVKq/8pWCXEdHIcahSE+QopjsRvv/gD28tTPGc9nBhtXMggVEwWYDrqkm4kAvh2Lw
- +D8gbDqvXdWJKllFzUooDZKishoFYmdfEkMfLAXqU+Sy1GZvEYxlsVmp8iQQ5w4nox/M
- 3AyA==
+ bh=fqU0YFx6cSRjVw2zD+R0tht6d4TzcGxYEhidKZzMmv8=;
+ b=LOgeaJLaOkDzs03WM2Wnkj2/KtTkqV1i8U+pGoNTQiyHsj6TIYjUHNMW1fjV0be4pu
+ wBuTeq86sos14nqBYRL0W0dApUCgRgjU9bTzTUPGoA5tRgXiPSKdl+SwIjxOS9jLJZ3u
+ TnLKv/oSjgefPZVPu7hNMCiYMUYu7IKwSgIjSjyO8Yah5dC03Jen3cg2KS7QHlicmZcB
+ TAiu6sIXoaDeGQ2m58hAEvig8pSj1hqBk4A1uYGkc68HzrBY0TXfCjvyUVEiQODpE4j+
+ jt9sxC225SiV6hefG35UprLiSQNILHLJp4+qQ28AH7ZgvhizKPMNmrshNPymu6geGB+1
+ bA/A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXsYBv1Ti+7rJ1628bqhL/BL7hpMmoeC9rQmQft1Qz4UwR1AtwuKuw064yqKYIsycf8nXrudugu4jsL0U5HWtnEF1kesA==
-X-Gm-Message-State: AOJu0YzXnSf4eR+LJTHZ4kn2BADcPYUzWgP+8UsIi4kqS7xhJPUi8flS
- N0sSi9vNihP2XYH83eUam6KFLukJYOlRKZLChVR6lEd1hr5b+K8j
-X-Google-Smtp-Source: AGHT+IHtQhNWrxx7CXzwrHNKwoYL87TnHh0yHn8lXIcIXvwHpmqSTI7NgJSwy0BFWclsVptLPF0i0w==
-X-Received: by 2002:a17:90a:d513:b0:2bf:7ccb:b8c0 with SMTP id
- 98e67ed59e1d1-2c1dc58eb8amr1902539a91.26.1717165136268; 
- Fri, 31 May 2024 07:18:56 -0700 (PDT)
+ AJvYcCXo5W74IaFlwK8BH52fUyYUg6EDfVqVk7V6hojTzOBpZzMSq8hkNHLlQY0vpaMfo9btsIZJclR6S77BOZ0HkpgDkHs+Tw==
+X-Gm-Message-State: AOJu0YzT6m4s/f71XI/LMEXGuKHdNdxQl1P9xQZyfKU4nV6FghLLZIzl
+ AP7qWCav5mbuCsIqADtyWDGEa8SdvvEqcd7AHatNT/Q6ofbE6knyFnRWqk4H
+X-Google-Smtp-Source: AGHT+IEFnQm08GpBzoWr4iIsJEtK7PGuLNYMmqqKOHNA0LSvQ6g3xHbxP2gAvyKY0xoRO7sVQBgx4A==
+X-Received: by 2002:a17:90a:eb8a:b0:2c1:a74d:653a with SMTP id
+ 98e67ed59e1d1-2c1dc57ceb7mr1834119a91.16.1717165139536; 
+ Fri, 31 May 2024 07:18:59 -0700 (PDT)
 Received: from localhost.localdomain ([113.30.217.222])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2c1a775ccedsm3563935a91.1.2024.05.31.07.18.53
+ 98e67ed59e1d1-2c1a775ccedsm3563935a91.1.2024.05.31.07.18.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 May 2024 07:18:56 -0700 (PDT)
+ Fri, 31 May 2024 07:18:59 -0700 (PDT)
 From: Anand Moon <linux.amoon@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Kever Yang <kever.yang@rock-chips.com>, Jagan Teki <jagan@edgeble.ai>,
  Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>
 Cc: Anand Moon <anand@edgeble.ai>, Anand Moon <linux.amoon@gmail.com>,
  u-boot@lists.denx.de
-Subject: [PATCH RFC v2 01/23] rockchip: RK3328: Read the reset cause from
- clock reset unit for RK3328 SoC
-Date: Fri, 31 May 2024 19:48:15 +0530
-Message-ID: <20240531141837.13189-2-linux.amoon@gmail.com>
+Subject: [PATCH RFC v2 02/23] rockchip: RK3328: Enable display cpuinfo support
+ on all boards
+Date: Fri, 31 May 2024 19:48:16 +0530
+Message-ID: <20240531141837.13189-3-linux.amoon@gmail.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240531141837.13189-1-linux.amoon@gmail.com>
 References: <20240531141837.13189-1-linux.amoon@gmail.com>
@@ -99,44 +99,132 @@ X-Virus-Status: Clean
 
 From: Anand Moon <anand@edgeble.ai>
 
-Read the reset cause from clock reset unit for RK3328 SoC.
+Enable DISPLAY_CPUINFO options to support on all RK3328 boards,
+Its used to determine the reset cause of the board.
 
 Cc: Jagan Teki <jagan@edgeble.ai>
 Signed-off-by: Anand Moon <anand@edgeble.ai>
 Signed-off-by: Anand Moon <linux.amoon@gmail.com>
 ---
- arch/arm/include/asm/arch-rockchip/cru.h | 2 ++
- arch/arm/mach-rockchip/cpu-info.c        | 4 +++-
- 2 files changed, 5 insertions(+), 1 deletion(-)
+ configs/evb-rk3328_defconfig                  | 1 -
+ configs/nanopi-r2c-plus-rk3328_defconfig      | 1 -
+ configs/nanopi-r2c-rk3328_defconfig           | 1 -
+ configs/nanopi-r2s-rk3328_defconfig           | 1 -
+ configs/orangepi-r1-plus-lts-rk3328_defconfig | 1 -
+ configs/orangepi-r1-plus-rk3328_defconfig     | 1 -
+ configs/roc-cc-rk3328_defconfig               | 1 -
+ configs/rock-pi-e-rk3328_defconfig            | 1 -
+ configs/rock64-rk3328_defconfig               | 1 -
+ 9 files changed, 9 deletions(-)
 
-diff --git a/arch/arm/include/asm/arch-rockchip/cru.h b/arch/arm/include/asm/arch-rockchip/cru.h
-index 9778790f34..a1499e9652 100644
---- a/arch/arm/include/asm/arch-rockchip/cru.h
-+++ b/arch/arm/include/asm/arch-rockchip/cru.h
-@@ -13,6 +13,8 @@
- 
- #if defined(CONFIG_ROCKCHIP_RK3288)
- # include <asm/arch-rockchip/cru_rk3288.h>
-+#elif defined(CONFIG_ROCKCHIP_RK3328)
-+#include <asm/arch-rockchip/cru_rk3328.h>
- #elif defined(CONFIG_ROCKCHIP_RK3399)
- # include <asm/arch-rockchip/cru_rk3399.h>
- #elif defined(CONFIG_ROCKCHIP_RK3568)
-diff --git a/arch/arm/mach-rockchip/cpu-info.c b/arch/arm/mach-rockchip/cpu-info.c
-index a62ff53c6a..86b0c02970 100644
---- a/arch/arm/mach-rockchip/cpu-info.c
-+++ b/arch/arm/mach-rockchip/cpu-info.c
-@@ -14,7 +14,9 @@
- 
- char *get_reset_cause(void)
- {
--	struct rockchip_cru *cru = rockchip_get_cru();
-+#if IS_ENABLED(CONFIG_ROCKCHIP_RK3328)
-+	struct rk3328_cru *cru = rockchip_get_cru();
-+#endif
- 	char *cause = NULL;
- 
- 	if (IS_ERR(cru))
+diff --git a/configs/evb-rk3328_defconfig b/configs/evb-rk3328_defconfig
+index bfb8522343..e1c2016cb3 100644
+--- a/configs/evb-rk3328_defconfig
++++ b/configs/evb-rk3328_defconfig
+@@ -19,7 +19,6 @@ CONFIG_SPL_FIT_SIGNATURE=y
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-evb.dtb"
+-# CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+diff --git a/configs/nanopi-r2c-plus-rk3328_defconfig b/configs/nanopi-r2c-plus-rk3328_defconfig
+index f311a0a80b..700ce47696 100644
+--- a/configs/nanopi-r2c-plus-rk3328_defconfig
++++ b/configs/nanopi-r2c-plus-rk3328_defconfig
+@@ -20,7 +20,6 @@ CONFIG_SPL_FIT_SIGNATURE=y
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-nanopi-r2c-plus.dtb"
+-# CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+diff --git a/configs/nanopi-r2c-rk3328_defconfig b/configs/nanopi-r2c-rk3328_defconfig
+index 533dc1029f..a594f329bf 100644
+--- a/configs/nanopi-r2c-rk3328_defconfig
++++ b/configs/nanopi-r2c-rk3328_defconfig
+@@ -20,7 +20,6 @@ CONFIG_SPL_FIT_SIGNATURE=y
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-nanopi-r2c.dtb"
+-# CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+diff --git a/configs/nanopi-r2s-rk3328_defconfig b/configs/nanopi-r2s-rk3328_defconfig
+index 2591a9cc8a..c1d0a1f396 100644
+--- a/configs/nanopi-r2s-rk3328_defconfig
++++ b/configs/nanopi-r2s-rk3328_defconfig
+@@ -20,7 +20,6 @@ CONFIG_SPL_FIT_SIGNATURE=y
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-nanopi-r2s.dtb"
+-# CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+diff --git a/configs/orangepi-r1-plus-lts-rk3328_defconfig b/configs/orangepi-r1-plus-lts-rk3328_defconfig
+index 14cdbd813c..7e0b1b2773 100644
+--- a/configs/orangepi-r1-plus-lts-rk3328_defconfig
++++ b/configs/orangepi-r1-plus-lts-rk3328_defconfig
+@@ -23,7 +23,6 @@ CONFIG_SPL_FIT_SIGNATURE=y
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-orangepi-r1-plus-lts.dtb"
+-# CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+diff --git a/configs/orangepi-r1-plus-rk3328_defconfig b/configs/orangepi-r1-plus-rk3328_defconfig
+index 7fe58e7a14..4525c99ca2 100644
+--- a/configs/orangepi-r1-plus-rk3328_defconfig
++++ b/configs/orangepi-r1-plus-rk3328_defconfig
+@@ -23,7 +23,6 @@ CONFIG_SPL_FIT_SIGNATURE=y
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-orangepi-r1-plus.dtb"
+-# CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+diff --git a/configs/roc-cc-rk3328_defconfig b/configs/roc-cc-rk3328_defconfig
+index 91b9422e26..c1eb03c5e8 100644
+--- a/configs/roc-cc-rk3328_defconfig
++++ b/configs/roc-cc-rk3328_defconfig
+@@ -19,7 +19,6 @@ CONFIG_SPL_FIT_SIGNATURE=y
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-roc-cc.dtb"
+-# CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+diff --git a/configs/rock-pi-e-rk3328_defconfig b/configs/rock-pi-e-rk3328_defconfig
+index 5cc54af3ca..bb99670b8c 100644
+--- a/configs/rock-pi-e-rk3328_defconfig
++++ b/configs/rock-pi-e-rk3328_defconfig
+@@ -19,7 +19,6 @@ CONFIG_SPL_FIT_SIGNATURE=y
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-rock-pi-e.dtb"
+-# CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+diff --git a/configs/rock64-rk3328_defconfig b/configs/rock64-rk3328_defconfig
+index 9d77dfb709..836f18a806 100644
+--- a/configs/rock64-rk3328_defconfig
++++ b/configs/rock64-rk3328_defconfig
+@@ -22,7 +22,6 @@ CONFIG_SPL_FIT_SIGNATURE=y
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-rock64.dtb"
+-# CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
 -- 
 2.44.0
 
