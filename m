@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4694C25B75
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 21:53:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58997C25B75
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 21:55:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41219887C9;
-	Fri, 31 May 2024 23:53:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E235088804;
+	Fri, 31 May 2024 23:55:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="M0USP/Rq";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="SM8192Vg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82DBC887EF; Fri, 31 May 2024 23:53:36 +0200 (CEST)
+ id 0A681882CD; Fri, 31 May 2024 23:55:24 +0200 (CEST)
 Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E1C6887C9
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 23:53:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EF3CA8880B
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 23:55:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1717192414;
+ t=1717192521;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Jn5HldqZ5713QgWfnuL2JjDcanmRjVz/UoSeUcf+ZfU=;
- b=M0USP/RqRT+kJFAc4Va1xSLX7u7FP5b3W7ys4z5dwe9YPZmioHZqO55aEV61AW2RrQ6IHO
- 4j3bdUZa24wkRsm+y9ZP1brW8mDulAAQZm5PvSJFIMv9v6QYbCyTf1+NYMrR74iqHshErO
- ssxmrR7MeyNew8iXaDvH4KmQh/9xsVPInuyfcg/FfTxlqZNWmQdCrrgW1/nho62O1GjfW2
- 0So8ucJv76xf37CgtgtyDB+2jWCR0NNlZs49lj4dgzzgqL4I+wAXAXlZ3jYD3NWJUzGOXS
- jyQe+7y/jbMAUAHSsneClUNIiiFgspHJVcSwjkLXtL3CSHvSzSgvmPTRAS50Eg==
-Date: Fri, 31 May 2024 23:53:33 +0200
+ bh=/18gLwrIgcvQzjhKr51ct/faBKAw6IBSPTj7tSKnQb8=;
+ b=SM8192Vg3LMks9Ipg8aguugArh5DAb0Y0lYwr+kig9cfTkTzS8vR5e8MERKY84rRa61bZk
+ H1K1ZTR/M1xfXW5Z5o34xua5kDVj6TzdcsWw6diE+5EgKiG+MEp05HurJqL4dzF8Hx1QAB
+ UIiZkL3FAk5twZ4uwAoA8Xzi1amZ+BtYW9R9FPM0LWBQCjjNfQlvZHYrr/hdZNIG+XGml6
+ /yrBoN5Mc09/G2135TPnbCM7soz7deGeTB8xkfne7XL+43q15oCLbxMb01zJmPRqkKPhg6
+ lrczMMCSbOc6NSJTwpDFBvW4ET/YlbwqMjwNsE0OKo0O3xSho2KHkDo+kj4mTw==
+Date: Fri, 31 May 2024 23:55:21 +0200
 From: Dragan Simic <dsimic@manjaro.org>
 To: Anand Moon <linux.amoon@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Kever
  Yang <kever.yang@rock-chips.com>, Jagan Teki <jagan@edgeble.ai>, Jonas
  Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>, Anand
  Moon <anand@edgeble.ai>, u-boot@lists.denx.de
-Subject: Re: [PATCH RFC v2 20/23] rockchip: RV1126: Read the reset cause from
- clock reset unit for RV1126 SoC
-In-Reply-To: <20240531141837.13189-21-linux.amoon@gmail.com>
+Subject: Re: [PATCH RFC v2 22/23] sysreset: rockchip: use fst reset for ARM64
+ SOC
+In-Reply-To: <20240531141837.13189-23-linux.amoon@gmail.com>
 References: <20240531141837.13189-1-linux.amoon@gmail.com>
- <20240531141837.13189-21-linux.amoon@gmail.com>
-Message-ID: <6a43e749b6edd8611dcaf01aa678b5be@manjaro.org>
+ <20240531141837.13189-23-linux.amoon@gmail.com>
+Message-ID: <7f5f6b4870ef298939d389a1a82c6b09@manjaro.org>
 X-Sender: dsimic@manjaro.org
 Content-Type: text/plain; charset=US-ASCII;
  format=flowed
@@ -76,52 +76,36 @@ X-Virus-Status: Clean
 Hello Anand,
 
 On 2024-05-31 16:18, Anand Moon wrote:
-> From: Anand Moon <anand@edgeble.ai>
+> From: Kever Yang <kever.yang@rock-chips.com>
 > 
-> Read the reset cause from clock reset unit for RV1126 SoC.
+> Rockchip ARM64 SOC will change cpu entry, only fst reset can reset it.
 > 
 > Cc: Jagan Teki <jagan@edgeble.ai>
-> Signed-off-by: Anand Moon <anand@edgeble.ai>
-> Signed-off-by: Anand Moon <linux.amoon@gmail.com>
+> Signed-off-by: Kever Yang <kever.yang@rock-chips.com>
 > ---
->  arch/arm/include/asm/arch-rockchip/cru.h | 2 ++
->  arch/arm/mach-rockchip/cpu-info.c        | 2 ++
->  2 files changed, 4 insertions(+)
+>  drivers/sysreset/sysreset_rockchip.c | 5 +++++
+>  1 file changed, 5 insertions(+)
 > 
-> diff --git a/arch/arm/include/asm/arch-rockchip/cru.h
-> b/arch/arm/include/asm/arch-rockchip/cru.h
-> index e886adf515..e1a8d8adad 100644
-> --- a/arch/arm/include/asm/arch-rockchip/cru.h
-> +++ b/arch/arm/include/asm/arch-rockchip/cru.h
-> @@ -29,6 +29,8 @@
->  #include <asm/arch-rockchip/cru_rk3368.h>
-
-Although not related to this patch directly, a single space character
-should be added between "#" and "include", for consistency.
-
->  #elif defined(CONFIG_ROCKCHIP_RV1108)
->  #include <asm/arch-rockchip/cru_rv1108.h>
-
-The same comment as above.
-
-> +#elif defined(CONFIG_ROCKCHIP_RV1126)
-> +#include <asm/arch-rockchip/cru_rv1126.h>
-
-The same comment as above, but this time related to this patch.
-
->  #endif
+> diff --git a/drivers/sysreset/sysreset_rockchip.c
+> b/drivers/sysreset/sysreset_rockchip.c
+> index f353f9b4c7..17aa191349 100644
+> --- a/drivers/sysreset/sysreset_rockchip.c
+> +++ b/drivers/sysreset/sysreset_rockchip.c
+> @@ -22,7 +22,12 @@ int rockchip_sysreset_request(struct udevice *dev,
+> enum sysreset_t type)
 > 
->  /* CRU_GLB_RST_ST */
-> diff --git a/arch/arm/mach-rockchip/cpu-info.c
-> b/arch/arm/mach-rockchip/cpu-info.c
-> index b2cfdade13..cb4ac39884 100644
-> --- a/arch/arm/mach-rockchip/cpu-info.c
-> +++ b/arch/arm/mach-rockchip/cpu-info.c
-> @@ -32,6 +32,8 @@ char *get_reset_cause(void)
->  	struct rk3368_cru *cru = rockchip_get_cru();
->  #elif IS_ENABLED(CONFIG_ROCKCHIP_RV1108)
->  	struct rv1108_cru *cru = rockchip_get_cru();
-> +#elif IS_ENABLED(CONFIG_ROCKCHIP_RV1126)
-> +	struct rv1126_cru *cru = rockchip_get_cru();
->  #endif
->  	char *cause = NULL;
+>  	switch (type) {
+>  	case SYSRESET_WARM:
+> +#ifdef CONFIG_ARM64
+> +		/* Rockchip 64bit SOC need fst reset for cpu reset entry */
+
+s/Rockchip 64bit SOC need fst reset for cpu reset entry
+  /Rockchip 64-bit SoCs need FST reset for CPU reset entry/
+
+> +		writel(0xfdb9, cru_base + offset->glb_srst_fst_value);
+> +#else
+>  		writel(0xeca8, cru_base + offset->glb_srst_snd_value);
+> +#endif
+>  		break;
+>  	case SYSRESET_COLD:
+>  		writel(0xfdb9, cru_base + offset->glb_srst_fst_value);
