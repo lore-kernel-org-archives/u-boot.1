@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35C72C25B75
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 14:22:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7A19C25B75
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 14:22:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9152488827;
-	Fri, 31 May 2024 16:19:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EDB6188816;
+	Fri, 31 May 2024 16:20:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y4N8bMyj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="O3fUM7+J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FC5D88826; Fri, 31 May 2024 16:19:58 +0200 (CEST)
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
+ id 601C58882D; Fri, 31 May 2024 16:20:02 +0200 (CEST)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DAB82887B9
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 16:19:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 390F5887B2
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 16:20:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-2bfff08fc29so1677084a91.1
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 07:19:55 -0700 (PDT)
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-2c034b016e6so1670509a91.2
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 07:20:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717165194; x=1717769994; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1717165199; x=1717769999; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gben/dVluhF95hZs4N8FI8oY0T+ecGR5Ot5Qeue04ig=;
- b=Y4N8bMyj7nJx2SAuC96VxTFlYmxkJl5RhUZeJ8hI2lo3RvJbcJS0SpHPnugOLJvHIz
- xdfPO1trHgvf9bUERhIkDadf2enBuWchtV+IzSmG1/x9ug9RQabJ2qfze4LcgmGJ379m
- Q6W4ZZhO3MHHOVkiTNOaXANsUgyOdndKsOUwIH1dekPMmO07JBJgR1l384L/sQxsc5GN
- Ixj1wadahD7Eg6ygcKqs1JLiVOxwedkKF2sns/u7erYmJ94TuDWn9blutdijuAK+XLqH
- BFqDJY/DC680g5Sgx/3McA5i2LVyRblzSKH0M1lCwE7QqaK+p760F31EADLvxBqGFl/w
- gukA==
+ bh=Tm0Pjms+WhXyTpR4NjXyPZl+pYDDuJEe+u2pX6ifCDo=;
+ b=O3fUM7+JSWUj2Ley9uz4SSoXxHfFmKMersYeMsN1h3bq7K29Ax5xpwtEnlNJ8h0G4r
+ t6+DUYRAnZi7OOqHFq2sv256i86Ow+dKtcpWJGZDlDUuZXXIVjVpphwEMtyG+tciGB2i
+ TbX/bi5LBx0kngSAtBGlhxkvgzW8VFH5gtzUXc48lDEAv+vJCslLjWjqFCR18oX1ddj7
+ ZduHY7UIzXGcYjKLrE8DZCaBcufVcM5I4UJBeepuPUHwzbVvYCa1O5zZq6GgmEsrf0ZQ
+ 7V1KR11Qj6lqaCiyGT1LY3rSSMm+FqbmfQkGvIsapVADXudtVmH9oCiOymOc9BH2Xls9
+ H7Kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717165194; x=1717769994;
+ d=1e100.net; s=20230601; t=1717165199; x=1717769999;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gben/dVluhF95hZs4N8FI8oY0T+ecGR5Ot5Qeue04ig=;
- b=TezwDqe/ppK66SN0YPrt+iaaJDMyM3uBDfW9X+iY1/WIrLBcCR23R1elPgcdSJO658
- 0iVJsmVY1HpeLXB+aY1xlg9fXWi+VkjsPD/2xgccOJAPbS1ju2krD8ApHa1U69Ppx8+1
- r+AYsJAIEXRyoW/AfX6bpJF0I3U3spb3qAQadXJmKEXH+GV3dT9SXYUgytYwBOWKHSWB
- mqiwJM5/K/iRuhCK5NRGd7GUSy9uT2OV8qS5wC4DGNihOVnzdF7PAV+WCZ/NCbfXQJ9n
- AYvB6pHNWnaeNWPWMS0zzF5Z6XMqsOW486wOp79O8zL3PLRMFtmniw890mZ7q5ZGBDVs
- RuXg==
+ bh=Tm0Pjms+WhXyTpR4NjXyPZl+pYDDuJEe+u2pX6ifCDo=;
+ b=G8Sst5qN33b1Gej956qv1wx0TQrtn7wwLQXvByMDRCggFiFubuuZMADEskJ1CBUzGc
+ 8qbB/83MfNwCKrRPb20Cf8IwX+3Cu2lFDOeoahMj+UVeEngAlQCQ+eO7pguyxlNZzn5N
+ oVHuv6DvaG9qdK+SSoAriMU66lDsXcGPHhILcFj4TEVwQJtR7TSo0+ly1p478bV+iHXh
+ vJPs4jLjWUrLWHb7vZSqsgA5Uqy6qeYFM0IMfySMn56OJMfxAsO/JbuexOWVSjyPW2uP
+ V92eVH2byeqQsj9PymsZv9dYpzpRTGnXHesQ8K+RNscm1dHxCQMZEiA5z7w+4EpapC+d
+ qxyA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUSQ/9p907VTU9h4blUJ4Yhv9zdl4lLQTrxgvsFEJA+8rLVDN7Y0yZMAi62bchWqXrHpEw30BUh6c/12e3McwyRP7g1hQ==
-X-Gm-Message-State: AOJu0Yy3yoQT7ngLXvoVNVC8nLT5hDjl13EiV+aDlfeOo2g0WHA6Etjk
- y82dIJZFNpbE3Quyoi2/evmDePE2kTbX8vfyaaIy73fq+cXimYzU
-X-Google-Smtp-Source: AGHT+IFnMGsqwIUr/56BxjnQFH/okCtelPCRoPb6CS5+7m+A+/lxy+Md3UXNYCkJbYSBUaXzwK6PJQ==
-X-Received: by 2002:a17:90b:1051:b0:2bf:d6da:ce62 with SMTP id
- 98e67ed59e1d1-2c1dc5cd585mr1732497a91.43.1717165194330; 
- Fri, 31 May 2024 07:19:54 -0700 (PDT)
+ AJvYcCWx7KBVFJVAsrPt6OC5171C+01ra4c3DzqOHhPzVcQ8WEo15Np3PEOgEUwiXu+bC6twMDwjTv0aSF11xVAc2/GN2rcjJQ==
+X-Gm-Message-State: AOJu0YwFeG+JGuMbl71zfQwyRQLwDfKWXD2usMU7jZd6ku8IPicoE7V1
+ 8iXWYYB9AgHO26P56GCsCkR2WJ3GNcGuXRh4W8sqy3seEt+A002s
+X-Google-Smtp-Source: AGHT+IF1MKHerfcw0bJ15oolm+ceJXLQTab4uwLvFrdckAvZ2jzY7frOGqbPEobo2Knq144vydU3hg==
+X-Received: by 2002:a17:90a:a013:b0:2bd:76f6:8d30 with SMTP id
+ 98e67ed59e1d1-2c1dc5bbe50mr1921241a91.32.1717165198627; 
+ Fri, 31 May 2024 07:19:58 -0700 (PDT)
 Received: from localhost.localdomain ([113.30.217.222])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2c1a775ccedsm3563935a91.1.2024.05.31.07.19.51
+ 98e67ed59e1d1-2c1a775ccedsm3563935a91.1.2024.05.31.07.19.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 May 2024 07:19:53 -0700 (PDT)
+ Fri, 31 May 2024 07:19:57 -0700 (PDT)
 From: Anand Moon <linux.amoon@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Kever Yang <kever.yang@rock-chips.com>, Jagan Teki <jagan@edgeble.ai>,
  Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>
 Cc: Anand Moon <anand@edgeble.ai>, Anand Moon <linux.amoon@gmail.com>,
  u-boot@lists.denx.de
-Subject: [PATCH RFC v2 19/23] rockchip: RV1108: Enable display cpuinfo support
- on all boards
-Date: Fri, 31 May 2024 19:48:33 +0530
-Message-ID: <20240531141837.13189-20-linux.amoon@gmail.com>
+Subject: [PATCH RFC v2 20/23] rockchip: RV1126: Read the reset cause from
+ clock reset unit for RV1126 SoC
+Date: Fri, 31 May 2024 19:48:34 +0530
+Message-ID: <20240531141837.13189-21-linux.amoon@gmail.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240531141837.13189-1-linux.amoon@gmail.com>
 References: <20240531141837.13189-1-linux.amoon@gmail.com>
@@ -99,41 +99,42 @@ X-Virus-Status: Clean
 
 From: Anand Moon <anand@edgeble.ai>
 
-Enable DISPLAY_CPUINFO options to support on all RV1108 boards.
-Its used to determine the reset cause of the board.
+Read the reset cause from clock reset unit for RV1126 SoC.
 
 Cc: Jagan Teki <jagan@edgeble.ai>
 Signed-off-by: Anand Moon <anand@edgeble.ai>
 Signed-off-by: Anand Moon <linux.amoon@gmail.com>
 ---
- configs/elgin-rv1108_defconfig | 1 -
- configs/evb-rv1108_defconfig   | 1 -
- 2 files changed, 2 deletions(-)
+ arch/arm/include/asm/arch-rockchip/cru.h | 2 ++
+ arch/arm/mach-rockchip/cpu-info.c        | 2 ++
+ 2 files changed, 4 insertions(+)
 
-diff --git a/configs/elgin-rv1108_defconfig b/configs/elgin-rv1108_defconfig
-index 454ed9e0a6..1fffa99793 100644
---- a/configs/elgin-rv1108_defconfig
-+++ b/configs/elgin-rv1108_defconfig
-@@ -17,7 +17,6 @@ CONFIG_SYS_LOAD_ADDR=0x62000000
- CONFIG_DEBUG_UART=y
- # CONFIG_USE_BOOTCOMMAND is not set
- CONFIG_DEFAULT_FDT_FILE="rv1108-elgin-r1.dtb"
--# CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_BOARD_EARLY_INIT_F=y
- CONFIG_BOARD_LATE_INIT=y
-diff --git a/configs/evb-rv1108_defconfig b/configs/evb-rv1108_defconfig
-index 6204cb4b96..8bff3a99e5 100644
---- a/configs/evb-rv1108_defconfig
-+++ b/configs/evb-rv1108_defconfig
-@@ -14,7 +14,6 @@ CONFIG_SYS_LOAD_ADDR=0x62000000
- CONFIG_DEBUG_UART=y
- CONFIG_BOOTCOMMAND="sf probe;sf read 0x62000000 0x140800 0x500000;dcache off;go 0x62000000"
- CONFIG_DEFAULT_FDT_FILE="rv1108-evb.dtb"
--# CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_BOARD_EARLY_INIT_F=y
- CONFIG_CMD_USB=y
+diff --git a/arch/arm/include/asm/arch-rockchip/cru.h b/arch/arm/include/asm/arch-rockchip/cru.h
+index e886adf515..e1a8d8adad 100644
+--- a/arch/arm/include/asm/arch-rockchip/cru.h
++++ b/arch/arm/include/asm/arch-rockchip/cru.h
+@@ -29,6 +29,8 @@
+ #include <asm/arch-rockchip/cru_rk3368.h>
+ #elif defined(CONFIG_ROCKCHIP_RV1108)
+ #include <asm/arch-rockchip/cru_rv1108.h>
++#elif defined(CONFIG_ROCKCHIP_RV1126)
++#include <asm/arch-rockchip/cru_rv1126.h>
+ #endif
+ 
+ /* CRU_GLB_RST_ST */
+diff --git a/arch/arm/mach-rockchip/cpu-info.c b/arch/arm/mach-rockchip/cpu-info.c
+index b2cfdade13..cb4ac39884 100644
+--- a/arch/arm/mach-rockchip/cpu-info.c
++++ b/arch/arm/mach-rockchip/cpu-info.c
+@@ -32,6 +32,8 @@ char *get_reset_cause(void)
+ 	struct rk3368_cru *cru = rockchip_get_cru();
+ #elif IS_ENABLED(CONFIG_ROCKCHIP_RV1108)
+ 	struct rv1108_cru *cru = rockchip_get_cru();
++#elif IS_ENABLED(CONFIG_ROCKCHIP_RV1126)
++	struct rv1126_cru *cru = rockchip_get_cru();
+ #endif
+ 	char *cause = NULL;
+ 
 -- 
 2.44.0
 
