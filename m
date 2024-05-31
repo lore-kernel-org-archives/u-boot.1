@@ -4,59 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B536C25B75
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 16:53:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9574C25B75
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 16:54:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5F5B887CB;
-	Fri, 31 May 2024 18:53:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4F77F8880B;
+	Fri, 31 May 2024 18:54:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="GInOB4Gh";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="TZoSIceL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A46F887F6; Fri, 31 May 2024 18:53:33 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id C15E08880E; Fri, 31 May 2024 18:54:34 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 546E08657F
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 18:53:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 78D558657F
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 18:54:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rogerq@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 0494E62802;
- Fri, 31 May 2024 16:53:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7E13DC116B1;
- Fri, 31 May 2024 16:53:25 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 2D62E62D15;
+ Fri, 31 May 2024 16:54:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BB01AC116B1;
+ Fri, 31 May 2024 16:54:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1717174408;
- bh=te3EO146/YZmdF0QH8nBLd0wEff/auHe1vQNCso8KFo=;
- h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
- b=GInOB4GhXPuWSltvyj9er9YOAwaKbZre5NIa5bG3DXkM/mL0xmZ4pqQKEp/L1isz3
- FIlzix/UdNA+C42c+HImxYA10b5tq6HUFlk1ApuiReo4M+Tjz1YMr3NRGhOwK2CFW6
- geKKokh7/T8tPTLurkPNqCc/T51RG+XbdVPXNIOkggjp98wPvaVh1JPufzXYfXg42N
- 5ZJeor5X52yzerJQ1Zjw1y1GstZmWMbETz/emjYWoeAUuYSLtcO9/BDPI6Od1zDQHF
- hNRcan3NIKiRjdah1D3/n99E81r803hxY3rURoSYyxwQiSJElJgWPqHf1V6BjUmlzY
- B2NkOFiqMtYgg==
-Message-ID: <7eb83ef8-e405-4441-b9cf-4aa6303b3259@kernel.org>
-Date: Fri, 31 May 2024 19:53:24 +0300
+ s=k20201202; t=1717174470;
+ bh=5nWxp9oxUzS4zPC0jj8f1AWXkYaalXLCUHs4fxcos60=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=TZoSIceLkUaZX70c2lfV7HKtMpq0mNnnByPLmkgChE9A4qT2XtAiUrKEdOYLCaaMz
+ xhTM2YvAAyk3Q8/pO9DX49iy9eLzmzU/VNIpyfmGGSYPOEr79jaRdRcQXWA+he95bY
+ FZzuHe69AD6BEfYEMIM6+aoIaUDn5LqBqr0IrOK6Lg79t1RcQwqnV9V0yl+jQIsFKw
+ mTBVORD+MqyeFMNlA/TACXitYlzyBhHe9q/iVqf2n/DyHkyhEAVOi1H3eo0f4s46/p
+ /5sTCOjNsimutIFKgpSX9Yb/YeRQ9Gq3bDGwoLyHb2k9i1MLeUMXIXYbI1PD+lRf+i
+ 0rae8Ru7ZmGkw==
+Message-ID: <2bc17c6e-3ab2-4be6-b651-83719c8633a2@kernel.org>
+Date: Fri, 31 May 2024 19:54:25 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v2 0/3] arm: dts: am62-beagleplay: Fix Beagleplay Ethernet
-From: Roger Quadros <rogerq@kernel.org>
-To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+To: Tom Rini <trini@konsulko.com>
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>, Nishanth Menon <nm@ti.com>,
  Robert Nelson <robertcnelson@gmail.com>, Wadim Egorov <w.egorov@phytec.de>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Simon Glass <sjg@chromium.org>
-Cc: srk@ti.com, s-vadapalli@ti.com, vigneshr@ti.com, r-gunasekaran@ti.com,
- danishanwar@ti.com, u-boot@lists.denx.de
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Simon Glass
+ <sjg@chromium.org>, srk@ti.com, s-vadapalli@ti.com, vigneshr@ti.com,
+ r-gunasekaran@ti.com, danishanwar@ti.com, u-boot@lists.denx.de
 References: <20240513-for-2024-07-beagleplay-eth-v2-0-a9bf457c3bb8@kernel.org>
  <171622056331.1577131.5584438868595064237.b4-ty@konsulko.com>
  <95fad9de-5fd3-4dd4-8a13-850dc81da26d@kernel.org>
+ <20240531164759.GO3714513@bill-the-cat>
 Content-Language: en-US
-In-Reply-To: <95fad9de-5fd3-4dd4-8a13-850dc81da26d@kernel.org>
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <20240531164759.GO3714513@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -75,39 +78,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tom,
 
-On 31/05/2024 19:32, Roger Quadros wrote:
-> Hi Tom,
-> 
-> On 20/05/2024 18:56, Tom Rini wrote:
->> On Mon, 13 May 2024 15:13:53 +0300, Roger Quadros wrote:
+
+On 31/05/2024 19:47, Tom Rini wrote:
+> On Fri, May 31, 2024 at 07:32:37PM +0300, Roger Quadros wrote:
+>> Hi Tom,
 >>
->>> Sync AM62 device tree files with Linux v6.9 and
->>> add in the missing bits in -u-boot.dtsi to get CPSW
->>> Ethernet working.
+>> On 20/05/2024 18:56, Tom Rini wrote:
+>>> On Mon, 13 May 2024 15:13:53 +0300, Roger Quadros wrote:
 >>>
->>> CI testing
->>> https://github.com/u-boot/u-boot/pull/534
+>>>> Sync AM62 device tree files with Linux v6.9 and
+>>>> add in the missing bits in -u-boot.dtsi to get CPSW
+>>>> Ethernet working.
+>>>>
+>>>> CI testing
+>>>> https://github.com/u-boot/u-boot/pull/534
+>>>>
+>>>> [...]
 >>>
->>> [...]
+>>> Applied to u-boot/next, thanks!
+>>>
 >>
->> Applied to u-boot/next, thanks!
+>> I see that this series was applied to u-boot master as well
+>> and then later reverted by commit d678a59d2d719da9e807495b4b021501f2836ca5
+>> as it was based on u-boot/next
 >>
+>> Can I re-send this series based on u-boot/master so it can be still applied to master?
+>> Without this Ethernet is broken on beagleplay.
 > 
-> I see that this series was applied to u-boot master as well
-> and then later reverted by commit d678a59d2d719da9e807495b4b021501f2836ca5
-> as it was based on u-boot/next
-> 
-> Can I re-send this series based on u-boot/master so it can be still applied to master?
-> Without this Ethernet is broken on beagleplay.
+> Was ethernet working on v2024.04?
 > 
 
-This series apply cleanly on u-boot/master so no need to resend.
-
-I've created a pull request for CI loop testing on u-boot/master.
-
-https://github.com/u-boot/u-boot/pull/572
+Ah, probably not.
 
 -- 
 cheers,
