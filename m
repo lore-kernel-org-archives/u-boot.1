@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D91A9C25B75
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 22:51:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F297C25B75
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 22:51:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 467878882E;
+	by phobos.denx.de (Postfix) with ESMTP id ACD8D88816;
 	Sat,  1 Jun 2024 00:51:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="K4BFQS1r";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YMfhxLzv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0DFC88829; Sat,  1 Jun 2024 00:51:25 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 0314488829; Sat,  1 Jun 2024 00:51:26 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81DB587E0D
+ by phobos.denx.de (Postfix) with ESMTPS id C6DC087F7D
  for <u-boot@lists.denx.de>; Sat,  1 Jun 2024 00:51:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44VMpDdV117024;
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44VMpDA3022288;
  Fri, 31 May 2024 17:51:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1717195873;
- bh=rX+JmwzYAWfPgzOnolHVbx+0q3dctrKsRCPOPeesIBE=;
+ bh=lk2UVKz5sn2efC3dnvVAYqEqsS/1jzy6eBH8ERXETHs=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=K4BFQS1rpuDRp02hpw9wM9DTaAVt8uhCET3PIWJzpgyVh5N9oMFJeYR3qkihcfG1H
- LeCCoPne5vPyFP/cv1UcpwtRD6Z3MMQdXdVLe2eZ0YUugpbou9rpKxGbk0eJq4fVYm
- udtuV1dhohJQUKjsprmy7bzejjP8FuN21iB74aBQ=
-Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44VMpDP8062783
+ b=YMfhxLzvZ1zNVGJ6qqbhXTdr4vPpxxU34YfDuHVjTQiEqhP1w8oUNmYHLjqqiPa0g
+ Doq7fK+WuYUDM8Olc1HKHDunAJNN+vmO2/kYIRrY+RqSmOmw6CdexgzgBZNbV7KATJ
+ qnJUx/KH0LMlpMp75i72ZG8zSYvefCJYdW631PUw=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44VMpDEu021617
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Fri, 31 May 2024 17:51:13 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 31
  May 2024 17:51:13 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Fri, 31 May 2024 17:51:13 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44VMpDvO046300;
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44VMpDrV065608;
  Fri, 31 May 2024 17:51:13 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
@@ -67,10 +67,10 @@ To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ilias Apalodimas
  <ilias.apalodimas@linaro.org>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH v3 4/9] dts: j721e: binman: Include firmware capsules binman
- nodes
-Date: Fri, 31 May 2024 17:51:05 -0500
-Message-ID: <20240531225110.2622239-5-j-humphreys@ti.com>
+Subject: [PATCH v3 1/9] tools: Build mkeficapsule tool by default if
+ EFI_LOADER is set
+Date: Fri, 31 May 2024 17:51:02 -0500
+Message-ID: <20240531225110.2622239-2-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240531225110.2622239-1-j-humphreys@ti.com>
 References: <20240531225110.2622239-1-j-humphreys@ti.com>
@@ -94,80 +94,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fill in the J721e SK's capsule GUID properties of the base binman capsule
-nodes.
-Also add it's SYSFW binman capsule node.
+Trigger the building of the mkeficapsule tool if EFI_LOADER is enabled.
+Previously it was triggered on EFI_CAPSULE_ON_DISK, but mkeficapsule is
+needed when a capsule is being generated for a bootloader stage, not just
+from the stage applying them. EFI_LOADER is a more accurate approximation
+of when a capsule may need to be generated.
 
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- arch/arm/dts/k3-j721e-binman.dtsi | 49 +++++++++++++++++++++++++++++++
- 1 file changed, 49 insertions(+)
+ tools/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/k3-j721e-binman.dtsi b/arch/arm/dts/k3-j721e-binman.dtsi
-index 1514d897634..7b426729eb8 100644
---- a/arch/arm/dts/k3-j721e-binman.dtsi
-+++ b/arch/arm/dts/k3-j721e-binman.dtsi
-@@ -295,6 +295,36 @@
- 		};
- 	};
- };
-+
-+#include "k3-binman-capsule-r5.dtsi"
-+
-+// Capsule update GUIDs in string form.  See j721e_evm.h
-+#define J721E_SK_TIBOOT3_IMAGE_GUID_STR "e672b518-7cd7-4014-bd8d-40724d0ad4dc"
-+#define J721E_SK_SYSFW_IMAGE_GUID_STR "6fd10680-361b-431f-80aa-899455819e11"
-+
-+&capsule_tiboot3 {
-+	efi-capsule {
-+		image-guid = J721E_SK_TIBOOT3_IMAGE_GUID_STR;
-+	};
-+};
-+
-+&binman {
-+	capsule-sysfw {
-+		filename = "sysfw-capsule.bin";
-+		efi-capsule {
-+			image-index = <0x4>;
-+			image-guid = J721E_SK_SYSFW_IMAGE_GUID_STR;
-+			private-key = "arch/arm/mach-k3/keys/custMpk.pem";
-+			public-key-cert = "arch/arm/mach-k3/keys/custMpk.crt";
-+			monotonic-count = <0x1>;
-+
-+			blob {
-+				filename = "sysfw.itb";
-+			};
-+		};
-+	};
-+};
-+
- #endif
+diff --git a/tools/Kconfig b/tools/Kconfig
+index 667807b3317..5c75af48fe3 100644
+--- a/tools/Kconfig
++++ b/tools/Kconfig
+@@ -98,7 +98,7 @@ config TOOLS_SHA512
  
- #ifdef CONFIG_TARGET_J721E_A72_EVM
-@@ -673,4 +703,23 @@
- 		};
- 	};
- };
-+
-+#include "k3-binman-capsule.dtsi"
-+
-+// Capsule update GUIDs in string form.  See j721e_evm.h
-+#define J721E_SK_SPL_IMAGE_GUID_STR "86f710ad-10cf-46ea-ac67-856ae06efad2"
-+#define J721E_SK_UBOOT_IMAGE_GUID_STR "81b58fb0-3b00-4add-a20a-c185bbaca1ed"
-+
-+&capsule_tispl {
-+	efi-capsule {
-+		image-guid = J721E_SK_SPL_IMAGE_GUID_STR;
-+	};
-+};
-+
-+&capsule_uboot {
-+	efi-capsule {
-+		image-guid = J721E_SK_UBOOT_IMAGE_GUID_STR;
-+	};
-+};
-+
- #endif
+ config TOOLS_MKEFICAPSULE
+ 	bool "Build efimkcapsule command"
+-	default y if EFI_CAPSULE_ON_DISK
++	default y if EFI_LOADER
+ 	help
+ 	  This command allows users to create a UEFI capsule file and,
+ 	  optionally sign that file. If you want to enable UEFI capsule
 -- 
 2.34.1
 
