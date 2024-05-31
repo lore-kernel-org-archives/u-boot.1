@@ -4,79 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92DF5C25B76
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 02:59:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F0D3C25B76
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 03:24:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A0C288763;
-	Fri, 31 May 2024 04:58:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id E6A8E883BD;
+	Fri, 31 May 2024 05:24:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FBmR6RxK";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="QHGraZmP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C561882D0; Fri, 31 May 2024 04:48:07 +0200 (CEST)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A90A2883BD; Fri, 31 May 2024 05:24:39 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7640D88735
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 04:48:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 28AD288748
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 05:24:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-6ae84d171fcso1921666d6.2
- for <u-boot@lists.denx.de>; Thu, 30 May 2024 19:48:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1717123683; x=1717728483; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JjQYNhGeZvolDp/bdAJ/I8px+Ol00vaeg/dkj9CHuqU=;
- b=FBmR6RxKTONyLNZIriOiv6H043E+eIHp68P6Y/vFYdWon8xqfj1/q6MQAAwkM6p6ei
- nfiNE7unbvdicIzbObzoHRXwSI9BNzQPSmAx4603Pwk6YPjL71lnQ4UGEI34w+JXVfWC
- U9hdQmAn1LBxHCkvvZasqynQYCTw+QF4Qc7tk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717123683; x=1717728483;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=JjQYNhGeZvolDp/bdAJ/I8px+Ol00vaeg/dkj9CHuqU=;
- b=ees1VLOzmipI2h+4JX1aav7AyUt3aJIc9GzOKbcsDo9YV5X9bZKS95jtVgweexVjX0
- 1SjTvpr6BSugWXOX0bzIG1/xbuUtyoziyHLe0oXo1UTxb1EXp11WpzjO9MQlxFszsaln
- nIJ4+sEHnKsvNYXGpTPZDfI10NFr1aC/mPAR1R/9TsElrjZ4pcyou2yYqWQk59mdzii7
- gsCYnsLtzs4byoVspDcaEEXRAW1EFWOedwCbXnHwWX8NDbzJGwHGH/DP0FYtZ/MyBNPh
- 4GOjHZxrGqcYVHYVa8XmD0Toum3Rqg/p8IadN42eFm9E+FPyYxOpknAYJewDO3cSI0he
- 8How==
-X-Gm-Message-State: AOJu0YxWPKQBuI/DpIFzff9H5I/cX+9nz1egu3HKPdooCjEBRvsFJHE2
- bo+awaTbVuB0FPRZ9hdTdzk0JtUonRtJRvb0uKi/HJisyGq5llCot1e4EtFsfshFTvlyttERDxn
- NtcKh6CvtkW16GTKUdeTrQUIFGIRwtczWyV5i
-X-Google-Smtp-Source: AGHT+IHdTwzS9/HKmNl6x3DzrENIhTsejKn+DC/+31pjVaqdwkizeIG+RSD063rfHHAgR1AxPusswhyP3GvdTybV4CU=
-X-Received: by 2002:a05:6214:5c46:b0:6ae:d19:b2f with SMTP id
- 6a1803df08f44-6aecd6dd17dmr5998006d6.47.1717123683329; Thu, 30 May 2024
- 19:48:03 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=j-humphreys@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44V3OYlu105446;
+ Thu, 30 May 2024 22:24:34 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1717125874;
+ bh=cchG+88Fbr0zqpB+2eOsIPzsFVRkawXFlrmjqDk7AIo=;
+ h=From:To:CC:Subject:In-Reply-To:References:Date;
+ b=QHGraZmP4YJ5jfkUOFv87uJUEPsPbCyUUf51DfXgA6lIa77b31gUXle878GJJgXZ7
+ yDYk13Fah1rvF53X4unqwFaJqCdL9XGEKZ+Wn3kQIhQgKOvOgQWbIGetHJwQ6segUk
+ JVL31Qec+BG4JY2RAjctp9HWcjwq44Eo1poH5FAw=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44V3OYp6073553
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 30 May 2024 22:24:34 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 30
+ May 2024 22:24:33 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 30 May 2024 22:24:33 -0500
+Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44V3OXWp081706;
+ Thu, 30 May 2024 22:24:33 -0500
+From: Jon Humphreys <j-humphreys@ti.com>
+To: Manorit Chawdhry <m-chawdhry@ti.com>, Jagan Teki
+ <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>, Tom Rini
+ <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>, Udit Kumar
+ <u-kumar1@ti.com>, Vaishnav Achath <vaishnav.a@ti.com>, Prasanth Mantena
+ <p-mantena@ti.com>, Apurva Nandan <a-nandan@ti.com>, Manorit Chawdhry
+ <m-chawdhry@ti.com>
+Subject: Re: [PATCH v2 4/4] configs: j721s2_evm_*_defconfig: Enable OSPI
+ configs
+In-Reply-To: <20240528-b4-upstream-j721s2-ospi-support-v2-4-b2e372ebcdd7@ti.com>
+References: <20240528-b4-upstream-j721s2-ospi-support-v2-0-b2e372ebcdd7@ti.com>
+ <20240528-b4-upstream-j721s2-ospi-support-v2-4-b2e372ebcdd7@ti.com>
+Date: Thu, 30 May 2024 22:24:33 -0500
+Message-ID: <86le3qfytq.fsf@udb0321960.dhcp.ti.com>
 MIME-Version: 1.0
-References: <20240530220634.155951-1-tharvey@gateworks.com>
- <20240530220634.155951-4-tharvey@gateworks.com>
-In-Reply-To: <20240530220634.155951-4-tharvey@gateworks.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 30 May 2024 20:47:52 -0600
-Message-ID: <CAFLszTivog4FkLmdnZmi7Y5E9CqAmbTG2C3-6-TxRfDVym6OdA@mail.gmail.com>
-Subject: Re: [PATCH v5 3/3] use fdt_kaslrseed function to de-duplicate code
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Devarsh Thakkar <devarsht@ti.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hugo Villeneuve <hvilleneuve@dimonoff.com>, 
- Marek Vasut <marex@denx.de>, Michal Simek <michal.simek@amd.com>,
- Andy Yan <andy.yan@rock-chips.com>, 
- Akash Gajjar <gajjar04akash@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Chris Morgan <macromorgan@hotmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Fri, 31 May 2024 04:58:26 +0200
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,60 +84,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 30 May 2024 at 16:06, Tim Harvey <tharvey@gateworks.com> wrote:
->
-> Use the fdt_kaslrseed function to deduplicate code doing the same thing.
->
-> Note that the kalsrseed command (CMD_KASLRSEED) is likely pointless now
-> but left in place in case boot scripts exist that rely on this command
-> existing and returning success. An informational message is printed to
-> alert users of this command that it is likely no longer needed.
->
-> Note that the Kernel's EFI STUB only relies on EFI_RNG_PROTOCOL for
-> randomization and completely ignores the kaslr-seed for its own
-> randomness needs (i.e the randomization of the physical placement of
-> the kernel). It gets weeded out from the DTB that gets handed over via
-> efi_install_fdt() as it would also mess up the measured boot DTB TPM
-> measurements as well.
->
-> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-> Cc: Michal Simek <michal.simek@amd.com>
-> Cc: Andy Yan <andy.yan@rock-chips.com>
-> Cc: Akash Gajjar <gajjar04akash@gmail.com>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Devarsh Thakkar <devarsht@ti.com>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Hugo Villeneuve <hvilleneuve@dimonoff.com>
-> Cc: Marek Vasut <marex@denx.de>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Chris Morgan <macromorgan@hotmail.com>
-> ---
-> v5:
->  - fixed typo in commit message s/it's/its/
->  - use cmd_process_error per Michal's suggestion
-> v4:
->  - add missing /n to notice in kaslrseed cmd
->  - combine ints in declaration
->  - remove unused vars from board/xilinx/common/board.c ft_board_setup
-> v3:
->  - skip if CONFIG_MEASURED_BOOT
->  - fix skip for CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT
->  - pass in rng index and bool to specify overwrite
->  - remove duplicate error strings printed outside of fdt_kaslrseed
->  - added note to commit log about how EFI STUB weeds out kalsr-seed
-> v2:
->  - fix typo in commit msg
->  - use stack for seed to avoid unecessary malloc/free
->  - move to a library function and deduplicate code by using it
->    elsewhere
-> ---
->  board/xilinx/common/board.c | 40 ------------------------------
->  boot/pxe_utils.c            | 34 +------------------------
->  cmd/kaslrseed.c             | 49 ++++++-------------------------------
->  3 files changed, 8 insertions(+), 115 deletions(-)
->
+Manorit Chawdhry <m-chawdhry@ti.com> writes:
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+> Enable OSPI related configs to boot using OSPI
+>
+> Reviewed-by: Apurva Nandan <a-nandan@ti.com>
+> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> ---
+>  configs/j721s2_evm_a72_defconfig | 3 +++
+>  configs/j721s2_evm_r5_defconfig  | 3 +++
+>  2 files changed, 6 insertions(+)
+>
+> diff --git a/configs/j721s2_evm_a72_defconfig b/configs/j721s2_evm_a72_defconfig
+> index 5ed8d00662e3..326beedea411 100644
+> --- a/configs/j721s2_evm_a72_defconfig
+> +++ b/configs/j721s2_evm_a72_defconfig
+> @@ -51,6 +51,7 @@ CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
+>  CONFIG_SPL_I2C=y
+>  CONFIG_SPL_DM_MAILBOX=y
+>  CONFIG_SPL_MTD=y
+> +CONFIG_SPL_MTD_SUPPORT=y
+
+Manorit, CONFIG_SPL_MTD_SUPPORT is no longer a valid config.
+
+>  CONFIG_SPL_DM_SPI_FLASH=y
+>  CONFIG_SPL_NOR_SUPPORT=y
+>  CONFIG_SPL_DM_RESET=y
+> @@ -59,6 +60,8 @@ CONFIG_SPL_RAM_SUPPORT=y
+>  CONFIG_SPL_RAM_DEVICE=y
+>  # CONFIG_SPL_SPI_FLASH_TINY is not set
+>  CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
+> +CONFIG_SF_DEFAULT_MODE=0
+> +CONFIG_SF_DEFAULT_SPEED=25000000
+
+CONFIG_SF_DEFAULT_MODE defaults to 0 already.
+
+Also please order config additions as safedefconfig would.
+
+thanks
+Jon
+
+>  CONFIG_SPL_SPI_LOAD=y
+>  CONFIG_SYS_SPI_U_BOOT_OFFS=0x280000
+>  CONFIG_SPL_THERMAL=y
+> diff --git a/configs/j721s2_evm_r5_defconfig b/configs/j721s2_evm_r5_defconfig
+> index 3c958cafbe8f..4039841488f9 100644
+> --- a/configs/j721s2_evm_r5_defconfig
+> +++ b/configs/j721s2_evm_r5_defconfig
+> @@ -57,6 +57,7 @@ CONFIG_SPL_FS_EXT4=y
+>  CONFIG_SPL_I2C=y
+>  CONFIG_SPL_DM_MAILBOX=y
+>  CONFIG_SPL_MTD=y
+> +CONFIG_SPL_MTD_SUPPORT=y
+>  CONFIG_SPL_DM_SPI_FLASH=y
+>  CONFIG_SPL_NOR_SUPPORT=y
+>  CONFIG_SPL_DM_RESET=y
+> @@ -66,6 +67,8 @@ CONFIG_SPL_RAM_DEVICE=y
+>  CONFIG_SPL_REMOTEPROC=y
+>  # CONFIG_SPL_SPI_FLASH_TINY is not set
+>  CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
+> +CONFIG_SF_DEFAULT_MODE=0
+> +CONFIG_SF_DEFAULT_SPEED=25000000
+>  CONFIG_SPL_SPI_LOAD=y
+>  CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
+>  CONFIG_SPL_THERMAL=y
+>
+> -- 
+> 2.43.2
