@@ -4,65 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DC50C25B75
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 22:32:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D91A9C25B75
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 22:51:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B31F88826;
-	Sat,  1 Jun 2024 00:32:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 467878882E;
+	Sat,  1 Jun 2024 00:51:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="K0eRg+C3";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="K4BFQS1r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 893978882E; Sat,  1 Jun 2024 00:32:50 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id B0DFC88829; Sat,  1 Jun 2024 00:51:25 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6AF4C8872E
- for <u-boot@lists.denx.de>; Sat,  1 Jun 2024 00:32:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 81DB587E0D
+ for <u-boot@lists.denx.de>; Sat,  1 Jun 2024 00:51:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44VMWiS3117578;
- Fri, 31 May 2024 17:32:44 -0500
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44VMpDdV117024;
+ Fri, 31 May 2024 17:51:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1717194764;
- bh=jiBMbMUdaemh/kavh1nf/XFdk8MkHPS4yP3nk8L1Ik4=;
- h=From:To:CC:Subject:Date;
- b=K0eRg+C3t08BrC3VK9NnauEIhwKVrbOzMWyupxgezHFX4vnQ4TO3t5mJXdzxr9tBC
- zYn3hKvV2jOgU3bpjtwp5/y7p/aK9Yc4CPuvzjKdUA9ZC1EQe+4gnSAdwkI7uJIn3g
- W4+BnL3/qrzOlnYfmwGVYIEQiM4FHBmuydfDN3jk=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44VMWihj053569
+ s=ti-com-17Q1; t=1717195873;
+ bh=rX+JmwzYAWfPgzOnolHVbx+0q3dctrKsRCPOPeesIBE=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=K4BFQS1rpuDRp02hpw9wM9DTaAVt8uhCET3PIWJzpgyVh5N9oMFJeYR3qkihcfG1H
+ LeCCoPne5vPyFP/cv1UcpwtRD6Z3MMQdXdVLe2eZ0YUugpbou9rpKxGbk0eJq4fVYm
+ udtuV1dhohJQUKjsprmy7bzejjP8FuN21iB74aBQ=
+Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44VMpDP8062783
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 31 May 2024 17:32:44 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 31 May 2024 17:51:13 -0500
+Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 31
- May 2024 17:32:43 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ May 2024 17:51:13 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 31 May 2024 17:32:44 -0500
+ Frontend Transport; Fri, 31 May 2024 17:51:13 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44VMWhNC042364;
- Fri, 31 May 2024 17:32:43 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44VMpDvO046300;
+ Fri, 31 May 2024 17:51:13 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
-To: Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Hari Nagalla <hnagalla@ti.com>, Nishanth Menon <nm@ti.com>, Andrew Davis
- <afd@ti.com>, Roger Quadros <rogerq@kernel.org>, Marcel Ziswiler
- <marcel.ziswiler@toradex.com>, Vignesh Raghavendra <vigneshr@ti.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
- Jonathan Humphreys <j-humphreys@ti.com>,
- Tom Rini <trini@konsulko.com>, Udit Kumar <u-kumar1@ti.com>
-CC: <u-boot@lists.denx.de>
-Subject: [PATCH] configs: j784s4: Enable OSPI NOR boot
-Date: Fri, 31 May 2024 17:32:41 -0500
-Message-ID: <20240531223241.2619357-1-j-humphreys@ti.com>
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
+ <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>, Christian Gmeiner
+ <christian.gmeiner@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>, Simon Glass <sjg@chromium.org>,
+ Nikhil M Jain <n-jain1@ti.com>, Neha Malcom Francis
+ <n-francis@ti.com>, Andrew Davis <afd@ti.com>, Maxime Ripard
+ <mripard@kernel.org>, Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Roger Quadros <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
+ Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>
+CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
+Subject: [PATCH v3 4/9] dts: j721e: binman: Include firmware capsules binman
+ nodes
+Date: Fri, 31 May 2024 17:51:05 -0500
+Message-ID: <20240531225110.2622239-5-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240531225110.2622239-1-j-humphreys@ti.com>
+References: <20240531225110.2622239-1-j-humphreys@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -83,41 +94,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set necessary configs to enable the j784s4 device to boot from OSPI NOR
-flash.
+Fill in the J721e SK's capsule GUID properties of the base binman capsule
+nodes.
+Also add it's SYSFW binman capsule node.
 
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- configs/j784s4_evm_a72_defconfig | 2 ++
- configs/j784s4_evm_r5_defconfig  | 2 ++
- 2 files changed, 4 insertions(+)
+ arch/arm/dts/k3-j721e-binman.dtsi | 49 +++++++++++++++++++++++++++++++
+ 1 file changed, 49 insertions(+)
 
-diff --git a/configs/j784s4_evm_a72_defconfig b/configs/j784s4_evm_a72_defconfig
-index 8ef50f690fb..e999a25319d 100644
---- a/configs/j784s4_evm_a72_defconfig
-+++ b/configs/j784s4_evm_a72_defconfig
-@@ -49,6 +49,8 @@ CONFIG_SPL_DM_RESET=y
- CONFIG_SPL_POWER_DOMAIN=y
- CONFIG_SPL_RAM_SUPPORT=y
- CONFIG_SPL_RAM_DEVICE=y
-+# CONFIG_SPL_SPI_FLASH_TINY is not set
-+CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x280000
- CONFIG_SPL_THERMAL=y
-diff --git a/configs/j784s4_evm_r5_defconfig b/configs/j784s4_evm_r5_defconfig
-index f5fe7432206..71b39b876e9 100644
---- a/configs/j784s4_evm_r5_defconfig
-+++ b/configs/j784s4_evm_r5_defconfig
-@@ -56,6 +56,8 @@ CONFIG_SPL_POWER_DOMAIN=y
- CONFIG_SPL_RAM_SUPPORT=y
- CONFIG_SPL_RAM_DEVICE=y
- CONFIG_SPL_REMOTEPROC=y
-+# CONFIG_SPL_SPI_FLASH_TINY is not set
-+CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
- CONFIG_SPL_THERMAL=y
+diff --git a/arch/arm/dts/k3-j721e-binman.dtsi b/arch/arm/dts/k3-j721e-binman.dtsi
+index 1514d897634..7b426729eb8 100644
+--- a/arch/arm/dts/k3-j721e-binman.dtsi
++++ b/arch/arm/dts/k3-j721e-binman.dtsi
+@@ -295,6 +295,36 @@
+ 		};
+ 	};
+ };
++
++#include "k3-binman-capsule-r5.dtsi"
++
++// Capsule update GUIDs in string form.  See j721e_evm.h
++#define J721E_SK_TIBOOT3_IMAGE_GUID_STR "e672b518-7cd7-4014-bd8d-40724d0ad4dc"
++#define J721E_SK_SYSFW_IMAGE_GUID_STR "6fd10680-361b-431f-80aa-899455819e11"
++
++&capsule_tiboot3 {
++	efi-capsule {
++		image-guid = J721E_SK_TIBOOT3_IMAGE_GUID_STR;
++	};
++};
++
++&binman {
++	capsule-sysfw {
++		filename = "sysfw-capsule.bin";
++		efi-capsule {
++			image-index = <0x4>;
++			image-guid = J721E_SK_SYSFW_IMAGE_GUID_STR;
++			private-key = "arch/arm/mach-k3/keys/custMpk.pem";
++			public-key-cert = "arch/arm/mach-k3/keys/custMpk.crt";
++			monotonic-count = <0x1>;
++
++			blob {
++				filename = "sysfw.itb";
++			};
++		};
++	};
++};
++
+ #endif
+ 
+ #ifdef CONFIG_TARGET_J721E_A72_EVM
+@@ -673,4 +703,23 @@
+ 		};
+ 	};
+ };
++
++#include "k3-binman-capsule.dtsi"
++
++// Capsule update GUIDs in string form.  See j721e_evm.h
++#define J721E_SK_SPL_IMAGE_GUID_STR "86f710ad-10cf-46ea-ac67-856ae06efad2"
++#define J721E_SK_UBOOT_IMAGE_GUID_STR "81b58fb0-3b00-4add-a20a-c185bbaca1ed"
++
++&capsule_tispl {
++	efi-capsule {
++		image-guid = J721E_SK_SPL_IMAGE_GUID_STR;
++	};
++};
++
++&capsule_uboot {
++	efi-capsule {
++		image-guid = J721E_SK_UBOOT_IMAGE_GUID_STR;
++	};
++};
++
+ #endif
 -- 
 2.34.1
 
