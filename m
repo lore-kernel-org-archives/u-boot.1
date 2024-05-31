@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B51AC25B75
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 14:11:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9583CC25B7E
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 14:18:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E23B88284;
-	Fri, 31 May 2024 16:11:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CBF328872E;
+	Fri, 31 May 2024 16:18:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="B4RoYrRn";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="C/tRimD9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 733A188284; Fri, 31 May 2024 16:11:39 +0200 (CEST)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id BEEB1887A1; Fri, 31 May 2024 16:18:54 +0200 (CEST)
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [IPv6:2607:f8b0:4864:20::1033])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2C15881D3
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 16:11:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2300A88607
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 16:18:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1f480624d04so17964705ad.2
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 07:11:36 -0700 (PDT)
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-2bdf11888a5so1739568a91.0
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 07:18:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717164695; x=1717769495; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1717165130; x=1717769930; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
  bh=oLN6wLvrRcFEHZtTgivXfYTkK3piHxOoHVkvcthIHwE=;
- b=B4RoYrRnSBJhyytACGTtDZIsoRKIAcUjVFBZQ30hv0iFkwfKLh3FcE6DqYauZubatP
- qkbKT0eZesFKT4QarQ33sGb7RJNhd6sT+vpnTZeWp2yk7cxCYKjyr21mdoFjFpUeETw7
- oLH7kHsyt9casPw93Drvjwjmzm+BjuSyRDsS2Ou7DaoQgZqOjV5QSxdyCL5wd/ODNazP
- CEqYnxK9Sv0Cz0PyJ2Z6+CYHnmDXSK1Tl8Y/wbVZx5RbPlSMAGeNzNxR6nJ0CRf8i2pF
- jKPIZGmDBc2v1+B7WVgDnugq4jNoO6RIMSXmsninBz3hc22zmy4iP8a/f01rOws4d1yC
- WIKg==
+ b=C/tRimD9KHl7e6pynqWb0570g5niAC4SnKMAL4DISXgLUN+vdJSul6AXHETdC4RTwk
+ IQBmWAzzc2ZZcvv628MiWbllgp64k9UZqKnXzg8qu85Gg0nxsJMf/uO2RMa9EvuN5llP
+ 4/xvhFeygOdNP0yagdSRLw7A3Z1cbsp1JeU95h4X/96Qldzr4XEYeGYlcMaOYa+nrG7R
+ zahEwNJxiZT34W5S1gkZ2ZHKfd1NUi+poiYxQa7aD3X6hALNg3r6JNHpehL9tnLnaOpS
+ crbm1uNiVZcXdgwxVPbNdcca2cBvMQKSDuioLSF0+3mxbeVgMLEWs9tz0nxJd/xPdgT3
+ uUqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717164695; x=1717769495;
+ d=1e100.net; s=20230601; t=1717165130; x=1717769930;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
  bh=oLN6wLvrRcFEHZtTgivXfYTkK3piHxOoHVkvcthIHwE=;
- b=enYKovn2G32tpYtOb9+hEpAqRolHjCo2n7qQA1dLjxDJowFTB9aE4fS76FDO3LyYIp
- l9cGAjuiT99SCHl5dRkzXhK+NYqDzQwNVu6GPlCPssUfIYzk1TVMX/EjVEfbDRTsUjEO
- uTRd1CrrSyWnapmLNiwfSaN5tahM0HPjlkI+HBitFPkb9QF3WrPZ9Tgq7B4h01iwJsC9
- YIeKRd+tZlV5Zoj8tRyluFFsYaRFVsFB3r1UL1fIbsZwaMx2AeK3grH80bSgEO+CfGKe
- xi/NJ1XAaKok1F1F8Mgp/BsDSe70YxAspHsiQb5xEZ/Mj4DOfWyG7Hl6hs9OyK9J81dJ
- iF6g==
+ b=LnHEapstD4XzBfDjbElJnFhLH3TdKO4RH4hAEaEYDrzTUzISe/JXlVGzIYmUWd4gD6
+ 56YdmPLq4FpKuBJl14e3b/9onl4Dr3uDB6Gkh+eGDLi9mB+TeGGSoFG0XgJdVOgbPZTM
+ FLOBdTmIjKJ6PLzXHQa32u9FNMk16zQeh5pLB+AGzyDgd2emgzgWoIUQ6naw3vpWqPEc
+ vp2ATRnXNE7eaIG1WFQtnoxH98TC6Ky6nyn/LYfvwrWv7xttvUjemM2elfYHJHEjuIac
+ 6FyNpAGEZsEfTuNOsL+sXkJhYSKCz++GMf9wrCojbD2U2v2oF3unyPp48gGwbN+d8eOx
+ i5Qw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXde/LmP4SdZOHCMVXCRh5O/liVME+g19Mdmh8XhygpYBzVdJTqPk9RPxMrheqXPYA18g/+2v6KunSEpElDlBZ6FD6ksQ==
-X-Gm-Message-State: AOJu0YxfHfmg1uQaMKQYgGjzG405UTXxmhBzADs+pI/oQNf0pBC+skOO
- 73pLKyCefIP3UtQi1Q/OVwN/WxOpa010pxhn3O5HWhefVQUt6V/7
-X-Google-Smtp-Source: AGHT+IGThbL31Rhg8n861Faqdh4mv6KklpbWf0+XJNBbi7zbY/LAga6T0E6nEtO4CVKhVkw1oSxkVQ==
-X-Received: by 2002:a17:902:eb8c:b0:1f6:3215:3d16 with SMTP id
- d9443c01a7336-1f63701639emr17488195ad.26.1717164695127; 
- Fri, 31 May 2024 07:11:35 -0700 (PDT)
+ AJvYcCUdePvE6KNa1mrTMIS2leWNMbvzcC/bJCuE02d2/Ld6r5HaihMDFyXJYpKKhCmX83/eBZOZryZVVKNOes7nhkkKea7oNw==
+X-Gm-Message-State: AOJu0YyvFS5gcA/3m3pT9u8F0DrPHMHrd+fT1pG7pQ4M93syzXXfQt7q
+ Yuc4lIkeAqYJqYnFk8darN81h2Do1hzqr/k3FOg1ME93I+Fi/ERM
+X-Google-Smtp-Source: AGHT+IGyq/lXwkVSFlSDS3yEUoxlbtTivjQm4NFqCvn3F22whm5AzOTJMNd6BRLidv+nKEm/IM6ADA==
+X-Received: by 2002:a17:90b:50c6:b0:2b1:e314:a5e6 with SMTP id
+ 98e67ed59e1d1-2c1dc56c32amr1907523a91.7.1717165130425; 
+ Fri, 31 May 2024 07:18:50 -0700 (PDT)
 Received: from localhost.localdomain ([113.30.217.222])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f63232dcf1sm16997765ad.53.2024.05.31.07.11.32
+ 98e67ed59e1d1-2c1a775ccedsm3563935a91.1.2024.05.31.07.18.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 May 2024 07:11:34 -0700 (PDT)
+ Fri, 31 May 2024 07:18:50 -0700 (PDT)
 From: Anand Moon <linux.amoon@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Kever Yang <kever.yang@rock-chips.com>, Jagan Teki <jagan@edgeble.ai>,
@@ -72,8 +72,8 @@ To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
 Cc: Anand Moon <anand@edgeble.ai>, Anand Moon <linux.amoon@gmail.com>,
  u-boot@lists.denx.de
 Subject: [PATCH RFC v2 00/23]  Enable display cpuinfo to get the reset cause
-Date: Fri, 31 May 2024 19:40:59 +0530
-Message-ID: <20240531141122.13084-1-linux.amoon@gmail.com>
+Date: Fri, 31 May 2024 19:48:14 +0530
+Message-ID: <20240531141837.13189-1-linux.amoon@gmail.com>
 X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
