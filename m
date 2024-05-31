@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA4DEC25B75
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 06:51:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0F60C25B75
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 06:52:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 629C48829B;
-	Fri, 31 May 2024 08:51:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4470E8879F;
+	Fri, 31 May 2024 08:52:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Vc8c9CLz";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Pte3PvZD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C183388786; Fri, 31 May 2024 08:51:53 +0200 (CEST)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
+ id 30BA2887A1; Fri, 31 May 2024 08:52:14 +0200 (CEST)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E7FA88270
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 08:51:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0AF4188270
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 08:52:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=promsoft@gmail.com
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-2c199abdbcbso1240568a91.3
- for <u-boot@lists.denx.de>; Thu, 30 May 2024 23:51:51 -0700 (PDT)
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-3d1d3c7f7c6so954155b6e.3
+ for <u-boot@lists.denx.de>; Thu, 30 May 2024 23:52:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717138310; x=1717743110; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1717138331; x=1717743131; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TYVyBYaeI+sZ8P/ozZVWfUwYoBDUXoTNNkckz+8llsc=;
- b=Vc8c9CLzRxURsAyLPUrhI1tt9mUGcCKKY0CPnLN8C2rJlT+DvJlZPxvJoK8DSWtPj6
- 76EE7gJuqbE3VWJAxrWzyLHJcd11LXef43qV9LdqWq5Bb1alSUDve5stN/zlmeiMroCT
- IBWx0PvnhEvdLVwuUaZZDzkcb32g4Mq+5Ug4RJ1XU6fsrn8u5spHKOx1DMHsfOVhZWXV
- mZRc00mM1IfzNs6s5ufG9LIHbqOzheDa+luvNiy4mh2G2dxj6Bv4fDGMTvd2vOeFLg4f
- rjWcPeH8LwrMrld8BR+fWfTIGmOXlFnsmbJJspgs9FysaKAADZo9i5sF+BZWZwsjecc4
- lE1A==
+ bh=wIf8nV+Z7Tni0mNE+pCh69fMe+4+uNgnecytVufMdZM=;
+ b=Pte3PvZDY7okeuCSJz9KMS3y5TO59ZTjUxBC6vP4o0luNqZgolU9KRBrNwTPuszxC9
+ 8v7okW6GJ0Jey1wCImnUjtW0UlBtVriDsgtdOEKM0Ik+E1V9za17UjTsMEkFuKJ+MHYX
+ Z6jk/yRCG+jfXUCzbhyzVNoUJSorVdJO8akbLJfhZ4yunJGrakj+WFqm4Lk9YEBXDsZ+
+ tLUbxU6Y3WdjMdb8Jlv159BRaooMbmgq6Rnm1VFnc7lB+9fIxnlt+f5EF9SA2s5oDGl/
+ 0Qz4mjSGfIx9uwcrcB0abTnpW8EswDuSGwtLXTzn+ecmqDJCAVgA5dsXBGMUnSP13ACA
+ Ziog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717138310; x=1717743110;
+ d=1e100.net; s=20230601; t=1717138331; x=1717743131;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=TYVyBYaeI+sZ8P/ozZVWfUwYoBDUXoTNNkckz+8llsc=;
- b=k3XKO+Mh+iTPW2AK5soS/VdmCE+ZD739hBxGRWfkMfawvI2Kd4/lXuhqaa36mEIxHo
- VFP6/+JV8bUZg3++88Mv475wnx8Jp5GKi7ESFfe73lPgzgtGdnYApKloRGE/H/L/2jO5
- YKLEFXfBHBgs6Q8hjCi1y4Nc1BUnMxv+SqP/SCFtubqRAuFmOP9eW8wHPw7HtmCSqwGL
- cnSLKoHxYZ0advAiA3hk+QIGtl9YnkukH9ho19oCah1iJ1dfp/jZxHAt1IS9y+WzWgJu
- uOs1r83HOMWkzhMUuidPahVRjnOzjW2vWnkNwZJo4Z0ShH8QdzU8mHoR7mY65Aomhw1A
- Jsnw==
+ bh=wIf8nV+Z7Tni0mNE+pCh69fMe+4+uNgnecytVufMdZM=;
+ b=bBcQ1fHbFtmvv1ZJPUVYdU3CStVTz2GktgKVd+KMUaYFJ3yPXiCk28vHL41CXmAoXB
+ w+8b4G60QXkUwObpjMkp2uvDfgFoar4Y93gLUeZokhGOW0jU+DJB0vkDYOXfKwutUnli
+ GYEEnuGveBbTI3M8TNoLnxzgvenkZWRQd023WpdaD49S1RbAAfyvIxKJfTvSeMSmgmmv
+ +jUNf7JmhvvUnUOSTNXmXNC3oDbuvj7irDepSHlgTFMSpdS+mFaCkOPy1hiNdf5XDjGN
+ lFocLk6+z6K6tk+zutUgtXESnTHyiuAQFx7WfXMLdc6R+L1KHET/WKQkSo9ORjo7CUqA
+ /hAA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWbNnBEKUexj95bpkvgH8328vQDnAUAnD6RdnbcmeUjLXvgmIB/SVvs1tbJeIUS0Wh1ADpyKfXg3YdSu4S1/T4Vmd/6hw==
-X-Gm-Message-State: AOJu0Yz4m6UZhdClH830koBnoCtPW4Ntrh5cYLC41MAl/KI8vA/+D9IZ
- YzvKXXzoW6ECkkBxEeAkFVUqeUe4C63QxDaWCT/Y14bAIYqd8MYn1PRq+mEeKvWOXeBjdYBEgwq
- bacYcRVxFxtTSm12TTUT3nop7eSU=
-X-Google-Smtp-Source: AGHT+IH6SiG513st2EvFhJ7p81gfJhZL+ei6C4+zK44EET5CHLaUVeYi33eiQznvzzRifQZQK6WplEQZXzsiV/M+VEA=
-X-Received: by 2002:a17:90a:f083:b0:2b1:b6f:e297 with SMTP id
- 98e67ed59e1d1-2c1dc5c8effmr977222a91.36.1717138309870; Thu, 30 May 2024
- 23:51:49 -0700 (PDT)
+ AJvYcCX5+U8GHsehaQo+9oxjnAXR7rg00szHbPLFr81NvkF0MEHbZdjP0Q5SiHspDdxTaC8P/ilgSMssb1xSDdiQqCSkvxMGTQ==
+X-Gm-Message-State: AOJu0YwyXRxb78iaSmZNnaB4lxI425b3MEKna2Z4iWQeLcrO3skIpoTl
+ kpmTcQjQktYoTonu7bQWvswAAQsyzvNxl3ZjXoEiEhhoVbj+mFmpFtIz8a54pqr2LE6V7IWRudp
+ 5qtGcDDvleGF5rUmEDxS/kSC9/0k=
+X-Google-Smtp-Source: AGHT+IHLXfiOOQWlaClKJo86qkdKnY2SsNrHrJuc1Tj6NSaCPHCbTHuLdfhZFl9i+mYBDvnyYdftZ50O/WjnB2xx154=
+X-Received: by 2002:a05:6870:5a6:b0:24c:ba5b:54d6 with SMTP id
+ 586e51a60fabf-2508bbfca87mr1302766fac.59.1717138330716; Thu, 30 May 2024
+ 23:52:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240525215138.11936-1-semen.protsenko@linaro.org>
-In-Reply-To: <20240525215138.11936-1-semen.protsenko@linaro.org>
+References: <20240525215330.16609-1-semen.protsenko@linaro.org>
+In-Reply-To: <20240525215330.16609-1-semen.protsenko@linaro.org>
 From: Minkyu Kang <promsoft@gmail.com>
-Date: Fri, 31 May 2024 15:51:36 +0900
-Message-ID: <CALrBrZ2YHP8Zr=2sfE0sy8b0YiziqBkpWJ0xup139gKFkAO+Nw@mail.gmail.com>
-Subject: Re: [PATCH] arm: dts: e850-96: Remove not needed bootph-all flags
+Date: Fri, 31 May 2024 15:51:55 +0900
+Message-ID: <CALrBrZ1YP6DfxuX6+DGR_GUfiKe3EFv59bJcLQHbPZyg9rT+WQ@mail.gmail.com>
+Subject: Re: [PATCH] arm: exynos: Map iRAM APM area for Exynos850 SoC
 To: Sam Protsenko <semen.protsenko@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>,
  u-boot@lists.denx.de
@@ -91,63 +91,38 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Sun, 26 May 2024 at 06:51, Sam Protsenko <semen.protsenko@linaro.org>
+On Sun, 26 May 2024 at 06:53, Sam Protsenko <semen.protsenko@linaro.org>
 wrote:
 
-> Most of the nodes in e850-96 appended device tree that add bootph-all
-> flags are not necessary. All those nodes are instantiated as
-> dependencies of other nodes anyway. Remove those nodes to avoid
-> cluttering the appended dts. 'bdinfo' reports 768 bytes reduction for
-> "Early malloc usage", and 'dm tree' output doesn't change. Keep only
-> pmu_system_controller changes, which are actually needed for serial to
-> work properly.
+> This iRAM APM area is needed for I3C access to PMIC via APM block.
+> Without this mapping any access to APM iRAM leads to "Synchronous Abort"
+> exception.
 >
 > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 > ---
->  arch/arm/dts/exynos850-e850-96-u-boot.dtsi | 28 ----------------------
->  1 file changed, 28 deletions(-)
+>  arch/arm/mach-exynos/mmu-arm64.c | 8 ++++++++
+>  1 file changed, 8 insertions(+)
 >
-> diff --git a/arch/arm/dts/exynos850-e850-96-u-boot.dtsi
-> b/arch/arm/dts/exynos850-e850-96-u-boot.dtsi
-> index 7ad11e9faab2..6d7148f7264a 100644
-> --- a/arch/arm/dts/exynos850-e850-96-u-boot.dtsi
-> +++ b/arch/arm/dts/exynos850-e850-96-u-boot.dtsi
-> @@ -3,35 +3,7 @@
->   * Copyright (c) 2023 Linaro Ltd.
->   */
+> diff --git a/arch/arm/mach-exynos/mmu-arm64.c
+> b/arch/arm/mach-exynos/mmu-arm64.c
+> index 30e522804fbf..4c154950f73b 100644
+> --- a/arch/arm/mach-exynos/mmu-arm64.c
+> +++ b/arch/arm/mach-exynos/mmu-arm64.c
+> @@ -101,6 +101,14 @@ struct mm_region *mem_map = exynos7880_mem_map;
 >
-> -&cmu_top {
-> -       bootph-all;
-> -};
-> -
-> -&cmu_peri {
-> -       bootph-all;
-> -};
-> -
-> -&oscclk {
-> -       bootph-all;
-> -};
-> -
-> -&pinctrl_alive {
-> -       bootph-all;
-> -};
-> -
->  &pmu_system_controller {
->         bootph-all;
->         samsung,uart-debug-1;
->  };
-> -
-> -&serial_0 {
-> -       bootph-all;
-> -};
-> -
-> -&uart1_pins {
-> -       bootph-all;
-> -};
-> -
-> -&usi_uart {
-> -       bootph-all;
-> -};
+>  static struct mm_region exynos850_mem_map[] = {
+>         {
+> +               /* iRAM */
+> +               .virt = 0x02000000UL,
+> +               .phys = 0x02000000UL,
+> +               .size = SZ_2M,
+> +               .attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRE) |
+> +                        PTE_BLOCK_NON_SHARE |
+> +                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> +       }, {
+>                 /* Peripheral block */
+>                 .virt = 0x10000000UL,
+>                 .phys = 0x10000000UL,
 > --
 > 2.39.2
 >
