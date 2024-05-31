@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50FC8C25B75
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 21:52:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4694C25B75
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 21:53:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B41ED882CD;
-	Fri, 31 May 2024 23:52:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 41219887C9;
+	Fri, 31 May 2024 23:53:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="kE2pyZLi";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="M0USP/Rq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5F0C887C9; Fri, 31 May 2024 23:52:15 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
+ id 82DBC887EF; Fri, 31 May 2024 23:53:36 +0200 (CEST)
+Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9794187FC2
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 23:52:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E1C6887C9
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 23:53:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1717192332;
+ t=1717192414;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=47r6ANPAOB8YINICN2zff7g1nUbgNx6hHJOcW//Dwi0=;
- b=kE2pyZLirJkeJzXd4mtfgIG1MN4R6FA7PJpkmkdgaJ+YvgzLGbXN9ubfZERDwE0QnKkdQR
- pUq7Nh9Nn9NGlmdz5TLq55kWiYjd40la5EsR1pI8RowPO7eEhTL1fKTffhfMDTGH/BjXMj
- DzRFjxKGfAyKqwZypZLAMXznHrt/Zu6dCPmVdziG6ZdASLG953FMe1qiMna7KsHUa00RqC
- 1XEN2lk8887EzWZruwvwHH/3GAMV+yIJynzsK2dmZTkDw95vukMQ7BMHLNpy3NbHivwR0T
- LnNgjy2/6LIMQQmZYD/eIxpz28kb6RXyEoHeixdCpPp7/DN2l9psygxLIug1oA==
-Date: Fri, 31 May 2024 23:52:12 +0200
+ bh=Jn5HldqZ5713QgWfnuL2JjDcanmRjVz/UoSeUcf+ZfU=;
+ b=M0USP/RqRT+kJFAc4Va1xSLX7u7FP5b3W7ys4z5dwe9YPZmioHZqO55aEV61AW2RrQ6IHO
+ 4j3bdUZa24wkRsm+y9ZP1brW8mDulAAQZm5PvSJFIMv9v6QYbCyTf1+NYMrR74iqHshErO
+ ssxmrR7MeyNew8iXaDvH4KmQh/9xsVPInuyfcg/FfTxlqZNWmQdCrrgW1/nho62O1GjfW2
+ 0So8ucJv76xf37CgtgtyDB+2jWCR0NNlZs49lj4dgzzgqL4I+wAXAXlZ3jYD3NWJUzGOXS
+ jyQe+7y/jbMAUAHSsneClUNIiiFgspHJVcSwjkLXtL3CSHvSzSgvmPTRAS50Eg==
+Date: Fri, 31 May 2024 23:53:33 +0200
 From: Dragan Simic <dsimic@manjaro.org>
 To: Anand Moon <linux.amoon@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Kever
  Yang <kever.yang@rock-chips.com>, Jagan Teki <jagan@edgeble.ai>, Jonas
  Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>, Anand
  Moon <anand@edgeble.ai>, u-boot@lists.denx.de
-Subject: Re: [PATCH RFC v2 18/23] rockchip: RV1108: Read the reset cause from
- clock reset unit for RV1108 SoC
-In-Reply-To: <20240531141837.13189-19-linux.amoon@gmail.com>
+Subject: Re: [PATCH RFC v2 20/23] rockchip: RV1126: Read the reset cause from
+ clock reset unit for RV1126 SoC
+In-Reply-To: <20240531141837.13189-21-linux.amoon@gmail.com>
 References: <20240531141837.13189-1-linux.amoon@gmail.com>
- <20240531141837.13189-19-linux.amoon@gmail.com>
-Message-ID: <92f3c3dfe4714520b49dbe4527b5a5dc@manjaro.org>
+ <20240531141837.13189-21-linux.amoon@gmail.com>
+Message-ID: <6a43e749b6edd8611dcaf01aa678b5be@manjaro.org>
 X-Sender: dsimic@manjaro.org
 Content-Type: text/plain; charset=US-ASCII;
  format=flowed
@@ -78,7 +78,7 @@ Hello Anand,
 On 2024-05-31 16:18, Anand Moon wrote:
 > From: Anand Moon <anand@edgeble.ai>
 > 
-> Read the reset cause from clock reset unit for RV1108 SoC.
+> Read the reset cause from clock reset unit for RV1126 SoC.
 > 
 > Cc: Jagan Teki <jagan@edgeble.ai>
 > Signed-off-by: Anand Moon <anand@edgeble.ai>
@@ -90,38 +90,38 @@ On 2024-05-31 16:18, Anand Moon wrote:
 > 
 > diff --git a/arch/arm/include/asm/arch-rockchip/cru.h
 > b/arch/arm/include/asm/arch-rockchip/cru.h
-> index 9cdd960fb1..e886adf515 100644
+> index e886adf515..e1a8d8adad 100644
 > --- a/arch/arm/include/asm/arch-rockchip/cru.h
 > +++ b/arch/arm/include/asm/arch-rockchip/cru.h
-> @@ -27,6 +27,8 @@
->  #include <asm/arch-rockchip/cru_rk3308.h>
+> @@ -29,6 +29,8 @@
+>  #include <asm/arch-rockchip/cru_rk3368.h>
 
 Although not related to this patch directly, a single space character
 should be added between "#" and "include", for consistency.
 
->  #elif defined(CONFIG_ROCKCHIP_RK3368)
->  #include <asm/arch-rockchip/cru_rk3368.h>
+>  #elif defined(CONFIG_ROCKCHIP_RV1108)
+>  #include <asm/arch-rockchip/cru_rv1108.h>
 
 The same comment as above.
 
-> +#elif defined(CONFIG_ROCKCHIP_RV1108)
-> +#include <asm/arch-rockchip/cru_rv1108.h>
+> +#elif defined(CONFIG_ROCKCHIP_RV1126)
+> +#include <asm/arch-rockchip/cru_rv1126.h>
 
-The same comment as above, bit this time related to this patch.
+The same comment as above, but this time related to this patch.
 
 >  #endif
 > 
 >  /* CRU_GLB_RST_ST */
 > diff --git a/arch/arm/mach-rockchip/cpu-info.c
 > b/arch/arm/mach-rockchip/cpu-info.c
-> index b9d2756a70..b2cfdade13 100644
+> index b2cfdade13..cb4ac39884 100644
 > --- a/arch/arm/mach-rockchip/cpu-info.c
 > +++ b/arch/arm/mach-rockchip/cpu-info.c
-> @@ -30,6 +30,8 @@ char *get_reset_cause(void)
->  	struct rk3308_cru *cru = rockchip_get_cru();
->  #elif IS_ENABLED(CONFIG_ROCKCHIP_RK3368)
+> @@ -32,6 +32,8 @@ char *get_reset_cause(void)
 >  	struct rk3368_cru *cru = rockchip_get_cru();
-> +#elif IS_ENABLED(CONFIG_ROCKCHIP_RV1108)
-> +	struct rv1108_cru *cru = rockchip_get_cru();
+>  #elif IS_ENABLED(CONFIG_ROCKCHIP_RV1108)
+>  	struct rv1108_cru *cru = rockchip_get_cru();
+> +#elif IS_ENABLED(CONFIG_ROCKCHIP_RV1126)
+> +	struct rv1126_cru *cru = rockchip_get_cru();
 >  #endif
 >  	char *cause = NULL;
