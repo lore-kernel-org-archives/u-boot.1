@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71545C25B75
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 10:00:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51B52C25B75
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 10:04:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C97348856E;
-	Fri, 31 May 2024 12:00:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 78B20885AF;
+	Fri, 31 May 2024 12:04:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="b0EdsJn+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iXAbNouM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22462885FE; Fri, 31 May 2024 12:00:13 +0200 (CEST)
-Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
- [IPv6:2607:f8b0:4864:20::42f])
+ id 328DE885F1; Fri, 31 May 2024 12:04:03 +0200 (CEST)
+Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
+ [IPv6:2607:f8b0:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB7E1880DB
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 12:00:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C80188856E
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 12:04:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-7023df18408so961529b3a.2
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 03:00:10 -0700 (PDT)
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-7024e7e55f7so142725b3a.2
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 03:04:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1717149609; x=1717754409; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1717149839; x=1717754639; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NGD5IYbzoW0ieWajw9USuTDh+EaW4abRmJRvJ+o716s=;
- b=b0EdsJn+mbOVYmT6UR+SXXGTbHMCNp+dTwwt6T3ef0lLxLCuqufdmM2XAXNE94S0Y0
- k8gz07y2edkOvNTwqF5oOzFyg0Ltl80a11T9+yqLJ8OL9CujJxu3CiRAsUfs0Xj7snUW
- ZLJ/fMOcphs2KwJFrlPQJefezAMIbsC+EpnWVF4Ey+XOmmIXAoWClDuTkkVHylGiBj30
- nexsnKruwx/1sBQvVsdvcMTT756EKdbND460uVHDnlqjixqK+ZzKRPN8a8gyCuBEXU9+
- O92uK6U8V2j3ivjQr++M5CiEIOhKdoolYs7GGqov8pLcPzeylQkpR0GbrsylsZ5VuVLw
- GVoQ==
+ bh=gymVY1PAQxRgpZfTHzwwSmyb+S7NVyoWP3O4DM8qXfQ=;
+ b=iXAbNouM3MCHs8d4EDXwoMLku8jaIHnWff0rIwIlqkhj2K4l1n4weWFhveIdJTQmBb
+ 8iwl7FQEzFaXEx5a0QOudDS3FLj4Ck9LuIntjEJ/yiS86inoZtTgba/+8AtRO4Gb40Dc
+ 7rg28wXNTkOSxT1kyjaWLq27ke9zz9UV3VM9JeSRhikhAb2/yQyhVVmkOfvSXz/ZmJqF
+ ifolPBXp/fv22FflthHV95fvIsw1ugZWrPt/ef/mv7Ckolk5sSQ5/PY+w3i+ZD8dvE84
+ CODMBC7k1vazLxroJowIMXYQbuGz95zwju4upuVzA8RiIONcSdmbGHT9ydivSfLnzDOZ
+ 1Hgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717149609; x=1717754409;
+ d=1e100.net; s=20230601; t=1717149839; x=1717754639;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=NGD5IYbzoW0ieWajw9USuTDh+EaW4abRmJRvJ+o716s=;
- b=A8J110J34iNfReNsq2+LYStW1cDnWW+ZpenYjmpSnONA5b8D9+rdDZHr972ECkK3Zy
- p/wqdZ3kzcQF/gbSHwPXrNMB3TryuJBE/vbt+kaGNGeMfNXRXVACR9WuAAU3UdTTuo+s
- z1s4knGwSmPjYEXqrkKRWh2rBFo3hbDR1GnhlzYZn6q7jWidOfO19GnVK33ee13e+PBs
- M8KudF75OczR3CzoYgebIYxJgIM2gdh3PRx6rw1rS3ImvXd9rmACj0g+HKw42EfUAR+t
- BLDyOe4jvfY27XD1fQZ6QDz1SxrWKMfXzgWJMIm4fC98nLKXX6a6cizOtE1AkbYNrYuv
- SG8Q==
-X-Gm-Message-State: AOJu0YzXSrYt31LZYl2OW1Vwzlbr64EkZ5NwDeoV0M21GMyb47Pf20Js
- 8tx6czowVEaPTTFMhcsr/nQ7meWoZCURT29IPvhJqkWgSC1bV9iJWFFVMCFNDsXHk1ZqOK/Pb+i
- Cx4DcXzyz1Tu3xuuMwQNViHfQxM/fYoKOC66ADg==
-X-Google-Smtp-Source: AGHT+IEjQ0hHwgSQjIdYnGUZ3mXL9/J8smVaAPbjNuKVJOKiVEFMpKi81VoALLDIu/y55XaRWN2F7NRsRpWefyCOjH4=
-X-Received: by 2002:a05:6a20:1581:b0:1a9:dd82:a42a with SMTP id
- adf61e73a8af0-1b26f18576fmr1650694637.31.1717149608685; Fri, 31 May 2024
- 03:00:08 -0700 (PDT)
+ bh=gymVY1PAQxRgpZfTHzwwSmyb+S7NVyoWP3O4DM8qXfQ=;
+ b=rSY+nBM0ccXV3+wMxrhUt4ShNfvZD2XTnWDdvTZCafMdDnSAsQ1dK/NVgxz5+RWs1N
+ 7K+X/TTePWA9E4MHhDC8ZVpbQLd8bJjsbwuKT2/Gw5/CJDnZIFhk9BlpNyOQBpzN6GTl
+ spyZ8AoSCeSA5S/J0pzVlPI/AuVeCy1KhnowEnbCcRmZax8gwh1LQfOXzZzJzRCyo3LE
+ GP4KR57iTeJJYTE2ucH/a0gyiWOiUHfpT8dGKFDDJHXcupipgx4T4t0/1Qew3TVBTLsJ
+ lP04zpESsY3nURy1xKUiuBZxnmtEolJJXafWEPXKk41qxkQb4chrMSwilArWAV4r0G8A
+ ggyA==
+X-Gm-Message-State: AOJu0YwMdUHIkbcoo/VAXw73Imghxgk469dP4G3fTCn4uh2rDETwUiV1
+ piNKwtIu2nIl77hPgprnDIg86bzNrI5j3CxQ+x9e2Dc3WjDKELP2qaTAAHwBqMjW/DJsYXv8wtM
+ N3pGS6leNAYCv5LhIq7k4sduQAU9cKHkKFavd6A==
+X-Google-Smtp-Source: AGHT+IHqRtvoPVy12SZcx7PoY4l52+qT/roOg3mHVXxcGtbtqK3taHVMe+pnlnouTe6dkUl/sz/8Aq0BEjE+kc4Rd50=
+X-Received: by 2002:a05:6a21:6d8a:b0:1af:d07a:37c8 with SMTP id
+ adf61e73a8af0-1b26f22b0e3mr1797335637.37.1717149839126; Fri, 31 May 2024
+ 03:03:59 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240528140955.1960172-1-raymond.mao@linaro.org>
- <20240528140955.1960172-22-raymond.mao@linaro.org>
-In-Reply-To: <20240528140955.1960172-22-raymond.mao@linaro.org>
+ <20240528140955.1960172-20-raymond.mao@linaro.org>
+In-Reply-To: <20240528140955.1960172-20-raymond.mao@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 31 May 2024 12:59:32 +0300
-Message-ID: <CAC_iWj+16ytziB5tT+hRF5gkyh+Mm_U9fWEdo6r4w72rzVmghg@mail.gmail.com>
-Subject: Re: [PATCH v3 21/25] mbedtls: add RSA helper layer on MbedTLS
+Date: Fri, 31 May 2024 13:03:22 +0300
+Message-ID: <CAC_iWjK7st0ttFuuX22eMtRraGin2dikMUu5_C1cY8J9KvKESw@mail.gmail.com>
+Subject: Re: [PATCH v3 19/25] mbedtls: add MSCode parser porting layer
 To: Raymond Mao <raymond.mao@linaro.org>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Stefan Bosch <stefan_b@posteo.net>,
@@ -77,15 +77,14 @@ Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sean Anderson <seanga2@gmail.com>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Jesse Taube <mr.bossman075@gmail.com>,
- Bryan Brattlof <bb@ti.com>, 
- "Leon M. Busch-George" <leon@georgemail.eu>, Sergei Antonov <saproj@gmail.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Sergei Antonov <saproj@gmail.com>, Ilya Lukin <4.shket@gmail.com>,
+ Bin Meng <bmeng@tinylab.org>, 
  Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>, 
- Manorit Chawdhry <m-chawdhry@ti.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Alexander Gendin <agendin@matrox.com>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -104,110 +103,160 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
-
-[...]
-
-> +
-> +/**
-> + * rsa_parse_pub_key() - decodes the BER encoded buffer and stores in the
-> + *                       provided struct rsa_key, pointers to the raw key as is,
-> + *                       so that the caller can copy it or MPI parse it, etc.
+On Tue, 28 May 2024 at 17:17, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Add porting layer for MSCode on top of MbedTLS ASN1 library.
+>
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
+> Changes in v2
+> - Move the porting layer to MbedTLS dir.
+> Changes in v3
+> - None.
+>
+>  lib/mbedtls/Makefile        |   1 +
+>  lib/mbedtls/mscode_parser.c | 111 ++++++++++++++++++++++++++++++++++++
+>  2 files changed, 112 insertions(+)
+>  create mode 100644 lib/mbedtls/mscode_parser.c
+>
+> diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
+> index 005b8a25320..f0b8a1c4003 100644
+> --- a/lib/mbedtls/Makefile
+> +++ b/lib/mbedtls/Makefile
+> @@ -26,6 +26,7 @@ obj-$(CONFIG_MBEDTLS_LIB_X509) += x509_mbedtls.o
+>  x509_mbedtls-$(CONFIG_$(SPL_)ASYMMETRIC_PUBLIC_KEY_SUBTYPE) += public_key.o
+>  x509_mbedtls-$(CONFIG_$(SPL_)X509_CERTIFICATE_PARSER) += x509_cert_parser.o
+>  x509_mbedtls-$(CONFIG_$(SPL_)PKCS7_MESSAGE_PARSER) += pkcs7_parser.o
+> +x509_mbedtls-$(CONFIG_$(SPL_)MSCODE_PARSER) += mscode_parser.o
+>
+>  obj-$(CONFIG_MBEDTLS_LIB_CRYPTO) += mbedtls_lib_crypto.o
+>  mbedtls_lib_crypto-y := \
+> diff --git a/lib/mbedtls/mscode_parser.c b/lib/mbedtls/mscode_parser.c
+> new file mode 100644
+> index 00000000000..34715f3a137
+> --- /dev/null
+> +++ b/lib/mbedtls/mscode_parser.c
+> @@ -0,0 +1,111 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * MSCode parser using MbedTLS ASN1 library
 > + *
-> + * @rsa_key:   struct rsa_key key representation
-> + * @key:       key in BER format
-> + * @key_len:   length of key
-> + *
-> + * Return:     0 on success or error code in case of error
+> + * Copyright (c) 2024 Linaro Limited
+> + * Author: Raymond Mao <raymond.mao@linaro.org>
 > + */
-> +int rsa_parse_pub_key(struct rsa_key *rsa_key, const void *key,
-> +                     unsigned int key_len)
+> +
+> +#include <linux/kernel.h>
+> +#include <linux/err.h>
+> +#include <crypto/pkcs7.h>
+> +#include <crypto/mscode.h>
+> +
+> +/*
+> + * Parse a Microsoft Individual Code Signing blob
+> + *
+> + * U.P.SEQUENCE {
+> + *    U.P.OBJECTIDENTIFIER 1.3.6.1.4.1.311.2.1.15 (SPC_PE_IMAGE_DATA_OBJID)
+> + *    U.P.SEQUENCE {
+> + *       U.P.BITSTRING NaN : 0 unused bit(s);
+> + *       [C.P.0] {
+> + *          [C.P.2] {
+> + *             [C.P.0] <arbitrary string>
+> + *          }
+> + *       }
+> + *    }
+> + * }
+> + * U.P.SEQUENCE {
+> + *    U.P.SEQUENCE {
+> + *       U.P.OBJECTIDENTIFIER <digest algorithm OID>
+> + *       U.P.NULL
+> + *    }
+> + *    U.P.OCTETSTRING <PE image digest>
+> + * }
+
+You need to describe the function arguments as well on the comment
+
+> + *
+> + */
+> +int mscode_parse(void *_ctx, const void *content_data, size_t data_len,
+> +                size_t asn1hdrlen)
 > +{
-> +       int ret = 0;
-> +       mbedtls_pk_context pk;
-> +       mbedtls_rsa_context *rsa;
-> +
-> +       mbedtls_pk_init(&pk);
-> +
-> +       ret = mbedtls_pk_parse_public_key(&pk, (const unsigned char *)key,
-> +                                         key_len);
-> +       if (ret) {
-> +               pr_err("Failed to parse public key, ret:-0x%04x\n",
-> +                      (unsigned int)-ret);
-> +               ret = -EINVAL;
-> +               goto clean_pubkey;
-> +       }
-> +
-> +       /* Ensure that it is a RSA key */
-> +       if (mbedtls_pk_get_type(&pk) != MBEDTLS_PK_RSA) {
-> +               pr_err("Non-RSA keys are not supported\n");
-> +               ret = -EKEYREJECTED;
-> +               goto clean_pubkey;
-> +       }
-> +
-> +       /* Get RSA key context */
-> +       rsa = mbedtls_pk_rsa(pk);
-> +       if (!rsa) {
-> +               pr_err("Failed to get RSA key context, ret:-0x%04x\n",
-> +                      (unsigned int)-ret);
+> +       struct pefile_context *ctx = _ctx;
+> +       unsigned char *p = (unsigned char *)content_data;
+> +       unsigned char *end = (unsigned char *)content_data + data_len;
 
-Why do we need to cast the result here? Just print ret
-Also, would it make sense to create a mapping between mbedTLS API
-errors and internal error codes?
-instead of doing ret -EINVAL etc  we could have something like
-ret = mbedtls_to_errno(ret);
+Why are you dropping const here?
 
-> +               ret = -EINVAL;
-> +               goto clean_pubkey;
-> +       }
+> +       size_t len = 0;
+> +       int ret;
+> +       unsigned char *inner_p;
+> +       size_t seq_len = 0;
 > +
-> +       /* Parse modulus (n) */
-> +       rsa_key->n_sz = mbedtls_mpi_size(&rsa->N);
-> +       rsa_key->n = kzalloc(rsa_key->n_sz, GFP_KERNEL);
-> +       if (!rsa_key->n) {
-> +               ret = -ENOMEM;
-> +               goto clean_pubkey;
-> +       }
-> +       ret = mbedtls_mpi_write_binary(&rsa->N, (unsigned char *)rsa_key->n,
-> +                                      rsa_key->n_sz);
-> +       if (ret) {
-> +               pr_err("Failed to parse modulus (n), ret:-0x%04x\n",
-> +                      (unsigned int)-ret);
-
-Same here
-
-> +               ret = -EINVAL;
-> +               goto clean_modulus;
-> +       }
+> +       ret = mbedtls_asn1_get_tag(&p, end, &seq_len,
+> +                                  MBEDTLS_ASN1_CONSTRUCTED |
+> +                                  MBEDTLS_ASN1_SEQUENCE);
+> +       if (ret)
+> +               return ret;
 > +
-> +       /* Parse public exponent (e) */
-> +       rsa_key->e_sz = mbedtls_mpi_size(&rsa->E);
-> +       rsa_key->e = kzalloc(rsa_key->e_sz, GFP_KERNEL);
-> +       if (!rsa_key->e) {
-> +               ret = -ENOMEM;
-> +               goto clean_modulus;
-> +       }
-> +       ret = mbedtls_mpi_write_binary(&rsa->E, (unsigned char *)rsa_key->e,
-> +                                      rsa_key->e_sz);
-> +       if (!ret)
-> +               return 0;
+> +       inner_p = p;
+> +       ret = mbedtls_asn1_get_tag(&inner_p, inner_p + seq_len, &len, MBEDTLS_ASN1_OID);
+> +       if (ret)
+> +               return ret;
 > +
-> +       pr_err("Failed to parse public exponent (e), ret:-0x%04x\n",
-> +              (unsigned int)-ret);
-
- and here
-
-> +       ret = -EINVAL;
+> +       /* Sanity check on the PE Image Data OID (1.3.6.1.4.1.311.2.1.15) */
+> +       if (MBEDTLS_OID_CMP_RAW(MBEDTLS_OID_MICROSOFT_PEIMAGEDATA, inner_p, len))
+> +               return -EINVAL;
 > +
-> +       kfree(rsa_key->e);
-> +clean_modulus:
-> +       kfree(rsa_key->n);
-> +clean_pubkey:
-> +       mbedtls_pk_free(&pk);
-> +       return ret;
+> +       p += seq_len;
+> +       ret = mbedtls_asn1_get_tag(&p, end, &seq_len,
+> +                                  MBEDTLS_ASN1_CONSTRUCTED |
+> +                                  MBEDTLS_ASN1_SEQUENCE);
+> +       if (ret)
+> +               return ret;
+> +
+> +       ret = mbedtls_asn1_get_tag(&p, p + seq_len, &seq_len,
+> +                                  MBEDTLS_ASN1_CONSTRUCTED |
+> +                                  MBEDTLS_ASN1_SEQUENCE);
+> +       if (ret)
+> +               return ret;
+> +
+> +       inner_p = p;
+> +
+> +       /*
+> +        * Check if the inner sequence contains a supported hash
+> +        * algorithm OID
+> +        */
+> +       ret = mbedtls_asn1_get_tag(&inner_p, inner_p + seq_len, &len, MBEDTLS_ASN1_OID);
+> +       if (ret)
+> +               return ret;
+> +
+> +       if (!MBEDTLS_OID_CMP_RAW(MBEDTLS_OID_DIGEST_ALG_MD5, inner_p, len))
+> +               ctx->digest_algo = "md5";
+> +       else if (!MBEDTLS_OID_CMP_RAW(MBEDTLS_OID_DIGEST_ALG_SHA1, inner_p, len))
+> +               ctx->digest_algo = "sha1";
+> +       else if (!MBEDTLS_OID_CMP_RAW(MBEDTLS_OID_DIGEST_ALG_SHA224, inner_p, len))
+> +               ctx->digest_algo = "sha224";
+> +       else if (!MBEDTLS_OID_CMP_RAW(MBEDTLS_OID_DIGEST_ALG_SHA256, inner_p, len))
+> +               ctx->digest_algo = "sha256";
+> +       else if (!MBEDTLS_OID_CMP_RAW(MBEDTLS_OID_DIGEST_ALG_SHA384, inner_p, len))
+> +               ctx->digest_algo = "sha384";
+> +       else if (!MBEDTLS_OID_CMP_RAW(MBEDTLS_OID_DIGEST_ALG_SHA512, inner_p, len))
+> +               ctx->digest_algo = "sha512";
+> +
+> +       if (!ctx->digest_algo)
+> +               return -EINVAL;
+> +
+> +       p += seq_len;
+> +       ret = mbedtls_asn1_get_tag(&p, end, &len, MBEDTLS_ASN1_OCTET_STRING);
+> +       if (ret)
+> +               return ret;
+> +
+> +       ctx->digest = p;
+> +       ctx->digest_len = len;
+> +
+> +       return 0;
 > +}
 > --
 > 2.25.1
 >
+
 Thanks
 /Ilias
