@@ -4,78 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28C34C25B75
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 04:10:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F6F0C25B75
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 05:51:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CE3B882D7;
-	Fri, 31 May 2024 06:10:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3ACB88875A;
+	Fri, 31 May 2024 07:51:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="U3sWXlz0";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="N5/f5y4d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B66CE88755; Fri, 31 May 2024 06:10:11 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id E3B1B88763; Fri, 31 May 2024 07:51:05 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E85E7882D0
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 06:10:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 57637882C4
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 07:51:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44V49uOZ104854;
- Thu, 30 May 2024 23:09:56 -0500
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j-keerthy@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44V5owMX106449;
+ Fri, 31 May 2024 00:50:58 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1717128596;
- bh=g0J5JLsJxIo0nUHxR6bhwUpH1kZSOEoH+GxhTG8nVDI=;
- h=From:To:CC:Subject:In-Reply-To:References:Date;
- b=U3sWXlz0wARyOQ4qJQOLJVtnFFPkHaWyaSExdrruRPs/Awo2ISuIgFFB9twKk6pAh
- 4dGmwKPKSPVTH3B6hfQS8ojA8YCarO49Q7y8MskLur0CLE3ejUMG8RYafXeJkXFGVf
- afkmgnOWmq9t+GfrOlBTq423ivTR/9nwwsjQ1ysw=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44V49ubG011316
+ s=ti-com-17Q1; t=1717134658;
+ bh=3g0ZEo0OnEWfGU6DJPZwKrHB71KSrldVbQS92EXPVYA=;
+ h=From:To:CC:Subject:Date;
+ b=N5/f5y4dxvnXo0hoBkSLsjBnEkZM6Y4BKe0TI2pHv0kWPNnzqnkY9ojEQBxXsh0eP
+ x8XBx305Y4UnmgsKWMbeYa93/+VEd2WjFJlnBdS5JeXDPXg6+ViRhrWTyGFJH27zn8
+ +ygRrxNsM1SKlGZpVgKqGCeolb3HYtt8pbVqWhKU=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44V5owAw035686
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 30 May 2024 23:09:56 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 30
- May 2024 23:09:56 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 31 May 2024 00:50:58 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 31
+ May 2024 00:50:57 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 30 May 2024 23:09:56 -0500
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44V49u8F017552;
- Thu, 30 May 2024 23:09:56 -0500
-From: Jon Humphreys <j-humphreys@ti.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-CC: Roger Quadros <rogerq@kernel.org>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>, Kamlesh Gurudasani <kamlesh@ti.com>, "Manorit
- Chawdhry" <m-chawdhry@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>, "Simon Glass" <sjg@chromium.org>,
- Nikhil M Jain <n-jain1@ti.com>,
- "Neha Malcom Francis" <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
- Maxime Ripard <mripard@kernel.org>, Siddharth Vadapalli
- <s-vadapalli@ti.com>, "Bryan Brattlof" <bb@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon
- <nm@ti.com>, Tom Rini <trini@konsulko.com>, Sughosh Ganu
- <sughosh.ganu@linaro.org>,
- "Masahisa Kojima" <kojima.masahisa@socionext.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH v4 15/19] board: am62px: Define capsule update firmware
- info
-In-Reply-To: <CAC_iWjLMERkDYF_-Eu5mg13q_PjjfjcwgsTGxJ_SB6h6PdzXEA@mail.gmail.com>
-References: <20240509164123.1753050-1-j-humphreys@ti.com>
- <20240509164123.1753050-16-j-humphreys@ti.com> <Zk--WFQJC-wi5zE5@hera>
- <86bk4vcjab.fsf@udb0321960.dhcp.ti.com>
- <CAC_iWjLMERkDYF_-Eu5mg13q_PjjfjcwgsTGxJ_SB6h6PdzXEA@mail.gmail.com>
-Date: Thu, 30 May 2024 23:09:56 -0500
-Message-ID: <86ikyufwq3.fsf@udb0321960.dhcp.ti.com>
+ Frontend Transport; Fri, 31 May 2024 00:50:57 -0500
+Received: from ubuntu.dhcp.ti.com (ltpw09g681.dhcp.ti.com [172.24.28.144])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44V5os1W009636;
+ Fri, 31 May 2024 00:50:55 -0500
+From: Keerthy <j-keerthy@ti.com>
+To: <trini@konsulko.com>, <jh80.chung@samsung.com>, <sjg@chromium.org>
+CC: <j-keerthy@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>,
+ <praneeth@ti.com>, <u-boot@lists.denx.de>
+Subject: [PATCH] power: regulator: tps6287x: Add driver for TPS6287x step down
+ convertors
+Date: Fri, 31 May 2024 11:20:41 +0530
+Message-ID: <20240531055041.32636-1-j-keerthy@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -95,142 +77,244 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
+Add driver for TPS6287x step down convertors
 
-> Hi Jon,
->
-> On Fri, 24 May 2024 at 18:38, Jon Humphreys <j-humphreys@ti.com> wrote:
->>
->> Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
->>
->> > Hi Jonathan
->> >
->> > Thanks for working on this
->> >
->> > On Thu, May 09, 2024 at 11:41:19AM -0500, Jonathan Humphreys wrote:
->> >> Define the firmware components updatable via EFI capsule update, including
->> >> defining capsule GUIDs for the various firmware components for the AM62px
->> >> SK.
->> >>
->> >> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
->> >> ---
->> >>  board/ti/am62px/evm.c        | 32 ++++++++++++++++++++++++++++++++
->> >>  include/configs/am62px_evm.h | 24 ++++++++++++++++++++++++
->> >>  2 files changed, 56 insertions(+)
->> >>
->> >> diff --git a/board/ti/am62px/evm.c b/board/ti/am62px/evm.c
->> >> index 97a95ce8cc2..6d0f66e5dc0 100644
->> >> --- a/board/ti/am62px/evm.c
->> >> +++ b/board/ti/am62px/evm.c
->> >> @@ -6,6 +6,7 @@
->> >>   *
->> >>   */
->> >>
->> >> +#include <efi_loader.h>
->> >>  #include <asm/arch/hardware.h>
->> >>  #include <asm/io.h>
->> >>  #include <dm/uclass.h>
->> >> @@ -13,6 +14,37 @@
->> >>  #include <fdt_support.h>
->> >>  #include <spl.h>
->> >>
->> >> +struct efi_fw_image fw_images[] = {
->> >
->> > It's better if we add an
->> > #if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
->> > for both of the structs that follow (and it applies to all your patches)
->> >
->>
->> Ilias, thanks for the reviews.
->>
->> I had this protected in #if's in an earlier patch set, as you suggest here.
->> However, in those reviews, Roger recommended that we don't do that and put
->> conditions around the use of it in set_dfu_alt_info().
->>
->
-> Hmm but the function prototype itself is on an ifdef. If you want to
-> remove the ifdef you got to do it everywhere
->
+Data sheet: https://www.ti.com/lit/ds/slvsgc5a/slvsgc5a.pdf
 
-Are you referring to set_dfu_alt_info() which is guarded by
-CONFIG_SET_DFU_ALT_INFO?
+Signed-off-by: Keerthy <j-keerthy@ti.com>
+---
+ drivers/power/regulator/Kconfig              |  18 ++
+ drivers/power/regulator/Makefile             |   1 +
+ drivers/power/regulator/tps6287x_regulator.c | 172 +++++++++++++++++++
+ 3 files changed, 191 insertions(+)
+ create mode 100644 drivers/power/regulator/tps6287x_regulator.c
 
-If so, that is separate but I can add a CONFIG_SET_DFU_ALT_INFO guard
-around the definition, for now. But IMO it is a bit of a mess because it's
-use and board specific defs are guarded by CONFIG_SET_DFU_ALT_INFO but the
-weak/default definition is guarded by CONFIG_EFI_CAPSULE_FIRMWARE, which
-causes problems because the configs are not always the same for all builds.
-I was wanting to fix that too so I might do that as a separate patch and
-make that patch a prerequisite for this series, which then allows me to
-remove the definitions of set_dfu_alt_info() in this series.
+diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kconfig
+index 102ec7bc5f..db4b40c35e 100644
+--- a/drivers/power/regulator/Kconfig
++++ b/drivers/power/regulator/Kconfig
+@@ -375,6 +375,15 @@ config DM_REGULATOR_TPS80031
+ 	features for TPS80031/TPS80032 PMICs. The driver implements
+ 	get/set api for: value and enable.
+ 
++config DM_REGULATOR_TPS6287X
++	bool "Enable driver for TPS6287x Power Regulator"
++	depends on DM_REGULATOR
++	help
++	The TPS6287X is a step down converter with a fast transient
++	response. This driver supports all four variants of the chip
++	(TPS62870, TPS62871, TPS62872, TPS62873). It implements the
++	get/set api for value only, as the power line is always on.
++
+ config DM_REGULATOR_STPMIC1
+ 	bool "Enable driver for STPMIC1 regulators"
+ 	depends on DM_REGULATOR && PMIC_STPMIC1
+@@ -394,6 +403,15 @@ config DM_REGULATOR_ANATOP
+ 	regulators. It is recommended that this option be enabled on
+ 	i.MX6 platform.
+ 
++config SPL_DM_REGULATOR_TPS6287X
++	bool "Enable driver for TPS6287x Power Regulator"
++	depends on SPL_DM_REGULATOR
++	help
++	The TPS6287X is a step down converter with a fast transient
++	response. This driver supports all four variants of the chip
++	(TPS62870, TPS62871, TPS62872, TPS62873). It implements the
++	get/set api for value only, as the power line is always on.
++
+ config SPL_DM_REGULATOR_STPMIC1
+ 	bool "Enable driver for STPMIC1 regulators in SPL"
+ 	depends on SPL_DM_REGULATOR && PMIC_STPMIC1
+diff --git a/drivers/power/regulator/Makefile b/drivers/power/regulator/Makefile
+index f79932d833..6335e5566d 100644
+--- a/drivers/power/regulator/Makefile
++++ b/drivers/power/regulator/Makefile
+@@ -34,6 +34,7 @@ obj-$(CONFIG_$(SPL_)DM_REGULATOR_STM32_VREFBUF) += stm32-vrefbuf.o
+ obj-$(CONFIG_DM_REGULATOR_TPS65910) += tps65910_regulator.o
+ obj-$(CONFIG_$(SPL_)DM_REGULATOR_TPS65911) += tps65911_regulator.o
+ obj-$(CONFIG_DM_REGULATOR_TPS62360) += tps62360_regulator.o
++obj-$(CONFIG_$(SPL_)DM_REGULATOR_TPS6287X) += tps6287x_regulator.o
+ obj-$(CONFIG_$(SPL_)DM_REGULATOR_TPS80031) += tps80031_regulator.o
+ obj-$(CONFIG_$(SPL_)DM_REGULATOR_STPMIC1) += stpmic1.o
+ obj-$(CONFIG_DM_REGULATOR_TPS65941) += tps65941_regulator.o
+diff --git a/drivers/power/regulator/tps6287x_regulator.c b/drivers/power/regulator/tps6287x_regulator.c
+new file mode 100644
+index 0000000000..6d18571919
+--- /dev/null
++++ b/drivers/power/regulator/tps6287x_regulator.c
+@@ -0,0 +1,172 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2024 Texas Instruments Incorporated - http://www.ti.com/
++ * Keerthy <j-keerthy@ti.com>
++ */
++
++#include <dm.h>
++#include <i2c.h>
++#include <dm/device_compat.h>
++#include <power/regulator.h>
++
++#define TPS6287X_REG_VSET			0x0
++#define TPS6287X_REG_CONTROL1			0x1
++#define TPS6287X_REG_CONTROL2			0x2
++#define TPS6287X_REG_CONTROL3			0x3
++#define TPS6287X_REG_STATUS			0x4
++#define TPS6287X_REG_VSET_VSET_MASK		0xff
++#define TPS6287X_REG_CONTROL2_VRANGE_MASK	0xc
++
++struct tps6287x_regulator_config {
++	u32 vmin;
++	u32 vmax;
++};
++
++struct tps6287x_regulator_pdata {
++	u8 vsel_offset;
++	struct udevice *i2c;
++	struct tps6287x_regulator_config *config;
++};
++
++static struct tps6287x_regulator_config tps6287x_data = {
++	.vmin = 400000,
++	.vmax = 3350000,
++};
++
++static int tps6287x_regulator_set_value(struct udevice *dev, int uV)
++{
++	struct tps6287x_regulator_pdata *pdata = dev_get_plat(dev);
++	u8 regval, vset;
++	int ret;
++
++	if (uV < pdata->config->vmin || uV > pdata->config->vmax)
++		return -EINVAL;
++	/*
++	 * Based on the value of VRANGE bit field of CONTROL2 reg the range
++	 * varies.
++	 */
++	ret = dm_i2c_read(pdata->i2c, TPS6287X_REG_CONTROL2, &regval, 1);
++	if (ret) {
++		dev_err(dev, "CTRL2 reg read failed: %d\n", ret);
++		return ret;
++	}
++
++	regval &= TPS6287X_REG_CONTROL2_VRANGE_MASK;
++	regval >>= ffs(TPS6287X_REG_CONTROL2_VRANGE_MASK) - 1;
++
++	/*
++	 * VRANGE = 0. Increment step 1250 uV starting with 0 --> 400000 uV
++	 * VRANGE = 1. Increment step 2500 uV starting with 0 --> 400000 uV
++	 * VRANGE = 2. Increment step 5000 uV starting with 0 --> 400000 uV
++	 * VRANGE = 3. Increment step 10000 uV starting with 0 --> 800000 uV
++	 */
++	switch (regval) {
++	case 0:
++		vset = (uV - 400000) / 1250;
++		break;
++	case 1:
++		vset = (uV - 400000) / 2500;
++		break;
++	case 2:
++		vset = (uV - 400000) / 5000;
++		break;
++	case 3:
++		vset = (uV - 800000) / 10000;
++		break;
++	default:
++		pr_err("%s: invalid regval %d\n", dev->name, regval);
++		return -EINVAL;
++	}
++
++	return dm_i2c_write(pdata->i2c, TPS6287X_REG_VSET, &vset, 1);
++}
++
++static int tps6287x_regulator_get_value(struct udevice *dev)
++{
++	u8 regval, vset;
++	int uV;
++	int ret;
++	struct tps6287x_regulator_pdata *pdata = dev_get_plat(dev);
++
++	/*
++	 * Based on the value of VRANGE bit field of CONTROL2 reg the range
++	 * varies.
++	 */
++	ret = dm_i2c_read(pdata->i2c, TPS6287X_REG_CONTROL2, &regval, 1);
++	if (ret) {
++		dev_err(dev, "i2c read failed: %d\n", ret);
++		return ret;
++	}
++
++	regval &= TPS6287X_REG_CONTROL2_VRANGE_MASK;
++	regval >>= ffs(TPS6287X_REG_CONTROL2_VRANGE_MASK) - 1;
++
++	ret = dm_i2c_read(pdata->i2c, TPS6287X_REG_VSET, &vset, 1);
++	if (ret) {
++		dev_err(dev, "i2c VSET read failed: %d\n", ret);
++		return ret;
++	}
++
++	/*
++	 * VRANGE = 0. Increment step 1250 uV starting with 0 --> 400000 uV
++	 * VRANGE = 1. Increment step 2500 uV starting with 0 --> 400000 uV
++	 * VRANGE = 2. Increment step 5000 uV starting with 0 --> 400000 uV
++	 * VRANGE = 3. Increment step 10000 uV starting with 0 --> 800000 uV
++	 */
++	switch (regval) {
++	case 0:
++		uV = 400000 + vset * 1250;
++		break;
++	case 1:
++		uV = 400000 + vset * 2500;
++		break;
++	case 2:
++		uV = 400000 + vset * 5000;
++		break;
++	case 3:
++		uV = 800000 + vset * 10000;
++		break;
++	default:
++		pr_err("%s: invalid regval %d\n", dev->name, regval);
++		return -EINVAL;
++	}
++
++	return uV;
++}
++
++static int tps6287x_regulator_probe(struct udevice *dev)
++{
++	struct tps6287x_regulator_pdata *pdata = dev_get_plat(dev);
++	int ret, slave_id;
++
++	pdata->config = (void *)dev_get_driver_data(dev);
++
++	slave_id = devfdt_get_addr_index(dev, 0);
++
++	ret = i2c_get_chip(dev->parent, slave_id, 1, &pdata->i2c);
++	if (ret) {
++		dev_err(dev, "i2c dev get failed.\n");
++		return ret;
++	}
++
++	return 0;
++}
++
++static const struct dm_regulator_ops tps6287x_regulator_ops = {
++	.get_value  = tps6287x_regulator_get_value,
++	.set_value  = tps6287x_regulator_set_value,
++};
++
++static const struct udevice_id tps6287x_regulator_ids[] = {
++	{ .compatible = "ti,tps62873", .data = (ulong)&tps6287x_data },
++	{ },
++};
++
++U_BOOT_DRIVER(tps6287x_regulator) = {
++	.name = "tps6287x_regulator",
++	.id = UCLASS_REGULATOR,
++	.ops = &tps6287x_regulator_ops,
++	.of_match = tps6287x_regulator_ids,
++	.plat_auto	= sizeof(struct tps6287x_regulator_pdata),
++	.probe = tps6287x_regulator_probe,
++};
+-- 
+2.17.1
 
-Jon
-
-> Thanks
-> /Ilias
->
->> https://lore.kernel.org/all/b19f02e0-a80a-46d6-8296-5d516577766a@kernel.org/
->>
->> I assume the reasoning is to reduce #if's in the code and rely on the
->> compiler to be smart enough to remove dead data. (Roger, speak up if I
->> misrepresent you.)
->>
->> I'm ok to do either way.  What is the preferred way in U-Boot?
->>
->> Thanks
->> Jon
->>
->> >> +    {
->> >> +            .image_type_id = AM62PX_SK_TIBOOT3_IMAGE_GUID,
->> >> +            .fw_name = u"AM62PX_SK_TIBOOT3",
->> >> +            .image_index = 1,
->> >> +    },
->> >> +    {
->> >> +            .image_type_id = AM62PX_SK_SPL_IMAGE_GUID,
->> >> +            .fw_name = u"AM62PX_SK_SPL",
->> >> +            .image_index = 2,
->> >> +    },
->> >> +    {
->> >> +            .image_type_id = AM62PX_SK_UBOOT_IMAGE_GUID,
->> >> +            .fw_name = u"AM62PX_SK_UBOOT",
->> >> +            .image_index = 3,
->> >> +    }
->> >> +};
->> >> +
->> >> +struct efi_capsule_update_info update_info = {
->> >> +    .dfu_string = "sf 0:0=tiboot3.bin raw 0 80000;"
->> >> +    "tispl.bin raw 80000 200000;u-boot.img raw 280000 400000",
->> >> +    .num_images = ARRAY_SIZE(fw_images),
->> >> +    .images = fw_images,
->> >> +};
->> >
->> > I haven't worked on any TI platforms lately so I cant say much about the
->> > naming and the flash regions. The definition seems correct
->> >
->> >
->> >> +
->> >> +void set_dfu_alt_info(char *interface, char *devstr)
->> >> +{
->> >> +    if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
->> >> +            env_set("dfu_alt_info", update_info.dfu_string);
->> >> +}
->> >
->> > There's a CONFIG_SET_DFU_ALT_INFO symbol. This better if we add a check here
->> > as well
->> >
->> >> +
->> >>  int board_init(void)
->> >>  {
->> >>      return 0;
->> >> diff --git a/include/configs/am62px_evm.h b/include/configs/am62px_evm.h
->> >> index 06b12860e21..57a1ba9dc3c 100644
->> >> --- a/include/configs/am62px_evm.h
->> >> +++ b/include/configs/am62px_evm.h
->> >> @@ -8,6 +8,30 @@
->> >>  #ifndef __CONFIG_AM62PX_EVM_H
->> >>  #define __CONFIG_AM62PX_EVM_H
->> >>
->> > [...]
->> >
->> > Regards
->> > /Ilias
