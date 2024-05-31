@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF349C25B7E
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 13:12:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A639C25B75
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 13:13:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0A99887B8;
-	Fri, 31 May 2024 15:12:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 14AE6887A1;
+	Fri, 31 May 2024 15:12:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xNkGxm60";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="PHbFCgtc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59626887B4; Fri, 31 May 2024 15:12:07 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id D889A88789; Fri, 31 May 2024 15:12:09 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E56B887B2
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 15:12:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C1FB2887B5
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 15:12:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44VDC3jr121977;
- Fri, 31 May 2024 08:12:03 -0500
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44VDC6nV107451;
+ Fri, 31 May 2024 08:12:06 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1717161123;
- bh=62nelT02rBpMLmHCB8/8Y3Z8NgeKfEiKBs7ShMzye9M=;
+ s=ti-com-17Q1; t=1717161126;
+ bh=ud7BslR5zIUi8CwmILsAeXavzubQo82Cli05gDITe90=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=xNkGxm60Hzt2w/A/Sk5x83Kv8MrcUh3g/X/kgJAvEtH4jVw6mbwnRapnulzu2RSUj
- SykkbHqoQ01/8fzkI19hQt8Rr+JfCrvWHhII8rNh1RV62EMgSveb0xGMhRJAM/yXBa
- OmGfpdZSAwWOpouBlNSnu0pYLNe/6mH7hgURPisA=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44VDC3Jq054128
+ b=PHbFCgtceKEqzYnb3xzIA8UQ7cobUi6lK+A+pFLq40yLiZmRLWN9h4TFV4wMhcac1
+ SirojEmrdgcdX68D4MQyJSEVEmiMsd/VWWZ6srWqE/1k49FcF0sJ1tMNh18HNCZbR8
+ H2GRwS2Ta5gdZm9xsh3lDPS68uE4ApVtDqtW2f9U=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44VDC6ck130445
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 31 May 2024 08:12:03 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 31 May 2024 08:12:06 -0500
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 31
- May 2024 08:12:03 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ May 2024 08:12:05 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 31 May 2024 08:12:03 -0500
+ Frontend Transport; Fri, 31 May 2024 08:12:05 -0500
 Received: from PSDKL-Workstation0.dhcp.ti.com (psdkl-workstation0.dhcp.ti.com
  [172.24.227.91])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44VDBm6t063605;
- Fri, 31 May 2024 08:12:01 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44VDBm6u063605;
+ Fri, 31 May 2024 08:12:03 -0500
 From: Aniket Limaye <a-limaye@ti.com>
 To: <u-boot@lists.denx.de>, <trini@konsulko.com>
 CC: <u-kumar1@ti.com>, <n-francis@ti.com>, <m-chawdhry@ti.com>, <nm@ti.com>,
- Gowtham Tammana <g-tammana@ti.com>, Aniket Limaye <a-limaye@ti.com>
-Subject: [PATCH 5/6] arm: dts: k3-j7200: Add ESM PMIC support for tps659413
-Date: Fri, 31 May 2024 18:38:22 +0530
-Message-ID: <20240531130823.646311-6-a-limaye@ti.com>
+ Aniket Limaye <a-limaye@ti.com>
+Subject: [PATCH 6/6] configs: j7200_evm_r5: Add ESM config for J7200
+Date: Fri, 31 May 2024 18:38:23 +0530
+Message-ID: <20240531130823.646311-7-a-limaye@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240531130823.646311-1-a-limaye@ti.com>
 References: <20240531130823.646311-1-a-limaye@ti.com>
@@ -80,35 +80,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Gowtham Tammana <g-tammana@ti.com>
+From: Neha Malcom Francis <n-francis@ti.com>
 
-On J7200 processor board MCU_SAFETY_ERROR signal is routed to PMIC for
-ESM error handling. The PMIC resets the board on receipt of the signal.
-Enable the support for the board by adding ESM PMIC node.
+Add CONFIG_ESM_PMIC to enable PMIC initialization in J7200.
 
-Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
 Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 Signed-off-by: Aniket Limaye <a-limaye@ti.com>
 ---
- arch/arm/dts/k3-j7200-r5-common-proc-board.dts | 5 +++++
- 1 file changed, 5 insertions(+)
+ configs/j7200_evm_r5_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-index 176cc0a0fbb..9c83a629504 100644
---- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-+++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-@@ -99,6 +99,11 @@
- };
- 
- &tps659414 {
-+	esm: esm {
-+		compatible = "ti,tps659413-esm";
-+		bootph-pre-ram;
-+	};
-+
- 	regulators {
- 		bucka1: buck1 {
- 			bootph-pre-ram;
+diff --git a/configs/j7200_evm_r5_defconfig b/configs/j7200_evm_r5_defconfig
+index c9f586a1695..7b2ff65fcee 100644
+--- a/configs/j7200_evm_r5_defconfig
++++ b/configs/j7200_evm_r5_defconfig
+@@ -103,6 +103,7 @@ CONFIG_FS_LOADER=y
+ CONFIG_SPL_FS_LOADER=y
+ CONFIG_ESM_K3=y
+ CONFIG_K3_AVS0=y
++CONFIG_ESM_PMIC=y
+ CONFIG_SUPPORT_EMMC_BOOT=y
+ CONFIG_SPL_MMC_HS400_SUPPORT=y
+ CONFIG_MMC_SDHCI=y
 -- 
 2.34.1
 
