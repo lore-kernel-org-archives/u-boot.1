@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFAA9C25B7E
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 14:19:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 780BFC25B7E
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 14:19:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7253E88607;
-	Fri, 31 May 2024 16:19:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C81A8887E3;
+	Fri, 31 May 2024 16:19:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gNz+05Lt";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OiyzyeAI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 988A7885AF; Fri, 31 May 2024 16:19:09 +0200 (CEST)
-Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
- [IPv6:2607:f8b0:4864:20::52a])
+ id B390E887EA; Fri, 31 May 2024 16:19:12 +0200 (CEST)
+Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
+ [IPv6:2607:f8b0:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B87E887C7
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 16:19:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A03F887C7
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 16:19:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-6bce380eb9cso1569564a12.0
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 07:19:07 -0700 (PDT)
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-6bce380ebc2so1782274a12.0
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 07:19:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717165146; x=1717769946; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1717165149; x=1717769949; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SdA+Ja0l3niJi2ZcNdfu+oSibsez7U/ZuCEEo+TWLKM=;
- b=gNz+05LtYh27L2Dp0tqt6QEfMJaOdpmixmd4xcUfwDnQBsqThPLnFvVPey1PtyhArW
- U5jJ5zwoymg1ZO8gKoJebhb38OjWxaQtUIb7c+9OO3LGIoNwmaOKFTzQdFgj0Yf+07E5
- H0MzqNQikeo06FrvwCdsc+miPBTiAQSkEvfSckMoLVuLnDcg3jIB++FxV5XdizGFzYRo
- 89yy7YEvjUXY8+ZmF1Km8HD8AMj/1yVvhTZzH+VJZWolReBLA+K7vqhle2nh+6jMG13F
- jQuznqkc3h9fQdITz1y3oGoiQHa9arCdpCJRKnK1C72Ys5B7PBQ03efhyJchSjpq2q3N
- 4BVA==
+ bh=cin9JKFG0fxFovjADZZvQtlw+A+m3bxqoWJeRsLkehw=;
+ b=OiyzyeAIlJm/GP15wEtJVw3ztwoJIVqyYIqLjQGAO1lz7h2Z7/8zKrXHfD5J6YOblS
+ fofV60UgfSivbz2GKeAUGlJ+C/aE9VfLUAxi6Vd9kG0t2bACDdXSckpVKrE9nX7nJ0ca
+ s17ChB0R0Hl6SDBZlDh4XfRLnzdQrETK+zeCvQrAX4tAgiUF++n+T7G96JKWWryXxNEj
+ 7Q6uSDk9ZOLDRLKuVcVAk5/s+mwy5Jv3KSX3SdLWpHZJOpL5xHtIwERs+i97YG9s4INY
+ RB/ItBNzoUsA/FUYESp63XS3WmFl/n3V+Kyuc1RaclCy2/TXsWHBU2gkCDi984ZvL37V
+ KySw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717165146; x=1717769946;
+ d=1e100.net; s=20230601; t=1717165149; x=1717769949;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=SdA+Ja0l3niJi2ZcNdfu+oSibsez7U/ZuCEEo+TWLKM=;
- b=m4WF1UXQao5Q94qpjlFtiBBpr84pTWVVx/3qnlNSt1b99dgcrCZHc+yZV3AzxPDqXd
- HBac8kQXpvOdvnWmivSRKngTj4dcjKNHi2ie5DO7qCLQ739gDEH4u9Po1cteAO+68M9k
- 8QdMCY4FdxIzyJppPNrGwMB7PqyLBNgAbO3WnxspfsuO6wsxcxQ0RW1AxSKffSoJOdhw
- 4d1F7cMsKb17grlSAOZuYznJX8G6tjBGqi7KWtuXSIkZZ+hWnIDf9K9gxt1QHU7ETFJc
- MAofFeSDjacL41lDFEb0xlsNWeC/SIVPXemsQRQ0TarZMXjCUqYsre3xYbW6O/7nsQf9
- Z8eQ==
+ bh=cin9JKFG0fxFovjADZZvQtlw+A+m3bxqoWJeRsLkehw=;
+ b=fwpnG+FeKmg0JPPRUH7mHA45qKcVCW4HxMfxvLdxceBPUiW2q7mbMDQ4u8gEPKO0l+
+ p0My4Aoau4d0Yp27B3gpqxExkkSYijuntnSaXzmZkIFpGvbN4eSIbsd2hcUwebg/bbG9
+ N9zv5wQTxge2BBdbnk/sHtqtN93+WXDf3+CLEEkVlDLGl8qq9wBUBxG9NiOy0UulULrl
+ eXQc0fZgRTwFKQV3VcBye/0TBdRhThwAkISoH7Rg8pcXpiplxP2/vObOTuO1Y3yPIiN7
+ Pmg//vurvx/SBWtEeAkwz2kUGHGFqpCJp47+A4Xd3F0EKw2VhNiPmOylYEctmZabgSQg
+ k8Qw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWNQleeq1qVdDwK5PQTjRJYjbpXtvHJHKXyAUcIKmRJ3QUl/+8MuowUL+7OVxCyYyvtnRR0sWiJ0wmgj764/fV1Y73SrA==
-X-Gm-Message-State: AOJu0YzkX+CNyRNCx4g4/cMglZ7MgwYRoYf4Y1IMbGDd2SHUxcFYr8Pm
- 6MBQr2V0SIQBQl/qPkY9KVIkAa6nsAkKq46+lBPNUnlJD3LiuPza
-X-Google-Smtp-Source: AGHT+IEMCC/Jd04gyuYN702kKepMvnbscSxxcOL/cNBY6a1pT0KWxxfIKoEkoT3yoHRhIJivt9WGJw==
-X-Received: by 2002:a17:90a:f3c8:b0:2b4:b306:ffbc with SMTP id
- 98e67ed59e1d1-2c1dc57102fmr1779761a91.17.1717165145839; 
- Fri, 31 May 2024 07:19:05 -0700 (PDT)
+ AJvYcCUURa8xtWsQJNNciOIkM5YYUBM471sJ0PjSrOwKrjagT1Ev4QBmAa9TGNHQhjDp1scXN3+8lrAJ54p1TRGpyz6G/voMGw==
+X-Gm-Message-State: AOJu0YzL6UYtSJcwoDkhr+kU3ViwfGN1Lmx6qw/cBeOhIWiCfWzH+Iop
+ mF9X+nWPbj+iFTgyfXvSscKkdXk6dQJkswVLV+Hh0/PL2yQaH41z
+X-Google-Smtp-Source: AGHT+IFT6tftfkF2X7noMcJKWOPrRH3exWtRkQcjUX1gIY0/1I7hHnsFpvLhoTEHyfg+H3wyL8ftJw==
+X-Received: by 2002:a17:90b:2282:b0:2c1:b88a:d5ce with SMTP id
+ 98e67ed59e1d1-2c1dc58fd41mr1749242a91.28.1717165149015; 
+ Fri, 31 May 2024 07:19:09 -0700 (PDT)
 Received: from localhost.localdomain ([113.30.217.222])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2c1a775ccedsm3563935a91.1.2024.05.31.07.19.03
+ 98e67ed59e1d1-2c1a775ccedsm3563935a91.1.2024.05.31.07.19.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 May 2024 07:19:05 -0700 (PDT)
+ Fri, 31 May 2024 07:19:08 -0700 (PDT)
 From: Anand Moon <linux.amoon@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Kever Yang <kever.yang@rock-chips.com>, Jagan Teki <jagan@edgeble.ai>,
  Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>
 Cc: Anand Moon <anand@edgeble.ai>, Anand Moon <linux.amoon@gmail.com>,
  u-boot@lists.denx.de
-Subject: [PATCH RFC v2 04/23] rockchip: RK3399: Enable display cpuinfo support
- on all boards
-Date: Fri, 31 May 2024 19:48:18 +0530
-Message-ID: <20240531141837.13189-5-linux.amoon@gmail.com>
+Subject: [PATCH RFC v2 05/23] arm: rockchip: Enable display cpuinfo to be
+ build with SPL_BUILD
+Date: Fri, 31 May 2024 19:48:19 +0530
+Message-ID: <20240531141837.13189-6-linux.amoon@gmail.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240531141837.13189-1-linux.amoon@gmail.com>
 References: <20240531141837.13189-1-linux.amoon@gmail.com>
@@ -99,41 +99,30 @@ X-Virus-Status: Clean
 
 From: Anand Moon <anand@edgeble.ai>
 
-Enable DISPLAY_CPUINFO options to support on all RK3399 boards.
-Its used to determine the reset cause of the board.
+Changes help enable CONFIG_DISPLAY_CPUINFO to build with SPL_BUILD for
+SoC RK356x and RK3588.
 
 Cc: Jagan Teki <jagan@edgeble.ai>
 Signed-off-by: Anand Moon <anand@edgeble.ai>
 Signed-off-by: Anand Moon <linux.amoon@gmail.com>
 ---
- configs/chromebook_bob_defconfig   | 1 -
- configs/chromebook_kevin_defconfig | 1 -
- 2 files changed, 2 deletions(-)
+ arch/arm/mach-rockchip/Makefile | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/configs/chromebook_bob_defconfig b/configs/chromebook_bob_defconfig
-index acfe393410..2c1a8141c0 100644
---- a/configs/chromebook_bob_defconfig
-+++ b/configs/chromebook_bob_defconfig
-@@ -30,7 +30,6 @@ CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART=y
- # CONFIG_SPL_FIT_SIGNATURE is not set
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-gru-bob.dtb"
--# CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_BOARD_EARLY_INIT_R=y
- CONFIG_BLOBLIST=y
-diff --git a/configs/chromebook_kevin_defconfig b/configs/chromebook_kevin_defconfig
-index 95fdb418d8..f6649804c7 100644
---- a/configs/chromebook_kevin_defconfig
-+++ b/configs/chromebook_kevin_defconfig
-@@ -31,7 +31,6 @@ CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART=y
- # CONFIG_SPL_FIT_SIGNATURE is not set
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-gru-kevin.dtb"
--# CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_BOARD_EARLY_INIT_R=y
- CONFIG_BLOBLIST=y
+diff --git a/arch/arm/mach-rockchip/Makefile b/arch/arm/mach-rockchip/Makefile
+index c07bdaee4c..254c26034f 100644
+--- a/arch/arm/mach-rockchip/Makefile
++++ b/arch/arm/mach-rockchip/Makefile
+@@ -23,9 +23,6 @@ ifeq ($(CONFIG_SPL_BUILD)$(CONFIG_TPL_BUILD),)
+ # meaning "turn it off".
+ obj-y += boot_mode.o
+ obj-$(CONFIG_ROCKCHIP_COMMON_BOARD) += board.o
+-endif
+-
+-ifeq ($(CONFIG_TPL_BUILD),)
+ obj-$(CONFIG_DISPLAY_CPUINFO) += cpu-info.o
+ endif
+ 
 -- 
 2.44.0
 
