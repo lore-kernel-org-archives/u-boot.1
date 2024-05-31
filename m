@@ -4,166 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0B11C27C44
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 07:35:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DEEDC25B75
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 09:30:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 340CD88270;
-	Fri, 31 May 2024 09:35:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=weidmueller.com
+	by phobos.denx.de (Postfix) with ESMTP id 2DD20883FA;
+	Fri, 31 May 2024 11:30:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="pi6GPuqi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nu5AM9J3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 461AB883BD; Fri, 31 May 2024 09:35:53 +0200 (CEST)
-Received: from EUR01-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur01on071f.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe02::71f])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D8C4C8856E; Fri, 31 May 2024 11:30:44 +0200 (CEST)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2416C8819D
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 09:35:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
- header.from=weidmueller.com
+ by phobos.denx.de (Postfix) with ESMTPS id 3122F883A0
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 11:30:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Lukas.Funke-oss@weidmueller.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=XcewVPQcmE6CFDDqPUe0Kb4Fx8z/wW3xl1hJnekrrOcKd6FqEQvkUh8STKQDyBUgvRKHYx73kHsNWPM1snRzS3Ymzk69GH5+5Fmdsar9cc0TK3NQahq2JSbJc0xn5u7nC/InYb20IQtRLlVEbcIukbUcSHK+ZqC28fq29YE/vCJhiE8jhmwufxlAEoNaOHihPk0ccDDxFXLM7pD0XEaEjgiia7QPzolzkdBJE4Vi17WgJrocPkhwaNjfzeCx2CEe3BUpMIj99VKDIH3/7qk32R+eCM6ytYfrWouOXZRzNnNWXkSdXgH7rElDFdON6cQBplm99RkZO1z5HcQkx+KnKw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=D8MTKFOCERsYn8srwfee9zzHmkt9Qh6tA/vFE7ZYPEQ=;
- b=FtkPj/1vBunhN4b5T1GFZfpd1MjEKw9DZ5KwDzd0xPqz2cNDVMQcOTwK49LOrLuvxnkDbUrnfgMo7eI0baDZBbQQHL64awZPjXXhqJQZlmMImIScrh3vQ7Olt/EyHbekrBwo7k1UHeGKkXV5ZEodV1pPlKDh9s0pswCK8gmXsVjXc1AGRN9AjNt7SLy5fwLKjLalJFiqR4mtibQIWL/zPablI6M2xs/VxTDq14+otrXIAizQ92rYjTBM7qjiL0fHXaCIW33Lo0T8kHKI9WBlkZTEZc3cCGvvG6eoBq+Y3znRwA4nqevxRpLMNNcBzJI/H81bNRL8pOpN+rQjvFffug==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=weidmueller.com; dmarc=pass action=none
- header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-2c034676e02so1334226a91.1
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 02:30:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=weidmueller.onmicrosoft.com; s=selector1-weidmueller-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=D8MTKFOCERsYn8srwfee9zzHmkt9Qh6tA/vFE7ZYPEQ=;
- b=pi6GPuqipEeFkMh8727P6knswJe4H+MzvfV/vX1+NuOlQmOBYFL4RWqtgQZk09tjfjjVyMiih4HF9nXco3FRUDXvD+2iH0Po/Cs7MwhQEH5uPZIAVutnL7FW2nq/ATsasDhelgMBcyOOaTUGFJwgp/Iu5P7j7MoQwUJItEdVNQk=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=weidmueller.com;
-Received: from AS2PR08MB8431.eurprd08.prod.outlook.com (2603:10a6:20b:55a::18)
- by PA6PR08MB10393.eurprd08.prod.outlook.com (2603:10a6:102:3cb::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.21; Fri, 31 May
- 2024 07:35:49 +0000
-Received: from AS2PR08MB8431.eurprd08.prod.outlook.com
- ([fe80::aeb:1738:d59a:cee6]) by AS2PR08MB8431.eurprd08.prod.outlook.com
- ([fe80::aeb:1738:d59a:cee6%7]) with mapi id 15.20.7633.021; Fri, 31 May 2024
- 07:35:49 +0000
-Message-ID: <253f484b-e018-428a-b02e-24ece486d29a@weidmueller.com>
-Date: Fri, 31 May 2024 09:35:45 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v1 1/1] mmc: zynq_sdhci: Only evaluate card-stable
- signal if card was detected
-To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
- "Simek, Michal" <michal.simek@amd.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Stefan Herbrechtsmeier <Stefan.Herbrechtsmeier@weidmueller.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
- Lukas Funke <lukas.funke@weidmueller.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Johan Jonker <jbx6244@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-References: <20240424082343.212554-1-lukas.funke-oss@weidmueller.com>
- <20240424082343.212554-2-lukas.funke-oss@weidmueller.com>
- <82f63d08-3dce-4166-bd82-246cade9ab87@amd.com>
- <CYYPR12MB8703F5C687226352CCBBCD3898F32@CYYPR12MB8703.namprd12.prod.outlook.com>
-From: Lukas Funke <lukas.funke-oss@weidmueller.com>
-In-Reply-To: <CYYPR12MB8703F5C687226352CCBBCD3898F32@CYYPR12MB8703.namprd12.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR0P281CA0156.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:b3::10) To AS2PR08MB8431.eurprd08.prod.outlook.com
- (2603:10a6:20b:55a::18)
+ d=linaro.org; s=google; t=1717147840; x=1717752640; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=mdLJlzQaPeiNh0sM3/+kvNBJnozajqkGyT/tU1JJBOM=;
+ b=nu5AM9J3dXLB2A2Bo3bOZdgCIGXqN40ESj1J9GSKffiUxbuHbyhfbsGCkvtawFGdPi
+ s+ci52hZt/RzePJ0V+NCRuJpdJzbBIEmqM6tL/nFnPBYj4Lf9bOR48FgxyViG9/KHK/y
+ NRpHbsv564Dyg6PiS7zBXfFZZe4TjDwjCufbfoJPrGJJj3A9o7e/E8SkESmR4e01eA7R
+ 8EePSkJAI0Ds0epVu1bioOrzCdUOsITuyQ/VlOPIR9QtausxjqSK+XutP257BDgfct/+
+ nH0EczNbPhqPabAgTHL5EXs5CsI7xLyPobEtiABupiocCIb5NDcvoEgm6O9tRZviaXne
+ CpiQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717147840; x=1717752640;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=mdLJlzQaPeiNh0sM3/+kvNBJnozajqkGyT/tU1JJBOM=;
+ b=Y/XJl2yh9AXiDn6i+BneCspnonIGj6QyWvhvfpFuUqgfa6qEVifC6XztOwFehVq6h9
+ amMQGAC7PBO4GlXcRMRHPciRTTQF+yInamYY2UQIj2FMHAR/ostRkxtdDUvArmb54Y+f
+ 0O3jpKxrtjK+OTPeHOiSLXFmsplrZFf94Kk9ji90Nk8XimeALvXXovhjquScLwX5mmIQ
+ k/nGlveT5yU9+ZIqt92e7d3mO3m2MhtNHwG4JJ0lJBZsVaCeHCdKuQmX0ZZYTz1rH5Zg
+ 9FJYty9QZQCHJ9Fby+hROZC0LvG+8K8Q3zu1yLL9gnQSTjEQifmPAbba9SAyoDv/GzAT
+ tsdA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXDX0wmcy7aJputUDXRCb3QiGPVD//L/KlQIor5KWdNEG344mawAZ8afmu8+b2lWxCtpsGTQfY1lPI6szECX+14BH61vg==
+X-Gm-Message-State: AOJu0YwvyK25QbzsWzF0r4rjW3+uqmCuKPGZF59PL8TY3t3cTXkGCVhl
+ HttIGVwx6sry/wj89m7niZZo99kQg6VRgZv6G1D43hMnJQk60n32x9XZhqOfIrMPRoyEUjQHOG8
+ RYmStdOK+3ZAbxo5aUSgPzwJrNgbhtNaHQ8w97g==
+X-Google-Smtp-Source: AGHT+IFbG0DMuClaJl5MUDozIaQMTC07N23G7MVv8ZHCkUA5S3t7xelX88TZcfVvbMHEYX0oCxO8Qiv2rgu2ijb/07U=
+X-Received: by 2002:a17:90a:f6d7:b0:2b3:d512:d487 with SMTP id
+ 98e67ed59e1d1-2c1dc5ccd70mr1224045a91.39.1717147840533; Fri, 31 May 2024
+ 02:30:40 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS2PR08MB8431:EE_|PA6PR08MB10393:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4463a137-fe44-493a-a301-08dc81444ab0
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230031|376005|1800799015|366007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NjFlZWhyZHZVOUJjQWthY0FuSFVKaDVoZjFlUlpOSkNwd2QxZmU2cUUyelha?=
- =?utf-8?B?eEwxenRpK1lVTlBwWUo3dVBxV1pFa1crOUpta2pOeWZzRXpNSGVlZXY1cUQ4?=
- =?utf-8?B?QUlHMjg2WXpRVEdmSE1rbjFoZlJxRkowbGtkTWRHUGNhaVlPblZObmNjWkdP?=
- =?utf-8?B?bGF0c2ZBT0lxbldqRCs2dzdGdUV3RDdLQk05UkxlWk8yTnFkU0owLzZVWStS?=
- =?utf-8?B?OGdUYWhUbkNicGJjNGx2N3d6MloyT3dtNzJuMU9NQVk4TkJ5TE1rNDA4MVVT?=
- =?utf-8?B?dW5KbUlEbEVwRjZtbDVsV24vaXBBWG94b2JhVmt5alMwU0ZEVFZ2Q0dmcVVl?=
- =?utf-8?B?ZENKQUl5cmlhWkttTThvQ0YwMWdiMHlLQWRTYlhWVkZPd0Jpa1dqRzhnYVVa?=
- =?utf-8?B?Mks4SFMrS09ydFhMNDlkaTN2SjE1Uk1EWlgrWVBSYWpJaDBEMTEyTU1WdzR0?=
- =?utf-8?B?Q0VyVGIzSzR0TkdlbnNZRWw2UTNSVHdHMVBLYWhYT0Y1MFRtcUtiQkhKa3RS?=
- =?utf-8?B?ZTFaV3JGYWxkV05aem41WnpDcTVqTFFPWU1vZmZvRnQyMzQwNUNKaWdqbXFp?=
- =?utf-8?B?NXVtNzJYbjR1bG9URmdXUUxUdFNxWGxZRHVKQzkxbC8vdndqWmFPYVI5b2dY?=
- =?utf-8?B?Wk5kNjhZcCtLK3NUcmFWdldYYk1IdVBEcWNjemhIOWw2UkRKa05NOFJkcjhj?=
- =?utf-8?B?VnhKcnJxOTJEa0l0YVRqcXhreTM3MFR3ZUtNWE90MU5aYzhIdlZpdUJlOVp6?=
- =?utf-8?B?UFRaUm96a0IwTjhOY3pneE5SeDFWanhZeTdUQ2g1R05BYkUxd0ZQVnRGenIy?=
- =?utf-8?B?U3BBWW5FZmxWTjVtbnNtU0JSYkZWQThjejkrcmU3cjRFSUVaTW5YdEo5MzlJ?=
- =?utf-8?B?cGdiWDBBZTVEZ3MwRDU0UFZSeEh6OHhUY0RDU2pNd1IxK2VxVHRzQUw4TnMz?=
- =?utf-8?B?OUkzWTFOK3ZKbTRrTWNscUIwNWh5MEp3V3B5YzA3QUZ6L200UUxYSmpYWDk5?=
- =?utf-8?B?dmxtU0RTdUpFSUdDQVZqckRlWWFta25mR043aHhmV2NpQll5MjU2YWVRcUJV?=
- =?utf-8?B?YWxsM3JxR0dIV21xTHMvakdYKy9CTVlsNEhVR2xyTDNpOEp2WVU1b2V3VExy?=
- =?utf-8?B?Z0QrM1VyNTNXbFArNXd0VU8xd2dUMVFaOGdDWld2ZUVhbGRJU1FKTVdGdUtH?=
- =?utf-8?B?T2pOa3VZbXQ0WnRSeWVyVmJXMDR4K3UzZ1RMSkd3c3VlVkQyYWZja3J5eldU?=
- =?utf-8?B?WGMxZ0JFbythYkEwU1E0cndDUTlZRG8zRFllTCtsakI3eXhYMDBZRHR0TzdI?=
- =?utf-8?B?M0l5cHZRdzdvYjZ5YlJYNWVOTjNhWE1qMHpDSG1RR2hEUnFHaGVDUXk5YVRo?=
- =?utf-8?B?QVAxQVd2b2ZhNUFwNHIzVkozd1dJeFA2cWRKTENuSVErMGowa1dIdlc5Vmtz?=
- =?utf-8?B?bmU4VGMwZDRMaGF5VmxJNm9SSUJ0Y3F0d0t5amY3SHg5UTJhSU9HQ0dQQkYw?=
- =?utf-8?B?L3dmZTFoeCswYUtRT01QYmt3TnppQjVOVmlXWkFHVnpLVk1vNHFKa3k1UGc3?=
- =?utf-8?B?SGhpK2pPd2tTWTk1NG1FQ1lzOXlSYjIxVStTMFBqS2xzcURZeklHa0NUN3FX?=
- =?utf-8?B?dFJWZi9ZWDJweHliUGRLbEw2K0xYd1ptTTA5SXFMU2oxY2NQVTlHMWtnLy93?=
- =?utf-8?B?M0ZjZzI1ZC9LNTUzU0o0cHdLelFTT3FJdlA1dnhCL1lTdDJXaE5FK0R3PT0=?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS2PR08MB8431.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376005)(1800799015)(366007); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bWIyS1EvTEhWSWdyK08yRkFoalllTWlyTXZWaXVxRTg0cVZ3blpqYzhUN252?=
- =?utf-8?B?SUI1c0tKWjFYOFUwbCtPZHZ5Uys4OWFpcmZrSGRIZS9MSGJxZWJKR3F0OXhh?=
- =?utf-8?B?R1J3MmUwWk5TTzVuMm9sMWtyTkhsaHcyREZsRnNVTlJhNE9VRG1Mcml0QnhO?=
- =?utf-8?B?c2RZTXV1ZEF2WmRLTUNrZk92OEM3MlVuR0Z5RXh3WHBnMVIxb1VCMHhRR2Zr?=
- =?utf-8?B?U09IUHRVZnRVd1FYb1BHelVQajNjM25HUGs0K2hWWmdJUjRXQk1sWHMwSzdx?=
- =?utf-8?B?NnJyamlpekkzK1REODhRN3dOZjU4RXd5S0UyYjU2MSs1WEZBbUkrdXdGSXEw?=
- =?utf-8?B?V0M4cm43NE8zMEZXdXJuWGRGaE54QjVGWWc1Yys3a2pSSXgxS3p2QXltWEJx?=
- =?utf-8?B?aWxmcWN0aWNXYjg1cWVxMXZ3S282b0kxWGV5d05GeEMxc0FZc3VqbzVIUnIx?=
- =?utf-8?B?RzRUNUEyUVVCaWpWWDE1UGNldXZmM2h4WHY2TzNiVEdYeERPRFZvTjFHZWxL?=
- =?utf-8?B?TTY4U0pZTktHM1dneFZVRVcvL0FoL0ZEWGh3NGZtSTFmY0M5Q2x6ZDhBWVFo?=
- =?utf-8?B?cEgvcTBTakRlemwzN3JIZDZ6NjNkU3dBdmdwVkRnUGZwb1MrcmRmeGJrYWhy?=
- =?utf-8?B?c1RiZFg0d2hVTXJDMno4NXNyTVVrR0lmdUJjWEhUMmRFbUxTQmUzdFNGVWll?=
- =?utf-8?B?cG82dnRTYUI3dTFLai9HRGUydndLdE0zQURGWXJZTjNGSXM1cGNPcXZzS2tG?=
- =?utf-8?B?MVNqUExuUnlHOVZ1Z1NDdmtBSzE5YkNKZkVUenZOcFFteVFsNSt1YitUbkJ3?=
- =?utf-8?B?ODdsZEpEelVFR2RyQk95Kyt4UGx2Ri9XNnZhYmxZY2FUOFMyaTZONzdTR1VI?=
- =?utf-8?B?YmpBMmJJTlZFYkN3aUVPbFl6L2JnYTRoUzNOVVZBMWxubGk5TTFzZEJHaWdW?=
- =?utf-8?B?ZjBic3hMWDdvSi9rWlNneG9hZVplUCtFb0tVcEdqZDBDNnJUMjYwd255ZkxS?=
- =?utf-8?B?N25VTlZjbE5lV3dFUmZFOEN1cEJ1ZTcrQkRJTnRNZHREU3hNRXM2ZVBwbzZk?=
- =?utf-8?B?NDRQZ0ZtOFQvM2lLNm9oS1VIbHlqZjY5cFQ1b1JIeFlDRzQ5QlFzb1pPNU9I?=
- =?utf-8?B?QmlUNlJDazJDY0xNc0RjQnJoUXorYzZIUmtVTDVocjJPcUFxM1NZSHI2L1pK?=
- =?utf-8?B?QnpsVzNVdVRnSlM3dGthVDZoMEtjWnpwQ0NjQ2FRbm5DL1dNcVVwcHJFNWdK?=
- =?utf-8?B?ZFFnNGdMQllqR2dJWCtuSnlQK3RTUGZNNXMxUTVvcGFhK29CellzeGxtRVpy?=
- =?utf-8?B?NmJ6c2o0dW9PcElaM1NzL0tWakpMNEcvdTJicDQ1Z0NnMnpqSWlvenBDSXB1?=
- =?utf-8?B?MVZzV043NFZzZzMvakhnajBWQXQ2KzhQVzhjVndiS2ZIMHc3b3RmNG9JMDRi?=
- =?utf-8?B?N3JEeExBZTV6SjJINzVKcERrMjRnRUc0dEJGdTkvWnVKeXBQNG0weThMa24v?=
- =?utf-8?B?QW8zK1NFd0Z1U2poNk83NGFFdklndGs2L2ZCQWY0ZkJJbUhld2lvMXRvcHNB?=
- =?utf-8?B?MGswNFBtOTF2WVN0TFNrZXVRcVZLdzJKMnQxdWJ6TWtoc1kzMXc5enRleG0x?=
- =?utf-8?B?dFJVYnRRYzY1QTFXRGRlcnpxaDM1TExZRTRqUlJoeDFlOGxMKzNkaGR4azZ4?=
- =?utf-8?B?OVEvdS9oTnF0TDBkQkpTUVdmcnovVnpvNXVlNnBtV1BnbGhORlk4eDNFRnVD?=
- =?utf-8?B?MlYzTHkvUFEwZmlhVjBmakwxMzdBRyswcitpVFd0Ni9yQmVueTVCaUdEbnFj?=
- =?utf-8?B?WkRndlFidGh2eHIxRUhsOUhBOFhFenFraVMyMWtYT2VCNTZGRXA4SmRxRXR4?=
- =?utf-8?B?TmV2TDFlVjhQMmZ5NGthdHpOOUIyRmV0U3AyL3d0WHRoa0hpZXNHcUwzMWV6?=
- =?utf-8?B?UXNtOWE4dE85MGFHVmp1Q2ErcnE0V1IzbVlTSnlTSVRsSHVNYjNoVVZTWjZr?=
- =?utf-8?B?bFIwWFVMcXBoajd6R3BxNERkTzlUWmZwRGZKWG9yam5MSFZZL0ZGc29KaE40?=
- =?utf-8?B?ekNBZGFqa2ZscEpZTURZU2p0cE1vbDE0UFh1T3RmdnN6QVp4SHE4cUgxaGw2?=
- =?utf-8?Q?ifDjijtkxA7GRPLl2ITJrlvtb?=
-X-OriginatorOrg: weidmueller.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4463a137-fe44-493a-a301-08dc81444ab0
-X-MS-Exchange-CrossTenant-AuthSource: AS2PR08MB8431.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 May 2024 07:35:49.1563 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: EpV09dPpQodxyV/JTm26bz+aRHUPh0rkhjmdAZSAvDD4Jo/qjj9QKvZcJgFDEz9xpdHl4iGCCdjTIwPnKWh8Gw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA6PR08MB10393
+References: <20240509164123.1753050-1-j-humphreys@ti.com>
+ <20240509164123.1753050-16-j-humphreys@ti.com>
+ <Zk--WFQJC-wi5zE5@hera> <86bk4vcjab.fsf@udb0321960.dhcp.ti.com>
+ <CAC_iWjLMERkDYF_-Eu5mg13q_PjjfjcwgsTGxJ_SB6h6PdzXEA@mail.gmail.com>
+ <86ikyufwq3.fsf@udb0321960.dhcp.ti.com>
+In-Reply-To: <86ikyufwq3.fsf@udb0321960.dhcp.ti.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 31 May 2024 12:30:03 +0300
+Message-ID: <CAC_iWjKRezCL1cXfB5Zy233XvP59js_MxcogaqcBCUV5gpQcvQ@mail.gmail.com>
+Subject: Re: [PATCH v4 15/19] board: am62px: Define capsule update firmware
+ info
+To: Jon Humphreys <j-humphreys@ti.com>
+Cc: Roger Quadros <rogerq@kernel.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Kamlesh Gurudasani <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>, 
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>, 
+ Simon Glass <sjg@chromium.org>, Nikhil M Jain <n-jain1@ti.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
+ Maxime Ripard <mripard@kernel.org>, 
+ Siddharth Vadapalli <s-vadapalli@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, 
+ Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
+ Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -180,89 +106,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Venkatesh,
+On Fri, 31 May 2024 at 07:10, Jon Humphreys <j-humphreys@ti.com> wrote:
+>
+> Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
+>
+> > Hi Jon,
+> >
+> > On Fri, 24 May 2024 at 18:38, Jon Humphreys <j-humphreys@ti.com> wrote:
+> >>
+> >> Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
+> >>
+> >> > Hi Jonathan
+> >> >
+> >> > Thanks for working on this
+> >> >
+> >> > On Thu, May 09, 2024 at 11:41:19AM -0500, Jonathan Humphreys wrote:
+> >> >> Define the firmware components updatable via EFI capsule update, including
+> >> >> defining capsule GUIDs for the various firmware components for the AM62px
+> >> >> SK.
+> >> >>
+> >> >> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
+> >> >> ---
+> >> >>  board/ti/am62px/evm.c        | 32 ++++++++++++++++++++++++++++++++
+> >> >>  include/configs/am62px_evm.h | 24 ++++++++++++++++++++++++
+> >> >>  2 files changed, 56 insertions(+)
+> >> >>
+> >> >> diff --git a/board/ti/am62px/evm.c b/board/ti/am62px/evm.c
+> >> >> index 97a95ce8cc2..6d0f66e5dc0 100644
+> >> >> --- a/board/ti/am62px/evm.c
+> >> >> +++ b/board/ti/am62px/evm.c
+> >> >> @@ -6,6 +6,7 @@
+> >> >>   *
+> >> >>   */
+> >> >>
+> >> >> +#include <efi_loader.h>
+> >> >>  #include <asm/arch/hardware.h>
+> >> >>  #include <asm/io.h>
+> >> >>  #include <dm/uclass.h>
+> >> >> @@ -13,6 +14,37 @@
+> >> >>  #include <fdt_support.h>
+> >> >>  #include <spl.h>
+> >> >>
+> >> >> +struct efi_fw_image fw_images[] = {
+> >> >
+> >> > It's better if we add an
+> >> > #if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
+> >> > for both of the structs that follow (and it applies to all your patches)
+> >> >
+> >>
+> >> Ilias, thanks for the reviews.
+> >>
+> >> I had this protected in #if's in an earlier patch set, as you suggest here.
+> >> However, in those reviews, Roger recommended that we don't do that and put
+> >> conditions around the use of it in set_dfu_alt_info().
+> >>
+> >
+> > Hmm but the function prototype itself is on an ifdef. If you want to
+> > remove the ifdef you got to do it everywhere
+> >
+>
+> Are you referring to set_dfu_alt_info() which is guarded by
+> CONFIG_SET_DFU_ALT_INFO?
 
-On 30.05.2024 07:39, Abbarapu, Venkatesh wrote:
-> Hi Lukas,
-> The polling of card-stable bit alone is enough, as if card-detect bit is not set anyways the card-stable bit won't be set which leads to timeout.
-> I don’t think it is specific to zynqmp platform.
-> 
-> Could you please let me know if you observe this issue on any of the zynqmp board?
+Yes
 
-We can observe this behaviour on zu2cg and zu3eg. I haven't tried it on 
-an eval-board but this would be the next step.
+>
+> If so, that is separate but I can add a CONFIG_SET_DFU_ALT_INFO guard
+> around the definition, for now. But IMO it is a bit of a mess because it's
+> use and board specific defs are guarded by CONFIG_SET_DFU_ALT_INFO but the
+> weak/default definition is guarded by CONFIG_EFI_CAPSULE_FIRMWARE, which
+> causes problems because the configs are not always the same for all builds.
 
-The main problem is that the stable-bit is not set if there is no 
-sd-card plugged in from the beginning, but only if the cd-signal changes.
+Indeed
 
-Is there any documentation how this bit should behave then?
+> I was wanting to fix that too so I might do that as a separate patch and
+> make that patch a prerequisite for this series, which then allows me to
+> remove the definitions of set_dfu_alt_info() in this series.
+>
 
-Best regards
-- Lukas
+We can clean it up later sure, but for now put it under an IS_ENABLED
+so we have the same mess everywhere :)
 
-> 
-> Thanks
-> Venkatesh
->> -----Original Message-----
->> From: Simek, Michal <michal.simek@amd.com>
->> Sent: Wednesday, May 29, 2024 8:33 PM
->> To: lukas.funke-oss@weidmueller.com; u-boot@lists.denx.de; Abbarapu,
->> Venkatesh <venkatesh.abbarapu@amd.com>
->> Cc: Stefan Herbrechtsmeier <Stefan.Herbrechtsmeier@weidmueller.com>;
->> Ashok Reddy Soma <ashok.reddy.soma@amd.com>; Lukas Funke
->> <lukas.funke@weidmueller.com>; Jaehoon Chung
->> <jh80.chung@samsung.com>; Johan Jonker <jbx6244@gmail.com>; Peng Fan
->> <peng.fan@nxp.com>; Simon Glass <sjg@chromium.org>; Tom Rini
->> <trini@konsulko.com>
->> Subject: Re: [RFC PATCH v1 1/1] mmc: zynq_sdhci: Only evaluate card-stable
->> signal if card was detected
->>
->>
->>
->> On 4/24/24 10:23, lukas.funke-oss@weidmueller.com wrote:
->>> From: Lukas Funke <lukas.funke@weidmueller.com>
->>>
->>> On ZynqMp there seems to be a dependency between the card-stable bit
->>> and the card-detect bit. The card-stable bit is set *if and only if*
->>> the card-detect bit was set before, indicating that the signal was
->>> stable and reliable during card insertion.
->>>
->>> If the card-detect bit is *not* evaluated the corresponding check
->>> leads to a timeout indicating that the card-detect was not stable.
->>>
->>> Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
->>> ---
->>>
->>>    drivers/mmc/zynq_sdhci.c | 7 +++++--
->>>    1 file changed, 5 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/drivers/mmc/zynq_sdhci.c b/drivers/mmc/zynq_sdhci.c index
->>> 935540d171..d0bccd41cc 100644
->>> --- a/drivers/mmc/zynq_sdhci.c
->>> +++ b/drivers/mmc/zynq_sdhci.c
->>> @@ -1168,11 +1168,14 @@ static int arasan_sdhci_probe(struct udevice
->> *dev)
->>>    	 */
->>>    	if (IS_ENABLED(CONFIG_ARCH_ZYNQMP) ||
->> IS_ENABLED(CONFIG_ARCH_VERSAL)) {
->>>    		u32 timeout = 1000000;
->>> +		u32 value;
->>>
->>> -		while (((sdhci_readl(host, SDHCI_PRESENT_STATE) &
->>> -			 SDHCI_CARD_STATE_STABLE) == 0) && timeout) {
->>> +		value = sdhci_readl(host, SDHCI_PRESENT_STATE);
->>> +		while ((value & SDHCI_CARD_PRESENT) &&
->>> +		       ((value & SDHCI_CARD_STATE_STABLE) == 0) && timeout)
->> {
->>>    			udelay(1);
->>>    			timeout--;
->>> +			value = sdhci_readl(host, SDHCI_PRESENT_STATE);
->>>    		}
->>>    		if (!timeout) {
->>>    			dev_err(dev, "Sdhci card detect state not stable\n");
->>
->> Venkatesh: Can you please take a look at this?
->>
->> Thanks,
->> Michal
-
+Thanks
+/Ilias
+> Jon
+>
+> > Thanks
+> > /Ilias
+> >
+> >> https://lore.kernel.org/all/b19f02e0-a80a-46d6-8296-5d516577766a@kernel.org/
+> >>
+> >> I assume the reasoning is to reduce #if's in the code and rely on the
+> >> compiler to be smart enough to remove dead data. (Roger, speak up if I
+> >> misrepresent you.)
+> >>
+> >> I'm ok to do either way.  What is the preferred way in U-Boot?
+> >>
+> >> Thanks
+> >> Jon
+> >>
+> >> >> +    {
+> >> >> +            .image_type_id = AM62PX_SK_TIBOOT3_IMAGE_GUID,
+> >> >> +            .fw_name = u"AM62PX_SK_TIBOOT3",
+> >> >> +            .image_index = 1,
+> >> >> +    },
+> >> >> +    {
+> >> >> +            .image_type_id = AM62PX_SK_SPL_IMAGE_GUID,
+> >> >> +            .fw_name = u"AM62PX_SK_SPL",
+> >> >> +            .image_index = 2,
+> >> >> +    },
+> >> >> +    {
+> >> >> +            .image_type_id = AM62PX_SK_UBOOT_IMAGE_GUID,
+> >> >> +            .fw_name = u"AM62PX_SK_UBOOT",
+> >> >> +            .image_index = 3,
+> >> >> +    }
+> >> >> +};
+> >> >> +
+> >> >> +struct efi_capsule_update_info update_info = {
+> >> >> +    .dfu_string = "sf 0:0=tiboot3.bin raw 0 80000;"
+> >> >> +    "tispl.bin raw 80000 200000;u-boot.img raw 280000 400000",
+> >> >> +    .num_images = ARRAY_SIZE(fw_images),
+> >> >> +    .images = fw_images,
+> >> >> +};
+> >> >
+> >> > I haven't worked on any TI platforms lately so I cant say much about the
+> >> > naming and the flash regions. The definition seems correct
+> >> >
+> >> >
+> >> >> +
+> >> >> +void set_dfu_alt_info(char *interface, char *devstr)
+> >> >> +{
+> >> >> +    if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
+> >> >> +            env_set("dfu_alt_info", update_info.dfu_string);
+> >> >> +}
+> >> >
+> >> > There's a CONFIG_SET_DFU_ALT_INFO symbol. This better if we add a check here
+> >> > as well
+> >> >
+> >> >> +
+> >> >>  int board_init(void)
+> >> >>  {
+> >> >>      return 0;
+> >> >> diff --git a/include/configs/am62px_evm.h b/include/configs/am62px_evm.h
+> >> >> index 06b12860e21..57a1ba9dc3c 100644
+> >> >> --- a/include/configs/am62px_evm.h
+> >> >> +++ b/include/configs/am62px_evm.h
+> >> >> @@ -8,6 +8,30 @@
+> >> >>  #ifndef __CONFIG_AM62PX_EVM_H
+> >> >>  #define __CONFIG_AM62PX_EVM_H
+> >> >>
+> >> > [...]
+> >> >
+> >> > Regards
+> >> > /Ilias
