@@ -4,66 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A639C25B75
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 13:13:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12B04C25B75
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 13:34:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14AE6887A1;
-	Fri, 31 May 2024 15:12:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 09C21882F0;
+	Fri, 31 May 2024 15:34:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="PHbFCgtc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="joS6Bsvf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D889A88789; Fri, 31 May 2024 15:12:09 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 2643D8831F; Fri, 31 May 2024 15:34:18 +0200 (CEST)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1FB2887B5
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 15:12:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C3B0988246
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 15:34:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44VDC6nV107451;
- Fri, 31 May 2024 08:12:06 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1717161126;
- bh=ud7BslR5zIUi8CwmILsAeXavzubQo82Cli05gDITe90=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=PHbFCgtceKEqzYnb3xzIA8UQ7cobUi6lK+A+pFLq40yLiZmRLWN9h4TFV4wMhcac1
- SirojEmrdgcdX68D4MQyJSEVEmiMsd/VWWZ6srWqE/1k49FcF0sJ1tMNh18HNCZbR8
- H2GRwS2Ta5gdZm9xsh3lDPS68uE4ApVtDqtW2f9U=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44VDC6ck130445
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 31 May 2024 08:12:06 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 31
- May 2024 08:12:05 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 31 May 2024 08:12:05 -0500
-Received: from PSDKL-Workstation0.dhcp.ti.com (psdkl-workstation0.dhcp.ti.com
- [172.24.227.91])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44VDBm6u063605;
- Fri, 31 May 2024 08:12:03 -0500
-From: Aniket Limaye <a-limaye@ti.com>
-To: <u-boot@lists.denx.de>, <trini@konsulko.com>
-CC: <u-kumar1@ti.com>, <n-francis@ti.com>, <m-chawdhry@ti.com>, <nm@ti.com>,
- Aniket Limaye <a-limaye@ti.com>
-Subject: [PATCH 6/6] configs: j7200_evm_r5: Add ESM config for J7200
-Date: Fri, 31 May 2024 18:38:23 +0530
-Message-ID: <20240531130823.646311-7-a-limaye@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240531130823.646311-1-a-limaye@ti.com>
-References: <20240531130823.646311-1-a-limaye@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2e95a1d5ee2so37073231fa.0
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 06:34:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1717162455; x=1717767255; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ZVq+1W4xC7tipzTC7LwEth+9OEBNLh9rkgtP73Q4QK0=;
+ b=joS6Bsvf251EiIDX7ZHEZWYBtOkGdT+Z26LPLSTkgB01YiQ7OJKmVAh1Y/lsINOIm/
+ pw9iU2subERRX5Md9zUIFyMjAg7jLN4HNw0VSJ9pYTcBvi/SZM1KTi7So/OL0Jwofw6u
+ UHo/Gw3uktmgIyroJvo+iVIafWElnMihUZvXQE+ngI/NHJp9JgW3vBQXrw9SdEfc7BN+
+ qDJHo+8S+SyKIA2lsrJEkHLTmZxzwv4UxSimVxVcyX3ILWq+9pd33ZsUQs8Vsxs4H26s
+ xNANp2669peImNuFIvI2MQ2WZwBCgxNd4m0qQl8fhYWY1+sjovrRCUAhNPWmH2SzdlHZ
+ bZEg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717162455; x=1717767255;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZVq+1W4xC7tipzTC7LwEth+9OEBNLh9rkgtP73Q4QK0=;
+ b=Ponk6sFQy62VJB+cn3i7cbXjzZyG9tTIwjM91r5VHgIHDIsA1DpSO5gfraCGQaMOX2
+ 4TnVLMxEMWqUGITiO9FHTnZZ1hkexDQ/kJ4SQ4HXKrwSbUWYZqn+hGsXq/WoZFder8fI
+ 2dFbTsOQ0bB/JC2yu9HIWHq0a6vF6V5w2tleGE06OhBv0rKVixxbBwBeMb8ywIfKsJcc
+ IQ/BWAE5X60ja1Rl1tA4rMQMXfSjR5s6B3BROuqmPMrwCJiCu/BWkk8P/kFAYIVziqZK
+ pbX0mwcMZP7BMuSUzRP7k3Fs3/QeYCfEACwSwCAbiSrQJim9KpMpIYh3beiOiIVFLyHb
+ UaOQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU7BTnaQxKgGNcyIuSzhILCPeVB1D25IWJ8dQCy32snfhG7/t6Goh3HYP8Vzx3JIhf/4z/fkDtxn+DHCvFSQDvRCXQ0QA==
+X-Gm-Message-State: AOJu0YzHMHL6UepeWL5c+6YBAeTzmzjNcg/14oq8uyq9300XD3dwDT30
+ qetMhOObaXm+W2mseXbcwPO2KtyYrvNlHOP+L9QtZbj1annBD2qZ9g7fFzzG6ik=
+X-Google-Smtp-Source: AGHT+IErtYFurUYLIphpNl+v/HnGyXJ1DQ1ORld7upZLAUreWORgpvrcO967b5EK1teedsJAdPd8+g==
+X-Received: by 2002:a05:6512:3e24:b0:52b:798f:cd7e with SMTP id
+ 2adb3069b0e04-52b89521852mr2069874e87.12.1717162454972; 
+ Fri, 31 May 2024 06:34:14 -0700 (PDT)
+Received: from ?IPV6:2a02:8109:aa0d:be00::ebdd? ([2a02:8109:aa0d:be00::ebdd])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a67ea67b4f8sm87431866b.102.2024.05.31.06.34.13
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 31 May 2024 06:34:14 -0700 (PDT)
+Message-ID: <353ca842-e9d3-478b-a7da-33570dd3b7ec@linaro.org>
+Date: Fri, 31 May 2024 15:34:11 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 6/7] tools: add genguid tool
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mario Six <mario.six@gdsys.cc>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de
+References: <20240529-b4-dynamic-uuid-v2-0-c26f31057bbe@linaro.org>
+ <20240529-b4-dynamic-uuid-v2-6-c26f31057bbe@linaro.org>
+ <CAFLszTgtJi+QE4Ry70jDJbqg3rgTMXEqbt-RROQ1kQwR1Qv-Ag@mail.gmail.com>
+ <fd581f3d-00a9-4389-a9e5-e1fb8b5b213a@linaro.org>
+ <CAFLszTgWPikh3VA6VvvQc6uuPvb3MZL=E37mUB4Ng7STJeUBTw@mail.gmail.com>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <CAFLszTgWPikh3VA6VvvQc6uuPvb3MZL=E37mUB4Ng7STJeUBTw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,28 +103,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Neha Malcom Francis <n-francis@ti.com>
+Hi Simon,
 
-Add CONFIG_ESM_PMIC to enable PMIC initialization in J7200.
+On 29/05/2024 21:45, Simon Glass wrote:
+> Hi Caleb,
+> 
+> On Wed, 29 May 2024 at 13:02, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>>
+>> Hi Simon,
+>>
+>> On 29/05/2024 18:30, Simon Glass wrote:
+>>> Hi Caleb,
+>>>
+>>> On Wed, 29 May 2024 at 08:49, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>>>>
+>>>> Add a tool that can generate GUIDs that match those generated internally
+>>>> by U-Boot for capsule update fw_images.
+>>>>
+>>>> Dynamic UUIDs in U-Boot work by taking a namespace UUID and hashing it
+>>>> with the board model, compatible, and fw_image name.
+>>>>
+>>>> This tool accepts the same inputs and will produce the same GUID as
+>>>> U-Boot would at runtime.
+>>>>
+>>>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+>>>> ---
+>>>>    tools/Makefile  |   3 ++
+>>>>    tools/genguid.c | 154 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+>>>>    2 files changed, 157 insertions(+)
+>>>
+>>> Where is this tool used? Can you add a man page and test?
+>>
+>> It currently doesn't have any users, it just allows for pre-generating
+>> GUIDs ahead of time for a given board. It might be hooked up to vendor
+>> tooling or some usecase like that.
+>>
+>> I've somehow escaped learning Groff before now heh, I can give it a go
+>> and write a test.
+> 
+> OK (just copy bits of mkimage.1 :-)
 
-Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-Signed-off-by: Aniket Limaye <a-limaye@ti.com>
----
- configs/j7200_evm_r5_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+Right :D
+> 
+> Re the test, would this be something that binman would use? If so you
+> could put a test there.
 
-diff --git a/configs/j7200_evm_r5_defconfig b/configs/j7200_evm_r5_defconfig
-index c9f586a1695..7b2ff65fcee 100644
---- a/configs/j7200_evm_r5_defconfig
-+++ b/configs/j7200_evm_r5_defconfig
-@@ -103,6 +103,7 @@ CONFIG_FS_LOADER=y
- CONFIG_SPL_FS_LOADER=y
- CONFIG_ESM_K3=y
- CONFIG_K3_AVS0=y
-+CONFIG_ESM_PMIC=y
- CONFIG_SUPPORT_EMMC_BOOT=y
- CONFIG_SPL_MMC_HS400_SUPPORT=y
- CONFIG_MMC_SDHCI=y
+This tool is just a wrapper for gen_uuid_v5() which we already test in 
+the dynamic UUID unit tests also introduced in this series. I don't 
+think it's necessary to additionally test this tool.
+
+Kind regards,
+> 
+> Regards,
+> Simon
+
 -- 
-2.34.1
-
+// Caleb (they/them)
