@@ -4,89 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12B04C25B75
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 13:34:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E3A7C25B7E
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 13:46:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 09C21882F0;
-	Fri, 31 May 2024 15:34:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CC5AE8831F;
+	Fri, 31 May 2024 15:46:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="joS6Bsvf";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qTzsz9kc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2643D8831F; Fri, 31 May 2024 15:34:18 +0200 (CEST)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 94007882F1; Fri, 31 May 2024 15:46:52 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3B0988246
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 15:34:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B03B28876C
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 15:46:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2e95a1d5ee2so37073231fa.0
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 06:34:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1717162455; x=1717767255; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ZVq+1W4xC7tipzTC7LwEth+9OEBNLh9rkgtP73Q4QK0=;
- b=joS6Bsvf251EiIDX7ZHEZWYBtOkGdT+Z26LPLSTkgB01YiQ7OJKmVAh1Y/lsINOIm/
- pw9iU2subERRX5Md9zUIFyMjAg7jLN4HNw0VSJ9pYTcBvi/SZM1KTi7So/OL0Jwofw6u
- UHo/Gw3uktmgIyroJvo+iVIafWElnMihUZvXQE+ngI/NHJp9JgW3vBQXrw9SdEfc7BN+
- qDJHo+8S+SyKIA2lsrJEkHLTmZxzwv4UxSimVxVcyX3ILWq+9pd33ZsUQs8Vsxs4H26s
- xNANp2669peImNuFIvI2MQ2WZwBCgxNd4m0qQl8fhYWY1+sjovrRCUAhNPWmH2SzdlHZ
- bZEg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717162455; x=1717767255;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ZVq+1W4xC7tipzTC7LwEth+9OEBNLh9rkgtP73Q4QK0=;
- b=Ponk6sFQy62VJB+cn3i7cbXjzZyG9tTIwjM91r5VHgIHDIsA1DpSO5gfraCGQaMOX2
- 4TnVLMxEMWqUGITiO9FHTnZZ1hkexDQ/kJ4SQ4HXKrwSbUWYZqn+hGsXq/WoZFder8fI
- 2dFbTsOQ0bB/JC2yu9HIWHq0a6vF6V5w2tleGE06OhBv0rKVixxbBwBeMb8ywIfKsJcc
- IQ/BWAE5X60ja1Rl1tA4rMQMXfSjR5s6B3BROuqmPMrwCJiCu/BWkk8P/kFAYIVziqZK
- pbX0mwcMZP7BMuSUzRP7k3Fs3/QeYCfEACwSwCAbiSrQJim9KpMpIYh3beiOiIVFLyHb
- UaOQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU7BTnaQxKgGNcyIuSzhILCPeVB1D25IWJ8dQCy32snfhG7/t6Goh3HYP8Vzx3JIhf/4z/fkDtxn+DHCvFSQDvRCXQ0QA==
-X-Gm-Message-State: AOJu0YzHMHL6UepeWL5c+6YBAeTzmzjNcg/14oq8uyq9300XD3dwDT30
- qetMhOObaXm+W2mseXbcwPO2KtyYrvNlHOP+L9QtZbj1annBD2qZ9g7fFzzG6ik=
-X-Google-Smtp-Source: AGHT+IErtYFurUYLIphpNl+v/HnGyXJ1DQ1ORld7upZLAUreWORgpvrcO967b5EK1teedsJAdPd8+g==
-X-Received: by 2002:a05:6512:3e24:b0:52b:798f:cd7e with SMTP id
- 2adb3069b0e04-52b89521852mr2069874e87.12.1717162454972; 
- Fri, 31 May 2024 06:34:14 -0700 (PDT)
-Received: from ?IPV6:2a02:8109:aa0d:be00::ebdd? ([2a02:8109:aa0d:be00::ebdd])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a67ea67b4f8sm87431866b.102.2024.05.31.06.34.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 31 May 2024 06:34:14 -0700 (PDT)
-Message-ID: <353ca842-e9d3-478b-a7da-33570dd3b7ec@linaro.org>
-Date: Fri, 31 May 2024 15:34:11 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44VDkloF122947;
+ Fri, 31 May 2024 08:46:47 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1717163207;
+ bh=ISMvxUnA3mEITgX7T6WlglBfst4dvxkHbnsgReZNsfA=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=qTzsz9kckIMApjx611jy5RM4KcVIc9QYDP4WucUAUCAaW2GUYxA5ZxCld6T46iKUW
+ Xcn6qKUV3wX5EB74lwKqAErDznvRBBkpBxJxQlsMiFFJ93jLrHNbzz3RqznOAO4kg5
+ B4nxyuw27tAlnELSgcDtZ3Bn3s1IiSvHdhX872uk=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44VDklNj114600
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 31 May 2024 08:46:47 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 31
+ May 2024 08:46:47 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 31 May 2024 08:46:47 -0500
+Received: from [172.24.27.209] (lt5cd112gt3k.dhcp.ti.com [172.24.27.209])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44VDkiF5011227;
+ Fri, 31 May 2024 08:46:45 -0500
+Message-ID: <a70cac48-0d45-4035-9362-09b0bb319a13@ti.com>
+Date: Fri, 31 May 2024 19:16:44 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 6/7] tools: add genguid tool
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Mario Six <mario.six@gdsys.cc>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de
-References: <20240529-b4-dynamic-uuid-v2-0-c26f31057bbe@linaro.org>
- <20240529-b4-dynamic-uuid-v2-6-c26f31057bbe@linaro.org>
- <CAFLszTgtJi+QE4Ry70jDJbqg3rgTMXEqbt-RROQ1kQwR1Qv-Ag@mail.gmail.com>
- <fd581f3d-00a9-4389-a9e5-e1fb8b5b213a@linaro.org>
- <CAFLszTgWPikh3VA6VvvQc6uuPvb3MZL=E37mUB4Ng7STJeUBTw@mail.gmail.com>
+Subject: Re: [PATCH 0/6] Add ESM Support for J7200
+To: <u-boot@lists.denx.de>, <trini@konsulko.com>
+CC: <u-kumar1@ti.com>, <n-francis@ti.com>, <m-chawdhry@ti.com>, <nm@ti.com>
+References: <20240531130823.646311-1-a-limaye@ti.com>
 Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAFLszTgWPikh3VA6VvvQc6uuPvb3MZL=E37mUB4Ng7STJeUBTw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: "Limaye, Aniket" <a-limaye@ti.com>
+In-Reply-To: <20240531130823.646311-1-a-limaye@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,59 +79,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
-On 29/05/2024 21:45, Simon Glass wrote:
-> Hi Caleb,
+
+On 5/31/2024 6:38 PM, Aniket Limaye wrote:
+> This series adds the required nodes in the devicetree, and enables the
+> configs for the ESM and PMIC.
 > 
-> On Wed, 29 May 2024 at 13:02, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>
->> Hi Simon,
->>
->> On 29/05/2024 18:30, Simon Glass wrote:
->>> Hi Caleb,
->>>
->>> On Wed, 29 May 2024 at 08:49, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>>>
->>>> Add a tool that can generate GUIDs that match those generated internally
->>>> by U-Boot for capsule update fw_images.
->>>>
->>>> Dynamic UUIDs in U-Boot work by taking a namespace UUID and hashing it
->>>> with the board model, compatible, and fw_image name.
->>>>
->>>> This tool accepts the same inputs and will produce the same GUID as
->>>> U-Boot would at runtime.
->>>>
->>>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->>>> ---
->>>>    tools/Makefile  |   3 ++
->>>>    tools/genguid.c | 154 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
->>>>    2 files changed, 157 insertions(+)
->>>
->>> Where is this tool used? Can you add a man page and test?
->>
->> It currently doesn't have any users, it just allows for pre-generating
->> GUIDs ahead of time for a given board. It might be hooked up to vendor
->> tooling or some usecase like that.
->>
->> I've somehow escaped learning Groff before now heh, I can give it a go
->> and write a test.
+> Test Logs AVS and ESM:
+> https://gist.github.com/aniket-l/96b85a25733095b4fd87f48f730518bf
+
+Forgot to add that this series depends on the patch [0] "arm: dts: 
+k3-j7200: Move to OF_UPSTREAM"
+
+[0]: 
+https://lore.kernel.org/u-boot/20240521054842.2121479-1-a-limaye@ti.com/
+
 > 
-> OK (just copy bits of mkimage.1 :-)
-
-Right :D
+> ---
+> Aniket Limaye (2):
+>    arm: dts: k3-j7200-r5: Add the pmic node in R5 dt
+>    arm: dts: k3-j7200-r5: Fix indentation to use tabs
 > 
-> Re the test, would this be something that binman would use? If so you
-> could put a test there.
-
-This tool is just a wrapper for gen_uuid_v5() which we already test in 
-the dynamic UUID unit tests also introduced in this series. I don't 
-think it's necessary to additionally test this tool.
-
-Kind regards,
+> Gowtham Tammana (2):
+>    arm: dts: k3-j7200-r5-common: Hook buckb1 to vtm supply
+>    arm: dts: k3-j7200: Add ESM PMIC support for tps659413
 > 
-> Regards,
-> Simon
-
--- 
-// Caleb (they/them)
+> Neha Malcom Francis (2):
+>    configs: j7200_evm_r5: Add ESM config for J7200
+>    configs: j7200_evm_r5: Add ESM config for J7200
+> 
+>   .../arm/dts/k3-j7200-r5-common-proc-board.dts | 23 +++++++++++++++----
+>   configs/j7200_evm_r5_defconfig                |  2 ++
+>   2 files changed, 21 insertions(+), 4 deletions(-)
+> 
