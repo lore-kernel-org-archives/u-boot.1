@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA3E3C25B75
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 22:25:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D85FCC27C4F
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 22:25:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCAAA887C7;
-	Sat,  1 Jun 2024 00:21:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3B6018879C;
+	Sat,  1 Jun 2024 00:21:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="LA9vmdMa";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="o+Hj928A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CACD38887E; Sat,  1 Jun 2024 00:21:55 +0200 (CEST)
+ id DD88D88842; Sat,  1 Jun 2024 00:21:55 +0200 (CEST)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1140688842
- for <u-boot@lists.denx.de>; Sat,  1 Jun 2024 00:21:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3FB46882BE
+ for <u-boot@lists.denx.de>; Sat,  1 Jun 2024 00:21:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44VMLYP3111766;
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44VMLYP1111762;
  Fri, 31 May 2024 17:21:34 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1717194094;
- bh=tS3hBoSQxYpQ7FzHp4bP9MZOuYG8lB00rjAzCl3pbDU=;
+ bh=UU8bty0DbXnKVLpPrLJnPmvuUYludXGycZt1EHygiFI=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=LA9vmdMaVmXZ4O72FTpHghQF2UZPNa2/G7avcSy19bXcn3BR+Zwr7BtaDTnkP40I4
- O2d9CyjbAvVjH7NKLZkt3i6QLZN5VTsGB0/KILnElqamwS9ZIZvsi/++bn0hc6XJAt
- bEtTNUK2kISypyL9jUBv4vUl9O5S3RS4fADzqmPY=
+ b=o+Hj928AuZnX6cLGxVhepDt9oyGWVX02kBRr5tZbFrIkPfPbkkfD8Rgy4o7NIjjEy
+ 4rZwcFg/fxZogAuvuVet6wSVSwhiv/FP2SYaOuJuSRIIwJbmx1GtJ4N6Sy8ydumOMO
+ byWKoBFXk65hAMLe0xPar4MOM/stZO2bIyUBRVVE=
 Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44VMLYWj005580
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44VMLYce005577
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Fri, 31 May 2024 17:21:34 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE112.ent.ti.com
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE112.ent.ti.com
  (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 31
  May 2024 17:21:34 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Fri, 31 May 2024 17:21:34 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44VMLYol006278;
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44VMLY3x026076;
  Fri, 31 May 2024 17:21:34 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
@@ -67,9 +67,9 @@ To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ilias Apalodimas
  <ilias.apalodimas@linaro.org>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH v5 22/23] configs: j784s4: Enable EFI capsule update
-Date: Fri, 31 May 2024 17:21:17 -0500
-Message-ID: <20240531222118.2618041-23-j-humphreys@ti.com>
+Subject: [PATCH v5 17/23] doc: board: ti: am62px: document OSPI layout
+Date: Fri, 31 May 2024 17:21:12 -0500
+Message-ID: <20240531222118.2618041-18-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240531222118.2618041-1-j-humphreys@ti.com>
 References: <20240531222118.2618041-1-j-humphreys@ti.com>
@@ -93,23 +93,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable on disk, raw capsule update.
+Added OSPI flash layout diagram, as well as example commands to flash
+firmware to it.
 
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- configs/j784s4_evm_a72_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
+ doc/board/ti/am62px_sk.rst | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
 
-diff --git a/configs/j784s4_evm_a72_defconfig b/configs/j784s4_evm_a72_defconfig
-index d7709f554fd..9cf1352cf7b 100644
---- a/configs/j784s4_evm_a72_defconfig
-+++ b/configs/j784s4_evm_a72_defconfig
-@@ -158,3 +158,5 @@ CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_TI_SCI=y
- CONFIG_DM_THERMAL=y
- CONFIG_EFI_SET_TIME=y
-+CONFIG_EFI_CAPSULE_ON_DISK=y
-+CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+diff --git a/doc/board/ti/am62px_sk.rst b/doc/board/ti/am62px_sk.rst
+index 1f2982c36f9..c80b5068117 100644
+--- a/doc/board/ti/am62px_sk.rst
++++ b/doc/board/ti/am62px_sk.rst
+@@ -156,6 +156,30 @@ Image formats:
+ .. image:: img/dm_tispl.bin.svg
+   :alt: tispl.bin image format
+ 
++OSPI:
++-----
++ROM supports booting from OSPI from offset 0x0.
++
++Flashing images to OSPI:
++
++Below commands can be used to download tiboot3.bin, tispl.bin, and u-boot.img,
++over tftp and then flash those to OSPI at their respective addresses.
++
++.. prompt:: bash =>
++
++  sf probe
++  tftp ${loadaddr} tiboot3.bin
++  sf update $loadaddr 0x0 $filesize
++  tftp ${loadaddr} tispl.bin
++  sf update $loadaddr 0x80000 $filesize
++  tftp ${loadaddr} u-boot.img
++  sf update $loadaddr 0x280000 $filesize
++
++Flash layout for OSPI:
++
++.. image:: img/ospi_sysfw2.svg
++  :alt: OSPI flash partition layout
++
+ A53 SPL DDR Memory Layout
+ -------------------------
+ 
 -- 
 2.34.1
 
