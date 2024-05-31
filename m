@@ -4,66 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01876C25B74
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 02:58:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92DF5C25B76
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 02:59:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C34288875A;
-	Fri, 31 May 2024 04:58:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2A0C288763;
+	Fri, 31 May 2024 04:58:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UKJ56g76";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FBmR6RxK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC3BF8831F; Fri, 31 May 2024 04:48:06 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id 8C561882D0; Fri, 31 May 2024 04:48:07 +0200 (CEST)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA52D8874B
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 04:48:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7640D88735
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 04:48:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6ad8243dba8so7602026d6.3
- for <u-boot@lists.denx.de>; Thu, 30 May 2024 19:48:03 -0700 (PDT)
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-6ae84d171fcso1921666d6.2
+ for <u-boot@lists.denx.de>; Thu, 30 May 2024 19:48:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1717123683; x=1717728483; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gBKshB+WTLbYn4p98T3fSbAqlC5IB0CQrCEXJYw/zis=;
- b=UKJ56g76///F2HLPfBA+S4AiAdwf0lQOpU3Win0HUAz3PQvg4/lCYJ6yeluEdYrzPp
- 0EM8ksH83OCcy14+zenBaIy3P2PAOR/xHg7IjOQ0LtpflCTd+bXHhrgZHap/U4HqcSpA
- Aij3IWoPJO5ET2rNi5En6xKQQK6WexsZ6bCcE=
+ bh=JjQYNhGeZvolDp/bdAJ/I8px+Ol00vaeg/dkj9CHuqU=;
+ b=FBmR6RxKTONyLNZIriOiv6H043E+eIHp68P6Y/vFYdWon8xqfj1/q6MQAAwkM6p6ei
+ nfiNE7unbvdicIzbObzoHRXwSI9BNzQPSmAx4603Pwk6YPjL71lnQ4UGEI34w+JXVfWC
+ U9hdQmAn1LBxHCkvvZasqynQYCTw+QF4Qc7tk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1717123683; x=1717728483;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=gBKshB+WTLbYn4p98T3fSbAqlC5IB0CQrCEXJYw/zis=;
- b=XenXDTgIVZEKc0qwqd54INqVeWnPlpDuAAU46eSLTQtTzD3BDX72MEIDoZWHCgWa72
- L8UTFBVcew7ehMe1h4RdbAr/Qggp42RGXGC9Ahsd/f4j/JzSymSKP+ZLvHtERNrUtrpm
- WGTyTI1NWN2nGyydE/2zY1F2aj50Cok9Ybvnl+iBqA7nLHz87dZmfOZ1V5GicfJl4GOt
- wcpexSsONM4DQvDm8L4u++EfpDUWXmJEQh0aCWLRjN1rfYhZgk40rymAWQg0q2IpU60t
- 1pnkuPdYZxiQnK6LcUY15tph2h5yytwXLX7iU1C2KEebfIZs9r2KMpsE4MSPNgP619Vd
- t6Ew==
-X-Gm-Message-State: AOJu0YwGkbBtylvpxhaKDr4BfHEQ3rsxOjIg0/Q8ti58ztdN4ro1aYcU
- Zm4+V2Edp5fuE7uG2NV/1IjS/kXch7haABfzg6DHYeBK8KQLifu7flIqFV3kTQO/XRl/ecRz4/8
- h9B1Lk+/ag+iqSl93HCs+ijVAMOcWSow1BSAW
-X-Google-Smtp-Source: AGHT+IEPsblRkdyiQmf8TpJmKZumEacT/nkZlaV9z4fYUpqJkMXu5SxqzPkEU+WdjeMBXyTntsIPFmvPzvxDYTb254I=
-X-Received: by 2002:a05:6214:3a03:b0:6a8:d2cd:5456 with SMTP id
- 6a1803df08f44-6aecd576577mr7968336d6.10.1717123682665; Thu, 30 May 2024
- 19:48:02 -0700 (PDT)
+ bh=JjQYNhGeZvolDp/bdAJ/I8px+Ol00vaeg/dkj9CHuqU=;
+ b=ees1VLOzmipI2h+4JX1aav7AyUt3aJIc9GzOKbcsDo9YV5X9bZKS95jtVgweexVjX0
+ 1SjTvpr6BSugWXOX0bzIG1/xbuUtyoziyHLe0oXo1UTxb1EXp11WpzjO9MQlxFszsaln
+ nIJ4+sEHnKsvNYXGpTPZDfI10NFr1aC/mPAR1R/9TsElrjZ4pcyou2yYqWQk59mdzii7
+ gsCYnsLtzs4byoVspDcaEEXRAW1EFWOedwCbXnHwWX8NDbzJGwHGH/DP0FYtZ/MyBNPh
+ 4GOjHZxrGqcYVHYVa8XmD0Toum3Rqg/p8IadN42eFm9E+FPyYxOpknAYJewDO3cSI0he
+ 8How==
+X-Gm-Message-State: AOJu0YxWPKQBuI/DpIFzff9H5I/cX+9nz1egu3HKPdooCjEBRvsFJHE2
+ bo+awaTbVuB0FPRZ9hdTdzk0JtUonRtJRvb0uKi/HJisyGq5llCot1e4EtFsfshFTvlyttERDxn
+ NtcKh6CvtkW16GTKUdeTrQUIFGIRwtczWyV5i
+X-Google-Smtp-Source: AGHT+IHdTwzS9/HKmNl6x3DzrENIhTsejKn+DC/+31pjVaqdwkizeIG+RSD063rfHHAgR1AxPusswhyP3GvdTybV4CU=
+X-Received: by 2002:a05:6214:5c46:b0:6ae:d19:b2f with SMTP id
+ 6a1803df08f44-6aecd6dd17dmr5998006d6.47.1717123683329; Thu, 30 May 2024
+ 19:48:03 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240530220634.155951-1-tharvey@gateworks.com>
- <20240530220634.155951-3-tharvey@gateworks.com>
-In-Reply-To: <20240530220634.155951-3-tharvey@gateworks.com>
+ <20240530220634.155951-4-tharvey@gateworks.com>
+In-Reply-To: <20240530220634.155951-4-tharvey@gateworks.com>
 From: Simon Glass <sjg@chromium.org>
 Date: Thu, 30 May 2024 20:47:52 -0600
-Message-ID: <CAFLszTiV67_+7rq9MAGpK0zV9kgqdwtE8SmJ-cxSwou4Ko=PLQ@mail.gmail.com>
-Subject: Re: [PATCH v5 2/3] fdt: automatically add /chosen/kaslr-seed if
- DM_RNG is enabled
+Message-ID: <CAFLszTivog4FkLmdnZmi7Y5E9CqAmbTG2C3-6-TxRfDVym6OdA@mail.gmail.com>
+Subject: Re: [PATCH v5 3/3] use fdt_kaslrseed function to de-duplicate code
 To: Tim Harvey <tharvey@gateworks.com>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Patrick Delaunay <patrick.delaunay@foss.st.com>, 
@@ -96,18 +95,12 @@ X-Virus-Status: Clean
 
 On Thu, 30 May 2024 at 16:06, Tim Harvey <tharvey@gateworks.com> wrote:
 >
-> If RANDOMIZE_BASE is enabled in the Linux kernel instructing it to
-> randomize the virtual address at which the kernel image is loaded, it
-> expects entropy to be provided by the bootloader by populating
-> /chosen/kaslr-seed with a 64-bit value from source of entropy at boot.
+> Use the fdt_kaslrseed function to deduplicate code doing the same thing.
 >
-> If we have DM_RNG enabled populate this value automatically when
-> fdt_chosen is called. We skip this if ARMV8_SEC_FIRMWARE_SUPPORT
-> is enabled as its implementation uses a different source of entropy
-> that is not yet implemented as DM_RNG. We also skip this if
-> MEASURED_BOOT is enabled as in that case any modifications to the
-> dt will cause measured boot to fail (although there are many other
-> places the dt is altered).
+> Note that the kalsrseed command (CMD_KASLRSEED) is likely pointless now
+> but left in place in case boot scripts exist that rely on this command
+> existing and returning success. An informational message is printed to
+> alert users of this command that it is likely no longer needed.
 >
 > Note that the Kernel's EFI STUB only relies on EFI_RNG_PROTOCOL for
 > randomization and completely ignores the kaslr-seed for its own
@@ -133,7 +126,7 @@ On Thu, 30 May 2024 at 16:06, Tim Harvey <tharvey@gateworks.com> wrote:
 > ---
 > v5:
 >  - fixed typo in commit message s/it's/its/
->  - split patch into 3 parts
+>  - use cmd_process_error per Michal's suggestion
 > v4:
 >  - add missing /n to notice in kaslrseed cmd
 >  - combine ints in declaration
@@ -150,37 +143,10 @@ On Thu, 30 May 2024 at 16:06, Tim Harvey <tharvey@gateworks.com> wrote:
 >  - move to a library function and deduplicate code by using it
 >    elsewhere
 > ---
->  boot/fdt_support.c | 9 +++++++++
->  1 file changed, 9 insertions(+)
+>  board/xilinx/common/board.c | 40 ------------------------------
+>  boot/pxe_utils.c            | 34 +------------------------
+>  cmd/kaslrseed.c             | 49 ++++++-------------------------------
+>  3 files changed, 8 insertions(+), 115 deletions(-)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-My only question is whether there should be error checking here?
-
-> diff --git a/boot/fdt_support.c b/boot/fdt_support.c
-> index b1b2679dea0c..4559adcd5e2e 100644
-> --- a/boot/fdt_support.c
-> +++ b/boot/fdt_support.c
-> @@ -345,6 +345,15 @@ int fdt_chosen(void *fdt)
->         if (nodeoffset < 0)
->                 return nodeoffset;
->
-> +       /* if DM_RNG enabled automatically inject kaslr-seed node unless:
-> +        * CONFIG_MEASURED_BOOT enabled: as dt modifications break measured boot
-> +        * CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT enabled: as that implementation does not use dm yet
-> +        */
-> +       if (IS_ENABLED(CONFIG_DM_RNG) &&
-> +           !IS_ENABLED(CONFIG_MEASURED_BOOT) &&
-> +           !IS_ENABLED(CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT))
-> +               fdt_kaslrseed(fdt, false);
-> +
->         if (IS_ENABLED(CONFIG_BOARD_RNG_SEED) && !board_rng_seed(&buf)) {
->                 err = fdt_setprop(fdt, nodeoffset, "rng-seed",
->                                   abuf_data(&buf), abuf_size(&buf));
-> --
-> 2.25.1
->
-
-Regards,
-Simon
