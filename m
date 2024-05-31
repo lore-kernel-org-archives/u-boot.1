@@ -4,49 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C0A4C25B75
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 15:13:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CED0FC27C4F
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 15:13:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A66E8887F5;
-	Fri, 31 May 2024 17:13:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1FB1B88805;
+	Fri, 31 May 2024 17:13:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="Ry8Xkj0b";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="E46LDal5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E224188076; Fri, 31 May 2024 16:34:15 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
+ id 260F5882CD; Fri, 31 May 2024 16:34:16 +0200 (CEST)
+Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4831C887C2
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 16:34:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ED443887B7
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 16:34:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=t.schramm@manjaro.org
 From: Tobias Schramm <t.schramm@manjaro.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1717166051;
+ t=1717166050;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=1RBIJv5imOpm3x8NQBGeqpk3MySQOt3FCPlkpue2fAM=;
- b=Ry8Xkj0bJrnUA8hkMwm1VsHcUID4BEY/oqZbmW/ApilAXSmqDHqOYk9qclwUzOasQzVHoZ
- B9C+jWVf61fRPYf9WIGHHWqDVaS/U8JDJ4ns4VpinZH6tVTt+bG2ujcdkk5nDxnKdPjN25
- 7DWqHrLuTm9HKeQi88r3rDUXBlKpTx3l0I7XwXVuf7Vqk+mEoAI0G7k+V0bmN7Ai+MzlRl
- Pyyeom3Di8W2ocCZl+WK9vsBoIlMLabEOAW86UUBGQWXJpjuWxCbBeR31mPTqB3q61rP1V
- b1umOd3L0a4BN240ntOuNbL8WqRnkgkAvH7n6D91Jl/csPxbourcB9IPi+nicw==
+ bh=voH0lHvXrkTMmzvcaw0pD9clMspYefqJb2p+0LzH3U8=;
+ b=E46LDal5RbHIbn/TJKrJFpIOKdbSXN36qdzWKU5elZ3nCWZC4etm0uCe5JreDvZBThAXf6
+ 7Ib+vS/DcACJH0Gwnqv9kfgi+crpABtS4OANjIiExcgCzE7B8s/URvc36GBt02awylOStA
+ KvbJ1NVgTaIuLA4jWqbcOlJl1taYRnhh+L6s4gqZEMveKa29tfhCv6jS5aRVejZl5A9Buw
+ mJuRmTNNdd9GvA3tkvoVhk2umfJOFX5BN2vfBQ4zYXC2ix6C7dYvHCNWyyXOdJVpf8+oV8
+ fDsFxBaCt0O92HWQDLirJULno8djwAVGQGkqfmYtIC7nAF8BgoL3QL5VXLiIiw==
 To: u-boot@lists.denx.de
 Cc: Jagan Teki <jagan@amarulasolutions.com>,
  Andre Przywara <andre.przywara@arm.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>,
  Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>, Tobias Schramm <t.schramm@manjaro.org>
-Subject: [PATCH 2/2] net: sun8i_emac: add support for EMAC on V3s-based SoCs
-Date: Fri, 31 May 2024 16:33:50 +0200
-Message-ID: <20240531143350.14855-3-t.schramm@manjaro.org>
+Subject: [PATCH 1/2] clk: sunxi: support Ethernet clock gates and resets on
+ V3s-based SoCs
+Date: Fri, 31 May 2024 16:33:49 +0200
+Message-ID: <20240531143350.14855-2-t.schramm@manjaro.org>
 In-Reply-To: <20240531143350.14855-1-t.schramm@manjaro.org>
 References: <20240531143350.14855-1-t.schramm@manjaro.org>
 MIME-Version: 1.0
@@ -70,41 +71,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Allwinner V3s SoC and related SoCs have a fast Ethernet MAC with
-internal Ethernet phy. The internal phy is connected via MII and the MII
-is not exposed externally on SoC pins.
-Add support for this MAC and phy combo to the sun8i EMAC driver.
+Previously Ethernet clock gates and resets were missing from the V3s CCU
+driver.
+Add the required clock gates and resets for Ethernet MAC and internal
+Ethernet phy.
 
 Signed-off-by: Tobias Schramm <t.schramm@manjaro.org>
 ---
- drivers/net/sun8i_emac.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ drivers/clk/sunxi/clk_v3s.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/drivers/net/sun8i_emac.c b/drivers/net/sun8i_emac.c
-index 8bff4fe9a9..d9d1825b69 100644
---- a/drivers/net/sun8i_emac.c
-+++ b/drivers/net/sun8i_emac.c
-@@ -903,6 +903,11 @@ static const struct emac_variant emac_variant_h6 = {
- 	.support_rmii		= true,
- };
+diff --git a/drivers/clk/sunxi/clk_v3s.c b/drivers/clk/sunxi/clk_v3s.c
+index 6524c13540..0402d5ed19 100644
+--- a/drivers/clk/sunxi/clk_v3s.c
++++ b/drivers/clk/sunxi/clk_v3s.c
+@@ -17,6 +17,7 @@ static struct ccu_clk_gate v3s_gates[] = {
+ 	[CLK_BUS_MMC0]		= GATE(0x060, BIT(8)),
+ 	[CLK_BUS_MMC1]		= GATE(0x060, BIT(9)),
+ 	[CLK_BUS_MMC2]		= GATE(0x060, BIT(10)),
++	[CLK_BUS_EMAC]		= GATE(0x060, BIT(17)),
+ 	[CLK_BUS_SPI0]		= GATE(0x060, BIT(20)),
+ 	[CLK_BUS_OTG]		= GATE(0x060, BIT(24)),
  
-+static const struct emac_variant emac_variant_v3s = {
-+	.syscon_offset		= 0x30,
-+	.soc_has_internal_phy	= true,
-+};
+@@ -31,6 +32,8 @@ static struct ccu_clk_gate v3s_gates[] = {
+ 	[CLK_BUS_UART1]		= GATE(0x06c, BIT(17)),
+ 	[CLK_BUS_UART2]		= GATE(0x06c, BIT(18)),
+ 
++	[CLK_BUS_EPHY]		= GATE(0x070, BIT(0)),
 +
- static const struct udevice_id sun8i_emac_eth_ids[] = {
- 	{ .compatible = "allwinner,sun8i-a83t-emac",
- 	  .data = (ulong)&emac_variant_a83t },
-@@ -914,6 +919,8 @@ static const struct udevice_id sun8i_emac_eth_ids[] = {
- 	  .data = (ulong)&emac_variant_a64 },
- 	{ .compatible = "allwinner,sun50i-h6-emac",
- 	  .data = (ulong)&emac_variant_h6 },
-+	{ .compatible = "allwinner,sun8i-v3s-emac",
-+	  .data = (ulong)&emac_variant_v3s },
- 	{ }
- };
+ 	[CLK_SPI0]		= GATE(0x0a0, BIT(31)),
  
+ 	[CLK_USB_PHY0]          = GATE(0x0cc, BIT(8)),
+@@ -45,12 +48,15 @@ static struct ccu_reset v3s_resets[] = {
+ 	[RST_BUS_MMC0]		= RESET(0x2c0, BIT(8)),
+ 	[RST_BUS_MMC1]		= RESET(0x2c0, BIT(9)),
+ 	[RST_BUS_MMC2]		= RESET(0x2c0, BIT(10)),
++	[RST_BUS_EMAC]		= RESET(0x2c0, BIT(17)),
+ 	[RST_BUS_SPI0]		= RESET(0x2c0, BIT(20)),
+ 	[RST_BUS_OTG]		= RESET(0x2c0, BIT(24)),
+ 
+ 	[RST_BUS_TCON0]		= RESET(0x2c4, BIT(4)),
+ 	[RST_BUS_DE]		= RESET(0x2c4, BIT(12)),
+ 
++	[RST_BUS_EPHY]		= RESET(0x2c8, BIT(2)),
++
+ 	[RST_BUS_I2C0]		= RESET(0x2d8, BIT(0)),
+ 	[RST_BUS_I2C1]		= RESET(0x2d8, BIT(1)),
+ 	[RST_BUS_UART0]		= RESET(0x2d8, BIT(16)),
 -- 
 2.30.2
 
