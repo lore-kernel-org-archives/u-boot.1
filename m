@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7ABEC25B75
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 22:52:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4C15C25B75
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 22:52:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB515887F6;
-	Sat,  1 Jun 2024 00:51:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5A2768883C;
+	Sat,  1 Jun 2024 00:51:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="FGlqTkv4";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZZR5ditp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E07A288838; Sat,  1 Jun 2024 00:51:27 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 050508872E; Sat,  1 Jun 2024 00:51:28 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A2A38881D
+ by phobos.denx.de (Postfix) with ESMTPS id 4A0A188817
  for <u-boot@lists.denx.de>; Sat,  1 Jun 2024 00:51:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44VMpDiM117020;
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44VMpDA3022284;
  Fri, 31 May 2024 17:51:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1717195873;
- bh=GYGsCNpa31AsrERw/DVFRVAmY0mWE9Tb6fUig6FxgH4=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=FGlqTkv4Gavq7Pq6f1ddqpArJnwgjHgDYarJe41xt299Bft9J1KzE2t1lFdJkwh6N
- ctIpf6m/qDCpAB5qEm/x9fqRCG94mRG3F4UQv1AZUYjz0VrLbduVuUk91bvto4VQ0d
- A/g443txlerXRNbKiYM6v3Gb6JFEL2VERkBK+d3M=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44VMpDwh062776
+ bh=xCQbLwghpyousnyb5els1zGHYP5ls+yh5cf4ydpRA3Q=;
+ h=From:To:CC:Subject:Date;
+ b=ZZR5ditpBTdTtxNaMO3tq1VyEyaC1zPZcLuscAcjKUl5/qwBECY7Fxfr6Lo8AGweU
+ gyqkXD290z/+WGBCwGO1UFtrGsjsBcYO7EcK77nSA82T7MelFbWisGhj0aFPJyUjBv
+ iRYpZPVaCPw6i1YRVghe8/1ALXB1sJMSZHhmFS2g=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44VMpDnm105306
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Fri, 31 May 2024 17:51:13 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 31
  May 2024 17:51:13 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Fri, 31 May 2024 17:51:13 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44VMpDMZ065618;
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44VMpDMN046297;
  Fri, 31 May 2024 17:51:13 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
@@ -67,13 +67,10 @@ To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ilias Apalodimas
  <ilias.apalodimas@linaro.org>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH v3 5/9] dts: beagleplay: binman: Include firmware capsules
- binman nodes
-Date: Fri, 31 May 2024 17:51:06 -0500
-Message-ID: <20240531225110.2622239-6-j-humphreys@ti.com>
+Subject: [PATCH v3 0/9] binman: ti: create binman nodes for EFI capsules
+Date: Fri, 31 May 2024 17:51:01 -0500
+Message-ID: <20240531225110.2622239-1-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240531225110.2622239-1-j-humphreys@ti.com>
-References: <20240531225110.2622239-1-j-humphreys@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -94,76 +91,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fill in the BeaglePlay's capsule GUID properties of the base binman capsule
-nodes.
+Add binman nodes for EFI capsules of firmware components so that capsules
+are automatically created during the UBoot builds.
 
-Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
----
- arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi | 27 ++++++++++++++++++++
- arch/arm/dts/k3-am625-r5-beagleplay.dts      | 15 +++++++++++
- 2 files changed, 42 insertions(+)
+This is enabled for several TI SoC based platforms: AM64, AM62, AM62p,
+BeaglePlay, AM69, J7, and BeagleboneAI.
 
-diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-index 9ac4a825f84..cbb428de1a8 100644
---- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-@@ -214,6 +214,33 @@
- 		};
- 	};
- };
-+
-+#include "k3-binman-capsule.dtsi"
-+
-+// Capsule update GUIDs in string form.  See beagleplay.h
-+#define BEAGLEPLAY_SPL_IMAGE_GUID_STR "b2e7cc49-1a5a-4036-ae01-3387c3bef657"
-+#define BEAGLEPLAY_UBOOT_IMAGE_GUID_STR "92c92b11-a7ee-486f-aaa2-713d84425b0e"
-+
-+&capsule_tispl {
-+	efi-capsule {
-+		image-guid = BEAGLEPLAY_SPL_IMAGE_GUID_STR;
-+
-+		blob {
-+			filename = "tispl.bin_unsigned";
-+		};
-+	};
-+};
-+
-+&capsule_uboot {
-+	efi-capsule {
-+		image-guid = BEAGLEPLAY_UBOOT_IMAGE_GUID_STR;
-+
-+		blob {
-+			filename = "u-boot.img_unsigned";
-+		};
-+	};
-+};
-+
- #endif
- 
- &main_bcdma {
-diff --git a/arch/arm/dts/k3-am625-r5-beagleplay.dts b/arch/arm/dts/k3-am625-r5-beagleplay.dts
-index 9db58f093c8..162d4800b17 100644
---- a/arch/arm/dts/k3-am625-r5-beagleplay.dts
-+++ b/arch/arm/dts/k3-am625-r5-beagleplay.dts
-@@ -114,3 +114,18 @@
- 
- 	};
- };
-+
-+#include "k3-binman-capsule-r5.dtsi"
-+
-+// Capsule update GUIDs in string form.  See beagleplay.h
-+#define BEAGLEPLAY_TIBOOT3_IMAGE_GUID_STR "0e225a09-f720-4d57-9120-e28f737f5a5e"
-+
-+&capsule_tiboot3 {
-+	efi-capsule {
-+		image-guid = BEAGLEPLAY_TIBOOT3_IMAGE_GUID_STR;
-+
-+		blob {
-+			filename = "tiboot3-am62x-gp-evm.bin";
-+		};
-+	};
-+};
+Changes from v1:
+- on GP devices, still use signed images in capsules where available
+- Insert board specific capsule GUIDs into the capsule node's image-guid.
+
+Changes from v2:
+- trigger building mkeficapsule tool on EFI_LOADER. This addresses buildman
+  failures found with CI.
+- Added AM69 board support
+Link to v2:  https://lore.kernel.org/r/20240419212819.170033-1-j-humphreys@ti.com
+
+Jonathan Humphreys (9):
+  tools: Build mkeficapsule tool by default if EFI_LOADER is set
+  dts: ti: binman: Add base K3 firmware capsule nodes
+  dts: am64x: binman: Include firmware capsules binman nodes
+  dts: j721e: binman: Include firmware capsules binman nodes
+  dts: beagleplay: binman: Include firmware capsules binman nodes
+  dts: am62px: binman: Include firmware capsules binman nodes
+  dts: am62x: binman: Include firmware capsules binman nodes
+  dts: beagleboneai64: binman: Include firmware capsules binman nodes
+  dts: j784s4: binman: Include firmware capsules binman nodes
+
+ arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi  | 27 ++++++++++
+ arch/arm/dts/k3-am625-r5-beagleplay.dts       | 15 ++++++
+ arch/arm/dts/k3-am625-sk-binman.dtsi          | 30 ++++++++++++
+ arch/arm/dts/k3-am62p-sk-binman.dtsi          | 29 +++++++++++
+ arch/arm/dts/k3-am64x-binman.dtsi             | 30 ++++++++++++
+ arch/arm/dts/k3-binman-capsule-r5.dtsi        | 21 ++++++++
+ arch/arm/dts/k3-binman-capsule.dtsi           | 38 ++++++++++++++
+ .../dts/k3-j721e-beagleboneai64-u-boot.dtsi   | 23 +++++++++
+ arch/arm/dts/k3-j721e-binman.dtsi             | 49 +++++++++++++++++++
+ arch/arm/dts/k3-j721e-r5-beagleboneai64.dts   | 29 +++++++++++
+ arch/arm/dts/k3-j784s4-binman.dtsi            | 35 +++++++++++++
+ tools/Kconfig                                 |  2 +-
+ 12 files changed, 327 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/k3-binman-capsule-r5.dtsi
+ create mode 100644 arch/arm/dts/k3-binman-capsule.dtsi
+
 -- 
 2.34.1
 
