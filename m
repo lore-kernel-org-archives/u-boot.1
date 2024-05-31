@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E983DC25B75
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 22:52:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FAFEC25B75
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 22:52:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B43E88858;
-	Sat,  1 Jun 2024 00:51:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0A6C688865;
+	Sat,  1 Jun 2024 00:51:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="t/idbNLZ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GAh29RGr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 961158883A; Sat,  1 Jun 2024 00:51:29 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id CA80188826; Sat,  1 Jun 2024 00:51:29 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E90F88826
+ by phobos.denx.de (Postfix) with ESMTPS id 8967188827
  for <u-boot@lists.denx.de>; Sat,  1 Jun 2024 00:51:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44VMpDkt022292;
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44VMpD0Z000818;
  Fri, 31 May 2024 17:51:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1717195873;
- bh=OhmCFH3IsmebhwTo5Y7HR+IFyzRIw73k7Wrvucvvif4=;
+ bh=Jm32GiKnOILLaA7VZlfewmO1mO5Dz1DVrTztOXpcMgo=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=t/idbNLZglyXw75NOl2oqsQjlFIj7wQzJ3hA68z7DBuoTrcWBG8wLDaUEDAblmXwo
- k7V+EA0Z8f4BaW7ZMnap1+xYILwaVGhRe/ovhg9+VwI7GKBZsO94JnSDP12A75jDm+
- fBp9ZV1D1EGxplr5UB+/u88mriSF70WWev2ZMtt8=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44VMpDoX105313
+ b=GAh29RGrBDUewVATzUv2KZjUzivN6Fxki4w6t8NbxUJNqgSvGeFOV5CsD1Yoc931l
+ ZW4aLGDFLpIllPI9AnGQjKD7UsYMF3Fgi6GGwHpQtDeE7wDhcj9IWgdzsysQsTFstj
+ oW13GJ91ZhMaeBlAg9vKgSw0Gk/CNI4v08E0avDQ=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44VMpD3h024393
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Fri, 31 May 2024 17:51:13 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 31
  May 2024 17:51:13 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Fri, 31 May 2024 17:51:13 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44VMpDEA065622;
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44VMpDm6065615;
  Fri, 31 May 2024 17:51:13 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
@@ -67,10 +67,10 @@ To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ilias Apalodimas
  <ilias.apalodimas@linaro.org>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH v3 8/9] dts: beagleboneai64: binman: Include firmware capsules
- binman nodes
-Date: Fri, 31 May 2024 17:51:09 -0500
-Message-ID: <20240531225110.2622239-9-j-humphreys@ti.com>
+Subject: [PATCH v3 3/9] dts: am64x: binman: Include firmware capsules binman
+ nodes
+Date: Fri, 31 May 2024 17:51:04 -0500
+Message-ID: <20240531225110.2622239-4-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240531225110.2622239-1-j-humphreys@ti.com>
 References: <20240531225110.2622239-1-j-humphreys@ti.com>
@@ -94,84 +94,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fill in the BeagleBoneAI64's capsule GUID properties of the base binman
-capsule nodes. Also add it's SYSFW binman capsule node.
+Fill in the am64x SK's capsule GUID properties of the base binman capsule
+nodes.
 
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- .../dts/k3-j721e-beagleboneai64-u-boot.dtsi   | 23 +++++++++++++++
- arch/arm/dts/k3-j721e-r5-beagleboneai64.dts   | 29 +++++++++++++++++++
- 2 files changed, 52 insertions(+)
+ arch/arm/dts/k3-am64x-binman.dtsi | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
 
-diff --git a/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi b/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
-index e202ae16644..884f44239e1 100644
---- a/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
-+++ b/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
-@@ -351,4 +351,27 @@
+diff --git a/arch/arm/dts/k3-am64x-binman.dtsi b/arch/arm/dts/k3-am64x-binman.dtsi
+index 37817ba60d2..f768c4d946d 100644
+--- a/arch/arm/dts/k3-am64x-binman.dtsi
++++ b/arch/arm/dts/k3-am64x-binman.dtsi
+@@ -114,6 +114,17 @@
+ 	};
+ };
+ 
++#include "k3-binman-capsule-r5.dtsi"
++
++// Capsule update GUIDs in string form.  See am64x_evm.h
++#define AM64X_SK_TIBOOT3_IMAGE_GUID_STR "ede0a0d5-9116-4bfb-aa54-09e97b5afe1a"
++
++&capsule_tiboot3 {
++	efi-capsule {
++		image-guid = AM64X_SK_TIBOOT3_IMAGE_GUID_STR;
++	};
++};
++
+ #endif
+ 
+ #ifdef CONFIG_TARGET_AM642_A53_EVM
+@@ -373,4 +384,23 @@
  		};
  	};
  };
 +
 +#include "k3-binman-capsule.dtsi"
 +
-+// Capsule update GUIDs in string form.  See beagleboneai64.h
-+#define BEAGLEBONEAI64_SPL_IMAGE_GUID_STR "83447222-1e26-40cd-a395-b7de0957e875"
-+#define BEAGLEBONEAI64_UBOOT_IMAGE_GUID_STR "4249ff77-c17d-4eb7-a1db-45aa9887d49e"
++// Capsule update GUIDs in string form.  See am64x_evm.h
++#define AM64X_SK_SPL_IMAGE_GUID_STR "77678f5c-64d4-4910-ad75-52c9d95cdb1d"
++#define AM64X_SK_UBOOT_IMAGE_GUID_STR "c6ad43a9-7d31-4f5d-83e9-b8efecae05bf"
 +
 +&capsule_tispl {
 +	efi-capsule {
-+		image-guid = BEAGLEBONEAI64_SPL_IMAGE_GUID_STR;
-+
-+		blob {
-+			filename = "tispl.bin_unsigned";
-+		};
++		image-guid = AM64X_SK_SPL_IMAGE_GUID_STR;
 +	};
 +};
 +
 +&capsule_uboot {
 +	efi-capsule {
-+		image-guid = BEAGLEBONEAI64_UBOOT_IMAGE_GUID_STR;
++		image-guid = AM64X_SK_UBOOT_IMAGE_GUID_STR;
 +	};
 +};
 +
  #endif
-diff --git a/arch/arm/dts/k3-j721e-r5-beagleboneai64.dts b/arch/arm/dts/k3-j721e-r5-beagleboneai64.dts
-index 43da4dafba8..d4ef18248b0 100644
---- a/arch/arm/dts/k3-j721e-r5-beagleboneai64.dts
-+++ b/arch/arm/dts/k3-j721e-r5-beagleboneai64.dts
-@@ -183,3 +183,32 @@
- 		};
- 	};
- };
-+
-+#include "k3-binman-capsule-r5.dtsi"
-+
-+// Capsue update GUIDs.  See beagleboneai64.h.
-+#define BEAGLEBONEAI64_TIBOOT3_IMAGE_GUID_STR "772a4810-2194-4923-8754-0115870ef367"
-+#define BEAGLEBONEAI64_SYSFW_IMAGE_GUID_STR "dfc9c683-49b7-46bd-b3c1-3a3b2fdb135b"
-+
-+&capsule_tiboot3 {
-+	efi-capsule {
-+		image-guid = BEAGLEBONEAI64_TIBOOT3_IMAGE_GUID_STR;
-+	};
-+};
-+
-+&binman {
-+	capsule-sysfw {
-+		filename = "sysfw-capsule.bin";
-+		efi-capsule {
-+			image-index = <0x4>;
-+			image-guid = BEAGLEBONEAI64_SYSFW_IMAGE_GUID_STR;
-+			private-key = "arch/arm/mach-k3/keys/custMpk.pem";
-+			public-key-cert = "arch/arm/mach-k3/keys/custMpk.crt";
-+			monotonic-count = <0x1>;
-+
-+			blob {
-+				filename = "sysfw.itb";
-+			};
-+		};
-+	};
-+};
 -- 
 2.34.1
 
