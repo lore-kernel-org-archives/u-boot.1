@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 780BFC25B7E
-	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 14:19:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A301C25B7E
+	for <u-boot@archiver.kernel.org>; Fri, 31 May 2024 14:20:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C81A8887E3;
-	Fri, 31 May 2024 16:19:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 40D8B887DA;
+	Fri, 31 May 2024 16:19:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OiyzyeAI";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WBewpLSM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B390E887EA; Fri, 31 May 2024 16:19:12 +0200 (CEST)
-Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
- [IPv6:2607:f8b0:4864:20::530])
+ id 04410887C7; Fri, 31 May 2024 16:19:16 +0200 (CEST)
+Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
+ [IPv6:2607:f8b0:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A03F887C7
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 16:19:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE11C887EA
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 16:19:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-6bce380ebc2so1782274a12.0
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 07:19:10 -0700 (PDT)
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-70234297ef9so1719973b3a.3
+ for <u-boot@lists.denx.de>; Fri, 31 May 2024 07:19:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717165149; x=1717769949; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1717165152; x=1717769952; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cin9JKFG0fxFovjADZZvQtlw+A+m3bxqoWJeRsLkehw=;
- b=OiyzyeAIlJm/GP15wEtJVw3ztwoJIVqyYIqLjQGAO1lz7h2Z7/8zKrXHfD5J6YOblS
- fofV60UgfSivbz2GKeAUGlJ+C/aE9VfLUAxi6Vd9kG0t2bACDdXSckpVKrE9nX7nJ0ca
- s17ChB0R0Hl6SDBZlDh4XfRLnzdQrETK+zeCvQrAX4tAgiUF++n+T7G96JKWWryXxNEj
- 7Q6uSDk9ZOLDRLKuVcVAk5/s+mwy5Jv3KSX3SdLWpHZJOpL5xHtIwERs+i97YG9s4INY
- RB/ItBNzoUsA/FUYESp63XS3WmFl/n3V+Kyuc1RaclCy2/TXsWHBU2gkCDi984ZvL37V
- KySw==
+ bh=9jS/rYDAQ1xa9Q+qHSkaY5aRH65+EVGYXvZS6VR4uDs=;
+ b=WBewpLSM906pjukmpWoz75CBBfhjAUNCIX8DM+y8zmdD+AOfQMSwK6KoVGHCwvU1JB
+ oRBhjFh//IHiCTf5PrL8+K8a9B4OfbKbmyL1auYVyK3C7YpbBfVgmnXhMYjYYUJvKHjc
+ CoRSAQpUppPPJJnX89j+yLwqZblgNDoX9m6Il3NuXSXRK9nAMBGaA5i1Q+dND1FJ4sgc
+ rURnhIVcxJLzePsm0zC5YJaklRW4Tkt8HB6NWdoxe3WDqlo05ap762pvxyOnwctN9KhQ
+ MCTASkzYpsT6JvDHnf33i6zLwF7SlUJno1RBXaGL/puj86M7zFwwHa9REmIk8fmyTIOQ
+ Ag8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717165149; x=1717769949;
+ d=1e100.net; s=20230601; t=1717165152; x=1717769952;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cin9JKFG0fxFovjADZZvQtlw+A+m3bxqoWJeRsLkehw=;
- b=fwpnG+FeKmg0JPPRUH7mHA45qKcVCW4HxMfxvLdxceBPUiW2q7mbMDQ4u8gEPKO0l+
- p0My4Aoau4d0Yp27B3gpqxExkkSYijuntnSaXzmZkIFpGvbN4eSIbsd2hcUwebg/bbG9
- N9zv5wQTxge2BBdbnk/sHtqtN93+WXDf3+CLEEkVlDLGl8qq9wBUBxG9NiOy0UulULrl
- eXQc0fZgRTwFKQV3VcBye/0TBdRhThwAkISoH7Rg8pcXpiplxP2/vObOTuO1Y3yPIiN7
- Pmg//vurvx/SBWtEeAkwz2kUGHGFqpCJp47+A4Xd3F0EKw2VhNiPmOylYEctmZabgSQg
- k8Qw==
+ bh=9jS/rYDAQ1xa9Q+qHSkaY5aRH65+EVGYXvZS6VR4uDs=;
+ b=SNfY/+88NVxNzOd35hHQ7RzVZkaaWxn3BZOhnkI+suqk26k8UHi0N96+VNrIEOZvGz
+ 4soarac/VX57S2hZl8gtEfhEsiAu/C41JPixI3wUJvbEZONkn5K2QQa6U8uebKRYJUlC
+ /igM+uhNcLNVzuyAtDsY/JYDfnlcaTfd4RUWCQoE7F96Et4k9+Aq1GM/J+fYVT0gx2fu
+ UPl5arFeiR1NELTnzY0XLOPsTDIGhQd+TA2h8wQIQwfynTezd021tx2xAFBy/lntpqg5
+ 9seorENrvt0LCxG29QAOcz6RdJqD2spqAawINy7hoUZE/8L5jnqEk+sl8d+BOr7oZOqj
+ nFLg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUURa8xtWsQJNNciOIkM5YYUBM471sJ0PjSrOwKrjagT1Ev4QBmAa9TGNHQhjDp1scXN3+8lrAJ54p1TRGpyz6G/voMGw==
-X-Gm-Message-State: AOJu0YzL6UYtSJcwoDkhr+kU3ViwfGN1Lmx6qw/cBeOhIWiCfWzH+Iop
- mF9X+nWPbj+iFTgyfXvSscKkdXk6dQJkswVLV+Hh0/PL2yQaH41z
-X-Google-Smtp-Source: AGHT+IFT6tftfkF2X7noMcJKWOPrRH3exWtRkQcjUX1gIY0/1I7hHnsFpvLhoTEHyfg+H3wyL8ftJw==
-X-Received: by 2002:a17:90b:2282:b0:2c1:b88a:d5ce with SMTP id
- 98e67ed59e1d1-2c1dc58fd41mr1749242a91.28.1717165149015; 
- Fri, 31 May 2024 07:19:09 -0700 (PDT)
+ AJvYcCWeOlOvCqGjWOm9UWBPzKU7csrr8QEdATdG1BTUIlFO/5y2BzQpIMYP07LtjdvoF8ibuygI6WC4oG3p62Q5PrnKtUFG2w==
+X-Gm-Message-State: AOJu0YxgZhttADjbtArNJiEhGQSzrfXC3+PY3Fu3FKVwIeJdSXVs9tTC
+ Wi2ZrMEef7F+/NsLbpC9W7+pSO6FiHiI5Hc+8QefhG0WxKNYpt6g
+X-Google-Smtp-Source: AGHT+IEBk4ctarbuNyQRu3f+CvuANTUj9EUGKNfb6VoktNpzst+UKZJNVK00jrkUdX1SPlTERMFhzw==
+X-Received: by 2002:a05:6a20:3d86:b0:1b1:f3d6:18c0 with SMTP id
+ adf61e73a8af0-1b26f12170amr2667046637.19.1717165152302; 
+ Fri, 31 May 2024 07:19:12 -0700 (PDT)
 Received: from localhost.localdomain ([113.30.217.222])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2c1a775ccedsm3563935a91.1.2024.05.31.07.19.06
+ 98e67ed59e1d1-2c1a775ccedsm3563935a91.1.2024.05.31.07.19.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 May 2024 07:19:08 -0700 (PDT)
+ Fri, 31 May 2024 07:19:11 -0700 (PDT)
 From: Anand Moon <linux.amoon@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Kever Yang <kever.yang@rock-chips.com>, Jagan Teki <jagan@edgeble.ai>,
  Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>
 Cc: Anand Moon <anand@edgeble.ai>, Anand Moon <linux.amoon@gmail.com>,
  u-boot@lists.denx.de
-Subject: [PATCH RFC v2 05/23] arm: rockchip: Enable display cpuinfo to be
- build with SPL_BUILD
-Date: Fri, 31 May 2024 19:48:19 +0530
-Message-ID: <20240531141837.13189-6-linux.amoon@gmail.com>
+Subject: [PATCH RFC v2 06/23] rockchip: RK3568: Read the reset cause from
+ clock reset unit for RK356x SoC
+Date: Fri, 31 May 2024 19:48:20 +0530
+Message-ID: <20240531141837.13189-7-linux.amoon@gmail.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240531141837.13189-1-linux.amoon@gmail.com>
 References: <20240531141837.13189-1-linux.amoon@gmail.com>
@@ -99,29 +99,27 @@ X-Virus-Status: Clean
 
 From: Anand Moon <anand@edgeble.ai>
 
-Changes help enable CONFIG_DISPLAY_CPUINFO to build with SPL_BUILD for
-SoC RK356x and RK3588.
+Read the reset cause from clock reset unit for RK356x SoC.
 
 Cc: Jagan Teki <jagan@edgeble.ai>
 Signed-off-by: Anand Moon <anand@edgeble.ai>
 Signed-off-by: Anand Moon <linux.amoon@gmail.com>
 ---
- arch/arm/mach-rockchip/Makefile | 3 ---
- 1 file changed, 3 deletions(-)
+ arch/arm/mach-rockchip/cpu-info.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/arch/arm/mach-rockchip/Makefile b/arch/arm/mach-rockchip/Makefile
-index c07bdaee4c..254c26034f 100644
---- a/arch/arm/mach-rockchip/Makefile
-+++ b/arch/arm/mach-rockchip/Makefile
-@@ -23,9 +23,6 @@ ifeq ($(CONFIG_SPL_BUILD)$(CONFIG_TPL_BUILD),)
- # meaning "turn it off".
- obj-y += boot_mode.o
- obj-$(CONFIG_ROCKCHIP_COMMON_BOARD) += board.o
--endif
--
--ifeq ($(CONFIG_TPL_BUILD),)
- obj-$(CONFIG_DISPLAY_CPUINFO) += cpu-info.o
- endif
+diff --git a/arch/arm/mach-rockchip/cpu-info.c b/arch/arm/mach-rockchip/cpu-info.c
+index e7cbcf5090..e12f84a1d2 100644
+--- a/arch/arm/mach-rockchip/cpu-info.c
++++ b/arch/arm/mach-rockchip/cpu-info.c
+@@ -18,6 +18,8 @@ char *get_reset_cause(void)
+ 	struct rk3328_cru *cru = rockchip_get_cru();
+ #elif IS_ENABLED(CONFIG_ROCKCHIP_RK3399)
+ 	struct rockchip_cru *cru = rockchip_get_cru();
++#elif IS_ENABLED(CONFIG_ROCKCHIP_RK3568)
++	struct rk3568_cru *cru = rockchip_get_cru();
+ #endif
+ 	char *cause = NULL;
  
 -- 
 2.44.0
