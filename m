@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3FC6C25B76
-	for <u-boot@archiver.kernel.org>; Sat,  1 Jun 2024 14:55:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F35DCC25B7E
+	for <u-boot@archiver.kernel.org>; Sat,  1 Jun 2024 14:55:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2EE74880E5;
-	Sat,  1 Jun 2024 16:55:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 892BD88239;
+	Sat,  1 Jun 2024 16:55:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mQojZy1N";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="U2wgPu3Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9C41880F9; Sat,  1 Jun 2024 16:55:32 +0200 (CEST)
-Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
- [IPv6:2607:f8b0:4864:20::d2f])
+ id A42B98822F; Sat,  1 Jun 2024 16:55:35 +0200 (CEST)
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C0A5880DE
- for <u-boot@lists.denx.de>; Sat,  1 Jun 2024 16:55:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 920318820B
+ for <u-boot@lists.denx.de>; Sat,  1 Jun 2024 16:55:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-io1-xd2f.google.com with SMTP id
- ca18e2360f4ac-7eae92e7b5aso133701639f.1
- for <u-boot@lists.denx.de>; Sat, 01 Jun 2024 07:55:30 -0700 (PDT)
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-7e21b6e98bdso128392639f.0
+ for <u-boot@lists.denx.de>; Sat, 01 Jun 2024 07:55:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717253728; x=1717858528; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=hoHGS4Q+tMM4GiejpFaPHcYXs2a6ydCAPLeV6C85EpU=;
- b=mQojZy1NLQJ0EBKe9Ynze0V0romzSQ7pIG6yfCALxVBmIJB6hTb9Fof3AsKgf+5pDn
- 80JhVyO7p9vJwm1kVhI3dS6Yzw4rPVboZ52xUmn+RGY9P757JUO2yzC2QhrOLjLO6FlB
- 2d12KCAWLAKibl2aPfVTEaG6jlN0wOwVXwmBQhwt50d60LzCjznrMGZequHt0ILBTRz6
- Ev8OdeMie/MeCthUQ7Nc0gxINl9RTlTbsQfa8f9pC3GtXJQHqiBnzuHKE+KxNm9FtTcf
- /IbOrsBpJFocDnD13zWJB6I+SzFa+eL4aQGjqhyQ6N7z24R2Y67RH0lWvy5NeZKmr1Ib
- Hd2A==
+ d=gmail.com; s=20230601; t=1717253731; x=1717858531; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tndlB+iqTVzPo1qMRPJF49l+Yph4mzEWfoKG6hU9ffU=;
+ b=U2wgPu3YpYtwZ4tfiJAPFx9ig2xEn29tVe3EbuUosbrFMcyb+kVdenAnCRN0iTLK3V
+ CxJtYPtYKCAb+mT9YapGhqz+3NgdicDuC50/6EPcai8lK4NT+x3YWRoVMbvjexCgykDD
+ 4yfXszSxsdQvd9SxzE4k7NCnvR4ps7XLTf0deHh8qhNOkaZjb08DZxZnbLtLfebBaAU5
+ S0bSiVvVOx1+MKyQNWTFDhxSBE3foffoT8DfwuF1aNgxHrKPGG8QVsTgkkYt+3AHNf3t
+ YFJtp4Lngk1OQxZ4yABUBAI1nzzXxf0yLWJSL0gURZIcYAoHOs68RomiXJ0pj60if10R
+ NIPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717253729; x=1717858529;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=hoHGS4Q+tMM4GiejpFaPHcYXs2a6ydCAPLeV6C85EpU=;
- b=r5fkXKSSHH/lkS9hiIwFuMKEYF8vBu2CB40MBA8IyGhjG8LBmOaTdW1DYmbZYwxLen
- H2Th+MlDDoB40HrdTMAnLpcODxfV0KRJ6lg7XL30YsA4f+daqHMs9r8YaOqoi7c15tQj
- cNmXZchyDkNlgwyHxoIkVCeNShP+rGzcm8gOe9kMQEwqGSUketzZ3QpwCXRNTaXVuKg+
- dAHU7tnObLhvw9g2B9qlmU6Y3q4/g+DD2TEHHHT2zG7BsjSBjZ0A2yvAdYNl62oepZDp
- bVKtvuDNbgxNeZBX6txXtGY00bg5zdnCtxOpT0Q/NMcdmN9SA6H4Nf7iMU9TzR2oTL1K
- b15A==
-X-Gm-Message-State: AOJu0Yygi9byi3dwDZm991eikUHaV3ItHMTODhod/eU1gB6L2mKBxsX9
- 1WqcmneTvcheSjseu4mMV+72oRsnH8AWmYOtk7YEWpU4yQDSZkzahLj+m9c+
-X-Google-Smtp-Source: AGHT+IHaTryNCxZjjGxtHwVZWEBgsqNkXlRbaCL427MBPoXCw/C4fj9uy62kJnaxr6aeX9qbuVFXQA==
-X-Received: by 2002:a05:6602:150f:b0:7ea:fcf7:ce9d with SMTP id
- ca18e2360f4ac-7eaffe685b9mr567210839f.2.1717253728670; 
- Sat, 01 Jun 2024 07:55:28 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1717253731; x=1717858531;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=tndlB+iqTVzPo1qMRPJF49l+Yph4mzEWfoKG6hU9ffU=;
+ b=D32G6wxxDgnFLoi/TfJoFjrDOPVtFwWBBktEFOa58TNczHSYOxE97lu/KK/t/itxE/
+ ZujurWmkF6LzshhCyV8ngoxbzL7ZvwGNZHoeTAOB+NhPqH1vNxfJiZn9VVM6wpZbQ6sf
+ VO8+HBzdOjV0tg90yG30rIx9AmXqJ0kixRdqFkHj4bddaJGDhdr/P784MD8Epp8Qvg0n
+ q2dRJ7eZpFL9b/uVoner4d6KEsdKDS27vnM0MsTo1hKSrREiwUjVc/vm9fQ7VgmDuTg1
+ x9KGbzdiX7/clXl0/Taj8GnTQMdQAxrtVe9idzhEjG3mfemR4SttTIW9l2346AdIQnfJ
+ ifHA==
+X-Gm-Message-State: AOJu0YzJc1prQts1LmOWz7ZejatmPNl2I8FY8gQH6ZpOSbS2roDUZMVd
+ JjcUZj4iwXJUMrf/nPWVHh0mQCbRdfKwPnEHq+UkNhWq+KMUkqYBd6GUXn+y
+X-Google-Smtp-Source: AGHT+IF3BOLeRB5f5XV/cjsDzzvtm8NjYshIMWxWNQ2I/9N6wJYC5bNTfQaQmRjO/AM8S8CKkpNZfA==
+X-Received: by 2002:a05:6602:3c2:b0:7e7:2c84:1369 with SMTP id
+ ca18e2360f4ac-7eafff5f8e3mr539984339f.21.1717253731484; 
+ Sat, 01 Jun 2024 07:55:31 -0700 (PDT)
 Received: from aford-System-Version.lan ([2601:447:d002:5be:e0b7:c613:ee:e8f3])
  by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4b4881d5bdesm1050386173.46.2024.06.01.07.55.27
+ 8926c6da1cb9f-4b4881d5bdesm1050386173.46.2024.06.01.07.55.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 01 Jun 2024 07:55:28 -0700 (PDT)
+ Sat, 01 Jun 2024 07:55:31 -0700 (PDT)
 From: Adam Ford <aford173@gmail.com>
 To: u-boot@lists.denx.de
 Cc: aford@beaconembedded.com, Adam Ford <aford173@gmail.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Tom Rini <trini@konsulko.com>, Paul Barker <paul.barker.ct@bp.renesas.com>,
  Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH 1/2] renesas: beacon-rzg2m:  Add Marek to MAINTAINER file
-Date: Sat,  1 Jun 2024 09:55:19 -0500
-Message-ID: <20240601145521.200132-1-aford173@gmail.com>
+Subject: [PATCH 2/2] configs: rzg2_beacon: Realign ENV location and offset
+Date: Sat,  1 Jun 2024 09:55:20 -0500
+Message-ID: <20240601145521.200132-2-aford173@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240601145521.200132-1-aford173@gmail.com>
+References: <20240601145521.200132-1-aford173@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,24 +94,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since any changes to the RZ/G2 family go through Marek's tree,
-update the MAINTAINER file to automatically show his name
-when running get_maintainer.pl.  Without this, he is not
-copied.
+The ENV size and offset were changed to different
+values in Beacon's downstream release.  Change them to the
+same values as the downstream for consistent behavior.
 
 Signed-off-by: Adam Ford <aford173@gmail.com>
 
-diff --git a/board/beacon/beacon-rzg2m/MAINTAINERS b/board/beacon/beacon-rzg2m/MAINTAINERS
-index f8042bb2c4..a4a920a017 100644
---- a/board/beacon/beacon-rzg2m/MAINTAINERS
-+++ b/board/beacon/beacon-rzg2m/MAINTAINERS
-@@ -1,5 +1,6 @@
- BEACON_RZG2M BOARD
- M:	Adam Ford <aford173@gmail.com>
-+M:	Marek Vasut <marek.vasut+renesas@mailbox.org>
- S:	Maintained
- F:	board/beacon/beacon-rzg2m/
- F:	include/configs/beacon-rzg2m.h
+diff --git a/configs/rzg2_beacon_defconfig b/configs/rzg2_beacon_defconfig
+index 4aabb1fe03..234c965023 100644
+--- a/configs/rzg2_beacon_defconfig
++++ b/configs/rzg2_beacon_defconfig
+@@ -3,7 +3,8 @@ CONFIG_ARCH_RENESAS=y
+ CONFIG_TEXT_BASE=0x50000000
+ CONFIG_SYS_MALLOC_LEN=0x4000000
+ CONFIG_SYS_MALLOC_F_LEN=0x2000
+-CONFIG_ENV_OFFSET=0x0
++CONFIG_ENV_SIZE=0x2000
++CONFIG_ENV_OFFSET=0xFFFFE000
+ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a774a1-beacon-rzg2m-kit"
+ CONFIG_RCAR_GEN3=y
 -- 
 2.43.0
 
