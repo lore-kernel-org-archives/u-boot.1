@@ -4,79 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3532C25B76
-	for <u-boot@archiver.kernel.org>; Sat,  1 Jun 2024 05:25:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3880C25B76
+	for <u-boot@archiver.kernel.org>; Sat,  1 Jun 2024 09:22:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E31B28880B;
-	Sat,  1 Jun 2024 07:25:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id ED7578816D;
+	Sat,  1 Jun 2024 11:22:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="I95FqAl3";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="USEi8DEW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41A9388827; Sat,  1 Jun 2024 07:25:34 +0200 (CEST)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 106A688247; Sat,  1 Jun 2024 11:22:02 +0200 (CEST)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20404887E2
- for <u-boot@lists.denx.de>; Sat,  1 Jun 2024 07:25:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B0CFE87FFB
+ for <u-boot@lists.denx.de>; Sat,  1 Jun 2024 11:21:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-5b96a781b63so1363001eaf.1
- for <u-boot@lists.denx.de>; Fri, 31 May 2024 22:25:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717219531; x=1717824331; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=uie+Ow8d0ScgG5/jXKVsQvz9orekOYpPl+iNL3nagqQ=;
- b=I95FqAl35zHsnPgABj/lc3r42yPXP/1k9nmcO7z5ea3K4vOVoQ0m3gNQv9FBP0I2f8
- PvhGunaGM5A4e3tG7fUgwhXemBxBg/f2RZF0fHMnRhZKbn9jB3VqLQbeWTMUbjklkdz+
- JshreOgQsFTwKsyrSWnptLimSmpkAmHPAx2pSbt6vG478jE9afEjvckrybQigBiP+PY+
- sV4PJC7uCvwoZCu2wuIZQwbyl4cQ24/opMV1GFrvxKk9U9nKJCFInmZhPui/UGFZZcQw
- m5idG1+G1zNHd4saZff0lAZ6Ys6zK4jNotPZMPjJE9jogDjiA9aECoM4QFwBPETAtDFy
- 6+/Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717219531; x=1717824331;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=uie+Ow8d0ScgG5/jXKVsQvz9orekOYpPl+iNL3nagqQ=;
- b=U2KcyOHs03CgaRTOD5CgKyBWnbMZynhg+68zAuI/gUIy7nDEomF5YsGu49HuD1UEiC
- sLSYpKkxQqOemsWFLvVG9DwSLLsvQn4XMO+fE0oZOfpvJd/EeAscEybcBFe4LzvmDrpZ
- MQCEUq/e69lDAoue4RP5mn7KKt45OkxtwLV3E39H+28hCfDbJKMGtfBKy8sSpFQWHtsS
- M3rg+acqAYOIyvRze57GSWwtLAAGtUK0mK+Lx+dvO5ZrzHYSha9kTiKsV3Ubb1ky3GaE
- lhStRvCwwDeIO+fNavzGug3hoOVJlVGqCfpkEq8Ou+p4NTHhDTDOnocQQHol+f5B0DIW
- 3y6w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUDSrjw1tBlf/2yW2Nu3Mpx0beAospx/eiCMbRq1HBvdyucP0ns+LOBNr3zLpfkErHIoPLMfHlHZ1/fx+XyKhrn7eDc1w==
-X-Gm-Message-State: AOJu0YzoMOc9QaRZqLGjAuu/7j1/4MkemfscYp6jAt5zzEx5KRTWSfR8
- drMcnUE6bNV6VK+E/y+VUrzdgkGDq5GyK9nqY/kVcVRUl/rZfbRhwXcwpkPl/tdZcWoOoqIniy6
- RqmwCgx3DAqE2idRsOy8eipURcrcMb0aD
-X-Google-Smtp-Source: AGHT+IFEwGA4vf9fg7/D4Fiaz8kF96sheCNCjfAQDP+61RofX0lHiLN8QL1jdI/YQYbG4mFycS1np8tSZ6VnA2xuBO4=
-X-Received: by 2002:a05:6820:1ac4:b0:5b9:fc9f:6a52 with SMTP id
- 006d021491bc7-5ba05cfb5bfmr3728323eaf.4.1717219530711; Fri, 31 May 2024
- 22:25:30 -0700 (PDT)
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id C7E8A1FDB1;
+ Sat,  1 Jun 2024 11:21:58 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1717233719;
+ bh=tFftIpXp2qqvjWCul6G9/l7YcicAXZ7XrdXuoyYsOzE=; h=From:To:Subject;
+ b=USEi8DEWaSgMULsQwWrMEBRXAOAIZbPuz0MpQP88vol4JfW0Iyt2B9nT/4c4aAR4E
+ qQu9FA7OQm/e/xOKB4g42sdjBPVxar/z55hnW6ZEMWpvJ2kQT2xG3HoT/nqmcM9KhI
+ ZccTq1Sp1oeqbdcgL65/N7HsS4GemeumnFa7CXACLDV+hCKRXTfJk5SiHcBKeIREWY
+ XCXAnvpDks29Sri301gTPFq6d0hbW15clmctkB5Mi1MvkbKjVh7e5agWw7zLp4eEy8
+ flmUWQ90ylNtzsZeBAvdDMx7Kebo5wVHatOm+gbTdCc5FJseldu1ysuq0jWn0UrIu4
+ kOuVwO2wueb1w==
+Date: Sat, 1 Jun 2024 11:21:54 +0200
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH 2/2] net: phy: Replace PHY_ANEG_TIMEOUT with Kconfig symbol
+Message-ID: <20240601092154.GA4383@francesco-nb>
+References: <20240531164733.192105-1-marek.vasut+renesas@mailbox.org>
+ <20240531164733.192105-2-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <20240531141837.13189-1-linux.amoon@gmail.com>
- <20240531141837.13189-21-linux.amoon@gmail.com>
- <6a43e749b6edd8611dcaf01aa678b5be@manjaro.org>
-In-Reply-To: <6a43e749b6edd8611dcaf01aa678b5be@manjaro.org>
-From: Anand Moon <linux.amoon@gmail.com>
-Date: Sat, 1 Jun 2024 10:55:14 +0530
-Message-ID: <CANAwSgRAY7gBTrQtW03LY+Ug8VZCccm0Tk3qKOxxv25jp4tkgA@mail.gmail.com>
-Subject: Re: [PATCH RFC v2 20/23] rockchip: RV1126: Read the reset cause from
- clock reset unit for RV1126 SoC
-To: Dragan Simic <dsimic@manjaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Kever Yang <kever.yang@rock-chips.com>, Jagan Teki <jagan@edgeble.ai>, 
- Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Anand Moon <anand@edgeble.ai>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240531164733.192105-2-marek.vasut+renesas@mailbox.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,50 +66,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dragan,
+Hello Marek,
 
-On Sat, 1 Jun 2024 at 03:23, Dragan Simic <dsimic@manjaro.org> wrote:
->
-> Hello Anand,
->
-> On 2024-05-31 16:18, Anand Moon wrote:
-> > From: Anand Moon <anand@edgeble.ai>
-> >
-> > Read the reset cause from clock reset unit for RV1126 SoC.
-> >
-> > Cc: Jagan Teki <jagan@edgeble.ai>
-> > Signed-off-by: Anand Moon <anand@edgeble.ai>
-> > Signed-off-by: Anand Moon <linux.amoon@gmail.com>
-> > ---
-> >  arch/arm/include/asm/arch-rockchip/cru.h | 2 ++
-> >  arch/arm/mach-rockchip/cpu-info.c        | 2 ++
-> >  2 files changed, 4 insertions(+)
-> >
-> > diff --git a/arch/arm/include/asm/arch-rockchip/cru.h
-> > b/arch/arm/include/asm/arch-rockchip/cru.h
-> > index e886adf515..e1a8d8adad 100644
-> > --- a/arch/arm/include/asm/arch-rockchip/cru.h
-> > +++ b/arch/arm/include/asm/arch-rockchip/cru.h
-> > @@ -29,6 +29,8 @@
-> >  #include <asm/arch-rockchip/cru_rk3368.h>
->
-> Although not related to this patch directly, a single space character
-> should be added between "#" and "include", for consistency.
->
-Not sure of this.
-> >  #elif defined(CONFIG_ROCKCHIP_RV1108)
-> >  #include <asm/arch-rockchip/cru_rv1108.h>
->
-> The same comment as above.
->
-> > +#elif defined(CONFIG_ROCKCHIP_RV1126)
-> > +#include <asm/arch-rockchip/cru_rv1126.h>
->
-> The same comment as above, but this time related to this patch.
->
-> >  #endif
+On Fri, May 31, 2024 at 06:47:17PM +0200, Marek Vasut wrote:
+> Switch PHY_ANEG_TIMEOUT to CONFIG_PHY_ANEG_TIMEOUT Kconfig symbol.
+> This removes one more configuration headers option finalizes its
+> Kconfig symbol conversion. No functional change expected.
+> 
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+...
 
-Let me check this again if needed. I will update in the next version.
+> diff --git a/include/configs/apalis_imx6.h b/include/configs/apalis_imx6.h
+> index 0df3917e200..6fd43511ee4 100644
+> --- a/include/configs/apalis_imx6.h
+> +++ b/include/configs/apalis_imx6.h
+> @@ -22,7 +22,6 @@
+>  #define CFG_SYS_FSL_USDHC_NUM	3
+>  
+>  /* Network */
+> -#define PHY_ANEG_TIMEOUT		15000 /* PHY needs longer aneg time */
 
-Thanks
--Anand
+You should remove also the line before, after removing the define it's
+just a stale comment.
+
+> diff --git a/include/configs/ds414.h b/include/configs/ds414.h
+> index 9446acba792..f1921dac5e7 100644
+> --- a/include/configs/ds414.h
+> +++ b/include/configs/ds414.h
+> @@ -55,6 +55,5 @@
+>  
+>  
+>  /* increase autoneg timeout, my NIC sucks */
+> -#define PHY_ANEG_TIMEOUT	16000
+
+same here.
+
+> diff --git a/include/configs/hmibsc.h b/include/configs/hmibsc.h
+> index 27404c80fdf..950ec8b190d 100644
+> --- a/include/configs/hmibsc.h
+> +++ b/include/configs/hmibsc.h
+> @@ -9,7 +9,6 @@
+>  #define __CONFIGS_HMIBSC_H
+>  
+>  /* PHY needs a longer aneg time */
+> -#define PHY_ANEG_TIMEOUT		8000
+
+and here, and also in some of the following files.
+
+Francesco
+
