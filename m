@@ -4,77 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A561C25B74
-	for <u-boot@archiver.kernel.org>; Sun,  2 Jun 2024 08:30:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49FE4C25B74
+	for <u-boot@archiver.kernel.org>; Sun,  2 Jun 2024 12:51:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B95088096;
-	Sun,  2 Jun 2024 10:29:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4AF3B87F4B;
+	Sun,  2 Jun 2024 14:51:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EMgCZ466";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="lNRxNTnu";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="L6CFzqEH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46A418826D; Sun,  2 Jun 2024 10:29:56 +0200 (CEST)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EAB4587F8C; Sun,  2 Jun 2024 14:51:11 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1433D87FC7
- for <u-boot@lists.denx.de>; Sun,  2 Jun 2024 10:29:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8573787F33
+ for <u-boot@lists.denx.de>; Sun,  2 Jun 2024 14:51:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yasuharu.shibata@gmail.com
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1f44b42e9a6so26116265ad.0
- for <u-boot@lists.denx.de>; Sun, 02 Jun 2024 01:29:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717316992; x=1717921792; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=WUgvXMkI/ZKNVEDHlpi5SPOt2c6J9DN05Rpc3nbIyb0=;
- b=EMgCZ466xk+vjmHi2W5NHn0qjnGbiA/eQdp5ADZTUQ/M21OzF5m0fRU5FL7cbrZYxI
- pVf9tNgAdkUm7XlcyQpjuLxyMigQ6HPleKXefbvpE2IFhwt5cCZSu3dgL554thvVaMGf
- b0E7v62d6IKeWMNfkYtX0Na0jYmoejKw8mXujo/pcO2KtAcki9gUp1d2lQZ3FR4G/auw
- WX+rXQ5euLesv6bjHstl7sUI3Dx0MQRtJA3aFVrQCJVjgzci0xxhqNP8KyaYHRM6OIod
- U3M+g9PpnV2KKrVnP5wOD6Q8RLvMG6Y56FvEfXO6Hh7Cg98d9lCA8JZvXdXEgq2+yodQ
- vkdQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717316992; x=1717921792;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=WUgvXMkI/ZKNVEDHlpi5SPOt2c6J9DN05Rpc3nbIyb0=;
- b=P0olZdxRDG+vPWB8yELHXC5Oldt5G601OU/Bi/cRIFe0jHWoOfJw1fv2u7Vft7vQz5
- vqAM1lBzc+HPx49LujbLfiGJv/N7N3UJF13WsjxUNjAkCKWLQgMQQNedm1Zz4wbwsJ3F
- 26MZ/CFk0t/Trcw88KoBS135uvRH0ivGz4u/GQZSYaxvYGtCae6I5uw/1nGIYUsr4qfC
- RE+lo+yk8GTSVl3JHvgZTz9Ez8AKDuGOWcaVvgoF7aE2bWqreJqKEbx41oAvC0DBDdNZ
- UDwwuZj4pHepLZWnJzHDNZ2IrZ7kbRQS4uZ/Z+WBJnGYgzYJElA4pPazB7ajyPvZfzBu
- /icA==
-X-Gm-Message-State: AOJu0Yy2xbPIuXKj00jAz0Ca0cAKG1vY2FfF3itcpA+l1U1EULcyBxvJ
- VSlhVMEDMQNauPvSypCXEy6aoqroM+u5Vrns4ZB7ULbhenWQLfVb
-X-Google-Smtp-Source: AGHT+IFojDP+ZS9CjqPfZ+NejHLHU2wN4OaKu9h1Cn1JevI4m+pDD7+u7hPkeotVtsVpETL5Qyj0sQ==
-X-Received: by 2002:a17:903:6cb:b0:1f6:18f9:b764 with SMTP id
- d9443c01a7336-1f637024d4cmr47800035ad.30.1717316972786; 
- Sun, 02 Jun 2024 01:29:32 -0700 (PDT)
-Received: from localhost.localdomain ([2409:10:d8a0:1500:8a15:9ebf:c34b:b836])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f6323ea10csm43651115ad.201.2024.06.02.01.29.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 02 Jun 2024 01:29:32 -0700 (PDT)
-From: Yasuharu Shibata <yasuharu.shibata@gmail.com>
-To: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,
-	Yasuharu Shibata <yasuharu.shibata@gmail.com>
-Subject: [PATCH] bcmgenet: fix Rx buffer corruption caused by lack of cache
- flush
-Date: Sun,  2 Jun 2024 17:24:03 +0900
-Message-Id: <20240602082403.17508-1-yasuharu.shibata@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4VscDD1nPMz9ssS;
+ Sun,  2 Jun 2024 14:51:08 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1717332668;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=ika7qRsJm4pHItpQlAQarBkP1nmD4zOEXn6VQkVNV4U=;
+ b=lNRxNTnu1w6IGe1fJE/be8RAsvacvyQdQHI1Ng/avCwSIo5jM2RDcRnIDrfzs+ds0TFO1B
+ x0wLxMb08H5Ydasx19LXrzVBetuaJ1guw2uUaWWifDOUvFxBvNh6iNtUUMcLETFcECYeLK
+ YDVXWqtVMzlxCrI2Ptch9XkUjQ0bgALswU0g7YaA8m55m+zvdC7QLRPUIVAXs4NYRYKJjH
+ +hI/1kw2sXeInO5UN80HwUk5z0gsyFvph5PEZ++ZZv6/qx0hHtmvGBhWOR7YZqQQRl7v1G
+ 27UQ/siV0i4TkQ6CQIeo1tOsEY9GT544iA3piif6bOLAeDcXD69XFT1qn8qjuw==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1717332666;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=ika7qRsJm4pHItpQlAQarBkP1nmD4zOEXn6VQkVNV4U=;
+ b=L6CFzqEHko+rYfAsR1h8xZ3J5+h//s83SUTVrQNabIqwJ+j20bH15MBY+o5BQoTWT62ceh
+ 8O/kfHq262aXSALgpl8TNvHZy16W9D5VADTlou5GdkqoG29pea1sXPHiY9J+ffLkZYYJDm
+ i3/XIstUXf4BJH4x5NukXS5ZiRv5cTgDOl59COpE7XZ7x29KIeXuWYgC7ldK21Jj9tTILj
+ vRPoN9LdGyjo1ANhOTGkWimn5kJY67728SbrKDsamnxGs1ClMISKApXgi9Q6A6yhORmX+M
+ Z2WAWXdq+tsAfX64pFNOfBrf2Nw8xOid/d6KajsJVSZFHvusVlvXfgeFoNdO0A==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Adam Ford <aford173@gmail.com>
+Subject: [PULL] u-boot-sh/master-cleanup
+Date: Sun,  2 Jun 2024 14:50:14 +0200
+Message-ID: <20240602125047.12374-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: fkfimkdcgimanbkd5mqwmenb65o9f1jo
+X-MBO-RS-ID: 1861ad6697c5592f380
+X-Rspamd-Queue-Id: 4VscDD1nPMz9ssS
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,48 +85,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When bcmgenet complete to write Rx buffer with the DMA,
-some U-Boot commands write data to the buffer directly.
-Those write data will become dirty in CPU cache.
-After this driver calls free_pkt to the buffer,
-the buffer is assigned as the future Rx buffer.
-At some point, if bcmgenet writes to a buffer with DMA
-and CPU cache flushes dirty data to the buffer,
-the buffer is corrupted.
+The following changes since commit ea722aa5eb33740ae77e8816aeb72b385e621cd0:
 
-This patch calls flush_dcache_range in free_pkt
-to immediately flush the data written by U-Boot command
-and prevent data corruption.
+  Merge branch '2024-05-29-assorted-small-fixes' (2024-05-29 11:21:14 -0600)
 
-This issue can be reproduced using wget on Raspberry Pi4.
-If wget receives data larger than
-RX_BUF_LENGTH * RX_DESCS = 2048 * 256 bytes,
-it will timeout due to data corruption.
-In addition, if LOG_DEBUG is enabled in net/tcp.c,
-the following error log is output.
+are available in the Git repository at:
 
-TCP RX TCP xSum Error
+  https://source.denx.de/u-boot/custodians/u-boot-sh.git master-cleanup
 
-Signed-off-by: Yasuharu Shibata <yasuharu.shibata@gmail.com>
----
- drivers/net/bcmgenet.c | 4 ++++
- 1 file changed, 4 insertions(+)
+for you to fetch changes up to ecfa301911405f9ebc27677f6d26fcd43309ed36:
 
-diff --git a/drivers/net/bcmgenet.c b/drivers/net/bcmgenet.c
-index 4e1f8ed7a4..a0264dc386 100644
---- a/drivers/net/bcmgenet.c
-+++ b/drivers/net/bcmgenet.c
-@@ -360,6 +360,10 @@ static int bcmgenet_gmac_free_pkt(struct udevice *dev, uchar *packet,
- 				  int length)
- {
- 	struct bcmgenet_eth_priv *priv = dev_get_priv(dev);
-+	void *desc_base = priv->rx_desc_base + priv->rx_index * DMA_DESC_SIZE;
-+	u32 addr = readl(desc_base + DMA_DESC_ADDRESS_LO);
-+
-+	flush_dcache_range(addr, addr + RX_BUF_LENGTH);
- 
- 	/* Tell the MAC we have consumed that last receive buffer. */
- 	priv->c_index = (priv->c_index + 1) & 0xFFFF;
--- 
-2.25.1
+  configs: rzg2_beacon: Realign ENV location and offset (2024-06-02 02:30:01 +0200)
 
+----------------------------------------------------------------
+Adam Ford (2):
+      renesas: beacon-rzg2m: Add Marek to MAINTAINER file
+      configs: rzg2_beacon: Realign ENV location and offset
+
+Marek Vasut (2):
+      ARM: dts: renesas: Remove leftovers after OF_UPSTREAM conversion
+      ARM: dts: renesas: Reserve space in 64bit R-Car DTs
+
+ arch/arm/dts/salvator-common.dtsi        | 1104 ------------------------------
+ arch/arm/dts/salvator-x.dtsi             |   29 -
+ arch/arm/dts/salvator-xs.dtsi            |   85 ---
+ arch/arm/dts/ulcb-audio-graph-card.dtsi  |   85 ---
+ arch/arm/dts/ulcb-audio-graph-card2.dtsi |   26 -
+ arch/arm/dts/ulcb.dtsi                   |  509 --------------
+ board/beacon/beacon-rzg2m/MAINTAINERS    |    1 +
+ configs/rzg2_beacon_defconfig            |    3 +-
+ dts/upstream/src/arm64/Makefile          |    4 +
+ 9 files changed, 7 insertions(+), 1839 deletions(-)
+ delete mode 100644 arch/arm/dts/salvator-common.dtsi
+ delete mode 100644 arch/arm/dts/salvator-x.dtsi
+ delete mode 100644 arch/arm/dts/salvator-xs.dtsi
+ delete mode 100644 arch/arm/dts/ulcb-audio-graph-card.dtsi
+ delete mode 100644 arch/arm/dts/ulcb-audio-graph-card2.dtsi
+ delete mode 100644 arch/arm/dts/ulcb.dtsi
