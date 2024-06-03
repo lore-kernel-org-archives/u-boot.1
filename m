@@ -4,59 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A0D3C25B75
-	for <u-boot@archiver.kernel.org>; Mon,  3 Jun 2024 09:58:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E88AC25B75
+	for <u-boot@archiver.kernel.org>; Mon,  3 Jun 2024 12:07:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91BB2881B8;
-	Mon,  3 Jun 2024 11:58:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id C90A788292;
+	Mon,  3 Jun 2024 14:06:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="WDdXsBYY";
+	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="NaGvancF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3CE188214; Mon,  3 Jun 2024 11:58:29 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 67B89881B8; Mon,  3 Jun 2024 14:06:57 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A32FC8813A
- for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 11:58:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E889688245
+ for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 14:06:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=730d=NF=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1717408694;
- bh=UKIDblb5pDS6AhlqKl0EU0w/2TrfSLKh9rXUsNO5Iwc=;
- b=WDdXsBYYA6MhBzww6AYrHrsVXmFvjbsthn5nNxPvDIb2dILv6jNuj3IAlI52c5NASXrosMomG
- PlCcht6bvVGmKqs94ig1wyG+/AYmDX8Q3mMSmtsS1DbNZdvvpoDHgFzKAUEe0tlFVwBWUryz9hX
- fYttyS/IGW4rS++dzd7B5YtdtUyX2MFKQccx+o882BlAXc1FGWECyFsq191aRXo+mwIAQHRkIEJ
- nzVJ0zIfPrknisyri8JkRQXW+il7mqY33/dfLpJ9OKCBDJDg7yutk0EjewRjMg+a+KqxXeJw9OI
- DoeI3CinoNZxNVsKI3L+5p8vtgWKOWt0kv2cATkXOU2w==
-Message-ID: <7ace6636-54ed-477e-9fb2-a9aac6ec4e7b@kwiboo.se>
-Date: Mon, 3 Jun 2024 11:58:07 +0200
+ dmarc=pass (p=reject dis=none) header.from=sartura.hr
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=robert.marko@sartura.hr
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-57a1fe63a96so3698230a12.0
+ for <u-boot@lists.denx.de>; Mon, 03 Jun 2024 05:06:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sartura.hr; s=sartura; t=1717416414; x=1718021214; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8Ix17QsGmzKR336WObtj0CcLYsrQkBhn6IMG/hGK/4w=;
+ b=NaGvancFlamcSQIecoPkmBkTwSApa03sOVOOMyKwh0+YBPETt3GX2VO8QQ7BKndn8C
+ 7WOXHoCKx1OHcJ17fTJcMb6yo5qg8twmYdlff9AancFPtz9Cp9ja+Zgb6AUCTH/6Ia42
+ AXyfpTPan0bPs5J8fxp8LcEH/a5vRs1p2WxK0xbaqqMUKnS0KnW/0tvyLCJhW9LdTtfm
+ 9Ww3ZLQsZUHz3G6vUyHpohyl2Hxib028XsH7OhHdsbASmugSQ2U4SmEWO2SdoO8G+o6p
+ fc6Z6M3jUd/xLHdRy8LUjQRm3NKfl5g+pal72m3e824Nbxk3LoBTNku5tFsBZwqrcCpL
+ uaKg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717416414; x=1718021214;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=8Ix17QsGmzKR336WObtj0CcLYsrQkBhn6IMG/hGK/4w=;
+ b=Q3ptezk+JoSYBOzp2rzwd59O2JEXZT21s4JxQxwtSBejr+XoeS4h2rSA1qGlaaFJey
+ B3bb2J8SqJj2ZB8jFdm1jBi4NWSHdjehNQtx/xHK4y0m8rnijUnDK8vblrGGqVweZMgz
+ 0fi/tJpatX3AMiPK2QSTvg2gHY8O+PA+jIyrBnlgrq/9LkZr4qq63q8GIq2cgG1fcTA8
+ 0pUQ4eYs02eHhhNEdoSItr2E5qZhDIv9n7hjQqMdPtDjmlJ9rSNiYKKFHkTKaTuV41CW
+ gBgwCbtfgC5sD0QVUrqR3F9EcJNcFYHFRLzLPViv9SzO5bTXBPfrPKmtPgWZ9e74+HWz
+ 5Nbg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUnTQ1LNXgtkhcpETYcfODFvbsX1JiTiBKRYXZbjdG/Jf8JtHJc7AiT8Qz1p/0h9DXwnR//RQcFhMwe5C/hjTjbcYVxHw==
+X-Gm-Message-State: AOJu0YyZuBYqW+mROlZT3OC71bM96z7RgmiSsStmITiwcbeVIED7Nawa
+ fkgE3AIblum40ZzCB09izlI2W6BdSUZH1HnaHAHiu4tAilq067w2qkoDoqEgzRo=
+X-Google-Smtp-Source: AGHT+IEpZbW/PubO2JGSEx4oRa1dI5e+/k2jS846YyplQGbSFbP/4I98JqlFv9XZQp/zNwUjNPdFTA==
+X-Received: by 2002:a50:cd16:0:b0:57a:7585:bd4d with SMTP id
+ 4fb4d7f45d1cf-57a7585c12fmr117735a12.42.1717416413961; 
+ Mon, 03 Jun 2024 05:06:53 -0700 (PDT)
+Received: from fedora.. (cpe-188-129-45-221.dynamic.amis.hr. [188.129.45.221])
+ by smtp.googlemail.com with ESMTPSA id
+ 4fb4d7f45d1cf-57a5cbece23sm2380391a12.61.2024.06.03.05.06.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 03 Jun 2024 05:06:53 -0700 (PDT)
+From: Robert Marko <robert.marko@sartura.hr>
+To: trini@konsulko.com, caleb.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@linaro.org, lukma@denx.de, seanga2@gmail.com,
+ joe.hershberger@ni.com, rfried.dev@gmail.com, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+Cc: j.beck@linefinity.com,
+	Robert Marko <robert.marko@sartura.hr>
+Subject: [PATCH v3 1/5] clock: qcom: ipq4019: add ESS clock
+Date: Mon,  3 Jun 2024 14:06:12 +0200
+Message-ID: <20240603120651.154670-1-robert.marko@sartura.hr>
+X-Mailer: git-send-email 2.45.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 0/5] FUSB302 USB-C controller support
-To: Sebastian Reichel <sebastian.reichel@collabora.com>
-Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>, Eugen Hristev
- <eugen.hristev@collabora.com>, Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>
-References: <20240531151026.84846-1-sebastian.reichel@collabora.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20240531151026.84846-1-sebastian.reichel@collabora.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 665d93b45644d33516eaafd2
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,105 +94,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sebastian,
+ESS clock is the Ethernet Subsystem clock, so lets add it as its
+already configured by SBL1.
 
-On 2024-05-31 17:08, Sebastian Reichel wrote:
-> Hi,
-> 
-> On ROCK 5B power is usually supplied via it's USB-C port. This port has the
-> data lines connected to RK3588, VBUS connected to the input regulator and
-> CC pins connected to FUSB302. FUSB302 is a USB-C controller, which can be
-> accessed via I2C from RK3588. The USB-C controller is needed to figure out
-> the USB-C cable orientation, but also to do USB PD communication. Thus it
-> would be great to enable support for it in the operating system.
-> 
-> But the USB-PD specification requires, that a device reacts to USB-PD messages
-> send by the power-supply within around 5 seconds. If that does not happen the
-> power-supply assumes, that the device does not support USB-PD. If a device
-> later starts sending USB-PD messages it is considered an error, which is solved
-> by doing a hard reset. A USB-PD hard reset means, that all supply voltages are
-> removed for a short period of time. For boards, which are solely powered
-> through their USB-C port, like the Radxa Rock 5B, this results in an machine
-> reset. This is currently worked around by not describing the FUSB302 in the
-> kernel DT, so nothing will ever speak USB-PD on the Rock 5B. This means
-> 
-> 1. the USB-C port cannot be used at all
-> 2. the board will be running via fallback supply, which provides limited
->    power capabilities
-> 
-> In order to avoid the hard reset, this adds FUSB302 support to U-Boot, so
-> that we react to the power-supply's queries in time. The code, which is
-> originally from the Linux kernel, consists of two parts:
-> 
-> 1. the tcpm state machine, which implements the Type C port manager state
->    machine as described in the USB PD specification
-> 2. the fusb302 driver, which knows about specific registers
-> 
-> Especially the first part has been heavily modified compared to the
-> kernel, which makes use of multiple delayed works and threads. For this
-> I used a priorly ported version from Rockchip, removed their hacks and
-> any states not necessary in U-Boot (e.g. audio accessory support).
+Signed-off-by: Robert Marko <robert.marko@sartura.hr>
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+---
+ drivers/clk/qcom/clock-ipq4019.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-Thanks for working on this!
-
-Some initial quick feedback is that the tcpm uclass and driver should
-probably take more advantage of the u-boot driver model.
-
-Few quick thoughts:
-- Split out uclass/driver api parts into tcpm-uclass.c
-- Take advantage of uclass_driver ops such as post_probe and
-  per_device_auto/per_device_plat_auto to e.g. handle tcpm_port_init and
-  tcpm_port/tcpm_dev
-- udevice should probably be passed to tcpm_ functions instead of a
-  tcpm_port, dev_get_uclass_plat/priv could possible be used to get
-  the tcpm_port data for the udevice
-
-I have not yet had time to runtime test this but will do and get back
-with a more in depth review later this week.
-
-Regards,
-Jonas
-
-> 
-> Greetings,
-> 
-> -- Sebastian
-> 
-> Sebastian Reichel (5):
->   usb: tcpm: add core framework
->   usb: tcpm: fusb302: add driver
->   board: rock5b-rk3588: add USB-C controller support
->   board: rock5b-rk3588: enable USB-C in operating system
->   MAINTAINERS: add TCPM section
-> 
->  MAINTAINERS                               |    8 +
->  Makefile                                  |    1 +
->  arch/arm/dts/rk3588-rock-5b-u-boot.dtsi   |   28 +
->  board/radxa/rock5b-rk3588/Makefile        |    6 +
->  board/radxa/rock5b-rk3588/rock5b-rk3588.c |   33 +
->  cmd/Kconfig                               |    7 +
->  cmd/Makefile                              |    1 +
->  cmd/tcpm.c                                |  117 +
->  configs/rock5b-rk3588_defconfig           |    5 +
->  drivers/usb/Kconfig                       |    2 +
->  drivers/usb/tcpm/Kconfig                  |   16 +
->  drivers/usb/tcpm/Makefile                 |    4 +
->  drivers/usb/tcpm/fusb302.c                | 1427 ++++++++++++
->  drivers/usb/tcpm/fusb302_reg.h            |  177 ++
->  drivers/usb/tcpm/tcpm.c                   | 2406 +++++++++++++++++++++
->  include/dm/uclass-id.h                    |    1 +
->  include/usb/pd.h                          |  516 +++++
->  include/usb/tcpm.h                        |  116 +
->  18 files changed, 4871 insertions(+)
->  create mode 100644 board/radxa/rock5b-rk3588/Makefile
->  create mode 100644 board/radxa/rock5b-rk3588/rock5b-rk3588.c
->  create mode 100644 cmd/tcpm.c
->  create mode 100644 drivers/usb/tcpm/Kconfig
->  create mode 100644 drivers/usb/tcpm/Makefile
->  create mode 100644 drivers/usb/tcpm/fusb302.c
->  create mode 100644 drivers/usb/tcpm/fusb302_reg.h
->  create mode 100644 drivers/usb/tcpm/tcpm.c
->  create mode 100644 include/usb/pd.h
->  create mode 100644 include/usb/tcpm.h
-> 
+diff --git a/drivers/clk/qcom/clock-ipq4019.c b/drivers/clk/qcom/clock-ipq4019.c
+index 72f235eab2..09be203d4b 100644
+--- a/drivers/clk/qcom/clock-ipq4019.c
++++ b/drivers/clk/qcom/clock-ipq4019.c
+@@ -44,6 +44,9 @@ static int ipq4019_clk_enable(struct clk *clk)
+ 	case GCC_USB2_MOCK_UTMI_CLK:
+ 		/* These clocks is already initialized by SBL1 */
+ 		return 0;
++	case GCC_ESS_CLK:
++		/* This clock is already initialized by SBL1 */
++		return 0;
+ 	default:
+ 		return -EINVAL;
+ 	}
+-- 
+2.45.1
 
