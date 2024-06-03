@@ -4,75 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDFC7C25B75
-	for <u-boot@archiver.kernel.org>; Mon,  3 Jun 2024 15:08:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAC61C25B75
+	for <u-boot@archiver.kernel.org>; Mon,  3 Jun 2024 16:43:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2895688350;
-	Mon,  3 Jun 2024 17:08:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 3AAC8881B8;
+	Mon,  3 Jun 2024 18:43:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="X1X+V4rN";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jQV0Vbfr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A63E688350; Mon,  3 Jun 2024 17:08:34 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id D935F88180; Mon,  3 Jun 2024 18:43:11 +0200 (CEST)
+Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
+ [IPv6:2607:f8b0:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F43E88282
- for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 17:08:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=patrick.barsanti@amarulasolutions.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-52b98fb5c32so1717167e87.1
- for <u-boot@lists.denx.de>; Mon, 03 Jun 2024 08:08:32 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 55B4B88353
+ for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 18:43:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-702762a76f0so23757b3a.1
+ for <u-boot@lists.denx.de>; Mon, 03 Jun 2024 09:43:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1717427311; x=1718032111;
- darn=lists.denx.de; 
+ d=gmail.com; s=20230601; t=1717432988; x=1718037788; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=xjusg0SwUurd/i2HT45Mm88san4GAPhGrMMT37/MxDw=;
- b=X1X+V4rNsLUXml5NxY8dRs41cqSsBQUZY+PD9XHZg3kVC/rOnQVe6v6DGCyB3cWbv3
- HgOzyTOH/IaJmPm0T+87mBp3uiwFhw2LCQdpe4pxsqkO1kNChOPdBsoo4abTpD+NEpSs
- IkYA+zme8GBSPdSYAl1G+Qscr2pk6PJGqUdDI=
+ bh=UDRM8wC4bTU9P7M7Pw48nRy4vG96uw0kBKQ2Tdob3BE=;
+ b=jQV0VbfrcRSamw1xd9nbo8Hh4PF3hw1i0W0ki4LpoLQKbReM+jHfEK3OmGcq/w3yrB
+ l4dPtIApt1LsvQM0zU6RE/F/BDIM3V54yPAoP3LLgCn8OqO78HKvXll2Ha+ZVvuIt/F4
+ R/Hf8DAJfbw+9hbZgdUEWzOMHS/wS/AtOQT09jsnrfEGgs1l0Uhff7P7V6QPXr6Tvu56
+ YJJCGK+ZaTjjT9VTWOg+os2ACbfzzH7Acfi7hPGPuR9YxHfySfPAAh4KnCemPqzjrEDK
+ zjDv1X7WIpdcA9u7qtZyGmxXDQTsreXSSSjLzyiJBbV/fxcu8Gx0fw2q2QJXGMp114jo
+ 6VlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717427311; x=1718032111;
+ d=1e100.net; s=20230601; t=1717432988; x=1718037788;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=xjusg0SwUurd/i2HT45Mm88san4GAPhGrMMT37/MxDw=;
- b=o5uwGqqxI9VKQy3IEg5LQUDJ8zM6aDEq4iUiCCKX4QISvZQToMs7wpaZTK79Uu3crO
- QgqZP6eC0+pVWFV+O+vWlzzf/YxKpDIOp+JLRpPQ9b54fgPK6XOR2fEYuaK1aO7Gdx2e
- Xd2w7rZpLWTgjCNiyk2aWEDFHnx7cv6ze+70eV17Xy2WZjAOpjJZgn6MXyJAuB00o5vy
- c5oT+DVwlM8ky1h+T2DWEmEoleJtZnlhQipKPesYa5jEeUcVVWsud+d/YvQ3Rfl/KZAL
- 9ECxwwDOkEK1i/lXw6fjqrZv6iECDmja+3feXbARuxtSfdHNELWFNtvlKR/SThyn34g2
- enNA==
-X-Gm-Message-State: AOJu0YzR84/Q3pEIizHVb7oqzMVaKHXJHmef2U/Ry/sq3KCWKPJZCT3q
- NgZ+8S8DwHlRpaZPcs1qlGfTQPFCczLjrtC+TGl2oAVfJIWQ1aB4ffSeFOIkd/DXTVrpf9g7K07
- U
-X-Google-Smtp-Source: AGHT+IGH7ZZZnZe0Nasir8qrxcWm4krZqaUizi4b/ZHQZht4yS9GMpyQ7e4HB11xii1zxVW+nlTvwA==
-X-Received: by 2002:a05:6512:2508:b0:529:b691:e37e with SMTP id
- 2adb3069b0e04-52b895715eemr9274754e87.40.1717427310628; 
- Mon, 03 Jun 2024 08:08:30 -0700 (PDT)
-Received: from localhost.localdomain (i116103.upc-i.chello.nl.
- [62.195.116.103]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a68cb11fa2csm319735366b.198.2024.06.03.08.08.29
+ bh=UDRM8wC4bTU9P7M7Pw48nRy4vG96uw0kBKQ2Tdob3BE=;
+ b=kMxVr2mCDOdeeBRRv6v8jBMjMe9RkP0xh56v2L7E86447fgxGO0tdetxf1/evwXYVT
+ A2A8A4GOlkvzln8d/Whp8+R6jTlOu9eS47S8rKlsGQC9nQXiMZyMwkaHU33Bd9JPrIVO
+ mQJK505Nrn6LTswY0W3GTmquqnqv+GT06bSo9Mj5ylmTz1KZfTFMcFkfIWAprQ4E28Nq
+ g897kENGwVu/NSKHvmZIQF9yZS+Peso5oiVreTDq6T5Iq5KpW7t26Kh0aV0ULgKzkCKz
+ Hh8rT4AfWTjx7Zua9baDppP54tLh1QOfUwV4PPPyPEuVWW4OCl5Q6ToVgn1U6uU1MRpX
+ Saqg==
+X-Gm-Message-State: AOJu0Yx08SF5WEpEf95cp8nFwWg32FaAMuzPTOdGhvHGDln1SiBktO1J
+ JbRefkCnKTyyndTM+dckqmFe+Q+K5EyIlAXiu9hkCkNPnKH++4oYi2urnxZ6
+X-Google-Smtp-Source: AGHT+IFkFNhD/H3im8THkt28HmQaqovqhU6jJf5tUtvSJLQyBROuky8G5HHoE/TVxEr8Z2XWKa95sA==
+X-Received: by 2002:a05:6a21:6d9f:b0:1af:5385:3aff with SMTP id
+ adf61e73a8af0-1b26f2cc29bmr10205821637.3.1717432987538; 
+ Mon, 03 Jun 2024 09:43:07 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:592e:cdd9:67e3:7255])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-70245aa1982sm5374954b3a.163.2024.06.03.09.43.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Jun 2024 08:08:30 -0700 (PDT)
-From: Patrick Barsanti <patrick.barsanti@amarulasolutions.com>
-To: u-boot@lists.denx.de,
-	trini@konsulko.com
-Cc: sjg@chromium.org, xypron.glpk@gmx.de, marek.vasut+renesas@mailbox.org,
- sumit.garg@linaro.org, afd@ti.com, bb@ti.com, mr.bossman075@gmail.com,
- leon@georgemail.eu, michael@amarulasolutions.com,
- Patrick Barsanti <patrick.barsanti@amarulasolutions.com>
-Subject: [PATCH v2] Makefile: Fix include directory for OF_UPSTREAM
-Date: Mon,  3 Jun 2024 17:07:49 +0200
-Message-ID: <20240603150749.507797-1-patrick.barsanti@amarulasolutions.com>
-X-Mailer: git-send-email 2.45.1
+ Mon, 03 Jun 2024 09:43:07 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] Please pull u-boot-imx-next-20240603
+Date: Mon,  3 Jun 2024 13:43:03 -0300
+Message-Id: <20240603164303.2659176-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,83 +88,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Always prioritizing u-boot includes causes problems when trying to migrate
-boards to OF_UPSTREAM that have different local devicetree files with
-respect to the upstream ones, if local DT headers are not dropped.
-At the same time if local and upstream files are the same, migrations
-can be, and have been, introduced without dropping local DT headers.
-This also causes problems whenever upstream DTS and DT headers are patched.
+Hi Tom,
 
-For example, now migrating a board based on `imx6ul.dtsi` to OF_UPSTREAM
-breaks it, as there are some missing defines in a local DT header file
-(`imx6ul-clock.h`); the solution would be to drop it, which has not always
-been done in previous OF_UPSTREAM migration patches for other boards
-because most of the time the two are the same. This solution is also
-vulnerable to ABI breakage, although this has not yet happened since the
-introduction of OF_UPSTREAM support and is unlikely.
+Please pull from u-boot-imx/next, thanks.
 
-Maintainers assure backwards compatibility for DT headers when syncing the
-upstream folder with the kernel.
-The problem is that, at the current state, all boards that have not dropped
-their local headers when migrating to OF_UPSTREAM will break once the
-upstream devicetrees are patched, for example, to use any newly added
-define which is not present in the local DT header file, even if those
-changes are backwards compatible.
+The following changes since commit 7e52d6ccfb76e2afc2d183b357abe2a2e2f948cf:
 
-This patch fixes these problems by prioritizing upstream includes when
-`CONFIG_OF_UPSTREAM=y`, while keeping current prioritization when it is
-not.
+  Merge patch series "FWU: Add support for FWU metadata version 2" (2024-05-24 13:42:07 -0600)
 
-Also in case of ABI breakage in the kernel, keeping redundant header files
-(only until strictly necessary, e.g. until all boards including them have
-been migrated to OF_UPSTREAM) together with this selective prioritization
-of the include folder is a solution for keeping not-yet-migrated boards
-from breaking.
+are available in the Git repository at:
 
-Link: https://lore.kernel.org/u-boot/20240528084224.113385-1-patrick.barsanti@amarulasolutions.com/
-Signed-off-by: Patrick Barsanti <patrick.barsanti@amarulasolutions.com>
-Tested-by: Michael Trimarchi <michael@amarulasolutions.com>
----
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-next-20240603
 
-Changes in v2:
-- Reword and correct the commit message following the discussion
-with Sumit, per Michael's suggestion.
+for you to fetch changes up to fb95661116fb4269883721afd80578e6d88ce043:
 
- Makefile | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+  imx8mm-cl-iot-gate: Add support for the Realtek RTL8211E PHY (2024-06-03 12:14:29 -0300)
 
-diff --git a/Makefile b/Makefile
-index 79b28c2d81..899ae664ca 100644
---- a/Makefile
-+++ b/Makefile
-@@ -826,6 +826,19 @@ KBUILD_HOSTCFLAGS += $(if $(CONFIG_TOOLS_DEBUG),-g)
- 
- # Use UBOOTINCLUDE when you must reference the include/ directory.
- # Needed to be compatible with the O= option
-+ifeq ($(CONFIG_OF_UPSTREAM),y)
-+UBOOTINCLUDE    := \
-+	-I$(srctree)/dts/upstream/include \
-+	-Iinclude \
-+	$(if $(KBUILD_SRC), -I$(srctree)/include) \
-+	$(if $(CONFIG_$(SPL_)SYS_THUMB_BUILD), \
-+		$(if $(CONFIG_HAS_THUMB2), \
-+			$(if $(CONFIG_CPU_V7M), \
-+				-I$(srctree)/arch/arm/thumb1/include), \
-+			-I$(srctree)/arch/arm/thumb1/include)) \
-+	-I$(srctree)/arch/$(ARCH)/include \
-+	-include $(srctree)/include/linux/kconfig.h
-+else
- UBOOTINCLUDE    := \
- 	-Iinclude \
- 	$(if $(KBUILD_SRC), -I$(srctree)/include) \
-@@ -837,6 +850,7 @@ UBOOTINCLUDE    := \
- 	-I$(srctree)/arch/$(ARCH)/include \
- 	-include $(srctree)/include/linux/kconfig.h \
- 	-I$(srctree)/dts/upstream/include
-+endif
- 
- NOSTDINC_FLAGS += -nostdinc -isystem $(shell $(CC) -print-file-name=include)
- 
--- 
-2.45.1
+u-boot-imx-next-20240603
+--------------------------
 
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/20956
+
+- Support different RAM sizes on imx8m phycoce boards.
+- Support new toradex variants.
+- Support Samsung 4GB DDR and Realtek RTL8211E PHY on imx8mm-cl-iot-gate.
+- Convert imx8mm-phycore and imx8mp-phycore boards to use OF_UPSTREAM.
+
+----------------------------------------------------------------
+Benjamin Hahn (1):
+      board: phycore_imx8mp: enable setting 2GHz timings without RAM size
+
+Emanuele Ghidoli (5):
+      board: toradex: verdin-imx8mm: add 4 GB lpddr4 memory support
+      board: toradex: verdin-imx8mm: increase maximum addressable ram to 4GB
+      toradex: tdx-cfg-block: add aquila am69 sku 0088 pid4
+      toradex: tdx-cfg-block: add verdin imx95 sku 0089 pid4
+      toradex: tdx-cfg-block: add verdin i.mx8m mini 0090 pid4
+
+Fabio Estevam (2):
+      imx8mm-cl-iot-gate: Add support for Samsung 4GB DDR
+      imx8mm-cl-iot-gate: Add support for the Realtek RTL8211E PHY
+
+Teresa Remmet (3):
+      board: phytec: phycore-imx8mp: spl: Fix syle issue
+      board: phytec: phycore_imx8mp: Add support for different RAM sizes
+      board: phytec: phycore_imx8mp: Make RAM size configuration fix
+
+Yannic Moog (2):
+      arm: imx8mm-phycore: move to OF_UPSTREAM
+      arm: imx8mp-phycore: move to OF_UPSTREAM
+
+ arch/arm/dts/Makefile                              |   3 -
+ arch/arm/dts/imx8mm-phyboard-polis-rdk.dts         | 460 -------------------
+ arch/arm/dts/imx8mm-phycore-som.dtsi               | 440 ------------------
+ arch/arm/dts/imx8mm-phygate-tauri-l.dts            | 489 ---------------------
+ arch/arm/dts/imx8mp-phyboard-pollux-rdk.dts        | 361 ---------------
+ arch/arm/dts/imx8mp-phycore-som.dtsi               | 323 --------------
+ arch/arm/mach-imx/imx8m/Kconfig                    |   2 +
+ board/compulab/imx8mm-cl-iot-gate/ddr/ddr.c        |   4 +-
+ .../imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c        | 106 ++++-
+ board/phytec/phycore_imx8mm/MAINTAINERS            |   3 -
+ board/phytec/phycore_imx8mp/Kconfig                |  67 +++
+ board/phytec/phycore_imx8mp/MAINTAINERS            |   1 -
+ board/phytec/phycore_imx8mp/lpddr4_timing.c        | 153 +++++++
+ board/phytec/phycore_imx8mp/lpddr4_timing.h        |  16 +
+ board/phytec/phycore_imx8mp/phycore-imx8mp.c       |  11 +
+ board/phytec/phycore_imx8mp/spl.c                  | 136 +++---
+ board/toradex/common/tdx-cfg-block.c               |   3 +
+ board/toradex/common/tdx-cfg-block.h               |   3 +
+ board/toradex/verdin-imx8mm/lpddr4_timing.c        |  14 +-
+ board/toradex/verdin-imx8mm/verdin-imx8mm.c        |   5 +-
+ configs/imx8mm-phygate-tauri-l_defconfig           |   2 +-
+ configs/phycore-imx8mm_defconfig                   |   2 +-
+ configs/phycore-imx8mp_defconfig                   |   2 +-
+ include/configs/imx8mm-cl-iot-gate.h               |   2 +-
+ include/configs/phycore_imx8mp.h                   |   4 +-
+ include/configs/verdin-imx8mm.h                    |   6 +-
+ 26 files changed, 454 insertions(+), 2164 deletions(-)
+ delete mode 100644 arch/arm/dts/imx8mm-phyboard-polis-rdk.dts
+ delete mode 100644 arch/arm/dts/imx8mm-phycore-som.dtsi
+ delete mode 100644 arch/arm/dts/imx8mm-phygate-tauri-l.dts
+ delete mode 100644 arch/arm/dts/imx8mp-phyboard-pollux-rdk.dts
+ delete mode 100644 arch/arm/dts/imx8mp-phycore-som.dtsi
+ create mode 100644 board/phytec/phycore_imx8mp/lpddr4_timing.h
