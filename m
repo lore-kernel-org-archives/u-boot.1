@@ -4,72 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AC4CC25B7E
-	for <u-boot@archiver.kernel.org>; Tue,  4 Jun 2024 13:18:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B902EC25B7E
+	for <u-boot@archiver.kernel.org>; Tue,  4 Jun 2024 13:18:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1B7088400;
-	Tue,  4 Jun 2024 15:18:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 35B5988494;
+	Tue,  4 Jun 2024 15:18:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AcY3W+gL";
+	dkim=fail reason="key not found in DNS" (0-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="Xw1forLR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C44487D07; Mon,  3 Jun 2024 16:49:12 +0200 (CEST)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3AE9E87CF1; Mon,  3 Jun 2024 17:57:18 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47E5B831A1
- for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 16:49:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 87B9187CF1
+ for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 17:57:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=wjq.sec@gmail.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-7950c1b0220so56055385a.3
- for <u-boot@lists.denx.de>; Mon, 03 Jun 2024 07:49:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717426149; x=1718030949; darn=lists.denx.de;
- h=content-transfer-encoding:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kcI+0ZdWTybOnZfqxgc/utvw0kU+Nylr5AQA9+8Sjfg=;
- b=AcY3W+gLcaPEqK36JDvW803VrNhwnQzb+h3KdbTUysBtSmPYTcErvX+6hTal5Z8S/S
- CR69sp5uskiotIp7bQdnsXOLVBHuTdWVviWcP+rnbzqrvWY5KpIwb1ZLXmX5qZOj7Dzq
- rQb0e5/82bGw45RoyMcMKr1NLSNGGqs03OECn95zDXfNbmOQNB8nmKxyeMM5WpwpZYFd
- qaq9HhzJ0aPTY7iCV0titBS5OB7dPCaQPtInFQnXLXgtLj28iUjIQqc8DfzV4fZOoMzi
- e8ZcuCEB8nbeL5DpJbkSVKqfEEIkylJdpCX+AeorsSl7sQtHT3t+GGwcS/8ckECXIzfD
- 44/A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717426149; x=1718030949;
- h=content-transfer-encoding:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=kcI+0ZdWTybOnZfqxgc/utvw0kU+Nylr5AQA9+8Sjfg=;
- b=AzM6KvWEbCIVqvl7jZjgHypVMH/scyGDcOcARX3XKm85dDVwJgh/wlszhyvwja/txv
- dOcH/gkeYOROamMszAOSatRdS6Q9WqBao2zgQ8eEHssPjQOuZ6WH2oHOtR72Nf1Tg5NP
- GUdwodK4As0Tgw842N3XfoZ67OMkjxsTbc7hONH/MuGO5GPtQwIfMliRCDPZaUhzyTNT
- DFq4DL+Qj+y95YYwh8tkluFoumwnAyrJ8JG4Ivcnj4hs8/Hntc4ppeJTUa5LR3TGLqEJ
- 8JeWXyr7HvcL2/8IQ6kfUGge4kol87EiEsx/Bk69+XK8+DmG65/l9pnnP4gXW+6nICtN
- OgBg==
-X-Gm-Message-State: AOJu0Yy3oJHX56efsdb7UEF9aKsel+FW7PD0S6t3JgebnS2WU6MRKQt3
- aSBS1znFQSW/pth/VbBvNO3Lv5mTAb2Qc0GkJpwW+5xJxQFzTkX+wUnt7xTkHSfhoROw7CIRQCr
- gxNWF82onGWOGGRfBDGn8Dira+NKlag==
-X-Google-Smtp-Source: AGHT+IHuS5SZn0bse62A1JzhXrdie8NGZtSqJWuumJULf6vX/040sicM7thtRnQ9LWXcjvK5k0G7s6KsvDfn9SQO9qM=
-X-Received: by 2002:a05:620a:5650:b0:792:94ab:cfd0 with SMTP id
- af79cd13be357-794f5ec1c8bmr928865985a.56.1717426148610; Mon, 03 Jun 2024
- 07:49:08 -0700 (PDT)
+ spf=none smtp.mailfrom=avromanov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id BFE88100003;
+ Mon,  3 Jun 2024 18:57:14 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru BFE88100003
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1717430234;
+ bh=QzRomsoftZvb4P226kk6wuZKcbT7T8wmkLUAc1CvSnQ=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=Xw1forLRrA9NTorsVdcXkvOg04FWd5e78x+6dy++GIxl4S71sxIpijgAW4abIttto
+ MOoY3mgdlc8dm2erfer9mO7TyTdElue9HQPx3oIAswee0PcL70nwOb1hKM8DcPAvrs
+ 6XoHwSihlWRWIeTum9SK8wCRXhyowK0Cf+vObf1tU2Rx2hu5aHM7VbYj1+T2sXwYHh
+ k35Wl8NSDPYYdPUAnoM12uWbXT4Ym3yE/AIGNYyNcN6aqw/sNUutVaTc73szrdkhTx
+ 8om0miJhl2C3mJNgW1OKPSrhoQcLSC/oGTIinxPgv5WtEbrkHMVeTnBVsRm9FDB6Pr
+ 8joI7hAJdZQCw==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
+ [172.16.192.103])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Mon,  3 Jun 2024 18:57:14 +0300 (MSK)
+Received: from user-A520M-DS3H.sigma.sbrf.ru (100.64.160.123) by
+ p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.40; Mon, 3 Jun 2024 18:57:13 +0300
+From: Alexey Romanov <avromanov@salutedevices.com>
+To: <dario.binacchi@amarulasolutions.com>, <michael@amarulasolutions.com>,
+ <frieder.schrempf@kontron.de>, <xypron.glpk@gmx.de>,
+ <ilias.apalodimas@linaro.org>, <sjg@chromium.org>, <bmeng@tinylab.org>,
+ <tobias@waldekranz.com>, <jpewhacker@gmail.com>,
+ <marek.vasut+renesas@mailbox.org>, <kever.yang@rock-chips.com>,
+ <jbx6244@gmail.com>, <abdellatif.elkhlifi@arm.com>, <michal.simek@amd.com>,
+ <mikhail.kshevetskiy@iopsys.eu>, <patrice.chotard@foss.st.com>
+CC: <kernel@salutedevices.com>, <u-boot@lists.denx.de>, Alexey Romanov
+ <avromanov@salutedevices.com>
+Subject: [PATCH v5 0/3] Introduce mtdblock device
+Date: Mon, 3 Jun 2024 18:56:59 +0300
+Message-ID: <20240603155702.1840464-1-avromanov@salutedevices.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <CAMn3X6OJk3D0X=dnciRjtcUGzDb4qj1JGLGnCMwW7hVoqzZjDQ@mail.gmail.com>
-In-Reply-To: <CAMn3X6OJk3D0X=dnciRjtcUGzDb4qj1JGLGnCMwW7hVoqzZjDQ@mail.gmail.com>
-From: jianqiang wang <wjq.sec@gmail.com>
-Date: Mon, 3 Jun 2024 16:48:57 +0200
-Message-ID: <CAMn3X6Op+euyEqp1JOqFTKg4BuhVH_B8PgZaeMGDUaYPzcvW2g@mail.gmail.com>
-Subject: Fwd: A potential bug in das u-boot nfs implemnetation
-To: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [100.64.160.123]
+X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
+ p-i-exch-sc-m02.sberdevices.ru (172.16.192.103)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 185690 [Jun 03 2024]
+X-KSMG-AntiSpam-Version: 6.1.0.4
+X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 20 0.3.20
+ 743589a8af6ec90b529f2124c2bbfc3ce1d2f20f, {Tracking_uf_ne_domains},
+ {Tracking_from_domain_doesnt_match_to}, lore.kernel.org:7.1.1;
+ 127.0.0.199:7.1.2; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
+ salutedevices.com:7.1.1; smtp.sberdevices.ru:7.1.1,5.0.1;
+ 100.64.160.123:7.1.2, FromAlignment: s, ApMailHostAddress: 100.64.160.123
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean, bases: 2024/06/03 09:40:00
+X-KSMG-LinksScanning: Clean, bases: 2024/06/03 09:40:00
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/06/03 09:35:00 #25420383
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-Mailman-Approved-At: Tue, 04 Jun 2024 15:18:43 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,29 +108,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hello!
 
-I sent this email to das u-boot one month ago, however, I haven't
-gotten a reply yet. Do you know what happened?
+This series adds support for the mtdblock device, which
+allows to read/write data block by block. For example,
+it can now be used for BCB or Android AB command:
 
-Best
+  $ bcb load mtd 0 part_name
 
----------- Forwarded message ---------
-=E5=8F=91=E4=BB=B6=E4=BA=BA=EF=BC=9A jianqiang wang <wjq.sec@gmail.com>
-Date: 2024=E5=B9=B45=E6=9C=881=E6=97=A5=E5=91=A8=E4=B8=89 16:14
-Subject: A potential bug in das u-boot nfs implemnetation
-To: <u-boot@lists.denx.de>
+Tested only on SPI NAND, so bind is made only for
+SPI NAND drivers.
 
+---
 
-Dear all
+Changes V1 -> V2 [1]:
 
-I found a potential bug in the das-boot network filesystem
-implementation. I tried to mount a remote file system in U-boot.
-However, it failed. I checked the network packet. The server said it
-was a bad directory handler. After deeply checking the packet field, I
-found that u-boot calculated the wrong length for the directory
-handler and added it to the packet. After I commented line 381 in
-net/nfs.c: *p++ =3D htonl(dirfh3_length); It worked. Please check if it
-is a bug implementation.
+  - Drop patch [2].
+  - Add warning if bind NAND mtdblock device.
+  - Move documentation of mtdblock implementation
+    from commit message to the source code.
+  - Remove __maybe_unused from mtd partition functions
+    description.
+  - Use blk_enabled() instead of #ifdefs.
 
-Best regards
+Changes V2 -> V3 [2]:
+
+  - Rebased over [3].
+  - Rename mtd_bread/bwrite -> mtd_blk_read/write.
+  - Fix GPL-2.0 license short name definiton in headers.
+  - Add empty line after MTD_ENTRY_NUMBERS define.
+
+Changes V3 -> V4 [4]:
+
+  - Fix build warnings: use LBAF printf format string for lbaint_t types.
+
+Changes V4 -> V5 [5]:
+
+  - Rebased over u-boot/master.
+  - Fix build errors and warnings if CONFIG_BLK isn't enabled.
+  - Fix failed tests in cases is mtdblock device isn't binded.
+
+Links:
+
+  - [1] https://lore.kernel.org/all/20240227100441.1811047-1-avromanov@salutedevices.com/
+  - [2] https://lore.kernel.org/all/20240227100441.1811047-5-avromanov@salutedevices.com/
+  - [3] https://lore.kernel.org/u-boot/20240403114047.84030-1-heinrich.schuchardt@canonical.com/T/#u
+  - [4] https://lore.kernel.org/all/20240404105813.1520732-1-avromanov@salutedevices.com/
+  - [5] https://lore.kernel.org/all/20240524102920.2631731-1-avromanov@salutedevices.com/
+
+Alexey Romanov (3):
+  disk: support MTD partitions
+  drivers: introduce mtdblock abstraction
+  spinand: bind mtdblock
+
+ disk/part.c                 |   3 +-
+ drivers/block/blk-uclass.c  |   1 +
+ drivers/mtd/Kconfig         |   1 +
+ drivers/mtd/Makefile        |   1 +
+ drivers/mtd/mtdblock.c      | 227 ++++++++++++++++++++++++++++++++++++
+ drivers/mtd/mtdpart.c       |  76 ++++++++++++
+ drivers/mtd/nand/spi/core.c |  20 ++++
+ include/linux/mtd/mtd.h     |  21 ++++
+ include/part.h              |   3 +
+ 9 files changed, 352 insertions(+), 1 deletion(-)
+ create mode 100644 drivers/mtd/mtdblock.c
+
+-- 
+2.34.1
+
