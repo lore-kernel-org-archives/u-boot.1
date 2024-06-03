@@ -4,80 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CA8EC25B76
-	for <u-boot@archiver.kernel.org>; Mon,  3 Jun 2024 09:11:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A0D3C25B75
+	for <u-boot@archiver.kernel.org>; Mon,  3 Jun 2024 09:58:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAD8E87D40;
-	Mon,  3 Jun 2024 11:11:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 91BB2881B8;
+	Mon,  3 Jun 2024 11:58:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="b40ortUv";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="WDdXsBYY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 202648813A; Mon,  3 Jun 2024 11:11:08 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A3CE188214; Mon,  3 Jun 2024 11:58:29 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08A20878E2
- for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 11:11:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A32FC8813A
+ for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 11:58:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-42120e3911eso36753315e9.0
- for <u-boot@lists.denx.de>; Mon, 03 Jun 2024 02:11:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1717405865; x=1718010665;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=OsGP1lip1h770i3+rDZz96/9Q552dbOuttcPIxafzkA=;
- b=b40ortUv/SMV/SKwPkDQ4OAk7Xn4k8H28tFn8ORPRK4nSGF2y2uPZCyICgu0h+naJM
- Vp3rf7LMOoW6WDDQe3xcwiZNiXjILThs8tKSM8xfaRof7iU1SbMel+LM6YGXtqWn22QQ
- AHcIvy67v9A3mP5I4ua7qta5cwPqoPpavptYHM0GkZYh3kxzxaNn7wYupo/yRqq7vLl3
- syGOMtBOtHh8+ZbqQzaIF+NyXVMNAJduNe93Ay0FgBzXF5dj8u2eX6WcnqIKL/Tunw3I
- z1NJdNxwh/NkKEgoyqAfQ4Ishk8Rt1itraTNTH4JxDhc8wQ369xNnVPEmhvLTWRc3gG2
- HXow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717405865; x=1718010665;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=OsGP1lip1h770i3+rDZz96/9Q552dbOuttcPIxafzkA=;
- b=RsdsTa7sQY3zQdrULdhh66zbChKMBQB9uH3ytDCAN0gpN/yBNSKRaLd/npotuPbenI
- S2+B+nP2pxjXaq7PBBOpwcHHw5hOpnj7KiwdivtEcrCkgXKr4tBDTnPB4qcMGE48p1vc
- MPEinbbxwzFzB0bPpbSplWFLeapPabEQXTyAfJ/qygOxJStFYL3/HUANtT23ORXmP78e
- HtgTQSMIP11x/zvuAELTLQITnwvBKsibExy/coU+Djs4H2DRALR3XBPpP8MmcrB4Kpm0
- tHEDaauHHV3sD9JfIVvhFhqtFZzfQo5S71M8h5f5ELPPFAJnAiPTu7L+pBtH+OZiB0Bj
- BgUw==
-X-Gm-Message-State: AOJu0Yy4Cy7uJD0VPZVC9ZNDJFDE/Wsgjuwclz9NaLuq1bVwkfpnvCby
- OpJK5h9ULu6P1lixJFxTT1AuED9b5VMPzO+62HP0nCo7eb8h2/uz2kX1RuXeCaJsUAAB75Maspi
- vktU=
-X-Google-Smtp-Source: AGHT+IE5D/8jY+Xv8mbHxEbl8D+n+AnmUw/DXK4vMF9yeOHmd4Vm+vtJ+YCtpGlWRdKfACG2mvOnHw==
-X-Received: by 2002:a05:600c:3c97:b0:419:f630:57c2 with SMTP id
- 5b1f17b1804b1-4212e0c3fd9mr66010955e9.37.1717405865331; 
- Mon, 03 Jun 2024 02:11:05 -0700 (PDT)
-Received: from groot.home ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4212b8b39aesm108702055e9.46.2024.06.03.02.11.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Jun 2024 02:11:04 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Date: Mon, 03 Jun 2024 11:11:01 +0200
-Subject: [PATCH] bootstd: Fix a handful of doc typos in bootmeth
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=730d=NF=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1717408694;
+ bh=UKIDblb5pDS6AhlqKl0EU0w/2TrfSLKh9rXUsNO5Iwc=;
+ b=WDdXsBYYA6MhBzww6AYrHrsVXmFvjbsthn5nNxPvDIb2dILv6jNuj3IAlI52c5NASXrosMomG
+ PlCcht6bvVGmKqs94ig1wyG+/AYmDX8Q3mMSmtsS1DbNZdvvpoDHgFzKAUEe0tlFVwBWUryz9hX
+ fYttyS/IGW4rS++dzd7B5YtdtUyX2MFKQccx+o882BlAXc1FGWECyFsq191aRXo+mwIAQHRkIEJ
+ nzVJ0zIfPrknisyri8JkRQXW+il7mqY33/dfLpJ9OKCBDJDg7yutk0EjewRjMg+a+KqxXeJw9OI
+ DoeI3CinoNZxNVsKI3L+5p8vtgWKOWt0kv2cATkXOU2w==
+Message-ID: <7ace6636-54ed-477e-9fb2-a9aac6ec4e7b@kwiboo.se>
+Date: Mon, 3 Jun 2024 11:58:07 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 0/5] FUSB302 USB-C controller support
+To: Sebastian Reichel <sebastian.reichel@collabora.com>
+Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>, Eugen Hristev
+ <eugen.hristev@collabora.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>
+References: <20240531151026.84846-1-sebastian.reichel@collabora.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20240531151026.84846-1-sebastian.reichel@collabora.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240603-bootmeth-typos-v1-1-6edbdb469f7c@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAKSIXWYC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIxMDMwNj3aT8/JLc1JIM3ZLKgvxiXRPzZAsz01Rzg+TkNCWgpoKi1LTMCrC
- B0bG1tQC++TBfYAAAAA==
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>
-X-Mailer: b4 0.14-dev-bf739
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 167.172.40.54
+X-ForwardEmail-ID: 665d93b45644d33516eaafd2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,78 +73,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix some trivial typos found by browsing the code.
-Done with flyspell.
+Hi Sebastian,
 
-Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
----
- include/bootmeth.h | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+On 2024-05-31 17:08, Sebastian Reichel wrote:
+> Hi,
+> 
+> On ROCK 5B power is usually supplied via it's USB-C port. This port has the
+> data lines connected to RK3588, VBUS connected to the input regulator and
+> CC pins connected to FUSB302. FUSB302 is a USB-C controller, which can be
+> accessed via I2C from RK3588. The USB-C controller is needed to figure out
+> the USB-C cable orientation, but also to do USB PD communication. Thus it
+> would be great to enable support for it in the operating system.
+> 
+> But the USB-PD specification requires, that a device reacts to USB-PD messages
+> send by the power-supply within around 5 seconds. If that does not happen the
+> power-supply assumes, that the device does not support USB-PD. If a device
+> later starts sending USB-PD messages it is considered an error, which is solved
+> by doing a hard reset. A USB-PD hard reset means, that all supply voltages are
+> removed for a short period of time. For boards, which are solely powered
+> through their USB-C port, like the Radxa Rock 5B, this results in an machine
+> reset. This is currently worked around by not describing the FUSB302 in the
+> kernel DT, so nothing will ever speak USB-PD on the Rock 5B. This means
+> 
+> 1. the USB-C port cannot be used at all
+> 2. the board will be running via fallback supply, which provides limited
+>    power capabilities
+> 
+> In order to avoid the hard reset, this adds FUSB302 support to U-Boot, so
+> that we react to the power-supply's queries in time. The code, which is
+> originally from the Linux kernel, consists of two parts:
+> 
+> 1. the tcpm state machine, which implements the Type C port manager state
+>    machine as described in the USB PD specification
+> 2. the fusb302 driver, which knows about specific registers
+> 
+> Especially the first part has been heavily modified compared to the
+> kernel, which makes use of multiple delayed works and threads. For this
+> I used a priorly ported version from Rockchip, removed their hacks and
+> any states not necessary in U-Boot (e.g. audio accessory support).
 
-diff --git a/include/bootmeth.h b/include/bootmeth.h
-index 0fc36104ece0..529c4d813d82 100644
---- a/include/bootmeth.h
-+++ b/include/bootmeth.h
-@@ -40,7 +40,7 @@ struct bootmeth_ops {
- 	/**
- 	 * get_state_desc() - get detailed state information
- 	 *
--	 * Prodecues a textual description of the state of the bootmeth. This
-+	 * Produces a textual description of the state of the bootmeth. This
- 	 * can include newline characters if it extends to multiple lines. It
- 	 * must be a nul-terminated string.
- 	 *
-@@ -138,7 +138,7 @@ struct bootmeth_ops {
- 	 * @dev:	Bootmethod device to boot
- 	 * @bflow:	Bootflow to boot
- 	 * Return: does not return on success, since it should boot the
--	 *	Operating Systemn. Returns -EFAULT if that fails, -ENOTSUPP if
-+	 *	Operating System. Returns -EFAULT if that fails, -ENOTSUPP if
- 	 *	trying method resulted in finding out that is not actually
- 	 *	supported for this boot and should not be tried again unless
- 	 *	something changes, other -ve on other error
-@@ -151,7 +151,7 @@ struct bootmeth_ops {
- /**
-  * bootmeth_get_state_desc() - get detailed state information
-  *
-- * Prodecues a textual description of the state of the bootmeth. This
-+ * Produces a textual description of the state of the bootmeth. This
-  * can include newline characters if it extends to multiple lines. It
-  * must be a nul-terminated string.
-  *
-@@ -244,7 +244,7 @@ int bootmeth_read_file(struct udevice *dev, struct bootflow *bflow,
-  * @dev:	Bootmethod device to use
-  * @bflow:	Bootflow to read
-  * Return: does not return on success, since it should boot the
-- *	Operating Systemn. Returns -EFAULT if that fails, other -ve on
-+ *	Operating System. Returns -EFAULT if that fails, other -ve on
-  *	other error
-  */
- int bootmeth_read_all(struct udevice *dev, struct bootflow *bflow);
-@@ -255,7 +255,7 @@ int bootmeth_read_all(struct udevice *dev, struct bootflow *bflow);
-  * @dev:	Bootmethod device to boot
-  * @bflow:	Bootflow to boot
-  * Return: does not return on success, since it should boot the
-- *	Operating Systemn. Returns -EFAULT if that fails, other -ve on
-+ *	Operating System. Returns -EFAULT if that fails, other -ve on
-  *	other error
-  */
- int bootmeth_boot(struct udevice *dev, struct bootflow *bflow);
-@@ -264,7 +264,7 @@ int bootmeth_boot(struct udevice *dev, struct bootflow *bflow);
-  * bootmeth_setup_iter_order() - Set up the ordering of bootmeths to scan
-  *
-  * This sets up the ordering information in @iter, based on the selected
-- * ordering of the bootmethds in bootstd_priv->bootmeth_order. If there is no
-+ * ordering of the bootmeths in bootstd_priv->bootmeth_order. If there is no
-  * ordering there, then all bootmethods are added
-  *
-  * @iter: Iterator to update with the order
+Thanks for working on this!
 
----
-base-commit: ea722aa5eb33740ae77e8816aeb72b385e621cd0
-change-id: 20240603-bootmeth-typos-47c865e70ccf
+Some initial quick feedback is that the tcpm uclass and driver should
+probably take more advantage of the u-boot driver model.
 
-Best regards,
--- 
-Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Few quick thoughts:
+- Split out uclass/driver api parts into tcpm-uclass.c
+- Take advantage of uclass_driver ops such as post_probe and
+  per_device_auto/per_device_plat_auto to e.g. handle tcpm_port_init and
+  tcpm_port/tcpm_dev
+- udevice should probably be passed to tcpm_ functions instead of a
+  tcpm_port, dev_get_uclass_plat/priv could possible be used to get
+  the tcpm_port data for the udevice
+
+I have not yet had time to runtime test this but will do and get back
+with a more in depth review later this week.
+
+Regards,
+Jonas
+
+> 
+> Greetings,
+> 
+> -- Sebastian
+> 
+> Sebastian Reichel (5):
+>   usb: tcpm: add core framework
+>   usb: tcpm: fusb302: add driver
+>   board: rock5b-rk3588: add USB-C controller support
+>   board: rock5b-rk3588: enable USB-C in operating system
+>   MAINTAINERS: add TCPM section
+> 
+>  MAINTAINERS                               |    8 +
+>  Makefile                                  |    1 +
+>  arch/arm/dts/rk3588-rock-5b-u-boot.dtsi   |   28 +
+>  board/radxa/rock5b-rk3588/Makefile        |    6 +
+>  board/radxa/rock5b-rk3588/rock5b-rk3588.c |   33 +
+>  cmd/Kconfig                               |    7 +
+>  cmd/Makefile                              |    1 +
+>  cmd/tcpm.c                                |  117 +
+>  configs/rock5b-rk3588_defconfig           |    5 +
+>  drivers/usb/Kconfig                       |    2 +
+>  drivers/usb/tcpm/Kconfig                  |   16 +
+>  drivers/usb/tcpm/Makefile                 |    4 +
+>  drivers/usb/tcpm/fusb302.c                | 1427 ++++++++++++
+>  drivers/usb/tcpm/fusb302_reg.h            |  177 ++
+>  drivers/usb/tcpm/tcpm.c                   | 2406 +++++++++++++++++++++
+>  include/dm/uclass-id.h                    |    1 +
+>  include/usb/pd.h                          |  516 +++++
+>  include/usb/tcpm.h                        |  116 +
+>  18 files changed, 4871 insertions(+)
+>  create mode 100644 board/radxa/rock5b-rk3588/Makefile
+>  create mode 100644 board/radxa/rock5b-rk3588/rock5b-rk3588.c
+>  create mode 100644 cmd/tcpm.c
+>  create mode 100644 drivers/usb/tcpm/Kconfig
+>  create mode 100644 drivers/usb/tcpm/Makefile
+>  create mode 100644 drivers/usb/tcpm/fusb302.c
+>  create mode 100644 drivers/usb/tcpm/fusb302_reg.h
+>  create mode 100644 drivers/usb/tcpm/tcpm.c
+>  create mode 100644 include/usb/pd.h
+>  create mode 100644 include/usb/tcpm.h
+> 
 
