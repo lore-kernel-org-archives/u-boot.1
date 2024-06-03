@@ -4,87 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 092EBC25B75
-	for <u-boot@archiver.kernel.org>; Mon,  3 Jun 2024 17:42:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DAC4C25B75
+	for <u-boot@archiver.kernel.org>; Mon,  3 Jun 2024 17:42:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45AE2882AF;
-	Mon,  3 Jun 2024 19:42:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AAD0F88387;
+	Mon,  3 Jun 2024 19:42:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WSbGR1aN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FcMdZwym";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 320E88834B; Mon,  3 Jun 2024 19:42:01 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id 90BEC8835E; Mon,  3 Jun 2024 19:42:13 +0200 (CEST)
+Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
+ [IPv6:2001:4860:4864:20::30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01A2387EB4
- for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 19:41:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A07B87EB4
+ for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 19:42:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-6f8edde24b3so3008372a34.2
- for <u-boot@lists.denx.de>; Mon, 03 Jun 2024 10:41:58 -0700 (PDT)
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-24ca03ad307so2578762fac.3
+ for <u-boot@lists.denx.de>; Mon, 03 Jun 2024 10:42:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1717436518; x=1718041318; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FhOpN1j3bUh23Ir7p0jwLMxIeN55z03CqsaUIzZhCHI=;
- b=WSbGR1aNsCkxQIEbdqCvpJadX1R/mSfDLU1WDLUjDG4T45PjdekARRvVe+OP1nI/t1
- +2M19q71jMmBy1GkGeEXa+W9MvpXeuzqNTc03YnjNCEl4JNXujrblZFL2FT8P/ulEMQL
- 9cZLZ9mXzrBeqt7xjdi0By6VKgsZtjc8oXhRA=
+ d=konsulko.com; s=google; t=1717436530; x=1718041330; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ocAkeSHMUOYWtL7uLvtkAsa+wgVl0Os9mXFEwhDXi4Q=;
+ b=FcMdZwym6OnVMJ6nLf/8I7jE4CeQf14QT/7/t8f2p0Bbi8HTjxhDBTMx1TCkrTXUhE
+ lcl+UYAaX4GvwyI5VeZIO8cjtDAgzRrYQhrT/8P9R9CjYBnuUbJaHOWEU3Q6wHHBtFPg
+ J3mENdvUktoNVD1TY7tuqhO0HIRUVedhRck4Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717436518; x=1718041318;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=FhOpN1j3bUh23Ir7p0jwLMxIeN55z03CqsaUIzZhCHI=;
- b=ZHMPN02bZ7bxiR5aNw16GxuDPnxE4UYB/8pGlnwHmcR3ky5IRyEhZ518Okr2A7DWYl
- PFBehYTN1a9BF+1o3Nl1uMYPJtrbaOjCJL5zQVtqd665I8UKd5dCRYGwRUT5M1buowSZ
- RUZ0Mn0MZdRKhbterbbcrnDOBfPJODwsg3ueOFlJqYNQcL4HmXeg37YjpRk0tsbOL43r
- pZ7KDgI5RmLUWqS52V/yKbwf/Yp+TLFfBUgeZhCQCeeYKEz0rKx/dFMBpvc3mA4vpt2S
- zurU7jhL37CGHgxuUoj5D3SftnIZVkZ5vIcsQ+zIhYpgedbChFmkErLsxw4H+L2oF+Ds
- FZuQ==
-X-Gm-Message-State: AOJu0Yzs/3WJzHqQtifWH41DXLA2QCDNbKbDHwTlYlH2n0AB70Ei5/xw
- h9NwoKT0eHI3w2Cn2XnHwW6AAvHzQBTKp/WgrjpiS8p+6DDBGl62jqVllA9YnKo=
-X-Google-Smtp-Source: AGHT+IGcsZF/Oqre2rQATG4CHjqdxzGM8oUAKJ5fy7vNqgerJG40yt9PP3Isi6N1ZQ5eJtTj/yMS1w==
-X-Received: by 2002:a9d:5c16:0:b0:6f0:444c:d534 with SMTP id
- 46e09a7af769-6f911f2425dmr11899430a34.5.1717436517630; 
- Mon, 03 Jun 2024 10:41:57 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-45.totalplay.net.
+ d=1e100.net; s=20230601; t=1717436530; x=1718041330;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ocAkeSHMUOYWtL7uLvtkAsa+wgVl0Os9mXFEwhDXi4Q=;
+ b=ZTakcMPBDZaZ2mbnAUMdeEvHy8w5nNcOBHXdIwBZ4Te4sqLS7EO/tlLeYiRBJJY6mX
+ roVYCowiCF7mswVZfjkN0zfGMWTnxIWGn057g6rB7hV3LLk0530rv0i5oH0DR7WbPcBe
+ mxU6D6viHA/qwcDwfjEvRMIvGI8IrNcoJmdZ5YwUI7K5CRHnwwRQ40t535wzJ50dsvYK
+ suFp9TsKVHSIfD5H4+FMmtd+VD+X7jVFPqJAhQeJCuica/4ePxIJgmbZR8auUFXph73G
+ 8edrtw3TIVWnQSgb5uy4yKEOUPwWg7vQ+JPiIWnyytBVe3KlRQel7ve82SRLp0H2vus/
+ YQcQ==
+X-Gm-Message-State: AOJu0YySLafVvauQ5JUlnsbWMoDD038h09mQeGEeaXNFQOlA5Sjj9eQf
+ lqATUF4fwM5cTXs2ANEHgsuC49l70R4BA+5T9Qa9XhpR3CyVNY54ypB/tz8v2nn9laXFoUfBK6S
+ x
+X-Google-Smtp-Source: AGHT+IHq7D7gUB4MhtFaXdFkrjkOzVx/IwETfNfxtZXT/WjTweyiKi6frTbyxWLHQkqyQAyJLJpz2w==
+X-Received: by 2002:a05:6870:568b:b0:24c:b820:6fe3 with SMTP id
+ 586e51a60fabf-2508ba25632mr12007639fac.22.1717436529699; 
+ Mon, 03 Jun 2024 10:42:09 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
  [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-6f91059cc97sm1523261a34.63.2024.06.03.10.41.56
+ 586e51a60fabf-25085023811sm2551214fac.32.2024.06.03.10.42.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Jun 2024 10:41:57 -0700 (PDT)
+ Mon, 03 Jun 2024 10:42:09 -0700 (PDT)
+Date: Mon, 3 Jun 2024 11:42:07 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Javier Martinez Canillas <javier@dowhile0.org>
-Cc: Enric Balletbo i Serra <eballetbo@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Javier Martinez Canillas <javierm@redhat.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Martyn Welch <martyn.welch@collabora.com>, 
- Michal Simek <michal.simek@amd.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Qu Wenruo <wqu@suse.com>, 
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
- Tim Harvey <tharvey@gateworks.com>, Tony Dinh <mibodhi@gmail.com>
-In-Reply-To: <20240518130622.219031-1-javier@dowhile0.org>
-References: <20240518130622.219031-1-javier@dowhile0.org>
-Subject: Re: [RESEND PATCH 0/4] omap3: igep0x00: Fix boot failure and
- modernize the boards support
-Message-Id: <171743651627.1565845.12755270495736547272.b4-ty@konsulko.com>
-Date: Mon, 03 Jun 2024 11:41:56 -0600
+To: Leo Liang <ycliang@andestech.com>
+Cc: u-boot@lists.denx.de, rick@andestech.com
+Subject: Re: [GIT PULL] u-boot-riscv/master
+Message-ID: <20240603174207.GB68077@bill-the-cat>
+References: <Zlg_MycDVG7f4pqx@swlinux02>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="vVXzI+LGcdWgq8ni"
+Content-Disposition: inline
+In-Reply-To: <Zlg_MycDVG7f4pqx@swlinux02>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,20 +90,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 18 May 2024 15:06:11 +0200, Javier Martinez Canillas wrote:
 
-> I noticed that the IGEPv2 board did not boot anymore with mainline U-Boot.
-> This was caused by a driver change to allocate its platform data before
-> relocation and U-Boot not having enough pre-relocation heap size for this.
-> 
-> This series fixes this issue and also makes the board support more modern,
-> by enabling DM for SPL and migrating the IGEP boards to use upstream DTBs.
-> 
-> [...]
+--vVXzI+LGcdWgq8ni
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, May 30, 2024 at 04:56:49PM +0800, Leo Liang wrote:
+
+> Hi Tom,
+>=20
+> The following changes since commit 46ff00bea5dd2dd247d5e2fdadbf5dcf8653cd=
+9a:
+>=20
+>   Merge tag 'tpm-master-27052024' of https://source.denx.de/u-boot/custod=
+ians/u-boot-tpm (2024-05-27 08:56:02 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-riscv.git=20
+>=20
+> for you to fetch changes up to 1d29c718b7ba09807f8060796d9c21772e3c1b52:
+>=20
+>   andes: Use UCCTLCOMMAND instead of MCCTLCOMMAND (2024-05-30 16:01:13 +0=
+800)
+>=20
+> CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot=
+-riscv/-/pipelines/20920
 
 Applied to u-boot/master, thanks!
 
--- 
+--=20
 Tom
 
+--vVXzI+LGcdWgq8ni
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZeAGUACgkQFHw5/5Y0
+tyzKKwwAk5lGfNAiGJFGNQM+6HmeGxa59HYqsObz2Wmfj9TRmzhff/wWW7ew1SSk
+sA7cMQxlCqbHXBTr104rEkWKTTOx8DlBLm26RQhVTVMrvWYiMmRzUagDCPsQ1W3u
+xlblcpgHz21PgOtq2f0JG9KR+6cAabma7X10Fb8Z6zz1yONQRPo+cQCJPW41198t
+W6g1RpdhIk65grB1AJPGysFDT3ksUjtHu0tktxi7CcP17OLvYBYJjEK3lpz8ARAJ
+7vPBWf0X0z/JCtziaRFPhFglyN23LFIbndtmDKtY1nWgmprNJZHROXjyKAzzCRN7
+Wuf0TBE2ak7BXRsgEFbBx+e91E7jYui+ZbKhNsinbs8Z0uZfqUJvzxUrJ/JRtDqo
+zEcHmRxVwn7K7grjOBOvbclaqlGWr5rLQr3tNT33XgWjHwEd/YMTS5NR6QQ/sV+V
+TlbMuTM35r9Aaz+3bz6wK8/YVSq0QA6Vy92txNVc0YjSUvx7JceA52qnheIceAG/
+8Vj8Rzmn
+=Vzjq
+-----END PGP SIGNATURE-----
+
+--vVXzI+LGcdWgq8ni--
