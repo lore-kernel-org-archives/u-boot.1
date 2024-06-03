@@ -4,44 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2E16C25B76
-	for <u-boot@archiver.kernel.org>; Mon,  3 Jun 2024 12:27:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CF1FC25B75
+	for <u-boot@archiver.kernel.org>; Mon,  3 Jun 2024 12:49:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2469B882AC;
-	Mon,  3 Jun 2024 14:27:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id A35E8882F9;
+	Mon,  3 Jun 2024 14:49:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dp1dgdpN";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3AF0087FF0; Mon,  3 Jun 2024 10:18:45 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 202CC874D4
- for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 10:18:43 +0200 (CEST)
+ id 3DA64882F6; Mon,  3 Jun 2024 14:49:22 +0200 (CEST)
+Received: from mail-ed1-x543.google.com (mail-ed1-x543.google.com
+ [IPv6:2a00:1450:4864:20::543])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C360987FC1
+ for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 14:49:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=christian.loehle@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A87741042;
- Mon,  3 Jun 2024 01:19:06 -0700 (PDT)
-Received: from [10.57.83.47] (unknown [10.57.83.47])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EAD0E3F792;
- Mon,  3 Jun 2024 01:18:40 -0700 (PDT)
-Message-ID: <e0f38bc9-bcc2-4476-a5d4-4f2efaebc0c1@arm.com>
-Date: Mon, 3 Jun 2024 09:18:40 +0100
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ed1-x543.google.com with SMTP id
+ 4fb4d7f45d1cf-57a4d7ba501so1984444a12.2
+ for <u-boot@lists.denx.de>; Mon, 03 Jun 2024 05:49:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1717418959; x=1718023759; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Xi4KqcKUzHSBeGu8h5eKCPa9zjQDldEDM593qTyD6Ek=;
+ b=dp1dgdpNHM/KgvmkdZIL7X6t6wiT42ndjeyZyrfiqyEJWvCBhy/Wh83ZcckwoDx/l5
+ SHJ30AZUwf4/baJU+V3PoCxwWpug6wNzQ1MzCW9wzuRVBzbR9LzPIYq5cjkHxZqIkU4i
+ ZNxCucMwKHNEfWm0sI30kTMrtAANAC3kztUMD70LCU/JsqE8xq4JQeaMSq8xcju0qhhz
+ tnCHTzkQhkAbrotoo4Tpgy+zkbTW/LA7V40w04GR9eSHIPMbOxc16//w8ttyRD1Ovajb
+ bk3wLwJLhKOEeDn9z2MAmnKDmd1QAtR9yX0o/vC6Ndpft1zMWaTp85sHztF9SJ35O2hI
+ BE1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717418959; x=1718023759;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Xi4KqcKUzHSBeGu8h5eKCPa9zjQDldEDM593qTyD6Ek=;
+ b=MM9PSuWn92BEcRNM8T3UGyCW9obkvJCpS5ydh/eBUBnklBJIjLMqXKTyWkfX29upUB
+ hPFuAaq8TN8rpqx+ty+DZUjpfOsgWqvf7yrXeqGAz49/zw003JsGZfG0sik8tMnq4EMw
+ mztHtV1LZKUrZiYWhWOW0ZqVTJR0fmEROEhptOeLghfeYxQcmvnbvpOH7/MCedRlWV63
+ Fn8sgB+9cf6GdP6nvmbOl2N2l7+qjopRBxbTELUQn957bsm/GvHAV2qQKeONKFuERr+k
+ h5iLgY71AqWZ1EyoTtJY4wsWDIX8YwJtau2EvY3OcOo0VnzdZgImxVop2jOVvSKOo8w0
+ VoLw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXeBcifBBcCtnYB+2wKaVmi8w89lOfP+dkajwsn7k7KrXfPc7OnAhtp8UPmV3QpTYYOqADgK+qqBv/sNr73TsEG4jzQsg==
+X-Gm-Message-State: AOJu0YyufsmiJSDn22SYw0aCeus6l3aTNppjLxQQ/Qu+cG07yQ1Y2vL1
+ gQT7Ko6Weh8zahrwzRHY/YzN8MfwVeIOpKg1lcQXCZETnib5GWWBiw/TO/eLSbE=
+X-Google-Smtp-Source: AGHT+IE5I3yfdkrBYBoz+Y+BdtXU6cOcI1aoUE14osxgG+WNmGeCxsIxlhX8CQvmkM6bWsgcZAfc3w==
+X-Received: by 2002:a17:906:a293:b0:a68:e58b:2c35 with SMTP id
+ a640c23a62f3a-a68e58b2c64mr302223266b.31.1717418959211; 
+ Mon, 03 Jun 2024 05:49:19 -0700 (PDT)
+Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::8090])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a691cd07c72sm98917066b.170.2024.06.03.05.49.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 03 Jun 2024 05:49:18 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH v3 0/8] qcom: implement capsule updates
+Date: Mon, 03 Jun 2024 14:49:15 +0200
+Message-Id: <20240603-b4-qcom-capsule-updates-v3-0-fe2e083289ec@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: obscure microsd detection issue between U-Boot and kernel
-To: Tim Harvey <tharvey@gateworks.com>, u-boot <u-boot@lists.denx.de>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Linux MMC List <linux-mmc@vger.kernel.org>,
- Ulf Hansson <ulf.hansson@linaro.org>
-References: <CAJ+vNU3Ns0RVtROcChGAhfO=XbpnzwQv1SehexbgHX6ST6-Piw@mail.gmail.com>
-Content-Language: en-US
-From: Christian Loehle <christian.loehle@arm.com>
-In-Reply-To: <CAJ+vNU3Ns0RVtROcChGAhfO=XbpnzwQv1SehexbgHX6ST6-Piw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Mon, 03 Jun 2024 14:27:46 +0200
+X-B4-Tracking: v=1; b=H4sIAMu7XWYC/3XOQQ7CIBAF0KsY1o6hQEt15T2MC4ShJamlQks0T
+ e8urQvjwuWf5L8/M4kYHEZy2s0kYHLR+T4Hvt8R3aq+QXAmZ8IoE7RkHG4CHtrfQashTh3CNBg
+ 1YgRUDIWtLbWWktweAlr33OTLNefWxdGH1zaUivX6MQU9rqaxE0QdHaQCKHAshChURbmszp3rV
+ fAHHxqyQol9yyWTfx9KLENCljU3UhnB6h9oWZY3YgXsxPwAAAA=
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Lukasz Majewski <lukma@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
+ u-boot-qcom@groups.io
+X-Mailer: b4 0.14-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3206;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=dt7NHoCeoL30HWFoQisJqeIe1xYA8I+1N539lyAavh4=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmXbvMQE4sBmlW8vxNBJT4kcQ9ny+2qdrFUlMbw
+ Vcd0HhvIRKJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZl27zAAKCRAFgzErGV9k
+ tq0kEACLpT0yXRGcgE0hgPzwPMADzZtzYGW/Dqhh5pru6ZSO4nmhxv9wfM61VPGJP1LgPRl451l
+ 15ob9QAECHwmvx8DXU5p+hm6p82Zz7/exnTmKC8cgkcSp6whygU/BUiFugzr6OralZVIC6JTSS7
+ MCRTAzbSCfHKNzUMQjGGhryM0W8STYqW7TMQ7o5TDXg8hOn9Ui8W/0rNkpeMf/NnnK8yUHHSkno
+ +OYly4p89VHdZNXUMBnSmr4rZUC4gw3MjwQK82TJEXtiSKCILfgYE7t/OYRs+PA0kWs1697AVma
+ gkjTa8Mgu6vvnTqnI5WF2P3cuN54/XiMcioZ8L8jMXru/vTmyF721WJVDPiLbnK4cH7YkhkXSDq
+ afi5WE2K8AF4ax6E0FEoDJPzLE4aiJ07bC8NQHrY1IFZcrU+ipG8+0LlCDj4SmqWdzR0/9CRNcx
+ qJv8yhewtTwUo31gsfOp6v35Tw7LIzelLFKDC9bnn0oskow27XxAIeO9CKPEv9MUnRhXsnJ2h8G
+ rIFJwHK3/bpVyWtiJWkQtswEfhUl4W3yrem3JQLzN2eL3pa6XkfT6hIgq2ZscBLthJvP9Ur5x2h
+ FxRNNctsW7jz7m23FXd0UfH3qn6HPPPLngEW/tJSRzkgmCa5+PXTaePm0+tJX4eCsbNSGvy3wYR
+ Jkzrq2xlLm0jH9g==
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,42 +118,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/31/24 21:47, Tim Harvey wrote:
-> Greetings,
-> 
-> I'm seeing an issue on an imx8mm board (imx8mm-venice-gw73xx) where
-> for a specific set of microsd cards if I have accessed the microsd in
-> U-Boot with UHS/1.8V the kernel will not recognize that microsd when
-> scanning.
-> 
-> The issue does not occur with all microsd cards but seems to appear
-> with a large sample size of a specific card/model (Kingston SDC32 32GB
-> SDR104 card). I do not see a signal integrity issue on the scope.
-> 
-> Instrumenting the kernel the issue is that the host reports a CRC
-> error as soon as the first mmc_send_if_cond call which occurs in
-> mmc_rescan_try_freq.
-> 
-> I can avoid the issue by either not accessing the microsd in U-Boot or
-> by disabling UHS/1.8V mode in U-Boot therefore what I think is
-> happening is that U-Boot leaves the card in UHS/1.8V signalling mode
-> and when the kernel scans it sets the voltage back to 3.3V
-> standard/default and default timings then issues its clock cycles to
-> 'reset' the card and the card does not recognize the reset. I'm
-> wondering if this is because the reset is done via clock cycles after
-> the kernel has set the I/O voltage back to 3.3V when perhaps the card
-> is still in 1.8V mode (although I don't see how that would cause an
-> issue)?
+Hook up support for capsule updates loaded from disk on Qualcomm
+platforms.
 
-It will cause an issue for many cards and might break some cards.
+Most Qualcomm devices have an A/B partition layout, with most partitions
+duplicated. The metadata on which slot is active is stored in the GPT
+headers in the vendor-specific attribute bits of each partition.
 
-> 
-> Is there some sort of MMC 'reset' I can/should do in U-Boot before
-> booting the kernel? Has anyone encountered anything like this before?
+Add support for reading this attributes via the disk_partition struct
+and using them to determine which boot partition U-Boot is flashed to
+and generate the appropriate DFU string.
 
-There is no 'switching back' to 3.3V signalling from UHS 1.8V.
-The only way this can be done is therefore a full power-off.
-Is that done correctly for your system?
-AFAIR spec dictates 500ms of <0.5V on VCC. Note that  driving CLK/signal
-lines can also sustain the card somewhat, as leakage is only limited
-within operating voltage.
+This logic is gated behind a check to ensure that U-Boot is actually
+being chainloaded and not run via some other mechanism.
+
+SCSI support for most Qualcomm platforms is not yet enabled upstream,
+but will follow in future patches.
+
+This series enables capsule updates on the RB2, however [1] is required
+for it to work properly (as otherwise MMC won't be available).
+
+[1]: https://lore.kernel.org/u-boot/20240527-b4-clk-stub-v2-0-29013855e343@linaro.org/
+
+To: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+To: Lukasz Majewski <lukma@denx.de>
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de
+Cc: u-boot-qcom@groups.io
+
+Changes in v3:
+- Address comments in scsi dfu support
+- enable CONFIG_DFU_SCSI for qcom
+- Link to v2: https://lore.kernel.org/r/20240527-b4-qcom-capsule-updates-v2-0-47583d7ad428@linaro.org
+
+Changes in v2:
+- Add qcom capsule update support patches
+- Link to v1: https://lore.kernel.org/r/20240409-b4-dfu-scsi-v1-0-3e1441a60376@linaro.org
+
+---
+Caleb Connolly (8):
+      dfu: add scsi backend
+      disk: expose partition type flags
+      mmc: msm_sdhci: work around a bug when writing
+      mach-snapdragon: implement capsule update support
+      qcom_defconfig: savedefconfig
+      mach-snapdragon: use SYSRESET_PSCI
+      mach-snapdragon: bump up heap size
+      qcom_defconfig: enable capsule update support
+
+ arch/arm/Kconfig                          |   2 +
+ arch/arm/mach-snapdragon/Kconfig          |   3 +
+ arch/arm/mach-snapdragon/Makefile         |   1 +
+ arch/arm/mach-snapdragon/board.c          |   8 +-
+ arch/arm/mach-snapdragon/capsule_update.c | 147 ++++++++++
+ arch/arm/mach-snapdragon/qcom-priv.h      |   6 +
+ configs/qcom_defconfig                    |  19 +-
+ disk/part_efi.c                           |   1 +
+ doc/usage/dfu.rst                         |  32 +++
+ drivers/dfu/Kconfig                       |   7 +
+ drivers/dfu/Makefile                      |   1 +
+ drivers/dfu/dfu.c                         |   5 +-
+ drivers/dfu/dfu_scsi.c                    | 435 ++++++++++++++++++++++++++++++
+ drivers/mmc/msm_sdhci.c                   |   7 +
+ include/configs/qcom.h                    |   5 +
+ include/dfu.h                             |  26 ++
+ include/part.h                            |   1 +
+ 17 files changed, 695 insertions(+), 11 deletions(-)
+---
+change-id: 20240523-b4-qcom-capsule-updates-ea2e4f8f0ff0
+base-commit: 5d8881a0801241d68701e8644d495f1d535506f0
+
+// Caleb (they/them)
+
