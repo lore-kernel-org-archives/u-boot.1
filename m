@@ -4,55 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1182EC25B75
-	for <u-boot@archiver.kernel.org>; Mon,  3 Jun 2024 18:21:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E0A5C25B75
+	for <u-boot@archiver.kernel.org>; Mon,  3 Jun 2024 20:32:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8EF5B87D33;
-	Mon,  3 Jun 2024 20:21:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id AA511883A7;
+	Mon,  3 Jun 2024 22:32:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="rPdRb99P";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KvoSon1G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A67087C7E; Mon,  3 Jun 2024 20:21:28 +0200 (CEST)
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B94248839D; Mon,  3 Jun 2024 22:32:16 +0200 (CEST)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CC7A8835E
- for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 20:21:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D1622883A7
+ for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 22:32:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from [127.0.0.1] (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 93E601F9B5;
- Mon,  3 Jun 2024 20:21:24 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1717438884;
- bh=C2LAhXWJm8V5phlCXDOC43zLavjs+lgp3iMOEAytz+M=; h=From:To:Subject;
- b=rPdRb99Px0BVMwKYj7Aiob1cnvoNSArn1IFn3A15aFzkeDqHbdy/U/8mPEnLLsOR9
- eyh2yeyGCnM7Ho/W4yOOvqfVf/cbiZCB168W8+mASSwsZksGKsUNSbugcK2XkaeKfa
- 91cdzYKSAAcOOZvL39hd2bLoAmWf72zP3+LyvUR7F3+X4PhtwRnj7GqmkAZ6iQJwVP
- YDTa3i5/CguUxpwsantqUrCrCF13j+tLFXu5EtBipxNTRDeLxqvKrmFxj2s8NBTxvA
- BwGMkShfWvibeu63Jdn0nF79p7m1BcVBwIFemlmJK/XLZ2+2hA2AwipxUDY/PwJtZX
- Fyu4f/6ey8N6Q==
-Date: Mon, 03 Jun 2024 20:21:18 +0200
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Tom Rini <trini@konsulko.com>
-CC: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_2/2=5D_net=3A_phy=3A_Replace_P?=
- =?US-ASCII?Q?HY=5FANEG=5FTIMEOUT_with_Kconfig_symbol?=
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20240603174419.GE68077@bill-the-cat>
-References: <20240531164733.192105-1-marek.vasut+renesas@mailbox.org>
- <20240531164733.192105-2-marek.vasut+renesas@mailbox.org>
- <20240601092154.GA4383@francesco-nb> <20240603174419.GE68077@bill-the-cat>
-Message-ID: <04182B2F-C087-4D5D-BF98-093A579D85FC@dolcini.it>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-52b90038cf7so3208033e87.0
+ for <u-boot@lists.denx.de>; Mon, 03 Jun 2024 13:32:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1717446734; x=1718051534; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0d+hi+RVW462g8woeoA39lUvci0S3ikzpBaT0M0AJRM=;
+ b=KvoSon1GtMT1IDRZfTUTwX8JehpHkSMCUOCDgU03F8+ygnlTtl/buf2YrYq31PZ/0M
+ v5p6PqjU44+VOCdfblLroT706uoJDN1o60wulJESiPw+L2Gg523VRKmzkgtXNPfafemQ
+ IcrgGURNYHmCuiIDQVYjVpmdSXvO8RqLbbTmxIlb2ccsH17BuBn+08XYs64pmIQGSXwd
+ tCJUVgS3negRtFFZumX6tPVNsG+pNOFYFfnbRbzOr/14cHK6sXiketC3OwATc0CWGcaZ
+ DP6ih59lW3l6asu/BSsob0T75wfPmrrlzDeG+qNfTeMGJZgTLh3ID4WyhD6UnaxvsZuO
+ UmVw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717446734; x=1718051534;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0d+hi+RVW462g8woeoA39lUvci0S3ikzpBaT0M0AJRM=;
+ b=OGyIYotr0ddovPEu0TZav/qsOy3u9O53m+CdeqoBo+7XYIUxNyE5qmtxos83LfnrUG
+ MQzkEwYdw8DkHcuoxUTGTd6CujtJaOiMeP8h/KFpVSsEqU6Lbh2dCRGIPNSR16THPgql
+ nDGi7crkkpkVLuDg91ceR0a/A8oWAqHLfvk/xwcn+yvOGhpERobWYpL4l4we1apVKl1D
+ LRa6dCJ3VqgTNWuqrsiJbVpKiSWttEJQC96Ygr5U52D+R3w5g7wzDwYx02s3wjcFWchj
+ jEY29F9SwcF/p2zyXPsJKCeegj76wLvtCnVsh7LTJYzhbTKxhbB2AHDX9sTyGA1WRdyi
+ zdUg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXYJVcjWV3Kw4tFybEaCE4Pnyi5DYUrLbWEG6BaxGxyJxsU7+XP8bRN/dwvboNA6/AAn1qO4uEwqATh9fpXPzeOEDtxJA==
+X-Gm-Message-State: AOJu0YyJb+FbWUkOG8MAcHeeS3CXbybe4Xtys3GBF+2TmjmOkplbBfsL
+ G+KC8s/x06mBbFw3i/1wTzZXelxvfVmtgwwGfXPoSxXW3UiQoAbKHZx64JG/N2duNl+Qi/Zs1TO
+ owBTeRzFfhr63uVj4TK4qETerAMo=
+X-Google-Smtp-Source: AGHT+IGjVgyh7CqPwSdVqBPwk6gv9C154mJtHb0pNdzsQDW2hMcWTbtyI4kqpP+/6KV1/cZVtsKrdTOmmn87Q4fOvo0=
+X-Received: by 2002:a05:6512:21a:b0:52b:839c:78dc with SMTP id
+ 2adb3069b0e04-52b8957af1amr6420375e87.29.1717446733797; Mon, 03 Jun 2024
+ 13:32:13 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
+References: <20240603132721.6522-1-hal.feng@starfivetech.com>
+In-Reply-To: <20240603132721.6522-1-hal.feng@starfivetech.com>
+From: E Shattow <lucent@gmail.com>
+Date: Mon, 3 Jun 2024 13:32:02 -0700
+Message-ID: <CANV2PTPjbYEWr67bMSM_fg3kSS4Q2kDYdcHTLVp0CrQyeT=dbA@mail.gmail.com>
+Subject: Re: [PATCH v1 0/4] Sync StarFive JH7110 clock and reset dt-bindings
+ with Linux
+To: Hal Feng <hal.feng@starfivetech.com>
+Cc: Leo Yu-Chi Liang <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Rick Chen <rick@andestech.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Nam Cao <namcao@linutronix.de>,
+ Bo Gan <ganboing@gmail.com>, 
+ Yanhong Wang <yanhong.wang@starfivetech.com>, 
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>, 
+ Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -70,40 +96,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom,
+Hi Hal,
 
-Il 3 giugno 2024 19:56:07 CEST, Tom Rini <trini@konsulko=2Ecom> ha scritto=
-:
->On Sat, Jun 01, 2024 at 11:21:54AM +0200, Francesco Dolcini wrote:
->> Hello Marek,
->>=20
->> On Fri, May 31, 2024 at 06:47:17PM +0200, Marek Vasut wrote:
->> > Switch PHY_ANEG_TIMEOUT to CONFIG_PHY_ANEG_TIMEOUT Kconfig symbol=2E
->> > This removes one more configuration headers option finalizes its
->> > Kconfig symbol conversion=2E No functional change expected=2E
->> >=20
->> > Signed-off-by: Marek Vasut <marek=2Evasut+renesas@mailbox=2Eorg>
->> > ---
->> =2E=2E=2E
->>=20
->> > diff --git a/include/configs/apalis_imx6=2Eh b/include/configs/apalis=
-_imx6=2Eh
->> > index 0df3917e200=2E=2E6fd43511ee4 100644
->> > --- a/include/configs/apalis_imx6=2Eh
->> > +++ b/include/configs/apalis_imx6=2Eh
->> > @@ -22,7 +22,6 @@
->> >  #define CFG_SYS_FSL_USDHC_NUM	3
->> > =20
->> >  /* Network */
->> > -#define PHY_ANEG_TIMEOUT		15000 /* PHY needs longer aneg time */
->>=20
->> You should remove also the line before, after removing the define it's
->> just a stale comment=2E
+Instead of manual dt-bindings sync can we please adopt OF_UPSTREAM for JH71=
+10 ?
+
+-E
+
+
+On Mon, Jun 3, 2024 at 6:57=E2=80=AFAM Hal Feng <hal.feng@starfivetech.com>=
+ wrote:
 >
->It would be nice, but there's lots of similar garbage remaining from
->other transitions, so to me it's not a deal-breaker here=2E
-
-I see your point, I gonna send a follow-up patch to cleanup what I care th=
-e most afterwards if we merge this as it is=2E
-
-Francesco=20
+> There are differences in clock / reset dt-bindings between U-Boot and
+> Linux. Sync them, so it is feasible to use OF_UPSTREAM for StarFive
+> JH7110 SoC.
+>
+> Hal Feng (4):
+>   dt-bindings: clock: jh7110: Sync with Linux
+>   dt-bindings: reset: jh7110: Sync with Linux
+>   clk: starfive: jh7110: Sync clock definitions with Linux
+>   riscv: dts: jh7110: Sync clock and reset definitions with Linux
+>
+>  .../dts/jh7110-starfive-visionfive-2.dtsi     |   6 +-
+>  arch/riscv/dts/jh7110-u-boot.dtsi             |   2 +-
+>  arch/riscv/dts/jh7110.dtsi                    |  28 +--
+>  drivers/clk/starfive/clk-jh7110-pll.c         |   6 +-
+>  drivers/clk/starfive/clk-jh7110.c             |  44 ++---
+>  .../dt-bindings/clock/starfive,jh7110-crg.h   | 180 +++++++++++-------
+>  .../dt-bindings/reset/starfive,jh7110-crg.h   | 144 ++++++++------
+>  7 files changed, 243 insertions(+), 167 deletions(-)
+>
+>
+> base-commit: ea722aa5eb33740ae77e8816aeb72b385e621cd0
+> --
+> 2.43.2
+>
