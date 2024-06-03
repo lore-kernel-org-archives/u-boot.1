@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CF1FC25B75
-	for <u-boot@archiver.kernel.org>; Mon,  3 Jun 2024 12:49:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BEB2C25B75
+	for <u-boot@archiver.kernel.org>; Mon,  3 Jun 2024 12:49:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A35E8882F9;
-	Mon,  3 Jun 2024 14:49:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 09310882AF;
+	Mon,  3 Jun 2024 14:49:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dp1dgdpN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mMxGUfit";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3DA64882F6; Mon,  3 Jun 2024 14:49:22 +0200 (CEST)
-Received: from mail-ed1-x543.google.com (mail-ed1-x543.google.com
- [IPv6:2a00:1450:4864:20::543])
+ id 3918088324; Mon,  3 Jun 2024 14:49:24 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C360987FC1
- for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 14:49:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E5BAC882AC
+ for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 14:49:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x543.google.com with SMTP id
- 4fb4d7f45d1cf-57a4d7ba501so1984444a12.2
- for <u-boot@lists.denx.de>; Mon, 03 Jun 2024 05:49:19 -0700 (PDT)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a6302bdb54aso565509466b.0
+ for <u-boot@lists.denx.de>; Mon, 03 Jun 2024 05:49:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1717418959; x=1718023759; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Xi4KqcKUzHSBeGu8h5eKCPa9zjQDldEDM593qTyD6Ek=;
- b=dp1dgdpNHM/KgvmkdZIL7X6t6wiT42ndjeyZyrfiqyEJWvCBhy/Wh83ZcckwoDx/l5
- SHJ30AZUwf4/baJU+V3PoCxwWpug6wNzQ1MzCW9wzuRVBzbR9LzPIYq5cjkHxZqIkU4i
- ZNxCucMwKHNEfWm0sI30kTMrtAANAC3kztUMD70LCU/JsqE8xq4JQeaMSq8xcju0qhhz
- tnCHTzkQhkAbrotoo4Tpgy+zkbTW/LA7V40w04GR9eSHIPMbOxc16//w8ttyRD1Ovajb
- bk3wLwJLhKOEeDn9z2MAmnKDmd1QAtR9yX0o/vC6Ndpft1zMWaTp85sHztF9SJ35O2hI
- BE1w==
+ d=linaro.org; s=google; t=1717418961; x=1718023761; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=TsLrwe77MphWY0YcELWYdgLVdM7F1B/rZUAF0i5P55I=;
+ b=mMxGUfitaKrJHgT/F8E9MzOaUXgjWjV1DjrSPOvmuAyOEY682awRpf4lWQ16pvzdCi
+ Y3vOHlxzS+dO20458wkp1lYJIqL01hacoI6G6Tv/YtKczcSgLLhPBj4naV/dy0plExq6
+ 2sup+zQs+ZJure3Pfex6dtlXfkr1jiW068M+d6Y++uZbXOOiKBBwOcdUVuVE8XtWTlvU
+ ceFK9cICJDWYj564OzEfk19hj+jbmMy2HwMUdEAQx5OBq+uMpqpq/4FaxIdLtY95N/Vb
+ Hhd+FipFfv1PFDfokFKGp526MI9OHjKR/ag45v8cTe/3UTTIvtTuCWOf2XTt8E64y/7f
+ LEOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717418959; x=1718023759;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Xi4KqcKUzHSBeGu8h5eKCPa9zjQDldEDM593qTyD6Ek=;
- b=MM9PSuWn92BEcRNM8T3UGyCW9obkvJCpS5ydh/eBUBnklBJIjLMqXKTyWkfX29upUB
- hPFuAaq8TN8rpqx+ty+DZUjpfOsgWqvf7yrXeqGAz49/zw003JsGZfG0sik8tMnq4EMw
- mztHtV1LZKUrZiYWhWOW0ZqVTJR0fmEROEhptOeLghfeYxQcmvnbvpOH7/MCedRlWV63
- Fn8sgB+9cf6GdP6nvmbOl2N2l7+qjopRBxbTELUQn957bsm/GvHAV2qQKeONKFuERr+k
- h5iLgY71AqWZ1EyoTtJY4wsWDIX8YwJtau2EvY3OcOo0VnzdZgImxVop2jOVvSKOo8w0
- VoLw==
+ d=1e100.net; s=20230601; t=1717418961; x=1718023761;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TsLrwe77MphWY0YcELWYdgLVdM7F1B/rZUAF0i5P55I=;
+ b=Rr0/abfA3FwtAv8LjxqfZd5DL9U2gKxoIB06HKtgkDk0rhW2dtKe0ztG8YwLv5bhoJ
+ V5dlD0sExTGgfmNJJ+W1sxMfVCFWEdEPnhW1+Ln/cHgVbctVT5ryhunF1KIJqD1OYVpO
+ Q6mumZPEeL9Li1GrGtaK0pHQi+FsBX3RQfK2koYGscmCExiGfUf3I4WPTevOfn/p26pA
+ wYYVfe8I3LlbQZnyykSu2rVA539pCBt3KL5DkOLvLyfW+loHf+Lgff5YGj+Wcb2fw+P2
+ BMl8AeYmg44nGBDP6FS1hiGG6B08gqdGBslNBF68EIVvIlWRuKIR63hkIyGb8b815LbM
+ 6NCw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXeBcifBBcCtnYB+2wKaVmi8w89lOfP+dkajwsn7k7KrXfPc7OnAhtp8UPmV3QpTYYOqADgK+qqBv/sNr73TsEG4jzQsg==
-X-Gm-Message-State: AOJu0YyufsmiJSDn22SYw0aCeus6l3aTNppjLxQQ/Qu+cG07yQ1Y2vL1
- gQT7Ko6Weh8zahrwzRHY/YzN8MfwVeIOpKg1lcQXCZETnib5GWWBiw/TO/eLSbE=
-X-Google-Smtp-Source: AGHT+IE5I3yfdkrBYBoz+Y+BdtXU6cOcI1aoUE14osxgG+WNmGeCxsIxlhX8CQvmkM6bWsgcZAfc3w==
-X-Received: by 2002:a17:906:a293:b0:a68:e58b:2c35 with SMTP id
- a640c23a62f3a-a68e58b2c64mr302223266b.31.1717418959211; 
- Mon, 03 Jun 2024 05:49:19 -0700 (PDT)
+ AJvYcCWWOikZ0kfnlM3nFlazpCUQxRt28YAvT6V3+NRDpflyUpUGHlm9EGt5nqfvq2MMEvseRdLKzkA3enNSBdVPVXNAB0YKWw==
+X-Gm-Message-State: AOJu0Yx2lKYROao3y9vdl1X8HIoNKlGcurelOMf+bUcvdlhJvoadae3F
+ IiwCrVOi8LvzmjYsJWQYTQZheR1ZTN6xQandomxjFea3IJhL7LHcNg9RRE1X6wU=
+X-Google-Smtp-Source: AGHT+IHXFRCZVY6IWJCLgavoMQmXjOOZWHuR0g47OZeuBS85JRQPXyt/dJnMEtFkSjrPEReFODy0ZA==
+X-Received: by 2002:a17:906:27ce:b0:a68:f8b9:ffa3 with SMTP id
+ a640c23a62f3a-a68f8ba0035mr210645166b.46.1717418961361; 
+ Mon, 03 Jun 2024 05:49:21 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::8090])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a691cd07c72sm98917066b.170.2024.06.03.05.49.18
+ a640c23a62f3a-a691cd07c72sm98917066b.170.2024.06.03.05.49.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Jun 2024 05:49:18 -0700 (PDT)
+ Mon, 03 Jun 2024 05:49:20 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Subject: [PATCH v3 0/8] qcom: implement capsule updates
-Date: Mon, 03 Jun 2024 14:49:15 +0200
-Message-Id: <20240603-b4-qcom-capsule-updates-v3-0-fe2e083289ec@linaro.org>
+Date: Mon, 03 Jun 2024 14:49:17 +0200
+Subject: [PATCH v3 2/8] disk: expose partition type flags
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAMu7XWYC/3XOQQ7CIBAF0KsY1o6hQEt15T2MC4ShJamlQks0T
- e8urQvjwuWf5L8/M4kYHEZy2s0kYHLR+T4Hvt8R3aq+QXAmZ8IoE7RkHG4CHtrfQashTh3CNBg
- 1YgRUDIWtLbWWktweAlr33OTLNefWxdGH1zaUivX6MQU9rqaxE0QdHaQCKHAshChURbmszp3rV
- fAHHxqyQol9yyWTfx9KLENCljU3UhnB6h9oWZY3YgXsxPwAAAA=
+Message-Id: <20240603-b4-qcom-capsule-updates-v3-2-fe2e083289ec@linaro.org>
+References: <20240603-b4-qcom-capsule-updates-v3-0-fe2e083289ec@linaro.org>
+In-Reply-To: <20240603-b4-qcom-capsule-updates-v3-0-fe2e083289ec@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Lukasz Majewski <lukma@denx.de>, 
  Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
@@ -85,21 +83,21 @@ To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
  u-boot-qcom@groups.io
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3206;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1946;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=dt7NHoCeoL30HWFoQisJqeIe1xYA8I+1N539lyAavh4=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmXbvMQE4sBmlW8vxNBJT4kcQ9ny+2qdrFUlMbw
- Vcd0HhvIRKJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZl27zAAKCRAFgzErGV9k
- tq0kEACLpT0yXRGcgE0hgPzwPMADzZtzYGW/Dqhh5pru6ZSO4nmhxv9wfM61VPGJP1LgPRl451l
- 15ob9QAECHwmvx8DXU5p+hm6p82Zz7/exnTmKC8cgkcSp6whygU/BUiFugzr6OralZVIC6JTSS7
- MCRTAzbSCfHKNzUMQjGGhryM0W8STYqW7TMQ7o5TDXg8hOn9Ui8W/0rNkpeMf/NnnK8yUHHSkno
- +OYly4p89VHdZNXUMBnSmr4rZUC4gw3MjwQK82TJEXtiSKCILfgYE7t/OYRs+PA0kWs1697AVma
- gkjTa8Mgu6vvnTqnI5WF2P3cuN54/XiMcioZ8L8jMXru/vTmyF721WJVDPiLbnK4cH7YkhkXSDq
- afi5WE2K8AF4ax6E0FEoDJPzLE4aiJ07bC8NQHrY1IFZcrU+ipG8+0LlCDj4SmqWdzR0/9CRNcx
- qJv8yhewtTwUo31gsfOp6v35Tw7LIzelLFKDC9bnn0oskow27XxAIeO9CKPEv9MUnRhXsnJ2h8G
- rIFJwHK3/bpVyWtiJWkQtswEfhUl4W3yrem3JQLzN2eL3pa6XkfT6hIgq2ZscBLthJvP9Ur5x2h
- FxRNNctsW7jz7m23FXd0UfH3qn6HPPPLngEW/tJSRzkgmCa5+PXTaePm0+tJX4eCsbNSGvy3wYR
- Jkzrq2xlLm0jH9g==
+ bh=6r6o+LARxoUfqXvO6HRYgyNJUDpuL2kNJVwCc7gQ/4M=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmXbvNAJ2Jfm3J8hw8bYT0Lk+zvfwvCoq6WP61l
+ 80Pu7qH7cyJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZl27zQAKCRAFgzErGV9k
+ thuZD/wNvsSqR0r0EOrVxGpHjhu+ExvMV1GvqYbcxOmUu3ipp/4ZkbDzdyoBnLUhihQJWnLHcTB
+ tCiKR2dLWottkBsUZ9zw11xnzhSmtFk/PDpTt8els64QIlPMIroz27t8PbBwN5PJj4aeMFn55IJ
+ XPk21sloQfR2JlExPLlsGtICzctsCMkMF5Wn+w/3eNluCfETJAJk+oK7BMl/PrG3lMlA/TT6San
+ lDRplKOaE5wlPgLWHwicnsmE9PL/e2AoqH8JPU6Vxu7uoNSvi+RSzJaEGN3IVDgr3U5xbjkEQ/+
+ FZptqghTY9eQT1H8FxiTVsxPpngcLgiPYId86ksz3JSq39DM/mB3kjcNNy498Z0wWZxU+ncNwyE
+ nQa4Y4YiA9eJWUV+Qvjrf+0Cpd2p/5dGUFoKAkzRAu95L/vZJqyd6DljZp0jMC7SNkZNVo+YQjT
+ mVgm3iP4iScigoh+eM4AK/XN6dgfzxztvq5f6K95iwPjrP0Bu10OZfEAHngOwvK+gnyvAD1oACB
+ PRDudCOG6RD3h23tFyK0dHZYpKHFGj7dy6RMj4fOf18EIckQ9LGo4HBCy+GQws2/0rgZf/JJMHT
+ rQ0WLbnNOko97BXopAI9xe8HRw/lKy/0qH0+CYqZwFa2op2pYQ7qIX0wTA9sUtLwzljM8scAgqB
+ GFB1UxshE5rQoOA==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -118,80 +116,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hook up support for capsule updates loaded from disk on Qualcomm
-platforms.
+GPT partition tables include two bytes worth of vendor defined
+attributes, per partition. ChromeOS and Qualcomm both use these (with
+different encoding!) to handle A/B slot switching with a retry counter.
 
-Most Qualcomm devices have an A/B partition layout, with most partitions
-duplicated. The metadata on which slot is active is stored in the GPT
-headers in the vendor-specific attribute bits of each partition.
+Expose these via the disk_partition struct so that they can be parsed by
+the relevant board code.
 
-Add support for reading this attributes via the disk_partition struct
-and using them to determine which boot partition U-Boot is flashed to
-and generate the appropriate DFU string.
+This will be used on Qualcomm boards to determine which slot we're
+booting on so that we can flash capsule updates to the correct one.
 
-This logic is gated behind a check to ensure that U-Boot is actually
-being chainloaded and not run via some other mechanism.
-
-SCSI support for most Qualcomm platforms is not yet enabled upstream,
-but will follow in future patches.
-
-This series enables capsule updates on the RB2, however [1] is required
-for it to work properly (as otherwise MMC won't be available).
-
-[1]: https://lore.kernel.org/u-boot/20240527-b4-clk-stub-v2-0-29013855e343@linaro.org/
-
-To: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-To: Lukasz Majewski <lukma@denx.de>
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-To: Neil Armstrong <neil.armstrong@linaro.org>
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de
-Cc: u-boot-qcom@groups.io
-
-Changes in v3:
-- Address comments in scsi dfu support
-- enable CONFIG_DFU_SCSI for qcom
-- Link to v2: https://lore.kernel.org/r/20240527-b4-qcom-capsule-updates-v2-0-47583d7ad428@linaro.org
-
-Changes in v2:
-- Add qcom capsule update support patches
-- Link to v1: https://lore.kernel.org/r/20240409-b4-dfu-scsi-v1-0-3e1441a60376@linaro.org
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
-Caleb Connolly (8):
-      dfu: add scsi backend
-      disk: expose partition type flags
-      mmc: msm_sdhci: work around a bug when writing
-      mach-snapdragon: implement capsule update support
-      qcom_defconfig: savedefconfig
-      mach-snapdragon: use SYSRESET_PSCI
-      mach-snapdragon: bump up heap size
-      qcom_defconfig: enable capsule update support
+ disk/part_efi.c | 1 +
+ include/part.h  | 1 +
+ 2 files changed, 2 insertions(+)
 
- arch/arm/Kconfig                          |   2 +
- arch/arm/mach-snapdragon/Kconfig          |   3 +
- arch/arm/mach-snapdragon/Makefile         |   1 +
- arch/arm/mach-snapdragon/board.c          |   8 +-
- arch/arm/mach-snapdragon/capsule_update.c | 147 ++++++++++
- arch/arm/mach-snapdragon/qcom-priv.h      |   6 +
- configs/qcom_defconfig                    |  19 +-
- disk/part_efi.c                           |   1 +
- doc/usage/dfu.rst                         |  32 +++
- drivers/dfu/Kconfig                       |   7 +
- drivers/dfu/Makefile                      |   1 +
- drivers/dfu/dfu.c                         |   5 +-
- drivers/dfu/dfu_scsi.c                    | 435 ++++++++++++++++++++++++++++++
- drivers/mmc/msm_sdhci.c                   |   7 +
- include/configs/qcom.h                    |   5 +
- include/dfu.h                             |  26 ++
- include/part.h                            |   1 +
- 17 files changed, 695 insertions(+), 11 deletions(-)
----
-change-id: 20240523-b4-qcom-capsule-updates-ea2e4f8f0ff0
-base-commit: 5d8881a0801241d68701e8644d495f1d535506f0
+diff --git a/disk/part_efi.c b/disk/part_efi.c
+index b1a03bd165e0..bde4adcfa087 100644
+--- a/disk/part_efi.c
++++ b/disk/part_efi.c
+@@ -291,8 +291,9 @@ int part_get_info_efi(struct blk_desc *desc, int part,
+ 	snprintf((char *)info->name, sizeof(info->name), "%s",
+ 		 print_efiname(&gpt_pte[part - 1]));
+ 	strcpy((char *)info->type, "U-Boot");
+ 	info->bootable = get_bootable(&gpt_pte[part - 1]);
++	info->type_flags = gpt_pte[part - 1].attributes.fields.type_guid_specific;
+ 	if (CONFIG_IS_ENABLED(PARTITION_UUIDS)) {
+ 		uuid_bin_to_str(gpt_pte[part - 1].unique_partition_guid.b,
+ 				(char *)disk_partition_uuid(info),
+ 				UUID_STR_FORMAT_GUID);
+diff --git a/include/part.h b/include/part.h
+index 32ee40488563..afae51f1b933 100644
+--- a/include/part.h
++++ b/include/part.h
+@@ -68,8 +68,9 @@ struct disk_partition {
+ 	 * PART_BOOTABLE		the MBR bootable flag is set
+ 	 * PART_EFI_SYSTEM_PARTITION	the partition is an EFI system partition
+ 	 */
+ 	int	bootable;
++	u16	type_flags;	/* top 16 bits of GPT partition attributes	*/
+ #if CONFIG_IS_ENABLED(PARTITION_UUIDS)
+ 	char	uuid[UUID_STR_LEN + 1];	/* filesystem UUID as string, if exists	*/
+ #endif
+ #ifdef CONFIG_PARTITION_TYPE_GUID
 
-// Caleb (they/them)
+-- 
+2.45.0
 
