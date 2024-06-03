@@ -4,63 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2BCDC25B76
-	for <u-boot@archiver.kernel.org>; Mon,  3 Jun 2024 13:35:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F429C25B76
+	for <u-boot@archiver.kernel.org>; Mon,  3 Jun 2024 13:35:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4ADA288282;
-	Mon,  3 Jun 2024 15:35:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B21888830C;
+	Mon,  3 Jun 2024 15:35:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=weidmueller.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="N2/E4US4";
+	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="sB9ZOxdx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4BAEF8830C; Mon,  3 Jun 2024 15:35:18 +0200 (CEST)
+ id 507EF882AC; Mon,  3 Jun 2024 15:35:20 +0200 (CEST)
 Received: from EUR05-AM6-obe.outbound.protection.outlook.com
  (mail-am6eur05on20722.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:2612::722])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F85F882AC
+ by phobos.denx.de (Postfix) with ESMTPS id A3444882F9
  for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 15:35:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
  header.from=weidmueller.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Lukas.Funke-oss@weidmueller.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=QZxZDQEh212axqYXYfy9C1NFebltoZPbGZsfOAu1VxNOW0gFxgQInTQ3+64jJuaE5yKPboz3RA7giXqJg2lxyOfnBL3CRecYtGy8Fiv3X+GN/Uk7Hbo8Y/6BvZbb30cERCFJdoylGvgGzOPVRlD9Ua8e+tzNP7+r8sNdiRbK8DWCQfvu4DhOzZCqVjXFzMWiQaoShg5kclaKvC2WwoiGHJFKge2U/AeT7yvuiuSioBPZBusHNVRxIr9AsVHytil6cVXyHNj2U029X+7Owu1JKnwgji195r3/a/nK2Uqvq1+T6u1Px7j7AajheeVC8mLtFLAV6jywyykXfxK7c/Mx8w==
+ b=bsUEH01NmGpQvPaVDXo9XLPDzppZruxKu60HARmDs8av8B22+J75T70x2UYCB2bACP2HvytFjVzCHgRKG1QPfhtTJrtY6aYG19kneex1oaIg5jlbLxmT1c0U8hk/phk3uSd6OooHcpfXY+KDgebPHnjRTl38Q2ecEe+FK09P35b4c0qO1TxPwi8BqSrCESzaZw/jxxa4fnqIwmDnTUNudlxUssUhRztqSoYY/O3q4n+yFHTitnPrmVzxyjP6tKp2vozAKfUBX/0NPKcgenKrei/JgkXJWUME5yz0YyOcUD5gRjh0gsmuVdGAM9drQCNWZGiLgnpNjykbmXGNKScmSg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Hy0xp9u605F/ZN5e/XpFCO++kmvwCE5YkVDi8w9KlFk=;
- b=QZdn8AeGJAEgiTrvHiKRwy9QVnKx0+E1ta28sfdyjeGffIHtug8qopEynqYSqD7wfFAXrnSJi3DDW5jVeJ0l6moY/dB33zavYlU3vrPOi9vpiUV12zd8XBsjJTQgqwCkMEoijr2K0uE5CLil6lDek8Xi8ESM1reQQ+Dg4DolJfAcU720agt5sz4BNwtbMbV5xh3BEyrxmTULsAao7lPA+JJ0XtM4j8hX4HraU7z1UHn4t7FLEXb762rZ0gPCdBOPW6ngK+l47dr9UPbDkihc4IESlT3ogLq+6F0diLq+2R1UKphMgp3cxYgZkay/khp8ujnxt2T6ucAKH5xeNyfRsg==
+ bh=bm9tptLHXD3APTkD1WBYLPsTiWvaGprzcyIBVnSbsTQ=;
+ b=IXxNu4O2bt2cosZW7LJCFkuWRQ/WRtDZ7MLnCNZlAJROj9cJo0879J1qsdCUZeTzGVXpH9TIbEATNHMIaV+NgUGebkQQc1qF7EorEMsAdseaGpe6OupS2QPKnOODfb49m9OXrhMckAw+QVk3ej9H/jm/w1ldLsxgMKz0oTJQQHnt+WRvNP9/wwkKcviRrrLQ9wlLx6FDc8xCxim+AFxhKj4z4wiZ3qpmpBL4CUhmWAKIBHw8cdrlAr7QROG5dTrRE15FBtX/YFG9+dlG/LVPaaCstK217BGL58x1Ouo/uiXmIj/YhpumL0wTCo0KGBjsrnhp01Wcc12h9Q7rEhUlJw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=weidmueller.com; dmarc=pass action=none
  header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=weidmueller.onmicrosoft.com; s=selector1-weidmueller-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Hy0xp9u605F/ZN5e/XpFCO++kmvwCE5YkVDi8w9KlFk=;
- b=N2/E4US45L/sSlBf12VrNfXe2Cl+IYUZkATAIeuv3ZeifNgz5hiIU578YIh1sqCdTva6vsuxao6Zyh+ockuVYdvwshc4WvmrBPIi0OKOQrktE4tUElei/MGiNRXUk/l+MmQOYGpqKzkntDJaPYQKik/l1AccME87p6JFN9yeq8w=
+ bh=bm9tptLHXD3APTkD1WBYLPsTiWvaGprzcyIBVnSbsTQ=;
+ b=sB9ZOxdxDcgm/RcQ/29yF4iGIQsHtqKEMIjm0+piRn9erryWig6NU4ZK/f/T+EOtxSjc4HUcIA8ozidtYokI2lkILqkcotK6mlCbiTilhCc+Yc/ieuZff568d8Aug5II7EPj5UQwyGTb9xiLtbCxd/SJM5Fx7o7AYcTK47gLuuQ=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=weidmueller.com;
 Received: from AS2PR08MB8431.eurprd08.prod.outlook.com (2603:10a6:20b:55a::18)
  by GV2PR08MB8678.eurprd08.prod.outlook.com (2603:10a6:150:b6::7) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7587.36; Mon, 3 Jun
- 2024 13:34:57 +0000
+ 2024 13:34:56 +0000
 Received: from AS2PR08MB8431.eurprd08.prod.outlook.com
  ([fe80::aeb:1738:d59a:cee6]) by AS2PR08MB8431.eurprd08.prod.outlook.com
  ([fe80::aeb:1738:d59a:cee6%7]) with mapi id 15.20.7633.021; Mon, 3 Jun 2024
- 13:34:57 +0000
+ 13:34:56 +0000
 From: lukas.funke-oss@weidmueller.com
 To: u-boot@lists.denx.de
 Cc: Michal Simek <michal.simek@amd.com>,
- Lukas Funke <lukas.funke@weidmueller.com>, Tom Rini <trini@konsulko.com>,
+ Lukas Funke <lukas.funke@weidmueller.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Taedcke <christian.taedcke@weidmueller.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Tom Rini <trini@konsulko.com>,
  Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Subject: [PATCH 2/2] xilinx: zynqmp: Enable reset_cpu() in SPL
-Date: Mon,  3 Jun 2024 15:34:47 +0200
-Message-Id: <20240603133447.173402-3-lukas.funke-oss@weidmueller.com>
+Subject: [PATCH 1/2] arm64: zynqmp: Add 'SPL_ZYNQMP_FIRMWARE' to Kconfig
+Date: Mon,  3 Jun 2024 15:34:46 +0200
+Message-Id: <20240603133447.173402-2-lukas.funke-oss@weidmueller.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20240603133447.173402-1-lukas.funke-oss@weidmueller.com>
 References: <20240603133447.173402-1-lukas.funke-oss@weidmueller.com>
@@ -72,76 +81,76 @@ X-ClientProxiedBy: FR0P281CA0196.DEUP281.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS2PR08MB8431:EE_|GV2PR08MB8678:EE_
-X-MS-Office365-Filtering-Correlation-Id: cd956e63-c404-4f55-c155-08dc83d1f5a5
+X-MS-Office365-Filtering-Correlation-Id: 469a052b-122e-4e49-8d9b-08dc83d1f53a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230031|366007|376005|52116005|1800799015|38350700005; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?YhQVfCflr0sbSCp6QQTOPYoZhkDsx0zKXZ1YJgLtFXECInoYnqofpbD19Ran?=
- =?us-ascii?Q?fqpSwb3t8QHjvJzjRC9a7dhdgeQKs7q8Xm4no7IPyBOw/w/gdgEKpTCesJMu?=
- =?us-ascii?Q?eoShs6i1d2t+b8O43cHhkh/j3FJpw/VAqHiUgyv2rvwzihH1n/t/tcDlNpKv?=
- =?us-ascii?Q?0ogZ/xYyzQCF6iacCFMT5pGa4XVXCIO9zlNq2zTEQIIUoRlIEorpGbJQZb+T?=
- =?us-ascii?Q?YXutTG6gRDIPT56Lj0UJCjp47efH/z+3ha7+BkzW2x5eqWXzpWmJlWrcqDio?=
- =?us-ascii?Q?tqmQYuMdZk4bYuI0HNNwk2OO168qwYQcJmLtXpsvXZbQu88HZ3DYgXg4oWZS?=
- =?us-ascii?Q?egPHBRfrIEDaThwMT4XeJdPAZHDrZ5WXxGSQ9tcwJ59bQE4mKxoBusaczf0S?=
- =?us-ascii?Q?TsLqRnYU0Qu3MBs++mNI2/QG6gtLpkULPC7pAD5EY256ROX0/8xBZX6e4cY7?=
- =?us-ascii?Q?Br1D07gMQECoNtI1iYO0lH7Hd81X0tf6elyZeMIbcJcibliwV3GqOy1UeP8U?=
- =?us-ascii?Q?dHO1wcwjky06RaRPMLwbdNVef7F2Lr/Bai9tCkebfcAf7wytKTFmjRYd0F9q?=
- =?us-ascii?Q?qMUsd5NdmgLoG2ER4wV/OqB84/W/oJA0TlOdjvv3CgHSDbnLHH1PU15mgOoj?=
- =?us-ascii?Q?nIm+dpWWtkX6qWH3WDnTarjf6s0HSIZnBAdj8R8X6rlGeQtyiB9ZxjRcKoLq?=
- =?us-ascii?Q?7vxmDkFgO20ad8OID0nTp2OLruDT+KUfTdLLl0FZ/WBwRoauD+MuuVa7djih?=
- =?us-ascii?Q?aubWaqN+i5hXQYzoOY9SebshDA8rOBgkpg5pqMyUnSyaQHem933hISWdJMQh?=
- =?us-ascii?Q?vb/LtnWIlWyKPIWENOUGJ1HFcuVH+chwmcS7LrZdrHwadT++Pu/u4Jpxm1b6?=
- =?us-ascii?Q?SXpPvdHJBjjn4u3kw4fuTqy0FZIQvk0Us7knBO0pTTqf6o1tucfss5/Ku05n?=
- =?us-ascii?Q?9v/rPshn76wcomb/4JQnZaCtyIqgoiloydc7LGejmKBiZzSTXXSXGzMwBrTr?=
- =?us-ascii?Q?KtzN7ND6b1Tc8VPTEnCSi3e8fZX/XlZ9F+3to0/6Ifp7bBU1FhjZq1AGMajv?=
- =?us-ascii?Q?ybjVh2bhgUr8ZEzCwxQshXaMPBvZ3D9sw+4wnQmpneAPZ0SjZmazu5INMzxA?=
- =?us-ascii?Q?xCKAg0KLBGVCJdC2oRqXMMPJWRNcyoskF+PWt8TnXP2FO+PZh1KlhNNdYVJk?=
- =?us-ascii?Q?E006v+IsOFoji2P5RQBb1vO3sY3rXRn1lZ58l/vuEjr1801Qmf0sc2uMNZ9l?=
- =?us-ascii?Q?V6nkLq2zBJag1woajAFUgMK6QzR2yFLFVycKNiCt3kZITIns7aG16Fipm+w7?=
- =?us-ascii?Q?2Lz97p1Bf+ieU+jThSTfo0rp7SQ9iJo4iGyHFlnnw2xbTA=3D=3D?=
+ ARA:13230031|7416005|366007|376005|52116005|1800799015|38350700005; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?SgnXolTqqKucHI8eafTa61r6FOBT8SpvH1c5C7/Z9H8+4RhZb0R1AcOooKcG?=
+ =?us-ascii?Q?Vmbn81BVrG3JlycIlqXR8KVDG2GBWMjVJV0RQ/X9puD1TyDLaFHajx2yC6rT?=
+ =?us-ascii?Q?8Ri7nomAXHHLUkaGyPPhSWMgFBY8wZCnE2wLcD+oody1LEAYRqw7GUS60nGJ?=
+ =?us-ascii?Q?OrxDiTtFtHi7y4hYq7SitC0D/FveoKPs8i8k+LpAaqt3ACkNIhOA7MY0TyjS?=
+ =?us-ascii?Q?hD6O+I3Ys6I6njnV+orllXY1jEsiI0bCjrYfnFWA0jChsIc+DwbCTlSemLNP?=
+ =?us-ascii?Q?AvqGUU7HMoohOkapUS/lg9/dhJX8Q4+TSEsvmtglhcm+LgRq/sxezRQuE34I?=
+ =?us-ascii?Q?PvWCFDQnen0Du1nLGbe5MoKYoYTWhw5+/UUl4pEpinNPy29jLL5kZuGC3m+t?=
+ =?us-ascii?Q?c84CKAvJcAPpNE3GT9tpXcIRm8y05rOyWYeAAQTcOmyHqx8/rv7eenmtgcwv?=
+ =?us-ascii?Q?1uqQYFEWsD7tZfYG6QO4eFx+Fc6l/RIcN/tDStpKOoiLpciTjLdb1IbwH07l?=
+ =?us-ascii?Q?G+FkN49hMaUgV2U4bP/zTSL04yHP9jLZX5sAh+fxeyvcf/l3GIplWKk5t+fw?=
+ =?us-ascii?Q?sVk51gCKeUzsQFdrHR9Lz5SzgwlOAPiy/LcRh3TTiCCJap2vceFYarbNS1ql?=
+ =?us-ascii?Q?EsUKrLiErPCT4f/4Nvdwi/9GDpTLbJ7owOtJZteUFvPju3FafmDOIEvsQUXB?=
+ =?us-ascii?Q?ZqQpv7DtZ8EdhnZt9mDJQC/i3ZL6mwOGQNMFpMd5gT4qHRHWFFk65g26x/yL?=
+ =?us-ascii?Q?JMoF5Sp+3uvkzbyYlQK/rn6lyZ66GiVVGrwh7SQ8M9MzVkh2XFqcFjK3ZXXH?=
+ =?us-ascii?Q?c0bA4aLZKyRGW9iZoyw0mt0D5FDrnSTelzMFLStHRNXwp9g3cPKKuPcybzlI?=
+ =?us-ascii?Q?N/FIAahhwC60hhK79wVqYgmSKEnd6z/JvMSFXq7PC5mBkgbUAnGSbZksoL8u?=
+ =?us-ascii?Q?A2zWRiDVSARnH8mh0vmuhA2zdLILcVbx4WbNvIuyDK7KjKVHmpoPlV08MF3S?=
+ =?us-ascii?Q?aBzyrgRvr8Z581X7nnCzAx3CMQ0OmCGKPORzsbfPaWF2C1ObvBCFFLhkn1Uu?=
+ =?us-ascii?Q?Pxy1MsGRxah3wLi//CfZrLUKaaYjvuYc0XiD5+tFcAGil4YujHRmzNDEY6eZ?=
+ =?us-ascii?Q?hItKEtirk1A9VcscJtFc97cYRaEcupfHY5Lp6b9ReBrF9phIEWuf4dNiLBWc?=
+ =?us-ascii?Q?cd48z7GY4uIlXefyAcOsFXYBO8tfOBSIGE78MbjEXJJeEf9bWI/Dm2hffV50?=
+ =?us-ascii?Q?b7AtMjyjnF2bbOJmp+dkHk1Ijr1nXnHpJUpklQX05SrIJ1ZnDUx2nbomvEQy?=
+ =?us-ascii?Q?qdPH3MCvFU8l52APE+1XSWVd?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS2PR08MB8431.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366007)(376005)(52116005)(1800799015)(38350700005); DIR:OUT;
- SFP:1102; 
+ SFS:(13230031)(7416005)(366007)(376005)(52116005)(1800799015)(38350700005);
+ DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?HmdSrjuNXtRrA6SKC5I/Ja9x4FXFLCRZQYafqAEnDlZUsWHa7zmiMWCk+vdk?=
- =?us-ascii?Q?Iw6ts6kdj6j8q5Vo2AnxtFh7ZRDxS4UYqOI44ps3zc9pePTHc0zEPqMGxa37?=
- =?us-ascii?Q?MGAMEaXTjKRlM+vKHR24gl1KyKJnhnnXyg5eASW4ypKI9JRmWyNYqlr3yw/o?=
- =?us-ascii?Q?3uERPMRFU+5pzvcFnKJMyclguCgWtQZWJ7/xFJ3Aok/9c4bIlaAjT2mBTO3T?=
- =?us-ascii?Q?Mq8AddRH6yRM+a0ZJJzg30gCrOO3mSp1VuiUqwPRPJNZg/9mDeKj5iop5kBU?=
- =?us-ascii?Q?vU+YBMmfj/vPQhK7DmXOileWMOcx1ovIEokna/589q6gfmAgWlks8P0UF2Ah?=
- =?us-ascii?Q?oAs6B/lfVgvU4FrAH9LujfuWZfeaUVo5cv/My1moyCi7ZOd6FlTYNh3WEas8?=
- =?us-ascii?Q?B9uK0gLAe5XApAIgcnSlgcL5rJ40g+Rzfr6IRRq+mhLM8PRgNZCUeIMrlYtB?=
- =?us-ascii?Q?7L5OXjdti3gqaYHSvtaVKl9IR99X9RQ/FfFC9qhrx6+J5GTDQEHUNWTYIcxx?=
- =?us-ascii?Q?YTj+Rw+BWdebBr+KtFhsCjAJ6O+tFGSrMAY+PvIlCZ0Flts3F12MNTYm5tpF?=
- =?us-ascii?Q?TI8xK3GlEIUYbgJHbC3jWqsj362oUFeh8ZseKdh6zbWweLAmy5wXqLb/j3Qe?=
- =?us-ascii?Q?HPczTwNePv4qM/V3P4euklvljSHM4EWOKLdSrhXUPZ+eZj7I5uYRBcM2H1d7?=
- =?us-ascii?Q?vO34iLIKU/0bYqp07gtG+Jg+xeYyxqs3XTKvsjH8sh1ABkNz8WTVAfN/05eP?=
- =?us-ascii?Q?6jsNf6Akq3Wvo1MLlyZuo+CSb85UQCYshlxWAk+YaT2OsZg4johaiKWGl40H?=
- =?us-ascii?Q?y0L0VGIxmgda527VDZhnJKWVriNr2Eg40wlKMXAp4DhPdBO/+faOEQ/TH2+Q?=
- =?us-ascii?Q?R7aw3OSTahRCZB+f0t8yOc9oBSqiIrvX4nC/9UOzDwn7yMXe5c5FdokTbgBs?=
- =?us-ascii?Q?8fNSoJjbxUGC7mkG4SQdZwpM+5Oby6huRBF16zOTqZGI2jnqQK2lWNA/X/oj?=
- =?us-ascii?Q?6Ld5Ll6QaeUWotlQPaVArzmN/sKposOly5HAnk/Q5EXwqL9k7P5iuTsRcPEK?=
- =?us-ascii?Q?KNu4mOpH9nZQUIiP9wb1dphx3au/xTeg+Pcz8DPSECdnoD/AfP7270ZWMmRo?=
- =?us-ascii?Q?4znmD1GWjaDi60t6T9coLQrJ1MTkWNehsQjMbBe/4iUUTMT9j9h8ZDWCaguK?=
- =?us-ascii?Q?5a6Yy0ynENGmvLQnEdahFd2FTWtW+2SKLtYHwfq2PtfzxqH3BFs5IpSzcae7?=
- =?us-ascii?Q?SkA7CcWDfr63AVUP0spzyeMer5+Hze3tPWTEucfmxcriLrpNaBSxTiTmV+6d?=
- =?us-ascii?Q?ixDN2JQ+8emwLaUZKgevoKhDpxdlGc7GzLoHKQsSwWfyZ5buTJoezWyC8S6T?=
- =?us-ascii?Q?idg4Zz4fRQ4cE0JiZsbPfEcSHfd42w0J26Rl+yDCAFX2uqWeAErQK8liXANX?=
- =?us-ascii?Q?KsB3pER5RbQyRWuFBZXXTr1ATYa6z9yu2I6eTttz5f2BgZx4DSUsahn/7vXV?=
- =?us-ascii?Q?Cbc2hehYGtAPMDosPa9ngc3NTA5aBZYMnCZHlv9nd0WA0jX2oRN6d+2r9Ga6?=
- =?us-ascii?Q?naWkj7zH0erRunUdkHJj6Oo6W/C9hCbvXM+Fhi21g2OnK3u2zRc9fuG5xxRj?=
- =?us-ascii?Q?Qg=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?g1M7y+hDqTPak3pJtyPQf8p00QApTYGqLXqHrXw8+wZHjbn059uVuQRO6uIV?=
+ =?us-ascii?Q?zmPGf22izO1jxVnsCvU8BpZDVHZIDSr6zewLJbbECLhPEMaRDOMQRVHDNlnS?=
+ =?us-ascii?Q?C9VCLfjU9AWPZ7gxaEsMLVYqbAQ0uhX5XSsEGZ9b0H1Go9C/KfmaWGksXKRy?=
+ =?us-ascii?Q?9JVmmlj26ykD7LxScKmRdOgTcEOda4nD7ZOSE68hUYNDEhfg2iacaVX1PFRU?=
+ =?us-ascii?Q?kLf2T8qft4D8GexVxrZCDXTAXxcw4a1QfYq38qrkQ63FsTdhY4ByKxTcqRai?=
+ =?us-ascii?Q?mEOggJGsQAgiqosWuprM45+lub7Y4A1gys/NfwJjmgs3g1Fv3A65u4zrdT5d?=
+ =?us-ascii?Q?37A+sxBnXJ3aN8MDGWFHdUevWr813fMjmpKrcUw4YMh5J/mYak/aQlAigbZ6?=
+ =?us-ascii?Q?ArWzADB/o0eOW8LmLTRiJsBz6uFtIpKQvvhtDL2lf3FH3FYiWBsuhgx28vet?=
+ =?us-ascii?Q?QqWjTnIiu0lnqA1JvSDl68fAV71FaYdqjVdS4fNi/37gwzbTzHI/EUW1hnvy?=
+ =?us-ascii?Q?eJWVHMwL8gGF3XKb+LhI9y+eR7N3nKAl4H8JapCixjNiUqhN2TbeW4Mqq/mq?=
+ =?us-ascii?Q?U1cdxbPfyd+ezPJ6MspRWXOc43x5N4SX8jGzlnaYUf5TgfaIfAzVgB8DnY04?=
+ =?us-ascii?Q?tO0F5WyvTknYrK4RsTj8asTqrGQk3wmjqK8mgKF6mm/jk2o68UGlGhy0Nv7X?=
+ =?us-ascii?Q?2/R6ZZIVj/o0KVtlJaiUJL/zQVo8ESooa5wuA/DFOaDoLTJNOiYmHlOvWMwE?=
+ =?us-ascii?Q?TbnT7UlxYIf0FTiE81nKwLZV0lw9BdxBQTiJVLqAJkTpU22O9A1uN4CaBRPp?=
+ =?us-ascii?Q?Dt8Xmx/osdcxTVEKi2fVZe/OY4e+Buyt02aNmFSU7yw7RGLbMtM/jgZHyJ1i?=
+ =?us-ascii?Q?kc3YFbI+fNZqyiKudDwvOlySrSoIkDXwmMgwnQ3d6ZtwZ+aEyiSi5bwedm4G?=
+ =?us-ascii?Q?a1kd/UCxwpgoHOQRZba2AS0EVPVE5Qgrz397ezHV3oVCTyRpV3TJB7Zo63pJ?=
+ =?us-ascii?Q?0Zm9IUNX3nGwmIU6A7nM5bK0n1Cr6mEidbWrcjqpp6MIdIk1gFEw2kNEar5n?=
+ =?us-ascii?Q?SPtNhD6MPxFZUnrC/xu/pGuS5vIy+FoKwy4ZdE41eE3J9sesDJnAmZRFrDxI?=
+ =?us-ascii?Q?jM7jqoFXTKL96fMpo2U9TVOBiyVmCFRpBnNZlTjN7HYkApuUEh7wS2DJFkwm?=
+ =?us-ascii?Q?2XLqvT1hj/OLptsxoEzAgXhkHh78yHzHdb9ygi8pAZU3zUTNwuYTQ9zgcShm?=
+ =?us-ascii?Q?AQ9eA5jf06FM79Oud+mS0ipwVVAy+eWMbX2gnrrs5K+8BTng7O++EeSF5c8d?=
+ =?us-ascii?Q?s2eqN520M0hVDILbvfNSq4BO6OvV7Cuu+3qWzua3LHqoaqRFcAS19GUbZsDu?=
+ =?us-ascii?Q?wAyCksM/x9sBjpA8khcbsuMlmzUdQORdXuIY7T/yT0RrW0nmab84cg5dEPOQ?=
+ =?us-ascii?Q?b+w8dDd4d89f3WF+ZMWtvYUHkoU+I99xBEP9auTBvzXvT7z+lRBzA0ysCM5c?=
+ =?us-ascii?Q?8YwEnRIDAc4wo9phRd2uFA2uahZ15x3CXxMlWZvmwKRwd3mjzkdimjXAHWgI?=
+ =?us-ascii?Q?Jr/9IsIe8+6MjV4wIT2RVDLwzfsgR8ImxK6wrNBD8k6jcbPLYW5/mUMfoNNO?=
+ =?us-ascii?Q?LQ=3D=3D?=
 X-OriginatorOrg: weidmueller.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cd956e63-c404-4f55-c155-08dc83d1f5a5
+X-MS-Exchange-CrossTenant-Network-Message-Id: 469a052b-122e-4e49-8d9b-08dc83d1f53a
 X-MS-Exchange-CrossTenant-AuthSource: AS2PR08MB8431.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jun 2024 13:34:57.3152 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jun 2024 13:34:56.6376 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: I3/4WWVHXAeHmQ4YK61hrvRPC65UnWND2Khb8KZ4HiPJwwuuRqKdYte1XQ+Bo7lvflDeT7yXJyB+MIZGSGiAYg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: OiPN9Jn1PUV3R+NHk9/SLiIeS3wPjrWbGm+mGfFDE7OCrrZ7r3hbGKjrnLuzsVA+9Tx3SCMiiVa4PR6IYBA8Yg==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR08MB8678
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -161,43 +170,157 @@ X-Virus-Status: Clean
 
 From: Lukas Funke <lukas.funke@weidmueller.com>
 
-This commit enables SPL to reset the CPU via PMU-firmware. The usual
-reset mechanism requires bl31 to be loaded which may not be the case in
-SPL.
+In order to make CONFIG_IS_ENABLED() work with 'ZYNQMP_FIRMWARE'
+introduce an additional Kconfig 'SPL_ZYNQMP_FIRMWARE' which is selected
+if and only if ZYNQMP_FIRMWARE is enabled. Driver are adapted such
+that they build with and without the config being set.
 
 Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
 ---
 
- board/xilinx/zynqmp/zynqmp.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ arch/arm/mach-zynqmp/Kconfig | 2 +-
+ arch/arm/mach-zynqmp/aes.c   | 2 ++
+ arch/arm/mach-zynqmp/cpu.c   | 4 ++--
+ board/xilinx/zynqmp/zynqmp.c | 4 ++--
+ drivers/firmware/Kconfig     | 5 +++++
+ drivers/mmc/zynq_sdhci.c     | 4 ++--
+ drivers/pinctrl/Kconfig      | 2 +-
+ 7 files changed, 15 insertions(+), 8 deletions(-)
 
+diff --git a/arch/arm/mach-zynqmp/Kconfig b/arch/arm/mach-zynqmp/Kconfig
+index 0d2238ace1e..304dce45439 100644
+--- a/arch/arm/mach-zynqmp/Kconfig
++++ b/arch/arm/mach-zynqmp/Kconfig
+@@ -36,7 +36,7 @@ config PMUFW_INIT_FILE
+ 
+ config ZYNQMP_SPL_PM_CFG_OBJ_FILE
+ 	string "PMU firmware configuration object to load at runtime by SPL"
+-	depends on SPL
++	depends on SPL && ZYNQMP_FIRMWARE
+ 	help
+ 	  Path to a binary PMU firmware configuration object to be linked
+ 	  into U-Boot SPL and loaded at runtime into the PMU firmware.
+diff --git a/arch/arm/mach-zynqmp/aes.c b/arch/arm/mach-zynqmp/aes.c
+index 8a2b7fdcbe9..100dde2f372 100644
+--- a/arch/arm/mach-zynqmp/aes.c
++++ b/arch/arm/mach-zynqmp/aes.c
+@@ -17,6 +17,7 @@
+ 
+ int zynqmp_aes_operation(struct zynqmp_aes *aes)
+ {
++#if CONFIG_IS_ENABLED(ZYNQMP_FIRMWARE)
+ 	u32 ret_payload[PAYLOAD_ARG_CNT];
+ 	int ret;
+ 
+@@ -54,6 +55,7 @@ int zynqmp_aes_operation(struct zynqmp_aes *aes)
+ 		       ret, ret_payload[1]);
+ 		return -EIO;
+ 	}
++#endif
+ 
+ 	return 0;
+ }
+diff --git a/arch/arm/mach-zynqmp/cpu.c b/arch/arm/mach-zynqmp/cpu.c
+index 6ae27894ecd..3515be257a5 100644
+--- a/arch/arm/mach-zynqmp/cpu.c
++++ b/arch/arm/mach-zynqmp/cpu.c
+@@ -188,7 +188,7 @@ int zynqmp_mmio_write(const u32 address,
+ {
+ 	if (IS_ENABLED(CONFIG_SPL_BUILD) || current_el() == 3)
+ 		return zynqmp_mmio_rawwrite(address, mask, value);
+-#if defined(CONFIG_ZYNQMP_FIRMWARE)
++#if CONFIG_IS_ENABLED(ZYNQMP_FIRMWARE)
+ 	else
+ 		return xilinx_pm_request(PM_MMIO_WRITE, address, mask,
+ 					 value, 0, NULL);
+@@ -207,7 +207,7 @@ int zynqmp_mmio_read(const u32 address, u32 *value)
+ 	if (IS_ENABLED(CONFIG_SPL_BUILD) || current_el() == 3) {
+ 		ret = zynqmp_mmio_rawread(address, value);
+ 	}
+-#if defined(CONFIG_ZYNQMP_FIRMWARE)
++#if CONFIG_IS_ENABLED(ZYNQMP_FIRMWARE)
+ 	else {
+ 		u32 ret_payload[PAYLOAD_ARG_CNT];
+ 
 diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
-index 95a134b972d..99f5c178c1d 100644
+index f370fb7347a..95a134b972d 100644
 --- a/board/xilinx/zynqmp/zynqmp.c
 +++ b/board/xilinx/zynqmp/zynqmp.c
-@@ -40,6 +40,7 @@
- #include <linux/bitops.h>
- #include <linux/delay.h>
- #include <linux/sizes.h>
-+#include <dt-bindings/reset/xlnx-zynqmp-resets.h>
- #include "../common/board.h"
- 
- #include "pm_cfg_obj.h"
-@@ -285,6 +286,14 @@ int dram_init(void)
- #if !CONFIG_IS_ENABLED(SYSRESET)
- void reset_cpu(void)
- {
-+	if (!CONFIG_IS_ENABLED(ZYNQMP_FIRMWARE)) {
-+		log_warning("reset failed: ZYNQMP_FIRMWARE disabled");
-+		return;
-+	}
-+
-+	xilinx_pm_request(PM_RESET_ASSERT,
-+			  ZYNQMP_PM_RESET_START + ZYNQMP_RESET_SOFT,
-+			  PM_RESET_ACTION_ASSERT, 0, 0, NULL);
- }
+@@ -147,14 +147,14 @@ int board_init(void)
+ 	int ret;
  #endif
  
+-#if defined(CONFIG_SPL_BUILD)
++#if defined(CONFIG_SPL_BUILD) && CONFIG_IS_ENABLED(ZYNQMP_FIRMWARE)
+ 	/* Check *at build time* if the filename is an non-empty string */
+ 	if (sizeof(CONFIG_ZYNQMP_SPL_PM_CFG_OBJ_FILE) > 1)
+ 		zynqmp_pmufw_load_config_object(zynqmp_pm_cfg_obj,
+ 						zynqmp_pm_cfg_obj_size);
+ #endif
+ 
+-#if defined(CONFIG_ZYNQMP_FIRMWARE)
++#if CONFIG_IS_ENABLED(ZYNQMP_FIRMWARE)
+ 	struct udevice *dev;
+ 
+ 	uclass_get_device_by_name(UCLASS_FIRMWARE, "power-management", &dev);
+diff --git a/drivers/firmware/Kconfig b/drivers/firmware/Kconfig
+index 8789b1ea141..ae785d55d54 100644
+--- a/drivers/firmware/Kconfig
++++ b/drivers/firmware/Kconfig
+@@ -30,6 +30,7 @@ config TI_SCI_PROTOCOL
+ config ZYNQMP_FIRMWARE
+ 	bool "ZynqMP Firmware interface"
+ 	select FIRMWARE
++	select SPL_ZYNQMP_FIRMWARE if SPL
+ 	help
+ 	  Firmware interface driver is used by different
+ 	  drivers to communicate with the firmware for
+@@ -37,6 +38,10 @@ config ZYNQMP_FIRMWARE
+ 	  Say yes to enable ZynqMP firmware interface driver.
+ 	  If in doubt, say N.
+ 
++config SPL_ZYNQMP_FIRMWARE
++	bool "Enable ZynqMP Firmware interface in SPL"
++	depends on FIRMWARE && SPL
++
+ config ARM_SMCCC_FEATURES
+ 	bool "Arm SMCCC features discovery"
+ 	depends on ARM_PSCI_FW
+diff --git a/drivers/mmc/zynq_sdhci.c b/drivers/mmc/zynq_sdhci.c
+index 935540d1719..3e4cae60c17 100644
+--- a/drivers/mmc/zynq_sdhci.c
++++ b/drivers/mmc/zynq_sdhci.c
+@@ -992,7 +992,7 @@ static const struct sdhci_ops arasan_ops = {
+ };
+ #endif
+ 
+-#if defined(CONFIG_ARCH_ZYNQMP) && defined(CONFIG_ZYNQMP_FIRMWARE)
++#if defined(CONFIG_ARCH_ZYNQMP) && CONFIG_IS_ENABLED(ZYNQMP_FIRMWARE)
+ static int sdhci_zynqmp_set_dynamic_config(struct arasan_sdhci_priv *priv,
+ 					   struct udevice *dev)
+ {
+@@ -1094,7 +1094,7 @@ static int arasan_sdhci_probe(struct udevice *dev)
+ 
+ 	host = priv->host;
+ 
+-#if defined(CONFIG_ARCH_ZYNQMP) && defined(CONFIG_ZYNQMP_FIRMWARE)
++#if defined(CONFIG_ARCH_ZYNQMP) && CONFIG_IS_ENABLED(ZYNQMP_FIRMWARE)
+ 	if (device_is_compatible(dev, "xlnx,zynqmp-8.9a")) {
+ 		ret = zynqmp_pm_is_function_supported(PM_IOCTL,
+ 						      IOCTL_SET_SD_CONFIG);
+diff --git a/drivers/pinctrl/Kconfig b/drivers/pinctrl/Kconfig
+index a1d53cfbdbe..d2ccfb724af 100644
+--- a/drivers/pinctrl/Kconfig
++++ b/drivers/pinctrl/Kconfig
+@@ -335,7 +335,7 @@ config PINCTRL_K210
+ 
+ config PINCTRL_ZYNQMP
+ 	bool "Xilinx ZynqMP pin control driver"
+-	depends on DM && PINCTRL_GENERIC && ARCH_ZYNQMP
++	depends on DM && PINCTRL_GENERIC && ARCH_ZYNQMP && ZYNQMP_FIRMWARE
+ 	default y
+ 	help
+ 	  Support pin multiplexing control on Xilinx ZynqMP. The driver uses
 -- 
 2.30.2
 
