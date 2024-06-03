@@ -4,114 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43533C25B75
-	for <u-boot@archiver.kernel.org>; Mon,  3 Jun 2024 06:09:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47430C25B75
+	for <u-boot@archiver.kernel.org>; Mon,  3 Jun 2024 06:26:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CAADA882DA;
-	Mon,  3 Jun 2024 08:09:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id B392D882AD;
+	Mon,  3 Jun 2024 08:26:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="QKFZHVOy";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="uiX5JE9a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A872882CE; Mon,  3 Jun 2024 08:09:10 +0200 (CEST)
-Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D0C00882DB; Mon,  3 Jun 2024 08:26:53 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F8E1882A6
- for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 08:09:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AF88187DDF
+ for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 08:26:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mk7.kang@samsung.com
-Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
- by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20240603060857epoutp0485bc41a9da077c453689887866eb5fc1~VaZjJLP3M1012810128epoutp04N
- for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 06:08:57 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20240603060857epoutp0485bc41a9da077c453689887866eb5fc1~VaZjJLP3M1012810128epoutp04N
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1717394937;
- bh=HgMbAHq3kUxKAtK7AKAmDxZP8xs/9JWdvTJcAzFL0Kg=;
- h=From:To:Subject:Date:References:From;
- b=QKFZHVOyvIa8ZPw8LCWZZEsX4pcY00A1GdTrTbh+C5W/rbe0m0S0OotJR9vhqkF1i
- HyBixatxB+5q3g3pkAVXpQUxvpkLNiHUdTeZLwSjkUzMusreDmORHi1qjccqPvBXKK
- u6yLau2DPvzJ5CT7TO2DhlY91myrT3gCBuNxqmr0=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTP id
- 20240603060857epcas1p1e406fcc4e67bd1033751c34715a6fea3~VaZi53LEz0567005670epcas1p17;
- Mon,  3 Jun 2024 06:08:57 +0000 (GMT)
-Received: from epsmges1p5.samsung.com (unknown [182.195.38.240]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4Vt3Fh4JVNz4x9Pw; Mon,  3 Jun
- 2024 06:08:56 +0000 (GMT)
-Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
- epsmges1p5.samsung.com (Symantec Messaging Gateway) with SMTP id
- 56.CF.09561.6FD5D566; Mon,  3 Jun 2024 15:08:54 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas1p2.samsung.com (KnoxPortal) with ESMTPA id
- 20240603060854epcas1p207233f59828c47f31e941894634b9af7~VaZf1Drgl3264632646epcas1p2W;
- Mon,  3 Jun 2024 06:08:54 +0000 (GMT)
-Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20240603060854epsmtrp1c4af37e97ddefdce08ea5a13501487a8~VaZf0Z0No2459724597epsmtrp1D;
- Mon,  3 Jun 2024 06:08:54 +0000 (GMT)
-X-AuditID: b6c32a39-b63ff70000002559-5b-665d5df66603
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 93.39.18846.6FD5D566; Mon,  3 Jun 2024 15:08:54 +0900 (KST)
-Received: from mk7kang01 (unknown [10.88.105.222]) by epsmtip2.samsung.com
- (KnoxPortal) with ESMTPA id
- 20240603060854epsmtip22cb15fa19a515d82453f66df5da10cda~VaZfod-h82314223142epsmtip2I;
- Mon,  3 Jun 2024 06:08:54 +0000 (GMT)
-From: "Minkyu Kang" <mk7.kang@samsung.com>
-To: <trini@konsulko.com>, <u-boot@lists.denx.de>
-Subject: Please pull u-boot-samsung master
-Date: Mon, 3 Jun 2024 15:08:53 +0900
-Message-ID: <166001dab57c$83114450$8933ccf0$@samsung.com>
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-42137366995so15117835e9.3
+ for <u-boot@lists.denx.de>; Sun, 02 Jun 2024 23:26:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1717396011; x=1718000811;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9c/Vy6o7m7eNGrPdMNnXJO2wxZpbIL1k/+xGdRlZvGI=;
+ b=uiX5JE9acDa3PxLBQ994F/xwQaomH4pSCIdKVIZGMIOXdzTkte0W3WScZom2IChoIr
+ BlLWyFvx4z0ZFj2u7hHQuN+MbPtu4mfc/EJLO7n14IoYbLwdTWgt36NXiy5ixwO/delD
+ 1c0uCfiC5cg8N8XBh8Rdpa2Fn8IXFOVNfv93pddEG1uUTLfgWZaQhHMtZ13ObfTqfke3
+ 5NV67uni59atpZ9wgKTlWXsDuCI050PlG08LyFTOI1J/FKoqcEsovpnjfdSeguLD3Jpp
+ zJjoyfLtHkLmWKrchZJ/aCrrHrR3IrZ9jFBZgXDpwUyFCnPg9/jilQjYhORfoymXWSE7
+ bPpA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717396011; x=1718000811;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=9c/Vy6o7m7eNGrPdMNnXJO2wxZpbIL1k/+xGdRlZvGI=;
+ b=UI6pGwwxX2X4l7Bilw0Qke+SMG0A3CnTCgb4JiCfKvZsADDYbztu8UaawAY5Udv1MY
+ o6H3zSOhkUMSRZIMKynl/ZEwPz7rpluJHC+mkTT9qk/70ywdMdm8yjHJ77C9wDiZRcT2
+ 0nKQed22frz0TdzsS45VQyy9nGfKzma9dRX5dISTfmjsHj0mw5TeiDzeUlYzaRLJer+b
+ DXQDf/xf0iYZpd/P3VG/YzyFW5FZGadXsx+Hi39nuTrzaD/HtymQoFBx00xiuiDq94lM
+ 8oGX+cIlaWlvM2VALsybfBiHDhUiuKi/0sQMAFhaC0XCZM09XjuU5PeoHAnnjBBtfFTE
+ vSFQ==
+X-Gm-Message-State: AOJu0YxxDFw1fKvpxP/J476QXBOLfzPsz7iAN6f1Rmor3MtDVyumkT1f
+ SkkZS71j+ZAm9n0S70yyms02Mc9NM4pEL0xa4oLezZ8tme4oZBkeXnP5ZFpiZa4=
+X-Google-Smtp-Source: AGHT+IE7wVf9smIYr3yAyhxuWcfcowEu60uoKlbWuIx7INbuwSK+JrrMZEjMwZwYWP/7/pxucKz3Xw==
+X-Received: by 2002:a05:600c:45d2:b0:421:2429:7e46 with SMTP id
+ 5b1f17b1804b1-4212e05019amr96242475e9.13.1717396010963; 
+ Sun, 02 Jun 2024 23:26:50 -0700 (PDT)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4212b838b83sm105670965e9.10.2024.06.02.23.26.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 02 Jun 2024 23:26:50 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Jonathan Humphreys <j-humphreys@ti.com>, Kamlesh Gurudasani
+ <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Heinrich
+ Schuchardt <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>, Christian
+ Gmeiner <christian.gmeiner@gmail.com>, Devarsh Thakkar <devarsht@ti.com>,
+ Simon Glass <sjg@chromium.org>, Nikhil M Jain <n-jain1@ti.com>, Neha
+ Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>, Maxime
+ Ripard <mripard@kernel.org>, Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Roger Quadros <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>, Vignesh
+ Raghavendra <vigneshr@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
+ Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>, Sughosh Ganu
+ <sughosh.ganu@linaro.org>, Masahisa Kojima
+ <kojima.masahisa@socionext.com>, Marcel Ziswiler
+ <marcel.ziswiler@toradex.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Jonathan Humphreys <j-humphreys@ti.com>
+Subject: Re: [PATCH v5 02/23] doc: ti: k3: Correct spelling mistakes and
+ improve clarity
+In-Reply-To: <20240531222118.2618041-3-j-humphreys@ti.com>
+References: <20240531222118.2618041-1-j-humphreys@ti.com>
+ <20240531222118.2618041-3-j-humphreys@ti.com>
+Date: Mon, 03 Jun 2024 08:26:49 +0200
+Message-ID: <87sexuilsm.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: Adq1V7GVWTPx1KALSIGKJ8Jz1MUdkw==
-Content-Language: ko
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrCKsWRmVeSWpSXmKPExsWy7bCmnu632Ng0g13T5CymTtrMbvF2bye7
- A5PHqwOr2D3O3tnBGMAUlW2TkZqYklqkkJqXnJ+SmZduq+QdHO8cb2pmYKhraGlhrqSQl5ib
- aqvk4hOg65aZAzRfSaEsMacUKBSQWFyspG9nU5RfWpKqkJFfXGKrlFqQklNgVqBXnJhbXJqX
- rpeXWmJlaGBgZApUmJCd8WvOD/aC90IVB9vXszcwvuPtYuTkkBAwkZh5cQdzFyMXh5DADkaJ
- pQcuMYEkhAQ+MUp8mFoJkQCyry/7xwLTcWjSbWaIop2MEudW10IUPWeUmPDnGztIgk1AS+Lv
- wvOsILaIgIHEloM7wGxhoPivC8/YQGwWARWJtav7wLbxClhKXH53mxHCFpQ4OfMJ2DJmAXmJ
- 7W/nMEMsVpD4+XQZ1Ew9iUPvtzBC1IhIzO5sA3tBQmAdu8TSr1vYIRpcJF7/OAh1tbDEq+Mw
- cSmJl/1t7BANkxklJi16xgjhrGeUODzrAyNElbHEzfUbgNZxAK3QlFi/Sx9iG5/Eu689YGEJ
- AV6JjjYhiGoliQMXDkB1SkjMvr4dqsRD4sDPMkhgxUpsffaFdQKj/Cwkb85C8uYsJO/MQti7
- gJFlFaNYakFxbnpqsWGBKTyCk/NzNzGCk5uW5Q7G6W8/6B1iZOJgPMQowcGsJMLbVxedJsSb
- klhZlVqUH19UmpNafIjRFBjwE5mlRJPzgek1ryTe0MTSwMTMyMTC2NLYTEmc98yVslQhgfTE
- ktTs1NSC1CKYPiYOTqkGJs+DYmpTHmgYry7dVSM2LWTSmZ/zolU9Pksp6E1ksS0LaZx3Uei2
- 2Dv3zOq7D44aGs9YYnfd5WnK7Q3vfjOszHhccJW9r06n5cm8ivdaZUz129d0XD1b0HSkW1zk
- ckBRbuvnOV91w7dqGtgsMQrdqTshUC78/BPfO0FbFu/0vSF8bJ1q5Yqr1XctmxT8u/e9qFDi
- cJpjLdh6+G+dGIOp2ReLyHb/3Uzv3ngs377VliP92Ey1myufrPn6WmPXkcW/Tkm9TpKPDbBs
- OTtlntIV8QWurG7Za58uvl4w9a3gdKufp07fvcB+KZFvlpjA9bfZdm6yZf+2VHuvZmlYLfKR
- 1WLjr+bHF5M32jLsldYLfaLEUpyRaKjFXFScCABGSyES9wMAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrALMWRmVeSWpSXmKPExsWy7bCSvO632Ng0g/kzOC2mTtrMbvF2bye7
- A5PHqwOr2D3O3tnBGMAUxWWTkpqTWZZapG+XwJXxa84P9oL3QhUH29ezNzC+4+1i5OSQEDCR
- ODTpNjOILSSwnVFi60M9iLiExKTZF5i6GDmAbGGJw4eLuxi5gEqeMkrsmr+bBaSGTUBL4u/C
- 86wgtoiAkUTrhk4mEFsYKP7rwjM2EJtFQEVi7eo+sDivgKXE5Xe3GSFsQYmTM5+wgMxnFtCT
- aNsIFmYWkJfY/nYOM8QJChI/ny6DGq8ncej9FqgaEYnZnW3MExgFZiGZNAth0iwkk2Yh6VjA
- yLKKUTS1oDg3PTe5wFCvODG3uDQvXS85P3cTIzhQtYJ2MC5b/1fvECMTB+MhRgkOZiUR3r66
- 6DQh3pTEyqrUovz4otKc1OJDjNIcLErivMo5nSlCAumJJanZqakFqUUwWSYOTqkGJrvKlZs2
- y+coqu/r3uOcKs0prvbyMefSKwt9Jk86qyWxxow7OTTw4P69R9g0Lh7Wcm/Y3xFo5sMd9phR
- cTnHlq+X+afIbxNvz78kcDfw3sn4pBWya1SEelM51zyJfxjc9eDh3YV+Om8WbCxsWLUw8x7T
- cbXk6laXBwU96ibuK/nu/FJpl+9dwF+w1jqceW7Rs85tV2ubP09cEbf546MVs/iTexMa1csC
- PGRyZwhmHclucu08YcBm/nM5b3y9/HsbhTcSp/Im7zx/82roVbNgC7ef5i1Pez2nfql/WtGc
- UqXvVnlh6sOTL5ctrnaoS7velaYcrdwjomju46rrw6z36NL91JUhkS1O/S7657yUWIozEg21
- mIuKEwEIjBVIwwIAAA==
-X-CMS-MailID: 20240603060854epcas1p207233f59828c47f31e941894634b9af7
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20240603060854epcas1p207233f59828c47f31e941894634b9af7
-References: <CGME20240603060854epcas1p207233f59828c47f31e941894634b9af7@epcas1p2.samsung.com>
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,60 +104,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+Hi Jon,
 
-The following changes since commit 46ff00bea5dd2dd247d5e2fdadbf5dcf8653cd9a:
+Thank you for the patch.
 
-  Merge tag 'tpm-master-27052024' of
-https://source.denx.de/u-boot/custodians/u-boot-tpm (2024-05-27 08:56:02
--0600)
+On ven., mai 31, 2024 at 17:20, Jonathan Humphreys <j-humphreys@ti.com> wrote:
 
-are available in the git repository at:
+> Few cosmetic fixes for clarity and spelling mistakes.
+>
+> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 
-  46ff00bea5dd2dd247d5e2fdadbf5dcf8653cd9a 
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-for you to fetch changes up to 7045c4dd04648fd2ba1806b75e139d941db0d6c5:
-
-  arm: exynos: Map iRAM APM area for Exynos850 SoC (2024-05-28 11:54:07
-+0900)
-
-----------------------------------------------------------------
-Sam Protsenko (3):
-      arm: exynos: Migrate E850-96 board to OF_UPSTREAM
-      arm: dts: e850-96: Remove not needed bootph-all flags
-      arm: exynos: Map iRAM APM area for Exynos850 SoC
-
- MAINTAINERS                                                 |   7 +-
- arch/arm/dts/Makefile                                       |   1 -
- arch/arm/dts/exynos850-e850-96-u-boot.dtsi                  |  28 --
- arch/arm/dts/exynos850-e850-96.dts                          | 273
--------------------
- arch/arm/dts/exynos850-pinctrl.dtsi                         | 663
-----------------------------------------------
- arch/arm/dts/exynos850.dtsi                                 | 809
---------------------------------------------------------
- arch/arm/mach-exynos/Kconfig                                |   1 +
- arch/arm/mach-exynos/mmu-arm64.c                            |   8 +
- board/samsung/e850-96/MAINTAINERS                           |   1 -
- configs/e850-96_defconfig                                   |   2 +-
- doc/device-tree-bindings/clock/samsung,exynos850-clock.yaml | 307
----------------------
- doc/device-tree-bindings/soc/samsung/exynos-usi.yaml        | 162
-------------
- include/dt-bindings/clock/exynos850.h                       | 337
------------------------
- include/dt-bindings/soc/samsung,exynos-usi.h                |  17 --
- 14 files changed, 11 insertions(+), 2605 deletions(-)
- delete mode 100644 arch/arm/dts/exynos850-e850-96.dts
- delete mode 100644 arch/arm/dts/exynos850-pinctrl.dtsi
- delete mode 100644 arch/arm/dts/exynos850.dtsi
- delete mode 100644
-doc/device-tree-bindings/clock/samsung,exynos850-clock.yaml
- delete mode 100644 doc/device-tree-bindings/soc/samsung/exynos-usi.yaml
- delete mode 100644 include/dt-bindings/clock/exynos850.h
- delete mode 100644 include/dt-bindings/soc/samsung,exynos-usi.h
-
-Thanks,
-Minkyu Kang.
-
-
+> ---
+>  doc/board/ti/k3.rst | 10 +++++-----
+>  1 file changed, 5 insertions(+), 5 deletions(-)
+>
+> diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
+> index a1c01d1cf02..927f3976d34 100644
+> --- a/doc/board/ti/k3.rst
+> +++ b/doc/board/ti/k3.rst
+> @@ -51,14 +51,14 @@ For all K3 SoCs the first core started will be inside the Security
+>  Management Subsystem (SMS) which will secure the device and start a core
+>  in the wakeup domain to run the ROM code. ROM will then initialize the
+>  boot media needed to load the binaries packaged inside `tiboot3.bin`,
+> -including a 32bit U-Boot SPL, (called the wakup SPL) that ROM will jump
+> +including a 32bit U-Boot SPL, (called the wakeup SPL) that ROM will jump
+>  to after it has finished loading everything into internal SRAM.
+>  
+>  .. image:: img/boot_flow_01.svg
+>    :alt: Boot flow up to wakeup domain SPL
+>  
+>  The wakeup SPL, running on a wakeup domain core, will initialize DDR and
+> -any peripherals needed load the larger binaries inside the `tispl.bin`
+> +any peripherals needed to load the larger binaries inside the `tispl.bin`
+>  into DDR.  Once loaded the wakeup SPL will start one of the 'big'
+>  application cores inside the main domain to initialize the main domain,
+>  starting with Trusted Firmware-A (TF-A), before moving on to start
+> @@ -94,7 +94,7 @@ essentially 4 unique but very similar flows:
+>  * Combined binary with a split firmware: (eg: AM62)
+>  
+>  For devices that utilize the split binary approach, ROM is not capable
+> -of loading the firmware into the SoC requiring the wakeup domain's
+> +of loading the firmware into the SoC, requiring the wakeup domain's
+>  U-Boot SPL to load the firmware.
+>  
+>  Devices with a split firmware will have two firmwares loaded into the
+> @@ -114,8 +114,8 @@ K3 HS-SE (High Security - Security Enforced) devices enforce an
+>  authenticated boot flow for secure boot. HS-FS (High Security - Field
+>  Securable) is the state of a K3 device before it has been eFused with
+>  customer security keys.  In the HS-FS state the authentication still can
+> -function as in HS-SE but as there are no customer keys to verify the
+> -signatures against the authentication will pass for certificates signed
+> +function as in HS-SE, but as there are no customer keys to verify the
+> +signatures against, the authentication will pass for certificates signed
+>  with any key.
+>  
+>  Chain of trust
+> -- 
+> 2.34.1
