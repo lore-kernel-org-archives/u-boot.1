@@ -4,75 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78894C25B75
-	for <u-boot@archiver.kernel.org>; Mon,  3 Jun 2024 17:42:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACA3FC25B75
+	for <u-boot@archiver.kernel.org>; Mon,  3 Jun 2024 17:56:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E9E88835E;
-	Mon,  3 Jun 2024 19:42:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EA2568834B;
+	Mon,  3 Jun 2024 19:56:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uCXvozAa";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qkz7sSh/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1848787EB4; Mon,  3 Jun 2024 19:42:22 +0200 (CEST)
+ id 79100882AF; Mon,  3 Jun 2024 19:56:16 +0200 (CEST)
 Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
  [IPv6:2607:f8b0:4864:20::c2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B296883AC
- for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 19:42:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5019B8837A
+ for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 19:56:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-5b97a071c92so2143472eaf.1
- for <u-boot@lists.denx.de>; Mon, 03 Jun 2024 10:42:19 -0700 (PDT)
+ 006d021491bc7-5b96a78639aso2080422eaf.1
+ for <u-boot@lists.denx.de>; Mon, 03 Jun 2024 10:56:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1717436538; x=1718041338; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1717437373; x=1718042173; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=h1sUbeWxIOONqgTZ+BnmZ4KmZsMQujiUp8ae1QjU+Rw=;
- b=uCXvozAaQUJzpHEAapvbUtAIdJcVouZp7T0T/BoEeMr+4GSDIwfeavoRSSGPhhi5W6
- 6N+oOjlbO7ciWEefbrmib16+AO63KKVolB5+wLD1Cwdgy3DBM40qCB3PYf7whjO87A1j
- q6AECX4fn0BaOPd//dzvN3bbKWyzZUbNGeydA=
+ bh=qQTN4ckRUV2Na+XTgR9T1PPzkpylFpndDiM+MEleK70=;
+ b=qkz7sSh/gJM6McMfBzyDaEiJk+2G1toB8ZBBz2M221N8R3C40Xl9Cq+CuQE1E/q97C
+ DOTtZ899XNusuoXvtUKHCpI+XwjyfuGFoYaaLrYHXTDI+IlEYvcoot9QD05MrPygRN3s
+ z6e3mdOnXzXoLW8/D7peiOqjRrbZJ+CR3moy0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717436538; x=1718041338;
+ d=1e100.net; s=20230601; t=1717437373; x=1718042173;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=h1sUbeWxIOONqgTZ+BnmZ4KmZsMQujiUp8ae1QjU+Rw=;
- b=WTNzcDx7R4vKCU8npk4Tkj7x+kfWiInVj+SMgwWGrC/2WFjYqBmZyLEigerxmki4ZT
- 1NOCIG0L+cOrDhhN8viguXji6s48a4JIJIakP73KHp5vyWsyZhaQCd/D7TbkQub26LfQ
- NeGy6exT9tL06m/4TginYm5vLr2/tPIqTJr2V+mHvzZUaPagJuGPRenaaiYlSiZRrzSN
- NOWMm4Emg2QzCVFs6fVHnbxwoixP+C4pFHOkeSpaXz0gTBUZdaxQCVEe+bNUQjTddKov
- U65IUSPcPDpjze6w7GxBqDT+sx6iNRjY76yYpFSHCX4G4smWp0LcgbTDwuYOVzzu9lbG
- b8iQ==
-X-Gm-Message-State: AOJu0YyZ0+Urv2umtWeDpaBAwb7fdyzp1Wb4Uxf7tgUyW0in0L6nHVhp
- gMCRKD5zdoeAGLniXfKXi1sezvTom0SHC3nvogfz+u3IP3bpI/2AdYhe4ILIVTA=
-X-Google-Smtp-Source: AGHT+IF1CnbRlO0Fk+PHqx/L/khF7aT8HxDFTAl9YtSAGhuCGyXh35GQ6fKRp5o0E8eGxvWKOab89Q==
-X-Received: by 2002:a05:6820:1aca:b0:5b8:75ce:1787 with SMTP id
- 006d021491bc7-5ba05cb1125mr10352536eaf.6.1717436538138; 
- Mon, 03 Jun 2024 10:42:18 -0700 (PDT)
+ bh=qQTN4ckRUV2Na+XTgR9T1PPzkpylFpndDiM+MEleK70=;
+ b=FsH3VJR432t8RrTuyqOtUgSLkzrFfD0FwF98CArWCrM86ICP5+4Hb4KKdA/bgGOyY/
+ lL1CVRFGQgZo/gqfYG/rMLLBrF94bS8w/gurf5X2EcwPLVBvBEkqFxyf+WmoQWOyLSfy
+ N9Ie8zQT5dnYYzK63KbE+qRDKGfObfjvHC4uOl14TVzkq+6gY7/UIZ1F0yZHMiN6pzxJ
+ Dq0hytQpWJLxUeIrn0TOVrjkXhX0fduyOwWDQxtc1KBRnPvekY8dv0sdDwpP2jyICxvQ
+ P+buQ7ge6rJgfi7Xhy7PyTSSdk/MH4gePSMGvLtZme+ye+Hg7M1byTz4OXdVONUs/vxZ
+ mqlw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUCIXAGO6mi/WqdOhdRNAB7yqADtfPo7MzoYFEqbmGFtQ4sebbQv2qIxWNeLVFMHBnYXisGOQ1VjZr7xAYm62F8JvMNfQ==
+X-Gm-Message-State: AOJu0YwM9NrFPPEYJFvr1AHMEbPTUCwOmPYAhWjdbDxUSDBfvHWBijiK
+ 6Q2Oc2icQDbEMPEoDsFu8P+IP8lvk+2i9YRVycxm2SSoj87UXJjfh2MG9R7xKnNW8pD+4qMBvVr
+ p
+X-Google-Smtp-Source: AGHT+IHc4gdgO0CN14RnzgrneVIWSOgFiPvmkIYZj8/CDBQ8bHkzbdAyNvoyG93idkHF0TMsm9QFOA==
+X-Received: by 2002:a05:6820:1ca7:b0:5b2:3782:7848 with SMTP id
+ 006d021491bc7-5ba05dde222mr10810402eaf.6.1717437372842; 
+ Mon, 03 Jun 2024 10:56:12 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
  [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5ba0034a107sm1581386eaf.2.2024.06.03.10.42.17
+ 006d021491bc7-5ba003fdf6bsm1487194eaf.25.2024.06.03.10.56.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Jun 2024 10:42:17 -0700 (PDT)
-Date: Mon, 3 Jun 2024 11:42:15 -0600
+ Mon, 03 Jun 2024 10:56:12 -0700 (PDT)
+Date: Mon, 3 Jun 2024 11:56:07 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Minkyu Kang <mk7.kang@samsung.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: Please pull u-boot-samsung master
-Message-ID: <20240603174215.GD68077@bill-the-cat>
-References: <CGME20240603060854epcas1p207233f59828c47f31e941894634b9af7@epcas1p2.samsung.com>
- <166001dab57c$83114450$8933ccf0$@samsung.com>
+To: Francesco Dolcini <francesco@dolcini.it>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>
+Subject: Re: [PATCH 2/2] net: phy: Replace PHY_ANEG_TIMEOUT with Kconfig symbol
+Message-ID: <20240603174419.GE68077@bill-the-cat>
+References: <20240531164733.192105-1-marek.vasut+renesas@mailbox.org>
+ <20240531164733.192105-2-marek.vasut+renesas@mailbox.org>
+ <20240601092154.GA4383@francesco-nb>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="UUbYJdA97JBrqmCv"
+ protocol="application/pgp-signature"; boundary="bL9jrZ0r//z2TRux"
 Content-Disposition: inline
-In-Reply-To: <166001dab57c$83114450$8933ccf0$@samsung.com>
+In-Reply-To: <20240601092154.GA4383@francesco-nb>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,53 +97,59 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---UUbYJdA97JBrqmCv
+--bL9jrZ0r//z2TRux
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 03, 2024 at 03:08:53PM +0900, Minkyu Kang wrote:
+On Sat, Jun 01, 2024 at 11:21:54AM +0200, Francesco Dolcini wrote:
+> Hello Marek,
+>=20
+> On Fri, May 31, 2024 at 06:47:17PM +0200, Marek Vasut wrote:
+> > Switch PHY_ANEG_TIMEOUT to CONFIG_PHY_ANEG_TIMEOUT Kconfig symbol.
+> > This removes one more configuration headers option finalizes its
+> > Kconfig symbol conversion. No functional change expected.
+> >=20
+> > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> > ---
+> ...
+>=20
+> > diff --git a/include/configs/apalis_imx6.h b/include/configs/apalis_imx=
+6.h
+> > index 0df3917e200..6fd43511ee4 100644
+> > --- a/include/configs/apalis_imx6.h
+> > +++ b/include/configs/apalis_imx6.h
+> > @@ -22,7 +22,6 @@
+> >  #define CFG_SYS_FSL_USDHC_NUM	3
+> > =20
+> >  /* Network */
+> > -#define PHY_ANEG_TIMEOUT		15000 /* PHY needs longer aneg time */
+>=20
+> You should remove also the line before, after removing the define it's
+> just a stale comment.
 
-> Dear Tom,
->=20
-> The following changes since commit 46ff00bea5dd2dd247d5e2fdadbf5dcf8653cd=
-9a:
->=20
->   Merge tag 'tpm-master-27052024' of
-> https://source.denx.de/u-boot/custodians/u-boot-tpm (2024-05-27 08:56:02
-> -0600)
->=20
-> are available in the git repository at:
->=20
->   46ff00bea5dd2dd247d5e2fdadbf5dcf8653cd9a=20
->=20
-> for you to fetch changes up to 7045c4dd04648fd2ba1806b75e139d941db0d6c5:
->=20
->   arm: exynos: Map iRAM APM area for Exynos850 SoC (2024-05-28 11:54:07
-> +0900)
->=20
-
-Applied to u-boot/master, thanks!
+It would be nice, but there's lots of similar garbage remaining from
+other transitions, so to me it's not a deal-breaker here.
 
 --=20
 Tom
 
---UUbYJdA97JBrqmCv
+--bL9jrZ0r//z2TRux
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZeAHcACgkQFHw5/5Y0
-tyw7hgwAnQaOYoeAj+dJlK7W/muoLeXaZv8X2a6NvA+s6FgnZoebav+KdvHUoXh0
-YXVGEwXCDTIk82tYMaB9Sue1KLDltSuzZU4rXPUQQ6KwGHsLYG+62TzCyhEaps97
-fZSPanU8AIYqibfmRLWI0n5tTBV2o1+Kpfm54GV/zm4rc8Ow17JChXup36UFqdtw
-1XrpUFb/7JqyM9m0QdC5kpeJVQG+A80aw7DyOonf7fHWGPQodU89KUCRMK6OTPkc
-YF8YbHcO+nWwIZ8NTewwE/zcQmF96eEy8JQYWzvvrgHxlCsJFQ6/6GVT03epULht
-rTm/DTg/bxaxdhozTY7uaSPVK4Bf3rejhRVx5PFEH0V5wjbBcHzxWXCmAefmSbvj
-VhSGLsBGTObpLxCDRhEO3Yx2wVMRWK6ZCzaP9GpVs+mSG7gJQL3RWSSmKNJ3ObJR
-6NMbrTItXJXrx2jWEMQLDGS5bjHVfVRNdqZeOYCJP8JPmReem+k9xNyUokg6AxMM
-smPE2tja
-=7JOu
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZeA7AACgkQFHw5/5Y0
+tyzOwAv8DVswTiu5IixSAOtXNSH2PEMv5yTYkSGFkV442HIYN9B2oZ6kePS9RClS
+7mI/tFurVydSnvNu968+W7zMI7x9+tZUSiPSmDP0Iggo1RScbG0glA58L6YvKok9
+VTiy6/KYFvxh2oY5qiPSgKSm1XO4DCenx2yTT2GJka9mxFSMJN7xIJRxTL2Im+qU
+iHSB4XnqSwgoMeC9w3DOOYi80gjxutUST6x0h8afwHF3R2OdObRdu9Le3B55EWRj
+/qxFb+2G+r3tq2ru7v91utbo60Z7d2aiCsTxpnSDQ1sLdurB9ho125I3FI3zVVWk
+Ly/gt5l0tOzc5iockXQreOJB4e4WSWQPH3HfQ/vWn3iMaJASMgf9pGeWE0uJ02do
+3swdMZWJclMe7wmIP7HzPTTC1xqWJVO3895FgJ0m6U9yKb95sq8u3cftaezqufzQ
+PYHP5jAMr5oWt4Kyg8O2We3jvGcug1Fx0bsEvMZ+6F1jBhIEp7e6eyPIVVeAhSv+
+5+aZ6syc
+=8QQB
 -----END PGP SIGNATURE-----
 
---UUbYJdA97JBrqmCv--
+--bL9jrZ0r//z2TRux--
