@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 331C8C25B76
-	for <u-boot@archiver.kernel.org>; Mon,  3 Jun 2024 12:07:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CFF2C25B75
+	for <u-boot@archiver.kernel.org>; Mon,  3 Jun 2024 12:07:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97AD98830C;
-	Mon,  3 Jun 2024 14:07:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1582588324;
+	Mon,  3 Jun 2024 14:07:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="qJxMzyvG";
+	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="0XsPJKu1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 61D8D88307; Mon,  3 Jun 2024 14:07:00 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id E650A8832D; Mon,  3 Jun 2024 14:07:02 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C60D881B8
- for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 14:06:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E696A88245
+ for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 14:07:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=robert.marko@sartura.hr
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-57864327f6eso6893417a12.1
- for <u-boot@lists.denx.de>; Mon, 03 Jun 2024 05:06:58 -0700 (PDT)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-57a20ccafc6so3492331a12.2
+ for <u-boot@lists.denx.de>; Mon, 03 Jun 2024 05:07:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sartura.hr; s=sartura; t=1717416418; x=1718021218; darn=lists.denx.de;
+ d=sartura.hr; s=sartura; t=1717416420; x=1718021220; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yU6hLR83tqYJFupL36Q/2WMiY9agKZbS+dKnPGk1q7I=;
- b=qJxMzyvGDjv6sMjjj3ZfxLGlosx0vi/BZ6sIQ6xo3q/lFm2q98u+2v8UOaVhmgxaL+
- r/+vpvSI+37hrDuTva+kd/BDgUnD+AAsfLXaPfE9d7fp8J3xvpD3qwhcn39D6QjLQYhm
- fOQvHQ9VA8f2+7llxRu/SbGPJngKJpEGhufzcEtduMmzG0K07FL0wxyhTQsiWHaecGLN
- BCWDOeSAK4CfVtbiIic4ncen6uURgn9ledfuqS4vVK7VSvR5BMRuMl2LUiRff3OyOP6q
- jSYU9ER3hnN4PHw0Cm/8Q3kzeJl88N9aE1tTxoBG1p6sWn7g5qfwAx/6rhYn2aQP6q+S
- qoOA==
+ bh=FGZQr5gMXTO24jjNQa2TisTD9GuXgfgrd9V3/R/4sAI=;
+ b=0XsPJKu14LFc9yQvLWhIf6yEbWfX+CYYkVhGrKeZMx6tq0UntpeTnX8wWvq8KTlr2U
+ N9jiYMOC52XQzFHfS3+XhZ3ef0i3oNPJZfZ1E7CsHV0Uh1BkoXHcAZgF/6DUW+Co7J8P
+ oe2kZGvzlRLmQEG4He9KV9NI2eldNRtX3I/V82qCggA5B1OWomGHWwzrHt43gKVTwofc
+ 7J9wWA+9fIDO8PUPiekbh6QyxLyAj20/OuyQj5w+9b/RGC6PC3djhAuAD0u376pfQGe7
+ qerdGvNPUMBPwDml/SO+3mN1vhfxloHCeyz3nan/ATBa8533WiWEON9Xcd9DBoWaKy2/
+ kz6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717416418; x=1718021218;
+ d=1e100.net; s=20230601; t=1717416420; x=1718021220;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yU6hLR83tqYJFupL36Q/2WMiY9agKZbS+dKnPGk1q7I=;
- b=BA2Kxka/YQQPYM3HsZZsPlDXWCEYtQ2nV05yTAtblLgqEYMP2h9Iy+eWMr3z1RgU7x
- G5qIbr9TbIwtO0tDqAtPMVno+q/REci7vuHePcmBAGyGajZ4PkuiEQM0hcN/SLK6kHHW
- RUg5oJZ2ph0Hy5i0AeY5IkS4gq4QNvvic7oFMbEaiZtN00rIYvMbGT/r0/KtXwukmOza
- A+OdIAi1sPi9MCHbYSvUuWK3NnmbmZUedjJmFnt1eooJxr4NLFroyo5myGY7UlZpmRkS
- OEeon6KqyJP7hwq/LwHLZq8EYVD4WgJLz89LbQw5EnKLfSzX2bZqImrzbWPEV5Axi7g1
- IBXA==
+ bh=FGZQr5gMXTO24jjNQa2TisTD9GuXgfgrd9V3/R/4sAI=;
+ b=Mcg3ryGnP6fq8nO9aLfqL7AjRV/u8h5wpEWG00LBjLq/jABGLGXN06FFfivC+cbK7E
+ Kc7ch29p+9VOJZ0Nz0oFXfIN47115eRKEvEAg7HRAY3eTuy3UH2VAxDUdkjVsFRHBpDR
+ NQ/zHeM8nlea8caYpqamkWb7pL6o4mFQCZVtugj8sWP8voWJnNPgbzBJBsp50AR7gANv
+ fg8754B3jf481u4furW/RAAaKGHdQkSCNK3De4QmqJmsacNRYPdGi48VRfh7dFMhcT4n
+ hK09iNUaGQTAc8Pq8hsPgIRjnpfRGoI8txjXg9Rru5kfgIX2wxXmRvAmbC08TOEjula8
+ wO9A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVv79VsKNbq8qPm6cRUyQZrMBglaoFbSeQIEtVusvZ7nCv9GYWyKLmLkvUdtURa9qOF0pIh7yrgOR3b9WBv3yTCndosXg==
-X-Gm-Message-State: AOJu0YwYFTLOHiC9IE7Qj/X1udJP/YBYie6JTB9r56rDMcco+3IMxUbp
- 0AUVI2SvrSQ/QmmWvNxfjnrStBonTQH6dy9cRFMkYCmhIZ++KSecdPGYlDaIz292V32z1xwPsKT
- n
-X-Google-Smtp-Source: AGHT+IFjw4dqU7v+hZSmCHcukLt3PCLn2iCbwc6MQeTqwr0BXNinRRvzbpcIoJUiHQZZraOMpK+LLQ==
-X-Received: by 2002:a05:6402:348c:b0:572:b83e:e062 with SMTP id
- 4fb4d7f45d1cf-57a4da051demr5986710a12.3.1717416416948; 
- Mon, 03 Jun 2024 05:06:56 -0700 (PDT)
+ AJvYcCVPoofxj7kRwrqhWFlx/06HSTL0BJUS19UHYaAtfOn45c3N7N/RwT9GIgU2se3tJnb+RM03ypUZy2X32DcyV0RU+J6lng==
+X-Gm-Message-State: AOJu0YxAMozwg2RIcLTCicLM+zYuHxDtCfKUA0IbV1re7tCr1n8Cx9al
+ po7d8GZDXE6+XfuYRrVczsuiJjuHEPK6Spb4qsAllHtStFPW4RVcfqYYbdyOwEc=
+X-Google-Smtp-Source: AGHT+IE6fcvhleBAs53eyAQz+Bhk13s3yszF6CMN3sjgzlt6Qm4D8/iBLHbXT8q2BwuHci7I0r2RNA==
+X-Received: by 2002:a50:cd04:0:b0:57a:2fc1:e838 with SMTP id
+ 4fb4d7f45d1cf-57a363aed39mr6109799a12.22.1717416420157; 
+ Mon, 03 Jun 2024 05:07:00 -0700 (PDT)
 Received: from fedora.. (cpe-188-129-45-221.dynamic.amis.hr. [188.129.45.221])
  by smtp.googlemail.com with ESMTPSA id
- 4fb4d7f45d1cf-57a5cbece23sm2380391a12.61.2024.06.03.05.06.55
+ 4fb4d7f45d1cf-57a5cbece23sm2380391a12.61.2024.06.03.05.06.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Jun 2024 05:06:56 -0700 (PDT)
+ Mon, 03 Jun 2024 05:06:59 -0700 (PDT)
 From: Robert Marko <robert.marko@sartura.hr>
 To: trini@konsulko.com, caleb.connolly@linaro.org, neil.armstrong@linaro.org,
  sumit.garg@linaro.org, lukma@denx.de, seanga2@gmail.com,
@@ -74,9 +73,9 @@ To: trini@konsulko.com, caleb.connolly@linaro.org, neil.armstrong@linaro.org,
  u-boot@lists.denx.de
 Cc: j.beck@linefinity.com,
 	Robert Marko <robert.marko@sartura.hr>
-Subject: [PATCH v3 3/5] clock: qcom: ipq4019: add missing networking resets
-Date: Mon,  3 Jun 2024 14:06:14 +0200
-Message-ID: <20240603120651.154670-3-robert.marko@sartura.hr>
+Subject: [PATCH v3 5/5] arm: dts: add IPQ4019 ESS EDMA U-Boot additions
+Date: Mon,  3 Jun 2024 14:06:16 +0200
+Message-ID: <20240603120651.154670-5-robert.marko@sartura.hr>
 X-Mailer: git-send-email 2.45.1
 In-Reply-To: <20240603120651.154670-1-robert.marko@sartura.hr>
 References: <20240603120651.154670-1-robert.marko@sartura.hr>
@@ -98,34 +97,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-IPQ4019 has more networking related resets that will be required for future
-wired networking support, so lets add them.
-
-This syncs the driver with Linux.
+IPQ4019 ESS EDMA support is not yet in upstream Linux, so for now lets use
+the latest pending Linux DTS node for wired networking.
 
 Signed-off-by: Robert Marko <robert.marko@sartura.hr>
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/clk/qcom/clock-ipq4019.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+Chanes in v2:
+* Use the latest pending Linux DT node for EDMA instead
 
-diff --git a/drivers/clk/qcom/clock-ipq4019.c b/drivers/clk/qcom/clock-ipq4019.c
-index 09be203d4b..fca7626ada 100644
---- a/drivers/clk/qcom/clock-ipq4019.c
-+++ b/drivers/clk/qcom/clock-ipq4019.c
-@@ -124,6 +124,12 @@ static const struct qcom_reset_map gcc_ipq4019_resets[] = {
- 	[GCC_TCSR_BCR] = {0x22000, 0},
- 	[GCC_MPM_BCR] = {0x24000, 0},
- 	[GCC_SPDM_BCR] = {0x25000, 0},
-+	[ESS_MAC1_ARES] = {0x1200C, 0},
-+	[ESS_MAC2_ARES] = {0x1200C, 1},
-+	[ESS_MAC3_ARES] = {0x1200C, 2},
-+	[ESS_MAC4_ARES] = {0x1200C, 3},
-+	[ESS_MAC5_ARES] = {0x1200C, 4},
-+	[ESS_PSGMII_ARES] = {0x1200C, 5},
- };
- 
- static struct msm_clk_data ipq4019_clk_data = {
+ arch/arm/dts/qcom-ipq4019-u-boot.dtsi | 104 ++++++++++++++++++++++++++
+ 1 file changed, 104 insertions(+)
+ create mode 100644 arch/arm/dts/qcom-ipq4019-u-boot.dtsi
+
+diff --git a/arch/arm/dts/qcom-ipq4019-u-boot.dtsi b/arch/arm/dts/qcom-ipq4019-u-boot.dtsi
+new file mode 100644
+index 0000000000..07aaaa9f41
+--- /dev/null
++++ b/arch/arm/dts/qcom-ipq4019-u-boot.dtsi
+@@ -0,0 +1,104 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
++/ {
++	soc {
++		switch: switch@c000000 {
++			compatible = "qcom,ipq4019-ess";
++			reg = <0xc000000 0x80000>, <0x98000 0x800>, <0xc080000 0x8000>;
++			reg-names = "base", "psgmii_phy", "edma";
++			resets = <&gcc ESS_PSGMII_ARES>, <&gcc ESS_RESET>;
++			reset-names = "psgmii", "ess";
++			clocks = <&gcc GCC_ESS_CLK>;
++			clock-names = "ess";
++			mdio = <&mdio>;
++			interrupts = <GIC_SPI  65 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI  66 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI  67 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI  68 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI  69 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI  70 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI  71 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI  72 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI  73 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI  74 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI  75 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI  76 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI  77 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI  78 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI  79 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI  80 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 240 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 241 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 242 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 243 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 244 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 245 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 246 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 247 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 248 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 249 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 250 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 251 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 252 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 253 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 254 IRQ_TYPE_EDGE_RISING>,
++				     <GIC_SPI 255 IRQ_TYPE_EDGE_RISING>;
++			status = "disabled";
++
++			ports {
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				swport1: port@1 { /* MAC1 */
++					reg = <1>;
++					label = "lan1";
++					phy-handle = <&ethphy0>;
++					phy-mode = "psgmii";
++
++					status = "disabled";
++				};
++
++				swport2: port@2 { /* MAC2 */
++					reg = <2>;
++					label = "lan2";
++					phy-handle = <&ethphy1>;
++					phy-mode = "psgmii";
++
++					status = "disabled";
++				};
++
++				swport3: port@3 { /* MAC3 */
++					reg = <3>;
++					label = "lan3";
++					phy-handle = <&ethphy2>;
++					phy-mode = "psgmii";
++
++					status = "disabled";
++				};
++
++				swport4: port@4 { /* MAC4 */
++					reg = <4>;
++					label = "lan4";
++					phy-handle = <&ethphy3>;
++					phy-mode = "psgmii";
++
++					status = "disabled";
++				};
++
++				swport5: port@5 { /* MAC5 */
++					reg = <5>;
++					label = "wan";
++					phy-handle = <&ethphy4>;
++					phy-mode = "psgmii";
++
++					status = "disabled";
++				};
++			};
++		};
++	};
++};
++
++&mdio {
++	psgmiiphy: psgmii-phy@5 {
++		reg = <5>;
++	};
++};
 -- 
 2.45.1
 
