@@ -4,45 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C92F0C25B78
-	for <u-boot@archiver.kernel.org>; Tue,  4 Jun 2024 13:21:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CCF1C25B78
+	for <u-boot@archiver.kernel.org>; Tue,  4 Jun 2024 13:21:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE5CA88523;
-	Tue,  4 Jun 2024 15:18:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 2558388528;
+	Tue,  4 Jun 2024 15:18:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id BF1E5883B6; Tue,  4 Jun 2024 09:47:12 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 9701F88458
- for <u-boot@lists.denx.de>; Tue,  4 Jun 2024 09:47:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=christian.loehle@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 26B4C1042;
- Tue,  4 Jun 2024 00:47:34 -0700 (PDT)
-Received: from [10.57.86.243] (unknown [10.57.86.243])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 72DCC3F762;
- Tue,  4 Jun 2024 00:47:08 -0700 (PDT)
-Message-ID: <50bfdbf9-2ab0-4111-bf2e-abe4c9ed86fb@arm.com>
-Date: Tue, 4 Jun 2024 08:47:06 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1717507131;
+	bh=3sCxcGCLHWAhNppPT34fsEBSg6fNAuh16MnBYl9+5/0=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=0UOIr5vVUn5vESIxPoIjNwLDK6GjROvMNhJAuBgqsc+l1py4gCsHizsu2JPqQvw92
+	 r45PBturogwf3yN6N+fCHVATXOe8/z8/98UaVudVI6vOYMKKKU//GKjzxSSAoFJ9RH
+	 RnPvmLTNWL5Bnn5S4mER+bj9g3pbM5DGW7889HTag4OCsqfKczJ1J51Au86HkckDA2
+	 pLai0Wo3Fp+sIYpL7o5PkMUAMxvv/i02d+SlHPOgtZisX+euXjoanYjMr17R0KjADM
+	 QfgAthfrCCLGAgOO9J7/4Ep9Lte7aj3GJfZ56NBXo3049RBuo2kb6+pBChbJGE0J9P
+	 ddgliP34Y0Nvg==
+Received: from localhost (unknown [IPv6:2001:861:52:5f60:ff6c:4545:dfcf:4c97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested) (Authenticated sender: pro@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 80CB388456;
+ Tue,  4 Jun 2024 12:20:04 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1717496406;
+ bh=3sCxcGCLHWAhNppPT34fsEBSg6fNAuh16MnBYl9+5/0=;
+ h=From:To:Cc:Subject:Date:From;
+ b=N1m9d8yEzqklhRImU899cfYPJiTL6+KVA8IsJhHJ72jdHatBOpu1tn5qYWLQG+jpZ
+ ccCymhUA938xp9PxK9FZzz0iLAO0CBf2d/CmGU57GDqX7XaaSHvGLsFD7f2ryYaf6d
+ zdT1ejsiYylei9xjCQUmbCQz1LZkXp51IFvcsg+a9g01hPil9q1EwUeeELFYuVXw97
+ X9ezui46SnYQoDNemOnLXrbbpJelTQyawUxojmrZ/lczJTxQe37e6dQgZci6ZXywbC
+ tYE/Ccejr+68rqxtgAsZWrzrF+70tNmZjnns7M5h+8/ACoGK6Xh3DGd5uc6MHX1O4e
+ 45TLev+9cNP6A==
+From: Philip Oberfichtner <pro@denx.de>
+To: u-boot@lists.denx.de
+Cc: marex@denx.de, trini@konsulko.com, patrice.chotard@foss.st.com,
+ caleb.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@linaro.org, michal.simek@amd.com, bmeng.cn@gmail.com,
+ ryder.lee@mediatek.com, weijie.gao@mediatek.com, chunfeng.yun@mediatek.com,
+ GSS_MTK_Uboot_upstream@mediatek.com, iwamatsu@nigauri.org, lukma@denx.de,
+ mkorpershoek@baylibre.com, eddie.cai.linux@gmail.com, neal@gompa.dev,
+ pro@denx.de, j@jannau.net, sjg@chromium.org, teik.heng.chong@intel.com,
+ jonas@kwiboo.se, nm@ti.com, seanga2@gmail.com, festevam@gmail.com,
+ tharvey@gateworks.com, othacehe@gnu.org, fabrice.gasnier@foss.st.com,
+ xdrudis@tinet.cat, marcan@marcan.st, richard.habeeb@gmail.com,
+ artur@conclusive.pl, simon@holesch.de, clamor95@gmail.com, ion@agorria.com,
+ miquel.raynal@bootlin.com
+Subject: [PATCH v2 1/1] usb: Assimilate usb_get_descriptor() to linux
+Date: Tue,  4 Jun 2024 12:18:11 +0200
+Message-Id: <20240604101811.76112-1-pro@denx.de>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: obscure microsd detection issue between U-Boot and kernel
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: u-boot <u-boot@lists.denx.de>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Linux MMC List <linux-mmc@vger.kernel.org>,
- Ulf Hansson <ulf.hansson@linaro.org>
-References: <CAJ+vNU3Ns0RVtROcChGAhfO=XbpnzwQv1SehexbgHX6ST6-Piw@mail.gmail.com>
- <e0f38bc9-bcc2-4476-a5d4-4f2efaebc0c1@arm.com>
- <CAJ+vNU0jiVb4caYeQ5HYKZ-dqxcdG1K5pPisJZpfL4q7Sc3zvA@mail.gmail.com>
-Content-Language: en-US
-From: Christian Loehle <christian.loehle@arm.com>
-In-Reply-To: <CAJ+vNU0jiVb4caYeQ5HYKZ-dqxcdG1K5pPisJZpfL4q7Sc3zvA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 04 Jun 2024 15:18:43 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -61,65 +74,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/3/24 22:28, Tim Harvey wrote:
-> On Mon, Jun 3, 2024 at 1:18 AM Christian Loehle
-> <christian.loehle@arm.com> wrote:
->>
->> On 5/31/24 21:47, Tim Harvey wrote:
->>> Greetings,
->>>
->>> I'm seeing an issue on an imx8mm board (imx8mm-venice-gw73xx) where
->>> for a specific set of microsd cards if I have accessed the microsd in
->>> U-Boot with UHS/1.8V the kernel will not recognize that microsd when
->>> scanning.
->>>
->>> The issue does not occur with all microsd cards but seems to appear
->>> with a large sample size of a specific card/model (Kingston SDC32 32GB
->>> SDR104 card). I do not see a signal integrity issue on the scope.
->>>
->>> Instrumenting the kernel the issue is that the host reports a CRC
->>> error as soon as the first mmc_send_if_cond call which occurs in
->>> mmc_rescan_try_freq.
->>>
->>> I can avoid the issue by either not accessing the microsd in U-Boot or
->>> by disabling UHS/1.8V mode in U-Boot therefore what I think is
->>> happening is that U-Boot leaves the card in UHS/1.8V signalling mode
->>> and when the kernel scans it sets the voltage back to 3.3V
->>> standard/default and default timings then issues its clock cycles to
->>> 'reset' the card and the card does not recognize the reset. I'm
->>> wondering if this is because the reset is done via clock cycles after
->>> the kernel has set the I/O voltage back to 3.3V when perhaps the card
->>> is still in 1.8V mode (although I don't see how that would cause an
->>> issue)?
->>
->> It will cause an issue for many cards and might break some cards.
->>
->>>
->>> Is there some sort of MMC 'reset' I can/should do in U-Boot before
->>> booting the kernel? Has anyone encountered anything like this before?
->>
->> There is no 'switching back' to 3.3V signalling from UHS 1.8V.
->> The only way this can be done is therefore a full power-off.
->> Is that done correctly for your system?
->> AFAIR spec dictates 500ms of <0.5V on VCC. Note that  driving CLK/signal
->> lines can also sustain the card somewhat, as leakage is only limited
->> within operating voltage.
-> 
-> Hi Christian,
-> 
-> Are you saying the only way to properly reset from 1.8V is to have a
-> VDD supply on the microSD card that can be turned off before booting
-> to Linux? We have never had that before and never encountered
-> something like this.
+Before this commit, usb_get_descriptor() failed for some flakey USB
+devices. We hereby adopt the more robust linux implementation [1].
 
-Yes, the only safe way to use UHS-I really anyway.
-You could disable UHS for u-boot but that still leaves (potentially)
-problematic warm-reboots of the board.
-Having a (software-controlled) switchable regulator on SD VCC is pretty
-common for this reason and you should be able to find it in most dts
-for host controllers with sd-uhs-* property.
-I'm afraid that the relevant spec section isn't available in the
-simplified version.
+For instance, for the "Alcor Micro Corp. Flash Drive" (VID 0x058f, PID
+0x6387), the following behavior occurs from time to time:
 
-Kind Regards,
-Christian
+=> usb start
+starting USB...
+Bus xhci_pci: Register 10000840 NbrPorts 16
+Starting the controller
+USB XHCI 1.20
+scanning bus xhci_pci for devices... usb_new_device: Cannot read configuration, skipping device 058f:6387
+
+Signed-off-by: Philip Oberfichtner <pro@denx.de>
+
+[1] From a38297e3fb012 (Linux 6.9), see
+    https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/drivers/usb/core/message.c?h=v6.9#n781
+---
+
+Notes:
+    Changes in V2: Adapt commit message to
+    	- state kernel version
+    	- state which exact USB device is being fixed
+    	- include error log
+
+ common/usb.c | 37 ++++++++++++++++++++++++++++++-------
+ 1 file changed, 30 insertions(+), 7 deletions(-)
+
+diff --git a/common/usb.c b/common/usb.c
+index 99e6b857c7..661ec0a9c4 100644
+--- a/common/usb.c
++++ b/common/usb.c
+@@ -215,8 +215,9 @@ int usb_int_msg(struct usb_device *dev, unsigned long pipe,
+  * clear keyboards LEDs). For data transfers, (storage transfers) we don't
+  * allow control messages with 0 timeout, by previousely resetting the flag
+  * asynch_allowed (usb_disable_asynch(1)).
+- * returns the transferred length if OK or -1 if error. The transferred length
+- * and the current status are stored in the dev->act_len and dev->status.
++ * returns the transferred length if OK, otherwise a negative error code. The
++ * transferred length and the current status are stored in the dev->act_len and
++ * dev->status.
+  */
+ int usb_control_msg(struct usb_device *dev, unsigned int pipe,
+ 			unsigned char request, unsigned char requesttype,
+@@ -258,11 +259,14 @@ int usb_control_msg(struct usb_device *dev, unsigned int pipe,
+ 			break;
+ 		mdelay(1);
+ 	}
++
++	if (timeout == 0)
++		return -ETIMEDOUT;
++
+ 	if (dev->status)
+ 		return -1;
+ 
+ 	return dev->act_len;
+-
+ }
+ 
+ /*-------------------------------------------------------------------
+@@ -563,10 +567,29 @@ int usb_clear_halt(struct usb_device *dev, int pipe)
+ static int usb_get_descriptor(struct usb_device *dev, unsigned char type,
+ 			unsigned char index, void *buf, int size)
+ {
+-	return usb_control_msg(dev, usb_rcvctrlpipe(dev, 0),
+-			       USB_REQ_GET_DESCRIPTOR, USB_DIR_IN,
+-			       (type << 8) + index, 0, buf, size,
+-			       USB_CNTL_TIMEOUT);
++	int i;
++	int result;
++
++	if (size <= 0)		/* No point in asking for no data */
++		return -EINVAL;
++
++	memset(buf, 0, size);	/* Make sure we parse really received data */
++
++	for (i = 0; i < 3; ++i) {
++		/* retry on length 0 or error; some devices are flakey */
++		result = usb_control_msg(dev, usb_rcvctrlpipe(dev, 0),
++					 USB_REQ_GET_DESCRIPTOR, USB_DIR_IN,
++					 (type << 8) + index, 0, buf, size,
++					 USB_CNTL_TIMEOUT);
++		if (result <= 0 && result != -ETIMEDOUT)
++			continue;
++		if (result > 1 && ((u8 *)buf)[1] != type) {
++			result = -ENODATA;
++			continue;
++		}
++		break;
++	}
++	return result;
+ }
+ 
+ /**********************************************************************
+-- 
+2.39.2
+
