@@ -4,72 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA4C4C25B75
-	for <u-boot@archiver.kernel.org>; Tue,  4 Jun 2024 00:36:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B604C25B75
+	for <u-boot@archiver.kernel.org>; Tue,  4 Jun 2024 00:44:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29299883E5;
-	Tue,  4 Jun 2024 02:35:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 04F24883C8;
+	Tue,  4 Jun 2024 02:44:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Gwfu3PtN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="spljgtsP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF7CE883E8; Tue,  4 Jun 2024 02:35:56 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 9E67187CFE; Tue,  4 Jun 2024 02:44:14 +0200 (CEST)
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
+ [IPv6:2607:f8b0:4864:20::c2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8CE0883DB
- for <u-boot@lists.denx.de>; Tue,  4 Jun 2024 02:35:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6480C883C8
+ for <u-boot@lists.denx.de>; Tue,  4 Jun 2024 02:44:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-6f8f024a75cso270919a34.0
- for <u-boot@lists.denx.de>; Mon, 03 Jun 2024 17:35:54 -0700 (PDT)
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-5b970e90ab8so3289702eaf.3
+ for <u-boot@lists.denx.de>; Mon, 03 Jun 2024 17:44:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1717461353; x=1718066153; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=HbtVO0hk6dLVEgMDUtNUiLRynxL5LOi/V/TK12vBLX4=;
- b=Gwfu3PtN7fBKyyZ2wzFVofvR3OJYMwbb0vAC+vDk2ct//27ElrxnQvctjSm97RV1WS
- w4Dnd8bqzaKAm+/zGS1tVGR8xVGT7X+q271rFcAXs1Hy9RhIMwIMstBVJTokbpzhiqFt
- RlhJZEOTZqCJa+97NZOfATNcZ5WhiET9nL3yA=
+ d=konsulko.com; s=google; t=1717461851; x=1718066651; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=P/OvScn9XUon3IK2t+hpOehL+HW+e57xEMtXYynzPDQ=;
+ b=spljgtsPRfAKuLkvKkcxBLxx2j8FDS1UN3EyoFHKAQzFdHibe+nX/E+pDmSRKhjb0x
+ mdIYWwu1kYqRrw0yxa4glAsLl+KOAOQQXc+y0owdjuOP9ZhkgtgWIVoZHzypMggPNw3l
+ 7KJUD5luY0jcwSwedj3emC38A2u3MakYSz2Zg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717461353; x=1718066153;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=HbtVO0hk6dLVEgMDUtNUiLRynxL5LOi/V/TK12vBLX4=;
- b=D1nmRZa76axsLLCGsMbTBf1U2CVognv9BsmOuNGEoDIGcqLqVCFmeqqk+R1R+oj1HA
- tXmsOgWX1ejQAPofO94MFb2D3/NEpM14dWCq2F5/x0vtBmeYPamw195ibhkQyYJgHDaq
- FqwoDpFU+1T8LuuBqB9YqCPrATCVbag5GYX4BTVtgiSfPMZ4XV3dzd3P+j2hQxBCgYyE
- jRIdFVdJn5uoJEH8rrhPWEtjdTrP9p+bV50OITfEXdIJquh+s8XLMJAbbtEDqjTlYp4V
- yaoZS/i+EU23/2vFUnmDb/k2VtzXA0usrWZkQ9l0PJqjpAoMZPeMG2Nd6iKe05cfIDMa
- GHoA==
-X-Gm-Message-State: AOJu0YzEK4tUmWIu/kL6g4SS30udruaKL76uCUStXFz3cOqGEsrRfL2c
- Foxq9vAU78YEa1xS3nVntLrLuUAr4jJoU43nCszEeiM2v+B+6c3tsJRTNo1zrrmjYgmCrt4BtX+
- p
-X-Google-Smtp-Source: AGHT+IEtwQhbzYtUh9RXFurvDPHUqr/jWcJ6dWFGeKCV/2OrAbTrZQyxoXut9fogFxY55zyicUNXog==
-X-Received: by 2002:a9d:5606:0:b0:6f0:e28c:afe0 with SMTP id
- 46e09a7af769-6f911fb5037mr11686400a34.30.1717461353310; 
- Mon, 03 Jun 2024 17:35:53 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1717461851; x=1718066651;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=P/OvScn9XUon3IK2t+hpOehL+HW+e57xEMtXYynzPDQ=;
+ b=pKottgHaW2VI1OiQUuNzDHy8Jl9PbkHhFZ4J9kNfg9cso5DgiZOSlEd+yzqvAlMOl4
+ VOyRUmEkQXoUIi1G/5xdHL2wEslOYCKfH+rEj10q4TkozDN85Bh1tczBW4IszWh/yalq
+ QSUUATGPOfpbxVe7e8+D/fcnEj63OFyMuur7FKM1fWaEQsAb2b5wMTSXnUm63ttJh2HK
+ Fp21BlfA8LdBd3OqZKP9fJINsvyFPmeKh7AWsQZufPdORhy2e1nmu0tGioNg9dvqbhfB
+ /FNXmR8XHu4sjsBgL3764uxoXx3xOqE8Gp3e0r9G2ung/KTGmV6V8q8UmTTuvB7CC9vM
+ 1J/g==
+X-Gm-Message-State: AOJu0YzLp13yvsuf1A/c5tTYaWU0oz9fed+rtcF3pzTNJm2F0XAciUUk
+ 9M0QAZTVoZlHxZwfibs9pID+OuYy+/Zbkndvjc7LOc89DBCm+qUkA0KwrFqL9pY=
+X-Google-Smtp-Source: AGHT+IE3wkOuSAykYf2nebXGg1a63Q4+8NF5DJ1qquJYeLQwDG2V9xxo/JX4oL4sLYbD9eFug8lRNw==
+X-Received: by 2002:a05:6820:1c91:b0:5b9:ff9c:b889 with SMTP id
+ 006d021491bc7-5ba05d7e00bmr12499151eaf.5.1717461850946; 
+ Mon, 03 Jun 2024 17:44:10 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
  [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-6f91054ee19sm1716306a34.34.2024.06.03.17.35.51
+ 006d021491bc7-5ba004f12f5sm1697756eaf.46.2024.06.03.17.44.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Jun 2024 17:35:51 -0700 (PDT)
-Date: Mon, 3 Jun 2024 18:35:49 -0600
+ Mon, 03 Jun 2024 17:44:10 -0700 (PDT)
+Date: Mon, 3 Jun 2024 18:44:08 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
-Subject: [ANN] U-Boot v2024.07-rc4 released
-Message-ID: <20240604003549.GI68077@bill-the-cat>
+To: Love Kumar <love.kumar@amd.com>
+Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com
+Subject: Re: [PATCH v6] test/py: net_boot: Add test cases for net boot
+Message-ID: <20240604004408.GJ68077@bill-the-cat>
+References: <3dcb3163c4b685d4ddd5f9d4149ac82a43955fe0.1717425151.git.love.kumar@amd.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="W2DcYxa9rLnck9Sd"
+ protocol="application/pgp-signature"; boundary="/qqI92f4pVnI8g1P"
 Content-Disposition: inline
+In-Reply-To: <3dcb3163c4b685d4ddd5f9d4149ac82a43955fe0.1717425151.git.love.kumar@amd.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,46 +90,72 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---W2DcYxa9rLnck9Sd
+--/qqI92f4pVnI8g1P
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hey all,
+On Mon, Jun 03, 2024 at 08:03:45PM +0530, Love Kumar wrote:
 
-It's release day and here is -rc4. To reiterate what I said last
-release, this really is the time for bug fixes (which includes
-documentation corrections) only at this point. Pretty much anything else
-should be for -next.
+> Add tests for booting image using tftpboot/pxe boot commands, tftpboot
+> boot case loads the FIT image into DDR and boots using bootm command
+> whereas pxe boot cases downloads the pxe configuration file from the
+> TFTP server and interprets it to boot the images mentioned in the pxe
+> configurations file.
+> This test relies on boardenv_* containing configuration values including
+> the parameter 'pattern'. tftpboot/pxe boot cases boots the Linux till the
+> boot log pattern value is matched. For example, if the parameter
+> 'pattern' is defined as 'login:', it will boot till login prompt.
+>=20
+> Signed-off-by: Love Kumar <love.kumar@amd.com>
 
-In terms of a changelog,=20
-git log --merges v2024.07-rc3..v2024.07-rc4
-contains what I've pulled but as always, better PR messages and tags
-will provide better results here.
+So, I get as far as this with the PXE test:
+------------------------------------ Captured stdout call -----------------=
+--------------------
+U-Boot> setenv autoload no
+U-Boot> U-Boot> dhcp
+Waiting for Ethernet connection... done.
+BOOTP broadcast 1
+BOOTP broadcast 2
+DHCP client bound to address 192.168.1.100 (254 ms)
+U-Boot> U-Boot> echo $bootfile
 
-I hope to remain on schedule and that means the rest of the rcs every
-other Monday, and with final release on Monday, July 1st, 2024. Thanks
-all!
+U-Boot> U-Boot> pxe get
+missing environment variable: pxeuuid
+Retrieving file: pxelinux.cfg/01-b8-27-eb-fc-64-a6
+Waiting for Ethernet connection... done.
+Using smsc95xx_eth device
+TFTP from server 192.168.1.10; our IP address is 192.168.1.100
+Filename 'pxelinux.cfg/01-b8-27-eb-fc-64-a6'.
+Load address: 0x2500000
+Loading: ##################################################  64 Bytes
+         0 Bytes/s
+done
+Bytes transferred =3D 64 (40 hex)
+Config file '<NULL>' found
+U-Boot> U-Boot> pxe boot 200000
+Ignoring unknown command: <9G??0????`@???p
+U-Boot>
 
 --=20
 Tom
 
---W2DcYxa9rLnck9Sd
+--/qqI92f4pVnI8g1P
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZeYWUACgkQFHw5/5Y0
-tyzo6gv+KEeJ8bvJbyVWU3iipUtovBPGUqqSYlEJz4tH+PGSCxsE3gwHUnY/LudN
-Ut2Bn5ZLjcMOPOn769u2CMdml7j+N55wKYC9o+58VmBaEWttxiEAS1QxoYu5kR1v
-5K5I7Nkzp0NMnmk/aG2d0yeyXDcNlnQAbr+PyCKxGr+X1NbdaYnJ3bjGEJ7jUcLY
-TCmRkKB5gh+AcuF485vOE78fDXc/k4vDgA6KoMWSjujEXURQ5iWOSvfHUtecqlFD
-LC1ytqUNIRyrcOpATWxSU1rsT1pL3d9ZHjdmK5AqSzDEio70cssoQPNhyyrHCd67
-HOd3BOkLonLlRjV7nQbBAzZKTdKHKPqLRfQC/R8OgrwjH/8fGG1zbt7j9Ba00Ahy
-0xOJuXugHdW+hLEa9RBuPv1fUPZclUQvUI86afFP1aBt/p/Q388y+tBQ7DfY5K2T
-vXPz7kb1m0MpQdWxpQ1GpdDuDkfltHzQg6DsqvfJV8US/NSNBF7APYPTrhFZkf7r
-d/sf1kcy
-=RZNM
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZeY1gACgkQFHw5/5Y0
+tyy9igv/RB9KPV3434oSzvaPBT9geblKwR08EtdQfCA7WP43ep8mkfqXIcPpUwP5
+bhJLuOn4aynag6LbqOqM9TrfaoP70o5+YcGBwGtkQZ/0tSunBJHQZJMdcMQ+4nlT
+fYuv+46aJOA5Y5UDI/JMiJnN/5zA/LVNohIUbsrTOgteMK7MjOk6RJc40G6YLT3m
+XTXMh5FpjcAoMrqx05am5sqfyXoXadCFqvwAYxTUQdiHi3llYZEqn97adg1wPbHb
+J6toIkKdMqVzrxa4aB5Tq8nJouj8QbrYBGLcCxWZrWQfqNWsgr+5TcsHMMbV8zxl
+xjj5L5+hYJP8PjMM31PLzN5JMx4x+8KTfAs9sWLtXtXfJvzHSQp9YB2Hg+3KFeyH
+y0y5ebsTeTL8vGf/xIG6sF5C32vLIq5EpqrLu8TK6FeuIrMVUPATR/BcLF9kZkT/
+JpLgcXTH4nkbnxgyb6pntS81I9Lv3FZWBlMdjjliQSk6yXXlKvp9om566NWbzGtI
+1s3Bsa7k
+=YvSK
 -----END PGP SIGNATURE-----
 
---W2DcYxa9rLnck9Sd--
+--/qqI92f4pVnI8g1P--
