@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 686F2C25B75
-	for <u-boot@archiver.kernel.org>; Mon,  3 Jun 2024 21:28:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 726A1C25B78
+	for <u-boot@archiver.kernel.org>; Tue,  4 Jun 2024 00:35:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 456C7831A2;
-	Mon,  3 Jun 2024 23:28:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 656E7883C9;
+	Tue,  4 Jun 2024 02:35:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="P+hr4hYm";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SzheSBxV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 345F2883B3; Mon,  3 Jun 2024 23:28:19 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 8DACF883C9; Tue,  4 Jun 2024 02:35:44 +0200 (CEST)
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
+ [IPv6:2607:f8b0:4864:20::c2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AFE4C81026
- for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 23:28:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B81587D33
+ for <u-boot@lists.denx.de>; Tue,  4 Jun 2024 02:35:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a6302bdb54aso634269766b.0
- for <u-boot@lists.denx.de>; Mon, 03 Jun 2024 14:28:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-5b9a35a0901so1799503eaf.0
+ for <u-boot@lists.denx.de>; Mon, 03 Jun 2024 17:35:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1717450096; x=1718054896; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kNGROccSaNHV2d77luxoSSDnNrRRXPLIEee9PuDipVk=;
- b=P+hr4hYmf5gxDOBQCrkf1/g3QCT6uUAmSXM9wQGgg+pqdDjr5WSBJBADB1zK+e1tKu
- UucBW7qxiJMhtmk5lPL3j1wUgRdWPdA9cxrJrKbEKPJc6pbAtmiKbj2+UJoTWLWTVbme
- Ckj4Z6DjGWBVQ3UxhjEeHZAiZI473+4C4uKSYBom1pYIc8+HD/P01HJi6NxsXiyaexYK
- NBwyjd6TzHO/lP/UXzctUCjnkX5euKpAQiC3tvHhddsm7R0v1n9+1BUey3BzY248e3yi
- U1oiTEXTaHDqnbNzKGXbySfplRzGKjJ1MbR4aq+iXIN/iZoCLu466J+qdzU0ePZv+Qdi
- PYtQ==
+ d=konsulko.com; s=google; t=1717461341; x=1718066141; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=RKngSLCiNmUzqZUcMvR/ClTFjWznMJMv2MFPxDSk0fg=;
+ b=SzheSBxVbBWtME9xfnzazTk+XA0/SBy1aGKsMykjj+m4MKfc8uAN++pGzElhSxfhg8
+ 5bHDacxUNNdIX0oj9DhV1eKnREA56r3YtBNyLGoIAcRgYWatIi7aLed3QONs/y641FnY
+ ggaMYPG/RpX6fQOyMwzCsdJYvWPWgV/BImU0k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717450096; x=1718054896;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=kNGROccSaNHV2d77luxoSSDnNrRRXPLIEee9PuDipVk=;
- b=wE++ELg/mc+Ux3T8CWOW5GWhQ97ZglCpGMO7OQKdN1zroQ2WxEPpIX0+ZQguEMr9nd
- 5CSCiNrte7IR15i9jawcINlF693KlPMgHkhj9IbcjsxWb6H3i5KX820BSoTJQjZSRtbZ
- OG3gn+VOrr9Gjg1lSiH48m1iImkb/2ZB/tYfX/LG+n6oN8GRQgVSEP1gY5++NQ+Kl6Il
- 1u7wgMxbgd+k+6GZwzyR2C8LjiUtHl3YCAIC9FWhO/C7qVXbVMqI7BxKUVSfGHONJsu6
- SrywlczZF7WGpizcJIpprC7GUI1KxVO0E9j67LdNoXwy3SlbnKYYM/qE08FV5fnzEl7D
- 51wA==
-X-Gm-Message-State: AOJu0YxXd2Gki+c4CJJVYoL9sP2lIN8od7zbrfTp5SlrSKwhsWPl33D3
- aG4wQ8+TvQuCCviGU3/50zas5BbpvrTXWBYnP6wyJ/T0tuBtocV2nAIZS1IQCmDeNx1RkgVw8uz
- g0zq667dyECpHO40d1rkPOuYwHeUOijXinlcpAw==
-X-Google-Smtp-Source: AGHT+IFUpE1yAnr+EA4tOHqhgT5Hywj4u0yMIFLXvPcXn2TUAiT8DAUt4icmaeZdmRG0hV7pksCURqf7oWnVHxOA/00=
-X-Received: by 2002:a17:906:f592:b0:a68:fa24:9e82 with SMTP id
- a640c23a62f3a-a68fa249ebamr378786066b.38.1717450096008; Mon, 03 Jun 2024
- 14:28:16 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1717461341; x=1718066141;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RKngSLCiNmUzqZUcMvR/ClTFjWznMJMv2MFPxDSk0fg=;
+ b=f3ba8RrCQ6oRSw6nkGZ6DBZZQBMGQF96Ms5O02v6ma/F9mZFPyWrsg4FUN2lOhvC5F
+ SMxDryJ0jCZJGRFCiOHjsOZdpl1qRmhXbBsIYJ7BjTkymgs05dwB5ZNR9pbdBxEVxkvs
+ GoJoxGbOYG4Ty2Bms0uu8fK0KfTVI9rfWIyfFPWTqFFJCsyMrKUEMT7CVS2BHrHZ6L9m
+ bxb0HPzH3QWBBbryDBwBgSgAREr45QCeNug0016V0dMPbLr3Vg7Pykur46UC5QrNUHF1
+ VCye0r10BWuysaoBrBARP7a9VN/xaL9coDG8edQtNYylgOzRzlSDSAmxAhV14c+9uz6D
+ WoLQ==
+X-Gm-Message-State: AOJu0Yy4G1lE9rDf3ruZvpCYAXt13VlnaETikqR/efcXr9jNvqns0Xjd
+ 0qd4aOaCw2SAGG9vS8ABpj58GdMfnEewxaPaN1NOfHxyA4zto75N4LSzfxNNcp4=
+X-Google-Smtp-Source: AGHT+IH1eAsDr23WxJqYgvV/fjehmZd0SL7n7IXUhZP1cwO4ktQgIG3SI4PsfOTViiESD9oQE18qzQ==
+X-Received: by 2002:a05:6870:5e0a:b0:24c:678c:4282 with SMTP id
+ 586e51a60fabf-2508bcb4144mr12352967fac.44.1717461340723; 
+ Mon, 03 Jun 2024 17:35:40 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
+ [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-6f9105a9243sm1711297a34.75.2024.06.03.17.35.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 03 Jun 2024 17:35:39 -0700 (PDT)
+Date: Mon, 3 Jun 2024 18:35:36 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PULL] u-boot-sh/next-cleanup
+Message-ID: <20240604003536.GG68077@bill-the-cat>
+References: <20240602125146.12460-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <CAJ+vNU3Ns0RVtROcChGAhfO=XbpnzwQv1SehexbgHX6ST6-Piw@mail.gmail.com>
- <e0f38bc9-bcc2-4476-a5d4-4f2efaebc0c1@arm.com>
-In-Reply-To: <e0f38bc9-bcc2-4476-a5d4-4f2efaebc0c1@arm.com>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Mon, 3 Jun 2024 14:28:04 -0700
-Message-ID: <CAJ+vNU0jiVb4caYeQ5HYKZ-dqxcdG1K5pPisJZpfL4q7Sc3zvA@mail.gmail.com>
-Subject: Re: obscure microsd detection issue between U-Boot and kernel
-To: Christian Loehle <christian.loehle@arm.com>
-Cc: u-boot <u-boot@lists.denx.de>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>,
- Linux MMC List <linux-mmc@vger.kernel.org>, 
- Ulf Hansson <ulf.hansson@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="wtrfp9ya7J/TxVbP"
+Content-Disposition: inline
+In-Reply-To: <20240602125146.12460-1-marek.vasut+renesas@mailbox.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,56 +89,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jun 3, 2024 at 1:18=E2=80=AFAM Christian Loehle
-<christian.loehle@arm.com> wrote:
->
-> On 5/31/24 21:47, Tim Harvey wrote:
-> > Greetings,
-> >
-> > I'm seeing an issue on an imx8mm board (imx8mm-venice-gw73xx) where
-> > for a specific set of microsd cards if I have accessed the microsd in
-> > U-Boot with UHS/1.8V the kernel will not recognize that microsd when
-> > scanning.
-> >
-> > The issue does not occur with all microsd cards but seems to appear
-> > with a large sample size of a specific card/model (Kingston SDC32 32GB
-> > SDR104 card). I do not see a signal integrity issue on the scope.
-> >
-> > Instrumenting the kernel the issue is that the host reports a CRC
-> > error as soon as the first mmc_send_if_cond call which occurs in
-> > mmc_rescan_try_freq.
-> >
-> > I can avoid the issue by either not accessing the microsd in U-Boot or
-> > by disabling UHS/1.8V mode in U-Boot therefore what I think is
-> > happening is that U-Boot leaves the card in UHS/1.8V signalling mode
-> > and when the kernel scans it sets the voltage back to 3.3V
-> > standard/default and default timings then issues its clock cycles to
-> > 'reset' the card and the card does not recognize the reset. I'm
-> > wondering if this is because the reset is done via clock cycles after
-> > the kernel has set the I/O voltage back to 3.3V when perhaps the card
-> > is still in 1.8V mode (although I don't see how that would cause an
-> > issue)?
->
-> It will cause an issue for many cards and might break some cards.
->
-> >
-> > Is there some sort of MMC 'reset' I can/should do in U-Boot before
-> > booting the kernel? Has anyone encountered anything like this before?
->
-> There is no 'switching back' to 3.3V signalling from UHS 1.8V.
-> The only way this can be done is therefore a full power-off.
-> Is that done correctly for your system?
-> AFAIR spec dictates 500ms of <0.5V on VCC. Note that  driving CLK/signal
-> lines can also sustain the card somewhat, as leakage is only limited
-> within operating voltage.
 
-Hi Christian,
+--wtrfp9ya7J/TxVbP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Are you saying the only way to properly reset from 1.8V is to have a
-VDD supply on the microSD card that can be turned off before booting
-to Linux? We have never had that before and never encountered
-something like this.
+On Sun, Jun 02, 2024 at 02:51:15PM +0200, Marek Vasut wrote:
 
-Best Regards,
+> The following changes since commit 7e52d6ccfb76e2afc2d183b357abe2a2e2f948=
+cf:
+>=20
+>   Merge patch series "FWU: Add support for FWU metadata version 2" (2024-=
+05-24 13:42:07 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-sh.git next-cleanup
+>=20
+> for you to fetch changes up to 63da3a795e86dcf0906beb99865e3d4139114872:
+>=20
+>   ARM: dts: renesas: Drop R8A779H0 V4M DTs with OF_UPSTREAM counterparts =
+(2024-06-02 02:30:13 +0200)
+>=20
 
-Tim
+Applied to u-boot/next, thanks!
+
+--=20
+Tom
+
+--wtrfp9ya7J/TxVbP
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZeYVgACgkQFHw5/5Y0
+tyyniwwArNlQjgkchfDodk28vd687rTlnV5MGvwpY9hXWsutxlEkq1c9ukDXk1H3
+1O+QvN59wN2BvN8fKIxIyjN84jf26E1BWOOLblTWdOZjwjfj6Mtwkv7vXvkH9HEY
+g70zS4g/EM0BCDxle1vDOlOzcGTKbantRJ4QNReboELbB0cEgd+frymTCbgZSN/8
+Y0BqkMwa/h8KlYpcBajgnv1vwIFCkNs6rzirCwNSBk3vLQ/8idjgbdufstUbVjCF
+kQtI+ADPxZNHb57A/dtSSFu0i1KzleI+mvj19AX4FFTAUKXMWwMA2yjp1gCTNtBq
+haS/wbupiaY/v70OF8pU8WgDpN13z2o7ZF7wKgpCS/EPCaiBMp7wBAZT56to2rBs
+Rj5nY/ul55x7VAxZKw7TreqTyYMVURos+bSrrAWiEgbmZ/eW7U0/9T4Z309A3qeG
+6kKB8JROPHFzGjPkXExZGV6w/i9tnJe/Tqh0mMGKW6y6bigsek2Hv9VS3YqWYNjT
+uTEylV/D
+=737S
+-----END PGP SIGNATURE-----
+
+--wtrfp9ya7J/TxVbP--
