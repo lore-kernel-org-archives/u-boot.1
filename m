@@ -4,60 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41AD1C27C52
-	for <u-boot@archiver.kernel.org>; Tue,  4 Jun 2024 08:15:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20843C27C52
+	for <u-boot@archiver.kernel.org>; Tue,  4 Jun 2024 08:39:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 373CA8843A;
-	Tue,  4 Jun 2024 10:14:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=walle.cc
+	by phobos.denx.de (Postfix) with ESMTP id 4B40C88458;
+	Tue,  4 Jun 2024 10:39:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=walle.cc header.i=@walle.cc header.b="jJ6YHGHx";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="O0AFMi+2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 260A388458; Tue,  4 Jun 2024 10:14:58 +0200 (CEST)
-Received: from mail.3ffe.de (0001.3ffe.de [IPv6:2a01:4f8:c0c:9d57::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5817F88464; Tue,  4 Jun 2024 10:39:08 +0200 (CEST)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on2060c.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2414::60c])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB53588433
- for <u-boot@lists.denx.de>; Tue,  4 Jun 2024 10:14:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=walle.cc
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=michael@walle.cc
-Received: from localhost (unknown [213.135.10.150])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (prime256v1) server-signature RSA-PSS (2048 bits)
- server-digest SHA256) (No client certificate requested)
- by mail.3ffe.de (Postfix) with ESMTPSA id C61E0113B;
- Tue,  4 Jun 2024 10:14:54 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=walle.cc;
- s=mail2022082101; t=1717488894;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:content-type:content-type:in-reply-to:in-reply-to:
- references:references; bh=8W67pPGuc+oO1wWjgLCTieOepAZSYII53gp6MQPXDQM=;
- b=jJ6YHGHxIoklBFIKb8WdhLrcxLiXJ7W2a2VqAuwBf4/MRmlmu4fT/HaGOPPw9ZFcSOYHwD
- f8idlHX4FFgTRD5jnb1XrdQn6SmylqLkJX0mHKc58gb5GhMYXtiv+1hmJ3xjZG3raHrLPI
- b/GRGPCwdDdkaTAeiHmA8l5ZrzY4jOJPx3B1VFdK242ZpFPoi2tlNx0nuDV3ZBiXVpj4sB
- 3uXgReUBwdLSLexDEwgv402OFvHQgAziItkMuMQQJXjV4odzLcl6BLJjShlktUszmsahKZ
- taqtEZPdOzTkBGSHNuFBD6cx/gsPTNJtjG2BFTWQ0e47V8PIPkrL5jWRSgqfgQ==
-Content-Type: multipart/signed;
- boundary=b0fc8532539659fed34754b74f65f6b7589310b80cb3b6b7ccc2d7f374f4;
- micalg=pgp-sha384; protocol="application/pgp-signature"
-Date: Tue, 04 Jun 2024 10:14:42 +0200
-Message-Id: <D1R2ZW5Q12QQ.OU52AZIYS68O@walle.cc>
-Subject: Re: obscure microsd detection issue between U-Boot and kernel
-Cc: "u-boot" <u-boot@lists.denx.de>, "Peng Fan" <peng.fan@nxp.com>, "Jaehoon
- Chung" <jh80.chung@samsung.com>, "Linux MMC List"
- <linux-mmc@vger.kernel.org>, "Ulf Hansson" <ulf.hansson@linaro.org>
-From: "Michael Walle" <michael@walle.cc>
-To: "Christian Loehle" <christian.loehle@arm.com>, "Tim Harvey"
- <tharvey@gateworks.com>
-X-Mailer: aerc 0.16.0
-References: <CAJ+vNU3Ns0RVtROcChGAhfO=XbpnzwQv1SehexbgHX6ST6-Piw@mail.gmail.com>
- <e0f38bc9-bcc2-4476-a5d4-4f2efaebc0c1@arm.com>
- <CAJ+vNU0jiVb4caYeQ5HYKZ-dqxcdG1K5pPisJZpfL4q7Sc3zvA@mail.gmail.com>
- <50bfdbf9-2ab0-4111-bf2e-abe4c9ed86fb@arm.com>
-In-Reply-To: <50bfdbf9-2ab0-4111-bf2e-abe4c9ed86fb@arm.com>
+ by phobos.denx.de (Postfix) with ESMTPS id B580B883DB
+ for <u-boot@lists.denx.de>; Tue,  4 Jun 2024 10:39:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=neal.frager@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=kE32xBJqee0K3B/HUnmmQ2Nekyuhjc5TTuNehKY4duV8Ib8Jd3RALOrObSTSH85Jq2Us7Y3+/yRgsjRR59VB9detErILMDFQx7lH2oqanrTi32DYJGCkXK5KPA5yc/oHk6EjqWNPCHGWmD61niC6jnVGQjg39YzzPzuAMRgixrW4wySYpdWnV0doLa3qan1st7A3Wmn/Q6zISqji8+veO55wrDHR01MrSGzJTGl3z68cFJouL5PkoHE56Rcx/NrXsMa3Ch054rM+Uqrg9Hxjw5Clr7IGA2vw/gowaRyslpBRwGLkPAQsmEqm1D4jGJPLYlgsIT4XKQ4cisXvxJEenw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=qtYbwv1tCnl/S0TX6IGCnmPwwynzWWzNAOwdyU9xXSM=;
+ b=X64CKuJNaaeNOyP832I+CkL8xD1G99ab98BdfYulgapy1CIplCRbNzlchZhohsP+IFpBh7nNc/PS6YmUPeD/3qBP9si0giIrkCws2xd9bSKz1pMP/xOmP8lV5Mg/rdLRoCri20OjagXoYglY5P4HcxwGBoI62HGmLKlOJ0YZvJBvRp8DSB/1qOT8HaiVEBWM5mCs5BcwGoieBuWpHxfOECuIKIqrut9Pf/gH49VGLzkmE2l+90zlrUBIO0g9/SUGysxRnYy8npRknsB6yl052xawPbUu/kVMDgh4Bb+Q9JGGxgq78sj49OGpUeWB46HSrhEue36SRLcTMGsyK5zHUw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=qtYbwv1tCnl/S0TX6IGCnmPwwynzWWzNAOwdyU9xXSM=;
+ b=O0AFMi+29ouYlP3Tst0UD/c819LMlwNJY1PnR6L5VXiH9v2V9FieOmwV5cax3aEITHhsrLjgdqlglkegrpO52Cwywo+7MB/LU48XBfSOmPoRxbDNqhOxgHwwgFayqBQeFYlpEUeM2Yc2uvpeKLcxFZv74+hjOZcXoeTCJGnrSgw=
+Received: from BYAPR21CA0016.namprd21.prod.outlook.com (2603:10b6:a03:114::26)
+ by IA1PR12MB6580.namprd12.prod.outlook.com (2603:10b6:208:3a0::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.22; Tue, 4 Jun
+ 2024 08:39:00 +0000
+Received: from SJ1PEPF00001CDD.namprd05.prod.outlook.com
+ (2603:10b6:a03:114:cafe::4) by BYAPR21CA0016.outlook.office365.com
+ (2603:10b6:a03:114::26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7677.6 via Frontend
+ Transport; Tue, 4 Jun 2024 08:39:00 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SJ1PEPF00001CDD.mail.protection.outlook.com (10.167.242.5) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7633.15 via Frontend Transport; Tue, 4 Jun 2024 08:38:59 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Tue, 4 Jun
+ 2024 03:38:58 -0500
+Received: from xirengwts09.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
+ Transport; Tue, 4 Jun 2024 03:38:57 -0500
+From: Neal Frager <neal.frager@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <luca.ceresoli@bootlin.com>, Neal Frager
+ <neal.frager@amd.com>
+Subject: [PATCH v3 1/1] arm64: zynqmp: Enable usb3 for k24 som
+Date: Tue, 4 Jun 2024 09:38:54 +0100
+Message-ID: <20240604083854.2033917-1-neal.frager@amd.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB04.amd.com: neal.frager@amd.com does not designate
+ permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF00001CDD:EE_|IA1PR12MB6580:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1c6efa2c-306a-4cd3-4819-08dc8471c7f8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230031|36860700004|376005|82310400017|1800799015; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?U5WR4MxbtKzGiM6WfWvPkM1kCDRkrLjlBH2fGMy5sNUSg9AlZWpZJlUUnvJQ?=
+ =?us-ascii?Q?Y1z+3JBjZcTr19bu+4W7YeI/K2M8+MC3StIkStUpPPtvd7IVzLisAjBnrKNY?=
+ =?us-ascii?Q?cbE+ZDU4qMA39BRbPwM5dFPH1fSQAtH4Q9A1g9dcV2KDmbPSFKiaoQrcr9JU?=
+ =?us-ascii?Q?BgACGGiNeGuoF+7omxFN83KOuYnIbpA0PuT+ZcYSWRH1+6d+AdJe7ci4r/8V?=
+ =?us-ascii?Q?aIzoGoLlb2nDWmQFAOGCtpONKESZNv/tsiWaJsGbKzc3Q0PPLxyB1iZ4TYwK?=
+ =?us-ascii?Q?BOSBMGjdvY4FUgIEUigNwmMORdsyojIFm5LWyqXExJybgmqRtTvWJ+fHPKcm?=
+ =?us-ascii?Q?pHpvikt+shYw6WyBT1F87tujCrlw2fP2U4yjKZhdxELVaGD/kI+nxN6U0Kb1?=
+ =?us-ascii?Q?sSbqxJfSf09l84fpWfUrkzPf123K0jk4S5XrZvBgPGgHQorFrsjvcVkK5kWm?=
+ =?us-ascii?Q?peTSP434O+MfErMS47MvTeZUz6fCI6HnYZUPjNIwKoGwh6orpj2OApGQ5gdG?=
+ =?us-ascii?Q?spo0pqfW1RyVEubXtJRak0+Nl//3ZAiIcxnWyjTGocV2vWkBnsyiZBRUFCjU?=
+ =?us-ascii?Q?5Qkxsbgb45YoytgSXB/tOCDMSzi6HINrG5qFUqwyzBMycwxnSG7OiCC4xlzs?=
+ =?us-ascii?Q?RdBvLzSDf3hQf7Qwr/IMNWfmpbOeqZNZmpp0hrcDZvDPLwi1zhFXVeEHYOQc?=
+ =?us-ascii?Q?tVt/EhBeJnwiVsS1Et/TcpkLA6Kl5wLYy4/Sh9MrlF0AP8ucJQT7QUvOwfuP?=
+ =?us-ascii?Q?4AaPEtPFMJWkQOGqZPAFBC8vQNzqVCO4TN9M3C+GUT6nZYJIzlfiTsiWtHIY?=
+ =?us-ascii?Q?GGhVM6zW0X2BOkksGZanQTNA7AVUvBZcav3hX4iONx0c1JyW8Ls/zSWum12M?=
+ =?us-ascii?Q?rkd2zYjZRwMV5eowHlkRTfQ8jPTF/rO74kceG4/IF5AxpAk431f7PhH0GTl/?=
+ =?us-ascii?Q?HcDNiwnnyEBvWk9UVS/bOVNYrdIybsnXyXgYObKdihWvfGn2VQ29ShB4pPSV?=
+ =?us-ascii?Q?h2+DboxVw5/VBB7JEoIyLKATLaTQ06g/Mx9ZqWz8mAdJ0CP+j6BmMig8BPml?=
+ =?us-ascii?Q?BdYy3161zbTqA6EmbhIgschoZVEbNSuYTB6I7KnRsYQ9hRr27x9JnnG5DoZo?=
+ =?us-ascii?Q?t93aJps6nQHTiqjbHcpcPECwDvayVyoJJB1V9DXiqlAPrT+wGPQt2srPYNNo?=
+ =?us-ascii?Q?l+6xH5zmjsv07ZdrJtHEvfPoQCUdeHpAichIKix0EJtp+AHWLgELTo5Ylx2e?=
+ =?us-ascii?Q?uankwouRkClIvjIkvoI+Tq6eLOa41Szzu9B5GIBeAtdNjDfO5Cl52j6IoOsr?=
+ =?us-ascii?Q?g3ha21sCc5XvZSwbFqWOwk8xHPqctYR9gea+P2sq/9Cq39+1ILv9NeFgv53p?=
+ =?us-ascii?Q?l8l1syTboLoZOCu1upVYGlyV4J4J?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(36860700004)(376005)(82310400017)(1800799015); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jun 2024 08:38:59.9469 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1c6efa2c-306a-4cd3-4819-08dc8471c7f8
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00001CDD.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6580
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,102 +144,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---b0fc8532539659fed34754b74f65f6b7589310b80cb3b6b7ccc2d7f374f4
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+This patch corrects the mio and pll configuration registers for using usb3
+on the kd240 starter kit.  Without this patch, the usb3 to sd card bridge does
+not initialize correctly and u-boot is unable to find the OS located on the
+kd240 starter kit sd card.
 
-On Tue Jun 4, 2024 at 9:47 AM CEST, Christian Loehle wrote:
-> On 6/3/24 22:28, Tim Harvey wrote:
-> > On Mon, Jun 3, 2024 at 1:18=E2=80=AFAM Christian Loehle
-> > <christian.loehle@arm.com> wrote:
-> >>
-> >> On 5/31/24 21:47, Tim Harvey wrote:
-> >>> Greetings,
-> >>>
-> >>> I'm seeing an issue on an imx8mm board (imx8mm-venice-gw73xx) where
-> >>> for a specific set of microsd cards if I have accessed the microsd in
-> >>> U-Boot with UHS/1.8V the kernel will not recognize that microsd when
-> >>> scanning.
-> >>>
-> >>> The issue does not occur with all microsd cards but seems to appear
-> >>> with a large sample size of a specific card/model (Kingston SDC32 32G=
-B
-> >>> SDR104 card). I do not see a signal integrity issue on the scope.
-> >>>
-> >>> Instrumenting the kernel the issue is that the host reports a CRC
-> >>> error as soon as the first mmc_send_if_cond call which occurs in
-> >>> mmc_rescan_try_freq.
-> >>>
-> >>> I can avoid the issue by either not accessing the microsd in U-Boot o=
-r
-> >>> by disabling UHS/1.8V mode in U-Boot therefore what I think is
-> >>> happening is that U-Boot leaves the card in UHS/1.8V signalling mode
-> >>> and when the kernel scans it sets the voltage back to 3.3V
-> >>> standard/default and default timings then issues its clock cycles to
-> >>> 'reset' the card and the card does not recognize the reset. I'm
-> >>> wondering if this is because the reset is done via clock cycles after
-> >>> the kernel has set the I/O voltage back to 3.3V when perhaps the card
-> >>> is still in 1.8V mode (although I don't see how that would cause an
-> >>> issue)?
-> >>
-> >> It will cause an issue for many cards and might break some cards.
-> >>
-> >>>
-> >>> Is there some sort of MMC 'reset' I can/should do in U-Boot before
-> >>> booting the kernel? Has anyone encountered anything like this before?
-> >>
-> >> There is no 'switching back' to 3.3V signalling from UHS 1.8V.
-> >> The only way this can be done is therefore a full power-off.
-> >> Is that done correctly for your system?
-> >> AFAIR spec dictates 500ms of <0.5V on VCC. Note that  driving CLK/sign=
-al
-> >> lines can also sustain the card somewhat, as leakage is only limited
-> >> within operating voltage.
-> >=20
-> > Hi Christian,
-> >=20
-> > Are you saying the only way to properly reset from 1.8V is to have a
-> > VDD supply on the microSD card that can be turned off before booting
-> > to Linux? We have never had that before and never encountered
-> > something like this.
->
-> Yes, the only safe way to use UHS-I really anyway.
+In addition, this patch correctly configures mio76 and mio77 as gpio pins
+which are used as reset gpio pins on the kd240 starter kit.
 
-I can second that. And also keep in mind that the actual supply
-voltage must be below that threshold. Thus, the power-off time also
-depends on the capacitance on that supply line after the power load
-switch. There are switches with dedicated output discharge circuits
-built-in.
+Signed-off-by: Neal Frager <neal.frager@amd.com>
+---
+V1->V2:
+ - rebased patch to latest u-boot master branch
+ - improved git commit message
+V2->V3:
+ - removed unnecessary serdes initialization from patch
+---
+ .../zynqmp/zynqmp-sm-k24-revA/psu_init_gpl.c  | 23 ++++++++-----------
+ 1 file changed, 10 insertions(+), 13 deletions(-)
 
-That being said, from my experience there are cards which will work
-when switching back from 1V8 to 3V3 signalling and some don't. I
-haven't digged deeper into that topic, though.
+diff --git a/board/xilinx/zynqmp/zynqmp-sm-k24-revA/psu_init_gpl.c b/board/xilinx/zynqmp/zynqmp-sm-k24-revA/psu_init_gpl.c
+index 166e61431b..274203ffaa 100644
+--- a/board/xilinx/zynqmp/zynqmp-sm-k24-revA/psu_init_gpl.c
++++ b/board/xilinx/zynqmp/zynqmp-sm-k24-revA/psu_init_gpl.c
+@@ -528,8 +528,8 @@ static unsigned long psu_mio_init_data(void)
+ 	psu_mask_write(0xFF180124, 0x000000FEU, 0x00000002U);
+ 	psu_mask_write(0xFF180128, 0x000000FEU, 0x00000002U);
+ 	psu_mask_write(0xFF18012C, 0x000000FEU, 0x00000002U);
+-	psu_mask_write(0xFF180130, 0x000000FEU, 0x000000C0U);
+-	psu_mask_write(0xFF180134, 0x000000FEU, 0x000000C0U);
++	psu_mask_write(0xFF180130, 0x000000FEU, 0x00000000U);
++	psu_mask_write(0xFF180134, 0x000000FEU, 0x00000000U);
+ 	psu_mask_write(0xFF180204, 0xFFFFFFFFU, 0x50000000U);
+ 	psu_mask_write(0xFF180208, 0xFFFFFFFFU, 0x00B02020U);
+ 	psu_mask_write(0xFF18020C, 0x00003FFFU, 0x00000FC0U);
+@@ -569,21 +569,16 @@ static unsigned long psu_peripherals_init_data(void)
+ 	psu_mask_write(0xFD1A0100, 0x0001807CU, 0x00000000U);
+ 	psu_mask_write(0xFF5E0238, 0x001A0000U, 0x00000000U);
+ 	psu_mask_write(0xFF5E023C, 0x0093C018U, 0x00000000U);
+-	psu_mask_write(0xFF5E0230, 0x00000008U, 0x00000000U);
++	psu_mask_write(0xFF5E0230, 0x00000002U, 0x00000000U);
+ 	psu_mask_write(0xFF5E0238, 0x00000001U, 0x00000000U);
+ 	psu_mask_write(0xFF180390, 0x00000004U, 0x00000004U);
+ 	psu_mask_write(0xFF5E023C, 0x00000400U, 0x00000000U);
+-	psu_mask_write(0xFF5E0238, 0x00000040U, 0x00000000U);
+-	psu_mask_write(0xFF180310, 0x00008000U, 0x00000000U);
+-	psu_mask_write(0xFF180320, 0x33840000U, 0x02840000U);
+-	psu_mask_write(0xFF18031C, 0x7FFE0000U, 0x64500000U);
+-	psu_mask_write(0xFF180358, 0x00000008U, 0x00000008U);
+-	psu_mask_write(0xFF180324, 0x03C00000U, 0x00000000U);
++	psu_mask_write(0xFF5E0238, 0x00000080U, 0x00000000U);
+ 	psu_mask_write(0xFF5E0238, 0x00000400U, 0x00000000U);
+ 	psu_mask_write(0xFF5E0238, 0x00008000U, 0x00000000U);
+ 	psu_mask_write(0xFF5E0238, 0x00000010U, 0x00000000U);
+ 	psu_mask_write(0xFF5E0238, 0x00007800U, 0x00000000U);
+-	psu_mask_write(0xFF5E0238, 0x00000004U, 0x00000000U);
++	psu_mask_write(0xFF5E0238, 0x00000006U, 0x00000000U);
+ 	psu_mask_write(0xFF5E0238, 0x00040000U, 0x00000000U);
+ 	psu_mask_write(0xFF4B0024, 0x000000FFU, 0x000000FFU);
+ 	psu_mask_write(0xFFCA5000, 0x00001FFFU, 0x00000000U);
+@@ -591,13 +586,15 @@ static unsigned long psu_peripherals_init_data(void)
+ 	psu_mask_write(0xFFA60040, 0x80000000U, 0x80000000U);
+ 	psu_mask_write(0xFF260020, 0xFFFFFFFFU, 0x05F5DD18U);
+ 	psu_mask_write(0xFF260000, 0x00000001U, 0x00000001U);
+-	psu_mask_write(0xFF5E0250, 0x00000F0FU, 0x00000202U);
++	psu_mask_write(0xFF0A0284, 0x03FFFFFFU, 0x01000000U);
++	psu_mask_write(0xFF0A0288, 0x03FFFFFFU, 0x01000000U);
++	psu_mask_write(0xFF0A0014, 0x03FF03FFU, 0x02FF0100U);
+ 
+ 	mask_delay(1);
+-	psu_mask_write(0xFF5E0250, 0x00000F0FU, 0x00000002U);
++	psu_mask_write(0xFF0A0014, 0x03FF03FFU, 0x02FF0000U);
+ 
+ 	mask_delay(5);
+-	psu_mask_write(0xFF5E0250, 0x00000F0FU, 0x00000202U);
++	psu_mask_write(0xFF0A0014, 0x03FF03FFU, 0x02FF0100U);
+ 
+ 	return 1;
+ }
+-- 
+2.25.1
 
--michael
-
-> You could disable UHS for u-boot but that still leaves (potentially)
-> problematic warm-reboots of the board.
-> Having a (software-controlled) switchable regulator on SD VCC is pretty
-> common for this reason and you should be able to find it in most dts
-> for host controllers with sd-uhs-* property.
-> I'm afraid that the relevant spec section isn't available in the
-> simplified version.
->
-> Kind Regards,
-> Christian
-
-
---b0fc8532539659fed34754b74f65f6b7589310b80cb3b6b7ccc2d7f374f4
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iKcEABMJAC8WIQTIVZIcOo5wfU/AngkSJzzuPgIf+AUCZl7M8hEcbWljaGFlbEB3
-YWxsZS5jYwAKCRASJzzuPgIf+E2kAX9643rEFafhN3Byt2vnBYKK5gv+nLAwAup7
-Lozt0Z/QxjG0X00s3/+k39VIkpN5Ys4BgOhn6O11fwB/7BZ7pLOLyDOvR6eZkX/E
-np9FslAwncUReepBwreSl7NuzYlMdOAhwQ==
-=zHMu
------END PGP SIGNATURE-----
-
---b0fc8532539659fed34754b74f65f6b7589310b80cb3b6b7ccc2d7f374f4--
