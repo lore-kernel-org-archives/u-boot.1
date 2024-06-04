@@ -4,96 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D219DC25B7E
-	for <u-boot@archiver.kernel.org>; Tue,  4 Jun 2024 10:50:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CF99C25B78
+	for <u-boot@archiver.kernel.org>; Tue,  4 Jun 2024 12:04:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E47D388488;
-	Tue,  4 Jun 2024 12:50:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
+	by phobos.denx.de (Postfix) with ESMTP id CAD5C88418;
+	Tue,  4 Jun 2024 14:04:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="t3xbtk0z";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="bxiOHVfQ";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="tR4QgRnq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16CC388489; Tue,  4 Jun 2024 12:50:47 +0200 (CEST)
-Received: from wfhigh6-smtp.messagingengine.com
- (wfhigh6-smtp.messagingengine.com [64.147.123.157])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F38FE88428; Tue,  4 Jun 2024 14:04:53 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53F6E88476
- for <u-boot@lists.denx.de>; Tue,  4 Jun 2024 12:50:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 889BB87B35
+ for <u-boot@lists.denx.de>; Tue,  4 Jun 2024 14:04:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=flygoat.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailfhigh.west.internal (Postfix) with ESMTP id 2053A1800152;
- Tue,  4 Jun 2024 06:50:42 -0400 (EDT)
-Received: from imap44 ([10.202.2.94])
- by compute3.internal (MEProxy); Tue, 04 Jun 2024 06:50:42 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
- cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1717498241;
- x=1717584641; bh=EG+iLYMoV08Klbd1KJA4gG4EBRJWkGI2HfhE/rxNaxw=; b=
- t3xbtk0zQ756qkDreDcxqXbiKRHwl/XJFz4iWKRWEGPBhQqTreRndNuGuXOwwvBM
- xf+7bL34ZTn4HEZBVt5fds68nTUNaEMDhpCzQ08t5HD1nUlt1kWo50rFHnFcFKY8
- jMtbXhjvgRc/M9PQ/YLxjpWSE79QSzZ6/Iw9LDIezQo4GReySjYqZJn6eeBFHjgZ
- 5Jm3ysBieMdZFhc8J8CGjg2GIwtv1K3mLsn7u9MJUkClDhCAwjtDO7ULX+CWHuWL
- EwknmVdjGqP23d61m8m3uWdjUCrCJUJWMOR/nt5ygHF9luuWFG1Ugq1lPQuqyp7k
- STfJTBmJJY/JSAAO5+Eb/A==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1717498241; x=
- 1717584641; bh=EG+iLYMoV08Klbd1KJA4gG4EBRJWkGI2HfhE/rxNaxw=; b=b
- xiOHVfQ/ou99UoHn1xhUFOeLTjm6+1DKSeDD2eEC+1eYG1cwvTv7uFTpLWW0aMLp
- 1zTbMDiGmIMlYrHnTD6AyiyUJPzWX14m3ettez6MSYSdisA4/oqqKl7HZgHcMSMq
- t6251S8kvx09ejbwGFxUGgtBs/m2+ronmavEK2aaR1oRFJcRSCklDDXbNI8ulRM2
- LdJls8BhBpWTS5N2UyZpE4yByMVxLmiwvtFC5l/VUB74YthA1a8OhgKBk1LNvh/S
- fs3KqbcbZf3DBIw+MzFo8bymBSe8P9lJuyvRkCivqxmFsS6CCtO7E1ZR+lYD1xfR
- l5NLcikZPG9iop6vtS+Nw==
-X-ME-Sender: <xms:gfFeZnKTCdha5HC3nZbD9DS7PUxx1Ohka_OtK6IXs9Zw3F5nMDsKNg>
- <xme:gfFeZrJPmqdpU9iCpbivqwbK2tH_i8Qzc_qWthT8zZgSu9XkA2j46L65rrZA0v5iU
- _-buEUusUCEZxzzn_0>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdelgedgvdelucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepofgfggfkjghffffhvfevufgtgfesthhqredtreerjeenucfhrhhomhepfdfl
- ihgrgihunhcujggrnhhgfdcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtoh
- hmqeenucggtffrrghtthgvrhhnpeeujeduheeltdeffefgfeffhfevgefggefhffeftdeu
- uddvtdekuedvkedvtdfhieenucffohhmrghinhepuhdqsghoohhtrdhorhhgnecuvehluh
- hsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepjhhirgiguhhnrdih
- rghnghesfhhlhihgohgrthdrtghomh
-X-ME-Proxy: <xmx:gfFeZvsyxsvzldfRB0tPorurYGcrydc1cjFJDk-fjKZ65q1LJALG5g>
- <xmx:gfFeZgajeMMm5a5z_hoF2WoKFuTGyhGuXF9s_Zs4KmYpLlrpFCHGiA>
- <xmx:gfFeZuaRoFYrpsSNnOhSdjDicBe2rONfKO2AEm0FZHWiEeT35qZdQQ>
- <xmx:gfFeZkBfYZob3SOzxtP8hjrqm3vZVRR6qPHL8JL6U1H1vkuafLPJgQ>
- <xmx:gfFeZlUhRvHZ_5ByNWwXLnGjxXoTRlOFfWF38lV10ui-xe2stuJmG2Ym>
-Feedback-ID: ifd894703:Fastmail
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
- id 7202E36A0074; Tue,  4 Jun 2024 06:50:41 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.11.0-alpha0-497-g97f96844c-fm-20240526.001-g97f96844
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-52b8b638437so1034528e87.3
+ for <u-boot@lists.denx.de>; Tue, 04 Jun 2024 05:04:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1717502691; x=1718107491;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZSp5TY5G6VsKCCHg/5DjsQeB/AUjpxPECpxrSDXCKQw=;
+ b=tR4QgRnqpU+l6h3KOcov8Z/7nNhHf+xLPXUMfgzCcHJ38C9qaPOamVtf7JjHN0vdpj
+ jJkdM3cyB45qj09YioBztffekQY3S/KKzuwL6cXrs7KPA7SlMVji2lRzkEY9tn46NjIo
+ 2IMy2Z9jLmrkm5RTaNwd8Bv8vA0FXVXM3HAt1VasfPT6xE/TBFimAByR5i81lQIAUSx6
+ TRbXY7x61d1EKWSei7hU2OZOrPtyfmRpWOrp/y6rNKcUKhJKfk+gT0tyYdrHGC3TTImX
+ +pNtOPf3YhuW4jvrgiKJy+JePSeGd8a08QtZg+dTnZiTy3xh9mOkNFCUWh4BrhKULmvh
+ Gw+A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717502691; x=1718107491;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZSp5TY5G6VsKCCHg/5DjsQeB/AUjpxPECpxrSDXCKQw=;
+ b=j3/AwFb14QMXR30U7Dt8x/a5nSxdn3geWYhfzGDkS+HIiMTCgCX9kHklJ/VvSAX3R4
+ Oqw7kJVwjaNlMdT9jr7x4KfCx/6rdotB4idQxVoehdLv5nXGwYAQCEBb2RvubGtkWdXZ
+ PPFk44R3nUziBljqniqPYgHsU2Lp22BOQSbhZ7MAGPD8eL2hnmnLEXdWLN3G3iOLbO6l
+ nAcbv0B/mgq3JsRJKzO3MbU5j6MewyXCof/Ys0pX6Ox3TvuekVr24jLkp77I5gtah9s/
+ rINaK8b2psV2XjjayHvWiFkiXl39b/OQfPcYuPk5R76KCZ0DDPTOdkZTqg2Xbs/wAv0/
+ Hi1A==
+X-Gm-Message-State: AOJu0Yxc57CMP/56teJMjwoax2frEw4GozINM52xuz6gDyquFHA6UCYw
+ LSnnpLd+9ebHiPzNRpPDS4/UMTeTii1YJvMVfkRLDLJlANPQc77YTGZn4NMZaJc=
+X-Google-Smtp-Source: AGHT+IF7cFJ6mYE6p+jbVEf4KCJTSrVCQtB80KdSTkoIUDQ35Ud78DN1N8ZjMK05bftOgWNHxB1Xtg==
+X-Received: by 2002:ac2:44d1:0:b0:52b:7917:9956 with SMTP id
+ 2adb3069b0e04-52b8980acaemr6232994e87.60.1717502690271; 
+ Tue, 04 Jun 2024 05:04:50 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-35dd0667366sm11268544f8f.111.2024.06.04.05.04.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 04 Jun 2024 05:04:49 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] bootstd: Fix a handful of doc typos in bootmeth
+In-Reply-To: <3bb636fd-39b7-472a-8715-e306dc8c3ac7@cherry.de>
+References: <20240603-bootmeth-typos-v1-1-6edbdb469f7c@baylibre.com>
+ <3bb636fd-39b7-472a-8715-e306dc8c3ac7@cherry.de>
+Date: Tue, 04 Jun 2024 14:04:47 +0200
+Message-ID: <87wmn429sw.fsf@baylibre.com>
 MIME-Version: 1.0
-Message-Id: <ce9d23a2-d273-4493-83dd-ef565cbc1c44@app.fastmail.com>
-In-Reply-To: <20240523154317.GT2568172@bill-the-cat>
-References: <20240522-loongarch-v1-0-1407e0b69678@flygoat.com>
- <20240523152540.GR2568172@bill-the-cat>
- <36b2a4a8-9a37-44b8-9630-bb48a862e60d@app.fastmail.com>
- <20240523154317.GT2568172@bill-the-cat>
-Date: Tue, 04 Jun 2024 11:50:20 +0100
-From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
-To: "Tom Rini" <trini@konsulko.com>
-Cc: "Simon Glass" <sjg@chromium.org>,
- "Heinrich Schuchardt" <xypron.glpk@gmx.de>,
- "Ilias Apalodimas" <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 00/16] LoongArch initial support
-Content-Type: text/plain;charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,69 +90,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Quentin,
 
+On mar., juin 04, 2024 at 11:47, Quentin Schulz <quentin.schulz@cherry.de> wrote:
 
-=E5=9C=A82024=E5=B9=B45=E6=9C=8823=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8B=E5=
-=8D=884:43=EF=BC=8CTom Rini=E5=86=99=E9=81=93=EF=BC=9A
-> On Thu, May 23, 2024 at 04:38:52PM +0100, Jiaxun Yang wrote:
->>=20
->>=20
->> =E5=9C=A82024=E5=B9=B45=E6=9C=8823=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8B=
-=E5=8D=884:25=EF=BC=8CTom Rini=E5=86=99=E9=81=93=EF=BC=9A
->> > On Wed, May 22, 2024 at 04:34:43PM +0100, Jiaxun Yang wrote:
->> >
->> >> Hi all,
->> >>=20
->> >> Sorry for flooding the mailing list recently, yet another huge RFC=
- series ahead.
->> >>=20
->> >> So after working on MIPS, arm64be and Xtensa I'm now on LoongArch,=
- as suggested
->> >> by=C2=A0Heinrich.
->> >
->> > My big feedback here, and it applies to all of your other series as
->> > well, is to please update CI to make use of and test this. On the D=
-ocker
->> > side, update tools/docker/Dockerfile as needed. For Azure, you can =
-tell
->> > it to use a different image and then follow the documentation on
->> > https://docs.u-boot.org/en/latest/develop/ci_testing.html and for G=
-itLab
->> > you can at least use their "linter" to make sure that your additions
->> > have the correct syntax. Thanks.
->>=20
->> Hi Tom,
->>=20
->> Thanks for the feedback, I thought CI is for custodians only :-)
->>=20
->> Do you mean I should include azure/gitlab pipeline file to create
->> pipeline for those new qemu targets?
+> Hi Mattijs,
 >
-> Yes, just like the rest of the QEMU targets.
+> On 6/3/24 11:11 AM, Mattijs Korpershoek wrote:
+>> Fix some trivial typos found by browsing the code.
+>> Done with flyspell.
+>> 
+>> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> > ---
+>>   include/bootmeth.h | 12 ++++++------
+>>   1 file changed, 6 insertions(+), 6 deletions(-)
+>> 
+>> diff --git a/include/bootmeth.h b/include/bootmeth.h
+>> index 0fc36104ece0..529c4d813d82 100644
+>> --- a/include/bootmeth.h
+>> +++ b/include/bootmeth.h
+>> @@ -40,7 +40,7 @@ struct bootmeth_ops {
+>>   	/**
+>>   	 * get_state_desc() - get detailed state information
+>>   	 *
+>> -	 * Prodecues a textual description of the state of the bootmeth. This
+>> +	 * Produces a textual description of the state of the bootmeth. This
+>>   	 * can include newline characters if it extends to multiple lines. It
+>>   	 * must be a nul-terminated string.
+>>   	 *
+>> @@ -138,7 +138,7 @@ struct bootmeth_ops {
+>>   	 * @dev:	Bootmethod device to boot
+>>   	 * @bflow:	Bootflow to boot
+>>   	 * Return: does not return on success, since it should boot the
+>> -	 *	Operating Systemn. Returns -EFAULT if that fails, -ENOTSUPP if
+>> +	 *	Operating System. Returns -EFAULT if that fails, -ENOTSUPP if
+>>   	 *	trying method resulted in finding out that is not actually
+>>   	 *	supported for this boot and should not be tried again unless
+>>   	 *	something changes, other -ve on other error
+>> @@ -151,7 +151,7 @@ struct bootmeth_ops {
+>>   /**
+>>    * bootmeth_get_state_desc() - get detailed state information
+>>    *
+>> - * Prodecues a textual description of the state of the bootmeth. This
+>> + * Produces a textual description of the state of the bootmeth. This
+>>    * can include newline characters if it extends to multiple lines. It
+>>    * must be a nul-terminated string.
+>
+> I see we have a mix of null-terminated and nul-terminated in the tree,
+> is the latter correct?
 
-Hi Tom,
+Thank you for your review.
 
-I've got CI working on azure-pipeline for my arm64be, xtensa and LoongAr=
-ch
-work.
+I believe nul-terminated is correct: nul is the character, and null is the pointer.
 
-What is the best way to submit all these changes? I think I can send pat=
-ches to
-update Dockerfile and CI hooks first, then after new docker image being =
-built
-I'll combine CI related changes into these series and refresh all those =
-series.
+See:
+- https://news.ycombinator.com/item?id=22283217
+- https://internals.rust-lang.org/t/null-consistency/16767
 
-Will it work for you?
-
-Thanks
+I'll check the tree and submit another patch to fix this.
 
 >
-> --=20
-> Tom
+>>    *
+>> @@ -244,7 +244,7 @@ int bootmeth_read_file(struct udevice *dev, struct bootflow *bflow,
+>>    * @dev:	Bootmethod device to use
+>>    * @bflow:	Bootflow to read
+>>    * Return: does not return on success, since it should boot the
+>> - *	Operating Systemn. Returns -EFAULT if that fails, other -ve on
+>> + *	Operating System. Returns -EFAULT if that fails, other -ve on
+>>    *	other error
+>>    */
+>>   int bootmeth_read_all(struct udevice *dev, struct bootflow *bflow);
+>> @@ -255,7 +255,7 @@ int bootmeth_read_all(struct udevice *dev, struct bootflow *bflow);
+>>    * @dev:	Bootmethod device to boot
+>>    * @bflow:	Bootflow to boot
+>>    * Return: does not return on success, since it should boot the
+>> - *	Operating Systemn. Returns -EFAULT if that fails, other -ve on
+>> + *	Operating System. Returns -EFAULT if that fails, other -ve on
+>>    *	other error
+>>    */
+>>   int bootmeth_boot(struct udevice *dev, struct bootflow *bflow);
+>> @@ -264,7 +264,7 @@ int bootmeth_boot(struct udevice *dev, struct bootflow *bflow);
+>>    * bootmeth_setup_iter_order() - Set up the ordering of bootmeths to scan
+>>    *
+>>    * This sets up the ordering information in @iter, based on the selected
+>> - * ordering of the bootmethds in bootstd_priv->bootmeth_order. If there is no
+>> + * ordering of the bootmeths in bootstd_priv->bootmeth_order. If there is no
+>>    * ordering there, then all bootmethods are added
+>>    *
 >
-> =E9=99=84=E4=BB=B6:
-> * signature.asc
+> Shouldn't this be bootmeths here as well?
+>
+> (And there's another occurrence in boot/bootmeth-uclass.c
 
---=20
-- Jiaxun
+There seems indeed to be some inconsistencies around bootmeths versus
+bootmethods.
+
+To me, we should use 'bootmeth' everywhere.
+
+Simon, as the maintainer of bootflow, do you agree ?
+
+I can spin up another patch to fix this.
+
+>
+> Cheers,
+> Quentin
