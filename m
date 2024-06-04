@@ -4,89 +4,177 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B23AC25B78
-	for <u-boot@archiver.kernel.org>; Tue,  4 Jun 2024 14:16:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE7A3C25B78
+	for <u-boot@archiver.kernel.org>; Tue,  4 Jun 2024 14:27:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E82AD88481;
-	Tue,  4 Jun 2024 16:16:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3ED3F884EE;
+	Tue,  4 Jun 2024 16:27:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=weidmueller.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TuAw4Bzc";
+	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="yqW0xsGT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C59FF8849D; Tue,  4 Jun 2024 16:16:36 +0200 (CEST)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4A32D884EF; Tue,  4 Jun 2024 16:27:52 +0200 (CEST)
+Received: from EUR03-AM7-obe.outbound.protection.outlook.com
+ (mail-am7eur03on20700.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260e::700])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BD1988481
- for <U-Boot@lists.denx.de>; Tue,  4 Jun 2024 16:16:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E8B01883F5
+ for <u-boot@lists.denx.de>; Tue,  4 Jun 2024 16:27:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
+ header.from=weidmueller.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-6f906f52a4aso3396749a34.3
- for <U-Boot@lists.denx.de>; Tue, 04 Jun 2024 07:16:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=Lukas.Funke-oss@weidmueller.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=gUzPu8xY1zyu6tZggL9hmekRJC8KWiVfg6tw/C9M97yc5JURweuNPbCrPd3CnRXKp76ZK8iF8CvrXR3DbBdzUMi1N+yMr2ePYu9SsJ+j82Z1M5Ta6ADQzS3evTeVioa290msclXPhos6Dr1AkJlRALJEoCrKmVe3soObQppumsS5dj2VA0C5vrmGgK54s+rAWX3p3730/WaBqvj6Z/XrwRp9lpSb3hGFHR3zmh83yTN9u3+au6j8oftDPSeA9QYNRS3nclHRfhr7zuantszj+GGSpQ6EdyQ+MQasNN430eh9GiW/MaewCETeaIjXB0E/bEUL3AMhuDQAQRhEkmwvFg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=56m9BVeZw2+4B9D8qk42sVoWjKA7ZsnbWPzLCOlPyxQ=;
+ b=UYw6U5mDw7HRzdd/py2Rtr72zhRthIVVSL57BUt9gzxvHqiDBMHz0wLy6PqXdovWnC5XBceJWHu0vQmxkas7FYdxjTStmxMxnB/lbMgd0h/L5Snlc3ReyChMxKUUZdfOXjFtWb/nZ3eTamesyrWH1THdLrXBNBI1kAIv3I1OmmYViitBsdF8NkvpsOxLXFnkaKd+ptMC/re85GiHcPrVIv+0fiMq9oJ5Ugnh2BM4HY/g7aJN0jeO81ER6E0aUkwXR6dCh1JJioNij8+8mD37kO820o5mDcq76qIBMqqwMfqiEpwWhrYR5L+5AjAEzOzsD2UREEu6DcuvesGG9BbnvQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=weidmueller.com; dmarc=pass action=none
+ header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1717510593; x=1718115393; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=VXfkaL4u1BZvkzpS6hSYxRsM9kyaU32b3i4Mdb7utvE=;
- b=TuAw4Bzc1Kh4jUhoZjOLRbWOCePebUnSGA7WODlRkAQEWCLw1uAedSTCcgMJOEmdGx
- THd7YzTeYd1W72gAQR6EcaKT9IqRRl7ej8X7jDKuxB8gQ1xFOFmqddSp0ni4KkJJ6okZ
- K9vOIjQ78wD7G//hIKlFGEwCnYyJYX8dDVt8w=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717510593; x=1718115393;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VXfkaL4u1BZvkzpS6hSYxRsM9kyaU32b3i4Mdb7utvE=;
- b=Hr+xhMEIObAEsIKUtybyCAkW6EYDpjpMCCwaP1JkBEYwlljS+lhIL0fCNSkeodpD6i
- wnF7zq3Y9zBJyc35dSYhsB4tr6o+LTvQqXTEJ0WXCw1xwLwAwGifvfNIXWN7IQG0Tn+S
- f6hlHOnxc3uXg5kqWTHTCeqsyps97Cp1yOLmq7z18+l2ykLp5Y9FSm2LoPFmj4++NCy5
- 8p98NL/B+UubrsoNZTz9EfS6NGA0TKkWpBCKXJXtPJ4CeqdFXePzEf9qaI/84M2/qE7s
- qcnvMxwD943jb1FigN3XWCDWyrr86XaYK7bofSKppqqSNxMlzESuVqHqDj6URfVDatf5
- dOFw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV8LrIWjq/OPPFIRZWnmQzwdCcXo8ZCbzYJ9Nge5XaUh56aB9ZnZcEtJDL/5QBPNMEzpc66VbcvM/SJvjnf4440IELpnA==
-X-Gm-Message-State: AOJu0YxjXwO6k1XSqSR6crYUcodFfNYd4H4LgycDo+OEC69mhcPYdM/u
- R94g5OzZ8R7MeP2Pz23ocZxCjoTGmJVwsK+lJzewNhwbjFVpDby6Pg4D4Xh192I=
-X-Google-Smtp-Source: AGHT+IFxdYquhpt5GPcD0a2PWmujnc0A0tvFKcBdtgt0Lg6+YNMfMlO0/vch5nhj2pTySbOj2SUniw==
-X-Received: by 2002:a05:6830:348b:b0:6f9:3982:d33b with SMTP id
- 46e09a7af769-6f93982d6e7mr2380086a34.10.1717510592819; 
- Tue, 04 Jun 2024 07:16:32 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
- [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-6f91059cc97sm1958050a34.63.2024.06.04.07.16.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Jun 2024 07:16:32 -0700 (PDT)
-Date: Tue, 4 Jun 2024 08:16:30 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: "Brunham, Kalen" <kalen.brunham@intel.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ d=weidmueller.onmicrosoft.com; s=selector1-weidmueller-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=56m9BVeZw2+4B9D8qk42sVoWjKA7ZsnbWPzLCOlPyxQ=;
+ b=yqW0xsGTknSh8yDPzH1VhtA5huZ7S4LZnXnW7ws7YWlK+Th0iwqvxaITtGkpf9vHuPEGJwh69/03GrGppvkCxnXr6d+6SewQiKZEro4gAu0vqXrhWhXQ6HpjICCL+kb7yEUHhhCHFILKHCvbo/PBHJIZXqaldY1vSFR72qmeymY=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=weidmueller.com;
+Received: from AS2PR08MB8431.eurprd08.prod.outlook.com (2603:10a6:20b:55a::18)
+ by AM8PR08MB5827.eurprd08.prod.outlook.com (2603:10a6:20b:1da::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.24; Tue, 4 Jun
+ 2024 14:27:49 +0000
+Received: from AS2PR08MB8431.eurprd08.prod.outlook.com
+ ([fe80::aeb:1738:d59a:cee6]) by AS2PR08MB8431.eurprd08.prod.outlook.com
+ ([fe80::aeb:1738:d59a:cee6%7]) with mapi id 15.20.7633.021; Tue, 4 Jun 2024
+ 14:27:48 +0000
+From: lukas.funke-oss@weidmueller.com
+To: u-boot@lists.denx.de
+Cc: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
+ Stefan Roese <sr@denx.de>, Michal Simek <michal.simek@amd.com>,
+ Lukas Funke <lukas.funke@weidmueller.com>,
+ Alexander Gendin <agendin@matrox.com>,
+ Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Bryan Brattlof <bb@ti.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- "U-Boot@lists.denx.de" <U-Boot@lists.denx.de>
-Subject: Re: [PATCH 1/1] Added arm64 assembly for examples/api crt0
-Message-ID: <20240604141630.GK68077@bill-the-cat>
-References: <DM4PR11MB529668DA50F05F26AAD229F0E3EA2@DM4PR11MB5296.namprd11.prod.outlook.com>
- <20240521181534.GD2568172@bill-the-cat>
- <d5887c6d-fc80-4f89-be51-db9b8da3863f@app.fastmail.com>
- <20240527160708.GJ2568172@bill-the-cat>
- <DM4PR11MB52966C57EFE2BE722B9E8DC1E3F32@DM4PR11MB5296.namprd11.prod.outlook.com>
- <20240531160258.GN3714513@bill-the-cat>
- <DM4PR11MB5296624D138053E9457054B8E3FE2@DM4PR11MB5296.namprd11.prod.outlook.com>
- <20240603172322.GA68077@bill-the-cat>
- <DM4PR11MB5296E1D83E3AC318389107E3E3F82@DM4PR11MB5296.namprd11.prod.outlook.com>
- <9a189d18-c748-4fe5-a3ce-9f0f7a5225ee@gmx.de>
+ Jonas Karlman <jonas@kwiboo.se>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Simon Glass <sjg@chromium.org>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Tanmay Shah <tanmay.shah@amd.com>,
+ Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>,
+ Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Wan Yee Lau <wan.yee.lau@intel.com>
+Subject: [PATCH v3 0/7] Add eFuse access for ZynqMP
+Date: Tue,  4 Jun 2024 16:27:34 +0200
+Message-Id: <20240604142741.425307-1-lukas.funke-oss@weidmueller.com>
+X-Mailer: git-send-email 2.30.2
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR4P281CA0308.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:f6::12) To AS2PR08MB8431.eurprd08.prod.outlook.com
+ (2603:10a6:20b:55a::18)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="iqZjillVLLPZTvHs"
-Content-Disposition: inline
-In-Reply-To: <9a189d18-c748-4fe5-a3ce-9f0f7a5225ee@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS2PR08MB8431:EE_|AM8PR08MB5827:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4a3ade88-dd57-4d28-00b2-08dc84a28275
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230031|366007|376005|52116005|7416005|1800799015|38350700005; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?YmJIZThtRVpieXpJNmR1WkpNMUVWaXAyeUJadjJkVlZRTExSaDFWQUplRE1r?=
+ =?utf-8?B?SFpTWTBIZ0VoVUp0Y1N3cXZjQnh5OHh4TFUyZE1mNTdXTWIvSEZETFRZWHZ3?=
+ =?utf-8?B?UmdUdnkwRXVRRll6WlhWdkR6cEZLWExmZDRqdi9NU0dkak9UMkIwbTBkd2ww?=
+ =?utf-8?B?QkcrM0svck0zZkhyYnF2bmNCc3hJaVpEVjFmQmM1YlF3Y3hRR1hYMzI5SFRL?=
+ =?utf-8?B?TUF1RDZ6T05SYnM1NkY3YlFnaEZxUkhpWFpIRDRDRm0yU2NmMy9uMGt1MU5F?=
+ =?utf-8?B?TVpIcFhIYW85eWxoRFRyOWpPKzhUaW9KeWJjVGZWUWdqbTEzRW9uRS9Ma21Z?=
+ =?utf-8?B?ejRNYjlzSlNHZjNBMjQvdjBWclFjKzFOalZpMW16UVVsU2tGaTQxWmw4Zzlp?=
+ =?utf-8?B?d0VPQU9VTXBjeFlKdjNFTXdCWjhPN25qZTdIV3VocWNIWktEcDhVd3ZpdWkw?=
+ =?utf-8?B?dnVqWWhxQ1RRWEp4WWhnZm5vekFNK21GTDd2QVYzdFZGU1RabTFtcDBYazgy?=
+ =?utf-8?B?MTdrNGNKOUZiMldONEo2VUw4U2JRSGJMd2tKdFdLRzRLeTRMbndVNDg5b255?=
+ =?utf-8?B?aUVhVmd5UllHS0dGaWFPciswbGs2Vit0SGQ0VzU4dU8rUkFtdFlRaCtQcCt2?=
+ =?utf-8?B?Y3l4Mis5dkZST0dOTHFRam00RHFQNUNEWlRvKzl4c0g2czBvSWZET2hOWlRa?=
+ =?utf-8?B?UFIzRk44aktvYlVJNkNPdmNVRTJwWFJkY2tIQUFvZVFPb3FwVGhTNC9lb2ho?=
+ =?utf-8?B?ekNnbHRiWE1QdDRzQlFVTGxlS1BlUGkxTlZYLzdxb0E5ZHJLOFI1N25TRkhm?=
+ =?utf-8?B?dUNYUDg0NEpqWmJtTjR1dC8xVTREMmY2OS9KTW9HUmhKa0JPL3FxMHVpMHBY?=
+ =?utf-8?B?emFQa3dlU3h1c0NReTNXeTJOaUhnUXBUZEJpMHVaWlhJQkR3NHpRTjMrNERm?=
+ =?utf-8?B?SFgzK3BvM0lUaDFuWjJadWlIYU5zTTFwdmlDdUp4VWtEbTlsTlNkWlJXMFBL?=
+ =?utf-8?B?cUVOaTE3UkdWWWZHRlBCcExsNnprMmp1dFNkdVEwYmg5TnBWOW5LWTNMTVRC?=
+ =?utf-8?B?Zmd2NldVZTVOQ05HQ3l5TE04UTEydHg3Y1RNTnQrQUNDd3NXeUJickFVZ2Iv?=
+ =?utf-8?B?OCtQZzBzRHlyOElMWWJiY1F4clRveHFYN2k5algrMStYallJNXR2Y0J0SklR?=
+ =?utf-8?B?VUFKUXAvYVlXaHlRNzQwRHA5REUzVUxVbVg2WkJzQSsxaEtwMWJHZWQrOEpl?=
+ =?utf-8?B?WnR3Z1FUNXJuS0x6Nkg4MkYrZTNScmE3TDU3QnhseFltZmpGbW94U2xTVGZ1?=
+ =?utf-8?B?SkdnUHN3TVB1ZTROM1pQTjdxTFM2L1pQWnc2NXVmZXMwU2xlM2VodkczcUxz?=
+ =?utf-8?B?WmxJSzFDK29EOXpzcGlKWFN4UjV5S0E4Zmh4MktxZ0xWclYvQnpHQkZUd29y?=
+ =?utf-8?B?SFg4OXVDWUFURUpHNzM2Z3Z0SmZsRnhXOGVtVTIrWnlQM3M2YzFJV0NIUFla?=
+ =?utf-8?B?bnpPSlQ4K3hoUERLN2s5WW1VVkhUU2VqcTkxNDcvbWZIaUorZGE0U2ptcGhy?=
+ =?utf-8?B?Y0FIenFrQVBYTm5CTDJNUkxqVzRBeFUyZldqN1YrT1g5K2ErdDlsWHNkRnJr?=
+ =?utf-8?B?RnRtUjRYRGpjbjM1OHBZc3lLQmowSjVYaEJnNytKQlBBOW9LcS93QVVDcDcy?=
+ =?utf-8?B?bWh0M2NSZWZIVEpnK0QvT3RTY2JhY3psL0hKK1M5ZUkreUYrRW5IR0M5ZVdU?=
+ =?utf-8?B?aStGUXZlYmdpWEZ5UWFKZFFjOUpNcE94cHVocGNYeXUrcW96SStIK2xaMFBY?=
+ =?utf-8?Q?rLplyH4bNdMZs+7psOdC6zRUiU+KOjVStrQTM=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS2PR08MB8431.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(366007)(376005)(52116005)(7416005)(1800799015)(38350700005);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MWhKZnJwNVVvUlc3SlVNS3hrM1NLdG1mdFpBR2kvNnBLMGNxbUdLSDkwejhW?=
+ =?utf-8?B?d1BjSnVzZFNkaE10bVpOdUlydk9rMS8rclh4dnpFdGRYS2J0T21vcStSUTBO?=
+ =?utf-8?B?QVcyOUZ5UjNLNlhqYnZmSzV0MlgyWWpMbzVBb1FHZVYyWWViMzdCTXJpaUFQ?=
+ =?utf-8?B?djFNNThTbjRsV1BhZzBzQmlRbGdKVjM2QUN6SGUzRmdBbVM4V2c1UWRxbXc2?=
+ =?utf-8?B?c29qMGJVZ05JV0puSjNzNEtzUUM3OThDSGlERVJaRXFSN094VGJNNDB2RnRy?=
+ =?utf-8?B?d3piWkpBdElKN3FzaWVtVEJjVGZUOHRtbjJIa2tRaDZLWXorK2x5RklIVDll?=
+ =?utf-8?B?WjR4RHlLRGNLSW43T0FMTTd3aVhYT3JqTFEzOE1rMXlkUklzMGQ2NmZNY2Zw?=
+ =?utf-8?B?Nk5BbXRSQnJ2MnBvUFV2YXliS2FjY0NqbFRvL3dzQy9tVWg0VHBLc1JRUDgv?=
+ =?utf-8?B?bjUwelV2RDhqcDVjZzBpakJvOXVBQkkvMk0xcmZRaDdOc0prZXdUekFuNjJp?=
+ =?utf-8?B?MUxJRWphSHkyeW9oRzhUZVMrdWFFdHlnVXVtL0RBVTVNeFdnazNDT3BUK1Fj?=
+ =?utf-8?B?d3Jzd0ZmRFlYNmN4ZXhkU0lxbEpEa3Z5UmVseEVXRG12c21zaWhFV2hMTDMw?=
+ =?utf-8?B?SzRTMjM2V2cwSmVsc01xWDBNNldJZnpHSjZIeVV5QzZaVk9xblBMRHV2bGp4?=
+ =?utf-8?B?RUkyUjhZTmhaSXdaYWpocXVQTGN1ZkgrY3FsU3dkdnBQSHhySUNscUtKOGRO?=
+ =?utf-8?B?MCtaamtZOGpkR3EvTk5zSmFrR21yNmRyMUVuQVZTVWtHdXlWc1hhR1lDWUp2?=
+ =?utf-8?B?YjBWeG1KVG9hLzZZb0FxSnJxaWdmajBENmJyalRYZUcreHlld2Y1YlZNa09t?=
+ =?utf-8?B?MThlbzNKMURHVWVxcnhTOWlMVlp2NVUwSFRwMXdhdmovYm9PME01ZEdCbjVT?=
+ =?utf-8?B?dWFaK3JXTTRBcy91b2VnbW9FV0orVmRFaU9sWG92SWUrbUZjaHdyYzRTY2pB?=
+ =?utf-8?B?cTBXZWxHaFBuVitOL29kdFFwbWpjdi9ENU00OXJRNFNtWFF0RU9ML21hWkFQ?=
+ =?utf-8?B?bXVNN09zeTlmV2sydlNla3NabGFodGlkMGR3RnhCV2VUOXJuVWFhMlpXUG9t?=
+ =?utf-8?B?THIrU3pKSUNWbXI1WUE3Z2NYWisya21aOHFOWEkwSXdKYzMvR3JiNnMvcEpV?=
+ =?utf-8?B?S0hHd3lQLzNqMFQ5cnQ1RVRITkM1RkJCMDMzQVJHd2x6U2gzVm5wdkRxM0Rj?=
+ =?utf-8?B?OExSMHRsdDBWd3BqbzB3ZWI4SzF3ZlpnY0IwdkJzODQzdktKZGdzTGVYNHFx?=
+ =?utf-8?B?Qlk3dk9idHVFMk1yc2RNUU5MYWNJVElHT2R6T3hONFg4dEtFN3NqNGxzWk9p?=
+ =?utf-8?B?UnprMkp2d0pmWEJwTExqaTF2QWF1Vmx1VEZkcjY3ODBjbXVJbXVzYlowc2hi?=
+ =?utf-8?B?a2NyaGFDbGdqWXJPQURTbEpPVU9KckZ3QUtmTCt0eGpWeDFWcXcwOFRCN1Ny?=
+ =?utf-8?B?OUNkNDhpQzJ5ejVIYXcwTXZYdWUwY2d2aWhHVU02VUxaa1NSazNHRnZrcWw5?=
+ =?utf-8?B?Y2hDa2dhdnAwei9kcE9hcVh6Ty9kQ3pjUDQ5d1Y0WGtTN2g5Rmw4SStHSU45?=
+ =?utf-8?B?K2RLcFMvZ2t6dHo3NFg0VGs3MDZIZEFoSDdXcHNiaEtCVTJEY0ZVeVUrSi8z?=
+ =?utf-8?B?OFFnU1VIMys4Mi9uZGZ4c3lCeFAyQS9CRUZDK3EzVUovRHFvanZaOWFxYml0?=
+ =?utf-8?B?MDBzalZvLzJ4YWtjVldRVk1HTExXWiswaTRHcHBoZm5DV3E5MEM4VmVaRlpx?=
+ =?utf-8?B?R09iak5aL2dwWGVvOFBiSTcwMzM2SDFFdW45MG00dExsMCtjUEQwenI4b0U5?=
+ =?utf-8?B?TVY2UGVKanlmL0R0V0JJb09ZL0dFdzZLcWhnUms5T2o5alJBYmpyN3hmemx1?=
+ =?utf-8?B?Qk00TndwMStiNzZWMzE4NFlaVEZQSFIzcDgwazNwcUFQWndYajlldEZoeEVo?=
+ =?utf-8?B?ZmVlemc4U0ozRk5QL29EU1BzSndDakxpeEN6NFphc2huTlRrNFdmZXVSZUd4?=
+ =?utf-8?B?SDVnRUQvSHJNTG54MURtZG5VcmZuRm5qTXlqVFN3NnR2N0tYa2xUcUpYODQx?=
+ =?utf-8?B?NzR1V0gzeUxrVHp2MG1CTmlhaTdBZEZsVXN3TEFrVUJUWktlazN6dThTZzhr?=
+ =?utf-8?B?WlE9PQ==?=
+X-OriginatorOrg: weidmueller.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4a3ade88-dd57-4d28-00b2-08dc84a28275
+X-MS-Exchange-CrossTenant-AuthSource: AS2PR08MB8431.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jun 2024 14:27:48.9041 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Z0IsATdHfZlaoc6HRhl+73HYzNNRJcw1jl3bNQ3qkRKXeSblKBTQvRZMtlIYbPIWHk2+SCUpRpA167BHSnbAPg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR08MB5827
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,103 +191,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Lukas Funke <lukas.funke@weidmueller.com>
 
---iqZjillVLLPZTvHs
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jun 04, 2024 at 07:57:38AM +0200, Heinrich Schuchardt wrote:
-> On 6/4/24 05:34, Brunham, Kalen wrote:
-> > Hi Tom/Heinrich,
-> >=20
-> > I have https://github.com/u-boot/u-boot/pull/574 that has a proposed ch=
-ange. It is currently failing clang sandbox, which looks a little strange a=
-nd I'm looking into it. Please let me know if you have any feedback on the =
-general strategy.
-> >=20
-> > Thanks,
-> > -Kalen
-> >=20
-> > -----Original Message-----
-> > From: Tom Rini <trini@konsulko.com>
-> > Sent: Monday, June 3, 2024 1:23 PM
-> > To: Brunham, Kalen <kalen.brunham@intel.com>
-> > Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>; Heinrich Schuchardt <xypron.=
-glpk@gmx.de>; Ilias Apalodimas <ilias.apalodimas@linaro.org>; U-Boot@lists.=
-denx.de
-> > Subject: Re: [PATCH 1/1] Added arm64 assembly for examples/api crt0
-> >=20
-> > On Sun, Jun 02, 2024 at 12:16:38AM +0000, Brunham, Kalen wrote:
-> > > Thanks Tom.
-> > >=20
-> > > Can you suggest who is the existing owner of this code I could work w=
-ith?
-> >=20
-> > You should CC Heinrich for sure once you have things working.
-> >=20
-> > >=20
-> > > -----Original Message-----
-> > > From: Tom Rini <trini@konsulko.com>
-> > > Sent: Friday, May 31, 2024 12:03 PM
-> > > To: Brunham, Kalen <kalen.brunham@intel.com>
-> > > Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>; Heinrich Schuchardt <xypro=
-n.glpk@gmx.de>; Ilias Apalodimas <ilias.apalodimas@linaro.org>; U-Boot@list=
-s.denx.de
-> > > Subject: Re: [PATCH 1/1] Added arm64 assembly for examples/api crt0
-> > >=20
-> > > On Thu, May 30, 2024 at 02:53:17PM +0000, Brunham, Kalen wrote:
-> > >=20
-> > > > Hi Tom,
-> > > >=20
-> > > > What are next steps on this change?
-> > > >=20
-> > > > I'm committed to the idea of EFI apps opposed to examples/standalon=
-e.
-> > > > EFI currently requires block devices which is not enabled when only=
- using flash.
-> > > >=20
-> > > > Should config BLK be updated to include DM_SPI_FLASH?
->=20
-> The UEFI implementation should not depend on DM_SPI_FLASH.
->=20
-> You could make BLK manually selectable again instead:
->=20
-> diff --git a/drivers/block/Kconfig b/drivers/block/Kconfig
-> index 6ad18889f61..1f0e1010f0e 100644
-> --- a/drivers/block/Kconfig
-> +++ b/drivers/block/Kconfig
-> @@ -1,5 +1,5 @@
->  config BLK
-> -       bool # "Support block devices"
-> +       bool "Support block devices"
->=20
-> Cf. 0417b8523c47 ("blk: Hide the BLK and SPL_LEGACY_BLOCK options")
+This series adds a driver to read and write ZynqMP eFuses [1]. The
+driver can be accessed by the 'fuse read' and 'fuse write' commands
 
-They're hidden on purpose because most things should select them, not
-depend on them. If EFI_LOADER is making its own virtual block devices,
-it should be select'ing it not depending on it. There's a few other
-places getting this backwards I see.
+Example:
 
---=20
-Tom
+=> fuse read 0 0xc 3
+Reading bank 0:
 
---iqZjillVLLPZTvHs
-Content-Type: application/pgp-signature; name="signature.asc"
+Word 0x0000000c: 3cb16685 013af244 40000000
 
------BEGIN PGP SIGNATURE-----
+Note: Accessing eFuses requires eFuse access to be enabled in the
+underlying PMU firmware.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZfIbQACgkQFHw5/5Y0
-tywaFwv+LpjhKUQcMDDrEGqsWh58kXF5Bl2iZNmg3UE4pI+iV5/vRRDgnmUbeNh0
-uvR2DSWZ4z2InBKKubzrNXxVJtfsMtmmjC4gY5kU0n+0Tmsx3XPjhHHet+8A70Hy
-SQ+fC7+d6jqt62kyGTj5mP+F6uoxnj9RwUDjZ3dG3JpI6COKdM5DJTRBSeRBFLm7
-42ui3nU0bd8YhTGE/qbfBFg6Xn/r7dChO2+w/lwZ1yXswwcjp7M9HAIhUAxByHeF
-fe0vPPnOfWsvKW4ItlDb0Jgb1/0pZOWPc8ELk+jTd1PgU2YLo2DEsRxgNn+8RGmb
-ivpoT7QBFenkJ4heC7uuj7a8zJvSJ7+SBJ9tDlXOu1H/0i9orNlOyKeZwVyiGh91
-rK/Mxe07S/xSHpgSEPilCe1uPFrfrZ4+AkJcpdIzayZyeJSiuIQSludd8U6M19Da
-TNijVOxSfkb3kMCQIEDyim/O1pqgzysK/bEnYPKxoIhX/vPDHhdHict1HLYJ1lxo
-CLkTeEy+
-=7RBO
------END PGP SIGNATURE-----
+Use cases are:
+ - Reading/writing user specific eFuses to enable device specific
+   implementations
+ - Revoking SPK IDs
+ - Reading SoC version/DNA
 
---iqZjillVLLPZTvHs--
+[1] https://docs.amd.com/r/en-US/ug1085-zynq-ultrascale-trm/eFUSE
+
+
+Changes in v3:
+- Align ZynqMP eFuse driver with Linux kernel
+- Adapt versal, versal-net and zynqmp to use common chip-id function
+- Enable CMD_FUSE and ZYNQMP_EFUSE for zynqmp_virt and zynqmp_kria defconfig
+- Use 'dev_err' instead 'log_msg_ret' if possible
+
+Changes in v2:
+- Drop vendor specific fuse cmd, use existing fuse cmd
+- Minor code refactoring (reverse x-mas tree)
+
+Lukas Funke (7):
+  configs: zynqmp_kria: Enable CMD_FUSE and ZYNQMP_EFUSE
+  configs: zynqmp_virt: Enable CMD_FUSE and ZYNQMP_EFUSE
+  soc: xilinx: versal: Use zynqmp_pm_get_chipid() to get chip revision
+  soc: xilinx: versal-net: Use zynqmp_pm_get_chipid() to get chip
+    revision
+  soc: xilinx: zynqmp: Use zynqmp_pm_get_chipid() to get chip revision
+  firmware: zynqmp: Add support to access efuses
+  drivers: misc: Add driver to access ZynqMP efuses
+
+ configs/xilinx_zynqmp_kria_defconfig |   2 +
+ configs/xilinx_zynqmp_virt_defconfig |   2 +
+ drivers/firmware/firmware-zynqmp.c   |  31 +++
+ drivers/misc/Kconfig                 |   8 +
+ drivers/misc/Makefile                |   1 +
+ drivers/misc/zynqmp_efuse.c          | 360 +++++++++++++++++++++++++++
+ drivers/soc/soc_xilinx_versal.c      |  13 +-
+ drivers/soc/soc_xilinx_versal_net.c  |  13 +-
+ drivers/soc/soc_xilinx_zynqmp.c      |  21 +-
+ include/zynqmp_firmware.h            |   2 +
+ 10 files changed, 427 insertions(+), 26 deletions(-)
+ create mode 100644 drivers/misc/zynqmp_efuse.c
+
+-- 
+2.30.2
+
