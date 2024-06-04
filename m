@@ -4,82 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 745D5C25B78
-	for <u-boot@archiver.kernel.org>; Tue,  4 Jun 2024 13:21:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C92F0C25B78
+	for <u-boot@archiver.kernel.org>; Tue,  4 Jun 2024 13:21:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F10C8851B;
+	by phobos.denx.de (Postfix) with ESMTP id BE5CA88523;
 	Tue,  4 Jun 2024 15:18:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HRJA3aM3";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E500878F7; Mon,  3 Jun 2024 18:47:46 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A13288395
- for <u-boot@lists.denx.de>; Mon,  3 Jun 2024 18:47:44 +0200 (CEST)
+ id BF1E5883B6; Tue,  4 Jun 2024 09:47:12 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 9701F88458
+ for <u-boot@lists.denx.de>; Tue,  4 Jun 2024 09:47:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=vassilisamir@gmail.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-57a3d21299aso3526213a12.2
- for <u-boot@lists.denx.de>; Mon, 03 Jun 2024 09:47:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717433264; x=1718038064; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xJk3nZkjTANll2KjO1knbe9a/zJQrVBeqbktYmALTcA=;
- b=HRJA3aM3OkzWhd0EQhPq8MEe+FUfcvVGpj9fOn+YzF3np8eJjAo+h4GSE2YIh0oRfU
- L3AWa/gWHjXXBFOLCRltYRZZhWSlkSR3fxWi9+JkxHe6hjCz0uoDo+DbzebMStQmDkxk
- 4ye34zX2qcYz128OMis6bsIpn+Np/wqQE/d3zsOdtmlnZWShHajfUk51sjWslyqPlHJX
- PADraD0om04jEMEmn120tWGtevCIfSFIIIMl040G42WMt5unXoCu1ywYzsRpr3vIapfW
- Y6n+Xvbf3lELHsjw/qN8Opkyc+XQ4sRWs4hd7RT74dSelCBM24hy2SDXPs8qPgHfX173
- 4tGQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717433264; x=1718038064;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=xJk3nZkjTANll2KjO1knbe9a/zJQrVBeqbktYmALTcA=;
- b=eb6eJ+GhFriCcMixM/RuzyTGW5+lRopIMvVC5yn6x3Ocpcg6oRML1NWoTBIwARWzNT
- JhO/Gcbdjwa2cF1TvKptWCSFIQcJ19WaKIP0TenRWTA3YQJP4R8LaGaHKLte84F6Aa3c
- LxJgpXsPVQSDeEoJ05tIxgssMuOPCu0WOGz923g9oVjMTfyfCyG/duX4C/CDCtfb2eY4
- P9523hJnzToDxr8TJkob642niIF4Lp2+SXUioOqRSsV+7p84KpmZANoykPhW1TtENckM
- S7S4ZFPxF3SRz0Xmm/4yJt/eJHkFeeA+ZRzLKQMboY+Xb/pteciB4AQaNUTIAkP76Zci
- vV+Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXLCjTAlM9VMu3J6LSEYoqkfEf7F4RFyZ6nS9pG+BUioQfeRjRkckrhc5Rej7QQ/pZaX8MRLHb5zuAhvYdA6G4WDQdY1g==
-X-Gm-Message-State: AOJu0Yx8PIzXNT79SMluYBn/+GTcrwC97hd7gAg1yYgMGYWY6GtrVyzJ
- PMMIaL17RJWa5viqCHDnxrsjFPinea1WnxQQsBvKZQ+5X0XNhV3n
-X-Google-Smtp-Source: AGHT+IGqBG4H9n9BeYxAw8s+gZhCasJ1RKguTiylGg6oAJG46D7kvow9JeIsPhy/CZ4M+1mfm2wuSQ==
-X-Received: by 2002:a17:906:a1c5:b0:a67:b440:e50f with SMTP id
- a640c23a62f3a-a68224472c9mr607304666b.63.1717433263438; 
- Mon, 03 Jun 2024 09:47:43 -0700 (PDT)
-Received: from localhost.localdomain ([2a04:ee41:82:7577:c014:12e2:7350:b51b])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a67e73faa76sm505449766b.75.2024.06.03.09.47.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Jun 2024 09:47:43 -0700 (PDT)
-From: Vasileios Amoiridis <vassilisamir@gmail.com>
-To: michal.simek@amd.com,
-	trini@konsulko.com
-Cc: santoshsagar.algapally@amd.com, vassilisamir@gmail.com,
- vasileios.amoiridis@cern.ch, LPolak@arri.de, venkatesh.abbarapu@amd.com,
- u-boot@lists.denx.de, sr@denx.de
-Subject: [PATCH v2 1/1] xilinx: Add option to load environment from outside of
- boot media
-Date: Mon,  3 Jun 2024 18:47:38 +0200
-Message-Id: <20240603164738.437834-2-vassilisamir@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240603164738.437834-1-vassilisamir@gmail.com>
-References: <20240603164738.437834-1-vassilisamir@gmail.com>
+ spf=pass smtp.mailfrom=christian.loehle@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 26B4C1042;
+ Tue,  4 Jun 2024 00:47:34 -0700 (PDT)
+Received: from [10.57.86.243] (unknown [10.57.86.243])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 72DCC3F762;
+ Tue,  4 Jun 2024 00:47:08 -0700 (PDT)
+Message-ID: <50bfdbf9-2ab0-4111-bf2e-abe4c9ed86fb@arm.com>
+Date: Tue, 4 Jun 2024 08:47:06 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: obscure microsd detection issue between U-Boot and kernel
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: u-boot <u-boot@lists.denx.de>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Linux MMC List <linux-mmc@vger.kernel.org>,
+ Ulf Hansson <ulf.hansson@linaro.org>
+References: <CAJ+vNU3Ns0RVtROcChGAhfO=XbpnzwQv1SehexbgHX6ST6-Piw@mail.gmail.com>
+ <e0f38bc9-bcc2-4476-a5d4-4f2efaebc0c1@arm.com>
+ <CAJ+vNU0jiVb4caYeQ5HYKZ-dqxcdG1K5pPisJZpfL4q7Sc3zvA@mail.gmail.com>
+Content-Language: en-US
+From: Christian Loehle <christian.loehle@arm.com>
+In-Reply-To: <CAJ+vNU0jiVb4caYeQ5HYKZ-dqxcdG1K5pPisJZpfL4q7Sc3zvA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 04 Jun 2024 15:18:43 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -98,266 +61,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
+On 6/3/24 22:28, Tim Harvey wrote:
+> On Mon, Jun 3, 2024 at 1:18 AM Christian Loehle
+> <christian.loehle@arm.com> wrote:
+>>
+>> On 5/31/24 21:47, Tim Harvey wrote:
+>>> Greetings,
+>>>
+>>> I'm seeing an issue on an imx8mm board (imx8mm-venice-gw73xx) where
+>>> for a specific set of microsd cards if I have accessed the microsd in
+>>> U-Boot with UHS/1.8V the kernel will not recognize that microsd when
+>>> scanning.
+>>>
+>>> The issue does not occur with all microsd cards but seems to appear
+>>> with a large sample size of a specific card/model (Kingston SDC32 32GB
+>>> SDR104 card). I do not see a signal integrity issue on the scope.
+>>>
+>>> Instrumenting the kernel the issue is that the host reports a CRC
+>>> error as soon as the first mmc_send_if_cond call which occurs in
+>>> mmc_rescan_try_freq.
+>>>
+>>> I can avoid the issue by either not accessing the microsd in U-Boot or
+>>> by disabling UHS/1.8V mode in U-Boot therefore what I think is
+>>> happening is that U-Boot leaves the card in UHS/1.8V signalling mode
+>>> and when the kernel scans it sets the voltage back to 3.3V
+>>> standard/default and default timings then issues its clock cycles to
+>>> 'reset' the card and the card does not recognize the reset. I'm
+>>> wondering if this is because the reset is done via clock cycles after
+>>> the kernel has set the I/O voltage back to 3.3V when perhaps the card
+>>> is still in 1.8V mode (although I don't see how that would cause an
+>>> issue)?
+>>
+>> It will cause an issue for many cards and might break some cards.
+>>
+>>>
+>>> Is there some sort of MMC 'reset' I can/should do in U-Boot before
+>>> booting the kernel? Has anyone encountered anything like this before?
+>>
+>> There is no 'switching back' to 3.3V signalling from UHS 1.8V.
+>> The only way this can be done is therefore a full power-off.
+>> Is that done correctly for your system?
+>> AFAIR spec dictates 500ms of <0.5V on VCC. Note that  driving CLK/signal
+>> lines can also sustain the card somewhat, as leakage is only limited
+>> within operating voltage.
+> 
+> Hi Christian,
+> 
+> Are you saying the only way to properly reset from 1.8V is to have a
+> VDD supply on the microSD card that can be turned off before booting
+> to Linux? We have never had that before and never encountered
+> something like this.
 
-Currently, if the environment is not in the current boot media, the
-env_get_location() is returning ENVL_UNKNOWN or ENVL_NOWHERE which
-is not true (i.e booting from FLASH with environment in eMMC). This
-commit adds an extra check to find the environment in the other
-supported boot media, keeping the same priority as of now.
+Yes, the only safe way to use UHS-I really anyway.
+You could disable UHS for u-boot but that still leaves (potentially)
+problematic warm-reboots of the board.
+Having a (software-controlled) switchable regulator on SD VCC is pretty
+common for this reason and you should be able to find it in most dts
+for host controllers with sd-uhs-* property.
+I'm afraid that the relevant spec section isn't available in the
+simplified version.
 
-Signed-off-by: Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
----
- board/xilinx/versal-net/board.c | 47 ++++++++++++++--------------
- board/xilinx/versal/board.c     | 47 ++++++++++++++--------------
- board/xilinx/zynq/board.c       | 49 +++++++++++++++--------------
- board/xilinx/zynqmp/zynqmp.c    | 55 +++++++++++++++++----------------
- 4 files changed, 101 insertions(+), 97 deletions(-)
-
-diff --git a/board/xilinx/versal-net/board.c b/board/xilinx/versal-net/board.c
-index da03024e16..5295221aaa 100644
---- a/board/xilinx/versal-net/board.c
-+++ b/board/xilinx/versal-net/board.c
-@@ -377,29 +377,30 @@ enum env_location env_get_location(enum env_operation op, int prio)
- {
- 	u8 bootmode = versal_net_get_bootmode();
- 
--	if (prio)
--		return ENVL_UNKNOWN;
--
--	switch (bootmode) {
--	case EMMC_MODE:
--	case SD_MODE:
--	case SD1_LSHFT_MODE:
--	case SD_MODE1:
--		if (IS_ENABLED(CONFIG_ENV_IS_IN_FAT))
--			return ENVL_FAT;
--		if (IS_ENABLED(CONFIG_ENV_IS_IN_EXT4))
--			return ENVL_EXT4;
--		return ENVL_NOWHERE;
--	case OSPI_MODE:
--	case QSPI_MODE_24BIT:
--	case QSPI_MODE_32BIT:
--		if (IS_ENABLED(CONFIG_ENV_IS_IN_SPI_FLASH))
--			return ENVL_SPI_FLASH;
--		return ENVL_NOWHERE;
--	case JTAG_MODE:
--	case SELECTMAP_MODE:
--	default:
--		return ENVL_NOWHERE;
-+	if (!prio) {
-+		switch (bootmode) {
-+		case EMMC_MODE:
-+		case SD_MODE:
-+		case SD1_LSHFT_MODE:
-+		case SD_MODE1:
-+			if (IS_ENABLED(CONFIG_ENV_IS_IN_FAT))
-+				return ENVL_FAT;
-+			if (IS_ENABLED(CONFIG_ENV_IS_IN_EXT4))
-+				return ENVL_EXT4;
-+			break;
-+		case OSPI_MODE:
-+		case QSPI_MODE_24BIT:
-+		case QSPI_MODE_32BIT:
-+			if (IS_ENABLED(CONFIG_ENV_IS_IN_SPI_FLASH))
-+				return ENVL_SPI_FLASH;
-+			break;
-+		case JTAG_MODE:
-+		case SELECTMAP_MODE:
-+		default:
-+			return ENVL_NOWHERE;
-+		}
- 	}
-+
-+	return arch_env_get_location(op, prio);
- }
- #endif
-diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c
-index 4f6d56119d..4201c3e2ef 100644
---- a/board/xilinx/versal/board.c
-+++ b/board/xilinx/versal/board.c
-@@ -296,29 +296,30 @@ enum env_location env_get_location(enum env_operation op, int prio)
- {
- 	u32 bootmode = versal_get_bootmode();
- 
--	if (prio)
--		return ENVL_UNKNOWN;
--
--	switch (bootmode) {
--	case EMMC_MODE:
--	case SD_MODE:
--	case SD1_LSHFT_MODE:
--	case SD_MODE1:
--		if (IS_ENABLED(CONFIG_ENV_IS_IN_FAT))
--			return ENVL_FAT;
--		if (IS_ENABLED(CONFIG_ENV_IS_IN_EXT4))
--			return ENVL_EXT4;
--		return ENVL_NOWHERE;
--	case OSPI_MODE:
--	case QSPI_MODE_24BIT:
--	case QSPI_MODE_32BIT:
--		if (IS_ENABLED(CONFIG_ENV_IS_IN_SPI_FLASH))
--			return ENVL_SPI_FLASH;
--		return ENVL_NOWHERE;
--	case JTAG_MODE:
--	case SELECTMAP_MODE:
--	default:
--		return ENVL_NOWHERE;
-+	if (!prio) {
-+		switch (bootmode) {
-+		case EMMC_MODE:
-+		case SD_MODE:
-+		case SD1_LSHFT_MODE:
-+		case SD_MODE1:
-+			if (IS_ENABLED(CONFIG_ENV_IS_IN_FAT))
-+				return ENVL_FAT;
-+			if (IS_ENABLED(CONFIG_ENV_IS_IN_EXT4))
-+				return ENVL_EXT4;
-+			break;
-+		case OSPI_MODE:
-+		case QSPI_MODE_24BIT:
-+		case QSPI_MODE_32BIT:
-+			if (IS_ENABLED(CONFIG_ENV_IS_IN_SPI_FLASH))
-+				return ENVL_SPI_FLASH;
-+			break;
-+		case JTAG_MODE:
-+		case SELECTMAP_MODE:
-+		default:
-+			return ENVL_NOWHERE;
-+		}
- 	}
-+
-+	return arch_env_get_location(op, prio);
- }
- #endif
-diff --git a/board/xilinx/zynq/board.c b/board/xilinx/zynq/board.c
-index 6c36591001..4c9923de18 100644
---- a/board/xilinx/zynq/board.c
-+++ b/board/xilinx/zynq/board.c
-@@ -138,31 +138,32 @@ enum env_location env_get_location(enum env_operation op, int prio)
- {
- 	u32 bootmode = zynq_slcr_get_boot_mode() & ZYNQ_BM_MASK;
- 
--	if (prio)
--		return ENVL_UNKNOWN;
--
--	switch (bootmode) {
--	case ZYNQ_BM_SD:
--		if (IS_ENABLED(CONFIG_ENV_IS_IN_FAT))
--			return ENVL_FAT;
--		if (IS_ENABLED(CONFIG_ENV_IS_IN_EXT4))
--			return ENVL_EXT4;
--		return ENVL_NOWHERE;
--	case ZYNQ_BM_NAND:
--		if (IS_ENABLED(CONFIG_ENV_IS_IN_NAND))
--			return ENVL_NAND;
--		if (IS_ENABLED(CONFIG_ENV_IS_IN_UBI))
--			return ENVL_UBI;
--		return ENVL_NOWHERE;
--	case ZYNQ_BM_NOR:
--	case ZYNQ_BM_QSPI:
--		if (IS_ENABLED(CONFIG_ENV_IS_IN_SPI_FLASH))
--			return ENVL_SPI_FLASH;
--		return ENVL_NOWHERE;
--	case ZYNQ_BM_JTAG:
--	default:
--		return ENVL_NOWHERE;
-+	if (!prio) {
-+		switch (bootmode) {
-+		case ZYNQ_BM_SD:
-+			if (IS_ENABLED(CONFIG_ENV_IS_IN_FAT))
-+				return ENVL_FAT;
-+			if (IS_ENABLED(CONFIG_ENV_IS_IN_EXT4))
-+				return ENVL_EXT4;
-+			break;
-+		case ZYNQ_BM_NAND:
-+			if (IS_ENABLED(CONFIG_ENV_IS_IN_NAND))
-+				return ENVL_NAND;
-+			if (IS_ENABLED(CONFIG_ENV_IS_IN_UBI))
-+				return ENVL_UBI;
-+			break;
-+		case ZYNQ_BM_NOR:
-+		case ZYNQ_BM_QSPI:
-+			if (IS_ENABLED(CONFIG_ENV_IS_IN_SPI_FLASH))
-+				return ENVL_SPI_FLASH;
-+			break;
-+		case ZYNQ_BM_JTAG:
-+		default:
-+			return ENVL_NOWHERE;
-+		}
- 	}
-+
-+	return arch_env_get_location(op, prio);
- }
- 
- #if defined(CONFIG_SET_DFU_ALT_INFO)
-diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
-index f370fb7347..b610668d28 100644
---- a/board/xilinx/zynqmp/zynqmp.c
-+++ b/board/xilinx/zynqmp/zynqmp.c
-@@ -593,34 +593,35 @@ enum env_location env_get_location(enum env_operation op, int prio)
- {
- 	u32 bootmode = zynqmp_get_bootmode();
- 
--	if (prio)
--		return ENVL_UNKNOWN;
--
--	switch (bootmode) {
--	case EMMC_MODE:
--	case SD_MODE:
--	case SD1_LSHFT_MODE:
--	case SD_MODE1:
--		if (IS_ENABLED(CONFIG_ENV_IS_IN_FAT))
--			return ENVL_FAT;
--		if (IS_ENABLED(CONFIG_ENV_IS_IN_EXT4))
--			return ENVL_EXT4;
--		return ENVL_NOWHERE;
--	case NAND_MODE:
--		if (IS_ENABLED(CONFIG_ENV_IS_IN_NAND))
--			return ENVL_NAND;
--		if (IS_ENABLED(CONFIG_ENV_IS_IN_UBI))
--			return ENVL_UBI;
--		return ENVL_NOWHERE;
--	case QSPI_MODE_24BIT:
--	case QSPI_MODE_32BIT:
--		if (IS_ENABLED(CONFIG_ENV_IS_IN_SPI_FLASH))
--			return ENVL_SPI_FLASH;
--		return ENVL_NOWHERE;
--	case JTAG_MODE:
--	default:
--		return ENVL_NOWHERE;
-+	if (!prio) {
-+		switch (bootmode) {
-+		case EMMC_MODE:
-+		case SD_MODE:
-+		case SD1_LSHFT_MODE:
-+		case SD_MODE1:
-+			if (IS_ENABLED(CONFIG_ENV_IS_IN_FAT))
-+				return ENVL_FAT;
-+			if (IS_ENABLED(CONFIG_ENV_IS_IN_EXT4))
-+				return ENVL_EXT4;
-+			break;
-+		case NAND_MODE:
-+			if (IS_ENABLED(CONFIG_ENV_IS_IN_NAND))
-+				return ENVL_NAND;
-+			if (IS_ENABLED(CONFIG_ENV_IS_IN_UBI))
-+				return ENVL_UBI;
-+			break;
-+		case QSPI_MODE_24BIT:
-+		case QSPI_MODE_32BIT:
-+			if (IS_ENABLED(CONFIG_ENV_IS_IN_SPI_FLASH))
-+				return ENVL_SPI_FLASH;
-+			break;
-+		case JTAG_MODE:
-+		default:
-+			return ENVL_NOWHERE;
-+		}
- 	}
-+
-+	return arch_env_get_location(op, prio);
- }
- #endif
- 
--- 
-2.34.1
-
+Kind Regards,
+Christian
