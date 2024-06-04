@@ -4,100 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E965CC25B78
-	for <u-boot@archiver.kernel.org>; Tue,  4 Jun 2024 18:01:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB6BCC25B78
+	for <u-boot@archiver.kernel.org>; Tue,  4 Jun 2024 19:57:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 633B68850A;
-	Tue,  4 Jun 2024 20:01:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C595A87C69;
+	Tue,  4 Jun 2024 21:57:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rlWt5Dp1";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="3sVyK5yw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 288DD8850E; Tue,  4 Jun 2024 20:01:42 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 35B9487D0A; Tue,  4 Jun 2024 21:53:37 +0200 (CEST)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20600.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2416::600])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E1D1E88501
- for <u-boot@lists.denx.de>; Tue,  4 Jun 2024 20:01:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4082F87DCA
+ for <u-boot@lists.denx.de>; Tue,  4 Jun 2024 21:53:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-6f91152ff00so35198a34.1
- for <u-boot@lists.denx.de>; Tue, 04 Jun 2024 11:01:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1717524098; x=1718128898; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=gDXGpmG5Ec7wqK55L5mlvK45HcKk65WoW5SLTyegrNI=;
- b=rlWt5Dp1J0HUnAIa28mi1jWFLEX0dhtLb5xc9vAvO8RDV5WLzwlMiLhN8LoT3h9Hus
- 8/5/BNXjS3BtDkZlsxoQk5g8u9THCy9oq7fOPvv8mRu27uEqhuLasAV43GUtFF+hg0/k
- osXOjPuKzq1aHN0BggKEW2p5z8IoouJsOmHJ4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717524098; x=1718128898;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gDXGpmG5Ec7wqK55L5mlvK45HcKk65WoW5SLTyegrNI=;
- b=YaiHXzUEWZi2QPcaKDvxEgDG3pG3+Zq7DoB9pw2ibo/VJsx7eKlJ2dRVVYPiejwcF1
- ERnPial/flEKpT8HufN2h/+yITs0e/t4nIy7Ew2IdXCjt3s6IOYScg8rZdShr9MvJP2W
- P9KOfmZJU2QnvTEkvn1S47sBhav4i7erxePvuof3umKPHbuobGJy0YSqSzD4EnRiSBQf
- b6AgB1HB8hwQcCgbJHpkiR0j0fEQa1tyitag5whGdIJApfXKFersM1YTriVX7i2oUenV
- rJu4648Qe9flNmRKw3654VTI3oUXDTn3beULglNIxhN4rqamevAy1D48jlfOxzTVWBKM
- xJmg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUFzOjejbB4+dfsx+wTH9s+dOva5ln9Bd3x/g6o54RwNCg0v3J3JiDYuswYcc9nuvvqxROzDSQvuoggUYzw810rL/oW7g==
-X-Gm-Message-State: AOJu0YzFVOIAiz//bZOWqM1KJOE4kopnU0j7fuHg6YPmMO8+wH5kYVRn
- u+3vduFxrwxJuSK6HzJ2ejlzVz038ZV4uOwmXmUJ4W2auhWOSw02A1hXXSsKLR0=
-X-Google-Smtp-Source: AGHT+IEask/J2XI8zztCS0WOugmDF9WC05SW4zRfOyl2ORFLcocS9VoENs5I0jQ4rGk6boY6VU3MDg==
-X-Received: by 2002:a05:6830:124e:b0:6f0:f199:1ccf with SMTP id
- 46e09a7af769-6f936df8d51mr1389701a34.0.1717524098430; 
- Tue, 04 Jun 2024 11:01:38 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
- [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-6f9105231absm2034920a34.11.2024.06.04.11.01.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Jun 2024 11:01:38 -0700 (PDT)
-Date: Tue, 4 Jun 2024 12:01:34 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
- Stefan Bosch <stefan_b@posteo.net>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Ilya Lukin <4.shket@gmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Sergei Antonov <saproj@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>,
- Eddie James <eajames@linux.ibm.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: Re: [PATCH v3 15/25] mbedtls: add X509 cert parser porting layer
-Message-ID: <20240604180134.GN68077@bill-the-cat>
-References: <20240528140955.1960172-1-raymond.mao@linaro.org>
- <20240528140955.1960172-16-raymond.mao@linaro.org>
- <CAC_iWjJry9zAU0B5P+dmBj6E9m+NZqGEZhGj3FZ08SB3q7B1Vg@mail.gmail.com>
- <CAEfUkUJ64bwK_+mz5o_R1RwMtYoLD6=3xtMn-o2czJh5NHi14w@mail.gmail.com>
- <CAC_iWj+rrSz+1n+9kqjw-gkX3ja6SK-35S67pMkkVFAcQuyjLg@mail.gmail.com>
+ spf=fail smtp.mailfrom=Sam.Povilus@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=OM7S+XmPkiN6iso57lrKCkhoYlA7qiJmJJxkhSnNn8SwAeVs0L+6J2/GGxy+Vgy8oNzVyrtxW2MU2VXFB51bsr8AB2+ZlfSFWSZurWKXvG0XC0mSyqMg1Rx3bj4lDDvEHt+jfuxZAaxkYm4FKXxUPyr78OJhFop+2WtOadALxUGa8rjYkb6AFJPw+NcdUZVKf5twI+Glv0+R1QpZzoDxKEmm1Tszb9ksMzWCPI2PYrjc5Y1k7NuSG5z+jrhWogtr3xwOtZx8MJINkmQSDABCYF2GMmaU2ZsP4RQTZU3f9HWqSRTFjD5fCo+pYbthOAGeefYXFBFOFhA/tTQMxsX6Pw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Qw9sR+xGiHGC5fc8QeB4k1LEmzYS+OGwlpeUN+K/00Y=;
+ b=mfVoK9YkD21HJ0wJy+x1I4OL/SxuKkNghdW+VoI+grK05RG99XBBeU2N/yNBE0J7cWIF3TV2fkdGi1P1oB8TisKJegPhJksZ73FIs4Dzcc0ZG2KidfI/Fxh6r9NZIqbDbccVow5Yy+YoqVRE4E5wWfTMR0ndnqLMzvf0jTN7J2ewPv+DYr2/DIUN61ys1HpEeVIDEv6GrUnZ+MiwP7cjJD+gY0k6vUiDFxosAZzHk9Qt0E1XgnpRKU21CZAMeRPb6pPLHYjv+VsVAgYhelyK2aQtqxPUS+JcV4tLmOiZm1eCd9VmZkF6Ayp3RzcijZwYdkEayTtkgAUrsGxZ1+8+FQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=konsulko.com smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Qw9sR+xGiHGC5fc8QeB4k1LEmzYS+OGwlpeUN+K/00Y=;
+ b=3sVyK5ywMSuESRJ3wEwDEgF3+YxKDyjzKDdpR/sTqyTJpclHcpjE2xQDHc7slwsCcElNw7twpgwtffm1e9o9OKlCOZqw59Bc+8nBGB13LACu2qsuOL2aRtD/UtPiMpaPa3sz/UY4S03YSNGOuzxStVGurergKAC15Qpwhnd60PQ=
+Received: from BN9P222CA0029.NAMP222.PROD.OUTLOOK.COM (2603:10b6:408:10c::34)
+ by CH3PR12MB8258.namprd12.prod.outlook.com (2603:10b6:610:128::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.27; Tue, 4 Jun
+ 2024 19:53:28 +0000
+Received: from BN3PEPF0000B06B.namprd21.prod.outlook.com
+ (2603:10b6:408:10c:cafe::a6) by BN9P222CA0029.outlook.office365.com
+ (2603:10b6:408:10c::34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.31 via Frontend
+ Transport; Tue, 4 Jun 2024 19:53:27 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ BN3PEPF0000B06B.mail.protection.outlook.com (10.167.243.70) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7677.0 via Frontend Transport; Tue, 4 Jun 2024 19:53:27 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Tue, 4 Jun
+ 2024 14:53:27 -0500
+Received: from xcoapps69.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
+ Transport; Tue, 4 Jun 2024 14:53:26 -0500
+From: Sam Povilus <sam.povilus@amd.com>
+To: <trini@konsulko.com>, <sjg@chromium.org>, <u-boot@lists.denx.de>
+CC: <git@amd.com>, <michal.simek@amd.com>, Sam Povilus <sam.povilus@amd.com>
+Subject: [PATCH 0/2] Cleanup fit documentation
+Date: Tue, 4 Jun 2024 13:52:54 -0600
+Message-ID: <20240604195256.1820285-1-sam.povilus@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="0Rzp+2bUWFQ7LL+M"
-Content-Disposition: inline
-In-Reply-To: <CAC_iWj+rrSz+1n+9kqjw-gkX3ja6SK-35S67pMkkVFAcQuyjLg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB03.amd.com: sam.povilus@amd.com does not designate
+ permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B06B:EE_|CH3PR12MB8258:EE_
+X-MS-Office365-Filtering-Correlation-Id: fa7660ee-28f0-415c-3ec5-08dc84d000b1
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230031|36860700004|376005|82310400017|1800799015; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?upBNCUjmIH1NgZDMQExS75K0Zpgd8BmaPDo5+EgM7K6WPBfn2jjKjaECeP/R?=
+ =?us-ascii?Q?aNkM7wTwer2A287mDRvQPB7evlsrWfZNufPUth4n1hMEnIHxsVtKoHgmvEYg?=
+ =?us-ascii?Q?TlHzePwR4o+I310VeZAAaClmlrnpjOTOMdy0t0tzenSnNtJNWPvt5JxpMCCx?=
+ =?us-ascii?Q?D44szkOt8kDk0zUKpCrsYl5QlXJ6+LW3jQ+RoLBk4Q1Vq0+IWyckCfro9DT3?=
+ =?us-ascii?Q?FzPhBW4gjlyRTTiRwTbXswGytDjzztsHd11IRGFbqZUIZU6ObZHr6cIb7OOp?=
+ =?us-ascii?Q?A+FRsArK3Sbi63eAWsexDE8zbf83vZLmtjvJt03Wh8i0JgQ/h9oFQfRqnrDY?=
+ =?us-ascii?Q?d7A12H4nQ89k1+F5fkGBRM4HzpZT/ij/FUmiXtsrHrZzuk31NzvVfEv/oGQ0?=
+ =?us-ascii?Q?cfWcyYZtoK8mgR0CDYVJIbvRnVfqdY/03UzxUs2j5xLyy9ylaejuNNbKsM7X?=
+ =?us-ascii?Q?H1rnQB+UiUquIudGMcZ0Mdkznx2KyPdiWuixBCVyI5aeP+sahclfMB2BP3hc?=
+ =?us-ascii?Q?jCEbKEJn7W5x7V7Rdb8jPiJk7XA4P13mnc/ogEPFVfuNjh2KD3Cx24M5sUt6?=
+ =?us-ascii?Q?4RrYxArDqRHiZ5gwVohyLGj7y9zhlzzVMpV5aF8xuLf8Unp/ZCHhyIfpbCnz?=
+ =?us-ascii?Q?temZkFOucNeoAHnICGQQAeXyGygKKsoNgwYIFgsk0q44rc7wWEyoVFr5fg14?=
+ =?us-ascii?Q?ZCy9JDI5yPNTw5H1Q5pFUr1tzj7vZyuaNWwMtfqGGiXU/he2qS08c4lU7p6E?=
+ =?us-ascii?Q?w/X9WQK9e2qstlGlhiLXpv/3Fg3+/bTA9KbXlFa86wVHqngu1hbxCpReC+GR?=
+ =?us-ascii?Q?5QRqQ387ci+/eV8S1BWagj2aBOmlOklbpDk0lCqrpcitv4jHpvaN7a6P2LCX?=
+ =?us-ascii?Q?8Hb9Omo4oGLC2KkGhCDRPaZm4axfj8LLY8TSk7QYZpSiOFQf9fXZFHcpWMIY?=
+ =?us-ascii?Q?+mrTrwx9+wcjHy7S5Fa3XLlTMgT4ppNKhRxOa4qbF4btWZdzFeSrFiUEbB2s?=
+ =?us-ascii?Q?nDyyDd0ekMrLZncyXcExM4k6w7uIfRmRb6UyBx9AzN0jZ4C/uVCdGX6MlVvs?=
+ =?us-ascii?Q?Hd5ZiZcuaPFzNF6jgaZsXL6dDybyVp62g4IIfNvAUl6g8O59HjP31eo84sbC?=
+ =?us-ascii?Q?ULb+NjgTmdqLwa+A0uB8AdX8DAL9Ov/82suXeSoYfwyORgd61qNOXAW/pz5W?=
+ =?us-ascii?Q?zgi9Gs5r4/sUXx4n7SM0J5A65uq8CFKGyUflhYFl2G4PmpHqofhBXrYN9VUQ?=
+ =?us-ascii?Q?jXT0SpBPlWZI5Tx6X58Y/OevIadfVwtNtWYy7hN4+Ts23gUaLu5Ij5Zv0dat?=
+ =?us-ascii?Q?/ok7s1YjIytmoPlK+x+osvNkm1sYFawham1mf2VzTSSGcgH8080/4fr+NJfy?=
+ =?us-ascii?Q?4OYBiDJUZSAqw2ccZnYWUKTjJKkWSsgeuMrgVHBjCjycbKrong=3D=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(36860700004)(376005)(82310400017)(1800799015); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jun 2024 19:53:27.8197 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: fa7660ee-28f0-415c-3ec5-08dc84d000b1
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B06B.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8258
+X-Mailman-Approved-At: Tue, 04 Jun 2024 21:57:40 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,131 +144,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Sam Povilus (2):
+  doc: Remove extraneous curly braces
+  doc: add clarity to what a "fpga" image is
 
---0Rzp+2bUWFQ7LL+M
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+ doc/usage/fit/source_file_format.rst | 28 ++++++++++++++--------------
+ 1 file changed, 14 insertions(+), 14 deletions(-)
 
-On Tue, Jun 04, 2024 at 07:53:54PM +0300, Ilias Apalodimas wrote:
-> On Tue, 4 Jun 2024 at 19:05, Raymond Mao <raymond.mao@linaro.org> wrote:
-> >
-> > Hi Ilias,
-> >
-> > On Fri, 31 May 2024 at 07:42, Ilias Apalodimas <ilias.apalodimas@linaro=
-=2Eorg> wrote:
-> >>
-> >> On Tue, 28 May 2024 at 17:15, Raymond Mao <raymond.mao@linaro.org> wro=
-te:
-> >> >
-> >> > Add porting layer for X509 cert parser on top of MbedTLS X509
-> >> > library.
-> >> >
-> >> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> >> > ---
-> >> > Changes in v2
-> >> > - Move the porting layer to MbedTLS dir.
-> >> > Changes in v3
-> >> > - None.
-> >> >
-> >> >  lib/mbedtls/Makefile           |   1 +
-> >> >  lib/mbedtls/x509_cert_parser.c | 497 ++++++++++++++++++++++++++++++=
-+++
-> >> >  2 files changed, 498 insertions(+)
-> >> >  create mode 100644 lib/mbedtls/x509_cert_parser.c
-> >> >
-> >
-> > [snip]
-> >>
-> >> > diff --git a/lib/mbedtls/x509_cert_parser.c b/lib/mbedtls/x509_cert_=
-parser.c
-> >> > new file mode 100644
-> >> > index 00000000000..b0867d31047
-> >> > --- /dev/null
-> >> > +++ b/lib/mbedtls/x509_cert_parser.c
-> >>
-> > [snip]
-> >>
-> >> > +static int x509_set_cert_flags(struct x509_certificate *cert)
-> >> > +{
-> >> > +       struct public_key_signature *sig =3D cert->sig;
-> >> > +
-> >> > +       if (!sig || !cert->pub) {
-> >> > +               pr_err("Signature or public key is not initialized\n=
-");
-> >> > +               return -ENOPKG;
-> >> > +       }
-> >> > +
-> >> > +       if (!cert->pub->pkey_algo)
-> >> > +               cert->unsupported_key =3D true;
-> >> > +
-> >> > +       if (!sig->pkey_algo)
-> >> > +               cert->unsupported_sig =3D true;
-> >> > +
-> >> > +       if (!sig->hash_algo)
-> >> > +               cert->unsupported_sig =3D true;
-> >> > +
-> >> > +       /* TODO: is_hash_blacklisted()? */
-> >>
-> >> Is this supported by our current implementation?
-> >>
-> > This is not supported currently either. I just copied the TODO mark
-> > from legacy lib.
-> >
-> > [snip]
-> >>
-> >> > +               }
-> >> > +               goto out;
-> >> > +       }
-> >> > +
-> >> > +       pr_devel("Cert Self-signature verified");
-> >> > +       cert->self_signed =3D true;
-> >> > +
-> >> > +out:
-> >> > +       return ret;
-> >> > +
-> >> > +not_self_signed:
-> >> > +       return 0;
-> >> > +}
-> >>
-> >> the whole function looks like a copy of lib/crypto/x509_public_key.c.
-> >> Can you move all the c/p ones to a common file that the existing and
-> >> mbedTLS implementations can use?
-> >>
-> > Per a previous discussion with Tom, eventually we tend to keep only one
-> > crypto lib, that is the reason I prefer to copy/optimize a few existing
-> > functions into MbedTLS implementation instead of creating another
-> > common file.
->=20
-> Regardless of the implementation, the common functions should reside
-> in a common file which will be used regardless of mbedTLS or the
-> existing stack.
-> We do not want to fix bugs twice
+-- 
+2.34.1
 
-And please keep in mind we already have _two_ implementations at times
-today, and it will stay that way even when mbedTLS replaces legacy
-options.  The ARM HW SHA256 option for example is going to likely be
-used over mbedTLS SHA256.
-
---=20
-Tom
-
---0Rzp+2bUWFQ7LL+M
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZfVncACgkQFHw5/5Y0
-tywctgwAj16VOUOTtvNMe9sbqakGZa66I0lAkjL8AYM6uKxbIGUSSEA0Q8rUKVtg
-EBfjCYaajISpQyXtFid+UY9JgAbQX5b9Vw+DHfjHTmE4++cUTlS7ELSSPRoPHVXV
-ZUHKiVjSXSqkxdfCNm/Uce5VZzSALrb1q1yo4pbZw8l764RE+sAbo1lEd1ldWEVi
-sN/TBIpBnZxEkxxJzCNFfPwZ4d5uRL4kPn/FJ9q5VivInhvWSL9j8bkGKteCR3RC
-2umgLgO37UyVz5AOhKb4ek1SuiuT0D8ZnwLUDkK/WvySF3rZbDEMtEqgifkhHjjb
-72iVZnmxRYO+gHozS5IWONYrArj8tqxbSiMQdib3fb+o0K6SmSaPI/eN8Glkd1Da
-20VBPPze3+rX4khNEmgmeyBB/rDsMHh6XrevRn3IBoFF83pNykKm/vlABGzZ868F
-sSfo25p4Pk6aHKY4/Mx8IPwJC/wg3S8Wt0PrqO4zT8iezacMU76RvLFA5/mwRQCh
-W6A5tXqs
-=F2+c
------END PGP SIGNATURE-----
-
---0Rzp+2bUWFQ7LL+M--
