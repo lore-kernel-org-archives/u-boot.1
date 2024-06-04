@@ -4,95 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C74EC25B78
-	for <u-boot@archiver.kernel.org>; Tue,  4 Jun 2024 16:16:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA95FC25B78
+	for <u-boot@archiver.kernel.org>; Tue,  4 Jun 2024 16:26:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A36F8850D;
-	Tue,  4 Jun 2024 18:16:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=collins.com
+	by phobos.denx.de (Postfix) with ESMTP id 3293888476;
+	Tue,  4 Jun 2024 18:26:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collins.com header.i=@collins.com header.b="QZ0vf8mO";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="i4KBvzSn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D91187D46; Tue,  4 Jun 2024 18:16:28 +0200 (CEST)
-Received: from mx0b-00105401.pphosted.com (mx0b-00105401.pphosted.com
- [67.231.152.184])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 464C5884EE; Tue,  4 Jun 2024 18:26:48 +0200 (CEST)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07F15884EF
- for <u-boot@lists.denx.de>; Tue,  4 Jun 2024 18:16:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AA8DD883EA
+ for <u-boot@lists.denx.de>; Tue,  4 Jun 2024 18:26:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=collins.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=brandon.maier@collins.com
-Received: from pps.filterd (m0346902.ppops.net [127.0.0.1])
- by mx0a-00105401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 454D2lAA018429; Tue, 4 Jun 2024 16:16:24 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=collins.com; h=cc :
- content-transfer-encoding : date : from : in-reply-to : message-id :
- mime-version : references : subject : to; s=POD051818;
- bh=sehCcUXVxz+5bAv1bM5Ca63k2VPgW9ZPXF5bmL+IAKA=;
- b=QZ0vf8mOusX6462zVQlFXaXNYM0ZVmfYzHEU4dA/jrZnJBKu03puSDkvEHFIzIWvORdK
- NtLa+AsTsCMgpWNEESb/1HFdrW17+UhxfgUtv+8NJfR+rWtYJYJLFFdwexYwz+oKLrY3
- /279uBvAzOCt3zPKKlNxdQsre8Q/sAkgnBZQfjzgn648w0k0eE1dscTX4BnHPyzlBQw/
- QbqZJpFPdce//kGTvBxRfXMYf53/FcwaKd+zCvtPBC2awnDBQb/syjLh3OeIt+ALILE0
- NueVYCd1miTWbhDkn9vN1l7Bwc3ouKYbxR7rxLRrOgaSorYRejByOC2tmXw6f9d7N7yc GA== 
-Received: from xusxph009rp050.rtx.com (xusxph009rp050.rtx.com [128.13.125.147])
- by mx0a-00105401.pphosted.com (PPS) with ESMTPS id 3yhxxcd7ns-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 04 Jun 2024 16:16:24 +0000
-Received: from xusxph008rp020.corp.ray.com ([128.13.124.224])
- by xusxph009rp050.rtx.com (8.17.1.19/8.17.1.19) with ESMTPS id 454GGMRw020302
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 4 Jun 2024 16:16:23 GMT
-Received: from ciulimr02.rockwellcollins.com
- (snat-utc-mailhub.rockwellcollins.com [10.172.224.19])
- by xusxph008rp020.corp.ray.com (8.17.1.19/8.17.1.19) with ESMTPS id
- 454GGLC1013086
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Tue, 4 Jun 2024 16:16:22 GMT
-X-Received: from bspbox.kirk (unknown [10.148.204.208])
- by ciulimr02.rockwellcollins.com (Postfix) with ESMTP id B4CB410029B1;
- Tue,  4 Jun 2024 11:16:21 -0500 (CDT)
-From: Brandon Maier <brandon.maier@collins.com>
-To: u-boot@lists.denx.de
-Cc: Brandon Maier <brandon.maier@collins.com>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH 3/3] tools: patman: fix deprecated Python ConfigParser methods
-Date: Tue,  4 Jun 2024 16:16:07 +0000
-Message-ID: <20240604161607.1133032-3-brandon.maier@collins.com>
-X-Mailer: git-send-email 2.45.1
-In-Reply-To: <20240604161607.1133032-1-brandon.maier@collins.com>
-References: <20240604161607.1133032-1-brandon.maier@collins.com>
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1f480624d0fso42843805ad.1
+ for <u-boot@lists.denx.de>; Tue, 04 Jun 2024 09:26:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1717518404; x=1718123204; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=dEx1rVAHtKZQlt52qabqIe8rKfgt3hzrdz8GYgFFs/w=;
+ b=i4KBvzSnTYxxl2yN1sHUqJAq2EyP7MquJkofiQ8dQW4gxsriqawQOoyUn6dHarTv9V
+ yJashYzBLAYhZCo0xIcwUXcsaJyan25d5ZSz6Sfqy8xkytj7MfE1CuCm63m3aU9ho4Zt
+ 3bqeVFy6+FpKoOhGuR23STksu14OwAFF515JUCl93B3B8Dcl1lwbUrK6gdbwnpcF+HAY
+ pdL6AZTzI0EBHFyHXjUZxXz+rfVpvNyxxwfUFd+lf4Z5Vj4x5eU+3nCB7blsKguQ5zVh
+ gashID6A1xzovE4Jm44LTE65cG5bsssLX8gua1H1L0J7pwN3kW3yhwhX3K/5C0027ULk
+ pBSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717518404; x=1718123204;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dEx1rVAHtKZQlt52qabqIe8rKfgt3hzrdz8GYgFFs/w=;
+ b=epr7a8pvbD+XyWNNZuFFVdVxbBUOaDwMLxv7fy0byIaJ8prSc2KrcbL6ht3UD79iG+
+ 06QZZx5Y29aHtGaoW18zK9kLf9T4SdrYunZtMlJhIJj+u6FHs2YaWWP4naiH1axYU9o8
+ ULuIjD1sRUY0yFK9ap1V5sQn2g4fqew+5aw+y5nkPXNO9yDAvqr+yuHe900Ftf74mfr2
+ 53V9MOhzJ1kew7bkdSkkRV5l0xWRpSGrYxLjxKpqIpe0f1TMBwefOxqoGPc4M+RAliGj
+ D57C5nRvt+iyBOfKGr2uyloM3XBxnKynaqP6bbA2Z96qYIo9hvPW4wvFHXwMHp18tha/
+ CSSQ==
+X-Gm-Message-State: AOJu0YzGu3eNYngfU30EJETIFyelflIm84tlqaOQy46Qj9CwEHyHyt7D
+ 4WnDjsWPAfxlZqTahh7Qn80fhpt3jL250k7I43abeyyEtAkMZbZEEWrWCvFZxpq/iFtUPy5yLT6
+ cAliAaHxlony+Q2yBaPkzLINdzyBfqTx8qc5AAQ==
+X-Google-Smtp-Source: AGHT+IERL+A+ttrFeCpZ9NRfUfE19cuckxLwiKs7GuoN+52Cumh/ziYAHqz792WlRgOfR7tOo6arP6m1dr61cDkkZbM=
+X-Received: by 2002:a17:90b:534f:b0:2c1:a068:ba83 with SMTP id
+ 98e67ed59e1d1-2c1dc57e027mr10789642a91.11.1717518404086; Tue, 04 Jun 2024
+ 09:26:44 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-06-04_09,2024-06-04_01,2024-05-17_01
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-06-04_09,2024-06-04_01,2024-05-17_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0
- phishscore=0 spamscore=0
- adultscore=0 suspectscore=0 bulkscore=0 malwarescore=0 mlxlogscore=999
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2405010000
- definitions=main-2406040130
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0
- bulkscore=0 suspectscore=0
- adultscore=0 mlxlogscore=995 malwarescore=0 spamscore=0 mlxscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2405010000
- definitions=main-2406040130
-X-Proofpoint-ORIG-GUID: L3Rv9sG11PuZk2feBml7SqAlZjHpzpUU
-X-Proofpoint-GUID: L3Rv9sG11PuZk2feBml7SqAlZjHpzpUU
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-06-04_09,2024-06-04_01,2024-05-17_01
-X-Proofpoint-Spam-Details: rule=outbound_default_notspam
- policy=outbound_default score=0
- impostorscore=0 phishscore=0 adultscore=0 spamscore=0 malwarescore=0
- mlxlogscore=999 mlxscore=0 priorityscore=1501 bulkscore=0 clxscore=1015
- lowpriorityscore=0 suspectscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.12.0-2405010000 definitions=main-2406040130
+References: <20240528140955.1960172-1-raymond.mao@linaro.org>
+ <20240528140955.1960172-20-raymond.mao@linaro.org>
+ <CAC_iWjK7st0ttFuuX22eMtRraGin2dikMUu5_C1cY8J9KvKESw@mail.gmail.com>
+In-Reply-To: <CAC_iWjK7st0ttFuuX22eMtRraGin2dikMUu5_C1cY8J9KvKESw@mail.gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Tue, 4 Jun 2024 12:26:32 -0400
+Message-ID: <CAEfUkU+08oVT1ZKaEM=vONoqT64gX8pAyntruwwPNZ_CjfXg3g@mail.gmail.com>
+Subject: Re: [PATCH v3 19/25] mbedtls: add MSCode parser porting layer
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Stefan Bosch <stefan_b@posteo.net>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
+ Michal Simek <michal.simek@amd.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Simon Glass <sjg@chromium.org>, Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jesse Taube <mr.bossman075@gmail.com>,
+ Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Sergei Antonov <saproj@gmail.com>, Ilya Lukin <4.shket@gmail.com>,
+ Bin Meng <bmeng@tinylab.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Alexander Gendin <agendin@matrox.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,53 +105,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The method `ConfigParser.readfp()` is marked deprecated[1].
+Hi Ilias,
 
-In Python 3.12 this method have been removed, so replace it with
-`ConfigParser.read_file()`.
+On Fri, 31 May 2024 at 06:03, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+wrote:
 
-[1] https://docs.python.org/3.11/library/configparser.html#configparser.ConfigParser.readfp
+> On Tue, 28 May 2024 at 17:17, Raymond Mao <raymond.mao@linaro.org> wrote:
+> >
+> > Add porting layer for MSCode on top of MbedTLS ASN1 library.
+> >
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > ---
+> > Changes in v2
+> > - Move the porting layer to MbedTLS dir.
+> > Changes in v3
+> > - None.
+> >
+> >  lib/mbedtls/Makefile        |   1 +
+> >  lib/mbedtls/mscode_parser.c | 111 ++++++++++++++++++++++++++++++++++++
+> >  2 files changed, 112 insertions(+)
+> >  create mode 100644 lib/mbedtls/mscode_parser.c
+> >
+>
+> [snip]
 
-Signed-off-by: Brandon Maier <brandon.maier@collins.com>
-CC: Simon Glass <sjg@chromium.org>
----
- tools/patman/settings.py | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+> > diff --git a/lib/mbedtls/mscode_parser.c b/lib/mbedtls/mscode_parser.c
+> > new file mode 100644
+> > index 00000000000..34715f3a137
+> > --- /dev/null
+> > +++ b/lib/mbedtls/mscode_parser.c
+>
+> [snip]
 
-diff --git a/tools/patman/settings.py b/tools/patman/settings.py
-index 636983e32da..68c93e313b3 100644
---- a/tools/patman/settings.py
-+++ b/tools/patman/settings.py
-@@ -59,25 +59,25 @@ class _ProjectConfigParser(ConfigParser.ConfigParser):
- 
-     # Check to make sure that bogus project gets general alias.
-     >>> config = _ProjectConfigParser("zzz")
--    >>> config.readfp(StringIO(sample_config))
-+    >>> config.read_file(StringIO(sample_config))
-     >>> str(config.get("alias", "enemies"))
-     'Evil <evil@example.com>'
- 
-     # Check to make sure that alias gets overridden by project.
-     >>> config = _ProjectConfigParser("sm")
--    >>> config.readfp(StringIO(sample_config))
-+    >>> config.read_file(StringIO(sample_config))
-     >>> str(config.get("alias", "enemies"))
-     'Green G. <ugly@example.com>'
- 
-     # Check to make sure that settings get merged with project.
-     >>> config = _ProjectConfigParser("linux")
--    >>> config.readfp(StringIO(sample_config))
-+    >>> config.read_file(StringIO(sample_config))
-     >>> sorted((str(a), str(b)) for (a, b) in config.items("settings"))
-     [('am_hero', 'True'), ('check_patch_use_tree', 'True'), ('process_tags', 'False')]
- 
-     # Check to make sure that settings works with unknown project.
-     >>> config = _ProjectConfigParser("unknown")
--    >>> config.readfp(StringIO(sample_config))
-+    >>> config.read_file(StringIO(sample_config))
-     >>> sorted((str(a), str(b)) for (a, b) in config.items("settings"))
-     [('am_hero', 'True')]
-     """
--- 
-2.45.1
+>
+> > + *
+> > + */
+> > +int mscode_parse(void *_ctx, const void *content_data, size_t data_len,
+> > +                size_t asn1hdrlen)
+> > +{
+> > +       struct pefile_context *ctx = _ctx;
+> > +       unsigned char *p = (unsigned char *)content_data;
+> > +       unsigned char *end = (unsigned char *)content_data + data_len;
+>
+> Why are you dropping const here?
+>
+> mbedtls_asn1_get_tag requires the args without const.
 
+Regards,
+Raymond
