@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7837C27C52
-	for <u-boot@archiver.kernel.org>; Tue,  4 Jun 2024 17:47:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E965CC25B78
+	for <u-boot@archiver.kernel.org>; Tue,  4 Jun 2024 18:01:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F39178851A;
-	Tue,  4 Jun 2024 19:47:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 633B68850A;
+	Tue,  4 Jun 2024 20:01:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="U1/1FkcM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rlWt5Dp1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B94228851C; Tue,  4 Jun 2024 19:47:18 +0200 (CEST)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
+ id 288DD8850E; Tue,  4 Jun 2024 20:01:42 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 443F7884D2
- for <u-boot@lists.denx.de>; Tue,  4 Jun 2024 19:47:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E1D1E88501
+ for <u-boot@lists.denx.de>; Tue,  4 Jun 2024 20:01:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-24c9f6338a4so2400398fac.1
- for <u-boot@lists.denx.de>; Tue, 04 Jun 2024 10:47:16 -0700 (PDT)
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-6f91152ff00so35198a34.1
+ for <u-boot@lists.denx.de>; Tue, 04 Jun 2024 11:01:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1717523235; x=1718128035; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1717524098; x=1718128898; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=dCMmvfZnDlb7Mj1HNvmaHw/68yOwXOOFwuNo6kZSyBM=;
- b=U1/1FkcMJpuTOOxrZgPCshfBzyH+2dPAHXH6rEMTA8FwrgcwFe9JG/wKqGpwtPvoLn
- TSp+OHKDGoJh0xhDCgahjnERUAheRCQzA8ZsFVgHyecdOWivxStVhERyjASQd/7IzREo
- 2AeQZPQ8u8YnxoQEmiJh84YNTyKyrh5XSnF8w=
+ bh=gDXGpmG5Ec7wqK55L5mlvK45HcKk65WoW5SLTyegrNI=;
+ b=rlWt5Dp1J0HUnAIa28mi1jWFLEX0dhtLb5xc9vAvO8RDV5WLzwlMiLhN8LoT3h9Hus
+ 8/5/BNXjS3BtDkZlsxoQk5g8u9THCy9oq7fOPvv8mRu27uEqhuLasAV43GUtFF+hg0/k
+ osXOjPuKzq1aHN0BggKEW2p5z8IoouJsOmHJ4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717523235; x=1718128035;
+ d=1e100.net; s=20230601; t=1717524098; x=1718128898;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dCMmvfZnDlb7Mj1HNvmaHw/68yOwXOOFwuNo6kZSyBM=;
- b=DzFmX+WKKOltXVL18a0zHqR7ZylJoujkO2EQLYMmq4yD/vckNV99EQcfaiDf8CITBl
- AIY3L6k6Id0Y0yqUNmHPzzZL3I2QZML13Z3LhlROMLZlccL1/D8vzeVEli87lRJqXjG8
- r7Zf68EQBcN1Ck+GTg2FAR9fzyZLWMtTd0wnD8WCpPXtiZHMmwu07UzIys5404T2vz71
- t89VT7tH/L1nrG9ip20Hn6FNiKSIKAelwOCTWew5KbAgxghu9MreMNeLEt1cEFVzfYI0
- IXXVk5cuLcuVy/YG6DfwwWkl/u6VbYOgaa2VsjQv4lZQMCEDYVb6Y6lwvcKIMWUGYOwz
- T0XQ==
+ bh=gDXGpmG5Ec7wqK55L5mlvK45HcKk65WoW5SLTyegrNI=;
+ b=YaiHXzUEWZi2QPcaKDvxEgDG3pG3+Zq7DoB9pw2ibo/VJsx7eKlJ2dRVVYPiejwcF1
+ ERnPial/flEKpT8HufN2h/+yITs0e/t4nIy7Ew2IdXCjt3s6IOYScg8rZdShr9MvJP2W
+ P9KOfmZJU2QnvTEkvn1S47sBhav4i7erxePvuof3umKPHbuobGJy0YSqSzD4EnRiSBQf
+ b6AgB1HB8hwQcCgbJHpkiR0j0fEQa1tyitag5whGdIJApfXKFersM1YTriVX7i2oUenV
+ rJu4648Qe9flNmRKw3654VTI3oUXDTn3beULglNIxhN4rqamevAy1D48jlfOxzTVWBKM
+ xJmg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV6uAw8fosPFuDRJ84vhs/f31dRVACEZTDnxG3+v8Ooolrc9ifAlNQFCuRmjfisbbwmxxwl6Cp1679an+OeGt+k6IUZUA==
-X-Gm-Message-State: AOJu0YyI6fZkWzO9sTHeXwCq91vvR/kkRcMCEy4ild8el44AuK3/PZLR
- TZ8RU0Rlnuh/M0yPz2z8Gz824sa+TDNOEQ8g+iDFJ3cyl0QvKA0ceBX6L/ndsq0=
-X-Google-Smtp-Source: AGHT+IG2i8BlZMKU5SMaoCjE7Jo4BmOxX70ehHX/h3pQ4kMddGI5KtsOrUvl5yqQxucMQbvOc6/x8Q==
-X-Received: by 2002:a05:6870:eca6:b0:24f:dd11:4486 with SMTP id
- 586e51a60fabf-25121fec0e0mr290992fac.36.1717523234701; 
- Tue, 04 Jun 2024 10:47:14 -0700 (PDT)
+ AJvYcCUFzOjejbB4+dfsx+wTH9s+dOva5ln9Bd3x/g6o54RwNCg0v3J3JiDYuswYcc9nuvvqxROzDSQvuoggUYzw810rL/oW7g==
+X-Gm-Message-State: AOJu0YzFVOIAiz//bZOWqM1KJOE4kopnU0j7fuHg6YPmMO8+wH5kYVRn
+ u+3vduFxrwxJuSK6HzJ2ejlzVz038ZV4uOwmXmUJ4W2auhWOSw02A1hXXSsKLR0=
+X-Google-Smtp-Source: AGHT+IEask/J2XI8zztCS0WOugmDF9WC05SW4zRfOyl2ORFLcocS9VoENs5I0jQ4rGk6boY6VU3MDg==
+X-Received: by 2002:a05:6830:124e:b0:6f0:f199:1ccf with SMTP id
+ 46e09a7af769-6f936df8d51mr1389701a34.0.1717524098430; 
+ Tue, 04 Jun 2024 11:01:38 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
  [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25084f8b071sm3430986fac.21.2024.06.04.10.47.12
+ 46e09a7af769-6f9105231absm2034920a34.11.2024.06.04.11.01.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Jun 2024 10:47:14 -0700 (PDT)
-Date: Tue, 4 Jun 2024 11:47:11 -0600
+ Tue, 04 Jun 2024 11:01:38 -0700 (PDT)
+Date: Tue, 4 Jun 2024 12:01:34 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
  Stefan Bosch <stefan_b@posteo.net>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  Michal Simek <michal.simek@amd.com>,
@@ -77,30 +77,26 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
  "Leon M. Busch-George" <leon@georgemail.eu>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilya Lukin <4.shket@gmail.com>, Sergei Antonov <saproj@gmail.com>,
+ Ilya Lukin <4.shket@gmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Sergei Antonov <saproj@gmail.com>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>,
+ Eddie James <eajames@linux.ibm.com>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: Re: [PATCH v3 03/25] mbedtls: add mbedtls into the build system
-Message-ID: <20240604174711.GM68077@bill-the-cat>
-References: <20240528140955.1960172-4-raymond.mao@linaro.org>
- <20240529165814.GQ2568172@bill-the-cat>
- <CAEfUkU+zKyaqc5tFy0rN3ofm3pRuckZX6PbD00VNtWQc5COZyA@mail.gmail.com>
- <20240529180129.GB3714513@bill-the-cat>
- <CAEfUkUJj5Y+uVmRXx+=DP-6O7dpNcMjSA1jADKaJo07RSsBjHw@mail.gmail.com>
- <20240529184255.GC3714513@bill-the-cat>
- <CAEfUkUJOD=KEnUo=7BD14mW2yfq8ZnGREqMgOQfx2pkWxLvtzQ@mail.gmail.com>
- <20240529194715.GD3714513@bill-the-cat>
- <CAC_iWjL4Qr+9DB6VWe8tFJSk030FNwuoWCV4kj+ivaU+PesbbQ@mail.gmail.com>
- <CAEfUkUJiAm==v-Wr4bQBGnvX3evRAUoH0Vznf2Y+ZO6wZVXjsA@mail.gmail.com>
+Subject: Re: [PATCH v3 15/25] mbedtls: add X509 cert parser porting layer
+Message-ID: <20240604180134.GN68077@bill-the-cat>
+References: <20240528140955.1960172-1-raymond.mao@linaro.org>
+ <20240528140955.1960172-16-raymond.mao@linaro.org>
+ <CAC_iWjJry9zAU0B5P+dmBj6E9m+NZqGEZhGj3FZ08SB3q7B1Vg@mail.gmail.com>
+ <CAEfUkUJ64bwK_+mz5o_R1RwMtYoLD6=3xtMn-o2czJh5NHi14w@mail.gmail.com>
+ <CAC_iWj+rrSz+1n+9kqjw-gkX3ja6SK-35S67pMkkVFAcQuyjLg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="IYrFWNubF6OsSBRE"
+ protocol="application/pgp-signature"; boundary="0Rzp+2bUWFQ7LL+M"
 Content-Disposition: inline
-In-Reply-To: <CAEfUkUJiAm==v-Wr4bQBGnvX3evRAUoH0Vznf2Y+ZO6wZVXjsA@mail.gmail.com>
+In-Reply-To: <CAC_iWj+rrSz+1n+9kqjw-gkX3ja6SK-35S67pMkkVFAcQuyjLg@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -119,289 +115,130 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---IYrFWNubF6OsSBRE
+--0Rzp+2bUWFQ7LL+M
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, May 31, 2024 at 01:07:23PM -0400, Raymond Mao wrote:
-> Hi Ilias and Tom,
->=20
-> On Thu, 30 May 2024 at 16:17, Ilias Apalodimas <ilias.apalodimas@linaro.o=
-rg>
-> wrote:
->=20
-> > Hi Tom
+On Tue, Jun 04, 2024 at 07:53:54PM +0300, Ilias Apalodimas wrote:
+> On Tue, 4 Jun 2024 at 19:05, Raymond Mao <raymond.mao@linaro.org> wrote:
 > >
-> > On Wed, 29 May 2024 at 22:47, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Wed, May 29, 2024 at 03:42:04PM -0400, Raymond Mao wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Wed, 29 May 2024 at 14:43, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > > On Wed, May 29, 2024 at 02:38:10PM -0400, Raymond Mao wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Wed, 29 May 2024 at 14:01, Tom Rini <trini@konsulko.com> wro=
+> > Hi Ilias,
+> >
+> > On Fri, 31 May 2024 at 07:42, Ilias Apalodimas <ilias.apalodimas@linaro=
+=2Eorg> wrote:
+> >>
+> >> On Tue, 28 May 2024 at 17:15, Raymond Mao <raymond.mao@linaro.org> wro=
 te:
-> > > > > >
-> > > > > > > On Wed, May 29, 2024 at 01:42:16PM -0400, Raymond Mao wrote:
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > On Wed, 29 May 2024 at 12:58, Tom Rini <trini@konsulko.com>
-> > wrote:
-> > > > > > > >
-> > > > > > > > > On Tue, May 28, 2024 at 07:09:14AM -0700, Raymond Mao wro=
-te:
-> > > > > > > > >
-> > > > > > > > > > Port mbedtls with dummy libc header files.
-> > > > > > > > > > Add mbedtls default config header file.
-> > > > > > > > > > Optimize mbedtls default config by disabling unused
-> > features to
-> > > > > > > > > > reduce the target size.
-> > > > > > > > > > Add mbedtls kbuild makefile.
-> > > > > > > > > > Add Kconfig and mbedtls config submenu.
-> > > > > > > > > [snip]
-> > > > > > > > > > diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
-> > > > > > > > > > new file mode 100644
-> > > > > > > > > > index 00000000000..d6e77d56871
-> > > > > > > > > > --- /dev/null
-> > > > > > > > > > +++ b/lib/mbedtls/Kconfig
-> > > > > > > > > > @@ -0,0 +1,25 @@
-> > > > > > > > > > +menuconfig MBEDTLS_LIB
-> > > > > > > > > > +     bool "Use mbedtls libraries"
-> > > > > > > > > > +     select MBEDTLS_LIB_CRYPTO
-> > > > > > > > > > +     select MBEDTLS_LIB_X509
-> > > > > > > > > > +     help
-> > > > > > > > > > +       Enable mbedtls libraries
-> > > > > > > > > > +
-> > > > > > > > > > +if MBEDTLS_LIB
-> > > > > > > > > > +
-> > > > > > > > > > +config MBEDTLS_LIB_CRYPTO
-> > > > > > > > > > +     bool "Crypto library"
-> > > > > > > > > > +     help
-> > > > > > > > > > +       Enable mbedtls crypto library
-> > > > > > > > > > +
-> > > > > > > > > > +config MBEDTLS_LIB_X509
-> > > > > > > > > > +     bool "X509 library"
-> > > > > > > > > > +     help
-> > > > > > > > > > +       Enable mbedtls X509 library
-> > > > > > > > > > +
-> > > > > > > > > > +config MBEDTLS_LIB_TLS
-> > > > > > > > > > +     bool "TLS library"
-> > > > > > > > > > +     help
-> > > > > > > > > > +       Enable mbedtls TLS library
-> > > > > > > > > > +
-> > > > > > > > > > +endif # MBEDTLS_LIB
-> > > > > > > > >
-> > > > > > > > > We need much more granularity here, and to re-think some
-> > existing
-> > > > > > > > > symbols too perhaps. What we should be able to do is pick
-> > mbedTLS
-> > > > > or
-> > > > > > > > > "legacy SW implementation" or "HW implementation" for the
-> > various
-> > > > > > > > > algorithms, and that in turn can have some higher level
-> > grouping
-> > > > > to it.
-> > > > > > > > > This should then negate a bunch of the Makefile work you'=
-re
-> > doing
-> > > > > as we
-> > > > > > > > > won't have CONFIG_SHA256 enabled as we'll have
-> > > > > > > CONFIG_MBEDTLS_LIB_SHA256
-> > > > > > > > > or whatever enabled.
-> > > > > > > > >
-> > > > > > > >
-> > > > > > > > I think we should use CONFIG_MBEDTLS_LIB_[CRYPTO,X509,TLS] =
-for
-> > > > > high-level
-> > > > > > > > grouping.
-> > > > > > > > Underneath, the CONFIG_SHA[1,256,512] switches (and other
-> > crypto
-> > > > > options)
-> > > > > > > > can be
-> > > > > > > > used as sub build options in both MbedTLS and "legacy libs".
-> > > > > > > >
-> > > > > > > > Take hash as an example, if the users prefer to use MbedTLS
-> > other
-> > > > > than
-> > > > > > > > "legacy libs" for
-> > > > > > > > hash operation, CONFIG_MBEDTLS_LIB_CRYPTO should be defined=
- as
-> > the
-> > > > > main
-> > > > > > > > switch
-> > > > > > > > (the users can still prefer to use "legacy libs" for X509 by
-> > > > > > > > keeping  CONFIG_MBEDTLS_LIB_X509
-> > > > > > > > disabled).
-> > > > > > > > Then enable the algorithms they need (e.g. CONFIG_SHA256) -=
- the
-> > > > > algorithm
-> > > > > > > > options works
-> > > > > > > > for both MbedTLS and "legacy libs".
-> > > > > > > >
-> > > > > > > > HW implementations with MbedTLS (aka, Alternative algorithm=
-s in
-> > > > > MbedTLS)
-> > > > > > > is
-> > > > > > > > another
-> > > > > > > > topic which is not covered in this patch set (It needs to
-> > migrate
-> > > > > each
-> > > > > > > > vendor's solution under
-> > > > > > > > MbedTLS alternative algorithm).
-> > > > > > > > Current patch set is focused on SW implementation with Mbed=
-TLS.
-> > > > > > >
-> > > > > > > The "easy" problem with what's in v3 is that X509 and CRYPTO =
-are
-> > > > > > > select'd under the main heading.
-> > > > > >
-> > > > > > Not sure if I get what you mentioned, currently all MbedTLS
-> > options are
-> > > > > > under
-> > > > > > Library routines > Security support
-> > > > > > Do you think we should keep them in other places?
-> > > > > >
-> > > > > >
-> > > > > > > The harder problem is that we
-> > > > > > > intentionally have granularity for SHA256, SHA512, etc, etc a=
-nd
-> > all of
-> > > > > > > that goes away with the current Kconfig option if you select
-> > mbedTLS.
-> > > > > We
-> > > > > > > need to bring that back. And we shouldn't need to have all of
-> > the ifneq
-> > > > > > > statements in Makefiles because both CONFIG_SHA256 and
-> > > > > > > CONFIG_MBEDLTS_LIB_CRYPTO_SHA256 will not be true (Or possibl=
-y,
-> > > > > > > CONFIG_SHA256 gates things U-Boot's internal API for sha256'i=
-ng
-> > > > > > > something and CONFIG_LEGACY_SHA256 controls building
-> > lib/sha256.c).
-> > > > > > >
-> > > > > > > I think we should not introduce new ones like CONFIG_LEGACY_,
-> > > > > > CONFIG_SHA[1,256,512] should be used no matter whether MbedTLS =
-is
-> > > > > > enabled or not.
-> > > > > > I understand your concern, I will bring CONFIG_SHA[1,256,512] b=
-ack
-> > when
-> > > > > > MbedTLS is enabled. Those options should control the options in=
- the
-> > > > > MbedTLS
-> > > > > > default config file.
-> > > > >
-> > > > > My concern is that we do not have the correct level of granularit=
-y,
-> > and
-> > > > > that can partly be seen by the number of ifneq(...) statements be=
-ing
-> > > > > added around already conditional logic. We should have almost non=
-e of
-> > > > > those, in the end, is what I'm saying. We have a mechanism for
-> > > > > configuring the build, Kconfig, and that should drive the decisio=
-ns
-> > as
-> > > > > much as possible.
-> > > >
-> > > > The `ifneq(ONFIG_MBEDTLS_LIB_*)` statements are due to the fact tha=
-t we
-> > > > still
-> > > > need lib/Makefile and lib/crypto/Makefile when building hash and x5=
-09
-> > > > stuffs with
-> > > > MbedTLS enabled.
-> > > > To address this, I guess we have to first refactor all "legacy libs"
-> > that
-> > > > will be replaced
-> > > > by MbedTLS:
-> > > > Move md5, sha* from lib to to a new dir lib/hash and move public_ke=
-y,
-> > > > rsapubkey*,
-> > > > rsa_helper, x509*, pkcs7*,mscode* from lib/crypto to a new dir
-> > lib/x509.
-> > > > When they are all independent modules with separated Makefile, we c=
-an
-> > remove
-> > > > `ifneq(ONFIG_MBEDTLS_LIB_*)` and all can be driven in lib/Makefile.
-> > > >
-> > > > Is that something you expect?
-> > > > If yes I can do this for v4, or put it into another
-> > prerequisite/refactor
-> > > > series.
-> > >
+> >> >
+> >> > Add porting layer for X509 cert parser on top of MbedTLS X509
+> >> > library.
+> >> >
+> >> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> >> > ---
+> >> > Changes in v2
+> >> > - Move the porting layer to MbedTLS dir.
+> >> > Changes in v3
+> >> > - None.
+> >> >
+> >> >  lib/mbedtls/Makefile           |   1 +
+> >> >  lib/mbedtls/x509_cert_parser.c | 497 ++++++++++++++++++++++++++++++=
++++
+> >> >  2 files changed, 498 insertions(+)
+> >> >  create mode 100644 lib/mbedtls/x509_cert_parser.c
+> >> >
 > >
-> > Just trying to make sure we are all on the same page here.
-> > Your main concerns are that the configuration options are not on par,
-> > we lack granularity, and it's currently confusing to turn the feature
-> > on since we have to enable both CONFIG_SHA256 &&
-> > CONFIG_MBEDTLS_LIB_CRYPTO. This also leads to makefiles being a bit
-> > weird-looking as well. Correct?
+> > [snip]
+> >>
+> >> > diff --git a/lib/mbedtls/x509_cert_parser.c b/lib/mbedtls/x509_cert_=
+parser.c
+> >> > new file mode 100644
+> >> > index 00000000000..b0867d31047
+> >> > --- /dev/null
+> >> > +++ b/lib/mbedtls/x509_cert_parser.c
+> >>
+> > [snip]
+> >>
+> >> > +static int x509_set_cert_flags(struct x509_certificate *cert)
+> >> > +{
+> >> > +       struct public_key_signature *sig =3D cert->sig;
+> >> > +
+> >> > +       if (!sig || !cert->pub) {
+> >> > +               pr_err("Signature or public key is not initialized\n=
+");
+> >> > +               return -ENOPKG;
+> >> > +       }
+> >> > +
+> >> > +       if (!cert->pub->pkey_algo)
+> >> > +               cert->unsupported_key =3D true;
+> >> > +
+> >> > +       if (!sig->pkey_algo)
+> >> > +               cert->unsupported_sig =3D true;
+> >> > +
+> >> > +       if (!sig->hash_algo)
+> >> > +               cert->unsupported_sig =3D true;
+> >> > +
+> >> > +       /* TODO: is_hash_blacklisted()? */
+> >>
+> >> Is this supported by our current implementation?
+> >>
+> > This is not supported currently either. I just copied the TODO mark
+> > from legacy lib.
 > >
-> > The suggestion is that we add 3 symbols overall (again only using
-> > sha256 as an example, this applies to all)
-> > CONFIG_LEGACY_SHA256 -> This is the renamed CONFIG_SHA256
-> > CONFIG_MBEDTLS_SHA256 -> new symbol and has to map the existing options
-> > CONFIG_SHA256 -> This gets selected if either of the above is on and
-> > we use it to control the API.
-> >
-> > > We should not need to do that because we should not have CONFIG_SHA256
-> > > set if we are not building lib/sha256.c at that stage, is what I'm
-> > > saying.
-> >
-> > I am fine with all the above. This is the part that confused me. If we
-> > end up with the symbols above, we will need,
-> >
-> > obj-CONFIG_LEGACY$(SPL_)SHA256 -> compiles the existing code
-> > obj-CONFIG_MBEDTLS$(SPL_)SHA256 -> compiles the new mbedTLS variant,
-> > which now goes into a new .c file instead of an ifdef in the existing
-> > lib/sha256.c
-> >
-> > Did I miss anything?
-> >
-> >
-> Moreover, to prevent user selecting algorithms mixed up from MbedTLS and
-> the legacy
-> ones (e.g. sha1 from legacy lib but sha256 from MbedTLS):
+> > [snip]
+> >>
+> >> > +               }
+> >> > +               goto out;
+> >> > +       }
+> >> > +
+> >> > +       pr_devel("Cert Self-signature verified");
+> >> > +       cert->self_signed =3D true;
+> >> > +
+> >> > +out:
+> >> > +       return ret;
+> >> > +
+> >> > +not_self_signed:
+> >> > +       return 0;
+> >> > +}
+> >>
+> >> the whole function looks like a copy of lib/crypto/x509_public_key.c.
+> >> Can you move all the c/p ones to a common file that the existing and
+> >> mbedTLS implementations can use?
+> >>
+> > Per a previous discussion with Tom, eventually we tend to keep only one
+> > crypto lib, that is the reason I prefer to copy/optimize a few existing
+> > functions into MbedTLS implementation instead of creating another
+> > common file.
 >=20
-> When any of 'CONFIG_LEGACY_<alg>' is ON, CONFIG_LEGACY_CRYPTO is
-> selected automatically.
-> When each of 'CONFIG_ MBEDTLS  _<alg>' is ON, CONFIG_MBEDTLS_LIB_CRYPTO
-> is selected automatically.
-> Mark CONFIG_LEGACY_CRYPTO and CONFIG_MBEDTLS_LIB_CRYPTO as
-> mutually exclusive.
->=20
-> Is this correct?
+> Regardless of the implementation, the common functions should reside
+> in a common file which will be used regardless of mbedTLS or the
+> existing stack.
+> We do not want to fix bugs twice
 
-That's correct, but backwards in my mind.  The user should pick "legacy
-SW" or "mbedTLS" or "HW" and then "SHA256" or "SHA512". So it's really
-that If the user selects MBEDTLS_LIB_CRYPTO and SHA256 then
-MBEDTLS_LIB_CRYPTO_SHA256 is selected automatically. Does this make
-sense?
+And please keep in mind we already have _two_ implementations at times
+today, and it will stay that way even when mbedTLS replaces legacy
+options.  The ARM HW SHA256 option for example is going to likely be
+used over mbedTLS SHA256.
 
 --=20
 Tom
 
---IYrFWNubF6OsSBRE
+--0Rzp+2bUWFQ7LL+M
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZfUxQACgkQFHw5/5Y0
-tyxaMQwAnWOLPZUrufqSolcmAGmBe+VA97qz5ox5ES6rU1KZsqZ02ZggY5smAs4T
-j+MKbgUXcX8vL544gi/37U91iu9/mOaZRyCqNzZLQbU7guhkeWLabzUbQfMzVRe8
-BjpM4052YdBYDa+ewnkCvQ1DEy6rQkAIqVE+bwbvAIPxh2WuvPbixGG7I2n/bpVw
-eaAAVtsG+6wX3l6ZzGibG98+GM6nLNp07lu/VqmMf8mhCkAHTH36CE75KqY6m9S6
-mb//Gmps90nPrT1Z9dqUqd41/CHZyn+FHEvezBV0P6gwh2q4JWbGoqxaQD2SYmRY
-ovLL0Xdv7TXSwYXNR580JARJMVjt+cX4TfdJiZyjaGFA2TOKFFCDMuyzwCwqYicd
-MboylyFwhJznVYRDys8bLN+ujRwRT2CiZNBBH8qT+fQN+JoC0Bsbhzr+G9Pk8ZuS
-KG4i4i3os8g3cqTQR6CekpwpgI/9GWBKPG2ikoEBUGNBJC+CjEf8aZtkbz6RNBAz
-KafiQUJp
-=OCuq
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZfVncACgkQFHw5/5Y0
+tywctgwAj16VOUOTtvNMe9sbqakGZa66I0lAkjL8AYM6uKxbIGUSSEA0Q8rUKVtg
+EBfjCYaajISpQyXtFid+UY9JgAbQX5b9Vw+DHfjHTmE4++cUTlS7ELSSPRoPHVXV
+ZUHKiVjSXSqkxdfCNm/Uce5VZzSALrb1q1yo4pbZw8l764RE+sAbo1lEd1ldWEVi
+sN/TBIpBnZxEkxxJzCNFfPwZ4d5uRL4kPn/FJ9q5VivInhvWSL9j8bkGKteCR3RC
+2umgLgO37UyVz5AOhKb4ek1SuiuT0D8ZnwLUDkK/WvySF3rZbDEMtEqgifkhHjjb
+72iVZnmxRYO+gHozS5IWONYrArj8tqxbSiMQdib3fb+o0K6SmSaPI/eN8Glkd1Da
+20VBPPze3+rX4khNEmgmeyBB/rDsMHh6XrevRn3IBoFF83pNykKm/vlABGzZ868F
+sSfo25p4Pk6aHKY4/Mx8IPwJC/wg3S8Wt0PrqO4zT8iezacMU76RvLFA5/mwRQCh
+W6A5tXqs
+=F2+c
 -----END PGP SIGNATURE-----
 
---IYrFWNubF6OsSBRE--
+--0Rzp+2bUWFQ7LL+M--
