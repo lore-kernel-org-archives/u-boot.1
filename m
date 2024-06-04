@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA4CEC25B78
-	for <u-boot@archiver.kernel.org>; Tue,  4 Jun 2024 16:44:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD55CC25B78
+	for <u-boot@archiver.kernel.org>; Tue,  4 Jun 2024 16:54:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2303C8751B;
-	Tue,  4 Jun 2024 18:44:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4BBE388499;
+	Tue,  4 Jun 2024 18:54:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ebclVvGq";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="j3Th/rsp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 280168751B; Tue,  4 Jun 2024 18:44:09 +0200 (CEST)
-Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
- [IPv6:2607:f8b0:4864:20::534])
+ id B69E88813F; Tue,  4 Jun 2024 18:54:35 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B510386F6E
- for <u-boot@lists.denx.de>; Tue,  4 Jun 2024 18:44:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DC9687842
+ for <u-boot@lists.denx.de>; Tue,  4 Jun 2024 18:54:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-6c8c880f526so2237674a12.3
- for <u-boot@lists.denx.de>; Tue, 04 Jun 2024 09:44:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-578517c7ae9so1641838a12.3
+ for <u-boot@lists.denx.de>; Tue, 04 Jun 2024 09:54:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1717519445; x=1718124245; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1717520073; x=1718124873; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Ign5DC3nVF+TeTlaDlcbLkxdAbHjoA0OxfpEpZ67up0=;
- b=ebclVvGqgywflcgz+Dud0hWQaDLKi3oeW3z3Q79TKMm5EpmYRV1NmsiEEw5l6gU32s
- O9DGgGmTnWtMSJXN17OZbZxMok9tIA73TD42AYT9UwxkNl/xXAkVri3RSo+YTup8owym
- MF+8Ai8FRl4emSJGtu1OEWWZCLealo0Tyfo8wib2afUJcENFdyOu7fsgxq0+fJyXg5nf
- +kKj5RJK5N66IeHPB41dfzdCoAmphi5IjLnXeJMGLGN5KwU/mNecW8Sh8Kk6PdQQE8M3
- oOSikOc77oW6o00cgKK4Skt0gQob0UFxsyhDA6m1pVqQ2i/pSoMG4Rs6qD4WVVwwz6yC
- 2b1A==
+ bh=x6vwYDS0ecoZV5NzO14pd+Uwwd/Gu6BobE422eLzlDY=;
+ b=j3Th/rspURrItIO8mYJO1O6EsCbGnSE1qAQfIkFhFWUjb+Te7xDG3NeYlYH9gxOx08
+ eE4WsWyYcopWv3iHopx3gRsoBJVxzoH1SzrJvbTQQFfhfeZObnsrgh+T9l0rdanOvz1p
+ 7OE8jMkTbpvZ6od1Fhb4KrZWLpvCjtWqFQpI3JmmdfEG13MApafm8HTJDozybdJ+kNmy
+ urSfLyaZWbGPTyxYR+bOKfCbUkMoBGrRgYw3IYyaSZVdfyhUPbTSiVFmDcCSUflRt0ob
+ 86DH9c4oUXoeVr01vl5lTOBuFS6ELfrMzXAo8us25Zgj2RPPE/7qeC4x+C1Md+ncv58h
+ VY1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717519445; x=1718124245;
+ d=1e100.net; s=20230601; t=1717520073; x=1718124873;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Ign5DC3nVF+TeTlaDlcbLkxdAbHjoA0OxfpEpZ67up0=;
- b=H1QRw0V/oewqvWqofggSeGiG5WjjDa9q+a7amCxwMbwyI4YIXRAEpUek38rGHqv7mH
- QdECA3XrITb/kt63SIpYkAGoc4w/jRYbhmsENMtMZkdvCyFTl7VhBWRD9fp70CqLESx0
- jjXZ3AIh5qn79y4fJuHHI0gTsdpMhVq1ENL66yIZiZcWO+zgAYCIfnTFQSI9LPVkBzR2
- JpPUOUuM1+aB5GTnXLz7FSbWQTI+ukA2NnGXnLuvmb1r77bOUYLfZo2V8p1Hy1lSqM8n
- ++ZxvMXIZZ5D4KXNaWSbwAsC0t7zejGaoPmMpAE77ShWm8Z4omhX8NIX/H39ofOOm1N2
- ySPA==
-X-Gm-Message-State: AOJu0YwaWBZM+BRKgBByHfg/m7G1vSqCIhJSfhtqUnRONiKXMxHojCQa
- eIrXHjt+5Lg+r8yV30J/MreazJaC0vwwxgMOvyKLB4P1zWsIS6hA521YrcoDkCmkOQBDwWhePaQ
- TtqLRDGrNgOZdgVGbEeuPm3YF362yZSE1jKkQfQ==
-X-Google-Smtp-Source: AGHT+IE5R9OcefrzY2dPA1Rh/64R2YQ7wUSU989bnerXSwNy3IW09Xg1rFtNTH6YEn27soZ2VgSD4/50EtIOiUNpCCE=
-X-Received: by 2002:a05:6a20:f39e:b0:1af:ac6c:367f with SMTP id
- adf61e73a8af0-1b2b713e000mr150879637.44.1717519445160; Tue, 04 Jun 2024
- 09:44:05 -0700 (PDT)
+ bh=x6vwYDS0ecoZV5NzO14pd+Uwwd/Gu6BobE422eLzlDY=;
+ b=M9OBRULrN4sjbvqHzrAsub+88KX1++MTge+4bPC5W7q2C+0RT1aWjxCfR45nPLdOjO
+ DEP7sVv9k+KV1iHa5rnDelK/dkup9ldkHW6IsyefsIwvUafNZICkx9K9oYbE8mciHDVm
+ MzIDTV2/HNQ38l5AXOhsLBJIERWEAvE+C9AbjvHNfApWolmKfY+9p9RCKfXwBIk9jm0C
+ poBfKP/PvTV1ll5CNFwi/dlyTkT3xIvZjCyyib9Ntgmu/eVQS/NAwi8+GcczEUUo+hpk
+ ZmNPXrxUC79SR9BKHG3ujFE5mwRQsCQP7OMhlwf0iFY237byB0uUNfNR9VKMd1hdSjWL
+ 0BjQ==
+X-Gm-Message-State: AOJu0YxTzrSdMU3h85GpR510NR4uStn4+/KKMo7q2K1wP6jgW4jXvBVx
+ R5GcE9EIdq7YgwZWQHgbd6NNJR4sfFXdbV/fqd6N2GfHOVG85SeUCSOeT7qOlVD0N80kDJJNfRB
+ BEG8qhbvtHtm95Lzlt2aQN/ciKPt5HyOHb3HaHv2UDWRvCGcg
+X-Google-Smtp-Source: AGHT+IExSnSbI+ddkiwoW43JfzbfCA/xjR4Llcdxo+anuV2cnZZd/krsRP4DUFQTuPREwFIkM99T4wjoCo+sZK5rTD0=
+X-Received: by 2002:a17:906:24c3:b0:a68:cb91:1b91 with SMTP id
+ a640c23a62f3a-a699f88866amr7437066b.36.1717520072674; Tue, 04 Jun 2024
+ 09:54:32 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240528140955.1960172-1-raymond.mao@linaro.org>
- <20240528140955.1960172-22-raymond.mao@linaro.org>
- <CAC_iWj+16ytziB5tT+hRF5gkyh+Mm_U9fWEdo6r4w72rzVmghg@mail.gmail.com>
-In-Reply-To: <CAC_iWj+16ytziB5tT+hRF5gkyh+Mm_U9fWEdo6r4w72rzVmghg@mail.gmail.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Tue, 4 Jun 2024 12:43:52 -0400
-Message-ID: <CAEfUkUJ2cq7-OWu-AqmoRq0WRriPvuBGvvFX=q8GMjOfZ8H=Dw@mail.gmail.com>
-Subject: Re: [PATCH v3 21/25] mbedtls: add RSA helper layer on MbedTLS
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+ <20240528140955.1960172-16-raymond.mao@linaro.org>
+ <CAC_iWjJry9zAU0B5P+dmBj6E9m+NZqGEZhGj3FZ08SB3q7B1Vg@mail.gmail.com>
+ <CAEfUkUJ64bwK_+mz5o_R1RwMtYoLD6=3xtMn-o2czJh5NHi14w@mail.gmail.com>
+In-Reply-To: <CAEfUkUJ64bwK_+mz5o_R1RwMtYoLD6=3xtMn-o2czJh5NHi14w@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 4 Jun 2024 19:53:54 +0300
+Message-ID: <CAC_iWj+rrSz+1n+9kqjw-gkX3ja6SK-35S67pMkkVFAcQuyjLg@mail.gmail.com>
+Subject: Re: [PATCH v3 15/25] mbedtls: add X509 cert parser porting layer
+To: Raymond Mao <raymond.mao@linaro.org>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Stefan Bosch <stefan_b@posteo.net>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
@@ -79,17 +80,15 @@ Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
  Sean Anderson <seanga2@gmail.com>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Jesse Taube <mr.bossman075@gmail.com>,
  Bryan Brattlof <bb@ti.com>, 
- "Leon M. Busch-George" <leon@georgemail.eu>, Sergei Antonov <saproj@gmail.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>, 
- Manorit Chawdhry <m-chawdhry@ti.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ "Leon M. Busch-George" <leon@georgemail.eu>, Ilya Lukin <4.shket@gmail.com>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>, Sergei Antonov <saproj@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Alexander Gendin <agendin@matrox.com>, 
+ Bin Meng <bmeng@tinylab.org>, Eddie James <eajames@linux.ibm.com>, 
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,78 +105,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
-
-On Fri, 31 May 2024 at 06:00, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-wrote:
-
-> Hi Raymond,
+On Tue, 4 Jun 2024 at 19:05, Raymond Mao <raymond.mao@linaro.org> wrote:
 >
-> [...]
+> Hi Ilias,
 >
-> > +
-> > +/**
-> > + * rsa_parse_pub_key() - decodes the BER encoded buffer and stores in
-> the
-> > + *                       provided struct rsa_key, pointers to the raw
-> key as is,
-> > + *                       so that the caller can copy it or MPI parse
-> it, etc.
-> > + *
-> > + * @rsa_key:   struct rsa_key key representation
-> > + * @key:       key in BER format
-> > + * @key_len:   length of key
-> > + *
-> > + * Return:     0 on success or error code in case of error
-> > + */
-> > +int rsa_parse_pub_key(struct rsa_key *rsa_key, const void *key,
-> > +                     unsigned int key_len)
-> > +{
-> > +       int ret = 0;
-> > +       mbedtls_pk_context pk;
-> > +       mbedtls_rsa_context *rsa;
-> > +
-> > +       mbedtls_pk_init(&pk);
-> > +
-> > +       ret = mbedtls_pk_parse_public_key(&pk, (const unsigned char
-> *)key,
-> > +                                         key_len);
-> > +       if (ret) {
-> > +               pr_err("Failed to parse public key, ret:-0x%04x\n",
-> > +                      (unsigned int)-ret);
-> > +               ret = -EINVAL;
-> > +               goto clean_pubkey;
-> > +       }
-> > +
-> > +       /* Ensure that it is a RSA key */
-> > +       if (mbedtls_pk_get_type(&pk) != MBEDTLS_PK_RSA) {
-> > +               pr_err("Non-RSA keys are not supported\n");
-> > +               ret = -EKEYREJECTED;
-> > +               goto clean_pubkey;
-> > +       }
-> > +
-> > +       /* Get RSA key context */
-> > +       rsa = mbedtls_pk_rsa(pk);
-> > +       if (!rsa) {
-> > +               pr_err("Failed to get RSA key context, ret:-0x%04x\n",
-> > +                      (unsigned int)-ret);
+> On Fri, 31 May 2024 at 07:42, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
+>>
+>> On Tue, 28 May 2024 at 17:15, Raymond Mao <raymond.mao@linaro.org> wrote:
+>> >
+>> > Add porting layer for X509 cert parser on top of MbedTLS X509
+>> > library.
+>> >
+>> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+>> > ---
+>> > Changes in v2
+>> > - Move the porting layer to MbedTLS dir.
+>> > Changes in v3
+>> > - None.
+>> >
+>> >  lib/mbedtls/Makefile           |   1 +
+>> >  lib/mbedtls/x509_cert_parser.c | 497 +++++++++++++++++++++++++++++++++
+>> >  2 files changed, 498 insertions(+)
+>> >  create mode 100644 lib/mbedtls/x509_cert_parser.c
+>> >
 >
-> Why do we need to cast the result here? Just print ret
-> Also, would it make sense to create a mapping between mbedTLS API
-> errors and internal error codes?
-> instead of doing ret -EINVAL etc  we could have something like
-> ret = mbedtls_to_errno(ret);
+> [snip]
+>>
+>> > diff --git a/lib/mbedtls/x509_cert_parser.c b/lib/mbedtls/x509_cert_parser.c
+>> > new file mode 100644
+>> > index 00000000000..b0867d31047
+>> > --- /dev/null
+>> > +++ b/lib/mbedtls/x509_cert_parser.c
+>>
+> [snip]
+>>
+>> > +static int x509_set_cert_flags(struct x509_certificate *cert)
+>> > +{
+>> > +       struct public_key_signature *sig = cert->sig;
+>> > +
+>> > +       if (!sig || !cert->pub) {
+>> > +               pr_err("Signature or public key is not initialized\n");
+>> > +               return -ENOPKG;
+>> > +       }
+>> > +
+>> > +       if (!cert->pub->pkey_algo)
+>> > +               cert->unsupported_key = true;
+>> > +
+>> > +       if (!sig->pkey_algo)
+>> > +               cert->unsupported_sig = true;
+>> > +
+>> > +       if (!sig->hash_algo)
+>> > +               cert->unsupported_sig = true;
+>> > +
+>> > +       /* TODO: is_hash_blacklisted()? */
+>>
+>> Is this supported by our current implementation?
+>>
+> This is not supported currently either. I just copied the TODO mark
+> from legacy lib.
 >
-> I can remove all the cast.
-But it is not able to 1/1 map the mbedtls errors to general ones via a
-helper
-function since the error code should reflect the current scenario of the
-operation.
-Even with the same MbedTLS API and same error code, the purpose of
-caller is different, it is hard to get them mapped in a common
-interpretation.
+> [snip]
+>>
+>> > +               }
+>> > +               goto out;
+>> > +       }
+>> > +
+>> > +       pr_devel("Cert Self-signature verified");
+>> > +       cert->self_signed = true;
+>> > +
+>> > +out:
+>> > +       return ret;
+>> > +
+>> > +not_self_signed:
+>> > +       return 0;
+>> > +}
+>>
+>> the whole function looks like a copy of lib/crypto/x509_public_key.c.
+>> Can you move all the c/p ones to a common file that the existing and
+>> mbedTLS implementations can use?
+>>
+> Per a previous discussion with Tom, eventually we tend to keep only one
+> crypto lib, that is the reason I prefer to copy/optimize a few existing
+> functions into MbedTLS implementation instead of creating another
+> common file.
 
-[...]
+Regardless of the implementation, the common functions should reside
+in a common file which will be used regardless of mbedTLS or the
+existing stack.
+We do not want to fix bugs twice
 
-Regards,
-Raymond
+Regards
+/Ilias
+
+>
+> Regards,
+> Raymond
