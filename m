@@ -4,76 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17E2DC25B78
-	for <u-boot@archiver.kernel.org>; Tue,  4 Jun 2024 23:13:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9D7DC25B78
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 01:33:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49518879F3;
-	Wed,  5 Jun 2024 01:13:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 99FF087D0A;
+	Wed,  5 Jun 2024 03:33:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=disengage.co
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HjYPJ7OO";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AD6A88096; Wed,  5 Jun 2024 01:13:16 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 47BB388126; Wed,  5 Jun 2024 00:47:49 +0200 (CEST)
+Received: from 137-he.filtered.junkemailfilter.com
+ (137-he.filtered.junkemailfilter.com [184.105.182.137])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7357D87D0A
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 01:13:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3FFCF87B4D
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 00:47:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=disengage.co
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a68a288b8a4so214711266b.2
- for <u-boot@lists.denx.de>; Tue, 04 Jun 2024 16:13:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717542794; x=1718147594; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5Wf9wuPsx+3XX63Q9cDup0/WINIXm/EpQw8DReG11Io=;
- b=HjYPJ7OOQlQh3bSf3x7uvhzlgA0xo4im/5LhuqgaigNFH55AcaVHghh7K+eSSzXk1A
- iY4w6RJMXi8lcYq6Qs2EAD8xNkxPIWTYZdcCZQdXgnceY4URnbVG2DrrGX8uzSXdTiQ9
- z+FFwnN1TUDXgcVn7xLKjjJxHcvqmZ/BZWQGBsJ3VE7fBZLlj3XyI8wA09l8Xoo1SAot
- dguscrXeznOMroASOUCVJH9GfVesu/rgHFu/jmatv57Y3xABIyBzXgIPpx4hORmCrD/I
- WNIBOOCQIQK8SXk2qMiCcaUvKgdRUfMk9DI0aOr3Qthrlz0huEHbyroGetxaXVAxSoqz
- wohw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717542794; x=1718147594;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=5Wf9wuPsx+3XX63Q9cDup0/WINIXm/EpQw8DReG11Io=;
- b=oiBuiafxXWiKkpUP6wUWFvblGUr8/kM5q3OTLe2JKWb25jWRblXycNTSOo8lYxUC0W
- 7Drubu+bm3U+oCSx2lEh1DOUkNW7orQxmV05vGdBAKW1oH3EpZiiAxBs1IOMdZAIYICD
- 8ZhOhNlqjMqQJFdZn7xs+63h/IOZ3qdDfNQT8URJe4qqmAt29tx6dPjA/j7vy+TU4gva
- GnGm5Fj4i7OUSEQ8N5CXQOMu3F8nGHj00BBnZylMg8xerNJlt0c8jBOb/iVtyw0H4LJs
- rg3fJ53Eq/6kUl4LlM2JVQdKd9xhCqffPbL9c+rruwLHe4v+Zj+JpkyiEYdkA3tQ8Lk8
- WoMA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVLjSBQ04RvDA27SEAUNACdoil4ysbxWMkSn8thbMaQk4v1PySlUKUr+jae6nSQNZHYvzeyNCjmX8zZ3trSgHWYTgi3fA==
-X-Gm-Message-State: AOJu0YzupPl7ddgMBleEdd5tNXuJixpaR3PtFeO3qGidEhfsECj7V+IB
- pqTv/JiHtfgIxAvs0CQV7EkiFxoT+4LsO15ZKkXKPmr40diJ0b3PF7GbF/EY9awNaZ/18fPcxAY
- vM8A4g87n1ZMZ0V1bt6iBxcG78Jg=
-X-Google-Smtp-Source: AGHT+IGjKYHwFXsGluUxaP4FR8oi3eiBleX0ne1pzcgyzp58i/uBPEQVNXewycRqTJp22rIkOEeGfQrQIRrVKx6M4dY=
-X-Received: by 2002:a50:d54f:0:b0:578:5756:1519 with SMTP id
- 4fb4d7f45d1cf-57a8b6ac996mr657631a12.16.1717542793702; Tue, 04 Jun 2024
- 16:13:13 -0700 (PDT)
+ spf=pass smtp.mailfrom=pm88hpxmdxke@disengage.co
+Delivery-date: Tue, 04 Jun 2024 15:47:46 -0700
+Received: from smtp3.opayq.com ([23.23.126.237]:49832) (helo=[23.23.126.237])
+ by opayq-outbound2.junkemailfilter.com with esmtps
+ (TLSv1.2:ECDHE-RSA-AES256-SHA384:256) (JEF)
+ id 1sEcwS-0005th-O4 (on interface=184.105.182.155)
+ for u-boot@lists.denx.de; Tue, 04 Jun 2024 15:47:44 -0700
+From: pm88hpxmdxke@disengage.co
+To: u-boot@lists.denx.de
+Message-ID: <987500512.386867.1717541262207@smtp3.opayq.com>
 MIME-Version: 1.0
-References: <cover.1716566960.git.jerome.forissier@linaro.org>
- <20240527092301.GA7851@francesco-nb>
-In-Reply-To: <20240527092301.GA7851@francesco-nb>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Wed, 5 Jun 2024 00:13:02 +0100
-Message-ID: <CALeDE9NrH1VF81i0VxaUr7mna2acibp8aF1ty=-maJqL7cOUJQ@mail.gmail.com>
-Subject: Re: [PATCH v2 00/14] Introduce the lwIP network stack
-To: Francesco Dolcini <francesco@dolcini.it>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>
+X-GetAbine-Processed: 1
+Date: Tue, 04 Jun 2024 18:47:18 -0400
+Subject: Possible license violation
+Importance: Normal
+User-Agent: Zoho Mail
+X-Mailer: Zoho Mail
+Feedback-ID: rr0801122cb3cae71e38dd4a991f83877a00001694372ec905baecff665a7447a99c18083a76b47f4955381fee8907fd84:zu08011227bcc21b02e08d709af89dee920000996e71c4aa55db04520275fab1f83cf2a53003b903c219e970:rf0801122a20933cd5bccc9ab5b8eaee3e00004a00bb2a2eba1e2ed1cc841f9daab4a0bc4197a3f133501b0744ed95:ZohoMail
+X-Key-ID: ZndkLnBsbGozYmFpM2xhajltcEBkaXNlbmdhZ2UuY28gbWFob2xpbzU2QHpvaG9tYWlsLmNvbSAyMDI0LTA2LTA0IDE1OjQ5OjAyLjMzMCAxc0VjeGktMDAwNzg1LTFX
+X-Content-flags: business check click css dashes direct hello https link
+ message notext number-text offer order pass percent phone-num please probably
+ provid provide quoted re receive received regarding request requests
+ text-plain transfer utf-8 w3 web
+X-Spamfilter-host: opayq-outbound2.junkemailfilter.com -
+ http://www.junkemailfilter.com
+X-Key-ID: dS1ib290QGxpc3RzLmRlbnguZGUgcG04OGhweG1keGtlQGRpc2VuZ2FnZS5jbyAyMDI0LTA2LTA0IDE1OjQ3OjQ0LjkwNCAxc0Vjd1MtMDAwNXRoLU80
+X-Domain-list: disengage.co denx.de awsdns-11.co.uk amazon.com
+X-Sender-Host-Address: 23.23.126.237
+X-Sender-Host-Name: smtp3.opayq.com
+X-Mailman-Approved-At: Wed, 05 Jun 2024 03:33:13 +0200
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,22 +71,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> On Fri, May 24, 2024 at 06:19:54PM +0200, Jerome Forissier wrote:
-> > - Make the support of HTTPS in the wget command easier. Javier T. (CC'd)
-> > has some additional lwIP and Mbed TLS patches to do so. With that it
-> > becomes possible to fetch and launch a distro installer such as Debian
-> > etc. directly from the U-Boot shell.
->
-> Why this is enabling this use case? Or it is just that currently,
-> without TLS, is not supposed to be something you should do?
-> I am a little bit confused reading this sentence, since to me this is
-> already possible using tftp.
 
-A lot of companies don't want to run tftp any more when http(s) is
-more straight forward, especially when used outside of the data
-centre, it can be cached/proxied etc and has a bunch of other benefits
-before you even get to things like security and auth. Also a lot of FW
-vendors are starting to drop PXE/TFTP support in standards due to
-various things like standards requirements from governments.
+       =20
 
-Peter
+       =20
+            HiI am copying this message to you and GL team.Regarding licens=
+e violation:U-boot=E2=80=99s license requires Gl.iNet to provide the source=
+-code for U-boot (including any modifications they made) to anybody that as=
+ks for it.=C2=A0So=E2=80=A6GL team refused to send source code nor .bin fil=
+e. I wanted to inspect it for possible backdoors but still they are refusin=
+g.=E2=80=9C If you choose to provide source through a written offer, then a=
+nybody who requests the source from you is entitled to receive it.If you co=
+mmercially distribute binaries not accompanied with source code, the GPL sa=
+ys you must provide a written offer to distribute the source code later. Wh=
+en users non-commercially redistribute the binaries they received from you,=
+ they must pass along a copy of this written offer. This means that people =
+who did not get the binaries directly from you can still receive copies of =
+the source code, along with the written offer.The reason we require the off=
+er to be valid for any third party is so that people who receive the binari=
+es indirectly in that way can order the source code from you.=E2=80=9Dhttps=
+://www.gnu.org/licenses/old-licenses/gpl-2.0-faq.en.htmlhttps://github.com/=
+u-boot/u-bootSo I am sending this message to you to check this situation. T=
+hey probably will not send it to you.Also please use web mail (not business=
+ domain) as they can sent it to you through it to hide the fact of licensin=
+g violation. For example send request from Gmail.=C2=A0Please take measures=
+. =20
+               =20
+           =20
+       =20
+       =20
+
+   =20
+   =20
+
