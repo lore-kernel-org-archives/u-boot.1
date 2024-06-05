@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8416BC25B76
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 15:56:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35997C25B76
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 15:56:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB1E1882C4;
-	Wed,  5 Jun 2024 17:56:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 53DAE882E2;
+	Wed,  5 Jun 2024 17:56:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D473882E2; Wed,  5 Jun 2024 17:56:33 +0200 (CEST)
-Received: from smtp-bc09.mail.infomaniak.ch (smtp-bc09.mail.infomaniak.ch
- [45.157.188.9])
+ id BA95B8831D; Wed,  5 Jun 2024 17:56:34 +0200 (CEST)
+Received: from smtp-bc0a.mail.infomaniak.ch (smtp-bc0a.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::bc0a])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A8D987A09
+ by phobos.denx.de (Postfix) with ESMTPS id C3A8288250
  for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 17:56:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
@@ -25,21 +25,20 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
  [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4VvXBk6BNBz13Lr;
- Wed,  5 Jun 2024 17:56:30 +0200 (CEST)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4VvXBl32Yhzd5t;
+ Wed,  5 Jun 2024 17:56:31 +0200 (CEST)
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4VvXBh55ysz9lg; Wed,  5 Jun 2024 17:56:28 +0200 (CEST)
+ id 4VvXBk64X5zBFr; Wed,  5 Jun 2024 17:56:30 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Subject: [PATCH next v2 0/6] rockchip: display PMIC variant properly + misc
- fixes for Theobroma boards
-Date: Wed, 05 Jun 2024 17:56:05 +0200
-Message-Id: <20240605-misc-tsd-v2-0-12479432c90f@cherry.de>
+Date: Wed, 05 Jun 2024 17:56:06 +0200
+Subject: [PATCH next v2 1/6] rockchip: jaguar-rk3588: use default env size
+ for Rockchip on MMC
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAJWKYGYC/2WMQQ7CIBBFr9LM2jGAEKsr72G6KDDKLGwNENKm4
- e4Sti7f/y/vgESRKcF9OCBS4cTr0kCdBnBhXt6E7BuDEkoLozR+ODnMySOJ0RjphHTjDE3/Rnr
- x1lNPWGjLMLU1cMpr3Hu/yP79p4pEgfZqPcmL1vZGDxcoxv3sCaZa6w8ZKq5RpgAAAA==
+Message-Id: <20240605-misc-tsd-v2-1-12479432c90f@cherry.de>
+References: <20240605-misc-tsd-v2-0-12479432c90f@cherry.de>
+In-Reply-To: <20240605-misc-tsd-v2-0-12479432c90f@cherry.de>
 To: Klaus Goger <klaus.goger@theobroma-systems.com>, 
  Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
  Heiko Stuebner <heiko.stuebner@cherry.de>, Tom Rini <trini@konsulko.com>, 
@@ -65,51 +64,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This fixes how the Rockchip PMIC variant is shown for all but RK808 by
-stripping the LSB.
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-Also fix the size of the environment on Jaguar to match the default
-(smaller) size.
+The default env size is 0x8000 when building for Rockchip SoCs with
+support for environment stored in MMC.
 
-Fix SPL_PAD_TO on Ringneck.
-
-Remove duplicated default value of ENV_OFFSET in puma defconfig.
-
-Remove unnecessary override of the fit offset in u-boot dtsi for Puma
-and Ringneck.
-
-Fix TPL_MAX_SIZE for Ringneck to match the (valid) default value for
-PX30 boards.
+Jaguar hasn't entered mass production just yet, so it's a breaking
+change we can afford in the name of consistency.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
-Changes in v2:
-- add patch for fixing TPL_MAX_SIZE on PX30 Ringneck
-- print show_variant when PMIC variant not found
-- use bitfield_extract_by_mask instead of using hardcoded shift operator
-- Link to v1: https://lore.kernel.org/r/20240524-misc-tsd-v1-0-b7bde1344b9e@cherry.de
+ configs/jaguar-rk3588_defconfig | 1 -
+ 1 file changed, 1 deletion(-)
 
----
-Quentin Schulz (6):
-      rockchip: jaguar-rk3588: use default env size for Rockchip on MMC
-      rockchip: rk3399-puma: remove default value from defconfig
-      rockchip: rk3399-puma: remove unnecessary simple-bin:fit:offset override
-      rockchip: px30-ringneck: Update SPL_PAD_TO Kconfig option
-      power: rk8xx: properly print all supported PMICs name
-      rockchip: ringneck-px30: fix TPL_MAX_SIZE
+diff --git a/configs/jaguar-rk3588_defconfig b/configs/jaguar-rk3588_defconfig
+index b69cf4cd057..36bf34d97c8 100644
+--- a/configs/jaguar-rk3588_defconfig
++++ b/configs/jaguar-rk3588_defconfig
+@@ -5,7 +5,6 @@ CONFIG_ARCH_ROCKCHIP=y
+ CONFIG_SPL_GPIO=y
+ CONFIG_SF_DEFAULT_SPEED=24000000
+ CONFIG_SF_DEFAULT_MODE=0x2000
+-CONFIG_ENV_SIZE=0x1f000
+ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-jaguar"
+ CONFIG_ROCKCHIP_RK3588=y
+ CONFIG_ROCKCHIP_BOOT_MODE_REG=0x0
 
- arch/arm/dts/px30-ringneck-haikou-u-boot.dtsi | 8 --------
- arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi   | 6 ------
- configs/jaguar-rk3588_defconfig               | 1 -
- configs/puma-rk3399_defconfig                 | 1 -
- configs/ringneck-px30_defconfig               | 3 +--
- drivers/power/pmic/rk8xx.c                    | 5 ++---
- 6 files changed, 3 insertions(+), 21 deletions(-)
----
-base-commit: 8887ffb625f65475fd6619f8b05fb7a5a12b016b
-change-id: 20240524-misc-tsd-e08551c01c8a
-
-Best regards,
 -- 
-Quentin Schulz <quentin.schulz@cherry.de>
+2.45.1
 
