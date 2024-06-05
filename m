@@ -4,72 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A1D9C27C52
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 17:28:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 310FCC25B76
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 18:01:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DAAC0878E2;
-	Wed,  5 Jun 2024 19:28:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mail.de
+	by phobos.denx.de (Postfix) with ESMTP id 395C488096;
+	Wed,  5 Jun 2024 20:01:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mail.de header.i=@mail.de header.b="lvhsM2rA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fjO/qnis";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B1BB882C4; Wed,  5 Jun 2024 17:57:15 +0200 (CEST)
-Received: from shout12.mail.de (shout12.mail.de [IPv6:2001:868:100:600::f154])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CB9B088356; Wed,  5 Jun 2024 19:48:29 +0200 (CEST)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20A6C88398
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 17:57:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C2FF3879F3
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 19:48:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=mail.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=seb-dev@mail.de
-Received: from shout02.mail.de (unknown [10.0.120.222])
- by shout12.mail.de (Postfix) with ESMTPS id 8D704240A72;
- Wed,  5 Jun 2024 17:57:12 +0200 (CEST)
-Received: from postfix02.mail.de (postfix02.bt.mail.de [10.0.121.126])
- by shout02.mail.de (Postfix) with ESMTP id 765A9240EE5;
- Wed,  5 Jun 2024 17:57:12 +0200 (CEST)
-Received: from smtp01.mail.de (smtp03.bt.mail.de [10.0.121.213])
- by postfix02.mail.de (Postfix) with ESMTP id 57143A03C4;
- Wed,  5 Jun 2024 17:57:12 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=mail.de;
- s=mailde202009; t=1717603032;
- bh=yVnh30YXWkJMxRay/PAZNbzuKnCTM9miydFFWjYDgx8=;
- h=From:To:Cc:Subject:Date:Message-ID:From:To:CC:Subject:Reply-To;
- b=lvhsM2rAR8sFhVpLmws4IZUYpl/S71aKtMrm6Qxn4zXkuPlWqrclqG/pwUIOxx5p0
- OhiFpQx7ve0RHVgTMeDIFuLxu+px4sw/8pN4NKwXTgw873gmRrBef2TSVlLKt3H+O6
- ZaRXvQ/FlAzJR3XWGzSJNUR0nN1nYjTKBPia5vqGBE6s993rf40iYgKjcyQPMEb9Ft
- /57NlpiBbAyR6bLg4Q3vFsGTE/E0M6ozNGPfniO7WV8TVkWl7rwFojp3Zv/nUD9Ofp
- g+RA7AggOHgdcN6GJtG64K1iP5hybg1zU8m6bE8YY2lSZm8HyEhU0/1h+0jAhh0BEc
- Qbw47tlGn8APg==
-Received: from [127.0.0.1] (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp01.mail.de (Postfix) with ESMTPSA id 02C8C240A6F;
- Wed,  5 Jun 2024 17:57:08 +0200 (CEST)
-From: Sebastian Kropatsch <seb-dev@mail.de>
-To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>
-Cc: Tom Rini <trini@konsulko.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH] board: rockchip: Add FriendlyElec NanoPi R6C
-Date: Wed,  5 Jun 2024 17:36:19 +0200
-Message-ID: <20240605155413.226629-1-seb-dev@mail.de>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-35dceef429bso16978f8f.1
+ for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 10:48:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1717609707; x=1718214507; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=zF5Hm/7tVmTlU8SNyItXB5afRXMnwupk8D61gNGjYoE=;
+ b=fjO/qnisPUvo3jGaarkkT9yWQfglVRqYTXsn0Wgqv5ebE5VmTFqsHZxvE+13qdqVKj
+ 0hDf4nO3jnHzw+aMUPPSBB42i0wunVuMzLIAPpDpWBPN6k9IHPpiYBsq5QcCp1+Vo2de
+ ii+aBQY7fmGFlhrZsF6QaYosByEd2mT62cPOWas6p8jPtCdKIJshnSzlkZje/CVm/FQo
+ hLbvgC7bOQNh/Fi96x30ZUiw7RDtQV3rMU6g7mZiJ0RKPnp0XrMwD7IptPIrVRuIR7fO
+ Sq0lt2mHnIxV/3Xwhd3SxaldTBlcT3kGdSkpGdUMQWjxBbakogjNIglBh9Z1V///RiPR
+ +e2Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717609707; x=1718214507;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=zF5Hm/7tVmTlU8SNyItXB5afRXMnwupk8D61gNGjYoE=;
+ b=G1dfZ/wck8DH3E6u8gebPBqhBdSA3NOLsfkNLN/H7khAQunf+JUhQIgGarULKV8XWo
+ OQS0qN3CcMwKfAuHUaM3jVnIYI/CsQJXdPfhDrxqqMH3J3tM/mjbnk/h/YpilxOW/m0Q
+ g10dmsLcSqaNrF8sHVtZmrWoQtjelMTr3K5Ms+5VGE7hP1X+XDtHDAeEWeLiegthlBvr
+ JFxH9ITp/VnLhmVRFzF5XE1uoMjJl5AvzCLWAPlrQiYjmPjmt2Q5occL/azNTSZ10u9q
+ sepC7ExQKHSeAAGW1G8yKmKQHNVPYwTPf0ii0QEE4rs2UZIFOo/U0gw+ZMdibtlJz2ha
+ T4Qg==
+X-Gm-Message-State: AOJu0YwMJbOiQz+xowYDwHYGZyopJgGtziq144t6HLETSypC0+urSrFx
+ NyafpT8TDY2pqGS7LkGahmvcQrBMarZzXBkiEcBNkJPiyYDnfrhXRpc72CP7cKI=
+X-Google-Smtp-Source: AGHT+IH3BhJw+Y7YuCKDjeEBSargXRf6giETCVVFhtCxhJCVQoYrRFaVHI3SEN4G7ZUtrhEgDWgB2w==
+X-Received: by 2002:a5d:68c9:0:b0:354:c330:5d2a with SMTP id
+ ffacd0b85a97d-35ef0dbd277mr257344f8f.35.1717609707052; 
+ Wed, 05 Jun 2024 10:48:27 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:af73:f6a9:3d55:6f07?
+ ([2a01:e0a:3cb:7bb0:af73:f6a9:3d55:6f07])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-35dd04da182sm15233268f8f.54.2024.06.05.10.48.25
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 05 Jun 2024 10:48:26 -0700 (PDT)
+Message-ID: <aefef4e4-5541-48b9-bad9-543409029a35@linaro.org>
+Date: Wed, 5 Jun 2024 19:48:22 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate: clean
-X-purgate: This mail is considered clean (visit http://www.eleven.de for
- further information)
-X-purgate-type: clean
-X-purgate-Ad: Categorized by eleven eXpurgate (R) http://www.eleven.de
-X-purgate: This mail is considered clean (visit http://www.eleven.de for
- further information)
-X-purgate: clean
-X-purgate-size: 9093
-X-purgate-ID: 154282::1717603032-4D6271F9-8BE91BAD/0/0
-X-Mailman-Approved-At: Wed, 05 Jun 2024 19:28:42 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 01/14] net: introduce alternative implementation as
+ net-lwip/
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Marek Vasut <marex@denx.de>,
+ Simon Glass <sjg@chromium.org>, Greg Malysa <greg.malysa@timesys.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Shengyu Qu <wiagn233@outlook.com>,
+ John Keeping <jkeeping@inmusicbrands.com>,
+ Jesse Taube <mr.bossman075@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Samuel Dionne-Riel <samuel@dionne-riel.com>,
+ Joshua Watt <jpewhacker@gmail.com>, Sean Anderson <sean.anderson@seco.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Samuel Holland <samuel@sholland.org>, Jaehoon Chung
+ <jh80.chung@samsung.com>, Patrice Chotard <patrice.chotard@foss.st.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Alexey Romanov <avromanov@salutedevices.com>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Ion Agorria <ion@agorria.com>, Yanhong Wang <yanhong.wang@starfivetech.com>,
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Baruch Siach <baruch@tkos.co.il>
+References: <cover.1716566960.git.jerome.forissier@linaro.org>
+ <923f66b4a74d9c91c6d661e96dced8e1cbcdc7e0.1716566960.git.jerome.forissier@linaro.org>
+ <20240527153434.GH2568172@bill-the-cat>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20240527153434.GH2568172@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Wed, 05 Jun 2024 20:01:50 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,257 +124,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The NanoPi R6C is a SBC by FriendlyElec based on the Rockchip RK3588s.
-It comes with 4GB or 8GB of RAM, a microSD card slot, optional 32GB eMMC
-storage, one M.2 M-Key connector, one RTL8211F 1GbE and one RTL8125
-2.5GbE Ethernet port, one USB 2.0 Type-A and one USB 3.0 Type-A port, a
-HDMI port, a 30-pin GPIO header as well as multiple buttons and LEDs.
+On 5/27/24 17:34, Tom Rini wrote:
+> On Fri, May 24, 2024 at 06:19:55PM +0200, Jerome Forissier wrote:
+> 
+>> Prepare the introduction of the lwIP (lightweight IP) TCP/IP stack by
+>> adding a new net-lwip/ directory and the NET_LWIP symbol. At this
+>> point, enabling NET_LWIP simply disables NET. Subsequent commits will
+>> introduce the lwIP code, re-work the NETDEVICE integration and port
+>> some of the NET commands and features to lwIP.
+>>
+>> SPL_NET cannot be enabled when NET_LWIP=y. SPL_NET pulls some symbols
+>> that are part of NET (such as arp_init(), arp_timeout_check(),
+>> arp_receive(), net_arp_wait_packet_ip()). lwIP support in SPL may be
+>> added later.
+>>
+>> Similarly, DFU_TFTP is not compatible with NET_LWIP because it depends
+>> on net_loop(), tftp_timeout_ms, tftp_timeout_count_max. Let's add a
+>> dependency on !NET_LWIP for now.
+>>
+>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> [snip]
+>> diff --git a/Kconfig b/Kconfig
+>> index 82df59f176e..758256ab121 100644
+>> --- a/Kconfig
+>> +++ b/Kconfig
+>> @@ -747,6 +747,8 @@ source "env/Kconfig"
+>>  
+>>  source "net/Kconfig"
+>>  
+>> +source "net-lwip/Kconfig"
+>> +
+>>  source "drivers/Kconfig"
+>>  
+>>  source "fs/Kconfig"
+> 
+> I think we need to instead rework this to a choice statement instead so
+> that in the end we have something like:
+> choice "Networking stack"
+> config NO_NET
+>   bool "No networking support"
+> config NET
+>   bool "Legacy U-Boot networking stack"
+> config NET_LWIP
+>   bool "Use lwIP for networking stack"
+> 
+> if NET_LEGACY
+> source "net/Kconfig"
+> endif
+> 
+> if NET_LWIP
+> source "net-lwip/Kconfig"
+> endif
+> 
+> And then SPL_NET still depends on !NET_LWIP for now and we sort out the
+> problems with different networking stacks in SPL vs full U-Boot later
+> on.
 
-Add initial support for this board using the upstream devicetree sources.
+Done in v3. Thanks.
 
-Tests in U-Boot proper:
-- Booting from eMMC works
-- 1GbE Ethernet works using the eth_eqos driver (tested by ping)
-- 2.5GbE Ethernet works using the eth_rtl8169 driver (tested by ping),
-  but the status LEDs on this specific port currently aren't working
-- NVMe SSD in M.2 socket does get recognized (tested with `nvme scan`
-  followed by `nvme details`)
-
-Kernel commit:
-d5f1d7437451 ("arm64: dts: rockchip: Add support for NanoPi R6C")
-
-Signed-off-by: Sebastian Kropatsch <seb-dev@mail.de>
----
-
-Hello!
-
-The Ethernet status LEDs which sit directly on the 2.5GbE port using the
-RTL8169 driver don't light up when connected and I couldn't figure out
-why. The other port with a RTL8211F has no problems with the LEDs.
-Have there been occurrences like this in combination with the RTL8125?
-I'm trying to figure out if this is something that could be solved in
-the devicetree or if this is a potential driver bug.
-
-Secondly, the default active network device in U-Boot is the 1GbE one.
-I believe it would make sense to make the 2.5GbE device the default
-active one since this one is labeled "LAN", whereas the 1GbE is labeled
-"WAN". However, since the 2.5GbE device is PCIe-based, it only shows up
-in U-Boot proper after using the `pci enum` command (shows up as in gets
-listed in `net list` and `dm tree`).
-Do you have any tips on the preferred approach to handle this switch of
-the default active net device? Is this even a sensible thing to include
-in U-Boot in your opinion?
-
-Thanks for your feedback!
-
-Best regards,
-Sebastian
-
----
- arch/arm/dts/rk3588s-nanopi-r6c-u-boot.dtsi   |  3 +
- arch/arm/mach-rockchip/rk3588/Kconfig         | 13 +++
- board/friendlyelec/nanopi-r6c-rk3588s/Kconfig | 12 +++
- .../nanopi-r6c-rk3588s/MAINTAINERS            |  7 ++
- configs/nanopi-r6c-rk3588s_defconfig          | 83 +++++++++++++++++++
- doc/board/rockchip/rockchip.rst               |  1 +
- include/configs/nanopi-r6c-rk3588s.h          | 12 +++
- 7 files changed, 131 insertions(+)
- create mode 100644 arch/arm/dts/rk3588s-nanopi-r6c-u-boot.dtsi
- create mode 100644 board/friendlyelec/nanopi-r6c-rk3588s/Kconfig
- create mode 100644 board/friendlyelec/nanopi-r6c-rk3588s/MAINTAINERS
- create mode 100644 configs/nanopi-r6c-rk3588s_defconfig
- create mode 100644 include/configs/nanopi-r6c-rk3588s.h
-
-diff --git a/arch/arm/dts/rk3588s-nanopi-r6c-u-boot.dtsi b/arch/arm/dts/rk3588s-nanopi-r6c-u-boot.dtsi
-new file mode 100644
-index 0000000000..853ed58cfe
---- /dev/null
-+++ b/arch/arm/dts/rk3588s-nanopi-r6c-u-boot.dtsi
-@@ -0,0 +1,3 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include "rk3588s-u-boot.dtsi"
-diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
-index 820e979abb..0e232ddfb9 100644
---- a/arch/arm/mach-rockchip/rk3588/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3588/Kconfig
-@@ -78,6 +78,18 @@ config TARGET_NANOPCT6_RK3588
- 	  Power: 5.5*2.1mm DC Jack, 12VDC input
- 	  Dimensions: 110x80x1.6mm (without case) / 86x114.5x30mm (with case)
- 
-+config TARGET_NANOPI_R6C_RK3588
-+	bool "FriendlyElec NanoPi R6C"
-+	select BOARD_LATE_INIT
-+	help
-+	  The NanoPi R6C is a SBC by FriendlyElec based on the Rockchip
-+	  RK3588s.
-+	  It comes with 4GB or 8GB of RAM, a microSD card slot, optional 32GB
-+	  eMMC storage, one M.2 M-Key connector, one RTL8211F 1GbE and one
-+	  RTL8125 2.5GbE Ethernet port, one USB 2.0 Type-A and one USB 3.0
-+	  Type-A port, a HDMI port, a 30-pin GPIO header as well as some
-+	  buttons and LEDs.
-+
- config TARGET_NOVA_RK3588
- 	bool "Indiedroid Nova RK3588"
- 	select BOARD_LATE_INIT
-@@ -232,6 +244,7 @@ config TEXT_BASE
- 
- source "board/edgeble/neural-compute-module-6/Kconfig"
- source "board/friendlyelec/nanopc-t6-rk3588/Kconfig"
-+source "board/friendlyelec/nanopi-r6c-rk3588s/Kconfig"
- source "board/indiedroid/nova/Kconfig"
- source "board/pine64/quartzpro64-rk3588/Kconfig"
- source "board/turing/turing-rk1-rk3588/Kconfig"
-diff --git a/board/friendlyelec/nanopi-r6c-rk3588s/Kconfig b/board/friendlyelec/nanopi-r6c-rk3588s/Kconfig
-new file mode 100644
-index 0000000000..5ffbd40af3
---- /dev/null
-+++ b/board/friendlyelec/nanopi-r6c-rk3588s/Kconfig
-@@ -0,0 +1,12 @@
-+if TARGET_NANOPI_R6C_RK3588
-+
-+config SYS_BOARD
-+	default "nanopi-r6c-rk3588s"
-+
-+config SYS_VENDOR
-+	default "friendlyelec"
-+
-+config SYS_CONFIG_NAME
-+	default "nanopi-r6c-rk3588s"
-+
-+endif
-diff --git a/board/friendlyelec/nanopi-r6c-rk3588s/MAINTAINERS b/board/friendlyelec/nanopi-r6c-rk3588s/MAINTAINERS
-new file mode 100644
-index 0000000000..18d0bd1287
---- /dev/null
-+++ b/board/friendlyelec/nanopi-r6c-rk3588s/MAINTAINERS
-@@ -0,0 +1,7 @@
-+NANOPI-R6C
-+M:	Sebastian Kropatsch <seb-dev@mail.de>
-+S:	Maintained
-+F:	arch/arm/dts/rk3588s-nanopi-r6c-u-boot.dtsi
-+F:	board/friendlyelec/nanopi-r6c-rk3588s
-+F:	configs/nanopi-r6c-rk3588s_defconfig
-+F:	include/configs/nanopi-r6c-rk3588s.h
-diff --git a/configs/nanopi-r6c-rk3588s_defconfig b/configs/nanopi-r6c-rk3588s_defconfig
-new file mode 100644
-index 0000000000..f1cca7145c
---- /dev/null
-+++ b/configs/nanopi-r6c-rk3588s_defconfig
-@@ -0,0 +1,83 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_SYS_HAS_NONCACHED_MEMORY=y
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-nanopi-r6c"
-+CONFIG_ROCKCHIP_RK3588=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_TARGET_NANOPI_R6C_RK3588=y
-+CONFIG_DEBUG_UART_BASE=0xFEB50000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_SYS_LOAD_ADDR=0xc00800
-+CONFIG_PCI=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-nanopi-r6c.dtb"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_SPL_MAX_SIZE=0x40000
-+CONFIG_SPL_PAD_TO=0x7f8000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_ATF=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_PWM=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_ROCKUSB=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_REGULATOR=y
-+# CONFIG_SPL_DOS_PARTITION is not set
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_LIVE=y
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+CONFIG_SPL_REGMAP=y
-+CONFIG_SPL_SYSCON=y
-+CONFIG_SPL_CLK=y
-+# CONFIG_USB_FUNCTION_FASTBOOT is not set
-+CONFIG_ROCKCHIP_GPIO=y
-+CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_MISC=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_ROCKCHIP=y
-+# CONFIG_SPI_FLASH is not set
-+CONFIG_PHY_REALTEK=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-+CONFIG_RTL8169=y
-+CONFIG_NVME_PCI=y
-+CONFIG_PCIE_DW_ROCKCHIP=y
-+CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-+CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-+CONFIG_PHY_ROCKCHIP_USBDP=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_PWM_ROCKCHIP=y
-+CONFIG_SPL_RAM=y
-+CONFIG_BAUDRATE=1500000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_SYSRESET=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_OHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-+CONFIG_USB_FUNCTION_ROCKUSB=y
-+CONFIG_ERRNO_STR=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index cfbf641f49..a3d9837dda 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -123,6 +123,7 @@ List of mainline supported Rockchip boards:
-      - Edgeble Neural Compute Module 6A SoM - Neu6a (neu6a-io-rk3588)
-      - Edgeble Neural Compute Module 6B SoM - Neu6b (neu6b-io-rk3588)
-      - FriendlyElec NanoPC-T6 (nanopc-t6-rk3588)
-+     - FriendlyElec NanoPi R6C (nanopi-r6c-rk3588s)
-      - Generic RK3588S/RK3588 (generic-rk3588)
-      - Indiedroid Nova (nova-rk3588s)
-      - Pine64 QuartzPro64 (quartzpro64-rk3588)
-diff --git a/include/configs/nanopi-r6c-rk3588s.h b/include/configs/nanopi-r6c-rk3588s.h
-new file mode 100644
-index 0000000000..e05856f3ce
---- /dev/null
-+++ b/include/configs/nanopi-r6c-rk3588s.h
-@@ -0,0 +1,12 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+
-+#ifndef __NANOPI_R6C_RK3588_H
-+#define __NANOPI_R6C_RK3588_H
-+
-+#define ROCKCHIP_DEVICE_SETTINGS \
-+		"stdout=serial,vidconsole\0" \
-+		"stderr=serial,vidconsole\0"
-+
-+#include <configs/rk3588_common.h>
-+
-+#endif /* __NANOPI_R6C_RK3588_H */
 -- 
-2.45.2
-
+Jerome
