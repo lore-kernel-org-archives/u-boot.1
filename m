@@ -4,78 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A2B7C27C55
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 03:27:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACA20C25B76
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 03:48:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DDA58831C;
-	Wed,  5 Jun 2024 05:26:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id EAEA688191;
+	Wed,  5 Jun 2024 05:47:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RTDHpoSN";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="LnwgiYno";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5C9C88379; Wed,  5 Jun 2024 05:26:47 +0200 (CEST)
-Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
- [IPv6:2607:f8b0:4864:20::135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B051A882DA; Wed,  5 Jun 2024 05:47:57 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FA028785E
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 05:26:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F74F87C40
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 05:47:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x135.google.com with SMTP id
- e9e14a558f8ab-374a6b5c504so10609385ab.2
- for <u-boot@lists.denx.de>; Tue, 04 Jun 2024 20:26:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1717558004; x=1718162804; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CNKShT409V6k+eS7f2S2ZDFqzG48CpzI0KNZ94lhFTM=;
- b=RTDHpoSNljLo3rl5pvGINB+FmS4FcAr6ddWRfrLCwFdKj/1bTrey85/e08DB+fZPE7
- WGu4qm3+mjkZZlL8grOIyLr7RWALpZDXmJxpQpB5rmhumoPFI3sRPKYCPjJpPI8z1vsv
- ASh1jZRdivdnIfNtfBNq9DhRAr9/fqUrLlico=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717558004; x=1718162804;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CNKShT409V6k+eS7f2S2ZDFqzG48CpzI0KNZ94lhFTM=;
- b=OXOF/3P2RWyBElOC0mMIMPuuPjeimNwskOjc1MxTgnYv20PddP7LWzqnY4+PvmT5e4
- M1UwNAfYxp21hOaPCskhDi1k4yS243HmWAozjPy5XLeLn/uF0H4P9nNMLCJdgCJ8suFP
- 8LybsQs2CdHQJWh+UG1kEiv8/n+U9scSUuoNV7eEkSwm1QjFP2niLgLW1NTyWbDKsW/J
- JBKWiWt0AExzrqWfejgJ5gkX14yBCyao5pIgB8chrHdcTEq8DGXj6VToRHWCUCCdJHzZ
- FpyM3/Qyd5F5Ikk/ecoXFSsX667k4C+0rigkhqW1xzq1+ZnDwGyyUUpfJ6RC6KP3zZAk
- BYaQ==
-X-Gm-Message-State: AOJu0Ywn4IsrVrMtj3J8SRO7zSQj+FCmClVY8wU0Xss36OVtnPvs6y0v
- 1CT4B21MBgOHthAOYkRjICRZhn8t+6pm4lMZ6d7BHkCm0reiEcG10JSekvBPj9F0fdBh+SJkI1i
- dsg==
-X-Google-Smtp-Source: AGHT+IEQ58sA0whgDJkf0rZlAkazy9O9WE4wsBOdo0Yvmi25B0xqfJW91t2xauCCcsawd1NZCSEFOw==
-X-Received: by 2002:a92:c26b:0:b0:374:ac3a:e32c with SMTP id
- e9e14a558f8ab-374b1eff03dmr14171135ab.16.1717558004201; 
- Tue, 04 Jun 2024 20:26:44 -0700 (PDT)
-Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
- [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-374af0e3ef1sm3691495ab.34.2024.06.04.20.26.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Jun 2024 20:26:43 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Martyn Welch <martyn.welch@collabora.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>
-Subject: [PATCH 9/9] Revert "arm: am335x: Enable SPL_OF_CONTROL on some
- configs"
-Date: Tue,  4 Jun 2024 21:25:21 -0600
-Message-Id: <20240605032521.1142768-10-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240605032521.1142768-1-sjg@chromium.org>
-References: <20240605032521.1142768-1-sjg@chromium.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4553lp48128793;
+ Tue, 4 Jun 2024 22:47:51 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1717559271;
+ bh=4bEY6MKi6dNAdEIkKv2+3ibqRZC1ZIDAIgKS/xwP1jU=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=LnwgiYnovPDd6eBbxsKG7pOmk80T+v3yey7e6IldMv1d9CvfsPaVp4gzEHc7RGs+7
+ 4GQhfJdaduDPcAD8odb5Iq6fkvwSOG8Hw5chCxeH+aEeoZKVDrnkV6KkMXAFlA1ihU
+ 39DnyhxSgcrG9TMes0/j9KaVDFzTFg1yDBjqkgW0=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4553lpJB109282
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 4 Jun 2024 22:47:51 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 4
+ Jun 2024 22:47:51 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 4 Jun 2024 22:47:50 -0500
+Received: from [172.24.227.36]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4553lnnE110697;
+ Tue, 4 Jun 2024 22:47:49 -0500
+Message-ID: <567f8d4e-982c-41ad-94bd-594baba7784c@ti.com>
+Date: Wed, 5 Jun 2024 09:17:48 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] ufs: core: remove link_startup_again logic
+To: Neil Armstrong <neil.armstrong@linaro.org>, Bhupesh Sharma
+ <bhupesh.linux@gmail.com>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>
+References: <20240528-topic-sm8x50-ufs-core-link-startup-again-v1-1-146ca43e80b6@linaro.org>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20240528-topic-sm8x50-ufs-core-link-startup-again-v1-1-146ca43e80b6@linaro.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,28 +81,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is a partial revert which makes boneblack_vboot boot again.
+Hi Neil,
 
-This reverts commit f4b64e9736e73ceec14d51600bed9a8ac48f9fe8.
+On 28/05/24 14:06, Neil Armstrong wrote:
+> The link_startup_again logic was added in Linux to handle device
+> that were set in LinkDown state, which should not be the case since U-boot
+> doesn't set LinkDown state are init, and Linux sets the device active
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+s/are/at ?
 
- configs/am335x_boneblack_vboot_defconfig | 1 -
- 1 file changed, 1 deletion(-)
+> in ufshcd_init() for the first link startup.
+> 
+> While it worked to far, it breaks link startup for Qualcomm Controllers v5,
+> let's just remove the logic.
+> 
 
-diff --git a/configs/am335x_boneblack_vboot_defconfig b/configs/am335x_boneblack_vboot_defconfig
-index d473a1a793b..3ec4abddd77 100644
---- a/configs/am335x_boneblack_vboot_defconfig
-+++ b/configs/am335x_boneblack_vboot_defconfig
-@@ -40,7 +40,6 @@ CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_BOOTP_DNS2=y
- CONFIG_OF_CONTROL=y
--CONFIG_SPL_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+I don't see any repercussions ATM, but will need to get a wider opinion with 
+different controllers before acking.
+
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> ---
+>   drivers/ufs/ufs.c | 8 --------
+>   1 file changed, 8 deletions(-)
+> 
+> diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
+> index be64bf971f1..28c244b70e5 100644
+> --- a/drivers/ufs/ufs.c
+> +++ b/drivers/ufs/ufs.c
+> @@ -456,9 +456,7 @@ static int ufshcd_link_startup(struct ufs_hba *hba)
+>   {
+>   	int ret;
+>   	int retries = DME_LINKSTARTUP_RETRIES;
+> -	bool link_startup_again = true;
+>   
+> -link_startup:
+>   	do {
+>   		ufshcd_ops_link_startup_notify(hba, PRE_CHANGE);
+>   
+> @@ -484,12 +482,6 @@ link_startup:
+>   		/* failed to get the link up... retire */
+>   		goto out;
+>   
+> -	if (link_startup_again) {
+> -		link_startup_again = false;
+> -		retries = DME_LINKSTARTUP_RETRIES;
+> -		goto link_startup;
+> -	}
+> -
+>   	/* Mark that link is up in PWM-G1, 1-lane, SLOW-AUTO mode */
+>   	ufshcd_init_pwr_info(hba);
+>   
+> 
+> ---
+> base-commit: 7e52d6ccfb76e2afc2d183b357abe2a2e2f948cf
+> change-id: 20240528-topic-sm8x50-ufs-core-link-startup-again-bc2cf907c164
+> 
+> Best regards,
+
 -- 
-2.34.1
-
+Thanking You
+Neha Malcom Francis
