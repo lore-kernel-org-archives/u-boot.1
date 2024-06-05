@@ -4,107 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCDE0C27C5E
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 12:35:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 143CCC25B76
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 12:42:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E05988385;
-	Wed,  5 Jun 2024 14:35:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 4EE2988313;
+	Wed,  5 Jun 2024 14:42:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="TzL31JDh";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kvwz8TvW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBF72881A2; Wed,  5 Jun 2024 12:09:33 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 29E4688361; Wed,  5 Jun 2024 14:42:15 +0200 (CEST)
+Received: from mail-lj1-x241.google.com (mail-lj1-x241.google.com
+ [IPv6:2a00:1450:4864:20::241])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B576488353
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 12:09:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id B7D4A88313
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 14:42:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 0CDA3100016;
- Wed,  5 Jun 2024 13:09:29 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 0CDA3100016
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1717582169;
- bh=Ss+Zv5dQd4wdQw2TQ54qgpjFNR8PtDzuOteoWZp0FSM=;
- h=From:To:Subject:Date:Message-ID:Content-Type:MIME-Version:From;
- b=TzL31JDhPutmDqXekofI3YOlqA9mIhuJN8Y/us4uQn/HiAiC8s3prDU983UkhvzSg
- +K7FyV+y9wv6AhsqgbOWKNcjbUEIwvA0WnL8KNEnyCnzNPDRmnDPcKlNMcfZWuo3uC
- LZr97Df2wfaHMVtDvHyH9zE9Ml9csWP1w5ztTSeKFn0883IgTJCU2Wokq46qfzuFYf
- f5gpnUBkB6VjSY4vn2WB0lkxun+K91rBKjI+WGOpa3oK+4PI68JMRnsEu4YlSzFrHZ
- 0NXM4YLK2gl+DJNHNVmyAjmRe+e/ih+uGCjD6x0cW/XwSSTYkFV3uEU78Czi262LSE
- qJP9de45IyDrw==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
- [172.16.192.103])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Wed,  5 Jun 2024 13:09:28 +0300 (MSK)
-Received: from p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) by
- p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Wed, 5 Jun 2024 13:09:28 +0300
-Received: from p-i-exch-sc-m02.sberdevices.ru ([fe80::10c3:6e04:fd07:c511]) by
- p-i-exch-sc-m02.sberdevices.ru ([fe80::10c3:6e04:fd07:c511%9]) with
- mapi id 15.02.1118.040; Wed, 5 Jun 2024 13:09:28 +0300
-From: Alexey Romanov <avromanov@salutedevices.com>
-To: Simon Glass <sjg@chromium.org>
-CC: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Michael Trimarchi
- <michael@amarulasolutions.com>, Frieder Schrempf
- <frieder.schrempf@kontron.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Bin Meng <bmeng@tinylab.org>, 
- Tobias Waldekranz <tobias@waldekranz.com>, Joshua Watt
- <jpewhacker@gmail.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, "Kever
- Yang" <kever.yang@rock-chips.com>, Johan Jonker <jbx6244@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, Michal Simek
- <michal.simek@amd.com>, "mikhail.kshevetskiy@iopsys.eu"
- <mikhail.kshevetskiy@iopsys.eu>, Patrice Chotard
- <patrice.chotard@foss.st.com>, kernel <kernel@sberdevices.ru>, "U-Boot
- Mailing List" <u-boot@lists.denx.de>
-Subject: Re: [PATCH v5 0/3] Introduce mtdblock device
-Thread-Topic: [PATCH v5 0/3] Introduce mtdblock device
-Thread-Index: AQHatc6zqVAL1cVPUECQBY+Z/hNaPLG4PgcAgACE8AA=
-Date: Wed, 5 Jun 2024 10:09:27 +0000
-Message-ID: <20240605100922.er7xwi5wadaa5dlk@cab-wsm-0029881>
-References: <20240603155702.1840464-1-avromanov@salutedevices.com>
- <CAFLszTi+ONdb2P5gtSX_OMUD162G7OtRMD-LbmzO7xuNLRX_HQ@mail.gmail.com>
-In-Reply-To: <CAFLszTi+ONdb2P5gtSX_OMUD162G7OtRMD-LbmzO7xuNLRX_HQ@mail.gmail.com>
-Accept-Language: ru-RU, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.16.18.93]
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <71904A5116AB0A4894B46B4D6268C0DA@sberdevices.ru>
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-lj1-x241.google.com with SMTP id
+ 38308e7fff4ca-2eaad2c673fso55152541fa.3
+ for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 05:42:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1717591332; x=1718196132; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=fmF10L/mjBlo+h6cUuN44vHWfEcO1g/S9aKOWUdAZ9c=;
+ b=kvwz8TvWR9B4w27nmhkw0+en63upSFctqI8XdRMcorobPRmZaH8CESajU2NNkVXk84
+ u7ceQqJ1wCKLDSdVKn6FcOEmtwFYDmntr4ovH8qqAl1Wei9U3pRUv7GejvVvlw8BtkGH
+ MszL2wbc2hBNcOg4WN2Y3a1325w1D49Gf3rZsRru0390QScNSKNriydjQqVKjTS4IY7a
+ sfz7LXaVBM8OxX1lc/OIS6JTk0IGJg/omIUmsFEy26YjYQeTPk0cu1Gut/05U7JsFtJH
+ Gkn8Q3Uv0NoVC0tCgjUtiKdjgAzCZz6q6I3uzi3xFl29MdjNCGfKGYetOmeurQK4Nqjp
+ FEfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717591332; x=1718196132;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=fmF10L/mjBlo+h6cUuN44vHWfEcO1g/S9aKOWUdAZ9c=;
+ b=E9cfLA5GXh7KnFSTohII+LIsNYnQz3TWbnFhfHyatsNBjw0HCxWOQtdfwYWZYGJXoX
+ AHpa4n0xl5ZKMzUguSsOR70cesHKPHpYHaY7yxmQX/Y8aQF9Q4Imd2xPqs7yFxP5mONV
+ Rqe56/WpmXhf/iCKL9NeRGjsxhDhdRz3xuEboMO4b/Pxkw0Jt3r+daN5joERVq3fHGJf
+ IqJpCNL9rbx0lMjQLtXsdsEI0obiGHJWChYbyTzcVBm99oloMhFja7e+asWERJcAaitr
+ qyWtvN9YS39VpFUQn5s2un31ASQd1VRG/TpcWQxZ95cMlQvmfD77XaT0hN750csjebYf
+ GZQQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXLLSS2d6x5rQW4gT5b291pdldp744CDHZeBQ6esUlJsUi6OLH/SDrO4k0ZyWtHyb8cLrO9xu3MTwzjy5IzwdN+m5qZhw==
+X-Gm-Message-State: AOJu0YwhKmorGC20JxUztaP6XXOxRYQYbTff4tUnJGJoHRgusu2XslJZ
+ Eydp2fz7aPzwoOj6Y4NwrU+Z6Gf6ezyKI0lt2NJ423Z0rCUgtaqwlRy3pbVYJGM=
+X-Google-Smtp-Source: AGHT+IGAzVdQguOK7sbnn3lEXc4AnkSAbX8+vzJMaOm0Dsr1JYBSPqcJAapl2MnQG35yb1fo8kfwxw==
+X-Received: by 2002:a2e:9154:0:b0:2e0:da20:2502 with SMTP id
+ 38308e7fff4ca-2eac7a8029dmr17401831fa.49.1717591331709; 
+ Wed, 05 Jun 2024 05:42:11 -0700 (PDT)
+Received: from ?IPV6:2a02:8109:aa0d:be00::8090? ([2a02:8109:aa0d:be00::8090])
+ by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-2ea91cc7d25sm17658591fa.79.2024.06.05.05.42.10
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 05 Jun 2024 05:42:11 -0700 (PDT)
+Message-ID: <22924b95-5181-4aa8-9014-9a030ee7fea3@linaro.org>
+Date: Wed, 5 Jun 2024 14:42:09 +0200
 MIME-Version: 1.0
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 185735 [Jun 05 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.4
-X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 20 0.3.20
- 743589a8af6ec90b529f2124c2bbfc3ce1d2f20f, {Tracking_uf_ne_domains},
- {Track_E25351}, {Tracking_from_domain_doesnt_match_to}, 127.0.0.199:7.1.2;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; salutedevices.com:7.1.1;
- lore.kernel.org:7.1.1; smtp.sberdevices.ru:5.0.1,7.1.1, FromAlignment: s
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean, bases: 2024/06/05 09:22:00
-X-KSMG-LinksScanning: Clean, bases: 2024/06/05 09:22:00
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/06/05 04:05:00 #25448641
-X-KSMG-AntiVirus-Status: Clean, skipped
-X-Mailman-Approved-At: Wed, 05 Jun 2024 14:35:38 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 0/8] qcom: implement capsule updates
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
+References: <20240603-b4-qcom-capsule-updates-v3-0-fe2e083289ec@linaro.org>
+ <CAFA6WYP-1tuELgthx=Ky9JYAkgP0mRNEsnHdw2ZmnjHXMAm8Rw@mail.gmail.com>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <CAFA6WYP-1tuELgthx=Ky9JYAkgP0mRNEsnHdw2ZmnjHXMAm8Rw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,96 +101,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
-your message is empty.
+Hi Sumit,
 
-On Tue, Jun 04, 2024 at 08:13:34PM -0600, Simon Glass wrote:
-> Hi Alexey,
->=20
-> On Mon, Jun 3, 2024, 09:57 Alexey Romanov <avromanov@salutedevices.com>
-> wrote:
->=20
-> > Hello!
-> >
-> > This series adds support for the mtdblock device, which
-> > allows to read/write data block by block. For example,
-> > it can now be used for BCB or Android AB command:
-> >
-> >   $ bcb load mtd 0 part_name
-> >
-> > Tested only on SPI NAND, so bind is made only for
-> > SPI NAND drivers.
-> >
-> > ---
-> >
-> > Changes V1 -> V2 [1]:
-> >
-> >   - Drop patch [2].
-> >   - Add warning if bind NAND mtdblock device.
-> >   - Move documentation of mtdblock implementation
-> >     from commit message to the source code.
-> >   - Remove __maybe_unused from mtd partition functions
-> >     description.
-> >   - Use blk_enabled() instead of #ifdefs.
-> >
-> > Changes V2 -> V3 [2]:
-> >
-> >   - Rebased over [3].
-> >   - Rename mtd_bread/bwrite -> mtd_blk_read/write.
-> >   - Fix GPL-2.0 license short name definiton in headers.
-> >   - Add empty line after MTD_ENTRY_NUMBERS define.
-> >
-> > Changes V3 -> V4 [4]:
-> >
-> >   - Fix build warnings: use LBAF printf format string for lbaint_t type=
-s.
-> >
-> > Changes V4 -> V5 [5]:
-> >
-> >   - Rebased over u-boot/master.
-> >   - Fix build errors and warnings if CONFIG_BLK isn't enabled.
-> >   - Fix failed tests in cases is mtdblock device isn't binded.
-> >
-> > Links:
-> >
-> >   - [1]
-> > https://lore.kernel.org/all/20240227100441.1811047-1-avromanov@salutede=
-vices.com/
-> >   - [2]
-> > https://lore.kernel.org/all/20240227100441.1811047-5-avromanov@salutede=
-vices.com/
-> >   - [3]
-> > https://lore.kernel.org/u-boot/20240403114047.84030-1-heinrich.schuchar=
-dt@canonical.com/T/#u
-> >   - [4]
-> > https://lore.kernel.org/all/20240404105813.1520732-1-avromanov@salutede=
-vices.com/
-> >   - [5]
-> > https://lore.kernel.org/all/20240524102920.2631731-1-avromanov@salutede=
-vices.com/
-> >
-> > Alexey Romanov (3):
-> >   disk: support MTD partitions
-> >   drivers: introduce mtdblock abstraction
-> >   spinand: bind mtdblock
-> >
-> >  disk/part.c                 |   3 +-
-> >  drivers/block/blk-uclass.c  |   1 +
-> >  drivers/mtd/Kconfig         |   1 +
-> >  drivers/mtd/Makefile        |   1 +
-> >  drivers/mtd/mtdblock.c      | 227 ++++++++++++++++++++++++++++++++++++
-> >  drivers/mtd/mtdpart.c       |  76 ++++++++++++
-> >  drivers/mtd/nand/spi/core.c |  20 ++++
-> >  include/linux/mtd/mtd.h     |  21 ++++
-> >  include/part.h              |   3 +
-> >  9 files changed, 352 insertions(+), 1 deletion(-)
-> >  create mode 100644 drivers/mtd/mtdblock.c
-> >
-> > --
-> > 2.34.1
-> >
-> >
+On 05/06/2024 07:31, Sumit Garg wrote:
+> Hi Caleb,
+> 
+> On Mon, 3 Jun 2024 at 18:19, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>>
+>> Hook up support for capsule updates loaded from disk on Qualcomm
+>> platforms.
+>>
+>> Most Qualcomm devices have an A/B partition layout, with most partitions
+>> duplicated. The metadata on which slot is active is stored in the GPT
+>> headers in the vendor-specific attribute bits of each partition.
+> 
+> It's good to see capsule updates support coming up for Qualcomm
+> platforms. AFAICS, with this series we only update U-Boot on the
+> current active partition. IOW, real A/B support is still not
+> supported. Do you think it is possible for U-Boot to update metadata
+> in GPT headers and for proprietary bootloaders to pick up the U-Boot
+> from the updated partition?
 
---=20
-Thank you,
-Alexey=
+Yes this would be possible, I have some WIP patches to let us modify the 
+slot attribute bits and write back the header.
+
+The reason I haven't implement A/B is because we don't support it from 
+the OS level on any of the boards I work on. We often patch ABL to 
+disable or skip the slot logic and flash a partition table without 
+slots. It also unlocks a bunch of additional complexity...
+
+This isn't super high on my todo list but I'd be happy to help if 
+someone wants to enable this functionality. We'd need:
+
+1. Upstream support for modifying the GPT (see my PoC at [1] and [2]).
+2. Logic to configure flashing the active or inactive slot
+
+This logic would have to run after the capsule update, I don't know if 
+there is currently a way to add a callback after the update.
+
+If we enable updating other images (like XBL, hyp, tz, etc), we would 
+need to either agree that a capsule update would have to update ALL 
+partitions, or implement logic to copy over partitions that weren't 
+flashed to the other slot.
+
+[1]: 
+https://git.codelinaro.org/linaro/qcomlt/u-boot/-/commit/34d3de6f79550527746303e0bf6337fa37e31fe5
+
+[2]: 
+https://git.codelinaro.org/linaro/qcomlt/u-boot/-/commit/656d9e816bef85e586460a999cc7874255be9f1d
+> 
+> -Sumit
+> 
+>>
+>> Add support for reading this attributes via the disk_partition struct
+>> and using them to determine which boot partition U-Boot is flashed to
+>> and generate the appropriate DFU string.
+>>
+>> This logic is gated behind a check to ensure that U-Boot is actually
+>> being chainloaded and not run via some other mechanism.
+>>
+>> SCSI support for most Qualcomm platforms is not yet enabled upstream,
+>> but will follow in future patches.
+>>
+>> This series enables capsule updates on the RB2, however [1] is required
+>> for it to work properly (as otherwise MMC won't be available).
+>>
+>> [1]: https://lore.kernel.org/u-boot/20240527-b4-clk-stub-v2-0-29013855e343@linaro.org/
+>>
+>> To: Tom Rini <trini@konsulko.com>
+>> To: Simon Glass <sjg@chromium.org>
+>> To: Lukasz Majewski <lukma@denx.de>
+>> To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>> To: Caleb Connolly <caleb.connolly@linaro.org>
+>> To: Neil Armstrong <neil.armstrong@linaro.org>
+>> To: Sumit Garg <sumit.garg@linaro.org>
+>> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>> Cc: u-boot@lists.denx.de
+>> Cc: u-boot-qcom@groups.io
+>>
+>> Changes in v3:
+>> - Address comments in scsi dfu support
+>> - enable CONFIG_DFU_SCSI for qcom
+>> - Link to v2: https://lore.kernel.org/r/20240527-b4-qcom-capsule-updates-v2-0-47583d7ad428@linaro.org
+>>
+>> Changes in v2:
+>> - Add qcom capsule update support patches
+>> - Link to v1: https://lore.kernel.org/r/20240409-b4-dfu-scsi-v1-0-3e1441a60376@linaro.org
+>>
+>> ---
+>> Caleb Connolly (8):
+>>        dfu: add scsi backend
+>>        disk: expose partition type flags
+>>        mmc: msm_sdhci: work around a bug when writing
+>>        mach-snapdragon: implement capsule update support
+>>        qcom_defconfig: savedefconfig
+>>        mach-snapdragon: use SYSRESET_PSCI
+>>        mach-snapdragon: bump up heap size
+>>        qcom_defconfig: enable capsule update support
+>>
+>>   arch/arm/Kconfig                          |   2 +
+>>   arch/arm/mach-snapdragon/Kconfig          |   3 +
+>>   arch/arm/mach-snapdragon/Makefile         |   1 +
+>>   arch/arm/mach-snapdragon/board.c          |   8 +-
+>>   arch/arm/mach-snapdragon/capsule_update.c | 147 ++++++++++
+>>   arch/arm/mach-snapdragon/qcom-priv.h      |   6 +
+>>   configs/qcom_defconfig                    |  19 +-
+>>   disk/part_efi.c                           |   1 +
+>>   doc/usage/dfu.rst                         |  32 +++
+>>   drivers/dfu/Kconfig                       |   7 +
+>>   drivers/dfu/Makefile                      |   1 +
+>>   drivers/dfu/dfu.c                         |   5 +-
+>>   drivers/dfu/dfu_scsi.c                    | 435 ++++++++++++++++++++++++++++++
+>>   drivers/mmc/msm_sdhci.c                   |   7 +
+>>   include/configs/qcom.h                    |   5 +
+>>   include/dfu.h                             |  26 ++
+>>   include/part.h                            |   1 +
+>>   17 files changed, 695 insertions(+), 11 deletions(-)
+>> ---
+>> change-id: 20240523-b4-qcom-capsule-updates-ea2e4f8f0ff0
+>> base-commit: 5d8881a0801241d68701e8644d495f1d535506f0
+>>
+>> // Caleb (they/them)
+>>
+
+-- 
+// Caleb (they/them)
