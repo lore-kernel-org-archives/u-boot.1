@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35997C25B76
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 15:56:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D98DC27C53
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 15:56:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53DAE882E2;
+	by phobos.denx.de (Postfix) with ESMTP id ABCB888356;
 	Wed,  5 Jun 2024 17:56:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA95B8831D; Wed,  5 Jun 2024 17:56:34 +0200 (CEST)
-Received: from smtp-bc0a.mail.infomaniak.ch (smtp-bc0a.mail.infomaniak.ch
- [IPv6:2001:1600:4:17::bc0a])
+ id BCFF188250; Wed,  5 Jun 2024 17:56:34 +0200 (CEST)
+Received: from smtp-190c.mail.infomaniak.ch (smtp-190c.mail.infomaniak.ch
+ [185.125.25.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3A8288250
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 17:56:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7434D882B8
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 17:56:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
  [10.7.10.107])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4VvXBl32Yhzd5t;
- Wed,  5 Jun 2024 17:56:31 +0200 (CEST)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4VvXBm11nFzctF;
+ Wed,  5 Jun 2024 17:56:32 +0200 (CEST)
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4VvXBk64X5zBFr; Wed,  5 Jun 2024 17:56:30 +0200 (CEST)
+ id 4VvXBl2yTXz8qX; Wed,  5 Jun 2024 17:56:31 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 05 Jun 2024 17:56:06 +0200
-Subject: [PATCH next v2 1/6] rockchip: jaguar-rk3588: use default env size
- for Rockchip on MMC
+Date: Wed, 05 Jun 2024 17:56:07 +0200
+Subject: [PATCH next v2 2/6] rockchip: rk3399-puma: remove default value
+ from defconfig
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240605-misc-tsd-v2-1-12479432c90f@cherry.de>
+Message-Id: <20240605-misc-tsd-v2-2-12479432c90f@cherry.de>
 References: <20240605-misc-tsd-v2-0-12479432c90f@cherry.de>
 In-Reply-To: <20240605-misc-tsd-v2-0-12479432c90f@cherry.de>
 To: Klaus Goger <klaus.goger@theobroma-systems.com>, 
@@ -66,29 +66,28 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-The default env size is 0x8000 when building for Rockchip SoCs with
-support for environment stored in MMC.
+CONFIG_ENV_OFFSET already defaults to 0x3F8000, however it is stored in
+lowercase hexdigits instead of uppercase like in the defconfig.
 
-Jaguar hasn't entered mass production just yet, so it's a breaking
-change we can afford in the name of consistency.
+No change in behavior intended.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- configs/jaguar-rk3588_defconfig | 1 -
+ configs/puma-rk3399_defconfig | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/configs/jaguar-rk3588_defconfig b/configs/jaguar-rk3588_defconfig
-index b69cf4cd057..36bf34d97c8 100644
---- a/configs/jaguar-rk3588_defconfig
-+++ b/configs/jaguar-rk3588_defconfig
-@@ -5,7 +5,6 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_SPL_GPIO=y
- CONFIG_SF_DEFAULT_SPEED=24000000
- CONFIG_SF_DEFAULT_MODE=0x2000
--CONFIG_ENV_SIZE=0x1f000
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-jaguar"
- CONFIG_ROCKCHIP_RK3588=y
- CONFIG_ROCKCHIP_BOOT_MODE_REG=0x0
+diff --git a/configs/puma-rk3399_defconfig b/configs/puma-rk3399_defconfig
+index 34a0b575991..42819102d70 100644
+--- a/configs/puma-rk3399_defconfig
++++ b/configs/puma-rk3399_defconfig
+@@ -6,7 +6,6 @@ CONFIG_SPL_GPIO=y
+ CONFIG_NR_DRAM_BANKS=1
+ CONFIG_SF_DEFAULT_SPEED=20000000
+ CONFIG_ENV_SIZE=0x3000
+-CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-puma-haikou"
+ CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3399=y
 
 -- 
 2.45.1
