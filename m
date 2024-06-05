@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 476F6C25B76
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 19:40:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80994C25B76
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 19:41:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 131A6884CA;
+	by phobos.denx.de (Postfix) with ESMTP id 67E1B884D2;
 	Wed,  5 Jun 2024 21:37:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GSKI8RGu";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OxyzgfbY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8916A8831D; Wed,  5 Jun 2024 21:22:07 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 13AC98836E; Wed,  5 Jun 2024 21:22:09 +0200 (CEST)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 106C788369
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 21:22:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A53488300
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 21:22:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4210aa012e5so2699255e9.0
- for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 12:22:05 -0700 (PDT)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-35dce6102f4so100927f8f.3
+ for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 12:22:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717615324; x=1718220124; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1717615326; x=1718220126; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=DMtQynVUynIygMJG+HZoR5ODD0Kxq9UV2wpCO2Dk7eU=;
- b=GSKI8RGuBlaPWcKrxTwOz6Ut/nhcDxRUY23r9iDj51M3qxyiqDTM1ey37+SpYqF8uD
- PsrSLx3BwfDNUFZ8l+MlJRwhBj4JNro86VzkOMZn/rz7g4SmBrDo6LHrYL2ZIkx1IUXq
- RGevFXMdFVJv0iOeXU6r3PK2fT8/zT3sWFuRzZtClGar1WqtnYc3TkHx96MbBjyiceEl
- 5JxbBnG8aT3aCTwmTayRch1cPvHev1kckGbjmfrUHls5bGu8PfnECFVBFRGDkfnIxyc2
- h6L34ZlFiZUauBPUZVipRY0E+dsMO/bD3M3IzV1WkCO01c45jveUayHVAQkcHnKGWczV
- WzxA==
+ :reply-to; bh=N/Gdt7/+lZ0binabe9ZcG2ArhZluimuOacqq/Lpqfk4=;
+ b=OxyzgfbYRpxJ+QqP+DlWn1/N/EsBao3U5kw6uoRmAml7bLYryOM/Sa0T5q6jp+D+i1
+ 9nhND9HfiYXbZv9AdhB4jp2w4PUm3P+guXrsbtK/cKJ9aSvtmhf46LZc2kzCKaTcn0Cs
+ vXhlcgQr1KDrG5glVRVQT6+eFnmDX46WNMFxwsz4C/F2redy6Fgz8xOleevPoTVBdEMK
+ xViBxVwlIZPA5sMFjYbkwNOS1wL1DT06ryYtUd3ylYc77fPYS4xywRFjvwNtRdZbTYnd
+ 9yPt5WlrGu6DVOUNz1cbNJzLrTwqpUsQ2OEPEWofOIMGo4EUqM2Lz0A/QUMxJSyQjTLz
+ uXJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717615324; x=1718220124;
+ d=1e100.net; s=20230601; t=1717615326; x=1718220126;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DMtQynVUynIygMJG+HZoR5ODD0Kxq9UV2wpCO2Dk7eU=;
- b=vbZvHL3UbvCuAbVptFvI9lNtgACmYYI5mFEY93glRvyLHepinWC4AyuqjzIg3euRKp
- 5u0HyOpcWoQ5pRijkVIdQsyAgWxVLhMZJg9g9ikmm+5o+Ym9xO+XOHMVQ9Fe9s1ahnid
- smpS54Twbj05xAsybmOQ3ReK0r4VAPYhdyQnIeIS0IWRIKfGKZQSOl0p42+MiWUg7kXo
- 8XR/KW/rKOCEHs3QVW9pzuTyIWfPSnwJxKYphaqnkCL0F557FW7vVPoaa0y7dimdUXzN
- sT7oFHjjdKjNI0te0pSLiNgaZE4emcOgpd/WLHXlY3pLRsFinBdXh6Z/F9rlCe1m/yIw
- kXPQ==
+ bh=N/Gdt7/+lZ0binabe9ZcG2ArhZluimuOacqq/Lpqfk4=;
+ b=ws9rsBDCVGMkfX8MrOY8bZOeAHM08iRimBMCW2H/2B5bvF5O1lmuvTziR0AeAsLclC
+ G4pKKWlXbVyZQq99Y0xQ2lle/fVJNz36y2N/3a4xPyhCLlDz8T/69X6Bn5NdFux0lp07
+ Gp5gibblHEfmmFPL05g7GL5MWlDXeT18zLrfq/KZWEhkQUoKd7R609hriVTc18gE5S84
+ 9dCMqeVqzwt9dOsajqD8RYHZcgEq6F7UILipmYWginCQBT4XNLqVLCIOzI+pCcgoT4MB
+ K4hjXkAbDR4R8VaDYN837dbygb955sM7dpFFrQOJODQEnElihP4PweAweLzMbMC8kZGW
+ 2JyA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUuF/dy5q+F6pqJsvlyScUaQYrA+ai7je5Ey8Fg3p80RSr4CLLeDL2QLRS7zWNOc68UPa5FPDtnvNvDOgjH8Mv9+I5Fsg==
-X-Gm-Message-State: AOJu0YwDiRsQc0hWw4Jmyoo6fHMkoCHQ9+Nm+UrqbA5YPlqRH+3M1gJo
- 3HYIiZ948Wj6hfVYOdKbfg81nVpmQRJBq5t3Jlr8CkJ0Zz3ZUS4b
-X-Google-Smtp-Source: AGHT+IF/DLKpxiFUV75gz22btwZA5UcxYrHoZb3JmMGS3S6+dahFuKAktbgTaShNUPBrB/VsohhVog==
-X-Received: by 2002:a05:600c:4ed1:b0:421:54f7:c294 with SMTP id
- 5b1f17b1804b1-4215632d74fmr29771825e9.29.1717615324462; 
- Wed, 05 Jun 2024 12:22:04 -0700 (PDT)
+ AJvYcCUeQhuEPHetNAVBTx56IwQRgNcFLDZm3zD3kIXUfrFOmnLh0W/oGtA6O27gg/Pyhad0WY8OHSjrXEEnKc+ML0PVgMc75w==
+X-Gm-Message-State: AOJu0YxrGa1fqNP9RQcEF6OoQ81aIJkpoGUiBEUybawnJss8hLquYqUg
+ 2zuIkZxierJjcQo69pm0DSSw338EaVRv147fqoL+cwu3zR8Ady8K
+X-Google-Smtp-Source: AGHT+IFRONZK8RGRC5x6pa76z50dfB1U6LM+8CSQvvATEkVm7j8/Po7g1HUZxhWHUHcDvCBzMjEpUg==
+X-Received: by 2002:a5d:4e91:0:b0:35d:bf15:dac2 with SMTP id
+ ffacd0b85a97d-35e8ef0aad3mr2652191f8f.39.1717615326216; 
+ Wed, 05 Jun 2024 12:22:06 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
  [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-4214bf5994csm36079625e9.1.2024.06.05.12.22.02
+ 5b1f17b1804b1-4214bf5994csm36079625e9.1.2024.06.05.12.22.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Jun 2024 12:22:04 -0700 (PDT)
+ Wed, 05 Jun 2024 12:22:05 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
@@ -90,9 +90,9 @@ To: Tom Rini <trini@konsulko.com>,
  Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
  Vaishnav Achath <vaishnav.a@ti.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH 5/7] tftp: implement support for LED status activity
-Date: Wed,  5 Jun 2024 21:21:37 +0200
-Message-ID: <20240605192146.19052-6-ansuelsmth@gmail.com>
+Subject: [PATCH 6/7] mtd: implement support for LED status activity
+Date: Wed,  5 Jun 2024 21:21:38 +0200
+Message-ID: <20240605192146.19052-7-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240605192146.19052-1-ansuelsmth@gmail.com>
 References: <20240605192146.19052-1-ansuelsmth@gmail.com>
@@ -116,68 +116,157 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Implement support for LED status activity. If the feature is enabled,
-make the defined ACTIVITY LED to signal traffic.
+make the defined ACTIVITY LED to signal mtd write or erase operations.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- net/tftp.c | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+ cmd/mtd.c                      | 23 +++++++++++++++++++++++
+ drivers/mtd/nand/core.c        |  4 ++++
+ drivers/mtd/nand/spi/core.c    |  5 +++++
+ drivers/mtd/spi/spi-nor-core.c |  9 +++++++++
+ 4 files changed, 41 insertions(+)
 
-diff --git a/net/tftp.c b/net/tftp.c
-index 2e335413492..07dea321bb4 100644
---- a/net/tftp.c
-+++ b/net/tftp.c
-@@ -19,6 +19,7 @@
- #include <asm/global_data.h>
- #include <net/tftp.h>
- #include "bootp.h"
+diff --git a/cmd/mtd.c b/cmd/mtd.c
+index 9189f45cabd..aa0a41ac3bb 100644
+--- a/cmd/mtd.c
++++ b/cmd/mtd.c
+@@ -11,6 +11,7 @@
+ #include <command.h>
+ #include <common.h>
+ #include <console.h>
 +#include <status_led.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -193,6 +194,10 @@ static void new_transfer(void)
- #ifdef CONFIG_CMD_TFTPPUT
- 	tftp_put_final_block_sent = 0;
+ #if CONFIG_IS_ENABLED(CMD_MTD_OTP)
+ #include <hexdump.h>
  #endif
-+#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
-+	status_led_set(CONFIG_LED_STATUS_ACTIVITY,
-+		       CONFIG_LED_STATUS_BLINKING);
-+#endif
- }
- 
- #ifdef CONFIG_CMD_TFTPPUT
-@@ -228,6 +233,10 @@ static void show_block_marker(void)
- {
- 	ulong pos;
+@@ -559,6 +560,12 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	while (mtd_block_isbad(mtd, off))
+ 		off += mtd->erasesize;
  
 +#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
-+	status_led_activity(CONFIG_LED_STATUS_ACTIVITY);
++	if (!read)
++		status_led_set(CONFIG_LED_STATUS_ACTIVITY,
++			       CONFIG_LED_STATUS_BLINKING);
 +#endif
 +
- #ifdef CONFIG_TFTP_TSIZE
- 	if (tftp_tsize) {
- 		pos = tftp_cur_block * tftp_block_size +
-@@ -290,6 +299,9 @@ static void tftp_complete(void)
- 	/* Print hash marks for the last packet received */
- 	while (tftp_tsize && tftp_tsize_num_hash < 49) {
- 		putc('#');
+ 	/* Loop over the pages to do the actual read/write */
+ 	while (remaining) {
+ 		/* Skip the block if it is bad */
+@@ -586,6 +593,12 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		io_op.oobbuf += io_op.oobretlen;
+ 	}
+ 
 +#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
-+		status_led_activity(CONFIG_LED_STATUS_ACTIVITY);
++	if (!read)
++		status_led_set(CONFIG_LED_STATUS_ACTIVITY,
++			       CONFIG_LED_STATUS_OFF);
 +#endif
- 		tftp_tsize_num_hash++;
++
+ 	if (!ret && dump)
+ 		mtd_dump_device_buf(mtd, start_off, buf, len, woob);
+ 
+@@ -653,6 +666,11 @@ static int do_mtd_erase(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	erase_op.addr = off;
+ 	erase_op.len = mtd->erasesize;
+ 
++#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
++	status_led_set(CONFIG_LED_STATUS_ACTIVITY,
++		       CONFIG_LED_STATUS_ON);
++#endif
++
+ 	while (len) {
+ 		if (!scrub) {
+ 			ret = mtd_block_isbad(mtd, erase_op.addr);
+@@ -681,6 +699,11 @@ static int do_mtd_erase(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		erase_op.addr += mtd->erasesize;
  	}
- 	puts("  ");
-@@ -302,6 +314,10 @@ static void tftp_complete(void)
- 			time_start * 1000, "/s");
- 	}
- 	puts("\ndone\n");
+ 
 +#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
 +	status_led_set(CONFIG_LED_STATUS_ACTIVITY,
 +		       CONFIG_LED_STATUS_OFF);
 +#endif
- 	if (!tftp_put_active)
- 		efi_set_bootdev("Net", "", tftp_filename,
- 				map_sysmem(tftp_load_addr, 0),
++
+ 	if (ret && ret != -EIO)
+ 		ret = CMD_RET_FAILURE;
+ 	else
+diff --git a/drivers/mtd/nand/core.c b/drivers/mtd/nand/core.c
+index f6d9c584f78..631a4c83e04 100644
+--- a/drivers/mtd/nand/core.c
++++ b/drivers/mtd/nand/core.c
+@@ -18,6 +18,7 @@
+ #include <linux/bitops.h>
+ #include <linux/mtd/nand.h>
+ #include <linux/printk.h>
++#include <status_led.h>
+ 
+ /**
+  * nanddev_isbad() - Check if a block is bad
+@@ -182,6 +183,9 @@ int nanddev_mtd_erase(struct mtd_info *mtd, struct erase_info *einfo)
+ 		}
+ 
+ 		nanddev_pos_next_eraseblock(nand, &pos);
++#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
++		status_led_activity(CONFIG_LED_STATUS_ACTIVITY);
++#endif
+ 	}
+ 
+ 	return 0;
+diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
+index 62c28aa422d..86d7ed9e9d0 100644
+--- a/drivers/mtd/nand/spi/core.c
++++ b/drivers/mtd/nand/spi/core.c
+@@ -32,6 +32,7 @@
+ #include <linux/bug.h>
+ #include <linux/mtd/spinand.h>
+ #include <linux/printk.h>
++#include <status_led.h>
+ #endif
+ 
+ /* SPI NAND index visible in MTD names */
+@@ -657,6 +658,10 @@ static int spinand_mtd_write(struct mtd_info *mtd, loff_t to,
+ 
+ 		ops->retlen += iter.req.datalen;
+ 		ops->oobretlen += iter.req.ooblen;
++
++#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
++		status_led_activity(CONFIG_LED_STATUS_ACTIVITY);
++#endif
+ 	}
+ 
+ #ifndef __UBOOT__
+diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
+index f86003ca8c0..1e7436079e9 100644
+--- a/drivers/mtd/spi/spi-nor-core.c
++++ b/drivers/mtd/spi/spi-nor-core.c
+@@ -32,6 +32,8 @@
+ #include <spi-mem.h>
+ #include <spi.h>
+ 
++#include <status_led.h>
++
+ #include "sf_internal.h"
+ 
+ /* Define max times to check status register before we give up. */
+@@ -1039,6 +1041,10 @@ static int spi_nor_erase(struct mtd_info *mtd, struct erase_info *instr)
+ 		ret = spi_nor_wait_till_ready(nor);
+ 		if (ret)
+ 			goto erase_err;
++
++#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
++		status_led_activity(CONFIG_LED_STATUS_ACTIVITY);
++#endif
+ 	}
+ 
+ 	addr_known = false;
+@@ -1816,6 +1822,9 @@ static int spi_nor_write(struct mtd_info *mtd, loff_t to, size_t len,
+ 			goto write_err;
+ 		*retlen += written;
+ 		i += written;
++#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
++		status_led_activity(CONFIG_LED_STATUS_ACTIVITY);
++#endif
+ 	}
+ 
+ write_err:
 -- 
 2.43.0
 
