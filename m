@@ -4,65 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ED39C27C53
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 15:38:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEF86C27C53
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 15:52:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AAD65870AB;
-	Wed,  5 Jun 2024 17:38:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 1841C8813A;
+	Wed,  5 Jun 2024 17:52:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="NAnR7mQq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="R4jCozPl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA6F08704E; Wed,  5 Jun 2024 17:38:04 +0200 (CEST)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1BC0D87BF4; Wed,  5 Jun 2024 17:52:35 +0200 (CEST)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4597F87BF4
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 17:38:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AD77287702
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 17:52:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 213D8CE182A;
- Wed,  5 Jun 2024 15:37:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8EE0FC2BD11;
- Wed,  5 Jun 2024 15:37:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1717601877;
- bh=o4k87sRWNcpblrBVQQGsabSON6rOvCp3L5k4V0JS6aU=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=NAnR7mQqY6acYUnb27sgspebG6LAAp6H5L9EWJ19EHfqC1Q+j0ePyypMnDe795+BT
- OyYG1laj0BNKT5vZ4oOLlQczXe/0tsfn1ubpBL+bb2gIawi7TX2PlC4+ddBZzf5yVX
- EUHLuNcdaw2JHnJN7z2pFAO+9fdBxwU85NL5PYJdCuIsEPXZqg/dTUpSUhjJHIO2Ka
- /mDGj4wNavZyWm0GBLDBeIUvnpwcJdg73+FIh555XmUlv7fnKyADoWFPoPox7q/ubs
- WppIJYbNTrpl95cE7d08VJSBDbGWDTpv3TmJAkyckoXV96UdB4URxmXiggjParOLFK
- +LiLL6qdLN6cw==
-Date: Wed, 5 Jun 2024 16:37:52 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: Hal Feng <hal.feng@starfivetech.com>, E Shattow <lucent@gmail.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Rick Chen <rick@andestech.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Nam Cao <namcao@linutronix.de>, Bo Gan <ganboing@gmail.com>,
- Yanhong Wang <yanhong.wang@starfivetech.com>,
- Emil Renner Berthing <emil.renner.berthing@canonical.com>,
- Minda Chen <minda.chen@starfivetech.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH v1 0/4] Sync StarFive JH7110 clock and reset dt-bindings
- with Linux
-Message-ID: <20240605-process-thinner-9ceb66006959@spud>
-References: <20240603132721.6522-1-hal.feng@starfivetech.com>
- <CANV2PTPjbYEWr67bMSM_fg3kSS4Q2kDYdcHTLVp0CrQyeT=dbA@mail.gmail.com>
- <ZQ2PR01MB13070E142612139A6D955820E6F92@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
- <20240605143515.GP68077@bill-the-cat>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-6ae1b32752fso34885446d6.0
+ for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 08:52:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1717602751; x=1718207551; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=G9DkiBC4tySNS/9onySsxVL3t+/SNNKP5h+Z8OtNWk8=;
+ b=R4jCozPlFfc5gZlueQc7DQNYIF0bXekmzSwCp+mWtk8IH7G2s650XWYjWIApcUJ4k5
+ 7tqgJyOChksa1hQKNKNJgec9liHpGD1LxKPT+B7puFbotOnTmfCiN2ehkkmem9LWdTvV
+ EMDdRZLV74hDs31e72AfFS0YZSZXU6GqHmm68=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717602751; x=1718207551;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=G9DkiBC4tySNS/9onySsxVL3t+/SNNKP5h+Z8OtNWk8=;
+ b=bq9xngV4HZ5YV6W900T0twaU+2ffvtKHWmr4kPeliFjy9cBpnaAwOtvE4lnSX9QbCj
+ lo94kMRNJ8Gt7KlYOhqC8JXcedfBjs34PQAuy0e3FogDqCVr16F9znlkEv2DnNn1yj+C
+ JIuFFQ9WStv9GcgWzefEyJ/ZcF1V7YhRWS6cF1Bajywu5SIWAoVE4XSwGNYqzoeU+7j7
+ To+aNCX291zsbq4fThWwqRm4nOhVhC6daVgBwSUS9ssA5SMpdZK7ngqhtZump8SMFr5o
+ UXzLZ66qA1zBe5lCxlIEFCbk3ExK0AzJu2RQAInClZPnZbk9E9UTIBFbtpiVLjh3O0r3
+ 0+jA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXxWJ5H/SibsbIOpWz991+BLQRDFT3SOLqm5dOrHz4DPPMYAQ6Zcj1UVC1DWW767a6JlofdYnyRl/jz+XToB4QG4DtLGw==
+X-Gm-Message-State: AOJu0Yz+7WJn+NI3gWRo4JK1bpFmymFp5kX8gpZfT+1HKRo1H0qSMVyS
+ Tjz7LZzldchzgcA4XsKTSv0rfG4PKtsDA0KOXi7RtcUkxa5s8PRgQ+PB2FnhuuafjQdnVr4LAgM
+ SIOBCll7wXqaNjh6Qe/jTZeskQWPvvPBsTwJAhd3x2HKboyBVbQ==
+X-Google-Smtp-Source: AGHT+IGThIt46bIdU+LTwBrx+49FfAUBj3Q1NwfffeO9ZGYTRhAodJ50alaoq86rGWVW0d1jP5GciIoNbxRc0pOPKSg=
+X-Received: by 2002:a05:6214:4402:b0:6af:38de:6ac6 with SMTP id
+ 6a1803df08f44-6b030a9617dmr23676746d6.59.1717602751373; Wed, 05 Jun 2024
+ 08:52:31 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="fWFRAqRvK0wUUmaf"
-Content-Disposition: inline
-In-Reply-To: <20240605143515.GP68077@bill-the-cat>
+References: <20240604195256.1820285-1-sam.povilus@amd.com>
+ <CAFLszTgRAwRrhMQfoUDHg9tGaTf4zLBtHR_QWFQRodh4JyoNJg@mail.gmail.com>
+In-Reply-To: <CAFLszTgRAwRrhMQfoUDHg9tGaTf4zLBtHR_QWFQRodh4JyoNJg@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 5 Jun 2024 09:52:20 -0600
+Message-ID: <CAFLszTgb7ihDDqFOhruwFo9zRN_3ZhQu+PQB+Hn6NGLvoBewiw@mail.gmail.com>
+Subject: Re: [PATCH 0/2] Cleanup fit documentation
+To: Sam Povilus <sam.povilus@amd.com>
+Cc: trini@konsulko.com, u-boot@lists.denx.de, git@amd.com, 
+ michal.simek@amd.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,42 +85,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Sam,
 
---fWFRAqRvK0wUUmaf
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Tue, 4 Jun 2024 at 20:13, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Sam,
+>
+> On Tue, 4 Jun 2024 at 13:53, Sam Povilus <sam.povilus@amd.com> wrote:
+> >
+> > Sam Povilus (2):
+> >   doc: Remove extraneous curly braces
+> >   doc: add clarity to what a "fpga" image is
+> >
+> >  doc/usage/fit/source_file_format.rst | 28 ++++++++++++++--------------
+> >  1 file changed, 14 insertions(+), 14 deletions(-)
+>
+> This is now at [1]. Could you please instead do a PR for that?
+>
+> I am not sure yet the best way to incorporate or link the FIT spec
+> from the U-Boot documentation. I suppose we could employ a script to
+> sync it?
 
-On Wed, Jun 05, 2024 at 08:35:15AM -0600, Tom Rini wrote:
-> On Wed, Jun 05, 2024 at 01:56:13AM +0000, Hal Feng wrote:
-> > > On 04.06.24 04:32, E Shattow wrote:
-> > > Hi Hal,
-> > >=20
-> > > Instead of manual dt-bindings sync can we please adopt OF_UPSTREAM for
-> > > JH7110 ?
-> >=20
-> > Yeah, I will try to do it recently, although I am not sure whether the =
-U-Boot
-> > drivers and Linux drivers are compatible so that they can use the same =
-DT.
->=20
-> They must be compatible so that they can use the same DT, U-Boot needs
-> updating if it doesn't match.
+Hmm actually it is at [2].
 
-Other than the naming, I think they are compatible. IIRC there were some
-issues where U-Boot originally used different numbers to linux, but this
-was fixed in commit 9a12e304dd ("dt-bindings: clock: jh7110: Modify clock
-id to be same with Linux").
+So perhaps we can just link to it and drop some of the files from U-Boot?
 
---fWFRAqRvK0wUUmaf
-Content-Type: application/pgp-signature; name="signature.asc"
+Regards,
+Simon
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZmCGUAAKCRB4tDGHoIJi
-0ilDAQDdxRcuDAkiu5PspnWOdrHjqxbKwjeTlmLzSRo5YK/ihQEA3p4EMKH7wYli
-xb8r/Bk93lCoRuLmXottAmdV/PD4agg=
-=So9W
------END PGP SIGNATURE-----
-
---fWFRAqRvK0wUUmaf--
+[2] https://fitspec.osfw.foundation/
