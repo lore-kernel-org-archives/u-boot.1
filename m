@@ -4,71 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C8EDC25B76
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 03:26:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8CB0C25B76
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 03:27:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A76F882ED;
+	by phobos.denx.de (Postfix) with ESMTP id 77A8A8832D;
 	Wed,  5 Jun 2024 05:26:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZGlSdszl";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="b1NQDCnE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3D7E88315; Wed,  5 Jun 2024 05:26:42 +0200 (CEST)
-Received: from mail-il1-x142.google.com (mail-il1-x142.google.com
- [IPv6:2607:f8b0:4864:20::142])
+ id 71111882AF; Wed,  5 Jun 2024 05:26:43 +0200 (CEST)
+Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
+ [IPv6:2607:f8b0:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C2D2882DF
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 05:26:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 55477882F9
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 05:26:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x142.google.com with SMTP id
- e9e14a558f8ab-374b05c4f40so3589325ab.3
- for <u-boot@lists.denx.de>; Tue, 04 Jun 2024 20:26:40 -0700 (PDT)
+Received: by mail-il1-x12b.google.com with SMTP id
+ e9e14a558f8ab-3749a160512so1755975ab.0
+ for <u-boot@lists.denx.de>; Tue, 04 Jun 2024 20:26:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1717557998; x=1718162798; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1717558000; x=1718162800; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zv6C3op4MH2MkMkOMJhljeFlThCAUnVbQHGZunveQ1g=;
- b=ZGlSdszlHO8cCO3CQnr6fRiBBLFyqljjXDGcNDr2W2C83qKF/cFAjKe0ersTYeDQWT
- 6///REZR6vwrHJIpv3PHwYkDwtNNXMx5Y79SV6GA/QGAv2qn4z9yzPZjel8RT16OO1/S
- rQsRAFzg/mKes4qAbak7uhT163od6uV+KKlO4=
+ bh=8DwB7knJErWncuZw2hsDOiW5a1oIkrLbpZ326qjD5Us=;
+ b=b1NQDCnEqPb/Xy8NIn443GUuDK4xMJbTMo02mJ6WzEWhcgJ9hei28mK52opNdlpfA0
+ c7bj5HwxMJoMZSVcM62UwXGo8pB4IZIm1JOvIJxkyGpqzMkhXSUkn9gJ4syIr24VjoMp
+ vCi/79/g2YAXFTRlbfy8QGLtxKecaW8uBLKn8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717557998; x=1718162798;
+ d=1e100.net; s=20230601; t=1717558000; x=1718162800;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zv6C3op4MH2MkMkOMJhljeFlThCAUnVbQHGZunveQ1g=;
- b=Naz9keM0AlStoRTRjyE9V+dTzvfeafocnrvfElzsH/oUjgAxiPIgGoPJT/VHtQeE9y
- F6BoIwDkfxYzUzNGO78Ly62MvVELSFfhfcXJBLl2o54h5XCjOo4E8fkH+cfBIP+YaBTP
- fdXz3eexh+uH+Z7zzs1K0oblBwGKGZyRkMbDdpWv/nZWeupoDNr+pcDVp7dVQOkTTQhp
- imMwxGnY+hC1c6P+TqJrsIO10sXGm4ai3sk2rrAk6PFNbauQ+j5XKeGFiaBpgJ+1+B64
- nhUzwOaLxyLZI0Wum9MsmmT0/guC04uGNQI1Z/TWj2Mlv4njDKUv1ughXkxWtkei+A+j
- DLEw==
-X-Gm-Message-State: AOJu0YxoXpDmpHYISLPI6xxUuMYDpPStWj3htxWQvH5vV2ysthmGB7W0
- P6O0JZRBtmHsDvyt2Wz6IhclivP2IXWpskxf5gtPa3atjuwpijAp0q47I0CHy7zuaToSUcrP6wL
- QLNpR
-X-Google-Smtp-Source: AGHT+IEtNMNGGDTvROMe+HMxslBF11S1DoiAmyEmjcgl4ECshoNwzRHiQ7G4Wyn5+mLIFVnt8XgNvg==
-X-Received: by 2002:a05:6e02:b23:b0:374:8a84:6bf7 with SMTP id
- e9e14a558f8ab-374b1ef309emr14784425ab.8.1717557998558; 
- Tue, 04 Jun 2024 20:26:38 -0700 (PDT)
+ bh=8DwB7knJErWncuZw2hsDOiW5a1oIkrLbpZ326qjD5Us=;
+ b=ABUqK5yP+pct9/bU4ZEaMtk3LLxBoTwSJxt259Z2GcyXvrOQhBKD7oS1r0COHRZoFJ
+ dEpG4L4hjPX0+c1J1gwNT2CbMbG5eb3G3W4iD0sWb055KEWdqIY2SxnGTRGqp6G+1FDK
+ 5xn6BpwFrvqD4sz8uuLGp6vPHiTZKRPmkDykYdR60wddre6shNaby/8EECsKggqiPqS3
+ WyEokTkzwk96FnxM7m0f1aO0qtm5Kq/Rl08EliHvtensMfUtVPpIDMab4Cl632uU3RyX
+ jo62fzacAy07FhkojD3xaoKy38++Bt+TELUDglls/PsgAooS/c/ZMTj39uKK/AgHjosu
+ PoPw==
+X-Gm-Message-State: AOJu0YxtP01iyUfbWbq/6WsGvSyqvM/UWn6ieB2Y3wjL/Dt3Q7mYcwUG
+ F6aBriI9mc8LN4VU2ZLD6qd8CP5i1uAJtNSNTgfER4HN7gJaIUyxz8ISM2FFwKi7ciM+7yQd9WX
+ BLQ==
+X-Google-Smtp-Source: AGHT+IFvx4o1yDPKMR/09kg4PyzRnEE69hGKh5wxE7rwI1P4NbwNeijSX+tv62xy9Wq1A4ykkWjIVQ==
+X-Received: by 2002:a05:6e02:178d:b0:374:9c23:a04e with SMTP id
+ e9e14a558f8ab-374b12f20a8mr13472175ab.1.1717557999806; 
+ Tue, 04 Jun 2024 20:26:39 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-374af0e3ef1sm3691495ab.34.2024.06.04.20.26.37
+ e9e14a558f8ab-374af0e3ef1sm3691495ab.34.2024.06.04.20.26.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Jun 2024 20:26:38 -0700 (PDT)
+ Tue, 04 Jun 2024 20:26:39 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Jeffy Chen <jeffy.chen@rock-chips.com>,
- Kever Yang <kever.yang@rock-chips.com>, huang lin <hl@rock-chips.com>
-Subject: [PATCH 3/9] rockchip: veyron: Add logging for power init
-Date: Tue,  4 Jun 2024 21:25:15 -0600
-Message-Id: <20240605032521.1142768-4-sjg@chromium.org>
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Lukasz Majewski <l.majewski@samsung.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+Subject: [PATCH 4/9] power: regulator: Handle autoset in
+ regulators_enable_boot_on()
+Date: Tue,  4 Jun 2024 21:25:16 -0600
+Message-Id: <20240605032521.1142768-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240605032521.1142768-1-sjg@chromium.org>
 References: <20240605032521.1142768-1-sjg@chromium.org>
@@ -90,84 +94,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add better logging for power init so that CONFIG_LOG_ERROR_RETURN can
-be enabled.
+With a recent change, regulators_enable_boot_on() returns an error if a
+regulator is already set. Check for and handle this situation.
+
+Fixes: d99fb64a98a power: regulator: Only run autoset once for each regulator
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- board/google/veyron/veyron.c | 27 ++++++++++++---------------
- 1 file changed, 12 insertions(+), 15 deletions(-)
+ drivers/power/regulator/regulator-uclass.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/board/google/veyron/veyron.c b/board/google/veyron/veyron.c
-index 32dbcdc4d10..23fe8bf088c 100644
---- a/board/google/veyron/veyron.c
-+++ b/board/google/veyron/veyron.c
-@@ -29,44 +29,41 @@ static int veyron_init(void)
- 	int ret;
- 
- 	ret = regulator_get_by_platname("vdd_arm", &dev);
--	if (ret) {
--		debug("Cannot set regulator name\n");
--		return ret;
--	}
-+	if (ret)
-+		return log_msg_ret("vdd", ret);
- 
- 	/* Slowly raise to max CPU voltage to prevent overshoot */
- 	ret = regulator_set_value(dev, 1200000);
- 	if (ret)
--		return ret;
-+		return log_msg_ret("s12", ret);
- 	udelay(175); /* Must wait for voltage to stabilize, 2mV/us */
- 	ret = regulator_set_value(dev, 1400000);
- 	if (ret)
--		return ret;
-+		return log_msg_ret("s14", ret);
- 	udelay(100); /* Must wait for voltage to stabilize, 2mV/us */
- 
- 	ret = rockchip_get_clk(&clk.dev);
- 	if (ret)
--		return ret;
-+		return log_msg_ret("clk", ret);
- 	clk.id = PLL_APLL;
- 	ret = clk_set_rate(&clk, 1800000000);
- 	if (IS_ERR_VALUE(ret))
--		return ret;
-+		return log_msg_ret("s18", ret);
- 
- 	ret = regulator_get_by_platname("vcc33_sd", &dev);
- 	if (ret) {
- 		debug("Cannot get regulator name\n");
--		return ret;
-+		if (ret)
-+			return log_msg_ret("vcc", ret);
- 	}
- 
- 	ret = regulator_set_value(dev, 3300000);
- 	if (ret)
--		return ret;
-+		return log_msg_ret("s33", ret);
- 
- 	ret = regulators_enable_boot_on(false);
--	if (ret) {
--		debug("%s: Cannot enable boot on regulators\n", __func__);
--		return ret;
--	}
-+	if (ret)
-+		return log_msg_ret("boo", ret);
- 
- 	return 0;
- }
-@@ -81,7 +78,7 @@ int board_early_init_r(void)
- 	if (!fdt_node_check_compatible(gd->fdt_blob, 0, "google,veyron")) {
- 		ret = veyron_init();
- 		if (ret)
--			return ret;
-+			return log_msg_ret("vey", ret);
- 	}
- #endif
- 	/*
+diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
+index 77d101f262e..d9e1fb68295 100644
+--- a/drivers/power/regulator/regulator-uclass.c
++++ b/drivers/power/regulator/regulator-uclass.c
+@@ -518,7 +518,7 @@ int regulators_enable_boot_on(bool verbose)
+ 	     dev;
+ 	     uclass_next_device(&dev)) {
+ 		ret = regulator_autoset(dev);
+-		if (ret == -EMEDIUMTYPE) {
++		if (ret == -EMEDIUMTYPE || ret == -EALREADY) {
+ 			ret = 0;
+ 			continue;
+ 		}
 -- 
 2.34.1
 
