@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60F71C27C50
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 02:14:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6E37C27C50
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 02:14:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74A47882ED;
+	by phobos.denx.de (Postfix) with ESMTP id D20AE8833B;
 	Wed,  5 Jun 2024 04:13:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EHcKcazi";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VUwKxEx6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F22DA88268; Wed,  5 Jun 2024 04:13:51 +0200 (CEST)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id 0CD32882F9; Wed,  5 Jun 2024 04:13:52 +0200 (CEST)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D8A988300
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 04:13:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D68C88297
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 04:13:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6ae0bf069f3so29881876d6.3
- for <u-boot@lists.denx.de>; Tue, 04 Jun 2024 19:13:48 -0700 (PDT)
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-62a2424ecb8so21012797b3.1
+ for <u-boot@lists.denx.de>; Tue, 04 Jun 2024 19:13:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1717553627; x=1718158427; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=uLxQO9U0NOj18WhmHRaS68Ud3goD0GAkXmlDAjdnv2Q=;
- b=EHcKcazi3nL2SQ2c5UVsXWTTXGgY470ayAL7mrpwqUgTIguk3QnaAs5Dv2zg+sYpcR
- KltBRNNCAm5pE+u1ttdmEVO4+REPyQ6J0tqIuBMSWX9afer2oa4f9C4rwLoDtgSHAZlg
- rFMlBBBkULDjg5CEQXQ3pkQ4JCgJmzUJ2qrtg=
+ d=chromium.org; s=google; t=1717553628; x=1718158428; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=W/pmIGbkiSPBXGj6j/lB9ltNjPX6Ye4MET/lVqaUnII=;
+ b=VUwKxEx6rsMisgOOCMLV1H639yUAgQUV/+qVjMEfvDRmHUYAO4y3XA8nKWkljUy2t0
+ Ot/t520m42tWN0a3hM4zMUj+j1YH6bk65UcZG93Q3bY/1izEDSwkZ9vZbNgSMLyEvspg
+ bnwerksMWY58cISS6xHxUOg+CRY5g9YavL8/s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717553627; x=1718158427;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=uLxQO9U0NOj18WhmHRaS68Ud3goD0GAkXmlDAjdnv2Q=;
- b=cpdYIFs4SoEAlnwSNuVMxR6M0JtV8qdfYNlttw5ViBEZKSzqwN+kVb4pB70p5Xmn0L
- toRCrcX//qZiVt+EQCPyVZXue+jgIYIwZNoZ+/d7VswpQpJd9ChCBIdPrLtEnqtrQjP3
- 7o0ceMdQ1YQVfR2A4B6Gie78IbfvICs8zwpsZS+bMqS34aSVjhlRCmwBqBvK0uutfN37
- buxhS5L/7a0JlK/Wu254LkW8TNPvuko3LWV9m1n5Rmcn9x0Np5VTe4/WQ4vgoG5A5V3Z
- Ss9S0ayNIh+2SuWQ/m4vSebFBMS409AoZCLd5t1u5iKCrA4q9jfYU4Omr0czNfOsr2u4
- kSbQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWq9samKRjTGWaCO6mPcQU6pX5cl7oBWJSrzP4UFVcI6w1hxvDiHRbSnOejTctruBy80XVaJktAH/bodY0ZRW9rrIoZcQ==
-X-Gm-Message-State: AOJu0YxmSaQiGrWwRfy8rRK/jyVkrvsfT8FRR0v52OxBQvoq3mu7toOk
- z2O/6wCpvtogZ+5Gqnbwwz30NulEHYfca3QZNMF4ouyV50SgA0rdf2muSAZJKsNAfK8bHPjwmdS
- jTMrjFVw+s6XpQQgkTsE5nbFfp4uutyts1ppz
-X-Google-Smtp-Source: AGHT+IHqxnuKJj1aLCL3YRxSNgdLSsG8ZywS0FXLlEYM5tyVgoQwHD990LvzD1yhFyjy6rvLxT8WDalIOE1CjsRa55Q=
-X-Received: by 2002:a05:6214:4601:b0:6ae:e4f9:cb8 with SMTP id
- 6a1803df08f44-6b02bf83096mr13312816d6.38.1717553627116; Tue, 04 Jun 2024
- 19:13:47 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1717553628; x=1718158428;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=W/pmIGbkiSPBXGj6j/lB9ltNjPX6Ye4MET/lVqaUnII=;
+ b=NwyZek7z3zTdvNyu0Ss72SGuNDjHMrHrolClhggttUvU5Ml9DMeUj0ntR12wO7Bd7d
+ DugvkMrg6L6gfH2pbCDVpJ4M9WrCQEhO5VhW3DgAo5FZA9GW/4lYudiIITjqivYGufPC
+ a+v1RSEymAdDVA8A+RctQYOqC/SZJoLYJ9dIfoJjUO1clG/vIkh3f98yGLgi9hNM43Me
+ wmipT/uIPEVDpVdd6xaNTJtiicLXqAaqQzhSbINACbuLzvmTetykuuJ6gXykYC6EMKcg
+ lOn0uYfRt6En8+cc1E15q9qBD7L/ThRzKuh0NGQxYZxD6zMh9KuAfLgu9B1YOQ3GKWue
+ BWvQ==
+X-Gm-Message-State: AOJu0YxfT6vcSGdRA9nXZ9aqNE/qNHOBhM82Nx9BcqPw2OdHBnPfViak
+ 59ENfeg5E73jevCYUJQSGDUOXUy9nwIa6/ZYArIyzxjBNS4oc8UXDv8i3MHctnak+2ti1dTpq/a
+ Di0Ha+lXEgi1l0bdqZKK3KefS/wsHZahUQWg3S8sEWTT/k/g=
+X-Google-Smtp-Source: AGHT+IGDSLERDS6bwTXFIzyjnASSSIFKkFyAmZHdHeolycJPeeueFcD7ornP0oP2rY9fn30Ef0c1/NM6sEw0npl8LtU=
+X-Received: by 2002:a81:b383:0:b0:615:15fe:3cb8 with SMTP id
+ 00721157ae682-62cbb5048damr12231527b3.28.1717553628079; Tue, 04 Jun 2024
+ 19:13:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240604195256.1820285-1-sam.povilus@amd.com>
-In-Reply-To: <20240604195256.1820285-1-sam.povilus@amd.com>
+References: <20240604163134.1149752-1-brandon.maier@collins.com>
+In-Reply-To: <20240604163134.1149752-1-brandon.maier@collins.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 4 Jun 2024 20:13:36 -0600
-Message-ID: <CAFLszTgRAwRrhMQfoUDHg9tGaTf4zLBtHR_QWFQRodh4JyoNJg@mail.gmail.com>
-Subject: Re: [PATCH 0/2] Cleanup fit documentation
-To: Sam Povilus <sam.povilus@amd.com>
-Cc: trini@konsulko.com, u-boot@lists.denx.de, git@amd.com, 
- michal.simek@amd.com
+Date: Tue, 4 Jun 2024 20:13:37 -0600
+Message-ID: <CAFLszTg++xwrcHyt-3hficWSMm=wBJ+bS1oTrjcDY7HYJD7pEg@mail.gmail.com>
+Subject: Re: [PATCH 1/1] tools: patman: fix `pip install` with Python 3.12
+To: Brandon Maier <brandon.maier@collins.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,24 +83,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sam,
-
-On Tue, 4 Jun 2024 at 13:53, Sam Povilus <sam.povilus@amd.com> wrote:
+On Tue, 4 Jun 2024 at 10:31, Brandon Maier <brandon.maier@collins.com> wrot=
+e:
 >
-> Sam Povilus (2):
->   doc: Remove extraneous curly braces
->   doc: add clarity to what a "fpga" image is
+> Installing patman with `cd ./tools/patman && pip install -e .` fails
+> with the error below.
 >
->  doc/usage/fit/source_file_format.rst | 28 ++++++++++++++--------------
->  1 file changed, 14 insertions(+), 14 deletions(-)
+> As described in the error output, the license line is not allowed to be
+> only defined in the setup.py.
+>
+> > $ cd ./tools/patman && pip install -e .
+> > Obtaining file:///.../u-boot/tools/patman
+> >   Installing build dependencies ... done
+> >   Checking if build backend supports build_editable ... done
+> >   Getting requirements to build editable ... error
+> >   error: subprocess-exited-with-error
+> >
+> >   =C3=97 Getting requirements to build editable did not run successfull=
+y.
+> >   =E2=94=82 exit code: 1
+> >   =E2=95=B0=E2=94=80> [61 lines of output]
+> >       /tmp/pip-build-env-mqjvnmz8/overlay/lib/python3.12/site-packages/=
+setuptools/config/_apply_pyprojecttoml.py:76:
+> >           _MissingDynamic: `license` defined outside of `pyproject.toml=
+` is ignored.
+> >       !!
+> >
+> >       *****************************************************************=
+***************
+> >       The following seems to be defined outside of `pyproject.toml`:
+> >
+> >       `license =3D 'GPL-2.0+'`
+> >
+> >       According to the spec (see the link below), however, setuptools C=
+ANNOT
+> >       consider this value unless `license` is listed as `dynamic`.
+> >
+> >       https://packaging.python.org/en/latest/specifications/pyproject-t=
+oml/#declaring-project-metadata-the-project-table
+> >
+> >       To prevent this problem, you can list `license` under `dynamic` o=
+r alternatively
+> >       remove the `[project]` table from your file and rely entirely on =
+other means of
+> >       configuration.
+> >       *****************************************************************=
+***************
+> >
+> >       !!
+>
+> Signed-off-by: Brandon Maier <brandon.maier@collins.com>
+> CC: Simon Glass <sjg@chromium.org>
+> ---
+>  tools/patman/pyproject.toml | 1 +
+>  1 file changed, 1 insertion(+)
 
-This is now at [1]. Could you please instead do a PR for that?
-
-I am not sure yet the best way to incorporate or link the FIT spec
-from the U-Boot documentation. I suppose we could employ a script to
-sync it?
-
-Regards,
-Simon
-
-[1] https://github.com/open-source-firmware/flat-image-tree
+Reviewed-by: Simon Glass <sjg@chromium.org>
