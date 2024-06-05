@@ -4,81 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED5AFC27C5E
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 13:18:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 972A8C25B76
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 13:31:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6664A88356;
-	Wed,  5 Jun 2024 15:17:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 006D4882E8;
+	Wed,  5 Jun 2024 15:31:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EC+cU7Vf";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lOfsBwI7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8042A88369; Wed,  5 Jun 2024 15:17:51 +0200 (CEST)
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
+ id 81BD7882E8; Wed,  5 Jun 2024 15:31:46 +0200 (CEST)
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EEC588377
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 15:17:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3846388261
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 15:31:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-6afc61f9a2eso7253366d6.0
- for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 06:17:48 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-2c2865e2a68so455186a91.1
+ for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 06:31:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1717593467; x=1718198267; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=G4zjdQKJlqpcawQCiGO//p8SSvKoKFXUQSoekL/URfM=;
- b=EC+cU7VfJzYqwU+GqnK1pWgYUmmY2jyaw3gXkJV5AIUMuA1e6ChATUGvUIo7uwPbbD
- hr/Ac1dq9g7y3rPUhBS0Kcw5buyd2IfZgcRrwa2oghI3eIZUlQ8qepF2PGzbg9eLz33+
- COpn9j2C0UH4/cyUZpjBozZjoOKftJuGQmCbo=
+ d=linaro.org; s=google; t=1717594303; x=1718199103; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=O0sJ8YQwbCwKznFdVH75vE2jxmW6arhXV7HEUQPUE6g=;
+ b=lOfsBwI7eWJIonl+0R6HGov9fK1hY8aEmd4FWW10V5gP5/MLf1K9RoBU/yBfgNqZdN
+ ytfr48ISmbZRTJBi+1wW+AE/rUb28FERgYXHqVuGPsS1njpFqu/TlgeN2s4mpaalWKBg
+ 3LSLwz3WBcM76Shi2LXL1n7Ln60WDIQdQT/vtCT1ev7ZTKjMjokRXgD+kGOufRA3Vvdr
+ L0JsA9BdkMWhrqGvXGaHELNY1rdXDDVJpx48AnczXt71h4z8cORnexfl9Za1ogL+2z6q
+ mdWb3r+jwv1q5MoPjISFNK8H11ft+xfAhZqrGzt1wrcUnGCNTZX6h//M5esPkOwds7fV
+ u8Vg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717593467; x=1718198267;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=G4zjdQKJlqpcawQCiGO//p8SSvKoKFXUQSoekL/URfM=;
- b=QNaiq3m5KitnSOO7pMTxrzeCN/dO3LVQ7NdiTV6tUXHa7k3b3QsNKr2XJsp0jzIQmV
- U/r3Ph1XAIpKARtGtaLFCwLyFikAOx8BP1QnNcqBk/I+B7C7ob5HxYIUuwWEvdkEFETV
- 2dQ3qneIVM4DCWQXxFSJKW2BdfFuKfE2i+9QcoRSDwHf5+Dt/9iMtSXRve+7uBJTmFQ5
- FrGa+GovOfR12KVOA3I3iT7chd29RZKW1GRXmtk8nKUeeC/aRLEpyRonBPjb11DPpF37
- hwxBkHILMMbPDxYPG19xalqJ+6QzSkaLKICoBexM72DTgkaOwzXBKQNDr3ASp8Hrf461
- KqkA==
+ d=1e100.net; s=20230601; t=1717594303; x=1718199103;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=O0sJ8YQwbCwKznFdVH75vE2jxmW6arhXV7HEUQPUE6g=;
+ b=vbUDP5nQvHZ0y1izIll38ugXG7F35aZNK4Q1AiqsK70tlwO2eBtVYafnlPs+jmj9rU
+ eCKl+wNC/eLhxUg31luBP+NPCXqvJjZFnK5pvIcIHImz8jINc0l4xf89YjUsCBFGrLqP
+ vyZzCNYIr+U+FfTsV+ucdvUV+PtHMImddBhe51mW1zFTLN4/OZMTBtgw8bJ5GPfoGLgC
+ la7XGuahTdcnDyfb9tMoGPJhgvRk5nsWYDE9LcojO2aWZACiHhSWLgUNsA6BqGZDDwHd
+ TNejMDfAs1wly71LFtBahZTcg3On14p3xweNGybmNbzUR22rSVqW+ncpJdcqPEnzdwM+
+ 3mYw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVBNTjPL3LJbFEMEEv7t1aal1h1cuChVcrPeLpFQa791hVk/8FVmn5Z+Om9L1jVB5PgnIC0bhCcaBT7Cwy1AI7qAZGlFA==
-X-Gm-Message-State: AOJu0YzM38uZ3xDAgX6Q7Kpvd0XukrUq/dX6l8vwEdogWToZFfv1eouQ
- DigB6mN6Ja0kncpqlgmJgvR0RipRvb4m/qRTWYfSCwqg8N1T5a0D2V9nKWcuHus+gjJverU1+js
- N0MEtedljz/erhBHTjlIW0AILO4kHRIGfCwZt
-X-Google-Smtp-Source: AGHT+IFeL5DiU+k8vIGZEIYUksY+LSbLWEYeoM5bkZ3wjJ9h+KM/P54FAsA+IKepH7VdwcZ4VJhZoJO93bDfFxbRjBA=
-X-Received: by 2002:a05:6214:1304:b0:6af:4fcd:3065 with SMTP id
- 6a1803df08f44-6aff72de233mr106552296d6.19.1717593466941; Wed, 05 Jun 2024
- 06:17:46 -0700 (PDT)
+ AJvYcCW22wpfKvsa6sVwyRSvVRgHjg0y8qtih8FgTNRQkiQbxouhCyT6VIR6XnixDOUr4WGyZkxuNiWrwzgMMODfG+4q1VN4PQ==
+X-Gm-Message-State: AOJu0YyUPHA4FFctOtG3RF9L9dfT5kKZ1jqt1Kt5RmoMMNG73K2Y+jKL
+ fKPB9uZUM3ILdqUzsxiaFF1vPqBdcmOVakbh92QjY1ZpkYz8fzZLN2ohVrjNbr1PJPcCAKtlq3a
+ sZntrb2TXrCHo4C7o626alZAPwNXkej3RAvqLgg==
+X-Google-Smtp-Source: AGHT+IEZij0HZe5vfbzer+G20FzYR7GRar3cvlNuAfb+EnFx+98KbInTJ+aeYaPaAAsKrnT9awaOb+KyFyyhYg3pUxI=
+X-Received: by 2002:a17:90a:df89:b0:2bd:9319:3da1 with SMTP id
+ 98e67ed59e1d1-2c27db19e1emr2767295a91.25.1717594302467; Wed, 05 Jun 2024
+ 06:31:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240528144252.179247-1-heinrich.schuchardt@canonical.com>
- <CANV2PTOAc50sXtz2V6s7bgnEk02TV_7+VArxBpHhF_tCGNjsmA@mail.gmail.com>
- <CAFLszTikFOL3MCOLr+MVg+sGdt3sxcjq6zhbgZxCMyVf-scRdQ@mail.gmail.com>
- <2ce195a5-e1af-43d6-82bd-252bccaa8e24@canonical.com>
-In-Reply-To: <2ce195a5-e1af-43d6-82bd-252bccaa8e24@canonical.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 5 Jun 2024 07:17:36 -0600
-Message-ID: <CAFLszTj2aoxmPJUFo7CFq9u5kD2mBRbJxmNVm5xXmjrBGN7=Rg@mail.gmail.com>
-Subject: Re: [PATCH v2 0/8] efi_loader: improve device-tree loading
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, 
- Shantur Rathore <i@shantur.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Raymond Mao <raymond.mao@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Bin Meng <bmeng@tinylab.org>, Mark Kettenis <kettenis@openbsd.org>, 
- Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de, 
- E Shattow <lucent@gmail.com>
+References: <20240528140955.1960172-1-raymond.mao@linaro.org>
+ <20240528140955.1960172-4-raymond.mao@linaro.org>
+ <Zl92YrE0tw-15wzZ@smile.fi.intel.com>
+ <CAEfUkU+tcgjs61thzAiNVsBZEVDUTY+BBAxNQFuemHsfzWf9Sw@mail.gmail.com>
+ <ZmAwMGCXZQbhoK0P@smile.fi.intel.com>
+ <CAC_iWj+PpUurGLqMw42ALHV6fOLnSwscG4KB2k-55eO2HuLwCQ@mail.gmail.com>
+ <ZmA7NgxcSS315jrK@smile.fi.intel.com>
+In-Reply-To: <ZmA7NgxcSS315jrK@smile.fi.intel.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 5 Jun 2024 16:30:58 +0300
+Message-ID: <CAC_iWj+B+X2BQP403X6wz7dj2HHUO_j0rXb=TjAwh6zCMEgGNg@mail.gmail.com>
+Subject: Re: [PATCH v3 03/25] mbedtls: add mbedtls into the build system
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de, 
+ Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>, 
+ Michal Simek <michal.simek@amd.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Simon Glass <sjg@chromium.org>, Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jesse Taube <mr.bossman075@gmail.com>,
+ Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Ilya Lukin <4.shket@gmail.com>, Sergei Antonov <saproj@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,111 +108,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Andy,
 
-On Wed, 5 Jun 2024 at 02:40, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> On 29.05.24 18:30, Simon Glass wrote:
-> > Hi,
+[...]
+
+> > > > > Is this approach maintainable?
+> > > > > I don't remember if we have similar in Linux kernel, for example.
+> > > > > (There are few candidates like compression algorithms that are usually
+> > > > > being
+> > > > >  hosted elsewhere)
+> > >
+> > > No answer?
 > >
-> > On Tue, 28 May 2024 at 18:38, E Shattow <lucent@gmail.com> wrote:
-> >>
-> >> Hi,
-> >>
-> >> On Tue, May 28, 2024 at 7:43=E2=80=AFAM Heinrich Schuchardt
-> >> <heinrich.schuchardt@canonical.com> wrote:
-> >>>
-> >>> In U-Boot EFI boot options can already specify both an EFI binary and
-> >>> an initrd. With this series we can additionally define the matching
-> >>> device-tree to be loaded in the boot option.
-> >>>
-> >>> With the last patch the boot manager will fall back the device-tree
-> >>> specified by $fdtfile in directories '/dtb/', '/', or '/dtb/current/'
-> >>> on the boot device if no device-tree is specified in the boot
-> >>> option or via a bootefi command parameter.
-> >>>
-> >>
-> >> As tested the $fdtfile environment variable has no effect on
-> >> global EFI boot when i.e. EFI/BOOT/BOOTRISCV64.EFI
-> >> on EFI System Partition and no user-added boot option;
-> >> $fdtfile env variable is not used with "mmc 0" or whichever
-> >> global boot option is enabled by default in the boot order.
-> >>
-> >> Adding a boot option for EFI/BOOT/BOOTRISCV64.EFI
-> >> and giving this priority in the boot order allows $fdtfile to
-> >> be effective here. This is consistent with what is described
-> >> by the series. Would the global EFI boot also get support
-> >> for $fdtfile either with this or a later series?
-> >>
-> >>> v2:
-> >>>          Update efi_dp_concat() instead of new function efi_dp_merge(=
-).
-> >>>          Carve out a function efi_load_option_dp_join() which we can
-> >>>          use both for the eficonfig and the efidebug command.
-> >>>          Rename variables id_dp, final_dp_size.
-> >>>          Rename create_initrd_dp() to create_lo_dp_part().
-> >>>          Use enum as parameter for create_lo_dp_part().
-> >>>          Put all related changes into one patch.
-> >>>
-> >>> Heinrich Schuchardt (8):
-> >>>    efi_loader: allow concatenation with contained end node
-> >>>    cmd: eficonfig: add support for setting fdt
-> >>>    cmd: efidebug: add support for setting fdt
-> >>>    efi_loader: load device-tree specified in boot option
-> >>>    efi_loader: move distro_efi_get_fdt_name()
-> >>>    efi_loader: return binary from efi_dp_from_lo()
-> >>>    efi_loader: export efi_load_image_from_path
-> >>>    efi_loader: load distro dtb in bootmgr
-> >>>
-> >>>   boot/bootmeth_efi.c                        |  60 +---------
-> >>>   cmd/eficonfig.c                            |  83 +++++++++----
-> >>>   cmd/efidebug.c                             | 130 +++++++++++++++---=
----
-> >>>   include/efi_loader.h                       |  24 +++-
-> >>>   lib/efi_loader/Makefile                    |   1 +
-> >>>   lib/efi_loader/efi_bootbin.c               |   2 +-
-> >>>   lib/efi_loader/efi_bootmgr.c               |  75 +++++++++++-
-> >>>   lib/efi_loader/efi_boottime.c              |   3 +-
-> >>>   lib/efi_loader/efi_device_path.c           |  40 ++++---
-> >>>   lib/efi_loader/efi_device_path_utilities.c |   2 +-
-> >>>   lib/efi_loader/efi_fdt.c                   | 117 ++++++++++++++++++=
-+
-> >>>   lib/efi_loader/efi_helper.c                |  44 +++++++
-> >>>   12 files changed, 445 insertions(+), 136 deletions(-)
-> >>>   create mode 100644 lib/efi_loader/efi_fdt.c
-> >>>
-> >>> --
-> >>> 2.43.0
-> >>>
-> >>
+> > subtrees is what was decided on OF_UPSRTEAM as well. If you have a
+> > better idea feel free to propose it, but for the sake of conformance
+> > we are better off doing the same thing on every external tree we pull
+> > in
+>
+> How do they will (or already do) maintain this?
+>
+
+There's a script to do that in dts/update-dts-subtree.sh
+
+> At least it's a good to have a few words on the choice made in the cover
+> letter, so we will have no questions on it.
+>
+> > > > > > Moreover, due to the Windows-style files from mbedtls git repo,
+> > > > > > we need to convert the CRLF endings to LF and do a commit manually:
+> > > > > >
+> > > > > > $ git add --renormalize .
+> > > > > > $ git commit
+>
+> ...
+>
+> > > > > >  lib/mbedtls/mbedtls_def_config.h | 4262 ++++++++++++++++++++++++++++++
+> > > > >
+> > > > > This is ridiculously HUGE! This is unreviewable. Moreover, this is even
+> > > > > hard to
+> > > > > configure by the user! Can you rather make it modular and maybe create a
+> > > > > separate documentation for the most important options (I do not believe one
+> > > > > needs _all_ of them to be set / tuned)?
+> > > > >
+> > > > > This is a file from MbedTLS and follows its own style.
+> > > > And this is how MbedTLS is configured - with all features listed in a
+> > > > config file and
+> > > > commenting out the unused features with "//").
+> > > > The modification here is just to control those existing options with
+> > > > Kconfigs.
+> > >
+> > > And why should we blindly follow this nonsense?
 > >
-> > Can we use the best-match compatible approach as expected by the new
-> > 'make image.fit' in Linux?
+> > It's easier to follow up future changes tbh. But I do agree the config
+> > file is huge. Perhaps splitting in 2 files is going to be easier
+> > mbedtls_def_config.h -> contains all the options that rarely need
+> > tuning, which I assume is the majority of the header
+> > mbedtls_usef_config.h -> contains the imporant options, crypto,
+> > checksum algorithms etc
 > >
-> > Filenames should be deprecated IMO. I am happy to help work on how to
-> > do that if you agree.
+> > Thoughts?
 >
-> Hello Simon,
+> The problem is on who decides which are "rarely need".
+
+Us. Sure it's going to take some time, but eventually we should be
+able to isolate options that rarely need a change
+
+> The feasible (to me) approach is to split per domain. Like you listed at the very end of your reply.
+> We can also learn from managing MTA configurations, such as Exim4 where user
+> may decide if they want a single file or split version.
+
+I am not sure tbh. Let me backpaddle from my previous suggestion :).
+Looking at it closer config.h is copied from mbedTLS, commenting out
+features we don't want.
+
+What we could do instead is either trim those comments out and only
+define the options we need for now. That would make the patch easily
+reviewable. If in the future we decide we need a more modular
+approach, we can retrofit it without breaking anything.
+
+Alternatively, we can undef the options we don't want in our header,
+but I am not sure how often these change or how scalable this is going
+to end up being. I prefer option #1
+
+Regards
+/Ilias
+
 >
-> It is the OS that creates boot options. The OS can determine the exact
-> dtb file based on the compatible string and the kernel version once per
-> kernel upgrade. This is much more efficient than doing the same on every
-> boot.
+> --
+> With Best Regards,
+> Andy Shevchenko
 >
-> Replacing $fdtfile by a matching logic could make sense. But please
-> consider the effect on boot time if have to read through more than 1000
-> arm64 dtbs with U-Boot's non-caching file-system drivers.
-
-The suggested option here is to use FIT, which is very fast at
-scanning the files. Please see [1]
-
-Failing that, we could implement a way (in FIT) of specifying that the
-FDT is in an external file. In that case FIT would become a mapping
-from compatible strings to filenames.
-
-Regards,
-Simon
-
-[1] https://github.com/open-source-firmware/flat-image-tree/blob/main/sourc=
-e/chapter3-usage.rst
+>
