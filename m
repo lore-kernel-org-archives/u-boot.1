@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 475AFC27C53
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 11:26:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B93F6C27C53
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 11:27:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F9498836E;
-	Wed,  5 Jun 2024 13:26:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 465688780E;
+	Wed,  5 Jun 2024 13:27:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="EA+KNvB8";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bH9NQr3N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F4748836E; Wed,  5 Jun 2024 13:26:16 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 46AFE8833C; Wed,  5 Jun 2024 13:27:04 +0200 (CEST)
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [IPv6:2607:f8b0:4864:20::730])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A133F88365
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 13:26:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D1D6D807EC
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 13:27:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dimorinny@google.com
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-57a22af919cso8314a12.1
- for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 04:26:14 -0700 (PDT)
+ spf=pass smtp.mailfrom=wjq.sec@gmail.com
+Received: by mail-qk1-x730.google.com with SMTP id
+ af79cd13be357-795186ae415so100711285a.2
+ for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 04:27:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1717586774; x=1718191574; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Aoa1RZoymo7tffdZP6t7dJPb/69CbFp1jQT8Ka4h3Z4=;
- b=EA+KNvB8zUPX3xrpXe82k1MDuIRcBsIPBjXeXBTVjvg75yA1tHxt/ckqTLZSzvrKNH
- i6Ln9n4bqjt+1P0nwNuUWHLlj1flTto4TdvclKVTXmESb3PA3DUEuE+dvMSAg/1jHOVs
- AbE2nR4vbHQC6yOGVVy7eIO0X+KwfA6lFKaD1PE8NoXhh/vvLlr6jz1D990pasPP3GUh
- X0jfMQtk8bYydggUS/P3MwupmXHlT+LTbi12W+FGFma40NWO5mPOBHRhHTTa29FSgVwq
- R/mRwHavPuLN3b1jCz4QajZWFpDq2NbtPWoLGAIph3r2lKZO8U4MD4pD2sKb+PmoWtOx
- AojA==
+ d=gmail.com; s=20230601; t=1717586821; x=1718191621; darn=lists.denx.de;
+ h=content-transfer-encoding:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eDY1aipJjGB/BqxxBZ4BKWza7WvHZ9wKmJrTLJkJQao=;
+ b=bH9NQr3No+MzaGDQCXWfZKTHRpOcrxpe2UV/jJ8R/RJhyQ7PmkMMc5nZN2XC8EqMPH
+ dRncGRrPeUTYpKjLGvuNt7C7PEHlzC1EdfAyolGgSqohxKdfc0f4QMVT5HRv72ehoWWB
+ 7F97YW3y3yb8EXEW7+M3H3gC5gGnSmtMdpTr6K2WkV3s0gz2nzdKGBPNL4McHkzFFq17
+ YyVofX2VugtgoOHJWMJ0oH/gPOb9+DV9PBP1Kw++F69sBa+PWu8BwbMA/O3tXlhAPMlp
+ QJEqUzN1ghuQK9yHEjEeKB+L8x7U1GNaujRG7nnz1djpS08nNdt5E5KKpGep4Ukaa4H0
+ IpHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717586774; x=1718191574;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Aoa1RZoymo7tffdZP6t7dJPb/69CbFp1jQT8Ka4h3Z4=;
- b=epsSYfRzFp/85wTTuJNu8vcqFbFUCtcwoWYK0iFDDu9qbtffJFN2AqMtqUz9tUhBYF
- t6zFe7euAGS6xM/JAsJHMUGIUsUdGlSufJEWTE5dCl1Yi+sO0471flBC8hfUpiEAs3hv
- 3tScMU43IaLUQi/vbL0M0HEOZb8DEGXMr3YdKNN/EyixPAmGqQCZYnT+p2eeUvfCUtSp
- eGzDVoAb+BVbCt83tW9enJKZc5tH807CclppLH04gCmo9zV4+Z7NyDbwFHKZJc8LYPZe
- Ctoea6ZIBrUjwWyhrCCKezWkvc8sT/N8Vri5PAxSz9SMHumkCMSkaqi6ggujxD0OK2Gp
- BxTQ==
+ d=1e100.net; s=20230601; t=1717586821; x=1718191621;
+ h=content-transfer-encoding:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=eDY1aipJjGB/BqxxBZ4BKWza7WvHZ9wKmJrTLJkJQao=;
+ b=A/pW1jEeVplyfvXjihPEWBVuKS0q+tTy3JIWET895Hwa3hfYgyOg5eB0GR2DHDCwzP
+ JTk/XQXBbUyrAXRkMgKVByV/B5TJwo63qSBhRi0CRKT+iZKcnNY2S/CknQcMBOs6+/pC
+ pO0Z3PQJwra/0ZreZIgmNfb5ke31Lez2O4z4nlRThoD90PMIMt8lrQ/2OdLb6pufGYdq
+ 76kzsBQHEaOHqcoY0NKVZZ9PhtkcUmN+IhMvgEhrbERqOG0qrbx38+cmxwy3GsvdJsq5
+ xT7yPOzPoY8SivYk8aGKM39olWhTAE1JACzKNRF6RvK7UQavzOfH5mI/wdb/t9yUE3jr
+ 2DGQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX2bAjsAy5a4CwwB4ka2vEPEBkahz2cDNJrnJkGGm8e4WlQ2PNlu05dD6u1cdOmDC4w22aWoVsb+HgeNh5mPWct43w9jg==
-X-Gm-Message-State: AOJu0YyBT6DhXuYRm6wIOkYNvvOOqJfiuvRgUOilcUB5UmPYlvA4WpNQ
- zeHzrefmOaw3/8FkgPkj4gKq2Qh3vsQIyW5TMYH+Bv7lkB044lYbcz4btnkc/ZArpDBg7P/yNh5
- 0UzNCoAMUnjbtshYNzFIzQ2iNfvHoPko5KXqe
-X-Google-Smtp-Source: AGHT+IHRdy8pwj04OUtWchGia3Fz3GTHrNP/3o0jgiivsZJrzr+tPC/dWizAAriNnTenvUVGab0AR+tCA+nms++EwJ8=
-X-Received: by 2002:a05:6402:1051:b0:572:988f:2f38 with SMTP id
- 4fb4d7f45d1cf-57a9089e5d0mr174270a12.6.1717586773692; Wed, 05 Jun 2024
- 04:26:13 -0700 (PDT)
+ AJvYcCV7G91krArnaKwxjAR5Uot4w/J66LHG0O3e4zeFO80b3QUlBwI7JSZ0u07wUp7TuvrngBuLsIHaOhP58Emgvx9hpmofZw==
+X-Gm-Message-State: AOJu0YzV+wGJ+G/tVr/Tr4eDn2rAqAU3H2HPnxtK1mDCgLXuLtsfHyB8
+ w/6sqLd7R1KGS1nvEerpeQJgVkl8EANU2ecTufNqH4Lcf849dcTYEASYeHED7u8Pzso2OI+sdPo
+ WBgTrcEZDIr7KQ0/8Cu/B+eMkml0=
+X-Google-Smtp-Source: AGHT+IEmAWrpfufRcd9Y2JSTbTZnJlFtO6Dc1KlUmDyDgNy50iabMK9ypUSPVPHxbFwRWKWAJdRTW0jCAlbjksq4J3k=
+X-Received: by 2002:a05:620a:8dc:b0:792:bd20:422b with SMTP id
+ af79cd13be357-79523d38759mr241100385a.26.1717586820539; Wed, 05 Jun 2024
+ 04:27:00 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240603-bcb-compil-v1-1-4edc2c77eed3@baylibre.com>
- <44f71d7d-a999-4479-9e7a-be2956b650bb@baylibre.com>
-In-Reply-To: <44f71d7d-a999-4479-9e7a-be2956b650bb@baylibre.com>
-From: Dmitrii Merkurev <dimorinny@google.com>
-Date: Wed, 5 Jun 2024 12:26:03 +0100
-Message-ID: <CAOWkq4kL2T41gjeZjYde4R9_idcr1NoTCqw7msBqXZ5uh_Mt-g@mail.gmail.com>
-Subject: Re: [PATCH] cmd: bcb: Fix bcb compilation when CONFIG_CMD_BCB=n
-To: Guillaume LA ROQUE <glaroque@baylibre.com>
-Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Tom Rini <trini@konsulko.com>, 
- Cody Schuffelen <schuffelen@google.com>, u-boot@lists.denx.de
+References: <CAMn3X6NjqGmCeVT-X_d_btDKQQJDzz7CnTzOb=62np75VumhDg@mail.gmail.com>
+ <5b08ad9c-8ed3-4877-b95d-f5d0ca693fb0@linux.alibaba.com>
+ <CAMn3X6MJiPdB9s=h8wyNQ-=LoWcOMghj3K1KOk-V-pMvyen2fw@mail.gmail.com>
+ <0d843d6d-3561-4a03-9fa1-94152551f935@linux.alibaba.com>
+In-Reply-To: <0d843d6d-3561-4a03-9fa1-94152551f935@linux.alibaba.com>
+From: jianqiang wang <wjq.sec@gmail.com>
+Date: Wed, 5 Jun 2024 13:26:48 +0200
+Message-ID: <CAMn3X6M-Lmmh9rH6k1E_+u2aOEyViwM9nb2f9=p_ZXD+s20d7A@mail.gmail.com>
+Subject: Re: Several potential vulnerabilities in the filesystem
+To: Gao Xiang <hsiangkao@linux.alibaba.com>, Huang Jianan <jnhuang95@gmail.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,6 +92,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thank you and sorry for missing that
+Hi Xiang,
 
-Reviewed-by: Dmitrii Merkurev <dimorinny@google.com>
+I just checked the second crash, the patch can solve this issue. Did
+you also look into the other two issues?
+
+Best
+Jianqiang
+
+Gao Xiang <hsiangkao@linux.alibaba.com> =E4=BA=8E2024=E5=B9=B46=E6=9C=885=
+=E6=97=A5=E5=91=A8=E4=B8=89 13:18=E5=86=99=E9=81=93=EF=BC=9A
+>
+> Hi Jianqiang,
+>
+> On 2024/6/5 19:00, jianqiang wang wrote:
+> > Hi,
+> >
+> > I do have the crafted image.
+> >
+> > payload_00500, payload_00763, payload_00846 can be used to reproduce
+> > 1,2,3 vulnerabilities respectively.
+> >
+> > Each image is a hard drive file and the vulnerabilities can be
+> > triggered by performing the following operations:
+> >
+> >      struct udevice *dev;
+> >      uclass_first_device_err(UCLASS_IDE, &dev);  //detect the block dev=
+ice
+> >
+> >      fs_set_blk_dev("ide","0:1", 0);
+> >      fs_ls("/");   //mount the first partition and list the root direct=
+ory files
+> >
+> >      fs_set_blk_dev("ide","0:1", 0);
+> >      char buf[10];
+> >      buf[0] =3D 0;
+> >      buf[1] =3D 0;
+> >      buf[2] =3D 0;
+> >      buf[3] =3D 0;
+> >      loff_t actread =3D 0;
+> >      fs_read("/a.txt", (ulong)buf, 0, 5, &actread);
+> >      printf("fd actread %lld %x %x %x\n",actread,buf[0],buf[1],buf[2]);
+> >   read the /a.txt file
+> >
+> >
+> >      fs_set_blk_dev("ide","0:1", 0);
+> >      fs_read("/a.txt.ln", (ulong)buf, 0, 5, &actread);
+> >      printf("fd actread %lld %x %x %x\n",actread,buf[0],buf[1],buf[2]);
+> >   read the /a.txt.ln symbol file
+> >
+> >      fs_set_blk_dev("ide","0:1", 0);
+> >      fs_unlink("/a.txt.ln");  //unlink it
+> >
+> > The second and third may not trigger a crash however, can be observed
+> > by inserting logging before the memset/memcpy function.
+>
+> Sorry, I just found that this issue was already fixed in erofs-utils:
+> https://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs-utils.git/com=
+mit/?id=3D884866ca07817e97c59605a2fa858a0b732d3f3c
+>
+> Would you mind checking if the patch above fixes the issue?
+>
+> Hi Jianan,
+> Would you mind backporting this patch for u-boot?
+>
+> Thanks,
+> Gao Xiang
+>
+> >
+> > Best regards
+> >
+> > Gao Xiang <hsiangkao@linux.alibaba.com> =E4=BA=8E2024=E5=B9=B46=E6=9C=
+=885=E6=97=A5=E5=91=A8=E4=B8=89 05:10=E5=86=99=E9=81=93=EF=BC=9A
+> >>
+> >>
+> >>
+> >> On 2024/6/5 06:53, jianqiang wang wrote:
+> >>> Hi Das U-Boot developers,
+> >>>
+> >>
+> >> ...
+> >>
+> >>>
+> >>> 2. in file fs/erofs/data.c, function z_erofs_read_one_data, the node
+> >>> data is read from the storage, however, without a proper check, the
+> >>> data can be corrupted. For example, the inode data is used in functio=
+n
+> >>> z_erofs_read_data, map.m_llen will be calculated to a very large
+> >>> value, which means the length variable will be very large. It will
+> >>> cause a large memory clear with memset(buffer + end - offset, 0,
+> >>> length);
+> >>
+> >> Would you mind giving a reproducer or a crafted image to trigger
+> >> this?  Or it's your pure observation.
+> >>
+> >> Thanks,
+> >> Gao XIang
+> >>
