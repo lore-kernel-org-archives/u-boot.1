@@ -4,80 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0DE4C25B76
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 11:39:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D9B5C27C5E
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 12:06:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3363388261;
-	Wed,  5 Jun 2024 13:39:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5582888354;
+	Wed,  5 Jun 2024 14:06:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FrG67GEL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TMVCnduZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6BC198833C; Wed,  5 Jun 2024 13:39:39 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id E85F488261; Wed,  5 Jun 2024 14:06:07 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4514881A2
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 13:39:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 72B6D88261
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 14:06:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=wjq.sec@gmail.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-6f93c24d1f7so950492a34.1
- for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 04:39:36 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-57a30b3a6cbso2765248a12.1
+ for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 05:06:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717587575; x=1718192375; darn=lists.denx.de;
- h=content-transfer-encoding:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=j9UFVB55H08GsTooap2ILqoHEaQbMTx7rQAbtDfDe0U=;
- b=FrG67GELLD3pDfxkLic0jxxwaYqViVXMbmFtozh88LVnVBZrZYzj2HOGPlf9ghTEh+
- Fd+eK7pCYT4i7hEgHkd63oc607geZQnASSB01afXwInQ0dqv9m2Q9NNrkl+p/uKi3wKI
- lPOJz5SjaQ7OskJiBRZ+Ajkq8duOLSkALPAxjiadaLRdusN3YRzBcxH/lZ8ohdCBqQnC
- 8lKDQQlQo+YZeGB30V0ufbMIlkdHTlaAnjjVZqeAZquLnUloZIH08L3TGZos/SLtgxOu
- kBKrqbd7OV+Py1R6zJJglIx2KUuQDLjL6IoxLH/z+mmdN5uKoVkUSFRA/HZ9OKOxk6B5
- T9Rw==
+ d=linaro.org; s=google; t=1717589165; x=1718193965; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=vdIAUqEzJLD5eMi+hRrOuxewt1vWLCKR4z8DqNkGH74=;
+ b=TMVCnduZXXqUbHXl6FmFK4uVWU7bX+sz/Z/1oIW54BSF9uA9GpsIWosaSe+h8dFprq
+ qGWqkgN9hvltRP7fLsp6zniG+fJdmlyvGvk3vhg2s/HmX2h3hSqi+Q6UP8g6maa0jOXY
+ KhyEdirRVnAD8KLsixuMeh3N1CxTi5P/Z/6hnNTu+jBbBS9+aF5a4vuBwy9kaU3qX6fd
+ zeUK0vhzqegM0xGNI6EI5opHku/cs3Mm9pnvK5prVftkcpE39+otI3p5DqxCgRTFTtLK
+ BYqzvB2n5N4hkt8afQBmNX3xt6tk03j0tdFUq1hCXYHqU59UbCd2kh5TyCcQG6HsWxOX
+ FyOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717587575; x=1718192375;
- h=content-transfer-encoding:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=j9UFVB55H08GsTooap2ILqoHEaQbMTx7rQAbtDfDe0U=;
- b=ut1Qs7ZUsqeX5kMOJL0oO4QOXz7IAXoeECnmrR5hFnr+aRoIz9DZLo3R9JQ+NbWKYm
- XkPUMXbvr58WC2qcFtofaHkpo6MnQKlOkRaGmbeTAmolPohfiIJABuTHqKlhNLnRh+GB
- /AxW3KYBAr70GkE9+iy2S7urGy8llay0zOtgWp1It7Pnz5G8h201rbGtrGKlKzPowoi4
- LFAyeYkxT0dnVts4gFwJp6Sf0z0+nGveuS4gk6prE8f4qXiN1+02VDETBP9IuASj3fg9
- 6rW5r3TYKQFzNSjgk90MbuIcyL5ro++KazL/hUeb8eSr9c7WBSinNEwpn3HJNeCWqSO4
- gDLQ==
+ d=1e100.net; s=20230601; t=1717589165; x=1718193965;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=vdIAUqEzJLD5eMi+hRrOuxewt1vWLCKR4z8DqNkGH74=;
+ b=e/bF3AWJ9AHDQnjXYY3WsPfrDgq/CgsUNZaVb+8ZmFnIFzxWnkaaz53oWFPuZ/9Uin
+ eYyXrkqsBTujOsWJMgP2MdDPzKMEh0lwhj6yaapUawXQcirDc/N7rFoS6XXpMkd/5AvT
+ WLNu/GmVspYPnHkydKZ8yDkDexmx+bRhZvbKf5nfQ3U291liaemkSASt4+57+q1e0WUx
+ UNantZ7L8kz0O3O7d+yZz6orE19YhYE4c1BNeGj983SzXO1TKEyOIfw7HDEnKD4R6kU0
+ 1hFLnxqFt7CnwO9PvZp1mxINuEZhIPPCI8DjFEaWJmdGsCiTPSBYBXhUYTVlLSJwP0+Y
+ UgaQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU76HHU349jYPkLVNwa6hMdKRwsdpIUGQjbVrz77f6+r3cUtcNzgfWW8Tyl3tyFjNZ+xXl1o5bbjTnHWcT67GgnUfw24w==
-X-Gm-Message-State: AOJu0YwcdtehRP4e47f55jU5B0uJzW7a214q3pmwyUp/3+41Wdoew6SI
- 9zX0qTftypIIaL5DR6VVqn4mL+xaQL8gpzhuLpmW+m5012uaTYygarpa94h5cKmKLSjHaBskgoH
- w19tyOc/cfwf4c8zKZMwmiN7N570=
-X-Google-Smtp-Source: AGHT+IH4evIkE/SkL4vlqt5PqGdxpkUOfrvbY2xRMCDTeSAHpZ08XKYRWj+oXp82VVmpmt31DNFnm9IKBoOIRngaUGc=
-X-Received: by 2002:a05:6830:10:b0:6f0:e4f1:7a47 with SMTP id
- 46e09a7af769-6f9436b6fe3mr2402236a34.28.1717587575516; Wed, 05 Jun 2024
- 04:39:35 -0700 (PDT)
+ AJvYcCXrn1N+w8T1LRdnXHK+sMJt0v7neGAsIhFIMjcHiCDqEPbUuLm1hfXRqxX1JTXA7ukEtqSv58vWaB7Rn1jyqXX+WMSL2Q==
+X-Gm-Message-State: AOJu0YyMZPhb0scH9CzCbpnCFJApiO1bfWybDsgpKCFuJQzQzQrSVv3A
+ BqpAerAaXvQMuv/+eDh66yykGapDsLsgKgId1hVR6c3A6xQWPpzb2d/NQCDSJGk=
+X-Google-Smtp-Source: AGHT+IHXBqmBQK1yIsVnuLG/ytN2WfLvarW/Ud3eUvzg8paO6jcpHO8YcV9nilXhYOMUt1GxqgJwRw==
+X-Received: by 2002:a50:aa93:0:b0:57a:4ff8:2f11 with SMTP id
+ 4fb4d7f45d1cf-57a8b674ac2mr1551735a12.5.1717589164527; 
+ Wed, 05 Jun 2024 05:06:04 -0700 (PDT)
+Received: from ?IPV6:2a02:8109:aa0d:be00::8090? ([2a02:8109:aa0d:be00::8090])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-57a61b4e36dsm5460703a12.75.2024.06.05.05.06.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 05 Jun 2024 05:06:03 -0700 (PDT)
+Message-ID: <61e7da76-4599-4c2a-8c35-f3caa2724e0a@linaro.org>
+Date: Wed, 5 Jun 2024 14:06:02 +0200
 MIME-Version: 1.0
-References: <CAMn3X6NjqGmCeVT-X_d_btDKQQJDzz7CnTzOb=62np75VumhDg@mail.gmail.com>
- <5b08ad9c-8ed3-4877-b95d-f5d0ca693fb0@linux.alibaba.com>
- <CAMn3X6MJiPdB9s=h8wyNQ-=LoWcOMghj3K1KOk-V-pMvyen2fw@mail.gmail.com>
- <0d843d6d-3561-4a03-9fa1-94152551f935@linux.alibaba.com>
- <CAMn3X6M-Lmmh9rH6k1E_+u2aOEyViwM9nb2f9=p_ZXD+s20d7A@mail.gmail.com>
- <e57884b8-701a-4ca5-adce-1b3a0b4b8b2e@linux.alibaba.com>
-In-Reply-To: <e57884b8-701a-4ca5-adce-1b3a0b4b8b2e@linux.alibaba.com>
-From: jianqiang wang <wjq.sec@gmail.com>
-Date: Wed, 5 Jun 2024 13:39:23 +0200
-Message-ID: <CAMn3X6MNJka9wVJooUEn2SXZaY0Y2ODhmo3c9+Fo=zgeqmoksA@mail.gmail.com>
-Subject: Re: Several potential vulnerabilities in the filesystem
-To: Gao Xiang <hsiangkao@linux.alibaba.com>, Huang Jianan <jnhuang95@gmail.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/7] lib: uuid: add UUID v5 support
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mario Six <mario.six@gdsys.cc>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de
+References: <20240531-b4-dynamic-uuid-v3-0-ca4a4865db00@linaro.org>
+ <20240531-b4-dynamic-uuid-v3-1-ca4a4865db00@linaro.org>
+ <CAFLszTj=yu5AGBDv7K7ir=_dCGzsZ1Zc3UXafxSDTM0wKZ=pNw@mail.gmail.com>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <CAFLszTj=yu5AGBDv7K7ir=_dCGzsZ1Zc3UXafxSDTM0wKZ=pNw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,117 +101,167 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Could you please forward the issues to whoever is responsible for them?
+Hi Simon,
 
-Gao Xiang <hsiangkao@linux.alibaba.com> =E4=BA=8E2024=E5=B9=B46=E6=9C=885=
-=E6=97=A5=E5=91=A8=E4=B8=89 13:35=E5=86=99=E9=81=93=EF=BC=9A
->
->
->
-> On 2024/6/5 19:26, jianqiang wang wrote:
-> > Hi Xiang,
-> >
-> > I just checked the second crash, the patch can solve this issue. Did
-> > you also look into the other two issues?
->
-> I'm only responsible for the EROFS project.
->
-> Thanks,
-> Gao Xiang
->
-> >
-> > Best
-> > Jianqiang
-> >
-> > Gao Xiang <hsiangkao@linux.alibaba.com> =E4=BA=8E2024=E5=B9=B46=E6=9C=
-=885=E6=97=A5=E5=91=A8=E4=B8=89 13:18=E5=86=99=E9=81=93=EF=BC=9A
-> >>
-> >> Hi Jianqiang,
-> >>
-> >> On 2024/6/5 19:00, jianqiang wang wrote:
-> >>> Hi,
-> >>>
-> >>> I do have the crafted image.
-> >>>
-> >>> payload_00500, payload_00763, payload_00846 can be used to reproduce
-> >>> 1,2,3 vulnerabilities respectively.
-> >>>
-> >>> Each image is a hard drive file and the vulnerabilities can be
-> >>> triggered by performing the following operations:
-> >>>
-> >>>       struct udevice *dev;
-> >>>       uclass_first_device_err(UCLASS_IDE, &dev);  //detect the block =
-device
-> >>>
-> >>>       fs_set_blk_dev("ide","0:1", 0);
-> >>>       fs_ls("/");   //mount the first partition and list the root dir=
-ectory files
-> >>>
-> >>>       fs_set_blk_dev("ide","0:1", 0);
-> >>>       char buf[10];
-> >>>       buf[0] =3D 0;
-> >>>       buf[1] =3D 0;
-> >>>       buf[2] =3D 0;
-> >>>       buf[3] =3D 0;
-> >>>       loff_t actread =3D 0;
-> >>>       fs_read("/a.txt", (ulong)buf, 0, 5, &actread);
-> >>>       printf("fd actread %lld %x %x %x\n",actread,buf[0],buf[1],buf[2=
-]);
-> >>>    read the /a.txt file
-> >>>
-> >>>
-> >>>       fs_set_blk_dev("ide","0:1", 0);
-> >>>       fs_read("/a.txt.ln", (ulong)buf, 0, 5, &actread);
-> >>>       printf("fd actread %lld %x %x %x\n",actread,buf[0],buf[1],buf[2=
-]);
-> >>>    read the /a.txt.ln symbol file
-> >>>
-> >>>       fs_set_blk_dev("ide","0:1", 0);
-> >>>       fs_unlink("/a.txt.ln");  //unlink it
-> >>>
-> >>> The second and third may not trigger a crash however, can be observed
-> >>> by inserting logging before the memset/memcpy function.
-> >>
-> >> Sorry, I just found that this issue was already fixed in erofs-utils:
-> >> https://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs-utils.git/=
-commit/?id=3D884866ca07817e97c59605a2fa858a0b732d3f3c
-> >>
-> >> Would you mind checking if the patch above fixes the issue?
-> >>
-> >> Hi Jianan,
-> >> Would you mind backporting this patch for u-boot?
-> >>
-> >> Thanks,
-> >> Gao Xiang
-> >>
-> >>>
-> >>> Best regards
-> >>>
-> >>> Gao Xiang <hsiangkao@linux.alibaba.com> =E4=BA=8E2024=E5=B9=B46=E6=9C=
-=885=E6=97=A5=E5=91=A8=E4=B8=89 05:10=E5=86=99=E9=81=93=EF=BC=9A
-> >>>>
-> >>>>
-> >>>>
-> >>>> On 2024/6/5 06:53, jianqiang wang wrote:
-> >>>>> Hi Das U-Boot developers,
-> >>>>>
-> >>>>
-> >>>> ...
-> >>>>
-> >>>>>
-> >>>>> 2. in file fs/erofs/data.c, function z_erofs_read_one_data, the nod=
-e
-> >>>>> data is read from the storage, however, without a proper check, the
-> >>>>> data can be corrupted. For example, the inode data is used in funct=
-ion
-> >>>>> z_erofs_read_data, map.m_llen will be calculated to a very large
-> >>>>> value, which means the length variable will be very large. It will
-> >>>>> cause a large memory clear with memset(buffer + end - offset, 0,
-> >>>>> length);
-> >>>>
-> >>>> Would you mind giving a reproducer or a crafted image to trigger
-> >>>> this?  Or it's your pure observation.
-> >>>>
-> >>>> Thanks,
-> >>>> Gao XIang
-> >>>>
+On 05/06/2024 04:13, Simon Glass wrote:
+> Hi Caleb,
+> 
+> On Fri, 31 May 2024 at 07:50, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>>
+>> Add support for generating version 5 UUIDs, these are determistic and work
+> 
+> spelling
+> 
+>> by hashing a "namespace" UUID together with some unique data. One intended
+>> usecase is to allow for dynamically generate payload UUIDs for UEFI
+>> capsule updates, so that supported boards can have their own UUIDs
+>> without needing to hardcode them.
+>>
+>> Tests for this are added in an upcoming patch.
+>>
+>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+>> ---
+>>   include/uuid.h | 17 +++++++++++++++++
+>>   lib/Kconfig    |  8 ++++++++
+>>   lib/uuid.c     | 37 +++++++++++++++++++++++++++++++++++++
+>>   3 files changed, 62 insertions(+)
+>>
+>> diff --git a/include/uuid.h b/include/uuid.h
+>> index f5a941250f48..539affaa47b9 100644
+>> --- a/include/uuid.h
+>> +++ b/include/uuid.h
+>> @@ -10,8 +10,9 @@
+>>   #ifndef __UUID_H__
+>>   #define __UUID_H__
+>>
+>>   #include <linux/bitops.h>
+>> +#include <linux/kconfig.h>
+>>
+>>   /*
+>>    * UUID - Universally Unique IDentifier - 128 bits unique number.
+>>    *        There are 5 versions and one variant of UUID defined by RFC4122
+>> @@ -142,8 +143,24 @@ void gen_rand_uuid(unsigned char *uuid_bin);
+>>    * @param          - uuid output type: UUID - 0, GUID - 1
+>>    */
+>>   void gen_rand_uuid_str(char *uuid_str, int str_format);
+>>
+>> +#if IS_ENABLED(CONFIG_UUID_GEN_V5)
+>> +/**
+>> + * gen_uuid_v5() - generate UUID v5 from namespace and other seed data.
+>> + *
+>> + * @namespace:   pointer to UUID namespace salt
+>> + * @uuid:        pointer to allocated UUID output
+>> + * @...:         NULL terminated list of seed data as pairs of pointers
+>> + *               to data and their lengths
+>> + */
+>> +void gen_uuid_v5(const struct uuid *namespace, struct uuid *uuid, ...);
+>> +#else
+>> +static inline void gen_uuid_v5(const struct uuid *namespace, struct uuid *uuid, ...)
+>> +{
+>> +}
+>> +#endif
+> 
+> Can you explain somewhere why the static inline is needed?
+
+The explicit "inline" certainly isn't, but this must be static because 
+it's defined in a header, so we'd otherwise have multiple definitions 
+for every #include.
+> 
+>> +
+>>   /**
+>>    * uuid_str_to_le_bin() - Convert string UUID to little endian binary data.
+>>    * @uuid_str:  pointer to UUID string
+>>    * @uuid_bin:  pointer to allocated array for little endian output [16B]
+>> diff --git a/lib/Kconfig b/lib/Kconfig
+>> index 189e6eb31aa1..2941532f25cf 100644
+>> --- a/lib/Kconfig
+>> +++ b/lib/Kconfig
+>> @@ -80,8 +80,16 @@ config RANDOM_UUID
+>>          help
+>>            Enable the generation of partitions with random UUIDs if none
+>>            are provided.
+>>
+>> +config UUID_GEN_V5
+>> +       bool "Enable UUID version 5 generation"
+>> +       select LIB_UUID
+>> +       depends on SHA1
+>> +       help
+>> +         Enable the generation of version 5 UUIDs, these are determistic and
+> 
+> spelling
+> 
+>> +         generated from a namespace UUID, and a string (such as a board name).
+>> +
+>>   config SPL_LIB_UUID
+>>          depends on SPL
+>>          bool
+>>
+>> diff --git a/lib/uuid.c b/lib/uuid.c
+>> index dfa2320ba267..2df0523e717f 100644
+>> --- a/lib/uuid.c
+>> +++ b/lib/uuid.c
+>> @@ -21,8 +21,9 @@
+>>   #include <part_efi.h>
+>>   #include <malloc.h>
+>>   #include <dm/uclass.h>
+>>   #include <rng.h>
+>> +#include <u-boot/sha1.h>
+>>
+>>   int uuid_str_valid(const char *uuid)
+>>   {
+>>          int i, valid;
+>> @@ -368,8 +369,44 @@ void uuid_bin_to_str(const unsigned char *uuid_bin, char *uuid_str,
+>>                  }
+>>          }
+>>   }
+>>
+>> +#if IS_ENABLED(CONFIG_UUID_GEN_V5)
+>> +void gen_uuid_v5(const struct uuid *namespace, struct uuid *uuid, ...)
+>> +{
+>> +       sha1_context ctx;
+>> +       va_list args;
+>> +       const uint8_t *data;
+>> +       uint8_t hash[SHA1_SUM_LEN];
+>> +       uint32_t tmp;
+>> +
+>> +       sha1_starts(&ctx);
+>> +       /* Hash the namespace UUID as salt */
+>> +       sha1_update(&ctx, (unsigned char *)namespace, UUID_BIN_LEN);
+>> +       va_start(args, uuid);
+>> +
+>> +       while ((data = va_arg(args, const uint8_t *))) {
+>> +               unsigned int len = va_arg(args, size_t);
+>> +
+>> +               sha1_update(&ctx, data, len);
+>> +       }
+>> +
+>> +       va_end(args);
+>> +       sha1_finish(&ctx, hash);
+>> +
+>> +       /* Truncate the hash into output UUID, it is already big endian */
+>> +       memcpy(uuid, hash, sizeof(*uuid));
+>> +
+>> +       /* Configure variant/version bits */
+>> +       tmp = be32_to_cpu(uuid->time_hi_and_version);
+>> +       tmp = (tmp & ~UUID_VERSION_MASK) | (5 << UUID_VERSION_SHIFT);
+>> +       uuid->time_hi_and_version = cpu_to_be32(tmp);
+>> +
+>> +       uuid->clock_seq_hi_and_reserved &= UUID_VARIANT_MASK;
+>> +       uuid->clock_seq_hi_and_reserved |= UUID_VARIANT << UUID_VARIANT_SHIFT;
+>> +}
+>> +#endif
+>> +
+>>   #if defined(CONFIG_RANDOM_UUID) || defined(CONFIG_CMD_UUID)
+>>   void gen_rand_uuid(unsigned char *uuid_bin)
+>>   {
+>>          u32 ptr[4];
+>>
+>> --
+>> 2.45.0
+>>
+> 
+> Regards,
+> Simon
+
+-- 
+// Caleb (they/them)
