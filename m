@@ -4,86 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86634C25B76
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 12:29:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57A82C27C53
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 12:33:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D96D688313;
-	Wed,  5 Jun 2024 14:29:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B4E2588313;
+	Wed,  5 Jun 2024 14:33:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sRsyaCg8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SS/Z8Hlv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF85A88354; Wed,  5 Jun 2024 14:29:31 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 4CF2388286; Wed,  5 Jun 2024 14:33:40 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD34787AD2
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 14:29:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0BCEC88313
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 14:33:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a62ef52e837so258334766b.3
- for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 05:29:29 -0700 (PDT)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a68c2915d99so231242266b.2
+ for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 05:33:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1717590569; x=1718195369; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1717590816; x=1718195616; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=DgGQiXn93DPT+ejAfIEi0oMWq8HVOf+FMz09y6/cbQ4=;
- b=sRsyaCg8lCm3H1BxHNbVogc6bnhYY+UDGmo0FDY3r77Lfyn18kCxJicinDC4x9pa1h
- GU8DgpgEAuWB0L1cvJiZvdzU12h+63vogCUvURhxe94cHH4N3x65WLIZagTeTznuryRN
- cxojrDaAfN/kEsiy58kstTQjc3HIA48paeb/ctcNtC8M+J8ZZmyby8fMLTKPGWjlWQKQ
- KikT9LCddLAUDe1++iGDa6LL8DNqg6P8PJrkMHe7wrn6WfC/d8PvU0Sj4daC79+QBiv2
- QFdF56tqF1jd5m3ct4hj3xTyQeBwc6FNb+mqjmXrZbYFe24kybae8NNzKeG77NECWh8G
- S4Fw==
+ bh=wF13AKABjyucdHcOfkQEggCMyK2tDFWHpxZE3PaesXw=;
+ b=SS/Z8Hlvvzh9/CycdbrKq7tFKlPdm6M9cfjyeYQEhBvsWNbMXblAX7vvu88EZlOW7d
+ AqsrdhMVw/IUGUdGVyAhFhv9A9SS7CL1k26zjOjGANjBIp4gZ6BzGLDTjckJep7trxyj
+ AdYeXdimkoPzUpeYapZ0ccYTsOXXFF7B8VdGNuyorB1LpWcNmzObU7doTfU63cIiDvcU
+ OZCISA4GtVQjGmM77jmwWcVoVceGJn/cc5Oxe0EyYmKt8zjK+CJU4XsUKzCKjlmv2Tjj
+ km2POYVP5qLSJPnqHBmo3Czux0xIkEdelqau/zZcxldVerYNKFighbq0tbs2xvegX+PR
+ Dlgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717590569; x=1718195369;
+ d=1e100.net; s=20230601; t=1717590816; x=1718195616;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=DgGQiXn93DPT+ejAfIEi0oMWq8HVOf+FMz09y6/cbQ4=;
- b=RPfqfoTUefO//Bk2GNpCZ26/apSeivIO8bapP4iHSYz3r+lYhBzoTTDHccGRqCrA7+
- 3km68Nh7BCI12tecTWjgkQtVFOpVTJ1QClKl83DDUftHYwc1BvnuTlq6Gum80is8M7FV
- EKagP0sXx4CarNDbiJzIgLOTRMhWV5hYCvOVueOP376Ya8rSragCa/WFtU+CtkAVB6FJ
- fIy1vMcBdrBq2YkjDkOe3O5gCnCeFpEE4Z62r2umRxKjnEkZ3QQ62Yj/YJrLIZwjnHqr
- BIfufsuUyKACt9pBHFHvrWJcW4qtIq92qVk1FVRk4zwPko5Hur7bs1joKcci8Hlh7tLL
- 1C4A==
+ bh=wF13AKABjyucdHcOfkQEggCMyK2tDFWHpxZE3PaesXw=;
+ b=bXN0Ch4PCDmbCJZYfedTkIAiwiUZKrv5jErrzghrSVRrSXE6CpMLjGLhB15y3nvj3E
+ zptMOfZisD02bFt2XG2NsBbnjQDuQeKfg4tBsIVA1BBI/tNF7BzqOzwICxL6azIKyNJI
+ FUELFau2VXSe5UbfniaeuC88U/gVizc4y3mKELRgiXegKddXGVWcPfp2cT5KkYTf5ql5
+ nVLMFCcjthbPpgkMGCHDAt6UsMhCfSaPK4ZaRWW8n8GHg18LvZ/EMaPt5RF6AkHq859A
+ ZVlPPx3aXfFKNfWxwYqvd5SNa96G/QBBIazty7C+ElDqnmwjBjvuf0fBx9Tpm48ZnEnj
+ v+PQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU3zNNHexAwKyd/vcHCBz6Y+np37dQUFILhPaxHpsYF4313+dl6VOPxbaXpi7Xwp6qU93903WnbS5COAk730/0GYRrIgw==
-X-Gm-Message-State: AOJu0Yw4IzZfoIqSJHCQWvHoDto4EI7nN5hQ0W6MYH3cnTTbFrzVHVOn
- dpyv3ENWvm70bQ6EnfcFLZeVXvonKmwSRuIK/8We7MypPGxW6Wye9odViOzX/2Q=
-X-Google-Smtp-Source: AGHT+IHk6HFhiyosa8XJbEx2GaC6ovN8xLUWi6VRF5JFTR9w54hCFPY58FO6WKo+vcSjYb8r6RxCjg==
-X-Received: by 2002:a17:906:2318:b0:a68:e58b:2c35 with SMTP id
- a640c23a62f3a-a699f56bd3cmr147987466b.31.1717590569127; 
- Wed, 05 Jun 2024 05:29:29 -0700 (PDT)
+ AJvYcCUOEsTZ/Tpl3cTkSq9MheyBNUC6i7UZHZXpbmQeTn/ZYZgeTEg98LYtqjYpe722yfcyZfLYjLlatKyzR1Y8yJZI0ftDRg==
+X-Gm-Message-State: AOJu0YwRICr69NAzG05AjIgA6JPaVy/D6yX9ZupXlHSg21PvUMvU0ba2
+ N6cc3YsC9C6P0xeszMvvsbfJ4yPrHPIxXcwfKcvSkvYc/0qMrxxGunKX6QQj9LvD5a9VU9kXmp6
+ 1EHvmkg==
+X-Google-Smtp-Source: AGHT+IEnCnPZWTNj4ORh9/Mo8gNKXih+icWK+4Ulfg2zPvb2cPgVOya76WaOet+GYRH9PfoWj2uukQ==
+X-Received: by 2002:a17:906:ae8d:b0:a69:1a11:d396 with SMTP id
+ a640c23a62f3a-a69a0000b9fmr150015566b.71.1717590816414; 
+ Wed, 05 Jun 2024 05:33:36 -0700 (PDT)
 Received: from ?IPV6:2a02:8109:aa0d:be00::8090? ([2a02:8109:aa0d:be00::8090])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a68bc80212dsm612741166b.82.2024.06.05.05.29.26
+ a640c23a62f3a-a68ab7c72b6sm649333666b.50.2024.06.05.05.33.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Jun 2024 05:29:27 -0700 (PDT)
-Message-ID: <8e4f962b-77c5-4eb7-8147-cd00a73b4172@linaro.org>
-Date: Wed, 5 Jun 2024 14:29:25 +0200
+ Wed, 05 Jun 2024 05:33:35 -0700 (PDT)
+Message-ID: <0361e6b1-b0cc-453b-968e-999d1913a3db@linaro.org>
+Date: Wed, 5 Jun 2024 14:33:34 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 6/7] tools: add genguid tool
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Mario Six <mario.six@gdsys.cc>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-References: <20240531-b4-dynamic-uuid-v3-0-ca4a4865db00@linaro.org>
- <20240531-b4-dynamic-uuid-v3-6-ca4a4865db00@linaro.org>
- <eb3681f0-ecb9-4775-9093-5640aa408f50@gmx.de>
- <CAC_iWj+s67woD-USmT3+hDq7yO9K_G=WS1DG-oJMM1byPb3JNQ@mail.gmail.com>
+Subject: Re: [PATCH v3 4/8] mach-snapdragon: implement capsule update support
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
+References: <20240603-b4-qcom-capsule-updates-v3-0-fe2e083289ec@linaro.org>
+ <20240603-b4-qcom-capsule-updates-v3-4-fe2e083289ec@linaro.org>
+ <CAFA6WYNa2zQoHqqaGYxQ=x=3jdw=rKMVRjXLCB65HG6CxNQAwQ@mail.gmail.com>
 Content-Language: en-US
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAC_iWj+s67woD-USmT3+hDq7yO9K_G=WS1DG-oJMM1byPb3JNQ@mail.gmail.com>
+In-Reply-To: <CAFA6WYNa2zQoHqqaGYxQ=x=3jdw=rKMVRjXLCB65HG6CxNQAwQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -102,58 +103,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 05/06/2024 11:25, Ilias Apalodimas wrote:
-> Hi Heinrich
+Hi Sumit,
+>> +/**
+>> + * qcom_configure_capsule_updates() - Configure the DFU string for capsule updates
+>> + *
+>> + * U-Boot is flashed to the boot partition on Qualcomm boards. In most cases there
+>> + * are two boot partitions, boot_a and boot_b. As we don't currently support doing
+>> + * full A/B updates, we only support updating the currently active boot partition.
+>> + *
+>> + * So we need to find the current slot suffix and the associated boot partition.
+>> + * We do this by looking for the boot partition that has the 'active' flag set
+>> + * in the GPT partition vendor attribute bits.
+>> + */
+>> +void qcom_configure_capsule_updates(void)
+>> +{
+>> +       struct blk_desc *desc;
+>> +       int ret = 0, partnum = -1, devnum;
+>> +       static char dfu_string[32] = { 0 };
+>> +       char name[32]; /* GPT partition name */
+>> +       char *partname = "boot";
+>> +       struct udevice *dev = NULL;
+>> +
+>> +       /*
+>> +        * There is currently no good way to check how U-Boot is booting, but we have
+>> +        * a few hueristics, like here checking if our DTB has a kaslr-seed specified
+>> +        * will tell us if we were chainloaded by another bootloader.
+>> +        * FIXME: we should do this check once and use some proper API to expose the data.
 > 
-> On Wed, 5 Jun 2024 at 09:36, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->>
->> On 5/31/24 15:50, Caleb Connolly wrote:
->>> Add a tool that can generate GUIDs that match those generated internally
->>> by U-Boot for capsule update fw_images.
->>>
->>> Dynamic UUIDs in U-Boot work by taking a namespace UUID and hashing it
->>> with the board model, compatible, and fw_image name.
->>>
->>> This tool accepts the same inputs and will produce the same GUID as
->>> U-Boot would at runtime.
->>
->> This functionality should be integrated into the mkeficapsule.
->>
->> Just pass the device-tree into mkeficapsule and generate the GUIDs
->> whereever they are needed.
+> If U-Boot is built with LINUX_KERNEL_IMAGE_HEADER enabled then we
+> should know that U-Boot is built as a replacement of Linux kernel and
+> hence chainloaded. Isn't that what you need here?
+
+Not necessarily, you can build with LINUX_KERNEL_IMAGE_HEADER and then 
+pack U-Boot into XBL or flash it to hyp and it will still run (the 
+kernel header is specifically written to behave like a nop slide). So we 
+can't rely on this.
 > 
-> I like the idea of moving this mkeficapsule which is already part of
-> distro packages but,  isn't it easier to pass the compatible string
-> node and the namespace?
-
-Yeah, we only need the first entry in the compatible property, so 
-parsing the whole DT is a bit overkill.
-
-I can look at combining these tools, can mkeficapsule generate a capsule 
-for multiple images?
-
-Would we want it to work such that you provide the namespace GUID, 
-compatible, and image names, and have it generate a capsule with the 
-right image GUIDs?
-
-Or would it be simple enough to just incorporate the functionality of 
-genguid?
+> -Sumit
+> 
 
 Kind regards,
-> 
-> Thanks
-> /Ilias
->>
->> Best regards
->>
->> Heinrich
-> 
-> [...]
-> 
-> Thanks
-> /Ilias
 
 -- 
 // Caleb (they/them)
