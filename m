@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBA2BC27C53
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 11:03:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E9C0C25B76
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 11:08:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F255388361;
-	Wed,  5 Jun 2024 13:03:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C11E18834D;
+	Wed,  5 Jun 2024 13:07:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="M/WfDevn";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="kTCI4iFC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 37A6188361; Wed,  5 Jun 2024 13:03:26 +0200 (CEST)
+ id 6182388369; Wed,  5 Jun 2024 13:07:57 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 227F28833C
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 13:03:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ECA1588361
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 13:07:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,30 +28,30 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
  Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1717585387;
- bh=KHb0u/5v7yuEt75nB98MEzmLKrNfWFHkadUGLrqhg28=;
- b=M/WfDevnw7nSUXqLLWFL6dkrfipN3IU53UKSRExAjoGR57OHBXyXXuyJ0f6/FgCZuXlYSSNFV
- zc6LeXmho4XeGHv5upu/9MZ7HMJ5khpOON9HSODwlRY5e1fzkWA2jglt2cEymJp4WGCVB1EVjBI
- 3r2xopqX/BBjhF9e1+FvD2IUP37pu1oLV+SgEwwm1MKcTwhvwNkstANsQ9byHevBLU/2FnZGaA3
- zGc/Qo8QWihk1+x8MSdYvK4GgFn7eAWi9neepk1Fxp3KYKbTiqjs2Ll1u+kq37PIE2d/FtO0xaF
- WYrQiygEqSR+/BLSlHZ36NSF+youGpwhS/suviz2BYeg==
-Message-ID: <f88179b1-816c-473c-9e7c-2e83d7341c15@kwiboo.se>
-Date: Wed, 5 Jun 2024 13:03:00 +0200
+ s=fe-e1b5cab7be; t=1717585663;
+ bh=yUblC05QHQZ6a3HOiGb/DsVW+bjsYV3wCImWu6sl7JA=;
+ b=kTCI4iFCxJ+PhNNKBheujAxHN8IxVzF+xxKpO7g4seMQv9W6f8PQ/pHl6NBkw1m9fxx+fVrtk
+ i6Gup4vnSTqg1NHjihDG2b4zV9qtfsiCfoPopyIpzeDq2YicKMHcjrXlhRNCULJxe1bRyT99cGa
+ AW85trnDaKdAMtBHBBDf52pIq70BDofpb3SEWYnLDbRES2F5BorXWcEG9x8sAj0JQ7AEeJuyOQw
+ /eNU7/5JJLlUAVoP8XuPyEzZFthTWvp6h9l5WG65JQ9qge5tLZzuE+IBo0LZ84tkqKg0cpVafbv
+ 9ZY+xojGzPc7pTWWOI570JRO+PmSugnyw2vnZY4DLToA==
+Message-ID: <d87e132b-f31c-4b3b-a055-9625fb3fbb49@kwiboo.se>
+Date: Wed, 5 Jun 2024 13:07:35 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/9] power: regulator: Handle autoset in
- regulators_enable_boot_on()
+Subject: Re: [PATCH 7/9] rockchip: bob: kevin: Disable dcache in SPL
 To: Simon Glass <sjg@chromium.org>
 Cc: "U-Boot Mailing List" <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, Eugen Hristev <eugen.hristev@collabora.com>, Jaehoon
- Chung <jh80.chung@samsung.com>, Kever Yang <kever.yang@rock-chips.com>,
- Lukasz Majewski <l.majewski@samsung.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>
+ <trini@konsulko.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ "Chen-Yu Tsai" <wens@csie.org>, Dragan Simic <dsimic@manjaro.org>, Jeffy
+ Chen <jeffy.chen@rock-chips.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Quentin Schulz
+ <quentin.schulz@cherry.de>, huang lin <hl@rock-chips.com>
 References: <20240605032521.1142768-1-sjg@chromium.org>
- <20240605032521.1142768-5-sjg@chromium.org>
+ <20240605032521.1142768-8-sjg@chromium.org>
 Content-Language: en-US
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20240605032521.1142768-5-sjg@chromium.org>
+In-Reply-To: <20240605032521.1142768-8-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Report-Abuse-To: abuse@forwardemail.net
@@ -60,7 +60,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 666045e9c6f01aa23fe0401c
+X-ForwardEmail-ID: 666046fb2a3b8a3d945cef0d
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,43 +80,50 @@ X-Virus-Status: Clean
 Hi Simon,
 
 On 2024-06-05 05:25, Simon Glass wrote:
-> With a recent change, regulators_enable_boot_on() returns an error if a
-> regulator is already set. Check for and handle this situation.
+> This causes a hang, so disable it.
 
-I am guessing this is being hit because of the call in veyron_init() ?
+When I initially tested this on multiple boards there was some boards
+that also hanged, that turned out to be an issue in one of the drivers.
 
-regulators_enable_boot_on() is also called for rockchip boards in the
-rockchip common boards.c board_init().
+If I remember correctly such hang was related to a null pointer
+dereference or unaligned access in one of the drivers.
 
-Maybe the call to regulators_enable_boot_on() in veyron_init() could
-be dropped?
-
-> 
-> Fixes: d99fb64a98a power: regulator: Only run autoset once for each regulator
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-
-Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+Could there be a similar underlying issue for these boards?
 
 Regards,
 Jonas
 
+> 
+> Fixes: 6d8cdfd1536 ("rockchip: spl: Enable caches to speed up checksum validation")
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 > 
->  drivers/power/regulator/regulator-uclass.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  configs/chromebook_bob_defconfig   | 1 +
+>  configs/chromebook_kevin_defconfig | 1 +
+>  2 files changed, 2 insertions(+)
 > 
-> diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
-> index 77d101f262e..d9e1fb68295 100644
-> --- a/drivers/power/regulator/regulator-uclass.c
-> +++ b/drivers/power/regulator/regulator-uclass.c
-> @@ -518,7 +518,7 @@ int regulators_enable_boot_on(bool verbose)
->  	     dev;
->  	     uclass_next_device(&dev)) {
->  		ret = regulator_autoset(dev);
-> -		if (ret == -EMEDIUMTYPE) {
-> +		if (ret == -EMEDIUMTYPE || ret == -EALREADY) {
->  			ret = 0;
->  			continue;
->  		}
+> diff --git a/configs/chromebook_bob_defconfig b/configs/chromebook_bob_defconfig
+> index acfe3934104..b2ecfa6050c 100644
+> --- a/configs/chromebook_bob_defconfig
+> +++ b/configs/chromebook_bob_defconfig
+> @@ -1,5 +1,6 @@
+>  CONFIG_ARM=y
+>  CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_SPL_SYS_DCACHE_OFF=y
+>  CONFIG_COUNTER_FREQUENCY=24000000
+>  CONFIG_ARCH_ROCKCHIP=y
+>  CONFIG_TEXT_BASE=0x00200000
+> diff --git a/configs/chromebook_kevin_defconfig b/configs/chromebook_kevin_defconfig
+> index 95fdb418d82..da748e4f022 100644
+> --- a/configs/chromebook_kevin_defconfig
+> +++ b/configs/chromebook_kevin_defconfig
+> @@ -2,6 +2,7 @@ CONFIG_ARM=y
+>  CONFIG_SKIP_LOWLEVEL_INIT=y
+>  CONFIG_COUNTER_FREQUENCY=24000000
+>  CONFIG_ARCH_ROCKCHIP=y
+> +CONFIG_SPL_SYS_DCACHE_OFF=y
+>  CONFIG_TEXT_BASE=0x00200000
+>  CONFIG_SPL_GPIO=y
+>  CONFIG_NR_DRAM_BANKS=1
 
