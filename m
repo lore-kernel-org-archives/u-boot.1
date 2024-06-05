@@ -4,74 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B42DDC25B76
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 13:12:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC42CC27C53
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 13:17:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DFE608836C;
-	Wed,  5 Jun 2024 15:12:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0C5DB88385;
+	Wed,  5 Jun 2024 15:17:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="grfbQndV";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZPnnYVzM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5319088356; Wed,  5 Jun 2024 15:12:19 +0200 (CEST)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
+ id 3BFF588385; Wed,  5 Jun 2024 15:17:49 +0200 (CEST)
+Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
+ [IPv6:2607:f8b0:4864:20::c2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39BC488370
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 15:12:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5BCF7879F3
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 15:17:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-5ba6c41e1a7so1033827eaf.2
- for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 06:12:17 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-oo1-xc2b.google.com with SMTP id
+ 006d021491bc7-5b96a95c5e8so3724577eaf.3
+ for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 06:17:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717593136; x=1718197936; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1717593465; x=1718198265; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=YtfLZNZEw8jbQz+9LSThzUtJzM+8ZScMW0eZB8y5Pug=;
- b=grfbQndVDxZgykbxJikOZEUult67SD2yQXIz+FCUGpqxSmutPzVj3L3Qe0K9yPeIGW
- IC5NLHqeM9FMVKXXo4tCOtzYFUcKW8MuUS84mGwIwQ9Jqz1kqnxCjpK8hB6s0+/zG21U
- hiGa/AIbl7fEB9S7epP185jYMq6xO71SIklZuOHeBRJHb8JHNaeV0t+TK4szRos0EG6N
- y1INQS+P9Le5xy1xf9epWVKYMPHjqVzYPHXHRZD3zMKJKL0Wp7AuvUtESYFXBMlPhjOm
- yXmWpboW4BzHNOOmdUpBSdOuZvwGhFe3xsYSoBxr2UckHp9a0md6vUkTiv3xh/vZMCh9
- 3K7A==
+ bh=rcYVES9z9QtRlIgsz0XVCFRkJbVsS49fGk7DNa1G5gk=;
+ b=ZPnnYVzMFy5l3ODQlSaW5j0xpxYQvUFceYv22Z6OLCtYDZXBf+VgbhrR7S1g5b3Som
+ B9UwJI6XbdouSn7X+FVGgwjYKlXp6FQWh6TuIz4fQiQCNtAKVSlF4MDKD+CpGTEw7BVX
+ qpgTr7xP9CuXI/A3fNvbDXke/t8nTEUsCifVY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717593136; x=1718197936;
+ d=1e100.net; s=20230601; t=1717593465; x=1718198265;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=YtfLZNZEw8jbQz+9LSThzUtJzM+8ZScMW0eZB8y5Pug=;
- b=L9tIzk6u+EB3hpY+9sSIqWsHsElnsTaXr1dGq9g2uvbm/6WxFjoMuZLYkCwQvuU06F
- aSMjon6spMuul1ejEE34l3jd/v/tcwokorF8ESwmoMFaeiHI0uytvNklk+vTNlLll7tb
- ltXyNOn4jJzKIOXaZboQ+4BvrmaX/pDVeRTtmk2cW6PsDN8PE0Qqci6cBJrfiu67nG8p
- Zwh4nd+TD0nqvPrbfd4YoJcobvZij8V9SIzEgeJlDUZjZOkL2e/R5keUU+4quDTZnmKR
- MsZyh9NQLaJQYoWBicv3FW/H9Ub39INjPlDZm2wmKAvkvsJvkWit+V+bcxjmmoA2+I5R
- 4rcA==
+ bh=rcYVES9z9QtRlIgsz0XVCFRkJbVsS49fGk7DNa1G5gk=;
+ b=k4FYMINQypCLJjPmrtWA73+TLvJP1g5PdJcrvcZVHPIKuolDJas5sopEAKtTyeCfmx
+ w9l+7N8+dlqtekjyoKtbpa5vmG8GiWIEaR+SAx0+lEITiYrTh7qoM2+j/TSaaprYUBwT
+ plsvTnsGLFHKcR27d9mY2cDHMe4/5pgMb6SarueOUTBQVaw0irYdja3WUP5AAFFxN1xg
+ p36Ry8cs5MPevKLGJHLjnC/zAEhZCTipOgpbz+6XuiqMH+fV2/IeNhN0PBnoQYdiZQwo
+ d/zRDFR0N9lB5pnGK4w4uflA4O52DuxwbyYG7X+Is2/Ay3JMl+hqHnV5WZdMKAaCMchy
+ pz/A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVMHmrXf4I7Pjw0YBa9d+sdXHRCfU0STtTn3q612wTrO/59mtZCzboWahXwjsa7gONQHKyATCngonAdlzOy7HA922722w==
-X-Gm-Message-State: AOJu0YxKlRGDf6+8QUprxWVcQP6DbJb3bvzKBU6f6AlWnl3VeK/sKwPL
- 7ODGWQTbCgxHSkZDtXlsPlheNAAsLvdp8XDCeonKgiUoVL8M9KyDaZDrKZ+1sZ1YB8XOMUpDojp
- UjnJnRMf7XUKeKBxhNnb9eL/bX9Y=
-X-Google-Smtp-Source: AGHT+IF5hPN6hqq6gCo0BKQeTb/v4dlAbBSFfSYGVlp031UqwOZ+RHUyi2Gorc4tCF59g2OTC51xMT1ny4zNZEVFmAk=
-X-Received: by 2002:a05:6820:168e:b0:5b9:f2f4:6a95 with SMTP id
- 006d021491bc7-5ba7909bc13mr2594308eaf.5.1717593135712; Wed, 05 Jun 2024
- 06:12:15 -0700 (PDT)
+ AJvYcCVwsoAoR1dQfBBeMEXMwPrnNqxEOobgahZySwFAOK2I9DnCkMij5GRPiaLqJDtFjVoWtVINhmfSdqqh1zUlvza1Cps8Rg==
+X-Gm-Message-State: AOJu0Yy5ij4M/RBoYqhvdakyOuMcszk+4dH53Y2HnH2Oacidb78q5ixm
+ z6+WtQa/4W7hG73q74UGP6cuWsX+Th9OaXSyhactKm+TYHPxAblmaV1bQcLIqMOC6asjQ5e12OU
+ I1379t2GLH+MnwoCKM/V2H6/yv8GPST2+4xkG
+X-Google-Smtp-Source: AGHT+IGK+5DsD5L/8GeRH0/bks4w56Lsv+3dwfpx/nossI5ZfbKZz3wbMU2DBqtOmWSSPZ8fEwEoJ2Dm569GmZepdtc=
+X-Received: by 2002:a05:6358:2618:b0:19c:3b76:2116 with SMTP id
+ e5c5f4694b2df-19c6c695011mr272855555d.11.1717593464782; Wed, 05 Jun 2024
+ 06:17:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240605-pmic-rk8xx-v1-0-2349fdf68aa0@cherry.de>
-In-Reply-To: <20240605-pmic-rk8xx-v1-0-2349fdf68aa0@cherry.de>
-From: Anand Moon <linux.amoon@gmail.com>
-Date: Wed, 5 Jun 2024 18:41:59 +0530
-Message-ID: <CANAwSgQR1pWEvUaf-moLK4bF=o7gBUp2KzbWDk8-D7xkZEXFNA@mail.gmail.com>
-Subject: Re: [PATCH 0/3] rockchip: rk8xx: fix broken [np]ldo callbacks
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>, 
- Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
+References: <20240603155702.1840464-1-avromanov@salutedevices.com>
+ <CAFLszTi+ONdb2P5gtSX_OMUD162G7OtRMD-LbmzO7xuNLRX_HQ@mail.gmail.com>
+ <20240605100922.er7xwi5wadaa5dlk@cab-wsm-0029881>
+In-Reply-To: <20240605100922.er7xwi5wadaa5dlk@cab-wsm-0029881>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 5 Jun 2024 07:17:34 -0600
+Message-ID: <CAFLszThCaA72+3H_vvrvB3o0euEUEGq-V7Tpj55bk99Vc1j5=w@mail.gmail.com>
+Subject: Re: [PATCH v5 0/3] Introduce mtdblock device
+To: Alexey Romanov <avromanov@salutedevices.com>
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Bin Meng <bmeng@tinylab.org>, 
+ Tobias Waldekranz <tobias@waldekranz.com>, Joshua Watt <jpewhacker@gmail.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Kever Yang <kever.yang@rock-chips.com>, Johan Jonker <jbx6244@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
+ Michal Simek <michal.simek@amd.com>, 
+ "mikhail.kshevetskiy@iopsys.eu" <mikhail.kshevetskiy@iopsys.eu>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, kernel <kernel@sberdevices.ru>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,51 +97,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hi Alexey,
 
-On Wed, 5 Jun 2024 at 15:03, Quentin Schulz <foss+uboot@0leil.net> wrote:
+On Wed, 5 Jun 2024 at 04:09, Alexey Romanov <avromanov@salutedevices.com> wrote:
 >
-> This is for master branch, merge ASAP as it's known to break at least
-> Chromebook Jerry.
+> Hi Simon,
+> your message is empty.
 >
-> @Simon, can you please check that this fixes your CB?
+> On Tue, Jun 04, 2024 at 08:13:34PM -0600, Simon Glass wrote:
+> > Hi Alexey,
+> >
+> > On Mon, Jun 3, 2024, 09:57 Alexey Romanov <avromanov@salutedevices.com>
+> > wrote:
+> >
+> > > Hello!
+> > >
+> > > This series adds support for the mtdblock device, which
+> > > allows to read/write data block by block. For example,
+> > > it can now be used for BCB or Android AB command:
+> > >
+> > >   $ bcb load mtd 0 part_name
+> > >
+> > > Tested only on SPI NAND, so bind is made only for
+> > > SPI NAND drivers.
+> > >
+> > > ---
+> > >
+> > > Changes V1 -> V2 [1]:
+> > >
+> > >   - Drop patch [2].
+> > >   - Add warning if bind NAND mtdblock device.
+> > >   - Move documentation of mtdblock implementation
+> > >     from commit message to the source code.
+> > >   - Remove __maybe_unused from mtd partition functions
+> > >     description.
+> > >   - Use blk_enabled() instead of #ifdefs.
+> > >
+> > > Changes V2 -> V3 [2]:
+> > >
+> > >   - Rebased over [3].
+> > >   - Rename mtd_bread/bwrite -> mtd_blk_read/write.
+> > >   - Fix GPL-2.0 license short name definiton in headers.
+> > >   - Add empty line after MTD_ENTRY_NUMBERS define.
+> > >
+> > > Changes V3 -> V4 [4]:
+> > >
+> > >   - Fix build warnings: use LBAF printf format string for lbaint_t types.
+> > >
+> > > Changes V4 -> V5 [5]:
+> > >
+> > >   - Rebased over u-boot/master.
+> > >   - Fix build errors and warnings if CONFIG_BLK isn't enabled.
+> > >   - Fix failed tests in cases is mtdblock device isn't binded.
+> > >
+> > > Links:
+> > >
+> > >   - [1]
+> > > https://lore.kernel.org/all/20240227100441.1811047-1-avromanov@salutedevices.com/
+> > >   - [2]
+> > > https://lore.kernel.org/all/20240227100441.1811047-5-avromanov@salutedevices.com/
+> > >   - [3]
+> > > https://lore.kernel.org/u-boot/20240403114047.84030-1-heinrich.schuchardt@canonical.com/T/#u
+> > >   - [4]
+> > > https://lore.kernel.org/all/20240404105813.1520732-1-avromanov@salutedevices.com/
+> > >   - [5]
+> > > https://lore.kernel.org/all/20240524102920.2631731-1-avromanov@salutedevices.com/
+> > >
+> > > Alexey Romanov (3):
+> > >   disk: support MTD partitions
+> > >   drivers: introduce mtdblock abstraction
+> > >   spinand: bind mtdblock
+> > >
+> > >  disk/part.c                 |   3 +-
+> > >  drivers/block/blk-uclass.c  |   1 +
+> > >  drivers/mtd/Kconfig         |   1 +
+> > >  drivers/mtd/Makefile        |   1 +
+> > >  drivers/mtd/mtdblock.c      | 227 ++++++++++++++++++++++++++++++++++++
+> > >  drivers/mtd/mtdpart.c       |  76 ++++++++++++
+> > >  drivers/mtd/nand/spi/core.c |  20 ++++
+> > >  include/linux/mtd/mtd.h     |  21 ++++
+> > >  include/part.h              |   3 +
+> > >  9 files changed, 352 insertions(+), 1 deletion(-)
+> > >  create mode 100644 drivers/mtd/mtdblock.c
+> > >
+> > > --
+> > > 2.34.1
+> > >
+> > >
 >
-> The wrong udevice was passed to the functions, making them call the
-> pmic callbacks on the parent of the pmic udevice instead of the pmic
-> udevice itself.
->
-> While at it, ensure consistency by having all internal functions use
-> pmic udevice instead of the regulator udevice.
->
-> Finally, clarify operator precedence in ternary condition as reported by
-> my linter.
->
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-I see we have not been able to follow configs on a few of the board's for RK3588
+Are you able to add a sandbox test for this code?
 
-CONFIG_CMD_REGULATOR=y
-CONFIG_PMIC_RK8XX=y
-CONFIG_REGULATOR_RK8XX=y
-
-could you enable the options with imply for all the rockchip boards?
-
-Thanks
--Anand
-
-> ---
-> Quentin Schulz (3):
->       regulator: rk8xx: fix incorrect device used for _ldo_[sg]et_suspend_value
->       regulator: rk8xx: pass pmic udevice instead of regulator to all internal functions
->       regulator: rk8xx: clarify operator precedence
->
->  drivers/power/regulator/rk8xx.c | 54 ++++++++++++++++++++---------------------
->  1 file changed, 27 insertions(+), 27 deletions(-)
-> ---
-> base-commit: c0ea27bccfb7d2d37fd36806ac2a2f7389099420
-> change-id: 20240605-pmic-rk8xx-52f2286be334
->
-> Best regards,
-> --
-> Quentin Schulz <quentin.schulz@cherry.de>
->
+Regards,
+Simon
