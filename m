@@ -4,76 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75A14C27C53
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 14:08:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 524DDC25B76
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 14:28:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE1ED88300;
-	Wed,  5 Jun 2024 16:08:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 94BFD882E8;
+	Wed,  5 Jun 2024 16:28:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YvnoRhho";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VNqox3ZT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A079D8836C; Wed,  5 Jun 2024 16:08:24 +0200 (CEST)
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
+ id 95E0D88300; Wed,  5 Jun 2024 16:28:43 +0200 (CEST)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37E6788250
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 16:08:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E4C1882E6
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 16:28:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jnhuang95@gmail.com
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-5b2ed25b337so4208754eaf.0
- for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 07:08:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-2c2039db0c6so746557a91.1
+ for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 07:28:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717596501; x=1718201301; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NS9X0ttGI1QGn/y/kBtGJPvmJqB/K9WQNk46ZATcEBs=;
- b=YvnoRhhoHn3gRPQZBFJPthHQfwta0sq1SbvAaB5w/h44t3oofHE8qyGSws6BWxh+Dj
- gwvv4NMjVAkBYa1f0kjxL4XtPPyf3+7eUYGumsbivnw7qX4XA98pLaGsQqaOD/5zvn/R
- eeRqkCrgequn/u/WsygVrevwQaupfIWB0NShOSe1Mh0H+dr+j0i8+yMb9n8hzKAmQl61
- 2B0zOUhKDD90VzRnkNccFB+UYl8ho0LlE4dO7KkZF9uxZoEnA9hXHaKFsBC/X2ShFKL9
- LTBEOuACg8UhRRc7kesNRfUstCrEjrY8apead19Pf3ulqEsrtvpB0rY4XkwgBQFKitsy
- 93IA==
+ d=linaro.org; s=google; t=1717597719; x=1718202519; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=rl3S/Pf8xhpQO8KuxKEPiZjZ5s8k6PsJHsTr4RMCKOA=;
+ b=VNqox3ZTQO5z76EZkoVWUl+keynd7+vi2csKG258397N8fBrgJTHtDuqWx55peMbJT
+ 61cNUA30paldMiCzCFt51kGL0yjlz0zUE32QFsm6tsVReK62TkNtO5B+RnMwEqXvQl7w
+ zr+wDpTJSC8uQs8Rf2KqaGCkT/OeCvoBxb/7dllkfKtsd+sMsq00I4yQTsx5/vUQm1zG
+ BBDgNFVQjLGgeb6TWjUd/ekcqgsL+iGlJZlCmKrbrqTUEKRCtXKZM6248t393poU0okz
+ 12nYBNUAbUBMFeDC9SpfjcMZxQUkJPkCUZHP6Ht1EWib5ZDkdhRNPdNcIkVycFgUJ7gj
+ x1zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717596501; x=1718201301;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=NS9X0ttGI1QGn/y/kBtGJPvmJqB/K9WQNk46ZATcEBs=;
- b=EzZlp2cxzQPHX3f6AvqWxMtstu3x3AuYwpU/WQxsjZxNnFraI7M7iokOVUrN+4TZ3D
- k67/bTUstrcRa+xp7ltTxziNTVQcDhRpLu0bBytqPeei3gFd+1HtSfyDcXT8xCd0AGmp
- 41JXnOKiWI/+UJUKGHcVLsx4HkcxYZiMayg1mZ0XrG/zZWs8raigqP7JvzE40IDezcAd
- YrJMrcP58EeeH5BLYg74duyYlZRs38sKia8gdO4BPZWBMYHKlnT/nGet4MT0ERYXBu1/
- pMjbHUUt7eTvGW3sFcbFsytIXvWeM5d4ZR3Q8YIsvnda4g5t7SrnruxpF4hKsjAC/t1Y
- WQQQ==
-X-Gm-Message-State: AOJu0YwC8XF/WmN1Jh1hG3swGZW+9YCP96l3scfOaI+fbGbIXXlnmqZt
- pMYPFJBae/MoIL0YNoDdVwz31j6h4rQtgdhKo2e9Eb7b8ldK+MPs6LghdtX++IR0BWfglOXgJlg
- VzTaATKM2yv1TKf0SN1Zh3fcWhqY=
-X-Google-Smtp-Source: AGHT+IHr9FCjiyG+iRVecCuS/QVNq7f+ZtGuhMUY7fUoWnTBezUJPXfqSes763O1mbVzoVaqX/09OZQt6eGp+z+sspM=
-X-Received: by 2002:a05:6358:7e45:b0:199:520e:f1b6 with SMTP id
- e5c5f4694b2df-19c6c7afe43mr305866155d.19.1717596500533; Wed, 05 Jun 2024
- 07:08:20 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1717597719; x=1718202519;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=rl3S/Pf8xhpQO8KuxKEPiZjZ5s8k6PsJHsTr4RMCKOA=;
+ b=MJ3jSze7sitp+XPLYa73nKh+kCnro3guloGrjAleY0cZGANN4/zVD9UApbUzE11guP
+ WIs8MgRBhU49MSXo+p0aGQhVU2UE0mQ6i3DhPnXJVdEb5RMxNSHfv2z6jK8k+Hr+QOW9
+ zuRHKfwmTo9FLaD5nfOZn/KlJ88wPRxru0wauP9bA72P+btWHL39TdNFmm1KEWbVl7GD
+ CnsJOmZ+UWJsSxQG+HGiFx4fiC1FR3zES0orz6OBvRN0xupgugyTxXnYr/zHmn4J18nj
+ hf3zYNljdjcn367aFp2HTmdpb012X9S6pVY3vFY75XY6soUh+xrP9fslwSxyizlscxnS
+ 7KYg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCULu8IUaYKpFAmbrX4AVw8Yh5Pgt+hbMxoJD6JCJncqgymldl8C0+dn9QACivpD+padljUro9CsBpBRoR1wGLyJx0rWiQ==
+X-Gm-Message-State: AOJu0YzliaASWwDegq+QUo9sAmGVNZt6U+nEHy4ObQonxcFC8+te9t+z
+ xLpeIUVT7qB/33cpi0iGzS15G4ePBhSzjF6reZSLG6lltuMtvDry0TF233g7i9cuoaH1psdoQYy
+ 8emLV4YK0rGnrdkztz7wRWvkF+aVcHCTR/turFQ==
+X-Google-Smtp-Source: AGHT+IGmPQMGRV7SDc0KEJdPoAScrWu6zS6wQChUITrQXF1o6xU6tJ0Z5478QcA5Hp6asUIRTAv/c7840Zqn1+Ov2yo=
+X-Received: by 2002:a17:90a:5ac7:b0:2bd:801f:dabd with SMTP id
+ 98e67ed59e1d1-2c27cbacf69mr4191173a91.3.1717597719424; Wed, 05 Jun 2024
+ 07:28:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAMn3X6NjqGmCeVT-X_d_btDKQQJDzz7CnTzOb=62np75VumhDg@mail.gmail.com>
- <5b08ad9c-8ed3-4877-b95d-f5d0ca693fb0@linux.alibaba.com>
- <CAMn3X6MJiPdB9s=h8wyNQ-=LoWcOMghj3K1KOk-V-pMvyen2fw@mail.gmail.com>
- <0d843d6d-3561-4a03-9fa1-94152551f935@linux.alibaba.com>
-In-Reply-To: <0d843d6d-3561-4a03-9fa1-94152551f935@linux.alibaba.com>
-From: Jianan Huang <jnhuang95@gmail.com>
-Date: Wed, 5 Jun 2024 22:08:14 +0800
-Message-ID: <CAJfKizoD1=DwDYYF_5RzL7jNz5q19t5ZH2sbGBw5GNv+5MwhoQ@mail.gmail.com>
-Subject: Re: Several potential vulnerabilities in the filesystem
-To: Gao Xiang <hsiangkao@linux.alibaba.com>, jianqiang wang <wjq.sec@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20240528140955.1960172-1-raymond.mao@linaro.org>
+ <20240528140955.1960172-4-raymond.mao@linaro.org>
+ <Zl92YrE0tw-15wzZ@smile.fi.intel.com>
+ <CAEfUkU+tcgjs61thzAiNVsBZEVDUTY+BBAxNQFuemHsfzWf9Sw@mail.gmail.com>
+ <ZmAwMGCXZQbhoK0P@smile.fi.intel.com>
+ <CAC_iWj+PpUurGLqMw42ALHV6fOLnSwscG4KB2k-55eO2HuLwCQ@mail.gmail.com>
+ <ZmA7NgxcSS315jrK@smile.fi.intel.com>
+ <CAC_iWj+B+X2BQP403X6wz7dj2HHUO_j0rXb=TjAwh6zCMEgGNg@mail.gmail.com>
+In-Reply-To: <CAC_iWj+B+X2BQP403X6wz7dj2HHUO_j0rXb=TjAwh6zCMEgGNg@mail.gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Wed, 5 Jun 2024 10:28:26 -0400
+Message-ID: <CAEfUkU+VxkjaOxk8YCk=7jL8mKbnNg18qxUAY1LYFRPiN4Vn5Q@mail.gmail.com>
+Subject: Re: [PATCH v3 03/25] mbedtls: add mbedtls into the build system
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>, u-boot@lists.denx.de, 
+ Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>, 
+ Michal Simek <michal.simek@amd.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Simon Glass <sjg@chromium.org>, Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jesse Taube <mr.bossman075@gmail.com>,
+ Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Ilya Lukin <4.shket@gmail.com>, Sergei Antonov <saproj@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,97 +110,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2024/6/5 19:18, Gao Xiang wrote:
-> Hi Jianqiang,
->
-> On 2024/6/5 19:00, jianqiang wang wrote:
->> Hi,
->>
->> I do have the crafted image.
->>
->> payload_00500, payload_00763, payload_00846 can be used to reproduce
->> 1,2,3 vulnerabilities respectively.
->>
->> Each image is a hard drive file and the vulnerabilities can be
->> triggered by performing the following operations:
->>
->>      struct udevice *dev;
->>      uclass_first_device_err(UCLASS_IDE, &dev);  //detect the block
->> device
->>
->>      fs_set_blk_dev("ide","0:1", 0);
->>      fs_ls("/");   //mount the first partition and list the root
->> directory files
->>
->>      fs_set_blk_dev("ide","0:1", 0);
->>      char buf[10];
->>      buf[0] =3D 0;
->>      buf[1] =3D 0;
->>      buf[2] =3D 0;
->>      buf[3] =3D 0;
->>      loff_t actread =3D 0;
->>      fs_read("/a.txt", (ulong)buf, 0, 5, &actread);
->>      printf("fd actread %lld %x %x %x\n",actread,buf[0],buf[1],buf[2]);
->>   read the /a.txt file
->>
->>
->>      fs_set_blk_dev("ide","0:1", 0);
->>      fs_read("/a.txt.ln", (ulong)buf, 0, 5, &actread);
->>      printf("fd actread %lld %x %x %x\n",actread,buf[0],buf[1],buf[2]);
->>   read the /a.txt.ln symbol file
->>
->>      fs_set_blk_dev("ide","0:1", 0);
->>      fs_unlink("/a.txt.ln");  //unlink it
->>
->> The second and third may not trigger a crash however, can be observed
->> by inserting logging before the memset/memcpy function.
->
-> Sorry, I just found that this issue was already fixed in erofs-utils:
-> https://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs-utils.git/com=
-mit/?id=3D884866ca07817e97c59605a2fa858a0b732d3f3c
->
->
-> Would you mind checking if the patch above fixes the issue?
->
-> Hi Jianan,
-> Would you mind backporting this patch for u-boot?
+Hi Andy and Ilias,
 
-https://lore.kernel.org/u-boot/20240605140554.1883-1-jnhuang95@gmail.com/T/=
-#u
+On Wed, 5 Jun 2024 at 09:31, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+wrote:
 
-Thanks,
-Jianan
+> Hi Andy,
+>
+> [...]
+>
+> > > > > > Is this approach maintainable?
+> > > > > > I don't remember if we have similar in Linux kernel, for example.
+> > > > > > (There are few candidates like compression algorithms that are
+> usually
+> > > > > > being
+> > > > > >  hosted elsewhere)
+> > > >
+> > > > No answer?
+> > >
+> > > subtrees is what was decided on OF_UPSRTEAM as well. If you have a
+> > > better idea feel free to propose it, but for the sake of conformance
+> > > we are better off doing the same thing on every external tree we pull
+> > > in
+> >
+> > How do they will (or already do) maintain this?
+> >
+>
+> There's a script to do that in dts/update-dts-subtree.sh
+>
+> > At least it's a good to have a few words on the choice made in the cover
+> > letter, so we will have no questions on it.
+> >
+> > > > > > > Moreover, due to the Windows-style files from mbedtls git repo,
+> > > > > > > we need to convert the CRLF endings to LF and do a commit
+> manually:
+> > > > > > >
+> > > > > > > $ git add --renormalize .
+> > > > > > > $ git commit
+> >
+> > ...
+> >
+> > > > > > >  lib/mbedtls/mbedtls_def_config.h | 4262
+> ++++++++++++++++++++++++++++++
+> > > > > >
+> > > > > > This is ridiculously HUGE! This is unreviewable. Moreover, this
+> is even
+> > > > > > hard to
+> > > > > > configure by the user! Can you rather make it modular and maybe
+> create a
+> > > > > > separate documentation for the most important options (I do not
+> believe one
+> > > > > > needs _all_ of them to be set / tuned)?
+> > > > > >
+> > > > > > This is a file from MbedTLS and follows its own style.
+> > > > > And this is how MbedTLS is configured - with all features listed
+> in a
+> > > > > config file and
+> > > > > commenting out the unused features with "//").
+> > > > > The modification here is just to control those existing options
+> with
+> > > > > Kconfigs.
+> > > >
+> > > > And why should we blindly follow this nonsense?
+> > >
+> > > It's easier to follow up future changes tbh. But I do agree the config
+> > > file is huge. Perhaps splitting in 2 files is going to be easier
+> > > mbedtls_def_config.h -> contains all the options that rarely need
+> > > tuning, which I assume is the majority of the header
+> > > mbedtls_usef_config.h -> contains the imporant options, crypto,
+> > > checksum algorithms etc
+> > >
+> > > Thoughts?
+> >
+> > The problem is on who decides which are "rarely need".
+>
+> Us. Sure it's going to take some time, but eventually we should be
+> able to isolate options that rarely need a change
+>
+> > The feasible (to me) approach is to split per domain. Like you listed at
+> the very end of your reply.
+> > We can also learn from managing MTA configurations, such as Exim4 where
+> user
+> > may decide if they want a single file or split version.
+>
+> I am not sure tbh. Let me backpaddle from my previous suggestion :).
+> Looking at it closer config.h is copied from mbedTLS, commenting out
+> features we don't want.
+>
+> What we could do instead is either trim those comments out and only
+> define the options we need for now. That would make the patch easily
+> reviewable. If in the future we decide we need a more modular
+> approach, we can retrofit it without breaking anything.
+>
+> Alternatively, we can undef the options we don't want in our header,
+> but I am not sure how often these change or how scalable this is going
+> to end up being. I prefer option #1
+>
+> I can remove the disabled features and only keep the ones that should be
+controlled by the Kconfigs if you don't want a huge list for user's
+fine-tune.
+Currently most of them can be regarded as default setting by U-Boot.
+In the future if any of them needs to be exposed as a Kconfig for tuning,
+we can add them back.
 
->
-> Thanks,
-> Gao Xiang
->
->>
->> Best regards
->>
->> Gao Xiang <hsiangkao@linux.alibaba.com> =E4=BA=8E2024=E5=B9=B46=E6=9C=88=
-5=E6=97=A5=E5=91=A8=E4=B8=89 05:10=E5=86=99=E9=81=93=EF=BC=9A
->>>
->>>
->>>
->>> On 2024/6/5 06:53, jianqiang wang wrote:
->>>> Hi Das U-Boot developers,
->>>>
->>>
->>> ...
->>>
->>>>
->>>> 2. in file fs/erofs/data.c, function z_erofs_read_one_data, the node
->>>> data is read from the storage, however, without a proper check, the
->>>> data can be corrupted. For example, the inode data is used in function
->>>> z_erofs_read_data, map.m_llen will be calculated to a very large
->>>> value, which means the length variable will be very large. It will
->>>> cause a large memory clear with memset(buffer + end - offset, 0,
->>>> length);
->>>
->>> Would you mind giving a reproducer or a crafted image to trigger
->>> this?  Or it's your pure observation.
->>>
->>> Thanks,
->>> Gao XIang
->>>
+Regards,
+Raymond
