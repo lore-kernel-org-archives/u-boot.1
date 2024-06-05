@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1930C25B76
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 05:52:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF8C9C27C52
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 05:54:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB2DA88308;
-	Wed,  5 Jun 2024 07:52:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 3B18787AEC;
+	Wed,  5 Jun 2024 07:54:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="XQ5atXEk";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FmYxL8cq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2355C88096; Wed,  5 Jun 2024 07:52:51 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DC70F88096; Wed,  5 Jun 2024 07:54:10 +0200 (CEST)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 11F1A8751B
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 07:52:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D1BD8751B
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 07:54:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1717566766; x=1718171566; i=xypron.glpk@gmx.de;
- bh=ut8P5+W/icFiuRaR2qagZpGMKVkDsX4uyZWMrFU/kPY=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=XQ5atXEkIoVi05CDeGkbh+NiKgCqF0Fl0d/E/wnJsRTMk1vtiVzdiOYabnwF7utF
- Ko4KrhA86lAlCWvGfbAzO9EsWtJMP5SB5cdf7mtlLQGV7hqbdIMLPPFE8gcdj2R3q
- SnI24MoLnmjdFD4dkxXH6DUkaV0RtNNt0/3QUXyzgPVLL8BbjyTMslLruqM4kqPhF
- NxkcyFWZqpfQxt/cmA/sBlrYYVMCk6nYhdji0vjS8vfCXgLEsCw7GlOxwUNLfwy3d
- x3ZdWK1DRZBAVUvcIMoRiZwvOR5y+bdREO+Ly5uLj5BzeqsL4AiF1awJInPA9cZzk
- TodsE883MzP+ode9qg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.107] ([109.42.178.114]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MCKBc-1sMx2K0kYk-00Cmht; Wed, 05
- Jun 2024 07:52:46 +0200
-Message-ID: <54c1e53b-a6a0-410c-b6de-ac9f7a492f76@gmx.de>
-Date: Wed, 5 Jun 2024 07:52:45 +0200
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-1f62a628b4cso43012845ad.1
+ for <u-boot@lists.denx.de>; Tue, 04 Jun 2024 22:54:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1717566847; x=1718171647; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=0Z8myshYQZj+eJZLYplOSdGGZinZ3omwgPdu8DseJCI=;
+ b=FmYxL8cqxK9h3YzdS9TqWdl3Mp5f0vHLHqtBJXVlvqYAe3OtDlfgSEjTrlC9dI86Qz
+ bs3+GeOEAvCJ7WK5UQ54xOfvY70SC/YOOJOc625HVASsqPtYhrpE4LB5uSW5azL2Xguu
+ 4cZQJHbXVz7pDoK0mwOSdgoR8Qiw1LhA3Kjyd38sFV3MYZAMVXtHzZq8AFcbA0dGtwh2
+ 2w2EGOMQ7Axxjz20Qh+Cncu9Q1pWLVOI2aiMUcpI8mUqewXYv7b2+d3VRo8kO84a3ml7
+ m7frfdLXmqyeO3TgPQhyJqvNSXfA5E2RVZKLrxYG9GRlLAaOHa9QFJEcKCRftys7DC16
+ 6bqg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717566847; x=1718171647;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0Z8myshYQZj+eJZLYplOSdGGZinZ3omwgPdu8DseJCI=;
+ b=cpGw5zZ92A4khTMluQM4H4GnaIAto54jQSz4JwQicmT6DBFo4n3IRDxS5okI2jDTXs
+ PfdpjflsmlBRhlr0vSTF6Inxc6TMQiLWXTmfdFXTzh9BKfHkZjsVt71x1uJLjbIWe0Qc
+ CLcwJz0kT8AEUDM7GTiFsdnrCukOeURkE5Yi7v8BGP5AC0BBvvP1FM4rQv+MMU8w4j6m
+ OhDQ8C1jjPI4GweY1KOXEYoLPTYeqqaXqdLv9sueMiWlrRtm8JpZTwYbBkItz0EZT7lY
+ JxkP9jtwzNPmHt+fVFy1osvomzlxb0TFnkxOFk2xPw4JNkUodO6PPlz0UixrAIdxsc0b
+ 1qSQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU5Tly/6U6Fvu4sbLk8Ta4wlm3Y3pC6LLGF4fFkzsHb+sbiBGvlvMlL4eQti6+xHU1VnzsRwfgepev0rutu07m5Evy3Iw==
+X-Gm-Message-State: AOJu0YynF5IIu8yBBr1wVsHtHubnDoPOm1lz/IoIEvSdKuG7c7diWCOk
+ KTrjzrrLjfmzOytk0pv3TeZ78gfSbuDz9zheKBIYdjmiOG2Vg/0TEFfUtwuajnBSKVJPC/fxvtE
+ 6eW0YfMTwsJtzeMaRjuFnR4YZdhl+jzmCiLaIvw==
+X-Google-Smtp-Source: AGHT+IHMnVqe77UJFv4vuru0rrjzHBTwHDEDT5eS9uFrouMKePgTWG/IML3eXSREqqF1wIHQR/l6agPeGQFqpSef+OA=
+X-Received: by 2002:a17:90a:5410:b0:2bd:fa57:b361 with SMTP id
+ 98e67ed59e1d1-2c27db10aecmr1589692a91.11.1717566846843; Tue, 04 Jun 2024
+ 22:54:06 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/7] efi: add a helper to generate dynamic UUIDs
-To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
- <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-Cc: Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de
-References: <20240531-b4-dynamic-uuid-v3-0-ca4a4865db00@linaro.org>
- <20240531-b4-dynamic-uuid-v3-2-ca4a4865db00@linaro.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240531-b4-dynamic-uuid-v3-2-ca4a4865db00@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:9JWCkeHbaP9/E1EZZzS1kbO3nqOmP1U4qUjnq4PokJNd5Yhn1gg
- 0LKyXiTPN33B1oZXkDE6ROA1yFZ6ETUytbym0/3ndeMr9RaecBrWnRmADX/gQ4UBfAVJ1jj
- zX6KhXrFyCuUAS0/sLMv4QG5TPmrqD11AMf+1AZ6N0kjPcCDY3ryQbFZGRpjgyB5wgzj/ve
- /SYd1khleuqNsO6RTwHRA==
-UI-OutboundReport: notjunk:1;M01:P0:vflZdolTIcE=;6S27v3xOXEZRTmca4LQaZCBjnCp
- 8TXRJ8f6DqMED6/PmWfzHaNXsIKfZxT/onkJyZig74ZNkd+jVpJMs+zFp4iVftd8TYXqfl3IN
- 7EFFaxOYiyCyUsSpjZxY1Lp5SwjeKE24T9C6Uzc0yjZYyAYO7R0URfpxDckaADtI9dItHrqG+
- TAejmTsFqMZQXixKLVCxwpgCTzmYUtSe32RCYV69bzeTyY99uIeoOs3vsgkmPZua6gwQYUUhP
- QTvO7MjwgPVY35QuUhoG+1HP00z7PQHaXLDexUeDHku2hin3k07erfQzzLakSjickj2bFiccp
- K5rw75v7jzLnscAivQUpmE7sfszwbkkfk8F507Ro7PkcxB/74Ab0muaCQMSVhpdyuYsxfYw8X
- 5NeOMapaHtlA4cH4+e0Hfe4Tt1qmKnYZApNvkLVqdYlliIxBwaN7X0JyU/7dXdZHCw1oQ0wHY
- s5+N0udtTpkdv77jI2YwKB//t97t2iQg4WSXT10IxLBYC/Gp87JRzqdVX7/NaD4djQhgMGH9E
- br75/EMkBEwGGq708XAc1Tf0kMezaeHYAOOcu38VGzpi6n0XogEwCmrovj8l82aueIINQOHW3
- jzsvTaP7K+Fc3EU2P9py2CG5taNMIuEOdFEbZ8S4cRaE+67e3nPxpAxUUOpjCZFC5tAWUonHg
- wbvaFcMy/B2APor1lg02PhHe5dHnhTEG/wsYEts7Oxt4nwvvmOgWc1Y+TaGePWJzKc/7Vl5xb
- u14kLWjFnfOyrwKFCmBuz8VQkR5a5V0S9ZIBqLVAhi2uUXMAGieWYVH2NkwAEg4rKdNwyhXnu
- 0zCfHiEPuOjlrqrJVD2R8twPs/rfDZbpLNwMkZvcmRujs=
+References: <20240605032521.1142768-1-sjg@chromium.org>
+ <20240605032521.1142768-3-sjg@chromium.org>
+ <21ec4fcf-0a17-46c6-ae18-6787366e99fa@gmx.de>
+In-Reply-To: <21ec4fcf-0a17-46c6-ae18-6787366e99fa@gmx.de>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 5 Jun 2024 08:53:30 +0300
+Message-ID: <CAC_iWjLzE9mgckmij1A0VRNj9RXAFsa8+Eu3X4R-Vbuf3P3LBg@mail.gmail.com>
+Subject: Re: [PATCH 2/9] tpm: Avoid code bloat when not using EFI_TCG2_PROTOCOL
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Eddie James <eajames@linux.ibm.com>, Manorit Chawdhry <m-chawdhry@ti.com>, 
+ Michal Simek <michal.simek@amd.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
+ Sean Anderson <sean.anderson@seco.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,201 +96,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/31/24 15:50, Caleb Connolly wrote:
-> Introduce a new helper efi_capsule_update_info_gen_ids() which populates
-> the capsule update fw images image_type_id field. This allows for
-> determinstic UUIDs to be used that can scale to a large number of
-> different boards and board variants without the need to maintain a big
-> list.
+Hi Heinrich
+
+On Wed, 5 Jun 2024 at 07:09, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> We call this from efi_fill_image_desc_array() to populate the UUIDs
-> lazily on-demand.
+> On 6/5/24 05:25, Simon Glass wrote:
+> > It does not make sense to enable all SHA algorithms unless they are
+> > needed. It bloats the code and in this case, causes chromebook_link to
+> > fail to build.
 >
-> This is behind an additional config option as it depends on V5 UUIDs and
-> the SHA1 implementation.
+> Why would chromebook_link fail to build?
+> Is TPM used by U-Boot on that board at all?
 >
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->   lib/efi_loader/Kconfig        | 23 +++++++++++++++
->   lib/efi_loader/efi_capsule.c  |  1 +
->   lib/efi_loader/efi_firmware.c | 66 +++++++++++++++++++++++++++++++++++=
-++++++++
->   3 files changed, 90 insertions(+)
+> >
+> > Add a condition to TPM to correct this. Note that the original commit
+> > combines refactoring and new features, which makes it hard to see what
+> > is going on.
+> >
+> > Fixes: 97707f12fda tpm: Support boot measurements
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >   lib/Kconfig | 8 ++++----
+> >   1 file changed, 4 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/lib/Kconfig b/lib/Kconfig
+> > index 189e6eb31aa..70b32362ada 100644
+> > --- a/lib/Kconfig
+> > +++ b/lib/Kconfig
+> > @@ -438,10 +438,10 @@ config TPM
+> >       bool "Trusted Platform Module (TPM) Support"
+> >       depends on DM
+> >       imply DM_RNG
+> > -     select SHA1
+> > -     select SHA256
+> > -     select SHA384
+> > -     select SHA512
+> > +     select SHA1 if EFI_TCG2_PROTOCOL
+> > +     select SHA256 if EFI_TCG2_PROTOCOL
+> > +     select SHA384 if EFI_TCG2_PROTOCOL
+> > +     select SHA512 if EFI_TCG2_PROTOCOL
 >
-> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> index 430bb7f0f7dc..e90caf4f8e14 100644
-> --- a/lib/efi_loader/Kconfig
-> +++ b/lib/efi_loader/Kconfig
-> @@ -235,8 +235,31 @@ config EFI_CAPSULE_ON_DISK_EARLY
->   	  If this option is enabled, capsules will be enforced to be
->   	  executed as part of U-Boot initialisation so that they will
->   	  surely take place whatever is set to distro_bootcmd.
+> You need to consider CONFIG_MEASURED_BOOT which allows measured boot in
+> the non-UEFI case.
 >
-> +config EFI_CAPSULE_DYNAMIC_UUIDS
-> +	bool "Dynamic UUIDs for capsules"
-> +	depends on EFI_HAVE_CAPSULE_SUPPORT
-> +	select UUID_GEN_V5
-
-This select will create a build error if CONFIG_SHA1=3Dn as
-CONFIG_UUID_GEN_V5 depends on it.
-
-> +	help
-> +	  Select this option if you want to use dynamically generated v5
-> +	  UUIDs for your board. To make use of this feature, your board
-> +	  code should call efi_capsule_update_info_gen_ids() with a seed
-> +	  UUID to generate the image_type_id field for each fw_image.
-> +
-> +	  The CapsuleUpdate payloads are expected to generate matching UUIDs
-> +	  using the same scheme.
-> +
-> +config EFI_CAPSULE_NAMESPACE_UUID
-> +	string "Namespace UUID for dynamic UUIDs"
-> +	depends on EFI_CAPSULE_DYNAMIC_UUIDS
-> +	help
-> +	  Define the namespace or "salt" UUID used to generate the per-image
-> +	  UUIDs. This should be a UUID in the standard 8-4-4-4-12 format.
-
-As UUIDs can be formatted low-endian or big-endian I would not know how
-the value will be interpreted.
-
-Why do we need a vendor specific name-space if we are using compatible
-strings which are vendor specific themselves?
-
-> +
-> +	  Device vendors are expected to generate their own namespace UUID
-> +	  to avoid conflicts with existing products.
-> +
->   config EFI_CAPSULE_FIRMWARE
->   	bool
+> Please, take into account
 >
->   config EFI_CAPSULE_FIRMWARE_MANAGEMENT
-> diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
-> index 0937800e588f..ac02e79ae7d8 100644
-> --- a/lib/efi_loader/efi_capsule.c
-> +++ b/lib/efi_loader/efi_capsule.c
-> @@ -19,8 +19,9 @@
->   #include <mapmem.h>
->   #include <sort.h>
->   #include <sysreset.h>
->   #include <asm/global_data.h>
-> +#include <uuid.h>
+> lib/tpm-v1.c:20:
+> #error "TPM_AUTH_SESSIONS require SHA1 to be configured, too"
 >
->   #include <crypto/pkcs7.h>
->   #include <crypto/pkcs7_parser.h>
->   #include <linux/err.h>
-> diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware=
-.c
-> index ba5aba098c0f..a8dafe4f01a5 100644
-> --- a/lib/efi_loader/efi_firmware.c
-> +++ b/lib/efi_loader/efi_firmware.c
-> @@ -244,8 +244,71 @@ void efi_firmware_fill_version_info(struct efi_firm=
-ware_image_descriptor *image_
+> This #error should be replaced by a Kconfig constraint.
 >
->   	free(var_state);
->   }
+> I would prefer the select statements to be in lib/efi_loader/Kconfig
+> under EFI_TCG2_PROTOCOL.
 >
-> +#if CONFIG_IS_ENABLED(EFI_CAPSULE_DYNAMIC_UUIDS)
-> +/**
-> + * efi_capsule_update_info_gen_ids - generate GUIDs for the images
-> + *
-> + * Generate the image_type_id for each image in the update_info.images =
-array
-> + * using the first compatible from the device tree and a salt
-> + * UUID defined at build time.
-> + *
-> + * Returns:		status code
-> + */
-> +static efi_status_t efi_capsule_update_info_gen_ids(void)
-> +{
-> +	int ret, i;
-> +	struct uuid namespace;
-> +	const char *compatible; /* Full array including null bytes */
-> +	struct efi_fw_image *fw_array;
-> +
-> +	fw_array =3D update_info.images;
-> +	/* Check if we need to run (there are images and we didn't already gen=
-erate their IDs) */
-> +	if (!update_info.num_images ||
-> +	    memchr_inv(&fw_array[0].image_type_id, 0, sizeof(fw_array[0].image=
-_type_id)))
-> +		return EFI_SUCCESS;
-> +
-> +	ret =3D uuid_str_to_bin(CONFIG_EFI_CAPSULE_NAMESPACE_UUID,
-> +			(unsigned char *)&namespace, UUID_STR_FORMAT_GUID);
-> +	if (ret) {
-> +		log_debug("%s: CONFIG_EFI_CAPSULE_NAMESPACE_UUID is invalid: %d\n", _=
-_func__, ret);
-> +		return EFI_UNSUPPORTED;
-> +	}
-
-You don't want end-users to be the first to find this issue. This must
-be a build time check.
-
-> +
-> +	compatible =3D ofnode_read_string(ofnode_root(), "compatible");
-> +
-> +	if (!compatible) {
-> +		log_debug("%s: model or compatible not defined\n", __func__);
-
-You are not reading model here.
-
-> +		return EFI_UNSUPPORTED;
-> +	}
-> +
-> +	if (!update_info.num_images) {
-> +		log_debug("%s: no fw_images, make sure update_info.num_images is set\=
-n", __func__);
-
-I thought we were using capsules without images in A/B updates and need
-to process them?
-
-> +		return -ENODATA;
-> +	}
-> +
-> +	for (i =3D 0; i < update_info.num_images; i++) {
-> +		gen_uuid_v5(&namespace,
-> +			    (struct uuid *)&fw_array[i].image_type_id,
-> +			    compatible, strlen(compatible),
-> +			    fw_array[i].fw_name, u16_strsize(fw_array[i].fw_name)
-> +				- sizeof(uint16_t),
-> +			    NULL);
-> +
-> +		log_debug("Image %ls UUID %pUs\n", fw_array[i].fw_name,
-> +			  &fw_array[i].image_type_id);
-> +	}
-> +
-> +	return EFI_SUCCESS;
-> +}
-> +#else
-> +static efi_status_t efi_capsule_update_info_gen_ids(void)
-> +{
-> +	return EFI_SUCCESS;
-
-Why should we have a case were we don't generate the image UUIDs?
-Don't we get rid of capsule GUIDs in the device-trees?
-
-Best regards
-
-Heinrich
-
-> +}
-> +#endif
-> +
->   /**
->    * efi_fill_image_desc_array - populate image descriptor array
->    * @image_info_size:		Size of @image_info
->    * @image_info:			Image information
-> @@ -282,8 +345,11 @@ static efi_status_t efi_fill_image_desc_array(
->   		return EFI_BUFFER_TOO_SMALL;
->   	}
->   	*image_info_size =3D total_size;
+> @Ilias, Eddie:
 >
-> +	if (efi_capsule_update_info_gen_ids() !=3D EFI_SUCCESS)
-> +		return EFI_UNSUPPORTED;
-> +
->   	fw_array =3D update_info.images;
->   	*descriptor_count =3D update_info.num_images;
->   	*descriptor_version =3D EFI_FIRMWARE_IMAGE_DESCRIPTOR_VERSION;
->   	*descriptor_size =3D sizeof(*image_info);
+> Why do we require SHA1 which is considered insecure?
 >
+> Shouldn't we change tpm2_supported_algorithms[] to include only
+> algorithms selected in the configuration? This would allow replacing all
+> the select statements in Simon's patch by imply.
 
+The algorithms used and configured by the TPM are device runtime
+decisions, not compile-time ones and to my knowledge, there are no
+devices out there that disable SHA1.
+
+Failing to extend a PCR in an active bank is a security vulnerability.
+It would allow the unsealing of secrets if an attacker can replay a
+good set of measurements into an unused bank.
+
+We could potentially fix that in the future since we can configure the
+TPM active banks on boot, but IIRC we don't support that yet.
+
+Regards
+/Ilias
+
+>
+> Best regards
+>
+> Heinrich
+>
+> >       help
+> >         This enables support for TPMs which can be used to provide security
+> >         features for your board. The TPM can be connected via LPC or I2C
+>
