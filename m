@@ -4,73 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6F33C25B76
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 05:33:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 479B6C25B76
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 05:33:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 617DF882ED;
-	Wed,  5 Jun 2024 07:33:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C787F88297;
+	Wed,  5 Jun 2024 07:33:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GX6lR1NL";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="giNkp+qp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A2B4882E0; Wed,  5 Jun 2024 07:33:06 +0200 (CEST)
-Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
- [IPv6:2607:f8b0:4864:20::533])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C6413882E0; Wed,  5 Jun 2024 07:33:34 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC499879F3
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 07:33:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C0CE5879F3
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 07:33:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-6c3b5c5e32cso3633062a12.1
- for <u-boot@lists.denx.de>; Tue, 04 Jun 2024 22:33:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1717565582; x=1718170382; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Dq+DkJ9riTO+/z6VK2YFie9h/xC1HSr9fu3BwcbiHuU=;
- b=GX6lR1NL6slgVBf9cM3ulQSYX33QvaXG2F5c421bdfHOAju653ZqjjJZ8aQ9ofWI8+
- sRHrM2vQ8EVbsMZ1XQXNTO8bCSn1UaqDqdBYAggjY6m5f2bnqc+VoCXb7y1hVCtTTFaR
- bewul1FadDQUtsqQulbPkt1eRPrcfkIRqA5B3h23aKxbDbTD91LOYRXdW9K+fCSWfhlQ
- SQQH82vEd9m/AIE7yVvBV3P1SuCRQDmjR8j3Zu218PqE3ymBiArP8wVlphsga54+k1en
- cRenRWHurFWfbBKDDOu+FK6wyPI07iCFGA4ajXweHj4BmyPHamJITt83LsWQbP7cLr2f
- /UkA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717565582; x=1718170382;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Dq+DkJ9riTO+/z6VK2YFie9h/xC1HSr9fu3BwcbiHuU=;
- b=uzIw3NK6D5lEsO9VLvBJHb3LjmH7vLA9PXJ0g9yDGL3pVRitZv2TWxzFUeOc140Se/
- CL/NuRcDQcPLmnHdRgmH0wW95tCYVR/J/qwNjfzpS6+gwlIoFOs/L2hWn2rCaD+r2vPJ
- /oACZe+DDf0KwR6afjF76WDqdooKIBfBgXUqMP3L9oehoj/Px1E1+26mqw9xSLMeIEme
- KF9Xrqm8tIkBu4vmBHEVNMtG0FlhS5gcxt1nm0/rOI8pg5Lp01wg6GGcGXQeJuS2RaIv
- dqWg/qFBL86H4qJ0PA3abCi+YeA0GdIZL9Us7tDBqbt9iirMS3Ecd1pWWBxIaWipKwDn
- iwQA==
-X-Gm-Message-State: AOJu0YyH+pZqC8W8dz2Ib6oN8ulGjPsReFOowwVyPpbI/7MBr6DEDPy4
- QE95UAzXsf+YTAz8cDV58ZFaHrFUkHaUC9lChKChH7cSX1zOqeeGk1DD3kBGYVeEMOiQzth1lai
- bYUEz0gKeF/VeknMgyiLoZsOsPEOzGkYrU1qTPw==
-X-Google-Smtp-Source: AGHT+IFv6Vgf7SFFpf8/h9ST3T0W3LkkPcwTxu9fzVKNDIoGCxJrKys8+APNnOLTG9X7vV1qAxBUT1vq3VfYKiloRVo=
-X-Received: by 2002:a17:90b:188f:b0:2c1:c648:14d2 with SMTP id
- 98e67ed59e1d1-2c27db003cdmr1604473a91.1.1717565582357; Tue, 04 Jun 2024
- 22:33:02 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1717565609; x=1718170409; i=xypron.glpk@gmx.de;
+ bh=VZbjW2SeXqzM1TqAZs1IBaCiu84r1rNSWFpZh39+cn0=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=giNkp+qp2om9hW8KRX8NO6T/NPzyzskIyb3I/c/FFC9EPbaCthBRvVtax5sZP3iu
+ c7DWWXbDYGEZgP1MT0nBLl3hyCqwHUlO7bqmh86R21NiKyaCYqWb4MNdou3ujWfbQ
+ lpQxMxpKcn4NdBn6Qre5L3SDeFErEgKNEA4NRJ1YCNBX2Nk4YB2EDPOxIqIz93tAV
+ Hdy1pqoEuIOtMIPIOQ68YLZZm17vKWFOPr53BWpnK7bOxXWOV2LJJ2PgA/c2Hb/HT
+ AbpmnK1TP6HwwUw3/BFEAk6ecUoONLv4YsrjOTgv0DEpDsTKXZXBFnX+dYIM1M/hD
+ uLL2Nz62a0uVwKRMDQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.107] ([109.42.178.114]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1M5wLZ-1s7HYg2vPv-007U63; Wed, 05
+ Jun 2024 07:33:29 +0200
+Message-ID: <928c870f-2749-46d7-8a02-a5605557bce2@gmx.de>
+Date: Wed, 5 Jun 2024 07:33:29 +0200
 MIME-Version: 1.0
-References: <20240605032521.1142768-1-sjg@chromium.org>
- <20240605032521.1142768-6-sjg@chromium.org>
-In-Reply-To: <20240605032521.1142768-6-sjg@chromium.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 5 Jun 2024 08:32:26 +0300
-Message-ID: <CAC_iWjK6CKheBax2VxL4JydJqLzus9UF5hNMqMXtscqebxKuwQ@mail.gmail.com>
-Subject: Re: [PATCH 5/9] fdt: Correct condition for bloblist existing
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Jerry Van Baren <vanbaren@cideas.com>, Shiji Yang <yangshiji66@outlook.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/7] lib: uuid: add UUID v5 support
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Mario Six <mario.six@gdsys.cc>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+References: <20240531-b4-dynamic-uuid-v3-0-ca4a4865db00@linaro.org>
+ <20240531-b4-dynamic-uuid-v3-1-ca4a4865db00@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240531-b4-dynamic-uuid-v3-1-ca4a4865db00@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:lHjTRLhO/ug/EEAD/ekSjBrCWNd3s2y1ijQ8E0QSETEN/q4QBzz
+ 9ZV9C1ZZrNEqS1w/nLwWSDhCDw3RZOUUQy1EkapOR/OVgowy3nXrkaDdUeFRKiDX5WwIe1W
+ Q9eZbsgOy7HEvFaljlSnL8zfhp2r0niu1BB6bQM/tdw9jXhzm1TnygAVguAVfn+Rwiov8o4
+ Hj77eZB9kD/S9WYvSfPKg==
+UI-OutboundReport: notjunk:1;M01:P0:8L8tTXn+Eog=;uXKrCQcU/uOE2yDWSLXJd1Rbcu5
+ anrqBS0lYiyrMSLsMjl6a4k+zZvHJh9Q+CifJN2RvYQadu1BLdTsq/SkPR1p6ofh6ijBaddFk
+ uMRCAehh+CkFjq/OLXgWuAKzleznAxHptzj3Hgz9lGZe/mtfSjtzXpI+EDiAw1GKNS/v2OLTO
+ ezD/PrjJDNxytW0dc1VuJxZwFMlvKfSORHr4RaEmECreFySwmNFZkLWuk534VZ6Umbb2w3xB/
+ ezD8/+BwE6dsm7qa16ifoPwKsWxmwXONjLx5DsRnXnoCcp+oh1I0r39YJk6B8oryO1XxO5Rpz
+ pRx7QCZGQPHGXXJuXqm7xGYHylb9SmPb4WfMs6QOHAdS0AGc1m6qYRuf3YgcjZrLTo38I7k5M
+ LpQWzk8ZA13xQh6LzYXuEBuyYq5fHC6nfzpHRlGHhVSeeRbxhKp4z1Mt/s2Qa23QsjGVp34W9
+ E+6P4yQiTUz+Zzn74XVLHJgHNeWekHJMOHW/ounTFcVjmbD/r2t7uOOOoSIaJ1Yv9cKyKbmfR
+ gQ3d8npPhAzowgKYAdg+y3pvKCyxRj4pocMwwIRSdYuy+iknM+I1FchXBiPF7VdCAuFy+pyye
+ v2bbLqz82xeQvgaYCkXAE8Lsy2/5nvdSi35ObH6XIzmS8tF+5EZ+ltop3TYNDZZH24VrdufA/
+ 9Vz3EGJk2lM0wAVlxha8C+moVUPDYumiI53KRxef0ZFy1ZbU6j96OEBKvrgS8mABNZk+GjKfi
+ yT1q3meCphmRXZ7i51eqOUtVQhjQEjr7XEviypuzobkJo6OVtT5sudKli+p1HMb3RqDYRLuoK
+ WQIfB6V5bd5hR4y78NG7LD5M/1xJc9b1IaVFQ318/G/+A=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,59 +94,195 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
-
-On Wed, 5 Jun 2024 at 06:26, Simon Glass <sjg@chromium.org> wrote:
+On 5/31/24 15:50, Caleb Connolly wrote:
+> Add support for generating version 5 UUIDs, these are determistic and wo=
+rk
+> by hashing a "namespace" UUID together with some unique data. One intend=
+ed
+> usecase is to allow for dynamically generate payload UUIDs for UEFI
+> capsule updates, so that supported boards can have their own UUIDs
+> without needing to hardcode them.
 >
-> On some boards, the bloblist is created in SPL once SDRAM is ready. It
-> cannot be accessed until that point, so is not available early in SPL.
+> Tests for this are added in an upcoming patch.
 >
-> Add a condition to avoid a hang in this case.
->
-> This fixes a hang in chromebook_coral
->
-> Fixes: 70fe2385943 ("fdt: Allow the devicetree to come from a bloblist")
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
+>   include/uuid.h | 17 +++++++++++++++++
+>   lib/Kconfig    |  8 ++++++++
+>   lib/uuid.c     | 37 +++++++++++++++++++++++++++++++++++++
+>   3 files changed, 62 insertions(+)
 >
->  lib/fdtdec.c | 12 ++++++++++--
->  1 file changed, 10 insertions(+), 2 deletions(-)
+> diff --git a/include/uuid.h b/include/uuid.h
+> index f5a941250f48..539affaa47b9 100644
+> --- a/include/uuid.h
+> +++ b/include/uuid.h
+> @@ -10,8 +10,9 @@
+>   #ifndef __UUID_H__
+>   #define __UUID_H__
 >
-> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> index b2c59ab3818..b141244e3b9 100644
-> --- a/lib/fdtdec.c
-> +++ b/lib/fdtdec.c
-> @@ -1669,8 +1669,16 @@ int fdtdec_setup(void)
->  {
->         int ret = -ENOENT;
+>   #include <linux/bitops.h>
+> +#include <linux/kconfig.h>
 >
-> -       /* If allowing a bloblist, check that first */
-> -       if (CONFIG_IS_ENABLED(BLOBLIST)) {
-> +       /*
-> +        * If allowing a bloblist, check that first. This would be better
-> +        * handled with an OF_BLOBLIST Kconfig, but that caused far too much
-> +        * argument, so add a hack here, used e.g. by chromebook_coral
-> +        * The necessary test is whether the previous stage passed a bloblist,
-> +        * not whether this one creates one.
-> +        */
-> +       if (CONFIG_IS_ENABLED(OF_BLOBLIST) &&
-> +           (spl_prev_phase() != PHASE_TPL ||
-> +            !IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
-
-The same condition exists in common/bloblist.c.
-Carve out a function --e.g
-
-bool can can_enable_bloblist(void)
-     return ....
-
-instead of open coding that
-
-Thanks
-/Ilias
->                 ret = bloblist_maybe_init();
->                 if (!ret) {
->                         gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
-> --
-> 2.34.1
+>   /*
+>    * UUID - Universally Unique IDentifier - 128 bits unique number.
+>    *        There are 5 versions and one variant of UUID defined by RFC4=
+122
+> @@ -142,8 +143,24 @@ void gen_rand_uuid(unsigned char *uuid_bin);
+>    * @param          - uuid output type: UUID - 0, GUID - 1
+>    */
+>   void gen_rand_uuid_str(char *uuid_str, int str_format);
 >
+> +#if IS_ENABLED(CONFIG_UUID_GEN_V5)
+> +/**
+> + * gen_uuid_v5() - generate UUID v5 from namespace and other seed data.
+> + *
+> + * @namespace:   pointer to UUID namespace salt
+> + * @uuid:        pointer to allocated UUID output
+> + * @...:         NULL terminated list of seed data as pairs of pointers
+> + *               to data and their lengths
+
+It is unclear what this might mean.
+
+According to your description ... could be
+
+struct {
+	void *data;
+	u32 *length;
+} ...[] =3D {
+	{ &data_1, &length_1 },
+	{ &data_2, &length_2 },
+	{ NULL, NULL }
+}
+
+Do we have pointer to lengths?
+Which data type do lengths have?
+
+Please, provide an unambiguous description.
+
+An example would help.
+
+> + */
+> +void gen_uuid_v5(const struct uuid *namespace, struct uuid *uuid, ...);
+> +#else
+> +static inline void gen_uuid_v5(const struct uuid *namespace, struct uui=
+d *uuid, ...)
+> +{
+> +}
+> +#endif
+> +
+>   /**
+>    * uuid_str_to_le_bin() - Convert string UUID to little endian binary =
+data.
+>    * @uuid_str:	pointer to UUID string
+>    * @uuid_bin:	pointer to allocated array for little endian output [16B=
+]
+> diff --git a/lib/Kconfig b/lib/Kconfig
+> index 189e6eb31aa1..2941532f25cf 100644
+> --- a/lib/Kconfig
+> +++ b/lib/Kconfig
+> @@ -80,8 +80,16 @@ config RANDOM_UUID
+>   	help
+>   	  Enable the generation of partitions with random UUIDs if none
+>   	  are provided.
+>
+> +config UUID_GEN_V5
+> +	bool "Enable UUID version 5 generation"
+> +	select LIB_UUID
+> +	depends on SHA1
+
+'select SHA1' might make things easier.
+
+> +	help
+> +	  Enable the generation of version 5 UUIDs, these are determistic and
+
+%s/determistic/deterministic/
+
+> +	  generated from a namespace UUID, and a string (such as a board name)=
+.
+> +
+>   config SPL_LIB_UUID
+>   	depends on SPL
+>   	bool
+>
+> diff --git a/lib/uuid.c b/lib/uuid.c
+> index dfa2320ba267..2df0523e717f 100644
+> --- a/lib/uuid.c
+> +++ b/lib/uuid.c
+> @@ -21,8 +21,9 @@
+>   #include <part_efi.h>
+>   #include <malloc.h>
+>   #include <dm/uclass.h>
+>   #include <rng.h>
+> +#include <u-boot/sha1.h>
+>
+>   int uuid_str_valid(const char *uuid)
+>   {
+>   	int i, valid;
+> @@ -368,8 +369,44 @@ void uuid_bin_to_str(const unsigned char *uuid_bin,=
+ char *uuid_str,
+>   		}
+>   	}
+>   }
+>
+> +#if IS_ENABLED(CONFIG_UUID_GEN_V5)
+> +void gen_uuid_v5(const struct uuid *namespace, struct uuid *uuid, ...)
+> +{
+> +	sha1_context ctx;
+> +	va_list args;
+> +	const uint8_t *data;
+> +	uint8_t hash[SHA1_SUM_LEN];
+> +	uint32_t tmp;
+> +
+> +	sha1_starts(&ctx);
+> +	/* Hash the namespace UUID as salt */
+> +	sha1_update(&ctx, (unsigned char *)namespace, UUID_BIN_LEN);
+> +	va_start(args, uuid);
+> +
+> +	while ((data =3D va_arg(args, const uint8_t *))) {
+> +		unsigned int len =3D va_arg(args, size_t);
+> +
+> +		sha1_update(&ctx, data, len);
+> +	}
+> +
+> +	va_end(args);
+> +	sha1_finish(&ctx, hash);
+> +
+> +	/* Truncate the hash into output UUID, it is already big endian */
+> +	memcpy(uuid, hash, sizeof(*uuid));
+> +
+> +	/* Configure variant/version bits */
+> +	tmp =3D be32_to_cpu(uuid->time_hi_and_version);
+> +	tmp =3D (tmp & ~UUID_VERSION_MASK) | (5 << UUID_VERSION_SHIFT);
+
+Currently we have
+
+#define UUID_VERSION            0x4
+
+Shouldn't we create
+
+#define UUID_VARIANT_4 0x4 - to be used in gen_rand_uuid()
+#define UUID_VARIANT_5 0x5 - to be used in gen_uuid_v5()
+
+instead?
+
+Please, provide a unit test for gen_uuid_v5() that passes multiple
+strings to gen_uuid_v5() and checks the hash.
+
+Best regards
+
+Heinrich
+
+> +	uuid->time_hi_and_version =3D cpu_to_be32(tmp);
+> +
+> +	uuid->clock_seq_hi_and_reserved &=3D UUID_VARIANT_MASK;
+> +	uuid->clock_seq_hi_and_reserved |=3D UUID_VARIANT << UUID_VARIANT_SHIF=
+T;
+> +}
+> +#endif
+> +
+>   #if defined(CONFIG_RANDOM_UUID) || defined(CONFIG_CMD_UUID)
+>   void gen_rand_uuid(unsigned char *uuid_bin)
+>   {
+>   	u32 ptr[4];
+>
+
