@@ -4,87 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 143CCC25B76
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 12:42:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B42DDC25B76
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 13:12:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EE2988313;
-	Wed,  5 Jun 2024 14:42:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DFE608836C;
+	Wed,  5 Jun 2024 15:12:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kvwz8TvW";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="grfbQndV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29E4688361; Wed,  5 Jun 2024 14:42:15 +0200 (CEST)
-Received: from mail-lj1-x241.google.com (mail-lj1-x241.google.com
- [IPv6:2a00:1450:4864:20::241])
+ id 5319088356; Wed,  5 Jun 2024 15:12:19 +0200 (CEST)
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7D4A88313
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 14:42:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 39BC488370
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 15:12:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lj1-x241.google.com with SMTP id
- 38308e7fff4ca-2eaad2c673fso55152541fa.3
- for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 05:42:12 -0700 (PDT)
+ spf=pass smtp.mailfrom=linux.amoon@gmail.com
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-5ba6c41e1a7so1033827eaf.2
+ for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 06:12:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1717591332; x=1718196132; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=fmF10L/mjBlo+h6cUuN44vHWfEcO1g/S9aKOWUdAZ9c=;
- b=kvwz8TvWR9B4w27nmhkw0+en63upSFctqI8XdRMcorobPRmZaH8CESajU2NNkVXk84
- u7ceQqJ1wCKLDSdVKn6FcOEmtwFYDmntr4ovH8qqAl1Wei9U3pRUv7GejvVvlw8BtkGH
- MszL2wbc2hBNcOg4WN2Y3a1325w1D49Gf3rZsRru0390QScNSKNriydjQqVKjTS4IY7a
- sfz7LXaVBM8OxX1lc/OIS6JTk0IGJg/omIUmsFEy26YjYQeTPk0cu1Gut/05U7JsFtJH
- Gkn8Q3Uv0NoVC0tCgjUtiKdjgAzCZz6q6I3uzi3xFl29MdjNCGfKGYetOmeurQK4Nqjp
- FEfg==
+ d=gmail.com; s=20230601; t=1717593136; x=1718197936; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=YtfLZNZEw8jbQz+9LSThzUtJzM+8ZScMW0eZB8y5Pug=;
+ b=grfbQndVDxZgykbxJikOZEUult67SD2yQXIz+FCUGpqxSmutPzVj3L3Qe0K9yPeIGW
+ IC5NLHqeM9FMVKXXo4tCOtzYFUcKW8MuUS84mGwIwQ9Jqz1kqnxCjpK8hB6s0+/zG21U
+ hiGa/AIbl7fEB9S7epP185jYMq6xO71SIklZuOHeBRJHb8JHNaeV0t+TK4szRos0EG6N
+ y1INQS+P9Le5xy1xf9epWVKYMPHjqVzYPHXHRZD3zMKJKL0Wp7AuvUtESYFXBMlPhjOm
+ yXmWpboW4BzHNOOmdUpBSdOuZvwGhFe3xsYSoBxr2UckHp9a0md6vUkTiv3xh/vZMCh9
+ 3K7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717591332; x=1718196132;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=fmF10L/mjBlo+h6cUuN44vHWfEcO1g/S9aKOWUdAZ9c=;
- b=E9cfLA5GXh7KnFSTohII+LIsNYnQz3TWbnFhfHyatsNBjw0HCxWOQtdfwYWZYGJXoX
- AHpa4n0xl5ZKMzUguSsOR70cesHKPHpYHaY7yxmQX/Y8aQF9Q4Imd2xPqs7yFxP5mONV
- Rqe56/WpmXhf/iCKL9NeRGjsxhDhdRz3xuEboMO4b/Pxkw0Jt3r+daN5joERVq3fHGJf
- IqJpCNL9rbx0lMjQLtXsdsEI0obiGHJWChYbyTzcVBm99oloMhFja7e+asWERJcAaitr
- qyWtvN9YS39VpFUQn5s2un31ASQd1VRG/TpcWQxZ95cMlQvmfD77XaT0hN750csjebYf
- GZQQ==
+ d=1e100.net; s=20230601; t=1717593136; x=1718197936;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=YtfLZNZEw8jbQz+9LSThzUtJzM+8ZScMW0eZB8y5Pug=;
+ b=L9tIzk6u+EB3hpY+9sSIqWsHsElnsTaXr1dGq9g2uvbm/6WxFjoMuZLYkCwQvuU06F
+ aSMjon6spMuul1ejEE34l3jd/v/tcwokorF8ESwmoMFaeiHI0uytvNklk+vTNlLll7tb
+ ltXyNOn4jJzKIOXaZboQ+4BvrmaX/pDVeRTtmk2cW6PsDN8PE0Qqci6cBJrfiu67nG8p
+ Zwh4nd+TD0nqvPrbfd4YoJcobvZij8V9SIzEgeJlDUZjZOkL2e/R5keUU+4quDTZnmKR
+ MsZyh9NQLaJQYoWBicv3FW/H9Ub39INjPlDZm2wmKAvkvsJvkWit+V+bcxjmmoA2+I5R
+ 4rcA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXLLSS2d6x5rQW4gT5b291pdldp744CDHZeBQ6esUlJsUi6OLH/SDrO4k0ZyWtHyb8cLrO9xu3MTwzjy5IzwdN+m5qZhw==
-X-Gm-Message-State: AOJu0YwhKmorGC20JxUztaP6XXOxRYQYbTff4tUnJGJoHRgusu2XslJZ
- Eydp2fz7aPzwoOj6Y4NwrU+Z6Gf6ezyKI0lt2NJ423Z0rCUgtaqwlRy3pbVYJGM=
-X-Google-Smtp-Source: AGHT+IGAzVdQguOK7sbnn3lEXc4AnkSAbX8+vzJMaOm0Dsr1JYBSPqcJAapl2MnQG35yb1fo8kfwxw==
-X-Received: by 2002:a2e:9154:0:b0:2e0:da20:2502 with SMTP id
- 38308e7fff4ca-2eac7a8029dmr17401831fa.49.1717591331709; 
- Wed, 05 Jun 2024 05:42:11 -0700 (PDT)
-Received: from ?IPV6:2a02:8109:aa0d:be00::8090? ([2a02:8109:aa0d:be00::8090])
- by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-2ea91cc7d25sm17658591fa.79.2024.06.05.05.42.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Jun 2024 05:42:11 -0700 (PDT)
-Message-ID: <22924b95-5181-4aa8-9014-9a030ee7fea3@linaro.org>
-Date: Wed, 5 Jun 2024 14:42:09 +0200
+ AJvYcCVMHmrXf4I7Pjw0YBa9d+sdXHRCfU0STtTn3q612wTrO/59mtZCzboWahXwjsa7gONQHKyATCngonAdlzOy7HA922722w==
+X-Gm-Message-State: AOJu0YxKlRGDf6+8QUprxWVcQP6DbJb3bvzKBU6f6AlWnl3VeK/sKwPL
+ 7ODGWQTbCgxHSkZDtXlsPlheNAAsLvdp8XDCeonKgiUoVL8M9KyDaZDrKZ+1sZ1YB8XOMUpDojp
+ UjnJnRMf7XUKeKBxhNnb9eL/bX9Y=
+X-Google-Smtp-Source: AGHT+IF5hPN6hqq6gCo0BKQeTb/v4dlAbBSFfSYGVlp031UqwOZ+RHUyi2Gorc4tCF59g2OTC51xMT1ny4zNZEVFmAk=
+X-Received: by 2002:a05:6820:168e:b0:5b9:f2f4:6a95 with SMTP id
+ 006d021491bc7-5ba7909bc13mr2594308eaf.5.1717593135712; Wed, 05 Jun 2024
+ 06:12:15 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/8] qcom: implement capsule updates
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-References: <20240603-b4-qcom-capsule-updates-v3-0-fe2e083289ec@linaro.org>
- <CAFA6WYP-1tuELgthx=Ky9JYAkgP0mRNEsnHdw2ZmnjHXMAm8Rw@mail.gmail.com>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAFA6WYP-1tuELgthx=Ky9JYAkgP0mRNEsnHdw2ZmnjHXMAm8Rw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20240605-pmic-rk8xx-v1-0-2349fdf68aa0@cherry.de>
+In-Reply-To: <20240605-pmic-rk8xx-v1-0-2349fdf68aa0@cherry.de>
+From: Anand Moon <linux.amoon@gmail.com>
+Date: Wed, 5 Jun 2024 18:41:59 +0530
+Message-ID: <CANAwSgQR1pWEvUaf-moLK4bF=o7gBUp2KzbWDk8-D7xkZEXFNA@mail.gmail.com>
+Subject: Re: [PATCH 0/3] rockchip: rk8xx: fix broken [np]ldo callbacks
+To: Quentin Schulz <foss+uboot@0leil.net>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>, 
+ Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,128 +89,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sumit,
+Hi Quentin,
 
-On 05/06/2024 07:31, Sumit Garg wrote:
-> Hi Caleb,
-> 
-> On Mon, 3 Jun 2024 at 18:19, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>
->> Hook up support for capsule updates loaded from disk on Qualcomm
->> platforms.
->>
->> Most Qualcomm devices have an A/B partition layout, with most partitions
->> duplicated. The metadata on which slot is active is stored in the GPT
->> headers in the vendor-specific attribute bits of each partition.
-> 
-> It's good to see capsule updates support coming up for Qualcomm
-> platforms. AFAICS, with this series we only update U-Boot on the
-> current active partition. IOW, real A/B support is still not
-> supported. Do you think it is possible for U-Boot to update metadata
-> in GPT headers and for proprietary bootloaders to pick up the U-Boot
-> from the updated partition?
+On Wed, 5 Jun 2024 at 15:03, Quentin Schulz <foss+uboot@0leil.net> wrote:
+>
+> This is for master branch, merge ASAP as it's known to break at least
+> Chromebook Jerry.
+>
+> @Simon, can you please check that this fixes your CB?
+>
+> The wrong udevice was passed to the functions, making them call the
+> pmic callbacks on the parent of the pmic udevice instead of the pmic
+> udevice itself.
+>
+> While at it, ensure consistency by having all internal functions use
+> pmic udevice instead of the regulator udevice.
+>
+> Finally, clarify operator precedence in ternary condition as reported by
+> my linter.
+>
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-Yes this would be possible, I have some WIP patches to let us modify the 
-slot attribute bits and write back the header.
+I see we have not been able to follow configs on a few of the board's for RK3588
 
-The reason I haven't implement A/B is because we don't support it from 
-the OS level on any of the boards I work on. We often patch ABL to 
-disable or skip the slot logic and flash a partition table without 
-slots. It also unlocks a bunch of additional complexity...
+CONFIG_CMD_REGULATOR=y
+CONFIG_PMIC_RK8XX=y
+CONFIG_REGULATOR_RK8XX=y
 
-This isn't super high on my todo list but I'd be happy to help if 
-someone wants to enable this functionality. We'd need:
+could you enable the options with imply for all the rockchip boards?
 
-1. Upstream support for modifying the GPT (see my PoC at [1] and [2]).
-2. Logic to configure flashing the active or inactive slot
+Thanks
+-Anand
 
-This logic would have to run after the capsule update, I don't know if 
-there is currently a way to add a callback after the update.
-
-If we enable updating other images (like XBL, hyp, tz, etc), we would 
-need to either agree that a capsule update would have to update ALL 
-partitions, or implement logic to copy over partitions that weren't 
-flashed to the other slot.
-
-[1]: 
-https://git.codelinaro.org/linaro/qcomlt/u-boot/-/commit/34d3de6f79550527746303e0bf6337fa37e31fe5
-
-[2]: 
-https://git.codelinaro.org/linaro/qcomlt/u-boot/-/commit/656d9e816bef85e586460a999cc7874255be9f1d
-> 
-> -Sumit
-> 
->>
->> Add support for reading this attributes via the disk_partition struct
->> and using them to determine which boot partition U-Boot is flashed to
->> and generate the appropriate DFU string.
->>
->> This logic is gated behind a check to ensure that U-Boot is actually
->> being chainloaded and not run via some other mechanism.
->>
->> SCSI support for most Qualcomm platforms is not yet enabled upstream,
->> but will follow in future patches.
->>
->> This series enables capsule updates on the RB2, however [1] is required
->> for it to work properly (as otherwise MMC won't be available).
->>
->> [1]: https://lore.kernel.org/u-boot/20240527-b4-clk-stub-v2-0-29013855e343@linaro.org/
->>
->> To: Tom Rini <trini@konsulko.com>
->> To: Simon Glass <sjg@chromium.org>
->> To: Lukasz Majewski <lukma@denx.de>
->> To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
->> To: Caleb Connolly <caleb.connolly@linaro.org>
->> To: Neil Armstrong <neil.armstrong@linaro.org>
->> To: Sumit Garg <sumit.garg@linaro.org>
->> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->> Cc: u-boot@lists.denx.de
->> Cc: u-boot-qcom@groups.io
->>
->> Changes in v3:
->> - Address comments in scsi dfu support
->> - enable CONFIG_DFU_SCSI for qcom
->> - Link to v2: https://lore.kernel.org/r/20240527-b4-qcom-capsule-updates-v2-0-47583d7ad428@linaro.org
->>
->> Changes in v2:
->> - Add qcom capsule update support patches
->> - Link to v1: https://lore.kernel.org/r/20240409-b4-dfu-scsi-v1-0-3e1441a60376@linaro.org
->>
->> ---
->> Caleb Connolly (8):
->>        dfu: add scsi backend
->>        disk: expose partition type flags
->>        mmc: msm_sdhci: work around a bug when writing
->>        mach-snapdragon: implement capsule update support
->>        qcom_defconfig: savedefconfig
->>        mach-snapdragon: use SYSRESET_PSCI
->>        mach-snapdragon: bump up heap size
->>        qcom_defconfig: enable capsule update support
->>
->>   arch/arm/Kconfig                          |   2 +
->>   arch/arm/mach-snapdragon/Kconfig          |   3 +
->>   arch/arm/mach-snapdragon/Makefile         |   1 +
->>   arch/arm/mach-snapdragon/board.c          |   8 +-
->>   arch/arm/mach-snapdragon/capsule_update.c | 147 ++++++++++
->>   arch/arm/mach-snapdragon/qcom-priv.h      |   6 +
->>   configs/qcom_defconfig                    |  19 +-
->>   disk/part_efi.c                           |   1 +
->>   doc/usage/dfu.rst                         |  32 +++
->>   drivers/dfu/Kconfig                       |   7 +
->>   drivers/dfu/Makefile                      |   1 +
->>   drivers/dfu/dfu.c                         |   5 +-
->>   drivers/dfu/dfu_scsi.c                    | 435 ++++++++++++++++++++++++++++++
->>   drivers/mmc/msm_sdhci.c                   |   7 +
->>   include/configs/qcom.h                    |   5 +
->>   include/dfu.h                             |  26 ++
->>   include/part.h                            |   1 +
->>   17 files changed, 695 insertions(+), 11 deletions(-)
->> ---
->> change-id: 20240523-b4-qcom-capsule-updates-ea2e4f8f0ff0
->> base-commit: 5d8881a0801241d68701e8644d495f1d535506f0
->>
->> // Caleb (they/them)
->>
-
--- 
-// Caleb (they/them)
+> ---
+> Quentin Schulz (3):
+>       regulator: rk8xx: fix incorrect device used for _ldo_[sg]et_suspend_value
+>       regulator: rk8xx: pass pmic udevice instead of regulator to all internal functions
+>       regulator: rk8xx: clarify operator precedence
+>
+>  drivers/power/regulator/rk8xx.c | 54 ++++++++++++++++++++---------------------
+>  1 file changed, 27 insertions(+), 27 deletions(-)
+> ---
+> base-commit: c0ea27bccfb7d2d37fd36806ac2a2f7389099420
+> change-id: 20240605-pmic-rk8xx-52f2286be334
+>
+> Best regards,
+> --
+> Quentin Schulz <quentin.schulz@cherry.de>
+>
