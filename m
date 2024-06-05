@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF58DC27C53
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 10:03:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84939C27C53
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 10:03:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAC1F883D3;
-	Wed,  5 Jun 2024 12:02:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2A42088369;
+	Wed,  5 Jun 2024 12:02:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="1htN3K53";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Zw596LmR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1180D88369; Wed,  5 Jun 2024 12:02:52 +0200 (CEST)
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam04on20608.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:240a::608])
+ id 5C05188354; Wed,  5 Jun 2024 12:02:56 +0200 (CEST)
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2417::601])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2C88883CF
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 12:02:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BB5E8839C
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 12:02:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=OvY9FZlYDiw6qMZ3rYKnNh1pmBq3B4VuhvL2k06r5Uv8GkE+MJ7BMcC9Bhs0n/ESaTZbOrhNYjVLyqKS3JBhtzLQdavyTNJH3CJcnoA29UNAtGGFM49ptY8eUdJfs52i5vJts9nIy+Z3o1A8uudxOaVtaoDI2ZzYY7ullxRwBF20xryVkAgxnSp4uuBtD63GYDBhyffh6S598D8YrvmYjOqlf0v0rXEhCzDOF762fEZ5x8FBHlkJyRi0yJaN9aP0eCVgE69jUzrwXUg0LxeBbtqeiWFjfffotZYsUWP4BzDUwiEP44W5lXqUsxWYktpGuJnpM6TFvHskEIbTzplwSw==
+ b=SvsiUJ4ALbM7y0myyIxw9gQfN1D+sga+yjYqogH0wtjif/mHMiq8D4UgXKRfoctWU3HBOr7/icyTj5EcmHkgbM/r5c+DvwLmOFzxsZdPsxozmxw6Yedqj1hEyWntHvXtyWJrFgCbDC5mrtEni4BEVUQ1dv5xKqNRvrgMyQfJ//NtJbvv/FvxnIlYh58vCpBcmggpUokWCJnY0BM+POofsUAbfJtnJDXe9GTGZcehNiO3KZK07f0kfzWZ5VbX2IiXIcQXoRfG49zFr4u3/ViRs4NYeQhcjWqqG5xbdCiF8/edA6sxBMsyAxXXujHm47UmucNhuO1Z1LNMFSSXuisPSg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ShcBO4Plu/a3XSpPPVfgSogA6S3BhPE4jwB7F0CsAJc=;
- b=c86GcJLjkncrhqSyq0zwgSmyhzkoMZyj8e7oAwIE4lnKYsTlXkJf7OvSM1tVl+KPRhYGUd1u82Lx2l9zPVTnupb27k14DdiyFkFjN4wc/Z3OnfJu++b8gFlM++SPbSH/0VKLPjp6iSuUu6z/fmnW4TYcHa7Y3As5WeVoaq9sRRPt/A08NWetdHAmlpaMc2kYRqH6K1L0wB+bXmRiIrE9oKqxzPxDiolLCtGYlVmRNC/3hxfyUqkRws/JTocP+nAfqziCWRimnMXZe17uVUl/9lydmY0TGDf7pq/M0Cy0RiVJgN7NoUZD42hCBV1eOISe8jfO1I4if6a4SIb/TlNMng==
+ bh=TdqQ0IB6YH6BBYCtkokSkuTIPadPRz5QBNzeMqZpp4Q=;
+ b=AX2hgRiYnxBeKB4cHgnzfNxMQGpCFvSZ3x3apvL+Hnl5Ua8PRFopMIK/i4tERiy/Mo9QvYYFiRbjbVPBZslsf8MajStlwKlFXMuNVDxmcozPOnrbppDveWyvhRNysYb4hVpSKd+rzOAOQPVjzy8rM2/nuYUnXHLVANOcBJM00K8kvv5g1lg8TOQ3rS4nkTbaFNFzd+2zu4W8XnjbMFK4EdHW0twxum4l4EhUT6PUlfcMrt6aMMSnCxNb8ysW/jIK+zhr7PO76UdlRCJfNCKKyi9h8CtF+K66ZEeD/VcAQdlqlaypuvm4x7Cf8swog8iS6YEDCcGannG98XerCkYU+w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ShcBO4Plu/a3XSpPPVfgSogA6S3BhPE4jwB7F0CsAJc=;
- b=1htN3K53L2lLszmoyUVh4yQNLC4L5IIqSIXe4sHlJbqAj/vOhzI6aLZAQyENERDaCAYnyZcFLHk8Y8s76BDyqLtOqPS7yzAk60CsKcl62ap5X07MZO6t+V//IjW9i+yUmxqgBYzqNQC+UDleT9FysS9Vl+tZdKK3GmL1CG3XFX0=
-Received: from DS7PR06CA0040.namprd06.prod.outlook.com (2603:10b6:8:54::28) by
- CH3PR12MB7570.namprd12.prod.outlook.com (2603:10b6:610:149::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.31; Wed, 5 Jun
- 2024 10:02:42 +0000
-Received: from DS2PEPF0000343B.namprd02.prod.outlook.com
- (2603:10b6:8:54:cafe::19) by DS7PR06CA0040.outlook.office365.com
- (2603:10b6:8:54::28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.29 via Frontend
- Transport; Wed, 5 Jun 2024 10:02:41 +0000
+ bh=TdqQ0IB6YH6BBYCtkokSkuTIPadPRz5QBNzeMqZpp4Q=;
+ b=Zw596LmRI7FAr64Z89YF4xrecBDDwKqYx9/YFimd8ylj+GVddm/IQp/kluaeEjA3TdTZ+reAx8dOjbQOHVxhwvnNMSrvXE209S8VlcWKZzYzDULMlu9s9ni41wps3T72yxhpQpgjL3l6wVLJTsGpTAcmbH1eg41n0x+uu4UxMs4=
+Received: from CH0PR03CA0432.namprd03.prod.outlook.com (2603:10b6:610:10e::20)
+ by IA1PR12MB6329.namprd12.prod.outlook.com (2603:10b6:208:3e5::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.22; Wed, 5 Jun
+ 2024 10:02:45 +0000
+Received: from DS2PEPF0000343D.namprd02.prod.outlook.com
+ (2603:10b6:610:10e:cafe::e2) by CH0PR03CA0432.outlook.office365.com
+ (2603:10b6:610:10e::20) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.31 via Frontend
+ Transport; Wed, 5 Jun 2024 10:02:45 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,24 +59,24 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS2PEPF0000343B.mail.protection.outlook.com (10.167.18.38) with Microsoft
+ DS2PEPF0000343D.mail.protection.outlook.com (10.167.18.40) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7633.15 via Frontend Transport; Wed, 5 Jun 2024 10:02:41 +0000
+ 15.20.7633.15 via Frontend Transport; Wed, 5 Jun 2024 10:02:45 +0000
 Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 5 Jun
- 2024 05:02:40 -0500
+ 2024 05:02:44 -0500
 Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35 via Frontend
- Transport; Wed, 5 Jun 2024 05:02:38 -0500
+ Transport; Wed, 5 Jun 2024 05:02:42 -0500
 From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 To: <u-boot@lists.denx.de>
 CC: <michal.simek@amd.com>, <marex@denx.de>, <fabrice.gasnier@foss.st.com>,
  <git@amd.com>
-Subject: [PATCH 5/7] usb: onboard-hub: Bail out if peer hub is already probed
-Date: Wed, 5 Jun 2024 15:32:19 +0530
-Message-ID: <20240605100221.3571-6-venkatesh.abbarapu@amd.com>
+Subject: [PATCH 7/7] arm64: zynqmp: Update the usb5744 hub node as per binding
+Date: Wed, 5 Jun 2024 15:32:21 +0530
+Message-ID: <20240605100221.3571-8-venkatesh.abbarapu@amd.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20240605100221.3571-1-venkatesh.abbarapu@amd.com>
 References: <20240605100221.3571-1-venkatesh.abbarapu@amd.com>
@@ -86,49 +86,49 @@ Received-SPF: None (SATLEXMB04.amd.com: venkatesh.abbarapu@amd.com does not
  designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS2PEPF0000343B:EE_|CH3PR12MB7570:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7c7423f4-4638-4690-94e9-08dc8546a36e
+X-MS-TrafficTypeDiagnostic: DS2PEPF0000343D:EE_|IA1PR12MB6329:EE_
+X-MS-Office365-Filtering-Correlation-Id: cb1aff41-78dd-48aa-4c64-08dc8546a5b6
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230031|376005|36860700004|82310400017|1800799015; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?8QLY8AEUrbMpEeid5alu9CvjjVS92ayjTMc0EmtVK6Ov7mO4Bh8O9yBxIBMR?=
- =?us-ascii?Q?2tTdJVDqO1GDrfJ2Jbt3SfrY3UBUOXXz/brF5HiCvCbDiRCNP/OH3ggtykYo?=
- =?us-ascii?Q?mvTHhwCGogp/VNOilsh95ZZIC4PAHdGxTnnrPeUyW8+WxiZO/y587R+ebYh/?=
- =?us-ascii?Q?IPAWBq/HNXYjLNipLbHkp2cZZLdHv/gBp2DOeZU+6UWFgVRTY1/GXW39nF7f?=
- =?us-ascii?Q?YiFC8WfGZgBkGMsEMLJr7dU/1dATHtgaYc0hYe5a1n/JxsyBcMmgmL35UYYO?=
- =?us-ascii?Q?qaKAQEnlyPEEbKFXb8KLqXCARfi1X5zuF843CEMoCl+B0EnxnMVam/97kbiu?=
- =?us-ascii?Q?KfeWM7plZ40HGb45N7F0hc+44mcCqGfT/ixBCeQLN6DS5RQEbfa3s/OIcdc4?=
- =?us-ascii?Q?u3yWN1A7CySym1vNoOKbuBpNLDNjYUvmAozAhPBqoclTtAovvNGTVfPtAThz?=
- =?us-ascii?Q?VLUmmB/kLkL28MnNJVj1mKZlhz7AEXBJDFUCaVtTn0cC39N2iRBh76L5nrRV?=
- =?us-ascii?Q?KCFvy0Hi5Fho2StjESuPbjPqa0AsKxw+nZuGKNc90QqjEZhJIOPcWHOCqsRE?=
- =?us-ascii?Q?AWqzq4WClNd9eclCZveC6Xb0U1iD3BqZGz+29JI1T2LZrPgwd+LW+EukOJ0+?=
- =?us-ascii?Q?NreLw3GSwG8AnEd9Zs+CAuXVSbyMr3PNp6iMivU9aJGtUUg2fsEXcy5vGSNK?=
- =?us-ascii?Q?Y/8W3i2uVZVA7qc8a7RhqGSJGM075ULIi6dIVfN+3XjOCbM8abYeLx+X9MpA?=
- =?us-ascii?Q?mbFkY8XLvgV4JXfB9EFCY5xGnoHtRTw4ZvzYmpFRv3+6Cb5bLBuZGeZ3Bbgp?=
- =?us-ascii?Q?+XZj0oeS+OZ0LnL++Cuh64u6i3Azt4ZiGurJrB1PWr09nB1q3NdFuFK8fZBX?=
- =?us-ascii?Q?3047Lgrm40x4Num2JiX/k/biQ0mNhXeC93OK094fYpvYCeLQFcBGQ4Ot8U9f?=
- =?us-ascii?Q?giODWo7HEXAs1Pqiltsjk0EPj3w7a4x8pfAlzQ0UtgNBhFLtiYk1DrHZQCsR?=
- =?us-ascii?Q?4RFewJrGaQLcyb/SsXP4baJJ6VGpGOaiBlrbv5REQjMMle71KkO6pltFimTC?=
- =?us-ascii?Q?oKFHH+1mzp5adRSfrWsUd2vadtVlCJa7IH/+ub71VDHXv1tmJ+vOUHknFMGt?=
- =?us-ascii?Q?6oN2+TcE/QhDm4FTMnH5Y9UKrsg2zaYAE6tnezRv1iqfvH6JL+1W2E6s8aJ7?=
- =?us-ascii?Q?e8rL3dzsAbXDFUb5zC7W0cN5xkC9NdYxP3CBUJg97br/J0HvU6xY8JDO/mF1?=
- =?us-ascii?Q?qcJrbTEs32j1M5GlUARRUvfMNrMUJIxPTkX2XZd4VcCv6RiNYsgICll+DZuo?=
- =?us-ascii?Q?LofBUY0dhZAlhN+PVVzOft/vrAtkpNUDiwp4kq+l4ahWwQ=3D=3D?=
+ ARA:13230031|82310400017|36860700004|376005|1800799015; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?FejFd4yRRZ/GXrnNF7MpvRCPOV1SxeKWybxMnpGFnWCQonS0LlDds1NlgMgb?=
+ =?us-ascii?Q?BejZKygCsOr1iuLo5WX+GOL3oIpZrEKwVhV8P7M+0VERKDzE12D8GViVriu0?=
+ =?us-ascii?Q?YXxkw25+2erKLEc0fWjJ9mH0tBHV23GNblkE9b9s+OR5Z4B68g7nogA/Oca/?=
+ =?us-ascii?Q?3vK7bzomC0EapfpRaPzqaGj9YVfUyAPg0ackqKYmT9lmbHtKjT/rQV7bidwI?=
+ =?us-ascii?Q?ZS9JdkkTNdJAbiOptg1VH9XeipcfNN93S4MuZcwh784UL21nrF7eIUfOj+a6?=
+ =?us-ascii?Q?GIID1MoVUdeMJgVVrhm29m3Fn8mdJLSe9L8T3pM0rOC4TC00bSlt8/ZnIK0a?=
+ =?us-ascii?Q?vCxKy9SYGnpZ0F8B4CZavvFihhO3y2yVDFCGCJFPbGCB0vEoor0L04X/S4iR?=
+ =?us-ascii?Q?jabQ+TXh2oWNmmoIWttcMfMcAmQqHK2PsUr/2KTQ/ohFd12+tv1TE7fC0gBO?=
+ =?us-ascii?Q?856+Aubci2EaLsBwDc5rfwtlvX5kiiTWmRtBKTaLZZ0khMdpNfIpqjHM2LTL?=
+ =?us-ascii?Q?gQbMc3cl13zhBR2xICQ0vm+D8mPtpsoUH8l3ZGyqbPIE3olFRR2bbTu97KQo?=
+ =?us-ascii?Q?WwM+u6Ap837V4bkH9rcp10+4bRuOx9gxviiBV99Q/itZ0jBwjYJfYONbcWUX?=
+ =?us-ascii?Q?7/TevZAa/+nIFeXE/v3DPqsKR3HnD9zkBauaCEvWqSSis40LWqA+zPIz7cFd?=
+ =?us-ascii?Q?DEmoQFfUTaFC0jnFaSQ6bzIoJF4oBe3XjqREflF8pfki8gv9oXqHIcKsEB7G?=
+ =?us-ascii?Q?+fFFjWEQL0wq/LEq2G1cTj382RG69jwFH2Mawh7UqEILwq6J3rxCaivrgOnU?=
+ =?us-ascii?Q?EXlcpVUcXq7eC7cvXz1oZYBTmFY49MK7095vLOOVSX4MNzl0Z0mn8DwKno4b?=
+ =?us-ascii?Q?eT5waDmuv14UdHZ/KVdVlGva0BhPvH2ysxE7r51Y2qoWwWG1IECqb7kzMU6s?=
+ =?us-ascii?Q?B9MNumCf3Z7hIi9KDrmRFBKVSeu2/vTciBdZvweSFskzyCZETmUp8lRDIyzC?=
+ =?us-ascii?Q?G7Riq+2N/siDX25YMEHBhuUQCw/VOzttQqLgia90tnKa5AMwBXtXHhPiZFRE?=
+ =?us-ascii?Q?GaGLpSEEIfVg7JK6oU9o4qVx3MQJA0Gw5YtIj39EQWIc0QkuRkWIJnWKcNcX?=
+ =?us-ascii?Q?UHLGW7CRT9JM4TgEJqDoEMCNtU+DEkeqF37SYzFfqwUTpD0e7617+Ie5iZ0q?=
+ =?us-ascii?Q?bpjaWDthkIF1ApvdiveNVOWi/DRuhRzy9PAefQ0tHfrqK9s6ou9rLGxcegxZ?=
+ =?us-ascii?Q?lIYT6FonZ/eFU0xvftU926tZBL9rf7SlRP3k6Hca8bIyc6iBFeq+oM8zGb3j?=
+ =?us-ascii?Q?jvk6lKN3t6U1zctY+nQfomTi?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(376005)(36860700004)(82310400017)(1800799015); DIR:OUT;
+ SFS:(13230031)(82310400017)(36860700004)(376005)(1800799015); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jun 2024 10:02:41.2624 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7c7423f4-4638-4690-94e9-08dc8546a36e
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jun 2024 10:02:45.3066 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: cb1aff41-78dd-48aa-4c64-08dc8546a5b6
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF0000343B.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF0000343D.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB7570
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6329
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -145,69 +145,246 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Many physical hub chips include multiple logical hubs to handle both
-USB and 2 and 3. Both logical hubs will then match the onboard hub
-driver, which means it will end up with two driver instances trying to
-control the reset GPIO that is only present once on the physical chip.
-
-The reference for this change is taken from
-https://lore.barebox.org/barebox/20240327165554.894805-1-l.stach@pengutronix.de/
+Updating the usb5744 hub node as per the latest upstream DT binding
+https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/
+tree/Documentation/devicetree/bindings/usb/microchip,usb5744.yaml?h=v6.8.8
 
 Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 ---
- common/usb_onboard_hub.c | 16 +++++++++++++++-
- 1 file changed, 15 insertions(+), 1 deletion(-)
+ arch/arm/dts/zynqmp-sck-kr-g-revA.dtso | 48 ++++++++++++++++++++++++++
+ arch/arm/dts/zynqmp-sck-kr-g-revB.dtso | 48 ++++++++++++++++++++++++++
+ arch/arm/dts/zynqmp-sck-kv-g-revA.dtso | 18 ++++++++++
+ arch/arm/dts/zynqmp-sck-kv-g-revB.dtso | 25 +++++++++++++-
+ 4 files changed, 138 insertions(+), 1 deletion(-)
 
-diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
-index 09ce452af1b..519bad337e1 100644
---- a/common/usb_onboard_hub.c
-+++ b/common/usb_onboard_hub.c
-@@ -11,6 +11,7 @@
- #include <common.h>
- #include <dm.h>
- #include <dm/device_compat.h>
-+#include <dm/uclass-internal.h>
- #include <i2c.h>
- #include <linux/delay.h>
- #include <power/regulator.h>
-@@ -21,7 +22,7 @@
- #define USB5744_CONFIG_REG_ACCESS_LSB 0x99
- 
- struct onboard_hub {
--	struct udevice *vdd;
-+	struct udevice *vdd, *dev;
- 	struct gpio_desc *reset_gpio;
+diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
+index ce7c5eb6d34..18e9d308de3 100644
+--- a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
++++ b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
+@@ -105,11 +105,19 @@
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+ 			reg = <0>;
++			hub_1: usb-hub@2d {
++				compatible = "microchip,usb5744";
++				reg = <0x2d>;
++			};
+ 		};
+ 		usbhub_i2c1: i2c@1 {
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+ 			reg = <1>;
++			hub_2: usb-hub@2d {
++				compatible = "microchip,usb5744";
++				reg = <0x2d>;
++			};
+ 		};
+ 		/* Bus 2/3 are not connected */
+ 	};
+@@ -164,6 +172,26 @@
+ 	dr_mode = "host";
+ 	snps,usb3_lpm_capable;
+ 	maximum-speed = "super-speed";
++	#address-cells = <1>;
++	#size-cells = <0>;
++
++	/* 2.0 hub on port 1 */
++	hub_2_0: hub@1 {
++		compatible = "usb424,2744";
++		reg = <1>;
++		peer-hub = <&hub_3_0>;
++		i2c-bus = <&hub_1>;
++		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
++	};
++
++	/* 3.0 hub on port 2 */
++	hub_3_0: hub@2 {
++		compatible = "usb424,5744";
++		reg = <2>;
++		peer-hub = <&hub_2_0>;
++		i2c-bus = <&hub_1>;
++		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
++	};
  };
  
-@@ -106,8 +107,18 @@ static int usb_onboard_hub_probe(struct udevice *dev)
- 	struct onboard_hub_data *data =
- 		(struct onboard_hub_data *)dev_get_driver_data(dev);
- 	struct onboard_hub *hub = dev_get_priv(dev);
-+	struct ofnode_phandle_args phandle;
-+	struct udevice *hub_dev;
- 	int ret;
- 
-+	if (!dev_read_phandle_with_args(dev, "peer-hub", NULL, 0, 0, &phandle)) {
-+		if (ofnode_valid(phandle.node)) {
-+			ret = uclass_find_device_by_ofnode(UCLASS_USB_HUB, phandle.node, &hub_dev);
-+			if (hub_dev && hub_dev->priv_)
-+				return 0;
-+		}
-+	}
+ &usb1 { /* mio64 - mio75 */
+@@ -188,6 +216,26 @@
+ 	dr_mode = "host";
+ 	snps,usb3_lpm_capable;
+ 	maximum-speed = "super-speed";
++	#address-cells = <1>;
++	#size-cells = <0>;
 +
- 	if (CONFIG_IS_ENABLED(DM_REGULATOR)) {
- 		ret = device_get_supply_regulator(dev, "vdd-supply",
- 						  &hub->vdd);
-@@ -148,6 +159,9 @@ static int usb_onboard_hub_probe(struct udevice *dev)
- 			return ret;
- 		}
- 	}
-+	hub->dev = dev;
-+	dev->priv_ = hub;
++	/* 2.0 hub on port 1 */
++	hub1_2_0: hub@1 {
++		compatible = "usb424,2744";
++		reg = <1>;
++		peer-hub = <&hub1_3_0>;
++		i2c-bus = <&hub_2>;
++		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
++	};
 +
- 	return 0;
- }
++	/* 3.0 hub on port 2 */
++	hub1_3_0: hub@2 {
++		compatible = "usb424,5744";
++		reg = <2>;
++		peer-hub = <&hub1_2_0>;
++		i2c-bus = <&hub_2>;
++		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
++	};
+ };
  
+ &gem0 { /* mdio mio50/51 */
+diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
+index 0a0cbd2b69a..5261e793c14 100644
+--- a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
++++ b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
+@@ -117,11 +117,19 @@
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+ 			reg = <0>;
++			hub_1: usb-hub@2d {
++				compatible = "microchip,usb5744";
++				reg = <0x2d>;
++			};
+ 		};
+ 		usbhub_i2c1: i2c@1 {
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+ 			reg = <1>;
++			hub_2: usb-hub@2d {
++				compatible = "microchip,usb5744";
++				reg = <0x2d>;
++			};
+ 		};
+ 		/* Bus 2/3 are not connected */
+ 	};
+@@ -184,6 +192,26 @@
+ 	dr_mode = "host";
+ 	snps,usb3_lpm_capable;
+ 	maximum-speed = "super-speed";
++	#address-cells = <1>;
++	#size-cells = <0>;
++
++	/* 2.0 hub on port 1 */
++	hub_2_0: hub@1 {
++		compatible = "usb424,2744";
++		reg = <1>;
++		peer-hub = <&hub_3_0>;
++		i2c-bus = <&hub_1>;
++		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
++	};
++
++	/* 3.0 hub on port 2 */
++	hub_3_0: hub@2 {
++		compatible = "usb424,5744";
++		reg = <2>;
++		peer-hub = <&hub_2_0>;
++		i2c-bus = <&hub_1>;
++		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
++	};
+ };
+ 
+ &usb1 { /* mio64 - mio75 */
+@@ -209,6 +237,26 @@
+ 	dr_mode = "host";
+ 	snps,usb3_lpm_capable;
+ 	maximum-speed = "super-speed";
++	#address-cells = <1>;
++	#size-cells = <0>;
++
++	/* 2.0 hub on port 1 */
++	hub1_2_0: hub@1 {
++		compatible = "usb424,2744";
++		reg = <1>;
++		peer-hub = <&hub1_3_0>;
++		i2c-bus = <&hub_2>;
++		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
++	};
++
++	/* 3.0 hub on port 2 */
++	hub1_3_0: hub@2 {
++		compatible = "usb424,5744";
++		reg = <2>;
++		peer-hub = <&hub1_2_0>;
++		i2c-bus = <&hub_2>;
++		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
++	};
+ };
+ 
+ &gem0 { /* mdio mio50/51 */
+diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
+index 561b546e37f..0ef0357bd29 100644
+--- a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
++++ b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
+@@ -142,6 +142,24 @@
+ 	dr_mode = "host";
+ 	snps,usb3_lpm_capable;
+ 	maximum-speed = "super-speed";
++	#address-cells = <1>;
++	#size-cells = <0>;
++
++	/* 2.0 hub on port 1 */
++	hub_2_0: hub@1 {
++		compatible = "usb424,2744";
++		reg = <1>;
++		peer-hub = <&hub_3_0>;
++		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
++	};
++
++	/* 3.0 hub on port 2 */
++	hub_3_0: hub@2 {
++		compatible = "usb424,5744";
++		reg = <2>;
++		peer-hub = <&hub_2_0>;
++		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
++	};
+ };
+ 
+ &sdhci1 { /* on CC with tuned parameters */
+diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
+index 64683e0ccbb..92d8851eb8a 100644
+--- a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
++++ b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
+@@ -92,7 +92,10 @@
+ 		label = "ina260-u14";
+ 		reg = <0x40>;
+ 	};
+-	/* u43 - 0x2d - USB hub */
++	hub: usb-hub@2d {
++		compatible = "microchip,usb5744";
++		reg = <0x2d>;
++	};
+ 	/* u27 - 0xe0 - STDP4320 DP/HDMI splitter */
+ };
+ 
+@@ -146,6 +149,26 @@
+ 	dr_mode = "host";
+ 	snps,usb3_lpm_capable;
+ 	maximum-speed = "super-speed";
++	#address-cells = <1>;
++	#size-cells = <0>;
++
++	/* 2.0 hub on port 1 */
++	hub_2_0: hub@1 {
++		compatible = "usb424,2744";
++		reg = <1>;
++		peer-hub = <&hub_3_0>;
++		i2c-bus = <&hub>;
++		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
++	};
++
++	/* 3.0 hub on port 2 */
++	hub_3_0: hub@2 {
++		compatible = "usb424,5744";
++		reg = <2>;
++		peer-hub = <&hub_2_0>;
++		i2c-bus = <&hub>;
++		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
++	};
+ };
+ 
+ &sdhci1 { /* on CC with tuned parameters */
 -- 
 2.17.1
 
