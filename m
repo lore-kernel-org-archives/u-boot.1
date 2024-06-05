@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AD63C27C52
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 19:39:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35E8BC27C52
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 19:40:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4AF1D884B2;
+	by phobos.denx.de (Postfix) with ESMTP id A015C884BA;
 	Wed,  5 Jun 2024 21:37:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="APdEV65X";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WLRuoNfp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E391388300; Wed,  5 Jun 2024 21:21:58 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 858AE88300; Wed,  5 Jun 2024 21:22:00 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E760787AD2
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 21:21:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CC9B8825E
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 21:21:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-4215b0bffe1so909735e9.0
- for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 12:21:56 -0700 (PDT)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-42147970772so1511485e9.0
+ for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 12:21:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717615316; x=1718220116; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=WTHeBlWVt9sBEz91HX8OWDFtPQsrQI/3C5lJjTUXPvE=;
- b=APdEV65X/sMXaK/9h3r066HGsYhp/C3x6x/ACj2Uj5Mf0R5HWRdIIcyQ8Aoj7RPd6f
- u+4OCIMFOTOJDCurYwV6NHsdakl+fENSl5caDrw8/UK4aFlMmdMZdBjpnbB0cA5zUo1O
- YpOyKevFx+Csb7NRvDwflibg0Y8NloZdyW0Co5ko8vyjktSjsxoWDm/yxbLIo2LXH0Dm
- EQCoEBQrfcAomezxskwxZ8uCCoRR6/cznJLyoYtIsoK73crbA3mahkEr4DnKv+w+6TtO
- VwkwO6EQIC/ROm/8ite9iCR0tke/jaOemM07AfqnHe2Ev5dJ/E/MJI0ofsYT/J5D7nYO
- lbaQ==
+ d=gmail.com; s=20230601; t=1717615318; x=1718220118; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=tFLs4djXMjy4iXY0nn18T3TiYUGeLDPIB6Xqyuip8VI=;
+ b=WLRuoNfpb+yB0zPGWfnPHFbJ5jmS+hUalw1X91W32HbfgmLl6bpfO8M2YkCuzdxrFT
+ YiI0C1ieypRHKVzzC9lMvsDfeFKoTWp7TmixeSlRII8xdBGRLX9nTTrj4fG7Ejcg2Tku
+ n4X0rLKSb1WnsNSovvoatycMPczRPj5QRH1Ykx3U5RlFDkn1Y5RnoP6c1IAmniOpDEy4
+ i1lsvCdbnkxtpKL2BCJja/gt+RpB5ysRcqYyawrUbkrIayptcjsCh+kvrec2ReLJ4RTd
+ owyAxcBICmlAv0VQnWnTaGX61KQFTz20+DWBH0rQsJCL5p12mFlWOIP5Q//gZTK1nge6
+ SD6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717615316; x=1718220116;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=WTHeBlWVt9sBEz91HX8OWDFtPQsrQI/3C5lJjTUXPvE=;
- b=T90ZQ4H63YHAa+bw/+LhAsFxuLfN+6P6Ex7g080O5udyyF9iNL8ECJX+ZvjPu3T9Z0
- 20kO1846BPLJ3K64C4/mprWFh7tfQigsIbFsbu/A8eDuYQ1zeN/igFgq5mDAzaKIq9+8
- rTjfF3H9d1Q+wCV5mwkA4oeg6NDKArySsQS84GOZlg3Y9GxIUGZrNslW1sRWag4TMTVX
- jvwCmHw2asxRNlXq7dmpWjQaYopkhDvV1kSgbFPgU2t2UjiVTtkF6lxdFuNlcTfI3nli
- kUcpEnuFqnafXPki3hQe7jtnJOASO88eJJx3W/j9UvLUpfthW6oLBjGC2++RjItFlPex
- HPIg==
+ d=1e100.net; s=20230601; t=1717615318; x=1718220118;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=tFLs4djXMjy4iXY0nn18T3TiYUGeLDPIB6Xqyuip8VI=;
+ b=M7h4byQTf8AaPPbc3+HYqjutDEVWJQ3+zWKQ5cNizulGsgaEfyICZvavxdpvEtO1H+
+ RDSaAb2iW2FqKKbfs6ShbA6iaPxteGEkZBnvZiBTFuARQZ1UcRP0xV3u5wAtOl63vbB6
+ kYl79/exLwuqn8bQZSq96NaGHfDVvViJ1Q7Siav9A3lA0F1j041oK+OhXZ8T1vZa6GiK
+ MHVoKW0LLOxMUN4Z1pfVDbb/j1whZ498xVh4wmMJb8nJHyWg1b3EHQKQ+cVwadNV7Rs0
+ 1mfGd3vLhcSTL5C0LevoZ04qkuDfq9sJSV/QHwFlYVWpSzyQr6j1yugwC0kC39oHgU8d
+ ZauA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWqpMssZH46MV4bKsdXlNYwXb+uaukNG2nKBkQvUxjkE613B2sFTsCGPctnztB4pfeuzoWUk9q1qR/IVajatT+6vANKuA==
-X-Gm-Message-State: AOJu0YwOdyBo6920+8tfbWXKnKL6VFQyvuRyOlQ949QWt0jhK5KhhXmi
- zA+d47dSikelCWqqdk7IR1fKV6J63rmywLJ9F2bCtotV1gQ74gK/
-X-Google-Smtp-Source: AGHT+IH8zX9ck4U6nKvd4ZQMT8+LDw5NjuxEFQsPe/KtMMSocpYvVacO4jPRY0mfRl6uikxIneP1bg==
-X-Received: by 2002:a05:600c:5254:b0:421:3be5:a6cb with SMTP id
- 5b1f17b1804b1-4215acd81a5mr5155195e9.6.1717615316169; 
- Wed, 05 Jun 2024 12:21:56 -0700 (PDT)
+ AJvYcCU058oVziXANEGTPYKoYx+Gs/mgQN7KsfA7UU1FiEoR4o/xwXT+5ZJAbKwoEUMkA/5PekPWJuS0mowdUHgYJiET2JQugA==
+X-Gm-Message-State: AOJu0YxfUVjprB3mXEGxHelX8TFkZF7awduEyiSkMRQH3vOO+ALsXCZ0
+ Y4KhJJHukRNzl4qMgn9rJTuEar/lCNBWw1Y7GcSD4dPcXAyrrR8/
+X-Google-Smtp-Source: AGHT+IGiX2LAnPfXvoiYiWPwxB7YUqVTWflFtU2cD61pbKMWs+3HBc7rsX8+nvISMLPUvYLCTVIxzQ==
+X-Received: by 2002:a05:600c:4f83:b0:420:66e:4c31 with SMTP id
+ 5b1f17b1804b1-4215634de43mr31102835e9.34.1717615317813; 
+ Wed, 05 Jun 2024 12:21:57 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
  [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-4214bf5994csm36079625e9.1.2024.06.05.12.21.54
+ 5b1f17b1804b1-4214bf5994csm36079625e9.1.2024.06.05.12.21.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Jun 2024 12:21:55 -0700 (PDT)
+ Wed, 05 Jun 2024 12:21:57 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
@@ -89,10 +90,12 @@ To: Tom Rini <trini@konsulko.com>,
  Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
  Vaishnav Achath <vaishnav.a@ti.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH 0/7] misc: introduce STATUS LED activity function
-Date: Wed,  5 Jun 2024 21:21:32 +0200
-Message-ID: <20240605192146.19052-1-ansuelsmth@gmail.com>
+Subject: [PATCH 1/7] misc: gpio_led: fix broken coloured LED status functions
+Date: Wed,  5 Jun 2024 21:21:33 +0200
+Message-ID: <20240605192146.19052-2-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240605192146.19052-1-ansuelsmth@gmail.com>
+References: <20240605192146.19052-1-ansuelsmth@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 05 Jun 2024 21:37:35 +0200
@@ -112,71 +115,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series expand the STATUS LED framework with a new color
-and a big new feature. One thing that many device need is a way
-to communicate to the user that the device is actually doing
-something.
+The GPIO LED driver is a backend to provide LED status functions via the
+GPIO common functions.
 
-This is especially useful for recovery steps where an
-user (for example) insert an USB drive, keep a button pressed
-and the device autorecover.
+The coloured LED functions are currently broken and deviates from what
+is written in README.LED
 
-There is currently no way to signal the user externally that
-the bootloader is processing/recoverying aside from setting
-a LED on.
+Quoting the README.LED:
 
-A solid LED on is not enough and won't actually signal any
-kind of progress.
-Solution is the good old blinking LED but uboot doesn't
-suggest (and support) interrupts and almost all the LED
-are usually GPIO LED that doesn't support HW blink.
+CONFIG_STATUS_LED_RED is the red LED. It is used to signal errors.
+This must be a valid LED number (0-5). Other similar color LED's macros
+are CONFIG_STATUS_LED_GREEN, CONFIG_STATUS_LED_YELLOW and
+CONFIG_STATUS_LED_BLUE.
 
-To fix this and handle the problem of device not supporting
-HW blink, expand the STATUS LED framework with new API.
+Hence the value of the config must refer to the ID.
 
-We introduce a new config LED_STATUS_ACTIVITY, that similar
-to the RED, GREEN and others, takes the LED ID set in
-the LED_STATUS config and is used as the global LED for activity
-operations.
+Currently this is not the case and the driver expect the GPIO ID to be
+put in these config. On top of this to actually have these functions, a
+never define in Kconfig config must be declared to actually compile
+them. (CONFIG_GPIO_LED_STUBS)
 
-We add status_led_activity() that simulate software blink.
-Any function that signal activity will call this function.
-At each call a counter is increased. When the counter reach
-the freq value, the LED is toggled simulating a blink and
-the counter is zeroed. When the counter reach the freq value
-again, the LED is toggled again and so on...
+To fix this and the GPIO problem, introduce some define that reference
+the LED_STATUS_BIT<n> config to have the ID->BIT connection (as
+described in Docs) and drop the never defined config.
 
-Call to this function is added to the usual operation for
-recovery. Currently added to tftp traffic and mtd spi and
-nand write and erase operation.
+The gpio_led already provide a wrapper to the functions and should not
+be enabled if the board provide their custom function hence it's ok to
+also provide the wrapper for the colour functions.
 
-This also contains a big fixup for the gpio_led driver that
-currently deviates from the Documentation and make the
-coloured status led feature unusable.
+Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+---
+ drivers/misc/gpio_led.c | 31 +++++++++++++++++++------------
+ 1 file changed, 19 insertions(+), 12 deletions(-)
 
-Christian Marangi (7):
-  misc: gpio_led: fix broken coloured LED status functions
-  led: status_led: add support for white LED colour
-  led: status_led: add function to toggle a status LED
-  led: status_led: add new activity LED config and functions
-  tftp: implement support for LED status activity
-  mtd: implement support for LED status activity
-  ubi: implement support for LED status activity
-
- cmd/legacy_led.c               |  6 ++++
- cmd/mtd.c                      | 23 +++++++++++++++
- cmd/ubi.c                      | 17 ++++++++++-
- common/board_f.c               |  2 ++
- drivers/led/Kconfig            | 29 +++++++++++++++++++
- drivers/misc/gpio_led.c        | 41 +++++++++++++++++++-------
- drivers/misc/status_led.c      | 53 +++++++++++++++++++++++++++-------
- drivers/mtd/nand/core.c        |  4 +++
- drivers/mtd/nand/spi/core.c    |  5 ++++
- drivers/mtd/spi/spi-nor-core.c |  9 ++++++
- include/status_led.h           |  6 ++++
- net/tftp.c                     | 16 ++++++++++
- 12 files changed, 189 insertions(+), 22 deletions(-)
-
+diff --git a/drivers/misc/gpio_led.c b/drivers/misc/gpio_led.c
+index 30679f80cf1..0f3682e1465 100644
+--- a/drivers/misc/gpio_led.c
++++ b/drivers/misc/gpio_led.c
+@@ -52,56 +52,63 @@ void __led_toggle(led_id_t mask)
+ 	gpio_set_value(mask, !gpio_get_value(mask));
+ }
+ 
+-#ifdef CONFIG_GPIO_LED_STUBS
+-
+ /* 'generic' override of colored LED stubs, to use GPIO functions instead */
+ 
++/* We support up to 6 LEDs, LED 0 STATUS BIT doesn't have the number suffix */
++#define GPIO_BIT0	CONFIG_LED_STATUS_BIT
++#define GPIO_BIT1	CONFIG_LED_STATUS_BIT1
++#define GPIO_BIT2	CONFIG_LED_STATUS_BIT2
++#define GPIO_BIT3	CONFIG_LED_STATUS_BIT3
++#define GPIO_BIT4	CONFIG_LED_STATUS_BIT4
++#define GPIO_BIT5	CONFIG_LED_STATUS_BIT5
++/* C preprocessor magic way to generate a GPIO_LED<id> reference */
++#define GPIO_BIT(id)	___PASTE(GPIO_BIT, id)
++
+ #ifdef CONFIG_LED_STATUS_RED
++
+ void red_led_on(void)
+ {
+-	__led_set(CONFIG_LED_STATUS_RED, CONFIG_LED_STATUS_ON);
++	__led_set(GPIO_BIT(CONFIG_LED_STATUS_RED), CONFIG_LED_STATUS_ON);
+ }
+ 
+ void red_led_off(void)
+ {
+-	__led_set(CONFIG_LED_STATUS_RED, CONFIG_LED_STATUS_OFF);
++	__led_set(GPIO_BIT(CONFIG_LED_STATUS_RED), CONFIG_LED_STATUS_OFF);
+ }
+ #endif
+ 
+ #ifdef CONFIG_LED_STATUS_GREEN
+ void green_led_on(void)
+ {
+-	__led_set(CONFIG_LED_STATUS_GREEN, CONFIG_LED_STATUS_ON);
++	__led_set(GPIO_BIT(CONFIG_LED_STATUS_GREEN), CONFIG_LED_STATUS_ON);
+ }
+ 
+ void green_led_off(void)
+ {
+-	__led_set(CONFIG_LED_STATUS_GREEN, CONFIG_LED_STATUS_OFF);
++	__led_set(GPIO_BIT(CONFIG_LED_STATUS_GREEN), CONFIG_LED_STATUS_OFF);
+ }
+ #endif
+ 
+ #ifdef CONFIG_LED_STATUS_YELLOW
+ void yellow_led_on(void)
+ {
+-	__led_set(CONFIG_LED_STATUS_YELLOW, CONFIG_LED_STATUS_ON);
++	__led_set(GPIO_BIT(CONFIG_LED_STATUS_YELLOW), CONFIG_LED_STATUS_ON);
+ }
+ 
+ void yellow_led_off(void)
+ {
+-	__led_set(CONFIG_LED_STATUS_YELLOW, CONFIG_LED_STATUS_OFF);
++	__led_set(GPIO_BIT(CONFIG_LED_STATUS_YELLOW), CONFIG_LED_STATUS_OFF);
+ }
+ #endif
+ 
+ #ifdef CONFIG_LED_STATUS_BLUE
+ void blue_led_on(void)
+ {
+-	__led_set(CONFIG_LED_STATUS_BLUE, CONFIG_LED_STATUS_ON);
++	__led_set(GPIO_BIT(CONFIG_LED_STATUS_BLUE), CONFIG_LED_STATUS_ON);
+ }
+ 
+ void blue_led_off(void)
+ {
+-	__led_set(CONFIG_LED_STATUS_BLUE, CONFIG_LED_STATUS_OFF);
++	__led_set(GPIO_BIT(CONFIG_LED_STATUS_BLUE), CONFIG_LED_STATUS_OFF);
+ }
+ #endif
+-
+-#endif /* CONFIG_GPIO_LED_STUBS */
 -- 
 2.43.0
 
