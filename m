@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C337EC25B76
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 18:47:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 068E4C25B76
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 18:48:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15B268836E;
-	Wed,  5 Jun 2024 20:47:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 81D1B88263;
+	Wed,  5 Jun 2024 20:48:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="feA3H/oM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="H6e2fX2F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 084B18836E; Wed,  5 Jun 2024 20:47:37 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id 6CB53881E5; Wed,  5 Jun 2024 20:48:41 +0200 (CEST)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E524F88261
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 20:47:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7FEEE88263
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 20:48:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-3d1b33e9ac6so527677b6e.1
- for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 11:47:34 -0700 (PDT)
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-3d208a05f97so53226b6e.1
+ for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 11:48:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1717613253; x=1718218053; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1717613316; x=1718218116; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=EeCroI7lrqU9cwaUNM/cOMw3Gbi3aX1NkLIXWjbDdug=;
- b=feA3H/oM5US/+5Eb/uAGmQL4RBplQh9Ut1IcN02+ebodiu3PYts2UIjKmzXpcSO2Hx
- Nu0HiaO+OXsQPodIbvSqvO5n7P+xUAoqcUdToq/mPBxT2x5Cwd2C7MpbNevYihzF1n2U
- huS+gqc6IB4QexG0R4MY2pTF6gVqxgUy2XfIs=
+ bh=WhHBdcL6odTNtnNkXOarQBnrXbZTf3Srj2i6A661SOo=;
+ b=H6e2fX2Fqxi9qmPAru0mdHeMCE7Brg5cuhD8SMWZtSOsKaBDT23bgfg1lRlWgpKxhq
+ qoTxxzcs5QV/8jQtZRZZcZwJcjU5E003F/iDXkN+oohJzXKX/W0NhxQ0S62opzZPl87r
+ rEO9U2Rupyqk26YVjU/D8uw1uNQtIGegv64qo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717613253; x=1718218053;
+ d=1e100.net; s=20230601; t=1717613316; x=1718218116;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EeCroI7lrqU9cwaUNM/cOMw3Gbi3aX1NkLIXWjbDdug=;
- b=GSCEDKavUddBjacwuxWTJT4fQ4QhJR+LPcaP48tWSYBUhTXnGLslPd9V8Zp0xfq7Fc
- HqQF28NxziVWOw7iP6oglMyDxaMcKyq5W6fcpkXU7i1Eis9s1McgHiWk1cyPjB3zc1FV
- S7NdgqhPF+QiZcpKXz6lgrmr4aajSwKGIApBtRoonKGULvSZFtO+L/LqUBzB6C3RZIOO
- QdhDOd79r5w9QTQItI2z0NC6kys63+zH5SeZheyU/+X4n0jPOdBXCF3k/rchoaa75M03
- +rALwMp74xs/R4KXlkTzaKZdl2BoXYDXyMbAa6QSMnVFYbNIZWlznR2j4b3CUAn2Q+Qc
- 2d8A==
-X-Gm-Message-State: AOJu0Yz5F2/CefmQOXSObo1PJHEJI17eMXCvkgP0lrk8GtTqjEQfIcy8
- BVfbwufkHTzJOkb/diJw9rT3QIKk1xAubPa1WrhSfxovyKmxj9BSNJcLwCEJ9rQ=
-X-Google-Smtp-Source: AGHT+IFRDw/GdaI/KXjdexKFNpd+QUY9dTPRB60Qn7k/fn6C2nku0o+PKvAg6azufFWg9UI9R9Fvrg==
-X-Received: by 2002:a05:6808:1d9:b0:3c9:9494:7826 with SMTP id
- 5614622812f47-3d209c00562mr227967b6e.29.1717613253194; 
- Wed, 05 Jun 2024 11:47:33 -0700 (PDT)
+ bh=WhHBdcL6odTNtnNkXOarQBnrXbZTf3Srj2i6A661SOo=;
+ b=b3Iu0J618b10yp413661q+l2h0PykpRUt4pJK0t33owgOfV1cs5pVMQ8gi8IBUmgEr
+ IzDAZC2AT40O/DBvuIK8oQS0ZNEnpu6qa0zUG2Dh1Et6/q+Mii1P5pgp9qU/rrvDp/Y9
+ a6KG2hAuN6s++3U+hrTVYena+GAI52OSEx6oSjtblVlDWRMeq6lZOdUDhO0wwr0T5f8m
+ i/qbmSaYp1znpPPDVtjsrP7tzjkYZz/NYrwh66/jMvvagqBDBdmSIhnfpnDddiUX6Fmd
+ ENCyZsLaZ6NhiD5ICiR/cIB9m9urGFLafx5EALzVpnyD7qXzouGqyR8Toea8+hOQNYFT
+ ZjrQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVsShMpxiOxxAm/of86BYmcyvYhZ+rGA7boJpxi6u7wLplpmFkhDHRp7xXW9tkpgwnkw+oV2lo3H/smD6z16nLzImooEQ==
+X-Gm-Message-State: AOJu0Yz3yk9R6Dk5hRu+eHxq22mL+lH/mtCVtYzBDQIOp4k3diEHPlmJ
+ 0zgwmcunVfHQwOmYBK1JDQK5YB1my5U6apVea9rv2/GvJnGyQx4C39zDmRW+1AI=
+X-Google-Smtp-Source: AGHT+IG8sAmO1y2vPYrv12RH3PnYXvkYfv+k3v5sC1xLdP6yTp+dAhP1sjSOlYusIhv0Jg5shoo04A==
+X-Received: by 2002:a05:6808:3948:b0:3d1:d437:28e2 with SMTP id
+ 5614622812f47-3d2044dcb31mr2919844b6e.51.1717613315187; 
+ Wed, 05 Jun 2024 11:48:35 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
  [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3d2060db24asm291340b6e.20.2024.06.05.11.47.32
+ 5614622812f47-3d20a7970c3sm28606b6e.36.2024.06.05.11.48.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Jun 2024 11:47:32 -0700 (PDT)
-Date: Wed, 5 Jun 2024 12:47:30 -0600
+ Wed, 05 Jun 2024 11:48:34 -0700 (PDT)
+Date: Wed, 5 Jun 2024 12:48:32 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Heiko Schocher <hs@denx.de>
-Subject: Re: [PULL] u-boot-usb/master
-Message-ID: <20240605184730.GU68077@bill-the-cat>
-References: <20240605165011.11850-1-marex@denx.de>
+To: Vasileios Amoiridis <vassilisamir@gmail.com>
+Cc: hs@denx.de, pro@denx.de, vasileios.amoiridis@cern.ch, u-boot@lists.denx.de
+Subject: Re: [RFC PATCH 0/1] drivers: bootcount: Add support for FAT filesystem
+Message-ID: <20240605184832.GV68077@bill-the-cat>
+References: <20240605181041.68317-1-vassilisamir@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2NX+5YIioqQU1aY1"
+ protocol="application/pgp-signature"; boundary="acJGaOXjWeUuUnts"
 Content-Disposition: inline
-In-Reply-To: <20240605165011.11850-1-marex@denx.de>
+In-Reply-To: <20240605181041.68317-1-vassilisamir@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,50 +92,45 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---2NX+5YIioqQU1aY1
+--acJGaOXjWeUuUnts
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jun 05, 2024 at 06:48:53PM +0200, Marek Vasut wrote:
+On Wed, Jun 05, 2024 at 08:10:40PM +0200, Vasileios Amoiridis wrote:
+> From: Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
+>=20
+> This patch adds support to save the bootcount variable in a file located =
+in
+> FAT filesystem. Up to now, there was support only for EXT filesystem.
+>=20
+> The reason I put this as RFC is because the file "bootcount_ext.c" will no
+> longer represent the implementation for the EXT filesystem, but also for =
+the
+> FAT filesystem. Should it be renamed? If not, wouldn't it be inconsistent?
 
-> The following changes since commit ea722aa5eb33740ae77e8816aeb72b385e621c=
-d0:
->=20
->   Merge branch '2024-05-29-assorted-small-fixes' (2024-05-29 11:21:14 -06=
-00)
->=20
-> are available in the Git repository at:
->=20
->   git://source.denx.de/u-boot-usb.git master
->=20
-> for you to fetch changes up to 8f8b4b0833fb8e890d053860ecf1c39d037c8039:
->=20
->   usb: remove not used variable in usb_ether_curr_dev (2024-06-01 21:42:0=
-9 +0200)
->=20
-
-Applied to u-boot/master, thanks!
+Yeah, lets call it bootcount_fs.c ? It otherwise all looks good to me,
+thanks!
 
 --=20
 Tom
 
---2NX+5YIioqQU1aY1
+--acJGaOXjWeUuUnts
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZgsr8ACgkQFHw5/5Y0
-tyyJFAwAoghiRgl2jrCMhsVmrFdnic1vAeMDJGZQP3VnJ1S6lFq1QXnRM/TyMLbH
-Yq/N8WhS0q0fqrd7rGcsS1MDFvJknPTaZ8+T63VjOfPgbImbpXE55f3Xc2QN0Eab
-jX3qhjYZskNMVpglqSkFhLSNbGZPMYcgOEnJgDkFAsA5I+xe5k4zjTP3jXTwH+8O
-/JQmVq2txxi/Z59VVrTfAMZ3ZcC3N3wi73Wrc6bawwu5bfVCy0uW4pl9Tu4aL8l0
-fV05gJ02vNUQf+ix7efPrvkTcsxhh+7lEpZ5jro/DKFIPb38EGUQ1iygHKgeY/8l
-uWAe2eHXkFLqmXDtO0GvkSPpyu94CpH5nGB+k6tyxlAXNJ0u/WCgKxEBSy+yM2dT
-D9C85pHjH4epQ/JUoikZFuQ2lV3Vm6ZN5jEYBGwOTPEzxFT0UDnkxivtbf1S5suP
-BIFb86UMD6PEayUTFyZZQaaABOJ8mMR36aimQf6DYdRknDYXCc2kIaq6/e1varub
-ykYGG3qq
-=2wCr
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZgswAACgkQFHw5/5Y0
+tyxcbwv+NVcUxVxUvFGMkyW52pK49RAu033b8qh1qVbLyFChE4vqk6jT7x7y5ahW
+KpbbeoSshdDanKOw3UtP0GW/14Zb/TGmAQ+y4nrUgE3l8Pd1nis0JONXN4vT0bFI
+A07eTIzhteJH3UrLaSM4buSZSZzHTYdqbjn6jJzjSzSQBmgIllDNuEAAXvESgexB
+40l0OaQfNcH7dfA7bIdGRnF70v69e5wlC3HMUNP+hLi1h8zLHdk0+cNKtgQN4Bxl
+SMj1oA8Ig4McGmVPYPZm2wGxwTatS+rimFxWlEzEaqvEcbbHvgxydjAsbsDAVPpE
+/AuKjnIqJS7ZmQneTuaGzHJbZotp1k7F+9eeEfdHxOvxjWeDISkxuWtJCX6sfYiO
+cW1y43uwn7W3qaVhxMFeWoyXTOznHjCK0aFXUBfqfOmuJPC1Xxi1swLQrImSfP98
+3dolbH2Zd4END4hJIrR2yHZ/Y6hRCzyrDs0EtACgejw16CycalIS0RUwyjwR4kaq
+PPvmfzb6
+=Zcy1
 -----END PGP SIGNATURE-----
 
---2NX+5YIioqQU1aY1--
+--acJGaOXjWeUuUnts--
