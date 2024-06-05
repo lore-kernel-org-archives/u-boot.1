@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1969EC25B76
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 19:39:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22B1BC27C52
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 19:39:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDD7E88464;
-	Wed,  5 Jun 2024 21:37:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3553488476;
+	Wed,  5 Jun 2024 21:37:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Nod7a0Fz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SOEl5ThH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C6EA87F39; Wed,  5 Jun 2024 21:03:54 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id CD9B288280; Wed,  5 Jun 2024 21:03:55 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C69E88096
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 21:03:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CECC78831D
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 21:03:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-421578c546eso2123805e9.0
- for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 12:03:52 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-42108856c33so7709335e9.1
+ for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 12:03:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717614232; x=1718219032; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1717614233; x=1718219033; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ZenwWrDeFzRe8cHFaTxY5C2wi9H9AcMzagN3f1ue2mY=;
- b=Nod7a0Fz2p3VaPFZt97qUl+ZHqKQizhKBgH0Kmx6tGSPt5kBz/0Hc3RC2uj6CpFUti
- lCd51TgTxSaEi0aWZQJQGL5eUFNQhin2e9M8znQK1SK3t7tmT1JdadkBogyN4HONok7x
- 0H4stMGGcQlyXXKpTDntkJFGza4e0d69B8eh9u/NDAZ6DKUD+SY0+YiDNDfT207VHpWS
- zOM3F/eZowMODTJYThHC/fA6OysKNCZymtuPZm97kqL1Np12RfNAcqvYf2WDf7XXhx1I
- Fo5pZ2hsYaVhYM7QLTXaAbK0qkTeTVOyDsKBDa7Sfi4YhjUhK74GFnmaaKvEe82bsivb
- TfxQ==
+ :reply-to; bh=+mEXw7F2lJQQgW+4oCLpZWuN1JwwLw7u8qEl078/N1E=;
+ b=SOEl5ThHlJ91ZLGQsrATVw/Dw0DCqoQ8ZoeetLFobCKLv4yMP2sfQXTdxAA0dY1PrM
+ gamS4qz4pEzTuiQ8fuHpH2HQzI08dSC8f4qkTlttbBfa97mw72PZgSiOV50pnCyJXTmQ
+ 6aNBLTHr4wXB6JOq85tNTRhOHobtOYbXBls/qzkqrCeXjwYM0wk0VzksIhb0zP8dXOpH
+ 9jbYlebjQVc7toTxP8N87a76Bjvwhv9q4oJWuhpplV08mO8f6R58uK7h9C7TuX/DCCtW
+ PSQRaHgfn4LRVIvanoZ765cwwLWdWJs+ZjqcwpUX8yGu5Q7BvM0RppyeU2ajwAjUuZHM
+ fjhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717614232; x=1718219032;
+ d=1e100.net; s=20230601; t=1717614233; x=1718219033;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZenwWrDeFzRe8cHFaTxY5C2wi9H9AcMzagN3f1ue2mY=;
- b=PfAL7d3EN2IT1dXLTVFynAfnYueYe+rgDTmyRsr6Mi623a1y6qzUvjEn/7qqvyRZ3f
- rFgjCeBmQg4sfFjgTY+sywGSyvYfZ+juz0CUhbnrfhv+LitYwjZzUB+TGIFSLGT1ZEhb
- lqR3omLDOVevNZPtuY1Y2WX9+3xT3Le9JTlV7hTgLQ+Ns8wHdQJVNboANsS1yEW8YxAb
- zFoMxlcnTtwbsfk4pKFTlmERPLwVXm+l5mCh68Rj2JRlqEiCctfj+ZavNoW47aWtPNwf
- PWSqtgSzR9NIY8vovg3oeoOA5fTk1eLg0VoJQqa81P/HofDK+vlSGMciAxvpeuT529LN
- g/gQ==
+ bh=+mEXw7F2lJQQgW+4oCLpZWuN1JwwLw7u8qEl078/N1E=;
+ b=pDt7GuluI0p0JLPvfx3yApvwr9ne9iHJsn0ESr+Ur9NUz/PHGirf9MN24tkJl0TOSx
+ WDkPr+84tggfF6wGDIu6xbn2ZYdFRWEQGqe6Jy5LCOiBPs3ft5bdowxzhvzXxnmMR/6u
+ FZQKfHnP6/N2bjv38MbqiAKT23mn+Yxxu2A8/0km7tocH3rrBqGaQztrYKEcaCmGAK8T
+ cikQ7r0XTzpc+o+hsgm9BdKObJ/n7K0SCwS/QunNiUPs0TjKkiOfUlvOO7eBOhrE4DF9
+ YeVLF20Lf1WabCdjOqTeL6X6v73lIv9geCuqtw3qA8q1yyWvObdN/WBimX38PrN9Llay
+ pyVw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXZeZdCOSXdxb5kJdySqbmQ4ne61iqsBJjAu4icz9Eio3FYdBbS4ngeF6oHW8rssZEmAdxK+gGPqU2JCQjJ38otAohkLQ==
-X-Gm-Message-State: AOJu0YxjlhjGrtmy4PSUcoVnwqunjwb8J+njA5f9fDIldqc0A3Al8k3U
- L9ZHd6N65ciSaJD91pIdDHmuU4Flciys2NWo7XMuRjPfXv027q+9
-X-Google-Smtp-Source: AGHT+IH1QRNyf6gH5QsiayNFU7OGqHb1tL9uttUD/JJZsQnOIzo40PGkz7TGOwETIex1FbAhaUFIyw==
-X-Received: by 2002:a05:600c:3795:b0:41b:e416:43d3 with SMTP id
- 5b1f17b1804b1-421563595a6mr28602425e9.35.1717614231549; 
- Wed, 05 Jun 2024 12:03:51 -0700 (PDT)
+ AJvYcCXCo2IK2iMew5CToCU2Qs+FugbZVPxtqq5hkFuikckXNedexDX4IR1mbZE18D0571+buEaqKZvPvcX2x6XjBHzi8m+Fiw==
+X-Gm-Message-State: AOJu0Yx6XHxIJsgsaWf+xKtU20iimkxv+eRDT8m9XTpV902vFaxxUhug
+ 4VfsS7sJ6zjh8DF9K7gBWwBvo946UTrXjN1A4YqZ8PsVhWe+341f
+X-Google-Smtp-Source: AGHT+IEU8FmgZ1EHipp0TMtL5/sOkdd0dU2OBeWlE4AKF8zco2f06WqMv3FTZzFBqlmP+JKYuBQTCw==
+X-Received: by 2002:a05:600c:4f51:b0:421:556f:5fb8 with SMTP id
+ 5b1f17b1804b1-4215ac83330mr4881685e9.0.1717614233276; 
+ Wed, 05 Jun 2024 12:03:53 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
  [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-4214a4abdd5sm44772195e9.0.2024.06.05.12.03.49
+ 5b1f17b1804b1-4214a4abdd5sm44772195e9.0.2024.06.05.12.03.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Jun 2024 12:03:51 -0700 (PDT)
+ Wed, 05 Jun 2024 12:03:53 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Ryder Lee <ryder.lee@mediatek.com>,
@@ -92,10 +92,10 @@ To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  "SkyLake.Huang" <skylake.huang@mediatek.com>,
  =?UTF-8?q?Nicol=C3=B2=20Veronese?= <nicveronese@gmail.com>,
  u-boot@lists.denx.de
-Subject: [PATCH 08/11] mmc: mediatek: add support for upstream linux clock and
- property
-Date: Wed,  5 Jun 2024 21:02:15 +0200
-Message-ID: <20240605190220.17616-9-ansuelsmth@gmail.com>
+Subject: [PATCH 09/11] clk: mediatek: mt7981: support alternative compatible
+ for fixed-plls
+Date: Wed,  5 Jun 2024 21:02:16 +0200
+Message-ID: <20240605190220.17616-10-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240605190220.17616-1-ansuelsmth@gmail.com>
 References: <20240605190220.17616-1-ansuelsmth@gmail.com>
@@ -118,98 +118,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for upstream linux clock and map U-Boot property to the one
-use in upstream linux where supported.
-
-Also add handling for the use_internal_cd that on upstream is hardcoded
-enabled on mt7620.
+Support alternative compatible for fixed-plls clocks used upstream with
+the compatible mediatek,mt7981-apmixedsys.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- drivers/mmc/mtk-sd.c | 33 +++++++++++++++++++++++++++++----
- 1 file changed, 29 insertions(+), 4 deletions(-)
+ drivers/clk/mediatek/clk-mt7981.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/mmc/mtk-sd.c b/drivers/mmc/mtk-sd.c
-index 296aaee7331..93878900dec 100644
---- a/drivers/mmc/mtk-sd.c
-+++ b/drivers/mmc/mtk-sd.c
-@@ -336,6 +336,7 @@ struct msdc_compatible {
- 	bool enhance_rx;
- 	bool builtin_pad_ctrl;
- 	bool default_pad_dly;
-+	bool use_internal_cd;
+diff --git a/drivers/clk/mediatek/clk-mt7981.c b/drivers/clk/mediatek/clk-mt7981.c
+index 7fcb81419cd..13dc3df0e9e 100644
+--- a/drivers/clk/mediatek/clk-mt7981.c
++++ b/drivers/clk/mediatek/clk-mt7981.c
+@@ -543,6 +543,7 @@ static const struct mtk_clk_tree mt7981_infracfg_clk_tree = {
+ 
+ static const struct udevice_id mt7981_fixed_pll_compat[] = {
+ 	{ .compatible = "mediatek,mt7981-fixed-plls" },
++	{ .compatible = "mediatek,mt7981-apmixedsys" },
+ 	{}
  };
  
- struct msdc_delay_phase {
-@@ -366,6 +367,10 @@ struct msdc_host {
- 	struct clk src_clk_cg;	/* optional, MSDC source clock control gate */
- 	struct clk h_clk;	/* MSDC core clock */
- 
-+	/* upstream linux clock */
-+	struct clk axi_cg_clk;	/* optional, AXI clock */
-+	struct clk ahb_cg_clk;	/* optional, AHB clock */
-+
- 	u32 src_clk_freq;	/* source clock */
- 	u32 mclk;		/* mmc framework required bus clock */
- 	u32 sclk;		/* actual calculated bus clock */
-@@ -1638,6 +1643,11 @@ static void msdc_ungate_clock(struct msdc_host *host)
- 	clk_enable(&host->h_clk);
- 	if (host->src_clk_cg.dev)
- 		clk_enable(&host->src_clk_cg);
-+
-+	if (host->axi_cg_clk.dev)
-+		clk_enable(&host->axi_cg_clk);
-+	if (host->ahb_cg_clk.dev)
-+		clk_enable(&host->ahb_cg_clk);
- }
- 
- static int msdc_drv_probe(struct udevice *dev)
-@@ -1716,19 +1726,33 @@ static int msdc_of_to_plat(struct udevice *dev)
- 
- 	clk_get_by_name(dev, "source_cg", &host->src_clk_cg); /* optional */
- 
-+	/* upstream linux clock */
-+	clk_get_by_name(dev, "axi_cg", &host->axi_cg_clk); /* optional */
-+	clk_get_by_name(dev, "ahb_cg", &host->ahb_cg_clk); /* optional */
-+
- #if CONFIG_IS_ENABLED(DM_GPIO)
- 	gpio_request_by_name(dev, "wp-gpios", 0, &host->gpio_wp, GPIOD_IS_IN);
- 	gpio_request_by_name(dev, "cd-gpios", 0, &host->gpio_cd, GPIOD_IS_IN);
- #endif
- 
- 	host->hs400_ds_delay = dev_read_u32_default(dev, "hs400-ds-delay", 0);
--	host->hs200_cmd_int_delay =
--			dev_read_u32_default(dev, "cmd_int_delay", 0);
-+	if (dev_read_u32(dev, "mediatek,hs200-cmd-int-delay",
-+			 &host->hs200_cmd_int_delay))
-+		host->hs200_cmd_int_delay =
-+				dev_read_u32_default(dev, "cmd_int_delay", 0);
-+
- 	host->hs200_write_int_delay =
- 			dev_read_u32_default(dev, "write_int_delay", 0);
--	host->latch_ck = dev_read_u32_default(dev, "latch-ck", 0);
-+
-+	if (dev_read_u32(dev, "mediatek,latch-ck", &host->latch_ck))
-+		host->latch_ck = dev_read_u32_default(dev, "latch-ck", 0);
-+
- 	host->r_smpl = dev_read_u32_default(dev, "r_smpl", 0);
--	host->builtin_cd = dev_read_u32_default(dev, "builtin-cd", 0);
-+	if (dev_read_bool(dev, "mediatek,hs400-cmd-resp-sel-rising"))
-+		host->r_smpl = 1;
-+
-+	host->builtin_cd = dev_read_u32_default(dev, "builtin-cd", 0) ||
-+			   host->dev_comp->use_internal_cd;
- 	host->cd_active_high = dev_read_bool(dev, "cd-active-high");
- 
- 	return 0;
-@@ -1776,6 +1800,7 @@ static const struct msdc_compatible mt7620_compat = {
- 	.enhance_rx = false,
- 	.builtin_pad_ctrl = true,
- 	.default_pad_dly = true,
-+	.use_internal_cd = true,
- };
- 
- static const struct msdc_compatible mt7621_compat = {
 -- 
 2.43.0
 
