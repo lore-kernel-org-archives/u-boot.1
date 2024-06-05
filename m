@@ -4,65 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39AECC25B76
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 18:41:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFBFFC25B76
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 18:42:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43EFC87AD2;
-	Wed,  5 Jun 2024 20:41:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id CFDCB878F7;
+	Wed,  5 Jun 2024 20:42:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cfEpfFPl";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P5Cui6bZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A6F887F39; Wed,  5 Jun 2024 20:41:17 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1926687AD2; Wed,  5 Jun 2024 20:42:24 +0200 (CEST)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9F37878F7
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 20:41:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 069AF87842
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 20:42:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 455IfCja101693;
- Wed, 5 Jun 2024 13:41:12 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1717612872;
- bh=xMltKgda/ZoHvS1hSzexmADlIQ+iGxPjOLK3Bwvsibw=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=cfEpfFPl4ZjPFeO59XY1Pe0bQ/btAzcXrfkqc773DdtSxKkKbhDO5LIYFIloqH/Pr
- dSeUDwMBvSZw/tsf3zjhcqAGNb5DCkt4JsX/q4+qOkYweTzjHT0RzZYb7mUgpG3Igz
- 8CVU9xlVRtrPtL8fPa4S9JUwEwqg1R+BQ5F/0aRE=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 455IfCkO007843
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 5 Jun 2024 13:41:12 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 5
- Jun 2024 13:41:12 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 5 Jun 2024 13:41:12 -0500
-Received: from localhost (dhruva.dhcp.ti.com [172.24.227.68])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 455IfBZd021611;
- Wed, 5 Jun 2024 13:41:11 -0500
-Date: Thu, 6 Jun 2024 00:11:10 +0530
-From: Dhruva Gole <d-gole@ti.com>
-To: Nishanth Menon <nm@ti.com>
-CC: Tom Rini <trini@konsulko.com>, Bryan Brattlof <bb@ti.com>, Vignesh
- Raghavendra <vigneshr@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH 0/3] arm: dts: am625/am62a7: Switch over to OF_UPSTREAM
-Message-ID: <20240605184110.jytanjglt5ddpbrq@dhruva>
-References: <20240605152752.1711835-1-nm@ti.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=maximmosk4@gmail.com
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-52b94ad88cbso291219e87.0
+ for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 11:42:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1717612941; x=1718217741; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=oQSfouEfhX7wzpgRRSAk/tjFaHg+NE6ZA6/rzgbF54k=;
+ b=P5Cui6bZqLlGFNp1omK7LTXmQ2NnMzFXAuOtu1ZuqwbEnOdiTvTPETN8OcA8dCysVF
+ KfcnJuc49RYvPWb3bgOLbcZ6aTB1NsZSj1wfOTiS4JD+quEQ3EqVLVqbPKP3b7r59I04
+ fkF/SuoQVw22BvUA1xWlbzAH5V5aRDdW7nG8yFVs3jGSomncI+8Tdhfq6n7o83TNFnQ6
+ wQ89gM68HdUG5AGw6fCmryIEGCa7IuTEYYo4qWGjFLAgAacKZ+iTGVatrskLfGTpuNae
+ jmxDFLOIq/mRrWQGRCYKwOpzV4SWnNiXh8so0kJSrVlzCACh3KlT/lEuBdyZC20QWLu4
+ Uxog==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717612941; x=1718217741;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=oQSfouEfhX7wzpgRRSAk/tjFaHg+NE6ZA6/rzgbF54k=;
+ b=gcJAMi11ysXPxrNp2asrhX9PvPoljHURm2609fTChOeqj2gDAnVmfeKGZcsAn0A0KS
+ D3qRxDIISdIX+JOWQZrvRy/Fx0Wwhw6PAoEIC9rtFytrxcm4xxVux9ErpYUGDNARGXlg
+ Oxv/K60Q1jiCRq2YoAGW9IZs0Rl2E/RpvnVmH/TfDNjjryEXlXIGqvMnw3qVM3wqeBY9
+ lKrXcAnpTmtBT8XtrhVdlfjIeh8FBrPro18xRlJcCdtm+023tZFHvVOhGt3+IzBsIPeJ
+ necdlHzuw54mL073qfdG6h+YKJbo89aU55DI85Jgi+m7nqlx0li4SVXU2DHhQytYOq+b
+ dPRg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUMwJqsIU9D7AFCHAf04rJhAu1bTIF036GkO2u/RAKst9eCwO/XqrX+0opaCXBCzf0YaWTo3ABNczuGJC/FjWAJM9L5Dg==
+X-Gm-Message-State: AOJu0Ywd92ioIj6cv6N9U9pI8nwjM4Zp0GoZ1mmfYfl2DcLEdUW/QbIR
+ b4jzSPgxse/T9jjBxCB03ytxltPhssyjACMkDCwO9rWEh3szu7xY
+X-Google-Smtp-Source: AGHT+IEytC03nFA6DnHdeOCkTafuFihI+FSbuCteHrvs2bBaaDDTRUrlZVXVwp+gsQ1kOJxPGCHAKA==
+X-Received: by 2002:ac2:48a7:0:b0:52b:77c9:182 with SMTP id
+ 2adb3069b0e04-52bab50b8f9mr2624215e87.68.1717612940978; 
+ Wed, 05 Jun 2024 11:42:20 -0700 (PDT)
+Received: from localhost.localdomain (109-252-15-116.nat.spd-mgts.ru.
+ [109.252.15.116]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-52bacfa8038sm276872e87.198.2024.06.05.11.42.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 05 Jun 2024 11:42:20 -0700 (PDT)
+From: Maxim Moskalets <maximmosk4@gmail.com>
+X-Google-Original-From: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
+To: quentin.schulz@theobroma-systems.com, sjg@chromium.org, trini@konsulko.com,
+ u-boot@lists.denx.de, xypron.glpk@gmx.de
+Cc: Maxim.Moskalets@kaspersky.com,
+	Maxim Moskalets <maximmosk4@gmail.com>
+Subject: [PATCH] cmd: move ELF load and boot to lib/elf.c
+Date: Wed,  5 Jun 2024 21:42:17 +0300
+Message-Id: <20240605184217.13892-1-Maxim.Moskalets@kaspersky.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20240605152752.1711835-1-nm@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,29 +93,226 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+From: Maxim Moskalets <maximmosk4@gmail.com>
 
-On Jun 05, 2024 at 10:27:49 -0500, Nishanth Menon wrote:
-> Cleanup am625 on by switching over the last two platforms (SK and
-> beagleplay) over to OF_UPSTREAM, and while at it, switch over am62a7
-> (last of the am62* family) over as well.
+Loading and running the ELF image is the responsibility of the
+library and should not be associated with the command line interface.
 
-Thanks for the cleanup.
+It is also required to run ELF images from FIT with the bootm command
+so as not to depend on the command line interface.
 
-> 
-> This superscedes the previous version of beagleplay only patch[1]
-> 
-> Test logs: https://gist.github.com/nmenon/ba310d3750a80789aca6a4fd90190135
-> 
-> Nishanth Menon (3):
->   arm: dts: am625_beagleplay: Switch to OF_UPSTREAM
->   arm: dts: am625_sk: Switch to OF_UPSTREAM
->   arm: dts: am62a7_sk: Switch to OF_UPSTREAM
-> 
+Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
+---
+ cmd/elf.c     | 58 +++++++++++++++++++--------------------------------
+ include/elf.h | 10 +++++++++
+ lib/elf.c     | 54 +++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 86 insertions(+), 36 deletions(-)
 
-For the series,
-Reviewed-by: Dhruva Gole <d-gole@ti.com>
-
+diff --git a/cmd/elf.c b/cmd/elf.c
+index a02361f9f5..32b7462f92 100644
+--- a/cmd/elf.c
++++ b/cmd/elf.c
+@@ -19,21 +19,6 @@
+ #include <linux/linkage.h>
+ #endif
+ 
+-/* Allow ports to override the default behavior */
+-static unsigned long do_bootelf_exec(ulong (*entry)(int, char * const[]),
+-				     int argc, char *const argv[])
+-{
+-	unsigned long ret;
+-
+-	/*
+-	 * pass address parameter as argv[0] (aka command name),
+-	 * and all remaining args
+-	 */
+-	ret = entry(argc, argv);
+-
+-	return ret;
+-}
+-
+ /* Interpreter command to boot an arbitrary ELF image from memory */
+ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ {
+@@ -43,8 +28,8 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ #endif
+ 	unsigned long addr; /* Address of the ELF image */
+ 	unsigned long rc; /* Return value from user code */
+-	char *sload = NULL;
+-	int rcode = 0;
++	int rcode = CMD_RET_SUCCESS;
++	Bootelf_flags flags = {0};
+ 
+ 	/* Consume 'bootelf' */
+ 	argc--; argv++;
+@@ -52,7 +37,10 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	/* Check for [-p|-s] flag. */
+ 	if (argc >= 1 && (argv[0][0] == '-' && \
+ 				(argv[0][1] == 'p' || argv[0][1] == 's'))) {
+-		sload = argv[0];
++		if (argv[0][1] == 'p')
++			flags.phdr = 1;
++		log_debug("Using ELF header format %s\n",
++				flags.phdr ? "phdr" : "shdr");
+ 		/* Consume flag. */
+ 		argc--; argv++;
+ 	}
+@@ -75,17 +63,9 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	} else
+ 		addr = image_load_addr;
+ 
+-	if (!valid_elf_image(addr))
+-		return 1;
+-
+-	if (sload && sload[1] == 'p')
+-		addr = load_elf_image_phdr(addr);
+-	else
+-		addr = load_elf_image_shdr(addr);
+-
+ #if CONFIG_IS_ENABLED(CMD_ELF_FDT_SETUP)
+ 	if (fdt_addr) {
+-		printf("## Setting up FDT at 0x%08lx ...\n", fdt_addr);
++		log_debug("Setting up FDT at 0x%08lx ...\n", fdt_addr);
+ 		flush();
+ 
+ 		if (image_setup_libfdt(&img, (void *)fdt_addr, NULL))
+@@ -93,21 +73,27 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	}
+ #endif
+ 
+-	if (!env_get_autostart())
+-		return rcode;
+-
+-	printf("## Starting application at 0x%08lx ...\n", addr);
+-	flush();
++	if (env_get_autostart()) {
++		flags.autostart = 1;
++		log_debug("Starting application at 0x%08lx ...\n", addr);
++		flush();
++	}
+ 
+ 	/*
+ 	 * pass address parameter as argv[0] (aka command name),
+-	 * and all remaining args
++	 * and all remaining arguments
+ 	 */
+-	rc = do_bootelf_exec((void *)addr, argc, argv);
++	rc = bootelf(addr, flags, argc, argv);
+ 	if (rc != 0)
+-		rcode = 1;
++		rcode = CMD_RET_FAILURE;
+ 
+-	printf("## Application terminated, rc = 0x%lx\n", rc);
++	if (flags.autostart)
++	{
++		if (ENOEXEC == errno)
++			log_err("Invalid ELF image\n");
++		else
++			log_debug("## Application terminated, rc = 0x%lx\n", rc);
++	}
+ 
+ 	return rcode;
+ }
+diff --git a/include/elf.h b/include/elf.h
+index a4ba74d8ab..b88e6cf403 100644
+--- a/include/elf.h
++++ b/include/elf.h
+@@ -12,6 +12,12 @@
+ #ifndef __ASSEMBLY__
+ #include "compiler.h"
+ 
++/* Flag param bits for bootelf() function */
++typedef struct {
++	unsigned phdr      : 1; /* load via program (not section) headers */
++	unsigned autostart : 1; /* Start ELF after loading */
++} Bootelf_flags;
++
+ /* This version doesn't work for 64-bit ABIs - Erik */
+ 
+ /* These typedefs need to be handled better */
+@@ -700,6 +706,10 @@ unsigned long elf_hash(const unsigned char *name);
+ #define R_RISCV_RELATIVE	3
+ 
+ #ifndef __ASSEMBLY__
++unsigned long bootelf_exec(ulong (*entry)(int, char * const[]),
++			   int argc, char *const argv[]);
++unsigned long bootelf(unsigned long addr, Bootelf_flags flags,
++		      int argc, char *const argv[]);
+ int valid_elf_image(unsigned long addr);
+ unsigned long load_elf64_image_phdr(unsigned long addr);
+ unsigned long load_elf64_image_shdr(unsigned long addr);
+diff --git a/lib/elf.c b/lib/elf.c
+index 9a794f9cba..dc13935e10 100644
+--- a/lib/elf.c
++++ b/lib/elf.c
+@@ -7,6 +7,7 @@
+ #include <cpu_func.h>
+ #include <elf.h>
+ #include <env.h>
++#include <errno.h>
+ #include <net.h>
+ #include <vxworks.h>
+ #ifdef CONFIG_X86
+@@ -15,6 +16,59 @@
+ #include <linux/linkage.h>
+ #endif
+ 
++/**
++ * bootelf_exec() - start the ELF image execution.
++ *
++ * @entry: address of entry point of ELF.
++ *
++ * May by used to allow ports to override the default behavior.
++ */
++unsigned long bootelf_exec(ulong (*entry)(int, char * const[]),
++			   int argc, char *const argv[])
++{
++	return entry(argc, argv);
++}
++
++/**
++ * bootelf() - Boot ELF from memory.
++ *
++ * @addr:  Loading address of ELF in memory.
++ * @flags: Bits like ELF_PHDR to control boot details.
++ * @argc: May be used to pass command line arguments (maybe unused).
++ *	  Necessary for backward compatibility with the CLI command.
++ *	  If unused, must be 0.
++ * @argv: see @argc. If unused, must be NULL.
++ * Return: Number returned by ELF application.
++ *
++ * Sets errno = ENOEXEC if the ELF image is not valid.
++ */
++unsigned long bootelf(unsigned long addr, Bootelf_flags flags,
++		      int argc, char *const argv[])
++{
++	unsigned long entry_addr;
++	char *args[] = {"", NULL};
++
++	errno = 0;
++
++	if (!valid_elf_image(addr)) {
++		errno = ENOEXEC;
++		return 1;
++	}
++
++	entry_addr = flags.phdr ? load_elf_image_phdr(addr)
++					    : load_elf_image_shdr(addr);
++
++	if (!flags.autostart)
++		return 0;
++
++	if (!argc && !argv) {
++		argc = 1;
++		argv = args;
++	}
++
++	return bootelf_exec((void *)entry_addr, argc, argv);
++}
++
+ /*
+  * A very simple ELF64 loader, assumes the image is valid, returns the
+  * entry point address.
 -- 
-Best regards,
-Dhruva Gole
+2.39.2
+
