@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80994C25B76
-	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 19:41:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A937C27C52
+	for <u-boot@archiver.kernel.org>; Wed,  5 Jun 2024 19:41:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67E1B884D2;
+	by phobos.denx.de (Postfix) with ESMTP id C06AB884E7;
 	Wed,  5 Jun 2024 21:37:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OxyzgfbY";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lQIv3bVp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13AC98836E; Wed,  5 Jun 2024 21:22:09 +0200 (CEST)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id AAA0A88354; Wed,  5 Jun 2024 21:22:10 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A53488300
- for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 21:22:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B17F68836C
+ for <u-boot@lists.denx.de>; Wed,  5 Jun 2024 21:22:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-35dce6102f4so100927f8f.3
- for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 12:22:07 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-4213870aafdso2242095e9.2
+ for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 12:22:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717615326; x=1718220126; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1717615328; x=1718220128; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=N/Gdt7/+lZ0binabe9ZcG2ArhZluimuOacqq/Lpqfk4=;
- b=OxyzgfbYRpxJ+QqP+DlWn1/N/EsBao3U5kw6uoRmAml7bLYryOM/Sa0T5q6jp+D+i1
- 9nhND9HfiYXbZv9AdhB4jp2w4PUm3P+guXrsbtK/cKJ9aSvtmhf46LZc2kzCKaTcn0Cs
- vXhlcgQr1KDrG5glVRVQT6+eFnmDX46WNMFxwsz4C/F2redy6Fgz8xOleevPoTVBdEMK
- xViBxVwlIZPA5sMFjYbkwNOS1wL1DT06ryYtUd3ylYc77fPYS4xywRFjvwNtRdZbTYnd
- 9yPt5WlrGu6DVOUNz1cbNJzLrTwqpUsQ2OEPEWofOIMGo4EUqM2Lz0A/QUMxJSyQjTLz
- uXJA==
+ :reply-to; bh=uXkXlxaFoE7EdVjfBeOn9iAr3jACb605iugKm19iiDE=;
+ b=lQIv3bVpIvffDEOC9QexJH0yaRXo0V6nuHcCT371hDzpt3OfGWBXCeu6u8+KWp+ojt
+ 81c2e16anhjkXw0hQ4Hiks+a9s+Sz4oMN2Y64Tlo+CiHPRkF4Nk0oY4nshI+h9gJlVcU
+ 28MDr8DzaMs2PlmVZ405DLqcUzVxOkf42sExCMvPs3VgOrufFYWtFglxARjuZjhe9Eyp
+ IwYbR0NEyC3GxrqI2PDiWNvmrmB3kxmcTQvqQNJ3FkX4Xn+TW2izZO5BtZekcipeQ+IB
+ End0WJmyM3cq6mNtLh2lYk8j0Pt336aeQSFhthm8z2/qhfdAuPdQ+DvHksjqSSvEA9ar
+ tfDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717615326; x=1718220126;
+ d=1e100.net; s=20230601; t=1717615328; x=1718220128;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=N/Gdt7/+lZ0binabe9ZcG2ArhZluimuOacqq/Lpqfk4=;
- b=ws9rsBDCVGMkfX8MrOY8bZOeAHM08iRimBMCW2H/2B5bvF5O1lmuvTziR0AeAsLclC
- G4pKKWlXbVyZQq99Y0xQ2lle/fVJNz36y2N/3a4xPyhCLlDz8T/69X6Bn5NdFux0lp07
- Gp5gibblHEfmmFPL05g7GL5MWlDXeT18zLrfq/KZWEhkQUoKd7R609hriVTc18gE5S84
- 9dCMqeVqzwt9dOsajqD8RYHZcgEq6F7UILipmYWginCQBT4XNLqVLCIOzI+pCcgoT4MB
- K4hjXkAbDR4R8VaDYN837dbygb955sM7dpFFrQOJODQEnElihP4PweAweLzMbMC8kZGW
- 2JyA==
+ bh=uXkXlxaFoE7EdVjfBeOn9iAr3jACb605iugKm19iiDE=;
+ b=EOxx5sspQPXF2bjmbFSVhdH9elTzFzuT4XDvl+wCi7mTJsQ2tUydWB7vTVy5e2lBP9
+ UjtZEMdVztgU0zxDCl/hObdcR460/3ljDPmhbS/B/QdalExzgHGz5+wdJNSGqjz5GLeF
+ qcnexBdg8Tcv76CmSnNXiXr+NCqvOzEbVhmZy0BjND4qdNdqEH+AO75r8vBqfOQUCNEl
+ bHOHW3LeHmMPNJGt1CMcfz9nC+ng9yqqPJep2rVX9M9LtL5fmMncrryyDWfSBve+ub1z
+ WcbsuWMPDihZv9f/KXcmsXgk/nKEEdah1gOvPHT+ynFDWl61ENI4csAyg2XxQvgeIf0X
+ HBvQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUeQhuEPHetNAVBTx56IwQRgNcFLDZm3zD3kIXUfrFOmnLh0W/oGtA6O27gg/Pyhad0WY8OHSjrXEEnKc+ML0PVgMc75w==
-X-Gm-Message-State: AOJu0YxrGa1fqNP9RQcEF6OoQ81aIJkpoGUiBEUybawnJss8hLquYqUg
- 2zuIkZxierJjcQo69pm0DSSw338EaVRv147fqoL+cwu3zR8Ady8K
-X-Google-Smtp-Source: AGHT+IFRONZK8RGRC5x6pa76z50dfB1U6LM+8CSQvvATEkVm7j8/Po7g1HUZxhWHUHcDvCBzMjEpUg==
-X-Received: by 2002:a5d:4e91:0:b0:35d:bf15:dac2 with SMTP id
- ffacd0b85a97d-35e8ef0aad3mr2652191f8f.39.1717615326216; 
- Wed, 05 Jun 2024 12:22:06 -0700 (PDT)
+ AJvYcCXXE0k7AnUdMDMi4zdJ9xuTkXRlIF0YTn5iU3jPHuwCVOQ8fiJcH/q3NAACAchaUF6ONdMacfwtXlBYQKlqkjptH5BQrA==
+X-Gm-Message-State: AOJu0YwlpsE3Yac3uzn8YOzDsbe3PXS2fG7TgUJKOmtKbqrpoSc4hnRr
+ M22Bm+qsNEiRZaAeocVFjq1iXUPI9Ff+/DghlqqwefHk+OfuuNhn
+X-Google-Smtp-Source: AGHT+IErBhjLsRxsMG74ZnVXIuy6g++nKkoDlCz82M9dDcJzW9H8oUZp6W3oAh5397d34nLRCaLFTQ==
+X-Received: by 2002:a05:600c:458e:b0:420:2986:ccee with SMTP id
+ 5b1f17b1804b1-4215633febamr27014155e9.30.1717615328083; 
+ Wed, 05 Jun 2024 12:22:08 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
  [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-4214bf5994csm36079625e9.1.2024.06.05.12.22.04
+ 5b1f17b1804b1-4214bf5994csm36079625e9.1.2024.06.05.12.22.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Jun 2024 12:22:05 -0700 (PDT)
+ Wed, 05 Jun 2024 12:22:07 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
@@ -90,9 +90,9 @@ To: Tom Rini <trini@konsulko.com>,
  Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
  Vaishnav Achath <vaishnav.a@ti.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH 6/7] mtd: implement support for LED status activity
-Date: Wed,  5 Jun 2024 21:21:38 +0200
-Message-ID: <20240605192146.19052-7-ansuelsmth@gmail.com>
+Subject: [PATCH 7/7] ubi: implement support for LED status activity
+Date: Wed,  5 Jun 2024 21:21:39 +0200
+Message-ID: <20240605192146.19052-8-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240605192146.19052-1-ansuelsmth@gmail.com>
 References: <20240605192146.19052-1-ansuelsmth@gmail.com>
@@ -116,157 +116,48 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Implement support for LED status activity. If the feature is enabled,
-make the defined ACTIVITY LED to signal mtd write or erase operations.
+make the defined ACTIVITY LED to signal ubi write operation.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- cmd/mtd.c                      | 23 +++++++++++++++++++++++
- drivers/mtd/nand/core.c        |  4 ++++
- drivers/mtd/nand/spi/core.c    |  5 +++++
- drivers/mtd/spi/spi-nor-core.c |  9 +++++++++
- 4 files changed, 41 insertions(+)
+ cmd/ubi.c | 17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
 
-diff --git a/cmd/mtd.c b/cmd/mtd.c
-index 9189f45cabd..aa0a41ac3bb 100644
---- a/cmd/mtd.c
-+++ b/cmd/mtd.c
-@@ -11,6 +11,7 @@
- #include <command.h>
- #include <common.h>
- #include <console.h>
+diff --git a/cmd/ubi.c b/cmd/ubi.c
+index 0a6a80bdd10..c300f1dc853 100644
+--- a/cmd/ubi.c
++++ b/cmd/ubi.c
+@@ -20,6 +20,7 @@
+ #include <mtd.h>
+ #include <nand.h>
+ #include <onenand_uboot.h>
 +#include <status_led.h>
- #if CONFIG_IS_ENABLED(CMD_MTD_OTP)
- #include <hexdump.h>
- #endif
-@@ -559,6 +560,12 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag, int argc,
- 	while (mtd_block_isbad(mtd, off))
- 		off += mtd->erasesize;
+ #include <dm/devres.h>
+ #include <linux/mtd/mtd.h>
+ #include <linux/mtd/partitions.h>
+@@ -417,7 +418,21 @@ int ubi_volume_begin_write(char *volume, void *buf, size_t size,
  
-+#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
-+	if (!read)
-+		status_led_set(CONFIG_LED_STATUS_ACTIVITY,
-+			       CONFIG_LED_STATUS_BLINKING);
-+#endif
+ int ubi_volume_write(char *volume, void *buf, size_t size)
+ {
+-	return ubi_volume_begin_write(volume, buf, size, size);
++	int ret;
 +
- 	/* Loop over the pages to do the actual read/write */
- 	while (remaining) {
- 		/* Skip the block if it is bad */
-@@ -586,6 +593,12 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag, int argc,
- 		io_op.oobbuf += io_op.oobretlen;
- 	}
- 
-+#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
-+	if (!read)
-+		status_led_set(CONFIG_LED_STATUS_ACTIVITY,
-+			       CONFIG_LED_STATUS_OFF);
-+#endif
-+
- 	if (!ret && dump)
- 		mtd_dump_device_buf(mtd, start_off, buf, len, woob);
- 
-@@ -653,6 +666,11 @@ static int do_mtd_erase(struct cmd_tbl *cmdtp, int flag, int argc,
- 	erase_op.addr = off;
- 	erase_op.len = mtd->erasesize;
- 
 +#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
 +	status_led_set(CONFIG_LED_STATUS_ACTIVITY,
-+		       CONFIG_LED_STATUS_ON);
++		       CONFIG_LED_STATUS_BLINKING);
 +#endif
 +
- 	while (len) {
- 		if (!scrub) {
- 			ret = mtd_block_isbad(mtd, erase_op.addr);
-@@ -681,6 +699,11 @@ static int do_mtd_erase(struct cmd_tbl *cmdtp, int flag, int argc,
- 		erase_op.addr += mtd->erasesize;
- 	}
- 
++	ret = ubi_volume_begin_write(volume, buf, size, size);
++
 +#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
 +	status_led_set(CONFIG_LED_STATUS_ACTIVITY,
 +		       CONFIG_LED_STATUS_OFF);
 +#endif
 +
- 	if (ret && ret != -EIO)
- 		ret = CMD_RET_FAILURE;
- 	else
-diff --git a/drivers/mtd/nand/core.c b/drivers/mtd/nand/core.c
-index f6d9c584f78..631a4c83e04 100644
---- a/drivers/mtd/nand/core.c
-+++ b/drivers/mtd/nand/core.c
-@@ -18,6 +18,7 @@
- #include <linux/bitops.h>
- #include <linux/mtd/nand.h>
- #include <linux/printk.h>
-+#include <status_led.h>
++	return ret;
+ }
  
- /**
-  * nanddev_isbad() - Check if a block is bad
-@@ -182,6 +183,9 @@ int nanddev_mtd_erase(struct mtd_info *mtd, struct erase_info *einfo)
- 		}
- 
- 		nanddev_pos_next_eraseblock(nand, &pos);
-+#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
-+		status_led_activity(CONFIG_LED_STATUS_ACTIVITY);
-+#endif
- 	}
- 
- 	return 0;
-diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
-index 62c28aa422d..86d7ed9e9d0 100644
---- a/drivers/mtd/nand/spi/core.c
-+++ b/drivers/mtd/nand/spi/core.c
-@@ -32,6 +32,7 @@
- #include <linux/bug.h>
- #include <linux/mtd/spinand.h>
- #include <linux/printk.h>
-+#include <status_led.h>
- #endif
- 
- /* SPI NAND index visible in MTD names */
-@@ -657,6 +658,10 @@ static int spinand_mtd_write(struct mtd_info *mtd, loff_t to,
- 
- 		ops->retlen += iter.req.datalen;
- 		ops->oobretlen += iter.req.ooblen;
-+
-+#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
-+		status_led_activity(CONFIG_LED_STATUS_ACTIVITY);
-+#endif
- 	}
- 
- #ifndef __UBOOT__
-diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-index f86003ca8c0..1e7436079e9 100644
---- a/drivers/mtd/spi/spi-nor-core.c
-+++ b/drivers/mtd/spi/spi-nor-core.c
-@@ -32,6 +32,8 @@
- #include <spi-mem.h>
- #include <spi.h>
- 
-+#include <status_led.h>
-+
- #include "sf_internal.h"
- 
- /* Define max times to check status register before we give up. */
-@@ -1039,6 +1041,10 @@ static int spi_nor_erase(struct mtd_info *mtd, struct erase_info *instr)
- 		ret = spi_nor_wait_till_ready(nor);
- 		if (ret)
- 			goto erase_err;
-+
-+#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
-+		status_led_activity(CONFIG_LED_STATUS_ACTIVITY);
-+#endif
- 	}
- 
- 	addr_known = false;
-@@ -1816,6 +1822,9 @@ static int spi_nor_write(struct mtd_info *mtd, loff_t to, size_t len,
- 			goto write_err;
- 		*retlen += written;
- 		i += written;
-+#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
-+		status_led_activity(CONFIG_LED_STATUS_ACTIVITY);
-+#endif
- 	}
- 
- write_err:
+ int ubi_volume_read(char *volume, char *buf, size_t size)
 -- 
 2.43.0
 
