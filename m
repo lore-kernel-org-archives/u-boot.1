@@ -4,159 +4,158 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC084C25B75
-	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 14:54:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83769C25B75
+	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 14:59:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF621881DB;
-	Thu,  6 Jun 2024 16:54:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E3F5288335;
+	Thu,  6 Jun 2024 16:59:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="O99vXiOb";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="ZKoKnJGV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16276883AA; Thu,  6 Jun 2024 16:54:07 +0200 (CEST)
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- (mail-db3eur04on0717.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe0c::717])
+ id 11E2A88335; Thu,  6 Jun 2024 16:59:55 +0200 (CEST)
+Received: from EUR03-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur03on20713.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260c::713])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85A9D881D3
- for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 16:54:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B81C9881DB
+ for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 16:59:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=P5THcRbqByjjsYQ2ORMQTs4GLRjNMy5WUCwrzbqoZ5plLUTX9def8EI8Yi/Gz1dyphQdJ7Rzp++8NMZ85l8LboaAl3IPiPcL9/VR9eDVCnh4NyevJ0tpEGbF5ilkIBe9OCfpzWgHD9CEfuJIHO7agKkNbwEj2w5h9kq7AHhXw3E+LkWlu3v/yRcYzZmjdOD9DrCHEEdq5QEixnuakqCk4V+dcfgAiMI2on/j8u/fiUCSD2CWH9tBO6/U4R4tuJRkmrblCdtkuoSIf944GqvVsxJ1EGJBRcgk0xmG3UrBrkhlSYWtCtb5uRopSusbydCAttwjDHYYZHj8mCEuv5qJzw==
+ b=dYSSDDtZEyg0xGpzSWiryKe1qhZm3XcfU2VoZulSKOM3N7tFHrYhTYnoqP/pPDTkuhKOX9OW76+joR+dWcX1JBElNIEn+N5tlwlziLKNWNWRF85S0+ARvaOAQJf0yLV/m5dUGJp76A5H9mhYl2XFL4JdMNUDpzI/I/eUd5r5Wy3lFPALMLQK2pPGGkNsk+tmuZJ6asYwaUQBeQxGtpVFhX11lKXtPB9hoe5bZjSB/w7uQwXG/05SgeyH1r48n7yKcpF9QgB2wl7ABE/9zb9JdIWSlSPYkecX96l7EcQEv8K6CvRWLbLezSgep9VEm8maoaKR2gxu4Yv5FZiFK6GgmA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cJy1F8/zjBRCN5rm3nkkprYHBYjV7t8KNAp4aVhcxr0=;
- b=ockwEK9vQU/f9/Iwfr8XVv4bvArJQ1ZbvkbGawdUDCsJLUXBvtVVqV9OqDYxczfoGC3XZf/oa9kWECJPTwJ1cX7WsCAfE98fXGePjnWY/2SmiP7F/2qxRAZ1jOU0WdQIjv1I0HteXE6D1XE/sDZYYtuDZkqe+FYpTuscXSg5+heDVhaO+vs5l+8bdiJoghnFxbEQRuIxeqVKUoQEVJwHVutJdQq0Nu3rJRocYD0n0Gmepe/zAFQXsKFsXdKjBEPLREZxZF+ARjXi1JVHZLhcO/iQvj4wYtjR+eMZP+Cag4SVjxj1iw48mdlyRP+p0PeILxgV1aRRCYzalqOy5gYFjg==
+ bh=6EQaXpWJZHlUFVKBtVdVKtyuCmYKX8849yKsrx7xhhs=;
+ b=UHZ0tZm1Al9qhXuiOgW4j56n3DnPemDpuX8H9LAbCTxFupgrYVnaRMBxQTiUbiyqqrqMsM9kAu0Xjdac+Irf2i7kxzjkIo+8Q33CCYXqTgMS1QyK5G6abBR8rc3jfh07ZKuPY/7Ng0e8MpaClsiwNdvEusT+KD7KafMZt6F6TUzh97+ENFkVYkPEfJUQADGNkHrrQGN64TGYhQn7Kdvx7wLDu+rhhp+CiF8xfGrAaOa4YaeRW3Y5YdCksq/mnWdku3BkKD5tqbnCjXJE4uR3l1qbP3i9F3wjf7QxoxeCNxUJLTAFItDFOLRzeGvz62wDBX04g9MTtW8qlcZw5SbvEw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cJy1F8/zjBRCN5rm3nkkprYHBYjV7t8KNAp4aVhcxr0=;
- b=O99vXiObxgPxD+OCtfQJduFMLdzYgVi/OWaeL7tnvzsj22civgjdPEBBl7fvsh3RqL0SHUhdysHiwQ6OZ7Q0c9P08CTxhc67Rg3EW2m2HHuwydLoLlenxYqvS4siA1rITGD067GOKFcU0ZT0iWiMwqBrxdgdZRGnPnpEmCgP2nw=
+ bh=6EQaXpWJZHlUFVKBtVdVKtyuCmYKX8849yKsrx7xhhs=;
+ b=ZKoKnJGVKOsGZjhUKuUt8aUp2GLzqeuyZr3+Tr1RqfbAvBAOM3ATWLZA2FKrqhgjj+MW2btMhSuZfLLrkmzlZddBfxAlPcer7oesP53DOWJMx8gg5ASnoQi7Ns5RdaVuKqT84Trtu1t/wmkHnwnxDdz72c5bdooR335AulaPvWY=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from PA4PR04MB7982.eurprd04.prod.outlook.com (2603:10a6:102:c4::9)
- by PA1PR04MB10367.eurprd04.prod.outlook.com (2603:10a6:102:441::21) with
+ by PAXPR04MB8688.eurprd04.prod.outlook.com (2603:10a6:102:21f::10) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.31; Thu, 6 Jun
- 2024 14:54:02 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.33; Thu, 6 Jun
+ 2024 14:59:51 +0000
 Received: from PA4PR04MB7982.eurprd04.prod.outlook.com
  ([fe80::3c4:afd5:49ac:77af]) by PA4PR04MB7982.eurprd04.prod.outlook.com
  ([fe80::3c4:afd5:49ac:77af%4]) with mapi id 15.20.7633.033; Thu, 6 Jun 2024
- 14:54:02 +0000
-Message-ID: <3c422e9f-3cd8-4b24-83f1-d4ad6e7641eb@cherry.de>
-Date: Thu, 6 Jun 2024 16:53:59 +0200
+ 14:59:51 +0000
+Message-ID: <4240b625-8925-4ea1-ae8c-b1b3c35b87e0@cherry.de>
+Date: Thu, 6 Jun 2024 16:59:48 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] board: rockchip: Add FriendlyElec NanoPi R6C
-To: Sebastian Kropatsch <seb-dev@mail.de>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20240605155413.226629-1-seb-dev@mail.de>
+Subject: Re: [PATCH 0/2] Cleanup fit documentation
+To: Simon Glass <sjg@chromium.org>, Sam Povilus <sam.povilus@amd.com>
+Cc: trini@konsulko.com, u-boot@lists.denx.de, git@amd.com, michal.simek@amd.com
+References: <20240604195256.1820285-1-sam.povilus@amd.com>
+ <CAFLszTgRAwRrhMQfoUDHg9tGaTf4zLBtHR_QWFQRodh4JyoNJg@mail.gmail.com>
+ <CAFLszTgb7ihDDqFOhruwFo9zRN_3ZhQu+PQB+Hn6NGLvoBewiw@mail.gmail.com>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20240605155413.226629-1-seb-dev@mail.de>
+In-Reply-To: <CAFLszTgb7ihDDqFOhruwFo9zRN_3ZhQu+PQB+Hn6NGLvoBewiw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA0P291CA0013.POLP291.PROD.OUTLOOK.COM (2603:10a6:1d0:1::8)
- To PA4PR04MB7982.eurprd04.prod.outlook.com
+X-ClientProxiedBy: VI1PR09CA0125.eurprd09.prod.outlook.com
+ (2603:10a6:803:78::48) To PA4PR04MB7982.eurprd04.prod.outlook.com
  (2603:10a6:102:c4::9)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB7982:EE_|PA1PR04MB10367:EE_
-X-MS-Office365-Filtering-Correlation-Id: c3a223c6-5e0c-45b7-11a0-08dc8638812e
+X-MS-TrafficTypeDiagnostic: PA4PR04MB7982:EE_|PAXPR04MB8688:EE_
+X-MS-Office365-Filtering-Correlation-Id: c85fe980-b4e6-4f99-48d9-08dc863950e4
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230031|376005|1800799015|366007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?VThrQnFnc1B5NGovd0pkOTJiYUdINnhXUzVUWDVuRFFsYnU0SEJmU1laYW5F?=
- =?utf-8?B?N3J1ZUFHZEZ6bEZ3RStBZFJiUFhqWVdERVMrK0NnWjVCT3dUeWN0d3VVcjhM?=
- =?utf-8?B?dW9zSFd0SVZKVUc2N01EWU8zM0tPUVlwZ01jVHl6ZC90bklaQUZWKzdxVVpt?=
- =?utf-8?B?eWl5VDd3amlKSUhKYWZwOUpJN0doblZLMGNYSUxUMGE0ZW1QU1Y3a05xZ1Fo?=
- =?utf-8?B?NzZNREJOcVNsb0graEU5ZmxVcFIrNjlPTGxzWmtvV1p5SW5Fb2dJTHdWcXlB?=
- =?utf-8?B?My9uT1VncnBZeDRvbGVsck1DLzF1bmVwdlBzS08yWHRhOE5mODBaYksyYk8y?=
- =?utf-8?B?blRSRWdLY1liakN5T3FKeTgyM1hqdGNpby9FWEw3ZW9IU1JMVzNBdWtyN0lO?=
- =?utf-8?B?cXZaSmJxL0RYbjNyc3FZdU96dFJzYkZ6eDlwR2wvdVZqWFpMZFFmU1VrZy9Y?=
- =?utf-8?B?MkptcUFURFdERG1SOE9FU1daNG1ld1pLVkh1dnFZcTk4eU1UdXhBMlFVTkFN?=
- =?utf-8?B?aEs4djBCT3JGQTlOejZoUUxrRWp6TWJyZWlIODFVcXRvQmlmbThVbDVOSlI4?=
- =?utf-8?B?ZC82dm41eXZ6SEMvMkdqT1Q0ZVNFY05reThXcnFtN3FTWVN5a1crdmVNK1JM?=
- =?utf-8?B?aGwyVWNnaGE5S0lodStjN0xXcDVZeTJTWTk1SU9XSVNhRXNRcWNMaGFEK2x0?=
- =?utf-8?B?d1E0aEhnMFBva3pNTC84a29VVHJ2UnVQTzhaVVRMUGNwcy9JVXpxM1lBbC8y?=
- =?utf-8?B?Yk1SbkM3SGwvbVYyOWgrUEpRalROVDIxNmNTSFZ6N0h4OUVQSlFLQkNIaUI1?=
- =?utf-8?B?ckFLOHIwKyt3OXJqMnFpVlVWRHVJNkNkNFlVLzNoeGJaTE5zbG9OOTlJcFRn?=
- =?utf-8?B?WXAzQ3Rob0RMbGxRVlAwM3VIcG5tMFhWZ0pGWHR1YTRiSUtNNW9FOEQwMlZV?=
- =?utf-8?B?K2p4c1lTbG9LTXhqSC9SN0FJSFBHdDVYbkJiZkh1d0puY0sxem8vZ1RENlE4?=
- =?utf-8?B?dEZIaGVLSFhsck9lUlNnY1FRV201TjBVTzlkTzFidlpTTnlVTzNoR0lKTGdt?=
- =?utf-8?B?Z1lkMS9QM1hSWmVVZWlQaHZjN3VCdFRKcHRqYmFpTGVNWDBrLzA3WHBDODBY?=
- =?utf-8?B?V2Zza1RMMHdDNFdrNTB3WjgzUC9OMHI0Q1krc3crK0xFUDhhNmVQc3VHd2Fs?=
- =?utf-8?B?SlBETjd5Z3hGZHVGZWV5WWhZMzJDS2E5VENJMkJKYlgxQ1hzUkM2MWJDL3p5?=
- =?utf-8?B?R21SeVg5QXpla0hWQ01XNkJoQmYxdDNHK0ZGbFJxczRCZ0tmZEVaUGNGUWo1?=
- =?utf-8?B?ZjJObDZBRFprNE9MQlUxU2xrRHpNQ1VJaU4yKytlendrMTY0eEk0NitlVFBZ?=
- =?utf-8?B?L2ZTSVRYVVppV3hnZGhPQWtCTmJ1YkxTQVgyMzMxYURLOTc3Q2xHb0FUR050?=
- =?utf-8?B?NW1hVDVSS2l3Y1h1Um1Jc1oyRE50MEd6ZjRTbUw0REt5dHo0aEZCUTRWaE0y?=
- =?utf-8?B?dkxNK0x5dUJlb0xiTVdBbko3T0xyYmlGSVh2elNOVThBaGNUaGJmM3VaUWw4?=
- =?utf-8?B?VDZlMi9DY2V0SktCdXJTS2tzQmxNZ3FycUt3MG1LNmFiaU1nQThPeFA2ZU9h?=
- =?utf-8?B?UWp2ZWNzbWpIbUxKaE9IYUNmcG03aldYZ2kzV0I5RzNMZmgxaE51ODFSdldY?=
- =?utf-8?B?OVRTZkxPdXUzMmFHcWtRY2J2MWk4MXN2YnhQM0ZqeWRhRExvSklTV0ZXWVdi?=
- =?utf-8?Q?4qllu1OYSx7qFWkyGPYNyF8AJj9N6M9IqjqZw4g?=
+X-Microsoft-Antispam: BCL:0;ARA:13230031|1800799015|376005|366007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?ZTVHWUFUYjd2WnVSejNOODhlTS9VZm9mdnZUQnhORFl2MkFTOEkzeHdnMlBC?=
+ =?utf-8?B?cXpaUWdlMXZmY3BIdnNSVVEyWGxaak5aS2pubzNmOC9TcisvczVsbzVCOG0w?=
+ =?utf-8?B?WTV1SmpScjFBczZGVzhXUllBRkhiWG1mZ2xPOEF0ZVRvYThKTUtxODJ4b0x1?=
+ =?utf-8?B?a3ZOOUpHRHVWMCtVWW9sTXdmeGdIZ2RvakxvZEZOUW4zOFlONStZeHR2QXk4?=
+ =?utf-8?B?ekFPcVlId044STMvMkpBL29iRHpiOUs4aldLc08yTGVPcDVDeFBuK3BRL3Qw?=
+ =?utf-8?B?ZDhuaVI5V2dnQ2JmZkY3T2IxNWk1S2U0S0JpUHp4YVV5RXpxVWZZVHNYQy94?=
+ =?utf-8?B?RUFUYzVuRjJmTHZoTEZxWU8yVHBubkVuNDRsN1V3MkF4WC9QQm95QitvNlhn?=
+ =?utf-8?B?K2diOUJ3SlMxYjhlSGxPL2xaUmtLUkI1dkVWRGxTQXhiNXByekpiUExyZ3A3?=
+ =?utf-8?B?WnhLVjRpdmpmYWUwQXp0U2hLOC9Rc0Zoczl0ekhSRTNyZEVIa2tMYXphUXQ0?=
+ =?utf-8?B?Z3JwSWdRaXkxN0ZFWVdGd0N5YVZtbEhDYTJzbE8xNkJpZlA2TTM0dHdFOVE2?=
+ =?utf-8?B?K3FETC9yQ0ppVUZ5TTc0bEVkcTVYa2ovVmxMUGNxNENaOVNNVWRmelI1c2Rr?=
+ =?utf-8?B?Nmp5U1BiS3UyekFONWM4cTJEZWlXaVRuWnp5YzQraDh5bklPcUNFcVJla3pj?=
+ =?utf-8?B?WHVJNmhTRnRwL2pldzNFY084V0ZQQy9BR3JYYXg2a2tCSlppSDkzZVRYaEpJ?=
+ =?utf-8?B?SVZCNUthaGVJVFRZZW5laHhmM05LRHBJQ1FjakQrb3hiVkhiSVkxeVdROXZU?=
+ =?utf-8?B?VWhodEdmTTBPK2VteDlJQ0gzS0hucC9wQzZHeDZGc3hia0lySnQ0T1ROazl0?=
+ =?utf-8?B?aithSDFybjgvbDJqUFhsUTNEUVp1U0tFQkJoWWlINGxLeWg1UVFxeFpZS0pv?=
+ =?utf-8?B?VVRBMXZ0LzJhalJGR0dOMkVuZG9EQnJaTll4ckdrK1ZyWG5ncW1iek1ucEdK?=
+ =?utf-8?B?U0svUFp6QUVsQ1pIZjFndHFFWW4zTjR2VXE3RFI0dXNNZjFPZHNJalFxQWpQ?=
+ =?utf-8?B?cWFXdEcwTWlyaFBqdzc4M0JTT2dJKzg3ZjJ5dlBjODRVcXExRWU1LyttZFFT?=
+ =?utf-8?B?Y08xdkJlWGwzYTJ0M0M1d3AwaHdCeFp2VmZuSDZDV1VnZWtCMnhWaXRGSVpD?=
+ =?utf-8?B?WFlEUkI4ZGtLV3F3ZW0xblZDdUJUWElha20wUldUUWw1OG90TERDaDc2UHZN?=
+ =?utf-8?B?OHB5ZHhldFY0YjIxSGtOcXZKcEdOc0ZobEFxNitqa0E5dDBhN2doSTJoYXNq?=
+ =?utf-8?B?N3J0bFlyeE0xblBPU25pUVIvRGxZbHFXRTROUjVsc2lPNlJDT0VoNHgrTjhO?=
+ =?utf-8?B?OXRuQWpDbVY0NXlPZENhek9lNTVrRUlweVA2ZjN4RVhmZG03eGZTZDE3Wngw?=
+ =?utf-8?B?VWZiQm9UaFdySXFiTnlQQVlWd3g3Tjg5ZXFYQUcvSHhPb3dFSGlnSUF6Ymhk?=
+ =?utf-8?B?Z0FXZEwxVXZVTk1FcGVvcFpBdndhenJMb0pCYzFaWG0wazI3djBWallIcmFk?=
+ =?utf-8?B?Q1djOE4yU0NTTmFnVnIrKzlzMms2RGloei9VSGo1SUJLTTBDdXA3L1N6R3lB?=
+ =?utf-8?B?dmdQYzljNnNQMkthbFlwR2N3NG9GV2VHaTNXRnUvWE01RXp5N3U5bWduZzlx?=
+ =?utf-8?Q?lmjwU747BTsrnL9fft5o?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PA4PR04MB7982.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376005)(1800799015)(366007); DIR:OUT; SFP:1102; 
+ SFS:(13230031)(1800799015)(376005)(366007); DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MThiZVBlWE5LNXdlNzhKTk8rOVFuZmE4ZVRVZUpCSG5ZMU40dDBpbUdaRzdZ?=
- =?utf-8?B?clY1Q0lpdk1EQU4zQ1k0U3NpSXg2SmFMREIwRktVU3VhMkhWd21yK0NNVzVa?=
- =?utf-8?B?OWFVaFZzcVpKRHhGeVZJaXp1ei9uTDBQSm1MT1F5RDZvZjZuTnlJSEpZV2RJ?=
- =?utf-8?B?MXZQdU80eDhBTmV3SDd1cmVXSi9JdUt4aWhtSkZWUXRLMWVES1dHTkZxS0di?=
- =?utf-8?B?U2pDYmtGdUFIV3RvYTc4ZkRUc2xYT2Q0czRKeHFHS3pSOE42WUNpVCtmeFJw?=
- =?utf-8?B?RHpGeS9DNzA5S1p4bnF6SzB4RFVROXI2aVJXMDNyZFRZMWJha1VpeWVTMWlI?=
- =?utf-8?B?dlRIaWFPRTVsa3F3dk0yWEtkbXdqWFhmdU50c1hpaHZhUzZYbjNXbituWkVq?=
- =?utf-8?B?YTZtQWh6UDB3WlEvNmYvRE5UcjdGcnBrelBNbFQvRmEzWnNVaU9RYVNPckQ1?=
- =?utf-8?B?Rk44aFRiTGNVQ3hzUE1uVUlralRhbkZ6L2NDZTBpd0hHb1dLUnZjVDhZLyty?=
- =?utf-8?B?WElycFg3ZTBXRWIrL0liR21yeE9RaG1iMGpSSUZwTUhYcGZyeUE5ampXSDA4?=
- =?utf-8?B?dmh1TkpRZkhHM2R1U0hFdXpTYkw2SHdlREhCdHJWbFAxbXY1ZnZvVm4xdjZm?=
- =?utf-8?B?Sm95TW5yUHJaNEhNK3NOSUVMUWI4d1JVc0lVUmtCN2JvK3pxUlZBanpWWU9Y?=
- =?utf-8?B?eExMV0wrKzlmSDNkdGp1MVhQRkRCRHZ3bEtFVTlra3RGY1A5WTc1Mit2U3hi?=
- =?utf-8?B?NEhiNXdTNFRoMHI3VFdEa21EQTFlOFN6NFR0UzBvL3EzaXEzRDlyZVVTN3gv?=
- =?utf-8?B?WFBaZmRSTFRINUY3NnA5RVdneEk4VUZ0ZWxNR3A5cFZqaVVKOHNBVWlQMklN?=
- =?utf-8?B?dTBDWHF1NWgwS01NM3RUOGlVQzh0SUpkN2V0b3A5aE5aRW9wZWdOVnkrWjQ1?=
- =?utf-8?B?RVgxdHJmbHpsbVdjV1dLbWc0KzNQbUxZeWJBU3hORFVGYXdXcEtmZUJhd1No?=
- =?utf-8?B?cVdxNGErRmdyYWhoc3d0b3ZNbWl3a3Y4ZlRBWlZjSG8xS1hjUXJrQVVjM1do?=
- =?utf-8?B?Qlp0ejhiUmJ2Y3JqVy96YmxqNkFNSlliZFFEbTVicEsrbWZjb0tFMDM2ZVZy?=
- =?utf-8?B?RUVDY0RzRkhxd2RDczFWOWphcUNPRHBBYkJLUXFxYlcxczcycWhBditXcmJT?=
- =?utf-8?B?b1orVnRWY0NLeTJ0YU1hVTMyNG85NzNlekErUENOZ1FvUzVrN1BxM1Vsa2Nk?=
- =?utf-8?B?cjF6M3NaZUhIM21aL3N5WGxlK2dFNVZlc1NRMFplbTFkNWZzZndadkF1MjNs?=
- =?utf-8?B?RHRIa0VUeU9Dai9rN1p2aGtVSjI0SGN1c0tscHBzazVCMUZ3SGxsSlQ0NVB4?=
- =?utf-8?B?elZqREt2eWdBUXNvc1ZnYmNNdkZDVDYxTFBUbmdSOXRPbmd0c2lsVHBwMzZ1?=
- =?utf-8?B?M1JUOUdud2RkOHRwdGR2Y1N0cjVwc2VSeVBxNmppMkd4YXpHc3U3SmpCQ3B3?=
- =?utf-8?B?T0ZDd29pRDcvUmJUUmZCL2dkZlR0VEkxb3JpNnFHT01GRllBem9iWkp5Ym1L?=
- =?utf-8?B?T2R3VG5KWEhmNEpKRkY3ZlVvNHczK2cyREVNVGt2MFQzYjc0dHJXcDlma1Rm?=
- =?utf-8?B?SjBpc3Nxb2g3bzVCWmdqVE0wK05mSitPVzk5RHNndWl4ZlZseWF5dVZIYVZ3?=
- =?utf-8?B?OU5SVU12b1hhK2dzelJOU2hiUEN4UUNWY0FhVlBGMVU2RGVVeGkxWUpLMmU5?=
- =?utf-8?B?bFV3NHp5Nk82TFM3RDFrbk5BWHVoOExvclAwUnNRMGNnbEl6RERCKy9pY1B0?=
- =?utf-8?B?Z3c3OWVCeGg2alR3ckNOT08waGk2bURvSjVyRGFZRTMycElub3hUNERvRHJV?=
- =?utf-8?B?TUM2ajRHS1pUeS9qNkUrMXRJUXdPN2ZpaCtEVm5qNkZsQ0EvRVhpTDdSTTgv?=
- =?utf-8?B?cjI0alJNaDk0V1dlOXhNbU1IMjlhSHNMMUdzQkdSUnBqZnlGSmdneEloaFNG?=
- =?utf-8?B?Q3hIRE91bHgwc1RRajE0VGFZQWZtVXY3UlU5bmxSbHlMNmpQUHRnU3ZJTW8z?=
- =?utf-8?B?VDFmMHovS0N6SGtvd0gwN1Q1T2ZxWTNTZWhKcGY2WXdWN0JsSisyWkp1UlFB?=
- =?utf-8?B?TGdvaHhVd0JjUVhMc2FsN1RKS3NpZ2tvcFkrSlJyS25LYjVsUmt6cFZxUFJ2?=
- =?utf-8?Q?4S6Ei7bTTjX9ggeiTlR2pPE=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NVViNmlubnQvYU1mSmxGL1djKzVuVnNiQ2NkM2toQkdvbmxnbDFtLzdyb05O?=
+ =?utf-8?B?Rjh2dU1GVFRPY3Y1dm0yVTFsQUxvc0hDMy9UTUdtYzd1NWhGVk5GbXdBNVBD?=
+ =?utf-8?B?bkpwZkdlK2JuSSt0YmJtanpZOGZPNXJFdkFYNm1Yek5uYWdJeGRxUUNmU2cr?=
+ =?utf-8?B?YUFZbkRDb2h0eGtqNjA0bUZ5Zm1hSzk2bE55Q2djRWtGY0RuS1BjSEx6N1p6?=
+ =?utf-8?B?RU5UT0JNRFVHTWN4OVJFcndYTjUxTnhQMWQ3ZjJTV2NyMytJUEJVYUVab3gz?=
+ =?utf-8?B?OXdWQ0N1b21waHBUdCthNDNGNmhkOHY0aHhPUHk3d2tacDk5ckthSGFWMzVj?=
+ =?utf-8?B?WkVpdERwMGV1bnhRKytnSjNDSjRSN0NqNkFDRFhzcEZtVUk5dVVZdC9iY3NU?=
+ =?utf-8?B?R29Kc0VraWF6V1dpbXNUWU5oM2pwTlNuUkhWQjUxN2dzVWpWNktwMHl4Ukc5?=
+ =?utf-8?B?d1F6cE5XQW9IdGg0UzRIRlBkYkdqbm52TXoxclQvTEZiVDYxYU1MMTVlN1pQ?=
+ =?utf-8?B?Mi90SkpqUlpwYUtSWWZFMy9jbVBZemJ5NE1lVXVDSEM2ZGNBbXZVOTZ4SkxS?=
+ =?utf-8?B?OW9IdTlPVC9xeVpNNTkrWkxqbHc5VmtVYzNvaEd6Ukw0QmQ0Q2ZRL1ZMZXYz?=
+ =?utf-8?B?UU5XekVRd3JqbjEyVFE5MldxOE1tcGNCVEJSMndzK2kzM0tncDlDeUUrOVha?=
+ =?utf-8?B?QXR6bW1zNmdmdUJZOExKKzRPYXBBbXArTDRmT0JONzVUTlFCQUYvRkVjSVlR?=
+ =?utf-8?B?alBlSGJiUEN5bWRUWkhERXRLdm5hYjdQQmlMNFFRcE43dnExKzBrQ05PaGxj?=
+ =?utf-8?B?WWFqYjI5a201b2V3K2JZUTRDQkhFUmtsN3dyN08xclJXcXV0RXlnWGxCdkdZ?=
+ =?utf-8?B?RnZFZElqamswY2JqcEhtMW9lNDl4MDhyd3RseHNCekJWQ1BBT0UxT2xOeWlM?=
+ =?utf-8?B?Sm5LUzRzZGdmVFp5NURFZTRucC95N0VwVmxDdTdUOTdEMEsxSkgxNDVwRVpl?=
+ =?utf-8?B?UGtJUW5kbG4wSTROa2tMcDZZcFBCeEYvdVNpNlZOaUNMWWtEQ1Y0bGd2V0o1?=
+ =?utf-8?B?OUhuRHYwYmJJMENWcE4wUHNXQ3psaXpxejNnaUIyM2JnbVEyTzVPUzh3MjRH?=
+ =?utf-8?B?OEI5VlhrQWM1Wm9xZ0pZSUNvV1BFTmVjSHRXOUR5UURJTTRoWXhBWHExU251?=
+ =?utf-8?B?VFo0NTNocVVhcXBIL3hXN2w4eFBEOGk5ZC9oN2dVazlXK3VXV2duOWJqanZa?=
+ =?utf-8?B?dGVQL0t0ZlIyN2U3VmJMVk1rNnRveXdKQ2M0cDl0UGliUU52MmhBVTZTRUw3?=
+ =?utf-8?B?TkV4VWFNakdqYUFacnJoNXBueStHRS9ZMlFRczFXUmdaK01LRGZ2YXFTTm8z?=
+ =?utf-8?B?VzI4R0l3RWY5MnVmWm9KUURBR2RPV1REYkFWTTF1V2kwNU9UUmYrYU9kRm1H?=
+ =?utf-8?B?Mk5kYzNTYmxYVkg3RGMwOEt1T2FXbDVJMnJrQThkLy9RVEwvS3ZUalhIQVFv?=
+ =?utf-8?B?SmN5Y0hnMm1FTXJ5Yko5eGZKaWtNM0RFUEN2ZWpCZEkvM3I1WWR3VDdweVpr?=
+ =?utf-8?B?d2tSQmxFcklwbEVlKyt1VDA1czRaM2FEejQ4TE1RU1VIeFhVQTdiS2tkU3RR?=
+ =?utf-8?B?ZFF4SXNTeTJMSDlaaS9SQXo5RWtDdXZFSE9PdHFXOEhkU3NxYmc2VDZvd1NT?=
+ =?utf-8?B?YWVwNldkUktFWFhycERmMVM0MXRpd0dwd20yYkVGUDB3UlNiWWhQaitJTXZn?=
+ =?utf-8?B?VWhTMnRIZjRURjgzcjZqSGNHLzJLVWZaYm4veWNYNUxlMmN2emt1Q3BrZXRM?=
+ =?utf-8?B?a0hidEtuUEFIMVgyMlk4WUdpQUMyVnRmbkhyS0MyOXNidk5rWnpLanNIc0I3?=
+ =?utf-8?B?NHl6NFdmYS85UVpzVUxOQnh1MTk1dXVzTUF1L0xvNG9ZNjRmUml5MUxENC9X?=
+ =?utf-8?B?a2x0bFlUbTh4NVlwM1EraFRsSUszK2NYbHM5TkVmck1hTWFFOU0yR2RSTVdw?=
+ =?utf-8?B?WVFZZ2x3dHlnUkh6SFlLWlFVMEdQZ1Y3NnhQMmVzdU51ZFBwNFZrSzFYQmJG?=
+ =?utf-8?B?OXltYzd0eUZjY2FzcnBZS2dIMkhMQmlwT0hHOXh6ZWJFeE1DdC9hbmg1NWFL?=
+ =?utf-8?B?SzFrdzZUQnUvSTVXUC81SlV1cTZNZzJXM1c5MWp6MEZLb01EWkVUaS9TSUxJ?=
+ =?utf-8?Q?Kc+X8ozfe5xV+zZB0Yu8tdo=3D?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: c3a223c6-5e0c-45b7-11a0-08dc8638812e
+X-MS-Exchange-CrossTenant-Network-Message-Id: c85fe980-b4e6-4f99-48d9-08dc863950e4
 X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7982.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jun 2024 14:54:02.4225 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jun 2024 14:59:50.9528 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: zdewaAHnPbUvEPmaTy2Ikhqr+2CJ7j/8tuVW4p9Y5eeXRzolEgf/dyO4mEpHHJ5yeBRyTBy4jxyx023Eh25fafJuT2oLo+Mb52oCVWXWDZ8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB10367
+X-MS-Exchange-CrossTenant-UserPrincipalName: qrBP0Sd0igzeHr4sxZ2EEqvFvmyjptV9vT5JfjVMeup5Vql7RIc0qb4rOLLOJNnqoAcwpqm57D2qyxlQHYK29pNXZdX9w7S8TDLXZ3xwdm0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8688
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -173,98 +172,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sebastian,
+Hi Simon,
 
-On 6/5/24 5:36 PM, Sebastian Kropatsch wrote:
-> [You don't often get email from seb-dev@mail.de. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+On 6/5/24 5:52 PM, Simon Glass wrote:
+> Hi Sam,
 > 
-> The NanoPi R6C is a SBC by FriendlyElec based on the Rockchip RK3588s.
-> It comes with 4GB or 8GB of RAM, a microSD card slot, optional 32GB eMMC
-> storage, one M.2 M-Key connector, one RTL8211F 1GbE and one RTL8125
-> 2.5GbE Ethernet port, one USB 2.0 Type-A and one USB 3.0 Type-A port, a
-> HDMI port, a 30-pin GPIO header as well as multiple buttons and LEDs.
+> On Tue, 4 Jun 2024 at 20:13, Simon Glass <sjg@chromium.org> wrote:
+>>
+>> Hi Sam,
+>>
+>> On Tue, 4 Jun 2024 at 13:53, Sam Povilus <sam.povilus@amd.com> wrote:
+>>>
+>>> Sam Povilus (2):
+>>>    doc: Remove extraneous curly braces
+>>>    doc: add clarity to what a "fpga" image is
+>>>
+>>>   doc/usage/fit/source_file_format.rst | 28 ++++++++++++++--------------
+>>>   1 file changed, 14 insertions(+), 14 deletions(-)
+>>
+>> This is now at [1]. Could you please instead do a PR for that?
+>>
+>> I am not sure yet the best way to incorporate or link the FIT spec
+>> from the U-Boot documentation. I suppose we could employ a script to
+>> sync it?
 > 
-> Add initial support for this board using the upstream devicetree sources.
-> 
-> Tests in U-Boot proper:
-> - Booting from eMMC works
-> - 1GbE Ethernet works using the eth_eqos driver (tested by ping)
-> - 2.5GbE Ethernet works using the eth_rtl8169 driver (tested by ping),
->    but the status LEDs on this specific port currently aren't working
-> - NVMe SSD in M.2 socket does get recognized (tested with `nvme scan`
->    followed by `nvme details`)
-> 
-> Kernel commit:
-> d5f1d7437451 ("arm64: dts: rockchip: Add support for NanoPi R6C")
-> 
-> Signed-off-by: Sebastian Kropatsch <seb-dev@mail.de>
-> ---
-> 
-> Hello!
-> 
-> The Ethernet status LEDs which sit directly on the 2.5GbE port using the
-> RTL8169 driver don't light up when connected and I couldn't figure out
-> why. The other port with a RTL8211F has no problems with the LEDs.
-> Have there been occurrences like this in combination with the RTL8125?
-> I'm trying to figure out if this is something that could be solved in
-> the devicetree or if this is a potential driver bug.
-> 
-> Secondly, the default active network device in U-Boot is the 1GbE one.
-> I believe it would make sense to make the 2.5GbE device the default
-> active one since this one is labeled "LAN", whereas the 1GbE is labeled
-> "WAN". However, since the 2.5GbE device is PCIe-based, it only shows up
-> in U-Boot proper after using the `pci enum` command (shows up as in gets
-> listed in `net list` and `dm tree`).
-> Do you have any tips on the preferred approach to handle this switch of
-> the default active net device? Is this even a sensible thing to include
-> in U-Boot in your opinion?
-> 
-> Thanks for your feedback!
-> 
-> Best regards,
-> Sebastian
-> 
-> ---
->   arch/arm/dts/rk3588s-nanopi-r6c-u-boot.dtsi   |  3 +
->   arch/arm/mach-rockchip/rk3588/Kconfig         | 13 +++
->   board/friendlyelec/nanopi-r6c-rk3588s/Kconfig | 12 +++
->   .../nanopi-r6c-rk3588s/MAINTAINERS            |  7 ++
->   configs/nanopi-r6c-rk3588s_defconfig          | 83 +++++++++++++++++++
->   doc/board/rockchip/rockchip.rst               |  1 +
->   include/configs/nanopi-r6c-rk3588s.h          | 12 +++
->   7 files changed, 131 insertions(+)
->   create mode 100644 arch/arm/dts/rk3588s-nanopi-r6c-u-boot.dtsi
->   create mode 100644 board/friendlyelec/nanopi-r6c-rk3588s/Kconfig
->   create mode 100644 board/friendlyelec/nanopi-r6c-rk3588s/MAINTAINERS
->   create mode 100644 configs/nanopi-r6c-rk3588s_defconfig
->   create mode 100644 include/configs/nanopi-r6c-rk3588s.h
-> 
-> diff --git a/arch/arm/dts/rk3588s-nanopi-r6c-u-boot.dtsi b/arch/arm/dts/rk3588s-nanopi-r6c-u-boot.dtsi
-> new file mode 100644
-> index 0000000000..853ed58cfe
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3588s-nanopi-r6c-u-boot.dtsi
-> @@ -0,0 +1,3 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +
-> +#include "rk3588s-u-boot.dtsi"
-> diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
-> index 820e979abb..0e232ddfb9 100644
-> --- a/arch/arm/mach-rockchip/rk3588/Kconfig
-> +++ b/arch/arm/mach-rockchip/rk3588/Kconfig
-> @@ -78,6 +78,18 @@ config TARGET_NANOPCT6_RK3588
->            Power: 5.5*2.1mm DC Jack, 12VDC input
->            Dimensions: 110x80x1.6mm (without case) / 86x114.5x30mm (with case)
-> 
-> +config TARGET_NANOPI_R6C_RK3588
 
-Please add the S at the end of the symbol.
+One can reference links from another Sphinx project thanks to 
+intersphinx_mapping, c.f. 
+https://git.yoctoproject.org/yocto-docs/tree/documentation/conf.py#n114 
+and 
+https://git.yoctoproject.org/yocto-docs/tree/documentation/migration-guides/release-notes-5.0.rst#n196.
 
-Otherwise looking good to me. I'm wondering if we shouldn't do something 
-for boards which do not need a -u-boot.dtsi. Here it's needed because 
-U-Boot would include rk3588-u-boot.dtsi automatically (because of 
-CONFIG_SYS_SOC being rk3588) instead of rk3588s-u-boot.dtsi. Maybe it's 
-too much headache for the benefit :)
+It requires the objects.inv file to be available, which seems to be the 
+case.
 
+Hope this helps,
 Cheers,
 Quentin
