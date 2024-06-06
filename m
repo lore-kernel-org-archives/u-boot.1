@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D740C25B75
-	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 15:42:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DF47C27C5F
+	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 15:44:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B075D881A1;
-	Thu,  6 Jun 2024 17:42:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6C9BB881A1;
+	Thu,  6 Jun 2024 17:44:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RkmXDHsn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tGWf4OFl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDDD688216; Thu,  6 Jun 2024 17:42:22 +0200 (CEST)
-Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
- [IPv6:2607:f8b0:4864:20::1031])
+ id 1E03E88395; Thu,  6 Jun 2024 17:44:43 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A27CC87F5C
- for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 17:42:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DBC3A87F5C
+ for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 17:44:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-2c283f0da84so847392a91.3
- for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 08:42:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-250aa4e8306so620530fac.0
+ for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 08:44:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1717688538; x=1718293338; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=aEBX9+gV6BxVUlWy5ZLr92lZFcNRcKpTF3Ghod6BpxE=;
- b=RkmXDHsnw6T6toTDT6xsltstGzpg6QdbiQBMrqHWe9MWzEaFhfvVjWIE+tnXWR2IGl
- ozwuVo5RtDENA2UJQTvqZUZdbcGdAX5yEPhPy/OCb7Occcrsn3PtvaMqhzXlQDyM/IzL
- a2c3GSA/EKKizikFKAv2syJNAIyHJaFiJR2sbKGTbvZafe+xMw8hbGIIPmuQeurdZ+w3
- 4Zy0GUACI2sQnlv+MI0SodTtO2dPIJvcXWeegpYCfLFXDxP85XViJhce2CYBaTJYeUQP
- 0Ak7gAbdyATqkCUsZ+SIJ1b7JZQushc4EvCjodM1qfvU+VUmx5mKqvGZAS69e6nEnewY
- q9ZA==
+ d=konsulko.com; s=google; t=1717688679; x=1718293479; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=r9cRrJaln06TgkhT0XlYmPiX9aMFbLQJ/Y9VvVmifPU=;
+ b=tGWf4OFlejj2KXZ+7NO7FPnuw8y5GEO6lPik+J7Hfs3IcrgmTA53C/r+Pdc0n/Z8nW
+ 5nYLz9ZDR1BDjGTW/iAzFub/1owXwscYv5hbj4s7sOOodTAa4vrV3i3hoIkQZJJppY4p
+ NVOpbuxqzz+Gs5ZwBn+11N3iZxRLvJc7C1E9U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717688538; x=1718293338;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=aEBX9+gV6BxVUlWy5ZLr92lZFcNRcKpTF3Ghod6BpxE=;
- b=vBqiHPkKo1NUBZjLVhjtBfdRhs0YDdQqAyoQh0kZMeeKrddxk8MSb9qLfPZEzvhdNy
- 04yko1WSjDMa9tAnVzmj5hnjwgNO+zBUvAzA/dhoNv6iWP9aE/sOYKs41PUNROxkHsDw
- woXdJmHx+4mrxMbGZ5RoRr3uECMYKD6vXV5RnPIHX14SofTXi34sOXH2dmNxKDk6WSud
- XDi0Rqf6ohetSdznC7mSVtHX7G7a9sKKA79bZAZdWbxgsCzML70SuYWIPFNXu099QLhv
- kSAG1ZPSmD1QzhEMdc/p0RxqHOZNjTEhKrjCeJcbK+iB/vkvxau1dFVIVPS93iUxlhMd
- +KgQ==
-X-Gm-Message-State: AOJu0Yx8gKUFwh7zfMiSI3YFdpyDAWwRlMTMj9EF0oN6dkNir3SYKpcl
- jbijaYLiKJgVzlYPOiKJmSyuiHsLJIryJ7zO5IVFENnFIYDsw6QmBoWayQ406XujlQW/jHEuCam
- ArPhQUdrV5s1STPiFpQCfkLjRv100X78qkharvg==
-X-Google-Smtp-Source: AGHT+IGKf6GZuLhro7tYOCK4A2ECIa/D4nzczZDklxJYQ4Xw86+w3N21HKfo39HKt4vP6pqNrqxXQ+eNHIEx1frz6j4=
-X-Received: by 2002:a17:90b:46c4:b0:2bd:f1d5:8e3f with SMTP id
- 98e67ed59e1d1-2c27db6cbfemr5811163a91.41.1717688537804; Thu, 06 Jun 2024
- 08:42:17 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1717688679; x=1718293479;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=r9cRrJaln06TgkhT0XlYmPiX9aMFbLQJ/Y9VvVmifPU=;
+ b=Anx0mzNdI5Yzbr25ad8fRoJ1HHXZnGgyUmwfbSCANqVkMJUitN7UbsdSEwUoGJLM/+
+ vS2SlJ63Q2dygSXx3Qb/dfHoDn4SfbLd0elZKUJYO15MNfBKLZgBltDs8DcJUoYneHBm
+ 4oSlBKDeqNOYLrpX/9KZe4BD+hlHxzel0iGG0Hk2kJfgbxobwOWl4ltswJiHbDwOrdB4
+ TI0ayFgfWhrnFyFOR0D4i0ajG49UkmrwsP0cwgWg9NmTXBaGYwqOJZsb/R3UPXVck7Uc
+ X18wxCR4OyibwxvCTfmw1NbsqIxU2D+xu6CuArt/fDjRVKnQzRMxvipNvWWl8K6IdZSC
+ BCdA==
+X-Gm-Message-State: AOJu0Ywt/XfG0xKsPuHMihs2A+8XL2btkQaaVHVs287mnqpbyf6Df5AC
+ 1FNq2xSRZtf1P5nu8KtRMlHn1T1qUX1FcL1nkT4qshTUpw4oP06QqZCoqkZpsUI=
+X-Google-Smtp-Source: AGHT+IHxhMb5c5NOq9Y9i6RKE6mn1WzRUwd6L1kx1Zro4VqlrAb/s58vR/AHsg/q0+DSg/VPnXJOiA==
+X-Received: by 2002:a05:6870:2247:b0:24f:dd36:7b24 with SMTP id
+ 586e51a60fabf-25121c7e051mr7226344fac.2.1717688679536; 
+ Thu, 06 Jun 2024 08:44:39 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
+ [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2544812d776sm410182fac.56.2024.06.06.08.44.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 06 Jun 2024 08:44:38 -0700 (PDT)
+Date: Thu, 6 Jun 2024 09:44:36 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>
+Subject: Re: [PATCH 9/9] Revert "arm: am335x: Enable SPL_OF_CONTROL on some
+ configs"
+Message-ID: <20240606154436.GA68077@bill-the-cat>
+References: <20240605032521.1142768-1-sjg@chromium.org>
+ <20240605032521.1142768-10-sjg@chromium.org>
+ <20240605144224.GR68077@bill-the-cat>
+ <CAFLszThEeXFtqf-Yk+_WbJ2GJtkFdC-R-_nWH2HAE9rjn0d8ag@mail.gmail.com>
+ <20240605201509.GW68077@bill-the-cat>
+ <CAFLszTisz7GUBzSYS9doV2vfPfM14=-v7ADsPbrALYZkuqrtiA@mail.gmail.com>
 MIME-Version: 1.0
-References: <cover.1717680809.git.jerome.forissier@linaro.org>
- <16eac9a19f8f6572ea111cc20cc5793bfb5e6f94.1717680809.git.jerome.forissier@linaro.org>
-In-Reply-To: <16eac9a19f8f6572ea111cc20cc5793bfb5e6f94.1717680809.git.jerome.forissier@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 6 Jun 2024 18:41:41 +0300
-Message-ID: <CAC_iWj++SdJxHouuX_rhgTpeKcfqvudHgtjDQ6Gz0HzYUXoV9Q@mail.gmail.com>
-Subject: Re: [PATCH v3 07/12] net-lwip: add wget command
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>, 
- Maxim Uvarov <muvarov@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Michal Simek <michal.simek@amd.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Peter Robinson <pbrobinson@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Ramon Fried <rfried.dev@gmail.com>, 
- Ioana Ciornei <ioana.ciornei@nxp.com>, Peng Fan <peng.fan@nxp.com>, 
- Sean Edmond <seanedmond@microsoft.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="nCQ8zUkDd6/02pQx"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTisz7GUBzSYS9doV2vfPfM14=-v7ADsPbrALYZkuqrtiA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,635 +98,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
 
-Can we split this in 2 patches instead?
-A preparatory one, with split the net-common etc and one that adds wget?
+--nCQ8zUkDd6/02pQx
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks
-/Ilias
+On Thu, Jun 06, 2024 at 09:04:17AM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Wed, 5 Jun 2024 at 14:15, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Wed, Jun 05, 2024 at 02:08:54PM -0600, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Wed, 5 Jun 2024 at 08:42, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Tue, Jun 04, 2024 at 09:25:21PM -0600, Simon Glass wrote:
+> > > >
+> > > > > This is a partial revert which makes boneblack_vboot boot again.
+> > > > >
+> > > > > This reverts commit f4b64e9736e73ceec14d51600bed9a8ac48f9fe8.
+> > > > >
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > ---
+> > > > >
+> > > > >  configs/am335x_boneblack_vboot_defconfig | 1 -
+> > > > >  1 file changed, 1 deletion(-)
+> > > > >
+> > > > > diff --git a/configs/am335x_boneblack_vboot_defconfig b/configs/a=
+m335x_boneblack_vboot_defconfig
+> > > > > index d473a1a793b..3ec4abddd77 100644
+> > > > > --- a/configs/am335x_boneblack_vboot_defconfig
+> > > > > +++ b/configs/am335x_boneblack_vboot_defconfig
+> > > > > @@ -40,7 +40,6 @@ CONFIG_SYS_I2C_EEPROM_ADDR_LEN=3D2
+> > > > >  # CONFIG_CMD_SETEXPR is not set
+> > > > >  CONFIG_BOOTP_DNS2=3Dy
+> > > > >  CONFIG_OF_CONTROL=3Dy
+> > > > > -CONFIG_SPL_OF_CONTROL=3Dy
+> > > > >  CONFIG_ENV_OVERWRITE=3Dy
+> > > > >  CONFIG_ENV_IS_IN_MMC=3Dy
+> > > > >  CONFIG_SYS_REDUNDAND_ENVIRONMENT=3Dy
+> > > >
+> > > > So, this change was a while ago. But I did it because some of the
+> > > > drivers, tho I forget which ones exactly, really were not functional
+> > > > without SPL_OF_CONTROL enabled. That said, does am335x_evm_defconfig
+> > > > work in your configuration? I think we have to keep am335x_evm_spib=
+oot
+> > > > because it's so radically different from how the rest of the possib=
+le
+> > > > options boot, but I'm not sure we need a vboot defconfig? Or if we =
+do,
+> > > > it should be updated to use the #include logic these days.
+> > >
+> > > I don't actually have an am335x_evm board, which is why I'm using bbb.
+> > > We only have the vboot version, since the non-vboot was removed a
+> > > while back.
+> > >
+> > > In any case, with this patch, bbb boots again.
+> >
+> > Yes, the am335x_evm build supports all of the TI (or associated, like
+> > beagleboard) platforms. Please give it a try.
+>=20
+> Yes, that works. So what should we do with the boneblack config? We
+> really should have something that boots.
 
-On Thu, 6 Jun 2024 at 16:37, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
->
-> Add support for the wget command with NET_LWIP.
->
-> About the small change in cmd/efidebug.c: when the wget command based
-> on the lwIP stack is used the wget command has a built-in URL
-> validation function since it needs to parse it anyways (in parse_url()).
-> Therefore wget_validate_uri() doesn't exist. So, guard the call in
-> efidebug.c with CONFIG_CMD_WGET.
->
-> Based on code initially developed by Maxim U.
->
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> Co-developed-by: Maxim Uvarov <muvarov@gmail.com>
-> Cc: Maxim Uvarov <muvarov@gmail.com>
-> ---
->  cmd/Kconfig        |   7 ++
->  cmd/Makefile       |   5 +-
->  cmd/efidebug.c     |   8 +-
->  cmd/net-common.c   | 115 +++++++++++++++++++++++++++++
->  cmd/net-lwip.c     |  12 +++
->  cmd/net.c          | 115 -----------------------------
->  include/net-lwip.h |  51 +++++++++++++
->  net-lwip/Makefile  |   1 +
->  net-lwip/wget.c    | 180 +++++++++++++++++++++++++++++++++++++++++++++
->  9 files changed, 375 insertions(+), 119 deletions(-)
->  create mode 100644 cmd/net-common.c
->  create mode 100644 net-lwip/wget.c
->
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index 6ef0b52cd34..d9a86540be6 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -2117,6 +2117,13 @@ config CMD_TFTPBOOT
->         help
->           tftpboot - load file via network using TFTP protocol
->
-> +config CMD_WGET
-> +       bool "wget"
-> +       select PROT_TCP_LWIP
-> +       help
-> +         wget is a simple command to download kernel, or other files,
-> +         from a http server over TCP.
-> +
->  endif
->
->  endif
-> diff --git a/cmd/Makefile b/cmd/Makefile
-> index 535b6838ca5..e90f2f68211 100644
-> --- a/cmd/Makefile
-> +++ b/cmd/Makefile
-> @@ -129,8 +129,11 @@ obj-$(CONFIG_CMD_MUX) += mux.o
->  obj-$(CONFIG_CMD_NAND) += nand.o
->  obj-$(CONFIG_CMD_NET) += net.o
->  obj-$(CONFIG_CMD_NET_LWIP) += net-lwip.o
-> +obj-$(filter y,$(CONFIG_CMD_NET) $(CONFIG_CMD_NET_LWIP)) += net-common.o
->  ifdef CONFIG_CMD_NET_LWIP
-> -CFLAGS_net-lwip.o := -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
-> +lwip-includes := -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
-> +CFLAGS_net-lwip.o := $(lwip-includes)
-> +CFLAGS_net-common.o := $(lwip-includes)
->  endif
->  obj-$(CONFIG_ENV_SUPPORT) += nvedit.o
->  obj-$(CONFIG_CMD_NVEDIT_EFI) += nvedit_efi.o
-> diff --git a/cmd/efidebug.c b/cmd/efidebug.c
-> index c2c525f2351..d80e91ecadd 100644
-> --- a/cmd/efidebug.c
-> +++ b/cmd/efidebug.c
-> @@ -741,9 +741,11 @@ static int efi_boot_add_uri(int argc, char *const argv[], u16 *var_name16,
->         if (!label)
->                 return CMD_RET_FAILURE;
->
-> -       if (!wget_validate_uri(argv[3])) {
-> -               printf("ERROR: invalid URI\n");
-> -               return CMD_RET_FAILURE;
-> +       if (IS_ENABLED(CONFIG_CMD_WGET)) {
-> +               if (!wget_validate_uri(argv[3])) {
-> +                       printf("ERROR: invalid URI\n");
-> +                       return CMD_RET_FAILURE;
-> +               }
->         }
->
->         efi_create_indexed_name(var_name16, var_name16_size, "Boot", id);
-> diff --git a/cmd/net-common.c b/cmd/net-common.c
-> new file mode 100644
-> index 00000000000..f01d9e63998
-> --- /dev/null
-> +++ b/cmd/net-common.c
-> @@ -0,0 +1,115 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * (C) Copyright 2000
-> + * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
-> + */
-> +
-> +#include <command.h>
-> +#include <dm/device.h>
-> +#include <dm/uclass.h>
-> +#ifdef CONFIG_NET
-> +#include <net.h>
-> +#elif defined CONFIG_NET_LWIP
-> +#include <net-lwip.h>
-> +#else
-> +#error Either NET or NET_LWIP must be enabled
-> +#endif
-> +#include <linux/compat.h>
-> +#include <linux/ethtool.h>
-> +
-> +static int do_net_list(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-> +{
-> +       const struct udevice *current = eth_get_dev();
-> +       unsigned char env_enetaddr[ARP_HLEN];
-> +       const struct udevice *dev;
-> +       struct uclass *uc;
-> +
-> +       uclass_id_foreach_dev(UCLASS_ETH, dev, uc) {
-> +               eth_env_get_enetaddr_by_index("eth", dev_seq(dev), env_enetaddr);
-> +               printf("eth%d : %s %pM %s\n", dev_seq(dev), dev->name, env_enetaddr,
-> +                      current == dev ? "active" : "");
-> +       }
-> +       return CMD_RET_SUCCESS;
-> +}
-> +
-> +static int do_net_stats(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-> +{
-> +       int nstats, err, i, off;
-> +       struct udevice *dev;
-> +       u64 *values;
-> +       u8 *strings;
-> +
-> +       if (argc < 2)
-> +               return CMD_RET_USAGE;
-> +
-> +       err = uclass_get_device_by_name(UCLASS_ETH, argv[1], &dev);
-> +       if (err) {
-> +               printf("Could not find device %s\n", argv[1]);
-> +               return CMD_RET_FAILURE;
-> +       }
-> +
-> +       if (!eth_get_ops(dev)->get_sset_count ||
-> +           !eth_get_ops(dev)->get_strings ||
-> +           !eth_get_ops(dev)->get_stats) {
-> +               printf("Driver does not implement stats dump!\n");
-> +               return CMD_RET_FAILURE;
-> +       }
-> +
-> +       nstats = eth_get_ops(dev)->get_sset_count(dev);
-> +       strings = kcalloc(nstats, ETH_GSTRING_LEN, GFP_KERNEL);
-> +       if (!strings)
-> +               return CMD_RET_FAILURE;
-> +
-> +       values = kcalloc(nstats, sizeof(u64), GFP_KERNEL);
-> +       if (!values)
-> +               goto err_free_strings;
-> +
-> +       eth_get_ops(dev)->get_strings(dev, strings);
-> +       eth_get_ops(dev)->get_stats(dev, values);
-> +
-> +       off = 0;
-> +       for (i = 0; i < nstats; i++) {
-> +               printf("  %s: %llu\n", &strings[off], values[i]);
-> +               off += ETH_GSTRING_LEN;
-> +       };
-> +
-> +       kfree(strings);
-> +       kfree(values);
-> +
-> +       return CMD_RET_SUCCESS;
-> +
-> +err_free_strings:
-> +       kfree(strings);
-> +
-> +       return CMD_RET_FAILURE;
-> +}
-> +
-> +static struct cmd_tbl cmd_net[] = {
-> +       U_BOOT_CMD_MKENT(list, 1, 0, do_net_list, "", ""),
-> +       U_BOOT_CMD_MKENT(stats, 2, 0, do_net_stats, "", ""),
-> +};
-> +
-> +static int do_net(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-> +{
-> +       struct cmd_tbl *cp;
-> +
-> +       cp = find_cmd_tbl(argv[1], cmd_net, ARRAY_SIZE(cmd_net));
-> +
-> +       /* Drop the net command */
-> +       argc--;
-> +       argv++;
-> +
-> +       if (!cp || argc > cp->maxargs)
-> +               return CMD_RET_USAGE;
-> +       if (flag == CMD_FLAG_REPEAT && !cmd_is_repeatable(cp))
-> +               return CMD_RET_SUCCESS;
-> +
-> +       return cp->cmd(cmdtp, flag, argc, argv);
-> +}
-> +
-> +U_BOOT_CMD(
-> +       net, 3, 1, do_net,
-> +       "NET sub-system",
-> +       "list - list available devices\n"
-> +       "stats <device> - dump statistics for specified device\n"
-> +);
-> diff --git a/cmd/net-lwip.c b/cmd/net-lwip.c
-> index 3abafdf7969..b80375c831e 100644
-> --- a/cmd/net-lwip.c
-> +++ b/cmd/net-lwip.c
-> @@ -2,6 +2,10 @@
->  /* Copyright (C) 2024 Linaro Ltd. */
->
->  #include <command.h>
-> +#include <dm/device.h>
-> +#include <dm/uclass.h>
-> +#include <linux/compat.h>
-> +#include <linux/ethtool.h>
->  #include <net-lwip.h>
->
->  #if defined(CONFIG_CMD_DHCP)
-> @@ -35,3 +39,11 @@ U_BOOT_CMD(
->         "hostname [envvar]"
->  );
->  #endif
-> +
-> +#if defined(CONFIG_CMD_WGET)
-> +U_BOOT_CMD(
-> +       wget,   3,      1,      do_wget,
-> +       "boot image via network using HTTP protocol",
-> +       "[loadAddress] URL"
-> +);
-> +#endif
-> diff --git a/cmd/net.c b/cmd/net.c
-> index d407d8320a3..03b4582204f 100644
-> --- a/cmd/net.c
-> +++ b/cmd/net.c
-> @@ -676,118 +676,3 @@ U_BOOT_CMD(
->  );
->
->  #endif  /* CONFIG_CMD_LINK_LOCAL */
-> -
-> -static int do_net_list(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-> -{
-> -       const struct udevice *current = eth_get_dev();
-> -       unsigned char env_enetaddr[ARP_HLEN];
-> -       const struct udevice *dev;
-> -       struct uclass *uc;
-> -
-> -       uclass_id_foreach_dev(UCLASS_ETH, dev, uc) {
-> -               eth_env_get_enetaddr_by_index("eth", dev_seq(dev), env_enetaddr);
-> -               printf("eth%d : %s %pM %s\n", dev_seq(dev), dev->name, env_enetaddr,
-> -                      current == dev ? "active" : "");
-> -       }
-> -       return CMD_RET_SUCCESS;
-> -}
-> -
-> -static int do_net_stats(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-> -{
-> -       int nstats, err, i, off;
-> -       struct udevice *dev;
-> -       u64 *values;
-> -       u8 *strings;
-> -
-> -       if (argc < 2)
-> -               return CMD_RET_USAGE;
-> -
-> -       err = uclass_get_device_by_name(UCLASS_ETH, argv[1], &dev);
-> -       if (err) {
-> -               printf("Could not find device %s\n", argv[1]);
-> -               return CMD_RET_FAILURE;
-> -       }
-> -
-> -       if (!eth_get_ops(dev)->get_sset_count ||
-> -           !eth_get_ops(dev)->get_strings ||
-> -           !eth_get_ops(dev)->get_stats) {
-> -               printf("Driver does not implement stats dump!\n");
-> -               return CMD_RET_FAILURE;
-> -       }
-> -
-> -       nstats = eth_get_ops(dev)->get_sset_count(dev);
-> -       strings = kcalloc(nstats, ETH_GSTRING_LEN, GFP_KERNEL);
-> -       if (!strings)
-> -               return CMD_RET_FAILURE;
-> -
-> -       values = kcalloc(nstats, sizeof(u64), GFP_KERNEL);
-> -       if (!values)
-> -               goto err_free_strings;
-> -
-> -       eth_get_ops(dev)->get_strings(dev, strings);
-> -       eth_get_ops(dev)->get_stats(dev, values);
-> -
-> -       off = 0;
-> -       for (i = 0; i < nstats; i++) {
-> -               printf("  %s: %llu\n", &strings[off], values[i]);
-> -               off += ETH_GSTRING_LEN;
-> -       };
-> -
-> -       return CMD_RET_SUCCESS;
-> -
-> -err_free_strings:
-> -       kfree(strings);
-> -
-> -       return CMD_RET_FAILURE;
-> -}
-> -
-> -static struct cmd_tbl cmd_net[] = {
-> -       U_BOOT_CMD_MKENT(list, 1, 0, do_net_list, "", ""),
-> -       U_BOOT_CMD_MKENT(stats, 2, 0, do_net_stats, "", ""),
-> -};
-> -
-> -static int do_net(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-> -{
-> -       struct cmd_tbl *cp;
-> -
-> -       cp = find_cmd_tbl(argv[1], cmd_net, ARRAY_SIZE(cmd_net));
-> -
-> -       /* Drop the net command */
-> -       argc--;
-> -       argv++;
-> -
-> -       if (!cp || argc > cp->maxargs)
-> -               return CMD_RET_USAGE;
-> -       if (flag == CMD_FLAG_REPEAT && !cmd_is_repeatable(cp))
-> -               return CMD_RET_SUCCESS;
-> -
-> -       return cp->cmd(cmdtp, flag, argc, argv);
-> -}
-> -
-> -U_BOOT_CMD(
-> -       net, 3, 1, do_net,
-> -       "NET sub-system",
-> -       "list - list available devices\n"
-> -       "stats <device> - dump statistics for specified device\n"
-> -);
-> -
-> -#if defined(CONFIG_CMD_NCSI)
-> -static int do_ncsi(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
-> -{
-> -       if (!phy_interface_is_ncsi() || !ncsi_active()) {
-> -               printf("Device not configured for NC-SI\n");
-> -               return CMD_RET_FAILURE;
-> -       }
-> -
-> -       if (net_loop(NCSI) < 0)
-> -               return CMD_RET_FAILURE;
-> -
-> -       return CMD_RET_SUCCESS;
-> -}
-> -
-> -U_BOOT_CMD(
-> -       ncsi,   1,      1,      do_ncsi,
-> -       "Configure attached NIC via NC-SI",
-> -       ""
-> -);
-> -#endif  /* CONFIG_CMD_NCSI */
-> diff --git a/include/net-lwip.h b/include/net-lwip.h
-> index 0019d1524e5..6fda940fec2 100644
-> --- a/include/net-lwip.h
-> +++ b/include/net-lwip.h
-> @@ -51,6 +51,56 @@ int eth_env_get_enetaddr_by_index(const char *base_name, int index,
->  int eth_init(void);                    /* Initialize the device */
->  int eth_send(void *packet, int length);           /* Send a packet */
->  int eth_rx(void);
-> +
-> +/**
-> + * struct eth_ops - functions of Ethernet MAC controllers
-> + *
-> + * start: Prepare the hardware to send and receive packets
-> + * send: Send the bytes passed in "packet" as a packet on the wire
-> + * recv: Check if the hardware received a packet. If so, set the pointer to the
-> + *      packet buffer in the packetp parameter. If not, return an error or 0 to
-> + *      indicate that the hardware receive FIFO is empty. If 0 is returned, the
-> + *      network stack will not process the empty packet, but free_pkt() will be
-> + *      called if supplied
-> + * free_pkt: Give the driver an opportunity to manage its packet buffer memory
-> + *          when the network stack is finished processing it. This will only be
-> + *          called when no error was returned from recv - optional
-> + * stop: Stop the hardware from looking for packets - may be called even if
-> + *      state == PASSIVE
-> + * mcast: Join or leave a multicast group (for TFTP) - optional
-> + * write_hwaddr: Write a MAC address to the hardware (used to pass it to Linux
-> + *              on some platforms like ARM). This function expects the
-> + *              eth_pdata::enetaddr field to be populated. The method can
-> + *              return -ENOSYS to indicate that this is not implemented for
-> +                this hardware - optional.
-> + * read_rom_hwaddr: Some devices have a backup of the MAC address stored in a
-> + *                 ROM on the board. This is how the driver should expose it
-> + *                 to the network stack. This function should fill in the
-> + *                 eth_pdata::enetaddr field - optional
-> + * set_promisc: Enable or Disable promiscuous mode
-> + * get_sset_count: Number of statistics counters
-> + * get_string: Names of the statistic counters
-> + * get_stats: The values of the statistic counters
-> + */
-> +struct eth_ops {
-> +       int (*start)(struct udevice *dev);
-> +       int (*send)(struct udevice *dev, void *packet, int length);
-> +       int (*recv)(struct udevice *dev, int flags, uchar **packetp);
-> +       int (*free_pkt)(struct udevice *dev, uchar *packet, int length);
-> +       void (*stop)(struct udevice *dev);
-> +       int (*mcast)(struct udevice *dev, const u8 *enetaddr, int join);
-> +       int (*write_hwaddr)(struct udevice *dev);
-> +       int (*read_rom_hwaddr)(struct udevice *dev);
-> +       int (*set_promisc)(struct udevice *dev, bool enable);
-> +       int (*get_sset_count)(struct udevice *dev);
-> +       void (*get_strings)(struct udevice *dev, u8 *data);
-> +       void (*get_stats)(struct udevice *dev, u64 *data);
-> +};
-> +
-> +#define eth_get_ops(dev) ((struct eth_ops *)(dev)->driver->ops)
-> +
-> +struct udevice *eth_get_dev(void); /* get the current device */
-> +int eth_get_dev_index(void);
->  const char *eth_get_name(void);
->  int eth_get_dev_index(void);
->  int eth_init_state_only(void); /* Set active state */
-> @@ -85,5 +135,6 @@ int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
->  int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
->  int do_ping(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
->  int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
-> +int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
->
->  #endif /* __NET_LWIP_H__ */
-> diff --git a/net-lwip/Makefile b/net-lwip/Makefile
-> index aa247859483..bc011bb0e32 100644
-> --- a/net-lwip/Makefile
-> +++ b/net-lwip/Makefile
-> @@ -10,6 +10,7 @@ obj-$(CONFIG_CMD_DHCP) += dhcp.o
->  obj-$(CONFIG_CMD_DNS) += dns.o
->  obj-$(CONFIG_CMD_PING) += ping.o
->  obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
-> +obj-$(CONFIG_CMD_WGET) += wget.o
->
->  # Disable this warning as it is triggered by:
->  # sprintf(buf, index ? "foo%d" : "foo", index)
-> diff --git a/net-lwip/wget.c b/net-lwip/wget.c
-> new file mode 100644
-> index 00000000000..e3e6f525674
-> --- /dev/null
-> +++ b/net-lwip/wget.c
-> @@ -0,0 +1,180 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/* Copyright (C) 2024 Linaro Ltd. */
-> +
-> +#include <command.h>
-> +#include <console.h>
-> +#include <display_options.h>
-> +#include <image.h>
-> +#include <lwip/apps/http_client.h>
-> +#include <lwip/timeouts.h>
-> +#include <net-lwip.h>
-> +#include <time.h>
-> +
-> +#define SERVER_NAME_SIZE 200
-> +#define HTTP_PORT_DEFAULT 80
-> +
-> +static ulong daddr;
-> +static ulong saved_daddr;
-> +static ulong size;
-> +static ulong prevsize;
-> +#define PROGRESS_PRINT_STEP_BYTES (100 * 1024)
-> +static ulong start_time;
-> +static enum done_state {
-> +        NOT_DONE = 0,
-> +        SUCCESS = 1,
-> +        FAILURE = 2
-> +} done;
-> +
-> +static int parse_url(char *url, char *host, u16 *port, char **path)
-> +{
-> +       char *p, *pp;
-> +       long lport;
-> +
-> +       p = strstr(url, "http://");
-> +       if (!p)
-> +               return -EINVAL;
-> +
-> +       p += strlen("http://");
-> +
-> +       /* Parse hostname */
-> +       pp = strchr(p, ':');
-> +       if (!pp)
-> +               pp = strchr(p, '/');
-> +       if (!pp)
-> +               return -EINVAL;
-> +
-> +       if (p + SERVER_NAME_SIZE <= pp)
-> +               return -EINVAL;
-> +
-> +       memcpy(host, p, pp - p);
-> +       host[pp - p + 1] = '\0';
-> +
-> +       if (*pp == ':') {
-> +               /* Parse port number */
-> +               p = pp + 1;
-> +               lport = simple_strtol(p, &pp, 10);
-> +               if (pp && *pp != '/')
-> +                       return -EINVAL;
-> +               if (lport > 65535)
-> +                       return -EINVAL;
-> +               *port = (u16)lport;
-> +       } else {
-> +               *port = HTTP_PORT_DEFAULT;
-> +       }
-> +       if (*pp != '/')
-> +               return -EINVAL;
-> +       *path = pp;
-> +
-> +       return 0;
-> +}
-> +
-> +static err_t httpc_recv_cb(void *arg, struct altcp_pcb *pcb, struct pbuf *pbuf,
-> +                          err_t err)
-> +{
-> +       struct pbuf *buf;
-> +
-> +       if (!pbuf)
-> +               return ERR_BUF;
-> +
-> +       for (buf = pbuf; buf; buf = buf->next) {
-> +               memcpy((void *)daddr, buf->payload, buf->len);
-> +               daddr += buf->len;
-> +               size += buf->len;
-> +               if (size - prevsize > PROGRESS_PRINT_STEP_BYTES) {
-> +                       printf("#");
-> +                       prevsize = size;
-> +               }
-> +       }
-> +
-> +       altcp_recved(pcb, pbuf->tot_len);
-> +       pbuf_free(pbuf);
-> +       return ERR_OK;
-> +}
-> +
-> +static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
-> +                           u32_t rx_content_len, u32_t srv_res, err_t err)
-> +{
-> +       ulong elapsed;
-> +
-> +       if (httpc_result != HTTPC_RESULT_OK) {
-> +               log_err("\nHTTP client error %d\n", httpc_result);
-> +               done = FAILURE;
-> +               return;
-> +       }
-> +
-> +       elapsed = get_timer(start_time);
-> +        log_info("\n%u bytes transferred in %lu ms (", rx_content_len,
-> +                 get_timer(start_time));
-> +        print_size(rx_content_len / elapsed * 1000, "/s)\n");
-> +
-> +       if (env_set_hex("filesize", rx_content_len) ||
-> +           env_set_hex("fileaddr", saved_daddr)) {
-> +               log_err("Could not set filesize or fileaddr\n");
-> +               done = FAILURE;
-> +               return;
-> +       }
-> +
-> +       done = SUCCESS;
-> +}
-> +
-> +int wget_with_dns(ulong dst_addr, char *uri)
-> +{
-> +       char server_name[SERVER_NAME_SIZE];
-> +       httpc_connection_t conn;
-> +       httpc_state_t *state;
-> +       char *path;
-> +       u16 port;
-> +
-> +       daddr = dst_addr;
-> +       saved_daddr = dst_addr;
-> +       done = NOT_DONE;
-> +       size = 0;
-> +       prevsize = 0;
-> +
-> +       if (parse_url(uri, server_name, &port, &path))
-> +               return CMD_RET_USAGE;
-> +
-> +       memset(&conn, 0, sizeof(conn));
-> +       conn.result_fn = httpc_result_cb;
-> +       start_time = get_timer(0);
-> +       if (httpc_get_file_dns(server_name, port, path, &conn, httpc_recv_cb,
-> +                              NULL, &state))
-> +               return CMD_RET_FAILURE;
-> +
-> +       while (!done) {
-> +               eth_rx();
-> +               sys_check_timeouts();
-> +               if (ctrlc())
-> +                       break;
-> +       }
-> +
-> +       if (done == SUCCESS)
-> +               return 0;
-> +
-> +       return -1;
-> +}
-> +
-> +int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
-> +{
-> +       char *end;
-> +       char *url;
-> +       ulong dst_addr;
-> +
-> +       if (argc < 2 || argc > 3)
-> +               return CMD_RET_USAGE;
-> +
-> +       dst_addr = hextoul(argv[1], &end);
-> +        if (end == (argv[1] + strlen(argv[1]))) {
-> +               if (argc < 3)
-> +                       return CMD_RET_USAGE;
-> +               url = argv[2];
-> +       } else {
-> +               dst_addr = image_load_addr;
-> +               url = argv[1];
-> +       }
-> +
-> +       if (wget_with_dns(dst_addr, url))
-> +               return CMD_RET_FAILURE;
-> +
-> +       return CMD_RET_SUCCESS;
-> +}
-> --
-> 2.40.1
->
+We should delete it and make sure the vboot docs are still up to date /
+correct.
+
+--=20
+Tom
+
+--nCQ8zUkDd6/02pQx
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZh2WEACgkQFHw5/5Y0
+tyyahAwAmnHNqOX2UY9moLw8szqYNdUf6AuBkg206WYTL3LoBy+ctdzL14St2zh+
+tW6qYdv018KOGWfTm+degxdjFE1wkJZZETRDVtjCXgGIgNwf3RY2Evm6CEetvpG9
+Wyz0cutCXYDt4Esa6KDZeNS1H9jiyOGVqknpoT2dZ6o2q0rGWWKXhXE0XQsAj29o
+DiZeMo9wmEHV9EP64/59TuVwOo6tBJiJ/DvpHMzYlP38TxqBnsji9f74qpq1VymQ
+1RNtdzLRsNgygkCD6At/F9UgSDMAaQjP7pV98LNLvUL2MMxBcPgNX5voaRCHvnDB
+1JxZVDyUPtYNyH9ilgfgDlKOsGGuRg9yMOjI9tNHvaqzlsTAWMj/8K7ODJ7OSFfo
+FelCGg5uFjWYMmWEQ8ZFd7Ok8Uud8pvkZPqTMIyDjGqEF/2Dtq24zBzoW0pmNPQ8
+sqqxKyUAa92l60SFFGJNs4qLRmYlDK0bn0AQDW3fJDkxPE3U3y402HtBswQ6f5nV
+QpaYxUhQ
+=DYhk
+-----END PGP SIGNATURE-----
+
+--nCQ8zUkDd6/02pQx--
