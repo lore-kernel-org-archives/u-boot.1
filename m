@@ -4,76 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74198C27C54
-	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 13:38:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC87CC27C54
+	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 13:38:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D76F88453;
-	Thu,  6 Jun 2024 15:37:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0A79988476;
+	Thu,  6 Jun 2024 15:37:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UaNMO/eX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rWR5qizH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1094888464; Thu,  6 Jun 2024 15:37:18 +0200 (CEST)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
+ id 4184788464; Thu,  6 Jun 2024 15:37:18 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 798A98846E
- for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 15:37:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0501088499
+ for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 15:37:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-52b88335dd7so1214595e87.1
- for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 06:37:15 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-421208c97a2so9855685e9.1
+ for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 06:37:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1717681034; x=1718285834; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1717681035; x=1718285835; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jbMRm/KnE79A7lsy/7kwhP2w6DrKnyYEC4cqafPFDpM=;
- b=UaNMO/eXed8yITIWh91wYbEAgcUKvZrRl6NSbBpt/9+5alul4aMXh7ocZO50EHWV7Z
- EO9MoEWKShkfyUAo15vbgeeZ1CYCyHCLHaKEp9fY/XP8DR5lYZls/APynj9Kin+IdsiZ
- w4vfS3VHGGMPe2N4Nou9BTj3vRlNIA/HbnmgjPFnuVYe4TH+TvtJbws6vcXh+8n0Kehk
- keHv8IkMWC2sn2Owj21mHvr+B3wfifWvrP2kPS7eqAT/fLpKjTu5MvOuZZ6Kp/rrG+LB
- 2A1Nbs/NFiJ5CdLg9OtdB4zz0/7EGPyqGfWvxsvLQPbCd8L46R78Dh9FjPMb/pIq/W0E
- v6bQ==
+ bh=qqVqLn066MM3njEiUrH9ehDx4F2etQZeP2c8uVrZpho=;
+ b=rWR5qizHj5QNBMLvyCLySFdX+6E6OBw4q2zAdHUO/lYJMyL31hrlwl+lsqtL8GTAEw
+ rmdtdbbrmHGMK8e+UoQMvu5fY2TmdgKqPuXtsfpx81yEo5zP1Kwu3n6It8zfuyO1evCZ
+ 1mmBV6v0Xh0pmP0sWRTy3sJskqItC2nbodnpPZVy67psONE2i3hNU5hDWiSiO3chBoqh
+ vni0bcaNrQDuHwevVwExBnMPT7T6eYnHDNZEFQL8Ym3b4E1eMqLkNetKeR1HsJ3frnMS
+ tWKnSlGG/SSLJQfTeuNycO2wcr6YEkVGq6r12yBZCrP7GsFMbEbcZkGbRTWb2rFWI8ze
+ Jpzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717681034; x=1718285834;
+ d=1e100.net; s=20230601; t=1717681035; x=1718285835;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jbMRm/KnE79A7lsy/7kwhP2w6DrKnyYEC4cqafPFDpM=;
- b=eFKwUY6vcXDN2vxejXj8N7Y4MinpvGy9vzH73MOX/3MPi+UYniyV+igjqYZOjnyU/P
- zWMahdzkAjmqnTx8LrViUBCaeHPMIFSfaudDxecM1+57DFgJ4RpbYcl2yetRj1YJaFkn
- ofNfQnM8fa7GflRdVEgsuIcifgISP4WLDFo8lebfhnvMLHjWNIUGNQB86syEg0sbH+nh
- FGjSL38qOBHFGV5AL5B9GXjdD64Yj9LqZRjqL5kUva8Er/3lIdCUx/nnB2ZQesciBHpm
- t5IKOrvTf7Rt+46kZzU9MPdvITIdbC72DxTtHWR5B0XEg0JyvoyqCjEDmwBiTV3bOxdp
- QcWA==
-X-Gm-Message-State: AOJu0YyZQLFlY7+LS0g+D5YmRAzYhbFONgDPkVM6vNYy2X4JZRqOys5y
- vV9MlwsBq6vXlzOhu4yHCbobU0NU1qryZ5xuKdCi+V3h7MsL9t6szcv26N8KzvZ7rU10AlHcQ2J
- Tvs6JKG85
-X-Google-Smtp-Source: AGHT+IHfH+tRoWDXC4MCxI3UdOAJy/q+Ha1sGbmPdiFCDtLNyzgGrGDGvzVQLR3Iyg7Hz8oHAFFgpA==
-X-Received: by 2002:a05:6512:3254:b0:526:92d7:52d4 with SMTP id
- 2adb3069b0e04-52bab4fb447mr2873511e87.61.1717681033975; 
- Thu, 06 Jun 2024 06:37:13 -0700 (PDT)
+ bh=qqVqLn066MM3njEiUrH9ehDx4F2etQZeP2c8uVrZpho=;
+ b=pNVtjIRowxITW9HldlXWMhu0I1dt2AWUUaj0gCBmVU2aoT+L7XSXlxKpI9zMV6TTXB
+ xuMyvUBabgudL1UGG+GbIcAM+jnUMu3ZWt2Oms+NW0q7Nxl4p4Av59gHHyalzk5u/YCr
+ f4sZprioQP2gxP/1YpVDoeIwRZs38cKJ3giW5OegrFsoAu95ATN3nrrD719Ds1VQlBvh
+ 6ILeT/rxhPkcSi4vKnlqBvCtR519QXBvLikGmy7ASghNUGGS6JsOryEJDyDszRdvacGp
+ f6h6KiWkR3tWgqGtxwk+KmzaBYvEimB3anXjkzAY3xtONonUUPddiAdlOe16Et17oOwa
+ BFcw==
+X-Gm-Message-State: AOJu0YxTgSK3tKsWd/UL/A78u/FCMzuzxEcbHUNKRHnNchBNAW68toJM
+ J5Mr3teStaBlAdsuiTStceGVDkv3dpofGOpLIt/2w2D+ioa/ZBAxdUXt+DxzPzJ/SdWETHt3kwE
+ jjVrAwZ4e
+X-Google-Smtp-Source: AGHT+IHWPsxOwAPy782heI9A6kvHY6pMryW0Ti1JdRr/gPhd1i/n4lqEHr1/PgDnH/ZZSZ4C44U2gg==
+X-Received: by 2002:a05:600c:458d:b0:420:2983:2229 with SMTP id
+ 5b1f17b1804b1-421562e6358mr53315695e9.22.1717681035366; 
+ Thu, 06 Jun 2024 06:37:15 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:6417:8cf6:a7f7:ee38])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4215c19d52dsm23111955e9.8.2024.06.06.06.37.13
+ 5b1f17b1804b1-4215c19d52dsm23111955e9.8.2024.06.06.06.37.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Jun 2024 06:37:13 -0700 (PDT)
+ Thu, 06 Jun 2024 06:37:14 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 10/12] configs: add qemu_arm64_lwip_defconfig
-Date: Thu,  6 Jun 2024 15:36:05 +0200
-Message-Id: <908e69080417054ebe50ec67c803d0697e8b53c0.1717680809.git.jerome.forissier@linaro.org>
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Subject: [PATCH v3 11/12] MAINTAINERS: net-lwip: add myself as a maintainer
+Date: Thu,  6 Jun 2024 15:36:06 +0200
+Message-Id: <a49d313c767c7b3cd92fc2ca09d0701e39ca65c4.1717680809.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1717680809.git.jerome.forissier@linaro.org>
 References: <cover.1717680809.git.jerome.forissier@linaro.org>
@@ -95,24 +103,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add qemu_arm64_lwip_defconfig based on qemu_arm64_defconfig but
-with NET_LWIP instead of NET.
+Add myself as a maintainer for the lwIP network stack integration code
+and network commands. The library code itself (i.e., most files under
+lib/lwip/ except README, Makefile and integration files in u-boot) is
+unmodified from upstream and therefore does not need a maintainer.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- configs/qemu_arm64_lwip_defconfig | 3 +++
- 1 file changed, 3 insertions(+)
- create mode 100644 configs/qemu_arm64_lwip_defconfig
+ MAINTAINERS | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/configs/qemu_arm64_lwip_defconfig b/configs/qemu_arm64_lwip_defconfig
-new file mode 100644
-index 00000000000..050c93ff97b
---- /dev/null
-+++ b/configs/qemu_arm64_lwip_defconfig
-@@ -0,0 +1,3 @@
-+#include <configs/qemu_arm64_defconfig>
-+CONFIG_NET_LWIP=y
-+# CONFIG_DFU_TFTP is not set
+diff --git a/MAINTAINERS b/MAINTAINERS
+index f8afd7d51e2..11105869304 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1310,6 +1310,17 @@ F:	drivers/net/
+ F:	include/net.h
+ F:	net/
+ 
++NETWORK (LWIP)
++M:	Jerome Forissier <jerome.forissier@linaro.org>
++S:	Maintained
++F:	cmd/net-lwip.c
++F:	configs/qemu_arm64_lwip_defconfig
++F:	include/net-lwip.h
++F:	lib/lwip/Makefile
++F:	lib/lwip/README
++F:	lib/lwip/u-boot/
++F:	net-lwip/
++
+ NIOS
+ M:	Thomas Chou <thomas@wytron.com.tw>
+ S:	Maintained
 -- 
 2.40.1
 
