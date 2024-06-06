@@ -4,159 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66B98C25B75
-	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 15:35:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D740C25B75
+	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 15:42:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA3EF881A1;
-	Thu,  6 Jun 2024 17:35:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id B075D881A1;
+	Thu,  6 Jun 2024 17:42:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="VCAn9ABF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RkmXDHsn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C22F8817C; Thu,  6 Jun 2024 17:35:04 +0200 (CEST)
-Received: from EUR01-VE1-obe.outbound.protection.outlook.com
- (mail-ve1eur01on20701.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2602::701])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id CDDD688216; Thu,  6 Jun 2024 17:42:22 +0200 (CEST)
+Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
+ [IPv6:2607:f8b0:4864:20::1031])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A851F88274
- for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 17:35:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id A27CC87F5C
+ for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 17:42:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=bauOnJHSLzwSfJSABrAmetWc3SP8GmBEqJb8lNLOGbUKkQ287AdTy3vugO0wFJByq8qjeHyTXP3QzKa1IaxcUdMGQir2xZo6ZdYRxxu4L/1hQLE0VNOjibXed5Dv+X4Ma0ew8Us4tPBTzcEb428dUINXI/lx8N/ek9Lnf/BqPa4VA/skrWYor8GFckiDC8S4q8Bwi+GI7aPF7RrbD7yqZTCczfrnXC1PpKWG6R0P3eyu1KPKUv3xpg43oHU1i09I+YzHzjXvsyP7+rNpi/N/eYkTg8Mn8uJjo4+cJeIW1YXQ8erSSxPRgRMDcqfAugy5ZDgDNc/mAVQTvQltp0VTxw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FPXCkJed6K5F3VPjYvADUDltV3l8ZWvHzkIEj31pf/U=;
- b=Vtfqf4riElYTr9IiALuGUFVq/HeFToZmiDPDxc5ubVOuhJHe9Qeo4nn1cgd2MoDy8nQ6gg3ZPuDITM2LJlGhoQSNcso/i9bQ4jFiz47FCrPurnpXHbqm6uyjRNPFl63zWz3D20qsmUl7Z7KdWGRMBl8dIjKLvHDhNpzMra6PK/WI+1FPihRveN/5Hd5ABKun/jhpjNfawiNJtFWyBrMVFhUE8kHdureZFosLaPUIoKC3pYj54fs9KLlQJiCnR5u7KND+G3RCatgrF+x84D7Le113dfPs5RvFZPL2eGo4ukdjgfVtQBVreHjbkx2hrWkQDzKz/vM7prdcCj5MTjE2iw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FPXCkJed6K5F3VPjYvADUDltV3l8ZWvHzkIEj31pf/U=;
- b=VCAn9ABFr9sA6++e74+e+6fL9/TW4vzSGtUEYnEAVCvHjLbA8lKG/Deh63cHpE/NZMAMcA2h/gwPm0nHHDlyqW5rQcgU/C9DlSGBI96bSWsNs+v3vbTRZHRYg0EqCWWj82BXkwLSsm7ijshUp0f3uNXsHIK5/Vts8WCtpBwPM3M=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from PA4PR04MB7982.eurprd04.prod.outlook.com (2603:10a6:102:c4::9)
- by DB8PR04MB7033.eurprd04.prod.outlook.com (2603:10a6:10:125::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.33; Thu, 6 Jun
- 2024 15:34:58 +0000
-Received: from PA4PR04MB7982.eurprd04.prod.outlook.com
- ([fe80::3c4:afd5:49ac:77af]) by PA4PR04MB7982.eurprd04.prod.outlook.com
- ([fe80::3c4:afd5:49ac:77af%4]) with mapi id 15.20.7633.033; Thu, 6 Jun 2024
- 15:34:58 +0000
-Message-ID: <a9b83883-f429-46c7-a2d8-0be187ad3be4@cherry.de>
-Date: Thu, 6 Jun 2024 17:34:55 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH] drivers: bootcount: Add support for FAT filesystem
-To: Vasileios Amoiridis <vassilisamir@gmail.com>, trini@konsulko.com,
- hs@denx.de, pro@denx.de
-Cc: vasileios.amoiridis@cern.ch, u-boot@lists.denx.de
-References: <20240605181041.68317-1-vassilisamir@gmail.com>
- <20240605181041.68317-2-vassilisamir@gmail.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20240605181041.68317-2-vassilisamir@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA1P291CA0023.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:19::7) To PA4PR04MB7982.eurprd04.prod.outlook.com
- (2603:10a6:102:c4::9)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pj1-x1031.google.com with SMTP id
+ 98e67ed59e1d1-2c283f0da84so847392a91.3
+ for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 08:42:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1717688538; x=1718293338; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=aEBX9+gV6BxVUlWy5ZLr92lZFcNRcKpTF3Ghod6BpxE=;
+ b=RkmXDHsnw6T6toTDT6xsltstGzpg6QdbiQBMrqHWe9MWzEaFhfvVjWIE+tnXWR2IGl
+ ozwuVo5RtDENA2UJQTvqZUZdbcGdAX5yEPhPy/OCb7Occcrsn3PtvaMqhzXlQDyM/IzL
+ a2c3GSA/EKKizikFKAv2syJNAIyHJaFiJR2sbKGTbvZafe+xMw8hbGIIPmuQeurdZ+w3
+ 4Zy0GUACI2sQnlv+MI0SodTtO2dPIJvcXWeegpYCfLFXDxP85XViJhce2CYBaTJYeUQP
+ 0Ak7gAbdyATqkCUsZ+SIJ1b7JZQushc4EvCjodM1qfvU+VUmx5mKqvGZAS69e6nEnewY
+ q9ZA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717688538; x=1718293338;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=aEBX9+gV6BxVUlWy5ZLr92lZFcNRcKpTF3Ghod6BpxE=;
+ b=vBqiHPkKo1NUBZjLVhjtBfdRhs0YDdQqAyoQh0kZMeeKrddxk8MSb9qLfPZEzvhdNy
+ 04yko1WSjDMa9tAnVzmj5hnjwgNO+zBUvAzA/dhoNv6iWP9aE/sOYKs41PUNROxkHsDw
+ woXdJmHx+4mrxMbGZ5RoRr3uECMYKD6vXV5RnPIHX14SofTXi34sOXH2dmNxKDk6WSud
+ XDi0Rqf6ohetSdznC7mSVtHX7G7a9sKKA79bZAZdWbxgsCzML70SuYWIPFNXu099QLhv
+ kSAG1ZPSmD1QzhEMdc/p0RxqHOZNjTEhKrjCeJcbK+iB/vkvxau1dFVIVPS93iUxlhMd
+ +KgQ==
+X-Gm-Message-State: AOJu0Yx8gKUFwh7zfMiSI3YFdpyDAWwRlMTMj9EF0oN6dkNir3SYKpcl
+ jbijaYLiKJgVzlYPOiKJmSyuiHsLJIryJ7zO5IVFENnFIYDsw6QmBoWayQ406XujlQW/jHEuCam
+ ArPhQUdrV5s1STPiFpQCfkLjRv100X78qkharvg==
+X-Google-Smtp-Source: AGHT+IGKf6GZuLhro7tYOCK4A2ECIa/D4nzczZDklxJYQ4Xw86+w3N21HKfo39HKt4vP6pqNrqxXQ+eNHIEx1frz6j4=
+X-Received: by 2002:a17:90b:46c4:b0:2bd:f1d5:8e3f with SMTP id
+ 98e67ed59e1d1-2c27db6cbfemr5811163a91.41.1717688537804; Thu, 06 Jun 2024
+ 08:42:17 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB7982:EE_|DB8PR04MB7033:EE_
-X-MS-Office365-Filtering-Correlation-Id: c1ac3a0f-49c7-428e-382f-08dc863e3903
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230031|1800799015|376005|366007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?RWtIeUY2UlFYTmdSUk0zTS9wMEl6RVplUHBWM1A2ZFluT0IrZC9jU1R2TFVG?=
- =?utf-8?B?bjlvMGpybGlZWEw1VXhOWElJc0tmSWU3YjlWTEpkdEdUUUsrcmVlOGF0a01N?=
- =?utf-8?B?OTRHd1QzNmNEV1RhNjF6WU01eWZoeXlZL2c1UGdiVUIrSzBZbU9GbnhjSC9W?=
- =?utf-8?B?TmFtTzF6NENEZkE4V3RVc1hhUk1ETElIRndGU3NkNkQycVNaZjFYbWpPRWRJ?=
- =?utf-8?B?UmdiWlFZV2l2eGpBVUdCZ1g4aUlZcGJHajZRNFNLdVRBVVZhMjRaQ2RQK1BT?=
- =?utf-8?B?eDU0cllxcEVHQlliYnhBbHg3RFU4d1dTa1lKZm94SktueXhDNkZ2WGFGdmRU?=
- =?utf-8?B?TzdoRTlpS1Byd2N6S1ptb1BraGVFU2JsTlB6UDMyK3hmeHorTjVOZ2FhUDZi?=
- =?utf-8?B?WFN4czdPM0Jmb3pLeHcvL3RXL1NlWDMzWEV0SUk4Qkh0Njh2ZHNRUFMxSDlw?=
- =?utf-8?B?YUNBTnl5cndWUnVmOWN4cXFQa3pSUW4rK2kxckc5bDV2emlhRXV0a1FpVU40?=
- =?utf-8?B?ZEJCdXozRTVDbHRoVlNBdjdZQVBvZWpYbERTZXNqM3BZbWwvRTdSeFY1S0g5?=
- =?utf-8?B?clY0MDhYb0xuQlhmamVvQUplT1EzVjBuNWRrM3NkK3gyeVc3aitpazg2QkN5?=
- =?utf-8?B?ZnVETWJhckIzZTBmTGJrK0Yxbjh6cjJ3RXZ6VHVER3lOc0VlKzl0V21aNmVl?=
- =?utf-8?B?eVllRDNhMEgxdUNUaC9VSWVNK3pSdGUzb1NKaXRNQlR1NnhaMnpMQ1VrdUdJ?=
- =?utf-8?B?Sk5LcmRPVFhidUgwaGh6bnpUQ2MvbXlJSFRzQ21JeGt4OWJqVi9pUkI1U1RO?=
- =?utf-8?B?cnJUSUlXN0Y4WjZ0eG9iSElZSkI4elFTZSszNFFBemcyYWJ6VnFpbEpYL2FO?=
- =?utf-8?B?cURnTnVBS3FYR3hOTGJ3aFk0eTJRNnNzek1BY1ZiNDE2UE1odElUdjhQdTBF?=
- =?utf-8?B?WlNKTUxRaEZ0Z1k0RlMwK0xIMGJnc3hYY3I5a1JYTytqUXQ0a3lFcXBUdU5o?=
- =?utf-8?B?QnRnWmY0SEJGRHNaSUVGd2RjUjNDbS9qWTFVOTdjVnJaQ1dkMFZhQk1XTGFm?=
- =?utf-8?B?ckVNS1MyNzg3aXdHd1Y0V21WTm0wNU1CYWUwTkQxOTVZWlJIUk9DTllXcDBZ?=
- =?utf-8?B?NUF1cVh3WFRCQndBYVI2bnlweEZrQUM2bi9rWjJHbnVqTlVFalFzV1dvWUJ2?=
- =?utf-8?B?ZkpscXQwSzgxVWZoSGtvZ3lzSTUyTFpPMk9hUUVSS3E2SngrcWJVWEZpcEFj?=
- =?utf-8?B?eWlsWjBMcytXY3d5RnBXN1NOMm9qVi9xRUVlOGpxc0Evdm1OQVhoNTVBcUlV?=
- =?utf-8?B?T3d3MjQ0S2o4VloxZlFvN3lTSHhWcnRSRjllNytUSjZiOWFJQzZ5UkRqSXM0?=
- =?utf-8?B?RDh2cTY3dUkwOW5PZzZqbXVvN0tCQnVMVlg3d0lJSzkwT1RRNEVETW1YMUhN?=
- =?utf-8?B?M29QMWZyK3NWQS9EQmNzSW5BRWlXSlhSV2VJL2ZiSzNQTEhsZVVTQnZZa1Jj?=
- =?utf-8?B?TkNKWXYyVXdDWk41YUVldVlUalJQV1IrdEZuVHdIZXE1KzB6MXZLOEZiYmJo?=
- =?utf-8?B?Ukc5VURLYldxc3dRdkNYREFFb1E3ZTEwU0RGYVVSb1lIVXljNERnQUY1Mjkw?=
- =?utf-8?B?RDNmRE5zUGd5VDZJaFRkM21Rbzhya1hzeWtSZEVxamZvcWZtaHdFdlQrMzFp?=
- =?utf-8?B?NUl0cGxUSlVqZjRsT1FLb2ovMkp1Nm0wUThyVmJneGRURFdBSVJXS0svcXFl?=
- =?utf-8?Q?3Q1tVyQMkn6pAFQfmL8FkphgrcTAiwdQ1EanuSc?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA4PR04MB7982.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(1800799015)(376005)(366007); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SnBHMERyREg5cmN1S1pnTDFXOXZCQ0MyNkdEVHFycGJSRVN5SG5rZ3JPeWpX?=
- =?utf-8?B?bkljWjVwbkxEVHcvdEFIWXNRV05VUkFidXlmMzdKVlhQbU9sWDhsNEIvdnB5?=
- =?utf-8?B?TUJXMDlMR0RDM25PSmdqZURmS2pFYmdXYkVZUWZNZVE2TFVDVVBxUERDbGo2?=
- =?utf-8?B?TnYxdmE3clRMOFVSVkJ6bDhKMVFqeExnY3FjSHJEd0d2S2djQkZobVNXemdJ?=
- =?utf-8?B?aEFOc2orUENBT2k5SHJ2dkRhZTlyZ3ExS29vdGVmL2RFNXB3bW4yTkZ3UEQ4?=
- =?utf-8?B?RmFJVTRCMm1rekM2YW9zNDVlcDZDMENnSUpaek9ockpyMmZqTVlnd3picHVX?=
- =?utf-8?B?VHN6bUw5dnhyVHcrZlhQZjVrdVRnQi9mekJPc3VFWlBaaDVKL1FjOHFqeHZm?=
- =?utf-8?B?ZUFucGRTTGxsUmFFdnJrdjcwK0puWkNzTUlhektnTVRYQjFrUVYweXlZN0xx?=
- =?utf-8?B?N3lGK0J2SzhCMFNKbVZLQmFpZkpaR3h3VkU0b0pWc3Y5b2NoSFNFSmtvUzRt?=
- =?utf-8?B?KzNNRVI4V2FDNTlhNEo0WXBqeDZhOUE3aW1sS0lhQ2FHdlNlcWxESGt3cEJX?=
- =?utf-8?B?eEdqQTNiaUh6N1d1elVHVENCT0p5OWt4L3ZNeEZiOGFUKy9yYWZPclMrK2R5?=
- =?utf-8?B?ckxYR1YvV2FlVFRhcFBGenhaYTNvMFRxRytiU1JmY0J3cjNXL0FMZGY1azJW?=
- =?utf-8?B?RGpaUTUrTUg5WUU2MGJOV1ZMa21GV1REM2QxOW1TbjYweGNTQU00MitDZ0sx?=
- =?utf-8?B?M2lUUDYzdXkwWmkxRWxzU0Z0V0VqN0FtSkU4MlhqS1l5ZVRFeTJQUTYwWE5n?=
- =?utf-8?B?eUZSNTNtU0Qza2FsY0dIalJqY05LanRHYUh0dEN1V1F5SWRMNzAwb2tvQ2lx?=
- =?utf-8?B?Y1ZYZThDaXpDbHBLTlBwdldJZEFqSG14QkFVRWVlRW5GSWk3YnQrSkJhZURE?=
- =?utf-8?B?R0tVKzdacUFibFZvOVRRMDRmMTdYa1YxWXRHczFqTC9JT2NDdmFkaERCK0Fu?=
- =?utf-8?B?TGdJZ1VzVGVpMEljZTdjclQvSlpnTlk0a01qcWZxSE05VFNnZTN0NHc1V2xm?=
- =?utf-8?B?L2RSemJWTU1HWFphV1lHQzdtV1E3TWVVc1pzaHdudjN0Zk5zckVaakZzK09E?=
- =?utf-8?B?TkV3aDBaVTJSeUE2MGdESTB2K1pBN0RjVG4rcGpjcDdiazdIcm5TUHNqRkF2?=
- =?utf-8?B?RHVlZjhyT2svNjJ1ZDE1UGxUdHp2QVdHdVFITkpsSzhGT2FaaWM1aktXQmU3?=
- =?utf-8?B?NnEvWFR5aUMrSHh6ODRUdmlLcmFjZ2ZtQ3dabDdkckRqalo0OHNXYzBVVmFD?=
- =?utf-8?B?djZIZ2NNUC8xdzcrU0E4VWtwdkpFZVFaUjZlUEJXeEplRHZ5eU5HMGZpNi92?=
- =?utf-8?B?SDBZakdINkplN3lBTUZWYTJyRzFta0hON1A3anJITFhlSzdJanhXNmd4Vzlv?=
- =?utf-8?B?Wmo5dnBYaXNUUmZ6ZVFySmNWYTNzem4xazlIdFJyZGFBTGx3Yy9LejA0NjBH?=
- =?utf-8?B?bndxamdOY21meFNnZmpUNXAzY21taXVzbmVYRTFtZ0NWYm9lRDBYWEJyL2FP?=
- =?utf-8?B?cHdVN2FWVndjZldWWlRBVDV2WjZPZXRrVUF4L1ZjU3RGWCtJdHVrOEwrcCtG?=
- =?utf-8?B?YXFkYmlrVVBXNjVNYU5aNlZxeTJ6SzFhdjEySWJNWTk5SFUxRTdTQndVNUFQ?=
- =?utf-8?B?WkpELzBLL0puMVdWcjQvdnNtOFFWNWpVQkVQT2JmQmR1dkpMMkwxL1NNc0l4?=
- =?utf-8?B?ck9FcUdWYjk5R1VESGpTckJORGQrWUR0N0dzbVl6SEkxdnpsSy8zZE0yNXE3?=
- =?utf-8?B?YkkvZ29jSDN5ekxobHY4U2xnRVF6ZXYrdW1pd2tNcndXMUxsYTFyMHFXdGdF?=
- =?utf-8?B?L1c4clByeGZNYnhNdFFWc1Z3bEVZcGp4Z3RxK2tjUnBuZGZWWCtsL1o0YTJG?=
- =?utf-8?B?YlBydTAyNVdqc0tjcFN3YW9RNFh6YnRDSkdzQ0duOGdBU2VMaDZxaE5JcFps?=
- =?utf-8?B?OGdGSjVMRTlzT29lWDNrRHZRMGNTTnZWd3dkamYyK2FZaDd2MmFsUGd6T3JD?=
- =?utf-8?B?ekU4YTdnMGIrMTU4SkhSdVk0bzJ6R3JmRlhmeUkxOE1MNGtNMWVnYkMvRnoz?=
- =?utf-8?B?Qjd2YUtvZk1nR2JVY1Z4Uy9LbUFaTW1IQTFtVkdYMUFOdFNjeDRGVnQrSHAz?=
- =?utf-8?Q?+u+/A2EBd0kuxsOsri4RPRU=3D?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: c1ac3a0f-49c7-428e-382f-08dc863e3903
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7982.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jun 2024 15:34:58.7597 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: sEUOYlzeMIQXT9ONEjvKq68LYnMSzzI0Czlb+u4Cwg23mrX1qP2fV/NmoSPHhKC1Ve/ujuHIICDOpU92Odds9f+slMCFtZjWzdluUXp/+MY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR04MB7033
+References: <cover.1717680809.git.jerome.forissier@linaro.org>
+ <16eac9a19f8f6572ea111cc20cc5793bfb5e6f94.1717680809.git.jerome.forissier@linaro.org>
+In-Reply-To: <16eac9a19f8f6572ea111cc20cc5793bfb5e6f94.1717680809.git.jerome.forissier@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 6 Jun 2024 18:41:41 +0300
+Message-ID: <CAC_iWj++SdJxHouuX_rhgTpeKcfqvudHgtjDQ6Gz0HzYUXoV9Q@mail.gmail.com>
+Subject: Re: [PATCH v3 07/12] net-lwip: add wget command
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>, 
+ Maxim Uvarov <muvarov@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Michal Simek <michal.simek@amd.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Peter Robinson <pbrobinson@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Ramon Fried <rfried.dev@gmail.com>, 
+ Ioana Ciornei <ioana.ciornei@nxp.com>, Peng Fan <peng.fan@nxp.com>, 
+ Sean Edmond <seanedmond@microsoft.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -173,185 +98,635 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Vasileios,
+Hi Jerome,
 
-On 6/5/24 8:10 PM, Vasileios Amoiridis wrote:
-> [You don't often get email from vassilisamir@gmail.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
-> 
-> From: Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
-> 
-> Add support to save boot count variable in a file in a FAT filesystem.
-> 
-> Signed-off-by: Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
+Can we split this in 2 patches instead?
+A preparatory one, with split the net-common etc and one that adds wget?
+
+Thanks
+/Ilias
+
+On Thu, 6 Jun 2024 at 16:37, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+> Add support for the wget command with NET_LWIP.
+>
+> About the small change in cmd/efidebug.c: when the wget command based
+> on the lwIP stack is used the wget command has a built-in URL
+> validation function since it needs to parse it anyways (in parse_url()).
+> Therefore wget_validate_uri() doesn't exist. So, guard the call in
+> efidebug.c with CONFIG_CMD_WGET.
+>
+> Based on code initially developed by Maxim U.
+>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> Co-developed-by: Maxim Uvarov <muvarov@gmail.com>
+> Cc: Maxim Uvarov <muvarov@gmail.com>
 > ---
->   doc/README.bootcount              | 12 ++++----
->   drivers/bootcount/Kconfig         | 49 +++++++++++++++++++++++--------
->   drivers/bootcount/Makefile        |  2 +-
->   drivers/bootcount/bootcount_ext.c | 18 ++++++++----
->   4 files changed, 56 insertions(+), 25 deletions(-)
-> 
-> diff --git a/doc/README.bootcount b/doc/README.bootcount
-> index f6c5f82f98..cce66d4d70 100644
-> --- a/doc/README.bootcount
-> +++ b/doc/README.bootcount
-> @@ -23,15 +23,17 @@ It is the responsibility of some application code (typically a Linux
->   application) to reset the variable "bootcount" to 0 when the system booted
->   successfully, thus allowing for more boot cycles.
-> 
-> -CONFIG_BOOTCOUNT_EXT
-> +CONFIG_BOOTCOUNT_FS
->   --------------------
-> 
-> -This adds support for maintaining boot count in a file on an EXT filesystem.
-> +This adds support for maintaining boot count in a file on a filesystem.
-> +Supported filesystems are FAT and EXT.
-> +
->   The file to use is defined by:
-> 
-> -CONFIG_SYS_BOOTCOUNT_EXT_INTERFACE
-> -CONFIG_SYS_BOOTCOUNT_EXT_DEVPART
-> -CONFIG_SYS_BOOTCOUNT_EXT_NAME
-> +CONFIG_SYS_BOOTCOUNT_FS_INTERFACE
-> +CONFIG_SYS_BOOTCOUNT_FS_DEVPART
-> +CONFIG_SYS_BOOTCOUNT_FS_NAME
-> 
->   The format of the file is:
-> 
-> diff --git a/drivers/bootcount/Kconfig b/drivers/bootcount/Kconfig
-> index 3c56253b1e..a39a7556bb 100644
-> --- a/drivers/bootcount/Kconfig
-> +++ b/drivers/bootcount/Kconfig
-> @@ -25,10 +25,9 @@ config BOOTCOUNT_GENERIC
->              Set to the address where the bootcount and bootcount magic
->              will be stored.
-> 
-> -config BOOTCOUNT_EXT
-> -       bool "Boot counter on EXT filesystem"
-> -       depends on FS_EXT4
-> -       select EXT4_WRITE
-> +config BOOTCOUNT_FS
-> +       bool "Boot counter on filesystem"
-> +       depends on FS_EXT4 || FS_FAT
->          help
->            Add support for maintaining boot count in a file on an EXT
->            filesystem.
-> @@ -177,6 +176,30 @@ config BOOTCOUNT_BOOTLIMIT
->            counter being cleared.
->            If set to 0, do not set a boot limit in the environment.
-> 
-> +if BOOTCOUNT_FS
-> +choice
-> +       prompt "Filesystem type"
-> +       default BOOTCOUNT_EXT
-> +
-> +config BOOTCOUNT_EXT
-> +       bool "Boot counter on EXT filesystem"
-> +       depends on FS_EXT4
-> +       select EXT4_WRITE
+>  cmd/Kconfig        |   7 ++
+>  cmd/Makefile       |   5 +-
+>  cmd/efidebug.c     |   8 +-
+>  cmd/net-common.c   | 115 +++++++++++++++++++++++++++++
+>  cmd/net-lwip.c     |  12 +++
+>  cmd/net.c          | 115 -----------------------------
+>  include/net-lwip.h |  51 +++++++++++++
+>  net-lwip/Makefile  |   1 +
+>  net-lwip/wget.c    | 180 +++++++++++++++++++++++++++++++++++++++++++++
+>  9 files changed, 375 insertions(+), 119 deletions(-)
+>  create mode 100644 cmd/net-common.c
+>  create mode 100644 net-lwip/wget.c
+>
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index 6ef0b52cd34..d9a86540be6 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -2117,6 +2117,13 @@ config CMD_TFTPBOOT
+>         help
+>           tftpboot - load file via network using TFTP protocol
+>
+> +config CMD_WGET
+> +       bool "wget"
+> +       select PROT_TCP_LWIP
 > +       help
-> +         Add support for maintaining boot count in a file on an EXT
-> +         filesystem.
+> +         wget is a simple command to download kernel, or other files,
+> +         from a http server over TCP.
 > +
-> +config BOOTCOUNT_FAT
-> +       bool "Boot counter on FAT filesystem"
-> +       depends on FS_FAT
-> +       select FAT_WRITE
-> +       help
-> +         Add support for maintaining boot count in a file on a FAT
-> +         filesystem.
+>  endif
+>
+>  endif
+> diff --git a/cmd/Makefile b/cmd/Makefile
+> index 535b6838ca5..e90f2f68211 100644
+> --- a/cmd/Makefile
+> +++ b/cmd/Makefile
+> @@ -129,8 +129,11 @@ obj-$(CONFIG_CMD_MUX) += mux.o
+>  obj-$(CONFIG_CMD_NAND) += nand.o
+>  obj-$(CONFIG_CMD_NET) += net.o
+>  obj-$(CONFIG_CMD_NET_LWIP) += net-lwip.o
+> +obj-$(filter y,$(CONFIG_CMD_NET) $(CONFIG_CMD_NET_LWIP)) += net-common.o
+>  ifdef CONFIG_CMD_NET_LWIP
+> -CFLAGS_net-lwip.o := -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
+> +lwip-includes := -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
+> +CFLAGS_net-lwip.o := $(lwip-includes)
+> +CFLAGS_net-common.o := $(lwip-includes)
+>  endif
+>  obj-$(CONFIG_ENV_SUPPORT) += nvedit.o
+>  obj-$(CONFIG_CMD_NVEDIT_EFI) += nvedit_efi.o
+> diff --git a/cmd/efidebug.c b/cmd/efidebug.c
+> index c2c525f2351..d80e91ecadd 100644
+> --- a/cmd/efidebug.c
+> +++ b/cmd/efidebug.c
+> @@ -741,9 +741,11 @@ static int efi_boot_add_uri(int argc, char *const argv[], u16 *var_name16,
+>         if (!label)
+>                 return CMD_RET_FAILURE;
+>
+> -       if (!wget_validate_uri(argv[3])) {
+> -               printf("ERROR: invalid URI\n");
+> -               return CMD_RET_FAILURE;
+> +       if (IS_ENABLED(CONFIG_CMD_WGET)) {
+> +               if (!wget_validate_uri(argv[3])) {
+> +                       printf("ERROR: invalid URI\n");
+> +                       return CMD_RET_FAILURE;
+> +               }
+>         }
+>
+>         efi_create_indexed_name(var_name16, var_name16_size, "Boot", id);
+> diff --git a/cmd/net-common.c b/cmd/net-common.c
+> new file mode 100644
+> index 00000000000..f01d9e63998
+> --- /dev/null
+> +++ b/cmd/net-common.c
+> @@ -0,0 +1,115 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * (C) Copyright 2000
+> + * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+> + */
 > +
-> +endchoice
-> +endif
-> +
->   config SYS_BOOTCOUNT_SINGLEWORD
->          bool "Use single word to pack boot count and magic value"
->          depends on BOOTCOUNT_GENERIC
-> @@ -184,26 +207,26 @@ config SYS_BOOTCOUNT_SINGLEWORD
->            This option enables packing boot count magic value and boot count
->            into single word (32 bits).
-> 
-> -config SYS_BOOTCOUNT_EXT_INTERFACE
-> +config SYS_BOOTCOUNT_FS_INTERFACE
->          string "Interface on which to find boot counter EXT filesystem"
->          default "mmc"
-> -       depends on BOOTCOUNT_EXT
-> +       depends on BOOTCOUNT_FS
->          help
->            Set the interface to use when locating the filesystem to use for the
->            boot counter.
-> 
-> -config SYS_BOOTCOUNT_EXT_DEVPART
-> +config SYS_BOOTCOUNT_FS_DEVPART
->          string "Partition of the boot counter EXT filesystem"
->          default "0:1"
-> -       depends on BOOTCOUNT_EXT
-> +       depends on BOOTCOUNT_FS
->          help
->            Set the partition to use when locating the filesystem to use for the
->            boot counter.
-> 
-> -config SYS_BOOTCOUNT_EXT_NAME
-> +config SYS_BOOTCOUNT_FS_NAME
->          string "Path and filename of the EXT filesystem based boot counter"
->          default "/boot/failures"
-> -       depends on BOOTCOUNT_EXT
-> +       depends on BOOTCOUNT_FS
->          help
->            Set the filename and path of the file used to store the boot counter.
-> 
-> @@ -211,18 +234,18 @@ config SYS_BOOTCOUNT_ADDR
->          hex "RAM address used for reading and writing the boot counter"
->          default 0x44E3E000 if BOOTCOUNT_AM33XX || BOOTCOUNT_AM33XX_NVMEM
->          default 0xE0115FF8 if ARCH_LS1043A || ARCH_LS1021A
-> -       depends on BOOTCOUNT_AM33XX || BOOTCOUNT_GENERIC || BOOTCOUNT_EXT || \
-> +       depends on BOOTCOUNT_AM33XX || BOOTCOUNT_GENERIC || BOOTCOUNT_FS || \
->                     BOOTCOUNT_AM33XX_NVMEM
->          help
->            Set the address used for reading and writing the boot counter.
-> 
->   config SYS_BOOTCOUNT_MAGIC
->          hex "Magic value for the boot counter"
-> -       default 0xB001C041 if BOOTCOUNT_GENERIC || BOOTCOUNT_EXT || \
-> +       default 0xB001C041 if BOOTCOUNT_GENERIC || BOOTCOUNT_FS || \
->                                BOOTCOUNT_AM33XX || BOOTCOUNT_ENV || \
->                                BOOTCOUNT_RAM || BOOTCOUNT_AT91 || DM_BOOTCOUNT
->          default 0xB0 if BOOTCOUNT_AM33XX_NVMEM
-> -       depends on BOOTCOUNT_GENERIC || BOOTCOUNT_EXT || \
-> +       depends on BOOTCOUNT_GENERIC || BOOTCOUNT_FS || \
->                     BOOTCOUNT_AM33XX || BOOTCOUNT_ENV || \
->                     BOOTCOUNT_RAM || BOOTCOUNT_AT91 || DM_BOOTCOUNT || \
->                     BOOTCOUNT_AM33XX_NVMEM
-> diff --git a/drivers/bootcount/Makefile b/drivers/bootcount/Makefile
-> index e7771f5b36..c0427434d7 100644
-> --- a/drivers/bootcount/Makefile
-> +++ b/drivers/bootcount/Makefile
-> @@ -6,7 +6,7 @@ obj-$(CONFIG_BOOTCOUNT_AT91)    += bootcount_at91.o
->   obj-$(CONFIG_BOOTCOUNT_AM33XX) += bootcount_davinci.o
->   obj-$(CONFIG_BOOTCOUNT_RAM)    += bootcount_ram.o
->   obj-$(CONFIG_BOOTCOUNT_ENV)    += bootcount_env.o
-> -obj-$(CONFIG_BOOTCOUNT_EXT)    += bootcount_ext.o
-> +obj-$(CONFIG_BOOTCOUNT_FS)     += bootcount_ext.o
->   obj-$(CONFIG_BOOTCOUNT_AM33XX_NVMEM)   += bootcount_nvmem.o
-> 
->   obj-$(CONFIG_DM_BOOTCOUNT)      += bootcount-uclass.o
-> diff --git a/drivers/bootcount/bootcount_ext.c b/drivers/bootcount/bootcount_ext.c
-> index 9639e638e9..660bea2db2 100644
-> --- a/drivers/bootcount/bootcount_ext.c
-> +++ b/drivers/bootcount/bootcount_ext.c
-> @@ -19,14 +19,20 @@ typedef struct {
-> 
->   static u8 upgrade_available = 1;
-> 
-> +#ifdef BOOTCOUNT_EXT
-> +static u8 bootcount_fstype = FS_TYPE_EXT;
+> +#include <command.h>
+> +#include <dm/device.h>
+> +#include <dm/uclass.h>
+> +#ifdef CONFIG_NET
+> +#include <net.h>
+> +#elif defined CONFIG_NET_LWIP
+> +#include <net-lwip.h>
 > +#else
-> +static u8 bootcount_fstype = FS_TYPE_FAT;
+> +#error Either NET or NET_LWIP must be enabled
 > +#endif
+> +#include <linux/compat.h>
+> +#include <linux/ethtool.h>
 > +
-
-I know nothing about filesystems, but I was wondering if we couldn't 
-just use FS_TYPE_ANY here? Do we really need to specify which FS_TYPE to 
-use? Are there some limitations, etc.?
-
-Cheers,
-Quentin
+> +static int do_net_list(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> +{
+> +       const struct udevice *current = eth_get_dev();
+> +       unsigned char env_enetaddr[ARP_HLEN];
+> +       const struct udevice *dev;
+> +       struct uclass *uc;
+> +
+> +       uclass_id_foreach_dev(UCLASS_ETH, dev, uc) {
+> +               eth_env_get_enetaddr_by_index("eth", dev_seq(dev), env_enetaddr);
+> +               printf("eth%d : %s %pM %s\n", dev_seq(dev), dev->name, env_enetaddr,
+> +                      current == dev ? "active" : "");
+> +       }
+> +       return CMD_RET_SUCCESS;
+> +}
+> +
+> +static int do_net_stats(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> +{
+> +       int nstats, err, i, off;
+> +       struct udevice *dev;
+> +       u64 *values;
+> +       u8 *strings;
+> +
+> +       if (argc < 2)
+> +               return CMD_RET_USAGE;
+> +
+> +       err = uclass_get_device_by_name(UCLASS_ETH, argv[1], &dev);
+> +       if (err) {
+> +               printf("Could not find device %s\n", argv[1]);
+> +               return CMD_RET_FAILURE;
+> +       }
+> +
+> +       if (!eth_get_ops(dev)->get_sset_count ||
+> +           !eth_get_ops(dev)->get_strings ||
+> +           !eth_get_ops(dev)->get_stats) {
+> +               printf("Driver does not implement stats dump!\n");
+> +               return CMD_RET_FAILURE;
+> +       }
+> +
+> +       nstats = eth_get_ops(dev)->get_sset_count(dev);
+> +       strings = kcalloc(nstats, ETH_GSTRING_LEN, GFP_KERNEL);
+> +       if (!strings)
+> +               return CMD_RET_FAILURE;
+> +
+> +       values = kcalloc(nstats, sizeof(u64), GFP_KERNEL);
+> +       if (!values)
+> +               goto err_free_strings;
+> +
+> +       eth_get_ops(dev)->get_strings(dev, strings);
+> +       eth_get_ops(dev)->get_stats(dev, values);
+> +
+> +       off = 0;
+> +       for (i = 0; i < nstats; i++) {
+> +               printf("  %s: %llu\n", &strings[off], values[i]);
+> +               off += ETH_GSTRING_LEN;
+> +       };
+> +
+> +       kfree(strings);
+> +       kfree(values);
+> +
+> +       return CMD_RET_SUCCESS;
+> +
+> +err_free_strings:
+> +       kfree(strings);
+> +
+> +       return CMD_RET_FAILURE;
+> +}
+> +
+> +static struct cmd_tbl cmd_net[] = {
+> +       U_BOOT_CMD_MKENT(list, 1, 0, do_net_list, "", ""),
+> +       U_BOOT_CMD_MKENT(stats, 2, 0, do_net_stats, "", ""),
+> +};
+> +
+> +static int do_net(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> +{
+> +       struct cmd_tbl *cp;
+> +
+> +       cp = find_cmd_tbl(argv[1], cmd_net, ARRAY_SIZE(cmd_net));
+> +
+> +       /* Drop the net command */
+> +       argc--;
+> +       argv++;
+> +
+> +       if (!cp || argc > cp->maxargs)
+> +               return CMD_RET_USAGE;
+> +       if (flag == CMD_FLAG_REPEAT && !cmd_is_repeatable(cp))
+> +               return CMD_RET_SUCCESS;
+> +
+> +       return cp->cmd(cmdtp, flag, argc, argv);
+> +}
+> +
+> +U_BOOT_CMD(
+> +       net, 3, 1, do_net,
+> +       "NET sub-system",
+> +       "list - list available devices\n"
+> +       "stats <device> - dump statistics for specified device\n"
+> +);
+> diff --git a/cmd/net-lwip.c b/cmd/net-lwip.c
+> index 3abafdf7969..b80375c831e 100644
+> --- a/cmd/net-lwip.c
+> +++ b/cmd/net-lwip.c
+> @@ -2,6 +2,10 @@
+>  /* Copyright (C) 2024 Linaro Ltd. */
+>
+>  #include <command.h>
+> +#include <dm/device.h>
+> +#include <dm/uclass.h>
+> +#include <linux/compat.h>
+> +#include <linux/ethtool.h>
+>  #include <net-lwip.h>
+>
+>  #if defined(CONFIG_CMD_DHCP)
+> @@ -35,3 +39,11 @@ U_BOOT_CMD(
+>         "hostname [envvar]"
+>  );
+>  #endif
+> +
+> +#if defined(CONFIG_CMD_WGET)
+> +U_BOOT_CMD(
+> +       wget,   3,      1,      do_wget,
+> +       "boot image via network using HTTP protocol",
+> +       "[loadAddress] URL"
+> +);
+> +#endif
+> diff --git a/cmd/net.c b/cmd/net.c
+> index d407d8320a3..03b4582204f 100644
+> --- a/cmd/net.c
+> +++ b/cmd/net.c
+> @@ -676,118 +676,3 @@ U_BOOT_CMD(
+>  );
+>
+>  #endif  /* CONFIG_CMD_LINK_LOCAL */
+> -
+> -static int do_net_list(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> -{
+> -       const struct udevice *current = eth_get_dev();
+> -       unsigned char env_enetaddr[ARP_HLEN];
+> -       const struct udevice *dev;
+> -       struct uclass *uc;
+> -
+> -       uclass_id_foreach_dev(UCLASS_ETH, dev, uc) {
+> -               eth_env_get_enetaddr_by_index("eth", dev_seq(dev), env_enetaddr);
+> -               printf("eth%d : %s %pM %s\n", dev_seq(dev), dev->name, env_enetaddr,
+> -                      current == dev ? "active" : "");
+> -       }
+> -       return CMD_RET_SUCCESS;
+> -}
+> -
+> -static int do_net_stats(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> -{
+> -       int nstats, err, i, off;
+> -       struct udevice *dev;
+> -       u64 *values;
+> -       u8 *strings;
+> -
+> -       if (argc < 2)
+> -               return CMD_RET_USAGE;
+> -
+> -       err = uclass_get_device_by_name(UCLASS_ETH, argv[1], &dev);
+> -       if (err) {
+> -               printf("Could not find device %s\n", argv[1]);
+> -               return CMD_RET_FAILURE;
+> -       }
+> -
+> -       if (!eth_get_ops(dev)->get_sset_count ||
+> -           !eth_get_ops(dev)->get_strings ||
+> -           !eth_get_ops(dev)->get_stats) {
+> -               printf("Driver does not implement stats dump!\n");
+> -               return CMD_RET_FAILURE;
+> -       }
+> -
+> -       nstats = eth_get_ops(dev)->get_sset_count(dev);
+> -       strings = kcalloc(nstats, ETH_GSTRING_LEN, GFP_KERNEL);
+> -       if (!strings)
+> -               return CMD_RET_FAILURE;
+> -
+> -       values = kcalloc(nstats, sizeof(u64), GFP_KERNEL);
+> -       if (!values)
+> -               goto err_free_strings;
+> -
+> -       eth_get_ops(dev)->get_strings(dev, strings);
+> -       eth_get_ops(dev)->get_stats(dev, values);
+> -
+> -       off = 0;
+> -       for (i = 0; i < nstats; i++) {
+> -               printf("  %s: %llu\n", &strings[off], values[i]);
+> -               off += ETH_GSTRING_LEN;
+> -       };
+> -
+> -       return CMD_RET_SUCCESS;
+> -
+> -err_free_strings:
+> -       kfree(strings);
+> -
+> -       return CMD_RET_FAILURE;
+> -}
+> -
+> -static struct cmd_tbl cmd_net[] = {
+> -       U_BOOT_CMD_MKENT(list, 1, 0, do_net_list, "", ""),
+> -       U_BOOT_CMD_MKENT(stats, 2, 0, do_net_stats, "", ""),
+> -};
+> -
+> -static int do_net(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> -{
+> -       struct cmd_tbl *cp;
+> -
+> -       cp = find_cmd_tbl(argv[1], cmd_net, ARRAY_SIZE(cmd_net));
+> -
+> -       /* Drop the net command */
+> -       argc--;
+> -       argv++;
+> -
+> -       if (!cp || argc > cp->maxargs)
+> -               return CMD_RET_USAGE;
+> -       if (flag == CMD_FLAG_REPEAT && !cmd_is_repeatable(cp))
+> -               return CMD_RET_SUCCESS;
+> -
+> -       return cp->cmd(cmdtp, flag, argc, argv);
+> -}
+> -
+> -U_BOOT_CMD(
+> -       net, 3, 1, do_net,
+> -       "NET sub-system",
+> -       "list - list available devices\n"
+> -       "stats <device> - dump statistics for specified device\n"
+> -);
+> -
+> -#if defined(CONFIG_CMD_NCSI)
+> -static int do_ncsi(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
+> -{
+> -       if (!phy_interface_is_ncsi() || !ncsi_active()) {
+> -               printf("Device not configured for NC-SI\n");
+> -               return CMD_RET_FAILURE;
+> -       }
+> -
+> -       if (net_loop(NCSI) < 0)
+> -               return CMD_RET_FAILURE;
+> -
+> -       return CMD_RET_SUCCESS;
+> -}
+> -
+> -U_BOOT_CMD(
+> -       ncsi,   1,      1,      do_ncsi,
+> -       "Configure attached NIC via NC-SI",
+> -       ""
+> -);
+> -#endif  /* CONFIG_CMD_NCSI */
+> diff --git a/include/net-lwip.h b/include/net-lwip.h
+> index 0019d1524e5..6fda940fec2 100644
+> --- a/include/net-lwip.h
+> +++ b/include/net-lwip.h
+> @@ -51,6 +51,56 @@ int eth_env_get_enetaddr_by_index(const char *base_name, int index,
+>  int eth_init(void);                    /* Initialize the device */
+>  int eth_send(void *packet, int length);           /* Send a packet */
+>  int eth_rx(void);
+> +
+> +/**
+> + * struct eth_ops - functions of Ethernet MAC controllers
+> + *
+> + * start: Prepare the hardware to send and receive packets
+> + * send: Send the bytes passed in "packet" as a packet on the wire
+> + * recv: Check if the hardware received a packet. If so, set the pointer to the
+> + *      packet buffer in the packetp parameter. If not, return an error or 0 to
+> + *      indicate that the hardware receive FIFO is empty. If 0 is returned, the
+> + *      network stack will not process the empty packet, but free_pkt() will be
+> + *      called if supplied
+> + * free_pkt: Give the driver an opportunity to manage its packet buffer memory
+> + *          when the network stack is finished processing it. This will only be
+> + *          called when no error was returned from recv - optional
+> + * stop: Stop the hardware from looking for packets - may be called even if
+> + *      state == PASSIVE
+> + * mcast: Join or leave a multicast group (for TFTP) - optional
+> + * write_hwaddr: Write a MAC address to the hardware (used to pass it to Linux
+> + *              on some platforms like ARM). This function expects the
+> + *              eth_pdata::enetaddr field to be populated. The method can
+> + *              return -ENOSYS to indicate that this is not implemented for
+> +                this hardware - optional.
+> + * read_rom_hwaddr: Some devices have a backup of the MAC address stored in a
+> + *                 ROM on the board. This is how the driver should expose it
+> + *                 to the network stack. This function should fill in the
+> + *                 eth_pdata::enetaddr field - optional
+> + * set_promisc: Enable or Disable promiscuous mode
+> + * get_sset_count: Number of statistics counters
+> + * get_string: Names of the statistic counters
+> + * get_stats: The values of the statistic counters
+> + */
+> +struct eth_ops {
+> +       int (*start)(struct udevice *dev);
+> +       int (*send)(struct udevice *dev, void *packet, int length);
+> +       int (*recv)(struct udevice *dev, int flags, uchar **packetp);
+> +       int (*free_pkt)(struct udevice *dev, uchar *packet, int length);
+> +       void (*stop)(struct udevice *dev);
+> +       int (*mcast)(struct udevice *dev, const u8 *enetaddr, int join);
+> +       int (*write_hwaddr)(struct udevice *dev);
+> +       int (*read_rom_hwaddr)(struct udevice *dev);
+> +       int (*set_promisc)(struct udevice *dev, bool enable);
+> +       int (*get_sset_count)(struct udevice *dev);
+> +       void (*get_strings)(struct udevice *dev, u8 *data);
+> +       void (*get_stats)(struct udevice *dev, u64 *data);
+> +};
+> +
+> +#define eth_get_ops(dev) ((struct eth_ops *)(dev)->driver->ops)
+> +
+> +struct udevice *eth_get_dev(void); /* get the current device */
+> +int eth_get_dev_index(void);
+>  const char *eth_get_name(void);
+>  int eth_get_dev_index(void);
+>  int eth_init_state_only(void); /* Set active state */
+> @@ -85,5 +135,6 @@ int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+>  int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+>  int do_ping(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+>  int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+> +int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
+>
+>  #endif /* __NET_LWIP_H__ */
+> diff --git a/net-lwip/Makefile b/net-lwip/Makefile
+> index aa247859483..bc011bb0e32 100644
+> --- a/net-lwip/Makefile
+> +++ b/net-lwip/Makefile
+> @@ -10,6 +10,7 @@ obj-$(CONFIG_CMD_DHCP) += dhcp.o
+>  obj-$(CONFIG_CMD_DNS) += dns.o
+>  obj-$(CONFIG_CMD_PING) += ping.o
+>  obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
+> +obj-$(CONFIG_CMD_WGET) += wget.o
+>
+>  # Disable this warning as it is triggered by:
+>  # sprintf(buf, index ? "foo%d" : "foo", index)
+> diff --git a/net-lwip/wget.c b/net-lwip/wget.c
+> new file mode 100644
+> index 00000000000..e3e6f525674
+> --- /dev/null
+> +++ b/net-lwip/wget.c
+> @@ -0,0 +1,180 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/* Copyright (C) 2024 Linaro Ltd. */
+> +
+> +#include <command.h>
+> +#include <console.h>
+> +#include <display_options.h>
+> +#include <image.h>
+> +#include <lwip/apps/http_client.h>
+> +#include <lwip/timeouts.h>
+> +#include <net-lwip.h>
+> +#include <time.h>
+> +
+> +#define SERVER_NAME_SIZE 200
+> +#define HTTP_PORT_DEFAULT 80
+> +
+> +static ulong daddr;
+> +static ulong saved_daddr;
+> +static ulong size;
+> +static ulong prevsize;
+> +#define PROGRESS_PRINT_STEP_BYTES (100 * 1024)
+> +static ulong start_time;
+> +static enum done_state {
+> +        NOT_DONE = 0,
+> +        SUCCESS = 1,
+> +        FAILURE = 2
+> +} done;
+> +
+> +static int parse_url(char *url, char *host, u16 *port, char **path)
+> +{
+> +       char *p, *pp;
+> +       long lport;
+> +
+> +       p = strstr(url, "http://");
+> +       if (!p)
+> +               return -EINVAL;
+> +
+> +       p += strlen("http://");
+> +
+> +       /* Parse hostname */
+> +       pp = strchr(p, ':');
+> +       if (!pp)
+> +               pp = strchr(p, '/');
+> +       if (!pp)
+> +               return -EINVAL;
+> +
+> +       if (p + SERVER_NAME_SIZE <= pp)
+> +               return -EINVAL;
+> +
+> +       memcpy(host, p, pp - p);
+> +       host[pp - p + 1] = '\0';
+> +
+> +       if (*pp == ':') {
+> +               /* Parse port number */
+> +               p = pp + 1;
+> +               lport = simple_strtol(p, &pp, 10);
+> +               if (pp && *pp != '/')
+> +                       return -EINVAL;
+> +               if (lport > 65535)
+> +                       return -EINVAL;
+> +               *port = (u16)lport;
+> +       } else {
+> +               *port = HTTP_PORT_DEFAULT;
+> +       }
+> +       if (*pp != '/')
+> +               return -EINVAL;
+> +       *path = pp;
+> +
+> +       return 0;
+> +}
+> +
+> +static err_t httpc_recv_cb(void *arg, struct altcp_pcb *pcb, struct pbuf *pbuf,
+> +                          err_t err)
+> +{
+> +       struct pbuf *buf;
+> +
+> +       if (!pbuf)
+> +               return ERR_BUF;
+> +
+> +       for (buf = pbuf; buf; buf = buf->next) {
+> +               memcpy((void *)daddr, buf->payload, buf->len);
+> +               daddr += buf->len;
+> +               size += buf->len;
+> +               if (size - prevsize > PROGRESS_PRINT_STEP_BYTES) {
+> +                       printf("#");
+> +                       prevsize = size;
+> +               }
+> +       }
+> +
+> +       altcp_recved(pcb, pbuf->tot_len);
+> +       pbuf_free(pbuf);
+> +       return ERR_OK;
+> +}
+> +
+> +static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
+> +                           u32_t rx_content_len, u32_t srv_res, err_t err)
+> +{
+> +       ulong elapsed;
+> +
+> +       if (httpc_result != HTTPC_RESULT_OK) {
+> +               log_err("\nHTTP client error %d\n", httpc_result);
+> +               done = FAILURE;
+> +               return;
+> +       }
+> +
+> +       elapsed = get_timer(start_time);
+> +        log_info("\n%u bytes transferred in %lu ms (", rx_content_len,
+> +                 get_timer(start_time));
+> +        print_size(rx_content_len / elapsed * 1000, "/s)\n");
+> +
+> +       if (env_set_hex("filesize", rx_content_len) ||
+> +           env_set_hex("fileaddr", saved_daddr)) {
+> +               log_err("Could not set filesize or fileaddr\n");
+> +               done = FAILURE;
+> +               return;
+> +       }
+> +
+> +       done = SUCCESS;
+> +}
+> +
+> +int wget_with_dns(ulong dst_addr, char *uri)
+> +{
+> +       char server_name[SERVER_NAME_SIZE];
+> +       httpc_connection_t conn;
+> +       httpc_state_t *state;
+> +       char *path;
+> +       u16 port;
+> +
+> +       daddr = dst_addr;
+> +       saved_daddr = dst_addr;
+> +       done = NOT_DONE;
+> +       size = 0;
+> +       prevsize = 0;
+> +
+> +       if (parse_url(uri, server_name, &port, &path))
+> +               return CMD_RET_USAGE;
+> +
+> +       memset(&conn, 0, sizeof(conn));
+> +       conn.result_fn = httpc_result_cb;
+> +       start_time = get_timer(0);
+> +       if (httpc_get_file_dns(server_name, port, path, &conn, httpc_recv_cb,
+> +                              NULL, &state))
+> +               return CMD_RET_FAILURE;
+> +
+> +       while (!done) {
+> +               eth_rx();
+> +               sys_check_timeouts();
+> +               if (ctrlc())
+> +                       break;
+> +       }
+> +
+> +       if (done == SUCCESS)
+> +               return 0;
+> +
+> +       return -1;
+> +}
+> +
+> +int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
+> +{
+> +       char *end;
+> +       char *url;
+> +       ulong dst_addr;
+> +
+> +       if (argc < 2 || argc > 3)
+> +               return CMD_RET_USAGE;
+> +
+> +       dst_addr = hextoul(argv[1], &end);
+> +        if (end == (argv[1] + strlen(argv[1]))) {
+> +               if (argc < 3)
+> +                       return CMD_RET_USAGE;
+> +               url = argv[2];
+> +       } else {
+> +               dst_addr = image_load_addr;
+> +               url = argv[1];
+> +       }
+> +
+> +       if (wget_with_dns(dst_addr, url))
+> +               return CMD_RET_FAILURE;
+> +
+> +       return CMD_RET_SUCCESS;
+> +}
+> --
+> 2.40.1
+>
