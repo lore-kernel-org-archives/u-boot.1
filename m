@@ -4,80 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 676F7C25B75
-	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 07:34:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76E1FC25B75
+	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 07:42:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72F4688199;
-	Thu,  6 Jun 2024 09:34:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A726C88193;
+	Thu,  6 Jun 2024 09:42:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VagtvAdH";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="GsgI+lVP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59583881D9; Thu,  6 Jun 2024 09:34:18 +0200 (CEST)
-Received: from mail-ua1-x92f.google.com (mail-ua1-x92f.google.com
- [IPv6:2607:f8b0:4864:20::92f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8F98988199; Thu,  6 Jun 2024 09:42:14 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C595488199
- for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 09:34:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ECBDB88103
+ for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 09:42:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x92f.google.com with SMTP id
- a1e0cc1a2514c-804efaaae87so236153241.0
- for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 00:34:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1717659254; x=1718264054; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZA31EnqKdkmzpqvQ5E3jv35k2G0V89V4zTAghFOKGxU=;
- b=VagtvAdH7ay14a/Yn2doGJq2CPJkr77MGjuLS+x2J99vds2ABZgZA8k38d93cyhAyz
- sIbms0Es6E6ZmlDWYbHp4CezQMf6WQ6X7Lwo2veJCQTYYMQ+qz9BFggxoAcVyc7HsGA2
- p7MJVkOfBvZPZojVZn1ufGvapyxXBNBnDSGr3n1txWNRORTTtIxkQmHLYZVM78v3CDZH
- F1RsxyRiuk2AlFSspIqGw7VV7G0fVXf6mp6oUovknY4vE3NEY7YWwtuGAiRIgE441eEX
- I9wMN9F2undwzBuZBIaHsazKs3ujroHT9kSrlpcNUA88YSHEV59b4E0IGzT8Y+PDJJkI
- UfFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717659254; x=1718264054;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ZA31EnqKdkmzpqvQ5E3jv35k2G0V89V4zTAghFOKGxU=;
- b=MrlxHRUzcDHfPpym6cGlbXwe7pin24KDXlRY+xPEaqRmW6GLOa295NvdDELN5mOnlm
- a3UDp84HPP9Cup41EhdHYUmM9gam394JdUMoy+zuLLP3H9ypiRf9bjIcRIqk7DW3UE0o
- ZXarLyD7chT8yuHIi5LJJVe4g71I/KlqsITUAhF9Q8L60txdHISXExOYJaEYYfbl8i70
- MgC5YL3lEi7VUsWF6yzxnVwKUzRD2WGKwgqtPlpJSfIphFPFgRUWCLP0514Otw2W5wS4
- l49uQ69DP3Szqy0J+6dGdJxCW9wcvlGMxFWRxbociDPp7N1tSdDJ8Ado/fzeComWdiAg
- mifQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXUosx6w1DC3HMI6wDySkQbm5C0xQLNIZ7tnMN17Bu4dy9F9fPexs2jAwgChcVPFhkER6u77XDOOr80T+FSHjE26cfFAQ==
-X-Gm-Message-State: AOJu0YxzUaKE7Ed/cxVNdXA913fpe078+/l4qBdkK6ELPO1DmYtzCqhp
- V+9BajuAY1jEdkSKBWNAst12DJeam0Q5Is8ukv9+shcGrl6qYMzcFKOKNNAR9xJ4+f86p7tL0a+
- sFCeR02ceY7lWe6D4mbAZd7ugCViN5p+lSthzVg==
-X-Google-Smtp-Source: AGHT+IEW3nKuhP8TIOTbpdGbEn09RdpVbq4jmTk/3r7LtTJ5XF3Yl5lXvOjNGUSzEeeWgvprhleeaVyOkexEfVniLuY=
-X-Received: by 2002:a05:6102:292b:b0:48a:3745:ca72 with SMTP id
- ada2fe7eead31-48c048c6b3amr5992886137.2.1717659254537; Thu, 06 Jun 2024
- 00:34:14 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1717659728; x=1718264528; i=xypron.glpk@gmx.de;
+ bh=ZGrtmtoDFv57FwO0nu1dtgkck3MmWM0x68cvWsQRDuQ=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
+ Subject:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=GsgI+lVPpEkPJJfsrvovO2pX4StRaQhLesHHsMw/q0UCqIuAnb8wdsg5IwIjZLI6
+ ZvG/UvEkMMs8gv8nIWCYF2EfVlvzwVq4yPUiYHUDI5wpwp9miHqHWXiD+Mmi0z8DN
+ fshQ+0C84MNHFMGGyQa5kZwWL4PoS7pNWFPlA98k0AHfCPQ2JL4xKnvQcNUJriV29
+ FkFu5CJWlng7fTGoULVceCGUcg3sJkNYJZaWyHpXhXxQBGJIp+1+d7WkmHMx1MwmA
+ VWUfQN4aJoSSsrSV2JFi0dL9d4FsDzc18twvAzip4K5tWA3OHi6nfOUXmcsN/EZ7K
+ Ff+pJnm8RjajQ2yqdA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.107] ([109.42.178.114]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MC30P-1s9JPh0Oib-005Ojx; Thu, 06
+ Jun 2024 09:42:08 +0200
+Message-ID: <8ec6229a-0f90-43fc-9c78-dea655ef5ccb@gmx.de>
+Date: Thu, 6 Jun 2024 09:42:07 +0200
 MIME-Version: 1.0
-References: <20240603-b4-qcom-capsule-updates-v3-0-fe2e083289ec@linaro.org>
- <CAFA6WYP-1tuELgthx=Ky9JYAkgP0mRNEsnHdw2ZmnjHXMAm8Rw@mail.gmail.com>
- <22924b95-5181-4aa8-9014-9a030ee7fea3@linaro.org>
-In-Reply-To: <22924b95-5181-4aa8-9014-9a030ee7fea3@linaro.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Thu, 6 Jun 2024 13:04:03 +0530
-Message-ID: <CAFA6WYMVdwfMGK+DhGbkZ79PWTEMhj_=ZVWedZDDTgqWx=XNBA@mail.gmail.com>
-Subject: Re: [PATCH v3 0/8] qcom: implement capsule updates
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Fiona Klute <fiona.klute@gmx.de>, Sam Povilus <sam.povilus@amd.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Pull request doc-2024-07-rc5
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:gFEUVliCj5E1P66m9v5CNGhUyxS1kOewGFGkEVaOuYhHn34QQJJ
+ s/iIxpWsQb+JJJ/IwlGSPWm8jtqaPq1ALpr23CsQ3mosGIFbDdik23MONYR/k0rOTZjMG10
+ SIKtMmjVVX0Dy2FX9ophf2BNr/6z0OEda+P6MEZS7fdLxH56+TlnuqVNJuZz91bpA5pbhBB
+ NvNKA6YdwqzzzkN6hSVEw==
+UI-OutboundReport: notjunk:1;M01:P0:7lraQ9x99QA=;zOeXeFH1N3ogmu27m2fS644icru
+ jiIQOTZxaqN91p4gwiv5MzUj5Mzp8lpfj+fOX5aY7ZVXjwQXpx9nbavNrBB0Pv0S3PGMO4btE
+ 55cfPjsH65sSfKpRGmnxhB4YZcXOGh7Zcm1QGU5/33C8aKnzAb5yyqZ71PGVWEvVOUS0lwq1n
+ GF/VjMLkBTUCmccMN53m1IlaVfmEgckd0SOi5P1KPf3Rr8DqFsrz4fzc7lr6dIs6sHxljLMep
+ BtYreAf24mBn/XfpSz8ljePlVCNvZ+GlbhvJO218ZFFUb+RlE7WFEYAg2Vu7bza/VhQdO+iM0
+ M1LU9oxOIOU3UuCSsksJxrLAajOLKFztsGOlgPOd3Mp7+msr7rKkr+j9AV6xklP0OVXnGmtl5
+ LMyqptiAHKi9m/nzDs4XX+sj6A8T1RftkrnyJ/Z2FZ1XG+luLPHmTnB/pRTa6/skvBNzr37Jt
+ T2I2bPr0wrimTKim+BqKey815aHWzhUCTgV6WYdWj9n7TIH4U+Xv6o5HlPe0XEKupZqGpOiXp
+ ly90E4xeyr3Jaw0n2ahZNDfOEzThqkdu/VDJexudxWdDwFWlTAdAhx9MUwemJS0d5Po55inqQ
+ pjer88DZ57LkZoCB3k3CPQKWFd29ioY2pl+gxsAHBa0JJY+et26YkBi7ehhV3CSsj3W3NuHQ7
+ ToOWPHeo8+375vEc6ptAUkvWk3qVuolQahX5F2KhgjzOHmGUJECY5bV9BxyAuxGv+IrywsjYs
+ wXxkM0XfobZTSJkq3GxJMHFHYK7/g/R/Txgvz1YZ5mEX5xJCF3UxgOegoOQnD1Byg9qTGOQRi
+ QCh7bZSQktiNOTSKgCJIM/9sv8LRQ3CY8Xa4mZC9Xrdf4=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,78 +87,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 5 Jun 2024 at 18:12, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
-> Hi Sumit,
->
-> On 05/06/2024 07:31, Sumit Garg wrote:
-> > Hi Caleb,
-> >
-> > On Mon, 3 Jun 2024 at 18:19, Caleb Connolly <caleb.connolly@linaro.org> wrote:
-> >>
-> >> Hook up support for capsule updates loaded from disk on Qualcomm
-> >> platforms.
-> >>
-> >> Most Qualcomm devices have an A/B partition layout, with most partitions
-> >> duplicated. The metadata on which slot is active is stored in the GPT
-> >> headers in the vendor-specific attribute bits of each partition.
-> >
-> > It's good to see capsule updates support coming up for Qualcomm
-> > platforms. AFAICS, with this series we only update U-Boot on the
-> > current active partition. IOW, real A/B support is still not
-> > supported. Do you think it is possible for U-Boot to update metadata
-> > in GPT headers and for proprietary bootloaders to pick up the U-Boot
-> > from the updated partition?
->
-> Yes this would be possible, I have some WIP patches to let us modify the
-> slot attribute bits and write back the header.
+Dear Tom,
 
-Nice to hear that possibility.
+The following changes since commit 4b992573b34b1586e323e27b177680a6efec1c7=
+6:
 
->
-> The reason I haven't implement A/B is because we don't support it from
-> the OS level on any of the boards I work on. We often patch ABL to
-> disable or skip the slot logic and flash a partition table without
-> slots. It also unlocks a bunch of additional complexity...
+   Merge https://gitlab.denx.de/u-boot/custodians/u-boot-usb (2024-06-05
+10:59:10 -0600)
 
-Please have a look at an alternative FWU Multi Bank Updates [1].
-AFAIK, the UEFI capsules updates feature from the OS point of view
-remains transparent. It's more about how those capsules are
-interpreted with the logic to update the inactive partition and
-metadata such that subsequent boot uses the updated firmware.
+are available in the Git repository at:
 
-[1] https://docs.u-boot.org/en/latest/develop/uefi/fwu_updates.html
+   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+tags/doc-2024-07-rc5
 
->
-> This isn't super high on my todo list but I'd be happy to help if
-> someone wants to enable this functionality. We'd need:
->
-> 1. Upstream support for modifying the GPT (see my PoC at [1] and [2]).
-> 2. Logic to configure flashing the active or inactive slot
->
-> This logic would have to run after the capsule update, I don't know if
-> there is currently a way to add a callback after the update.
->
-> If we enable updating other images (like XBL, hyp, tz, etc), we would
-> need to either agree that a capsule update would have to update ALL
-> partitions, or implement logic to copy over partitions that weren't
-> flashed to the other slot.
+for you to fetch changes up to 0efc5a9f670144cad7f287711f25c69cba0fde39:
 
-I would be interested to see how we can plug Qcom specific pieces
-underneath in order to have multi bank updates. However, this patchset
-is still usable in its current form. We can later add the real A/B
-functionality.
+   doc: process.rst: Document device tree resync rules (2024-06-06
+09:28:20 +0200)
 
-Apart from patch #4 where we are still discussing the finer details,
-feel free to add:
+Gitlab CI showed no issues building the documentation:
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/20988
 
-Acked-by: Sumit Garg <sumit.garg@linaro.org>
+=2D---------------------------------------------------------------
+Documentation:
 
--Sumit
+* Update netconsole examples mentioning stderr.
+* Describe what an "fpga" image is in FIT files.
+* process.rst: Document device tree resync rules.
 
->
-> [1]:
-> https://git.codelinaro.org/linaro/qcomlt/u-boot/-/commit/34d3de6f79550527746303e0bf6337fa37e31fe5
->
-> [2]:
-> https://git.codelinaro.org/linaro/qcomlt/u-boot/-/commit/656d9e816bef85e586460a999cc7874255be9f1d
+=2D---------------------------------------------------------------
+Fiona Klute (2):
+       doc: Detailed example for netconsole setup
+       doc: Update netconsole examples, mention stderr
+
+Sam Povilus (2):
+       doc: Remove extraneous curly braces
+       doc: add clarity to what a "fpga" image is
+
+Tom Rini (2):
+       doc: process.rst: Use subsubheading for "Phases of the
+Development Process"
+       doc: process.rst: Document device tree resync rules
+
+  doc/develop/devicetree/control.rst   |  9 ++++--
+  doc/develop/process.rst              | 21 +++++++++++---
+  doc/usage/fit/source_file_format.rst | 28 +++++++++---------
+  doc/usage/netconsole.rst             | 55
++++++++++++++++++++++++++++++-------
+  4 files changed, 82 insertions(+), 31 deletions(-)
