@@ -4,80 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A01ECC27C54
-	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 17:46:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75B6AC27C52
+	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 18:46:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6E6888009;
-	Thu,  6 Jun 2024 19:46:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9FBBC8823C;
+	Thu,  6 Jun 2024 20:46:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MgaANj1X";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Aga2rFC1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B0068806C; Thu,  6 Jun 2024 19:46:11 +0200 (CEST)
-Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
- [IPv6:2607:f8b0:4864:20::531])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D308A883CE; Thu,  6 Jun 2024 20:46:30 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B8C187F64
- for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 19:46:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 35186881A1
+ for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 20:46:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-6c9e8c0a15bso956388a12.3
- for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 10:46:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1717695967; x=1718300767; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LX27vffjMR0jHJi/C3UKCA5ZlFWtQg+SsVC4ba71kvk=;
- b=MgaANj1XDgbYck6HJVvRWfkC9twk/qq87eGb3d1dKU9poOdJsombhK+3c2qkXWnPVY
- BE1U3uPcY7bYQ8AN8Bhy9SAYbaBzmyXu9s7BiD4oub1buse5N7awVD826zt7CTw7WPTk
- B017VNHXKNxzr9NyKYiVyIIb/RLY/hEtLhHUD5KrrZx3q3IB9raEjPCNUjq2ElwpPGO6
- 3eO8e0Td2liTuGHDewCYBdjwtpC0ctcB7jTQnqbjwoQg7rMLlIMEd5CK7hKbge8+smuS
- qAXHLnupJECBhlhnk2k5LCvemAtM8kW6EPPU4U1OgUV003WrPbAX7GSD1ZkuFKLxjkgv
- d97w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717695967; x=1718300767;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=LX27vffjMR0jHJi/C3UKCA5ZlFWtQg+SsVC4ba71kvk=;
- b=cFv2892D4FBO3izLCBb/XzjAcqySFn9yZudVq5Vfmxkvdxkz1+vdH6f72RRw0TovXe
- TeCqtXjehNXE/zfNuEr+AoO6pA9to3KgA/XaxiVxIoWmlBhteiF/GOYshIEsAAgQ9WvM
- nQGTgqLS3mNBxwDju429l7Qv9fcyqWOCTD4sk9OY5C19JueHJkHzl0gRkPDfBlgoq28O
- Iu6flyGEuE68gmhj1RcGhDJlJFdrMrIf+KAuz5w+KG1asyCv3ZVAmpmTd04sH72mkaVE
- SPMRw4uslAkuZdLjQy8aumfRvRbd41S99s11WkfFUol95RLu8/UlVza7IBeczzR4LVzw
- bsEw==
-X-Gm-Message-State: AOJu0Yw9uTgZqC4Lv5vQLMheiveC5UXB8YJYZcnDIBs2nMMUUPLUEnws
- afIr3fMcgTwMtHJvSJpNR2zs4DMX5XxVWSNPaR3jkvO1uW4MUMY+nSSqA333LaodbVfAqcePUI5
- tC3aTrSooUmYdcxdIb/2wYFi1E6whjbcWm1Lkdw==
-X-Google-Smtp-Source: AGHT+IFEfekHZ6rFFgd49ygatlgeRO6plXZc3592wIeMixWUljygTxQBAzUAiSRvb2CbDlaPBjvdEdcp924iR/JpHhw=
-X-Received: by 2002:a17:90a:8402:b0:2c2:5a29:9bb5 with SMTP id
- 98e67ed59e1d1-2c2bcacce7cmr229970a91.5.1717695967453; Thu, 06 Jun 2024
- 10:46:07 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 456IkPU1067874;
+ Thu, 6 Jun 2024 13:46:25 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1717699585;
+ bh=yHgN9UMt+Gu3b+XCwpkG4Mnye9OfjdVzl3ynuVbC89g=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=Aga2rFC1LdBbNrQYELVge5hdknZLj5BUyKLEdAy4vecfpFvU3SYxfp0DMBrWECgnU
+ 8mqrc9n36kx62gvVAtu6edSOAc+eJM8673tG8oJlSgFlPD0ZfjFZJKo1FtvuS2mw1f
+ KgFtMOeH/B5cTP101LmpJvRYArWKOxxbI3ZWG7qQ=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 456IkPqf030889
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 6 Jun 2024 13:46:25 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 6
+ Jun 2024 13:46:24 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 6 Jun 2024 13:46:24 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 456IkOBJ112496;
+ Thu, 6 Jun 2024 13:46:24 -0500
+Date: Thu, 6 Jun 2024 13:46:24 -0500
+From: Bryan Brattlof <bb@ti.com>
+To: Nishanth Menon <nm@ti.com>
+CC: Tom Rini <trini@konsulko.com>, Dhruva Gole <d-gole@ti.com>, Vignesh
+ Raghavendra <vigneshr@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH 0/3] arm: dts: am625/am62a7: Switch over to OF_UPSTREAM
+Message-ID: <20240606184624.s53zlrdztsiig3qv@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20240605152752.1711835-1-nm@ti.com>
 MIME-Version: 1.0
-References: <cover.1717680809.git.jerome.forissier@linaro.org>
- <7ae6750ee1319cafa8b5b86f34394d597439b610.1717680809.git.jerome.forissier@linaro.org>
- <CAC_iWjJcnBv_1iVeJGk=G1yc54TFF7Jqooa5m30AMoVGR1FSLw@mail.gmail.com>
- <CAC_iWjLqEVLcys4YDXqgwvSUOpwHvdwOZ0Ms0j8_y_ew4MEBKQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjLqEVLcys4YDXqgwvSUOpwHvdwOZ0Ms0j8_y_ew4MEBKQ@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 6 Jun 2024 20:45:31 +0300
-Message-ID: <CAC_iWj+b3wq=7t++3UAtcjDtmN9itgXu2sODD4nqkR82gTbGDg@mail.gmail.com>
-Subject: Re: [PATCH v3 05/12] net-lwip: add ping command
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>, 
- Maxim Uvarov <muvarov@gmail.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Eddie James <eajames@linux.ibm.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Peter Robinson <pbrobinson@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+In-Reply-To: <20240605152752.1711835-1-nm@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,158 +80,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 6 Jun 2024 at 20:02, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> On Thu, 6 Jun 2024 at 19:53, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > [...]
-> >
-> > > +static int ping_raw_init(void *recv_arg)
-> > > +{
-> > > +       ping_pcb = raw_new(IP_PROTO_ICMP);
-> > > +       if (!ping_pcb)
-> > > +               return -ENOMEM;
-> > > +
-> > > +       raw_recv(ping_pcb, ping_recv, recv_arg);
-> > > +       raw_bind(ping_pcb, IP_ADDR_ANY);
-> > > +
-> > > +       return 0;
-> > > +}
-> > > +
-> > > +static void ping_raw_stop(void)
-> > > +{
-> > > +       if (ping_pcb != NULL) {
-> >
-> > nits, but we usually do if (!ping_pcb) for NULL pointers and variables
-> > that have a value of 0.
-> > Please change it in other files as well
-> >
-> >
-> > > +               raw_remove(ping_pcb);
-> > > +               ping_pcb = NULL;
-> > > +       }
-> > > +}
-> > > +
-> > > +static void ping_prepare_echo(struct icmp_echo_hdr *iecho)
-> > > +{
-> > > +       ICMPH_TYPE_SET(iecho, ICMP_ECHO);
-> > > +       ICMPH_CODE_SET(iecho, 0);
-> > > +       iecho->chksum = 0;
-> > > +       iecho->id = PING_ID;
-> > > +       iecho->seqno = lwip_htons(++ping_seq_num);
-> > > +
-> > > +       iecho->chksum = inet_chksum(iecho, sizeof(*iecho));
-> > > +}
-> > > +
-> > > +static void ping_send_icmp(struct raw_pcb *raw, const ip_addr_t *addr)
-> > > +{
-> > > +       struct pbuf *p;
-> > > +       struct icmp_echo_hdr *iecho;
-> > > +       size_t ping_size = sizeof(struct icmp_echo_hdr);
-> > > +
-> > > +       p = pbuf_alloc(PBUF_IP, (u16_t)ping_size, PBUF_RAM);
-> > > +       if (!p)
-> > > +               return;
-> > > +
-> > > +       if ((p->len == p->tot_len) && (p->next == NULL)) {
-> >
-> > && !p->next
-> >
-> > > +               iecho = (struct icmp_echo_hdr *)p->payload;
-> > > +               ping_prepare_echo(iecho);
-> > > +               raw_sendto(raw, p, addr);
-> > > +       }
-> > > +
-> > > +       pbuf_free(p);
-> > > +}
-> > > +
-> > > +static void ping_send(void *arg)
-> > > +{
-> > > +       struct raw_pcb *pcb = (struct raw_pcb *)arg;
-> > > +
-> > > +       ping_send_icmp(pcb, ping_target);
-> > > +       sys_timeout(PING_DELAY_MS, ping_send, ping_pcb);
-> > > +}
-> > > +
-> > > +static int ping_loop(const ip_addr_t* addr)
-> > > +{
-> > > +       bool alive;
-> > > +       ulong start;
-> > > +       int ret;
-> > > +
-> > > +       printf("Using %s device\n", eth_get_name());
-> > > +
-> > > +       ret = ping_raw_init(&alive);
-> > > +       if (ret < 0)
-> > > +               return ret;
-> > > +       ping_target = addr;
-> > > +       ping_seq_num = 0;
-> > > +
-> > > +       start = get_timer(0);
-> > > +       ping_send(ping_pcb);
-> > > +
-> > > +       do {
-> > > +               eth_rx();
-> > > +               if (alive)
-> > > +                       break;
-> > > +               sys_check_timeouts();
-> > > +               if (ctrlc()) {
-> > > +                       printf("\nAbort\n");
-> > > +                       break;
-> > > +               }
-> > > +       } while (get_timer(start) < PING_TIMEOUT_MS);
-> >
-> > I am a bit confused about what happens here.
-> > ping_send() will send the packet, but it will also schedule itself to
-> > rerun after 1 ms and send another ping?
-> >
-> > > +
-> > > +       sys_untimeout(ping_send, ping_pcb);
-> >
-> > So we need the sys_untimeout() because we queued 2 pings? Because
-> > sys_timeout() is supposed to be an one shot.
->
-> Ah nvm, I misread that. We always reschedule ping_send_icmp(), that's
-> why we have to delete it here
+On June  5, 2024 thus sayeth Nishanth Menon:
+> Cleanup am625 on by switching over the last two platforms (SK and
+> beagleplay) over to OF_UPSTREAM, and while at it, switch over am62a7
+> (last of the am62* family) over as well.
+> 
+> This superscedes the previous version of beagleplay only patch[1]
+> 
+> Test logs: https://gist.github.com/nmenon/ba310d3750a80789aca6a4fd90190135
+> 
+> Nishanth Menon (3):
+>   arm: dts: am625_beagleplay: Switch to OF_UPSTREAM
+>   arm: dts: am625_sk: Switch to OF_UPSTREAM
+>   arm: dts: am62a7_sk: Switch to OF_UPSTREAM
 
-Ok so looking at it a bit more. Why do we have to schedule contunuous pings?
-We just have to send one packet and wait for the response no?
+Looks great to me
 
-Thanks
-/Ilias
->
->
-> >
-> > Thanks
-> > /Ilias
-> > > +       ping_raw_stop();
-> > > +       ping_target = NULL;
-> > > +
-> > > +       if (alive) {
-> > > +               alive = false;
-> > > +               return 0;
-> > > +       }
-> > > +       printf("ping failed; host %s is not alive\n", ipaddr_ntoa(addr));
-> > > +       return -1;
-> > > +}
-> > > +
-> > > +int do_ping(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-> > > +{
-> > > +       ip_addr_t addr;
-> > > +
-> > > +       if (argc < 2)
-> > > +               return CMD_RET_USAGE;
-> > > +
-> > > +       if (!ipaddr_aton(argv[1], &addr))
-> > > +               return CMD_RET_USAGE;
-> > > +
-> > > +       if (ping_loop(&addr) < 0)
-> > > +               return CMD_RET_FAILURE;
-> > > +
-> > > +       return CMD_RET_SUCCESS;
-> > > +}
-> > > --
-> > > 2.40.1
-> > >
+Reviewed-by: Bryan Brattlof <bb@ti.com>
+
+~Bryan
