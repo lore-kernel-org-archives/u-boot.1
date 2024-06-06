@@ -4,77 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4825C27C52
-	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 10:08:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0314EC25B75
+	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 11:44:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4914E883EA;
-	Thu,  6 Jun 2024 12:08:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id DCBCA88274;
+	Thu,  6 Jun 2024 13:44:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="tSeDMiO8";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1799088423; Thu,  6 Jun 2024 12:08:02 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 13367883CF; Thu,  6 Jun 2024 13:44:17 +0200 (CEST)
+Received: from smtp-8faa.mail.infomaniak.ch (smtp-8faa.mail.infomaniak.ch
+ [83.166.143.170])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC7C687F5C
- for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 12:07:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1117887D40
+ for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 13:44:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-354be94c874so565451f8f.3
- for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 03:07:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1717668479; x=1718273279;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=Df73NAHe71ICYdA1lf9Ll42gD67/5NWHpektfFo0Hsk=;
- b=tSeDMiO8aL/FbBLfs8GC1qHie3wEIvicVvtGUAQ+BOUZOvmbO95JIqb5qlfR1aGOaG
- IjDnTF+hqRFLzr8d2EADYazxwHAXXgDNUyNutJ5o36zEo+Kqpsw9SLSCRLgxkCu7b1or
- D+kwv2D/RrfqrUWg1hxYyb+4oHEaFfN1qQ4PTjEJ2WibSS4DDoNfIb6qNOjNu7bMoTCE
- YWPg+085Xaqq8pz8cvFXJn70Z3ubvSKioL4vKO3kwx6bzQ6ieOsJ2iAtFpRoUCuyTscR
- 0Vrm4aCCUAx5refFFi+OTc8bZoI2BjR6JhN7BdJjsdkAKqd1Rp5DJwdneY1uo73FgmAq
- NTQA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717668479; x=1718273279;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Df73NAHe71ICYdA1lf9Ll42gD67/5NWHpektfFo0Hsk=;
- b=Tkq5+Ve7exK1rbFwjy17OzYzUjY8O8JHhBRz40HMbJ8zHgXGXl12TK3FPQ+GdsnkVS
- iWnCV5felCbicRAiY12s7GG7reJpotsqCP6Ksj5TC3TCyT+/sJsHwl4Oa7FH04lt5xWn
- /Orf/fj6GxMGw3BhRsuH8VjM6bdKcrkT3jRl+SQ4XjsjVYdCSR4C0GPplevlmOlQX47l
- qw1qqmlkKHLZxQvG7j/8jvMWTsZYO/McjHW5J43XtpUxDDb7BOm/t/wj85rL8erqRAC+
- xyzz5nC0ngSmupqzuEdbRhhviosOW8m9MiUUbXOOny6oh8I3jCY0fM4zsbE9QlhJ7q3v
- 4mpA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWhqYPVFdJQTILYr+nInA9MC+EbfzEJWR+8wcw+yyU1HEpCT90r+tdFpMqtV1lr9ccGTOhKQhw0aAGOczSqWfVy+51p4w==
-X-Gm-Message-State: AOJu0Yws6PmkWVFIv6IxT3O5YLzuEe8bJr7zm3Q6K0joH64HbsTt6hnT
- u6yTU+JkhVffc934gWxS7UZoeRUKMpiovUfS+qyLV8aK1INK5lO1WEfSf9To7hc=
-X-Google-Smtp-Source: AGHT+IETqeuDMGkLlm6MHjvR0klDrl+wrdPWAiQNrmPaxP7Xux6oYwhm6ctzngE9btNyGPnoTmrMkw==
-X-Received: by 2002:adf:f186:0:b0:355:1b5:befb with SMTP id
- ffacd0b85a97d-35e8ef8fd2emr4264489f8f.43.1717668479282; 
- Thu, 06 Jun 2024 03:07:59 -0700 (PDT)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-35efa97b15dsm83305f8f.81.2024.06.06.03.07.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Jun 2024 03:07:58 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, Neil Armstrong
- <neil.armstrong@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [GIT PULL] Please pull u-boot-dfu-20240606
-In-Reply-To: <87o78e1k0c.fsf@baylibre.com>
-References: <87o78e1k0c.fsf@baylibre.com>
-Date: Thu, 06 Jun 2024 12:07:56 +0200
-Message-ID: <87ikym1j0j.fsf@baylibre.com>
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
+ [10.4.36.107])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Vw2YB4xgrz7xh;
+ Thu,  6 Jun 2024 13:44:14 +0200 (CEST)
+Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4Vw2Y94dtxzhtN; Thu,  6 Jun 2024 13:44:13 +0200 (CEST)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Date: Thu, 06 Jun 2024 13:44:04 +0200
+Subject: [PATCH] rockchip: mkimage: fix mkimage -l for header v1
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20240606-rkcommon-dumpimage-mkimage-v1-1-018515731e86@cherry.de>
+X-B4-Tracking: v=1; b=H4sIAAOhYWYC/yWMSQqAMAwAvyI5W4hbFb8iHqRGDZJWWhSh+HeLn
+ oaBYSIE8kwB+iyCp4sDO5ukyDMw22RXUjwnhxLLGjVq5XfjRJxV8ykHy5QK2X82nS7QLNhWNUI
+ aHJ4Wvr/5MD7PC2ZiG0BsAAAA
+To: Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.13.0
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,54 +61,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi everyone,
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-On jeu., mai 16, 2024 at 17:12, Mattijs Korpershoek <mkorpershoek@baylibre.com> wrote:
+There are two paths to reach this function, either through mkimage -l or
+through dumpimage -l. The latter passes a NULL imagename while the
+former passes an empty string. Therefore, let's make both tools behave
+the same by handling the empty string the same way as for NULL.
 
-> Hi Tom,
->
-> Please find some fixes for master:
->
-> - dwc3 fix crash when ep0 stalls or gadget is stopped
-> - Kconfig build fix for DFU_SF (SPI flash DFU driver)
->
-> The CI job is at https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/20990
+Without this, the only way to get some information out of mkimage -l is
+to provide "-n rk3399" for example, which isn't documented in the usage
+of the tool.
 
-Please ignore this one, my mail client screwed up the send date.
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+ tools/rkcommon.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Sorry about that :(
+diff --git a/tools/rkcommon.c b/tools/rkcommon.c
+index 12c27b34eaa..3e52236b15a 100644
+--- a/tools/rkcommon.c
++++ b/tools/rkcommon.c
+@@ -470,7 +470,7 @@ int rkcommon_verify_header(unsigned char *buf, int size,
+ 	 * If no 'imagename' is specified via the commandline (e.g. if this is
+ 	 * 'dumpimage -l' w/o any further constraints), we accept any spl_info.
+ 	 */
+-	if (params->imagename == NULL)
++	if (params->imagename == NULL || !strlen(params->imagename))
+ 		return 0;
+ 
+ 	/* Match the 'imagename' against the 'spl_hdr' found */
 
-Mattijs
+---
+base-commit: 4b992573b34b1586e323e27b177680a6efec1c76
+change-id: 20240606-rkcommon-dumpimage-mkimage-58610cf07340
 
->
-> Thanks,
-> Mattijs
->
-> The following changes since commit c0ea27bccfb7d2d37fd36806ac2a2f7389099420:
->
->   Prepare v2024.07-rc4 (2024-06-03 18:34:59 -0600)
->
-> are available in the Git repository at:
->
->   https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu-20240606
->
-> for you to fetch changes up to 4339138a2086f8449b9356130cb6e97a81aa8679:
->
->   dfu: add missing dependency for SPI flash DFU driver (2024-06-06 09:11:21 +0200)
->
-> ----------------------------------------------------------------
-> u-boot-dfu-20240606
->
-> - dwc3 fix crash when ep0 stalls or gadget is stopped
-> - Kconfig build fix for DFU_SF (SPI flash DFU driver)
->
-> ----------------------------------------------------------------
-> Heinrich Schuchardt (1):
->       dfu: add missing dependency for SPI flash DFU driver
->
-> Neil Armstrong (1):
->       usb: dwc3: gadget: fix crash in dwc3_gadget_giveback()
->
->  drivers/dfu/Kconfig       | 1 +
->  drivers/usb/dwc3/gadget.c | 4 ++--
->  2 files changed, 3 insertions(+), 2 deletions(-)
+Best regards,
+-- 
+Quentin Schulz <quentin.schulz@cherry.de>
+
