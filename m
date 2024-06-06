@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51EA2C27C52
-	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 23:55:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B741AC27C52
+	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 23:55:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F04E88009;
-	Fri,  7 Jun 2024 01:55:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 073C98845E;
+	Fri,  7 Jun 2024 01:55:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XvGnnbZV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UO75mKlP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71B9C88009; Fri,  7 Jun 2024 01:55:08 +0200 (CEST)
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
+ id 1780088453; Fri,  7 Jun 2024 01:55:13 +0200 (CEST)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF58D8842C
- for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 01:55:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B22B78843A
+ for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 01:55:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-24c9f628e71so759074fac.1
- for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 16:55:04 -0700 (PDT)
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-3d1bc6e5f01so847743b6e.0
+ for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 16:55:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1717718103; x=1718322903; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1717718109; x=1718322909; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=4vFYaEe2rqUoERYkG6XJL3Pfe6BkszOfGlBs/m7cBkU=;
- b=XvGnnbZVGe8g7iKtKJoUsz2I1tRWvmhZUiLFJ/HDLXgY5Z8PMrx3jE2TIZXTYZW8Sz
- KGPnEUDXvO5I6hdgevzCWhDbf4ATVWtEDWFD4FQnLolPAZ2TE3nebP3x5QFx54ldIK5w
- nw/nc4+1lC3jb1eevacJ7VXyiio4mu4fWauh8=
+ bh=gTpNf2g4SpkPXj0sQNE4byZz9/nDBMapBdIX+nQg1Q0=;
+ b=UO75mKlP5FbCdhgcK2mJskHKklpoGMJtnzaMBZOok/8v0E3tnHxuy65SUGgrAm2nyc
+ jljtEGr0zFRnd9eWeJFKJoXw7vnhhN4naRmellwLLFiJJWRmvOG0XsrXgWPDYQA2YgAU
+ 8v+2zOppC2Y291Jkqpem5X09+37nUBSROC7Cw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717718103; x=1718322903;
+ d=1e100.net; s=20230601; t=1717718109; x=1718322909;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4vFYaEe2rqUoERYkG6XJL3Pfe6BkszOfGlBs/m7cBkU=;
- b=VR2PiiO54v7Iwnz1AIAjKDX0fXms+DIo0ejF0ZmycOCUttmsGIKRSGcv08IuCmNQ8b
- 6KZn/qLF+N9U/DsXxnrbwqXAB2ycuo0yrZo3f7mj1RzCOGGu+t9zMml6zICPruaNDjOK
- ZizKl93LGYw0uV61HfwbmOoNmsRkCWiz+kcm904rGrvKP9TW7CHEv6xH2ONtPtRGrK1m
- Hf0ApzvWTYr6m+mDzt6lB+eY/FpLVpaNmZk1Q44Xpil9SkjeP9uHuyfPsikfMwrvSnXY
- iTakghEp+F7P2eSG1xR9RY7N8Tx5b+Cfip4Hl8gwdnpOH9MBBsfAhPG02xAU4SsNg5Fo
- M6Kw==
-X-Gm-Message-State: AOJu0YxVq082PTysW8RnIQlUbh+p6q7FU84byaMSv6r8sMVu18Of3Yr2
- cUj1Q36TuLmkL863dSNyV5pcvdY+feZ2sR2RD2FZD+Jn+PzmY/POz1ZjF3epsV8=
-X-Google-Smtp-Source: AGHT+IHHxF6xQbUkDujkZW5gEtvwE04y76Xam6cfD5V/boq4iYq3Ap6nX3qnpSZmRidjz9kDEEx1Hw==
-X-Received: by 2002:a05:6870:d113:b0:240:eab9:1635 with SMTP id
- 586e51a60fabf-254644debcfmr1032011fac.21.1717718103397; 
- Thu, 06 Jun 2024 16:55:03 -0700 (PDT)
+ bh=gTpNf2g4SpkPXj0sQNE4byZz9/nDBMapBdIX+nQg1Q0=;
+ b=Gokv8nUH7QKHgij/uinmlndQU+86Gh8pzIbqrtCwEmQY0C1v32QE87/SegTCMPq+AR
+ DBpxetoAcrGzQ4sjHvJ1U3P/MHbj+Kw7w1eTmeaFwHuafmuTN19jkXKSn/VhDTiLkqGt
+ J73f2MbcCJ+ZPNB+YsmiYSpYuAclb65dSgaw2ns6wHxEm8SLv6IxBY81I9fz7jq9iuKR
+ 6gQhN6bj/QfKmait6kTTVBfwkVx8XG+AoyGfwH9KcKWbrupiAmrNoG//1odb7pD2xR7J
+ iRn66GawPBTc7blGX6BT6Q/In9TBjpN7mwu3RmgYiKi7Q/FLZfrNPZDdhcXaf8PhsdH7
+ kQlg==
+X-Gm-Message-State: AOJu0Yxf/ULjujoRhx8TVkyg2q/p+4342UAACPtY4LVUDkrlNQREcK6P
+ elipG4TO0Y8Fhf41kzG03ccZcOzVKQzJFmRAunZ4vh5+WHZYCTJ0ElYr5+QBM2c=
+X-Google-Smtp-Source: AGHT+IHH7Fjbb8BSKN6Adc0NBdC+7qNT98Izyx6G7lNVR2qZjtCGcZMm5QEBmASxcnno+9HVyiQA9Q==
+X-Received: by 2002:aca:2801:0:b0:3d1:fd63:a0f with SMTP id
+ 5614622812f47-3d210d6a03cmr861407b6e.20.1717718109244; 
+ Thu, 06 Jun 2024 16:55:09 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
  [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25447d71e28sm623599fac.10.2024.06.06.16.55.02
+ 5614622812f47-3d20b66ca3dsm456641b6e.9.2024.06.06.16.55.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Jun 2024 16:55:02 -0700 (PDT)
-Date: Thu, 6 Jun 2024 17:55:00 -0600
+ Thu, 06 Jun 2024 16:55:08 -0700 (PDT)
+Date: Thu, 6 Jun 2024 17:55:06 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Fiona Klute <fiona.klute@gmx.de>, Sam Povilus <sam.povilus@amd.com>
-Subject: Re: Pull request doc-2024-07-rc5
-Message-ID: <20240606235500.GF68077@bill-the-cat>
-References: <8ec6229a-0f90-43fc-9c78-dea655ef5ccb@gmx.de>
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [GIT PULL] Please pull u-boot-dfu-20240606
+Message-ID: <20240606235506.GG68077@bill-the-cat>
+References: <87le3i1j2j.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="n/3UixDYZTonhxe5"
+ protocol="application/pgp-signature"; boundary="rCkwXlXFyQ1Y04B3"
 Content-Disposition: inline
-In-Reply-To: <8ec6229a-0f90-43fc-9c78-dea655ef5ccb@gmx.de>
+In-Reply-To: <87le3i1j2j.fsf@baylibre.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,33 +92,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---n/3UixDYZTonhxe5
+--rCkwXlXFyQ1Y04B3
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jun 06, 2024 at 09:42:07AM +0200, Heinrich Schuchardt wrote:
+On Thu, Jun 06, 2024 at 12:06:44PM +0200, Mattijs Korpershoek wrote:
 
-> Dear Tom,
+> Hi Tom,
 >=20
-> The following changes since commit 4b992573b34b1586e323e27b177680a6efec1c=
-76:
+> Please find some fixes for master:
 >=20
->   Merge https://gitlab.denx.de/u-boot/custodians/u-boot-usb (2024-06-05
-> 10:59:10 -0600)
+> - dwc3 fix crash when ep0 stalls or gadget is stopped
+> - Kconfig build fix for DFU_SF (SPI flash DFU driver)
+>=20
+> The CI job is at https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pi=
+pelines/20990
+>=20
+> Thanks,
+> Mattijs
+>=20
+> The following changes since commit c0ea27bccfb7d2d37fd36806ac2a2f73890994=
+20:
+>=20
+>   Prepare v2024.07-rc4 (2024-06-03 18:34:59 -0600)
 >=20
 > are available in the Git repository at:
 >=20
->   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/doc-2024-07-rc5
+>   https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu=
+-20240606
 >=20
-> for you to fetch changes up to 0efc5a9f670144cad7f287711f25c69cba0fde39:
+> for you to fetch changes up to 4339138a2086f8449b9356130cb6e97a81aa8679:
 >=20
->   doc: process.rst: Document device tree resync rules (2024-06-06
-> 09:28:20 +0200)
->=20
-> Gitlab CI showed no issues building the documentation:
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/20988
+>   dfu: add missing dependency for SPI flash DFU driver (2024-06-06 09:11:=
+21 +0200)
 >=20
 
 Applied to u-boot/master, thanks!
@@ -125,22 +133,22 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---n/3UixDYZTonhxe5
+--rCkwXlXFyQ1Y04B3
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZiTFQACgkQFHw5/5Y0
-tyzp3Av/aYtrYlMMoAcBh+2SEqi+BcmmRbqNOiYwInztz8ba55wTD4o8yK2NHNp/
-1NCLr2PdMBmLanT87Vyb3rxPsV6cARHohfq0IHsBZiOYSeS04acMGYtLTtnMxSjB
-QRDMCqABFHnk8piBGiJ2yTW4uMn35ep2cEJn6Y2pWCnCC+HFI5mOGMwrI9PoeCCI
-QPE0KD14VksUzwdjuNPRw6aEh+nU/WowQql94/aMtkoBkqNOvBhG7LmE6akPUAi2
-yG4UxskaNlMgMpKPbkOOhRIo9FFCk7ld8Hyqr7iOdZN4XHrffxmWHLDAbJRGvcyE
-Uv+xA4tJPyqFxas8xylM03bVusu7jb1tLqhOG7rPfKDcWT5GSqxQesh1PB8/XSeh
-ZQJKlHITJj8sn5KATipXXb5si7F+x2DHiYq/hD06IBYN8yV+CI8cfmlb2kaWJX5Y
-QtYHaDUUhFxu9l6hrdxCPsiyg8Drfq9MUBL6hZSxppxTmQ9A1iy0Q/o+Fv/ZNZqf
-3NA9Te/X
-=9Vsm
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZiTFoACgkQFHw5/5Y0
+tyyoJAv+JJd8SLROkrq8wepUw+ps6q/PvxHBp7AW0iE6MVML+3vV1hfdDSFe3TxJ
+gET6K/y2SvE4KDvKm2TLLJZtv55RvN+3Xi4pjeOWIXWiaiFCA7q0lWOQF4Tb71PI
+HPTEeCD6sVIn1/6xPVcaemxzujh0dOwgA1RXcPa1OQSunQIR+EZmDrwHClZV1AjY
+nbVTI0yYGMn9DZauQF73sZjQAAqW9qGDohW0Up7g8GIG/8JZzNCtm73EaUcH+t8t
+xBq3Dmt2d3GjL/MIp5UuteWQfx521/sGWvyS/SXvRZCwPp6vrpepjMGVxvxgxYHE
+EDu54HLG6KPBUE4E1mgrtvvcDep/UesTTZb0YcdHaUlsIFCL7EWYRGcgKAmorgYY
+UgfuqK8be1/tEIeFsVY2w+MFEtPKteylSRX5z5XOCUvXXCw34JK4kl/kb+aQ1Wt7
+buGbcb7J9pHFN2ltZY3pTpasuyVgJSlzF0juzEV6tDESpnf3MIwaOCFaBncT/WXp
+877Swjgh
+=LoWA
 -----END PGP SIGNATURE-----
 
---n/3UixDYZTonhxe5--
+--rCkwXlXFyQ1Y04B3--
