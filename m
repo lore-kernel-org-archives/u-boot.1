@@ -4,92 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E8B0C27C54
-	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 16:36:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A369C27C55
+	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 16:36:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB183884EA;
-	Thu,  6 Jun 2024 18:33:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 22038884F4;
+	Thu,  6 Jun 2024 18:33:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VkfhJftV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GQ6aPcvG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA61F87E1D; Thu,  6 Jun 2024 16:30:51 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id 9986388274; Thu,  6 Jun 2024 16:48:15 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9AE6A88428
- for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 16:30:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2110688103
+ for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 16:48:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-35dd0c06577so1064623f8f.2
- for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 07:30:49 -0700 (PDT)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-42122ac2f38so6291365e9.1
+ for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 07:48:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717684249; x=1718289049; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=1SnK722UF5gQtV5gKPMHvDpazj/jDZqxf6MafxYMW7M=;
- b=VkfhJftV/Y/IgEqmozQOyB4bfIvcUa6oj2M/f/lvPkc8wM/bLyiF6GP4o+6R2VrT6m
- 3mkJs3whrf6SEN/I0vl9wCB9jJYC822d5HoY5jDltbV9H5PBYoYl4MxTdvvDGiTKdsRg
- 5XB9qWseA7fK7UoDnPIj/SswGSRYWSZ9ZTeJwmEvh5yUwGhf8i0XiEh13WFGOqXNsrih
- KRQ3ZNJY3I7ed8z2MTowjvHrOZGNF0QaWNfwCZ+ZlasvKTzE0FR9rmUoOwbYBHSMgb71
- tknFH3Q4l6GBiwh0PFB+/DD3cPkecd5K4qyYwpbIpK/M2sd03fCf9e476RgLjSgujlnr
- nNHA==
+ d=gmail.com; s=20230601; t=1717685292; x=1718290092; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:subject:cc
+ :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=VmupeawOelCE4DUYO0v1+9JgtOR6dZ1ZtyNidpv2QHc=;
+ b=GQ6aPcvGauEeHrEQXPeZxJqSe6/PF9jF8a663NES0X04Ybn+HThlull3vTIYuTADJn
+ FRQTDo/njnJi1piaZSPJDim3f3GUNe7Me9hDVLEAi8ltHwDapyJxwU1IKeDMyZhQ1Lo5
+ 5XuCyr9z3MI2gF+mmzFkI5f8SiSY0AavfUTJgqx6fmsNZts5q/E7NcEQNH6uojuu17DG
+ oUH9/XkGpw05o9fefhrkGEatOC1VCeuAs+hCCpC5Oq7pF4LNaBq40c58aRfMxGo/6Xjx
+ kSIm+URYqKG02SuE3tJf2PbzldzSEAEzv6PuCJGDA8NrqQWLRWfWZ5G7sT9UYFXtvRHf
+ pN4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717684249; x=1718289049;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1SnK722UF5gQtV5gKPMHvDpazj/jDZqxf6MafxYMW7M=;
- b=raGvyyMjrej0dsw89DuCb6f8bo9Kg5G1jYnHTYTazGLJ1nrmxc1Ccv6n4fmE1zO4A+
- yggiKcNLp2f8d/E3sTX9Y/MILd5ScV6YjeBN0GvHcMsaufyMqF88QHkQA/oD+EwPBhla
- E1Eet0Z+NVA8IqLufDUXjwleX/h891VCLg3fQFUiz/Gc57dj0wxpJNQTEyQig+PwhehQ
- Kh7CE/axtTHq+zlPkqfVo4gRxVGlysFJd7ALR1crsgMA77l5ylXlzQGGmJeENz4BAeBd
- EXV+BkbJ55J98XmGQweeWWUImGeW+mTd6zbW9JhC5hghESe3pnDtmPQ6TaQi+Ej+TojU
- y7oA==
+ d=1e100.net; s=20230601; t=1717685292; x=1718290092;
+ h=in-reply-to:content-disposition:mime-version:references:subject:cc
+ :to:from:date:message-id:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VmupeawOelCE4DUYO0v1+9JgtOR6dZ1ZtyNidpv2QHc=;
+ b=buBSStBS1aKTU6GD3qs6ndCuO19acZwIwBM3IIzuzknAJGYeYGwIxOuopm6BkjW5BI
+ 8zd83R5A3uKt/1uU1tnKtXEJfrdQ1AB6RC4cew19MzPGbDBA2Rzc+JVF1KUz4x6q38yp
+ vFpzdQRh/KSBg6UlRMhL0MTLrS6gtEQYHlD73w+q15glYw7GGCLQ9Lq6IGFmEawBKSBn
+ C++0jLTJx9XUGFe2v1jdLJWelePFrWds4cWx0PCeKDShFdUrLD2CcbLSgnvozEND+4NY
+ l6fWEcw8vSZ6J1rg1AimGAoa16VVUeQxGcVlJlMDM8eRb6LAAuLqGlevl78qSU8X+sv/
+ svlQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVH1WaizNJjedqIa50KzAIhjfU17ZhyNaXGq+5KPAn6EsTXxdjWQp0D6Uomt7GSoksot48ZKLyVA9PFSYdTKPIpDSZnWA==
-X-Gm-Message-State: AOJu0YxfYzxepCZixq8WKKprZX11Mtl2WPc1I3NZbtlV+zw+L0ZJqrbZ
- OitgrZKEn0SxThvtkmZVASffDajjEtLExV446+sLU2dipxO8XHa2
-X-Google-Smtp-Source: AGHT+IHdQVRcEnnaWi7drWG1rxMggzQKW2ohz3XJnImAkpIiPNxDRv40FmPbtIyJJFheOFPDmbIgxA==
-X-Received: by 2002:a5d:658d:0:b0:358:380:f44c with SMTP id
- ffacd0b85a97d-35e840582femr4390753f8f.5.1717684248884; 
- Thu, 06 Jun 2024 07:30:48 -0700 (PDT)
-Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
- [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-35ef5e989b3sm1718060f8f.71.2024.06.06.07.30.47
+ AJvYcCXtGS2Es4bmDEjZ+aMljqpQuKlkt6B2eLs4TC4R0FlfBc/s2t0P86KIPZAYm07nMFw+R7hTCzOYpiATO5cI06ToMS49cw==
+X-Gm-Message-State: AOJu0YzgOJifktVyCP96S97y67WG7/af411YlhJilsXhqClrjcjhLbCP
+ 5UitEE2eyR969+QWfBmrYwtxKfahHD2RMlDZ5S2jXNruMcYf+E87
+X-Google-Smtp-Source: AGHT+IHx0Q/lU9FNfQL5pH41BRf5YRYGeIZ3M+HNeOrgqLcw40e9s7jNOVbJQMYZ21cShfsOvcde0Q==
+X-Received: by 2002:a05:600c:190c:b0:421:3880:d7d5 with SMTP id
+ 5b1f17b1804b1-4215ad33799mr28321035e9.18.1717685292262; 
+ Thu, 06 Jun 2024 07:48:12 -0700 (PDT)
+Received: from Ansuel-XPS. (93-34-90-105.ip49.fastwebnet.it. [93.34.90.105])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-35ef5d299absm1745078f8f.22.2024.06.06.07.48.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Jun 2024 07:30:48 -0700 (PDT)
+ Thu, 06 Jun 2024 07:48:11 -0700 (PDT)
+Message-ID: <6661cc2b.5d0a0220.2a8edc.61ca@mx.google.com>
+X-Google-Original-Message-ID: <ZmHMKSaChtM0W5dm@Ansuel-XPS.>
+Date: Thu, 6 Jun 2024 16:48:09 +0200
 From: Christian Marangi <ansuelsmth@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Tom Rini <trini@konsulko.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Jagan Teki <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
  Arseniy Krasnov <avkrasnov@salutedevices.com>,
  Miquel Raynal <miquel.raynal@bootlin.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Dmitry Dunaev <dunaev@tecon.ru>,
- Devarsh Thakkar <devarsht@ti.com>, Bin Meng <bmeng.cn@gmail.com>,
- Stefan Bosch <stefan_b@posteo.net>, Eugene Uriev <eugeneuriev@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Dmitry Dunaev <dunaev@tecon.ru>, Devarsh Thakkar <devarsht@ti.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Eugene Uriev <eugeneuriev@gmail.com>,
  Nikhil M Jain <n-jain1@ti.com>, Shiji Yang <yangshiji66@outlook.com>,
  Raymond Mao <raymond.mao@linaro.org>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Doug Zobel <douglas.zobel@climate.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de,
- John Crispin <john@phrozen.org>
-Subject: [PATCH v2 8/8] doc: convert README.LED to .rst documentation
-Date: Thu,  6 Jun 2024 16:29:29 +0200
-Message-ID: <20240606143024.20024-9-ansuelsmth@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240606143024.20024-1-ansuelsmth@gmail.com>
-References: <20240606143024.20024-1-ansuelsmth@gmail.com>
+ William Zhang <william.zhang@broadcom.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Igor Prusov <ivprusov@salutedevices.com>, Bruce Suen <bruce_suen@163.com>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
+ Pratyush Yadav <p.yadav@ti.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Vaishnav Achath <vaishnav.a@ti.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 0/7] misc: introduce STATUS LED activity function
+References: <20240605192146.19052-1-ansuelsmth@gmail.com>
+ <85d02b8a-dee1-42db-a804-d065517391aa@cherry.de>
+ <666186d4.050a0220.fbb8b.00ff@mx.google.com>
+ <96b43c02-aad4-4fd9-b35b-bc4e1d232a47@cherry.de>
+ <6661a306.df0a0220.1f4b34.4513@mx.google.com>
+ <60ddb985-8fa6-455b-a0a5-45da16b8f469@cherry.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <60ddb985-8fa6-455b-a0a5-45da16b8f469@cherry.de>
 X-Mailman-Approved-At: Thu, 06 Jun 2024 18:33:44 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,441 +122,273 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Convert README.LED to .rst documentation and include all the relevant
-documentation in the status_led.h.
+On Thu, Jun 06, 2024 at 03:32:14PM +0200, Quentin Schulz wrote:
+> Hi Christian,
+> 
+> On 6/6/24 1:52 PM, Christian Marangi wrote:
+> > On Thu, Jun 06, 2024 at 12:55:37PM +0200, Quentin Schulz wrote:
+> > > Hi Christian,
+> > > 
+> > > On 6/6/24 11:52 AM, Christian Marangi wrote:
+> > > > On Thu, Jun 06, 2024 at 11:12:11AM +0200, Quentin Schulz wrote:
+> > > > > Hi Christian,
+> > > > > 
+> > > > > On 6/5/24 9:21 PM, Christian Marangi wrote:
+> > > > > > This series expand the STATUS LED framework with a new color
+> > > > > > and a big new feature. One thing that many device need is a way
+> > > > > > to communicate to the user that the device is actually doing
+> > > > > > something.
+> > > > > > 
+> > > > > > This is especially useful for recovery steps where an
+> > > > > > user (for example) insert an USB drive, keep a button pressed
+> > > > > > and the device autorecover.
+> > > > > > 
+> > > > > > There is currently no way to signal the user externally that
+> > > > > > the bootloader is processing/recoverying aside from setting
+> > > > > > a LED on.
+> > > > > > 
+> > > > > > A solid LED on is not enough and won't actually signal any
+> > > > > > kind of progress.
+> > > > > > Solution is the good old blinking LED but uboot doesn't
+> > > > > > suggest (and support) interrupts and almost all the LED
+> > > > > > are usually GPIO LED that doesn't support HW blink.
+> > > > > > 
+> > > > > 
+> > > > > I haven't used it yet but we do have a cyclic framework now for things
+> > > > > happening in the background. I think this is a good use-case for this
+> > > > > framework? Something would set the blinking frequency (could be from CLI
+> > > > > directly, or as part of board files, or architecture, etc...) and the LED
+> > > > > would just blink then. This would allow to highlight stages in the boot
+> > > > > process, though that is not like an activity LED so if you're stuck in a
+> > > > > stage, you wouldn't know if something is still happening or if you're really
+> > > > > stuck (e.g. no packet on TFTP or TFTP very slow). The benefit is that it
+> > > > > would be way less intrusive than patching all commands that could make use
+> > > > > of that LED. Right now, this only adds support to MTD, SPI and TFTP, but
+> > > > > what about MMC, NVMe, USB, other net stuff (e.g. wget), etc...
+> > > > > 
+> > > > 
+> > > > Can you hint me on where is this framework? Checking the tftp code i
+> > > > couldn't find extra call to it. Maybe it's attached to the schedule()
+> > > > function?
+> > > > 
+> > > 
+> > > https://docs.u-boot.org/en/latest/develop/cyclic.html
+> > > 
+> > 
+> > Thanks looks very interesting and looks handy to make use of the
+> > watchdog for it. I will try now to rework the implementation for the sw
+> > blink to make use of cyclic thing.
+> > 
+> > > > Also notice that it's really not a one setting since almost all device
+> > > > have GPIO LEDs and doesn't have a way to support HW Blink so the
+> > > > "activity" function needs to be called multiple time to increase the
+> > > > counter and toggle the LED.
+> > > > 
+> > > 
+> > > Cyclic callback would be called twice per expected blink period, where you
+> > > would toggle the GPIO (essentially making it 50% duty cycle, but could be
+> > > more fine-grained if you want a different duty cycle).
+> > > 
+> > 
+> > Well status LED already have CONFIG_STATUS_LED_FREQ where you can set a
+> > value. I will just use this.
+> > 
+> 
+> This actually only appears in the rST doc, nothing actually makes use of
+> this right now, so it's not something we **need** to use.
+> 
+> What I meant is, if you only provide a frequency, a specific, hardcoded,
+> pattern is expected. E.g. for 1KHz, you enable the LED for 0.5ms and disable
+> it for 0.5ms (or 1ms and 1ms, depending on how you see LED_STATUS_FREQ
+> working). Could be 0.2ms and 0.8ms but it would always be this. How do you
+> differentiate between "something is happening on NAND" and "TFTP is being
+> used" if you don't have the ability to change the duty cycle? Or are you
+> expecting people to have multiple LED of different colors for that?
+>
 
-Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
----
- doc/README.LED         |  77 --------------
- doc/api/index.rst      |   1 +
- doc/api/status_led.rst |  35 +++++++
- include/status_led.h   | 224 ++++++++++++++++++++++++++++++++++++++++-
- 4 files changed, 256 insertions(+), 81 deletions(-)
- delete mode 100644 doc/README.LED
- create mode 100644 doc/api/status_led.rst
+I just sent v2 to account for the Cyclic thing.
 
-diff --git a/doc/README.LED b/doc/README.LED
-deleted file mode 100644
-index c21c9d53ec3..00000000000
---- a/doc/README.LED
-+++ /dev/null
-@@ -1,77 +0,0 @@
--Status LED
--========================================
--
--This README describes the status LED API.
--
--The API is defined by the include file include/status_led.h
--
--The first step is to enable CONFIG_LED_STATUS in menuconfig:
--> Device Drivers > LED Support.
--
--If the LED support is only for specific board, enable
--CONFIG_LED_STATUS_BOARD_SPECIFIC in the menuconfig.
--
--Status LEDS 0 to 5 are enabled by the following configurations at menuconfig:
--CONFIG_STATUS_LED0, CONFIG_STATUS_LED1, ... CONFIG_STATUS_LED5
--
--The following should be configured for each of the enabled LEDs:
--CONFIG_STATUS_LED_BIT<n>
--CONFIG_STATUS_LED_STATE<n>
--CONFIG_STATUS_LED_FREQ<n>
--Where <n> is an integer 1 through 5 (empty for 0).
--
--CONFIG_STATUS_LED_BIT is passed into the __led_* functions to identify which LED
--is being acted on. As such, the value choose must be unique with with respect to
--the other CONFIG_STATUS_LED_BIT's. Mapping the value to a physical LED is the
--reponsiblity of the __led_* function.
--
--CONFIG_STATUS_LED_STATE is the initial state of the LED. It should be set to one
--of these values: CONFIG_LED_STATUS_OFF or CONFIG_LED_STATUS_ON.
--
--CONFIG_STATUS_LED_FREQ determines the LED blink frequency.
--Values range from 2 to 10.
--
--Some other LED macros
-----------------------
--
--CONFIG_STATUS_LED_BOOT is the LED to light when the board is booting.
--This must be a valid LED number (0-5).
--
--CONFIG_STATUS_LED_RED is the red LED. It is used to signal errors. This must be
--a valid LED number (0-5). Other similar color LED's macros are
--CONFIG_STATUS_LED_GREEN, CONFIG_STATUS_LED_YELLOW and CONFIG_STATUS_LED_BLUE.
--
--General LED functions
-----------------------
--The following functions should be defined:
--
--__led_init is called once to initialize the LED to CONFIG_STATUS_LED_STATE.
--One time start up code should be placed here.
--
--__led_set is called to change the state of the LED.
--
--__led_toggle is called to toggle the current state of the LED.
--
--Colour LED
--========================================
--
--Colour LED's are at present only used by ARM.
--
--The functions names explain their purpose.
--
--coloured_LED_init
--red_LED_on
--red_LED_off
--green_LED_on
--green_LED_off
--yellow_LED_on
--yellow_LED_off
--blue_LED_on
--blue_LED_off
--
--These are weakly defined in arch/arm/lib/board.c to noops. Where applicable, define
--these functions in the board specific source.
--
--TBD : Describe older board dependent macros similar to what is done for
--
--TBD : Describe general support via asm/status_led.h
-diff --git a/doc/api/index.rst b/doc/api/index.rst
-index 51b2013af36..d40e90801d1 100644
---- a/doc/api/index.rst
-+++ b/doc/api/index.rst
-@@ -22,6 +22,7 @@ U-Boot API documentation
-    rng
-    sandbox
-    serial
-+   status_led
-    sysreset
-    timer
-    unicode
-diff --git a/doc/api/status_led.rst b/doc/api/status_led.rst
-new file mode 100644
-index 00000000000..44bbea47157
---- /dev/null
-+++ b/doc/api/status_led.rst
-@@ -0,0 +1,35 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+Status LED
-+==========
-+
-+.. kernel-doc:: include/status_led.h
-+   :doc: Overview
-+
-+CONFIG_STATUS_LED Description
-+-----------------------------
-+
-+.. kernel-doc:: include/status_led.h
-+   :doc: CONFIG Description
-+
-+Special Status LED Configs
-+--------------------------
-+.. kernel-doc:: include/status_led.h
-+   :doc: LED Status Config
-+
-+Colour Status LED Configs
-+-------------------------
-+.. kernel-doc:: include/status_led.h
-+   :doc: LED Colour Config
-+
-+Required API
-+------------
-+
-+.. kernel-doc:: include/status_led.h
-+   :doc: Required API
-+
-+Status LED API
-+--------------
-+
-+.. kernel-doc:: include/status_led.h
-+   :internal:
-diff --git a/include/status_led.h b/include/status_led.h
-index 7de40551621..6893d1d68e0 100644
---- a/include/status_led.h
-+++ b/include/status_led.h
-@@ -4,18 +4,102 @@
-  * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
-  */
- 
--/*
-- * The purpose of this code is to signal the operational status of a
-+/**
-+ * DOC: Overview
-+ *
-+ * Status LED is a Low-Level way to handle LEDs to signal state of the
-+ * bootloader, for example boot progress, file transfer fail, activity
-+ * of some sort like tftp transfer, mtd write/erase.
-+ *
-+ * The original usage these API were to signal the operational status of a
-  * target which usually boots over the network; while running in
-  * PCBoot, a status LED is blinking. As soon as a valid BOOTP reply
-  * message has been received, the LED is turned off. The Linux
-  * kernel, once it is running, will start blinking the LED again,
-  * with another frequency.
-+ *
-+ * Status LED require support Low Level and the board to implement
-+ * the specific functions to correctly works.
-  */
- 
- #ifndef _STATUS_LED_H_
- #define	_STATUS_LED_H_
- 
-+/**
-+ * DOC: CONFIG Description
-+ *
-+ * Enable `CONFIG_LED_STATUS` to support the Status LED under
-+ * > Device Drivers > LED Support.
-+ *
-+ * The Status LED can be defined in various ways, but most of the time,
-+ * specific functions will need to be defined in the board file.
-+ * If this is the case, enable `CONFIG_LED_STATUS_BOARD_SPECIFIC`.
-+ *
-+ * If the LEDs are GPIO-driven, you can use the GPIO wrapper driver
-+ * instead of defining specific board functions.
-+ * If this is the case, enable `CONFIG_LED_STATUS_GPIO`.
-+ * (Note that `CONFIG_LED_STATUS_BOARD_SPECIFIC` is also required.)
-+ *
-+ * The Status LED allows defining up to six different LEDs, from 0 to 5,
-+ * with the following configurations:
-+ * `CONFIG_STATUS_LED`, `CONFIG_STATUS_LED1`, ..., `CONFIG_STATUS_LED5`.
-+ *
-+ * For each LED, the following options are required:
-+ *  * `CONFIG_STATUS_LED_BIT<n>`
-+ *  * `CONFIG_STATUS_LED_STATE<n>`
-+ *  * `CONFIG_STATUS_LED_FREQ<n>`
-+ *
-+ * Where `<n>` is an integer from 1 through 5. (Note that LED 0 doesn't have the
-+ * integer suffix.)
-+ *
-+ * `CONFIG_STATUS_LED_BIT` is passed into the `__led_*` functions to identify
-+ * which LED is being acted on. The value is opaque, meaning it depends on how
-+ * the low-level API handles this value. It can be an ID to reference the LED
-+ * internally, or in the case of the GPIO wrapper, it's the GPIO number of the LED.
-+ * Mapping the value to a physical LED is the responsibility of the `__led_*` function.
-+ *
-+ * `CONFIG_STATUS_LED_STATE` sets the initial state of the LED. It should be set
-+ * to one of these values: `CONFIG_LED_STATUS_OFF` or `CONFIG_LED_STATUS_ON`.
-+ *
-+ * `CONFIG_STATUS_LED_FREQ` determines the LED blink frequency.
-+ * Values range from 2 to 10.
-+ */
-+/**
-+ * DOC: LED Status Config
-+ *
-+ * The Status LED uses two special configurations for common operations:
-+ *
-+ *   * CONFIG_STATUS_LED_BOOT is the LED that lights up when the board is booting.
-+ *   * CONFIG_STATUS_LED_ACTIVITY is the LED that lights and blinks during activity
-+ *     (e.g., file transfer, flash write).
-+ *
-+ * The values set in these configurations refer to the LED ID previously set.
-+ *
-+ * - ``CONFIG_STATUS_LED_RED=0`` will refer to the option ``CONFIG_STATUS_LED_BIT``.
-+ * - ``CONFIG_STATUS_LED_RED=1`` will refer to the option ``CONFIG_STATUS_LED_BIT1``.
-+ * - ``CONFIG_STATUS_LED_RED=2`` will refer to the option ``CONFIG_STATUS_LED_BIT2``.
-+ * - ...
-+ */
-+/**
-+ * DOC: LED Colour Config
-+ *
-+ * The Status LED exposes specific configurations for LEDs of different colors.
-+ *
-+ * The values set in these configurations refer to the LED ID previously set.
-+ *
-+ * - ``CONFIG_STATUS_LED_RED=0`` will refer to the option ``CONFIG_STATUS_LED_BIT``.
-+ * - ``CONFIG_STATUS_LED_RED=1`` will refer to the option ``CONFIG_STATUS_LED_BIT1``.
-+ * - ``CONFIG_STATUS_LED_RED=2`` will refer to the option ``CONFIG_STATUS_LED_BIT2``.
-+ * - ...
-+ *
-+ * Supported colors are:
-+ *   * red
-+ *   * green
-+ *   * yellow
-+ *   * blue
-+ *   * white
-+ */
-+
- #ifdef CONFIG_LED_STATUS
- 
- #define LED_STATUS_PERIOD	(CONFIG_SYS_HZ / CONFIG_LED_STATUS_FREQ)
-@@ -35,11 +119,49 @@
- #define LED_STATUS_PERIOD5	(CONFIG_SYS_HZ / CONFIG_LED_STATUS_FREQ5)
- #endif /* CONFIG_LED_STATUS5 */
- 
-+/**
-+ * void status_led_init - Init the Status LED with all the required structs.
-+ */
- void status_led_init(void);
-+/**
-+ * void status_led_tick - Blink each LED that is currently set in blinking
-+ *   mode
-+ * @timestamp: currently unused
-+ */
- void status_led_tick(unsigned long timestamp);
-+/**
-+ * void status_led_set - Set the LED ID passed as first arg to the mode set
-+ * @led: reference to the Status LED ID
-+ * @state: state to set the LED to
-+ *
-+ * Modes for state arE:
-+ *   * CONFIG_LED_STATUS_OFF (LED off)
-+ *   * CONFIG_LED_STATUS_ON (LED on)
-+ *   * CONFIG_LED_STATUS_BLINK (LED initially on, expected to blink)
-+ */
- void status_led_set(int led, int state);
-+/**
-+ * void status_led_toggle - toggle the LED ID
-+ * @led: reference to the Status LED ID
-+ *
-+ * Toggle the LED ID passed as first arg. If it's ON became OFF, if it's
-+ * OFF became ON.
-+ */
- void status_led_toggle(int led);
-+/**
-+ * void status_led_activity_start - start a LED activity
-+ * @led: reference to the Status LED ID
-+ *
-+ * Set the Status LED ON and start the Cyclic to make the LED blink at
-+ * the configured freq.
-+ */
- void status_led_activity_start(int led);
-+/**
-+ * void status_led_activity_stop - stop a LED activity
-+ * @led: reference to the Status LED ID
-+ *
-+ * Stop and free the Cyclic and turn the LED OFF.
-+ */
- void status_led_activity_stop(int led);
- 
- /*****  MVS v1  **********************************************************/
-@@ -62,9 +184,61 @@ void status_led_activity_stop(int led);
- /* led_id_t is unsigned long mask */
- typedef unsigned long led_id_t;
- 
-+/**
-+ * DOC: Required API
-+ *
-+ * The Status LED requires the following API functions to operate correctly
-+ * and compile:
-+ *
-+ * - ``__led_toggle``: Low-level function to toggle the LED at the specified
-+ *   mask.
-+ * - ``__led_init``: Initializes the Status LED, sets up required tables, and
-+ *   configures registers.
-+ * - ``__led_set``: Low-level function to set the state of the LED at the
-+ *   specified mask.
-+ * - ``__led_blink``: Low-level function to set the LED to blink at the
-+ *   specified frequency.
-+ *
-+ * The Status LED also provides optional functions to control colored LEDs.
-+ * Each supported LED color has corresponding ``_on`` and ``_off`` functions.
-+ *
-+ * There is also support for ``coloured_LED_init`` for LEDs that provide
-+ * multiple colors. (Currently, this is only used by ARM.)
-+ *
-+ * Each function is weakly defined and should be implemented in the
-+ * board-specific source file. (This does not apply to the GPIO LED wrapper.)
-+ */
-+/**
-+ * void __led_toggle - toggle LED at @mask
-+ * @mask: opaque value to reference the LED
-+ *
-+ * Low-Level function to toggle the LED at mask.
-+ */
- extern void __led_toggle (led_id_t mask);
-+/**
-+ * void __led_init - Init the LED at @mask
-+ * @mask: opaque value to reference the LED
-+ * @state: starting state of the LED
-+ *
-+ * Init the Status LED, init required tables, setup regs...
-+ */
- extern void __led_init (led_id_t mask, int state);
-+/**
-+ * void __led_set - Set the LED at @mask
-+ * @mask: opaque value to reference the LED
-+ * @state: state to set the LED to
-+ *
-+ * Init the Status LED, init required tables, setup regs...
-+ */
- extern void __led_set (led_id_t mask, int state);
-+/**
-+ * void __led_blink - Set the LED at @mask to HW blink
-+ * @mask: opaque value to reference the LED
-+ * @freq: freq to make the LED blink at
-+ *
-+ * Low-Level function to set the LED at HW blink by the
-+ * passed freq.
-+ */
- void __led_blink(led_id_t mask, int freq);
- #else
- # error Status LED configuration missing
-@@ -77,20 +251,62 @@ void __led_blink(led_id_t mask, int freq);
- 
- #endif	/* CONFIG_LED_STATUS	*/
- 
--/*
-- * Coloured LEDs API
-+/**
-+ * DOC: Coloured LED API
-+ *
-+ * Status LED expose optional functions to control coloured LED.
-+ * Each LED color supported expose _on and _off function.
-+ *
-+ * There is also support for coloured_LED_init for LED that provide
-+ * multiple colours. (currently only used by ARM)
-+ *
-+ * Each function is weakly defined and should be defined in the board
-+ * specific source. (doesn't apply for GPIO LED wrapper)
-  */
- #ifndef	__ASSEMBLY__
-+/**
-+ * void coloured_LED_init - Init multi colour LED
-+ */
- void coloured_LED_init(void);
-+/**
-+ * void red_led_on - Turn LED Red on
-+ */
- void red_led_on(void);
-+/**
-+ * void red_led_off - Turn LED Red off
-+ */
- void red_led_off(void);
-+/**
-+ * void green_led_on - Turn LED Green on
-+ */
- void green_led_on(void);
-+/**
-+ * void green_led_off - Turn LED Green off
-+ */
- void green_led_off(void);
-+/**
-+ * void yellow_led_on - Turn LED Yellow on
-+ */
- void yellow_led_on(void);
-+/**
-+ * void yellow_led_off - Turn LED Yellow off
-+ */
- void yellow_led_off(void);
-+/**
-+ * void blue_led_on - Turn LED Blue on
-+ */
- void blue_led_on(void);
-+/**
-+ * void blue_led_off - Turn LED Blue off
-+ */
- void blue_led_off(void);
-+/**
-+ * void white_led_on - Turn LED White on
-+ */
- void white_led_on(void);
-+/**
-+ * void white_led_off - Turn LED White off
-+ */
- void white_led_off(void);
- #else
- 	.extern LED_init
+Honestly I wanted to keep the thing very simple with the config we
+already had. But yes it's pretty easy to add additional config to
+configure different blink times.
+
+> > > > Also this have the extra feature that you can check if something gets
+> > > > stuck in the process. The lifecycle is:
+> > > > - Turn on the ACTIVITY LED at the start of the thing
+> > > > - Blink once in a while (for very little task this might not happen)
+> > > > - Turn off the ACTIVITY LED at the end of the thing
+> > > > 
+> > > > Soo if something goes wrong the LED would never turn OFF but would stay
+> > > > solid ON.
+> > > > 
+> > > 
+> > > Yes, that's something that wouldn't be covered by cyclic framework here. It
+> > > all depends what you want to do, if it's an activity LED, then we need to
+> > > hook ourselves deep into frameworks where stuff is actually happening. If
+> > > it's just to specify which stage of the boot we reached, then cyclic would
+> > > be good enough probably (register for stage 1, unregister stage1+register
+> > > for stage2 for different frequency, etc...).
+> > > 
+> > 
+> > The cyclic framework can reduce the implementation to just START and
+> > STOP. We would lose the ability to know if there is an actual progress
+> > or not tho... So maybe that is bad but honestly a TFTP transfer can be
+> > tracked by the other machine and MTD write/erase won't magically stop
+> > and get stalled... (and even with that they will timeout and the status
+> > LED stop will be called anyway)
+> > 
+> > So a dumb blinking with the watchdog is O.K. This is really a simple
+> > thing to show that something is happening (use case of recovering the
+> > device without actually using serial)
+> > 
+> 
+> Then it's not so much an activity LED anymore, rather a "i'm still alive and
+> doing X thing right now, but maybe I'm stuck who knows", e.g. a little bit
+> like a glorified heartbeat (I'm not saying it's bad, it's just a different
+> use case :) ).
+> 
+
+Well if we want a simple API that use Cyclic that it the path with an
+heartbeat. (but again IMHO we still need to account for context. for
+TFTP you can check progress from the device for any stall... For MTD
+write stall can't happen as any function have a timeout.)
+
+But yes it's a different use case. v1 implementation actually have an
+activity that react to every "activity" (but for this you need to attach
+to the driver and you can't have simple start/stop API)
+
+> > > > More than happy to rework this to a less intrusive implementation.
+> > > > 
+> > > > Maybe this can be generalized to some generic API like task_start(),
+> > > > task_processing() and task_end()? Might make more sense than having to
+> > > > add specific LED function to each function?
+> > > > 
+> > > 
+> > > This also likely would introduce a hit in performance if we need to toggle
+> > > the GPIO in the same thread that we do TFTP/storage medium reading/writing?
+> > > I assume we could still adapt cyclic to make it spawn a one time event
+> > > instead of looping (e.g. by unregistering itself at the end of its own
+> > > callback?).
+> > 
+> > But the penality is that bad? Unless you have the crazy idea of an
+> > absurt low value for the freq, it would be triggered once every 200
+> > iteration. If you are transfering MB of data you are probably on x86 or
+> > high end device where a GPIO bit set doesn't really affect anything.
+> > 
+> 
+> The kernel on Aarch64 is usually a few MB, sometimes a few tens of MB, then
+> you may have an initramfs which is also in the tens of MB.
+> 
+> People are trying to get U-Boot to boot into Linux ASAP, so maybe they'll be
+> bothered by this. If they are, they can always disable the support for this
+> LED status feature or improve it, so I wouldn't be too worried about it for
+> now since it won't be on by default anyway?
+> 
+
+Well it's for this exact reason I'm not touching read OPs. Yes perf it's
+a topic to account but nothing to worry about... the penality is really
+minimal and now that we use cyclic API is even non existant...
+
+> > My current idea is that start() will register a cyclic and LED will
+> > blink with watchdog. Stop will deregister it.
+> > 
+> 
+> Sounds good :)
+> 
+
+Implemented in v2... It's pretty clean, I like it.
+
+> > > 
+> > > > (AFAIK linux kernel have something similar used for all the trace
+> > > > framework so having something in uboot to trace these kind of operation
+> > > > might be interesting)
+> > > > 
+> > > 
+> > > Indeed, that's what's being done with ledtrig_.* functions, they are however
+> > > scheduled on a workqueue and called from the subsystem directly.
+> > > 
+> > > I'm a bit confused also as to why we control the LED blinking from the cmd/
+> > > ? E.g. for cmd/mtd.c I would assume that the changes made to the mtd
+> > > subsystem should be enough to handle those? Similarly, since UBI is for use
+> > > over NAND/MTD, shouldn't that already be handled by the MTD subsystem, and
+> > > if not, why not in the UBI subsystem instead of the CMD_UBI? One of the
+> > > issues is that you may not necessarily go through the cmd/ to do stuff with
+> > > storage medium or network (e.g. directly from board files).
+> > 
+> > It's a mix of cmd and subsystem cause you need to turn the LED on. Use
+> > the activity function to increase the conunter and toggle the LED at
+> > actual activity (example a mtd write command, a single block received from
+> > TFTP)
+> > 
+> > If the cyclic thing works as I think MAYBE we can just add this to the
+> > cmd part without having to disturb all the subsystem. And that is a much
+> > cleaner approach.
+> > 
+> 
+> Why isn't the subsystem turning the LED on when writing to the counter, why
+> does it have to go through the CMD?
+
+Userspace might call direct function of the subsystem and there is some
+problem to track single operations. (Example for MTD the _write OP can
+be called multiple time for each block or can be called one time for a
+big block... it's what I notice when I was implementing this. My
+original idea was to add everything in the single driver but it was hard
+to track when the single operation started and stopped)
+
+> 
+> If I'm not mistaken, I have my disk-activity LED in Linux working just fine
+> without having to rely on a userspace tool to activate it for me? Maybe I
+> missed something there though :)
+
+Well the userspace tool probably call the generic subsystem that call
+the specific subsystem and so on. In uboot the cmd tools call directly
+the subsystem so IMHO it's not that bad to have the Status LED be
+started and stopped in cmd. (totally OK to change this if not liked tho)
+
+> 
+> > > 
+> > > For the net protocols, why not hook this to the net_[sg]et_*_handler for
+> > > example so it's protocol-agnostic? No clue how difficult this would be, or
+> > > if you'd rather have something like per-protocol activity?
+> > 
+> > Attaching to the net handler would provide a way too generic activity
+> > thing and would result in a dump NIC LED. We want to show activity when
+> > we actually want to signal stuff not when the device is executin ASM
+> > instructions ahahah
+> > 
+> 
+> How does one define "when we actually want to signal stuff"? The further
+> away you're from the subsystem, the more consumers we're going to have to
+> patch to add this logic.
+
+Logic would be everything that is slow enough and is not instant. I can
+already see USB activity to be not part of this as the trasnfer should
+be instant.
+
+> 
+> > So yes I feel adding this way in way too generic subsystem might
+> > deviates from the idea of this. Even attaching to the write and erase
+> > function was a bit problematic and too generic.
+> > 
+> > > 
+> > > Finally, maybe we also want to have a Kconfig symbol per "type" of activity
+> > > to control what should be "monitored", and I would also suggest if we go
+> > > this route to have a Kconfig symbol for the frequency per "type" of activity
+> > > as well, so that one can know which activity is happening right now.
+> > > 
+> > 
+> > Yes that might be good but I have some fear we might explode with
+> > Kconfig. I think it's better to first have a solid idea on how this
+> > works and then we can think of the configuration part.
+> > 
+> 
+> Oh, we've seen much worse with the VPL_/TPL_/SPL_// symbols :) Can come
+> later though if someone has a usecase for it.
+
+As said early these are very small thing, I want to first understand
+what is the right place to add the _start() and _stop().
+
+See you in v2 ahahaha
+
 -- 
-2.43.0
-
+	Ansuel
