@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C3F3C27C54
-	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 16:33:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CF06C27C54
+	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 16:33:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A779B88414;
-	Thu,  6 Jun 2024 18:33:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0BE14883CE;
+	Thu,  6 Jun 2024 18:33:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nic.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=nic.cz header.i=@nic.cz header.b="ga1LDZKq";
+	dkim=pass (1024-bit key; secure) header.d=nic.cz header.i=@nic.cz header.b="WysdrwsU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 452A68844B; Thu,  6 Jun 2024 18:33:36 +0200 (CEST)
+ id 1DFE388459; Thu,  6 Jun 2024 18:33:38 +0200 (CEST)
 Received: from mail.nic.cz (mail.nic.cz [217.31.204.67])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E240883CE
+ by phobos.denx.de (Postfix) with ESMTPS id 9643A883F5
  for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 18:33:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=nic.cz
@@ -27,25 +27,25 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.mojik@nic.cz
 Received: from marcharch.labs.office.nic.cz (unknown
  [IPv6:2001:1488:fffe:6:592e:6672:3345:e2e0])
- by mail.nic.cz (Postfix) with ESMTPSA id CE20F1C2B72;
- Thu,  6 Jun 2024 18:33:32 +0200 (CEST)
+ by mail.nic.cz (Postfix) with ESMTPSA id 1821B1C2B73;
+ Thu,  6 Jun 2024 18:33:33 +0200 (CEST)
 Authentication-Results: mail.nic.cz;
  auth=pass smtp.auth=marek.mojik@nic.cz smtp.mailfrom=marek.mojik@nic.cz
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nic.cz; s=default;
- t=1717691612; bh=WWhp4I7EVnGNJgAjaXOGT1hZMMlIfE16pcjKBKwxG58=;
+ t=1717691613; bh=iOwaHJej/A7YWouo+54t/25nUL4G3h7pp0qfHZSSyJ4=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From:Reply-To:
  Subject:To:Cc;
- b=ga1LDZKqmgwCaKy6HifhcIf+iNRSV5DEI+D1Eq511Z+oJrj0kkc+w9KOs6u3gW6w6
- DBlVsDV85edeOFe4wYnlhYBwZaH2VYaRSc22JC/TJFV8mddxAhK9nAmxbZnNVv4mUZ
- OyoXNh93BzlU3zRznIRqmd5sA+cwY/VBeaUfU7QI=
+ b=WysdrwsUO8PwNa/gghAYsAUjZM0/2tRyR3I1O+0Y9yusAWqcLy2zxsCayQaNz5oZI
+ nWsv3x6O+6v2fHRoy2j4lP5uakSXtBo7FMLjxFdVMTSTzs4IxQOP6JJ/Unf9eHbkfo
+ MCv7lJkp+FiFnG2Xtpu/3CeGWBxRcAnPYZCVX+eU=
 From: =?UTF-8?q?Marek=20Moj=C3=ADk?= <marek.mojik@nic.cz>
 To: u-boot@lists.denx.de
 Cc: kabel@kernel.org,
 	marek.mojik@nic.cz
-Subject: [PATCH 3/6] powerpc: mpc8xxx: Extend find_law() to
- find_law_by_addr_id()
-Date: Thu,  6 Jun 2024 18:33:23 +0200
-Message-ID: <20240606163326.386950-4-marek.mojik@nic.cz>
+Subject: [PATCH 4/6] powerpc: mpc85xx: use CONFIG_VAL() for SYS_MONITOR_BASE
+ in start.s
+Date: Thu,  6 Jun 2024 18:33:24 +0200
+Message-ID: <20240606163326.386950-5-marek.mojik@nic.cz>
 X-Mailer: git-send-email 2.45.1
 In-Reply-To: <20240606163326.386950-1-marek.mojik@nic.cz>
 References: <20240606163326.386950-1-marek.mojik@nic.cz>
@@ -60,7 +60,7 @@ X-Spamd-Result: default: False [-4.10 / 20.00]; REPLY(-4.00)[];
  FUZZY_BLOCKED(0.00)[rspamd.com]; MIME_TRACE(0.00)[0:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: mail
-X-Rspamd-Queue-Id: CE20F1C2B72
+X-Rspamd-Queue-Id: 1821B1C2B73
 X-Spamd-Bar: ----
 X-Rspamd-Pre-Result: action=no action; module=multimap;
  Matched map: WHITELISTED_IP
@@ -80,65 +80,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Pali Rohár <pali@kernel.org>
+Use CONFIG_VAL() for SYS_MONITOR_BASE in start.S so that correct value
+is used for SPL.
 
-The find_law() function searches for LAW just by physical address. This
-is unsuitable for cases with overlapping LAWs. Extend it to
-find_law_by_addr_id(), which searches for LAW by physical address and
-target id.
-
-Add a static inline definition of the original find_law() into fsl_law.h
-header.
-
-Signed-off-by: Pali Rohár <pali@kernel.org>
 Signed-off-by: Marek Mojík <marek.mojik@nic.cz>
 ---
- arch/powerpc/cpu/mpc8xxx/law.c     | 5 ++++-
- arch/powerpc/include/asm/fsl_law.h | 8 +++++++-
- 2 files changed, 11 insertions(+), 2 deletions(-)
+ arch/powerpc/cpu/mpc85xx/start.S | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/powerpc/cpu/mpc8xxx/law.c b/arch/powerpc/cpu/mpc8xxx/law.c
-index f16bc19966..f3a9749625 100644
---- a/arch/powerpc/cpu/mpc8xxx/law.c
-+++ b/arch/powerpc/cpu/mpc8xxx/law.c
-@@ -130,7 +130,7 @@ int set_last_law(phys_addr_t addr, enum law_size sz, enum law_trgt_if id)
- 	return idx;
- }
+diff --git a/arch/powerpc/cpu/mpc85xx/start.S b/arch/powerpc/cpu/mpc85xx/start.S
+index b737d5d12f..3e24a90233 100644
+--- a/arch/powerpc/cpu/mpc85xx/start.S
++++ b/arch/powerpc/cpu/mpc85xx/start.S
+@@ -116,7 +116,7 @@ bootsect:
+ 	.long (CONFIG_FSL_PREPBL_ESDHC_BOOT_SECTOR_START + CONFIG_FSL_PREPBL_ESDHC_BOOT_SECTOR_DATA) * 512
  
--struct law_entry find_law(phys_addr_t addr)
-+struct law_entry find_law_by_addr_id(phys_addr_t addr, enum law_trgt_if id)
- {
- 	struct law_entry entry;
- 	int i;
-@@ -146,6 +146,9 @@ struct law_entry find_law(phys_addr_t addr)
- 		if (!get_law_entry(i, &entry))
- 			continue;
+ 	.org 0x58 /* Target address in the system's local memory address space */
+-	.long CONFIG_SYS_MONITOR_BASE
++	.long CONFIG_VAL(SYS_MONITOR_BASE)
  
-+		if (id != -1 && id != entry.trgt_id)
-+			continue;
-+
- 		upper = entry.addr + (2ull << entry.size);
- 		if ((addr >= entry.addr) && (addr < upper)) {
- 			entry.index = i;
-diff --git a/arch/powerpc/include/asm/fsl_law.h b/arch/powerpc/include/asm/fsl_law.h
-index 9e2f2d5370..d1cd728397 100644
---- a/arch/powerpc/include/asm/fsl_law.h
-+++ b/arch/powerpc/include/asm/fsl_law.h
-@@ -130,7 +130,13 @@ extern void set_law(u8 idx, phys_addr_t addr, enum law_size sz, enum law_trgt_if
- extern int set_next_law(phys_addr_t addr, enum law_size sz, enum law_trgt_if id);
- extern int set_last_law(phys_addr_t addr, enum law_size sz, enum law_trgt_if id);
- extern int set_ddr_laws(u64 start, u64 sz, enum law_trgt_if id);
--extern struct law_entry find_law(phys_addr_t addr);
-+extern struct law_entry find_law_by_addr_id(phys_addr_t addr, enum law_trgt_if id);
-+
-+static inline struct law_entry find_law(phys_addr_t addr)
-+{
-+	return find_law_by_addr_id(addr, -1);
-+}
-+
- extern void disable_law(u8 idx);
- extern void init_laws(void);
- extern void print_laws(void);
+ 	.org 0x60 /* Execution starting address */
+ 	.long _start
 -- 
 2.45.1
 
