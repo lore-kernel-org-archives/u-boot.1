@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E91E2C27C54
-	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 12:25:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F378FC25B75
+	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 12:25:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E098E8844E;
-	Thu,  6 Jun 2024 14:24:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 491B888489;
+	Thu,  6 Jun 2024 14:24:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="CV2WizCj";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="W/spsE5R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF0A98844F; Thu,  6 Jun 2024 14:24:21 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id CD9568842C; Thu,  6 Jun 2024 14:24:23 +0200 (CEST)
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [IPv6:2a00:1450:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D925A883E3
- for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 14:24:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A282B883F4
+ for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 14:24:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4215fc19abfso3446325e9.3
- for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 05:24:19 -0700 (PDT)
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-2eabd22d404so9726131fa.2
+ for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 05:24:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1717676659; x=1718281459;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1717676661; x=1718281461;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ap5zzJ2Sgv957PGodavnNyWyvD86GtmSBBet7PiftZo=;
- b=CV2WizCjkdv1O849JQxbHckCaDXwNBIvRnl8jCKcU3km/V1v88sWBjxLp7qQvck1nm
- T1Cm8YrkakSDyEtkqKJQXLpX37DM1tW8mD79bjMHg5+/o0ZxeIlM8qIeKZ6eZ+1szO1o
- xtpojSjeqiI+Lyr5S9H9jSFl074EY1St6pMJQNJUNSAll2dQIjdGrJRmArBCNJ13BUmn
- VmhDO8sewW5z7zyiF4anqeb3rSXORla8PMhwRdf1CVdX+5BSEEs2mrgMAYdsaMOPnsIV
- xPRpUua2ULCN89x3t0wpz+sfgL5IZih2gsmeSFQgh8CXQgIVT7VdHywetQlyaPo7PGnM
- DhtA==
+ :reply-to; bh=eVIHF5iS3zLS6NXvp2oJCFGbfbbDAdd8wrvYCmR32JI=;
+ b=W/spsE5R7j7OuCTeZv3IyMpY+5zUYhSnUwNKcaTGjHE7jYEFxIFu5o1OKpDijmmsX6
+ M0XCWE1FDZKMFQQ+3YZ/Y5i7FW3iNhbmtFHFxxplCaCRGYc+/vGLtrgrUfkZ42L2a8jl
+ dBUx0AysxeTBlBcFDV6NrI1Ns1ANK6R5FIn48sLE4Y8OsjP7MX9JpAiwnhPnZCxL1K71
+ dq5945HiaU+LqIqUHC1EkpMG7kRd9IKEeoRqsL/J9+1PGyMWPBYAST2eMZlZU5zuDbcb
+ 3YdBPruQvvY5/SUbQD62bSYA1DP6P4rUMG9aLlOnRcXV8AdeHZUpWcfkCBMtoODde1qH
+ eHyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717676659; x=1718281459;
+ d=1e100.net; s=20230601; t=1717676661; x=1718281461;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ap5zzJ2Sgv957PGodavnNyWyvD86GtmSBBet7PiftZo=;
- b=f1IX6uEpDiiNlhf5E/DNgib2RcySkn8jrjQ/cGpUJSQkPLoQiIHLHrIXeZXSZN2GFA
- fD2II5e5ab65ZzimFU4dd5Ac+UMeBQ7rXs8nwH8C8J07TqQbHTE8ce7N7NF2S33xV8lq
- 9yuEFgIzBkzKZAjYY/IIwyg6NBa0Y9keEOXRrUDbIs+59ppBYEHx3gOx598gs9/ufmMP
- 2v8NSxVGZja3DtGP4eYBcFa+qYYz57dgpT5dLtJ1Q0qOXOpT/45CdYZCVSEdHhnFmQRx
- UgLUxogj+WNXni4sbOm16U1LSTgsDNWaRNtQrgPInm+JSFRZ1XQiD/IsE4vIb0uUOkQX
- bE5w==
+ bh=eVIHF5iS3zLS6NXvp2oJCFGbfbbDAdd8wrvYCmR32JI=;
+ b=S1FfD1kg+ivZokQAQrRaIZPs2DVQElVzhCZc8Lysyrh0kEViNIU7/JvNFcIE+NGbhZ
+ ZXjLpCsopKgjxJkI4Iy9kT85ch7/YguXuOBL7aHbvBvFEcOBnQ92EQtLrI6VHkYD53JP
+ kyyRvCyOQZwY2lifW1LJpZ+l0AjE5byYwXWLrV1EKZoZdJ4FbCh+8ZzBTDhsdYAGjob2
+ zS17qS0yz2LanRNnHbybvrmglXy95oaYa0E1mH5aXqvaHzMJJBOzCpyh/z8PamM6NiGA
+ 2l+XXOBIEh1nYd/4cJ7ARBAYiwy+kcp0sNxGM66BFuIIbX8h3gxREydaErEqaIYbssXc
+ XtgA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVycLhrEAbKiSJNIDj0ld1nKuMHPLkszv1DS1rXfJSBIRz+UGNikmNL3CqfL7XVLKtBvv7/6a8dO8jtYgb3lzXeUFiWeQ==
-X-Gm-Message-State: AOJu0Yz1RwvYq6hDO62Sywo68V+Z+m2r039mcPULFdhNCS/516e7dH0F
- fQn+6zJNptPiml5yT6xE4IgPm6Z6cI7BGhd5LDrW0m3QmEZ3AOvLTDOLyLPcXRM=
-X-Google-Smtp-Source: AGHT+IHVsSE+wsT535a7q8Nk+7/qIl1XBnO2SlCukJAIX5h7tSVNLSjVHhRUJEDscelxAU8nVaqp/Q==
-X-Received: by 2002:a05:600c:350b:b0:421:2df2:2850 with SMTP id
- 5b1f17b1804b1-4215632dd10mr50716015e9.31.1717676659316; 
- Thu, 06 Jun 2024 05:24:19 -0700 (PDT)
+ AJvYcCWePPwhSJQGfQUaozti47apZpSxmJcv1TbGeIlQ1sOpE6Rh8V7iwTNBSwYP9Ntru+gxHDW5q6GrXsWQk8c2URS6phyu6A==
+X-Gm-Message-State: AOJu0YyPW5/u2B6OzxIIOiQ6PH78hY4OmUeDaqthyOk9FzRPi6uZU5Zk
+ wcNF7A0HEtkX7tlFSxU/AUU6yDvS8vE+QVAHwxIjq1IZtRDp0EWVDcZT1BmjQhE=
+X-Google-Smtp-Source: AGHT+IEBgRLTZNI8SK62D1WxEsK+h6PHAFmaAs7nU+oGjUT/HZhOAsXcNRR28HImRS/hDnQtQaWcdg==
+X-Received: by 2002:a2e:7302:0:b0:2e5:8685:8b13 with SMTP id
+ 38308e7fff4ca-2eac79e9d80mr32625151fa.25.1717676660925; 
+ Thu, 06 Jun 2024 05:24:20 -0700 (PDT)
 Received: from groot.home ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-35ef5d66d01sm1432828f8f.50.2024.06.06.05.24.18
+ ffacd0b85a97d-35ef5d66d01sm1432828f8f.50.2024.06.06.05.24.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Jun 2024 05:24:18 -0700 (PDT)
+ Thu, 06 Jun 2024 05:24:20 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Date: Thu, 06 Jun 2024 14:23:56 +0200
-Subject: [PATCH 4/6] android: boot: Add set_abootimg_addr() and
- set_avendor_bootimg_addr()
+Date: Thu, 06 Jun 2024 14:23:58 +0200
+Subject: [PATCH 6/6] bootstd: Add test for bootmeth_android
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240606-bootmeth-android-v1-4-0c69d4457cc5@baylibre.com>
+Message-Id: <20240606-bootmeth-android-v1-6-0c69d4457cc5@baylibre.com>
 References: <20240606-bootmeth-android-v1-0-0c69d4457cc5@baylibre.com>
 In-Reply-To: <20240606-bootmeth-android-v1-0-0c69d4457cc5@baylibre.com>
 To: Simon Glass <sjg@chromium.org>
@@ -100,79 +99,277 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The only way to configure the load addresses for both bootimg and
-vendor_bootimg is by using the "abootimg" command.
-If we want to use the C API, there is no equivalent.
+Add a unit test for testing the Android bootmethod.
 
-Add set_abootimg_addr() and set_avendor_bootimg_addr() so that we can
-specify the load address from C.
+This requires another mmc image (mmc7) to contain the following partitions:
+- misc: contains the Bootloader Control Block (BCB)
+- boot_a: contains a fake generic kernel image
+- vendor_boot_a: contains a fake vendor_boot image
 
-This can be useful for implementing an Android bootmethod.
+Also add BOOTMETH_ANDROID as a dependency on sandbox so that we can test
+this with:
+
+$ ./test/py/test.py --bd sandbox --build -k test_ut # to build the mmc7.img
+$ ./test/py/test.py --bd sandbox --build -k bootflow_android
 
 Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 ---
- cmd/abootimg.c  | 10 ++++++++++
- include/image.h | 14 ++++++++++++++
- 2 files changed, 24 insertions(+)
+ arch/sandbox/dts/test.dts |  8 +++++
+ configs/sandbox_defconfig |  2 +-
+ test/boot/bootflow.c      | 65 ++++++++++++++++++++++++++++++++++++++--
+ test/py/tests/test_ut.py  | 76 +++++++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 147 insertions(+), 4 deletions(-)
 
-diff --git a/cmd/abootimg.c b/cmd/abootimg.c
-index 88c77d999290..33381e22dec2 100644
---- a/cmd/abootimg.c
-+++ b/cmd/abootimg.c
-@@ -21,11 +21,21 @@ ulong get_abootimg_addr(void)
- 	return (_abootimg_addr == -1 ? image_load_addr : _abootimg_addr);
+diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+index a012f5c4c9ba..5fb5eac862ec 100644
+--- a/arch/sandbox/dts/test.dts
++++ b/arch/sandbox/dts/test.dts
+@@ -43,6 +43,7 @@
+ 		mmc4 = "/mmc4";
+ 		mmc5 = "/mmc5";
+ 		mmc6 = "/mmc6";
++		mmc7 = "/mmc7";
+ 		pci0 = &pci0;
+ 		pci1 = &pci1;
+ 		pci2 = &pci2;
+@@ -1129,6 +1130,13 @@
+ 		filename = "mmc6.img";
+ 	};
+ 
++	/* This is used for Android tests */
++	mmc7 {
++		status = "disabled";
++		compatible = "sandbox,mmc";
++		filename = "mmc7.img";
++	};
++
+ 	pch {
+ 		compatible = "sandbox,pch";
+ 	};
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index 93b52f2de5cf..bc4398f101a7 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -15,6 +15,7 @@ CONFIG_FIT=y
+ CONFIG_FIT_RSASSA_PSS=y
+ CONFIG_FIT_CIPHER=y
+ CONFIG_FIT_VERBOSE=y
++CONFIG_BOOTMETH_ANDROID=y
+ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_MEASURED_BOOT=y
+ CONFIG_BOOTSTAGE=y
+@@ -40,7 +41,6 @@ CONFIG_LOG_MAX_LEVEL=9
+ CONFIG_LOG_DEFAULT_LEVEL=6
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_STACKPROTECTOR=y
+-CONFIG_ANDROID_AB=y
+ CONFIG_CMD_CPU=y
+ CONFIG_CMD_LICENSE=y
+ CONFIG_CMD_SMBIOS=y
+diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+index 4511cfa7f9bf..934c4dcbad2b 100644
+--- a/test/boot/bootflow.c
++++ b/test/boot/bootflow.c
+@@ -27,6 +27,7 @@
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
++extern U_BOOT_DRIVER(bootmeth_android);
+ extern U_BOOT_DRIVER(bootmeth_cros);
+ extern U_BOOT_DRIVER(bootmeth_2script);
+ 
+@@ -518,12 +519,12 @@ BOOTSTD_TEST(bootflow_cmd_boot, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
+  * @uts: Unit test state
+  * @mmc_dev: MMC device to use, e.g. "mmc4". Note that this must remain valid
+  *	in the caller until
+- * @bind_cros: true to bind the ChromiumOS bootmeth
++ * @bind_cros: true to bind the ChromiumOS and Android bootmeths
+  * @old_orderp: Returns the original bootdev order, which must be restored
+  * Returns 0 on success, -ve on failure
+  */
+ static int prep_mmc_bootdev(struct unit_test_state *uts, const char *mmc_dev,
+-			    bool bind_cros, const char ***old_orderp)
++			    bool bind_cros_android, const char ***old_orderp)
+ {
+ 	static const char *order[] = {"mmc2", "mmc1", NULL, NULL};
+ 	struct udevice *dev, *bootstd;
+@@ -545,12 +546,19 @@ static int prep_mmc_bootdev(struct unit_test_state *uts, const char *mmc_dev,
+ 				"bootmeth_script", 0, ofnode_null(), &dev));
+ 
+ 	/* Enable the cros bootmeth if needed */
+-	if (IS_ENABLED(CONFIG_BOOTMETH_CROS) && bind_cros) {
++	if (IS_ENABLED(CONFIG_BOOTMETH_CROS) && bind_cros_android) {
+ 		ut_assertok(uclass_first_device_err(UCLASS_BOOTSTD, &bootstd));
+ 		ut_assertok(device_bind(bootstd, DM_DRIVER_REF(bootmeth_cros),
+ 					"cros", 0, ofnode_null(), &dev));
+ 	}
+ 
++	/* Enable the android bootmeths if needed */
++	if (IS_ENABLED(CONFIG_BOOTMETH_ANDROID) && bind_cros_android) {
++		ut_assertok(uclass_first_device_err(UCLASS_BOOTSTD, &bootstd));
++		ut_assertok(device_bind(bootstd, DM_DRIVER_REF(bootmeth_android),
++					"android", 0, ofnode_null(), &dev));
++	}
++
+ 	/* Change the order to include the device */
+ 	std = dev_get_priv(bootstd);
+ 	old_order = std->bootdev_order;
+@@ -589,6 +597,37 @@ static int scan_mmc_bootdev(struct unit_test_state *uts, const char *mmc_dev,
+ 	return 0;
  }
  
-+void set_abootimg_addr(ulong addr)
++/**
++ * scan_mmc_android_bootdev() - Set up an mmc bootdev so we can access other
++ * distros. Android bootflow might print "ANDROID:*" while scanning
++ *
++ * @uts: Unit test state
++ * @mmc_dev: MMC device to use, e.g. "mmc4"
++ * Returns 0 on success, -ve on failure
++ */
++static int scan_mmc_android_bootdev(struct unit_test_state *uts, const char *mmc_dev)
 +{
-+	_abootimg_addr = addr;
++	struct bootstd_priv *std;
++	struct udevice *bootstd;
++	const char **old_order;
++
++	ut_assertok(prep_mmc_bootdev(uts, mmc_dev, true, &old_order));
++
++	console_record_reset_enable();
++	ut_assertok(run_command("bootflow scan", 0));
++	/* Android bootflow might print one or two 'ANDROID:*' logs */
++	ut_check_skipline(uts);
++	ut_check_skipline(uts);
++	ut_assert_console_end();
++
++	/* Restore the order used by the device tree */
++	ut_assertok(uclass_first_device_err(UCLASS_BOOTSTD, &bootstd));
++	std = dev_get_priv(bootstd);
++	std->bootdev_order = old_order;
++
++	return 0;
 +}
 +
- ulong get_avendor_bootimg_addr(void)
- {
- 	return _avendor_bootimg_addr;
+ /**
+  * scan_mmc4_bootdev() - Set up the mmc4 bootdev so we can access a fake Armbian
+  *
+@@ -1160,3 +1199,23 @@ static int bootflow_cros(struct unit_test_state *uts)
+ 	return 0;
  }
- 
-+void set_avendor_bootimg_addr(ulong addr)
+ BOOTSTD_TEST(bootflow_cros, 0);
++
++/* Test Android bootmeth  */
++static int bootflow_android(struct unit_test_state *uts)
 +{
-+	_avendor_bootimg_addr = addr;
++	ut_assertok(scan_mmc_android_bootdev(uts, "mmc7"));
++	ut_assertok(run_command("bootflow list", 0));
++
++	ut_assert_nextlinen("Showing all");
++	ut_assert_nextlinen("Seq");
++	ut_assert_nextlinen("---");
++	ut_assert_nextlinen("  0  extlinux");
++	ut_assert_nextlinen("  1  android      ready   mmc          0  mmc7.bootdev.whole        ");
++	ut_assert_nextlinen("---");
++	ut_assert_skip_to_line("(2 bootflows, 2 valid)");
++
++	ut_assert_console_end();
++
++	return 0;
 +}
-+
- static int abootimg_get_ver(int argc, char *const argv[])
- {
- 	const struct andr_boot_img_hdr_v0 *hdr;
-diff --git a/include/image.h b/include/image.h
-index 18e5ced5ab42..6deaf406605e 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -1977,6 +1977,13 @@ u32 android_image_get_version(const void *hdr);
-  */
- ulong get_abootimg_addr(void);
++BOOTSTD_TEST(bootflow_android, 0);
+diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
+index c169c835e38a..39e1abe02a68 100644
+--- a/test/py/tests/test_ut.py
++++ b/test/py/tests/test_ut.py
+@@ -423,6 +423,81 @@ def setup_cros_image(cons):
  
-+/**
-+ * set_abootimg_addr() - Set Android boot image address
-+ *
-+ * Return: no returned results
-+ */
-+void set_abootimg_addr(ulong addr);
-+
- /**
-  * get_avendor_bootimg_addr() - Get Android vendor boot image address
-  *
-@@ -1984,6 +1991,13 @@ ulong get_abootimg_addr(void);
-  */
- ulong get_avendor_bootimg_addr(void);
+     return fname
  
-+/**
-+ * set_abootimg_addr() - Set Android vendor boot image address
-+ *
-+ * Return: no returned results
-+ */
-+void set_avendor_bootimg_addr(ulong addr);
++def setup_android_image(cons):
++    """Create a 20MB disk image with Android partitions"""
++    Partition = collections.namedtuple('part', 'start,size,name')
++    parts = {}
++    disk_data = None
 +
- /**
-  * board_fit_config_name_match() - Check for a matching board name
-  *
++    def set_part_data(partnum, data):
++        """Set the contents of a disk partition
++
++        This updates disk_data by putting data in the right place
++
++        Args:
++            partnum (int): Partition number to set
++            data (bytes): Data for that partition
++        """
++        nonlocal disk_data
++
++        start = parts[partnum].start * sect_size
++        disk_data = disk_data[:start] + data + disk_data[start + len(data):]
++
++    mmc_dev = 7
++    fname = os.path.join(cons.config.source_dir, f'mmc{mmc_dev}.img')
++    u_boot_utils.run_and_log(cons, 'qemu-img create %s 20M' % fname)
++    u_boot_utils.run_and_log(cons, f'cgpt create {fname}')
++
++    ptr = 40
++
++    # Number of sectors in 1MB
++    sect_size = 512
++    sect_1mb = (1 << 20) // sect_size
++
++    required_parts = [
++        {'num': 1, 'label':'misc', 'size': '1M'},
++        {'num': 2, 'label':'boot_a', 'size': '4M'},
++        {'num': 3, 'label':'boot_b', 'size': '4M'},
++        {'num': 4, 'label':'vendor_boot_a', 'size': '4M'},
++        {'num': 5, 'label':'vendor_boot_b', 'size': '4M'},
++    ]
++
++    for part in required_parts:
++        size_str = part['size']
++        if 'M' in size_str:
++            size = int(size_str[:-1]) * sect_1mb
++        else:
++            size = int(size_str)
++        u_boot_utils.run_and_log(
++            cons,
++            f"cgpt add -i {part['num']} -b {ptr} -s {size} -l {part['label']} -t basicdata {fname}")
++        ptr += size
++
++    u_boot_utils.run_and_log(cons, f'cgpt boot -p {fname}')
++    out = u_boot_utils.run_and_log(cons, f'cgpt show -q {fname}')
++
++    # Create a dict (indexed by partition number) containing the above info
++    for line in out.splitlines():
++        start, size, num, name = line.split(maxsplit=3)
++        parts[int(num)] = Partition(int(start), int(size), name)
++
++    with open(fname, 'rb') as inf:
++        disk_data = inf.read()
++
++    boot_img = os.path.join(cons.config.result_dir, 'bootv4.img')
++    with open(boot_img, 'rb') as inf:
++        set_part_data(2, inf.read())
++
++    vendor_boot_img = os.path.join(cons.config.result_dir, 'vendor_boot.img')
++    with open(vendor_boot_img, 'rb') as inf:
++        set_part_data(4, inf.read())
++
++    with open(fname, 'wb') as outf:
++        outf.write(disk_data)
++
++    print('wrote to {}'.format(fname))
++
++    return fname
+ 
+ def setup_cedit_file(cons):
+     infname = os.path.join(cons.config.source_dir,
+@@ -477,6 +552,7 @@ def test_ut_dm_init_bootstd(u_boot_console):
+     setup_bootmenu_image(u_boot_console)
+     setup_cedit_file(u_boot_console)
+     setup_cros_image(u_boot_console)
++    setup_android_image(u_boot_console)
+ 
+     # Restart so that the new mmc1.img is picked up
+     u_boot_console.restart_uboot()
 
 -- 
 2.45.0
