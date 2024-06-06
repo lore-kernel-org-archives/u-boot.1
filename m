@@ -4,78 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FE84C25B75
-	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 06:29:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A2B9C25B75
+	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 06:36:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2ABCC87AD2;
-	Thu,  6 Jun 2024 08:29:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4FD3788363;
+	Thu,  6 Jun 2024 08:35:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Hm+Yu4kD";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="PL4PH/MB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7F1C86F6E; Thu,  6 Jun 2024 08:29:52 +0200 (CEST)
-Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
- [IPv6:2607:f8b0:4864:20::52e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 073B2883EA; Thu,  6 Jun 2024 08:35:58 +0200 (CEST)
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2417::601])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E176883CF
- for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 08:29:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A159888276
+ for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 08:35:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-6da49fa2407so435680a12.1
- for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 23:29:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1717655389; x=1718260189; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1YzvYjUejgtNEVmh1fEL99eRAcUHIAjqH1j2FlwqH7A=;
- b=Hm+Yu4kDOCGOoSZaGJyq6t+hkhWW05/ab0QxY+9pHB/OvTWHHkyt5X2vht/NAciDVH
- I0YuW4HlA4o7UDsE0wA1zbCzOw4JkjYKGKY+J+h2MP+TqxvhER1Vodw03etl0dJ6oSLl
- 570tVCd0EOZ0C1fXz96BMPBECtvN+jeejQMk7CPqiQnTWkVa53uAaLIRsXDitm4kohI2
- ZVAdiUeoEFTy8VEYoJZ3RUXLq9tbB3kHPUyWMwmYI1UVziJgq+vl4cH7TrkJCuZHRwsp
- dSegXi6455qbNvfVk2B+F5e5tOH7W+l/z0gl+FmjBElfTFW1OaaxfJKMnkYGNFv2k7ax
- xsHw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717655389; x=1718260189;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=1YzvYjUejgtNEVmh1fEL99eRAcUHIAjqH1j2FlwqH7A=;
- b=aZIPYaRnSwluOXGG0hDXJkAHOzACdZWXsyMh6Xn/NKXcukwSf99+d3orrXCWIqcRKa
- Krm8+H0XyurP7Dw1vMtiZrqz/X/+U2X+z3J7M9dTCoJ1cPls4vHGJaXVb0ilYfE6P/X4
- /pS2dSwrzY1QGRP6osd4RlBCpgQtXKKJnTrlwuqO9zrb6vEfOEoKI3CKYaG5i/oMLfMj
- AXXVlJKzUCiZ5q4HK3D2i1X45jA5lFkwHtI81TD+f7raEfD7d84MJN+ryY69jMJCJmpY
- nlMKaw/Q857sabn1ad+X32PIdxiLnt6u1D1carvU/buAVdxnPtWFUeAoT9LCRBz09mim
- oLRw==
-X-Gm-Message-State: AOJu0YwezH2MfdiXjQ4gKMG6dcQZlnky+sZckH63HVzr3xwZ0wqhZVfV
- P45f77HQw9WHdZB9Psitz9RjvjAVuqEVrK1/sUx2l1kVh2weLdi7YywJMLMai3oOurpdB8OdFMi
- rksVyboG/JY6yqkSo2ZE2M+dUBQSB9anmCabV7w==
-X-Google-Smtp-Source: AGHT+IGAGEbJUD0N7RCEAIaqVzrIyjk7TMFO2lle3By6b8f++mvOMH92Ir8wd4x0F33oJQ0hWGnCTFKe1RNowxywlGg=
-X-Received: by 2002:a05:6a20:7354:b0:1ad:9394:2d30 with SMTP id
- adf61e73a8af0-1b2b700dfafmr5593368637.37.1717655388777; Wed, 05 Jun 2024
- 23:29:48 -0700 (PDT)
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=bJqYaESaoxKxeyBpykZ+w0pqk5ZA2o6aq9B+tpljKZQDcbT2IJZqt29KuBErdCdqHIkXbrkA6FYP332bbwGCsecZq1nSTG1cd0TXEmaXC/wjV/JxJCkQeH28hYlauZpIOP9dwCA/bzSEWGmQ0YFNIfmpxSOz+4dhN0Jji1130WCS2KEBmMwU3++Kkb6Y/yuuwr6Y8PJQDZtJX30sHvjx5XQrMO3zkXaMraTq4o8diLAA+R5Z40UdCBC2XUsmVcdINiaPUCKUn/ibSBbL1ycNN5uybUbvtJKWb0ZAMruvzyjEpKvAuZ1Kl5qunJxAsmdu2fBTz/C+pnivrhKeQMgx7A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Z4Uq6MOcUOkBLpTQ7Um24u7txGlxIS0ijDnsLF4z3iU=;
+ b=LHdR1F/rIPxO3qXiwIBmhZ5ezkSiIGio5iYv/U3TK4nymGCJgfH9FZ+Q8vzgxgkhlGtMEpVF76I0bfAuxZpG5topevsewGRDPVYpLG2vOOU++SNWkToHCHhEN+n8Z+x7cUhwa3fbCcVKe5dlwXCXAmkX0102asXAVPh9mkuh+h1KabWzLmUUvcOdPrFfiV4+BKYeQ7iGFWJ9YQ7PilUO9hAbLDoVtWwmxklyEKRJYF5R4lk1OcsRusvlxWefqxRo3Hmg3/SbO9j15zyagcI5RF+eqwRDsyDw+yhFHJJwU7XOmW1Bx/mN+6GrCWCQ67ZF9fkMC1FiNfvR41luEK2cDw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Z4Uq6MOcUOkBLpTQ7Um24u7txGlxIS0ijDnsLF4z3iU=;
+ b=PL4PH/MBUFBY1Ogx6g70c0aXdAlZbQ6RoSgkanowxADxFtzQMphD4GbcGyZcz1tysulnbpgGaoB/T1cBNl+a4uzSevxGywYQhS1AnmqDMRGUloaXRk4pJaKNMRFv8sytJd3g4UHNnK8mt2JIG7WkXmuQfB3fCaW2sMtqXovi/b0=
+Received: from MN2PR19CA0003.namprd19.prod.outlook.com (2603:10b6:208:178::16)
+ by DM4PR12MB6446.namprd12.prod.outlook.com (2603:10b6:8:be::7) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7633.21; Thu, 6 Jun 2024 06:35:51 +0000
+Received: from BN3PEPF0000B072.namprd04.prod.outlook.com
+ (2603:10b6:208:178:cafe::cf) by MN2PR19CA0003.outlook.office365.com
+ (2603:10b6:208:178::16) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7656.20 via Frontend
+ Transport; Thu, 6 Jun 2024 06:35:51 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BN3PEPF0000B072.mail.protection.outlook.com (10.167.243.117) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7633.15 via Frontend Transport; Thu, 6 Jun 2024 06:35:51 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Thu, 6 Jun
+ 2024 01:35:49 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Etienne Carriere <etienne.carriere@linaro.org>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Jassi Brar <jaswinder.singh@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2] cmd: fwu: Also print information about size
+Date: Thu, 6 Jun 2024 08:35:46 +0200
+Message-ID: <4fd96b9f7312793109fe32a85fc717566ef6fa92.1717655740.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-References: <cover.1716566960.git.jerome.forissier@linaro.org>
- <b77a239e1fb9a81744d1da9a000979aac298fd29.1716566960.git.jerome.forissier@linaro.org>
-In-Reply-To: <b77a239e1fb9a81744d1da9a000979aac298fd29.1716566960.git.jerome.forissier@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 6 Jun 2024 09:29:12 +0300
-Message-ID: <CAC_iWjKrsG+fBNm3k__QtsiQSqH8OTyee6E-Oc7JFCmn8WhyPQ@mail.gmail.com>
-Subject: Re: [PATCH v2 07/14] net-lwip: add dns command
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>, 
- Maxim Uvarov <muvarov@gmail.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Peter Robinson <pbrobinson@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+X-Developer-Signature: v=1; a=openpgp-sha256; l=727; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=wiQ6qBmY8l/pcJURc7beyZ2n818fmdWhesKTHIXUVWw=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhrTEiL1BvaxTJqUXfU3gnMvK2vdDr9g1KEBOzKDPPW92l
+ Vkkj3lHLAuDIBODrJgii7TNlTN7K2dMEb54WA5mDisTyBAGLk4BmMibTIb5Tguvr2HIc7DhW9eo
+ 6xx4ULq1fU8bwxz+HbYXZ8mz1qZyTA/dPWOhQEPnWTkA
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B072:EE_|DM4PR12MB6446:EE_
+X-MS-Office365-Filtering-Correlation-Id: aa680be6-a86d-4eb2-c588-08dc85f2e8e9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230031|36860700004|82310400017|1800799015|376005; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?YK4XIYaZ398y9IE6VE7q5CJsJYmLxzVFyOMxZmHPI2Ngz4lnG5mtdn7Xmy3s?=
+ =?us-ascii?Q?GL47TfPzxXKMuIDn4/r42N6Lzj/UIf9iAiAmlhMC8+axXQOGLupkZ1BjTcRr?=
+ =?us-ascii?Q?ng16wkb+AS3dA4omMkDxVHI9MaqwehOJLh4w1N6o6/hlOtquPQoJGOAPVXJv?=
+ =?us-ascii?Q?UK1sU3dcupwg6uXZGOtF0Gumjk/Zz0/ulZ151SSeQ6zdIagdkFbellqnbsu0?=
+ =?us-ascii?Q?UbEiSH4OYucULHMHBYwuW1IFOQ88d5jxN9B193XwFbD6TlGawyu90Op+rzyz?=
+ =?us-ascii?Q?p8HMq55j6yR6cNK2pzmLQ4tDX3KrfZ3jAXXKw7c9Oaqfax9wv7AsJZMoaUCj?=
+ =?us-ascii?Q?2u+Dx5He7rjooEaCaFlky2VWlL5/nArqvHjCtYeh2qyX9nlSiokcAA5s83Jp?=
+ =?us-ascii?Q?un5FVAoazliul4p9g0EyglF3uPCSuWSrJJHiWiDvGg2lfOXH58c0fBXouC4n?=
+ =?us-ascii?Q?WPhgxTbefiFoCavE+OIeNXwA5zCgWSLwn5OPbJVs+MqRUzTFNp5D6WCqEpwP?=
+ =?us-ascii?Q?Lxh47huQrVBu5aiJrzL5PKVrIqmMRvJUK7MYCtitQ27K4i8qh+JaDLiVEV8b?=
+ =?us-ascii?Q?uoosPWHuGklRLisaRH2YdluUfuP7/DMYL0XLV6vDZ2BB+sb2xfq74EtviXY7?=
+ =?us-ascii?Q?ECsSQjIPZ38JJzEE7oa0dk1ivG+reXXYsGLrmNhCuAgVkgoj38IhY+TPlWuG?=
+ =?us-ascii?Q?y3QQBg4qe/MuhI7gas+LKt0oUiqJ4rZt+29m89rbp8lLGBg1J/LXswUytsLn?=
+ =?us-ascii?Q?iMQTz4HrPp1jOjW4IZQQL+FqslL7qZTydGYYUg+fQeY0Z9KVRJyMHiS8557t?=
+ =?us-ascii?Q?t0Yv5IQCZIzAx2PhHafFVNB5ZLc4Op5YR6EI2se29iRoorUFIH+abCcEHzXp?=
+ =?us-ascii?Q?OVv2YN8fmXn5lR13C8I89qMWq/GaqB/IVnXffZiwAUi7e0NmLse2ngmDnlDI?=
+ =?us-ascii?Q?sJNbVrcYvxMI+bNSwwYEKBe3g3ZQ9VtlXd12iPOxkwBhF+vIS+azILsI1xO3?=
+ =?us-ascii?Q?v/zyW8col6scIOnhp4osYOyWjIWofdbsT8AzbTffOi0ll1KhC3qZIBQnVLKb?=
+ =?us-ascii?Q?J3b/acwiDvEtANO43Ai+cVJNOGUK6fy76xE/tuDkVokzcH17M2PaF2bd4fn/?=
+ =?us-ascii?Q?yMvYXpI7C6NrlrQGK6fAWFxUngeaQoZ6AjpCxmM9mrjjkwuheKXsl0JmBsjG?=
+ =?us-ascii?Q?i1PjvbIhEI1uTRqFuAhWeQhjQrEouWOZwNJKwQOi0lj5tIGV6mVifHh3oG4i?=
+ =?us-ascii?Q?qrrqg3pD9qj/3q2xzlfQt6AC8f8emoLlma3/4D/BFov4Xgt/rKUeTwUInkfN?=
+ =?us-ascii?Q?6xvjvmo4NPy8AyV3hlJ+j9SKusWWbAiEDszmU6L3KGl1ueRrnRquVBs975Fe?=
+ =?us-ascii?Q?+/pXv0wkUgx1bEKZ3hTY2Yy52GH/iC++sO7fTZ0xwrSaAtD/9A=3D=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(36860700004)(82310400017)(1800799015)(376005); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jun 2024 06:35:51.5357 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: aa680be6-a86d-4eb2-c588-08dc85f2e8e9
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B072.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6446
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,116 +150,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
+It is useful when structure is also used for saving vendor data covered
+by CRC32.
 
-[...]
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-> +
-> +static ulong start;
-> +static ip_addr_t host_ipaddr;
-> +static bool done;
-> +
-> +static void do_dns_tmr(void *arg)
-> +{
-> +     dns_tmr();
-> +}
-> +
-> +static void dns_cb(const char *name, const ip_addr_t *ipaddr, void *arg)
-> +{
-> +     char *var = (char *)arg;
+Changes in v2:
+- print it only in mdata v2 version
 
-const char *
+ cmd/fwu_mdata.c | 1 +
+ 1 file changed, 1 insertion(+)
 
+diff --git a/cmd/fwu_mdata.c b/cmd/fwu_mdata.c
+index 6d91935b9b54..56654ba1b93c 100644
+--- a/cmd/fwu_mdata.c
++++ b/cmd/fwu_mdata.c
+@@ -27,6 +27,7 @@ static void print_mdata(struct fwu_data *data)
+ 	printf("previous_active_index: %#x\n", data->previous_active_index);
+ 
+ 	if (data->version == 2) {
++		printf("size: %#x\n", data->metadata_size);
+ 		for (i = 0; i < 4; i++)
+ 			printf("bank_state[%d]: %#x\n",
+ 			       i, data->bank_state[i]);
+-- 
+2.40.1
 
-> +     char *ipstr = ip4addr_ntoa(ipaddr);
-> +
-> +     done = true;
-> +
-> +     if (!ipaddr) {
-> +             printf("DNS: host not found\n");
-> +             host_ipaddr.addr = 0;
-> +             return;
-> +     }
-> +
-> +     if (var)
-> +             env_set(var, ipstr);
-> +
-> +     printf("%s\n", ipstr);
-> +}
-> +
-> +int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-> +{
-> +     bool has_server = false;
-> +     ip_addr_t ipaddr;
-> +     ip_addr_t ns;
-> +     char *nsenv;
-> +     char *name;
-> +     char *var;
-> +     int ret;
-> +
-> +     if (argc == 1 || argc > 3)
-> +             return CMD_RET_USAGE;
-> +
-> +     if (argc >= 2)
-> +             name = argv[1];
-> +
-> +     if (argc == 3)
-> +             var = argv[2];
-> +
-> +     dns_init();
-> +
-> +     nsenv = env_get("dnsip");
-> +     if (nsenv && ipaddr_aton(nsenv, &ns)) {
-> +             dns_setserver(0, &ns);
-> +             has_server = true;
-> +     }
-> +
-> +     nsenv = env_get("dnsip2");
-> +     if (nsenv && ipaddr_aton(nsenv, &ns)) {
-> +             dns_setserver(1, &ns);
-> +             has_server = true;
-> +     }
-> +
-> +     if (!has_server) {
-> +             log_err("No valid name server (dnsip/dnsip2)\n");
-> +             return CMD_RET_FAILURE;
-> +     }
-> +
-> +     done = false;
-> +
-> +     ret = dns_gethostbyname(name, &ipaddr, dns_cb, var);
-> +
-> +     if (ret == ERR_OK) {
-> +             dns_cb(name, &ipaddr, var);
-> +     } else if (ret == ERR_INPROGRESS) {
-> +             start = get_timer(0);
-> +             sys_timeout(DNS_RESEND_MS, do_dns_tmr, NULL);
-> +             do {
-> +                     eth_rx();
-> +                     if (done)
-> +                             break;
-> +                     sys_check_timeouts();
-> +                     if (ctrlc()) {
-> +                             printf("\nAbort\n");
-> +                             break;
-> +                     }
-> +             } while (get_timer(start) < DNS_TIMEOUT_MS);
-> +             sys_untimeout(do_dns_tmr, NULL);
-> +     }
-
-Looking at the lwip code there are other ret values than just ERR_OK,
-ERR_INPROGRESS. Should we have an 'else' handling the rest?
-
-> +
-> +     if (done && host_ipaddr.addr != 0)
-> +             return CMD_RET_SUCCESS;
-> +
-> +     return CMD_RET_FAILURE;
-> +}
-> +
-> --
-> 2.40.1
->
-
-Thanks
-/Ilias
