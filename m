@@ -4,68 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F4B5C25B75
-	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 08:24:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04ABBC25B75
+	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 08:24:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0353E85B66;
-	Thu,  6 Jun 2024 10:24:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7A021881B8;
+	Thu,  6 Jun 2024 10:24:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lXpKhe6R";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HpGqk3Ea";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75CE487D9B; Thu,  6 Jun 2024 10:24:01 +0200 (CEST)
-Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
- [IPv6:2607:f8b0:4864:20::42d])
+ id 1490D88199; Thu,  6 Jun 2024 10:24:28 +0200 (CEST)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0B1E8332E
- for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 10:23:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 09286881B8
+ for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 10:24:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-6f8ec7e054dso508640b3a.2
- for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 01:23:58 -0700 (PDT)
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1f62a628b4cso6591875ad.1
+ for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 01:24:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1717662237; x=1718267037; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1717662263; x=1718267063; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UXNYHMWcwj95zNi2EgCuUxq2SX4UUpVVXL47aOL7OYQ=;
- b=lXpKhe6RZfwpYv5korcg3nJM8zJgcT2aQRyDN/svEKtQbzuVoddR2rL+J4AM04TTps
- qvG9x+4x8WCLYrXyLKNCcnvwH31BdJqdMTIY16cWQ0wIyJzSSyoa+GUB/O0sRp4TSPqy
- 2FjZysD6yJ7mT/gqhIM4jq0QA2jrdl7BkHa83HF2Aia9d2xS1adIqDcxzVwLBjPzcCTZ
- CrGzQKbhEpmOoOwxL5h9VgOPrhshPd9UfjasC03UgRUsWhOflhNwP8GWk9rJQ//6beUH
- EK5igNAqNe7DDWW6Z0v1qoeiD/kC1n5oy9Vw7SISAScS/ONih+qzEs2LiwbuaAJG1mHV
- 7TuQ==
+ bh=NFiZ1YL0QUIcdp7lKMMVK0VRo5hke0I2cGrYTHv8jwg=;
+ b=HpGqk3EabaNCqJPiDyexVsNKNHiFqoNqbzAeRuT/J03Fw6jw5qWaXs0pJv4USXpTdq
+ rMj+11UX7Z5ug+HVbwZDZVsdYT861J2xQG+OMYeb8ucm8VaSCnBhGDg9fUTnbHR9Lqb1
+ ruKRkUu/NQcJfXyU9CWAxRP+yIJDyjXO8e1v/t+KLrcH6jBS+oQVSADsZM9ZpGCSlHTM
+ nt6FhVtkULXt8sHTKmFfUFSXrm6kmm1ndNBBfwLpp33iOVg3Mvc5XtQuqaj8BEK4ydFc
+ yynRN0cpsIvaiadIJMbnSnL1cf/5Th3qQ+YBk/QWH5Df35tIOT9qscdapcGFdJ5ne2yi
+ 1oFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717662237; x=1718267037;
+ d=1e100.net; s=20230601; t=1717662263; x=1718267063;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=UXNYHMWcwj95zNi2EgCuUxq2SX4UUpVVXL47aOL7OYQ=;
- b=OXWLAEDrdWttFLkXhQF+oOK2PN5NBRVXz9Lh4z+Slyel3SJ0yDPQ6Bo313T1N2q3KQ
- rMyHW5topqkrHQvQFWQt37huIKpCR98vnjCCUw13Wpr0bjsrbzJUx1urlxEywWh4FAJV
- WyB2ZZBq+wPtSTTIUJzJJ2o0dN9QIO64qj8X/mSwnKYmUP1U1Ck2xpPs+4AzPrusoeYS
- acI4tWLV0N0MJ1v5UzCuVgpMvf1uWSQIJ7zLG5m5HgAxNAvLQAW1cV6w4cUpy6JIlJzO
- HYSUfIammoXz/RG8kSZJinvaNARb0NykvzUGwME41MxBO61X+toQUV56qiiihxOVZ3x4
- inqQ==
-X-Gm-Message-State: AOJu0Yz9IOtHzP+S12ZyRiNwMwTTTB1WO7WT2uruqzU1k83q7juGs1zd
- pXzbVfEKE7NprFz1XOqZH0B982238tyRTuLa3K6IuhLXUCiVQtdh99RwKcDtSSzhDcFypSpyD/f
- /tsCWuBiHCHc/SFBA7YI8hAZduyRKdJf3WzNkyg==
-X-Google-Smtp-Source: AGHT+IF86XzJ0uDDWMDrh/Dr+uzeelkWL4UUmahXFazbrJA2PQW+20BjQevRKqWVVloUhAcxwAZN3FFHpU4TfT7s7J8=
-X-Received: by 2002:a05:6a20:a122:b0:1ad:7e4d:2ea2 with SMTP id
- adf61e73a8af0-1b2b6e2d014mr6077954637.4.1717662237126; Thu, 06 Jun 2024
- 01:23:57 -0700 (PDT)
+ bh=NFiZ1YL0QUIcdp7lKMMVK0VRo5hke0I2cGrYTHv8jwg=;
+ b=tKKBqxHLlxGG8mJSdYroYAlxIC+D7V88agjBkQj7rHdxTj4Ii2Gn6HuAMhVURBO+wW
+ 7T3VQNmNffIZlaDkfI345jNA27JcWDo6S+XA563M1s1Wxz4DADduibwGVpTbzjdDoIKt
+ TK6v4MPf/sW48cPCifo1KbP44ERhdjAy+E3znQJXWpy0UjNSRAtdnunOBoFfbwOUHa+C
+ i7MW3mTSw54rwNrTWJjD9hfwk1kDeyo3EhJLBFGWImaxe9w600bUvIq/Y6gJI+rl7WVP
+ i2QCSlPX0F2xmU41vut0UE6LhTSCTH/urVQ7aWyl1AuIkecy+ORvdTY1BBBxcXKWP0lP
+ 4FAw==
+X-Gm-Message-State: AOJu0YxW9MT4b/TtMR8g3MdrVOZxbOdFU26Xiwax3Lodn43NmuCiqqmR
+ 4ZH181+LwhHUvtZJ9PBSxDDZ/KMpJ7U/nxoXFc5dWTFcyl7EZHTkxUOBTowdoBETLPohQH0DslE
+ kmfXvIVo152QDE2cOKPWytaMrlsOy4Yo2SVxHkg==
+X-Google-Smtp-Source: AGHT+IGhtyyxAOpuSvXEH1pQaO+OmTIPlSbf032yqxV4COxzm/XbkhrLdtaI41t7z4TPuqZQk/j+nwBWN/I2Kcn7syY=
+X-Received: by 2002:a17:903:4303:b0:1f6:a43:89c3 with SMTP id
+ d9443c01a7336-1f6a5a76a53mr36101455ad.57.1717662263469; Thu, 06 Jun 2024
+ 01:24:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <4fd96b9f7312793109fe32a85fc717566ef6fa92.1717655740.git.michal.simek@amd.com>
-In-Reply-To: <4fd96b9f7312793109fe32a85fc717566ef6fa92.1717655740.git.michal.simek@amd.com>
+References: <0513d382abefaa0cab02bd85e120f544d1ef8e6d.1717599504.git.michal.simek@amd.com>
+ <CAC_iWjJc5gO1W8GeNRG3Oo24hVzPope3cisz0R=7_pUTjJLWVA@mail.gmail.com>
+ <6ecddda9-0823-4512-b33c-787eef615181@amd.com>
+In-Reply-To: <6ecddda9-0823-4512-b33c-787eef615181@amd.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 6 Jun 2024 11:23:21 +0300
-Message-ID: <CAC_iWjKzkx10FZN2MRq1r9Gty-pZRYO+LtG5Lzmu-7jjQGMshQ@mail.gmail.com>
-Subject: Re: [PATCH v2] cmd: fwu: Also print information about size
+Date: Thu, 6 Jun 2024 11:23:46 +0300
+Message-ID: <CAC_iWjJo9oiPh55NixeK8pXtQJZb_9xZ-zxSty00Vn87LAmz=Q@mail.gmail.com>
+Subject: Re: [PATCH] cmd: fwu: Also print information about size
 To: Michal Simek <michal.simek@amd.com>
 Cc: u-boot@lists.denx.de, git@xilinx.com, 
  Etienne Carriere <etienne.carriere@linaro.org>,
@@ -88,36 +90,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This isn't needed v1 [0] is better
+On Thu, 6 Jun 2024 at 09:38, Michal Simek <michal.simek@amd.com> wrote:
+>
+>
+>
+> On 6/5/24 17:09, Ilias Apalodimas wrote:
+> > On Wed, 5 Jun 2024 at 17:58, Michal Simek <michal.simek@amd.com> wrote:
+> >>
+> >> It is useful when structure is also used for saving vendor data covered
+> >> by CRC32.
+> >>
+> >> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> >> ---
+> >>
+> >>   cmd/fwu_mdata.c | 1 +
+> >>   1 file changed, 1 insertion(+)
+> >>
+> >> diff --git a/cmd/fwu_mdata.c b/cmd/fwu_mdata.c
+> >> index 3c8be576ac7a..9c048d69a131 100644
+> >> --- a/cmd/fwu_mdata.c
+> >> +++ b/cmd/fwu_mdata.c
+> >> @@ -22,6 +22,7 @@ static void print_mdata(struct fwu_data *data)
+> >>          printf("\tFWU Metadata\n");
+> >>          printf("crc32: %#x\n", data->crc32);
+> >>          printf("version: %#x\n", data->version);
+> >> +       printf("size: %#x\n", data->metadata_size);
+> >
+> > That's only available in v2
+> > IS_ENABLED(CONFIG_FWU_MDATA_V1) etc?
+>
+> This field should be present in v1 and v2 case because it is the part of
+> fwu_data (u-boot private structure) not fwu_mdata (which match the spec).
+> But I have sent v2 and only printing it in v2 case.
 
-[0] https://lore.kernel.org/u-boot/6ecddda9-0823-4512-b33c-787eef615181@amd.com/
+Ah you are right, I was looking at an older tree....
 
-On Thu, 6 Jun 2024 at 09:35, Michal Simek <michal.simek@amd.com> wrote:
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
 >
-> It is useful when structure is also used for saving vendor data covered
-> by CRC32.
->
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> ---
->
-> Changes in v2:
-> - print it only in mdata v2 version
->
->  cmd/fwu_mdata.c | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/cmd/fwu_mdata.c b/cmd/fwu_mdata.c
-> index 6d91935b9b54..56654ba1b93c 100644
-> --- a/cmd/fwu_mdata.c
-> +++ b/cmd/fwu_mdata.c
-> @@ -27,6 +27,7 @@ static void print_mdata(struct fwu_data *data)
->         printf("previous_active_index: %#x\n", data->previous_active_index);
->
->         if (data->version == 2) {
-> +               printf("size: %#x\n", data->metadata_size);
->                 for (i = 0; i < 4; i++)
->                         printf("bank_state[%d]: %#x\n",
->                                i, data->bank_state[i]);
-> --
-> 2.40.1
->
+> Thanks,
+> Michal
