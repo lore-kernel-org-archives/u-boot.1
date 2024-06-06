@@ -4,82 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54FBAC27C54
-	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 12:31:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E8DFC25B75
+	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 12:31:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18CAA883F4;
+	by phobos.denx.de (Postfix) with ESMTP id 8822F8842E;
 	Thu,  6 Jun 2024 14:31:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OnaQ6BaM";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XPXuH/UB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A1998823C; Thu,  6 Jun 2024 10:51:45 +0200 (CEST)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id BD44B8823C; Thu,  6 Jun 2024 10:52:11 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C94F88027
- for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 10:51:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D19A688027
+ for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 10:52:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=muvarov@gmail.com
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-52b962c4bb6so948485e87.3
- for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 01:51:43 -0700 (PDT)
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-354dfe54738so610102f8f.3
+ for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 01:52:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717663902; x=1718268702; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RQhgUuE/HRv/WpZboKol8zWN7n+VTbFHFy7lAN3ySDw=;
- b=OnaQ6BaM95Ze58YmXcUM80CPpSrWKE0UdJPtobpUahX3Y8ZVRHNOCpLBOMuUaLcLp7
- f320QGMywant6/A4ObeZcEECPHAFGVP3B1wYZ6UwDcSf1SvDVZCljJ1lc+ZCN7wRNtEU
- qdxu9stJaPx5dHfSiJl0gA6Sx/HIwLBm364W9WUJp9zoNz15lDwLyH55kauB+CT+DjPV
- x22utxqVojjrr3LcLxy+53ixkKasTB7r/cG5+tGNR1+RxwVm1onKNDtU4MKXRbNfqn3W
- hePgg6xl22SZXA7k8LF66++UP5QQncAgKHCTZUEnB+Issegul2Dxj0bS5cWclq+T4EcO
- esLg==
+ d=gmail.com; s=20230601; t=1717663929; x=1718268729; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:subject:cc
+ :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=RRygEFq22WrwEaEKzKWX4GoodOltnbMGIs7eBW1bjUk=;
+ b=XPXuH/UBDvfgXqC9ICIzNgL/DSIaNXduyQRGa/Rjda3PFel+Gg8DaJnKDOrT3mPKa2
+ T8dPdlFhk/iK5OCcUTlRqZVzTT9dwPpUuejHq1G+uqP+nqtNEXRJM1DHMgKOFXOjAlRm
+ FmuwFlefpcwrM3iCJ2jRXwHxJ8fjwBHnSLvdTBk1qk/OuoCuGeu0f7ZGWLXuVTzjXiz4
+ BbGfIdfs7mH6JV4g5mlCa8panv/eiNuhaNSWbEFlLJP9Rbo87jYmQqBLHY/W3C3otFO/
+ IgdWzyOqhTf8Bt3SN8Ko5Wrx9+xxQdYmWBHaxyf1wqM4aP1aN53tnYGAi61GY2xGgvvD
+ UW+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717663902; x=1718268702;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=RQhgUuE/HRv/WpZboKol8zWN7n+VTbFHFy7lAN3ySDw=;
- b=g9IjeqgempZGfS1/t783TxOr3hhvZTzSACKcF41+abT180ZAt1mQsFJjH76W0p0bPF
- PWvL0cpKXAedXLgxfJJQ0jim2ln9jQypdw7e/bvf8+WgBCX9JFmrOcIMNDGwxNL60CcL
- M8WmBHszAWV1clzOx9a/xj/dMysddlfk9LKT6Ok2ddqy958GEF4Qib89XN17ZKA2DSQN
- SO6Exue2ekSq/VIGgE+X2wBdPm8W8eER6LQZPjEg/d52xpjvpzhfnQEcmtq6XHivMcdo
- vnrFgFRzz8XvQ9kIdtYpcsmxN5iUFcwdOJJnGdE9YVc+SZ+QGD3cOmARbmuRGDjI4yl+
- g2Hg==
+ d=1e100.net; s=20230601; t=1717663929; x=1718268729;
+ h=in-reply-to:content-disposition:mime-version:references:subject:cc
+ :to:from:date:message-id:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RRygEFq22WrwEaEKzKWX4GoodOltnbMGIs7eBW1bjUk=;
+ b=uWqk28BOb0e0UNsOUfB8FdatPpfyoUZmcfoSCi12hnCUegvKCgsW4j3Hj6zz7Rp2Me
+ J/ahFrdyrIy8OVLmuUTmK7c0DT+IiI2DCMEVDhdY8qamy38VfGji4WYs5gHBsNxOiFTz
+ Bii6cNI5buzT5a8PZFCKrKl3CDNP+FiXJxsrNgLgC632pbc7v8Qxt3vkBvZWUOVd1DF7
+ HfGMuVcatGyysdhDJPcaY4Axx6oWHvcQrRjbHMJBdQ9JrVCy0nY0cdHgy4AHTb+oTsXp
+ vQOW4ydlFkQcYdWGwMh+cGeGQsesMKehQAgZZxXaLSfDkWwBzWC7kkE0zq2tI1sjBnEH
+ FD2w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXUWjNKqICoE3MBuo0mda5U7S2UnG1IBf6H9l6/dGSPADQ8eeDWAwyOGkWZ4DNImDJMqeodMC9wly7aXOdSB/mGG/MOpw==
-X-Gm-Message-State: AOJu0YyBB3fU3MPqV0OStthEceZwl/gLX7MW/MU3QLf2/M529t+B4Unp
- IhcIEhhL0YjDrEvvmiYyIGpsa7R0xe5HyhhVTCvZRKHdEGz+8x8WRUhxaqNhnp9h2fgZ0Yhpfj8
- luXRM5DYJNjKlSsyswvgf2KSCZbM=
-X-Google-Smtp-Source: AGHT+IErXqoUjFUhOls9PfXcGILXxEAWqShXNddJXc7xzLcsPCdLIFvl2QmF6+wYQ305Wdt3F4TgRo6UUHPDYzBbuYM=
-X-Received: by 2002:a05:6512:3194:b0:52b:9964:9dae with SMTP id
- 2adb3069b0e04-52bab50b1abmr4040962e87.57.1717663902203; Thu, 06 Jun 2024
- 01:51:42 -0700 (PDT)
+ AJvYcCW3uVGHGY3oON0wX7yKCFBLOYSTsEJ4HZlxCISda3Ym/j25NXoBnjp76zzAxZ4nmuh19MJ4fcqHqOpvWUnFRMYDH7DGiQ==
+X-Gm-Message-State: AOJu0YwEtsaGTX7FOMdHY8SSAPrje/xWhd+KqFS44XBmE1we/XMJ8ieO
+ lGphJvXehfIqv0+JNHeWCn0CRbtYnwzvtQB5105T6rLSv9lUfAQds8djoQ==
+X-Google-Smtp-Source: AGHT+IFohfS4LZ4nYjCk8aHAQL2asyyexU354P1DR4o48gD44Y1BXUxKHulJNr5g2awHaDciv2lVGg==
+X-Received: by 2002:ac2:55a6:0:b0:51e:41a1:4d5 with SMTP id
+ 2adb3069b0e04-52bab4b84d2mr2471692e87.9.1717663467345; 
+ Thu, 06 Jun 2024 01:44:27 -0700 (PDT)
+Received: from Ansuel-XPS. (93-34-90-105.ip49.fastwebnet.it. [93.34.90.105])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-52bb41ee01fsm133165e87.69.2024.06.06.01.44.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 06 Jun 2024 01:44:26 -0700 (PDT)
+Message-ID: <666176ea.190a0220.1a2d40.0d8b@mx.google.com>
+X-Google-Original-Message-ID: <ZmF25GBgIJ-7CZ6D@Ansuel-XPS.>
+Date: Thu, 6 Jun 2024 10:44:20 +0200
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Jagan Teki <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Arseniy Krasnov <avkrasnov@salutedevices.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Dmitry Dunaev <dunaev@tecon.ru>, Devarsh Thakkar <devarsht@ti.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Eugene Uriev <eugeneuriev@gmail.com>,
+ Nikhil M Jain <n-jain1@ti.com>, Shiji Yang <yangshiji66@outlook.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Doug Zobel <douglas.zobel@climate.com>,
+ William Zhang <william.zhang@broadcom.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Igor Prusov <ivprusov@salutedevices.com>, Bruce Suen <bruce_suen@163.com>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
+ Pratyush Yadav <p.yadav@ti.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Vaishnav Achath <vaishnav.a@ti.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 5/7] tftp: implement support for LED status activity
+References: <20240605192146.19052-1-ansuelsmth@gmail.com>
+ <20240605192146.19052-6-ansuelsmth@gmail.com>
+ <CALeDE9Pa8362N_HBKk6Z1Rjn+nTa_pQky8Cur-ABB9NpySwULw@mail.gmail.com>
 MIME-Version: 1.0
-References: <cover.1716566960.git.jerome.forissier@linaro.org>
- <b77a239e1fb9a81744d1da9a000979aac298fd29.1716566960.git.jerome.forissier@linaro.org>
- <CAC_iWjKrsG+fBNm3k__QtsiQSqH8OTyee6E-Oc7JFCmn8WhyPQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjKrsG+fBNm3k__QtsiQSqH8OTyee6E-Oc7JFCmn8WhyPQ@mail.gmail.com>
-From: Maxim Uvarov <muvarov@gmail.com>
-Date: Thu, 6 Jun 2024 11:51:30 +0300
-Message-ID: <CAJGZr0KqWVJe4pmjVZc=or0PUBF6VBVbTLC3+41s1s=xKkj7BA@mail.gmail.com>
-Subject: Re: [PATCH v2 07/14] net-lwip: add dns command
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de, 
- Javier Tia <javier.tia@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Peter Robinson <pbrobinson@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CALeDE9Pa8362N_HBKk6Z1Rjn+nTa_pQky8Cur-ABB9NpySwULw@mail.gmail.com>
 X-Mailman-Approved-At: Thu, 06 Jun 2024 14:31:15 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,134 +119,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D1=87=D1=82, 6 =D0=B8=D1=8E=D0=BD. 2024=E2=80=AF=D0=B3. =D0=B2 09:29, Ilia=
-s Apalodimas <ilias.apalodimas@linaro.org>:
->
-> Hi Jerome,
->
-> [...]
->
-> > +
-> > +static ulong start;
-> > +static ip_addr_t host_ipaddr;
-> > +static bool done;
-> > +
-> > +static void do_dns_tmr(void *arg)
-> > +{
-> > +     dns_tmr();
-> > +}
-> > +
-> > +static void dns_cb(const char *name, const ip_addr_t *ipaddr, void *ar=
-g)
-> > +{
-> > +     char *var =3D (char *)arg;
->
-> const char *
->
->
-> > +     char *ipstr =3D ip4addr_ntoa(ipaddr);
-> > +
-> > +     done =3D true;
-> > +
-> > +     if (!ipaddr) {
-> > +             printf("DNS: host not found\n");
-> > +             host_ipaddr.addr =3D 0;
-> > +             return;
-> > +     }
-> > +
-> > +     if (var)
-> > +             env_set(var, ipstr);
-> > +
-> > +     printf("%s\n", ipstr);
-> > +}
-> > +
-> > +int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv=
-[])
-> > +{
-> > +     bool has_server =3D false;
-> > +     ip_addr_t ipaddr;
-> > +     ip_addr_t ns;
-> > +     char *nsenv;
-> > +     char *name;
-> > +     char *var;
-> > +     int ret;
-> > +
-> > +     if (argc =3D=3D 1 || argc > 3)
-> > +             return CMD_RET_USAGE;
-> > +
-> > +     if (argc >=3D 2)
-> > +             name =3D argv[1];
-> > +
-> > +     if (argc =3D=3D 3)
-> > +             var =3D argv[2];
-> > +
-> > +     dns_init();
-> > +
-> > +     nsenv =3D env_get("dnsip");
-> > +     if (nsenv && ipaddr_aton(nsenv, &ns)) {
-> > +             dns_setserver(0, &ns);
-> > +             has_server =3D true;
-> > +     }
-> > +
-> > +     nsenv =3D env_get("dnsip2");
-> > +     if (nsenv && ipaddr_aton(nsenv, &ns)) {
-> > +             dns_setserver(1, &ns);
-> > +             has_server =3D true;
-> > +     }
-> > +
-> > +     if (!has_server) {
-> > +             log_err("No valid name server (dnsip/dnsip2)\n");
-> > +             return CMD_RET_FAILURE;
-> > +     }
-> > +
-> > +     done =3D false;
-> > +
-> > +     ret =3D dns_gethostbyname(name, &ipaddr, dns_cb, var);
-> > +
-> > +     if (ret =3D=3D ERR_OK) {
-> > +             dns_cb(name, &ipaddr, var);
-> > +     } else if (ret =3D=3D ERR_INPROGRESS) {
-> > +             start =3D get_timer(0);
-> > +             sys_timeout(DNS_RESEND_MS, do_dns_tmr, NULL);
-> > +             do {
-> > +                     eth_rx();
-> > +                     if (done)
-> > +                             break;
-> > +                     sys_check_timeouts();
-> > +                     if (ctrlc()) {
-> > +                             printf("\nAbort\n");
-> > +                             break;
-> > +                     }
-> > +             } while (get_timer(start) < DNS_TIMEOUT_MS);
-> > +             sys_untimeout(do_dns_tmr, NULL);
-> > +     }
->
-> Looking at the lwip code there are other ret values than just ERR_OK,
-> ERR_INPROGRESS. Should we have an 'else' handling the rest?
->
-+1
-And check the return code of eth_rx(), that is int function
-and current code for some reason skips this check.
-
-BR,
-Maxim.
-
-> > +
-> > +     if (done && host_ipaddr.addr !=3D 0)
-> > +             return CMD_RET_SUCCESS;
-> > +
-> > +     return CMD_RET_FAILURE;
-> > +}
-> > +
-> > --
-> > 2.40.1
+On Thu, Jun 06, 2024 at 09:22:05AM +0100, Peter Robinson wrote:
+> On Wed, 5 Jun 2024 at 20:51, Christian Marangi <ansuelsmth@gmail.com> wrote:
 > >
+> > Implement support for LED status activity. If the feature is enabled,
+> > make the defined ACTIVITY LED to signal traffic.
+> 
+> Would this not just duplicate the activity on the NIC LED?
 >
-> Thanks
-> /Ilias
 
+Yes but most of the time Vendor doesn't ship NIC port with LED attached
+or even some PHY require additional setup to make the NIC LED blink on
+traffic.
 
-
---=20
-Best regards,
-Maxim Uvarov
+-- 
+	Ansuel
