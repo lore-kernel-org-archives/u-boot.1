@@ -4,69 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43910C27C53
-	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 05:19:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 584AFC27C53
+	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 06:07:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 146018803E;
-	Fri,  7 Jun 2024 07:19:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 851E888224;
+	Fri,  7 Jun 2024 08:06:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rmyFQjkU";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QEm+YkOz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0290588103; Fri,  7 Jun 2024 07:19:22 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 905A488428; Thu,  6 Jun 2024 19:11:11 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B26888005
- for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 07:19:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 706D080E9A
+ for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 19:11:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-k6@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4575JHGN036764;
- Fri, 7 Jun 2024 00:19:17 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1717737557;
- bh=FM0hLtx2WaBgKTjt7ziYF1AzU34I/JKCwQUDnxfjs4k=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=rmyFQjkUN7zOFwFiJPIV9k/00we/MRRX5t7b8krfQUSUVj425m6TD3dSDbvkIvTxZ
- 9Q0ZGys/91w3caogWzZJLDLaK4NkDtCq2+BZ40vAdyIGCzQfeiCJE+Zts+GIebtn7T
- ob1ZEfZBzd3GTtnjlItFfWqV+8te4bINCKHNmb94=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4575JHA7126082
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 7 Jun 2024 00:19:17 -0500
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 7
- Jun 2024 00:19:17 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 7 Jun 2024 00:19:17 -0500
-Received: from [172.24.227.241] (santhoshkumark.dhcp.ti.com [172.24.227.241])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4575JDJl045384; 
- Fri, 7 Jun 2024 00:19:14 -0500
-Message-ID: <e4a87a13-2c0b-4244-a4ca-1de9b13acfec@ti.com>
-Date: Fri, 7 Jun 2024 10:49:13 +0530
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=vassilisamir@gmail.com
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a6265d48ec3so151137566b.0
+ for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 10:11:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1717693869; x=1718298669; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=BIIDtk8w0dhjE+3z4dNv5EMRTLcUwaMMq0vkP1dx9S0=;
+ b=QEm+YkOzAB0s90IRylhzh3fUSnySXeSRrcard9dZhsMqgO+1rmg1cSeyoZV+xMJj79
+ giJL3CVh0GSQDKBIcfwtkZZsLNm7turWTr7fryNsoVZXHSkdEtc0jnbQQhyXREuyX43u
+ GAo0WC9fHbPNdtSAhZPnJCI7id5XhMOUmIzAzuwo2BZFDoPXzqwqDO5vQJmHBIaqev5/
+ 5avwtp/07q90iHsXBwt6qQxXUEH0pkbE5iQpjus7gpSMZfZvxOXvzLZuz74uFcnsEKvB
+ 7jSNoCnPYyD5RTBDHfIn4JwvFfg1tIDoVLK/c14gfY3+3f3cnON5BL4h03TNjDMfQwTV
+ AR7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717693869; x=1718298669;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:date:from:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BIIDtk8w0dhjE+3z4dNv5EMRTLcUwaMMq0vkP1dx9S0=;
+ b=xJPsJGx91xLnk+YgwhUySaV58CtAPQTdz0czOoH/h5mJTNQgYw75Ytx7rKdZb2inRt
+ mkqPl30JtlQMcc59qIbo37QvC15/dQ7PniAojN1wH/A7jFRyynVfEsiNcPaED91wheWa
+ v4bw43BdlixvT1Wv3OPc5bN+WL3U/omSLFlWKuNzXBO2c0OcuDmwhV/BD0cdR2E0vOam
+ yIOrWFUaAN2C03E7wpoNR+7br0C5lO/4JzECsMPzqGQLEuOyOcW53U5uU9ow6niDgOPB
+ unQ/83gUvVcuA/kXA+MMAPhPK9IV9i3LZ1JqmlzsFhaNL+v7B2XU+ReApy9PVR2xaLyx
+ 5fPQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU68GQhBnbrRZ2DRIYnN7Agt9oliVHWVh8VIt1taBbP2gLy/dA2V2NW2ZffzmxP9pKvv21CIZOIhmlqz2aqPnOlsMsFDA==
+X-Gm-Message-State: AOJu0YxlpRyU9D8/U6Efq94wokjPDxRrU0TasE2YGg7QDWQlkXzn19tk
+ Yr4T9arQQqUoBmq376arvXVlF8UtN0ew45urOKuw5pUZJxtIGD2mtnnmF2wz
+X-Google-Smtp-Source: AGHT+IEITO6ysrEgNEPW9r6dgEcxd4eEAEC6wUHftLL5BQ6PKaOPlCXedm8bLESmanUDI6ApZfhfLg==
+X-Received: by 2002:a17:906:1d5b:b0:a65:4268:dfca with SMTP id
+ a640c23a62f3a-a6cdb9ddff5mr10635166b.65.1717693868508; 
+ Thu, 06 Jun 2024 10:11:08 -0700 (PDT)
+Received: from vamoiridPC ([2a04:ee41:82:7577:28a0:434b:ab8b:94ca])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a6c80582030sm121399566b.33.2024.06.06.10.11.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 06 Jun 2024 10:11:07 -0700 (PDT)
+From: Vasileios Amoiridis <vassilisamir@gmail.com>
+X-Google-Original-From: Vasileios Amoiridis <vamoirid@vamoiridPC>
+Date: Thu, 6 Jun 2024 19:11:06 +0200
+To: Philip Oberfichtner <pro@denx.de>
+Cc: Vasileios Amoiridis <vassilisamir@gmail.com>, trini@konsulko.com,
+ hs@denx.de, vasileios.amoiridis@cern.ch, u-boot@lists.denx.de
+Subject: Re: [RFC PATCH] drivers: bootcount: Add support for FAT filesystem
+Message-ID: <20240606171106.GA123822@vamoiridPC>
+References: <20240605181041.68317-1-vassilisamir@gmail.com>
+ <20240605181041.68317-2-vassilisamir@gmail.com>
+ <ZmFsLMEAQPFuP_aA@eryximachos>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 7/8] board: ti: Pull redundant DDR functions to a
- common location and Fixup DDR size when ECC is enabled
-To: Wadim Egorov <w.egorov@phytec.de>, <trini@konsulko.com>, <nm@ti.com>,
- <vigneshr@ti.com>, <bb@ti.com>, <u-kumar1@ti.com>, <m-chawdhry@ti.com>
-CC: <u-boot@lists.denx.de>, <n-francis@ti.com>
-References: <20240523050430.455201-1-s-k6@ti.com>
- <20240523050430.455201-8-s-k6@ti.com>
- <89aba782-fbc2-463e-ae93-f38dca3da534@phytec.de>
-Content-Language: en-US
-From: Santhosh Kumar K <s-k6@ti.com>
-In-Reply-To: <89aba782-fbc2-463e-ae93-f38dca3da534@phytec.de>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ZmFsLMEAQPFuP_aA@eryximachos>
+X-Mailman-Approved-At: Fri, 07 Jun 2024 08:06:57 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,307 +97,256 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi, Wadim,
+On Thu, Jun 06, 2024 at 09:58:36AM +0200, Philip Oberfichtner wrote:
+> Hi,
+> 
+> On Wed, Jun 05, 2024 at 08:10:41PM +0200, Vasileios Amoiridis wrote:
+> > From: Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
+> > 
+> > Add support to save boot count variable in a file in a FAT filesystem.
+> > 
+> > Signed-off-by: Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
+> > ---
+> >  doc/README.bootcount              | 12 ++++----
+> >  drivers/bootcount/Kconfig         | 49 +++++++++++++++++++++++--------
+> >  drivers/bootcount/Makefile        |  2 +-
+> >  drivers/bootcount/bootcount_ext.c | 18 ++++++++----
+> >  4 files changed, 56 insertions(+), 25 deletions(-)
+> > 
+> > diff --git a/doc/README.bootcount b/doc/README.bootcount
+> > index f6c5f82f98..cce66d4d70 100644
+> > --- a/doc/README.bootcount
+> > +++ b/doc/README.bootcount
+> > @@ -23,15 +23,17 @@ It is the responsibility of some application code (typically a Linux
+> >  application) to reset the variable "bootcount" to 0 when the system booted
+> >  successfully, thus allowing for more boot cycles.
+> >  
+> > -CONFIG_BOOTCOUNT_EXT
+> > +CONFIG_BOOTCOUNT_FS
+> >  --------------------
+> >  
+> > -This adds support for maintaining boot count in a file on an EXT filesystem.
+> > +This adds support for maintaining boot count in a file on a filesystem.
+> > +Supported filesystems are FAT and EXT.
+> > +
+> >  The file to use is defined by:
+> >  
+> > -CONFIG_SYS_BOOTCOUNT_EXT_INTERFACE
+> > -CONFIG_SYS_BOOTCOUNT_EXT_DEVPART
+> > -CONFIG_SYS_BOOTCOUNT_EXT_NAME
+> > +CONFIG_SYS_BOOTCOUNT_FS_INTERFACE
+> > +CONFIG_SYS_BOOTCOUNT_FS_DEVPART
+> > +CONFIG_SYS_BOOTCOUNT_FS_NAME
+> >  
+> >  The format of the file is:
+> >  
+> > diff --git a/drivers/bootcount/Kconfig b/drivers/bootcount/Kconfig
+> > index 3c56253b1e..a39a7556bb 100644
+> > --- a/drivers/bootcount/Kconfig
+> > +++ b/drivers/bootcount/Kconfig
+> > @@ -25,10 +25,9 @@ config BOOTCOUNT_GENERIC
+> >  	    Set to the address where the bootcount and bootcount magic
+> >  	    will be stored.
+> >  
+> > -config BOOTCOUNT_EXT
+> > -	bool "Boot counter on EXT filesystem"
+> > -	depends on FS_EXT4
+> > -	select EXT4_WRITE
+> > +config BOOTCOUNT_FS
+> > +	bool "Boot counter on filesystem"
+> > +	depends on FS_EXT4 || FS_FAT
+> >  	help
+> >  	  Add support for maintaining boot count in a file on an EXT
+> >  	  filesystem.
+> 
+> The help message refers to EXT only, not mentioning FAT.
+> 
 
-Thanks for the review.
+Ack.
 
-On 30/05/24 17:48, Wadim Egorov wrote:
-> Hi Santhosh,
+> > @@ -177,6 +176,30 @@ config BOOTCOUNT_BOOTLIMIT
+> >  	  counter being cleared.
+> >  	  If set to 0, do not set a boot limit in the environment.
+> >  
+> > +if BOOTCOUNT_FS
+> > +choice
+> > +	prompt "Filesystem type"
+> > +	default BOOTCOUNT_EXT
+> > +
+> > +config BOOTCOUNT_EXT
+> > +	bool "Boot counter on EXT filesystem"
+> > +	depends on FS_EXT4
+> > +	select EXT4_WRITE
+> > +	help
+> > +	  Add support for maintaining boot count in a file on an EXT
+> > +	  filesystem.
+> > +
+> > +config BOOTCOUNT_FAT
+> > +	bool "Boot counter on FAT filesystem"
+> > +	depends on FS_FAT
+> > +	select FAT_WRITE
+> > +	help
+> > +	  Add support for maintaining boot count in a file on a FAT
+> > +	  filesystem.
+> > +
+> > +endchoice
+> > +endif
+> > +
+> >  config SYS_BOOTCOUNT_SINGLEWORD
+> >  	bool "Use single word to pack boot count and magic value"
+> >  	depends on BOOTCOUNT_GENERIC
+> > @@ -184,26 +207,26 @@ config SYS_BOOTCOUNT_SINGLEWORD
+> >  	  This option enables packing boot count magic value and boot count
+> >  	  into single word (32 bits).
+> >  
+> > -config SYS_BOOTCOUNT_EXT_INTERFACE
+> > +config SYS_BOOTCOUNT_FS_INTERFACE
+> >  	string "Interface on which to find boot counter EXT filesystem"
 > 
-> thanks for this series!
+> Same here.
 > 
-> Am 23.05.24 um 07:04 schrieb Santhosh Kumar K:
->> As there are few redundant functions in board/ti/*/evm.c files, pull
->> them to a common location of access to reuse and include the common file
->> to access the functions.
->>
->> Call k3-ddrss driver through fixup_ddr_driver_for_ecc() to fixup the
->> device tree and resize the available amount of DDR, if ECC is enabled.
->> Otherwise, fixup the device tree using the regular
->> fdt_fixup_memory_banks().
->>
->> Also call dram_init_banksize() after every call to
->> fixup_ddr_driver_for_ecc() is made so that gd->bd is populated
->> correctly.
->>
->> Ensure that fixup_ddr_driver_for_ecc() is agnostic to the number of DDR
->> controllers present.
->>
->> Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
->> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
->> ---
-> [...]
->> +++ b/board/ti/common/k3-ddr-init.c
->> @@ -0,0 +1,89 @@
->> +// SPDX-License-Identifier: GPL-2.0+
->> +/*
->> + * Copyright (C) 2023, Texas Instruments Incorporated - 
->> https://www.ti.com/
->> + */
->> +
->> +#include <fdt_support.h>
->> +#include <dm/uclass.h>
->> +#include <k3-ddrss.h>
->> +#include <spl.h>
->> +
->> +#include "k3-ddr-init.h"
->> +
->> +int dram_init(void)
->> +{
->> +    s32 ret;
->> +
->> +    ret = fdtdec_setup_mem_size_base_lowest();
->> +    if (ret)
->> +        printf("Error setting up mem size and base. %d\n", ret);
->> +
->> +    return ret;
->> +}
->> +
->> +int dram_init_banksize(void)
->> +{
->> +    s32 ret;
->> +
->> +    ret = fdtdec_setup_memory_banksize();
->> +    if (ret)
->> +        printf("Error setting up memory banksize. %d\n", ret);
->> +
->> +    return ret;
->> +}
-> 
-> I'm wondering if we can generalize more.
-> 
-> What do you say if we keep dram_init() & dram_init_banksize() in the 
-> board code and move fixup_ddr_driver_for_ecc() & fixup_memory_node() to 
-> mach-k3 and make them available for all K3 based boards?
-> 
-> It looks like I will reuse the code for our boards and I assume other 
-> vendors too.
-> 
-> Regards,
-> Wadim
-> 
-Yeah, makes sense, will work on it and post v4.
 
-Regards,
-Santhosh.
->> +
->> +#if defined(CONFIG_SPL_BUILD)
->> +
->> +void fixup_ddr_driver_for_ecc(struct spl_image_info *spl_image)
->> +{
->> +    struct udevice *dev;
->> +    int ret, ctr = 1;
->> +
->> +    dram_init_banksize();
->> +
->> +    ret = uclass_get_device(UCLASS_RAM, 0, &dev);
->> +    if (ret)
->> +        panic("Cannnot get RAM device for ddr size fixup: %d\n", ret);
->> +
->> +    ret = k3_ddrss_ddr_fdt_fixup(dev, spl_image->fdt_addr, gd->bd);
->> +    if (ret)
->> +        printf("Error fixing up ddr node for ECC use! %d\n", ret);
->> +
->> +    dram_init_banksize();
->> +
->> +    ret = uclass_next_device_err(&dev);
->> +
->> +    while (!ret) {
->> +        ret = k3_ddrss_ddr_fdt_fixup(dev, spl_image->fdt_addr, gd->bd);
->> +        if (ret)
->> +            printf("Error fixing up ddr node %d for ECC use! %d\n", 
->> ctr, ret);
->> +
->> +        dram_init_banksize();
->> +        ret = uclass_next_device_err(&dev);
->> +        ctr++;
->> +    }
->> +}
->> +
->> +void fixup_memory_node(struct spl_image_info *spl_image)
->> +{
->> +    u64 start[CONFIG_NR_DRAM_BANKS];
->> +    u64 size[CONFIG_NR_DRAM_BANKS];
->> +    int bank;
->> +    int ret;
->> +
->> +    dram_init();
->> +    dram_init_banksize();
->> +
->> +    for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
->> +        start[bank] = gd->bd->bi_dram[bank].start;
->> +        size[bank] = gd->bd->bi_dram[bank].size;
->> +    }
->> +
->> +    ret = fdt_fixup_memory_banks(spl_image->fdt_addr, start, size,
->> +                     CONFIG_NR_DRAM_BANKS);
->> +
->> +    if (ret)
->> +        printf("Error fixing up memory node! %d\n", ret);
->> +}
->> +
->> +#endif
->> diff --git a/board/ti/common/k3-ddr-init.h 
->> b/board/ti/common/k3-ddr-init.h
->> new file mode 100644
->> index 000000000000..9d1826815dfd
->> --- /dev/null
->> +++ b/board/ti/common/k3-ddr-init.h
->> @@ -0,0 +1,15 @@
->> +/* SPDX-License-Identifier: GPL-2.0+ */
->> +/*
->> + * Copyright (C) 2023, Texas Instruments Incorporated - 
->> https://www.ti.com/
->> + */
->> +
->> +#ifndef __K3_DDR_INIT_H
->> +#define __K3_DDR_INIT_H
->> +
->> +int dram_init(void);
->> +int dram_init_banksize(void);
->> +
->> +void fixup_ddr_driver_for_ecc(struct spl_image_info *spl_image);
->> +void fixup_memory_node(struct spl_image_info *spl_image);
->> +
->> +#endif /* __K3_DDR_INIT_H */
->> diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
->> index 539eaf47186a..e0cd8529bc2b 100644
->> --- a/board/ti/j721e/evm.c
->> +++ b/board/ti/j721e/evm.c
->> @@ -17,6 +17,7 @@
->>   #include "../common/board_detect.h"
->>   #include "../common/fdt_ops.h"
->> +#include "../common/k3-ddr-init.h"
->>   #define board_is_j721e_som()    (board_ti_k3_is("J721EX-PM1-SOM") || \
->>                    board_ti_k3_is("J721EX-PM2-SOM"))
->> @@ -37,17 +38,6 @@ int board_init(void)
->>       return 0;
->>   }
->> -int dram_init(void)
->> -{
->> -#ifdef CONFIG_PHYS_64BIT
->> -    gd->ram_size = 0x100000000;
->> -#else
->> -    gd->ram_size = 0x80000000;
->> -#endif
->> -
->> -    return 0;
->> -}
->> -
->>   phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
->>   {
->>   #ifdef CONFIG_PHYS_64BIT
->> @@ -59,23 +49,6 @@ phys_addr_t board_get_usable_ram_top(phys_size_t 
->> total_size)
->>       return gd->ram_top;
->>   }
->> -int dram_init_banksize(void)
->> -{
->> -    /* Bank 0 declares the memory available in the DDR low region */
->> -    gd->bd->bi_dram[0].start = 0x80000000;
->> -    gd->bd->bi_dram[0].size = 0x80000000;
->> -    gd->ram_size = 0x80000000;
->> -
->> -#ifdef CONFIG_PHYS_64BIT
->> -    /* Bank 1 declares the memory available in the DDR high region */
->> -    gd->bd->bi_dram[1].start = 0x880000000;
->> -    gd->bd->bi_dram[1].size = 0x80000000;
->> -    gd->ram_size = 0x100000000;
->> -#endif
->> -
->> -    return 0;
->> -}
->> -
->>   #ifdef CONFIG_SPL_LOAD_FIT
->>   int board_fit_config_name_match(const char *name)
->>   {
->> diff --git a/board/ti/j721s2/evm.c b/board/ti/j721s2/evm.c
->> index 5a0281d6b483..fca30107cddb 100644
->> --- a/board/ti/j721s2/evm.c
->> +++ b/board/ti/j721s2/evm.c
->> @@ -24,6 +24,7 @@
->>   #include "../common/board_detect.h"
->>   #include "../common/fdt_ops.h"
->> +#include "../common/k3-ddr-init.h"
->>   DECLARE_GLOBAL_DATA_PTR;
->> @@ -32,17 +33,6 @@ int board_init(void)
->>       return 0;
->>   }
->> -int dram_init(void)
->> -{
->> -#ifdef CONFIG_PHYS_64BIT
->> -    gd->ram_size = 0x100000000;
->> -#else
->> -    gd->ram_size = 0x80000000;
->> -#endif
->> -
->> -    return 0;
->> -}
->> -
->>   phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
->>   {
->>   #ifdef CONFIG_PHYS_64BIT
->> @@ -54,22 +44,17 @@ phys_addr_t board_get_usable_ram_top(phys_size_t 
->> total_size)
->>       return gd->ram_top;
->>   }
->> -int dram_init_banksize(void)
->> +#if defined(CONFIG_SPL_BUILD)
->> +void spl_perform_fixups(struct spl_image_info *spl_image)
->>   {
->> -    /* Bank 0 declares the memory available in the DDR low region */
->> -    gd->bd->bi_dram[0].start = 0x80000000;
->> -    gd->bd->bi_dram[0].size = 0x7fffffff;
->> -    gd->ram_size = 0x80000000;
->> -
->> -#ifdef CONFIG_PHYS_64BIT
->> -    /* Bank 1 declares the memory available in the DDR high region */
->> -    gd->bd->bi_dram[1].start = 0x880000000;
->> -    gd->bd->bi_dram[1].size = 0x37fffffff;
->> -    gd->ram_size = 0x400000000;
->> -#endif
->> -
->> -    return 0;
->> +    if (IS_ENABLED(CONFIG_K3_DDRSS)) {
->> +        if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
->> +            fixup_ddr_driver_for_ecc(spl_image);
->> +    } else {
->> +        fixup_memory_node(spl_image);
->> +    }
->>   }
->> +#endif
->>   #ifdef CONFIG_TI_I2C_BOARD_DETECT
->>   /*
->> diff --git a/board/ti/j784s4/evm.c b/board/ti/j784s4/evm.c
->> index aed0ea5b9495..73056a16dd5f 100644
->> --- a/board/ti/j784s4/evm.c
->> +++ b/board/ti/j784s4/evm.c
->> @@ -10,6 +10,7 @@
->>   #include <init.h>
->>   #include <spl.h>
->>   #include "../common/fdt_ops.h"
->> +#include "../common/k3-ddr-init.h"
->>   DECLARE_GLOBAL_DATA_PTR;
->> @@ -18,15 +19,17 @@ int board_init(void)
->>       return 0;
->>   }
->> -int dram_init(void)
->> +#if defined(CONFIG_SPL_BUILD)
->> +void spl_perform_fixups(struct spl_image_info *spl_image)
->>   {
->> -    return fdtdec_setup_mem_size_base();
->> -}
->> -
->> -int dram_init_banksize(void)
->> -{
->> -    return fdtdec_setup_memory_banksize();
->> +    if (IS_ENABLED(CONFIG_K3_DDRSS)) {
->> +        if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
->> +            fixup_ddr_driver_for_ecc(spl_image);
->> +    } else {
->> +        fixup_memory_node(spl_image);
->> +    }
->>   }
->> +#endif
->>   #ifdef CONFIG_BOARD_LATE_INIT
->>   int board_late_init(void)
+Ack.
+
+> >  	default "mmc"
+> > -	depends on BOOTCOUNT_EXT
+> > +	depends on BOOTCOUNT_FS
+> >  	help
+> >  	  Set the interface to use when locating the filesystem to use for the
+> >  	  boot counter.
+> >  
+> > -config SYS_BOOTCOUNT_EXT_DEVPART
+> > +config SYS_BOOTCOUNT_FS_DEVPART
+> >  	string "Partition of the boot counter EXT filesystem"
+> 
+> And here.
+> 
+
+Ack.
+
+> >  	default "0:1"
+> > -	depends on BOOTCOUNT_EXT
+> > +	depends on BOOTCOUNT_FS
+> >  	help
+> >  	  Set the partition to use when locating the filesystem to use for the
+> >  	  boot counter.
+> >  
+> > -config SYS_BOOTCOUNT_EXT_NAME
+> > +config SYS_BOOTCOUNT_FS_NAME
+> >  	string "Path and filename of the EXT filesystem based boot counter"
+> 
+> And here. Other than that
+> Reviewed-by: Philip Oberfichtner <pro@denx.de>
+> 
+
+Ack.
+
+Cheers,
+Vasilis
+
+> >  	default "/boot/failures"
+> > -	depends on BOOTCOUNT_EXT
+> > +	depends on BOOTCOUNT_FS
+> >  	help
+> >  	  Set the filename and path of the file used to store the boot counter.
+> >  
+> > @@ -211,18 +234,18 @@ config SYS_BOOTCOUNT_ADDR
+> >  	hex "RAM address used for reading and writing the boot counter"
+> >  	default 0x44E3E000 if BOOTCOUNT_AM33XX || BOOTCOUNT_AM33XX_NVMEM
+> >  	default 0xE0115FF8 if ARCH_LS1043A || ARCH_LS1021A
+> > -	depends on BOOTCOUNT_AM33XX || BOOTCOUNT_GENERIC || BOOTCOUNT_EXT || \
+> > +	depends on BOOTCOUNT_AM33XX || BOOTCOUNT_GENERIC || BOOTCOUNT_FS || \
+> >  		   BOOTCOUNT_AM33XX_NVMEM
+> >  	help
+> >  	  Set the address used for reading and writing the boot counter.
+> >  
+> >  config SYS_BOOTCOUNT_MAGIC
+> >  	hex "Magic value for the boot counter"
+> > -	default 0xB001C041 if BOOTCOUNT_GENERIC || BOOTCOUNT_EXT || \
+> > +	default 0xB001C041 if BOOTCOUNT_GENERIC || BOOTCOUNT_FS || \
+> >  			      BOOTCOUNT_AM33XX || BOOTCOUNT_ENV || \
+> >  			      BOOTCOUNT_RAM || BOOTCOUNT_AT91 || DM_BOOTCOUNT
+> >  	default 0xB0 if BOOTCOUNT_AM33XX_NVMEM
+> > -	depends on BOOTCOUNT_GENERIC || BOOTCOUNT_EXT || \
+> > +	depends on BOOTCOUNT_GENERIC || BOOTCOUNT_FS || \
+> >  		   BOOTCOUNT_AM33XX || BOOTCOUNT_ENV || \
+> >  		   BOOTCOUNT_RAM || BOOTCOUNT_AT91 || DM_BOOTCOUNT || \
+> >  		   BOOTCOUNT_AM33XX_NVMEM
+> > diff --git a/drivers/bootcount/Makefile b/drivers/bootcount/Makefile
+> > index e7771f5b36..c0427434d7 100644
+> > --- a/drivers/bootcount/Makefile
+> > +++ b/drivers/bootcount/Makefile
+> > @@ -6,7 +6,7 @@ obj-$(CONFIG_BOOTCOUNT_AT91)	+= bootcount_at91.o
+> >  obj-$(CONFIG_BOOTCOUNT_AM33XX)	+= bootcount_davinci.o
+> >  obj-$(CONFIG_BOOTCOUNT_RAM)	+= bootcount_ram.o
+> >  obj-$(CONFIG_BOOTCOUNT_ENV)	+= bootcount_env.o
+> > -obj-$(CONFIG_BOOTCOUNT_EXT)	+= bootcount_ext.o
+> > +obj-$(CONFIG_BOOTCOUNT_FS)	+= bootcount_ext.o
+> >  obj-$(CONFIG_BOOTCOUNT_AM33XX_NVMEM)	+= bootcount_nvmem.o
+> >  
+> >  obj-$(CONFIG_DM_BOOTCOUNT)      += bootcount-uclass.o
+> > diff --git a/drivers/bootcount/bootcount_ext.c b/drivers/bootcount/bootcount_ext.c
+> > index 9639e638e9..660bea2db2 100644
+> > --- a/drivers/bootcount/bootcount_ext.c
+> > +++ b/drivers/bootcount/bootcount_ext.c
+> > @@ -19,14 +19,20 @@ typedef struct {
+> >  
+> >  static u8 upgrade_available = 1;
+> >  
+> > +#ifdef BOOTCOUNT_EXT
+> > +static u8 bootcount_fstype = FS_TYPE_EXT;
+> > +#else
+> > +static u8 bootcount_fstype = FS_TYPE_FAT;
+> > +#endif
+> > +
+> >  void bootcount_store(ulong a)
+> >  {
+> >  	bootcount_ext_t *buf;
+> >  	loff_t len;
+> >  	int ret;
+> >  
+> > -	if (fs_set_blk_dev(CONFIG_SYS_BOOTCOUNT_EXT_INTERFACE,
+> > -			   CONFIG_SYS_BOOTCOUNT_EXT_DEVPART, FS_TYPE_EXT)) {
+> > +	if (fs_set_blk_dev(CONFIG_SYS_BOOTCOUNT_FS_INTERFACE,
+> > +			   CONFIG_SYS_BOOTCOUNT_FS_DEVPART, bootcount_fstype)) {
+> >  		puts("Error selecting device\n");
+> >  		return;
+> >  	}
+> > @@ -42,7 +48,7 @@ void bootcount_store(ulong a)
+> >  	buf->upgrade_available = upgrade_available;
+> >  	unmap_sysmem(buf);
+> >  
+> > -	ret = fs_write(CONFIG_SYS_BOOTCOUNT_EXT_NAME,
+> > +	ret = fs_write(CONFIG_SYS_BOOTCOUNT_FS_NAME,
+> >  		       CONFIG_SYS_BOOTCOUNT_ADDR, 0, sizeof(bootcount_ext_t),
+> >  		       &len);
+> >  	if (ret != 0)
+> > @@ -55,13 +61,13 @@ ulong bootcount_load(void)
+> >  	loff_t len_read;
+> >  	int ret;
+> >  
+> > -	if (fs_set_blk_dev(CONFIG_SYS_BOOTCOUNT_EXT_INTERFACE,
+> > -			   CONFIG_SYS_BOOTCOUNT_EXT_DEVPART, FS_TYPE_EXT)) {
+> > +	if (fs_set_blk_dev(CONFIG_SYS_BOOTCOUNT_FS_INTERFACE,
+> > +			   CONFIG_SYS_BOOTCOUNT_FS_DEVPART, bootcount_fstype)) {
+> >  		puts("Error selecting device\n");
+> >  		return 0;
+> >  	}
+> >  
+> > -	ret = fs_read(CONFIG_SYS_BOOTCOUNT_EXT_NAME, CONFIG_SYS_BOOTCOUNT_ADDR,
+> > +	ret = fs_read(CONFIG_SYS_BOOTCOUNT_FS_NAME, CONFIG_SYS_BOOTCOUNT_ADDR,
+> >  		      0, sizeof(bootcount_ext_t), &len_read);
+> >  	if (ret != 0 || len_read != sizeof(bootcount_ext_t)) {
+> >  		puts("Error loading bootcount\n");
+> > 
+> > base-commit: c0ea27bccfb7d2d37fd36806ac2a2f7389099420
+> > -- 
+> > 2.34.1
+> > 
+> 
+> -- 
+> =====================================================================
+> DENX Software Engineering GmbH,        Managing Director: Erika Unter
+> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+> Phone: +49-8142-66989-22  Fax: +49-8142-66989-80   Email: pro@denx.de
+> =====================================================================
