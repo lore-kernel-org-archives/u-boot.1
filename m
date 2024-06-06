@@ -4,74 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6893DC27C54
-	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 15:05:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CBEAC25B75
+	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 15:05:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDEB58845E;
-	Thu,  6 Jun 2024 17:04:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3C55C88473;
+	Thu,  6 Jun 2024 17:04:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Q4WDu8X0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZEuc4Qn1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11E7088453; Thu,  6 Jun 2024 17:04:32 +0200 (CEST)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
+ id C819687F64; Thu,  6 Jun 2024 17:04:35 +0200 (CEST)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0155D88459
- for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 17:04:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A6E55883AA
+ for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 17:04:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-6afbf9c9bc0so5764766d6.3
- for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 08:04:29 -0700 (PDT)
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-6ae84d0cd2eso5678516d6.0
+ for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 08:04:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1717686269; x=1718291069; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1717686272; x=1718291072; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=07FW4H3RjcZeJFfWrX5YA2SByGS4uz4cnwtlxUezFr4=;
- b=Q4WDu8X0dM4uBhAyq9Pk7qfEGbg5d0WeOfJtz+xuWx13w2dOL3j7qBWHICcBCB0PS/
- Dh3NXVS50XbIzyH6C8O5tmEUBy6AFaqVQnFir0lm2BSuaAmAr3e6jJKLRM/ya3kkFAvk
- N7osDFCUamzt2uSf0hAVHw8Ri0IKw6QaZNZJ8=
+ bh=LBYASjzwGCv4VjKppMmdh6yqYLVNvjIL5gAaKSGjRTM=;
+ b=ZEuc4Qn12tzIVzDt4lhqywcOr4cXTnDrCd7YPJ+41eY8sbItHtPov256qBZVjq2QnW
+ NognN5li0/8xF842lKAQqr9x/hi1xA8KYxVGYE7h2Du/ukeaKvMsTEbzf0wqDQFqQdmg
+ 5GA+9YLgZj5fFXLrv4SQY9J7Xze7M/hi3DALw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717686269; x=1718291069;
+ d=1e100.net; s=20230601; t=1717686272; x=1718291072;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=07FW4H3RjcZeJFfWrX5YA2SByGS4uz4cnwtlxUezFr4=;
- b=GpNWc+TIZCU5E5pjUKdIEDTqdrf423Zi6PolrkIVT+WL/WAvzUM9IZBsNp8AZcJBpU
- ddWFfXyaqlip0xi+Rnd8FMtB+Ka4ulIV0BKhnM0eoGcO3A8ZfK/omiGpgyRmYNTZFREA
- dQI7j/txefYakzOVE8afnYNlTHCs56p3Z2ZxA2Obh0qOo4sO/uJwa92V15Oi1YSdf7qd
- KZZK/ZlOEExhTEv6WTqn/cWQdPkiZrieSYq8X5IVSiakpN2nbE6tgej0h0Y4ef/vazDZ
- P8kkr2bplRurK/l4RJHF7CkFOsTQcsPJDEEDA7YpATj5G6i8QV/NurEdnIyNE2Kg87Pe
- A8GQ==
-X-Gm-Message-State: AOJu0YyM31Qw6G88Se/Z/8E3G0erftpNbpWMxtcXYETB6TA2Wh+YiqQO
- YLSWYgo+mkBbZ4dzoHYHVJ9F4LWJQPwqdpn0aWQT2LyNokQMbXZ3gY/c2iwfy0kV7vIxMcO4U4B
- OVk1rZ9+VoR7lkw4rSYhg5EakfP+jCrLadgNk
-X-Google-Smtp-Source: AGHT+IHFFz44HNIHTlP8OZHD5kVsKzpvFiVxCE6sqbv1aPDlJL+VftSxYbXeM2tg0miY9MoRwdaA4uFYfuFmGrt7Fq4=
-X-Received: by 2002:a05:6214:4385:b0:6ae:d66c:40db with SMTP id
- 6a1803df08f44-6b030aa92dbmr57678646d6.65.1717686268760; Thu, 06 Jun 2024
- 08:04:28 -0700 (PDT)
+ bh=LBYASjzwGCv4VjKppMmdh6yqYLVNvjIL5gAaKSGjRTM=;
+ b=Xkp7ckAYA4a66nHnO+MgLbl509YI+dOi8TA3UlwOsnBMsdjIltAXjdsNsLnVLBo+1J
+ tM2ewiNJ++oWed5YZQAlNJdVqHBftHgKb/avtSaOmBEaVSzV6ZKspZVsRKoSPNtkCoH3
+ mqq5TKMWQ3IC1HwYxlzvQexuuffHm4k/WTiVOrhKcrjAIFYv72afZxuRd/oFsXkUYnYo
+ 6JmujN+Eis82rRrEBlTOiiEpWi1m9fDADDQIuSCy3deqHc7v8wzR4CRGnojLOtc/Eqrm
+ SPuyv53POgp3QNCxqzTWNL5I3/zw79MH3TjtXkY0QqElc1OTmMofGzQ5MuMSQuVGZ9lQ
+ 0Pyg==
+X-Gm-Message-State: AOJu0YyML9wO/4wY2T9OZliBG3yLDsgEvo5V+ZtTCFvkbVIKFHFlajF2
+ Ql2v5AGdUs4lzrDfvSJ6FBXcg/e65sNASVgDtOKU2gJRn0WrNn9yBsP1tBBkl3y75Z9unvxr10F
+ Cud77qoY8hLcbMmPd0uJaNiqu2zgUX/NtM9sO
+X-Google-Smtp-Source: AGHT+IHsIofrUQhQS6goUnXdjEqfPMKgoolef+VxU7OTIwTM7+cHt3+vhfrJW5+1gBFTq9wpOAhXpHCL6ai1UGG71bs=
+X-Received: by 2002:a05:6214:3b89:b0:6af:c46f:be69 with SMTP id
+ 6a1803df08f44-6b020321218mr66401956d6.5.1717686272486; Thu, 06 Jun 2024
+ 08:04:32 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240605032521.1142768-1-sjg@chromium.org>
- <20240605032521.1142768-10-sjg@chromium.org>
- <20240605144224.GR68077@bill-the-cat>
- <CAFLszThEeXFtqf-Yk+_WbJ2GJtkFdC-R-_nWH2HAE9rjn0d8ag@mail.gmail.com>
- <20240605201509.GW68077@bill-the-cat>
-In-Reply-To: <20240605201509.GW68077@bill-the-cat>
+ <20240605032521.1142768-4-sjg@chromium.org>
+ <bfe289ff-eb98-477f-bda5-ab8559166ec3@cherry.de>
+In-Reply-To: <bfe289ff-eb98-477f-bda5-ab8559166ec3@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 6 Jun 2024 09:04:17 -0600
-Message-ID: <CAFLszTisz7GUBzSYS9doV2vfPfM14=-v7ADsPbrALYZkuqrtiA@mail.gmail.com>
-Subject: Re: [PATCH 9/9] Revert "arm: am335x: Enable SPL_OF_CONTROL on some
- configs"
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
- Martyn Welch <martyn.welch@collabora.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Thu, 6 Jun 2024 09:04:20 -0600
+Message-ID: <CAFLszTi6xr7QeaUafMgJDSb6jg9ip3A9MLsEK8HOS=DMnhyxfQ@mail.gmail.com>
+Subject: Re: [PATCH 3/9] rockchip: veyron: Add logging for power init
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Jeffy Chen <jeffy.chen@rock-chips.com>,
+ Kever Yang <kever.yang@rock-chips.com>, huang lin <hl@rock-chips.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,59 +85,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+HI Quentin,
 
-On Wed, 5 Jun 2024 at 14:15, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 5 Jun 2024 at 02:36, Quentin Schulz <quentin.schulz@cherry.de> wrote:
 >
-> On Wed, Jun 05, 2024 at 02:08:54PM -0600, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Wed, 5 Jun 2024 at 08:42, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Tue, Jun 04, 2024 at 09:25:21PM -0600, Simon Glass wrote:
-> > >
-> > > > This is a partial revert which makes boneblack_vboot boot again.
-> > > >
-> > > > This reverts commit f4b64e9736e73ceec14d51600bed9a8ac48f9fe8.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > ---
-> > > >
-> > > >  configs/am335x_boneblack_vboot_defconfig | 1 -
-> > > >  1 file changed, 1 deletion(-)
-> > > >
-> > > > diff --git a/configs/am335x_boneblack_vboot_defconfig b/configs/am335x_boneblack_vboot_defconfig
-> > > > index d473a1a793b..3ec4abddd77 100644
-> > > > --- a/configs/am335x_boneblack_vboot_defconfig
-> > > > +++ b/configs/am335x_boneblack_vboot_defconfig
-> > > > @@ -40,7 +40,6 @@ CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
-> > > >  # CONFIG_CMD_SETEXPR is not set
-> > > >  CONFIG_BOOTP_DNS2=y
-> > > >  CONFIG_OF_CONTROL=y
-> > > > -CONFIG_SPL_OF_CONTROL=y
-> > > >  CONFIG_ENV_OVERWRITE=y
-> > > >  CONFIG_ENV_IS_IN_MMC=y
-> > > >  CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-> > >
-> > > So, this change was a while ago. But I did it because some of the
-> > > drivers, tho I forget which ones exactly, really were not functional
-> > > without SPL_OF_CONTROL enabled. That said, does am335x_evm_defconfig
-> > > work in your configuration? I think we have to keep am335x_evm_spiboot
-> > > because it's so radically different from how the rest of the possible
-> > > options boot, but I'm not sure we need a vboot defconfig? Or if we do,
-> > > it should be updated to use the #include logic these days.
-> >
-> > I don't actually have an am335x_evm board, which is why I'm using bbb.
-> > We only have the vboot version, since the non-vboot was removed a
-> > while back.
-> >
-> > In any case, with this patch, bbb boots again.
+> Hi Simon,
 >
-> Yes, the am335x_evm build supports all of the TI (or associated, like
-> beagleboard) platforms. Please give it a try.
+> On 6/5/24 5:25 AM, Simon Glass wrote:
+> > Add better logging for power init so that CONFIG_LOG_ERROR_RETURN can
+> > be enabled.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >   board/google/veyron/veyron.c | 27 ++++++++++++---------------
+> >   1 file changed, 12 insertions(+), 15 deletions(-)
+> >
+> > diff --git a/board/google/veyron/veyron.c b/board/google/veyron/veyron.c
+> > index 32dbcdc4d10..23fe8bf088c 100644
+> > --- a/board/google/veyron/veyron.c
+> > +++ b/board/google/veyron/veyron.c
+> > @@ -29,44 +29,41 @@ static int veyron_init(void)
+> >       int ret;
+> >
+> >       ret = regulator_get_by_platname("vdd_arm", &dev);
+> > -     if (ret) {
+> > -             debug("Cannot set regulator name\n");
+> > -             return ret;
+> > -     }
+> > +     if (ret)
+> > +             return log_msg_ret("vdd", ret);
+> >
+>
+> Those log messages aren't for code in SPL as far as I could tell, is
+> there any reason to make them that small/cryptic?
 
-Yes, that works. So what should we do with the boneblack config? We
-really should have something that boots.
+Oh yes, it happens early in U-Boot proper before any messages which is
+probably what confused me.
+
+Re size, they just need to support searching the code base. Long
+strings mean that many boards fail to boot / hit their limits when
+CONFIG_LOG_ERROR_RETURN is enabled. So I try to keep them to 3
+characters.
+
+>
+> >       /* Slowly raise to max CPU voltage to prevent overshoot */
+> >       ret = regulator_set_value(dev, 1200000);
+> >       if (ret)
+> > -             return ret;
+> > +             return log_msg_ret("s12", ret);
+> >       udelay(175); /* Must wait for voltage to stabilize, 2mV/us */
+> >       ret = regulator_set_value(dev, 1400000);
+> >       if (ret)
+> > -             return ret;
+> > +             return log_msg_ret("s14", ret);
+> >       udelay(100); /* Must wait for voltage to stabilize, 2mV/us */
+> >
+> >       ret = rockchip_get_clk(&clk.dev);
+> >       if (ret)
+> > -             return ret;
+> > +             return log_msg_ret("clk", ret);
+> >       clk.id = PLL_APLL;
+> >       ret = clk_set_rate(&clk, 1800000000);
+> >       if (IS_ERR_VALUE(ret))
+> > -             return ret;
+> > +             return log_msg_ret("s18", ret);
+> >
+> >       ret = regulator_get_by_platname("vcc33_sd", &dev);
+> >       if (ret) {
+> >               debug("Cannot get regulator name\n");
+> > -             return ret;
+> > +             if (ret)
+> > +                     return log_msg_ret("vcc", ret);
+>
+> I think you can just merge the debug and log_msg_ret here?
+
+They are actually different. The debug message is how I actually found
+this problem.
+
+>
+> Otherwise looking good to me,
+>
+> Cheers,
+> Quentin
 
 Regards,
 Simon
