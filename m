@@ -4,39 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9164BC27C52
-	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 09:22:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB879C27C52
+	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 09:22:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B756488291;
-	Thu,  6 Jun 2024 11:22:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 335C0883E3;
+	Thu,  6 Jun 2024 11:22:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1717665738;
-	bh=hEtRG5fzyW6QF2087cFkKmMZgIePv+acCednefknBG4=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=WJRs/BzbEkSH1v1uLaeesjs8pI7822+l1UJHY3LRrTRslV4n4ZEFolydp3iCnAqjA
-	 RXuHySRKG6Gt+vZbNHAc1zX39DirUzmPcoO/05b48SFLuWtJz5JPBgfGcP6Mf3jHj4
-	 f4x20d3vx/ZRytyjtZ8Qla1iMNS2pBHGt55n/g9NHB96RVc/oIAWCnNw2YUKAffMtP
-	 6vpiDn3x8xXS98kyj43MXZKB/bptxrkTobOHQKm2m34i8iFegH+7LN6Z3cD0GeTlAd
-	 qYqPO4mV8HcYrCQPcZt5sPpalnIUKMT0s9PFyO8tbC6mFusyoMKSDsPe/X2AGtbtq0
-	 qDZwb67/kNgYg==
+	s=phobos-20191101; t=1717665740;
+	bh=Ez9z+95LH4CLZHB2SgRGvQmtSik9xPXGjZ3/RYbSxNY=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Lkitb14Orz8EEQZg/5ja7oEIlO5jl1VGYHrKWjm7WQeFDjVZ2PUGVE/PZOGWeIWyk
+	 8kAJjp32f68rzpNfQjjHzslK5+Lc+CS1GWW3HqL/KteYlUvmVFCFPJf0rS6nobvvoE
+	 NwwYiW0bp6y4dvf4GVnkHRTrkw/yxJEsYbcaV+kU/BOFz6hY8WVoDMMHzXsRKmn7d5
+	 6Ita4+yayRihpTK4g2jp4ARFISZvSBoMsm+quFwznD5JrZwMcbEoq1JugkjWEQ2XYv
+	 3zDwdjZxRJESqQN/ehIhS6kP91NKN6Oyz0sdsmWUxkNt9tI9iXcigqrZovvX6/OQ67
+	 t0ItbZ0WQEgGw==
 Received: from localhost (unknown [IPv6:2001:861:52:5f60:ff6c:4545:dfcf:4c97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested) (Authenticated sender: pro@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 2046B88103;
- Thu,  6 Jun 2024 11:22:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 9639F881B8;
+ Thu,  6 Jun 2024 11:22:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1717665737;
- bh=hEtRG5fzyW6QF2087cFkKmMZgIePv+acCednefknBG4=;
- h=From:To:Cc:Subject:Date:From;
- b=i+5g9n163ifXYCJCLKwnqNO/zyAZQCdQHSbtN/vIHp3Za/kcFwljLG0V7IThBMQtV
- q1WfOKohq1ZdkrYPBQpSlUl0+bGg7R68FvcJKbfk9Ghqfq5M3iGUcOm37kCOvOC+of
- dJvT7rKE1nWcfnRs2eo47pv4t3LD7clQ44XRriZa52d4gnTTGAAWaXz1qAiZ0sjqWm
- I+AmdQP8ztsFdc25jHN6vfFBTWtBrKk2KH6r4s2o5JopN9XzwvkzUlZnImTjMFStrD
- kCqpBiK+bpj6UB4gnLWpJGHX6/NSs3Xehnv8+nzsx8mh3OOUbYxegavC/eq6FLqM9N
- 2OJB4R/3d949w==
+ s=phobos-20191101; t=1717665738;
+ bh=Ez9z+95LH4CLZHB2SgRGvQmtSik9xPXGjZ3/RYbSxNY=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=xo3jsEOzEjMmBm9UG6JgQ18pm2R/+7CDDnltKw2qUGypY3lpat32uMDv7gqGoWv3m
+ 2iquXrt8x8Gtm6F2m9b2P92d/XO2k9mF5YEskWq9oDz04zK/owTSIHq1e20CIuJhbC
+ zr+tXGhIfavR4fzEbmfeYbtriuXxYThQPNVJEczM6X5uqjAid7hRu98KazxK0j/Zku
+ +nTJz7CMOhYS+rM2psXr7xug0kmDx4jjrmUEO7B5WImjup6ca1Cl5+afH8tmgttQfA
+ 0vDWChSPWHzXphVgi9ZVkc+vE50zFHTiwn4/W6tpZ/prmNWIB6WpcnpL6v/WAA1Q2Z
+ ZLa7FAbby73vA==
 From: Philip Oberfichtner <pro@denx.de>
 To: u-boot@lists.denx.de
 Cc: bmeng.cn@gmail.com, caleb.connolly@linaro.org,
@@ -50,10 +51,12 @@ Cc: bmeng.cn@gmail.com, caleb.connolly@linaro.org,
  rfried.dev@gmail.com, seanga2@gmail.com, sebastian.reichel@collabora.com,
  sebastien.szymanski@armadeus.com, sjg@chromium.org, sumit.garg@linaro.org,
  trini@konsulko.com, xypron.glpk@gmx.de, Philip Oberfichtner <pro@denx.de>
-Subject: [PATCH v2 0/5] net: dwc_eth_qos: Add glue driver for Intel MAC
-Date: Thu,  6 Jun 2024 11:22:02 +0200
-Message-Id: <20240606092207.87816-1-pro@denx.de>
+Subject: [PATCH v2 1/5] x86: provide mb() macro
+Date: Thu,  6 Jun 2024 11:22:03 +0200
+Message-Id: <20240606092207.87816-2-pro@denx.de>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240606092207.87816-1-pro@denx.de>
+References: <20240606092207.87816-1-pro@denx.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -73,40 +76,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series implements the dwc_eth_qos glue driver for Intel SOCs.
-Before doing that, a few general adaptions to the dwc_eth_qos.c main
-driver are required. Most notably, the preparation for PCI based driver
-instances, which do not necessarily use a device tree.
+Implement memory barrier using mfence. Linux does it equivalently [1].
 
-This patch series depends on: "net: dwc_eth_qos: mdio: Implement clause 45":
-https://patchwork.ozlabs.org/project/uboot/patch/20240507094237.168238-1-pro@denx.de/
+"The MFENCE instruction establishes a memory fence for both loads and
+stores" [2].
 
-Changes in V2: Improve coding-style in PATCH 5/5
+[1] linux/arch/x86/include/asm/barrier.h
+[2] Intel® 64 and IA-32 Architectures Software Developer’s Manual
 
-Philip Oberfichtner (5):
-  x86: provide mb() macro
-  net: dwc_eth_qos: Fix header to be self-contained
-  net: dwc_eth_qos: Adapt probe() for PCI devices
-  net: dwc_eth_qos: Implement bind() for PCI devices
-  net: dwc_eth_qos: Add glue driver for Intel MAC
+Signed-off-by: Philip Oberfichtner <pro@denx.de>
+---
+ arch/x86/include/asm/io.h | 1 +
+ 1 file changed, 1 insertion(+)
 
- arch/x86/include/asm/io.h          |   1 +
- drivers/net/Kconfig                |   7 +
- drivers/net/Makefile               |   1 +
- drivers/net/dwc_eth_qos.c          |  44 ++-
- drivers/net/dwc_eth_qos.h          |   8 +-
- drivers/net/dwc_eth_qos_imx.c      |   1 +
- drivers/net/dwc_eth_qos_intel.c    | 446 +++++++++++++++++++++++++++++
- drivers/net/dwc_eth_qos_intel.h    |  58 ++++
- drivers/net/dwc_eth_qos_qcom.c     |   1 +
- drivers/net/dwc_eth_qos_rockchip.c |   1 +
- drivers/net/dwc_eth_qos_starfive.c |   1 +
- drivers/net/dwc_eth_qos_stm32.c    |   1 +
- include/pci_ids.h                  |   9 +
- 13 files changed, 575 insertions(+), 4 deletions(-)
- create mode 100644 drivers/net/dwc_eth_qos_intel.c
- create mode 100644 drivers/net/dwc_eth_qos_intel.h
-
+diff --git a/arch/x86/include/asm/io.h b/arch/x86/include/asm/io.h
+index 5efb2e1b21..936ad6f588 100644
+--- a/arch/x86/include/asm/io.h
++++ b/arch/x86/include/asm/io.h
+@@ -244,6 +244,7 @@ static inline void sync(void)
+  * have some advantages to use them instead of the simple one here.
+  */
+ #define dmb()		__asm__ __volatile__ ("" : : : "memory")
++#define mb()		__asm__ __volatile__ ("mfence" : : : "memory")
+ #define __iormb()	dmb()
+ #define __iowmb()	dmb()
+ 
 -- 
 2.39.2
 
