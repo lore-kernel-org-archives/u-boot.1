@@ -4,76 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04ABBC25B75
-	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 08:24:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5CBDC27C52
+	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 08:45:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A021881B8;
-	Thu,  6 Jun 2024 10:24:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0D89188291;
+	Thu,  6 Jun 2024 10:45:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HpGqk3Ea";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1490D88199; Thu,  6 Jun 2024 10:24:28 +0200 (CEST)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 21C3F88258; Thu,  6 Jun 2024 10:45:44 +0200 (CEST)
+Received: from smtp-42ad.mail.infomaniak.ch (smtp-42ad.mail.infomaniak.ch
+ [84.16.66.173])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09286881B8
- for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 10:24:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D2FFA8808B
+ for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 10:45:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-1f62a628b4cso6591875ad.1
- for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 01:24:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1717662263; x=1718267063; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NFiZ1YL0QUIcdp7lKMMVK0VRo5hke0I2cGrYTHv8jwg=;
- b=HpGqk3EabaNCqJPiDyexVsNKNHiFqoNqbzAeRuT/J03Fw6jw5qWaXs0pJv4USXpTdq
- rMj+11UX7Z5ug+HVbwZDZVsdYT861J2xQG+OMYeb8ucm8VaSCnBhGDg9fUTnbHR9Lqb1
- ruKRkUu/NQcJfXyU9CWAxRP+yIJDyjXO8e1v/t+KLrcH6jBS+oQVSADsZM9ZpGCSlHTM
- nt6FhVtkULXt8sHTKmFfUFSXrm6kmm1ndNBBfwLpp33iOVg3Mvc5XtQuqaj8BEK4ydFc
- yynRN0cpsIvaiadIJMbnSnL1cf/5Th3qQ+YBk/QWH5Df35tIOT9qscdapcGFdJ5ne2yi
- 1oFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717662263; x=1718267063;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NFiZ1YL0QUIcdp7lKMMVK0VRo5hke0I2cGrYTHv8jwg=;
- b=tKKBqxHLlxGG8mJSdYroYAlxIC+D7V88agjBkQj7rHdxTj4Ii2Gn6HuAMhVURBO+wW
- 7T3VQNmNffIZlaDkfI345jNA27JcWDo6S+XA563M1s1Wxz4DADduibwGVpTbzjdDoIKt
- TK6v4MPf/sW48cPCifo1KbP44ERhdjAy+E3znQJXWpy0UjNSRAtdnunOBoFfbwOUHa+C
- i7MW3mTSw54rwNrTWJjD9hfwk1kDeyo3EhJLBFGWImaxe9w600bUvIq/Y6gJI+rl7WVP
- i2QCSlPX0F2xmU41vut0UE6LhTSCTH/urVQ7aWyl1AuIkecy+ORvdTY1BBBxcXKWP0lP
- 4FAw==
-X-Gm-Message-State: AOJu0YxW9MT4b/TtMR8g3MdrVOZxbOdFU26Xiwax3Lodn43NmuCiqqmR
- 4ZH181+LwhHUvtZJ9PBSxDDZ/KMpJ7U/nxoXFc5dWTFcyl7EZHTkxUOBTowdoBETLPohQH0DslE
- kmfXvIVo152QDE2cOKPWytaMrlsOy4Yo2SVxHkg==
-X-Google-Smtp-Source: AGHT+IGhtyyxAOpuSvXEH1pQaO+OmTIPlSbf032yqxV4COxzm/XbkhrLdtaI41t7z4TPuqZQk/j+nwBWN/I2Kcn7syY=
-X-Received: by 2002:a17:903:4303:b0:1f6:a43:89c3 with SMTP id
- d9443c01a7336-1f6a5a76a53mr36101455ad.57.1717662263469; Thu, 06 Jun 2024
- 01:24:23 -0700 (PDT)
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
+ [10.4.36.107])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Vvyb93ShTztnm;
+ Thu,  6 Jun 2024 10:45:41 +0200 (CEST)
+Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4Vvyb81rmKzFMg; Thu,  6 Jun 2024 10:45:39 +0200 (CEST)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Subject: [PATCH next v3 0/6] rockchip: display PMIC variant properly + misc
+ fixes for Theobroma boards
+Date: Thu, 06 Jun 2024 10:45:30 +0200
+Message-Id: <20240606-misc-tsd-v3-0-728d721c464a@cherry.de>
 MIME-Version: 1.0
-References: <0513d382abefaa0cab02bd85e120f544d1ef8e6d.1717599504.git.michal.simek@amd.com>
- <CAC_iWjJc5gO1W8GeNRG3Oo24hVzPope3cisz0R=7_pUTjJLWVA@mail.gmail.com>
- <6ecddda9-0823-4512-b33c-787eef615181@amd.com>
-In-Reply-To: <6ecddda9-0823-4512-b33c-787eef615181@amd.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 6 Jun 2024 11:23:46 +0300
-Message-ID: <CAC_iWjJo9oiPh55NixeK8pXtQJZb_9xZ-zxSty00Vn87LAmz=Q@mail.gmail.com>
-Subject: Re: [PATCH] cmd: fwu: Also print information about size
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, git@xilinx.com, 
- Etienne Carriere <etienne.carriere@linaro.org>,
- Jassi Brar <jaswinder.singh@linaro.org>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIACp3YWYC/2WMTQ6DIBBGr2JmXZoBoWpXvUfThcJYZ1E1YIjGe
+ PcSNjXp8vt5b4dAninAvdjBU+TA05hCeSnADu34JsEuZVCoNBqlxYeDFUtwgrA2RlqUtm4h3Wd
+ PPa9Z9YSR1gVeqR04LJPfsj/KvP2rohQouqpzJEutu4YediDvt6ujLInqB97QnECVQKl01ehS2
+ Qb7M3gcxxeLgfPf3wAAAA==
+To: Klaus Goger <klaus.goger@theobroma-systems.com>, 
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
+ Heiko Stuebner <heiko.stuebner@cherry.de>, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>
+Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.13.0
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,43 +66,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 6 Jun 2024 at 09:38, Michal Simek <michal.simek@amd.com> wrote:
->
->
->
-> On 6/5/24 17:09, Ilias Apalodimas wrote:
-> > On Wed, 5 Jun 2024 at 17:58, Michal Simek <michal.simek@amd.com> wrote:
-> >>
-> >> It is useful when structure is also used for saving vendor data covered
-> >> by CRC32.
-> >>
-> >> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> >> ---
-> >>
-> >>   cmd/fwu_mdata.c | 1 +
-> >>   1 file changed, 1 insertion(+)
-> >>
-> >> diff --git a/cmd/fwu_mdata.c b/cmd/fwu_mdata.c
-> >> index 3c8be576ac7a..9c048d69a131 100644
-> >> --- a/cmd/fwu_mdata.c
-> >> +++ b/cmd/fwu_mdata.c
-> >> @@ -22,6 +22,7 @@ static void print_mdata(struct fwu_data *data)
-> >>          printf("\tFWU Metadata\n");
-> >>          printf("crc32: %#x\n", data->crc32);
-> >>          printf("version: %#x\n", data->version);
-> >> +       printf("size: %#x\n", data->metadata_size);
-> >
-> > That's only available in v2
-> > IS_ENABLED(CONFIG_FWU_MDATA_V1) etc?
->
-> This field should be present in v1 and v2 case because it is the part of
-> fwu_data (u-boot private structure) not fwu_mdata (which match the spec).
-> But I have sent v2 and only printing it in v2 case.
+This fixes how the Rockchip PMIC variant is shown for all but RK808 by
+stripping the LSB.
 
-Ah you are right, I was looking at an older tree....
+Also fix the size of the environment on Jaguar to match the default
+(smaller) size.
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Fix SPL_PAD_TO on Ringneck.
 
->
-> Thanks,
-> Michal
+Remove duplicated default value of ENV_OFFSET in puma defconfig.
+
+Remove unnecessary override of the fit offset in u-boot dtsi for Puma
+and Ringneck.
+
+Fix TPL_MAX_SIZE for Ringneck to match the (valid) default value for
+PX30 boards.
+
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+Changes in v3:
+- add missing bitfield include in PMIC patch
+- Link to v2: https://lore.kernel.org/r/20240605-misc-tsd-v2-0-12479432c90f@cherry.de
+
+Changes in v2:
+- add patch for fixing TPL_MAX_SIZE on PX30 Ringneck
+- print show_variant when PMIC variant not found
+- use bitfield_extract_by_mask instead of using hardcoded shift operator
+- Link to v1: https://lore.kernel.org/r/20240524-misc-tsd-v1-0-b7bde1344b9e@cherry.de
+
+---
+Quentin Schulz (6):
+      rockchip: jaguar-rk3588: use default env size for Rockchip on MMC
+      rockchip: rk3399-puma: remove default value from defconfig
+      rockchip: rk3399-puma: remove unnecessary simple-bin:fit:offset override
+      rockchip: px30-ringneck: Update SPL_PAD_TO Kconfig option
+      power: rk8xx: properly print all supported PMICs name
+      rockchip: ringneck-px30: fix TPL_MAX_SIZE
+
+ arch/arm/dts/px30-ringneck-haikou-u-boot.dtsi | 8 --------
+ arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi   | 6 ------
+ configs/jaguar-rk3588_defconfig               | 1 -
+ configs/puma-rk3399_defconfig                 | 1 -
+ configs/ringneck-px30_defconfig               | 3 +--
+ drivers/power/pmic/rk8xx.c                    | 6 +++---
+ 6 files changed, 4 insertions(+), 21 deletions(-)
+---
+base-commit: 8887ffb625f65475fd6619f8b05fb7a5a12b016b
+change-id: 20240524-misc-tsd-e08551c01c8a
+
+Best regards,
+-- 
+Quentin Schulz <quentin.schulz@cherry.de>
+
