@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5610DC25B75
-	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 13:37:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFA06C27C54
+	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 13:37:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E1C0883C2;
-	Thu,  6 Jun 2024 15:37:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9947E8842C;
+	Thu,  6 Jun 2024 15:37:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tDs0sYUB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RAHnKjit";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB3C2883C2; Thu,  6 Jun 2024 15:37:06 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id A2B2E883F4; Thu,  6 Jun 2024 15:37:08 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DB978844E
- for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 15:37:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 922C1878E2
+ for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 15:37:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-42108856c33so12596085e9.1
- for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 06:37:04 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4215f694749so4439925e9.2
+ for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 06:37:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1717681023; x=1718285823; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1717681026; x=1718285826; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gixJyMqtgR/Ja9yTjknGq4WaI5xi6z803iO4UfDzWGo=;
- b=tDs0sYUB5abuuc7nzP9F1xE2q76RxWY4mLGiiF9MxzexMgeWU6i+LfUSdVC1qW8kJZ
- vZSALIz2ey/OtvpjpbTQVht5oo8LzxgvauTbhaFd8172XwojzHRmOPMMu2hzr+vtRJqw
- xfmWnx4CdhhfTqAifFQFyHCVLGA4TeO4gHEx7sen7TxEKWnomV+cAkdGdxHfLZL4cnjJ
- Q+WMmOCmMCJDpsLgfiRQaEXSY4OOIW+g+OPQ8jmU+38S1nLNxJGzdM4pcBX/re092I7F
- BpfQOe7tPOEAeJSA3pZXbfj09gi7AIZmERJBM1i+rRben67lWsoFMvHenK2NQyZwnDj8
- thJw==
+ bh=iOKNHUQAF/z7uYw9BKC26r4hFcJWPHxgcCrB35CBXwE=;
+ b=RAHnKjitxm+sPpJrJy8GPIoHXcvdkTUN6Nd9Col7uW5RIqG6GOdIkFyaOWr1d3Koy+
+ XKnXcMMs+3KHoFIypuZYv4qvJBwW/WKQdL5HJpU6tccDi0IG17ua/KgcT0pBRJsh8c3V
+ brj+NudEmX5DcLSi+roPnDLDpkHb2d25hnBrK4qqFg9PGgQ11LomE5UqTV288d94y652
+ wyo1DWgoxlp/Iv4Thw3zjnUP5pk+BypMXd4iNlcGRKVhxG/D9POwVDNuzsFYD86M2cL+
+ 19/QSFrUK2itXcYGZlHo8IHjTErjARskVtJoEBf9SB0wP4MGFICtH1NK8PHwLfzW3q/a
+ Xp2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717681023; x=1718285823;
+ d=1e100.net; s=20230601; t=1717681026; x=1718285826;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gixJyMqtgR/Ja9yTjknGq4WaI5xi6z803iO4UfDzWGo=;
- b=HZXeuzFKetIw437XZeCxgUGN9RKCKUm1lUd3LgItmT30nXLnjH//s4euRKbZFXM7xR
- 2hBjvkp/eXcDZDA1u4lSCspf1IkwGulA9AsBdaxgebIe0glsgO5Hqj7U+TI28lETpsw2
- 5pBYaoMlMzSQwpx0/ulBNsp/J/JX2UzeVRAsCz0isOszXlAqKomDPo9UwXjpW5V5xpAR
- +pVbm7EcuyVuKbMs3u3HqdrR1OfcmnNft4Pd8V0lS+OSNiHezXaPLzzAXI/o+t1qF8L5
- UL2msjLk+nLK24xm2Zfk4DFI/J7XL5sHt5xJENEyXLaZ2sXp1KBPanYKckmgY49dpVkM
- B0NA==
-X-Gm-Message-State: AOJu0YzKFf9GzwZE5tf3z9vfSczpi+iDIyIL+qmluSWxVA5t7N91GdR9
- cweWd+Em/Yzi9SwLZYck+2TvFwIepmI05i0QTNfD9Un8xaY2XGPqb/aa0lMm2Dhl7Km2SfrAD4a
- wFuUJi8Dq
-X-Google-Smtp-Source: AGHT+IGovyUG+2Kx42iGne2CzrOoDQNz8/VcWX9FRp7k4T0++HF2mnaL89Voo2SRO8JdJWO/7zmkdQ==
-X-Received: by 2002:a05:600c:1c28:b0:420:1a72:69dd with SMTP id
- 5b1f17b1804b1-4215acf92damr22605235e9.10.1717681023372; 
- Thu, 06 Jun 2024 06:37:03 -0700 (PDT)
+ bh=iOKNHUQAF/z7uYw9BKC26r4hFcJWPHxgcCrB35CBXwE=;
+ b=Xw1LA4VHyMUiM38VDvdBJA1V/xMkd3O14CdbOSp4br+QlIQbrbOJK/glj7Fx2mFSOf
+ uX86XH5rULmwPTYCbPqWkBlRFaSsrs2JJOr/aDaqnug+7DvoSa/esYP6WcmJC//h5rtN
+ YXXILQwHZJ+Xws9dULPKoAmT4F4MdMa5cx0WspyvKJRq6rUgOmrzs7v2LpZy9A6j8JEy
+ ZdDIZhCVb44qLVCgahnsQeuRubdIL67KF5tyPAhFW/ofqxg4fe/lyNdYyCT9XbvggUUO
+ px4ULe6yHONBCpmBQlRKmtVeJ662TpjXet/pzB61bvdxSuZMZUimjR5VRNfkaAySplRW
+ OXVQ==
+X-Gm-Message-State: AOJu0Yz2y2Ha83UmzlifsNUEcjbJU2Y9vAD+uTKm+WnTgCEd3hNOAvPX
+ iyeRPzGMGZPewesQ33gtzMHubCc6qjAqeiBsF1wm1WZ8NZ0JuGUlwLAyLOkoAZeWbl03nk5ux3m
+ UG5wkekJI
+X-Google-Smtp-Source: AGHT+IEaWjHKXfEdNzA6V6OKQ3OM5srhEJw3coZ93RBX2IjVC3BrdCK6u5KY6WvyUwovbTe2VrQX6Q==
+X-Received: by 2002:a05:600c:470f:b0:421:e89:dd07 with SMTP id
+ 5b1f17b1804b1-421562c66dcmr46477605e9.2.1717681025789; 
+ Thu, 06 Jun 2024 06:37:05 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:6417:8cf6:a7f7:ee38])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4215c19d52dsm23111955e9.8.2024.06.06.06.37.02
+ 5b1f17b1804b1-4215c19d52dsm23111955e9.8.2024.06.06.06.37.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Jun 2024 06:37:03 -0700 (PDT)
+ Thu, 06 Jun 2024 06:37:05 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Eddie James <eajames@linux.ibm.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Michal Simek <michal.simek@amd.com>,
  Francis Laniel <francis.laniel@amarulasolutions.com>,
  Peter Robinson <pbrobinson@gmail.com>
-Subject: [PATCH v3 04/12] net-lwip: add TFTP support and tftpboot command
-Date: Thu,  6 Jun 2024 15:35:59 +0200
-Message-Id: <805d51e8a6a2f54ae7fc20d9fbc599fb71866755.1717680809.git.jerome.forissier@linaro.org>
+Subject: [PATCH v3 05/12] net-lwip: add ping command
+Date: Thu,  6 Jun 2024 15:36:00 +0200
+Message-Id: <7ae6750ee1319cafa8b5b86f34394d597439b610.1717680809.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1717680809.git.jerome.forissier@linaro.org>
 References: <cover.1717680809.git.jerome.forissier@linaro.org>
@@ -99,289 +101,278 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement do_tftpb().
+Add support for the the ping command with NET_LWIP. The implementation
+is derived from lwIP's contrib/apps/ping/ping.c.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
- cmd/Kconfig     |   3 +-
- cmd/net-lwip.c  |   8 ++
- net-lwip/dhcp.c |  11 ++-
- net-lwip/tftp.c | 202 +++++++++++++++++++++++++++++++++++++++++++++++-
- 4 files changed, 219 insertions(+), 5 deletions(-)
+ boot/Kconfig       |   2 +-
+ cmd/Kconfig        |   6 ++
+ cmd/net-lwip.c     |   8 +++
+ include/net-lwip.h |   3 +
+ net-lwip/Makefile  |   1 +
+ net-lwip/ping.c    | 163 +++++++++++++++++++++++++++++++++++++++++++++
+ 6 files changed, 182 insertions(+), 1 deletion(-)
+ create mode 100644 net-lwip/ping.c
 
+diff --git a/boot/Kconfig b/boot/Kconfig
+index 004e69dd92a..983a284ec52 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -379,7 +379,7 @@ config BOOT_DEFAULTS_CMDS
+ 	select CMD_FS_GENERIC
+ 	select CMD_PART if PARTITIONS
+ 	select CMD_DHCP if CMD_NET || CMD_NET_LWIP
+-	select CMD_PING if CMD_NET
++	select CMD_PING if CMD_NET || CMD_NET_LWIP
+ 	select CMD_PXE if CMD_NET
+ 	select CMD_BOOTI if ARM64
+ 	select CMD_BOOTZ if ARM && !ARM64
 diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 1bfa528e945..94a8de266f6 100644
+index 94a8de266f6..07cfe824e3f 100644
 --- a/cmd/Kconfig
 +++ b/cmd/Kconfig
-@@ -2101,10 +2101,9 @@ config CMD_DHCP
+@@ -2098,6 +2098,12 @@ config CMD_DHCP
+ 	help
+ 	  Boot image via network using DHCP/TFTP protocol
+ 
++config CMD_PING
++	bool "ping"
++	select PROT_RAW_LWIP
++	help
++	  Send ICMP ECHO_REQUEST to network host
++
  config CMD_TFTPBOOT
  	bool "tftp"
  	select PROT_UDP_LWIP
--	default n
-+	default y
- 	help
- 	  tftpboot - load file via network using TFTP protocol
--	  Currently a placeholder (not implemented)
- 
- endif
- 
 diff --git a/cmd/net-lwip.c b/cmd/net-lwip.c
-index 966d7226eda..490a2e4ac5c 100644
+index 490a2e4ac5c..13856703fcf 100644
 --- a/cmd/net-lwip.c
 +++ b/cmd/net-lwip.c
-@@ -11,3 +11,11 @@ U_BOOT_CMD(
-         "[loadAddress] [[hostIPaddr:]bootfilename]"
+@@ -12,6 +12,14 @@ U_BOOT_CMD(
  );
  #endif
-+
-+#if defined(CONFIG_CMD_TFTPBOOT)
+ 
++#if defined(CONFIG_CMD_PING)
 +U_BOOT_CMD(
-+	tftpboot,	3,	0,	do_tftpb,
-+	"boot image via network using TFTP protocol\n",
-+	"[loadAddress] [[hostIPaddr:]bootfilename]"
++	ping,	2,	1,	do_ping,
++	"send ICMP ECHO_REQUEST to network host",
++	"pingAddress"
 +);
 +#endif
-diff --git a/net-lwip/dhcp.c b/net-lwip/dhcp.c
-index d1d35999b04..7bacc234f1e 100644
---- a/net-lwip/dhcp.c
-+++ b/net-lwip/dhcp.c
-@@ -94,11 +94,20 @@ int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- int dhcp_run(ulong addr, const char *fname, bool autoload)
- {
- 	char *dhcp_argv[] = {"dhcp", NULL, };
-+#ifdef CONFIG_CMD_TFTPBOOT
-+	char *tftp_argv[] = {"tftpboot", boot_file_name, NULL, };
-+#endif
- 	struct cmd_tbl cmdtp = {};	/* dummy */
++
+ #if defined(CONFIG_CMD_TFTPBOOT)
+ U_BOOT_CMD(
+ 	tftpboot,	3,	0,	do_tftpb,
+diff --git a/include/net-lwip.h b/include/net-lwip.h
+index 2308703e46b..2abaaa3b4e3 100644
+--- a/include/net-lwip.h
++++ b/include/net-lwip.h
+@@ -5,6 +5,7 @@
  
- 	if (autoload) {
--		/* Will be supported when TFTP is added */
-+#ifdef CONFIG_CMD_TFTPBOOT
-+		/* Assume DHCP was already performed */
-+		if (boot_file_name[0])
-+			return do_tftpb(&cmdtp, 0, 2, tftp_argv);
-+		return 0;
-+#else
- 		return -EOPNOTSUPP;
-+#endif
- 	}
+ #include <asm/cache.h>
+ #include <linux/types.h>
++#include <lwip/ip_addr.h>
+ #include <lwip/netif.h>
+ #include <time.h>
  
- 	return do_dhcp(&cmdtp, 0, 1, dhcp_argv);
-diff --git a/net-lwip/tftp.c b/net-lwip/tftp.c
-index 1fa246f55d9..02ee4aacca5 100644
---- a/net-lwip/tftp.c
-+++ b/net-lwip/tftp.c
-@@ -2,10 +2,208 @@
- /* Copyright (C) 2024 Linaro Ltd. */
+@@ -50,6 +51,7 @@ int eth_env_get_enetaddr_by_index(const char *base_name, int index,
+ int eth_init(void);			/* Initialize the device */
+ int eth_send(void *packet, int length);	   /* Send a packet */
+ int eth_rx(void);
++const char *eth_get_name(void);
+ int eth_get_dev_index(void);
+ int eth_init_state_only(void); /* Set active state */
+ void eth_set_current(void);		/* set nterface to ethcur var */
+@@ -80,6 +82,7 @@ int net_lwip_init(void);
+ struct netif *net_lwip_get_netif(void);
  
- #include <command.h>
+ int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
++int do_ping(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ 
+ #endif /* __NET_LWIP_H__ */
+diff --git a/net-lwip/Makefile b/net-lwip/Makefile
+index a56c32bfa74..e68d4e24197 100644
+--- a/net-lwip/Makefile
++++ b/net-lwip/Makefile
+@@ -7,6 +7,7 @@ obj-$(CONFIG_$(SPL_)DM_ETH) += ../net/eth_common.o
+ obj-$(CONFIG_$(SPL_)DM_ETH) += ../net/eth-uclass.o
+ obj-$(CONFIG_$(SPL_)DM_ETH) += net-lwip.o
+ obj-$(CONFIG_CMD_DHCP) += dhcp.o
++obj-$(CONFIG_CMD_PING) += ping.o
+ obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
+ 
+ # Disable this warning as it is triggered by:
+diff --git a/net-lwip/ping.c b/net-lwip/ping.c
+new file mode 100644
+index 00000000000..51947d615ed
+--- /dev/null
++++ b/net-lwip/ping.c
+@@ -0,0 +1,163 @@
++// SPDX-License-Identifier: GPL-2.0+
++/* Copyright (C) 2024 Linaro Ltd. */
++
++#include <command.h>
 +#include <console.h>
-+#include <image.h>
 +#include <linux/delay.h>
-+#include <lwip/apps/tftp_client.h>
++#include <linux/errno.h>
++#include <lwip/icmp.h>
++#include <lwip/inet_chksum.h>
++#include <lwip/raw.h>
 +#include <lwip/timeouts.h>
- #include <net-lwip.h>
++#include <net-lwip.h>
 +#include <time.h>
 +
-+static ulong daddr;
-+static ulong size;
-+static ulong prevsize;
-+#define PROGRESS_PRINT_STEP_BYTES (100 * 1024)
-+static ulong start_time;
-+static enum done_state {
-+	NOT_DONE = 0,
-+	SUCCESS = 1,
-+	FAILURE = 2
-+} done;
++#define PING_DELAY_MS 1000
++#define PING_TIMEOUT_MS 10000
++/* Ping identifier - must fit on a u16_t */
++#define PING_ID 0xAFAF
 +
-+static void *tftp_open(const char *fname, const char *mode, u8_t is_write)
++static const ip_addr_t *ping_target;
++static struct raw_pcb *ping_pcb;
++static uint16_t ping_seq_num;
++
++static u8_t ping_recv(void *arg, struct raw_pcb *pcb, struct pbuf *p,
++		      const ip_addr_t *addr)
 +{
-+	return NULL;
-+}
++	struct icmp_echo_hdr *iecho;
++	bool *alive = arg;
 +
-+static void tftp_close(void *handle)
-+{
-+	ulong elapsed;
++	if (addr->addr != ping_target->addr)
++		return 0;
 +
-+	if (done == FAILURE) {
-+		/* Closing after an error */
-+		return;
-+	}
++	if ((p->tot_len >= (IP_HLEN + sizeof(struct icmp_echo_hdr))) &&
++	    pbuf_remove_header(p, IP_HLEN) == 0) {
++		iecho = (struct icmp_echo_hdr *)p->payload;
 +
-+	elapsed = get_timer(start_time);
-+	done = SUCCESS;
-+	printf("\nBytes transferred = %lu (%lx hex)\n", size, size);
-+
-+	if (env_set_hex("filesize", size)) {
-+		log_err("filesize not updated\n");
-+		return;
-+	}
-+}
-+
-+static int tftp_read(void *handle, void *buf, int bytes)
-+{
-+	return 0;
-+}
-+
-+static int tftp_write(void *handle, struct pbuf *p)
-+{
-+	struct pbuf *q;
-+
-+	for (q = p; q != NULL; q = q->next) {
-+		memcpy((void *)daddr, q->payload, q->len);
-+		daddr += q->len;
-+		size += q->len;
-+		if (size - prevsize > PROGRESS_PRINT_STEP_BYTES) {
-+			printf("#");
-+			prevsize = size;
++		if ((iecho->id == PING_ID) &&
++		    (iecho->seqno == lwip_htons(ping_seq_num))) {
++			*alive = true;
++			printf("host %s is alive\n", ipaddr_ntoa(addr));
++			pbuf_free(p);
++			return 1; /* eat the packet */
 +		}
++		/* not eaten, restore original packet */
++		pbuf_add_header(p, IP_HLEN);
 +	}
++
++	return 0; /* don't eat the packet */
++}
++
++static int ping_raw_init(void *recv_arg)
++{
++	ping_pcb = raw_new(IP_PROTO_ICMP);
++	if (!ping_pcb)
++		return -ENOMEM;
++
++	raw_recv(ping_pcb, ping_recv, recv_arg);
++	raw_bind(ping_pcb, IP_ADDR_ANY);
 +
 +	return 0;
 +}
 +
-+static void tftp_error(void *handle, int err, const char *msg, int size)
++static void ping_raw_stop(void)
 +{
-+	char message[100];
-+
-+	done = FAILURE;
-+	memset(message, 0, sizeof(message));
-+	memcpy(message, msg, LWIP_MIN(sizeof(message) - 1, (size_t)size));
-+
-+	log_info("\nTFTP error: %d (%s)\n", err, message);
++	if (ping_pcb != NULL) {
++		raw_remove(ping_pcb);
++		ping_pcb = NULL;
++	}
 +}
 +
-+static const struct tftp_context tftp_context = {
-+	tftp_open,
-+	tftp_close,
-+	tftp_read,
-+	tftp_write,
-+	tftp_error
-+};
-+
-+static int tftp_run(ulong addr, char *fname, ip_addr_t srvip)
++static void ping_prepare_echo(struct icmp_echo_hdr *iecho)
 +{
-+	void *f = (void *)0x1; /* unused fake file handle*/
-+	err_t err;
++	ICMPH_TYPE_SET(iecho, ICMP_ECHO);
++	ICMPH_CODE_SET(iecho, 0);
++	iecho->chksum = 0;
++	iecho->id = PING_ID;
++	iecho->seqno = lwip_htons(++ping_seq_num);
 +
-+	if (!fname || addr == 0)
-+		return -1;
++	iecho->chksum = inet_chksum(iecho, sizeof(*iecho));
++}
 +
-+	done = NOT_DONE;
-+	size = 0;
-+	prevsize = 0;
-+	daddr = addr;
++static void ping_send_icmp(struct raw_pcb *raw, const ip_addr_t *addr)
++{
++	struct pbuf *p;
++	struct icmp_echo_hdr *iecho;
++	size_t ping_size = sizeof(struct icmp_echo_hdr);
 +
-+	log_info("TFTP from server %s; our IP address is %s\n",
-+		 ip4addr_ntoa(&srvip), env_get("ipaddr"));
-+	log_info("Filename '%s'.\n", fname);
-+	log_info("Load address: 0x%lx\n", daddr);
-+	log_info("Loading: ");
++	p = pbuf_alloc(PBUF_IP, (u16_t)ping_size, PBUF_RAM);
++	if (!p)
++		return;
 +
-+	err = tftp_init_client(&tftp_context);
-+	if (!(err == ERR_OK || err == ERR_USE))
-+		log_err("tftp_init_client err: %d\n", err);
-+
-+	start_time = get_timer(0);
-+	err = tftp_get(f, &srvip, TFTP_PORT, fname, TFTP_MODE_OCTET);
-+	/* might return different errors, like routing problems */
-+	if (err != ERR_OK) {
-+		log_err("tftp_get err=%d\n", err);
-+		return -1;
++	if ((p->len == p->tot_len) && (p->next == NULL)) {
++		iecho = (struct icmp_echo_hdr *)p->payload;
++		ping_prepare_echo(iecho);
++		raw_sendto(raw, p, addr);
 +	}
 +
-+	while (!done) {
++	pbuf_free(p);
++}
++
++static void ping_send(void *arg)
++{
++	struct raw_pcb *pcb = (struct raw_pcb *)arg;
++
++	ping_send_icmp(pcb, ping_target);
++	sys_timeout(PING_DELAY_MS, ping_send, ping_pcb);
++}
++
++static int ping_loop(const ip_addr_t* addr)
++{
++	bool alive;
++	ulong start;
++	int ret;
++
++	printf("Using %s device\n", eth_get_name());
++
++	ret = ping_raw_init(&alive);
++	if (ret < 0)
++		return ret;
++	ping_target = addr;
++	ping_seq_num = 0;
++
++	start = get_timer(0);
++	ping_send(ping_pcb);
++
++	do {
 +		eth_rx();
-+		sys_check_timeouts();
-+		if (ctrlc())
++		if (alive)
 +			break;
-+	}
-+
-+	tftp_cleanup();
-+
-+	if (done == SUCCESS) {
-+		if (env_set_hex("fileaddr", addr)) {
-+			log_err("fileaddr not updated\n");
-+			return -1;
++		sys_check_timeouts();
++		if (ctrlc()) {
++			printf("\nAbort\n");
++			break;
 +		}
++	} while (get_timer(start) < PING_TIMEOUT_MS);
++
++	sys_untimeout(ping_send, ping_pcb);
++	ping_raw_stop();
++	ping_target = NULL;
++
++	if (alive) {
++		alive = false;
 +		return 0;
 +	}
-+
++	printf("ping failed; host %s is not alive\n", ipaddr_ntoa(addr));
 +	return -1;
 +}
- 
- int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- {
--	/* Not implemented */
--	return CMD_RET_FAILURE;
-+	char *fname;
-+	char *server_ip;
-+	ip_addr_t srvip;
-+	ulong addr;
-+	char *end;
-+	char *col;
 +
-+	image_load_addr = env_get_ulong("loadaddr", 16, image_load_addr);
++int do_ping(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
++{
++	ip_addr_t addr;
 +
-+	switch (argc) {
-+	case 1:
-+		fname = env_get("bootfile");
-+		break;
-+	case 2:
-+		/*
-+		 * Only one arg - accept two forms:
-+		 * Just load address, or just boot file name. The latter
-+		 * form must be written in a format which can not be
-+		 * mis-interpreted as a valid number.
-+		 */
-+		addr = hextoul(argv[1], &end);
-+		if (end == (argv[1] + strlen(argv[1]))) {
-+			image_load_addr = addr;
-+			fname = env_get("bootfile");
-+		} else {
-+			fname = argv[1];
-+		}
-+		break;
-+	case 3:
-+		image_load_addr = hextoul(argv[1], NULL);
-+		fname = argv[2];
-+		break;
-+	default:
++	if (argc < 2)
 +		return CMD_RET_USAGE;
-+	}
 +
-+	col = strchr(fname, ':');
-+	if (col) {
-+		server_ip = fname;
-+		*col = '\0';
-+		fname = col + 1;
-+	} else {
-+		server_ip = env_get("serverip");
-+		if (!server_ip) {
-+			log_err("error: serverip variable has to be set\n");
-+			return CMD_RET_FAILURE;
-+		}
-+	}
-+	if (!ipaddr_aton(server_ip, &srvip)) {
-+		log_err("error: ipaddr_aton\n");
-+		return CMD_RET_FAILURE;
-+	}
++	if (!ipaddr_aton(argv[1], &addr))
++		return CMD_RET_USAGE;
 +
-+	if (!fname) {
-+		log_err("error: no file name\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	if (!image_load_addr) {
-+		log_err("error: no load address\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	if (tftp_run(image_load_addr, fname, srvip) < 0)
++	if (ping_loop(&addr) < 0)
 +		return CMD_RET_FAILURE;
 +
 +	return CMD_RET_SUCCESS;
- }
++}
 -- 
 2.40.1
 
