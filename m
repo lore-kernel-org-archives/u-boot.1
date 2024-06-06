@@ -4,88 +4,179 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94833C25B75
-	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 12:32:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35F6EC25B75
+	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 12:32:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE7E58848F;
-	Thu,  6 Jun 2024 14:31:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4D6AD884A7;
+	Thu,  6 Jun 2024 14:31:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JRgm1H0y";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="PnQy3Cjq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8FF9087D40; Thu,  6 Jun 2024 12:17:11 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EB58B88395; Thu,  6 Jun 2024 12:55:52 +0200 (CEST)
+Received: from EUR04-DB3-obe.outbound.protection.outlook.com
+ (mail-db3eur04on071d.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe0c::71d])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 537A18780E
- for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 12:17:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6130088308
+ for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 12:55:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=muvarov@gmail.com
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a69607c6ccaso78760566b.2
- for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 03:17:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717669029; x=1718273829; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fdhrg4nw4FISvoHoJL4f9PdkFlO2WZrSEpeo2CNFAAg=;
- b=JRgm1H0ygehNUTVQbGiq4rCUERtAWkG8xb12XL1WpbnZKo6pq7CRtdlm+7f7+NliXl
- FhOJ0faAZbUEohcCavmW4IVevYbcYm9hjO6wTxaa7dk5OU5TLeh9p3qEiwEpuI/lMqaY
- BIyoi3tSHuKdLmfpsKonAAisM5csO7qi+YB1uTqIjspp5E3itgKl+Ho0WlNlFrB1P0Eg
- MUsGlM8yB+L382DveWHDw7+ZTaXTsiMvar079Hh34TgyXrf0XoYi6338Lv4mjR6kaWuO
- FyVv9OqVyM2PFQiUDIROUvG5k7mL+zIM0OAdNwF4ISLRANjFu5r9AnwgxQGQf2OIIT2W
- M5LQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717669029; x=1718273829;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=fdhrg4nw4FISvoHoJL4f9PdkFlO2WZrSEpeo2CNFAAg=;
- b=dtWhr+qOIvAw/a5aUJo34gTv+1OWIOw/rRsbG0cteqkH+Na2wEq0J2DoKPUBhLPiSK
- RkPjBVsgNPxwKpLHvR3SDrkcF7e7qi34JiLj+t6bf4Vp3a7qLa0sVs+/GWOYFqj7KBA1
- LMv4a7SMPSRF67d8FSrPHE+8scf9JZBzOV+3VDHQvs/LWPJ/aI78uAqJO/0fpsleh8g4
- vFhWCSfNlokL6HDhy0krsSuk/f9tJ9h5JPZsuZbG175rfnnJfcu9DTinjsODg+dXw5Nx
- TLACsAPFWlLxvvdfKTkRb5H+ocP+rJkmaVJJScdctFb1PuRTekVp09f+Bp+EGgtjmNUB
- bE0w==
-X-Gm-Message-State: AOJu0YwN6kkA0WG+rZEnwzaOCLoUg1ezmfR3KYyW7r9OJ6vkFGHDXJKK
- n2gF0gKftRDNfrIuzxVS/vK6Gmqpk8s4tvZVHoOZtT2FOkDlr+bxxbEi3Jl8G/2HNOLYkvjR2yp
- FQRdyinyM/X6W+OljFSb8Vu0MJdc=
-X-Google-Smtp-Source: AGHT+IGRk3q66Im9IogaBquG479wIMrDE59dP5Vbo0SVdpx+Ln5f7SRBGofa6/ZT5Heq9jlVtQIaZevsEyDmUeoWmko=
-X-Received: by 2002:a17:906:a184:b0:a67:7649:3c38 with SMTP id
- a640c23a62f3a-a69a024ce58mr299940066b.49.1717669028362; Thu, 06 Jun 2024
- 03:17:08 -0700 (PDT)
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=JP+Sxi8xm+ELSsGXnng9PeGURAFVhubkyiRqR+jkPpkZqAXOvy9AQ/Yveh+SqyZVVbgl6N59XRUjWdbxShXltFQ/ej39XcxSt32WcSmY86nD/GzIDoV+WS6TC4BQ96R3Mc1fgDlMGnAXGi6taxkXQznjF9mLz6oJn7E7jQAIL1MybbPr+UA8p38omWD+PTL4d7+H2++Kg/rEnVpdsWfRK53er1LeHN56Nun1qgk65ct1+VYmso7JoAJoWgKIwJn7UllKfqaHDW25Rl6Gk2IoLjaliTj0kybLCLMc5onFkrNanx4wMwLrkmKwPmoWkrlp8COhzHNZlZmKANguuTdEkg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=CKm9s2XFjWw1uLIl4OISdXLyjvZUbfgWugIzbwhC1t4=;
+ b=CPDWg8Xyw9RF4tBkcrwYbvPpP87PZIaOT+R7PsNFSEOwSQpiXcH4Ei2SQfbAloIErRmShFJRN5vqo4k88q4eerTbknV6JdMLmw0A8RLsbVDxxoQ1E73dQUQOi6Q27eWdF0IM+s9vlFSgr7JlXD8a1xUSh6iTp9MVgKlluZusOeBYCSemfshLWOC0BKtxZ2ZVyskRFv3XaYil9i1F6VVmew63Jwa8Hu9o64uXrwWeJ84zqPClItHO/WaSNSFFLgfGhw35J7UURoXmewgpGH6svNom1szt7vXiFnEOgIeRUsiJ5DEldMKMxpJGAtZKU0JxEbFTNj6DXOI0m/4LXLv6OA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=CKm9s2XFjWw1uLIl4OISdXLyjvZUbfgWugIzbwhC1t4=;
+ b=PnQy3Cjqmugjm6igDbAw9NbgJXOrhXQMblfApqv9i0B4IEZycNxsY2+8TuaoOgUsFO894aNz0rFD2YUEQ5irqg5VmkN24AIKgPz1nHwB6j/k7PaWxYQJL3wcTHKjRynLh603h2FNn+oG9aOVasKOaP5AYKznP76+GN7LvZsCvZg=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA4PR04MB7982.eurprd04.prod.outlook.com (2603:10a6:102:c4::9)
+ by AS1PR04MB9456.eurprd04.prod.outlook.com (2603:10a6:20b:4d7::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.26; Thu, 6 Jun
+ 2024 10:55:47 +0000
+Received: from PA4PR04MB7982.eurprd04.prod.outlook.com
+ ([fe80::3c4:afd5:49ac:77af]) by PA4PR04MB7982.eurprd04.prod.outlook.com
+ ([fe80::3c4:afd5:49ac:77af%4]) with mapi id 15.20.7633.033; Thu, 6 Jun 2024
+ 10:55:41 +0000
+Message-ID: <96b43c02-aad4-4fd9-b35b-bc4e1d232a47@cherry.de>
+Date: Thu, 6 Jun 2024 12:55:37 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/7] misc: introduce STATUS LED activity function
+To: Christian Marangi <ansuelsmth@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Jagan Teki <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Arseniy Krasnov <avkrasnov@salutedevices.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Dmitry Dunaev <dunaev@tecon.ru>,
+ Devarsh Thakkar <devarsht@ti.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Eugene Uriev <eugeneuriev@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Shiji Yang <yangshiji66@outlook.com>, Raymond Mao <raymond.mao@linaro.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Doug Zobel <douglas.zobel@climate.com>,
+ William Zhang <william.zhang@broadcom.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Igor Prusov <ivprusov@salutedevices.com>, Bruce Suen <bruce_suen@163.com>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
+ Pratyush Yadav <p.yadav@ti.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Vaishnav Achath <vaishnav.a@ti.com>, AKASHI Takahiro
+ <akashi.tkhro@gmail.com>, u-boot@lists.denx.de
+References: <20240605192146.19052-1-ansuelsmth@gmail.com>
+ <85d02b8a-dee1-42db-a804-d065517391aa@cherry.de>
+ <666186d4.050a0220.fbb8b.00ff@mx.google.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <666186d4.050a0220.fbb8b.00ff@mx.google.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: WA0P291CA0014.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:1::19) To PA4PR04MB7982.eurprd04.prod.outlook.com
+ (2603:10a6:102:c4::9)
 MIME-Version: 1.0
-References: <cover.1716566960.git.jerome.forissier@linaro.org>
- <98a1de5f01dad1ad55b68ebadcbad1f6357246a6.1716566960.git.jerome.forissier@linaro.org>
- <CAJGZr0LjFDH5XETPRwSKVS_=KCDbdf9Mi0NneFwyM7_YOXi4OQ@mail.gmail.com>
- <e6c307e8-5621-42e2-9c89-024a93e11496@linaro.org>
-In-Reply-To: <e6c307e8-5621-42e2-9c89-024a93e11496@linaro.org>
-From: Maxim Uvarov <muvarov@gmail.com>
-Date: Thu, 6 Jun 2024 13:16:56 +0300
-Message-ID: <CAJGZr0Lu_ZUMOLpFGuvARW5FzC8jKo1iEBxds9xJQet7RHM4iw@mail.gmail.com>
-Subject: Re: [PATCH v2 08/14] net-lwip: add wget command
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Javier Tia <javier.tia@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Michal Simek <michal.simek@amd.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Peter Robinson <pbrobinson@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Ramon Fried <rfried.dev@gmail.com>, 
- Peng Fan <peng.fan@nxp.com>, Sean Edmond <seanedmond@microsoft.com>, 
- Ioana Ciornei <ioana.ciornei@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA4PR04MB7982:EE_|AS1PR04MB9456:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0224d091-1393-4ebb-0787-08dc86173508
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230031|376005|366007|7416005|1800799015;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?Vll2eUVMc2dsaExMNnZvZUZ0bVk1TlFTOElJSVJadVg3MUZyN2tTUVZ5TWlF?=
+ =?utf-8?B?M2F2UUJmVm1BSGdYU0l5aEJBbjJiYkpWOTRIVS9SKytVckwvb3YzM0dZR21r?=
+ =?utf-8?B?VVBZK1Q1NmprdkVxVU50Y2ljRVlQZGkyRDZ0dEhBZnlVTUJaMXBDNGl2OTdo?=
+ =?utf-8?B?V3FUd01CaVN0eVA3NzVYYkhTeXZBMmdZRVhFQlBDQzAxS3Mwdzh0dU5uY2lG?=
+ =?utf-8?B?OXozM1hmaEd4Lzh6MWZ0THdlSXhRN3VpTE5HU1hzTFJVdDZheEovczVSQ2Jy?=
+ =?utf-8?B?M2FEUTArZXVhUmZESHFWTHU2UVpMYmhJanp3ZHJXYldyNEVmQTl2bFhEcHd2?=
+ =?utf-8?B?cm9kM2pFS0dOWjF3aENwQnVrV0hpZGhneWc1U25MS2YrWnlqOWl6SHU2VmxH?=
+ =?utf-8?B?bGd6cXpiam55UStnM2JEaGFLelNSVHN1dytKd203dXNWMGRjU3ZuaHlZTmxS?=
+ =?utf-8?B?a2p3NkptMVRGVURKOVBGendaNW5zSUpkQll0eFEyd0d5TDFmS0tVckttMEZG?=
+ =?utf-8?B?TXJYYXhUQ09pTEtXa0ZQNUtOS1liMHUxTDZtcW1zSFJscjJhSlkwRVFPMHdt?=
+ =?utf-8?B?bGdkU3VRbjBxdExYcC9tZEdJWDNjalRBRkFORjFKbXIySzBUQ3lWanBMOSt3?=
+ =?utf-8?B?NTQzVHZSOHJIeWFOV0p3YnBQWWg2SzQ2bHRrK1ZiU2tZS2hrVGY2SGJwdzVL?=
+ =?utf-8?B?MmtNcm5zbUVQQTJwMW16dUtWdWp5dEhGSzNGQjQzY2JSWTRoQkF2dldoSHNq?=
+ =?utf-8?B?ZlFLaFFFYUVTWXcxamkwdUw4NDVVek9BcjlhOUJBVzZtZ0EzY1JjSFRFaThh?=
+ =?utf-8?B?eis2QlZTRElJa0tWemZPQ0lMcXp6QU5naktldlZwSTF3SHV5VGxSb3V5dFpZ?=
+ =?utf-8?B?VnM1eHZLQkh3YTlJU3lvNW5pdWNSN0ZYRkdNaGh1amdUY0FkNTRrT21rRjRG?=
+ =?utf-8?B?RXRmd2tnTTczeDVDakJ4a25UL09TRENITVNPbksvRWFRb1VobmFvTDNYQStM?=
+ =?utf-8?B?OVEzWEdnM0RLOEtEQ0F0M1BBQ1lzK1p3azZLSit3bFVBaElSNXdGakRtWDBU?=
+ =?utf-8?B?cjVXN3FRc1E3aWJjanRjNjZlZFk3NkoraGx6NDlxaVJJeUlKZTBsdzcyL2pu?=
+ =?utf-8?B?NXc3WC9GMFgyaXpQOXBQWTRXUGJHd0taK0Z0VkdzSzZmSU9PaWRNLzdBUVZy?=
+ =?utf-8?B?bEs2QnMyS0w2aTZvM3kvai9oSnFLWTl1YlBGYnJMZnhYMGJHWUJCSWhHR2ND?=
+ =?utf-8?B?SVpwTklBazkrN0ZWMmU5dDEweGNlblBmQ2drS3kvclpZR0J0eWNtdUFuRFFu?=
+ =?utf-8?B?S2RoWTBzb01FeVF6eEdsRFEyUXdZWDRvTlVzemxtU09PSUVLWkZiYjZSbWZu?=
+ =?utf-8?B?NDRNRklnY3JlSUJLY3ZxQkduTUkrUWVRb0J1bTZMYk5EU1dqc2pLZVAwWW55?=
+ =?utf-8?B?U00yVmRqTmJRU2g4QnYvK0RheGR1Yi9sUks4UlJ5SFdLb01CKzgxWm5haWpz?=
+ =?utf-8?B?UHpubnBrNkh2UysyQmtMa2cvdmhjSk8zZ3RaNWRmQm8vekdFeVJWSml3blpX?=
+ =?utf-8?B?eEpSTGRoMVpneUJuRElVMHlDN2RlazVwY2xrd2J4RUJCVDNPWWtiWGEvbmcr?=
+ =?utf-8?B?VkJCandZbEdqeDFyZjJ4TVVkTVFIVnYxcHk3aTQzZkFpSjhpeDZ2MUl1NVo0?=
+ =?utf-8?Q?kfJzWY0hzD6Qkb2lfJxZ?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA4PR04MB7982.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(376005)(366007)(7416005)(1800799015); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?M2M0alVlK0NOSHVxMHJaRW5LVzZiOFlONllWSHN6K0ZQTGdHL1IyRER2Yk00?=
+ =?utf-8?B?d3VIWkx6MzB3dk5uUkYrWVM0ZGRBWmsyU0EwM1duajFmd3N0ajB3blhYUTJ6?=
+ =?utf-8?B?aGhTcjkrcnFLTTRoejVsbFJweHVwU21CWGlmRkJlTDlxN0VNdkQ5eHN3RC9h?=
+ =?utf-8?B?THR6WHdRVWdLeWtoZ01tMEhSUGhwY0hKc1NOekVVVHdEZ3ZjWllva20wMXQy?=
+ =?utf-8?B?bjRFbmZzbkVMM00zMmRUNVBqYXNuYWtJT0tGOHdiVGVvcjVCTlhjQnp1ZXdV?=
+ =?utf-8?B?eUpWQisvMjFKbWNMY3o3aWc5YTJrdnVQUDdoNUdYbTJyL2NNeFhyUmpKaVdN?=
+ =?utf-8?B?MTJmN0NSbE1lcW4rSWNxQ2l3MWdHODlHUjVldVdUejVVTzRlVGJ2SXphUEVU?=
+ =?utf-8?B?bjhpOEloNFZJNC9jOGMzVWl4SnEyM0JhY05pdlRkK0VWTzkrZCtXZk1yajFu?=
+ =?utf-8?B?QXlCUzdWd1kvb1hmOXFGV1B3ckdHZVJFNzY3amNYRlBDVWZaYnU4ZmIyMmlv?=
+ =?utf-8?B?SE9ZQjhzN3BkSUtKTE5qSW8wRzdDYmdjWWlBVFJsZnZHVWZIZDNWSnFWbjlQ?=
+ =?utf-8?B?YWJZcDB0MitlZXEyVUFNb29PTTlCRFdhdFNwOWs5MlA0VE1wZ1dDdi9HZUQ0?=
+ =?utf-8?B?Z2NtcFhoVFRsRk1HM1VZRHNrR0hkcnN5NjVzdGFnd1ErL25jRWxzTE04MExF?=
+ =?utf-8?B?SGR0cGg3c09XTFh1MlZPeUU3eWlITDd1RURia2JHYnpjUUVqZ1o2ZjFPT3lK?=
+ =?utf-8?B?OUR5ZDRaWEtHKzdTR3pPem1Rc09Ock1BZjgrK3R1S1hJREVCYXhrcnJxS0JL?=
+ =?utf-8?B?M2dWbmp3ZS83K0prRzI2MDdSbGU5YTNxc2pNS1BESVgvTDZNeFZCOXVOZUdk?=
+ =?utf-8?B?Q0ZmUW0zSXpkbHFrNTQvVTFSRUkreWNTU09qYXJ2eFE0VzNIQ3ZtU205RWxF?=
+ =?utf-8?B?VkpEdVlyKy8xTGlzOGV2V2hoYlA2TW40UFAwYmZkYStzVTFvUzZkUGRGbTNM?=
+ =?utf-8?B?WWJjdXpzUlBlT0g0WVNnMWoxNEFISWJKREl5N3pKNjNFaFN1YnhLSnpreHZG?=
+ =?utf-8?B?ZXoxK2poblNuVFV4QThwZjVjYmRmSDcvcXcydWdXWmNuQjBncXN0Sk1Gd0xa?=
+ =?utf-8?B?M1JmQy9PT1l3Zms0MHdYSHRweGd0N3BXei9lQ3R2UGU4bU0xVTIvM3M2Vzhp?=
+ =?utf-8?B?N1B5VzlpcWMzM09aUFZ0aTZnN1JEZnRmRnZKbWtHZ0RJL3VrWUxJVFg4WElj?=
+ =?utf-8?B?eDVpdWNNdy9laDhRWXBhWkc3SGlWdzdmaERHVkx5YWhaZ2ZjOEozaEFGQndN?=
+ =?utf-8?B?V2pzckRmOXFTNzB2T0xwUzEzR2MzYnpUbFdLNGJiM2FYdEVvVWE5K01hejJv?=
+ =?utf-8?B?Ky9DZTJCNGdicXNualhtQmErbEdBbEY2ZWxuL0lNeEtiT1FBbFJOd2NUT1M3?=
+ =?utf-8?B?OXFlTDFIZlo1L2lHdTNHYnBkVDNNYU9RK1NmVER3cHRqcDYyU012N2o3Nk1P?=
+ =?utf-8?B?Ym5EaU5uNm5XT1FjN1kwU2s5aXFicmhKNVMxQ3NESi9CamhPSHJtR0FwUWx4?=
+ =?utf-8?B?RTJwYUNBbVM5cmFZLzVCdlRPTlVjU3hEMnM0RmZ1UiszRXNRYmRNMFp4UE5T?=
+ =?utf-8?B?STlQTnlkM1VKbXJzS3BOc2lrbmpnZFdKOTVTUEhDSkhobEhCWWIxNlJ3TW1H?=
+ =?utf-8?B?cTVjdlZFUmpXMzlYYmxzbmorNEFGZGlwSFlSVGZrWU9xMzhRdkd5K3ljNUVD?=
+ =?utf-8?B?RlpHVU5UU1M0c0pGbzJRaUMyUHhoMGxkZkdhdVRUWXVFSXVkN25mREtPNUda?=
+ =?utf-8?B?NTdCUnRlZDdMd3NrVGlOaERRNFROUzVhV0RFOWpXMjlxTkdYZjlXaTRST2hN?=
+ =?utf-8?B?Q2NmcWUxQUhQamc2YjJsVlcxMXZKR2M5b0lYTjZjS0doUHd4aStEUGM5bThi?=
+ =?utf-8?B?cVpaZ0JZQWhpMSs0dWVQMXUrUjhFQ0o0bitzL1JPWkdKanM0NnZCcC94MDRt?=
+ =?utf-8?B?RzVmSFcxUjdaSWo4d0l1ZVNqY01KVU5NbTdnTnFPUXZwaW9WVlBVWkZmUUZG?=
+ =?utf-8?B?QzYzU01PcDFCMWtvVW0yYTRMcTVoYjkyaytyenA2Yy9pZnc1cmwrQktyZGtX?=
+ =?utf-8?B?OUFLd3VEbHJsL2VaNjJvOFd1ajM0MUtSeHRodnlSREU1S1EzYUJIaUs0WHAr?=
+ =?utf-8?Q?IE2K1IRYvDgPgYuupGC5uUc=3D?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0224d091-1393-4ebb-0787-08dc86173508
+X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7982.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jun 2024 10:55:41.3436 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: BcbZTMQQrYcbd50rg/I69nByoTcqTrOKuPzmD5iP9kYmkgjFzPC91yxymouOxnGSv6TFwUkD3jebeJCanM58FZ5231DH0tjck7Y92Bs/Ahk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR04MB9456
 X-Mailman-Approved-At: Thu, 06 Jun 2024 14:31:15 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,354 +194,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D1=87=D1=82, 6 =D0=B8=D1=8E=D0=BD. 2024=E2=80=AF=D0=B3. =D0=B2 12:56, Jero=
-me Forissier <jerome.forissier@linaro.org>:
->
->
->
-> On 5/28/24 15:39, Maxim Uvarov wrote:
-> > =D0=BF=D1=82, 24 =D0=BC=D0=B0=D1=8F 2024=E2=80=AF=D0=B3. =D0=B2 19:22, =
-Jerome Forissier <jerome.forissier@linaro.org>:
-> >>
-> >> Add support for the wget command with NET_LWIP.
-> >>
-> >> About the small change in cmd/efidebug.c: when the wget command based
-> >> on the lwIP stack is used the wget command has a built-in URL
-> >> validation function since it needs to parse it anyways (in parse_url()=
-).
-> >> Therefore wget_validate_uri() doesn't exist. So, guard the call in
-> >> efidebug.c with CONFIG_CMD_WGET.
-> >>
-> >> Based on code initially developed by Maxim U.
-> >>
-> >> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> >> Co-developed-by: Maxim Uvarov <muvarov@gmail.com>
-> >> Cc: Maxim Uvarov <muvarov@gmail.com>
-> >> ---
-> >>  cmd/Kconfig        |   7 ++
-> >>  cmd/Makefile       |   5 +-
-> >>  cmd/efidebug.c     |   8 +-
-> >>  cmd/net-common.c   | 112 ++++++++++++++++++++++++++++
-> >>  cmd/net-lwip.c     |  12 +++
-> >>  cmd/net.c          | 115 -----------------------------
-> >>  include/net-lwip.h |  51 +++++++++++++
-> >>  net-lwip/Makefile  |   1 +
-> >>  net-lwip/wget.c    | 180 ++++++++++++++++++++++++++++++++++++++++++++=
-+
-> >>  9 files changed, 372 insertions(+), 119 deletions(-)
-> >>  create mode 100644 cmd/net-common.c
-> >>  create mode 100644 net-lwip/wget.c
-> >>
-> >> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> >> index 6ef0b52cd34..d9a86540be6 100644
-> >> --- a/cmd/Kconfig
-> >> +++ b/cmd/Kconfig
-> >> @@ -2117,6 +2117,13 @@ config CMD_TFTPBOOT
-> >>         help
-> >>           tftpboot - load file via network using TFTP protocol
-> >>
-> >> +config CMD_WGET
-> >> +       bool "wget"
-> >> +       select PROT_TCP_LWIP
-> >> +       help
-> >> +         wget is a simple command to download kernel, or other files,
-> >> +         from a http server over TCP.
-> >> +
-> >>  endif
-> >>
-> >>  endif
-> >> diff --git a/cmd/Makefile b/cmd/Makefile
-> >> index 535b6838ca5..e90f2f68211 100644
-> >> --- a/cmd/Makefile
-> >> +++ b/cmd/Makefile
-> >> @@ -129,8 +129,11 @@ obj-$(CONFIG_CMD_MUX) +=3D mux.o
-> >>  obj-$(CONFIG_CMD_NAND) +=3D nand.o
-> >>  obj-$(CONFIG_CMD_NET) +=3D net.o
-> >>  obj-$(CONFIG_CMD_NET_LWIP) +=3D net-lwip.o
-> >> +obj-$(filter y,$(CONFIG_CMD_NET) $(CONFIG_CMD_NET_LWIP)) +=3D net-com=
-mon.o
-> >>  ifdef CONFIG_CMD_NET_LWIP
-> >> -CFLAGS_net-lwip.o :=3D -I$(srctree)/lib/lwip/lwip/src/include -I$(src=
-tree)/lib/lwip/u-boot
-> >> +lwip-includes :=3D -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree=
-)/lib/lwip/u-boot
-> >> +CFLAGS_net-lwip.o :=3D $(lwip-includes)
-> >> +CFLAGS_net-common.o :=3D $(lwip-includes)
-> >>  endif
-> >>  obj-$(CONFIG_ENV_SUPPORT) +=3D nvedit.o
-> >>  obj-$(CONFIG_CMD_NVEDIT_EFI) +=3D nvedit_efi.o
-> >> diff --git a/cmd/efidebug.c b/cmd/efidebug.c
-> >> index c2c525f2351..d80e91ecadd 100644
-> >> --- a/cmd/efidebug.c
-> >> +++ b/cmd/efidebug.c
-> >> @@ -741,9 +741,11 @@ static int efi_boot_add_uri(int argc, char *const=
- argv[], u16 *var_name16,
-> >>         if (!label)
-> >>                 return CMD_RET_FAILURE;
-> >>
-> >> -       if (!wget_validate_uri(argv[3])) {
-> >> -               printf("ERROR: invalid URI\n");
-> >> -               return CMD_RET_FAILURE;
-> >> +       if (IS_ENABLED(CONFIG_CMD_WGET)) {
-> >> +               if (!wget_validate_uri(argv[3])) {
-> >> +                       printf("ERROR: invalid URI\n");
-> >> +                       return CMD_RET_FAILURE;
-> >> +               }
-> >>         }
-> >>
-> >>         efi_create_indexed_name(var_name16, var_name16_size, "Boot", i=
-d);
-> >> diff --git a/cmd/net-common.c b/cmd/net-common.c
-> >> new file mode 100644
-> >> index 00000000000..b5dfd2c8866
-> >> --- /dev/null
-> >> +++ b/cmd/net-common.c
-> >> @@ -0,0 +1,112 @@
-> >> +// SPDX-License-Identifier: GPL-2.0+
-> >> +/*
-> >> + * (C) Copyright 2000
-> >> + * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
-> >> + */
-> >> +
-> >> +#include <command.h>
-> >> +#include <dm/device.h>
-> >> +#include <dm/uclass.h>
-> >> +#ifdef CONFIG_NET
-> >> +#include <net.h>
-> >> +#elif defined CONFIG_NET_LWIP
-> >> +#include <net-lwip.h>
-> >> +#else
-> >> +#error Either NET or NET_LWIP must be enabled
-> >> +#endif
-> >> +#include <linux/compat.h>
-> >> +#include <linux/ethtool.h>
-> >> +
-> >> +static int do_net_list(struct cmd_tbl *cmdtp, int flag, int argc, cha=
-r *const argv[])
-> >> +{
-> >> +       const struct udevice *current =3D eth_get_dev();
-> >> +       unsigned char env_enetaddr[ARP_HLEN];
-> >> +       const struct udevice *dev;
-> >> +       struct uclass *uc;
-> >> +
-> >> +       uclass_id_foreach_dev(UCLASS_ETH, dev, uc) {
-> >> +               eth_env_get_enetaddr_by_index("eth", dev_seq(dev), env=
-_enetaddr);
-> >> +               printf("eth%d : %s %pM %s\n", dev_seq(dev), dev->name,=
- env_enetaddr,
-> >> +                      current =3D=3D dev ? "active" : "");
-> >> +       }
-> >> +       return CMD_RET_SUCCESS;
-> >> +}
-> >> +
-> >> +static int do_net_stats(struct cmd_tbl *cmdtp, int flag, int argc, ch=
-ar *const argv[])
-> >> +{
-> >> +       int nstats, err, i, off;
-> >> +       struct udevice *dev;
-> >> +       u64 *values;
-> >> +       u8 *strings;
-> >> +
-> >> +       if (argc < 2)
-> >> +               return CMD_RET_USAGE;
-> >> +
-> >> +       err =3D uclass_get_device_by_name(UCLASS_ETH, argv[1], &dev);
-> >> +       if (err) {
-> >> +               printf("Could not find device %s\n", argv[1]);
-> >> +               return CMD_RET_FAILURE;
-> >> +       }
-> >> +
-> >> +       if (!eth_get_ops(dev)->get_sset_count ||
-> >> +           !eth_get_ops(dev)->get_strings ||
-> >> +           !eth_get_ops(dev)->get_stats) {
-> >> +               printf("Driver does not implement stats dump!\n");
-> >> +               return CMD_RET_FAILURE;
-> >> +       }
-> >> +
-> >> +       nstats =3D eth_get_ops(dev)->get_sset_count(dev);
-> >> +       strings =3D kcalloc(nstats, ETH_GSTRING_LEN, GFP_KERNEL);
-> >> +       if (!strings)
-> >> +               return CMD_RET_FAILURE;
-> >> +
-> >> +       values =3D kcalloc(nstats, sizeof(u64), GFP_KERNEL);
-> >> +       if (!values)
-> >> +               goto err_free_strings;
-> >> +
-> >> +       eth_get_ops(dev)->get_strings(dev, strings);
-> >> +       eth_get_ops(dev)->get_stats(dev, values);
-> >> +
-> >> +       off =3D 0;
-> >> +       for (i =3D 0; i < nstats; i++) {
-> >> +               printf("  %s: %llu\n", &strings[off], values[i]);
-> >> +               off +=3D ETH_GSTRING_LEN;
-> >> +       };
-> >> +
-> >
-> > It looks like here you missed kfree().
->
-> Good catch! This is already missing in master (cmd/net.c). I will fix
-> in v3 and also send a patch for master.
->
-> >> +       return CMD_RET_SUCCESS;
-> >> +
-> >> +err_free_strings:
-> >> +       kfree(strings);
-> >> +
-> >> +       return CMD_RET_FAILURE;
-> >> +}
-> >> +
->
-> [...]
->
-> >> diff --git a/net-lwip/wget.c b/net-lwip/wget.c
-> >> new file mode 100644
-> >> index 00000000000..25b75040806
-> >> --- /dev/null
-> >> +++ b/net-lwip/wget.c
-> >> @@ -0,0 +1,180 @@
-> >> +// SPDX-License-Identifier: GPL-2.0+
-> >> +/* Copyright (C) 2024 Linaro Ltd. */
-> >> +
-> >> +#include <command.h>
-> >> +#include <console.h>
-> >> +#include <display_options.h>
-> >> +#include <image.h>
-> >> +#include <lwip/apps/http_client.h>
-> >> +#include <lwip/timeouts.h>
-> >> +#include <net-lwip.h>
-> >> +#include <time.h>
-> >> +
->
-> [...]
-> >> +
-> >> +static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
-> >> +                           u32_t rx_content_len, u32_t srv_res, err_t=
- err)
-> >> +{
-> >> +       ulong elapsed;
-> >> +
-> >> +       if (httpc_result !=3D HTTPC_RESULT_OK) {
-> >> +               log_err("\nHTTP client error %d\n", httpc_result);
-> >> +               done =3D FAILURE;
-> >> +               return;
-> >> +       }
-> >> +
-> >> +       elapsed =3D get_timer(start_time);
-> >> +        log_info("\n%u bytes transferred in %lu ms (", rx_content_len=
-,
-> >
-> > This print I commented for another patch to match current python tests.
->
-> What do you mean? Is this text incorrect because some tests expect someth=
-ing
-> else? Which ones?
+Hi Christian,
 
-You modified the python test to expect this output if LWIP is enabled.
-Instead of adding one
-more 'if LWIP' to the python test you can make this log_info() output
-the same as the original code.
-But this is up to you. Somebody sometime later will need to drop 'if
-LWIP' from python code.
+On 6/6/24 11:52 AM, Christian Marangi wrote:
+> On Thu, Jun 06, 2024 at 11:12:11AM +0200, Quentin Schulz wrote:
+>> Hi Christian,
+>>
+>> On 6/5/24 9:21 PM, Christian Marangi wrote:
+>>> This series expand the STATUS LED framework with a new color
+>>> and a big new feature. One thing that many device need is a way
+>>> to communicate to the user that the device is actually doing
+>>> something.
+>>>
+>>> This is especially useful for recovery steps where an
+>>> user (for example) insert an USB drive, keep a button pressed
+>>> and the device autorecover.
+>>>
+>>> There is currently no way to signal the user externally that
+>>> the bootloader is processing/recoverying aside from setting
+>>> a LED on.
+>>>
+>>> A solid LED on is not enough and won't actually signal any
+>>> kind of progress.
+>>> Solution is the good old blinking LED but uboot doesn't
+>>> suggest (and support) interrupts and almost all the LED
+>>> are usually GPIO LED that doesn't support HW blink.
+>>>
+>>
+>> I haven't used it yet but we do have a cyclic framework now for things
+>> happening in the background. I think this is a good use-case for this
+>> framework? Something would set the blinking frequency (could be from CLI
+>> directly, or as part of board files, or architecture, etc...) and the LED
+>> would just blink then. This would allow to highlight stages in the boot
+>> process, though that is not like an activity LED so if you're stuck in a
+>> stage, you wouldn't know if something is still happening or if you're really
+>> stuck (e.g. no packet on TFTP or TFTP very slow). The benefit is that it
+>> would be way less intrusive than patching all commands that could make use
+>> of that LED. Right now, this only adds support to MTD, SPI and TFTP, but
+>> what about MMC, NVMe, USB, other net stuff (e.g. wget), etc...
+>>
+> 
+> Can you hint me on where is this framework? Checking the tftp code i
+> couldn't find extra call to it. Maybe it's attached to the schedule()
+> function?
+> 
 
-BR,
-Maxim.
->
-> >> +                 get_timer(start_time));
-> >> +        print_size(rx_content_len / elapsed * 1000, "/s)\n");
-> >> +
-> >> +       if (env_set_hex("filesize", rx_content_len) ||
-> >> +           env_set_hex("fileaddr", saved_daddr)) {
-> >> +               log_err("Could not set filesize or fileaddr\n");
-> >> +               done =3D FAILURE;
-> >> +               return;
-> >> +       }
-> >> +
-> >> +       done =3D SUCCESS;
-> >> +}
-> >> +
-> >> +int wget_with_dns(ulong dst_addr, char *uri)
-> >
-> > static?
->
-> No, this function is called from lib/efi_loader/efi_bootmgr.c.
->
-> >> +{
-> >> +       char server_name[SERVER_NAME_SIZE];
-> >> +       httpc_connection_t conn;
-> >> +       httpc_state_t *state;
-> >> +       char *path;
-> >> +       u16 port;
-> >> +
-> >> +       daddr =3D dst_addr;
-> >> +       saved_daddr =3D dst_addr;
-> >> +       done =3D NOT_DONE;
-> >> +       size =3D 0;
-> >> +       prevsize =3D 0;
-> >> +
-> >> +       if (parse_url(uri, server_name, &port, &path))
-> >> +               return CMD_RET_USAGE;
-> >> +
-> >> +       memset(&conn, 0, sizeof(conn));
-> >> +       conn.result_fn =3D httpc_result_cb;
-> >> +       start_time =3D get_timer(0);
-> >> +       if (httpc_get_file_dns(server_name, port, path, &conn, httpc_r=
-ecv_cb,
-> >> +                              NULL, &state))
-> >> +               return CMD_RET_FAILURE;
-> >> +
-> >> +       while (!done) {
-> >> +               eth_rx();
-> >> +               sys_check_timeouts();
-> >> +               if (ctrlc())
-> >> +                       break;
-> >> +       }
-> >> +
-> >> +       if (done =3D=3D SUCCESS)
-> >> +               return 0;
-> >> +
-> >> +       return -1;
-> >> +}
-> >> +
-> >> +int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const a=
-rgv[])
-> >> +{
-> >> +       char *url;
-> >> +       ulong dst_addr;
-> >> +
-> >> +       if (argc < 2 || argc > 3)
-> >> +               return CMD_RET_USAGE;
-> >> +
-> >> +       dst_addr =3D image_load_addr;
-> >> +
-> >> +       if (!strncmp(argv[1], "0x", 2)) {
-> >
-> > As I remember u-boot can eat hex and decimal numbers for arguments for
-> > most of the commands.
->
-> Right. I'll use hextoul() properly in v3.
->
-> >> +               if (argc < 3)
-> >> +                       return CMD_RET_USAGE;
-> >> +               dst_addr =3D hextoul(argv[1], NULL);
-> >> +               url =3D argv[2];
-> >> +       } else {
-> >> +               url =3D argv[1];
-> >> +       }
-> >> +
-> >> +       if (wget_with_dns(dst_addr, url))
-> >> +               return CMD_RET_FAILURE;
-> >> +
-> >> +       return CMD_RET_SUCCESS;
-> >> +}
-> >> --
-> >> 2.40.1
->
-> Thanks,
-> --
-> Jerome
+https://docs.u-boot.org/en/latest/develop/cyclic.html
 
+> Also notice that it's really not a one setting since almost all device
+> have GPIO LEDs and doesn't have a way to support HW Blink so the
+> "activity" function needs to be called multiple time to increase the
+> counter and toggle the LED.
+> 
 
+Cyclic callback would be called twice per expected blink period, where 
+you would toggle the GPIO (essentially making it 50% duty cycle, but 
+could be more fine-grained if you want a different duty cycle).
 
---=20
-Best regards,
-Maxim Uvarov
+> Also this have the extra feature that you can check if something gets
+> stuck in the process. The lifecycle is:
+> - Turn on the ACTIVITY LED at the start of the thing
+> - Blink once in a while (for very little task this might not happen)
+> - Turn off the ACTIVITY LED at the end of the thing
+> 
+> Soo if something goes wrong the LED would never turn OFF but would stay
+> solid ON.
+> 
+
+Yes, that's something that wouldn't be covered by cyclic framework here. 
+It all depends what you want to do, if it's an activity LED, then we 
+need to hook ourselves deep into frameworks where stuff is actually 
+happening. If it's just to specify which stage of the boot we reached, 
+then cyclic would be good enough probably (register for stage 1, 
+unregister stage1+register for stage2 for different frequency, etc...).
+
+> More than happy to rework this to a less intrusive implementation.
+> 
+> Maybe this can be generalized to some generic API like task_start(),
+> task_processing() and task_end()? Might make more sense than having to
+> add specific LED function to each function?
+> 
+
+This also likely would introduce a hit in performance if we need to 
+toggle the GPIO in the same thread that we do TFTP/storage medium 
+reading/writing? I assume we could still adapt cyclic to make it spawn a 
+one time event instead of looping (e.g. by unregistering itself at the 
+end of its own callback?).
+
+> (AFAIK linux kernel have something similar used for all the trace
+> framework so having something in uboot to trace these kind of operation
+> might be interesting)
+> 
+
+Indeed, that's what's being done with ledtrig_.* functions, they are 
+however scheduled on a workqueue and called from the subsystem directly.
+
+I'm a bit confused also as to why we control the LED blinking from the 
+cmd/ ? E.g. for cmd/mtd.c I would assume that the changes made to the 
+mtd subsystem should be enough to handle those? Similarly, since UBI is 
+for use over NAND/MTD, shouldn't that already be handled by the MTD 
+subsystem, and if not, why not in the UBI subsystem instead of the 
+CMD_UBI? One of the issues is that you may not necessarily go through 
+the cmd/ to do stuff with storage medium or network (e.g. directly from 
+board files).
+
+For the net protocols, why not hook this to the net_[sg]et_*_handler for 
+example so it's protocol-agnostic? No clue how difficult this would be, 
+or if you'd rather have something like per-protocol activity?
+
+Finally, maybe we also want to have a Kconfig symbol per "type" of 
+activity to control what should be "monitored", and I would also suggest 
+if we go this route to have a Kconfig symbol for the frequency per 
+"type" of activity as well, so that one can know which activity is 
+happening right now.
+
+Nothing against this patch series or its current implementation, just 
+throwing ideas :)
+
+Cheers,
+Quentin
