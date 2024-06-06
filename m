@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB0BEC25B75
-	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 05:58:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FE84C25B75
+	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 06:29:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 050AB88440;
-	Thu,  6 Jun 2024 07:58:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 2ABCC87AD2;
+	Thu,  6 Jun 2024 08:29:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1717653494;
-	bh=P6omtETyKMaFvfh59fbPiWPcMmbRSe4zV2MQDvVu3bM=;
-	h=Date:Subject:To:References:Cc:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=dv5rncgRnoszpY2sg5zHUkp7wBiEEUatWpmEj0KVaF++1DDA8HsHyKjeqJtBo6E+f
-	 /TcN3+jcYrWEPiYSLrvTTnEUznOfaM0PvtTKBCUikEKoP9K2wql+WyWvSwqDjuWgCa
-	 nDvUu9mst5jkpyYz1l/6eqLPzBcxsQ+t5o8guK/pIM4g7uJ/DX8spijd7CJKmiGRxx
-	 DTVWPXJ0k/A9FoauiRospLEmDUTwBTigX7miAmq69jt7W46uZONOQeqkM4wrwIVThX
-	 IXVZGz+AelVpm/jBXaq+1hMOlrnBEWubWRTxOkzooWTk4fFJBXl8jQlHUEUKUrXq1b
-	 HkdlK2RoM0Kkw==
-Received: from [192.168.1.107] (91-82-24-13.pool.digikabel.hu [91.82.24.13])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Hm+Yu4kD";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id A7F1C86F6E; Thu,  6 Jun 2024 08:29:52 +0200 (CEST)
+Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
+ [IPv6:2607:f8b0:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id D7FE3883A6;
- Thu,  6 Jun 2024 06:27:59 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1717648084;
- bh=P6omtETyKMaFvfh59fbPiWPcMmbRSe4zV2MQDvVu3bM=;
- h=Date:Subject:To:References:Cc:Reply-To:From:In-Reply-To:From;
- b=CbHgdD0S3s0oyCbxa2hvsYC2VRi9ZA0OMdnT227bnNEvi5I2sYHhGEorTxvchLZIX
- HmNNVpTHE6LNqRHtY1AeFXGH7vtGrEl0uziMynZ473fyr2DGzkzzxbwfESfKmYGXIC
- qTvciOZA70Nyb3s2cCpDMuD5MuDGW6OQTzNrxuZeTsJq4iC25b1MNGxwpTxLQwDLuY
- 1+b/ZhTgiiQ5emxfu1s0O14WkNwqHIkW6PdNnmHcHqKA0+nYEKV8SyPEnhtnzGjA3S
- qe0VSs2cn5byCimq0dAt2Ospb32MaWL8wENAwhYB/0mZ116YNvSTz5OBOz0L20Nyva
- hOVUw6vDInmMQ==
-Message-ID: <8abcde75-c37d-b2f1-0d43-a3d6b72d9351@denx.de>
-Date: Thu, 6 Jun 2024 06:27:38 +0200
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E176883CF
+ for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 08:29:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pg1-x52e.google.com with SMTP id
+ 41be03b00d2f7-6da49fa2407so435680a12.1
+ for <u-boot@lists.denx.de>; Wed, 05 Jun 2024 23:29:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1717655389; x=1718260189; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=1YzvYjUejgtNEVmh1fEL99eRAcUHIAjqH1j2FlwqH7A=;
+ b=Hm+Yu4kDOCGOoSZaGJyq6t+hkhWW05/ab0QxY+9pHB/OvTWHHkyt5X2vht/NAciDVH
+ I0YuW4HlA4o7UDsE0wA1zbCzOw4JkjYKGKY+J+h2MP+TqxvhER1Vodw03etl0dJ6oSLl
+ 570tVCd0EOZ0C1fXz96BMPBECtvN+jeejQMk7CPqiQnTWkVa53uAaLIRsXDitm4kohI2
+ ZVAdiUeoEFTy8VEYoJZ3RUXLq9tbB3kHPUyWMwmYI1UVziJgq+vl4cH7TrkJCuZHRwsp
+ dSegXi6455qbNvfVk2B+F5e5tOH7W+l/z0gl+FmjBElfTFW1OaaxfJKMnkYGNFv2k7ax
+ xsHw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717655389; x=1718260189;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1YzvYjUejgtNEVmh1fEL99eRAcUHIAjqH1j2FlwqH7A=;
+ b=aZIPYaRnSwluOXGG0hDXJkAHOzACdZWXsyMh6Xn/NKXcukwSf99+d3orrXCWIqcRKa
+ Krm8+H0XyurP7Dw1vMtiZrqz/X/+U2X+z3J7M9dTCoJ1cPls4vHGJaXVb0ilYfE6P/X4
+ /pS2dSwrzY1QGRP6osd4RlBCpgQtXKKJnTrlwuqO9zrb6vEfOEoKI3CKYaG5i/oMLfMj
+ AXXVlJKzUCiZ5q4HK3D2i1X45jA5lFkwHtI81TD+f7raEfD7d84MJN+ryY69jMJCJmpY
+ nlMKaw/Q857sabn1ad+X32PIdxiLnt6u1D1carvU/buAVdxnPtWFUeAoT9LCRBz09mim
+ oLRw==
+X-Gm-Message-State: AOJu0YwezH2MfdiXjQ4gKMG6dcQZlnky+sZckH63HVzr3xwZ0wqhZVfV
+ P45f77HQw9WHdZB9Psitz9RjvjAVuqEVrK1/sUx2l1kVh2weLdi7YywJMLMai3oOurpdB8OdFMi
+ rksVyboG/JY6yqkSo2ZE2M+dUBQSB9anmCabV7w==
+X-Google-Smtp-Source: AGHT+IGAGEbJUD0N7RCEAIaqVzrIyjk7TMFO2lle3By6b8f++mvOMH92Ir8wd4x0F33oJQ0hWGnCTFKe1RNowxywlGg=
+X-Received: by 2002:a05:6a20:7354:b0:1ad:9394:2d30 with SMTP id
+ adf61e73a8af0-1b2b700dfafmr5593368637.37.1717655388777; Wed, 05 Jun 2024
+ 23:29:48 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH 05/11] i2c: mediatek: add support for optional arb and
- pmic clock
-Content-Language: en-US
-To: Christian Marangi <ansuelsmth@gmail.com>
-References: <20240605190220.17616-1-ansuelsmth@gmail.com>
- <20240605190220.17616-6-ansuelsmth@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Ramon Fried <rfried.dev@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Bo-Cun Chen <bc-bocun.chen@mediatek.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Sam Shih <sam.shih@mediatek.com>,
- Francois Berder <fberder@outlook.fr>, Simon Glass <sjg@chromium.org>,
- Julien Masson <jmasson@baylibre.com>, Michal Simek <michal.simek@amd.com>,
- John Crispin <john@phrozen.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mason Huo <mason.huo@starfivetech.com>, Stefan Roese <sr@denx.de>,
- Sumit Garg <sumit.garg@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
- Sergei Antonov <saproj@gmail.com>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- "SkyLake.Huang" <skylake.huang@mediatek.com>,
- =?UTF-8?Q?Nicol=c3=b2_Veronese?= <nicveronese@gmail.com>,
- u-boot@lists.denx.de, Sean Anderson <seanga2@gmail.com>,
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>
-From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20240605190220.17616-6-ansuelsmth@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Thu, 06 Jun 2024 07:58:11 +0200
+References: <cover.1716566960.git.jerome.forissier@linaro.org>
+ <b77a239e1fb9a81744d1da9a000979aac298fd29.1716566960.git.jerome.forissier@linaro.org>
+In-Reply-To: <b77a239e1fb9a81744d1da9a000979aac298fd29.1716566960.git.jerome.forissier@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 6 Jun 2024 09:29:12 +0300
+Message-ID: <CAC_iWjKrsG+fBNm3k__QtsiQSqH8OTyee6E-Oc7JFCmn8WhyPQ@mail.gmail.com>
+Subject: Re: [PATCH v2 07/14] net-lwip: add dns command
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>, 
+ Maxim Uvarov <muvarov@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Peter Robinson <pbrobinson@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,29 +87,121 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Christian,
+Hi Jerome,
 
-On 05.06.24 21:02, Christian Marangi wrote:
-> Add support for optional arb and pmic clock for i2c provided in upstream
-> linux DTSI.
-> 
-> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
-> ---
->   drivers/i2c/mtk_i2c.c | 30 ++++++++++++++++++++++++++++++
->   1 file changed, 30 insertions(+)
+[...]
 
-Reviewed-by: Heiko Schocher <hs@denx.de>
+> +
+> +static ulong start;
+> +static ip_addr_t host_ipaddr;
+> +static bool done;
+> +
+> +static void do_dns_tmr(void *arg)
+> +{
+> +     dns_tmr();
+> +}
+> +
+> +static void dns_cb(const char *name, const ip_addr_t *ipaddr, void *arg)
+> +{
+> +     char *var = (char *)arg;
 
-bye,
-Heiko
--- 
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+const char *
+
+
+> +     char *ipstr = ip4addr_ntoa(ipaddr);
+> +
+> +     done = true;
+> +
+> +     if (!ipaddr) {
+> +             printf("DNS: host not found\n");
+> +             host_ipaddr.addr = 0;
+> +             return;
+> +     }
+> +
+> +     if (var)
+> +             env_set(var, ipstr);
+> +
+> +     printf("%s\n", ipstr);
+> +}
+> +
+> +int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> +{
+> +     bool has_server = false;
+> +     ip_addr_t ipaddr;
+> +     ip_addr_t ns;
+> +     char *nsenv;
+> +     char *name;
+> +     char *var;
+> +     int ret;
+> +
+> +     if (argc == 1 || argc > 3)
+> +             return CMD_RET_USAGE;
+> +
+> +     if (argc >= 2)
+> +             name = argv[1];
+> +
+> +     if (argc == 3)
+> +             var = argv[2];
+> +
+> +     dns_init();
+> +
+> +     nsenv = env_get("dnsip");
+> +     if (nsenv && ipaddr_aton(nsenv, &ns)) {
+> +             dns_setserver(0, &ns);
+> +             has_server = true;
+> +     }
+> +
+> +     nsenv = env_get("dnsip2");
+> +     if (nsenv && ipaddr_aton(nsenv, &ns)) {
+> +             dns_setserver(1, &ns);
+> +             has_server = true;
+> +     }
+> +
+> +     if (!has_server) {
+> +             log_err("No valid name server (dnsip/dnsip2)\n");
+> +             return CMD_RET_FAILURE;
+> +     }
+> +
+> +     done = false;
+> +
+> +     ret = dns_gethostbyname(name, &ipaddr, dns_cb, var);
+> +
+> +     if (ret == ERR_OK) {
+> +             dns_cb(name, &ipaddr, var);
+> +     } else if (ret == ERR_INPROGRESS) {
+> +             start = get_timer(0);
+> +             sys_timeout(DNS_RESEND_MS, do_dns_tmr, NULL);
+> +             do {
+> +                     eth_rx();
+> +                     if (done)
+> +                             break;
+> +                     sys_check_timeouts();
+> +                     if (ctrlc()) {
+> +                             printf("\nAbort\n");
+> +                             break;
+> +                     }
+> +             } while (get_timer(start) < DNS_TIMEOUT_MS);
+> +             sys_untimeout(do_dns_tmr, NULL);
+> +     }
+
+Looking at the lwip code there are other ret values than just ERR_OK,
+ERR_INPROGRESS. Should we have an 'else' handling the rest?
+
+> +
+> +     if (done && host_ipaddr.addr != 0)
+> +             return CMD_RET_SUCCESS;
+> +
+> +     return CMD_RET_FAILURE;
+> +}
+> +
+> --
+> 2.40.1
+>
+
+Thanks
+/Ilias
