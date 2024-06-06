@@ -4,85 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F7F6C27C52
-	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 07:12:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96687C41513
+	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 07:16:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 140D388216;
-	Thu,  6 Jun 2024 09:12:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 088CC882C1;
+	Thu,  6 Jun 2024 09:16:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="x9wHh5CY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jeQMTRFb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FC59882C1; Thu,  6 Jun 2024 09:12:30 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id D7C55881D9; Thu,  6 Jun 2024 09:16:11 +0200 (CEST)
+Received: from mail-ua1-x929.google.com (mail-ua1-x929.google.com
+ [IPv6:2607:f8b0:4864:20::929])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCF1088216
- for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 09:12:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 87669882C1
+ for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 09:16:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-354f14bd80cso540379f8f.1
- for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 00:12:27 -0700 (PDT)
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x929.google.com with SMTP id
+ a1e0cc1a2514c-80ae09dce7eso187078241.2
+ for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 00:16:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1717657947; x=1718262747;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UW9IIiVcscOg3165zFGF1SPoQULgvPmfMzeLhrLcvHc=;
- b=x9wHh5CYtqKBPUTc15y7SnlSPcQ3yicfUyL/04O4NgWjixMlEvvRQfCtLT3BL3nshv
- wZWbzMTD6l8gJqiC2r0all+9HbrwXeYt4TQCu9m4cSTTkzEJLbwiSxO0x++H6E4UqRyp
- TOwyBkrEKV9BlFLHHS78WYxnWNr5QoXsS8AmDaK7/D20pzPxtOA8n8SFWTfNyn1VUd/0
- Sn/WdkRzsFEI67gqwYNAzXBdDe8kjpA/XRecZ3a4pd6O+p47hoEsWNOfN/REU2bhpM9U
- sYoxsktRkHHRxV2RettKvvnjfw7M11ZPA/WGXHgJzukzsuPc9M2sUR+l8saztfG5dDnH
- aHVg==
+ d=linaro.org; s=google; t=1717658166; x=1718262966; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=SSuo+kC90PULGZOoPmTUQMcKm7Z91j5G4jEgcJ+UuAw=;
+ b=jeQMTRFblxHhYcm8DlaYytNKRDokcN4KyJvnhxeYFKupMBnDU9X7wUt8o3P5S3B1kW
+ Wob5meCcqBMj9Vp5nEaG7Etr0tK46zWYum88H2lV23IMuxkH/5ejWyRjKtPGbc+nLXJY
+ VFAzGqfmzb36suLiGcez/0xMROBwUiLJAkVxWe/uOv6HA2x3A+yOloGtfmhdg220ZZsW
+ bPe1apf8OwEoH0+nAwhjGhfOv68X0wD9xDZfdIDkOsw787clXHmE3Xc9uBZALs7tBSiC
+ yBTqdrO212PmKWwLQF2GPnpzea/B3MfoH93DN5BSPvmc7adLbXkBiyVMAR8c+yXGaB9W
+ uYCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717657947; x=1718262747;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UW9IIiVcscOg3165zFGF1SPoQULgvPmfMzeLhrLcvHc=;
- b=VKeR5FyrBHmUl/wLMExREbGApnOKw+Xwgv1bs4NZmQI4n9wLx/uuKITTm65QF/Hunm
- vNhHd4w8CHZpH/8v0DXpHlf53r4vNT0PKozxJFyO2oLMI/JGhpm5EOBzPbY8BkVbAX0c
- xCn6DcWyjl0QuxZ+2W/HO41STQWItgIKvR7IMymYhKqGfE0tLbN2psbV6J2VwKSSWKcz
- G8fYqTsIRlxBYcXWf5jvikXNtnCv/1hXbrb2SzEFYajSn/H6iYJpWIluuneW04l5vpym
- Jc4zWJ7hxLMQrDuxsgL/yon9vKGV6sD1PYbpb+yl+4wYM/LnddPK+QTLptDYSbOC3HVe
- YWUQ==
+ d=1e100.net; s=20230601; t=1717658166; x=1718262966;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=SSuo+kC90PULGZOoPmTUQMcKm7Z91j5G4jEgcJ+UuAw=;
+ b=htLDssvy4qQ5e5kDkALX436gwJ+8l0tOZKYy9Zh6GPflZ6qdMVGKGfT9wCNIbGOSOr
+ 7plm0d/iKdWT8YUAndWBcWLjOLjRi9eHRAlXBv3TFAuiIABmVA2Jj9T9nYGNoi7Unjk4
+ CxDW17rToJJvLryRNKp9C2voaNw6IT9wDzcXfYF/l5rUVCQ0e03jCjDSszrSdt/H2sQH
+ Wnqi8MLwfnmioyTbGQQbcYE7fHoTwAHs42n7GJ3r9VbiRf7vMDSk6O3t9pZ9hr3tP+99
+ tr/2OjIJWrCOcfE/kIAFWdpxLATIM55caWvqJknvJfnlWieqPUjDn0TyA3c7Xld4DRe6
+ X6tA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWPImJA5dCU2ruBLDLR3n2pCr1mlJJG0Ga4ngjJCUd2YkERGWvnMtBiOJyIFITcYbYcp9Xv8vjnIm3iM/QAR5cfr8xarQ==
-X-Gm-Message-State: AOJu0YxBtth5e7U0IcdBGPBFQavz0Tm0Vhwvq2F9mEzUwrEX8M083HZ5
- Urajvvvmf3HbHnn10Gy22u2vTSx2uegWPZJIMF6hTLlK6ID3s0DUlUeE377bUR9ypNfLh3rzzP/
- oses=
-X-Google-Smtp-Source: AGHT+IGTyX0IRqN9zGSactSC+Gpra7A/52o4sVERpDPMjx+x7057PiEc2lim1P4UJET8NCPgMSqLWA==
-X-Received: by 2002:a05:6000:1d2:b0:354:f90c:63d9 with SMTP id
- ffacd0b85a97d-35e8405dc4dmr3308065f8f.6.1717657947084; 
- Thu, 06 Jun 2024 00:12:27 -0700 (PDT)
-Received: from mkorpershoek-xps13.carmes.etincelle-coworking.com
- ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-35ef5d29508sm764998f8f.4.2024.06.06.00.12.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Jun 2024 00:12:26 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Lukasz Majewski <lukma@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Tom Rini <trini@konsulko.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>, u-boot@lists.denx.de
-In-Reply-To: <20240604054425.105902-1-heinrich.schuchardt@canonical.com>
-References: <20240604054425.105902-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 1/1] dfu: add missing dependency for SPI flash DFU driver
-Message-Id: <171765794606.161006.4352011938653246906.b4-ty@baylibre.com>
-Date: Thu, 06 Jun 2024 09:12:26 +0200
+ AJvYcCVnRkTTUO5mefwvdT7jhhkfDEvCgV6g8+5SELkQvT8WBdA/dKb85f3tuAx9B73aOFsKxnDMTtQraKdqI03WbiZ9sNH+FQ==
+X-Gm-Message-State: AOJu0Yw/vkcxf4PXINFX6gTS/9tF6YDH5PNgeTLHG/2xYk79WvT1W7Qe
+ MRvnOE1lX/9BL+dUOJpP2+k+P2EpdsMmCxHN78eXg8rH3QlMvX1njcEMCwtLaEX2AMMVWjMVhar
+ +Vsy86dPVc0w4ck6de4zA6MIf2mADrko2Wb7tCw==
+X-Google-Smtp-Source: AGHT+IG5QHSEDJyJITNi5R0cIxl+2bJ5W6ZxsMtI0hk+LVHNfJXysVCRNnT4gN46B7ufi/F1o7U998ZPfxbiNjsIkGI=
+X-Received: by 2002:a67:b346:0:b0:48b:a6d1:774 with SMTP id
+ ada2fe7eead31-48c04aab9bbmr5048374137.22.1717658166051; Thu, 06 Jun 2024
+ 00:16:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.14-dev-b6b73
+References: <20240603-b4-qcom-capsule-updates-v3-0-fe2e083289ec@linaro.org>
+ <20240603-b4-qcom-capsule-updates-v3-4-fe2e083289ec@linaro.org>
+ <CAFA6WYNa2zQoHqqaGYxQ=x=3jdw=rKMVRjXLCB65HG6CxNQAwQ@mail.gmail.com>
+ <0361e6b1-b0cc-453b-968e-999d1913a3db@linaro.org>
+In-Reply-To: <0361e6b1-b0cc-453b-968e-999d1913a3db@linaro.org>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Thu, 6 Jun 2024 12:45:55 +0530
+Message-ID: <CAFA6WYNSKdua=g1h5h7YVTyODMc5ZdrZh8Xs9WiE7ff0atF4_w@mail.gmail.com>
+Subject: Re: [PATCH v3 4/8] mach-snapdragon: implement capsule update support
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,22 +95,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On Wed, 5 Jun 2024 at 18:03, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>
+> Hi Sumit,
+> >> +/**
+> >> + * qcom_configure_capsule_updates() - Configure the DFU string for capsule updates
+> >> + *
+> >> + * U-Boot is flashed to the boot partition on Qualcomm boards. In most cases there
+> >> + * are two boot partitions, boot_a and boot_b. As we don't currently support doing
+> >> + * full A/B updates, we only support updating the currently active boot partition.
+> >> + *
+> >> + * So we need to find the current slot suffix and the associated boot partition.
+> >> + * We do this by looking for the boot partition that has the 'active' flag set
+> >> + * in the GPT partition vendor attribute bits.
+> >> + */
+> >> +void qcom_configure_capsule_updates(void)
+> >> +{
+> >> +       struct blk_desc *desc;
+> >> +       int ret = 0, partnum = -1, devnum;
+> >> +       static char dfu_string[32] = { 0 };
+> >> +       char name[32]; /* GPT partition name */
+> >> +       char *partname = "boot";
+> >> +       struct udevice *dev = NULL;
+> >> +
+> >> +       /*
+> >> +        * There is currently no good way to check how U-Boot is booting, but we have
+> >> +        * a few hueristics, like here checking if our DTB has a kaslr-seed specified
+> >> +        * will tell us if we were chainloaded by another bootloader.
+> >> +        * FIXME: we should do this check once and use some proper API to expose the data.
+> >
+> > If U-Boot is built with LINUX_KERNEL_IMAGE_HEADER enabled then we
+> > should know that U-Boot is built as a replacement of Linux kernel and
+> > hence chainloaded. Isn't that what you need here?
+>
+> Not necessarily, you can build with LINUX_KERNEL_IMAGE_HEADER and then
+> pack U-Boot into XBL or flash it to hyp and it will still run (the
+> kernel header is specifically written to behave like a nop slide). So we
+> can't rely on this.
+> >
 
-On Tue, 04 Jun 2024 07:44:25 +0200, Heinrich Schuchardt wrote:
-> Building the SPI flash DFU driver fails if SPI flash support is missing.
-> 
->     drivers/dfu/dfu_sf.c:123:29: error:
->     ‘CONFIG_SF_DEFAULT_MODE’ undeclared (first use in this function);
-> 
-> Add the missing dependency.
-> 
-> [...]
+Yeah you can build it in whatever form downstream and run as a NOP too
+but I don't think we support any such combination in upstream U-Boot,
+right? We should let people know that LINUX_KERNEL_IMAGE_HEADER should
+only be enabled if the U-Boot image is flashed into the boot partition
+as a replacement for Linux kernel image. BTW, isn't that the real
+meaning for that config option? IMHO, the current DT check you have
+implemented is implicit and I am unsure if we can reliably depend upon
+it.
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
-
-[1/1] dfu: add missing dependency for SPI flash DFU driver
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/4339138a2086f8449b9356130cb6e97a81aa8679
-
---
-Mattijs
+-Sumit
