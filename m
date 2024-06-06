@@ -4,61 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B94A2C25B75
-	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 09:23:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26FDAC27C55
+	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 09:24:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE84388485;
-	Thu,  6 Jun 2024 11:22:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id A6956881B8;
+	Thu,  6 Jun 2024 11:24:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1717665744;
-	bh=BqYPYsplDlqYMULLNDLqrOP76U1GOq6amOo71IHpjQw=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=ikyq5Hb04H0uqN3Yu5HCZVlIAjG4NnBSNFOtES7R1LQfwoWEVwyLZeGOxBVSf7VYR
-	 8yAEal/EjSvn0DvNLh7zEmBYRX51cBplMallvOnzYWLS5wzh+L+SSt19/HjyhB483Y
-	 A/HABEbPpnnJVnZZb/qs+iD+L2u7WfBuLwM4xzj2oMfqEsWTb1wHMpk4cEDr1AHRkE
-	 TuM1r+jVpONuVykaNBLPoJQZtGrnN8lLtrqiQev3Lq9anrSMEVIhxY0g2DaYYsexeb
-	 rC201R5orwan1JjAhewdFWGGfIXgKLhrETpD0BM3YERkAPqQjqaiL0Otl/RpHntOxi
-	 vj7zWQawgTAGQ==
-Received: from localhost (unknown [IPv6:2001:861:52:5f60:ff6c:4545:dfcf:4c97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested) (Authenticated sender: pro@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id AE35C883CF;
- Thu,  6 Jun 2024 11:22:22 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1717665742;
- bh=BqYPYsplDlqYMULLNDLqrOP76U1GOq6amOo71IHpjQw=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=bCEnLyUMBQ7LoEwHmKVB1t8B2yTgtY9l9wR+2/8g6qmi3dXlHoivlwgoamYPYHZM5
- 7AXstUUFq8CRC2tUCz3eRz3eBhxZNC1kDEWiIEVa18SR8E6OLWILUnMn9pDPi/PD7S
- wBNr/KjIJu9KF35jbdxt/K0igAE9xT06PbahXdyO+IkTF5AkjQ57ryOVWDT9hCRnou
- T6FMiBLbLtQZSPVyv3wjAK32OGAN5pZmgYViIuS+Zaed8WUd/o+1KY8QcczJrb5acR
- XsWXwSxGAKy21FgObj9/MVmIVZ1fOmKIv50kVd1nqZixP7+liZA7UJ/XjMTxxFH6pl
- jrBCtabzPG01Q==
-From: Philip Oberfichtner <pro@denx.de>
-To: u-boot@lists.denx.de
-Cc: bmeng.cn@gmail.com, caleb.connolly@linaro.org,
- christophe.roullier@foss.st.com, epsi@gmx.de, eugen.hristev@collabora.com,
- festevam@gmail.com, forbidden405@outlook.com, ivprusov@salutedevices.com,
- joe.hershberger@ni.com, jonas@kwiboo.se, kever.yang@rock-chips.com,
- leyfoon.tan@starfivetech.com, marek.vasut+renesas@mailbox.org,
- marjolaine.amate@odyssee-systemes.fr, neil.armstrong@linaro.org,
- n-francis@ti.com, patrice.chotard@foss.st.com,
- patrick.delaunay@foss.st.com, philipp.tomsich@vrull.eu,
- rfried.dev@gmail.com, seanga2@gmail.com, sebastian.reichel@collabora.com,
- sebastien.szymanski@armadeus.com, sjg@chromium.org, sumit.garg@linaro.org,
- trini@konsulko.com, xypron.glpk@gmx.de, Philip Oberfichtner <pro@denx.de>
-Subject: [PATCH v2 5/5] net: dwc_eth_qos: Add glue driver for Intel MAC
-Date: Thu,  6 Jun 2024 11:22:07 +0200
-Message-Id: <20240606092207.87816-6-pro@denx.de>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240606092207.87816-1-pro@denx.de>
-References: <20240606092207.87816-1-pro@denx.de>
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="eWN1r5Gu";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 577DD883AA; Thu,  6 Jun 2024 11:24:39 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E697F88103
+ for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 11:24:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-35e5604abdcso1158738f8f.0
+ for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 02:24:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1717665875; x=1718270675;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=YsB7vnaezK9584r86qmEKiDKSnN8d1FGIGXWzZavLD8=;
+ b=eWN1r5GuC5KT1UnCUg/GRipIL8Pa6bm4tUQY1E3kTyc2Ip+Hv3z8BqNDhDCKtPQ3Xs
+ L2SurCql/1F3abbBzKlHJPvC+W8Haw+IUbny2X90BwZ4JfdUwXdQm9RAjusDqlrscYgY
+ PwYbdKbXU9VABgPsGlIWM40W0MUehDYKQOpXCVEtmTyN8W4IQwga4CNsxk/OPkRxUP76
+ /HUapKJNnLsyefevAAAYSxZs1/vZr0Y7jFDxJ3JXWovNThgMCzCr0d1LHFIztQuDJs5s
+ IdfUHCMLnALddHxEHXTX5uGtgXYcX/NFjzU2XVT0dAPz38U563ZSwJDT52T/sUpLveNy
+ FJ5A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717665875; x=1718270675;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=YsB7vnaezK9584r86qmEKiDKSnN8d1FGIGXWzZavLD8=;
+ b=AcRSdOiwAmi1i/NmDG6Ga+J5mhO1wQSaPQALKCqozLqJPkaLXjvDr42cxHq64/e38r
+ OELXfdGoIcoLDThCpQcpprAyYWYhrIkBeM8wvUJqUmYixbfn9yvWEmzz5sFiZ6s0tB/c
+ kQJs+KnySVJlUU/necyGVI9Rhda6y+RLufBa+vgwtK6pniotWzxPD796PwpNx4Lax2lj
+ TUrpWP5t76l+uQ6o3Ay8YDkyDOWsLm8CZmSxGTEyCTWukMAsj3VPQpOHjH0C0QKgg6O+
+ PryGgh9b4zGcHAX4vjkrV43/nxyn3xI3qbt+ULXOll5zpsHcSD1wUYTZPGTr7dnlYphm
+ WTKA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX2SROi7vSHJgTIUMLRn45v2IBUHwpTMl6GEZ3gzCQ2qgRX7C3yCwXO4W7bobN7JfydcjqiEdmgK3Qcf5IAK6oYQXxZEg==
+X-Gm-Message-State: AOJu0Yx5HKiV77ChF4Q7opwZr16wOaoQQrVVFJLY9lgsdaEYrF/Eg51Q
+ wP2l27Pjawx9OmDjWeDGb2PDt1EcyKEGC7lYO/pmfmwffMAVkek/bEsor5TjVeo=
+X-Google-Smtp-Source: AGHT+IFq/i7rjSbAfSsYzX6C2SdiPtS3IdTWQVV7RI0aujFSjLup78qJnJWIKjdGMs/oBNru246mgg==
+X-Received: by 2002:adf:f385:0:b0:357:8f8c:2dba with SMTP id
+ ffacd0b85a97d-35ef0d9693emr1797411f8f.17.1717665875063; 
+ Thu, 06 Jun 2024 02:24:35 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-35ef5d29afasm1049117f8f.13.2024.06.06.02.24.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 06 Jun 2024 02:24:34 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>
+Cc: Dhruva Gole <d-gole@ti.com>, Bryan Brattlof <bb@ti.com>, Vignesh
+ Raghavendra <vigneshr@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
+ u-boot@lists.denx.de, Nishanth Menon <nm@ti.com>
+Subject: Re: [PATCH 1/3] arm: dts: am625_beagleplay: Switch to OF_UPSTREAM
+In-Reply-To: <20240605152752.1711835-2-nm@ti.com>
+References: <20240605152752.1711835-1-nm@ti.com>
+ <20240605152752.1711835-2-nm@ti.com>
+Date: Thu, 06 Jun 2024 11:24:31 +0200
+Message-ID: <87r0da1l0w.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,592 +93,1014 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add dwc_eth_qos glue driver for the Intel Elkhart-Lake SOC.
+Hi Nishanth,
 
-Signed-off-by: Philip Oberfichtner <pro@denx.de>
----
+Thank you for the patch.
 
-Notes:
-    Changes in V2:
-    	- Remove 'struct eqos_intel_config' from dwc_eth_qos.h
-    	- Improve some comments
-    	- Remove duplicate MAC reset
+On mer., juin 05, 2024 at 10:27, Nishanth Menon <nm@ti.com> wrote:
 
- drivers/net/Kconfig             |   7 +
- drivers/net/Makefile            |   1 +
- drivers/net/dwc_eth_qos_intel.c | 446 ++++++++++++++++++++++++++++++++
- drivers/net/dwc_eth_qos_intel.h |  58 +++++
- include/pci_ids.h               |   9 +
- 5 files changed, 521 insertions(+)
- create mode 100644 drivers/net/dwc_eth_qos_intel.c
- create mode 100644 drivers/net/dwc_eth_qos_intel.h
+> Enable OF_UPSTREAM for AM625-beagleplay board. Remove DT files that
+> are now available in dts/upstream. Update the appended files based on
+> version of latest OF_UPSTREAM sync point (v6.10-rc1).
+>
+> Signed-off-by: Nishanth Menon <nm@ti.com>
 
-diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-index b2d7b49976..b23fe55792 100644
---- a/drivers/net/Kconfig
-+++ b/drivers/net/Kconfig
-@@ -225,6 +225,13 @@ config DWC_ETH_QOS_IMX
- 	  The Synopsys Designware Ethernet QOS IP block with the specific
- 	  configuration used in IMX soc.
- 
-+config DWC_ETH_QOS_INTEL
-+	bool "Synopsys DWC Ethernet QOS device support for Intel"
-+	depends on DWC_ETH_QOS
-+	help
-+	  The Synopsys Designware Ethernet QOS IP block with the specific
-+	  configuration used in the Intel Elkhart-Lake soc.
-+
- config DWC_ETH_QOS_ROCKCHIP
- 	bool "Synopsys DWC Ethernet QOS device support for Rockchip SoCs"
- 	depends on DWC_ETH_QOS
-diff --git a/drivers/net/Makefile b/drivers/net/Makefile
-index dc3404519d..bd62c65dd5 100644
---- a/drivers/net/Makefile
-+++ b/drivers/net/Makefile
-@@ -20,6 +20,7 @@ obj-$(CONFIG_DRIVER_DM9000) += dm9000x.o
- obj-$(CONFIG_DSA_SANDBOX) += dsa_sandbox.o
- obj-$(CONFIG_DWC_ETH_QOS) += dwc_eth_qos.o
- obj-$(CONFIG_DWC_ETH_QOS_IMX) += dwc_eth_qos_imx.o
-+obj-$(CONFIG_DWC_ETH_QOS_INTEL) += dwc_eth_qos_intel.o
- obj-$(CONFIG_DWC_ETH_QOS_ROCKCHIP) += dwc_eth_qos_rockchip.o
- obj-$(CONFIG_DWC_ETH_QOS_QCOM) += dwc_eth_qos_qcom.o
- obj-$(CONFIG_DWC_ETH_QOS_STARFIVE) += dwc_eth_qos_starfive.o
-diff --git a/drivers/net/dwc_eth_qos_intel.c b/drivers/net/dwc_eth_qos_intel.c
-new file mode 100644
-index 0000000000..15680187cc
---- /dev/null
-+++ b/drivers/net/dwc_eth_qos_intel.c
-@@ -0,0 +1,446 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (c) 2023 DENX Software Engineering GmbH
-+ * Philip Oberfichtner <pro@denx.de>
-+ *
-+ * Based on linux v6.1.38, especially drivers/net/ethernet/stmicro/stmmac
-+ */
-+
-+#include <asm/io.h>
-+#include <dm.h>
-+#include <linux/delay.h>
-+#include <miiphy.h>
-+#include <net.h>
-+#include <pci.h>
-+
-+#include "dwc_eth_qos.h"
-+#include "dwc_eth_qos_intel.h"
-+
-+static struct pci_device_id intel_pci_ids[] = {
-+	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_EHL_RGMII1G) },
-+	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_EHL_SGMII1) },
-+	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_EHL_SGMII2G5) },
-+	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_EHL_PSE0_RGMII1G) },
-+	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_EHL_PSE0_SGMII1G) },
-+	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_EHL_PSE0_SGMII2G5) },
-+	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_EHL_PSE1_RGMII1G) },
-+	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_EHL_PSE1_SGMII1G) },
-+	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_EHL_PSE1_SGMII2G5) },
-+	{}
-+};
-+
-+static int __pci_config(struct udevice *dev)
-+{
-+	u32 val;
-+
-+	/* Try to enable I/O accesses and bus-mastering */
-+	dm_pci_read_config32(dev, PCI_COMMAND, &val);
-+	val |= PCI_COMMAND_MEMORY | PCI_COMMAND_MASTER;
-+	dm_pci_write_config32(dev, PCI_COMMAND, val);
-+
-+	/* Make sure it worked */
-+	dm_pci_read_config32(dev, PCI_COMMAND, &val);
-+	if (!(val & PCI_COMMAND_MEMORY)) {
-+		pr_err("%s: Can't enable I/O memory\n", __func__);
-+		return -ENOSPC;
-+	}
-+
-+	if (!(val & PCI_COMMAND_MASTER)) {
-+		pr_err("%s: Can't enable bus-mastering\n", __func__);
-+		return -EPERM;
-+	}
-+
-+	return 0;
-+}
-+
-+static void __limit_fifo_size(struct udevice *dev)
-+{
-+	/*
-+	 * As described in Intel Erratum EHL22, Document Number: 636674-2.1,
-+	 * the PSE GbE Controllers advertise a wrong RX and TX fifo size.
-+	 * Software should limit this value to 64KB.
-+	 */
-+	struct eqos_priv *eqos = dev_get_priv(dev);
-+
-+	eqos->tx_fifo_sz = 0x8000;
-+	eqos->rx_fifo_sz = 0x8000;
-+}
-+
-+static int __serdes_status_poll(struct udevice *dev,
-+				unsigned char phyaddr, unsigned char phyreg,
-+				unsigned short mask, unsigned short val)
-+{
-+	struct eqos_priv *eqos = dev_get_priv(dev);
-+	unsigned int retries = 10;
-+	unsigned short val_rd;
-+
-+	do {
-+		miiphy_read(eqos->mii->name, phyaddr, phyreg, &val_rd);
-+		if ((val_rd & mask) == (val & mask))
-+			return 0;
-+		udelay(POLL_DELAY_US);
-+	} while (--retries);
-+
-+	return -ETIMEDOUT;
-+}
-+
-+ /* Returns -ve if MAC is unknown and 0 on success */
-+static int __mac_check_pse(const struct udevice *dev, bool *is_pse)
-+{
-+	struct pci_child_plat *plat = dev_get_parent_plat(dev);
-+
-+	if (!plat || plat->vendor != PCI_VENDOR_ID_INTEL)
-+		return -ENXIO;
-+
-+	switch (plat->device) {
-+	case PCI_DEVICE_ID_INTEL_EHL_PSE0_RGMII1G:
-+	case PCI_DEVICE_ID_INTEL_EHL_PSE1_RGMII1G:
-+	case PCI_DEVICE_ID_INTEL_EHL_PSE0_SGMII1G:
-+	case PCI_DEVICE_ID_INTEL_EHL_PSE1_SGMII1G:
-+	case PCI_DEVICE_ID_INTEL_EHL_PSE0_SGMII2G5:
-+	case PCI_DEVICE_ID_INTEL_EHL_PSE1_SGMII2G5:
-+		*is_pse = 1;
-+		return 0;
-+
-+	case PCI_DEVICE_ID_INTEL_EHL_RGMII1G:
-+	case PCI_DEVICE_ID_INTEL_EHL_SGMII1:
-+	case PCI_DEVICE_ID_INTEL_EHL_SGMII2G5:
-+		*is_pse = 0;
-+		return 0;
-+	};
-+
-+	return -ENXIO;
-+}
-+
-+/* Check if we're in 2G5 mode */
-+static bool __serdes_link_mode_2500(struct udevice *dev)
-+{
-+	const unsigned char phyad = INTEL_MGBE_ADHOC_ADDR;
-+	struct eqos_priv *eqos = dev_get_priv(dev);
-+	unsigned short data;
-+
-+	miiphy_read(eqos->mii->name, phyad, SERDES_GCR, &data);
-+	if (((data & SERDES_LINK_MODE_MASK) >> SERDES_LINK_MODE_SHIFT) ==
-+	    SERDES_LINK_MODE_2G5)
-+		return true;
-+
-+	return false;
-+}
-+
-+static int __serdes_powerup(struct udevice *dev)
-+{
-+	/* Based on linux/drivers/net/ethernet/stmicro/stmmac/dwmac-intel.c */
-+
-+	const unsigned char phyad = INTEL_MGBE_ADHOC_ADDR;
-+	struct eqos_priv *eqos = dev_get_priv(dev);
-+	unsigned short data;
-+	int ret;
-+	bool is_pse;
-+
-+	/* Set the serdes rate and the PCLK rate */
-+	miiphy_read(eqos->mii->name, phyad, SERDES_GCR0, &data);
-+
-+	data &= ~SERDES_RATE_MASK;
-+	data &= ~SERDES_PCLK_MASK;
-+
-+	if (__serdes_link_mode_2500(dev))
-+		data |= SERDES_RATE_PCIE_GEN2 << SERDES_RATE_PCIE_SHIFT |
-+			SERDES_PCLK_37p5MHZ << SERDES_PCLK_SHIFT;
-+	else
-+		data |= SERDES_RATE_PCIE_GEN1 << SERDES_RATE_PCIE_SHIFT |
-+			SERDES_PCLK_70MHZ << SERDES_PCLK_SHIFT;
-+
-+	miiphy_write(eqos->mii->name, phyad, SERDES_GCR0, data);
-+
-+	/* assert clk_req */
-+	miiphy_read(eqos->mii->name, phyad, SERDES_GCR0, &data);
-+	data |= SERDES_PLL_CLK;
-+	miiphy_write(eqos->mii->name, phyad, SERDES_GCR0, data);
-+
-+	/* check for clk_ack assertion */
-+	ret = __serdes_status_poll(dev, phyad, SERDES_GSR0,
-+				   SERDES_PLL_CLK, SERDES_PLL_CLK);
-+
-+	if (ret) {
-+		pr_err("Serdes PLL clk request timeout\n");
-+		return ret;
-+	}
-+
-+	/* assert lane reset*/
-+	miiphy_read(eqos->mii->name, phyad, SERDES_GCR0, &data);
-+	data |= SERDES_RST;
-+	miiphy_write(eqos->mii->name, phyad, SERDES_GCR0, data);
-+
-+	/* check for assert lane reset reflection */
-+	ret = __serdes_status_poll(dev, phyad, SERDES_GSR0,
-+				   SERDES_RST, SERDES_RST);
-+
-+	if (ret) {
-+		pr_err("Serdes assert lane reset timeout\n");
-+		return ret;
-+	}
-+
-+	/* move power state to P0 */
-+	miiphy_read(eqos->mii->name, phyad, SERDES_GCR0, &data);
-+	data &= ~SERDES_PWR_ST_MASK;
-+	data |= SERDES_PWR_ST_P0 << SERDES_PWR_ST_SHIFT;
-+	miiphy_write(eqos->mii->name, phyad, SERDES_GCR0, data);
-+
-+	/* Check for P0 state */
-+	ret = __serdes_status_poll(dev, phyad, SERDES_GSR0,
-+				   SERDES_PWR_ST_MASK,
-+				   SERDES_PWR_ST_P0 << SERDES_PWR_ST_SHIFT);
-+
-+	if (ret) {
-+		pr_err("Serdes power state P0 timeout.\n");
-+		return ret;
-+	}
-+
-+	/* PSE only - ungate SGMII PHY Rx Clock*/
-+	ret = __mac_check_pse(dev, &is_pse);
-+	if (ret) {
-+		pr_err("Failed to determine MAC type.\n");
-+		return ret;
-+	}
-+
-+	if (is_pse) {
-+		miiphy_read(eqos->mii->name, phyad, SERDES_GCR0, &data);
-+		data |= SERDES_PHY_RX_CLK;
-+		miiphy_write(eqos->mii->name, phyad, SERDES_GCR0, data);
-+	}
-+
-+	return 0;
-+}
-+
-+static int __xpcs_access(struct udevice *dev, int reg, int v)
-+{
-+	/*
-+	 * Common read/write helper function
-+	 *
-+	 * It may seem a bit odd at a first glance that we use bus->read()
-+	 * directly insetad of one of the wrapper functions. But:
-+	 *
-+	 * (1) phy_read() can't be used because we do not access an acutal PHY,
-+	 *     but a MAC-internal submodule.
-+	 *
-+	 * (2) miiphy_read() can't be used because it assumes MDIO_DEVAD_NONE.
-+	 */
-+
-+	int port = INTEL_MGBE_XPCS_ADDR;
-+	int devad = 0x1f;
-+	u16 val;
-+	struct eqos_priv *eqos;
-+	struct mii_dev *bus;
-+
-+	eqos = dev_get_priv(dev);
-+	bus = eqos->mii;
-+
-+	if (v < 0)
-+		return bus->read(bus, port, devad, reg);
-+
-+	val = v;
-+	return bus->write(bus, port, devad, reg, val);
-+}
-+
-+static int __xpcs_read(struct udevice *dev, int reg)
-+{
-+	return __xpcs_access(dev, reg, -1);
-+}
-+
-+static int __xpcs_write(struct udevice *dev, int reg, u16 val)
-+{
-+	return __xpcs_access(dev, reg, val);
-+}
-+
-+static int __xpcs_clr_bits(struct udevice *dev, int reg, u16 bits)
-+{
-+	int ret;
-+
-+	ret = __xpcs_read(dev, reg);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret &= ~bits;
-+
-+	return __xpcs_write(dev, reg, ret);
-+}
-+
-+static int __xpcs_set_bits(struct udevice *dev, int reg, u16 bits)
-+{
-+	int ret;
-+
-+	ret = __xpcs_read(dev, reg);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret |= bits;
-+
-+	return __xpcs_write(dev, reg, ret);
-+}
-+
-+static int __xpcs_init(struct udevice *dev)
-+{
-+	/* Based on linux/drivers/net/pcs/pcs-xpcs.c */
-+	struct eqos_priv *eqos = dev_get_priv(dev);
-+	phy_interface_t interface = eqos->config->interface(dev);
-+
-+	if (interface != PHY_INTERFACE_MODE_SGMII)
-+		return 0;
-+
-+	if (__xpcs_clr_bits(dev, VR_MII_MMD_CTRL,  XPCS_AN_CL37_EN)  ||
-+	    __xpcs_set_bits(dev, VR_MII_AN_CTRL,   XPCS_MODE_SGMII)  ||
-+	    __xpcs_set_bits(dev, VR_MII_DIG_CTRL1, XPCS_MAC_AUTO_SW) ||
-+	    __xpcs_set_bits(dev, VR_MII_MMD_CTRL,  XPCS_AN_CL37_EN))
-+		return -EIO;
-+
-+	return 0;
-+}
-+
-+static int eqos_probe_ressources_intel(struct udevice *dev)
-+{
-+	__limit_fifo_size(dev);
-+
-+	return __pci_config(dev);
-+}
-+
-+struct eqos_config eqos_intel_config;
-+
-+/*
-+ * overwrite __weak function from eqos_intel.c
-+ *
-+ * For PCI devices the devcie tree is optional. Choose driver data based on PCI
-+ * IDs instead.
-+ */
-+void *eqos_get_driver_data(struct udevice *dev)
-+{
-+	const struct pci_device_id *id;
-+	const struct pci_child_plat *plat;
-+
-+	plat = dev_get_parent_plat(dev);
-+
-+	if (!plat)
-+		return NULL;
-+
-+	/* last intel_pci_ids element is zero initialized */
-+	for (id = intel_pci_ids; id->vendor != 0; id++) {
-+		if (id->vendor == plat->vendor && id->device == plat->device)
-+			return &eqos_intel_config;
-+	}
-+
-+	return NULL;
-+}
-+
-+static fdt_addr_t eqos_get_base_addr_intel(struct udevice *dev)
-+{
-+	void *ptr = dm_pci_map_bar(dev, PCI_BASE_ADDRESS_0, 0, 0,
-+				   PCI_REGION_TYPE, PCI_REGION_MEM);
-+
-+	if (!ptr)
-+		return FDT_ADDR_T_NONE;
-+
-+	return (fdt_addr_t)ptr;
-+}
-+
-+static int eqos_start_resets_intel(struct udevice *dev)
-+{
-+	int ret;
-+
-+	ret = __xpcs_init(dev);
-+	if (ret) {
-+		pr_err("xpcs init failed.\n");
-+		return ret;
-+	}
-+
-+	ret = __serdes_powerup(dev);
-+	if (ret) {
-+		pr_err("Failed to power up serdes.\n");
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static ulong eqos_get_tick_clk_rate_intel(struct udevice *dev)
-+{
-+	return 0;
-+}
-+
-+static int eqos_get_enetaddr_intel(struct udevice *dev)
-+{
-+	/* Assume MAC address is programmed by previous boot stage */
-+	struct eth_pdata *plat = dev_get_plat(dev);
-+	struct eqos_priv *eqos = dev_get_priv(dev);
-+	u8 *lo = (u8 *)&eqos->mac_regs->address0_low;
-+	u8 *hi = (u8 *)&eqos->mac_regs->address0_high;
-+
-+	plat->enetaddr[0] = lo[0];
-+	plat->enetaddr[1] = lo[1];
-+	plat->enetaddr[2] = lo[2];
-+	plat->enetaddr[3] = lo[3];
-+	plat->enetaddr[4] = hi[0];
-+	plat->enetaddr[5] = hi[1];
-+
-+	return 0;
-+}
-+
-+static phy_interface_t eqos_get_interface_intel(const struct udevice *dev)
-+{
-+	struct pci_child_plat *plat = dev_get_parent_plat(dev);
-+
-+	if (!plat || plat->vendor != PCI_VENDOR_ID_INTEL)
-+		return PHY_INTERFACE_MODE_NA;
-+
-+	switch (plat->device) {
-+	/* The GbE Host Controller has no RGMII interface */
-+	case PCI_DEVICE_ID_INTEL_EHL_RGMII1G:
-+		return PHY_INTERFACE_MODE_NA;
-+
-+	case PCI_DEVICE_ID_INTEL_EHL_PSE0_RGMII1G:
-+	case PCI_DEVICE_ID_INTEL_EHL_PSE1_RGMII1G:
-+		return PHY_INTERFACE_MODE_RGMII;
-+
-+	/* Host SGMII and Host SGMII2G5 share the same device id */
-+	case PCI_DEVICE_ID_INTEL_EHL_SGMII1:
-+	case PCI_DEVICE_ID_INTEL_EHL_SGMII2G5:
-+	case PCI_DEVICE_ID_INTEL_EHL_PSE0_SGMII2G5:
-+	case PCI_DEVICE_ID_INTEL_EHL_PSE0_SGMII1G:
-+	case PCI_DEVICE_ID_INTEL_EHL_PSE1_SGMII1G:
-+	case PCI_DEVICE_ID_INTEL_EHL_PSE1_SGMII2G5:
-+		return PHY_INTERFACE_MODE_SGMII;
-+	};
-+
-+	return PHY_INTERFACE_MODE_NA;
-+}
-+
-+static struct eqos_ops eqos_intel_ops = {
-+	.eqos_inval_desc = eqos_inval_desc_generic,
-+	.eqos_flush_desc = eqos_flush_desc_generic,
-+	.eqos_inval_buffer = eqos_inval_buffer_generic,
-+	.eqos_flush_buffer = eqos_flush_buffer_generic,
-+	.eqos_probe_resources =  eqos_probe_ressources_intel,
-+	.eqos_remove_resources = eqos_null_ops,
-+	.eqos_get_base_addr = eqos_get_base_addr_intel,
-+	.eqos_stop_resets = eqos_null_ops,
-+	.eqos_start_resets = eqos_start_resets_intel,
-+	.eqos_stop_clks = eqos_null_ops,
-+	.eqos_start_clks = eqos_null_ops,
-+	.eqos_calibrate_pads = eqos_null_ops,
-+	.eqos_disable_calibration = eqos_null_ops,
-+	.eqos_set_tx_clk_speed = eqos_null_ops,
-+	.eqos_get_enetaddr = eqos_get_enetaddr_intel,
-+	.eqos_get_tick_clk_rate = eqos_get_tick_clk_rate_intel,
-+};
-+
-+struct eqos_config eqos_intel_config = {
-+	.reg_access_always_ok = false,
-+	.mdio_wait = 10,
-+	.swr_wait = 50,
-+	.config_mac = EQOS_MAC_RXQ_CTRL0_RXQ0EN_ENABLED_DCB,
-+	.config_mac_mdio = EQOS_MAC_MDIO_ADDRESS_CR_250_300,
-+	.axi_bus_width = EQOS_AXI_WIDTH_64,
-+	.interface = eqos_get_interface_intel,
-+	.ops = &eqos_intel_ops
-+};
-+
-+extern U_BOOT_DRIVER(eth_eqos);
-+U_BOOT_PCI_DEVICE(eth_eqos, intel_pci_ids);
-diff --git a/drivers/net/dwc_eth_qos_intel.h b/drivers/net/dwc_eth_qos_intel.h
-new file mode 100644
-index 0000000000..a7eede621c
---- /dev/null
-+++ b/drivers/net/dwc_eth_qos_intel.h
-@@ -0,0 +1,58 @@
-+/* SPDX-License-Identifier: GPL-2.0
-+ *
-+ * Copyright (c) 2023 DENX Software Engineering GmbH
-+ * Philip Oberfichtner <pro@denx.de>
-+ *
-+ * This header is based on linux v6.1.38,
-+ *
-+ *	drivers/net/pcs/pcs-xpcs.h
-+ *	drivers/net/ethernet/stmicro/stmmac/dwmac-intel.h,
-+ *
-+ *      Copyright (c) 2020 Synopsys, Inc. and/or its affiliates
-+ *      Copyright (c) 2020 Intel Corporation
-+ */
-+
-+#ifndef __DWMAC_INTEL_H__
-+#define __DWMAC_INTEL_H__
-+
-+#define POLL_DELAY_US 8
-+
-+/* SERDES Register */
-+#define SERDES_GCR	0x0	/* Global Conguration */
-+#define SERDES_GSR0	0x5	/* Global Status Reg0 */
-+#define SERDES_GCR0	0xb	/* Global Configuration Reg0 */
-+
-+/* SERDES defines */
-+#define SERDES_PLL_CLK		BIT(0)		/* PLL clk valid signal */
-+#define SERDES_PHY_RX_CLK	BIT(1)		/* PSE SGMII PHY rx clk */
-+#define SERDES_RST		BIT(2)		/* Serdes Reset */
-+#define SERDES_PWR_ST_MASK	GENMASK(6, 4)	/* Serdes Power state*/
-+#define SERDES_RATE_MASK	GENMASK(9, 8)
-+#define SERDES_PCLK_MASK	GENMASK(14, 12)	/* PCLK rate to PHY */
-+#define SERDES_LINK_MODE_MASK	GENMASK(2, 1)
-+#define SERDES_LINK_MODE_SHIFT	1
-+#define SERDES_PWR_ST_SHIFT	4
-+#define SERDES_PWR_ST_P0	0x0
-+#define SERDES_PWR_ST_P3	0x3
-+#define SERDES_LINK_MODE_2G5	0x3
-+#define SERSED_LINK_MODE_1G	0x2
-+#define SERDES_PCLK_37p5MHZ	0x0
-+#define SERDES_PCLK_70MHZ	0x1
-+#define SERDES_RATE_PCIE_GEN1	0x0
-+#define SERDES_RATE_PCIE_GEN2	0x1
-+#define SERDES_RATE_PCIE_SHIFT	8
-+#define SERDES_PCLK_SHIFT	12
-+
-+#define INTEL_MGBE_ADHOC_ADDR	0x15
-+#define INTEL_MGBE_XPCS_ADDR	0x16
-+
-+/* XPCS defines */
-+#define XPCS_MODE_SGMII		BIT(2)
-+#define XPCS_MAC_AUTO_SW	BIT(9)
-+#define XPCS_AN_CL37_EN		BIT(12)
-+
-+#define VR_MII_MMD_CTRL		0x0000
-+#define VR_MII_DIG_CTRL1	0x8000
-+#define VR_MII_AN_CTRL		0x8001
-+
-+#endif /* __DWMAC_INTEL_H__ */
-diff --git a/include/pci_ids.h b/include/pci_ids.h
-index f1886c3a75..14acb77d2d 100644
---- a/include/pci_ids.h
-+++ b/include/pci_ids.h
-@@ -2601,6 +2601,15 @@
- #define PCI_DEVICE_ID_DCI_PCCOM2	0x0004
- 
- #define PCI_VENDOR_ID_INTEL		0x8086
-+#define PCI_DEVICE_ID_INTEL_EHL_RGMII1G       0x4b30
-+#define PCI_DEVICE_ID_INTEL_EHL_SGMII1        0x4b31
-+#define PCI_DEVICE_ID_INTEL_EHL_SGMII2G5      0x4b32
-+#define PCI_DEVICE_ID_INTEL_EHL_PSE0_RGMII1G  0x4ba0
-+#define PCI_DEVICE_ID_INTEL_EHL_PSE0_SGMII1G  0x4ba1
-+#define PCI_DEVICE_ID_INTEL_EHL_PSE0_SGMII2G5 0x4ba2
-+#define PCI_DEVICE_ID_INTEL_EHL_PSE1_RGMII1G  0x4bb0
-+#define PCI_DEVICE_ID_INTEL_EHL_PSE1_SGMII1G  0x4bb1
-+#define PCI_DEVICE_ID_INTEL_EHL_PSE1_SGMII2G5 0x4bb2
- #define PCI_DEVICE_ID_INTEL_EESSC	0x0008
- #define PCI_DEVICE_ID_INTEL_SNB_IMC	0x0100
- #define PCI_DEVICE_ID_INTEL_IVB_IMC	0x0154
--- 
-2.39.2
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
+> ---
+>  arch/arm/dts/Makefile                        |   1 -
+>  arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi |   4 +-
+>  arch/arm/dts/k3-am625-beagleplay.dts         | 932 -------------------
+>  configs/am62x_beagleplay_a53_defconfig       |   3 +-
+>  4 files changed, 4 insertions(+), 936 deletions(-)
+>  delete mode 100644 arch/arm/dts/k3-am625-beagleplay.dts
+>
+> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> index 624dadf8ece2..813426a3e519 100644
+> --- a/arch/arm/dts/Makefile
+> +++ b/arch/arm/dts/Makefile
+> @@ -1200,7 +1200,6 @@ dtb-$(CONFIG_SOC_K3_AM642) += k3-am642-r5-evm.dtb \
+>  
+>  dtb-$(CONFIG_SOC_K3_AM625) += k3-am625-sk.dtb \
+>  			      k3-am625-r5-sk.dtb \
+> -			      k3-am625-beagleplay.dtb \
+>  			      k3-am625-r5-beagleplay.dtb \
+>  			      k3-am625-verdin-r5.dtb \
+>  			      k3-am625-r5-phycore-som-2gb.dtb
+> diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+> index 9ac4a825f841..dd5b335ed2ee 100644
+> --- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+> +++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+> @@ -66,9 +66,9 @@
+>  #ifdef CONFIG_TARGET_AM625_A53_BEAGLEPLAY
+>  
+>  #define SPL_NODTB "spl/u-boot-spl-nodtb.bin"
+> -#define SPL_AM625_BEAGLEPLAY_DTB "spl/dts/k3-am625-beagleplay.dtb"
+> +#define SPL_AM625_BEAGLEPLAY_DTB "spl/dts/ti/k3-am625-beagleplay.dtb"
+>  #define UBOOT_NODTB "u-boot-nodtb.bin"
+> -#define AM625_BEAGLEPLAY_DTB "arch/arm/dts/k3-am625-beagleplay.dtb"
+> +#define AM625_BEAGLEPLAY_DTB "dts/upstream/src/arm64/ti/k3-am625-beagleplay.dtb"
+>  
+>  &binman {
+>  	ti-dm {
+> diff --git a/arch/arm/dts/k3-am625-beagleplay.dts b/arch/arm/dts/k3-am625-beagleplay.dts
+> deleted file mode 100644
+> index 8ab838f1697c..000000000000
+> --- a/arch/arm/dts/k3-am625-beagleplay.dts
+> +++ /dev/null
+> @@ -1,932 +0,0 @@
+> -// SPDX-License-Identifier: GPL-2.0-only OR MIT
+> -/*
+> - * https://beagleplay.org/
+> - *
+> - * Copyright (C) 2022-2024 Texas Instruments Incorporated - https://www.ti.com/
+> - * Copyright (C) 2022-2024 Robert Nelson, BeagleBoard.org Foundation
+> - */
+> -
+> -/dts-v1/;
+> -
+> -#include <dt-bindings/leds/common.h>
+> -#include <dt-bindings/gpio/gpio.h>
+> -#include <dt-bindings/input/input.h>
+> -#include "k3-am625.dtsi"
+> -
+> -/ {
+> -	compatible = "beagle,am625-beagleplay", "ti,am625";
+> -	model = "BeagleBoard.org BeaglePlay";
+> -
+> -	aliases {
+> -		ethernet0 = &cpsw_port1;
+> -		ethernet1 = &cpsw_port2;
+> -		gpio0 = &main_gpio0;
+> -		gpio1 = &main_gpio1;
+> -		gpio2 = &mcu_gpio0;
+> -		i2c0 = &main_i2c0;
+> -		i2c1 = &main_i2c1;
+> -		i2c2 = &main_i2c2;
+> -		i2c3 = &main_i2c3;
+> -		i2c4 = &wkup_i2c0;
+> -		i2c5 = &mcu_i2c0;
+> -		mmc0 = &sdhci0;
+> -		mmc1 = &sdhci1;
+> -		mmc2 = &sdhci2;
+> -		rtc0 = &rtc;
+> -		serial0 = &main_uart5;
+> -		serial1 = &main_uart6;
+> -		serial2 = &main_uart0;
+> -		usb0 = &usb0;
+> -		usb1 = &usb1;
+> -	};
+> -
+> -	chosen {
+> -		stdout-path = "serial2:115200n8";
+> -	};
+> -
+> -	memory@80000000 {
+> -		bootph-pre-ram;
+> -		device_type = "memory";
+> -		/* 2G RAM */
+> -		reg = <0x00000000 0x80000000 0x00000000 0x80000000>;
+> -	};
+> -
+> -	reserved-memory {
+> -		#address-cells = <2>;
+> -		#size-cells = <2>;
+> -		ranges;
+> -
+> -		ramoops: ramoops@9ca00000 {
+> -			compatible = "ramoops";
+> -			reg = <0x00 0x9ca00000 0x00 0x00100000>;
+> -			record-size = <0x8000>;
+> -			console-size = <0x8000>;
+> -			ftrace-size = <0x00>;
+> -			pmsg-size = <0x8000>;
+> -		};
+> -
+> -		secure_tfa_ddr: tfa@9e780000 {
+> -			reg = <0x00 0x9e780000 0x00 0x80000>;
+> -			no-map;
+> -		};
+> -
+> -		secure_ddr: optee@9e800000 {
+> -			reg = <0x00 0x9e800000 0x00 0x01800000>;
+> -			no-map;
+> -		};
+> -
+> -		wkup_r5fss0_core0_dma_memory_region: r5f-dma-memory@9db00000 {
+> -			compatible = "shared-dma-pool";
+> -			reg = <0x00 0x9db00000 0x00 0xc00000>;
+> -			no-map;
+> -		};
+> -	};
+> -
+> -	vsys_5v0: regulator-1 {
+> -		bootph-all;
+> -		compatible = "regulator-fixed";
+> -		regulator-name = "vsys_5v0";
+> -		regulator-min-microvolt = <5000000>;
+> -		regulator-max-microvolt = <5000000>;
+> -		regulator-always-on;
+> -		regulator-boot-on;
+> -	};
+> -
+> -	vdd_3v3: regulator-2 {
+> -		/* output of TLV62595DMQR-U12 */
+> -		bootph-all;
+> -		compatible = "regulator-fixed";
+> -		regulator-name = "vdd_3v3";
+> -		regulator-min-microvolt = <3300000>;
+> -		regulator-max-microvolt = <3300000>;
+> -		vin-supply = <&vsys_5v0>;
+> -		regulator-always-on;
+> -		regulator-boot-on;
+> -	};
+> -
+> -	wlan_en: regulator-3 {
+> -		/* OUTPUT of SN74AVC2T244DQMR */
+> -		compatible = "regulator-fixed";
+> -		regulator-name = "wlan_en";
+> -		regulator-min-microvolt = <1800000>;
+> -		regulator-max-microvolt = <1800000>;
+> -		enable-active-high;
+> -		regulator-always-on;
+> -		vin-supply = <&vdd_3v3>;
+> -		gpio = <&main_gpio0 38 GPIO_ACTIVE_HIGH>;
+> -		pinctrl-names = "default";
+> -		pinctrl-0 = <&wifi_en_pins_default>;
+> -	};
+> -
+> -	vdd_3v3_sd: regulator-4 {
+> -		/* output of TPS22918DBVR-U21 */
+> -		bootph-all;
+> -		pinctrl-names = "default";
+> -		pinctrl-0 = <&vdd_3v3_sd_pins_default>;
+> -
+> -		compatible = "regulator-fixed";
+> -		regulator-name = "vdd_3v3_sd";
+> -		regulator-min-microvolt = <3300000>;
+> -		regulator-max-microvolt = <3300000>;
+> -		enable-active-high;
+> -		regulator-always-on;
+> -		vin-supply = <&vdd_3v3>;
+> -		gpio = <&main_gpio1 19 GPIO_ACTIVE_HIGH>;
+> -	};
+> -
+> -	vdd_sd_dv: regulator-5 {
+> -		bootph-all;
+> -		compatible = "regulator-gpio";
+> -		regulator-name = "sd_hs200_switch";
+> -		pinctrl-names = "default";
+> -		pinctrl-0 = <&vdd_sd_dv_pins_default>;
+> -		regulator-min-microvolt = <1800000>;
+> -		regulator-max-microvolt = <3300000>;
+> -		regulator-boot-on;
+> -		vin-supply = <&ldo1_reg>;
+> -		gpios = <&main_gpio1 49 GPIO_ACTIVE_HIGH>;
+> -		states = <1800000 0x0>,
+> -			 <3300000 0x1>;
+> -	};
+> -
+> -	leds {
+> -		bootph-all;
+> -		compatible = "gpio-leds";
+> -
+> -		led-0 {
+> -			bootph-all;
+> -			gpios = <&main_gpio0 3 GPIO_ACTIVE_HIGH>;
+> -			linux,default-trigger = "heartbeat";
+> -			function = LED_FUNCTION_HEARTBEAT;
+> -			default-state = "off";
+> -		};
+> -
+> -		led-1 {
+> -			bootph-all;
+> -			gpios = <&main_gpio0 4 GPIO_ACTIVE_HIGH>;
+> -			linux,default-trigger = "disk-activity";
+> -			function = LED_FUNCTION_DISK_ACTIVITY;
+> -			default-state = "keep";
+> -		};
+> -
+> -		led-2 {
+> -			bootph-all;
+> -			gpios = <&main_gpio0 5 GPIO_ACTIVE_HIGH>;
+> -			function = LED_FUNCTION_CPU;
+> -		};
+> -
+> -		led-3 {
+> -			bootph-all;
+> -			gpios = <&main_gpio0 6 GPIO_ACTIVE_HIGH>;
+> -			function = LED_FUNCTION_LAN;
+> -		};
+> -
+> -		led-4 {
+> -			bootph-all;
+> -			gpios = <&main_gpio0 9 GPIO_ACTIVE_HIGH>;
+> -			function = LED_FUNCTION_WLAN;
+> -		};
+> -	};
+> -
+> -	gpio_keys: gpio-keys {
+> -		compatible = "gpio-keys";
+> -		autorepeat;
+> -		pinctrl-names = "default";
+> -		pinctrl-0 = <&usr_button_pins_default>;
+> -
+> -		usr: button-usr {
+> -			label = "User Key";
+> -			linux,code = <BTN_0>;
+> -			gpios = <&main_gpio0 18 GPIO_ACTIVE_LOW>;
+> -		};
+> -
+> -	};
+> -
+> -	hdmi0: connector-hdmi {
+> -		compatible = "hdmi-connector";
+> -		label = "hdmi";
+> -		type = "a";
+> -		port {
+> -			hdmi_connector_in: endpoint {
+> -				remote-endpoint = <&it66121_out>;
+> -			};
+> -		};
+> -	};
+> -
+> -	sound {
+> -		compatible = "simple-audio-card";
+> -		simple-audio-card,name = "it66121 HDMI";
+> -		simple-audio-card,format = "i2s";
+> -		simple-audio-card,bitclock-master = <&hdmi_dailink_master>;
+> -		simple-audio-card,frame-master = <&hdmi_dailink_master>;
+> -
+> -		hdmi_dailink_master: simple-audio-card,cpu {
+> -			sound-dai = <&mcasp1>;
+> -			system-clock-direction-out;
+> -		};
+> -
+> -		simple-audio-card,codec {
+> -			sound-dai = <&it66121>;
+> -		};
+> -	};
+> -
+> -};
+> -
+> -&main_pmx0 {
+> -	gpio0_pins_default: gpio0-default-pins {
+> -		bootph-all;
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x0004, PIN_INPUT, 7) /* (G25) OSPI0_LBCLKO.GPIO0_1 */
+> -			AM62X_IOPAD(0x0008, PIN_INPUT, 7) /* (J24) OSPI0_DQS.GPIO0_2 */
+> -			AM62X_IOPAD(0x000c, PIN_INPUT, 7) /* (E25) OSPI0_D0.GPIO0_3 */
+> -			AM62X_IOPAD(0x0010, PIN_INPUT, 7) /* (G24) OSPI0_D1.GPIO0_4 */
+> -			AM62X_IOPAD(0x0014, PIN_INPUT, 7) /* (F25) OSPI0_D2.GPIO0_5 */
+> -			AM62X_IOPAD(0x0018, PIN_INPUT, 7) /* (F24) OSPI0_D3.GPIO0_6 */
+> -			AM62X_IOPAD(0x0024, PIN_INPUT, 7) /* (H25) OSPI0_D6.GPIO0_9 */
+> -			AM62X_IOPAD(0x0028, PIN_INPUT, 7) /* (J22) OSPI0_D7.GPIO0_10 */
+> -			AM62X_IOPAD(0x002c, PIN_INPUT, 7) /* (F23) OSPI0_CSn0.GPIO0_11 */
+> -			AM62X_IOPAD(0x0030, PIN_INPUT, 7) /* (G21) OSPI0_CSn1.GPIO0_12 */
+> -			AM62X_IOPAD(0x0034, PIN_INPUT, 7) /* (H21) OSPI0_CSn2.GPIO0_13 */
+> -			AM62X_IOPAD(0x0038, PIN_INPUT, 7) /* (E24) OSPI0_CSn3.GPIO0_14 */
+> -			AM62X_IOPAD(0x00a4, PIN_INPUT, 7) /* (M22) GPMC0_DIR.GPIO0_40 */
+> -			AM62X_IOPAD(0x00ac, PIN_INPUT, 7) /* (L21) GPMC0_CSn1.GPIO0_42 */
+> -		>;
+> -	};
+> -
+> -	vdd_sd_dv_pins_default: vdd-sd-default-pins {
+> -		bootph-all;
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x0244, PIN_OUTPUT, 7) /* (C17) MMC1_SDWP.GPIO1_49 */
+> -		>;
+> -	};
+> -
+> -	usr_button_pins_default: usr-button-default-pins {
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x0048, PIN_INPUT, 7) /* (N25) GPMC0_AD3.GPIO0_18 */
+> -		>;
+> -	};
+> -
+> -	grove_pins_default: grove-default-pins {
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x01e8, PIN_INPUT_PULLUP, 0) /* (B17) I2C1_SCL */
+> -			AM62X_IOPAD(0x01ec, PIN_INPUT_PULLUP, 0) /* (A17) I2C1_SDA */
+> -		>;
+> -	};
+> -
+> -	local_i2c_pins_default: local-i2c-default-pins {
+> -		bootph-all;
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x01e0, PIN_INPUT_PULLUP, 0) /* (B16) I2C0_SCL */
+> -			AM62X_IOPAD(0x01e4, PIN_INPUT_PULLUP, 0) /* (A16) I2C0_SDA */
+> -		>;
+> -	};
+> -
+> -	i2c2_1v8_pins_default: i2c2-default-pins {
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x00b0, PIN_INPUT_PULLUP, 1) /* (K22) GPMC0_CSn2.I2C2_SCL */
+> -			AM62X_IOPAD(0x00b4, PIN_INPUT_PULLUP, 1) /* (K24) GPMC0_CSn3.I2C2_SDA */
+> -		>;
+> -	};
+> -
+> -	mdio0_pins_default: mdio0-default-pins {
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x0160, PIN_OUTPUT, 0) /* (AD24) MDIO0_MDC */
+> -			AM62X_IOPAD(0x015c, PIN_INPUT, 0) /* (AB22) MDIO0_MDIO */
+> -			AM62X_IOPAD(0x003c, PIN_INPUT, 7) /* (M25) GPMC0_AD0.GPIO0_15 */
+> -			AM62X_IOPAD(0x018c, PIN_INPUT, 7) /* (AC21) RGMII2_RD2.GPIO1_5 */
+> -		>;
+> -	};
+> -
+> -	rgmii1_pins_default: rgmii1-default-pins {
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x014c, PIN_INPUT, 0) /* (AB17) RGMII1_RD0 */
+> -			AM62X_IOPAD(0x0150, PIN_INPUT, 0) /* (AC17) RGMII1_RD1 */
+> -			AM62X_IOPAD(0x0154, PIN_INPUT, 0) /* (AB16) RGMII1_RD2 */
+> -			AM62X_IOPAD(0x0158, PIN_INPUT, 0) /* (AA15) RGMII1_RD3 */
+> -			AM62X_IOPAD(0x0148, PIN_INPUT, 0) /* (AD17) RGMII1_RXC */
+> -			AM62X_IOPAD(0x0144, PIN_INPUT, 0) /* (AE17) RGMII1_RX_CTL */
+> -			AM62X_IOPAD(0x0134, PIN_OUTPUT, 0) /* (AE20) RGMII1_TD0 */
+> -			AM62X_IOPAD(0x0138, PIN_OUTPUT, 0) /* (AD20) RGMII1_TD1 */
+> -			AM62X_IOPAD(0x013c, PIN_OUTPUT, 0) /* (AE18) RGMII1_TD2 */
+> -			AM62X_IOPAD(0x0140, PIN_OUTPUT, 0) /* (AD18) RGMII1_TD3 */
+> -			AM62X_IOPAD(0x0130, PIN_OUTPUT, 0) /* (AE19) RGMII1_TXC */
+> -			AM62X_IOPAD(0x012c, PIN_OUTPUT, 0) /* (AD19) RGMII1_TX_CTL */
+> -		>;
+> -	};
+> -
+> -	emmc_pins_default: emmc-default-pins {
+> -		bootph-all;
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x0220, PIN_INPUT, 0) /* (Y3) MMC0_CMD */
+> -			AM62X_IOPAD(0x0218, PIN_INPUT, 0) /* (AB1) MMC0_CLK */
+> -			AM62X_IOPAD(0x0214, PIN_INPUT, 0) /* (AA2) MMC0_DAT0 */
+> -			AM62X_IOPAD(0x0210, PIN_INPUT, 0) /* (AA1) MMC0_DAT1 */
+> -			AM62X_IOPAD(0x020c, PIN_INPUT, 0) /* (AA3) MMC0_DAT2 */
+> -			AM62X_IOPAD(0x0208, PIN_INPUT, 0) /* (Y4) MMC0_DAT3 */
+> -			AM62X_IOPAD(0x0204, PIN_INPUT, 0) /* (AB2) MMC0_DAT4 */
+> -			AM62X_IOPAD(0x0200, PIN_INPUT, 0) /* (AC1) MMC0_DAT5 */
+> -			AM62X_IOPAD(0x01fc, PIN_INPUT, 0) /* (AD2) MMC0_DAT6 */
+> -			AM62X_IOPAD(0x01f8, PIN_INPUT, 0) /* (AC2) MMC0_DAT7 */
+> -		>;
+> -	};
+> -
+> -	vdd_3v3_sd_pins_default: vdd-3v3-sd-default-pins {
+> -		bootph-all;
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x01c4, PIN_INPUT, 7) /* (B14) SPI0_D1_GPIO1_19 */
+> -		>;
+> -	};
+> -
+> -	sd_pins_default: sd-default-pins {
+> -		bootph-all;
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x023c, PIN_INPUT, 0) /* (A21) MMC1_CMD */
+> -			AM62X_IOPAD(0x0234, PIN_INPUT, 0) /* (B22) MMC1_CLK */
+> -			AM62X_IOPAD(0x0230, PIN_INPUT, 0) /* (A22) MMC1_DAT0 */
+> -			AM62X_IOPAD(0x022c, PIN_INPUT, 0) /* (B21) MMC1_DAT1 */
+> -			AM62X_IOPAD(0x0228, PIN_INPUT, 0) /* (C21) MMC1_DAT2 */
+> -			AM62X_IOPAD(0x0224, PIN_INPUT, 0) /* (D22) MMC1_DAT3 */
+> -			AM62X_IOPAD(0x0240, PIN_INPUT, 7) /* (D17) MMC1_SDCD.GPIO1_48 */
+> -		>;
+> -	};
+> -
+> -	wifi_pins_default: wifi-default-pins {
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x0120, PIN_INPUT, 0) /* (C24) MMC2_CMD */
+> -			AM62X_IOPAD(0x0118, PIN_INPUT, 0) /* (D25) MMC2_CLK */
+> -			AM62X_IOPAD(0x0114, PIN_INPUT, 0) /* (B24) MMC2_DAT0 */
+> -			AM62X_IOPAD(0x0110, PIN_INPUT, 0) /* (C25) MMC2_DAT1 */
+> -			AM62X_IOPAD(0x010c, PIN_INPUT, 0) /* (E23) MMC2_DAT2 */
+> -			AM62X_IOPAD(0x0108, PIN_INPUT, 0) /* (D24) MMC2_DAT3 */
+> -			AM62X_IOPAD(0x0124, PIN_INPUT, 0) /* (A23) MMC2_SDCD */
+> -			AM62X_IOPAD(0x11c, PIN_INPUT, 0) /* (#N/A) MMC2_CLKB */
+> -		>;
+> -	};
+> -
+> -	wifi_en_pins_default: wifi-en-default-pins {
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x009c, PIN_OUTPUT, 7) /* (V25) GPMC0_WAIT1.GPIO0_38 */
+> -		>;
+> -	};
+> -
+> -	wifi_wlirq_pins_default: wifi-wlirq-default-pins {
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x00a8, PIN_INPUT, 7) /* (M21) GPMC0_CSn0.GPIO0_41 */
+> -		>;
+> -	};
+> -
+> -	spe_pins_default: spe-default-pins {
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x0168, PIN_INPUT, 1) /* (AE21) RGMII2_TXC.RMII2_CRS_DV */
+> -			AM62X_IOPAD(0x0180, PIN_INPUT, 1) /* (AD23) RGMII2_RXC.RMII2_REF_CLK */
+> -			AM62X_IOPAD(0x0184, PIN_INPUT, 1) /* (AE23) RGMII2_RD0.RMII2_RXD0 */
+> -			AM62X_IOPAD(0x0188, PIN_INPUT, 1) /* (AB20) RGMII2_RD1.RMII2_RXD1 */
+> -			AM62X_IOPAD(0x017c, PIN_INPUT, 1) /* (AD22) RGMII2_RX_CTL.RMII2_RX_ER */
+> -			AM62X_IOPAD(0x016c, PIN_INPUT, 1) /* (Y18) RGMII2_TD0.RMII2_TXD0 */
+> -			AM62X_IOPAD(0x0170, PIN_INPUT, 1) /* (AA18) RGMII2_TD1.RMII2_TXD1 */
+> -			AM62X_IOPAD(0x0164, PIN_INPUT, 1) /* (AA19) RGMII2_TX_CTL.RMII2_TX_EN */
+> -			AM62X_IOPAD(0x0190, PIN_INPUT, 7) /* (AE22) RGMII2_RD3.GPIO1_6 */
+> -			AM62X_IOPAD(0x01f0, PIN_OUTPUT, 5) /* (A18) EXT_REFCLK1.CLKOUT0 */
+> -		>;
+> -	};
+> -
+> -	mikrobus_i2c_pins_default: mikrobus-i2c-default-pins {
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x01d0, PIN_INPUT_PULLUP, 2) /* (A15) UART0_CTSn.I2C3_SCL */
+> -			AM62X_IOPAD(0x01d4, PIN_INPUT_PULLUP, 2) /* (B15) UART0_RTSn.I2C3_SDA */
+> -		>;
+> -	};
+> -
+> -	mikrobus_uart_pins_default: mikrobus-uart-default-pins {
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x01d8, PIN_INPUT, 1) /* (C15) MCAN0_TX.UART5_RXD */
+> -			AM62X_IOPAD(0x01dc, PIN_OUTPUT, 1) /* (E15) MCAN0_RX.UART5_TXD */
+> -		>;
+> -	};
+> -
+> -	mikrobus_spi_pins_default: mikrobus-spi-default-pins {
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x01b0, PIN_INPUT, 1) /* (A20) MCASP0_ACLKR.SPI2_CLK */
+> -			AM62X_IOPAD(0x01ac, PIN_INPUT, 1) /* (E19) MCASP0_AFSR.SPI2_CS0 */
+> -			AM62X_IOPAD(0x0194, PIN_INPUT, 1) /* (B19) MCASP0_AXR3.SPI2_D0 */
+> -			AM62X_IOPAD(0x0198, PIN_INPUT, 1) /* (A19) MCASP0_AXR2.SPI2_D1 */
+> -		>;
+> -	};
+> -
+> -	mikrobus_gpio_pins_default: mikrobus-gpio-default-pins {
+> -		bootph-all;
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x019c, PIN_INPUT, 7) /* (B18) MCASP0_AXR1.GPIO1_9 */
+> -			AM62X_IOPAD(0x01a0, PIN_INPUT, 7) /* (E18) MCASP0_AXR0.GPIO1_10 */
+> -			AM62X_IOPAD(0x01a8, PIN_INPUT, 7) /* (D20) MCASP0_AFSX.GPIO1_12 */
+> -		>;
+> -	};
+> -
+> -	main_uart0_pins_default: main-uart0-default-pins {
+> -		bootph-all;
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x01c8, PIN_INPUT, 0) /* (D14) UART0_RXD */
+> -			AM62X_IOPAD(0x01cc, PIN_OUTPUT, 0) /* (E14) UART0_TXD */
+> -		>;
+> -	};
+> -
+> -	wifi_debug_uart_pins_default: wifi-debug-uart-default-pins {
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x001c, PIN_INPUT, 3) /* (J23) OSPI0_D4.UART6_RXD */
+> -			AM62X_IOPAD(0x0020, PIN_OUTPUT, 3) /* (J25) OSPI0_D5.UART6_TXD */
+> -		>;
+> -	};
+> -
+> -	usb1_pins_default: usb1-default-pins {
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x0258, PIN_INPUT, 0) /* (F18) USB1_DRVVBUS */
+> -		>;
+> -	};
+> -
+> -	pmic_irq_pins_default: pmic-irq-default-pins {
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x01f4, PIN_INPUT_PULLUP, 0) /* (D16) EXTINTn */
+> -		>;
+> -	};
+> -
+> -	hdmi_gpio_pins_default: hdmi-gpio-default-pins {
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x0094, PIN_INPUT_PULLUP | PIN_DEBOUNCE_CONF6, 7) /* (N20) GPMC0_BE1n.GPIO0_36 */
+> -			AM62X_IOPAD(0x0054, PIN_OUTPUT_PULLUP, 7) /* (P21) GPMC0_AD6.GPIO0_21 */
+> -		>;
+> -	};
+> -
+> -	mcasp_hdmi_pins_default: mcasp-hdmi-default-pins {
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x0090, PIN_INPUT, 2) /* (M24) GPMC0_BE0n_CLE.MCASP1_ACLKX */
+> -			AM62X_IOPAD(0x0098, PIN_INPUT, 2) /* (U23) GPMC0_WAIT0.MCASP1_AFSX */
+> -			AM62X_IOPAD(0x008c, PIN_OUTPUT, 2) /* (L25) GPMC0_WEn.MCASP1_AXR0 */
+> -			AM62X_IOPAD(0x0088, PIN_INPUT, 2) /* (L24) GPMC0_OEn_REn.MCASP1_AXR1 */
+> -			AM62X_IOPAD(0x0084, PIN_INPUT, 2) /* (L23) GPMC0_ADVn_ALE.MCASP1_AXR2 */
+> -			AM62X_IOPAD(0x007c, PIN_INPUT, 2) /* (P25) GPMC0_CLK.MCASP1_AXR3 */
+> -		>;
+> -	};
+> -
+> -	dss0_pins_default: dss0-default-pins {
+> -		pinctrl-single,pins = <
+> -			AM62X_IOPAD(0x0100, PIN_OUTPUT, 0) /* (AC25) VOUT0_VSYNC */
+> -			AM62X_IOPAD(0x00f8, PIN_OUTPUT, 0) /* (AB24) VOUT0_HSYNC */
+> -			AM62X_IOPAD(0x0104, PIN_OUTPUT, 0) /* (AC24) VOUT0_PCLK */
+> -			AM62X_IOPAD(0x00fc, PIN_OUTPUT, 0) /* (Y20) VOUT0_DE */
+> -			AM62X_IOPAD(0x00b8, PIN_OUTPUT, 0) /* (U22) VOUT0_DATA0 */
+> -			AM62X_IOPAD(0x00bc, PIN_OUTPUT, 0) /* (V24) VOUT0_DATA1 */
+> -			AM62X_IOPAD(0x00c0, PIN_OUTPUT, 0) /* (W25) VOUT0_DATA2 */
+> -			AM62X_IOPAD(0x00c4, PIN_OUTPUT, 0) /* (W24) VOUT0_DATA3 */
+> -			AM62X_IOPAD(0x00c8, PIN_OUTPUT, 0) /* (Y25) VOUT0_DATA4 */
+> -			AM62X_IOPAD(0x00cc, PIN_OUTPUT, 0) /* (Y24) VOUT0_DATA5 */
+> -			AM62X_IOPAD(0x00d0, PIN_OUTPUT, 0) /* (Y23) VOUT0_DATA6 */
+> -			AM62X_IOPAD(0x00d4, PIN_OUTPUT, 0) /* (AA25) VOUT0_DATA7 */
+> -			AM62X_IOPAD(0x00d8, PIN_OUTPUT, 0) /* (V21) VOUT0_DATA8 */
+> -			AM62X_IOPAD(0x00dc, PIN_OUTPUT, 0) /* (W21) VOUT0_DATA9 */
+> -			AM62X_IOPAD(0x00e0, PIN_OUTPUT, 0) /* (V20) VOUT0_DATA10 */
+> -			AM62X_IOPAD(0x00e4, PIN_OUTPUT, 0) /* (AA23) VOUT0_DATA11 */
+> -			AM62X_IOPAD(0x00e8, PIN_OUTPUT, 0) /* (AB25) VOUT0_DATA12 */
+> -			AM62X_IOPAD(0x00ec, PIN_OUTPUT, 0) /* (AA24) VOUT0_DATA13 */
+> -			AM62X_IOPAD(0x00f0, PIN_OUTPUT, 0) /* (Y22) VOUT0_DATA14 */
+> -			AM62X_IOPAD(0x00f4, PIN_OUTPUT, 0) /* (AA21) VOUT0_DATA15 */
+> -			AM62X_IOPAD(0x005c, PIN_OUTPUT, 1) /* (R24) GPMC0_AD8.VOUT0_DATA16 */
+> -			AM62X_IOPAD(0x0060, PIN_OUTPUT, 1) /* (R25) GPMC0_AD9.VOUT0_DATA17 */
+> -			AM62X_IOPAD(0x0064, PIN_OUTPUT, 1) /* (T25) GPMC0_AD10.VOUT0_DATA18 */
+> -			AM62X_IOPAD(0x0068, PIN_OUTPUT, 1) /* (R21) GPMC0_AD11.VOUT0_DATA19 */
+> -			AM62X_IOPAD(0x006c, PIN_OUTPUT, 1) /* (T22) GPMC0_AD12.VOUT0_DATA20 */
+> -			AM62X_IOPAD(0x0070, PIN_OUTPUT, 1) /* (T24) GPMC0_AD13.VOUT0_DATA21 */
+> -			AM62X_IOPAD(0x0074, PIN_OUTPUT, 1) /* (U25) GPMC0_AD14.VOUT0_DATA22 */
+> -			AM62X_IOPAD(0x0078, PIN_OUTPUT, 1) /* (U24) GPMC0_AD15.VOUT0_DATA23 */
+> -		>;
+> -	};
+> -};
+> -
+> -&mcu_pmx0 {
+> -	i2c_qwiic_pins_default: i2c-qwiic-default-pins {
+> -		pinctrl-single,pins = <
+> -			AM62X_MCU_IOPAD(0x0044, PIN_INPUT, 0) /* (A8) MCU_I2C0_SCL */
+> -			AM62X_MCU_IOPAD(0x0048, PIN_INPUT, 0) /* (D10) MCU_I2C0_SDA */
+> -		>;
+> -	};
+> -
+> -	gbe_pmx_obsclk: gbe-pmx-obsclk-default-pins {
+> -		pinctrl-single,pins = <
+> -			AM62X_MCU_IOPAD(0x0004, PIN_OUTPUT, 1) /* (B8) MCU_SPI0_CS1.MCU_OBSCLK0 */
+> -		>;
+> -	};
+> -
+> -	i2c_csi_pins_default: i2c-csi-default-pins {
+> -		pinctrl-single,pins = <
+> -			AM62X_MCU_IOPAD(0x004c, PIN_INPUT_PULLUP, 0) /* (B9) WKUP_I2C0_SCL */
+> -			AM62X_MCU_IOPAD(0x0050, PIN_INPUT_PULLUP, 0) /* (A9) WKUP_I2C0_SDA */
+> -		>;
+> -	};
+> -
+> -	wifi_32k_clk: mcu-clk-out-default-pins {
+> -		pinctrl-single,pins = <
+> -			AM62X_MCU_IOPAD(0x0084, PIN_OUTPUT, 0) /* (A12) WKUP_CLKOUT0 */
+> -		>;
+> -	};
+> -};
+> -
+> -&a53_opp_table {
+> -	/* Requires VDD_CORE to be at 0.85V */
+> -	opp-1400000000 {
+> -		opp-hz = /bits/ 64 <1400000000>;
+> -		opp-supported-hw = <0x01 0x0004>;
+> -	};
+> -};
+> -
+> -&wkup_i2c0 {
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&i2c_csi_pins_default>;
+> -	clock-frequency = <400000>;
+> -	/* Enable with overlay for camera sensor */
+> -};
+> -
+> -&mcu_i2c0 {
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&i2c_qwiic_pins_default>;
+> -	clock-frequency = <100000>;
+> -	status = "okay";
+> -};
+> -
+> -&usbss0 {
+> -	bootph-all;
+> -	ti,vbus-divider;
+> -	status = "okay";
+> -};
+> -
+> -&usb0 {
+> -	bootph-all;
+> -	dr_mode = "peripheral";
+> -};
+> -
+> -&usbss1 {
+> -	ti,vbus-divider;
+> -	status = "okay";
+> -};
+> -
+> -&usb1 {
+> -	dr_mode = "host";
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&usb1_pins_default>;
+> -};
+> -
+> -&cpsw3g {
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&rgmii1_pins_default>, <&spe_pins_default>,
+> -		    <&gbe_pmx_obsclk>;
+> -	assigned-clocks = <&k3_clks 157 70>, <&k3_clks 157 20>;
+> -	assigned-clock-parents = <&k3_clks 157 72>, <&k3_clks 157 22>;
+> -};
+> -
+> -&cpsw_port1 {
+> -	phy-mode = "rgmii-rxid";
+> -	phy-handle = <&cpsw3g_phy0>;
+> -};
+> -
+> -&cpsw_port2 {
+> -	phy-mode = "rmii";
+> -	phy-handle = <&cpsw3g_phy1>;
+> -};
+> -
+> -&cpsw3g_mdio {
+> -	status = "okay";
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&mdio0_pins_default>;
+> -
+> -	cpsw3g_phy0: ethernet-phy@0 {
+> -		reg = <0>;
+> -		reset-gpios = <&main_gpio0 15 GPIO_ACTIVE_LOW>;
+> -		reset-assert-us = <10000>;
+> -		reset-deassert-us = <50000>;
+> -	};
+> -
+> -	cpsw3g_phy1: ethernet-phy@1 {
+> -		reg = <1>;
+> -		reset-gpios = <&main_gpio1 5 GPIO_ACTIVE_LOW>;
+> -		reset-assert-us = <25>;
+> -		reset-deassert-us = <60000>; /* T2 */
+> -	};
+> -};
+> -
+> -&main_gpio0 {
+> -	bootph-all;
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&gpio0_pins_default>;
+> -	gpio-line-names = "BL_EN_3V3", "SPE_PO_EN", "RTC_INT",	/* 0-2 */
+> -		"USR0", "USR1", "USR2", "USR3", "", "", "USR4",	/* 3-9 */
+> -		"EEPROM_WP",					/* 10 */
+> -		"CSI2_CAMERA_GPIO1", "CSI2_CAMERA_GPIO2",	/* 11-12 */
+> -		"CC1352P7_BOOT", "CC1352P7_RSTN", "GBE_RSTN", "", "",	/* 13-17 */
+> -		"USR_BUTTON", "", "", "", "", "", "", "", "",	/* 18-26 */
+> -		"", "", "", "", "", "", "", "", "", "HDMI_INT",	/* 27-36 */
+> -		"", "VDD_WLAN_EN", "", "", "WL_IRQ", "GBE_INTN",/* 37-42 */
+> -		"", "", "", "", "", "", "", "", "", "", "", "",	/* 43-54 */
+> -		"", "", "", "", "", "", "", "", "", "", "", "", /* 55-66 */
+> -		"", "", "", "", "", "", "", "", "", "", "", "", /* 67-78 */
+> -		"", "", "", "", "", "",				/* 79-84 */
+> -		"BITBANG_MDIO_DATA", "BITBANG_MDIO_CLK",	/* 85-86 */
+> -		"", "", "", "", "";				/* 87-91 */
+> -};
+> -
+> -&main_gpio1 {
+> -	bootph-all;
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&mikrobus_gpio_pins_default>;
+> -	gpio-line-names = "", "", "", "", "",			/* 0-4 */
+> -		"SPE_RSTN", "SPE_INTN", "MIKROBUS_GPIO1_7",	/* 5-7 */
+> -		"MIKROBUS_GPIO1_8", "MIKROBUS_GPIO1_9",		/* 8-9 */
+> -		"MIKROBUS_GPIO1_10", "MIKROBUS_GPIO1_11",	/* 10-11 */
+> -		"MIKROBUS_GPIO1_12", "MIKROBUS_W1_GPIO0",	/* 12-13 */
+> -		"MIKROBUS_GPIO1_14",				/* 14 */
+> -		"", "", "", "", "VDD_3V3_SD", "", "",		/* 15-21 */
+> -		"MIKROBUS_GPIO1_22", "MIKROBUS_GPIO1_23",	/* 22-23 */
+> -		"MIKROBUS_GPIO1_24", "MIKROBUS_GPIO1_25",	/* 24-25 */
+> -		"", "", "", "", "", "", "", "", "", "", "", "",	/* 26-37 */
+> -		"", "", "", "", "", "", "", "", "", "",		/* 38-47 */
+> -		"SD_CD", "SD_VOLT_SEL", "", "";			/* 48-51 */
+> -};
+> -
+> -&main_i2c0 {
+> -	bootph-all;
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&local_i2c_pins_default>;
+> -	clock-frequency = <400000>;
+> -	status = "okay";
+> -
+> -	eeprom@50 {
+> -		compatible = "atmel,24c32";
+> -		reg = <0x50>;
+> -	};
+> -
+> -	rtc: rtc@68 {
+> -		compatible = "ti,bq32000";
+> -		reg = <0x68>;
+> -		interrupt-parent = <&main_gpio0>;
+> -		interrupts = <2 IRQ_TYPE_EDGE_FALLING>;
+> -	};
+> -
+> -	tps65219: pmic@30 {
+> -		bootph-all;
+> -		compatible = "ti,tps65219";
+> -		reg = <0x30>;
+> -		buck1-supply = <&vsys_5v0>;
+> -		buck2-supply = <&vsys_5v0>;
+> -		buck3-supply = <&vsys_5v0>;
+> -		ldo1-supply = <&vdd_3v3>;
+> -		ldo2-supply = <&buck2_reg>;
+> -		ldo3-supply = <&vdd_3v3>;
+> -		ldo4-supply = <&vdd_3v3>;
+> -
+> -		pinctrl-names = "default";
+> -		pinctrl-0 = <&pmic_irq_pins_default>;
+> -		interrupt-parent = <&gic500>;
+> -		interrupts = <GIC_SPI 224 IRQ_TYPE_LEVEL_HIGH>;
+> -		interrupt-controller;
+> -		#interrupt-cells = <1>;
+> -
+> -		system-power-controller;
+> -		ti,power-button;
+> -
+> -		regulators {
+> -			buck1_reg: buck1 {
+> -				regulator-name = "VDD_CORE";
+> -				regulator-min-microvolt = <850000>;
+> -				regulator-max-microvolt = <850000>;
+> -				regulator-boot-on;
+> -				regulator-always-on;
+> -			};
+> -
+> -			buck2_reg: buck2 {
+> -				regulator-name = "VDD_1V8";
+> -				regulator-min-microvolt = <1800000>;
+> -				regulator-max-microvolt = <1800000>;
+> -				regulator-boot-on;
+> -				regulator-always-on;
+> -			};
+> -
+> -			buck3_reg: buck3 {
+> -				regulator-name = "VDD_1V2";
+> -				regulator-min-microvolt = <1200000>;
+> -				regulator-max-microvolt = <1200000>;
+> -				regulator-boot-on;
+> -				regulator-always-on;
+> -			};
+> -
+> -			ldo1_reg: ldo1 {
+> -				/*
+> -				 * Regulator is left as is unused, vdd_sd
+> -				 * is controlled via GPIO with bypass config
+> -				 * as per the NVM configuration
+> -				 */
+> -				regulator-name = "VDD_SD_3V3";
+> -				regulator-min-microvolt = <3300000>;
+> -				regulator-max-microvolt = <3300000>;
+> -				regulator-allow-bypass;
+> -				regulator-boot-on;
+> -				regulator-always-on;
+> -			};
+> -
+> -			ldo2_reg: ldo2 {
+> -				regulator-name = "VDDA_0V85";
+> -				regulator-min-microvolt = <850000>;
+> -				regulator-max-microvolt = <850000>;
+> -				regulator-boot-on;
+> -				regulator-always-on;
+> -			};
+> -
+> -			ldo3_reg: ldo3 {
+> -				regulator-name = "VDDA_1V8";
+> -				regulator-min-microvolt = <1800000>;
+> -				regulator-max-microvolt = <1800000>;
+> -				regulator-boot-on;
+> -				regulator-always-on;
+> -			};
+> -
+> -			ldo4_reg: ldo4 {
+> -				regulator-name = "VDD_2V5";
+> -				regulator-min-microvolt = <2500000>;
+> -				regulator-max-microvolt = <2500000>;
+> -				regulator-boot-on;
+> -				regulator-always-on;
+> -			};
+> -		};
+> -	};
+> -};
+> -
+> -&main_i2c1 {
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&grove_pins_default>;
+> -	clock-frequency = <100000>;
+> -	status = "okay";
+> -};
+> -
+> -&main_i2c2 {
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&i2c2_1v8_pins_default>;
+> -	clock-frequency = <100000>;
+> -	status = "okay";
+> -
+> -	it66121: bridge-hdmi@4c {
+> -		compatible = "ite,it66121";
+> -		reg = <0x4c>;
+> -		pinctrl-names = "default";
+> -		pinctrl-0 = <&hdmi_gpio_pins_default>;
+> -		vcn33-supply = <&vdd_3v3>;
+> -		vcn18-supply = <&buck2_reg>;
+> -		vrf12-supply = <&buck3_reg>;
+> -		reset-gpios = <&main_gpio0 21 GPIO_ACTIVE_LOW>;
+> -		interrupt-parent = <&main_gpio0>;
+> -		interrupts = <36 IRQ_TYPE_EDGE_FALLING>;
+> -		#sound-dai-cells = <0>;
+> -
+> -		ports {
+> -			#address-cells = <1>;
+> -			#size-cells = <0>;
+> -
+> -			port@0 {
+> -				reg = <0>;
+> -
+> -				it66121_in: endpoint {
+> -					bus-width = <24>;
+> -					remote-endpoint = <&dpi1_out>;
+> -				};
+> -			};
+> -
+> -			port@1 {
+> -				reg = <1>;
+> -
+> -				it66121_out: endpoint {
+> -					remote-endpoint = <&hdmi_connector_in>;
+> -				};
+> -			};
+> -		};
+> -	};
+> -};
+> -
+> -&main_i2c3 {
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&mikrobus_i2c_pins_default>;
+> -	clock-frequency = <400000>;
+> -	status = "okay";
+> -};
+> -
+> -&main_spi2 {
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&mikrobus_spi_pins_default>;
+> -	status = "okay";
+> -};
+> -
+> -&sdhci0 {
+> -	bootph-all;
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&emmc_pins_default>;
+> -	disable-wp;
+> -	status = "okay";
+> -};
+> -
+> -&sdhci1 {
+> -	/* SD/MMC */
+> -	bootph-all;
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&sd_pins_default>;
+> -
+> -	vmmc-supply = <&vdd_3v3_sd>;
+> -	vqmmc-supply = <&vdd_sd_dv>;
+> -	disable-wp;
+> -	cd-gpios = <&main_gpio1 48 GPIO_ACTIVE_LOW>;
+> -	cd-debounce-delay-ms = <100>;
+> -	ti,fails-without-test-cd;
+> -	status = "okay";
+> -};
+> -
+> -&sdhci2 {
+> -	vmmc-supply = <&wlan_en>;
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&wifi_pins_default>, <&wifi_32k_clk>;
+> -	non-removable;
+> -	ti,fails-without-test-cd;
+> -	cap-power-off-card;
+> -	keep-power-in-suspend;
+> -	assigned-clocks = <&k3_clks 157 158>;
+> -	assigned-clock-parents = <&k3_clks 157 160>;
+> -	#address-cells = <1>;
+> -	#size-cells = <0>;
+> -	status = "okay";
+> -
+> -	wlcore: wlcore@2 {
+> -		compatible = "ti,wl1807";
+> -		reg = <2>;
+> -		pinctrl-names = "default";
+> -		pinctrl-0 = <&wifi_wlirq_pins_default>;
+> -		interrupt-parent = <&main_gpio0>;
+> -		interrupts = <41 IRQ_TYPE_EDGE_FALLING>;
+> -	};
+> -};
+> -
+> -&main_uart0 {
+> -	bootph-all;
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&main_uart0_pins_default>;
+> -	status = "okay";
+> -};
+> -
+> -&main_uart1 {
+> -	/* Main UART1 is used by TIFS firmware */
+> -	status = "reserved";
+> -};
+> -
+> -&main_uart5 {
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&mikrobus_uart_pins_default>;
+> -	status = "okay";
+> -};
+> -
+> -&main_uart6 {
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&wifi_debug_uart_pins_default>;
+> -	status = "okay";
+> -
+> -	mcu {
+> -		compatible = "ti,cc1352p7";
+> -		reset-gpios = <&main_gpio0 72 GPIO_ACTIVE_LOW>;
+> -		vdds-supply = <&vdd_3v3>;
+> -	};
+> -};
+> -
+> -&dss {
+> -	status = "okay";
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&dss0_pins_default>;
+> -};
+> -
+> -&dss_ports {
+> -	/* VP2: DPI Output */
+> -	port@1 {
+> -		reg = <1>;
+> -
+> -		dpi1_out: endpoint {
+> -			remote-endpoint = <&it66121_in>;
+> -		};
+> -	};
+> -};
+> -
+> -&mcasp1 {
+> -	status = "okay";
+> -	#sound-dai-cells = <0>;
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&mcasp_hdmi_pins_default>;
+> -	auxclk-fs-ratio = <2177>;
+> -	op-mode = <0>;          /* MCASP_IIS_MODE */
+> -	tdm-slots = <2>;
+> -	serial-dir = <  /* 0: INACTIVE, 1: TX, 2: RX */
+> -	       1 0 0 0
+> -	       0 0 0 0
+> -	       0 0 0 0
+> -	       0 0 0 0
+> -	>;
+> -	tx-num-evt = <32>;
+> -	rx-num-evt = <32>;
+> -};
+> diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
+> index ec62670d55d6..455dd86b2fc3 100644
+> --- a/configs/am62x_beagleplay_a53_defconfig
+> +++ b/configs/am62x_beagleplay_a53_defconfig
+> @@ -10,7 +10,7 @@ CONFIG_TARGET_AM625_A53_BEAGLEPLAY=y
+>  CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+>  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80b80000
+>  CONFIG_DM_GPIO=y
+> -CONFIG_DEFAULT_DEVICE_TREE="k3-am625-beagleplay"
+> +CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am625-beagleplay"
+>  CONFIG_SPL_TEXT_BASE=0x80080000
+>  CONFIG_OF_LIBFDT_OVERLAY=y
+>  CONFIG_DM_RESET=y
+> @@ -58,6 +58,7 @@ CONFIG_CMD_PMIC=y
+>  CONFIG_CMD_REGULATOR=y
+>  CONFIG_OF_CONTROL=y
+>  CONFIG_SPL_OF_CONTROL=y
+> +CONFIG_OF_UPSTREAM=y
+>  CONFIG_MULTI_DTB_FIT=y
+>  CONFIG_SPL_MULTI_DTB_FIT=y
+>  CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
+> -- 
+> 2.43.0
