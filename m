@@ -4,43 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5CBDC27C52
-	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 08:45:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14CAEC27C55
+	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 08:45:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D89188291;
+	by phobos.denx.de (Postfix) with ESMTP id 6555988363;
 	Thu,  6 Jun 2024 10:45:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21C3F88258; Thu,  6 Jun 2024 10:45:44 +0200 (CEST)
-Received: from smtp-42ad.mail.infomaniak.ch (smtp-42ad.mail.infomaniak.ch
- [84.16.66.173])
+ id 8CA138808B; Thu,  6 Jun 2024 10:45:44 +0200 (CEST)
+Received: from smtp-1909.mail.infomaniak.ch (smtp-1909.mail.infomaniak.ch
+ [185.125.25.9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2FFA8808B
- for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 10:45:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A4F64881D3
+ for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 10:45:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
  [10.4.36.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Vvyb93ShTztnm;
- Thu,  6 Jun 2024 10:45:41 +0200 (CEST)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4VvybB1qt3zh5t;
+ Thu,  6 Jun 2024 10:45:42 +0200 (CEST)
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Vvyb81rmKzFMg; Thu,  6 Jun 2024 10:45:39 +0200 (CEST)
+ id 4Vvyb93kYzzDdr; Thu,  6 Jun 2024 10:45:41 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Subject: [PATCH next v3 0/6] rockchip: display PMIC variant properly + misc
- fixes for Theobroma boards
-Date: Thu, 06 Jun 2024 10:45:30 +0200
-Message-Id: <20240606-misc-tsd-v3-0-728d721c464a@cherry.de>
+Date: Thu, 06 Jun 2024 10:45:31 +0200
+Subject: [PATCH next v3 1/6] rockchip: jaguar-rk3588: use default env size
+ for Rockchip on MMC
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIACp3YWYC/2WMTQ6DIBBGr2JmXZoBoWpXvUfThcJYZ1E1YIjGe
- PcSNjXp8vt5b4dAninAvdjBU+TA05hCeSnADu34JsEuZVCoNBqlxYeDFUtwgrA2RlqUtm4h3Wd
- PPa9Z9YSR1gVeqR04LJPfsj/KvP2rohQouqpzJEutu4YediDvt6ujLInqB97QnECVQKl01ehS2
- Qb7M3gcxxeLgfPf3wAAAA==
+Message-Id: <20240606-misc-tsd-v3-1-728d721c464a@cherry.de>
+References: <20240606-misc-tsd-v3-0-728d721c464a@cherry.de>
+In-Reply-To: <20240606-misc-tsd-v3-0-728d721c464a@cherry.de>
 To: Klaus Goger <klaus.goger@theobroma-systems.com>, 
  Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
  Heiko Stuebner <heiko.stuebner@cherry.de>, Tom Rini <trini@konsulko.com>, 
@@ -66,55 +64,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This fixes how the Rockchip PMIC variant is shown for all but RK808 by
-stripping the LSB.
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-Also fix the size of the environment on Jaguar to match the default
-(smaller) size.
+The default env size is 0x8000 when building for Rockchip SoCs with
+support for environment stored in MMC.
 
-Fix SPL_PAD_TO on Ringneck.
+Jaguar hasn't entered mass production just yet, so it's a breaking
+change we can afford in the name of consistency.
 
-Remove duplicated default value of ENV_OFFSET in puma defconfig.
-
-Remove unnecessary override of the fit offset in u-boot dtsi for Puma
-and Ringneck.
-
-Fix TPL_MAX_SIZE for Ringneck to match the (valid) default value for
-PX30 boards.
-
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
-Changes in v3:
-- add missing bitfield include in PMIC patch
-- Link to v2: https://lore.kernel.org/r/20240605-misc-tsd-v2-0-12479432c90f@cherry.de
+ configs/jaguar-rk3588_defconfig | 1 -
+ 1 file changed, 1 deletion(-)
 
-Changes in v2:
-- add patch for fixing TPL_MAX_SIZE on PX30 Ringneck
-- print show_variant when PMIC variant not found
-- use bitfield_extract_by_mask instead of using hardcoded shift operator
-- Link to v1: https://lore.kernel.org/r/20240524-misc-tsd-v1-0-b7bde1344b9e@cherry.de
+diff --git a/configs/jaguar-rk3588_defconfig b/configs/jaguar-rk3588_defconfig
+index b69cf4cd057..36bf34d97c8 100644
+--- a/configs/jaguar-rk3588_defconfig
++++ b/configs/jaguar-rk3588_defconfig
+@@ -5,7 +5,6 @@ CONFIG_ARCH_ROCKCHIP=y
+ CONFIG_SPL_GPIO=y
+ CONFIG_SF_DEFAULT_SPEED=24000000
+ CONFIG_SF_DEFAULT_MODE=0x2000
+-CONFIG_ENV_SIZE=0x1f000
+ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-jaguar"
+ CONFIG_ROCKCHIP_RK3588=y
+ CONFIG_ROCKCHIP_BOOT_MODE_REG=0x0
 
----
-Quentin Schulz (6):
-      rockchip: jaguar-rk3588: use default env size for Rockchip on MMC
-      rockchip: rk3399-puma: remove default value from defconfig
-      rockchip: rk3399-puma: remove unnecessary simple-bin:fit:offset override
-      rockchip: px30-ringneck: Update SPL_PAD_TO Kconfig option
-      power: rk8xx: properly print all supported PMICs name
-      rockchip: ringneck-px30: fix TPL_MAX_SIZE
-
- arch/arm/dts/px30-ringneck-haikou-u-boot.dtsi | 8 --------
- arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi   | 6 ------
- configs/jaguar-rk3588_defconfig               | 1 -
- configs/puma-rk3399_defconfig                 | 1 -
- configs/ringneck-px30_defconfig               | 3 +--
- drivers/power/pmic/rk8xx.c                    | 6 +++---
- 6 files changed, 4 insertions(+), 21 deletions(-)
----
-base-commit: 8887ffb625f65475fd6619f8b05fb7a5a12b016b
-change-id: 20240524-misc-tsd-e08551c01c8a
-
-Best regards,
 -- 
-Quentin Schulz <quentin.schulz@cherry.de>
+2.45.2
 
