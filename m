@@ -4,50 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CF24C27C54
-	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 13:03:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11987C27C55
+	for <u-boot@archiver.kernel.org>; Thu,  6 Jun 2024 13:36:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FDDE883AA;
-	Thu,  6 Jun 2024 15:03:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 388AC88414;
+	Thu,  6 Jun 2024 15:36:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1717679000;
-	bh=iNQAEz1SXQr5mv/7JOm+IOln8rFvhdf48ItkZ8tpjHg=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=i+UFup7mp3By51Mq9Z1XUEeF5hLXVIbN6+xu4KbPMks71EOz/0XxTY7i4482U6eiw
-	 05w/zs4GOFq1/tzFH3GewxinvSiz0iYKcVpWKPrrITNxIi46GNFena51ZJxvWlZS/r
-	 rHooqXS/Iq/zEwpYIU720tvp4E/ykUZ/FK4R7tu4kdBbr/02ZxSY3Fon4+wYL2+ntz
-	 QL+V29o2G8l+9cGHerDGkyCpXSBoitnYEBjgP4godFV635QOgR1KZK9+YyUrGLBlax
-	 H+pphLLToSU7oJtjL6NyUf3/P63xzTI5XPMHPuLqsdXaljTGd7gYJT1PaZUnAfeoSy
-	 qFb6aoebr2SNA==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MpIlD4SB";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id B2A3D883CE; Thu,  6 Jun 2024 15:36:56 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id AE68F87666;
- Thu,  6 Jun 2024 15:03:18 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1717678999;
- bh=iNQAEz1SXQr5mv/7JOm+IOln8rFvhdf48ItkZ8tpjHg=;
- h=From:To:Cc:Subject:Date:From;
- b=rkXx3qRFi8JXDKuh9OM8PSvg2foboBdDt7FbL6cnkrCp8hyr/oY4evDB/KzcxwBfj
- UUwkcwQch+BXEYM4uz7ZcfCrkIfZA82iIOOWP4cDEuRJfDBPFB3O/YMY0ZwkK/zURu
- EdcvuxTkV/flcrmsfuGKrZN+1KD0w44M6UKVZB/zFKkA0jNJ9zzdFzUdVX7DGSmoqP
- rmsP0EGl2//7aDe2P23wnPH05kS0Ot6CBqiSodmZGL3Boji+XP2MDLXafBvJ4UQuxf
- dxabaGsVzKF4yMUdLKKJJj25QLed8/mUxXvbfHEgj8DfgBQiuTLO+sC+/i0VXxkUXf
- Iq59G1aPe5G7Q==
-From: Marek Vasut <marex@denx.de>
+ by phobos.denx.de (Postfix) with ESMTPS id 39BBB878E2
+ for <u-boot@lists.denx.de>; Thu,  6 Jun 2024 15:36:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-42136faf3aeso6331465e9.2
+ for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 06:36:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1717681013; x=1718285813; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=AHE/C5ynmqIm2V1kHQaVhNVTBeVr7o5cQodyqdDe4Sc=;
+ b=MpIlD4SBV819/AboWyusZVGO+UvM/asyh1buoitZuVsK83HDt/7xHvf39O6uQoCusC
+ bEGczD/MB/w9mbQf/FUmyvwu5GiPFQA4CyOuzJbwxKVS+81ZvUBjam3GBTh7LORn2FyR
+ XUJ1NpzMhq2bux03hrLRK/sR43+gojRNeo1yiKvfVnOxUxzFGNVgD8QFOGSGnDQBuevB
+ M061wRcoNxo7uQ4UfYPhC2KmEUVv8r9NrstGxaxgy3B8oWfIrBCe9Ro3I3KM8/pxD9m1
+ bMDcwARjFKJKDQCRZ/6xfjPIIUup3bWwqDYEndiHbLpYihs1mao73SJrTuBwWVbUgJ3H
+ b0cQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717681013; x=1718285813;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=AHE/C5ynmqIm2V1kHQaVhNVTBeVr7o5cQodyqdDe4Sc=;
+ b=KK3LDOK1Ul1Fsj31wwUxUAMVSy9tWp5myZZEzxtY4s64euVUUgiMPIrV1H6psEQ1K5
+ LmeFXfvjJlC78puHN8QJUA7rH9BKimxl1vAPe1Ay4YF6hYsPOweXyEfeWSKu+vdfPovu
+ dvRDXX3VRg5AMWHFWuYN4dFzDFoATo8xaYdvpXlZqJfhdWhCnMTI8wiPcsF+sKPq7hGr
+ 3xi2oAzqNtcDjkFRTlcSZ1hTKePwtqPsiUHj0hH7UuJfsdsxgZHpMdts2qUh9XyBj5B6
+ n0u8+HxiqiTmnCrUUGVdnwhHxY7Y2OXl42S9x30U5aZubtDJnPqRvSR73R5hdRTzJikj
+ TaNA==
+X-Gm-Message-State: AOJu0YyqsXXwWeHuO9HXTGqFME0tvCdRVNT9jCPevn+OPEsjAUdGJSst
+ wI7zXc4s81ABie1sYfSh/2XeiQyIVd4bPxbgehAN6C63+IWqodmvz0dX9LSG08KqJs3+J8uG2Pz
+ FXPHUJ3cK
+X-Google-Smtp-Source: AGHT+IH1chTq/XmFEL5gqtJEX11REQc/EUzmW2ROUgGyF5HHsCj7SgebYeI7Tqvdf0CI89OLE7SrDA==
+X-Received: by 2002:a05:600c:4e0b:b0:421:5f00:90b9 with SMTP id
+ 5b1f17b1804b1-4215f009442mr12373935e9.38.1717681012692; 
+ Thu, 06 Jun 2024 06:36:52 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:6417:8cf6:a7f7:ee38])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4215c19d52dsm23111955e9.8.2024.06.06.06.36.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 06 Jun 2024 06:36:52 -0700 (PDT)
+From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- u-boot@dh-electronics.com, uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH] ARM: stm32: Fix livetree conversion on STM32MP15xx DHSOM
-Date: Thu,  6 Jun 2024 15:02:46 +0200
-Message-ID: <20240606130305.24563-1-marex@denx.de>
-X-Mailer: git-send-email 2.43.0
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>
+Subject: [PATCH v3 00/12] Introduce the lwIP network stack
+Date: Thu,  6 Jun 2024 15:35:55 +0200
+Message-Id: <cover.1717680809.git.jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -66,64 +91,204 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Unlike fdt_node_check_compatible() which returns 0 if node is compatible,
-ofnode_device_is_compatible() return true which is non-zero if node is
-compatible. The intention of the code is to exit from the function in
-case the node is not compatible with "micrel,ks8851-mll". Add the missing
-invert into the conditional to reinstate original behavior.
+This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
+library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
+stack [2] [3] as an alternative to the current implementation in net/,
+selectable with Kconfig, and ultimately keep only lwIP if possible. Some
+reasons for doing so are:
+- Make the support of HTTPS in the wget command easier. Javier T. (CC'd)
+has some additional lwIP and Mbed TLS patches to do so. With that it
+becomes possible to fetch and launch a distro installer such as Debian
+etc. using a secure, authenticated connection directly from the U-Boot
+shell. Several use cases:
+  * Authentication: prevent MITM attack (third party replacing the
+binary with a different one)
+  * Confidentiality: prevent third parties from grabbing a copy of the
+image as it is being downloaded
+  * Allow connection to servers that do not support plain HTTP anymore
+(this is becoming more and more common on the Internet these days)
+- Possibly benefit from additional features implemented in lwIP
+- Less code to maintain in U-Boot
 
-This exposes a follow up problem caused by conversion to DM based FMC2 EBI
-driver, where the FMC2 EBI is not configured when accessed by this code.
-Probe the KS8851 MAC, which also configures the FMC2 EBI as a dependency,
-so that the KS8851 MAC CCR register can be accessed over the FMC2 EBI bus
-and checked for EEPROM present bit.
+Prior to applying this series, the lwIP stack needs to be added as a
+Git subtree with the following command:
 
-Fixes: 5a605b7c8615 ("board: dhelectronics: stm32mp1: convert to livetree")
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@dh-electronics.com
-Cc: u-boot@lists.denx.de
-Cc: uboot-stm32@st-md-mailman.stormreply.com
----
- board/dhelectronics/dh_stm32mp1/board.c | 15 +++++++++++++--
- 1 file changed, 13 insertions(+), 2 deletions(-)
+ $  git subtree add --squash --prefix lib/lwip/lwip https://git.savannah.gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
 
-diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
-index ebd45f9053f..4f4f537fee5 100644
---- a/board/dhelectronics/dh_stm32mp1/board.c
-+++ b/board/dhelectronics/dh_stm32mp1/board.c
-@@ -76,14 +76,25 @@
- 
- static bool dh_stm32_mac_is_in_ks8851(void)
- {
--	ofnode node;
-+	struct udevice *udev;
- 	u32 reg, cider, ccr;
-+	char path[256];
-+	ofnode node;
-+	int ret;
- 
- 	node = ofnode_path("ethernet1");
- 	if (!ofnode_valid(node))
- 		return false;
- 
--	if (ofnode_device_is_compatible(node, "micrel,ks8851-mll"))
-+	ret = ofnode_get_path(node, path, sizeof(path));
-+	if (ret)
-+		return false;
-+
-+	ret = uclass_get_device_by_of_path(UCLASS_ETH, path, &udev);
-+	if (ret)
-+		return false;
-+
-+	if (!ofnode_device_is_compatible(node, "micrel,ks8851-mll"))
- 		return false;
- 
- 	/*
+The first patch introduces a new Kconfig symbol: NET_LWIP, which selects
+the lwIP implementation instead of the current one (NET). Contrary to the
+approach chosen by Maxim in [1], NET_LWIP and NET cannot be enabled
+simultaneously. The rationale is we want to start from a clean state and
+not pull potentially duplicated functionality from both stacks. Note
+however that a few files are still built in net/, they are the ones
+related to ethernet device management and the ethernet bootflow.
+
+The second patch introduces the Makefile to build lwIP when NET_LWIP is
+enabled.
+
+The subsequent patches implement various network-oriented commands and
+features: dhcp, dns, ping, tftpboot, wget.
+
+NET_LWIP is not enabled by default because it lacks functionality compared
+to NET and many CI tests would fail to run or even build.
+
+Some tests (dm dsa/eth) are disabled when NET_LWIP is selected because
+they make strong assumptions on how the network stack is implemented and
+how the packet flow occurs. For example, an ARP exchange is expected
+when an ICMP packet goes out, but with lwIP no exchange will occur if the
+host IP is already in the the ARP cache.
+
+Due to the above and in order to provide some level of testing, a new QEMU
+configuration is introduced (qemu_arm64_lwip_defconfig) which is the same
+as qemu_arm64_lwip_defconfig but with NET_LWIP and CMD_*_LWIP enabled.
+Tests are added to test/py/tests/test_net.py for that configuration.
+
+Changes in v3:
+
+- Make NET_LWIP a Kconfig choice in patch "net: introduce alternative
+implementation as net-lwip/" (Tom R.)
+- Drop the patch introducing lwIP as a Git subtree and document the git
+command in the cover letter instead (Tom R.)
+- "net-lwip: add TFTP support and tftpboot command": use the same
+"Bytes transferred =" message as in the legacy implementation (Tom R.,
+Maxim U.)
+- Drop "test/py: net: add _lwip variants of dhcp, ping and tftpboot
+tests" which is not needed anymore.
+- Add missing kfree() calls in cmd/net-common.c and fix the parsing of
+decimal address in net-lwip/wget.c (patch "net-lwip: add wget command")
+(Maxim U.)
+- "net-lwip: add ping command": drop the ICMP payload (Ilias A.). Set
+the sequence number to zero when entering ping_loop().
+
+Changes in v2:
+
+** Address comments from Ilias A.
+
+- "net-lwip: add wget command"
+Implement the wget_with_dns() function to do most of the wget work and
+call it from do_wget(). This allows to simplify patch "net-lwip: add
+support for EFI_HTTP_BOOT".
+
+- "net-lwip: import net command from cmd/net.c"
+Move a few functions from cmd/net.c to a new file cmd/net-common.c
+rather than duplicating then in cmd/net-lwip.c.
+
+- "net-lwip: add support for EFI_HTTP_BOOT"
+Since wget_with_dns() is now implemented in "net-lwip: add wget command",
+just enable the wget command when the lwIP stack is enabled and
+EFI_HTTP_BOOT is requested.
+
+** Address comments from Tom R.
+
+- "net-lwip: add DHCP support and dhcp commmand",
+  "net-lwip: add TFTP support and tftpboot command",
+  "net-lwip: add ping command",
+  "net-lwip: add dns command",
+  "net-lwip: add wget command"
+Do not introduce new CMD_XXX_LWIP symbols and use existing CMD_XXX
+instead.
+
+- "configs: add qemu_arm64_lwip_defconfig"
+Use #include <configs/qemu_arm64_defconfig>.
+
+- "net-lwip: import lwIP library under lib/lwip"
+Patch removed and replaced by the introduction of a Git subtree:
+"Squashed 'lib/lwip/lwip/' content from commit 0a0452b2c3".
+
+Note that I have not yet addressed your comments on "test: dm: dsa,
+eth: disable tests when CONFIG_NET_LWIP=y"). I need some more time
+for that and I think running CI on this v2 will help better understand
+what is needed for v3.
+
+** Miscellaneous improvements
+
+- "net: introduce alternative implementation as net-lwip/":
+
+* Make DFU_OVER_TFTP not DFU_TFTP incompatible with NET_LWIP. It seems
+quite natural to supplement "depends on NET" with "&& !NET_LWIP".
+* Make PROT_*_LWIP not visible by removing the Kconfig prompt.
+
+[1] https://lore.kernel.org/all/20231127125726.3735-1-maxim.uvarov@linaro.org/
+[2] https://www.nongnu.org/lwip/
+[3] https://en.wikipedia.org/wiki/LwIP
+
+CC: Javier Tia <javier.tia@linaro.org>
+
+Jerome Forissier (12):
+  net: introduce alternative implementation as net-lwip/
+  net-lwip: build lwIP
+  net-lwip: add DHCP support and dhcp commmand
+  net-lwip: add TFTP support and tftpboot command
+  net-lwip: add ping command
+  net-lwip: add dns command
+  net-lwip: add wget command
+  test: dm: dsa, eth: disable tests when CONFIG_NET_LWIP=y
+  cmd: bdinfo: enable -e when CONFIG_CMD_NET_LWIP=y
+  configs: add qemu_arm64_lwip_defconfig
+  MAINTAINERS: net-lwip: add myself as a maintainer
+  CI: add qemu_arm64_lwip to the test matrix
+
+ .azure-pipelines.yml              |   7 +
+ Kconfig                           |  40 ++++++
+ MAINTAINERS                       |  11 ++
+ Makefile                          |   3 +-
+ boot/Kconfig                      |   5 +-
+ cmd/Kconfig                       |  44 ++++++
+ cmd/Makefile                      |   7 +
+ cmd/bdinfo.c                      |   5 +-
+ cmd/efidebug.c                    |   8 +-
+ cmd/net-common.c                  | 115 +++++++++++++++
+ cmd/net-lwip.c                    |  49 +++++++
+ cmd/net.c                         | 115 ---------------
+ common/Kconfig                    |   2 +-
+ common/board_r.c                  |   4 +-
+ common/spl/Kconfig                |   1 +
+ configs/qemu_arm64_lwip_defconfig |   3 +
+ drivers/dfu/Kconfig               |   2 +-
+ drivers/fastboot/Kconfig          |   4 +-
+ drivers/net/Kconfig               |   2 +-
+ drivers/net/phy/Kconfig           |   2 +-
+ drivers/usb/gadget/Kconfig        |   2 +-
+ include/net-lwip.h                | 140 +++++++++++++++++++
+ include/net.h                     |   2 +-
+ lib/Makefile                      |   2 +
+ lib/lwip/Makefile                 |  57 ++++++++
+ lib/lwip/u-boot/arch/cc.h         |  43 ++++++
+ lib/lwip/u-boot/arch/sys_arch.h   |   0
+ lib/lwip/u-boot/limits.h          |   0
+ lib/lwip/u-boot/lwipopts.h        | 197 ++++++++++++++++++++++++++
+ net-lwip/Kconfig                  |  37 +++++
+ net-lwip/Makefile                 |  18 +++
+ net-lwip/dhcp.c                   | 114 +++++++++++++++
+ net-lwip/dns.c                    | 107 ++++++++++++++
+ net-lwip/eth_internal.h           |  35 +++++
+ net-lwip/net-lwip.c               | 224 ++++++++++++++++++++++++++++++
+ net-lwip/ping.c                   | 163 ++++++++++++++++++++++
+ net-lwip/tftp.c                   | 209 ++++++++++++++++++++++++++++
+ net-lwip/wget.c                   | 180 ++++++++++++++++++++++++
+ net/Kconfig                       |  14 --
+ test/dm/dsa.c                     |   2 +
+ test/dm/eth.c                     |   4 +
+ 41 files changed, 1832 insertions(+), 147 deletions(-)
+ create mode 100644 cmd/net-common.c
+ create mode 100644 cmd/net-lwip.c
+ create mode 100644 configs/qemu_arm64_lwip_defconfig
+ create mode 100644 include/net-lwip.h
+ create mode 100644 lib/lwip/Makefile
+ create mode 100644 lib/lwip/u-boot/arch/cc.h
+ create mode 100644 lib/lwip/u-boot/arch/sys_arch.h
+ create mode 100644 lib/lwip/u-boot/limits.h
+ create mode 100644 lib/lwip/u-boot/lwipopts.h
+ create mode 100644 net-lwip/Kconfig
+ create mode 100644 net-lwip/Makefile
+ create mode 100644 net-lwip/dhcp.c
+ create mode 100644 net-lwip/dns.c
+ create mode 100644 net-lwip/eth_internal.h
+ create mode 100644 net-lwip/net-lwip.c
+ create mode 100644 net-lwip/ping.c
+ create mode 100644 net-lwip/tftp.c
+ create mode 100644 net-lwip/wget.c
+
 -- 
-2.43.0
+2.40.1
 
