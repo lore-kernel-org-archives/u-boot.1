@@ -4,76 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC0BDC27C5F
-	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 18:11:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34D82C27C53
+	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 18:53:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D3968844B;
-	Fri,  7 Jun 2024 20:11:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 3F5D088464;
+	Fri,  7 Jun 2024 20:53:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="tA5VhoDG";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 811BB88464; Fri,  7 Jun 2024 20:11:53 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1827C8839C
- for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 20:11:51 +0200 (CEST)
+ id 82671883AA; Fri,  7 Jun 2024 20:53:35 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 1DEEC8844F
+ for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 20:53:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1717783906; x=1718388706; i=xypron.glpk@gmx.de;
- bh=QLV30QDBbssc9zRw7NyQmwAJNRFbPvGHr2EioYeOFMc=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=tA5VhoDG0O3GWEnt1zjzlljwhctsJxalp5L25MJmhH2/mn+tC08cDXYwVMQJSVp7
- 2/KNxJf84sMxSqX/oW3dYpGgiv1oGlS7FidSkwWHglXqAo42+rINRltdEdZWoIrYM
- D3q8KM6ef9G4kSF0KjM1teiBVXoYzq4vyYfvYNt8ofYnutwCMaZDXt849OWtTr1ed
- z/CXIYWOuToWXSShZrlKY36I300BBLpy6qGtyQtCFQMzLy/gzN9g7VzDfVsLy0sdU
- MWWKP6/RI6frcCHXK9uHeuP2PgR8xDdYfSjnBOYFSZnFNpzfPJrv9GQJmgzrWnl6w
- aMUAWP9Gkk0Gx8S80A==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.126] ([109.42.178.114]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1N95e9-1sTEjV2m9P-00ubiR; Fri, 07
- Jun 2024 20:11:46 +0200
-Message-ID: <786590fb-2f5f-4855-bcad-3ce3f1cf25ff@gmx.de>
-Date: Fri, 7 Jun 2024 20:11:46 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] doc: Add UEFI supplement document
-To: Jiaxun Yang <jiaxun.yang@flygoat.com>
+ spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B6D261480;
+ Fri,  7 Jun 2024 11:53:56 -0700 (PDT)
+Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id BE43E3F792;
+ Fri,  7 Jun 2024 11:53:29 -0700 (PDT)
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-References: <20240529-efi-spec-v1-1-0668e4d19683@flygoat.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240529-efi-spec-v1-1-0668e4d19683@flygoat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:lZ8AEFEE7opQnLLjbJM7nCXsPEuL7cbRmjH0SHTpnBemSL4CO0b
- gV2DaThMSVLgTrNGdBAjPbCG4r5e5Aj7wNdVPbfY3VMNCgi5B5J/W1KRmi8DrwWbjOWrwQq
- hNOmLD6XqaefSaHB1rEztDKuJF6kCBJmWt24G1fUpXKj+UHyqxD8zYD+/unBOaZEDsThq2H
- +HAmZNZSkAZ6Yf4qcHVfA==
-UI-OutboundReport: notjunk:1;M01:P0:P0DDJRn3eyM=;n7Q6o3KhYxPOhzKWSHHKm/NzdnK
- s6sJZsx9xBxPAD0WFAJyzACH9xnWxgmLbLlguEGv5bPg1wSrYltEZKoAjpQkLm70acSO/Vui6
- lRvFAXMAojOc2OqLgXAA7DPeidzXXywWHOzNILw/yGfqXCib6cf/aFFjRivFUXvqH2OS86jVB
- d2EnS/kS0avr1nL4mtdAYURC21twBijKZ4Ub6uckyJKWM+BojZ9GtSScODRVWlxrNdC434wqS
- Xb+tzcDRBa7Ns0mkDPVtBl5QplAUbtgr3sCcv7CTXpx+XdXkuqYYHQYwjsztnx8IkhfbvMPhf
- 7y7tgwWxnx5xhUOixIQ+oT6zc2kC4d7Rx9QjgxLxHL8RBYH3seU2itPTatcQJgOmibja6kSO1
- p8Nnyty5ywrZZPShhhlzQ4wrHkNnb2ueoRaaqnJgV9SsKrSMMx9CljQgHtIs+MXKwmQnHWMq8
- MZGYu0M4h9CEvky2vw0F2MdsyIVXfWOdtaa2DWv78Z0vKnlOt3ad+NFg2sWXlGtPjwPMkapZM
- eHCPLA0lRc5moXoRZrok6xZtcGryUu/fVkIYXvtIK4mULQUFDJargrIeinwwSlefK7fxe+31x
- QizkOSAicsrKgTWdYLCHulFZVZeCt+gWbIH3/slUrOS3ezcw/YXVLRgVYyGdrh/ZP+QoHTneV
- OYDIrbaXHoC8HH26UQjBQLcII/MkW7FM7+NavuHFsGtW8wm/AisL3lcNxGZrUp6JVPza6YuJb
- UQyYFPdqwkgU8qlrxNYR3BzhjvW66EzvSJps7L9IPXMa/LQ4vXh69/djbk5zmFE1w2k46ic6s
- FTMTJVHyubKrRQ7L7LBZbaGKi9chuF3OsaSrwmBZyiZCg=
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>,
+ Fabio Estevam <festevam@gmail.com>
+Subject: [RFC PATCH 00/31] Make U-Boot memory reservations coherent
+Date: Sat,  8 Jun 2024 00:22:09 +0530
+Message-Id: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,212 +55,149 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 29.05.24 15:36, Jiaxun Yang wrote:
-> Add UEFI supplement document to define some behaviours
-> on architectures not covered by the original specification.
->
-> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
-> ---
-> Hi all,
->
-> This document is in response to discussion at [1]. It is produced
-> based on my attempt to port U-Boot UEFI to MIPS and Xtensa. I also
-> plan to try m68k.
->
-> Please review
->
-> Thanks
-> [1]: https://lore.kernel.org/u-boot/CAC_iWjLbY6+FaUYQw2Zv5y5byCnXRHxfzvr=
-Ff1dMyJX+ANP9VQ@mail.gmail.com/
-> ---
->   doc/develop/uefi/index.rst           |  1 +
->   doc/develop/uefi/uefi_supplement.rst | 73 ++++++++++++++++++++++++++++=
-++++++++
->   2 files changed, 74 insertions(+)
->
-> diff --git a/doc/develop/uefi/index.rst b/doc/develop/uefi/index.rst
-> index e26b1fbe05c5..a274fff88754 100644
-> --- a/doc/develop/uefi/index.rst
-> +++ b/doc/develop/uefi/index.rst
-> @@ -11,6 +11,7 @@ can be run an UEFI payload.
->      :maxdepth: 2
->
->      uefi.rst
-> +   uefi_supplement.rst
->      u-boot_on_efi.rst
->      iscsi.rst
->      fwu_updates.rst
-> diff --git a/doc/develop/uefi/uefi_supplement.rst b/doc/develop/uefi/uef=
-i_supplement.rst
-> new file mode 100644
-> index 000000000000..cb20cd290912
-> --- /dev/null
-> +++ b/doc/develop/uefi/uefi_supplement.rst
-> @@ -0,0 +1,73 @@
-> +.. SPDX-License-Identifier: GPL-2.0+
-> +.. Copyright (c) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
-> +
-> +U-Boot Supplement to UEFI Specifications
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +
-> +Motivation
-> +----------
-> +
-> +The UEFI specifications are designed to be platform-independent, enabli=
-ng the
-> +implementation of UEFI-like API support across various architectures. H=
-owever,
-> +some platform-dependent aspects and constraints remain. This document p=
-rovides
-> +a supplement to the UEFI specifications for U-Boot, clarifying these pl=
-atform
-> +dependent details for architectures not covered by the original specifi=
-cations.
 
-This does not explain why we should bother about any non-UEFI
-architecture. It does not list relevant architectures and does not
-provide any evidence that this more than an academic endeavor.
+The aim of this patch series is to fix the current state of
+incoherence between modules when it comes to memory usage. The primary
+issue that this series is trying to fix is that the EFI memory module
+which is responsible for allocating and freeing memory, does not have
+any visibility of the memory that is being used by the LMB
+module. This is further complicated by the fact that the LMB
+allocations are caller specific -- the LMB memory map is not global
+nor persistent. This means that the memory "allocated" by the LMB
+module might be relevant only for a given function. Hence one of the
+requirements for making the memory usage visible across modules is to
+make LMB allocations persistent and global, and then have means to
+communicate the use of memory across modules.
 
-All git repositories you mentioned in you MIPS series have not seen any
-update in the last four years.
+The first set of patches in this series work on making the LMB memory
+map persistent and global. This is being done keeping in mind the
+usage of LMB memory by platforms where the same memory region can be
+used to load multiple different images. What is not allowed is to
+overwrite memory that has been allocated by the other module,
+currently the EFI memory module. This is being achieved by introducing
+a new flag, LMB_NOOVERWRITE, which represents memory which cannot be
+re-requested once allocated.
 
-If any company were sincerely interested in using UEFI on such
-architectures, wouldn't they contribute to the specification like has
-been done for LoongArch and RISC-V?
+The second set of patches are then introducing a notification
+mechanism to indicate any changes to a respective module's memory
+map. This way, any memory allocation/reservation by a module gets
+notified to any interested listners, who then update their memory map
+accordingly, thus keeping memory usage coherent.
 
-It does not make sense to define UEFI for non-UEFI architectures in
-U-Boot. Isn't there any existing documentation for UEFI on MIPS?
+Todo's
+------
+I have run these patches through CI, but the LMB unit tests need an
+overhaul. I have currently marked these tests for manual run, as
+running these would obviously tamper the LMB memory map, thus
+affecting subsequent tests. The current set of LMB tests are written
+with the assumption of local LMB memory maps. This needs to be
+reworked.
 
-> +
-> +Architectural Conventions
-> +-------------------------
-> +
-> +The UEFI specifications cover IA32, X64, ARM, AARCH64, RISC-V, LoongArc=
-h, and
+Secondly, there needs to be a test written for testing the various
+scenarios of memory being allocated and freed by different modules,
+namely LMB and EFI. I have written a couple of commands for testing
+the changes that I have made -- I have also included these temporary
+commands to assist anyone who might want to test these changes. But I
+will be working on adding a more comprehensive test.
 
-There is only one UEFI specification.
+Lastly, as the series touches common code, there is obviously an
+increase in the size of the image, moreover since the LMB memory is
+now persistent, and the variables do not reside on the stack. I want
+to check if there can be ways of decreasing the size impact of the
+changes.
 
-%s/specifications cover/specification covers/
 
-> +Itanium architectures. This document extends the UEFI specifications to=
- include
-> +all architectures supported by U-Boot.
-> +
-> +The following conventions are used for these architectures:
-> +
-> +- For architectures with multiple ABIs, we adhere to the calling conven=
-tions
-> +  used by the Linux kernel for the same architecture.
-> +
-> +- Optional CPU registers (floating-point, SIMD) are excluded from calli=
-ng
-> +  conventions. However, the UEFI payload should be able to utilize them=
- if
-> +  available.
-> +
-> +- Control is handed over to the UEFI payload at the privilege level use=
-d
-> +  by the Linux kernel for the same architecture.
+Sughosh Ganu (31):
+  lmb: remove the unused lmb_is_reserved() function
+  lmb: staticize __lmb_alloc_base()
+  lmb: make the lmb reservations persistent
+  lmb: remove local instances of the lmb structure variable
+  lmb: pass a flag to image_setup_libfdt() for lmb reservations
+  lmb: reserve and add common memory regions post relocation
+  lmb: remove lmb_init_and_reserve_range() function
+  lmb: replcace the lmb_init_and_reserve() function
+  lmb: allow for resizing lmb regions
+  event: add events to notify memory map changes
+  lib: Kconfig: add a config symbol for getting memory map updates
+  add a function to check if an address is in RAM memory
+  efi_memory: notify of any changes to the EFI memory map
+  lmb: notify of any changes to the LMB memory map
+  efi_memory: add an event handler to update memory map
+  lmb: add an event handler to update memory map
+  lmb: remove call to efi_lmb_reserve()
+  sandbox: iommu: remove lmb allocation in the driver
+  zynq: lmb: do not add to lmb map before relocation
+  test: cedit: use allocated address for reading file
+  test: event: update the expected event dump output
+  test: lmb: run the LMB tests only on sandbox
+  test: lmb: initialise the lmb structure before tests
+  test: lmb: add a test case for checking overlapping region add
+  test: lmb: adjust the test case to handle overlapping regions
+  test: lmb: run lmb tests only manually
+  test: bdinfo: dump the global LMB memory map
+  cmd: bdinfo: only dump the current LMB memory
+  temp: mx6sabresd: bump up the size limit of the board
+  temp: cmd: efi_mem: add a command to test efi alloc/free
+  temp: cmd: efi: add a command to dump EFI memory map
 
-This does not provide enough detail. The Linux kernel can run at
-different privilege levels on the same architecture, e.g. in S-mode or
-M-mode on RISC-V.
+ arch/arc/lib/cache.c                 |   4 +-
+ arch/arm/lib/stack.c                 |   4 +-
+ arch/arm/mach-apple/board.c          |  17 +-
+ arch/arm/mach-snapdragon/board.c     |  17 +-
+ arch/arm/mach-stm32mp/dram_init.c    |   8 +-
+ arch/arm/mach-stm32mp/stm32mp1/cpu.c |   6 +-
+ arch/m68k/lib/bootm.c                |   7 +-
+ arch/microblaze/lib/bootm.c          |   4 +-
+ arch/mips/lib/bootm.c                |  11 +-
+ arch/nios2/lib/bootm.c               |   4 +-
+ arch/powerpc/cpu/mpc85xx/mp.c        |   4 +-
+ arch/powerpc/include/asm/mp.h        |   4 +-
+ arch/powerpc/lib/bootm.c             |  14 +-
+ arch/riscv/lib/bootm.c               |   4 +-
+ arch/sandbox/cpu/cpu.c               |   5 +
+ arch/sh/lib/bootm.c                  |   4 +-
+ arch/x86/lib/bootm.c                 |   4 +-
+ arch/xtensa/lib/bootm.c              |   4 +-
+ board/xilinx/common/board.c          |  33 --
+ boot/bootm.c                         |  26 +-
+ boot/bootm_os.c                      |   5 +-
+ boot/image-board.c                   |  34 +--
+ boot/image-fdt.c                     |  36 +--
+ cmd/Makefile                         |   2 +
+ cmd/bdinfo.c                         |   5 +-
+ cmd/booti.c                          |   2 +-
+ cmd/bootz.c                          |   2 +-
+ cmd/efi_map_dump.c                   |  28 ++
+ cmd/efi_memory.c                     | 155 ++++++++++
+ cmd/elf.c                            |   2 +-
+ cmd/load.c                           |   7 +-
+ common/board_r.c                     |  20 ++
+ common/event.c                       |   4 +
+ configs/mx6sabresd_defconfig         |   2 +-
+ drivers/iommu/apple_dart.c           |   8 +-
+ drivers/iommu/sandbox_iommu.c        |  17 +-
+ fs/fs.c                              |   7 +-
+ include/efi_loader.h                 |   2 +
+ include/event.h                      |  28 ++
+ include/image.h                      |  27 +-
+ include/lmb.h                        |  96 +++---
+ lib/Kconfig                          |  10 +
+ lib/efi_loader/efi_dt_fixup.c        |   2 +-
+ lib/efi_loader/efi_helper.c          |   2 +-
+ lib/efi_loader/efi_memory.c          | 127 +++++++-
+ lib/lmb.c                            | 442 ++++++++++++++++++---------
+ net/tftp.c                           |   5 +-
+ net/wget.c                           |   5 +-
+ test/boot/cedit.c                    |   5 +-
+ test/cmd/bdinfo.c                    |  22 +-
+ test/lib/Makefile                    |   2 +-
+ test/lib/lmb.c                       | 274 +++++++++--------
+ test/py/tests/test_event_dump.py     |   2 +
+ 53 files changed, 1001 insertions(+), 570 deletions(-)
+ create mode 100644 cmd/efi_map_dump.c
+ create mode 100644 cmd/efi_memory.c
 
-> +
-> +- Identity mapping (i.e., VA =3D=3D PA mapping) is preferred for UEFI. =
-However,
-> +  this may not be possible for some architectures. In such cases, if th=
-e
-> +  processor supports a default linear translation, it should be used.
-> +
-> +- Endianness: UEFI specifications enforce little-endian architectures.
-> +  However, U-Boot supports both little-endian and big-endian architectu=
-res.
-> +  For big-endian architectures, UEFI data structures should be stored i=
-n
-> +  native endianness, with exceptions explicitly specified.
+-- 
+2.34.1
 
-Why do you bother about big-endian systems? MIPS supports low-endian.
-Linux distros like Debian have dropped big-endian MIPS support.
-
-If found https://www.ventoy.net/en/doc_mips64el.html (MIPS64EL UEFI) but
-nothing describing big-endian usage of UEFI.
-
-> +
-> +UEFI Images
-> +-----------
-> +
-> +The UEFI specifications define the PE/COFF image format for UEFI applic=
-ations.
-> +U-Boot extends this format as follows:
-
-The UEFI specification does not define the PE/COFF image format. It
-prescribes its usage.
-
-> +
-> +- **PE32+ Machine Type**: UEFI specifications define machine types for =
-supported
-> +  architectures. For machines not covered by UEFI specifications, we us=
-e the
-> +  machine type defined by the Microsoft PE/COFF specification if possib=
-le.
-> +  Otherwise, we use the ``IMAGE_FILE_MACHINE_UNKNOWN`` (0) machine type=
-.
-> +  U-Boot should always accept ``IMAGE_FILE_MACHINE_UNKNOWN`` as a valid
-> +  machine type.
-
-We should not accept IMAGE_FILE_MACHINE_UNKNOWN on an architecture that
-has a machine type defined in the PE-COFF specification.
-
-Which MIPS machine type are you missing?
-
-> +
-> +- **Header Endianness**: PE/COFF header data fields are always stored a=
-s
-> +  little-endian, regardless of the target architecture's endianness.
-> +
-> +- **DOS Stub**: To accommodate various boot image formats, we relax the=
- requirement
-> +  for a DOS stub in the UEFI image. U-Boot should accept UEFI images wi=
-thout a DOS
-> +  stub and MZ signature. However, U-Boot still expects the PE/COFF head=
-er at the
-> +  file offset specified at offset 0x3C.
-
-Why would anybody create such an invalid file and expect it to be
-interpreted as EFI?
-
-Shouldn't you fix the software creating such invalid files?
-
-This topic is related to the question of which specification has been
-used to create UEFI implementations like
-https://github.com/kontais/EFI-MIPS.
-
-> +
-> +I/O Device Access
-> +-----------------
-> +
-> +UEFI specifications define the EFI_DEVICE_IO_PROTOCOL and EFI_PCI_IO_PR=
-OTOCOL
-> +for accessing I/O devices. U-Boot extends these specifications as follo=
-ws:
-
-These protocols are not used in U-Boot, yet.
-
-Best regards
-
-Heinrich
-
-> +
-> +- All I/O access is performed using the CPU's native endianness.
-> +  For big-endian architectures, U-Boot should convert data to/from litt=
-le-endian
-> +  before/after accessing I/O devices.
->
-> ---
-> base-commit: 46ff00bea5dd2dd247d5e2fdadbf5dcf8653cd9a
-> change-id: 20240529-efi-spec-0ea657985272
->
-> Best regards,
 
