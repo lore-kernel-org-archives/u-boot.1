@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCD76C27C53
-	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 22:42:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C896CC27C55
+	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 22:43:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 765FC885A5;
-	Sat,  8 Jun 2024 00:39:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 017B6885AE;
+	Sat,  8 Jun 2024 00:39:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="w+7RDLPN";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UGe7D3r/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 234A58857D; Sat,  8 Jun 2024 00:39:50 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 8DF5F88578; Sat,  8 Jun 2024 00:39:50 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0716E88531
+ by phobos.denx.de (Postfix) with ESMTPS id B3D408850D
  for <u-boot@lists.denx.de>; Sat,  8 Jun 2024 00:39:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 457MdUEO079346;
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 457MdUiN026929;
  Fri, 7 Jun 2024 17:39:30 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1717799970;
- bh=GPI/j+0xyYlAVFmFT7wKLRMbqcXO6xBCXFbY90XC2xM=;
+ bh=ZcHYTDQfsEbrH3dAipffE7uv3IbF3BybiVBzfLSWDx8=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=w+7RDLPNztfvMNQYc5V8EKK40sk9sZF6vou8ivPJ5Er4ZY+7sG1jYiRkP4fewxYDE
- +xfhNOe9PxvsyGiVAFspN0jaB63aHh5HSAGxXK35DhFo//V7Up9Tzn5qNR5mvDAa3A
- mma06HPZ/YTUybusDovIAMZWLUEpaJgm3CSZXQlk=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 457MdUEJ083991
+ b=UGe7D3r/Fx1AZnzup0yJJ6SxTH0a+n8yD6KVaA7Otzr331+g+kymSkP+7uhCEaVV/
+ DM6JgedoE+hd9T2R69X2wQoSvZJQ4Nf6Mw0NQeMT5qv2FsInlg1i1Rzv049pAkpHmL
+ yCrqHf82SOFpK6nRKr+RApbZuPOTAyrphJAynSnE=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 457MdUOp084004
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Fri, 7 Jun 2024 17:39:30 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 7
- Jun 2024 17:39:29 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2024 17:39:30 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 7 Jun 2024 17:39:29 -0500
+ Frontend Transport; Fri, 7 Jun 2024 17:39:30 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 457MdTas011247;
- Fri, 7 Jun 2024 17:39:29 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 457MdU96011275;
+ Fri, 7 Jun 2024 17:39:30 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Heinrich Schuchardt
@@ -67,9 +67,10 @@ To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ilias Apalodimas
  <ilias.apalodimas@linaro.org>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH v6 04/24] board: am64x: Define capsule update firmware info
-Date: Fri, 7 Jun 2024 17:38:38 -0500
-Message-ID: <20240607223858.1971290-5-j-humphreys@ti.com>
+Subject: [PATCH v6 19/24] board: beagleboneai64: Define capsule update
+ firmware info
+Date: Fri, 7 Jun 2024 17:38:53 -0500
+Message-ID: <20240607223858.1971290-20-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240607223858.1971290-1-j-humphreys@ti.com>
 References: <20240607223858.1971290-1-j-humphreys@ti.com>
@@ -94,52 +95,84 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Define the firmware components updatable via EFI capsule update, including
-defining capsule GUIDs for the various firmware components for the AM64x
-SK.
+defining capsule GUIDs for the various firmware components for the
+BeagleBoneAI64.
+
+Note this involved creating BeagleBoneAI64's own beagleboneai64.h board
+header file instead of reusing j721e_evm's.
 
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- board/ti/am64x/evm.c        | 34 ++++++++++++++++++++++++++++++++++
- include/configs/am64x_evm.h | 24 ++++++++++++++++++++++++
- 2 files changed, 58 insertions(+)
+ board/beagle/beagleboneai64/Kconfig          |  4 +-
+ board/beagle/beagleboneai64/beagleboneai64.c | 39 ++++++++++++++
+ include/configs/beagleboneai64.h             | 55 ++++++++++++++++++++
+ 3 files changed, 96 insertions(+), 2 deletions(-)
+ create mode 100644 include/configs/beagleboneai64.h
 
-diff --git a/board/ti/am64x/evm.c b/board/ti/am64x/evm.c
-index b8de69da06c..609e5cf6d51 100644
---- a/board/ti/am64x/evm.c
-+++ b/board/ti/am64x/evm.c
+diff --git a/board/beagle/beagleboneai64/Kconfig b/board/beagle/beagleboneai64/Kconfig
+index 7cfccf9baf0..0f21582614d 100644
+--- a/board/beagle/beagleboneai64/Kconfig
++++ b/board/beagle/beagleboneai64/Kconfig
+@@ -37,7 +37,7 @@ config SYS_VENDOR
+        default "beagle"
+ 
+ config SYS_CONFIG_NAME
+-       default "j721e_evm"
++       default "beagleboneai64"
+ 
+ source "board/ti/common/Kconfig"
+ 
+@@ -52,7 +52,7 @@ config SYS_VENDOR
+        default "beagle"
+ 
+ config SYS_CONFIG_NAME
+-       default "j721e_evm"
++       default "beagleboneai64"
+ 
+ source "board/ti/common/Kconfig"
+ 
+diff --git a/board/beagle/beagleboneai64/beagleboneai64.c b/board/beagle/beagleboneai64/beagleboneai64.c
+index c5b4ff7df47..1e43d1c1bd2 100644
+--- a/board/beagle/beagleboneai64/beagleboneai64.c
++++ b/board/beagle/beagleboneai64/beagleboneai64.c
 @@ -7,6 +7,7 @@
-  *
+  * Copyright (C) 2022-2023 Robert Nelson, BeagleBoard.org Foundation
   */
  
 +#include <efi_loader.h>
- #include <asm/io.h>
- #include <dm/uclass.h>
- #include <k3-ddrss.h>
-@@ -27,6 +28,39 @@
+ #include <cpu_func.h>
+ #include <env.h>
+ #include <fdt_support.h>
+@@ -14,6 +15,44 @@
  
  DECLARE_GLOBAL_DATA_PTR;
  
 +struct efi_fw_image fw_images[] = {
 +	{
-+		.image_type_id = AM64X_SK_TIBOOT3_IMAGE_GUID,
-+		.fw_name = u"AM64X_SK_TIBOOT3",
++		.image_type_id = BEAGLEBONEAI64_TIBOOT3_IMAGE_GUID,
++		.fw_name = u"BEAGLEBONEAI64_TIBOOT3",
 +		.image_index = 1,
 +	},
 +	{
-+		.image_type_id = AM64X_SK_SPL_IMAGE_GUID,
-+		.fw_name = u"AM64X_SK_SPL",
++		.image_type_id = BEAGLEBONEAI64_SPL_IMAGE_GUID,
++		.fw_name = u"BEAGLEBONEAI64_SPL",
 +		.image_index = 2,
 +	},
 +	{
-+		.image_type_id = AM64X_SK_UBOOT_IMAGE_GUID,
-+		.fw_name = u"AM64X_SK_UBOOT",
++		.image_type_id = BEAGLEBONEAI64_UBOOT_IMAGE_GUID,
++		.fw_name = u"BEAGLEBONEAI64_UBOOT",
 +		.image_index = 3,
++	},
++	{
++		.image_type_id = BEAGLEBONEAI64_SYSFW_IMAGE_GUID,
++		.fw_name = u"BEAGLEBONEAI64_SYSFW",
++		.image_index = 4,
 +	}
 +};
 +
 +struct efi_capsule_update_info update_info = {
-+	.dfu_string = "sf 0:0=tiboot3.bin raw 0 100000;"
-+	"tispl.bin raw 100000 200000;u-boot.img raw 300000 400000",
++	.dfu_string = "mmc 0=tiboot3.bin raw 0 2000 mmcpart 1;"
++	"tispl.bin fat 0 1;u-boot.img fat 0 1; sysfw.itb fat 0 1",
 +	.num_images = ARRAY_SIZE(fw_images),
 +	.images = fw_images,
 +};
@@ -155,18 +188,39 @@ index b8de69da06c..609e5cf6d51 100644
  int board_init(void)
  {
  	return 0;
-diff --git a/include/configs/am64x_evm.h b/include/configs/am64x_evm.h
-index f9f8c7bc2f6..9db83621ea8 100644
---- a/include/configs/am64x_evm.h
-+++ b/include/configs/am64x_evm.h
-@@ -9,6 +9,30 @@
- #ifndef __CONFIG_AM642_EVM_H
- #define __CONFIG_AM642_EVM_H
- 
+diff --git a/include/configs/beagleboneai64.h b/include/configs/beagleboneai64.h
+new file mode 100644
+index 00000000000..85d57248bb6
+--- /dev/null
++++ b/include/configs/beagleboneai64.h
+@@ -0,0 +1,55 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Configuration header file for BeagleBoneAI64
++ *
++ * https://beagleboard.org/ai-64
++ *
++ * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
++ */
++
++#ifndef __CONFIG_BEAGLEBONEAI64_H
++#define __CONFIG_BEAGLEBONEAI64_H
++
++/* FLASH Configuration */
++#define CFG_SYS_FLASH_BASE		0x000000000
++
++/* SPL Loader Configuration */
++#define CFG_SYS_UBOOT_BASE		0x50080000
++
 +/**
-+ * define AM64X_SK_TIBOOT3_IMAGE_GUID - firmware GUID for AM64X sk tiboot3.bin
-+ * define AM64X_SK_SPL_IMAGE_GUID     - firmware GUID for AM64X sk SPL
-+ * define AM64X_SK_UBOOT_IMAGE_GUID   - firmware GUID for AM64X sk UBOOT
++ * define BEAGLEBONEAI64_TIBOOT3_IMAGE_GUID - firmware GUID for BeagleBoneAI64
++ *                                            tiboot3.bin
++ * define BEAGLEBONEAI64_SPL_IMAGE_GUID     - firmware GUID for BeagleBoneAI64
++ *                                            SPL
++ * define BEAGLEBONEAI64_UBOOT_IMAGE_GUID   - firmware GUID for BeagleBoneAI64
++ *                                            UBOOT
++ * define BEAGLEBONEAI64_SYSFW_IMAGE_GUID   - firmware GUID for BeagleBoneAI64
++ *                                            SYSFW
 + *
 + * These GUIDs are used in capsules updates to identify the corresponding
 + * firmware object.
@@ -175,21 +229,26 @@ index f9f8c7bc2f6..9db83621ea8 100644
 + * define their own GUIDs to ensure that firmware repositories (like
 + * LVFS) do not confuse them.
 + */
-+#define AM64X_SK_TIBOOT3_IMAGE_GUID \
-+	EFI_GUID(0xede0a0d5, 0x9116, 0x4bfb, 0xaa, 0x54, \
-+		0x09, 0xe9, 0x7b, 0x5a, 0xfe, 0x1a)
++#define BEAGLEBONEAI64_TIBOOT3_IMAGE_GUID \
++	EFI_GUID(0x772a4810, 0x2194, 0x4923, 0x87, 0x54, \
++		0x01, 0x15, 0x87, 0x0e, 0xf3, 0x67)
 +
-+#define AM64X_SK_SPL_IMAGE_GUID \
-+	EFI_GUID(0x77678f5c, 0x64d4, 0x4910, 0xad, 0x75, \
-+		0x52, 0xc9, 0xd9, 0x5c, 0xdb, 0x1d)
++#define BEAGLEBONEAI64_SPL_IMAGE_GUID \
++	EFI_GUID(0x83447222, 0x1e26, 0x40cd, 0xa3, 0x95, \
++		0xb7, 0xde, 0x09, 0x57, 0xe8, 0x75)
 +
-+#define AM64X_SK_UBOOT_IMAGE_GUID \
-+	EFI_GUID(0xc6ad43a9, 0x7d31, 0x4f5d, 0x83, 0xe9, \
-+		0xb8, 0xef, 0xec, 0xae, 0x05, 0xbf)
++#define BEAGLEBONEAI64_UBOOT_IMAGE_GUID \
++	EFI_GUID(0x4249ff77, 0xc17d, 0x4eb7, 0xa1, 0xdb, \
++		0x45, 0xaa, 0x98, 0x87, 0xd4, 0x9e)
 +
- /* Now for the remaining common defines */
- #include <configs/ti_armv7_common.h>
- 
++#define BEAGLEBONEAI64_SYSFW_IMAGE_GUID \
++	EFI_GUID(0xdfc9c683, 0x49b7, 0x46bd, 0xb3, 0xc1, \
++		0x3a, 0x3b, 0x2f, 0xdb, 0x13, 0x5b)
++
++/* Now for the remaining common defines */
++#include <configs/ti_armv7_common.h>
++
++#endif /* __CONFIG_BEAGLEBONEAI64_H */
 -- 
 2.34.1
 
