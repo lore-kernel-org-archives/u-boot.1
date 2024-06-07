@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72A7DC27C55
-	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 22:39:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DA00C27C55
+	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 22:40:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3164688516;
-	Sat,  8 Jun 2024 00:39:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A06898850A;
+	Sat,  8 Jun 2024 00:39:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ypnfdhsY";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YYVoLbmg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97C918827D; Sat,  8 Jun 2024 00:39:41 +0200 (CEST)
+ id 4A7EE8851C; Sat,  8 Jun 2024 00:39:43 +0200 (CEST)
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E585887947
- for <u-boot@lists.denx.de>; Sat,  8 Jun 2024 00:39:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DF0F6884CD
+ for <u-boot@lists.denx.de>; Sat,  8 Jun 2024 00:39:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 457MdSjm026899;
- Fri, 7 Jun 2024 17:39:28 -0500
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 457MdUWc026921;
+ Fri, 7 Jun 2024 17:39:30 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1717799968;
- bh=Asgbhs45vbz9sxzNEzXuZiOe7ge3OycVGiF6f4of9Ds=;
- h=From:To:CC:Subject:Date;
- b=ypnfdhsYj4eFLy86RA2YPZfGeEsJa3RIWpC+9nPg5LhJyFG/5BDnoXb/KaG5Q4Etz
- 7deBp4KeR1cKk5xmZUvXWVFiZG2rVXx0JwuLH6K6Um25JY8gmTEISRywjaE/1eui8v
- ZBIRWeb+be8wWdBD9LSlDk0UCj9WQq3p0mSxTt6E=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 457MdS4D093511
+ s=ti-com-17Q1; t=1717799970;
+ bh=V7UqHPd1UzWtvccNC4EBC55h1l89B9bqpnfRQxhMoJs=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=YYVoLbmgowUybqARdGu83yNMHcvB0b1fH0oHWuH+Ud9RNaHhJ8znSPG37SLKssQMQ
+ rZoiATRGb1w45kbOdHEtpmDcqgnICDyqd9xz0g2y+hTtM1bDGo8x9KT0Ph1zou1n3/
+ rZMw68v4s/c+EbF9G7SuNpYV7j90DYjJI+5Ndmkw=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 457MdUEX060676
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 7 Jun 2024 17:39:28 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 7 Jun 2024 17:39:30 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 7
- Jun 2024 17:39:27 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2024 17:39:30 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 7 Jun 2024 17:39:27 -0500
+ Frontend Transport; Fri, 7 Jun 2024 17:39:30 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 457MdRs0011204;
- Fri, 7 Jun 2024 17:39:27 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 457MdUNm089872;
+ Fri, 7 Jun 2024 17:39:30 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Heinrich Schuchardt
@@ -67,10 +67,12 @@ To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ilias Apalodimas
  <ilias.apalodimas@linaro.org>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH v6 00/24] EFI: ti: Enable EFI capsule updates
-Date: Fri, 7 Jun 2024 17:38:34 -0500
-Message-ID: <20240607223858.1971290-1-j-humphreys@ti.com>
+Subject: [PATCH v6 11/24] configs: beagleplay: Enable DFU for MMC
+Date: Fri, 7 Jun 2024 17:38:45 -0500
+Message-ID: <20240607223858.1971290-12-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240607223858.1971290-1-j-humphreys@ti.com>
+References: <20240607223858.1971290-1-j-humphreys@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -91,117 +93,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable on disk capsule updates, which includes defining the firmware
-components (tiboot3, spl, u-boot) and enabling processing of raw capsule
-updates.
+MMC DFU is required for capsule updates.
 
-This is enabled for several TI SoC based platforms: AM64, AM62, AM62p,
-AM69, BeaglePlay, J7, and BeagleboneAI. The configs to enable this are in a
-single base config file. This will make it more scalable to add additional
-EFI capsule features (like authentication) across all TI boards that have
-capsules enabled.
+Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
+---
+ configs/am62x_beagleplay_a53_defconfig | 3 +++
+ 1 file changed, 3 insertions(+)
 
-This series also includes enabling serial flash DFU for AM62 and MMC DFU
-for beagleplay.
-
-Changes from v1:
-- Added sysfw.itb capsule definition to beagleboneai64
-- removed extra commas in structure definitions
-
-Changes from v2:
-- Added documentation on OSPI flash layouts
-- Improved comments for capsule GUIDs definitions
-- Defined board unique capsule GUIDs and put definitions in board specific
-  files
-- Added a Capsule Update porting section to the documentation
-
-Changes from v3:
-- Added better commit messages based upon checkpatch warnings.
-- Remove conditional inclusion of capsule update firmware info
-- Converted OSPI layout diagram to svg format
-Link to v3: https://lore.kernel.org/r/20240419205701.163821-1-j-humphreys@ti.com
-
-Changes from v4:
-- Added am69 SK board
-- Corrected a few spelling mistakes and clarity improvements in k3 docs
-  section
-- Added CONFIG_SET_DFU_ALT_INFO guard around set_dfu_alt_info()
-Link to v4: https://lore.kernel.org/r/20240509164123.1753050-1-j-humphreys@ti.com
-
-Changes from v5:
-- Created an EFI capsule base config for TI boards, making adding
-  additional capsule features on TI boards more scalable.
-Link to v5: https://lore.kernel.org/r/20240531222118.2618041-1-j-humphreys@ti.com
-
-Jonathan Humphreys (24):
-  doc: uefi: capsules: Add Capsule Update porting section
-  doc: ti: k3: Correct spelling mistakes and improve clarity
-  configs: ti: Create base EFI capsule configs for TI K3 devices
-  board: am64x: Define capsule update firmware info
-  configs: am64x: Enable EFI capsule update
-  doc: board: ti: am64x: document OSPI layout
-  board: j721e: Define capsule update firmware info
-  configs: j721e: Enable EFI capsule update
-  doc: board: ti: j721e: document OSPI layout
-  board: beagleplay: Define capsule update firmware info
-  configs: beagleplay: Enable DFU for MMC
-  configs: beagleplay: Enable EFI capsule update
-  board: am62x: Define capsule update firmware info
-  configs: am62x: Enable EFI capsule update
-  doc: board: ti: am62x: document OSPI layout
-  board: am62px: Define capsule update firmware info
-  configs: am62px: Enable EFI capsule update
-  doc: board: ti: am62px: document OSPI layout
-  board: beagleboneai64: Define capsule update firmware info
-  configs: beagleboneai64: Enable EFI capsule update
-  configs: j784s4_evm: Enable serial flash DFU support
-  board: sk-am69: Define capsule update firmware info
-  configs: j784s4: Enable EFI capsule update
-  doc: board: ti: j784s4: document OSPI NOR layout
-
- board/beagle/beagleboneai64/Kconfig          |    4 +-
- board/beagle/beagleboneai64/beagleboneai64.c |   39 +
- board/beagle/beagleplay/Kconfig              |    4 +-
- board/beagle/beagleplay/beagleplay.c         |   34 +
- board/ti/am62px/evm.c                        |   34 +
- board/ti/am62x/evm.c                         |   34 +
- board/ti/am64x/evm.c                         |   34 +
- board/ti/j721e/evm.c                         |   40 +
- board/ti/j784s4/evm.c                        |   34 +
- configs/am62px_evm_a53_defconfig             |    2 +
- configs/am62x_beagleplay_a53_defconfig       |    4 +
- configs/am62x_evm_a53_defconfig              |    1 +
- configs/am64x_evm_a53_defconfig              |    2 +
- configs/j721e_beagleboneai64_a72_defconfig   |    2 +
- configs/j721e_evm_a72_defconfig              |    2 +
- configs/j784s4_evm_a72_defconfig             |    5 +
- configs/k3_efi_capsule.config                |    2 +
- doc/board/ti/am62px_sk.rst                   |   24 +
- doc/board/ti/am62x_sk.rst                    |   24 +
- doc/board/ti/am64x_evm.rst                   |   24 +
- doc/board/ti/img/ospi_sysfw-am64.svg         |  802 ++++++++++
- doc/board/ti/img/ospi_sysfw.svg              | 1464 ++++++++++--------
- doc/board/ti/img/ospi_sysfw2.svg             |  802 ++++++++++
- doc/board/ti/img/ospi_sysfw3.svg             |  802 ++++++++++
- doc/board/ti/j721e_evm.rst                   |   58 +-
- doc/board/ti/j784s4_evm.rst                  |   28 +
- doc/board/ti/k3.rst                          |   10 +-
- doc/develop/uefi/uefi.rst                    |   12 +
- include/configs/am62px_evm.h                 |   24 +
- include/configs/am62x_evm.h                  |   24 +
- include/configs/am64x_evm.h                  |   24 +
- include/configs/beagleboneai64.h             |   55 +
- include/configs/beagleplay.h                 |   41 +
- include/configs/j721e_evm.h                  |   29 +
- include/configs/j784s4_evm.h                 |   24 +
- 35 files changed, 3864 insertions(+), 684 deletions(-)
- create mode 100644 configs/k3_efi_capsule.config
- create mode 100644 doc/board/ti/img/ospi_sysfw-am64.svg
- create mode 100644 doc/board/ti/img/ospi_sysfw2.svg
- create mode 100644 doc/board/ti/img/ospi_sysfw3.svg
- create mode 100644 include/configs/beagleboneai64.h
- create mode 100644 include/configs/beagleplay.h
-
+diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
+index ec62670d55d..dbdbaf98348 100644
+--- a/configs/am62x_beagleplay_a53_defconfig
++++ b/configs/am62x_beagleplay_a53_defconfig
+@@ -70,6 +70,9 @@ CONFIG_SPL_OF_TRANSLATE=y
+ CONFIG_CLK=y
+ CONFIG_SPL_CLK=y
+ CONFIG_CLK_TI_SCI=y
++CONFIG_DFU_MMC=y
++CONFIG_SYS_DFU_DATA_BUF_SIZE=0x40000
++CONFIG_SYS_DFU_MAX_FILE_SIZE=0x180000
+ CONFIG_DMA_CHANNELS=y
+ CONFIG_TI_K3_NAVSS_UDMA=y
+ CONFIG_TI_SCI_PROTOCOL=y
 -- 
 2.34.1
 
