@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 352ECC27C53
-	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 22:05:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFEA1C27C53
+	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 22:06:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4F5588506;
-	Sat,  8 Jun 2024 00:03:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5259F884D5;
+	Sat,  8 Jun 2024 00:06:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uGVepYN6";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="K0di5aLs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77AD888485; Sat,  8 Jun 2024 00:03:52 +0200 (CEST)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CC725884D5; Sat,  8 Jun 2024 00:06:25 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62C568850A
- for <u-boot@lists.denx.de>; Sat,  8 Jun 2024 00:03:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 52E4987EF6
+ for <u-boot@lists.denx.de>; Sat,  8 Jun 2024 00:06:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-24c9f628e71so1272121fac.1
- for <u-boot@lists.denx.de>; Fri, 07 Jun 2024 15:03:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1717797829; x=1718402629; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=40upo58hWLMqMcWNydKuJhMETheiClG83t+si2V+aY4=;
- b=uGVepYN6aJzFI1LKaIhsY3ckRQFDzngTKpGQ2t/PUCsz6vNIiw3Ks9f8JDpeCrOv0k
- 3L7sKhdBImcccpC5xmd3YgL/XZFsaw1VflraMitAlPzcQ/9EP0RdTTS2w8z83tdauuIx
- 4llbU/8FEsSHXwHSZrN5+/eonovBxwP9H3SuI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717797829; x=1718402629;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=40upo58hWLMqMcWNydKuJhMETheiClG83t+si2V+aY4=;
- b=CxVNMVfzNdNOTRC/8M2Czrwb8rHskBMKFptsQNX36uwo7f2eewFQK3jQIXMp+Hrwmu
- uGD2gQWLi7SY2RlDhKIW8P1rkRUdOzlhLZWxjMj0EEiamPf4XzfOOaQ/0Vd8Z5cnLuxr
- q/KjrqHcXQwUSy4SLKqwcQIXqjZDaAJTLmlBvaznBDbukB12wCR+XKxf/wGxTlVuUm42
- nmlvkgtnbh+x3sayFDBBzDvp4J8WMUJKkyOLtYBI1NEBCpkQm4kZYQM1gMS2R41SwFrt
- fntmf5c/B4DiKEHbwusigdXofZlAHYV6Y13BLEd4zVHXeIetSkS9JoeZa+83bPirShX3
- 0gGg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUjVd3C3UivL1er1zAeZznQcbHpAk88hwCmK4hDL7Oyr4RZ9hPjpkUbiMTw7PpqMW0b+E4+1q0sGivNoo/U+CV3Cx4/3A==
-X-Gm-Message-State: AOJu0YxgY9L/vT7O0ynsHmrZJTZB0g8JQtF7Dq23fWSMnfycs/fiF8Vh
- AfZEPjOrNDXSkffj+70PupBVON5GJq3bnzT9Xz3n76JclArD4YeMHtkshMasAVI=
-X-Google-Smtp-Source: AGHT+IGh9qmjjduXm0s4iIJfcN1uFxjYFt3QryaHxGhb26qCb7wjtMm4Zb5jbvw1LIi8Cyl+1p+aKQ==
-X-Received: by 2002:a05:6870:5a86:b0:254:8712:e0f7 with SMTP id
- 586e51a60fabf-2548712f687mr1269847fac.9.1717797829017; 
- Fri, 07 Jun 2024 15:03:49 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-45.totalplay.net.
- [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-254951da4d4sm58415fac.47.2024.06.07.15.03.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Jun 2024 15:03:48 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Roger Quadros <rogerq@kernel.org>
-Cc: Bajjuri Praneeth <praneeth@ti.com>, Nishanth Menon <nm@ti.com>, 
- u-boot@lists.denx.de
-In-Reply-To: <20240515-for-2024-10-gpmc-printf-v1-1-025c78529d8c@kernel.org>
-References: <20240515-for-2024-10-gpmc-printf-v1-1-025c78529d8c@kernel.org>
-Subject: Re: [PATCH] memory: ti-gpmc: use printf to dump settings/timings
-Message-Id: <171779782828.4156831.10623556321053027385.b4-ty@konsulko.com>
-Date: Fri, 07 Jun 2024 16:03:48 -0600
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 457M6LJH074159;
+ Fri, 7 Jun 2024 17:06:21 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1717797981;
+ bh=DphOaK0p7um9wD1Jc2WbLzjwSnea0WBXz+Jn1RZXaso=;
+ h=From:Date:Subject:References:In-Reply-To:To:CC;
+ b=K0di5aLsn6xHqFOwf2VNtiE1tahVrBa7AyT+q51LzIZJIn7Ml0VmApls6GZxrp+PW
+ +fUPj4vpahX64Hc4aJvXoI040Pcislu0ZOTloY578klcYi9kT+3StYyzB6b+Ctp18E
+ 88R8L2um92yGKbAB9DoU7Qg2i84kwk5udiqC04jw=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 457M6Lrb023667
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 7 Jun 2024 17:06:21 -0500
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 7
+ Jun 2024 17:06:21 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 7 Jun 2024 17:06:21 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 457M6L5X039231;
+ Fri, 7 Jun 2024 17:06:21 -0500
+From: Bryan Brattlof <bb@ti.com>
+Date: Fri, 7 Jun 2024 17:06:13 -0500
+Subject: [PATCH v4 2/2] configs: add defconfigs for the am625-lp-sk
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-ID: <20240607-am62q-wip-v4-2-3900cdf25721@ti.com>
+References: <20240607-am62q-wip-v4-0-3900cdf25721@ti.com>
+In-Reply-To: <20240607-am62q-wip-v4-0-3900cdf25721@ti.com>
+To: Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Bryan Brattlof <bb@ti.com>, Dhruva Gole
+ <d-gole@ti.com>
 X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1943; i=bb@ti.com;
+ h=from:subject:message-id; bh=WqVeTvoDQpRpjKfyG3zCMHYPb6vMQtd8E5OkuNBEnY4=;
+ b=owNCWmg5MUFZJlNZQHl3UgAAZ/////f/2vPgG5zrHkX/vV+rH+27e29rf/473f3a7ltqx/awA
+ RkAxRoGgDTRpppoABoyDQGg0aDQaAaDJoyNMjQGIDI0ZDQ0NAYIyMTTZQ9TJsogyYjINNGmgxND
+ TTTINGTCYCNNGTQaMIZNGg0GgAyDCNGgxBkAMRpo0NA00w6D00ho2pkGmgAxNDQyNABkGmmAjQA
+ Gg0yDT1GTRkyMgGIGjCMIMj1NAA0AAWo24hAp9sXJ0MMdKUwgsExTyASHgQqAgwg5iVFWHYKVz8
+ Yrc/ipIC466QmJFX3rXh35wual1OzAY1dliLRBtdAQIjk2TL7y0saQAVqo+b8t9cYTwmOGJodqJ
+ BLOTEPUthjjDHZPZz6i3KNUtz304kMahN471cYoxAWsuFpWQBufat4jgzgCCohc4DPp67jeTu3W
+ auRyAqvALsOpM1A40DZe/neWjMQWjwdhEYYk1HCXYD3wqB8AMinpUOHeHBDZYxCQ2R31+1focFc
+ qT7YzmBMR4a8zQ2CR8dJkAfHf2DQrg1CmxXUyEe+HGLRLXfupKKIFIT6FbdJQpYWKeXEm8J6g7d
+ IiGEk8vh8XyCqwQGD4giXX6q9IJVArUCCfy8FKsjB6P+ZjFO87eliWW/C3fxMNAFGFFf8V+Cubj
+ AHwzaIKx/xdyRThQkEB5d1I
+X-Developer-Key: i=bb@ti.com; a=openpgp;
+ fpr=D3D177E40A38DF4D1853FEEF41B90D5D71D56CE0
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,20 +93,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 15 May 2024 15:20:08 +0300, Roger Quadros wrote:
+The am62x-lp-sk is a package and reference board spin of the am62x-sk to
+showcase the low-power features of the am62x SoC family. Because it so
+closely resembles the am62x-sk board, use the preprocessor to inherit
+its configuration making the needed changes for this board where
+necessary.
 
-> pr_info() depends on CONFIG_LOGLEVEL > 6. If user has
-> enabled CONFIG_TI_GPMC_DEBUG then we should print the
-> GPMC settings/timings regardless of CONFIG_LOGLEVEL.
-> 
-> So use printf() instead of pr_info().
-> 
-> 
-> [...]
+Reviewed-by: Dhruva Gole <d-gole@ti.com>
+Signed-off-by: Bryan Brattlof <bb@ti.com>
+---
+ board/ti/am62x/MAINTAINERS       | 4 +++-
+ configs/am62x_lpsk_a53_defconfig | 8 ++++++++
+ configs/am62x_lpsk_r5_defconfig  | 7 +++++++
+ 3 files changed, 18 insertions(+), 1 deletion(-)
 
-Applied to u-boot/next, thanks!
+diff --git a/board/ti/am62x/MAINTAINERS b/board/ti/am62x/MAINTAINERS
+index 105e741995ed9..562a5c676690d 100644
+--- a/board/ti/am62x/MAINTAINERS
++++ b/board/ti/am62x/MAINTAINERS
+@@ -1,8 +1,10 @@
+ AM62x BOARD
+-M:	Dave Gerlach <d-gerlach@ti.com>
++M:	Bryan Brattlof <bb@ti.com>
+ M:	Tom Rini <trini@konsulko.com>
+ S:	Maintained
+ F:	board/ti/am62x/
+ F:	include/configs/am62x_evm.h
+ F:	configs/am62x_evm_r5_defconfig
+ F:	configs/am62x_evm_a53_defconfig
++F:	configs/am62x_lpsk_r5_defconfig
++F:	configs/am62x_lpsk_a53_defconfig
+diff --git a/configs/am62x_lpsk_a53_defconfig b/configs/am62x_lpsk_a53_defconfig
+new file mode 100644
+index 0000000000000..a86bfb5a761bf
+--- /dev/null
++++ b/configs/am62x_lpsk_a53_defconfig
+@@ -0,0 +1,8 @@
++#include <configs/am62x_evm_a53_defconfig>
++
++CONFIG_ARM=y
++CONFIG_ARCH_K3=y
++CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am62-lp-sk"
++CONFIG_OF_UPSTREAM=y
++CONFIG_SOC_K3_AM625=y
++CONFIG_TARGET_AM625_A53_EVM=y
+diff --git a/configs/am62x_lpsk_r5_defconfig b/configs/am62x_lpsk_r5_defconfig
+new file mode 100644
+index 0000000000000..9112bc2cba7cc
+--- /dev/null
++++ b/configs/am62x_lpsk_r5_defconfig
+@@ -0,0 +1,7 @@
++#include <configs/am62x_evm_r5_defconfig>
++
++CONFIG_ARM=y
++CONFIG_ARCH_K3=y
++CONFIG_DEFAULT_DEVICE_TREE="k3-am62-r5-lp-sk"
++CONFIG_SOC_K3_AM625=y
++CONFIG_TARGET_AM625_R5_EVM=y
 
 -- 
-Tom
-
+2.45.1
 
