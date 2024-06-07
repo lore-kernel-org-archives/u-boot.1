@@ -4,43 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 018D9C27C5F
-	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 18:58:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 108ABC27C53
+	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 18:58:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2748988556;
-	Fri,  7 Jun 2024 20:55:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9070288548;
+	Fri,  7 Jun 2024 20:55:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xvO/M3DU";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52E3C8848F; Fri,  7 Jun 2024 20:55:02 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 55AED88496
- for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 20:55:00 +0200 (CEST)
+ id 14F7B8856F; Fri,  7 Jun 2024 20:55:05 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A1B888496
+ for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 20:55:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 448601480;
- Fri,  7 Jun 2024 11:55:24 -0700 (PDT)
-Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 286AA3F792;
- Fri,  7 Jun 2024 11:54:56 -0700 (PDT)
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>,
- Fabio Estevam <festevam@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [RFC PATCH 27/31] test: bdinfo: dump the global LMB memory map
-Date: Sat,  8 Jun 2024 00:22:36 +0530
-Message-Id: <20240607185240.1892031-28-sughosh.ganu@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
-References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 457IsuBj002617;
+ Fri, 7 Jun 2024 13:54:56 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1717786496;
+ bh=VvNY6Kct2yUHI5tGp38pb8+jWKjcs9AInSE8qfrDhxg=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=xvO/M3DUNONw6bRZMPOQrsbr0VuzSZ2UWREvWpExYWeFPJIZXD8uRXNORTqMzcT4w
+ sECGpCJwHW5Y0klJyAwEsAKh8ygAoKG5BDMXO3lvQxR3KgTGgPcCTTDcr2R22P5oMh
+ to99rPvPLCNB8WbH8ZBeWF/xi1D/o23P+xqJpkz4=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 457Isubx036823
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 7 Jun 2024 13:54:56 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 7
+ Jun 2024 13:54:56 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 7 Jun 2024 13:54:56 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 457Isth3126180;
+ Fri, 7 Jun 2024 13:54:55 -0500
+Message-ID: <e48f5818-182c-47ab-b384-379659830d38@ti.com>
+Date: Fri, 7 Jun 2024 13:54:55 -0500
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] arm: dts: k3-am642-evm-u-boot: Add remoteproc-name
+ for PRU cores
+To: "Anwar, Md Danish" <a0501179@ti.com>, MD Danish Anwar
+ <danishanwar@ti.com>, Judith Mendez <jm@ti.com>, Kamlesh Gurudasani
+ <kamlesh@ti.com>, Nikhil M Jain <n-jain1@ti.com>, Manorit Chawdhry
+ <m-chawdhry@ti.com>, Jonathan Humphreys <j-humphreys@ti.com>, Siddharth
+ Vadapalli <s-vadapalli@ti.com>, Simon Glass <sjg@chromium.org>, Neha Malcom
+ Francis <n-francis@ti.com>, Nishanth Menon <nm@ti.com>, Roger Quadros
+ <rogerq@kernel.org>, Vignesh Raghavendra <vigneshr@ti.com>, Tom Rini
+ <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>
+References: <20240522063652.3759497-1-danishanwar@ti.com>
+ <20240522063652.3759497-2-danishanwar@ti.com>
+ <cb53651f-a823-41b8-81e5-c3939bd33764@ti.com>
+ <5cda289f-1d14-41f6-84e3-ff1d1034be13@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <5cda289f-1d14-41f6-84e3-ff1d1034be13@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -57,56 +90,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The LMB code has been changed to make the memory reservations
-persistent and global. Make corresponding change the the
-lmb_test_dump_all() function to print the global LMB added and
-reserved memory.
+On 5/23/24 1:33 AM, Anwar, Md Danish wrote:
+> Hi Andrew,
+> 
+> On 5/22/2024 9:38 PM, Andrew Davis wrote:
+>> On 5/22/24 1:36 AM, MD Danish Anwar wrote:
+>>> Add remoteproc-name property for PRU cores.
+>>>
+>>> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
+>>> ---
+>>>    arch/arm/dts/k3-am642-evm-u-boot.dtsi | 44 +++++++++++++++++++++++++++
+>>>    1 file changed, 44 insertions(+)
+>>>
+>>> diff --git a/arch/arm/dts/k3-am642-evm-u-boot.dtsi
+>>> b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
+>>> index 705b3baa81..25ddace74e 100644
+>>> --- a/arch/arm/dts/k3-am642-evm-u-boot.dtsi
+>>> +++ b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
+>>> @@ -11,6 +11,50 @@
+>>>        };
+>>>    };
+>>>    +&pru0_0 {
+>>> +    remoteproc-name = "pru0_0";
+>>
+>> Why do we need all these? Looks like we fallback to using `dev->name` if
+>> these are not set, does that not work for us here?
+>>
+> 
+> Yes we will fallback to `dev->name` if `remoteproc-name` is not set but
+> in our case two different PRU cores will have same `dev->name`. As a
+> result the API rproc_name_is_unique() will return false and as a result
+> the probe will fail for the PRU cores.
+> 
 
-Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
----
- test/cmd/bdinfo.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+If `dev->name` is not unique, then combine it with something that is, or
+remove the requirement for the name to be unique. Right now this looks
+like just a hack around a framework requirement and a driver problem.
 
-diff --git a/test/cmd/bdinfo.c b/test/cmd/bdinfo.c
-index 8ba785fc31..2f90c04b70 100644
---- a/test/cmd/bdinfo.c
-+++ b/test/cmd/bdinfo.c
-@@ -25,6 +25,8 @@
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-+extern struct lmb lmb;
-+
- /* Declare a new bdinfo test */
- #define BDINFO_TEST(_name, _flags)	UNIT_TEST(_name, _flags, bdinfo_test)
- 
-@@ -125,11 +127,11 @@ static int lmb_test_dump_region(struct unit_test_state *uts,
- 	return 0;
- }
- 
--static int lmb_test_dump_all(struct unit_test_state *uts, struct lmb *lmb)
-+static int lmb_test_dump_all(struct unit_test_state *uts)
- {
- 	ut_assert_nextline("lmb_dump_all:");
--	ut_assertok(lmb_test_dump_region(uts, &lmb->memory, "memory"));
--	ut_assertok(lmb_test_dump_region(uts, &lmb->reserved, "reserved"));
-+	ut_assertok(lmb_test_dump_region(uts, &lmb.memory, "memory"));
-+	ut_assertok(lmb_test_dump_region(uts, &lmb.reserved, "reserved"));
- 
- 	return 0;
- }
-@@ -191,10 +193,8 @@ static int bdinfo_test_all(struct unit_test_state *uts)
- #endif
- 
- 	if (IS_ENABLED(CONFIG_LMB) && gd->fdt_blob) {
--		struct lmb lmb;
--
- 		lmb_add_memory(gd->bd);
--		ut_assertok(lmb_test_dump_all(uts, &lmb));
-+		ut_assertok(lmb_test_dump_all(uts));
- 		if (IS_ENABLED(CONFIG_OF_REAL))
- 			ut_assert_nextline("devicetree  = %s", fdtdec_get_srcname());
- 	}
--- 
-2.34.1
+If you really think this is something that should be solved in DT then
+go convince the DT maintainers and get it into the kernel DT. We should
+be reducing the deltas we carry in -u-boot.dtsi files, not adding more
+workarounds.
 
+Andrew
+
+> Example: In k3-am64-main.dtsi, both pru0_0 [1] and pru1_0 [2] will have
+> dev->name as "pru@34000" same goes for rtu and txpru as well.
+> 
+> 		pru0_0: pru@34000 {
+> 			compatible = "ti,am642-pru";
+> 			reg = <0x34000 0x3000>,
+> 			      <0x22000 0x100>,
+> 			      <0x22400 0x100>;
+> 			reg-names = "iram", "control", "debug";
+> 			firmware-name = "am64x-pru0_0-fw";
+> 		};
+> 
+> 		pru1_0: pru@34000 {
+> 			compatible = "ti,am642-pru";
+> 			reg = <0x34000 0x4000>,
+> 			      <0x22000 0x100>,
+> 			      <0x22400 0x100>;
+> 			reg-names = "iram", "control", "debug";
+> 			firmware-name = "am64x-pru1_0-fw";
+> 		};
+> 
+> To avoid this, we are setting the "remoteproc-name" property in
+> -u-boot.dtsi. Same is done for AM65x as well [3].
+> 
+> [1]
+> https://elixir.bootlin.com/u-boot/v2024.07-rc3/source/dts/upstream/src/arm64/ti/k3-am64-main.dtsi#L1276
+> [2]
+> https://elixir.bootlin.com/u-boot/v2024.07-rc3/source/dts/upstream/src/arm64/ti/k3-am64-main.dtsi#L1417
+> [3]
+> https://elixir.bootlin.com/u-boot/v2024.07-rc3/source/arch/arm/dts/k3-am654-base-board-u-boot.dtsi#L168
+> 
+>> Andrew
+>>
+>>> +};
+>>> +
+>>> +&rtu0_0 {
+>>> +    remoteproc-name = "rtu0_0";
+>>> +};
+>>> +
+>>> +&tx_pru0_0 {
+>>> +    remoteproc-name = "tx_pru0_0";
+>>> +};
+>>> +
+>>> +&pru0_1 {
+>>> +    remoteproc-name = "pru0_1";
+>>> +};
+>>> +
+>>> +&rtu0_1 {
+>>> +    remoteproc-name = "rtu0_1";
+>>> +};
+>>> +
+>>> +&tx_pru0_1 {
+>>> +    remoteproc-name = "tx_pru0_1";
+>>> +};
+>>> +
+>>> +&pru1_0 {
+>>> +    remoteproc-name = "pru1_0";
+>>> +};
+>>> +
+>>> +&rtu1_0 {
+>>> +    remoteproc-name = "rtu1_0";
+>>> +};
+>>> +
+>>> +&tx_pru1_0 {
+>>> +    remoteproc-name = "tx_pru1_0";
+>>> +};
+>>> +
+>>> +&pru1_1 {
+>>> +    remoteproc-name = "pru1_1";
+>>> +};
+>>> +
+>>> +&rtu1_1 {
+>>> +    remoteproc-name = "rtu1_1";
+>>> +};
+>>> +
+>>>    &main_timer0 {
+>>>        clock-frequency = <200000000>;
+>>>    };
+> 
