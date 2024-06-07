@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3D20C27C5F
-	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 18:57:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9187CC27C53
+	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 18:57:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE6E38852D;
-	Fri,  7 Jun 2024 20:54:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 45C2788545;
+	Fri,  7 Jun 2024 20:54:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 189198852E; Fri,  7 Jun 2024 20:54:43 +0200 (CEST)
+ id 3123488470; Fri,  7 Jun 2024 20:54:46 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 2113688470
- for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 20:54:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 3FDB28848F
+ for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 20:54:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0C8141480;
- Fri,  7 Jun 2024 11:55:05 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2DAEF1480;
+ Fri,  7 Jun 2024 11:55:08 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D06AA3F792;
- Fri,  7 Jun 2024 11:54:37 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1405E3F792;
+ Fri,  7 Jun 2024 11:54:40 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>,
@@ -33,9 +33,9 @@ Cc: Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>,
  Fabio Estevam <festevam@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [RFC PATCH 21/31] test: event: update the expected event dump output
-Date: Sat,  8 Jun 2024 00:22:30 +0530
-Message-Id: <20240607185240.1892031-22-sughosh.ganu@linaro.org>
+Subject: [RFC PATCH 22/31] test: lmb: run the LMB tests only on sandbox
+Date: Sat,  8 Jun 2024 00:22:31 +0530
+Message-Id: <20240607185240.1892031-23-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
 References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
@@ -57,32 +57,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the addition of two events for notification of any changes to
-memory that is occupied and is free, the output of the event_dump.py
-script has changed. Update the expected event log to incorporate this
-change.
+The LMB memory map is now persistent and global. Running the tests for
+the LMB module will result in the memory map getting reset, and this
+will have side-effects on the rest of the working of the platform. Run
+the LMB tests only on the sandbox platform, which is meant for running
+such kinds of tests.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
- test/py/tests/test_event_dump.py | 2 ++
- 1 file changed, 2 insertions(+)
+ test/lib/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/test/py/tests/test_event_dump.py b/test/py/tests/test_event_dump.py
-index e282c67335..b14e098895 100644
---- a/test/py/tests/test_event_dump.py
-+++ b/test/py/tests/test_event_dump.py
-@@ -16,9 +16,11 @@ def test_event_dump(u_boot_console):
-     out = util.run_and_log(cons, ['scripts/event_dump.py', sandbox])
-     expect = '''.*Event type            Id                              Source location
- --------------------  ------------------------------  ------------------------------
-+EVT_EFI_MEM_MAP_UPDATE  efi_mem_map_update_sync       .*lib/lmb.c:.*
- EVT_FT_FIXUP          bootmeth_vbe_ft_fixup           .*boot/vbe_request.c:.*
- EVT_FT_FIXUP          bootmeth_vbe_simple_ft_fixup    .*boot/vbe_simple_os.c:.*
- EVT_LAST_STAGE_INIT   install_smbios_table            .*lib/efi_loader/efi_smbios.c:.*
-+EVT_LMB_MAP_UPDATE    lmb_mem_map_update_sync         .*lib/efi_loader/efi_memory.c:.*
- EVT_MISC_INIT_F       sandbox_early_getopt_check      .*arch/sandbox/cpu/start.c:.*
- EVT_TEST              h_adder_simple                  .*test/common/event.c:'''
-     assert re.match(expect, out, re.MULTILINE) is not None
+diff --git a/test/lib/Makefile b/test/lib/Makefile
+index e75a263e6a..9154e07993 100644
+--- a/test/lib/Makefile
++++ b/test/lib/Makefile
+@@ -9,7 +9,7 @@ obj-$(CONFIG_EFI_LOADER) += efi_device_path.o
+ obj-$(CONFIG_EFI_SECURE_BOOT) += efi_image_region.o
+ obj-y += hexdump.o
+ obj-$(CONFIG_SANDBOX) += kconfig.o
+-obj-y += lmb.o
++obj-$(CONFIG_SANDBOX) += lmb.o
+ obj-y += longjmp.o
+ obj-$(CONFIG_CONSOLE_RECORD) += test_print.o
+ obj-$(CONFIG_SSCANF) += sscanf.o
 -- 
 2.34.1
 
