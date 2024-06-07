@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7999C27C53
-	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 22:59:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CF74C27C53
+	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 23:14:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55828884CD;
-	Sat,  8 Jun 2024 00:59:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 4B1F788499;
+	Sat,  8 Jun 2024 01:14:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="gYVLLRfj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JAMF4DoH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CA2D8850A; Sat,  8 Jun 2024 00:59:42 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 273D08850A; Sat,  8 Jun 2024 01:14:41 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E51F788499
- for <u-boot@lists.denx.de>; Sat,  8 Jun 2024 00:59:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D28188499
+ for <u-boot@lists.denx.de>; Sat,  8 Jun 2024 01:14:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 457MxRDu083695;
- Fri, 7 Jun 2024 17:59:27 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1717801167;
- bh=eFyCq5RGC7yvCA5tjKxq3HD8Tmjr0n3uqV/Sxe13E0A=;
- h=From:To:CC:Subject:Date;
- b=gYVLLRfjsqeA2SPzkVOTHixhwkEdQr7OGRSDlsaJumiiRmz4+wVfMgo+qJZ+Dn5SI
- /X+ngxwU591bdEdtb9zJWI22gt1XN4iSDO3EMnuWM4M4/4YcNG9eLXGFkQxSW71rHV
- faieUjXg6kJPH7DPcBqcL0GbPIXziZ/ePTBGLPhQ=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 457MxRFH028273
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 7 Jun 2024 17:59:27 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 7
- Jun 2024 17:59:27 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 7 Jun 2024 17:59:27 -0500
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 457MxRpo116340;
- Fri, 7 Jun 2024 17:59:27 -0500
-From: Jonathan Humphreys <j-humphreys@ti.com>
-To: Sumit Garg <sumit.garg@linaro.org>, Rasmus Villemoes
- <rasmus.villemoes@prevas.dk>, Wei Ming Chen <jj251510319013@gmail.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Joshua Watt <jpewhacker@gmail.com>, Caleb
- Connolly <caleb.connolly@linaro.org>,
- Alexander Gendin <agendin@matrox.com>, Sean Anderson <seanga2@gmail.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Jonathan Humphreys <j-humphreys@ti.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Tom Rini <trini@konsulko.com>, Mario Six <mario.six@gdsys.cc>, Simon Glass
- <sjg@chromium.org>
-CC: <u-boot@lists.denx.de>
-Subject: [PATCH] scripts/Makefile.lib: EFI: Use capsule CRT instead of ESL file
-Date: Fri, 7 Jun 2024 17:59:15 -0500
-Message-ID: <20240607225915.1985514-1-j-humphreys@ti.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-57a52dfd081so3143600a12.2
+ for <u-boot@lists.denx.de>; Fri, 07 Jun 2024 16:14:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1717802078; x=1718406878; darn=lists.denx.de;
+ h=content-transfer-encoding:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=IRA3JB/fhrAYNS/gtJ4AOd8mevyd1GxZ/v7HZpKyu68=;
+ b=JAMF4DoHOyBPCNtn8wTZM0P+svcbp1Ics4U8uIngm+TITtCVMQQbB5Z/jhisnP9MPz
+ FOvjDO/No0LS7ylrkdEQZTTbl8ppwaaNbiZ+jAeezibGVJ+vudQbrIf9cxqVzcBwgHL1
+ sp8xYLG4d6HuV299evZWHqLD6BhzpgLMtH1JLYHFc/+8SLBFM/U8EPW8mo7e0tC4qcBK
+ Sh7n40Gm5n4TcW0vc587/I410sDvtHh0pakOd1K+pt+7yX6ydjgHyoXzwCqeqnB/HFLN
+ Jlggr4ROeQnbT3IyY+My+KvB4DyO5xQssMNsnNWs+H1Xjl3Z+oMu/iEsSlM1xf8JeXgD
+ 5wZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717802078; x=1718406878;
+ h=content-transfer-encoding:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=IRA3JB/fhrAYNS/gtJ4AOd8mevyd1GxZ/v7HZpKyu68=;
+ b=rH7kExRKwDfEWjncxF0FVypWYQAYZTh+i2MMwbhxUkuUSVYaCPiNrGTfOEQzB0TKQS
+ NNQaRjqw+XumTGz0mDxX4bIN6TCoCj5j8WLAj3BJ80OBCTk4YgRH/HwQihMhLrBSXA6U
+ G9+WotvMgBGr2N7EEYS89vbT9JS/MRaKIh697/Y5AABXrUusO1o9WKAIMbc3nLFB7Bmt
+ 2TC4deSQhSOkL+5HEqNUZTmWJH9TV3wFW8aJhJeBO8pqQNig2WYKKTY+IaLfkmBiHgYl
+ Ap9BDtCUv65An3eTPKfkL8OkwR+N9LR1KPdzUjQPPRYQHyknMVwmmjXxFsnT1KQ20akX
+ 4w3w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXWryJd75mo2NO+RZ7R01F8Yh4ubdoaPJeuMiiQfh57STIIgoNNtiwB2AWmOGTI4i5b3As9cedENexhK1+9TNlIBm0uzg==
+X-Gm-Message-State: AOJu0YwUxc6DEWSXjEKbYk8XRz30MhiMJmstqePk82sa0ZKJgB8CuseH
+ ehfL7nhAUJdUbbkO7VEqL2GmDxle47pFBZFCBa2tt0516bVoEVn1ziX9P9m3dcrQq21dmZV46cQ
+ CQ9pBBYM+5+12R6B4rRN45GZvMRY=
+X-Google-Smtp-Source: AGHT+IHBoJkRNKinvUAt3GKYTEzgswFOR1tfgIRhllm7F9JzDtWX4mhPi6Eycf8oAG6sEnP6UfZHfnp2IRIR1aMy+Cw=
+X-Received: by 2002:a50:aa95:0:b0:578:5242:a22c with SMTP id
+ 4fb4d7f45d1cf-57c50941d47mr2265959a12.25.1717802077999; Fri, 07 Jun 2024
+ 16:14:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20240606234437.24549-1-mibodhi@gmail.com>
+ <ZmMO-yODr9n2X7yD@orbyte.nwl.cc>
+In-Reply-To: <ZmMO-yODr9n2X7yD@orbyte.nwl.cc>
+From: Tony Dinh <mibodhi@gmail.com>
+Date: Fri, 7 Jun 2024 16:14:26 -0700
+Message-ID: <CAJaLiFwDHkkDKv3DY8Edk7_LE8gVHujx=d=nMfF3vu2zGmLWgA@mail.gmail.com>
+Subject: Re: [PATCH] arm: mvebu: Enable bootstd and other modernization for
+ Synology DS414 (Armada XP) board
+To: Phil Sutter <phil@nwl.cc>, Tony Dinh <mibodhi@gmail.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>,
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,156 +92,159 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The EFI Capsule ESL file (EFI Signature List File) used for authentication
-is a binary generated from the EFI Capsule public key certificate. Instead
-of including it in the source repo, automatically generate it from the
-certificate file during the build process.
+Hi Phil,
 
-Currently, sandbox is the only device using this, so removed its ESL file
-and set the (new) CONFIG_EFI_CAPSULE_CRT_FILE config to point to its public
-key certificate.
+On Fri, Jun 7, 2024 at 6:45=E2=80=AFAM Phil Sutter <phil@nwl.cc> wrote:
+>
+> Hi Tony,
+>
+> On Thu, Jun 06, 2024 at 04:44:36PM -0700, Tony Dinh wrote:
+> > - Switch to standard boot (in include/configs/ds414.h and
+> > configs/ds414_defconfig)
+> > - Implement board_late_init() to ensure successful enumeration
+> > of USB3 devices
+>
+> Oh, this makes the rear USB3 ports usable? I had failed to get there
+> when working on DS414 support.
 
-Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
----
- board/sandbox/capsule_pub_esl_good.esl | Bin 831 -> 0 bytes
- configs/sandbox_defconfig              |   2 +-
- configs/sandbox_flattree_defconfig     |   2 +-
- doc/develop/uefi/uefi.rst              |   8 ++++----
- lib/efi_loader/Kconfig                 |  12 +++++++-----
- scripts/Makefile.lib                   |  17 +++++++++--------
- 6 files changed, 22 insertions(+), 19 deletions(-)
- delete mode 100644 board/sandbox/capsule_pub_esl_good.esl
+Yes! There have been a lot of updates in the PCIe MVEBU area. So it
+could have been a different reason why it did not work when you added
+support for this board.
 
-diff --git a/board/sandbox/capsule_pub_esl_good.esl b/board/sandbox/capsule_pub_esl_good.esl
-deleted file mode 100644
-index f8cc272309b2f80113c29e22bc9fdd5c767b4667..0000000000000000000000000000000000000000
-GIT binary patch
-literal 0
-HcmV?d00001
+Still, without this board_late_init(), we would need to run "pci enum"
+and then "usb start" or "usb reset" to bring up the USB3 ports. The
+USB3 controller is on the PCIe bus, and MVEBU PCIe drivers don't
+initialize everything when it comes up.
 
-literal 831
-zcmZ1&d0^?2Da*aux2_hA(f&|m&&&V@%1|1@gOCPI%=`vTjNcb9GchtTi3D3+YdNud
-z!N;6d=3f<&F-6ONS4$i4vT<s)d9;1!Wn|=LWiSvk6fqEDV-96u=HU);4GxJ9_H_4i
-z4Kh#==QT1murM$&v@kF?F^ZDlH#RUZHZ(9Wg9_l(*~F-XYzZSP19KB2KLgNRTue=j
-zj0_uCzfHaHH`(1}*Y#3U|97H!k3}~NhPN}GOrG;oTyFi(qmA`NTh~3>_x7NA^t?#f
-z>a)U0PLquF6_u8?^dHul+F@6qxB0YdssF`W?=n<3b^P4dmiKI#^@p}E)#B;%RW0;Z
-z-#n?@Et9eDfUQTgV&QR*{b|~VRC6NVv@WS%&0hbnAnbMH)s>m<ruWw!o9KU&t7IaN
-z^ws?)fy!Y!PA6wHM9oeqJuYyoIO0;duj#}3>jlOWk4kw?f2&||$2#il@?9KqESXN5
-zbz2wTe>RVi?d~3_cT1K9oDaUDRd@aM1GkLbi{)<QcW%>Ma(#i_ui5G`j(PuTIhpoN
-z73DslYiZhJ`RkA&6Eh<N<Kke0Km%D|xXbdfh_Q&secT;;BI`VRLX*$F#X3)yTwnIl
-z%Rn9^t;`}}Al86g0Y6BAFeBrC7FGjhAcY+4z_<klJ0n9-ZF-^Byx1)aGPkZ;M8@iK
-z@4h6QYApWke51U4vh|)B+RHfwcQh8f`Fd8-Ad#bU?mv#SCl^~!ojUbKMpn)-Kd>zH
-z-bULy5-~dZsg>zZPS-w(zNM;c<#N4ar|5@t2FY2AoF7{4IWYI(=HR-Vl;VtSQGM$z
-zG&LhNEwesN5|ez&@#Le<mt%k4Ngp{`oU3!I!!G(r+O78=mGAf;yBNLt_LaVmLHB2w
-zF3Vp(*($;GmPMkjzjWQf=x-~Qozl?NwEilS|Lo7%xGP$f^Riek&1Q@!w>qJ9NJDsL
-xX})Fc$L0Fj-&QP|CD!3Bu=aCF<a-t|<@nrhQ$HQy*tL7JV9T^r#)tp!0|2#rO&9<G
+>
+> > - Remove unnecessary misc_init_r(), since NET_RANDOM_ETHADDR is now
+> > configured in
+>
+> So u-boot will assign random MAC addresses to the NICs instead of the
+> real ones? Won't this potentially break PXE boot setups?
 
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index 93b52f2de5c..d6c7d7a4ad3 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -352,7 +352,7 @@ CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
- CONFIG_EFI_CAPSULE_ON_DISK=y
- CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
- CONFIG_EFI_CAPSULE_AUTHENTICATE=y
--CONFIG_EFI_CAPSULE_ESL_FILE="board/sandbox/capsule_pub_esl_good.esl"
-+CONFIG_EFI_CAPSULE_CRT_FILE="board/sandbox/capsule_pub_key_good.crt"
- CONFIG_EFI_SECURE_BOOT=y
- CONFIG_TEST_FDTDEC=y
- CONFIG_UNIT_TEST=y
-diff --git a/configs/sandbox_flattree_defconfig b/configs/sandbox_flattree_defconfig
-index 6bf8874e722..049a606613e 100644
---- a/configs/sandbox_flattree_defconfig
-+++ b/configs/sandbox_flattree_defconfig
-@@ -227,7 +227,7 @@ CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
- CONFIG_EFI_CAPSULE_ON_DISK=y
- CONFIG_EFI_CAPSULE_FIRMWARE_FIT=y
- CONFIG_EFI_CAPSULE_AUTHENTICATE=y
--CONFIG_EFI_CAPSULE_ESL_FILE="board/sandbox/capsule_pub_esl_good.esl"
-+CONFIG_EFI_CAPSULE_CRT_FILE="board/sandbox/capsule_pub_key_good.crt"
- CONFIG_UNIT_TEST=y
- CONFIG_UT_TIME=y
- CONFIG_UT_DM=y
-diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
-index 36ac75278fa..985956ab85c 100644
---- a/doc/develop/uefi/uefi.rst
-+++ b/doc/develop/uefi/uefi.rst
-@@ -580,10 +580,10 @@ and used by the steps highlighted below.
-     }
- 
- You can perform step-4 through the Kconfig symbol
--CONFIG_EFI_CAPSULE_ESL_FILE. This symbol points to the esl file
--generated in step-2. Once the symbol has been populated with the path
--to the esl file, it will automatically get embedded into the
--platform's dtb as part of U-Boot build.
-+CONFIG_EFI_CAPSULE_CRT_FILE. This symbol points to the signing key
-+generated in step-2. As part of U-Boot build, the ESL certificate file will
-+be generated from the signing key and automatically get embedded into the
-+platform's dtb.
- 
- Anti-rollback Protection
- ************************
-diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-index 430bb7f0f7d..23079a5709d 100644
---- a/lib/efi_loader/Kconfig
-+++ b/lib/efi_loader/Kconfig
-@@ -298,13 +298,15 @@ config EFI_CAPSULE_MAX
- 	  Select the max capsule index value used for capsule report
- 	  variables. This value is used to create CapsuleMax variable.
- 
--config EFI_CAPSULE_ESL_FILE
--	string "Path to the EFI Signature List File"
-+config EFI_CAPSULE_CRT_FILE
-+	string "Path to the EFI capsule public key certificate"
- 	depends on EFI_CAPSULE_AUTHENTICATE
- 	help
--	  Provides the path to the EFI Signature List file which will
--	  be embedded in the platform's device tree and used for
--	  capsule authentication at the time of capsule update.
-+	  Provides the path to the EFI capsule public key certificate that
-+	  corresponds to the capsule signing key. This certificate will be used
-+	  to generate the EFI capsule ESL (signature list file) that gets
-+	  embedded in the platform's device tree and used for capsule
-+	  authentication at the time of capsule update.
- 
- config EFI_DEVICE_PATH_TO_TEXT
- 	bool "Device path to text protocol"
-diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-index 62f87517c09..7e2c0b145df 100644
---- a/scripts/Makefile.lib
-+++ b/scripts/Makefile.lib
-@@ -342,22 +342,23 @@ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
- 		; \
- 	sed "s:$(pre-tmp):$(<):" $(depfile).pre.tmp $(depfile).dtc.tmp > $(depfile)
- 
-+capsule_esl_input_file=$(srctree)/lib/efi_loader/capsule_esl.dtsi.in
-+capsule_crt_file=$(subst $(quote),,$(CONFIG_EFI_CAPSULE_CRT_FILE))
-+capsule_esl_dtsi=.capsule_esl.dtsi
-+
- quiet_cmd_capsule_esl_gen = CAPSULE_ESL_GEN $@
- cmd_capsule_esl_gen = \
--	$(shell sed "s:ESL_BIN_FILE:$(capsule_esl_path):" $(capsule_esl_input_file) > $@)
-+	cert-to-efi-sig-list $< $(obj)/capsule_esl_file \
-+	$(shell sed "s:ESL_BIN_FILE:$(abspath $(obj)/capsule_esl_file):" $(capsule_esl_input_file) > $@)
- 
--$(obj)/.capsule_esl.dtsi: FORCE
--ifeq ($(CONFIG_EFI_CAPSULE_ESL_FILE),"")
--	$(error "CONFIG_EFI_CAPSULE_ESL_FILE is empty, EFI capsule authentication \
-+$(obj)/$(capsule_esl_dtsi): $(capsule_crt_file) FORCE
-+ifeq ($(CONFIG_EFI_CAPSULE_CRT_FILE),"")
-+	$(error "CONFIG_EFI_CAPSULE_CRT_FILE is empty, EFI capsule authentication \
- 	public key must be specified when CONFIG_EFI_CAPSULE_AUTHENTICATE is enabled")
- else
- 	$(call cmd_capsule_esl_gen)
- endif
- 
--capsule_esl_input_file=$(srctree)/lib/efi_loader/capsule_esl.dtsi.in
--capsule_esl_dtsi = .capsule_esl.dtsi
--capsule_esl_path=$(abspath $(srctree)/$(subst $(quote),,$(CONFIG_EFI_CAPSULE_ESL_FILE)))
--
- dtsi_include_list_deps := $(addprefix $(u_boot_dtsi_loc),$(subst $(quote),,$(dtsi_include_list)))
- 
- ifdef CONFIG_EFI_CAPSULE_AUTHENTICATE
--- 
-2.34.1
+I did not see any problem using a random MAC address in my test using
+bootstd. Is there a setup where this board MAC address must be known
+when we boot with PXE? my impression is that only ipaddr and serverip
+are needed, and the MAC address could be whatever we define for the
+board.
 
+>
+> > - Remove unnecessary checkboard()
+> > - Updated IDENT_STRING to indicate this u-boot supports both Synology
+> > DS414 and DS214+ boards
+> > - Add SYS_THUMB_BUILD to reduce binary size
+> > - Add NET_RANDOM_ETHADDR
+> > - Add CONFIG_LBA48 and CONFIG_SYS_64BIT_LBA to support >2TB HDD/SDD
+> >
+> > Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+> > ---
+> >
+> >  board/Synology/ds414/ds414.c | 15 +++--------
+> >  configs/ds414_defconfig      | 20 ++++++--------
+> >  include/configs/ds414.h      | 51 ++++++++++++++++++++++--------------
+> >  3 files changed, 42 insertions(+), 44 deletions(-)
+> >
+> > diff --git a/board/Synology/ds414/ds414.c b/board/Synology/ds414/ds414.=
+c
+> > index abe6f9eb5e..f0b55fa095 100644
+> > --- a/board/Synology/ds414/ds414.c
+> > +++ b/board/Synology/ds414/ds414.c
+> > @@ -181,18 +181,9 @@ int board_init(void)
+> >       return 0;
+> >  }
+> >
+> > -int misc_init_r(void)
+> > +int board_late_init(void)
+> >  {
+> > -     if (!env_get("ethaddr")) {
+> > -             puts("Incomplete environment, populating from SPI flash\n=
+");
+> > -             do_syno_populate(0, NULL);
+> > -     }
+> > -     return 0;
+> > -}
+>
+> This is useful for first boot of flashed vanilla u-boot. Can this be
+> retained somehow?
+
+We could, but with NET_RANDOM_ETHADDR configured in, this routine will
+do nothing. Perhaps the fact that the envs will show CRC errors in the
+1st boot should be an indicator that it needs to be populated?
+
+With standard boot enabled in this patch, the default envs can be
+scripted in /boot/boot.scr or /boot.scr on the rootfs disk storage, or
+on some flash location, or on the network . So we don't even need the
+full envs on SPI flash like we used to. It might still be useful but
+not necessary.
+
+>
+> [...]
+> > diff --git a/include/configs/ds414.h b/include/configs/ds414.h
+> > index 9446acba79..bbefe632e0 100644
+> > --- a/include/configs/ds414.h
+> > +++ b/include/configs/ds414.h
+> [...]
+> > @@ -38,23 +34,38 @@
+> >   * L2 cache thus cannot be used.
+> >   */
+> >
+> > -/* SPL */
+> > -/* Defines for SPL */
+> > +/* Keep device tree and initrd in lower memory so the kernel can acces=
+s them */
+> > +#define RELOCATION_LIMITS_ENV_SETTINGS  \
+> > +     "fdt_high=3D0x10000000\0"         \
+> > +     "initrd_high=3D0x10000000\0"
+> > +
+> > +/*
+> > + * mv-common.h should be defined after CMD configs since it used them
+> > + * to enable certain macros
+> > + */
+> > +#include "mv-common.h"
+> > +
+> > +#ifndef CONFIG_SPL_BUILD
+> >
+> > -/* Default Environment */
+> > +#define KERNEL_ADDR_R        __stringify(0x1000000)
+> > +#define FDT_ADDR_R   __stringify(0x2000000)
+> > +#define RAMDISK_ADDR_R       __stringify(0x2200000)
+> > +#define SCRIPT_ADDR_R        __stringify(0x1800000)
+> > +#define PXEFILE_ADDR_R       __stringify(0x1900000)
+> >
+> > -#define CFG_EXTRA_ENV_SETTINGS                               \
+> > -     "initrd_high=3D0xffffffff\0"                              \
+> > -     "ramdisk_addr_r=3D0x8000000\0"                            \
+> > -     "usb0Mode=3Dhost\0usb1Mode=3Dhost\0usb2Mode=3Ddevice\0"       \
+> > -     "ethmtu=3D1500\0eth1mtu=3D1500\0"                           \
+> > -     "update_uboot=3Dsf probe; dhcp; "                         \
+> > -             "mw.b ${loadaddr} 0x0 0xd0000; "                \
+> > -             "tftpboot ${loadaddr} u-boot-with-spl.kwb; "    \
+> > -             "sf update ${loadaddr} 0x0 0xd0000\0"
+>
+> Are these dropped or am I missing a generic spot which adds them? IIRC,
+> the usb*mode and eth*mtu settings are required, is that wrong? Lastly,
+
+MTU is default to 1500 in mvneta.c. So the eth*mtu env is no longer necessa=
+ry.
+
+Also, I believe usb*mode is no longer necessary with the USB driver
+model. I have not come across their usage anywhere for a long time.
+The USB driver model seems to handle everything pretty well.
+
+> that update_uboot macro at least helps preventing people from writing
+> into wrong spots. What's the cause for dropping it?
+
+I think we usually use mtdparts to define where u-boot is. So users
+know where the right place to flash is. But you are right, it only
+helps to describe exactly how to flash a new u-boot. So I'll put that
+back in the V2 patch.
+
+Thanks for taking time to review the patch. And I'm glad to see you
+are still active with the u-boot community!
+
+All the best,
+Tony
+
+>
+> Thanks, Phil
