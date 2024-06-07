@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18004C27C6E
-	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 18:54:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB0D7C27C5F
+	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 18:54:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74F2C8848F;
-	Fri,  7 Jun 2024 20:53:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D17B4884C0;
+	Fri,  7 Jun 2024 20:53:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 60FD888473; Fri,  7 Jun 2024 20:53:45 +0200 (CEST)
+ id 71B208846E; Fri,  7 Jun 2024 20:53:52 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id D2326884A7
- for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 20:53:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id A5F4288473
+ for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 20:53:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AF7441480;
- Fri,  7 Jun 2024 11:54:06 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 88C961480;
+ Fri,  7 Jun 2024 11:54:13 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 558F83F792;
- Fri,  7 Jun 2024 11:53:39 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6F2813F792;
+ Fri,  7 Jun 2024 11:53:46 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>,
@@ -33,9 +33,10 @@ Cc: Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>,
  Fabio Estevam <festevam@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [RFC PATCH 03/31] lmb: make the lmb reservations persistent
-Date: Sat,  8 Jun 2024 00:22:12 +0530
-Message-Id: <20240607185240.1892031-4-sughosh.ganu@linaro.org>
+Subject: [RFC PATCH 05/31] lmb: pass a flag to image_setup_libfdt() for lmb
+ reservations
+Date: Sat,  8 Jun 2024 00:22:14 +0530
+Message-Id: <20240607185240.1892031-6-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
 References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
@@ -57,412 +58,139 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current LMB API's for allocating and reserving memory use a
-per-caller based memory view. Memory allocated by a caller can then be
-overwritten by another caller. Make these allocations and reservations
-persistent. With this, memory allocated or reserved will not be
-overwritten.
+The image_setup_libfdt() function optionally calls the LMB API to
+reserve the region of memory occupied by the FDT blob. This was
+earlier determined through the presence of the pointer to the lmb
+structure, which is no longer present. Pass a flag to the
+image_setup_libfdt() function to indicate if the region occupied by
+the FDT blob is to be marked as reserved by the LMB module.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
+ arch/mips/lib/bootm.c         | 2 +-
+ boot/image-board.c            | 2 +-
+ boot/image-fdt.c              | 7 +++----
+ cmd/elf.c                     | 2 +-
+ include/image.h               | 5 ++---
+ lib/efi_loader/efi_dt_fixup.c | 2 +-
+ lib/efi_loader/efi_helper.c   | 2 +-
+ 7 files changed, 10 insertions(+), 12 deletions(-)
 
-Note: @Mark Kettenis, please review the changes made in the apple dart
-driver. I have removed the driver-local LMB instance, but I am not
-sure if the current logic makes sense. I would think that it would be
-possible to simply use memory region allocated by the LMB module(maybe
-using the max address argument), instead of adding specific memory
-region with lmb_add().
-
- arch/arm/mach-stm32mp/dram_init.c |  1 -
- board/xilinx/common/board.c       |  1 -
- drivers/iommu/apple_dart.c        |  1 -
- drivers/iommu/sandbox_iommu.c     |  1 -
- include/lmb.h                     | 17 ++----
- lib/lmb.c                         | 91 ++++++++++++++++---------------
- test/lib/lmb.c                    | 18 ------
- 7 files changed, 50 insertions(+), 80 deletions(-)
-
-diff --git a/arch/arm/mach-stm32mp/dram_init.c b/arch/arm/mach-stm32mp/dram_init.c
-index fb1208fc5d..86d6577b35 100644
---- a/arch/arm/mach-stm32mp/dram_init.c
-+++ b/arch/arm/mach-stm32mp/dram_init.c
-@@ -59,7 +59,6 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
- 	gd->ram_top = clamp_val(gd->ram_top, 0, SZ_4G - 1);
+diff --git a/arch/mips/lib/bootm.c b/arch/mips/lib/bootm.c
+index 54d89e9cca..e4fc2e589d 100644
+--- a/arch/mips/lib/bootm.c
++++ b/arch/mips/lib/bootm.c
+@@ -247,7 +247,7 @@ static int boot_setup_fdt(struct bootm_headers *images)
+ 	images->initrd_start = virt_to_phys((void *)images->initrd_start);
+ 	images->initrd_end = virt_to_phys((void *)images->initrd_end);
  
- 	/* found enough not-reserved memory to relocated U-Boot */
--	lmb_init(&lmb);
- 	lmb_add(&lmb, gd->ram_base, gd->ram_top - gd->ram_base);
- 	boot_fdt_add_mem_rsv_regions(&lmb, (void *)gd->fdt_blob);
- 	/* add 8M for reserved memory for display, fdt, gd,... */
-diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
-index b47d2d23f9..ebe57da7f8 100644
---- a/board/xilinx/common/board.c
-+++ b/board/xilinx/common/board.c
-@@ -685,7 +685,6 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
- 		panic("Not 64bit aligned DT location: %p\n", gd->fdt_blob);
+-	return image_setup_libfdt(images, images->ft_addr, &images->lmb);
++	return image_setup_libfdt(images, images->ft_addr, 0);
+ }
  
- 	/* found enough not-reserved memory to relocated U-Boot */
--	lmb_init(&lmb);
- 	lmb_add(&lmb, gd->ram_base, gd->ram_size);
- 	boot_fdt_add_mem_rsv_regions(&lmb, (void *)gd->fdt_blob);
- 	size = ALIGN(CONFIG_SYS_MALLOC_LEN + total_size, MMU_SECTION_SIZE);
-diff --git a/drivers/iommu/apple_dart.c b/drivers/iommu/apple_dart.c
-index 6ecd84303b..ef385d9c9f 100644
---- a/drivers/iommu/apple_dart.c
-+++ b/drivers/iommu/apple_dart.c
-@@ -214,7 +214,6 @@ static int apple_dart_probe(struct udevice *dev)
- 	priv->dvabase = DART_PAGE_SIZE;
- 	priv->dvaend = SZ_4G - DART_PAGE_SIZE;
+ static void boot_prep_linux(struct bootm_headers *images)
+diff --git a/boot/image-board.c b/boot/image-board.c
+index 89ccf80066..481b333b4c 100644
+--- a/boot/image-board.c
++++ b/boot/image-board.c
+@@ -897,7 +897,7 @@ int image_setup_linux(struct bootm_headers *images)
+ 	}
  
--	lmb_init(&priv->lmb);
- 	lmb_add(&priv->lmb, priv->dvabase, priv->dvaend - priv->dvabase);
- 
- 	/* Disable translations. */
-diff --git a/drivers/iommu/sandbox_iommu.c b/drivers/iommu/sandbox_iommu.c
-index 6ceb7fd5ec..31ce91345c 100644
---- a/drivers/iommu/sandbox_iommu.c
-+++ b/drivers/iommu/sandbox_iommu.c
-@@ -55,7 +55,6 @@ static int sandbox_iommu_probe(struct udevice *dev)
- {
- 	struct sandbox_iommu_priv *priv = dev_get_priv(dev);
- 
--	lmb_init(&priv->lmb);
- 	lmb_add(&priv->lmb, 0x89abc000, SZ_16K);
- 
+ 	if (CONFIG_IS_ENABLED(OF_LIBFDT) && of_size) {
+-		ret = image_setup_libfdt(images, *of_flat_tree, lmb);
++		ret = image_setup_libfdt(images, *of_flat_tree, 1);
+ 		if (ret)
+ 			return ret;
+ 	}
+diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+index 08afde203c..4daced9e99 100644
+--- a/boot/image-fdt.c
++++ b/boot/image-fdt.c
+@@ -567,8 +567,7 @@ __weak int arch_fixup_fdt(void *blob)
  	return 0;
-diff --git a/include/lmb.h b/include/lmb.h
-index 7b87181b9e..bbe1c5299c 100644
---- a/include/lmb.h
-+++ b/include/lmb.h
-@@ -49,8 +49,7 @@ struct lmb_property {
-  *         => CONFIG_LMB_MEMORY_REGIONS: struct lmb.memory_regions
-  *         => CONFIG_LMB_RESERVED_REGIONS: struct lmb.reserved_regions
-  *         lmb_region.region is only a pointer to the correct buffer,
-- *         initialized in lmb_init(). This configuration is useful to manage
-- *         more reserved memory regions with CONFIG_LMB_RESERVED_REGIONS.
-+ *         initialized with these values.
+ }
+ 
+-int image_setup_libfdt(struct bootm_headers *images, void *blob,
+-		       struct lmb *lmb)
++int image_setup_libfdt(struct bootm_headers *images, void *blob, bool lmb)
+ {
+ 	ulong *initrd_start = &images->initrd_start;
+ 	ulong *initrd_end = &images->initrd_end;
+@@ -668,7 +667,7 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob,
+ 	}
+ 
+ 	/* Delete the old LMB reservation */
+-	if (lmb)
++	if (CONFIG_IS_ENABLED(LMB) && lmb)
+ 		lmb_free(map_to_sysmem(blob), fdt_totalsize(blob));
+ 
+ 	ret = fdt_shrink_to_minimum(blob, 0);
+@@ -677,7 +676,7 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob,
+ 	of_size = ret;
+ 
+ 	/* Create a new LMB reservation */
+-	if (lmb)
++	if (CONFIG_IS_ENABLED(LMB) && lmb)
+ 		lmb_reserve(map_to_sysmem(blob), of_size);
+ 
+ #if defined(CONFIG_ARCH_KEYSTONE)
+diff --git a/cmd/elf.c b/cmd/elf.c
+index df4354d374..00879de22b 100644
+--- a/cmd/elf.c
++++ b/cmd/elf.c
+@@ -89,7 +89,7 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 		printf("## Setting up FDT at 0x%08lx ...\n", fdt_addr);
+ 		flush();
+ 
+-		if (image_setup_libfdt(&img, (void *)fdt_addr, NULL))
++		if (image_setup_libfdt(&img, (void *)fdt_addr, 0))
+ 			return 1;
+ 	}
+ #endif
+diff --git a/include/image.h b/include/image.h
+index 8c619030ee..92ebe25548 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -1018,11 +1018,10 @@ int image_decomp(int comp, ulong load, ulong image_start, int type,
+  *
+  * @images:	Images information
+  * @blob:	FDT to update
+- * @lmb:	Points to logical memory block structure
++ * @lmb:	Flag indicating use of lmb for reserving FDT memory region
+  * Return: 0 if ok, <0 on failure
   */
+-int image_setup_libfdt(struct bootm_headers *images, void *blob,
+-		       struct lmb *lmb);
++int image_setup_libfdt(struct bootm_headers *images, void *blob, bool lmb);
  
  /**
-@@ -73,26 +72,18 @@ struct lmb_region {
- /**
-  * struct lmb - Logical memory block handle.
-  *
-- * Clients provide storage for Logical memory block (lmb) handles.
-- * The content of the structure is managed by the lmb library.
-- * A lmb struct is  initialized by lmb_init() functions.
-- * The lmb struct is passed to all other lmb APIs.
-+ * The Logical Memory Block structure which is used to keep track
-+ * of available memory which can be used for stuff like loading
-+ * images(kernel, initrd, fdt).
-  *
-  * @memory: Description of memory regions.
-  * @reserved: Description of reserved regions.
-- * @memory_regions: Array of the memory regions (statically allocated)
-- * @reserved_regions: Array of the reserved regions (statically allocated)
-  */
- struct lmb {
- 	struct lmb_region memory;
- 	struct lmb_region reserved;
--#if !IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
--	struct lmb_property memory_regions[CONFIG_LMB_MEMORY_REGIONS];
--	struct lmb_property reserved_regions[CONFIG_LMB_RESERVED_REGIONS];
--#endif
- };
- 
--void lmb_init(struct lmb *lmb);
- void lmb_init_and_reserve(struct lmb *lmb, struct bd_info *bd, void *fdt_blob);
- void lmb_init_and_reserve_range(struct lmb *lmb, phys_addr_t base,
- 				phys_size_t size, void *fdt_blob);
-diff --git a/lib/lmb.c b/lib/lmb.c
-index 4d39c0d1f9..7f34d4a8b0 100644
---- a/lib/lmb.c
-+++ b/lib/lmb.c
-@@ -20,6 +20,25 @@ DECLARE_GLOBAL_DATA_PTR;
- 
- #define LMB_ALLOC_ANYWHERE	0
- 
-+#if !IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
-+struct lmb_property memory_regions[CONFIG_LMB_MEMORY_REGIONS];
-+struct lmb_property reserved_regions[CONFIG_LMB_RESERVED_REGIONS];
-+#endif
-+
-+struct lmb lmb = {
-+#if IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
-+	.memory.max = CONFIG_LMB_MAX_REGIONS,
-+	.reserved.max = CONFIG_LMB_MAX_REGIONS,
-+#else
-+	.memory.max = CONFIG_LMB_MEMORY_REGIONS,
-+	.reserved.max = CONFIG_LMB_RESERVED_REGIONS,
-+	.memory.region = memory_regions,
-+	.reserved.region = reserved_regions,
-+#endif
-+	.memory.cnt = 0,
-+	.reserved.cnt = 0,
-+};
-+
- static void lmb_dump_region(struct lmb_region *rgn, char *name)
- {
- 	unsigned long long base, size, end;
-@@ -42,8 +61,8 @@ static void lmb_dump_region(struct lmb_region *rgn, char *name)
- void lmb_dump_all_force(struct lmb *lmb)
- {
- 	printf("lmb_dump_all:\n");
--	lmb_dump_region(&lmb->memory, "memory");
--	lmb_dump_region(&lmb->reserved, "reserved");
-+	lmb_dump_region(&lmb.memory, "memory");
-+	lmb_dump_region(&lmb.reserved, "reserved");
- }
- 
- void lmb_dump_all(struct lmb *lmb)
-@@ -130,21 +149,6 @@ static void lmb_fix_over_lap_regions(struct lmb_region *rgn, unsigned long r1,
- 	lmb_remove_region(rgn, r2);
- }
- 
--void lmb_init(struct lmb *lmb)
--{
--#if IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
--	lmb->memory.max = CONFIG_LMB_MAX_REGIONS;
--	lmb->reserved.max = CONFIG_LMB_MAX_REGIONS;
--#else
--	lmb->memory.max = CONFIG_LMB_MEMORY_REGIONS;
--	lmb->reserved.max = CONFIG_LMB_RESERVED_REGIONS;
--	lmb->memory.region = lmb->memory_regions;
--	lmb->reserved.region = lmb->reserved_regions;
--#endif
--	lmb->memory.cnt = 0;
--	lmb->reserved.cnt = 0;
--}
--
- void arch_lmb_reserve_generic(struct lmb *lmb, ulong sp, ulong end, ulong align)
- {
- 	ulong bank_end;
-@@ -231,8 +235,6 @@ void lmb_init_and_reserve(struct lmb *lmb, struct bd_info *bd, void *fdt_blob)
- {
- 	int i;
- 
--	lmb_init(lmb);
--
- 	for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
- 		if (bd->bi_dram[i].size) {
- 			lmb_add(lmb, bd->bi_dram[i].start,
-@@ -247,7 +249,6 @@ void lmb_init_and_reserve(struct lmb *lmb, struct bd_info *bd, void *fdt_blob)
- void lmb_init_and_reserve_range(struct lmb *lmb, phys_addr_t base,
- 				phys_size_t size, void *fdt_blob)
- {
--	lmb_init(lmb);
- 	lmb_add(lmb, base, size);
- 	lmb_reserve_common(lmb, fdt_blob);
- }
-@@ -352,14 +353,14 @@ static long lmb_add_region(struct lmb_region *rgn, phys_addr_t base,
- /* This routine may be called with relocation disabled. */
- long lmb_add(struct lmb *lmb, phys_addr_t base, phys_size_t size)
- {
--	struct lmb_region *_rgn = &(lmb->memory);
-+	struct lmb_region *_rgn = &lmb.memory;
- 
- 	return lmb_add_region(_rgn, base, size);
- }
- 
- long lmb_free(struct lmb *lmb, phys_addr_t base, phys_size_t size)
- {
--	struct lmb_region *rgn = &(lmb->reserved);
-+	struct lmb_region *rgn = &lmb.reserved;
- 	phys_addr_t rgnbegin, rgnend;
- 	phys_addr_t end = base + size - 1;
- 	int i;
-@@ -410,7 +411,7 @@ long lmb_free(struct lmb *lmb, phys_addr_t base, phys_size_t size)
- long lmb_reserve_flags(struct lmb *lmb, phys_addr_t base, phys_size_t size,
- 		       enum lmb_flags flags)
- {
--	struct lmb_region *_rgn = &(lmb->reserved);
-+	struct lmb_region *_rgn = &lmb.reserved;
- 
- 	return lmb_add_region_flags(_rgn, base, size, flags);
- }
-@@ -447,9 +448,9 @@ static phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size,
- 	phys_addr_t base = 0;
- 	phys_addr_t res_base;
- 
--	for (i = lmb->memory.cnt - 1; i >= 0; i--) {
--		phys_addr_t lmbbase = lmb->memory.region[i].base;
--		phys_size_t lmbsize = lmb->memory.region[i].size;
-+	for (i = lmb.memory.cnt - 1; i >= 0; i--) {
-+		phys_addr_t lmbbase = lmb.memory.region[i].base;
-+		phys_size_t lmbsize = lmb.memory.region[i].size;
- 
- 		if (lmbsize < size)
- 			continue;
-@@ -465,15 +466,15 @@ static phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size,
- 			continue;
- 
- 		while (base && lmbbase <= base) {
--			rgn = lmb_overlaps_region(&lmb->reserved, base, size);
-+			rgn = lmb_overlaps_region(&lmb.reserved, base, size);
- 			if (rgn < 0) {
- 				/* This area isn't reserved, take it */
--				if (lmb_add_region(&lmb->reserved, base,
-+				if (lmb_add_region(&lmb.reserved, base,
- 						   size) < 0)
- 					return 0;
- 				return base;
- 			}
--			res_base = lmb->reserved.region[rgn].base;
-+			res_base = lmb.reserved.region[rgn].base;
- 			if (res_base < size)
- 				break;
- 			base = lmb_align_down(res_base - size, align);
-@@ -509,14 +510,14 @@ phys_addr_t lmb_alloc_addr(struct lmb *lmb, phys_addr_t base, phys_size_t size)
- 	long rgn;
- 
- 	/* Check if the requested address is in one of the memory regions */
--	rgn = lmb_overlaps_region(&lmb->memory, base, size);
-+	rgn = lmb_overlaps_region(&lmb.memory, base, size);
- 	if (rgn >= 0) {
- 		/*
- 		 * Check if the requested end address is in the same memory
- 		 * region we found.
- 		 */
--		if (lmb_addrs_overlap(lmb->memory.region[rgn].base,
--				      lmb->memory.region[rgn].size,
-+		if (lmb_addrs_overlap(lmb.memory.region[rgn].base,
-+				      lmb.memory.region[rgn].size,
- 				      base + size - 1, 1)) {
- 			/* ok, reserve the memory */
- 			if (lmb_reserve(lmb, base, size) >= 0)
-@@ -533,22 +534,22 @@ phys_size_t lmb_get_free_size(struct lmb *lmb, phys_addr_t addr)
- 	long rgn;
- 
- 	/* check if the requested address is in the memory regions */
--	rgn = lmb_overlaps_region(&lmb->memory, addr, 1);
-+	rgn = lmb_overlaps_region(&lmb.memory, addr, 1);
- 	if (rgn >= 0) {
--		for (i = 0; i < lmb->reserved.cnt; i++) {
--			if (addr < lmb->reserved.region[i].base) {
-+		for (i = 0; i < lmb.reserved.cnt; i++) {
-+			if (addr < lmb.reserved.region[i].base) {
- 				/* first reserved range > requested address */
--				return lmb->reserved.region[i].base - addr;
-+				return lmb.reserved.region[i].base - addr;
- 			}
--			if (lmb->reserved.region[i].base +
--			    lmb->reserved.region[i].size > addr) {
-+			if (lmb.reserved.region[i].base +
-+			    lmb.reserved.region[i].size > addr) {
- 				/* requested addr is in this reserved range */
- 				return 0;
- 			}
+  * Set up the FDT to use for booting a kernel
+diff --git a/lib/efi_loader/efi_dt_fixup.c b/lib/efi_loader/efi_dt_fixup.c
+index 9886e6897c..4d50246c8f 100644
+--- a/lib/efi_loader/efi_dt_fixup.c
++++ b/lib/efi_loader/efi_dt_fixup.c
+@@ -172,7 +172,7 @@ efi_dt_fixup(struct efi_dt_fixup_protocol *this, void *dtb,
  		}
- 		/* if we come here: no reserved ranges above requested addr */
--		return lmb->memory.region[lmb->memory.cnt - 1].base +
--		       lmb->memory.region[lmb->memory.cnt - 1].size - addr;
-+		return lmb.memory.region[lmb.memory.cnt - 1].base +
-+		       lmb.memory.region[lmb.memory.cnt - 1].size - addr;
+ 
+ 		fdt_set_totalsize(dtb, *buffer_size);
+-		if (image_setup_libfdt(&img, dtb, NULL)) {
++		if (image_setup_libfdt(&img, dtb, 0)) {
+ 			log_err("failed to process device tree\n");
+ 			ret = EFI_INVALID_PARAMETER;
+ 			goto out;
+diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+index 73d0279e84..2d91f0edc3 100644
+--- a/lib/efi_loader/efi_helper.c
++++ b/lib/efi_loader/efi_helper.c
+@@ -469,7 +469,7 @@ efi_status_t efi_install_fdt(void *fdt)
+ 		return EFI_OUT_OF_RESOURCES;
  	}
- 	return 0;
- }
-@@ -557,11 +558,11 @@ int lmb_is_reserved_flags(struct lmb *lmb, phys_addr_t addr, int flags)
- {
- 	int i;
  
--	for (i = 0; i < lmb->reserved.cnt; i++) {
--		phys_addr_t upper = lmb->reserved.region[i].base +
--			lmb->reserved.region[i].size - 1;
--		if ((addr >= lmb->reserved.region[i].base) && (addr <= upper))
--			return (lmb->reserved.region[i].flags & flags) == flags;
-+	for (i = 0; i < lmb.reserved.cnt; i++) {
-+		phys_addr_t upper = lmb.reserved.region[i].base +
-+			lmb.reserved.region[i].size - 1;
-+		if ((addr >= lmb.reserved.region[i].base) && (addr <= upper))
-+			return (lmb.reserved.region[i].flags & flags) == flags;
+-	if (image_setup_libfdt(&img, fdt, NULL)) {
++	if (image_setup_libfdt(&img, fdt, 0)) {
+ 		log_err("ERROR: failed to process device tree\n");
+ 		return EFI_LOAD_ERROR;
  	}
- 	return 0;
- }
-diff --git a/test/lib/lmb.c b/test/lib/lmb.c
-index 7e4368de22..42551b7c6d 100644
---- a/test/lib/lmb.c
-+++ b/test/lib/lmb.c
-@@ -76,8 +76,6 @@ static int test_multi_alloc(struct unit_test_state *uts, const phys_addr_t ram,
- 	ut_assert(alloc_64k_addr >= ram + 8);
- 	ut_assert(alloc_64k_end <= ram_end - 8);
- 
--	lmb_init(&lmb);
--
- 	if (ram0_size) {
- 		ret = lmb_add(&lmb, ram0, ram0_size);
- 		ut_asserteq(ret, 0);
-@@ -237,8 +235,6 @@ static int test_bigblock(struct unit_test_state *uts, const phys_addr_t ram)
- 	/* check for overflow */
- 	ut_assert(ram_end == 0 || ram_end > ram);
- 
--	lmb_init(&lmb);
--
- 	ret = lmb_add(&lmb, ram, ram_size);
- 	ut_asserteq(ret, 0);
- 
-@@ -304,8 +300,6 @@ static int test_noreserved(struct unit_test_state *uts, const phys_addr_t ram,
- 	/* check for overflow */
- 	ut_assert(ram_end == 0 || ram_end > ram);
- 
--	lmb_init(&lmb);
--
- 	ret = lmb_add(&lmb, ram, ram_size);
- 	ut_asserteq(ret, 0);
- 	ASSERT_LMB(&lmb, ram, ram_size, 0, 0, 0, 0, 0, 0, 0);
-@@ -390,8 +384,6 @@ static int lib_test_lmb_at_0(struct unit_test_state *uts)
- 	long ret;
- 	phys_addr_t a, b;
- 
--	lmb_init(&lmb);
--
- 	ret = lmb_add(&lmb, ram, ram_size);
- 	ut_asserteq(ret, 0);
- 
-@@ -429,8 +421,6 @@ static int lib_test_lmb_overlapping_reserve(struct unit_test_state *uts)
- 	struct lmb lmb;
- 	long ret;
- 
--	lmb_init(&lmb);
--
- 	ret = lmb_add(&lmb, ram, ram_size);
- 	ut_asserteq(ret, 0);
- 
-@@ -487,8 +477,6 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
- 	/* check for overflow */
- 	ut_assert(ram_end == 0 || ram_end > ram);
- 
--	lmb_init(&lmb);
--
- 	ret = lmb_add(&lmb, ram, ram_size);
- 	ut_asserteq(ret, 0);
- 
-@@ -614,8 +602,6 @@ static int test_get_unreserved_size(struct unit_test_state *uts,
- 	/* check for overflow */
- 	ut_assert(ram_end == 0 || ram_end > ram);
- 
--	lmb_init(&lmb);
--
- 	ret = lmb_add(&lmb, ram, ram_size);
- 	ut_asserteq(ret, 0);
- 
-@@ -684,8 +670,6 @@ static int lib_test_lmb_max_regions(struct unit_test_state *uts)
- 	struct lmb lmb;
- 	int ret, i;
- 
--	lmb_init(&lmb);
--
- 	ut_asserteq(lmb.memory.cnt, 0);
- 	ut_asserteq(lmb.memory.max, CONFIG_LMB_MAX_REGIONS);
- 	ut_asserteq(lmb.reserved.cnt, 0);
-@@ -745,8 +729,6 @@ static int lib_test_lmb_flags(struct unit_test_state *uts)
- 	struct lmb lmb;
- 	long ret;
- 
--	lmb_init(&lmb);
--
- 	ret = lmb_add(&lmb, ram, ram_size);
- 	ut_asserteq(ret, 0);
- 
 -- 
 2.34.1
 
