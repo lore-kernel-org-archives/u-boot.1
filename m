@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A9ABC27C53
-	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 18:09:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC0BDC27C5F
+	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 18:11:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 555DE8839C;
-	Fri,  7 Jun 2024 20:09:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0D3968844B;
+	Fri,  7 Jun 2024 20:11:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="txvsY+Gq";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="tA5VhoDG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB0F78844F; Fri,  7 Jun 2024 20:08:59 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id 811BB88464; Fri,  7 Jun 2024 20:11:53 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F62C8839C
- for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 20:08:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1827C8839C
+ for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 20:11:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1717783728; x=1718388528; i=xypron.glpk@gmx.de;
- bh=1uZ4c4Vwfc9+UuaLFn+ATMSKjMyo4umY2f1lrVh8GXM=;
+ s=s31663417; t=1717783906; x=1718388706; i=xypron.glpk@gmx.de;
+ bh=QLV30QDBbssc9zRw7NyQmwAJNRFbPvGHr2EioYeOFMc=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=txvsY+GqtVuSfTB1Ok9h0hjebIQVj1pL6jpmnw3C0mYfEECW31Tfe2zJ2QyRQQ+2
- R4dsbZtPm7WfCMqeMKHpFpimsBPQSex4CpkTdDHITZtwSjr4dHYpdwZczjDPiRmVb
- Gzmfd8wuIn4QscRshRwjb6EIcmRn6rzf4TZ379i0KXoJ31jPhct0+JTCj+0QDfHm7
- ewFESDwSFYbyLB4QKV0h/+RGZFKMG+o4ESLz3y56lkeIX9ZILwLHcmStY79JEXU/D
- UVzovwSLRE9Pi/EyXOQ40iXQ/y0Bs0YsaUh9Sb9CrNBzlLWruAr4l9zYpUrsuC2/u
- 5cs/60LKx7CPDd7ETA==
+ b=tA5VhoDG0O3GWEnt1zjzlljwhctsJxalp5L25MJmhH2/mn+tC08cDXYwVMQJSVp7
+ 2/KNxJf84sMxSqX/oW3dYpGgiv1oGlS7FidSkwWHglXqAo42+rINRltdEdZWoIrYM
+ D3q8KM6ef9G4kSF0KjM1teiBVXoYzq4vyYfvYNt8ofYnutwCMaZDXt849OWtTr1ed
+ z/CXIYWOuToWXSShZrlKY36I300BBLpy6qGtyQtCFQMzLy/gzN9g7VzDfVsLy0sdU
+ MWWKP6/RI6frcCHXK9uHeuP2PgR8xDdYfSjnBOYFSZnFNpzfPJrv9GQJmgzrWnl6w
+ aMUAWP9Gkk0Gx8S80A==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.126] ([109.42.178.114]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MK3W0-1s0iT815Pq-00W0HB; Fri, 07
- Jun 2024 20:08:48 +0200
-Message-ID: <a9253b2b-826e-407c-8066-118fef1a1294@gmx.de>
-Date: Fri, 7 Jun 2024 20:08:41 +0200
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N95e9-1sTEjV2m9P-00ubiR; Fri, 07
+ Jun 2024 20:11:46 +0200
+Message-ID: <786590fb-2f5f-4855-bcad-3ce3f1cf25ff@gmx.de>
+Date: Fri, 7 Jun 2024 20:11:46 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/7] MIPS: Enable EFI support
+Subject: Re: [PATCH] doc: Add UEFI supplement document
 To: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Cc: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Tom Rini <trini@konsulko.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-References: <20240517-mips-efi-v1-0-79096e3ca3b3@flygoat.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+References: <20240529-efi-spec-v1-1-0668e4d19683@flygoat.com>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240517-mips-efi-v1-0-79096e3ca3b3@flygoat.com>
+In-Reply-To: <20240529-efi-spec-v1-1-0668e4d19683@flygoat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:WM+A4aLE1KRGeDxpju6WIUyiedHkDgs4UYJUyFQOrFADH47fm6/
- iGScbiaXu9bkDoq3y/qJZKHjXQDjzzX1YqFuWphzCgqhEe5bqQ9Q1lAbVgTyq6CLaWseFS0
- v6JwoKiBp0RWPrW4GB9GjUM2x2FbAvIv84NPP7iXbDdeTYT6L0QOVP+8I1DWktfpqMa9ygy
- 7DBb1es5FkXcxulczzY3w==
-UI-OutboundReport: notjunk:1;M01:P0:A6+XVQ+8fkA=;APU/GJk1+r3RhHV+CQG+VnpxT2h
- sxbeLzViFy7N7aMcvq2Obo/PREDV5VNuzGb9inCJVoiDZxuokAszsciQzPkGSDUuvo4cQ+eXY
- FKGekpy+jzpcX5iYfI3W4m6o/U/m5+Phr/FRIMwiZBbFAkmL1VNKPf51awh181C0FINHzctjK
- w5r6IOchh0DYBPCYHrO5S7gUBqkKi2el5/lk69JL6uA08aNqyuub9NijK132qVjIQRlbB6Mlv
- nHt08srBXznwqAQkGO3znHMWf9yPPq1oxYSBzIBy9vUPrw8Yy6ecLZTE7rC+LR4lhcBbdsIge
- GIupkdTzLcW6uHpOcfaaR4PDECyGHF9G8onNAKIApep2SiLCaZza2cou5TNYE+65MnzvkFT3u
- kRk3vny3l9U1wv+lIDT3Tf8M4cZH3sdJ8iRU4NrwnagttaiWXuKdkvW4XXxjQnS1eBC1jFICw
- QxM0sYXLmXljXZA4wKr/pKBqtG6q4KxOsryEs44ybUGO19HYxpcMkatG+T7q/p2133VYgZnIS
- w+xO4FrRK+R0WqrZbjHv6cyavEsKFV//ZTPEBxG8JewEQg/1WDmyzJLxvha2nukqi/GR2FPie
- rpZ8hmaefQva28H2D8sWTKZl3kCSxtCNN9xzlSFkoGCy/mYBPOuoj/8oB/Z4f7U2awHQ/caQd
- jyGni19NP2mhuE39bDhewCwxx8goHrDpbFCkriHic0QFO3r/Aaz6Z7yj3IWCSWUtzrVDgQ3B7
- 5ZfQKO/RZ+ja2iTNOaiLcVI/iceXOTzFBsoKGSYtoCkBAK/9WY8K64oU2iOLDVvtOETLokCIo
- b0HAqHHZY8yUBUlpSG5wBZxUi36hCathrr7FWui0WU1pI=
+X-Provags-ID: V03:K1:lZ8AEFEE7opQnLLjbJM7nCXsPEuL7cbRmjH0SHTpnBemSL4CO0b
+ gV2DaThMSVLgTrNGdBAjPbCG4r5e5Aj7wNdVPbfY3VMNCgi5B5J/W1KRmi8DrwWbjOWrwQq
+ hNOmLD6XqaefSaHB1rEztDKuJF6kCBJmWt24G1fUpXKj+UHyqxD8zYD+/unBOaZEDsThq2H
+ +HAmZNZSkAZ6Yf4qcHVfA==
+UI-OutboundReport: notjunk:1;M01:P0:P0DDJRn3eyM=;n7Q6o3KhYxPOhzKWSHHKm/NzdnK
+ s6sJZsx9xBxPAD0WFAJyzACH9xnWxgmLbLlguEGv5bPg1wSrYltEZKoAjpQkLm70acSO/Vui6
+ lRvFAXMAojOc2OqLgXAA7DPeidzXXywWHOzNILw/yGfqXCib6cf/aFFjRivFUXvqH2OS86jVB
+ d2EnS/kS0avr1nL4mtdAYURC21twBijKZ4Ub6uckyJKWM+BojZ9GtSScODRVWlxrNdC434wqS
+ Xb+tzcDRBa7Ns0mkDPVtBl5QplAUbtgr3sCcv7CTXpx+XdXkuqYYHQYwjsztnx8IkhfbvMPhf
+ 7y7tgwWxnx5xhUOixIQ+oT6zc2kC4d7Rx9QjgxLxHL8RBYH3seU2itPTatcQJgOmibja6kSO1
+ p8Nnyty5ywrZZPShhhlzQ4wrHkNnb2ueoRaaqnJgV9SsKrSMMx9CljQgHtIs+MXKwmQnHWMq8
+ MZGYu0M4h9CEvky2vw0F2MdsyIVXfWOdtaa2DWv78Z0vKnlOt3ad+NFg2sWXlGtPjwPMkapZM
+ eHCPLA0lRc5moXoRZrok6xZtcGryUu/fVkIYXvtIK4mULQUFDJargrIeinwwSlefK7fxe+31x
+ QizkOSAicsrKgTWdYLCHulFZVZeCt+gWbIH3/slUrOS3ezcw/YXVLRgVYyGdrh/ZP+QoHTneV
+ OYDIrbaXHoC8HH26UQjBQLcII/MkW7FM7+NavuHFsGtW8wm/AisL3lcNxGZrUp6JVPza6YuJb
+ UQyYFPdqwkgU8qlrxNYR3BzhjvW66EzvSJps7L9IPXMa/LQ4vXh69/djbk5zmFE1w2k46ic6s
+ FTMTJVHyubKrRQ7L7LBZbaGKi9chuF3OsaSrwmBZyiZCg=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,98 +90,212 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 17.05.24 18:32, Jiaxun Yang wrote:
+On 29.05.24 15:36, Jiaxun Yang wrote:
+> Add UEFI supplement document to define some behaviours
+> on architectures not covered by the original specification.
+>
+> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> ---
 > Hi all,
 >
-> This series enabled EFI support to MIPS platform.
+> This document is in response to discussion at [1]. It is produced
+> based on my attempt to port U-Boot UEFI to MIPS and Xtensa. I also
+> plan to try m68k.
 >
-> Although MIPS is not defined by UEFI specification, there are
-> quite a few firmware implementations available, including
-> MIPS-EFI[1] for Loongson-2F, Lemote's proprietary EDK2 implementation
-> on Loongson-3[2], Kunlun firmware for Loongson-3[3], efiffy[4]
-> for MIPS Creator CI20 and another mystery EDK implementation shipped
-> with some Creator CI20 board.
+> Please review
 >
-> Available applications including gnu-efi, Loongson's GRUB fork[5],
-> Ventoy[6].
->
-> My implementation in U-Boot is aiming to follow conventions made
-> by other implementations for architecture stuff and remain
-> compliance with spec for general aspects.
->
-> bootefi hello and selftest passed on both 32 and 64 bit system,
-> gnu-efi, grub and ventoy are tested on mips64el with my pending
-> platform works. mips32el efi executable from efiffy is tested
-> as well.
->
-> Please review.
 > Thanks
+> [1]: https://lore.kernel.org/u-boot/CAC_iWjLbY6+FaUYQw2Zv5y5byCnXRHxfzvr=
+Ff1dMyJX+ANP9VQ@mail.gmail.com/
+> ---
+>   doc/develop/uefi/index.rst           |  1 +
+>   doc/develop/uefi/uefi_supplement.rst | 73 ++++++++++++++++++++++++++++=
+++++++++
+>   2 files changed, 74 insertions(+)
 >
-> [1]: https://github.com/kontais/EFI-MIPS
+> diff --git a/doc/develop/uefi/index.rst b/doc/develop/uefi/index.rst
+> index e26b1fbe05c5..a274fff88754 100644
+> --- a/doc/develop/uefi/index.rst
+> +++ b/doc/develop/uefi/index.rst
+> @@ -11,6 +11,7 @@ can be run an UEFI payload.
+>      :maxdepth: 2
+>
+>      uefi.rst
+> +   uefi_supplement.rst
+>      u-boot_on_efi.rst
+>      iscsi.rst
+>      fwu_updates.rst
+> diff --git a/doc/develop/uefi/uefi_supplement.rst b/doc/develop/uefi/uef=
+i_supplement.rst
+> new file mode 100644
+> index 000000000000..cb20cd290912
+> --- /dev/null
+> +++ b/doc/develop/uefi/uefi_supplement.rst
+> @@ -0,0 +1,73 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
+> +.. Copyright (c) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
+> +
+> +U-Boot Supplement to UEFI Specifications
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +Motivation
+> +----------
+> +
+> +The UEFI specifications are designed to be platform-independent, enabli=
+ng the
+> +implementation of UEFI-like API support across various architectures. H=
+owever,
+> +some platform-dependent aspects and constraints remain. This document p=
+rovides
+> +a supplement to the UEFI specifications for U-Boot, clarifying these pl=
+atform
+> +dependent details for architectures not covered by the original specifi=
+cations.
 
-Last commit 8 years ago.
+This does not explain why we should bother about any non-UEFI
+architecture. It does not list relevant architectures and does not
+provide any evidence that this more than an academic endeavor.
 
-> [2]: https://github.com/loongson-community/firmware-nonfree
+All git repositories you mentioned in you MIPS series have not seen any
+update in the last four years.
 
-Last commit 4 years ago.
+If any company were sincerely interested in using UEFI on such
+architectures, wouldn't they contribute to the specification like has
+been done for LoongArch and RISC-V?
 
-> [3]: http://www.kunluntech.com.cn/klbiosxl
-> [4]: https://sourceforge.net/projects/efify/
+It does not make sense to define UEFI for non-UEFI architectures in
+U-Boot. Isn't there any existing documentation for UEFI on MIPS?
 
-Last commit 2018.
+> +
+> +Architectural Conventions
+> +-------------------------
+> +
+> +The UEFI specifications cover IA32, X64, ARM, AARCH64, RISC-V, LoongArc=
+h, and
 
-> [5]: https://github.com/loongson-community/grub
+There is only one UEFI specification.
 
-Last commit 5 year ago.
+%s/specifications cover/specification covers/
 
-This looks like riding a dead horse.
+> +Itanium architectures. This document extends the UEFI specifications to=
+ include
+> +all architectures supported by U-Boot.
+> +
+> +The following conventions are used for these architectures:
+> +
+> +- For architectures with multiple ABIs, we adhere to the calling conven=
+tions
+> +  used by the Linux kernel for the same architecture.
+> +
+> +- Optional CPU registers (floating-point, SIMD) are excluded from calli=
+ng
+> +  conventions. However, the UEFI payload should be able to utilize them=
+ if
+> +  available.
+> +
+> +- Control is handed over to the UEFI payload at the privilege level use=
+d
+> +  by the Linux kernel for the same architecture.
+
+This does not provide enough detail. The Linux kernel can run at
+different privilege levels on the same architecture, e.g. in S-mode or
+M-mode on RISC-V.
+
+> +
+> +- Identity mapping (i.e., VA =3D=3D PA mapping) is preferred for UEFI. =
+However,
+> +  this may not be possible for some architectures. In such cases, if th=
+e
+> +  processor supports a default linear translation, it should be used.
+> +
+> +- Endianness: UEFI specifications enforce little-endian architectures.
+> +  However, U-Boot supports both little-endian and big-endian architectu=
+res.
+> +  For big-endian architectures, UEFI data structures should be stored i=
+n
+> +  native endianness, with exceptions explicitly specified.
+
+Why do you bother about big-endian systems? MIPS supports low-endian.
+Linux distros like Debian have dropped big-endian MIPS support.
+
+If found https://www.ventoy.net/en/doc_mips64el.html (MIPS64EL UEFI) but
+nothing describing big-endian usage of UEFI.
+
+> +
+> +UEFI Images
+> +-----------
+> +
+> +The UEFI specifications define the PE/COFF image format for UEFI applic=
+ations.
+> +U-Boot extends this format as follows:
+
+The UEFI specification does not define the PE/COFF image format. It
+prescribes its usage.
+
+> +
+> +- **PE32+ Machine Type**: UEFI specifications define machine types for =
+supported
+> +  architectures. For machines not covered by UEFI specifications, we us=
+e the
+> +  machine type defined by the Microsoft PE/COFF specification if possib=
+le.
+> +  Otherwise, we use the ``IMAGE_FILE_MACHINE_UNKNOWN`` (0) machine type=
+.
+> +  U-Boot should always accept ``IMAGE_FILE_MACHINE_UNKNOWN`` as a valid
+> +  machine type.
+
+We should not accept IMAGE_FILE_MACHINE_UNKNOWN on an architecture that
+has a machine type defined in the PE-COFF specification.
+
+Which MIPS machine type are you missing?
+
+> +
+> +- **Header Endianness**: PE/COFF header data fields are always stored a=
+s
+> +  little-endian, regardless of the target architecture's endianness.
+> +
+> +- **DOS Stub**: To accommodate various boot image formats, we relax the=
+ requirement
+> +  for a DOS stub in the UEFI image. U-Boot should accept UEFI images wi=
+thout a DOS
+> +  stub and MZ signature. However, U-Boot still expects the PE/COFF head=
+er at the
+> +  file offset specified at offset 0x3C.
+
+Why would anybody create such an invalid file and expect it to be
+interpreted as EFI?
+
+Shouldn't you fix the software creating such invalid files?
+
+This topic is related to the question of which specification has been
+used to create UEFI implementations like
+https://github.com/kontais/EFI-MIPS.
+
+> +
+> +I/O Device Access
+> +-----------------
+> +
+> +UEFI specifications define the EFI_DEVICE_IO_PROTOCOL and EFI_PCI_IO_PR=
+OTOCOL
+> +for accessing I/O devices. U-Boot extends these specifications as follo=
+ws:
+
+These protocols are not used in U-Boot, yet.
 
 Best regards
 
 Heinrich
 
-
-> [6]: https://www.ventoy.net/en/index.html
+> +
+> +- All I/O access is performed using the CPU's native endianness.
+> +  For big-endian architectures, U-Boot should convert data to/from litt=
+le-endian
+> +  before/after accessing I/O devices.
 >
-> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 > ---
-> Jiaxun Yang (7):
->        MIPS: Implement setjmp
->        efi: Allow runtime relocate to be disabled
->        Makefile.lib: Preserve .rodata section for EFI file
->        Makefile.lib: Enforce EFI CFLAGS/AFLAGS
->        MIPS: Add smbios_start to arch_global_data
->        MIPS: Define MIPS EFI related bits everywhere
->        MIPS: Implement EFI supporting stuff
->
->   Makefile                                          |   3 +
->   arch/mips/config.mk                               |   9 +
->   arch/mips/include/asm/global_data.h               |   3 +
->   arch/mips/include/asm/setjmp.h                    |  36 ++++
->   arch/mips/lib/Makefile                            |  15 ++
->   arch/mips/lib/crt0_mips_efi.S                     | 239 ++++++++++++++=
-++++++++
->   arch/mips/lib/elf_mips_efi.lds                    | 113 ++++++++++
->   arch/mips/lib/reloc_mips_efi.c                    |  99 +++++++++
->   arch/mips/lib/setjmp32.S                          |  51 +++++
->   arch/mips/lib/setjmp64.S                          |  56 +++++
->   include/asm-generic/pe.h                          |   5 +
->   include/config_distro_bootcmd.h                   |   6 +
->   include/efi_default_filename.h                    |   8 +
->   include/efi_loader.h                              |  26 ++-
->   include/elf.h                                     |   8 +
->   lib/efi_loader/Kconfig                            |  12 +-
->   lib/efi_loader/efi_image_loader.c                 |  18 ++
->   lib/efi_loader/efi_memory.c                       |  14 +-
->   lib/efi_loader/efi_runtime.c                      |  11 +-
->   lib/efi_loader/efi_var_mem.c                      |   6 +-
->   lib/efi_selftest/Makefile                         |   2 +-
->   lib/efi_selftest/efi_selftest_miniapp_exception.c |   2 +
->   scripts/Makefile.lib                              |  10 +-
->   23 files changed, 734 insertions(+), 18 deletions(-)
-> ---
-> base-commit: ad7dce5abd49ef3b5c93da5303e15449c8c162b4
-> change-id: 20240517-mips-efi-c9a1ad819c2d
+> base-commit: 46ff00bea5dd2dd247d5e2fdadbf5dcf8653cd9a
+> change-id: 20240529-efi-spec-0ea657985272
 >
 > Best regards,
 
