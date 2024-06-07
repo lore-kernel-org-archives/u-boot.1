@@ -4,57 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5F5BC27C53
-	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 13:45:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4FCEC27C53
+	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 13:52:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0D1F88047;
-	Fri,  7 Jun 2024 15:45:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=nwl.cc
+	by phobos.denx.de (Postfix) with ESMTP id 1894087F6F;
+	Fri,  7 Jun 2024 15:52:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=nwl.cc header.i=@nwl.cc header.b="pdQJDIm6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lVEYZks4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7BEE87F6F; Fri,  7 Jun 2024 15:45:34 +0200 (CEST)
-Received: from orbyte.nwl.cc (orbyte.nwl.cc [IPv6:2001:41d0:e:133a::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1CE2587FCD; Fri,  7 Jun 2024 15:52:41 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC81887FCD
- for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 15:45:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E4C2F87E50
+ for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 15:52:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=nwl.cc
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=phil@nwl.cc
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=nwl.cc;
- s=mail2022; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
- Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=U9PFA8eeD5LqrtprDhy6pcKmDoB9Ej2Jtwh8dGdk890=; b=pdQJDIm6n2hlrklglpqlbhhUr5
- WkXeyOH+QYAQbgOinWPMC3aQXzv2eZ0Gl84j4239fLOJghG2PZjpCITkOtH32lPeEUDzJoov+tvhU
- XCHq7yrsurgyRRoPiO8yA249moYnFkVsqeRocYnYLdhhVxhMr8D0L9j/GYMnnv9Ue0Vi9p/YOL02f
- ejOGOqKfwY56OD1rWyetJjYxnVKiL4FX3jGAc1c2xvuCZ0B4yelci3NvG1CTM4fwbxxW9vrmd13Ub
- pDrdhgQbkH1RSDF83ZtNg3HYY/lbgdLRrcmxBgM6+hozB4YOEyXiLGVJUe139e7uw+CCThOV+r/rp
- j+jRdXDw==;
-Received: from n0-1 by orbyte.nwl.cc with local (Exim 4.97.1)
- (envelope-from <phil@nwl.cc>) id 1sFZuN-000000007AV-2qzR;
- Fri, 07 Jun 2024 15:45:31 +0200
-Date: Fri, 7 Jun 2024 15:45:31 +0200
-From: Phil Sutter <phil@nwl.cc>
-To: Tony Dinh <mibodhi@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] arm: mvebu: Enable bootstd and other modernization for
- Synology DS414 (Armada XP) board
-Message-ID: <ZmMO-yODr9n2X7yD@orbyte.nwl.cc>
-Mail-Followup-To: Phil Sutter <phil@nwl.cc>, Tony Dinh <mibodhi@gmail.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>
-References: <20240606234437.24549-1-mibodhi@gmail.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-6f95084c257so950862a34.0
+ for <u-boot@lists.denx.de>; Fri, 07 Jun 2024 06:52:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1717768357; x=1718373157; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=6txHRFy6kfGwRc0UAXsbYBs1zFstHAMqxGR+QpcealU=;
+ b=lVEYZks4RpEczy3SIeGuAOrcNTtB6NNTDmm+fMFoea7/RkXAfF6Pt1RBm5h6lPoNNP
+ 4v5fRWb9GiZHdQfypYcw/R64qJmfAmcOJ/r0NrwuNeA8bsZKWxNuunmq0sLC9GNckMUb
+ e0FgO8SIUo2UlIFr9MosIIeXqzuv+9Jqviqc8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717768357; x=1718373157;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6txHRFy6kfGwRc0UAXsbYBs1zFstHAMqxGR+QpcealU=;
+ b=reymszJYyHLrOcFsCgi58dH4lwZFL0lrPAX/byp4V0V0J0xxuxUrr9OnEe1GPB+4id
+ w9f2ZXZGYIz267m0QqCH7zAkvC3znY+w+ktnvL1gMciagu55XJiDGW9Kr0iAovEFhdYm
+ nLxfoprZIBJ/vodqHArw1I11nmd/oLDPbAnCdro22lDRbwqumWSxA/r4NDRxJgAu9CVL
+ ME09uW87yphf1Di+W7ATIk7C7V+vCznCz2L3hOCYFsOzvPBQdB8tdbDfRRmfk+UjB4GS
+ +Ldm3S8UITw5xzsy/AiHzNdEWbZe85hqW6i4p3e6gxKlUyiaqZl8Zt/Twn1+jsB9M9FI
+ R5zg==
+X-Gm-Message-State: AOJu0YyNiEntLWDNgntwn2mB57rP/TGvc8LDLJlQW14MdjHb0E4ZKw6F
+ 3GGlFcF3krC2YQjU8dItQ/sSHh3MQgrs4huCwaQE0CryqvfzUcfu2pmvknPwRUI=
+X-Google-Smtp-Source: AGHT+IGUvt4/g6jz7w+XX7qc6Th4VtNIZ/ZoDvfXy+53mrBGuhbXbDGeKkHu1UanMaIf9PMZqoV1/A==
+X-Received: by 2002:a05:6870:f613:b0:24c:ae57:b4b9 with SMTP id
+ 586e51a60fabf-25464462e73mr2976500fac.14.1717768357353; 
+ Fri, 07 Jun 2024 06:52:37 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
+ [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-254480d9e3esm913215fac.53.2024.06.07.06.52.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 07 Jun 2024 06:52:36 -0700 (PDT)
+Date: Fri, 7 Jun 2024 07:52:34 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Maxim Uvarov <muvarov@gmail.com>
+Subject: Re: [PATCH v3 00/12] Introduce the lwIP network stack
+Message-ID: <20240607135234.GI68077@bill-the-cat>
+References: <cover.1717680809.git.jerome.forissier@linaro.org>
+ <20240606165634.GB68077@bill-the-cat>
+ <97621d9f-584b-41f9-98e9-c6e4346661a5@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="tD1ExmBLzBQAcAZH"
 Content-Disposition: inline
-In-Reply-To: <20240606234437.24549-1-mibodhi@gmail.com>
+In-Reply-To: <97621d9f-584b-41f9-98e9-c6e4346661a5@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,104 +92,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tony,
 
-On Thu, Jun 06, 2024 at 04:44:36PM -0700, Tony Dinh wrote:
-> - Switch to standard boot (in include/configs/ds414.h and
-> configs/ds414_defconfig)
-> - Implement board_late_init() to ensure successful enumeration
-> of USB3 devices
+--tD1ExmBLzBQAcAZH
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Oh, this makes the rear USB3 ports usable? I had failed to get there
-when working on DS414 support.
+On Fri, Jun 07, 2024 at 11:11:49AM +0200, Jerome Forissier wrote:
+>=20
+>=20
+> On 6/6/24 18:56, Tom Rini wrote:
+> > On Thu, Jun 06, 2024 at 03:35:55PM +0200, Jerome Forissier wrote:
+> >=20
+> >> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
+> >> library for the network stack" [1]. The goal is to introduce the lwIP =
+TCP/IP
+> >> stack [2] [3] as an alternative to the current implementation in net/,
+> >> selectable with Kconfig, and ultimately keep only lwIP if possible. So=
+me
+> >> reasons for doing so are:
+> >> - Make the support of HTTPS in the wget command easier. Javier T. (CC'=
+d)
+> >> has some additional lwIP and Mbed TLS patches to do so. With that it
+> >> becomes possible to fetch and launch a distro installer such as Debian
+> >> etc. using a secure, authenticated connection directly from the U-Boot
+> >> shell. Several use cases:
+> >>   * Authentication: prevent MITM attack (third party replacing the
+> >> binary with a different one)
+> >>   * Confidentiality: prevent third parties from grabbing a copy of the
+> >> image as it is being downloaded
+> >>   * Allow connection to servers that do not support plain HTTP anymore
+> >> (this is becoming more and more common on the Internet these days)
+> >> - Possibly benefit from additional features implemented in lwIP
+> >> - Less code to maintain in U-Boot
+> >=20
+> > Alright, on Pi 3, I think we have more "output changed, test fails"
+> > problems:
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D FAILURES =3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > _____________________________________ test_efi_fit_launch _____________=
+________________________
+> > test/py/tests/test_efi_fit.py:452: in test_efi_fit_launch
+> >     launch_efi(False, False)
+> > test/py/tests/test_efi_fit.py:394: in launch_efi
+> >     net_set_up =3D net_dhcp()
+> > test/py/tests/test_efi_fit.py:178: in net_dhcp
+> >     assert 'DHCP client bound to address ' in output
+> > E   AssertionError: assert 'DHCP client bound to address ' in 'Waiting =
+for Ethernet connection... done.\r\neth0: smsc95xx_eth b8:27:eb:fc:64:a6 ac=
+tive'
+> > ------------------------------------ Captured stdout call -------------=
+------------------------
+> > U-Boot> usb start
+> > U-Boot> U-Boot> setenv autoload no
+> > U-Boot> U-Boot> dhcp
+> > Waiting for Ethernet connection... done.
+> > eth0: smsc95xx_eth b8:27:eb:fc:64:a6 active
+> > U-Boot>
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D short test summary info =3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D
+> >=20
+> > I'm going to skip that set of tests and see how far we get but I suspect
+> > it'll keep failing on DHCP output being different.
+>=20
+> As discussed offline with Ilias it might be a timeout issue, although 200=
+0 ms
+> for DHCP_TIMEOUT_MS seems a large value to me, it might not be enough in =
+your
+> environment. Can you please try to increase it? NET effectively has a tim=
+eout
+> of 28 seconds if we take the retries into account.
 
-> - Remove unnecessary misc_init_r(), since NET_RANDOM_ETHADDR is now
-> configured in
+I increased it to 20000 ms and no change.
 
-So u-boot will assign random MAC addresses to the NICs instead of the
-real ones? Won't this potentially break PXE boot setups?
+--=20
+Tom
 
-> - Remove unnecessary checkboard()
-> - Updated IDENT_STRING to indicate this u-boot supports both Synology
-> DS414 and DS214+ boards
-> - Add SYS_THUMB_BUILD to reduce binary size
-> - Add NET_RANDOM_ETHADDR
-> - Add CONFIG_LBA48 and CONFIG_SYS_64BIT_LBA to support >2TB HDD/SDD
-> 
-> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
-> ---
-> 
->  board/Synology/ds414/ds414.c | 15 +++--------
->  configs/ds414_defconfig      | 20 ++++++--------
->  include/configs/ds414.h      | 51 ++++++++++++++++++++++--------------
->  3 files changed, 42 insertions(+), 44 deletions(-)
-> 
-> diff --git a/board/Synology/ds414/ds414.c b/board/Synology/ds414/ds414.c
-> index abe6f9eb5e..f0b55fa095 100644
-> --- a/board/Synology/ds414/ds414.c
-> +++ b/board/Synology/ds414/ds414.c
-> @@ -181,18 +181,9 @@ int board_init(void)
->  	return 0;
->  }
->  
-> -int misc_init_r(void)
-> +int board_late_init(void)
->  {
-> -	if (!env_get("ethaddr")) {
-> -		puts("Incomplete environment, populating from SPI flash\n");
-> -		do_syno_populate(0, NULL);
-> -	}
-> -	return 0;
-> -}
+--tD1ExmBLzBQAcAZH
+Content-Type: application/pgp-signature; name="signature.asc"
 
-This is useful for first boot of flashed vanilla u-boot. Can this be
-retained somehow?
+-----BEGIN PGP SIGNATURE-----
 
-[...]
-> diff --git a/include/configs/ds414.h b/include/configs/ds414.h
-> index 9446acba79..bbefe632e0 100644
-> --- a/include/configs/ds414.h
-> +++ b/include/configs/ds414.h
-[...]
-> @@ -38,23 +34,38 @@
->   * L2 cache thus cannot be used.
->   */
->  
-> -/* SPL */
-> -/* Defines for SPL */
-> +/* Keep device tree and initrd in lower memory so the kernel can access them */
-> +#define RELOCATION_LIMITS_ENV_SETTINGS  \
-> +	"fdt_high=0x10000000\0"         \
-> +	"initrd_high=0x10000000\0"
-> +
-> +/*
-> + * mv-common.h should be defined after CMD configs since it used them
-> + * to enable certain macros
-> + */
-> +#include "mv-common.h"
-> +
-> +#ifndef CONFIG_SPL_BUILD
->  
-> -/* Default Environment */
-> +#define KERNEL_ADDR_R	__stringify(0x1000000)
-> +#define FDT_ADDR_R	__stringify(0x2000000)
-> +#define RAMDISK_ADDR_R	__stringify(0x2200000)
-> +#define SCRIPT_ADDR_R	__stringify(0x1800000)
-> +#define PXEFILE_ADDR_R	__stringify(0x1900000)
->  
-> -#define CFG_EXTRA_ENV_SETTINGS				\
-> -	"initrd_high=0xffffffff\0"				\
-> -	"ramdisk_addr_r=0x8000000\0"				\
-> -	"usb0Mode=host\0usb1Mode=host\0usb2Mode=device\0"	\
-> -	"ethmtu=1500\0eth1mtu=1500\0"				\
-> -	"update_uboot=sf probe; dhcp; "				\
-> -		"mw.b ${loadaddr} 0x0 0xd0000; "		\
-> -		"tftpboot ${loadaddr} u-boot-with-spl.kwb; "	\
-> -		"sf update ${loadaddr} 0x0 0xd0000\0"
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZjEJ8ACgkQFHw5/5Y0
+tywO8wv+KkHdmJfNs6mOcprrSsql8t5kXg+rslUHWRgdusWy9KIn+W39mwzZ1XMh
+9mIA2bXfjOxpNQScU6FxoZCabsto3fFZMS4xCvw6Hzofghh322jv+c1qGLjjHLoz
+K7Ncl+MaSY+gh6Ptsql8kwYbGyPEIfDdFjBzIBzI85Ar45l/vHfKIsot8T7gv8XR
+tDSSt2rDAW1/LmnbFuHrwg4/d+VK3gsXMAkeO4m2beufaLNhSi25hmc0hs5U/NSW
+adtJL+pG5n4o7ufrMwurwHv5EM9sLGBDnXL3X6HSoUt1hjMTWgqeL0OLU/q3R3df
+pe9npg1DblRoEVmebEGr+nkSW+LwtkK2hT2tsjY9l9qhkJ+4mR4V2elHSEdP4vVi
+dR+SI6gwrAxDiVVomS+zShjQUcXO6khycIKQmxfMKeSA4HdKWExyQBf3+16JiXZh
+M338klDdDWzoltMR9XOa0WorLAlPpL4B99gpi2M6eAdyBQdk47BewjDgbLH45doI
+Xw8YQfHA
+=FHxR
+-----END PGP SIGNATURE-----
 
-Are these dropped or am I missing a generic spot which adds them? IIRC,
-the usb*mode and eth*mtu settings are required, is that wrong? Lastly,
-that update_uboot macro at least helps preventing people from writing
-into wrong spots. What's the cause for dropping it?
-
-Thanks, Phil
+--tD1ExmBLzBQAcAZH--
