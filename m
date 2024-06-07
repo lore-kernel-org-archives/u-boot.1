@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E688C27C55
-	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 22:42:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42F00C27C53
+	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 22:42:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67FFB88555;
+	by phobos.denx.de (Postfix) with ESMTP id DCEA28854B;
 	Sat,  8 Jun 2024 00:39:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="mFh1LLgm";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CXXpnZVa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2936088557; Sat,  8 Jun 2024 00:39:48 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 40971884FE; Sat,  8 Jun 2024 00:39:48 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D3930884FE
+ by phobos.denx.de (Postfix) with ESMTPS id 199E588521
  for <u-boot@lists.denx.de>; Sat,  8 Jun 2024 00:39:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 457MdUpT083110;
- Fri, 7 Jun 2024 17:39:30 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 457MdV5i079363;
+ Fri, 7 Jun 2024 17:39:31 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1717799970;
- bh=o2//n13a3h+i1WJPii/ErLgG3L6cVQHZIbeuSdcyrO8=;
+ s=ti-com-17Q1; t=1717799971;
+ bh=XFt7mowSCo5gmKM1tT1wbXaxFS4F5/2lBODaQdjptYc=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=mFh1LLgmWIsGqHHY2twasIfbwzRylHZuArviZFT5pxcWDP9dCVl5GVxNYj+plXmx+
- ktDvk0MRl3jSlQ3o6+HeXSXU0A1rSBCvkKTV1Sphz3yEJgTc2GDCSWAHBc82f/8dQu
- dvAy9l1kNLmKH0fvcfvkcsT3yD+Wa9XdqHgidEZk=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 457MdUDb060681
+ b=CXXpnZVazAe4B+sMtEh2PlZT0oxMBb2ifWpMxZ5sHq08H+RrjNVl3mZxCbcB1iv6F
+ wcpEyDQPUf4lF4dJvc4/597oAdHDLGejzxHTOJLKsnzvqM5GET/O55Gh7ve0xoAKvx
+ 9ekQk5xZA0MRYV7//rBSu0SJVs92/zLkq/bVRtCc=
+Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 457MdV7K015750
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 7 Jun 2024 17:39:30 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 7 Jun 2024 17:39:31 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 7
  Jun 2024 17:39:30 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Fri, 7 Jun 2024 17:39:30 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 457MdURD011265;
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 457MdUdk089894;
  Fri, 7 Jun 2024 17:39:30 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
@@ -67,9 +67,9 @@ To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ilias Apalodimas
  <ilias.apalodimas@linaro.org>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH v6 15/24] doc: board: ti: am62x: document OSPI layout
-Date: Fri, 7 Jun 2024 17:38:49 -0500
-Message-ID: <20240607223858.1971290-16-j-humphreys@ti.com>
+Subject: [PATCH v6 22/24] board: sk-am69: Define capsule update firmware info
+Date: Fri, 7 Jun 2024 17:38:56 -0500
+Message-ID: <20240607223858.1971290-23-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240607223858.1971290-1-j-humphreys@ti.com>
 References: <20240607223858.1971290-1-j-humphreys@ti.com>
@@ -93,859 +93,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Added OSPI flash layout diagram, as well as example commands to flash
-firmware to it.
+Define the firmware components updatable via EFI capsule update, including
+defining capsule GUIDs for the various firmware components for the AM69
+SK.
+
+TODO: possibly make the struct's sk specific.
+TODO: add doc commit (and make sure doc is sk/NOR specific, and add OSIP
+boot mode)
+TODO: update doc to show sk defconfig when building
 
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- doc/board/ti/am62x_sk.rst        |  24 +
- doc/board/ti/img/ospi_sysfw2.svg | 802 +++++++++++++++++++++++++++++++
- 2 files changed, 826 insertions(+)
- create mode 100644 doc/board/ti/img/ospi_sysfw2.svg
+ board/ti/j784s4/evm.c        | 34 ++++++++++++++++++++++++++++++++++
+ include/configs/j784s4_evm.h | 24 ++++++++++++++++++++++++
+ 2 files changed, 58 insertions(+)
 
-diff --git a/doc/board/ti/am62x_sk.rst b/doc/board/ti/am62x_sk.rst
-index d5f7fe3b036..2a25e84f6c9 100644
---- a/doc/board/ti/am62x_sk.rst
-+++ b/doc/board/ti/am62x_sk.rst
-@@ -164,6 +164,30 @@ Image formats:
- .. image:: img/dm_tispl.bin.svg
-   :alt: tispl.bin image format
+diff --git a/board/ti/j784s4/evm.c b/board/ti/j784s4/evm.c
+index aed0ea5b949..548dbd5925d 100644
+--- a/board/ti/j784s4/evm.c
++++ b/board/ti/j784s4/evm.c
+@@ -7,12 +7,46 @@
+  *
+  */
  
-+OSPI:
-+-----
-+ROM supports booting from OSPI from offset 0x0.
-+
-+Flashing images to OSPI:
-+
-+Below commands can be used to download tiboot3.bin, tispl.bin, and u-boot.img,
-+over tftp and then flash those to OSPI at their respective addresses.
-+
-+.. prompt:: bash =>
-+
-+  sf probe
-+  tftp ${loadaddr} tiboot3.bin
-+  sf update $loadaddr 0x0 $filesize
-+  tftp ${loadaddr} tispl.bin
-+  sf update $loadaddr 0x80000 $filesize
-+  tftp ${loadaddr} u-boot.img
-+  sf update $loadaddr 0x280000 $filesize
-+
-+Flash layout for OSPI:
-+
-+.. image:: img/ospi_sysfw2.svg
-+  :alt: OSPI flash partition layout
-+
- A53 SPL DDR Memory Layout
- -------------------------
++#include <efi_loader.h>
+ #include <init.h>
+ #include <spl.h>
+ #include "../common/fdt_ops.h"
  
-diff --git a/doc/board/ti/img/ospi_sysfw2.svg b/doc/board/ti/img/ospi_sysfw2.svg
-new file mode 100644
-index 00000000000..06711df4117
---- /dev/null
-+++ b/doc/board/ti/img/ospi_sysfw2.svg
-@@ -0,0 +1,802 @@
-+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-+<!--SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause-->
+ DECLARE_GLOBAL_DATA_PTR;
+ 
++struct efi_fw_image fw_images[] = {
++	{
++		.image_type_id = AM69_SK_TIBOOT3_IMAGE_GUID,
++		.fw_name = u"AM69_SK_TIBOOT3",
++		.image_index = 1,
++	},
++	{
++		.image_type_id = AM69_SK_SPL_IMAGE_GUID,
++		.fw_name = u"AM69_SK_SPL",
++		.image_index = 2,
++	},
++	{
++		.image_type_id = AM69_SK_UBOOT_IMAGE_GUID,
++		.fw_name = u"AM69_SK_UBOOT",
++		.image_index = 3,
++	}
++};
 +
-+<!--Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/-->
++struct efi_capsule_update_info update_info = {
++	.dfu_string = "sf 0:0=tiboot3.bin raw 0 80000;"
++	"tispl.bin raw 80000 200000;u-boot.img raw 280000 400000",
++	.num_images = ARRAY_SIZE(fw_images),
++	.images = fw_images,
++};
 +
-+<svg
-+   version="1.1"
-+   width="321px"
-+   height="336px"
-+   viewBox="-0.5 -0.5 321 336"
-+   id="svg24863"
-+   sodipodi:docname="ospi_sysfw2.svg"
-+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
-+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-+   xmlns="http://www.w3.org/2000/svg"
-+   xmlns:svg="http://www.w3.org/2000/svg"
-+   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-+  <sodipodi:namedview
-+     id="namedview24865"
-+     pagecolor="#505050"
-+     bordercolor="#eeeeee"
-+     borderopacity="1"
-+     inkscape:pageshadow="0"
-+     inkscape:pageopacity="0"
-+     inkscape:pagecheckerboard="0"
-+     showgrid="false"
-+     inkscape:zoom="2.5982143"
-+     inkscape:cx="160.49485"
-+     inkscape:cy="168"
-+     inkscape:window-width="3370"
-+     inkscape:window-height="1376"
-+     inkscape:window-x="70"
-+     inkscape:window-y="27"
-+     inkscape:window-maximized="1"
-+     inkscape:current-layer="g24861" />
-+  <defs
-+     id="defs24667" />
-+  <g
-+     id="g24861">
-+    <g
-+       id="g24671">
-+      <rect
-+         x="120"
-+         y="15"
-+         width="200"
-+         height="40"
-+         fill="none"
-+         stroke="rgb(0, 0, 0)"
-+         pointer-events="all"
-+         id="rect24669" />
-+    </g>
-+    <g
-+       id="g24679">
-+      <g
-+         transform="translate(-0.5 -0.5)"
-+         id="g24677">
-+        <switch
-+           id="switch24675">
-+          <foreignObject
-+             pointer-events="none"
-+             width="100%"
-+             height="100%"
-+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
-+             style="overflow: visible; text-align: left;">
-+            <xhtml:div
-+               style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 198px; height: 1px; padding-top: 35px; margin-left: 121px;">
-+              <xhtml:div
-+                 data-drawio-colors="color: rgb(0, 0, 0); "
-+                 style="box-sizing: border-box; font-size: 0px; text-align: center;">
-+                <xhtml:div
-+                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">ospi.tiboot3(512k)</xhtml:div>
-+              </xhtml:div>
-+            </xhtml:div>
-+          </foreignObject>
-+          <text
-+             x="220"
-+             y="39"
-+             fill="rgb(0, 0, 0)"
-+             font-family="Helvetica"
-+             font-size="12px"
-+             text-anchor="middle"
-+             id="text24673">ospi.tiboot3(512k)</text>
-+        </switch>
-+      </g>
-+    </g>
-+    <g
-+       id="g24683">
-+      <rect
-+         x="60"
-+         y="5"
-+         width="60"
-+         height="30"
-+         fill="none"
-+         stroke="none"
-+         pointer-events="all"
-+         id="rect24681" />
-+    </g>
-+    <g
-+       id="g24691">
-+      <g
-+         transform="translate(-0.5 -0.5)"
-+         id="g24689">
-+        <switch
-+           id="switch24687">
-+          <foreignObject
-+             pointer-events="none"
-+             width="100%"
-+             height="100%"
-+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
-+             style="overflow: visible; text-align: left;">
-+            <xhtml:div
-+               style="display: flex; align-items: unsafe center; justify-content: unsafe flex-end; width: 58px; height: 1px; padding-top: 20px; margin-left: 60px;">
-+              <xhtml:div
-+                 data-drawio-colors="color: rgb(0, 0, 0); "
-+                 style="box-sizing: border-box; font-size: 0px; text-align: right;">
-+                <xhtml:div
-+                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
-+                  <xhtml:pre
-+                     style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, &quot;Courier New&quot;, Courier, monospace; line-height: 1.4; margin-top: 0px; margin-bottom: 0px; padding: 12px; overflow: auto; color: rgb(64, 64, 64); text-align: start;">0x0</xhtml:pre>
-+                </xhtml:div>
-+              </xhtml:div>
-+            </xhtml:div>
-+          </foreignObject>
-+          <text
-+             x="118"
-+             y="24"
-+             fill="rgb(0, 0, 0)"
-+             font-family="Helvetica"
-+             font-size="12px"
-+             text-anchor="end"
-+             id="text24685">0x0</text>
-+        </switch>
-+      </g>
-+    </g>
-+    <g
-+       id="g24695">
-+      <rect
-+         x="120"
-+         y="55"
-+         width="200"
-+         height="40"
-+         fill="none"
-+         stroke="rgb(0, 0, 0)"
-+         pointer-events="all"
-+         id="rect24693" />
-+    </g>
-+    <g
-+       id="g24703">
-+      <g
-+         transform="translate(-0.5 -0.5)"
-+         id="g24701">
-+        <switch
-+           id="switch24699">
-+          <foreignObject
-+             pointer-events="none"
-+             width="100%"
-+             height="100%"
-+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
-+             style="overflow: visible; text-align: left;">
-+            <xhtml:div
-+               style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 198px; height: 1px; padding-top: 75px; margin-left: 121px;">
-+              <xhtml:div
-+                 data-drawio-colors="color: rgb(0, 0, 0); "
-+                 style="box-sizing: border-box; font-size: 0px; text-align: center;">
-+                <xhtml:div
-+                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">ospi.tispl(2M)</xhtml:div>
-+              </xhtml:div>
-+            </xhtml:div>
-+          </foreignObject>
-+          <text
-+             x="220"
-+             y="79"
-+             fill="rgb(0, 0, 0)"
-+             font-family="Helvetica"
-+             font-size="12px"
-+             text-anchor="middle"
-+             id="text24697">ospi.tispl(2M)</text>
-+        </switch>
-+      </g>
-+    </g>
-+    <g
-+       id="g24707">
-+      <rect
-+         x="0"
-+         y="45"
-+         width="120"
-+         height="30"
-+         fill="none"
-+         stroke="none"
-+         pointer-events="all"
-+         id="rect24705" />
-+    </g>
-+    <g
-+       id="g24715">
-+      <g
-+         transform="translate(-0.5 -0.5)"
-+         id="g24713">
-+        <switch
-+           id="switch24711">
-+          <foreignObject
-+             pointer-events="none"
-+             width="100%"
-+             height="100%"
-+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
-+             style="overflow: visible; text-align: left;">
-+            <xhtml:div
-+               style="display: flex; align-items: unsafe center; justify-content: unsafe flex-end; width: 118px; height: 1px; padding-top: 60px; margin-left: 0px;">
-+              <xhtml:div
-+                 data-drawio-colors="color: rgb(0, 0, 0); "
-+                 style="box-sizing: border-box; font-size: 0px; text-align: right;">
-+                <xhtml:div
-+                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
-+                  <xhtml:pre
-+                     style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, &quot;Courier New&quot;, Courier, monospace; line-height: 1.4; margin-top: 0px; margin-bottom: 0px; padding: 12px; overflow: auto; color: rgb(64, 64, 64); text-align: start;">0x80000</xhtml:pre>
-+                </xhtml:div>
-+              </xhtml:div>
-+            </xhtml:div>
-+          </foreignObject>
-+          <text
-+             x="118"
-+             y="64"
-+             fill="rgb(0, 0, 0)"
-+             font-family="Helvetica"
-+             font-size="12px"
-+             text-anchor="end"
-+             id="text24709">0x80000</text>
-+        </switch>
-+      </g>
-+    </g>
-+    <g
-+       id="g24719">
-+      <rect
-+         x="120"
-+         y="95"
-+         width="200"
-+         height="40"
-+         fill="none"
-+         stroke="rgb(0, 0, 0)"
-+         pointer-events="all"
-+         id="rect24717" />
-+    </g>
-+    <g
-+       id="g24727">
-+      <g
-+         transform="translate(-0.5 -0.5)"
-+         id="g24725">
-+        <switch
-+           id="switch24723">
-+          <foreignObject
-+             pointer-events="none"
-+             width="100%"
-+             height="100%"
-+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
-+             style="overflow: visible; text-align: left;">
-+            <xhtml:div
-+               style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 198px; height: 1px; padding-top: 115px; margin-left: 121px;">
-+              <xhtml:div
-+                 data-drawio-colors="color: rgb(0, 0, 0); "
-+                 style="box-sizing: border-box; font-size: 0px; text-align: center;">
-+                <xhtml:div
-+                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">ospi.u-boot(4M)</xhtml:div>
-+              </xhtml:div>
-+            </xhtml:div>
-+          </foreignObject>
-+          <text
-+             x="220"
-+             y="119"
-+             fill="rgb(0, 0, 0)"
-+             font-family="Helvetica"
-+             font-size="12px"
-+             text-anchor="middle"
-+             id="text24721">ospi.u-boot(4M)</text>
-+        </switch>
-+      </g>
-+    </g>
-+    <g
-+       id="g24731">
-+      <rect
-+         x="0"
-+         y="85"
-+         width="120"
-+         height="30"
-+         fill="none"
-+         stroke="none"
-+         pointer-events="all"
-+         id="rect24729" />
-+    </g>
-+    <g
-+       id="g24739">
-+      <g
-+         transform="translate(-0.5 -0.5)"
-+         id="g24737">
-+        <switch
-+           id="switch24735">
-+          <foreignObject
-+             pointer-events="none"
-+             width="100%"
-+             height="100%"
-+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
-+             style="overflow: visible; text-align: left;">
-+            <xhtml:div
-+               style="display: flex; align-items: unsafe center; justify-content: unsafe flex-end; width: 118px; height: 1px; padding-top: 100px; margin-left: 0px;">
-+              <xhtml:div
-+                 data-drawio-colors="color: rgb(0, 0, 0); "
-+                 style="box-sizing: border-box; font-size: 0px; text-align: right;">
-+                <xhtml:div
-+                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
-+                  <xhtml:pre
-+                     style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, &quot;Courier New&quot;, Courier, monospace; line-height: 1.4; margin-top: 0px; margin-bottom: 0px; padding: 12px; overflow: auto; color: rgb(64, 64, 64); text-align: start;">0x280000</xhtml:pre>
-+                </xhtml:div>
-+              </xhtml:div>
-+            </xhtml:div>
-+          </foreignObject>
-+          <text
-+             x="118"
-+             y="104"
-+             fill="rgb(0, 0, 0)"
-+             font-family="Helvetica"
-+             font-size="12px"
-+             text-anchor="end"
-+             id="text24733">0x280000</text>
-+        </switch>
-+      </g>
-+    </g>
-+    <g
-+       id="g24743">
-+      <rect
-+         x="120"
-+         y="135"
-+         width="200"
-+         height="40"
-+         fill="none"
-+         stroke="rgb(0, 0, 0)"
-+         pointer-events="all"
-+         id="rect24741" />
-+    </g>
-+    <g
-+       id="g24751">
-+      <g
-+         transform="translate(-0.5 -0.5)"
-+         id="g24749">
-+        <switch
-+           id="switch24747">
-+          <foreignObject
-+             pointer-events="none"
-+             width="100%"
-+             height="100%"
-+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
-+             style="overflow: visible; text-align: left;">
-+            <xhtml:div
-+               style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 198px; height: 1px; padding-top: 155px; margin-left: 121px;">
-+              <xhtml:div
-+                 data-drawio-colors="color: rgb(0, 0, 0); "
-+                 style="box-sizing: border-box; font-size: 0px; text-align: center;">
-+                <xhtml:div
-+                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">ospi.env(128K)</xhtml:div>
-+              </xhtml:div>
-+            </xhtml:div>
-+          </foreignObject>
-+          <text
-+             x="220"
-+             y="159"
-+             fill="rgb(0, 0, 0)"
-+             font-family="Helvetica"
-+             font-size="12px"
-+             text-anchor="middle"
-+             id="text24745">ospi.env(128K)</text>
-+        </switch>
-+      </g>
-+    </g>
-+    <g
-+       id="g24755">
-+      <rect
-+         x="0"
-+         y="125"
-+         width="120"
-+         height="30"
-+         fill="none"
-+         stroke="none"
-+         pointer-events="all"
-+         id="rect24753" />
-+    </g>
-+    <g
-+       id="g24763">
-+      <g
-+         transform="translate(-0.5 -0.5)"
-+         id="g24761">
-+        <switch
-+           id="switch24759">
-+          <foreignObject
-+             pointer-events="none"
-+             width="100%"
-+             height="100%"
-+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
-+             style="overflow: visible; text-align: left;">
-+            <xhtml:div
-+               style="display: flex; align-items: unsafe center; justify-content: unsafe flex-end; width: 118px; height: 1px; padding-top: 140px; margin-left: 0px;">
-+              <xhtml:div
-+                 data-drawio-colors="color: rgb(0, 0, 0); "
-+                 style="box-sizing: border-box; font-size: 0px; text-align: right;">
-+                <xhtml:div
-+                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
-+                  <xhtml:pre
-+                     style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, &quot;Courier New&quot;, Courier, monospace; line-height: 1.4; margin-top: 0px; margin-bottom: 0px; padding: 12px; overflow: auto; color: rgb(64, 64, 64); text-align: start;">0x680000</xhtml:pre>
-+                </xhtml:div>
-+              </xhtml:div>
-+            </xhtml:div>
-+          </foreignObject>
-+          <text
-+             x="118"
-+             y="144"
-+             fill="#000000"
-+             font-family="Helvetica"
-+             font-size="12px"
-+             text-anchor="end"
-+             id="text24757">0x680000</text>
-+        </switch>
-+      </g>
-+    </g>
-+    <g
-+       id="g24767">
-+      <rect
-+         x="120"
-+         y="175"
-+         width="200"
-+         height="40"
-+         fill="none"
-+         stroke="rgb(0, 0, 0)"
-+         pointer-events="all"
-+         id="rect24765" />
-+    </g>
-+    <g
-+       id="g24775">
-+      <g
-+         transform="translate(-0.5 -0.5)"
-+         id="g24773">
-+        <switch
-+           id="switch24771">
-+          <foreignObject
-+             pointer-events="none"
-+             width="100%"
-+             height="100%"
-+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
-+             style="overflow: visible; text-align: left;">
-+            <xhtml:div
-+               style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 198px; height: 1px; padding-top: 195px; margin-left: 121px;">
-+              <xhtml:div
-+                 data-drawio-colors="color: rgb(0, 0, 0); "
-+                 style="box-sizing: border-box; font-size: 0px; text-align: center;">
-+                <xhtml:div
-+                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">ospi.env.backup(128K)</xhtml:div>
-+              </xhtml:div>
-+            </xhtml:div>
-+          </foreignObject>
-+          <text
-+             x="220"
-+             y="199"
-+             fill="rgb(0, 0, 0)"
-+             font-family="Helvetica"
-+             font-size="12px"
-+             text-anchor="middle"
-+             id="text24769">ospi.env.backup(128K)</text>
-+        </switch>
-+      </g>
-+    </g>
-+    <g
-+       id="g24779">
-+      <rect
-+         x="0"
-+         y="165"
-+         width="120"
-+         height="30"
-+         fill="none"
-+         stroke="none"
-+         pointer-events="all"
-+         id="rect24777" />
-+    </g>
-+    <g
-+       id="g24787">
-+      <g
-+         transform="translate(-0.5 -0.5)"
-+         id="g24785">
-+        <switch
-+           id="switch24783">
-+          <foreignObject
-+             pointer-events="none"
-+             width="100%"
-+             height="100%"
-+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
-+             style="overflow: visible; text-align: left;">
-+            <xhtml:div
-+               style="display: flex; align-items: unsafe center; justify-content: unsafe flex-end; width: 118px; height: 1px; padding-top: 180px; margin-left: 0px;">
-+              <xhtml:div
-+                 data-drawio-colors="color: rgb(0, 0, 0); "
-+                 style="box-sizing: border-box; font-size: 0px; text-align: right;">
-+                <xhtml:div
-+                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
-+                  <xhtml:pre
-+                     style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, &quot;Courier New&quot;, Courier, monospace; line-height: 1.4; margin-top: 0px; margin-bottom: 0px; padding: 12px; overflow: auto; color: rgb(64, 64, 64); text-align: start;">0x6C0000</xhtml:pre>
-+                </xhtml:div>
-+              </xhtml:div>
-+            </xhtml:div>
-+          </foreignObject>
-+          <text
-+             x="118"
-+             y="184"
-+             fill="rgb(0, 0, 0)"
-+             font-family="Helvetica"
-+             font-size="12px"
-+             text-anchor="end"
-+             id="text24781">0x6C0000</text>
-+        </switch>
-+      </g>
-+    </g>
-+    <g
-+       id="g24791">
-+      <rect
-+         x="120"
-+         y="215"
-+         width="200"
-+         height="40"
-+         fill="none"
-+         stroke="rgb(0, 0, 0)"
-+         pointer-events="all"
-+         id="rect24789" />
-+    </g>
-+    <g
-+       id="g24799">
-+      <g
-+         transform="translate(-0.5 -0.5)"
-+         id="g24797">
-+        <switch
-+           id="switch24795">
-+          <foreignObject
-+             pointer-events="none"
-+             width="100%"
-+             height="100%"
-+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
-+             style="overflow: visible; text-align: left;">
-+            <xhtml:div
-+               style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 198px; height: 1px; padding-top: 235px; margin-left: 121px;">
-+              <xhtml:div
-+                 data-drawio-colors="color: rgb(0, 0, 0); "
-+                 style="box-sizing: border-box; font-size: 0px; text-align: center;">
-+                <xhtml:div
-+                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">padding(768K)</xhtml:div>
-+              </xhtml:div>
-+            </xhtml:div>
-+          </foreignObject>
-+          <text
-+             x="220"
-+             y="239"
-+             fill="rgb(0, 0, 0)"
-+             font-family="Helvetica"
-+             font-size="12px"
-+             text-anchor="middle"
-+             id="text24793">padding(768K)</text>
-+        </switch>
-+      </g>
-+    </g>
-+    <g
-+       id="g24803">
-+      <rect
-+         x="0"
-+         y="205"
-+         width="120"
-+         height="30"
-+         fill="none"
-+         stroke="none"
-+         pointer-events="all"
-+         id="rect24801" />
-+    </g>
-+    <g
-+       id="g24811">
-+      <g
-+         transform="translate(-0.5 -0.5)"
-+         id="g24809">
-+        <switch
-+           id="switch24807">
-+          <foreignObject
-+             pointer-events="none"
-+             width="100%"
-+             height="100%"
-+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
-+             style="overflow: visible; text-align: left;">
-+            <xhtml:div
-+               style="display: flex; align-items: unsafe center; justify-content: unsafe flex-end; width: 118px; height: 1px; padding-top: 220px; margin-left: 0px;">
-+              <xhtml:div
-+                 data-drawio-colors="color: rgb(0, 0, 0); "
-+                 style="box-sizing: border-box; font-size: 0px; text-align: right;">
-+                <xhtml:div
-+                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
-+                  <xhtml:pre
-+                     style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, &quot;Courier New&quot;, Courier, monospace; line-height: 1.4; margin-top: 0px; margin-bottom: 0px; padding: 12px; overflow: auto; color: rgb(64, 64, 64); text-align: start;">0x740000</xhtml:pre>
-+                </xhtml:div>
-+              </xhtml:div>
-+            </xhtml:div>
-+          </foreignObject>
-+          <text
-+             x="118"
-+             y="224"
-+             fill="rgb(0, 0, 0)"
-+             font-family="Helvetica"
-+             font-size="12px"
-+             text-anchor="end"
-+             id="text24805">0x740000</text>
-+        </switch>
-+      </g>
-+    </g>
-+    <g
-+       id="g24815">
-+      <rect
-+         x="120"
-+         y="255"
-+         width="200"
-+         height="40"
-+         fill="none"
-+         stroke="rgb(0, 0, 0)"
-+         pointer-events="all"
-+         id="rect24813" />
-+    </g>
-+    <g
-+       id="g24823">
-+      <g
-+         transform="translate(-0.5 -0.5)"
-+         id="g24821">
-+        <switch
-+           id="switch24819">
-+          <foreignObject
-+             pointer-events="none"
-+             width="100%"
-+             height="100%"
-+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
-+             style="overflow: visible; text-align: left;">
-+            <xhtml:div
-+               style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 198px; height: 1px; padding-top: 275px; margin-left: 121px;">
-+              <xhtml:div
-+                 data-drawio-colors="color: rgb(0, 0, 0); "
-+                 style="box-sizing: border-box; font-size: 0px; text-align: center;">
-+                <xhtml:div
-+                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">ospi.rootfs(UBIFS)</xhtml:div>
-+              </xhtml:div>
-+            </xhtml:div>
-+          </foreignObject>
-+          <text
-+             x="220"
-+             y="279"
-+             fill="rgb(0, 0, 0)"
-+             font-family="Helvetica"
-+             font-size="12px"
-+             text-anchor="middle"
-+             id="text24817">ospi.rootfs(UBIFS)</text>
-+        </switch>
-+      </g>
-+    </g>
-+    <g
-+       id="g24827">
-+      <rect
-+         x="0"
-+         y="245"
-+         width="120"
-+         height="30"
-+         fill="none"
-+         stroke="none"
-+         pointer-events="all"
-+         id="rect24825" />
-+    </g>
-+    <g
-+       id="g24835">
-+      <g
-+         transform="translate(-0.5 -0.5)"
-+         id="g24833">
-+        <switch
-+           id="switch24831">
-+          <foreignObject
-+             pointer-events="none"
-+             width="100%"
-+             height="100%"
-+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
-+             style="overflow: visible; text-align: left;">
-+            <xhtml:div
-+               style="display: flex; align-items: unsafe center; justify-content: unsafe flex-end; width: 118px; height: 1px; padding-top: 260px; margin-left: 0px;">
-+              <xhtml:div
-+                 data-drawio-colors="color: rgb(0, 0, 0); "
-+                 style="box-sizing: border-box; font-size: 0px; text-align: right;">
-+                <xhtml:div
-+                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
-+                  <xhtml:pre
-+                     style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, &quot;Courier New&quot;, Courier, monospace; line-height: 1.4; margin-top: 0px; margin-bottom: 0px; padding: 12px; overflow: auto; color: rgb(64, 64, 64); text-align: start;">0x800000</xhtml:pre>
-+                </xhtml:div>
-+              </xhtml:div>
-+            </xhtml:div>
-+          </foreignObject>
-+          <text
-+             x="118"
-+             y="264"
-+             fill="rgb(0, 0, 0)"
-+             font-family="Helvetica"
-+             font-size="12px"
-+             text-anchor="end"
-+             id="text24829">0x800000</text>
-+        </switch>
-+      </g>
-+    </g>
-+    <g
-+       id="g24839">
-+      <rect
-+         x="120"
-+         y="295"
-+         width="200"
-+         height="40"
-+         fill="none"
-+         stroke="rgb(0, 0, 0)"
-+         pointer-events="all"
-+         id="rect24837" />
-+    </g>
-+    <g
-+       id="g24847">
-+      <g
-+         transform="translate(-0.5 -0.5)"
-+         id="g24845">
-+        <switch
-+           id="switch24843">
-+          <foreignObject
-+             pointer-events="none"
-+             width="100%"
-+             height="100%"
-+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
-+             style="overflow: visible; text-align: left;">
-+            <xhtml:div
-+               style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 198px; height: 1px; padding-top: 315px; margin-left: 121px;">
-+              <xhtml:div
-+                 data-drawio-colors="color: rgb(0, 0, 0); "
-+                 style="box-sizing: border-box; font-size: 0px; text-align: center;">
-+                <xhtml:div
-+                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">ospi.phypattern(256k)</xhtml:div>
-+              </xhtml:div>
-+            </xhtml:div>
-+          </foreignObject>
-+          <text
-+             x="220"
-+             y="319"
-+             fill="rgb(0, 0, 0)"
-+             font-family="Helvetica"
-+             font-size="12px"
-+             text-anchor="middle"
-+             id="text24841">ospi.phypattern(256k)</text>
-+        </switch>
-+      </g>
-+    </g>
-+    <g
-+       id="g24851">
-+      <rect
-+         x="0"
-+         y="285"
-+         width="120"
-+         height="30"
-+         fill="none"
-+         stroke="none"
-+         pointer-events="all"
-+         id="rect24849" />
-+    </g>
-+    <g
-+       id="g24859">
-+      <g
-+         transform="translate(-0.5 -0.5)"
-+         id="g24857">
-+        <switch
-+           id="switch24855">
-+          <foreignObject
-+             pointer-events="none"
-+             width="100%"
-+             height="100%"
-+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
-+             style="overflow: visible; text-align: left;">
-+            <xhtml:div
-+               style="display: flex; align-items: unsafe center; justify-content: unsafe flex-end; width: 118px; height: 1px; padding-top: 300px; margin-left: 0px;">
-+              <xhtml:div
-+                 data-drawio-colors="color: rgb(0, 0, 0); "
-+                 style="box-sizing: border-box; font-size: 0px; text-align: right;">
-+                <xhtml:div
-+                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
-+                  <xhtml:pre
-+                     style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, &quot;Courier New&quot;, Courier, monospace; line-height: 1.4; margin-top: 0px; margin-bottom: 0px; padding: 12px; overflow: auto; color: rgb(64, 64, 64); text-align: start;">0x3FC0000</xhtml:pre>
-+                </xhtml:div>
-+              </xhtml:div>
-+            </xhtml:div>
-+          </foreignObject>
-+          <text
-+             x="118"
-+             y="304"
-+             fill="rgb(0, 0, 0)"
-+             font-family="Helvetica"
-+             font-size="12px"
-+             text-anchor="end"
-+             id="text24853">0x3FC0000</text>
-+        </switch>
-+      </g>
-+    </g>
-+  </g>
-+</svg>
++#if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
++void set_dfu_alt_info(char *interface, char *devstr)
++{
++	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
++		env_set("dfu_alt_info", update_info.dfu_string);
++}
++#endif
++
+ int board_init(void)
+ {
+ 	return 0;
+diff --git a/include/configs/j784s4_evm.h b/include/configs/j784s4_evm.h
+index 4a2ccdce144..53eb2bff221 100644
+--- a/include/configs/j784s4_evm.h
++++ b/include/configs/j784s4_evm.h
+@@ -9,6 +9,30 @@
+ #ifndef __CONFIG_J784S4_EVM_H
+ #define __CONFIG_J784S4_EVM_H
+ 
++/**
++ * define AM69_SK_TIBOOT3_IMAGE_GUID - firmware GUID for AM69 SK tiboot3.bin
++ * define AM69_SK_SPL_IMAGE_GUID     - firmware GUID for AM69 SK SPL
++ * define AM69_SK_UBOOT_IMAGE_GUID   - firmware GUID for AM69 SK UBOOT
++ *
++ * These GUIDs are used in capsules updates to identify the corresponding
++ * firmware object.
++ *
++ * Board developers using this as a starting reference should
++ * define their own GUIDs to ensure that firmware repositories (like
++ * LVFS) do not confuse them.
++ */
++#define AM69_SK_TIBOOT3_IMAGE_GUID \
++	EFI_GUID(0xadf49ec5, 0x61bb, 0x4dbe, 0x8b, 0x8d,	\
++		 0x39, 0xdf, 0x4d, 0x7e, 0xbf, 0x46)
++
++#define AM69_SK_SPL_IMAGE_GUID \
++	EFI_GUID(0x787f0059, 0x63a1, 0x461c, 0xa1, 0x8e, \
++		 0x9d, 0x83, 0x83, 0x45, 0xfe, 0x8e)
++
++#define AM69_SK_UBOOT_IMAGE_GUID \
++	EFI_GUID(0x9300505d, 0x6ec5, 0x4ff8, 0x99, 0xe4, \
++		 0x54, 0x59, 0xa0, 0x4b, 0xe6, 0x17)
++
+ /* Now for the remaining common defines */
+ #include <configs/ti_armv7_common.h>
+ 
 -- 
 2.34.1
 
