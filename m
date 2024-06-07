@@ -4,85 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C4ACC27C53
-	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 20:10:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E754C27C65
+	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 20:24:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FC46881AF;
-	Fri,  7 Jun 2024 22:10:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C085B881AF;
+	Fri,  7 Jun 2024 22:24:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mail.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VImJcU9O";
+	dkim=pass (2048-bit key; secure) header.d=mail.de header.i=@mail.de header.b="d85k4+Af";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DBFD884A7; Fri,  7 Jun 2024 22:10:11 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D9C45884B0; Fri,  7 Jun 2024 22:24:18 +0200 (CEST)
+Received: from shout12.mail.de (shout12.mail.de [IPv6:2001:868:100:600::f154])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6AE9888047
- for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 22:10:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CFA50884A4
+ for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 22:24:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a6267778b3aso304237366b.3
- for <u-boot@lists.denx.de>; Fri, 07 Jun 2024 13:10:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1717791009; x=1718395809; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=5sek5eOlErMdi7XCVZd4QsuduzhydLqF80l/WFD46ps=;
- b=VImJcU9OujDFEnwU1vlHCB4C6uyGUGP3wsq23hxyexGfZN7X13sWk1dBwYNvQn0IQE
- 1SEfC8K1OdCZf4sIy90roeQhRGieTdFMF0CMqpyqV5wqGXG4yCdxOgsV2Nae5AKTtydo
- 4MxZSrEb67MdXdUtCrxXn3MPIsUl4mtDKdn3mjSnwiSfZDUCG8xTqFzDt5eYF6eBJ9aF
- dv4DjuKmeEQKm6OfQkvetcYAsvrGHtsGvD7d+W1232xZiYjKv3xvZA26yy+3XuoGbI8g
- F4U7SBIJh09EMphThqSYB9zdgzpKMNj25mpjhF3Rse9VzpIWiGupfckeH+6RKqoUfiX1
- OBiQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717791009; x=1718395809;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=5sek5eOlErMdi7XCVZd4QsuduzhydLqF80l/WFD46ps=;
- b=ZAoZ0/TuTwA+UJuZngsP+IBFKllGp8iMwYBjSrrrwCie4+EvLdqVCc6gJ8EG3pil3w
- yEa+IqrZZ9No7fiNDBYXpkHCtQbhIj/aFkQ4gQtzK8ohpPoKcvRZ3j47F6NKzFtoWxC8
- DkCndhDl44B4A0ffricA1yayYJKt/qx6bF+alAhCPBAlit7zfCLm6JsuQUYmFLhescR2
- v4LE/JWo8XYViGYkb36sWLL5WWVzHKUgwwN8SrP2wYqeO4DDYfKFR5KEcsMzFbd0k2SR
- 4uaBcHR/waGBf+1ci8NEJ0PnytuzNY1AqqZ+bCgaF2IjT1cmHDLQroEyXzG2OZkb7X0i
- 0ZYA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXdiVzXEmVAnt4rBi3IPTI1SHg6le44LgADYiUUdZWSjL1xY7Xnc1cxm+H5qdGIpybuPafkRPBgIXNuXoV+2X7mABEoyQ==
-X-Gm-Message-State: AOJu0Yz0AFTyXJALX0M/7B5Ew20Bdu9LsgVDjXb2hG7b0+cV5BHsbxAd
- Un0o/r17lGxXoqys+wrdnR9fGxa0oEBoUQGQYECKrRL/E5o5vbl5LSgd3Cx+y5Q=
-X-Google-Smtp-Source: AGHT+IHmnZt7QM/lf4Jtr03/+dhaf+TQ8jUhSdRqvZXF+uzyzXAtrGm0eDzP7jCwXqQLBGrPYq2TbQ==
-X-Received: by 2002:a17:906:2644:b0:a6e:f8dd:d2fd with SMTP id
- a640c23a62f3a-a6ef8ddd398mr53678266b.29.1717791008612; 
- Fri, 07 Jun 2024 13:10:08 -0700 (PDT)
-Received: from ?IPV6:2a02:8109:aa0d:be00::8090? ([2a02:8109:aa0d:be00::8090])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a6c8070dcd7sm292288966b.180.2024.06.07.13.10.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 07 Jun 2024 13:10:08 -0700 (PDT)
-Message-ID: <66b2bad8-2f68-4ad7-a580-cce9613fe797@linaro.org>
-Date: Fri, 7 Jun 2024 22:10:06 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=mail.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=seb-dev@mail.de
+Received: from shout02.mail.de (unknown [10.0.120.222])
+ by shout12.mail.de (Postfix) with ESMTPS id 7052F241964;
+ Fri,  7 Jun 2024 22:24:16 +0200 (CEST)
+Received: from postfix02.mail.de (postfix02.bt.mail.de [10.0.121.126])
+ by shout02.mail.de (Postfix) with ESMTP id 5988F240AF7;
+ Fri,  7 Jun 2024 22:24:16 +0200 (CEST)
+Received: from smtp01.mail.de (smtp02.bt.mail.de [10.0.121.212])
+ by postfix02.mail.de (Postfix) with ESMTP id 3D0D5A03C3;
+ Fri,  7 Jun 2024 22:24:16 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=mail.de;
+ s=mailde202009; t=1717791856;
+ bh=KttYdhh0evFi0EsDuhKw0S2bHbVh/6/hNbs5wfiA8wE=;
+ h=From:To:Cc:Subject:Date:Message-ID:From:To:CC:Subject:Reply-To;
+ b=d85k4+Afp0Vxw+e6yQYHQ8bU//G1+Sa8P12U4VP+7+g1eneS2htVDAKWgHCWif6Zk
+ oBtNQWkjFMQXyYZQvYJEW7yPha0Oli4lyLOrPc+YK1KvdAcHeNTnfqTYhqy8oo9dg5
+ 1NtslR9DtEaN7vsETSy2kSX7XSCMizWBmjkg+0gu9GVB3YyT/WeP//Ji8AGYW37oof
+ gBeUiKOrqfNpQbdQawGdIKs0h6Od4kJf2Bfmi9SrVSFmFsFQm7TKXEiaVaIlw34RNM
+ LwiCbttsECNuviR1ghEzgVmt1tbsvy+jYBUZzhu7J7fXYTDC7KHvZ1x/pqb6U4HiWi
+ BSlxc7V6MVgRg==
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp01.mail.de (Postfix) with ESMTPSA id E2C3D240A50;
+ Fri,  7 Jun 2024 22:24:15 +0200 (CEST)
+From: Sebastian Kropatsch <seb-dev@mail.de>
+To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>
+Cc: Tom Rini <trini@konsulko.com>,
+	u-boot@lists.denx.de
+Subject: [PATCH v2 2/2] board: rockchip: Add FriendlyElec NanoPi R6S
+Date: Fri,  7 Jun 2024 22:17:42 +0200
+Message-ID: <20240607202111.453943-2-seb-dev@mail.de>
+In-Reply-To: <20240607202111.453943-1-seb-dev@mail.de>
+References: <20240607202111.453943-1-seb-dev@mail.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] arm64: add software pagetable walker
-To: Tom Rini <trini@konsulko.com>
-Cc: Michal Simek <michal.simek@amd.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.denx.de
-References: <20240607-caleb-upstreaming-v1-0-99094dabb3d9@linaro.org>
- <20240607-caleb-upstreaming-v1-2-99094dabb3d9@linaro.org>
- <20240607170050.GJ68077@bill-the-cat>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240607170050.GJ68077@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-purgate: clean
+X-purgate: This mail is considered clean (visit http://www.eleven.de for
+ further information)
+X-purgate-type: clean
+X-purgate-Ad: Categorized by eleven eXpurgate (R) http://www.eleven.de
+X-purgate: This mail is considered clean (visit http://www.eleven.de for
+ further information)
+X-purgate: clean
+X-purgate-size: 8217
+X-purgate-ID: 154282::1717791856-DB52A878-83BAE176/0/0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,35 +87,235 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The NanoPi R6S is a SBC by FriendlyElec based on the Rockchip RK3588s.
+It comes with 4GB or 8GB of RAM, a microSD card slot, 32GB eMMC storage,
+one RTL8211F 1GbE and two RTL8125 2.5GbE Ethernet ports, one USB 2.0
+Type-A and one USB 3.0 Type-A port, a HDMI port, a 12-pin GPIO FPC
+connector, a fan connector, IR receiver as well as some buttons and LEDs.
 
+Add initial support for this board using the upstream devicetree sources.
 
-On 07/06/2024 19:00, Tom Rini wrote:
-> On Fri, Jun 07, 2024 at 06:51:20PM +0200, Caleb Connolly wrote:
-> 
->> Add a basic software implementation of the ARM64 pagetable walker. This
->> can be used for debugging U-Boot's pagetable, as well as dumping the
->> pagetable from the previous bootloader stage if it used one (by reading
->> out the ttbr address).
->>
->> One can either call dump_pagetable() to print the pagetable to the
->> console with the default formatter, or implement their own pagetable
->> handler using walke_pagetable() with a custom pte_walker_cb_t callback.
->>
->> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->> ---
->>   arch/arm/cpu/armv8/cache_v8.c    | 202 +++++++++++++++++++++++++++++++++++++++
->>   arch/arm/include/asm/armv8/mmu.h |  55 +++++++++++
->>   2 files changed, 257 insertions(+)
-> 
-> So, I assume that by default, all of this gets discarded as unused code
-> and that's why it's not behind a Kconfig. Next, please add something
+Kernel commit:
+f1b11f43b3e9 ("arm64: dts: rockchip: Add support for NanoPi R6S")
 
-Yes, a basic "strings" check on the U-Boot binary suggests this is the case.
-> under maybe doc/arch/ or doc/develop (I'm honestly not sure which is
-> best) that documents all of this. Thanks!
+Signed-off-by: Sebastian Kropatsch <seb-dev@mail.de>
+---
 
-Sure, will try and find a suitable place for it.
-> 
+The R6S is very similar to the R6C, the major difference being that
+instead of the M.2 NVMe socket on the R6C, the R6S has a second RTL8125BG
+Ethernet chip, which uses the same PCIe lanes that the R6C uses for its
+M.2 socket. Other minor differences include:
+- 12-pin GPIO FPC instead of 30-pin header
+- IR receiver (pwm-based)
+- 5V fan connector
+Other than that, they are the same, which is why the difference in
+U-Boot is only the missing NVME config option in the R6S defconfig.
 
+Please note that I was not able to test this device. I only chose to
+add it due to it being a very similar implementation to the R6C, like the
+NanoPi R5C and R5S are similar. It should however boot just fine and even
+both RTL8125 Ethernet ports should work in U-Boot since RTL8125 is the
+same chip used in the R6C, using the rtl8169 driver.
+
+If this is not how things should be done in U-Boot, please disregard
+and drop this patch :) Thanks!
+
+---
+ arch/arm/dts/rk3588s-nanopi-r6s-u-boot.dtsi   |  3 +
+ arch/arm/mach-rockchip/rk3588/Kconfig         | 12 +++
+ board/friendlyelec/nanopi-r6s-rk3588s/Kconfig | 12 +++
+ .../nanopi-r6s-rk3588s/MAINTAINERS            |  7 ++
+ configs/nanopi-r6s-rk3588s_defconfig          | 82 +++++++++++++++++++
+ doc/board/rockchip/rockchip.rst               |  1 +
+ include/configs/nanopi-r6s-rk3588s.h          | 12 +++
+ 7 files changed, 129 insertions(+)
+ create mode 100644 arch/arm/dts/rk3588s-nanopi-r6s-u-boot.dtsi
+ create mode 100644 board/friendlyelec/nanopi-r6s-rk3588s/Kconfig
+ create mode 100644 board/friendlyelec/nanopi-r6s-rk3588s/MAINTAINERS
+ create mode 100644 configs/nanopi-r6s-rk3588s_defconfig
+ create mode 100644 include/configs/nanopi-r6s-rk3588s.h
+
+diff --git a/arch/arm/dts/rk3588s-nanopi-r6s-u-boot.dtsi b/arch/arm/dts/rk3588s-nanopi-r6s-u-boot.dtsi
+new file mode 100644
+index 0000000000..853ed58cfe
+--- /dev/null
++++ b/arch/arm/dts/rk3588s-nanopi-r6s-u-boot.dtsi
+@@ -0,0 +1,3 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++
++#include "rk3588s-u-boot.dtsi"
+diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
+index 4b7d751c6f..a9e400861a 100644
+--- a/arch/arm/mach-rockchip/rk3588/Kconfig
++++ b/arch/arm/mach-rockchip/rk3588/Kconfig
+@@ -90,6 +90,18 @@ config TARGET_NANOPI_R6C_RK3588S
+ 	  Type-A port, a HDMI port, a 30-pin GPIO header as well as some
+ 	  buttons and LEDs.
+ 
++config TARGET_NANOPI_R6S_RK3588S
++	bool "FriendlyElec NanoPi R6S"
++	select BOARD_LATE_INIT
++	help
++	  The NanoPi R6S is a SBC by FriendlyElec based on the Rockchip
++	  RK3588s.
++	  It comes with 4GB or 8GB of RAM, a microSD card slot, 32GB eMMC
++	  storage, one RTL8211F 1GbE and two RTL8125 2.5GbE Ethernet ports,
++	  one USB 2.0 Type-A and one USB 3.0 Type-A port, a HDMI port, a
++	  12-pin GPIO FPC connector, a fan connector, IR receiver as well
++	  as some buttons and LEDs.
++
+ config TARGET_NOVA_RK3588
+ 	bool "Indiedroid Nova RK3588"
+ 	select BOARD_LATE_INIT
+diff --git a/board/friendlyelec/nanopi-r6s-rk3588s/Kconfig b/board/friendlyelec/nanopi-r6s-rk3588s/Kconfig
+new file mode 100644
+index 0000000000..4d579816b1
+--- /dev/null
++++ b/board/friendlyelec/nanopi-r6s-rk3588s/Kconfig
+@@ -0,0 +1,12 @@
++if TARGET_NANOPI_R6S_RK3588S
++
++config SYS_BOARD
++	default "nanopi-r6s-rk3588s"
++
++config SYS_VENDOR
++	default "friendlyelec"
++
++config SYS_CONFIG_NAME
++	default "nanopi-r6s-rk3588s"
++
++endif
+diff --git a/board/friendlyelec/nanopi-r6s-rk3588s/MAINTAINERS b/board/friendlyelec/nanopi-r6s-rk3588s/MAINTAINERS
+new file mode 100644
+index 0000000000..76288b4320
+--- /dev/null
++++ b/board/friendlyelec/nanopi-r6s-rk3588s/MAINTAINERS
+@@ -0,0 +1,7 @@
++NANOPI-R6S
++M:	Sebastian Kropatsch <seb-dev@mail.de>
++S:	Maintained
++F:	arch/arm/dts/rk3588s-nanopi-r6s-u-boot.dtsi
++F:	board/friendlyelec/nanopi-r6s-rk3588s
++F:	configs/nanopi-r6s-rk3588s_defconfig
++F:	include/configs/nanopi-r6s-rk3588s.h
+diff --git a/configs/nanopi-r6s-rk3588s_defconfig b/configs/nanopi-r6s-rk3588s_defconfig
+new file mode 100644
+index 0000000000..f7b364655f
+--- /dev/null
++++ b/configs/nanopi-r6s-rk3588s_defconfig
+@@ -0,0 +1,82 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_SYS_HAS_NONCACHED_MEMORY=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-nanopi-r6s"
++CONFIG_ROCKCHIP_RK3588=y
++CONFIG_SPL_SERIAL=y
++CONFIG_TARGET_NANOPI_R6S_RK3588S=y
++CONFIG_DEBUG_UART_BASE=0xFEB50000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_PCI=y
++CONFIG_DEBUG_UART=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-nanopi-r6s.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_MAX_SIZE=0x40000
++CONFIG_SPL_PAD_TO=0x7f8000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_SPL_ATF=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_PWM=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_ROCKUSB=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_SPL_CLK=y
++# CONFIG_USB_FUNCTION_FASTBOOT is not set
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_MISC=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++# CONFIG_SPI_FLASH is not set
++CONFIG_PHY_REALTEK=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_ROCKCHIP=y
++CONFIG_RTL8169=y
++CONFIG_PCIE_DW_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
++CONFIG_PHY_ROCKCHIP_USBDP=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_PWM_ROCKCHIP=y
++CONFIG_SPL_RAM=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_SYSRESET=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_USB_FUNCTION_ROCKUSB=y
++CONFIG_ERRNO_STR=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index a3d9837dda..0b58086f06 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -124,6 +124,7 @@ List of mainline supported Rockchip boards:
+      - Edgeble Neural Compute Module 6B SoM - Neu6b (neu6b-io-rk3588)
+      - FriendlyElec NanoPC-T6 (nanopc-t6-rk3588)
+      - FriendlyElec NanoPi R6C (nanopi-r6c-rk3588s)
++     - FriendlyElec NanoPi R6S (nanopi-r6s-rk3588s)
+      - Generic RK3588S/RK3588 (generic-rk3588)
+      - Indiedroid Nova (nova-rk3588s)
+      - Pine64 QuartzPro64 (quartzpro64-rk3588)
+diff --git a/include/configs/nanopi-r6s-rk3588s.h b/include/configs/nanopi-r6s-rk3588s.h
+new file mode 100644
+index 0000000000..a1b19783c5
+--- /dev/null
++++ b/include/configs/nanopi-r6s-rk3588s.h
+@@ -0,0 +1,12 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++
++#ifndef __NANOPI_R6S_RK3588S_H
++#define __NANOPI_R6S_RK3588S_H
++
++#define ROCKCHIP_DEVICE_SETTINGS \
++		"stdout=serial,vidconsole\0" \
++		"stderr=serial,vidconsole\0"
++
++#include <configs/rk3588_common.h>
++
++#endif /* __NANOPI_R6S_RK3588S_H */
 -- 
-// Caleb (they/them)
+2.45.2
+
