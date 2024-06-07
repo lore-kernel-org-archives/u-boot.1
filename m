@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF83CC27C53
-	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 18:55:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79270C27C5F
+	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 18:55:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D966884D1;
-	Fri,  7 Jun 2024 20:54:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BF3D0884DC;
+	Fri,  7 Jun 2024 20:54:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67CC4884D0; Fri,  7 Jun 2024 20:54:01 +0200 (CEST)
+ id 4A999884D0; Fri,  7 Jun 2024 20:54:05 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 29B0788495
- for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 20:53:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 4B737884AA
+ for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 20:54:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0FA9D1480;
- Fri,  7 Jun 2024 11:54:23 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 39DDB1480;
+ Fri,  7 Jun 2024 11:54:26 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EAAD83F792;
- Fri,  7 Jun 2024 11:53:55 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2080D3F792;
+ Fri,  7 Jun 2024 11:53:58 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>,
@@ -33,9 +33,9 @@ Cc: Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>,
  Fabio Estevam <festevam@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [RFC PATCH 08/31] lmb: replcace the lmb_init_and_reserve() function
-Date: Sat,  8 Jun 2024 00:22:17 +0530
-Message-Id: <20240607185240.1892031-9-sughosh.ganu@linaro.org>
+Subject: [RFC PATCH 09/31] lmb: allow for resizing lmb regions
+Date: Sat,  8 Jun 2024 00:22:18 +0530
+Message-Id: <20240607185240.1892031-10-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
 References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
@@ -57,215 +57,226 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the changes to make the Logical Memory Block(LMB) allocations
-persistent and with the common memory regions being reserved during
-board init, the lmb_init_and_reserve() API can be removed and replaced
-with a lmb_add_memory() API, which adds all the available memory to
-the LMB pool.
+Allow for resizing of LMB regions if the region attributes match. The
+current code returns a failure status on detecting an overlapping
+address. This worked up until now since the LMB calls were not
+persistent and global -- the LMB memory map was specific and private
+to a given caller of the LMB API's.
+
+With the change in the LMB code to make the LMB reservations
+persistent, there needs to be a check on whether the memory region can
+be resized, and then do it if so. To distinguish between memory that
+cannot be resized, add a new flag, LMB_NOOVERWRITE. Reserving a region
+of memory with this attribute would indicate that the region cannot be
+resized.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
- arch/arm/mach-apple/board.c          |  2 +-
- arch/arm/mach-snapdragon/board.c     |  2 +-
- arch/arm/mach-stm32mp/stm32mp1/cpu.c |  2 +-
- cmd/bdinfo.c                         |  2 +-
- cmd/load.c                           |  2 +-
- fs/fs.c                              |  2 +-
- include/lmb.h                        | 12 +++++++++++-
- lib/lmb.c                            | 15 +++++++++++----
- net/tftp.c                           |  2 +-
- net/wget.c                           |  2 +-
- test/cmd/bdinfo.c                    | 10 +---------
- 11 files changed, 31 insertions(+), 22 deletions(-)
+ include/lmb.h |   1 +
+ lib/lmb.c     | 120 ++++++++++++++++++++++++++++++++++++++++++++------
+ 2 files changed, 107 insertions(+), 14 deletions(-)
 
-diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/board.c
-index c877c7b94c..2e72d03edd 100644
---- a/arch/arm/mach-apple/board.c
-+++ b/arch/arm/mach-apple/board.c
-@@ -776,7 +776,7 @@ int board_late_init(void)
- {
- 	u32 status = 0;
- 
--	lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
-+	lmb_add_memory(gd->bd);
- 
- 	/* somewhat based on the Linux Kernel boot requirements:
- 	 * align by 2M and maximal FDT size 2M
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-index a63c8bec45..b3c9a21419 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -282,7 +282,7 @@ int board_late_init(void)
- {
- 	u32 status = 0;
- 
--	lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
-+	lmb_add_memory(gd->bd);
- 
- 	/* We need to be fairly conservative here as we support boards with just 1G of TOTAL RAM */
- 	status |= env_set_hex("kernel_addr_r", addr_alloc(SZ_128M));
-diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-index a223297034..8e3f001f74 100644
---- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-+++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-@@ -143,7 +143,7 @@ int mach_cpu_init(void)
- void enable_caches(void)
- {
- 	/* parse device tree when data cache is still activated */
--	lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
-+	lmb_add_memory(gd->bd);
- 
- 	/* I-cache is already enabled in start.S: icache_enable() not needed */
- 
-diff --git a/cmd/bdinfo.c b/cmd/bdinfo.c
-index e08d3e2cf3..fc408e9820 100644
---- a/cmd/bdinfo.c
-+++ b/cmd/bdinfo.c
-@@ -163,7 +163,7 @@ static int bdinfo_print_all(struct bd_info *bd)
- 	bdinfo_print_num_l("multi_dtb_fit", (ulong)gd->multi_dtb_fit);
- #endif
- 	if (IS_ENABLED(CONFIG_LMB) && gd->fdt_blob) {
--		lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
-+		lmb_add_memory(gd->bd);
- 		lmb_dump_all_force();
- 		if (IS_ENABLED(CONFIG_OF_REAL))
- 			printf("devicetree  = %s\n", fdtdec_get_srcname());
-diff --git a/cmd/load.c b/cmd/load.c
-index f019111991..9918523806 100644
---- a/cmd/load.c
-+++ b/cmd/load.c
-@@ -154,7 +154,7 @@ static ulong load_serial(long offset)
- 	int	line_count =  0;
- 	long ret;
- 
--	lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
-+	lmb_add_memory(gd->bd);
- 
- 	while (read_record(record, SREC_MAXRECLEN + 1) >= 0) {
- 		type = srec_decode(record, &binlen, &addr, binbuf);
-diff --git a/fs/fs.c b/fs/fs.c
-index 3c54eaa366..f72d3962d1 100644
---- a/fs/fs.c
-+++ b/fs/fs.c
-@@ -549,7 +549,7 @@ static int fs_read_lmb_check(const char *filename, ulong addr, loff_t offset,
- 	if (len && len < read_len)
- 		read_len = len;
- 
--	lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
-+	lmb_add_memory(gd->bd);
- 	lmb_dump_all();
- 
- 	if (lmb_alloc_addr(addr, read_len) == addr)
 diff --git a/include/lmb.h b/include/lmb.h
-index f3e3f716e5..03bce2a50c 100644
+index 03bce2a50c..1d4cd255d2 100644
 --- a/include/lmb.h
 +++ b/include/lmb.h
-@@ -84,7 +84,17 @@ struct lmb {
- 	struct lmb_region reserved;
+@@ -20,6 +20,7 @@
+ enum lmb_flags {
+ 	LMB_NONE		= 0x0,
+ 	LMB_NOMAP		= 0x4,
++	LMB_NOOVERWRITE		= 0x8,
  };
  
--void lmb_init_and_reserve(struct bd_info *bd, void *fdt_blob);
-+/**
-+ * lmb_add_memory() - Add memory range for LMB allocations
-+ * @bd: pointer to board info structure
-+ *
-+ * Add the entire available memory range to the pool of memory that
-+ * can be used by the LMB module for allocations.
-+ *
-+ * Return: None
-+ *
-+ */
-+void lmb_add_memory(struct bd_info *bd);
- long lmb_add(phys_addr_t base, phys_size_t size);
- long lmb_reserve(phys_addr_t base, phys_size_t size);
  /**
 diff --git a/lib/lmb.c b/lib/lmb.c
-index 5c056800c3..de5a2cf23b 100644
+index de5a2cf23b..0a4f3d5bcd 100644
 --- a/lib/lmb.c
 +++ b/lib/lmb.c
-@@ -240,8 +240,17 @@ void lmb_reserve_common(void *fdt_blob)
- 		efi_lmb_reserve();
- }
- 
--/* Initialize the struct, add memory and call arch/board reserve functions */
--void lmb_init_and_reserve(struct bd_info *bd, void *fdt_blob)
-+/**
-+ * lmb_add_memory() - Add memory range for LMB allocations
-+ * @bd: pointer to board info structure
-+ *
-+ * Add the entire available memory range to the pool of memory that
-+ * can be used by the LMB module for allocations.
-+ *
-+ * Return: None
-+ *
-+ */
-+void lmb_add_memory(struct bd_info *bd)
- {
- 	int i;
- 
-@@ -249,8 +258,6 @@ void lmb_init_and_reserve(struct bd_info *bd, void *fdt_blob)
- 		if (bd->bi_dram[i].size)
- 			lmb_add(bd->bi_dram[i].start, bd->bi_dram[i].size);
+@@ -260,12 +260,88 @@ void lmb_add_memory(struct bd_info *bd)
  	}
--
--	lmb_reserve_common(fdt_blob);
  }
  
++static bool lmb_region_flags_match(struct lmb_region *rgn, unsigned long r1,
++				   enum lmb_flags flags)
++{
++	return rgn->region[r1].flags == flags;
++}
++
++static long lmb_merge_overlap_regions(struct lmb_region *rgn, unsigned long i,
++				      phys_addr_t base, phys_size_t size,
++				      enum lmb_flags flags)
++{
++	phys_size_t rgnsize;
++	unsigned long rgn_cnt, idx;
++	phys_addr_t rgnbase, rgnend;
++	phys_addr_t mergebase, mergeend;
++
++	rgn_cnt = 0;
++	idx = i;
++	/*
++	 * First thing to do is to identify how many regions does
++	 * the requested region overlap.
++	 * If the flags match, combine all these overlapping
++	 * regions into a single region, and remove the merged
++	 * regions.
++	 */
++	while (idx < rgn->cnt - 1) {
++		rgnbase = rgn->region[idx].base;
++		rgnsize = rgn->region[idx].size;
++
++		if (lmb_addrs_overlap(base, size, rgnbase,
++				      rgnsize)) {
++			if (!lmb_region_flags_match(rgn, idx, flags))
++				return -1;
++			rgn_cnt++;
++			idx++;
++		}
++	}
++
++	/* The merged region's base and size */
++	rgnbase = rgn->region[i].base;
++	mergebase = min(base, rgnbase);
++	rgnend = rgn->region[idx].base + rgn->region[idx].size;
++	mergeend = max(rgnend, (base + size));
++
++	rgn->region[i].base = mergebase;
++	rgn->region[i].size = mergeend - mergebase;
++
++	/* Now remove the merged regions */
++	while (--rgn_cnt)
++		lmb_remove_region(rgn, i + 1);
++
++	return 0;
++}
++
++static long lmb_resize_regions(struct lmb_region *rgn, unsigned long i,
++			       phys_addr_t base, phys_size_t size,
++			       enum lmb_flags flags)
++{
++	long ret = 0;
++	phys_addr_t rgnend;
++
++	if (i == rgn->cnt - 1 ||
++		base + size < rgn->region[i + 1].base) {
++		if (!lmb_region_flags_match(rgn, i, flags))
++			return -1;
++
++		rgnend = rgn->region[i].base + rgn->region[i].size;
++		rgn->region[i].base = min(base, rgn->region[i].base);
++		rgnend = max(base + size, rgnend);
++		rgn->region[i].size = rgnend - rgn->region[i].base;
++	} else {
++		ret = lmb_merge_overlap_regions(rgn, i, base, size, flags);
++	}
++
++	return ret;
++}
++
  /* This routine called with relocation disabled. */
-diff --git a/net/tftp.c b/net/tftp.c
-index 02a5ca0f9f..54ac5e1262 100644
---- a/net/tftp.c
-+++ b/net/tftp.c
-@@ -714,7 +714,7 @@ static int tftp_init_load_addr(void)
- #ifdef CONFIG_LMB
- 	phys_size_t max_size;
- 
--	lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
-+	lmb_add_memory(gd->bd);
- 
- 	max_size = lmb_get_free_size(image_load_addr);
- 	if (!max_size)
-diff --git a/net/wget.c b/net/wget.c
-index dbdc519946..87f2f33c8a 100644
---- a/net/wget.c
-+++ b/net/wget.c
-@@ -76,7 +76,7 @@ static int wget_init_load_size(void)
+ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
+ 				 phys_size_t size, enum lmb_flags flags)
  {
- 	phys_size_t max_size;
+ 	unsigned long coalesced = 0;
+-	long adjacent, i;
++	long ret, i;
  
--	lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
-+	lmb_add_memory(gd->bd);
+ 	if (rgn->cnt == 0) {
+ 		rgn->region[0].base = base;
+@@ -290,23 +366,32 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
+ 				return -1; /* regions with new flags */
+ 		}
  
- 	max_size = lmb_get_free_size(image_load_addr);
- 	if (!max_size)
-diff --git a/test/cmd/bdinfo.c b/test/cmd/bdinfo.c
-index 31d5e28105..8ba785fc31 100644
---- a/test/cmd/bdinfo.c
-+++ b/test/cmd/bdinfo.c
-@@ -114,14 +114,6 @@ static int lmb_test_dump_region(struct unit_test_state *uts,
- 		end = base + size - 1;
- 		flags = rgn->region[i].flags;
+-		adjacent = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
+-		if (adjacent > 0) {
++		ret = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
++		if (ret > 0) {
+ 			if (flags != rgnflags)
+ 				break;
+ 			rgn->region[i].base -= size;
+ 			rgn->region[i].size += size;
+ 			coalesced++;
+ 			break;
+-		} else if (adjacent < 0) {
++		} else if (ret < 0) {
+ 			if (flags != rgnflags)
+ 				break;
+ 			rgn->region[i].size += size;
+ 			coalesced++;
+ 			break;
+ 		} else if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
+-			/* regions overlap */
+-			return -1;
++			if (flags == LMB_NONE) {
++				ret = lmb_resize_regions(rgn, i, base, size,
++							 flags);
++				if (ret < 0)
++					return -1;
++
++				coalesced++;
++				break;
++			} else {
++				return -1;
++			}
+ 		}
+ 	}
  
--		/*
--		 * this entry includes the stack (get_sp()) on many platforms
--		 * so will different each time lmb_init_and_reserve() is called.
--		 * We could instead have the bdinfo command put its lmb region
--		 * in a known location, so we can check it directly, rather than
--		 * calling lmb_init_and_reserve() to create a new (and hopefully
--		 * identical one). But for now this seems good enough.
--		 */
- 		if (!IS_ENABLED(CONFIG_SANDBOX) && i == 3) {
- 			ut_assert_nextlinen(" %s[%d]\t[", name, i);
- 			continue;
-@@ -201,7 +193,7 @@ static int bdinfo_test_all(struct unit_test_state *uts)
- 	if (IS_ENABLED(CONFIG_LMB) && gd->fdt_blob) {
- 		struct lmb lmb;
+@@ -448,7 +533,7 @@ static phys_addr_t lmb_align_down(phys_addr_t addr, phys_size_t size)
+ }
  
--		lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
-+		lmb_add_memory(gd->bd);
- 		ut_assertok(lmb_test_dump_all(uts, &lmb));
- 		if (IS_ENABLED(CONFIG_OF_REAL))
- 			ut_assert_nextline("devicetree  = %s", fdtdec_get_srcname());
+ static phys_addr_t __lmb_alloc_base(phys_size_t size, ulong align,
+-				    phys_addr_t max_addr)
++				    phys_addr_t max_addr, enum lmb_flags flags)
+ {
+ 	long i, rgn;
+ 	phys_addr_t base = 0;
+@@ -498,7 +583,7 @@ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr)
+ {
+ 	phys_addr_t alloc;
+ 
+-	alloc = __lmb_alloc_base(size, align, max_addr);
++	alloc = __lmb_alloc_base(size, align, max_addr, LMB_NONE);
+ 
+ 	if (alloc == 0)
+ 		printf("ERROR: Failed to allocate 0x%lx bytes below 0x%lx.\n",
+@@ -507,11 +592,8 @@ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr)
+ 	return alloc;
+ }
+ 
+-/*
+- * Try to allocate a specific address range: must be in defined memory but not
+- * reserved
+- */
+-phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
++static phys_addr_t __lmb_alloc_addr(phys_addr_t base, phys_size_t size,
++				    enum lmb_flags flags)
+ {
+ 	long rgn;
+ 
+@@ -526,13 +608,23 @@ phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
+ 				      lmb.memory.region[rgn].size,
+ 				      base + size - 1, 1)) {
+ 			/* ok, reserve the memory */
+-			if (lmb_reserve(base, size) >= 0)
++			if (lmb_reserve_flags(base, size, flags) >= 0)
+ 				return base;
+ 		}
+ 	}
++
+ 	return 0;
+ }
+ 
++/*
++ * Try to allocate a specific address range: must be in defined memory but not
++ * reserved
++ */
++phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
++{
++	return __lmb_alloc_addr(base, size, LMB_NONE);
++}
++
+ /* Return number of bytes from a given address that are free */
+ phys_size_t lmb_get_free_size(phys_addr_t addr)
+ {
 -- 
 2.34.1
 
