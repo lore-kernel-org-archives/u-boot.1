@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DA00C27C55
-	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 22:40:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07585C27C53
+	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 22:40:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A06898850A;
-	Sat,  8 Jun 2024 00:39:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0FD5088550;
+	Sat,  8 Jun 2024 00:39:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YYVoLbmg";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SR70E3W6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A7EE8851C; Sat,  8 Jun 2024 00:39:43 +0200 (CEST)
+ id 4F355884D5; Sat,  8 Jun 2024 00:39:43 +0200 (CEST)
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF0F6884CD
- for <u-boot@lists.denx.de>; Sat,  8 Jun 2024 00:39:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 37DD9884A9
+ for <u-boot@lists.denx.de>; Sat,  8 Jun 2024 00:39:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 457MdUWc026921;
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 457MdUaO026904;
  Fri, 7 Jun 2024 17:39:30 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1717799970;
- bh=V7UqHPd1UzWtvccNC4EBC55h1l89B9bqpnfRQxhMoJs=;
+ bh=ZB4Yg/YoBeu8s1O8mXYXK1nIo+TRa5YumnFSn1ikL7Y=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=YYVoLbmgowUybqARdGu83yNMHcvB0b1fH0oHWuH+Ud9RNaHhJ8znSPG37SLKssQMQ
- rZoiATRGb1w45kbOdHEtpmDcqgnICDyqd9xz0g2y+hTtM1bDGo8x9KT0Ph1zou1n3/
- rZMw68v4s/c+EbF9G7SuNpYV7j90DYjJI+5Ndmkw=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 457MdUEX060676
+ b=SR70E3W6/67VpLsyAdz0XtYh5PhMaH7aL+QJ/itOoMEMjpnmr3rbZBK5JQz+VuRx+
+ ZWleTAyWK0OXB5yHMKmGqEGNNN2B5MAD7hPrvF5v6GApXj61tW1NV5OcdyKwVCf9jk
+ Xyfd/uWts0iX3c2FirCyTU3SpVg65lApLdzmssFU=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 457MdUlg093524
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Fri, 7 Jun 2024 17:39:30 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 7
- Jun 2024 17:39:30 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2024 17:39:29 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Fri, 7 Jun 2024 17:39:30 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 457MdUNm089872;
- Fri, 7 Jun 2024 17:39:30 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 457MdTxl011241;
+ Fri, 7 Jun 2024 17:39:29 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Heinrich Schuchardt
@@ -67,9 +67,10 @@ To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ilias Apalodimas
  <ilias.apalodimas@linaro.org>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH v6 11/24] configs: beagleplay: Enable DFU for MMC
-Date: Fri, 7 Jun 2024 17:38:45 -0500
-Message-ID: <20240607223858.1971290-12-j-humphreys@ti.com>
+Subject: [PATCH v6 01/24] doc: uefi: capsules: Add Capsule Update porting
+ section
+Date: Fri, 7 Jun 2024 17:38:35 -0500
+Message-ID: <20240607223858.1971290-2-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240607223858.1971290-1-j-humphreys@ti.com>
 References: <20240607223858.1971290-1-j-humphreys@ti.com>
@@ -93,27 +94,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-MMC DFU is required for capsule updates.
+Created a capsule update porting section in the documentation that outlines
+the steps a board developer must do when porting from an existing reference
+board implementation.
+
+In particular, added a big warning that new capsule GUID's need to be
+defined.
 
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- configs/am62x_beagleplay_a53_defconfig | 3 +++
- 1 file changed, 3 insertions(+)
+ doc/develop/uefi/uefi.rst | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
-index ec62670d55d..dbdbaf98348 100644
---- a/configs/am62x_beagleplay_a53_defconfig
-+++ b/configs/am62x_beagleplay_a53_defconfig
-@@ -70,6 +70,9 @@ CONFIG_SPL_OF_TRANSLATE=y
- CONFIG_CLK=y
- CONFIG_SPL_CLK=y
- CONFIG_CLK_TI_SCI=y
-+CONFIG_DFU_MMC=y
-+CONFIG_SYS_DFU_DATA_BUF_SIZE=0x40000
-+CONFIG_SYS_DFU_MAX_FILE_SIZE=0x180000
- CONFIG_DMA_CHANNELS=y
- CONFIG_TI_K3_NAVSS_UDMA=y
- CONFIG_TI_SCI_PROTOCOL=y
+diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
+index 0389b269c01..36ac75278fa 100644
+--- a/doc/develop/uefi/uefi.rst
++++ b/doc/develop/uefi/uefi.rst
+@@ -631,6 +631,18 @@ where version.dtso looks like::
+ The properties of image-type-id and image-index must match the value
+ defined in the efi_fw_image array as image_type_id and image_index.
+ 
++Porting Capsule Updates to new boards
++*************************************
++
++It is important, when using a reference board as a starting point for a custom
++board, that certain steps are taken to properly support Capsule Updates.
++
++Capsule GUIDs need to be unique for each firmware and board. That is, if two
++firmwares are built from the same source but result in different binaries
++because they are built for different boards, they should have different GUIDs.
++Therefore it is important when creating support for a new board, new GUIDs are
++defined in the board's header file.  *DO NOT* reuse capsule GUIDs.
++
+ Executing the boot manager
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
 -- 
 2.34.1
 
