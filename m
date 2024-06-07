@@ -4,76 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D78FBC27C52
-	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 00:38:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43910C27C53
+	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 05:19:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3EA1F88428;
-	Fri,  7 Jun 2024 02:38:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 146018803E;
+	Fri,  7 Jun 2024 07:19:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="affYx/JL";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rmyFQjkU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CDBB88176; Fri,  7 Jun 2024 02:38:25 +0200 (CEST)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0290588103; Fri,  7 Jun 2024 07:19:22 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6EEFF87E1D
- for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 02:38:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B26888005
+ for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 07:19:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-2508934c50aso765884fac.3
- for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 17:38:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1717720701; x=1718325501; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/Kkt9NSWDQQNCxzqqpmO2RIKbr17sJhxZVrRnmGj7KI=;
- b=affYx/JLEZaRfG+KOwCwq3bP1SuFE1pBDil1k6SE9Zu4DYQam4SUS43wu9M5uwgNM9
- FObzMx9MCFpa9NLDLdXWPudbsvw1AyqtyMGUS7O+cl1vORzv3YicxgHWuhDr/nNJDPSL
- EHevATtbpj+klejLJsrUTT60VizJqOBA3IfG8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717720701; x=1718325501;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/Kkt9NSWDQQNCxzqqpmO2RIKbr17sJhxZVrRnmGj7KI=;
- b=ezOfrMXbddLp8moj9JOScgIS0bNNrxJeeevKNxR0VmZEt6zMzaI+/ekNJGINmPZ8TO
- hSJnfVTTgCUBZX52l7aWAqjDu1nGtZesxp6CbI5k7SxvvF4jRhzoi4evUdUCHvqteKdj
- /OQKJTbj7KbMwu2EfZ1ZN0Pzma6kSM3w/oivcC/XuoJabI4B/Upn7bBls9//KINs0onp
- 0pXqK4S1Q0zQ/vI/uznxT97Qw/Pw2Ut9kH26X8CULXUUjtrHtMy6Uxx9EeaMqbmwLxz+
- I0W9sp0/c3zCbY/zSsHpcJo30b+yuVQe+YUrpTTeKP/eUZ1W9akfK5IMGUYSuH7TXj4j
- 8qTA==
-X-Gm-Message-State: AOJu0YwHdzW+nFk2kbHb0uLurR1xNjoqgwasUU3baSc75pJdzZmYUyHA
- tXIlxMymIerQq95l3Fj+CWxjuHV9dZfsFtHc9CWD7DPzvQ69jJfXVJ/8MtXfFh4=
-X-Google-Smtp-Source: AGHT+IEkAm1SznPjBu+FyVXXkhXOQUvOSmNi0Q86M6S+G6aH7xTlXGc8gvJkB8zK+kNTyaZgv0fdBA==
-X-Received: by 2002:a05:6870:9125:b0:24f:d75b:6180 with SMTP id
- 586e51a60fabf-254648079a3mr1146731fac.44.1717720701019; 
- Thu, 06 Jun 2024 17:38:21 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
- [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25447ecc748sm630495fac.29.2024.06.06.17.38.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Jun 2024 17:38:20 -0700 (PDT)
-Date: Thu, 6 Jun 2024 18:38:18 -0600
-From: Tom Rini <trini@konsulko.com>
-To: pm88hpxmdxke@disengage.co
-Cc: u-boot@lists.denx.de, support@glinet.biz, marketing@gl-inet.com,
- lwn@lwn.net
-Subject: Re: Possible license violation
-Message-ID: <20240607003818.GH68077@bill-the-cat>
-References: <1869186491.466723.1717719348267@smtp2.opayq.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-k6@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4575JHGN036764;
+ Fri, 7 Jun 2024 00:19:17 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1717737557;
+ bh=FM0hLtx2WaBgKTjt7ziYF1AzU34I/JKCwQUDnxfjs4k=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=rmyFQjkUN7zOFwFiJPIV9k/00we/MRRX5t7b8krfQUSUVj425m6TD3dSDbvkIvTxZ
+ 9Q0ZGys/91w3caogWzZJLDLaK4NkDtCq2+BZ40vAdyIGCzQfeiCJE+Zts+GIebtn7T
+ ob1ZEfZBzd3GTtnjlItFfWqV+8te4bINCKHNmb94=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4575JHA7126082
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 7 Jun 2024 00:19:17 -0500
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 7
+ Jun 2024 00:19:17 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 7 Jun 2024 00:19:17 -0500
+Received: from [172.24.227.241] (santhoshkumark.dhcp.ti.com [172.24.227.241])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4575JDJl045384; 
+ Fri, 7 Jun 2024 00:19:14 -0500
+Message-ID: <e4a87a13-2c0b-4244-a4ca-1de9b13acfec@ti.com>
+Date: Fri, 7 Jun 2024 10:49:13 +0530
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="QimlS/9u+NalhjvO"
-Content-Disposition: inline
-In-Reply-To: <1869186491.466723.1717719348267@smtp2.opayq.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 7/8] board: ti: Pull redundant DDR functions to a
+ common location and Fixup DDR size when ECC is enabled
+To: Wadim Egorov <w.egorov@phytec.de>, <trini@konsulko.com>, <nm@ti.com>,
+ <vigneshr@ti.com>, <bb@ti.com>, <u-kumar1@ti.com>, <m-chawdhry@ti.com>
+CC: <u-boot@lists.denx.de>, <n-francis@ti.com>
+References: <20240523050430.455201-1-s-k6@ti.com>
+ <20240523050430.455201-8-s-k6@ti.com>
+ <89aba782-fbc2-463e-ae93-f38dca3da534@phytec.de>
+Content-Language: en-US
+From: Santhosh Kumar K <s-k6@ti.com>
+In-Reply-To: <89aba782-fbc2-463e-ae93-f38dca3da534@phytec.de>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,65 +83,307 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi, Wadim,
 
---QimlS/9u+NalhjvO
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Thanks for the review.
 
-On Thu, Jun 06, 2024 at 08:15:24PM -0400, pm88hpxmdxke@disengage.co wrote:
->=20
->        =20
->=20
->        =20
->             I think this is huge misunderstanding.They just don=E2=80=99t=
- want users to brick devices:After agent reply, no complaintshttps://forum.=
-gl-inet.com/t/uboot-for-gl-mt3000-beryl-ax/41760/13Nice company, sorry for =
-fuss>             HiI am copying this message to you and GL team.Regarding =
-license violation:U-boot=E2=80=99s license requires Gl.iNet to provide the =
-source-code for U-boot (including any modifications they made) to anybody t=
-hat asks for it.=C2=A0So=E2=80=A6GL team refused to send source code nor .b=
-in file. I wanted to inspect it for possible backdoors but still they are r=
-efusing.=E2=80=9C If you choose to provide source through a written offer, =
-then anybody who requests the source from you is entitled to receive it.If =
-you commercially distribute binaries not accompanied with source code, the =
-GPL says you must provide a written offer to distribute the source code lat=
-er. When users non-commercially redistribute the binaries they received fro=
-m you, they must pass along a copy of this written offer. This means that p=
-eople who did not get the binaries directly from you can still receive copi=
-es of the source code, along with the written offer.The reason we require t=
-he offer to be valid for any third party is so that people who receive the =
-binaries indirectly in that way can order the source code from you.=E2=80=
-=9Dhttps://www.gnu.org/licenses/old-licenses/gpl-2.0-faq.en.htmlhttps://git=
-hub.com/u-boot/u-bootSo I am sending this message to you to check this situ=
-ation. They probably will not send it to you.Also please use web mail (not =
-business domain) as they can sent it to you through it to hide the fact of =
-licensing violation. For example send request from Gmail.=C2=A0Please take =
-measures.=C2=A0 It is certainly very disappointing to hear GL.iNET is not f=
-ollowing the clear license terms of software they are using.  --  Tom =20
+On 30/05/24 17:48, Wadim Egorov wrote:
+> Hi Santhosh,
+> 
+> thanks for this series!
+> 
+> Am 23.05.24 um 07:04 schrieb Santhosh Kumar K:
+>> As there are few redundant functions in board/ti/*/evm.c files, pull
+>> them to a common location of access to reuse and include the common file
+>> to access the functions.
+>>
+>> Call k3-ddrss driver through fixup_ddr_driver_for_ecc() to fixup the
+>> device tree and resize the available amount of DDR, if ECC is enabled.
+>> Otherwise, fixup the device tree using the regular
+>> fdt_fixup_memory_banks().
+>>
+>> Also call dram_init_banksize() after every call to
+>> fixup_ddr_driver_for_ecc() is made so that gd->bd is populated
+>> correctly.
+>>
+>> Ensure that fixup_ddr_driver_for_ecc() is agnostic to the number of DDR
+>> controllers present.
+>>
+>> Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
+>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+>> ---
+> [...]
+>> +++ b/board/ti/common/k3-ddr-init.c
+>> @@ -0,0 +1,89 @@
+>> +// SPDX-License-Identifier: GPL-2.0+
+>> +/*
+>> + * Copyright (C) 2023, Texas Instruments Incorporated - 
+>> https://www.ti.com/
+>> + */
+>> +
+>> +#include <fdt_support.h>
+>> +#include <dm/uclass.h>
+>> +#include <k3-ddrss.h>
+>> +#include <spl.h>
+>> +
+>> +#include "k3-ddr-init.h"
+>> +
+>> +int dram_init(void)
+>> +{
+>> +    s32 ret;
+>> +
+>> +    ret = fdtdec_setup_mem_size_base_lowest();
+>> +    if (ret)
+>> +        printf("Error setting up mem size and base. %d\n", ret);
+>> +
+>> +    return ret;
+>> +}
+>> +
+>> +int dram_init_banksize(void)
+>> +{
+>> +    s32 ret;
+>> +
+>> +    ret = fdtdec_setup_memory_banksize();
+>> +    if (ret)
+>> +        printf("Error setting up memory banksize. %d\n", ret);
+>> +
+>> +    return ret;
+>> +}
+> 
+> I'm wondering if we can generalize more.
+> 
+> What do you say if we keep dram_init() & dram_init_banksize() in the 
+> board code and move fixup_ddr_driver_for_ecc() & fixup_memory_node() to 
+> mach-k3 and make them available for all K3 based boards?
+> 
+> It looks like I will reuse the code for our boards and I assume other 
+> vendors too.
+> 
+> Regards,
+> Wadim
+> 
+Yeah, makes sense, will work on it and post v4.
 
-Ah, yes, I see the sources are available at:
-https://github.com/gl-inet/uboot-for-qca95xx/tree/master/src
-
---=20
-Tom
-
---QimlS/9u+NalhjvO
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZiVnYACgkQFHw5/5Y0
-tyzq7Av/R5eF9j7EuDiAGNK06hVj+KMJlMi/USS1jSxaNTrS43UcrfXIp1MLhHgR
-ty4VvQYoYL98sLukaFuUgL42+8yuRHvVqgOdJGFysWRtVRiUZsZ2RiEb8l1nrHGx
-NfYDM+SfgHOzgQftn482x7uL9tNCCS0jhO5YqfDmsqSYRB820SqAITt1c73qxPhs
-wId/C4JtYBCrkolRCm1UCV0fSnI0bZQqVXKVmiPuZWF2cSRAdzK1HDN99oLrWEtf
-8vRKkADaFglZs1GyVCwJyuAj+636MtlEffYRc50qq4Wf8M22umfZo3TU+944L0O8
-TJeqcwcaxfGUywRKVOsnAT8KQyNpl3tPkwULa1NTrND0W1PbmB7EU0brxRTTVvYR
-BtxfwoX15NX0L4wYwhZR0ATYJrwPyS9PcZ2FmnZIzMGAzu+vgjWsLGzUbdxTF6JX
-XVx6PQwx132qgrhCQ2cF/tXIcEPK4XmRhIN69ZwdPEgACtM+Lf6uol3VJ4VNIj3l
-GhQ6yMI8
-=xVpR
------END PGP SIGNATURE-----
-
---QimlS/9u+NalhjvO--
+Regards,
+Santhosh.
+>> +
+>> +#if defined(CONFIG_SPL_BUILD)
+>> +
+>> +void fixup_ddr_driver_for_ecc(struct spl_image_info *spl_image)
+>> +{
+>> +    struct udevice *dev;
+>> +    int ret, ctr = 1;
+>> +
+>> +    dram_init_banksize();
+>> +
+>> +    ret = uclass_get_device(UCLASS_RAM, 0, &dev);
+>> +    if (ret)
+>> +        panic("Cannnot get RAM device for ddr size fixup: %d\n", ret);
+>> +
+>> +    ret = k3_ddrss_ddr_fdt_fixup(dev, spl_image->fdt_addr, gd->bd);
+>> +    if (ret)
+>> +        printf("Error fixing up ddr node for ECC use! %d\n", ret);
+>> +
+>> +    dram_init_banksize();
+>> +
+>> +    ret = uclass_next_device_err(&dev);
+>> +
+>> +    while (!ret) {
+>> +        ret = k3_ddrss_ddr_fdt_fixup(dev, spl_image->fdt_addr, gd->bd);
+>> +        if (ret)
+>> +            printf("Error fixing up ddr node %d for ECC use! %d\n", 
+>> ctr, ret);
+>> +
+>> +        dram_init_banksize();
+>> +        ret = uclass_next_device_err(&dev);
+>> +        ctr++;
+>> +    }
+>> +}
+>> +
+>> +void fixup_memory_node(struct spl_image_info *spl_image)
+>> +{
+>> +    u64 start[CONFIG_NR_DRAM_BANKS];
+>> +    u64 size[CONFIG_NR_DRAM_BANKS];
+>> +    int bank;
+>> +    int ret;
+>> +
+>> +    dram_init();
+>> +    dram_init_banksize();
+>> +
+>> +    for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+>> +        start[bank] = gd->bd->bi_dram[bank].start;
+>> +        size[bank] = gd->bd->bi_dram[bank].size;
+>> +    }
+>> +
+>> +    ret = fdt_fixup_memory_banks(spl_image->fdt_addr, start, size,
+>> +                     CONFIG_NR_DRAM_BANKS);
+>> +
+>> +    if (ret)
+>> +        printf("Error fixing up memory node! %d\n", ret);
+>> +}
+>> +
+>> +#endif
+>> diff --git a/board/ti/common/k3-ddr-init.h 
+>> b/board/ti/common/k3-ddr-init.h
+>> new file mode 100644
+>> index 000000000000..9d1826815dfd
+>> --- /dev/null
+>> +++ b/board/ti/common/k3-ddr-init.h
+>> @@ -0,0 +1,15 @@
+>> +/* SPDX-License-Identifier: GPL-2.0+ */
+>> +/*
+>> + * Copyright (C) 2023, Texas Instruments Incorporated - 
+>> https://www.ti.com/
+>> + */
+>> +
+>> +#ifndef __K3_DDR_INIT_H
+>> +#define __K3_DDR_INIT_H
+>> +
+>> +int dram_init(void);
+>> +int dram_init_banksize(void);
+>> +
+>> +void fixup_ddr_driver_for_ecc(struct spl_image_info *spl_image);
+>> +void fixup_memory_node(struct spl_image_info *spl_image);
+>> +
+>> +#endif /* __K3_DDR_INIT_H */
+>> diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
+>> index 539eaf47186a..e0cd8529bc2b 100644
+>> --- a/board/ti/j721e/evm.c
+>> +++ b/board/ti/j721e/evm.c
+>> @@ -17,6 +17,7 @@
+>>   #include "../common/board_detect.h"
+>>   #include "../common/fdt_ops.h"
+>> +#include "../common/k3-ddr-init.h"
+>>   #define board_is_j721e_som()    (board_ti_k3_is("J721EX-PM1-SOM") || \
+>>                    board_ti_k3_is("J721EX-PM2-SOM"))
+>> @@ -37,17 +38,6 @@ int board_init(void)
+>>       return 0;
+>>   }
+>> -int dram_init(void)
+>> -{
+>> -#ifdef CONFIG_PHYS_64BIT
+>> -    gd->ram_size = 0x100000000;
+>> -#else
+>> -    gd->ram_size = 0x80000000;
+>> -#endif
+>> -
+>> -    return 0;
+>> -}
+>> -
+>>   phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+>>   {
+>>   #ifdef CONFIG_PHYS_64BIT
+>> @@ -59,23 +49,6 @@ phys_addr_t board_get_usable_ram_top(phys_size_t 
+>> total_size)
+>>       return gd->ram_top;
+>>   }
+>> -int dram_init_banksize(void)
+>> -{
+>> -    /* Bank 0 declares the memory available in the DDR low region */
+>> -    gd->bd->bi_dram[0].start = 0x80000000;
+>> -    gd->bd->bi_dram[0].size = 0x80000000;
+>> -    gd->ram_size = 0x80000000;
+>> -
+>> -#ifdef CONFIG_PHYS_64BIT
+>> -    /* Bank 1 declares the memory available in the DDR high region */
+>> -    gd->bd->bi_dram[1].start = 0x880000000;
+>> -    gd->bd->bi_dram[1].size = 0x80000000;
+>> -    gd->ram_size = 0x100000000;
+>> -#endif
+>> -
+>> -    return 0;
+>> -}
+>> -
+>>   #ifdef CONFIG_SPL_LOAD_FIT
+>>   int board_fit_config_name_match(const char *name)
+>>   {
+>> diff --git a/board/ti/j721s2/evm.c b/board/ti/j721s2/evm.c
+>> index 5a0281d6b483..fca30107cddb 100644
+>> --- a/board/ti/j721s2/evm.c
+>> +++ b/board/ti/j721s2/evm.c
+>> @@ -24,6 +24,7 @@
+>>   #include "../common/board_detect.h"
+>>   #include "../common/fdt_ops.h"
+>> +#include "../common/k3-ddr-init.h"
+>>   DECLARE_GLOBAL_DATA_PTR;
+>> @@ -32,17 +33,6 @@ int board_init(void)
+>>       return 0;
+>>   }
+>> -int dram_init(void)
+>> -{
+>> -#ifdef CONFIG_PHYS_64BIT
+>> -    gd->ram_size = 0x100000000;
+>> -#else
+>> -    gd->ram_size = 0x80000000;
+>> -#endif
+>> -
+>> -    return 0;
+>> -}
+>> -
+>>   phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+>>   {
+>>   #ifdef CONFIG_PHYS_64BIT
+>> @@ -54,22 +44,17 @@ phys_addr_t board_get_usable_ram_top(phys_size_t 
+>> total_size)
+>>       return gd->ram_top;
+>>   }
+>> -int dram_init_banksize(void)
+>> +#if defined(CONFIG_SPL_BUILD)
+>> +void spl_perform_fixups(struct spl_image_info *spl_image)
+>>   {
+>> -    /* Bank 0 declares the memory available in the DDR low region */
+>> -    gd->bd->bi_dram[0].start = 0x80000000;
+>> -    gd->bd->bi_dram[0].size = 0x7fffffff;
+>> -    gd->ram_size = 0x80000000;
+>> -
+>> -#ifdef CONFIG_PHYS_64BIT
+>> -    /* Bank 1 declares the memory available in the DDR high region */
+>> -    gd->bd->bi_dram[1].start = 0x880000000;
+>> -    gd->bd->bi_dram[1].size = 0x37fffffff;
+>> -    gd->ram_size = 0x400000000;
+>> -#endif
+>> -
+>> -    return 0;
+>> +    if (IS_ENABLED(CONFIG_K3_DDRSS)) {
+>> +        if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
+>> +            fixup_ddr_driver_for_ecc(spl_image);
+>> +    } else {
+>> +        fixup_memory_node(spl_image);
+>> +    }
+>>   }
+>> +#endif
+>>   #ifdef CONFIG_TI_I2C_BOARD_DETECT
+>>   /*
+>> diff --git a/board/ti/j784s4/evm.c b/board/ti/j784s4/evm.c
+>> index aed0ea5b9495..73056a16dd5f 100644
+>> --- a/board/ti/j784s4/evm.c
+>> +++ b/board/ti/j784s4/evm.c
+>> @@ -10,6 +10,7 @@
+>>   #include <init.h>
+>>   #include <spl.h>
+>>   #include "../common/fdt_ops.h"
+>> +#include "../common/k3-ddr-init.h"
+>>   DECLARE_GLOBAL_DATA_PTR;
+>> @@ -18,15 +19,17 @@ int board_init(void)
+>>       return 0;
+>>   }
+>> -int dram_init(void)
+>> +#if defined(CONFIG_SPL_BUILD)
+>> +void spl_perform_fixups(struct spl_image_info *spl_image)
+>>   {
+>> -    return fdtdec_setup_mem_size_base();
+>> -}
+>> -
+>> -int dram_init_banksize(void)
+>> -{
+>> -    return fdtdec_setup_memory_banksize();
+>> +    if (IS_ENABLED(CONFIG_K3_DDRSS)) {
+>> +        if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
+>> +            fixup_ddr_driver_for_ecc(spl_image);
+>> +    } else {
+>> +        fixup_memory_node(spl_image);
+>> +    }
+>>   }
+>> +#endif
+>>   #ifdef CONFIG_BOARD_LATE_INIT
+>>   int board_late_init(void)
