@@ -4,66 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16F83C27C53
-	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 23:44:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62FE0C27C55
+	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 23:53:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 23F3588499;
-	Sat,  8 Jun 2024 01:44:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 79DC7884B5;
+	Sat,  8 Jun 2024 01:53:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pvJiIWu5";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GSxaEf/y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0497884B5; Sat,  8 Jun 2024 01:44:20 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id ECE4B8851A; Sat,  8 Jun 2024 01:53:27 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B52F688496
- for <u-boot@lists.denx.de>; Sat,  8 Jun 2024 01:44:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F8C888496
+ for <u-boot@lists.denx.de>; Sat,  8 Jun 2024 01:53:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 457Ni2HD106378;
- Fri, 7 Jun 2024 18:44:02 -0500
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 457NrE57078028;
+ Fri, 7 Jun 2024 18:53:14 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1717803842;
- bh=x/v9JReUNBnDtJ0OiYzwde/qrbnZHEYiSSSnCMefJRY=;
+ s=ti-com-17Q1; t=1717804394;
+ bh=Yso/8jw15OzQZEK0ZbW9a0hH2xuodikFcu2Bgs3rsvU=;
  h=From:To:CC:Subject:Date;
- b=pvJiIWu51h5DpnEwvxrT5OrffK/pqLlBNUH24ZD57G3bElVublJyblYbux1wMTWgs
- 0D6aytsjRxTtrH2TWt5OzpoJLbZ8zlJtUE49MojYiXQUhm/9MVfkaMKquXXrBL1s80
- gXFn0D+EJ6xri7lXM66AGKp1baH+LVE08MnW/H2g=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 457Ni2sc122522
+ b=GSxaEf/yWfLyfPezh+WqcV7iU0XfZ0xStSTXUUtscRm29ZKBrUyWCL+omn8G5QE8O
+ PDAS9WCCtC6FIYF+a2EeiZnwgHCD6ahv4IbAycckSJ2D3U+qWDqkDRmhUBEFZTfrxI
+ udsdSSsFfuPI4Ad+aJAG9EEFbRmveFMAXZzSkGGo=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 457NrEKc008133
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 7 Jun 2024 18:44:02 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 7 Jun 2024 18:53:14 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 7
- Jun 2024 18:44:02 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2024 18:53:14 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 7 Jun 2024 18:44:02 -0500
+ Frontend Transport; Fri, 7 Jun 2024 18:53:14 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 457Ni26o051114;
- Fri, 7 Jun 2024 18:44:02 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 457NrESU062879;
+ Fri, 7 Jun 2024 18:53:14 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
-To: Dan Carpenter <dan.carpenter@linaro.org>, Abdellatif El Khlifi
- <abdellatif.elkhlifi@arm.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Simon Glass <sjg@chromium.org>, Rasmus Villemoes
- <rasmus.villemoes@prevas.dk>, Michal Simek <michal.simek@amd.com>, Wei Ming
- Chen <jj251510319013@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Jonathan Humphreys <j-humphreys@ti.com>, Masahisa Kojima
- <kojima.masahisa@socionext.com>, Tom Rini <trini@konsulko.com>, Ilias
- Apalodimas <ilias.apalodimas@linaro.org>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>
-CC: <u-boot@lists.denx.de>
-Subject: [PATCH] efi: capsule: Improve capsule update porting to new boards
-Date: Fri, 7 Jun 2024 18:43:58 -0500
-Message-ID: <20240607234358.1991568-1-j-humphreys@ti.com>
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
+ <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>, Christian Gmeiner
+ <christian.gmeiner@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>, Simon Glass <sjg@chromium.org>,
+ Nikhil M Jain <n-jain1@ti.com>, Neha Malcom Francis
+ <n-francis@ti.com>, Andrew Davis <afd@ti.com>, Maxime Ripard
+ <mripard@kernel.org>, Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Roger Quadros <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
+ Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>
+CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
+Subject: [PATCH] configs: k3: Enable capsule authentication
+Date: Fri, 7 Jun 2024 18:53:12 -0500
+Message-ID: <20240607235312.1992500-1-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -85,121 +91,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add to the capsule update porting documentation that when capsule
-authentication is enabled (via EFI_CAPSULE_AUTHENTICATE), a public key
-certificate corresponding to the capsule signing key must be specified.
+Enable EFI capsule authentication and set the capsule public key
+certificate file in the base TI K3 EFI Capsule config.
 
-Also add a config (EFI_CAPSULE_BOARD_INSECURE) that is set by default and
-causes a warning (info level) alerting a developer to consult this porting
-section to ensure the capsule update capability is secure for the platform.
-Once this section has been reviewed and confidence is established in the
-security of the capsule update implementation for this board, deselecting
-the EFI_CAPSULE_BOARD_INSECURE config will remove the warning.
+This will enable EFI capsule authentication on all boards that
+include the base TI K3 EFI Capsule config file.
 
-This config is to balance the desire to provide a reference implementation
-in upstream for capsule authentication but also provide some safeguards
-to prevent developers from overlooking the need to properly secure their
-implementation.
+This patch is built upon the series enabling EFI capsule TI boards [0] as
+well as using capsule certificates directly [1].
+
+[0] https://lore.kernel.org/r/20240607223858.1971290-1-j-humphreys@ti.com
+[1] https://lore.kernel.org/r/20240607225915.1985514-1-j-humphreys@ti.com
 
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- doc/develop/uefi/uefi.rst    | 30 +++++++++++++++++++++++-------
- lib/efi_loader/Kconfig       | 13 +++++++++++++
- lib/efi_loader/efi_capsule.c |  5 +++++
- 3 files changed, 41 insertions(+), 7 deletions(-)
+ configs/k3_efi_capsule.config | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
-index 985956ab85c..1c98c6e4ab4 100644
---- a/doc/develop/uefi/uefi.rst
-+++ b/doc/develop/uefi/uefi.rst
-@@ -526,6 +526,7 @@ following command can be issued
-       --guid c1b629f1-ce0e-4894-82bf-f0a38387e630 \
-       optee.bin optee.capsule
- 
-+.. _Enabling Capsule Authentication:
- 
- Enabling Capsule Authentication
- *******************************
-@@ -631,17 +632,32 @@ where version.dtso looks like::
- The properties of image-type-id and image-index must match the value
- defined in the efi_fw_image array as image_type_id and image_index.
- 
--Porting Capsule Updates to new boards
--*************************************
-+Porting Capsule Update to new boards
-+************************************
- 
- It is important, when using a reference board as a starting point for a custom
- board, that certain steps are taken to properly support Capsule Updates.
- 
--Capsule GUIDs need to be unique for each firmware and board. That is, if two
--firmwares are built from the same source but result in different binaries
--because they are built for different boards, they should have different GUIDs.
--Therefore it is important when creating support for a new board, new GUIDs are
--defined in the board's header file.  *DO NOT* reuse capsule GUIDs.
-+Capsule GUIDs need to be unique for each firmware and board. That is, even
-+if two firmwares are built from the same source but result in different
-+binaries because they are built for different boards, they should have
-+different GUIDs. Therefore it is important when creating support for a new
-+board, new GUIDs are defined in the board's header file. *DO NOT* reuse
-+capsule GUIDs.
-+
-+When capsule authentication is enabled (via EFI_CAPSULE_AUTHENTICATE), it
-+is also very important to set the public key certificate corresponding to
-+the capsule signing key. See :ref:`Enabling Capsule Authentication` for
-+more information on signing capsules. *DO NOT* reuse the certificate file
-+from the reference board, which usually would be based on the development
-+board keys.
-+
-+By default, the EFI_CAPSULE_BOARD_INSECURE config is set to true and causes
-+a warning (info level) alerting a developer to consult this section to
-+ensure the capsule update capability is secure for the platform. Once this
-+section has been reviewed and confidence is established in the security of
-+the capsule update implementation for this board, deselecting
-+EFI_CAPSULE_BOARD_INSECURE config will remove the warning.
- 
- Executing the boot manager
- ~~~~~~~~~~~~~~~~~~~~~~~~~~
-diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-index 23079a5709d..f4b1a20ee40 100644
---- a/lib/efi_loader/Kconfig
-+++ b/lib/efi_loader/Kconfig
-@@ -236,6 +236,19 @@ config EFI_CAPSULE_ON_DISK_EARLY
- 	  executed as part of U-Boot initialisation so that they will
- 	  surely take place whatever is set to distro_bootcmd.
- 
-+config EFI_CAPSULE_BOARD_INSECURE
-+	bool "Permit insecure capsule-on-disk support"
-+	depends on EFI_HAVE_CAPSULE_SUPPORT
-+	default y
-+	help
-+	  Permit insecure capsule update support and emit a warning (info level)
-+	  when applying capsule updates, indicating that the configuration is
-+	  insecure and including a link to the capsule update porting guide in
-+	  U-Boot docs. Disabling this option removes the warning. A developer
-+	  configuration doesn't need to be secure, but before making a product
-+	  from the configuration, the intent is to developers alert of steps that
-+	  must be taken.
-+
- config EFI_CAPSULE_FIRMWARE
- 	bool
- 
-diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
-index 0937800e588..76ade2809d9 100644
---- a/lib/efi_loader/efi_capsule.c
-+++ b/lib/efi_loader/efi_capsule.c
-@@ -1329,6 +1329,11 @@ efi_status_t efi_launch_capsules(void)
- 	if (!nfiles)
- 		return EFI_SUCCESS;
- 
-+	if (IS_ENABLED(CONFIG_EFI_CAPSULE_BOARD_INSECURE)) {
-+		log_info("WARNING: EFI Capsules might be insecure!\n");
-+		log_info("WARNING: Please check https://docs.u-boot.org/en/latest/develop/uefi/uefi.html#porting-capsule-update-to-new-boards\n");
-+	}
-+
- 	/* Launch capsules */
- 	for (i = 0, ++index; i < nfiles; i++, index++) {
- 		log_debug("Applying %ls\n", files[i]);
+diff --git a/configs/k3_efi_capsule.config b/configs/k3_efi_capsule.config
+index e31cea37269..8f8f63f672e 100644
+--- a/configs/k3_efi_capsule.config
++++ b/configs/k3_efi_capsule.config
+@@ -1,2 +1,4 @@
+ CONFIG_EFI_CAPSULE_ON_DISK=y
+ CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
++CONFIG_EFI_CAPSULE_AUTHENTICATE=y
++CONFIG_EFI_CAPSULE_CRT_FILE="arch/arm/mach-k3/keys/custMpk.crt"
 -- 
 2.34.1
 
