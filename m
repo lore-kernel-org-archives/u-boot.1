@@ -4,56 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4676CC27C54
-	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 00:16:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D78FBC27C52
+	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 00:38:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 594E5883F5;
-	Fri,  7 Jun 2024 02:15:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=disengage.co
+	by phobos.denx.de (Postfix) with ESMTP id 3EA1F88428;
+	Fri,  7 Jun 2024 02:38:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="affYx/JL";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65944883F5; Fri,  7 Jun 2024 02:15:56 +0200 (CEST)
-Received: from 133-he.filtered.junkemailfilter.com
- (133-he.filtered.junkemailfilter.com [184.105.182.133])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1CDBB88176; Fri,  7 Jun 2024 02:38:25 +0200 (CEST)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CACD880AD
- for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 02:15:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6EEFF87E1D
+ for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 02:38:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=disengage.co
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pm88hpxmdxke@disengage.co
-Delivery-date: Thu, 06 Jun 2024 17:15:52 -0700
-Received: from smtp2.opayq.com ([54.235.124.91]:36342) (helo=[54.235.124.91])
- by opayq-outbound.junkemailfilter.com with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-SHA384:256) (JEF)
- id 1sFNGp-0000vO-1H (on interface=184.105.182.150)
- for u-boot@lists.denx.de; Thu, 06 Jun 2024 17:15:51 -0700
-From: pm88hpxmdxke@disengage.co
-To: u-boot@lists.denx.de
-Message-ID: <1869186491.466723.1717719348267@smtp2.opayq.com>
-MIME-Version: 1.0
-X-GetAbine-Processed: 1
-Date: Thu, 06 Jun 2024 20:15:24 -0400
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-2508934c50aso765884fac.3
+ for <u-boot@lists.denx.de>; Thu, 06 Jun 2024 17:38:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1717720701; x=1718325501; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=/Kkt9NSWDQQNCxzqqpmO2RIKbr17sJhxZVrRnmGj7KI=;
+ b=affYx/JLEZaRfG+KOwCwq3bP1SuFE1pBDil1k6SE9Zu4DYQam4SUS43wu9M5uwgNM9
+ FObzMx9MCFpa9NLDLdXWPudbsvw1AyqtyMGUS7O+cl1vORzv3YicxgHWuhDr/nNJDPSL
+ EHevATtbpj+klejLJsrUTT60VizJqOBA3IfG8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717720701; x=1718325501;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/Kkt9NSWDQQNCxzqqpmO2RIKbr17sJhxZVrRnmGj7KI=;
+ b=ezOfrMXbddLp8moj9JOScgIS0bNNrxJeeevKNxR0VmZEt6zMzaI+/ekNJGINmPZ8TO
+ hSJnfVTTgCUBZX52l7aWAqjDu1nGtZesxp6CbI5k7SxvvF4jRhzoi4evUdUCHvqteKdj
+ /OQKJTbj7KbMwu2EfZ1ZN0Pzma6kSM3w/oivcC/XuoJabI4B/Upn7bBls9//KINs0onp
+ 0pXqK4S1Q0zQ/vI/uznxT97Qw/Pw2Ut9kH26X8CULXUUjtrHtMy6Uxx9EeaMqbmwLxz+
+ I0W9sp0/c3zCbY/zSsHpcJo30b+yuVQe+YUrpTTeKP/eUZ1W9akfK5IMGUYSuH7TXj4j
+ 8qTA==
+X-Gm-Message-State: AOJu0YwHdzW+nFk2kbHb0uLurR1xNjoqgwasUU3baSc75pJdzZmYUyHA
+ tXIlxMymIerQq95l3Fj+CWxjuHV9dZfsFtHc9CWD7DPzvQ69jJfXVJ/8MtXfFh4=
+X-Google-Smtp-Source: AGHT+IEkAm1SznPjBu+FyVXXkhXOQUvOSmNi0Q86M6S+G6aH7xTlXGc8gvJkB8zK+kNTyaZgv0fdBA==
+X-Received: by 2002:a05:6870:9125:b0:24f:d75b:6180 with SMTP id
+ 586e51a60fabf-254648079a3mr1146731fac.44.1717720701019; 
+ Thu, 06 Jun 2024 17:38:21 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
+ [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-25447ecc748sm630495fac.29.2024.06.06.17.38.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 06 Jun 2024 17:38:20 -0700 (PDT)
+Date: Thu, 6 Jun 2024 18:38:18 -0600
+From: Tom Rini <trini@konsulko.com>
+To: pm88hpxmdxke@disengage.co
+Cc: u-boot@lists.denx.de, support@glinet.biz, marketing@gl-inet.com,
+ lwn@lwn.net
 Subject: Re: Possible license violation
-Importance: Normal
-User-Agent: Zoho Mail
-X-Mailer: Zoho Mail
-Feedback-ID: rr0801122c22707d2fad96291e044e17e600002f314e08a009bd9ad22c0dc08cdce179acfae895810a21fd154cb8c7611c:zu08011227f7cf18de17bd8f79fd859ed30000b3213c8691d8467a422c552069c0d561e10ca1f7ac92839c22:rf0801122a5327df2ef1d7bc6e8814710c00000b1661631ec4a4dcc014418effc84ae016a689520f9ccf11900d4b98:ZohoMail
-X-Spamfilter-host: opayq-outbound.junkemailfilter.com -
- http://www.junkemailfilter.com
-X-Key-ID: dS1ib290QGxpc3RzLmRlbnguZGUgcG04OGhweG1keGtlQGRpc2VuZ2FnZS5jbyAyMDI0LTA2LTA2IDE3OjE1OjUxLjEzMyAxc0ZOR3AtMDAwMHZPLTFI
-X-Content-flags: agent business certainly check clear click company
- complaintshttps css dashes devices direct equest follo following https link
- links message notext offer order pass phone-num please probably provide
- quoted re receive received regarding reply request requests software terms
- text-plain transfer utf-8 w3 web wing
-X-Domain-list: disengage.co denx.de awsdns-11.co.uk amazon.com
-X-Sender-Host-Address: 54.235.124.91
-X-Sender-Host-Name: smtp2.opayq.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Message-ID: <20240607003818.GH68077@bill-the-cat>
+References: <1869186491.466723.1717719348267@smtp2.opayq.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="QimlS/9u+NalhjvO"
+Content-Disposition: inline
+In-Reply-To: <1869186491.466723.1717719348267@smtp2.opayq.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,37 +91,64 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-       =20
+--QimlS/9u+NalhjvO
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-       =20
-            I think this is huge misunderstanding.They just don=E2=80=99t w=
-ant users to brick devices:After agent reply, no complaintshttps://forum.gl=
--inet.com/t/uboot-for-gl-mt3000-beryl-ax/41760/13Nice company, sorry for fu=
-ss>             HiI am copying this message to you and GL team.Regarding li=
-cense violation:U-boot=E2=80=99s license requires Gl.iNet to provide the so=
-urce-code for U-boot (including any modifications they made) to anybody tha=
-t asks for it.=C2=A0So=E2=80=A6GL team refused to send source code nor .bin=
- file. I wanted to inspect it for possible backdoors but still they are ref=
-using.=E2=80=9C If you choose to provide source through a written offer, th=
-en anybody who requests the source from you is entitled to receive it.If yo=
-u commercially distribute binaries not accompanied with source code, the GP=
-L says you must provide a written offer to distribute the source code later=
-. When users non-commercially redistribute the binaries they received from =
-you, they must pass along a copy of this written offer. This means that peo=
-ple who did not get the binaries directly from you can still receive copies=
- of the source code, along with the written offer.The reason we require the=
- offer to be valid for any third party is so that people who receive the bi=
-naries indirectly in that way can order the source code from you.=E2=80=9Dh=
-ttps://www.gnu.org/licenses/old-licenses/gpl-2.0-faq.en.htmlhttps://github.=
-com/u-boot/u-bootSo I am sending this message to you to check this situatio=
-n. They probably will not send it to you.Also please use web mail (not busi=
-ness domain) as they can sent it to you through it to hide the fact of lice=
-nsing violation. For example send request from Gmail.=C2=A0Please take meas=
-ures.=C2=A0 It is certainly very disappointing to hear GL.iNET is not follo=
-wing the clear license terms of software they are using.  --  Tom =20
-       =20
-       =20
+On Thu, Jun 06, 2024 at 08:15:24PM -0400, pm88hpxmdxke@disengage.co wrote:
+>=20
+>        =20
+>=20
+>        =20
+>             I think this is huge misunderstanding.They just don=E2=80=99t=
+ want users to brick devices:After agent reply, no complaintshttps://forum.=
+gl-inet.com/t/uboot-for-gl-mt3000-beryl-ax/41760/13Nice company, sorry for =
+fuss>             HiI am copying this message to you and GL team.Regarding =
+license violation:U-boot=E2=80=99s license requires Gl.iNet to provide the =
+source-code for U-boot (including any modifications they made) to anybody t=
+hat asks for it.=C2=A0So=E2=80=A6GL team refused to send source code nor .b=
+in file. I wanted to inspect it for possible backdoors but still they are r=
+efusing.=E2=80=9C If you choose to provide source through a written offer, =
+then anybody who requests the source from you is entitled to receive it.If =
+you commercially distribute binaries not accompanied with source code, the =
+GPL says you must provide a written offer to distribute the source code lat=
+er. When users non-commercially redistribute the binaries they received fro=
+m you, they must pass along a copy of this written offer. This means that p=
+eople who did not get the binaries directly from you can still receive copi=
+es of the source code, along with the written offer.The reason we require t=
+he offer to be valid for any third party is so that people who receive the =
+binaries indirectly in that way can order the source code from you.=E2=80=
+=9Dhttps://www.gnu.org/licenses/old-licenses/gpl-2.0-faq.en.htmlhttps://git=
+hub.com/u-boot/u-bootSo I am sending this message to you to check this situ=
+ation. They probably will not send it to you.Also please use web mail (not =
+business domain) as they can sent it to you through it to hide the fact of =
+licensing violation. For example send request from Gmail.=C2=A0Please take =
+measures.=C2=A0 It is certainly very disappointing to hear GL.iNET is not f=
+ollowing the clear license terms of software they are using.  --  Tom =20
 
-   =20
-   =20
+Ah, yes, I see the sources are available at:
+https://github.com/gl-inet/uboot-for-qca95xx/tree/master/src
 
+--=20
+Tom
+
+--QimlS/9u+NalhjvO
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZiVnYACgkQFHw5/5Y0
+tyzq7Av/R5eF9j7EuDiAGNK06hVj+KMJlMi/USS1jSxaNTrS43UcrfXIp1MLhHgR
+ty4VvQYoYL98sLukaFuUgL42+8yuRHvVqgOdJGFysWRtVRiUZsZ2RiEb8l1nrHGx
+NfYDM+SfgHOzgQftn482x7uL9tNCCS0jhO5YqfDmsqSYRB820SqAITt1c73qxPhs
+wId/C4JtYBCrkolRCm1UCV0fSnI0bZQqVXKVmiPuZWF2cSRAdzK1HDN99oLrWEtf
+8vRKkADaFglZs1GyVCwJyuAj+636MtlEffYRc50qq4Wf8M22umfZo3TU+944L0O8
+TJeqcwcaxfGUywRKVOsnAT8KQyNpl3tPkwULa1NTrND0W1PbmB7EU0brxRTTVvYR
+BtxfwoX15NX0L4wYwhZR0ATYJrwPyS9PcZ2FmnZIzMGAzu+vgjWsLGzUbdxTF6JX
+XVx6PQwx132qgrhCQ2cF/tXIcEPK4XmRhIN69ZwdPEgACtM+Lf6uol3VJ4VNIj3l
+GhQ6yMI8
+=xVpR
+-----END PGP SIGNATURE-----
+
+--QimlS/9u+NalhjvO--
