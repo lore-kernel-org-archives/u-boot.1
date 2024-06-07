@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13002C27C53
-	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 17:01:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A9ABC27C53
+	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 18:09:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 551FF88445;
-	Fri,  7 Jun 2024 19:00:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 555DE8839C;
+	Fri,  7 Jun 2024 20:09:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hHlHCWK5";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="txvsY+Gq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 511018845E; Fri,  7 Jun 2024 19:00:57 +0200 (CEST)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CB0F78844F; Fri,  7 Jun 2024 20:08:59 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 007EA88431
- for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 19:00:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F62C8839C
+ for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 20:08:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-62a08099115so25140107b3.0
- for <u-boot@lists.denx.de>; Fri, 07 Jun 2024 10:00:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1717779654; x=1718384454; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=wXvCk2j4SSpdfgUufI1ZV9Y3Td+Cmsn0IXoIHeZKzCI=;
- b=hHlHCWK5MGuZrFYweVl0ylOGk40lbKmH62vl2IUgsi8sN20uVPs3+ibdffwjVIqiwq
- tgLNn0Ei7vAAB+ItzpbdUDHDaZ78ps1mo68DDahn3+fay+evZYlnbDw7qx+NKz1Kyoqd
- 0MKxS5+0WlUBYaflBR2BwpdNl7wP+Wg18i6Qw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717779654; x=1718384454;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wXvCk2j4SSpdfgUufI1ZV9Y3Td+Cmsn0IXoIHeZKzCI=;
- b=oRHWZB/PIMt/hEh+VEtfHWvLLO2Uiam5TxXAQBJzvla+9JyhPZmRUhIuj4mrM7gisj
- hjJwWnOAgyNC65NVbn51vPfy4Vfar4ueSP+GYNZ67AsDK9B0NukOM/a0RJItB9SE6xPl
- dln3KgYcxH2sDszNMi3NvWFdM0ga2ia2Q30THepP7vOO5qMC8HmVexudLFHqeij8QjZZ
- uzU+StDKOqaDt9MDIfK0DRdRYfIQ7yBW873Ydy0KF+BhlFJV1ANoal4ZGY0jvWRepUgZ
- GjzRFoagIyOqibKhNW4nXjnEEkj5V8U+HyVmbRPuRVNOqi1K8GVazdz4s9y39pKNhCWY
- s8/A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWhDpW9KLBkOr5/TwlGX9leboQHKSlhxFnT20WRbY2N0DWWQ9S2Le4H1plEHB6qPszWKS9YfRIh4Q1n7sHHNQUunkAuPw==
-X-Gm-Message-State: AOJu0YzYIKPV1ilrRSiC+psT+RVOb/MleetwRLCa3pyV4SVCxT7arccA
- 5pr8DLz0ajjwiqRm8ECfjUuexeD0q7PEHGKYDYZx2OgXT6D48xSEB/UREpnjF/Y=
-X-Google-Smtp-Source: AGHT+IGiVZeGN8AcP6DYj8h6HKRnnl4BRrg9GZl8/B3DRSU9Ppm4sa3plK9xnMt9Kd2OyibSQF2g6g==
-X-Received: by 2002:a81:a9c3:0:b0:627:db26:7a2f with SMTP id
- 00721157ae682-62cd5570e41mr28769377b3.2.1717779653421; 
- Fri, 07 Jun 2024 10:00:53 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
- [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 00721157ae682-62ccae47952sm7476667b3.77.2024.06.07.10.00.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Jun 2024 10:00:52 -0700 (PDT)
-Date: Fri, 7 Jun 2024 11:00:50 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Michal Simek <michal.simek@amd.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 2/2] arm64: add software pagetable walker
-Message-ID: <20240607170050.GJ68077@bill-the-cat>
-References: <20240607-caleb-upstreaming-v1-0-99094dabb3d9@linaro.org>
- <20240607-caleb-upstreaming-v1-2-99094dabb3d9@linaro.org>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1717783728; x=1718388528; i=xypron.glpk@gmx.de;
+ bh=1uZ4c4Vwfc9+UuaLFn+ATMSKjMyo4umY2f1lrVh8GXM=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=txvsY+GqtVuSfTB1Ok9h0hjebIQVj1pL6jpmnw3C0mYfEECW31Tfe2zJ2QyRQQ+2
+ R4dsbZtPm7WfCMqeMKHpFpimsBPQSex4CpkTdDHITZtwSjr4dHYpdwZczjDPiRmVb
+ Gzmfd8wuIn4QscRshRwjb6EIcmRn6rzf4TZ379i0KXoJ31jPhct0+JTCj+0QDfHm7
+ ewFESDwSFYbyLB4QKV0h/+RGZFKMG+o4ESLz3y56lkeIX9ZILwLHcmStY79JEXU/D
+ UVzovwSLRE9Pi/EyXOQ40iXQ/y0Bs0YsaUh9Sb9CrNBzlLWruAr4l9zYpUrsuC2/u
+ 5cs/60LKx7CPDd7ETA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.126] ([109.42.178.114]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MK3W0-1s0iT815Pq-00W0HB; Fri, 07
+ Jun 2024 20:08:48 +0200
+Message-ID: <a9253b2b-826e-407c-8066-118fef1a1294@gmx.de>
+Date: Fri, 7 Jun 2024 20:08:41 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9ivxtF4LTvnf0Aho"
-Content-Disposition: inline
-In-Reply-To: <20240607-caleb-upstreaming-v1-2-99094dabb3d9@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/7] MIPS: Enable EFI support
+To: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Cc: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+References: <20240517-mips-efi-v1-0-79096e3ca3b3@flygoat.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240517-mips-efi-v1-0-79096e3ca3b3@flygoat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:WM+A4aLE1KRGeDxpju6WIUyiedHkDgs4UYJUyFQOrFADH47fm6/
+ iGScbiaXu9bkDoq3y/qJZKHjXQDjzzX1YqFuWphzCgqhEe5bqQ9Q1lAbVgTyq6CLaWseFS0
+ v6JwoKiBp0RWPrW4GB9GjUM2x2FbAvIv84NPP7iXbDdeTYT6L0QOVP+8I1DWktfpqMa9ygy
+ 7DBb1es5FkXcxulczzY3w==
+UI-OutboundReport: notjunk:1;M01:P0:A6+XVQ+8fkA=;APU/GJk1+r3RhHV+CQG+VnpxT2h
+ sxbeLzViFy7N7aMcvq2Obo/PREDV5VNuzGb9inCJVoiDZxuokAszsciQzPkGSDUuvo4cQ+eXY
+ FKGekpy+jzpcX5iYfI3W4m6o/U/m5+Phr/FRIMwiZBbFAkmL1VNKPf51awh181C0FINHzctjK
+ w5r6IOchh0DYBPCYHrO5S7gUBqkKi2el5/lk69JL6uA08aNqyuub9NijK132qVjIQRlbB6Mlv
+ nHt08srBXznwqAQkGO3znHMWf9yPPq1oxYSBzIBy9vUPrw8Yy6ecLZTE7rC+LR4lhcBbdsIge
+ GIupkdTzLcW6uHpOcfaaR4PDECyGHF9G8onNAKIApep2SiLCaZza2cou5TNYE+65MnzvkFT3u
+ kRk3vny3l9U1wv+lIDT3Tf8M4cZH3sdJ8iRU4NrwnagttaiWXuKdkvW4XXxjQnS1eBC1jFICw
+ QxM0sYXLmXljXZA4wKr/pKBqtG6q4KxOsryEs44ybUGO19HYxpcMkatG+T7q/p2133VYgZnIS
+ w+xO4FrRK+R0WqrZbjHv6cyavEsKFV//ZTPEBxG8JewEQg/1WDmyzJLxvha2nukqi/GR2FPie
+ rpZ8hmaefQva28H2D8sWTKZl3kCSxtCNN9xzlSFkoGCy/mYBPOuoj/8oB/Z4f7U2awHQ/caQd
+ jyGni19NP2mhuE39bDhewCwxx8goHrDpbFCkriHic0QFO3r/Aaz6Z7yj3IWCSWUtzrVDgQ3B7
+ 5ZfQKO/RZ+ja2iTNOaiLcVI/iceXOTzFBsoKGSYtoCkBAK/9WY8K64oU2iOLDVvtOETLokCIo
+ b0HAqHHZY8yUBUlpSG5wBZxUi36hCathrr7FWui0WU1pI=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,54 +91,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 17.05.24 18:32, Jiaxun Yang wrote:
+> Hi all,
+>
+> This series enabled EFI support to MIPS platform.
+>
+> Although MIPS is not defined by UEFI specification, there are
+> quite a few firmware implementations available, including
+> MIPS-EFI[1] for Loongson-2F, Lemote's proprietary EDK2 implementation
+> on Loongson-3[2], Kunlun firmware for Loongson-3[3], efiffy[4]
+> for MIPS Creator CI20 and another mystery EDK implementation shipped
+> with some Creator CI20 board.
+>
+> Available applications including gnu-efi, Loongson's GRUB fork[5],
+> Ventoy[6].
+>
+> My implementation in U-Boot is aiming to follow conventions made
+> by other implementations for architecture stuff and remain
+> compliance with spec for general aspects.
+>
+> bootefi hello and selftest passed on both 32 and 64 bit system,
+> gnu-efi, grub and ventoy are tested on mips64el with my pending
+> platform works. mips32el efi executable from efiffy is tested
+> as well.
+>
+> Please review.
+> Thanks
+>
+> [1]: https://github.com/kontais/EFI-MIPS
 
---9ivxtF4LTvnf0Aho
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Last commit 8 years ago.
 
-On Fri, Jun 07, 2024 at 06:51:20PM +0200, Caleb Connolly wrote:
+> [2]: https://github.com/loongson-community/firmware-nonfree
 
-> Add a basic software implementation of the ARM64 pagetable walker. This
-> can be used for debugging U-Boot's pagetable, as well as dumping the
-> pagetable from the previous bootloader stage if it used one (by reading
-> out the ttbr address).
->=20
-> One can either call dump_pagetable() to print the pagetable to the
-> console with the default formatter, or implement their own pagetable
-> handler using walke_pagetable() with a custom pte_walker_cb_t callback.
->=20
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+Last commit 4 years ago.
+
+> [3]: http://www.kunluntech.com.cn/klbiosxl
+> [4]: https://sourceforge.net/projects/efify/
+
+Last commit 2018.
+
+> [5]: https://github.com/loongson-community/grub
+
+Last commit 5 year ago.
+
+This looks like riding a dead horse.
+
+Best regards
+
+Heinrich
+
+
+> [6]: https://www.ventoy.net/en/index.html
+>
+> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 > ---
->  arch/arm/cpu/armv8/cache_v8.c    | 202 +++++++++++++++++++++++++++++++++=
-++++++
->  arch/arm/include/asm/armv8/mmu.h |  55 +++++++++++
->  2 files changed, 257 insertions(+)
+> Jiaxun Yang (7):
+>        MIPS: Implement setjmp
+>        efi: Allow runtime relocate to be disabled
+>        Makefile.lib: Preserve .rodata section for EFI file
+>        Makefile.lib: Enforce EFI CFLAGS/AFLAGS
+>        MIPS: Add smbios_start to arch_global_data
+>        MIPS: Define MIPS EFI related bits everywhere
+>        MIPS: Implement EFI supporting stuff
+>
+>   Makefile                                          |   3 +
+>   arch/mips/config.mk                               |   9 +
+>   arch/mips/include/asm/global_data.h               |   3 +
+>   arch/mips/include/asm/setjmp.h                    |  36 ++++
+>   arch/mips/lib/Makefile                            |  15 ++
+>   arch/mips/lib/crt0_mips_efi.S                     | 239 ++++++++++++++=
+++++++++
+>   arch/mips/lib/elf_mips_efi.lds                    | 113 ++++++++++
+>   arch/mips/lib/reloc_mips_efi.c                    |  99 +++++++++
+>   arch/mips/lib/setjmp32.S                          |  51 +++++
+>   arch/mips/lib/setjmp64.S                          |  56 +++++
+>   include/asm-generic/pe.h                          |   5 +
+>   include/config_distro_bootcmd.h                   |   6 +
+>   include/efi_default_filename.h                    |   8 +
+>   include/efi_loader.h                              |  26 ++-
+>   include/elf.h                                     |   8 +
+>   lib/efi_loader/Kconfig                            |  12 +-
+>   lib/efi_loader/efi_image_loader.c                 |  18 ++
+>   lib/efi_loader/efi_memory.c                       |  14 +-
+>   lib/efi_loader/efi_runtime.c                      |  11 +-
+>   lib/efi_loader/efi_var_mem.c                      |   6 +-
+>   lib/efi_selftest/Makefile                         |   2 +-
+>   lib/efi_selftest/efi_selftest_miniapp_exception.c |   2 +
+>   scripts/Makefile.lib                              |  10 +-
+>   23 files changed, 734 insertions(+), 18 deletions(-)
+> ---
+> base-commit: ad7dce5abd49ef3b5c93da5303e15449c8c162b4
+> change-id: 20240517-mips-efi-c9a1ad819c2d
+>
+> Best regards,
 
-So, I assume that by default, all of this gets discarded as unused code
-and that's why it's not behind a Kconfig. Next, please add something
-under maybe doc/arch/ or doc/develop (I'm honestly not sure which is
-best) that documents all of this. Thanks!
-
---=20
-Tom
-
---9ivxtF4LTvnf0Aho
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZjPL4ACgkQFHw5/5Y0
-tyxU2gwAjVYm3u/39mJuuJXcS7h1T8NH6s6Uxvgqk9asVbhBUTK6ZhfjqwnyuaSn
-UAM+ZSMzph3Vih3Gy++OIHYtJspDN8Om644Whq7Fr94C0Mv4H/4xaRnnEVr0Ri/h
-JGIHqaq7xt/RmRIfe88CeiirY+mBNMaUp5lEFgzLPQuyTKjh0BAs7xRyn6x5bKkl
-f4KpyHnkCFyExMfqcTIgB5pX1ui3ZVF+2Q+zCTwOgDGp4DxvtyGQsvrkrK3ycDQD
-VsHEQ4E42DUmfotPj4WEG5H59yz4jevBh8HqUsBMjy7rsDjChXwIq5kuKdc1AfxS
-OH4d+K9J9CimHVYw68iVAMtEgeCqsgInbJ3QdK/bXBHxOhB0Qd/EskncvI5A6c6t
-9oRWDFRQf01WHIZYz/daq3KgQ6qs3mR4ClpEIHcRl0kNZXW7hK3oAkjoxfJeJ9Lz
-J2ucS9kGe72yeiuTrNVSStLfR5cdRqpBCVdtS8oPcSq4Pr1JqjmBPJwY4hCXN2fh
-eEK/tEe6
-=hzKt
------END PGP SIGNATURE-----
-
---9ivxtF4LTvnf0Aho--
