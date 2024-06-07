@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13713C27C53
-	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 18:58:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9F1FC27C53
+	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 18:58:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F0AA8856F;
-	Fri,  7 Jun 2024 20:55:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9260D88496;
+	Fri,  7 Jun 2024 20:55:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43BE088445; Fri,  7 Jun 2024 20:55:07 +0200 (CEST)
+ id E33618857C; Fri,  7 Jun 2024 20:55:10 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 96C6888445
- for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 20:55:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 445A38848F
+ for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 20:55:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 804EB1480;
- Fri,  7 Jun 2024 11:55:27 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AEE791480;
+ Fri,  7 Jun 2024 11:55:30 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 556C93F792;
- Fri,  7 Jun 2024 11:55:00 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 80B413F792;
+ Fri,  7 Jun 2024 11:55:03 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>,
@@ -33,9 +33,10 @@ Cc: Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>,
  Fabio Estevam <festevam@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [RFC PATCH 28/31] cmd: bdinfo: only dump the current LMB memory
-Date: Sat,  8 Jun 2024 00:22:37 +0530
-Message-Id: <20240607185240.1892031-29-sughosh.ganu@linaro.org>
+Subject: [RFC PATCH 29/31] temp: mx6sabresd: bump up the size limit of the
+ board
+Date: Sat,  8 Jun 2024 00:22:38 +0530
+Message-Id: <20240607185240.1892031-30-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
 References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
@@ -57,28 +58,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The LMB memory map is now persistent and global. There is therefore no
-need to add memory to the LMB memory map as part of the bdinfo
-command. Only dump the current available and reserved memory as part
-of the bdinfo command.
+With the changes to add notifications for any changes to the LMB map,
+the size of the image exceeds the limit set. Bump up the image size
+limit for now to get the platform to build.
+
+This is not for committing.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
- cmd/bdinfo.c | 1 -
- 1 file changed, 1 deletion(-)
+Note: @Fabio Estevam, please check if it would be okay to increase the
+board size limit. Else other ways to reduce image size will have to be
+checked.
 
-diff --git a/cmd/bdinfo.c b/cmd/bdinfo.c
-index fc408e9820..0f343203ef 100644
---- a/cmd/bdinfo.c
-+++ b/cmd/bdinfo.c
-@@ -163,7 +163,6 @@ static int bdinfo_print_all(struct bd_info *bd)
- 	bdinfo_print_num_l("multi_dtb_fit", (ulong)gd->multi_dtb_fit);
- #endif
- 	if (IS_ENABLED(CONFIG_LMB) && gd->fdt_blob) {
--		lmb_add_memory(gd->bd);
- 		lmb_dump_all_force();
- 		if (IS_ENABLED(CONFIG_OF_REAL))
- 			printf("devicetree  = %s\n", fdtdec_get_srcname());
+ configs/mx6sabresd_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configs/mx6sabresd_defconfig b/configs/mx6sabresd_defconfig
+index 868f6b1551..7308ae2ec6 100644
+--- a/configs/mx6sabresd_defconfig
++++ b/configs/mx6sabresd_defconfig
+@@ -23,7 +23,7 @@ CONFIG_SPL_LIBDISK_SUPPORT=y
+ CONFIG_PCI=y
+ CONFIG_LTO=y
+ CONFIG_HAS_BOARD_SIZE_LIMIT=y
+-CONFIG_BOARD_SIZE_LIMIT=715766
++CONFIG_BOARD_SIZE_LIMIT=718108
+ CONFIG_FIT=y
+ CONFIG_SPL_FIT_PRINT=y
+ CONFIG_SPL_LOAD_FIT=y
 -- 
 2.34.1
 
