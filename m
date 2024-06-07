@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B83FC27C55
-	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 10:27:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C78D3C27C53
+	for <u-boot@archiver.kernel.org>; Fri,  7 Jun 2024 10:27:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A95C28822F;
-	Fri,  7 Jun 2024 12:27:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 213618820C;
+	Fri,  7 Jun 2024 12:27:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="JbgPnSJv";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="YIOZmYgZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E4578824C; Fri,  7 Jun 2024 12:27:05 +0200 (CEST)
-Received: from mail-m121153.qiye.163.com (mail-m121153.qiye.163.com
- [115.236.121.153])
+ id D48218820C; Fri,  7 Jun 2024 12:27:20 +0200 (CEST)
+Received: from mail-m1973174.qiye.163.com (mail-m1973174.qiye.163.com
+ [220.197.31.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A1F1387ABC
- for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 12:27:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B492087ABC
+ for <u-boot@lists.denx.de>; Fri,  7 Jun 2024 12:27:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=JbgPnSJvyNnJBgKIOSqnxVFAXafGbsGco1l48VCLmdzLItt2fE1pjmxXuVG8FenaBRVYA/kQeYAVVWP+HW6SWF55GSVJwPi2Z9cX6sq1Dzz1B4BkEvpBJ6R7uENIcYEt2s8EmcgP5McqasCZO5o1z+rt6Rjdcdn2/a1zzW4tnwk=;
+ b=YIOZmYgZvBLJioJdc8AobQDOSXw6VsEJ2JD8PYmP9xyeG8mjTnvI4r8LDH3czjhTmNnzMSVu2Cv5vZQNcj5wE8ZSsf3DztD++7sxWaUwqbcAj9BNToKvNfWFJevBiQthRxcsmPQDlW00u91IKMISM58kpbIFV6osg4TX2ciPXdM=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=NIDPsCw/jNOtNm2erBMnTCBWDMN415hMeDfRBXP3dPs=;
+ bh=LSLVMaCStvrTbYz2vUs7nuOc1bOF9gphmmJoSDEqnvI=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id D304E9006DD;
- Fri,  7 Jun 2024 18:26:52 +0800 (CST)
-Message-ID: <c8bee542-356a-4e01-92a8-4f2aabfe31c0@rock-chips.com>
-Date: Fri, 7 Jun 2024 18:26:52 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 0322E90022A;
+ Fri,  7 Jun 2024 18:27:07 +0800 (CST)
+Message-ID: <b6b72167-c5ee-4bc6-8ddd-4b1fc2055b3c@rock-chips.com>
+Date: Fri, 7 Jun 2024 18:27:07 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/9] pinctrl: rockchip: rv1126: Fix support for
- IOMUX_L_SOURCE_PMU flag
+Subject: Re: [PATCH 3/9] pinctrl: rockchip: rk3588: Fix support for
+ rockchip_get_mux()
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: Johan Jonker <jbx6244@gmail.com>, Alex Bee <knaerzche@gmail.com>,
  Mark Kettenis <mark.kettenis@xs4all.nl>, u-boot@lists.denx.de
 References: <20240512121633.1632597-1-jonas@kwiboo.se>
- <20240512121633.1632597-3-jonas@kwiboo.se>
+ <20240512121633.1632597-4-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240512121633.1632597-3-jonas@kwiboo.se>
+In-Reply-To: <20240512121633.1632597-4-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGU5LGFYeSkNOSUhOHx1PGEJVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGk8ZSlYeTk5CGUhKHkkfH01VEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8ff23caad103a9kunmd304e9006dd
+X-HM-Tid: 0a8ff23cebb503a9kunm0322e90022a
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Myo6Fyo5GTNNTykpISoWETdO
- Dj0wFBFVSlVKTEpMTE5NS0pITEhCVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFITEJPNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PBg6AQw5CTNIHikQSC8OESop
+ HRgKFB9VSlVKTEpMTE5NS0hLSU9CVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFITUNLNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,12 +78,13 @@ X-Virus-Status: Clean
 
 
 On 2024/5/12 20:16, Jonas Karlman wrote:
-> GPIO0_C0-C4 iomux is set using PMUGRF_GPIO0C_IOMUX_L reg on RV1126. This
-> is indicated using the IOMUX_L_SOURCE_PMU flag. Fix reading current mux
-> by fully adopting the IOMUX_L_SOURCE_PMU related code in Linux kernel.
+> GPIO IOMUX control is located at PMU2_IOC or BUS_IOC offset on RK3588.
 >
-> Based on Linux commit fd4ea48688c6 ("pinctrl: rockchip: Add RV1126
-> pinctrl support").
+> Based on Linux commit fdc33eba11c5 ("pinctrl/rockchip: add rk3588
+> support").
+>
+> Compared to the Linux commit, this include a fix so that the iomux of
+> GPIO0_B4-D7 is reported correctly.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -91,42 +92,53 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
->   drivers/pinctrl/rockchip/pinctrl-rockchip-core.c | 14 ++++++++++----
->   1 file changed, 10 insertions(+), 4 deletions(-)
+> The fix to report correct iomux for GPIO0_B4-D7 will be sent to Linux.
+> ---
+>   .../pinctrl/rockchip/pinctrl-rockchip-core.c  | 24 ++++++++++++++++++-
+>   1 file changed, 23 insertions(+), 1 deletion(-)
 >
 > diff --git a/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c b/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
-> index b6e2ab474d0f..973e6a4f6db9 100644
+> index 973e6a4f6db9..efc2070d32d9 100644
 > --- a/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
 > +++ b/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
-> @@ -132,8 +132,12 @@ static int rockchip_get_mux(struct rockchip_pin_bank *bank, int pin)
->   	if (bank->iomux[iomux_num].type & IOMUX_GPIO_ONLY)
->   		return RK_FUNC_GPIO;
+> @@ -14,10 +14,10 @@
+>   #include <linux/libfdt.h>
 >   
-> -	regmap = (bank->iomux[iomux_num].type & IOMUX_SOURCE_PMU)
-> -				? priv->regmap_pmu : priv->regmap_base;
-> +	if (bank->iomux[iomux_num].type & IOMUX_SOURCE_PMU)
-> +		regmap = priv->regmap_pmu;
-> +	else if (bank->iomux[iomux_num].type & IOMUX_L_SOURCE_PMU)
-> +		regmap = (pin % 8 < 4) ? priv->regmap_pmu : priv->regmap_base;
-> +	else
-> +		regmap = priv->regmap_base;
+>   #include "pinctrl-rockchip.h"
+> +#include <dt-bindings/pinctrl/rockchip.h>
 >   
->   	/* get basic quadrupel of mux registers and the correct reg inside */
->   	mux_type = bank->iomux[iomux_num].type;
-> @@ -563,12 +567,14 @@ static struct rockchip_pin_ctrl *rockchip_pinctrl_get_soc_data(struct udevice *d
+>   #define MAX_ROCKCHIP_PINS_ENTRIES	30
+>   #define MAX_ROCKCHIP_GPIO_PER_BANK      32
+> -#define RK_FUNC_GPIO                    0
 >   
->   			/* preset iomux offset value, set new start value */
->   			if (iom->offset >= 0) {
-> -				if (iom->type & IOMUX_SOURCE_PMU)
-> +				if ((iom->type & IOMUX_SOURCE_PMU) ||
-> +				    (iom->type & IOMUX_L_SOURCE_PMU))
->   					pmu_offs = iom->offset;
->   				else
->   					grf_offs = iom->offset;
->   			} else { /* set current iomux offset */
-> -				iom->offset = (iom->type & IOMUX_SOURCE_PMU) ?
-> +				iom->offset = ((iom->type & IOMUX_SOURCE_PMU) ||
-> +					       (iom->type & IOMUX_L_SOURCE_PMU)) ?
->   							pmu_offs : grf_offs;
->   			}
+>   static int rockchip_verify_config(struct udevice *dev, u32 bank, u32 pin)
+>   {
+> @@ -147,6 +147,28 @@ static int rockchip_get_mux(struct rockchip_pin_bank *bank, int pin)
+>   	if (bank->recalced_mask & BIT(pin))
+>   		rockchip_get_recalced_mux(bank, pin, &reg, &bit, &mask);
 >   
+> +	if (IS_ENABLED(CONFIG_ROCKCHIP_RK3588)) {
+> +		if (bank->bank_num == 0) {
+> +			if (pin >= RK_PB4 && pin <= RK_PD7) {
+> +				u32 reg0 = 0;
+> +
+> +				reg0 = reg + 0x4000 - 0xC; /* PMU2_IOC_BASE */
+> +				ret = regmap_read(regmap, reg0, &val);
+> +				if (ret)
+> +					return ret;
+> +
+> +				ret = ((val >> bit) & mask);
+> +				if (ret != 8)
+> +					return ret;
+> +
+> +				reg = reg + 0x8000; /* BUS_IOC_BASE */
+> +				regmap = priv->regmap_base;
+> +			}
+> +		} else if (bank->bank_num > 0) {
+> +			reg += 0x8000; /* BUS_IOC_BASE */
+> +		}
+> +	}
+> +
+>   	ret = regmap_read(regmap, reg, &val);
+>   	if (ret)
+>   		return ret;
