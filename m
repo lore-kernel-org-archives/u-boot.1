@@ -4,78 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE083C25B76
-	for <u-boot@archiver.kernel.org>; Sat,  8 Jun 2024 03:59:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14C05C25B76
+	for <u-boot@archiver.kernel.org>; Sat,  8 Jun 2024 04:12:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF43187F8D;
-	Sat,  8 Jun 2024 05:59:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 1BC7287F8D;
+	Sat,  8 Jun 2024 06:12:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="aJy26Aqm";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="e8C9USJ/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD0E1884C6; Sat,  8 Jun 2024 05:59:43 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ id 359BA87EF6; Sat,  8 Jun 2024 06:12:56 +0200 (CEST)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B993187ED0
- for <u-boot@lists.denx.de>; Sat,  8 Jun 2024 05:59:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DF44988005
+ for <u-boot@lists.denx.de>; Sat,  8 Jun 2024 06:12:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1717819179; x=1718423979; i=xypron.glpk@gmx.de;
- bh=viwxJhuKsJVtSh3qOFwl0X0jWqlTHA+OR3r9Ksevk9c=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=aJy26Aqm7AD5SImI4xDku5dKJSPH9JofsRp6hzidjvmSww8vsbKyQTf+6Y+I6j1d
- V5Zx5v3wdWZvfjlhCk3WRI3cAcDyqHNf40+41bSfb5N1aZk+/pzE0AVy9vWJR5d9M
- tEVZilP2spsGH9/t22sUWC98UcVCHUJlZ/4P1xdAV8WXq5BcqP/6taWtK8mavVCpW
- VGPmaN/yNDYlQh/aP9XaXTCetVxx1p4GFVILknY7SzcJPCB2G+9N2O84Ro7K56lG4
- Ygcp2e79kKzdobHUkPw4YYnfk1uKXRuhv8bUmOTrUSKsmRVBxYJyyVWTSyGe0BkV8
- hWPhrrQ4gjUSAUwCYw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([109.42.178.114]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mel3n-1spfp81uuT-00qghd; Sat, 08
- Jun 2024 05:59:39 +0200
-Date: Sat, 08 Jun 2024 05:59:37 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de
-CC: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
- Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>
-Subject: Re: [RFC PATCH 28/31] cmd: bdinfo: only dump the current LMB memory
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20240607185240.1892031-29-sughosh.ganu@linaro.org>
-References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
- <20240607185240.1892031-29-sughosh.ganu@linaro.org>
-Message-ID: <B9D72BA0-BB60-402C-885C-6457EC517973@gmx.de>
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.. (ip-109-42-178-114.web.vodafone.de [109.42.178.114])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 5DDE53F5F5; 
+ Sat,  8 Jun 2024 04:12:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1717819969;
+ bh=YR26OgY2hM6mc/6ssvTw/2siXTKEgmOnPignyzCspKU=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=e8C9USJ/GG3045w7cMSS0y1KAxBX5dBp1KjF2WxXDQmShRsFtA61zCqdh/qE8xSKu
+ 9g8piHgpQKE90ohYcHm3KN7sgu0KT4Y+zVzu5hQ3v+bne1L2EF/F4UJT34u0FliZI1
+ 4PGtsZRkVcjqX1+tbone4Ans4FI1QT4INlZ3BAobE9lYEbBYR/e9bQZQgSqmVCubYL
+ RxpBiDbCW2fWjsJ9VV0yPg2ETAA8wbgQn/8Y60tgWVHy8nL97U/UHCoQQ3xW29w/S4
+ cW8/fE6CJMAJZVF9xA9FLnhmBdsb3M6UGOIJQ0l9JBXs6sSvV7TydVzT1CIz2Hs1cg
+ uROPjfSnLe4Dg==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] dm: typo prbing
+Date: Sat,  8 Jun 2024 06:12:44 +0200
+Message-ID: <20240608041244.7325-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:GoOwgoQs8l5okpvCsq9YLoTHyLdluAdfrzjinZ+7vrVAGF6joBD
- 09KriMTbgYW17sx5gMLNOg6aBHlNW1GD/Uxx910pCRsgSvWoP/6hpWgC1S3KGYBoYm2NJSF
- 6z9Llc8U1Zs8j0JcieGUU76mbzvlPIsFvzRnztA9nMxsv8goIEZ+/pdgE0MkUcZavYUXiE7
- AdEcCvP+ak2cXMKf1BE8g==
-UI-OutboundReport: notjunk:1;M01:P0:JlP5vbQCo7M=;37pBF9jnxakPRVNNIvBEI6/Ad4w
- 7+6+1I42ZqQL5izZ+gTj5eedkxNNo0jSB4GN+sav330mvgp0JxCb+WhzI/Uze+MbbivQyGI0J
- IiB4hJu0knThk3MeJ4EIZMIaJOCHsKHkYeUMMBNIzlOCDqCwZlxSCErMurLWI0bzaZ3+LvRSu
- 9aw34Z+Mz57hhMGhI68BAscpneQgB8IpI9Oi3hHsulKabMvvEE1hAeLSdCA9fiQdC4bqJoUtp
- CaB/p6IZF2VIVMWcjoYUdRnGLjCLvJVoGLyKiwRJkGTnioAbPSYk35naByeS2okdTgunNZj9Y
- XLR2TjNv8JVFOnzqYdJAQpF+SwnRMP/rtUTgXtVQ+GExBNA9vGeFIyYeRO3Cil6gpc71hM6iJ
- uZa4ordmmrfpydONfyy0SU9fFw8pVCLO2PahfxM59q4wvvnhPj/IV7gOMEjyiCDPDeX91zrsp
- +4WVCo3h/U/nORAXi3rtwSp+kwi8GGIHfpV9uNaS5nqMiwgA2IYvA/OTTlbChywCAXKvB+EXc
- GE2fg2d+No1Gc6JYVf36GO5xBOfSLZplJKqmrPIk40F0Gd1jqunu20LsaTSUGtzYEIgFnkfY1
- hmFz4FGP/T49IUgfD9FZcIJNOYCPdPPJSP+/wWW0ineAgGm2WwaWTwHRTAd1MwZd4CykTYzPp
- afWbIr5IBkKHaAq1UwkdDl6GZGn3Q8FbV0VdiX87n+oyZ7mQa0Xg60b4cnNte5r7Oc/5dwLZs
- FZ/5mp2vF7uiIiSfsmJN0aQ61KHkA7UBLslEN9e0BosHtB0ahPLf2B9nQzLg45r8HnEPTMcSB
- HZjz0gN7B3JjlTq3/uL5rZWO+4nJITqw6nfBbUCbB9LoY=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,37 +68,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+%s/prbing/probing/
 
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ drivers/core/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Am 7=2E Juni 2024 20:52:37 MESZ schrieb Sughosh Ganu <sughosh=2Eganu@linar=
-o=2Eorg>:
->The LMB memory map is now persistent and global=2E There is therefore no
->need to add memory to the LMB memory map as part of the bdinfo
->command=2E Only dump the current available and reserved memory as part
->of the bdinfo command=2E
+diff --git a/drivers/core/Kconfig b/drivers/core/Kconfig
+index 1081d61fcf0..754649f091e 100644
+--- a/drivers/core/Kconfig
++++ b/drivers/core/Kconfig
+@@ -113,7 +113,7 @@ config DM_EVENT
+ 	select EVENT
+ 	help
+ 	  This enables support for generating events related to driver model
+-	  operations, such as prbing or removing a device. Subsystems can
++	  operations, such as probing or removing a device. Subsystems can
+ 	  register a 'spy' function that is called when the event occurs. Such
+ 	  subsystems must select this option.
+ 
+-- 
+2.43.0
 
-Would it make sense to move printing lmb memory to a separate command inst=
-ead?
-
-Best regards
-
-Heinrich
-
->
->Signed-off-by: Sughosh Ganu <sughosh=2Eganu@linaro=2Eorg>
->---
-> cmd/bdinfo=2Ec | 1 -
-> 1 file changed, 1 deletion(-)
->
->diff --git a/cmd/bdinfo=2Ec b/cmd/bdinfo=2Ec
->index fc408e9820=2E=2E0f343203ef 100644
->--- a/cmd/bdinfo=2Ec
->+++ b/cmd/bdinfo=2Ec
->@@ -163,7 +163,6 @@ static int bdinfo_print_all(struct bd_info *bd)
-> 	bdinfo_print_num_l("multi_dtb_fit", (ulong)gd->multi_dtb_fit);
-> #endif
-> 	if (IS_ENABLED(CONFIG_LMB) && gd->fdt_blob) {
->-		lmb_add_memory(gd->bd);
-> 		lmb_dump_all_force();
-> 		if (IS_ENABLED(CONFIG_OF_REAL))
-> 			printf("devicetree  =3D %s\n", fdtdec_get_srcname());
