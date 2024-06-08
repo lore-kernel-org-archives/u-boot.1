@@ -4,94 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B37FBC25B76
-	for <u-boot@archiver.kernel.org>; Sat,  8 Jun 2024 10:00:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6723C25B76
+	for <u-boot@archiver.kernel.org>; Sat,  8 Jun 2024 23:33:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D050D871C7;
-	Sat,  8 Jun 2024 12:00:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
+	by phobos.denx.de (Postfix) with ESMTP id CFBF887FC7;
+	Sun,  9 Jun 2024 01:33:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=nwl.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="CALB1ggY";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="IeCYkqqf";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=nwl.cc header.i=@nwl.cc header.b="amimJxZF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4AE2787947; Sat,  8 Jun 2024 12:00:53 +0200 (CEST)
-Received: from wfhigh1-smtp.messagingengine.com
- (wfhigh1-smtp.messagingengine.com [64.147.123.152])
+ id E933B87947; Sun,  9 Jun 2024 01:32:59 +0200 (CEST)
+Received: from orbyte.nwl.cc (orbyte.nwl.cc [IPv6:2001:41d0:e:133a::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 298F5831A2
- for <u-boot@lists.denx.de>; Sat,  8 Jun 2024 12:00:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E508987FC7
+ for <u-boot@lists.denx.de>; Sun,  9 Jun 2024 01:32:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=flygoat.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailfhigh.west.internal (Postfix) with ESMTP id 7E93D18000B9;
- Sat,  8 Jun 2024 06:00:45 -0400 (EDT)
-Received: from imap44 ([10.202.2.94])
- by compute3.internal (MEProxy); Sat, 08 Jun 2024 06:00:45 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
- cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1717840845;
- x=1717927245; bh=hLVVTBqnQDD3tBNO7Afl9Ybc79TrKheyFxDWrM4bNvs=; b=
- CALB1ggYPE7WWs2IbcVi2N+5PrSLogo0NNl8W0u1WR+787jtUooy/bfUTJMcnbmo
- HvM6gS97e6AP+L7jl8NMSos02YwpER+9+shwhCsC1sLu32+v72997y39HvkgIoy4
- NDLW33W7oHpD58uginZ9nNrDjUYLXFSL689BWH4fBzG942DVAdY6ItjQbT1KI0xv
- 1coDnUfildS3EI3mTcXJ2ZwJVcqmR7/9jjSSJlS/P6ihZu6UGp0b/nScH3KeSspw
- +Vyd8IW8+JA7wSSqEtZhjrNMjs0ifrgoApkismnKSwgz1h3HDvUQ/vjaL7TGVMeY
- foS2kzYR5htzJvxUYK4Dug==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1717840845; x=
- 1717927245; bh=hLVVTBqnQDD3tBNO7Afl9Ybc79TrKheyFxDWrM4bNvs=; b=I
- eCYkqqfeyRuU6UkY7np2RrsdqOnj1YUOna4ms7deD1kzL2e4taPao6bpeiB4Hv3O
- LiyuUErkkxenjFwl4t+nb1rW31wnELLcfa9ODNV1mq0GocsGBUZ0umhmET7/wKpn
- BE0NxYUIq5eaSdPLBgvbAyvkbM3ijpzpym1Abq5VoPEatktLt2EBgj1HKDlU4vX5
- pqtPZZLNDBrEQajbn9eyFrKpGZSDIokVa5JvwHcvfpsm6PUkYyETWoASalv9fUQd
- w3v8Hox8Fz3k9+79Hy11YQClyPsBuTz/rdx+4E6xYOE26E5iXYbY/XjnLUpmqK/X
- NNOz6wVTY4ImJzmlxeHjg==
-X-ME-Sender: <xms:zCtkZgU6w44FiiEv8Of14ayGd-dwF3GS-LmDXdifWSz0adH6yb_qmg>
- <xme:zCtkZklO0klOaZbgB7W92mOr2pOydvQ5936sDZScGKWX0uaPQhG4k2yzbP7GG5MFy
- 0JLnkrS-P4DeSw9Bn4>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrfedtvddgudefiecutefuodetggdotefrod
- ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
- necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
- enucfjughrpefofgggkfgjfhffhffvvefutgfgsehtqhertderreejnecuhfhrohhmpedf
- lfhirgiguhhnucgjrghnghdfuceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtg
- homheqnecuggftrfgrthhtvghrnhepiefgfedtleetiedvtdfhjeeufeffgfdugffgheel
- tefhleeuvdejvefgieevheeunecuffhomhgrihhnpehvvghnthhohidrnhgvthdpghhith
- hhuhgsrdgtohhmpdhkvghrnhgvlhdrohhrghenucevlhhushhtvghrufhiiigvpedtnecu
- rfgrrhgrmhepmhgrihhlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrd
- gtohhm
-X-ME-Proxy: <xmx:zCtkZkZDjdEA5s19Y69kbHd8LFMgE1lcpkT6pKTcua37bKCdSOdcmQ>
- <xmx:zCtkZvX0ASE3F_of5WDBNe6ROX1FdcjNFcV17DGcDc7_R2qcjG2K8Q>
- <xmx:zCtkZqkuCVTMy158CM0_xEnUaBZuNJUx7KFRpURnunbzKCmJxcQ_HA>
- <xmx:zCtkZkdQhxowZ0lTGa_2swJFTgi5l5TRcEHFwZ2XMUC4xULpDrjdEQ>
- <xmx:zStkZsjXOA9vOWxP1jobCTd9AgrIiXaONdtVqcDKjJGn_681DP1AyPr6>
-Feedback-ID: ifd894703:Fastmail
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
- id C8C0836A0074; Sat,  8 Jun 2024 06:00:44 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.11.0-alpha0-497-g97f96844c-fm-20240526.001-g97f96844
+ dmarc=none (p=none dis=none) header.from=nwl.cc
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=phil@nwl.cc
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=nwl.cc;
+ s=mail2022; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=ZuIoSadk/gGZBYiiwdWAXwSsD3tjQG7iKwe9UbtDV6Q=; b=amimJxZFa73ybreqRJASWzSd9P
+ GpXIhe75/sd/bTmi0p+KS9Q0X7465WKVROOj1QNRgv6ok4wVo8Bzj2ws22bloKz517meFPOu/FSL0
+ lH4DdSTkUWO5bV+cwyTw58BXfuNJODf+5YcXKE5SfwjKeVqKecrPzHwflkPHGN4HZugtf5VL3pS8c
+ ulXCxWW9o+4A0Bxie8Ddj5SauoMXvCXVDuboDZoDoguSLnqSYjuyzCtLeYJ5IPgJPmw+oUafHQso2
+ GD4aVO03H5TjaDyDu8nHnuGaRz6c85hhbAy9LloQF7hVOQgzhKBM/etbfhZ7uUzrAj7/OObGW/MNn
+ tsImmixA==;
+Received: from n0-1 by orbyte.nwl.cc with local (Exim 4.97.1)
+ (envelope-from <phil@nwl.cc>) id 1sG5YN-000000004oP-3mBh;
+ Sun, 09 Jun 2024 01:32:55 +0200
+Date: Sun, 9 Jun 2024 01:32:55 +0200
+From: Phil Sutter <phil@nwl.cc>
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] arm: mvebu: Enable bootstd and other modernization for
+ Synology DS414 (Armada XP) board
+Message-ID: <ZmTqJwGDQlILtlnx@orbyte.nwl.cc>
+Mail-Followup-To: Phil Sutter <phil@nwl.cc>, Tony Dinh <mibodhi@gmail.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>
+References: <20240606234437.24549-1-mibodhi@gmail.com>
+ <ZmMO-yODr9n2X7yD@orbyte.nwl.cc>
+ <CAJaLiFwDHkkDKv3DY8Edk7_LE8gVHujx=d=nMfF3vu2zGmLWgA@mail.gmail.com>
 MIME-Version: 1.0
-Message-Id: <bab8fae1-9a5d-461d-ad78-7d85192cc7c1@app.fastmail.com>
-In-Reply-To: <786590fb-2f5f-4855-bcad-3ce3f1cf25ff@gmx.de>
-References: <20240529-efi-spec-v1-1-0668e4d19683@flygoat.com>
- <786590fb-2f5f-4855-bcad-3ce3f1cf25ff@gmx.de>
-Date: Sat, 08 Jun 2024 11:00:25 +0100
-From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
-To: "Heinrich Schuchardt" <xypron.glpk@gmx.de>
-Cc: "Tom Rini" <trini@konsulko.com>,
- "Ilias Apalodimas" <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH] doc: Add UEFI supplement document
-Content-Type: text/plain;charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAJaLiFwDHkkDKv3DY8Edk7_LE8gVHujx=d=nMfF3vu2zGmLWgA@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,219 +74,181 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, Jun 07, 2024 at 04:14:26PM -0700, Tony Dinh wrote:
+> On Fri, Jun 7, 2024 at 6:45 AM Phil Sutter <phil@nwl.cc> wrote:
+> > On Thu, Jun 06, 2024 at 04:44:36PM -0700, Tony Dinh wrote:
+> > > - Switch to standard boot (in include/configs/ds414.h and
+> > > configs/ds414_defconfig)
+> > > - Implement board_late_init() to ensure successful enumeration
+> > > of USB3 devices
+> >
+> > Oh, this makes the rear USB3 ports usable? I had failed to get there
+> > when working on DS414 support.
+> 
+> Yes! There have been a lot of updates in the PCIe MVEBU area. So it
+> could have been a different reason why it did not work when you added
+> support for this board.
 
+Nice!
 
-=E5=9C=A82024=E5=B9=B46=E6=9C=887=E6=97=A5=E5=85=AD=E6=9C=88 =E4=B8=8B=E5=
-=8D=887:11=EF=BC=8CHeinrich Schuchardt=E5=86=99=E9=81=93=EF=BC=9A
-[...]
->
-> This does not explain why we should bother about any non-UEFI
-> architecture. It does not list relevant architectures and does not
-> provide any evidence that this more than an academic endeavor.
+> Still, without this board_late_init(), we would need to run "pci enum"
+> and then "usb start" or "usb reset" to bring up the USB3 ports. The
+> USB3 controller is on the PCIe bus, and MVEBU PCIe drivers don't
+> initialize everything when it comes up.
 
-Hi Heinrich,
+Yeah, at some point I still had
+| CONFIG_PREBOOT="usb start; sf probe"
+in ds414_defconfig. Looking at my initial DS414 support patch from 2015,
+at least 'usb start' seemed to be necessary for USB to work in Linux.
+This might have changed later as I dropped the config symbol six years
+later in e471ddf0f3472 ("arm: mvebu: board/Synology: Unify legacy kernel
+support").
 
-As per discussion made at [1] it can be next generation of U-Boot's
-API facing to bare-metal software.
+> > > - Remove unnecessary misc_init_r(), since NET_RANDOM_ETHADDR is now
+> > > configured in
+> >
+> > So u-boot will assign random MAC addresses to the NICs instead of the
+> > real ones? Won't this potentially break PXE boot setups?
+> 
+> I did not see any problem using a random MAC address in my test using
+> bootstd. Is there a setup where this board MAC address must be known
+> when we boot with PXE? my impression is that only ipaddr and serverip
+> are needed, and the MAC address could be whatever we define for the
+> board.
 
-I admit it's more or less an academic endeavour to me, but isn't
-U-Boot a great place for such thing? Do we have to be bound by
-commercial interest?
+I haven't played with PXE for a long time, but I assumed the DHCP daemon
+might send different options to different hosts identified by their MAC
+address. The latter being random obviously defeats such setups.
 
->
-> All git repositories you mentioned in you MIPS series have not seen any
-> update in the last four years.
+Does the random MAC persist in Linux, BTW? I don't recall Linux
+extracting data from the vendor-specific flash storage. Unless I'm
+mistaken, it should be u-boot's responsibility to setup MAC addresses in
+the NICs (to the vendor-assigned ones).
 
-Everything is working well, so nobody is willing to touch them.
+> > > - Remove unnecessary checkboard()
+> > > - Updated IDENT_STRING to indicate this u-boot supports both Synology
+> > > DS414 and DS214+ boards
+> > > - Add SYS_THUMB_BUILD to reduce binary size
+> > > - Add NET_RANDOM_ETHADDR
+> > > - Add CONFIG_LBA48 and CONFIG_SYS_64BIT_LBA to support >2TB HDD/SDD
+> > >
+> > > Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+> > > ---
+> > >
+> > >  board/Synology/ds414/ds414.c | 15 +++--------
+> > >  configs/ds414_defconfig      | 20 ++++++--------
+> > >  include/configs/ds414.h      | 51 ++++++++++++++++++++++--------------
+> > >  3 files changed, 42 insertions(+), 44 deletions(-)
+> > >
+> > > diff --git a/board/Synology/ds414/ds414.c b/board/Synology/ds414/ds414.c
+> > > index abe6f9eb5e..f0b55fa095 100644
+> > > --- a/board/Synology/ds414/ds414.c
+> > > +++ b/board/Synology/ds414/ds414.c
+> > > @@ -181,18 +181,9 @@ int board_init(void)
+> > >       return 0;
+> > >  }
+> > >
+> > > -int misc_init_r(void)
+> > > +int board_late_init(void)
+> > >  {
+> > > -     if (!env_get("ethaddr")) {
+> > > -             puts("Incomplete environment, populating from SPI flash\n");
+> > > -             do_syno_populate(0, NULL);
+> > > -     }
+> > > -     return 0;
+> > > -}
+> >
+> > This is useful for first boot of flashed vanilla u-boot. Can this be
+> > retained somehow?
+> 
+> We could, but with NET_RANDOM_ETHADDR configured in, this routine will
+> do nothing. Perhaps the fact that the envs will show CRC errors in the
+> 1st boot should be an indicator that it needs to be populated?
 
->
-> If any company were sincerely interested in using UEFI on such
-> architectures, wouldn't they contribute to the specification like has
-> been done for LoongArch and RISC-V?
+Maybe this env population approach is not the right one to begin with.
+Reading doc/README.enetaddr, it seems we want something like step 1 in
+"Correct flow of setting up the MAC address", though I'm not sure which
+initialize() function this is about (board_eth_init() maybe?). Also we
+need a working spi flash driver at that point.
 
-Some architectures are dead in commercial point of view (m68k, xtensa)
-etc, so I think nobody is going to represent them in commercial world.
-Loongson tried to push UEFI spec for MIPS to UEFI forum a couple of years
-ago but was trapped by a good deal of commercial stuff. Now they
-lost interest on it.
+> With standard boot enabled in this patch, the default envs can be
+> scripted in /boot/boot.scr or /boot.scr on the rootfs disk storage, or
+> on some flash location, or on the network . So we don't even need the
+> full envs on SPI flash like we used to. It might still be useful but
+> not necessary.
 
->
-> It does not make sense to define UEFI for non-UEFI architectures in
-> U-Boot. Isn't there any existing documentation for UEFI on MIPS?
+Maybe one could implement a translator which presents the 'vendor'
+partition contents as such default boot env.
 
-Yes, from Loongson, in Chinese.
-But I'd like to make a cross-arch document to help with other ports.
+> > [...]
+> > > diff --git a/include/configs/ds414.h b/include/configs/ds414.h
+> > > index 9446acba79..bbefe632e0 100644
+> > > --- a/include/configs/ds414.h
+> > > +++ b/include/configs/ds414.h
+> > [...]
+> > > @@ -38,23 +34,38 @@
+> > >   * L2 cache thus cannot be used.
+> > >   */
+> > >
+> > > -/* SPL */
+> > > -/* Defines for SPL */
+> > > +/* Keep device tree and initrd in lower memory so the kernel can access them */
+> > > +#define RELOCATION_LIMITS_ENV_SETTINGS  \
+> > > +     "fdt_high=0x10000000\0"         \
+> > > +     "initrd_high=0x10000000\0"
+> > > +
+> > > +/*
+> > > + * mv-common.h should be defined after CMD configs since it used them
+> > > + * to enable certain macros
+> > > + */
+> > > +#include "mv-common.h"
+> > > +
+> > > +#ifndef CONFIG_SPL_BUILD
+> > >
+> > > -/* Default Environment */
+> > > +#define KERNEL_ADDR_R        __stringify(0x1000000)
+> > > +#define FDT_ADDR_R   __stringify(0x2000000)
+> > > +#define RAMDISK_ADDR_R       __stringify(0x2200000)
+> > > +#define SCRIPT_ADDR_R        __stringify(0x1800000)
+> > > +#define PXEFILE_ADDR_R       __stringify(0x1900000)
+> > >
+> > > -#define CFG_EXTRA_ENV_SETTINGS                               \
+> > > -     "initrd_high=0xffffffff\0"                              \
+> > > -     "ramdisk_addr_r=0x8000000\0"                            \
+> > > -     "usb0Mode=host\0usb1Mode=host\0usb2Mode=device\0"       \
+> > > -     "ethmtu=1500\0eth1mtu=1500\0"                           \
+> > > -     "update_uboot=sf probe; dhcp; "                         \
+> > > -             "mw.b ${loadaddr} 0x0 0xd0000; "                \
+> > > -             "tftpboot ${loadaddr} u-boot-with-spl.kwb; "    \
+> > > -             "sf update ${loadaddr} 0x0 0xd0000\0"
+> >
+> > Are these dropped or am I missing a generic spot which adds them? IIRC,
+> > the usb*mode and eth*mtu settings are required, is that wrong? Lastly,
+> 
+> MTU is default to 1500 in mvneta.c. So the eth*mtu env is no longer necessary.
+> 
+> Also, I believe usb*mode is no longer necessary with the USB driver
+> model. I have not come across their usage anywhere for a long time.
+> The USB driver model seems to handle everything pretty well.
 
->
->> +
->> +Architectural Conventions
->> +-------------------------
->> +
->> +The UEFI specifications cover IA32, X64, ARM, AARCH64, RISC-V, Loong=
-Arch, and
->
-> There is only one UEFI specification.
->
-> %s/specifications cover/specification covers/
->
->> +Itanium architectures. This document extends the UEFI specifications=
- to include
->> +all architectures supported by U-Boot.
->> +
->> +The following conventions are used for these architectures:
->> +
->> +- For architectures with multiple ABIs, we adhere to the calling con=
-ventions
->> +  used by the Linux kernel for the same architecture.
->> +
->> +- Optional CPU registers (floating-point, SIMD) are excluded from ca=
-lling
->> +  conventions. However, the UEFI payload should be able to utilize t=
-hem if
->> +  available.
->> +
->> +- Control is handed over to the UEFI payload at the privilege level =
-used
->> +  by the Linux kernel for the same architecture.
->
-> This does not provide enough detail. The Linux kernel can run at
-> different privilege levels on the same architecture, e.g. in S-mode or
-> M-mode on RISC-V.
+I think both are required for stock Synology Linux, see
+setup_board_tags() in board/Synology/common/legacy.c. One could just
+hard-code sane fallback values into that routine though.
 
-I think it's only the case of RISC-V and AArch64 to have multiple privil=
-ege
-levels. MIPS, m68k, xtensa, power, nios2 all have only one level for ker=
-nel.
-But I'm happy to add some architecture specific wording here.
+> > that update_uboot macro at least helps preventing people from writing
+> > into wrong spots. What's the cause for dropping it?
+> 
+> I think we usually use mtdparts to define where u-boot is. So users
+> know where the right place to flash is. But you are right, it only
+> helps to describe exactly how to flash a new u-boot. So I'll put that
+> back in the V2 patch.
 
->
->> +
->> +- Identity mapping (i.e., VA =3D=3D PA mapping) is preferred for UEF=
-I. However,
->> +  this may not be possible for some architectures. In such cases, if=
- the
->> +  processor supports a default linear translation, it should be used.
->> +
->> +- Endianness: UEFI specifications enforce little-endian architecture=
-s.
->> +  However, U-Boot supports both little-endian and big-endian archite=
-ctures.
->> +  For big-endian architectures, UEFI data structures should be store=
-d in
->> +  native endianness, with exceptions explicitly specified.
->
-> Why do you bother about big-endian systems? MIPS supports low-endian.
-> Linux distros like Debian have dropped big-endian MIPS support.
->
-> If found https://www.ventoy.net/en/doc_mips64el.html (MIPS64EL UEFI) b=
-ut
-> nothing describing big-endian usage of UEFI.
+Cool, thanks!
 
-Yes there is no such usage so far, but Big Endian is still widely used
-in network devices (cavium octeon, even aarch64_be from ZXIC etc) and I =
-don't want
-to left it over.
+> Thanks for taking time to review the patch. And I'm glad to see you
+> are still active with the u-boot community!
 
->
->> +
->> +UEFI Images
->> +-----------
->> +
->> +The UEFI specifications define the PE/COFF image format for UEFI app=
-lications.
->> +U-Boot extends this format as follows:
->
-> The UEFI specification does not define the PE/COFF image format. It
-> prescribes its usage.
->
->> +
->> +- **PE32+ Machine Type**: UEFI specifications define machine types f=
-or supported
->> +  architectures. For machines not covered by UEFI specifications, we=
- use the
->> +  machine type defined by the Microsoft PE/COFF specification if pos=
-sible.
->> +  Otherwise, we use the ``IMAGE_FILE_MACHINE_UNKNOWN`` (0) machine t=
-ype.
->> +  U-Boot should always accept ``IMAGE_FILE_MACHINE_UNKNOWN`` as a va=
-lid
->> +  machine type.
->
-> We should not accept IMAGE_FILE_MACHINE_UNKNOWN on an architecture that
-> has a machine type defined in the PE-COFF specification.
->
-> Which MIPS machine type are you missing?
+My DS414 is still alive (and running in production most of the time), so
+I benefit from improved u-boot support as well! :)
 
-Not for MIPS, but we don't have onr for m68k and xtensa.
-
->
->> +
->> +- **Header Endianness**: PE/COFF header data fields are always store=
-d as
->> +  little-endian, regardless of the target architecture's endianness.
->> +
->> +- **DOS Stub**: To accommodate various boot image formats, we relax =
-the requirement
->> +  for a DOS stub in the UEFI image. U-Boot should accept UEFI images=
- without a DOS
->> +  stub and MZ signature. However, U-Boot still expects the PE/COFF h=
-eader at the
->> +  file offset specified at offset 0x3C.
->
-> Why would anybody create such an invalid file and expect it to be
-> interpreted as EFI?
-
-There is no such usage so far, but I noticed that for m68k "MZ" is not a=
- valid
-stub opcode, it might be a problem for EFISTUB kernel. Thus I came up wi=
-th this
-idea.
-
-But it can be worked out if we define another booting header format for =
-m68k.
-
-What's your opinion?
-
->
-> Shouldn't you fix the software creating such invalid files?
->
-> This topic is related to the question of which specification has been
-> used to create UEFI implementations like
-> https://github.com/kontais/EFI-MIPS.
->
->> +
->> +I/O Device Access
->> +-----------------
->> +
->> +UEFI specifications define the EFI_DEVICE_IO_PROTOCOL and EFI_PCI_IO=
-_PROTOCOL
->> +for accessing I/O devices. U-Boot extends these specifications as fo=
-llows:
->
-> These protocols are not used in U-Boot, yet.
-
-Yes, I had a glance on the specification and noticed that issue, so I
-write it here in case we are going to support them in future.
-
->
-> Best regards
->
-> Heinrich
->
->> +
->> +- All I/O access is performed using the CPU's native endianness.
->> +  For big-endian architectures, U-Boot should convert data to/from l=
-ittle-endian
->> +  before/after accessing I/O devices.
->>
->> ---
->> base-commit: 46ff00bea5dd2dd247d5e2fdadbf5dcf8653cd9a
->> change-id: 20240529-efi-spec-0ea657985272
->>
->> Best regards,
-
-[1]: https://lore.kernel.org/u-boot/CAC_iWjLbY6+FaUYQw2Zv5y5byCnXRHxfzvr=
-Ff1dMyJX+ANP9VQ@mail.gmail.com/
-Thanks
---=20
-- Jiaxun
+Cheers, Phil
