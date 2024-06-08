@@ -4,54 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14C05C25B76
-	for <u-boot@archiver.kernel.org>; Sat,  8 Jun 2024 04:12:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D30BC25B76
+	for <u-boot@archiver.kernel.org>; Sat,  8 Jun 2024 04:35:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BC7287F8D;
-	Sat,  8 Jun 2024 06:12:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 5BB5F87F68;
+	Sat,  8 Jun 2024 06:35:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="e8C9USJ/";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="rC5duKSl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 359BA87EF6; Sat,  8 Jun 2024 06:12:56 +0200 (CEST)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ id 6CFAF88005; Sat,  8 Jun 2024 06:35:08 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF44988005
- for <u-boot@lists.denx.de>; Sat,  8 Jun 2024 06:12:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F04387E50
+ for <u-boot@lists.denx.de>; Sat,  8 Jun 2024 06:35:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.. (ip-109-42-178-114.web.vodafone.de [109.42.178.114])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 5DDE53F5F5; 
- Sat,  8 Jun 2024 04:12:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1717819969;
- bh=YR26OgY2hM6mc/6ssvTw/2siXTKEgmOnPignyzCspKU=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=e8C9USJ/GG3045w7cMSS0y1KAxBX5dBp1KjF2WxXDQmShRsFtA61zCqdh/qE8xSKu
- 9g8piHgpQKE90ohYcHm3KN7sgu0KT4Y+zVzu5hQ3v+bne1L2EF/F4UJT34u0FliZI1
- 4PGtsZRkVcjqX1+tbone4Ans4FI1QT4INlZ3BAobE9lYEbBYR/e9bQZQgSqmVCubYL
- RxpBiDbCW2fWjsJ9VV0yPg2ETAA8wbgQn/8Y60tgWVHy8nL97U/UHCoQQ3xW29w/S4
- cW8/fE6CJMAJZVF9xA9FLnhmBdsb3M6UGOIJQ0l9JBXs6sSvV7TydVzT1CIz2Hs1cg
- uROPjfSnLe4Dg==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] dm: typo prbing
-Date: Sat,  8 Jun 2024 06:12:44 +0200
-Message-ID: <20240608041244.7325-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1717821303; x=1718426103; i=xypron.glpk@gmx.de;
+ bh=JBWg4hacpvojr/xtW1WH5Nr6D+D9/mHSffh2Qzm1W/k=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:From:To:
+ Cc:References:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+ cc:content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=rC5duKSlZ6UA3qHsdAikNTJMpDG0LbHgFcg5w61RDKrYc0rZ16Ebmils4jQ/AAk3
+ fEUwYJlE7/M8nmNndvJ78rUEvwmG7Re1fCY3mdRUkA3lqizBLL3jNTpX26LNmg+Kx
+ CyGPaQTG7yaQuOuXB5xrjg5fIeJlgndkAqZv+HN2RBHSAV7oPNJsZyWjrhNKvtUso
+ 3g+LKLHyCgOvh4LdTSTosUBpP8uAtHNhoF7zsSEgLkjdM8BhAEWPKRyhk0vYjNSQs
+ R2WJSHARRKYp7JhvLPKWIsGYomQXY9msleB4sWRNlVK7UEAnbnriJFVmR7RNSmUTC
+ 486yn5MDD68OLcVQoA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.107] ([109.42.178.114]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MNKlu-1s49j30ud8-00RiDE; Sat, 08
+ Jun 2024 06:35:03 +0200
+Message-ID: <4e1d5e85-15ed-4d88-9397-87acd837e58e@gmx.de>
+Date: Sat, 8 Jun 2024 06:34:59 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 11/31] lib: Kconfig: add a config symbol for getting
+ memory map updates
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>,
+ u-boot@lists.denx.de
+References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
+ <20240607185240.1892031-12-sughosh.ganu@linaro.org>
+ <388854D8-E73C-469F-A214-EEC175CF000A@gmx.de>
+Content-Language: en-US
+In-Reply-To: <388854D8-E73C-469F-A214-EEC175CF000A@gmx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:GI6lX0pnaoyeFP1o6/5QUVnhpeqCSQIT7iO34PqLJr78MBRMi0E
+ XG4OKKKDYIUODRw90pr6lz4QD4OxR6oVjQ2o4jqk9dVU94Scvth2wliVFhi3MlaTfOpf8Dg
+ /WJ1qiMrN5Sb1YniGuyAs2lm5VjsRSiLLvGah0AA5r/AZDrEH65t2fu5AU5oNIhxHPff/bo
+ DZK5GC+82N68uMRmgyM+w==
+UI-OutboundReport: notjunk:1;M01:P0:D7bNsYPMgik=;WdCS9PXH3++hTDtZzJ9znmLKabn
+ TDNbjMQ+fJXFg0segxGh4kAMTzmIKCdZ0gJW345XO843QbbM2/ERa9rDEJJU/eII0/HWrWq0f
+ gGXDtwjcO0y3WWpTFe0gNh0z5Nx4y66SQNJuhkEK4zIrKa7mp0ry9C3tvRfkZnJdrZzFShB+O
+ svLAchTLZW8tgJdgLfv3oGdg9DdAoxhfy1xNULn5+x6flLlPplFot5EK1z8askVIu8kwIdU44
+ 3Af2TRB04WF27qAoPchlBnCsJvUfsYhJ8u+XYTn/yLk/90K/Kq7sxI+A7ZcaGnxJ5EAmbHqC0
+ y+58Jw2Y+fIjaWxfNV6Gv/eW7+JT4+3OhkEBeV3S8ntrNUL3sXNPboYhUp/WJPavnXMIRx8Ma
+ LJmY5w0jIf+ISqdm1ii1gcvt/oMYUwrdivq/LSNoXLjV444KkxOxnF9Vq+8Y9542e7U/Rpel+
+ RbJ73rrRmkDMrbjrYtUSUEdBKppc0SM/14eqweLm/ctbrOnv27kuBm35aDVK6Ajzk6XiftD+O
+ yzspEzDd8YE0/Am9vayU2tL8R6Wp7D7e/PKu79qYsH3fKprOVfjLQDK8ph0jFDYGSIdE1vMq5
+ oSr+48bRnNJV9W0sKU+MJ/knqCa4psDHI4gU2T595mcZAhtlXnEzwi+/pVo2ctFmINYPJts+2
+ pOxHbd+Nj4TFlWhZ3+XpN/Bt8puXgUnusa/RZzO20rMio2SrUQWxMs+aephAemD7HsKIIzh4e
+ QdZgFC1uwb9qNegMtZ0lrd5QcZaCvwHBRRQaSsEcqb8f0HYkh7G+WCC8kYZlAGpaVpLWT2bRW
+ IRE0tBvitZQAWIAZVUIz8wLU883GQqocWxcjiX12r/JZg=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,26 +95,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-%s/prbing/probing/
+On 6/8/24 05:53, Heinrich Schuchardt wrote:
+>
+>
+> Am 7. Juni 2024 20:52:20 MESZ schrieb Sughosh Ganu <sughosh.ganu@linaro.=
+org>:
+>> Add a Kconfig symbol to enable getting updates on any memory map
+>> changes that might be done by some other module. This notification
+>> mechanism can then be used to have a synchronous view of allocated and
+>> free memory.
+>>
+>> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+>> ---
+>> lib/Kconfig | 9 +++++++++
+>> 1 file changed, 9 insertions(+)
+>>
+>> diff --git a/lib/Kconfig b/lib/Kconfig
+>> index 189e6eb31a..9ea02ae006 100644
+>> --- a/lib/Kconfig
+>> +++ b/lib/Kconfig
+>> @@ -74,6 +74,15 @@ config HAVE_PRIVATE_LIBGCC
+>> config LIB_UUID
+>> 	bool
+>>
+>> +config MEM_MAP_UPDATE_NOTIFY
+>> +	bool "Get notified of any changes to the memory map"
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- drivers/core/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Looking at later patches it seems you are sending memory map events from
+different memory maps: LMB and EFI.
 
-diff --git a/drivers/core/Kconfig b/drivers/core/Kconfig
-index 1081d61fcf0..754649f091e 100644
---- a/drivers/core/Kconfig
-+++ b/drivers/core/Kconfig
-@@ -113,7 +113,7 @@ config DM_EVENT
- 	select EVENT
- 	help
- 	  This enables support for generating events related to driver model
--	  operations, such as prbing or removing a device. Subsystems can
-+	  operations, such as probing or removing a device. Subsystems can
- 	  register a 'spy' function that is called when the event occurs. Such
- 	  subsystems must select this option.
- 
--- 
-2.43.0
+%s/to the memory map/to a memory map/
+
+>
+> To the "LMB memory map"?
+>
+>> +	default y if EVENT && LMB && EFI_LOADER
+>
+> I am missing 'depends on EVENT && LMB' here. This should allow to simpli=
+fy the 'default' statement. But why not use select?
+
+Sending messaging makes only sense if two memory management systems are
+present. How about:
+
+depends on EVENT && LMB && EFI_LOADER
+default y
+
+>
+> Best regards
+>
+> Heinrich
+>
+>
+>
+>> +	help
+>> +	  Enable this option to get notification on any changes to the
+>> +	  memory that is allocated or freed. This will allow different
+>> +	  modules that allocate memory to have a synchronous view of availabl=
+e
+>> +	  and allocated memory.
+
+Mentioning LMB and EFI here would be helpful:
+
+help
+   U-Boot manages memory allocation in multiple modules: LMB and EFI.
+   To keep them synchronized memory change messages are used.
+   Enable this symbol to ensure synchronization.
+
+Best regards
+
+Heinrich
+
+>> +
+>> config RANDOM_UUID
+>> 	bool "GPT Random UUID generation"
+>> 	select LIB_UUID
 
