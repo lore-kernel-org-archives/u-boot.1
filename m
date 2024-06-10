@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA8BEC27C5E
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 09:20:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C61EEC27C5E
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 09:31:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDA0687C2D;
-	Mon, 10 Jun 2024 11:20:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3B5BF87CF1;
+	Mon, 10 Jun 2024 11:31:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AMKJJtkV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nqWvyBaK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97A5B87EBD; Mon, 10 Jun 2024 11:20:28 +0200 (CEST)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id 2940E87CF1; Mon, 10 Jun 2024 11:31:30 +0200 (CEST)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61BF686EB5
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 11:20:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D9FCF87C40
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 11:31:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-35f1d407fc2so170085f8f.1
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 02:20:26 -0700 (PDT)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-3579ef2d436so209240f8f.2
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 02:31:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1718011226; x=1718616026; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1718011887; x=1718616687; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5aaW6doY18gKSFWWZcGipPg35/3Euq6516g8BSOPqmI=;
- b=AMKJJtkVYR0lekNiaLFc6qOggVi2hVr9ImKVQZG6+nSTNhTGRXkhOQcMYhesAN6CYZ
- 2n2OJ4bx0ymr+ep06IqTurbkD4kzoQXNQdIJBDTOZ30d4zP2MNT7P6hlflE1yVNxLhzJ
- q/uTNpun+XVT0UTYopn/1gpWnmd8d/r+6syRh/HFzAiDopCNgYgM7cIxY5YwSP/a7Avk
- lOxBwW++d/wbjkzd3sB8X9NBREvAIONU3zywEfoj254iFrgdcMvFWgizq9Sq7ltdtRsi
- ELR6Kwvchos9pSBVgoM4EaW5f7p75zMSEqKeUtJUSKn9UVi6uZiDkOIB2w6vzG+tPsIL
- bVMw==
+ bh=jH8sBWD9j/vrIRtPuSjhG1nsWoMXY275Qf4kO6eZuCE=;
+ b=nqWvyBaK3tKUuwIjRETa1+snd3Feott3cXMz0G79QZPZuWLHzblu0bKDFffMHcz/UG
+ IdkKA+fK7Ucx/nWCGFslsButKuWIdIvXpMzcGbp9ZW1DyzumsFv54POIvMMjbHOO6EwQ
+ IdF7TF7r1Ps6LsLlVcTh7vpWE+Lrnka40jmM8IO7zEtZOYd5aHjpw/wJ8X0y4tbVNZo9
+ CPWx7QIBEHXGKyLZFbO+tDF4MOLs9GxxtJyo2b/5DVIHyHhZfILKe86OthC0pOM8KrFQ
+ uDQO4AVIDR65LKUdsrFOdbgT+tM+bornNXaZxVgGfXKyav/vspDPDd/dghA+B2ihmj/v
+ LYMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718011226; x=1718616026;
+ d=1e100.net; s=20230601; t=1718011887; x=1718616687;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5aaW6doY18gKSFWWZcGipPg35/3Euq6516g8BSOPqmI=;
- b=WPlABxNgoXYPkgoFr4mE/WdItVLmfvieSkLdof7v0oQbZ69s5S85aiY41wEPXjIk1D
- GM9Zu75nsZwiXz6zBqyFC4taDU4Fluxd9pvuCl9b8pzYO4uittM8+tJmg2BIaUW0WlYl
- rZJLG+Kc8M5Zomtnv8GPd52CfI+umYouQlgPwTgZc7bmgx1K/GUT5Eri23vLHUrSu4CS
- FUBdzOqOMVrKKDsHFZVXi+gmju22HqH6SiupCLvY979X29gei6XnW3njcVx9fipVAg2j
- kddnxMogfusyFm4+i1s1BThe6oUh5HyesYImpZBgKtQLx0Vz1NGAP2rU1ue3ycHBeHVM
- DW2g==
+ bh=jH8sBWD9j/vrIRtPuSjhG1nsWoMXY275Qf4kO6eZuCE=;
+ b=WQsQIxgpJGbcYsvpXxGb6vYceI/xY9Q0R/Ep7wA2ND1yGYsi7+gg+KmH9U1Fc003ky
+ d6VJi+whKVbjig6PYkBesNo7PnTTWB2NOj74K/h7St7+06P2WhkfGnNuJskqAfDA1vdc
+ lke26wyWmZUmqJD6yRZG0vu9VfdbCd1aBn69eQgxYwVmycUPiRwlYHol1U0QikJXSI+O
+ OicDlIMnXXiXefrk9s51O4PT7h7djP9T7kGH7CwXh4yT5Ze8lP9+yrX7Vq++fQ2s60Ov
+ 0AATVU8xqxbijcCOhNge2Kxdta1mGNxXwQo8tpWB/bVueioSq7DC5LG327YSGItx1+w8
+ gfFw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXtBzAuHonAwcgUiyTYXV2RKD8Tqfc6rxG70/WkmwiOjcSKLBHh5lpCe9w/IgqWKsKQPmoOKeAuMfR0kUvheK6YQL0Zhw==
-X-Gm-Message-State: AOJu0YwWj2Ek94lYJchy3f2/mY2Y8dfNdTwqkGznOUEndHvba2FdkwCc
- 9mqr6uwE8HOxNjHnf6XimV4f20DZlNXoEWOtM1jzn0I1TwgJyh4Yp6zk0bXoZoQO3BMIHPa9eVs
- K/n4giPtNBoOBWgLTks8l+PF6Xv4=
-X-Google-Smtp-Source: AGHT+IGXMTg2l+HMBUBQ+pCoWRA/keefHxar5cjVhDiMEkHMt3iIABPqSRaMjHKAPolKT8uz2HfKXFIek/YfZJxvQEA=
-X-Received: by 2002:a05:6000:2ad:b0:35f:1edb:4695 with SMTP id
- ffacd0b85a97d-35f1edb47dbmr2686053f8f.6.1718011225531; Mon, 10 Jun 2024
- 02:20:25 -0700 (PDT)
+ AJvYcCXATcGhp+weVUKfeGr0A25blJs6ZOSLdBZyKOiAafS/WSCpwKVAI3Jo+ROZvT0mZfSTtpxKGqxPy7ilzoRYy2RoWJkBTA==
+X-Gm-Message-State: AOJu0YxI5SKdYVhxnCYq6vhPeHMSKKKW9uRtO1qgSCN78qGG3nU8nn+b
+ kdMptlMlSpmujdSQZ1ShJCFUQUVv2JIJmrqKa4yxvQhdXlXgokVFAjKtUZT0l1iI2VtrUSI7vWZ
+ pXhmjcff4ExetkkoTINhyTK8xlSU=
+X-Google-Smtp-Source: AGHT+IHk+A3YZOQJH3jyq4A27hlXt+5sNtDeIfCpghZl1jOjJ8lJ0I0t6xPFZ+BqVdZesBZYo+uD7OQomSVlI/Jn1xU=
+X-Received: by 2002:a5d:5f41:0:b0:358:3a1:2643 with SMTP id
+ ffacd0b85a97d-35efedd9ccdmr6654870f8f.3.1718011887170; Mon, 10 Jun 2024
+ 02:31:27 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240606-bootmeth-android-v1-0-0c69d4457cc5@baylibre.com>
- <20240606-bootmeth-android-v1-2-0c69d4457cc5@baylibre.com>
-In-Reply-To: <20240606-bootmeth-android-v1-2-0c69d4457cc5@baylibre.com>
+ <20240606-bootmeth-android-v1-3-0c69d4457cc5@baylibre.com>
+In-Reply-To: <20240606-bootmeth-android-v1-3-0c69d4457cc5@baylibre.com>
 From: Igor Opaniuk <igor.opaniuk@gmail.com>
-Date: Mon, 10 Jun 2024 11:20:14 +0200
-Message-ID: <CAByghJa6gLyJHB7z3ME0JPewZ3JJizmY54XBO3MeX3TMrzB_tA@mail.gmail.com>
-Subject: Re: [PATCH 2/6] boot: android: Add image_android_get_version()
+Date: Mon, 10 Jun 2024 11:31:16 +0200
+Message-ID: <CAByghJY9Vnp1fTT_1mXg8iCCaFBsMP0+MeYSr3by1xbVp-73qw@mail.gmail.com>
+Subject: Re: [PATCH 3/6] bootstd: Add bootflow_iter_check_mmc() helper
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Cc: Simon Glass <sjg@chromium.org>, Julien Masson <jmasson@baylibre.com>, 
  Guillaume La Roque <glaroque@baylibre.com>,
@@ -98,85 +98,77 @@ Hi Mattijs,
 On Thu, Jun 6, 2024 at 2:24=E2=80=AFPM Mattijs Korpershoek
 <mkorpershoek@baylibre.com> wrote:
 >
-> When reading a boot image header, we may need to retrieve the header
-> version.
+> Some bootflows might be able to only boot from MMC devices.
 >
-> Add a helper function for it.
+> Add a helper function these bootflows can use.
 >
 > Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 > ---
->  boot/image-android.c | 7 ++++++-
->  include/image.h      | 7 +++++++
->  2 files changed, 13 insertions(+), 1 deletion(-)
+>  boot/bootflow.c    | 12 ++++++++++++
+>  include/bootflow.h |  9 +++++++++
+>  2 files changed, 21 insertions(+)
 >
-> diff --git a/boot/image-android.c b/boot/image-android.c
-> index ddd8ffd5e540..4f8fb51585eb 100644
-> --- a/boot/image-android.c
-> +++ b/boot/image-android.c
-> @@ -185,7 +185,7 @@ bool android_image_get_data(const void *boot_hdr, con=
-st void *vendor_boot_hdr,
->                 return false;
->         }
->
-> -       if (((struct andr_boot_img_hdr_v0 *)boot_hdr)->header_version > 2=
-) {
-> +       if (android_image_get_version(boot_hdr) > 2) {
->                 if (!vendor_boot_hdr) {
->                         printf("For boot header v3+ vendor boot image has=
- to be provided\n");
->                         return false;
-> @@ -203,6 +203,11 @@ bool android_image_get_data(const void *boot_hdr, co=
-nst void *vendor_boot_hdr,
->         return true;
+> diff --git a/boot/bootflow.c b/boot/bootflow.c
+> index 9aa3179c3881..59d77d2385f4 100644
+> --- a/boot/bootflow.c
+> +++ b/boot/bootflow.c
+> @@ -575,6 +575,18 @@ int bootflow_iter_check_blk(const struct bootflow_it=
+er *iter)
+>         return -ENOTSUPP;
 >  }
 >
-> +u32 android_image_get_version(const void *hdr)
+> +int bootflow_iter_check_mmc(const struct bootflow_iter *iter)
 > +{
-> +       return ((struct andr_boot_img_hdr_v0 *)hdr)->header_version;
+> +       const struct udevice *media =3D dev_get_parent(iter->dev);
+> +       enum uclass_id id =3D device_get_uclass_id(media);
+> +
+> +       log_debug("uclass %d: %s\n", id, uclass_get_name(id));
+> +       if (id =3D=3D UCLASS_MMC)
+> +               return 0;
+> +
+> +       return -ENOTSUPP;
 > +}
 > +
->  static ulong android_image_get_kernel_addr(struct andr_image_data *img_d=
-ata)
+>  int bootflow_iter_check_sf(const struct bootflow_iter *iter)
 >  {
->         /*
-> diff --git a/include/image.h b/include/image.h
-> index acffd17e0dfd..18e5ced5ab42 100644
-> --- a/include/image.h
-> +++ b/include/image.h
-> @@ -1963,6 +1963,13 @@ bool is_android_boot_image_header(const void *hdr)=
-;
+>         const struct udevice *media =3D dev_get_parent(iter->dev);
+> diff --git a/include/bootflow.h b/include/bootflow.h
+> index 080ee8501225..6058ddd89b16 100644
+> --- a/include/bootflow.h
+> +++ b/include/bootflow.h
+> @@ -407,6 +407,15 @@ void bootflow_remove(struct bootflow *bflow);
 >   */
->  bool is_android_vendor_boot_image_header(const void *vendor_boot_img);
+>  int bootflow_iter_check_blk(const struct bootflow_iter *iter);
 >
 > +/**
-> + * android_image_get_version() - Retrieve the boot.img version
+> + * bootflow_iter_check_mmc() - Check that a bootflow uses a MMC device
 > + *
-> + * Return: Android boot image header version.
+> + * This checks the bootdev in the bootflow to make sure it uses a mmc de=
+vice
+> + *
+> + * Return: 0 if OK, -ENOTSUPP if some other device is used (e.g. etherne=
+t)
 > + */
-> +u32 android_image_get_version(const void *hdr);
+> +int bootflow_iter_check_mmc(const struct bootflow_iter *iter);
 > +
 >  /**
->   * get_abootimg_addr() - Get Android boot image address
+>   * bootflow_iter_check_sf() - Check that a bootflow uses SPI FLASH
 >   *
 >
 > --
 > 2.45.0
 >
-why introduce a helper function if there is only one user of it?
 
-android_image_get_data() expects andr_boot_img_hdr_v0 anyway,
-as it has an explicit check for it in the very beginning
-(is_android_boot_image_header()).
+Reviewed-by: Igor Opaniuk <igor.opaniuk@gmail.com>
 
-Have you considered adjusting android_image_get_data() declaration, and jus=
-t use
-andr_boot_img_hdr_v0 *boot_hdr as first param instead (like it's done
-for example in
-android_boot_image_v0_v1_v2_parse_hdr()) and then rely on implicit
-cast when this
-function is used.
-
-this is of course all a matter of preference, just thinking out loud
+A bit offtopic (just an idea for future refactoring), but I think all these
+bootflow_iter_check_* helpers should be replaced by just one
+int bootflow_iter_check_id(const struct bootflow_iter *iter, enum uclass_id=
+ id)
+to avoid code duplication or at least keep all these
+bootmedia-specific functions as
+wrappers with one-line call to bootflow_iter_check_id(iter,
+UCLASS_SPI_*) inside.
 
 --=20
 Best regards - Atentamente - Meilleures salutations
