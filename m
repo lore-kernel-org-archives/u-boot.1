@@ -4,79 +4,128 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EC1DC27C55
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 14:22:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 362CCC27C55
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 14:25:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC5D588537;
-	Mon, 10 Jun 2024 16:22:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 86D7F8857E;
+	Mon, 10 Jun 2024 16:25:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UsIqpMTP";
+	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="YPUVO69Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE7418857A; Mon, 10 Jun 2024 16:22:25 +0200 (CEST)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F2A988857A; Mon, 10 Jun 2024 16:25:28 +0200 (CEST)
+Received: from APC01-PSA-obe.outbound.protection.outlook.com
+ (mail-psaapc01olkn2080f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:feae::80f])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 449BB88537
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 16:22:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 28A2F88581
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 16:25:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-1f6da06ba24so23468965ad.2
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 07:22:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718029342; x=1718634142; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hhNayGUAmEp3/oKkG5SeGivTLOAyTlMgpKRM4QFtnsQ=;
- b=UsIqpMTPS519k0dr7I5IPV69LSUdJWLXdkg6g2j39iIwH4QHSuQ88bWq8eMemEpDJF
- dfyphWH+3P1mGeCYNeL0IAYfoLrHknsO4hOhlHr5JtNOGNOrNsMbLsUl+UgT8YihNNyY
- BmQogbQB4phB+rpdAezUlorjl/vZtDyqjloVKKVuxQ7FmlRC9HLTlnnzz0EJn2u7q/o+
- NCY96KrwZGTUHOyuFEVx5Baga5yTPP7niIYkhsQ0mk4/Oi4T/6VnmxB4mQwlkYga3YAM
- oeaPCqXO6sB3UF8plsGztBjrSVZaM8shyYw8xuvDhVrZVDMJ/UAmOUMO/QrKcATML7XE
- qcPA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718029342; x=1718634142;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=hhNayGUAmEp3/oKkG5SeGivTLOAyTlMgpKRM4QFtnsQ=;
- b=aflY1Qp4fBTewKEb0ls2X/UfBVzfWwa4laewnhi+zIEvGx8FkORKbXjgoMGy9HRjNP
- 1vj4pbbEHELXUP+856QaoliqrxMSMogN1ppdU1EFGZY7YnSPaiwlkiOeQ+XNx7P9dM7S
- FxW210+D1h38lzN8kqvovEyQt7GnEcNeqvD+kUqfflVsdhWnBltpgDPPCFIr+3DGR1a5
- 5r3LZ1CLliOGA2IZunrAezfMuIGB4C9T62pz+Zt8Wp9fblU5W+fbyWCm0tkP38y1YXzE
- nbpW9U6PKglpdq0lVRFeoxpPZOUnJ3fgeppu6zlPuDZWaJnAcUuHEPYhE5IE/urp3aEk
- eCDQ==
-X-Gm-Message-State: AOJu0YxFCCSwdT234SIRRpsZi+17MeR5WgOkluf/MgP5rqHjgkFnYwef
- Tj5DMRMxI76XaY/DFF0QwM8FxnMN3Zp4Fmf9XXlwIpHcIMmonrZc5f6O6mJKtrx/Uy46QH+N/Yv
- ltXNs6sp1pdkvX2DtHd76yiIjaT7HOiyeOCOmgQ==
-X-Google-Smtp-Source: AGHT+IGGV44xF4CZ3i00n7JwhJ03FUzUEIrSBB4EnKeARWIm0rUr1Brf+C7EkESrH/VngvKGar38i2xZ6mHuARVwnhg=
-X-Received: by 2002:a17:902:c102:b0:1f7:92b:4e6f with SMTP id
- d9443c01a7336-1f7092b5094mr29097495ad.29.1718029341587; Mon, 10 Jun 2024
- 07:22:21 -0700 (PDT)
+ spf=pass smtp.mailfrom=forbidden405@outlook.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=COxEKJVhmDdDgGr0NzIjPNcQMZnQp1qwJPqclwIIe5htVRjfNIlWpCVCFv4RBFWggkxMZ5bqmwGHicMDRtEucBa3+RNA3Tgp8Vyr7i/XJmV4uzmmN30HnjuewQyWFDNpu9Ja+DiXzmqwiVNTLsa8oroFAaYD++J5SFP0u3mBd8Z8ST8og/Zhp1xWBMPuHLfGTuvsTpB0+lt4Hr9wLTBLPc7eF5nFYX9VS8N7WG8t/KhDwI0Lnnehvvp0CEbSsrui5gdEl+VLo+Rf2VPYhXqW9VYxQ4zafiHH394SAB3HxWr6VAGEX7tYyVO9t4cI8PtEs/7ENqTUG7raO3fFuYQPeQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=+R01M5rdVNPlwIZ5CQHc9qMVwBtL+wAZYR1U+52gKSo=;
+ b=ZvCZulo+Y35mtKl13G2XuDcQcWdaNY/FGdTZjmpzvrUXRiZz5IteRHJ5WEz5xttOypwDH1BlubxRlcwC/O4rXTLJ/rkxxuwzRnBJlu6f9EarU5D2VTixX3zR/TncD5kYqDEhssFX1B0N+ZQt9Ib1KpASEjh8zO9F2/sBVIZNJ0QTOAEECa5FLJvuFJI1CJFMmrxkiS/FQaK5vut5YIleu4TBRHBC4e+5qSzoVZ5038o1L0zUVcleEN2twB3xveW/oYPVx+DmyahIE1U7A7Tip8L/u8ZBe7SQVhmTRKCnGgykRv4GaVhbel5CWb0OFNGn06AlMV+2JEFN42slN9YVDA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=+R01M5rdVNPlwIZ5CQHc9qMVwBtL+wAZYR1U+52gKSo=;
+ b=YPUVO69Zc+0VvimgIK1hSw0njPpz8JJKqc8qxaQK73hffrpoVB6TLs0+Dyg7AdK4FAu2aUvsEevCen5ayNow08sqNP75NHvpS+MiCqffEDdmvIoZcnglo6mFQc+MAmrssY6zmVY95XrOrMFgNO4HtL2VmOqMMDxh3JKgZkD95EyGKtkrD+r8q2VMxCMJ/MQJpwh7CBTVc2nsMnky+TdGmNoxiq9w3NVRDndWIbgTOmEATfF4wcnb0k6DxBxZLU/EpKEj+XiWvdXEzyyf62NZ/1EIXv1jHy9A8ua6/6HWVTLHI+Hhkf2EiJKr7GiV/hO8J6sjNW19wPGV2Rn65MchRA==
+Received: from SEZPR06MB6959.apcprd06.prod.outlook.com (2603:1096:101:1ed::14)
+ by SEYPR06MB6684.apcprd06.prod.outlook.com (2603:1096:101:176::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.36; Mon, 10 Jun
+ 2024 14:25:19 +0000
+Received: from SEZPR06MB6959.apcprd06.prod.outlook.com
+ ([fe80::67f0:b5df:46f2:9f97]) by SEZPR06MB6959.apcprd06.prod.outlook.com
+ ([fe80::67f0:b5df:46f2:9f97%4]) with mapi id 15.20.7633.036; Mon, 10 Jun 2024
+ 14:25:19 +0000
+Message-ID: <SEZPR06MB6959E033F3220C5D8351072096C62@SEZPR06MB6959.apcprd06.prod.outlook.com>
+Date: Mon, 10 Jun 2024 22:25:12 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 12/40] mmc: dw_mmc: Replace fifoth_val property with
+ fifo-depth
+To: Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Simon Glass <sjg@chromium.org>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Ferass El Hafidi <vitali64pmemail@protonmail.com>,
+ Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
+ uboot-snps-arc@synopsys.com
+References: <20240610011226.4050-1-semen.protsenko@linaro.org>
+ <20240610011226.4050-13-semen.protsenko@linaro.org>
+Content-Language: en-US
+From: Yang Xiwen <forbidden405@outlook.com>
+In-Reply-To: <20240610011226.4050-13-semen.protsenko@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-TMN: [+skqAzDp05zrisgX54bZsYdgwa+Ixb2jxQJ2VX3XDw4h4kB/o+MguIwfl3Srr3eJ]
+X-ClientProxiedBy: SI2PR01CA0017.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:191::19) To SEZPR06MB6959.apcprd06.prod.outlook.com
+ (2603:1096:101:1ed::14)
+X-Microsoft-Original-Message-ID: <ed4754ec-98e5-464e-bd3f-5da9974fd8d3@outlook.com>
 MIME-Version: 1.0
-References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
- <20240607185240.1892031-10-sughosh.ganu@linaro.org>
- <CAC_iWjJARprGkjPQV4nVGKPWxBL+3iiSAuKcdqUNvn+hKV40XQ@mail.gmail.com>
- <CADg8p95O5FMyyLV3yZkRshrOB4nbKa4VdQwMxrSf4bB9z4e8Yg@mail.gmail.com>
- <CAC_iWjJaWMrv94c_94K_gCaZ0-RaOEz03M-pF4z7qOdryaqbSg@mail.gmail.com>
- <CADg8p96ztLcp80GHghBr2JTeEVcd795LiXarhNks6Ycsf7TjBw@mail.gmail.com>
-In-Reply-To: <CADg8p96ztLcp80GHghBr2JTeEVcd795LiXarhNks6Ycsf7TjBw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 10 Jun 2024 17:21:44 +0300
-Message-ID: <CAC_iWjLrak_a-vMz-Fy+UHPN0vg+7xGdqReGh0m7pf9UY9eP9w@mail.gmail.com>
-Subject: Re: [RFC PATCH 09/31] lmb: allow for resizing lmb regions
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marex@denx.de>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SEZPR06MB6959:EE_|SEYPR06MB6684:EE_
+X-MS-Office365-Filtering-Correlation-Id: 63a13b36-334f-4abb-c9d2-08dc89592729
+X-Microsoft-Antispam: BCL:0;ARA:14566002|461199019|3412199016|440099019;
+X-Microsoft-Antispam-Message-Info: /n7H2oG70WewTpdPmRtsz5IqsZ33dIln3GVMF4qWU8NGVucMNasV7vj7h6wv2xeqgqaKqvXr1Ytl0N5XsammJxYGyWxcBrqPpfj/IhR7bFgBvd6A2O5jFBHsk6xWfNU5bJczXTLXnLkksy7wAPLjgSv1ANo9NaBRwSXL6Et9Ml/DIUZkStv79DGu2xxlWYxjXZau5ixuMO6AzoVWwPYjlHG5YIV8q9XmWOvUjBKk0SiY0s244y+8cPLC1F8/RfMdvF0ILDbkQHIQkfN8luPyB9Q0zdh2KhGgixB3zh0xWaXVJ0H/Xh4Px+YTCrUDpSJmlmtkuDOD2/VQYLg/nlORKM5Ub8nd3VX8YILQRKPvlv5y1ZofI8LVKrzHuMhO+6e7FWYM8BFXRtuFXfV9FIa24vV91GMKxlAsT5vv5/iPlkt1nqL+Iv0b6nhXB9O5iwesUT73ux+Xqnd6gRlPmHt3FdTwrat7+E2FXu19dbQ6/gV0EqoavIPwRRlhRVf/PYtO2KvE0RSAPFLDAzc+kr4fo6UdmC49HhfhstAyxWOAxCN1dKT1gFW6K/zxIQ5vtV+y
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Wjg5clJhejVhRWljTzRSa29lN1I1VU91b1NmUzlzNEVQZGRWUExXM25mcFIw?=
+ =?utf-8?B?ZWdvS1JvTW9ZYUNoMDFxd3BDYUNBZ3BqZk00aHRScFVmQkh1cEtkTTNVQi81?=
+ =?utf-8?B?S0JjNHFaUGptWjhnS0szaDd0RDQ3QTRMdy9TMUJ6NDA4eWVSVlJOMGZGUDZt?=
+ =?utf-8?B?cFZwSWlvallNZThjcDVuUkk3aGJYdTMxRjRrbjgyOHNRcGdxdHYxdmJMS0VW?=
+ =?utf-8?B?U216WmlzYkxra1VITmppOXNVVVRJbVc1d2ZSM2k4c3ZLVUhLV1VpQ3cwWUxV?=
+ =?utf-8?B?MCthTXJ4d2ladTViQ2QzVHo2cnZpY2k4ZDYvZGh1UHFHL3lyNGlmTjR4ZHEr?=
+ =?utf-8?B?SDhTZzNvU2MvTXlNYzBSbGRaYkhaUTh4WVI1VUFROGxTWDZHM0lrUzlVdml6?=
+ =?utf-8?B?RFRTMWx3UlZBOVRXa3MwendOa1FvU0RFM21EYzNRZWFKaEF0alU5bFFqSjA0?=
+ =?utf-8?B?aHpJeXl3N1hlNGxXWVlEbk5mRWJmbGxHenVybkdub3kyK0UrV0x3QmpFdE9n?=
+ =?utf-8?B?Wm5yL3VQMStoc1hUN2VFRVkybTVDUXpoRkNyNDh1OTJsVVlaVDNEVWE3TDVy?=
+ =?utf-8?B?Qk1Yd0xNNVZja0NBS1JjL0NqRUZLUnpYdURWZjdWSU5Vb2dGVlRhRUtCVHJC?=
+ =?utf-8?B?dmgwMU14M1o2SUNpRFBJY0pWcTBUYWFmTGhwMGRIZk9kQy9xdFhmSG03V284?=
+ =?utf-8?B?UWwxNTBNWCtDZlM0ekZjaDVEMTFSS3FEOWhCYlBmeHZxK1hUL3E5QnpGRU8w?=
+ =?utf-8?B?R01pM2JKNGxHU0t1UkZyRlJCRTNrUm1VS2xwMXU5MXJNWXZrZEF1MzlDVUg3?=
+ =?utf-8?B?Tzc3TEFrRjkwclJkbCtIeVBmdGt5L0EwcEhlQm9vTjlqUTNZZ0Vsc1FUVW85?=
+ =?utf-8?B?RU1rYkJUOURVOGp4bU1XTG9wK3Z4R3ZNZ3VQV0FTSFlhQjZSdUNHM0YxZzVO?=
+ =?utf-8?B?MGxOTFl3SFFvTDhRcWVVaEluZmowclAza2VVZG9VWjg0OE43Y3drMHZkeThz?=
+ =?utf-8?B?TW9yNDFDKy9tbXBZc0pwOHFJQUg0M2hOT3dOVmZGQnFraS9UOWZxWHIxRzU2?=
+ =?utf-8?B?dVNDNFpPVDlvbmlsc1cwK2VCdG5KU2Q5TTQ1RzdrMmVQZlFlWGl1dDNtSGpy?=
+ =?utf-8?B?SVRaT1k5b0hmZ3UwUlgwTm1qc0JBeU5oQ0ZWdzJiVllIb1p6WHJJYjMwN3pX?=
+ =?utf-8?B?QlVYL2dIKzA5bHJ2RytHbW90U3prVkhoS1UyYkUvd3lzaWpVS3VwM0RMdXF6?=
+ =?utf-8?B?ejhuMHp5OVZDSElqRUxqR3FuZU1aZ1hIb3BxUnpCWHpwZzAwaGxub2RWZ0I3?=
+ =?utf-8?B?ZDQySktueTRwOUFBUWVtQXpsQ0YxWUhoVlk0SnhYYktvTHJkZm9IdFE3QWRE?=
+ =?utf-8?B?b1IyM21HR0JOL2pibVRmd2hjeUg2ajdQVS90MlBBYktwVWNIMUg5RzVGc2xN?=
+ =?utf-8?B?UmtKRWJ0L1g4R0hhZitsMnJIN21kOHNmM3NmK25kNEorTWFXS2R0UURpRXpH?=
+ =?utf-8?B?aWg0em95ekVFNTEwUExpSEd3UTE5c2c3Mlo2cFhoRVc1ZC95OUU4VmdJU2wz?=
+ =?utf-8?B?WmN1RWhObVJVcUhSd0FyNVRRSWJFMmgvaTFPcFZFSklnTHg2UGpPT0krV3R4?=
+ =?utf-8?B?b3JHM2lpTzhXWEwzT3AvUVpNeklBR0RadEYyeklvRnVzbUJSY2xpbTQydnJP?=
+ =?utf-8?B?KzdGaG1xZFhTNzNIa3RISFFlUFlhSTNPMnpOUjRoMm5Nd1YvV2g5RzRkNWtj?=
+ =?utf-8?Q?/04PmATS4n7IU9r07At9j32GjURXXgdOUYFq34J?=
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 63a13b36-334f-4abb-c9d2-08dc89592729
+X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB6959.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2024 14:25:18.4428 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEYPR06MB6684
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,316 +142,264 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh
+On 6/10/2024 9:11 AM, Sam Protsenko wrote:
+> Replace fifoth_val property with its fifo-depth counterpart in all DW
+> MMC drivers. fifo-depth is a common property used in upstream Linux
+> kernel. The FIFOTH register value will be calculated using fifo-depth
+> value in DW MMC core (dw_mmc.c). This change reduces code duplication in
+> platform drivers, and pulls common FIFOTH register value calculation
+> into core dw_mmc driver where it belongs.
+>
+> No functional change.
+>
+> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+> ---
+>   drivers/mmc/dw_mmc.c          | 21 +++++++++++++--------
+>   drivers/mmc/exynos_dw_mmc.c   | 10 +++++-----
+>   drivers/mmc/ftsdc010_mci.h    |  1 -
+>   drivers/mmc/hi6220_dw_mmc.c   |  7 +++----
+>   drivers/mmc/nexell_dw_mmc.c   |  5 +----
+>   drivers/mmc/rockchip_dw_mmc.c |  5 +----
+>   drivers/mmc/snps_dw_mmc.c     |  6 ++----
+>   drivers/mmc/socfpga_dw_mmc.c  |  4 ++--
+>   include/dwmmc.h               |  4 ++--
+>   9 files changed, 29 insertions(+), 34 deletions(-)
+>
+> diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
+> index 7aa3dbbe83ad..8af665a00222 100644
+> --- a/drivers/mmc/dw_mmc.c
+> +++ b/drivers/mmc/dw_mmc.c
+> @@ -218,8 +218,6 @@ static unsigned int dwmci_get_timeout(struct mmc *mmc, const unsigned int size)
+>   static int dwmci_data_transfer_fifo(struct dwmci_host *host,
+>   				    struct mmc_data *data, u32 mask)
+>   {
+> -	const u32 fifo_depth = (((host->fifoth_val & RX_WMARK_MASK) >>
+> -				 RX_WMARK_SHIFT) + 1) * 2;
+>   	const u32 int_rx = mask & (DWMCI_INTMSK_RXDR | DWMCI_INTMSK_DTO);
+>   	const u32 int_tx = mask & DWMCI_INTMSK_TXDR;
+>   	int ret = 0;
+> @@ -254,8 +252,8 @@ static int dwmci_data_transfer_fifo(struct dwmci_host *host,
+>   			if (ret < 0)
+>   				break;
+>   
+> -			len = fifo_depth - ((len >> DWMCI_FIFO_SHIFT) &
+> -					    DWMCI_FIFO_MASK);
+> +			len = host->fifo_depth - ((len >> DWMCI_FIFO_SHIFT) &
+> +						  DWMCI_FIFO_MASK);
+>   			len = min(size, len);
+>   			for (i = 0; i < len; i++)
+>   				dwmci_writel(host, DWMCI_DATA, *buf++);
+> @@ -656,16 +654,23 @@ static int dwmci_set_ios(struct mmc *mmc)
+>   
+>   static void dwmci_init_fifo(struct dwmci_host *host)
+>   {
+> -	if (!host->fifoth_val) {
+> +	u32 fifo_thr, fifoth_val;
+> +
+> +	if (!host->fifo_depth) {
+>   		u32 fifo_size;
+>   
+> +		/*
+> +		 * Automatically detect FIFO depth from FIFOTH register.
+> +		 * Power-on value of RX_WMark is FIFO_DEPTH-1.
+> +		 */
+>   		fifo_size = dwmci_readl(host, DWMCI_FIFOTH);
+>   		fifo_size = ((fifo_size & RX_WMARK_MASK) >> RX_WMARK_SHIFT) + 1;
+> -		host->fifoth_val = MSIZE(0x2) | RX_WMARK(fifo_size / 2 - 1) |
+> -				   TX_WMARK(fifo_size / 2);
+> +		host->fifo_depth = fifo_size;
+>   	}
+>   
+> -	dwmci_writel(host, DWMCI_FIFOTH, host->fifoth_val);
+> +	fifo_thr = host->fifo_depth / 2;
+> +	fifoth_val = MSIZE(0x2) | RX_WMARK(fifo_thr - 1) | TX_WMARK(fifo_thr);
+> +	dwmci_writel(host, DWMCI_FIFOTH, fifoth_val);
+>   }
+>   
+>   static void dwmci_init_dma(struct dwmci_host *host)
+> diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
+> index 2f849c43b129..14cb0c05cb55 100644
+> --- a/drivers/mmc/exynos_dw_mmc.c
+> +++ b/drivers/mmc/exynos_dw_mmc.c
+> @@ -151,8 +151,8 @@ static int do_dwmci_init(struct dwmci_host *host)
+>   	return exynos_dwmci_core_init(host);
+>   }
+>   
+> -static int exynos_dwmci_get_config(const void *blob, int node,
+> -				   struct dwmci_host *host,
+> +static int exynos_dwmci_get_config(struct udevice *dev, const void *blob,
+> +				   int node, struct dwmci_host *host,
+>   				   struct dwmci_exynos_priv_data *priv)
+>   {
+>   	int err = 0;
+> @@ -201,7 +201,7 @@ static int exynos_dwmci_get_config(const void *blob, int node,
+>   			priv->sdr_timing = DWMMC_MMC2_SDR_TIMING_VAL;
+>   	}
+>   
+> -	host->fifoth_val = fdtdec_get_int(blob, node, "fifoth_val", 0);
+> +	host->fifo_depth = dev_read_u32_default(dev, "fifo-depth", 0);
+>   	host->bus_hz = fdtdec_get_int(blob, node, "bus_hz", 0);
+>   	host->div = fdtdec_get_int(blob, node, "div", 0);
+>   
+> @@ -217,8 +217,8 @@ static int exynos_dwmmc_probe(struct udevice *dev)
+>   	struct dwmci_host *host = &priv->host;
+>   	int err;
+>   
+> -	err = exynos_dwmci_get_config(gd->fdt_blob, dev_of_offset(dev), host,
+> -				      priv);
+> +	err = exynos_dwmci_get_config(dev, gd->fdt_blob, dev_of_offset(dev),
+> +				      host, priv);
+>   	if (err)
+>   		return err;
+>   	err = do_dwmci_init(host);
+> diff --git a/drivers/mmc/ftsdc010_mci.h b/drivers/mmc/ftsdc010_mci.h
+> index 782d92be2f5f..36187cfa04f6 100644
+> --- a/drivers/mmc/ftsdc010_mci.h
+> +++ b/drivers/mmc/ftsdc010_mci.h
+> @@ -28,7 +28,6 @@ struct ftsdc010_chip {
+>   	int dev_index;
+>   	int dev_id;
+>   	int buswidth;
+> -	u32 fifoth_val;
+>   	struct mmc *mmc;
+>   	void *priv;
+>   	bool fifo_mode;
+> diff --git a/drivers/mmc/hi6220_dw_mmc.c b/drivers/mmc/hi6220_dw_mmc.c
+> index dc0210402bd2..e0b473f3f55c 100644
+> --- a/drivers/mmc/hi6220_dw_mmc.c
+> +++ b/drivers/mmc/hi6220_dw_mmc.c
+> @@ -37,7 +37,7 @@ struct hi6220_dwmmc_priv_data {
+>   struct hisi_mmc_data {
+>   	unsigned int clock;
+>   	bool use_fifo;
+> -	u32 fifoth_val;
+> +	u32 fifo_depth;
+>   };
+>   
+>   static int hi6220_dwmmc_of_to_plat(struct udevice *dev)
+> @@ -126,7 +126,7 @@ static int hi6220_dwmmc_probe(struct udevice *dev)
+>   	host->mmc = &plat->mmc;
+>   
+>   	host->fifo_mode = mmc_data->use_fifo;
+> -	host->fifoth_val = mmc_data->fifoth_val;
+> +	host->fifo_depth = mmc_data->fifo_depth;
+>   	host->mmc->priv = &priv->host;
+>   	upriv->mmc = host->mmc;
+>   	host->mmc->dev = dev;
+> @@ -159,8 +159,7 @@ static const struct hisi_mmc_data hi6220_mmc_data = {
+>   static const struct hisi_mmc_data hi3798mv2x_mmc_data = {
+>   	.clock = 50000000,
+>   	.use_fifo = false,
+> -	// FIFO depth is 256
+> -	.fifoth_val = MSIZE(4) | RX_WMARK(0x7f) | TX_WMARK(0x80),
+> +	.fifo_depth = 256,
+>   };
+>   
 
-On Mon, 10 Jun 2024 at 15:57, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
->
-> On Mon, 10 Jun 2024 at 18:17, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > On Mon, 10 Jun 2024 at 15:20, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > >
-> > > hi Ilias,
-> > >
-> > > On Mon, 10 Jun 2024 at 17:34, Ilias Apalodimas
-> > > <ilias.apalodimas@linaro.org> wrote:
-> > > >
-> > > > Hi Sughosh
-> > > >
-> > > >
-> > > > On Fri, 7 Jun 2024 at 21:54, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > > > >
-> > > > > Allow for resizing of LMB regions if the region attributes match. The
-> > > > > current code returns a failure status on detecting an overlapping
-> > > > > address. This worked up until now since the LMB calls were not
-> > > > > persistent and global -- the LMB memory map was specific and private
-> > > > > to a given caller of the LMB API's.
-> > > > >
-> > > > > With the change in the LMB code to make the LMB reservations
-> > > > > persistent, there needs to be a check on whether the memory region can
-> > > > > be resized, and then do it if so. To distinguish between memory that
-> > > > > cannot be resized, add a new flag, LMB_NOOVERWRITE. Reserving a region
-> > > > > of memory with this attribute would indicate that the region cannot be
-> > > > > resized.
-> > > >
-> > > > Can you think of a memory region that needs to be protected from resizing?
-> > >
-> > > Actually, I think I could use a better term instead of 'resize'. The
-> > > aim of this patch is to allow re-allocation/re-reservation of the same
-> > > region of memory -- this will only be relevant for the LMB
-> > > reservations, as these are used for loading images into memory. All
-> > > other allocations(EFI currently) are true allocations in that these
-> > > should not get overwritten at all. Memory once allocated, say for
-> > > loading an EFI image, cannot be re-requested.
-> > >
-> > >
-> > > > I think we should design this a bit differently.  For example, think
-> > > > of someone loading a file in a memory region and then a subsystem
-> > > > trying to resize its reserved memory overwriting that region. Instead
-> > > > of this flag why don't we add
-> > > > - A flag that indicates whether this region can be re-used (IOW
-> > > > overwrites it), but only if the 'subsytem id' defined below matches
-> > > > - a u32 that indicates the subsystem ID that initiated the transaction
-> > > > -- e.g EFI, load command, U-Boot core .. etc
-> > > >
-> > > > Resizing can be enabled unconditionally in that case as long as there
-> > > > is enough space. The only requirement would be that the request comes
-> > > > from the same subsystem that reserved the memory in the beginning
-> > >
-> > > Like I mentioned above, resizing(or rather re-allocations) should only
-> > > be allowed for the LMB subsystem. Any other module should not be
-> > > returned an already allocated address. Which is why I mark any memory
-> > > map update coming from the EFI module as no-overwrite.
-> >
-> > And what happens if someone tries to overwrite 'load' memory? Won't
-> > you still corrupt whatever is loaded on that region as it's not marked
-> > for protection?
->
-> Yes, but that is the expected behavior in U-Boot for LMB memory.
-> Consider the following flow,
->
-> 1) load hostfs - $some_addr $some_image
-> 2) fs.write $some_addr $some_destination $filesize
-> 3) load hostfs - $some_addr $some_other_image
-> 4) fs.write $some_addr $some_other_destination $filesize
->
-> The above flow is very much valid, and this exercises the same region
-> of LMB memory. Which is why we need to allow re-using the same memory
-> address for LMB. This worked up until now since all LMB
-> allocations/reservations were private. This is user visible behaviour,
-> and used in many scripts used by platforms to read and write files. So
-> even after making the LMB memory map global and persistent, this
-> aspect of re-use of LMB memory must be maintained.
 
-I am not talking about this. I haven't gone through all the patches
-yet, so I might be missing something but...
-What if a user loads a file to boot and then an EFI subsystem decides
-to allocate memory -- e.g the EventLog and that allocation routine
-returns memory within the space you just loaded the binary from? Yes
-memory should be overwritten to preserve the current behavior, but
-only if you perform the same action/command
+For HiSilicon changes in hi6220_dw_mmc.c,
 
-Thanks
-/Ilias
->
-> -sughosh
->
-> >
-> > /Ilias
-> > >
-> > > -sughosh
-> > > >
-> > > > Thanks
-> > > > /Ilias
-> > > >
-> > > > >
-> > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > > > ---
-> > > > >  include/lmb.h |   1 +
-> > > > >  lib/lmb.c     | 120 ++++++++++++++++++++++++++++++++++++++++++++------
-> > > > >  2 files changed, 107 insertions(+), 14 deletions(-)
-> > > > >
-> > > > > diff --git a/include/lmb.h b/include/lmb.h
-> > > > > index 03bce2a50c..1d4cd255d2 100644
-> > > > > --- a/include/lmb.h
-> > > > > +++ b/include/lmb.h
-> > > > > @@ -20,6 +20,7 @@
-> > > > >  enum lmb_flags {
-> > > > >         LMB_NONE                = 0x0,
-> > > > >         LMB_NOMAP               = 0x4,
-> > > > > +       LMB_NOOVERWRITE         = 0x8,
-> > > > >  };
-> > > > >
-> > > > >  /**
-> > > > > diff --git a/lib/lmb.c b/lib/lmb.c
-> > > > > index de5a2cf23b..0a4f3d5bcd 100644
-> > > > > --- a/lib/lmb.c
-> > > > > +++ b/lib/lmb.c
-> > > > > @@ -260,12 +260,88 @@ void lmb_add_memory(struct bd_info *bd)
-> > > > >         }
-> > > > >  }
-> > > > >
-> > > > > +static bool lmb_region_flags_match(struct lmb_region *rgn, unsigned long r1,
-> > > > > +                                  enum lmb_flags flags)
-> > > > > +{
-> > > > > +       return rgn->region[r1].flags == flags;
-> > > > > +}
-> > > > > +
-> > > > > +static long lmb_merge_overlap_regions(struct lmb_region *rgn, unsigned long i,
-> > > > > +                                     phys_addr_t base, phys_size_t size,
-> > > > > +                                     enum lmb_flags flags)
-> > > > > +{
-> > > > > +       phys_size_t rgnsize;
-> > > > > +       unsigned long rgn_cnt, idx;
-> > > > > +       phys_addr_t rgnbase, rgnend;
-> > > > > +       phys_addr_t mergebase, mergeend;
-> > > > > +
-> > > > > +       rgn_cnt = 0;
-> > > > > +       idx = i;
-> > > > > +       /*
-> > > > > +        * First thing to do is to identify how many regions does
-> > > > > +        * the requested region overlap.
-> > > > > +        * If the flags match, combine all these overlapping
-> > > > > +        * regions into a single region, and remove the merged
-> > > > > +        * regions.
-> > > > > +        */
-> > > > > +       while (idx < rgn->cnt - 1) {
-> > > > > +               rgnbase = rgn->region[idx].base;
-> > > > > +               rgnsize = rgn->region[idx].size;
-> > > > > +
-> > > > > +               if (lmb_addrs_overlap(base, size, rgnbase,
-> > > > > +                                     rgnsize)) {
-> > > > > +                       if (!lmb_region_flags_match(rgn, idx, flags))
-> > > > > +                               return -1;
-> > > > > +                       rgn_cnt++;
-> > > > > +                       idx++;
-> > > > > +               }
-> > > > > +       }
-> > > > > +
-> > > > > +       /* The merged region's base and size */
-> > > > > +       rgnbase = rgn->region[i].base;
-> > > > > +       mergebase = min(base, rgnbase);
-> > > > > +       rgnend = rgn->region[idx].base + rgn->region[idx].size;
-> > > > > +       mergeend = max(rgnend, (base + size));
-> > > > > +
-> > > > > +       rgn->region[i].base = mergebase;
-> > > > > +       rgn->region[i].size = mergeend - mergebase;
-> > > > > +
-> > > > > +       /* Now remove the merged regions */
-> > > > > +       while (--rgn_cnt)
-> > > > > +               lmb_remove_region(rgn, i + 1);
-> > > > > +
-> > > > > +       return 0;
-> > > > > +}
-> > > > > +
-> > > > > +static long lmb_resize_regions(struct lmb_region *rgn, unsigned long i,
-> > > > > +                              phys_addr_t base, phys_size_t size,
-> > > > > +                              enum lmb_flags flags)
-> > > > > +{
-> > > > > +       long ret = 0;
-> > > > > +       phys_addr_t rgnend;
-> > > > > +
-> > > > > +       if (i == rgn->cnt - 1 ||
-> > > > > +               base + size < rgn->region[i + 1].base) {
-> > > > > +               if (!lmb_region_flags_match(rgn, i, flags))
-> > > > > +                       return -1;
-> > > > > +
-> > > > > +               rgnend = rgn->region[i].base + rgn->region[i].size;
-> > > > > +               rgn->region[i].base = min(base, rgn->region[i].base);
-> > > > > +               rgnend = max(base + size, rgnend);
-> > > > > +               rgn->region[i].size = rgnend - rgn->region[i].base;
-> > > > > +       } else {
-> > > > > +               ret = lmb_merge_overlap_regions(rgn, i, base, size, flags);
-> > > > > +       }
-> > > > > +
-> > > > > +       return ret;
-> > > > > +}
-> > > > > +
-> > > > >  /* This routine called with relocation disabled. */
-> > > > >  static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
-> > > > >                                  phys_size_t size, enum lmb_flags flags)
-> > > > >  {
-> > > > >         unsigned long coalesced = 0;
-> > > > > -       long adjacent, i;
-> > > > > +       long ret, i;
-> > > > >
-> > > > >         if (rgn->cnt == 0) {
-> > > > >                 rgn->region[0].base = base;
-> > > > > @@ -290,23 +366,32 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
-> > > > >                                 return -1; /* regions with new flags */
-> > > > >                 }
-> > > > >
-> > > > > -               adjacent = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
-> > > > > -               if (adjacent > 0) {
-> > > > > +               ret = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
-> > > > > +               if (ret > 0) {
-> > > > >                         if (flags != rgnflags)
-> > > > >                                 break;
-> > > > >                         rgn->region[i].base -= size;
-> > > > >                         rgn->region[i].size += size;
-> > > > >                         coalesced++;
-> > > > >                         break;
-> > > > > -               } else if (adjacent < 0) {
-> > > > > +               } else if (ret < 0) {
-> > > > >                         if (flags != rgnflags)
-> > > > >                                 break;
-> > > > >                         rgn->region[i].size += size;
-> > > > >                         coalesced++;
-> > > > >                         break;
-> > > > >                 } else if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
-> > > > > -                       /* regions overlap */
-> > > > > -                       return -1;
-> > > > > +                       if (flags == LMB_NONE) {
-> > > > > +                               ret = lmb_resize_regions(rgn, i, base, size,
-> > > > > +                                                        flags);
-> > > > > +                               if (ret < 0)
-> > > > > +                                       return -1;
-> > > > > +
-> > > > > +                               coalesced++;
-> > > > > +                               break;
-> > > > > +                       } else {
-> > > > > +                               return -1;
-> > > > > +                       }
-> > > > >                 }
-> > > > >         }
-> > > > >
-> > > > > @@ -448,7 +533,7 @@ static phys_addr_t lmb_align_down(phys_addr_t addr, phys_size_t size)
-> > > > >  }
-> > > > >
-> > > > >  static phys_addr_t __lmb_alloc_base(phys_size_t size, ulong align,
-> > > > > -                                   phys_addr_t max_addr)
-> > > > > +                                   phys_addr_t max_addr, enum lmb_flags flags)
-> > > > >  {
-> > > > >         long i, rgn;
-> > > > >         phys_addr_t base = 0;
-> > > > > @@ -498,7 +583,7 @@ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr)
-> > > > >  {
-> > > > >         phys_addr_t alloc;
-> > > > >
-> > > > > -       alloc = __lmb_alloc_base(size, align, max_addr);
-> > > > > +       alloc = __lmb_alloc_base(size, align, max_addr, LMB_NONE);
-> > > > >
-> > > > >         if (alloc == 0)
-> > > > >                 printf("ERROR: Failed to allocate 0x%lx bytes below 0x%lx.\n",
-> > > > > @@ -507,11 +592,8 @@ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr)
-> > > > >         return alloc;
-> > > > >  }
-> > > > >
-> > > > > -/*
-> > > > > - * Try to allocate a specific address range: must be in defined memory but not
-> > > > > - * reserved
-> > > > > - */
-> > > > > -phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
-> > > > > +static phys_addr_t __lmb_alloc_addr(phys_addr_t base, phys_size_t size,
-> > > > > +                                   enum lmb_flags flags)
-> > > > >  {
-> > > > >         long rgn;
-> > > > >
-> > > > > @@ -526,13 +608,23 @@ phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
-> > > > >                                       lmb.memory.region[rgn].size,
-> > > > >                                       base + size - 1, 1)) {
-> > > > >                         /* ok, reserve the memory */
-> > > > > -                       if (lmb_reserve(base, size) >= 0)
-> > > > > +                       if (lmb_reserve_flags(base, size, flags) >= 0)
-> > > > >                                 return base;
-> > > > >                 }
-> > > > >         }
-> > > > > +
-> > > > >         return 0;
-> > > > >  }
-> > > > >
-> > > > > +/*
-> > > > > + * Try to allocate a specific address range: must be in defined memory but not
-> > > > > + * reserved
-> > > > > + */
-> > > > > +phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
-> > > > > +{
-> > > > > +       return __lmb_alloc_addr(base, size, LMB_NONE);
-> > > > > +}
-> > > > > +
-> > > > >  /* Return number of bytes from a given address that are free */
-> > > > >  phys_size_t lmb_get_free_size(phys_addr_t addr)
-> > > > >  {
-> > > > > --
-> > > > > 2.34.1
-> > > > >
+
+Reviewed-by: Yang Xiwen <forbidden405@outlook.com>
+
+
+>   static const struct udevice_id hi6220_dwmmc_ids[] = {
+> diff --git a/drivers/mmc/nexell_dw_mmc.c b/drivers/mmc/nexell_dw_mmc.c
+> index 2723e4887cf7..aad848ca2825 100644
+> --- a/drivers/mmc/nexell_dw_mmc.c
+> +++ b/drivers/mmc/nexell_dw_mmc.c
+> @@ -187,10 +187,7 @@ static int nexell_dwmmc_probe(struct udevice *dev)
+>   	struct dwmci_host *host = &priv->host;
+>   	struct udevice *pwr_dev __maybe_unused;
+>   
+> -	host->fifoth_val = MSIZE(0x2) |
+> -		RX_WMARK(priv->fifo_size / 2 - 1) |
+> -		TX_WMARK(priv->fifo_size / 2);
+> -
+> +	host->fifo_depth = priv->fifo_size;
+>   	host->fifo_mode = priv->fifo_mode;
+>   
+>   	dwmci_setup_cfg(&plat->cfg, host, priv->max_freq, priv->min_freq);
+> diff --git a/drivers/mmc/rockchip_dw_mmc.c b/drivers/mmc/rockchip_dw_mmc.c
+> index ad4529d6afa8..d52ae9cb6fd8 100644
+> --- a/drivers/mmc/rockchip_dw_mmc.c
+> +++ b/drivers/mmc/rockchip_dw_mmc.c
+> @@ -139,10 +139,7 @@ static int rockchip_dwmmc_probe(struct udevice *dev)
+>   	if (ret < 0)
+>   		return ret;
+>   #endif
+> -	host->fifoth_val = MSIZE(0x2) |
+> -		RX_WMARK(priv->fifo_depth / 2 - 1) |
+> -		TX_WMARK(priv->fifo_depth / 2);
+> -
+> +	host->fifo_depth = priv->fifo_depth;
+>   	host->fifo_mode = priv->fifo_mode;
+>   
+>   #if CONFIG_IS_ENABLED(MMC_PWRSEQ)
+> diff --git a/drivers/mmc/snps_dw_mmc.c b/drivers/mmc/snps_dw_mmc.c
+> index 0134399e3934..4a72f41ef16f 100644
+> --- a/drivers/mmc/snps_dw_mmc.c
+> +++ b/drivers/mmc/snps_dw_mmc.c
+> @@ -82,7 +82,7 @@ static int snps_dwmmc_of_to_plat(struct udevice *dev)
+>   	host->ioaddr = dev_read_addr_ptr(dev);
+>   
+>   	/*
+> -	 * If fifo-depth is unset don't set fifoth_val - we will try to
+> +	 * If fifo-depth is unset don't set fifo_depth - we will try to
+>   	 * auto detect it.
+>   	 */
+>   	ret = dev_read_u32(dev, "fifo-depth", &fifo_depth);
+> @@ -90,9 +90,7 @@ static int snps_dwmmc_of_to_plat(struct udevice *dev)
+>   		if (fifo_depth < FIFO_MIN || fifo_depth > FIFO_MAX)
+>   			return -EINVAL;
+>   
+> -		host->fifoth_val = MSIZE(0x2) |
+> -				   RX_WMARK(fifo_depth / 2 - 1) |
+> -				   TX_WMARK(fifo_depth / 2);
+> +		host->fifo_depth = fifo_depth;
+>   	}
+>   
+>   	host->buswidth = dev_read_u32_default(dev, "bus-width", 4);
+> diff --git a/drivers/mmc/socfpga_dw_mmc.c b/drivers/mmc/socfpga_dw_mmc.c
+> index 387cb8b6b50a..f795472d10f7 100644
+> --- a/drivers/mmc/socfpga_dw_mmc.c
+> +++ b/drivers/mmc/socfpga_dw_mmc.c
+> @@ -135,8 +135,8 @@ static int socfpga_dwmmc_of_to_plat(struct udevice *dev)
+>   	 * We only have one dwmmc block on gen5 SoCFPGA.
+>   	 */
+>   	host->dev_index = 0;
+> -	host->fifoth_val = MSIZE(0x2) |
+> -		RX_WMARK(fifo_depth / 2 - 1) | TX_WMARK(fifo_depth / 2);
+> +
+> +	host->fifo_depth = fifo_depth;
+>   	priv->drvsel = fdtdec_get_uint(gd->fdt_blob, dev_of_offset(dev),
+>   				       "drvsel", 3);
+>   	priv->smplsel = fdtdec_get_uint(gd->fdt_blob, dev_of_offset(dev),
+> diff --git a/include/dwmmc.h b/include/dwmmc.h
+> index de18fda68ac8..7bb456e792b4 100644
+> --- a/include/dwmmc.h
+> +++ b/include/dwmmc.h
+> @@ -187,7 +187,7 @@ struct dwmci_idmac_regs {
+>    * @dev_index:	Arbitrary device index for use by controller
+>    * @dev_id:	Arbitrary device ID for use by controller
+>    * @buswidth:	Bus width in bits (8 or 4)
+> - * @fifoth_val:	Value for FIFOTH register (or 0 to leave unset)
+> + * @fifo_depth:	Depth of FIFO, bytes (or 0 for automatic detection)
+>    * @mmc:	Pointer to generic MMC structure for this device
+>    * @priv:	Private pointer for use by controller
+>    * @dma_64bit_address: Whether DMA supports 64-bit address mode or not
+> @@ -204,7 +204,7 @@ struct dwmci_host {
+>   	int dev_index;
+>   	int dev_id;
+>   	int buswidth;
+> -	u32 fifoth_val;
+> +	u32 fifo_depth;
+>   	struct mmc *mmc;
+>   	void *priv;
+>   
+
+
+-- 
+Regards,
+Yang Xiwen
+
