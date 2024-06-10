@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1CC7C27C5E
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 13:36:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AB7DC27C5E
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 13:53:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3AC98885A3;
-	Mon, 10 Jun 2024 15:34:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 7C106884C7;
+	Mon, 10 Jun 2024 15:53:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="cwSVKptT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E1A+epdq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D13D8852C; Mon, 10 Jun 2024 15:34:17 +0200 (CEST)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 05D5188532; Mon, 10 Jun 2024 15:53:17 +0200 (CEST)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B81A8855C
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 15:34:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F2DC884C7
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 15:53:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1718026451; x=1720618451;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZxYb4nqJ/JGEjoQ+A18NrA/NKwpqV0iQnJJpAXa+lYw=;
- b=cwSVKptTcG8N3CCwbB7bhBHYmTrxLSZVm/iSb7+DgpZ/ds4Msksyz/lV8RVxQ3vQ
- pzfa/78d99GgYdxCBNnx7FAGvvvlIRBpWQGUIP8/1NcM6/jeKKWPwJKmyIrKBDOh
- 4g2LCG1IfQiXaLjYhEkaxovfYjCEO+icKCh/G9nZ5rc=;
-X-AuditID: ac14000a-03251700000021bc-f6-666700d30e99
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 4C.7D.08636.3D007666;
- Mon, 10 Jun 2024 15:34:11 +0200 (CEST)
-Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
- (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 10 Jun
- 2024 15:34:11 +0200
-From: Wadim Egorov <w.egorov@phytec.de>
-To: <u-boot@lists.phytec.de>, <upstream@lists.phytec.de>,
- <u-boot@lists.denx.de>
-CC: <trini@konsulko.com>, <d.schultz@phytec.de>, <nmorrisson@phytec.com>
-Subject: [PATCH 13/13] board: phytec: phycore-am62x: Use memory nodes in
- higher boot stages
-Date: Mon, 10 Jun 2024 15:33:52 +0200
-Message-ID: <20240610133352.2473414-14-w.egorov@phytec.de>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240610133352.2473414-1-w.egorov@phytec.de>
-References: <20240610133352.2473414-1-w.egorov@phytec.de>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6b060f0f48aso14055806d6.1
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 06:53:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1718027593; x=1718632393; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=vKl1PhriwrkewtKj4zOcWPapEJ8z0xyX89xqFo/JqN4=;
+ b=E1A+epdqexv41Vh2s+4ljSFUNh/eTZh+nycYnBhkcNrPdR2iG9cE/XsK3R5eN3Ycem
+ dwFjKd2ZaXVG7DXItoW99w2uAtfrJug/JxnszcYeIJHh3fsXTWztxNZFx5vVLpT85zwB
+ zlR90e8juU25Hr2P+dxuquu5/fx8dceY9d0SA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718027593; x=1718632393;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vKl1PhriwrkewtKj4zOcWPapEJ8z0xyX89xqFo/JqN4=;
+ b=JFrX15k+f0Kp9znB68PpNkKgmjSjP5sQA/IrdAzutnwC1pyJlQkoD6ltaTabQGTEHf
+ hhV450x+1HhNRJcdzAeELNB/d+/yvNXt1BzBbkNwHZh7xJv36cuzcPSeWV91/2/lUK+n
+ beMLj2QKjacwjZevKX88LKjM1XkeRYWJltljSABG8QiMUgOABK1gUEL68IOCaTW7cUuQ
+ zOt9gIua6Yy7J9QWFSxnkW0sbAcICPJ+Ao5B42wDf8pavF9V82HrnSlAaLzZua4DglJ/
+ pBS2w+PUffSQiS+JRCKwoVJDrv672na8VFz7J2nUHJLaJcQBk66gOuN5W6Hp7efCWRrq
+ 5D0Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUflC1Kv3Rc8vA7GLwmrNbr/nsSmFt3Hj7TN2PhBW3FE32gEAuK17vfrF2OkgCqmkq3aagDf4rBAyr5czM3xyyy1upidw==
+X-Gm-Message-State: AOJu0YxJToy8FuJD15FY3oc2gEU4zu3DIn7cuMUxVg7AQcFk/gd+3U0W
+ 8F6fXGxPkVb2bag26QTj4wf4R/eOB/EsMBcsrJygxMEKq7q/mAUZCpirF25xkHpd8pkSIsU3jRZ
+ nV/buMfwl0dtd9Bnu4f5fJZOoZ+Y+kk61GOOD
+X-Google-Smtp-Source: AGHT+IE1R1kAXABqVr3c8U2D1hcT7sOrJ+2r/GrGyKnAp72aDMlvvbBD87aV+1m1hCLfm6ULkzrg8QQVppkbN2SCG/k=
+X-Received: by 2002:a05:6214:3c9e:b0:6af:2a4e:140e with SMTP id
+ 6a1803df08f44-6b059f2fa97mr127556876d6.65.1718027593280; Mon, 10 Jun 2024
+ 06:53:13 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrELMWRmVeSWpSXmKPExsWyRpKBR/cyQ3qaQX+PvMWHxs1sFlMnbWa3
- eLu3k93iXd9+Jovud+oOrB6vDqxi9zh7ZwejR393C6vHn4vvWANYorhsUlJzMstSi/TtErgy
- jk+5wlzwlL/i6J3QBsapvF2MnBwSAiYS36a8Z+1i5OIQEljCJPF3/md2COcxo8SePcuZQKrY
- BNQl7mz4xgpiiwgESfRe+sQIYjMLeEhs/bsBLC4sEC1x6dFiFhCbRUBV4un3eUC9HBy8AlYS
- t1eHQCyTl5h56Ts7iM0JFP6xZi9Yq5CApcSiT2vAWnkFBCVOznzCAjFeXqJ562xmCFtC4uCL
- F8wQ9fISLy4tZ4GZOe3ca2YIO1Ri65ftTBMYhWYhGTULyahZSEYtYGRexSiUm5mcnVqUma1X
- kFFZkpqsl5K6iREU7iIMXDsY++Z4HGJk4mA8xCjBwawkwiuUkZwmxJuSWFmVWpQfX1Sak1p8
- iFGag0VJnHd1R3CqkEB6YklqdmpqQWoRTJaJg1OqgbHay+/WXBfnrsgf2T6zb+qUtbvcTYjd
- 2b9mUsPKV07zsyIPf2VWDRSXc/jyx26yz+sefwOze0UGN39cyVFesle8Ms3E4d19tcLN9k8n
- snPZrRaJmq10IIpR+nfe7a1XbkwqqPOf75j6h+WXZnfu91335B/Pm/+58c2au07nd3Foa/zn
- lVMt6FBiKc5INNRiLipOBADGkirMZQIAAA==
+References: <20240610091057.64463-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240610091057.64463-1-heinrich.schuchardt@canonical.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 10 Jun 2024 07:53:02 -0600
+Message-ID: <CAFLszTgcnftK=GqZ0LGue2Y8-YkRhOKzPuc4Yf1CvhzAGO+MTg@mail.gmail.com>
+Subject: Re: [PATCH v3 0/9] efi_loader: improve device-tree loading
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, 
+ Shantur Rathore <i@shantur.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Raymond Mao <raymond.mao@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Bin Meng <bmeng@tinylab.org>, Mark Kettenis <kettenis@openbsd.org>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,71 +89,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is no need to reread the EEPROM multiple times in different stages
-to detect the RAM size. We can do this once at an early stage and let
-higher stages decode memory nodes using fdtdec.
-Make sure to pass fixup memory nodes before passing to u-boot stage.
+Hi Heinrich,
 
-Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
----
- board/phytec/phycore_am62x/phycore-am62x.c | 30 +++++++++++++++++++++-
- 1 file changed, 29 insertions(+), 1 deletion(-)
+On Mon, 10 Jun 2024 at 03:11, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> In U-Boot EFI boot options can already specify both an EFI binary and
+> an initrd. With this series we can additionally define the matching
+> device-tree to be loaded in the boot option.
+>
+> With the last patch the boot manager will fall back the device-tree
+> specified by $fdtfile in directories '/dtb/', '/', or '/dtb/current/'
+> on the boot device if no device-tree is specified in the boot
+> option or via a bootefi command parameter.
+>
+> v3:
+>         Add missing '@' in EFI_LP_DP_PART_FDT description.
+>         Use calloc() instead of malloc() in load_fdt_from_load_option().
+>         Add missing '@' in load_fdt_from_load_option function description
+>         Rename struct efi_initrd_dp to efi_lo_dp_prefix.
+>
+> v2:
+>         Update efi_dp_concat() instead of new function efi_dp_merge().
+>         Carve out a function efi_load_option_dp_join() which we can
+>         use both for the eficonfig and the efidebug command.
+>         Rename variables id_dp, final_dp_size.
+>         Rename create_initrd_dp() to create_lo_dp_part().
+>         Use enum as parameter for create_lo_dp_part().
+>         Put all related changes into one patch.
+>
+> Heinrich Schuchardt (8):
+>   efi_loader: allow concatenation with contained end node
+>   cmd: eficonfig: add support for setting fdt
+>   cmd: efidebug: add support for setting fdt
+>   efi_loader: load device-tree specified in boot option
+>   efi_loader: move distro_efi_get_fdt_name()
+>   efi_loader: return binary from efi_dp_from_lo()
+>   efi_loader: export efi_load_image_from_path
+>   efi_loader: load distro dtb in bootmgr
+>
+>  boot/bootmeth_efi.c                        |  60 +---------
+>  cmd/eficonfig.c                            |  83 +++++++++----
+>  cmd/efidebug.c                             | 130 +++++++++++++++------
+>  include/efi_loader.h                       |  24 +++-
+>  lib/efi_loader/Makefile                    |   1 +
+>  lib/efi_loader/efi_bootbin.c               |   2 +-
+>  lib/efi_loader/efi_bootmgr.c               |  75 +++++++++++-
+>  lib/efi_loader/efi_boottime.c              |   3 +-
+>  lib/efi_loader/efi_device_path.c           |  40 ++++---
+>  lib/efi_loader/efi_device_path_utilities.c |   2 +-
+>  lib/efi_loader/efi_fdt.c                   | 117 +++++++++++++++++++
+>  lib/efi_loader/efi_helper.c                |  44 +++++++
+>  12 files changed, 445 insertions(+), 136 deletions(-)
+>  create mode 100644 lib/efi_loader/efi_fdt.c
+>
 
-diff --git a/board/phytec/phycore_am62x/phycore-am62x.c b/board/phytec/phycore_am62x/phycore-am62x.c
-index 35e1bb96b8d..9f6bc736cbb 100644
---- a/board/phytec/phycore_am62x/phycore-am62x.c
-+++ b/board/phytec/phycore_am62x/phycore-am62x.c
-@@ -47,7 +47,12 @@ static u8 phytec_get_am62_ddr_size_default(void)
- 
- int dram_init(void)
- {
--	u8 ram_size = phytec_get_am62_ddr_size_default();
-+	u8 ram_size;
-+
-+	if (!IS_ENABLED(CONFIG_CPU_V7R))
-+		return fdtdec_setup_mem_size_base();
-+
-+	ram_size = phytec_get_am62_ddr_size_default();
- 
- 	/*
- 	 * HACK: ddrss driver support 2GB RAM by default
-@@ -92,6 +97,9 @@ int dram_init_banksize(void)
- {
- 	u8 ram_size;
- 
-+	if (!IS_ENABLED(CONFIG_CPU_V7R))
-+		return fdtdec_setup_memory_banksize();
-+
- 	ram_size = phytec_get_am62_ddr_size_default();
- 	switch (ram_size) {
- 	case EEPROM_RAM_SIZE_1GB:
-@@ -174,6 +182,26 @@ int do_board_detect(void)
- }
- #endif
- 
-+#if IS_ENABLED(CONFIG_SPL_BUILD)
-+void spl_perform_fixups(struct spl_image_info *spl_image)
-+{
-+	u64 start[CONFIG_NR_DRAM_BANKS];
-+	u64 size[CONFIG_NR_DRAM_BANKS];
-+	int bank;
-+	int ret;
-+
-+	dram_init();
-+	dram_init_banksize();
-+
-+	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-+		start[bank] = gd->bd->bi_dram[bank].start;
-+		size[bank] = gd->bd->bi_dram[bank].size;
-+	}
-+
-+	ret = fdt_fixup_memory_banks(spl_image->fdt_addr, start, size, CONFIG_NR_DRAM_BANKS);
-+}
-+#endif
-+
- #define CTRLMMR_USB0_PHY_CTRL   0x43004008
- #define CTRLMMR_USB1_PHY_CTRL   0x43004018
- #define CORE_VOLTAGE            0x80000000
--- 
-2.34.1
+Somewhat related, what work has been done to support FIT, or to locate
+a DT using the compatible string?
 
+Regards,
+Simon
