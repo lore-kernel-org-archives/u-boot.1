@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB1B8C27C5E
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 06:44:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 836BFC27C5E
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 06:46:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D2AB8844B;
-	Mon, 10 Jun 2024 08:44:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A26918848F;
+	Mon, 10 Jun 2024 08:46:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CqESdTEA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sn16VVMb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46E798848F; Mon, 10 Jun 2024 08:44:29 +0200 (CEST)
+ id 6D823884A4; Mon, 10 Jun 2024 08:46:00 +0200 (CEST)
 Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
  [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24CD38826E
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 08:44:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 618B88826E
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 08:45:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
 Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-57c72d6d5f3so1612727a12.1
- for <u-boot@lists.denx.de>; Sun, 09 Jun 2024 23:44:27 -0700 (PDT)
+ 4fb4d7f45d1cf-57a677d3d79so9314512a12.1
+ for <u-boot@lists.denx.de>; Sun, 09 Jun 2024 23:45:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718001866; x=1718606666; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1718001958; x=1718606758; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nNd8e2b06rJCtpM7ekZh2Y07CNjakDOrj89xIV6OniY=;
- b=CqESdTEAfu15ltMMeEZzg7Y4ve39zylhk8WuD5jT4x2ODn+f6uKxHbFF/+Rl4dQX/J
- k8KOk7jpscc8niVbWFdF43w2J1KR+sbdnBEACxCLbuUDmINPQn04fWUbzbZCLWZhuEH+
- aplJ7ADa6glKXJp7/pR67GnL4GQHjUR3f/PkpZbvFnhznw5A9fsYBd07rTZcYPcHIb7h
- v4lQl5abdhJyc5jym57eb1o182vKXJ/Ae+yrQ7FrSPpzhOju6e8pqwgdp3g/hODug+24
- 2EyN3aFMo9G6LZDlgCKq0u9X3yC8GbD2dm8sGTUgS79/TGdbY7YEAJb+asFV/WZZzoba
- Vd+Q==
+ bh=VRaUdjBv27tRnvPXj9GASsl58urriiW1wsCMfClc0Yo=;
+ b=sn16VVMbqBxcsaIHH81zAH80bEyR3du37GxY12A5uZCwwbGAyC3b6HZMsrCdcAMzba
+ s6Xblwi6YqzE2Kq/qTDv6VVtpkUEwO33qKYQ4Ke6mj1ZmNunF8GbY7Mv1xlpNt8PBibJ
+ g6HD4VoZo1+KUCLDI5CUQuKK1pjZCOT/YxQ5yFCYgms7GfWfYSXPnPplHbxqjQ73zsfz
+ Minx5G4uCKx5Mv1knJXWKDMcrSazy0lroCNejqOe6yA7MJ5IcHbDohnnbtzQotX74ZT3
+ PvxzBsQsQfjR7hZyqfhUGN9DEKw3J38YC+QAakRURM1+7BR97OlRFn4G1RPOcm5YybYU
+ rNyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718001866; x=1718606666;
+ d=1e100.net; s=20230601; t=1718001958; x=1718606758;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=nNd8e2b06rJCtpM7ekZh2Y07CNjakDOrj89xIV6OniY=;
- b=p00LfOLYMw0zkOQw31+bUCUxoc3DZ9nQsFxHFk62IN4jnCcnEJhbcPcyBKQwDKW6g0
- 5+cCIMzTyo9tP4lIYbAiT65WCZ3ZTEcKxMuif5BlRuVnZs6qWvtG2CXcmMnGr+a4Y9i3
- +8nSgPfV+cYDQNT3tbYJQO7NCcMrl07zSy/OloeXSXX9M0BopCOUrUohaZYf6KR/FP8A
- tLorMN+dNvpXL/mR/TPuP8ejv7qCcqQKJl/QHZzOHAEh2PNmAKHpP3oMvSlDck4N2qqA
- E068+8PmOcLG5KHlyCfsTqHheWKZN9e25/SVN0ct7pHLZs+cnykR5oBW/r0eNXmn+nTF
- Mx0g==
-X-Gm-Message-State: AOJu0YzuiUbKEMSPD0R2t6K0IPJrwwp+1nfwcP1d9ebI9L207vAEtK8k
- scSK4jMbd+Z41OE5wWoUpUVLjKYnftC1Z9LKNC2wcfhEnWBzmFQIgcLPUTeWyNv6FYiRZYcSaja
- pSYKQNx8Rb+o5SBiWGusZjIAIY3fzdUMlEaHFSA==
-X-Google-Smtp-Source: AGHT+IGp1r4Z+esUq6Fh18qjGt3PaXvzQ+bj2cjDuAfNI8NX+2UDAuQges2ALFJxMfKTMnfCeBBrbgu1dLkpn3sVIgE=
-X-Received: by 2002:a50:cdda:0:b0:57c:7ce3:6cd9 with SMTP id
- 4fb4d7f45d1cf-57c7ce36e15mr1468055a12.23.1718001866428; Sun, 09 Jun 2024
- 23:44:26 -0700 (PDT)
+ bh=VRaUdjBv27tRnvPXj9GASsl58urriiW1wsCMfClc0Yo=;
+ b=UBRabCn4WYkihXhWI6CVGdYEr40DCpne/qGGZckUgYuRhOMIgRYdNAQq2Hw34s3Au9
+ KllYWCPetTkcp0ZXtiHCY6CfgDv01EdEnXy6rRkrEuH3tJhkNq68vQzClB45XuWfV/mg
+ OHd3IvAwtRPrDtQ2Ovda6jmMXhhsLn+dEjHVOdR3YkJG7LwZ2pBVvBMVj3/68Nq9va1f
+ B2w5xyGNY6PqVIxjeuM9ny9qKo/x7Fm/ai5G5+1DTVShOW831JRHbKVSHHwYR2gbJN08
+ 2EcwW/qWXAfIHFmM+EHjlY7t9XcVBJxy1Z0dpAtg6pbuF+vQQjrw+W5Q8AHt6SYeBPPC
+ w80A==
+X-Gm-Message-State: AOJu0YyHhaUI249sPARVvLqO5ciwqqtbKLF5ZQihSbVxg7hP8HW43TWT
+ X596W7cj2tjgpbHmHfKSFDrnI3w7Pqipd5zoJn8a4yChoujLohP/HbL4lnlWGw69wWq/l0Ge2zX
+ tSvvgMv+xPNvkyzpeMNfbNBu2rQqvjlYly++iEg==
+X-Google-Smtp-Source: AGHT+IGnJQSCMCu3UytNO5T6p80MQWc+aO5r+2KJcj0JezzkCFgEkVBdGuwFIPXghKGSL6TmeBzjLQJcYuacsO886ak=
+X-Received: by 2002:a50:9550:0:b0:57c:57af:6e88 with SMTP id
+ 4fb4d7f45d1cf-57c57af70a9mr6287834a12.9.1718001957790; Sun, 09 Jun 2024
+ 23:45:57 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
- <20240607185240.1892031-31-sughosh.ganu@linaro.org>
- <5BF273F8-08EB-44C9-9B59-1AAA924F4591@gmx.de>
-In-Reply-To: <5BF273F8-08EB-44C9-9B59-1AAA924F4591@gmx.de>
+ <20240607185240.1892031-32-sughosh.ganu@linaro.org>
+ <D859DD98-73B6-4E7D-BE36-5442845F3FE9@gmx.de>
+In-Reply-To: <D859DD98-73B6-4E7D-BE36-5442845F3FE9@gmx.de>
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 10 Jun 2024 12:14:14 +0530
-Message-ID: <CADg8p966xzJiveKXDSs6-sGaiW1TRaRjL8GGfo3eoP0ieSAsjA@mail.gmail.com>
-Subject: Re: [RFC PATCH 30/31] temp: cmd: efi_mem: add a command to test efi
- alloc/free
+Date: Mon, 10 Jun 2024 12:15:46 +0530
+Message-ID: <CADg8p95MmfYdinwqqKHL6SN0+OsATQ-+zd7CVOn8X6P5bUT-ow@mail.gmail.com>
+Subject: Re: [RFC PATCH 31/31] temp: cmd: efi: add a command to dump EFI
+ memory map
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
@@ -91,21 +91,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 8 Jun 2024 at 09:07, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Sat, 8 Jun 2024 at 09:03, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
 >
 >
-> Am 7. Juni 2024 20:52:39 MESZ schrieb Sughosh Ganu <sughosh.ganu@linaro.org>:
-> >Not for committing.
+> Am 7. Juni 2024 20:52:40 MESZ schrieb Sughosh Ganu <sughosh.ganu@linaro.org>:
+> >Add a command to dump the EFI memory map.
 >
-> Best put "DON'T MERGE" into the title to avoid mishaps in future versions.
+> What are you missing in 'efidebug memmap'?
 
-Will do.
-
->
-> In the final series we should have unit test covering all relevant aspects of the memory system.
-
-Yes, that's the plan.
+Nothing. I wasn't aware of this sub-command. Thanks for pointing it out.
 
 -sughosh
 
@@ -115,31 +110,35 @@ Yes, that's the plan.
 > Heinrich
 >
 > >
+> >Not for committing.
+> >
 > >Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > >---
-> > cmd/Makefile     |   1 +
-> > cmd/efi_memory.c | 155 +++++++++++++++++++++++++++++++++++++++++++++++
-> > 2 files changed, 156 insertions(+)
-> > create mode 100644 cmd/efi_memory.c
+> > cmd/Makefile                |  1 +
+> > cmd/efi_map_dump.c          | 28 ++++++++++++++++++++++++++++
+> > include/efi_loader.h        |  2 ++
+> > lib/efi_loader/efi_memory.c | 32 ++++++++++++++++++++++++++++++++
+> > 4 files changed, 63 insertions(+)
+> > create mode 100644 cmd/efi_map_dump.c
 > >
 > >diff --git a/cmd/Makefile b/cmd/Makefile
-> >index 87133cc27a..35fcc4af5a 100644
+> >index 35fcc4af5a..315046def6 100644
 > >--- a/cmd/Makefile
 > >+++ b/cmd/Makefile
-> >@@ -10,6 +10,7 @@ obj-$(CONFIG_CMD_BOOTM) += bootm.o
-> > obj-y += help.o
+> >@@ -11,6 +11,7 @@ obj-y += help.o
 > > obj-y += panic.o
 > > obj-y += version.o
-> >+obj-y += efi_memory.o
+> > obj-y += efi_memory.o
+> >+obj-y += efi_map_dump.o
 > >
 > > # command
 > > obj-$(CONFIG_CMD_ARMFFA) += armffa.o
-> >diff --git a/cmd/efi_memory.c b/cmd/efi_memory.c
+> >diff --git a/cmd/efi_map_dump.c b/cmd/efi_map_dump.c
 > >new file mode 100644
-> >index 0000000000..52ddcb7146
+> >index 0000000000..f2a5932767
 > >--- /dev/null
-> >+++ b/cmd/efi_memory.c
-> >@@ -0,0 +1,155 @@
+> >+++ b/cmd/efi_map_dump.c
+> >@@ -0,0 +1,28 @@
 > >+// SPDX-License-Identifier: GPL-2.0+
 > >+/*
 > >+ *  Allocate and Free EFI memory
@@ -149,149 +148,85 @@ Yes, that's the plan.
 > >+
 > >+#include <command.h>
 > >+#include <efi_loader.h>
-> >+#include <lmb.h>
-> >+#include <vsprintf.h>
 > >+
-> >+#include <linux/types.h>
-> >+
-> >+static int do_efi_mem_free(struct cmd_tbl *cmdtp, int flag, int argc,
-> >+                         char * const argv[])
+> >+static int do_efi_map_dump(struct cmd_tbl *cmdtp, int flag, int argc,
+> >+                         char *const argv[])
 > >+{
-> >+      uint64_t addr = 0, size = 0;
-> >+      efi_uintn_t pages;
-> >+      efi_status_t status;
+> >+//    printf("%s: argc => %d\n", __func__, argc);
 > >+
-> >+      if (argc != 3)
+> >+      if (argc != 1)
 > >+              return CMD_RET_USAGE;
 > >+
-> >+      argc--; argv++;
-> >+
-> >+      size = simple_strtoul(argv[0], NULL, 16);
-> >+      if (!size) {
-> >+              printf("Enter valid size for free in Hex\n");
-> >+              return CMD_RET_USAGE;
-> >+      }
-> >+
-> >+
-> >+      addr = simple_strtoul(argv[1], NULL, 16);
-> >+      if (!addr) {
-> >+              printf("Enter a valid address in Hex\n");
-> >+              return CMD_RET_USAGE;
-> >+      }
-> >+
-> >+      pages = efi_size_in_pages(size + (addr & EFI_PAGE_MASK));
-> >+
-> >+      status = efi_free_pages(addr, pages);
-> >+      if (status != EFI_SUCCESS) {
-> >+              printf("Unable to free memory, error (%#lx)\n", status);
-> >+              return CMD_RET_FAILURE;
-> >+      }
+> >+      dump_efi_memory_map();
 > >+
 > >+      return CMD_RET_SUCCESS;
 > >+}
-> >+
-> >+static int do_efi_mem_alloc(struct cmd_tbl *cmdtp, int flag, int argc,
-> >+                          char * const argv[])
-> >+{
-> >+      enum efi_allocate_type type;
-> >+      uint64_t addr = 0, size = 0;
-> >+      efi_uintn_t pages;
-> >+      efi_status_t status;
-> >+      bool max = false;
-> >+
-> >+      if (argc < 2)
-> >+              return CMD_RET_USAGE;
-> >+
-> >+      argc--; argv++;
-> >+
-> >+      if (!strcmp("max", argv[0])) {
-> >+              if (argc != 3)
-> >+                      return CMD_RET_USAGE;
-> >+
-> >+              max = true;
-> >+              argv++;
-> >+              argc--;
-> >+      }
-> >+
-> >+      size = simple_strtoul(argv[0], NULL, 16);
-> >+      if (!size) {
-> >+              printf("Enter valid size for allocation in Hex\n");
-> >+              return CMD_RET_USAGE;
-> >+      }
-> >+
-> >+      if (max || argc == 2) {
-> >+              addr = simple_strtoul(argv[1], NULL, 16);
-> >+              if (!addr) {
-> >+                      printf("Enter a valid address in Hex\n");
-> >+                      return CMD_RET_USAGE;
-> >+              }
-> >+      }
-> >+
-> >+      if (max)
-> >+              type = EFI_ALLOCATE_MAX_ADDRESS;
-> >+      else if (addr)
-> >+              type = EFI_ALLOCATE_ADDRESS;
-> >+      else
-> >+              type = EFI_ALLOCATE_ANY_PAGES;
-> >+
-> >+      pages = efi_size_in_pages(size + (addr & EFI_PAGE_MASK));
-> >+      status = efi_allocate_pages(type, EFI_BOOT_SERVICES_DATA, pages,
-> >+                                  &addr);
-> >+      if (status != EFI_SUCCESS) {
-> >+              printf("efi_allocate_pages failed %lx\n", status);
-> >+              return CMD_RET_FAILURE;
-> >+      } else {
-> >+              printf("Address returned %#llx\n", addr);
-> >+      }
-> >+
-> >+      return CMD_RET_SUCCESS;
-> >+}
-> >+
-> >+static struct cmd_tbl cmd_efi_mem_sub[] = {
-> >+      U_BOOT_CMD_MKENT(alloc, 3, 0, do_efi_mem_alloc,
-> >+              "", ""),
-> >+      U_BOOT_CMD_MKENT(free, 2, 0, do_efi_mem_free,
-> >+              "", ""),
-> >+};
-> >+
-> >+static int do_efi_mem(struct cmd_tbl *cmdtp, int flag, int argc,
-> >+                    char *const argv[])
-> >+{
-> >+      struct cmd_tbl *cp;
-> >+      efi_status_t r;
-> >+
-> >+      if (argc < 3)
-> >+              return CMD_RET_USAGE;
-> >+
-> >+      argc--; argv++;
-> >+
-> >+      /* Initialize UEFI subsystem */
-> >+      r = efi_init_obj_list();
-> >+      if (r != EFI_SUCCESS) {
-> >+              printf("Error: Cannot initialize UEFI sub-system, r = %lu\n",
-> >+                     r & ~EFI_ERROR_MASK);
-> >+              return CMD_RET_FAILURE;
-> >+      }
-> >+
-> >+      cp = find_cmd_tbl(argv[0], cmd_efi_mem_sub,
-> >+                        ARRAY_SIZE(cmd_efi_mem_sub));
-> >+      if (!cp)
-> >+              return CMD_RET_USAGE;
-> >+
-> >+      return cp->cmd(cmdtp, flag, argc, argv);
-> >+}
-> >+
-> >+U_BOOT_LONGHELP(efi_mem,
-> >+      "Functions to allocate and free memory\n"
-> >+      "\n"
-> >+      "efi_mem alloc <size> [addr]\n"
-> >+      "efi_mem alloc max <size> <max-addr>\n"
-> >+      "efi_mem free <size> <addr>\n"
-> >+      "\n"
-> >+);
 > >+
 > >+U_BOOT_CMD(
-> >+      efi_mem, CONFIG_SYS_MAXARGS, 0, do_efi_mem,
-> >+      "Allocate and free EFI memory",
-> >+      efi_mem_help_text
+> >+      efi_map_dump, 1, 0, do_efi_map_dump,
+> >+      "Dump the EFI memory map",
+> >+      ""
 > >+);
+> >diff --git a/include/efi_loader.h b/include/efi_loader.h
+> >index 9600941aa3..40f894f182 100644
+> >--- a/include/efi_loader.h
+> >+++ b/include/efi_loader.h
+> >@@ -791,6 +791,8 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory_map_size,
+> >                               uint32_t *descriptor_version);
+> > /* Adds a range into the EFI memory map */
+> > efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type);
+> >+/* Dump the contents of the EFI memory map */
+> >+void dump_efi_memory_map(void);
+> > /* Adds a conventional range into the EFI memory map */
+> > efi_status_t efi_add_conventional_memory_map(u64 ram_start, u64 ram_end,
+> >                                            u64 ram_top);
+> >diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> >index 93244161b0..7ab1b86140 100644
+> >--- a/lib/efi_loader/efi_memory.c
+> >+++ b/lib/efi_loader/efi_memory.c
+> >@@ -47,6 +47,8 @@ static LIST_HEAD(efi_mem);
+> > void *efi_bounce_buffer;
+> > #endif
+> >
+> >+static uint64_t desc_get_end(struct efi_mem_desc *desc);
+> >+
+> > /**
+> >  * struct efi_pool_allocation - memory block allocated from pool
+> >  *
+> >@@ -118,6 +120,36 @@ static int lmb_mem_map_update_sync(void *ctx, struct event *event)
+> > EVENT_SPY_FULL(EVT_LMB_MAP_UPDATE, lmb_mem_map_update_sync);
+> > #endif /* MEM_MAP_UPDATE_NOTIFY */
+> >
+> >+static void dump_efi_mem_desc(struct efi_mem_desc *desc)
+> >+{
+> >+      u64 end;
+> >+
+> >+      end = desc_get_end(desc);
+> >+
+> >+      printf("-----------------------------------\n");
+> >+      printf("Memory Range   [0x%llx - 0x%llx]\n",
+> >+             desc->physical_start, end);
+> >+      printf("Num Pages      [0x%llx]\n", desc->num_pages);
+> >+      printf("Memory Type    [0x%x]\n", desc->type);
+> >+      printf("Attribute      [0x%llx]\n", desc->attribute);
+> >+      printf("-----------------------------------\n");
+> >+}
+> >+
+> >+void dump_efi_memory_map(void)
+> >+{
+> >+      struct list_head *lhandle;
+> >+
+> >+      list_for_each(lhandle, &efi_mem) {
+> >+              struct efi_mem_list *lmem;
+> >+              struct efi_mem_desc *desc;
+> >+
+> >+              lmem = list_entry(lhandle, struct efi_mem_list, link);
+> >+              desc = &lmem->desc;
+> >+
+> >+              dump_efi_mem_desc(desc);
+> >+      }
+> >+}
+> >+
+> > /**
+> >  * checksum() - calculate checksum for memory allocated from pool
+> >  *
