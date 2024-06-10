@@ -4,76 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2CCFC27C55
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 15:00:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D4F2C27C5E
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 15:00:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA2FD885DD;
-	Mon, 10 Jun 2024 16:59:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 42AEF885F4;
+	Mon, 10 Jun 2024 16:59:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fbJn2kgY";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jVR8ZPvt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16405885DD; Mon, 10 Jun 2024 16:59:45 +0200 (CEST)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
+ id 052DB885CF; Mon, 10 Jun 2024 16:59:46 +0200 (CEST)
+Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
+ [IPv6:2607:f8b0:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3CFA885AD
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 16:59:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E503F885CF
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 16:59:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-3758fdbd2daso10163095ab.3
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 07:59:42 -0700 (PDT)
+Received: by mail-il1-x12c.google.com with SMTP id
+ e9e14a558f8ab-36ddf683ad7so222545ab.2
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 07:59:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718031581; x=1718636381; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1718031582; x=1718636382; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bJXFsCW6LCl1bXkmZ8sKbXEiUPqgjCbPoT+lGmHDHLY=;
- b=fbJn2kgYTAoqb9MBoJy31yt3F1auJaWpVXmiE+0WxzsXDxCt16v3E6k1+i9Yp4ajhp
- vu/kfXcSiMo/L32mipsSOZAG/+u/t17KDYhp9NPUCaLnFrp6F5aAICn5fOyKUv/XIOMF
- I28kcFf53yhe3OwAzL0pf9YYP4ebNfcO0k4Go=
+ bh=Rch1N+RVGzHMc51Jj2sUeBQ325MDbk8FDnOVAg9COLk=;
+ b=jVR8ZPvtPv8rWIySyrvw8FIwsieBaYSA/T3BjS3rao0efKRUgrsGK4G8bLZIU+Eqr/
+ M58AMzjjYirMF3Ybi1SffVNvk/Dz0ONPNqLpx/mtUbWaRM3FJaelCW1Qp6CaPanlt9zv
+ bFJK+eXrKOLlwyC7ez78w3ZGtkOuVfzO8WW+s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718031581; x=1718636381;
+ d=1e100.net; s=20230601; t=1718031582; x=1718636382;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bJXFsCW6LCl1bXkmZ8sKbXEiUPqgjCbPoT+lGmHDHLY=;
- b=HNMaxBBxpE1DTyyF4Jn66ugJFiBrgH9LmU+7SmjVarhEzwwIDGCE32Re4+pd5vkCHS
- WUKrtVlMeEfxOT7pq/9VLtYq8AM65QvnWL85vGMgqjENDSGshP6rE/e+YJo+jfXnCz8m
- Omb4Aut8fhsiCrvH74rzHt1/CyhP3PvFY2GISvJRZ1kuvKz7q4X9CopUy3Nl4Ht/VpAk
- 06NujGfzzAyrIhN7c/KsSoJAaElJC/gbFT7IaKn5ngfZadrnj/0ycXfCHvrIcR5EjFZz
- TErp9y/VsZzqsp05U7ZQFy/lg3DClD7hbYdJlC55kZy01fbsEvtbDbU3opYrV7nTtavl
- 24yw==
-X-Gm-Message-State: AOJu0Yz7pODd1xOeupsSmcnZyWqKzaJbvloP1wm73lPyDRCk8LgDzx0a
- w0Ib+G14ukCRHdA/jxHX06z8pFPmv5u7cNkiHHSj0J6K9kK/8ftyb+rk3YAWT0WQih5hfwNQfX4
- sLQ==
-X-Google-Smtp-Source: AGHT+IGUsgoY+z28GkxfRfoezDXJ0ZLbqdsxdYK0VwmZjT62XqJ+QbeQg/WdAswW2NuHD085S8JAWQ==
-X-Received: by 2002:a92:c54e:0:b0:375:92ed:254a with SMTP id
- e9e14a558f8ab-37592ed4917mr71237755ab.18.1718031580656; 
- Mon, 10 Jun 2024 07:59:40 -0700 (PDT)
+ bh=Rch1N+RVGzHMc51Jj2sUeBQ325MDbk8FDnOVAg9COLk=;
+ b=DY1oJgbTIeGMGQl5Mt1dMAYBxT4VrJJEudV1fgtRSQHdFfJrJ84uHEsKvWBk7Odb/o
+ QwnIkCgSUuhHHtlud/Zy9k8ZpYIyA2SoCGT9oxHY/R/BFVmsDsdMIV8HUPROPYMJpxjO
+ yk87VkF8xYKVCRmWivFq+9qO0uXZIPvhZVWxCGrRNllKQnyXr5kXhDb2raa4Ez3El+cF
+ n3JIJH1AtrRLSdhRgY94uFsC3CPAktNyIU0SkwrQzxMnMk4DIxGbCbx+skcS1bLNy8H8
+ 9PTwHQ8iJH0ZVqlx1oTzRPP2Ex2p4TkSi8XF+HBOvDq+5UOmXLFl2loT9H7j8SCCJx7X
+ xIvg==
+X-Gm-Message-State: AOJu0Yw6IGryAp22EsBZqhZxMIKOHrtLd5sQBMcmqUyvMlW09zVranGl
+ EqYyXmtd3kyTxZOGTbE2QPYhoXcuVmhbp4ELcml5E2hxSKMNYsqXxyzw8o+XHHyzke6xi3CQXcx
+ IaA==
+X-Google-Smtp-Source: AGHT+IHx98WmdhI2Sc40hP27n9iFEQNKkEdiD0hzPI2ArUzPHGEWAOnHqpOhO/rBxX9gDJO5hMSWpw==
+X-Received: by 2002:a92:cda9:0:b0:375:aca4:65de with SMTP id
+ e9e14a558f8ab-375aca46883mr16142585ab.7.1718031582531; 
+ Mon, 10 Jun 2024 07:59:42 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-375ac6104dasm2526885ab.4.2024.06.10.07.59.39
+ e9e14a558f8ab-375ac6104dasm2526885ab.4.2024.06.10.07.59.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Jun 2024 07:59:40 -0700 (PDT)
+ Mon, 10 Jun 2024 07:59:42 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Lukasz Majewski <l.majewski@samsung.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>
-Subject: [PATCH v2 4/9] power: regulator: Handle autoset in
- regulators_enable_boot_on()
-Date: Mon, 10 Jun 2024 08:59:15 -0600
-Message-Id: <20240610145920.3302001-5-sjg@chromium.org>
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerry Van Baren <vanbaren@cideas.com>, Shiji Yang <yangshiji66@outlook.com>
+Subject: [PATCH v2 5/9] fdt: Correct condition for bloblist existing
+Date: Mon, 10 Jun 2024 08:59:16 -0600
+Message-Id: <20240610145920.3302001-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240610145920.3302001-1-sjg@chromium.org>
 References: <20240610145920.3302001-1-sjg@chromium.org>
@@ -95,34 +90,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With a recent change, regulators_enable_boot_on() returns an error if a
-regulator is already set. Check for and handle this situation.
+On some boards, the bloblist is created in SPL once SDRAM is ready. It
+cannot be accessed until that point, so is not available early in SPL.
 
-Fixes: d99fb64a98a power: regulator: Only run autoset once for each regulator
-Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+Add a condition to avoid a hang in this case.
+
+This fixes a hang in chromebook_coral
+
+Fixes: 70fe2385943 ("fdt: Allow the devicetree to come from a bloblist")
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v2:
+- Use 'phase' instead of 'stage'
 
- drivers/power/regulator/regulator-uclass.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ lib/fdtdec.c | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
-index 77d101f262e..d9e1fb68295 100644
---- a/drivers/power/regulator/regulator-uclass.c
-+++ b/drivers/power/regulator/regulator-uclass.c
-@@ -518,7 +518,7 @@ int regulators_enable_boot_on(bool verbose)
- 	     dev;
- 	     uclass_next_device(&dev)) {
- 		ret = regulator_autoset(dev);
--		if (ret == -EMEDIUMTYPE) {
-+		if (ret == -EMEDIUMTYPE || ret == -EALREADY) {
- 			ret = 0;
- 			continue;
- 		}
+diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+index b2c59ab3818..79eaa56ea39 100644
+--- a/lib/fdtdec.c
++++ b/lib/fdtdec.c
+@@ -1669,8 +1669,16 @@ int fdtdec_setup(void)
+ {
+ 	int ret = -ENOENT;
+ 
+-	/* If allowing a bloblist, check that first */
+-	if (CONFIG_IS_ENABLED(BLOBLIST)) {
++	/*
++	 * If allowing a bloblist, check that first. This would be better
++	 * handled with an OF_BLOBLIST Kconfig, but that caused far too much
++	 * argument, so add a hack here, used e.g. by chromebook_coral
++	 * The necessary test is whether the previous phase passed a bloblist,
++	 * not whether this phase creates one.
++	 */
++	if (CONFIG_IS_ENABLED(OF_BLOBLIST) &&
++	    (spl_prev_phase() != PHASE_TPL ||
++	     !IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
+ 		ret = bloblist_maybe_init();
+ 		if (!ret) {
+ 			gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
 -- 
 2.34.1
 
