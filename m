@@ -4,55 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 889ADC27C55
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 01:07:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E104C27C53
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 01:12:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 876F6883C9;
-	Mon, 10 Jun 2024 03:07:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BE5BF88422;
+	Mon, 10 Jun 2024 03:12:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="WsT7bGO1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FqW9mEjy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58E05883F2; Mon, 10 Jun 2024 03:07:55 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 17EA487D46; Mon, 10 Jun 2024 03:12:31 +0200 (CEST)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 301D1883C9
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 03:07:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id 5BD9B87BCB
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 03:12:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-6f9c1902459so192333a34.0
+ for <u-boot@lists.denx.de>; Sun, 09 Jun 2024 18:12:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1717981947; x=1718586747; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=098JMltDuR0ufxWUGeUpsa4t2HA0VQkZ+m4JwF4XQYA=;
+ b=FqW9mEjyBlTC4cPXPbqvq7Fq1DXD9IiPx0zEI20jv7+HVOZ3SrYdtCv374lzX7Gsmt
+ jThR7+GAJEWlXvNIgihgco02eZ50loaDqFHa0vspmUF1eWcqpMfMOefXLAaVYrO1JUmQ
+ YgUm60IjH+kSBRG8yZWBlpZMoQwqSFpE1vTBfymKYB59JP7sHnGzkAgu6QUVh67rAJCi
+ 3R8wQbrofByHSCHRV/bmhONrXiXVatehLW5eBT5QIAsf2gz3m7+FCShDbyJlpdA1G1ZI
+ IxGxcOvKj558iuS0Xw6KJ37/y9FVF3GNEVcJSFfvvjqrSvO+G9MGO4Loi781w4H5EYzl
+ jyxw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717981947; x=1718586747;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=098JMltDuR0ufxWUGeUpsa4t2HA0VQkZ+m4JwF4XQYA=;
+ b=wJv3Q+CW7v9KwBog0BOSQaeiN8hWnOtg0ePV/vbsumeyce86hK2fSziJuEkkgI1+uz
+ tiZj1becENE4fwGNzF9wVvmcNnZTaucdAFulKj4QKp5iOLqzmDpw9QPuaRLhgkTFIeP6
+ 1csSHkCbXhXBbmDNJUo96l8qjYow7vdSUZ7quUtpgg09W0mhdccaFRQkkAOkVPVx+2NG
+ /YklP5xJECuT0c+RQA/LJKubiagIP3ah064JqqjoWVPbQsvgX2C1ThGSdTe+PnDJokkR
+ PJI97cKn3XVr22PTXXR6xG5orDD+LSseR+AFEjhiTS6irjR1ixBeHYQoogHe5eCJofnj
+ mwrw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXCF3iTyepSZEh03KHFauGnGDfhlwX7T3NFimT4lJe3Vol2umMAA34mPVNCsI5pu9iuzznzPT9vpG53tAHLRwRrv6Jrsg==
+X-Gm-Message-State: AOJu0Yye8qpDDJcfC4yzd4TBjaiX24jgjkKJXhSXMA5S2WQKKin35xtR
+ R6oh3ZNj3NyChn3GkPeLg8QqycOnJS6Xn5JL9AJojK9zaMGe1jAA7tqG6no1OLI=
+X-Google-Smtp-Source: AGHT+IGbdnYsUpbRrP/Z4NhjuOcUXvu8g0XyAJlG2F/cAQwElwuC2RaFl0nDfPbl9ep65yeyY7WQZg==
+X-Received: by 2002:a05:6870:1490:b0:254:b7cc:6207 with SMTP id
+ 586e51a60fabf-254b7ccb877mr3168453fac.14.1717981946828; 
+ Sun, 09 Jun 2024 18:12:26 -0700 (PDT)
+Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-254a3d654c5sm797443fac.39.2024.06.09.18.12.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 09 Jun 2024 18:12:26 -0700 (PDT)
+From: Sam Protsenko <semen.protsenko@linaro.org>
+To: Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Simon Glass <sjg@chromium.org>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Yang Xiwen <forbidden405@outlook.com>,
+ Ferass El Hafidi <vitali64pmemail@protonmail.com>,
+ Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
+ uboot-snps-arc@synopsys.com
+Subject: [PATCH v2 00/40] mmc: dw_mmc: Enable eMMC on E850-96 board
+Date: Sun,  9 Jun 2024 20:11:46 -0500
+Message-Id: <20240610011226.4050-1-semen.protsenko@linaro.org>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1717981672;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=qd5qHNaCk4E1/YkwHky0+mimLPdvJ7nv7MZ1InQcYTM=;
- b=WsT7bGO1LWbyGxfBhc83fyK5D89pAMHWQo1jk/5HX9am9ATaizpGFzNgPWZdocGZIkcZaP
- 9xGmWlE8cbfiVAug9qeLo0bNFvENKnbZLcl8nu6s9X+DBdIVX5kGm9DBCLZVw19ctxo5rf
- 4cy06H/XSIJK+KSnLXUbXEijfZ9iI48K4G9kExnMlzBKkpXD49KSq/fDWRV2aWB1vXifNz
- gPG9eHJ0Q7LHCyE9hjPCjO5I3BsiIw5lORoU9uFGdh/TVPuGJFTliFviw+RGUdfuzTrx2D
- uqKnuX2Qc/dfASwHLwQaJmHLkDbIQYYiPDXDc1cWRpmz3xsQC4zT2ZL8e+/TYQ==
-Date: Mon, 10 Jun 2024 03:07:52 +0200
-From: Dragan Simic <dsimic@manjaro.org>
-To: Tony Dinh <mibodhi@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] arm: dts: mvebu: Update DTS for Thecus N2350 board
-In-Reply-To: <20240610003431.14148-1-mibodhi@gmail.com>
-References: <20240610003431.14148-1-mibodhi@gmail.com>
-Message-ID: <2f5754a5c9f50ed735d80153f1e72082@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,64 +99,177 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tony,
+Bring 64-bit support to dw_mmc core and Exynos dw_mmc drivers, and
+enable it on E850-96 board. Additionally do some related cleanups and
+device tree updates.
 
-Please see a few comments below.
+64-bit version of DesignWare MMC can be often found on modern ARM64
+chips. It's different from its older 32-bit version (which is already
+implemented in U-Boot): some new registers were added, existing
+register addresses are changed, DMA descriptor table is different, etc.
+Next Exynos chips are known to have 64-bit DW MMC block:
 
-On 2024-06-10 02:34, Tony Dinh wrote:
-> - Change the spi-max-frequency to 50000000 (50 Mhz). According to the
-> data sheet[1], the MX25L3205D max frequency is 86 Mhz. Using 50 Mhz in
-> the DTS to ensure u-boot is consistent with what Linux kernel expected.
-> - Update GPIO fan to conform to the latest DT binding.
+  - Exynos3475
+  - Exynos5433
+  - Exynos7420
+  - Exynos7570
+  - Exynos7580
+  - Exynos7870
+  - Exynos7872
+  - Exynos7880
+  - Exynos7885
+  - Exynos7890
+  - Exynos850 (Exynos3830)
 
-There's no need for the bullet points, plain prose will do fine instead.
+Exynos DW MMC driver was updated too: ARM64 Exynos chips implement their
+clock drivers using CCF framework, pinmux configuration is done at
+startup in DM capable pinctrl drivers, device tree properties were
+changed w.r.t. their upstream (Linux kernel) counterparts. CLKSEL
+register address is also different on 64-bit Exynos platforms.
 
-> [1] 
-> MX25L3205D-MX25L1605D-MX25L6405D-Macronix-MX25L3205DM2I-12G-datasheet.pdf
+The patch series was tested on E850-96 board by running mainline Linux
+kernel with Debian rootfs from eMMC ("boot" partition) with these
+commands:
 
-Unless you can provide a real, working URL for the datasheet, this 
-reference
-should actually be deleted.
+8<-------------------------------------------------------------------->8
+env set fdtaddr 0x8a000000
+env set bootaddr 0x94000000
+env set boot_kerneladdr 0x94000800
+part start mmc 0 boot boot_start
+part size mmc 0 boot boot_size
+mmc read $bootaddr $boot_start $boot_size
+abootimg addr $bootaddr
+abootimg get dtb --index=0 dtb_start dtb_size
+cp.b $dtb_start $fdtaddr $dtb_size
+fdt addr $fdtaddr 0x100000
+cp.b $boot_kerneladdr $loadaddr 2aaaa00
+env set bootargs console=ttySAC0,115200n8 printk.devkmsg=on \
+                 root=/dev/mmcblk0p12 rootwait rw
+booti $loadaddr - $fdtaddr
+8<-------------------------------------------------------------------->8
 
-> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
-> ---
-> 
->  arch/arm/dts/armada-385-thecus-n2350.dts | 10 +++++-----
->  1 file changed, 5 insertions(+), 5 deletions(-)
-> 
-> diff --git a/arch/arm/dts/armada-385-thecus-n2350.dts
-> b/arch/arm/dts/armada-385-thecus-n2350.dts
-> index 253cf01130..fdaa444e51 100644
-> --- a/arch/arm/dts/armada-385-thecus-n2350.dts
-> +++ b/arch/arm/dts/armada-385-thecus-n2350.dts
-> @@ -2,7 +2,7 @@
->  /*
->   * Device Tree file for Thecus N2350 board
->   *
-> - * Copyright (C) 2018-2023 Tony Dinh <mibodhi@gmail.com>
-> + * Copyright (C) 2018-2024 Tony Dinh <mibodhi@gmail.com>
->   * Copyright (C) 2018 Manuel Jung <manuel.jung@hotmail.com>
->   */
-> 
-> @@ -143,9 +143,9 @@
->  	fan {
->  		compatible = "gpio-fan";
->  		gpios = <&gpio1 16 GPIO_ACTIVE_HIGH>;
-> -		gpio-fan,speed-map = <	  0  0
-> -					600  1
-> -					3000 2 >;
-> +		gpio-fan,speed-map = <	  0  0>,
-> +					<600  1>,
-> +					<3000 2 >;
->  		pinctrl-0 = <&pmx_fan>;
->  		pinctrl-names = "default";
->  	};
-> @@ -415,7 +415,7 @@
->  		compatible = "jedec,spi-nor";
->  		reg = <0>;
-> 
-> -		spi-max-frequency = <108000000>;
-> +		spi-max-frequency = <50000000>;
->  		spi-cpha;
-> 
->  		partition@0 {
+For E850-96 eMMC to function properly in DDR mode, the pending patch [1]
+has to be applied. Otherwise it won't be possible for exynos_dw_mmc
+driver to change CIU clock rate from 200 MHz up to 400 MHz, and MMC will
+fall back to SDR mode, which makes eMMC throughput twice as slower. With
+patch [1] applied, 'mmc info' reports this:
+
+    Bus Speed: 52000000
+    Mode: MMC DDR52 (52MHz)
+
+and 'clk dump' shows CIU clock rate to be ~400 MHz (after first mmc
+operation, e.g. 'part start' or 'mmc read'):
+
+    399750000    gout_mmc_embd_sdclkin
+
+Which makes sense, because dw_mmc requests to set CCLKIN = 52 MHz (with
+DDR/8-bit mode), and exynos_dw_mmc tries to set CIU clock rate to:
+
+    SDCLKIN = 2 * ciu_div * CCLKIN = 2 * 4 * 52 MHz = 416 MHz,
+
+and the closest possible value the clock driver can set is 399.75 MHz,
+which works just fine.
+
+For Exynos4 and Exynos5 (ARM32) boards, this patch series was only build
+tested (manually and with buildman). The build is clean (no errors or
+warnings), but I don't have any Exynos4/Exynos5 boards at my disposal,
+so I can't actually verify MMC operation there.
+
+Changes in v2:
+  - Rebased on top of the most recent U-Boot/master
+  - Added pending R-b tags from the mailing list
+  - Addressed the comment from Quentin about CONFIG_IS_ENABLED() not
+    playing nice in SPL case:
+    1. Dropped [PATCH 35/42]
+       ("mmc: exynos_dw_mmc: Use CONFIG_IS_ENABLED() to check config
+        options")
+    2. Dropped [PATCH 14/42]
+       ("mmc: dw_mmc: Use CONFIG_IS_ENABLED() to check config options")
+    3. Got rid of all other CONFIG_IS_ENABLED() changes (used #ifdef for
+       now)
+  - Addressed the comment from Quentin about incorrect logic for divider
+    update in [PATCH 06/40]
+  - Guarded exynos_dwmmc_of_to_plat() with #ifded CONFIG_DM_MMC in
+    [PATCH 22/40]
+  - Added list of Exynos chips implementing 64-bit IDMAC descriptor (in
+    [PATCH 00/40])
+
+[1] https://lists.denx.de/pipermail/u-boot/2024-March/547719.html
+
+Sam Protsenko (40):
+  mmc: dw_mmc: Remove common.h
+  mmc: dw_mmc: Remove unused version field from struct dwmci_host
+  mmc: dw_mmc: Move struct idmac to dw_mmc.c
+  mmc: dw_mmc: Extract waiting for data busy into a separate routine
+  mmc: dw_mmc: Extract FIFO init into a separate routine
+  mmc: dw_mmc: Extract divider update to a separate function
+  mmc: dw_mmc: Extract FIFO data transfer into a separate routine
+  mmc: dw_mmc: Extract DMA transfer handling code into a separate
+    routine
+  mmc: dw_mmc: Extract setting the DMA descriptor into a separate
+    routine
+  mmc: dw_mmc: Improve 32-bit IDMAC descriptor namings
+  mmc: dw_mmc: Add support for 64-bit IDMAC
+  mmc: dw_mmc: Replace fifoth_val property with fifo-depth
+  mmc: dw_mmc: Fix kernel-doc comments in dwmmc.h
+  mmc: dw_mmc: Improve coding style
+  arm: dts: exynos: Add upstream DW MMC properties to all Exynos dts
+  dt-bindings: exynos: Update bindings doc for DW MMC controller
+  arm: exynos: Add header guard for dwmmc.h
+  mmc: exynos_dw_mmc: Fix obtaining the base address of controller
+  mmc: exynos_dw_mmc: Fix getting private data in
+    exynos_dwmci_board_init()
+  mmc: exynos_dw_mmc: Don't call pinmux functions on ARM64 chips
+  mmc: exynos_dw_mmc: Obtain and use CIU clock via CCF API
+  mmc: exynos_dw_mmc: Use .of_to_plat for device tree parsing
+  mmc: exynos_dw_mmc: Convert to use livetree API
+  mmc: exynos_dw_mmc: Read upstream SDR timing properties
+  mmc: exynos_dw_mmc: Abstract CLKSEL register
+  mmc: exynos_dw_mmc: Refactor fixed CIU clock divider
+  mmc: exynos_dw_mmc: Read common bus-width property
+  mmc: exynos_dw_mmc: Read common clock-frequency property
+  mmc: exynos_dw_mmc: Move quirks from struct dwmci_host to chip data
+  mmc: exynos_dw_mmc: Read and use DDR timing when available
+  mmc: exynos_dw_mmc: Set requested freq in get_mmc_clk() callback
+  mmc: exynos_dw_mmc: Add support for ARM64 Exynos chips
+  mmc: exynos_dw_mmc: Remove common.h
+  mmc: exynos_dw_mmc: Pull all init code into probe function
+  mmc: exynos_dw_mmc: Don't call dwmci_setup_cfg() after add_dwmci()
+  mmc: exynos_dw_mmc: Use dev->name as driver's displayed name
+  mmc: exynos_dw_mmc: Improve coding style
+  arm: dts: exynos: Remove outdated DW MMC properties in all Exynos dts
+  configs: e850-96: Enable MMC
+  doc: samsung: Mention enabled eMMC in E850-96 board doc
+
+ arch/arm/dts/exynos4210-origen.dts         |   3 +-
+ arch/arm/dts/exynos4210-trats.dts          |   6 +-
+ arch/arm/dts/exynos4210-universal_c210.dts |   6 +-
+ arch/arm/dts/exynos4412-odroid.dts         |  14 +-
+ arch/arm/dts/exynos4412-trats2.dts         |  20 +-
+ arch/arm/dts/exynos5250-arndale.dts        |  10 +-
+ arch/arm/dts/exynos5250-smdk5250.dts       |  13 +-
+ arch/arm/dts/exynos5250-snow.dts           |  13 +-
+ arch/arm/dts/exynos5250-spring.dts         |   7 +-
+ arch/arm/dts/exynos5420-smdk5420.dts       |  13 +-
+ arch/arm/dts/exynos5422-odroidxu3.dts      |   4 +-
+ arch/arm/dts/exynos54xx.dtsi               |  13 +-
+ arch/arm/mach-exynos/include/mach/dwmmc.h  |  40 +-
+ configs/e850-96_defconfig                  |  10 +-
+ doc/board/samsung/e850-96.rst              |   5 +-
+ doc/device-tree-bindings/exynos/dwmmc.txt  |  46 +-
+ drivers/mmc/ca_dw_mmc.c                    |   2 +-
+ drivers/mmc/dw_mmc.c                       | 550 +++++++++++++--------
+ drivers/mmc/exynos_dw_mmc.c                | 358 +++++++++-----
+ drivers/mmc/ftsdc010_mci.h                 |   1 -
+ drivers/mmc/hi6220_dw_mmc.c                |   7 +-
+ drivers/mmc/nexell_dw_mmc.c                |   5 +-
+ drivers/mmc/rockchip_dw_mmc.c              |   5 +-
+ drivers/mmc/s5p_sdhci.c                    |   2 +-
+ drivers/mmc/snps_dw_mmc.c                  |   6 +-
+ drivers/mmc/socfpga_dw_mmc.c               |   4 +-
+ include/dwmmc.h                            | 242 +++++----
+ 27 files changed, 868 insertions(+), 537 deletions(-)
+
+-- 
+2.39.2
+
