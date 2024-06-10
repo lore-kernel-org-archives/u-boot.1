@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 058E6C27C5E
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 08:37:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C645C27C5E
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 08:45:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76A8588279;
-	Mon, 10 Jun 2024 10:37:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
+	by phobos.denx.de (Postfix) with ESMTP id 65B4C88433;
+	Mon, 10 Jun 2024 10:45:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="VI+VxreT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ixOoS3D4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5A918843F; Mon, 10 Jun 2024 10:37:11 +0200 (CEST)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
+ id 71D168843F; Mon, 10 Jun 2024 10:45:31 +0200 (CEST)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4117B8822D
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 10:37:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=foundries.io
+ by phobos.denx.de (Postfix) with ESMTPS id 3CEAE882ED
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 10:45:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-52bc3130ae6so2516583e87.3
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 01:37:09 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-52a6f05503aso470442e87.0
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 01:45:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=foundries.io; s=google; t=1718008628; x=1718613428; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1718009128; x=1718613928; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vn5ZPHR126rPkkRCsFkIkiFQtWLPG8ppHEfcAlk14lY=;
- b=VI+VxreT5uHieZkcxGYkxQVJ037rQc24VVEiubdRHJustlJ4VWkR0ENsfjM7rb2JfS
- wyijhAJtm7sdmq91lZ6/0LGF7EZy+Hj+CTBY6vqTnLytGJ5KE4fAKilBGEiV1cYf1VGz
- JSM0oboxkHeg2kdD3TRLzVpjuyXDZPwPQA9keRS6pK6Gw3EEUEDJ0VweDDvD7oxWTqwW
- uSQC9KO1lZdJqNMjNpa3ktgclJzxteS4brnPnTHm0aZoExO/jJvOlC8ZuJPlFy6wbf61
- HpdCmu6j4vqbNYrF48RWN8Xb5QLpvGZr9zpGptmZmyoMHmZGSr9wI/eZ7iQq+D6KK1a/
- WaaA==
+ bh=GJdv20lpiSyp5bh7QVWbHpbyT4yUulrMMXrPtHrSuxI=;
+ b=ixOoS3D46YIY1jSkNFrDZ+3H9PGnBnB105fy7893AHd53Fw5m0L89rz8z7jdBxvnWb
+ 6mCw3Zf+YerMxzoiG98DDNxzVPiER5RFQ+4wrAG8TXoDY1i2gcp3Q3yVywbvRifnwGnl
+ qPrR4T+KZeBg+SnBum0V3ybyFQzKzSh115hctMINMZj1IneqrDkHBiDCJ8K5ThFFTFRd
+ XwidX6aT0MN/S9/dAOfyT438iTZhz9scJnRaO2Si82WccBZgVXnnh7uFdze5LkrCy3SK
+ PFZbWJ+n6zUo1AuAz5bkA2VhYiPtZmq40R5J2+bpWooC5rf2LPy1oR1dDQKRlXO5RkcO
+ iObQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718008628; x=1718613428;
+ d=1e100.net; s=20230601; t=1718009128; x=1718613928;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vn5ZPHR126rPkkRCsFkIkiFQtWLPG8ppHEfcAlk14lY=;
- b=hFktTuy/Who0Q4a//RYAY313+WUpa5Zvim7vTmbwtjzZa6US7SEgqM0qqKxG6YsgVi
- ufvu99K9uykmtsxSLcohqsqKwm6cMslxIFeklrnWSBvBXPa2aoSwZQbyIxH7kVK3jJ52
- qBTNkgAPtXasRO+3atsM6y8/3+I6Ph6nCDMAxyVouwqUDB1CuZ5/sEovYoQLOSvt9wdw
- OFqRKTKqXSGcxnHA20voEUDrEc/TwG1DXZXVljyAp8ibt53C+V2UTkRVSm6twHhA0epT
- VSeOdqHL1IuHSOVgZAw0mf9fMGO0PZRo5crDymelujwdJmhbn+aqdBfwjN6Rc+TLmSMz
- AOmw==
-X-Gm-Message-State: AOJu0YzG5hez/MRIEO4qiVszroUbKQQAKySFe7UHsFykWtdvHOhgqZ5a
- weHY3DFWgKeTF83N07irDxrlpji8E/06HIk5DMiY4Sq3gJl6nOhzEUgeFJq/Z7Bs/pTMvtJqQRf
- HZZa9upcGZXK47zogxDdwIsVOULNCsLl4ncZvwg==
-X-Google-Smtp-Source: AGHT+IFKgSWg/r+n0l9DNilpf9GJADLjPK9/esge2l4fOvI38UsvaY6TK1KjclU72ahH6jYuAO+uKVA9k+lLkcUqj48=
-X-Received: by 2002:a05:6512:3f10:b0:52b:59f7:7602 with SMTP id
- 2adb3069b0e04-52bb9f66381mr7327433e87.8.1718008628403; Mon, 10 Jun 2024
- 01:37:08 -0700 (PDT)
+ bh=GJdv20lpiSyp5bh7QVWbHpbyT4yUulrMMXrPtHrSuxI=;
+ b=L8F08Izp2XrIIdGpZnf+2NLXNrbiEdB67bIcvqyctFzBCXQGOdArLEDlnF7SDnG55X
+ qRWZGQrd95MBdBPjBCI2R1zITB6cqMN+s+pDTS+zyyDwKLOzPG+FeTFcZSog+dcNG2VF
+ VownfXR8DspAlpjF25s3MoqK5SpdlmAawyTbJomDYQdRgeWtLVtuxGsAPbxCWt1e++5h
+ gNjO9/37C6+nPXkN+SaVIZRcsIXoOitdxHDFWAhfRNqA4YurVTZkl10MF3srj6IoLO2U
+ oJbhdX8FKjzizz9MULMpmjvnAg+sBDRT/QsMz3xavyWM07zTPc5VIELLkZlxcqj/SbOA
+ xcOA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWyVVoFMTpztGMRACtEf7MZXl+53Y47R1BQ2H3XuXGTFewFZAuhqnO76YT0HocrqDqrzqCJDMhO073r0GKHtT3DpKFjWA==
+X-Gm-Message-State: AOJu0YyqW+NUN4ol/3L3GpSH2KujAYpsQMCFGtEAJDIsgqXTXR9167XE
+ 2M570EuTceC1h2wY4/mWUXiV/CweFplYRpzCKjR1FW7tibDh5dXNROXBdGoiac3lcMrDkM8+bOM
+ NA/+X7mhiiO2jP2UDgbmC04KdaVM=
+X-Google-Smtp-Source: AGHT+IE7zasUjDCqjbFjhz3/2vRNVeMsAty1k34wYJDRwmM7BG3QPArDUbimCN7jLcYJvdmF8dBgE68lUBHNzhae84s=
+X-Received: by 2002:ac2:46ec:0:b0:52b:be95:5b72 with SMTP id
+ 2adb3069b0e04-52bbe955c21mr4384750e87.1.1718009128130; Mon, 10 Jun 2024
+ 01:45:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240419220331.277574-1-marex@denx.de>
-In-Reply-To: <20240419220331.277574-1-marex@denx.de>
-From: Igor Opaniuk <igor.opaniuk@foundries.io>
-Date: Mon, 10 Jun 2024 10:36:56 +0200
-Message-ID: <CAL6CDMHFDhcUXhz5+w92SqKa0jC1TNPEiyvRS=jZ4CBqTm7=PA@mail.gmail.com>
-Subject: Re: [PATCH] ARM: stm32: Ping IWDG on exit from PSCI suspend code
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com, 
- uboot-stm32@st-md-mailman.stormreply.com
+References: <20240608041244.7325-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240608041244.7325-1-heinrich.schuchardt@canonical.com>
+From: Igor Opaniuk <igor.opaniuk@gmail.com>
+Date: Mon, 10 Jun 2024 10:45:16 +0200
+Message-ID: <CAByghJZm6PddZVv85H_jE-Ag9_ONgvEmd0PU=oR58xqpY0CYHA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] dm: typo prbing
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -90,80 +89,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Apr 20, 2024 at 12:03=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
+On Sat, Jun 8, 2024 at 6:13=E2=80=AFAM Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> Make sure the OS would not get any spurious IWDG pretimeout IRQ
-> right after the system wakes up. This may happen in case the SoC
-> got woken up by another source than the IWDG pretimeout and the
-> pretimeout IRQ arrived immediately afterward, but too late to be
-> handled by the suspend main loop. In case either of the IWDG is
-> enabled, ping it first and then return to the OS.
+> %s/prbing/probing/
 >
-> Signed-off-by: Marek Vasut <marex@denx.de>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
-> Cc: Igor Opaniuk <igor.opaniuk@foundries.io>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@dh-electronics.com
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  arch/arm/mach-stm32mp/stm32mp1/psci.c | 21 +++++++++++++++++++++
->  1 file changed, 21 insertions(+)
+>  drivers/core/Kconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/arch/arm/mach-stm32mp/stm32mp1/psci.c b/arch/arm/mach-stm32m=
-p/stm32mp1/psci.c
-> index 4f2379df45f..e99103910d9 100644
-> --- a/arch/arm/mach-stm32mp/stm32mp1/psci.c
-> +++ b/arch/arm/mach-stm32mp/stm32mp1/psci.c
-> @@ -808,6 +808,27 @@ void __secure psci_system_suspend(u32 __always_unuse=
-d function_id,
->         writel(SYSCFG_CMPENR_MPUEN, STM32_SYSCFG_BASE + SYSCFG_CMPENSETR)=
-;
->         clrbits_le32(STM32_SYSCFG_BASE + SYSCFG_CMPCR, SYSCFG_CMPCR_SW_CT=
-RL);
+> diff --git a/drivers/core/Kconfig b/drivers/core/Kconfig
+> index 1081d61fcf0..754649f091e 100644
+> --- a/drivers/core/Kconfig
+> +++ b/drivers/core/Kconfig
+> @@ -113,7 +113,7 @@ config DM_EVENT
+>         select EVENT
+>         help
+>           This enables support for generating events related to driver mo=
+del
+> -         operations, such as prbing or removing a device. Subsystems can
+> +         operations, such as probing or removing a device. Subsystems ca=
+n
+>           register a 'spy' function that is called when the event occurs.=
+ Such
+>           subsystems must select this option.
 >
-> +       /*
-> +        * Make sure the OS would not get any spurious IWDG pretimeout IR=
-Q
-> +        * right after the system wakes up. This may happen in case the S=
-oC
-> +        * got woken up by another source than the IWDG pretimeout and th=
-e
-> +        * pretimeout IRQ arrived immediately afterward, but too late to =
-be
-> +        * handled by the main loop above. In case either of the IWDG is
-> +        * enabled, ping it first and then return to the OS.
-> +        */
-> +
-> +       /* Ping IWDG1 and ACK pretimer IRQ */
-> +       if (gic_enabled[4] & BIT(22)) {
-> +               writel(IWDG_KR_RELOAD_KEY, STM32_IWDG1_BASE + IWDG_KR);
-> +               writel(IWDG_EWCR_EWIC, STM32_IWDG1_BASE + IWDG_EWCR);
-> +       }
-> +
-> +       /* Ping IWDG2 and ACK pretimer IRQ */
-> +       if (gic_enabled[4] & BIT(23)) {
-> +               writel(IWDG_KR_RELOAD_KEY, STM32_IWDG2_BASE + IWDG_KR);
-> +               writel(IWDG_EWCR_EWIC, STM32_IWDG2_BASE + IWDG_EWCR);
-> +       }
-> +
->         /*
->          * The system has resumed successfully. Rewrite LR register store=
-d
->          * on stack with 'ep' value, so that on return from this PSCI cal=
-l,
 > --
 > 2.43.0
 >
 
-Reviewed-by: Igor Opaniuk <igor.opaniuk@foundries.io>
-
+Reviewed-by: Igor Opaniuk <igor.opaniuk@gmail.com>
 --=20
-Best regards - Freundliche Gr=C3=BCsse - Meilleures salutations
+Best regards - Atentamente - Meilleures salutations
 
 Igor Opaniuk
-Senior Software Engineer, Embedded & Security
-E: igor.opaniuk@foundries.io
-W: www.foundries.io
+
+mailto: igor.opaniuk@gmail.com
+skype: igor.opanyuk
+https://www.linkedin.com/in/iopaniuk
