@@ -4,69 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38EA4C27C5E
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 15:54:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47E5DC27C55
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 15:54:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7458288615;
-	Mon, 10 Jun 2024 17:54:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D0C5E8858E;
+	Mon, 10 Jun 2024 17:54:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZvBvZxS5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="D+2j11IS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A0DD885FE; Mon, 10 Jun 2024 17:54:16 +0200 (CEST)
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
+ id A4561885E1; Mon, 10 Jun 2024 17:54:18 +0200 (CEST)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B66D885EB
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 17:54:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 424158858E
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 17:54:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-5ba33b08550so2435511eaf.2
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 08:54:14 -0700 (PDT)
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-6b07308fe6cso7371386d6.0
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 08:54:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718034853; x=1718639653; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1718034855; x=1718639655; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WGZiK5w2L1TdeItHQX6kTaHRoyUzwKHMj1WWNaQc9DQ=;
- b=ZvBvZxS5NGkXGg06kU0liS8J99SejLvUl38QobhLVM1j5qvabZjtQksA08k5Cr9XbB
- YCjoL3EhljlH0QCyC+4M+kujJ/pAIlqy91RJu7chusCPczjorqHRa8lnfgmkVxv+Ybf5
- hcNZRq9wam4pg29V4d4A/fmddVaVa2BTSQfac=
+ bh=Qv8QVidjzolD5kbh5e+ibrhdSRuUQ2HuLhCJdJRZAiY=;
+ b=D+2j11ISnQODyB1q+rTr7yt+/UJ7VCz6ST92LituFf1PvMx4Qtx6sfmGvDuuTpPH+4
+ klUX3QJBAiJw/cWyUjY58kVOwHHpw/DL/bsG7e0s+EsnY6XfnhiJEMt3kHUCOCXAqpYg
+ TtsHLSiJuGr5CMCDqdIziJYXQrspfUCw5VKAg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718034853; x=1718639653;
+ d=1e100.net; s=20230601; t=1718034855; x=1718639655;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=WGZiK5w2L1TdeItHQX6kTaHRoyUzwKHMj1WWNaQc9DQ=;
- b=YN7MBJWxizHhI6YBHExBCvgVmL+py+5ImGDCxEoetR9NamJuGHpZwhNNQTMlz3mgD+
- ZlhnG+TieZKLwqE8DnIHZf/l+85YYxAtjbwNKkwKqOD82xy6nDSFlHzdN904+CuorUpg
- EV+63lmi8ZvkLWXacrS1re8t65kpWeGcsQHgfaAp8i/sxDo+AXGoYh7tUa9/XNL+09DV
- mdPxL7wAzMHmdp1RiG76muZCXMdFBWCGWle3zL9ETooAQ2TFDmcLBeSh9fACOSVA8HWY
- 2yopF008WJd0QnCO1efaHbov33+IRwERJJFOdIzpvOpv5aofeHEQo67/IBv/EdWNsXaH
- CefQ==
-X-Gm-Message-State: AOJu0YxwsKVIGb41KhYWoxWIrWGiuF6rlGEdjF7nurv3vaQ2ncrrYmgn
- 4sLf+k54YbNgl2Iu0Wk+Tfolvio4Kjc/4UdWMMEahs6gmQi4t8VwYPkwlnx7sgqHfOhJSJnnO8o
- vm1CFnK8tSZDvPJDT6XyKGBS6NnePeTuXTn5QsSCdPtI8EKU=
-X-Google-Smtp-Source: AGHT+IEi0M7Ov4TNjgKBH8NrBTIYLcb7PweWr6/mvkWnZ/pGyfwpk5ggMrZ9Ze8Vmj91zULLDN15SYvTr24zT94KEf4=
-X-Received: by 2002:a05:6358:4327:b0:19f:5317:499b with SMTP id
- e5c5f4694b2df-19f53174b78mr326292955d.30.1718034853009; Mon, 10 Jun 2024
- 08:54:13 -0700 (PDT)
+ bh=Qv8QVidjzolD5kbh5e+ibrhdSRuUQ2HuLhCJdJRZAiY=;
+ b=povl2me177YvaxWR5Xkt28Ti3JQoYNJi/DnHIk3jZ87K2maL0EYAgv93q8gXA/XvN4
+ A3XnSUPvtiWRDaMgSuxSygHr12IfPoZC1aqd43gsOxSU8tYgu+hZCSameBylhqIWpKvz
+ 2LnqhfJSG0mh1Oplr+a3d9TXqNhsOejs/yHxdetbXkP1tn/724Xj1Wzo6pWtI0f08mUU
+ j1sN/enFLPLGJDK6Sow5nrxYvzEoAfeofoNwwLXNMzMEdaZ4W6LOZBh5IKk8Ann6rCPE
+ d2hA+sW838L9XI2rooe2LwK0X3oHN/Bd19cpTX/FK22EIqvVYox1h601nTL2lNtXDCOx
+ o8vQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWQXao4YS7UFFpnEwLkTIXnvLJsxW6mDLJ3gxPbKLbC1RZs3MZjUrX0ny33/GxcRHYGuxoZduDi6gOz735ARpQKOnpH/w==
+X-Gm-Message-State: AOJu0YyFqPoVTrjEcr3oTRgJBhKq+55poxXzcXpavbSGYqGFa1Z/6bz/
+ ScWQbj9WFejsUT0WMUrFOoXXwgKw8ZM32g0RJ2IcxK12kcxMyJmqmg8OxyTVxJ2scNeNx6Owfeq
+ rck2n9E/JpdZEY3IIRcHkiBQkoZC5gI7Ifi67
+X-Google-Smtp-Source: AGHT+IHg7moChbikWwe/LtsMcLW8NOENM08zreqS3ShZaNH2J0DU2Q2yqxBm8FrxPsDQ8yYtuo9y0QMD3xY5tapVmeM=
+X-Received: by 2002:a05:6214:5342:b0:6b0:754e:9869 with SMTP id
+ 6a1803df08f44-6b0754e9ad7mr54533616d6.15.1718034855060; Mon, 10 Jun 2024
+ 08:54:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240605032521.1142768-1-sjg@chromium.org>
- <20240605032521.1142768-6-sjg@chromium.org>
- <CAC_iWjK6CKheBax2VxL4JydJqLzus9UF5hNMqMXtscqebxKuwQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjK6CKheBax2VxL4JydJqLzus9UF5hNMqMXtscqebxKuwQ@mail.gmail.com>
+References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
+ <20240607185240.1892031-16-sughosh.ganu@linaro.org>
+ <40cf9c99-d3f5-4851-81e0-9fc7218434e8@gmx.de>
+ <CADg8p952ieHHzeBSoyKPZ4+9pzHHEL+7w9=1Xf5WKuN2zBrBXw@mail.gmail.com>
+In-Reply-To: <CADg8p952ieHHzeBSoyKPZ4+9pzHHEL+7w9=1Xf5WKuN2zBrBXw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 10 Jun 2024 09:54:02 -0600
-Message-ID: <CAFLszTh1X3zGnN_DOQvuJGAqBM5BoeZZuS0k5ntL5kkc+Oyv7g@mail.gmail.com>
-Subject: Re: [PATCH 5/9] fdt: Correct condition for bloblist existing
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Jerry Van Baren <vanbaren@cideas.com>, Shiji Yang <yangshiji66@outlook.com>
+Date: Mon, 10 Jun 2024 09:54:03 -0600
+Message-ID: <CAFLszTi=En1-FJ7WRpTZDhr9kzS9TNySPeSjMqfso-L6Cp_vrg@mail.gmail.com>
+Subject: Re: [RFC PATCH 15/31] efi_memory: add an event handler to update
+ memory map
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Marek Vasut <marex@denx.de>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,68 +90,171 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi,
 
-On Tue, 4 Jun 2024 at 23:33, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Mon, 10 Jun 2024 at 09:42, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> Hi Simon,
+> On Mon, 10 Jun 2024 at 20:47, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> >
+> > On 07.06.24 20:52, Sughosh Ganu wrote:
+> > > There are events that would be used to notify other interested modules
+> > > of any changes in available and occupied memory. This would happen
+> > > when a module allocates or reserves memory, or frees up memory. These
+> >
+> > I am worried about the "frees up memory" case.
+> >
+> > When LMB frees memory we cannot add it back to EFI conventional memory
+> > as there might still be a file image lingering around that EFI should
+> > not overwrite. It has to stay marked as EfiLoaderCode or EfiLoaderData.
 >
-> On Wed, 5 Jun 2024 at 06:26, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > On some boards, the bloblist is created in SPL once SDRAM is ready. It
-> > cannot be accessed until that point, so is not available early in SPL.
-> >
-> > Add a condition to avoid a hang in this case.
-> >
-> > This fixes a hang in chromebook_coral
-> >
-> > Fixes: 70fe2385943 ("fdt: Allow the devicetree to come from a bloblist")
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> >  lib/fdtdec.c | 12 ++++++++++--
-> >  1 file changed, 10 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> > index b2c59ab3818..b141244e3b9 100644
-> > --- a/lib/fdtdec.c
-> > +++ b/lib/fdtdec.c
-> > @@ -1669,8 +1669,16 @@ int fdtdec_setup(void)
-> >  {
-> >         int ret = -ENOENT;
-> >
-> > -       /* If allowing a bloblist, check that first */
-> > -       if (CONFIG_IS_ENABLED(BLOBLIST)) {
-> > +       /*
-> > +        * If allowing a bloblist, check that first. This would be better
-> > +        * handled with an OF_BLOBLIST Kconfig, but that caused far too much
-> > +        * argument, so add a hack here, used e.g. by chromebook_coral
-> > +        * The necessary test is whether the previous stage passed a bloblist,
-> > +        * not whether this one creates one.
-> > +        */
-> > +       if (CONFIG_IS_ENABLED(OF_BLOBLIST) &&
-> > +           (spl_prev_phase() != PHASE_TPL ||
-> > +            !IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
+> So here is my basic doubt. Why would LMB free up memory if it still
+> has a valid image. If that is the case, the lmb_free API should not be
+> called?
 >
-> The same condition exists in common/bloblist.c.
-> Carve out a function --e.g
+> -sughosh
 >
-> bool can can_enable_bloblist(void)
->      return ....
 >
-> instead of open coding that
+> >
+> > How do you ensure that if a region reserved by LMB notification as
+> > EfiLoaderData is coalesced with some other allocation LMB is not
+> > requested to mark the coalesced region as reserved?
+> >
+> > @Tom
+> >
+> > Clinging to the existing logic that you can do anything when loading
+> > files is obviously leading us into coding hell.
+> >
+> > If somebody wants to load two images into the same location, he should
+> > be forced to unload the first image. This will allow us to have a single
+> > memory management system.
 
-Unfortunately it looks like the conditions are different, with the one
-you mention being:
-
-if (spl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
-from_addr = false;
-
-(is that the one you mean?)
-
-So I don't think I can combine them into a helper function.
+It seems we really shouldn't use the words 'allocate' and 'free' when
+talking about LMB. They are simply reservations. I believe we have got
+into this situation due to an assumption that these two things are the
+same, but in U-Boot they certainly are not. LMB is a very lighweight
+and temporary reservation system to be used for a single boot process.
 
 Regards,
 Simon
+
+
+> >
+> > Best regards
+> >
+> > Heinrich
+> >
+> > > changes in memory map should be notified to other interested modules
+> > > so that the allocated memory does not get overwritten. Add an event
+> > > handler in the EFI memory module to update the EFI memory map
+> > > accordingly when such changes happen. As a consequence, any subsequent
+> > > memory request would honour the updated memory map and only available
+> > > memory would be allocated from.
+> > >
+> > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > ---
+> > >   lib/efi_loader/efi_memory.c | 70 ++++++++++++++++++++++++++++++-------
+> > >   1 file changed, 58 insertions(+), 12 deletions(-)
+> > >
+> > > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> > > index 435e580fb3..93244161b0 100644
+> > > --- a/lib/efi_loader/efi_memory.c
+> > > +++ b/lib/efi_loader/efi_memory.c
+> > > @@ -73,6 +73,10 @@ struct efi_pool_allocation {
+> > >   #if CONFIG_IS_ENABLED(MEM_MAP_UPDATE_NOTIFY)
+> > >   extern bool is_addr_in_ram(uintptr_t addr);
+> > >
+> > > +static efi_status_t __efi_add_memory_map_pg(u64 start, u64 pages,
+> > > +                                         int memory_type,
+> > > +                                         bool overlap_only_ram);
+> > > +
+> > >   static void efi_map_update_notify(u64 addr, u64 size, u8 op)
+> > >   {
+> > >       struct event_efi_mem_map_update efi_map = {0};
+> > > @@ -84,6 +88,34 @@ static void efi_map_update_notify(u64 addr, u64 size, u8 op)
+> > >       if (is_addr_in_ram((uintptr_t)addr))
+> > >               event_notify(EVT_EFI_MEM_MAP_UPDATE, &efi_map, sizeof(efi_map));
+> > >   }
+> > > +
+> > > +static int lmb_mem_map_update_sync(void *ctx, struct event *event)
+> > > +{
+> > > +     u8 op;
+> > > +     u64 addr;
+> > > +     u64 pages;
+> > > +     efi_status_t status;
+> > > +     struct event_lmb_map_update *lmb_map = &event->data.lmb_map;
+> > > +
+> > > +     addr = (uintptr_t)map_sysmem(lmb_map->base, 0);
+> > > +     pages = efi_size_in_pages(lmb_map->size + (addr & EFI_PAGE_MASK));
+> > > +     op = lmb_map->op;
+> > > +     addr &= ~EFI_PAGE_MASK;
+> > > +
+> > > +     if (op != MAP_OP_RESERVE && op != MAP_OP_FREE) {
+> > > +             log_debug("Invalid map update op received (%d)\n", op);
+> > > +             return -1;
+> > > +     }
+> > > +
+> > > +     status = __efi_add_memory_map_pg(addr, pages,
+> > > +                                      op == MAP_OP_FREE ?
+> > > +                                      EFI_CONVENTIONAL_MEMORY :
+> > > +                                      EFI_BOOT_SERVICES_DATA,
+> > > +                                      true);
+> > > +
+> > > +     return status == EFI_SUCCESS ? 0 : -1;
+> > > +}
+> > > +EVENT_SPY_FULL(EVT_LMB_MAP_UPDATE, lmb_mem_map_update_sync);
+> > >   #endif /* MEM_MAP_UPDATE_NOTIFY */
+> > >
+> > >   /**
+> > > @@ -275,18 +307,9 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
+> > >       return EFI_CARVE_LOOP_AGAIN;
+> > >   }
+> > >
+> > > -/**
+> > > - * efi_add_memory_map_pg() - add pages to the memory map
+> > > - *
+> > > - * @start:           start address, must be a multiple of EFI_PAGE_SIZE
+> > > - * @pages:           number of pages to add
+> > > - * @memory_type:     type of memory added
+> > > - * @overlap_only_ram:        region may only overlap RAM
+> > > - * Return:           status code
+> > > - */
+> > > -static efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+> > > -                                       int memory_type,
+> > > -                                       bool overlap_only_ram)
+> > > +static efi_status_t __efi_add_memory_map_pg(u64 start, u64 pages,
+> > > +                                         int memory_type,
+> > > +                                         bool overlap_only_ram)
+> > >   {
+> > >       struct list_head *lhandle;
+> > >       struct efi_mem_list *newlist;
+> > > @@ -395,6 +418,29 @@ static efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+> > >               }
+> > >       }
+> > >
+> > > +     return EFI_SUCCESS;
+> > > +}
+> > > +
+> > > +/**
+> > > + * efi_add_memory_map_pg() - add pages to the memory map
+> > > + *
+> > > + * @start:           start address, must be a multiple of EFI_PAGE_SIZE
+> > > + * @pages:           number of pages to add
+> > > + * @memory_type:     type of memory added
+> > > + * @overlap_only_ram:        region may only overlap RAM
+> > > + * Return:           status code
+> > > + */
+> > > +static efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+> > > +                                       int memory_type,
+> > > +                                       bool overlap_only_ram)
+> > > +{
+> > > +     efi_status_t status;
+> > > +
+> > > +     status = __efi_add_memory_map_pg(start, pages, memory_type,
+> > > +                                      overlap_only_ram);
+> > > +     if (status != EFI_SUCCESS)
+> > > +             return status;
+> > > +
+> > >       if (CONFIG_IS_ENABLED(MEM_MAP_UPDATE_NOTIFY))
+> > >               efi_map_update_notify(start, pages << EFI_PAGE_SHIFT,
+> > >                                     memory_type == EFI_CONVENTIONAL_MEMORY ?
+> >
