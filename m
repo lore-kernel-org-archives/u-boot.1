@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D01FC27C55
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 11:45:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C8FDC27C5E
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 11:46:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CFB92884C3;
-	Mon, 10 Jun 2024 13:45:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6ED98884C8;
+	Mon, 10 Jun 2024 13:46:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rUsQWw2q";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HLezb53E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F9ED884CC; Mon, 10 Jun 2024 13:45:07 +0200 (CEST)
-Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
- [IPv6:2607:f8b0:4864:20::629])
+ id 1FD3A8811A; Mon, 10 Jun 2024 13:46:51 +0200 (CEST)
+Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
+ [IPv6:2607:f8b0:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BBD48811A
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 13:45:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D96F5884AC
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 13:46:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-1f61f775738so36127455ad.2
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 04:45:05 -0700 (PDT)
+Received: by mail-pg1-x52a.google.com with SMTP id
+ 41be03b00d2f7-6ce533b643dso3232414a12.3
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 04:46:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718019904; x=1718624704; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1718020007; x=1718624807; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0ab5WEbnxdwGd7C6Ms9QkQvYWD0gtFDQO9Tc4KD8/9o=;
- b=rUsQWw2qPtsJ7wIM4tfQgagxTcjgqOfi5BIyajgKhkT5whZq5CRliaX5dj6EvHvg9M
- FYxx0YClwNBn41frGoDy/SD4gGx3LHvo6WmsvVZNLJ6TF2dwaA6pGABeFgTt2UhV1YhH
- tqu+i/5r3ybE/R89wQtSJjrZgc6w5n4nwYS5giAJKrVQuazv0W93osS7iCYdd1cIpk9K
- 5ikrk1TBjd4K5sLXnU30c2+P9efAlEBbVQ/8z760yiLwQo+Qv4wxIiRW4DnLCXkVv0Pa
- DwBRiGf00415ufarTZUC+QCz4DQFZUiWsLma+kU5Xymp9cmeyOsK6Kpk6IOrVKvVGLNg
- YFRA==
+ bh=QZZBrO2fb9RW3lLEu2YeNTeMP9i8BdeDxcd+vo+FJLk=;
+ b=HLezb53EBrA5nFC5vV1mavMU+P28Zd6R9bkdv1Q3tEuxe6IIxeYbJ8C74pAoF1zvWy
+ 6tqd4xiVxr1MhqeRAqZLdq485iIM+0ZmIAHBCZdaaYv1kPpt7oVji+Snky9Dezlphusx
+ zg6Gqrai3t3ZA4sJVOGKfxq7u/5nHt14MySHbh7oJ1FsFxbCE7FCkaJmPBSMzTK3WYvY
+ QkDbfY61PettwssPpNnOGxuvlpVMLSmtGg0dDQsm0nFP7M+oobIbcVQiBmokg2SBT0iG
+ loPE4dkVRFVEeQ8cC7NeZ5BJaXcDxBI8JhXpT4REp6cOcE3wH6N08ydgbt+mDLQNtPUh
+ Cs/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718019904; x=1718624704;
+ d=1e100.net; s=20230601; t=1718020007; x=1718624807;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=0ab5WEbnxdwGd7C6Ms9QkQvYWD0gtFDQO9Tc4KD8/9o=;
- b=r6549u7Zbg4wzf7jD/6WdyCEJIiftBvC2cX0R0kYlaI8RYNVHxnHxjcLK8gnAW4ckd
- sj8F9LZWKmo6Ew9wt8z+9Iray3xvt2d+kO4U/akrNjeAuEvNcJp3m8h43qnMwYiCOi4l
- kkfc3Cyu3YfVA7at+9W+HPdshzIoHEuOourC5TTz09/IX3HT5Q8DGj10QWL10Ivo+WxF
- jUJhNIbUNNs5Ggg8mqXafrVyVCqHdsBTFjucv1PbLZ6NsM2IHrTsak+ucbL5e9aPmAR8
- k7BJIdGoxGb28/ifNako2864TKVt6wyAHOGEFH84eqpodz+93JeAKqCfF3lMfC75Q9TW
- nrQg==
-X-Gm-Message-State: AOJu0YwhzA7X4QCAlGsqPb3qndUyEjKUIjhcuwyJP7i8s8gkVQMonK+R
- yfh24HwqdqvyJ3z5wULcAiIzvzbbmrfDz3AIs7vdOjZaRmXkHhlix2vBTosvw5jqgWasx0dgRyN
- 2l8VuvRsa9Y4yYPbX+3ieBQYAM0LJ8bhHX4zNvg==
-X-Google-Smtp-Source: AGHT+IExHjF/Caw2c/qn4xQeGodNWt0+sKGuw7WJKOaBfBdxiHpJSJQcPSfpY+fgT5vtZRpwdokdv9oS6Gro0aExZ78=
-X-Received: by 2002:a17:902:e752:b0:1f7:234b:4f3d with SMTP id
- d9443c01a7336-1f7234b8fadmr2942225ad.39.1718019903903; Mon, 10 Jun 2024
- 04:45:03 -0700 (PDT)
+ bh=QZZBrO2fb9RW3lLEu2YeNTeMP9i8BdeDxcd+vo+FJLk=;
+ b=e8bNa/0N9ETxkMKlJKtlSjNLaeOdU2JcfQoE9HAffNUyNZsBUJ8MTLyGPJU0SmO1sa
+ vFO5CwGGRzraqmzSZFCA4MkodnoOpui5M5bv+iSMS0sL643ixkEa+w2Q0KPX3Xu+Nhz3
+ EsSiUlGqvV9wpjMk60Dm6c9FG3BYBR5EyXd1Of9o6As86T1RO67fHrT443QgVcz+Ae4w
+ gI4bjuxdrfK20is5K9/AXyn+OBrJwOyOWYnLYrb1AEqB+WoiRBHXV/j/MKwfezKCGI0o
+ JFt/ncq7uRAyiZ5xXhXFMKIdtMcHoHOXTP5eBz//5zWDMRVNf/jYy4qQv4mFuvSVn5a7
+ ySjA==
+X-Gm-Message-State: AOJu0YyXaKaXmaARM46noi2FnDR3M9qEYSLdZjxX04nJ5XN6wixU05qo
+ OjyCWk7c604mbq9uyntPB0Hng1GxKsnAQYkc5RJNLEdCScmigrUxE3mCD+FfE92b9gVQ4Zp9/xM
+ AaZCjen9niBIiK2slfYnihqwQaR/RhoQ/kA2VCg==
+X-Google-Smtp-Source: AGHT+IFfH25k+j5KJhtsmxdqTBqTr7SU+a7E1CKgZ6BXSifLulDsW8rKEDD2FqjqCKHL7qfekmeDVjrX1mIDgquYtsM=
+X-Received: by 2002:a17:902:da8b:b0:1f6:51f5:540c with SMTP id
+ d9443c01a7336-1f6d02f41e5mr110087615ad.29.1718020007304; Mon, 10 Jun 2024
+ 04:46:47 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
- <20240607185240.1892031-12-sughosh.ganu@linaro.org>
-In-Reply-To: <20240607185240.1892031-12-sughosh.ganu@linaro.org>
+ <20240607185240.1892031-18-sughosh.ganu@linaro.org>
+In-Reply-To: <20240607185240.1892031-18-sughosh.ganu@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 10 Jun 2024 14:44:27 +0300
-Message-ID: <CAC_iWjJTtZsdPKB+RBUDnN9KturZH5M9oiGz35D0dfgrE52F6g@mail.gmail.com>
-Subject: Re: [RFC PATCH 11/31] lib: Kconfig: add a config symbol for getting
- memory map updates
+Date: Mon, 10 Jun 2024 14:46:11 +0300
+Message-ID: <CAC_iWjLd79VywGTAGRhPcG1=NHSypADt=suzN3vkVv_=ATzK+Q@mail.gmail.com>
+Subject: Re: [RFC PATCH 17/31] lmb: remove call to efi_lmb_reserve()
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
@@ -92,43 +91,70 @@ X-Virus-Status: Clean
 
 On Fri, 7 Jun 2024 at 21:54, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> Add a Kconfig symbol to enable getting updates on any memory map
-> changes that might be done by some other module. This notification
-> mechanism can then be used to have a synchronous view of allocated and
-> free memory.
-
-Is there any chance we want to build a firmware that allows memory not
-to be reserved?
-I think we should make the feature mandatory
-
-Cheers
-/Ilias
+> The changes in the EFI memory map are now notified to the LMB
+> module. There is therefore no need to explicitly get the efi memory
+> map and set aside the EFI allocated memory.
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
->  lib/Kconfig | 9 +++++++++
->  1 file changed, 9 insertions(+)
+>  lib/lmb.c | 35 -----------------------------------
+>  1 file changed, 35 deletions(-)
 >
-> diff --git a/lib/Kconfig b/lib/Kconfig
-> index 189e6eb31a..9ea02ae006 100644
-> --- a/lib/Kconfig
-> +++ b/lib/Kconfig
-> @@ -74,6 +74,15 @@ config HAVE_PRIVATE_LIBGCC
->  config LIB_UUID
->         bool
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> index 3059609aea..c9f6ca692e 100644
+> --- a/lib/lmb.c
+> +++ b/lib/lmb.c
+> @@ -204,38 +204,6 @@ void arch_lmb_reserve_generic(ulong sp, ulong end, ulong align)
+>         }
+>  }
 >
-> +config MEM_MAP_UPDATE_NOTIFY
-> +       bool "Get notified of any changes to the memory map"
-> +       default y if EVENT && LMB && EFI_LOADER
-> +       help
-> +         Enable this option to get notification on any changes to the
-> +         memory that is allocated or freed. This will allow different
-> +         modules that allocate memory to have a synchronous view of available
-> +         and allocated memory.
-> +
->  config RANDOM_UUID
->         bool "GPT Random UUID generation"
->         select LIB_UUID
+> -/**
+> - * efi_lmb_reserve() - add reservations for EFI memory
+> - *
+> - * Add reservations for all EFI memory areas that are not
+> - * EFI_CONVENTIONAL_MEMORY.
+> - *
+> - * Return:     0 on success, 1 on failure
+> - */
+> -static __maybe_unused int efi_lmb_reserve(void)
+> -{
+> -       struct efi_mem_desc *memmap = NULL, *map;
+> -       efi_uintn_t i, map_size = 0;
+> -       efi_status_t ret;
+> -
+> -       ret = efi_get_memory_map_alloc(&map_size, &memmap);
+> -       if (ret != EFI_SUCCESS)
+> -               return 1;
+> -
+> -       for (i = 0, map = memmap; i < map_size / sizeof(*map); ++map, ++i) {
+> -               if (map->type != EFI_CONVENTIONAL_MEMORY) {
+> -                       lmb_reserve_flags(map_to_sysmem((void *)(uintptr_t)
+> -                                                       map->physical_start),
+> -                                         map->num_pages * EFI_PAGE_SIZE,
+> -                                         map->type == EFI_RESERVED_MEMORY_TYPE
+> -                                             ? LMB_NOMAP : LMB_NONE);
+> -               }
+> -       }
+> -       efi_free_pool(memmap);
+> -
+> -       return 0;
+> -}
+> -
+>  /**
+>   * lmb_reserve_common() - Reserve memory region occupied by U-Boot image
+>   * @fdt_blob: pointer to the FDT blob
+> @@ -255,9 +223,6 @@ void lmb_reserve_common(void *fdt_blob)
+>
+>         if (CONFIG_IS_ENABLED(OF_LIBFDT) && fdt_blob)
+>                 boot_fdt_add_mem_rsv_regions(fdt_blob);
+> -
+> -       if (CONFIG_IS_ENABLED(EFI_LOADER))
+> -               efi_lmb_reserve();
+>  }
+>
+>  /**
 > --
 > 2.34.1
 >
+
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
