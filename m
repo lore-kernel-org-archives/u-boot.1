@@ -4,79 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAA33C27C55
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 17:45:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4007AC27C5E
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 18:54:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4195288622;
-	Mon, 10 Jun 2024 19:45:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3B7A188679;
+	Mon, 10 Jun 2024 20:54:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Yt6cBqau";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nw5wDIwj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1225888674; Mon, 10 Jun 2024 19:44:59 +0200 (CEST)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id D417C885B6; Mon, 10 Jun 2024 16:59:28 +0200 (CEST)
+Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
+ [IPv6:2607:f8b0:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF5BC88622
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 19:44:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 523B888476
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 16:59:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-2549c883c43so741070fac.1
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 10:44:56 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x12f.google.com with SMTP id
+ e9e14a558f8ab-3737b47c0acso18839355ab.3
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 07:59:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718041495; x=1718646295; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ok4R85OrVLn37jyeu2ZifU4QM7Krv1OgAFSr/GHK9Ws=;
- b=Yt6cBqaukns07m4ak3DArIFxwam3Rhg/qf+TTjTJVIMw7kr44TabvEVfu44pDN3tn4
- wJtbD3NYfNXWo/eTNCg21BtoyTL+s+CinAtPXipCIC7A1FDnl0QvjClP5jKuNSxGnnh1
- 5btEPOn9FDk0SmJfVMLHnLaOMvkLxQTnoHUIE=
+ d=chromium.org; s=google; t=1718031565; x=1718636365; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=GPaTeeUCMOpio4yMkH8ou8Mbyj4dUUvAR9tnDS3rVEw=;
+ b=nw5wDIwjHuQNqzsM76lkV8tJ/FYUoXoq1udbs+BFhvTcJVgXm/fYEQMNj9qTed3Uaa
+ 9C+soxoeSUDo7TvIcDnUHaHkdCogEZo3aPaOkzDxRFrJzgLXcftcEgcBJw7aEyKq6Fz6
+ phSAkFV01bqNDF58OpJ1V3Cy4N0Ml8uuV1Qcw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718041495; x=1718646295;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ok4R85OrVLn37jyeu2ZifU4QM7Krv1OgAFSr/GHK9Ws=;
- b=Hz32c+cok8RaYVi9EzF/X/ZqzJT6adO94jgc3Mx/C5kOv6YqRyO/grGrWQso+65deL
- 3VXdz//1D0R5mUSPHI2CAdWi1kieMakvSqynEoui2cIL3hhHjlYxJZ7fuwLXcJyQNW+J
- ldaUWlC/31iUh5+P9epOk4sbcDLVCQMSpUFm6VFGH8PVO4816U0UhIsjBAdDT2eyc/Px
- iOE6KfvFJi1ErTuh9+bYGWWOx5BJembefBoFl3qJdhgRWaemtHCBeZ/nHp/ZbJMsQ/ni
- BbeJKm85NIDkyeJMqY8YuT/r2bHlULzD5lJRpx5EZ8ZSIWtJ0uMJWwq8ynlYVA4A01Q9
- Gt5w==
-X-Gm-Message-State: AOJu0YyJ1/IVdBnBNbH/KETQSx7UiKsNDSh6lO/1EgZqqFDRe7fk53J6
- fLkCojN/nrTa5+ulp9dMVyJOVuU+7q/QFrRP99kCno45JxwIxai/VrhyDc3dbHY=
-X-Google-Smtp-Source: AGHT+IGI+ux7GdyO44yJxhXilCi/eVce36QD83mM0ywrevVhlVfV4REZjcBPzwNUXckH6EF/g/cVXQ==
-X-Received: by 2002:a05:6870:a706:b0:254:6f6c:5262 with SMTP id
- 586e51a60fabf-254ecd34bbamr166460fac.14.1718041494189; 
- Mon, 10 Jun 2024 10:44:54 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
- [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-25447e29786sm2375690fac.21.2024.06.10.10.44.52
+ d=1e100.net; s=20230601; t=1718031565; x=1718636365;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=GPaTeeUCMOpio4yMkH8ou8Mbyj4dUUvAR9tnDS3rVEw=;
+ b=TqOUIGWiqMaMYi5OO9AlT12vjAlPIC621CO6WHNjlEKk4QMxxvbRWbCyAE4ElT4H/n
+ XzIjagkb0vcsZXQUmlBvUEXCZ5RMh6cOwG1tl/9P0bAJ0GeWpTqxY2KaQRcOnKmLrS4P
+ MGqYUoanc62Dr8UMps7POHBupLVZrf0fvCgyMhtECHrqpE+xMgI51DpFriYZ9HM1U8d5
+ 4V6qG+qd1gk58hJE7Vf7u/+l7aYfAfF6O6Ub7KMVKlbgxPmCHUh2wB6acIigNIQK25qZ
+ G/NN1moWoNHwBOAIx+OV1HW1hWaFRAyHO4kyVl1qk+WRAkib3ruZvs0/X0zvN9wyp2U0
+ q06g==
+X-Gm-Message-State: AOJu0YxonrNgC+8/sT6kiLbkIiniaNK3sktwGH57X16EtO2gIRUYax+i
+ AT4O/4zAH4NO3qdeSVbQQStAkewd6wWm35OEdCJuVX6YdX2q5MEl7f6PX6X+tt7jScITw2ejfBU
+ xSA==
+X-Google-Smtp-Source: AGHT+IHNCnBdYb0WzE0emyGljGhPRoET6uxlsygMfkX2CxOdae0pp2OwzRvR++YjChat4157CTWzWA==
+X-Received: by 2002:a92:c5c3:0:b0:375:932e:7e9c with SMTP id
+ e9e14a558f8ab-375932e80bbmr57453995ab.19.1718031564545; 
+ Mon, 10 Jun 2024 07:59:24 -0700 (PDT)
+Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
+ [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-375ac6104dasm2526885ab.4.2024.06.10.07.59.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Jun 2024 10:44:53 -0700 (PDT)
-Date: Mon, 10 Jun 2024 11:44:50 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mon, 10 Jun 2024 07:59:24 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Allen Martin <amartin@nvidia.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Chanho Park <chanho61.park@samsung.com>, Chen-Yu Tsai <wens@csie.org>,
+ Dragan Simic <dsimic@manjaro.org>, Eddie James <eajames@linux.ibm.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
- Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>
-Subject: Re: [RFC PATCH 22/31] test: lmb: run the LMB tests only on sandbox
-Message-ID: <20240610174450.GX68077@bill-the-cat>
-References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
- <20240607185240.1892031-23-sughosh.ganu@linaro.org>
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jeffy Chen <jeffy.chen@rock-chips.com>,
+ Jerry Van Baren <vanbaren@cideas.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Lukasz Majewski <l.majewski@samsung.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>,
+ Shiji Yang <yangshiji66@outlook.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, huang lin <hl@rock-chips.com>
+Subject: [PATCH v2 0/9] Bug-fixes for a few boards
+Date: Mon, 10 Jun 2024 08:59:11 -0600
+Message-Id: <20240610145920.3302001-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ejGEfesYJYLiYL01"
-Content-Disposition: inline
-In-Reply-To: <20240607185240.1892031-23-sughosh.ganu@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Mon, 10 Jun 2024 20:54:07 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,44 +111,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series includes fixes to get some rockchip and nvidia boards
+working again. It also drops the broken Beaglebone Black config and
+provides a devicetree fix for coral (x86).
 
---ejGEfesYJYLiYL01
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Changes in v2:
+- Put the conditions under EFI_TCG2_PROTOCOL
+- Consider MEASURED_BOOT too
+- Remove the superfluous if() and drop the debug() as well
+- Use 'phase' instead of 'stage'
+- Add new patch to correct memory size in SPL
+- Drop patch "regulator: rk8xx: Fix incorrect parameter"
+- Rewrite boneblack patch to onstead drop the target and update docs
 
-On Sat, Jun 08, 2024 at 12:22:31AM +0530, Sughosh Ganu wrote:
+Simon Glass (9):
+  nvidia: nyan-big: Disable debug UART
+  tpm: Avoid code bloat when not using EFI_TCG2_PROTOCOL
+  rockchip: veyron: Add logging for power init
+  power: regulator: Handle autoset in regulators_enable_boot_on()
+  fdt: Correct condition for bloblist existing
+  spl: Allow ATF to work when dcache is disabled
+  rockchip: Ensure memory size is available in RK3399 SPL
+  rockchip: bob: kevin: Disable dcache in SPL
+  Drop the special am335x_boneblack_vboot target
 
-> The LMB memory map is now persistent and global. Running the tests for
-> the LMB module will result in the memory map getting reset, and this
-> will have side-effects on the rest of the working of the platform. Run
-> the LMB tests only on the sandbox platform, which is meant for running
-> such kinds of tests.
->=20
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+ board/google/veyron/veyron.c               | 30 +++----
+ board/ti/am335x/MAINTAINERS                |  1 -
+ boot/Kconfig                               |  4 +
+ common/spl/spl_atf.c                       |  3 +-
+ configs/am335x_boneblack_vboot_defconfig   | 94 ----------------------
+ configs/am335x_evm_defconfig               |  3 +-
+ configs/chromebook_bob_defconfig           |  1 +
+ configs/chromebook_kevin_defconfig         |  1 +
+ configs/nyan-big_defconfig                 |  1 -
+ doc/usage/fit/beaglebone_vboot.rst         | 21 +++--
+ drivers/power/regulator/regulator-uclass.c |  2 +-
+ drivers/ram/rockchip/sdram_rk3399.c        | 49 ++++++-----
+ lib/Kconfig                                |  4 -
+ lib/fdtdec.c                               | 12 ++-
+ 14 files changed, 70 insertions(+), 156 deletions(-)
+ delete mode 100644 configs/am335x_boneblack_vboot_defconfig
 
-I'm not sure about this. We can reset real hardware as often as we need,
-too. Did you run in to problems with this test on non-sandbox?
+-- 
+2.34.1
 
---=20
-Tom
-
---ejGEfesYJYLiYL01
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZnO48ACgkQFHw5/5Y0
-tyxjiQv+OG+8bIqRswh4Oyu7bD6Bv3e2kFzpheJ4IWgfEr/bDaMBGu5HokvcqNfV
-mvtCb8L66NicHjcCkIN3p24Lft5Wgtk2fGlEV0XlkkB3u9wPJ40bKt5h6hwgySJZ
-Z1LguPnZdUuvN4ELY8qhZxvreuAU+9w+QXYYNgEQOfpE/bUlJadPLT3zmfcRYdSM
-0pGWR1vao5UttpcF42SPHff6qqCLDRM+FPxdo9rRtbU0DAXhiKu9v9j12L5Os4uN
-5Gw4spmLrump9sGbdipYa99RpbkDikJLo4rGG+C4RmMRdgtyDnFGY1rF2q/AL6AC
-X/VSobBIYol8rmU2EN/YL9NUnYu+ul0PZv6VuepUKv1BP6XJ3jTtJGwUeSiANpT3
-zOgLo5ZgHHuAcRLEFuldPtX8X/y6snE5oet0qAYfYZoiyGYGA2ei5ux4jDu4jzMI
-hKr6ptrsD5T8YdBUPoI3vvxezFf49rB+WaEkhEP4Iy7yZb2brXHIJWSJd2Bb/JT0
-lkGh51xH
-=fkgP
------END PGP SIGNATURE-----
-
---ejGEfesYJYLiYL01--
