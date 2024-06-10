@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCC3BC27C55
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 16:09:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 167DFC27C5E
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 16:10:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EEE1988629;
-	Mon, 10 Jun 2024 18:09:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5601488633;
+	Mon, 10 Jun 2024 18:09:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 480898863B; Mon, 10 Jun 2024 18:09:39 +0200 (CEST)
+ id 25C8888637; Mon, 10 Jun 2024 18:09:41 +0200 (CEST)
 Received: from smtp-bc08.mail.infomaniak.ch (smtp-bc08.mail.infomaniak.ch
  [45.157.188.8])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61EA288626
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 18:09:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AEA588812B
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 18:09:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
  [10.7.10.107])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4VycFY0yZszrrR;
- Mon, 10 Jun 2024 18:09:37 +0200 (CEST)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4VycFZ3mwmzxRT;
+ Mon, 10 Jun 2024 18:09:38 +0200 (CEST)
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4VycFT5hC1z1Kw; Mon, 10 Jun 2024 18:09:33 +0200 (CEST)
+ id 4VycFY6bFyzKG; Mon, 10 Jun 2024 18:09:37 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Mon, 10 Jun 2024 18:09:14 +0200
-Subject: [PATCH 2/4] dm: core: fix signedness in debug messages
+Date: Mon, 10 Jun 2024 18:09:16 +0200
+Subject: [PATCH 4/4] dm: core: fix typo in SPL_DM_WARN prompt text
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240610-misc-20240610-v1-2-6914f1725dd4@cherry.de>
+Message-Id: <20240610-misc-20240610-v1-4-6914f1725dd4@cherry.de>
 References: <20240610-misc-20240610-v1-0-6914f1725dd4@cherry.de>
 In-Reply-To: <20240610-misc-20240610-v1-0-6914f1725dd4@cherry.de>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
@@ -63,79 +63,26 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-outp always point to an unsigned type in ofnode_read_u* functions but
-the format specifier is currently always using signed type.
+It should read "in SPL" and not "wuth SPL".
 
-This is an issue since the signed type can only contain half of the
-unsigned type values above 0.
-
-However, this now breaks another usecase. Indeed,
-ofnode_read_s32_default is actually passing an s32 but it'll be printed
-as a u32 instead. But since the function is called u32, it makes more
-sense to have it print an unsigned value.
-
-This was discovered because arm,smc-id = <0x82000010>; on RK3588S is
-above the max signed value and therefore would return a negative signed
-decimal value instead of its proper unsigned one.
-
-Fixes: fa12dfa08a7b ("dm: core: support reading a single indexed u64 value")
-Fixes: 4bb7075c830c ("dm: core: support reading a single indexed u32 value")
-Fixes: 7e5196c409f1 ("dm: core: Add ofnode function to read a 64-bit int")
-Fixes: 9e51204527dc ("dm: core: Add operations on device tree references")
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- drivers/core/ofnode.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ drivers/core/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-index 9a5eaaa4d13..9ff46460e7d 100644
---- a/drivers/core/ofnode.c
-+++ b/drivers/core/ofnode.c
-@@ -326,7 +326,7 @@ int ofnode_read_u8(ofnode node, const char *propname, u8 *outp)
- 		return -EINVAL;
- 	}
- 	*outp = *cell;
--	debug("%#x (%d)\n", *outp, *outp);
-+	debug("%#x (%u)\n", *outp, *outp);
+diff --git a/drivers/core/Kconfig b/drivers/core/Kconfig
+index 1081d61fcf0..e4b1a66ecb1 100644
+--- a/drivers/core/Kconfig
++++ b/drivers/core/Kconfig
+@@ -56,7 +56,7 @@ config DM_WARN
+ 	  out - it will do nothing when called.
  
- 	return 0;
- }
-@@ -357,7 +357,7 @@ int ofnode_read_u16(ofnode node, const char *propname, u16 *outp)
- 		return -EINVAL;
- 	}
- 	*outp = be16_to_cpup(cell);
--	debug("%#x (%d)\n", *outp, *outp);
-+	debug("%#x (%u)\n", *outp, *outp);
- 
- 	return 0;
- }
-@@ -409,7 +409,7 @@ int ofnode_read_u32_index(ofnode node, const char *propname, int index,
- 	}
- 
- 	*outp = fdt32_to_cpu(cell[index]);
--	debug("%#x (%d)\n", *outp, *outp);
-+	debug("%#x (%u)\n", *outp, *outp);
- 
- 	return 0;
- }
-@@ -439,7 +439,7 @@ int ofnode_read_u64_index(ofnode node, const char *propname, int index,
- 	}
- 
- 	*outp = fdt64_to_cpu(cell[index]);
--	debug("%#llx (%lld)\n", *outp, *outp);
-+	debug("%#llx (%llu)\n", *outp, *outp);
- 
- 	return 0;
- }
-@@ -479,7 +479,7 @@ int ofnode_read_u64(ofnode node, const char *propname, u64 *outp)
- 		return -EINVAL;
- 	}
- 	*outp = fdt64_to_cpu(cell[0]);
--	debug("%#llx (%lld)\n", (unsigned long long)*outp,
-+	debug("%#llx (%llu)\n", (unsigned long long)*outp,
- 	      (unsigned long long)*outp);
- 
- 	return 0;
+ config SPL_DM_WARN
+-	bool "Enable warnings in driver model wuth SPL"
++	bool "Enable warnings in driver model in SPL"
+ 	depends on SPL_DM
+ 	help
+ 	  Enable this to see warnings related to driver model in SPL
 
 -- 
 2.45.2
