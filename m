@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66CAEC27C5E
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 09:34:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9422C27C55
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 09:38:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1150881C1;
-	Mon, 10 Jun 2024 11:34:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5578087E9D;
+	Mon, 10 Jun 2024 11:38:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kqS3pfsB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EwQ+QMnW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3377588468; Mon, 10 Jun 2024 11:34:39 +0200 (CEST)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
+ id A136287E0D; Mon, 10 Jun 2024 11:38:28 +0200 (CEST)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAFA6881C1
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 11:34:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5AE4487E9D
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 11:38:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-1f6f1677b26so10386665ad.0
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 02:34:36 -0700 (PDT)
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1f6dfc17006so17188675ad.0
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 02:38:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718012075; x=1718616875; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1718012305; x=1718617105; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=v7tmsQ0hplW2JpEdFVEmtAKGfg2xWK3XDKJ435enUaA=;
- b=kqS3pfsBsb1nabDHSgG6uv+PxZUgZIuadKDK15rZ2eAOSS2pcadEWpSzSBDtssCJ1l
- av/B0g+o0qj4KT0zudg9gLA1WHm9GXJ2arzETnzci8lCducUgglfMcOLm/jSrcW4Mjqq
- fAK6akXXDqCYUvZOHijlsmAwGh90XbR0h6zt8hDwVvIKAhWmpVKmo9h+fLrGW6fK5hnH
- yM+G+gcXRZ3vovkAoUDh0bjM8hHS+nY+CzxhvB90nI3lS3OtXn+YjyLabFns2Xm1jwyp
- UoPq1vLWFEyoRPd9rh71bhuqT4REoRIQLyHCpG/8WrmXHI1AQmXltdDXeosrL7I7tHw9
- SD3Q==
+ bh=iT8Dw5X0r4fFTQcRUaFsnX4kLyr53aZ/+jF2O1ia8K0=;
+ b=EwQ+QMnWsS16P1df2cejd8wKYA8PtqN94Cs0U5pFXrXhk4lY1NavxqLEUhbSB15NfT
+ G+LfYiCmvdXKSdHpMaIPGhxxZVoqqffRMv9n2wj1124OQAh3dSYFn90UBpipbTYSwBHw
+ xAsOJ9qa1JfBi+Pzw4yr/Vv3/efO2U63RYui5e1chbzHgTv6MJeJGIfVXUq59af7tsFc
+ jdklK/vrhQYW80IUfhX+SbTYdXkpS1fq2i0EGI+3t5aNTsfuYN8HQQ3z69FYQc6kav4c
+ ZNmJDtnAVkuWxFS5blDeIiwIE6GWz8ec7bGz37cv3TxIdjpl3LmIptZeqU9jYetdIUtC
+ CysA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718012075; x=1718616875;
+ d=1e100.net; s=20230601; t=1718012305; x=1718617105;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=v7tmsQ0hplW2JpEdFVEmtAKGfg2xWK3XDKJ435enUaA=;
- b=CDefB1r3FijwOiXAYbhjCJRRtv06FGcg+jkOU6Abatm5pg2O8t3SNfpBEwIIRQ9Mm0
- yX6f10hAvFgcvS60BhdpMR63MpOP9lciJiHtuI2k/fAAlEyPHcn7f44U0030vvYh+q3I
- n2AOVyO04/X/pTC9Pa7DaWvC2p3ZD4kCuQ1W2e/pq8zrJlGxV80TNtrUSlCz5iPF6bon
- gR3aW1NB7tlm4M/h3b5xNCTvXQE/wc4YOkRE8SwoitZepSDwBxnpLgYR5ZrEHEGMvrz4
- X0dENL852OA9Qumiu1ACvLZ6+3Bslx4f3xnDMfkVYzvOydXiG6xAN3xjXaq9Oprx0goy
- L9uA==
-X-Gm-Message-State: AOJu0YwdooeAIQL+X8NE9FpIiSpOSg8vK8g/BwjhgIyzyczpUJDajEvO
- XqhiZ+LHtCHXObE+VOqOIkf4G2H8aOGqwUqb3vPwuNxKjP6+pZdcmrT25QjPtSXFi0fh+aZJ+qq
- uwxBnMOEZIV77vzmx8xr+Nwa8m8gFcXXD0aGDQKrdT7om3vc20UHZsQ==
-X-Google-Smtp-Source: AGHT+IElCImYfZb2Jsv4r/dvySwH37E61NXUduQ7jTjXEeqrTx03BEpRJwm/1l0jTVGTmapasLrCWtSvilnXscB2W9Y=
-X-Received: by 2002:a17:902:e54c:b0:1f6:1a86:37ba with SMTP id
- d9443c01a7336-1f6d010c375mr137786295ad.2.1718012075193; Mon, 10 Jun 2024
- 02:34:35 -0700 (PDT)
+ bh=iT8Dw5X0r4fFTQcRUaFsnX4kLyr53aZ/+jF2O1ia8K0=;
+ b=GRwNWrTTvObPR+KXM/x4rFBNMq8OWfwk5Kgjpqd+LHjx3P9XTAf3dehYZWvjP/JgUL
+ QvYwLyUVadMtp6GDOlkqzNrPGOYVaOyNygsVGz8Dhu7FB1JmIZ+uVZ4Ll0WTzcDilEDa
+ 516/aBxNHz//SsBPF0B1EfboACg6QFMuwrMvmjGtMcZXuq7J2IMpiRAzLPo0Hj7draS7
+ w5GDIKoqrlpNesZo+qP6oqTZmPKwVgW+qNTBSTUNOIcuOrvSN/LLMb6PAIph+OCJCzCt
+ aiY+9YwYYKN+QD91sHjtbbGJTXVt2mcPMliw0O6fGuxB/QiE24PnTcSFWKtM5fPOxOaZ
+ Ix0Q==
+X-Gm-Message-State: AOJu0YxEsRRI+NOEo8oQ5bFnEWJoJ5ejK4dgC0XvORWlD89rVjodKqUX
+ oSo5bVoWX3TZh8HeQ7AajojVPXFDbVpIRHvlY5qPMjhSD2rUW6XdERrh5h5YauuRwug4hD3Jicg
+ f7er47JfODn/wutr+Y5/vlkxHNwRADpMJjBoUEIcq2qBpoXFz6YbzXQ==
+X-Google-Smtp-Source: AGHT+IGhvh3aAfRkP8GO7TRoC7U9fLZKoAmno5/RpqwDSI3Pzh0hzOYTpMwvtchRx0yCPowy/JD/oEPiwZhp9PVOjsE=
+X-Received: by 2002:a17:902:f690:b0:1f6:fa4a:5080 with SMTP id
+ d9443c01a7336-1f6fa4a537cmr39157035ad.8.1718012304771; Mon, 10 Jun 2024
+ 02:38:24 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
- <20240607185240.1892031-2-sughosh.ganu@linaro.org>
-In-Reply-To: <20240607185240.1892031-2-sughosh.ganu@linaro.org>
+ <20240607185240.1892031-3-sughosh.ganu@linaro.org>
+In-Reply-To: <20240607185240.1892031-3-sughosh.ganu@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 10 Jun 2024 12:33:59 +0300
-Message-ID: <CAC_iWjJ0a71iV4Ai9avekaS9s2PTgv+cyCAus8scFHaoSa+1ow@mail.gmail.com>
-Subject: Re: [RFC PATCH 01/31] lmb: remove the unused lmb_is_reserved()
- function
+Date: Mon, 10 Jun 2024 12:37:47 +0300
+Message-ID: <CAC_iWj++=PHS2mwpL70=qTQ-9SFR50X3KvKgDpEmq1BryWQKaw@mail.gmail.com>
+Subject: Re: [RFC PATCH 02/31] lmb: staticize __lmb_alloc_base()
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
@@ -92,54 +91,92 @@ X-Virus-Status: Clean
 
 On Fri, 7 Jun 2024 at 21:53, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> The lmb_is_reserved() API is not used. There is another API,
-> lmb_is_reserved_flags() which can be used to check if a particular
-> memory region is reserved. Remove the unused API.
+> The __lmb_alloc_base() function is only called from within the lmb
+> module. Moreover, the lmb_alloc() and lmb_alloc_base() API's are good
+> enough for the allocation API calls. Make the __lmb_alloc_base()
+> function static.
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
->  include/lmb.h | 11 -----------
->  lib/lmb.c     |  5 -----
->  2 files changed, 16 deletions(-)
+>  include/lmb.h |  2 --
+>  lib/lmb.c     | 39 ++++++++++++++++++++-------------------
+>  2 files changed, 20 insertions(+), 21 deletions(-)
 >
 > diff --git a/include/lmb.h b/include/lmb.h
-> index 231b68b27d..6c50d93e83 100644
+> index 6c50d93e83..7b87181b9e 100644
 > --- a/include/lmb.h
 > +++ b/include/lmb.h
-> @@ -117,17 +117,6 @@ phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align,
+> @@ -112,8 +112,6 @@ long lmb_reserve_flags(struct lmb *lmb, phys_addr_t base,
+>  phys_addr_t lmb_alloc(struct lmb *lmb, phys_size_t size, ulong align);
+>  phys_addr_t lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align,
+>                            phys_addr_t max_addr);
+> -phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align,
+> -                            phys_addr_t max_addr);
 >  phys_addr_t lmb_alloc_addr(struct lmb *lmb, phys_addr_t base, phys_size_t size);
 >  phys_size_t lmb_get_free_size(struct lmb *lmb, phys_addr_t addr);
 >
-> -/**
-> - * lmb_is_reserved() - test if address is in reserved region
-> - *
-> - * The function checks if a reserved region comprising @addr exists.
-> - *
-> - * @lmb:       the logical memory block struct
-> - * @addr:      address to be tested
-> - * Return:     1 if reservation exists, 0 otherwise
-> - */
-> -int lmb_is_reserved(struct lmb *lmb, phys_addr_t addr);
-> -
->  /**
->   * lmb_is_reserved_flags() - test if address is in reserved region with flag bits set
->   *
 > diff --git a/lib/lmb.c b/lib/lmb.c
-> index 44f9820531..adc3abd5b4 100644
+> index adc3abd5b4..4d39c0d1f9 100644
 > --- a/lib/lmb.c
 > +++ b/lib/lmb.c
-> @@ -565,11 +565,6 @@ int lmb_is_reserved_flags(struct lmb *lmb, phys_addr_t addr, int flags)
+> @@ -435,30 +435,13 @@ static long lmb_overlaps_region(struct lmb_region *rgn, phys_addr_t base,
+>         return (i < rgn->cnt) ? i : -1;
+>  }
+>
+> -phys_addr_t lmb_alloc(struct lmb *lmb, phys_size_t size, ulong align)
+> -{
+> -       return lmb_alloc_base(lmb, size, align, LMB_ALLOC_ANYWHERE);
+> -}
+> -
+> -phys_addr_t lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align, phys_addr_t max_addr)
+> -{
+> -       phys_addr_t alloc;
+> -
+> -       alloc = __lmb_alloc_base(lmb, size, align, max_addr);
+> -
+> -       if (alloc == 0)
+> -               printf("ERROR: Failed to allocate 0x%lx bytes below 0x%lx.\n",
+> -                      (ulong)size, (ulong)max_addr);
+> -
+> -       return alloc;
+> -}
+> -
+>  static phys_addr_t lmb_align_down(phys_addr_t addr, phys_size_t size)
+>  {
+>         return addr & ~(size - 1);
+>  }
+>
+> -phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align, phys_addr_t max_addr)
+> +static phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size,
+> +                                   ulong align, phys_addr_t max_addr)
+>  {
+>         long i, rgn;
+>         phys_addr_t base = 0;
+> @@ -499,6 +482,24 @@ phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align, phy
 >         return 0;
 >  }
 >
-> -int lmb_is_reserved(struct lmb *lmb, phys_addr_t addr)
-> -{
-> -       return lmb_is_reserved_flags(lmb, addr, LMB_NONE);
-> -}
-> -
->  __weak void board_lmb_reserve(struct lmb *lmb)
->  {
->         /* please define platform specific board_lmb_reserve() */
+> +phys_addr_t lmb_alloc(struct lmb *lmb, phys_size_t size, ulong align)
+> +{
+> +       return lmb_alloc_base(lmb, size, align, LMB_ALLOC_ANYWHERE);
+> +}
+> +
+> +phys_addr_t lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align, phys_addr_t max_addr)
+> +{
+> +       phys_addr_t alloc;
+> +
+> +       alloc = __lmb_alloc_base(lmb, size, align, max_addr);
+> +
+> +       if (alloc == 0)
+> +               printf("ERROR: Failed to allocate 0x%lx bytes below 0x%lx.\n",
+> +                      (ulong)size, (ulong)max_addr);
+> +
+> +       return alloc;
+> +}
+> +
+>  /*
+>   * Try to allocate a specific address range: must be in defined memory but not
+>   * reserved
 > --
 > 2.34.1
 >
