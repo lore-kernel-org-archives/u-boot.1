@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B3CCC27C55
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 09:44:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 504DBC27C55
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 09:45:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 57B3F880A8;
-	Mon, 10 Jun 2024 11:44:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BC4C5884BF;
+	Mon, 10 Jun 2024 11:45:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="jPQ57Hex";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="gNqFcIIZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B1CE88239; Mon, 10 Jun 2024 11:44:49 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 19F3287EBD; Mon, 10 Jun 2024 11:45:34 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77B1687E0D
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 11:44:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 30BB887E0D
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 11:45:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jmasson@baylibre.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5751bcb3139so5066690a12.1
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 02:44:47 -0700 (PDT)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a6269885572so917983966b.1
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 02:45:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718012687; x=1718617487;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718012731; x=1718617531;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:in-reply-to:subject:cc:to:from:from:to
  :cc:subject:date:message-id:reply-to;
- bh=kitNeS9GtZKqwC9ndq4IvdHnjYHHSMX8VKyElLVC9FU=;
- b=jPQ57Hex3ya4eNBqa9ozJxJRA1UwKBXYcT629S7yXl4IZ8I8/tAG6rdORzXVNaBByj
- zNAxJZk1ffdU1tt1AOmLFOCmlGK8y3BhDMcia0xZRt0OSX1EjZXO8lpKVvJtozOqyeik
- KJfk3tMPjMMVOfXxLUz9YQqtMxrtJSjHfc0sfckjzzJm4gi/8Wtd8/8LrbTeWXuuCmiI
- JLF+aeZT+/FuL0qLdW8VNAEPh/fYYD/MHaEmELolPbpArzlmstUCYbRZ/LKYRsYEEQms
- uSyTm/rcgFiSoxCMTcB+6DWOOp1mZGvfjWiuMbYBeek1QGCR/xHR+f0YzhM/KaVqrZCl
- 4fiw==
+ bh=/jDdtsnPkPsC4yWqLV7zP4peSlzjmLdK5xPV8yzJwVY=;
+ b=gNqFcIIZe5ahW7zJ0/oybWTUFL/3bT2tMGblaaSHcYRsaa5DnA+2Udmfcgft0falns
+ jXgUzTQYCIx59IAaebx10yCWdiNpq1EgeCfoP1UdYPXOanHiomKE0x8b4ZW8LwEtpxnY
+ rWEMXNg54Ucdo7SPpGGCiboForR4zUtilMNu8jC+HlwbvVme8NXKPXe7egBf2j4JnjeQ
+ rvQOLZKtolqMiTwiNJhHQidv/lT8XboXvlAj6JS6CqtTOqe5Wr5AS/qI3xjTPaeSs5Bg
+ +yKotMM9DBz9jumgwY13JQD+C0byjmQIunQA1kiu8vMaexN4RnJ/RIavIXoZAe9SYNEQ
+ Tq6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718012687; x=1718617487;
+ d=1e100.net; s=20230601; t=1718012731; x=1718617531;
  h=mime-version:message-id:date:in-reply-to:subject:cc:to:from
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=kitNeS9GtZKqwC9ndq4IvdHnjYHHSMX8VKyElLVC9FU=;
- b=AICrk1+/FFDcAdEe1k11jDREmCIJ7+PF/abuP6VSX6psqdsuN/ul7adNRD3ZBnoXxJ
- nnzf/xArmQ1I12n9zrbCcZqj+MP/F9/+3OCN3/mmraGjt+cRMikQTEv5SD2NzkirHnlH
- GxajMmoHwbi1Ng8bCUA3kASwgaj0U7vTVJoJV1HNwJvNlfQyRd0Uerbp3QWwMRtZnctP
- s95IwthU6w8rFAR+XQHi/qMKWtofriGcVYFFZLOXGybmmR4QGOUq3pBTURNFXNgnTTA2
- tfEOeQBR/YbFJeN3ivCqoeoGj3g6ArYIQziw1FCeQfCYb7hTKgaETGcvqxiL/Doev+n+
- q+QA==
+ bh=/jDdtsnPkPsC4yWqLV7zP4peSlzjmLdK5xPV8yzJwVY=;
+ b=lupbKYSdvNsqrx6wAcqNmf+Kddx7fZGak6NUOg3hXrYTDsHaKTO+CVzA08hapjEau3
+ xCt00rLavbiGX41w6k8+jE/q/9tyNqz/0YnM+YUmkPWYUt7VWLoWqp5BcHj/2ehC0NeQ
+ l903n5qlih3w8G8lR0h1F0TI3txXsUYZOJ+HqXLzCTGKHhWD4d2GLKFiyqdPOsYm9lEp
+ ywKI5N8hYexUKnfpYAtcWpNLSiOfk69+ozJBcWSu7c69WZLxZW9Qqmd0LylHH9CoBpHB
+ +5g/Kk90orDnk+kC2JAVMU07li/pg9biu3yQW5LDwbZ1Cz4+6H1bfBoqWYL1ju1RmEn2
+ 5XtA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXMRbz/PTPPSecS0ImWCWfSqLe/zawp93t9sdr57WH+Af8zcJnIw79CkKyafjrx4Kn8YdUzsgB2qDM67WeB9jZsmqvYoA==
-X-Gm-Message-State: AOJu0YwufUdjk7tF4k5Xnetgiee7lxDzq4A3QkdRoyFa8HBbVcrM2cJ/
- V2HWlBDdSCneED4xtCkHaW8wh3Y3i4qlOAjPbYB5PX5XErRPilp/TjPZahLdvPc=
-X-Google-Smtp-Source: AGHT+IEbQYRLFZXTPCneBs9gw23mi2dPAwK45qCXm/2z7sXIT2aMhhYt+pDRG90kZFkhc9+ktBGguQ==
-X-Received: by 2002:a50:d70c:0:b0:57c:628d:f0eb with SMTP id
- 4fb4d7f45d1cf-57c628df308mr3639089a12.24.1718012686829; 
- Mon, 10 Jun 2024 02:44:46 -0700 (PDT)
+ AJvYcCX/8G2iKu3I0B4lwA7+iII1NHRvNW0Zv+RsyYQAuR9fmdktUDNyYrOv27G4enoFxnFOUaQBQb+W8D5iF12ntZoQWaULwg==
+X-Gm-Message-State: AOJu0YzbPP0RhEcsRH2rQe7ji/wIEFOTHaW9MySJoztdMaMpoGTdylHe
+ 4PKKfe1Mkr+ojqJvn+QKry7Vn5XKrzh4iRKMdTKKHEM7jsJPsvNaz/4ihrEndjg=
+X-Google-Smtp-Source: AGHT+IHqXO4Pk6vfC3NCtspYoSTTzBasoJeA3gQeA9Hdl+SxFcPF9XcXmvbam+W4UcCfADGIqJYBAQ==
+X-Received: by 2002:a17:906:3c04:b0:a6f:81b:9639 with SMTP id
+ a640c23a62f3a-a6f081bd1d1mr342598966b.26.1718012731292; 
+ Mon, 10 Jun 2024 02:45:31 -0700 (PDT)
 Received: from localhost ([2a04:cec2:b:49d2:7655:6cc3:de57:63b7])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-57aae11a98csm7154312a12.48.2024.06.10.02.44.46
+ a640c23a62f3a-a6c806eaa1dsm625292266b.107.2024.06.10.02.45.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Jun 2024 02:44:46 -0700 (PDT)
+ Mon, 10 Jun 2024 02:45:30 -0700 (PDT)
 From: Julien Masson <jmasson@baylibre.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Tom Rini
- <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, <u-boot@lists.denx.de>, Mattijs
- Korpershoek <mkorpershoek@baylibre.com>
-Subject: Re: [PATCH] image: Set load_end on partial loads
-In-Reply-To: <20240523-image-partial-decomp-v1-1-af036235963a@baylibre.com>
-Date: Mon, 10 Jun 2024 11:44:45 +0200
-Message-ID: <87o789i12q.fsf@fedora.mail-host-address-is-not-set>
+ <trini@konsulko.com>, Dmitrii Merkurev <dimorinny@google.com>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Cody Schuffelen
+ <schuffelen@google.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH] cmd: bcb: Fix bcb compilation when CONFIG_CMD_BCB=n
+In-Reply-To: <20240603-bcb-compil-v1-1-4edc2c77eed3@baylibre.com>
+Date: Mon, 10 Jun 2024 11:45:29 +0200
+Message-ID: <87le3di11i.fsf@fedora.mail-host-address-is-not-set>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -93,57 +93,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Mon 10 Jun 2024 at 11:43, Mattijs Korpershoek <mkorpershoek@baylibre.com> wrote:
+On Mon 10 Jun 2024 at 11:45, Mattijs Korpershoek <mkorpershoek@baylibre.com> wrote:
 
-> When decompressing, it's possible that the algorithm only performs
-> a partial decompression.
-> This usually happens when CONFIG_SYS_BOOTM_LEN is too small for
-> the uncompressed image.
+> commit dfeb4f0d7935 ("cmd: bcb: extend BCB C API to allow read/write the fields")
+> introduced the bcb_get() function.
 > 
-> When that happens, image_decomp() returns an error and *load_end == load.
-> The error is then handled by handle_decomp_error().
+> When CONFIG_CMD_BCB=n, that function is stubbed.
+> The stubbed function has a wrong prototype: value_size arg is missing.
 > 
-> handle_decomp_error() expects the number of uncompressed bytes in
-> uncomp_size but receives *load_end - load == load - load == 0.
+> Add the missing argument to fix build when CONFIG_CMD_BCB=n.
 > 
-> Because of this, handle_decomp_error does not report the expected
-> "Image too large: increase CONFIG_SYS_BOOTM_LEN" error message.
-> 
-> Modify the image_decomp() logic to always report the decompressed size,
-> even when a partial decompression happened.
-> 
+> Fixes: dfeb4f0d7935 ("cmd: bcb: extend BCB C API to allow read/write the fields")
 > Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 > ---
-> This has been tested on an AM62X SK EVM board with a big lz4 image and
-> the default CONFIG_SYS_BOOTM_LEN of 0x800000.
+>  include/bcb.h | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 > 
-> This has also been tested on sandbox using:
-> => ut compression
-> ---
->  boot/image.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/boot/image.c b/boot/image.c
-> index 073931cd7a3f..4f48e6eb563d 100644
-> --- a/boot/image.c
-> +++ b/boot/image.c
-> @@ -531,10 +531,10 @@ int image_decomp(int comp, ulong load, ulong image_start, int type,
->  		printf("Unimplemented compression type %d\n", comp);
->  		return ret;
->  	}
-> -	if (ret)
-> -		return ret;
+> diff --git a/include/bcb.h b/include/bcb.h
+> index 1941d8c28b4f..a56b547595a6 100644
+> --- a/include/bcb.h
+> +++ b/include/bcb.h
+> @@ -58,7 +58,8 @@ static inline int bcb_set(enum bcb_field field, const char *value)
+>  	return -EOPNOTSUPP;
+>  }
 >  
->  	*load_end = load + image_len;
-> +	if (ret)
-> +		return ret;
->  
->  	return 0;
+> -static inline int bcb_get(enum bcb_field field, char *value_out)
+> +static inline int bcb_get(enum bcb_field field,
+> +			  char *value_out, size_t value_size)
+>  {
+>  	return -EOPNOTSUPP;
 >  }
 > 
 > ---
-> base-commit: a7f0154c412859323396111dd0c09dbafbc153cb
-> change-id: 20240523-image-partial-decomp-d6604e998e3a
+> base-commit: ea722aa5eb33740ae77e8816aeb72b385e621cd0
+> change-id: 20240603-bcb-compil-d8eaf7074475
 > 
 > Best regards,
 > -- 
