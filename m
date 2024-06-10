@@ -4,77 +4,158 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 836BFC27C5E
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 06:46:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCB77C27C5F
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 08:33:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A26918848F;
-	Mon, 10 Jun 2024 08:46:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A6AAE88387;
+	Mon, 10 Jun 2024 10:33:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sn16VVMb";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="Eu8k1nMT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D823884A4; Mon, 10 Jun 2024 08:46:00 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4C698883DA; Mon, 10 Jun 2024 10:33:57 +0200 (CEST)
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur04on20700.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2611::700])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 618B88826E
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 08:45:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 45E08882ED
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 10:33:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-57a677d3d79so9314512a12.1
- for <u-boot@lists.denx.de>; Sun, 09 Jun 2024 23:45:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718001958; x=1718606758; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VRaUdjBv27tRnvPXj9GASsl58urriiW1wsCMfClc0Yo=;
- b=sn16VVMbqBxcsaIHH81zAH80bEyR3du37GxY12A5uZCwwbGAyC3b6HZMsrCdcAMzba
- s6Xblwi6YqzE2Kq/qTDv6VVtpkUEwO33qKYQ4Ke6mj1ZmNunF8GbY7Mv1xlpNt8PBibJ
- g6HD4VoZo1+KUCLDI5CUQuKK1pjZCOT/YxQ5yFCYgms7GfWfYSXPnPplHbxqjQ73zsfz
- Minx5G4uCKx5Mv1knJXWKDMcrSazy0lroCNejqOe6yA7MJ5IcHbDohnnbtzQotX74ZT3
- PvxzBsQsQfjR7hZyqfhUGN9DEKw3J38YC+QAakRURM1+7BR97OlRFn4G1RPOcm5YybYU
- rNyQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718001958; x=1718606758;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=VRaUdjBv27tRnvPXj9GASsl58urriiW1wsCMfClc0Yo=;
- b=UBRabCn4WYkihXhWI6CVGdYEr40DCpne/qGGZckUgYuRhOMIgRYdNAQq2Hw34s3Au9
- KllYWCPetTkcp0ZXtiHCY6CfgDv01EdEnXy6rRkrEuH3tJhkNq68vQzClB45XuWfV/mg
- OHd3IvAwtRPrDtQ2Ovda6jmMXhhsLn+dEjHVOdR3YkJG7LwZ2pBVvBMVj3/68Nq9va1f
- B2w5xyGNY6PqVIxjeuM9ny9qKo/x7Fm/ai5G5+1DTVShOW831JRHbKVSHHwYR2gbJN08
- 2EcwW/qWXAfIHFmM+EHjlY7t9XcVBJxy1Z0dpAtg6pbuF+vQQjrw+W5Q8AHt6SYeBPPC
- w80A==
-X-Gm-Message-State: AOJu0YyHhaUI249sPARVvLqO5ciwqqtbKLF5ZQihSbVxg7hP8HW43TWT
- X596W7cj2tjgpbHmHfKSFDrnI3w7Pqipd5zoJn8a4yChoujLohP/HbL4lnlWGw69wWq/l0Ge2zX
- tSvvgMv+xPNvkyzpeMNfbNBu2rQqvjlYly++iEg==
-X-Google-Smtp-Source: AGHT+IGnJQSCMCu3UytNO5T6p80MQWc+aO5r+2KJcj0JezzkCFgEkVBdGuwFIPXghKGSL6TmeBzjLQJcYuacsO886ak=
-X-Received: by 2002:a50:9550:0:b0:57c:57af:6e88 with SMTP id
- 4fb4d7f45d1cf-57c57af70a9mr6287834a12.9.1718001957790; Sun, 09 Jun 2024
- 23:45:57 -0700 (PDT)
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=LkmTDp7bPXG2ymk2slq6bCX78RBdgeZWn47F4FL8MQoSmLgqnQxK0QXgUXTxaLGqZrHh+dm6TqlmCjOhYJMiDXniTwyKe4Pp4UQft9b4GFqXwABcAHW1cB26o3RVI1Z/ezRNnd8NY765zNACV1ICZ7skyPPxpxNe+LtcvelA+6JMgl+q+yPF/iB9gyhUvxdsPCL9HEi/wSt1fyeQ8xQk+8/pL1l83D/SjvpLJK4pkx/u5EO4kMNk5jYjdqCpVUNKUiUkBsMza2g+5XUy/PgEF+6R2AmbkFU29yd+oFLK0cQtYjBoxuQUO1mnmKPEaN1Bl9hNFI3qxhHUP9Aj6JHyqA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=yaLTElxzCzdxGz4BW9WVZF9tY/Q4ljkl+5eQqyypFKc=;
+ b=apD2rxdflkmOFTg/pIys9zW5Kr4a6FE10ndqnVR1eytE+nwAP9Y+XfGwF2IUK4vl/Kg0dTW7jrqp5XdLi7mtMSXcBCKRrrIJsVWfxWYGRav8jymVZ9YqQ2wyjLYCyhhDnbxgk107zOox6Cvl9bj5lYhC/5k8c+SqDNWZv1aCdgVW+S6Lctngmt5GjW78gRx96pPyEJLXiwvSz+xA3wtuF5gHLvaWvyFAD+lYeP5mhJd/mBPPxVoswA+C6RRPTlpXu3CqJnlgn3rFDzg+lTthA6JSMqq+25oQ4Y+Oql6J4TT8Wqhqj9OMNvsnmE7lV4VtwpTaUn2AYlkyC7xTo0ik9A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=yaLTElxzCzdxGz4BW9WVZF9tY/Q4ljkl+5eQqyypFKc=;
+ b=Eu8k1nMTPM1OMrIgxf13BPDHouvohq06XQzjhQAHDiDpOeSqfzsooluJ2L2xwJENucGffJZHMRtbxtUKZwE7tYCWqppFh2F/IM+mEquvTgPkmyJ8xCPl43RH0dK5W7EIoP5I+m7o9APLE6D+LkShzsPtSH5CvO5RZz7R63EeRHA=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA4PR04MB7982.eurprd04.prod.outlook.com (2603:10a6:102:c4::9)
+ by PAXPR04MB8334.eurprd04.prod.outlook.com (2603:10a6:102:1cc::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.36; Mon, 10 Jun
+ 2024 08:33:51 +0000
+Received: from PA4PR04MB7982.eurprd04.prod.outlook.com
+ ([fe80::3c4:afd5:49ac:77af]) by PA4PR04MB7982.eurprd04.prod.outlook.com
+ ([fe80::3c4:afd5:49ac:77af%4]) with mapi id 15.20.7633.036; Mon, 10 Jun 2024
+ 08:33:51 +0000
+Message-ID: <5df3fe93-5e1e-4000-aebd-ff2090abf68f@cherry.de>
+Date: Mon, 10 Jun 2024 10:33:49 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] dm: typo prbing
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+References: <20240608041244.7325-1-heinrich.schuchardt@canonical.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20240608041244.7325-1-heinrich.schuchardt@canonical.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: WA2P291CA0022.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:1e::24) To PA4PR04MB7982.eurprd04.prod.outlook.com
+ (2603:10a6:102:c4::9)
 MIME-Version: 1.0
-References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
- <20240607185240.1892031-32-sughosh.ganu@linaro.org>
- <D859DD98-73B6-4E7D-BE36-5442845F3FE9@gmx.de>
-In-Reply-To: <D859DD98-73B6-4E7D-BE36-5442845F3FE9@gmx.de>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 10 Jun 2024 12:15:46 +0530
-Message-ID: <CADg8p95MmfYdinwqqKHL6SN0+OsATQ-+zd7CVOn8X6P5bUT-ow@mail.gmail.com>
-Subject: Re: [RFC PATCH 31/31] temp: cmd: efi: add a command to dump EFI
- memory map
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>, 
- Fabio Estevam <festevam@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA4PR04MB7982:EE_|PAXPR04MB8334:EE_
+X-MS-Office365-Filtering-Correlation-Id: df18cc5a-545c-42e7-c470-08dc89280e81
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230031|366007|1800799015|376005;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NFg4Q3RKaVoreDFGOHRkSWNRc0FSV2NkQnpwRHNDdm5QVmliUTc3UXVVY0dk?=
+ =?utf-8?B?WVFreEdzRmxYdVAvQkJzSnJ1NnBHd2FDT0htM0RjWlFxaHBwN25VRGhGRnhL?=
+ =?utf-8?B?WUN2Z2lpeDB6S3JBK1orbHB5dE0xSmVWVDhISkdTSkhJU3JONkJWVFdYemFu?=
+ =?utf-8?B?YSsrcFBlb0hpTzJLVmNzeG5BeGNZdjR0NWVpTlM4QmtkODhZa0NCcU5QZENn?=
+ =?utf-8?B?QS8yYXI3K1ZPN251UE5RaS8zbFQrdEpRc0NQbjVYZ1J1cG8rRmdwZkdyYzRE?=
+ =?utf-8?B?WVlTZExFNTgrcGVHV2lOYkRtYVY5RjN1QStXY0hSSk8yWlp2TG5YcmYxd3JQ?=
+ =?utf-8?B?WjdxUjdjWDNQZ0RWcXFwQS9DUmRYVjR0VHZZQVBOYnFmWkVCMjJ5cFVvcXMv?=
+ =?utf-8?B?TjYzRXVRM0IrVHpPTE9JUDFBOVFNQ25aVFdrcTVPdEtjRUxhNWwxRTVYNXlY?=
+ =?utf-8?B?K3I5RHpRWElPU3J6QnBaMVFxQS82eDdlZFV5a21WZ0EvNzY5QkV0eE9qdVNL?=
+ =?utf-8?B?QnRJdll6RGM0NUxNNVc2bHlVZzRjZ215WmpzMmhoYitsY3BNR3R1LzJCYkFD?=
+ =?utf-8?B?WEM5Uk41OWF6SzZZV3BJb0kxQVFtYnNNUzl1QlR0dVVRT29HOEJLMHYzejNQ?=
+ =?utf-8?B?Q3I4N1E0aE5qRFRSbkZjd01NU0pMb01ueUU3WldMVzgrZ0QzVDJJRXZPNys1?=
+ =?utf-8?B?R3VxK2tpZXBERzJEVkhHN240ZUFDeTNHbDFhelpvUzhLV2RuRC9tT1NYRjBB?=
+ =?utf-8?B?dGUrbFMzbFdXSDJKakJqOXNwak53c3ZqTVdGbEVtZWtUS25kYWxBYUxKSjdC?=
+ =?utf-8?B?SmJsbitqTzY5QnNyUXh6KzNzUW85RlpERzE1b2ZBZmZMdFlxVjE3dnYrQUt1?=
+ =?utf-8?B?OXpLN25vZlB1NU0zdytobUhza2d6VVpWalZyR1VTWmtpQ1FjRkJFaWJ2YzNy?=
+ =?utf-8?B?c2lES2pOVVdrUkVQYWFNWElROGROMkRDRHZXVGFTb09oYVl4UmhsTE1PanpG?=
+ =?utf-8?B?Y3ozWmxVeHMwR0JoNUErZnVGTnFKSkdLcU9icFhiWlk3bWd5Zm1ISDJaM0Rz?=
+ =?utf-8?B?TXpXRHM0eEhoN1VQOTNreVg0dVFzV2RYQXQvS0ZsTlV1RnI5RHRUUTRialZY?=
+ =?utf-8?B?Mi9oZHJZa3c3ait2MXllRkJiaEtueWRnUU9pTVl0UFVBeDhyakY4YkhuRDFu?=
+ =?utf-8?B?bU9mMk1uVXdXMWRickRNbHc3dVZmc20xRGJyMWhLcUJkdTFOeHdrVkw3K2hr?=
+ =?utf-8?B?NmpoU2VyNmNxME8wK2dGNXU0N294MDAxT2dEenNSTE1ueFhzTXRmUlg2bDVm?=
+ =?utf-8?B?QUhtb3VQRll3M0hQMzBQSGx0TkV5alB4UFJ6cGNFbkV0VktEL1NZRzhBVk01?=
+ =?utf-8?B?K0RvaEJhZXF2N0hzQnVlLzZJc3F5NXZSdGhSMG9JZ0ptNEdoaWpacnVIdWsr?=
+ =?utf-8?B?empoRjFVQ2VBcDRGT1pXS3kvZUl1VGVxQU1TazlhQXJocStMdVAvd1pOQ1Fa?=
+ =?utf-8?B?YmEvSGtvUlRFNFNSdDRWMjlSdkNuTGcyMnhJQmVKdjNCcXA5WENvbTdDam50?=
+ =?utf-8?B?VzlzUmp2dlZZK2Z2MlUwREZPcGhiRlFSZkN3RVArR0J2WXk4eXBnWmRiQmlU?=
+ =?utf-8?B?TFAwZStQZkp6WlhrZlpJbVVsVjFIZ0JiMG0wbzFWUXdhZmRIL056eW5pakNB?=
+ =?utf-8?B?alc0Z1g1QUlwcmhpdHBWdTBVSUVtWjcreFRRM2NpN3hIbWNVdzRXWlc3U2sv?=
+ =?utf-8?Q?Y33w77jaCylBhKxoG4=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA4PR04MB7982.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(366007)(1800799015)(376005); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Q0tReWNudXZVV21MbHJwS3A2ZGhvSCtLT2k5SW9XaW1wbXBYWGZJc2JmYnlh?=
+ =?utf-8?B?QjRKM2d5cE9TY3E1NHA2TUFNbC9XNnVyN0dKWWpqMllNZTVwYWw3QWxUd2lI?=
+ =?utf-8?B?SHZqelBEUUpBNmVaNDF4S3ZSNXZaUmFPL1RORGl6dVQwTzJ4dnhSRitGWDZB?=
+ =?utf-8?B?cWxOeFU3bWxRRXRtamYzeG5xakJieU9DRml2ci84UEd6TkNGNzRHZ2JtNUpt?=
+ =?utf-8?B?eHFCYUREWVVqZ002WWFhblUzZXJpeWljYkM3anpuWmdQNHFnUnFTRVU1NDd1?=
+ =?utf-8?B?c3RtMTBZR0gzOHc4UkxGZE5tcThTcnVhWUVnZEY4MC9HT1dTYTdJVXVJZVdB?=
+ =?utf-8?B?aW1nRWdzVnlySFpGZnVMUzBTakNaSzVaZDU0ZmQ3NURHbUFpRWZrYmxXKys5?=
+ =?utf-8?B?eVUwK3BnK3NYSWpIaG1SUG9aS0dOdWpMNjhJQjRxeWlqbzJEOSsxbXRvRlk0?=
+ =?utf-8?B?MU5EY2JKekJGdnJZT3RQR2NPT2ZYNFVWUkZtWG1CL2M3NGxETytlekZIQ1Er?=
+ =?utf-8?B?bHJGa1pVUFRwNEZDY0JGNm0rbkloQ01DTXVxVkNGWFpKbUQ4YURNR25MNzlx?=
+ =?utf-8?B?Mm5XdGZjenMyeFBzdTZBekhQd2hMcEpzbXozRC92MDRTYzFJck1XRm9lVU5Q?=
+ =?utf-8?B?YXE5ZiswcmtvRTc5ZHdXQ29UdE5JOUZpTG1tczFDT3dHNVZTY2NoL3FtVndS?=
+ =?utf-8?B?b05wRGtrYVRVeC9qNHA3MVlkR1VlalcrbVJrMzJ3SUd6VU5nS0dBWWtTeGQw?=
+ =?utf-8?B?VVp2ZjJxWW5mMytzK3o2MGJLV2puckdSMmZmc0IzbUJtSHJBRmI2Tnk3cWxJ?=
+ =?utf-8?B?c2lvQWlLUDI2NDlFY0ZyMHUrQXJUQm52b0wvWVBZK09FUllpd2k5dHpFRmJr?=
+ =?utf-8?B?Rll2Q2ZaeXZ5NkZxWm1IZ0hjWkczakdjT052QnNraVpWTjFLZWVuSGwzWGxS?=
+ =?utf-8?B?ZjJJVlZUZ1Nqc1JiL25OY21HM1BpbzNrck9RWmRjQXA5QytBZWYrVWljbkxy?=
+ =?utf-8?B?SnZ1WGd2em0wUHpjVFBjSXNEc0pqYURmVmQ1TDZUdERycVAra2g5Mi9wQUV4?=
+ =?utf-8?B?SU5mVFJBNGduVUpsQWt1MXZvaHVzNGFaYlg0NTArbHNOdzZhYlFkSFIvN0dx?=
+ =?utf-8?B?UEtHcjBERVZDSXNrWlpJWnp6NWkxYzlTWnRzYmhiMHRtcGNmdTJ4WVVtWG5v?=
+ =?utf-8?B?elVCRkZpWXdaQnErcklxTUpSSDhONDFjMlRubHZNdUpWeVNFZEVnODdDNzFP?=
+ =?utf-8?B?ZHlPbnhlU3IvSDJWdUdXenFXVkRsRC9yNEFrVE0yZTZDUkVGMFJuT0Y2WFRm?=
+ =?utf-8?B?dlBzVDZ2a1R1aUpYQXFvU3JnZTZCRDJjdm9GN3hLQ2NpMHhOMVFIa2RoVk40?=
+ =?utf-8?B?ZzdiM3JwaU9wdC83SmZtdE1mT1FLMHBUczIvcWF3T1U1YTFOTVg2Qm4rM0RT?=
+ =?utf-8?B?MWNQK3hKZ21VNEZFdGxuWk12UG95L25ZT2JrM1A2N1d1TGtHcDVuSDI3SVpl?=
+ =?utf-8?B?YzkzN1BBMXhtS3pQb0FnSHprNlZLTTZWRUVMejN6cXFoL1NWalNibkxERXhO?=
+ =?utf-8?B?ekEzR3RSUlJJSndwbmJoRmtuclFWZlp0dFB2aWI3OHlwNnJiSTNjRUlGa1J0?=
+ =?utf-8?B?OUo5d09EZnZZM2VSVHFnVzNQUEMvekFZRUVCdW93ditBMmp4Y3V3QW82UG5I?=
+ =?utf-8?B?K01IMzFaQWY3RnhKSXQ2Vm5waU12SHhIaWx1bVd3WW5jRlFLVW1NNGt3M2w4?=
+ =?utf-8?B?bGRXRnQ3UHN0czNUanRLZjJUUHdPRGVhQy9vUjdVeE5tS2dSTGE1bFB5VVNh?=
+ =?utf-8?B?ZVVoWmVqUlc1ZHdmSTVLbEllV3c4L2VkVXBmUEIvbHMyUVUyeFE2ek5BTmpy?=
+ =?utf-8?B?WVFad0NhMzVOYXhKOVVzNENhbGRKeWpkSXJyRklBWjRlQkdVNStzY0dEc2Na?=
+ =?utf-8?B?b2wxa3ZrSEhncVJCOGZiMUlQK082YUtIckd5dVJOUSs4cEhCQVBybStLdVNE?=
+ =?utf-8?B?eUYxRmZ4MzlDRlhEMERVMG9DUHNYQ1VDMVI5cTdCeUFGeDVMMWlwM3dPcVRy?=
+ =?utf-8?B?OXJXK1JNdnpKYWQyVTNrQWZLeUpubDRvTjlZQXdnWTdLb20xY01US3AxdDhs?=
+ =?utf-8?B?c0pZT1BoUTJ6VDRTZjcvWWZYWFdXNW5uRVF1Y0l0c1Y4UGV6cU8wZVJqdHY1?=
+ =?utf-8?Q?ZGXxWrBcPgTB5QlR9Nk1wK0=3D?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: df18cc5a-545c-42e7-c470-08dc89280e81
+X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7982.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2024 08:33:51.6945 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: rK9am1nYdOugeDkllKoOX0N7y60G0R4czCjORP83P+m3hMGZEhx0/GM8om1O1EyaoHlOOlai5ZEf+mh1N3UD8GZ5AZ570rzrguFbJiNFM1Y=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8334
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,142 +172,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 8 Jun 2024 at 09:03, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
->
->
-> Am 7. Juni 2024 20:52:40 MESZ schrieb Sughosh Ganu <sughosh.ganu@linaro.org>:
-> >Add a command to dump the EFI memory map.
->
-> What are you missing in 'efidebug memmap'?
+Hi Heinrich,
 
-Nothing. I wasn't aware of this sub-command. Thanks for pointing it out.
+On 6/8/24 6:12 AM, Heinrich Schuchardt wrote:
+> %s/prbing/probing/
+> 
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
--sughosh
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
->
-> Best regards
->
-> Heinrich
->
-> >
-> >Not for committing.
-> >
-> >Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> >---
-> > cmd/Makefile                |  1 +
-> > cmd/efi_map_dump.c          | 28 ++++++++++++++++++++++++++++
-> > include/efi_loader.h        |  2 ++
-> > lib/efi_loader/efi_memory.c | 32 ++++++++++++++++++++++++++++++++
-> > 4 files changed, 63 insertions(+)
-> > create mode 100644 cmd/efi_map_dump.c
-> >
-> >diff --git a/cmd/Makefile b/cmd/Makefile
-> >index 35fcc4af5a..315046def6 100644
-> >--- a/cmd/Makefile
-> >+++ b/cmd/Makefile
-> >@@ -11,6 +11,7 @@ obj-y += help.o
-> > obj-y += panic.o
-> > obj-y += version.o
-> > obj-y += efi_memory.o
-> >+obj-y += efi_map_dump.o
-> >
-> > # command
-> > obj-$(CONFIG_CMD_ARMFFA) += armffa.o
-> >diff --git a/cmd/efi_map_dump.c b/cmd/efi_map_dump.c
-> >new file mode 100644
-> >index 0000000000..f2a5932767
-> >--- /dev/null
-> >+++ b/cmd/efi_map_dump.c
-> >@@ -0,0 +1,28 @@
-> >+// SPDX-License-Identifier: GPL-2.0+
-> >+/*
-> >+ *  Allocate and Free EFI memory
-> >+ *
-> >+ *  Copyright (c) 2024 Linaro Limited
-> >+ */
-> >+
-> >+#include <command.h>
-> >+#include <efi_loader.h>
-> >+
-> >+static int do_efi_map_dump(struct cmd_tbl *cmdtp, int flag, int argc,
-> >+                         char *const argv[])
-> >+{
-> >+//    printf("%s: argc => %d\n", __func__, argc);
-> >+
-> >+      if (argc != 1)
-> >+              return CMD_RET_USAGE;
-> >+
-> >+      dump_efi_memory_map();
-> >+
-> >+      return CMD_RET_SUCCESS;
-> >+}
-> >+
-> >+U_BOOT_CMD(
-> >+      efi_map_dump, 1, 0, do_efi_map_dump,
-> >+      "Dump the EFI memory map",
-> >+      ""
-> >+);
-> >diff --git a/include/efi_loader.h b/include/efi_loader.h
-> >index 9600941aa3..40f894f182 100644
-> >--- a/include/efi_loader.h
-> >+++ b/include/efi_loader.h
-> >@@ -791,6 +791,8 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory_map_size,
-> >                               uint32_t *descriptor_version);
-> > /* Adds a range into the EFI memory map */
-> > efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type);
-> >+/* Dump the contents of the EFI memory map */
-> >+void dump_efi_memory_map(void);
-> > /* Adds a conventional range into the EFI memory map */
-> > efi_status_t efi_add_conventional_memory_map(u64 ram_start, u64 ram_end,
-> >                                            u64 ram_top);
-> >diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> >index 93244161b0..7ab1b86140 100644
-> >--- a/lib/efi_loader/efi_memory.c
-> >+++ b/lib/efi_loader/efi_memory.c
-> >@@ -47,6 +47,8 @@ static LIST_HEAD(efi_mem);
-> > void *efi_bounce_buffer;
-> > #endif
-> >
-> >+static uint64_t desc_get_end(struct efi_mem_desc *desc);
-> >+
-> > /**
-> >  * struct efi_pool_allocation - memory block allocated from pool
-> >  *
-> >@@ -118,6 +120,36 @@ static int lmb_mem_map_update_sync(void *ctx, struct event *event)
-> > EVENT_SPY_FULL(EVT_LMB_MAP_UPDATE, lmb_mem_map_update_sync);
-> > #endif /* MEM_MAP_UPDATE_NOTIFY */
-> >
-> >+static void dump_efi_mem_desc(struct efi_mem_desc *desc)
-> >+{
-> >+      u64 end;
-> >+
-> >+      end = desc_get_end(desc);
-> >+
-> >+      printf("-----------------------------------\n");
-> >+      printf("Memory Range   [0x%llx - 0x%llx]\n",
-> >+             desc->physical_start, end);
-> >+      printf("Num Pages      [0x%llx]\n", desc->num_pages);
-> >+      printf("Memory Type    [0x%x]\n", desc->type);
-> >+      printf("Attribute      [0x%llx]\n", desc->attribute);
-> >+      printf("-----------------------------------\n");
-> >+}
-> >+
-> >+void dump_efi_memory_map(void)
-> >+{
-> >+      struct list_head *lhandle;
-> >+
-> >+      list_for_each(lhandle, &efi_mem) {
-> >+              struct efi_mem_list *lmem;
-> >+              struct efi_mem_desc *desc;
-> >+
-> >+              lmem = list_entry(lhandle, struct efi_mem_list, link);
-> >+              desc = &lmem->desc;
-> >+
-> >+              dump_efi_mem_desc(desc);
-> >+      }
-> >+}
-> >+
-> > /**
-> >  * checksum() - calculate checksum for memory allocated from pool
-> >  *
+Thanks!
+Quentin
