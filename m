@@ -4,94 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4007AC27C5E
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 18:54:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C9C8C27C55
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 18:54:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B7A188679;
+	by phobos.denx.de (Postfix) with ESMTP id 95F4E886A4;
 	Mon, 10 Jun 2024 20:54:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nw5wDIwj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="d9LdNFwa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D417C885B6; Mon, 10 Jun 2024 16:59:28 +0200 (CEST)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
+ id DC3B888692; Mon, 10 Jun 2024 20:51:23 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 523B888476
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 16:59:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A65D98852D
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 20:51:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-3737b47c0acso18839355ab.3
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 07:59:26 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=vassilisamir@gmail.com
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a6f1cf00b3aso247072966b.0
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 11:51:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718031565; x=1718636365; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1718045481; x=1718650281; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=GPaTeeUCMOpio4yMkH8ou8Mbyj4dUUvAR9tnDS3rVEw=;
- b=nw5wDIwjHuQNqzsM76lkV8tJ/FYUoXoq1udbs+BFhvTcJVgXm/fYEQMNj9qTed3Uaa
- 9C+soxoeSUDo7TvIcDnUHaHkdCogEZo3aPaOkzDxRFrJzgLXcftcEgcBJw7aEyKq6Fz6
- phSAkFV01bqNDF58OpJ1V3Cy4N0Ml8uuV1Qcw=
+ bh=s1TVoHXDKexrZCEG6rmtfrrhgP1MPN0+X56XyC7Cxfw=;
+ b=d9LdNFwa83odY7z5EPQorzheC9HblEiBicC6e1rrV7jsbTJynvafnvHjMLE63l2uUb
+ pGgAF140SGbpcwOdKosASNGoAQNXr9DfWVtk5x3V3nMcWVku0QxuVEQRRx41scQMNzXE
+ S9908CZFk2qVJUkycv3MjBy5GnSqr+KuF+J+LgYKR5dmz/EvMT/JOwGwzPNrKCt1rUK1
+ 8971HBYIxJktOU/CqtOGPC3WRNzzM2h/RCe2Z4TCLLepTWAREFq0XSjxBJ2EHvWy2M0i
+ V/izkbgBBMhalolnwhvqB5Q20JnVvCQkpeAUVL1qz78FUgcD8bBt6Eo7p+GohBAnZjbE
+ ZUNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718031565; x=1718636365;
+ d=1e100.net; s=20230601; t=1718045481; x=1718650281;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=GPaTeeUCMOpio4yMkH8ou8Mbyj4dUUvAR9tnDS3rVEw=;
- b=TqOUIGWiqMaMYi5OO9AlT12vjAlPIC621CO6WHNjlEKk4QMxxvbRWbCyAE4ElT4H/n
- XzIjagkb0vcsZXQUmlBvUEXCZ5RMh6cOwG1tl/9P0bAJ0GeWpTqxY2KaQRcOnKmLrS4P
- MGqYUoanc62Dr8UMps7POHBupLVZrf0fvCgyMhtECHrqpE+xMgI51DpFriYZ9HM1U8d5
- 4V6qG+qd1gk58hJE7Vf7u/+l7aYfAfF6O6Ub7KMVKlbgxPmCHUh2wB6acIigNIQK25qZ
- G/NN1moWoNHwBOAIx+OV1HW1hWaFRAyHO4kyVl1qk+WRAkib3ruZvs0/X0zvN9wyp2U0
- q06g==
-X-Gm-Message-State: AOJu0YxonrNgC+8/sT6kiLbkIiniaNK3sktwGH57X16EtO2gIRUYax+i
- AT4O/4zAH4NO3qdeSVbQQStAkewd6wWm35OEdCJuVX6YdX2q5MEl7f6PX6X+tt7jScITw2ejfBU
- xSA==
-X-Google-Smtp-Source: AGHT+IHNCnBdYb0WzE0emyGljGhPRoET6uxlsygMfkX2CxOdae0pp2OwzRvR++YjChat4157CTWzWA==
-X-Received: by 2002:a92:c5c3:0:b0:375:932e:7e9c with SMTP id
- e9e14a558f8ab-375932e80bbmr57453995ab.19.1718031564545; 
- Mon, 10 Jun 2024 07:59:24 -0700 (PDT)
-Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
- [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-375ac6104dasm2526885ab.4.2024.06.10.07.59.23
+ bh=s1TVoHXDKexrZCEG6rmtfrrhgP1MPN0+X56XyC7Cxfw=;
+ b=oyHlNtvXuVx4Ddk/xPvBsSv/KKtwOiz+ZaBKov5zAVDu6dWhgIwmIgiBP3vF5mjtqo
+ RdMn3usfzWy7usOeYh+aECqEqZoqHYeEZZyyktxOo5BxUyiHURz7EUcpGEXhgKKlrrLv
+ OsJIRld4kat7NGbWhMw2KWqe5dznipzlhM2hdUNwILNbJF9y3qzByZK22fB4VWmnTV2W
+ rryzpe4XD+cjr7Fw0IdnHJtIshtesVJsCzQQvjrrfHlKwtfeLs6pBAoA+p3FYJ+/fg2V
+ GvxUi7NE6X0Zlnq+qR0PMbYU3UmvfJI/AhgA/a+7+ccliBkIDtqCpK/8TDUzNWfF3YUh
+ VgOw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVgJop9BnkPqDOIj+EJEk16QDrlyzFzMlkS+TDC4IKS3IZP0Fd03s0aZg6wMmp6GnApW2YLKFQE2CH2LeMhCU+XY42HZw==
+X-Gm-Message-State: AOJu0YxVZrqrxdgLPnR7HTWNNhEWPLC5UWDQsLwQG9QigQBBjfTGgzPD
+ Ff4bTpAp3VUWSPJbhuqdHsAJ1uxqDr6vdgUkK3X1LfZ0ndT5Nrv5
+X-Google-Smtp-Source: AGHT+IHnRoMiO9QwbFsq4+d5zSJF19pvwfsvXltIVMAmrN4JMEBDGGu+x8oaZkC+LYO3ksFHWU5Lzw==
+X-Received: by 2002:a17:906:b885:b0:a6e:fdc8:ae42 with SMTP id
+ a640c23a62f3a-a6f34cb468bmr31050466b.12.1718045480875; 
+ Mon, 10 Jun 2024 11:51:20 -0700 (PDT)
+Received: from localhost.localdomain ([2a04:ee41:82:7577:ed15:c026:8826:cce0])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a6f1245ff6esm281964166b.58.2024.06.10.11.51.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Jun 2024 07:59:24 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Allen Martin <amartin@nvidia.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
- Chanho Park <chanho61.park@samsung.com>, Chen-Yu Tsai <wens@csie.org>,
- Dragan Simic <dsimic@manjaro.org>, Eddie James <eajames@linux.ibm.com>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jeffy Chen <jeffy.chen@rock-chips.com>,
- Jerry Van Baren <vanbaren@cideas.com>, Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>,
- Lukasz Majewski <l.majewski@samsung.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Martyn Welch <martyn.welch@collabora.com>,
- Michal Simek <michal.simek@amd.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>,
- Shiji Yang <yangshiji66@outlook.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, huang lin <hl@rock-chips.com>
-Subject: [PATCH v2 0/9] Bug-fixes for a few boards
-Date: Mon, 10 Jun 2024 08:59:11 -0600
-Message-Id: <20240610145920.3302001-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
+ Mon, 10 Jun 2024 11:51:20 -0700 (PDT)
+From: Vasileios Amoiridis <vassilisamir@gmail.com>
+To: trini@konsulko.com,
+	hs@denx.de,
+	pro@denx.de
+Cc: vasileios.amoiridis@cern.ch, quentin.schulz@cherry.de,
+ u-boot@lists.denx.de, Vasileios Amoiridis <vassilisamir@gmail.com>
+Subject: [PATCH v2 0/1]: drivers: bootcount: Add support for FAT filesystem
+Date: Mon, 10 Jun 2024 20:51:15 +0200
+Message-Id: <20240610185116.353604-1-vassilisamir@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Mon, 10 Jun 2024 20:54:07 +0200
@@ -111,47 +94,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series includes fixes to get some rockchip and nvidia boards
-working again. It also drops the broken Beaglebone Black config and
-provides a devicetree fix for coral (x86).
-
 Changes in v2:
-- Put the conditions under EFI_TCG2_PROTOCOL
-- Consider MEASURED_BOOT too
-- Remove the superfluous if() and drop the debug() as well
-- Use 'phase' instead of 'stage'
-- Add new patch to correct memory size in SPL
-- Drop patch "regulator: rk8xx: Fix incorrect parameter"
-- Rewrite boneblack patch to onstead drop the target and update docs
+	- Use generic code by utilizing FS_TYPE_ANY
+	- Change filename from bootcount_ext.c to bootcount_fs.c
 
-Simon Glass (9):
-  nvidia: nyan-big: Disable debug UART
-  tpm: Avoid code bloat when not using EFI_TCG2_PROTOCOL
-  rockchip: veyron: Add logging for power init
-  power: regulator: Handle autoset in regulators_enable_boot_on()
-  fdt: Correct condition for bloblist existing
-  spl: Allow ATF to work when dcache is disabled
-  rockchip: Ensure memory size is available in RK3399 SPL
-  rockchip: bob: kevin: Disable dcache in SPL
-  Drop the special am335x_boneblack_vboot target
+v1: https://lore.kernel.org/u-boot/20240605181041.68317-1-vassilisamir@gmail.com/
 
- board/google/veyron/veyron.c               | 30 +++----
- board/ti/am335x/MAINTAINERS                |  1 -
- boot/Kconfig                               |  4 +
- common/spl/spl_atf.c                       |  3 +-
- configs/am335x_boneblack_vboot_defconfig   | 94 ----------------------
- configs/am335x_evm_defconfig               |  3 +-
- configs/chromebook_bob_defconfig           |  1 +
- configs/chromebook_kevin_defconfig         |  1 +
- configs/nyan-big_defconfig                 |  1 -
- doc/usage/fit/beaglebone_vboot.rst         | 21 +++--
- drivers/power/regulator/regulator-uclass.c |  2 +-
- drivers/ram/rockchip/sdram_rk3399.c        | 49 ++++++-----
- lib/Kconfig                                |  4 -
- lib/fdtdec.c                               | 12 ++-
- 14 files changed, 70 insertions(+), 156 deletions(-)
- delete mode 100644 configs/am335x_boneblack_vboot_defconfig
+This patch adds support to save the bootcount variable in a file located in
+FAT filesystem. Up to now, there was support only for EXT filesystem.
+
+The reason I put this as RFC is because the file "bootcount_ext.c" will no
+longer represent the implementation for the EXT filesystem, but also for the
+FAT filesystem. Should it be renamed? If not, wouldn't it be inconsistent?
+
+Cheers,
+Vasilis
+
+P.S: Documentation has not been modified yet, I will submit in the v2 (if any).
+
+Vasileios Amoiridis (1):
+  drivers: bootcount: Add support for FAT filesystem
+
+ doc/README.bootcount                          | 12 ++---
+ drivers/bootcount/Kconfig                     | 53 +++++++++++++------
+ drivers/bootcount/Makefile                    |  2 +-
+ .../{bootcount_ext.c => bootcount_fs.c}       | 12 ++---
+ 4 files changed, 50 insertions(+), 29 deletions(-)
+ rename drivers/bootcount/{bootcount_ext.c => bootcount_fs.c} (81%)
 
 -- 
-2.34.1
+2.25.1
 
