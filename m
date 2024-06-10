@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A410DC27C5E
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 06:38:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB1B8C27C5E
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 06:44:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CCE8C88477;
-	Mon, 10 Jun 2024 08:38:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 2D2AB8844B;
+	Mon, 10 Jun 2024 08:44:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="QcH8EmL5";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CqESdTEA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 195FF88470; Mon, 10 Jun 2024 08:38:49 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 46E798848F; Mon, 10 Jun 2024 08:44:29 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05AC58826E
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 08:38:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 24CD38826E
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 08:44:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a6f253a06caso25515566b.1
- for <u-boot@lists.denx.de>; Sun, 09 Jun 2024 23:38:46 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-57c72d6d5f3so1612727a12.1
+ for <u-boot@lists.denx.de>; Sun, 09 Jun 2024 23:44:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1718001526; x=1718606326;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=YkXX4a+CuneOZrLJ6bLzVntjWw3QI6StBqVFpA22XHE=;
- b=QcH8EmL57Z3HjAGxYBgIX44M/QnzLe+uuyge+0LqP5Ax59cGHrIIjrR1WHt1AItJ4T
- 2kHOPbzDbveTQWWIqACdqTKqsusXbGAwj2z2W08IKK1rr35wB7uqconPAxL8b7CJ2mqM
- YUJumVfwSKZ2I8GwoQj79vqOCDyCDh1kjYLhg=
+ d=linaro.org; s=google; t=1718001866; x=1718606666; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=nNd8e2b06rJCtpM7ekZh2Y07CNjakDOrj89xIV6OniY=;
+ b=CqESdTEAfu15ltMMeEZzg7Y4ve39zylhk8WuD5jT4x2ODn+f6uKxHbFF/+Rl4dQX/J
+ k8KOk7jpscc8niVbWFdF43w2J1KR+sbdnBEACxCLbuUDmINPQn04fWUbzbZCLWZhuEH+
+ aplJ7ADa6glKXJp7/pR67GnL4GQHjUR3f/PkpZbvFnhznw5A9fsYBd07rTZcYPcHIb7h
+ v4lQl5abdhJyc5jym57eb1o182vKXJ/Ae+yrQ7FrSPpzhOju6e8pqwgdp3g/hODug+24
+ 2EyN3aFMo9G6LZDlgCKq0u9X3yC8GbD2dm8sGTUgS79/TGdbY7YEAJb+asFV/WZZzoba
+ Vd+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718001526; x=1718606326;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1718001866; x=1718606666;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=YkXX4a+CuneOZrLJ6bLzVntjWw3QI6StBqVFpA22XHE=;
- b=It15NqoAdGQWjxSwItjN0Ojh8qQQis30U4/VEsv6fOhCStVU57KMLc5BbbjK0ETmJY
- 7fOc/6iONUXHwz/qMAyzbGGUqPx0axyeSNE1fIbB7V3+g1r6rVZrierWBCTewf91YFVV
- d/HWH0kZfqCr640KWoUqHRJd0ee8uMgqso18VpCCuU9gocWRecsEQyfkx3lYr8Zje7o4
- TtpokUZQ/3MCkW1NJz1CuXl5XHl1BXslvbNzIy3kNeZbOiZo4yYxFD3ZG/UQ45moEY55
- qAnKlE6c4uM2qeixV/ExhY26iKnt3OvcxpKkLhIl5/RGL2ADG2R4DBlP8fNqvjCQkrtp
- 2mGg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUYFAHcp+CQdFUlxkY7RUjfCyJ/MrtzUNsC3Ki1UqOC+WfhWlqfAeYFg+Z7X3T2CcI3erkODO0jot9quq3d693PmEvpMg==
-X-Gm-Message-State: AOJu0Yz7Fez8edwvq+1oaC8qKIhUzPxXVxf3jJ5NU9fhLq0f5JE4Rs/A
- DUwsESLUY2g6+5WAGva7RhV5DaKprsTXrQV27WlVd2vzijj1oDgY29y/zGYNwfo=
-X-Google-Smtp-Source: AGHT+IEhJ4JUtFS+ZVoxz6++VDoQ+PCSho+l5Rh67VaCkbPyj3SQ+QhXyjJ/0URj2NbyAi6N6xcCGQ==
-X-Received: by 2002:a17:906:b4a:b0:a6f:2994:e0e9 with SMTP id
- a640c23a62f3a-a6f2994e273mr38272966b.33.1718001526324; 
- Sun, 09 Jun 2024 23:38:46 -0700 (PDT)
-Received: from panicking.amarulasolutions.com ([109.52.5.62])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a6f1b3b2d7esm146070566b.24.2024.06.09.23.38.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Jun 2024 23:38:45 -0700 (PDT)
-From: Michael Trimarchi <michael@amarulasolutions.com>
-To: Tom Rini <trini@konsulko.com>,
-	u-boot@lists.denx.de
-Cc: festevam@gmail.com, linux-amarula@amarulasolutions.com,
- dario.binacchi@amarulasolutions.com, patrick.barsanti@amarulasolutions.com,
- Michael Trimarchi <michael@amarulasolutions.com>
-Subject: [PATCH] board: imx8mn_s2: Update timing with production one
-Date: Mon, 10 Jun 2024 08:38:42 +0200
-Message-ID: <20240610063842.192786-1-michael@amarulasolutions.com>
-X-Mailer: git-send-email 2.43.0
+ bh=nNd8e2b06rJCtpM7ekZh2Y07CNjakDOrj89xIV6OniY=;
+ b=p00LfOLYMw0zkOQw31+bUCUxoc3DZ9nQsFxHFk62IN4jnCcnEJhbcPcyBKQwDKW6g0
+ 5+cCIMzTyo9tP4lIYbAiT65WCZ3ZTEcKxMuif5BlRuVnZs6qWvtG2CXcmMnGr+a4Y9i3
+ +8nSgPfV+cYDQNT3tbYJQO7NCcMrl07zSy/OloeXSXX9M0BopCOUrUohaZYf6KR/FP8A
+ tLorMN+dNvpXL/mR/TPuP8ejv7qCcqQKJl/QHZzOHAEh2PNmAKHpP3oMvSlDck4N2qqA
+ E068+8PmOcLG5KHlyCfsTqHheWKZN9e25/SVN0ct7pHLZs+cnykR5oBW/r0eNXmn+nTF
+ Mx0g==
+X-Gm-Message-State: AOJu0YzuiUbKEMSPD0R2t6K0IPJrwwp+1nfwcP1d9ebI9L207vAEtK8k
+ scSK4jMbd+Z41OE5wWoUpUVLjKYnftC1Z9LKNC2wcfhEnWBzmFQIgcLPUTeWyNv6FYiRZYcSaja
+ pSYKQNx8Rb+o5SBiWGusZjIAIY3fzdUMlEaHFSA==
+X-Google-Smtp-Source: AGHT+IGp1r4Z+esUq6Fh18qjGt3PaXvzQ+bj2cjDuAfNI8NX+2UDAuQges2ALFJxMfKTMnfCeBBrbgu1dLkpn3sVIgE=
+X-Received: by 2002:a50:cdda:0:b0:57c:7ce3:6cd9 with SMTP id
+ 4fb4d7f45d1cf-57c7ce36e15mr1468055a12.23.1718001866428; Sun, 09 Jun 2024
+ 23:44:26 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
+ <20240607185240.1892031-31-sughosh.ganu@linaro.org>
+ <5BF273F8-08EB-44C9-9B59-1AAA924F4591@gmx.de>
+In-Reply-To: <5BF273F8-08EB-44C9-9B59-1AAA924F4591@gmx.de>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Mon, 10 Jun 2024 12:14:14 +0530
+Message-ID: <CADg8p966xzJiveKXDSs6-sGaiW1TRaRjL8GGfo3eoP0ieSAsjA@mail.gmail.com>
+Subject: Re: [RFC PATCH 30/31] temp: cmd: efi_mem: add a command to test efi
+ alloc/free
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>, 
+ Fabio Estevam <festevam@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,150 +91,207 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The timing upstream was wrong corresponding to the production.
-This come evident after commit b614ddb5d33
-(ddr: imx: Save the FW loading if it hasn't changed). This
-change fix booting from usb
+On Sat, 8 Jun 2024 at 09:07, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+>
+>
+> Am 7. Juni 2024 20:52:39 MESZ schrieb Sughosh Ganu <sughosh.ganu@linaro.org>:
+> >Not for committing.
+>
+> Best put "DON'T MERGE" into the title to avoid mishaps in future versions.
 
-Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
----
- board/bsh/imx8mn_smm_s2/ddr3l_timing_256m.c | 23 ++++++++++++---------
- board/bsh/imx8mn_smm_s2/ddr3l_timing_512m.c | 14 +++++++------
- 2 files changed, 21 insertions(+), 16 deletions(-)
+Will do.
 
-diff --git a/board/bsh/imx8mn_smm_s2/ddr3l_timing_256m.c b/board/bsh/imx8mn_smm_s2/ddr3l_timing_256m.c
-index 0da641834d..33452d2ad5 100644
---- a/board/bsh/imx8mn_smm_s2/ddr3l_timing_256m.c
-+++ b/board/bsh/imx8mn_smm_s2/ddr3l_timing_256m.c
-@@ -18,15 +18,15 @@ struct dram_cfg_param ddr_ddrc_cfg[] = {
- 	{ 0x3d400304, 0x1 },
- 	{ 0x3d400030, 0x20 },
- 	{ 0x3d400000, 0xa1040001 },
--	{ 0x3d400064, 0x610040 },
-+	{ 0x3d400064, 0x300040 },
- 	{ 0x3d4000d0, 0xc00200c5 },
- 	{ 0x3d4000d4, 0x1000b },
- 	{ 0x3d4000dc, 0x1d700004 },
--	{ 0x3d4000e0, 0x180000 },
-+	{ 0x3d4000e0, 0x580000 },
- 	{ 0x3d4000e4, 0x90000 },
--	{ 0x3d4000f0, 0x0 },
-+	{ 0x3d4000f0, 0x2 },
- 	{ 0x3d4000f4, 0xee5 },
--	{ 0x3d400100, 0xc101b0e },
-+	{ 0x3d400100, 0xc100d0e },
- 	{ 0x3d400104, 0x30314 },
- 	{ 0x3d400108, 0x4060509 },
- 	{ 0x3d40010c, 0x2006 },
-@@ -67,10 +67,10 @@ struct dram_cfg_param ddr_ddrc_cfg[] = {
- 	{ 0x3d400498, 0x7ff },
- 	{ 0x3d40049c, 0xe00 },
- 	{ 0x3d4004a0, 0x7ff },
--	{ 0x3d402064, 0x28001b },
-+	{ 0x3d402064, 0x14001b },
- 	{ 0x3d4020dc, 0x12200004 },
--	{ 0x3d4020e0, 0x0 },
--	{ 0x3d402100, 0x7090b07 },
-+	{ 0x3d4020e0, 0x400000 },
-+	{ 0x3d402100, 0x7090507 },
- 	{ 0x3d402104, 0x20209 },
- 	{ 0x3d402108, 0x3030407 },
- 	{ 0x3d40210c, 0x2006 },
-@@ -680,12 +680,13 @@ struct dram_cfg_param ddr_fsp0_cfg[] = {
- 	{ 0x54006, 0x140 },
- 	{ 0x54007, 0x1000 },
- 	{ 0x54008, 0x101 },
-+	{ 0x54009, 0x200 },
- 	{ 0x5400b, 0x31f },
- 	{ 0x5400c, 0xc8 },
- 	{ 0x54012, 0x1 },
- 	{ 0x5402f, 0x1d70 },
- 	{ 0x54030, 0x4 },
--	{ 0x54031, 0x18 },
-+	{ 0x54031, 0x58 },
- 	{ 0x5403a, 0x1323 },
- 	{ 0xd0000, 0x1 },
- };
-@@ -700,11 +701,13 @@ struct dram_cfg_param ddr_fsp1_cfg[] = {
- 	{ 0x54006, 0x140 },
- 	{ 0x54007, 0x1000 },
- 	{ 0x54008, 0x101 },
-+	{ 0x54009, 0x200 },
- 	{ 0x5400b, 0x21f },
- 	{ 0x5400c, 0xc8 },
- 	{ 0x54012, 0x1 },
- 	{ 0x5402f, 0x1220 },
- 	{ 0x54030, 0x4 },
-+	{ 0x54031, 0x40 },
- 	{ 0x5403a, 0x1323 },
- 	{ 0xd0000, 0x1 },
- };
-@@ -886,11 +889,11 @@ struct dram_cfg_param ddr_phy_pie[] = {
- 	{ 0xd00e7, 0x400 },
- 	{ 0x90017, 0x0 },
- 	{ 0x90026, 0x2b },
--	{ 0x2000b, 0x32 },
-+	{ 0x2000b, 0x1c2 },
- 	{ 0x2000c, 0x64 },
- 	{ 0x2000d, 0x3e8 },
- 	{ 0x2000e, 0x2c },
--	{ 0x12000b, 0x14 },
-+	{ 0x12000b, 0xbb },
- 	{ 0x12000c, 0x26 },
- 	{ 0x12000d, 0x1a1 },
- 	{ 0x12000e, 0x10 },
-diff --git a/board/bsh/imx8mn_smm_s2/ddr3l_timing_512m.c b/board/bsh/imx8mn_smm_s2/ddr3l_timing_512m.c
-index f845395ad9..ca14a47442 100644
---- a/board/bsh/imx8mn_smm_s2/ddr3l_timing_512m.c
-+++ b/board/bsh/imx8mn_smm_s2/ddr3l_timing_512m.c
-@@ -18,15 +18,15 @@ struct dram_cfg_param ddr_ddrc_cfg[] = {
- 	{ 0x3d400304, 0x1 },
- 	{ 0x3d400030, 0x20 },
- 	{ 0x3d400000, 0xa1040001 },
--	{ 0x3d400064, 0x610068 },
-+	{ 0x3d400064, 0x300068 },
- 	{ 0x3d4000d0, 0xc00200c5 },
- 	{ 0x3d4000d4, 0x1000b },
- 	{ 0x3d4000dc, 0x1d700004 },
--	{ 0x3d4000e0, 0x180000 },
-+	{ 0x3d4000e0, 0x580000 },
- 	{ 0x3d4000e4, 0x90000 },
--	{ 0x3d4000f0, 0x0 },
-+	{ 0x3d4000f0, 0x2 },
- 	{ 0x3d4000f4, 0xee5 },
--	{ 0x3d400100, 0xc101b0e },
-+	{ 0x3d400100, 0xc100d0e },
- 	{ 0x3d400104, 0x30314 },
- 	{ 0x3d400108, 0x4060509 },
- 	{ 0x3d40010c, 0x2006 },
-@@ -700,11 +700,13 @@ struct dram_cfg_param ddr_fsp1_cfg[] = {
- 	{ 0x54006, 0x140 },
- 	{ 0x54007, 0x1000 },
- 	{ 0x54008, 0x101 },
-+	{ 0x54009, 0x200 },
- 	{ 0x5400b, 0x21f },
- 	{ 0x5400c, 0xc8 },
- 	{ 0x54012, 0x1 },
- 	{ 0x5402f, 0x1220 },
- 	{ 0x54030, 0x4 },
-+	{ 0x54031, 0x40 },
- 	{ 0x5403a, 0x1323 },
- 	{ 0xd0000, 0x1 },
- };
-@@ -886,11 +888,11 @@ struct dram_cfg_param ddr_phy_pie[] = {
- 	{ 0xd00e7, 0x400 },
- 	{ 0x90017, 0x0 },
- 	{ 0x90026, 0x2b },
--	{ 0x2000b, 0x32 },
-+	{ 0x2000b, 0x1c2 },
- 	{ 0x2000c, 0x64 },
- 	{ 0x2000d, 0x3e8 },
- 	{ 0x2000e, 0x2c },
--	{ 0x12000b, 0x14 },
-+	{ 0x12000b, 0xbb },
- 	{ 0x12000c, 0x26 },
- 	{ 0x12000d, 0x1a1 },
- 	{ 0x12000e, 0x10 },
--- 
-2.43.0
+>
+> In the final series we should have unit test covering all relevant aspects of the memory system.
 
+Yes, that's the plan.
+
+-sughosh
+
+>
+> Best regards
+>
+> Heinrich
+>
+> >
+> >Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> >---
+> > cmd/Makefile     |   1 +
+> > cmd/efi_memory.c | 155 +++++++++++++++++++++++++++++++++++++++++++++++
+> > 2 files changed, 156 insertions(+)
+> > create mode 100644 cmd/efi_memory.c
+> >
+> >diff --git a/cmd/Makefile b/cmd/Makefile
+> >index 87133cc27a..35fcc4af5a 100644
+> >--- a/cmd/Makefile
+> >+++ b/cmd/Makefile
+> >@@ -10,6 +10,7 @@ obj-$(CONFIG_CMD_BOOTM) += bootm.o
+> > obj-y += help.o
+> > obj-y += panic.o
+> > obj-y += version.o
+> >+obj-y += efi_memory.o
+> >
+> > # command
+> > obj-$(CONFIG_CMD_ARMFFA) += armffa.o
+> >diff --git a/cmd/efi_memory.c b/cmd/efi_memory.c
+> >new file mode 100644
+> >index 0000000000..52ddcb7146
+> >--- /dev/null
+> >+++ b/cmd/efi_memory.c
+> >@@ -0,0 +1,155 @@
+> >+// SPDX-License-Identifier: GPL-2.0+
+> >+/*
+> >+ *  Allocate and Free EFI memory
+> >+ *
+> >+ *  Copyright (c) 2024 Linaro Limited
+> >+ */
+> >+
+> >+#include <command.h>
+> >+#include <efi_loader.h>
+> >+#include <lmb.h>
+> >+#include <vsprintf.h>
+> >+
+> >+#include <linux/types.h>
+> >+
+> >+static int do_efi_mem_free(struct cmd_tbl *cmdtp, int flag, int argc,
+> >+                         char * const argv[])
+> >+{
+> >+      uint64_t addr = 0, size = 0;
+> >+      efi_uintn_t pages;
+> >+      efi_status_t status;
+> >+
+> >+      if (argc != 3)
+> >+              return CMD_RET_USAGE;
+> >+
+> >+      argc--; argv++;
+> >+
+> >+      size = simple_strtoul(argv[0], NULL, 16);
+> >+      if (!size) {
+> >+              printf("Enter valid size for free in Hex\n");
+> >+              return CMD_RET_USAGE;
+> >+      }
+> >+
+> >+
+> >+      addr = simple_strtoul(argv[1], NULL, 16);
+> >+      if (!addr) {
+> >+              printf("Enter a valid address in Hex\n");
+> >+              return CMD_RET_USAGE;
+> >+      }
+> >+
+> >+      pages = efi_size_in_pages(size + (addr & EFI_PAGE_MASK));
+> >+
+> >+      status = efi_free_pages(addr, pages);
+> >+      if (status != EFI_SUCCESS) {
+> >+              printf("Unable to free memory, error (%#lx)\n", status);
+> >+              return CMD_RET_FAILURE;
+> >+      }
+> >+
+> >+      return CMD_RET_SUCCESS;
+> >+}
+> >+
+> >+static int do_efi_mem_alloc(struct cmd_tbl *cmdtp, int flag, int argc,
+> >+                          char * const argv[])
+> >+{
+> >+      enum efi_allocate_type type;
+> >+      uint64_t addr = 0, size = 0;
+> >+      efi_uintn_t pages;
+> >+      efi_status_t status;
+> >+      bool max = false;
+> >+
+> >+      if (argc < 2)
+> >+              return CMD_RET_USAGE;
+> >+
+> >+      argc--; argv++;
+> >+
+> >+      if (!strcmp("max", argv[0])) {
+> >+              if (argc != 3)
+> >+                      return CMD_RET_USAGE;
+> >+
+> >+              max = true;
+> >+              argv++;
+> >+              argc--;
+> >+      }
+> >+
+> >+      size = simple_strtoul(argv[0], NULL, 16);
+> >+      if (!size) {
+> >+              printf("Enter valid size for allocation in Hex\n");
+> >+              return CMD_RET_USAGE;
+> >+      }
+> >+
+> >+      if (max || argc == 2) {
+> >+              addr = simple_strtoul(argv[1], NULL, 16);
+> >+              if (!addr) {
+> >+                      printf("Enter a valid address in Hex\n");
+> >+                      return CMD_RET_USAGE;
+> >+              }
+> >+      }
+> >+
+> >+      if (max)
+> >+              type = EFI_ALLOCATE_MAX_ADDRESS;
+> >+      else if (addr)
+> >+              type = EFI_ALLOCATE_ADDRESS;
+> >+      else
+> >+              type = EFI_ALLOCATE_ANY_PAGES;
+> >+
+> >+      pages = efi_size_in_pages(size + (addr & EFI_PAGE_MASK));
+> >+      status = efi_allocate_pages(type, EFI_BOOT_SERVICES_DATA, pages,
+> >+                                  &addr);
+> >+      if (status != EFI_SUCCESS) {
+> >+              printf("efi_allocate_pages failed %lx\n", status);
+> >+              return CMD_RET_FAILURE;
+> >+      } else {
+> >+              printf("Address returned %#llx\n", addr);
+> >+      }
+> >+
+> >+      return CMD_RET_SUCCESS;
+> >+}
+> >+
+> >+static struct cmd_tbl cmd_efi_mem_sub[] = {
+> >+      U_BOOT_CMD_MKENT(alloc, 3, 0, do_efi_mem_alloc,
+> >+              "", ""),
+> >+      U_BOOT_CMD_MKENT(free, 2, 0, do_efi_mem_free,
+> >+              "", ""),
+> >+};
+> >+
+> >+static int do_efi_mem(struct cmd_tbl *cmdtp, int flag, int argc,
+> >+                    char *const argv[])
+> >+{
+> >+      struct cmd_tbl *cp;
+> >+      efi_status_t r;
+> >+
+> >+      if (argc < 3)
+> >+              return CMD_RET_USAGE;
+> >+
+> >+      argc--; argv++;
+> >+
+> >+      /* Initialize UEFI subsystem */
+> >+      r = efi_init_obj_list();
+> >+      if (r != EFI_SUCCESS) {
+> >+              printf("Error: Cannot initialize UEFI sub-system, r = %lu\n",
+> >+                     r & ~EFI_ERROR_MASK);
+> >+              return CMD_RET_FAILURE;
+> >+      }
+> >+
+> >+      cp = find_cmd_tbl(argv[0], cmd_efi_mem_sub,
+> >+                        ARRAY_SIZE(cmd_efi_mem_sub));
+> >+      if (!cp)
+> >+              return CMD_RET_USAGE;
+> >+
+> >+      return cp->cmd(cmdtp, flag, argc, argv);
+> >+}
+> >+
+> >+U_BOOT_LONGHELP(efi_mem,
+> >+      "Functions to allocate and free memory\n"
+> >+      "\n"
+> >+      "efi_mem alloc <size> [addr]\n"
+> >+      "efi_mem alloc max <size> <max-addr>\n"
+> >+      "efi_mem free <size> <addr>\n"
+> >+      "\n"
+> >+);
+> >+
+> >+U_BOOT_CMD(
+> >+      efi_mem, CONFIG_SYS_MAXARGS, 0, do_efi_mem,
+> >+      "Allocate and free EFI memory",
+> >+      efi_mem_help_text
+> >+);
