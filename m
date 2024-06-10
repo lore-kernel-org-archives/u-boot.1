@@ -4,159 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D5AEC27C55
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 17:03:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C140C27C55
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 17:13:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63BE288669;
-	Mon, 10 Jun 2024 19:03:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 79FE688581;
+	Mon, 10 Jun 2024 19:12:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="kL9BP/PW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ARVIIKY2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40DCB88641; Mon, 10 Jun 2024 19:03:03 +0200 (CEST)
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- (mail-db3eur04on070c.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe0c::70c])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4DA3C88581; Mon, 10 Jun 2024 19:12:58 +0200 (CEST)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3271488651
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 19:03:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 274AB8865F
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 19:12:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=OCrWapwFa79b4vwqWiRYhoQAynFy6WquXm5jmfmD+eOwr6ChwRzBWdy9L26BqlTwTSpnppLvr2FidGdkQHvZL3PJXjVPhzhRqNCQn6SLNVnZcnp9rD3W5yAu7ib3nikkMJCKknO+XO49vf4p197+jTxWlBYSYLhiMG/VaQiOKq6+mDTe1X+BbLxSJ0xvxfqnpZfxJLKNbMbCfbTbcF/OyNjl8oYWMW92yMk2s04XqSEEsvQoxDCZDQiuKsjSBZ+zSUNwyG7pf6MvBUh8DLGkEhx+aFypmymrB/yEY9tE0VhXBzodjFuksd2HKDE3nZqf0qC6X+Z7v/NW2x7AuBvjug==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5RN8P3giOakKaSozssQf40AsYcPF8mp/E92URK0eyVw=;
- b=LfN6jv7OpwlEFf+j1hHF0C0yh6BTI9JWnfOK9/SEtjCIh1SK+wd2doNpjd5Nt/gr/5K28XlDlr4YfIkZS3CYaVcuiC7OAIRusdHjxrQwx85OtsYqczSZ3mdXormO9r4W7gX2yMOTWUh85R4PKRr9cp+ubzB0eLE0lKDQTk9IB8HLSJv6m3QoUPPsu1d7Yj7Thf0gym2RciZXLvzy1avEWEnxhVOHm11Uw0o5oFyHd4TxnkBPaRYYB9fiEJDs1uOrHd3YpJzFOekFgFrFc0JQMM5Ov7RoUBqZgL234MYIhJhsEQMchl7TtzBBuacYmMn/iQPzEdYs7Mii0voxtrnqEQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5RN8P3giOakKaSozssQf40AsYcPF8mp/E92URK0eyVw=;
- b=kL9BP/PWmsG+LqIFDdBEWHKCGgb81woAt6w3gjjpXZKxxRm7rAaqVyczcaApBxrofQ2PrQx2JlxkKwDZYk7ZRcVp90sxKhLgUDIT6fDak7shQ7tgEAIRPBrtovygVRKm6uNsNSJt8FMOtidxv62nnX+Pxp15IJWCwlYOCI6Hr+E=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from PA4PR04MB7982.eurprd04.prod.outlook.com (2603:10a6:102:c4::9)
- by GV1PR04MB11063.eurprd04.prod.outlook.com (2603:10a6:150:20c::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.36; Mon, 10 Jun
- 2024 17:02:57 +0000
-Received: from PA4PR04MB7982.eurprd04.prod.outlook.com
- ([fe80::3c4:afd5:49ac:77af]) by PA4PR04MB7982.eurprd04.prod.outlook.com
- ([fe80::3c4:afd5:49ac:77af%4]) with mapi id 15.20.7633.036; Mon, 10 Jun 2024
- 17:02:57 +0000
-Message-ID: <576352c5-54fc-4c64-8797-f33d51879a6b@cherry.de>
-Date: Mon, 10 Jun 2024 19:02:55 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/9] rockchip: veyron: Add logging for power init
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Jeffy Chen <jeffy.chen@rock-chips.com>,
- Kever Yang <kever.yang@rock-chips.com>, huang lin <hl@rock-chips.com>
-References: <20240610145920.3302001-1-sjg@chromium.org>
- <20240610145920.3302001-4-sjg@chromium.org>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20240610145920.3302001-4-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA0P291CA0019.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1::21) To PA4PR04MB7982.eurprd04.prod.outlook.com
- (2603:10a6:102:c4::9)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-3d229181325so698201b6e.3
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 10:12:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1718039575; x=1718644375; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=CQECgUOtieRaES3f9RnoNnw3uWFANbV1dUfvEW3MOhY=;
+ b=ARVIIKY2IQm9wSP7libSB9iFpc5mAwOB3jzxPk7/hPSuOPhoGw+73FTYWbyg/FRXYg
+ 6AZctCW+olihgb6IqOBk/lQLLKzBklLfMi5+XNz7H02xbYQ0kgm1OFB3svmIhAx34WRv
+ 6dGX6XrwQ2TW2Mei7ZeIu26IednDeTUVdW8l4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718039575; x=1718644375;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CQECgUOtieRaES3f9RnoNnw3uWFANbV1dUfvEW3MOhY=;
+ b=LVff/5fTaxa22cFevEqIumQ9gN1MY0n4+4uCUMAWfcv2lIP0oPjUhMcbVlZukmQtQF
+ 7Sjpf8wZx4u6tAtbVxcuq1D2Yhqhpzsb7iL4+NOdHR4uziQD9PVf47Sg94gYOK/iVcyL
+ KoNU9wBqsdTujord+CiU6qS7L5vGfTXLsdYkH9qtX4O2KVjYleTRWqdUWuSmjpixm46n
+ FoGbvit1g6iPZ7XmiK3a2Sl/xSr1QJEiCJBtRPK/jlzZMsw8gUjLR4g6TDSKcsHlg7Sd
+ 6brUeX46IdvCTnMJf4GLwM89O1BKdxjkrzc93vAEP1XoTHO7JVnPpWM17e6qporZfygF
+ Y7LQ==
+X-Gm-Message-State: AOJu0YyrAEISkRTreioxUMRsTojWAW8IBNdRl3RVHvylErdJoYs6EpKW
+ aacoLdDJwZogOZO88lrGWFc0WxvBQTnYoE5ZKyNgWOoGhrfwd2OSPuMaXDHwhbs=
+X-Google-Smtp-Source: AGHT+IHZ/UOqodDbAPU4jaxnzCgFVErdMcG3zPTXwD7k0v19pKSI9orFnzXFFK2ViUcqThojhad+9Q==
+X-Received: by 2002:a54:4e97:0:b0:3d1:fda9:3b05 with SMTP id
+ 5614622812f47-3d210d2b9b7mr8841028b6e.12.1718039574750; 
+ Mon, 10 Jun 2024 10:12:54 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
+ [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-3d21db2cea2sm873341b6e.36.2024.06.10.10.12.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 10 Jun 2024 10:12:54 -0700 (PDT)
+Date: Mon, 10 Jun 2024 11:12:52 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>
+Subject: Re: [RFC PATCH 05/31] lmb: pass a flag to image_setup_libfdt() for
+ lmb reservations
+Message-ID: <20240610171252.GT68077@bill-the-cat>
+References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
+ <20240607185240.1892031-6-sughosh.ganu@linaro.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB7982:EE_|GV1PR04MB11063:EE_
-X-MS-Office365-Filtering-Correlation-Id: e01fcef6-b887-4723-4705-08dc896f2d25
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230031|376005|366007|1800799015;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NnV0cWtyT1cwaWpIQSthVzBNM0JjOGRZeS9MUXZPUGlLS3ExdGVLUFhqeklX?=
- =?utf-8?B?NEdWZUI3dGlLMUl2blB0Vm1qN3dnVmVKai9WVWFyYVFPSUpDQUZLaWZGaitM?=
- =?utf-8?B?c0pnd08vc2huRHpiSVBvOEY1eGtYMTNSbWFpRm1sK1lnU0pJNmQ3WUxDTXJ4?=
- =?utf-8?B?Wkowc3lLYnJhL0tHU2syRkdONzNlSlFOdmJUZ0RsTDE5OEMyY2VmZStXTkJW?=
- =?utf-8?B?RFFTelZNblFDU3h5WlRWRmhLV3Rrb1E5bEM4ZDFtQ3plekNaSG03OUhkUE84?=
- =?utf-8?B?NFc4cVRwcG8xZkE5R09hWnl3UzE1c1pPc1JuNWpIdUQ1MEVEYlRLYU1zWmVY?=
- =?utf-8?B?Zk43VXdibDNGeTFWdlJ0MHlRYkNVMmdXTzBLdTVoZ2JrYUNiQXdFK1FMMTZ1?=
- =?utf-8?B?T1ZQUTFyNW9PamFJdzFBdW5ILzVPY3BNV2tNTDYxbExla2cxenllR0JjcDlt?=
- =?utf-8?B?eU5iZVdqVy9YZnBLZ2lNN3prLzJMRUtJTG5hZzc3K3RRckpCQnFJeHRxV1hv?=
- =?utf-8?B?c0ZvVmw1bE5iSnpkNkl0bXRJczBjWUt6L3ora3VHdjVFcm9IbUhTSkdzM2dr?=
- =?utf-8?B?RWRwODlBc1lHdmJmd3lrSjM4YzU3VVFMWlZMZzJ4eDRkLzQwNEdDdjg1bWtR?=
- =?utf-8?B?dk50bUpnZit0bGFBTmtUcHlYc1VOdjVuWEJVRTZCOWxWaUNxYWZtNlJaMTU3?=
- =?utf-8?B?eFErQXlRR2phMG1IRUZ4b01ibE1PR0lhVnRLdVo4LzIxNjB0OWIvcWRtb3Jz?=
- =?utf-8?B?UXVxMjFKSmhRYmhjS1NzV0ZKUjlrV2RWb2p0N00yZEdUM1VJVC95M3l6UlRR?=
- =?utf-8?B?S0kwTzlDNThFS01HQVhvbkpTREh3c3ZwcURCcXpqTnJaeU53UUU0TlBhSXBI?=
- =?utf-8?B?djhwcXFYa0hOb1E1WnJGZnlMQVFLZjZVeWxhM3BCTGZMUzZvc1dVM1dENFdu?=
- =?utf-8?B?UDUyUWpHclZ6ajd6b1pNYm8rRkk0NC8xcEpnVEl2TTR4OUhJU29ueitoWGNs?=
- =?utf-8?B?Zm1sTmFrWCtHbmRUODBKemRzejJpSDJObFZHOFFHT0xkeE5FcysxRzBjTUhU?=
- =?utf-8?B?d1R4NTFmK0lBeEVIeXRhaWE3OU1YNFgrZW5DYllMRHByRHpKN3dSZFB5MDZS?=
- =?utf-8?B?NzdFM2pPcjU5elVBNC9CSytob0VQdXJNY0pveFBtb1BIbDhjcFVIMThCQXpW?=
- =?utf-8?B?RjlRMW44Vm9SZmhkY1l6d096cEJ2dE9UMXYxZzcvZFhwMVM5V1hvNkV4RUF0?=
- =?utf-8?B?c0dBZE5seEpwWGptK09hS2dQUHhkMkFYNkxESVFHdlArMkJ5aTgzeHhmemtR?=
- =?utf-8?B?ekdXbG1SY1pGb1NmKysyWE5VeE9kMGlSVUFHZGhNUk4vRnI0aG02aTROeUhV?=
- =?utf-8?B?Wnk1TjlLZ3ljdld2dTNFcGV5U3JGNjQ3WDFCNjRKaGg0VEZZTjY0RU5XN1RV?=
- =?utf-8?B?d1M3Zmp6b3FVc0pmSWw1QkdHVGVWQjJ0MTgzR2J6aWMzZUdQVWtLaklWUmtV?=
- =?utf-8?B?TEU4R2RDSkhITWYwS3hjNHRNTG1YQVY2YTJaQWM1Q1pJYU5seFdTZlFqTDJa?=
- =?utf-8?B?SDNXVjRaUFZoWWNyVVc2UDBLaittSU9wR002Tzc3czlSNVB1Qm1HRU9wZ2pV?=
- =?utf-8?B?a0lyMnpnaElBZ0M1YkRaRTFzN0dnbDVrTXgyZ2lDQmRoTldUQnpJWWVVanNj?=
- =?utf-8?B?NlpGNDlxZElTcW9Xby9wMm9KcElSQmZpbkJjM0dLcGw4UVBqSzMycDJ0TkU0?=
- =?utf-8?Q?UQ5Gs+UpGKxY04mGGH6txDME+wWNjaniz7LLu9P?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA4PR04MB7982.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376005)(366007)(1800799015); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SUpkdWM3RFJKczF5MzlvVzYvb0FnNHpmZXZCVlV3eDdNNmlOcmRoZVFXOFlH?=
- =?utf-8?B?QlN1b0t3cU16YjFKTUYvZVN6QjRRYkUrVmlDL2tCV0FVOHFsRDNoVUk0Q1Ni?=
- =?utf-8?B?RmRtZjBwZjV4NFpYRUhDYWJ4c21nRFMyYjZHbzZ5RWZyZm1zbWd1U2svNWgw?=
- =?utf-8?B?ZFpqRDdLZ0pFVDIzK1NrVzBielRNMnZOU0ZRVlQ2SWRGaTZEMERiYm9QM05u?=
- =?utf-8?B?RnN3bVdjcWFtblR1VEpJVXpBeURNSEF5M0UzL2wwRUY0bjBuVFUyaGNRMllH?=
- =?utf-8?B?aXFSNzhPemRmRmQzaUZxeW85M1htaXJENWhYZmZVYmJZU29QNWFCNC9ySEZC?=
- =?utf-8?B?VGdIS2swcjBGTElyREtaK1UvNWFKb0VGVGJhWWVSa3l1Tkw2M3YyellQTUwy?=
- =?utf-8?B?N3l2V0kydW1KMDRlZ0pnTmIydTExSDJ5eVIvMmFQamVHeXpsd3hDVkJoMHAy?=
- =?utf-8?B?STNjUVgxUjFnVEtZMjlFbHhEUEpycXpTRkxQaEhQMDJ3VmFITGNUTXZMem9Y?=
- =?utf-8?B?M2t5VWZjU1gyZ0NMcXRCNWhLeHBrQUxPaWM3MTZRSGlFbFpkU1ZTZkxUbWVu?=
- =?utf-8?B?NGZmRFNTeHFnVTdHNXUyWmlmQ3RhUTg0cExRUml1YzgrbHlHMjQ4TVNXWTRz?=
- =?utf-8?B?NW15Y0FPZHFhWHd6K0NPK3BTNjI2R3RpVUI2TEpNbllXR2dCN3R3MXFnazg3?=
- =?utf-8?B?WU0vOVNPK3BOSjdXYlEwUUYraU5rQ3ZwWUpSRVZQUkEwbWZEVXppOWczT0w1?=
- =?utf-8?B?TG9pbGpaYmRPV2pGZDNGYS91Y25CVkxPQ3pFQUppUnp4QzlJTWNjWThiWEUy?=
- =?utf-8?B?MjhqQXpOcHlkVXRKcjFLM3Jkd3VSbjZuNk41R0FkNUYzbENMYW5FbENWY3Rn?=
- =?utf-8?B?bTRORHhQb1lYTHBmR21JNUlVZ0RxNVFacWo1aUNzSExUYUNnZHhlYmRBMk16?=
- =?utf-8?B?SmlwaStIQjdIWDlJYzF3dDF3V2tmNHp3SWVxemprR1V2NFFFaXRGeElqNG1j?=
- =?utf-8?B?OGpsQmtXVUZxWjg5L3crSHpkcWFybVhVWjl5WHRTZERhdG1sNzFxZnhxM0pK?=
- =?utf-8?B?NFlMSFQyNFJyQ0JyN0VkVVF4YVpvYUd0MVpMZ3RnUFpyRHZKQjdBQTl6MFRz?=
- =?utf-8?B?ejI5a282eXMwQXNkMkcvbXJLSmg0N2pFVmU4MXlucFhvMzYwK2F6T0lxcmdH?=
- =?utf-8?B?a1E2RkxwQkVOWHUxdGNyZ084dWxwblo0UFJNV1pPb09OL3JBZythL1h5ZTJa?=
- =?utf-8?B?Tk5FZFdXWS9BMU0ybmlqWll5aFdqMHVDZVJVZWlXV3ZIeVg2dStyTHNLVStO?=
- =?utf-8?B?cTlYbEFkOTdMQko3b2lETUJieEpEUU1KUjhXVU1hT2lWWTBLLzZ5NXV5V3FK?=
- =?utf-8?B?ekxEcFdtejRaNnhySHI3blZnNFhCczBEZ0dmS2ZWY0dVOHI1cmFoT3pHNndW?=
- =?utf-8?B?VzN2TExXdHJDVjIrbUp5ZUc2YjN5eUZ3RGFuYjNlWHpnUEJTbXFSU2ZIZnF0?=
- =?utf-8?B?aC9HNlI1NVVzSS8vdzdPbk1TMHQwdVhJeUdlSlNjSXJ0N2xjMUptN3JHSk5t?=
- =?utf-8?B?anRiQ1VEZU9zdHFFanAyR1lhVkF1RW44dVE1UkJNdEt3UUNPOTNUUE5qeVNy?=
- =?utf-8?B?OFk1N1BuTWx1aEtsTUFJMFhwSzI1clFTM3grV0hsa2M5RnVKVFZ1a05MWmM2?=
- =?utf-8?B?UE5xaVJSVVkydU1zd0cvdkUyMlVkSzhIL0JsOURxUTVINXZMOXMzaGYxalZ4?=
- =?utf-8?B?eFZZUERreENpL2xaMmROb2VPUTA0MWpOd054SVV5djZFblVEakorY2E1Ynpq?=
- =?utf-8?B?ZDM1ekFkSjdjTmtMVno4MzI0WmtlT1Z5Q2hQbDI1SnBWSFFIWDBKQURnanJV?=
- =?utf-8?B?NVRKTlpoTWxJaWc5Wk94NFJUeVBySytrQXdaWFZMMmEreDhTc2k0WXpMN2Er?=
- =?utf-8?B?aXFBdDNtQUhYVEltWHJ3VEpxRnoyd0F4TkVGUmpjVHgvS1R2ditzMXR6RTZs?=
- =?utf-8?B?ak53QVpXZkNpL2RNOHFWMUtqNXZCUUQxcVV6TjFuODRBYURPZlVrc0lid2hN?=
- =?utf-8?B?bnRyNkVWdkV2ZVY0YmhjWjc4Q1dsZGgyelZuYlRNbHF4eDlxWU1ESEQySkNh?=
- =?utf-8?B?cXZ2SFZTdVkzVGtYNHo5Vm9VaUg2SlU4cUkyUjJ1N0xNMUJiZmRxSTB1a2pB?=
- =?utf-8?Q?t1fKhnin454s3WEWQ4hYx2I=3D?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: e01fcef6-b887-4723-4705-08dc896f2d25
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7982.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2024 17:02:57.3500 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: mj1CsRLYe2mzAEXG/gswFa3ROx94PCys+j8IDL2yYCfrHpvOdFU4i9JHhK8A/c3B+lKPKFQao13Fhz1c3H41yhuSdJPT9q+3384ZSrCWUkE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB11063
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="eWUBkOAyG8BMUZpz"
+Content-Disposition: inline
+In-Reply-To: <20240607185240.1892031-6-sughosh.ganu@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -173,15 +94,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
-On 6/10/24 4:59 PM, Simon Glass wrote:
-> Add better logging for power init so that CONFIG_LOG_ERROR_RETURN can
-> be enabled.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+--eWUBkOAyG8BMUZpz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+On Sat, Jun 08, 2024 at 12:22:14AM +0530, Sughosh Ganu wrote:
 
-Thanks!
-Quentin
+> The image_setup_libfdt() function optionally calls the LMB API to
+> reserve the region of memory occupied by the FDT blob. This was
+> earlier determined through the presence of the pointer to the lmb
+> structure, which is no longer present. Pass a flag to the
+> image_setup_libfdt() function to indicate if the region occupied by
+> the FDT blob is to be marked as reserved by the LMB module.
+>=20
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+[snip]
+> ---
+>  arch/mips/lib/bootm.c         | 2 +-
+>  boot/image-board.c            | 2 +-
+>  boot/image-fdt.c              | 7 +++----
+>  cmd/elf.c                     | 2 +-
+>  include/image.h               | 5 ++---
+>  lib/efi_loader/efi_dt_fixup.c | 2 +-
+>  lib/efi_loader/efi_helper.c   | 2 +-
+>  7 files changed, 10 insertions(+), 12 deletions(-)
+>=20
+> diff --git a/arch/mips/lib/bootm.c b/arch/mips/lib/bootm.c
+> index 54d89e9cca..e4fc2e589d 100644
+> --- a/arch/mips/lib/bootm.c
+> +++ b/arch/mips/lib/bootm.c
+> @@ -247,7 +247,7 @@ static int boot_setup_fdt(struct bootm_headers *image=
+s)
+>  	images->initrd_start =3D virt_to_phys((void *)images->initrd_start);
+>  	images->initrd_end =3D virt_to_phys((void *)images->initrd_end);
+> =20
+> -	return image_setup_libfdt(images, images->ft_addr, &images->lmb);
+> +	return image_setup_libfdt(images, images->ft_addr, 0);
+>  }
+> =20
+>  static void boot_prep_linux(struct bootm_headers *images)
+> diff --git a/boot/image-board.c b/boot/image-board.c
+> index 89ccf80066..481b333b4c 100644
+> --- a/boot/image-board.c
+> +++ b/boot/image-board.c
+> @@ -897,7 +897,7 @@ int image_setup_linux(struct bootm_headers *images)
+>  	}
+> =20
+>  	if (CONFIG_IS_ENABLED(OF_LIBFDT) && of_size) {
+> -		ret =3D image_setup_libfdt(images, *of_flat_tree, lmb);
+> +		ret =3D image_setup_libfdt(images, *of_flat_tree, 1);
+>  		if (ret)
+>  			return ret;
+>  	}
+> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+> index 08afde203c..4daced9e99 100644
+> --- a/boot/image-fdt.c
+> +++ b/boot/image-fdt.c
+> @@ -567,8 +567,7 @@ __weak int arch_fixup_fdt(void *blob)
+>  	return 0;
+>  }
+> =20
+> -int image_setup_libfdt(struct bootm_headers *images, void *blob,
+> -		       struct lmb *lmb)
+> +int image_setup_libfdt(struct bootm_headers *images, void *blob, bool lm=
+b)
+>  {
+>  	ulong *initrd_start =3D &images->initrd_start;
+>  	ulong *initrd_end =3D &images->initrd_end;
+
+Since this is a bool, please use true/false in the callers.
+
+--=20
+Tom
+
+--eWUBkOAyG8BMUZpz
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZnNBAACgkQFHw5/5Y0
+tyzX2gwAiM+yXRbELQ9zlv/KDosC1uFiC/362oBGNjwUKgLlg7/wR+qPuCccSnh6
+YEU0maofQVequ9Ce5pKpVqCw49oMgU89wtJbzmawTEi+7DHStVaBEmS5JPkLFhUw
+XpQAWsdf5HUHM9WoGHKss7Vb7Z5joMnTf6fvrjp52D3P9QemjYJgsrTA3NG7GIps
+pRiklmiX+QXOCTHT2r/zIqyJIX5pfEad00Q/oE/N/StjqUmv58TaI+cW4Y2Z1HeM
+86KzU7YIEmS0pYdTxj9EivTD+AYQ9b9K0lTKYJOQptCC7yRdEOpdBo5J781LDlfr
+FdaviHG6845/IE7Gj0uKf6N8HQfGR3pMYiKzmfTVzTipcQMwvOdvtDbdpYyColMU
+SiR8FfEOnvtHzlu/8OligowfISJPtKX64wx49DmDK4pjfsu/qvk39tX6Rg2DT7t7
+eIZeX89r2Suq3MufHHCE9w9AHwuXHI5/UUoy8K9kJrnDQxEK+qCdzzhF2MtRcoWk
+UTBrd4cY
+=dCjx
+-----END PGP SIGNATURE-----
+
+--eWUBkOAyG8BMUZpz--
