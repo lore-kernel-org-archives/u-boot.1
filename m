@@ -4,168 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35E2BC27C55
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 12:46:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D38EC27C65
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 12:48:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56ECC884F4;
-	Mon, 10 Jun 2024 14:46:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=kontron.de
+	by phobos.denx.de (Postfix) with ESMTP id CE93988506;
+	Mon, 10 Jun 2024 14:47:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mysnt.onmicrosoft.com header.i=@mysnt.onmicrosoft.com header.b="CBL5tLIo";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Sd433EJY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 937D288516; Mon, 10 Jun 2024 14:46:51 +0200 (CEST)
-Received: from EUR04-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur04on20714.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2611::714])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 07A5E88523; Mon, 10 Jun 2024 14:47:58 +0200 (CEST)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB334884F4
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 14:46:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 909DB88506
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 14:47:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=kontron.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=frieder.schrempf@kontron.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=hug7+DtYGHkdM8XphpgLeU+KOP4XyLs6wUwJJWZ1inGpFPalZKLTlSBoeFDYJun0o2MkWXMVnZXfUQIUMtJ3kCatOcM80KUQPPRft5GzL4sTEjYRsXWx3ZGyT+srwCoiqV3zExiQB/ZJdb2+T7vJcFq5tPKRH9ENA7PXhdV/EGFLKMF1QXuUGScTsv7YpWPlPlCB3XcUyrpAA1iy8KRYxOaKKI8W7rfbnpO/dGPW412ui5it4VZUperISpNhF36QITdtDVlvBEtLig0FsdDHSMwHsZxDHUMoflGJ/huGDAjdRwh3nj6P/lWlL7gyuhPsinGUlSmVjDYKtym5zJKlOw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jvPuLj/OI4DD5X1qvgxMOwiYopu0R2gR4KXdsPoT7mM=;
- b=fXVcMTTmrRb5VlnRFk05/qBr1UlWn1yFKzlGkY2zWH6uakrPr2DErvxW8/U+20dZ4yABJalmvH3ZLESfAl58kkJ8y4IlJ8mQdlEtDzYTfAaReDL4sP53lw2xKT4oTgIj1Yb7FfHrfPlyPbYvVZDz155lE34eMb/ufvEDnWAmu96soDdF2LZI7hss93gd9Qh4K+fWygDZ5mvO4QkwkOovqvuvPqPrTfqfrNV6a5l5FHCeWxXfmXDN08T5+By39K9piURzbFaqR1BaBzoJNiQIcX9fpmNGp2F9N7pIIyQG+Fqe7mUuyziG4elr7v0lw0zTqIp4+tYP5B/ncJxuX9pusw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=kontron.de; dmarc=pass action=none header.from=kontron.de;
- dkim=pass header.d=kontron.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mysnt.onmicrosoft.com; 
- s=selector2-mysnt-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jvPuLj/OI4DD5X1qvgxMOwiYopu0R2gR4KXdsPoT7mM=;
- b=CBL5tLIoLHX3XTAhh1+/3RCjEpcbIqCOlRqy7S7lB9qTs2oZzKEH6082HXmbWNt6uSvhdllRpiKhKNv+DxGburFjDa+3K07f0wI++7h1ZGcYUNAoHXEcJl6MNB1pPt4JRQ43YhBt0ZH40x4VpZbkRu/fPLNkqBn7zrtlWLRxAl4=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=kontron.de;
-Received: from PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:263::10)
- by AM0PR10MB3715.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:153::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.36; Mon, 10 Jun
- 2024 12:46:47 +0000
-Received: from PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::b854:7611:1533:2a19]) by PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::b854:7611:1533:2a19%5]) with mapi id 15.20.7633.036; Mon, 10 Jun 2024
- 12:46:47 +0000
-Message-ID: <934a3406-0c51-4929-b9fd-08ebd469ed54@kontron.de>
-Date: Mon, 10 Jun 2024 14:46:43 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 6/6] spinand: bind UBI block
-To: Alexey Romanov <avromanov@salutedevices.com>,
- dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
- kmpark@infradead.org, hs@denx.de, joe.hershberger@ni.com, dunaev@tecon.ru,
- sjg@chromium.org, bmeng@tinylab.org, xypron.glpk@gmx.de,
- tobias@waldekranz.com, jpewhacker@gmail.com,
- marek.vasut+renesas@mailbox.org, kever.yang@rock-chips.com,
- jbx6244@gmail.com, abdellatif.elkhlifi@arm.com,
- mikhail.kshevetskiy@iopsys.eu, jagan@amarulasolutions.com
-Cc: kernel@salutedevices.com, u-boot@lists.denx.de
-References: <20240603155740.1840571-1-avromanov@salutedevices.com>
- <20240603155740.1840571-7-avromanov@salutedevices.com>
-Content-Language: en-US, de-DE
-From: Frieder Schrempf <frieder.schrempf@kontron.de>
-In-Reply-To: <20240603155740.1840571-7-avromanov@salutedevices.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR0P281CA0038.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:48::21) To PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:102:263::10)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-1f6fada63a6so11451315ad.3
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 05:47:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1718023674; x=1718628474; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=IOCEsu6LTF+eD8tRXZmBDiqWYnwqApCk5MvQr1sm4So=;
+ b=Sd433EJYdXQ1zzK4VUzK2WWUMNGojva9+61iD7NB3ZrQAPAFhrZGa6tPBvn1P3iNpH
+ RiI34t/CKEB/DL5k9WorWhM7uOUw33X6bb1k1liNNu3dWTllMawWzJVTHq7U2kiTuSnr
+ WAgarN+U+gQIKJH2Rtn3AS+nfga5NegvUoIewYHc/oSxTVzSlX+UJKH+guYsY3cOuA5/
+ itOaAFJPxhYwF4RO6EPWpYBlHXPWlx0fHqnrVWlDK74qdVev6T6CEfSE8veaocGeSnK7
+ P2AGF6WoCRNleCYepVsLM9Qb4WU8FmypKJAk2hJfAKUiPseMyzDCGIUkscfrYuvlp89S
+ 6qKQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718023674; x=1718628474;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=IOCEsu6LTF+eD8tRXZmBDiqWYnwqApCk5MvQr1sm4So=;
+ b=tCoWBlxdtQ2IsoMbMHR4XuZChLdeGDZn2ZpTwevqbv6YJiVkZnpeyvr9l8h9/lUOl8
+ wI+4GHGqwE9aNK5noZ+zxUOVxQzb7mRO+tfYX3G0Yk6csZsGS0JwwOYmEqGQuygDcX7N
+ DBfEHN+ejAjW7omXVXudBRAGLPibt0ZaccJVHRPIuSJcSBGE2uINZv8TIqs1os4zAon8
+ TNPX5CVBFG0l6X1fVx+IHi29cWeIegoXbhgS9klvzHSIoyOkMyujK+6mfYQpXAz7QwRG
+ IIHaZWU3cwMyRryAVakm2kV8rTUu1LCHf95FAxXxETYLGFVpg3lEFXXcwRBmkyYUiaTX
+ fj8A==
+X-Gm-Message-State: AOJu0YxKUCMWegdsPLEN+l+SOeuD1zeD4E4hvYKjzDZiHWLZ6o9SUNZx
+ MZFaEgvbUWBwd3Uwp6YbUeWWW2mumFL/uwdAXBbWiS7bj5uwTZQTsbL79p/QLxKqhfvq/7ziHyA
+ zK5U0xo6/XveDY6Px1dUMpQ8IwfN1EAOPyaV1Bw==
+X-Google-Smtp-Source: AGHT+IFuKAp0D9pPtlAuNrdj1x4PQ2BWSA3nqYJ0l/evyhd8d/0U3AK14UYi3EDQw20yKMppJqdxpqRuqwno4NmSl1U=
+X-Received: by 2002:a17:902:ecc7:b0:1f2:fb02:3dfd with SMTP id
+ d9443c01a7336-1f6d02d2170mr120565185ad.11.1718023674016; Mon, 10 Jun 2024
+ 05:47:54 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR10MB5681:EE_|AM0PR10MB3715:EE_
-X-MS-Office365-Filtering-Correlation-Id: a0883155-43c4-494a-214c-08dc894b63e0
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230031|7416005|376005|366007|1800799015|921011; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?SERtcVB6R0tSWlg2TVlaL20zWWFEMURmTlo4emtTYzZLdXZoUmlWWnBqcDEx?=
- =?utf-8?B?bWc1THRNNy9abi9ZNzAwM0tnd2U0K0wwZ0E5bUluNXJaSFZibW1sTzdwQVUy?=
- =?utf-8?B?WjZZTVUyWlZpVS9vdm9aMHUwc2t3MDRwK0xkdmFRV0IvR1M2OVFwa2Npb0xE?=
- =?utf-8?B?ck9HdGRjaGJOZVZ6a2FWYndHdWl2S3NoVy9CMTI1b0o4N0g2by8vQ0g1TVRt?=
- =?utf-8?B?dlBScmdtMHdibVlYRzlhV3Z3eHE5SkZLUEhhQk9CdEFQSjdTUmRXNXNDWmxu?=
- =?utf-8?B?K3VESi9oSmVMNDRPQmJTaGVVc0dYdm1HNDBFYWdyNElUY2ZBSXhrclNuK3RE?=
- =?utf-8?B?N1hIaXlXaTZQOXNBYkU2NVdMTTg4QWZkTW5mVUo0VE1ITWUvZDc3d0NwM1hr?=
- =?utf-8?B?dlFveXVKZ0F2ZTBuZmEvYmxlNGMxTEFZOVNraHZMeTVuVHZvazhLUWs5NDV6?=
- =?utf-8?B?M01TaUZadzBvK28yQzdCeWFBYkI1NFNuYTFjWUY4UFZGekRBcGtJVU5IOW5R?=
- =?utf-8?B?ZEwwZU9sVU1OT05JSUs2bVJUdFU0WncrbXhta1lJeWd5eVYzRnkwSHM3STVr?=
- =?utf-8?B?eHNXSGpWb3FIL0tjaEhzVTBUODR1NDVaTWlyanhsdXFhcUluejVWOFhXQ3lE?=
- =?utf-8?B?NXo2L0l4ZGg3Y0xtdVBzVDM4NXY3dklieEJYVzhIUHBDdkVMSGpSay9QSEh2?=
- =?utf-8?B?eGswdEs5TjYvWUgyWHVJQUZDT0NlUWthc3Y3bWNJS0s0RzhWYzRIMU9XVXZF?=
- =?utf-8?B?cnZFZjdMSk02TXlaSHNtWktnNUJYVWNoYmJHbzZEaUdWQjQ4aElkTVN5Q3dY?=
- =?utf-8?B?M0F5N2g2NXNYQUdXdXNzMVo1UURHSnRCMVFqT3NVS3gxSVYwN3Q2ZFNYUXNC?=
- =?utf-8?B?a0RHdTlsZEV1RFV0WkNpSndqN2FoZzNhYjdjaVppV29QZTdNeWx0a04yRHR4?=
- =?utf-8?B?Vit2eU95aFJCelpuUnhjYjJ4aVJEODIxWG95VHRqdFpoRUlyRTRBL0JpNS9k?=
- =?utf-8?B?YUVvMDlvSHRkRXpGTW0yUkMyQWtEaGxXVllRZ0NMbjlCZDFBK0ExOU9VeHZF?=
- =?utf-8?B?a3JnZHV3OEh0RW9nTTBKR2FGQ1gvL3I2WFU5UVRPVTBHc0MvdHE5ZTZUL0xq?=
- =?utf-8?B?RHlRRURTWGpTNU9aRzk3WjhOY0pBTlA3YmtvT1JFNUdDelVGdnd4akV6TytT?=
- =?utf-8?B?M2NDZ3JsSDdpOERCODEvQVk3RFY3bWtHcHlDOTNYK0dKUVUxcUJManlsT21v?=
- =?utf-8?B?MzRXVXdQelVpZzBjQy9JUWNEVkhMMFBmVThySmRCeXJTUHFiVHU4NHdJMitL?=
- =?utf-8?B?Z3BJbGYvdDZCa21SMlljdVRiSDMzSmV6TFltMmZTNFJEYzl3WEVycnhHS0gw?=
- =?utf-8?B?eGlVMzdxU2hJV1lRTWt2Q3lXNHR6MWF0YU5FSWN2S1MwL3FNNEhBU28zc2R2?=
- =?utf-8?B?QjduY2VKR21hVG5rMDdGZmh3aDlRbjM5eW13MFptdW81SVhxdEg4NlFGRDJH?=
- =?utf-8?B?VFp4T3pZZnBnaXJYNlpYNGVRb3loaTY0YW5abzNORm1PQ2lrd0Y5ZTlUMHZT?=
- =?utf-8?B?a1dlOHp6MURBWk1vZ1Z3bFlydURnVTM4czNTTGFlY09QbEU0ZWFjUWU3NUFr?=
- =?utf-8?B?UUxaSU50TzNwcHZuZDNTdGhWaGIzbEVEZjUyUzlqRlV4S0tBSm1tbEtPTEhQ?=
- =?utf-8?B?ZG1heEdjV1FKd0k0UHRCNndveVgyMmd0bFEzYy9rSXplMlR4bHZ4MUFRTkZO?=
- =?utf-8?B?UjFpZ1BrSDlkMWt3a3pGUXMvZ1dhaWNhQm9PenRSZHI3NzJHNXY4c1JRVTJX?=
- =?utf-8?Q?XH8eKRbMwlBjPiCBPxL+CZJjxFlIoS0P+YGTU=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(7416005)(376005)(366007)(1800799015)(921011); DIR:OUT; SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YXhLVGN4VURTNHorQzBRajN6T0dLaER4KzkxOFJSbzlVV2MxVVo0MGN4dEJM?=
- =?utf-8?B?MnhCZEpSRG1NQTIvV2xKS0xBOHE3VGpJYUxjeUM5cyttMWhseHpjbk12by9s?=
- =?utf-8?B?QkhtaGZEUmJBNFdyb2dZaGFRR3VWVzVjSFJXSDExTWx5c0xZNEJZdFp3NlZ4?=
- =?utf-8?B?QVV4Tm1GeFhvei9DejR3cXZUcWZtYnhBcUFXVFRDaFcvYmpSbEVHcnhSZGd3?=
- =?utf-8?B?ZlRDN1dDKzlzQ3JFenNGQkUxR2hqdFJ3WFBNNUlRR05uU01HaGNyU2lLdzJh?=
- =?utf-8?B?cUdCOUlPY044WWg5RHJGWFgzN0w4OWdETEdLTUhBTG4zbDUzR1ZPQWRKMkJx?=
- =?utf-8?B?MzRVaG5EMjJRalV2bU80UEFTWGNXWnZKYk1ITjJ5S1oxbk1iaDhZTWRLVHQr?=
- =?utf-8?B?RjgrSk5qdk41S2s1OE9jK0JubDZ2d0hydWNkWk5SSUpWMnJmV0Vaa2wzV0dp?=
- =?utf-8?B?V214c00wbnk4ZUhMQkl6SUJyK1Jac1llQ2xubEQvTitWRWRTRzhKM0RSSjdJ?=
- =?utf-8?B?eXlmRzh1TmxwenJmM0FNS2RraGNIVzZlSGpXR3ErdENuNlJJMUlmdE5VUmhX?=
- =?utf-8?B?QTBFRUZxTjc5REhYbTFMbDJhdTYvYUtGUFduaTZWUkFSc29WOHRvRUxsUXZM?=
- =?utf-8?B?cUh6ZUlrTDFISEROYUowT01XTUhEYXZ2SE9SZktac21qaVEvTW1SU2ZOYlBo?=
- =?utf-8?B?ZDA4UUhkVDgyQUpieG1NREF4Qk5iSGJ0Qkg3UmRRZzJXZDg2UHg5S3BiOGFq?=
- =?utf-8?B?Z3hwa0wyd3VQOG1VWlFhc2tNVGRwbkZzMmJYa1ZaNlpnRGRwZVoydjB0eVhj?=
- =?utf-8?B?L1pHNnhhemNtVWRpMWppRU1oUDNoc1lsQi9GWThOUjZ3RTVwLzlMMmx3N0xZ?=
- =?utf-8?B?LzQyTGF0OU05T0hPRlZuTWNLZFBOVTByNU44dTdHUHRpVmUyejdCQWNqRFhT?=
- =?utf-8?B?VEFabDdoRWJIOUZidTBENmpaS1NoSmovUmYxdnpyZHd5YWNoLzRmdFRQc2Yw?=
- =?utf-8?B?alhYSHpSbm81WTNnV0ZPUUlKYXlzSzVMTkZKKzhNOVN1TmN6ZSs4TVA2N1VH?=
- =?utf-8?B?UkdyZ1JRcUpvUEMwU2hhTGU3OEsrN3pqeTVjS2t6YWhEcG4yRUVxSGNzYWsv?=
- =?utf-8?B?b3pyVmhEQ1J1bnhRSUg5cnd6bXp2bmRZVVhnNkY0dWQ4TExtbkk1aysyZllk?=
- =?utf-8?B?MU5ON1ppQVVZcVIwT0RrUm9wSXgxVDRKb1k3MkpwREE1VXRvSmtPL2xYcEJZ?=
- =?utf-8?B?alZBNWszV1M5N2x0VzFyUkh0WXk0L05vMlJIRHdUY2dWZWNDblliWHZEQUlt?=
- =?utf-8?B?QmFyUWpEdnVweXNMS0F5Vy9wNFlDaGdDRFZlcHlLV1J1NTFJaGJRTWF4RlVY?=
- =?utf-8?B?RENQWUdxa0lQbndtcDRjWHloZm1nWWpGR2ZpZWpwWm5PSnVGZEJSTkQ0NjZ2?=
- =?utf-8?B?dnNzQ0dJMytUN1F5MVBxZldzbHRCZ3ZkUjZnYmtaUzJtUFhEdTBObEFDM2lp?=
- =?utf-8?B?bHVMZEw5Z2lGMVcrQm40Qk5Ja0E2Sk5zQkZCUENBcVhYbkJIbzA5UHAyWFBH?=
- =?utf-8?B?RFROeURjMVI3MzdRcFdUZktwajJKaithdHNDa2creXEzdjdoTjRFbmIwSFJN?=
- =?utf-8?B?UTgvMEQ5QUs5YVMrWWQweUlOUHZpNFg2RmhkdmpBSUtXUDNoVThPaVFYMVNw?=
- =?utf-8?B?YTQ4UTM2am85UWEzRVJERlFOa2ttZXY0OGlFcWRiU0pSKzZxQlMzZGNqVWo1?=
- =?utf-8?B?WjRuaW5hY2dtTElhZFFSTmFHaENBMG84cStUV3VUbUpzZ0dzUFl1K0NRdS90?=
- =?utf-8?B?NE5XSXZZOFBvNDlTQ084RHJ1S09DWWV2dEtDa0xTbzlMeEZ2OWhpMUU5WnRT?=
- =?utf-8?B?RmNoZVJkclVEODVTTEJoUjdzWncyWHFkYVJ4bzlTOXNKd3V4di9QVnBpamhW?=
- =?utf-8?B?YmxaaDN6ak52aUdkaWUrZmNZQldncExWM3Jibmx1TTBHK3dsNTQrWTZ5S3g3?=
- =?utf-8?B?U3hwelVOYlMxNFlNOVNFVnd0QXVxNHZ1czFtN1lxVlFLWmRVd3Vma2JtZjhZ?=
- =?utf-8?B?TW9sMDk5U0poZmhTblVJa1NKUWhRem5QaUcrUlYrdW5JeXpnaXdKMjREd3Fx?=
- =?utf-8?B?OExudGNibVprNGpEY0pOc25GY1VIaTQxNGk1bVZPL0J5dmtGS1ZFWEUrRWNH?=
- =?utf-8?B?U3c9PQ==?=
-X-OriginatorOrg: kontron.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: a0883155-43c4-494a-214c-08dc894b63e0
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2024 12:46:47.2314 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8c9d3c97-3fd9-41c8-a2b1-646f3942daf1
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: zLxBEDo1+4WauHmaHw4Gxq1hmodcF4sKa0G6syyWbHmoWfSivorRZXMsXIeJBzTOZgRiBOCVPfKHR6euIg6QJalsqDsaq+BSxJmegkQdrlY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR10MB3715
+References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
+ <20240607185240.1892031-10-sughosh.ganu@linaro.org>
+ <CAC_iWjJARprGkjPQV4nVGKPWxBL+3iiSAuKcdqUNvn+hKV40XQ@mail.gmail.com>
+ <CADg8p95O5FMyyLV3yZkRshrOB4nbKa4VdQwMxrSf4bB9z4e8Yg@mail.gmail.com>
+In-Reply-To: <CADg8p95O5FMyyLV3yZkRshrOB4nbKa4VdQwMxrSf4bB9z4e8Yg@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 10 Jun 2024 15:47:17 +0300
+Message-ID: <CAC_iWjJaWMrv94c_94K_gCaZ0-RaOEz03M-pF4z7qOdryaqbSg@mail.gmail.com>
+Subject: Re: [RFC PATCH 09/31] lmb: allow for resizing lmb regions
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -182,45 +91,279 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 03.06.24 5:57 PM, Alexey Romanov wrote:
-> UBI block is virtual block device, which is an abstraction
-> over MTD layer. Therefore it is logical to use it in
-> combination with MTD drivers.
-> 
-> Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
+On Mon, 10 Jun 2024 at 15:20, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+>
+> hi Ilias,
+>
+> On Mon, 10 Jun 2024 at 17:34, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > Hi Sughosh
+> >
+> >
+> > On Fri, 7 Jun 2024 at 21:54, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > >
+> > > Allow for resizing of LMB regions if the region attributes match. The
+> > > current code returns a failure status on detecting an overlapping
+> > > address. This worked up until now since the LMB calls were not
+> > > persistent and global -- the LMB memory map was specific and private
+> > > to a given caller of the LMB API's.
+> > >
+> > > With the change in the LMB code to make the LMB reservations
+> > > persistent, there needs to be a check on whether the memory region can
+> > > be resized, and then do it if so. To distinguish between memory that
+> > > cannot be resized, add a new flag, LMB_NOOVERWRITE. Reserving a region
+> > > of memory with this attribute would indicate that the region cannot be
+> > > resized.
+> >
+> > Can you think of a memory region that needs to be protected from resizing?
+>
+> Actually, I think I could use a better term instead of 'resize'. The
+> aim of this patch is to allow re-allocation/re-reservation of the same
+> region of memory -- this will only be relevant for the LMB
+> reservations, as these are used for loading images into memory. All
+> other allocations(EFI currently) are true allocations in that these
+> should not get overwritten at all. Memory once allocated, say for
+> loading an EFI image, cannot be re-requested.
+>
+>
+> > I think we should design this a bit differently.  For example, think
+> > of someone loading a file in a memory region and then a subsystem
+> > trying to resize its reserved memory overwriting that region. Instead
+> > of this flag why don't we add
+> > - A flag that indicates whether this region can be re-used (IOW
+> > overwrites it), but only if the 'subsytem id' defined below matches
+> > - a u32 that indicates the subsystem ID that initiated the transaction
+> > -- e.g EFI, load command, U-Boot core .. etc
+> >
+> > Resizing can be enabled unconditionally in that case as long as there
+> > is enough space. The only requirement would be that the request comes
+> > from the same subsystem that reserved the memory in the beginning
+>
+> Like I mentioned above, resizing(or rather re-allocations) should only
+> be allowed for the LMB subsystem. Any other module should not be
+> returned an already allocated address. Which is why I mark any memory
+> map update coming from the EFI module as no-overwrite.
 
-I think I already sent a review tag for v2, but anyway:
+And what happens if someone tries to overwrite 'load' memory? Won't
+you still corrupt whatever is loaded on that region as it's not marked
+for protection?
 
-Reviewed-by: Frieder Schrempf <frieder.schrempf@kontron.de>
-
-> ---
->  drivers/mtd/nand/spi/core.c | 8 +++++++-
->  1 file changed, 7 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
-> index 8edb468aed..db71e0627b 100644
-> --- a/drivers/mtd/nand/spi/core.c
-> +++ b/drivers/mtd/nand/spi/core.c
-> @@ -26,6 +26,7 @@
->  #include <watchdog.h>
->  #include <spi.h>
->  #include <spi-mem.h>
-> +#include <ubi_uboot.h>
->  #include <dm/device_compat.h>
->  #include <dm/devres.h>
->  #include <linux/bitops.h>
-> @@ -1181,8 +1182,13 @@ static int spinand_bind(struct udevice *dev)
->  {
->  	if (blk_enabled()) {
->  		struct spinand_plat *plat = dev_get_plat(dev);
-> +		int ret;
-> +
-> +		ret = mtd_bind(dev, &plat->mtd);
-> +		if (ret)
-> +			return ret;
->  
-> -		return mtd_bind(dev, &plat->mtd);
-> +		return ubi_bind(dev);
->  	}
->  
->  	return 0;
+/Ilias
+>
+> -sughosh
+> >
+> > Thanks
+> > /Ilias
+> >
+> > >
+> > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > ---
+> > >  include/lmb.h |   1 +
+> > >  lib/lmb.c     | 120 ++++++++++++++++++++++++++++++++++++++++++++------
+> > >  2 files changed, 107 insertions(+), 14 deletions(-)
+> > >
+> > > diff --git a/include/lmb.h b/include/lmb.h
+> > > index 03bce2a50c..1d4cd255d2 100644
+> > > --- a/include/lmb.h
+> > > +++ b/include/lmb.h
+> > > @@ -20,6 +20,7 @@
+> > >  enum lmb_flags {
+> > >         LMB_NONE                = 0x0,
+> > >         LMB_NOMAP               = 0x4,
+> > > +       LMB_NOOVERWRITE         = 0x8,
+> > >  };
+> > >
+> > >  /**
+> > > diff --git a/lib/lmb.c b/lib/lmb.c
+> > > index de5a2cf23b..0a4f3d5bcd 100644
+> > > --- a/lib/lmb.c
+> > > +++ b/lib/lmb.c
+> > > @@ -260,12 +260,88 @@ void lmb_add_memory(struct bd_info *bd)
+> > >         }
+> > >  }
+> > >
+> > > +static bool lmb_region_flags_match(struct lmb_region *rgn, unsigned long r1,
+> > > +                                  enum lmb_flags flags)
+> > > +{
+> > > +       return rgn->region[r1].flags == flags;
+> > > +}
+> > > +
+> > > +static long lmb_merge_overlap_regions(struct lmb_region *rgn, unsigned long i,
+> > > +                                     phys_addr_t base, phys_size_t size,
+> > > +                                     enum lmb_flags flags)
+> > > +{
+> > > +       phys_size_t rgnsize;
+> > > +       unsigned long rgn_cnt, idx;
+> > > +       phys_addr_t rgnbase, rgnend;
+> > > +       phys_addr_t mergebase, mergeend;
+> > > +
+> > > +       rgn_cnt = 0;
+> > > +       idx = i;
+> > > +       /*
+> > > +        * First thing to do is to identify how many regions does
+> > > +        * the requested region overlap.
+> > > +        * If the flags match, combine all these overlapping
+> > > +        * regions into a single region, and remove the merged
+> > > +        * regions.
+> > > +        */
+> > > +       while (idx < rgn->cnt - 1) {
+> > > +               rgnbase = rgn->region[idx].base;
+> > > +               rgnsize = rgn->region[idx].size;
+> > > +
+> > > +               if (lmb_addrs_overlap(base, size, rgnbase,
+> > > +                                     rgnsize)) {
+> > > +                       if (!lmb_region_flags_match(rgn, idx, flags))
+> > > +                               return -1;
+> > > +                       rgn_cnt++;
+> > > +                       idx++;
+> > > +               }
+> > > +       }
+> > > +
+> > > +       /* The merged region's base and size */
+> > > +       rgnbase = rgn->region[i].base;
+> > > +       mergebase = min(base, rgnbase);
+> > > +       rgnend = rgn->region[idx].base + rgn->region[idx].size;
+> > > +       mergeend = max(rgnend, (base + size));
+> > > +
+> > > +       rgn->region[i].base = mergebase;
+> > > +       rgn->region[i].size = mergeend - mergebase;
+> > > +
+> > > +       /* Now remove the merged regions */
+> > > +       while (--rgn_cnt)
+> > > +               lmb_remove_region(rgn, i + 1);
+> > > +
+> > > +       return 0;
+> > > +}
+> > > +
+> > > +static long lmb_resize_regions(struct lmb_region *rgn, unsigned long i,
+> > > +                              phys_addr_t base, phys_size_t size,
+> > > +                              enum lmb_flags flags)
+> > > +{
+> > > +       long ret = 0;
+> > > +       phys_addr_t rgnend;
+> > > +
+> > > +       if (i == rgn->cnt - 1 ||
+> > > +               base + size < rgn->region[i + 1].base) {
+> > > +               if (!lmb_region_flags_match(rgn, i, flags))
+> > > +                       return -1;
+> > > +
+> > > +               rgnend = rgn->region[i].base + rgn->region[i].size;
+> > > +               rgn->region[i].base = min(base, rgn->region[i].base);
+> > > +               rgnend = max(base + size, rgnend);
+> > > +               rgn->region[i].size = rgnend - rgn->region[i].base;
+> > > +       } else {
+> > > +               ret = lmb_merge_overlap_regions(rgn, i, base, size, flags);
+> > > +       }
+> > > +
+> > > +       return ret;
+> > > +}
+> > > +
+> > >  /* This routine called with relocation disabled. */
+> > >  static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
+> > >                                  phys_size_t size, enum lmb_flags flags)
+> > >  {
+> > >         unsigned long coalesced = 0;
+> > > -       long adjacent, i;
+> > > +       long ret, i;
+> > >
+> > >         if (rgn->cnt == 0) {
+> > >                 rgn->region[0].base = base;
+> > > @@ -290,23 +366,32 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
+> > >                                 return -1; /* regions with new flags */
+> > >                 }
+> > >
+> > > -               adjacent = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
+> > > -               if (adjacent > 0) {
+> > > +               ret = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
+> > > +               if (ret > 0) {
+> > >                         if (flags != rgnflags)
+> > >                                 break;
+> > >                         rgn->region[i].base -= size;
+> > >                         rgn->region[i].size += size;
+> > >                         coalesced++;
+> > >                         break;
+> > > -               } else if (adjacent < 0) {
+> > > +               } else if (ret < 0) {
+> > >                         if (flags != rgnflags)
+> > >                                 break;
+> > >                         rgn->region[i].size += size;
+> > >                         coalesced++;
+> > >                         break;
+> > >                 } else if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
+> > > -                       /* regions overlap */
+> > > -                       return -1;
+> > > +                       if (flags == LMB_NONE) {
+> > > +                               ret = lmb_resize_regions(rgn, i, base, size,
+> > > +                                                        flags);
+> > > +                               if (ret < 0)
+> > > +                                       return -1;
+> > > +
+> > > +                               coalesced++;
+> > > +                               break;
+> > > +                       } else {
+> > > +                               return -1;
+> > > +                       }
+> > >                 }
+> > >         }
+> > >
+> > > @@ -448,7 +533,7 @@ static phys_addr_t lmb_align_down(phys_addr_t addr, phys_size_t size)
+> > >  }
+> > >
+> > >  static phys_addr_t __lmb_alloc_base(phys_size_t size, ulong align,
+> > > -                                   phys_addr_t max_addr)
+> > > +                                   phys_addr_t max_addr, enum lmb_flags flags)
+> > >  {
+> > >         long i, rgn;
+> > >         phys_addr_t base = 0;
+> > > @@ -498,7 +583,7 @@ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr)
+> > >  {
+> > >         phys_addr_t alloc;
+> > >
+> > > -       alloc = __lmb_alloc_base(size, align, max_addr);
+> > > +       alloc = __lmb_alloc_base(size, align, max_addr, LMB_NONE);
+> > >
+> > >         if (alloc == 0)
+> > >                 printf("ERROR: Failed to allocate 0x%lx bytes below 0x%lx.\n",
+> > > @@ -507,11 +592,8 @@ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr)
+> > >         return alloc;
+> > >  }
+> > >
+> > > -/*
+> > > - * Try to allocate a specific address range: must be in defined memory but not
+> > > - * reserved
+> > > - */
+> > > -phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
+> > > +static phys_addr_t __lmb_alloc_addr(phys_addr_t base, phys_size_t size,
+> > > +                                   enum lmb_flags flags)
+> > >  {
+> > >         long rgn;
+> > >
+> > > @@ -526,13 +608,23 @@ phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
+> > >                                       lmb.memory.region[rgn].size,
+> > >                                       base + size - 1, 1)) {
+> > >                         /* ok, reserve the memory */
+> > > -                       if (lmb_reserve(base, size) >= 0)
+> > > +                       if (lmb_reserve_flags(base, size, flags) >= 0)
+> > >                                 return base;
+> > >                 }
+> > >         }
+> > > +
+> > >         return 0;
+> > >  }
+> > >
+> > > +/*
+> > > + * Try to allocate a specific address range: must be in defined memory but not
+> > > + * reserved
+> > > + */
+> > > +phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
+> > > +{
+> > > +       return __lmb_alloc_addr(base, size, LMB_NONE);
+> > > +}
+> > > +
+> > >  /* Return number of bytes from a given address that are free */
+> > >  phys_size_t lmb_get_free_size(phys_addr_t addr)
+> > >  {
+> > > --
+> > > 2.34.1
+> > >
