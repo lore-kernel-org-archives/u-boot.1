@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DD2FC27C55
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 01:19:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 463B9C27C53
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 01:19:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C4ADC885BE;
-	Mon, 10 Jun 2024 03:13:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4FAB588585;
+	Mon, 10 Jun 2024 03:13:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UV4g+SIe";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WBFkq0Tj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA6A688578; Mon, 10 Jun 2024 03:12:58 +0200 (CEST)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
+ id C3F4A8857A; Mon, 10 Jun 2024 03:13:01 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1DE488569
+ by phobos.denx.de (Postfix) with ESMTPS id 5ACC988581
  for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 03:12:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-254a7fe21aeso507608fac.0
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-6f9a4f9923aso350234a34.0
  for <u-boot@lists.denx.de>; Sun, 09 Jun 2024 18:12:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1717981975; x=1718586775; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2jMeGLO1IlJDYqTIdTf9GhLx78Z2YsLiJBjEhU1B4nI=;
- b=UV4g+SIexhcKZFUMN08oDFZYlkXuEvG76qag5apevSkbql047WUlOBfdAw08PvHvWP
- 0nawg5OTxZXWSP7ymu36jUt3qwd3OCum9K91UBJ0NJCCtqZiSZQuOEfAmY76OwyIHB82
- q1JgofSKDl9ka+13A8NG4f7zffxGwjkAmgJsoGizemTwfcbY9DaZVoFGPAvCOdsKkSFO
- NibWOuMT0E2woV4RFdkI+x+LwSZfFyt3VzEZdKQ3EJ5x8OTAhwAK+X3QmQ8T4XBKjrIO
- 23Kr3CUAZ/WFTTZffBzs1mVGe5+Rupss8/kGISh652PDHncgK3PKr1hXPYTvzMUTbGtM
- dCkQ==
+ bh=pqkE2BmuwICkL3yAL/WT/Aadg7mmPS2fm9a4jxxx2l0=;
+ b=WBFkq0TjJusqHMk3FQ9PIhyhMuhEDX5ebRrkzYpmm0Hdc1fhFdE/4T8IXgqb/htkXG
+ OJSZfrQXmqna9axdMenqAON6PbAS5PhA57eNIu0O6RQbjWiZZ8Gb7IPPx+8/J9wM+vOy
+ SOzuHFHc8ao+kR35Jmc2C36sUIJd3XzLCleoPr5Rw0HTuDsNSIYbW+6NM0eJIm6j20BE
+ q8Tvt4jo6Nz95zf8OFK4aNaH5/osTUa3YAjVILQbWO9b+lqGd9asbhjtSNOHBoIs+aj2
+ vlTP3I/92WV3BuroPj3rycAcG+CtcoM/Jh3avC0SiyVULidbKhl9x03UjcQku0WIXLwz
+ bxhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1717981975; x=1718586775;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2jMeGLO1IlJDYqTIdTf9GhLx78Z2YsLiJBjEhU1B4nI=;
- b=WHLdaMCuqfsBXoUuCsxDMhKVGXhl2BdgAAA50Aqi6Xqmw7RiE6Xy+mDpRRdLYZYmpW
- OG8rml8tQ24yjvesdc9AN+NV1MBJVVLPTC+ACw4WUuntOf2yihCBF3wpDkudi7DV7eGp
- A1qWHR59wASOAJc6tDHC3OIqYRRo65GV13DWPI2B1qB3UuemRO57OcdGZVy0AtZkae8x
- ZwCPRRlk764jCbP8jfdNIVDvaCpQ8l50+MtxTFU00bANXPBfDPuNAgH8m8oNQGWIQf3Z
- /QGJwGaNG4agYQQlvk6osGnLF3UMTjRW9cVBb3FF+fhwNxti1LKn8wsZOd2LJ2BVZCES
- wMvw==
+ bh=pqkE2BmuwICkL3yAL/WT/Aadg7mmPS2fm9a4jxxx2l0=;
+ b=ghe336GTGOwwQjp1r28FCWKM3ZOtYE0rSzqIDvhNVTGv9+FiqFiGPzrS5exoyBvRzO
+ G0vsk4wp0iV1mfMSpwIXGnkvUiBBk7RVIFZqdLDxw9sv5isbApgoCVMjWA4mDNTd75TX
+ Xh4c3IPHpL2VZgjvClIxWJa5VVqfaxFszJ94XzNXkKiYbIa6fuex7pzFw8g9zmiT3482
+ SOuWMGQ9oNR3IiEHBKoed6U3mLywVynzSzpshZMEEB9kBZMW1cMGMGYuW0DWTQ8L4tF0
+ 2tSZkXeTee026BojTpT0YLbIcFz+YKIFEN1NQ3X75OHsn4HsheK/iXcWNj2ANmF20x0J
+ xIRQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXrLYuolrxmfRjRhD7KVI3yy7imV79l9n1kXB3mIOAo85uO5LSr+nxs41zuTn86grDQfoosPsWFAqIj0GZvxRaTDfJoDw==
-X-Gm-Message-State: AOJu0YxpOFDefDJZnIEvDPEqpZtHTdiuvJXL2HaIRYmEtUK4EwuZQKVF
- fgJq2jsJ0GM7GLdL0L3mXKy3jb60fmeVq9jOEY8xlyi4dUQ8R3jnXeCydN7nQco=
-X-Google-Smtp-Source: AGHT+IH34NtVAdkqVDc6qglXLFrxC0TG8qoxTewaghgf+i6Gtcpq9ok9LIMuwQaHn8nhgBZgKSFodw==
-X-Received: by 2002:a05:6870:b022:b0:254:b8b2:e194 with SMTP id
- 586e51a60fabf-254b8b2ec1dmr1144821fac.12.1717981975561; 
- Sun, 09 Jun 2024 18:12:55 -0700 (PDT)
+ AJvYcCVs2PJCTvTdzFGKmwDgzdu0mDqw7hZJxGObDGJ85GqNvvR5d1tol4eDg0YKGEINxX5Xxn3yS0puUJfLlHmcbTx1+LBwow==
+X-Gm-Message-State: AOJu0YyrB0mbs8d5A4jw5Niu5K0vxNU0a79s2PQzi0d0mPp/uiLH5F8t
+ O271owfwWjpp4EhJyNn5Tyo8BmOSvetHjCq5HNyv4Vge6L/kbj88LyiHBn4zwOc=
+X-Google-Smtp-Source: AGHT+IGhg2FTv/XgIJ0rF563YyNQrbx31YtYW8b+BkmBwLlfyyMqlFK30ypRjVqM7yFZsd7j6wUttw==
+X-Received: by 2002:a05:6830:12cb:b0:6f9:c7f6:8fd0 with SMTP id
+ 46e09a7af769-6f9c805d3d0mr505444a34.4.1717981974876; 
+ Sun, 09 Jun 2024 18:12:54 -0700 (PDT)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-254d8b2b4a7sm31872fac.8.2024.06.09.18.12.55
+ 46e09a7af769-6f988a89d3esm616939a34.0.2024.06.09.18.12.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Jun 2024 18:12:55 -0700 (PDT)
+ Sun, 09 Jun 2024 18:12:54 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>,
  Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
@@ -78,10 +78,9 @@ Cc: Quentin Schulz <quentin.schulz@cherry.de>,
  Ferass El Hafidi <vitali64pmemail@protonmail.com>,
  Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com
-Subject: [PATCH v2 40/40] doc: samsung: Mention enabled eMMC in E850-96 board
- doc
-Date: Sun,  9 Jun 2024 20:12:26 -0500
-Message-Id: <20240610011226.4050-41-semen.protsenko@linaro.org>
+Subject: [PATCH v2 39/40] configs: e850-96: Enable MMC
+Date: Sun,  9 Jun 2024 20:12:25 -0500
+Message-Id: <20240610011226.4050-40-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240610011226.4050-1-semen.protsenko@linaro.org>
 References: <20240610011226.4050-1-semen.protsenko@linaro.org>
@@ -103,34 +102,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-eMMC is enabled on E850-96 board now. Mention that in the board
-documentation.
+Enable MMC subsystem and DW MMC driver support to make eMMC functional.
+Also enable a couple of related commands so the user can make use of
+eMMC from U-Boot shell.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
- doc/board/samsung/e850-96.rst | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ configs/e850-96_defconfig | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/doc/board/samsung/e850-96.rst b/doc/board/samsung/e850-96.rst
-index 0cb95473e536..0a7b6fc0c9dd 100644
---- a/doc/board/samsung/e850-96.rst
-+++ b/doc/board/samsung/e850-96.rst
-@@ -47,12 +47,13 @@ Build Procedure
- ---------------
- 
- .. warning::
--  At the moment both eMMC and USB features are not enabled in U-Boot. Flashing
-+  At the moment USB is not enabled in U-Boot for this board. Although eMMC is
-+  enabled, you won't be able to flash images over USB (fastboot). So flashing
-   U-Boot binary **WILL** effectively brick your board. The ``dltool`` [8]_ can
-   be used then to perform USB boot and flash LittleKernel bootloader binary [7]_
-   to unbrick and revive the board. Flashing U-Boot binary might be helpful for
-   developers or anybody who want to check current state of U-Boot enablement on
--  E850-96 (which is mostly serial console and related blocks).
-+  E850-96 (which is mostly serial console, eMMC and related blocks).
- 
- Build U-Boot binary from source code (using AArch64 baremetal GCC toolchain):
- 
+diff --git a/configs/e850-96_defconfig b/configs/e850-96_defconfig
+index 38b9968c1671..29ad31d5f8ed 100644
+--- a/configs/e850-96_defconfig
++++ b/configs/e850-96_defconfig
+@@ -9,11 +9,19 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xf8c00000
+ CONFIG_DEFAULT_DEVICE_TREE="exynos/exynos850-e850-96"
+ CONFIG_SYS_LOAD_ADDR=0x80000000
++CONFIG_ANDROID_BOOT_IMAGE=y
+ # CONFIG_AUTOBOOT is not set
+ # CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_HUSH_PARSER=y
++CONFIG_CMD_ABOOTIMG=y
++CONFIG_CMD_CLK=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PART=y
++CONFIG_CMD_TIME=y
+ # CONFIG_NET is not set
+ CONFIG_CLK_EXYNOS850=y
+-# CONFIG_MMC is not set
++CONFIG_MMC_DW=y
+ CONFIG_SOC_SAMSUNG=y
+ CONFIG_EXYNOS_PMU=y
+ CONFIG_EXYNOS_USI=y
 -- 
 2.39.2
 
