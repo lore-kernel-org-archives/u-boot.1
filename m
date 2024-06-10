@@ -4,160 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1B8EC27C55
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 14:16:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FACDC27C55
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 14:18:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3217F8841D;
-	Mon, 10 Jun 2024 16:16:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id C5C068855C;
+	Mon, 10 Jun 2024 16:18:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="BE6BskLN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wVwKQ7gm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4494E88546; Mon, 10 Jun 2024 16:16:46 +0200 (CEST)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20701.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::701])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B666F88577; Mon, 10 Jun 2024 16:18:36 +0200 (CEST)
+Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
+ [IPv6:2607:f8b0:4864:20::532])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0023883DA
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 16:16:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 430428855C
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 16:18:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=FJFmeLzjeXDfVt4RKDM6+vqtYko82TiFT4u+LbI7tPasOx84XavfSc5/QB76zrs9KdOw0hze8SpmjXxP6AQ4JEFTcx4pdPIpkiKQNBMwmvytT6AgXZhO35Wf8CHikJAuwKx3jG2V/Js6orbjeZ/EJkKhR2pKVqEfLqv4imPNGtm7f26HglVZqJyeMV4QUc3TYQGvXZnvhqNf/UdrQZHi2gFX4/IU/cN76Zj6l1YoPJAW9DcvTSCX+uDU29gaxgOvAdbpXhoNLibg8RmnR2n6iFVLg2opdkt9YEg7ks2AB7P5CzmJZesX0QQLslZdVGDE/JM+2/Ca8W0Ram1hz3XLlg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/+JkHGZ5DgK4dmCTG6iq4jqKzgiWnmk7JKkwGBzMXxc=;
- b=TrX5PYFvE7SHdJ+dNpw++e2cG7WvdJNsIGejS6stPXMhwPkLaC5Pag47R1fOjKOHuYq39QcIJUWgfd9yiDiN9T31cavP1yEvxVAf5W6ATOORe3hltieqkvXYsO5DxVmbCcj9NNKfU1yAPAxLynm41yS7p5ab6fQnLNMquP2Jnugbd6IUJzBQ40RcccJEl7Yt4fEYaXl2lHxsNGQEgIVkIGRIecWMLe8eyJ9/yJ3475AJlYTeD8m6oEJcla2rvKZapdd+zoQ4kI+3AFkmNZqK3cueBzZC4+JocB59/MMdrusXHdgo+BgcufTovUBawuZ6UpIhCbfDtyeMWhWx3jaxSw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/+JkHGZ5DgK4dmCTG6iq4jqKzgiWnmk7JKkwGBzMXxc=;
- b=BE6BskLNQjhq9ibc2oJApa5RALckAi29HeXsKCQ+ZIWkADdGvKOze/L0Gr8aMAdodp8ugqTXBVsvpZIN5N+6v4ZuGIXh/UBbg6ExJnYRb1UfcaPMlSAm4NlS7CVWd8Me44VPI0/Z7/6sRJf1UmjE3H9C4zxKgy8j2BOsaONP4s8=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from PA4PR04MB7982.eurprd04.prod.outlook.com (2603:10a6:102:c4::9)
- by AS8PR04MB8293.eurprd04.prod.outlook.com (2603:10a6:20b:3fa::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.36; Mon, 10 Jun
- 2024 14:16:40 +0000
-Received: from PA4PR04MB7982.eurprd04.prod.outlook.com
- ([fe80::3c4:afd5:49ac:77af]) by PA4PR04MB7982.eurprd04.prod.outlook.com
- ([fe80::3c4:afd5:49ac:77af%4]) with mapi id 15.20.7633.036; Mon, 10 Jun 2024
- 14:16:39 +0000
-Message-ID: <b878a6df-e095-416d-9874-c1deaffe4a58@cherry.de>
-Date: Mon, 10 Jun 2024 16:16:36 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 02/14] firmware: scmi: use a protocol's own channel if
- assigned
-To: AKASHI Takahiro <takahiro.akashi@linaro.org>, trini@konsulko.com,
- sjg@chromium.org
-Cc: etienne.carriere@st.com, u-boot@lists.denx.de,
- Etienne Carriere <etienne.carriere@foss.st.com>
-References: <20231011100707.1007417-1-takahiro.akashi@linaro.org>
- <20231011100707.1007417-3-takahiro.akashi@linaro.org>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20231011100707.1007417-3-takahiro.akashi@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA2P291CA0012.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1e::27) To PA4PR04MB7982.eurprd04.prod.outlook.com
- (2603:10a6:102:c4::9)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pg1-x532.google.com with SMTP id
+ 41be03b00d2f7-6c702226b0aso4024140a12.1
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 07:18:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1718029113; x=1718633913; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=H8eHqdPjga4UIAjpUo0Xa38OhIgeRDnlfteRQYP/KcI=;
+ b=wVwKQ7gm65nyMQozpRUkxXjcGen8R+TNv2aWsW8p60oXlIOuVqOn/+F7Qu23W83DgS
+ EoV8NN9W+85HtMKiz3r4odqe/frID08NhRTQI+L85zDJOvDbp/EFHNwddE9UtJsLiDl9
+ MgXAZbkGXHNAEKome/GWbAjQHXJxeCyFfztVUfW1A2KhA/ippVQidNBqUPvAbEwVQm7B
+ ASRmu0vEGOK6Y6BhuaIpQFeFBo6OA6wFNEfZeDJwwiVDFGVGqdpTC1xVC7vv4ihcHuw8
+ wOIJ4CALzO3DNzA8kSTdH8Q5WcbGNz8McETEKbHu7iyeuGaIQHIYTfw5bLRM7S5iZ/mL
+ QWpA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718029113; x=1718633913;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=H8eHqdPjga4UIAjpUo0Xa38OhIgeRDnlfteRQYP/KcI=;
+ b=uAM5UbdItyz6fgN42Tamuz5JvOVJP0/yWyW9QrdXubggfcWXD+32krUTMs3IYXQVCN
+ To0L/e/djW3WTlmzNZnYRNyECR5uDD9mwmdTEZGoxXgT6cCA40xWWoApOl6PGiyboDWG
+ 1bnvXDm641kX8Yd84D641/T6e4npCLqs6taVpEV+W9iLFquAH+s/QdrnawXXP0QdjYWS
+ wJ6hrlPmOv1SoB0cQot0zGqtd/gJOsoUHo2fuXDn2cfXJEATijlQT//T8wOGe1TnGjex
+ XM6aFD0GJClmbpMVnxxT3gF7MXja6QMh08OqC3u3ees4Dy4EK9LkUt0QdV+aIs74k6+6
+ g+rQ==
+X-Gm-Message-State: AOJu0Yz4tO0uKjGaA9B3PGPXFSsaQDRVoVJOIoUILeN8BVKM/fkH+s9t
+ XaI3VJA5WtiemAgSGlMu7b/JpesZ7JBMepOnM1ptBULu+KfD+jhT+5wBjGvqDKJoACm/bQQUFQF
+ f9els+r5j6nSS/XcjyGG1ymxwZ0VxESD5KtmPZQ==
+X-Google-Smtp-Source: AGHT+IELyvFbqud1NakF5D+SR4jG5s5EDXJPvknh12CiIJfwrqEE/Kk7H8xsZjCztPZTxvC90Y5FfoygM1Kdq5Wtsd0=
+X-Received: by 2002:a17:903:234f:b0:1f7:2051:18bf with SMTP id
+ d9443c01a7336-1f720511c77mr16654125ad.3.1718029112626; Mon, 10 Jun 2024
+ 07:18:32 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB7982:EE_|AS8PR04MB8293:EE_
-X-MS-Office365-Filtering-Correlation-Id: 12d97d7c-59f6-4603-b7f8-08dc8957f209
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230031|376005|1800799015|366007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?cHhvZkd0QkFrbCtxRUUra08vbEZOQzRVRDY4OEZGR1NMa2xiWmgrbHNyYTBM?=
- =?utf-8?B?b0tkZXpEeWk4bEhibm9jbDlZT1pLZkwxakIyRWYxUWNNaDg3R3c2Q2NQWEZL?=
- =?utf-8?B?OEtwOVVkL3FLNk8vQXZkZGgvZWhoZkpBVHowVHBSMTF2NTVMTnVqMU01ei9O?=
- =?utf-8?B?U1N5ZmFtSTJrREdXTnk1QkVLaVZoMVpEQ1VmeU9ETXRMSWR3clNpMTUvU1Mz?=
- =?utf-8?B?ZkYxMERIM3hjVWpzcHpOc0hyZHVvWTRZOG9wODlhNkQrWER4Ny9aNnZNY1Vu?=
- =?utf-8?B?TnJuQmdobEhEUzIveEptamlRdHY5Q214cWVvc0p6NHppenJZdFpKRUlhL1FO?=
- =?utf-8?B?T29LMm9hME5jVS9xL1NPbE5SM0lXZ3lFM3gzUW05TnNyZllYcHdRTjVkaytK?=
- =?utf-8?B?WExrUy81SUlScnJsMTg2UWJJTjFiWHFaaktEbEFJNFNUMFdEQ0I5VThVbU1S?=
- =?utf-8?B?bEsvdzI1eW8xSXNCTXExVGlzUVc3eVlYa1phM0hsZXZmYjlDN041NzZ2blNk?=
- =?utf-8?B?NlZ0bHlnTHVISC9sNUVDR0g1L0tTOGVpOVN5ZklKc3B1ZWIxdWpOU1FzOFlr?=
- =?utf-8?B?UFV4V0V1Z0xVb1FYRkpxT3BkbnFyV0dIVmpwYjk5QytYNzBsOWpyb3VySStr?=
- =?utf-8?B?cnp4cTJETGptRWNsakI0NWdqMWwwTUNjdmxFREhQZzU0czBrTFJJZERXbXpD?=
- =?utf-8?B?azMxcEVPWndGOGhlRkJldkIzUUJ3bGdRZHVsRmpzUlFuVm95K0dVWCtnVHRB?=
- =?utf-8?B?aVVtdEVZOTYxZ2w1WlVNazJBWEp0eml1aEp2bDYvYkNiQ28zalBGaHJNUUtv?=
- =?utf-8?B?bXV1dUFoWk51a1hZcWlkMXVNZkFxQk9BcmNoM01GeHVWRmxkcGFiLzVqQjRI?=
- =?utf-8?B?WWs5WW92aHQ3WXliWUE4aEpjQXFXS1BrejJ5ZTlheHBYaHZiOFRGcGxPYkVO?=
- =?utf-8?B?Mmp6ZlRpN2tHOFRZNHNxTFkzdTN3MGJhRTk4OFo1eEIwMEJMdzJmUkpKNUJo?=
- =?utf-8?B?WWV1TytRU3g0bGpwdXQyb0NCdStDWlVXVkpzSk5kNEo1b3luTmR6bVNCNU5D?=
- =?utf-8?B?NzBtM3pFYldMN08yaVNnT1ZteU5oVjFvYVdBakc3LzFyQXFMenlCQTlDMjdJ?=
- =?utf-8?B?YmZLWXhNWjdPKzZnb1ZJYWJBLytGTE5oVDJOL0xGOHl4ZGl0OGZSZDJWdW05?=
- =?utf-8?B?WG9JT3dmaGwwTk4xU1Y4Y1d6eFBzcDB1VkZGbGp0NkI4OFR0Q1h6Y2NwblEw?=
- =?utf-8?B?Wk91ckxRcGk0Lzh6LzhKbk1JSGpZbzV0YlZRaW1ZcFdDYXVUUU5HVUJnZ3k4?=
- =?utf-8?B?azJKbGt4Uno5cC82VEE2bWM4bkt3MlowUllqQ1hUVWtXSm0xR0NzT0Z6QkpY?=
- =?utf-8?B?TThmbXN1MjNQYy9DVi9BUTBEUlN0VldPVmhqRTQ5RFd4YXhReFo4bThMQzZh?=
- =?utf-8?B?b2N4TWNxMkF1VTFhL0g3QlN3QnJhaUZiZ3FDbHN0aFhRMzVSR0hHeVJqSHZq?=
- =?utf-8?B?NmZrSUN3SDNraEtpN0tkeDg1ZS82ZGFWdGgwTHQ2SUp1ZURzT1pyTFdrVVNN?=
- =?utf-8?B?eVl2MjZuVTdjMjVwWDMxNWVqdWs0L2lSdU9pRGhhY2VRWjdKOTRlWVg2Zk5X?=
- =?utf-8?B?S2d3QUlIWURENDBxRVFJNmdaOUlyb1JMR2prU2p1QWd3TjlyZEU4QmppMHU2?=
- =?utf-8?Q?habJOVCu3aqmnlxWNlVO?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA4PR04MB7982.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376005)(1800799015)(366007); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TGRZSHlWcmNrWmV5Z0pZMWYxRWJtbExwZkMzNDdBRDlPeFBxb1NYVStXYzAw?=
- =?utf-8?B?ZFNtNDZBTEQ0c1Y4NXk0OGp6eXlkTi9wd1JJL1FPcXA1VjRWNG0yVEE5aTNI?=
- =?utf-8?B?SFlKMVJSemFFVnluRFdVTTRTa0k1MldNOVNqZ1p1S0xsN09CS0t4TWlwMTU2?=
- =?utf-8?B?YmxrWG4xUkVhZ04vTG9rUmx5R0J0NGE5VlUzUXcyenZXM3dkd3orbnR4eHFB?=
- =?utf-8?B?YTFyRzZ0WkM5Z3lnaDluTENpZHJqT1dKcVBNaXZNUjFpSWdYZnpPRHNySGdF?=
- =?utf-8?B?SnRwYkN3VDljSFdiV1VKc0F0ZUR4REdybTdRSGJCWlp0RFJXa3ROZnRJTHZo?=
- =?utf-8?B?TEVDa0VMdGtGV1gra05CbVdGNmI4QkIvMEJjRFdoTUlBdE5idm9YL2VjR0xa?=
- =?utf-8?B?d05oRGw4TzI4c2ZxMEx0WFQ1cnM4aGxncCtXMDVkUi9oaGNWTFBiVUVmWDNK?=
- =?utf-8?B?ZmU3UlZmeHczT1hIK2dldkJMaFlocjZud2ViUDhtTjVNNzR5WkZKeXhFMk45?=
- =?utf-8?B?WlFjSmQ5UC9BdWlZd25CK3BWL0FmT2g0SHF2dDRSRXVxWG1KLytNNzI1VkxN?=
- =?utf-8?B?MmUyaHJkWDVnZ01DSTRxUFFHNnVrMms2bEVqMzJxVjlVSEVDWnA0L3RHei9C?=
- =?utf-8?B?ZjBwaUZxWko4QldmMUg2Y0VLRjc5Wm5Iczg3a21tVEY1SlBGbWtUNk85Y0Fo?=
- =?utf-8?B?VkZ4dW1CbHRScHk1RlhTc1VJRDJvVFUwWVU2MCtCTGtYS2dOVmR1SzE3clZq?=
- =?utf-8?B?ekRBMDJ1VmRNekkvckRsSmxpRHg3czYxcG5XS3JRZFZCdVZydGFCSE1oV21u?=
- =?utf-8?B?eG9tRTIwTE9LUWdpOHNZL3NzUjFLY29KekZmTTFrYW50dm9VSFYraFJ4U1hu?=
- =?utf-8?B?RHhYbWR5amlBNXV0ZjdndXFVSnM5dTN5S3J2T2p0MUhhV3Q1MWs2QmVnQWgv?=
- =?utf-8?B?YXB5Q0N0VklUVDhZSmNsTGd1NE1ZWk1JaFcvLzN3UUpIQ0JZeERWZ1dxc0hk?=
- =?utf-8?B?QmlOc3MxMzI2akZXbEYwcXNkd3QzckEvd0xrOFNWdk00OERkNHVBK3NNSWY5?=
- =?utf-8?B?NFRjZmI3c3pibmtyamVpWXZSajhCcFcvUHZ4eTNJaDdrUUNoZ1VpOXIzanpR?=
- =?utf-8?B?Si9Od0FXRmI1d2t5VStLd0NhR3ArbDhwYjFWT2VEVVpEbngwQytlNlJiakll?=
- =?utf-8?B?MkFyYjl6TS9BTG9ZZmNYRVBtbnBkMjhoczJzT2dYZXpzNkg1a2JCempJeUxT?=
- =?utf-8?B?VjU4bVlacHozU2xoZDFoR1FZSlhTWUVJSWlic3YvYTRSRVJaQ1JhM3FrWmhw?=
- =?utf-8?B?cXJKUkJUS3lwd0VaMzNBZ1g3WWI0SFhwWUpCYnNLbU5LanZhZW1ac3BxMnVi?=
- =?utf-8?B?QUFpZ1VkSnlibldMRzRZdnZ0aE9ybXNnVStmdHlpcy9oSDBrQzhVTEVTMllL?=
- =?utf-8?B?RXlVVy9uYTlEWlhBZWl2eG9ZLzhzMWZPWFZUallnWThTeVQzMys5dkxXdGZq?=
- =?utf-8?B?VGtta3VOeWR0RitVMFgrM2kxYXFZU3dyTVMzQStwei9ONDRxdVdXdkpnb0Fx?=
- =?utf-8?B?Q1d4UXJTVHZ0OUFtWXZPb0lsSzRoNSt2NVVWZU03OHZValVuOTV0Tm1JMGxG?=
- =?utf-8?B?cUI0ZVBqOHN0VUpiaWVMMHJ2a3hyaGcrVE5kbzJvRW9nV2h3NU1laUpjQmcz?=
- =?utf-8?B?OXZHSW1tYUVzY2RKWkpiSEVQV2RFYnVqMjlVbkp0QmFRQ3RvMHlEMms1OE0v?=
- =?utf-8?B?ckFYU3ptb29JUWozWWQ0bkp1MkxCcGJRU0tkbkwrV08rZmR6OXVJVnJoenJQ?=
- =?utf-8?B?MmtaZ2JRNHRkTWE3RDlNY1B5anFWOFVrOUxiOEhhL1h6TzdnYWFHOHhLSjhl?=
- =?utf-8?B?R1EzMmdMRWlDdXZLK1l3Z2RITnBLZkNrOHZiOGpvTHJIZng3NXlDOEcrSWdN?=
- =?utf-8?B?MnhMUGRWVlpUYVhQdmNLRi9GQmxVb2FNdzhITlArelYrSFg0NkJOd3JjeWgv?=
- =?utf-8?B?K25HV04wMnY0UHZqMjhGRmdsbEx0V2FDTG81S3RYRmlXbDlJS3g2Mng3elo1?=
- =?utf-8?B?Qy9iVjlwNDlIWUplRmw4bWF4NmxGYTI3cUhiZ2hoTXpYRllsWkpIL014bG03?=
- =?utf-8?B?aTI3dnVaUTYyRnd5V3c5cTBLZkxCTXpwUDRlaG9PNVpHakl3YWpEUkJUSUdu?=
- =?utf-8?Q?oC/fNhuae60EAoeq9W4SH3g=3D?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 12d97d7c-59f6-4603-b7f8-08dc8957f209
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7982.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2024 14:16:39.7499 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vq3Q/QKIT6JcokUAWLb2lQZOiWwjOHbWBIwYFTYilDaG1phN2qIurwZ8vQ3r1IKHgB02VW2S5IRu1BytpcjHol/+UoQGLT1/tats1N/5xSk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8293
+References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
+ <20240607185240.1892031-16-sughosh.ganu@linaro.org>
+ <CAC_iWjJB4t_SAuEoJwTdUR=d+N_PZhXEBx6jMW+n1OQzREVNvQ@mail.gmail.com>
+ <CADg8p94H6d3cPQzw8Xgc5r6vTat1SKAu3xY1BZcYNyPYrmjX7A@mail.gmail.com>
+In-Reply-To: <CADg8p94H6d3cPQzw8Xgc5r6vTat1SKAu3xY1BZcYNyPYrmjX7A@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 10 Jun 2024 17:17:56 +0300
+Message-ID: <CAC_iWj+S1MHjwH1zvT=rz+agwxXWef6SFG7Kipg4bCNFn7oabg@mail.gmail.com>
+Subject: Re: [RFC PATCH 15/31] efi_memory: add an event handler to update
+ memory map
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -174,152 +92,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Sughosh
 
-On 10/11/23 12:06 PM, AKASHI Takahiro wrote:
-> SCMI specification allows any protocol to have its own channel for
-> the transport. While the current SCMI driver may assign its channel
-> from a device tree, the core function, devm_scmi_process_msg(), doesn't
-> use a protocol's channel, but always use an agent's channel.
-> 
-> With this commit, devm_scmi_process_msg() tries to find and use
-> a protocol's channel. If it doesn't exist, use an agent's.
-> 
-> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> Reviewed-by: Etienne Carriere <etienne.carriere@foss.st.com>
-> ---
-> v5
-> * new commit (fixing a potential bug)
-> ---
->   drivers/firmware/scmi/mailbox_agent.c     | 5 +++--
->   drivers/firmware/scmi/optee_agent.c       | 5 +++--
->   drivers/firmware/scmi/scmi_agent-uclass.c | 7 ++++---
->   drivers/firmware/scmi/smccc_agent.c       | 5 +++--
->   include/scmi_agent-uclass.h               | 8 +++++---
->   5 files changed, 18 insertions(+), 12 deletions(-)
-> 
-> diff --git a/drivers/firmware/scmi/mailbox_agent.c b/drivers/firmware/scmi/mailbox_agent.c
-> index 8277c1860606..7ad3e8da9f08 100644
-> --- a/drivers/firmware/scmi/mailbox_agent.c
-> +++ b/drivers/firmware/scmi/mailbox_agent.c
-> @@ -94,13 +94,14 @@ static int setup_channel(struct udevice *dev, struct scmi_mbox_channel *chan)
->   }
->   
->   static int scmi_mbox_get_channel(struct udevice *dev,
-> +				 struct udevice *protocol,
->   				 struct scmi_channel **channel)
->   {
->   	struct scmi_mbox_channel *base_chan = dev_get_plat(dev);
->   	struct scmi_mbox_channel *chan;
->   	int ret;
->   
-> -	if (!dev_read_prop(dev, "shmem", NULL)) {
-> +	if (!dev_read_prop(protocol, "shmem", NULL)) {
->   		/* Uses agent base channel */
->   		*channel = container_of(base_chan, struct scmi_channel, ref);
->   
-> @@ -112,7 +113,7 @@ static int scmi_mbox_get_channel(struct udevice *dev,
->   		return -ENOMEM;
->   
->   	/* Setup a dedicated channel for the protocol */
-> -	ret = setup_channel(dev, chan);
-> +	ret = setup_channel(protocol, chan);
->   	if (ret) {
->   		free(chan);
->   		return ret;
-> diff --git a/drivers/firmware/scmi/optee_agent.c b/drivers/firmware/scmi/optee_agent.c
-> index db927fb21405..e3e462774045 100644
-> --- a/drivers/firmware/scmi/optee_agent.c
-> +++ b/drivers/firmware/scmi/optee_agent.c
-> @@ -324,6 +324,7 @@ static int setup_channel(struct udevice *dev, struct scmi_optee_channel *chan)
->   }
->   
->   static int scmi_optee_get_channel(struct udevice *dev,
-> +				  struct udevice *protocol,
->   				  struct scmi_channel **channel)
->   {
->   	struct scmi_optee_channel *base_chan = dev_get_plat(dev);
-> @@ -331,7 +332,7 @@ static int scmi_optee_get_channel(struct udevice *dev,
->   	u32 channel_id;
->   	int ret;
->   
-> -	if (dev_read_u32(dev, "linaro,optee-channel-id", &channel_id)) {
-> +	if (dev_read_u32(protocol, "linaro,optee-channel-id", &channel_id)) {
->   		/* Uses agent base channel */
->   		*channel = container_of(base_chan, struct scmi_channel, ref);
->   
-> @@ -343,7 +344,7 @@ static int scmi_optee_get_channel(struct udevice *dev,
->   	if (!chan)
->   		return -ENOMEM;
->   
-> -	ret = setup_channel(dev, chan);
-> +	ret = setup_channel(protocol, chan);
->   	if (ret) {
->   		free(chan);
->   		return ret;
-> diff --git a/drivers/firmware/scmi/scmi_agent-uclass.c b/drivers/firmware/scmi/scmi_agent-uclass.c
-> index ec58ccd2bc5d..a28692f39f4d 100644
-> --- a/drivers/firmware/scmi/scmi_agent-uclass.c
-> +++ b/drivers/firmware/scmi/scmi_agent-uclass.c
-> @@ -144,13 +144,14 @@ static const struct scmi_agent_ops *transport_dev_ops(struct udevice *dev)
->    * On return, @channel will be set.
->    * Return	0 on success and a negative errno on failure
->    */
-> -static int scmi_of_get_channel(struct udevice *dev, struct scmi_channel **channel)
-> +static int scmi_of_get_channel(struct udevice *dev, struct udevice *protocol,
-> +			       struct scmi_channel **channel)
->   {
->   	const struct scmi_agent_ops *ops;
->   
->   	ops = transport_dev_ops(dev);
->   	if (ops->of_get_channel)
-> -		return ops->of_get_channel(dev, channel);
-> +		return ops->of_get_channel(dev, protocol, channel);
->   	else
->   		return -EPROTONOSUPPORT;
->   }
-> @@ -166,7 +167,7 @@ int devm_scmi_of_get_channel(struct udevice *dev)
->   		return -ENODEV;
->   
->   	priv = dev_get_parent_priv(protocol);
-> -	ret = scmi_of_get_channel(protocol->parent, &priv->channel);
-> +	ret = scmi_of_get_channel(protocol->parent, protocol, &priv->channel);
->   	if (ret == -EPROTONOSUPPORT) {
->   		/* Drivers without a get_channel operator don't need a channel ref */
->   		priv->channel = NULL;
-> diff --git a/drivers/firmware/scmi/smccc_agent.c b/drivers/firmware/scmi/smccc_agent.c
-> index 6a52cd75d67b..972c6addde21 100644
-> --- a/drivers/firmware/scmi/smccc_agent.c
-> +++ b/drivers/firmware/scmi/smccc_agent.c
-> @@ -81,6 +81,7 @@ static int setup_channel(struct udevice *dev, struct scmi_smccc_channel *chan)
->   }
->   
->   static int scmi_smccc_get_channel(struct udevice *dev,
-> +				  struct udevice *protocol,
->   				  struct scmi_channel **channel)
->   {
->   	struct scmi_smccc_channel *base_chan = dev_get_plat(dev);
-> @@ -88,7 +89,7 @@ static int scmi_smccc_get_channel(struct udevice *dev,
->   	u32 func_id;
->   	int ret;
->   
-> -	if (dev_read_u32(dev, "arm,smc-id", &func_id)) {
-> +	if (dev_read_u32(protocol, "arm,smc-id", &func_id)) {
+On Mon, 10 Jun 2024 at 15:25, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+>
+> On Mon, 10 Jun 2024 at 17:40, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > On Fri, 7 Jun 2024 at 21:54, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > >
+> > > There are events that would be used to notify other interested modules
+> > > of any changes in available and occupied memory. This would happen
+> > > when a module allocates or reserves memory, or frees up memory. These
+> > > changes in memory map should be notified to other interested modules
+> > > so that the allocated memory does not get overwritten. Add an event
+> > > handler in the EFI memory module to update the EFI memory map
+> > > accordingly when such changes happen. As a consequence, any subsequent
+> > > memory request would honour the updated memory map and only available
+> > > memory would be allocated from.
+> >
+> > So the question here, is why do we need a notifier chain overall?
+> > Can't we change the EFI subsystem and allocate memory with lmb now?
+> > And any special functions we have in EFI (e.g allocate aligned memory)
+> > can migrate to lmb()
+>
+> Like we discussed offline, that was my initial attempt -- to use the
+> LMB allocation API's from inside the EFI allocate pages module. But I
+> was facing a lot of corner case issues, primarily in keeping the two
+> memory maps the same.
 
-This seems to trigger the assert in 
-https://elixir.bootlin.com/u-boot/latest/source/drivers/core/ofnode.c#L393 
-when building with DM_DEBUG=y on my RK3588 board, making it fail to boot 
-into U-Boot CLI:
+I think it would worth discussing this a bit more. I like the idea of
+having a single allocator more than having events to update memory
+reservations
 
-"""
-    - found match at driver 'scmi-over-smccc' for 'arm,scmi-smc'
-ofnode_read_u32_index: arm,smc-id: 0x82000010 (2181038096)
-drivers/core/ofnode.c:393: ofnode_read_u32_index: Assertion 
-`ofnode_valid(node)' failed.
-resetting ...
-"""
+> Which is why I moved to the current
+> implementation of notifying other modules, and that too only for the
+> addresses in the RAM region.
 
-Not sure what we should be doing here?
+The notification to 'other modules' i still done by updating the
+static memory map though no?
+So what corner cases we couldn't solve by having a single allocator?
 
-Cheers,
-Quentin
+Thanks
+/Ilias
+>
+> -sughosh
+>
+> >
+> > Cheers
+> > /Ilias
+> > >
+> > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > ---
+> > >  lib/efi_loader/efi_memory.c | 70 ++++++++++++++++++++++++++++++-------
+> > >  1 file changed, 58 insertions(+), 12 deletions(-)
+> > >
+> > > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> > > index 435e580fb3..93244161b0 100644
+> > > --- a/lib/efi_loader/efi_memory.c
+> > > +++ b/lib/efi_loader/efi_memory.c
+> > > @@ -73,6 +73,10 @@ struct efi_pool_allocation {
+> > >  #if CONFIG_IS_ENABLED(MEM_MAP_UPDATE_NOTIFY)
+> > >  extern bool is_addr_in_ram(uintptr_t addr);
+> > >
+> > > +static efi_status_t __efi_add_memory_map_pg(u64 start, u64 pages,
+> > > +                                           int memory_type,
+> > > +                                           bool overlap_only_ram);
+> > > +
+> > >  static void efi_map_update_notify(u64 addr, u64 size, u8 op)
+> > >  {
+> > >         struct event_efi_mem_map_update efi_map = {0};
+> > > @@ -84,6 +88,34 @@ static void efi_map_update_notify(u64 addr, u64 size, u8 op)
+> > >         if (is_addr_in_ram((uintptr_t)addr))
+> > >                 event_notify(EVT_EFI_MEM_MAP_UPDATE, &efi_map, sizeof(efi_map));
+> > >  }
+> > > +
+> > > +static int lmb_mem_map_update_sync(void *ctx, struct event *event)
+> > > +{
+> > > +       u8 op;
+> > > +       u64 addr;
+> > > +       u64 pages;
+> > > +       efi_status_t status;
+> > > +       struct event_lmb_map_update *lmb_map = &event->data.lmb_map;
+> > > +
+> > > +       addr = (uintptr_t)map_sysmem(lmb_map->base, 0);
+> > > +       pages = efi_size_in_pages(lmb_map->size + (addr & EFI_PAGE_MASK));
+> > > +       op = lmb_map->op;
+> > > +       addr &= ~EFI_PAGE_MASK;
+> > > +
+> > > +       if (op != MAP_OP_RESERVE && op != MAP_OP_FREE) {
+> > > +               log_debug("Invalid map update op received (%d)\n", op);
+> > > +               return -1;
+> > > +       }
+> > > +
+> > > +       status = __efi_add_memory_map_pg(addr, pages,
+> > > +                                        op == MAP_OP_FREE ?
+> > > +                                        EFI_CONVENTIONAL_MEMORY :
+> > > +                                        EFI_BOOT_SERVICES_DATA,
+> > > +                                        true);
+> > > +
+> > > +       return status == EFI_SUCCESS ? 0 : -1;
+> > > +}
+> > > +EVENT_SPY_FULL(EVT_LMB_MAP_UPDATE, lmb_mem_map_update_sync);
+> > >  #endif /* MEM_MAP_UPDATE_NOTIFY */
+> > >
+> > >  /**
+> > > @@ -275,18 +307,9 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
+> > >         return EFI_CARVE_LOOP_AGAIN;
+> > >  }
+> > >
+> > > -/**
+> > > - * efi_add_memory_map_pg() - add pages to the memory map
+> > > - *
+> > > - * @start:             start address, must be a multiple of EFI_PAGE_SIZE
+> > > - * @pages:             number of pages to add
+> > > - * @memory_type:       type of memory added
+> > > - * @overlap_only_ram:  region may only overlap RAM
+> > > - * Return:             status code
+> > > - */
+> > > -static efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+> > > -                                         int memory_type,
+> > > -                                         bool overlap_only_ram)
+> > > +static efi_status_t __efi_add_memory_map_pg(u64 start, u64 pages,
+> > > +                                           int memory_type,
+> > > +                                           bool overlap_only_ram)
+> > >  {
+> > >         struct list_head *lhandle;
+> > >         struct efi_mem_list *newlist;
+> > > @@ -395,6 +418,29 @@ static efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+> > >                 }
+> > >         }
+> > >
+> > > +       return EFI_SUCCESS;
+> > > +}
+> > > +
+> > > +/**
+> > > + * efi_add_memory_map_pg() - add pages to the memory map
+> > > + *
+> > > + * @start:             start address, must be a multiple of EFI_PAGE_SIZE
+> > > + * @pages:             number of pages to add
+> > > + * @memory_type:       type of memory added
+> > > + * @overlap_only_ram:  region may only overlap RAM
+> > > + * Return:             status code
+> > > + */
+> > > +static efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+> > > +                                         int memory_type,
+> > > +                                         bool overlap_only_ram)
+> > > +{
+> > > +       efi_status_t status;
+> > > +
+> > > +       status = __efi_add_memory_map_pg(start, pages, memory_type,
+> > > +                                        overlap_only_ram);
+> > > +       if (status != EFI_SUCCESS)
+> > > +               return status;
+> > > +
+> > >         if (CONFIG_IS_ENABLED(MEM_MAP_UPDATE_NOTIFY))
+> > >                 efi_map_update_notify(start, pages << EFI_PAGE_SHIFT,
+> > >                                       memory_type == EFI_CONVENTIONAL_MEMORY ?
+> > > --
+> > > 2.34.1
+> > >
