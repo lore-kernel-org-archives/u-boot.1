@@ -4,46 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17034C27C55
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 16:13:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BB34C27C55
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 16:22:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61B7B8861E;
-	Mon, 10 Jun 2024 18:13:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id 82A428862C;
+	Mon, 10 Jun 2024 18:22:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="B0UOozAM";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F38E58862C; Mon, 10 Jun 2024 18:13:56 +0200 (CEST)
-Received: from smtp-bc0f.mail.infomaniak.ch (smtp-bc0f.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::bc0f])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2E9318863B; Mon, 10 Jun 2024 18:22:44 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18E1F885FB
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 18:13:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E3D2B885FB
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 18:22:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
- [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4VycLV4mMxzNsx;
- Mon, 10 Jun 2024 18:13:54 +0200 (CEST)
-Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4VycLV1YwNz2Sx; Mon, 10 Jun 2024 18:13:54 +0200 (CEST)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Mon, 10 Jun 2024 18:13:46 +0200
-Subject: [PATCH] smbios: only look for a SYSINFO udevice if SYSINFO support
- is enabled
+ spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-4218e647d62so481435e9.3
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 09:22:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1718036561; x=1718641361; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mqcdeTPMFOI1ODRTjneJbpAdNiTTAPd9Dh4TRhZbl00=;
+ b=B0UOozAM23GW3nq/jGALOwVbX3UmjDxYh0zTTyhqZHHgqRG506WnfptPRpwFVrED4k
+ 5KFixznAlYTsQziO9zzOd3kBScSckcT+o9GGGMYmejzpEORjN+ly7b+SERAc081TnZtb
+ jXEp0rSEv9Cx7v5YggEdAUxYtvABn+4OAEk9X01LY3SIzRs5FyzSnaad9G2vs6x51cQg
+ fBnfPdOBRfz3zQ1k0oJgudFXG0Ju9sT4vvTP3PebfFsnvADpQ0CbpSWSiMkCxUQVch0M
+ 2yn79K5YK66AneefiYUXhC8hNKzPT7MfK8/CDUPHkBq8Lh+FGtLoFcZm2/ZlrTV+vsOa
+ x2ow==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718036561; x=1718641361;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=mqcdeTPMFOI1ODRTjneJbpAdNiTTAPd9Dh4TRhZbl00=;
+ b=uxMcHwSVIhku7msoIdbOV33lDZ8l5MIbucWOZgAgJU/soOwXRveTDdSwPk0EhY5+9Z
+ vLp/c+aSxfCboDEZfnUcLRTr9vkJ5OtoFyAfw8J2NDdaN6yMKYEKyqGFPcmdI10vRoys
+ 3e39w32bVBOrUy1I81LUWslRMNfSigmRu6Oj/2jka1fsDHFNmOGfB7q2kwS/xLaSwVSF
+ vTtkc0XF5G1DrPgLvcfQjQztUTuBY2Aux6wKAVBNhyNrr+8C27hjnyFWoMG5erDAIR0X
+ 3PxLSyaRWAgyzZKlmn3IS8t/ov8CiBuYN6I5QfDJfNwmiDFDghSowVFqeGldI3/XpI+1
+ 9ONw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXa/YA9m2tSkBzY+Ofon3+BlmRnq3y3syVmmJ+wZLghsPVH3m+1WM6bHVrxedhi72qI5AObowwsAl1h+7sheqdl3sCHVQ==
+X-Gm-Message-State: AOJu0Yy+WkqO84L0IwGIotZ1eB/ZsUS73xzRmYzCVhCv6QWUKnvwigyx
+ CM5KnMk7Ct5xRGapsSy4mcUIL1lgqGTcWSCJgePed648Rj7TmFS3lHLuPVLodYOVnO9VPgy4wJK
+ lINKUC1fHSAHyaK0gdioI2D9Targ=
+X-Google-Smtp-Source: AGHT+IG0S5iwWisIT+tFzb8icC+vH/RfFi4TbUq5R/mVLoFkFcp9yLW9VUWyUSmzexftjXwnL7napEqQea/kkbizc7I=
+X-Received: by 2002:a05:600c:17c3:b0:421:7dc3:99ff with SMTP id
+ 5b1f17b1804b1-4217dc39e3emr41996945e9.3.1718036561214; Mon, 10 Jun 2024
+ 09:22:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240610-smbios-sysinfo-v1-1-587e100a9d92@cherry.de>
-X-B4-Tracking: v=1; b=H4sIADkmZ2YC/x3MMQqAMAxA0auUzAaaIha8ijioTTWDrTQginh3i
- +Mb/n9AuQgr9OaBwqeo5FRBjYFlm9LKKKEanHWt7cii7rNkRb1VUswYlok8+46JAtToKBzl+of
- D+L4fAEUvj2AAAAA=
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.14-dev-a6ee3
-X-Infomaniak-Routing: alpha
+References: <20240519191856.2582174-1-r.stratiienko@gmail.com>
+ <20240519191856.2582174-3-r.stratiienko@gmail.com>
+In-Reply-To: <20240519191856.2582174-3-r.stratiienko@gmail.com>
+From: Igor Opaniuk <igor.opaniuk@gmail.com>
+Date: Mon, 10 Jun 2024 18:22:30 +0200
+Message-ID: <CAByghJa+ZzkzdzCi8CnaHcZc8ZqkHCYt-isEK6C-1o7M91g+jQ@mail.gmail.com>
+Subject: Re: [PATCH 2/3] avb: Implement get_preloaded_partition callback
+To: Roman Stratiienko <r.stratiienko@gmail.com>
+Cc: mkorpershoek@baylibre.com, dsimic@manjaro.org, sjg@chromium.org, 
+ ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, eajames@linux.ibm.com, 
+ marek.vasut+renesas@mailbox.org, paulerwan.rio@gmail.com, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,41 +93,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
+Hi Roman,
 
-If SYSINFO support isn't enabled, it's a given that uclass_first_device
-for UCLASS_SYSINFO will not find anything, therefore let's skip the test
-entirely.
+On Sun, May 19, 2024 at 9:19=E2=80=AFPM Roman Stratiienko
+<r.stratiienko@gmail.com> wrote:
+>
+> AVB can reuse already loaded images instead of loading them
+> from the disk.
+>
+> The get_preloaded_partition now looks for the env. variables
+> set by the 'abootimg load' to find the correct partition in RAM.
+>
+> Signed-off-by: Roman Stratiienko <r.stratiienko@gmail.com>
+> ---
+>  common/avb_verify.c | 53 +++++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 53 insertions(+)
+>
+> diff --git a/common/avb_verify.c b/common/avb_verify.c
+> index cff9117d92..d2626e8844 100644
+> --- a/common/avb_verify.c
+> +++ b/common/avb_verify.c
+> @@ -6,6 +6,7 @@
+>  #include <avb_verify.h>
+>  #include <blk.h>
+>  #include <cpu_func.h>
+> +#include <env.h>
+>  #include <image.h>
+>  #include <malloc.h>
+>  #include <part.h>
+> @@ -595,6 +596,55 @@ static AvbIOResult read_from_partition(AvbOps *ops,
+>                            num_bytes, buffer, out_num_read, IO_READ);
+>  }
+>
+> +#ifdef CONFIG_ANDROID_BOOT_IMAGE
+Please use CONFIG_IS_ENABLED() macro
+> +/**
+> + * get_preloaded_partition() - Gets the starting pointer of a partition =
+that
+> + * is pre-loaded in memory, and save it to |out_pointer|.
+> + *
+> + * If the partition is not pre-loaded in memory, the out_pointer shall n=
+ot be
+> + * modified.
+> + *
+> + * @ops: contains AVB ops handlers
+> + * @partition: partition name, NUL-terminated UTF-8 string
+> + * @num_bytes: amount of bytes to read
+> + * @out_pointer: pointer to the starting address of the partition
+> + * @out_num_bytes_preloaded: amount of bytes pre-loaded in memory
+> + *
+> + * @return:
+Please follow [1]. I know that the whole file has this type of issues,
+I plan to fix it in the near future.
 
-This allows to get rid of the following debug message that may be
-confusing:
+[1] https://www.kernel.org/doc/html/next/doc-guide/kernel-doc.html.
 
-Cannot find uclass for id 118: please add the UCLASS_DRIVER() declaration for this UCLASS_... id
+Should be "Return: AVB_IO_RESULT_OK, if partition was found or was not foun=
+d"
+> + *      AVB_IO_RESULT_OK, if partition was found or was not found
+> + *
+> + */
+> +static AvbIOResult get_preloaded_partition(AvbOps *ops, const char *part=
+ition, size_t num_bytes,
+> +                                          uint8_t **out_pointer, size_t =
+*out_num_bytes_preloaded)
+> +{
+> +       size_t partition_start =3D 0;
+> +       size_t partition_size =3D 0;
+> +       char env_name[64];
+> +
+> +       sprintf(env_name, "abootimg_%s_ptr", partition);
+Please use more secure version snprintf()
+> +       partition_start =3D env_get_hex(env_name, 0);
+> +
+> +       sprintf(env_name, "abootimg_%s_size", partition);
+> +       partition_size =3D env_get_hex(env_name, 0);
+> +
+> +       if (partition_start =3D=3D 0 || partition_size =3D=3D 0)
+> +               return AVB_IO_RESULT_OK;
+> +
+> +       if (partition_size < num_bytes) {
+> +               printf("AVB: Preloaded partition %s size %zu is smaller t=
+han requested %zu\n",
+> +                      partition, partition_size, num_bytes);
+> +               return AVB_IO_RESULT_ERROR_IO;
+> +       }
+> +
+> +       *out_pointer =3D (uint8_t *)partition_start;
+> +       *out_num_bytes_preloaded =3D partition_size;
+> +
+> +       printf("AVB: Using preloaded partition %s at %p\n", partition, *o=
+ut_pointer);
+> +
+> +       return AVB_IO_RESULT_OK;
+> +}
+> +#endif
+> +
+>  /**
+>   * write_to_partition() - writes N bytes to a partition identified by a =
+string
+>   * name
+> @@ -1043,6 +1093,9 @@ AvbOps *avb_ops_alloc(int boot_device)
+>         ops_data->ops.user_data =3D ops_data;
+>
+>         ops_data->ops.read_from_partition =3D read_from_partition;
+> +#ifdef CONFIG_ANDROID_BOOT_IMAGE
+Please use CONFIG_IS_ENABLED() macro
+> +       ops_data->ops.get_preloaded_partition =3D get_preloaded_partition=
+;
+> +#endif
+>         ops_data->ops.write_to_partition =3D write_to_partition;
+>         ops_data->ops.validate_vbmeta_public_key =3D validate_vbmeta_publ=
+ic_key;
+>         ops_data->ops.read_rollback_index =3D read_rollback_index;
+> --
+> 2.40.1
+>
 
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
----
- lib/smbios.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/lib/smbios.c b/lib/smbios.c
-index b190b010f30..a822acd48e9 100644
---- a/lib/smbios.c
-+++ b/lib/smbios.c
-@@ -571,7 +571,7 @@ ulong write_smbios_table(ulong addr)
- 	int i;
- 
- 	ctx.node = ofnode_null();
--	if (IS_ENABLED(CONFIG_OF_CONTROL)) {
-+	if (IS_ENABLED(CONFIG_OF_CONTROL) && CONFIG_IS_ENABLED(SYSINFO)) {
- 		uclass_first_device(UCLASS_SYSINFO, &ctx.dev);
- 		if (ctx.dev)
- 			parent_node = dev_read_subnode(ctx.dev, "smbios");
+--=20
+Best regards - Atentamente - Meilleures salutations
 
----
-base-commit: 4f836fb324ba500ecabdba4146c3ca9e1600cdf5
-change-id: 20240610-smbios-sysinfo-dca17e76e11d
+Igor Opaniuk
 
-Best regards,
--- 
-Quentin Schulz <quentin.schulz@cherry.de>
-
+mailto: igor.opaniuk@gmail.com
+skype: igor.opanyuk
+https://www.linkedin.com/in/iopaniuk
