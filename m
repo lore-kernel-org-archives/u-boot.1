@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3F38C27C5F
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 08:49:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33F1CC27C6E
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 08:51:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31AB088413;
-	Mon, 10 Jun 2024 10:49:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 942E1882ED;
+	Mon, 10 Jun 2024 10:51:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RJD0WArY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PDRorofs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5025E88431; Mon, 10 Jun 2024 10:49:34 +0200 (CEST)
-Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
- [IPv6:2607:f8b0:4864:20::629])
+ id 7225B8812B; Mon, 10 Jun 2024 10:51:30 +0200 (CEST)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F27B5882ED
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 10:49:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C58FB85B66
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 10:51:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-1f68834bfdfso30640115ad.3
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 01:49:31 -0700 (PDT)
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-1f44b45d6abso34274795ad.0
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 01:51:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718009370; x=1718614170; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1718009486; x=1718614286; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qPcCOBxZfzK0DLpt51JRx5qf198Al7hD9M9DFakPsAQ=;
- b=RJD0WArYWWzwlTvFPdQuzRYksHPyHoX5BOKFbTyXOcDOCkYYYZeRvdzpkS9ll6DKOB
- hci9Nev4srCYffKWOegGwtKkm/UhKjU+GuS8UFDveXYPMn1DzWAOdQbdQH56GPl5WTqs
- GCLNCPOiSSOKSsrv/EsejDYPjBtIvXGmv7+LpnnCyNhYoeTl/7yay3jyt2ttBnwaRyte
- YLwpWD87bYiamV0xHxrp/rUNjhUl8cKlC0ZEepRYqtGo77ZXmPYmkK1k9Hn2R2eDQxaQ
- zb3uqvq9+LM/msSrScLT8KuaXq5KfF0HPeU6CZg5OKwuKhgYWAZGBBia/h9ZX2lmGfE3
- UCpg==
+ bh=24VLcYS/i60Wg9EudMV3P1t5td0p3tBrrc7RweVPPSU=;
+ b=PDRorofs+UYEEpHJ9nTO0EZEKF/8tPYKNExJWDL4W7zFy+AJmALyFzgeZpbFIGtwow
+ WyI7dED0YPhJ5rwx9LN4WFFR4gtHAw13lAaldGnTnT9mEJbUOvGo2jZ0PBQL1xbzVq0/
+ bOEcZBjaKLB1tENWLud/ORIBiCnVAaoJDz7mO1FYoE0JEDTTpVC7PV9KZBcPR0SCQi/J
+ TSmzF9mMo5GVAv1YLHH2SLECLxIcMuR5IwChqDrj9xhh9T0QSSsOmeHBDZwofEE9gthZ
+ 88+IqhkwCtKLC/ilR9CIKp39jmxNxQpdgojWRHhafrl8/EHdnlM2ImZLxyG86gPNRcDm
+ VSAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718009370; x=1718614170;
+ d=1e100.net; s=20230601; t=1718009486; x=1718614286;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=qPcCOBxZfzK0DLpt51JRx5qf198Al7hD9M9DFakPsAQ=;
- b=L3yQp+x1isJ8imihdwcBl5br0bgYntGZ6J6AXyVvtzsrz5TcHkc/1k+OURHBVUDC+l
- C+wTr/vs8L1zaeOjzmuvBOFeXyT1ELrsJwEYQ0qx/H/YMvlXFnGtYe3lJszRmmDyk/f5
- g3m3XX8bFdN62SFAAur6BjWDeX9XrVtvv6zJtkvOFdhRRmKWmf8caljCn6xuRivV7yQN
- WzAYtJOKoqW3kLYbe4zihfCR4yuQFM0ON2QiDd1r2m590opKHi7/8PgTkdzaLHFc5qzw
- 9Y7ZeWL7/pGLdRdqUOfOrKxiCjNRi7RFN5/IJdnz9KWJBwi+3ohv77wncheB7GjbkU29
- ks5w==
+ bh=24VLcYS/i60Wg9EudMV3P1t5td0p3tBrrc7RweVPPSU=;
+ b=so1TbBD0x/Eh5aTABJwxAq3ujxH9V8Pfy1dElSh2ruS+DmsSaegStbLt0F+UIMiMIQ
+ dlH5R7KJRlJKZM0pWrUrNi/tAZYRbx//bjtRAfDzHTtKjLQi3zr1x5yzOKAVFUbbWqu2
+ KABghLqfHB2tJREVF+pRd1axfbyQHri1G3b3sB605HD4XLFwM3hX3PKgVIgKhXLDvjWQ
+ NmNQwhksjuk8vxqMmayc3of7zwIsOOhSr38+fyH51Egx26QP2hc5uV6v30TNtjP+577n
+ LyOa7fAzHguG0ciEtY1RG4boMw62i7xhC9slgtDL3+Hmh+Pm84fcDBNK0DeqW1cjxDpe
+ tShQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW09oVo0QhltsMpFBRPsP6vHPQB9gfpAck2c7MEfWdMuIihM3ktDbq8P8+/7qywH+iE3bh5S/p2skRxtxS8VhnvhqYFsg==
-X-Gm-Message-State: AOJu0YzQYz/ojvoYxbtPEnopwQhvXC/Z+m0sRyYVJiwOIHwYcLbnTKGJ
- f+Ep/3lnQGBusy01awpKvAZ4De369ifXReQcRqyr7g2XCL3JNCT79m0dN96baS4FM/cYtrJlEgz
- 9lWByqwXfn6Ii7C7FUiikdKwUVGjOlKJ6Z/aDQA==
-X-Google-Smtp-Source: AGHT+IGvtsQQndhk8bsnTjsGJOU7b3SpY7TgeH2tLJrKwJeWplQPblFPqVnaPoxKe4mBWVfsCuk1LCWmxoMCn46fZuo=
-X-Received: by 2002:a17:902:cf04:b0:1f6:f5bc:51c5 with SMTP id
- d9443c01a7336-1f6f5bc5391mr56183615ad.47.1718009370355; Mon, 10 Jun 2024
- 01:49:30 -0700 (PDT)
+ AJvYcCXfPsb0cAmzYnBY/ubzCDFAr9SBH34Ovf2mYZ8rkmi2SVnxBLTa744mxknUHrM7+1HalNVzbqrLukLGWC62pD7XiIyXrA==
+X-Gm-Message-State: AOJu0YzTFYU5iPRhS1wsyPkS8ucPeVJ2e1roKKM7zS6baNS+ymd3I7SB
+ 2THgcDKOwGI8ZzBgB+sQdnqxFuqs07wEjy+DLdWV5NMIiZk/94ZZD+VtK8qmI3V70592HfH9kf8
+ IFRYJh6qTBfBOTcNBsbAamM2R+orIs5/jT/y53w==
+X-Google-Smtp-Source: AGHT+IFypWTVb5HuKYWfZjJjbWS6Buxg20sdnWv8HYyN21/46KGMAO+ysfmV3HHLtaLl0jB5c0ImgUhfGnXVP+rNhfU=
+X-Received: by 2002:a17:903:22c3:b0:1f7:eb9:945a with SMTP id
+ d9443c01a7336-1f70eb997femr29517915ad.44.1718009486256; Mon, 10 Jun 2024
+ 01:51:26 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240607223858.1971290-1-j-humphreys@ti.com>
- <20240607223858.1971290-8-j-humphreys@ti.com>
-In-Reply-To: <20240607223858.1971290-8-j-humphreys@ti.com>
+ <20240607223858.1971290-11-j-humphreys@ti.com>
+In-Reply-To: <20240607223858.1971290-11-j-humphreys@ti.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 10 Jun 2024 11:48:53 +0300
-Message-ID: <CAC_iWjJhmOaS4UrFXMsRDhTGpEtQqDPSz6HwqeREwfVyO3Vx3w@mail.gmail.com>
-Subject: Re: [PATCH v6 07/24] board: j721e: Define capsule update firmware info
+Date: Mon, 10 Jun 2024 11:50:49 +0300
+Message-ID: <CAC_iWjLgKh9F67pqFbmwV0AHTV7mSjNg0UH=fTzhnJGWW746yw@mail.gmail.com>
+Subject: Re: [PATCH v6 10/24] board: beagleplay: Define capsule update
+ firmware info
 To: Jonathan Humphreys <j-humphreys@ti.com>
 Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Kamlesh Gurudasani <kamlesh@ti.com>, 
@@ -107,57 +108,78 @@ On Sat, 8 Jun 2024 at 01:39, Jonathan Humphreys <j-humphreys@ti.com> wrote:
 >
 > Define the firmware components updatable via EFI capsule update, including
 > defining capsule GUIDs for the various firmware components for the
-> SK-TDA4VM.
+> BeaglePlay.
+>
+> Note this involved creating BeaglePlay's own beagleplay.h board header file
+> instead of reusing am62_evm's.
 >
 > Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 > ---
->  board/ti/j721e/evm.c        | 40 +++++++++++++++++++++++++++++++++++++
->  include/configs/j721e_evm.h | 29 +++++++++++++++++++++++++++
->  2 files changed, 69 insertions(+)
+>  board/beagle/beagleplay/Kconfig      |  4 +--
+>  board/beagle/beagleplay/beagleplay.c | 34 +++++++++++++++++++++++
+>  include/configs/beagleplay.h         | 41 ++++++++++++++++++++++++++++
+>  3 files changed, 77 insertions(+), 2 deletions(-)
+>  create mode 100644 include/configs/beagleplay.h
 >
-> diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
-> index 539eaf47186..f3452ff0a8f 100644
-> --- a/board/ti/j721e/evm.c
-> +++ b/board/ti/j721e/evm.c
-> @@ -7,6 +7,7 @@
->   *
+> diff --git a/board/beagle/beagleplay/Kconfig b/board/beagle/beagleplay/Kconfig
+> index 7dbd833acb4..b0e67dc8ef3 100644
+> --- a/board/beagle/beagleplay/Kconfig
+> +++ b/board/beagle/beagleplay/Kconfig
+> @@ -35,7 +35,7 @@ config SYS_VENDOR
+>         default "beagle"
+>
+>  config SYS_CONFIG_NAME
+> -       default "am62x_evm"
+> +       default "beagleplay"
+>
+>  source "board/ti/common/Kconfig"
+>
+> @@ -50,7 +50,7 @@ config SYS_VENDOR
+>         default "beagle"
+>
+>  config SYS_CONFIG_NAME
+> -       default "am62x_evm"
+> +       default "beagleplay"
+>
+>  config SPL_LDSCRIPT
+>         default "arch/arm/mach-omap2/u-boot-spl.lds"
+> diff --git a/board/beagle/beagleplay/beagleplay.c b/board/beagle/beagleplay/beagleplay.c
+> index af36439e2e2..a21f09e3122 100644
+> --- a/board/beagle/beagleplay/beagleplay.c
+> +++ b/board/beagle/beagleplay/beagleplay.c
+> @@ -6,6 +6,7 @@
+>   * Copyright (C) 2022-2023 Robert Nelson, BeagleBoard.org Foundation
 >   */
 >
 > +#include <efi_loader.h>
->  #include <generic-phy.h>
->  #include <image.h>
->  #include <net.h>
-> @@ -32,6 +33,45 @@
+>  #include <cpu_func.h>
+>  #include <env.h>
+>  #include <fdt_support.h>
+> @@ -15,6 +16,39 @@
 >
 >  DECLARE_GLOBAL_DATA_PTR;
 >
 > +struct efi_fw_image fw_images[] = {
 > +       {
-> +               .image_type_id = J721E_SK_TIBOOT3_IMAGE_GUID,
-> +               .fw_name = u"J721E_SK_TIBOOT3",
+> +               .image_type_id = BEAGLEPLAY_TIBOOT3_IMAGE_GUID,
+> +               .fw_name = u"BEAGLEPLAY_TIBOOT3",
 > +               .image_index = 1,
 > +       },
 > +       {
-> +               .image_type_id = J721E_SK_SPL_IMAGE_GUID,
-> +               .fw_name = u"J721E_SK_SPL",
+> +               .image_type_id = BEAGLEPLAY_SPL_IMAGE_GUID,
+> +               .fw_name = u"BEAGLEPLAY_SPL",
 > +               .image_index = 2,
 > +       },
 > +       {
-> +               .image_type_id = J721E_SK_UBOOT_IMAGE_GUID,
-> +               .fw_name = u"J721E_SK_UBOOT",
+> +               .image_type_id = BEAGLEPLAY_UBOOT_IMAGE_GUID,
+> +               .fw_name = u"BEAGLEPLAY_UBOOT",
 > +               .image_index = 3,
-> +       },
-> +       {
-> +               .image_type_id = J721E_SK_SYSFW_IMAGE_GUID,
-> +               .fw_name = u"J721E_SK_SYSFW",
-> +               .image_index = 4,
 > +       }
 > +};
 > +
 > +struct efi_capsule_update_info update_info = {
-> +       .dfu_string = "sf 0:0=tiboot3.bin raw 0 80000;"
-> +       "tispl.bin raw 80000 200000;u-boot.img raw 280000 400000;"
-> +       "sysfw.itb raw 6C0000 100000",
+> +       .dfu_string = "mmc 0=tiboot3.bin raw 0 2000 mmcpart 1;"
+> +       "tispl.bin fat 0 1;u-boot.img fat 0 1",
 > +       .num_images = ARRAY_SIZE(fw_images),
 > +       .images = fw_images,
 > +};
@@ -173,19 +195,29 @@ On Sat, 8 Jun 2024 at 01:39, Jonathan Humphreys <j-humphreys@ti.com> wrote:
 >  int board_init(void)
 >  {
 >         return 0;
-> diff --git a/include/configs/j721e_evm.h b/include/configs/j721e_evm.h
-> index c26438c8684..a5140ea6a11 100644
-> --- a/include/configs/j721e_evm.h
-> +++ b/include/configs/j721e_evm.h
-> @@ -22,6 +22,35 @@
->  #define CFG_SYS_UBOOT_BASE             0x50080000
->  #endif
->
+> diff --git a/include/configs/beagleplay.h b/include/configs/beagleplay.h
+> new file mode 100644
+> index 00000000000..4baeab664af
+> --- /dev/null
+> +++ b/include/configs/beagleplay.h
+> @@ -0,0 +1,41 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +/*
+> + * Configuration header file for BeaglePlay
+> + *
+> + * https://beagleplay.org/
+> + *
+> + * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
+> + */
+> +
+> +#ifndef __CONFIG_BEAGLEPLAY_H
+> +#define __CONFIG_BEAGLEPLAY_H
+> +
 > +/**
-> + * define J721E_SK_TIBOOT3_IMAGE_GUID - firmware GUID for J721e sk tiboot3.bin
-> + * define J721E_SK_SPL_IMAGE_GUID     - firmware GUID for J721e sk SPL
-> + * define J721E_SK_UBOOT_IMAGE_GUID   - firmware GUID for J721e sk UBOOT
-> + * define J721E_SK_SYSFW_IMAGE_GUID   - firmware GUID for J721e sk SYSFW
+> + * define BEAGLEPLAY_TIBOOT3_IMAGE_GUID - firmware GUID for BeaglePlay
+> + *                                        tiboot3.bin
+> + * define BEAGLEPLAY_SPL_IMAGE_GUID     - firmware GUID for BeaglePlay SPL
+> + * define BEAGLEPLAY_UBOOT_IMAGE_GUID   - firmware GUID for BeaglePlay UBOOT
 > + *
 > + * These GUIDs are used in capsules updates to identify the corresponding
 > + * firmware object.
@@ -194,25 +226,22 @@ On Sat, 8 Jun 2024 at 01:39, Jonathan Humphreys <j-humphreys@ti.com> wrote:
 > + * define their own GUIDs to ensure that firmware repositories (like
 > + * LVFS) do not confuse them.
 > + */
-> +#define J721E_SK_TIBOOT3_IMAGE_GUID \
-> +       EFI_GUID(0xe672b518, 0x7cd7, 0x4014, 0xbd, 0x8d, \
-> +                0x40, 0x72, 0x4d, 0x0a, 0xd4, 0xdc)
+> +#define BEAGLEPLAY_TIBOOT3_IMAGE_GUID \
+> +       EFI_GUID(0x0e225a09, 0xf720, 0x4d57, 0x91, 0x20, \
+> +               0xe2, 0x8f, 0x73, 0x7f, 0x5a, 0x5e)
 > +
-> +#define J721E_SK_SPL_IMAGE_GUID \
-> +       EFI_GUID(0x86f710ad, 0x10cf, 0x46ea, 0xac, 0x67, \
-> +                0x85, 0x6a, 0xe0, 0x6e, 0xfa, 0xd2)
+> +#define BEAGLEPLAY_SPL_IMAGE_GUID \
+> +       EFI_GUID(0xb2e7cc49, 0x1a5a, 0x4036, 0xae, 0x01, \
+> +               0x33, 0x87, 0xc3, 0xbe, 0xf6, 0x57)
 > +
-> +#define J721E_SK_UBOOT_IMAGE_GUID \
-> +       EFI_GUID(0x81b58fb0, 0x3b00, 0x4add, 0xa2, 0x0a, \
-> +                0xc1, 0x85, 0xbb, 0xac, 0xa1, 0xed)
+> +#define BEAGLEPLAY_UBOOT_IMAGE_GUID \
+> +       EFI_GUID(0x92c92b11, 0xa7ee, 0x486f, 0xaa, 0xa2, \
+> +               0x71, 0x3d, 0x84, 0x42, 0x5b, 0x0e)
 > +
-> +#define J721E_SK_SYSFW_IMAGE_GUID \
-> +       EFI_GUID(0x6fd10680, 0x361b, 0x431f, 0x80, 0xaa, \
-> +                0x89, 0x94, 0x55, 0x81, 0x9e, 0x11)
+> +/* Now for the remaining common defines */
+> +#include <configs/ti_armv7_common.h>
 > +
->  /* Now for the remaining common defines */
->  #include <configs/ti_armv7_common.h>
->
+> +#endif /* __CONFIG_BEAGLEPLAY_H */
 > --
 > 2.34.1
 >
