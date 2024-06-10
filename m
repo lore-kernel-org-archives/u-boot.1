@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9430C27C55
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 01:14:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79421C27C53
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 01:14:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B3F7883E6;
+	by phobos.denx.de (Postfix) with ESMTP id CA100884B0;
 	Mon, 10 Jun 2024 03:12:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hJQnpIc3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HeP8AXC1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B9648846D; Mon, 10 Jun 2024 03:12:37 +0200 (CEST)
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
+ id 72036884A7; Mon, 10 Jun 2024 03:12:38 +0200 (CEST)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3DE1388428
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 03:12:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 06BF488413
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 03:12:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-24c0dbd2866so2115996fac.0
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-245435c02e1so2040408fac.0
  for <u-boot@lists.denx.de>; Sun, 09 Jun 2024 18:12:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1717981954; x=1718586754; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1717981955; x=1718586755; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ul4x83pvUauiV7lNM4UeKwyz1dPih6c34KL/rocNKoU=;
- b=hJQnpIc3eU8CJ8IgF2YsLKWs4EeISMswilNxIBKRrxYepOG08fv+A4Yp5RjBS8jPOe
- 8lK5Pyz7Elof1c8Qc9BU98AH73ScwQvpJHMDEUGyeDfGGQeJjA5Z/xr61VJkc9QDDkgT
- IkVCd7X9hLZ9CudyuWibvS5G1yEwiBWssJsku2J4EE3nx0n26sKe8c3EDmAgxRz6041L
- AZx/aRZJGxIEiTX9u1j88rykrmxaCm3v+EUKRj80BTCmofxqnSMdtjZwtXdj2I2Q06Vf
- ZysHCTr1PGIScCCcu3U439GjalSkw1SYiQQUjwFGYiTAqGXg+c5A6IrM4tBo7YSE0AOv
- 296w==
+ bh=Th8FwA8eBPsvohCOWDpRcQlEhX6pU9bPE2dFtsXjSXQ=;
+ b=HeP8AXC1ImBuQEHIGTEc3oLgcKOLcNbUGFY6y5lsrptFtpglZYrMDaHI3GSHD+Me/D
+ 2Z1kYwZRRDS0TmXypK2Z7uPW4DdftGxTnorfRFhUK8NCttNwCzVwW8UxCB8aQ9WBzWzT
+ +HqAqGxwmKYgDgdCRhh2v4LEonQ2Wy6FWnxaEaCYxh5KkdUyj8omBfNbvHLoZdMW6SAy
+ 7GpwiGm6K9Y5rGpS2Ls/yspLdgWdAOBqKJYLPSTaRj993T2gZx2Jjey9xdTVeZ3+TUiu
+ bYWh8x7+jJjNSwBdrMZkV6b3S4PVOktl2eLR7t5FzZVzWi+wADdP/e5RS70e41Vvv+V8
+ 3MlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717981954; x=1718586754;
+ d=1e100.net; s=20230601; t=1717981955; x=1718586755;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Ul4x83pvUauiV7lNM4UeKwyz1dPih6c34KL/rocNKoU=;
- b=DI/b8QPqnaBsc4AORV8yzU02EhNIjsnVhPrFVyWi7DCOWjq/SSiDSzRxkJFXblMMAU
- bBYGoi4DyZE52CRxiccSqurcn1DLclcmT9MmcK3RMSwGQ0LJwvqnwkhFGEPq6bH2X/1F
- kWfCYdROXfe+rcJpE8c80C1cYEbgUcHpDOAGB2Folbx1W7zAh3FC7vBqheFnrqwg0Y6J
- zOSCJZYQuIkgI50WnLIC6STbLFCs0yN3BLdXjx/0W9qFop/9tAXmzZeeco/LCHQ33jni
- Q1Pi/U2UiJiILAhujbJNkyZjS6uZi93wlfc/EVvHlEBfVaC+tIPSfkgSQssFxsZDoypG
- RVCA==
+ bh=Th8FwA8eBPsvohCOWDpRcQlEhX6pU9bPE2dFtsXjSXQ=;
+ b=DriwAEov5e2Pw+xYu+KQizMU8sEXz2KvMkzlm8wckIiOdWBhIFpWuuz0bvImL6aFU+
+ 6kHyBg7mkzPHGrdKHkgDsfWuZ8ZQ1UC4BJuguSPmqmJQrs9gOtlb/EXgf1z8HMRQtdiY
+ EPOATzXoQDebY89PZcOwqbomF9oxsgZSTpdl+46Jch26VB9PvYGhyVv0SA8sIBVQ7MyU
+ oHpZjLcoLLQKaKMk/9oGWbq/Xv2eYr0vuzQX893L/i9+i1SgwHDmF29VI3mz6x6MRuQT
+ GV/qXfgSLEQTRzj0ywy1lgTcQWpMJchuXsWd7ehFhKqbLe64Ztkmgl55jV+8C5Hhlhf2
+ 514A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWYou+YXhgrdWuofKvGJm5WgBgeV6917LfdmtyKU+xitmXNgWI7XXpBe4AX9xFRSUUK7dvZ/djEPHAUnZNM1iJL4d7Dhw==
-X-Gm-Message-State: AOJu0Yxq0mBQSDQc/Lt06yaEOiHQcof3BV9GgxQmAHMpYV/ygpttmFy7
- Jd/WfBBy2vG2Rve93tMsjXcmlU2NltccZcoHGBrbHxPJnZhq666v8hLpy/mk+bPp7/8qp4DgLEq
- A
-X-Google-Smtp-Source: AGHT+IEU5BR9duLX9c4tmk3Tn2yBKFZiC6L8gXYG9zS5YZry+h2+gWDkeibsiecrV2jFrLFPbvbPFw==
-X-Received: by 2002:a05:6870:3107:b0:24c:b0ca:9650 with SMTP id
- 586e51a60fabf-254644641edmr9998345fac.1.1717981953890; 
- Sun, 09 Jun 2024 18:12:33 -0700 (PDT)
+ AJvYcCVVMr7JT0DAsJhPLO3WJsPePn9DXZf0zGmv+mKV2xkzH6Se8ZO01dxwMOdWhFdKho+6CGjC6xxXXL1jBWzwxiY7mQ5Rfg==
+X-Gm-Message-State: AOJu0YyC2BHx/Wr4cbE4Iuw2cT8hTTqmUqRatLckOatc90fngXR/8r7N
+ xoH+8o01KAKQFERNVa1HNc5742cAsgjDzt6dnoJntkUBzr1yflNMSLO8CawQOv0=
+X-Google-Smtp-Source: AGHT+IFQ/udCYn6+epYlbf1OKb/scqtdnU7Jjon9HJ22kfiYxuyH3dmvcJIvbBiGPnfdkoYNp4Ef7w==
+X-Received: by 2002:a05:6870:1701:b0:254:bd24:de85 with SMTP id
+ 586e51a60fabf-254bd24e14fmr2482179fac.16.1717981954597; 
+ Sun, 09 Jun 2024 18:12:34 -0700 (PDT)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-254bd5bf058sm425851fac.38.2024.06.09.18.12.33
+ 586e51a60fabf-2544814f43csm2044176fac.58.2024.06.09.18.12.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Jun 2024 18:12:33 -0700 (PDT)
+ Sun, 09 Jun 2024 18:12:34 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>,
  Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
@@ -79,9 +78,9 @@ Cc: Quentin Schulz <quentin.schulz@cherry.de>,
  Ferass El Hafidi <vitali64pmemail@protonmail.com>,
  Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com
-Subject: [PATCH v2 10/40] mmc: dw_mmc: Improve 32-bit IDMAC descriptor namings
-Date: Sun,  9 Jun 2024 20:11:56 -0500
-Message-Id: <20240610011226.4050-11-semen.protsenko@linaro.org>
+Subject: [PATCH v2 11/40] mmc: dw_mmc: Add support for 64-bit IDMAC
+Date: Sun,  9 Jun 2024 20:11:57 -0500
+Message-Id: <20240610011226.4050-12-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240610011226.4050-1-semen.protsenko@linaro.org>
 References: <20240610011226.4050-1-semen.protsenko@linaro.org>
@@ -103,118 +102,374 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Prepare for adding 64-bit IDMAC descriptors by renaming current 32-bit
-descriptor and its fields accordingly. While at it, make use of
-virt_to_phys() to make it more obvious in which places the physical
-addresses have to be used.
+Some DW MMC blocks (e.g. those on modern Exynos chips) support 64-bit
+DMA addressing mode. 64-bit DW MMC variants differ from their 32-bit
+counterparts:
+  - the register layout is a bit different (because there are additional
+    IDMAC registers present for storing upper part of 64-bit addresses)
+  - DMA descriptor structure is bigger and different from 32-bit one
 
-No functional change.
+Introduce all necessary changes to enable support for 64-bit DMA capable
+DW MMC blocks. Next changes were made:
+
+  1. Check which DMA address mode is supported in current IP-core
+     version. HCON register (bit 27) indicates whether it's 32-bit or
+     64-bit addressing. Add boolean .dma_64bit_address field to struct
+     dwmci_host and store the result there. dwmci_init_dma() function is
+     introduced for doing so, which is called on driver's init.
+
+  2. Add 64-bit DMA descriptor (struct dwmci_idmac64) and use it in
+     dwmci_prepare_desc() in case if .dma_64bit_address field is true.
+     A new dwmci_set_idma_desc64() function was added for populating that
+     descriptor.
+
+  3. Add registers for 64-bit DMA capable blocks. To make the access to
+     IDMAC registers universal between 32-bit / 64-bit cases, a new
+     struct dwmci_idmac_regs (and corresponding host->regs field) was
+     introduced, which abstracts the hardware by being set to
+     appropriate offset constants on init. All direct calls to IDMAC
+     registers were correspondingly replaced by accessing host->regs.
+
+  4. Allocate and use 64-bit DMA descriptors buffer in case when IDMAC
+     is 64-bit capable. Extract all the code (except for the IDMAC
+     descriptors buffer allocation) from dwmci_send_cmd() to
+     dwmci_send_cmd_common(), so that it's possible to keep IDMAC
+     buffer (either 32-bit or 64-bit) on stack during send_cmd routine.
+
+The insights for this implementation were taken from Linux kernel DW MMC
+driver.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
- drivers/mmc/dw_mmc.c | 43 +++++++++++++++++++++++--------------------
- 1 file changed, 23 insertions(+), 20 deletions(-)
+Changes in v2:
+  - Replaced CONFIG_IS_ENABLED() with #ifdef
+
+ drivers/mmc/dw_mmc.c | 152 ++++++++++++++++++++++++++++++++++---------
+ include/dwmmc.h      |  39 ++++++++++-
+ 2 files changed, 160 insertions(+), 31 deletions(-)
 
 diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
-index 8bec43f0bd16..a77023ff4cd6 100644
+index a77023ff4cd6..7aa3dbbe83ad 100644
 --- a/drivers/mmc/dw_mmc.c
 +++ b/drivers/mmc/dw_mmc.c
-@@ -20,11 +20,12 @@
- 
- #define PAGE_SIZE 4096
- 
--struct dwmci_idmac {
--	u32 flags;
--	u32 cnt;
--	u32 addr;
--	u32 next_addr;
-+/* Internal DMA Controller (IDMAC) descriptor for 32-bit addressing mode */
-+struct dwmci_idmac32 {
-+	u32 des0;	/* Control descriptor */
-+	u32 des1;	/* Buffer size */
-+	u32 des2;	/* Buffer physical address */
-+	u32 des3;	/* Next descriptor physical address */
+@@ -28,6 +28,39 @@ struct dwmci_idmac32 {
+ 	u32 des3;	/* Next descriptor physical address */
  } __aligned(ARCH_DMA_MINALIGN);
  
++/* Internal DMA Controller (IDMAC) descriptor for 64-bit addressing mode */
++struct dwmci_idmac64 {
++	u32 des0;	/* Control descriptor */
++	u32 des1;	/* Reserved */
++	u32 des2;	/* Buffer sizes */
++	u32 des3;	/* Reserved */
++	u32 des4;	/* Lower 32-bits of Buffer Address Pointer 1 */
++	u32 des5;	/* Upper 32-bits of Buffer Address Pointer 1 */
++	u32 des6;	/* Lower 32-bits of Next Descriptor Address */
++	u32 des7;	/* Upper 32-bits of Next Descriptor Address */
++} __aligned(ARCH_DMA_MINALIGN);
++
++/* Register offsets for DW MMC blocks with 32-bit IDMAC */
++static const struct dwmci_idmac_regs dwmci_idmac_regs32 = {
++	.dbaddrl	= DWMCI_DBADDR,
++	.idsts		= DWMCI_IDSTS,
++	.idinten	= DWMCI_IDINTEN,
++	.dscaddrl	= DWMCI_DSCADDR,
++	.bufaddrl	= DWMCI_BUFADDR,
++};
++
++/* Register offsets for DW MMC blocks with 64-bit IDMAC */
++static const struct dwmci_idmac_regs dwmci_idmac_regs64 = {
++	.dbaddrl	= DWMCI_DBADDRL,
++	.dbaddru	= DWMCI_DBADDRU,
++	.idsts		= DWMCI_IDSTS64,
++	.idinten	= DWMCI_IDINTEN64,
++	.dscaddrl	= DWMCI_DSCADDRL,
++	.dscaddru	= DWMCI_DSCADDRU,
++	.bufaddrl	= DWMCI_BUFADDRL,
++	.bufaddru	= DWMCI_BUFADDRU,
++};
++
  static int dwmci_wait_reset(struct dwmci_host *host, u32 value)
-@@ -42,22 +43,23 @@ static int dwmci_wait_reset(struct dwmci_host *host, u32 value)
- 	return 0;
+ {
+ 	unsigned long timeout = 1000;
+@@ -55,11 +88,27 @@ static void dwmci_set_idma_desc32(struct dwmci_idmac32 *desc, u32 control,
+ 	desc->des3 = next_desc_phys;
  }
  
--static void dwmci_set_idma_desc(struct dwmci_idmac *idmac,
--		u32 desc0, u32 desc1, u32 desc2)
-+static void dwmci_set_idma_desc32(struct dwmci_idmac32 *desc, u32 control,
-+				  u32 buf_size, u32 buf_addr)
- {
--	struct dwmci_idmac *desc = idmac;
+-static void dwmci_prepare_desc(struct mmc_data *data,
+-			       struct dwmci_idmac32 *cur_idmac,
+-			       void *bounce_buffer)
++static void dwmci_set_idma_desc64(struct dwmci_idmac64 *desc, u32 control,
++				  u32 buf_size, u64 buf_addr)
++{
 +	phys_addr_t desc_phys = virt_to_phys(desc);
-+	u32 next_desc_phys = desc_phys + sizeof(struct dwmci_idmac32);
- 
--	desc->flags = desc0;
--	desc->cnt = desc1;
--	desc->addr = desc2;
--	desc->next_addr = (ulong)desc + sizeof(struct dwmci_idmac);
++	u64 next_desc_phys = desc_phys + sizeof(struct dwmci_idmac64);
++
 +	desc->des0 = control;
-+	desc->des1 = buf_size;
-+	desc->des2 = buf_addr;
-+	desc->des3 = next_desc_phys;
- }
- 
- static void dwmci_prepare_desc(struct mmc_data *data,
--			       struct dwmci_idmac *cur_idmac,
-+			       struct dwmci_idmac32 *cur_idmac,
- 			       void *bounce_buffer)
++	desc->des1 = 0;
++	desc->des2 = buf_size;
++	desc->des3 = 0;
++	desc->des4 = buf_addr & 0xffffffff;
++	desc->des5 = buf_addr >> 32;
++	desc->des6 = next_desc_phys & 0xffffffff;
++	desc->des7 = next_desc_phys >> 32;
++}
++
++static void dwmci_prepare_desc(struct dwmci_host *host, struct mmc_data *data,
++			       void *cur_idmac, void *bounce_buffer)
  {
--	struct dwmci_idmac *desc = cur_idmac;
-+	struct dwmci_idmac32 *desc32 = cur_idmac;
+ 	struct dwmci_idmac32 *desc32 = cur_idmac;
++	struct dwmci_idmac64 *desc64 = cur_idmac;
  	ulong data_start, data_end;
  	unsigned int blk_cnt, i;
  
-@@ -65,6 +67,7 @@ static void dwmci_prepare_desc(struct mmc_data *data,
- 	blk_cnt = data->blocks;
- 
- 	for (i = 0;; i++) {
-+		phys_addr_t buf_phys = virt_to_phys(bounce_buffer);
- 		unsigned int flags, cnt;
- 
- 		flags = DWMCI_IDMAC_OWN | DWMCI_IDMAC_CH;
-@@ -76,22 +79,22 @@ static void dwmci_prepare_desc(struct mmc_data *data,
+@@ -79,34 +128,47 @@ static void dwmci_prepare_desc(struct mmc_data *data,
  		} else
  			cnt = data->blocksize * 8;
  
--		dwmci_set_idma_desc(desc, flags, cnt,
--				    (ulong)bounce_buffer + i * PAGE_SIZE);
--		desc++;
-+		dwmci_set_idma_desc32(desc32, flags, cnt,
-+				      buf_phys + i * PAGE_SIZE);
-+		desc32++;
+-		dwmci_set_idma_desc32(desc32, flags, cnt,
+-				      buf_phys + i * PAGE_SIZE);
+-		desc32++;
++		if (host->dma_64bit_address) {
++			dwmci_set_idma_desc64(desc64, flags, cnt,
++					      buf_phys + i * PAGE_SIZE);
++			desc64++;
++		} else {
++			dwmci_set_idma_desc32(desc32, flags, cnt,
++					      buf_phys + i * PAGE_SIZE);
++			desc32++;
++		}
  
  		if (blk_cnt <= 8)
  			break;
  		blk_cnt -= 8;
  	}
  
--	data_end = (ulong)desc;
-+	data_end = (ulong)desc32;
+-	data_end = (ulong)desc32;
++	if (host->dma_64bit_address)
++		data_end = (ulong)desc64;
++	else
++		data_end = (ulong)desc32;
  	flush_dcache_range(data_start, roundup(data_end, ARCH_DMA_MINALIGN));
  }
  
  static void dwmci_prepare_data(struct dwmci_host *host,
  			       struct mmc_data *data,
--			       struct dwmci_idmac *cur_idmac,
-+			       struct dwmci_idmac32 *cur_idmac,
+-			       struct dwmci_idmac32 *cur_idmac,
++			       void *cur_idmac,
  			       void *bounce_buffer)
  {
++	const u32 idmacl = virt_to_phys(cur_idmac) & 0xffffffff;
++	const u32 idmacu = (u64)virt_to_phys(cur_idmac) >> 32;
  	unsigned long ctrl;
-@@ -308,7 +311,7 @@ static int dwmci_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
+ 
+ 	dwmci_wait_reset(host, DWMCI_CTRL_FIFO_RESET);
+ 
+ 	/* Clear IDMAC interrupt */
+-	dwmci_writel(host, DWMCI_IDSTS, 0xFFFFFFFF);
++	dwmci_writel(host, host->regs->idsts, 0xffffffff);
+ 
+-	dwmci_writel(host, DWMCI_DBADDR, (ulong)cur_idmac);
++	dwmci_writel(host, host->regs->dbaddrl, idmacl);
++	if (host->dma_64bit_address)
++		dwmci_writel(host, host->regs->dbaddru, idmacu);
+ 
+-	dwmci_prepare_desc(data, cur_idmac, bounce_buffer);
++	dwmci_prepare_desc(host, data, cur_idmac, bounce_buffer);
+ 
+ 	ctrl = dwmci_readl(host, DWMCI_CTRL);
+ 	ctrl |= DWMCI_IDMAC_EN | DWMCI_DMA_EN;
+@@ -257,13 +319,13 @@ static int dwmci_dma_transfer(struct dwmci_host *host, uint flags,
+ 	else
+ 		mask = DWMCI_IDINTEN_TI;
+ 
+-	ret = wait_for_bit_le32(host->ioaddr + DWMCI_IDSTS,
++	ret = wait_for_bit_le32(host->ioaddr + host->regs->idsts,
+ 				mask, true, 1000, false);
+ 	if (ret)
+ 		debug("%s: DWMCI_IDINTEN mask 0x%x timeout\n", __func__, mask);
+ 
+ 	/* Clear interrupts */
+-	dwmci_writel(host, DWMCI_IDSTS, DWMCI_IDINTEN_MASK);
++	dwmci_writel(host, host->regs->idsts, DWMCI_IDINTEN_MASK);
+ 
+ 	ctrl = dwmci_readl(host, DWMCI_CTRL);
+ 	ctrl &= ~DWMCI_DMA_EN;
+@@ -300,20 +362,10 @@ static void dwmci_wait_while_busy(struct dwmci_host *host, struct mmc_cmd *cmd)
+ 	}
+ }
+ 
+-#ifdef CONFIG_DM_MMC
+-static int dwmci_send_cmd(struct udevice *dev, struct mmc_cmd *cmd,
+-		   struct mmc_data *data)
++static int dwmci_send_cmd_common(struct dwmci_host *host, struct mmc_cmd *cmd,
++				 struct mmc_data *data, void *cur_idmac)
  {
- #endif
- 	struct dwmci_host *host = mmc->priv;
--	ALLOC_CACHE_ALIGN_BUFFER(struct dwmci_idmac, cur_idmac,
-+	ALLOC_CACHE_ALIGN_BUFFER(struct dwmci_idmac32, cur_idmac,
- 				 data ? DIV_ROUND_UP(data->blocks, 8) : 0);
- 	int ret = 0, flags = 0, i;
+-	struct mmc *mmc = mmc_get_mmc_dev(dev);
+-#else
+-static int dwmci_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
+-		struct mmc_data *data)
+-{
+-#endif
+-	struct dwmci_host *host = mmc->priv;
+-	ALLOC_CACHE_ALIGN_BUFFER(struct dwmci_idmac32, cur_idmac,
+-				 data ? DIV_ROUND_UP(data->blocks, 8) : 0);
+-	int ret = 0, flags = 0, i;
++	int ret, flags = 0, i;
  	u32 retry = 100000;
+ 	u32 mask;
+ 	struct bounce_buffer bbstate;
+@@ -433,6 +485,28 @@ static int dwmci_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
+ 	return ret;
+ }
+ 
++#ifdef CONFIG_DM_MMC
++static int dwmci_send_cmd(struct udevice *dev, struct mmc_cmd *cmd,
++			  struct mmc_data *data)
++{
++	struct mmc *mmc = mmc_get_mmc_dev(dev);
++#else
++static int dwmci_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
++			  struct mmc_data *data)
++{
++#endif
++	struct dwmci_host *host = mmc->priv;
++	const size_t buf_size = data ? DIV_ROUND_UP(data->blocks, 8) : 0;
++
++	if (host->dma_64bit_address) {
++		ALLOC_CACHE_ALIGN_BUFFER(struct dwmci_idmac64, idmac, buf_size);
++		return dwmci_send_cmd_common(host, cmd, data, idmac);
++	} else {
++		ALLOC_CACHE_ALIGN_BUFFER(struct dwmci_idmac32, idmac, buf_size);
++		return dwmci_send_cmd_common(host, cmd, data, idmac);
++	}
++}
++
+ static int dwmci_control_clken(struct dwmci_host *host, bool on)
+ {
+ 	const u32 val = on ? DWMCI_CLKEN_ENABLE | DWMCI_CLKEN_LOW_PWR : 0;
+@@ -594,6 +668,27 @@ static void dwmci_init_fifo(struct dwmci_host *host)
+ 	dwmci_writel(host, DWMCI_FIFOTH, host->fifoth_val);
+ }
+ 
++static void dwmci_init_dma(struct dwmci_host *host)
++{
++	int addr_config;
++
++	if (host->fifo_mode)
++		return;
++
++	addr_config = (dwmci_readl(host, DWMCI_HCON) >> 27) & 0x1;
++	if (addr_config == 1) {
++		host->dma_64bit_address = true;
++		host->regs = &dwmci_idmac_regs64;
++		debug("%s: IDMAC supports 64-bit address mode\n", __func__);
++	} else {
++		host->dma_64bit_address = false;
++		host->regs = &dwmci_idmac_regs32;
++		debug("%s: IDMAC supports 32-bit address mode\n", __func__);
++	}
++
++	dwmci_writel(host, host->regs->idinten, DWMCI_IDINTEN_MASK);
++}
++
+ static int dwmci_init(struct mmc *mmc)
+ {
+ 	struct dwmci_host *host = mmc->priv;
+@@ -616,16 +711,13 @@ static int dwmci_init(struct mmc *mmc)
+ 
+ 	dwmci_writel(host, DWMCI_TMOUT, 0xFFFFFFFF);
+ 
+-	dwmci_writel(host, DWMCI_IDINTEN, 0);
+ 	dwmci_writel(host, DWMCI_BMOD, 1);
+ 	dwmci_init_fifo(host);
++	dwmci_init_dma(host);
+ 
+ 	dwmci_writel(host, DWMCI_CLKENA, 0);
+ 	dwmci_writel(host, DWMCI_CLKSRC, 0);
+ 
+-	if (!host->fifo_mode)
+-		dwmci_writel(host, DWMCI_IDINTEN, DWMCI_IDINTEN_MASK);
+-
+ 	return 0;
+ }
+ 
+diff --git a/include/dwmmc.h b/include/dwmmc.h
+index 7e4acf096dce..de18fda68ac8 100644
+--- a/include/dwmmc.h
++++ b/include/dwmmc.h
+@@ -44,12 +44,22 @@
+ #define DWMCI_UHS_REG		0x074
+ #define DWMCI_BMOD		0x080
+ #define DWMCI_PLDMND		0x084
++#define DWMCI_DATA		0x200
++/* Registers to support IDMAC 32-bit address mode */
+ #define DWMCI_DBADDR		0x088
+ #define DWMCI_IDSTS		0x08C
+ #define DWMCI_IDINTEN		0x090
+ #define DWMCI_DSCADDR		0x094
+ #define DWMCI_BUFADDR		0x098
+-#define DWMCI_DATA		0x200
++/* Registers to support IDMAC 64-bit address mode */
++#define DWMCI_DBADDRL		0x088
++#define DWMCI_DBADDRU		0x08c
++#define DWMCI_IDSTS64		0x090
++#define DWMCI_IDINTEN64		0x094
++#define DWMCI_DSCADDRL		0x098
++#define DWMCI_DSCADDRU		0x09c
++#define DWMCI_BUFADDRL		0x0a0
++#define DWMCI_BUFADDRU		0x0a4
+ 
+ /* Interrupt Mask register */
+ #define DWMCI_INTMSK_ALL	0xffffffff
+@@ -142,6 +152,29 @@
+ /* quirks */
+ #define DWMCI_QUIRK_DISABLE_SMU		(1 << 0)
+ 
++/**
++ * struct dwmci_idmac_regs - Offsets of IDMAC registers
++ *
++ * @dbaddrl:	Descriptor base address, lower 32 bits
++ * @dbaddru:	Descriptor base address, upper 32 bits
++ * @idsts:	Internal DMA status
++ * @idinten:	Internal DMA interrupt enable
++ * @dscaddrl:	IDMAC descriptor address, lower 32 bits
++ * @dscaddru:	IDMAC descriptor address, upper 32 bits
++ * @bufaddrl:	Current data buffer address, lower 32 bits
++ * @bufaddru:	Current data buffer address, upper 32 bits
++ */
++struct dwmci_idmac_regs {
++	u32 dbaddrl;
++	u32 dbaddru;
++	u32 idsts;
++	u32 idinten;
++	u32 dscaddrl;
++	u32 dscaddru;
++	u32 bufaddrl;
++	u32 bufaddru;
++};
++
+ /**
+  * struct dwmci_host - Information about a designware MMC host
+  *
+@@ -157,6 +190,8 @@
+  * @fifoth_val:	Value for FIFOTH register (or 0 to leave unset)
+  * @mmc:	Pointer to generic MMC structure for this device
+  * @priv:	Private pointer for use by controller
++ * @dma_64bit_address: Whether DMA supports 64-bit address mode or not
++ * @regs:	Registers that can vary for different DW MMC block versions
+  */
+ struct dwmci_host {
+ 	const char *name;
+@@ -196,6 +231,8 @@ struct dwmci_host {
+ 
+ 	/* use fifo mode to read and write data */
+ 	bool fifo_mode;
++	bool dma_64bit_address;
++	const struct dwmci_idmac_regs *regs;
+ };
+ 
+ static inline void dwmci_writel(struct dwmci_host *host, int reg, u32 val)
 -- 
 2.39.2
 
