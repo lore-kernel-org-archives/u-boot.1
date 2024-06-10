@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E743C27C55
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 01:13:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1697C27C55
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 01:13:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 207DC88496;
+	by phobos.denx.de (Postfix) with ESMTP id 8F02C87D46;
 	Mon, 10 Jun 2024 03:12:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KUVLh6qW";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LKr1USlH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 069D987D46; Mon, 10 Jun 2024 03:12:34 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id BB24088468; Mon, 10 Jun 2024 03:12:34 +0200 (CEST)
+Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
+ [IPv6:2001:4860:4864:20::30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8059D88415
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 03:12:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 91120883DA
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 03:12:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-6f99555c922so588309a34.3
- for <u-boot@lists.denx.de>; Sun, 09 Jun 2024 18:12:29 -0700 (PDT)
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-250e4c4d650so2008847fac.2
+ for <u-boot@lists.denx.de>; Sun, 09 Jun 2024 18:12:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1717981948; x=1718586748; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1717981951; x=1718586751; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lVo1KnMaaxcTD3uxagIxh+Vl8qN05WrLHUaAeLL9aiE=;
- b=KUVLh6qWZFjrmsriNqRdG8z/QPFx3NvoR8+oiy3zRQPEYB7WfeaXnvposrR5yU/VBi
- jGgscJyOJMWFg4QceQruE9ykBBuVWDLP836adYsRp37WgQM9P8PVpAFy+yboATuNdKMJ
- o0akkBEl8T12ONsFjDz8WwjayfVRtjyPYPnP6ZA6S6/T/ZeBlZeEZ4JobTEMqPN2oHN8
- SyXBMsSVMOBmDfcBg73DHkA8VMzmjhaqTd0ebSd0fPeNyiyKJoZE7g14bhNliI0EKeLj
- PU6UHR/1bYb0Eq2m98kcQjMNbbUuwOoM35o1VfUMyQBitS5zIa7PAgx1ozFW99dFawGO
- alHg==
+ bh=9nd4em9gOiHJXkkv3B9uErPXnC9QG1DOG02CNBUp5pw=;
+ b=LKr1USlHpNMm36Qc1+isZMo5BWNlAHL4pq7bcrS67Sc9Fsd/rMKT/eWUohqieFrN9S
+ iLaju9D6spvUHOFlDXLB4au/iCMSlpwUBXo1AtM6+f9nxwU6JqHaLChqHN3HQNmC2/nB
+ mL4/hTUMVXHpYR7ks6KX8dDMrv7H3IiIQuJoSOG4HyuWYMUuZhyYp+lsnAW0No4yqRSg
+ e4XCi90soIfo2LZLN3D2H997e9S8tJFQqYRs/pbQprwyR1xAZiU0sGpYWpKHpkbl/NNc
+ lbCqexS9I4pCqAyIYea0x8R4I3K0mpsDSZeR4gwn1gSUEV71sus9b8fjO+dmfao5SlIE
+ 5Uag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717981948; x=1718586748;
+ d=1e100.net; s=20230601; t=1717981951; x=1718586751;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lVo1KnMaaxcTD3uxagIxh+Vl8qN05WrLHUaAeLL9aiE=;
- b=v0stNS4b5ETwloukyREVJ8Mf+jEZ5Ap4cuyYUc8BkZ02W0mUIihdLNrEFJkcsy/1Nr
- UuH7b0eOd79wCdB5IJy8gw6ClATCtAvzSL786Zd5mNVFxlXO6xMet2kFmbwjZH0xtzGt
- FDwRlOKVDZHQGX8nnEKmwuCkilzQcbqHCjrsJ56RaggO3ED0eFvdkh2b6HWAIgVueieU
- 4ebGpr8I2reB3SGLxlX7XoW5S85YWqipH+E1HcqGL8vlg7cfPj2D2BbCQ0WLztkJ/+as
- e7CYo+5V6Uhi8QJQcK2ngdE8Omn6frLF9yHnGUv19yEvQkqLDgBD0T3fe7Vc/B+Q5NHT
- u1Lw==
+ bh=9nd4em9gOiHJXkkv3B9uErPXnC9QG1DOG02CNBUp5pw=;
+ b=g7ZQMu1nwOmdXH00NPKbnFTC/omxiQmgycAnghKWVF4ULwcCG4sqDMy7NbGgO5Qmyj
+ wScRM1VN6E4l0EpBAAMOWmwrP3Vg4WguQNnUKXf6ID2jsgaxDAyIARxr5B+td0x4GBYN
+ RrhLGR7nv+8RgF9rcma1Tb5o8O8RLtyWy5fbCy3IitCSbb/QXhfGZFp3aflRqH9pe/V+
+ UEX+7bG4AFqP6n5tW7YzD9Bf0DeZzqd+84ZdAS9kmIUT75ChkJlGjM1wW0SQnSYN2Hrc
+ Aobbvg07NVvlVIFUn10UpD3I5hZKc66Hy0OR2GkOSKYFaji61qlIsqmqOv9sLq7zJsQN
+ fCFg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXLg+L+x6hTabWGJw/iZLp/zEzODxKi8zOSxyGGNW3o/X1cU2w7RebVkHl5HkN2oZptkUEAggKm86/LppsXn7feJCr6vg==
-X-Gm-Message-State: AOJu0YwG2K8u9TwzeWIKoe1Dg/eI7JLW9AYX/16SlTlvU+VPUcpuchkA
- +RfM45lsvfar6Y7yMVNY4QhMWeW6qTpPXED+mQpAil9Cy2FfU/hZpcKoSE6dpfs=
-X-Google-Smtp-Source: AGHT+IHTFaVBwK6e/OawE7AMK/WZBioroUr6H/TGKWrHUINm4cL5zW+jp+C2BTDcLMcddf0FRCVg4w==
-X-Received: by 2002:a05:6830:120b:b0:6f9:945f:7a6d with SMTP id
- 46e09a7af769-6f9945f7f90mr3536322a34.32.1717981948276; 
- Sun, 09 Jun 2024 18:12:28 -0700 (PDT)
+ AJvYcCViJx6+NlBwESGjytn3QlJZbnnqktqIPrymju08CH5VwGZWV2OlyN+RMm0vrH+7f6xAzINsbtdHY3ahbjA7/vEJi+A9gg==
+X-Gm-Message-State: AOJu0YzdH53TRl7WZnsgMD20FUmzkpN+1obUi5gYnNADkpPraajUlDDw
+ yEnGQI0UQzL/ffyBntOamR7feLQZjqNPM5k2L3YGHoqtzA5xXRPY9A3B5IYeRSA=
+X-Google-Smtp-Source: AGHT+IGng2mIUi8baggMyu6zSO7Bx0xDxtVRYsSiwe9iCzx46x3FI6QqyMKoBfhQX9gkmt7R7uTFwA==
+X-Received: by 2002:a05:6870:d187:b0:254:bc92:9b97 with SMTP id
+ 586e51a60fabf-254bc929e3dmr2682273fac.57.1717981951145; 
+ Sun, 09 Jun 2024 18:12:31 -0700 (PDT)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-6f95c79ad74sm1106784a34.47.2024.06.09.18.12.27
+ 586e51a60fabf-25448138e4asm2062822fac.57.2024.06.09.18.12.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Jun 2024 18:12:28 -0700 (PDT)
+ Sun, 09 Jun 2024 18:12:30 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>,
  Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
@@ -78,10 +78,10 @@ Cc: Quentin Schulz <quentin.schulz@cherry.de>,
  Ferass El Hafidi <vitali64pmemail@protonmail.com>,
  Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com
-Subject: [PATCH v2 02/40] mmc: dw_mmc: Remove unused version field from struct
- dwmci_host
-Date: Sun,  9 Jun 2024 20:11:48 -0500
-Message-Id: <20240610011226.4050-3-semen.protsenko@linaro.org>
+Subject: [PATCH v2 06/40] mmc: dw_mmc: Extract divider update to a separate
+ function
+Date: Sun,  9 Jun 2024 20:11:52 -0500
+Message-Id: <20240610011226.4050-7-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240610011226.4050-1-semen.protsenko@linaro.org>
 References: <20240610011226.4050-1-semen.protsenko@linaro.org>
@@ -103,31 +103,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Nobody seems to use it, so just remove it.
+Extract the clock divider update into dwmci_update_div() function. It's
+a procedure recommended in TRM, so it's better to keep it in a dedicated
+function to make the code clearer.
+
+While at it also extract the clock control code into a separate routine
+to avoid code duplication in dwmci_setup_bus().
 
 No functional change.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
 Changes in v2:
-  - Added R-b tag from Quentin
+  - Moved CLKSRC after disabling the clock as recommended in TRM, to
+    avoid possible glitch
+  - Extracted div update into a separate function with corresponding
+    comment
+  - Changed the patch subject and reworked the commit message
 
- include/dwmmc.h | 1 -
- 1 file changed, 1 deletion(-)
+ drivers/mmc/dw_mmc.c | 81 +++++++++++++++++++++++++++-----------------
+ 1 file changed, 50 insertions(+), 31 deletions(-)
 
-diff --git a/include/dwmmc.h b/include/dwmmc.h
-index 136a95b8cdb6..39024fb38aaa 100644
---- a/include/dwmmc.h
-+++ b/include/dwmmc.h
-@@ -163,7 +163,6 @@ struct dwmci_host {
- 	void *ioaddr;
- 	unsigned int quirks;
- 	unsigned int caps;
--	unsigned int version;
- 	unsigned int clock;
- 	unsigned int bus_hz;
- 	unsigned int div;
+diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
+index cbfb8d3b8683..7bf3279ee9ec 100644
+--- a/drivers/mmc/dw_mmc.c
++++ b/drivers/mmc/dw_mmc.c
+@@ -412,11 +412,56 @@ static int dwmci_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
+ 	return ret;
+ }
+ 
+-static int dwmci_setup_bus(struct dwmci_host *host, u32 freq)
++static int dwmci_control_clken(struct dwmci_host *host, bool on)
+ {
+-	u32 div, status;
++	const u32 val = on ? DWMCI_CLKEN_ENABLE | DWMCI_CLKEN_LOW_PWR : 0;
++	const u32 cmd_only_clk = DWMCI_CMD_PRV_DAT_WAIT | DWMCI_CMD_UPD_CLK;
+ 	int timeout = 10000;
++	u32 status;
++
++	dwmci_writel(host, DWMCI_CLKENA, val);
++
++	/* Inform CIU */
++	dwmci_writel(host, DWMCI_CMD, DWMCI_CMD_START | cmd_only_clk);
++	do {
++		status = dwmci_readl(host, DWMCI_CMD);
++		if (timeout-- < 0) {
++			debug("%s: Timeout!\n", __func__);
++			return -ETIMEDOUT;
++		}
++	} while (status & DWMCI_CMD_START);
++
++	return 0;
++}
++
++/*
++ * Update the clock divider.
++ *
++ * To prevent a clock glitch keep the clock stopped during the update of
++ * clock divider and clock source.
++ */
++static int dwmci_update_div(struct dwmci_host *host, u32 div)
++{
++	int ret;
++
++	/* Disable clock */
++	ret = dwmci_control_clken(host, false);
++	if (ret)
++		return ret;
++
++	/* Set clock to desired speed */
++	dwmci_writel(host, DWMCI_CLKDIV, div);
++	dwmci_writel(host, DWMCI_CLKSRC, 0);
++
++	/* Enable clock */
++	return dwmci_control_clken(host, true);
++}
++
++static int dwmci_setup_bus(struct dwmci_host *host, u32 freq)
++{
++	u32 div;
+ 	unsigned long sclk;
++	int ret;
+ 
+ 	if ((freq == host->clock) || (freq == 0))
+ 		return 0;
+@@ -439,35 +484,9 @@ static int dwmci_setup_bus(struct dwmci_host *host, u32 freq)
+ 	else
+ 		div = DIV_ROUND_UP(sclk, 2 * freq);
+ 
+-	dwmci_writel(host, DWMCI_CLKENA, 0);
+-	dwmci_writel(host, DWMCI_CLKSRC, 0);
+-
+-	dwmci_writel(host, DWMCI_CLKDIV, div);
+-	dwmci_writel(host, DWMCI_CMD, DWMCI_CMD_PRV_DAT_WAIT |
+-			DWMCI_CMD_UPD_CLK | DWMCI_CMD_START);
+-
+-	do {
+-		status = dwmci_readl(host, DWMCI_CMD);
+-		if (timeout-- < 0) {
+-			debug("%s: Timeout!\n", __func__);
+-			return -ETIMEDOUT;
+-		}
+-	} while (status & DWMCI_CMD_START);
+-
+-	dwmci_writel(host, DWMCI_CLKENA, DWMCI_CLKEN_ENABLE |
+-			DWMCI_CLKEN_LOW_PWR);
+-
+-	dwmci_writel(host, DWMCI_CMD, DWMCI_CMD_PRV_DAT_WAIT |
+-			DWMCI_CMD_UPD_CLK | DWMCI_CMD_START);
+-
+-	timeout = 10000;
+-	do {
+-		status = dwmci_readl(host, DWMCI_CMD);
+-		if (timeout-- < 0) {
+-			debug("%s: Timeout!\n", __func__);
+-			return -ETIMEDOUT;
+-		}
+-	} while (status & DWMCI_CMD_START);
++	ret = dwmci_update_div(host, div);
++	if (ret)
++		return ret;
+ 
+ 	host->clock = freq;
+ 
 -- 
 2.39.2
 
