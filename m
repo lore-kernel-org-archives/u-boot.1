@@ -4,77 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E7E2C27C5E
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 15:16:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A63ABC27C55
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 15:18:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8044E885D4;
-	Mon, 10 Jun 2024 17:16:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0474C885B0;
+	Mon, 10 Jun 2024 17:18:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jOl132Rg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="D3aTUnQt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 045E1885CF; Mon, 10 Jun 2024 17:16:04 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 3F88E8852E; Mon, 10 Jun 2024 17:17:58 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04953885A5
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 17:16:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6EE33885CF
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 17:17:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4217f072531so1999565e9.1
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 08:16:01 -0700 (PDT)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-57c685bfd86so2957122a12.2
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 08:17:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1718032560; x=1718637360; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1718032675; x=1718637475; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HWMlOX5Ro+ACiaw7jT4BA6kDrG7u+vqt5UWK9wYKL5Q=;
- b=jOl132RggCjqCcS0+N6Q2oB5SY0PYfC//xtywna4r+3q3cUCrgtStKHwYQ1zOFG5Dl
- je9Je0ose7x13ajecpAVASc3nxEm2pEFTGy/9dVYJlRcEj2Dq5ByJMWpQhNBiRsEY3DK
- jYsIFF7TzLzkDlurUoh6QoFz3nUKX0Q0j4WxfQ+Z2RfvIRFiSAWjpQl4cqq/MFcN944/
- 2gGDET/Vm3ZZEzbKi7pwJgMoHNEnknHb7raWw3l2pkIRLbkCHrQKNE/1t60VIBxf8bkm
- A5VToDWrHRr3nZp3SKbYFWbuLqDf3BSItg8AC6wTAz4g2c0eH2IfUWNLDZHOFG1Y6SqN
- drtg==
+ bh=dLwPMcfKJdalWGM4BQftb7IZQ/9ARB4d3evykudvB1M=;
+ b=D3aTUnQtQ3NyWkOxqXYBBhscnBZ9F9Azj/nlLJxgLWHaj84rWOebdj0CrPOWFal4of
+ DMUQOTvtun3XvYtClZ5JT1lOwdU9SQrHbCaqLqhTpQf9/pgwzWMEjBtSxsn2tda+qGfB
+ 2a3btB2TUGjf6w1oTiOtT1TG/spcOPAMNecO3oJQpMtWuK5hjlmVhQri1IFIAbo4c2l8
+ n7rGKJUTJ565VKf/yC6n5wOT1UtH+OpBz4qFPIAfRwGbJZl933wIisEAjk1lPG9rKyVb
+ R9YSEk9xkzggEi1rPw1AXMSxnaRoPeRFHy+AW4Bwn4oE2A1NOK2uNpnULiV/b2LKI2Sf
+ cErQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718032560; x=1718637360;
+ d=1e100.net; s=20230601; t=1718032675; x=1718637475;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HWMlOX5Ro+ACiaw7jT4BA6kDrG7u+vqt5UWK9wYKL5Q=;
- b=IbjaWVjxQYo7YSYUZH3/1NKxxNGHyf3npOWCKCQYK8DE17TEFqv+Q7ZNaCOhm2wK4D
- YVEifOAbojqVz/8WA7gV/qym/G/M2MyEGHOZJwLTPFvML+IdB70EI+NSBhFtpCUPW22P
- SDRoqvCKtngV9i+ajsuJ9PAPZ2H3Yd+Mpt4NaA/Q/xDuzIt0rX+ju/wCvewQtijCNHRx
- Ez6jbGTShQFZBpmKL3EptEF8wl2ooMq7FzKKPO8Qx87+CANGzjx5u66fkAqD7rcfMrdi
- qNsccy5C/uqQ6s9jdbr/hMFcko+y7vm4Bx9/JAfUWuc+IcIGKlCsh7S78iHLG0FMHIN7
- SZNw==
+ bh=dLwPMcfKJdalWGM4BQftb7IZQ/9ARB4d3evykudvB1M=;
+ b=KvPdL3HYzevI+FLiUNi0MOKZIVGWWNFpUwIdwLlUXZHc6j90686QCiWv59UeLBsKVj
+ +9qji46aiCJH3YIeWu6h3ZiMwepRo63u6qC1lkdnnUwYd9zdDZboKwhGluJVPlSd8mEp
+ UoAAsHNMuysUuHFZHfsKL6k3kkSIDhEpqYu2ViaGNMALwiwEAO4qJmuOtKhVKG676oNc
+ JMonaYOHzccU91D1fnmbU3oE5t4C7eBscMnuzx6Q2x7NllapFgZF2l07WBXKzpyTSY/t
+ m9Upm4idaMOsYTWQd7CxVB9Ev1lNbA23RsVziyaRqw97rdi9Gdd0e204uuecpF+lkVoE
+ UDAw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU9YQpjiOI6i0tuGu6ElSvrh7+ZUO7oe1i2rSoVNdPdHfAIM5DgEFzPZIsZbjP4okRsvxW77y1T4w8OdN4QpoKSkbmZEg==
-X-Gm-Message-State: AOJu0Ywo+HQ/WImCt1aG1pO0z9tziBbqibVyka3LlqGbF80zKJRg8i8V
- Nh6sOwxrBPF3ti1vd6tjATDP6prX2CyLaQ+PvmhoCFioTmUCDkS1BdwjQM+ZJF+yruzGVmpBZv4
- UEOzKYxK09nniYzFmVNHHG9YHhTE=
-X-Google-Smtp-Source: AGHT+IGtmwoJweCxfoaIxm1ypSmugG5+7ykH58rgEGJVCVqriYnV1rUqohP7uirXz+4HOk1OgK83jyrioQ1XWTc/IB4=
-X-Received: by 2002:a5d:5887:0:b0:35f:247e:fbce with SMTP id
- ffacd0b85a97d-35f247eff08mr2007347f8f.1.1718032560148; Mon, 10 Jun 2024
- 08:16:00 -0700 (PDT)
+ AJvYcCXUe12LSTzIdLKek956pf19B1tdFQDYXvJXHNszTTcBgkphRkSZ7BD2zTvCcYAnXRB7eCIynIFplc3M7qXGVVzPv6GxYw==
+X-Gm-Message-State: AOJu0YzaEz7mXPF7mNkNMHqdDWgBp6oLF1566hNj/idJECi6JXaEgvog
+ qKeaHU2Q4JWa8ItArVN24kRJCOuJTA9a6XZcqdCNHAq8ErWsTTwrqAIS4OU9u/g766s8a1jKf4Y
+ MIkcxROsA3oo8uqvYpGQpC78ObIZI+dS6Ld5HIQ==
+X-Google-Smtp-Source: AGHT+IFUM7HMOMSzq0317z7KI2q3DcLUXlGPrJQ3XcGa0Xlz5ifAw9nciSXCvJso9CP/aCTsZhApbENnHdhkNiSiyOw=
+X-Received: by 2002:a50:cd49:0:b0:57c:5c4f:a356 with SMTP id
+ 4fb4d7f45d1cf-57c5c4fa4bcmr5472460a12.8.1718032674521; Mon, 10 Jun 2024
+ 08:17:54 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240606-bootmeth-android-v1-0-0c69d4457cc5@baylibre.com>
- <20240606-bootmeth-android-v1-5-0c69d4457cc5@baylibre.com>
-In-Reply-To: <20240606-bootmeth-android-v1-5-0c69d4457cc5@baylibre.com>
-From: Igor Opaniuk <igor.opaniuk@gmail.com>
-Date: Mon, 10 Jun 2024 17:15:48 +0200
-Message-ID: <CAByghJbj3T118egMHs3pGMVGkLho5H42qcRBtVJpBNrSSP512g@mail.gmail.com>
-Subject: Re: [PATCH 5/6] bootstd: Add a bootmeth for Android
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Simon Glass <sjg@chromium.org>, Julien Masson <jmasson@baylibre.com>, 
- Guillaume La Roque <glaroque@baylibre.com>,
- Dmitrii Merkurev <dimorinny@google.com>, 
- Roman Stratiienko <r.stratiienko@gmail.com>, u-boot@lists.denx.de
+References: <20231229154307.GS2652760@bill-the-cat>
+ <7CDAA354-803C-4AFD-BD38-F432B811DB96@gmx.de>
+ <20231229161744.GU2652760@bill-the-cat>
+ <871qb4nbtc.fsf@bloch.sibelius.xs4all.nl>
+ <20231229175215.GY2652760@bill-the-cat>
+ <CAFLszTjXrmhOBeMvGfpy3mfZujNrCu2BKmUbEYz-rmxwyWdg3A@mail.gmail.com>
+ <20231231135357.GZ2652760@bill-the-cat>
+ <CAFLszTgCSDsobu9ak495vnRP-bjakK5Ytxd5YXro0-7GmYj9vA@mail.gmail.com>
+ <20231231151144.GD2652760@bill-the-cat>
+ <5599D28A-0255-4352-93E6-1095743F8983@gmx.de>
+ <20231231161630.GE2652760@bill-the-cat>
+ <CAFLszTgn2wq-QAEdgseAv7jx6TDyEQ+j6bQZZzdii2gmHtV5VA@mail.gmail.com>
+ <CADg8p96jSeXOvkSX9R7g8343k9aJ6bwouSh5WJjy=AnQ+R8Kcw@mail.gmail.com>
+ <CAFLszTgQKHXZ89aNz0uxUKGFCXcS5A+6Fqje+ga=gOhjWv=KOw@mail.gmail.com>
+ <CADg8p95eRCduZ-HKDsFO-rRpdV3q033nespjCAfAd1oE64iRtw@mail.gmail.com>
+ <CAFLszTihZjxsLhROmr=KKqPfqAxsBZs0RzmnKpsgtfmtg8cZog@mail.gmail.com>
+In-Reply-To: <CAFLszTihZjxsLhROmr=KKqPfqAxsBZs0RzmnKpsgtfmtg8cZog@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Mon, 10 Jun 2024 20:47:43 +0530
+Message-ID: <CADg8p97uQrBr_tbHSHkKnQtoj7r=3xaMHYpJnCtcuYE-q7hSCQ@mail.gmail.com>
+Subject: Re: Proposal: U-Boot memory management
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, u-boot@lists.denx.de,
+ ilias.apalodimas@linaro.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -93,770 +106,614 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mattijs,
+hi Simon,
 
-On Thu, Jun 6, 2024 at 2:24=E2=80=AFPM Mattijs Korpershoek
-<mkorpershoek@baylibre.com> wrote:
+On Mon, 10 Jun 2024 at 20:33, Simon Glass <sjg@chromium.org> wrote:
 >
-> Android boot flow is a bit different than a regular Linux distro.
-> Android relies on multiple partitions in order to boot.
+> Hi Sughosh,
 >
-> A typical boot flow would be:
-> 1. Parse the Bootloader Control Block (BCB, misc partition)
-> 2. If BCB requested bootonce-bootloader, start fastboot and wait.
-> 3. If BCB requested recovery or normal android, run the following:
-> 3.a. Get slot (A/B) from BCB
-> 3.b. Run AVB (Android Verified Boot) on boot partitions
-> 3.c. Load boot and vendor_boot partitions
-> 3.d. Load device-tree, ramdisk and boot
->
-> The AOSP documentation has more details at [1], [2], [3]
->
-> This has been implemented via complex boot scripts such as [4].
-> However, these boot script are neither very maintainable nor generic.
-> Moreover, DISTRO_DEFAULTS is being deprecated [5].
->
-> Add a generic Android bootflow implementation for bootstd.
-> For this initial version, only boot image v4 is supported.
->
-> [1] https://source.android.com/docs/core/architecture/bootloader
-> [2] https://source.android.com/docs/core/architecture/partitions
-> [3] https://source.android.com/docs/core/architecture/partitions/generic-=
-boot
-> [4] https://source.denx.de/u-boot/u-boot/-/blob/master/include/configs/me=
-son64_android.h
-> [5] https://lore.kernel.org/r/all/20230914165615.1058529-17-sjg@chromium.=
-org/
->
-> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> ---
->  MAINTAINERS             |   7 +
->  boot/Kconfig            |  14 ++
->  boot/Makefile           |   2 +
->  boot/bootmeth_android.c | 522 ++++++++++++++++++++++++++++++++++++++++++=
-++++++
->  boot/bootmeth_android.h |  27 +++
->  doc/develop/bootstd.rst |   6 +
->  6 files changed, 578 insertions(+)
->
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 66783d636e3d..6d2b87720565 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -939,6 +939,13 @@ F: include/bootstd.h
->  F:     net/eth_bootdevice.c
->  F:     test/boot/
->
-> +BOOTMETH_ANDROID
-> +M:     Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> +S:     Maintained
-> +T:     git https://source.denx.de/u-boot/custodians/u-boot-dfu.git
-> +F:     boot/bootmeth_android.c
-> +F:     boot/bootmeth_android.h
-> +
->  BTRFS
->  M:     Marek Beh=C3=BAn <kabel@kernel.org>
->  R:     Qu Wenruo <wqu@suse.com>
-> diff --git a/boot/Kconfig b/boot/Kconfig
-> index 6f3096c15a6f..5fa6f3b8315d 100644
-> --- a/boot/Kconfig
-> +++ b/boot/Kconfig
-> @@ -494,6 +494,20 @@ config BOOTMETH_GLOBAL
->           EFI bootmgr, since they take full control over which bootdevs a=
+> On Mon, 10 Jun 2024 at 08:40, Sughosh Ganu <sughosh.ganu@linaro.org> wrot=
+e:
+> >
+> > hi Simon,
+> >
+> > On Mon, 10 Jun 2024 at 19:25, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi Sughosh,
+> > >
+> > > On Thu, 6 Jun 2024 at 13:18, Sughosh Ganu <sughosh.ganu@linaro.org> w=
+rote:
+> > > >
+> > > > hi Simon,
+> > > >
+> > > > On Wed, 29 May 2024 at 22:00, Simon Glass <sjg@chromium.org> wrote:
+> > > > >
+> > > > > +Sughosh Ganu for reference
+> > > > >
+> > > > >
+> > > > > On Sun, 31 Dec 2023 at 09:16, Tom Rini <trini@konsulko.com> wrote=
+:
+> > > > > >
+> > > > > > On Sun, Dec 31, 2023 at 04:40:06PM +0100, Heinrich Schuchardt w=
+rote:
+> > > > > > >
+> > > > > > >
+> > > > > > > Am 31. Dezember 2023 16:11:44 MEZ schrieb Tom Rini <trini@kon=
+sulko.com>:
+> > > > > > > >On Sun, Dec 31, 2023 at 07:22:10AM -0700, Simon Glass wrote:
+> > > > > > > >> Hi Tom,
+> > > > > > > >>
+> > > > > > > >> On Sun, Dec 31, 2023 at 6:54=E2=80=AFAM Tom Rini <trini@ko=
+nsulko.com> wrote:
+> > > > > > > >> >
+> > > > > > > >> > On Sun, Dec 31, 2023 at 05:48:23AM -0700, Simon Glass wr=
+ote:
+> > > > > > > >> > > Hi,
+> > > > > > > >> > >
+> > > > > > > >> > > On Fri, Dec 29, 2023 at 10:52=E2=80=AFAM Tom Rini <tri=
+ni@konsulko.com> wrote:
+> > > > > > > >> > > >
+> > > > > > > >> > > > On Fri, Dec 29, 2023 at 06:44:15PM +0100, Mark Kette=
+nis wrote:
+> > > > > > > >> > > > > > Date: Fri, 29 Dec 2023 11:17:44 -0500
+> > > > > > > >> > > > > > From: Tom Rini <trini@konsulko.com>
+> > > > > > > >> > > > > >
+> > > > > > > >> > > > > > On Fri, Dec 29, 2023 at 05:05:17PM +0100, Heinri=
+ch Schuchardt wrote:
+> > > > > > > >> > > > > > >
+> > > > > > > >> > > > > > >
+> > > > > > > >> > > > > > > Am 29. Dezember 2023 16:43:07 MEZ schrieb Tom =
+Rini <trini@konsulko.com>:
+> > > > > > > >> > > > > > > >On Fri, Dec 29, 2023 at 05:36:09AM +0000, Sim=
+on Glass wrote:
+> > > > > > > >> > > > > > > >> Hi,
+> > > > > > > >> > > > > > > >>
+> > > > > > > >> > > > > > > >> On Sat, Dec 16, 2023 at 6:01=E2=80=AFPM Sim=
+on Glass <sjg@chromium.org> wrote:
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > Hi,
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > This records my thoughts after a discussi=
+on with Ilias & Heinrich re
+> > > > > > > >> > > > > > > >> > memory allocation in U-Boot.
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > 1. malloc()
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > malloc() is used for programmatic memory =
+allocation. It allows memory
+> > > > > > > >> > > > > > > >> > to be freed. It is not designed for very =
+large allocations (e.g. a
+> > > > > > > >> > > > > > > >> > 10MB kernel or 100MB ramdisk).
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > 2. lmb
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > lmb is used for large blocks of memory, s=
+uch as those needed for a
+> > > > > > > >> > > > > > > >> > kernel or ramdisk. Allocation is only tra=
+nsitory, for the purposes of
+> > > > > > > >> > > > > > > >> > loading some images and booting. If the b=
+oot fails, then all lmb
+> > > > > > > >> > > > > > > >> > allocations go away.
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > lmb is set up by getting all available me=
+mory and then removing what
+> > > > > > > >> > > > > > > >> > is used by U-Boot (code, data, malloc() s=
+pace, etc.)
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > lmb reservations have a few flags so that=
+ areas of memory can be
+> > > > > > > >> > > > > > > >> > provided with attributes
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > There are some corner cases...e.g. loadin=
+g a file does an lmb
+> > > > > > > >> > > > > > > >> > allocation but only for the purpose of av=
+oiding a file being loaded
+> > > > > > > >> > > > > > > >> > over U-Boot code/data. The allocation is =
+dropped immediately after the
+> > > > > > > >> > > > > > > >> > file is loaded. Within the bootm command,=
+ or when using standard boot,
+> > > > > > > >> > > > > > > >> > this would be fairly easy to solve.
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > Linux has renamed lmb to memblock. We sho=
+uld consider doing the same.
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > 3. EFI
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > EFI has its own memory-allocation tables.
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > Like lmb, EFI is able to deal with large =
+allocations. But via a 'pool'
+> > > > > > > >> > > > > > > >> > function it can also do smaller allocatio=
+ns similar to malloc(),
+> > > > > > > >> > > > > > > >> > although each one uses at least 4KB at pr=
+esent.
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > EFI allocations do not go away when a boo=
+t fails.
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > With EFI it is possible to add allocation=
+s post facto, in which case
+> > > > > > > >> > > > > > > >> > they are added to the allocation table ju=
+st as if the memory was
+> > > > > > > >> > > > > > > >> > allocated with EFI to begin with.
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > The EFI allocations and the lmb allocatio=
+ns use the same memory, so in
+> > > > > > > >> > > > > > > >> > principle could conflict.
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > EFI allocations are sometimes used to all=
+ocate internal U-Boot data as
+> > > > > > > >> > > > > > > >> > well, if needed by the EFI app. For examp=
+le, while efi_image_parse()
+> > > > > > > >> > > > > > > >> > uses malloc(), efi_var_mem.c uses EFI all=
+ocations since the code runs
+> > > > > > > >> > > > > > > >> > in the app context and may need to access=
+ the memory after U-Boot has
+> > > > > > > >> > > > > > > >> > exited. Also efi_smbios.c uses allocate_p=
+ages() and then adds a new
+> > > > > > > >> > > > > > > >> > mapping as well.
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > EFI memory has attributes, including what=
+ the memory is used for (to
+> > > > > > > >> > > > > > > >> > some degree of granularity). See enum efi=
+_memory_type and struct
+> > > > > > > >> > > > > > > >> > efi_mem_desc. In the latter there are als=
+o attribute flags - whether
+> > > > > > > >> > > > > > > >> > memory is cacheable, etc.
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > EFI also has the x86 idea of 'conventiona=
+l' memory, meaning (I
+> > > > > > > >> > > > > > > >> > believe) that below 4GB that isn't reserv=
+ed for the hardware/system.
+> > > > > > > >> > > > > > > >> > This is meaningless, or at least confusin=
+g, on ARM systems.
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > 4. reservations
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > It is perhaps worth mentioning a fourth m=
+ethod of memory management,
+> > > > > > > >> > > > > > > >> > where U-Boot reserves chunks of memory be=
+fore relocation (in
+> > > > > > > >> > > > > > > >> > board_init_f.c), e.g. for the framebuffer=
+, U-Boot code, the malloc()
+> > > > > > > >> > > > > > > >> > region, etc.
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > Problems
+> > > > > > > >> > > > > > > >> > =E2=80=94-------
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > There are no urgent problems, but here ar=
+e some things that could be improved:
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > 1. EFI should attach most of its data str=
+uctures to driver model. This
+> > > > > > > >> > > > > > > >> > work has started, with the partition supp=
+ort, but more effort would
+> > > > > > > >> > > > > > > >> > help. This would make it easier to see wh=
+ich memory is related to
+> > > > > > > >> > > > > > > >> > devices and which is separate.
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > 2. Some drivers do EFI reservations today=
+, whether EFI is used for
+> > > > > > > >> > > > > > > >> > booting or not (e.g. rockchip video rk_vo=
+p_probe()).
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > 3. U-Boot doesn't really map arch-specifi=
+c memory attributes (e.g.
+> > > > > > > >> > > > > > > >> > armv8's struct mm_region) to EFI ones.
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > 4. EFI duplicates some code from bootm, s=
+ome of which relates to
+> > > > > > > >> > > > > > > >> > memory allocation (e.g. FDT fixup).
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > 5. EFI code is used even if EFI is never =
+used to boot
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > 6. EFI allocations can result in the same=
+ memory being used as has
+> > > > > > > >> > > > > > > >> > already been allocated by lmb. Users may =
+load files which overwrite
+> > > > > > > >> > > > > > > >> > memory allocated by EFI.
+> > > > > > > >> > > > > > > >>
+> > > > > > > >> > > > > > > >> 7. We need to support doing an allocation w=
+hen a file is loaded (to
+> > > > > > > >> > > > > > > >> ensure files do not overlap), without makin=
+g it too difficult to load
+> > > > > > > >> > > > > > > >> multiple files to the same place, if desire=
+d.
+> > > > > > > >> > > > > > > >>
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > Lifetime
+> > > > > > > >> > > > > > > >> > --------
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > We have three different memory allocators=
+ with different purposes. Can
+> > > > > > > >> > > > > > > >> > we unify them a little?
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > Within U-Boot:
+> > > > > > > >> > > > > > > >> > - malloc() space lives forever
+> > > > > > > >> > > > > > > >> > - lmb lives while setting out images for =
+booting
+> > > > > > > >> > > > > > > >> > - EFI (mostly) lives while booting an EFI=
+ app
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > In practice, EFI is set up early in U-Boo=
+t. Some of this is necessary,
+> > > > > > > >> > > > > > > >> > some not. EFI allocations stay around for=
+ever. This works OK since
+> > > > > > > >> > > > > > > >> > large allocations are normally not done i=
+n EFI, so memory isn't really
+> > > > > > > >> > > > > > > >> > consumed to any great degree by the boot =
+process.
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > What happens to EFI allocations if the ap=
+p returns? They are still
+> > > > > > > >> > > > > > > >> > present, in case another app is run. This=
+ seems fine.
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > API
+> > > > > > > >> > > > > > > >> > =E2=80=93--
+> > > > > > > >> > > > > > > >> > Can we unify some APIs?
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > It should be possible to use lmb for larg=
+e EFI memory allocations, so
+> > > > > > > >> > > > > > > >> > long as they are only needed for booting.=
+ We effectively do this
+> > > > > > > >> > > > > > > >> > today, since EFI does not manage the arra=
+ngement of loaded images in
+> > > > > > > >> > > > > > > >> > memory. for the most part.
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > It would not make sense to use EFI alloca=
+tion to replace lmb and
+> > > > > > > >> > > > > > > >> > malloc(), of course.
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > Could we use a common (lower-level) API f=
+or allocation, used by both
+> > > > > > > >> > > > > > > >> > lmb and EFI? They do have some similariti=
+es. However they have
+> > > > > > > >> > > > > > > >> > different lifetime constraints (EFI alloc=
+ations are never dropped,
+> > > > > > > >> > > > > > > >> > unlikely lmb).
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > ** Overall, it seems that the existence o=
+f memory allocation in
+> > > > > > > >> > > > > > > >> > boot-time services has created confusion.=
+ Memory allocation is
+> > > > > > > >> > > > > > > >> > muddled, with both U-Boot code and boot-t=
+ime services calling the same
+> > > > > > > >> > > > > > > >> > memory allocator. This just has not been =
+clearly thought out.
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > Proposal
+> > > > > > > >> > > > > > > >> > =E2=80=94-------
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > Here are some ideas:
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > 1. For video, use the driver model API to=
+ locate the video regions, or
+> > > > > > > >> > > > > > > >> > block off the entire framebuffer memory, =
+for all devices as a whole.
+> > > > > > > >> > > > > > > >> > Use efi_add_memory_map()
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > 2. Add memory attributes to UCLASS_RAM an=
+d use them in EFI, mapping to
+> > > > > > > >> > > > > > > >> > the EFI_MEMORY_... attributes in struct e=
+fi_mem_desc.
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > 3. Add all EFI reservations just before b=
+ooting the app, as we do with
+> > > > > > > >> > > > > > > >> > devicetree fixup. With this model, malloc=
+() and lmb are used for all
+> > > > > > > >> > > > > > > >> > allocation. Then efi_add_memory_map() is =
+called for each region in
+> > > > > > > >> > > > > > > >> > turn just before booting. Memory attribut=
+es are dealt with above. The
+> > > > > > > >> > > > > > > >> > type (enum efi_memory_type) can be determ=
+ined simply by the data
+> > > > > > > >> > > > > > > >> > structure stored in it, as is done today.=
+ For example, SMBIOS tables
+> > > > > > > >> > > > > > > >> > can use EFI_ACPI_RECLAIM_MEMORY. Very few=
+ types are used and EFI code
+> > > > > > > >> > > > > > > >> > understands the meaning of each.
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > 4. Avoid setting up EFI memory at the sta=
+rt of U-Boot. Do it only when
+> > > > > > > >> > > > > > > >> > booting. This looks to require very littl=
+e effort.
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > 5. Avoid calling efi_allocate_pages() and=
+ efi_allocate_pool() outside
+> > > > > > > >> > > > > > > >> > boot-time services. This solves the probl=
+em 6. If memory is needed by
+> > > > > > > >> > > > > > > >> > an app, allocate it with malloc() and see=
+ 3. There are only two
+> > > > > > > >> > > > > > > >> > efi_allocate_pages() (smbios and efi_runt=
+ime). There are more calls of
+> > > > > > > >> > > > > > > >> > efi_allocate_pool(), but most of these se=
+em easy to fix up. For
+> > > > > > > >> > > > > > > >> > example, efi_init_event_log() allocates a=
+ buffer, but this can be
+> > > > > > > >> > > > > > > >> > allocated in normal malloc() space or in =
+a bloblist.
+> > > > > > > >> > > > > > > >> >
+> > > > > > > >> > > > > > > >> > 6. Don't worry too much about whether EFI=
+ will be used for booting.
+> > > > > > > >> > > > > > > >> > The cost is likely not that great: use bo=
+otstage to measure it as is
+> > > > > > > >> > > > > > > >> > done for driver model. Try to minmise the=
+ cost of its tables,
+> > > > > > > >> > > > > > > >> > particularly for execution time, but othe=
+rwise just rely on the
+> > > > > > > >> > > > > > > >> > ability to disable EFI_LOADER.
+> > > > > > > >> > > > > > > >>
+> > > > > > > >> > > > > > > >> 7. Add a flag to the 'load' command:
+> > > > > > > >> > > > > > > >>
+> > > > > > > >> > > > > > > >> -m <type> - make an lmb allocation for the =
+file
+> > > > > > > >> > > > > > > >>    <type> is the image type to use (kernel,=
+ ramdisk, flat_dt)
+> > > > > > > >> > > > > > > >>
+> > > > > > > >> > > > > > > >> any existing allocation for that type will =
+be automatically freed
+> > > > > > > >> > > > > > > >> first. If <type> is "none" then no freeing =
+is possible: any loaded
+> > > > > > > >> > > > > > > >> images just stack up in lmb.
+> > > > > > > >> > > > > > > >>
+> > > > > > > >> > > > > > > >> Add an 'lmb' (or memblock) command to allow=
+ listing and clearing allocations.
+> > > > > > > >> > > > > > > >
+> > > > > > > >> > > > > > > >I would really not like to change the user in=
+terface and instead simply
+> > > > > > > >> > > > > > > >handle this with flags to whatever mark/alloc=
+ation function is called.
+> > > > > > > >> > > > > > > >You can always overwrite things that are brou=
+ght in to memory, you
+> > > > > > > >> > > > > > > >cannot overwrite U-Boot or our internals. Opt=
+ionally noting that some
+> > > > > > > >> > > > > > > >previous load to memory has been at least par=
+tially overwritten could be
+> > > > > > > >> > > > > > > >helpful, if it's not too much extra logic.
+> > > > > > > >> > > > > > > >
+> > > > > > > >> > > > > > >
+> > > > > > > >> > > > > > > In most use cases users load exactly one file =
+at  each address. An
+> > > > > > > >> > > > > > > unload command would be the cleanest way for a=
+ user to indicate that
+> > > > > > > >> > > > > > > he wants to reuse the memory.
+> > > > > > > >> > > > > >
+> > > > > > > >> > > > > > I very much do not want to change the API. There=
+'s untold numbers of
+> > > > > > > >> > > > > > scripts out there and they should continue to wo=
+rk. I mentioned to Ilias
+> > > > > > > >> > > > > > off list just now that I'm not against adding a =
+command to add flags to
+> > > > > > > >> > > > > > these areas, but I don't think it's worthwhile t=
+o prevent overwrites the
+> > > > > > > >> > > > > > user did early. The biggest long running problem=
+ in this space was that
+> > > > > > > >> > > > > > for 32bit ARM we couldn't know where the kernel =
+BSS was going to be and
+> > > > > > > >> > > > > > so would have ramdisk at the wrong spot and get =
+partially eaten, and
+> > > > > > > >> > > > > > this was hard to figure out. The current example=
+ is "ooops,
+> > > > > > > >> > > > > > decompression buffer for Image.gz/etc is too clo=
+se to other things"
+> > > > > > > >> > > > > > which ends up failing nice and loudly, and in th=
+e future once this
+> > > > > > > >> > > > > > proposal is done we can just dynamically find an=
+d use a spot, since
+> > > > > > > >> > > > > > we'll have that ability finally.
+> > > > > > > >> > > > >
+> > > > > > > >> > > > > In order to keep the existing interfaces we need l=
+mb to keep track of
+> > > > > > > >> > > > > (at least ) three different states.  I think of th=
+ose as "free",
+> > > > > > > >> > > > > "allocated" and "reserved".  The load command woul=
+d "reserve" memory
+> > > > > > > >> > > > > insteaf "allocate".  And it would pass a flag to l=
+mb when reserving
+> > > > > > > >> > > > > memory to indicate that reserving memory that is a=
+lready reserved is
+> > > > > > > >> > > > > ok.  Both "reserved" and "allocated" memory should=
+ show up as not free
+> > > > > > > >> > > > > in the EFI memory map (probably as EfiLoaderData).
+> > > > > > > >> > > >
+> > > > > > > >> > > > Yes, something like this is what I was getting at, t=
+hanks.
+> > > > > > > >> > >
+> > > > > > > >> > > Yes, that is a good way of putting it. There is defini=
+tely a distinction there.
+> > > > > > > >> > >
+> > > > > > > >> > > If we don't want this flag, we could make U-Boot alway=
+s do a
+> > > > > > > >> > > reservation on load, with a '-f' command to force load=
+ing over an
+> > > > > > > >> > > existing reservation / releasing it first?
+> > > > > > > >> >
+> > > > > > > >> > Again, this is an API change and I don't want to change =
+the API.
+> > > > > > > >>
+> > > > > > > >> The flag is only needed to drop a reservation, since we ap=
+parently
+> > > > > > > >> want the 'load' command to create a permanent reservation.=
+ It should
+> > > > > > > >> not affect existing boot scripts since they won't load ove=
+rlapping
+> > > > > > > >> images.
+> > > > > > > >>
+> > > > > > > >> Anyway, what do you suggest?
+> > > > > > > >
+> > > > > > > >That "load" (and sf read and nand read and tftp and wget and=
+ ...)
+> > > > > > > >"reserve" memory but not "allocate" memory and "reserve" mea=
+ns something
+> > > > > > > >is there and "allocate" means that it can't be modified agai=
+n. For
+> > > > > > > >example, running U-Boot and our malloc pool are "allocated" =
+but just
+> > > > > > > >loading a file to memory is "reserved".  And then yes, I can=
+ see use for
+> > > > > > > >the command where some cases might want to "reserve" memory =
+to fiddle
+> > > > > > > >with it and then "allocate" it so something else can't chang=
+e it.
+> > > > > > > >
+> > > > > > > >This is one of those cases where english is terrible to disc=
+uss things
+> > > > > > > >in as both reserve and allocate can mean similar things.
+> > > > > > > >
+> > > > > > >
+> > > > > > > I have no clue what the semantics of the mentioned "reserved"=
+ state might be. Up to now  memory reservations designated address ranges t=
+hat U-Boot must not use at all, e.g. the memory used by OpenSBI or TF-A.
+> > > > > > >
+> > > > > > > Who can and who cannot write into "reserved" memory?
+> > > > > > >
+> > > > > > > What is wrong about allocating memory for files to forbid any=
+ other use until you are done with the file and free the memory?
+> > > > > >
+> > > > > > So, historically (lets say mid 2010s), you could use "load" to =
+bring a
+> > > > > > file in to memory, anywhere, and it could even overwrite part o=
+f U-Boot
+> > > > > > (running, or malloc pool or whatever). You could also use "load=
+" to
+> > > > > > bring a file in to memory and then bring another file in to tha=
+t same
+> > > > > > location in memory for whatever reason (assorted development ca=
+ses).
+> > > > > >
+> > > > > > Then later someone noted that using "load" to overwrite U-Boot =
+should
+> > > > > > get a CVE and instead of ignoring it we decided to use "lmb" to=
+ try and
+> > > > > > make sure that we couldn't use "load" to overwrite U-Boot itsel=
+f, and
+> > > > > > that that's a pre-check. This still allows overwriting a previo=
+usly
+> > > > > > loaded file in memory.
+> > > > > >
+> > > > > > Overwriting something the user put in memory is part of the ABI=
+ and has
+> > > > > > some use cases.
+> > > > > >
+> > > > > > So for whatever future system we setup, a memory location can b=
+e:
+> > > > > > - Free.
+> > > > > > - Readable but not Writable.
+> > > > > > - Readable and Writable.
+> > > > > >
+> > > > > > Something like $loadaddr starts as Free. If someone then uses "=
+load" to
+> > > > > > bring in an OS image, it's now "Readable and Writable". But if =
+someone
+> > > > > > does an API call to ask for a new region memory, it wouldn't re=
+turn
+> > > > > > $loadaddr because it's not Free. On the other hand, $relocaddr =
+where
+> > > > > > U-Boot is, at least in terms of the API is that it's "Readable =
+but not
+> > > > > > Writable".
+> > > > > >
+> > > > > > Does that help?
+> > > >
+> > > > Thanks for sharing this with me. I have been working on a solution =
+for
+> > > > this issue [1], and plan to send a rfc series by the end of this we=
+ek.
+> > > > My primary motivation behind this work is to have some kind of
+> > > > synchronisation between the allocations done by the LMB module and =
+the
+> > > > EFI subsystem. As you are aware, the way things stand today, either=
+ of
+> > > > the two can make memory allocations overwriting any earlier allocat=
+ed
+> > > > memory. The primary reasons behind this is 1) the LMB allocations a=
 re
->           selected to boot.
+> > > > private to their respective callers, so the LMB memory map is not
+> > > > global and persistent, and 2) the EFI allocation routines do not ha=
+ve
+> > > > any view of the allocations that would have been made by the LMB
+> > > > module.
+> > > >
+> > > > To fix these issues, I am working on a solution which 1) makes LMB
+> > > > memory map persistent and global, and 2) have notifications between
+> > > > the two modules when either of the two has made any changes to it's
+> > > > memory map. This way, it would be possible to prohibit one module f=
+rom
+> > > > allocating memory which is in use.
+> > > >
+> > > > I am aware that we have a whole bunch of tests and user scripts whi=
+ch
+> > > > work with an assumption that the memory can be re-used. The solutio=
+n
+> > > > that I would be proposing takes care of this assumption. Hopefully =
+I
+> > > > should be in a position to send a rfc series this week. We can disc=
+uss
+> > > > on the patches. Thanks.
+> > >
+> > > I actually am not sure what we are on the same page here. I described
+> > > the problems in my original email but your series seems to solve
+> > > somewhat different problems, while IMO introducing a whole new class
+> > > of problems.
+> >
+> > Can you please describe in a little more detail what "whole new class
+> > of problems" are being introduced here. If there are problems being
+> > introduced, it is better if they are enumerated, so that I can try to
+> > fix them.
 >
-> +config BOOTMETH_ANDROID
-> +       bool "Bootdev support for Android"
-> +       depends on X86 || ARM || SANDBOX
-> +       select ANDROID_AB
-> +       select ANDROID_BOOT_IMAGE
-> +       select CMD_BCB
-> +       select PARTITION_TYPE_GUID
-> +       select PARTITION_UUIDS
-> +       help
-> +         Enables support for booting Android using bootdevs. Android req=
-uires
-> +         multiple partitions (misc, boot, vbmeta, ...) in storage for bo=
-oting.
-> +
-> +         Note that only MMC bootdevs are supported at present.
-> +
->  config BOOTMETH_CROS
->         bool "Bootdev support for Chromium OS"
->         depends on X86 || ARM || SANDBOX
-> diff --git a/boot/Makefile b/boot/Makefile
-> index 84ccfeaecec4..75d1cd46fabf 100644
-> --- a/boot/Makefile
-> +++ b/boot/Makefile
-> @@ -66,3 +66,5 @@ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_VBE_REQUEST) +=3D vbe_=
-request.o
->  obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_VBE_SIMPLE) +=3D vbe_simple.o
->  obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_VBE_SIMPLE_FW) +=3D vbe_simple_fw.o
->  obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_VBE_SIMPLE_OS) +=3D vbe_simple_os.o
-> +
-> +obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_ANDROID) +=3D bootmeth_android.o
-> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
-> new file mode 100644
-> index 000000000000..26d548d2fd6e
-> --- /dev/null
-> +++ b/boot/bootmeth_android.c
-> @@ -0,0 +1,522 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Bootmethod for Android
-> + *
-> + * Copyright (C) 2024 BayLibre, SAS
-> + * Written by Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> + */
-> +#define LOG_CATEGORY UCLASS_BOOTSTD
-> +
-> +#include <android_ab.h>
-> +#include <android_image.h>
-> +#if CONFIG_IS_ENABLED(AVB_VERIFY)
-> +#include <avb_verify.h>
-> +#endif
-> +#include <bcb.h>
-> +#include <blk.h>
-> +#include <bootflow.h>
-> +#include <bootm.h>
-> +#include <bootmeth.h>
-> +#include <dm.h>
-> +#include <image.h>
-> +#include <malloc.h>
-> +#include <mapmem.h>
-> +#include <part.h>
-> +#include "bootmeth_android.h"
-> +
-> +#define BCB_FIELD_COMMAND_SZ 32
-> +#define BCB_PART_NAME "misc"
-> +#define BOOT_PART_NAME "boot"
-> +#define VENDOR_BOOT_PART_NAME "vendor_boot"
-> +
-> +/**
-> + * struct android_priv - Private data
-> + *
-> + * This is read from the disk and recorded for use when the full Android
-> + * kernel must be loaded and booted
-> + */
-> +struct android_priv {
-> +       int boot_mode;
-> +       char slot[2];
-> +       u32 header_version;
-> +};
-> +
-> +static int android_check(struct udevice *dev, struct bootflow_iter *iter=
-)
-> +{
-> +       /* This only works on mmc devices */
-> +       if (bootflow_iter_check_mmc(iter))
-> +               return log_msg_ret("mmc", -ENOTSUPP);
-> +
-> +       /* This only works on whole devices, as multiple
-> +        * partitions are needed to boot Android
-> +        */
-Please use Linux kernel coding style for long comments [1].
-Same in all occurrences below
+> Please see my point immediately below:
+>
+> >
+> > >
+> > > Making LMB persistent and global is a solution looking for a problem,
+> > > IMO. Can we go up a level and figure out exactly what is broken here?
+> > > That is what I attempted to do in my original email. Perhaps you coul=
+d
+> > > reply to that and suggest where you agree / disagree?
+> >
+> > I have gone through this thread multiple times, and my understanding
+> > was that there was no conclusive agreement that was arrived at. I saw
+> > a reply from Tom where he broadly mentioned what kind of a solution he
+> > is looking for. I am not sure if you have gone through the
+> > cover-letter of my RFC series [1], which clearly states the problem my
+> > patch series is trying to fix. Like I said above, it would help if you
+> > can describe in a little more detail the kind of issues you see with
+> > the RFC series. Thanks.
+>
+> My request was for you to reply to the thread with any thoughts so we
+> can agree what to do about it. I believe my original email mostly
+> stands as a summary of where things are and what the problems are. If
+> it helps, I can update it based on the discussion above. It is
+> important to avoid over-complicating U-Boot.
+>
+> My fundamental expectation is that LMB reservations only apply for a
+> particular boot. They should not be global, nor need freeing, nor
+> should they be similar to memory allocations. We discussed it in this
+> thread.
 
-[1] https://www.kernel.org/doc/html/latest/process/coding-style.html#commen=
-ting
-> +       if (iter->part !=3D 0)
-> +               return log_msg_ret("mmc part", -ENOTSUPP);
-> +
-> +       return 0;
-> +}
-> +
-> +static int scan_boot_part(struct udevice *blk, struct android_priv *priv=
-)
-> +{
-> +       struct blk_desc *desc =3D dev_get_uclass_plat(blk);
-> +       struct disk_partition partition;
-> +       char partname[PART_NAME_LEN];
-> +       ulong num_blks, bufsz;
-> +       char *buf;
-> +       int ret;
-> +
-> +       sprintf(partname, BOOT_PART_NAME "_%s", priv->slot);
-> +       ret =3D part_get_info_by_name(desc, partname, &partition);
-> +       if (ret < 0)
-> +               return log_msg_ret("part info", ret);
-> +
-> +       num_blks =3D DIV_ROUND_UP(sizeof(struct andr_boot_img_hdr_v0), de=
-sc->blksz);
-> +       bufsz =3D num_blks * desc->blksz;
-> +       buf =3D malloc(bufsz);
-> +       if (!buf)
-> +               return log_msg_ret("buf", -ENOMEM);
-> +
-> +       ret =3D blk_read(blk, partition.start, num_blks, buf);
-> +       if (ret !=3D num_blks) {
-> +               free(buf);
-> +               return log_msg_ret("part read", -EIO);
-> +       }
-> +
-> +       if (!is_android_boot_image_header(buf)) {
-> +               free(buf);
-> +               return log_msg_ret("header", -ENOENT);
-> +       }
-> +
-> +       priv->header_version =3D android_image_get_version(buf);
-> +
-> +       return 0;
-Shouldn't we free(buf) also here?
+Please note that I have run the patches through CI, and they pass the
+CI run. There are numerous examples in the CI test scripts where the
+LMB memory is re-used, and these patches are not changing that
+behaviour in any which way. The only reason why the LMB memory needs
+to be persistent and global is because it needs to work cohesively
+with the EFI memory allocator.
 
-> +}
-> +
-> +static int scan_vendor_boot_part(struct udevice *blk, const char slot[2]=
-)
-> +{
-> +       struct blk_desc *desc =3D dev_get_uclass_plat(blk);
-> +       struct disk_partition partition;
-> +       char partname[PART_NAME_LEN];
-> +       ulong num_blks, bufsz;
-> +       char *buf;
-> +       int ret;
-> +
-> +       sprintf(partname, VENDOR_BOOT_PART_NAME "_%s", slot);
-> +       ret =3D part_get_info_by_name(desc, partname, &partition);
-> +       if (ret < 0)
-> +               return log_msg_ret("part info", ret);
-> +
-> +       num_blks =3D DIV_ROUND_UP(sizeof(struct andr_vnd_boot_img_hdr), d=
-esc->blksz);
-> +       bufsz =3D num_blks * desc->blksz;
-> +       buf =3D malloc(bufsz);
-> +       if (!buf)
-> +               return log_msg_ret("buf", -ENOMEM);
-> +
-> +       ret =3D blk_read(blk, partition.start, num_blks, buf);
-> +       if (ret !=3D num_blks) {
-> +               free(buf);
-> +               return log_msg_ret("part read", -EIO);
-> +       }
-> +
-> +       if (!is_android_vendor_boot_image_header(buf)) {
-> +               free(buf);
-> +               return log_msg_ret("header", -ENOENT);
-> +       }
-> +
-> +       return 0;
-free(buf)?
+At this point, I guess the EFI maintainers and Tom have to provide
+their input on how we go about this. But if we have to have EFI
+allocations live alongside LMB, the *only* other solution that I see
+is to then break up the memory into two sections, one for LMB and one
+for EFI. But then again, that introduces it's own set of issues, for
+e.g. a platform might not be able to use some memory region simply
+because it is allocated to the other subsystem. But I would let the
+maintainers chime in at this point. Thanks.
 
-> +}
-> +
-> +static int android_read_slot_from_bcb(struct bootflow *bflow, bool decre=
-ment)
-> +{
-> +       struct blk_desc *desc =3D dev_get_uclass_plat(bflow->blk);
-> +       struct android_priv *priv =3D bflow->bootmeth_priv;
-> +       struct disk_partition misc;
-> +       char slot_suffix[3];
-> +       int ret;
-> +
-> +       ret =3D part_get_info_by_name(desc, BCB_PART_NAME, &misc);
-> +       if (ret < 0)
-> +               return log_msg_ret("part", ret);
-> +
-> +       ret =3D ab_select_slot(desc, &misc, decrement);
-> +       if (ret < 0)
-> +               return log_msg_ret("slot", ret);
-> +
-> +       priv->slot[0] =3D BOOT_SLOT_NAME(ret);
-> +       priv->slot[1] =3D '\0';
-> +
-> +       sprintf(slot_suffix, "_%s", priv->slot);
-> +       ret =3D bootflow_cmdline_set_arg(bflow, "androidboot.slot_suffix"=
-,
-> +                                      slot_suffix, false);
-> +       if (ret < 0)
-> +               return log_msg_ret("slot", ret);
-> +
-> +       return 0;
-> +}
-> +
-> +static int configure_serialno(struct bootflow *bflow)
-> +{
-> +       char *serialno =3D env_get("serial#");
-> +
-> +       if (!serialno)
-> +               return log_msg_ret("serial", -ENOENT);
-> +
-> +       return bootflow_cmdline_set_arg(bflow, "androidboot.serialno", se=
-rialno, false);
-> +}
-> +
-> +static int android_read_bootflow(struct udevice *dev, struct bootflow *b=
-flow)
-> +{
-> +       struct blk_desc *desc =3D dev_get_uclass_plat(bflow->blk);
-> +       struct disk_partition misc;
-> +       struct android_priv *priv;
-> +       char command[BCB_FIELD_COMMAND_SZ];
-> +       int ret;
-> +
-> +       bflow->state =3D BOOTFLOWST_MEDIA;
-> +
-> +       /* bcb_find_partition_and_load() will print errors to stdout
-> +        * if BCB_PART_NAME is not found. To avoid that, check if the
-> +        * partition exists first.
-> +        */
-> +       ret =3D part_get_info_by_name(desc, BCB_PART_NAME, &misc);
-> +       if (ret < 0)
-> +               return log_msg_ret("part", ret);
-> +
-> +       ret =3D bcb_find_partition_and_load("mmc", desc->devnum, BCB_PART=
-_NAME);
-> +       if (ret < 0)
-> +               return log_msg_ret("bcb load", ret);
-> +
-> +       ret =3D bcb_get(BCB_FIELD_COMMAND, command, sizeof(command));
-> +       if (ret < 0)
-> +               return log_msg_ret("bcb read", ret);
-> +
-> +       priv =3D malloc(sizeof(struct android_priv));
-> +       if (!priv)
-> +               return log_msg_ret("buf", -ENOMEM);
-> +
-> +       bflow->bootmeth_priv =3D priv;
-Probably we should do that just before successfully returning from the func=
-tion,
-otherwise we will end up with a dangling pointer.
+-sughosh
 
-> +       if (!strcmp("bootonce-bootloader", command)) {
-> +               priv->boot_mode =3D ANDROID_BOOT_MODE_BOOTLOADER;
-> +               bflow->os_name =3D strdup("Android (bootloader)");
-> +       } else if (!strcmp("boot-fastboot", command)) {
-> +               priv->boot_mode =3D ANDROID_BOOT_MODE_RECOVERY;
-> +               bflow->os_name =3D strdup("Android (fastbootd)");
-> +       } else if (!strcmp("boot-recovery", command)) {
-> +               priv->boot_mode =3D ANDROID_BOOT_MODE_RECOVERY;
-> +               bflow->os_name =3D strdup("Android (recovery)");
-> +       } else {
-> +               priv->boot_mode =3D ANDROID_BOOT_MODE_NORMAL;
-> +               bflow->os_name =3D strdup("Android");
-> +       }
-> +       if (!bflow->os_name)
-> +               return log_msg_ret("os", -ENOMEM);
-> +
-> +       if (priv->boot_mode =3D=3D ANDROID_BOOT_MODE_BOOTLOADER) {
-> +               /* Clear BCB */
-> +               memset(command, 0, sizeof(command));
-> +               ret =3D bcb_set(BCB_FIELD_COMMAND, command);
-> +               if (ret < 0) {
-> +                       free(priv);
-> +                       return log_msg_ret("bcb set", ret);
-> +               }
-> +               ret =3D bcb_store();
-> +               if (ret < 0) {
-> +                       free(priv);
-
-> +                       return log_msg_ret("bcb store", ret);
-> +               }
-> +
-is free(bflow->bootmeth_priv) handled in functions that call
-android_read_bootflow() ?
-
-> +               bflow->state =3D BOOTFLOWST_READY;
-> +               return 0;
-> +       }
-> +
-> +       /* For recovery and normal boot, we need to scan the partitions *=
-/
-> +       ret =3D android_read_slot_from_bcb(bflow, false);
-> +       if (ret < 0) {
-> +               free(priv);
-> +               return log_msg_ret("read slot", ret);
-> +       }
-> +
-> +       ret =3D scan_boot_part(bflow->blk, priv);
-> +       if (ret < 0) {
-> +               printf("- scan boot failed: err=3D%d\n", ret);
-> +               free(priv);
-> +               return log_msg_ret("scan boot", ret);
-> +       }
-> +
-> +       if (priv->header_version !=3D 4) {
-> +               printf("- Only boot.img v4 is supported\n");
-> +               free(priv);
-> +               return log_msg_ret("version", -EINVAL);
-> +       }
-> +
-> +       ret =3D scan_vendor_boot_part(bflow->blk, priv->slot);
-> +       if (ret < 0) {
-> +               printf("- scan vendor_boot failed: err=3D%d\n", ret);
-> +               free(priv);
-> +               return log_msg_ret("scan vendor_boot", ret);
-> +       }
-> +
-> +       /* Ignoring return code: setting serial number is not mandatory f=
-or booting */
-> +       configure_serialno(bflow);
-> +
-> +       if (priv->boot_mode =3D=3D ANDROID_BOOT_MODE_NORMAL) {
-> +               ret =3D bootflow_cmdline_set_arg(bflow, "androidboot.forc=
-e_normal_boot", "1", false);
-> +               if (ret < 0) {
-> +                       free(priv);
-> +                       return log_msg_ret("normal_boot", ret);
-> +               }
-> +       }
-> +
-> +       bflow->state =3D BOOTFLOWST_READY;
-> +
-> +       return 0;
-> +}
-> +
-> +static int android_read_file(struct udevice *dev, struct bootflow *bflow=
-,
-> +                            const char *file_path, ulong addr, ulong *si=
-zep)
-> +{
-> +       /* Reading individual files is not supported since we only
-> +        * operate on whole mmc devices (because we require multiple part=
-itions)
-> +        */
-> +       return log_msg_ret("Unsupported", -ENOSYS);
-> +}
-> +
-> +static int read_slotted_partition(struct blk_desc *desc, const char *con=
-st name,
-> +                                 const char slot[2], ulong addr)
-> +{
-> +       struct disk_partition partition;
-> +       char partname[PART_NAME_LEN];
-> +       int ret;
-> +       u32 n;
-> +
-> +       /* Ensure name fits in partname it should be: <name>_<slot>\0 */
-> +       if (strlen(name) > (PART_NAME_LEN - 2 - 1))
-> +               return log_msg_ret("name too long", -EINVAL);
-> +
-> +       sprintf(partname, "%s_%s", name, slot);
-> +       ret =3D part_get_info_by_name(desc, partname, &partition);
-> +       if (ret < 0)
-> +               return log_msg_ret("part", ret);
-> +
-> +       n =3D blk_dread(desc, partition.start, partition.size, map_sysmem=
-(addr, 0));
-> +       if (n < partition.size)
-> +               return log_msg_ret("part read", -EIO);
-> +
-> +       return 0;
-> +}
-> +
-> +#if CONFIG_IS_ENABLED(AVB_VERIFY)
-> +static int avb_append_commandline_arg(struct bootflow *bflow, char *arg)
-> +{
-> +       char *key =3D strsep(&arg, "=3D");
-> +       char *value =3D arg;
-> +       int ret;
-> +
-> +       ret =3D bootflow_cmdline_set_arg(bflow, key, value, false);
-> +       if (ret < 0)
-> +               return log_msg_ret("avb cmdline", ret);
-> +
-> +       return 0;
-> +}
-> +
-> +static int avb_append_commandline(struct bootflow *bflow, char *cmdline)
-> +{
-> +       char *arg =3D strsep(&cmdline, " ");
-> +       int ret;
-> +
-> +       while (arg) {
-> +               ret =3D avb_append_commandline_arg(bflow, arg);
-> +               if (ret < 0)
-> +                       return ret;
-> +
-> +               arg =3D strsep(&cmdline, " ");
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +static int run_avb_verification(struct bootflow *bflow)
-> +{
-> +       struct blk_desc *desc =3D dev_get_uclass_plat(bflow->blk);
-> +       struct android_priv *priv =3D bflow->bootmeth_priv;
-> +       const char * const requested_partitions[] =3D {"boot", "vendor_bo=
-ot"};
-> +       struct AvbOps *avb_ops;
-> +       AvbSlotVerifyResult result;
-> +       AvbSlotVerifyData *out_data;
-> +       enum avb_boot_state boot_state;
-> +       char *extra_args;
-> +       char slot_suffix[3];
-> +       bool unlocked =3D false;
-> +       int ret;
-> +
-> +       avb_ops =3D avb_ops_alloc(desc->devnum);
-> +       if (!avb_ops)
-> +               return log_msg_ret("avb ops", -ENOMEM);.
-> +
-> +       sprintf(slot_suffix, "_%s", priv->slot);
-> +
-> +       ret =3D avb_ops->read_is_device_unlocked(avb_ops, &unlocked);
-> +       if (ret !=3D AVB_IO_RESULT_OK)
-> +               return log_msg_ret("avb lock", -EIO);
-> +
-> +       result =3D avb_slot_verify(avb_ops,
-> +                                requested_partitions,
-> +                                slot_suffix,
-> +                                unlocked,
-> +                                AVB_HASHTREE_ERROR_MODE_RESTART_AND_INVA=
-LIDATE,
-> +                                &out_data);
-> +
-> +       if (result !=3D AVB_SLOT_VERIFY_RESULT_OK) {
-> +               printf("Verification failed, reason: %s\n",
-> +                      str_avb_slot_error(result));
-avb_ops_free(avb_ops) ?
-> +               return log_msg_ret("avb verify", -EIO);
-> +       }
-> +
-> +       if (unlocked)
-> +               boot_state =3D AVB_ORANGE;
-> +       else
-> +               boot_state =3D AVB_GREEN;
-> +
-> +       extra_args =3D avb_set_state(avb_ops, boot_state);
-> +       if (extra_args) {
-> +               ret =3D avb_append_commandline_arg(bflow, extra_args);
-> +               if (ret < 0)
-> +                       goto free_out_data;
-> +       }
-> +
-> +       ret =3D avb_append_commandline(bflow, out_data->cmdline);
-> +       if (ret < 0)
-> +               goto free_out_data;
-> +
-> +       return 0;
-> +
-> + free_out_data:
-> +       if (out_data)
-> +               avb_slot_verify_data_free(out_data);
-> +
-> +       return log_msg_ret("avb cmdline", ret);
-> +}
-> +#else
-> +static int run_avb_verification(struct bootflow *bflow)
-> +{
-> +       int ret;
-> +
-> +       /* When AVB is unsupported, pass ORANGE state  */
-> +       ret =3D bootflow_cmdline_set_arg(bflow,
-> +                                      "androidboot.verifiedbootstate",
-> +                                      "orange", false);
-> +       if (ret < 0)
-> +               return log_msg_ret("avb cmdline", ret);
-> +
-> +       return 0;
-> +}
-> +#endif /* AVB_VERIFY */
-> +
-> +static int boot_android_normal(struct bootflow *bflow)
-> +{
-> +       struct blk_desc *desc =3D dev_get_uclass_plat(bflow->blk);
-> +       struct android_priv *priv =3D bflow->bootmeth_priv;
-> +       int ret;
-> +
-> +       ulong loadaddr =3D env_get_hex("loadaddr", 0);
-> +       ulong vloadaddr =3D env_get_hex("vendor_boot_comp_addr_r", 0);
-> +
-> +       ret =3D run_avb_verification(bflow);
-> +       if (ret < 0)
-> +               return log_msg_ret("avb", ret);
-> +
-> +       /* Read slot once more to decrement counter from BCB */
-> +       ret =3D android_read_slot_from_bcb(bflow, true);
-> +       if (ret < 0)
-> +               return log_msg_ret("read slot", ret);
-> +
-> +       ret =3D read_slotted_partition(desc, "boot", priv->slot, loadaddr=
-);
-> +       if (ret < 0)
-> +               return log_msg_ret("read boot", ret);
-> +
-> +       ret =3D read_slotted_partition(desc, "vendor_boot", priv->slot, v=
-loadaddr);
-> +       if (ret < 0)
-> +               return log_msg_ret("read vendor_boot", ret);
-> +
-> +       set_abootimg_addr(loadaddr);
-> +       set_avendor_bootimg_addr(vloadaddr);
-> +
-> +       ret =3D bootm_boot_start(loadaddr, bflow->cmdline);
-> +
-> +       return log_msg_ret("boot", ret);
-> +}
-> +
-> +static int boot_android_recovery(struct bootflow *bflow)
-> +{
-> +       int ret;
-> +
-> +       ret =3D boot_android_normal(bflow);
-> +
-> +       return log_msg_ret("boot", ret);
-> +}
-> +
-> +static int boot_android_bootloader(struct bootflow *bflow)
-> +{
-> +       int ret;
-> +
-> +       ret =3D run_command("fastboot usb 0", 0);
-select CMD_FASTBOOT in Kconfig (config BOOTMETH_ANDROID)?
-> +       do_reset(NULL, 0, 0, NULL);
-> +
-> +       return log_msg_ret("boot", ret);
-> +}
-> +
-> +static int android_boot(struct udevice *dev, struct bootflow *bflow)
-> +{
-> +       struct android_priv *priv =3D bflow->bootmeth_priv;
-> +       int ret;
-> +
-> +       switch (priv->boot_mode) {
-> +       case ANDROID_BOOT_MODE_NORMAL:
-> +               ret =3D boot_android_normal(bflow);
-> +               break;
-> +       case ANDROID_BOOT_MODE_RECOVERY:
-> +               ret =3D boot_android_recovery(bflow);
-> +               break;
-> +       case ANDROID_BOOT_MODE_BOOTLOADER:
-> +               ret =3D boot_android_bootloader(bflow);
-> +               break;
-> +       default:
-> +               printf("ANDROID: Unknown boot mode %d. Running fastboot..=
-.\n",
-> +                      priv->boot_mode);
-> +               boot_android_bootloader(bflow);
-> +               /* Tell we failed to boot since boot mode is unknown */
-> +               ret =3D -EFAULT;
-> +       }
-> +
-> +       return ret;
-> +}
-> +
-> +static int android_bootmeth_bind(struct udevice *dev)
-> +{
-> +       struct bootmeth_uc_plat *plat =3D dev_get_uclass_plat(dev);
-> +
-> +       plat->desc =3D "Android boot";
-> +       plat->flags =3D BOOTMETHF_ANY_PART;
-> +
-> +       return 0;
-> +}
-> +
-> +static struct bootmeth_ops android_bootmeth_ops =3D {
-> +       .check          =3D android_check,
-> +       .read_bootflow  =3D android_read_bootflow,
-> +       .read_file      =3D android_read_file,
-> +       .boot           =3D android_boot,
-> +};
-> +
-> +static const struct udevice_id android_bootmeth_ids[] =3D {
-> +       { .compatible =3D "u-boot,android" },
-> +       { }
-> +};
-> +
-> +U_BOOT_DRIVER(bootmeth_android) =3D {
-> +       .name           =3D "bootmeth_android",
-> +       .id             =3D UCLASS_BOOTMETH,
-> +       .of_match       =3D android_bootmeth_ids,
-> +       .ops            =3D &android_bootmeth_ops,
-> +       .bind           =3D android_bootmeth_bind,
-> +};
-> diff --git a/boot/bootmeth_android.h b/boot/bootmeth_android.h
-> new file mode 100644
-> index 000000000000..411c2f2d15e7
-> --- /dev/null
-> +++ b/boot/bootmeth_android.h
-> @@ -0,0 +1,27 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Bootmethod for Android
-> + *
-> + * Copyright (C) 2024 BayLibre, SAS
-> + * Written by Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> + */
-> +
-> +enum android_boot_mode {
-> +       ANDROID_BOOT_MODE_NORMAL =3D 0,
-> +
-> +       /* Android "recovery" is a special boot mode that uses another ra=
-mdisk.
-> +        * It can be used to "factory reset" a board or to flash logical =
-partitions
-> +        * It operates in 2 modes: adb or fastbootd
-> +        * To enter recovery from Android, we can do:
-> +        * $ adb reboot recovery
-> +        * $ adb reboot fastboot
-> +        */
-> +       ANDROID_BOOT_MODE_RECOVERY,
-> +
-> +       /* Android "bootloader" is for accessing/reflashing physical part=
-itions
-> +        * Typically, this will launch a fastboot process in U-Boot.
-> +        * To enter "bootloader" from Android, we can do:
-> +        * $ adb reboot bootloader
-> +        */
-> +       ANDROID_BOOT_MODE_BOOTLOADER,
-> +};
-> diff --git a/doc/develop/bootstd.rst b/doc/develop/bootstd.rst
-> index a07a72581e7a..709fa9e64ff3 100644
-> --- a/doc/develop/bootstd.rst
-> +++ b/doc/develop/bootstd.rst
-> @@ -95,6 +95,7 @@ bootflows.
 >
->  Note: it is possible to have a bootmeth that uses a partition or a whole=
- device
->  directly, but it is more common to use a filesystem.
-> +For example, the Android bootmeth uses a whole device.
->
->  Note that some bootmeths are 'global', meaning that they select the boot=
-dev
->  themselves. Examples include VBE and EFI boot manager. In this case, the=
-y
-> @@ -277,6 +278,9 @@ script_offset_f
->  script_size_f
->      Size of the script to load, e.g. 0x2000
->
-> +vendor_boot_comp_addr_r
-> +    Address to which to load the vendor_boot Android image, e.g. 0xe0000=
-000
-> +
->  Some variables are set by script bootmeth:
->
->  devtype
-> @@ -418,6 +422,7 @@ Bootmeth drivers are provided for:
->     - EFI boot using bootefi from disk
->     - VBE
->     - EFI boot using boot manager
-> +   - Android bootflow (boot image v4)
->
->
->  Command interface
-> @@ -786,6 +791,7 @@ To do
->  Some things that need to be done to completely replace the distro-boot s=
-cripts:
->
->  - implement extensions (devicetree overlays with add-on boards)
-> +- implement legacy (boot image v2) android boot flow
->
->  Other ideas:
->
->
-> --
-> 2.45.0
->
-
-Some comments after a quick "scan". Will take a more detailed look a
-bit later today/tomorrow.
---=20
-Best regards - Atentamente - Meilleures salutations
-
-Igor Opaniuk
-
-mailto: igor.opaniuk@gmail.com
-skype: igor.opanyuk
-https://www.linkedin.com/in/iopaniuk
+> Regards,
+> Simon
