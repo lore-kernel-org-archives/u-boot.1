@@ -4,88 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 463B9C27C53
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 01:19:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43A35C27C5E
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 06:22:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4FAB588585;
-	Mon, 10 Jun 2024 03:13:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 51E84882DF;
+	Mon, 10 Jun 2024 08:22:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WBFkq0Tj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mV3IiQrj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3F4A8857A; Mon, 10 Jun 2024 03:13:01 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id 110A48826E; Mon, 10 Jun 2024 08:22:45 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5ACC988581
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 03:12:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B19E882DF
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 08:22:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-6f9a4f9923aso350234a34.0
- for <u-boot@lists.denx.de>; Sun, 09 Jun 2024 18:12:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5751bcb3139so4819090a12.1
+ for <u-boot@lists.denx.de>; Sun, 09 Jun 2024 23:22:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1717981975; x=1718586775; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pqkE2BmuwICkL3yAL/WT/Aadg7mmPS2fm9a4jxxx2l0=;
- b=WBFkq0TjJusqHMk3FQ9PIhyhMuhEDX5ebRrkzYpmm0Hdc1fhFdE/4T8IXgqb/htkXG
- OJSZfrQXmqna9axdMenqAON6PbAS5PhA57eNIu0O6RQbjWiZZ8Gb7IPPx+8/J9wM+vOy
- SOzuHFHc8ao+kR35Jmc2C36sUIJd3XzLCleoPr5Rw0HTuDsNSIYbW+6NM0eJIm6j20BE
- q8Tvt4jo6Nz95zf8OFK4aNaH5/osTUa3YAjVILQbWO9b+lqGd9asbhjtSNOHBoIs+aj2
- vlTP3I/92WV3BuroPj3rycAcG+CtcoM/Jh3avC0SiyVULidbKhl9x03UjcQku0WIXLwz
- bxhg==
+ d=linaro.org; s=google; t=1718000561; x=1718605361; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=IvO/WrW2qYeRbU6LYQqHaCaF4o8teEsGq9sC6CcQ9ao=;
+ b=mV3IiQrj2AaoFrQ20Y0VD8HAeu5UYW3AgbCkL79fkqKNn+2xpjuAY65htWPKPn0CBc
+ GzJW88sgJl8H+kBeiwFEKsGPqtRkHp6GLFIt0phRsAGBs6VkG7TiTowypS0MFZ/kdKFH
+ kAFkdk0PWXXwU3qh6XhLjkt5agePRcj+tZeS1fbhLxaghW+6oQofucmXrRS2ovd4bpXp
+ 94Bqn9xuL+YXb2QU4LrjT+3ZK/3/EoaWsTan304gHe/VLIGdJI1PcWHT1QWEDfNDpZHi
+ fXop6xZjaV02hXxAaoPL8odA2Zcz9aE80YWAOwb+tItjUAgVyWIuPf1ZxdL0Jzgm7YaM
+ nOoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717981975; x=1718586775;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=pqkE2BmuwICkL3yAL/WT/Aadg7mmPS2fm9a4jxxx2l0=;
- b=ghe336GTGOwwQjp1r28FCWKM3ZOtYE0rSzqIDvhNVTGv9+FiqFiGPzrS5exoyBvRzO
- G0vsk4wp0iV1mfMSpwIXGnkvUiBBk7RVIFZqdLDxw9sv5isbApgoCVMjWA4mDNTd75TX
- Xh4c3IPHpL2VZgjvClIxWJa5VVqfaxFszJ94XzNXkKiYbIa6fuex7pzFw8g9zmiT3482
- SOuWMGQ9oNR3IiEHBKoed6U3mLywVynzSzpshZMEEB9kBZMW1cMGMGYuW0DWTQ8L4tF0
- 2tSZkXeTee026BojTpT0YLbIcFz+YKIFEN1NQ3X75OHsn4HsheK/iXcWNj2ANmF20x0J
- xIRQ==
+ d=1e100.net; s=20230601; t=1718000561; x=1718605361;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=IvO/WrW2qYeRbU6LYQqHaCaF4o8teEsGq9sC6CcQ9ao=;
+ b=DEFjB97OqLiQy7iecctGRPvmvuq2hEW6/sOlDQyCURADfjSBoQyvKHAQW1QytqHUpO
+ t95eOeCLwmTDEPrlFlXN8BMAW7arSzGddz718QJN11sLsTUVzWS85pz0H3MNsvbtcHWc
+ j3ke/khGy5zzRFPvFgywAXXHSNf7i1m7mRLVilsJRrFgE6aGIBow/5ccOC57RngR8cni
+ +XFTCYuSo/qkjRO7AKH/uXBbAj3C763L9mBruv+ZRdMw1AOD80HwLE6HzqU/wJ3jL99A
+ KoO2/YM+XTyUbvRw4peY2f8/sL2jHsGltV5TuvgPa1OMovE30MW1uCTYPUpWR0BHBQrE
+ Bdzg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVs2PJCTvTdzFGKmwDgzdu0mDqw7hZJxGObDGJ85GqNvvR5d1tol4eDg0YKGEINxX5Xxn3yS0puUJfLlHmcbTx1+LBwow==
-X-Gm-Message-State: AOJu0YyrB0mbs8d5A4jw5Niu5K0vxNU0a79s2PQzi0d0mPp/uiLH5F8t
- O271owfwWjpp4EhJyNn5Tyo8BmOSvetHjCq5HNyv4Vge6L/kbj88LyiHBn4zwOc=
-X-Google-Smtp-Source: AGHT+IGhg2FTv/XgIJ0rF563YyNQrbx31YtYW8b+BkmBwLlfyyMqlFK30ypRjVqM7yFZsd7j6wUttw==
-X-Received: by 2002:a05:6830:12cb:b0:6f9:c7f6:8fd0 with SMTP id
- 46e09a7af769-6f9c805d3d0mr505444a34.4.1717981974876; 
- Sun, 09 Jun 2024 18:12:54 -0700 (PDT)
-Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-6f988a89d3esm616939a34.0.2024.06.09.18.12.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Jun 2024 18:12:54 -0700 (PDT)
-From: Sam Protsenko <semen.protsenko@linaro.org>
-To: Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Simon Glass <sjg@chromium.org>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
- Peter Robinson <pbrobinson@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Yang Xiwen <forbidden405@outlook.com>,
- Ferass El Hafidi <vitali64pmemail@protonmail.com>,
- Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
- uboot-snps-arc@synopsys.com
-Subject: [PATCH v2 39/40] configs: e850-96: Enable MMC
-Date: Sun,  9 Jun 2024 20:12:25 -0500
-Message-Id: <20240610011226.4050-40-semen.protsenko@linaro.org>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240610011226.4050-1-semen.protsenko@linaro.org>
-References: <20240610011226.4050-1-semen.protsenko@linaro.org>
+ AJvYcCVA0OMkSxt+9zE7aGiTNPn7adeSnyECp/7guNeao/USGyfMHn01DHroY7sXEl981tK2WjLjMdVAdXi6a2RJBU2l85Anig==
+X-Gm-Message-State: AOJu0Yx+kGsngAh1jcGozn4loMqXJAbleTMGc3QkC3Lda60Zv1l2IJg8
+ iiwfcMAc+ymoVOfBs0T3BZcCZP0jSg2EQfAqPNIhcpa/YKBGsJA3aZ5eyHCzTnhPXiuJ3Q8Anax
+ hzQr0+t1zEmX4ZN/WoQ9w78l8fpoPmRal4kXb8g==
+X-Google-Smtp-Source: AGHT+IFnOyhh4CxMX7tsq07ZwSsrQFEG3ViAmlvxEFsEicgxlEoOIiJJH9FEPChNGc+vSHjvzvMD9TvM51cw9P/0g0A=
+X-Received: by 2002:a50:a45a:0:b0:57c:8bdd:2d92 with SMTP id
+ 4fb4d7f45d1cf-57c8bdd2df8mr183192a12.10.1718000560853; Sun, 09 Jun 2024
+ 23:22:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
+ <20240607185240.1892031-27-sughosh.ganu@linaro.org>
+ <6098d0ed-f641-483a-8cf7-6711e2ab663d@gmx.de>
+In-Reply-To: <6098d0ed-f641-483a-8cf7-6711e2ab663d@gmx.de>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Mon, 10 Jun 2024 11:52:29 +0530
+Message-ID: <CADg8p95pEc=R-AYS-Ghe23nwZC3k=+4zeh4Vjdrv9RVUB6dKqw@mail.gmail.com>
+Subject: Re: [RFC PATCH 26/31] test: lmb: run lmb tests only manually
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,40 +93,219 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable MMC subsystem and DW MMC driver support to make eMMC functional.
-Also enable a couple of related commands so the user can make use of
-eMMC from U-Boot shell.
+On Sat, 8 Jun 2024 at 10:09, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 6/7/24 20:52, Sughosh Ganu wrote:
+> > The LMB code has been changed so that the memory reservations and
+> > allocations are now persistent and global. With this change, the
+> > design of the LMB tests needs to be changed accordingly. For now, mark
+> > the LMB tests to be run only manually. The tests won't be run as part
+> > of the unit test suite, and thus would not interfere with the running
+> > of the rest of the tests.
+>
+> We should run important tests in the CI.
+>
+> You could trigger the 'manual' test from a Python test and reboot the
+> system to get into an initial state.
 
-Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
----
- configs/e850-96_defconfig | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
+Yes, that is one of the solutions that I have in mind. Will work on
+this for the next version. Thanks.
 
-diff --git a/configs/e850-96_defconfig b/configs/e850-96_defconfig
-index 38b9968c1671..29ad31d5f8ed 100644
---- a/configs/e850-96_defconfig
-+++ b/configs/e850-96_defconfig
-@@ -9,11 +9,19 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xf8c00000
- CONFIG_DEFAULT_DEVICE_TREE="exynos/exynos850-e850-96"
- CONFIG_SYS_LOAD_ADDR=0x80000000
-+CONFIG_ANDROID_BOOT_IMAGE=y
- # CONFIG_AUTOBOOT is not set
- # CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_HUSH_PARSER=y
-+CONFIG_CMD_ABOOTIMG=y
-+CONFIG_CMD_CLK=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PART=y
-+CONFIG_CMD_TIME=y
- # CONFIG_NET is not set
- CONFIG_CLK_EXYNOS850=y
--# CONFIG_MMC is not set
-+CONFIG_MMC_DW=y
- CONFIG_SOC_SAMSUNG=y
- CONFIG_EXYNOS_PMU=y
- CONFIG_EXYNOS_USI=y
--- 
-2.39.2
+-sughosh
 
+>
+> Best regards
+>
+> Heinrich
+>
+> >
+> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > ---
+> >   test/lib/lmb.c | 49 ++++++++++++++++++++++++-------------------------
+> >   1 file changed, 24 insertions(+), 25 deletions(-)
+> >
+> > diff --git a/test/lib/lmb.c b/test/lib/lmb.c
+> > index 67a6be5bc3..813f7e3100 100644
+> > --- a/test/lib/lmb.c
+> > +++ b/test/lib/lmb.c
+> > @@ -195,7 +195,7 @@ static int test_multi_alloc_512mb_x2(struct unit_test_state *uts,
+> >   }
+> >
+> >   /* Create a memory region with one reserved region and allocate */
+> > -static int lib_test_lmb_simple(struct unit_test_state *uts)
+> > +static int lib_test_lmb_simple_norun(struct unit_test_state *uts)
+> >   {
+> >       int ret;
+> >
+> > @@ -207,10 +207,10 @@ static int lib_test_lmb_simple(struct unit_test_state *uts)
+> >       /* simulate 512 MiB RAM beginning at 1.5GiB */
+> >       return test_multi_alloc_512mb(uts, 0xE0000000);
+> >   }
+> > -LIB_TEST(lib_test_lmb_simple, 0);
+> > +LIB_TEST(lib_test_lmb_simple_norun, UT_TESTF_MANUAL);
+> >
+> >   /* Create two memory regions with one reserved region and allocate */
+> > -static int lib_test_lmb_simple_x2(struct unit_test_state *uts)
+> > +static int lib_test_lmb_simple_x2_norun(struct unit_test_state *uts)
+> >   {
+> >       int ret;
+> >
+> > @@ -222,7 +222,7 @@ static int lib_test_lmb_simple_x2(struct unit_test_state *uts)
+> >       /* simulate 512 MiB RAM beginning at 3.5GiB and 1 GiB */
+> >       return test_multi_alloc_512mb_x2(uts, 0xE0000000, 0x40000000);
+> >   }
+> > -LIB_TEST(lib_test_lmb_simple_x2, 0);
+> > +LIB_TEST(lib_test_lmb_simple_x2_norun, UT_TESTF_MANUAL);
+> >
+> >   /* Simulate 512 MiB RAM, allocate some blocks that fit/don't fit */
+> >   static int test_bigblock(struct unit_test_state *uts, const phys_addr_t ram)
+> > @@ -275,7 +275,7 @@ static int test_bigblock(struct unit_test_state *uts, const phys_addr_t ram)
+> >       return 0;
+> >   }
+> >
+> > -static int lib_test_lmb_big(struct unit_test_state *uts)
+> > +static int lib_test_lmb_big_norun(struct unit_test_state *uts)
+> >   {
+> >       int ret;
+> >
+> > @@ -287,7 +287,7 @@ static int lib_test_lmb_big(struct unit_test_state *uts)
+> >       /* simulate 512 MiB RAM beginning at 1.5GiB */
+> >       return test_bigblock(uts, 0xE0000000);
+> >   }
+> > -LIB_TEST(lib_test_lmb_big, 0);
+> > +LIB_TEST(lib_test_lmb_big_norun, UT_TESTF_MANUAL);
+> >
+> >   /* Simulate 512 MiB RAM, allocate a block without previous reservation */
+> >   static int test_noreserved(struct unit_test_state *uts, const phys_addr_t ram,
+> > @@ -348,7 +348,7 @@ static int test_noreserved(struct unit_test_state *uts, const phys_addr_t ram,
+> >       return 0;
+> >   }
+> >
+> > -static int lib_test_lmb_noreserved(struct unit_test_state *uts)
+> > +static int lib_test_lmb_noreserved_norun(struct unit_test_state *uts)
+> >   {
+> >       int ret;
+> >
+> > @@ -360,10 +360,9 @@ static int lib_test_lmb_noreserved(struct unit_test_state *uts)
+> >       /* simulate 512 MiB RAM beginning at 1.5GiB */
+> >       return test_noreserved(uts, 0xE0000000, 4, 1);
+> >   }
+> > +LIB_TEST(lib_test_lmb_noreserved_norun, UT_TESTF_MANUAL);
+> >
+> > -LIB_TEST(lib_test_lmb_noreserved, 0);
+> > -
+> > -static int lib_test_lmb_unaligned_size(struct unit_test_state *uts)
+> > +static int lib_test_lmb_unaligned_size_norun(struct unit_test_state *uts)
+> >   {
+> >       int ret;
+> >
+> > @@ -375,13 +374,13 @@ static int lib_test_lmb_unaligned_size(struct unit_test_state *uts)
+> >       /* simulate 512 MiB RAM beginning at 1.5GiB */
+> >       return test_noreserved(uts, 0xE0000000, 5, 8);
+> >   }
+> > -LIB_TEST(lib_test_lmb_unaligned_size, 0);
+> > +LIB_TEST(lib_test_lmb_unaligned_size_norun, UT_TESTF_MANUAL);
+> >
+> >   /*
+> >    * Simulate a RAM that starts at 0 and allocate down to address 0, which must
+> >    * fail as '0' means failure for the lmb_alloc functions.
+> >    */
+> > -static int lib_test_lmb_at_0(struct unit_test_state *uts)
+> > +static int lib_test_lmb_at_0_norun(struct unit_test_state *uts)
+> >   {
+> >       const phys_addr_t ram = 0;
+> >       const phys_size_t ram_size = 0x20000000;
+> > @@ -417,9 +416,9 @@ static int lib_test_lmb_at_0(struct unit_test_state *uts)
+> >
+> >       return 0;
+> >   }
+> > -LIB_TEST(lib_test_lmb_at_0, 0);
+> > +LIB_TEST(lib_test_lmb_at_0_norun, UT_TESTF_MANUAL);
+> >
+> > -static int lib_test_lmb_overlapping_add(struct unit_test_state *uts)
+> > +static int lib_test_lmb_overlapping_add_norun(struct unit_test_state *uts)
+> >   {
+> >       const phys_addr_t ram = 0x40000000;
+> >       const phys_size_t ram_size = 0x20000000;
+> > @@ -433,10 +432,10 @@ static int lib_test_lmb_overlapping_add(struct unit_test_state *uts)
+> >
+> >       return 0;
+> >   }
+> > -LIB_TEST(lib_test_lmb_overlapping_add, 0);
+> > +LIB_TEST(lib_test_lmb_overlapping_add_norun, UT_TESTF_MANUAL);
+> >
+> >   /* Check that calling lmb_reserve with overlapping regions fails. */
+> > -static int lib_test_lmb_overlapping_reserve(struct unit_test_state *uts)
+> > +static int lib_test_lmb_overlapping_reserve_norun(struct unit_test_state *uts)
+> >   {
+> >       const phys_addr_t ram = 0x40000000;
+> >       const phys_size_t ram_size = 0x20000000;
+> > @@ -480,7 +479,7 @@ static int lib_test_lmb_overlapping_reserve(struct unit_test_state *uts)
+> >                  0, 0, 0, 0);
+> >       return 0;
+> >   }
+> > -LIB_TEST(lib_test_lmb_overlapping_reserve, 0);
+> > +LIB_TEST(lib_test_lmb_overlapping_reserve_norun, UT_TESTF_MANUAL);
+> >
+> >   /*
+> >    * Simulate 512 MiB RAM, reserve 3 blocks, allocate addresses in between.
+> > @@ -596,7 +595,7 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
+> >       return 0;
+> >   }
+> >
+> > -static int lib_test_lmb_alloc_addr(struct unit_test_state *uts)
+> > +static int lib_test_lmb_alloc_addr_norun(struct unit_test_state *uts)
+> >   {
+> >       int ret;
+> >
+> > @@ -608,7 +607,7 @@ static int lib_test_lmb_alloc_addr(struct unit_test_state *uts)
+> >       /* simulate 512 MiB RAM beginning at 1.5GiB */
+> >       return test_alloc_addr(uts, 0xE0000000);
+> >   }
+> > -LIB_TEST(lib_test_lmb_alloc_addr, 0);
+> > +LIB_TEST(lib_test_lmb_alloc_addr_norun, UT_TESTF_MANUAL);
+> >
+> >   /* Simulate 512 MiB RAM, reserve 3 blocks, check addresses in between */
+> >   static int test_get_unreserved_size(struct unit_test_state *uts,
+> > @@ -665,7 +664,7 @@ static int test_get_unreserved_size(struct unit_test_state *uts,
+> >       return 0;
+> >   }
+> >
+> > -static int lib_test_lmb_get_free_size(struct unit_test_state *uts)
+> > +static int lib_test_lmb_get_free_size_norun(struct unit_test_state *uts)
+> >   {
+> >       int ret;
+> >
+> > @@ -677,10 +676,10 @@ static int lib_test_lmb_get_free_size(struct unit_test_state *uts)
+> >       /* simulate 512 MiB RAM beginning at 1.5GiB */
+> >       return test_get_unreserved_size(uts, 0xE0000000);
+> >   }
+> > -LIB_TEST(lib_test_lmb_get_free_size, 0);
+> > +LIB_TEST(lib_test_lmb_get_free_size_norun, UT_TESTF_MANUAL);
+> >
+> >   #ifdef CONFIG_LMB_USE_MAX_REGIONS
+> > -static int lib_test_lmb_max_regions(struct unit_test_state *uts)
+> > +static int lib_test_lmb_max_regions_norun(struct unit_test_state *uts)
+> >   {
+> >       const phys_addr_t ram = 0x00000000;
+> >       /*
+> > @@ -745,10 +744,10 @@ static int lib_test_lmb_max_regions(struct unit_test_state *uts)
+> >
+> >       return 0;
+> >   }
+> > -LIB_TEST(lib_test_lmb_max_regions, 0);
+> > +LIB_TEST(lib_test_lmb_max_regions_norun, UT_TESTF_MANUAL);
+> >   #endif
+> >
+> > -static int lib_test_lmb_flags(struct unit_test_state *uts)
+> > +static int lib_test_lmb_flags_norun(struct unit_test_state *uts)
+> >   {
+> >       const phys_addr_t ram = 0x40000000;
+> >       const phys_size_t ram_size = 0x20000000;
+> > @@ -832,4 +831,4 @@ static int lib_test_lmb_flags(struct unit_test_state *uts)
+> >
+> >       return 0;
+> >   }
+> > -LIB_TEST(lib_test_lmb_flags, 0);
+> > +LIB_TEST(lib_test_lmb_flags_norun, UT_TESTF_MANUAL);
+>
