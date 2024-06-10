@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C140C27C55
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 17:13:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AC2EC27C55
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 17:31:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79FE688581;
-	Mon, 10 Jun 2024 19:12:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2923D88673;
+	Mon, 10 Jun 2024 19:30:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ARVIIKY2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tjTBN3PK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DA3C88581; Mon, 10 Jun 2024 19:12:58 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id 2530188675; Mon, 10 Jun 2024 19:30:58 +0200 (CEST)
+Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
+ [IPv6:2001:4860:4864:20::32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 274AB8865F
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 19:12:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 08AE78858D
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 19:30:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-3d229181325so698201b6e.3
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 10:12:56 -0700 (PDT)
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-254efc9ca45so3905fac.3
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 10:30:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718039575; x=1718644375; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1718040655; x=1718645455; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=CQECgUOtieRaES3f9RnoNnw3uWFANbV1dUfvEW3MOhY=;
- b=ARVIIKY2IQm9wSP7libSB9iFpc5mAwOB3jzxPk7/hPSuOPhoGw+73FTYWbyg/FRXYg
- 6AZctCW+olihgb6IqOBk/lQLLKzBklLfMi5+XNz7H02xbYQ0kgm1OFB3svmIhAx34WRv
- 6dGX6XrwQ2TW2Mei7ZeIu26IednDeTUVdW8l4=
+ bh=Q3fdWKMBRTvNSgs1E1eLuAcL8S/Ql+IurnALnTVXtxE=;
+ b=tjTBN3PKbI0d1LYKUOGoyxjL9M8qvdQOcku1muy3MHhGkZ63Eo71fY53WepFs003OR
+ 9wXY2aIVeWxAxBOKl4quXmEU/KTdkAgxuxVRIXNbD7sZ+Yi1lGnHb8LJ5f33gDUu8izm
+ uamp7krxHSiL20LMSeyAc1IdsSHaqr/Z/nih4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718039575; x=1718644375;
+ d=1e100.net; s=20230601; t=1718040655; x=1718645455;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CQECgUOtieRaES3f9RnoNnw3uWFANbV1dUfvEW3MOhY=;
- b=LVff/5fTaxa22cFevEqIumQ9gN1MY0n4+4uCUMAWfcv2lIP0oPjUhMcbVlZukmQtQF
- 7Sjpf8wZx4u6tAtbVxcuq1D2Yhqhpzsb7iL4+NOdHR4uziQD9PVf47Sg94gYOK/iVcyL
- KoNU9wBqsdTujord+CiU6qS7L5vGfTXLsdYkH9qtX4O2KVjYleTRWqdUWuSmjpixm46n
- FoGbvit1g6iPZ7XmiK3a2Sl/xSr1QJEiCJBtRPK/jlzZMsw8gUjLR4g6TDSKcsHlg7Sd
- 6brUeX46IdvCTnMJf4GLwM89O1BKdxjkrzc93vAEP1XoTHO7JVnPpWM17e6qporZfygF
- Y7LQ==
-X-Gm-Message-State: AOJu0YyrAEISkRTreioxUMRsTojWAW8IBNdRl3RVHvylErdJoYs6EpKW
- aacoLdDJwZogOZO88lrGWFc0WxvBQTnYoE5ZKyNgWOoGhrfwd2OSPuMaXDHwhbs=
-X-Google-Smtp-Source: AGHT+IHZ/UOqodDbAPU4jaxnzCgFVErdMcG3zPTXwD7k0v19pKSI9orFnzXFFK2ViUcqThojhad+9Q==
-X-Received: by 2002:a54:4e97:0:b0:3d1:fda9:3b05 with SMTP id
- 5614622812f47-3d210d2b9b7mr8841028b6e.12.1718039574750; 
- Mon, 10 Jun 2024 10:12:54 -0700 (PDT)
+ bh=Q3fdWKMBRTvNSgs1E1eLuAcL8S/Ql+IurnALnTVXtxE=;
+ b=pCNpTvfFWrI+Tf2sFqmiOkF+ZKd1G4r8ld+MZgz7ErZnB77BvU9VHJPExR/Bl5BwEi
+ o4UXMrXXWnmDJeyYA6zQGZDkWkQ2PKWhLQfaztAc6z4sHD7+3t0resjbDgjtdu9YxWcQ
+ n3qtpkELQJoERrlGoRBMWc395bRlEXcBuivDARB0fI/hSEV8W9EvZS9PxVQNyeBdWuOa
+ 8BRx+PohIK7HBmrPz22Y1+x/9PyZOxqwgAdph0ZaPmQMYuH8TKZQegcNZkNtSL5+h5Av
+ /6hVfVLvTyufNrLPzr8eryada35zo+8FYn7x0kdifrhT3VbfQJSO3NipfDZYVN7vYIxR
+ YMmw==
+X-Gm-Message-State: AOJu0YxwgQGnLD46w2IYKxziOPEjzPz2iidJNAPLDO/fDUmfJd872u13
+ dLAXQj3qds72+H00a3u1x4TmoTTLfrc8mX/HSv3+XgqyCthcAzNgq0lItzrJWkk=
+X-Google-Smtp-Source: AGHT+IEbcYeOaDfp7mELspZm1Cbk+fMSWUQKp6KbzNFoGL/rMcyLWL31uvsE7YPonB6GsDXZzZh4Vg==
+X-Received: by 2002:a05:6870:d252:b0:254:ccac:133c with SMTP id
+ 586e51a60fabf-254ccac418fmr3194181fac.41.1718040654381; 
+ Mon, 10 Jun 2024 10:30:54 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
  [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3d21db2cea2sm873341b6e.36.2024.06.10.10.12.53
+ 586e51a60fabf-25447e29786sm2369279fac.21.2024.06.10.10.30.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Jun 2024 10:12:54 -0700 (PDT)
-Date: Mon, 10 Jun 2024 11:12:52 -0600
+ Mon, 10 Jun 2024 10:30:52 -0700 (PDT)
+Date: Mon, 10 Jun 2024 11:30:50 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
  Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>
-Subject: Re: [RFC PATCH 05/31] lmb: pass a flag to image_setup_libfdt() for
- lmb reservations
-Message-ID: <20240610171252.GT68077@bill-the-cat>
+Subject: Re: [RFC PATCH 06/31] lmb: reserve and add common memory regions
+ post relocation
+Message-ID: <20240610173050.GU68077@bill-the-cat>
 References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
- <20240607185240.1892031-6-sughosh.ganu@linaro.org>
+ <20240607185240.1892031-7-sughosh.ganu@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="eWUBkOAyG8BMUZpz"
+ protocol="application/pgp-signature"; boundary="CuprIc2zSWcTEN4X"
 Content-Disposition: inline
-In-Reply-To: <20240607185240.1892031-6-sughosh.ganu@linaro.org>
+In-Reply-To: <20240607185240.1892031-7-sughosh.ganu@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,96 +95,43 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---eWUBkOAyG8BMUZpz
+--CuprIc2zSWcTEN4X
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Jun 08, 2024 at 12:22:14AM +0530, Sughosh Ganu wrote:
+On Sat, Jun 08, 2024 at 12:22:15AM +0530, Sughosh Ganu wrote:
 
-> The image_setup_libfdt() function optionally calls the LMB API to
-> reserve the region of memory occupied by the FDT blob. This was
-> earlier determined through the presence of the pointer to the lmb
-> structure, which is no longer present. Pass a flag to the
-> image_setup_libfdt() function to indicate if the region occupied by
-> the FDT blob is to be marked as reserved by the LMB module.
+> The LMB module provides API's for allocating chunks of memory. The LMB
+> module should not be allocating memory regions that are in use, or
+> that might be occupied by the U-Boot image. Prevent allocations of
+> memory areas used by the U-Boot image by reserving these regions once
+> U-Boot has been relocated. Also add the rest of the memory that is
+> available for allocations to the LMB's memory map.
 >=20
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-[snip]
-> ---
->  arch/mips/lib/bootm.c         | 2 +-
->  boot/image-board.c            | 2 +-
->  boot/image-fdt.c              | 7 +++----
->  cmd/elf.c                     | 2 +-
->  include/image.h               | 5 ++---
->  lib/efi_loader/efi_dt_fixup.c | 2 +-
->  lib/efi_loader/efi_helper.c   | 2 +-
->  7 files changed, 10 insertions(+), 12 deletions(-)
->=20
-> diff --git a/arch/mips/lib/bootm.c b/arch/mips/lib/bootm.c
-> index 54d89e9cca..e4fc2e589d 100644
-> --- a/arch/mips/lib/bootm.c
-> +++ b/arch/mips/lib/bootm.c
-> @@ -247,7 +247,7 @@ static int boot_setup_fdt(struct bootm_headers *image=
-s)
->  	images->initrd_start =3D virt_to_phys((void *)images->initrd_start);
->  	images->initrd_end =3D virt_to_phys((void *)images->initrd_end);
-> =20
-> -	return image_setup_libfdt(images, images->ft_addr, &images->lmb);
-> +	return image_setup_libfdt(images, images->ft_addr, 0);
->  }
-> =20
->  static void boot_prep_linux(struct bootm_headers *images)
-> diff --git a/boot/image-board.c b/boot/image-board.c
-> index 89ccf80066..481b333b4c 100644
-> --- a/boot/image-board.c
-> +++ b/boot/image-board.c
-> @@ -897,7 +897,7 @@ int image_setup_linux(struct bootm_headers *images)
->  	}
-> =20
->  	if (CONFIG_IS_ENABLED(OF_LIBFDT) && of_size) {
-> -		ret =3D image_setup_libfdt(images, *of_flat_tree, lmb);
-> +		ret =3D image_setup_libfdt(images, *of_flat_tree, 1);
->  		if (ret)
->  			return ret;
->  	}
-> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-> index 08afde203c..4daced9e99 100644
-> --- a/boot/image-fdt.c
-> +++ b/boot/image-fdt.c
-> @@ -567,8 +567,7 @@ __weak int arch_fixup_fdt(void *blob)
->  	return 0;
->  }
-> =20
-> -int image_setup_libfdt(struct bootm_headers *images, void *blob,
-> -		       struct lmb *lmb)
-> +int image_setup_libfdt(struct bootm_headers *images, void *blob, bool lm=
-b)
->  {
->  	ulong *initrd_start =3D &images->initrd_start;
->  	ulong *initrd_end =3D &images->initrd_end;
 
-Since this is a bool, please use true/false in the callers.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---eWUBkOAyG8BMUZpz
+--CuprIc2zSWcTEN4X
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZnNBAACgkQFHw5/5Y0
-tyzX2gwAiM+yXRbELQ9zlv/KDosC1uFiC/362oBGNjwUKgLlg7/wR+qPuCccSnh6
-YEU0maofQVequ9Ce5pKpVqCw49oMgU89wtJbzmawTEi+7DHStVaBEmS5JPkLFhUw
-XpQAWsdf5HUHM9WoGHKss7Vb7Z5joMnTf6fvrjp52D3P9QemjYJgsrTA3NG7GIps
-pRiklmiX+QXOCTHT2r/zIqyJIX5pfEad00Q/oE/N/StjqUmv58TaI+cW4Y2Z1HeM
-86KzU7YIEmS0pYdTxj9EivTD+AYQ9b9K0lTKYJOQptCC7yRdEOpdBo5J781LDlfr
-FdaviHG6845/IE7Gj0uKf6N8HQfGR3pMYiKzmfTVzTipcQMwvOdvtDbdpYyColMU
-SiR8FfEOnvtHzlu/8OligowfISJPtKX64wx49DmDK4pjfsu/qvk39tX6Rg2DT7t7
-eIZeX89r2Suq3MufHHCE9w9AHwuXHI5/UUoy8K9kJrnDQxEK+qCdzzhF2MtRcoWk
-UTBrd4cY
-=dCjx
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZnOEcACgkQFHw5/5Y0
+tyxdpwv/RaAD+FcbZIxvW1lQ9NHX+9LVnGrSIlPtRC+mEoTVIWiRmyP4W5G6aYwt
+4LFCJmEQ98Sn5YAVHnXtSkIb5k2NT/LFZXcR3ua4E0cmxdgUiWv/1TYOA9NI8Fqk
+t0h6smMxKIP/J4R6itGuZEVq7lw9X2N4SZPqV7dgvS8gJGEcyh3prMB726kUdrO4
+kvEt/7Js/APra4NJV4U9qUWaqHjAKtC6+eRzmFC27CZOLmw8Pngx8RUuJGMNeYxo
+Og3PwjTh1M6BPmdgnpQ1ZgEerw3VVLGDdysp9A6tKyebC6aFEOkK44oi1Ltx6K22
+sAGN0ZzICeBdtB3XDeIPhztKH/Awc7n4LGkq5Ws2LkYgN5wLaMKu0Q11L+p5eJy5
+0ZsuwloesW1MEvnOe9mgwHw0DYeOtYJpZwGZCEgpIzmOBOTiP5J2pdPEiPXktY+c
+IO4pW2vuar6xvkamLF9Gbmkd5Pzei6KJl4wr9uPFsjmRYgcbpb/KBLvbTf9g/JHB
+I1mBixuK
+=I6fY
 -----END PGP SIGNATURE-----
 
---eWUBkOAyG8BMUZpz--
+--CuprIc2zSWcTEN4X--
