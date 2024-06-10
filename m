@@ -4,90 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 366A5C27C5F
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 08:55:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1693EC27C5F
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 09:11:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FF988813F;
-	Mon, 10 Jun 2024 10:55:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6065A8843F;
+	Mon, 10 Jun 2024 11:11:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SolLnGZa";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Nj10usI3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24152884A9; Mon, 10 Jun 2024 10:55:20 +0200 (CEST)
-Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
- [IPv6:2607:f8b0:4864:20::42b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D7A77884A9; Mon, 10 Jun 2024 11:11:07 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB48D85B66
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 10:55:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B4C15883F2
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 11:11:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-70599522368so397410b3a.2
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 01:55:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718009716; x=1718614516; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=PuUZYaeNsuCBr0lgw5rU7kZKE+PowaB6GVLVPdfHSNk=;
- b=SolLnGZayGXiKgt9p8XCphGMxV8lExLiPJ6Z87nPpsEjQXJHxLC3x5w5KhHMnXuNCx
- g/23adO99IjPySugK5/g8RkSCMzBT/o3HO/0uhyBVYHXZMWN2vcNAPEOh2eQW1yQrgXG
- +ELdllsWWkOe2A81me8Kp7xTGqbu0xMI+hZK5aBTTRcwnaz8B17zuk4B0ndMteNXnraC
- 2WvDgyzqxYyTC3zaUsICiN+Il2VeGaW/b4vlJLeVAVnA2rtlVgK2Ra3kIErTl8be8anj
- ouaffI5nqmw3SxlkXCDzqx9r+87DzUXqBe7Nkjm8FKltIC0DV3ujeeiDaxeOAfnjCHaZ
- TTfw==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-lf1-f71.google.com (mail-lf1-f71.google.com
+ [209.85.167.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id A30943F722
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 09:11:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1718010663;
+ bh=DSWicmw9JdU0vmKNFwEARBopNhyu1Y1MUUbuT2b9oA4=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=Nj10usI38YwQp4KdPCTohvWPQWJmWApPjmqbEmLosbKz/JTL4cSLgzhNi9Jye9ATo
+ mBGhRcpcm0hbsc2V0QkSJYyk8Z8H0s5Z/7fkefxGdcYv39SjzvObDv1ZcJnrWpnjgu
+ 9nsXnQg3eufIZS2njaPAk2LybeWzhtuGIEiw5JDvBXZ+HLUQiQy7cp+gKGevt+ZPsy
+ 81gEMspSMCpjaSNgd6ks7HoU9hsHrmSCt/2FRt6YaFTNObY2DHpQKo9HAuC12shZsA
+ mZb7Ey/M3p/ibghFLGieWMJWH3BrmZkB2+NKjXy0LxZjeTjpkifzosH0xXmjrYrhBg
+ Kk80YWP8eFcqg==
+Received: by mail-lf1-f71.google.com with SMTP id
+ 2adb3069b0e04-52c893408b5so592928e87.2
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 02:11:03 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718009716; x=1718614516;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1718010662; x=1718615462;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=PuUZYaeNsuCBr0lgw5rU7kZKE+PowaB6GVLVPdfHSNk=;
- b=Dm8fpLPY8Vpx26pfe6vg5Q8S3Etyi5WHm3vIUw6QFfoNuod3JCxBI3TglMMWcuOpSm
- TUSqu/QnUck1sMwYv96ymQF1yLFQyk4PRgIYzcY61A31UZoRI1WyT8IkyOgMqkXHkPVr
- jrkSIA9/5/YpNxCpYL1SFnZO2BavE5bHuF/HitkCFtpJT1ARf2ZDToA95cjjmNOdDuwP
- bjQ+Qj9ENlkO7Cu5kiFmsCcX6TjWv5BR4S5+sUaBRWEfuF/BSZ6kZ3VIMd06cCqnWBkW
- 9iZlvN+YiXCYsDHMvCJNIuNDZgr2vnUR1YbS03AFcidEy3KitOLYYUJTU+ohFhxQ4fVO
- jkxQ==
+ bh=DSWicmw9JdU0vmKNFwEARBopNhyu1Y1MUUbuT2b9oA4=;
+ b=raJ3qWlXVxPkubXgxbwH2kgwGJNFkfX2wDh3fSSSRMbVDyW0/KjSyo9xr0/pZxQ90W
+ 40RR4ehnqn/2jUSyS/0yZm3vxFGygdWbmA0vfKXd+4T8vHGudlJMH4cjrs+s5SUmZPqx
+ yTH7mOPuyRpDsJfExRrJtqxJLGKoh8eIvNAxvM+1JpYGLi6MdO6TlirwQr8EOdb2c4Hz
+ czgGpWFsRlzX2HITLFe3Iiz2uW4qnZJDv8SaW22ooaKjyunAk6kBbC+rhkoqq/4AfvOf
+ k1OsxAbisZ5Dgqk7ry6XLx/cLd8ZpwuJSnF0NsKqAgMzLh1BdW58b3EwSInOvWUqSQPG
+ ntlg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVA48rfIwqcV56CEuqS6dNhfTZlo9XfISE20256zbiT/ev/6HW4AUNoli/f3puFkTLGmx28Wjakqq4bDTbh8OZoH5PyLQ==
-X-Gm-Message-State: AOJu0Yync47VmYDCfGRqxJLOAJgisFVAgYO7eMf5X21srCU9WAka49s9
- jAiy6jp4eUYYy82gJMacmSSweJ+ifCb6Jucl+gAj+7cEiZryL3jsc/j5yUFtW1A3RGDkQzqciov
- negjFnRmYgmiHLWpnd0Nv4NIXA15gmNLsU3E3NA==
-X-Google-Smtp-Source: AGHT+IEfcFdu2DKKqsxKH4dO68fFHtnrVcUarK5YaSAkJDAGUgb6IeWX9kunV3UgkHUz68zGdSh738kqeG7aa/YK/4E=
-X-Received: by 2002:a05:6a21:190:b0:1b5:d36a:5d6e with SMTP id
- adf61e73a8af0-1b5d36a5e69mr4003207637.43.1718009716219; Mon, 10 Jun 2024
- 01:55:16 -0700 (PDT)
+ AJvYcCVHD8As5pKwd/Wtv0/UinCmCPph2BhocV3Rx31AwLiaKouWyOpheREA2NxBYGw6T2inJmWEwobQA7qEZ+uIkjRuf3nehQ==
+X-Gm-Message-State: AOJu0Yw5lEQvbGQ0leqcICCnTn4ikEOKpMz5IElvh4vVXs0vL5PNOK9p
+ RnW/HISWWgTYDZaHzUuVoenfmWdM92pxJSnhl11KR/FnTTjrKbOaADXeNnPK9sp1Qx8tPvvAvEN
+ AJIJSMACK3gZGte4WWITWrNdRz0uGNNdqAEXg+8Iphfzk2ZFyflwVk+qnvbWvN2JSM6Y=
+X-Received: by 2002:a2e:86cb:0:b0:2d4:50b2:62e9 with SMTP id
+ 38308e7fff4ca-2eadce34f1fmr58317221fa.14.1718010662661; 
+ Mon, 10 Jun 2024 02:11:02 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IF9wB63I4x6fxRUusWAW1Bbbm1/VaHFl+LgnVmk0HmnHywDF6bXRpFDZfU9h0F83rfiqzueWQ==
+X-Received: by 2002:a2e:86cb:0:b0:2d4:50b2:62e9 with SMTP id
+ 38308e7fff4ca-2eadce34f1fmr58316981fa.14.1718010662162; 
+ Mon, 10 Jun 2024 02:11:02 -0700 (PDT)
+Received: from workstation5.. ([2a00:20:43:88b5:6b2b:e162:4c45:5c4c])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42183c08f49sm41059465e9.6.2024.06.10.02.11.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 10 Jun 2024 02:11:01 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Shantur Rathore <i@shantur.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Bin Meng <bmeng@tinylab.org>, Mark Kettenis <kettenis@openbsd.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v3 0/9] efi_loader: improve device-tree loading
+Date: Mon, 10 Jun 2024 11:10:48 +0200
+Message-ID: <20240610091057.64463-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20240607223858.1971290-1-j-humphreys@ti.com>
- <20240607223858.1971290-17-j-humphreys@ti.com>
-In-Reply-To: <20240607223858.1971290-17-j-humphreys@ti.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 10 Jun 2024 11:54:39 +0300
-Message-ID: <CAC_iWj+bxKR1f1cFjhHu5+g=u7zccw7oLLJN637D7M1eNE77dg@mail.gmail.com>
-Subject: Re: [PATCH v6 16/24] board: am62px: Define capsule update firmware
- info
-To: Jonathan Humphreys <j-humphreys@ti.com>
-Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>, 
- Manorit Chawdhry <m-chawdhry@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Judith Mendez <jm@ti.com>, 
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>, 
- Simon Glass <sjg@chromium.org>, Nikhil M Jain <n-jain1@ti.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
- Maxime Ripard <mripard@kernel.org>, 
- Siddharth Vadapalli <s-vadapalli@ti.com>, Roger Quadros <rogerq@kernel.org>,
- Bryan Brattlof <bb@ti.com>, 
- Vignesh Raghavendra <vigneshr@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
- Nishanth Menon <nm@ti.com>, 
- Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,107 +106,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 8 Jun 2024 at 01:39, Jonathan Humphreys <j-humphreys@ti.com> wrote:
->
-> Define the firmware components updatable via EFI capsule update, including
-> defining capsule GUIDs for the various firmware components for the AM62px
-> SK.
->
-> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
-> ---
->  board/ti/am62px/evm.c        | 34 ++++++++++++++++++++++++++++++++++
->  include/configs/am62px_evm.h | 24 ++++++++++++++++++++++++
->  2 files changed, 58 insertions(+)
->
-> diff --git a/board/ti/am62px/evm.c b/board/ti/am62px/evm.c
-> index 97a95ce8cc2..1a2c46c462b 100644
-> --- a/board/ti/am62px/evm.c
-> +++ b/board/ti/am62px/evm.c
-> @@ -6,6 +6,7 @@
->   *
->   */
->
-> +#include <efi_loader.h>
->  #include <asm/arch/hardware.h>
->  #include <asm/io.h>
->  #include <dm/uclass.h>
-> @@ -13,6 +14,39 @@
->  #include <fdt_support.h>
->  #include <spl.h>
->
-> +struct efi_fw_image fw_images[] = {
-> +       {
-> +               .image_type_id = AM62PX_SK_TIBOOT3_IMAGE_GUID,
-> +               .fw_name = u"AM62PX_SK_TIBOOT3",
-> +               .image_index = 1,
-> +       },
-> +       {
-> +               .image_type_id = AM62PX_SK_SPL_IMAGE_GUID,
-> +               .fw_name = u"AM62PX_SK_SPL",
-> +               .image_index = 2,
-> +       },
-> +       {
-> +               .image_type_id = AM62PX_SK_UBOOT_IMAGE_GUID,
-> +               .fw_name = u"AM62PX_SK_UBOOT",
-> +               .image_index = 3,
-> +       }
-> +};
-> +
-> +struct efi_capsule_update_info update_info = {
-> +       .dfu_string = "sf 0:0=tiboot3.bin raw 0 80000;"
-> +       "tispl.bin raw 80000 200000;u-boot.img raw 280000 400000",
-> +       .num_images = ARRAY_SIZE(fw_images),
-> +       .images = fw_images,
-> +};
-> +
-> +#if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
-> +void set_dfu_alt_info(char *interface, char *devstr)
-> +{
-> +       if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
-> +               env_set("dfu_alt_info", update_info.dfu_string);
-> +}
-> +#endif
-> +
->  int board_init(void)
->  {
->         return 0;
-> diff --git a/include/configs/am62px_evm.h b/include/configs/am62px_evm.h
-> index 06b12860e21..57a1ba9dc3c 100644
-> --- a/include/configs/am62px_evm.h
-> +++ b/include/configs/am62px_evm.h
-> @@ -8,6 +8,30 @@
->  #ifndef __CONFIG_AM62PX_EVM_H
->  #define __CONFIG_AM62PX_EVM_H
->
-> +/**
-> + * define AM62PX_SK_TIBOOT3_IMAGE_GUID - firmware GUID for AM62PX sk tiboot3.bin
-> + * define AM62PX_SK_SPL_IMAGE_GUID     - firmware GUID for AM62PX sk SPL
-> + * define AM62PX_SK_UBOOT_IMAGE_GUID   - firmware GUID for AM62PX sk UBOOT
-> + *
-> + * These GUIDs are used in capsules updates to identify the corresponding
-> + * firmware object.
-> + *
-> + * Board developers using this as a starting reference should
-> + * define their own GUIDs to ensure that firmware repositories (like
-> + * LVFS) do not confuse them.
-> + */
-> +#define AM62PX_SK_TIBOOT3_IMAGE_GUID \
-> +       EFI_GUID(0xb08471b7, 0xbe2d, 0x4489, 0x87, 0xa1, \
-> +               0xca, 0xb2, 0x8a, 0x0c, 0xf7, 0x43)
-> +
-> +#define AM62PX_SK_SPL_IMAGE_GUID \
-> +       EFI_GUID(0xd02ed781, 0x6d71, 0x4c1a, 0xa9, 0x99, \
-> +               0x3c, 0x6a, 0x41, 0xc3, 0x63, 0x24)
-> +
-> +#define AM62PX_SK_UBOOT_IMAGE_GUID \
-> +       EFI_GUID(0x7e6aea51, 0x965c, 0x44ab, 0xb3, 0x88, \
-> +               0xda, 0xeb, 0x03, 0xb5, 0x4f, 0x66)
-> +
->  /* Now for the remaining common defines */
->  #include <configs/ti_armv7_common.h>
->
-> --
-> 2.34.1
->
+In U-Boot EFI boot options can already specify both an EFI binary and
+an initrd. With this series we can additionally define the matching
+device-tree to be loaded in the boot option.
 
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+With the last patch the boot manager will fall back the device-tree
+specified by $fdtfile in directories '/dtb/', '/', or '/dtb/current/'
+on the boot device if no device-tree is specified in the boot
+option or via a bootefi command parameter.
+
+v3:
+	Add missing '@' in EFI_LP_DP_PART_FDT description.
+	Use calloc() instead of malloc() in load_fdt_from_load_option().
+	Add missing '@' in load_fdt_from_load_option function description
+	Rename struct efi_initrd_dp to efi_lo_dp_prefix.
+
+v2:
+	Update efi_dp_concat() instead of new function efi_dp_merge().
+	Carve out a function efi_load_option_dp_join() which we can
+	use both for the eficonfig and the efidebug command.
+	Rename variables id_dp, final_dp_size.
+	Rename create_initrd_dp() to create_lo_dp_part().
+	Use enum as parameter for create_lo_dp_part().
+	Put all related changes into one patch.
+
+Heinrich Schuchardt (8):
+  efi_loader: allow concatenation with contained end node
+  cmd: eficonfig: add support for setting fdt
+  cmd: efidebug: add support for setting fdt
+  efi_loader: load device-tree specified in boot option
+  efi_loader: move distro_efi_get_fdt_name()
+  efi_loader: return binary from efi_dp_from_lo()
+  efi_loader: export efi_load_image_from_path
+  efi_loader: load distro dtb in bootmgr
+
+ boot/bootmeth_efi.c                        |  60 +---------
+ cmd/eficonfig.c                            |  83 +++++++++----
+ cmd/efidebug.c                             | 130 +++++++++++++++------
+ include/efi_loader.h                       |  24 +++-
+ lib/efi_loader/Makefile                    |   1 +
+ lib/efi_loader/efi_bootbin.c               |   2 +-
+ lib/efi_loader/efi_bootmgr.c               |  75 +++++++++++-
+ lib/efi_loader/efi_boottime.c              |   3 +-
+ lib/efi_loader/efi_device_path.c           |  40 ++++---
+ lib/efi_loader/efi_device_path_utilities.c |   2 +-
+ lib/efi_loader/efi_fdt.c                   | 117 +++++++++++++++++++
+ lib/efi_loader/efi_helper.c                |  44 +++++++
+ 12 files changed, 445 insertions(+), 136 deletions(-)
+ create mode 100644 lib/efi_loader/efi_fdt.c
+
+-- 
+2.43.0
+
