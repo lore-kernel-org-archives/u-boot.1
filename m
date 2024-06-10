@@ -4,55 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64919C27C5E
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 13:34:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DEF1C27C55
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 13:34:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E345188580;
-	Mon, 10 Jun 2024 15:34:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5482988548;
+	Mon, 10 Jun 2024 15:34:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="fW2K/7I1";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="rD4bGqhr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DC9088574; Mon, 10 Jun 2024 15:34:13 +0200 (CEST)
+ id 7612C88520; Mon, 10 Jun 2024 15:34:13 +0200 (CEST)
 Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC86388520
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 15:34:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8458388543
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 15:34:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=W.Egorov@phytec.de
 DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1718026449; x=1720618449;
+ q=dns/txt; i=@phytec.de; t=1718026450; x=1720618450;
  h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BcETWn/GrAeN9XxECymHIdo45+EG4H3ef34M87b+VQg=;
- b=fW2K/7I1y/MlF+EfNVRKL1L80XcsrVp+wH21Co66yHF8bSMY6soawIWECUPYL3mE
- 4e1NfdyD+8gOIge5M5n10ykE+FYCIF3B4o3aoDuMlqSDeq3M9FpCsB41iNRXkm5K
- 41cXAzpiHJU7sgk9rehG2GpnMo9H9aJAYy8HOQuMCiI=;
-X-AuditID: ac14000a-03e52700000021bc-e5-666700d19877
+ bh=CS12a5WoAFXPEHsv2SOWaYd1E5gnSJVICRW3W6+vmxQ=;
+ b=rD4bGqhrSC+iH/eh0rq1JeRpTvPgy1VUoMuEqXUiEbB9FPDWJa5qk5aSu3vR2FQt
+ UpLeSAoEwU+QoBMF8XIrpnJf+4BTbrcjh3cAlxTznRBHJYG9765ItsfXeQf/Pd7U
+ b36ITwcRCe4RzGX2+mEoKNrOmCbJrA/Dhg5Kiy3yI8E=;
+X-AuditID: ac14000a-03e52700000021bc-e9-666700d25385
 Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
  (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 65.7D.08636.1D007666;
- Mon, 10 Jun 2024 15:34:09 +0200 (CEST)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id E6.7D.08636.2D007666;
+ Mon, 10 Jun 2024 15:34:10 +0200 (CEST)
 Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
  (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 10 Jun
- 2024 15:34:09 +0200
+ 2024 15:34:10 +0200
 From: Wadim Egorov <w.egorov@phytec.de>
 To: <u-boot@lists.phytec.de>, <upstream@lists.phytec.de>,
  <u-boot@lists.denx.de>
 CC: <trini@konsulko.com>, <d.schultz@phytec.de>, <nmorrisson@phytec.com>
-Subject: [PATCH 02/13] arch: arm: dts: k3-am642-phyboard-electra: Add fixed
- partitions
-Date: Mon, 10 Jun 2024 15:33:41 +0200
-Message-ID: <20240610133352.2473414-3-w.egorov@phytec.de>
+Subject: [PATCH 06/13] configs: phycore_am64x: Update environment location
+Date: Mon, 10 Jun 2024 15:33:45 +0200
+Message-ID: <20240610133352.2473414-7-w.egorov@phytec.de>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240610133352.2473414-1-w.egorov@phytec.de>
 References: <20240610133352.2473414-1-w.egorov@phytec.de>
@@ -62,17 +61,17 @@ Content-Type: text/plain
 X-Originating-IP: [172.25.0.11]
 X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
  (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrELMWRmVeSWpSXmKPExsWyRpKBR/ciQ3qawf/behYfGjezWUydtJnd
- 4u3eTnaLd337mSy636k7sHq8OrCK3ePsnR2MHv3dLawefy6+Yw1gieKySUnNySxLLdK3S+DK
- 2Np7m7ngIFdF+9M2tgbGZRxdjJwcEgImEuefrmXrYuTiEBJYwiRx59p8RgjnMaPEhCf97CBV
- bALqEnc2fGMFsUUEgiR6L31iBLGZBTwktv7dABTn4BAWCJO4eTYNxGQRUJV42icJUsErYCmx
- Ztl8Nohd8hIzL30Hm8gpYCXxY81esIlCQDWLPq1hgagXlDg58wkLxHR5ieats5khbAmJgy9e
- MEPUy0u8uLScBWbmtHOvmSHsUImtX7YzTWAUmoVk1Cwko2YhGbWAkXkVo1BuZnJ2alFmtl5B
- RmVJarJeSuomRlC4izBw7WDsm+NxiJGJg/EQowQHs5IIr1BGcpoQb0piZVVqUX58UWlOavEh
- RmkOFiVx3tUdwalCAumJJanZqakFqUUwWSYOTqkGRnGNkz81/t058s5yR0K+qOWTO6xbPstt
- MpnO9dbSa5bLCu0JM762/DVsZn592zRoy+Hoo5o/b/j6VB1p/LvlWVZgx/yIv4u0wzR9pSW2
- BaUJuss2T9RbOTehm+e797ka52cfLkZz3c6YtkebQ/4lh0qCebRV3WKZlvU3nK492qwV5zEv
- 0yyqW4mlOCPRUIu5qDgRAEqDz0NlAgAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrCLMWRmVeSWpSXmKPExsWyRpKBR/cSQ3qaQdtsSYsPjZvZLKZO2sxu
+ 8XZvJ7vFu779TBbd79QdWD1eHVjF7nH2zg5Gj/7uFlaPPxffsQawRHHZpKTmZJalFunbJXBl
+ 7Hh1iLXgOlfFuR2XWBsYD3N2MXJySAiYSHydvpq9i5GLQ0hgCZPEwu23GSGcx4wSvxufMIFU
+ sQmoS9zZ8I0VxBYRCJLovfSJEcRmFvCQ2Pp3A1hcWMBLYsHdV8wgNouAqsSSle/ZQGxeAUuJ
+ P2dvMEJsk5eYeek7O4jNKWAl8WPNXrBeIaCaRZ/WsEDUC0qcnPmEBWK+vETz1tnMELaExMEX
+ L5gh6uUlXlxazgIzc9q518wQdqjE1i/bmSYwCs1CMmoWklGzkIxawMi8ilEoNzM5O7UoM1uv
+ IKOyJDVZLyV1EyMo5EUYuHYw9s3xOMTIxMF4iFGCg1lJhFcoIzlNiDclsbIqtSg/vqg0J7X4
+ EKM0B4uSOO/qjuBUIYH0xJLU7NTUgtQimCwTB6dUA+N6jeqP5d7La1SmvvZ6Vn318Lr0Rr3Q
+ WjmblU2NLywVTuf+vsHALnj+XPzRphfHNnTP6zjc1CcWai7JUP8p8dekWpOnhVsCxCY7zNtb
+ NfHkeccXr3z27jRMmfJrz2Ffu6Wnj7Tm3Ir/W52hvz20lM1WwfLfs22nmhZNjs4WqJzy1Ivd
+ j3ub3G8lluKMREMt5qLiRADLZRZCZwIAAA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,54 +88,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Nathan Morrisson <nmorrisson@phytec.com>
+Update environment location to align with OSPI fixed-partition
+definitions and provide a redundant environment at a 2nd location.
 
-Add a fixed partitions node to the AM64x device tree so that it can
-be used to fixup the Linux device tree.
-
-Signed-off-by: Nathan Morrisson <nmorrisson@phytec.com>
 Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
 ---
- .../k3-am642-phyboard-electra-rdk-u-boot.dtsi | 26 +++++++++++++++++++
- 1 file changed, 26 insertions(+)
+ configs/phycore_am64x_a53_defconfig | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/k3-am642-phyboard-electra-rdk-u-boot.dtsi b/arch/arm/dts/k3-am642-phyboard-electra-rdk-u-boot.dtsi
-index 4677c35e2d9..8f3c3a185ae 100644
---- a/arch/arm/dts/k3-am642-phyboard-electra-rdk-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am642-phyboard-electra-rdk-u-boot.dtsi
-@@ -115,6 +115,32 @@
- 	bootph-all;
- 	flash@0 {
- 		bootph-all;
-+		partitions {
-+			compatible = "fixed-partitions";
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+
-+			partition@0 {
-+				label = "ospi.tiboot3";
-+				reg = <0x00000 0x80000>;
-+			};
-+			partition@80000 {
-+				label = "ospi.tispl";
-+				reg = <0x080000 0x200000>;
-+			};
-+			partition@280000 {
-+				label = "ospi.u-boot";
-+				reg = <0x280000 0x400000>;
-+			};
-+			partition@680000 {
-+				label = "ospi.env";
-+				reg = <0x680000 0x40000>;
-+			};
-+			partition@6c0000 {
-+				label = "ospi.env.backup";
-+				reg = <0x6c0000 0x40000>;
-+			};
-+		};
- 	};
- };
- 
+diff --git a/configs/phycore_am64x_a53_defconfig b/configs/phycore_am64x_a53_defconfig
+index 76bb0e53e51..e94d829fd8f 100644
+--- a/configs/phycore_am64x_a53_defconfig
++++ b/configs/phycore_am64x_a53_defconfig
+@@ -13,7 +13,7 @@ CONFIG_TARGET_PHYCORE_AM64X_A53=y
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80480000
+ CONFIG_ENV_SIZE=0x20000
+-CONFIG_ENV_OFFSET=0xFFFFD000
++CONFIG_ENV_OFFSET=0x680000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am642-phyboard-electra-rdk"
+@@ -28,6 +28,7 @@ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x80a00000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
+ CONFIG_SPL_STACK_R=y
++CONFIG_ENV_OFFSET_REDUND=0x6c0000
+ CONFIG_SPL_FS_FAT=y
+ CONFIG_SPL_LIBDISK_SUPPORT=y
+ CONFIG_SPL_SPI_FLASH_SUPPORT=y
+@@ -76,6 +77,7 @@ CONFIG_MULTI_DTB_FIT=y
+ CONFIG_SPL_MULTI_DTB_FIT=y
+ CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
+ CONFIG_ENV_IS_IN_MMC=y
++CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+ CONFIG_SYS_MMC_ENV_DEV=1
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_SPL_DM=y
 -- 
 2.34.1
 
