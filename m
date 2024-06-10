@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 504DBC27C55
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 09:45:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31518C27C65
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 09:46:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC4C5884BF;
-	Mon, 10 Jun 2024 11:45:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7C40288239;
+	Mon, 10 Jun 2024 11:46:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="gNqFcIIZ";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Vc3OnbNg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 19F3287EBD; Mon, 10 Jun 2024 11:45:34 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 2555388470; Mon, 10 Jun 2024 11:46:38 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 30BB887E0D
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 11:45:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 284EC87EBD
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 11:46:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jmasson@baylibre.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a6269885572so917983966b.1
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 02:45:32 -0700 (PDT)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-57a1fe63a96so5214235a12.0
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 02:46:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718012731; x=1718617531;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718012795; x=1718617595;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:in-reply-to:subject:cc:to:from:from:to
  :cc:subject:date:message-id:reply-to;
- bh=/jDdtsnPkPsC4yWqLV7zP4peSlzjmLdK5xPV8yzJwVY=;
- b=gNqFcIIZe5ahW7zJ0/oybWTUFL/3bT2tMGblaaSHcYRsaa5DnA+2Udmfcgft0falns
- jXgUzTQYCIx59IAaebx10yCWdiNpq1EgeCfoP1UdYPXOanHiomKE0x8b4ZW8LwEtpxnY
- rWEMXNg54Ucdo7SPpGGCiboForR4zUtilMNu8jC+HlwbvVme8NXKPXe7egBf2j4JnjeQ
- rvQOLZKtolqMiTwiNJhHQidv/lT8XboXvlAj6JS6CqtTOqe5Wr5AS/qI3xjTPaeSs5Bg
- +yKotMM9DBz9jumgwY13JQD+C0byjmQIunQA1kiu8vMaexN4RnJ/RIavIXoZAe9SYNEQ
- Tq6g==
+ bh=L9s/Sf2EJ/XlUR8aUY+0lzqkCxABQj+Knhg3i+tGHPc=;
+ b=Vc3OnbNgfgvGTN/yZMldHk+86eQ915pSnVK4yIyJpZHAb0MrdgLdDe/adY+BwtVucD
+ FH16G0mUbEXEooozNV98uk+XKbf91/wZU019mD7ye/ir10Q704Ij6KJ2f8S2v1Y7lV9c
+ 6UzLJ3Pvbppok/F9Y5tbAXugerlzQ2WbTpIDd6msmfUkZ01DvljhsjH1k+AvpJgqRknx
+ dWksOtjUHv2P9Q3jFwZXduu5OihePfnuOpDNhDxBhoSHJ/4nrYbrXAMRMGMOQO8XI+7b
+ na4gIZABPr4PyKFeKGVllWspa4kNAZBkBROEPf0pWhrU0D4sOoHyZ0+/oX+H4Sx+fEaB
+ WJSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718012731; x=1718617531;
+ d=1e100.net; s=20230601; t=1718012795; x=1718617595;
  h=mime-version:message-id:date:in-reply-to:subject:cc:to:from
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=/jDdtsnPkPsC4yWqLV7zP4peSlzjmLdK5xPV8yzJwVY=;
- b=lupbKYSdvNsqrx6wAcqNmf+Kddx7fZGak6NUOg3hXrYTDsHaKTO+CVzA08hapjEau3
- xCt00rLavbiGX41w6k8+jE/q/9tyNqz/0YnM+YUmkPWYUt7VWLoWqp5BcHj/2ehC0NeQ
- l903n5qlih3w8G8lR0h1F0TI3txXsUYZOJ+HqXLzCTGKHhWD4d2GLKFiyqdPOsYm9lEp
- ywKI5N8hYexUKnfpYAtcWpNLSiOfk69+ozJBcWSu7c69WZLxZW9Qqmd0LylHH9CoBpHB
- +5g/Kk90orDnk+kC2JAVMU07li/pg9biu3yQW5LDwbZ1Cz4+6H1bfBoqWYL1ju1RmEn2
- 5XtA==
+ bh=L9s/Sf2EJ/XlUR8aUY+0lzqkCxABQj+Knhg3i+tGHPc=;
+ b=GWYrEFUJbaxjyyB/9JCmhUF72CmiWIDjtdprt2mKJ2my4TMpuw6jl5ybfzqUXAXYJ1
+ DllzlmaBWVPebhVds73trhYpzx4pXwrp+RQ7KAO4S25UyZaHNSbIfbXViivBqIEU5P49
+ HiXQclvYvMzHKVzXzdRx1GBBB+b15uIwXin2tDc7v428/M+/CXcOK8E4r5nm0nD4rRlC
+ DjyGx7pjWDPE5FSp4Ei4IJ42vuNaDktnaBn1F3eoGhp0fyj/RW9dR69dORL4szWoidca
+ 022k6opRxtxEueWvx9/hvApS21H0U8oYYo0XnfgYb0H6W/IeNJaBV2lorJ3ZO8cGq4iv
+ Qyxg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX/8G2iKu3I0B4lwA7+iII1NHRvNW0Zv+RsyYQAuR9fmdktUDNyYrOv27G4enoFxnFOUaQBQb+W8D5iF12ntZoQWaULwg==
-X-Gm-Message-State: AOJu0YzbPP0RhEcsRH2rQe7ji/wIEFOTHaW9MySJoztdMaMpoGTdylHe
- 4PKKfe1Mkr+ojqJvn+QKry7Vn5XKrzh4iRKMdTKKHEM7jsJPsvNaz/4ihrEndjg=
-X-Google-Smtp-Source: AGHT+IHqXO4Pk6vfC3NCtspYoSTTzBasoJeA3gQeA9Hdl+SxFcPF9XcXmvbam+W4UcCfADGIqJYBAQ==
-X-Received: by 2002:a17:906:3c04:b0:a6f:81b:9639 with SMTP id
- a640c23a62f3a-a6f081bd1d1mr342598966b.26.1718012731292; 
- Mon, 10 Jun 2024 02:45:31 -0700 (PDT)
+ AJvYcCVRYZ3gAPOKNtO1oGumcN+/lzxK8qcnIR1/JSYwzNLc2UDrGUxZPliRNikHf83ZNQSjZuPELcCt5qtQi1SGrRRwxCzIsA==
+X-Gm-Message-State: AOJu0YzaJGCgZ0YJqKxY/5oxseMcu9Eb5AEIoW0MZSt0QOzbdha2E0NQ
+ fgPINbMX/DRsEDpWaVnV19/R/cs6yGa+pwzLqXbOOtlaxjkPpvgaSwn+3nr8eR0=
+X-Google-Smtp-Source: AGHT+IFh0OMVkdECpnYEyYVYXBrbPTeW+P/xaYB8lmnn22CQ1xezVXWJgaeO9RfvmbFvZKeFzMFigQ==
+X-Received: by 2002:a50:d5c2:0:b0:57c:748e:8c56 with SMTP id
+ 4fb4d7f45d1cf-57c748e8dabmr2315777a12.33.1718012795454; 
+ Mon, 10 Jun 2024 02:46:35 -0700 (PDT)
 Received: from localhost ([2a04:cec2:b:49d2:7655:6cc3:de57:63b7])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a6c806eaa1dsm625292266b.107.2024.06.10.02.45.30
+ 4fb4d7f45d1cf-57aae0caa84sm7268231a12.29.2024.06.10.02.46.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Jun 2024 02:45:30 -0700 (PDT)
+ Mon, 10 Jun 2024 02:46:35 -0700 (PDT)
 From: Julien Masson <jmasson@baylibre.com>
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Tom Rini
- <trini@konsulko.com>, Dmitrii Merkurev <dimorinny@google.com>
-Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Cody Schuffelen
- <schuffelen@google.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH] cmd: bcb: Fix bcb compilation when CONFIG_CMD_BCB=n
-In-Reply-To: <20240603-bcb-compil-v1-1-4edc2c77eed3@baylibre.com>
-Date: Mon, 10 Jun 2024 11:45:29 +0200
-Message-ID: <87le3di11i.fsf@fedora.mail-host-address-is-not-set>
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Cc: Mario Six <mario.six@gdsys.cc>, Quentin Schulz
+ <quentin.schulz@cherry.de>, Mattijs Korpershoek
+ <mkorpershoek@baylibre.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH v2 1/2] bootstd: Fix a handful of doc typos in bootmeth
+In-Reply-To: <20240604-bootmeth-typos-v2-1-821683a95aaf@baylibre.com>
+Date: Mon, 10 Jun 2024 11:46:33 +0200
+Message-ID: <87ikyhi0zq.fsf@fedora.mail-host-address-is-not-set>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -93,44 +94,78 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Mon 10 Jun 2024 at 11:45, Mattijs Korpershoek <mkorpershoek@baylibre.com> wrote:
+On Mon 10 Jun 2024 at 11:46, Mattijs Korpershoek <mkorpershoek@baylibre.com> wrote:
 
-> commit dfeb4f0d7935 ("cmd: bcb: extend BCB C API to allow read/write the fields")
-> introduced the bcb_get() function.
+> Fix some trivial typos found by browsing the code.
+> Done with flyspell.
 > 
-> When CONFIG_CMD_BCB=n, that function is stubbed.
-> The stubbed function has a wrong prototype: value_size arg is missing.
-> 
-> Add the missing argument to fix build when CONFIG_CMD_BCB=n.
-> 
-> Fixes: dfeb4f0d7935 ("cmd: bcb: extend BCB C API to allow read/write the fields")
+> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 > Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 > ---
->  include/bcb.h | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+>  include/bootmeth.h | 12 ++++++------
+>  1 file changed, 6 insertions(+), 6 deletions(-)
 > 
-> diff --git a/include/bcb.h b/include/bcb.h
-> index 1941d8c28b4f..a56b547595a6 100644
-> --- a/include/bcb.h
-> +++ b/include/bcb.h
-> @@ -58,7 +58,8 @@ static inline int bcb_set(enum bcb_field field, const char *value)
->  	return -EOPNOTSUPP;
->  }
->  
-> -static inline int bcb_get(enum bcb_field field, char *value_out)
-> +static inline int bcb_get(enum bcb_field field,
-> +			  char *value_out, size_t value_size)
->  {
->  	return -EOPNOTSUPP;
->  }
+> diff --git a/include/bootmeth.h b/include/bootmeth.h
+> index 0fc36104ece0..529c4d813d82 100644
+> --- a/include/bootmeth.h
+> +++ b/include/bootmeth.h
+> @@ -40,7 +40,7 @@ struct bootmeth_ops {
+>  	/**
+>  	 * get_state_desc() - get detailed state information
+>  	 *
+> -	 * Prodecues a textual description of the state of the bootmeth. This
+> +	 * Produces a textual description of the state of the bootmeth. This
+>  	 * can include newline characters if it extends to multiple lines. It
+>  	 * must be a nul-terminated string.
+>  	 *
+> @@ -138,7 +138,7 @@ struct bootmeth_ops {
+>  	 * @dev:	Bootmethod device to boot
+>  	 * @bflow:	Bootflow to boot
+>  	 * Return: does not return on success, since it should boot the
+> -	 *	Operating Systemn. Returns -EFAULT if that fails, -ENOTSUPP if
+> +	 *	Operating System. Returns -EFAULT if that fails, -ENOTSUPP if
+>  	 *	trying method resulted in finding out that is not actually
+>  	 *	supported for this boot and should not be tried again unless
+>  	 *	something changes, other -ve on other error
+> @@ -151,7 +151,7 @@ struct bootmeth_ops {
+>  /**
+>   * bootmeth_get_state_desc() - get detailed state information
+>   *
+> - * Prodecues a textual description of the state of the bootmeth. This
+> + * Produces a textual description of the state of the bootmeth. This
+>   * can include newline characters if it extends to multiple lines. It
+>   * must be a nul-terminated string.
+>   *
+> @@ -244,7 +244,7 @@ int bootmeth_read_file(struct udevice *dev, struct bootflow *bflow,
+>   * @dev:	Bootmethod device to use
+>   * @bflow:	Bootflow to read
+>   * Return: does not return on success, since it should boot the
+> - *	Operating Systemn. Returns -EFAULT if that fails, other -ve on
+> + *	Operating System. Returns -EFAULT if that fails, other -ve on
+>   *	other error
+>   */
+>  int bootmeth_read_all(struct udevice *dev, struct bootflow *bflow);
+> @@ -255,7 +255,7 @@ int bootmeth_read_all(struct udevice *dev, struct bootflow *bflow);
+>   * @dev:	Bootmethod device to boot
+>   * @bflow:	Bootflow to boot
+>   * Return: does not return on success, since it should boot the
+> - *	Operating Systemn. Returns -EFAULT if that fails, other -ve on
+> + *	Operating System. Returns -EFAULT if that fails, other -ve on
+>   *	other error
+>   */
+>  int bootmeth_boot(struct udevice *dev, struct bootflow *bflow);
+> @@ -264,7 +264,7 @@ int bootmeth_boot(struct udevice *dev, struct bootflow *bflow);
+>   * bootmeth_setup_iter_order() - Set up the ordering of bootmeths to scan
+>   *
+>   * This sets up the ordering information in @iter, based on the selected
+> - * ordering of the bootmethds in bootstd_priv->bootmeth_order. If there is no
+> + * ordering of the bootmeths in bootstd_priv->bootmeth_order. If there is no
+>   * ordering there, then all bootmethods are added
+>   *
+>   * @iter: Iterator to update with the order
 > 
-> ---
-> base-commit: ea722aa5eb33740ae77e8816aeb72b385e621cd0
-> change-id: 20240603-bcb-compil-d8eaf7074475
-> 
-> Best regards,
 > -- 
-> Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> 2.45.0
 > 
 > 
 
