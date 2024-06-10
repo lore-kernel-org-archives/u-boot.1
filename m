@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9422C27C55
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 09:38:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B3CCC27C55
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 09:44:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5578087E9D;
-	Mon, 10 Jun 2024 11:38:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 57B3F880A8;
+	Mon, 10 Jun 2024 11:44:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EwQ+QMnW";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="jPQ57Hex";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A136287E0D; Mon, 10 Jun 2024 11:38:28 +0200 (CEST)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id 7B1CE88239; Mon, 10 Jun 2024 11:44:49 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5AE4487E9D
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 11:38:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 77B1687E0D
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 11:44:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1f6dfc17006so17188675ad.0
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 02:38:26 -0700 (PDT)
+ spf=pass smtp.mailfrom=jmasson@baylibre.com
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5751bcb3139so5066690a12.1
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 02:44:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718012305; x=1718617105; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=iT8Dw5X0r4fFTQcRUaFsnX4kLyr53aZ/+jF2O1ia8K0=;
- b=EwQ+QMnWsS16P1df2cejd8wKYA8PtqN94Cs0U5pFXrXhk4lY1NavxqLEUhbSB15NfT
- G+LfYiCmvdXKSdHpMaIPGhxxZVoqqffRMv9n2wj1124OQAh3dSYFn90UBpipbTYSwBHw
- xAsOJ9qa1JfBi+Pzw4yr/Vv3/efO2U63RYui5e1chbzHgTv6MJeJGIfVXUq59af7tsFc
- jdklK/vrhQYW80IUfhX+SbTYdXkpS1fq2i0EGI+3t5aNTsfuYN8HQQ3z69FYQc6kav4c
- ZNmJDtnAVkuWxFS5blDeIiwIE6GWz8ec7bGz37cv3TxIdjpl3LmIptZeqU9jYetdIUtC
- CysA==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718012687; x=1718617487;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:in-reply-to:subject:cc:to:from:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=kitNeS9GtZKqwC9ndq4IvdHnjYHHSMX8VKyElLVC9FU=;
+ b=jPQ57Hex3ya4eNBqa9ozJxJRA1UwKBXYcT629S7yXl4IZ8I8/tAG6rdORzXVNaBByj
+ zNAxJZk1ffdU1tt1AOmLFOCmlGK8y3BhDMcia0xZRt0OSX1EjZXO8lpKVvJtozOqyeik
+ KJfk3tMPjMMVOfXxLUz9YQqtMxrtJSjHfc0sfckjzzJm4gi/8Wtd8/8LrbTeWXuuCmiI
+ JLF+aeZT+/FuL0qLdW8VNAEPh/fYYD/MHaEmELolPbpArzlmstUCYbRZ/LKYRsYEEQms
+ uSyTm/rcgFiSoxCMTcB+6DWOOp1mZGvfjWiuMbYBeek1QGCR/xHR+f0YzhM/KaVqrZCl
+ 4fiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718012305; x=1718617105;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=iT8Dw5X0r4fFTQcRUaFsnX4kLyr53aZ/+jF2O1ia8K0=;
- b=GRwNWrTTvObPR+KXM/x4rFBNMq8OWfwk5Kgjpqd+LHjx3P9XTAf3dehYZWvjP/JgUL
- QvYwLyUVadMtp6GDOlkqzNrPGOYVaOyNygsVGz8Dhu7FB1JmIZ+uVZ4Ll0WTzcDilEDa
- 516/aBxNHz//SsBPF0B1EfboACg6QFMuwrMvmjGtMcZXuq7J2IMpiRAzLPo0Hj7draS7
- w5GDIKoqrlpNesZo+qP6oqTZmPKwVgW+qNTBSTUNOIcuOrvSN/LLMb6PAIph+OCJCzCt
- aiY+9YwYYKN+QD91sHjtbbGJTXVt2mcPMliw0O6fGuxB/QiE24PnTcSFWKtM5fPOxOaZ
- Ix0Q==
-X-Gm-Message-State: AOJu0YxEsRRI+NOEo8oQ5bFnEWJoJ5ejK4dgC0XvORWlD89rVjodKqUX
- oSo5bVoWX3TZh8HeQ7AajojVPXFDbVpIRHvlY5qPMjhSD2rUW6XdERrh5h5YauuRwug4hD3Jicg
- f7er47JfODn/wutr+Y5/vlkxHNwRADpMJjBoUEIcq2qBpoXFz6YbzXQ==
-X-Google-Smtp-Source: AGHT+IGhvh3aAfRkP8GO7TRoC7U9fLZKoAmno5/RpqwDSI3Pzh0hzOYTpMwvtchRx0yCPowy/JD/oEPiwZhp9PVOjsE=
-X-Received: by 2002:a17:902:f690:b0:1f6:fa4a:5080 with SMTP id
- d9443c01a7336-1f6fa4a537cmr39157035ad.8.1718012304771; Mon, 10 Jun 2024
- 02:38:24 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1718012687; x=1718617487;
+ h=mime-version:message-id:date:in-reply-to:subject:cc:to:from
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=kitNeS9GtZKqwC9ndq4IvdHnjYHHSMX8VKyElLVC9FU=;
+ b=AICrk1+/FFDcAdEe1k11jDREmCIJ7+PF/abuP6VSX6psqdsuN/ul7adNRD3ZBnoXxJ
+ nnzf/xArmQ1I12n9zrbCcZqj+MP/F9/+3OCN3/mmraGjt+cRMikQTEv5SD2NzkirHnlH
+ GxajMmoHwbi1Ng8bCUA3kASwgaj0U7vTVJoJV1HNwJvNlfQyRd0Uerbp3QWwMRtZnctP
+ s95IwthU6w8rFAR+XQHi/qMKWtofriGcVYFFZLOXGybmmR4QGOUq3pBTURNFXNgnTTA2
+ tfEOeQBR/YbFJeN3ivCqoeoGj3g6ArYIQziw1FCeQfCYb7hTKgaETGcvqxiL/Doev+n+
+ q+QA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXMRbz/PTPPSecS0ImWCWfSqLe/zawp93t9sdr57WH+Af8zcJnIw79CkKyafjrx4Kn8YdUzsgB2qDM67WeB9jZsmqvYoA==
+X-Gm-Message-State: AOJu0YwufUdjk7tF4k5Xnetgiee7lxDzq4A3QkdRoyFa8HBbVcrM2cJ/
+ V2HWlBDdSCneED4xtCkHaW8wh3Y3i4qlOAjPbYB5PX5XErRPilp/TjPZahLdvPc=
+X-Google-Smtp-Source: AGHT+IEbQYRLFZXTPCneBs9gw23mi2dPAwK45qCXm/2z7sXIT2aMhhYt+pDRG90kZFkhc9+ktBGguQ==
+X-Received: by 2002:a50:d70c:0:b0:57c:628d:f0eb with SMTP id
+ 4fb4d7f45d1cf-57c628df308mr3639089a12.24.1718012686829; 
+ Mon, 10 Jun 2024 02:44:46 -0700 (PDT)
+Received: from localhost ([2a04:cec2:b:49d2:7655:6cc3:de57:63b7])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-57aae11a98csm7154312a12.48.2024.06.10.02.44.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 10 Jun 2024 02:44:46 -0700 (PDT)
+From: Julien Masson <jmasson@baylibre.com>
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Tom Rini
+ <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, <u-boot@lists.denx.de>, Mattijs
+ Korpershoek <mkorpershoek@baylibre.com>
+Subject: Re: [PATCH] image: Set load_end on partial loads
+In-Reply-To: <20240523-image-partial-decomp-v1-1-af036235963a@baylibre.com>
+Date: Mon, 10 Jun 2024 11:44:45 +0200
+Message-ID: <87o789i12q.fsf@fedora.mail-host-address-is-not-set>
 MIME-Version: 1.0
-References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
- <20240607185240.1892031-3-sughosh.ganu@linaro.org>
-In-Reply-To: <20240607185240.1892031-3-sughosh.ganu@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 10 Jun 2024 12:37:47 +0300
-Message-ID: <CAC_iWj++=PHS2mwpL70=qTQ-9SFR50X3KvKgDpEmq1BryWQKaw@mail.gmail.com>
-Subject: Re: [RFC PATCH 02/31] lmb: staticize __lmb_alloc_base()
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marex@denx.de>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,96 +92,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 7 Jun 2024 at 21:53, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
->
-> The __lmb_alloc_base() function is only called from within the lmb
-> module. Moreover, the lmb_alloc() and lmb_alloc_base() API's are good
-> enough for the allocation API calls. Make the __lmb_alloc_base()
-> function static.
->
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> ---
->  include/lmb.h |  2 --
->  lib/lmb.c     | 39 ++++++++++++++++++++-------------------
->  2 files changed, 20 insertions(+), 21 deletions(-)
->
-> diff --git a/include/lmb.h b/include/lmb.h
-> index 6c50d93e83..7b87181b9e 100644
-> --- a/include/lmb.h
-> +++ b/include/lmb.h
-> @@ -112,8 +112,6 @@ long lmb_reserve_flags(struct lmb *lmb, phys_addr_t base,
->  phys_addr_t lmb_alloc(struct lmb *lmb, phys_size_t size, ulong align);
->  phys_addr_t lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align,
->                            phys_addr_t max_addr);
-> -phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align,
-> -                            phys_addr_t max_addr);
->  phys_addr_t lmb_alloc_addr(struct lmb *lmb, phys_addr_t base, phys_size_t size);
->  phys_size_t lmb_get_free_size(struct lmb *lmb, phys_addr_t addr);
->
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index adc3abd5b4..4d39c0d1f9 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -435,30 +435,13 @@ static long lmb_overlaps_region(struct lmb_region *rgn, phys_addr_t base,
->         return (i < rgn->cnt) ? i : -1;
->  }
->
-> -phys_addr_t lmb_alloc(struct lmb *lmb, phys_size_t size, ulong align)
-> -{
-> -       return lmb_alloc_base(lmb, size, align, LMB_ALLOC_ANYWHERE);
-> -}
-> -
-> -phys_addr_t lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align, phys_addr_t max_addr)
-> -{
-> -       phys_addr_t alloc;
-> -
-> -       alloc = __lmb_alloc_base(lmb, size, align, max_addr);
-> -
-> -       if (alloc == 0)
-> -               printf("ERROR: Failed to allocate 0x%lx bytes below 0x%lx.\n",
-> -                      (ulong)size, (ulong)max_addr);
-> -
-> -       return alloc;
-> -}
-> -
->  static phys_addr_t lmb_align_down(phys_addr_t addr, phys_size_t size)
->  {
->         return addr & ~(size - 1);
->  }
->
-> -phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align, phys_addr_t max_addr)
-> +static phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size,
-> +                                   ulong align, phys_addr_t max_addr)
->  {
->         long i, rgn;
->         phys_addr_t base = 0;
-> @@ -499,6 +482,24 @@ phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align, phy
->         return 0;
->  }
->
-> +phys_addr_t lmb_alloc(struct lmb *lmb, phys_size_t size, ulong align)
-> +{
-> +       return lmb_alloc_base(lmb, size, align, LMB_ALLOC_ANYWHERE);
-> +}
-> +
-> +phys_addr_t lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align, phys_addr_t max_addr)
-> +{
-> +       phys_addr_t alloc;
-> +
-> +       alloc = __lmb_alloc_base(lmb, size, align, max_addr);
-> +
-> +       if (alloc == 0)
-> +               printf("ERROR: Failed to allocate 0x%lx bytes below 0x%lx.\n",
-> +                      (ulong)size, (ulong)max_addr);
-> +
-> +       return alloc;
-> +}
-> +
->  /*
->   * Try to allocate a specific address range: must be in defined memory but not
->   * reserved
-> --
-> 2.34.1
->
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+On Mon 10 Jun 2024 at 11:43, Mattijs Korpershoek <mkorpershoek@baylibre.com> wrote:
+
+> When decompressing, it's possible that the algorithm only performs
+> a partial decompression.
+> This usually happens when CONFIG_SYS_BOOTM_LEN is too small for
+> the uncompressed image.
+> 
+> When that happens, image_decomp() returns an error and *load_end == load.
+> The error is then handled by handle_decomp_error().
+> 
+> handle_decomp_error() expects the number of uncompressed bytes in
+> uncomp_size but receives *load_end - load == load - load == 0.
+> 
+> Because of this, handle_decomp_error does not report the expected
+> "Image too large: increase CONFIG_SYS_BOOTM_LEN" error message.
+> 
+> Modify the image_decomp() logic to always report the decompressed size,
+> even when a partial decompression happened.
+> 
+> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> ---
+> This has been tested on an AM62X SK EVM board with a big lz4 image and
+> the default CONFIG_SYS_BOOTM_LEN of 0x800000.
+> 
+> This has also been tested on sandbox using:
+> => ut compression
+> ---
+>  boot/image.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/boot/image.c b/boot/image.c
+> index 073931cd7a3f..4f48e6eb563d 100644
+> --- a/boot/image.c
+> +++ b/boot/image.c
+> @@ -531,10 +531,10 @@ int image_decomp(int comp, ulong load, ulong image_start, int type,
+>  		printf("Unimplemented compression type %d\n", comp);
+>  		return ret;
+>  	}
+> -	if (ret)
+> -		return ret;
+>  
+>  	*load_end = load + image_len;
+> +	if (ret)
+> +		return ret;
+>  
+>  	return 0;
+>  }
+> 
+> ---
+> base-commit: a7f0154c412859323396111dd0c09dbafbc153cb
+> change-id: 20240523-image-partial-decomp-d6604e998e3a
+> 
+> Best regards,
+> -- 
+> Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> 
+> 
+
+Reviewed-by: Julien Masson <jmasson@baylibre.com>
+-- 
+Julien Masson
