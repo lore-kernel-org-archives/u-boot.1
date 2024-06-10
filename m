@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79421C27C53
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 01:14:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD856C27C55
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 01:14:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA100884B0;
-	Mon, 10 Jun 2024 03:12:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 44F5D8846D;
+	Mon, 10 Jun 2024 03:12:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HeP8AXC1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bmfmN4Xe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72036884A7; Mon, 10 Jun 2024 03:12:38 +0200 (CEST)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id 1C741884BF; Mon, 10 Jun 2024 03:12:39 +0200 (CEST)
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
+ [IPv6:2001:4860:4864:20::2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06BF488413
+ by phobos.denx.de (Postfix) with ESMTPS id BA7F5883DA
  for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 03:12:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-245435c02e1so2040408fac.0
- for <u-boot@lists.denx.de>; Sun, 09 Jun 2024 18:12:35 -0700 (PDT)
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-254c8e27c80so263204fac.2
+ for <u-boot@lists.denx.de>; Sun, 09 Jun 2024 18:12:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1717981955; x=1718586755; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Th8FwA8eBPsvohCOWDpRcQlEhX6pU9bPE2dFtsXjSXQ=;
- b=HeP8AXC1ImBuQEHIGTEc3oLgcKOLcNbUGFY6y5lsrptFtpglZYrMDaHI3GSHD+Me/D
- 2Z1kYwZRRDS0TmXypK2Z7uPW4DdftGxTnorfRFhUK8NCttNwCzVwW8UxCB8aQ9WBzWzT
- +HqAqGxwmKYgDgdCRhh2v4LEonQ2Wy6FWnxaEaCYxh5KkdUyj8omBfNbvHLoZdMW6SAy
- 7GpwiGm6K9Y5rGpS2Ls/yspLdgWdAOBqKJYLPSTaRj993T2gZx2Jjey9xdTVeZ3+TUiu
- bYWh8x7+jJjNSwBdrMZkV6b3S4PVOktl2eLR7t5FzZVzWi+wADdP/e5RS70e41Vvv+V8
- 3MlQ==
+ bh=DGYMSBlkj16uuveSb0a3b24lmBLhTYkV3djbSlPO19o=;
+ b=bmfmN4XelCL+KR2XFgSr0iEWmjbeUltRaIFwJeJ/Ww4GNVpzj/qgoEgW6Roem7g5Ni
+ PRtcGnn6TPofXAk7/PAHmLmnArC81lxZDdJbjKt69aqzQghMRqMKEVCPXlONcz6ExvtJ
+ 0o+Rk7pZEb+28hTBkJKJW8g3D3rukr7TH1qsjsXOFhikTh8SsuEjxG4YYZtId5+b/qbG
+ Mo8SD4T7Yp49/MYtgRN4Lpf/1FZOZ403Zp50ChZn23PCLz6ZuB9T+hmtg+t1HguqlLHc
+ qdc7zGIHfXH+CMPDJLgW8LMkpeOAB136wZNulu2X0ZH4xMtZqhVGVV8/CowUZz+jLIuR
+ gEvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1717981955; x=1718586755;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Th8FwA8eBPsvohCOWDpRcQlEhX6pU9bPE2dFtsXjSXQ=;
- b=DriwAEov5e2Pw+xYu+KQizMU8sEXz2KvMkzlm8wckIiOdWBhIFpWuuz0bvImL6aFU+
- 6kHyBg7mkzPHGrdKHkgDsfWuZ8ZQ1UC4BJuguSPmqmJQrs9gOtlb/EXgf1z8HMRQtdiY
- EPOATzXoQDebY89PZcOwqbomF9oxsgZSTpdl+46Jch26VB9PvYGhyVv0SA8sIBVQ7MyU
- oHpZjLcoLLQKaKMk/9oGWbq/Xv2eYr0vuzQX893L/i9+i1SgwHDmF29VI3mz6x6MRuQT
- GV/qXfgSLEQTRzj0ywy1lgTcQWpMJchuXsWd7ehFhKqbLe64Ztkmgl55jV+8C5Hhlhf2
- 514A==
+ bh=DGYMSBlkj16uuveSb0a3b24lmBLhTYkV3djbSlPO19o=;
+ b=dzwLSd/PGavEUJcXRBx38kbMCTXgoOP/XdwthvsOPBJ5NHMicZR0N/8M58Z934fiHq
+ y9N1VDLinNmR+wefHXXF3+uLhIsPjYoJ978/ipcQvOcVxmtfoBVS1vAhtGe7ZscD3NWg
+ 2u0HzSRHR0fLJc2YfScQQ5mUKLB4N1Bb1w8zyppudsCeeLZtnwAjCJvRVMPQksc8LqRp
+ drOlkR5vkVBK1WhcthH2+GRt15IuV3C+f6Hn3zD+AuclY/keze76zPQ9jk5wdpQnV+9u
+ 7QKxkU2tSd3d5WhnTshe9bZRsNWdjAm1PAhMbnTnpj5SyInko5Jw5zn+IRFaivaW6UYp
+ BV9Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVVMr7JT0DAsJhPLO3WJsPePn9DXZf0zGmv+mKV2xkzH6Se8ZO01dxwMOdWhFdKho+6CGjC6xxXXL1jBWzwxiY7mQ5Rfg==
-X-Gm-Message-State: AOJu0YyC2BHx/Wr4cbE4Iuw2cT8hTTqmUqRatLckOatc90fngXR/8r7N
- xoH+8o01KAKQFERNVa1HNc5742cAsgjDzt6dnoJntkUBzr1yflNMSLO8CawQOv0=
-X-Google-Smtp-Source: AGHT+IFQ/udCYn6+epYlbf1OKb/scqtdnU7Jjon9HJ22kfiYxuyH3dmvcJIvbBiGPnfdkoYNp4Ef7w==
-X-Received: by 2002:a05:6870:1701:b0:254:bd24:de85 with SMTP id
- 586e51a60fabf-254bd24e14fmr2482179fac.16.1717981954597; 
- Sun, 09 Jun 2024 18:12:34 -0700 (PDT)
+ AJvYcCXDiCvA2loBSG2BVCd2lc47j8J7qJPpMTLsZxtWlJI5dvWdOQBkPxvLlGxv+3DaoKQvbwsLGIyAiqSQDMEKsEyEtLge0A==
+X-Gm-Message-State: AOJu0YzhdlrQ2L5rNLBzGEO0LnmvSwIuoJ6QiAVz9MLSI68dKD0TMyvG
+ NTfDibeaZp6kONooQ5AH6g4rAiDhDHMTSsZbb7BiS6RmbB4FxwJzpyONp2cIeQU=
+X-Google-Smtp-Source: AGHT+IHcOqBhu3oMf+i4yk6s0XBkrLF+wRR2TFkHr+29Hfrfsf2F07dNQzWSo7GHMhNupntIp0Cp9w==
+X-Received: by 2002:a05:6870:a2cc:b0:254:8ca4:a18f with SMTP id
+ 586e51a60fabf-2548ca5a1c8mr6320497fac.29.1717981955332; 
+ Sun, 09 Jun 2024 18:12:35 -0700 (PDT)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2544814f43csm2044176fac.58.2024.06.09.18.12.34
+ 586e51a60fabf-254ab072356sm694925fac.53.2024.06.09.18.12.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Jun 2024 18:12:34 -0700 (PDT)
+ Sun, 09 Jun 2024 18:12:35 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>,
  Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
@@ -78,9 +78,10 @@ Cc: Quentin Schulz <quentin.schulz@cherry.de>,
  Ferass El Hafidi <vitali64pmemail@protonmail.com>,
  Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com
-Subject: [PATCH v2 11/40] mmc: dw_mmc: Add support for 64-bit IDMAC
-Date: Sun,  9 Jun 2024 20:11:57 -0500
-Message-Id: <20240610011226.4050-12-semen.protsenko@linaro.org>
+Subject: [PATCH v2 12/40] mmc: dw_mmc: Replace fifoth_val property with
+ fifo-depth
+Date: Sun,  9 Jun 2024 20:11:58 -0500
+Message-Id: <20240610011226.4050-13-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240610011226.4050-1-semen.protsenko@linaro.org>
 References: <20240610011226.4050-1-semen.protsenko@linaro.org>
@@ -102,374 +103,252 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some DW MMC blocks (e.g. those on modern Exynos chips) support 64-bit
-DMA addressing mode. 64-bit DW MMC variants differ from their 32-bit
-counterparts:
-  - the register layout is a bit different (because there are additional
-    IDMAC registers present for storing upper part of 64-bit addresses)
-  - DMA descriptor structure is bigger and different from 32-bit one
+Replace fifoth_val property with its fifo-depth counterpart in all DW
+MMC drivers. fifo-depth is a common property used in upstream Linux
+kernel. The FIFOTH register value will be calculated using fifo-depth
+value in DW MMC core (dw_mmc.c). This change reduces code duplication in
+platform drivers, and pulls common FIFOTH register value calculation
+into core dw_mmc driver where it belongs.
 
-Introduce all necessary changes to enable support for 64-bit DMA capable
-DW MMC blocks. Next changes were made:
-
-  1. Check which DMA address mode is supported in current IP-core
-     version. HCON register (bit 27) indicates whether it's 32-bit or
-     64-bit addressing. Add boolean .dma_64bit_address field to struct
-     dwmci_host and store the result there. dwmci_init_dma() function is
-     introduced for doing so, which is called on driver's init.
-
-  2. Add 64-bit DMA descriptor (struct dwmci_idmac64) and use it in
-     dwmci_prepare_desc() in case if .dma_64bit_address field is true.
-     A new dwmci_set_idma_desc64() function was added for populating that
-     descriptor.
-
-  3. Add registers for 64-bit DMA capable blocks. To make the access to
-     IDMAC registers universal between 32-bit / 64-bit cases, a new
-     struct dwmci_idmac_regs (and corresponding host->regs field) was
-     introduced, which abstracts the hardware by being set to
-     appropriate offset constants on init. All direct calls to IDMAC
-     registers were correspondingly replaced by accessing host->regs.
-
-  4. Allocate and use 64-bit DMA descriptors buffer in case when IDMAC
-     is 64-bit capable. Extract all the code (except for the IDMAC
-     descriptors buffer allocation) from dwmci_send_cmd() to
-     dwmci_send_cmd_common(), so that it's possible to keep IDMAC
-     buffer (either 32-bit or 64-bit) on stack during send_cmd routine.
-
-The insights for this implementation were taken from Linux kernel DW MMC
-driver.
+No functional change.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
-Changes in v2:
-  - Replaced CONFIG_IS_ENABLED() with #ifdef
-
- drivers/mmc/dw_mmc.c | 152 ++++++++++++++++++++++++++++++++++---------
- include/dwmmc.h      |  39 ++++++++++-
- 2 files changed, 160 insertions(+), 31 deletions(-)
+ drivers/mmc/dw_mmc.c          | 21 +++++++++++++--------
+ drivers/mmc/exynos_dw_mmc.c   | 10 +++++-----
+ drivers/mmc/ftsdc010_mci.h    |  1 -
+ drivers/mmc/hi6220_dw_mmc.c   |  7 +++----
+ drivers/mmc/nexell_dw_mmc.c   |  5 +----
+ drivers/mmc/rockchip_dw_mmc.c |  5 +----
+ drivers/mmc/snps_dw_mmc.c     |  6 ++----
+ drivers/mmc/socfpga_dw_mmc.c  |  4 ++--
+ include/dwmmc.h               |  4 ++--
+ 9 files changed, 29 insertions(+), 34 deletions(-)
 
 diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
-index a77023ff4cd6..7aa3dbbe83ad 100644
+index 7aa3dbbe83ad..8af665a00222 100644
 --- a/drivers/mmc/dw_mmc.c
 +++ b/drivers/mmc/dw_mmc.c
-@@ -28,6 +28,39 @@ struct dwmci_idmac32 {
- 	u32 des3;	/* Next descriptor physical address */
- } __aligned(ARCH_DMA_MINALIGN);
- 
-+/* Internal DMA Controller (IDMAC) descriptor for 64-bit addressing mode */
-+struct dwmci_idmac64 {
-+	u32 des0;	/* Control descriptor */
-+	u32 des1;	/* Reserved */
-+	u32 des2;	/* Buffer sizes */
-+	u32 des3;	/* Reserved */
-+	u32 des4;	/* Lower 32-bits of Buffer Address Pointer 1 */
-+	u32 des5;	/* Upper 32-bits of Buffer Address Pointer 1 */
-+	u32 des6;	/* Lower 32-bits of Next Descriptor Address */
-+	u32 des7;	/* Upper 32-bits of Next Descriptor Address */
-+} __aligned(ARCH_DMA_MINALIGN);
-+
-+/* Register offsets for DW MMC blocks with 32-bit IDMAC */
-+static const struct dwmci_idmac_regs dwmci_idmac_regs32 = {
-+	.dbaddrl	= DWMCI_DBADDR,
-+	.idsts		= DWMCI_IDSTS,
-+	.idinten	= DWMCI_IDINTEN,
-+	.dscaddrl	= DWMCI_DSCADDR,
-+	.bufaddrl	= DWMCI_BUFADDR,
-+};
-+
-+/* Register offsets for DW MMC blocks with 64-bit IDMAC */
-+static const struct dwmci_idmac_regs dwmci_idmac_regs64 = {
-+	.dbaddrl	= DWMCI_DBADDRL,
-+	.dbaddru	= DWMCI_DBADDRU,
-+	.idsts		= DWMCI_IDSTS64,
-+	.idinten	= DWMCI_IDINTEN64,
-+	.dscaddrl	= DWMCI_DSCADDRL,
-+	.dscaddru	= DWMCI_DSCADDRU,
-+	.bufaddrl	= DWMCI_BUFADDRL,
-+	.bufaddru	= DWMCI_BUFADDRU,
-+};
-+
- static int dwmci_wait_reset(struct dwmci_host *host, u32 value)
+@@ -218,8 +218,6 @@ static unsigned int dwmci_get_timeout(struct mmc *mmc, const unsigned int size)
+ static int dwmci_data_transfer_fifo(struct dwmci_host *host,
+ 				    struct mmc_data *data, u32 mask)
  {
- 	unsigned long timeout = 1000;
-@@ -55,11 +88,27 @@ static void dwmci_set_idma_desc32(struct dwmci_idmac32 *desc, u32 control,
- 	desc->des3 = next_desc_phys;
- }
+-	const u32 fifo_depth = (((host->fifoth_val & RX_WMARK_MASK) >>
+-				 RX_WMARK_SHIFT) + 1) * 2;
+ 	const u32 int_rx = mask & (DWMCI_INTMSK_RXDR | DWMCI_INTMSK_DTO);
+ 	const u32 int_tx = mask & DWMCI_INTMSK_TXDR;
+ 	int ret = 0;
+@@ -254,8 +252,8 @@ static int dwmci_data_transfer_fifo(struct dwmci_host *host,
+ 			if (ret < 0)
+ 				break;
  
--static void dwmci_prepare_desc(struct mmc_data *data,
--			       struct dwmci_idmac32 *cur_idmac,
--			       void *bounce_buffer)
-+static void dwmci_set_idma_desc64(struct dwmci_idmac64 *desc, u32 control,
-+				  u32 buf_size, u64 buf_addr)
-+{
-+	phys_addr_t desc_phys = virt_to_phys(desc);
-+	u64 next_desc_phys = desc_phys + sizeof(struct dwmci_idmac64);
-+
-+	desc->des0 = control;
-+	desc->des1 = 0;
-+	desc->des2 = buf_size;
-+	desc->des3 = 0;
-+	desc->des4 = buf_addr & 0xffffffff;
-+	desc->des5 = buf_addr >> 32;
-+	desc->des6 = next_desc_phys & 0xffffffff;
-+	desc->des7 = next_desc_phys >> 32;
-+}
-+
-+static void dwmci_prepare_desc(struct dwmci_host *host, struct mmc_data *data,
-+			       void *cur_idmac, void *bounce_buffer)
+-			len = fifo_depth - ((len >> DWMCI_FIFO_SHIFT) &
+-					    DWMCI_FIFO_MASK);
++			len = host->fifo_depth - ((len >> DWMCI_FIFO_SHIFT) &
++						  DWMCI_FIFO_MASK);
+ 			len = min(size, len);
+ 			for (i = 0; i < len; i++)
+ 				dwmci_writel(host, DWMCI_DATA, *buf++);
+@@ -656,16 +654,23 @@ static int dwmci_set_ios(struct mmc *mmc)
+ 
+ static void dwmci_init_fifo(struct dwmci_host *host)
  {
- 	struct dwmci_idmac32 *desc32 = cur_idmac;
-+	struct dwmci_idmac64 *desc64 = cur_idmac;
- 	ulong data_start, data_end;
- 	unsigned int blk_cnt, i;
+-	if (!host->fifoth_val) {
++	u32 fifo_thr, fifoth_val;
++
++	if (!host->fifo_depth) {
+ 		u32 fifo_size;
  
-@@ -79,34 +128,47 @@ static void dwmci_prepare_desc(struct mmc_data *data,
- 		} else
- 			cnt = data->blocksize * 8;
- 
--		dwmci_set_idma_desc32(desc32, flags, cnt,
--				      buf_phys + i * PAGE_SIZE);
--		desc32++;
-+		if (host->dma_64bit_address) {
-+			dwmci_set_idma_desc64(desc64, flags, cnt,
-+					      buf_phys + i * PAGE_SIZE);
-+			desc64++;
-+		} else {
-+			dwmci_set_idma_desc32(desc32, flags, cnt,
-+					      buf_phys + i * PAGE_SIZE);
-+			desc32++;
-+		}
- 
- 		if (blk_cnt <= 8)
- 			break;
- 		blk_cnt -= 8;
++		/*
++		 * Automatically detect FIFO depth from FIFOTH register.
++		 * Power-on value of RX_WMark is FIFO_DEPTH-1.
++		 */
+ 		fifo_size = dwmci_readl(host, DWMCI_FIFOTH);
+ 		fifo_size = ((fifo_size & RX_WMARK_MASK) >> RX_WMARK_SHIFT) + 1;
+-		host->fifoth_val = MSIZE(0x2) | RX_WMARK(fifo_size / 2 - 1) |
+-				   TX_WMARK(fifo_size / 2);
++		host->fifo_depth = fifo_size;
  	}
  
--	data_end = (ulong)desc32;
-+	if (host->dma_64bit_address)
-+		data_end = (ulong)desc64;
-+	else
-+		data_end = (ulong)desc32;
- 	flush_dcache_range(data_start, roundup(data_end, ARCH_DMA_MINALIGN));
+-	dwmci_writel(host, DWMCI_FIFOTH, host->fifoth_val);
++	fifo_thr = host->fifo_depth / 2;
++	fifoth_val = MSIZE(0x2) | RX_WMARK(fifo_thr - 1) | TX_WMARK(fifo_thr);
++	dwmci_writel(host, DWMCI_FIFOTH, fifoth_val);
  }
  
- static void dwmci_prepare_data(struct dwmci_host *host,
- 			       struct mmc_data *data,
--			       struct dwmci_idmac32 *cur_idmac,
-+			       void *cur_idmac,
- 			       void *bounce_buffer)
+ static void dwmci_init_dma(struct dwmci_host *host)
+diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
+index 2f849c43b129..14cb0c05cb55 100644
+--- a/drivers/mmc/exynos_dw_mmc.c
++++ b/drivers/mmc/exynos_dw_mmc.c
+@@ -151,8 +151,8 @@ static int do_dwmci_init(struct dwmci_host *host)
+ 	return exynos_dwmci_core_init(host);
+ }
+ 
+-static int exynos_dwmci_get_config(const void *blob, int node,
+-				   struct dwmci_host *host,
++static int exynos_dwmci_get_config(struct udevice *dev, const void *blob,
++				   int node, struct dwmci_host *host,
+ 				   struct dwmci_exynos_priv_data *priv)
  {
-+	const u32 idmacl = virt_to_phys(cur_idmac) & 0xffffffff;
-+	const u32 idmacu = (u64)virt_to_phys(cur_idmac) >> 32;
- 	unsigned long ctrl;
- 
- 	dwmci_wait_reset(host, DWMCI_CTRL_FIFO_RESET);
- 
- 	/* Clear IDMAC interrupt */
--	dwmci_writel(host, DWMCI_IDSTS, 0xFFFFFFFF);
-+	dwmci_writel(host, host->regs->idsts, 0xffffffff);
- 
--	dwmci_writel(host, DWMCI_DBADDR, (ulong)cur_idmac);
-+	dwmci_writel(host, host->regs->dbaddrl, idmacl);
-+	if (host->dma_64bit_address)
-+		dwmci_writel(host, host->regs->dbaddru, idmacu);
- 
--	dwmci_prepare_desc(data, cur_idmac, bounce_buffer);
-+	dwmci_prepare_desc(host, data, cur_idmac, bounce_buffer);
- 
- 	ctrl = dwmci_readl(host, DWMCI_CTRL);
- 	ctrl |= DWMCI_IDMAC_EN | DWMCI_DMA_EN;
-@@ -257,13 +319,13 @@ static int dwmci_dma_transfer(struct dwmci_host *host, uint flags,
- 	else
- 		mask = DWMCI_IDINTEN_TI;
- 
--	ret = wait_for_bit_le32(host->ioaddr + DWMCI_IDSTS,
-+	ret = wait_for_bit_le32(host->ioaddr + host->regs->idsts,
- 				mask, true, 1000, false);
- 	if (ret)
- 		debug("%s: DWMCI_IDINTEN mask 0x%x timeout\n", __func__, mask);
- 
- 	/* Clear interrupts */
--	dwmci_writel(host, DWMCI_IDSTS, DWMCI_IDINTEN_MASK);
-+	dwmci_writel(host, host->regs->idsts, DWMCI_IDINTEN_MASK);
- 
- 	ctrl = dwmci_readl(host, DWMCI_CTRL);
- 	ctrl &= ~DWMCI_DMA_EN;
-@@ -300,20 +362,10 @@ static void dwmci_wait_while_busy(struct dwmci_host *host, struct mmc_cmd *cmd)
+ 	int err = 0;
+@@ -201,7 +201,7 @@ static int exynos_dwmci_get_config(const void *blob, int node,
+ 			priv->sdr_timing = DWMMC_MMC2_SDR_TIMING_VAL;
  	}
- }
  
--#ifdef CONFIG_DM_MMC
--static int dwmci_send_cmd(struct udevice *dev, struct mmc_cmd *cmd,
--		   struct mmc_data *data)
-+static int dwmci_send_cmd_common(struct dwmci_host *host, struct mmc_cmd *cmd,
-+				 struct mmc_data *data, void *cur_idmac)
- {
--	struct mmc *mmc = mmc_get_mmc_dev(dev);
--#else
--static int dwmci_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
--		struct mmc_data *data)
--{
--#endif
--	struct dwmci_host *host = mmc->priv;
--	ALLOC_CACHE_ALIGN_BUFFER(struct dwmci_idmac32, cur_idmac,
--				 data ? DIV_ROUND_UP(data->blocks, 8) : 0);
--	int ret = 0, flags = 0, i;
-+	int ret, flags = 0, i;
- 	u32 retry = 100000;
- 	u32 mask;
- 	struct bounce_buffer bbstate;
-@@ -433,6 +485,28 @@ static int dwmci_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
- 	return ret;
- }
+-	host->fifoth_val = fdtdec_get_int(blob, node, "fifoth_val", 0);
++	host->fifo_depth = dev_read_u32_default(dev, "fifo-depth", 0);
+ 	host->bus_hz = fdtdec_get_int(blob, node, "bus_hz", 0);
+ 	host->div = fdtdec_get_int(blob, node, "div", 0);
  
-+#ifdef CONFIG_DM_MMC
-+static int dwmci_send_cmd(struct udevice *dev, struct mmc_cmd *cmd,
-+			  struct mmc_data *data)
-+{
-+	struct mmc *mmc = mmc_get_mmc_dev(dev);
-+#else
-+static int dwmci_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
-+			  struct mmc_data *data)
-+{
-+#endif
-+	struct dwmci_host *host = mmc->priv;
-+	const size_t buf_size = data ? DIV_ROUND_UP(data->blocks, 8) : 0;
-+
-+	if (host->dma_64bit_address) {
-+		ALLOC_CACHE_ALIGN_BUFFER(struct dwmci_idmac64, idmac, buf_size);
-+		return dwmci_send_cmd_common(host, cmd, data, idmac);
-+	} else {
-+		ALLOC_CACHE_ALIGN_BUFFER(struct dwmci_idmac32, idmac, buf_size);
-+		return dwmci_send_cmd_common(host, cmd, data, idmac);
-+	}
-+}
-+
- static int dwmci_control_clken(struct dwmci_host *host, bool on)
- {
- 	const u32 val = on ? DWMCI_CLKEN_ENABLE | DWMCI_CLKEN_LOW_PWR : 0;
-@@ -594,6 +668,27 @@ static void dwmci_init_fifo(struct dwmci_host *host)
- 	dwmci_writel(host, DWMCI_FIFOTH, host->fifoth_val);
- }
+@@ -217,8 +217,8 @@ static int exynos_dwmmc_probe(struct udevice *dev)
+ 	struct dwmci_host *host = &priv->host;
+ 	int err;
  
-+static void dwmci_init_dma(struct dwmci_host *host)
-+{
-+	int addr_config;
-+
-+	if (host->fifo_mode)
-+		return;
-+
-+	addr_config = (dwmci_readl(host, DWMCI_HCON) >> 27) & 0x1;
-+	if (addr_config == 1) {
-+		host->dma_64bit_address = true;
-+		host->regs = &dwmci_idmac_regs64;
-+		debug("%s: IDMAC supports 64-bit address mode\n", __func__);
-+	} else {
-+		host->dma_64bit_address = false;
-+		host->regs = &dwmci_idmac_regs32;
-+		debug("%s: IDMAC supports 32-bit address mode\n", __func__);
-+	}
-+
-+	dwmci_writel(host, host->regs->idinten, DWMCI_IDINTEN_MASK);
-+}
-+
- static int dwmci_init(struct mmc *mmc)
- {
- 	struct dwmci_host *host = mmc->priv;
-@@ -616,16 +711,13 @@ static int dwmci_init(struct mmc *mmc)
- 
- 	dwmci_writel(host, DWMCI_TMOUT, 0xFFFFFFFF);
- 
--	dwmci_writel(host, DWMCI_IDINTEN, 0);
- 	dwmci_writel(host, DWMCI_BMOD, 1);
- 	dwmci_init_fifo(host);
-+	dwmci_init_dma(host);
- 
- 	dwmci_writel(host, DWMCI_CLKENA, 0);
- 	dwmci_writel(host, DWMCI_CLKSRC, 0);
- 
--	if (!host->fifo_mode)
--		dwmci_writel(host, DWMCI_IDINTEN, DWMCI_IDINTEN_MASK);
--
- 	return 0;
- }
- 
-diff --git a/include/dwmmc.h b/include/dwmmc.h
-index 7e4acf096dce..de18fda68ac8 100644
---- a/include/dwmmc.h
-+++ b/include/dwmmc.h
-@@ -44,12 +44,22 @@
- #define DWMCI_UHS_REG		0x074
- #define DWMCI_BMOD		0x080
- #define DWMCI_PLDMND		0x084
-+#define DWMCI_DATA		0x200
-+/* Registers to support IDMAC 32-bit address mode */
- #define DWMCI_DBADDR		0x088
- #define DWMCI_IDSTS		0x08C
- #define DWMCI_IDINTEN		0x090
- #define DWMCI_DSCADDR		0x094
- #define DWMCI_BUFADDR		0x098
--#define DWMCI_DATA		0x200
-+/* Registers to support IDMAC 64-bit address mode */
-+#define DWMCI_DBADDRL		0x088
-+#define DWMCI_DBADDRU		0x08c
-+#define DWMCI_IDSTS64		0x090
-+#define DWMCI_IDINTEN64		0x094
-+#define DWMCI_DSCADDRL		0x098
-+#define DWMCI_DSCADDRU		0x09c
-+#define DWMCI_BUFADDRL		0x0a0
-+#define DWMCI_BUFADDRU		0x0a4
- 
- /* Interrupt Mask register */
- #define DWMCI_INTMSK_ALL	0xffffffff
-@@ -142,6 +152,29 @@
- /* quirks */
- #define DWMCI_QUIRK_DISABLE_SMU		(1 << 0)
- 
-+/**
-+ * struct dwmci_idmac_regs - Offsets of IDMAC registers
-+ *
-+ * @dbaddrl:	Descriptor base address, lower 32 bits
-+ * @dbaddru:	Descriptor base address, upper 32 bits
-+ * @idsts:	Internal DMA status
-+ * @idinten:	Internal DMA interrupt enable
-+ * @dscaddrl:	IDMAC descriptor address, lower 32 bits
-+ * @dscaddru:	IDMAC descriptor address, upper 32 bits
-+ * @bufaddrl:	Current data buffer address, lower 32 bits
-+ * @bufaddru:	Current data buffer address, upper 32 bits
-+ */
-+struct dwmci_idmac_regs {
-+	u32 dbaddrl;
-+	u32 dbaddru;
-+	u32 idsts;
-+	u32 idinten;
-+	u32 dscaddrl;
-+	u32 dscaddru;
-+	u32 bufaddrl;
-+	u32 bufaddru;
-+};
-+
- /**
-  * struct dwmci_host - Information about a designware MMC host
-  *
-@@ -157,6 +190,8 @@
-  * @fifoth_val:	Value for FIFOTH register (or 0 to leave unset)
-  * @mmc:	Pointer to generic MMC structure for this device
-  * @priv:	Private pointer for use by controller
-+ * @dma_64bit_address: Whether DMA supports 64-bit address mode or not
-+ * @regs:	Registers that can vary for different DW MMC block versions
-  */
- struct dwmci_host {
- 	const char *name;
-@@ -196,6 +231,8 @@ struct dwmci_host {
- 
- 	/* use fifo mode to read and write data */
+-	err = exynos_dwmci_get_config(gd->fdt_blob, dev_of_offset(dev), host,
+-				      priv);
++	err = exynos_dwmci_get_config(dev, gd->fdt_blob, dev_of_offset(dev),
++				      host, priv);
+ 	if (err)
+ 		return err;
+ 	err = do_dwmci_init(host);
+diff --git a/drivers/mmc/ftsdc010_mci.h b/drivers/mmc/ftsdc010_mci.h
+index 782d92be2f5f..36187cfa04f6 100644
+--- a/drivers/mmc/ftsdc010_mci.h
++++ b/drivers/mmc/ftsdc010_mci.h
+@@ -28,7 +28,6 @@ struct ftsdc010_chip {
+ 	int dev_index;
+ 	int dev_id;
+ 	int buswidth;
+-	u32 fifoth_val;
+ 	struct mmc *mmc;
+ 	void *priv;
  	bool fifo_mode;
-+	bool dma_64bit_address;
-+	const struct dwmci_idmac_regs *regs;
+diff --git a/drivers/mmc/hi6220_dw_mmc.c b/drivers/mmc/hi6220_dw_mmc.c
+index dc0210402bd2..e0b473f3f55c 100644
+--- a/drivers/mmc/hi6220_dw_mmc.c
++++ b/drivers/mmc/hi6220_dw_mmc.c
+@@ -37,7 +37,7 @@ struct hi6220_dwmmc_priv_data {
+ struct hisi_mmc_data {
+ 	unsigned int clock;
+ 	bool use_fifo;
+-	u32 fifoth_val;
++	u32 fifo_depth;
  };
  
- static inline void dwmci_writel(struct dwmci_host *host, int reg, u32 val)
+ static int hi6220_dwmmc_of_to_plat(struct udevice *dev)
+@@ -126,7 +126,7 @@ static int hi6220_dwmmc_probe(struct udevice *dev)
+ 	host->mmc = &plat->mmc;
+ 
+ 	host->fifo_mode = mmc_data->use_fifo;
+-	host->fifoth_val = mmc_data->fifoth_val;
++	host->fifo_depth = mmc_data->fifo_depth;
+ 	host->mmc->priv = &priv->host;
+ 	upriv->mmc = host->mmc;
+ 	host->mmc->dev = dev;
+@@ -159,8 +159,7 @@ static const struct hisi_mmc_data hi6220_mmc_data = {
+ static const struct hisi_mmc_data hi3798mv2x_mmc_data = {
+ 	.clock = 50000000,
+ 	.use_fifo = false,
+-	// FIFO depth is 256
+-	.fifoth_val = MSIZE(4) | RX_WMARK(0x7f) | TX_WMARK(0x80),
++	.fifo_depth = 256,
+ };
+ 
+ static const struct udevice_id hi6220_dwmmc_ids[] = {
+diff --git a/drivers/mmc/nexell_dw_mmc.c b/drivers/mmc/nexell_dw_mmc.c
+index 2723e4887cf7..aad848ca2825 100644
+--- a/drivers/mmc/nexell_dw_mmc.c
++++ b/drivers/mmc/nexell_dw_mmc.c
+@@ -187,10 +187,7 @@ static int nexell_dwmmc_probe(struct udevice *dev)
+ 	struct dwmci_host *host = &priv->host;
+ 	struct udevice *pwr_dev __maybe_unused;
+ 
+-	host->fifoth_val = MSIZE(0x2) |
+-		RX_WMARK(priv->fifo_size / 2 - 1) |
+-		TX_WMARK(priv->fifo_size / 2);
+-
++	host->fifo_depth = priv->fifo_size;
+ 	host->fifo_mode = priv->fifo_mode;
+ 
+ 	dwmci_setup_cfg(&plat->cfg, host, priv->max_freq, priv->min_freq);
+diff --git a/drivers/mmc/rockchip_dw_mmc.c b/drivers/mmc/rockchip_dw_mmc.c
+index ad4529d6afa8..d52ae9cb6fd8 100644
+--- a/drivers/mmc/rockchip_dw_mmc.c
++++ b/drivers/mmc/rockchip_dw_mmc.c
+@@ -139,10 +139,7 @@ static int rockchip_dwmmc_probe(struct udevice *dev)
+ 	if (ret < 0)
+ 		return ret;
+ #endif
+-	host->fifoth_val = MSIZE(0x2) |
+-		RX_WMARK(priv->fifo_depth / 2 - 1) |
+-		TX_WMARK(priv->fifo_depth / 2);
+-
++	host->fifo_depth = priv->fifo_depth;
+ 	host->fifo_mode = priv->fifo_mode;
+ 
+ #if CONFIG_IS_ENABLED(MMC_PWRSEQ)
+diff --git a/drivers/mmc/snps_dw_mmc.c b/drivers/mmc/snps_dw_mmc.c
+index 0134399e3934..4a72f41ef16f 100644
+--- a/drivers/mmc/snps_dw_mmc.c
++++ b/drivers/mmc/snps_dw_mmc.c
+@@ -82,7 +82,7 @@ static int snps_dwmmc_of_to_plat(struct udevice *dev)
+ 	host->ioaddr = dev_read_addr_ptr(dev);
+ 
+ 	/*
+-	 * If fifo-depth is unset don't set fifoth_val - we will try to
++	 * If fifo-depth is unset don't set fifo_depth - we will try to
+ 	 * auto detect it.
+ 	 */
+ 	ret = dev_read_u32(dev, "fifo-depth", &fifo_depth);
+@@ -90,9 +90,7 @@ static int snps_dwmmc_of_to_plat(struct udevice *dev)
+ 		if (fifo_depth < FIFO_MIN || fifo_depth > FIFO_MAX)
+ 			return -EINVAL;
+ 
+-		host->fifoth_val = MSIZE(0x2) |
+-				   RX_WMARK(fifo_depth / 2 - 1) |
+-				   TX_WMARK(fifo_depth / 2);
++		host->fifo_depth = fifo_depth;
+ 	}
+ 
+ 	host->buswidth = dev_read_u32_default(dev, "bus-width", 4);
+diff --git a/drivers/mmc/socfpga_dw_mmc.c b/drivers/mmc/socfpga_dw_mmc.c
+index 387cb8b6b50a..f795472d10f7 100644
+--- a/drivers/mmc/socfpga_dw_mmc.c
++++ b/drivers/mmc/socfpga_dw_mmc.c
+@@ -135,8 +135,8 @@ static int socfpga_dwmmc_of_to_plat(struct udevice *dev)
+ 	 * We only have one dwmmc block on gen5 SoCFPGA.
+ 	 */
+ 	host->dev_index = 0;
+-	host->fifoth_val = MSIZE(0x2) |
+-		RX_WMARK(fifo_depth / 2 - 1) | TX_WMARK(fifo_depth / 2);
++
++	host->fifo_depth = fifo_depth;
+ 	priv->drvsel = fdtdec_get_uint(gd->fdt_blob, dev_of_offset(dev),
+ 				       "drvsel", 3);
+ 	priv->smplsel = fdtdec_get_uint(gd->fdt_blob, dev_of_offset(dev),
+diff --git a/include/dwmmc.h b/include/dwmmc.h
+index de18fda68ac8..7bb456e792b4 100644
+--- a/include/dwmmc.h
++++ b/include/dwmmc.h
+@@ -187,7 +187,7 @@ struct dwmci_idmac_regs {
+  * @dev_index:	Arbitrary device index for use by controller
+  * @dev_id:	Arbitrary device ID for use by controller
+  * @buswidth:	Bus width in bits (8 or 4)
+- * @fifoth_val:	Value for FIFOTH register (or 0 to leave unset)
++ * @fifo_depth:	Depth of FIFO, bytes (or 0 for automatic detection)
+  * @mmc:	Pointer to generic MMC structure for this device
+  * @priv:	Private pointer for use by controller
+  * @dma_64bit_address: Whether DMA supports 64-bit address mode or not
+@@ -204,7 +204,7 @@ struct dwmci_host {
+ 	int dev_index;
+ 	int dev_id;
+ 	int buswidth;
+-	u32 fifoth_val;
++	u32 fifo_depth;
+ 	struct mmc *mmc;
+ 	void *priv;
+ 
 -- 
 2.39.2
 
