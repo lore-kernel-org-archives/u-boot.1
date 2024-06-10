@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0025C27C5F
-	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 08:52:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BCD5C27C5E
+	for <u-boot@archiver.kernel.org>; Mon, 10 Jun 2024 08:52:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 739BE88485;
-	Mon, 10 Jun 2024 10:52:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DE8438844F;
+	Mon, 10 Jun 2024 10:52:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RBwxJ5LA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pF/sLiA9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 28953884A7; Mon, 10 Jun 2024 10:52:13 +0200 (CEST)
-Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
- [IPv6:2607:f8b0:4864:20::52a])
+ id A6E078812B; Mon, 10 Jun 2024 10:52:50 +0200 (CEST)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6D5D85B66
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 10:52:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5753188476
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 10:52:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-6819d785528so2702903a12.3
- for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 01:52:10 -0700 (PDT)
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-1f4a0050b9aso34636775ad.2
+ for <u-boot@lists.denx.de>; Mon, 10 Jun 2024 01:52:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718009529; x=1718614329; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1718009567; x=1718614367; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=eJILaTAdK4Gn2bClaM+HPe4ALS4TP0w7l/cylEjzxdY=;
- b=RBwxJ5LAfuufs0PcvT+hcTOkF9T6NJD0WM0HBAQxjXysojEd8fwrAaO1VGb6BOjehn
- AwxMM5w6QFhZj6Efzt0a6pY8MgB+GdLeHtUv4YE4HkyYXmxZrN9z8ga/v612omHGkfuT
- uK/2nkzCG+OjrPWbqgaZG73Siws5uyfSvS1g6Z9rvnDLU2jY0wp5DwxERHYFWLfYube/
- fpIHnYUdNMH84C4hGiPjEteqyC/DT3NLl4kV9aehDNy4p9HZTikmU3quNXMSFyVEikHj
- I7X6ZHjC2t1PJGcUs08JMEzE0s5ximpXBbDkK/GBKRuDM1Qh4U4vK7z2FJeueIOcpPNl
- uDzA==
+ bh=nfgx++IdmDkV9q28M5fUuoocaiEU5XkCeMBi3+tu7/8=;
+ b=pF/sLiA9IgUdw8qRNvtTjokvVAFPhNNvyGlWCOvP3Dn+D061ugMT+5yMaVVcUQNL71
+ Sd6c04ItxnIcFc7Ksh0Q0dHP9MODEIBUv3RHtc3eJccGUo9QweDgcGepGN46uFmVx+SV
+ xRLCdFlCMjrVS2uS9mKMdPQI5OnxPLHWcaPNMSCJB0mKH89QUt1WCMNoY4nm1HFcX/gg
+ MI4xl53bQBK2Umr1X/NPNtetbEtHhmvI/tb1IuqiinqPgjKX5cT4cKfJx98DEMVwim3u
+ hQJNmVZLqdbOawmIfpYKVzz/1l1wXPWEEOONWxWMwVg4buKP41uX4APTclOuE85ixW2e
+ dIxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718009529; x=1718614329;
+ d=1e100.net; s=20230601; t=1718009567; x=1718614367;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=eJILaTAdK4Gn2bClaM+HPe4ALS4TP0w7l/cylEjzxdY=;
- b=ZIbMhqj83MjSgujz+RSXKscax7LBTJfOeLifbtkttn5fnunHxvx+yFfD2d7Oej53K7
- dOkH6Xf6HkvdprdNfjtfcg22wC1VgOVrvxwI4AVYkV4VgBUy2WlNEZ7LbeNbNrfwFERZ
- BzuJdE78GB+UChZl4+2ych6yDm3x+zEN2lxqsOObcljui9nstmUQVejLjBSUI/pUfIfU
- hcFF9+6ewAozlyElLCB5G1L77rWjuNNnBOoDA9ifpyh6UgIm0I76nbby4hbyRq4OaJrK
- BemQw+81SVDlqwi5rN3zXAtQlVUR8bzXUKwUesZc1+ZbTvG654dVXchVGEJuyE/26dUh
- 3erw==
+ bh=nfgx++IdmDkV9q28M5fUuoocaiEU5XkCeMBi3+tu7/8=;
+ b=giq/dJHSIvQkGczMq6mE0yz6iBZstmm/aCd60oNkDlxiCqKyHb4GwJ58TGxLg2L/91
+ RsyPMDavinGNcyUaFEzOah7avsTVLH38nhYZ+9QnWrQyxhMlIZxDQOEtJAd9RdCBghsF
+ ZF6oxmKhgd4LDD90YPZSv0qLKi6ROdd5h7xli2MYdYQgJ1v3H4P9X49IbNukitr0fJtz
+ 3l7SuqGJQJ7d6iZxSgoHSqRA2zmY3x7KIovZf2qZ9rkyx+seImfP2orTqv4j9IFfSCnH
+ OF1dWVV3eWJZkRgSvd0fmM5lijjIwSV6K+oqMF5lpYMZluYvubtKzj9Z+wYDQX3cIhsI
+ 5rcA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWVfUwZguhzmlf5jTsWlKzAfgJ16CPJrqsE7/A82cR9EihiGvXRVFdMDW+WGKxVbFTXK/EoceDFKZcP15XY/53Oo4/6Vw==
-X-Gm-Message-State: AOJu0YxxCfhWOhDMJjxHPsSPullrWU88HR+ORvTvkLSh4YF3Tbo2HxHH
- gGUv070PAWPzQx3VbAOZn4JRhbadybm27jLMCnivbBr1S7jIUVDn+Y1ELj6/EdllkqpSgRYcWvW
- I6QpLamdtjbUPmWCc9zecpv3y9IuFxDSO57sk2g==
-X-Google-Smtp-Source: AGHT+IEgaqs0DlAaOA1SIGOSqT1E5SOAaY0A0ncON0sPrHm7MQ9+xETIjhyeO/FFg441JHM08Nv7kApC1DTU1cebR6Q=
-X-Received: by 2002:a05:6a21:81a2:b0:1b5:ba37:9dbe with SMTP id
- adf61e73a8af0-1b5ba37d4e3mr3719304637.55.1718009529300; Mon, 10 Jun 2024
- 01:52:09 -0700 (PDT)
+ AJvYcCXdnhaHsAvVW+qi1iFrQrwUB+JpRWZhDqDLfePrOSxLQBnrmW54W2iWIvtO28lzSPLR1GTDDngXIyacWrweQLm6g2BTQg==
+X-Gm-Message-State: AOJu0YxvQbgbhKU1uNfut9pLoy9goI85VWbZwDHVtbHNg4bvHRC6T6k7
+ hs37KnWO74t1E9KEIhtNx+5FOZOk6QM9BPaeDEtZJvAwZkNvncY0fGNnRv4nHQv+2S/tn5/ENut
+ JnzPJ+VstmNFYHpMLcCk6ta92Eg07g8P7AQc3HQ==
+X-Google-Smtp-Source: AGHT+IHfOjwt8A5qQMH376riIw8RJEBtDBoRSHAmMGpuGzABlitK9Jcn0d299eh2bYAflcsSUK+uySvR3qSBMRY5hHk=
+X-Received: by 2002:a17:903:230c:b0:1f7:2134:e8a4 with SMTP id
+ d9443c01a7336-1f72134eaeamr2225525ad.49.1718009566801; Mon, 10 Jun 2024
+ 01:52:46 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240607223858.1971290-1-j-humphreys@ti.com>
- <20240607223858.1971290-23-j-humphreys@ti.com>
-In-Reply-To: <20240607223858.1971290-23-j-humphreys@ti.com>
+ <20240607223858.1971290-14-j-humphreys@ti.com>
+In-Reply-To: <20240607223858.1971290-14-j-humphreys@ti.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 10 Jun 2024 11:51:33 +0300
-Message-ID: <CAC_iWjLch+jyjkbfeVxWm945cQ6Un5XcQdOd6S+y-5L1_KUNXw@mail.gmail.com>
-Subject: Re: [PATCH v6 22/24] board: sk-am69: Define capsule update firmware
- info
+Date: Mon, 10 Jun 2024 11:52:10 +0300
+Message-ID: <CAC_iWj+HiuTJKX2PND07p6uHU+K7-0vBTFX_+i=6Pg74DK2uVA@mail.gmail.com>
+Subject: Re: [PATCH v6 13/24] board: am62x: Define capsule update firmware info
 To: Jonathan Humphreys <j-humphreys@ti.com>
 Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Kamlesh Gurudasani <kamlesh@ti.com>, 
@@ -107,49 +106,45 @@ X-Virus-Status: Clean
 On Sat, 8 Jun 2024 at 01:39, Jonathan Humphreys <j-humphreys@ti.com> wrote:
 >
 > Define the firmware components updatable via EFI capsule update, including
-> defining capsule GUIDs for the various firmware components for the AM69
+> defining capsule GUIDs for the various firmware components for the AM62x
 > SK.
->
-> TODO: possibly make the struct's sk specific.
-> TODO: add doc commit (and make sure doc is sk/NOR specific, and add OSIP
-> boot mode)
-> TODO: update doc to show sk defconfig when building
 >
 > Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 > ---
->  board/ti/j784s4/evm.c        | 34 ++++++++++++++++++++++++++++++++++
->  include/configs/j784s4_evm.h | 24 ++++++++++++++++++++++++
+>  board/ti/am62x/evm.c        | 34 ++++++++++++++++++++++++++++++++++
+>  include/configs/am62x_evm.h | 24 ++++++++++++++++++++++++
 >  2 files changed, 58 insertions(+)
 >
-> diff --git a/board/ti/j784s4/evm.c b/board/ti/j784s4/evm.c
-> index aed0ea5b949..548dbd5925d 100644
-> --- a/board/ti/j784s4/evm.c
-> +++ b/board/ti/j784s4/evm.c
-> @@ -7,12 +7,46 @@
+> diff --git a/board/ti/am62x/evm.c b/board/ti/am62x/evm.c
+> index b3e8680dfab..9bdd0223cdb 100644
+> --- a/board/ti/am62x/evm.c
+> +++ b/board/ti/am62x/evm.c
+> @@ -7,6 +7,7 @@
 >   *
 >   */
 >
 > +#include <efi_loader.h>
->  #include <init.h>
+>  #include <env.h>
 >  #include <spl.h>
->  #include "../common/fdt_ops.h"
->
->  DECLARE_GLOBAL_DATA_PTR;
+>  #include <init.h>
+> @@ -46,6 +47,39 @@ int splash_screen_prepare(void)
+>  }
+>  #endif
 >
 > +struct efi_fw_image fw_images[] = {
 > +       {
-> +               .image_type_id = AM69_SK_TIBOOT3_IMAGE_GUID,
-> +               .fw_name = u"AM69_SK_TIBOOT3",
+> +               .image_type_id = AM62X_SK_TIBOOT3_IMAGE_GUID,
+> +               .fw_name = u"AM62X_SK_TIBOOT3",
 > +               .image_index = 1,
 > +       },
 > +       {
-> +               .image_type_id = AM69_SK_SPL_IMAGE_GUID,
-> +               .fw_name = u"AM69_SK_SPL",
+> +               .image_type_id = AM62X_SK_SPL_IMAGE_GUID,
+> +               .fw_name = u"AM62X_SK_SPL",
 > +               .image_index = 2,
 > +       },
 > +       {
-> +               .image_type_id = AM69_SK_UBOOT_IMAGE_GUID,
-> +               .fw_name = u"AM69_SK_UBOOT",
+> +               .image_type_id = AM62X_SK_UBOOT_IMAGE_GUID,
+> +               .fw_name = u"AM62X_SK_UBOOT",
 > +               .image_index = 3,
 > +       }
 > +};
@@ -172,18 +167,18 @@ On Sat, 8 Jun 2024 at 01:39, Jonathan Humphreys <j-humphreys@ti.com> wrote:
 >  int board_init(void)
 >  {
 >         return 0;
-> diff --git a/include/configs/j784s4_evm.h b/include/configs/j784s4_evm.h
-> index 4a2ccdce144..53eb2bff221 100644
-> --- a/include/configs/j784s4_evm.h
-> +++ b/include/configs/j784s4_evm.h
+> diff --git a/include/configs/am62x_evm.h b/include/configs/am62x_evm.h
+> index c8fe59b7531..0d98f14a4bc 100644
+> --- a/include/configs/am62x_evm.h
+> +++ b/include/configs/am62x_evm.h
 > @@ -9,6 +9,30 @@
->  #ifndef __CONFIG_J784S4_EVM_H
->  #define __CONFIG_J784S4_EVM_H
+>  #ifndef __CONFIG_AM625_EVM_H
+>  #define __CONFIG_AM625_EVM_H
 >
 > +/**
-> + * define AM69_SK_TIBOOT3_IMAGE_GUID - firmware GUID for AM69 SK tiboot3.bin
-> + * define AM69_SK_SPL_IMAGE_GUID     - firmware GUID for AM69 SK SPL
-> + * define AM69_SK_UBOOT_IMAGE_GUID   - firmware GUID for AM69 SK UBOOT
+> + * define AM62X_SK_TIBOOT3_IMAGE_GUID - firmware GUID for AM62X sk tiboot3.bin
+> + * define AM62X_SK_SPL_IMAGE_GUID     - firmware GUID for AM62X sk SPL
+> + * define AM62X_SK_UBOOT_IMAGE_GUID   - firmware GUID for AM62X sk UBOOT
 > + *
 > + * These GUIDs are used in capsules updates to identify the corresponding
 > + * firmware object.
@@ -192,17 +187,17 @@ On Sat, 8 Jun 2024 at 01:39, Jonathan Humphreys <j-humphreys@ti.com> wrote:
 > + * define their own GUIDs to ensure that firmware repositories (like
 > + * LVFS) do not confuse them.
 > + */
-> +#define AM69_SK_TIBOOT3_IMAGE_GUID \
-> +       EFI_GUID(0xadf49ec5, 0x61bb, 0x4dbe, 0x8b, 0x8d,        \
-> +                0x39, 0xdf, 0x4d, 0x7e, 0xbf, 0x46)
+> +#define AM62X_SK_TIBOOT3_IMAGE_GUID \
+> +       EFI_GUID(0xabcb83d2, 0x9cb6, 0x4351, 0xb8, 0xf1, \
+> +               0x64, 0x94, 0xbb, 0xe3, 0x70, 0x0a)
 > +
-> +#define AM69_SK_SPL_IMAGE_GUID \
-> +       EFI_GUID(0x787f0059, 0x63a1, 0x461c, 0xa1, 0x8e, \
-> +                0x9d, 0x83, 0x83, 0x45, 0xfe, 0x8e)
+> +#define AM62X_SK_SPL_IMAGE_GUID \
+> +       EFI_GUID(0xaee355fc, 0xbf97, 0x4264, 0x8c, 0x82, \
+> +               0x43, 0x72, 0x55, 0xef, 0xdc, 0x1d)
 > +
-> +#define AM69_SK_UBOOT_IMAGE_GUID \
-> +       EFI_GUID(0x9300505d, 0x6ec5, 0x4ff8, 0x99, 0xe4, \
-> +                0x54, 0x59, 0xa0, 0x4b, 0xe6, 0x17)
+> +#define AM62X_SK_UBOOT_IMAGE_GUID \
+> +       EFI_GUID(0x28ab8c6c, 0xfca8, 0x41d3, 0x8e, 0xa1, \
+> +               0x5f, 0x17, 0x1b, 0x7d, 0x29, 0x29)
 > +
 >  /* Now for the remaining common defines */
 >  #include <configs/ti_armv7_common.h>
