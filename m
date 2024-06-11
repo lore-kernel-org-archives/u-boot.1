@@ -4,74 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F32D5C27C65
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 20:03:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0309CC27C65
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 20:03:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B10588746;
+	by phobos.denx.de (Postfix) with ESMTP id D77A888753;
 	Tue, 11 Jun 2024 22:02:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iy6utdNU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZU4rBQyu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B1678872D; Tue, 11 Jun 2024 22:02:22 +0200 (CEST)
-Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
- [IPv6:2607:f8b0:4864:20::131])
+ id BFB7A8870E; Tue, 11 Jun 2024 22:02:22 +0200 (CEST)
+Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
+ [IPv6:2607:f8b0:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F310388617
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 22:02:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8759883F4
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 22:02:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x131.google.com with SMTP id
- e9e14a558f8ab-3747e9f7cceso25102035ab.1
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 13:02:19 -0700 (PDT)
+Received: by mail-il1-x12b.google.com with SMTP id
+ e9e14a558f8ab-37597eba356so14069495ab.2
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 13:02:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718136138; x=1718740938; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1718136139; x=1718740939; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FA+FlwdkRSMhQxY2MZH+AxkvYhCzQLUcdRiqc88p2+4=;
- b=iy6utdNUXZxhrgs/+6ldj3SBjY1bjtT0e9iuIpKU1jOsgts8U5tACCYan64neVu1Y1
- 3ZgYF6KtHoWOw83NHzrKu434R+tuEWwtU2agpolQjd8NE/CldxqBru3OdHGAcr/BdcxW
- pYLAFn0PAagMXvzK611PGDxB7plPQ6CSht2h0=
+ bh=oksFfmSkHnmY059/50YjczK0o27dkuCx4uuoJ73RzBM=;
+ b=ZU4rBQyuFBWv4B/hulcKlGEXRcwubpKeDPPOHb43QOpk1qa/W+OYp0fPLVksStDx2x
+ AzyllYNe7QpkFxGW0/LqrNENhYFiIQe6X192TtlH4lz0jiJryWxF3zILAHoHh7aJsFFZ
+ iD6tenu9+AdKxepxPgAzgiPZy13FLVAj+6/JE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718136138; x=1718740938;
+ d=1e100.net; s=20230601; t=1718136139; x=1718740939;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FA+FlwdkRSMhQxY2MZH+AxkvYhCzQLUcdRiqc88p2+4=;
- b=MJblJNGJV5P2x0cldQi5a8ygXG6CpL7XH3Cgrd7W6ORP5B4Q7wNjIAiMhgmg+vAa3h
- HwbKtNhlh/K/jjzds4MI+ggYAVE2B6lC4jVrzEjOO+9rhdQoTDAYW6NsZD32gJM33qtD
- Ssf6BlCI8Kge8xcQoBgV2tDmwg0GiCV58AUvd5KGhhSi2Ig6ciMhaeVQW0GLC1/g6wi1
- ZUF9s00moveYz+inl+cwOSNbGJtMUlkS3PLEEic+vOOHApwbSqqxIg+buKscbPdtNDfh
- 5oh6ZDUVtkd2RbEPlINWwHbMyssh51Q2MTK7fu1DEWtjkkcmR6QC2PCEK3MQBOhaswa6
- 3+zA==
-X-Gm-Message-State: AOJu0YyfVJq+frlNx/ObPEgU+52iYWcbPzaSHVXdLTD8dudt7mFobYUH
- B0o5tzgkvkoIvyMg3pvPIlYWP6QSRLmTCtg9kdIggDZNIcTfxTKXKZf/8XiosGaNpj8ER6npV1Z
- z4Q==
-X-Google-Smtp-Source: AGHT+IGyU95wmmrDVxHAfdhLwtFRnCa6WH/As/Sj4TqoJGOHLpfWoLlTFFN7OQ+VRzbk1U1ioABm1A==
-X-Received: by 2002:a05:6e02:216a:b0:374:9b99:752a with SMTP id
- e9e14a558f8ab-3758033c3dfmr168048415ab.14.1718136138620; 
- Tue, 11 Jun 2024 13:02:18 -0700 (PDT)
+ bh=oksFfmSkHnmY059/50YjczK0o27dkuCx4uuoJ73RzBM=;
+ b=E1MIEDNayywSgyngoc23lWmX4zrYV79KuejzTbuhRzaYlYnMlnp8YLBTITiSTAyBQr
+ rWSClntiP0H1n/EtCrn2twNtl+xe6dh3OvoV4WUQaiIa+sYBw1/ZAa4qSTX5SUmt92ps
+ VwVDFXLJ+26LqdKQAxENSjisf02eNNQxlhDRvocGiiu750KvDXEAQIPd5iJS+ET+ygn2
+ 1OumR8N+FaXuzirKg708rBMqi8lqwFFUuNafadGlHIXk8nodIya7UJc1wn1YpL6Dn3Iu
+ AfL/66zcjuv1nLdDe4YSvTP+ovaSZWxlMAAJ/keT37+iqtKkA+0wY8TFKN+rYhAlbAuc
+ OMMA==
+X-Gm-Message-State: AOJu0YzzX21exhI/4KdHVvxzB6y/3UFYvpnZSFr61t9UVlZwG8S6E2qv
+ C5CiEeDPX41PMCVM852FtQzwMQELyUZfH4wLyl5DRDwk6pPmbbz26Foi6lcKlmZfWZxX+wqLjn8
+ IAw==
+X-Google-Smtp-Source: AGHT+IEU1Yri1JoKNIGiDe93RMOLMH1vbtspqz7VMU/PuReijlcKyohnGEwZJYsCmJJaUOp2couL6A==
+X-Received: by 2002:a05:6e02:1908:b0:374:ada1:296b with SMTP id
+ e9e14a558f8ab-3758032247emr160883225ab.8.1718136139294; 
+ Tue, 11 Jun 2024 13:02:19 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
  e9e14a558f8ab-375ca7617cbsm1119305ab.30.2024.06.11.13.02.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Jun 2024 13:02:18 -0700 (PDT)
+ Tue, 11 Jun 2024 13:02:19 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Marek Vasut <marex@denx.de>,
- Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH 05/42] binman: Update the entrydocs header
-Date: Tue, 11 Jun 2024 14:01:19 -0600
-Message-Id: <20240611200156.2245525-6-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH 06/42] buildman: Make mrproper an argument to _reconfigure()
+Date: Tue, 11 Jun 2024 14:01:20 -0600
+Message-Id: <20240611200156.2245525-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240611200156.2245525-1-sjg@chromium.org>
 References: <20240611200156.2245525-1-sjg@chromium.org>
@@ -93,28 +89,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Reduce the length of the underline for this header, to match the
-heading itself.
+Pass this in so the caller can change it independently of the member
+variable.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/binman/entry.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tools/buildman/builderthread.py | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/tools/binman/entry.py b/tools/binman/entry.py
-index 42e0b7b9145..2ed65800d22 100644
---- a/tools/binman/entry.py
-+++ b/tools/binman/entry.py
-@@ -812,7 +812,7 @@ class Entry(object):
-                 as missing
-         """
-         print('''Binman Entry Documentation
--===========================
-+==========================
+diff --git a/tools/buildman/builderthread.py b/tools/buildman/builderthread.py
+index a8599c0bb2a..5d4426bf0d1 100644
+--- a/tools/buildman/builderthread.py
++++ b/tools/buildman/builderthread.py
+@@ -240,7 +240,7 @@ class BuilderThread(threading.Thread):
+         return args, cwd, src_dir
  
- This file describes the entry types supported by binman. These entry types can
- be placed in an image one by one to build up a final firmware image. It is
+     def _reconfigure(self, commit, brd, cwd, args, env, config_args, config_out,
+-                     cmd_list):
++                     cmd_list, mrproper):
+         """Reconfigure the build
+ 
+         Args:
+@@ -251,11 +251,12 @@ class BuilderThread(threading.Thread):
+             env (dict): Environment strings
+             config_args (list of str): defconfig arg for this board
+             cmd_list (list of str): List to add the commands to, for logging
++            mrproper (bool): True to run mrproper first
+ 
+         Returns:
+             CommandResult object
+         """
+-        if self.mrproper:
++        if mrproper:
+             result = self.make(commit, brd, 'mrproper', cwd, 'mrproper', *args,
+                                env=env)
+             config_out.write(result.combined)
+@@ -419,7 +420,8 @@ class BuilderThread(threading.Thread):
+         cmd_list = []
+         if do_config or adjust_cfg:
+             result = self._reconfigure(
+-                commit, brd, cwd, args, env, config_args, config_out, cmd_list)
++                commit, brd, cwd, args, env, config_args, config_out, cmd_list,
++                self.mrproper)
+             do_config = False   # No need to configure next time
+             if adjust_cfg:
+                 cfgutil.adjust_cfg_file(cfg_file, adjust_cfg)
 -- 
 2.34.1
 
