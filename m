@@ -4,75 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90962C27C75
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 18:51:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8631C27C65
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 18:51:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B784D886FD;
-	Tue, 11 Jun 2024 20:51:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4256988685;
+	Tue, 11 Jun 2024 20:51:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="S/wbyDgy";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="laarP0N1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF63888655; Tue, 11 Jun 2024 20:51:00 +0200 (CEST)
-Received: from mail-io1-xd42.google.com (mail-io1-xd42.google.com
- [IPv6:2607:f8b0:4864:20::d42])
+ id 61471886F0; Tue, 11 Jun 2024 20:51:01 +0200 (CEST)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 621F2886DA
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 20:50:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C2F28839D
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 20:50:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd42.google.com with SMTP id
- ca18e2360f4ac-7eb699def37so5308839f.1
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 11:50:57 -0700 (PDT)
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-7ea0b5e0977so286439539f.2
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 11:50:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718131856; x=1718736656; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=jsgJ/i3yBJnC5Kqu8XhawIZ9nADjtVwBmpo4eaLeKh0=;
- b=S/wbyDgygqKQLsyk64kjevsMc2SEgXrVPIC0ppKtJy12DjpgrtAn6q2PEvbyi5LPnA
- 4PX9yI7ML702PuIvq17grdR8fLLlmudrvdqcLddE1vLnqJ/LvMqm22BBIOVf4KHE4n9x
- K3G4+saP+PUB324BhKy54pJlGSAvsgy1h93aU=
+ d=chromium.org; s=google; t=1718131858; x=1718736658; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Sdx3aaLQf2MdtvWEaj2rkEAZOFpgDbI7En5nH6j1bdk=;
+ b=laarP0N1NPsyBSLIpAowfUS3y2TlP9pGPg6qcVdkB6K3aqQsWyahxWpuR9EjnHOIVu
+ IB68++sZVGK+GRnQv9i70Ev0jizY3eGL8HOsEzf2HxwNSc9xZ9Q/qRBO++TikSoLA5P0
+ FCyMkHj5WHjw5lw3vxTJLpWF9nrlWQV9h/caQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718131856; x=1718736656;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jsgJ/i3yBJnC5Kqu8XhawIZ9nADjtVwBmpo4eaLeKh0=;
- b=fLDXHh8LhWQV/yX4MOcX5koQk72pIMiUPjAPNoyTyHgD5HWKgjXspb0M3UKVOqcl8Q
- BT1AaWbSYWq2hJg1QhrtIftSfOuf/owitclxnPF5DfaBEmw5DwmY0+INFvSUqjAm286f
- K+0l55mFfxBqDq0OcRCtnTivYBDoTWFBEPFLAD16NBW6dVM9bONo9NhqDYq7pvFtlenP
- t/BFg/J9acGamyi/6O0cSp3pY39FfxlOY53EMzEPnyt6/Kqnn0ylcYCt0KpcPnXsjGuE
- qtWJepTt7PyJKxlxvjnUmuRHepHK8kgQJAyd+86ZfwPDkUytFrMmWz715cAffwRDgHY8
- 1MCw==
-X-Gm-Message-State: AOJu0YzdKh5PQXHIbeQ952Vi24KQQdMlAiaD//zNn3TJjClJEd48VmDq
- 18PVZQz6ipYScB9f44eBSj+LJqkDonqzZy6Modhhf53FLnnRo5CQ2hUvgasg9zdmtWsQNVHEJSw
- 7i8Kz
-X-Google-Smtp-Source: AGHT+IHKcqdDhw14K1yYDHVylds7Co86L97RW9GBLu/0dQPApoKFInBuNInzeqB6WEnIRTPpClRgDg==
-X-Received: by 2002:a05:6602:1602:b0:7eb:a640:c724 with SMTP id
- ca18e2360f4ac-7ebb36efdabmr252343139f.4.1718131855973; 
- Tue, 11 Jun 2024 11:50:55 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1718131858; x=1718736658;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Sdx3aaLQf2MdtvWEaj2rkEAZOFpgDbI7En5nH6j1bdk=;
+ b=KA0TaiUnoy1DsAg2xWg20f29afIznz3k15qu9wx6dXaP5MjgFif3xVzfPIG+AJ9+cb
+ DJExBKLSyZAwG0ZlYFf+avpLtkmDRBGyy/ua3qGo3VzBkKF5uO/8fCFJKa8+1b0k4J7W
+ BjL+B7vzstfVGifHhm1ySmPtTQI1vob7CwEZqGxt4Ttlq7Ac+MvqnbiqDZkQ7rhEfQF1
+ zb7TajVwBpXyqZebIMtWM9FR/ugXT6U0KpS/aBWbP4zj1IPI55ETlfDDIauDZdfAzT8N
+ JvPraEmYBkccpG202rjkMtAvo6BTI3mX9813aRkXkg+G0YXOO3FrisOknzs7JA2FZ93b
+ Vplw==
+X-Gm-Message-State: AOJu0Yx6QLUCseQsBQ/33eVMT0GMIbL9Tb75GErAgDdrGIn+jcK4VvZq
+ 9Z3WsKrvEJzNLSWYpYBZCyc7LJJ1iYSFEukA+atQgjo+2bixI3io9sIbk+upnuSbXtLO+kEjnfz
+ Mjg==
+X-Google-Smtp-Source: AGHT+IFMXiqY+Se5qO4jSgqXaD9913nNXEFiMldbGSMRWYqctA/n0tpWI6gQY1yUmysJsw+zTBsNsQ==
+X-Received: by 2002:a05:6602:60ce:b0:7eb:708a:3264 with SMTP id
+ ca18e2360f4ac-7eb708a3721mr1201745339f.10.1718131857863; 
+ Tue, 11 Jun 2024 11:50:57 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-37594285ca5sm19645715ab.42.2024.06.11.11.50.55
+ e9e14a558f8ab-37594285ca5sm19645715ab.42.2024.06.11.11.50.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Jun 2024 11:50:55 -0700 (PDT)
+ Tue, 11 Jun 2024 11:50:57 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Bo Gan <ganboing@gmail.com>, Eugene Uriev <eugeneuriev@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Sean Anderson <seanga2@gmail.com>, Shengyu Qu <wiagn233@outlook.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 0/4] alist: Implement a pointer list / array of structs
-Date: Tue, 11 Jun 2024 12:50:47 -0600
-Message-Id: <20240611185051.2223452-1-sjg@chromium.org>
+Subject: [PATCH 2/4] lib: Handle a special case with str_to_list()
+Date: Tue, 11 Jun 2024 12:50:49 -0600
+Message-Id: <20240611185051.2223452-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240611185051.2223452-1-sjg@chromium.org>
+References: <20240611185051.2223452-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,47 +89,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This data structure provides a list of pointers / array of structures.
-I was planning to use it for the lmb restructure, to allow it to
-support any number of entries, but then I gave up on it.
+The current implementation can return an extra result at the end when
+the string ends with a space. Fix this by adding a special case.
 
-There are quite a few places in U-Boot where such a list would be
-useful, since it supports growing the array.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-The series includes a patch to convert an existing function to use
-this.
+ lib/strto.c   | 4 +++-
+ test/str_ut.c | 4 +---
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-It adds a little under 300 bytes of code with Thumb2.
-
-Example:
-
- struct my_struct obj;
- struct my_struct *ptr = alist_add(&lst, &obj, struct my_struct);
-
- // now ptr is in the list
-
-[1] https://patchwork.ozlabs.org/project/uboot/list/?series=371258&state=*
-
-
-Simon Glass (4):
-  malloc: Support testing with realloc()
-  lib: Handle a special case with str_to_list()
-  alist: Add support for an allocated pointer list
-  lib: Convert str_to_list() to use alist
-
- common/dlmalloc.c |   4 +
- include/alist.h   | 205 ++++++++++++++++++++++++++++++++++++++++++++++
- lib/Makefile      |   1 +
- lib/alist.c       | 154 ++++++++++++++++++++++++++++++++++
- lib/strto.c       |  33 ++++----
- test/lib/Makefile |   1 +
- test/lib/alist.c  | 197 ++++++++++++++++++++++++++++++++++++++++++++
- test/str_ut.c     |   4 +-
- 8 files changed, 582 insertions(+), 17 deletions(-)
- create mode 100644 include/alist.h
- create mode 100644 lib/alist.c
- create mode 100644 test/lib/alist.c
-
+diff --git a/lib/strto.c b/lib/strto.c
+index 5157332d6c1..f83ac67c666 100644
+--- a/lib/strto.c
++++ b/lib/strto.c
+@@ -236,12 +236,14 @@ const char **str_to_list(const char *instr)
+ 		return NULL;
+ 
+ 	/* count the number of space-separated strings */
+-	for (count = *str != '\0', p = str; *p; p++) {
++	for (count = 0, p = str; *p; p++) {
+ 		if (*p == ' ') {
+ 			count++;
+ 			*p = '\0';
+ 		}
+ 	}
++	if (p != str && p[-1])
++		count++;
+ 
+ 	/* allocate the pointer array, allowing for a NULL terminator */
+ 	ptr = calloc(count + 1, sizeof(char *));
+diff --git a/test/str_ut.c b/test/str_ut.c
+index 389779859a3..96e048975d8 100644
+--- a/test/str_ut.c
++++ b/test/str_ut.c
+@@ -342,9 +342,7 @@ static int test_str_to_list(struct unit_test_state *uts)
+ 	ut_asserteq_str("space", ptr[3]);
+ 	ut_assertnonnull(ptr[4]);
+ 	ut_asserteq_str("", ptr[4]);
+-	ut_assertnonnull(ptr[5]);
+-	ut_asserteq_str("", ptr[5]);
+-	ut_assertnull(ptr[6]);
++	ut_assertnull(ptr[5]);
+ 	str_free_list(ptr);
+ 	ut_assertok(ut_check_delta(start));
+ 
 -- 
 2.34.1
 
