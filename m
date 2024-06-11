@@ -4,94 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B792C25B76
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 13:48:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B3C9C25B76
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 13:50:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56B40886CF;
-	Tue, 11 Jun 2024 15:48:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
+	by phobos.denx.de (Postfix) with ESMTP id D9F78886BA;
+	Tue, 11 Jun 2024 15:50:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="MS8pmGA1";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="DhEVuVVi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qz6AO8ud";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18D1E886C3; Tue, 11 Jun 2024 15:48:17 +0200 (CEST)
-Received: from fout1-smtp.messagingengine.com (fout1-smtp.messagingengine.com
- [103.168.172.144])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 26FB2886D3; Tue, 11 Jun 2024 15:50:48 +0200 (CEST)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E372288685
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 15:48:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D246388685
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 15:50:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=flygoat.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailfout.nyi.internal (Postfix) with ESMTP id DD3C013801AA;
- Tue, 11 Jun 2024 09:48:13 -0400 (EDT)
-Received: from imap44 ([10.202.2.94])
- by compute3.internal (MEProxy); Tue, 11 Jun 2024 09:48:13 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
- cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1718113693;
- x=1718200093; bh=jIMlGXFCDIh4ujoW3tbJ/Ou+1G9YcHFeqS/iNY+f5xs=; b=
- MS8pmGA1w5m4yZPIzQmccOO6PQ9H9T88twXs0RLNhxk57XpkFpgCbB9OLYDvwjcs
- CxEH5193Wn7eQzjN+CkkpnyT5z9H4GFszIIzlTrhVmV9R1ZwRLhx1mtGCUnDBjFd
- QL1Vae8bail6Q8j7MoMfsneBVYP2kFsX010wTriAd/XJ571UECFDIgc5CcSzu17O
- S6yJOqstZDhdUGH/qvxfwEDOqV1wceKWYmRQHKwhFNQDEKNgHvWtoW8QMWTeIVha
- otXyKIxcJiJs2Tc3+jJi4d5v8DupA2al54ntX3CTt/e+yI2d9xHGYk1ARCSxYm3o
- Htv+4Zyu+c7NtXueIXHqSw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1718113693; x=
- 1718200093; bh=jIMlGXFCDIh4ujoW3tbJ/Ou+1G9YcHFeqS/iNY+f5xs=; b=D
- hEVuVVikVLMIOq2S+DMaAUBFjrG48UO+5skSJBfRCV6zjs38j7DqopU8dqbwae6n
- 4FKH7zgWJuE53O0OyrSRXxkZM1D1DHg+KnFxQQvFGAjOdbZ9Q5+MCLp4R4RoOnNc
- fXxGFhSLso7iV9km72DfdMbRIYJKemeZtZuqBZEZ0uBD6rSsbGoVErfD3qm5H133
- jGr+Ro+mKqDFxWOsJmS6BEwcInVCqyE2XsqtqMB348zzyjhetJlJFeYMPyDcBmDv
- +2Yx7aqFRS5U/OdUxPHNmcOADW7EKxBUaMmyRjSHwLkwVvpPLw0456j7L60DaFe0
- jN3gYK572Y2SBnNwN4lpw==
-X-ME-Sender: <xms:nVVoZiWD8yO5vgeadUN1H-XebjZAFNrCwCol6wXeq3ibjXqLnk9Ddg>
- <xme:nVVoZukwlFo924Zr0VeYWbEonsAPDNkdmDBNTXRO4Yy1tpSIxKULxTsdgMn-CxpXp
- CfPDTrU6LWzlYJGcPk>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrfeduvddgieejucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepofgfggfkjghffffhvfevufgtgfesthhqredtreerjeenucfhrhhomhepfdfl
- ihgrgihunhcujggrnhhgfdcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtoh
- hmqeenucggtffrrghtthgvrhhnpedufeegfeetudeghefftdehfefgveffleefgfehhfej
- ueegveethfduuddvieehgfenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmh
- grihhlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
-X-ME-Proxy: <xmx:nVVoZmaBNtFsLxD-rdDiz19XwCaaw2DnkLXw00_W651kcFeO-kDdbg>
- <xmx:nVVoZpUoYg-eqzCL0SrR-V_OG3SRmMdE_y9seWyJ7Jm1J8Y9eilqgg>
- <xmx:nVVoZsnp4JjqBnIOHx7Tv3mnL7GRS27SL0KyfB4juUye4aiAlsNCtg>
- <xmx:nVVoZue8AH4bnhhn1sT4G6k-IMRZI7fXncHIblXJ2EbNxAJygTUpzw>
- <xmx:nVVoZtAT5MpMf6k2z_idTHlkjXpy4vwW2W06IWdZn1n06jJw2a0RIu6t>
-Feedback-ID: ifd894703:Fastmail
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
- id 9342036A0075; Tue, 11 Jun 2024 09:48:13 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.11.0-alpha0-515-g87b2bad5a-fm-20240604.001-g87b2bad5
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1f6dfc17006so7624015ad.0
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 06:50:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1718113844; x=1718718644; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=jM42tcihyAMn0HeK3LZ6WE/wbVpPvSpzgOxSx5qxzIU=;
+ b=qz6AO8udfnN85dhk/4Asaink6Nq5vk/zkyj8c2RfueoCKasSjrSfdqegAWJ4TciXpm
+ Iqn6C25fKgz1rB1+nF1xvK0DkeYTYaRHbUydGLTygD/50LW3ELDyVnm/yj1ug+3hQ2BZ
+ tyQKsj1LtfsoYWoscSefKtLsfwH66Sd0sRFYmH7wxZVJn9qUykyOa+mZrUAxR0Jn6hVA
+ gpEf+ROspCVVBRurbdW9+7CVnbCUfHASHuw5THGmCle6B4LPjgjhLcT8O5iyeVN91P6D
+ PbCm10m1OmMM4iaQSC35EinBCdJRsxs2nJmREc57iK+WX88hjiNnT6zOFW5uZNSXgfez
+ nfPw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718113844; x=1718718644;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jM42tcihyAMn0HeK3LZ6WE/wbVpPvSpzgOxSx5qxzIU=;
+ b=C3OUs7+4IthWce5eeZyr1JqbcSTuAzYW32UT/YQk4Xo5YHYYaXU9P9g6lmfzssXc8u
+ HmV9i9HyGbs423sFUW3x/84SZDxWuyk+3KG5I0w7tpVaAY3id/8MT8nixrkiwOPgtCDd
+ 7gkFrNEJip/L43jac1aERYuunlMz7/TJG4BWIhyFR5yLofV8lyNYayRWisYpnKnm4v1V
+ c94h0nl8EQgHFzeT/Z14ybLFYwAIMtYgk5p2kSPPY76AJBRAdlgnuOjyuEVYI/5FP5ta
+ XiC2AICm+E6BIm4NRtQ/k+PUJ8L+1dOu5Kw8ml4RizK/xmBGP4rd87xoBdsUB/oY2PT0
+ uLrA==
+X-Gm-Message-State: AOJu0YxE1tcOZaDs347E3S2P1t2/XyhiwNkQt562sOQSYzJ07obcqbso
+ 4QplKtB69gW0O/PSfCgqgZui8lDzdi3IZIRF3TMCAaa9TixwId1/yacBUVqil76HsMhGLY7mVlW
+ 4/tD2ghAcBcT9tC3bgH+GaWDN7fXbQfntfPAM/Q==
+X-Google-Smtp-Source: AGHT+IFns2QNSOXPpYGfLzvMbjzhJutR7WaWAFS1V4tON/Aw1pnYUJtyKtl0aj4PCXGAea+UyxnJ0vs1dTSGNTTQPQY=
+X-Received: by 2002:a17:903:32c7:b0:1f7:4ff:d17 with SMTP id
+ d9443c01a7336-1f704ff1f5amr64693645ad.3.1718113814457; Tue, 11 Jun 2024
+ 06:50:14 -0700 (PDT)
 MIME-Version: 1.0
-Message-Id: <5bd109ff-73ef-4bda-8b5b-2ab583c064d8@app.fastmail.com>
-In-Reply-To: <b723aa8e-1d29-4904-953d-160caf097136@gmx.de>
-References: <20240522-loongarch-v1-0-1407e0b69678@flygoat.com>
- <20240522-loongarch-v1-1-1407e0b69678@flygoat.com>
- <b723aa8e-1d29-4904-953d-160caf097136@gmx.de>
-Date: Tue, 11 Jun 2024 14:47:49 +0100
-From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
-To: "Heinrich Schuchardt" <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de, "Simon Glass" <sjg@chromium.org>,
- "Tom Rini" <trini@konsulko.com>,
- "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH 01/16] lib: fdtdec: Handle multiple memory nodes
-Content-Type: text/plain;charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+References: <20240517-mips-efi-v1-0-79096e3ca3b3@flygoat.com>
+ <20240517-mips-efi-v1-3-79096e3ca3b3@flygoat.com>
+In-Reply-To: <20240517-mips-efi-v1-3-79096e3ca3b3@flygoat.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 11 Jun 2024 16:49:38 +0300
+Message-ID: <CAC_iWjK+KdrYWWfdVVqzyzUia+b7sddKHPF+ziQFp_Am0CbzQQ@mail.gmail.com>
+Subject: Re: [PATCH 3/7] Makefile.lib: Preserve .rodata section for EFI file
+To: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Cc: u-boot@lists.denx.de, Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,41 +87,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jiaxun
 
 
-=E5=9C=A82024=E5=B9=B46=E6=9C=8811=E6=97=A5=E5=85=AD=E6=9C=88 =E4=B8=8B=E5=
-=8D=881:26=EF=BC=8CHeinrich Schuchardt=E5=86=99=E9=81=93=EF=BC=9A
-Hi Heinrich,
-
-Thanks for your comments, will fix most of them in next reversion.
-
-[...]
->> -		gd->bd->bi_dram[bank].start =3D (phys_addr_t)res.start;
+On Fri, 17 May 2024 at 19:33, Jiaxun Yang <jiaxun.yang@flygoat.com> wrote:
 >
-> The conversion is superfluous.
+> This is required in performing objcopy to MIPS EFI files.
+>
 
-This is necessary as phys_addr_t can be unsigned long or unsigned long l=
-ong.
-
->
-[...]
->> +	__maybe_unused const char *final_name;
->> +	__maybe_unused int final_reg;
->
-> '__maybe_unused' is superfluous.
-
-This is necessary as when LOG_DEBUG is disabled these two variables won't
-be referenced. Compilers would complain about it.
-
->
->>
->>   	gd->ram_base =3D (unsigned long)~0;
->
-> gd->ram_base =3D ULONG_MAX;
->
->>
-[...]
+This seems not mips specific. What was missing for your case?
 
 Thanks
---=20
-- Jiaxun
+/Ilias
+> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> ---
+>  scripts/Makefile.lib | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+> index 62f87517c09c..52aed7a65d47 100644
+> --- a/scripts/Makefile.lib
+> +++ b/scripts/Makefile.lib
+> @@ -469,7 +469,7 @@ $(obj)/%_efi.S: $(obj)/%.efi
+>
+>  quiet_cmd_efi_objcopy = OBJCOPY $@
+>  cmd_efi_objcopy = $(OBJCOPY) -j .header -j .text -j .sdata -j .data -j \
+> -               .dynamic -j .dynsym  -j .rel* -j .rela* -j .reloc \
+> +               .dynamic -j .dynsym  -j .rel* -j .rela* -j .reloc -j .rodata \
+>                 $(if $(EFI_TARGET),$(EFI_TARGET),-O binary) $^ $@
+>
+>  $(obj)/%.efi: $(obj)/%_efi.so
+>
+> --
+> 2.34.1
+>
