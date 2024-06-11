@@ -4,63 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7105DC25B76
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 13:43:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B792C25B76
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 13:48:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF30E886A6;
-	Tue, 11 Jun 2024 15:43:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 56B40886CF;
+	Tue, 11 Jun 2024 15:48:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="OjaK0Io4";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="MS8pmGA1";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="DhEVuVVi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB9AF886AB; Tue, 11 Jun 2024 15:43:54 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ id 18D1E886C3; Tue, 11 Jun 2024 15:48:17 +0200 (CEST)
+Received: from fout1-smtp.messagingengine.com (fout1-smtp.messagingengine.com
+ [103.168.172.144])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DEFDE88685
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 15:43:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E372288685
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 15:48:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=323a=NO=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1718113396;
- bh=ruNHfttvRUimvHnRTUAKAYQC5iv+MAtePpM/8pDFF0E=;
- b=OjaK0Io4Bg6OBSY1jzb6YVqSOb0fDgFECKG8A5OqC1MZ/+PN+PtvNzsa9zCdbqq8t4eC+otev
- uBpaNHy6IFUMmcjUyiSOyo9rJKB7xFEWAJm7fViOkJ+kesgoA0Nu9guUC/lGREUYllorEU5EAW5
- UldHeT7O6VCo1PMqKq7NIOS5lQgVIk2Tngsp49bFRxWK6FmYTYhRHXlSeINLnaP9C4cn3PAGouZ
- 3y2ES4bBWQgRH5eY9+a2Hm8iAyA20niFY/pYhjSm0mLutD4F5qaURUmlB2+idaQBMxXu+K6MhGx
- lzLXtBgsxzcKpRuo37QYg5nib/Oi6ijCpAhu99xyix1g==
-Message-ID: <844b0a8a-471c-4c6b-83f5-3884c8bcb77c@kwiboo.se>
-Date: Tue, 11 Jun 2024 15:43:01 +0200
+ dmarc=pass (p=none dis=none) header.from=flygoat.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailfout.nyi.internal (Postfix) with ESMTP id DD3C013801AA;
+ Tue, 11 Jun 2024 09:48:13 -0400 (EDT)
+Received: from imap44 ([10.202.2.94])
+ by compute3.internal (MEProxy); Tue, 11 Jun 2024 09:48:13 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
+ cc:cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1718113693;
+ x=1718200093; bh=jIMlGXFCDIh4ujoW3tbJ/Ou+1G9YcHFeqS/iNY+f5xs=; b=
+ MS8pmGA1w5m4yZPIzQmccOO6PQ9H9T88twXs0RLNhxk57XpkFpgCbB9OLYDvwjcs
+ CxEH5193Wn7eQzjN+CkkpnyT5z9H4GFszIIzlTrhVmV9R1ZwRLhx1mtGCUnDBjFd
+ QL1Vae8bail6Q8j7MoMfsneBVYP2kFsX010wTriAd/XJ571UECFDIgc5CcSzu17O
+ S6yJOqstZDhdUGH/qvxfwEDOqV1wceKWYmRQHKwhFNQDEKNgHvWtoW8QMWTeIVha
+ otXyKIxcJiJs2Tc3+jJi4d5v8DupA2al54ntX3CTt/e+yI2d9xHGYk1ARCSxYm3o
+ Htv+4Zyu+c7NtXueIXHqSw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1718113693; x=
+ 1718200093; bh=jIMlGXFCDIh4ujoW3tbJ/Ou+1G9YcHFeqS/iNY+f5xs=; b=D
+ hEVuVVikVLMIOq2S+DMaAUBFjrG48UO+5skSJBfRCV6zjs38j7DqopU8dqbwae6n
+ 4FKH7zgWJuE53O0OyrSRXxkZM1D1DHg+KnFxQQvFGAjOdbZ9Q5+MCLp4R4RoOnNc
+ fXxGFhSLso7iV9km72DfdMbRIYJKemeZtZuqBZEZ0uBD6rSsbGoVErfD3qm5H133
+ jGr+Ro+mKqDFxWOsJmS6BEwcInVCqyE2XsqtqMB348zzyjhetJlJFeYMPyDcBmDv
+ +2Yx7aqFRS5U/OdUxPHNmcOADW7EKxBUaMmyRjSHwLkwVvpPLw0456j7L60DaFe0
+ jN3gYK572Y2SBnNwN4lpw==
+X-ME-Sender: <xms:nVVoZiWD8yO5vgeadUN1H-XebjZAFNrCwCol6wXeq3ibjXqLnk9Ddg>
+ <xme:nVVoZukwlFo924Zr0VeYWbEonsAPDNkdmDBNTXRO4Yy1tpSIxKULxTsdgMn-CxpXp
+ CfPDTrU6LWzlYJGcPk>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrfeduvddgieejucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhepofgfggfkjghffffhvfevufgtgfesthhqredtreerjeenucfhrhhomhepfdfl
+ ihgrgihunhcujggrnhhgfdcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtoh
+ hmqeenucggtffrrghtthgvrhhnpedufeegfeetudeghefftdehfefgveffleefgfehhfej
+ ueegveethfduuddvieehgfenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmh
+ grihhlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
+X-ME-Proxy: <xmx:nVVoZmaBNtFsLxD-rdDiz19XwCaaw2DnkLXw00_W651kcFeO-kDdbg>
+ <xmx:nVVoZpUoYg-eqzCL0SrR-V_OG3SRmMdE_y9seWyJ7Jm1J8Y9eilqgg>
+ <xmx:nVVoZsnp4JjqBnIOHx7Tv3mnL7GRS27SL0KyfB4juUye4aiAlsNCtg>
+ <xmx:nVVoZue8AH4bnhhn1sT4G6k-IMRZI7fXncHIblXJ2EbNxAJygTUpzw>
+ <xmx:nVVoZtAT5MpMf6k2z_idTHlkjXpy4vwW2W06IWdZn1n06jJw2a0RIu6t>
+Feedback-ID: ifd894703:Fastmail
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id 9342036A0075; Tue, 11 Jun 2024 09:48:13 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.11.0-alpha0-515-g87b2bad5a-fm-20240604.001-g87b2bad5
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 7/9] rockchip: Ensure memory size is available in
- RK3399 SPL
-To: Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>
-Cc: "U-Boot Mailing List" <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, Jeffy Chen <jeffy.chen@rock-chips.com>, Kever Yang
- <kever.yang@rock-chips.com>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- huang lin <hl@rock-chips.com>
-References: <20240610145920.3302001-1-sjg@chromium.org>
- <20240610145920.3302001-8-sjg@chromium.org>
- <282d4379-2094-42ff-8ac1-6327655ca2d5@cherry.de>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <282d4379-2094-42ff-8ac1-6327655ca2d5@cherry.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 6668546b20360a60b1f81695
+Message-Id: <5bd109ff-73ef-4bda-8b5b-2ab583c064d8@app.fastmail.com>
+In-Reply-To: <b723aa8e-1d29-4904-953d-160caf097136@gmx.de>
+References: <20240522-loongarch-v1-0-1407e0b69678@flygoat.com>
+ <20240522-loongarch-v1-1-1407e0b69678@flygoat.com>
+ <b723aa8e-1d29-4904-953d-160caf097136@gmx.de>
+Date: Tue, 11 Jun 2024 14:47:49 +0100
+From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
+To: "Heinrich Schuchardt" <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de, "Simon Glass" <sjg@chromium.org>,
+ "Tom Rini" <trini@konsulko.com>,
+ "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH 01/16] lib: fdtdec: Handle multiple memory nodes
+Content-Type: text/plain;charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,199 +108,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon and Quentin,
 
-On 2024-06-11 13:27, Quentin Schulz wrote:
-> Hi Simon,
-> 
-> On 6/10/24 4:59 PM, Simon Glass wrote:
->> At present gd->ram_size is 0 in SPL, meaning that it is not possible to
->> enable the cache. Correct this by always populating the RAM size
->> correctly.
+
+=E5=9C=A82024=E5=B9=B46=E6=9C=8811=E6=97=A5=E5=85=AD=E6=9C=88 =E4=B8=8B=E5=
+=8D=881:26=EF=BC=8CHeinrich Schuchardt=E5=86=99=E9=81=93=EF=BC=9A
+Hi Heinrich,
+
+Thanks for your comments, will fix most of them in next reversion.
+
+[...]
+>> -		gd->bd->bi_dram[bank].start =3D (phys_addr_t)res.start;
+>
+> The conversion is superfluous.
+
+This is necessary as phys_addr_t can be unsigned long or unsigned long l=
+ong.
+
+>
+[...]
+>> +	__maybe_unused const char *final_name;
+>> +	__maybe_unused int final_reg;
+>
+> '__maybe_unused' is superfluous.
+
+This is necessary as when LOG_DEBUG is disabled these two variables won't
+be referenced. Compilers would complain about it.
+
+>
 >>
->> Part of the confusion here comes from the large blocks of code which
->> are #ifdefed out. Add a function phase_sdram_init() which returns
->> whether SDRAM init should happen in the current phase, using that as
->> needed to control the code flow.
+>>   	gd->ram_base =3D (unsigned long)~0;
+>
+> gd->ram_base =3D ULONG_MAX;
+>
 >>
->> This increases code size by about 500 bytes in SPL when the cache is on,
->> since it must call the rather large rockchip_sdram_size() function.
->>
->> Signed-off-by: Simon Glass <sjg@chromium.org>
->> ---
->>
->> Changes in v2:
->> - Add new patch to correct memory size in SPL
->>
->>   drivers/ram/rockchip/sdram_rk3399.c | 49 ++++++++++++++++-------------
->>   1 file changed, 27 insertions(+), 22 deletions(-)
->>
->> diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
->> index 02cc4a38cf0..2f37dd712e7 100644
->> --- a/drivers/ram/rockchip/sdram_rk3399.c
->> +++ b/drivers/ram/rockchip/sdram_rk3399.c
->> @@ -13,6 +13,7 @@
->>   #include <log.h>
->>   #include <ram.h>
->>   #include <regmap.h>
->> +#include <spl.h>
->>   #include <syscon.h>
->>   #include <asm/arch-rockchip/clock.h>
->>   #include <asm/arch-rockchip/cru.h>
->> @@ -63,8 +64,6 @@ struct chan_info {
->>   };
->>   
->>   struct dram_info {
->> -#if defined(CONFIG_TPL_BUILD) || \
->> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
->>   	u32 pwrup_srefresh_exit[2];
->>   	struct chan_info chan[2];
->>   	struct clk ddr_clk;
->> @@ -75,7 +74,6 @@ struct dram_info {
->>   	struct rk3399_pmusgrf_regs *pmusgrf;
->>   	struct rk3399_ddr_cic_regs *cic;
->>   	const struct sdram_rk3399_ops *ops;
->> -#endif
->>   	struct ram_info info;
->>   	struct rk3399_pmugrf_regs *pmugrf;
->>   };
->> @@ -92,9 +90,6 @@ struct sdram_rk3399_ops {
->>   					struct rk3399_sdram_params *params);
->>   };
->>   
->> -#if defined(CONFIG_TPL_BUILD) || \
->> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
->> -
->>   struct rockchip_dmc_plat {
->>   #if CONFIG_IS_ENABLED(OF_PLATDATA)
->>   	struct dtd_rockchip_rk3399_dmc dtplat;
->> @@ -191,6 +186,17 @@ struct io_setting {
->>   	},
->>   };
->>   
->> +/**
->> + * phase_sdram_init() - Check if this is the phase where SDRAM init happens
->> + *
->> + * Returns: true to do SDRAM init in this phase, false to not
->> + */
->> +static bool phase_sdram_init(void)
->> +{
->> +	return spl_phase() == PHASE_TPL ||
->> +	    (!IS_ENABLED(CONFIG_TPL) && !spl_in_proper());
->> +}
->> +
->>   static struct io_setting *
->>   lpddr4_get_io_settings(const struct rk3399_sdram_params *params, u32 mr5)
->>   {
->> @@ -3024,7 +3030,7 @@ static int rk3399_dmc_of_to_plat(struct udevice *dev)
->>   	struct rockchip_dmc_plat *plat = dev_get_plat(dev);
->>   	int ret;
->>   
->> -	if (!CONFIG_IS_ENABLED(OF_REAL))
->> +	if (!CONFIG_IS_ENABLED(OF_REAL) || !phase_sdram_init())
->>   		return 0;
->>   
->>   	ret = dev_read_u32_array(dev, "rockchip,sdram-params",
->> @@ -3138,23 +3144,25 @@ static int rk3399_dmc_init(struct udevice *dev)
->>   
->>   	return 0;
->>   }
->> -#endif
->>   
->>   static int rk3399_dmc_probe(struct udevice *dev)
->>   {
->> -#if defined(CONFIG_TPL_BUILD) || \
->> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
->> -	if (rk3399_dmc_init(dev))
->> -		return 0;
->> -#else
->>   	struct dram_info *priv = dev_get_priv(dev);
->>   
->> -	priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
->> -	debug("%s: pmugrf = %p\n", __func__, priv->pmugrf);
->> -	priv->info.base = CFG_SYS_SDRAM_BASE;
->> -	priv->info.size =
->> -		rockchip_sdram_size((phys_addr_t)&priv->pmugrf->os_reg2);
->> -#endif
->> +	if (phase_sdram_init()) {
->> +		if (rk3399_dmc_init(dev))
->> +			return 0;
->> +	} else {
->> +		priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
->> +		debug("%s: pmugrf = %p\n", __func__, priv->pmugrf);
->> +	}
->> +
->> +	if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF)) {
->> +		priv->info.base = CFG_SYS_SDRAM_BASE;
->> +		priv->info.size =
->> +			rockchip_sdram_size((ulong)&priv->pmugrf->os_reg2);
->> +	}
->> +
-> 
-> Isn't the whole change summarized to making sure that priv->info.base 
-> and priv->info.size are set when DCACHE is enabled AND we're in the 
-> first stage BL (TPL or SPL if no TPL)?
-> 
-> i.e., shouldn't the following code be enough:
-> 
-> """
-> static int rk3399_dmc_probe(struct udevice *dev)
-> {
-> #if defined(CONFIG_TPL_BUILD) || \
-> 	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
-> 	if (rk3399_dmc_init(dev))
-> 		return 0;
-> #else
-> 	struct dram_info *priv = dev_get_priv(dev);
-> 
-> 	priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
-> 	debug("%s: pmugrf = %p\n", __func__, priv->pmugrf);
-> #endif
-> 	priv->info.base = CFG_SYS_SDRAM_BASE;
-> 	priv->info.size =
-> 		rockchip_sdram_size((phys_addr_t)&priv->pmugrf->os_reg2);
-> 
-> 	return 0;
-> }
-> """
-> ?
-> 
-> Then what's after the endif could be guarded by if 
-> (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF)) { if we need to but it's not clear 
-> to me why that is needed?
+[...]
 
-Agree, this look strange to me too and your diff much cleaner :-)
-
-> 
-> Basically, I'm not sure the migration from ifdefs to the 
-> phase_sdram_init() function is necessary. I'm not against it, but it 
-> makes the whole thing much harder to read and hides the actual changes.
-> 
-> Additionally, why was the cast to phys_addr_t changed to a ulong? The 
-> function actually expects a phys_addr_t.
-> 
-> Finally, can you please explain why gd->ram_size being 0 is an issue for 
-> the caches, where is this checked? I'm not too familiar with the caches 
-> in general :)
-
-My best guess is that enabling of caches in SPL cause issue for
-bob/kevin because they only use SPL not TPL+SPL like (if I am not
-mistaken) all other Rockchip arm64 targets.
-
-Using SPL-only was not something I tested when caches was enabled in SPL.
-
-Maybe bob/kevin can be changed to also use TPL+SPL similar to all other
-RK3399 boards?
-
-How U-Boot works on these chromebooks is still a mystery to me. If I
-understand correctly SPL is only involved for bare metal boot, if this
-is the case then using TPL + back-to-brom to load SPL should probably
-work fine?, and would align all RK3399 boards to work in a similar way.
-
-Regards,
-Jonas
-
-> 
-> Cheers,
-> Quentin
-
+Thanks
+--=20
+- Jiaxun
