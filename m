@@ -4,77 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95112C27C65
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 08:50:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D16CFC25B76
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 08:51:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2B41885E1;
-	Tue, 11 Jun 2024 10:50:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0C5C08837A;
+	Tue, 11 Jun 2024 10:51:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yGJQS4SK";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 40D56885EC; Tue, 11 Jun 2024 10:50:56 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1718095890;
+	bh=ujDJhuZ89mQIf8PwfYU+M7/4FN5Lwabw4ptIHAR0Vi0=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=mC0qDqeYYOlA6Jc2rBHy9mTU5b0ywrDMyYTQvJp41cI/4HoONNpWrrrCG38GeCIc6
+	 TcSX0KlJV8ZyFmYQO3ryIoxaccwl6BACejeLBxddb85s6xBttHDE53elwul2ep+9cS
+	 CeUI9p4xM0AQb3nt6BXhAQnte2UqDWETuP5dcw5vglH2KYwCUv6SWb0ZGec4/Xe1Ui
+	 3JfGYx2EwFmHFnLAXoxHBnDKvPU736eeu0bCafJdRIPDdaK/ggU/4GVmiH7FuL4Ae8
+	 9apfbDn1Ue6KF2K0KP7dp4aRXzsXQ5MhLOcWIQyk4f5Sgodyo2UqHGLF39eZNwecbq
+	 TYPOmPlQoSp3g==
+Received: from wsk (85-222-111-42.dynamic.chello.pl [85.222.111.42])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F6158332E
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 10:50:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-57c7440876bso1000674a12.0
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 01:50:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718095853; x=1718700653; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZURMeBsm3U82KPUq4cRvsaz/m8be/dtghf9SYzj5oO8=;
- b=yGJQS4SKpjfBYmlPSAZhZ2QtFgegASenxSGZKnUoVjRQ4HcYpmbDytVURsLI6yl7Zu
- TkRpeMyzC3aGZwvUxoskcePzo3YdPaWnD7SjQKGk1CYeLbF4zhDzUGKpLSKxAMv6PWvq
- dYo3wQJjXMsuMN9sbupdA71iMTnkEg2FPIR6aeV3twOC50zBeokxvRO88yyp8rNVf0XU
- Z6At1I/m1kPK+0g9/+Qx1IH+dFVFvAFhSdQUFhm553oNY2K9dFrp72jjvMiWLPdDfq9r
- fpwFif41vDcP3lGaPFxLXjDUf2MIfaodTxtoZjwyaIVcc8oi9CAmhond03SNLhYDs8fX
- X4gQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718095853; x=1718700653;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ZURMeBsm3U82KPUq4cRvsaz/m8be/dtghf9SYzj5oO8=;
- b=I5TYt7mTIY/zN/deEDu7vMaCGC2BVeAhTh5IXoIMqjtbL/1ZkXIagz/euXXNipiPPL
- MHOhzFUuK5X8XYUAuR41J+dZhefuYgTX/7oNz6z9yVLYCzgKL2yy121hSsI/UG1L7nG5
- cncDDBgE3AUBzmiEQqYkV9hm01fhT3FgKuhGCv+RjfL0kpPVJJpqqsAYgseW2CBjgSqL
- YZYbup7lmRJ7dQJyFa1M3nmsiCohkvzT0S55n0LAM07BCzATWmdQywT0BgtE0oLi4zBE
- iCW/411d8RIp4671Jr4b45/SHf/ROidPT4iHOc0BYtJc7Lh0hGsP8l/CEip567u4kuhl
- qDxw==
-X-Gm-Message-State: AOJu0YwxrRkpRrbIoxQ1+Lu/HKRlUMfH2S/SBLA9S2pVtYxe66BeXhCt
- sgRhSB4egVJVihNhfvGlth9XqSJg+jgMHv30JSUTuxniZMbdyrRuz6rUlAtZ3jwSfxXkpEVZuP1
- YkZnn3Y472HFjHiz2jNxNxNZjSn08iLgVSWoROw==
-X-Google-Smtp-Source: AGHT+IEG6HsE+2TWoU/3HukxcR94Q9VEoB8WlF3PGTzIxx0/vNFALCLD3SDTMSZbX4iJ+ylvOUe4WFxsc66oSC6vM7M=
-X-Received: by 2002:a50:9b42:0:b0:57c:9dbc:2b6e with SMTP id
- 4fb4d7f45d1cf-57c9dbc2cdcmr190428a12.42.1718095852784; Tue, 11 Jun 2024
- 01:50:52 -0700 (PDT)
+ (Authenticated sender: lukma@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id D095586FB2;
+ Tue, 11 Jun 2024 10:51:28 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1718095889;
+ bh=ujDJhuZ89mQIf8PwfYU+M7/4FN5Lwabw4ptIHAR0Vi0=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=y57+Vj7R6lsHSqti0KBjkYihOTEjCnnUaW5Ardy0A6ghMcaxc+bJ8iFpXaiHkUfYa
+ g7G7Nzi+3DRajCK9hC94Q8J4qoGQs8PaO+6jSXuUxYF26bkExZRad7610jtUXk/6rn
+ 6Mi+iVbMxwtUAF5RziHVr4ldDU2zGuOxfekZyVXa9XyXd3z5eBdmKWDY0anGSzusDE
+ Scmf5gmFkhgErBekTu9fsCQMDBP/mefD5blzMEopOwwoU0A/ExiZVs5gdhXKGf3D4z
+ T29Omq5F2KMFw0AMHX+K253GGgmvyS9GVtG7sgI4FTdwcNM6oO5knrA7puT2jqkLnf
+ kcy2meEMnFnYg==
+Date: Tue, 11 Jun 2024 10:51:27 +0200
+From: Lukasz Majewski <lukma@denx.de>
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>, Felipe Balbi
+ <felipe.balbi@linux.intel.com>, Nishanth Menon <nm@ti.com>, Simon Glass
+ <sjg@chromium.org>, Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Tom Rini
+ <trini@konsulko.com>
+Subject: Re: [PATCH 3/6] usb: gadget: Drop usb_gadget_controller_number()
+Message-ID: <20240611105127.3ab8cc38@wsk>
+In-Reply-To: <877cew0wu6.fsf@baylibre.com>
+References: <20240609213449.194762-1-marek.vasut+renesas@mailbox.org>
+ <20240609213449.194762-3-marek.vasut+renesas@mailbox.org>
+ <877cew0wu6.fsf@baylibre.com>
+Organization: denx.de
+X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
- <20240607185240.1892031-9-sughosh.ganu@linaro.org>
- <20240610173102.GW68077@bill-the-cat>
-In-Reply-To: <20240610173102.GW68077@bill-the-cat>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Tue, 11 Jun 2024 14:20:40 +0530
-Message-ID: <CADg8p95aA1h_0XgANyHjXFKpPjQdKvrH5jcTKL9Gu8ouhp-gqQ@mail.gmail.com>
-Subject: Re: [RFC PATCH 08/31] lmb: replcace the lmb_init_and_reserve()
- function
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marex@denx.de>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; boundary="Sig_/jHNIhbfQcAL1YuM8Vd8o8eL";
+ protocol="application/pgp-signature"; micalg=pgp-sha512
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,50 +74,165 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 10 Jun 2024 at 23:01, Tom Rini <trini@konsulko.com> wrote:
->
-> On Sat, Jun 08, 2024 at 12:22:17AM +0530, Sughosh Ganu wrote:
-> > With the changes to make the Logical Memory Block(LMB) allocations
-> > persistent and with the common memory regions being reserved during
-> > board init, the lmb_init_and_reserve() API can be removed and replaced
-> > with a lmb_add_memory() API, which adds all the available memory to
-> > the LMB pool.
+--Sig_/jHNIhbfQcAL1YuM8Vd8o8eL
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, 11 Jun 2024 09:20:33 +0200
+Mattijs Korpershoek <mkorpershoek@baylibre.com> wrote:
+
+> Hi Marek,
+>=20
+> Thank you for the patch.
+>=20
+> On dim., juin 09, 2024 at 23:32, Marek Vasut
+> <marek.vasut+renesas@mailbox.org> wrote:
+>=20
+> > The bcdDevice field is defined as
+> > |Device release number in binary-coded decimal
+> > in the USB 2.0 specification. We use this field to distinguish the
+> > UDCs from each other. In theory this could be used on the host side
+> > to apply certain quirks if the "special" UDC in combination with
+> > this gadget is used. This hasn't been done as far as I am aware. In
+> > practice it would be better to fix the UDC driver before shipping
+> > since a later release might not need this quirk anymore.
 > >
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > This patch removes the newly unused function. Linux stopped using
+> > this functionality in 2012, remove it from U-Boot as well.
+> >
+> > Matching Linux kernel commit:
+> > ed9cbda63d45 ("usb: gadget: remove usb_gadget_controller_number()")
+> >
+> > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org> =20
+>=20
+> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> # on vim3
+>=20
 > > ---
-> >  arch/arm/mach-apple/board.c          |  2 +-
-> >  arch/arm/mach-snapdragon/board.c     |  2 +-
-> >  arch/arm/mach-stm32mp/stm32mp1/cpu.c |  2 +-
-> >  cmd/bdinfo.c                         |  2 +-
-> >  cmd/load.c                           |  2 +-
-> >  fs/fs.c                              |  2 +-
-> >  include/lmb.h                        | 12 +++++++++++-
-> >  lib/lmb.c                            | 15 +++++++++++----
-> >  net/tftp.c                           |  2 +-
-> >  net/wget.c                           |  2 +-
-> >  test/cmd/bdinfo.c                    | 10 +---------
-> >  11 files changed, 31 insertions(+), 22 deletions(-)
+> > Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+> > Cc: Felipe Balbi <felipe.balbi@linux.intel.com>
+> > Cc: Lukasz Majewski <lukma@denx.de>
+> > Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> > Cc: Nishanth Menon <nm@ti.com>
+> > Cc: Simon Glass <sjg@chromium.org>
+> > Cc: Thinh Nguyen <Thinh.Nguyen@synopsys.com>
+> > Cc: Tom Rini <trini@konsulko.com>
+> > Cc: u-boot@lists.denx.de
+> > ---
+> >  drivers/usb/gadget/gadget_chips.h | 62
+> > ------------------------------- 1 file changed, 62 deletions(-)
 > >
-> > diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/board.c
-> > index c877c7b94c..2e72d03edd 100644
-> > --- a/arch/arm/mach-apple/board.c
-> > +++ b/arch/arm/mach-apple/board.c
-> > @@ -776,7 +776,7 @@ int board_late_init(void)
-> >  {
-> >       u32 status = 0;
-> >
-> > -     lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
-> > +     lmb_add_memory(gd->bd);
-> >
-> >       /* somewhat based on the Linux Kernel boot requirements:
-> >        * align by 2M and maximal FDT size 2M
->
-> We already reserved gd->bd as part of the initr_lmb call. So I think
-> this commit needs rethinking, or am I missing something?
+> > diff --git a/drivers/usb/gadget/gadget_chips.h
+> > b/drivers/usb/gadget/gadget_chips.h index 98156c312d2..316051686c4
+> > 100644 --- a/drivers/usb/gadget/gadget_chips.h
+> > +++ b/drivers/usb/gadget/gadget_chips.h
+> > @@ -146,65 +146,3 @@
+> >  #else
+> >  #define gadget_is_dwc2(g)        0
+> >  #endif
+> > -
+> > -/**
+> > - * usb_gadget_controller_number - support bcdDevice id convention
+> > - * @gadget: the controller being driven
+> > - *
+> > - * Return a 2-digit BCD value associated with the peripheral
+> > controller,
+> > - * suitable for use as part of a bcdDevice value, or a negative
+> > error code.
+> > - *
+> > - * NOTE:  this convention is purely optional, and has no meaning
+> > in terms of
+> > - * any USB specification.  If you want to use a different
+> > convention in your
+> > - * gadget driver firmware -- maybe a more formal revision ID --
+> > feel free.
+> > - *
+> > - * Hosts see these bcdDevice numbers, and are allowed (but not
+> > encouraged!)
+> > - * to change their behavior accordingly.  For example it might
+> > help avoiding
+> > - * some chip bug.
+> > - */
+> > -static inline int usb_gadget_controller_number(struct usb_gadget
+> > *gadget) -{
+> > -	if (gadget_is_net2280(gadget))
+> > -		return 0x01;
+> > -	else if (gadget_is_dummy(gadget))
+> > -		return 0x02;
+> > -	else if (gadget_is_sh(gadget))
+> > -		return 0x04;
+> > -	else if (gadget_is_goku(gadget))
+> > -		return 0x06;
+> > -	else if (gadget_is_mq11xx(gadget))
+> > -		return 0x07;
+> > -	else if (gadget_is_omap(gadget))
+> > -		return 0x08;
+> > -	else if (gadget_is_n9604(gadget))
+> > -		return 0x09;
+> > -	else if (gadget_is_at91(gadget))
+> > -		return 0x12;
+> > -	else if (gadget_is_imx(gadget))
+> > -		return 0x13;
+> > -	else if (gadget_is_musbhsfc(gadget))
+> > -		return 0x14;
+> > -	else if (gadget_is_musbhdrc(gadget))
+> > -		return 0x15;
+> > -	else if (gadget_is_atmel_usba(gadget))
+> > -		return 0x17;
+> > -	else if (gadget_is_fsl_usb2(gadget))
+> > -		return 0x18;
+> > -	else if (gadget_is_amd5536udc(gadget))
+> > -		return 0x19;
+> > -	else if (gadget_is_m66592(gadget))
+> > -		return 0x20;
+> > -	else if (gadget_is_ci(gadget))
+> > -		return 0x21;
+> > -	else if (gadget_is_dwc3(gadget))
+> > -		return 0x23;
+> > -	else if (gadget_is_cdns3(gadget))
+> > -		return 0x24;
+> > -	else if (gadget_is_max3420(gadget))
+> > -		return 0x25;
+> > -	else if (gadget_is_mtu3(gadget))
+> > -		return 0x26;
+> > -	else if (gadget_is_dwc2(gadget))
+> > -		return 0x27;
+> > -	return -ENOENT;
+> > -}
+> > --=20
+> > 2.43.0 =20
 
-I believe the LMB memory API's also get called from SPL(not sure about
-TPL/VPL though). The memory that gets added in the other commit is for
-U-Boot main, post relocation. These calls will then be needed for
-prior stages of U-Boot that want to use LMB memory.
+FInally..... :-)
 
--sughosh
+Thanks Mattijs for this cleanup.
+
+Reviewed-by: Lukasz Majewski <lukma@denx.de>
+
+
+Best regards,
+
+Lukasz Majewski
+
+--
+
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
+
+--Sig_/jHNIhbfQcAL1YuM8Vd8o8eL
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmZoEA8ACgkQAR8vZIA0
+zr3ScwgAjSfp0m/7jfMaEFDWdCQGR0GtdX+fFRT5KaKrqddQeQ0r3uOaDKXksCk9
+zNK9qA7377pFa98RTsdUbdCn7Xs++3FHf6f/N6EvXn2/UGnXmEKIvoXWRO1nRGyh
+2En7onpEOfctrUmHGiKkgPiOYsThTeJWYGtuF6VyrMW3qP1boa9RvRGt0UtL5Cwy
+wjwrZqv0Uxuvy3LMhpRNnNKw9fZBiFJ7Qbt7MOZf5NXF3wkeEoX1oLT4+MIW03rg
+S+eJBGqGMT6wENxq18VfEqQxFVrtADTvZzLcT9V/KMZun2B9BhlaIv0JlIJuSdtc
+FA+xjEcnesqwd35lDxeLaDTgA/xrfw==
+=KyDb
+-----END PGP SIGNATURE-----
+
+--Sig_/jHNIhbfQcAL1YuM8Vd8o8eL--
