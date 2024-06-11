@@ -4,84 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCBA3C27C65
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 21:00:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5970AC27C65
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 21:01:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17745886D5;
-	Tue, 11 Jun 2024 23:00:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A0F7788717;
+	Tue, 11 Jun 2024 23:01:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JUQwr55Z";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="NfrwYyRr";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="P0muY1Kk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21A788871E; Tue, 11 Jun 2024 23:00:04 +0200 (CEST)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5AABE88717; Tue, 11 Jun 2024 23:01:02 +0200 (CEST)
+Received: from wfhigh4-smtp.messagingengine.com
+ (wfhigh4-smtp.messagingengine.com [64.147.123.155])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA49888714
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 23:00:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BCE5C8870C
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 23:00:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maximmosk4@gmail.com
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2ead2c6b50bso66045431fa.0
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 14:00:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1718139601; x=1718744401; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=JRVGUDEZ+PDOuvDDEY+uCE8xggAEE/SPFKYE2vXu3CI=;
- b=JUQwr55ZUtzbglsYhVaXxPx9ZsuX9QPZnw9D2v2qiBs8DA3gvZkahJMMN1c5LCYR8t
- vvRg3Y3jEiwcuvf6rPOKz0Otv+835RaDnY49gvoEU2JLRXuSsWMEgpToqGGDI+k3c/Oh
- fk6XwWw+SJhCR4HBOWjGwur2Vd+aexrjb7Gj6Xb7KRDRLz2Sa0Z4ZDbXLi8Uf0Zaj9MF
- T/tsR30xldlYy8qur0utk5g1kx3gCNLCEqkb2gcOwdfS0oHlic7DH/En2SNHzUufeOkP
- iKRBNCvKYZmT3UgEZxa3a0KF/nDEsqqQMwu12Ph58i9OU2P6hRU30jrGPBQ6t0i9pIzx
- Zn2Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718139601; x=1718744401;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=JRVGUDEZ+PDOuvDDEY+uCE8xggAEE/SPFKYE2vXu3CI=;
- b=t27SHrxXa3fACZe3LS2eviyoUF27OHgA3XoXwQAu4vIc7MrZBoe3u9ESikXa2zhsUD
- f8bC2jA5pQqsRs+rJtGoteIPOM+F0txEoRV5Io7KWEa9IAfOcClqNsI2p44eiZejgtRx
- xbNcqle3PF3hzMcdJOJ4Z251hCXOmLBEwGSLaj8L3HRZ5QbiExejXp32wRzTIf86spQO
- 1Xr7jfbnm5l/nut3KcMqetREtUqKubI9mo8Sass3/pJ1K4WtMy3JLIvMFstRqXax/DC2
- cjuoQjuiBGQVvVqLxWSLK0mM6d5zuVfM3yqcyJWGc8x8Ar7fRLB2TCMB2575zmmlFeht
- b+dw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWwXuqHl6LeYN9jWaOvsHvX7c8/1BCkX3scOP5/49Abv4JdpWqytWpnYMUUNlBmqvZqnVnhh2mFQIG3q4sxyX9y8LYRRg==
-X-Gm-Message-State: AOJu0YwkXASKx0BRMVQQDNGRnQGaiydzipZo4RpQ7OPnAc0Z4Z70/Uf2
- uilO7adxhLfECWBa92TrxdWwci2wVU383hwoKYxrTuWkMNNUpsoJ
-X-Google-Smtp-Source: AGHT+IHAHYK6sTzuHmbwYf1XiVVvBP3+c3tFx8g/B2Ay+21AVveFKCC6drpvJI+FUEhqsbIDMJ6oLA==
-X-Received: by 2002:a2e:8705:0:b0:2ea:f719:317b with SMTP id
- 38308e7fff4ca-2eaf7287c04mr67435591fa.3.1718139600645; 
- Tue, 11 Jun 2024 14:00:00 -0700 (PDT)
-Received: from [192.168.1.6] (109-252-15-116.nat.spd-mgts.ru. [109.252.15.116])
- by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-2ebe62669d1sm11941111fa.69.2024.06.11.13.59.59
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 11 Jun 2024 14:00:00 -0700 (PDT)
-Message-ID: <c81b58cb-5304-4b33-adbb-590cd530afd4@gmail.com>
-Date: Tue, 11 Jun 2024 23:59:54 +0300
+ spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailfhigh.west.internal (Postfix) with ESMTP id E22A91800159;
+ Tue, 11 Jun 2024 17:00:56 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute5.internal (MEProxy); Tue, 11 Jun 2024 17:00:57 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
+ cc:cc:content-transfer-encoding:content-type:date:date:from:from
+ :in-reply-to:in-reply-to:message-id:mime-version:references
+ :reply-to:subject:subject:to:to; s=fm2; t=1718139656; x=
+ 1718226056; bh=x1cm+iaWsv6/CWdCzyJZbddTU3UzljXeO2HluK860UQ=; b=N
+ frwYyRrNOvC+MKzzU+vFz2byXIFgjl4F+La3jfcEQ1AYBzxkLO02BQDRk3n0PkW0
+ KLOTI5wejdwJQqdmskQwmHBK6ejWOEruGpDs5GvvSOXfmiSjqyNfm8FyMZAKzAXM
+ ATsx0Y1Lriy6t9urAJoZwLCDQQV9ED5evWL/e2gpk1cdVYjFVTduwsmyOCjBqEkt
+ +XyuWx6VP+e68tq+ffnZPfdhnTKshf9veHc9KKNE9jl3x08wuiaUHL+pewVx7vPC
+ GVSXvPFlx7R/s4J1K+uUZ/4/wO4Yr5g75ie/kYNykg/pv6q0aDAadaF+nqSjsMWl
+ qq8lHveGEWGJ4WSk+Kb9g==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:date:date:feedback-id:feedback-id:from:from
+ :in-reply-to:in-reply-to:message-id:mime-version:references
+ :reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1718139656; x=
+ 1718226056; bh=x1cm+iaWsv6/CWdCzyJZbddTU3UzljXeO2HluK860UQ=; b=P
+ 0muY1KkBeu6ak58I6hzb196Fv4nhVy/vSz3e0peUOPo8QNXp9HN76YAMigKLNjTo
+ rDPW3LcGV6dew5NUb6qMKWfTZg+vzKuad0BRRyus4/UZIREn7qE9Xmsi7Dz0cBms
+ QLbrjnWnOhpExobgzzensgGWZuTVT7ytqJgB87788BWqHw3lcCSvfFH5ddk3PBQS
+ 1FhqoQUhyBH4D7Va5jD8pZFXTlLz52rvvoleL9cm3BhwYuwjeqZpONTB92Oup5nm
+ iu/H8eR3VSDuIZxLfDonbZYi69BLQVUisYU2RroVI38ftePcWrLd6QTy+ioqIL8R
+ m58zIarvYUqLeYyzFPSRQ==
+X-ME-Sender: <xms:CLtoZlGDg3h5k-5uXak4qpZsh2R6gpo_mx63vtCUqY186UB3EohsBQ>
+ <xme:CLtoZqXLmwxT4AaLEXTgz2qCEg4RoDF914G6BErUhVhBkF8fwQnTorR2c0x7zxu-1
+ n7u3SVScT93aLf_Qw0>
+X-ME-Received: <xmr:CLtoZnJLyCB0vnikGM1ye93KlGbhyCGQgqQe6ywKa4WNaGgpqWBR3e1fwQM85kN6P7zrKn1l6_s>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrfeduvddgudehgecutefuodetggdotefrod
+ ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
+ necuuegrihhlohhuthemuceftddtnecunecujfgurhephffvvefufffkofgjfhgggfestd
+ ekredtredttdenucfhrhhomheplfhirgiguhhnucgjrghnghcuoehjihgrgihunhdrhigr
+ nhhgsehflhihghhorghtrdgtohhmqeenucggtffrrghtthgvrhhnpeefledufeehgedvue
+ dvvdegkefgvddttedtleeiiefhgeetudegkefhvdfhjeeftdenucevlhhushhtvghrufhi
+ iigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflh
+ ihghhorghtrdgtohhm
+X-ME-Proxy: <xmx:CLtoZrH3C5fxVMNV-q8hqb3JrlbMcKO6rQc2Qr9r2h00hQOpncKX1Q>
+ <xmx:CLtoZrVAESKZdsKS8NSMgZ-_6eaI6F8r6s5R329RDZM2xBXoTbB62Q>
+ <xmx:CLtoZmPHPR-E4ryqSexAvCYPBlHHTVh471oTnf8znvqULxiqpE6-hg>
+ <xmx:CLtoZq1oUurAkPtRs1dEouaJHXTJXHEWBBXu-vtUG1u3bbD2qCCCOQ>
+ <xmx:CLtoZmSWxJmc5imDOuuQDBbkVMzORc2wCJldoVNolfY6WjW-jTN9gJw7>
+Feedback-ID: ifd894703:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
+ 11 Jun 2024 17:00:55 -0400 (EDT)
+From: Jiaxun Yang <jiaxun.yang@flygoat.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de,
+	Jiaxun Yang <jiaxun.yang@flygoat.com>
+Subject: [u-boot-test-hooks PATCH 1/4] qemu-vexpress*: Pass -audio none
+Date: Tue, 11 Jun 2024 22:00:22 +0100
+Message-ID: <20240611210025.798978-2-jiaxun.yang@flygoat.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240611210025.798978-1-jiaxun.yang@flygoat.com>
+References: <20240611210025.798978-1-jiaxun.yang@flygoat.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5] cmd: move ELF load and boot to lib/elf.c
-To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Maxim.Moskalets@kaspersky.com, quentin.schulz@theobroma-systems.com,
- sjg@chromium.org, u-boot@lists.denx.de
-References: <20240605184334.13973-1-Maxim.Moskalets@kaspersky.com>
- <b95386ab-ec35-4912-934d-c3b611953b55@gmx.de>
- <20240606142136.GY68077@bill-the-cat>
-Content-Language: en-US
-From: "Maxim M. Moskalets" <maximmosk4@gmail.com>
-In-Reply-To: <20240606142136.GY68077@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,36 +104,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 06.06.2024 17:21, Tom Rini wrote:
-> On Thu, Jun 06, 2024 at 09:02:43AM +0200, Heinrich Schuchardt wrote:
->> On 6/5/24 20:43, Maxim Moskalets wrote:
->>> From: Maxim Moskalets <maximmosk4@gmail.com>
->>>
->>> Loading and running the ELF image is the responsibility of the
->>> library and should not be associated with the command line interface.
->>>
->>> It is also required to run ELF images from FIT with the bootm command
->>> so as not to depend on the command line interface.
->>>
->>> Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
->> In future versions please, include a change log separated from the
->> commit message by ---, e.g.
->>
->> ---
->> v6:
->> 	foo changed to bar
->> v5:
->> 	xxx removed
->> ---
->>
->> Best regards
->>
->> Heinrich
-> Do you have any other feedback, Heinrich?
->
-I will take these comments into account in future patches.
-Are there any other comments?
+Those boards have build in sound card which cause
+problems on CI runner.
 
-Best regards
+Pass -audio none to disable sound card backends.
 
-Maxim
+Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+---
+ bin/travis-ci/conf.vexpress_ca15_tc2_qemu | 2 +-
+ bin/travis-ci/conf.vexpress_ca9x4_qemu    | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/bin/travis-ci/conf.vexpress_ca15_tc2_qemu b/bin/travis-ci/conf.vexpress_ca15_tc2_qemu
+index 83d703269377..55e40038b379 100644
+--- a/bin/travis-ci/conf.vexpress_ca15_tc2_qemu
++++ b/bin/travis-ci/conf.vexpress_ca15_tc2_qemu
+@@ -21,7 +21,7 @@
+ console_impl=qemu
+ qemu_machine="vexpress-a15"
+ qemu_binary="qemu-system-arm"
+-qemu_extra_args="-nographic -m 1G -net user,tftp=${UBOOT_TRAVIS_BUILD_DIR} -net nic"
++qemu_extra_args="-nographic -m 1G -audio none -net user,tftp=${UBOOT_TRAVIS_BUILD_DIR} -net nic"
+ qemu_kernel_args="-kernel ${U_BOOT_BUILD_DIR}/u-boot"
+ reset_impl=none
+ flash_impl=none
+diff --git a/bin/travis-ci/conf.vexpress_ca9x4_qemu b/bin/travis-ci/conf.vexpress_ca9x4_qemu
+index d07be2b12984..b5ed72934c3a 100644
+--- a/bin/travis-ci/conf.vexpress_ca9x4_qemu
++++ b/bin/travis-ci/conf.vexpress_ca9x4_qemu
+@@ -21,7 +21,7 @@
+ console_impl=qemu
+ qemu_machine="vexpress-a9"
+ qemu_binary="qemu-system-arm"
+-qemu_extra_args="-nographic -m 1G -net user,tftp=${UBOOT_TRAVIS_BUILD_DIR} -net nic"
++qemu_extra_args="-nographic -m 1G -audio none -net user,tftp=${UBOOT_TRAVIS_BUILD_DIR} -net nic"
+ qemu_kernel_args="-kernel ${U_BOOT_BUILD_DIR}/u-boot"
+ reset_impl=none
+ flash_impl=none
+-- 
+2.43.0
+
