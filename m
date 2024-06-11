@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6320AC27C5E
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 09:42:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52CD4C25B76
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 09:49:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C34888640;
-	Tue, 11 Jun 2024 11:42:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9FF3A8836E;
+	Tue, 11 Jun 2024 11:49:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZpFzv7JY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="L88q9agr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46ACC88638; Tue, 11 Jun 2024 11:42:09 +0200 (CEST)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id 1BD9988624; Tue, 11 Jun 2024 11:49:55 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F60188619
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 11:42:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 11556880A3
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 11:49:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seashell11234455@gmail.com
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1f64ecb1766so41380205ad.1
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 02:42:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a689ad8d1f6so652999866b.2
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 02:49:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1718098924; x=1718703724; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=udFZv7R5m8JcvfX84MOWyXGUYZhGTj5nPhOhqf6CvcE=;
- b=ZpFzv7JYcEcNqCpaUOC7VjENQ6GUCX1ArJHSR3jvq1RhXYrT8xC1caYrzWq+nT0/BF
- 8qAtv2PlJLWIPmpczl+CgkDtqULAsRJWPh2/uZk0lA7EA+6+2yM3GNNMt9tNodfdQ2AO
- gBRsVWbiMTYYaTiPi4EJeU777WGoi+sIwzBNByRWcAFjieeDttaDdmxgsfjQgx4ScaLC
- q9pul0jnLLw3NP73XC2nAye+mMdkxCP4WCTPSXEpR26CWS1SF2PrcuAYtgtGPgPgzQnF
- pMg4QHkmTIu3tv4rf9RmI+XzNFNGj5OtAw4WJF7F1L7q0l4CnTbQczDB9swwZHXaN2r7
- qWMA==
+ d=linaro.org; s=google; t=1718099392; x=1718704192; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=LIV34FSG/o36CG2nBdhM4M7Crm0ujb+72nD8GOuqLzg=;
+ b=L88q9agr932Zd9sBHWvy835u4RXGHhaFz9lzs2rEjNuXzUaw9S1lOqaK44mdl0QPdl
+ bdwSjIBCy00mXkcSTV7zM21EVpJHh90ljSR33Nulm1kQlubav6ts6qPuxBcq514nSo6Q
+ YxiIpwH2GL0j/T0Tz5d1VGfVwSDnqHjtP+8KuZ+fEY2WHlEVM59uVu24Pepm8PdDoG1p
+ a4C0xSy8nuV7df40ohTI9zfm7zWgtXHneZWmpscrBibCx6I2yFNlTN9EYiG8aV0fhz5Y
+ 2FqXb9A4KP3wl+RsTuOsC+PpI81KxKHjMFSi5omhgpvJWucoeWvDC6fvDs2eY//wgkZH
+ mD/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718098924; x=1718703724;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=udFZv7R5m8JcvfX84MOWyXGUYZhGTj5nPhOhqf6CvcE=;
- b=gAWfM+AauPCMdNzH5wsuaQNwn/VyxbQ4fo+XwjrKxLQNcAKDZkQImppaILvr8FE+oQ
- mPNGma9ZpMY6rhpvCWOjJDo6lltUW/Das0RRb/FVO2ir4yXODJTa1Kw1DCps8jd8Rxsl
- 6LDaaSwYouAGJz/8Vwxy5iy9pFBLXEU3LpmPGzjryrwEzzZEoMIVMWJTLD41Lb621wyr
- kASwAaIGvlhcF1XFEfQsaM/F9bTvjVtmXbGcr8lRBoQc7gS1Gm85HmdF7Dzj5Oifjfyo
- 6+5dyvpkWBswZWnHQSOimFH7cbQ0e/zQyVrR+7hwNWwe3ezrLsZc++WIQE1yqd069koF
- vAtw==
-X-Gm-Message-State: AOJu0Yw5HTi2sHqBstkYNV0c6ugUIha5i3i6RJ5fBLJyYVPxwwjrkwvJ
- slhVgiBdXrewMJp6rW2bvhOvtfKtJ5Gg24AMmwWZ5Z7+eIqhgMt9FH1UaHLv
-X-Google-Smtp-Source: AGHT+IEL487TtKXE9OFuADkc6bVn9pNfwWD3QdjuaXTPbF+t6tA7h3lKgjrUc9MeHX0S2Dj71S4n6Q==
-X-Received: by 2002:a17:902:da84:b0:1f7:1b97:e91f with SMTP id
- d9443c01a7336-1f71b97f220mr37265955ad.26.1718098924302; 
- Tue, 11 Jun 2024 02:42:04 -0700 (PDT)
-Received: from localhost.localdomain ([117.135.90.188])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f6d859ea3csm76873555ad.178.2024.06.11.02.42.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Jun 2024 02:42:03 -0700 (PDT)
-From: Kongyang Liu <seashell11234455@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Leo <ycliang@andestech.com>, Rick Chen <rick@andestech.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 4/4] riscv: dts: sophgo: Replace device clocks with real
- clocks.
-Date: Tue, 11 Jun 2024 17:41:16 +0800
-Message-ID: <20240611094134.18868-5-seashell11234455@gmail.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20240611094134.18868-1-seashell11234455@gmail.com>
-References: <20240611094134.18868-1-seashell11234455@gmail.com>
+ d=1e100.net; s=20230601; t=1718099392; x=1718704192;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=LIV34FSG/o36CG2nBdhM4M7Crm0ujb+72nD8GOuqLzg=;
+ b=bNr0+bnClDKvOaY0PK+kaMEuXNIKX+kYpCH6Hr/Tc44ZCU7jSAbN0bMwQKgE5bHhuq
+ D6USfI7kOd2cPVWDvnmtPm7dyqgkVb3belA/EbBTaw1gW8GF8k/LKHyEqWqzdaZFsorA
+ jnYlVLRcwMhEhmeqmmxLi6qRp1xs7dlQVRAGDSJYyBX98GhnUYyijUsF6e/dT6hHWuo+
+ Spp+H2IBpmBFbOPFdH/yMp4IFh8ga8ThNh1Bx6sX7uGPa7dTfK6RMJT60EDPhP447Wey
+ BO087ikwCGl0D6ZbIHc+JLt8m3If1qVhcyFV6tzFcx6BWxQ+Fi3Psqn4T2rsjAe9TI/4
+ jwrQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUyUTg99gwvCXFyP8T7+KRvXt5i0AMEquyfIlnUQsp9VVN+0KAR3uEkietX+RdVmTmB6Akfzhndp2UGfuT/ZCaJODW2iA==
+X-Gm-Message-State: AOJu0YxpMTWdhQQYlTLNGu4cXDqokyhsYgOq3wHFoZoDwNXCKhzdwvYe
+ PNasX5xs8fOTGImhMGHr9KYkBxBqT0kd3YQXU+GWjWRubx41SF3VAmME7tEL7mZE1a2cBAFAUWk
+ /qzxxTnv/050oP089zNfFZu14Gi/GflReHzKpbg==
+X-Google-Smtp-Source: AGHT+IEd71qbReGD3pwZgWdBbMCV6COvlF3nVMIN8W+G4GXQMEmdYO1aCdEIoh+tyEhKOPymWhUgCcbH5q3PX7A4UmA=
+X-Received: by 2002:a17:906:ae4a:b0:a6e:46ab:9a9b with SMTP id
+ a640c23a62f3a-a6e46ab9b22mr626400266b.31.1718099392300; Tue, 11 Jun 2024
+ 02:49:52 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
+ <20240607185240.1892031-18-sughosh.ganu@linaro.org>
+ <11990152-63d9-4625-be0b-2fc278a8d27c@gmx.de>
+In-Reply-To: <11990152-63d9-4625-be0b-2fc278a8d27c@gmx.de>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Tue, 11 Jun 2024 15:19:41 +0530
+Message-ID: <CADg8p970=RpO-dmyY0vNBz1KT=A0SPVTYJOTPyRhdYZN0+pvtA@mail.gmail.com>
+Subject: Re: [RFC PATCH 17/31] lmb: remove call to efi_lmb_reserve()
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,138 +93,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace device clocks with real clocks from the clock controller, and
-remove dummy clocks.
+On Tue, 11 Jun 2024 at 14:42, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 07.06.24 20:52, Sughosh Ganu wrote:
+> > The changes in the EFI memory map are now notified to the LMB
+> > module. There is therefore no need to explicitly get the efi memory
+> > map and set aside the EFI allocated memory.
+> >
+> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > ---
+> >   lib/lmb.c | 35 -----------------------------------
+> >   1 file changed, 35 deletions(-)
+> >
+> > diff --git a/lib/lmb.c b/lib/lmb.c
+> > index 3059609aea..c9f6ca692e 100644
+> > --- a/lib/lmb.c
+> > +++ b/lib/lmb.c
+> > @@ -204,38 +204,6 @@ void arch_lmb_reserve_generic(ulong sp, ulong end, ulong align)
+> >       }
+> >   }
+> >
+> > -/**
+> > - * efi_lmb_reserve() - add reservations for EFI memory
+> > - *
+> > - * Add reservations for all EFI memory areas that are not
+> > - * EFI_CONVENTIONAL_MEMORY.
+> > - *
+> > - * Return:   0 on success, 1 on failure
+> > - */
+> > -static __maybe_unused int efi_lmb_reserve(void)
+> > -{
+> > -     struct efi_mem_desc *memmap = NULL, *map;
+> > -     efi_uintn_t i, map_size = 0;
+> > -     efi_status_t ret;
+> > -
+> > -     ret = efi_get_memory_map_alloc(&map_size, &memmap);
+> > -     if (ret != EFI_SUCCESS)
+> > -             return 1;
+> > -
+> > -     for (i = 0, map = memmap; i < map_size / sizeof(*map); ++map, ++i) {
+> > -             if (map->type != EFI_CONVENTIONAL_MEMORY) {
+> > -                     lmb_reserve_flags(map_to_sysmem((void *)(uintptr_t)
+> > -                                                     map->physical_start),
+> > -                                       map->num_pages * EFI_PAGE_SIZE,
+> > -                                       map->type == EFI_RESERVED_MEMORY_TYPE
+> > -                                           ? LMB_NOMAP : LMB_NONE);
+>
+>
+> Now that you have removed the last usage of LMB_NOMAP, please, remove it
+> from enum lmb_flags.
 
-Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
----
+Not all instances are removed. This flag gets used for reserving FDT
+memory areas as well. Used in
+boot/image-fdt.c:boot_fdt_add_mem_rsv_regions().
 
-(no changes since v1)
+-sughosh
 
- arch/riscv/dts/cv18xx.dtsi | 40 +++++++++++++++-----------------------
- 1 file changed, 16 insertions(+), 24 deletions(-)
-
-diff --git a/arch/riscv/dts/cv18xx.dtsi b/arch/riscv/dts/cv18xx.dtsi
-index 4b0143450e..8a7386b76e 100644
---- a/arch/riscv/dts/cv18xx.dtsi
-+++ b/arch/riscv/dts/cv18xx.dtsi
-@@ -5,6 +5,7 @@
-  */
- 
- #include <dt-bindings/interrupt-controller/irq.h>
-+#include <dt-bindings/clock/sophgo,cv1800.h>
- 
- / {
- 	#address-cells = <1>;
-@@ -45,13 +46,6 @@
- 		#clock-cells = <0>;
- 	};
- 
--	sdhci_clk: sdhci-clock {
--		compatible = "fixed-clock";
--		clock-frequency = <375000000>;
--		clock-output-names = "sdhci_clk";
--		#clock-cells = <0>;
--	};
--
- 	eth_csrclk: eth-csrclk {
- 		compatible = "fixed-clock";
- 		clock-frequency = <250000000>;
-@@ -66,13 +60,6 @@
- 		#clock-cells = <0x0>;
- 	};
- 
--	spif_clk: spi-flash-clock {
--		compatible = "fixed-clock";
--		clock-frequency = <300000000>;
--		clock-output-names = "spif_clk";
--		#clock-cells = <0>;
--	};
--
- 	soc {
- 		compatible = "simple-bus";
- 		interrupt-parent = <&plic>;
-@@ -163,8 +150,8 @@
- 			compatible = "sophgo,cv1800b-dwmac";
- 			reg = <0x04070000 0x10000>;
- 			interrupts = <31 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&eth_csrclk>, <&eth_ptpclk>;
--			clock-names = "stmmaceth", "ptp_ref";
-+			clocks = <&clk CLK_ETH0_500M>, <&clk CLK_AXI4_ETH0>;
-+			clock-names = "stmmaceth", "pclk";
- 			status = "disabled";
- 		};
- 
-@@ -172,7 +159,8 @@
- 			compatible = "snps,dw-apb-uart";
- 			reg = <0x04140000 0x100>;
- 			interrupts = <44 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&osc>;
-+			clocks = <&clk CLK_UART0>, <&clk CLK_APB_UART0>;
-+			clock-names = "baudclk", "apb_pclk";
- 			reg-shift = <2>;
- 			reg-io-width = <4>;
- 			status = "disabled";
-@@ -182,7 +170,8 @@
- 			compatible = "snps,dw-apb-uart";
- 			reg = <0x04150000 0x100>;
- 			interrupts = <45 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&osc>;
-+			clocks = <&clk CLK_UART4>, <&clk CLK_APB_UART4>;
-+			clock-names = "baudclk", "apb_pclk";
- 			reg-shift = <2>;
- 			reg-io-width = <4>;
- 			status = "disabled";
-@@ -192,7 +181,8 @@
- 			compatible = "snps,dw-apb-uart";
- 			reg = <0x04160000 0x100>;
- 			interrupts = <46 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&osc>;
-+			clocks = <&clk CLK_UART2>, <&clk CLK_APB_UART2>;
-+			clock-names = "baudclk", "apb_pclk";
- 			reg-shift = <2>;
- 			reg-io-width = <4>;
- 			status = "disabled";
-@@ -202,7 +192,8 @@
- 			compatible = "snps,dw-apb-uart";
- 			reg = <0x04170000 0x100>;
- 			interrupts = <47 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&osc>;
-+			clocks = <&clk CLK_UART3>, <&clk CLK_APB_UART3>;
-+			clock-names = "baudclk", "apb_pclk";
- 			reg-shift = <2>;
- 			reg-io-width = <4>;
- 			status = "disabled";
-@@ -212,7 +203,8 @@
- 			compatible = "snps,dw-apb-uart";
- 			reg = <0x041c0000 0x100>;
- 			interrupts = <48 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&osc>;
-+			clocks = <&clk CLK_UART4>, <&clk CLK_APB_UART4>;
-+			clock-names = "baudclk", "apb_pclk";
- 			reg-shift = <2>;
- 			reg-io-width = <4>;
- 			status = "disabled";
-@@ -222,8 +214,8 @@
- 			compatible = "sophgo,cv1800b-dwcmshc";
- 			reg = <0x4310000 0x1000>;
- 			interrupts = <36 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&sdhci_clk>;
--			clock-names = "core";
-+			clocks = <&clk CLK_AXI4_SD0>, <&clk CLK_SD0>;
-+			clock-names = "core", "bus";
- 			status = "disabled";
- 		};
- 
-@@ -232,7 +224,7 @@
- 			reg = <0x10000000 0x10000000>;
- 			#address-cells = <1>;
- 			#size-cells = <0>;
--			clocks = <&spif_clk>;
-+			clocks = <&clk CLK_AHB_SF>;
- 			interrupts = <95 IRQ_TYPE_LEVEL_HIGH>;
- 			status = "disabled";
- 		};
--- 
-2.41.0
-
+> > -     }
+> > -     efi_free_pool(memmap);
+> > -
+> > -     return 0;
+> > -}
+> > -
+> >   /**
+> >    * lmb_reserve_common() - Reserve memory region occupied by U-Boot image
+> >    * @fdt_blob: pointer to the FDT blob
+> > @@ -255,9 +223,6 @@ void lmb_reserve_common(void *fdt_blob)
+> >
+> >       if (CONFIG_IS_ENABLED(OF_LIBFDT) && fdt_blob)
+> >               boot_fdt_add_mem_rsv_regions(fdt_blob);
+> > -
+> > -     if (CONFIG_IS_ENABLED(EFI_LOADER))
+> > -             efi_lmb_reserve();
+> >   }
+> >
+> >   /**
+>
