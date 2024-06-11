@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C73B6C25B76
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 09:17:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FE0EC25B76
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 09:20:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17D1F885EC;
-	Tue, 11 Jun 2024 11:17:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id ED0E68861A;
+	Tue, 11 Jun 2024 11:20:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Rx8uWsBk";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Xy7tc9lp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A89C488619; Tue, 11 Jun 2024 11:17:13 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B89048861A; Tue, 11 Jun 2024 11:20:47 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CE5388300
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 11:17:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BAD708862E
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 11:20:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1718097429; x=1718702229; i=xypron.glpk@gmx.de;
- bh=wXV/kaW7luOEty6I/EoauAYulKmagMVs8uoiPMxywEk=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=Rx8uWsBkJCTwxGREAdt0bIutpORr1TqjFB2qJ7OCRc6PGz+gc+pAGb/aqi6O6XC4
- x4xBBltVtGTgWzS2jNC85WMYOi7Dxtynh1l5HFf7nc2P2KaA+6i3d8/HYqYt4LHqy
- Z10VmFJr10zB7KR2xp9TL6kyF+UF2sBfMD8y42+KviRAolrT909305wDi6Fj05Lti
- 19m84gS7cH6ziHWX2Dz9dnw06baGYoYgp4AfH2/WtnILxfxZzwDtFuwTJAjp9Jt6B
- oM54lwIjLmq24iuP5HdN6v499xX69dLfw78mArcFOczV16Ric+an91H5QtxFU5Jte
- JYiHQaGuxMgc74/pZw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.126] ([109.42.176.212]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MlNpH-1sgiCm1M1V-00ffPD; Tue, 11
- Jun 2024 11:17:09 +0200
-Message-ID: <5d133571-ba43-40c7-bd19-0c0a4e857034@gmx.de>
-Date: Tue, 11 Jun 2024 11:17:08 +0200
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-42165f6645fso7585175e9.2
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 02:20:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718097645; x=1718702445;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=TerKkpc17sbXbAp2r4AkLlmuAMuXHEffVhzgg4rmrUQ=;
+ b=Xy7tc9lpIqGdGUpuxgbuCS4tTvfCGk1PJiqk7sAdL9OaS8G7WdEMYcb5pyQN8PHuKJ
+ gpriUlP+4spNn7bjNq0WurhVsntSr5Odr8t+oA5tkU+CsPTLedItEltI8s9QuBuFf8v7
+ ni9r6JU2nbQbRwDXWf3oYu9lfkvBalMR8ru3rWSEX2fWO0Tt/BiCncggAYFM9T3dvzef
+ ENi9LxUNifFVTW2j6j63GkCXS9gMVqQK+bAxKEHunrQ2LT6BUAqVLEpkVrf1W/Xv4xUW
+ myjJm8lD25qozR1YTWPIhWTjcqd6JLIdRYKHtUlcbpF4aCISqImX5IDFllFkjPjmkOix
+ L8Gg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718097645; x=1718702445;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=TerKkpc17sbXbAp2r4AkLlmuAMuXHEffVhzgg4rmrUQ=;
+ b=bZLbAd2cYbRL9ED+M05lAUQulF8djPXiKvysj7rNmTBEXNOms9bGDASZLGHlE6bzkU
+ DlMizRPegr0kOCxB8C5gXkf5SOOONvpveYBarKW5XYJRbuGcGm6TVJ74pKVYlmfQOwn+
+ 9mGXXn3kWsUAdQq/POJKTYve2k8PYS6wtpgGFHgsE7HiOSI+fSZmwI0DvZLC7G6TVNJk
+ LODDvGEgYoXXt7fKmVMVHCqVCOjqxmeYIkzI2Qua/xl74bFCLiZPMrW8KCrbiZAWuOvH
+ bDH7le397pgCmSltWU1UDjV14wgB8YZEEm7GcCSeZSdvN7ko+4Ogn8c6zjolAabCQfpA
+ DrZQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXmcpfVOLmznpF7dJBrN5HeWPNtqCWFmtr/2zFuXv9CxLM0i7dThARUwiGY6c38oCBORcbt8NR8q/WRPf6CV6xgW15E+A==
+X-Gm-Message-State: AOJu0YwAw4Fs/NcHBFTG0MynUoBkIavMF9QPX/VMmJBVvSuH/yqeArV4
+ VCIwVY3ep3FYeFBAGc9tBqUre1E33SZoI0B1qHG6xbm0NBJokjorJTzdvL/u5Co=
+X-Google-Smtp-Source: AGHT+IH3OAvNtuBBxGK0di2HsRiYJ+cExDeH2QW5aqybsfsCm33YxrhSiC+id6czQmnViEgDppXSiw==
+X-Received: by 2002:a05:600c:3108:b0:422:e8d:e554 with SMTP id
+ 5b1f17b1804b1-4220e8de8bdmr30849115e9.1.1718097645072; 
+ Tue, 11 Jun 2024 02:20:45 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4217ff85ca6sm92573685e9.14.2024.06.11.02.20.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Jun 2024 02:20:44 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Lukasz Majewski <lukma@denx.de>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>, Felipe Balbi
+ <felipe.balbi@linux.intel.com>, Nishanth Menon <nm@ti.com>, Simon Glass
+ <sjg@chromium.org>, Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Tom Rini
+ <trini@konsulko.com>
+Subject: Re: [PATCH 3/6] usb: gadget: Drop usb_gadget_controller_number()
+In-Reply-To: <20240611105127.3ab8cc38@wsk>
+References: <20240609213449.194762-1-marek.vasut+renesas@mailbox.org>
+ <20240609213449.194762-3-marek.vasut+renesas@mailbox.org>
+ <877cew0wu6.fsf@baylibre.com> <20240611105127.3ab8cc38@wsk>
+Date: Tue, 11 Jun 2024 11:20:41 +0200
+Message-ID: <87msnrzvh2.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 09/31] lmb: allow for resizing lmb regions
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
- Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>,
- u-boot@lists.denx.de
-References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
- <20240607185240.1892031-10-sughosh.ganu@linaro.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240607185240.1892031-10-sughosh.ganu@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:IzIwEIARnEt30bpr5WiIkqHuvWlG04+CFNQNOek7gyogdJ/jubZ
- 7EPPLe8ors9o+FnZ7zgh89Xa7+r9eYxId8lm2CcxS/pyLk6JAkJChkhlSM4xG44ox+IzQvs
- MVcX0lnM8L6ggzioDJvobQBgaDk5jx6clcs4OmQ8s68SxZDDWmUBFfsxVqvS0CApwfd6Utv
- q9gAS44eGOzQdmuEQrtrg==
-UI-OutboundReport: notjunk:1;M01:P0:OnxB+QiSlRY=;3Bms1InFEDQwqlnMKohfCQs3Dm5
- F4Zndc4h2wQxZNYrGJHoa7X27f0PPD05DP5vj/4OBS5GsKnSNTDhhjYxaugdhNctyBKkSEVj7
- ysqS0HnxjIqeoJkG7zfERLDiIdxCY5C72y8k15TI8T63pXd/Juqo3YZM2dnFlPhRoK1284r2k
- xJbyzRkTajqfEQ2fnIF2UuNq+2+RiXiDHUXkF3VoRxqw0lr4KlSzsG3jkXbM9E9GHTC+qlETg
- 6K0AQlyfiKghqsxZaRT6vhc8gl4LbdV2fkJu2HAjm42OOYNmjql5cWIzV9wj761P+lIl2m+Tk
- ayX+PwEEfnsIxrfnbDVf2DPyADdg5QFMJiLCIK10pe13MK6sXUseb+mvsiZ0rTzxYQW0zN36r
- 2OJj/GwNzpdUcdTNo2VTeJMrqdZzSSPEXPtxUgHGdO60qdZbLJXFH/2GqpZ/mnTxkKwIeuIIW
- lNVHMwKOlVIQ0tGsrXzGnH30gcw9AdJBAWbWySCXnPs7IiVIEoe6YN6JKW8Ve2r9GEheUbWfS
- Qy/OteNs04wMOq5PnTcyRX6c7FIXgTUCXTuyXOvrx3JLbO8PQSSfTbA1C9Ie7CaLkQGaTHkpY
- e3285m0gCBdIwCuAcUlsnrK4k2GM8Mp/fRaL6crEYwsrmGluIUrhFrwAwH55lqaDC7GB+9b7r
- uD3jzV0fUD7qlYNIhVRkqhT027qwIPjGLu0/YnkK7Y2M9bFnUTaVWIfqufjJCjSJ6YhLi6fjT
- GFLf2F0NPJfctK2iEs303bUVr50EYl05hzyRau/gabNNC6aMO3rVPRWsEfUEaYEe5PCMwRI0a
- b192RQ7fnItm3wPICjZpzRyE5CNty9181WkLeKRqiN5C4=
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,251 +96,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 07.06.24 20:52, Sughosh Ganu wrote:
-> Allow for resizing of LMB regions if the region attributes match. The
-> current code returns a failure status on detecting an overlapping
-> address. This worked up until now since the LMB calls were not
-> persistent and global -- the LMB memory map was specific and private
-> to a given caller of the LMB API's.
->
-> With the change in the LMB code to make the LMB reservations
-> persistent, there needs to be a check on whether the memory region can
-> be resized, and then do it if so. To distinguish between memory that
-> cannot be resized, add a new flag, LMB_NOOVERWRITE. Reserving a region
-> of memory with this attribute would indicate that the region cannot be
-> resized.
->
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> ---
->   include/lmb.h |   1 +
->   lib/lmb.c     | 120 ++++++++++++++++++++++++++++++++++++++++++++------
->   2 files changed, 107 insertions(+), 14 deletions(-)
->
-> diff --git a/include/lmb.h b/include/lmb.h
-> index 03bce2a50c..1d4cd255d2 100644
-> --- a/include/lmb.h
-> +++ b/include/lmb.h
-> @@ -20,6 +20,7 @@
->   enum lmb_flags {
->   	LMB_NONE		=3D 0x0,
->   	LMB_NOMAP		=3D 0x4,
-> +	LMB_NOOVERWRITE		=3D 0x8,
+Hi Lukasz,
 
-Please, add the missing description for the new value. Using the first
-available bit (0x01) would be expected.
+On mar., juin 11, 2024 at 10:51, Lukasz Majewski <lukma@denx.de> wrote:
 
-Using the BIT macro would make it clearer that these are bits of a bitmap:
+> On Tue, 11 Jun 2024 09:20:33 +0200
+> Mattijs Korpershoek <mkorpershoek@baylibre.com> wrote:
 
-enum lmb_flags {
-	LMB_NONE		=3D BIT(0),
-	LMB_NOOVERWRITE		=3D BIT(1),
-};
+[...]
 
-Best regards
+>
+>> > -- 
+>> > 2.43.0  
+>
+> FInally..... :-)
+>
+> Thanks Mattijs for this cleanup.
 
-Heinrich
+You should thank Marek, i've just reviewed his work :)
 
-
->   };
 >
->   /**
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index de5a2cf23b..0a4f3d5bcd 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -260,12 +260,88 @@ void lmb_add_memory(struct bd_info *bd)
->   	}
->   }
+> Reviewed-by: Lukasz Majewski <lukma@denx.de>
 >
-> +static bool lmb_region_flags_match(struct lmb_region *rgn, unsigned lon=
-g r1,
-> +				   enum lmb_flags flags)
-> +{
-> +	return rgn->region[r1].flags =3D=3D flags;
-> +}
-> +
-> +static long lmb_merge_overlap_regions(struct lmb_region *rgn, unsigned =
-long i,
-> +				      phys_addr_t base, phys_size_t size,
-> +				      enum lmb_flags flags)
-> +{
-> +	phys_size_t rgnsize;
-> +	unsigned long rgn_cnt, idx;
-> +	phys_addr_t rgnbase, rgnend;
-> +	phys_addr_t mergebase, mergeend;
-> +
-> +	rgn_cnt =3D 0;
-> +	idx =3D i;
-> +	/*
-> +	 * First thing to do is to identify how many regions does
-> +	 * the requested region overlap.
-> +	 * If the flags match, combine all these overlapping
-> +	 * regions into a single region, and remove the merged
-> +	 * regions.
-> +	 */
-> +	while (idx < rgn->cnt - 1) {
-> +		rgnbase =3D rgn->region[idx].base;
-> +		rgnsize =3D rgn->region[idx].size;
-> +
-> +		if (lmb_addrs_overlap(base, size, rgnbase,
-> +				      rgnsize)) {
-> +			if (!lmb_region_flags_match(rgn, idx, flags))
-> +				return -1;
-> +			rgn_cnt++;
-> +			idx++;
-> +		}
-> +	}
-> +
-> +	/* The merged region's base and size */
-> +	rgnbase =3D rgn->region[i].base;
-> +	mergebase =3D min(base, rgnbase);
-> +	rgnend =3D rgn->region[idx].base + rgn->region[idx].size;
-> +	mergeend =3D max(rgnend, (base + size));
-> +
-> +	rgn->region[i].base =3D mergebase;
-> +	rgn->region[i].size =3D mergeend - mergebase;
-> +
-> +	/* Now remove the merged regions */
-> +	while (--rgn_cnt)
-> +		lmb_remove_region(rgn, i + 1);
-> +
-> +	return 0;
-> +}
-> +
-> +static long lmb_resize_regions(struct lmb_region *rgn, unsigned long i,
-> +			       phys_addr_t base, phys_size_t size,
-> +			       enum lmb_flags flags)
-> +{
-> +	long ret =3D 0;
-> +	phys_addr_t rgnend;
-> +
-> +	if (i =3D=3D rgn->cnt - 1 ||
-> +		base + size < rgn->region[i + 1].base) {
-> +		if (!lmb_region_flags_match(rgn, i, flags))
-> +			return -1;
-> +
-> +		rgnend =3D rgn->region[i].base + rgn->region[i].size;
-> +		rgn->region[i].base =3D min(base, rgn->region[i].base);
-> +		rgnend =3D max(base + size, rgnend);
-> +		rgn->region[i].size =3D rgnend - rgn->region[i].base;
-> +	} else {
-> +		ret =3D lmb_merge_overlap_regions(rgn, i, base, size, flags);
-> +	}
-> +
-> +	return ret;
-> +}
-> +
->   /* This routine called with relocation disabled. */
->   static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t b=
-ase,
->   				 phys_size_t size, enum lmb_flags flags)
->   {
->   	unsigned long coalesced =3D 0;
-> -	long adjacent, i;
-> +	long ret, i;
 >
->   	if (rgn->cnt =3D=3D 0) {
->   		rgn->region[0].base =3D base;
-> @@ -290,23 +366,32 @@ static long lmb_add_region_flags(struct lmb_region=
- *rgn, phys_addr_t base,
->   				return -1; /* regions with new flags */
->   		}
+> Best regards,
 >
-> -		adjacent =3D lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
-> -		if (adjacent > 0) {
-> +		ret =3D lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
-> +		if (ret > 0) {
->   			if (flags !=3D rgnflags)
->   				break;
->   			rgn->region[i].base -=3D size;
->   			rgn->region[i].size +=3D size;
->   			coalesced++;
->   			break;
-> -		} else if (adjacent < 0) {
-> +		} else if (ret < 0) {
->   			if (flags !=3D rgnflags)
->   				break;
->   			rgn->region[i].size +=3D size;
->   			coalesced++;
->   			break;
->   		} else if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
-> -			/* regions overlap */
-> -			return -1;
-> +			if (flags =3D=3D LMB_NONE) {
-> +				ret =3D lmb_resize_regions(rgn, i, base, size,
-> +							 flags);
-> +				if (ret < 0)
-> +					return -1;
-> +
-> +				coalesced++;
-> +				break;
-> +			} else {
-> +				return -1;
-> +			}
->   		}
->   	}
+> Lukasz Majewski
 >
-> @@ -448,7 +533,7 @@ static phys_addr_t lmb_align_down(phys_addr_t addr, =
-phys_size_t size)
->   }
+> --
 >
->   static phys_addr_t __lmb_alloc_base(phys_size_t size, ulong align,
-> -				    phys_addr_t max_addr)
-> +				    phys_addr_t max_addr, enum lmb_flags flags)
->   {
->   	long i, rgn;
->   	phys_addr_t base =3D 0;
-> @@ -498,7 +583,7 @@ phys_addr_t lmb_alloc_base(phys_size_t size, ulong a=
-lign, phys_addr_t max_addr)
->   {
->   	phys_addr_t alloc;
->
-> -	alloc =3D __lmb_alloc_base(size, align, max_addr);
-> +	alloc =3D __lmb_alloc_base(size, align, max_addr, LMB_NONE);
->
->   	if (alloc =3D=3D 0)
->   		printf("ERROR: Failed to allocate 0x%lx bytes below 0x%lx.\n",
-> @@ -507,11 +592,8 @@ phys_addr_t lmb_alloc_base(phys_size_t size, ulong =
-align, phys_addr_t max_addr)
->   	return alloc;
->   }
->
-> -/*
-> - * Try to allocate a specific address range: must be in defined memory =
-but not
-> - * reserved
-> - */
-> -phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
-> +static phys_addr_t __lmb_alloc_addr(phys_addr_t base, phys_size_t size,
-> +				    enum lmb_flags flags)
->   {
->   	long rgn;
->
-> @@ -526,13 +608,23 @@ phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_=
-size_t size)
->   				      lmb.memory.region[rgn].size,
->   				      base + size - 1, 1)) {
->   			/* ok, reserve the memory */
-> -			if (lmb_reserve(base, size) >=3D 0)
-> +			if (lmb_reserve_flags(base, size, flags) >=3D 0)
->   				return base;
->   		}
->   	}
-> +
->   	return 0;
->   }
->
-> +/*
-> + * Try to allocate a specific address range: must be in defined memory =
-but not
-> + * reserved
-> + */
-> +phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
-> +{
-> +	return __lmb_alloc_addr(base, size, LMB_NONE);
-> +}
-> +
->   /* Return number of bytes from a given address that are free */
->   phys_size_t lmb_get_free_size(phys_addr_t addr)
->   {
-
+> DENX Software Engineering GmbH,      Managing Director: Erika Unter
+> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+> Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
