@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83DA2C27C79
-	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 02:34:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30367C27C79
+	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 02:34:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84E2C887CF;
+	by phobos.denx.de (Postfix) with ESMTP id E9906887E3;
 	Wed, 12 Jun 2024 04:33:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ol3Tv3UI";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YuHxC+bb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2AB1887B30; Wed, 12 Jun 2024 01:14:59 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 66BD087B30; Wed, 12 Jun 2024 01:15:00 +0200 (CEST)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A72688315
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 01:14:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 848A18878D
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 01:14:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-4217926991fso35951125e9.3
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 16:14:57 -0700 (PDT)
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-35f0aeff7a8so1332938f8f.2
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 16:14:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1718147697; x=1718752497; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1718147698; x=1718752498; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=rtMC5JbP5BH/cFBWNtSST3rx9aK9f8wKNrTbXFX8p+0=;
- b=Ol3Tv3UIX0qmTshJqVEnjaaBnHPZlBeGUg6+siIUL3udFzrlgaBAKpYt+hhVn/PP9Z
- dYJtk6baL22IOrJXQ2sPG42QQn05OxPzQCfLxFgf2/xWV7tARYgSRg/uQ1aBVKPnzRiy
- zRodo61HZ0MwobMR8gKe+8d9S3L4P7DN17WLNdiumZm3X9hY3QHOlaEbC3kM+Gzazv5v
- 3qNim+sFdLLvHtwOP74QXcK7+Wt5QrAg7rEaGwO3vGovQiaVs/nHkotjWGd3SwIoCTnx
- z65ueEpo8F+pNy8r39nQXq6aHel+kWNNATCI09rIp3k3UgtcA9bjqkQ/krc7Rc3oEdnB
- tkiA==
+ :reply-to; bh=m1ahcJL+QZVoz+jmkvnn70yF6uGU5cp9PXqRqWEqUY0=;
+ b=YuHxC+bbNH5C0tlcRbfudXjNQwK7wqczP7cGZpqcM3dQM/95tIDOEHiEVQjAeHLmsJ
+ S1lTPtxKoDMDYitJiGJ2DcfVpdRROjxQbNM/N2kWM7gSCleBGTkk1bea5XQonsWN2pfH
+ AO/zQZnj9kAR1ldWSAMqWJInMCcWIFTYMFxbotq01JVcrThtaQWk3o5cmedfhRnGPKXO
+ IGL1DUMtb7HQvChgUWTmSn+zmB7TB/gBdr+Xp1mDWPsjoUer7k4frVYbF7exHT92/lCj
+ zY5SKhD5USXvw9V4B7J2l41Brq/lIQlSTpObasI5RPFR/gwBp3C1ayyfMtb1ooJNs+ra
+ KCnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718147697; x=1718752497;
+ d=1e100.net; s=20230601; t=1718147698; x=1718752498;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rtMC5JbP5BH/cFBWNtSST3rx9aK9f8wKNrTbXFX8p+0=;
- b=Ypol3D4VYR5XHHngbcrv7Xzo8oYRpT/9RquWqypAoWkdfiYbN94Ih2wllh6zLoa106
- FUgGfcVB1EqME5YeJ/JQvHtbZpgkufUoKI40tOAYjtzz2o/D5Yfe7yqxXm4XUyhDX8Pz
- G9aH01My+X5SGV97pMCCNEkaOiTSp86rzZXvGJ4gCHryiLf67nJbgUWVmEW+0pnvza4Q
- hlBxnSg7TckLpgrVhWnbaDcVfPMrSIppjphMUul642jB92tWTuq1PwZOuigmK5xmH1X1
- 17gzQ9Df9hfozfz2YbGDMfNPhqjkB03M8L3TLoCFyTfZmRppEbMG8cnCKTWeJ9g4IKx/
- QqQg==
+ bh=m1ahcJL+QZVoz+jmkvnn70yF6uGU5cp9PXqRqWEqUY0=;
+ b=SpsJjma23u3UMq5Vrwd1nOxmNKaCPGMHd7HZ99NqQ90jDI23yjdo1svz0ZG119Vt2D
+ fklOGcvnPeab6dDFKVSvjKlsX5VSbmxXpNA4fWl1Y6GhxSFSniQzRdEto6zkvoI7U2rj
+ ou7IDAZxHDViM/+7tY+w39awnUIga9ErpeON+CLfVQuA9DLz8HamemXJPNa3NSRGZ48X
+ GuBqOzYfPg0aMMD81wCe2ZGQcR1Jmzi6cm3jx9sXZYLGZSo4kmbUDSAMI10jaNdpOeim
+ +atxVyzSSEFcwvvzIu2A3wZ4kfPWHX5A+bYjapV4un6b78vbcOZ1YSNJT6u7p06cGYft
+ vD4Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX1hb2TksVPlaJXwy5JUZudiXdloscdyEZU87j9MMEnDOGy3B639k9+ZOYw+en8JigUm3/viJVssdA1PYkSw7Wcftv1EQ==
-X-Gm-Message-State: AOJu0YzFdHA/jzR5n/+PQOWr+o/BZR7mbXFKPgV2gO+Wz6hw+6ptNdyv
- RO2ak53UlZi+Temi8R625ko7Cn5q7JDGJxnXDqTByvHTypJD8glv
-X-Google-Smtp-Source: AGHT+IGAF71XS6N5m3CEASZWg4s4ENdE6Di4EanlP0MQm6A6yIvyioPv625Odxz6+WlG7Ow+KOP8nA==
-X-Received: by 2002:a5d:4951:0:b0:35f:228e:e82b with SMTP id
- ffacd0b85a97d-35fdf79a2c8mr94708f8f.17.1718147696743; 
- Tue, 11 Jun 2024 16:14:56 -0700 (PDT)
+ AJvYcCVwTTwao/7vs7Ggn+X+g9ac3NaLYnX+T/Jbj4r5cG1A1Rcyl0IOi++8+hcOvgHB/eKR0CIguLKXfh2g7pJqYJ3FGuT7yw==
+X-Gm-Message-State: AOJu0Yx1S4idPKT/b3pm84ws0DstJAqZvzAkfnUnHyLtXbmsxdAhlYXR
+ EjmjIAz0u6lmWT2UY9MiRYgmpmWd0usyfBaGUvzQiY0Fud7b7Fuu
+X-Google-Smtp-Source: AGHT+IHy+yrkBGgZgpeYkrVywIHyre7Pi9CS0M+zlZP7ksRQ8yBUcl3Dq9OrnmXqu91rRyYPBoYnRA==
+X-Received: by 2002:adf:ab07:0:b0:356:84b7:e5d1 with SMTP id
+ ffacd0b85a97d-35fdf7a9695mr120893f8f.42.1718147697960; 
+ Tue, 11 Jun 2024 16:14:57 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
  [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-35f231d5761sm7052096f8f.35.2024.06.11.16.14.55
+ ffacd0b85a97d-35f231d5761sm7052096f8f.35.2024.06.11.16.14.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Jun 2024 16:14:56 -0700 (PDT)
+ Tue, 11 Jun 2024 16:14:57 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
@@ -80,9 +80,9 @@ To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de,
  John Crispin <john@phrozen.org>
-Subject: [PATCH v3 6/9] tftp: implement support for LED status activity
-Date: Wed, 12 Jun 2024 01:14:21 +0200
-Message-ID: <20240611231435.10366-7-ansuelsmth@gmail.com>
+Subject: [PATCH v3 7/9] mtd: implement support for LED status activity
+Date: Wed, 12 Jun 2024 01:14:22 +0200
+Message-ID: <20240611231435.10366-8-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240611231435.10366-1-ansuelsmth@gmail.com>
 References: <20240611231435.10366-1-ansuelsmth@gmail.com>
@@ -106,45 +106,71 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Implement support for LED status activity. If the feature is enabled,
-make the defined ACTIVITY LED to signal traffic.
+make the defined ACTIVITY LED to signal mtd write or erase operations.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- net/tftp.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ cmd/mtd.c | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
 
-diff --git a/net/tftp.c b/net/tftp.c
-index 2e335413492..0515dc34d4b 100644
---- a/net/tftp.c
-+++ b/net/tftp.c
-@@ -19,6 +19,7 @@
- #include <asm/global_data.h>
- #include <net/tftp.h>
- #include "bootp.h"
+diff --git a/cmd/mtd.c b/cmd/mtd.c
+index 9189f45cabd..a10805d05a5 100644
+--- a/cmd/mtd.c
++++ b/cmd/mtd.c
+@@ -11,6 +11,7 @@
+ #include <command.h>
+ #include <common.h>
+ #include <console.h>
 +#include <status_led.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -193,6 +194,9 @@ static void new_transfer(void)
- #ifdef CONFIG_CMD_TFTPPUT
- 	tftp_put_final_block_sent = 0;
+ #if CONFIG_IS_ENABLED(CMD_MTD_OTP)
+ #include <hexdump.h>
  #endif
+@@ -559,6 +560,11 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	while (mtd_block_isbad(mtd, off))
+ 		off += mtd->erasesize;
+ 
++#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
++	if (!read)
++		status_led_activity_start(CONFIG_LED_STATUS_ACTIVITY);
++#endif
++
+ 	/* Loop over the pages to do the actual read/write */
+ 	while (remaining) {
+ 		/* Skip the block if it is bad */
+@@ -586,6 +592,11 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		io_op.oobbuf += io_op.oobretlen;
+ 	}
+ 
++#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
++	if (!read)
++		status_led_activity_stop(CONFIG_LED_STATUS_ACTIVITY);
++#endif
++
+ 	if (!ret && dump)
+ 		mtd_dump_device_buf(mtd, start_off, buf, len, woob);
+ 
+@@ -653,6 +664,10 @@ static int do_mtd_erase(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	erase_op.addr = off;
+ 	erase_op.len = mtd->erasesize;
+ 
 +#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
 +	status_led_activity_start(CONFIG_LED_STATUS_ACTIVITY);
 +#endif
- }
- 
- #ifdef CONFIG_CMD_TFTPPUT
-@@ -302,6 +306,9 @@ static void tftp_complete(void)
- 			time_start * 1000, "/s");
++
+ 	while (len) {
+ 		if (!scrub) {
+ 			ret = mtd_block_isbad(mtd, erase_op.addr);
+@@ -681,6 +696,10 @@ static int do_mtd_erase(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		erase_op.addr += mtd->erasesize;
  	}
- 	puts("\ndone\n");
+ 
 +#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
 +	status_led_activity_stop(CONFIG_LED_STATUS_ACTIVITY);
 +#endif
- 	if (!tftp_put_active)
- 		efi_set_bootdev("Net", "", tftp_filename,
- 				map_sysmem(tftp_load_addr, 0),
++
+ 	if (ret && ret != -EIO)
+ 		ret = CMD_RET_FAILURE;
+ 	else
 -- 
 2.43.0
 
