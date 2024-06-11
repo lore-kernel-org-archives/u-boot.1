@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A0C6C27C79
-	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 02:33:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6429FC27C78
+	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 02:34:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53289887B5;
+	by phobos.denx.de (Postfix) with ESMTP id B5906887BA;
 	Wed, 12 Jun 2024 04:33:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W4OS+aBA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aYWcnX4U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1F7388757; Wed, 12 Jun 2024 01:14:55 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id B990B88757; Wed, 12 Jun 2024 01:14:56 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AFADF886B1
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 01:14:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DBBC887B30
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 01:14:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-35f090093d8so3494880f8f.0
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 16:14:53 -0700 (PDT)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-35f22d3abf1so2734520f8f.1
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 16:14:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1718147693; x=1718752493; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1718147694; x=1718752494; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=LiJxSrHUQxU7ezUE98DdkJgahWdu8Tg6y94tQni3u9Y=;
- b=W4OS+aBAXoBddeN9e9N1WNZXZ+4Fh4TVN8Ok/B3yyY/htx0c+S/e9ZuSLCw1Kird7F
- hVn6zpTH1Oyvei7hCys4leVAhHNkx+RwArOaE4NCcYgFUKxOSJr0+zPF3ysvc/iJ/rlb
- jf5gxqTB37NMz78pqVIRoTPSrp3DWkEedbnv6AVQpKsnhI2VCs7IVQgtDaerh/1MR7V+
- +N1ZMSeOg5E8NmffdiL2e8ADz6kQj5H3LgBaIpXkBFtz/x52YIu/o5m2CPm1/DZ2iYZp
- 4tQIVsXnqBhlPyC0i2el60MQf7Vjn0QgTEETSI3xtb1XwshXADrYYPg7Mv53uu5JNSzy
- w4ww==
+ :reply-to; bh=Deq+K/f4mLjipGQcm5bssaae9fAIVoi6omAuikcDoDw=;
+ b=aYWcnX4UUii0QYNT3AopotqCyVR9pRY9n7rGjFmAC3KFrKHlhO8nRUDCnHSQD0Tfoq
+ okg/l2uio45jpCfxIAeuYKjVPNM76g9TXu+oSCv28XOyjMKF5Av7I8Yl5gUG5HFPqYuv
+ WwJ9MpJ6cH/X4hkNcMbfX0VGH+gco3fjRpxnLldNQUJ6uem+4EOlz1MVaIWUvLSLz0XI
+ mg/Fh5H/xVjzni9xYpnD/SesfAngSPZQvPeZXtVX/ZQYqRSC1qJ5hRw/hCfh803891XU
+ aOVw31s8PsD+x/fACZbnJ86qGR5yJlkHAVHJO/FuPkkd3hZ3gOCoIfWqMVydrgnPBCSn
+ 3B1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718147693; x=1718752493;
+ d=1e100.net; s=20230601; t=1718147694; x=1718752494;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LiJxSrHUQxU7ezUE98DdkJgahWdu8Tg6y94tQni3u9Y=;
- b=jjbmhPHY+cRJXcmM8OXwhs1Rxd5VpV5o9Yf/gOc4H5dwScGCpJJ/38Lt9wJJLatvK/
- 5abETX4q95ObIDJ/CDQkyHDCxscXcWS8NXoM+OyEbNTuOWlT7V5c4J7FbryFeoVCksoP
- fBPgvdAbwwxd/4BT89qwzldetoM0KWvQxCxqNSWHSX/kgJwN3ZKYgQR0XhKoauyJTe4K
- SE9GL5e6Yvbyq4kP6qc5PjMyMeeQEXWLM/sRzVhjLHI0t7RGxCJUo7WdsBEC9pKLXa/9
- sQyTekPyajAgrQL/DN7bMI3tRKqXUPKgoLIEdULYITBLKrYpZnmxyYDay9ThECV3bgjC
- MAJw==
+ bh=Deq+K/f4mLjipGQcm5bssaae9fAIVoi6omAuikcDoDw=;
+ b=fMzgVr69FFYkRWhTH4RSZKIswsOBgDdIXVtehzNO0RQohVVEbnOhWbxrGeN2RZZUw2
+ FUNWokwfydt2i+v7HBfk2GmKO5+jcSNwm+1WvzzoDwTGmLmMrgRTjnHFKn948dyK1oRp
+ pZn8eiiqvo2QzlOeQap6W+FXAlp9TsF1kiYkPIWBO2Yehj7wZ0dfixa8L0j18crqOQlf
+ 9stXdcl7CI4zSplYQBOs59iCd3Dk6qlYYFeJnCEjdf+zphKWEmFt9ujAtZTeh8PVZHJh
+ 3nrbqSweeecIV280RwHKecyo4BsuainYImycDqIf//z+nJ/7bhVDDPc+XBM+TBle7hUK
+ Vh9g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUOMQ/j0jRT7ACWXpyVqgi9mj2EqRMaOOOBp7cOHHSlZxPB1lJONZ/aJpZ21wV0IIAfKiM4URpIDtbOWEJ5NM/49aGZSg==
-X-Gm-Message-State: AOJu0YykLrxr3J1tJvmcHYtiVqbQo6wlFbj3+DaJyMO84WqrWNvnKNJU
- wYNBxXfsdbY7d1t1wBHI3WTB95tmix0P/+LOGCnqB66eno44hCDT
-X-Google-Smtp-Source: AGHT+IFKpwmdY7O1phZqj4a/xgSTdWCPGPs2jFdFQTc5jx9GceREIwMo6kfDjqtJ8pCLzhF8j0O8Tg==
-X-Received: by 2002:adf:fc88:0:b0:35f:29e6:dbd2 with SMTP id
- ffacd0b85a97d-35fe8926243mr38505f8f.64.1718147693020; 
- Tue, 11 Jun 2024 16:14:53 -0700 (PDT)
+ AJvYcCUbStTYbv2YHzpmavlD+FKpovRbtLacMhN+NzNSPBCwQvagJ7ngMEccsFeJHK9Jup0r/y8TQrmHYwXjY49GiYIuw3L4cg==
+X-Gm-Message-State: AOJu0YyDCvwcLlRkXC9mA1gTnfkk4qGoNv3PSY5LNe9jIwUrHfqPfqee
+ xMhH9z0YH0H9cGeQq7VtRt9JGTk9O1Y9qnTtkb8YxsSHQ07GDvC1
+X-Google-Smtp-Source: AGHT+IF72VIYclhw+KFuDLQgD6RcIs8jHbGEOGqiXNF/t6MIr2fwOuTZXohZcA98JJxSdIkXAdlYrA==
+X-Received: by 2002:adf:e6c2:0:b0:35f:225e:400f with SMTP id
+ ffacd0b85a97d-35fe1c0a063mr60932f8f.30.1718147694307; 
+ Tue, 11 Jun 2024 16:14:54 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
  [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-35f231d5761sm7052096f8f.35.2024.06.11.16.14.51
+ ffacd0b85a97d-35f231d5761sm7052096f8f.35.2024.06.11.16.14.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Jun 2024 16:14:52 -0700 (PDT)
+ Tue, 11 Jun 2024 16:14:53 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
@@ -80,9 +80,10 @@ To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de,
  John Crispin <john@phrozen.org>
-Subject: [PATCH v3 3/9] led: status_led: add function to toggle a status LED
-Date: Wed, 12 Jun 2024 01:14:18 +0200
-Message-ID: <20240611231435.10366-4-ansuelsmth@gmail.com>
+Subject: [PATCH v3 4/9] led: status_led: add warning when an invalid Status
+ LED ID is used
+Date: Wed, 12 Jun 2024 01:14:19 +0200
+Message-ID: <20240611231435.10366-5-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240611231435.10366-1-ansuelsmth@gmail.com>
 References: <20240611231435.10366-1-ansuelsmth@gmail.com>
@@ -105,76 +106,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add function to toggle a status LED by using the status LED ID reference
-configs.
+Add a warning when an invalid Status LED ID is used to make the user
+aware of bad configurations.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- drivers/misc/status_led.c | 28 +++++++++++++++++++++++-----
- include/status_led.h      |  1 +
- 2 files changed, 24 insertions(+), 5 deletions(-)
+ drivers/misc/status_led.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/misc/status_led.c b/drivers/misc/status_led.c
-index a6e9c03a02e..93bfb410662 100644
+index 93bfb410662..882273cc322 100644
 --- a/drivers/misc/status_led.c
 +++ b/drivers/misc/status_led.c
-@@ -103,17 +103,24 @@ void status_led_tick(ulong timestamp)
- 	}
- }
+@@ -105,8 +105,10 @@ void status_led_tick(ulong timestamp)
  
--void status_led_set(int led, int state)
-+static led_dev_t *status_get_led_dev(int led)
+ static led_dev_t *status_get_led_dev(int led)
  {
--	led_dev_t *ld;
--
- 	if (led < 0 || led >= MAX_LED_DEV)
--		return;
-+		return NULL;
+-	if (led < 0 || led >= MAX_LED_DEV)
++	if (led < 0 || led >= MAX_LED_DEV) {
++		printf("Invalid Status LED ID %d.", led)
+ 		return NULL;
++	}
  
  	if (!status_led_init_done)
  		status_led_init();
- 
--	ld = &led_dev[led];
-+	return &led_dev[led];
-+}
-+
-+void status_led_set(int led, int state)
-+{
-+	led_dev_t *ld;
-+
-+	ld = status_get_led_dev(led);
-+	if (!ld)
-+		return;
- 
- 	ld->state = state;
- 	if (state == CONFIG_LED_STATUS_BLINKING) {
-@@ -122,3 +129,14 @@ void status_led_set(int led, int state)
- 	}
- 	__led_set (ld->mask, state);
- }
-+
-+void status_led_toggle(int led)
-+{
-+	led_dev_t *ld;
-+
-+	ld = status_get_led_dev(led);
-+	if (!ld)
-+		return;
-+
-+	__led_toggle(ld->mask);
-+}
-diff --git a/include/status_led.h b/include/status_led.h
-index 5ce4522b029..fe0c84fb4b4 100644
---- a/include/status_led.h
-+++ b/include/status_led.h
-@@ -38,6 +38,7 @@
- void status_led_init(void);
- void status_led_tick(unsigned long timestamp);
- void status_led_set(int led, int state);
-+void status_led_toggle(int led);
- 
- /*****  MVS v1  **********************************************************/
- #if (defined(CONFIG_MVS) && CONFIG_MVS < 2)
 -- 
 2.43.0
 
