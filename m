@@ -4,83 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11490C25B76
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 09:07:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA7CCC25B76
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 09:12:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C604885FE;
-	Tue, 11 Jun 2024 11:07:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 3EB358811A;
+	Tue, 11 Jun 2024 11:12:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="vX0aqQPN";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="HbX+BRZk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE273885FF; Tue, 11 Jun 2024 11:07:03 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 37B06882F6; Tue, 11 Jun 2024 11:12:06 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92926880A3
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 11:07:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D88D6880A3
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 11:12:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-35f0aeff7a8so674978f8f.2
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 02:07:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718096821; x=1718701621;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=lFiHJmcXr5bRsAWtAg3LYC5szKnmHpm0MG8X8PMoYe8=;
- b=vX0aqQPNu20+JixPQgYN+kcdG/0+6DU2pBGk+tfy56LMp2tNi/AutFaqrsZzeiCxUe
- 5D+8IHqe4OFYqGBEEKXFP5BOdx09Bk1Hi5hOQ6JwNLD7OTaPYuqhux/gy2wB9RfTQ8dM
- Sv1sjtSR3kEWSxmgQBtNEmW0bVaN2oGxZfH89EPZ6VLNcACWHhcuTeVlqMPUC30FpdZI
- LqUbjFjRIl5Te1piONF+g1B3ox/dsfVTc5gaNUUtIxb1A5f8TSRp5R5/As39f4adfqK5
- Wcg19+7x8s1L/Zp0lj8U+D9jWkz2Ly9PADLkoq/1MctL9J7Dy3g+/druqV9OgveQtUSu
- ViOA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718096821; x=1718701621;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lFiHJmcXr5bRsAWtAg3LYC5szKnmHpm0MG8X8PMoYe8=;
- b=cjHsSk/Mj/MGZdvSBZupLCx2tmFIcRdEMnJG9yrrgH5GYWK85gXPwx43G5TwO2iZJ3
- +cykTY6OpsHuiRdECNkgs2KocxNIf1m3yw6Tb4V2IqAG9xmlkplb1rgb4MoXBT2R7UEI
- wYip/PZ7KqgndAKI3TWXLpGE/YwCtBRGssXnXuPYR6R1z4Y4GBfSxSYjRbw822dcbGIp
- zX3YausZtTv8IR0EkKlXhe4qmpI0pR8XEuhSM5i/C/g1D5Xs9rXYwgCJ6cKSiTpj/vam
- gQ2apG72LEdVljqDZhLfJsqM/pxJhOiZxgoddUmM4ZRxOwx5Ks6uoCAQgPsRyJcHVZUR
- vbOQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVjxfCByNAopEu7HHXwbOfj2L5NK1nPy9GEDaR3mBG3KrYzkXNp2eNsxtgCI9klOZnGzpJNKUDz998yk5zeN+R36lnGVQ==
-X-Gm-Message-State: AOJu0Yy5fEuN/1i61RhFFFFijRzL1pB5TXbbiOgkpg+zSXp4VxA0jh9B
- 4WU7isx32cwD5rbSAUP/hPHIFmbLT5YbqzGGTjH/mzncJQxzW2MupTBQRJf6r5Y=
-X-Google-Smtp-Source: AGHT+IEohbr3lPFs51E7xeQQWoM0UfiqELCJlLXdF093OG4bhn0TG1S1JHcnH31ss/4HJ+Tj4mo6CA==
-X-Received: by 2002:a5d:64e7:0:b0:35f:2255:606e with SMTP id
- ffacd0b85a97d-35f225560a4mr6628916f8f.29.1718096820948; 
- Tue, 11 Jun 2024 02:07:00 -0700 (PDT)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-35f0bdce051sm10182061f8f.75.2024.06.11.02.06.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Jun 2024 02:07:00 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Igor Opaniuk <igor.opaniuk@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, Julien Masson <jmasson@baylibre.com>,
- Guillaume La Roque <glaroque@baylibre.com>, Dmitrii Merkurev
- <dimorinny@google.com>, Roman Stratiienko <r.stratiienko@gmail.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 3/6] bootstd: Add bootflow_iter_check_mmc() helper
-In-Reply-To: <CAByghJY9Vnp1fTT_1mXg8iCCaFBsMP0+MeYSr3by1xbVp-73qw@mail.gmail.com>
-References: <20240606-bootmeth-android-v1-0-0c69d4457cc5@baylibre.com>
- <20240606-bootmeth-android-v1-3-0c69d4457cc5@baylibre.com>
- <CAByghJY9Vnp1fTT_1mXg8iCCaFBsMP0+MeYSr3by1xbVp-73qw@mail.gmail.com>
-Date: Tue, 11 Jun 2024 11:06:57 +0200
-Message-ID: <87plsnzw3y.fsf@baylibre.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1718097121; x=1718701921; i=xypron.glpk@gmx.de;
+ bh=tIlFm5ysI+xFDrKhMMy90d3Dv3V7VozYU0aJGgyT6w4=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=HbX+BRZkrKOZcqBoOy1fTdrlg0gUNBM6Q/rFJy6nP8Y68+y645QwzJvwSVZOGavH
+ C6+pBur+O4QE6y53v3x0XhKtm8P8FfzRuxg0oOJEvpG9GdfEM4BelVw0Iw4uys4KP
+ o6BUbEJCwA74tzpEsJL7tNh6ahUiu0pyg7y9bm0o/41/Qy30Wiereq/neKCCt9VR4
+ 8qOutZNdwsz/7sZRG2600NF5a+T8BhQBCrSY/Cbcy487IpwXdJawDjyNkcpMgD4b1
+ ztym4Y/rhnMA7S+nc/Csg6617vRaUgI6H77EjVmMFnioo1gdZY18Etlx/7tDDaD2d
+ gkXNiWarDbgSAQFn6w==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.126] ([109.42.176.212]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MsYqv-1sXOu21WQ7-014Vlj; Tue, 11
+ Jun 2024 11:12:01 +0200
+Message-ID: <11990152-63d9-4625-be0b-2fc278a8d27c@gmx.de>
+Date: Tue, 11 Jun 2024 11:11:55 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 17/31] lmb: remove call to efi_lmb_reserve()
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>,
+ u-boot@lists.denx.de
+References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
+ <20240607185240.1892031-18-sughosh.ganu@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240607185240.1892031-18-sughosh.ganu@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:G9oI0N3a4B62JttJNKSUM4umBECv3/P0+q3Vl4b7eU8qUxHvVDE
+ KlBeaga8rO7tgs1Y8BXZ1FigPf8YZ6uBifi0+29z245Bx1Xa4imIfuVqdhDoT0LiSu1dW8V
+ mxrKNz/RKw0XA+xP/p87ppdrbbtWEHX8/r/+wGgm3GxX616zlCfOq4t8O1AbEVX7Fg2l6FA
+ l2j99vuL9G5oyPhNdeVpA==
+UI-OutboundReport: notjunk:1;M01:P0:4D8s54olbLQ=;GkNf7KZMc6yiCcyVrSpPXZLfNws
+ nPPWTiI0oIIytuPiFUt5TuSrRealVLIK2IJ+CT1i/feHiffBJj2EMfhEmhJrKOSJj78yFs36B
+ g5fL2SlN/RiQ9Pv+PtSDT0cvD/hF4yKdz7fUk8N2/P3RArCjywC3PlwoSrJM2fOxDt+XwQM+2
+ ZdKpAlbWpcHNq0koIub22BF7X3OnfyVVt7UvWvU8VjfIdRierSu1XXkilRp1SMRa8ulgvVq3o
+ RT09mFvBpnMphM8aQC+FRN91U6aiBETAguVRrcZXKl6suXSAExGKe00w7DRMRPZrM7K0eDdOJ
+ n6wyPpxQ/sYQFxHH5vC8uWIbVbEedUNdD5eR6ph/8D7OHwkAqm8wtj94nRLAG0wzemVh/E/FQ
+ LsWOzInoGqPDosjzKc2RZLth82RE+odyVmbatbXF/IvGSnPo9yDCgv1ACUSlvOdGNNHmeInOG
+ 1BaXvVh9bZZ7ahsWgqYKrff5nKQCZsDabPBxSRo+Ewdn3r7Q/Jkho9ddO4w2B+7w5dH9KmGLb
+ JkVw1fcOSHiIZt1qCJOL6KdBIFCaeju1ztNDeGGjbKBYdA+0LNCNsWcTKatQC8IediM5l0Bv4
+ zhCU1yee+5F+xmTV1AghfLMRPfgCacccmOLjUxyM28P0EnCiJbAPAb1X3Kpe8/e7mZd92Tbyi
+ NvdEseAvUAgP4rmxey5tlRGZXJf5DROzagLjgilSyDqQAOhQ07mEL7UtXvbtwVU2DLJxv5sv5
+ e4vrki3Vy4LoZzcfH3OpEnC6VjKryPbVvKEVg1Q6HXxWE9RjdjKQ8IulymoJ8TfcZCl9iv41Y
+ ywtThjoqRmnDFJ7oQOtQa/j9kPgQxWCmE1jPAAaU2Kywc=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,100 +94,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Igor,
+On 07.06.24 20:52, Sughosh Ganu wrote:
+> The changes in the EFI memory map are now notified to the LMB
+> module. There is therefore no need to explicitly get the efi memory
+> map and set aside the EFI allocated memory.
+>
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> ---
+>   lib/lmb.c | 35 -----------------------------------
+>   1 file changed, 35 deletions(-)
+>
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> index 3059609aea..c9f6ca692e 100644
+> --- a/lib/lmb.c
+> +++ b/lib/lmb.c
+> @@ -204,38 +204,6 @@ void arch_lmb_reserve_generic(ulong sp, ulong end, =
+ulong align)
+>   	}
+>   }
+>
+> -/**
+> - * efi_lmb_reserve() - add reservations for EFI memory
+> - *
+> - * Add reservations for all EFI memory areas that are not
+> - * EFI_CONVENTIONAL_MEMORY.
+> - *
+> - * Return:	0 on success, 1 on failure
+> - */
+> -static __maybe_unused int efi_lmb_reserve(void)
+> -{
+> -	struct efi_mem_desc *memmap =3D NULL, *map;
+> -	efi_uintn_t i, map_size =3D 0;
+> -	efi_status_t ret;
+> -
+> -	ret =3D efi_get_memory_map_alloc(&map_size, &memmap);
+> -	if (ret !=3D EFI_SUCCESS)
+> -		return 1;
+> -
+> -	for (i =3D 0, map =3D memmap; i < map_size / sizeof(*map); ++map, ++i)=
+ {
+> -		if (map->type !=3D EFI_CONVENTIONAL_MEMORY) {
+> -			lmb_reserve_flags(map_to_sysmem((void *)(uintptr_t)
+> -							map->physical_start),
+> -					  map->num_pages * EFI_PAGE_SIZE,
+> -					  map->type =3D=3D EFI_RESERVED_MEMORY_TYPE
+> -					      ? LMB_NOMAP : LMB_NONE);
 
-Thank you for the review.
 
-On lun., juin 10, 2024 at 11:31, Igor Opaniuk <igor.opaniuk@gmail.com> wrot=
-e:
+Now that you have removed the last usage of LMB_NOMAP, please, remove it
+from enum lmb_flags.
 
-> Hi Mattijs,
->
-> On Thu, Jun 6, 2024 at 2:24=E2=80=AFPM Mattijs Korpershoek
-> <mkorpershoek@baylibre.com> wrote:
->>
->> Some bootflows might be able to only boot from MMC devices.
->>
->> Add a helper function these bootflows can use.
->>
->> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
->> ---
->>  boot/bootflow.c    | 12 ++++++++++++
->>  include/bootflow.h |  9 +++++++++
->>  2 files changed, 21 insertions(+)
->>
->> diff --git a/boot/bootflow.c b/boot/bootflow.c
->> index 9aa3179c3881..59d77d2385f4 100644
->> --- a/boot/bootflow.c
->> +++ b/boot/bootflow.c
->> @@ -575,6 +575,18 @@ int bootflow_iter_check_blk(const struct bootflow_i=
-ter *iter)
->>         return -ENOTSUPP;
->>  }
->>
->> +int bootflow_iter_check_mmc(const struct bootflow_iter *iter)
->> +{
->> +       const struct udevice *media =3D dev_get_parent(iter->dev);
->> +       enum uclass_id id =3D device_get_uclass_id(media);
->> +
->> +       log_debug("uclass %d: %s\n", id, uclass_get_name(id));
->> +       if (id =3D=3D UCLASS_MMC)
->> +               return 0;
->> +
->> +       return -ENOTSUPP;
->> +}
->> +
->>  int bootflow_iter_check_sf(const struct bootflow_iter *iter)
->>  {
->>         const struct udevice *media =3D dev_get_parent(iter->dev);
->> diff --git a/include/bootflow.h b/include/bootflow.h
->> index 080ee8501225..6058ddd89b16 100644
->> --- a/include/bootflow.h
->> +++ b/include/bootflow.h
->> @@ -407,6 +407,15 @@ void bootflow_remove(struct bootflow *bflow);
->>   */
->>  int bootflow_iter_check_blk(const struct bootflow_iter *iter);
->>
->> +/**
->> + * bootflow_iter_check_mmc() - Check that a bootflow uses a MMC device
->> + *
->> + * This checks the bootdev in the bootflow to make sure it uses a mmc d=
-evice
->> + *
->> + * Return: 0 if OK, -ENOTSUPP if some other device is used (e.g. ethern=
-et)
->> + */
->> +int bootflow_iter_check_mmc(const struct bootflow_iter *iter);
->> +
->>  /**
->>   * bootflow_iter_check_sf() - Check that a bootflow uses SPI FLASH
->>   *
->>
->> --
->> 2.45.0
->>
->
-> Reviewed-by: Igor Opaniuk <igor.opaniuk@gmail.com>
->
-> A bit offtopic (just an idea for future refactoring), but I think all the=
-se
-> bootflow_iter_check_* helpers should be replaced by just one
-> int bootflow_iter_check_id(const struct bootflow_iter *iter, enum uclass_=
-id id)
-> to avoid code duplication or at least keep all these
-> bootmedia-specific functions as
-> wrappers with one-line call to bootflow_iter_check_id(iter,
-> UCLASS_SPI_*) inside.
+Best regards
 
-I like this idea as well, I'll consider to implement this as a future refac=
-toring.
+Heinrich
 
+> -		}
+> -	}
+> -	efi_free_pool(memmap);
+> -
+> -	return 0;
+> -}
+> -
+>   /**
+>    * lmb_reserve_common() - Reserve memory region occupied by U-Boot ima=
+ge
+>    * @fdt_blob: pointer to the FDT blob
+> @@ -255,9 +223,6 @@ void lmb_reserve_common(void *fdt_blob)
 >
-> --=20
-> Best regards - Atentamente - Meilleures salutations
+>   	if (CONFIG_IS_ENABLED(OF_LIBFDT) && fdt_blob)
+>   		boot_fdt_add_mem_rsv_regions(fdt_blob);
+> -
+> -	if (CONFIG_IS_ENABLED(EFI_LOADER))
+> -		efi_lmb_reserve();
+>   }
 >
-> Igor Opaniuk
->
-> mailto: igor.opaniuk@gmail.com
-> skype: igor.opanyuk
-> https://www.linkedin.com/in/iopaniuk
+>   /**
+
