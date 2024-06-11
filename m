@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1631BC27C65
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 18:52:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49FF2C27C75
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 18:52:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D9B78864D;
+	by phobos.denx.de (Postfix) with ESMTP id C901E88725;
 	Tue, 11 Jun 2024 20:52:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JVVZIgQa";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="G14dmd9h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BBF69886F0; Tue, 11 Jun 2024 20:52:11 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id C9D7D8871C; Tue, 11 Jun 2024 20:52:11 +0200 (CEST)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 281F78871B
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 20:52:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 46BB288723
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 20:52:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-6f96445cfaeso786664a34.2
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 11:52:08 -0700 (PDT)
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-6ae259b1c87so1207776d6.1
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 11:52:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718131927; x=1718736727; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lLtd9gQDYOJsP717Q3Q1HIqxNVr2Iapx0vmvE7q1nZ4=;
- b=JVVZIgQafSLoFl+NBXOtvpWtnUzp3UP6e6pe9wRAlJNnmK21UsnA+SZOGHtidLeBJY
- EPK5w/t6+RoHVnJOfTV63aLgKgFRYA7qsjXWQUWe6/Mfaye9v7P1f//if+DGorf+JL7E
- jzw5wK1EuOWVe2xe5TTSQa4xKwBxkxH2kUfOg=
+ d=chromium.org; s=google; t=1718131928; x=1718736728; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=+j9Yk03BYtlxEZsX4xz9SjVcF+NRplTBDhw4IXTwZYw=;
+ b=G14dmd9hMshPk4TaOxtCJme2O8wazsQj5db21MZjUlXdlB4scu77X9aapp+3pTar1/
+ 5AlOmJ9cpUgUcg6fYdbzNr6XB2vn/2tM18/F71TMF5rtM6/umZlk/EJD5lrRM7+MbxDM
+ Y+Tt30h82XoSsYPaFpPZCjWrqPCy/4b/luPas=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718131927; x=1718736727;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lLtd9gQDYOJsP717Q3Q1HIqxNVr2Iapx0vmvE7q1nZ4=;
- b=HqGy2/DZbUQdl25gkRTa6lE70kZnKDzFMgkeXAx1MdWTMWdTT4jNZiF7TbtoRgPNMw
- 5QjC1JNZrpPcAoAXuuF0AdSQ2bwOCpSjU7kW4Ia1Cq4FjynnRlKaSaXpKsGD+VfY47Dq
- Kv1b0tPFp2HrhYxYGxX2txlZwNiEK4ur8Cfyt/8IuScDuqqzjndPEdfHrYx2p5O7uMKo
- iYM1bo150YN7AuZQh1BL/oU+P8S/axau9dpsOCO7CuQk8sPwKp6tY76jo22CT6oogvGN
- 5UN3XCYfp+/uLJ+RFDPhcUfzsGgKfhQabI0s5eHY+IaX0W2YhIrncPm8FzIcQW9XhWQp
- bMlQ==
+ d=1e100.net; s=20230601; t=1718131928; x=1718736728;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+j9Yk03BYtlxEZsX4xz9SjVcF+NRplTBDhw4IXTwZYw=;
+ b=Iu96a972h2TIcFBOlfsauwslcJphZ/3Tvrix9tZcr6mCBW5rwNR8zi5LVgMGPu41FB
+ GL/4L+rU2W7AdMmBejuga4MKIms2jE/PiLlxeyOwt+i//VH0PjWEm0N/tOtNx4fyj4ed
+ aleVx3fcabPnE2UvNrCubtpmPhte+yRDw/bPg/TCKdhkJzJqpXRz2OwCmNmoS1biJAAT
+ FPTIwnh3SAx2sXOcYMfOb9YRxTSKA4fxDvd7jJoLpJZhAR8bfaTDofMi14BhZUFN5oG4
+ gOCCmZkhl1GeMpt7/1dl1XrZL3rHZ/L5jqIo2V5HUXukf85FU/IFSpAwo/fRUpKnvfcU
+ YWgg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVQ6GTh5ypyghZKpLr5leh7sB4uJvGoeQZ1pXsLDkpe1iLVdKUGQMaEjLFyoUecIXQXeguMnu9m1Lv8B6SrHrPqSv6VzA==
-X-Gm-Message-State: AOJu0YwRYXyAW7Hf/xBnBVpPuuyrM/XHg3jDBKK+na4Nz2sWdsg5rx6y
- bDVRTZ0f6dvJ5Gl73Ir5sDMut9AzPUMGhLyIro6n3rOXuqPjSYWk7qrSqRH66sDRh4t7Vf0/ltB
- GvT0urqNsBUd/kVZuyixU5CtLD8P6Un4EzURC
-X-Google-Smtp-Source: AGHT+IEFZYVBelB6g3V7bNLWKqFRQHKc71pHnTgPEE58v/M9hgIms1/CQBBPXjKLnGyXUewVFoCa1QwdTIWeisic2ko=
-X-Received: by 2002:a9d:6c06:0:b0:6f9:9d00:553d with SMTP id
- 46e09a7af769-6f99d005605mr7546862a34.7.1718131926850; Tue, 11 Jun 2024
- 11:52:06 -0700 (PDT)
+ AJvYcCXhWmZeL8ubo4m6TpM3Kguzik+oeFEJ1CBONIl7KnBeNU+wgnRofJxWjfg+FPenjxABoLwA8PKd3n5U3CZvLhXB7bGskA==
+X-Gm-Message-State: AOJu0YyD7hPpHDHvAc4tSEbosNBb2G5woHxMPlpczNpoHjTuAM/S5Cz5
+ L0G514k02zIupQY1/CwRc1NdMqScxo758bFuGthQrgII/o2Dhn3isVjzk3EgkT/ZGtwrrgtCnoJ
+ M/h7JMbljcdeq5FYRxDIMDJL2Z8G/G6226Es7
+X-Google-Smtp-Source: AGHT+IGBxf434I+TOa9lJOH4kW2SGRro7qcxz1msFu5soH7ASwd8CXXRaw9QJZSEuLhPiobC6t9jk32NGX9tx29zdKc=
+X-Received: by 2002:a05:6214:3211:b0:6b0:767d:4c25 with SMTP id
+ 6a1803df08f44-6b089f60464mr71995186d6.22.1718131928156; Tue, 11 Jun 2024
+ 11:52:08 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240522-loongarch-v1-0-1407e0b69678@flygoat.com>
- <20240522-loongarch-v1-1-1407e0b69678@flygoat.com>
- <b723aa8e-1d29-4904-953d-160caf097136@gmx.de>
- <5bd109ff-73ef-4bda-8b5b-2ab583c064d8@app.fastmail.com>
-In-Reply-To: <5bd109ff-73ef-4bda-8b5b-2ab583c064d8@app.fastmail.com>
+References: <20240611-misc-20240610-v2-0-028e82b0b620@cherry.de>
+ <20240611-misc-20240610-v2-1-028e82b0b620@cherry.de>
+In-Reply-To: <20240611-misc-20240610-v2-1-028e82b0b620@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 11 Jun 2024 12:51:55 -0600
-Message-ID: <CAFLszTiU17kEPC4JGX4j-KJG7Ff=-fFnV9i2Ua0yvi-v-n6zhA@mail.gmail.com>
-Subject: Re: [PATCH 01/16] lib: fdtdec: Handle multiple memory nodes
-To: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 11 Jun 2024 12:51:56 -0600
+Message-ID: <CAFLszTicPzDKp3_L0bj0Oqe+ur5j=YODZ_Mwm1DguP-HRSar5Q@mail.gmail.com>
+Subject: Re: [PATCH v2 1/4] dm: core: fix misleading debug message when
+ matching compatible
+To: Quentin Schulz <foss+uboot@0leil.net>
+Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Michal Simek <michal.simek@amd.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>, 
+ Dario Binacchi <dariobin@libero.it>, u-boot@lists.denx.de, 
+ Quentin Schulz <quentin.schulz@cherry.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,52 +89,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jiaxun,
+On Tue, 11 Jun 2024 at 07:04, Quentin Schulz <foss+uboot@0leil.net> wrote:
+>
+> From: Quentin Schulz <quentin.schulz@cherry.de>
+>
+> A driver can have multiple compatible. When the id->compatible matches
+> for that driver, the first compatible supported by the driver is
+> currently returned, which gives the following confusing message:
+>
+>    - found match at 'rk3588_syscon': 'rockchip,rk3588-sys-grf' matches 'rockchip,rk3588-pmugrf'
+>
+> Considering that the compatible passed in argument is necessarily the
+> one that exactly matched to enter this code path, there's no need to do
+> some elaborate logic, just print the driver name and the compatible
+> passed in argument.
+>
+> Fixes: d3e773613b6d ("dm: core: Use U-Boot logging instead of pr_debug()")
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> ---
+>  drivers/core/lists.c | 5 ++---
+>  1 file changed, 2 insertions(+), 3 deletions(-)
 
-On Tue, 11 Jun 2024 at 07:48, Jiaxun Yang <jiaxun.yang@flygoat.com> wrote:
->
->
->
-> =E5=9C=A82024=E5=B9=B46=E6=9C=8811=E6=97=A5=E5=85=AD=E6=9C=88 =E4=B8=8B=
-=E5=8D=881:26=EF=BC=8CHeinrich Schuchardt=E5=86=99=E9=81=93=EF=BC=9A
-> Hi Heinrich,
->
-> Thanks for your comments, will fix most of them in next reversion.
->
-> [...]
-> >> -            gd->bd->bi_dram[bank].start =3D (phys_addr_t)res.start;
-> >
-> > The conversion is superfluous.
->
-> This is necessary as phys_addr_t can be unsigned long or unsigned long lo=
-ng.
->
-> >
-> [...]
-> >> +    __maybe_unused const char *final_name;
-> >> +    __maybe_unused int final_reg;
-> >
-> > '__maybe_unused' is superfluous.
->
-> This is necessary as when LOG_DEBUG is disabled these two variables won't
-> be referenced. Compilers would complain about it.
->
-> >
-> >>
-> >>      gd->ram_base =3D (unsigned long)~0;
-> >
-> > gd->ram_base =3D ULONG_MAX;
-> >
-> >>
-> [...]
->
-> Thanks
-> --
-
-Can you please add a test for this function? Perhaps test/dm/fdtdec.c
-might be a good place?
-
-Regards,
-Simon
-
-> - Jiaxun
+Reviewed-by: Simon Glass <sjg@chromium.org>
