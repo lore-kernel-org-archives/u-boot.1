@@ -4,87 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6E7DC27C75
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 21:04:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAA92C27C75
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 21:04:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6CFF887B4;
-	Tue, 11 Jun 2024 23:04:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 50C4588781;
+	Tue, 11 Jun 2024 23:04:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="dre19TZY";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="QJutOvtq";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="guhhIU95";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="m/Q4IvnR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA72188783; Tue, 11 Jun 2024 23:04:23 +0200 (CEST)
-Received: from wfhigh4-smtp.messagingengine.com
- (wfhigh4-smtp.messagingengine.com [64.147.123.155])
+ id B2707887C3; Tue, 11 Jun 2024 23:04:25 +0200 (CEST)
+Received: from wfout2-smtp.messagingengine.com
+ (wfout2-smtp.messagingengine.com [64.147.123.145])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 087E38878D
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 23:04:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F605887A8
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 23:04:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
- by mailfhigh.west.internal (Postfix) with ESMTP id 01D0A1800146;
- Tue, 11 Jun 2024 17:04:18 -0400 (EDT)
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+ by mailfout.west.internal (Postfix) with ESMTP id 7AE831C0007C;
+ Tue, 11 Jun 2024 17:04:21 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute6.internal (MEProxy); Tue, 11 Jun 2024 17:04:19 -0400
+ by compute1.internal (MEProxy); Tue, 11 Jun 2024 17:04:22 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1718139858;
- x=1718226258; bh=0mpfvnxjRh3xcBdu+SBSwiKUOdt5jcUI85gUXgaXBWs=; b=
- dre19TZYfSGRnFrWigtI3efGrgbEzGl3A2dpamR9gKi7r4qYw5Vt1PZA7WfJl7fH
- Kpfs2H0igy+rXI2F74O440FFpZl8Es8TwvrRCaeFh4gIB65fT2+GFC2zGt/+PpQk
- ItjlOI31T1dUaqXeVx9cPc8hJnGCwog1rmjd4e6wMIk5qY9Pqe/9qa3TM0qByGJa
- fCZwExaE209QRg3sAmV/o1+zeQOlq1SlV3hp2sGLw1NThR0MgR9yJRk6JMBnFgW2
- SmzSEIcJu3lWO4BiBk25MakryYucUmQPJANb/ghQ1byEfQFXO/XCWaoTrY1305MH
- X6jEbI3oVXqytlqVcsvt+g==
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1718139861;
+ x=1718226261; bh=08p0/+7kU9g75J/UHtgIwfneZWRiYgBRa1beVDM8fcs=; b=
+ guhhIU95IORmixwI7odSn/5U+OP7WVPCpeBn7XEom4Yd9ay8uz915SFu2J04Fhgi
+ iuqazZDU9zgs0YzbdtoOEkg7zX+0VVzXZ0mJSsIU41WRdlGFoGZAcI+6jFR5xVNo
+ veRg58TNoIHPnb0RIt6OEhpj0Dfjtk38YXQ1sdLbKDBgZfO+O4RqZUWO+ceCXFlA
+ K3Ze3vQfymuLf42NLNbXkLHGne+kdQDGqsOQnB4DCAi9cJn6WVJIECaLL7Lis86M
+ lArz8+fwOCktyA/bg0a6jdOYoRY1V3+Xu+r1PETBNRvs2llVrUwt8M+TF7R2A/g/
+ rXSSLaEdS5a0NjGoIwAPeA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1718139858; x=
- 1718226258; bh=0mpfvnxjRh3xcBdu+SBSwiKUOdt5jcUI85gUXgaXBWs=; b=Q
- JutOvtqlQv5OyM5fe/fv9O+lNq6Tz+cjrEf0RzdspFtfX7ET9+GbnWqKthKirKMc
- Nrs+s8pGOxs4CUdv54MMYXfWeLcSK47z2b9tlw38lREE6vjD2a3oOPI1toti/wAu
- iUrfl0zFsDd42tqblIJRkR72AGa+kOx5MBg6wgL5kDywCc0he8NAXJTXbJTr5JdZ
- sb9fy91FUd3Z6hoQnHZQLac4TP8PE7wfG9KHaWHMcSEKbQrxgf/lGBRc6KqvzZva
- 31pBcfyVvDN6jwKxfFI83zRMIoLfiaVCNNoWbsb9xVDYmnxOQLK1cY4BM6LNdhQe
- G4Pa4zu0xNfaG4wN3iJcw==
-X-ME-Sender: <xms:0rtoZqkyWZtLVO45w2PiblSX_Fd64dh5Ktt0mFuf9Az-M7w2u_DTZg>
- <xme:0rtoZh2EQNI5dhJRZfqppNVGZfxTyE6yEItIIhYUpukiyHOJ0EUy2QL8bXkR_fWed
- an4ihjQDJsn7iC12nk>
-X-ME-Received: <xmr:0rtoZoqmRmT_1evVn8p3y-r_TNvmecJNnY3p40anSpNSX9GxrdqGW0M>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1718139861; x=
+ 1718226261; bh=08p0/+7kU9g75J/UHtgIwfneZWRiYgBRa1beVDM8fcs=; b=m
+ /Q4IvnR1X4A+gS/Uz/Avn3OJ9+Rw169tfxGl08MS1ZHRHAOO+b93KQUczHWWpTdt
+ f+xKRbxHjcHPSz9nKfYyHTA2srHUNpp5JKviwBWZE1XQX/YgueRrEwJTcvZl11RR
+ z53emmIVtR3XRrloi9RGykblc4waNygAYQ/6dEtMKd4owdOd8WQM/r6bCcoqu0QT
+ uNRNXhQIDYuuERgux3fpt7cK9tUwNpSxbjIs1+a2407XxdY8+YbWF9wbR1CxyBm4
+ 9ofWxnBTNFoChzN6+IAuUKffOKhq1OaakddYZF0O78/tI7sWSPLtfBIt0892Gu3+
+ umzqD7lIegkJdlRZ4mjOw==
+X-ME-Sender: <xms:1LtoZrPVFP3ktzVNnXlkBCzbio6hVzn6_2pdWv_TXTPGQXKpraL83A>
+ <xme:1LtoZl_r1_z3CCfNKWGeC3f_Xb_cNmllSOFDItvvwm9MKQErzeWj8lbk3KtTttBwM
+ 4xbFxVIvfO886fWUUc>
+X-ME-Received: <xmr:1LtoZqTpWvoZqqKEBbQNtJU8WbUhuwHXPYJC1GbXEfCeeV6E2FOj8_g>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrfeduvddgudehgecutefuodetggdotefrod
  ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
  necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
  enucfjughrpefhfffugggtgffkfhgjvfevofesthejredtredtjeenucfhrhhomheplfhi
  rgiguhhnucgjrghnghcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhmqe
- enucggtffrrghtthgvrhhnpedvvefhtedvieetveduvedtudekkeetfeeiueehveeikeel
- udehheevkeeuvefgueenucffohhmrghinheprhgvshhouhhrtggvshdrlhhinhhkpdhphi
- hthhhonhdrohhrghdpvghnughsfihithhhrdhphienucevlhhushhtvghrufhiiigvpedt
- necurfgrrhgrmhepmhgrihhlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorg
- htrdgtohhm
-X-ME-Proxy: <xmx:0rtoZulQ0KO6Fn1S_FA0y4y1wd2lug0OptGaRXwNBWtCkKk5CDZH7A>
- <xmx:0rtoZo2Nc8m4bIWxYRz3VSVgv95xOU_hZ07gXCS-iu9a8tMdSRu5fw>
- <xmx:0rtoZluPQtxeUQT7MAXk_EOqoe2m5r5YJUHyKyokJBqI4qDgxEHETw>
- <xmx:0rtoZkVdpBlxENzxVRPZC--iDjIsbZdrF5zTu6goYSJQbDPQYP-wuw>
- <xmx:0rtoZpJFdHEzB6X2s9hFWvm-86zrUuPFr0QoC8LE_2S5cweNfOtcLhUW>
+ enucggtffrrghtthgvrhhnpedvkeeihfefveekueevteefleffkeegudeghfdtuddugefh
+ ueevgeffgedukeejleenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrih
+ hlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
+X-ME-Proxy: <xmx:1LtoZvs-siahcdAtB2v19827uGIiADXsfoad-VShoOtQ3xciXeFJBQ>
+ <xmx:1LtoZjcXIpTzzfde2qHjuaWfrqEfQMQYgjkU_IK4shUU8ikXmqZ-wg>
+ <xmx:1LtoZr3o-Ux5MwjtyVpEMOtFoqe9nAsim7oQdMmhNocSjiMt1c_bBQ>
+ <xmx:1LtoZv93WzSnvgDSbtLkn1UjhIGuWyzcfUBKOqQPMJHHQP1ETFIN1g>
+ <xmx:1btoZiyD59zIWmNlKtXcQfrx8REohoYBL7ky5kekuB6mZUaBxyW3gThR>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 11 Jun 2024 17:04:17 -0400 (EDT)
+ 11 Jun 2024 17:04:19 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Tue, 11 Jun 2024 22:04:01 +0100
-Subject: [PATCH 02/20] binman: Replace pkg_resources with importlib.resources
+Date: Tue, 11 Jun 2024 22:04:02 +0100
+Subject: [PATCH 03/20] py: Replace distutils.core with setuptools
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240611-docker-image-v1-2-51472eb70357@flygoat.com>
+Message-Id: <20240611-docker-image-v1-3-51472eb70357@flygoat.com>
 References: <20240611-docker-image-v1-0-51472eb70357@flygoat.com>
 In-Reply-To: <20240611-docker-image-v1-0-51472eb70357@flygoat.com>
 To: u-boot@lists.denx.de
@@ -95,13 +93,13 @@ Cc: Simon Glass <sjg@chromium.org>,
  Aaron Williams <awilliams@marvell.com>, 
  Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2378;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1314;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=F5I/KiJSft1EkDmGGgS+GaYoO06q6hZPU2blN9ZZ6/M=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhrSM3WedQ9T0VmVbHNAPXrdoHcMq63CpM/NkWaZOW5Idt
- NHp+bYFHaUsDGJcDLJiiiwhAkp9GxovLrj+IOsPzBxWJpAhDFycAjCRUx8Y/jsqbpx0xTp1YfjP
- J0ccfifd/LPhp//CpW+Lk3jbT4u+9F/NyPD4s4Pucr+rz/5bXWK1dBM+e/ETA+M68aj7TwtDRLk
- 51vECAA==
+ bh=noUNPPjbYOlGgrp6xwyqF6eKiELRLGjDK/0QfXadKsY=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhrSM3WeXh1i057rvrLxSERNrz6zgu6k9RnDrGc3Xe+15/
+ JRC5Es6SlkYxLgYZMUUWUIElPo2NF5ccP1B1h+YOaxMIEMYuDgFYCI3zjIyLHDcUOWQl3Jx95zp
+ C4qWPZug6N3u1Km/vDrB8uG2kHUfpRn+e85I5z6S/GanTuarBz8F3254Wn923/OkLXe+lGceffR
+ 8JQ8A
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -120,72 +118,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-pkg_resources is deprecated long ago and being removed in python 3.12.
+distutils is deprecated long ago and being removed in python 3.12.
 
-Reimplement functions with importlib.resources.
-
-Link: https://docs.python.org/3/library/importlib.resources.html
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- tools/binman/control.py | 18 +++++++++---------
- 1 file changed, 9 insertions(+), 9 deletions(-)
+ tools/binman/setup.py           | 2 +-
+ tools/buildman/requirements.txt | 1 +
+ tools/dtoc/setup.py             | 2 +-
+ 3 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/tools/binman/control.py b/tools/binman/control.py
-index 2f00279232b8..5549b0ad2185 100644
---- a/tools/binman/control.py
-+++ b/tools/binman/control.py
-@@ -8,12 +8,11 @@
- from collections import OrderedDict
- import glob
- try:
--    import importlib.resources
--except ImportError:  # pragma: no cover
-+    from importlib import resources
-+except ImportError:
-     # for Python 3.6
--    import importlib_resources
-+    import importlib_resources as resources
- import os
--import pkg_resources
- import re
+diff --git a/tools/binman/setup.py b/tools/binman/setup.py
+index 9a9206eb044a..bec078a3d9b1 100644
+--- a/tools/binman/setup.py
++++ b/tools/binman/setup.py
+@@ -1,6 +1,6 @@
+ # SPDX-License-Identifier: GPL-2.0+
  
- import sys
-@@ -96,12 +95,12 @@ def _ReadMissingBlobHelp():
-             msg = ''
-         return tag, msg
+-from distutils.core import setup
++from setuptools import setup
+ setup(name='binman',
+       version='1.0',
+       license='GPL-2.0+',
+diff --git a/tools/buildman/requirements.txt b/tools/buildman/requirements.txt
+index 4a31e69e4cb5..350da42c0ebf 100644
+--- a/tools/buildman/requirements.txt
++++ b/tools/buildman/requirements.txt
+@@ -1,3 +1,4 @@
+ jsonschema==4.17.3
+ pyyaml==6.0
+ yamllint==1.26.3
++setuptools==65.5.1
+diff --git a/tools/dtoc/setup.py b/tools/dtoc/setup.py
+index 5e092fe0872a..ae9ad043b013 100644
+--- a/tools/dtoc/setup.py
++++ b/tools/dtoc/setup.py
+@@ -1,6 +1,6 @@
+ # SPDX-License-Identifier: GPL-2.0+
  
--    my_data = pkg_resources.resource_string(__name__, 'missing-blob-help')
-+    my_data = resources.files(__package__).joinpath('missing-blob-help').read_text()
-     re_tag = re.compile('^([-a-z0-9]+):$')
-     result = {}
-     tag = None
-     msg = ''
--    for line in my_data.decode('utf-8').splitlines():
-+    for line in my_data.splitlines():
-         if not line.startswith('#'):
-             m_tag = re_tag.match(line)
-             if m_tag:
-@@ -151,8 +150,9 @@ def GetEntryModules(include_testing=True):
-     Returns:
-         Set of paths to entry class filenames
-     """
--    glob_list = pkg_resources.resource_listdir(__name__, 'etype')
--    glob_list = [fname for fname in glob_list if fname.endswith('.py')]
-+    directory = resources.files("binman.etype")
-+    glob_list = [entry.name for entry in directory.iterdir()
-+                 if entry.name.endswith('.py')]
-     return set([os.path.splitext(os.path.basename(item))[0]
-                 for item in glob_list
-                 if include_testing or '_testing' not in item])
-@@ -735,7 +735,7 @@ def Binman(args):
-     global state
- 
-     if args.full_help:
--        with importlib.resources.path('binman', 'README.rst') as readme:
-+        with resources.path('binman', 'README.rst') as readme:
-             tools.print_full_help(str(readme))
-         return 0
- 
+-from distutils.core import setup
++from setuptools import setup
+ setup(name='dtoc',
+       version='1.0',
+       license='GPL-2.0+',
 
 -- 
 2.43.0
