@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92203C25B76
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 07:42:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82B0DC25B76
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 07:56:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02C5A88348;
-	Tue, 11 Jun 2024 09:42:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A070888398;
+	Tue, 11 Jun 2024 09:56:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="CCfxW0IT";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="UoDxzHs/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C82588398; Tue, 11 Jun 2024 09:42:17 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id 737E8885F2; Tue, 11 Jun 2024 09:56:17 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6078288300
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 09:42:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4BAF588398
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 09:56:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-35f1c490c13so2742788f8f.3
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 00:42:15 -0700 (PDT)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4217f2e3450so23944275e9.1
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 00:56:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718091735; x=1718696535;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718092575; x=1718697375;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=46Ego2HJRUwV8bYVIN5ozCNJdS8KfJVy3LQGM2Yrck0=;
- b=CCfxW0ITJ5K/BKy5gZRxPW0aDOwsgpATm6rPzPEnfj7bm2EfIa6IyhoQMOLPPr20ln
- WnPBAYFMlevTXsZtSxRTDOqUiiGbdsm3uDLyIR9uuE/EzPPPhU5bEgKX+cohYSjRMDeL
- aDKq7T3XTLHlZa1lq+Ar+gGqVi+DB8+YGKsi/y8HoQdCitdtXNEaxErRQe2I5D8fFqO/
- 7VhCFfG8DqhrWZfoba1d9PKKS4BfAL81N4OqmRzFCVLzK8QmIxsZIeu3DJb/IHVQVEnu
- uKj5XQ81HQzCReLuVUi00RuqBFetT/FfbG+UXwCXgYP+mSRNq7a+ZIB4oqJ5A4ROG/D+
- 7Meg==
+ bh=KJmqaAbcywqWLZ6fPVgOhOIxBvifrl0/cDeloSg1vWE=;
+ b=UoDxzHs/0guN1sMMWRZtCyOqT5wXB9zgSJVUlKWl/BiZPKjB9NsN7VZkNMM134LgEZ
+ En39aQzgmjw3kyd+AY35ZBCeOAZR1yoPVhl/SWawq/Zn24diC04MZPFAFEnxM+7CQcNL
+ Ss0D8pezFpOwogsi03bSRzLnLRN6iI70FoxC5Lwz8ufgQQe7wnvjCXRzOMm7PJ0kLW0T
+ HMtB75vVDjScCTOxBG7w+cRtXZ73oTQvX7totosoZY3Y7i9eB1rnQ/e7JzljO07Zohas
+ FfciTtI2vpb7ZavnEWBjHkPlVD7xku3v7r1ZsZBf20pCUCrUdb0qVqU43sj0hE+ai41N
+ x7+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718091735; x=1718696535;
+ d=1e100.net; s=20230601; t=1718092575; x=1718697375;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=46Ego2HJRUwV8bYVIN5ozCNJdS8KfJVy3LQGM2Yrck0=;
- b=GU+NDFg2qCpgar+PZlusgPkk2nC3KfrzLcUsyE01O/pxZc/bOuQAVmm68KOoww4rDb
- eKr4CKDoPlLiPNNjwm2CJyIGwS2DFlng5hhiTIXq7p1VdM+HCoFZXD/GUg66B7ty1N+N
- I68QalEsmokreCCgT3DNUu7kP3O9IQoTONxAQK3Y+7KuIxODKnxR1Zrh8CoVQ5fX3CVC
- astMfLPPwjjvgXKTdvX5mmSz5kaFqci7INDIsYItMynhRsz3qVZTgYH79En6378qrrRQ
- UnHnPwMyrb+iDCpGZjDz9pfQiQNP3NebXe3GuNWCgGo6NAf1gjjEbUP3pzAOFGSLFLgl
- bm5Q==
+ bh=KJmqaAbcywqWLZ6fPVgOhOIxBvifrl0/cDeloSg1vWE=;
+ b=Ttl7199GJ8G3gJo0eoYcpldJEIMNwM6hUBCycx7qhDFM2zn+gvhDjiiHFe4bCbsS5+
+ hPYoJum1vRvTRGocMvM4m6CHM6cfSmipTBJmaCra9v+hMaaTI+wzhbzem/BJdKKPkHC3
+ PXhTNR61cSq8Cries3JvtU7nVxJneBe+ImvICouzykbsYVMzdwqUZYVASTTQHRJEIaM2
+ l1QsfNCKMuZ7s7WRlN4lA/tZws9c9TG9ImbhVUIinaA4Pm9+vblaoNL7uXDJ/HTCmbnn
+ JunsDWZBtATIjbJie67+YdnAbrv9G47sgfDElK0OhImPkwymNL/a8s1eKArYgilF+UFk
+ L+kw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWtO3C6aBJ38EzEsJEHLi5Y4p9p5hI09+kEq4YqtWxL6uxngkYYO+MveCcMRn2D7Te/XHXYAaN4mRFivDhGB4qrD0RskQ==
-X-Gm-Message-State: AOJu0YyC4BMG8UfGgbunvHwxlXU39lx45wqpuj2bqkcfpRFeSXO62O9B
- i+XgOk7qgIxxbPWws57YgbuaFJUwdl3i+CX5bHfKnXEVFmj09k+LHi41wKxDcmk=
-X-Google-Smtp-Source: AGHT+IHxxawgjUhVCgjSpA8zRJlJIM0gLVyPi3//SBQhzAFufdYJovV+jPRyxLeF0re2HDzpAk023g==
-X-Received: by 2002:a5d:47a6:0:b0:354:b7da:d3d4 with SMTP id
- ffacd0b85a97d-35efedd7da7mr10541331f8f.50.1718091734518; 
- Tue, 11 Jun 2024 00:42:14 -0700 (PDT)
+ AJvYcCV8/qmUW0BKDATCVBc4HagcZ9Q/hbJKvROdQv9MT5Z+P3GOaitYAO0dX0pI3XYtnuM6LLOj/JnBHQ6DkpmKwSdSnU+kYw==
+X-Gm-Message-State: AOJu0YyieW35+rKmvK6y7SmYfj12H+N/xeQcCn32Q+YAgP8GDzXlVsHE
+ +djdsSyHpuiv3mNi80Ff0kqsWTC+n64oeiYBDQjdH3IoGi/qG1fU9tfmbSzR1j0=
+X-Google-Smtp-Source: AGHT+IG700IW4tauCGqxx9y3vuSRv0t0OxJAYeZ8wnNxIFPVjcd6QIsHU6IGRDXT8m7cXX7lbLjq9w==
+X-Received: by 2002:a5d:6383:0:b0:35f:1bc3:ae71 with SMTP id
+ ffacd0b85a97d-35f1bc3aff5mr5794181f8f.63.1718092574621; 
+ Tue, 11 Jun 2024 00:56:14 -0700 (PDT)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-35f0e49e898sm9205955f8f.22.2024.06.11.00.42.13
+ ffacd0b85a97d-35f2c3fd63fsm1249224f8f.51.2024.06.11.00.56.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Jun 2024 00:42:14 -0700 (PDT)
+ Tue, 11 Jun 2024 00:56:14 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de, Li
+ Jun <jun.li@nxp.com>, Peng Fan <peng.fan@nxp.com>
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Alexander Sverdlin
  <alexander.sverdlin@siemens.com>, Felipe Balbi
  <felipe.balbi@linux.intel.com>, Lukasz Majewski <lukma@denx.de>, Nishanth
  Menon <nm@ti.com>, Simon Glass <sjg@chromium.org>, Thinh Nguyen
- <Thinh.Nguyen@synopsys.com>, Tom Rini <trini@konsulko.com>, Vignesh
- Raghavendra <vigneshr@ti.com>
-Subject: Re: [PATCH 5/6] usb: gadget: Add full ep_matches() check past
- .match_ep() callback
-In-Reply-To: <20240609213449.194762-5-marek.vasut+renesas@mailbox.org>
+ <Thinh.Nguyen@synopsys.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH 6/6] usb: dwc3: gadget: Convert epautoconf workaround to
+ match_ep callback
+In-Reply-To: <20240609213449.194762-6-marek.vasut+renesas@mailbox.org>
 References: <20240609213449.194762-1-marek.vasut+renesas@mailbox.org>
- <20240609213449.194762-5-marek.vasut+renesas@mailbox.org>
-Date: Tue, 11 Jun 2024 09:42:11 +0200
-Message-ID: <87y17cylgs.fsf@baylibre.com>
+ <20240609213449.194762-6-marek.vasut+renesas@mailbox.org>
+Date: Tue, 11 Jun 2024 09:56:11 +0200
+Message-ID: <87v82fzzdw.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -103,23 +103,25 @@ Thank you for the patch.
 
 On dim., juin 09, 2024 at 23:32, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
 
-> If .match_ep() callback returns non-NULL endpoint, immediately check
-> its usability and if the returned endpoint is usable, stop search and
-> return the endpoint. Otherwise, continue with best effort search for
-> usable endpoint.
+> Use the .match_ep() callback instead of workaround in core code.
+> Replace descriptor parsing with ch9 macros with the same effect.
+> Drop the SPL specific behavior, it is unclear why SPL should even
+> be special.
+
+Li, Peng,
+
+Is this good for you as well?
+
+You seem to be the author/committer of:
+c93edbf5385e ("usb: gadget: don't change ep name for dwc3 while ep autoconfig")
+
+I'd like to make sure this patch does not break your use-case.
+Please let me know within 2 weeks or so, otherwise I'll apply the changes.
+
 >
-> Currently the code would attempt the best effort search in any case,
-> which may find another unexpected endpoint. It is likely that the
-> intention of the original code was to stop the search early.
->
-> Fixes: 77dcbdf3c1ce ("usb: gadget: Add match_ep() op to usb_gadget_ops")
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-I've added Vignesh to the CC list since he is the author of
-77dcbdf3c1ce. He might be able to comment if this was indeed a mistake.
-
-It looks like a good fix to me as well. With this change we match more closely
-the linux implementation (usb_ep_autoconfig_ss()).
+To me, this looks good.
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> # on vim3
@@ -135,25 +137,124 @@ Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> # on vim3
 > Cc: Tom Rini <trini@konsulko.com>
 > Cc: u-boot@lists.denx.de
 > ---
->  drivers/usb/gadget/epautoconf.c | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
+>  drivers/usb/dwc3/gadget.c       | 33 +++++++++++++++++++++++
+>  drivers/usb/gadget/epautoconf.c | 46 +--------------------------------
+>  2 files changed, 34 insertions(+), 45 deletions(-)
 >
+> diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
+> index fab32575647..3ef2f016a60 100644
+> --- a/drivers/usb/dwc3/gadget.c
+> +++ b/drivers/usb/dwc3/gadget.c
+> @@ -1606,6 +1606,38 @@ static int dwc3_gadget_stop(struct usb_gadget *g)
+>  	return 0;
+>  }
+>  
+> +static struct usb_ep *dwc3_find_ep(struct usb_gadget *gadget, const char *name)
+> +{
+> +	struct usb_ep *ep;
+> +
+> +	list_for_each_entry(ep, &gadget->ep_list, ep_list)
+> +		if (!strcmp(ep->name, name))
+> +			return ep;
+> +
+> +	return NULL;
+> +}
+> +
+> +static struct
+> +usb_ep *dwc3_gadget_match_ep(struct usb_gadget *gadget,
+> +			     struct usb_endpoint_descriptor *desc,
+> +			     struct usb_ss_ep_comp_descriptor *comp_desc)
+> +{
+> +	/*
+> +	 * First try standard, common configuration: ep1in-bulk,
+> +	 * ep2out-bulk, ep3in-int to match other udc drivers to avoid
+> +	 * confusion in already deployed software (endpoint numbers
+> +	 * hardcoded in userspace software/drivers)
+> +	 */
+> +	if (usb_endpoint_is_bulk_in(desc))
+> +		return dwc3_find_ep(gadget, "ep1in");
+> +	if (usb_endpoint_is_bulk_out(desc))
+> +		return dwc3_find_ep(gadget, "ep2out");
+> +	if (usb_endpoint_is_int_in(desc))
+> +		return dwc3_find_ep(gadget, "ep3in");
+> +
+> +	return NULL;
+> +}
+> +
+>  static const struct usb_gadget_ops dwc3_gadget_ops = {
+>  	.get_frame		= dwc3_gadget_get_frame,
+>  	.wakeup			= dwc3_gadget_wakeup,
+> @@ -1613,6 +1645,7 @@ static const struct usb_gadget_ops dwc3_gadget_ops = {
+>  	.pullup			= dwc3_gadget_pullup,
+>  	.udc_start		= dwc3_gadget_start,
+>  	.udc_stop		= dwc3_gadget_stop,
+> +	.match_ep		= dwc3_gadget_match_ep,
+>  };
+>  
+>  /* -------------------------------------------------------------------------- */
 > diff --git a/drivers/usb/gadget/epautoconf.c b/drivers/usb/gadget/epautoconf.c
-> index 09950ceeaed..66599ce8efa 100644
+> index 66599ce8efa..a4da4f72de9 100644
 > --- a/drivers/usb/gadget/epautoconf.c
 > +++ b/drivers/usb/gadget/epautoconf.c
-> @@ -247,8 +247,11 @@ struct usb_ep *usb_ep_autoconfig(
->  			return ep;
->  	}
+> @@ -166,18 +166,6 @@ static int ep_matches(
+>  	return 1;
+>  }
 >  
-> -	if (gadget->ops->match_ep)
-> +	if (gadget->ops->match_ep) {
+> -static struct usb_ep *
+> -find_ep(struct usb_gadget *gadget, const char *name)
+> -{
+> -	struct usb_ep	*ep;
+> -
+> -	list_for_each_entry(ep, &gadget->ep_list, ep_list) {
+> -		if (0 == strcmp(ep->name, name))
+> -			return ep;
+> -	}
+> -	return NULL;
+> -}
+> -
+>  /**
+>   * usb_ep_autoconfig - choose an endpoint matching the descriptor
+>   * @gadget: The device to which the endpoint must belong.
+> @@ -213,39 +201,7 @@ struct usb_ep *usb_ep_autoconfig(
+>  	struct usb_endpoint_descriptor	*desc
+>  )
+>  {
+> -	struct usb_ep	*ep = NULL;
+> -	u8		type;
+> -
+> -	type = desc->bmAttributes & USB_ENDPOINT_XFERTYPE_MASK;
+> -
+> -	/* First, apply chip-specific "best usage" knowledge.
+> -	 * This might make a good usb_gadget_ops hook ...
+> -	 */
+> -	if (!IS_ENABLED(CONFIG_SPL_BUILD) &&
+> -	    IS_ENABLED(CONFIG_USB_DWC3_GADGET) &&
+> -	    !strcmp("dwc3-gadget", gadget->name)) {
+> -		const char *name = NULL;
+> -		/*
+> -		 * First try standard, common configuration: ep1in-bulk,
+> -		 * ep2out-bulk, ep3in-int to match other udc drivers to avoid
+> -		 * confusion in already deployed software (endpoint numbers
+> -		 * hardcoded in userspace software/drivers)
+> -		 */
+> -		if ((desc->bEndpointAddress & USB_DIR_IN) &&
+> -		    type == USB_ENDPOINT_XFER_BULK)
+> -			name = "ep1in";
+> -		else if ((desc->bEndpointAddress & USB_DIR_IN) == 0 &&
+> -			 type == USB_ENDPOINT_XFER_BULK)
+> -			name = "ep2out";
+> -		else if ((desc->bEndpointAddress & USB_DIR_IN) &&
+> -			 type == USB_ENDPOINT_XFER_INT)
+> -			name = "ep3in";
+> -
+> -		if (name)
+> -			ep = find_ep(gadget, name);
+> -		if (ep && ep_matches(gadget, ep, desc))
+> -			return ep;
+> -	}
+> +	struct usb_ep *ep;
+>  
+>  	if (gadget->ops->match_ep) {
 >  		ep = gadget->ops->match_ep(gadget, desc, NULL);
-> +		if (ep && ep_matches(gadget, ep, desc))
-> +			return ep;
-> +	}
->  
->  	/* Second, look at endpoints until an unclaimed one looks usable */
->  	list_for_each_entry(ep, &gadget->ep_list, ep_list) {
 > -- 
 > 2.43.0
