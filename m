@@ -4,82 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6984DC25B76
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 13:52:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE547C25B76
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 13:52:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CAC0788400;
-	Tue, 11 Jun 2024 15:52:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 47DE6886A3;
+	Tue, 11 Jun 2024 15:52:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="K+0pVZ1x";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RGNnhE7a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1EB2885F6; Tue, 11 Jun 2024 15:52:17 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id BD69C886D7; Tue, 11 Jun 2024 15:52:54 +0200 (CEST)
+Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
+ [IPv6:2607:f8b0:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A670687D0A
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 15:52:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6836488685
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 15:52:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-6f9c1902459so1158185a34.0
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 06:52:15 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-6e40ee57f45so935155a12.0
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 06:52:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718113934; x=1718718734; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=gxRQMyjCqQqeyhuA487gVf27W8CpvM/IkkXzDooX15A=;
- b=K+0pVZ1xGqzvmOq+gLqQ8S22OPqfJZrozjuE0lnHtC4G4uwI/tj6DFp0tD10OUC7h6
- keF4fAAV6t0TMNPiQF+dvii+2F1S7QUItcRM9c8PB0BJqjnsWbr3OQp5pmUSNqfWKJsI
- 6GVOT2Lpga390R798eKan8I0PC+IDzDk9LHik=
+ d=linaro.org; s=google; t=1718113971; x=1718718771; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=zMP3YA+q9kjuDbcMqC+cuBYTcN0vxIUDh/NobpVhrGI=;
+ b=RGNnhE7aykyRUBelwgpOPafkCTjlC9NhQvil7ZDgqK3AMJJv+n0Z4rQFjePZKZogdD
+ tFkAPt5sQgFMFoWVHb4S40CG0mVwvqyZc5nwfZhz45omarErHtn5moIH49RU2Wvdd0DB
+ hgl66RmyQ/45bGx5PpOd4bDJCYaXFW/LfIh39YuY4vqcQ03mXEEpnMWFahKlu+gp2p9j
+ LcL1wt3E6M8BnzuTy/Se+TflDuBiZt3gsMNE+7FShsBKQgAPrpVJ5osnBcSNUqldP6wu
+ cl2FHrtMXCg3zW/+yaSKdKl8HoKcDfso4KQCYT0cOeHwJkTaEKIHqy2fiRtV89TAUYeQ
+ mY/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718113934; x=1718718734;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gxRQMyjCqQqeyhuA487gVf27W8CpvM/IkkXzDooX15A=;
- b=uMyA+HZhR4+MdtcTGSQTHvISzx/5B6ETeInVlGr7YLS6I96dLOH51W6DnXnp7SkDaP
- 22ZbrELGjXxR+3lxgbN4UkQgRqjS4ayWaFMx+8qCVVNseo5CyVyDFzIa+8icIJfLgn2J
- 0ShH/mN3iostMNAV5dxCyj84G4nqsqx5P7a9PtZqsq+wKq5yzEY0sLQSaxBoGp994YX4
- bGChkXHlw4xgxPKtn24E8zfUUj38AOyEMtn5mnauFffK9JYKWG5DTvtBHODSbndibvu4
- u+g/yLOvfEqsFGYyP2dbKdn6udKxa6VRBnmC8/MYnfm+VzRX9PiW5DLhl7khELLCfu9A
- zvmg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVISfpQKRmW/aR+osdoLsWw38Zu95W1V0eOuM7ZFryM7PI9ntkZNjDyI795EiX6Eau/axdUEEppvUglarWnPMoSeVaWBg==
-X-Gm-Message-State: AOJu0Ywt9aWwpR/yTfn2S1r+lmP0z1iz1tI9j+Xllkt1DWiInXcyLqzn
- h8UAKEr9AbMfJI3PDTmnnbvaxOQjBJmeo/N8DhpsaXf3JkDVX62d3Nz0PPD8hLI=
-X-Google-Smtp-Source: AGHT+IEGJNEn8S4+ZBKN43wTZVaGQSiOdPBToiuks7J7Ym6ACVi8CeBMGEO70wtTFuLrqm4DAZ8YeQ==
-X-Received: by 2002:a05:6830:d2:b0:6f9:7538:b291 with SMTP id
- 46e09a7af769-6f97538b386mr9335835a34.26.1718113934206; 
- Tue, 11 Jun 2024 06:52:14 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
- [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-6f9d9407ba9sm495334a34.3.2024.06.11.06.52.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Jun 2024 06:52:13 -0700 (PDT)
-Date: Tue, 11 Jun 2024 07:52:09 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH 03/16] image: Take entry point as an output of setup_booti
-Message-ID: <20240611135209.GB68077@bill-the-cat>
-References: <20240522-loongarch-v1-0-1407e0b69678@flygoat.com>
- <20240522-loongarch-v1-3-1407e0b69678@flygoat.com>
- <4887f128-786d-4d07-8dec-79ef75e39509@gmx.de>
- <43b029fc-2910-455c-93d7-6555c65bf189@app.fastmail.com>
+ d=1e100.net; s=20230601; t=1718113971; x=1718718771;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zMP3YA+q9kjuDbcMqC+cuBYTcN0vxIUDh/NobpVhrGI=;
+ b=dDrdlGc/cNY02ozn/86yGUn5o1R67p58hRpiu5nXeJcgCYpMCmwcadn5EkvXhnfQrp
+ VRBdVt05dVwzLV0iSxhHD/Ip9Yi3qcETQRdjEU4zqMuKoldoQ9tULvj5h/CX2Xle3gE0
+ iIdLudkSrN51/DsHs9s2W9qT3WxJ0pHYkkIdkS7wJCm6gO8GQ1AosVY41rY/QdSOBcS0
+ mcO5Hj5Skvty4cOVhwCAfuppNmnplqyyp53lqaxpGoIcfDkaKU4HKN0A+Xpkgo00y/81
+ 6H88xCroy9eq3n7mGqPVamXOUb0CAzdLzb8bAr0PnraWzeCcwivo8/aBvQbG+HrgOMBu
+ qYTw==
+X-Gm-Message-State: AOJu0Yy+BbbJ/cty/CpcfdaBupVpgnNz1hb/Fz38LbNxJV36AUJLZvUU
+ por0INvF554ik3nGWs1kzC119U/nDByS6uoQmS2nZePhMsj9+xg4u6tAB2T9y17kprCuD4+g5MJ
+ AmOoQ9Yu9/bkDBgS0xydDMIj0cldQUKj8foAHxQ==
+X-Google-Smtp-Source: AGHT+IErTWXMQkd9dX+NEt98089vRZNWsPbUnFeK2pvHJMzf9ngw4F4HxjcYCCzGBqMcCaUrB8a6AMOcZG+y/gEZKr4=
+X-Received: by 2002:a17:903:2351:b0:1f7:3948:9541 with SMTP id
+ d9443c01a7336-1f7394897fdmr13150155ad.65.1718113970887; Tue, 11 Jun 2024
+ 06:52:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="kaUcg4UjlOGNd6iY"
-Content-Disposition: inline
-In-Reply-To: <43b029fc-2910-455c-93d7-6555c65bf189@app.fastmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240517-mips-efi-v1-0-79096e3ca3b3@flygoat.com>
+ <20240517-mips-efi-v1-6-79096e3ca3b3@flygoat.com>
+In-Reply-To: <20240517-mips-efi-v1-6-79096e3ca3b3@flygoat.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 11 Jun 2024 16:52:14 +0300
+Message-ID: <CAC_iWjJV7T3GG-7_m1EfrU4wAYksNdjm59UB-pWk3HsQ=FFr4w@mail.gmail.com>
+Subject: Re: [PATCH 6/7] MIPS: Define MIPS EFI related bits everywhere
+To: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Cc: u-boot@lists.denx.de, Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,67 +87,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---kaUcg4UjlOGNd6iY
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Jun 11, 2024 at 02:29:38PM +0100, Jiaxun Yang wrote:
->=20
->=20
-> =E5=9C=A82024=E5=B9=B46=E6=9C=8811=E6=97=A5=E5=85=AD=E6=9C=88 =E4=B8=8B=
-=E5=8D=882:02=EF=BC=8CHeinrich Schuchardt=E5=86=99=E9=81=93=EF=BC=9A
-> > On 22.05.24 17:34, Jiaxun Yang wrote:
-> >> For LoongArch the start of the image is not the entry
-> >> point to the image.
-> >
-> > Looking at arch/loongarch/kernel/head.S there seem to be two cases:
-> >
-> > * The kernel has an EFI stub (CONFIG_EFI_STUB=3Dy).
-> >    The legacy physical entry point is available at offset 0x08 of the
-> > header.
-> > * The kernel has no EFI stub.
-> >    The kernel entry point matches the start of the image.
-> >
-> > Where do you differentiate between the cases?
->=20
-> Hi Heinrich,
->=20
-> In case there is no EFI stub LoongArch would use elf format vmlinux, there
-> is no real "raw" image for us.
->=20
-> bootelf can't be used at the moment as it doesn't setup FDT and other env=
-ironments
-> properly.
->=20
-> I'm planning to implement a bootlinuxelf command for this case, as MIPS, =
-LoongArch,
-> xtensa are all using ELF as default kernel image format.
-
-Please note that we have CONFIG_CMD_ELF_FDT_SETUP already, so adjusting
-things so that bootelf works for this case should be doable without a
-new command.
-
---=20
-Tom
-
---kaUcg4UjlOGNd6iY
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZoVoYACgkQFHw5/5Y0
-tyyMywv+PTMeHpt6Fyu0n6FCveArXw4jqpKrFeYr9cE17xcYfBkyLzLH9NR39Djz
-cSbE5NVWirDBU3QmtB1QZem8Yfzp0Rm0WaL0vWs82EUSNPlad3WoFqwJ96O5oOsj
-97Pn2rTYDIDeHfLrWcWe9lygzCfyMuJiEv77CpTBQEuHaQZQJ7JP7ZOA79Th3tC4
-RN+PVC9FTL0JBLaNRMFRIbx8TPLpP4+HzeccpRBVoy+JwPdzMSSlarOUD2u1scAZ
-zAVsrvlSgvf9z5JxxXtK5SJGD416uwGGyS3EtvynF7LWFu6EtlbEskv+2Q3CVa7a
-GSvHTaJrCWHs5UeuPROSD02Q4QTDNdQrTkYtTCdLaTI1fqdpSeVOv33EL2wNo3bA
-4NEJC6fvXFBQq+5wngrRldXdgiQtL542A3INDbErub4JnEfr4/IxOj/2xAbQrID/
-qsl9qjLQHo+s5iJB0LG+CKjeLaIWksbTvXQvhF1R0ie00l3VBV+dqtFV7AhhpIfT
-tmBN/272
-=kWpZ
------END PGP SIGNATURE-----
-
---kaUcg4UjlOGNd6iY--
+On Fri, 17 May 2024 at 19:33, Jiaxun Yang <jiaxun.yang@flygoat.com> wrote:
+>
+> Various file names, instruction defines, magic numbers
+> related to MIPS's EFI implementation.
+>
+> PE magic numbers are from winnt.h, DHCP numbers are
+> from IANA page, boot file names are from other
+> implementations.
+>
+> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> ---
+>  include/asm-generic/pe.h                          |  5 +++++
+>  include/config_distro_bootcmd.h                   |  6 ++++++
+>  include/efi_default_filename.h                    |  8 ++++++++
+>  include/elf.h                                     |  8 ++++++++
+>  lib/efi_loader/efi_image_loader.c                 | 17 +++++++++++++++++
+>  lib/efi_selftest/efi_selftest_miniapp_exception.c |  2 ++
+>  6 files changed, 46 insertions(+)
+>
+> diff --git a/include/asm-generic/pe.h b/include/asm-generic/pe.h
+> index cd5b6ad62bf0..42c4cbedbc95 100644
+> --- a/include/asm-generic/pe.h
+> +++ b/include/asm-generic/pe.h
+> @@ -31,6 +31,11 @@
+>
+>  /* Machine types */
+>  #define IMAGE_FILE_MACHINE_I386                        0x014c
+> +#define IMAGE_FILE_MACHINE_R3000_BE            0x0160
+> +#define IMAGE_FILE_MACHINE_R3000               0x0162
+> +#define IMAGE_FILE_MACHINE_R4000_BE            0x0164
+> +#define IMAGE_FILE_MACHINE_R4000               0x0166
+> +#define IMAGE_FILE_MACHINE_R10000              0x0168
+>  #define IMAGE_FILE_MACHINE_ARM                 0x01c0
+>  #define IMAGE_FILE_MACHINE_THUMB               0x01c2
+>  #define IMAGE_FILE_MACHINE_ARMNT               0x01c4
+> diff --git a/include/config_distro_bootcmd.h b/include/config_distro_bootcmd.h
+> index 2a136b96a6d9..9e03d10acec5 100644
+> --- a/include/config_distro_bootcmd.h
+> +++ b/include/config_distro_bootcmd.h
+> @@ -366,6 +366,12 @@
+>  #elif defined(CONFIG_ARCH_RV64I) || ((defined(__riscv) && __riscv_xlen == 64))
+>  #define BOOTENV_EFI_PXE_ARCH "0x1b"
+>  #define BOOTENV_EFI_PXE_VCI "PXEClient:Arch:00027:UNDI:003000"
+> +#elif defined(CONFIG_CPU_MIPS32) || ((defined(__mips) && __mips == 32))
+> +#define BOOTENV_EFI_PXE_ARCH "0x21"
+> +#define BOOTENV_EFI_PXE_VCI "PXEClient:Arch:00033:UNDI:003000"
+> +#elif defined(CONFIG_CPU_MIPS64) || ((defined(__mips) && __mips == 64))
+> +#define BOOTENV_EFI_PXE_ARCH "0x22"
+> +#define BOOTENV_EFI_PXE_VCI "PXEClient:Arch:00034:UNDI:003000"
+>  #elif defined(CONFIG_SANDBOX)
+>  # error "sandbox EFI support is only supported on ARM and x86"
+>  #else
+> diff --git a/include/efi_default_filename.h b/include/efi_default_filename.h
+> index 77932984b557..eb94a54514bc 100644
+> --- a/include/efi_default_filename.h
+> +++ b/include/efi_default_filename.h
+> @@ -47,6 +47,14 @@
+>  #define BOOTEFI_NAME "BOOTRISCV32.EFI"
+>  #elif defined(CONFIG_ARCH_RV64I)
+>  #define BOOTEFI_NAME "BOOTRISCV64.EFI"
+> +#elif defined(CONFIG_CPU_MIPS32) && defined(CONFIG_SYS_BIG_ENDIAN)
+> +#define BOOTEFI_NAME "BOOTMIPS.EFI"
+> +#elif defined(CONFIG_CPU_MIPS32) && defined(CONFIG_SYS_LITTLE_ENDIAN)
+> +#define BOOTEFI_NAME "BOOTMIPSEL.EFI"
+> +#elif defined(CONFIG_CPU_MIPS64) && defined(CONFIG_SYS_BIG_ENDIAN)
+> +#define BOOTEFI_NAME "BOOTMIPS64.EFI"
+> +#elif defined(CONFIG_CPU_MIPS64) && defined(CONFIG_SYS_LITTLE_ENDIAN)
+> +#define BOOTEFI_NAME "BOOTMIPS64EL.EFI"
+>  #else
+>  #error Unsupported UEFI architecture
+>  #endif
+> diff --git a/include/elf.h b/include/elf.h
+> index a4ba74d8abeb..95de6ffbce31 100644
+> --- a/include/elf.h
+> +++ b/include/elf.h
+> @@ -545,6 +545,9 @@ typedef struct {
+>  #define DT_LOPROC      0x70000000      /* reserved range for processor */
+>  #define DT_HIPROC      0x7fffffff      /* specific dynamic array tags */
+>
+> +/* MIPS */
+> +#define DT_MIPS_LOCAL_GOTNO    0x7000000a      /* Number of local got entries */
+> +
+>  /* Dynamic Tag Flags - d_un.d_val */
+>  #define DF_ORIGIN      0x01            /* Object may use DF_ORIGIN */
+>  #define DF_SYMBOLIC    0x02            /* Symbol resolutions starts here */
+> @@ -699,6 +702,11 @@ unsigned long elf_hash(const unsigned char *name);
+>  #define R_RISCV_64             2
+>  #define R_RISCV_RELATIVE       3
+>
+> +/* MIPS Relocations */
+> +#define R_MIPS_NONE            0
+> +#define R_MIPS_REL32           3
+> +#define R_MIPS_64              18
+> +
+>  #ifndef __ASSEMBLY__
+>  int valid_elf_image(unsigned long addr);
+>  unsigned long load_elf64_image_phdr(unsigned long addr);
+> diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_image_loader.c
+> index cedc4d822fe7..8df469851851 100644
+> --- a/lib/efi_loader/efi_image_loader.c
+> +++ b/lib/efi_loader/efi_image_loader.c
+> @@ -51,6 +51,23 @@ static int machines[] = {
+>         IMAGE_FILE_MACHINE_RISCV64,
+>  #endif
+>
+> +#if defined(__mips__) && (__mips == 32) && defined(__BIG_ENDIAN)
+> +       IMAGE_FILE_MACHINE_R3000_BE,
+> +#endif
+> +
+> +#if defined(__mips__) && (__mips == 32) && defined(__LITTLE_ENDIAN)
+> +       IMAGE_FILE_MACHINE_R3000,
+> +#endif
+> +
+> +#if defined(__mips__) && (__mips == 64) && defined(__BIG_ENDIAN)
+> +       IMAGE_FILE_MACHINE_R4000_BE,
+> +#endif
+> +
+> +#if defined(__mips__) && (__mips == 64) && defined(__LITTLE_ENDIAN)
+> +       IMAGE_FILE_MACHINE_R4000,
+> +       IMAGE_FILE_MACHINE_R10000,
+> +#endif
+> +
+>         0 };
+>
+>  /**
+> diff --git a/lib/efi_selftest/efi_selftest_miniapp_exception.c b/lib/efi_selftest/efi_selftest_miniapp_exception.c
+> index f668cdac4ab2..f3b4ee926f8f 100644
+> --- a/lib/efi_selftest/efi_selftest_miniapp_exception.c
+> +++ b/lib/efi_selftest/efi_selftest_miniapp_exception.c
+> @@ -33,6 +33,8 @@ efi_status_t EFIAPI efi_main(efi_handle_t handle,
+>         asm volatile (".word 0xe7f7defb\n");
+>  #elif defined(CONFIG_RISCV)
+>         asm volatile (".word 0xffffffff\n");
+> +#elif defined(CONFIG_MIPS)
+> +       asm volatile ("break 0xf\n");
+>  #elif defined(CONFIG_X86)
+>         asm volatile (".word 0xffff\n");
+>  #elif defined(CONFIG_SANDBOX)
+>
+> --
+> 2.34.1
+>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
