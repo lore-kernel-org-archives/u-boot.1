@@ -4,80 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D1DEC27C5E
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 14:07:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1D7AC27C5E
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 14:09:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98454886E7;
-	Tue, 11 Jun 2024 16:07:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 31AE0886D7;
+	Tue, 11 Jun 2024 16:09:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nq1uj11e";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kkIPspr0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E53D3886EB; Tue, 11 Jun 2024 16:07:25 +0200 (CEST)
-Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
- [IPv6:2607:f8b0:4864:20::42a])
+ id B99B2886E4; Tue, 11 Jun 2024 16:09:48 +0200 (CEST)
+Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
+ [IPv6:2607:f8b0:4864:20::c35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99154886E7
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 16:07:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9095D8865F
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 16:09:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x42a.google.com with SMTP id
- d2e1a72fcca58-703ed15b273so4326983b3a.1
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 07:07:23 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-5b3241373adso635830eaf.2
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 07:09:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718114842; x=1718719642; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pOFIlSxileHn+NzXEzYqjVnJJNFq2gTHQhMfZUhd3AA=;
- b=nq1uj11e26zJV4ZHugsAobXKrZ2DChDI1OIPpHqUfBGuaunuAKc8Yx2KNR5Lqwf2AK
- Fw26aBfUzaLP3t9aeVJuOowwf3HI6+my3YBRrT7KwxnaoI0lggRXv7sMIqBwfOLLkIqg
- nZh5PZOKLfjsRK/PRphlE26AG3sVACn0QNfANiPGh7exkJzcORYi618dScZYtUOHRGqF
- Lp94SMONKtAJo9XoRtUjgi06jxNJ9oKnTSrQ4P6IgwTB/95QicvJypawIcWJ1PCladtl
- xTUGjacsN3ljUTbqGGcUS5ZxYBH3X4DVSYIqAIHbpRSPXW4DcsKWE4cqKm6I79Qqqw/j
- NkgA==
+ d=konsulko.com; s=google; t=1718114985; x=1718719785; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=P6SxUKRHabdRoX715cS1iCt1GuoPwevsD/KA7Nw18JQ=;
+ b=kkIPspr0azwZTQQM75H3IhzAXxieWkasGxTtLGwtQm9KmvaqSnF3QfucU2zEbY3eTE
+ Sx6v7ldJuj54JJ403026w7i6hgqBONnLa7ZWUEH32qz79ZriJ/0bor7urzFL2bmCtYoK
+ Ua+S2qSmuYNzPBgEG1hUmBuVbKn3Y2grTtFWA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718114842; x=1718719642;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pOFIlSxileHn+NzXEzYqjVnJJNFq2gTHQhMfZUhd3AA=;
- b=JZwpcA3cS9d/Y3MYUaFTlUem8sdyMYhpDbVtohUkqMynlt+EFpXnBGpw7GUhrAKMFy
- rQwpvSVdY5tj2Bk9Mkjzlj7yrz4UVH4aQzafX7J4ksYFNNmivxLNkFwqxcZff4eKqLk/
- SWiRLS+7GPMb3t9H2aVZ4Ka5kbUeSkXs4ay3+CyuKAN5IOlQvRAheTqAp61gdrlTG5lo
- 3RsVGm0MvW0uJfsLt+aPPSrEYR7yfJiBhLPlDPnUEjB+2Q+W0YFXgHT6+gwDirOMmXh8
- TV5k5q47Im7GbHl127YiTu7OpS1/3dFM8mBjyAWCxppnEh3au1uftxnCpDO1XHZLHqZL
- H2BQ==
+ d=1e100.net; s=20230601; t=1718114985; x=1718719785;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=P6SxUKRHabdRoX715cS1iCt1GuoPwevsD/KA7Nw18JQ=;
+ b=UdZky0NWpiHSPpwQyD/aFW9fyi9S9tcDns4v4XhVwWRX3v97bDvQpknA6J3Wq8xnit
+ kUF7g3aKuP5zl+TOX8B9WsbcHLerSL3BMRAa0AQBxQ+fDKdq5KRVlhaCvKNQC3wpaf4T
+ imwIzlwNyR+FkSmob0QuPkcy5JfykUfwrZcMydqXE/4nsmuyqpiOPp5qrpa/rDY/Ivo0
+ wvOOlMVllrWszQESWTGLsS9erV+0Cg/ooSUa7rgy2lEpen9MUS0GhND16SRkTwfQh2LT
+ QL9lWul1APoSWMigAK2ectaFSmVIb11a/GI22n/zfeiU5sp7qSqVqzMZ//psehThxj2E
+ 88ew==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUfFyP1QKn6k0ePpqMVlhCInAzDt1W8QRFQU/C+el1JOQ1Etklw+gx6TArhV/GKuGZ6u1IlxzPxAadI0qHYNAb8ljwc/A==
-X-Gm-Message-State: AOJu0Yz2f+R/SD63oYN5aICsrT9lBIAF6U9Zt5SiUMBwN/1rxZvmfBr+
- iX3cHPu/+M/e32lf1ZYRe8cN25NVYGaIktjnf3fZ7OmOZqudHWGYNtL82jl3BVJzZdfpuBr0boM
- spOPfNqheG1wvErEnFRU5WheD372aJq6Sy5M2Dw==
-X-Google-Smtp-Source: AGHT+IFjgfSlVjP8kjU0Htj2f0YrL5LmdoV6aSc4Wkw8r17Ax0qSAI9e5I4B7Sf+X71hVM8/Pj/c893pQJEfiPTI6c4=
-X-Received: by 2002:a17:90a:10d7:b0:2bd:fadd:75e3 with SMTP id
- 98e67ed59e1d1-2c2bcc4cef2mr13871378a91.34.1718114841874; Tue, 11 Jun 2024
- 07:07:21 -0700 (PDT)
+ AJvYcCVIgTE3KZ6hwe8BkzsIZ2THk8fPUq/rPDXCTDWKJKddREJTC6nFB857vJjHpGd1EaMc08DkCNOsO3yqBN8UA4J3aCI5JQ==
+X-Gm-Message-State: AOJu0Yw7/LJk9O5HsW1rQP39coRGntZI+F42S0SpUB5O678URH6H7ubg
+ LlOOUBlMX/l60VDb8ZxjxfYdoVIdcRwf99SGfeUwjZaJd8T28ZMBQhWkGejgde4=
+X-Google-Smtp-Source: AGHT+IFo4vmZQ1qzRbZU7Z5R3wAydN2xVhvpaiOKs62K8ATIxRNScZ9WyLNZy+p6WI7WEHqJ40X0Zw==
+X-Received: by 2002:a05:6870:8984:b0:254:7645:eebf with SMTP id
+ 586e51a60fabf-254764630c4mr13171407fac.37.1718114984902; 
+ Tue, 11 Jun 2024 07:09:44 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
+ [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-254d96e5e7fsm803139fac.26.2024.06.11.07.09.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Jun 2024 07:09:44 -0700 (PDT)
+Date: Tue, 11 Jun 2024 08:09:41 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH 03/16] image: Take entry point as an output of setup_booti
+Message-ID: <20240611140941.GE68077@bill-the-cat>
+References: <20240522-loongarch-v1-0-1407e0b69678@flygoat.com>
+ <20240522-loongarch-v1-3-1407e0b69678@flygoat.com>
+ <4887f128-786d-4d07-8dec-79ef75e39509@gmx.de>
+ <43b029fc-2910-455c-93d7-6555c65bf189@app.fastmail.com>
+ <20240611135209.GB68077@bill-the-cat>
+ <cdb2ba34-09c0-47f3-b72c-4099b48a6946@app.fastmail.com>
 MIME-Version: 1.0
-References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
- <20240607185240.1892031-23-sughosh.ganu@linaro.org>
- <20240610174450.GX68077@bill-the-cat>
- <CADg8p96rjN48peBf=cxbs7k7ku0stV-4bBhL5+RrTnPJVS1tjQ@mail.gmail.com>
- <20240611135918.GD68077@bill-the-cat>
-In-Reply-To: <20240611135918.GD68077@bill-the-cat>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 11 Jun 2024 17:06:45 +0300
-Message-ID: <CAC_iWjKNN8848NoE2u9ZYLUZVO45RyY77cL+1D6+iy1at0wDFA@mail.gmail.com>
-Subject: Re: [RFC PATCH 22/31] test: lmb: run the LMB tests only on sandbox
-To: Tom Rini <trini@konsulko.com>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marex@denx.de>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="6HhyscQxHo/Xzjk4"
+Content-Disposition: inline
+In-Reply-To: <cdb2ba34-09c0-47f3-b72c-4099b48a6946@app.fastmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,46 +98,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 11 Jun 2024 at 17:05, Tom Rini <trini@konsulko.com> wrote:
->
-> On Tue, Jun 11, 2024 at 02:25:05PM +0530, Sughosh Ganu wrote:
-> > On Mon, 10 Jun 2024 at 23:14, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Sat, Jun 08, 2024 at 12:22:31AM +0530, Sughosh Ganu wrote:
-> > >
-> > > > The LMB memory map is now persistent and global. Running the tests for
-> > > > the LMB module will result in the memory map getting reset, and this
-> > > > will have side-effects on the rest of the working of the platform. Run
-> > > > the LMB tests only on the sandbox platform, which is meant for running
-> > > > such kinds of tests.
-> > > >
-> > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > >
-> > > I'm not sure about this. We can reset real hardware as often as we need,
-> > > too. Did you run in to problems with this test on non-sandbox?
+
+--6HhyscQxHo/Xzjk4
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Jun 11, 2024 at 03:01:00PM +0100, Jiaxun Yang wrote:
+>=20
+>=20
+> =E5=9C=A82024=E5=B9=B46=E6=9C=8811=E6=97=A5=E5=85=AD=E6=9C=88 =E4=B8=8B=
+=E5=8D=882:52=EF=BC=8CTom Rini=E5=86=99=E9=81=93=EF=BC=9A
+> > On Tue, Jun 11, 2024 at 02:29:38PM +0100, Jiaxun Yang wrote:
+> >>=20
+> >>=20
+> >> =E5=9C=A82024=E5=B9=B46=E6=9C=8811=E6=97=A5=E5=85=AD=E6=9C=88 =E4=B8=
+=8B=E5=8D=882:02=EF=BC=8CHeinrich Schuchardt=E5=86=99=E9=81=93=EF=BC=9A
+> >> > On 22.05.24 17:34, Jiaxun Yang wrote:
+> >> >> For LoongArch the start of the image is not the entry
+> >> >> point to the image.
+> >> >
+> >> > Looking at arch/loongarch/kernel/head.S there seem to be two cases:
+> >> >
+> >> > * The kernel has an EFI stub (CONFIG_EFI_STUB=3Dy).
+> >> >    The legacy physical entry point is available at offset 0x08 of the
+> >> > header.
+> >> > * The kernel has no EFI stub.
+> >> >    The kernel entry point matches the start of the image.
+> >> >
+> >> > Where do you differentiate between the cases?
+> >>=20
+> >> Hi Heinrich,
+> >>=20
+> >> In case there is no EFI stub LoongArch would use elf format vmlinux, t=
+here
+> >> is no real "raw" image for us.
+> >>=20
+> >> bootelf can't be used at the moment as it doesn't setup FDT and other =
+environments
+> >> properly.
+> >>=20
+> >> I'm planning to implement a bootlinuxelf command for this case, as MIP=
+S, LoongArch,
+> >> xtensa are all using ELF as default kernel image format.
 > >
-> > But do we want to reset the state of the LMB memory map on real
-> > hardware? This was working up until now because of the local nature of
-> > the LMB variables. But if the LMB memory map is to be persistent,
-> > should we allow it to be changed for running some test? That would
-> > have side effects? I think running these tests on sandbox should
-> > suffice. I mean there isn't any aspect of the LMB module that is not
-> > getting tested on sandbox, right?
->
-> When running our test/ test code on hardware side effects are fine, this
-> isn't a POST type test that gets used in production. Do changes, reset
-> platform as needed just like sandbox, etc. And yes, a user running tests
-> that have side effects manually and then not dealing with them is user
-> error.
->
+> > Please note that we have CONFIG_CMD_ELF_FDT_SETUP already, so adjusting
+> > things so that bootelf works for this case should be doable without a
+> > new command.
+>=20
+> This is a little bit broken as then you'll need to bring architecture spe=
+cific
+> functions to bootelf to setup boot registers, initrd etc. It's fine for A=
+rm64 which
+> you just need to throw fdt into a location in memory but for MIPS and Loo=
+ngArch=20
+> you have to setup a good deal of other stuff.
+>=20
+> Ideally those setups should be done with bootm_run_states as what we've d=
+one at
+> booti, but that would be a semantic to bootelf command. I know many exist=
+ing
+> MIPS bare-metal applications rely on argc/argv style bootelf and I don't =
+want to
+> break them, thus I think a new command is necessary.
 
-So the lmb changes are scary to begin with. I think the tests
-shouldn't be limited to sandbox.
-Can't we plan c tests in test/dm etc that call functions and test?
-IOW we could allocate EFI memory and try to overwrite it with LMB,
-vice versa etc, without having to deal with the predefined areas.
+We should discuss this in its own thread, yeah. It's been a long while
+since I had to bootelf something non-trivial and one of the issues is
+that yes, a bunch of quiesce the system functionality wasn't done. Maybe
+it's just a matter of adding a flag to bootelf to say we're booting an
+OS rather than simple app and so call the normal boot os prep function
+chain.
 
-Regards
-/Ilias
-> --
-> Tom
+--=20
+Tom
+
+--6HhyscQxHo/Xzjk4
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZoWqUACgkQFHw5/5Y0
+tyyoAAv/S+m9MvwdLiS1+lHQBfI0XXdPKrCgUbNwIohuWro9gKyHcyt5XrxuxB1A
+IoNQ23/KRI/ACQsaOfOtNI62PmabUSE5mecNuTZ/Ch5dkDdb9ykyghWlvBQ+VFkp
+2yBGeXGV4ID1hGsbbmqvIiw5UENacNIMk49/XPcWQdz9/j1waea2BPkaOPZffhYB
+SDqY0qgYOeyn/LB4bblWiARfrbC/1uJ+YYxwIreGMC4yPTzfJloRc8r9NH39SWAI
+TPyGz80kowkckv0BFXIkYSZ3lnhF1b2EHdpvZoIxMGVU5ttI0+jnB3rArp8OTMr+
+k7nDW4Nkw+zpfaOyPEbQk95iPLNQOe6tM78OHyNantyNsfspR4f0IF3HpI87IC7+
+ovY+2tQrn25bWWOdiFeGnH4UMiDelU7FwShIyhrXzrguXDOl2bwXc/Hy3pcvgr81
+elOPGAy9YrBxbZHEA1wkwy5HEaEDAIt8jkMiw0bQzV7pYIdFOLwfKZ5qb9s2JU9m
+eoaVhy3I
+=wIec
+-----END PGP SIGNATURE-----
+
+--6HhyscQxHo/Xzjk4--
