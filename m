@@ -4,97 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF351C27C65
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 20:11:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCBA3C27C65
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 21:00:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20EA6886FF;
-	Tue, 11 Jun 2024 22:11:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 17745886D5;
+	Tue, 11 Jun 2024 23:00:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="auC1M8t4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JUQwr55Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B91D988617; Tue, 11 Jun 2024 22:09:43 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id 21A788871E; Tue, 11 Jun 2024 23:00:04 +0200 (CEST)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65FA8887B9
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 22:09:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BA49888714
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 23:00:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-6b05e504bceso35787326d6.2
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 13:09:40 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=maximmosk4@gmail.com
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2ead2c6b50bso66045431fa.0
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 14:00:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718136579; x=1718741379; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=tko77FxFECfapW6ub6Nfpp7SBXNLb1hOK7jOJ5eNWjA=;
- b=auC1M8t40JnQBbOnCSlSuK8fticO5dFnH0RCTKbfBemtEDjMQ/vGIdlJ/GVdDklp1r
- kmYyj+M6YrPDs8+OmPmRC+GK2fw6Ssy7g6+q/bAesjokucNG3IP1z3mbRL1cxHj/C6FG
- Te6Ev0XvL8hGOrHRmyGY+dYnIl+uLjuT1a+iE=
+ d=gmail.com; s=20230601; t=1718139601; x=1718744401; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=JRVGUDEZ+PDOuvDDEY+uCE8xggAEE/SPFKYE2vXu3CI=;
+ b=JUQwr55ZUtzbglsYhVaXxPx9ZsuX9QPZnw9D2v2qiBs8DA3gvZkahJMMN1c5LCYR8t
+ vvRg3Y3jEiwcuvf6rPOKz0Otv+835RaDnY49gvoEU2JLRXuSsWMEgpToqGGDI+k3c/Oh
+ fk6XwWw+SJhCR4HBOWjGwur2Vd+aexrjb7Gj6Xb7KRDRLz2Sa0Z4ZDbXLi8Uf0Zaj9MF
+ T/tsR30xldlYy8qur0utk5g1kx3gCNLCEqkb2gcOwdfS0oHlic7DH/En2SNHzUufeOkP
+ iKRBNCvKYZmT3UgEZxa3a0KF/nDEsqqQMwu12Ph58i9OU2P6hRU30jrGPBQ6t0i9pIzx
+ Zn2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718136579; x=1718741379;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=tko77FxFECfapW6ub6Nfpp7SBXNLb1hOK7jOJ5eNWjA=;
- b=a2FeNal43Tj4u7/d3A8gZdyFlg683TwgdtULpgZwYBogXBkC1ldsiZ+MTUFE0cpLuM
- r61idP+qwa5Oed+vk5NVvibIHcRx/Gt3zdZ2+KRTJwykupKkR0y3jCeQ/pI9LNGRa0LB
- yD9HsKfQIwx4uRgO6wTTakNLZnct6+aMcsNuXznM6iWMY+LRoELyS25vuW4z5qli4nOE
- ay7HyWuZkOjlseJCMkNHO+SspJYFcCd3yusddxneztKpz/sXAtV0Ari79n54avvNovNV
- qMElkYqQdcDiCjRtyKj0TIXxfW0fktVWOOAjtR6qfvZVedPhhql1B9oAOLy/whcbEAnR
- NK0A==
-X-Gm-Message-State: AOJu0YxB7Wi5oD7+dwSmlfrVRudrbmkfzblc/8yLYT8Npm1FRjJ18rlh
- kfRB1bvvSZFxdrDOgsZkp7jaWGPTyYJf5bNTCELPN4V+EEOAJQ5Mw5qp75IedfmjyTm9qjm3hyO
- Smq28ybMbw31g327qxRY1zGa2hcLGi30Y2PkVGOwWq886GEVImg==
-X-Google-Smtp-Source: AGHT+IG4qQvS5Dc2vHuRfyLzXkIQARykQC4lUbyYX5EWR11HOv3CxtWKrfQqIPPawT5B9B5p/3qXRomDrjQmiwOnJnk=
-X-Received: by 2002:a05:6214:5d8c:b0:6b0:737f:5348 with SMTP id
- 6a1803df08f44-6b0737f5600mr84698436d6.29.1718136579027; Tue, 11 Jun 2024
- 13:09:39 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1718139601; x=1718744401;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=JRVGUDEZ+PDOuvDDEY+uCE8xggAEE/SPFKYE2vXu3CI=;
+ b=t27SHrxXa3fACZe3LS2eviyoUF27OHgA3XoXwQAu4vIc7MrZBoe3u9ESikXa2zhsUD
+ f8bC2jA5pQqsRs+rJtGoteIPOM+F0txEoRV5Io7KWEa9IAfOcClqNsI2p44eiZejgtRx
+ xbNcqle3PF3hzMcdJOJ4Z251hCXOmLBEwGSLaj8L3HRZ5QbiExejXp32wRzTIf86spQO
+ 1Xr7jfbnm5l/nut3KcMqetREtUqKubI9mo8Sass3/pJ1K4WtMy3JLIvMFstRqXax/DC2
+ cjuoQjuiBGQVvVqLxWSLK0mM6d5zuVfM3yqcyJWGc8x8Ar7fRLB2TCMB2575zmmlFeht
+ b+dw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWwXuqHl6LeYN9jWaOvsHvX7c8/1BCkX3scOP5/49Abv4JdpWqytWpnYMUUNlBmqvZqnVnhh2mFQIG3q4sxyX9y8LYRRg==
+X-Gm-Message-State: AOJu0YwkXASKx0BRMVQQDNGRnQGaiydzipZo4RpQ7OPnAc0Z4Z70/Uf2
+ uilO7adxhLfECWBa92TrxdWwci2wVU383hwoKYxrTuWkMNNUpsoJ
+X-Google-Smtp-Source: AGHT+IHAHYK6sTzuHmbwYf1XiVVvBP3+c3tFx8g/B2Ay+21AVveFKCC6drpvJI+FUEhqsbIDMJ6oLA==
+X-Received: by 2002:a2e:8705:0:b0:2ea:f719:317b with SMTP id
+ 38308e7fff4ca-2eaf7287c04mr67435591fa.3.1718139600645; 
+ Tue, 11 Jun 2024 14:00:00 -0700 (PDT)
+Received: from [192.168.1.6] (109-252-15-116.nat.spd-mgts.ru. [109.252.15.116])
+ by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-2ebe62669d1sm11941111fa.69.2024.06.11.13.59.59
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 11 Jun 2024 14:00:00 -0700 (PDT)
+Message-ID: <c81b58cb-5304-4b33-adbb-590cd530afd4@gmail.com>
+Date: Tue, 11 Jun 2024 23:59:54 +0300
 MIME-Version: 1.0
-References: <20240611200156.2245525-1-sjg@chromium.org>
-In-Reply-To: <20240611200156.2245525-1-sjg@chromium.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 11 Jun 2024 14:09:28 -0600
-Message-ID: <CAFLszTiF=JdWuDsunut1WAKUOPKaH-PTjLvRoRBtEy07SXQAOw@mail.gmail.com>
-Subject: Re: [PATCH 00/42] labgrid: Provide an integration with Labgrid
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Alexander Gendin <agendin@matrox.com>,
- Alexey Brodkin <Alexey.Brodkin@synopsys.com>, 
- Allen Martin <amartin@nvidia.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Andrew Davis <afd@ti.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Christian Taedcke <christian.taedcke@weidmueller.com>, 
- Dan Carpenter <dan.carpenter@linaro.org>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Jerome Brunet <jbrunet@baylibre.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
- Lukas Funke <lukas.funke@weidmueller.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Marek Vasut <marex@denx.de>, Martyn Welch <martyn.welch@collabora.com>, 
- =?UTF-8?Q?Michal_Such=C3=A1nek?= <msuchanek@suse.de>, 
- Neha Malcom Francis <n-francis@ti.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Nishanth Menon <nm@ti.com>, 
- Pavel Herrmann <morpheus.ibis@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
- Peter Robinson <pbrobinson@gmail.com>,
- Philippe Reynes <philippe.reynes@softathome.com>, 
- Samuel Holland <samuel@sholland.org>, Sean Anderson <seanga2@gmail.com>, 
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
- Trevor Woerner <twoerner@gmail.com>, Vignesh Raghavendra <vigneshr@ti.com>,
- u-boot-amlogic@groups.io
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Tue, 11 Jun 2024 22:11:36 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5] cmd: move ELF load and boot to lib/elf.c
+To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Maxim.Moskalets@kaspersky.com, quentin.schulz@theobroma-systems.com,
+ sjg@chromium.org, u-boot@lists.denx.de
+References: <20240605184334.13973-1-Maxim.Moskalets@kaspersky.com>
+ <b95386ab-ec35-4912-934d-c3b611953b55@gmx.de>
+ <20240606142136.GY68077@bill-the-cat>
+Content-Language: en-US
+From: "Maxim M. Moskalets" <maximmosk4@gmail.com>
+In-Reply-To: <20240606142136.GY68077@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,166 +98,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On 06.06.2024 17:21, Tom Rini wrote:
+> On Thu, Jun 06, 2024 at 09:02:43AM +0200, Heinrich Schuchardt wrote:
+>> On 6/5/24 20:43, Maxim Moskalets wrote:
+>>> From: Maxim Moskalets <maximmosk4@gmail.com>
+>>>
+>>> Loading and running the ELF image is the responsibility of the
+>>> library and should not be associated with the command line interface.
+>>>
+>>> It is also required to run ELF images from FIT with the bootm command
+>>> so as not to depend on the command line interface.
+>>>
+>>> Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
+>> In future versions please, include a change log separated from the
+>> commit message by ---, e.g.
+>>
+>> ---
+>> v6:
+>> 	foo changed to bar
+>> v5:
+>> 	xxx removed
+>> ---
+>>
+>> Best regards
+>>
+>> Heinrich
+> Do you have any other feedback, Heinrich?
+>
+I will take these comments into account in future patches.
+Are there any other comments?
 
-On Tue, 11 Jun 2024 at 14:02, Simon Glass <sjg@chromium.org> wrote:
->
-> Labgrid provides access to a hardware lab in an automated way. It is
-> possible to boot U-Boot on boards in the lab without physically touching
-> them. It relies on relays, USB UARTs and SD muxes, among other things.
->
-> By way of background, about 4 years ago I wrong a thing called Labman[1]
-> which allowed my lab of about 30 devices to be operated remotely, using
-> tbot for the console and build integration. While it worked OK and I
-> used it for many bisects, I didn't take it any further.
->
-> It turns out that there was already an existing program, called Labgrid,
-> which I did not know about at time (thank you Tom for telling me). It is
-> more rounded than Labman and has a number of advantages:
->
-> - does not need udev rules, mostly
-> - has several existing users who rely on it
-> - supports multiple machines exporting their devices
->
-> It lacks a 'lab check' feature and a few other things, but these can be
-> remedied.
->
-> On and off over the past several weeks I have been experimenting with
-> Labgrid. I have managed to create an initial U-Boot integration (this
-> series) by adding various features to Labgrid[2] and the U-Boot test
-> hooks.
->
-> I hope that this might inspire others to set up boards and run tests
-> automatically, rather than relying on infrequent, manual test. Perhaps
-> it may even be possible to have a number of labs available.
->
-> Included in the integration are a number of simple scripts which make it
-> easy to connect to boards and run tests:
->
-> ub-int <target>
->     Build and boot on a target, starting an interactive session
->
-> ub-cli <target>
->     Build and boot on a target, ensure U-Boot starts and provide an interactive
->     session from there
->
-> ub-smoke <target>
->     Smoke test U-Boot to check that it boots to a prompt on a target
->
-> ub-bisect
->     Bisect a git tree to locate a failure on a particular target
->
-> ub-pyt <target> <testspec>
->     Run U-Boot pytests on a target
->
-> Some of these help to provide the same tbot[4] workflow which I have
-> relied on for several years, albeit much simpler versions.
->
-> The goal here is to create some sort of script which can collect
-> patches from the mailing list, apply them and test them on a selection
-> of boards. I suspect that script already exists, so please let me know
-> what you suggest.
->
-> I hope you find this interesting and take a look!
->
-> [1] https://github.com/sjg20/u-boot/tree/lab6a
-> [2] https://github.com/labgrid-project/labgrid/pull/1411
-> [3] https://github.com/sjg20/uboot-test-hooks/tree/labgrid
-> [4] https://tbot.tools/index.html
->
->
-> Simon Glass (42):
->   trace: Update test to tolerate different trace-cmd version
->   binman: efi: Correct entry docs
->   binman: Regenerate nxp docs
->   binman: ti: Regenerate entry docs
->   binman: Update the entrydocs header
->   buildman: Make mrproper an argument to _reconfigure()
->   buildman: Make mrproper an argument to _config_and_build()
->   buildman: Make mrproper an argument to run_commit()
->   buildman: Avoid rebuilding when --mrproper is used
->   buildman: Add a flag to force mrproper on failure
->   buildman: Retry the build for current source
->   buildman: Add a way to limit the number of buildmans
->   dm: core: Enhance comments on bind_drivers_pass()
->   initcall: Correct use of relocation offset
->   am33xx: Provide a function to set up the debug UART
->   sunxi: Mark scp as optional
->   google: Disable TPMv2 on most Chromebooks
->   meson: Correct driver declaration for meson_axg_gpio
->   test: Allow signaling that U-Boot is ready
->   test: Make bootstd init run only on sandbox
->   test: Use a constant for the test timeout
->   test: Pass stderr to stdout
->   test: Release board after tests complete
->   log: Allow tests to pass with CONFIG_LOGF_FUNC_PAD set
->   test: Allow connecting to a running board
->   test: Decode exceptions only with sandbox
->   test: Avoid failing skipped tests
->   test: dm: Show failing driver name
->   test: Check help output
->   test: Create a common function to get the config
->   test: Introduce the concept of a role
->   test: Move the receive code into a function
->   test: Separate out the exception handling
->   test: Detect dead connections
->   test: Tidy up remaining exceptions
->   test: Introduce lab mode
->   test: Improve handling of sending commands
->   test: Fix mulptiplex_log typo
->   test: Avoid double echo when starting up
->   test: Try to shut down the lab console gracefully
->   test: Add a section for closing the connection
->   CI: Allow running tests on sjg lab
->
->  .gitlab-ci.yml                                | 151 +++++++++++++++++
->  arch/arm/dts/sunxi-u-boot.dtsi                |   1 +
->  arch/arm/mach-omap2/am33xx/board.c            |  18 +-
->  configs/chromebook_link64_defconfig           |   1 +
->  configs/chromebook_link_defconfig             |   1 +
->  configs/chromebook_samus_defconfig            |   1 +
->  configs/chromebook_samus_tpl_defconfig        |   1 +
->  configs/nyan-big_defconfig                    |   4 +-
->  configs/snow_defconfig                        |   1 +
->  drivers/core/lists.c                          |  16 ++
->  drivers/pinctrl/meson/pinctrl-meson-axg-pmx.c |   2 +-
->  drivers/pinctrl/meson/pinctrl-meson-axg.c     |   4 +-
->  drivers/pinctrl/meson/pinctrl-meson-axg.h     |   2 +-
->  drivers/pinctrl/meson/pinctrl-meson-g12a.c    |   4 +-
->  lib/initcall.c                                |   6 +-
->  test/py/conftest.py                           |  86 ++++++++--
->  test/py/tests/test_dm.py                      |   5 +-
->  test/py/tests/test_help.py                    |   6 +-
->  test/py/tests/test_log.py                     |  11 +-
->  test/py/tests/test_trace.py                   |   6 +-
->  test/py/tests/test_ut.py                      |   1 +
->  test/py/u_boot_console_base.py                | 154 ++++++++++++------
->  test/py/u_boot_console_exec_attach.py         |  31 +++-
->  test/py/u_boot_console_sandbox.py             |   2 +-
->  test/py/u_boot_spawn.py                       | 123 ++++++++++++--
->  test/test-main.c                              |  16 +-
->  tools/binman/entries.rst                      | 115 +++++++++----
->  tools/binman/entry.py                         |   2 +-
->  tools/binman/etype/efi_capsule.py             |  40 ++---
->  tools/binman/etype/efi_empty_capsule.py       |  22 +--
->  tools/binman/etype/ti_secure.py               |  45 ++---
->  tools/buildman/builder.py                     |  18 +-
->  tools/buildman/builderthread.py               |  44 +++--
->  tools/buildman/buildman.rst                   |   8 +-
->  tools/buildman/cmdline.py                     |   6 +-
->  tools/buildman/control.py                     | 141 +++++++++++++++-
->  tools/buildman/pyproject.toml                 |   6 +-
->  tools/buildman/test.py                        | 121 ++++++++++++++
->  tools/u_boot_pylib/terminal.py                |   7 +-
->  39 files changed, 1003 insertions(+), 226 deletions(-)
->
-> --
-> 2.34.1
->
+Best regards
 
-Here is an example run (scroll to the right):
-
-https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/21081
-
-Regards,
-Simon
+Maxim
