@@ -4,72 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35627C25B76
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 10:54:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBBF3C25B76
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 10:59:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6838D88602;
-	Tue, 11 Jun 2024 12:54:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 2242D87BF4;
+	Tue, 11 Jun 2024 12:59:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=arachsys.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HTnjT3UU";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31BD78860A; Tue, 11 Jun 2024 12:54:25 +0200 (CEST)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01144885D0
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 12:54:22 +0200 (CEST)
+ id 18E9288623; Tue, 11 Jun 2024 12:59:04 +0200 (CEST)
+Received: from cdw.me.uk (cdw.me.uk [91.203.57.136])
+ by phobos.denx.de (Postfix) with ESMTP id B5B938752A
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 12:59:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-628c1f09f5cso11545137b3.1
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 03:54:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718103262; x=1718708062; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LMrnEiRPY7MyPCwnxgVJXWOJY05IQri3CPwIf9EfUIQ=;
- b=HTnjT3UUH2wyW+961iAJ5aEL6dp5TMUJmnkXetohhhaMYJHS7/u8o+QcV8pFOHF6Ze
- ucc8prEk3Bmk7Cb2OIx9UgYRAS8R+g5HqtmJTbFiJdopePXpdepXLMVoC5R8GwVKh9QQ
- GMCSn0grgwaXQJEUXeIEmVLYFWiQqcMBK9KB4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718103262; x=1718708062;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=LMrnEiRPY7MyPCwnxgVJXWOJY05IQri3CPwIf9EfUIQ=;
- b=V+BltHLcIs7fmQMxWDxBl2tOmJKVeRcTbzi6jvpkW5o+K0zTgFoDgS7f4WskMjY67R
- JKvH3ZVcTREok3XzMYao1ttjjeZqCVjWhSe/PvAGxBa+6QZwk1Q7E/jfNou7tjB2CA/R
- Su5k33damSQpq92F4Bu1XOkMH/iTm//ki7BpwPEZQWI30BVuOnPupBU2Wsh/DcoSX2XA
- AJEjGiBjEEnRabS/qWHyy67Avtch7X6Sqqs0CSGqhqsA+qyg3ZwILpksPNdE4srOatd9
- r/rhmZqd96J3hmpNZ5g+IyKRONClGjh5bwkId+x+QVhLGtuZGmXN8nGHKaS+XvqY8t2F
- bsSQ==
-X-Gm-Message-State: AOJu0Yyyf7A0xMd4ch9F9O23GHs7e237bibmhGMGC809yzjT9+YLD23U
- yKNnTWSoySOFDBrdGYNkOvOsqAj1nVsLRq6QmmmY0Nq5jZ9gQcq3EeS2Bn0+oiggmCUpkJrpcmE
- Pa9lMosCaYgv2lwQuOxIrULRNvBl558xN6C9+
-X-Google-Smtp-Source: AGHT+IGgad9BbpHhTMgCGxTvOVZ9Ur1CwdN79L4bJ4gVRYry46NgbLETZtz5wNonWdVL9PmEO7Aq+Q46tqk/g/mzBqg=
-X-Received: by 2002:a81:6fd5:0:b0:627:e281:6763 with SMTP id
- 00721157ae682-62cd55c59ffmr121988197b3.14.1718103261671; Tue, 11 Jun 2024
- 03:54:21 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240605032521.1142768-1-sjg@chromium.org>
- <20240605032521.1142768-6-sjg@chromium.org>
- <CAEfUkUKABkoHWr8i5fLNxgLAcs_7AdVYJEJj_UJj_Oby0HmwNA@mail.gmail.com>
-In-Reply-To: <CAEfUkUKABkoHWr8i5fLNxgLAcs_7AdVYJEJj_UJj_Oby0HmwNA@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 11 Jun 2024 04:54:10 -0600
-Message-ID: <CAFLszThqijQQjvSgGAkK387KXV9mjo8xs9tEK_jfKGocYyZzGQ@mail.gmail.com>
-Subject: Re: [PATCH 5/9] fdt: Correct condition for bloblist existing
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerry Van Baren <vanbaren@cideas.com>, 
- Shiji Yang <yangshiji66@outlook.com>
-Content-Type: text/plain; charset="UTF-8"
+ dmarc=none (p=none dis=none) header.from=arachsys.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=chris@arachsys.com
+Received: from [31.94.10.207] (helo=smtpclient.apple)
+ by delta.arachsys.com with esmtpa (Exim 4.80)
+ (envelope-from <chris@arachsys.com>) id 1sGzDO-0000AO-AX
+ for u-boot@lists.denx.de; Tue, 11 Jun 2024 11:58:58 +0100
+From: Chris Webb <chris@arachsys.com>
+Content-Type: text/plain;
+	charset=us-ascii;
+	delsp=yes;
+	format=flowed
+Content-Transfer-Encoding: 7bit
+Mime-Version: 1.0 (Mac OS X Mail 14.0 \(3654.120.0.1.15\))
+Subject: Debugging gpio-hogs which don't get probed
+Message-Id: <CE13B0FF-EE3C-44C6-A17C-65C8A945713A@arachsys.com>
+Date: Tue, 11 Jun 2024 11:59:00 +0100
+To: u-boot@lists.denx.de
+X-Mailer: Apple Mail (2.3654.120.0.1.15)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,70 +52,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
+I'm building u-boot for a mt7981a board, very similar to the in-tree  
+mt7981-emmc-rfb. For reference, my device tree and output of make  
+savedefconfig are here:
 
-On Mon, 10 Jun 2024 at 13:13, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> Hi Simon,
->
-> On Tue, 4 Jun 2024 at 23:27, Simon Glass <sjg@chromium.org> wrote:
->>
->> On some boards, the bloblist is created in SPL once SDRAM is ready. It
->> cannot be accessed until that point, so is not available early in SPL.
->>
->> Add a condition to avoid a hang in this case.
->>
->> This fixes a hang in chromebook_coral
->>
->> Fixes: 70fe2385943 ("fdt: Allow the devicetree to come from a bloblist")
->>
->> Signed-off-by: Simon Glass <sjg@chromium.org>
->> ---
->>
->>  lib/fdtdec.c | 12 ++++++++++--
->>  1 file changed, 10 insertions(+), 2 deletions(-)
->>
->> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
->> index b2c59ab3818..b141244e3b9 100644
->> --- a/lib/fdtdec.c
->> +++ b/lib/fdtdec.c
->> @@ -1669,8 +1669,16 @@ int fdtdec_setup(void)
->>  {
->>         int ret = -ENOENT;
->>
->> -       /* If allowing a bloblist, check that first */
->> -       if (CONFIG_IS_ENABLED(BLOBLIST)) {
->> +       /*
->> +        * If allowing a bloblist, check that first. This would be better
->> +        * handled with an OF_BLOBLIST Kconfig, but that caused far too much
->> +        * argument, so add a hack here, used e.g. by chromebook_coral
->
-> I am a bit confused by this comment - It means you will not use OF_BLOBLIST,
-> but actually you are using it below. Is it a typo?
+   https://gist.github.com/arachsys/98048980728c652bea641b42cfd41a40
 
-Basically it would be cleaner to have a separate, phase-specific
-Kconfig control as to whether the DT can come from the bloblist (I
-can't remember the Kconfig name I suggested, nor the patch as it was
-last year sometime). But for now I am adding this hack to get a few
-boards working again.
+Everything boots fine, but I have a handful of gpios which need to be set  
+to fixed values before booting the kernel to enable a 5g modem. I can do  
+this with
 
->
->>
->> +        * The necessary test is whether the previous stage passed a bloblist,
->> +        * not whether this one creates one.
->> +        */
->> +       if (CONFIG_IS_ENABLED(OF_BLOBLIST) &&
->> +           (spl_prev_phase() != PHASE_TPL ||
->> +            !IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
->>                 ret = bloblist_maybe_init();
->>                 if (!ret) {
->>                         gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
->> --
->> 2.34.1
->>
->
-> Regards,
-> Raymond
+   gpio clear 10; gpio set 5; gpio set 9; gpio 11
 
-Regards,
-Simon
+which works fine, but I think the 'official' solution for this might be  
+using u-boot's gpio-hog support?
+
+With that in mind, I added
+
+
+   &gpio {
+   	hub_power {
+   		gpio-hog;
+   		gpios = <5 GPIO_ACTIVE_HIGH>;
+   		output-high;
+   	};
+
+   	modem_control {
+   		gpio-hog;
+   		gpios = <9 GPIO_ACTIVE_HIGH>;
+   		output-high;
+   	};
+
+   	modem_reset {
+   		gpio-hog;
+   		gpios = <10 GPIO_ACTIVE_HIGH>;
+   		output-low;
+   	};
+
+   	modem_power {
+   		gpio-hog;
+   		gpios = <11 GPIO_ACTIVE_HIGH>;
+   		output-high;
+   	};
+   };
+
+with CONFIG_GPIO_HOG=y, but this doesn't seem to work on either u-boot.git  
+HEAD or 2024.07-rc.
+
+To try to see what was going on better, I added some debug printfs:
+
+   --- a/u-boot/drivers/gpio/gpio-uclass.c
+   +++ b/u-boot/drivers/gpio/gpio-uclass.c
+   @@ -328,6 +330,8 @@ static int gpio_hog_of_to_plat(struct udevice *dev)
+
+    static int gpio_hog_probe(struct udevice *dev)
+    {
+   +	printf("gpio_hog_probe called\n");
+   +
+    	struct gpio_hog_data *plat = dev_get_plat(dev);
+    	struct gpio_hog_priv *priv = dev_get_priv(dev);
+    	int ret;
+   @@ -1518,6 +1523,8 @@ void devm_gpiod_put(struct udevice *dev, struct gpio_desc *desc)
+
+    static int gpio_post_bind(struct udevice *dev)
+    {
+   +	printf("gpio_post_bind called\n");
+   +
+    	if (CONFIG_IS_ENABLED(GPIO_HOG) && dev_has_ofnode(dev)) {
+    		struct udevice *child;
+    		ofnode node;
+   @@ -1539,6 +1546,7 @@ static int gpio_post_bind(struct udevice *dev)
+    				 * since hogs can be essential to the hardware
+    				 * system.
+    				 */
+   +				printf("found a gpio-hog\n");
+    				dev_or_flags(child, DM_FLAG_PROBE_AFTER_BIND);
+    			}
+    		}
+
+This shows gpio_post_bind being called, then the four gpio-hogs found and  
+set to probe after bind, but the gpio_hog_probe function is never actually  
+called. Presumably this is the problem - if they're not probed then  
+they'll never take effect?
+
+I enabled CONFIG_DM_WARN and CONFIG_DM_DEBUG, which confirm that nothing  
+ever seems to be probing the gpio-hog children, but there aren't obviously  
+any errors or warnings related to them either. Nothing relevant happens  
+after gpio_post_bind is called.
+
+Is this a bug or is there some basic config/dts mistake on my part here?  
+Is there some other debug info I can get that might shed light on what's  
+going on, or some config prerequisite for DM_FLAG_PROBE_AFTER_BIND to work  
+that I'm likely to be missing?
+
+Best wishes,
+
+Chris.
