@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52CD4C25B76
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 09:49:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 893D8C25B76
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 09:50:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FF3A8836E;
-	Tue, 11 Jun 2024 11:49:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0D3F288653;
+	Tue, 11 Jun 2024 11:50:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="L88q9agr";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CaouA6v/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BD9988624; Tue, 11 Jun 2024 11:49:55 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 8AC3C88661; Tue, 11 Jun 2024 11:50:23 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 11556880A3
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 11:49:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7585C880A3
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 11:50:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a689ad8d1f6so652999866b.2
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 02:49:53 -0700 (PDT)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-57c72d6d5f3so3514834a12.1
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 02:50:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718099392; x=1718704192; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1718099421; x=1718704221; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LIV34FSG/o36CG2nBdhM4M7Crm0ujb+72nD8GOuqLzg=;
- b=L88q9agr932Zd9sBHWvy835u4RXGHhaFz9lzs2rEjNuXzUaw9S1lOqaK44mdl0QPdl
- bdwSjIBCy00mXkcSTV7zM21EVpJHh90ljSR33Nulm1kQlubav6ts6qPuxBcq514nSo6Q
- YxiIpwH2GL0j/T0Tz5d1VGfVwSDnqHjtP+8KuZ+fEY2WHlEVM59uVu24Pepm8PdDoG1p
- a4C0xSy8nuV7df40ohTI9zfm7zWgtXHneZWmpscrBibCx6I2yFNlTN9EYiG8aV0fhz5Y
- 2FqXb9A4KP3wl+RsTuOsC+PpI81KxKHjMFSi5omhgpvJWucoeWvDC6fvDs2eY//wgkZH
- mD/g==
+ bh=3lTIOwaa6e3caKErURgR12fIziIW2lJeKbytvhEN2xI=;
+ b=CaouA6v/yTPZiPxgmEciS5M4o5//nNYIHSDY9uBjnlP+dqTyNkZxUdfbcuFpeC6KKN
+ v/6Cn/gkKe1InHQ5dBFYPPuJ8egxk0jXjxEGOmCm04VWFZ7IbFYN046YMxJowJx+Y54T
+ DpCfINUpc1orlF6zI4hvMHdTZeaRqrMZHqGhmMhL6aUw8S1BwFOao0Oky4Fi87zC/IDy
+ aKY0+8Ikh2iwf6mkaLbc+uDBMeUFqOIGRSqIIN5tO5zX7X/nmQ7+/S9n7KZvm8LKNykR
+ RWzk7Wc8/y71mwlv6LP91r32s8VBc2jKxlIpda5keN5omZz+Ac5lJxJjLcQW3/1NhX6W
+ 1pyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718099392; x=1718704192;
+ d=1e100.net; s=20230601; t=1718099421; x=1718704221;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=LIV34FSG/o36CG2nBdhM4M7Crm0ujb+72nD8GOuqLzg=;
- b=bNr0+bnClDKvOaY0PK+kaMEuXNIKX+kYpCH6Hr/Tc44ZCU7jSAbN0bMwQKgE5bHhuq
- D6USfI7kOd2cPVWDvnmtPm7dyqgkVb3belA/EbBTaw1gW8GF8k/LKHyEqWqzdaZFsorA
- jnYlVLRcwMhEhmeqmmxLi6qRp1xs7dlQVRAGDSJYyBX98GhnUYyijUsF6e/dT6hHWuo+
- Spp+H2IBpmBFbOPFdH/yMp4IFh8ga8ThNh1Bx6sX7uGPa7dTfK6RMJT60EDPhP447Wey
- BO087ikwCGl0D6ZbIHc+JLt8m3If1qVhcyFV6tzFcx6BWxQ+Fi3Psqn4T2rsjAe9TI/4
- jwrQ==
+ bh=3lTIOwaa6e3caKErURgR12fIziIW2lJeKbytvhEN2xI=;
+ b=sGqfYBu2nkd+mZX24Pu9h9BhSlECYSBKLodjMgj/lpQFKhjoZJwXFY/fZpjRpILwAP
+ K5IkCu4UuLkV+wh1V2I1PuDofP/13JvXLZLZP4TjmD6WKzxIHFmAoJ3KBo65YnJlLpkU
+ e0/sRoA0QoE6UAqzTFGWgT0SJmK/XrXgZsR+d3m4R3IYJtubVEFNLaHlWHP652QzsmIj
+ 5AMERLAkPP6DWJBccg6QYIWko+T7OJ0z0i8XYY1enwgpYGylQG+IqYAlV0Ca0qcmHsgJ
+ 2yIcIS6AtjGX0Pa10P+5JgXgJWy0fHP3yK1wuK6MU+pHmfnEv9VgonROMz7Stt03uRhF
+ oPIA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUyUTg99gwvCXFyP8T7+KRvXt5i0AMEquyfIlnUQsp9VVN+0KAR3uEkietX+RdVmTmB6Akfzhndp2UGfuT/ZCaJODW2iA==
-X-Gm-Message-State: AOJu0YxpMTWdhQQYlTLNGu4cXDqokyhsYgOq3wHFoZoDwNXCKhzdwvYe
- PNasX5xs8fOTGImhMGHr9KYkBxBqT0kd3YQXU+GWjWRubx41SF3VAmME7tEL7mZE1a2cBAFAUWk
- /qzxxTnv/050oP089zNfFZu14Gi/GflReHzKpbg==
-X-Google-Smtp-Source: AGHT+IEd71qbReGD3pwZgWdBbMCV6COvlF3nVMIN8W+G4GXQMEmdYO1aCdEIoh+tyEhKOPymWhUgCcbH5q3PX7A4UmA=
-X-Received: by 2002:a17:906:ae4a:b0:a6e:46ab:9a9b with SMTP id
- a640c23a62f3a-a6e46ab9b22mr626400266b.31.1718099392300; Tue, 11 Jun 2024
- 02:49:52 -0700 (PDT)
+ AJvYcCX7W9GbDiB/pAyswq5RBmYs+4R3LNV4LFGOhRyrBLMNN2NrMbA5B+tW2lhxVb0n7OjtUWkmpJLHguI8iU1efTuR+rVoqQ==
+X-Gm-Message-State: AOJu0YwTCsBRWBECYZhyRaCMMX6xoJTLF4+SUuDvCvKJoh83eTcfsNZI
+ U4HsYT3G1vmym8BkyTFPitE9MhhVrDSwMS6iq/94BkYgoCLPQLObYjtLJbDp51bfgWtCUK/9dH+
+ 9tIyevwuVWhL3xAqlvDHHbFD7Eo+ZaGtm+WlbnQ==
+X-Google-Smtp-Source: AGHT+IF7VA+nwoU5IG1nkK7Dcf3xzJPDbM8wDHdD3SOv5o7XDXFpvQx0Gk71ffrS2+c/c0HoSK1/UbQ3D8iCJEwDiCk=
+X-Received: by 2002:a50:8e49:0:b0:57c:5cfc:3824 with SMTP id
+ 4fb4d7f45d1cf-57c5cfc3bccmr6905778a12.8.1718099420895; Tue, 11 Jun 2024
+ 02:50:20 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
- <20240607185240.1892031-18-sughosh.ganu@linaro.org>
- <11990152-63d9-4625-be0b-2fc278a8d27c@gmx.de>
-In-Reply-To: <11990152-63d9-4625-be0b-2fc278a8d27c@gmx.de>
+ <20240607185240.1892031-10-sughosh.ganu@linaro.org>
+ <5d133571-ba43-40c7-bd19-0c0a4e857034@gmx.de>
+In-Reply-To: <5d133571-ba43-40c7-bd19-0c0a4e857034@gmx.de>
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Tue, 11 Jun 2024 15:19:41 +0530
-Message-ID: <CADg8p970=RpO-dmyY0vNBz1KT=A0SPVTYJOTPyRhdYZN0+pvtA@mail.gmail.com>
-Subject: Re: [RFC PATCH 17/31] lmb: remove call to efi_lmb_reserve()
+Date: Tue, 11 Jun 2024 15:20:09 +0530
+Message-ID: <CADg8p94tXGdc69xE0tW1_JXT8oYhNSkV=hPfYp12x0Fe97TUhQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 09/31] lmb: allow for resizing lmb regions
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
@@ -93,79 +93,248 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 11 Jun 2024 at 14:42, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Tue, 11 Jun 2024 at 14:47, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
 > On 07.06.24 20:52, Sughosh Ganu wrote:
-> > The changes in the EFI memory map are now notified to the LMB
-> > module. There is therefore no need to explicitly get the efi memory
-> > map and set aside the EFI allocated memory.
+> > Allow for resizing of LMB regions if the region attributes match. The
+> > current code returns a failure status on detecting an overlapping
+> > address. This worked up until now since the LMB calls were not
+> > persistent and global -- the LMB memory map was specific and private
+> > to a given caller of the LMB API's.
+> >
+> > With the change in the LMB code to make the LMB reservations
+> > persistent, there needs to be a check on whether the memory region can
+> > be resized, and then do it if so. To distinguish between memory that
+> > cannot be resized, add a new flag, LMB_NOOVERWRITE. Reserving a region
+> > of memory with this attribute would indicate that the region cannot be
+> > resized.
 > >
 > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > > ---
-> >   lib/lmb.c | 35 -----------------------------------
-> >   1 file changed, 35 deletions(-)
+> >   include/lmb.h |   1 +
+> >   lib/lmb.c     | 120 ++++++++++++++++++++++++++++++++++++++++++++------
+> >   2 files changed, 107 insertions(+), 14 deletions(-)
 > >
-> > diff --git a/lib/lmb.c b/lib/lmb.c
-> > index 3059609aea..c9f6ca692e 100644
-> > --- a/lib/lmb.c
-> > +++ b/lib/lmb.c
-> > @@ -204,38 +204,6 @@ void arch_lmb_reserve_generic(ulong sp, ulong end, ulong align)
-> >       }
-> >   }
-> >
-> > -/**
-> > - * efi_lmb_reserve() - add reservations for EFI memory
-> > - *
-> > - * Add reservations for all EFI memory areas that are not
-> > - * EFI_CONVENTIONAL_MEMORY.
-> > - *
-> > - * Return:   0 on success, 1 on failure
-> > - */
-> > -static __maybe_unused int efi_lmb_reserve(void)
-> > -{
-> > -     struct efi_mem_desc *memmap = NULL, *map;
-> > -     efi_uintn_t i, map_size = 0;
-> > -     efi_status_t ret;
-> > -
-> > -     ret = efi_get_memory_map_alloc(&map_size, &memmap);
-> > -     if (ret != EFI_SUCCESS)
-> > -             return 1;
-> > -
-> > -     for (i = 0, map = memmap; i < map_size / sizeof(*map); ++map, ++i) {
-> > -             if (map->type != EFI_CONVENTIONAL_MEMORY) {
-> > -                     lmb_reserve_flags(map_to_sysmem((void *)(uintptr_t)
-> > -                                                     map->physical_start),
-> > -                                       map->num_pages * EFI_PAGE_SIZE,
-> > -                                       map->type == EFI_RESERVED_MEMORY_TYPE
-> > -                                           ? LMB_NOMAP : LMB_NONE);
+> > diff --git a/include/lmb.h b/include/lmb.h
+> > index 03bce2a50c..1d4cd255d2 100644
+> > --- a/include/lmb.h
+> > +++ b/include/lmb.h
+> > @@ -20,6 +20,7 @@
+> >   enum lmb_flags {
+> >       LMB_NONE                = 0x0,
+> >       LMB_NOMAP               = 0x4,
+> > +     LMB_NOOVERWRITE         = 0x8,
 >
+> Please, add the missing description for the new value. Using the first
+> available bit (0x01) would be expected.
 >
-> Now that you have removed the last usage of LMB_NOMAP, please, remove it
-> from enum lmb_flags.
+> Using the BIT macro would make it clearer that these are bits of a bitmap:
+>
+> enum lmb_flags {
+>         LMB_NONE                = BIT(0),
+>         LMB_NOOVERWRITE         = BIT(1),
+> };
 
-Not all instances are removed. This flag gets used for reserving FDT
-memory areas as well. Used in
-boot/image-fdt.c:boot_fdt_add_mem_rsv_regions().
+Noted. Will change.
 
 -sughosh
 
-> > -     }
-> > -     efi_free_pool(memmap);
-> > -
-> > -     return 0;
-> > -}
-> > -
-> >   /**
-> >    * lmb_reserve_common() - Reserve memory region occupied by U-Boot image
-> >    * @fdt_blob: pointer to the FDT blob
-> > @@ -255,9 +223,6 @@ void lmb_reserve_common(void *fdt_blob)
+>
+> Best regards
+>
+> Heinrich
+>
+>
+> >   };
 > >
-> >       if (CONFIG_IS_ENABLED(OF_LIBFDT) && fdt_blob)
-> >               boot_fdt_add_mem_rsv_regions(fdt_blob);
-> > -
-> > -     if (CONFIG_IS_ENABLED(EFI_LOADER))
-> > -             efi_lmb_reserve();
+> >   /**
+> > diff --git a/lib/lmb.c b/lib/lmb.c
+> > index de5a2cf23b..0a4f3d5bcd 100644
+> > --- a/lib/lmb.c
+> > +++ b/lib/lmb.c
+> > @@ -260,12 +260,88 @@ void lmb_add_memory(struct bd_info *bd)
+> >       }
 > >   }
 > >
-> >   /**
+> > +static bool lmb_region_flags_match(struct lmb_region *rgn, unsigned long r1,
+> > +                                enum lmb_flags flags)
+> > +{
+> > +     return rgn->region[r1].flags == flags;
+> > +}
+> > +
+> > +static long lmb_merge_overlap_regions(struct lmb_region *rgn, unsigned long i,
+> > +                                   phys_addr_t base, phys_size_t size,
+> > +                                   enum lmb_flags flags)
+> > +{
+> > +     phys_size_t rgnsize;
+> > +     unsigned long rgn_cnt, idx;
+> > +     phys_addr_t rgnbase, rgnend;
+> > +     phys_addr_t mergebase, mergeend;
+> > +
+> > +     rgn_cnt = 0;
+> > +     idx = i;
+> > +     /*
+> > +      * First thing to do is to identify how many regions does
+> > +      * the requested region overlap.
+> > +      * If the flags match, combine all these overlapping
+> > +      * regions into a single region, and remove the merged
+> > +      * regions.
+> > +      */
+> > +     while (idx < rgn->cnt - 1) {
+> > +             rgnbase = rgn->region[idx].base;
+> > +             rgnsize = rgn->region[idx].size;
+> > +
+> > +             if (lmb_addrs_overlap(base, size, rgnbase,
+> > +                                   rgnsize)) {
+> > +                     if (!lmb_region_flags_match(rgn, idx, flags))
+> > +                             return -1;
+> > +                     rgn_cnt++;
+> > +                     idx++;
+> > +             }
+> > +     }
+> > +
+> > +     /* The merged region's base and size */
+> > +     rgnbase = rgn->region[i].base;
+> > +     mergebase = min(base, rgnbase);
+> > +     rgnend = rgn->region[idx].base + rgn->region[idx].size;
+> > +     mergeend = max(rgnend, (base + size));
+> > +
+> > +     rgn->region[i].base = mergebase;
+> > +     rgn->region[i].size = mergeend - mergebase;
+> > +
+> > +     /* Now remove the merged regions */
+> > +     while (--rgn_cnt)
+> > +             lmb_remove_region(rgn, i + 1);
+> > +
+> > +     return 0;
+> > +}
+> > +
+> > +static long lmb_resize_regions(struct lmb_region *rgn, unsigned long i,
+> > +                            phys_addr_t base, phys_size_t size,
+> > +                            enum lmb_flags flags)
+> > +{
+> > +     long ret = 0;
+> > +     phys_addr_t rgnend;
+> > +
+> > +     if (i == rgn->cnt - 1 ||
+> > +             base + size < rgn->region[i + 1].base) {
+> > +             if (!lmb_region_flags_match(rgn, i, flags))
+> > +                     return -1;
+> > +
+> > +             rgnend = rgn->region[i].base + rgn->region[i].size;
+> > +             rgn->region[i].base = min(base, rgn->region[i].base);
+> > +             rgnend = max(base + size, rgnend);
+> > +             rgn->region[i].size = rgnend - rgn->region[i].base;
+> > +     } else {
+> > +             ret = lmb_merge_overlap_regions(rgn, i, base, size, flags);
+> > +     }
+> > +
+> > +     return ret;
+> > +}
+> > +
+> >   /* This routine called with relocation disabled. */
+> >   static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
+> >                                phys_size_t size, enum lmb_flags flags)
+> >   {
+> >       unsigned long coalesced = 0;
+> > -     long adjacent, i;
+> > +     long ret, i;
+> >
+> >       if (rgn->cnt == 0) {
+> >               rgn->region[0].base = base;
+> > @@ -290,23 +366,32 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
+> >                               return -1; /* regions with new flags */
+> >               }
+> >
+> > -             adjacent = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
+> > -             if (adjacent > 0) {
+> > +             ret = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
+> > +             if (ret > 0) {
+> >                       if (flags != rgnflags)
+> >                               break;
+> >                       rgn->region[i].base -= size;
+> >                       rgn->region[i].size += size;
+> >                       coalesced++;
+> >                       break;
+> > -             } else if (adjacent < 0) {
+> > +             } else if (ret < 0) {
+> >                       if (flags != rgnflags)
+> >                               break;
+> >                       rgn->region[i].size += size;
+> >                       coalesced++;
+> >                       break;
+> >               } else if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
+> > -                     /* regions overlap */
+> > -                     return -1;
+> > +                     if (flags == LMB_NONE) {
+> > +                             ret = lmb_resize_regions(rgn, i, base, size,
+> > +                                                      flags);
+> > +                             if (ret < 0)
+> > +                                     return -1;
+> > +
+> > +                             coalesced++;
+> > +                             break;
+> > +                     } else {
+> > +                             return -1;
+> > +                     }
+> >               }
+> >       }
+> >
+> > @@ -448,7 +533,7 @@ static phys_addr_t lmb_align_down(phys_addr_t addr, phys_size_t size)
+> >   }
+> >
+> >   static phys_addr_t __lmb_alloc_base(phys_size_t size, ulong align,
+> > -                                 phys_addr_t max_addr)
+> > +                                 phys_addr_t max_addr, enum lmb_flags flags)
+> >   {
+> >       long i, rgn;
+> >       phys_addr_t base = 0;
+> > @@ -498,7 +583,7 @@ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr)
+> >   {
+> >       phys_addr_t alloc;
+> >
+> > -     alloc = __lmb_alloc_base(size, align, max_addr);
+> > +     alloc = __lmb_alloc_base(size, align, max_addr, LMB_NONE);
+> >
+> >       if (alloc == 0)
+> >               printf("ERROR: Failed to allocate 0x%lx bytes below 0x%lx.\n",
+> > @@ -507,11 +592,8 @@ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr)
+> >       return alloc;
+> >   }
+> >
+> > -/*
+> > - * Try to allocate a specific address range: must be in defined memory but not
+> > - * reserved
+> > - */
+> > -phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
+> > +static phys_addr_t __lmb_alloc_addr(phys_addr_t base, phys_size_t size,
+> > +                                 enum lmb_flags flags)
+> >   {
+> >       long rgn;
+> >
+> > @@ -526,13 +608,23 @@ phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
+> >                                     lmb.memory.region[rgn].size,
+> >                                     base + size - 1, 1)) {
+> >                       /* ok, reserve the memory */
+> > -                     if (lmb_reserve(base, size) >= 0)
+> > +                     if (lmb_reserve_flags(base, size, flags) >= 0)
+> >                               return base;
+> >               }
+> >       }
+> > +
+> >       return 0;
+> >   }
+> >
+> > +/*
+> > + * Try to allocate a specific address range: must be in defined memory but not
+> > + * reserved
+> > + */
+> > +phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
+> > +{
+> > +     return __lmb_alloc_addr(base, size, LMB_NONE);
+> > +}
+> > +
+> >   /* Return number of bytes from a given address that are free */
+> >   phys_size_t lmb_get_free_size(phys_addr_t addr)
+> >   {
 >
