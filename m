@@ -4,83 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13412C27C75
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 21:02:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87F41C27C65
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 21:04:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30AF78876D;
-	Tue, 11 Jun 2024 23:01:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BC32688755;
+	Tue, 11 Jun 2024 23:04:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rGjy5xx1";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="g0YRgeyy";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="fdHvWSqC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C924288771; Tue, 11 Jun 2024 23:01:51 +0200 (CEST)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6156E88714; Tue, 11 Jun 2024 23:04:18 +0200 (CEST)
+Received: from wfhigh4-smtp.messagingengine.com
+ (wfhigh4-smtp.messagingengine.com [64.147.123.155])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E75D8839F
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 23:01:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E530C8839F
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 23:04:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-5b52b0d0dfeso3073548eaf.0
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 14:01:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718139708; x=1718744508; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0jIGpiVFUcF5+nuR/QdKPw+qarACmsnqSaVMbp4weeg=;
- b=rGjy5xx1VI1NaqTzeydyEmJCBuVgLyOPeRejFKSx18hu1bW6+IQCkDR2hQ4vqOWmPn
- SRmTd6jP2FIk7sWLz+yPB95RVFx43n2axI3gqjBtdiOzgx3thVzQbxWbDA3kKdRioyVd
- VCTSAEECNfvUq8v4qHTDpNX6ytm4h5ELUxb0I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718139708; x=1718744508;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0jIGpiVFUcF5+nuR/QdKPw+qarACmsnqSaVMbp4weeg=;
- b=nVLdfwZl/oLtTJUUrRLyy3YaCQ4ZYqZXsayPIJaeD6lqhbN8Ptk5eiTHWb9pgK6gy7
- wVnGsPHdgykX886mReFHdVljNWE4NRhR56eQE4vNDnfkncRkw1UAQHKdvD1k50j6VcEH
- akFh4JueUzCUgg7iJJV9JaBF3MDp66BQyJ1sLSe3v2a0YMfsKp90qdC4OQUSM+LHWW0F
- rJ0cqiRfSUZUe4/unmP6vRvKRbwq4dklP5gEl/rf3nMaIERflyukZSQdDSBv2qoIqIQE
- WrKFnAUUB+Vvek+cdRssPx3xsVKAw9iegbhauN+93a6epJRMwL0e39MWC+GkoYNMaq71
- VQEw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUrtlPeqRwn0yunKW6X9KByO5c9PooOJaUqJ+gLL2kgLf0+epEtMKRDX8J4RK9L1j2fhO1Q1ytnI9NCf4Pc/Rf2+mblUg==
-X-Gm-Message-State: AOJu0YwV5MIUq77wxGcsigcPqaxsSC9JVY2m30C4byTh7NNIhbOk1wDF
- wx1UzU3tDXArgzUPcw3asVk5hlB03R3OetDxqN+j+oy2Ph+nBMOebsyxcnkymyk=
-X-Google-Smtp-Source: AGHT+IEP0FjRiPHn4/fM07bhjwaMoN0I3UcjTvqFCNrVXZAYJik1T++4dXAD6NOa2DqL+Nk24PyzZA==
-X-Received: by 2002:a05:6820:168e:b0:5bb:672:404d with SMTP id
- 006d021491bc7-5bb067242a8mr6338436eaf.7.1718139707993; 
- Tue, 11 Jun 2024 14:01:47 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
- [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5bb33adc67esm124542eaf.13.2024.06.11.14.01.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Jun 2024 14:01:47 -0700 (PDT)
-Date: Tue, 11 Jun 2024 15:01:45 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
- Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>
-Subject: Re: [RFC PATCH 04/31] lmb: remove local instances of the lmb
- structure variable
-Message-ID: <20240611210145.GM68077@bill-the-cat>
-References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
- <20240607185240.1892031-5-sughosh.ganu@linaro.org>
- <CAFLszTjQW72_Z8Dx4g1mVx5Y=wq9xeXYVBffxLUto6sDp6CMbw@mail.gmail.com>
+ spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
+ by mailfhigh.west.internal (Postfix) with ESMTP id E16951800146;
+ Tue, 11 Jun 2024 17:04:13 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute6.internal (MEProxy); Tue, 11 Jun 2024 17:04:14 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
+ cc:cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:message-id:mime-version:reply-to
+ :subject:subject:to:to; s=fm2; t=1718139853; x=1718226253; bh=Ij
+ Vi7E3MQU2knldMvNctk5o6SPH8mbesc/DouuhnzCA=; b=g0YRgeyyH0x1LpqBg/
+ 3Of0uTEc+6jg/Fh+tkGcBffIW9ssnDUyl2nhrASrwNlU7UwhqphvaMoktW5RooTu
+ AMAeOM+HNQJvaDWPeXr2qUGFRO9mWSTl+mnBQGdFaPuUHzM6/gRUlIc6OT3NtXIR
+ ZL1e9lb4H4zJiNjv2rzmbdb9QzgQsSWDIofMx9sYluRIkUBht4XAsnL6sWK/oEix
+ tByxGeDmQMNq1UGIShdMK/JTzCi89kxSVvoC68HhC0DUmmt2PCwfDqX5OJr7eqK2
+ gFspE9uoA00Vd+KJhP1HRo79omp3HFoUykD43FkcTrQfVFXHvN0a8FiFRwH3Q5Xh
+ uHfg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:message-id:mime-version:reply-to:subject
+ :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+ :x-sasl-enc; s=fm1; t=1718139853; x=1718226253; bh=IjVi7E3MQU2kn
+ ldMvNctk5o6SPH8mbesc/DouuhnzCA=; b=fdHvWSqCnrZFinGbgQH9zsvt2rda5
+ lBVOWYCxG3eHGMXWAW5K+aekHo97QlM8BZjWsyBplYTkoqM/DzOc96K86PXXB7uv
+ /9fBkasalYaIV57cEoB6lzZsbuDaZI8m+mtupa+Mj+X0Y0q18nCwtLr6v42AVlPC
+ bwlRhRLMm72I+6dkGgwZTi/8Frv+4+OMFiiddyf4uCa7uk1VWd3AeboAl7AjlbO7
+ qpaGiAT25FS6PmdsxEGqrgC9tCAjiFSD+iWLlM81tqfBeH+h1N5i00x3BkNCg9Nr
+ 2IqepusKadg2oSfffev+5IS3CADobXhFxxajyB9WFirgWtbp9fjl9Psxw==
+X-ME-Sender: <xms:zbtoZk39sKiiLtGF9GNOniv0YQc0TVh90CZSm0uQzT-JfgttSdTCfg>
+ <xme:zbtoZvEj4Wc4frORqNx1V92FKIBgubvrxDG2bF54ChNg2_vHnJXUIFGLLfNixVXS2
+ sRD6wvLB8wX1BL40c4>
+X-ME-Received: <xmr:zbtoZs4rs5gP0DqbGJzLXl88R5bghYsnUzPKFlNib8jAd1dPa7IHupI>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrfeduvddgudehgecutefuodetggdotefrod
+ ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
+ necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+ enucfjughrpefhufffkfggtgfgvfevofesthejredtredtjeenucfhrhhomheplfhirgig
+ uhhnucgjrghnghcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhmqeenuc
+ ggtffrrghtthgvrhhnpeejveduudffueevffdtgfetheeugfeggeevheffleekiefhgeev
+ geefieelieelheenucffohhmrghinhepkhgvrhhnvghlrdhorhhgpdhgihhtlhgrsgdrtg
+ homhdpvhhishhurghlshhtuhguihhordgtohhmnecuvehluhhsthgvrhfuihiivgeptden
+ ucfrrghrrghmpehmrghilhhfrhhomhepjhhirgiguhhnrdihrghnghesfhhlhihgohgrth
+ drtghomh
+X-ME-Proxy: <xmx:zbtoZt0mcEgRrKgsTr959EloClu8t5ry8olwGTpS-8q-CfrDSCfnCA>
+ <xmx:zbtoZnHeqlAhyesDPqNdX3TaBH9cILh2fvSjjYrd5OAzZX1BQSjNyw>
+ <xmx:zbtoZm_YrGusQOggJBvPRvRD7P7r20CyaZq3cykuXDnXbtMtb56hEQ>
+ <xmx:zbtoZsly_V1UOypvLVG4kt9LQd3qErLvMpBmDNfSnbxq9XTku7AWdg>
+ <xmx:zbtoZtaj3HytSyxQOGKgCyBWNG3X2Q0Tgro8PtlA2P3MWeT3wpnN9-_L>
+Feedback-ID: ifd894703:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
+ 11 Jun 2024 17:04:12 -0400 (EDT)
+From: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Subject: [PATCH 00/20] New CI image and fixes
+Date: Tue, 11 Jun 2024 22:03:59 +0100
+Message-Id: <20240611-docker-image-v1-0-51472eb70357@flygoat.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="P09aqfjzLnJOpwQ4"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjQW72_Z8Dx4g1mVx5Y=wq9xeXYVBffxLUto6sDp6CMbw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAL+7aGYC/x2MQQqAIBAAvyJ7TtAlRPtKdBDdaok0FCKQ/p50H
+ IaZBpUKU4VJNCh0c+WcOuhBQNh92khy7AyocFRGKxlzOKhIPn131liNxmvv0EFPrkIrP/9uXt7
+ 3AzeIzmVeAAAA
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Aaron Williams <awilliams@marvell.com>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4306;
+ i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
+ bh=DnVkBuKzNj5mqIV1iMHZUgmTyIQasyJi7BaEq4445i0=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhrSM3WetvyeGbZS4YJW1X7F7isXdIwtjr23uzDjhbr3s7
+ j2HWdkBHaUsDGJcDLJiiiwhAkp9GxovLrj+IOsPzBxWJpAhDFycAjCRvHuMDJ9eMJ8weTs/1NR8
+ goqDYELrX8+5O3s6Vhw+m2rfxux14RcjQ69N/xWt799fZ5emdz8za9M707d4kbD+oZs3NOtWZ0b
+ 94gIA
+X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
+ fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,88 +120,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi all,
 
---P09aqfjzLnJOpwQ4
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This series build a new CI image based on Ubuntu focal with LoongArch64
+support, fixed various python scripts for python 3.12, fixed various
+problems popped up when testing againt latest software.
 
-On Tue, Jun 11, 2024 at 12:52:22PM -0600, Simon Glass wrote:
-> Hi Sughosh,
->=20
-> On Fri, 7 Jun 2024 at 12:53, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> >
-> > With the move of the LMB structure to a persistent state, there is no
-> > need to declare the variable locally, and pass it as part of the LMB
-> > API's. Remove all local variable instances and change the API's
-> > correspondingly.
-> >
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > ---
-> >  arch/arc/lib/cache.c                 |   4 +-
-> >  arch/arm/lib/stack.c                 |   4 +-
-> >  arch/arm/mach-apple/board.c          |  17 ++-
-> >  arch/arm/mach-snapdragon/board.c     |  17 ++-
-> >  arch/arm/mach-stm32mp/dram_init.c    |   7 +-
-> >  arch/arm/mach-stm32mp/stm32mp1/cpu.c |   6 +-
-> >  arch/m68k/lib/bootm.c                |   7 +-
-> >  arch/microblaze/lib/bootm.c          |   4 +-
-> >  arch/mips/lib/bootm.c                |   9 +-
-> >  arch/nios2/lib/bootm.c               |   4 +-
-> >  arch/powerpc/cpu/mpc85xx/mp.c        |   4 +-
-> >  arch/powerpc/include/asm/mp.h        |   4 +-
-> >  arch/powerpc/lib/bootm.c             |  14 +-
-> >  arch/riscv/lib/bootm.c               |   4 +-
-> >  arch/sh/lib/bootm.c                  |   4 +-
-> >  arch/x86/lib/bootm.c                 |   4 +-
-> >  arch/xtensa/lib/bootm.c              |   4 +-
-> >  board/xilinx/common/board.c          |   7 +-
-> >  boot/bootm.c                         |  26 ++--
-> >  boot/bootm_os.c                      |   5 +-
-> >  boot/image-board.c                   |  32 ++---
-> >  boot/image-fdt.c                     |  29 ++---
-> >  cmd/bdinfo.c                         |   6 +-
-> >  cmd/booti.c                          |   2 +-
-> >  cmd/bootz.c                          |   2 +-
-> >  cmd/load.c                           |   7 +-
-> >  drivers/iommu/apple_dart.c           |   7 +-
-> >  drivers/iommu/sandbox_iommu.c        |  15 +--
-> >  fs/fs.c                              |   7 +-
-> >  include/image.h                      |  22 +---
-> >  include/lmb.h                        |  39 +++---
-> >  lib/lmb.c                            |  81 ++++++------
-> >  net/tftp.c                           |   5 +-
-> >  net/wget.c                           |   5 +-
-> >  test/cmd/bdinfo.c                    |   2 +-
-> >  test/lib/lmb.c                       | 187 +++++++++++++--------------
-> >  36 files changed, 270 insertions(+), 333 deletions(-)
->=20
-> This isn't necessary...and it will make things harder. You can have a
-> global 'lmb' while still allowing passing a different pointer when
-> needed.
+This change must be combined with test hook changes at [1].
 
-There's only one reservation checking system and list of known
-reservations, keep in mind.
+Last two commits are for demonstration purpose and not for commit
+into repo.
 
---=20
-Tom
+CI runs passed at azure [2] and public gitlab.com runner [3].
 
---P09aqfjzLnJOpwQ4
-Content-Type: application/pgp-signature; name="signature.asc"
+Thanks
 
------BEGIN PGP SIGNATURE-----
+[1]: https://lore.kernel.org/u-boot/20240611210025.798978-1-jiaxun.yang@flygoat.com/
+[2]: https://gitlab.com/FlyGoat/u-boot/-/pipelines/1327832544
+[3]: https://flygoat.visualstudio.com/u-boot/_build/results?buildId=63&view=results
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZouzkACgkQFHw5/5Y0
-tyzBXgwAjNEsB1Pc3kDl1/W+M19bYZixYVjGxzterfR5yX5ZYSSHJJOh+UjNIFsb
-4xmREUi9jOjObq+sqHp0dpNiNI2xrebzFGERjMpvpfCjZn5yfyc5bHulD9JaC6mU
-QlCh8f/zusA49PClo2rigHnaGVyiH4cODp9pJM2KCxWylnqzjXC8qYneDXATp1k4
-/uhYU5zWPYhuiGUk0jul92kn8VWhfVyE3Cn1Kbble+cgDE5sH69zEWLu/e9f7tgF
-YkKkskNJdt05TPHquDl7Ny8CPBMt7MtA0Oa8w+ILJT1cbulFSfbpovmwIpprcOBS
-1xf5WAA7eAVdPDs6dXlNI79EqsIBUi8j9Td8s76Q+akcytBPWME0VHkgz9bDP0Gs
-rK2vTXj+2AhdxkqBG8oIlcBKOYjJWRhfMpShUHonFqW1zig6xjREZOAfnvovWGCl
-Kix/YnrosVzLWbkqzYUU3yuUffCzOnxHE8U4m5We2BMYai6OARd9RqMhXuInyJmq
-upqZQQcZ
-=wgRO
------END PGP SIGNATURE-----
+Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+---
+Jiaxun Yang (20):
+      py: Replace deprecated unittest APIs
+      binman: Replace pkg_resources with importlib.resources
+      py: Replace distutils.core with setuptools
+      py: Replace usage of configparser.read_fp
+      doc/sphinx: Remove usage of six
+      py: Remove unused entries in requirements.txt
+      py: Bump requirements versions
+      py: Bump pylint version and clear warnings
+      binman: Workaround lz4 cli padding in test cases
+      tests/test_event_dump: Relax match rule for output
+      lib/charset & efi: Fix possible unaligned accesses
+      cyclic: Rise default CYCLIC_MAX_CPU_TIME_US to 5000
+      CI: Ensure pip install is always performed in venv
+      CI: GitLab: Split build_world tasks
+      CI: Dockerfile: Set global git name & email config
+      CI: Dockerfile: Bump various software version
+      CI: Dockerfile: Add LoongArch64 support
+      doc: ci: Document how to run pipeline on gitlab.com
+      [NFC] Use Jiaxun's CI Image
+      [NFC] CI: Dockerfile: Replace some URL with mirror sites
 
---P09aqfjzLnJOpwQ4--
+ .azure-pipelines.yml                            |  22 +++--
+ .gitlab-ci.yml                                  | 122 ++++++++++++++----------
+ common/Kconfig                                  |   2 +-
+ configs/octeon_nic23_defconfig                  |   1 -
+ doc/develop/ci_testing.rst                      |  12 ++-
+ doc/develop/python_cq.rst                       |   4 +-
+ doc/sphinx/kfigure.py                           |   3 +-
+ doc/sphinx/requirements.txt                     |   1 -
+ lib/charset.c                                   |  21 ++--
+ lib/efi_loader/efi_device_path.c                |  11 +--
+ test/py/requirements.txt                        |  24 +----
+ test/py/tests/test_event_dump.py                |  10 +-
+ test/py/tests/test_ums.py                       |   1 +
+ test/py/tests/test_usb.py                       |   1 +
+ tools/binman/control.py                         |  18 ++--
+ tools/binman/entry_test.py                      |   6 +-
+ tools/binman/etype/fdtmap.py                    |   1 +
+ tools/binman/etype/fit.py                       |   1 +
+ tools/binman/etype/image_header.py              |   1 +
+ tools/binman/etype/pre_load.py                  |   2 +
+ tools/binman/etype/ti_board_config.py           |   1 +
+ tools/binman/etype/x509_cert.py                 |   1 +
+ tools/binman/fdt_test.py                        |  48 +++++-----
+ tools/binman/ftest.py                           |  50 +++++-----
+ tools/binman/setup.py                           |   2 +-
+ tools/binman/state.py                           |   1 +
+ tools/binman/test/184_compress_section_size.dts |   1 +
+ tools/buildman/bsettings.py                     |   2 +-
+ tools/buildman/builder.py                       |   2 +
+ tools/buildman/func_test.py                     |  74 +++++++-------
+ tools/buildman/requirements.txt                 |   7 +-
+ tools/buildman/test.py                          |   2 +-
+ tools/docker/Dockerfile                         |  75 +++++++++------
+ tools/dtoc/setup.py                             |   2 +-
+ tools/microcode-tool.py                         |   1 +
+ tools/patman/settings.py                        |   9 +-
+ tools/patman/test_checkpatch.py                 |   2 +
+ tools/qconfig.py                                |   1 +
+ 38 files changed, 293 insertions(+), 252 deletions(-)
+---
+base-commit: 1ebd659cf020843fd8e8ef90d85a66941cbab6ec
+change-id: 20240610-docker-image-868126a1a929
+
+Best regards,
+-- 
+Jiaxun Yang <jiaxun.yang@flygoat.com>
+
