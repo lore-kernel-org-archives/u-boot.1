@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89EADC27C79
-	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 02:34:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83DA2C27C79
+	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 02:34:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 210B2887CA;
+	by phobos.denx.de (Postfix) with ESMTP id 84E2C887CF;
 	Wed, 12 Jun 2024 04:33:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="K5bdUK+x";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ol3Tv3UI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29FF587B30; Wed, 12 Jun 2024 01:14:58 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id 2AB1887B30; Wed, 12 Jun 2024 01:14:59 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3FED78871C
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 01:14:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A72688315
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 01:14:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-35f1e35156cso2883112f8f.1
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 16:14:56 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-4217926991fso35951125e9.3
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 16:14:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1718147696; x=1718752496; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1718147697; x=1718752497; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=rCPUoR3Hm4ttQ2PN9Sraj9o+7KI/qo8K5RXCu1Gre4o=;
- b=K5bdUK+xNyFSWDhDtBPy7022cVTZXxxIyqR/oAERPT+4HNncKHbA6q0zqHMfat8Slk
- Mj1gHvtbrjA61guiGlGWQm7lu/lMiXjj9EvAVcR3krVYUfoQGK8xX3ETXim2/YX23VRg
- q7hJ0CxNh1Iwe8NE4/f7B69QL3B7K+aebRj+TVr3K7xyiXoPIksFbqnUBLlKvWWBGF9w
- Vhy80D56Yzk2w/7kNL3rlut3GAt5ZhZwSCyehfjqzQoP3llNqQ/e9ZH1IU8FAkhF7EiR
- oe7U+VvaNmgB+zNA6IamGNBCD3uHC6HELwfMCdXcsHi/12pn8capheM8MJF2+mdY5EV/
- 9tYA==
+ :reply-to; bh=rtMC5JbP5BH/cFBWNtSST3rx9aK9f8wKNrTbXFX8p+0=;
+ b=Ol3Tv3UIX0qmTshJqVEnjaaBnHPZlBeGUg6+siIUL3udFzrlgaBAKpYt+hhVn/PP9Z
+ dYJtk6baL22IOrJXQ2sPG42QQn05OxPzQCfLxFgf2/xWV7tARYgSRg/uQ1aBVKPnzRiy
+ zRodo61HZ0MwobMR8gKe+8d9S3L4P7DN17WLNdiumZm3X9hY3QHOlaEbC3kM+Gzazv5v
+ 3qNim+sFdLLvHtwOP74QXcK7+Wt5QrAg7rEaGwO3vGovQiaVs/nHkotjWGd3SwIoCTnx
+ z65ueEpo8F+pNy8r39nQXq6aHel+kWNNATCI09rIp3k3UgtcA9bjqkQ/krc7Rc3oEdnB
+ tkiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718147696; x=1718752496;
+ d=1e100.net; s=20230601; t=1718147697; x=1718752497;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rCPUoR3Hm4ttQ2PN9Sraj9o+7KI/qo8K5RXCu1Gre4o=;
- b=SOSJLm+xFPNL/5YVlAFDK1q1qaFS05/a0ZiHb8Chmx5AYxr6jWlIHZN5OpYhbB2jRA
- uoWifUKrVR67BKwWvDFskelT4tN4jvzwlh6EygCrdiUtmj/Ap1SszupM28dQhnPT0RD4
- rWOBKSPfY9tD/eZkGuQi16+GWaknuFV0ggDkDpw35MrV6Aw0teqp6ywZZBEqVQJzMxAY
- iyf+a6D1NHEKyFRiKIsDCYGndn9mFJ8lbQtlaEwSU8cc7kVyTVfG97hDiIyzwUaWd/jo
- fbk7KFdK9yNOSpc7Rs3XOaRdxuJLublFXsZOm6tJg0paNY29tariuMZebCwlPWV/fjrP
- 4cTQ==
+ bh=rtMC5JbP5BH/cFBWNtSST3rx9aK9f8wKNrTbXFX8p+0=;
+ b=Ypol3D4VYR5XHHngbcrv7Xzo8oYRpT/9RquWqypAoWkdfiYbN94Ih2wllh6zLoa106
+ FUgGfcVB1EqME5YeJ/JQvHtbZpgkufUoKI40tOAYjtzz2o/D5Yfe7yqxXm4XUyhDX8Pz
+ G9aH01My+X5SGV97pMCCNEkaOiTSp86rzZXvGJ4gCHryiLf67nJbgUWVmEW+0pnvza4Q
+ hlBxnSg7TckLpgrVhWnbaDcVfPMrSIppjphMUul642jB92tWTuq1PwZOuigmK5xmH1X1
+ 17gzQ9Df9hfozfz2YbGDMfNPhqjkB03M8L3TLoCFyTfZmRppEbMG8cnCKTWeJ9g4IKx/
+ QqQg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUv2VlYuZnj6n2D3CGAZJM/MLTDNkcadMmnUUb3UJBJe9GFwJcAyzbQjJVDkimEPd2ry1Mj4koNHBupJS85wwlnMmgXNA==
-X-Gm-Message-State: AOJu0YzBXF/D7HV6IfV4MLT9Q4bxo4kXdA0YO25YCYNEJXVMH0j+PvL+
- eVnaO90/E4R0Zh4k5YYd3YNDwhGgU6fvXYdw8+/OvEfFcKUiQoz7
-X-Google-Smtp-Source: AGHT+IGHf9tTJLJX4JQHCj+ejWkxjQqMMtA8Bi5vpbtcE1t6B2B4Lf2niFw9caRCgj+MarBlGtj04A==
-X-Received: by 2002:a5d:4c92:0:b0:35f:322b:92d6 with SMTP id
- ffacd0b85a97d-35fdf786ea2mr48230f8f.12.1718147695498; 
- Tue, 11 Jun 2024 16:14:55 -0700 (PDT)
+ AJvYcCX1hb2TksVPlaJXwy5JUZudiXdloscdyEZU87j9MMEnDOGy3B639k9+ZOYw+en8JigUm3/viJVssdA1PYkSw7Wcftv1EQ==
+X-Gm-Message-State: AOJu0YzFdHA/jzR5n/+PQOWr+o/BZR7mbXFKPgV2gO+Wz6hw+6ptNdyv
+ RO2ak53UlZi+Temi8R625ko7Cn5q7JDGJxnXDqTByvHTypJD8glv
+X-Google-Smtp-Source: AGHT+IGAF71XS6N5m3CEASZWg4s4ENdE6Di4EanlP0MQm6A6yIvyioPv625Odxz6+WlG7Ow+KOP8nA==
+X-Received: by 2002:a5d:4951:0:b0:35f:228e:e82b with SMTP id
+ ffacd0b85a97d-35fdf79a2c8mr94708f8f.17.1718147696743; 
+ Tue, 11 Jun 2024 16:14:56 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
  [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-35f231d5761sm7052096f8f.35.2024.06.11.16.14.54
+ ffacd0b85a97d-35f231d5761sm7052096f8f.35.2024.06.11.16.14.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Jun 2024 16:14:55 -0700 (PDT)
+ Tue, 11 Jun 2024 16:14:56 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
@@ -80,10 +80,9 @@ To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de,
  John Crispin <john@phrozen.org>
-Subject: [PATCH v3 5/9] led: status_led: add new activity LED config and
- functions
-Date: Wed, 12 Jun 2024 01:14:20 +0200
-Message-ID: <20240611231435.10366-6-ansuelsmth@gmail.com>
+Subject: [PATCH v3 6/9] tftp: implement support for LED status activity
+Date: Wed, 12 Jun 2024 01:14:21 +0200
+Message-ID: <20240611231435.10366-7-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240611231435.10366-1-ansuelsmth@gmail.com>
 References: <20240611231435.10366-1-ansuelsmth@gmail.com>
@@ -106,129 +105,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a new activity LED config and additional functions to implement a
-simple software blink feature to signal activity of any kind.
-
-Usual activity might be a file transfer with TFTP, a flash write...
-
-User of this API will call status_led_activity_start/stop() on each
-activity and LED will be toggled based on the defined FREQ config value.
-
-With this enabled, cyclic API are also enabled as this makes use of
-cyclic API to handle LED blink.
+Implement support for LED status activity. If the feature is enabled,
+make the defined ACTIVITY LED to signal traffic.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- drivers/led/Kconfig       | 16 +++++++++++++++
- drivers/misc/status_led.c | 43 +++++++++++++++++++++++++++++++++++++++
- include/status_led.h      |  2 ++
- 3 files changed, 61 insertions(+)
+ net/tftp.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/drivers/led/Kconfig b/drivers/led/Kconfig
-index 6c4f02d71f2..869ed78e87f 100644
---- a/drivers/led/Kconfig
-+++ b/drivers/led/Kconfig
-@@ -359,6 +359,22 @@ config LED_STATUS_BOOT
+diff --git a/net/tftp.c b/net/tftp.c
+index 2e335413492..0515dc34d4b 100644
+--- a/net/tftp.c
++++ b/net/tftp.c
+@@ -19,6 +19,7 @@
+ #include <asm/global_data.h>
+ #include <net/tftp.h>
+ #include "bootp.h"
++#include <status_led.h>
  
- endif # LED_STATUS_BOOT_ENABLE
+ DECLARE_GLOBAL_DATA_PTR;
  
-+config LED_STATUS_ACTIVITY_ENABLE
-+	bool "Enable BOOT LED"
-+	select CYCLIC
-+	help
-+	  Enable to turn an LED on when the board is doing some
-+	  activity (flash write, file download).
-+
-+if LED_STATUS_ACTIVITY_ENABLE
-+
-+config LED_STATUS_ACTIVITY
-+	int "LED to light when the board is doing some activity"
-+	help
-+	  Valid enabled LED device number.
-+
-+endif # LED_STATUS_ACTIVITY_ENABLE
-+
- config LED_STATUS_RED_ENABLE
- 	bool "Enable red LED"
- 	help
-diff --git a/drivers/misc/status_led.c b/drivers/misc/status_led.c
-index 882273cc322..6d5207508d8 100644
---- a/drivers/misc/status_led.c
-+++ b/drivers/misc/status_led.c
-@@ -5,6 +5,7 @@
-  */
- 
- #include <common.h>
-+#include <cyclic.h>
- #include <status_led.h>
- 
- /*
-@@ -23,6 +24,7 @@ typedef struct {
- 	int state;
- 	int period;
- 	int cnt;
-+	struct cyclic_info *cyclic;
- } led_dev_t;
- 
- led_dev_t led_dev[] = {
-@@ -142,3 +144,44 @@ void status_led_toggle(int led)
- 
- 	__led_toggle(ld->mask);
+@@ -193,6 +194,9 @@ static void new_transfer(void)
+ #ifdef CONFIG_CMD_TFTPPUT
+ 	tftp_put_final_block_sent = 0;
+ #endif
++#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
++	status_led_activity_start(CONFIG_LED_STATUS_ACTIVITY);
++#endif
  }
-+
-+static void status_led_activity_toggle(void *ctx)
-+{
-+	__led_toggle(*(led_id_t *)ctx);
-+}
-+
-+void status_led_activity_start(int led)
-+{
-+	led_dev_t *ld;
-+
-+	ld = status_get_led_dev(led);
-+	if (!ld)
-+		return;
-+
-+	if (ld->cyclic) {
-+		printf("Cyclic for activity status LED %d already registered. THIS IS AN ERROR.\n",
-+		       led);
-+		cyclic_unregister(ld->cyclic);
-+	}
-+
-+	status_led_set(led, CONFIG_LED_STATUS_BLINKING);
-+
-+	ld->cyclic = cyclic_register(status_led_activity_toggle,
-+				     ld->period * 500, "activity", &ld->mask);
-+	if (!ld->cyclic)
-+		printf("Registering of cyclic function for activity status LED %d failed\n",
-+		       led);
-+}
-+
-+void status_led_activity_stop(int led)
-+{
-+	led_dev_t *ld;
-+
-+	ld = status_get_led_dev(led);
-+	if (!ld)
-+		return;
-+
-+	cyclic_unregister(ld->cyclic);
-+	ld->cyclic = NULL
-+	status_led_set(led, CONFIG_LED_STATUS_OFF);
-+}
-diff --git a/include/status_led.h b/include/status_led.h
-index fe0c84fb4b4..7de40551621 100644
---- a/include/status_led.h
-+++ b/include/status_led.h
-@@ -39,6 +39,8 @@ void status_led_init(void);
- void status_led_tick(unsigned long timestamp);
- void status_led_set(int led, int state);
- void status_led_toggle(int led);
-+void status_led_activity_start(int led);
-+void status_led_activity_stop(int led);
  
- /*****  MVS v1  **********************************************************/
- #if (defined(CONFIG_MVS) && CONFIG_MVS < 2)
+ #ifdef CONFIG_CMD_TFTPPUT
+@@ -302,6 +306,9 @@ static void tftp_complete(void)
+ 			time_start * 1000, "/s");
+ 	}
+ 	puts("\ndone\n");
++#ifdef CONFIG_LED_STATUS_ACTIVITY_ENABLE
++	status_led_activity_stop(CONFIG_LED_STATUS_ACTIVITY);
++#endif
+ 	if (!tftp_put_active)
+ 		efi_set_bootdev("Net", "", tftp_filename,
+ 				map_sysmem(tftp_load_addr, 0),
 -- 
 2.43.0
 
