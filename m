@@ -4,75 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4A1AC27C75
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 18:51:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB15BC27C75
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 18:52:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1146688711;
-	Tue, 11 Jun 2024 20:51:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 809558870D;
+	Tue, 11 Jun 2024 20:51:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BrxSZEvH";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P2DehXoa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7788588703; Tue, 11 Jun 2024 20:51:03 +0200 (CEST)
-Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
- [IPv6:2607:f8b0:4864:20::d29])
+ id E43C38864D; Tue, 11 Jun 2024 20:51:56 +0200 (CEST)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56B4F886DA
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 20:51:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CCC52886F0
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 20:51:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd29.google.com with SMTP id
- ca18e2360f4ac-7ebc67365e3so28899439f.1
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 11:51:01 -0700 (PDT)
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6b07937b84fso7109926d6.1
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 11:51:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718131860; x=1718736660; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JSAuAzeKDu8+sZ8kys1m9gw2T6EAisPAxeUAY4kejUU=;
- b=BrxSZEvHuIQBHDda6XIiJM2f1/qQx5h/euyLzpnZyvkygCtRmrT8cfz3qrN2nylZd3
- gI6TVbJIfwEX2cUL/8AiERuMTAIuejfjjwMUTv+PzNU4KZXPJeavqUMnWZwzyTId5TTX
- Wc2aebE4EkWskWwjzrCn57vSQpmpkh7r8qvyI=
+ d=chromium.org; s=google; t=1718131913; x=1718736713; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ji6uX2V38NqJuC/ZktluwlgMS8GpWD0A8sLQLJ8ZjTY=;
+ b=P2DehXoaCQEWSaJKMMyNVYSalRNl7oV/It/0gMiT8yRq/IYdTlQjauZ6wFVOv7+DMm
+ kwAkgvHoABVMrzZyxdO4OOyLxY61aQ829Z9arUOX9IyW/6hhTx62esthMFKpqjvx3LZR
+ njhfpdPsd7KlRquHGOp1fmDoK+r7ZvQnNOeO0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718131860; x=1718736660;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=JSAuAzeKDu8+sZ8kys1m9gw2T6EAisPAxeUAY4kejUU=;
- b=BB18KkveAoDS1jzDINRcAfOsq32tY5s3pwhKXqCMdKmLylM+pfDo18cw3HLl0H9QAc
- eCk1VatYvf/jJ3uRy07uQXCs2b0Srkct5dABoekMl8g0SiXrI3K2yemK6aJhbg5JHCgW
- OgseoIo9asqrlfkT2raMX7cIJJe6GNWzH8QN4J0oZXzY4rUnwySURh587eMGzfnvpVKO
- sPLyNei0z0fIEArV8ySaIpndj+l6IxYVsLP7raCAHdQyGJTpVccw29BbdxYoEmbYCXzs
- xXZemjT/e0Rl1MkzkTJ2FR9G9KokNz9F9DOkvhQxDMyvg9O9dABnSzzknbYxjCVL2wcU
- T47Q==
-X-Gm-Message-State: AOJu0YwwLBMCkDlSKAcD5zhrt+SoFtgnN9cYbDsZSokD3fAY8dwjMgn+
- j7Bc9JPUAc8hPQX/SdIMR3EKcFk2/u+wxI7fWKR+GA+0MBdUXohEuaR1FnY+D3pbqEWm1beK2uf
- BaQ==
-X-Google-Smtp-Source: AGHT+IGUES8uDWVVUOBiRbpWNSIsXgAlsykro8CZSZf3sJTlspCvReHHZUTdk+xZIzDQWY6rN3SNIA==
-X-Received: by 2002:a05:6602:14cb:b0:7eb:7e0c:d186 with SMTP id
- ca18e2360f4ac-7eb7e0cd48bmr816264239f.16.1718131859830; 
- Tue, 11 Jun 2024 11:50:59 -0700 (PDT)
-Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
- [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-37594285ca5sm19645715ab.42.2024.06.11.11.50.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Jun 2024 11:50:59 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 4/4] lib: Convert str_to_list() to use alist
-Date: Tue, 11 Jun 2024 12:50:51 -0600
-Message-Id: <20240611185051.2223452-5-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240611185051.2223452-1-sjg@chromium.org>
-References: <20240611185051.2223452-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1718131913; x=1718736713;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Ji6uX2V38NqJuC/ZktluwlgMS8GpWD0A8sLQLJ8ZjTY=;
+ b=jzy5regKnDAlD14GqturmGQGyadCyYn16MnwMbM0A1ByAs2suNCKOTdu5xgDZ8nXA0
+ sgqY3g+zCxe9kXqDhn9sBBAIcFogTlQkrIxX8Ymzig+MieeHpzb7l3C2xTweHEIerG2a
+ 9aAqGvw3hLJddiIYJiXlrkl66n7Oqvyvn2Qc4+9e2Z2Rp0Nc3HX3/LveeeQH3IFL7uzf
+ dCM+X2C05ROOzM0f+6QEkSjCInerIxpAOd/9y4oJrjlfWPieBGaE5zxiZ4V8wl2zIH/k
+ xVwveTz55X2UYvP7chANnUtjA9C2po1EsmBf5eUvZxfdjMwfN2o9pNsiz+UF6gqWy0qF
+ nO4g==
+X-Gm-Message-State: AOJu0YxqHPueviSRoeNbkqfSurNANw/1G/jw7N0SaVc4/rH7ZhbUH2PV
+ b6TqOjLAIHIzEn5uyePOg/yB1oNpYTPc5y8/3kX0x+cET4/2k7fir3QJdQ4N2vKxPPCgYQfAizA
+ uN64IKgK/IzTqu3lj7tiCrz6HrD+X6g3tVBlm
+X-Google-Smtp-Source: AGHT+IHlvXLYsdO/IzyVfkU2gHvwCugAIRm16AeEB6mqtVPLZlio2K5Tu+NWFf0XsZXv131nVc/IuhEF9g2hZKZj//c=
+X-Received: by 2002:a05:6214:5982:b0:6b0:7ceb:3076 with SMTP id
+ 6a1803df08f44-6b07ceb3333mr66621096d6.12.1718131913633; Tue, 11 Jun 2024
+ 11:51:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240610222743.255386-1-sjg@chromium.org>
+ <20240611162815.GK68077@bill-the-cat>
+In-Reply-To: <20240611162815.GK68077@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 11 Jun 2024 12:51:42 -0600
+Message-ID: <CAFLszTjk52G1QmWHL9rmu-OCzc-f3qqfw+RpRsy9jzccuNaT7Q@mail.gmail.com>
+Subject: Re: [u-boot-test-hooks PATCH 0/2] Add support for Labgrid
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,82 +82,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use this new data structure in the utility function.
+Hi Tom,
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+On Tue, 11 Jun 2024 at 10:28, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Mon, Jun 10, 2024 at 04:27:41PM -0600, Simon Glass wrote:
+>
+> > This adds hooks for use with Labgrid. The only existing hook that really
+> > does anything now is the 'console' one. There is also a new 'getrole'
+> > hook which looks up a role to find various things about it, such as the
+> > U-Boot board name.
+>
+> Overall this is pretty neat and I'm happy to see it posted. Would you
+> mind linking to the Labgrid PR(s) and sample .gitlab-ci.yml changes you
+> have as well?
 
- lib/strto.c | 35 +++++++++++++++++++----------------
- 1 file changed, 19 insertions(+), 16 deletions(-)
+Thanks! Yes I will send the U-Boot series with that (PR linked in cover letter).
 
-diff --git a/lib/strto.c b/lib/strto.c
-index f83ac67c666..f059408755a 100644
---- a/lib/strto.c
-+++ b/lib/strto.c
-@@ -9,6 +9,7 @@
-  * Wirzenius wrote this portably, Torvalds fucked it up :-)
-  */
- 
-+#include <alist.h>
- #include <errno.h>
- #include <malloc.h>
- #include <vsprintf.h>
-@@ -226,37 +227,39 @@ void str_to_upper(const char *in, char *out, size_t len)
- 
- const char **str_to_list(const char *instr)
- {
--	const char **ptr;
--	char *str, *p;
--	int count, i;
-+	struct alist alist;
-+	char *str, *p, *start;
- 
- 	/* don't allocate if the string is empty */
- 	str = *instr ? strdup(instr) : (char *)instr;
- 	if (!str)
- 		return NULL;
- 
--	/* count the number of space-separated strings */
--	for (count = 0, p = str; *p; p++) {
-+	alist_init_struct(&alist, char *);
-+
-+	if (*str)
-+		alist_add(&alist, &str, char *);
-+	for (start = str, p = str; *p; p++) {
- 		if (*p == ' ') {
--			count++;
- 			*p = '\0';
-+			start = p + 1;
-+			if (*start)
-+				alist_add(&alist, &start, char *);
- 		}
- 	}
--	if (p != str && p[-1])
--		count++;
- 
--	/* allocate the pointer array, allowing for a NULL terminator */
--	ptr = calloc(count + 1, sizeof(char *));
--	if (!ptr) {
--		if (*str)
-+	/* terminate list */
-+	p = NULL;
-+	alist_add(&alist, &p, char *);
-+	if (alist_err(&alist)) {
-+		alist_uninit(&alist);
-+
-+		if (*instr)
- 			free(str);
- 		return NULL;
- 	}
- 
--	for (i = 0, p = str; i < count; p += strlen(p) + 1, i++)
--		ptr[i] = p;
--
--	return ptr;
-+	return alist_uninit_move(&alist, NULL, const char *);
- }
- 
- void str_free_list(const char **ptr)
--- 
-2.34.1
-
+Regards,
+Simon
