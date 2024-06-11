@@ -4,60 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D16CFC25B76
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 08:51:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91EE5C27C5E
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 08:55:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C5C08837A;
-	Tue, 11 Jun 2024 10:51:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id C6209885FA;
+	Tue, 11 Jun 2024 10:55:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1718095890;
-	bh=ujDJhuZ89mQIf8PwfYU+M7/4FN5Lwabw4ptIHAR0Vi0=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=mC0qDqeYYOlA6Jc2rBHy9mTU5b0ywrDMyYTQvJp41cI/4HoONNpWrrrCG38GeCIc6
-	 TcSX0KlJV8ZyFmYQO3ryIoxaccwl6BACejeLBxddb85s6xBttHDE53elwul2ep+9cS
-	 CeUI9p4xM0AQb3nt6BXhAQnte2UqDWETuP5dcw5vglH2KYwCUv6SWb0ZGec4/Xe1Ui
-	 3JfGYx2EwFmHFnLAXoxHBnDKvPU736eeu0bCafJdRIPDdaK/ggU/4GVmiH7FuL4Ae8
-	 9apfbDn1Ue6KF2K0KP7dp4aRXzsXQ5MhLOcWIQyk4f5Sgodyo2UqHGLF39eZNwecbq
-	 TYPOmPlQoSp3g==
-Received: from wsk (85-222-111-42.dynamic.chello.pl [85.222.111.42])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WMA0vBDS";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id C43E288606; Tue, 11 Jun 2024 10:55:18 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id D095586FB2;
- Tue, 11 Jun 2024 10:51:28 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1718095889;
- bh=ujDJhuZ89mQIf8PwfYU+M7/4FN5Lwabw4ptIHAR0Vi0=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=y57+Vj7R6lsHSqti0KBjkYihOTEjCnnUaW5Ardy0A6ghMcaxc+bJ8iFpXaiHkUfYa
- g7G7Nzi+3DRajCK9hC94Q8J4qoGQs8PaO+6jSXuUxYF26bkExZRad7610jtUXk/6rn
- 6Mi+iVbMxwtUAF5RziHVr4ldDU2zGuOxfekZyVXa9XyXd3z5eBdmKWDY0anGSzusDE
- Scmf5gmFkhgErBekTu9fsCQMDBP/mefD5blzMEopOwwoU0A/ExiZVs5gdhXKGf3D4z
- T29Omq5F2KMFw0AMHX+K253GGgmvyS9GVtG7sgI4FTdwcNM6oO5knrA7puT2jqkLnf
- kcy2meEMnFnYg==
-Date: Tue, 11 Jun 2024 10:51:27 +0200
-From: Lukasz Majewski <lukma@denx.de>
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>, Felipe Balbi
- <felipe.balbi@linux.intel.com>, Nishanth Menon <nm@ti.com>, Simon Glass
- <sjg@chromium.org>, Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Tom Rini
- <trini@konsulko.com>
-Subject: Re: [PATCH 3/6] usb: gadget: Drop usb_gadget_controller_number()
-Message-ID: <20240611105127.3ab8cc38@wsk>
-In-Reply-To: <877cew0wu6.fsf@baylibre.com>
-References: <20240609213449.194762-1-marek.vasut+renesas@mailbox.org>
- <20240609213449.194762-3-marek.vasut+renesas@mailbox.org>
- <877cew0wu6.fsf@baylibre.com>
-Organization: denx.de
-X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ by phobos.denx.de (Postfix) with ESMTPS id CCEE388381
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 10:55:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-57a44c2ce80so921390a12.0
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 01:55:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1718096116; x=1718700916; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Nq6dVffrRx6TUJg+pkp5Jz2Y1o+CqGvljfM/SkiXVJY=;
+ b=WMA0vBDSsO4hfL6Sv3MXRZmlqpW5rgzn5LAEX/jKNhLn6AjH2Gr+cOJ+u3x57ttrU+
+ 2YWX8Nyt8bMN+YaPOnwXUYou9hjHt4lFVEvqdAfKXcKjo3OdGp595OliddaLj8OTkZHf
+ fo2LudZ27cZQrTthuRxzXJ7dY5JFAKI5RSOXqR+dKiN0xTUeJ04vA7KqRHNrPZ5sXrvt
+ dcGzdJX0QMd0yKpPeIUSTCLsAbKZ31SU4Jc6cgOVltKTXT6xqVFgaNAhosWUD7wz6p2q
+ +xuk3AAFX5wKYVaXCzlIWwJjS31uHGju7lVlVim9mgoDrAG+9yFnVGQjTgzEibNjHw/Y
+ DEsw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718096116; x=1718700916;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Nq6dVffrRx6TUJg+pkp5Jz2Y1o+CqGvljfM/SkiXVJY=;
+ b=ppyPQni/qf+202kRCYXjzHgdAMMM5STKikAOpv6wZrpPDefzr3ceZTmp7crKC4WCpT
+ VZkleahU6XI+MFviFEQ5ylrTxlVnX1WXmhBQ8XrooyB4TouThrMhMWXitLedPMkJXcYE
+ xqtIJvXHm8Yi3mwuHsX9jzpQ6WcGcUxiVPAt0pIcSo2fJ/qSCUeY/lhPUGzHR/zudw8f
+ Tczos+cAYyy45w17tOhI7tdOQSS2/h0jO9UU2a70pBQ83gfhllZIoY+xVgfcDkwxKU5X
+ IWym7nsqMNODxDWvkyOo3+GM++4YzrGsvS9HmvOl0wPh9/H5AbQy06VJ4RvknwUXOSft
+ Xscg==
+X-Gm-Message-State: AOJu0YzuEppljKmGyH+8k95BVmw0QQtCnCl16V6eIfmWEIK7xts3rKpV
+ JHpHThE8sXovc8TP+n5O/ibnG+/x4GdYU6A2ct/pAqeVzOgSsbOB/RQUzr/cANW7EWsOHNQGipY
+ 8AuIHdMJP63/l7z683I1Bro9cV+wpH0xxM2EgOw==
+X-Google-Smtp-Source: AGHT+IEXNauHjjJvCtSYohbcfEy2fLm1ufyvm7KFqF8/46IN5Gvf18x/hFYMK6geourd5U3q+/ofaSb/lmV5d1J6KkI=
+X-Received: by 2002:a50:9509:0:b0:57a:339f:1b2d with SMTP id
+ 4fb4d7f45d1cf-57c5086e237mr7895156a12.5.1718096116180; Tue, 11 Jun 2024
+ 01:55:16 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/jHNIhbfQcAL1YuM8Vd8o8eL";
- protocol="application/pgp-signature"; micalg=pgp-sha512
+References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
+ <20240607185240.1892031-23-sughosh.ganu@linaro.org>
+ <20240610174450.GX68077@bill-the-cat>
+In-Reply-To: <20240610174450.GX68077@bill-the-cat>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Tue, 11 Jun 2024 14:25:05 +0530
+Message-ID: <CADg8p96rjN48peBf=cxbs7k7ku0stV-4bBhL5+RrTnPJVS1tjQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 22/31] test: lmb: run the LMB tests only on sandbox
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,165 +90,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---Sig_/jHNIhbfQcAL1YuM8Vd8o8eL
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, 11 Jun 2024 09:20:33 +0200
-Mattijs Korpershoek <mkorpershoek@baylibre.com> wrote:
-
-> Hi Marek,
->=20
-> Thank you for the patch.
->=20
-> On dim., juin 09, 2024 at 23:32, Marek Vasut
-> <marek.vasut+renesas@mailbox.org> wrote:
->=20
-> > The bcdDevice field is defined as
-> > |Device release number in binary-coded decimal
-> > in the USB 2.0 specification. We use this field to distinguish the
-> > UDCs from each other. In theory this could be used on the host side
-> > to apply certain quirks if the "special" UDC in combination with
-> > this gadget is used. This hasn't been done as far as I am aware. In
-> > practice it would be better to fix the UDC driver before shipping
-> > since a later release might not need this quirk anymore.
+On Mon, 10 Jun 2024 at 23:14, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Sat, Jun 08, 2024 at 12:22:31AM +0530, Sughosh Ganu wrote:
+>
+> > The LMB memory map is now persistent and global. Running the tests for
+> > the LMB module will result in the memory map getting reset, and this
+> > will have side-effects on the rest of the working of the platform. Run
+> > the LMB tests only on the sandbox platform, which is meant for running
+> > such kinds of tests.
 > >
-> > This patch removes the newly unused function. Linux stopped using
-> > this functionality in 2012, remove it from U-Boot as well.
-> >
-> > Matching Linux kernel commit:
-> > ed9cbda63d45 ("usb: gadget: remove usb_gadget_controller_number()")
-> >
-> > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org> =20
->=20
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> # on vim3
->=20
-> > ---
-> > Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>
-> > Cc: Felipe Balbi <felipe.balbi@linux.intel.com>
-> > Cc: Lukasz Majewski <lukma@denx.de>
-> > Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> > Cc: Nishanth Menon <nm@ti.com>
-> > Cc: Simon Glass <sjg@chromium.org>
-> > Cc: Thinh Nguyen <Thinh.Nguyen@synopsys.com>
-> > Cc: Tom Rini <trini@konsulko.com>
-> > Cc: u-boot@lists.denx.de
-> > ---
-> >  drivers/usb/gadget/gadget_chips.h | 62
-> > ------------------------------- 1 file changed, 62 deletions(-)
-> >
-> > diff --git a/drivers/usb/gadget/gadget_chips.h
-> > b/drivers/usb/gadget/gadget_chips.h index 98156c312d2..316051686c4
-> > 100644 --- a/drivers/usb/gadget/gadget_chips.h
-> > +++ b/drivers/usb/gadget/gadget_chips.h
-> > @@ -146,65 +146,3 @@
-> >  #else
-> >  #define gadget_is_dwc2(g)        0
-> >  #endif
-> > -
-> > -/**
-> > - * usb_gadget_controller_number - support bcdDevice id convention
-> > - * @gadget: the controller being driven
-> > - *
-> > - * Return a 2-digit BCD value associated with the peripheral
-> > controller,
-> > - * suitable for use as part of a bcdDevice value, or a negative
-> > error code.
-> > - *
-> > - * NOTE:  this convention is purely optional, and has no meaning
-> > in terms of
-> > - * any USB specification.  If you want to use a different
-> > convention in your
-> > - * gadget driver firmware -- maybe a more formal revision ID --
-> > feel free.
-> > - *
-> > - * Hosts see these bcdDevice numbers, and are allowed (but not
-> > encouraged!)
-> > - * to change their behavior accordingly.  For example it might
-> > help avoiding
-> > - * some chip bug.
-> > - */
-> > -static inline int usb_gadget_controller_number(struct usb_gadget
-> > *gadget) -{
-> > -	if (gadget_is_net2280(gadget))
-> > -		return 0x01;
-> > -	else if (gadget_is_dummy(gadget))
-> > -		return 0x02;
-> > -	else if (gadget_is_sh(gadget))
-> > -		return 0x04;
-> > -	else if (gadget_is_goku(gadget))
-> > -		return 0x06;
-> > -	else if (gadget_is_mq11xx(gadget))
-> > -		return 0x07;
-> > -	else if (gadget_is_omap(gadget))
-> > -		return 0x08;
-> > -	else if (gadget_is_n9604(gadget))
-> > -		return 0x09;
-> > -	else if (gadget_is_at91(gadget))
-> > -		return 0x12;
-> > -	else if (gadget_is_imx(gadget))
-> > -		return 0x13;
-> > -	else if (gadget_is_musbhsfc(gadget))
-> > -		return 0x14;
-> > -	else if (gadget_is_musbhdrc(gadget))
-> > -		return 0x15;
-> > -	else if (gadget_is_atmel_usba(gadget))
-> > -		return 0x17;
-> > -	else if (gadget_is_fsl_usb2(gadget))
-> > -		return 0x18;
-> > -	else if (gadget_is_amd5536udc(gadget))
-> > -		return 0x19;
-> > -	else if (gadget_is_m66592(gadget))
-> > -		return 0x20;
-> > -	else if (gadget_is_ci(gadget))
-> > -		return 0x21;
-> > -	else if (gadget_is_dwc3(gadget))
-> > -		return 0x23;
-> > -	else if (gadget_is_cdns3(gadget))
-> > -		return 0x24;
-> > -	else if (gadget_is_max3420(gadget))
-> > -		return 0x25;
-> > -	else if (gadget_is_mtu3(gadget))
-> > -		return 0x26;
-> > -	else if (gadget_is_dwc2(gadget))
-> > -		return 0x27;
-> > -	return -ENOENT;
-> > -}
-> > --=20
-> > 2.43.0 =20
+> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+>
+> I'm not sure about this. We can reset real hardware as often as we need,
+> too. Did you run in to problems with this test on non-sandbox?
 
-FInally..... :-)
+But do we want to reset the state of the LMB memory map on real
+hardware? This was working up until now because of the local nature of
+the LMB variables. But if the LMB memory map is to be persistent,
+should we allow it to be changed for running some test? That would
+have side effects? I think running these tests on sandbox should
+suffice. I mean there isn't any aspect of the LMB module that is not
+getting tested on sandbox, right?
 
-Thanks Mattijs for this cleanup.
-
-Reviewed-by: Lukasz Majewski <lukma@denx.de>
-
-
-Best regards,
-
-Lukasz Majewski
-
---
-
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
-
---Sig_/jHNIhbfQcAL1YuM8Vd8o8eL
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmZoEA8ACgkQAR8vZIA0
-zr3ScwgAjSfp0m/7jfMaEFDWdCQGR0GtdX+fFRT5KaKrqddQeQ0r3uOaDKXksCk9
-zNK9qA7377pFa98RTsdUbdCn7Xs++3FHf6f/N6EvXn2/UGnXmEKIvoXWRO1nRGyh
-2En7onpEOfctrUmHGiKkgPiOYsThTeJWYGtuF6VyrMW3qP1boa9RvRGt0UtL5Cwy
-wjwrZqv0Uxuvy3LMhpRNnNKw9fZBiFJ7Qbt7MOZf5NXF3wkeEoX1oLT4+MIW03rg
-S+eJBGqGMT6wENxq18VfEqQxFVrtADTvZzLcT9V/KMZun2B9BhlaIv0JlIJuSdtc
-FA+xjEcnesqwd35lDxeLaDTgA/xrfw==
-=KyDb
------END PGP SIGNATURE-----
-
---Sig_/jHNIhbfQcAL1YuM8Vd8o8eL--
+-sughosh
