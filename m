@@ -4,73 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A31A7C25B76
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 11:52:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75A15C25B76
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 12:26:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CFC54878ED;
-	Tue, 11 Jun 2024 13:52:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A99E28860A;
+	Tue, 11 Jun 2024 14:26:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="cjSNafgq";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="U9FFB5KU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17226882B6; Tue, 11 Jun 2024 13:52:19 +0200 (CEST)
+ id 3A3A888665; Tue, 11 Jun 2024 14:26:10 +0200 (CEST)
 Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CFCCF83334
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 13:52:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D15E7882EF
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 14:26:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1718106734; x=1718711534; i=xypron.glpk@gmx.de;
- bh=2Sr4UWCb7kZXgbxNy0IzJywe+e28S4NReEC1sK/yUqo=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
- Subject:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=cjSNafgqBe2fVsmK5Sx77RUEMoCU1yVfFIYov+Aki38hukgH7A6+q/UCpsUH+PRp
- tTTIOdAwIYYkP/rhor96tU4beEarB8ABCPCUxwlaWXdnn59fxbKVwzYJX+wWNKkCp
- kaBa/8yTBIQXVEHN8Ut5G+cDFuNFfkS/K9B93TD6ZuWWBhAGlL8WulrmRYHqSWq1v
- iQhEX5KhX5srOAZQVwL6vEb56G/AyuEhHUpooLMEketHIYjnZreHNQOavN/af9v1+
- gwXmS6xh4EOAu1VT58fqG9K6qdkwWVT8vJtV8wph7pCi+kyH9ZMwk1z5Oq7fw+zEk
- y4AmyPQX2dkSIxg4RA==
+ s=s31663417; t=1718108763; x=1718713563; i=xypron.glpk@gmx.de;
+ bh=yd2BSGoCIKELsGDyrk0weDPOBMY8Ihb+CqtUdUjsL+Y=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=U9FFB5KUZa8gEsQwKy4Y/ZN1XSnZpDtPXqWbGR8s4LKt+f4u4+LvJfCIRzRmhgRV
+ AZhBPM9ZuJQtHtFON55EXZc5W/ns5/HGPwEkmA4TNrn1NYeyHQCF8D3JSby3piD4m
+ nv0+9D8nzkgxK/kDrF5shn0q72lKKZo2N5p0nzrZZrAArIAZuAsoLiqoFx3FGgpJV
+ ACNME7gsgH/PPd+3kxJsbuu1kPQdOknsU5BSeHDG4EY4UY9rJQgGh0G0nKUSa/xXI
+ fDBCceTY4pBBq+b8lEpQkuSH7Svpk8glg5MLNLQlHX/XEXe8V8Ek7P4fEK/4nGv7C
+ 7ZLXi6TI6fgF+miltg==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.126] ([109.42.176.212]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MkHQh-1sfZLj1gGf-00mFXc; Tue, 11
- Jun 2024 13:52:14 +0200
-Message-ID: <1e8d881a-6b93-453c-8639-34ca61aa82cd@gmx.de>
-Date: Tue, 11 Jun 2024 13:52:13 +0200
+Received: from [192.168.123.126] ([109.42.176.212]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1M6UZv-1sJVfm0JWD-009fuS; Tue, 11
+ Jun 2024 14:26:03 +0200
+Message-ID: <b723aa8e-1d29-4904-953d-160caf097136@gmx.de>
+Date: Tue, 11 Jun 2024 14:26:02 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 01/16] lib: fdtdec: Handle multiple memory nodes
+To: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20240522-loongarch-v1-0-1407e0b69678@flygoat.com>
+ <20240522-loongarch-v1-1-1407e0b69678@flygoat.com>
 Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [NEXT] Pull request efi-next-20240611
+In-Reply-To: <20240522-loongarch-v1-1-1407e0b69678@flygoat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Pqv+pfe3LqvX+WzTPR20z5aiTPrkpfgh0uWEEHHKGf/lqvF9fyj
- 4iZSuRTEWjTH8jkHLTjQBgP9yOcXoowojlJ2+3O++IiFNCvyEn9tMggsXmoWeiZ2CMu5fOE
- x9o4Oz2yjwaEh/RNWN9sNYqSoO0JgnX2ePIX4N42cEdMqiOZj8InRyOL/ejfRsGuvV1XxMs
- xO81HKoUmBhOYj9ovqHjQ==
-UI-OutboundReport: notjunk:1;M01:P0:dKcxRcmFNrE=;6mGVWCh8ojj8+9sGIOYqL1u627Z
- 7hh1nN9PvSy/uK3XiwpB/Yi9IAFkEYBBNxu54S76sk7o5HscQieKVPDNA27BRT4HN0unkxGFl
- NqeOo7IQqBoBjm3xSdm3qEo8nDW88cCAK84clj2leBQgW9KdCgfSSpYQygIUXw9jhbQqKz1Bi
- 1hikG0bd2CkwfGdQh6OfdkgcoWZIwal7nDTqt5SBH2ImPQJi0vwZdpqXpEEjB12d+PlojZxm4
- zL9qYV3M/Enzto/DvA9drqllmo96N9xyepp/NXkIAemrJ1osEtsRT9qD6wOCxoUacZscE3NYs
- SAMMGu1xF0vGDLJVfjOLe0E6da3pDmC9MNWYbCuODUp4ZoIn2CEHQsh7AiCL+ZyKmIWf7Y9N9
- nIqB5pVbREMEcDQ5yxrPhkJp4hlR3IPR+J5jJUZL/9iEEP30Zm+76Y02+EVOG1oD7vhopAVr0
- ud36TLDc8OWblVLhFZqVctZqZ6JqBR7l8fFgeMjIt08u8s0sBpElKKZlVhsQXW14h1MSSwBJQ
- evxXoL7JpF8WK/tlDGF4rIWrno4YK4P6TIS6/evNbdDgOCVWsfthmmjoBVjGWuL7zxddG+9XR
- C+hHxY8MGiMxhThQjd2nnlylDjBkO0LFlKmR0seqEArw2CGP75oPtJtX6FZOGrLAhTvCSljOC
- AbykRrE3nWuSCKqITanI2zMgTe2fF0ZEUEcKMNtrGBwEA++0I6F4LithNr7WcfLgsZX1njpT9
- t+WO76ryVz15bMRckgcx9b/CHuXxz0y0NH4/X4v013wjzc44MTYWU8AG/4OycpLhDMRDHn/l7
- qgfFLHonv5K1TVL+Q0wxhzRM+/Gabp7SgFm4rGKti6FT0=
+X-Provags-ID: V03:K1:LA4wYkWYp3m+5PbeqGEjP4AeO4XWtyytU6Ab2e4AaylqyTeNby4
+ jy7KhGwFPPs2t7lrlocpcbhVML2ZWMSP7kmUNd+pzwwaKPpUDPKzEzqAdqNC0k7X6MaIa94
+ Zm9Y+ejo1kYjfW1mV6NArmjFXXn6r7MdX9E0g+xQSn/ts//WEDiguZqXYcGXBHzkQluepb/
+ 5nwcV8FKQ5elBmW5RL10Q==
+UI-OutboundReport: notjunk:1;M01:P0:AEqpE80EItM=;zrYUo0GafEceqLjLTWa4/CgXH4R
+ sXFOehvrluDTRQlFn+EjlDyfBJdCd/SmTvvQuexdT9C4zrEh+kKzXrAnR0l9KLLoF3JBpV6cs
+ DVideUehduVQP7C9W3hnxrvVAsQcKbwKRaXBTHDcpwQYflxtekKiXTEInPhmtPl1XxcOVoXLK
+ zeNNXxoky9rdWS7surndUVpzRAbX0XEg3gTgBt/al9AQMsL2cBOf03ul3s6HWb/3TPGqMaPWE
+ VUUiK1u6FQhjZt/nLWb7ubYK0YJYc2Rom8CPY9IpV8N6IQPXlVE68ID0HoHQp2YhrKRLxdE+E
+ h2ApfcZ2HcKvzaTZoYqDhrvheOnZ3k++AyaBTJcDG6jIbvOMQBb/9owpv3FJij1n0tmsCWP1B
+ GxX35TNzJE0fz687ULKydVTOTkulZauGKx/ZHYOTj9oMlofcDQvtfLzaHcRvrqnrI/lZPcC3V
+ dmowHb7yyHfGpsFRWEFIJbnQH0ZHIpcipENsTMbniIwN5y+tQsV9s+SxlWk3HTABT1R1mssJq
+ hAU1C8Fk315bEuU1kMbAscx/SPb//zAQizFGG9U5mA2utwuq3FgdArHGsHHY+FD+dPM1zbfEX
+ g41kiNbHU7n2Wh3PgGd4y2LNYXmOTyls980jrF/JyztiM193hKCFogYJ1/2PV+apCZg5eN+TF
+ 6uvqwO/NZiGopbCaoe3Byq9/tkwYNHDVHk/dqUyW1ekX2w1271U2WAvvPLm0JjtqF3EbmIDLL
+ r/7fDzjiFfajQ9NhvUjPDuzz4c+3PtiyUAAXDHSW3EtgUtO/acdELU4hlW6JCqenC3RnC//OV
+ ivR2pBgVgwbxhtJu53UzQmXktyo3rzYn8nrWLnsb8vt3A=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,67 +91,232 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+On 22.05.24 17:34, Jiaxun Yang wrote:
+> Current code only tries to fetch the first memory node found in
+> fdt tree and determine memory banks from multiple reg properties.
+>
+> Linux do allow multiple memory nodes in devicetree, rework
 
-This pull request is for the next branch.
+%/do allow/allows/
 
-The following changes since commit 4f836fb324ba500ecabdba4146c3ca9e1600cdf=
-5:
+It is not Linux that allows it but
 
-   memory: ti-gpmc: use printf to dump settings/timings (2024-06-07
-14:07:23 -0600)
+Devicetree Specification, Release v0.4
+https://github.com/devicetree-org/devicetree-specification/releases/downlo=
+ad/v0.4/devicetree-specification-v0.4.pdf
 
-are available in the Git repository at:
+> fdtdec_setup_mem_size_base_lowest and fdtdec_setup_memory_banksize
+> to iterate over all memory nodes.
+>
+> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> ---
+>   lib/fdtdec.c | 137 ++++++++++++++++++++++++++++++++++++---------------=
+--------
+>   1 file changed, 83 insertions(+), 54 deletions(-)
+>
+> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+> index b2c59ab3818b..403b363043d6 100644
+> --- a/lib/fdtdec.c
+> +++ b/lib/fdtdec.c
+> @@ -1075,90 +1075,119 @@ ofnode get_next_memory_node(ofnode mem)
+>   	return mem;
+>   }
+>
+> +static void sort_memory_banks(int num)
+> +{
+> +	int i, j;
+> +	phys_addr_t tmp_start;
+> +	phys_size_t tmp_size;
+> +	struct bd_info *bd =3D gd->bd;
+> +
+> +	for (i =3D 0; i < num - 1; i++) {
+> +		for (j =3D i + 1; j < num; j++) {
+> +			if (bd->bi_dram[i].start > bd->bi_dram[j].start) {
+> +				tmp_start =3D bd->bi_dram[i].start;
+> +				tmp_size =3D bd->bi_dram[i].size;
+> +				bd->bi_dram[i].start =3D bd->bi_dram[j].start;
+> +				bd->bi_dram[i].size =3D bd->bi_dram[j].size;
+> +				bd->bi_dram[j].start =3D tmp_start;
+> +				bd->bi_dram[j].size =3D tmp_size;
+> +			}
+> +		}
+> +	}
 
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-tags/efi-next-20240611
+Please, use qsort() instead.
 
-for you to fetch changes up to 535321c2ea76de44896330040d2e43aa4645d026:
+> +}
+> +
+>   int fdtdec_setup_memory_banksize(void)
+>   {
+> -	int bank, ret, reg =3D 0;
+> -	struct resource res;
+> +	int bank =3D 0;
+>   	ofnode mem =3D ofnode_null();
+>
+> -	mem =3D get_next_memory_node(mem);
+> -	if (!ofnode_valid(mem)) {
+> -		debug("%s: Missing /memory node\n", __func__);
+> -		return -EINVAL;
+> -	}
+> +	while (true) {
+> +		struct resource res;
+> +		int reg =3D 0;
+>
+> -	for (bank =3D 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+> -		ret =3D ofnode_read_resource(mem, reg++, &res);
+> -		if (ret < 0) {
+> -			reg =3D 0;
+> -			mem =3D get_next_memory_node(mem);
+> -			if (!ofnode_valid(mem))
+> -				break;
+> +		mem =3D get_next_memory_node(mem);
+> +		if (!ofnode_valid(mem))
+> +			break;
+>
+> -			ret =3D ofnode_read_resource(mem, reg++, &res);
+> +		while (true) {
+> +			int ret =3D ofnode_read_resource(mem, reg, &res);
 
-   efi_loader: rename struct efi_initrd_dp to efi_lo_dp_prefix
-(2024-06-10 11:43:37 +0200)
+Please, leave a blank line after declarations.
 
-Gitlab CI reported no issues:
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/21059
+>   			if (ret < 0)
+>   				break;
+> -		}
+>
+> -		if (ret !=3D 0)
+> -			return -EINVAL;
+> +			if (bank >=3D CONFIG_VAL(NR_DRAM_BANKS))
+> +				goto too_may_memory_banks;
+>
+> -		gd->bd->bi_dram[bank].start =3D (phys_addr_t)res.start;
 
-=2D---------------------------------------------------------------
-Pull request efi-next-20240611
+The conversion is superfluous.
 
-UEFI:
+> -		gd->bd->bi_dram[bank].size =3D
+> -			(phys_size_t)(res.end - res.start + 1);
+> +			gd->bd->bi_dram[bank].start =3D (phys_addr_t)res.start;
+> +			gd->bd->bi_dram[bank].size =3D
+> +				(phys_size_t)(res.end - res.start + 1);
+>
+> -		debug("%s: DRAM Bank #%d: start =3D 0x%llx, size =3D 0x%llx\n",
+> -		      __func__, bank,
+> -		      (unsigned long long)gd->bd->bi_dram[bank].start,
+> -		      (unsigned long long)gd->bd->bi_dram[bank].size);
+> +			log_debug("%s: DRAM Bank #%d %s.%d: start =3D 0x%llx, size =3D 0x%ll=
+x\n",
+> +				  __func__, bank, ofnode_get_name(mem), reg,
+> +				 (unsigned long long)gd->bd->bi_dram[bank].start,
+> +				 (unsigned long long)gd->bd->bi_dram[bank].size);
+> +			reg++;
+> +			bank++;
+> +		}
+>   	}
+>
+> +	if (!bank) {
+> +		log_warning("%s: Missing /memory node\n", __func__);
+> +		return -EINVAL;
+> +	}
+> +
+> +	sort_memory_banks(bank);
+> +
+>   	return 0;
+> +
+> +too_may_memory_banks:
+> +	log_warning("%s: Too many memory banks\n", __func__);
+> +	return -EINVAL;
+>   }
+>
+>   int fdtdec_setup_mem_size_base_lowest(void)
+>   {
+> -	int bank, ret, reg =3D 0;
+> -	struct resource res;
+> -	unsigned long base;
+> -	phys_size_t size;
+> +	int bank =3D 0;
+>   	ofnode mem =3D ofnode_null();
+> +	__maybe_unused const char *final_name;
+> +	__maybe_unused int final_reg;
 
-* Allow specifying a device-tree in an EFI load option
-   using the efidebug or eficonfig command.
-* Let the EFI boot manager fall back to an OS provided device-tree
-   if no device-tree is specified.
+'__maybe_unused' is superfluous.
 
-=2D---------------------------------------------------------------
-Heinrich Schuchardt (9):
-       efi_loader: allow concatenation with contained end node
-       cmd: eficonfig: add support for setting fdt
-       cmd: efidebug: add support for setting fdt
-       efi_loader: load device-tree specified in boot option
-       efi_loader: move distro_efi_get_fdt_name()
-       efi_loader: return binary from efi_dp_from_lo()
-       efi_loader: export efi_load_image_from_path
-       efi_loader: load distro dtb in bootmgr
-       efi_loader: rename struct efi_initrd_dp to efi_lo_dp_prefix
+>
+>   	gd->ram_base =3D (unsigned long)~0;
 
-  boot/bootmeth_efi.c                        |  60 +-------------
-  cmd/eficonfig.c                            |  83 ++++++++++++++-----
-  cmd/efidebug.c                             | 129
-++++++++++++++++++++---------
-  include/efi_load_initrd.h                  |  12 ++-
-  include/efi_loader.h                       |  24 +++++-
-  lib/efi_loader/Makefile                    |   1 +
-  lib/efi_loader/efi_bootbin.c               |   2 +-
-  lib/efi_loader/efi_bootmgr.c               |  81 +++++++++++++++++-
-  lib/efi_loader/efi_boottime.c              |   3 +-
-  lib/efi_loader/efi_device_path.c           |  40 +++++----
-  lib/efi_loader/efi_device_path_utilities.c |   2 +-
-  lib/efi_loader/efi_fdt.c                   | 117
-++++++++++++++++++++++++++
-  lib/efi_loader/efi_helper.c                |  44 ++++++++++
-  lib/efi_loader/efi_load_initrd.c           |   2 +-
-  lib/efi_loader/initrddump.c                |   2 +-
-  15 files changed, 463 insertions(+), 139 deletions(-)
-  create mode 100644 lib/efi_loader/efi_fdt.c
+gd->ram_base =3D ULONG_MAX;
+
+>
+> -	mem =3D get_next_memory_node(mem);
+> -	if (!ofnode_valid(mem)) {
+> -		debug("%s: Missing /memory node\n", __func__);
+> -		return -EINVAL;
+> -	}
+> +	while (true) {
+> +		struct resource res;
+> +		phys_size_t base, size;
+> +		int reg =3D 0;
+>
+> -	for (bank =3D 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+> -		ret =3D ofnode_read_resource(mem, reg++, &res);
+> -		if (ret < 0) {
+> -			reg =3D 0;
+> -			mem =3D get_next_memory_node(mem);
+> -			if (!ofnode_valid(mem))
+> -				break;
+> +		mem =3D get_next_memory_node(mem);
+> +		if (!ofnode_valid(mem))
+> +			break;
+>
+> -			ret =3D ofnode_read_resource(mem, reg++, &res);
+> +		while (true) {
+> +			int ret =3D ofnode_read_resource(mem, reg, &res);
+>   			if (ret < 0)
+>   				break;
+> +			base =3D res.start;
+> +			size =3D res.end - res.start + 1;
+> +			if (gd->ram_base > base && size) {
+> +				gd->ram_base =3D base;
+> +				gd->ram_size =3D size;
+> +				final_name =3D ofnode_get_name(mem);
+> +				final_reg =3D reg;
+> +			}
+> +			reg++;
+> +			bank++;
+>   		}
+> +	}
+>
+> -		if (ret !=3D 0)
+> -			return -EINVAL;
+> -
+> -		base =3D (unsigned long)res.start;
+> -		size =3D (phys_size_t)(res.end - res.start + 1);
+> -
+> -		if (gd->ram_base > base && size) {
+> -			gd->ram_base =3D base;
+> -			gd->ram_size =3D size;
+> -			debug("%s: Initial DRAM base %lx size %lx\n",
+> -			      __func__, base, (unsigned long)size);
+> -		}
+> +	if (!bank) {
+> +		log_warning("%s: Missing /memory node\n", __func__);
+> +		return -EINVAL;
+>   	}
+>
+> +	log_debug("%s: Initial DRAM %s.%d: base %lx size %lx\n",
+> +		  __func__, final_name, final_reg,
+> +		  (ulong)gd->ram_base, (ulong)gd->ram_size);
+
+ram_base is already defined as unsigned long.
+
+include/asm-generic/global_data.h:154:
+   unsigned long ram_base;
+
+Best regards
+
+Heinrich
+
+> +
+>   	return 0;
+>   }
+>
+>
+
