@@ -4,85 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 438DEC27C75
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 21:02:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13412C27C75
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 21:02:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C459F88701;
-	Tue, 11 Jun 2024 23:01:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 30AF78876D;
+	Tue, 11 Jun 2024 23:01:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Noetu1nw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rGjy5xx1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21FD988709; Tue, 11 Jun 2024 23:01:45 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id C924288771; Tue, 11 Jun 2024 23:01:51 +0200 (CEST)
+Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
+ [IPv6:2607:f8b0:4864:20::c2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C21AF88783
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 23:01:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E75D8839F
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 23:01:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-6f8ef63714cso906178a34.1
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 14:01:42 -0700 (PDT)
+Received: by mail-oo1-xc2d.google.com with SMTP id
+ 006d021491bc7-5b52b0d0dfeso3073548eaf.0
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 14:01:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718139701; x=1718744501; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1718139708; x=1718744508; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=V28sbl+7O8HKe9UvpJOb0X2cnWy84IN6kMVGvY6xIPQ=;
- b=Noetu1nwCEd0lk8aE+30WodR24Q7XA/YRUXO+XzUU7Vn+gDFaBw6XZ+JYmE1dFUJjb
- ggfOIlnq9qFVcLOCYVGgTUylftFUygO0RU/CGPx9AmKC/bPYUw6orQQVBcsZSo8hxzST
- MMABqhD/KChT7cfSCC0/zZ166vRbW/uIY2L9Q=
+ bh=0jIGpiVFUcF5+nuR/QdKPw+qarACmsnqSaVMbp4weeg=;
+ b=rGjy5xx1VI1NaqTzeydyEmJCBuVgLyOPeRejFKSx18hu1bW6+IQCkDR2hQ4vqOWmPn
+ SRmTd6jP2FIk7sWLz+yPB95RVFx43n2axI3gqjBtdiOzgx3thVzQbxWbDA3kKdRioyVd
+ VCTSAEECNfvUq8v4qHTDpNX6ytm4h5ELUxb0I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718139701; x=1718744501;
+ d=1e100.net; s=20230601; t=1718139708; x=1718744508;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=V28sbl+7O8HKe9UvpJOb0X2cnWy84IN6kMVGvY6xIPQ=;
- b=ilIKHjXtG0SN50dViyK5u7R88pQObcYqLDqS87dxY9V77X5vLBrGrT+0IVDP8Ys3yF
- i6Im3nhsA8u40A/DHLRKhBV0I7rtpEEaTpTLHm7ng7UlV0a8efBZwdXsjjiTobTh+F9U
- xX7cV2G6NMuQsMSHbfBuc+IcZchRW459ATKBhISZtediNK0B2Wi3LhOysGK4hO4hiFUB
- 2SJWEQGALUl5fQjhYD8wdHl8F1her3oVsm1cak8FZHSrNSURhwiXaYNA8PiOSCf9WvAK
- T0e9vYNXcHskXRr72wEz8S3Q4jWWY1rNCpNZmxpAFpVOfFpE+q6fAQDm1zEgnrnFy1Ce
- qwmg==
+ bh=0jIGpiVFUcF5+nuR/QdKPw+qarACmsnqSaVMbp4weeg=;
+ b=nVLdfwZl/oLtTJUUrRLyy3YaCQ4ZYqZXsayPIJaeD6lqhbN8Ptk5eiTHWb9pgK6gy7
+ wVnGsPHdgykX886mReFHdVljNWE4NRhR56eQE4vNDnfkncRkw1UAQHKdvD1k50j6VcEH
+ akFh4JueUzCUgg7iJJV9JaBF3MDp66BQyJ1sLSe3v2a0YMfsKp90qdC4OQUSM+LHWW0F
+ rJ0cqiRfSUZUe4/unmP6vRvKRbwq4dklP5gEl/rf3nMaIERflyukZSQdDSBv2qoIqIQE
+ WrKFnAUUB+Vvek+cdRssPx3xsVKAw9iegbhauN+93a6epJRMwL0e39MWC+GkoYNMaq71
+ VQEw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWDWuI3aER8NtEdEe+M0HLehjZtw+qRUw9TVAxLp0aOS42/s2AR9VDh7aGo+crROpFYZZ10eq/B3DNgOYjp97epBjQ5fA==
-X-Gm-Message-State: AOJu0YybN1txsLnhHPf6PVK81JWonX0nPS545y8Yoygj553WlafJHPPq
- dqwuOVE3HNHgKNbmjAhfnbAQPkTP7vFiaDQ5uyy59Xbxpr6wKu1GRnCc72iw8m4=
-X-Google-Smtp-Source: AGHT+IHQQnIgJSCiuwP2WjYWOsZz4tM7skBRMpq/gwiB3bD8HpOp81TRERZk0/Aqg+eaG9yvfuucWQ==
-X-Received: by 2002:a05:6871:79a1:b0:24f:c95b:ab6 with SMTP id
- 586e51a60fabf-25514b4d565mr5965fac.8.1718139701268; 
- Tue, 11 Jun 2024 14:01:41 -0700 (PDT)
+ AJvYcCUrtlPeqRwn0yunKW6X9KByO5c9PooOJaUqJ+gLL2kgLf0+epEtMKRDX8J4RK9L1j2fhO1Q1ytnI9NCf4Pc/Rf2+mblUg==
+X-Gm-Message-State: AOJu0YwV5MIUq77wxGcsigcPqaxsSC9JVY2m30C4byTh7NNIhbOk1wDF
+ wx1UzU3tDXArgzUPcw3asVk5hlB03R3OetDxqN+j+oy2Ph+nBMOebsyxcnkymyk=
+X-Google-Smtp-Source: AGHT+IEP0FjRiPHn4/fM07bhjwaMoN0I3UcjTvqFCNrVXZAYJik1T++4dXAD6NOa2DqL+Nk24PyzZA==
+X-Received: by 2002:a05:6820:168e:b0:5bb:672:404d with SMTP id
+ 006d021491bc7-5bb067242a8mr6338436eaf.7.1718139707993; 
+ Tue, 11 Jun 2024 14:01:47 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
  [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-254480d9c79sm3040337fac.52.2024.06.11.14.01.40
+ 006d021491bc7-5bb33adc67esm124542eaf.13.2024.06.11.14.01.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Jun 2024 14:01:40 -0700 (PDT)
-Date: Tue, 11 Jun 2024 15:01:38 -0600
+ Tue, 11 Jun 2024 14:01:47 -0700 (PDT)
+Date: Tue, 11 Jun 2024 15:01:45 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>,
- Fabio Estevam <festevam@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [RFC PATCH 15/31] efi_memory: add an event handler to update
- memory map
-Message-ID: <20240611210138.GL68077@bill-the-cat>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>
+Subject: Re: [RFC PATCH 04/31] lmb: remove local instances of the lmb
+ structure variable
+Message-ID: <20240611210145.GM68077@bill-the-cat>
 References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
- <20240607185240.1892031-16-sughosh.ganu@linaro.org>
- <50d0efab-0df6-47ef-a4e9-b0e3d6ec2556@gmx.de>
- <20240611143635.GF68077@bill-the-cat>
- <CAFLszTiEWw0tey4zeqjPYe2TsSWH1P4Xakn8OrOKSwqDU+EM_A@mail.gmail.com>
+ <20240607185240.1892031-5-sughosh.ganu@linaro.org>
+ <CAFLszTjQW72_Z8Dx4g1mVx5Y=wq9xeXYVBffxLUto6sDp6CMbw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="kAi8ujN4wSrvQZ9W"
+ protocol="application/pgp-signature"; boundary="P09aqfjzLnJOpwQ4"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTiEWw0tey4zeqjPYe2TsSWH1P4Xakn8OrOKSwqDU+EM_A@mail.gmail.com>
+In-Reply-To: <CAFLszTjQW72_Z8Dx4g1mVx5Y=wq9xeXYVBffxLUto6sDp6CMbw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,127 +98,87 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---kAi8ujN4wSrvQZ9W
+--P09aqfjzLnJOpwQ4
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jun 11, 2024 at 12:52:19PM -0600, Simon Glass wrote:
-> Hi,
+On Tue, Jun 11, 2024 at 12:52:22PM -0600, Simon Glass wrote:
+> Hi Sughosh,
 >=20
-> On Tue, 11 Jun 2024 at 08:36, Tom Rini <trini@konsulko.com> wrote:
+> On Fri, 7 Jun 2024 at 12:53, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > >
-> > On Tue, Jun 11, 2024 at 12:17:16PM +0200, Heinrich Schuchardt wrote:
-> > > On 07.06.24 20:52, Sughosh Ganu wrote:
-> > > > There are events that would be used to notify other interested modu=
-les
-> > > > of any changes in available and occupied memory. This would happen
-> > > > when a module allocates or reserves memory, or frees up memory. The=
-se
-> > > > changes in memory map should be notified to other interested modules
-> > > > so that the allocated memory does not get overwritten. Add an event
-> > > > handler in the EFI memory module to update the EFI memory map
-> > > > accordingly when such changes happen. As a consequence, any subsequ=
-ent
-> > > > memory request would honour the updated memory map and only availab=
-le
-> > > > memory would be allocated from.
-> > > >
-> > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > > ---
-> > > >   lib/efi_loader/efi_memory.c | 70 ++++++++++++++++++++++++++++++--=
------
-> > > >   1 file changed, 58 insertions(+), 12 deletions(-)
-> > > >
-> > > > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memor=
-y.c
-> > > > index 435e580fb3..93244161b0 100644
-> > > > --- a/lib/efi_loader/efi_memory.c
-> > > > +++ b/lib/efi_loader/efi_memory.c
-> > > > @@ -73,6 +73,10 @@ struct efi_pool_allocation {
-> > > >   #if CONFIG_IS_ENABLED(MEM_MAP_UPDATE_NOTIFY)
-> > > >   extern bool is_addr_in_ram(uintptr_t addr);
-> > > >
-> > > > +static efi_status_t __efi_add_memory_map_pg(u64 start, u64 pages,
-> > > > +                                       int memory_type,
-> > > > +                                       bool overlap_only_ram);
-> > > > +
-> > > >   static void efi_map_update_notify(u64 addr, u64 size, u8 op)
-> > > >   {
-> > > >     struct event_efi_mem_map_update efi_map =3D {0};
-> > > > @@ -84,6 +88,34 @@ static void efi_map_update_notify(u64 addr, u64 =
-size, u8 op)
-> > > >     if (is_addr_in_ram((uintptr_t)addr))
-> > > >             event_notify(EVT_EFI_MEM_MAP_UPDATE, &efi_map, sizeof(e=
-fi_map));
-> > > >   }
-> > > > +
-> > > > +static int lmb_mem_map_update_sync(void *ctx, struct event *event)
-> > > > +{
-> > > > +   u8 op;
-> > > > +   u64 addr;
-> > > > +   u64 pages;
-> > > > +   efi_status_t status;
-> > > > +   struct event_lmb_map_update *lmb_map =3D &event->data.lmb_map;
-> > > > +
-> > > > +   addr =3D (uintptr_t)map_sysmem(lmb_map->base, 0);
-> > > > +   pages =3D efi_size_in_pages(lmb_map->size + (addr & EFI_PAGE_MA=
-SK));
-> > > > +   op =3D lmb_map->op;
-> > > > +   addr &=3D ~EFI_PAGE_MASK;
-> > > > +
-> > > > +   if (op !=3D MAP_OP_RESERVE && op !=3D MAP_OP_FREE) {
-> > > > +           log_debug("Invalid map update op received (%d)\n", op);
-> > > > +           return -1;
-> > > > +   }
-> > > > +
-> > > > +   status =3D __efi_add_memory_map_pg(addr, pages,
-> > > > +                                    op =3D=3D MAP_OP_FREE ?
-> > > > +                                    EFI_CONVENTIONAL_MEMORY :
-> > >
-> > > This is dangerous. LMB might turn memory that is marked as
-> > > EfiReservedMemory which the OS must respect into EfiBootServicesData
-> > > which the OS may discard.
-> > >
-> > > E.g. initr_lmb() is being called after efi_memory_init().
-> > >
-> > > Getting all cases of synchronization properly tested seems very hard =
-to
-> > > me. Everything would be much easier if we had only a single memory
-> > > management system.
+> > With the move of the LMB structure to a persistent state, there is no
+> > need to declare the variable locally, and pass it as part of the LMB
+> > API's. Remove all local variable instances and change the API's
+> > correspondingly.
 > >
-> > Yes, Sughosh is working on the single memory reservation system for
-> > everyone to use. This pairs with the single memory allocation system
-> > (malloc) that we have. Parts of the code base that aren't keeping these
-> > systems up to date / obeying their results need to be corrected.
+> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > ---
+> >  arch/arc/lib/cache.c                 |   4 +-
+> >  arch/arm/lib/stack.c                 |   4 +-
+> >  arch/arm/mach-apple/board.c          |  17 ++-
+> >  arch/arm/mach-snapdragon/board.c     |  17 ++-
+> >  arch/arm/mach-stm32mp/dram_init.c    |   7 +-
+> >  arch/arm/mach-stm32mp/stm32mp1/cpu.c |   6 +-
+> >  arch/m68k/lib/bootm.c                |   7 +-
+> >  arch/microblaze/lib/bootm.c          |   4 +-
+> >  arch/mips/lib/bootm.c                |   9 +-
+> >  arch/nios2/lib/bootm.c               |   4 +-
+> >  arch/powerpc/cpu/mpc85xx/mp.c        |   4 +-
+> >  arch/powerpc/include/asm/mp.h        |   4 +-
+> >  arch/powerpc/lib/bootm.c             |  14 +-
+> >  arch/riscv/lib/bootm.c               |   4 +-
+> >  arch/sh/lib/bootm.c                  |   4 +-
+> >  arch/x86/lib/bootm.c                 |   4 +-
+> >  arch/xtensa/lib/bootm.c              |   4 +-
+> >  board/xilinx/common/board.c          |   7 +-
+> >  boot/bootm.c                         |  26 ++--
+> >  boot/bootm_os.c                      |   5 +-
+> >  boot/image-board.c                   |  32 ++---
+> >  boot/image-fdt.c                     |  29 ++---
+> >  cmd/bdinfo.c                         |   6 +-
+> >  cmd/booti.c                          |   2 +-
+> >  cmd/bootz.c                          |   2 +-
+> >  cmd/load.c                           |   7 +-
+> >  drivers/iommu/apple_dart.c           |   7 +-
+> >  drivers/iommu/sandbox_iommu.c        |  15 +--
+> >  fs/fs.c                              |   7 +-
+> >  include/image.h                      |  22 +---
+> >  include/lmb.h                        |  39 +++---
+> >  lib/lmb.c                            |  81 ++++++------
+> >  net/tftp.c                           |   5 +-
+> >  net/wget.c                           |   5 +-
+> >  test/cmd/bdinfo.c                    |   2 +-
+> >  test/lib/lmb.c                       | 187 +++++++++++++--------------
+> >  36 files changed, 270 insertions(+), 333 deletions(-)
 >=20
-> The EFI allocations don't happen until boot time...so why do we need
-> to do this now? We can instead have an EFI function to scan LMB and
-> add to its memory map.
+> This isn't necessary...and it will make things harder. You can have a
+> global 'lmb' while still allowing passing a different pointer when
+> needed.
 
-We're talking about reservations, not allocations. So yes, when someone
-is making their reservation, they need to make it. I don't understand
-your question.
+There's only one reservation checking system and list of known
+reservations, keep in mind.
 
 --=20
 Tom
 
---kAi8ujN4wSrvQZ9W
+--P09aqfjzLnJOpwQ4
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZouy8ACgkQFHw5/5Y0
-tyzgeQwArgqZlaFrzUnGPSpPZyPxpY/KyL0tsqi00mtLtHETiUoAw5ltKZ8BCz5M
-G0S3Hle7tW82SbkKsKD4loV3A2YPMYVLKVWdxEK1AN93JBrZbdDg0yegxeaVzeb4
-9Lu/8nTpgSsk7GvU2N22Dgc29mDL2Ym2Zm4KOvuaDYqwsK7iUYe5qZAnDWjffWtX
-0Ezpp7UU5e9nesRHDPLB2bNj+WXMR15Q6YdemTnvSTl2xsJgUHbilANrgR7/9N/U
-RhHhAcf5cb0Z6elRa2YRoPrEE5vsp5pMi8SIWq5Ip1W5EZmBNuC8BOuQp5J0Qv54
-rOwWMDcsga97e+lMXqDMuJiTn3guUYcLPP7Ztkl5UE6GYx3waI4XObqO/pKzTLCU
-S8B7aw1Yz3/CvK/JHG0V/TdRHYL6m7Y5NFMvWm1xKUc8rzPH7A/eqPidm2GiErxh
-UlRdRcWeSrzDFR+mbT/To0xJBSy3yjuasi9iiT7I3sQHRar/ck9tF88Tstk8FO0U
-uh87c4m8
-=woEU
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZouzkACgkQFHw5/5Y0
+tyzBXgwAjNEsB1Pc3kDl1/W+M19bYZixYVjGxzterfR5yX5ZYSSHJJOh+UjNIFsb
+4xmREUi9jOjObq+sqHp0dpNiNI2xrebzFGERjMpvpfCjZn5yfyc5bHulD9JaC6mU
+QlCh8f/zusA49PClo2rigHnaGVyiH4cODp9pJM2KCxWylnqzjXC8qYneDXATp1k4
+/uhYU5zWPYhuiGUk0jul92kn8VWhfVyE3Cn1Kbble+cgDE5sH69zEWLu/e9f7tgF
+YkKkskNJdt05TPHquDl7Ny8CPBMt7MtA0Oa8w+ILJT1cbulFSfbpovmwIpprcOBS
+1xf5WAA7eAVdPDs6dXlNI79EqsIBUi8j9Td8s76Q+akcytBPWME0VHkgz9bDP0Gs
+rK2vTXj+2AhdxkqBG8oIlcBKOYjJWRhfMpShUHonFqW1zig6xjREZOAfnvovWGCl
+Kix/YnrosVzLWbkqzYUU3yuUffCzOnxHE8U4m5We2BMYai6OARd9RqMhXuInyJmq
+upqZQQcZ
+=wgRO
 -----END PGP SIGNATURE-----
 
---kAi8ujN4wSrvQZ9W--
+--P09aqfjzLnJOpwQ4--
