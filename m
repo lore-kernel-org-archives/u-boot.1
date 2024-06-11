@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49FF2C27C75
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 18:52:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95425C27C65
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 18:52:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C901E88725;
-	Tue, 11 Jun 2024 20:52:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3C9BF88718;
+	Tue, 11 Jun 2024 20:52:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="G14dmd9h";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mkIBjejD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9D7D8871C; Tue, 11 Jun 2024 20:52:11 +0200 (CEST)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
+ id A17C988735; Tue, 11 Jun 2024 20:52:13 +0200 (CEST)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46BB288723
+ by phobos.denx.de (Postfix) with ESMTPS id F227E886DA
  for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 20:52:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-6ae259b1c87so1207776d6.1
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-6b0645351ebso3959986d6.2
  for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 11:52:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718131928; x=1718736728; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1718131929; x=1718736729; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+j9Yk03BYtlxEZsX4xz9SjVcF+NRplTBDhw4IXTwZYw=;
- b=G14dmd9hMshPk4TaOxtCJme2O8wazsQj5db21MZjUlXdlB4scu77X9aapp+3pTar1/
- 5AlOmJ9cpUgUcg6fYdbzNr6XB2vn/2tM18/F71TMF5rtM6/umZlk/EJD5lrRM7+MbxDM
- Y+Tt30h82XoSsYPaFpPZCjWrqPCy/4b/luPas=
+ bh=yoq6Wm+MO0qMARGCSseRxk3HVW40pOh5gD3NiPmwvZ4=;
+ b=mkIBjejDoyhmNfCiukxWi0eIeNImWtekUxsuneOfS54rrbmedqqZDY+E54Pu0XQbnC
+ WxazP5eTxMI06l1TYVmI7Qy7ixIkoIuUmgJKsWZae4UnWfXhD7gwhFpIGjVbLB7BNM7x
+ D1w10dIt5FYHKQ/cyQd23l3avm+XvyU2Fx6LQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718131928; x=1718736728;
+ d=1e100.net; s=20230601; t=1718131929; x=1718736729;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=+j9Yk03BYtlxEZsX4xz9SjVcF+NRplTBDhw4IXTwZYw=;
- b=Iu96a972h2TIcFBOlfsauwslcJphZ/3Tvrix9tZcr6mCBW5rwNR8zi5LVgMGPu41FB
- GL/4L+rU2W7AdMmBejuga4MKIms2jE/PiLlxeyOwt+i//VH0PjWEm0N/tOtNx4fyj4ed
- aleVx3fcabPnE2UvNrCubtpmPhte+yRDw/bPg/TCKdhkJzJqpXRz2OwCmNmoS1biJAAT
- FPTIwnh3SAx2sXOcYMfOb9YRxTSKA4fxDvd7jJoLpJZhAR8bfaTDofMi14BhZUFN5oG4
- gOCCmZkhl1GeMpt7/1dl1XrZL3rHZ/L5jqIo2V5HUXukf85FU/IFSpAwo/fRUpKnvfcU
- YWgg==
+ bh=yoq6Wm+MO0qMARGCSseRxk3HVW40pOh5gD3NiPmwvZ4=;
+ b=xKDxoFjux10vy0NGX3UDM8GpK/87gGrWL7FB/syz7ciMPQgIxSJ4YnBRpFDzPOPb6j
+ oDS2+L3M9B0ykXcMeAZcDdKkt5aT8Yok6KjN8w3noaACKuXPO52YE7eUtK89vxzLzYqA
+ vtGWip35tVGmmu55jt+Xe2Ji822QnI/ZlyB8+zSwrG7XKeKz+B8tKX12Tbrv7cDFDy6F
+ 8JiWPJdO6FIsO9rZ5/skFxWk+t0ADwn6ky9a7OuKEvS2LNjgQv2BQiEtgG7TPemlHHkj
+ 4zzTUFPewDi73vzVaCRWxivGoNuM6RkigIv05h7roT2IJcUsa8bVK6Qq/uK48lVT5ZnL
+ ukEA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXhWmZeL8ubo4m6TpM3Kguzik+oeFEJ1CBONIl7KnBeNU+wgnRofJxWjfg+FPenjxABoLwA8PKd3n5U3CZvLhXB7bGskA==
-X-Gm-Message-State: AOJu0YyD7hPpHDHvAc4tSEbosNBb2G5woHxMPlpczNpoHjTuAM/S5Cz5
- L0G514k02zIupQY1/CwRc1NdMqScxo758bFuGthQrgII/o2Dhn3isVjzk3EgkT/ZGtwrrgtCnoJ
- M/h7JMbljcdeq5FYRxDIMDJL2Z8G/G6226Es7
-X-Google-Smtp-Source: AGHT+IGBxf434I+TOa9lJOH4kW2SGRro7qcxz1msFu5soH7ASwd8CXXRaw9QJZSEuLhPiobC6t9jk32NGX9tx29zdKc=
-X-Received: by 2002:a05:6214:3211:b0:6b0:767d:4c25 with SMTP id
- 6a1803df08f44-6b089f60464mr71995186d6.22.1718131928156; Tue, 11 Jun 2024
+ AJvYcCUaZ+GxhrXpAvXD2zxUfAetPcPmt+oymKwDGWT10W6dhJrgyKCG1hCNYE2oy47qpc93VWDiiYKl9xUnQ2XHeohKcwgL0w==
+X-Gm-Message-State: AOJu0YzeAzPDp5PkM/dvCb4qe8oPrnWn3lW9VqV++zyqf0YlbHloFAEN
+ fGgBz6UItZ9Z8RsDFFDkf+he4m4vDT1Wd17mO2BoUYvtJzuAeneoaw+IUy0tDpixFj9qFtF0qDZ
+ k+jgTF7atRJL53kwj6mYg+h48jrf49dWxEALl
+X-Google-Smtp-Source: AGHT+IE0eSOIB4WiHpIuB2iRP1iq5D7HVzISFJr+OwVvLQsjqNTh53Wcx5YmLf3wUCbGlbLY+MMlLDRuR3D2+2G5P1k=
+X-Received: by 2002:a05:6214:469f:b0:6ad:6d06:ea9e with SMTP id
+ 6a1803df08f44-6b059cef258mr178095046d6.37.1718131928875; Tue, 11 Jun 2024
  11:52:08 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240611-misc-20240610-v2-0-028e82b0b620@cherry.de>
- <20240611-misc-20240610-v2-1-028e82b0b620@cherry.de>
-In-Reply-To: <20240611-misc-20240610-v2-1-028e82b0b620@cherry.de>
+ <20240611-misc-20240610-v2-2-028e82b0b620@cherry.de>
+In-Reply-To: <20240611-misc-20240610-v2-2-028e82b0b620@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 11 Jun 2024 12:51:56 -0600
-Message-ID: <CAFLszTicPzDKp3_L0bj0Oqe+ur5j=YODZ_Mwm1DguP-HRSar5Q@mail.gmail.com>
-Subject: Re: [PATCH v2 1/4] dm: core: fix misleading debug message when
- matching compatible
+Date: Tue, 11 Jun 2024 12:51:58 -0600
+Message-ID: <CAFLszThS5Kqrg1WfeJeoUency6vU8eYQ_U8dQvLzL0eobqDvQg@mail.gmail.com>
+Subject: Re: [PATCH v2 2/4] dm: core: fix signedness in debug messages
 To: Quentin Schulz <foss+uboot@0leil.net>
 Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>, 
  Michal Simek <michal.simek@amd.com>,
@@ -93,21 +92,29 @@ On Tue, 11 Jun 2024 at 07:04, Quentin Schulz <foss+uboot@0leil.net> wrote:
 >
 > From: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> A driver can have multiple compatible. When the id->compatible matches
-> for that driver, the first compatible supported by the driver is
-> currently returned, which gives the following confusing message:
+> outp always point to an unsigned type in ofnode_read_u* functions but
+> the format specifier is currently always using signed type.
 >
->    - found match at 'rk3588_syscon': 'rockchip,rk3588-sys-grf' matches 'rockchip,rk3588-pmugrf'
+> This is an issue since the signed type can only contain half of the
+> unsigned type values above 0.
 >
-> Considering that the compatible passed in argument is necessarily the
-> one that exactly matched to enter this code path, there's no need to do
-> some elaborate logic, just print the driver name and the compatible
-> passed in argument.
+> However, this now breaks another usecase. Indeed,
+> ofnode_read_s32_default is actually passing an s32 but it'll be printed
+> as a u32 instead. But since the function is called u32, it makes more
+> sense to have it print an unsigned value.
 >
-> Fixes: d3e773613b6d ("dm: core: Use U-Boot logging instead of pr_debug()")
+> This was discovered because arm,smc-id = <0x82000010>; on RK3588S is
+> above the max signed value and therefore would return a negative signed
+> decimal value instead of its proper unsigned one.
+>
+> Fixes: fa12dfa08a7b ("dm: core: support reading a single indexed u64 value")
+> Fixes: 4bb7075c830c ("dm: core: support reading a single indexed u32 value")
+> Fixes: 7e5196c409f1 ("dm: core: Add ofnode function to read a 64-bit int")
+> Fixes: 9e51204527dc ("dm: core: Add operations on device tree references")
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 > ---
->  drivers/core/lists.c | 5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
+>  drivers/core/ofnode.c | 10 +++++-----
+>  1 file changed, 5 insertions(+), 5 deletions(-)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
