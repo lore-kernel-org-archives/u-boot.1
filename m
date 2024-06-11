@@ -4,86 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2B0EC27C5E
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 08:08:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95112C27C65
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 08:50:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2936F884C9;
-	Tue, 11 Jun 2024 10:08:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id A2B41885E1;
+	Tue, 11 Jun 2024 10:50:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="ejvqpcSF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yGJQS4SK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11BAD883D3; Tue, 11 Jun 2024 10:08:41 +0200 (CEST)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 40D56885EC; Tue, 11 Jun 2024 10:50:56 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15F8B885CC
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 10:08:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F6158332E
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 10:50:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=T.Remmet@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1718093318; x=1720685318;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gOnkiVEmuzuvnq3sGPICQFZXiCpkLFu0LoXQ1S/MRzs=;
- b=ejvqpcSFXQct73fGO/CP5sJKWlqJbgiCCmdtOIvbSZcA6WNB+b0B2nIe22zB9zUo
- ypQriX+uQtYNKSr+KFiYJTAuU1FEVoXieIBHHf+tG1sZg6I6GhVmSB5gTshoHvpj
- WtZayoiZMlOUjDVjBMtayJRgbHysiyFnegOSwaT8t2k=;
-X-AuditID: ac14000a-03e52700000021bc-da-666806062afe
-Received: from florix.phytec.de (Unknown_Domain [172.25.0.13])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 2E.B1.08636.60608666;
- Tue, 11 Jun 2024 10:08:38 +0200 (CEST)
-Received: from Berlix.phytec.de (172.25.0.12) by Florix.phytec.de
- (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Tue, 11 Jun
- 2024 10:08:38 +0200
-Received: from Berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4]) by
- berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4%4]) with mapi id 15.01.2507.006;
- Tue, 11 Jun 2024 10:08:38 +0200
-From: Teresa Remmet <T.Remmet@phytec.de>
-To: "u-boot@lists.phytec.de" <u-boot@lists.phytec.de>, Wadim Egorov
- <W.Egorov@phytec.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "upstream@lists.phytec.de" <upstream@lists.phytec.de>
-CC: "trini@konsulko.com" <trini@konsulko.com>
-Subject: Re: [U-boot] [PATCH 01/13] arch: arm: dts: k3-am625-phyboard-lyra:
- Add fixed partitions
-Thread-Topic: [U-boot] [PATCH 01/13] arch: arm: dts: k3-am625-phyboard-lyra:
- Add fixed partitions
-Thread-Index: AQHau9aQrfpaBAxVbEiLV9qQh3UhPQ==
-Date: Tue, 11 Jun 2024 08:08:38 +0000
-Message-ID: <1d1aa06eafb110b96fa5a46ccc7ab5d226946f3d.camel@phytec.de>
-References: <20240610133352.2473414-1-w.egorov@phytec.de>
- <20240610133352.2473414-2-w.egorov@phytec.de>
-In-Reply-To: <20240610133352.2473414-2-w.egorov@phytec.de>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.25.0.11]
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <02D139CE82DE8042A7F0738C5531D0B6@phytec.de>
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-57c7440876bso1000674a12.0
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 01:50:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1718095853; x=1718700653; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZURMeBsm3U82KPUq4cRvsaz/m8be/dtghf9SYzj5oO8=;
+ b=yGJQS4SKpjfBYmlPSAZhZ2QtFgegASenxSGZKnUoVjRQ4HcYpmbDytVURsLI6yl7Zu
+ TkRpeMyzC3aGZwvUxoskcePzo3YdPaWnD7SjQKGk1CYeLbF4zhDzUGKpLSKxAMv6PWvq
+ dYo3wQJjXMsuMN9sbupdA71iMTnkEg2FPIR6aeV3twOC50zBeokxvRO88yyp8rNVf0XU
+ Z6At1I/m1kPK+0g9/+Qx1IH+dFVFvAFhSdQUFhm553oNY2K9dFrp72jjvMiWLPdDfq9r
+ fpwFif41vDcP3lGaPFxLXjDUf2MIfaodTxtoZjwyaIVcc8oi9CAmhond03SNLhYDs8fX
+ X4gQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718095853; x=1718700653;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZURMeBsm3U82KPUq4cRvsaz/m8be/dtghf9SYzj5oO8=;
+ b=I5TYt7mTIY/zN/deEDu7vMaCGC2BVeAhTh5IXoIMqjtbL/1ZkXIagz/euXXNipiPPL
+ MHOhzFUuK5X8XYUAuR41J+dZhefuYgTX/7oNz6z9yVLYCzgKL2yy121hSsI/UG1L7nG5
+ cncDDBgE3AUBzmiEQqYkV9hm01fhT3FgKuhGCv+RjfL0kpPVJJpqqsAYgseW2CBjgSqL
+ YZYbup7lmRJ7dQJyFa1M3nmsiCohkvzT0S55n0LAM07BCzATWmdQywT0BgtE0oLi4zBE
+ iCW/411d8RIp4671Jr4b45/SHf/ROidPT4iHOc0BYtJc7Lh0hGsP8l/CEip567u4kuhl
+ qDxw==
+X-Gm-Message-State: AOJu0YwxrRkpRrbIoxQ1+Lu/HKRlUMfH2S/SBLA9S2pVtYxe66BeXhCt
+ sgRhSB4egVJVihNhfvGlth9XqSJg+jgMHv30JSUTuxniZMbdyrRuz6rUlAtZ3jwSfxXkpEVZuP1
+ YkZnn3Y472HFjHiz2jNxNxNZjSn08iLgVSWoROw==
+X-Google-Smtp-Source: AGHT+IEG6HsE+2TWoU/3HukxcR94Q9VEoB8WlF3PGTzIxx0/vNFALCLD3SDTMSZbX4iJ+ylvOUe4WFxsc66oSC6vM7M=
+X-Received: by 2002:a50:9b42:0:b0:57c:9dbc:2b6e with SMTP id
+ 4fb4d7f45d1cf-57c9dbc2cdcmr190428a12.42.1718095852784; Tue, 11 Jun 2024
+ 01:50:52 -0700 (PDT)
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprNIsWRmVeSWpSXmKPExsWyRpKBV5eNLSPN4M47Y4upkzazW7zd28lu
- 8a5vP5NF9zt1BxaPVwdWsXucvbOD0aO/u4U1gDmKyyYlNSezLLVI3y6BK2POx2UsBZMUKk5P
- 2cfcwLhCvouRk0NCwETi5exf7F2MXBxCAkuYJGZPW8MI4dxnlLg29TUrhLOBUWLF1ZXMIC1s
- AhoSL090M4EkRAQOMUq0nZ4ElmAW0JXYOvMXUDsHh7BAksSxLTwgYRGBZIlL916wQ9h6Eg/P
- rWcHKWERUJV4Ny0cJMwr4CYx9cx5VhBbSCBL4lbzViaQEk4BK4mdd/xBwowCshIbNpyHWiQu
- senZd1aIBwQkluyBiEsIiEq8fPwPKi4vceLWNLAxzAKaEut36UO0WkisetPFCmErSkzpfsgO
- cYGgxMmZT1gmMIrPQrJhFkL3LCTds5B0z0LSvYCRdRWjUG5mcnZqUWa2XkFGZUlqsl5K6iZG
- UASKMHDtYOyb43GIkYmDERhuHMxKIrxnYtLThHhTEiurUovy44tKc1KLDzFKc7AoifOu7ghO
- FRJITyxJzU5NLUgtgskycXBKNTCqzX7mxtOZlVe+ulYtJ0vi9/3i2tLen9VP5GfXv2PcVbv0
- 6yWlpyEpAuHJbFkH1zKvUj/v9Opx36fLRze+Ouz3+qMT8/vKjSls0/KaOv99fjmvf5OZhphh
- E/97r7seHpIvJkXuf7XdLohHV3L5aWPWc2s2dsguMstYVibRpGmZKCQvefu4s5MSS3FGoqEW
- c1FxIgCl/aLdrgIAAA==
+References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
+ <20240607185240.1892031-9-sughosh.ganu@linaro.org>
+ <20240610173102.GW68077@bill-the-cat>
+In-Reply-To: <20240610173102.GW68077@bill-the-cat>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Tue, 11 Jun 2024 14:20:40 +0530
+Message-ID: <CADg8p95aA1h_0XgANyHjXFKpPjQdKvrH5jcTKL9Gu8ouhp-gqQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 08/31] lmb: replcace the lmb_init_and_reserve()
+ function
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,56 +91,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGVsbG8gV2FkaW0sCgpBbSBNb250YWcsIGRlbSAxMC4wNi4yMDI0IHVtIDE1OjMzICswMjAwIHNj
-aHJpZWIgV2FkaW0gRWdvcm92OgoKPiBGcm9tOiBOYXRoYW4gTW9ycmlzc29uIDxubW9ycmlzc29u
-QHBoeXRlYy5jb20+Cj4gCj4gQWRkIGEgZml4ZWQgcGFydGl0aW9ucyBub2RlIHRvIHRoZSBBTTYy
-eCBkZXZpY2UgdHJlZSBzbyB0aGF0IGl0IGNhbgo+IGJlIHVzZWQgdG8gZml4dXAgdGhlIExpbnV4
-IGRldmljZSB0cmVlLgoKZm9yIHdoaWNoIGJyYW5jaCBpcyB0aGlzIHNlcmllcz8KClJlZ2FyZHMs
-ClRlcmVzYQoKPiAKPiBTaWduZWQtb2ZmLWJ5OiBOYXRoYW4gTW9ycmlzc29uIDxubW9ycmlzc29u
-QHBoeXRlYy5jb20+Cj4gU2lnbmVkLW9mZi1ieTogV2FkaW0gRWdvcm92IDx3LmVnb3JvdkBwaHl0
-ZWMuZGU+Cj4gLS0tCj4gwqAuLi4vazMtYW02MjUtcGh5Ym9hcmQtbHlyYS1yZGstdS1ib290LmR0
-c2nCoMKgwqAgfCAyNgo+ICsrKysrKysrKysrKysrKysrKysKPiDCoDEgZmlsZSBjaGFuZ2VkLCAy
-NiBpbnNlcnRpb25zKCspCj4gCj4gZGlmZiAtLWdpdCBhL2FyY2gvYXJtL2R0cy9rMy1hbTYyNS1w
-aHlib2FyZC1seXJhLXJkay11LWJvb3QuZHRzaQo+IGIvYXJjaC9hcm0vZHRzL2szLWFtNjI1LXBo
-eWJvYXJkLWx5cmEtcmRrLXUtYm9vdC5kdHNpCj4gaW5kZXggOTQxNjIyODIwNjguLjdjNzZhY2Mw
-ZDU5IDEwMDY0NAo+IC0tLSBhL2FyY2gvYXJtL2R0cy9rMy1hbTYyNS1waHlib2FyZC1seXJhLXJk
-ay11LWJvb3QuZHRzaQo+ICsrKyBiL2FyY2gvYXJtL2R0cy9rMy1hbTYyNS1waHlib2FyZC1seXJh
-LXJkay11LWJvb3QuZHRzaQo+IEBAIC0xMjcsNiArMTI3LDMyIEBACj4gwqAKPiDCoMKgwqDCoMKg
-wqDCoMKgZmxhc2hAMCB7Cj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBib290cGgt
-YWxsOwo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBwYXJ0aXRpb25zIHsKPiArwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGNvbXBhdGlibGUgPSAi
-Zml4ZWQtcGFydGl0aW9ucyI7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqAjYWRkcmVzcy1jZWxscyA9IDwxPjsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCNzaXplLWNlbGxzID0gPDE+Owo+ICsKPiArwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHBhcnRpdGlvbkAwIHsKPiAr
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqBsYWJlbCA9ICJvc3BpLnRpYm9vdDMiOwo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHJlZyA9IDwweDAwMDAwIDB4ODAw
-MDA+Owo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgfTsK
-PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHBhcnRpdGlv
-bkA4MDAwMCB7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgbGFiZWwgPSAib3NwaS50aXNwbCI7Cj4gK8KgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcmVnID0gPDB4
-MDgwMDAwIDB4MjAwMDAwPjsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoH07Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqBwYXJ0aXRpb25AMjgwMDAwIHsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBsYWJlbCA9ICJvc3BpLnUtYm9vdCI7Cj4g
-K8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgcmVnID0gPDB4MjgwMDAwIDB4NDAwMDAwPjsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoH07Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqBwYXJ0aXRpb25ANjgwMDAwIHsKPiArwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBsYWJlbCA9ICJv
-c3BpLmVudiI7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgcmVnID0gPDB4NjgwMDAwIDB4NDAwMDA+Owo+ICvCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgfTsKPiArwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHBhcnRpdGlvbkA2YzAwMDAgewo+ICvCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oGxhYmVsID0gIm9zcGkuZW52LmJhY2t1cCI7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcmVnID0gPDB4NmMwMDAwIDB4NDAw
-MDA+Owo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgfTsK
-PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgfTsKPiDCoMKgwqDCoMKgwqDCoMKgfTsK
-PiDCoH07Cj4gwqAKCi0tIApQSFlURUMgTWVzc3RlY2huaWsgR21iSCB8IEJhcmNlbG9uYS1BbGxl
-ZSAxIHwgNTUxMjkgTWFpbnosIEdlcm1hbnkKCkdlc2Now6RmdHNmw7xocmVyOiBEaXBsLi1Jbmcu
-IE1pY2hhZWwgTWl0ZXpraSwgRGlwbC4tSW5nLiBCb2RvIEh1YmVyLApEaXBsLi1JbmcuIChGSCkg
-TWFya3VzIExpY2tlcyB8IEhhbmRlbHNyZWdpc3RlciBNYWlueiBIUkIgNDY1NiB8CkZpbmFuemFt
-dCBNYWlueiB8IFN0Lk5yLiAyNjY1MDA2MDgsIERFIDE0OTA1OTg1NQo=
+On Mon, 10 Jun 2024 at 23:01, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Sat, Jun 08, 2024 at 12:22:17AM +0530, Sughosh Ganu wrote:
+> > With the changes to make the Logical Memory Block(LMB) allocations
+> > persistent and with the common memory regions being reserved during
+> > board init, the lmb_init_and_reserve() API can be removed and replaced
+> > with a lmb_add_memory() API, which adds all the available memory to
+> > the LMB pool.
+> >
+> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > ---
+> >  arch/arm/mach-apple/board.c          |  2 +-
+> >  arch/arm/mach-snapdragon/board.c     |  2 +-
+> >  arch/arm/mach-stm32mp/stm32mp1/cpu.c |  2 +-
+> >  cmd/bdinfo.c                         |  2 +-
+> >  cmd/load.c                           |  2 +-
+> >  fs/fs.c                              |  2 +-
+> >  include/lmb.h                        | 12 +++++++++++-
+> >  lib/lmb.c                            | 15 +++++++++++----
+> >  net/tftp.c                           |  2 +-
+> >  net/wget.c                           |  2 +-
+> >  test/cmd/bdinfo.c                    | 10 +---------
+> >  11 files changed, 31 insertions(+), 22 deletions(-)
+> >
+> > diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/board.c
+> > index c877c7b94c..2e72d03edd 100644
+> > --- a/arch/arm/mach-apple/board.c
+> > +++ b/arch/arm/mach-apple/board.c
+> > @@ -776,7 +776,7 @@ int board_late_init(void)
+> >  {
+> >       u32 status = 0;
+> >
+> > -     lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
+> > +     lmb_add_memory(gd->bd);
+> >
+> >       /* somewhat based on the Linux Kernel boot requirements:
+> >        * align by 2M and maximal FDT size 2M
+>
+> We already reserved gd->bd as part of the initr_lmb call. So I think
+> this commit needs rethinking, or am I missing something?
+
+I believe the LMB memory API's also get called from SPL(not sure about
+TPL/VPL though). The memory that gets added in the other commit is for
+U-Boot main, post relocation. These calls will then be needed for
+prior stages of U-Boot that want to use LMB memory.
+
+-sughosh
