@@ -4,68 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB15BC27C75
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 18:52:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4C45C27C65
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 18:52:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 809558870D;
-	Tue, 11 Jun 2024 20:51:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EDC148871D;
+	Tue, 11 Jun 2024 20:52:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P2DehXoa";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QBgbXhgL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E43C38864D; Tue, 11 Jun 2024 20:51:56 +0200 (CEST)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id E12608871E; Tue, 11 Jun 2024 20:52:06 +0200 (CEST)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCC52886F0
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 20:51:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CDA5A886F0
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 20:52:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6b07937b84fso7109926d6.1
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 11:51:54 -0700 (PDT)
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-6b0745efaeeso13827636d6.1
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 11:52:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718131913; x=1718736713; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Ji6uX2V38NqJuC/ZktluwlgMS8GpWD0A8sLQLJ8ZjTY=;
- b=P2DehXoaCQEWSaJKMMyNVYSalRNl7oV/It/0gMiT8yRq/IYdTlQjauZ6wFVOv7+DMm
- kwAkgvHoABVMrzZyxdO4OOyLxY61aQ829Z9arUOX9IyW/6hhTx62esthMFKpqjvx3LZR
- njhfpdPsd7KlRquHGOp1fmDoK+r7ZvQnNOeO0=
+ d=chromium.org; s=google; t=1718131924; x=1718736724; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JmeLuADsrFeLKY3SSx40nwc08DVGs13MsOr2qbntFbk=;
+ b=QBgbXhgLt0Y5KfMddVc8Pw7n2V/i7/0BnOdJYFCsZHfbma/byIwMay4GGWynWxQZi7
+ m4rjbCYixQce2xPJ348SXBYLVRVHwAw6/pRMtUw+cBlEkjnGFBf0j3ERWI2TXYC5fptS
+ iq7FaYAfOrASCJCfmw5wr3ugAz9Y4VqY3P/ic=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718131913; x=1718736713;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Ji6uX2V38NqJuC/ZktluwlgMS8GpWD0A8sLQLJ8ZjTY=;
- b=jzy5regKnDAlD14GqturmGQGyadCyYn16MnwMbM0A1ByAs2suNCKOTdu5xgDZ8nXA0
- sgqY3g+zCxe9kXqDhn9sBBAIcFogTlQkrIxX8Ymzig+MieeHpzb7l3C2xTweHEIerG2a
- 9aAqGvw3hLJddiIYJiXlrkl66n7Oqvyvn2Qc4+9e2Z2Rp0Nc3HX3/LveeeQH3IFL7uzf
- dCM+X2C05ROOzM0f+6QEkSjCInerIxpAOd/9y4oJrjlfWPieBGaE5zxiZ4V8wl2zIH/k
- xVwveTz55X2UYvP7chANnUtjA9C2po1EsmBf5eUvZxfdjMwfN2o9pNsiz+UF6gqWy0qF
- nO4g==
-X-Gm-Message-State: AOJu0YxqHPueviSRoeNbkqfSurNANw/1G/jw7N0SaVc4/rH7ZhbUH2PV
- b6TqOjLAIHIzEn5uyePOg/yB1oNpYTPc5y8/3kX0x+cET4/2k7fir3QJdQ4N2vKxPPCgYQfAizA
- uN64IKgK/IzTqu3lj7tiCrz6HrD+X6g3tVBlm
-X-Google-Smtp-Source: AGHT+IHlvXLYsdO/IzyVfkU2gHvwCugAIRm16AeEB6mqtVPLZlio2K5Tu+NWFf0XsZXv131nVc/IuhEF9g2hZKZj//c=
-X-Received: by 2002:a05:6214:5982:b0:6b0:7ceb:3076 with SMTP id
- 6a1803df08f44-6b07ceb3333mr66621096d6.12.1718131913633; Tue, 11 Jun 2024
- 11:51:53 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1718131924; x=1718736724;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=JmeLuADsrFeLKY3SSx40nwc08DVGs13MsOr2qbntFbk=;
+ b=DltCGt6L9jyKxTFhJ7BeIUJPuVEWK8TAcaymiUjGAIO9x8iqm3+PKdKHaQnf0iBZix
+ GLP3baNpNwiOZ4LMNE8JUMQ5bgPGVIpNZ0unmP4v1QVzKEMx2+dSeEPE/JDU3sps5+2h
+ UYSg4Ekp1+6V1DsFNhNSkJI6oiaAWg31RMMrnfU0znmNA1A117yvgtmNkLBchmxMdTA3
+ DmYFrqstnXDIbABkjk9OEUzLz7QcTYyrWFUUMi7SgKsI9fN386dYA4bQUz5CxH1wR0xl
+ 3b9UGg7w6PTwyJvpfz9fKVO0o4GVQevDeK7yceag2j2zSzedu6F15Voz5cuI7FonNHd8
+ 3+sQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVvUDFz64z3DP5QuC6cOZD/rOqS/SuJDeFmqVHPgtgojlj60WemEEYa75VpJqR8i1u3vOWpD08YVx4rYjO85Is05j+CCw==
+X-Gm-Message-State: AOJu0YwR5cczQksWtxKrL9/efdARzyxMyJfOppssbId8Vlm+1TAv1pIP
+ P/6IACEQa0s3NUH0Nv4Ng9N3xKr0kdP3QKuuTmpywYnyFx/yqkWnZSYAvVj0LMVwQgg90PI7TfW
+ 9ODUaz+ShmkV3zDzIsMym7x/On7R8Mjqp5CFE
+X-Google-Smtp-Source: AGHT+IEWNiF9cZgA5vHgGmlN+USeGVUTl72Mg0WVaczwevX3Z0aBHpY1whJRtNWyf9f2ERJGIqGpBArfXLCXNqEFJOw=
+X-Received: by 2002:a05:6214:3a08:b0:6b0:8d20:e57e with SMTP id
+ 6a1803df08f44-6b08d20eba6mr23510026d6.7.1718131923750; Tue, 11 Jun 2024
+ 11:52:03 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240610222743.255386-1-sjg@chromium.org>
- <20240611162815.GK68077@bill-the-cat>
-In-Reply-To: <20240611162815.GK68077@bill-the-cat>
+References: <20240521104834.11295-1-marex@denx.de>
+ <CAOMZO5DsyuCu+fjpa8GjB6mbp9b5n=YOGxtjgMkdSstGFmEUuA@mail.gmail.com>
+In-Reply-To: <CAOMZO5DsyuCu+fjpa8GjB6mbp9b5n=YOGxtjgMkdSstGFmEUuA@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 11 Jun 2024 12:51:42 -0600
-Message-ID: <CAFLszTjk52G1QmWHL9rmu-OCzc-f3qqfw+RpRsy9jzccuNaT7Q@mail.gmail.com>
-Subject: Re: [u-boot-test-hooks PATCH 0/2] Add support for Labgrid
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Tue, 11 Jun 2024 12:51:53 -0600
+Message-ID: <CAFLszTiwqcPe98gwbt1oVnWYJ0yFQ6rTpdcrB2kw=YRH-9=JJA@mail.gmail.com>
+Subject: Re: [PATCH v4 1/4] binman: Add nxp_imx8mcst etype for i.MX8M
+ flash.bin signing
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de, anton.gres@ifm.com,
+ ch@denx.de, 
+ Tim Harvey <tharvey@gateworks.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Adam Ford <aford173@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Angus Ainslie <angus@akkea.ca>, 
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Stefan Eichenberger <stefan.eichenberger@toradex.com>,
+ Stefano Babic <sbabic@denx.de>, 
+ Tom Rini <trini@konsulko.com>, kernel@puri.sm, u-boot@dh-electronics.com
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,22 +99,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi,
 
-On Tue, 11 Jun 2024 at 10:28, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 24 May 2024 at 10:26, Fabio Estevam <festevam@gmail.com> wrote:
 >
-> On Mon, Jun 10, 2024 at 04:27:41PM -0600, Simon Glass wrote:
+> On Tue, May 21, 2024 at 7:48=E2=80=AFAM Marek Vasut <marex@denx.de> wrote=
+:
+> >
+> > Add new binman etype which allows signing both the SPL and fitImage sec=
+tions
+> > of i.MX8M flash.bin using CST. There are multiple DT properties which g=
+overn
+> > the signing process, nxp,loader-address is the only mandatory one which=
+ sets
+> > the SPL signature start address without the imx8mimage header, this sho=
+uld be
+> > SPL text base. The key material can be configured using optional DT pro=
+perties
+> > nxp,srk-table, nxp,csf-crt, nxp,img-crt, all of which default the key m=
+aterial
+> > names generated by CST tool scripts. The nxp,unlock property can be use=
+d to
+> > unlock CAAM access in SPL section.
+> >
+> > Reviewed-by: Tim Harvey <tharvey@gateworks.com>
+> > Signed-off-by: Marek Vasut <marex@denx.de>
 >
-> > This adds hooks for use with Labgrid. The only existing hook that really
-> > does anything now is the 'console' one. There is also a new 'getrole'
-> > hook which looks up a role to find various things about it, such as the
-> > U-Boot board name.
->
-> Overall this is pretty neat and I'm happy to see it posted. Would you
-> mind linking to the Labgrid PR(s) and sample .gitlab-ci.yml changes you
-> have as well?
+> Applied the series, thanks.
 
-Thanks! Yes I will send the U-Boot series with that (PR linked in cover letter).
+This lacks tests - can you please add sufficient tests in ftest.py to
+get the cover coverage back to 100%? Please try 'binman test -T' to
+see this.
 
 Regards,
 Simon
