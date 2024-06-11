@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBC52C25B76
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 09:42:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6320AC27C5E
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 09:42:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 405D68863F;
-	Tue, 11 Jun 2024 11:42:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9C34888640;
+	Tue, 11 Jun 2024 11:42:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="daPhQlkq";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZpFzv7JY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C44878862E; Tue, 11 Jun 2024 11:42:07 +0200 (CEST)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
+ id 46ACC88638; Tue, 11 Jun 2024 11:42:09 +0200 (CEST)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8726483333
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 11:42:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F60188619
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 11:42:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seashell11234455@gmail.com
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-1f4a5344ec7so40472595ad.1
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 02:42:04 -0700 (PDT)
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-1f64ecb1766so41380205ad.1
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 02:42:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1718098922; x=1718703722; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1718098924; x=1718703724; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VJLNd2bVDtFBGplJnB/N8CCKyYJc/gcR46Ikjmo7Rnw=;
- b=daPhQlkqd6DzUAVrr37DYe4Oo6/0emJ/4s+98TqD0Fg+tBuY94sPGx65jbcaVUT3d2
- HEP/h4sUMBb1Vk5zMemNyuuo8+33CcpbvF3xgOBODF8b1cNLNI6BLTEsgVWKaLU5gmkH
- mJuyC8p9WtFpy1V1gtJ0YfNWil41M7fRtpq5jLdM8XrsxtreDqwYiYnOyiX5aksh8kb2
- l7MGUOxxKN9vVPYpfQxw33impJJrTKQsImSfvUsk8GbB8boxgUOL24FRHCxP+V0Ntf2R
- Te5Cki65yEG8E5BLg8kBTptE3eDAQaHb6fW26fhbVuYniTPgGDOyvT0pIqt5/J7Tan36
- xTww==
+ bh=udFZv7R5m8JcvfX84MOWyXGUYZhGTj5nPhOhqf6CvcE=;
+ b=ZpFzv7JYcEcNqCpaUOC7VjENQ6GUCX1ArJHSR3jvq1RhXYrT8xC1caYrzWq+nT0/BF
+ 8qAtv2PlJLWIPmpczl+CgkDtqULAsRJWPh2/uZk0lA7EA+6+2yM3GNNMt9tNodfdQ2AO
+ gBRsVWbiMTYYaTiPi4EJeU777WGoi+sIwzBNByRWcAFjieeDttaDdmxgsfjQgx4ScaLC
+ q9pul0jnLLw3NP73XC2nAye+mMdkxCP4WCTPSXEpR26CWS1SF2PrcuAYtgtGPgPgzQnF
+ pMg4QHkmTIu3tv4rf9RmI+XzNFNGj5OtAw4WJF7F1L7q0l4CnTbQczDB9swwZHXaN2r7
+ qWMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718098922; x=1718703722;
+ d=1e100.net; s=20230601; t=1718098924; x=1718703724;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VJLNd2bVDtFBGplJnB/N8CCKyYJc/gcR46Ikjmo7Rnw=;
- b=EDp8EyM03EaBulmwFYvPSPKivJlX+Rsjk2h9TUuszJINUdJ55KttzNCNAGkCfzcDcs
- n0Dk15/yl2biwqMufIn4LZ3DQxv5w+CTQEJCIuL7G/w0rIfqaA7AF7DpeVXNYzovrM9Y
- hph8FGJNvf/iykBsupHv18KbOwVlGErgZGgRRsi96ZJc2Jn1p/5/8C4l5/pUfMkPBGR0
- RcPWQK6e880gn2kGeogaM0VcuUcMylGOfF34AI35LLInMEu9IMG34iBZg9AkGE3Dwprh
- I3j77woi6d4Qsa7Tr0YaGH3/COk/SSaYNKyMzAhqhPGFm9qRTSpXINZoeMWntZ4Tv36m
- ScSg==
-X-Gm-Message-State: AOJu0Yy2yW4ULTz77Ex3LPuQGBhDf1KwFs+6/nrBoHOx+DC7Q/sMADaF
- C3+P/F1apNk3ev+TfKCczczWbqBJNt6umjXBx5q/5OS9KLlLAnblaJo2WdqA
-X-Google-Smtp-Source: AGHT+IFCesba84y1+Zv3b0Z95+YdX/BFtNYJCubrYv5+52zLzYuxgYCL0LdDqyIhqEu3ovqzjUkoDQ==
-X-Received: by 2002:a17:902:f552:b0:1f4:a04e:8713 with SMTP id
- d9443c01a7336-1f72892538emr32825005ad.28.1718098921965; 
- Tue, 11 Jun 2024 02:42:01 -0700 (PDT)
+ bh=udFZv7R5m8JcvfX84MOWyXGUYZhGTj5nPhOhqf6CvcE=;
+ b=gAWfM+AauPCMdNzH5wsuaQNwn/VyxbQ4fo+XwjrKxLQNcAKDZkQImppaILvr8FE+oQ
+ mPNGma9ZpMY6rhpvCWOjJDo6lltUW/Das0RRb/FVO2ir4yXODJTa1Kw1DCps8jd8Rxsl
+ 6LDaaSwYouAGJz/8Vwxy5iy9pFBLXEU3LpmPGzjryrwEzzZEoMIVMWJTLD41Lb621wyr
+ kASwAaIGvlhcF1XFEfQsaM/F9bTvjVtmXbGcr8lRBoQc7gS1Gm85HmdF7Dzj5Oifjfyo
+ 6+5dyvpkWBswZWnHQSOimFH7cbQ0e/zQyVrR+7hwNWwe3ezrLsZc++WIQE1yqd069koF
+ vAtw==
+X-Gm-Message-State: AOJu0Yw5HTi2sHqBstkYNV0c6ugUIha5i3i6RJ5fBLJyYVPxwwjrkwvJ
+ slhVgiBdXrewMJp6rW2bvhOvtfKtJ5Gg24AMmwWZ5Z7+eIqhgMt9FH1UaHLv
+X-Google-Smtp-Source: AGHT+IEL487TtKXE9OFuADkc6bVn9pNfwWD3QdjuaXTPbF+t6tA7h3lKgjrUc9MeHX0S2Dj71S4n6Q==
+X-Received: by 2002:a17:902:da84:b0:1f7:1b97:e91f with SMTP id
+ d9443c01a7336-1f71b97f220mr37265955ad.26.1718098924302; 
+ Tue, 11 Jun 2024 02:42:04 -0700 (PDT)
 Received: from localhost.localdomain ([117.135.90.188])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f6d859ea3csm76873555ad.178.2024.06.11.02.42.00
+ d9443c01a7336-1f6d859ea3csm76873555ad.178.2024.06.11.02.42.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Jun 2024 02:42:01 -0700 (PDT)
+ Tue, 11 Jun 2024 02:42:03 -0700 (PDT)
 From: Kongyang Liu <seashell11234455@gmail.com>
 To: u-boot@lists.denx.de
-Cc: Leo Yu-Chi Liang <ycliang@andestech.com>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 3/4] configs: milkv_duo: Enable clock controller
-Date: Tue, 11 Jun 2024 17:41:15 +0800
-Message-ID: <20240611094134.18868-4-seashell11234455@gmail.com>
+Cc: Leo <ycliang@andestech.com>, Rick Chen <rick@andestech.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 4/4] riscv: dts: sophgo: Replace device clocks with real
+ clocks.
+Date: Tue, 11 Jun 2024 17:41:16 +0800
+Message-ID: <20240611094134.18868-5-seashell11234455@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240611094134.18868-1-seashell11234455@gmail.com>
 References: <20240611094134.18868-1-seashell11234455@gmail.com>
@@ -92,50 +93,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add configs to enable clock controller for Sophgo Milk-V Duo board
+Replace device clocks with real clocks from the clock controller, and
+remove dummy clocks.
 
 Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
 ---
 
 (no changes since v1)
 
- configs/milkv_duo_defconfig | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+ arch/riscv/dts/cv18xx.dtsi | 40 +++++++++++++++-----------------------
+ 1 file changed, 16 insertions(+), 24 deletions(-)
 
-diff --git a/configs/milkv_duo_defconfig b/configs/milkv_duo_defconfig
-index 0cb2922de4..1186763a73 100644
---- a/configs/milkv_duo_defconfig
-+++ b/configs/milkv_duo_defconfig
-@@ -1,6 +1,6 @@
- CONFIG_RISCV=y
- CONFIG_SYS_MALLOC_LEN=0x820000
--CONFIG_SYS_MALLOC_F_LEN=0x2000
-+CONFIG_SYS_MALLOC_F_LEN=0x8000
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x82300000
-@@ -26,17 +26,18 @@ CONFIG_CMD_FAT=y
- CONFIG_CMD_FS_GENERIC=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_CLK_SOPHGO_CV1800B=y
- CONFIG_MMC=y
- CONFIG_MMC_IO_VOLTAGE=y
- CONFIG_MMC_UHS_SUPPORT=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_ADMA=y
- CONFIG_MMC_SDHCI_CV1800B=y
-+CONFIG_SPI_FLASH_MACRONIX=y
- CONFIG_ETH_DESIGNWARE=y
- CONFIG_SYS_NS16550=y
- CONFIG_SYS_NS16550_MEM32=y
--CONFIG_SYSRESET=y
--CONFIG_SYSRESET_CV1800B=y
--CONFIG_SPI_FLASH_MACRONIX=y
- CONFIG_SPI=y
- CONFIG_CV1800B_SPIF=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_CV1800B=y
+diff --git a/arch/riscv/dts/cv18xx.dtsi b/arch/riscv/dts/cv18xx.dtsi
+index 4b0143450e..8a7386b76e 100644
+--- a/arch/riscv/dts/cv18xx.dtsi
++++ b/arch/riscv/dts/cv18xx.dtsi
+@@ -5,6 +5,7 @@
+  */
+ 
+ #include <dt-bindings/interrupt-controller/irq.h>
++#include <dt-bindings/clock/sophgo,cv1800.h>
+ 
+ / {
+ 	#address-cells = <1>;
+@@ -45,13 +46,6 @@
+ 		#clock-cells = <0>;
+ 	};
+ 
+-	sdhci_clk: sdhci-clock {
+-		compatible = "fixed-clock";
+-		clock-frequency = <375000000>;
+-		clock-output-names = "sdhci_clk";
+-		#clock-cells = <0>;
+-	};
+-
+ 	eth_csrclk: eth-csrclk {
+ 		compatible = "fixed-clock";
+ 		clock-frequency = <250000000>;
+@@ -66,13 +60,6 @@
+ 		#clock-cells = <0x0>;
+ 	};
+ 
+-	spif_clk: spi-flash-clock {
+-		compatible = "fixed-clock";
+-		clock-frequency = <300000000>;
+-		clock-output-names = "spif_clk";
+-		#clock-cells = <0>;
+-	};
+-
+ 	soc {
+ 		compatible = "simple-bus";
+ 		interrupt-parent = <&plic>;
+@@ -163,8 +150,8 @@
+ 			compatible = "sophgo,cv1800b-dwmac";
+ 			reg = <0x04070000 0x10000>;
+ 			interrupts = <31 IRQ_TYPE_LEVEL_HIGH>;
+-			clocks = <&eth_csrclk>, <&eth_ptpclk>;
+-			clock-names = "stmmaceth", "ptp_ref";
++			clocks = <&clk CLK_ETH0_500M>, <&clk CLK_AXI4_ETH0>;
++			clock-names = "stmmaceth", "pclk";
+ 			status = "disabled";
+ 		};
+ 
+@@ -172,7 +159,8 @@
+ 			compatible = "snps,dw-apb-uart";
+ 			reg = <0x04140000 0x100>;
+ 			interrupts = <44 IRQ_TYPE_LEVEL_HIGH>;
+-			clocks = <&osc>;
++			clocks = <&clk CLK_UART0>, <&clk CLK_APB_UART0>;
++			clock-names = "baudclk", "apb_pclk";
+ 			reg-shift = <2>;
+ 			reg-io-width = <4>;
+ 			status = "disabled";
+@@ -182,7 +170,8 @@
+ 			compatible = "snps,dw-apb-uart";
+ 			reg = <0x04150000 0x100>;
+ 			interrupts = <45 IRQ_TYPE_LEVEL_HIGH>;
+-			clocks = <&osc>;
++			clocks = <&clk CLK_UART4>, <&clk CLK_APB_UART4>;
++			clock-names = "baudclk", "apb_pclk";
+ 			reg-shift = <2>;
+ 			reg-io-width = <4>;
+ 			status = "disabled";
+@@ -192,7 +181,8 @@
+ 			compatible = "snps,dw-apb-uart";
+ 			reg = <0x04160000 0x100>;
+ 			interrupts = <46 IRQ_TYPE_LEVEL_HIGH>;
+-			clocks = <&osc>;
++			clocks = <&clk CLK_UART2>, <&clk CLK_APB_UART2>;
++			clock-names = "baudclk", "apb_pclk";
+ 			reg-shift = <2>;
+ 			reg-io-width = <4>;
+ 			status = "disabled";
+@@ -202,7 +192,8 @@
+ 			compatible = "snps,dw-apb-uart";
+ 			reg = <0x04170000 0x100>;
+ 			interrupts = <47 IRQ_TYPE_LEVEL_HIGH>;
+-			clocks = <&osc>;
++			clocks = <&clk CLK_UART3>, <&clk CLK_APB_UART3>;
++			clock-names = "baudclk", "apb_pclk";
+ 			reg-shift = <2>;
+ 			reg-io-width = <4>;
+ 			status = "disabled";
+@@ -212,7 +203,8 @@
+ 			compatible = "snps,dw-apb-uart";
+ 			reg = <0x041c0000 0x100>;
+ 			interrupts = <48 IRQ_TYPE_LEVEL_HIGH>;
+-			clocks = <&osc>;
++			clocks = <&clk CLK_UART4>, <&clk CLK_APB_UART4>;
++			clock-names = "baudclk", "apb_pclk";
+ 			reg-shift = <2>;
+ 			reg-io-width = <4>;
+ 			status = "disabled";
+@@ -222,8 +214,8 @@
+ 			compatible = "sophgo,cv1800b-dwcmshc";
+ 			reg = <0x4310000 0x1000>;
+ 			interrupts = <36 IRQ_TYPE_LEVEL_HIGH>;
+-			clocks = <&sdhci_clk>;
+-			clock-names = "core";
++			clocks = <&clk CLK_AXI4_SD0>, <&clk CLK_SD0>;
++			clock-names = "core", "bus";
+ 			status = "disabled";
+ 		};
+ 
+@@ -232,7 +224,7 @@
+ 			reg = <0x10000000 0x10000000>;
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+-			clocks = <&spif_clk>;
++			clocks = <&clk CLK_AHB_SF>;
+ 			interrupts = <95 IRQ_TYPE_LEVEL_HIGH>;
+ 			status = "disabled";
+ 		};
 -- 
 2.41.0
 
