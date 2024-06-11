@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 230B4C25B76
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 07:12:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82986C25B76
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 07:14:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 479598836C;
-	Tue, 11 Jun 2024 09:12:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E2392883DB;
+	Tue, 11 Jun 2024 09:14:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WeFU8/dW";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="3aMOo+tm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CABF88839D; Tue, 11 Jun 2024 09:12:24 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id DEA21885D0; Tue, 11 Jun 2024 09:14:31 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A54188365
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 09:12:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BA206883DB
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 09:14:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seashell11234455@gmail.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-52c84a21c62so2371308e87.1
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 00:12:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-421757d217aso33186495e9.3
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 00:14:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1718089941; x=1718694741; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DYaO6/Ab3uqOFRqKEfXzBK5BbFzGn2Ukz+PzQceQHaQ=;
- b=WeFU8/dWgVkIbPipISrKZVFF7PBzEr7qsRvYy0ManMRDntyp07bb7JhGbWMrv/MQin
- OvyG6omm4i6QCOoWNhFdh5wgwTJeXoeVw6ZPFS6fKZBJDfqBFW3bC4XxZ6fC19vdmkhU
- 2PqagwHqyoD8XgaTooZP47x5EmdfiOFqa0wGCGK1vOmOSwJy19hNtAiHqfH5ukuJTMbQ
- ArKhX6z8kv/I37//peq81Xep+fxrMqTe0WA9bvXjYWDCvFBUYkhIieunWA0me1Sx4ojH
- kXxDLdqcD8gx72kuxR+5UFL04nqvcbYfEogjiqOv7pbOvl55/dz83zDNqdo9HhDbEBKy
- Ns1A==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718090069; x=1718694869;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=YxwKzD94gHFPmEIGlISH4+cM/BWxNmEcdz9s5jwd86Y=;
+ b=3aMOo+tmT+Dh67D6D+i6+K7j2gnF3v/sKf+FNS5h98TA0TjxVq9LWC+R377WQ7Z81Z
+ KIkOiXTuHTRB+Gc7EKbnxb99TGMsoP5XOqUWBpwdpfDjTZF9GrZTTKGBLT0Vup8kA1Th
+ ABQmo6yF7YyjmfG+b39s1QgmRtVWxi+JBp/SQARDo3PZo6mBcOu5ZR+a5t/cd6cK9ozJ
+ J5XDfjKXguEICt/RoyQIbL2muNHBCeeXqARRG0he566bbhlz21xIPRHwIP8M/qQwhE/e
+ cxA+NBPDZH++ymOYF4XLC8bxbe9Qy9RRiz9pZCJVIrrglb5WPDmPwhe66QMcpwvv96Jh
+ k9uw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718089941; x=1718694741;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=DYaO6/Ab3uqOFRqKEfXzBK5BbFzGn2Ukz+PzQceQHaQ=;
- b=gmkVDYxC5iKa6D9vI0DKn//z35SoRdgVzdidFPEbDt3z68mh6tNTL/oG6xnbTMq02S
- V4wUkZpOTPEfIvR9lgUgZvl6+ZjsKknVjrBsHWOVJTCcV1BN2suN8xmX/jN4cUnlG0+o
- +1wYsYJUSYlrY1ITwW/QM+G1W/rfNMvI7sHx05pnVLFgDSl9w9jK7MKv3dtbXJo7pPjI
- 4hjOEj03d1wHK0KhnWAaPTRKBVCmC5tF1DRT1qmXFY/vUU3a6tp1/SygfAyZskyFIM7M
- oOi0ICBY9VeTZfiC++BJsXnJE4gg+DhWwIwON8cACZVt4Tt2Smma1qF6rvYYacRUF7sw
- B66Q==
+ d=1e100.net; s=20230601; t=1718090069; x=1718694869;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=YxwKzD94gHFPmEIGlISH4+cM/BWxNmEcdz9s5jwd86Y=;
+ b=hX4rxoM0A7yDVx9ZCUL3Yu4031pJw35KwkGc0HkeB0d7vlBZvWoCp+c77FTaBVxFbN
+ apk3KC6QLn+B2eFYy6fbJOZF4EkNZwa487pfvbeR5EfOt08aqoCxztFN7kA4g6FaEzh/
+ byZU1lnB5cx+R0GBDr4EUHaMDze8JKPeTwknG4IVqidp30D2FKpwyVy01485uaoGuj/V
+ 7uyk5WqmXeIzKYPIhlHmUdl2gUtPUXPg0o1sPYqZwJJfuscO76FFg5CV/ZJhDQChMnxd
+ 1PtEtrEsfRGc0nXVMR9MqTxMfZRY9nWZ7OrGrKGvnh8x6k9QVd6nV0mYxYfCsbV9ohNz
+ 8C/Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVLCsyB2u2cMdGtEYWH14lj7xeZq7F0ieQGkFHjSOeoimxnAKonPI7yBOq6XdhiosM4ai9OqPNQwBNOfKzKZARCFBweFg==
-X-Gm-Message-State: AOJu0Yx9Pg/dJ5/nKiOy1gB4CMtLuAdCuX6A1HacIVvahuvgcU77WPcZ
- d+Yt0rJDPNlxi9Myi7RKBFv8Yw06OMiRgcmWdC4tZwTKE4VZgXYE0FhCcvLmP3dWImOLY8u/wbS
- LtqoWdRGEswTf1a3iXWjQzX/IuPg=
-X-Google-Smtp-Source: AGHT+IExFM9Q3nUp6PWerqfJ+O4e4pGI3HI6gBaN8t6Hu/vh6wR/0lOZOMBtz34WJ/7fAzvCUOvHmrdGIIehV2WgRrM=
-X-Received: by 2002:ac2:4c33:0:b0:52c:8920:875 with SMTP id
- 2adb3069b0e04-52c89735017mr2928242e87.20.1718089940666; Tue, 11 Jun 2024
- 00:12:20 -0700 (PDT)
+ AJvYcCX0pmjzCQJvuU5su2eHvGEqQP6dn1aZABhzIg9AAP0U+X9LMNYgrZevP3dpQhUuRmweQApQthcOZN11lfhRKjv4ojWLHg==
+X-Gm-Message-State: AOJu0YySPLKyhxPuhVP4QT959D6qe4j06QsFo/Klvz3rn5NEzBeTuMSH
+ 2iTcLophEYpxZkzdQKfUFnCPV/bSzj7UfOL2zHvMziEA5uTVnj+Bhhq68kYwrgk=
+X-Google-Smtp-Source: AGHT+IEaNxj1ijOn6miub68HRAvhyJDQDfaueO09hwnY3TCeV8UKw1uFO5abYC1KD/Z0mJQh6W6VMw==
+X-Received: by 2002:a5d:5f91:0:b0:35f:276a:12d1 with SMTP id
+ ffacd0b85a97d-35f276a17c7mr4224855f8f.18.1718090069044; 
+ Tue, 11 Jun 2024 00:14:29 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-35f2b46332esm1530319f8f.73.2024.06.11.00.14.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Jun 2024 00:14:28 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Alexander Sverdlin
+ <alexander.sverdlin@siemens.com>, Felipe Balbi
+ <felipe.balbi@linux.intel.com>, Lukasz Majewski <lukma@denx.de>, Nishanth
+ Menon <nm@ti.com>, Simon Glass <sjg@chromium.org>, Thinh Nguyen
+ <Thinh.Nguyen@synopsys.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH 1/6] usb: gadget: g_dnl: Drop
+ usb_gadget_controller_number()
+In-Reply-To: <20240609213449.194762-1-marek.vasut+renesas@mailbox.org>
+References: <20240609213449.194762-1-marek.vasut+renesas@mailbox.org>
+Date: Tue, 11 Jun 2024 09:14:21 +0200
+Message-ID: <87cyoo0x4i.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20240523064025.17602-1-seashell11234455@gmail.com>
- <a11e1e72-c274-46f1-bedc-092ae0d9c370@canonical.com>
-In-Reply-To: <a11e1e72-c274-46f1-bedc-092ae0d9c370@canonical.com>
-From: Kongyang Liu <seashell11234455@gmail.com>
-Date: Tue, 11 Jun 2024 15:12:09 +0800
-Message-ID: <CAOKwTdoxeYYWeq305hTLfNwprNrpaW3kaSxHY+8osyWZDyiMBg@mail.gmail.com>
-Subject: Re: [PATCH] doc: board: sophgo: milkv_duo: Update Milk-V Duo
- documentation
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Leo Yu-Chi Liang <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de, Rick Chen <rick@andestech.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,169 +95,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Heinrich Schuchardt <heinrich.schuchardt@canonical.com> =E4=BA=8E2024=E5=B9=
-=B46=E6=9C=888=E6=97=A5=E5=91=A8=E5=85=AD 00:31=E5=86=99=E9=81=93=EF=BC=9A
->
-> On 23.05.24 08:40, Kongyang Liu wrote:
-> > Add detailed steps for compiling U-Boot and OpenSBI, generating the
-> > firmware package with fiptool, and booting the board.
-> >
-> > Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
-> > ---
-> >
-> >   doc/board/sophgo/milkv_duo.rst | 41 +++++++++++++++++++++++++--------=
--
-> >   1 file changed, 30 insertions(+), 11 deletions(-)
-> >
-> > diff --git a/doc/board/sophgo/milkv_duo.rst b/doc/board/sophgo/milkv_du=
-o.rst
-> > index cb2ed1ad98..a88db5b903 100644
-> > --- a/doc/board/sophgo/milkv_duo.rst
-> > +++ b/doc/board/sophgo/milkv_duo.rst
-> > @@ -20,31 +20,50 @@ Building
-> >   .. code-block:: console
->
-> There are is a 64 MiB version of the Milk-V Duo with the CF1800B, a 256
-> MiB version with the SG2002 and a Milk-V Duo S with the SG2000.
->
-> This may confuse U-Boot users. Should we mention explicitly that only
-> the CF1800B based board is supported?
->
+Hi Marek,
 
-I have tested the Milk-V Duo based on CV1800B and the Milk-V Duo256M based
-on SG2002. The tool works properly on both of these boards. However, I have
-not tested the Duo S because I currently don't have the board.
+Thank you for the patch.
 
-At present, U-Boot mainly supports the Milk-V Duo with 64M memory. For
-users with 256M, we have provided a README in the GitHub repository for
-building fip.bin.
+On dim., juin 09, 2024 at 23:32, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
 
-> >
-> >      export CROSS_COMPILE=3D<riscv64 toolchain prefix>
-> > +
-> > +3. Compile U-Boot
-> > +
-> > +.. code-block:: console
-> > +
-> >      cd <U-Boot-dir>
-> >      make milkv_duo_defconfig
-> >      make
-> >
-> > -This will generate u-boot-dtb.bin
-> > +This will generate u-boot.bin and u-boot.dtb
-> >
-> > -Booting
-> > -~~~~~~~
-> > -Currently, we rely on vendor FSBL(First Stage Boot Loader) to initiali=
-ze the
-> > -clock and load the u-boot image, then bootup from it.
-> > +4. Compile OpenSBI
-> > +
-> > +.. code-block:: console
-> >
-> > -Alternatively, to run u-boot-dtb.bin on top of FSBL, follow these step=
-s:
-> > +   cd <OpenSBI-dir>
-> > +   make PLATFORM=3Dgeneric FW_FDT_PATH=3D<Your U-Boot Path>/u-boot.dtb
-> >
-> > -1. Use the vendor-provided tool to create a unified fip.bin file conta=
-ining
-> > -   FSBL, OpenSBI, and U-Boot.
-> > +This will generate fw_dynamic.bin
-> >
-> > -2. Place the generated fip.bin file into the FAT partition of the SD c=
-ard.
-> > +4. Generate firmware image package
-> >
-> > -3. Insert the SD card into the board and power it on.
-> > +Fiptool(https://github.com/sophgo/fiptool) is used to generate fip fil=
-e.
-> > +
-> > +.. code-block:: console
-> > +
-> > +   git clone https://github.com/sophgo/fiptool
-> > +   cd fiptool
-> > +   ./fiptool \
-> > +      --fsbl data/fsbl/cv180x.bin \
+> The bcdDevice field is defined as
+> |Device release number in binary-coded decimal
+> in the USB 2.0 specification. We use this field to distinguish the UDCs
+> from each other. In theory this could be used on the host side to apply
+> certain quirks if the "special" UDC in combination with this gadget is
+> used. This hasn't been done as far as I am aware. In practice it would
+> be better to fix the UDC driver before shipping since a later release
+> might not need this quirk anymore.
 >
-> Where do we get this file from?
+> This patch converts this gadget to use the U-Boot version instead of a
+> random 2 or 3 plus the UDC number. Linux stopped using this functionality
+> in 2012, remove it from U-Boot as well.
 >
+> Matching Linux kernel commit:
+> ed9cbda63d45 ("usb: gadget: remove usb_gadget_controller_number()")
+>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-This is the precompiled FSBL provided by the vendor. Currently, the FSBL
-needs to be placed into the vendor-provided SDK to be compiled. For
-convenience, we provide the FSBL for different SoCs and uploaded them to
-the GitHub repository.
+Compared with linux commit, and looks good to me.
 
-> > +      --opensbi <OpenSBI-dir>/fw_dynamic.bin \
-> > +      --uboot <U-Boot-dir>/u-boot.bin \
-> > +
-> > +This will generate fip.bin
->
-> Should we let binman do this in future?
->
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-The format of the FIP file is defined by the FSBL. This format may change
-as the vendor updates the FSBL. At present, I don't think it's necessary
-to adapt binman to this format. If there is a need in the future, we will
-address this task.
+Tested that I could use fastboot, ums and scan for storage devices on
+khadas vim3
 
-> > +
-> > +Booting
-> > +~~~~~~~
-> > +1. Place the generated fip.bin file into the FAT partition of the SD c=
-ard.
->
-> This information is insufficient to set up a new SD-card.
->
-> Should the SD card be MBR or GPT partitioned?
->
-> On an SD card there are typically are multiple partitions. All of these
-> may be FAT partioned. Does the boot ROM use a fixed partition number, a
-> partition type, or a start sector to identify the relevant partition?
->
-> It is left unclear if fip.bin is to be copied by dd to the partition or
-> into a FAT file system on the partition.
->
->
->
-> I just downloaded the vendor milkv-duo-v1.1.1-2024-0528.img.zip file.
->
-> Here I found an MBR partition table with the following partitions:
->
-> Device                          Boot   Start     End Sectors  Size Id Typ=
-e
-> milkv-duo-v1.1.1-2024-0528.img1 *          1  262144  262144  128M  c
-> W95 FAT32 (LBA)
-> milkv-duo-v1.1.1-2024-0528.img2       262145 1835008 1572864  768M 83 Lin=
-ux
-> milkv-duo-v1.1.1-2024-0528.img3      1835009 2359296  524288  256M  0 Emp=
-ty
->
-> Partition 1 was FAT16 partitioned and contained file fip.bin in the root
-> directory. But I still don't know how the relevant partition is identifie=
-d.
->
+Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> # vim3
 
-Since I used a SD card that has been already formatted during my testing,
-I forgot to mention this step in the documentation. I will add instructions
-for this step in the next patch.
-
-Best regards
-Kongyang Liu
-
-> Best regards
+> ---
+> Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+> Cc: Felipe Balbi <felipe.balbi@linux.intel.com>
+> Cc: Lukasz Majewski <lukma@denx.de>
+> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Cc: Nishanth Menon <nm@ti.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Thinh Nguyen <Thinh.Nguyen@synopsys.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>  drivers/usb/gadget/g_dnl.c | 17 +++--------------
+>  1 file changed, 3 insertions(+), 14 deletions(-)
 >
-> Heinrich
->
-> > +2. Insert the SD card into the board and power it on.
-> >
-> >   The board will automatically execute the FSBL from the fip.bin file.
-> >   Subsequently, it will transition to OpenSBI, and finally, OpenSBI wil=
-l invoke
-> >   U-Boot.
-> >
-> > -
-> >   Sample boot log from Milk-V Duo board
-> >   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> >   .. code-block:: none
->
+> diff --git a/drivers/usb/gadget/g_dnl.c b/drivers/usb/gadget/g_dnl.c
+> index b5b5f5d8c11..631969b3405 100644
+> --- a/drivers/usb/gadget/g_dnl.c
+> +++ b/drivers/usb/gadget/g_dnl.c
+> @@ -17,10 +17,10 @@
+>  #include <usb_mass_storage.h>
+>  #include <dfu.h>
+>  #include <thor.h>
+> +#include <version.h>
+>  
+>  #include <env_callback.h>
+>  
+> -#include "gadget_chips.h"
+>  #include "composite.c"
+>  
+>  /*
+> @@ -199,18 +199,6 @@ void g_dnl_clear_detach(void)
+>  	g_dnl_detach_request = false;
+>  }
+>  
+> -static int g_dnl_get_bcd_device_number(struct usb_composite_dev *cdev)
+> -{
+> -	struct usb_gadget *gadget = cdev->gadget;
+> -	int gcnum;
+> -
+> -	gcnum = usb_gadget_controller_number(gadget);
+> -	if (gcnum > 0)
+> -		gcnum += 0x200;
+> -
+> -	return g_dnl_get_board_bcd_device_number(gcnum);
+> -}
+> -
+>  /**
+>   * Update internal serial number variable when the "serial#" env var changes.
+>   *
+> @@ -261,7 +249,8 @@ static int g_dnl_bind(struct usb_composite_dev *cdev)
+>  	if (ret)
+>  		goto error;
+>  
+> -	gcnum = g_dnl_get_bcd_device_number(cdev);
+> +	gcnum = g_dnl_get_board_bcd_device_number((U_BOOT_VERSION_NUM << 4) |
+> +						  U_BOOT_VERSION_NUM_PATCH);
+>  	if (gcnum >= 0)
+>  		device_desc.bcdDevice = cpu_to_le16(gcnum);
+>  	else {
+> -- 
+> 2.43.0
