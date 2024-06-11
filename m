@@ -4,96 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3869C25B76
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 14:01:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CC90C27C75
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 14:05:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E599C88258;
-	Tue, 11 Jun 2024 16:01:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
+	by phobos.denx.de (Postfix) with ESMTP id 9A664886AB;
+	Tue, 11 Jun 2024 16:05:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="IeKLdkyn";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="cFIoiZ0q";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QVh14QsP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E9AC84374; Tue, 11 Jun 2024 16:01:22 +0200 (CEST)
-Received: from fout1-smtp.messagingengine.com (fout1-smtp.messagingengine.com
- [103.168.172.144])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AE4B0886AB; Tue, 11 Jun 2024 16:05:13 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3A36885F6
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 16:01:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C367D84374
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 16:05:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=flygoat.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailfout.nyi.internal (Postfix) with ESMTP id 1AD1A138008E;
- Tue, 11 Jun 2024 10:01:19 -0400 (EDT)
-Received: from imap44 ([10.202.2.94])
- by compute3.internal (MEProxy); Tue, 11 Jun 2024 10:01:19 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
- cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1718114479;
- x=1718200879; bh=z3s08QSrPxcGODb+kU/nvG61Q4RZi+c+khbFvmsd6eo=; b=
- IeKLdkynLShAY1nAmIq9VymxPH7suhcEYzLlyjifmTm0n9TJaqzYisDS+4F7ZpLc
- 3RdUG5fDXtD+IxbrnQvKfDK+p6YOIKxTPiNv3ETtsmisSgZK5H6BC3asxTgeEWf1
- 0bWthGFVecof009XjSgt6DncHZNAwcmQup+AZJSC6XwoZAWmTsxO8ci+5CvN9Hf2
- KJYqAaMICsQVTTXNWH5BmnRZpN6lgf776Rn2ifSzeyXnUXsmTP+tdMPbNjuGAy5D
- H2+U6c0MeEadF6pDUqW88EqJCyc1oG2bFofLX7XFMT+YslbdxG/TAUobufz7Raqm
- /wAsg5zZGaYXg13V/aD94Q==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1718114479; x=
- 1718200879; bh=z3s08QSrPxcGODb+kU/nvG61Q4RZi+c+khbFvmsd6eo=; b=c
- FIoiZ0qxnhG8f36BtJWewHayp9FxWTP8hpOeqY3oV7wqGvNDnqyAPWlsfKo1yNds
- 4nJBfgQKUFOYso6ZgD23gouhnEHfCKKcSosnJSOl/DSbDWMen7H0PB/WsFfdug4r
- K3Khvon2zFs8cBAYKOXV1ZmPGRuk4QO3uJ2pEVBAKR+mRgB+7fWZyP+SuNf0fMUQ
- l1CJla5a/cA4WNoTjtLiOmrJ5GIr71wpFs5Opb1zYJJviU5lXyeTb83c5L08y2KN
- 2NuiR7SjmriHPamQ82XYjWG7sPCxiTHOvZtNxDvOJQi/a3rjSUUzBakOG80D/2AV
- 6aXGJZsp1nUz8cKXbPayw==
-X-ME-Sender: <xms:rlhoZlqbKKz3_LIXXSK56XTfeMBRyrjaYPiB4uZBzy6_-pay3X3lgw>
- <xme:rlhoZnody1MzY7w-W8c6y11RUHGJQxSSor0o5DuEAm3wt2d8ML4t6P7y5LJmGVpRz
- a4Ns25D-5If3xqNcQk>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrfeduvddgjedtucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepofgfggfkjghffffhvfevufgtgfesthhqredtreerjeenucfhrhhomhepfdfl
- ihgrgihunhcujggrnhhgfdcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtoh
- hmqeenucggtffrrghtthgvrhhnpedufeegfeetudeghefftdehfefgveffleefgfehhfej
- ueegveethfduuddvieehgfenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmh
- grihhlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
-X-ME-Proxy: <xmx:rlhoZiOBzxkFB66o_bG2N7xU0-d7sM_MT5Nu9tpZ_J-EouVlZF6jgA>
- <xmx:rlhoZg7ahhbuC9eQeGHWPsq3R9tV0Aafq8h0B517cTKIciImNJduGw>
- <xmx:rlhoZk4wfyRmjee6d4EMm9yZWy2QHi1QZid4jp1xuqWUEYRcI6aIDg>
- <xmx:rlhoZohBXHwOlfGdKHtR5HmyeWGj_MJ1j-czbQKhwGn2jmqF5vJzlQ>
- <xmx:r1hoZv2WTkla5osaJKMN1JJHRJQ_Rp70mwqHDwIjGcwjhkrrORLyoHp1>
-Feedback-ID: ifd894703:Fastmail
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
- id 9F5EB36A0074; Tue, 11 Jun 2024 10:01:18 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.11.0-alpha0-515-g87b2bad5a-fm-20240604.001-g87b2bad5
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-6f95be3d4c4so603004a34.3
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 07:05:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1718114709; x=1718719509; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=wsYdwGisrY+ISQyhIm3LBOEMWa83qe+Tb6CtWnP6Cps=;
+ b=QVh14QsP+fOnngTVPvcz/Uk1Bms90wtJdaAJ0Zg1r25JEXo4ngi5xPdH0f6RLd+ZB1
+ EEbDj8S1Beie/+T603bCwMLBPUdu7Y0Jce5IdnAsT4NMzxgrsabbGLCxVmXWw7wYPLsb
+ eAPc2/nkeZKMiszwlbYqiJZtJ6QMwLyiNcfW0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718114709; x=1718719509;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wsYdwGisrY+ISQyhIm3LBOEMWa83qe+Tb6CtWnP6Cps=;
+ b=UVh+f41JDKXLCpIeGJ8e9gWF4PHmltF1QtfDo5zKBNXUT/K4qo6moIGgtG1KCALYb3
+ nekiD61dO9y67gIhOd8rn8twWmO+f/YqVRi8lWHhU0GrHKa/m8knoZ/nHqbIRp1jjLpt
+ 3/8R0vGLoocWOKRlh1ljoVygtTDzlj3Bc4GZreGTCM48/WbUYfO2d4PKKjVtOWn8MFQq
+ kH6zjJ5L4mOps2HSuTjGDCEx84JwPg98O9aJBCnbxi9uEq21XlpkVw3keK/QYlYh4Bny
+ YwTb18oDhmDz5HtrJ2TUz7tkBLeouWERSv5b84JcMHLBWcCA8ob1tsfCEbBU2uf2t3JL
+ rs5A==
+X-Gm-Message-State: AOJu0YzEhOOOIFbTMsypcVijRAS7aMLLPrJqf+7TWvHJsYriNeB6CC0Z
+ udrAg1tyKmzT/4FcfKYnVaE+z0OEAGa6wkhV2+JE6uudnOU12SaaY1FPwomyZU4=
+X-Google-Smtp-Source: AGHT+IHzUgMla19QFZ8v6UfcBnhuW5RDRvcveoGKBLLpAeRfSgVzLdbMFfiPnFTXQu1hwnQYm2ZMwg==
+X-Received: by 2002:a9d:4d89:0:b0:6f9:b348:ddf5 with SMTP id
+ 46e09a7af769-6f9b348e025mr6474424a34.11.1718114709314; 
+ Tue, 11 Jun 2024 07:05:09 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
+ [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-6f992dd9d9bsm1105865a34.13.2024.06.11.07.05.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Jun 2024 07:05:08 -0700 (PDT)
+Date: Tue, 11 Jun 2024 08:05:06 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>
+Subject: Re: [RFC PATCH 22/31] test: lmb: run the LMB tests only on sandbox
+Message-ID: <20240611135918.GD68077@bill-the-cat>
+References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
+ <20240607185240.1892031-23-sughosh.ganu@linaro.org>
+ <20240610174450.GX68077@bill-the-cat>
+ <CADg8p96rjN48peBf=cxbs7k7ku0stV-4bBhL5+RrTnPJVS1tjQ@mail.gmail.com>
 MIME-Version: 1.0
-Message-Id: <cdb2ba34-09c0-47f3-b72c-4099b48a6946@app.fastmail.com>
-In-Reply-To: <20240611135209.GB68077@bill-the-cat>
-References: <20240522-loongarch-v1-0-1407e0b69678@flygoat.com>
- <20240522-loongarch-v1-3-1407e0b69678@flygoat.com>
- <4887f128-786d-4d07-8dec-79ef75e39509@gmx.de>
- <43b029fc-2910-455c-93d7-6555c65bf189@app.fastmail.com>
- <20240611135209.GB68077@bill-the-cat>
-Date: Tue, 11 Jun 2024 15:01:00 +0100
-From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
-To: "Tom Rini" <trini@konsulko.com>
-Cc: "Heinrich Schuchardt" <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
- "Simon Glass" <sjg@chromium.org>,
- "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH 03/16] image: Take entry point as an output of setup_booti
-Content-Type: text/plain;charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="9gtw8BIfC4vYzoMF"
+Content-Disposition: inline
+In-Reply-To: <CADg8p96rjN48peBf=cxbs7k7ku0stV-4bBhL5+RrTnPJVS1tjQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,70 +96,60 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--9gtw8BIfC4vYzoMF
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-=E5=9C=A82024=E5=B9=B46=E6=9C=8811=E6=97=A5=E5=85=AD=E6=9C=88 =E4=B8=8B=E5=
-=8D=882:52=EF=BC=8CTom Rini=E5=86=99=E9=81=93=EF=BC=9A
-> On Tue, Jun 11, 2024 at 02:29:38PM +0100, Jiaxun Yang wrote:
->>=20
->>=20
->> =E5=9C=A82024=E5=B9=B46=E6=9C=8811=E6=97=A5=E5=85=AD=E6=9C=88 =E4=B8=8B=
-=E5=8D=882:02=EF=BC=8CHeinrich Schuchardt=E5=86=99=E9=81=93=EF=BC=9A
->> > On 22.05.24 17:34, Jiaxun Yang wrote:
->> >> For LoongArch the start of the image is not the entry
->> >> point to the image.
->> >
->> > Looking at arch/loongarch/kernel/head.S there seem to be two cases:
->> >
->> > * The kernel has an EFI stub (CONFIG_EFI_STUB=3Dy).
->> >    The legacy physical entry point is available at offset 0x08 of t=
-he
->> > header.
->> > * The kernel has no EFI stub.
->> >    The kernel entry point matches the start of the image.
->> >
->> > Where do you differentiate between the cases?
->>=20
->> Hi Heinrich,
->>=20
->> In case there is no EFI stub LoongArch would use elf format vmlinux, =
-there
->> is no real "raw" image for us.
->>=20
->> bootelf can't be used at the moment as it doesn't setup FDT and other=
- environments
->> properly.
->>=20
->> I'm planning to implement a bootlinuxelf command for this case, as MI=
-PS, LoongArch,
->> xtensa are all using ELF as default kernel image format.
->
-> Please note that we have CONFIG_CMD_ELF_FDT_SETUP already, so adjusting
-> things so that bootelf works for this case should be doable without a
-> new command.
+On Tue, Jun 11, 2024 at 02:25:05PM +0530, Sughosh Ganu wrote:
+> On Mon, 10 Jun 2024 at 23:14, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Sat, Jun 08, 2024 at 12:22:31AM +0530, Sughosh Ganu wrote:
+> >
+> > > The LMB memory map is now persistent and global. Running the tests for
+> > > the LMB module will result in the memory map getting reset, and this
+> > > will have side-effects on the rest of the working of the platform. Run
+> > > the LMB tests only on the sandbox platform, which is meant for running
+> > > such kinds of tests.
+> > >
+> > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> >
+> > I'm not sure about this. We can reset real hardware as often as we need,
+> > too. Did you run in to problems with this test on non-sandbox?
+>=20
+> But do we want to reset the state of the LMB memory map on real
+> hardware? This was working up until now because of the local nature of
+> the LMB variables. But if the LMB memory map is to be persistent,
+> should we allow it to be changed for running some test? That would
+> have side effects? I think running these tests on sandbox should
+> suffice. I mean there isn't any aspect of the LMB module that is not
+> getting tested on sandbox, right?
 
-This is a little bit broken as then you'll need to bring architecture sp=
-ecific
-functions to bootelf to setup boot registers, initrd etc. It's fine for =
-Arm64 which
-you just need to throw fdt into a location in memory but for MIPS and Lo=
-ongArch=20
-you have to setup a good deal of other stuff.
-
-Ideally those setups should be done with bootm_run_states as what we've =
-done at
-booti, but that would be a semantic to bootelf command. I know many exis=
-ting
-MIPS bare-metal applications rely on argc/argv style bootelf and I don't=
- want to
-break them, thus I think a new command is necessary.
-
-Thanks
->
-> --=20
-> Tom
->
-> =E9=99=84=E4=BB=B6:
-> * signature.asc
+When running our test/ test code on hardware side effects are fine, this
+isn't a POST type test that gets used in production. Do changes, reset
+platform as needed just like sandbox, etc. And yes, a user running tests
+that have side effects manually and then not dealing with them is user
+error.
 
 --=20
-- Jiaxun
+Tom
+
+--9gtw8BIfC4vYzoMF
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZoWZIACgkQFHw5/5Y0
+tyxhJgv9GePKdXhOGTB/NRbIkb8XreKooPRA/CI26WcWSKXQPrKQQw/ewry+9oXs
+rPufRCWGsTHaAHKtVzZRgwYQHaUuOpNmnnJvjidWTZDDvOXMpbbuUTL7eiL8NHbv
+vaGGvIXu81es5MNSmfJcKd/xQ5YbRUFuU76yS9mf3PEugXErA3gsYMl4oalFcfkq
+JG2zAJY5f5UozZxVcAVwxFPXykc/EXM3/gbs+fh9DTgQr0Vg4W9zu3f2L+r9Owlm
+IhsI9gKztNYeSWM1YFxcAjbKoBmqBPkn0Rkt5OADo+yehVsqzePjTlcC3lpeRm0b
+1LWvRguzWoH9DnLjTkf/HSayLUYXAfoQXTyab4FfaUIR2Glvevdyuu1ADdbSJJuF
+Dxf5j28JCSCs4SyZ4inMGbyvC7GTotnIkDNSCyeT+KRVf3TQsYjmMxceu50JeFWE
+kQvbHahmeJ7po41t9c6eSOFqEAKNR6wKfF6rLXgegF1K90ykD8inygKWe6BpN0sH
+xNDbcDW6
+=dbjM
+-----END PGP SIGNATURE-----
+
+--9gtw8BIfC4vYzoMF--
