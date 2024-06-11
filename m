@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F061C27C5E
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 13:05:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11634C25B76
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 13:05:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FE1E886A8;
+	by phobos.denx.de (Postfix) with ESMTP id E93E1886CE;
 	Tue, 11 Jun 2024 15:04:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC10D88681; Tue, 11 Jun 2024 15:04:46 +0200 (CEST)
-Received: from smtp-190a.mail.infomaniak.ch (smtp-190a.mail.infomaniak.ch
- [IPv6:2001:1600:4:17::190a])
+ id C35DE88692; Tue, 11 Jun 2024 15:04:46 +0200 (CEST)
+Received: from smtp-8faa.mail.infomaniak.ch (smtp-8faa.mail.infomaniak.ch
+ [83.166.143.170])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65296886AB
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 15:04:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D4388869E
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 15:04:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
  [10.4.36.107])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Vz85l730gzG0L;
- Tue, 11 Jun 2024 15:04:43 +0200 (CEST)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Vz85k6bJMzGWV;
+ Tue, 11 Jun 2024 15:04:42 +0200 (CEST)
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Vz85l39Xbz7rM; Tue, 11 Jun 2024 15:04:43 +0200 (CEST)
+ id 4Vz85k3Z04z9CX; Tue, 11 Jun 2024 15:04:42 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Tue, 11 Jun 2024 15:04:27 +0200
-Subject: [PATCH v2 4/4] dm: core: fix typo in SPL_DM_WARN prompt text
+Date: Tue, 11 Jun 2024 15:04:25 +0200
+Subject: [PATCH v2 2/4] dm: core: fix signedness in debug messages
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240611-misc-20240610-v2-4-028e82b0b620@cherry.de>
+Message-Id: <20240611-misc-20240610-v2-2-028e82b0b620@cherry.de>
 References: <20240611-misc-20240610-v2-0-028e82b0b620@cherry.de>
 In-Reply-To: <20240611-misc-20240610-v2-0-028e82b0b620@cherry.de>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
@@ -63,26 +63,79 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-It should read "in SPL" and not "wuth SPL".
+outp always point to an unsigned type in ofnode_read_u* functions but
+the format specifier is currently always using signed type.
 
+This is an issue since the signed type can only contain half of the
+unsigned type values above 0.
+
+However, this now breaks another usecase. Indeed,
+ofnode_read_s32_default is actually passing an s32 but it'll be printed
+as a u32 instead. But since the function is called u32, it makes more
+sense to have it print an unsigned value.
+
+This was discovered because arm,smc-id = <0x82000010>; on RK3588S is
+above the max signed value and therefore would return a negative signed
+decimal value instead of its proper unsigned one.
+
+Fixes: fa12dfa08a7b ("dm: core: support reading a single indexed u64 value")
+Fixes: 4bb7075c830c ("dm: core: support reading a single indexed u32 value")
+Fixes: 7e5196c409f1 ("dm: core: Add ofnode function to read a 64-bit int")
+Fixes: 9e51204527dc ("dm: core: Add operations on device tree references")
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- drivers/core/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/core/ofnode.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/core/Kconfig b/drivers/core/Kconfig
-index 1081d61fcf0..e4b1a66ecb1 100644
---- a/drivers/core/Kconfig
-+++ b/drivers/core/Kconfig
-@@ -56,7 +56,7 @@ config DM_WARN
- 	  out - it will do nothing when called.
+diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
+index 9a5eaaa4d13..9ff46460e7d 100644
+--- a/drivers/core/ofnode.c
++++ b/drivers/core/ofnode.c
+@@ -326,7 +326,7 @@ int ofnode_read_u8(ofnode node, const char *propname, u8 *outp)
+ 		return -EINVAL;
+ 	}
+ 	*outp = *cell;
+-	debug("%#x (%d)\n", *outp, *outp);
++	debug("%#x (%u)\n", *outp, *outp);
  
- config SPL_DM_WARN
--	bool "Enable warnings in driver model wuth SPL"
-+	bool "Enable warnings in driver model in SPL"
- 	depends on SPL_DM
- 	help
- 	  Enable this to see warnings related to driver model in SPL
+ 	return 0;
+ }
+@@ -357,7 +357,7 @@ int ofnode_read_u16(ofnode node, const char *propname, u16 *outp)
+ 		return -EINVAL;
+ 	}
+ 	*outp = be16_to_cpup(cell);
+-	debug("%#x (%d)\n", *outp, *outp);
++	debug("%#x (%u)\n", *outp, *outp);
+ 
+ 	return 0;
+ }
+@@ -409,7 +409,7 @@ int ofnode_read_u32_index(ofnode node, const char *propname, int index,
+ 	}
+ 
+ 	*outp = fdt32_to_cpu(cell[index]);
+-	debug("%#x (%d)\n", *outp, *outp);
++	debug("%#x (%u)\n", *outp, *outp);
+ 
+ 	return 0;
+ }
+@@ -439,7 +439,7 @@ int ofnode_read_u64_index(ofnode node, const char *propname, int index,
+ 	}
+ 
+ 	*outp = fdt64_to_cpu(cell[index]);
+-	debug("%#llx (%lld)\n", *outp, *outp);
++	debug("%#llx (%llu)\n", *outp, *outp);
+ 
+ 	return 0;
+ }
+@@ -479,7 +479,7 @@ int ofnode_read_u64(ofnode node, const char *propname, u64 *outp)
+ 		return -EINVAL;
+ 	}
+ 	*outp = fdt64_to_cpu(cell[0]);
+-	debug("%#llx (%lld)\n", (unsigned long long)*outp,
++	debug("%#llx (%llu)\n", (unsigned long long)*outp,
+ 	      (unsigned long long)*outp);
+ 
+ 	return 0;
 
 -- 
 2.45.2
