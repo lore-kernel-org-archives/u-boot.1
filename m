@@ -4,83 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4C45C27C65
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 18:52:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1631BC27C65
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 18:52:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDC148871D;
-	Tue, 11 Jun 2024 20:52:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5D9B78864D;
+	Tue, 11 Jun 2024 20:52:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QBgbXhgL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JVVZIgQa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E12608871E; Tue, 11 Jun 2024 20:52:06 +0200 (CEST)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
+ id BBF69886F0; Tue, 11 Jun 2024 20:52:11 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CDA5A886F0
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 20:52:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 281F78871B
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 20:52:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-6b0745efaeeso13827636d6.1
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 11:52:04 -0700 (PDT)
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-6f96445cfaeso786664a34.2
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 11:52:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718131924; x=1718736724; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1718131927; x=1718736727; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JmeLuADsrFeLKY3SSx40nwc08DVGs13MsOr2qbntFbk=;
- b=QBgbXhgLt0Y5KfMddVc8Pw7n2V/i7/0BnOdJYFCsZHfbma/byIwMay4GGWynWxQZi7
- m4rjbCYixQce2xPJ348SXBYLVRVHwAw6/pRMtUw+cBlEkjnGFBf0j3ERWI2TXYC5fptS
- iq7FaYAfOrASCJCfmw5wr3ugAz9Y4VqY3P/ic=
+ bh=lLtd9gQDYOJsP717Q3Q1HIqxNVr2Iapx0vmvE7q1nZ4=;
+ b=JVVZIgQafSLoFl+NBXOtvpWtnUzp3UP6e6pe9wRAlJNnmK21UsnA+SZOGHtidLeBJY
+ EPK5w/t6+RoHVnJOfTV63aLgKgFRYA7qsjXWQUWe6/Mfaye9v7P1f//if+DGorf+JL7E
+ jzw5wK1EuOWVe2xe5TTSQa4xKwBxkxH2kUfOg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718131924; x=1718736724;
+ d=1e100.net; s=20230601; t=1718131927; x=1718736727;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JmeLuADsrFeLKY3SSx40nwc08DVGs13MsOr2qbntFbk=;
- b=DltCGt6L9jyKxTFhJ7BeIUJPuVEWK8TAcaymiUjGAIO9x8iqm3+PKdKHaQnf0iBZix
- GLP3baNpNwiOZ4LMNE8JUMQ5bgPGVIpNZ0unmP4v1QVzKEMx2+dSeEPE/JDU3sps5+2h
- UYSg4Ekp1+6V1DsFNhNSkJI6oiaAWg31RMMrnfU0znmNA1A117yvgtmNkLBchmxMdTA3
- DmYFrqstnXDIbABkjk9OEUzLz7QcTYyrWFUUMi7SgKsI9fN386dYA4bQUz5CxH1wR0xl
- 3b9UGg7w6PTwyJvpfz9fKVO0o4GVQevDeK7yceag2j2zSzedu6F15Voz5cuI7FonNHd8
- 3+sQ==
+ bh=lLtd9gQDYOJsP717Q3Q1HIqxNVr2Iapx0vmvE7q1nZ4=;
+ b=HqGy2/DZbUQdl25gkRTa6lE70kZnKDzFMgkeXAx1MdWTMWdTT4jNZiF7TbtoRgPNMw
+ 5QjC1JNZrpPcAoAXuuF0AdSQ2bwOCpSjU7kW4Ia1Cq4FjynnRlKaSaXpKsGD+VfY47Dq
+ Kv1b0tPFp2HrhYxYGxX2txlZwNiEK4ur8Cfyt/8IuScDuqqzjndPEdfHrYx2p5O7uMKo
+ iYM1bo150YN7AuZQh1BL/oU+P8S/axau9dpsOCO7CuQk8sPwKp6tY76jo22CT6oogvGN
+ 5UN3XCYfp+/uLJ+RFDPhcUfzsGgKfhQabI0s5eHY+IaX0W2YhIrncPm8FzIcQW9XhWQp
+ bMlQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVvUDFz64z3DP5QuC6cOZD/rOqS/SuJDeFmqVHPgtgojlj60WemEEYa75VpJqR8i1u3vOWpD08YVx4rYjO85Is05j+CCw==
-X-Gm-Message-State: AOJu0YwR5cczQksWtxKrL9/efdARzyxMyJfOppssbId8Vlm+1TAv1pIP
- P/6IACEQa0s3NUH0Nv4Ng9N3xKr0kdP3QKuuTmpywYnyFx/yqkWnZSYAvVj0LMVwQgg90PI7TfW
- 9ODUaz+ShmkV3zDzIsMym7x/On7R8Mjqp5CFE
-X-Google-Smtp-Source: AGHT+IEWNiF9cZgA5vHgGmlN+USeGVUTl72Mg0WVaczwevX3Z0aBHpY1whJRtNWyf9f2ERJGIqGpBArfXLCXNqEFJOw=
-X-Received: by 2002:a05:6214:3a08:b0:6b0:8d20:e57e with SMTP id
- 6a1803df08f44-6b08d20eba6mr23510026d6.7.1718131923750; Tue, 11 Jun 2024
- 11:52:03 -0700 (PDT)
+ AJvYcCVQ6GTh5ypyghZKpLr5leh7sB4uJvGoeQZ1pXsLDkpe1iLVdKUGQMaEjLFyoUecIXQXeguMnu9m1Lv8B6SrHrPqSv6VzA==
+X-Gm-Message-State: AOJu0YwRYXyAW7Hf/xBnBVpPuuyrM/XHg3jDBKK+na4Nz2sWdsg5rx6y
+ bDVRTZ0f6dvJ5Gl73Ir5sDMut9AzPUMGhLyIro6n3rOXuqPjSYWk7qrSqRH66sDRh4t7Vf0/ltB
+ GvT0urqNsBUd/kVZuyixU5CtLD8P6Un4EzURC
+X-Google-Smtp-Source: AGHT+IEFZYVBelB6g3V7bNLWKqFRQHKc71pHnTgPEE58v/M9hgIms1/CQBBPXjKLnGyXUewVFoCa1QwdTIWeisic2ko=
+X-Received: by 2002:a9d:6c06:0:b0:6f9:9d00:553d with SMTP id
+ 46e09a7af769-6f99d005605mr7546862a34.7.1718131926850; Tue, 11 Jun 2024
+ 11:52:06 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240521104834.11295-1-marex@denx.de>
- <CAOMZO5DsyuCu+fjpa8GjB6mbp9b5n=YOGxtjgMkdSstGFmEUuA@mail.gmail.com>
-In-Reply-To: <CAOMZO5DsyuCu+fjpa8GjB6mbp9b5n=YOGxtjgMkdSstGFmEUuA@mail.gmail.com>
+References: <20240522-loongarch-v1-0-1407e0b69678@flygoat.com>
+ <20240522-loongarch-v1-1-1407e0b69678@flygoat.com>
+ <b723aa8e-1d29-4904-953d-160caf097136@gmx.de>
+ <5bd109ff-73ef-4bda-8b5b-2ab583c064d8@app.fastmail.com>
+In-Reply-To: <5bd109ff-73ef-4bda-8b5b-2ab583c064d8@app.fastmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 11 Jun 2024 12:51:53 -0600
-Message-ID: <CAFLszTiwqcPe98gwbt1oVnWYJ0yFQ6rTpdcrB2kw=YRH-9=JJA@mail.gmail.com>
-Subject: Re: [PATCH v4 1/4] binman: Add nxp_imx8mcst etype for i.MX8M
- flash.bin signing
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de, anton.gres@ifm.com,
- ch@denx.de, 
- Tim Harvey <tharvey@gateworks.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Adam Ford <aford173@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Angus Ainslie <angus@akkea.ca>, 
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Stefan Eichenberger <stefan.eichenberger@toradex.com>,
- Stefano Babic <sbabic@denx.de>, 
- Tom Rini <trini@konsulko.com>, kernel@puri.sm, u-boot@dh-electronics.com
+Date: Tue, 11 Jun 2024 12:51:55 -0600
+Message-ID: <CAFLszTiU17kEPC4JGX4j-KJG7Ff=-fFnV9i2Ua0yvi-v-n6zhA@mail.gmail.com>
+Subject: Re: [PATCH 01/16] lib: fdtdec: Handle multiple memory nodes
+To: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -99,37 +90,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Jiaxun,
 
-On Fri, 24 May 2024 at 10:26, Fabio Estevam <festevam@gmail.com> wrote:
+On Tue, 11 Jun 2024 at 07:48, Jiaxun Yang <jiaxun.yang@flygoat.com> wrote:
 >
-> On Tue, May 21, 2024 at 7:48=E2=80=AFAM Marek Vasut <marex@denx.de> wrote=
-:
-> >
-> > Add new binman etype which allows signing both the SPL and fitImage sec=
-tions
-> > of i.MX8M flash.bin using CST. There are multiple DT properties which g=
-overn
-> > the signing process, nxp,loader-address is the only mandatory one which=
- sets
-> > the SPL signature start address without the imx8mimage header, this sho=
-uld be
-> > SPL text base. The key material can be configured using optional DT pro=
-perties
-> > nxp,srk-table, nxp,csf-crt, nxp,img-crt, all of which default the key m=
-aterial
-> > names generated by CST tool scripts. The nxp,unlock property can be use=
-d to
-> > unlock CAAM access in SPL section.
-> >
-> > Reviewed-by: Tim Harvey <tharvey@gateworks.com>
-> > Signed-off-by: Marek Vasut <marex@denx.de>
 >
-> Applied the series, thanks.
+>
+> =E5=9C=A82024=E5=B9=B46=E6=9C=8811=E6=97=A5=E5=85=AD=E6=9C=88 =E4=B8=8B=
+=E5=8D=881:26=EF=BC=8CHeinrich Schuchardt=E5=86=99=E9=81=93=EF=BC=9A
+> Hi Heinrich,
+>
+> Thanks for your comments, will fix most of them in next reversion.
+>
+> [...]
+> >> -            gd->bd->bi_dram[bank].start =3D (phys_addr_t)res.start;
+> >
+> > The conversion is superfluous.
+>
+> This is necessary as phys_addr_t can be unsigned long or unsigned long lo=
+ng.
+>
+> >
+> [...]
+> >> +    __maybe_unused const char *final_name;
+> >> +    __maybe_unused int final_reg;
+> >
+> > '__maybe_unused' is superfluous.
+>
+> This is necessary as when LOG_DEBUG is disabled these two variables won't
+> be referenced. Compilers would complain about it.
+>
+> >
+> >>
+> >>      gd->ram_base =3D (unsigned long)~0;
+> >
+> > gd->ram_base =3D ULONG_MAX;
+> >
+> >>
+> [...]
+>
+> Thanks
+> --
 
-This lacks tests - can you please add sufficient tests in ftest.py to
-get the cover coverage back to 100%? Please try 'binman test -T' to
-see this.
+Can you please add a test for this function? Perhaps test/dm/fdtdec.c
+might be a good place?
 
 Regards,
 Simon
+
+> - Jiaxun
