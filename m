@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79E94C27C65
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 21:05:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BCC6C27C65
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 21:05:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A70A8887AD;
-	Tue, 11 Jun 2024 23:04:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1622F88783;
+	Tue, 11 Jun 2024 23:04:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="BwU83LJp";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="GSAKiq6s";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="SWBK3iIU";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="WjTRJUnr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 298C7887AD; Tue, 11 Jun 2024 23:04:28 +0200 (CEST)
+ id 9AF148839F; Tue, 11 Jun 2024 23:04:30 +0200 (CEST)
 Received: from wfout2-smtp.messagingengine.com
  (wfout2-smtp.messagingengine.com [64.147.123.145])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1879F88739
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 23:04:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D7C088739
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 23:04:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
-Received: from compute7.internal (compute7.nyi.internal [10.202.2.48])
- by mailfout.west.internal (Postfix) with ESMTP id 13F321C00091;
- Tue, 11 Jun 2024 17:04:24 -0400 (EDT)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+ by mailfout.west.internal (Postfix) with ESMTP id 94C6D1C0008D;
+ Tue, 11 Jun 2024 17:04:26 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute7.internal (MEProxy); Tue, 11 Jun 2024 17:04:24 -0400
+ by compute4.internal (MEProxy); Tue, 11 Jun 2024 17:04:27 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1718139863;
- x=1718226263; bh=+hTHAPUndmDGnJBOKypzjfNfd8Kd/QBOKlVs3aF1skM=; b=
- BwU83LJpZIFecxpOa7T2JJX9mHKwpIfqyI5JivcqPica1W/MFzilbzfNGLYdSScA
- HjDZkj/EqZi//P/8NN+hIvzbvlzeAR4VrZAHxkHbeaYgqHNoisE8yNOylHB3m2zd
- 1cwAi1l9TO5BjML48X1/Ecjx4V/xgc1sxEZZ8h5+FS+c//SRsm8BIxICeFfKr83+
- IGG5w5tPAcaS1D6Rdhu1orJEpnzuaJNbflZqj1UswgHJe2WsjwDLh20FaEkJxeds
- 0w9RVFhxKR+jCi5u3SC20JoUVhLVTxGQHNOeAeeB7yIoHZZOo0iZczta2oIsDX8a
- 7lFmTyNRNU8a3DMAYDrqRg==
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1718139866;
+ x=1718226266; bh=c6WBYGV2x2DpAxqSXqGF9JybWF9TN0LcvdnIY3KS8Ec=; b=
+ SWBK3iIUjNttZaa07JjbLEos2XZayBVDboqpf1iK+Q0n7cw9V0hKxZlLl1I41hue
+ RYdUL+HNsLfVr/2WlhmXuRIcD5PiMxYdnTIzIpsSndtMZLGSKvbQ4ZYAHgZBPd+3
+ tNibkyNyB4s/1siRn0B7s9SnW5xvTB4qjvmNaeKwv0iYKEEwzUeeOJiCmljA94Pm
+ 5tQ+NO/bN0giP1a+PHPXFztQfs5ZwlyspBvO+w4b5HE0i3HsraTpQMaD76z3N9us
+ /n/vqd5EE3Cxb1XKF2AcbuPGDibIyVN7eJAgOCTw1M2+8ocfdQpl/TPRScMSbtRQ
+ Oib1vF6roZ59WgHjq6HR6A==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1718139863; x=
- 1718226263; bh=+hTHAPUndmDGnJBOKypzjfNfd8Kd/QBOKlVs3aF1skM=; b=G
- SAKiq6sf3zvdnC6+b+ba084HAZUp9ehGSNFDCZ1jq1efcyAsqzh2ewA6X9ZaYqfl
- ru3IUvCYTqhISSHDyLPFp307Z1MuUK5HLx++vBL9sJb4l2yZUQvmYzobtrEYNigr
- sxcoV6HBudbS9ojncgEIQHh9ZJ1U5QtW67YFC1/8whwghmMFnF/ZSNfcNkxmuaYM
- djNsY59b9K48tJieA/zw//AxLXBPImoCA3H12ZGYQIDe25zX+aPVO96ND8hqsbuS
- qHUN6txysPPmwbvEHtk7oJ1Mf6atzP7DgWXEN1kZzQ2kYgA+O/iqkTIYL7N+rvtZ
- MWYU7G3tz9KBY6nCQjoFQ==
-X-ME-Sender: <xms:17toZm8AhdljIJrVldba6H8NRPXA-LsNia0y53CTDXRNOk6UEZdG1g>
- <xme:17toZmsFTwxl1SohiC-tTpKLsnehtPvJAy6wzbHKHKyg-t5X24yqgrr7GCoE-oreh
- ircfBAfc-bVZN6zYbM>
-X-ME-Received: <xmr:17toZsDIh_z_tORLkgfCrVY0Jp_lH34JcABAINe7cy34NJYXRR-KdGQ>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1718139866; x=
+ 1718226266; bh=c6WBYGV2x2DpAxqSXqGF9JybWF9TN0LcvdnIY3KS8Ec=; b=W
+ jTRJUnrRbR9I0CYjifQep3yVLEmWyJjx/ZE78LNvlTRbVI64iSr/hVdG20krnJlK
+ chx0GDKHHxku+zu3vviIcv4A+GtairEZHM8tPImjZiPtgOu/c+DGTwrcn8qq23Mk
+ sOJNUgSWzPlj9nk+kmJNpP1tigvst70kHG8fWG6PEUNeRiNhjDzistwkzluuJCp2
+ RzcY8eFOk/qVWlj1s87Jf6ISOYFfo6DhUH1u7nMsBHJSOMvx5JGqpdKteGYjtp0y
+ kt+JJSxvv/sk/vXvnfO9VdPoCnIeLjY6L8dJl4psFUcMnItgAqGpOK055S93V/c/
+ rqk3SdfxoI7AO3BxsQmWA==
+X-ME-Sender: <xms:2rtoZlx0uj63dXGSReCUZyyE1UaZJmwcTIfWhMc_Rw8xmR8MOSEwWA>
+ <xme:2rtoZlRPtI5tJFx6J_ZQW9o2vHuF-Gz7g3XGzd4FyxzkTm2k9kAxn8yte_sOKYvlw
+ wfyCb7eU0RU8b9IfeI>
+X-ME-Received: <xmr:2rtoZvWW27IsxTK8BIzjkLH-P1I8b-nGJvXsBOncp2prQNDSUnvMYVU>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrfeduvddgudehgecutefuodetggdotefrod
  ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
  necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
@@ -68,21 +68,21 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrfeduvddgudehgecutefuodetgg
  enucggtffrrghtthgvrhhnpedvkeeihfefveekueevteefleffkeegudeghfdtuddugefh
  ueevgeffgedukeejleenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrih
  hlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtohhm
-X-ME-Proxy: <xmx:17toZudlEFrI0bBOYVV__vF0EigDRBP_Z6F0WWMCXJxOcSuOLppsAw>
- <xmx:17toZrOxwJMgqvL0XJr6aA_Qlxb6_hkq3Nh4EQgbjIJL0bRGHu_glA>
- <xmx:17toZokXnZROmkAF0YPIjJQFBcsPtyMqqpiJDQBK_WBZVUEmEg5qJQ>
- <xmx:17toZtus8VydrO9bLgGHirMXmKe5RqOCYIkB02HxXi8MACyelph2HA>
- <xmx:17toZkhhulxp69j4NOXmh1qs8HuonxoMfzgaf9BBRvHzGHxHayf3_AYr>
+X-ME-Proxy: <xmx:2rtoZnjQ3lVtjCJFb03qnzCmMtiSx9VQlmeB2rwOSm5ZQph0MbLarw>
+ <xmx:2rtoZnBXDjrMRre-YGbgXdh9XmK9fErcoRjPn3DYM7azO9gYYde1yw>
+ <xmx:2rtoZgJ30NaVJg4VeqHrucslxQ2Ojfk33JfY4upEpCzGD97GEgtj-Q>
+ <xmx:2rtoZmAJJKaIY5BrSwMpYEJeV89T_-eMiD9vib-E447mAZvqA6bG0Q>
+ <xmx:2rtoZr0mop8RMUBU3b1PrH4jzkTCMiFC1mk4vUJkeNdII4I2QjHgc5iV>
 Feedback-ID: ifd894703:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 11 Jun 2024 17:04:22 -0400 (EDT)
+ 11 Jun 2024 17:04:24 -0400 (EDT)
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Date: Tue, 11 Jun 2024 22:04:03 +0100
-Subject: [PATCH 04/20] py: Replace usage of configparser.read_fp
+Date: Tue, 11 Jun 2024 22:04:04 +0100
+Subject: [PATCH 05/20] doc/sphinx: Remove usage of six
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240611-docker-image-v1-4-51472eb70357@flygoat.com>
+Message-Id: <20240611-docker-image-v1-5-51472eb70357@flygoat.com>
 References: <20240611-docker-image-v1-0-51472eb70357@flygoat.com>
 In-Reply-To: <20240611-docker-image-v1-0-51472eb70357@flygoat.com>
 To: u-boot@lists.denx.de
@@ -93,13 +93,13 @@ Cc: Simon Glass <sjg@chromium.org>,
  Aaron Williams <awilliams@marvell.com>, 
  Jiaxun Yang <jiaxun.yang@flygoat.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2603;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=925;
  i=jiaxun.yang@flygoat.com; h=from:subject:message-id;
- bh=MvBMS4bIxSpnJoVB2N02fbsWWXoqEEDrI6IX3K/8MVk=;
- b=owGbwMvMwCXmXMhTe71c8zDjabUkhrSM3WfLuNRUPdV6cxcEfY2a3blPJ27B+w3X0ndsZJvn0
- 2F0S8Suo5SFQYyLQVZMkSVEQKlvQ+PFBdcfZP2BmcPKBDKEgYtTACaypp2RoUHza56JzIO4Vckv
- LHsfXe9e1cktErVXgjvIb13/4WCJwwx/pfMZ9e85XFvjGe+pOjlGeDl/QrrjugczF3D+PLfd/Pd
- sdgA=
+ bh=USCIZG1dPiKaNKiXpiL5cXS13xLsZrtCZRbrkG/smJY=;
+ b=owGbwMvMwCXmXMhTe71c8zDjabUkhrSM3Wd/rQnhvbhkzZ3NLOyxe/pXHk+X5Jk8K4+xq4jl4
+ apFa+vsOkpZGMS4GGTFFFlCBJT6NjReXHD9QdYfmDmsTCBDGLg4BWAi2h2MDEucDnhv3DA9qcl1
+ RoHv5/L3rlo1yhMyJYRnOKl1HJ3Tt56R4QeXgmDzLd8yl5j7vc4WP21PvQhkKDqutOVWQ94cNSd
+ GHgA=
 X-Developer-Key: i=jiaxun.yang@flygoat.com; a=openpgp;
  fpr=980379BEFEBFBF477EA04EF9C111949073FC0F67
 X-BeenThere: u-boot@lists.denx.de
@@ -118,70 +118,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-configparser.read_fp is deprecated long ago.
-Replace with relevant API.
+We don't support python2 any more so there is no point to
+use six here.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 ---
- tools/buildman/bsettings.py | 2 +-
- tools/patman/settings.py    | 9 ++++-----
- 2 files changed, 5 insertions(+), 6 deletions(-)
+ doc/sphinx/kfigure.py | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/tools/buildman/bsettings.py b/tools/buildman/bsettings.py
-index e225ac2ca0f4..7dbc638d5841 100644
---- a/tools/buildman/bsettings.py
-+++ b/tools/buildman/bsettings.py
-@@ -29,7 +29,7 @@ def setup(fname=''):
-             settings.read(config_fname)
+diff --git a/doc/sphinx/kfigure.py b/doc/sphinx/kfigure.py
+index dea7f91ef5ab..9467e8d52ac0 100644
+--- a/doc/sphinx/kfigure.py
++++ b/doc/sphinx/kfigure.py
+@@ -58,7 +58,6 @@ from docutils.parsers.rst.directives import images
+ import sphinx
  
- def add_file(data):
--    settings.readfp(io.StringIO(data))
-+    settings.read_file(io.StringIO(data), data)
+ from sphinx.util.nodes import clean_astext
+-from six import iteritems
  
- def get_items(section):
-     """Get the items from a section of the config.
-diff --git a/tools/patman/settings.py b/tools/patman/settings.py
-index 636983e32da8..308626107037 100644
---- a/tools/patman/settings.py
-+++ b/tools/patman/settings.py
-@@ -41,7 +41,6 @@ class _ProjectConfigParser(ConfigParser.ConfigParser):
-     - Merge general default settings/aliases with project-specific ones.
+ import kernellog
  
-     # Sample config used for tests below...
--    >>> from io import StringIO
-     >>> sample_config = '''
-     ... [alias]
-     ... me: Peter P. <likesspiders@example.com>
-@@ -59,25 +58,25 @@ class _ProjectConfigParser(ConfigParser.ConfigParser):
+@@ -540,7 +539,7 @@ def add_kernel_figure_to_std_domain(app, doctree):
+     docname = app.env.docname
+     labels = std.data["labels"]
  
-     # Check to make sure that bogus project gets general alias.
-     >>> config = _ProjectConfigParser("zzz")
--    >>> config.readfp(StringIO(sample_config))
-+    >>> config.read_string(sample_config)
-     >>> str(config.get("alias", "enemies"))
-     'Evil <evil@example.com>'
- 
-     # Check to make sure that alias gets overridden by project.
-     >>> config = _ProjectConfigParser("sm")
--    >>> config.readfp(StringIO(sample_config))
-+    >>> config.read_string(sample_config)
-     >>> str(config.get("alias", "enemies"))
-     'Green G. <ugly@example.com>'
- 
-     # Check to make sure that settings get merged with project.
-     >>> config = _ProjectConfigParser("linux")
--    >>> config.readfp(StringIO(sample_config))
-+    >>> config.read_string(sample_config)
-     >>> sorted((str(a), str(b)) for (a, b) in config.items("settings"))
-     [('am_hero', 'True'), ('check_patch_use_tree', 'True'), ('process_tags', 'False')]
- 
-     # Check to make sure that settings works with unknown project.
-     >>> config = _ProjectConfigParser("unknown")
--    >>> config.readfp(StringIO(sample_config))
-+    >>> config.read_string(sample_config)
-     >>> sorted((str(a), str(b)) for (a, b) in config.items("settings"))
-     [('am_hero', 'True')]
-     """
+-    for name, explicit in iteritems(doctree.nametypes):
++    for name, explicit in doctree.nametypes.items():
+         if not explicit:
+             continue
+         labelid = doctree.nameids[name]
 
 -- 
 2.43.0
