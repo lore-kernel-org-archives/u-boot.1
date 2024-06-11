@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DFC1C27C75
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 20:09:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E794C27C65
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 20:09:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DBC088823;
-	Tue, 11 Jun 2024 22:02:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 839B688715;
+	Tue, 11 Jun 2024 22:02:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bwweXeHe";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZhCEBB7u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A59A887E1; Tue, 11 Jun 2024 22:02:47 +0200 (CEST)
-Received: from mail-il1-x143.google.com (mail-il1-x143.google.com
- [IPv6:2607:f8b0:4864:20::143])
+ id EFC0B8880C; Tue, 11 Jun 2024 22:02:48 +0200 (CEST)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8465C887FF
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 22:02:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5CE3488717
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 22:02:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x143.google.com with SMTP id
- e9e14a558f8ab-37597eba356so14071665ab.2
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 13:02:45 -0700 (PDT)
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-7eb0b9fa610so273647839f.3
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 13:02:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718136164; x=1718740964; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1718136165; x=1718740965; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+efTwnbqAclrkOcv0sY5l3taj6AFXPXyErZ/eaktCgY=;
- b=bwweXeHeZNdhD4m9hF9axIna+v/0Gzqa6NWW2ailtEVJRTPR+3SV83JdB6tedMZli9
- uiF9jCe8wj0vQYw1huCqzqL30xre2lKkqhxe/BJoGW3yL5Bb0gXZmfDVlFLOw6jpZ5xA
- ya9mFmsP3YQkbyMfpRqd39psZ8c5d/ncHgFQ8=
+ bh=xVesZdjJwHtp4r7cSUkWpG3wg6027NEyrGlCxtH6zYs=;
+ b=ZhCEBB7uOg/ikwv8xbmzuyCo7rLoQM7owSwxnA0m4iW9hHfWBGJ2W/bwmvHNY8YxlG
+ Zm8p8wDJoCiOfiFjrkHWNU9RXL7Fy9wfMfM4+L72Jdivb9+OVhhSac+aBEQ6ttNbQsDC
+ 7pT9O7SF6Ge5G5etVjDlglZqJYjYljpoW7Dnk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718136164; x=1718740964;
+ d=1e100.net; s=20230601; t=1718136165; x=1718740965;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+efTwnbqAclrkOcv0sY5l3taj6AFXPXyErZ/eaktCgY=;
- b=pt/mdOHT1ggH8Orwa8lrO8wIc6KyqZD0nL6zRrUvDJqiUb7ZMVjaODCY0MUJzJuk77
- aM6b1y4cuFP9vuHCWzIy7HcEl3/OMvPDlZw26TFRyTPPySHMDNK0gmUdbbACjCjBLH52
- vaw7EV5fK2krtrAMgbcbrQjgCKqib7c0//ZMgDqez6DucBGYApbt+GccRWBLn+kVaB6T
- JlO/MNZVnIDqLBiXwz+CevYy9JTCZmyZYZuEEmf5cAnCIfNzp+5D+ggCIJgkLNwdUCMf
- nObnihNaOF34e4r3VkiBfQ27DSkks9utksYDk9GVDbF70myEpMrcmFmrnsylhlrfdjHW
- GGCg==
-X-Gm-Message-State: AOJu0YwS/LTaF7AhRJ2QF+Z7n7CQF321/s70MhyoSp500+t5jk9pTS1/
- dAbH3sMd9pqDWmLARDWJ5u+VOdgHY3J4wwol97Qt0z41iSSvI0oExpOYxB8CnMV5uv/C3oBVNyI
- KuqAs
-X-Google-Smtp-Source: AGHT+IFM1CKR/cpcdUjsMg3TKldI2dX+bKnElQTjCq1NJCxE4OwvUCMwm6Q484YevtVsVidC9j9GSg==
-X-Received: by 2002:a05:6e02:1908:b0:374:ada1:296b with SMTP id
- e9e14a558f8ab-3758032247emr160896835ab.8.1718136164286; 
+ bh=xVesZdjJwHtp4r7cSUkWpG3wg6027NEyrGlCxtH6zYs=;
+ b=Un2kbLAzEfjRtqGiLPamQXGrpI0nEL/7vX6U7nI5mnjA9pJEBLmOtkI8HN7spKsc0F
+ biUuXR6kSCnNMT+P4AjsryFYp0Knu5/HHbrRxFDEZnxGUoTFmcwGWRBjuWcgGZZW50wc
+ QvVw8eom6DiCLx/nQqwie9TCnoundsTPaQIiCZ1KZ2WRChEU1b4h1iSnJdEZbMCDwrsH
+ lx4dv2WgfGXGEt1f+W8BJkYq7gCkmpWPYCPs+XJt30shiOVC667+AHqkPpJVlJnXL/SW
+ MA/Cmd3FxBtzX3tlPJegaHeST9rOZA0y4u4DXB3KFXuWAydM7d/veaJFG8bYoaG5jJME
+ macQ==
+X-Gm-Message-State: AOJu0YyMLtoD47esQ0Wl9Q7ggHXYCUDPaVwlQTv87kY6hAUbY2VQZtH1
+ sjSIDwt7+2lpH8tmQhtMPNTAX2j1IXelM6zMs84OWhDbUnp7y/khFumTwt7vGKnhqTo5onFRIPg
+ 4Mw==
+X-Google-Smtp-Source: AGHT+IEUi+E4ECOeuCRtp+lkUcs6GUaYChVt9IFo9hWHdB0yak24kXuJRA3EwLdCTwBYJZ6V0MeCHg==
+X-Received: by 2002:a05:6e02:20e9:b0:375:af34:c13e with SMTP id
+ e9e14a558f8ab-375af34c4afmr57912255ab.12.1718136164965; 
  Tue, 11 Jun 2024 13:02:44 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-375ca7617cbsm1119305ab.30.2024.06.11.13.02.43
+ e9e14a558f8ab-375ca7617cbsm1119305ab.30.2024.06.11.13.02.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 11 Jun 2024 13:02:44 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 38/42] test: Fix mulptiplex_log typo
-Date: Tue, 11 Jun 2024 14:01:52 -0600
-Message-Id: <20240611200156.2245525-39-sjg@chromium.org>
+Subject: [PATCH 39/42] test: Avoid double echo when starting up
+Date: Tue, 11 Jun 2024 14:01:53 -0600
+Message-Id: <20240611200156.2245525-40-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240611200156.2245525-1-sjg@chromium.org>
 References: <20240611200156.2245525-1-sjg@chromium.org>
@@ -89,27 +89,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix a typo in a comment.
+There is a very annoying bug at present where the terminal echos part
+of the first command sent to the board. This happens because the
+terminal is still set to echo for a period until Labgrid starts up and
+can change this.
+
+Fix this by disabling echo (and other terminal features) as soon as the
+spawn happens.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- test/py/u_boot_console_base.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ test/py/u_boot_spawn.py | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/test/py/u_boot_console_base.py b/test/py/u_boot_console_base.py
-index eda48cd35f7..1b00821c5e9 100644
---- a/test/py/u_boot_console_base.py
-+++ b/test/py/u_boot_console_base.py
-@@ -97,7 +97,7 @@ class ConsoleBase(object):
-         Can only usefully be called by sub-classes.
+diff --git a/test/py/u_boot_spawn.py b/test/py/u_boot_spawn.py
+index 62eb4118731..261bdf62e15 100644
+--- a/test/py/u_boot_spawn.py
++++ b/test/py/u_boot_spawn.py
+@@ -12,6 +12,7 @@ import pytest
+ import signal
+ import select
+ import sys
++import termios
+ import time
+ import traceback
  
-         Args:
--            log: A mulptiplex_log.Logfile object, to which the U-Boot output
-+            log: A multiplexed_log.Logfile object, to which the U-Boot output
-                 will be logged.
-             config: A configuration data structure, as built by conftest.py.
-             max_fifo_fill: The maximum number of characters to send to U-Boot
+@@ -118,10 +119,19 @@ class Spawn:
+                 os._exit(255)
+ 
+         try:
++            new = termios.tcgetattr(self.fd)
++            old = new
++            new[3] = new[3] & ~(termios.ICANON | termios.ISIG)
++            new[3] = new[3] & ~termios.ECHO
++            new[6][termios.VMIN] = 0
++            new[6][termios.VTIME] = 0
++            termios.tcsetattr(self.fd, termios.TCSANOW, new)
++
+             self.poll = select.poll()
+             self.poll.register(self.fd, select.POLLIN | select.POLLPRI | select.POLLERR |
+                                select.POLLHUP | select.POLLNVAL)
+         except:
++            termios.tcsetattr(self.fd, termios.TCSANOW, old)
+             self.close()
+             raise
+ 
 -- 
 2.34.1
 
