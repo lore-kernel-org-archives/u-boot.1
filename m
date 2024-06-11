@@ -4,85 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63CEFC27C78
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 22:56:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 442F8C27C78
+	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 02:33:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A58F288739;
-	Wed, 12 Jun 2024 00:56:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 140D5886BB;
+	Wed, 12 Jun 2024 04:33:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HEKUW00N";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VGldz02h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B888588655; Wed, 12 Jun 2024 00:56:02 +0200 (CEST)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id 2E2C388744; Wed, 12 Jun 2024 01:14:52 +0200 (CEST)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E26888788
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 00:55:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2925487B30
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 01:14:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-3d22a32bef8so185662b6e.0
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 15:55:59 -0700 (PDT)
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-35f223e7691so197682f8f.1
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 16:14:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718146558; x=1718751358; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=c/Rh/+QCVOy4DpX+yJ1655CaEh65a+/9CU2iCiU/3Hk=;
- b=HEKUW00NvqdgM2hhxTzfMmPtm1zIPrIRRKryY5tsSonIkzqNHmU6JcA4FXjoPtk1aC
- upKZeexe6xQK40paRrQe/GqL27DsvTPN1oyLbxPJw5jxXzwCystk7oV8TaCzPOVQLcjP
- lJXWzFwm8fvrHi2YMtj4LywJQ5NNDFC7yU+rY=
+ d=gmail.com; s=20230601; t=1718147689; x=1718752489; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=4klEMCkdukh01l8+VxsqHUhcCHl2YHYkzoK75ub9YzU=;
+ b=VGldz02hocp+fZwN8xtRQAI+C1WlzEW1MjIjdP7MpcvOW+MdFx/24TeQhXTk91URiK
+ CtKIKwmfFPGjIF6gvmMblH8o979seGRwjIGrUnSdWT0M00cD0fU1f/66Y0DZN09djRIL
+ jVzpeztQTPSKVqPwfTDoK72yQ4sgSS8Bq3ayuMRS959dzFIoElcjjEbxmvr2rrBqWDrp
+ l4mGDRNkuHx8wm5bTUCPWQFNQqkWpB1aWuaa6jaPiasOHRVtlLmC3iFRE8xNSqLZR7pi
+ qpUiSKVvWIcTnvJwFMayNnizxcDXFQpd+HkUo6T4oQzg492BfKPBV78a+xmVZbXiDJT/
+ 1rmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718146558; x=1718751358;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=c/Rh/+QCVOy4DpX+yJ1655CaEh65a+/9CU2iCiU/3Hk=;
- b=Fg96X9EovdNESZk1NokwyVqjh/G9qBOpDpdq3+cUbhWgvD56QV0pwaBBcC2EgRMBd5
- xGMx/Jg94fR5wAygGZPp7ddxdSGxg3slSQMVo85XMicIQxMBYspQuWyivnU5soZEV3N7
- XmLdNhEnUoNK30Xut7jnvYqKM8KorrGtjdJeVMv+pwL8Q3U0zOoM1TgYRn7VvKOWvShj
- pg7Y1c5LKR0gxvTOfIxl+h7ML4KQqIs6fzgBKRHgQJuYVgC5LuBSY2O9LhDzRTv6OhxI
- CeORcviWN7rWP/i5AYSZdzL28VS8ATcuSVTl6/ZKGVC5GpgqZ09NZWir4njLIsUGGoMI
- FCCQ==
+ d=1e100.net; s=20230601; t=1718147689; x=1718752489;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=4klEMCkdukh01l8+VxsqHUhcCHl2YHYkzoK75ub9YzU=;
+ b=ObBIbD2no/nM+KTz+zrGgCrmiMQbF4y+eWKAmQyGcxRSkF23OuXix483fLqA9AwF1y
+ TwmX422rS3TFfJvgYdT94ywaHw287GXSahulLhnt2ezPeG8kFxx9TjIE3/mWCfbqT2v4
+ p2smHO2cKCmJ6DdHqlkw5egbs2Pd9C+ozbA8XHjfqrXa/pKhEa91dZjZex7zl1Dh/4vH
+ raUCrRgyWpY9WkIR64t6oysX2lPVATmCXWXehMYKYtSgUc5zhjdJKGzd5sEX1qMDbRpv
+ x8jssKOLkA3HMuVHe2uZ/sWa9Blwfwx42+0OeSpU/bSGFrijlLjg/BgiisRt/YbsJNOb
+ qhUQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVdteSCHCN7D2dx1H0zb75sk+lW3PMa7KkVDW02qt9DgA8sWiKNIBC+ZW/SWEo6paRWgO8kgaqwlHuq438t9snOQxeilw==
-X-Gm-Message-State: AOJu0Yz0B7RsyKqYCnMYQ5kIWskM+/GC3wz/Elr23hIaElHjiH8TaQN4
- kS5+e8JTG9Z2KfYoXrO5l0hNokK8Ya8gJtlWUt0nXBVm03RPwykkMYgE+YMNjZY=
-X-Google-Smtp-Source: AGHT+IEdUftGb9+VwNfuofNNMQ+9sXdLXB2Ne/I9DTpYVhwok+aOucvGQvGQOYooPHu7D6K0wueaoQ==
-X-Received: by 2002:a05:6808:1b2a:b0:3d2:16a:2002 with SMTP id
- 5614622812f47-3d23460d95dmr1616657b6e.2.1718146558083; 
- Tue, 11 Jun 2024 15:55:58 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
- [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-6f98dc069f0sm1317235a34.48.2024.06.11.15.55.56
+ AJvYcCVgCJNVfHigRbOHLvrFW/32Yo9cDFyIpQpeNqjjZBBTboSqMdOpTy64hbVLYCZikP/Qr0+zETeduEhLGu0hWG5Z4Us8sg==
+X-Gm-Message-State: AOJu0YzCRkec8GpP3VS2yEiHh8WqAFbz5ic/LqgpLSxQxGV6f5uMmtCV
+ XfbxtAeHOAw/dYlgWH+JJESaZGlt82Cs8FTMGAuiNfrcgYCiZx5U
+X-Google-Smtp-Source: AGHT+IFUtR9BgNQcVLy7JDRkZgDeEvqwQI7nEMxF0bYDbPUkqcW9aVHWCi6+U47496TelgyxY2W/Sg==
+X-Received: by 2002:a5d:584e:0:b0:35f:2ac4:732f with SMTP id
+ ffacd0b85a97d-35f5db92d0bmr305359f8f.24.1718147689234; 
+ Tue, 11 Jun 2024 16:14:49 -0700 (PDT)
+Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
+ [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
+ ffacd0b85a97d-35f231d5761sm7052096f8f.35.2024.06.11.16.14.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Jun 2024 15:55:57 -0700 (PDT)
-Date: Tue, 11 Jun 2024 16:55:54 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
- Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>
-Subject: Re: [RFC PATCH 04/31] lmb: remove local instances of the lmb
- structure variable
-Message-ID: <20240611225554.GO68077@bill-the-cat>
-References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
- <20240607185240.1892031-5-sughosh.ganu@linaro.org>
- <CAFLszTjQW72_Z8Dx4g1mVx5Y=wq9xeXYVBffxLUto6sDp6CMbw@mail.gmail.com>
- <20240611210145.GM68077@bill-the-cat>
- <CAFLszTjd4Sf=_um7QbkpbLAO9=2=vX_LkHv6br=9FPAPFhbH5Q@mail.gmail.com>
+ Tue, 11 Jun 2024 16:14:48 -0700 (PDT)
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Arseniy Krasnov <avkrasnov@salutedevices.com>,
+ Simon Glass <sjg@chromium.org>, Dmitry Dunaev <dunaev@tecon.ru>,
+ Devarsh Thakkar <devarsht@ti.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Stefan Bosch <stefan_b@posteo.net>,
+ Nikhil M Jain <n-jain1@ti.com>, Shiji Yang <yangshiji66@outlook.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de,
+ John Crispin <john@phrozen.org>
+Subject: [PATCH v3 0/9] misc: introduce STATUS LED activity function
+Date: Wed, 12 Jun 2024 01:14:15 +0200
+Message-ID: <20240611231435.10366-1-ansuelsmth@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="EqS+7P6jJqAib7+B"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjd4Sf=_um7QbkpbLAO9=2=vX_LkHv6br=9FPAPFhbH5Q@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 12 Jun 2024 04:33:23 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,106 +102,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series expand the STATUS LED framework with a new color
+and a big new feature. One thing that many device need is a way
+to communicate to the user that the device is actually doing
+something.
 
---EqS+7P6jJqAib7+B
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This is especially useful for recovery steps where an
+user (for example) insert an USB drive, keep a button pressed
+and the device autorecover.
 
-On Tue, Jun 11, 2024 at 04:08:56PM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Tue, 11 Jun 2024 at 15:01, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Tue, Jun 11, 2024 at 12:52:22PM -0600, Simon Glass wrote:
-> > > Hi Sughosh,
-> > >
-> > > On Fri, 7 Jun 2024 at 12:53, Sughosh Ganu <sughosh.ganu@linaro.org> w=
-rote:
-> > > >
-> > > > With the move of the LMB structure to a persistent state, there is =
-no
-> > > > need to declare the variable locally, and pass it as part of the LMB
-> > > > API's. Remove all local variable instances and change the API's
-> > > > correspondingly.
-> > > >
-> > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > > ---
-> > > >  arch/arc/lib/cache.c                 |   4 +-
-> > > >  arch/arm/lib/stack.c                 |   4 +-
-> > > >  arch/arm/mach-apple/board.c          |  17 ++-
-> > > >  arch/arm/mach-snapdragon/board.c     |  17 ++-
-> > > >  arch/arm/mach-stm32mp/dram_init.c    |   7 +-
-> > > >  arch/arm/mach-stm32mp/stm32mp1/cpu.c |   6 +-
-> > > >  arch/m68k/lib/bootm.c                |   7 +-
-> > > >  arch/microblaze/lib/bootm.c          |   4 +-
-> > > >  arch/mips/lib/bootm.c                |   9 +-
-> > > >  arch/nios2/lib/bootm.c               |   4 +-
-> > > >  arch/powerpc/cpu/mpc85xx/mp.c        |   4 +-
-> > > >  arch/powerpc/include/asm/mp.h        |   4 +-
-> > > >  arch/powerpc/lib/bootm.c             |  14 +-
-> > > >  arch/riscv/lib/bootm.c               |   4 +-
-> > > >  arch/sh/lib/bootm.c                  |   4 +-
-> > > >  arch/x86/lib/bootm.c                 |   4 +-
-> > > >  arch/xtensa/lib/bootm.c              |   4 +-
-> > > >  board/xilinx/common/board.c          |   7 +-
-> > > >  boot/bootm.c                         |  26 ++--
-> > > >  boot/bootm_os.c                      |   5 +-
-> > > >  boot/image-board.c                   |  32 ++---
-> > > >  boot/image-fdt.c                     |  29 ++---
-> > > >  cmd/bdinfo.c                         |   6 +-
-> > > >  cmd/booti.c                          |   2 +-
-> > > >  cmd/bootz.c                          |   2 +-
-> > > >  cmd/load.c                           |   7 +-
-> > > >  drivers/iommu/apple_dart.c           |   7 +-
-> > > >  drivers/iommu/sandbox_iommu.c        |  15 +--
-> > > >  fs/fs.c                              |   7 +-
-> > > >  include/image.h                      |  22 +---
-> > > >  include/lmb.h                        |  39 +++---
-> > > >  lib/lmb.c                            |  81 ++++++------
-> > > >  net/tftp.c                           |   5 +-
-> > > >  net/wget.c                           |   5 +-
-> > > >  test/cmd/bdinfo.c                    |   2 +-
-> > > >  test/lib/lmb.c                       | 187 +++++++++++++----------=
-----
-> > > >  36 files changed, 270 insertions(+), 333 deletions(-)
-> > >
-> > > This isn't necessary...and it will make things harder. You can have a
-> > > global 'lmb' while still allowing passing a different pointer when
-> > > needed.
-> >
-> > There's only one reservation checking system and list of known
-> > reservations, keep in mind.
->=20
-> There is only one driver model, too, but we use a pointer. It makes
-> tests much easier.
->=20
-> In fact I see elsewhere in this series that it causes problems with
-> tests. Best to use a pointer so it is easy to update.
+There is currently no way to signal the user externally that
+the bootloader is processing/recoverying aside from setting
+a LED on.
 
-Maybe? I worry that will lead to thinking that we still, like today,
-have many LMB lists, rather than a single LMB list that everyone must
-use.
+A solid LED on is not enough and won't actually signal any
+kind of progress.
+Solution is the good old blinking LED but uboot doesn't
+suggest (and support) interrupts and almost all the LED
+are usually GPIO LED that doesn't support HW blink.
 
---=20
-Tom
+To fix this and handle the problem of device not supporting
+HW blink, expand the STATUS LED framework with new API.
 
---EqS+7P6jJqAib7+B
-Content-Type: application/pgp-signature; name="signature.asc"
+We introduce a new config LED_STATUS_ACTIVITY, that similar
+to the RED, GREEN and others, takes the LED ID set in
+the LED_STATUS config and is used as the global LED for activity
+operations.
 
------BEGIN PGP SIGNATURE-----
+We add status_led_activity_start/stop() used to turn the
+activity LED on and register a cyclic to make it blink.
+LED will continue to blink until _stop() is called.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZo1foACgkQFHw5/5Y0
-tyzp9gv+Im31Hn/urMzZXfCBEEF1eBsejtRBJu9eX+OQAK/R6ct+Sr9eSD0F52Ze
-ftVb0X5MtVhGhdwTkbsVKOT1Oz5/Fiys1fo7f4CslgTKTjIcU4TcOc5K8sFUJ0kw
-H46jEsA7VpO3MnjWCbEAyTVDiqxXpn/z5yWycWhwwJ7TinPyR+uRX3IijpILeJUj
-tT+wVg4OkZD+hMFu04dJ+0L70Qe8veOR63UpHwCSH9JhEAQ+7v17HKFAqSzkvHxs
-sr33un88dcNAb76nhx6D+ujQCMU3m3vwZAmODQoH3/cX8x3eoAmmfZvfgMed/yfN
-EBFpdu+bYaDmLpaLhVtIeNQVo9U7DedA6LI1tlzQtV2RhhuYUBSlL4LaFsmhJSlu
-wmA5b9eYhCKD0shH+OD3TaptKr/2zO4QY/rJOXxXB2HqjEM9E+rCrntdrwo4h6V+
-6sPdtysyh6qQyWfZkE3cWhTmZ78L4h0wNvaWD00hxDJwMqQtLzr6nNcSZsxm+XIg
-uofLlh0L
-=JbrF
------END PGP SIGNATURE-----
+Function that will start some kind of action will first call
+_start() and then at the end will call stop().
+If (on the broken implementation) a _start() is called before
+calling a _stop(), the Cyclic is first unregister and is
+registered again.
 
---EqS+7P6jJqAib7+B--
+Support for this is initially added to the tftp, mtd and ubi
+command.
+
+This also contains a big fixup for the gpio_led driver that
+currently deviates from the Documentation and make the
+coloured status led feature unusable.
+
+Changes v3:
+- Add log on Status LED error conditions
+Changes v2:
+- Add Documentation conversion
+- Rework to Cyclic and simplify implementation
+
+Christian Marangi (9):
+  misc: gpio_led: fix broken coloured LED status functions
+  led: status_led: add support for white LED colour
+  led: status_led: add function to toggle a status LED
+  led: status_led: add warning when an invalid Status LED ID is used
+  led: status_led: add new activity LED config and functions
+  tftp: implement support for LED status activity
+  mtd: implement support for LED status activity
+  ubi: implement support for LED status activity
+  doc: convert README.LED to .rst documentation
+
+ cmd/legacy_led.c          |   6 +
+ cmd/mtd.c                 |  19 ++++
+ cmd/ubi.c                 |  15 ++-
+ common/board_f.c          |   2 +
+ doc/README.LED            |  77 -------------
+ doc/api/index.rst         |   1 +
+ doc/api/status_led.rst    |  35 ++++++
+ drivers/led/Kconfig       |  30 +++++
+ drivers/misc/gpio_led.c   |  41 +++++--
+ drivers/misc/status_led.c |  75 ++++++++++++-
+ include/status_led.h      | 231 +++++++++++++++++++++++++++++++++++++-
+ net/tftp.c                |   7 ++
+ 12 files changed, 440 insertions(+), 99 deletions(-)
+ delete mode 100644 doc/README.LED
+ create mode 100644 doc/api/status_led.rst
+
+-- 
+2.43.0
+
