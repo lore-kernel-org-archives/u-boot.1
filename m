@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEAAFC27C75
-	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 14:27:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34DF7C27C5E
+	for <u-boot@archiver.kernel.org>; Tue, 11 Jun 2024 14:28:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27288885C5;
-	Tue, 11 Jun 2024 16:27:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9236F886DD;
+	Tue, 11 Jun 2024 16:28:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="haYByDvL";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="EENFtxdX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DEE17886AE; Tue, 11 Jun 2024 16:27:32 +0200 (CEST)
-Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
- [IPv6:2607:f8b0:4864:20::429])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E1D19886DE; Tue, 11 Jun 2024 16:28:14 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8656E8859A
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 16:27:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E9F3188652
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 16:28:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-7042a8ad9f5so2092914b3a.0
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 07:27:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718116049; x=1718720849; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3234PJsJWoMjhGJmeAyOrBFLMpTf/uP0nQvhUtOFlAA=;
- b=haYByDvLq4WEEVGT/qI1DEt4sV+yCiu9DPQSYkDfqzOiC7V7YTaodzae3dv80Qvmmn
- KwVS2Y7li9/YOTlZCFVoiKh+KNTP8b41rF1hptU4AtqB6UVZAgwyW4yEaa+2ocIF6H+K
- KK2tKxP+SzWiQIZV4OBj/Et1XJYmM5dHgkEzC+l5pzMt4OXT1V1SH/aErnkwnEUogK/b
- vtrxmkP18Fe4lWsBVvXX/lJ31OGSJq/BD7vC59B3TOO/fiN6NWxIQdRIHDueQFYF3iKb
- rmlhsYvaIROF5s/dbrWgSUma1Ez+T9vmiE1wsenNfvDMf1IhMAZY5vCs1tFHSr6udtYH
- Sqrw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718116049; x=1718720849;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=3234PJsJWoMjhGJmeAyOrBFLMpTf/uP0nQvhUtOFlAA=;
- b=RN6T8byoGgEasRJgv0bD4NvpTZQqA/fe5yVJNIk6LMkHP5l3KfxMm0y6CiCe1oYNKZ
- 9Fu8DhPtPV4c3rkyhEg8i18UCtUUkotxKUa5JBa9jGd7uibUICdAbR5bIY6tkG1WkbdD
- 2yhpoH4A9oync9KKcelcWpwG49iiewMxgJn6kKdAlevr4+VDwf3A6KOQGmr9sx7p29yu
- uCpU2SQkGvblvCjtsktKzaMeYDG4UayQMbaQK8if091Wx0xpV0B0NoBkBTzfVkq9Lhim
- uo53WzAvhOBAOn/t2zL/y8wkZBvsOthta96IYY7cXBkQVWzz8hLUU6C/St7UmSXtKWoB
- bYdA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUI/6GS8BhP7kdUf6xZ1rnpB0kWkpkKJeIpCqv6oFu1ao0e5EtcvI3ku+sFSi+dI7NhcIP2/N4S81k0bcSkhNl46e7o0Q==
-X-Gm-Message-State: AOJu0Yz2azGJsVoDK3S9Mp79Bb7dGqB+y++rVUaz1ZEuYgUckiO8kcSG
- c09SRrtRJfF0As16nqgkwJCTAH380CNNn2oZ4pxb4QxKnTLq9ED/f6VsjfDmE5YrFzh/x2ZrNIY
- lTOTXubTTcw/dWqFrpMQM+Nm9cZ7G8mBSGc5XVw==
-X-Google-Smtp-Source: AGHT+IHSJJHeqNz5WHP91qK5u2/MTdv3Ej9a6zdzDfhMw5J6IMFQ4djEw4cF9PBZXRIRb4EjugjYWWO5kUJcTdX1po8=
-X-Received: by 2002:a17:90a:d4f:b0:2c2:c979:4c06 with SMTP id
- 98e67ed59e1d1-2c32b4a0f15mr3860786a91.14.1718116048812; Tue, 11 Jun 2024
- 07:27:28 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1718116087; x=1718720887; i=xypron.glpk@gmx.de;
+ bh=aryvaET/OO+eYrEppsZMDliHpQG6WLdux87uAz3HH0s=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=EENFtxdXD7+/18SSDuZowob+z2DYDu5esb1AuRfOvYwAlA0G7UnHohstDBYa+swl
+ mFHW0dEqT5Aap7yXXk8q7WdW0urYMWzb/HeS/4Vk6W1XuT8lkA1voWno/pJYXfDiZ
+ KneuWgGqlucu9NM6IyB0tKStIGNe25/2EbtPandsVHUmAHr/yPV56Ulpw/5tcu8+m
+ nips7HWh1bA4rd/IFaKHhYJavyuX1dCm/YbsTcYowz9cwCagLBO6hiwxy/DK4fsBg
+ mQO0Qfz1zeuNHxCXIKand0yl4g1Y+FohEdQHiPBIn8jMVhGl2LtPWfGN9SlaULRmy
+ D9VN1JUHK1iUtyS3QQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.126] ([109.42.176.212]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mel3n-1srkH42P4v-00qhtA; Tue, 11
+ Jun 2024 16:28:07 +0200
+Message-ID: <85599d13-b610-4735-8461-6793a45eb4ec@gmx.de>
+Date: Tue, 11 Jun 2024 16:28:06 +0200
 MIME-Version: 1.0
-References: <20240605032521.1142768-1-sjg@chromium.org>
- <20240605032521.1142768-6-sjg@chromium.org>
- <CAEfUkUKABkoHWr8i5fLNxgLAcs_7AdVYJEJj_UJj_Oby0HmwNA@mail.gmail.com>
- <CAFLszThqijQQjvSgGAkK387KXV9mjo8xs9tEK_jfKGocYyZzGQ@mail.gmail.com>
-In-Reply-To: <CAFLszThqijQQjvSgGAkK387KXV9mjo8xs9tEK_jfKGocYyZzGQ@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 11 Jun 2024 17:26:51 +0300
-Message-ID: <CAC_iWj+M5uw1qaVcUFZpXDArdbF3jfJDXk1HiA1i4S2eEYbEig@mail.gmail.com>
-Subject: Re: [PATCH 5/9] fdt: Correct condition for bloblist existing
-To: Simon Glass <sjg@chromium.org>
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Tom Rini <trini@konsulko.com>, Jerry Van Baren <vanbaren@cideas.com>, 
- Shiji Yang <yangshiji66@outlook.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/7] Makefile.lib: Preserve .rodata section for EFI file
+To: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Cc: u-boot@lists.denx.de, Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20240517-mips-efi-v1-0-79096e3ca3b3@flygoat.com>
+ <20240517-mips-efi-v1-3-79096e3ca3b3@flygoat.com>
+ <CAC_iWjK+KdrYWWfdVVqzyzUia+b7sddKHPF+ziQFp_Am0CbzQQ@mail.gmail.com>
+ <c789596e-d676-4fcd-a25b-4311257a9153@app.fastmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <c789596e-d676-4fcd-a25b-4311257a9153@app.fastmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:cfOevitTxUuJ72FJ9xQbHQdrYS/kvrngDGrWQ56zHbLq1R3cLXn
+ yEIY7ElWs73A1+DnaJcc5dbJLHR/MiLgEwf5i0P1nnhfhJGOfwz7+ls+sDkZZA97ytJ+mEp
+ LX+AS92djSLShnGhkLhtfKB0YVBirm8hMWj/KOhrt+MrnbGipp+imbZ/Htgv/SOm+e0B4XE
+ +IQbqHAT22aqSy7EHgAlQ==
+UI-OutboundReport: notjunk:1;M01:P0:9shzPB25glc=;fGsF6HyiVymc13iFg1GGFIBDaho
+ R8LVFUYRYCdc9ctwgoNzQY098Qy2E1aVP7NERqsv8m1xRj30pKPPLcPOB3yxY0omBjqW9V8wL
+ sw3yjGwGYzJLQ+OB6o7HA+8HmcPMw1bBfpXUIGvpIGmI0rj3gEayr1JO2RLdpHkhVHWiDFnm7
+ SuqHnmcxoKYtdR9fhUWhD8kAevLEU16csR3DijdsV0RZRrd9oMcSiqN6XHiSAWvdPqmR1BdeW
+ DksFMdkSlBD02pVeknD1MiqwI1m/o5Y60DQpL1P2fcuU7wo6n2VGoA+WM+e7CM/5ztxQWBsBw
+ pxOCQcNuZu1M3rEVbQ16glc6xy4K7Ae67dJwd7rTt3q/m/NdLnkQrHYrzw/WdJttSKPgLYJn7
+ d7MrQNXfr8pu/4d83VDZxaqX0CwQ7CZ5Klf34xuGJfvKmUyh+Q6bZlnExfFqzPxoS5XhkWSDf
+ 9rln6C0ucDMQBjSMe/G+o8F8F27I36z4F1YGwWDRS3/nZj/BmWkxJWyBvrFuR/cjzrWYeHaDm
+ V9Ktf8DAYHJsF5kX784owPd+Hgnk2vuId+lXfidCBYro/faE+kcA/4XxwGMAqNRJ7LaH9196k
+ nblsYE/vPqqj85wcXE0S5Euy8CvfPzV+Mgxk8exMv7B6KqdE5PjDSwqA1iGBUcQsnHs1DfRrA
+ ba4g2ICbwjbvhq6y6P4E0q3wiQ7BPeOGEVsfwWfv1JMbToRsvnuoFmKamGfQ81sWMVCP2ItSe
+ B8RNGtHwUgI6xtKjPjizR6lRwtzhHM3WlW4C/DUxTHvAyft+bJRXkU17VD+l29dG6GtgAjF0+
+ D45LPoEKuhpyoDZPCZr/jESdrhdrmviTqfJFRGSBGG0wk=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,85 +93,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 11 Jun 2024 at 13:54, Simon Glass <sjg@chromium.org> wrote:
+On 11.06.24 16:06, Jiaxun Yang wrote:
 >
-> Hi Raymond,
 >
-> On Mon, 10 Jun 2024 at 13:13, Raymond Mao <raymond.mao@linaro.org> wrote:
-> >
-> > Hi Simon,
-> >
-> > On Tue, 4 Jun 2024 at 23:27, Simon Glass <sjg@chromium.org> wrote:
-> >>
-> >> On some boards, the bloblist is created in SPL once SDRAM is ready. It
-> >> cannot be accessed until that point, so is not available early in SPL.
-> >>
-> >> Add a condition to avoid a hang in this case.
-> >>
-> >> This fixes a hang in chromebook_coral
-> >>
-> >> Fixes: 70fe2385943 ("fdt: Allow the devicetree to come from a bloblist")
-> >>
-> >> Signed-off-by: Simon Glass <sjg@chromium.org>
-> >> ---
-> >>
-> >>  lib/fdtdec.c | 12 ++++++++++--
-> >>  1 file changed, 10 insertions(+), 2 deletions(-)
-> >>
-> >> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> >> index b2c59ab3818..b141244e3b9 100644
-> >> --- a/lib/fdtdec.c
-> >> +++ b/lib/fdtdec.c
-> >> @@ -1669,8 +1669,16 @@ int fdtdec_setup(void)
-> >>  {
-> >>         int ret = -ENOENT;
-> >>
-> >> -       /* If allowing a bloblist, check that first */
-> >> -       if (CONFIG_IS_ENABLED(BLOBLIST)) {
-> >> +       /*
-> >> +        * If allowing a bloblist, check that first. This would be better
-> >> +        * handled with an OF_BLOBLIST Kconfig, but that caused far too much
-> >> +        * argument, so add a hack here, used e.g. by chromebook_coral
-> >
-> > I am a bit confused by this comment - It means you will not use OF_BLOBLIST,
-> > but actually you are using it below. Is it a typo?
+> =E5=9C=A82024=E5=B9=B46=E6=9C=8811=E6=97=A5=E5=85=AD=E6=9C=88 =E4=B8=8B=
+=E5=8D=882:49=EF=BC=8CIlias Apalodimas=E5=86=99=E9=81=93=EF=BC=9A
+>> Hi Jiaxun
+>>
+>>
+>> On Fri, 17 May 2024 at 19:33, Jiaxun Yang <jiaxun.yang@flygoat.com> wro=
+te:
+>>>
+>>> This is required in performing objcopy to MIPS EFI files.
+>>>
+>>
+>> This seems not mips specific. What was missing for your case?
 >
-> Basically it would be cleaner to have a separate, phase-specific
-> Kconfig control as to whether the DT can come from the bloblist (I
-> can't remember the Kconfig name I suggested, nor the patch as it was
-> last year sometime). But for now I am adding this hack to get a few
-> boards working again.
+> So MIPS EFI file would come with .rodata section. If we don't preserve
+> it here, the whole section would be stripped away.
+>
+> .rodata is always necessary in binary if it's in ELF as it contains
+> valid program data.
+>
+> Other architectures won't generate .rodata section in their ELF file
+> so it's harmless. Besides GNU-EFI's universal strip commands also have
+> -j .rodata argument.
+>
+> Thanks
+> - Jiaxun
+>>
+>> Thanks
+>> /Ilias
+>>> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+>>> ---
+>>>   scripts/Makefile.lib | 2 +-
+>>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>>
+>>> diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+>>> index 62f87517c09c..52aed7a65d47 100644
+>>> --- a/scripts/Makefile.lib
+>>> +++ b/scripts/Makefile.lib
+>>> @@ -469,7 +469,7 @@ $(obj)/%_efi.S: $(obj)/%.efi
+>>>
+>>>   quiet_cmd_efi_objcopy =3D OBJCOPY $@
+>>>   cmd_efi_objcopy =3D $(OBJCOPY) -j .header -j .text -j .sdata -j .dat=
+a -j \
+>>> -               .dynamic -j .dynsym  -j .rel* -j .rela* -j .reloc \
+>>> +               .dynamic -j .dynsym  -j .rel* -j .rela* -j .reloc -j .=
+rodata \
+>>>                  $(if $(EFI_TARGET),$(EFI_TARGET),-O binary) $^ $@
+>>>
+>>>   $(obj)/%.efi: $(obj)/%_efi.so
+>>>
+>>> --
+>>> 2.34.1
+>>>
+>
 
-I am a bit confused.
-First of all the comment is innapropriate. We went through a lengthy
-discussion on BLOBLIST/OF_BLOSLIST etc and,  even Tom chimed in and we
-made up our minds. Why are you adding this comment now? Why do code
-comments have to illustrate your personal opinion -- which was
-rejected?
+We have:
 
-Grepping for OF_BLOBLIST, I can't find any matches, so is the above if a typo?
+arch/arm/lib/elf_aarch64_efi.lds:26:            *(.rodata*)
+arch/arm/lib/elf_arm_efi.lds:26:                *(.rodata*)
+arch/riscv/lib/elf_riscv32_efi.lds:26:          *(.rodata*)
+arch/riscv/lib/elf_riscv64_efi.lds:26:          *(.rodata*)
+arch/x86/lib/elf_ia32_efi.lds:35:               *(.rodata*)
+arch/x86/lib/elf_x86_64_efi.lds:37:             *(.rodata*)
+
+Not considering .rodata in objcopy looks inconsistent.
+
+As we use -fdata-sections wouldn't we expect a .rodata* section per
+function with constants on LoongArch? Shouldn't we use:
+
++ .dynamic -j .dynsym  -j .rel* -j .rela* -j .reloc -j .rodata* \
+
+Best regards
+
+Heinrich
 
 
-Thanks
-/Ilias
->
-> >
-> >>
-> >> +        * The necessary test is whether the previous stage passed a bloblist,
-> >> +        * not whether this one creates one.
-> >> +        */
-> >> +       if (CONFIG_IS_ENABLED(OF_BLOBLIST) &&
-> >> +           (spl_prev_phase() != PHASE_TPL ||
-> >> +            !IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
-> >>                 ret = bloblist_maybe_init();
-> >>                 if (!ret) {
-> >>                         gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
-> >> --
-> >> 2.34.1
-> >>
-> >
-> > Regards,
-> > Raymond
->
-> Regards,
-> Simon
+
