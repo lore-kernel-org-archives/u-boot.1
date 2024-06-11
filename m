@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61CA6C27C78
-	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 02:33:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A0C6C27C79
+	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 02:33:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD4818878B;
-	Wed, 12 Jun 2024 04:33:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 53289887B5;
+	Wed, 12 Jun 2024 04:33:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YfCJWoOc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W4OS+aBA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A67388757; Wed, 12 Jun 2024 01:14:55 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id A1F7388757; Wed, 12 Jun 2024 01:14:55 +0200 (CEST)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8809388758
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 01:14:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AFADF886B1
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 01:14:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-35f223e7691so197697f8f.1
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 16:14:52 -0700 (PDT)
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-35f090093d8so3494880f8f.0
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 16:14:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1718147692; x=1718752492; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1718147693; x=1718752493; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=USHF67Hvkkr6X6WZ90mIvVSk959Bhec2gU9xl0MKgOk=;
- b=YfCJWoOcIPJhhVI2yvCxDYnUsxgQMx2OhVHO65dd4gptmh1e5tzEaCWrOKxkajMyqR
- qEIs9KBZsNHFQqEzBNsWZgMDIhemlxdUqO6ZoXheMgqqwbOFYfNxIT7mGnFwwDwWGke1
- WUnVk8YBwWha1eYEyQfSruRDkistfyNgNXWpeJLKGmCGPu+3OhZSU4AaQlOrtx4cq/gd
- OuFrGQ9nV+BpMuGnpuMV0xs6XlW1JOWSvCLVcfq7YVLRcEvgHeHbpJjGSGbb/GTlg4U0
- Cz3s7gwqzOa4vxYKGAdlnwvILnxQ2EBfJmMyKutkov9Ix6gTJrvbpMCGX+LfCQznqqP7
- Jt9Q==
+ :reply-to; bh=LiJxSrHUQxU7ezUE98DdkJgahWdu8Tg6y94tQni3u9Y=;
+ b=W4OS+aBAXoBddeN9e9N1WNZXZ+4Fh4TVN8Ok/B3yyY/htx0c+S/e9ZuSLCw1Kird7F
+ hVn6zpTH1Oyvei7hCys4leVAhHNkx+RwArOaE4NCcYgFUKxOSJr0+zPF3ysvc/iJ/rlb
+ jf5gxqTB37NMz78pqVIRoTPSrp3DWkEedbnv6AVQpKsnhI2VCs7IVQgtDaerh/1MR7V+
+ +N1ZMSeOg5E8NmffdiL2e8ADz6kQj5H3LgBaIpXkBFtz/x52YIu/o5m2CPm1/DZ2iYZp
+ 4tQIVsXnqBhlPyC0i2el60MQf7Vjn0QgTEETSI3xtb1XwshXADrYYPg7Mv53uu5JNSzy
+ w4ww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718147692; x=1718752492;
+ d=1e100.net; s=20230601; t=1718147693; x=1718752493;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=USHF67Hvkkr6X6WZ90mIvVSk959Bhec2gU9xl0MKgOk=;
- b=NfNXXJBWTZ3fignYWk/xPCYwqFN5/Sl5ikgq90K3rI/bId+thJ/wZLks22rcUkvgNL
- fOf0Xe21UHNCjrhQa5O2GpBJbptRWRSB/quc4TFr2VFycl6MA+TMgx07THG+BhnNbHO8
- P+X1C0/9O9+1rRzDNusxDu/xeeJa8eMQl3VDuYUmtqlxe2T81dBpi6YflkKSCu6hwsPQ
- Y9G13lrRhhcgmHFflcZMVH7KC10CXNN2+UVhyc9BmKutUJeSwowrFIV11OLhmKrReSKE
- mCEVLh1iy7cH8M64ZzRIjhEdQVC5I0ok4DRfzos+TdQK/UXPklrsrvxTo6e2RYgEmJ1r
- LhTg==
+ bh=LiJxSrHUQxU7ezUE98DdkJgahWdu8Tg6y94tQni3u9Y=;
+ b=jjbmhPHY+cRJXcmM8OXwhs1Rxd5VpV5o9Yf/gOc4H5dwScGCpJJ/38Lt9wJJLatvK/
+ 5abETX4q95ObIDJ/CDQkyHDCxscXcWS8NXoM+OyEbNTuOWlT7V5c4J7FbryFeoVCksoP
+ fBPgvdAbwwxd/4BT89qwzldetoM0KWvQxCxqNSWHSX/kgJwN3ZKYgQR0XhKoauyJTe4K
+ SE9GL5e6Yvbyq4kP6qc5PjMyMeeQEXWLM/sRzVhjLHI0t7RGxCJUo7WdsBEC9pKLXa/9
+ sQyTekPyajAgrQL/DN7bMI3tRKqXUPKgoLIEdULYITBLKrYpZnmxyYDay9ThECV3bgjC
+ MAJw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU7eekzTLtpiqJjinnavQruEbv3nhcIT8h1kOA28zrpwkCPfNaRWKuW1bmhGusgzflMTqhzwRjhkxjW3+/OWgFQ+bvUtw==
-X-Gm-Message-State: AOJu0YyAgzmqtLr4noK79HtdKTKYCMR95JlU2J/g18XYKQfJpE/yNJVe
- XuRngAg/VgjNLYjjO1BLzDc1rd0omHeRes45KLcf9vue18kfvT8f
-X-Google-Smtp-Source: AGHT+IHc9IF2WJBnurqpChq8+IM1FQkiGO00sjPjl1C1CGrQwsn4iM6y0j4uUlOxKtbbYC9N0b022g==
-X-Received: by 2002:a05:6000:1801:b0:35f:1da1:c077 with SMTP id
- ffacd0b85a97d-35f5a9bcb9dmr257486f8f.5.1718147691806; 
- Tue, 11 Jun 2024 16:14:51 -0700 (PDT)
+ AJvYcCUOMQ/j0jRT7ACWXpyVqgi9mj2EqRMaOOOBp7cOHHSlZxPB1lJONZ/aJpZ21wV0IIAfKiM4URpIDtbOWEJ5NM/49aGZSg==
+X-Gm-Message-State: AOJu0YykLrxr3J1tJvmcHYtiVqbQo6wlFbj3+DaJyMO84WqrWNvnKNJU
+ wYNBxXfsdbY7d1t1wBHI3WTB95tmix0P/+LOGCnqB66eno44hCDT
+X-Google-Smtp-Source: AGHT+IFKpwmdY7O1phZqj4a/xgSTdWCPGPs2jFdFQTc5jx9GceREIwMo6kfDjqtJ8pCLzhF8j0O8Tg==
+X-Received: by 2002:adf:fc88:0:b0:35f:29e6:dbd2 with SMTP id
+ ffacd0b85a97d-35fe8926243mr38505f8f.64.1718147693020; 
+ Tue, 11 Jun 2024 16:14:53 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
  [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-35f231d5761sm7052096f8f.35.2024.06.11.16.14.50
+ ffacd0b85a97d-35f231d5761sm7052096f8f.35.2024.06.11.16.14.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Jun 2024 16:14:51 -0700 (PDT)
+ Tue, 11 Jun 2024 16:14:52 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
@@ -80,9 +80,9 @@ To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de,
  John Crispin <john@phrozen.org>
-Subject: [PATCH v3 2/9] led: status_led: add support for white LED colour
-Date: Wed, 12 Jun 2024 01:14:17 +0200
-Message-ID: <20240611231435.10366-3-ansuelsmth@gmail.com>
+Subject: [PATCH v3 3/9] led: status_led: add function to toggle a status LED
+Date: Wed, 12 Jun 2024 01:14:18 +0200
+Message-ID: <20240611231435.10366-4-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240611231435.10366-1-ansuelsmth@gmail.com>
 References: <20240611231435.10366-1-ansuelsmth@gmail.com>
@@ -105,121 +105,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for white LED colour present on many devices.
+Add function to toggle a status LED by using the status LED ID reference
+configs.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- cmd/legacy_led.c        |  6 ++++++
- common/board_f.c        |  2 ++
- drivers/led/Kconfig     | 14 ++++++++++++++
- drivers/misc/gpio_led.c | 12 ++++++++++++
- include/status_led.h    |  4 ++++
- 5 files changed, 38 insertions(+)
+ drivers/misc/status_led.c | 28 +++++++++++++++++++++++-----
+ include/status_led.h      |  1 +
+ 2 files changed, 24 insertions(+), 5 deletions(-)
 
-diff --git a/cmd/legacy_led.c b/cmd/legacy_led.c
-index 5256255f052..40dbc05a651 100644
---- a/cmd/legacy_led.c
-+++ b/cmd/legacy_led.c
-@@ -57,6 +57,9 @@ static const led_tbl_t led_commands[] = {
- #endif
- #ifdef CONFIG_LED_STATUS_BLUE
- 	{ "blue", CONFIG_LED_STATUS_BLUE, blue_led_off, blue_led_on, NULL },
-+#endif
-+#ifdef CONFIG_LED_STATUS_WHITE
-+	{ "white", CONFIG_LED_STATUS_WHITE, white_led_off, white_led_on, NULL },
- #endif
- 	{ NULL, 0, NULL, NULL, NULL }
- };
-@@ -180,6 +183,9 @@ U_BOOT_CMD(
- #endif
- #ifdef CONFIG_LED_STATUS_BLUE
- 	"blue|"
-+#endif
-+#ifdef CONFIG_LED_STATUS_WHITE
-+	"white|"
- #endif
- 	"all] [on|off|toggle|blink] [blink-freq in ms]",
- 	"[led_name] [on|off|toggle|blink] sets or clears led(s)"
-diff --git a/common/board_f.c b/common/board_f.c
-index 039d6d712d0..54e2009339e 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -72,6 +72,8 @@ __weak void yellow_led_on(void) {}
- __weak void yellow_led_off(void) {}
- __weak void blue_led_on(void) {}
- __weak void blue_led_off(void) {}
-+__weak void white_led_on(void) {}
-+__weak void white_led_off(void) {}
- 
- /*
-  * Why is gd allocated a register? Prior to reloc it might be better to
-diff --git a/drivers/led/Kconfig b/drivers/led/Kconfig
-index 9837960198d..6c4f02d71f2 100644
---- a/drivers/led/Kconfig
-+++ b/drivers/led/Kconfig
-@@ -415,6 +415,20 @@ config LED_STATUS_GREEN
- 
- endif # LED_STATUS_GREEN_ENABLE
- 
-+config LED_STATUS_WHITE_ENABLE
-+	bool "Enable white LED"
-+	help
-+	  Enable white status LED.
-+
-+if LED_STATUS_WHITE_ENABLE
-+
-+config LED_STATUS_WHITE
-+	int "White LED identification"
-+	help
-+	  Valid enabled LED device number (0-5).
-+
-+endif # LED_STATUS_WHITE_ENABLE
-+
- config LED_STATUS_CMD
- 	bool "Enable status LED commands"
- 
-diff --git a/drivers/misc/gpio_led.c b/drivers/misc/gpio_led.c
-index 0f3682e1465..de84c206b6b 100644
---- a/drivers/misc/gpio_led.c
-+++ b/drivers/misc/gpio_led.c
-@@ -112,3 +112,15 @@ void blue_led_off(void)
- 	__led_set(GPIO_BIT(CONFIG_LED_STATUS_BLUE), CONFIG_LED_STATUS_OFF);
+diff --git a/drivers/misc/status_led.c b/drivers/misc/status_led.c
+index a6e9c03a02e..93bfb410662 100644
+--- a/drivers/misc/status_led.c
++++ b/drivers/misc/status_led.c
+@@ -103,17 +103,24 @@ void status_led_tick(ulong timestamp)
+ 	}
  }
- #endif
-+
-+#ifdef CONFIG_LED_STATUS_WHITE
-+void white_led_on(void)
-+{
-+	__led_set(GPIO_BIT(CONFIG_LED_STATUS_WHITE), CONFIG_LED_STATUS_ON);
+ 
+-void status_led_set(int led, int state)
++static led_dev_t *status_get_led_dev(int led)
+ {
+-	led_dev_t *ld;
+-
+ 	if (led < 0 || led >= MAX_LED_DEV)
+-		return;
++		return NULL;
+ 
+ 	if (!status_led_init_done)
+ 		status_led_init();
+ 
+-	ld = &led_dev[led];
++	return &led_dev[led];
 +}
 +
-+void white_led_off(void)
++void status_led_set(int led, int state)
 +{
-+	__led_set(GPIO_BIT(CONFIG_LED_STATUS_WHITE), CONFIG_LED_STATUS_OFF);
++	led_dev_t *ld;
++
++	ld = status_get_led_dev(led);
++	if (!ld)
++		return;
+ 
+ 	ld->state = state;
+ 	if (state == CONFIG_LED_STATUS_BLINKING) {
+@@ -122,3 +129,14 @@ void status_led_set(int led, int state)
+ 	}
+ 	__led_set (ld->mask, state);
+ }
++
++void status_led_toggle(int led)
++{
++	led_dev_t *ld;
++
++	ld = status_get_led_dev(led);
++	if (!ld)
++		return;
++
++	__led_toggle(ld->mask);
 +}
-+#endif
 diff --git a/include/status_led.h b/include/status_led.h
-index 6707ab1d29d..5ce4522b029 100644
+index 5ce4522b029..fe0c84fb4b4 100644
 --- a/include/status_led.h
 +++ b/include/status_led.h
-@@ -87,6 +87,8 @@ void yellow_led_on(void);
- void yellow_led_off(void);
- void blue_led_on(void);
- void blue_led_off(void);
-+void white_led_on(void);
-+void white_led_off(void);
- #else
- 	.extern LED_init
- 	.extern red_led_on
-@@ -97,6 +99,8 @@ void blue_led_off(void);
- 	.extern green_led_off
- 	.extern blue_led_on
- 	.extern blue_led_off
-+	.extern white_led_on
-+	.extern white_led_off
- #endif
+@@ -38,6 +38,7 @@
+ void status_led_init(void);
+ void status_led_tick(unsigned long timestamp);
+ void status_led_set(int led, int state);
++void status_led_toggle(int led);
  
- #endif	/* _STATUS_LED_H_	*/
+ /*****  MVS v1  **********************************************************/
+ #if (defined(CONFIG_MVS) && CONFIG_MVS < 2)
 -- 
 2.43.0
 
