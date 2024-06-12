@@ -4,86 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02717C27C53
-	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 17:22:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06964C27C53
+	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 17:25:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C2FA8881A;
-	Wed, 12 Jun 2024 19:22:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7129C88845;
+	Wed, 12 Jun 2024 19:25:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PIX1jW2L";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="p+Ufnndv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5A2288702; Wed, 12 Jun 2024 19:22:50 +0200 (CEST)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id 00F2588702; Wed, 12 Jun 2024 19:25:34 +0200 (CEST)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64AB98881B
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 19:22:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C984E8884B
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 19:25:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-6f96f7465a6so635475a34.1
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 10:22:48 -0700 (PDT)
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-5b3241373adso59079eaf.2
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 10:25:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718212967; x=1718817767; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1718213130; x=1718817930; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=icKpF5wmcbVTddHJ1xFd8AvI0vd7HFZ+kxYpJDZpe9Y=;
- b=PIX1jW2L90e8dCreQS2EjVsnaZwURVw8dz5ftw7iPs7KJrGv1Dezdnr5BUZWFhLSBC
- BBDvtonqQ3U34y8775EFkXJvVBRC+okVTSNlcv+FS/HDpFjQCqjukPxviACHWkHGjwHT
- c8cekReOWIHUPEBKt/siBuW6+guAxrbWzT6LI=
+ bh=9g3fK0NFuZtKmJxmiqMzSZB4jcd6pjq1KcIIqQl7/AU=;
+ b=p+Ufnndv7TCO2YDirvavwDuo2iBRLrWHmSKd5L6mt3LFjtLeBTXs+I8K4DimShToUV
+ EoW7FNdAiUoP2bILHVJoNXdPx4ZZbfS1JaBa6NNJao1mVgViRpZdsSocGE9wFyS/xhsp
+ uMOL6/iPTDqtvSffTPXcZ91f9T8kjpj8ei+Z0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718212967; x=1718817767;
+ d=1e100.net; s=20230601; t=1718213130; x=1718817930;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=icKpF5wmcbVTddHJ1xFd8AvI0vd7HFZ+kxYpJDZpe9Y=;
- b=Bqj2nWzO1c91VrhCDdCgr9YcRifRwVskaOHwa0er3yjEqsYctHfwGUHETfwqvjG7GW
- JN25puP89iji0aWqSnjJtlpB/F0vcfC8k/DVWqaq6vrUcCsuPliAHBcmrm5xZqcrKTdo
- BTEYfWivQzU7zSzAqWv9yzPuzGQITRFw1FkVOy39Kxp8zNVkgYXPlCQLBFvP6YO0nDgf
- sjyfCYMlIbUQ065Z1QzB6mpQx9sD3rDWh9Kvet5wSx4ajh5AdL3++CnT1VtDaa7EWQBP
- yBFfG2FdtlUMJ4piOWuboZywcw3HrnDQfXjdGvZjP2BliwJgOprW8zwUvxWlMfvSZP9z
- GS8Q==
+ bh=9g3fK0NFuZtKmJxmiqMzSZB4jcd6pjq1KcIIqQl7/AU=;
+ b=lVYXcNMC35NYMPqsMZGnlYr1ysPtcSwlzTLbyy8Ep9whlIvjWsRWjGQMnSIFYVtpBC
+ JzR6hNwEHU/EEfZFqQBNDoRCNx94tzIxqGMssww5oP2i8jnYG1pCdkVeqTlklnNEoptX
+ 53wqaNLiBI5ieAAUAPfEbnvivV5FaVoXBb4LoQmMvoEtO9rTAr5SXge+6956HdgkQLxE
+ D0UX8rRDxaxK6m+Jpec2ux4rMCFfJaAo2lBlfxstKmjM3s9A7HPKoUnHWCgtQb9bNJ2t
+ 70O0Lcfnwx7FxxJF/xLqw5WiQiXuBmI+RoEl2PQvuGwqU/gdkqW9yBd8lvQYCOtQK5T1
+ RqDg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXJnoix+9o5GdOQ7U5CzKUQtGrFIx/mh2vmMJtONdeIlmQuuI3bmY+U4/x7Cb8WVvqrhgBVCK1/G6eaFOSKPqxPcvpMLg==
-X-Gm-Message-State: AOJu0YyBTr1VXwPye1wLhsdBQ67r+Zvc2I9fdulwJDa0aq6V7bIC8inW
- aratKJozAHxk4aprbsi6LurLjYQa9s9DySNcBC14ImhYnyTxjXSMiY9hWf84cuY=
-X-Google-Smtp-Source: AGHT+IGjiQIkRgaLTgvFjPqmqE801iZNo8WTTg1Sv1i3q5KTtL0ObiDCO0OSmTnZxCUceDyEMTs6Vw==
-X-Received: by 2002:a05:6870:b14a:b0:254:ce80:c0ec with SMTP id
- 586e51a60fabf-2552ae36f77mr214429fac.0.1718212966931; 
- Wed, 12 Jun 2024 10:22:46 -0700 (PDT)
+ AJvYcCUO2/zsattiYWWs1OVcfD/VLu2tfpEzYjVxrJ/7zD2GeCj2F0VW1j4PE9dMUuCPDnoxVlTHmISYL2InWte5LP0/MGnELw==
+X-Gm-Message-State: AOJu0Ywfd5l0qd8g5A4rp2e6JDVc4oybeJLr0S8hshMR3Hux43u9//Vt
+ UXGXYeq0TXmS6lKW/ktjjgeWHXC5SvnXXgULR7K6PZC8PbUfH7YK8NKFH7fm0+k=
+X-Google-Smtp-Source: AGHT+IFQRdyfCyB4WfMOwLT/mjj+tJ/ZBPyn0tBeB38J+QtuTvwlrZj94Y4I3jSPBQN72oUvwfSxzQ==
+X-Received: by 2002:a05:6820:16a8:b0:5bb:26eb:5756 with SMTP id
+ 006d021491bc7-5bb3ba14c02mr1983107eaf.5.1718213130444; 
+ Wed, 12 Jun 2024 10:25:30 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
  [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-6fa50fb74fcsm226173a34.43.2024.06.12.10.22.45
+ 46e09a7af769-6f9e8a92480sm793933a34.73.2024.06.12.10.25.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Jun 2024 10:22:46 -0700 (PDT)
-Date: Wed, 12 Jun 2024 11:22:44 -0600
+ Wed, 12 Jun 2024 10:25:30 -0700 (PDT)
+Date: Wed, 12 Jun 2024 11:25:27 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
- Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>
-Subject: Re: [RFC PATCH 04/31] lmb: remove local instances of the lmb
- structure variable
-Message-ID: <20240612172244.GG68077@bill-the-cat>
-References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
- <20240607185240.1892031-5-sughosh.ganu@linaro.org>
- <CAFLszTjQW72_Z8Dx4g1mVx5Y=wq9xeXYVBffxLUto6sDp6CMbw@mail.gmail.com>
- <20240611210145.GM68077@bill-the-cat>
- <CAFLszTjd4Sf=_um7QbkpbLAO9=2=vX_LkHv6br=9FPAPFhbH5Q@mail.gmail.com>
- <20240611225554.GO68077@bill-the-cat>
- <CAFLszTi1ZR+qeEuEbGUE2Fv3h1ahX3S_2ySBPQjgkfruiW8Xtw@mail.gmail.com>
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Cc: Patrick Barsanti <patrick.barsanti@amarulasolutions.com>,
+ u-boot@lists.denx.de, sjg@chromium.org, xypron.glpk@gmx.de,
+ marek.vasut+renesas@mailbox.org, sumit.garg@linaro.org, afd@ti.com,
+ bb@ti.com, mr.bossman075@gmail.com, leon@georgemail.eu
+Subject: Re: [PATCH v2] Makefile: Fix include directory for OF_UPSTREAM
+Message-ID: <20240612172527.GH68077@bill-the-cat>
+References: <20240603150749.507797-1-patrick.barsanti@amarulasolutions.com>
+ <CAOf5uwkjz0qNkvsWzEQ+kPy66X9Eassq0b1PMDG2r7fYv94_OQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="w5XQ3Uj9zRIOGnta"
+ protocol="application/pgp-signature"; boundary="0dWDltxP+XS2wFRv"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTi1ZR+qeEuEbGUE2Fv3h1ahX3S_2ySBPQjgkfruiW8Xtw@mail.gmail.com>
+In-Reply-To: <CAOf5uwkjz0qNkvsWzEQ+kPy66X9Eassq0b1PMDG2r7fYv94_OQ@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,53 +96,76 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---w5XQ3Uj9zRIOGnta
-Content-Type: text/plain; charset=us-ascii
+--0dWDltxP+XS2wFRv
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jun 11, 2024 at 08:41:39PM -0600, Simon Glass wrote:
-
-[snip]
-> Also IMO there is only really one LMB list today. We create it at the
-> start of bootm and then it is done when we boot. The file-loading
-> stuff is what makes all this confusing...and with bootstd that is
-> under control as well.
+On Wed, Jun 12, 2024 at 10:17:12AM +0200, Michael Nazzareno Trimarchi wrote:
+> Hi Tom
 >=20
-> At lot of this effort seems to be about dealing with random scripts
-> which load things. We want to make sure we complain if something
-> overlaps. But we should be making the bootstd case work nicely and
-> doing things within that framework. Also EFI sort-of has its own
-> thing, which it is very-much in control of.
+> On Mon, Jun 3, 2024 at 5:08=E2=80=AFPM Patrick Barsanti
+> <patrick.barsanti@amarulasolutions.com> wrote:
+> >
+> > Always prioritizing u-boot includes causes problems when trying to migr=
+ate
+> > boards to OF_UPSTREAM that have different local devicetree files with
+> > respect to the upstream ones, if local DT headers are not dropped.
+> > At the same time if local and upstream files are the same, migrations
+> > can be, and have been, introduced without dropping local DT headers.
+> > This also causes problems whenever upstream DTS and DT headers are patc=
+hed.
+> >
+> > For example, now migrating a board based on `imx6ul.dtsi` to OF_UPSTREAM
+> > breaks it, as there are some missing defines in a local DT header file
+> > (`imx6ul-clock.h`); the solution would be to drop it, which has not alw=
+ays
+> > been done in previous OF_UPSTREAM migration patches for other boards
+> > because most of the time the two are the same. This solution is also
+> > vulnerable to ABI breakage, although this has not yet happened since the
+> > introduction of OF_UPSTREAM support and is unlikely.
+> >
+> > Maintainers assure backwards compatibility for DT headers when syncing =
+the
+> > upstream folder with the kernel.
+> > The problem is that, at the current state, all boards that have not dro=
+pped
+> > their local headers when migrating to OF_UPSTREAM will break once the
+> > upstream devicetrees are patched, for example, to use any newly added
+> > define which is not present in the local DT header file, even if those
+> > changes are backwards compatible.
+> >
+> > This patch fixes these problems by prioritizing upstream includes when
+> > `CONFIG_OF_UPSTREAM=3Dy`, while keeping current prioritization when it =
+is
+> > not.
 >=20
-> Overall I think this is a bit more subtle that just combining allocators.
+> Do you have some comments here? We would like to move upstream dts for
+> imx6 boards
+> too
 
-I think this gets to the main misunderstanding. The problem isn't
-handling bootstd, or EFI boot, or even assorted scripts. Those are all
-cases where things are otherwise (sufficiently) well-defined. The
-problem is "security" and that a "carefully crafted payload" could do
-something malicious. That's why we have to do all of this stuff sooner
-rather than later in our boot process.
+I've been waiting for the people that wanted the commit message
+clarified to Ack/Review the patch. Did I just miss that? Sorry.
 
 --=20
 Tom
 
---w5XQ3Uj9zRIOGnta
+--0dWDltxP+XS2wFRv
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZp2WMACgkQFHw5/5Y0
-tyzFJgv/bqKCSQDjrEl0bAYmwRp/oW2+qbvplkPYtOao1qRkFKV//u1jtzSf3fdD
-NTUOSejDCQmU+WgG+9ZVwW9w5uEwz/gs6RbBdggHKj/3G/SeIQN5xyp+DO+/5ddv
-9vP6vdAgJvbuUed3Kp+i3Iic1s16AQtvYjSCjyS023e1IX4Cz2OgTSVvjJ0SdO5e
-jWMmZKz3wOHQH+gOZf05KjRQohW1BrqVQd/ufwt3NBTdcgNVttdabUsx18Og7enW
-K6eaA5HEGEIoY92ORJfTKb7xWR0hIadCUd/icTf2OO9thucf9y+rQOtx6+uPLBrw
-HRV+AeWCSq3GLuTE1ceFl569b2je2OmDlAL4dKX9zYi4OWoRNo5Nd5VR4UYRJZay
-9njjyUqi1Q1yFcdicCr0+UL4j7HfHrJL1voWZ6p168T8MGcV0isJGw9uzZyizO09
-V/tgqN3dOnXPOUiWeuEuzWOY3/RfYiDRXv9dJcTKzvulhjm59Fai+KLcV/bwQLkw
-+c+ifZZj
-=d0Kn
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZp2gcACgkQFHw5/5Y0
+tyzY4Qv9GQNG78Gggfl528fpDbLxR8HlG+pmAqF4+bmu8EDaYX2nqaGvOdCbTUi9
+bvm2Sd7viIrgzmzL21AnRLJg7+Zor+AUPXts7qweBJ4Xwm1ASZdkQpl8qLUcxiw5
+1hDMouQfPlx8ukSBYhgRTwJdM9EId726t4O8exh1dpG70iWsVo1ryK8FLMw9Aw3E
+mIxj5NY089+l1FhmaI7Dv8eCoz4N6Rx6GNWIW+In4FZ/VwFFw9orUFIPw9YKDpZm
+9x4L/tSro0hdJdXEtpn0jdNo7fn8R28LQBf4dFhWBQIlrkO9cy+a9QeInFXNCAXn
+AWdrCWjgmB3ouTabXLnCebb1xlvepjrRcD+VVEzrmV+NBsvrTp4DYRRhArpcqBRX
+hvoLHVApHjI/J/cSEq8hfNArTlq+Y3hr+nXUnGI3x3rtYuUxlLldw3mg/u9AWoC4
+6TUldj+KxvCdBOUxnAfpgJQW1nf4qP49UzQm2OyYqlB64hUXM+VKAjmQiUSz6xbN
+YdzN/ogA
+=jLg7
 -----END PGP SIGNATURE-----
 
---w5XQ3Uj9zRIOGnta--
+--0dWDltxP+XS2wFRv--
