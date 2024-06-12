@@ -4,76 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7297C27C77
-	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 16:03:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A14F5C27C53
+	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 16:14:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E2508886C;
-	Wed, 12 Jun 2024 18:03:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E114188815;
+	Wed, 12 Jun 2024 18:14:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dSHAiS1C";
+	dkim=pass (2048-bit key; unprotected) header.d=flygoat.com header.i=@flygoat.com header.b="HD1/EJl6";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="eqFV2Kgr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E18E88850; Wed, 12 Jun 2024 18:03:03 +0200 (CEST)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 69B158881A; Wed, 12 Jun 2024 18:14:00 +0200 (CEST)
+Received: from fout1-smtp.messagingengine.com (fout1-smtp.messagingengine.com
+ [103.168.172.144])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3ABB883D3
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 18:03:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 812F8883F5
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 18:13:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=flygoat.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-3d2255f84e9so531237b6e.0
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 09:03:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718208179; x=1718812979; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=g3AB+4bCnL7WERIviCuF8UiF1LzXZls9ZlRD3ZnRtRY=;
- b=dSHAiS1C2nF6h2AjvX50RSHqTJ9hY2lNAeN3+LHF+zn8CPHIB/AHeZGok3BuLvMZH3
- rVYpOKIIBcjjvl9cweIMwaGyydKljQD/wSS00RH2WzkWxMTQ7czpin8It1EAsKvHd1sf
- 49plkycE06MeVj03JAbAhM/txTHfjeHkfmM3s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718208179; x=1718812979;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=g3AB+4bCnL7WERIviCuF8UiF1LzXZls9ZlRD3ZnRtRY=;
- b=tSUOB7Rm27jjWdo5Ukq6VLpCJQhUfDMV1NzBgKzXrJbTS3q117mbSXocx1RBFesmg5
- c1ChKvHnaXdMH2qOoxO4MPCJQg13vqhuBdsoLjO3g8d246UQc72ryYybAfn1QMkL8vQ5
- dYLL+JtSFwIpPF11qhqWeIpXhsgxoz0rxJjvI87h/xEUjI8iKry80xuoSUq05q0q3wYx
- c5z2DNbRueyFDEiS24l22pN3pgnaCsIweqSBllJTex2VaBHPlieq0V7FtQjmyuMWD+3/
- eYgE3TEy7vIUM3HE2TGaNjO+5D1G6hYpNE3IMlPlwN4O8rieFMtHD5/2jicXr+QQp/oV
- Nz6g==
-X-Gm-Message-State: AOJu0Yyg48pUie4bGsTOjnlM5gGIqzeGFol0rAtGrGrozKS309VxusoN
- ldMrSD/tmT2Gw7/9MAx52mr5P5WLDTt96ghpMoZHm7vGdSDg+iJdkSRhCypxPZY=
-X-Google-Smtp-Source: AGHT+IFmb/EW8OrQZKsyZiN5YXwRboJY3dra7sVw9Jskg36Fq4oaNVbZTNewiJ1W+f3tkUk9OxLhDQ==
-X-Received: by 2002:a05:6808:30a4:b0:3d2:239d:e0a8 with SMTP id
- 5614622812f47-3d244efb786mr10067b6e.26.1718208179456; 
- Wed, 12 Jun 2024 09:02:59 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
- [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3d20b66cb7asm2363145b6e.7.2024.06.12.09.02.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Jun 2024 09:02:58 -0700 (PDT)
-Date: Wed, 12 Jun 2024 10:02:57 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH 23/42] test: Release board after tests complete
-Message-ID: <20240612160257.GA68077@bill-the-cat>
-References: <20240611200156.2245525-1-sjg@chromium.org>
- <20240611200156.2245525-24-sjg@chromium.org>
+ spf=pass smtp.mailfrom=jiaxun.yang@flygoat.com
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailfout.nyi.internal (Postfix) with ESMTP id 7DD9713800F9;
+ Wed, 12 Jun 2024 12:13:56 -0400 (EDT)
+Received: from imap44 ([10.202.2.94])
+ by compute3.internal (MEProxy); Wed, 12 Jun 2024 12:13:56 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
+ cc:cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1718208836;
+ x=1718295236; bh=qY5tIW/NTdh+WwnECBI5/QXSZBc35p6WN6pN2GH2th0=; b=
+ HD1/EJl6yIhEaAsINHvFiWT6u0Lj7qrdpI3RE2tfhYOrKBQMPBDh1rfv34f1vvVa
+ om+2km+nHvSFBsMqeoBSmxtJwA+ddz7MUb7lEH9cXyNaXOEBCqk/q2C1akmsBoX5
+ g5kQxgvK9xCbHwA/NQeiLWVmH9xW2OHUKFDkLQE9MD23NzGx1bbfNuY/lj9j8nzY
+ U7Pn2WpiRuHE70rYMglrB+fcFaW6C52a+XxSbVr24FBJ4igZ34d0jqgPdNzW5Rsm
+ Lm4kOtOaFRmZaDWWr3x1/+lv9vGpVGf11xDWuR2glNIp8Rwnkz0ShPEMbEq9tfoU
+ LmXEGPDawnhrMZ9raYR7Sw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1718208836; x=
+ 1718295236; bh=qY5tIW/NTdh+WwnECBI5/QXSZBc35p6WN6pN2GH2th0=; b=e
+ qFV2KgrBkoZoM5ox0eqX5tO9hnNBJwEM53+mY8RXOP3+pCeuqvxZCMPn4SDaKViL
+ +/ONgkgfqYFrFO0qQGIKk21c37tNhLW5SI+JlG4I5SRHzUJOG3lmItc1vYH5iheV
+ ZI2RDmT6ekRiKgeVUbwd0wiXS+I0NKU+FWXD5ZifQrpvV2tCm57DU7waqXQnyV5P
+ zFp6n3FMHS72BpSIhYr97EJAkpQbNSthZ8D0zuyKSwuQxLIMdFAqaV8s2y5umH7m
+ uaoaxpjlr/4UvKzp0yrLtbRfzmZWY5FlTX8slHJn1QGjhxqGaP02+WCoNZZsKoC6
+ bNM5s88tRKtiUV0m9HlhA==
+X-ME-Sender: <xms:RMlpZh3mG035rE4X0TLS_gst9nVCnQ-tfiu1tyqDOnkNXI7RAYkWJw>
+ <xme:RMlpZoEkUXZMrzDUfNP95KRUN0fYFXFf_pFDZf8pYlUtm_JwoTii7lObasN7X2Umq
+ 2X6MOJTTM4wtSOmeY4>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrfedugedgleejucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhepofgfggfkjghffffhvfevufgtgfesthhqredtreerjeenucfhrhhomhepfdfl
+ ihgrgihunhcujggrnhhgfdcuoehjihgrgihunhdrhigrnhhgsehflhihghhorghtrdgtoh
+ hmqeenucggtffrrghtthgvrhhnpeelleekkedtteekleeffefggeevfffhtdefudeuiefg
+ ueeiudevffeludejffdtffenucffohhmrghinhepohiilhgrsghsrdhorhhgnecuvehluh
+ hsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepjhhirgiguhhnrdih
+ rghnghesfhhlhihgohgrthdrtghomh
+X-ME-Proxy: <xmx:RMlpZh7JpMMT1z3ShhjyS2Ftkv-7o4qFvX7oBDMXyPBRA30CmOCXXw>
+ <xmx:RMlpZu0BZgpSonGDQz3RaPzAxAk3Qjf9755XLfLWctYE_JA7YhWucQ>
+ <xmx:RMlpZkGE6ZuCyADBRH3An5AFIy6ppmO9Z1K1eVI6796LFbK2edMetg>
+ <xmx:RMlpZv9REvpfWJKmXRd8eYqk1V2M0YDOC2ANclotxy-8g3_NVba8Yw>
+ <xmx:RMlpZp4Mc5zcrXQ-RoolfQtN4t1V60Cb6GTeOPoPLMKXkYc6P171Hfrp>
+Feedback-ID: ifd894703:Fastmail
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id 0311836A0074; Wed, 12 Jun 2024 12:13:56 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.11.0-alpha0-515-g87b2bad5a-fm-20240604.001-g87b2bad5
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8Wu1uFSwmFcqwrt7"
-Content-Disposition: inline
-In-Reply-To: <20240611200156.2245525-24-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Message-Id: <49522625-8663-4102-82aa-cabc0f239afa@app.fastmail.com>
+In-Reply-To: <20240612160053.GS68077@bill-the-cat>
+References: <20240611-docker-image-v1-0-51472eb70357@flygoat.com>
+ <20240611-docker-image-v1-12-51472eb70357@flygoat.com>
+ <20240612160053.GS68077@bill-the-cat>
+Date: Wed, 12 Jun 2024 17:13:37 +0100
+From: "Jiaxun Yang" <jiaxun.yang@flygoat.com>
+To: "Tom Rini" <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, "Simon Glass" <sjg@chromium.org>,
+ "Alper Nebi Yasak" <alpernebiyasak@gmail.com>,
+ "Heinrich Schuchardt" <xypron.glpk@gmx.de>,
+ "Ilias Apalodimas" <ilias.apalodimas@linaro.org>,
+ "Aaron Williams" <awilliams@marvell.com>
+Subject: Re: [PATCH 12/20] cyclic: Rise default CYCLIC_MAX_CPU_TIME_US to 5000
+Content-Type: text/plain;charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,45 +112,34 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---8Wu1uFSwmFcqwrt7
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jun 11, 2024 at 02:01:37PM -0600, Simon Glass wrote:
+=E5=9C=A82024=E5=B9=B46=E6=9C=8812=E6=97=A5=E5=85=AD=E6=9C=88 =E4=B8=8B=E5=
+=8D=885:00=EF=BC=8CTom Rini=E5=86=99=E9=81=93=EF=BC=9A
+[...]
+>>  configs/octeon_nic23_defconfig | 1 -
+>>  2 files changed, 1 insertion(+), 2 deletions(-)
+>
+> This seems similar to:
+> https://patchwork.ozlabs.org/project/uboot/patch/20240524210817.195329=
+8-1-rasmus.villemoes@prevas.dk/
+>
+> at least for CI. And for outside CI, I'm OK with just having the value
+> be changed in the defconfig as needed. We do support using config
+> fragments, so keeping such changes locally isn't too hard.
 
-> When a board is finished with, the lab may want to power it off, or
-> perform some other function. Add a new script which is called when tests
-> are complete.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->=20
->  test/py/u_boot_console_exec_attach.py | 10 ++++++++++
->  1 file changed, 10 insertions(+)
+So the default value is a little bit too hard even for some of the actual
+hardware.
 
-Given that all of my wrapper scripts include a "turn it all on" and then
-catch for "turn everything off", this sounds very handy.
+I think being permissive here can prevent people hit into the problem
+only after enabling cyclic on their own board.
+
+Thanks
+>
+> --=20
+> Tom
+>
+> =E9=99=84=E4=BB=B6:
+> * signature.asc
 
 --=20
-Tom
-
---8Wu1uFSwmFcqwrt7
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZpxrEACgkQFHw5/5Y0
-tyx1sAv/cuoxwPE2Ua4FbSRgyE2tcpgQdx6943CMhMlizyjQyIcrAgZ6yIBEN67M
-O+eMbP+jPg+TDKOjls7RGGl9ihsp7s2JTa4av8AL7BA8UYc7g8wca+RyK5MlqfOp
-yKLbRVuowmgW0+XpaW4ueHe2d3A5pXWmGr1V3vbm0ulFQ9ODTnR7oMYvxNAYTj1N
-OiylaM0mRp99ZlufxqmHjn/XYnGi1dDB8xIrKo4zwPyGwo/VPlPzW/uzXdmtFevu
-SCeuGhZKfr5Yvhks6RreoUsDgB4rDEUCew0UePWiAj9YFZa9VbYzPCIqnRpLlK7U
-Oq2l727gtzPJlF+bjI9uPc00C5bbfAUxB0M62LFwi1y4NVEcYF08W3EzVYwRrT9N
-nuRPx8wRYVxF62vEYLNdnHjTCcF+9cEX68tnuItPAdHtSu/OIfqORsAPnOSM8cGM
-wM1pPHR4+D3azCDAgsIMW+gw7porRh0DeiXguVpOo6zqLlhEPxW8bu7PfYNZ3B4g
-AtaMW/qN
-=fCW/
------END PGP SIGNATURE-----
-
---8Wu1uFSwmFcqwrt7--
+- Jiaxun
