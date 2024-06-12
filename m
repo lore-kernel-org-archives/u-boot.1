@@ -4,81 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04830C27C53
-	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 17:07:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02717C27C53
+	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 17:22:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67D1688854;
-	Wed, 12 Jun 2024 19:07:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1C2FA8881A;
+	Wed, 12 Jun 2024 19:22:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ABWg/62a";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PIX1jW2L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 659E58880E; Wed, 12 Jun 2024 19:07:49 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id A5A2288702; Wed, 12 Jun 2024 19:22:50 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B71F88702
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 19:07:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 64AB98881B
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 19:22:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-6f8ffe1b65dso48406a34.0
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 10:07:47 -0700 (PDT)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-6f96f7465a6so635475a34.1
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 10:22:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718212066; x=1718816866; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1718212967; x=1718817767; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=XfH+JjQYS0JqsacgzjyO2moGkqewvs34B5BN5gcZ4Fw=;
- b=ABWg/62a6SHwLGTXAdWiJ+PESRDvT4GzBxnxvaGohVcC8CPnNYnity0ca9NPgO9gob
- s1Xs3/CeO+1yJP6KO4RsUhPml7Nb/DDwNq0Dr2UCHPRnhvYFFPPYTqMWTN65gWCO47N7
- P2irmVDwk0UFiFwmPDeBkqz0+9FPOvS2lZif0=
+ bh=icKpF5wmcbVTddHJ1xFd8AvI0vd7HFZ+kxYpJDZpe9Y=;
+ b=PIX1jW2L90e8dCreQS2EjVsnaZwURVw8dz5ftw7iPs7KJrGv1Dezdnr5BUZWFhLSBC
+ BBDvtonqQ3U34y8775EFkXJvVBRC+okVTSNlcv+FS/HDpFjQCqjukPxviACHWkHGjwHT
+ c8cekReOWIHUPEBKt/siBuW6+guAxrbWzT6LI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718212066; x=1718816866;
+ d=1e100.net; s=20230601; t=1718212967; x=1718817767;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XfH+JjQYS0JqsacgzjyO2moGkqewvs34B5BN5gcZ4Fw=;
- b=hlDkD7pNmyMIaKFFSJgtOGJE4juqbjgCpihUJvvtw1lW7wnaqb44iYF/c0tag6iGIC
- ctrIZ9pzNHWENTxJqIFVn7WJGy4J3RjXaD26DNXK7iAy0D8V0iRcQdXsGswGC5+qhB3T
- FOhULTeKxEOSaBPlsMd6wrpVAQWdo7odStLIObqjxBM/DrPcF/ygWXtbcM9/8VoKVYdb
- B9JvhHnG6Comn3dAIy0kU2MGwvks75ZXJQAK+z0PKO84wsx2+/Jg6vKt55cnwQROwiqM
- G085Gx1G527mbStEwKq388UQDI2htnPYajwC3dQMmML73i7/MU+vswuJQCbn+j26UGcZ
- lOwA==
-X-Gm-Message-State: AOJu0YwFWSIkkmNuhdcK2e53Q7SN2r2c22BO4PpOdW4orfbsg9ixuBXK
- IWcRkK4tbI9jQJAAYe7gtTlddIW0019ihGYq8XFSRrk+Z2VzheOWE9RORGb8pkg=
-X-Google-Smtp-Source: AGHT+IGuZSdvA1MUrWhjaA3+XafMJ/uSLwRLXnvcV5B1ezg5qpihKYDrO8LuPr2AW/UDPkBWD+bk7g==
-X-Received: by 2002:a9d:4e90:0:b0:6f9:4824:8d66 with SMTP id
- 46e09a7af769-6fad978b351mr153468a34.6.1718212065831; 
- Wed, 12 Jun 2024 10:07:45 -0700 (PDT)
+ bh=icKpF5wmcbVTddHJ1xFd8AvI0vd7HFZ+kxYpJDZpe9Y=;
+ b=Bqj2nWzO1c91VrhCDdCgr9YcRifRwVskaOHwa0er3yjEqsYctHfwGUHETfwqvjG7GW
+ JN25puP89iji0aWqSnjJtlpB/F0vcfC8k/DVWqaq6vrUcCsuPliAHBcmrm5xZqcrKTdo
+ BTEYfWivQzU7zSzAqWv9yzPuzGQITRFw1FkVOy39Kxp8zNVkgYXPlCQLBFvP6YO0nDgf
+ sjyfCYMlIbUQ065Z1QzB6mpQx9sD3rDWh9Kvet5wSx4ajh5AdL3++CnT1VtDaa7EWQBP
+ yBFfG2FdtlUMJ4piOWuboZywcw3HrnDQfXjdGvZjP2BliwJgOprW8zwUvxWlMfvSZP9z
+ GS8Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXJnoix+9o5GdOQ7U5CzKUQtGrFIx/mh2vmMJtONdeIlmQuuI3bmY+U4/x7Cb8WVvqrhgBVCK1/G6eaFOSKPqxPcvpMLg==
+X-Gm-Message-State: AOJu0YyBTr1VXwPye1wLhsdBQ67r+Zvc2I9fdulwJDa0aq6V7bIC8inW
+ aratKJozAHxk4aprbsi6LurLjYQa9s9DySNcBC14ImhYnyTxjXSMiY9hWf84cuY=
+X-Google-Smtp-Source: AGHT+IGjiQIkRgaLTgvFjPqmqE801iZNo8WTTg1Sv1i3q5KTtL0ObiDCO0OSmTnZxCUceDyEMTs6Vw==
+X-Received: by 2002:a05:6870:b14a:b0:254:ce80:c0ec with SMTP id
+ 586e51a60fabf-2552ae36f77mr214429fac.0.1718212966931; 
+ Wed, 12 Jun 2024 10:22:46 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
  [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-6f992005002sm1570160a34.42.2024.06.12.10.07.44
+ 46e09a7af769-6fa50fb74fcsm226173a34.43.2024.06.12.10.22.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Jun 2024 10:07:45 -0700 (PDT)
-Date: Wed, 12 Jun 2024 11:07:42 -0600
+ Wed, 12 Jun 2024 10:22:46 -0700 (PDT)
+Date: Wed, 12 Jun 2024 11:22:44 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+To: Simon Glass <sjg@chromium.org>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Aaron Williams <awilliams@marvell.com>
-Subject: Re: [PATCH 14/20] CI: GitLab: Split build_world tasks
-Message-ID: <20240612170742.GE68077@bill-the-cat>
-References: <20240611-docker-image-v1-0-51472eb70357@flygoat.com>
- <20240611-docker-image-v1-14-51472eb70357@flygoat.com>
- <20240612160104.GU68077@bill-the-cat>
- <894fd87b-ece7-48b6-bf20-2c6621e7224e@app.fastmail.com>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>
+Subject: Re: [RFC PATCH 04/31] lmb: remove local instances of the lmb
+ structure variable
+Message-ID: <20240612172244.GG68077@bill-the-cat>
+References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
+ <20240607185240.1892031-5-sughosh.ganu@linaro.org>
+ <CAFLszTjQW72_Z8Dx4g1mVx5Y=wq9xeXYVBffxLUto6sDp6CMbw@mail.gmail.com>
+ <20240611210145.GM68077@bill-the-cat>
+ <CAFLszTjd4Sf=_um7QbkpbLAO9=2=vX_LkHv6br=9FPAPFhbH5Q@mail.gmail.com>
+ <20240611225554.GO68077@bill-the-cat>
+ <CAFLszTi1ZR+qeEuEbGUE2Fv3h1ahX3S_2ySBPQjgkfruiW8Xtw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="PN5sZ4B3K8VUyomg"
+ protocol="application/pgp-signature"; boundary="w5XQ3Uj9zRIOGnta"
 Content-Disposition: inline
-In-Reply-To: <894fd87b-ece7-48b6-bf20-2c6621e7224e@app.fastmail.com>
+In-Reply-To: <CAFLszTi1ZR+qeEuEbGUE2Fv3h1ahX3S_2ySBPQjgkfruiW8Xtw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,69 +102,53 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---PN5sZ4B3K8VUyomg
-Content-Type: text/plain; charset=utf-8
+--w5XQ3Uj9zRIOGnta
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jun 12, 2024 at 05:14:46PM +0100, Jiaxun Yang wrote:
->=20
->=20
-> =E5=9C=A82024=E5=B9=B46=E6=9C=8812=E6=97=A5=E5=85=AD=E6=9C=88 =E4=B8=8B=
-=E5=8D=885:01=EF=BC=8CTom Rini=E5=86=99=E9=81=93=EF=BC=9A
-> > On Tue, Jun 11, 2024 at 10:04:13PM +0100, Jiaxun Yang wrote:
-> >
-> >> Current build_world task runs for too long on public gitlab
-> >> runner.
-> >>=20
-> >> Split the job as what we've done to azure pipeline.
-> >>=20
-> >> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
-> >> ---
-> >>  .gitlab-ci.yml | 103 +++++++++++++++++++++++++++++++++---------------=
----------
-> >>  1 file changed, 59 insertions(+), 44 deletions(-)
-> >
-> > I don't like this. The list in Azure is because of the time limits there
-> > and in turn we:
-> > a) Have to tweak it periodically to keep things from running too long
-> > b) Have to tweak it to ensure that we don't miss some new SoC/etc
->=20
-> Then it will render running CI test on gitlab.com impossible again :-(
+On Tue, Jun 11, 2024 at 08:41:39PM -0600, Simon Glass wrote:
 
-Yeah, it's not something I'm the happiest with. Looking around a bit, I
-see a blog post that talks about dealing with dynamic variables, in
-Azure. So we could, I think, figure out some logic to have each build
-stage say what platforms it covers. And then have a final step that
-compares all of the platforms built vs the global list (just
-tools/buildman/buildman --dry-run -v) to make sure nothing was missed.
-With something like that, and assuming GitLab can do it too (it probably
-can), I'm OK with having the world build be broken down to 10 groups
-(maximum number of parallel jobs in Azure CI for free) since we'll know
-if we miss something too.
+[snip]
+> Also IMO there is only really one LMB list today. We create it at the
+> start of bootm and then it is done when we boot. The file-loading
+> stuff is what makes all this confusing...and with bootstd that is
+> under control as well.
+>=20
+> At lot of this effort seems to be about dealing with random scripts
+> which load things. We want to make sure we complain if something
+> overlaps. But we should be making the bootstd case work nicely and
+> doing things within that framework. Also EFI sort-of has its own
+> thing, which it is very-much in control of.
+>=20
+> Overall I think this is a bit more subtle that just combining allocators.
 
-So lets set this patch (and the doc update) aside for now, unless you
-want to look at the above. I'll look at the above soon.
+I think this gets to the main misunderstanding. The problem isn't
+handling bootstd, or EFI boot, or even assorted scripts. Those are all
+cases where things are otherwise (sufficiently) well-defined. The
+problem is "security" and that a "carefully crafted payload" could do
+something malicious. That's why we have to do all of this stuff sooner
+rather than later in our boot process.
 
 --=20
 Tom
 
---PN5sZ4B3K8VUyomg
+--w5XQ3Uj9zRIOGnta
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZp1dsACgkQFHw5/5Y0
-tyzNKAwAknv5m/Vxao8NHydW76r+eQ7v7xCQJmvA2XecbORrc9rQbcn0BJCpsSZE
-MjPvfi5jvlzp0fQNnH89q+tMj0m5+EJMLQsrAcb3p+kZ9ZIjz8Hpd01yjfpS6Im6
-NJTat7Q5yI3hGVydudx7544GdPd8xJWF63DNmJbgqWqwW78XjECYiaibAmN/vTrG
-qxscHA3dKTFavxqlN4k5Fji+d75AcDZ43eTHg33gHcEPe66f6V51R5oImLuqzUHa
-tFeS+DoZCFqxvvgWdg27JUix/8HLy90CoJeIoGY67l1yKQX28tXEzUr5JWRqTn9t
-mxfZwKcmq3E+Z6SvOARnbe/M0OsXTgqCqW3+ayo+eppvc8UEIZqMV3JyIX0+YAsj
-5HLXEY8NbJwhHeMsie6sK+1cMp/O+Xf5dpMvgm3oB28o2emUHucCptSLF4VWAMCJ
-0JMDmIUo4PwkmJFFiWr+Oy8IB3eZg9MzSt/9f0PsTbGw0nt7aNtWbD01VvInMKfk
-+cHW+Eua
-=zEKK
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZp2WMACgkQFHw5/5Y0
+tyzFJgv/bqKCSQDjrEl0bAYmwRp/oW2+qbvplkPYtOao1qRkFKV//u1jtzSf3fdD
+NTUOSejDCQmU+WgG+9ZVwW9w5uEwz/gs6RbBdggHKj/3G/SeIQN5xyp+DO+/5ddv
+9vP6vdAgJvbuUed3Kp+i3Iic1s16AQtvYjSCjyS023e1IX4Cz2OgTSVvjJ0SdO5e
+jWMmZKz3wOHQH+gOZf05KjRQohW1BrqVQd/ufwt3NBTdcgNVttdabUsx18Og7enW
+K6eaA5HEGEIoY92ORJfTKb7xWR0hIadCUd/icTf2OO9thucf9y+rQOtx6+uPLBrw
+HRV+AeWCSq3GLuTE1ceFl569b2je2OmDlAL4dKX9zYi4OWoRNo5Nd5VR4UYRJZay
+9njjyUqi1Q1yFcdicCr0+UL4j7HfHrJL1voWZ6p168T8MGcV0isJGw9uzZyizO09
+V/tgqN3dOnXPOUiWeuEuzWOY3/RfYiDRXv9dJcTKzvulhjm59Fai+KLcV/bwQLkw
++c+ifZZj
+=d0Kn
 -----END PGP SIGNATURE-----
 
---PN5sZ4B3K8VUyomg--
+--w5XQ3Uj9zRIOGnta--
