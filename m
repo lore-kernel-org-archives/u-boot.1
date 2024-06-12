@@ -4,74 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49CE9C27C53
-	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 16:00:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 891D4C27C53
+	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 16:00:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C111887FD;
-	Wed, 12 Jun 2024 18:00:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C4DCB88829;
+	Wed, 12 Jun 2024 18:00:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iDn2ifrl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="S6SkfOcU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A03B288812; Wed, 12 Jun 2024 18:00:43 +0200 (CEST)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
+ id 21D698881C; Wed, 12 Jun 2024 18:00:50 +0200 (CEST)
+Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
+ [IPv6:2001:4860:4864:20::30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 68373887ED
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 18:00:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EC8608881B
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 18:00:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-3d226aff122so2057182b6e.2
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 09:00:41 -0700 (PDT)
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-24c9f6338a4so3492055fac.1
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 09:00:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718208040; x=1718812840; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1718208046; x=1718812846; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ZLEDoHDYmTDW7Ip8ADo+H339Xa/qBfT+i8ypdKo36ro=;
- b=iDn2ifrlQ6Hx/zf111TUFUPtjM8TtYVzz7VGPMIZT/e+voR25kdl+GomOrt7mLl5hJ
- SQJ8hrf6NBBFDr4hTah7yWW7J2JbtJJYBguyTwf+Z87Sid9GOwhBAXLWTViixS1AmJgI
- NAle/Nv2TnG+Jum2Hpaxu0CzGe08DX39nJeSs=
+ bh=0oPCoEjJ7lh0B54ouVxLvuWlxgjsOUG6HBHyrGWmPb0=;
+ b=S6SkfOcUdTgqruE8O9Lw2ORviM765r93UlIwtbxWIc3Tus/b2DKBgSdJ3wZTlwPZeR
+ lEcVM1X3D53PsSouTOLZvt4E4Ck2QAgwp3Kh51jS/108aMB1AAeT086HHZm2uIrE7dUi
+ GuNLlCluKhLFPogT3GB4BrJssLuJxQXqN5qGg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718208040; x=1718812840;
+ d=1e100.net; s=20230601; t=1718208046; x=1718812846;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZLEDoHDYmTDW7Ip8ADo+H339Xa/qBfT+i8ypdKo36ro=;
- b=Kg2VslXEZm4Jgu3+6I2aL6qMmNMyGCRd3Vkskqxm4DNpiK8jiOQC0sqbomaC/KMIE9
- LFL0U0y6ePwTz2Hz+9tftIjtZxrTO7r4KQC51FI0ZxkuRupzSC+pndTF1fdzp24mNWE+
- AlQb7AK4UxlTlhEGThmRbGEbTh0JrDoC2LjC0S2w300tVoHUng4ufEHg/OxhqqK0Orel
- TYB6I/JIVVcuhTl+rfTqsgA9YnVW8FKyEn7YcIL7YBqd4/cCWhW+62633/ORAi+fV8AB
- uljsWzwdKA6tBXGpldRp0KCiOB+9t5CRSm6WdahvuGozsPqPQ8vwEM8yNKx0v/zBx3zS
- Xf0w==
-X-Gm-Message-State: AOJu0YwDRGcG9LHL+orwoLga8mWJ2x2+q7KXoIkyNJ63k32l3NYCopLR
- rEYuuKfYqvIeKJP7fM3oXxmdGtwiOHEWUpP+QJnhKzX+KUHAUEYKrRIKYSzDJVI=
-X-Google-Smtp-Source: AGHT+IFWUXtZq9O+HiQ/sFkA0lw7HZruVsxZQGmglCVR4RyRBqkZ7hYjhdT/rnx3gLhVz4lAEBQsew==
-X-Received: by 2002:a05:6808:2221:b0:3d2:3e31:6cf1 with SMTP id
- 5614622812f47-3d23e31dc12mr2703408b6e.41.1718208039140; 
- Wed, 12 Jun 2024 09:00:39 -0700 (PDT)
+ bh=0oPCoEjJ7lh0B54ouVxLvuWlxgjsOUG6HBHyrGWmPb0=;
+ b=FjxlaGuLDICeghAC9msfDIYnNBlELoGfx30ktfIWHeuQVqPQU8rDekUbPkqHclgrOc
+ Je5hyxFDJVh28+apXMYFYpCIZJIcvWKvis4JLxbxUNOMQLrGthjzUN+5DEXBofMV1zn6
+ RBL32MVcQZ2eBoFpuQcbEcNn6h1AUMn7KkdrGcW5BFL18AnvkdAm2+H3FBvXZQzPwIlM
+ KMdxBmFGrjtDLOJ6WOe+vdJU/0zD31PZ/Nab/ORxErU85K8900J99l2u0trddIt203Rs
+ soFORzmUUA5sv1bqrgMBJCwaPlrWu+KZ6JlXpdiB2WoZzks/30xlNXmnvP3ptxzGiNB8
+ MBTA==
+X-Gm-Message-State: AOJu0YzMcg5IWG2ClRG2eQEl+AGGrXY0BPwK2dTdE9juV4cUXYxWMg1T
+ AfHqKoO2fFTB8TSKAMJbwkQzTkaLWMJR/zcRyp5xVNNTYpRULJRaHbzyTC+gz22TjwcfekLbPpS
+ wmbM=
+X-Google-Smtp-Source: AGHT+IFjywjE8eUSrC/pA+6cPuIHxH7jl/7H6mNcK5kV2K/18eWZsuJlcNwv/23If4ibfg9QRyHOKQ==
+X-Received: by 2002:a05:6870:b151:b0:24c:b80e:ee1b with SMTP id
+ 586e51a60fabf-25514f20a32mr2363706fac.50.1718208046406; 
+ Wed, 12 Jun 2024 09:00:46 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
  [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3d20b7183b7sm2347041b6e.40.2024.06.12.09.00.38
+ 586e51a60fabf-25498ff653fsm2273042fac.23.2024.06.12.09.00.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Jun 2024 09:00:38 -0700 (PDT)
-Date: Wed, 12 Jun 2024 10:00:36 -0600
+ Wed, 12 Jun 2024 09:00:45 -0700 (PDT)
+Date: Wed, 12 Jun 2024 10:00:44 -0600
 From: Tom Rini <trini@konsulko.com>
-To: harsimransingh.tungal@arm.com
-Cc: u-boot@lists.denx.de, rui.silva@linaro.org
-Subject: Re: [PATCH] arm: dts: corstone1000: enable secondary cores for FVP
-Message-ID: <20240612160036.GP68077@bill-the-cat>
-References: <20240612100421.47938-1-harsimransingh.tungal@arm.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [u-boot-test-hooks PATCH 1/2] Create a common file for test
+ scripts
+Message-ID: <20240612160044.GQ68077@bill-the-cat>
+References: <20240610222743.255386-1-sjg@chromium.org>
+ <20240610222743.255386-2-sjg@chromium.org>
+ <20240611160730.GJ68077@bill-the-cat>
+ <CAFLszTjk894twWPzfX-=Xw06Z6f2hjdxDguinBxAQhmjQ7KYNQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="m5bXgjk8FUwlwwgT"
+ protocol="application/pgp-signature"; boundary="JxXORuTOsq/aGaLp"
 Content-Disposition: inline
-In-Reply-To: <20240612100421.47938-1-harsimransingh.tungal@arm.com>
+In-Reply-To: <CAFLszTjk894twWPzfX-=Xw06Z6f2hjdxDguinBxAQhmjQ7KYNQ@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,46 +95,79 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---m5bXgjk8FUwlwwgT
+--JxXORuTOsq/aGaLp
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jun 12, 2024 at 11:04:21AM +0100, harsimransingh.tungal@arm.com wro=
-te:
-> From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+On Tue, Jun 11, 2024 at 02:07:26PM -0600, Simon Glass wrote:
+> Hi Tom,
 >=20
-> Add the secondary cores nodes in the dts file
+> On Tue, 11 Jun 2024 at 10:07, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Mon, Jun 10, 2024 at 04:27:42PM -0600, Simon Glass wrote:
+> >
+> > > The top part of each of the u-boot-test-* files is common. Put it in
+> > > a common script file to avoid duplication and to allow it to be
+> > > replaced for the Labgrid integration.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > [snip]
+> > > +++ b/bin/u-boot-test-common
+> > [snip]
+> > > +bin_dir=3D"`dirname $0`"
+> >
+> > So we always set bin_dir here...
+> >
+> > > +board_type=3D"$1"
+> > > +board_ident=3D"$2"
+> > > +hostname=3D"`hostname`"
+> > > +
+> > > +. "${bin_dir}/${hostname}/conf.${board_type}_${board_ident}"
+> > > diff --git a/bin/u-boot-test-console b/bin/u-boot-test-console
+> > > index 0b6b4ac..ad90040 100755
+> > > --- a/bin/u-boot-test-console
+> > > +++ b/bin/u-boot-test-console
+> > > @@ -20,12 +20,7 @@
+> > >  # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+> > >  # DEALINGS IN THE SOFTWARE.
+> > >
+> > > -set -e
+> > > -
+> > >  bin_dir=3D"`dirname $0`"
+> >
+> > But never remove it from the other files.
 >=20
-> Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Rui Miguel Silva <rui.silva@linaro.org>
-> ---
->  arch/arm/dts/corstone1000-fvp.dts | 25 +++++++++++++++++++++++++
->  arch/arm/dts/corstone1000.dtsi    |  2 +-
->  2 files changed, 26 insertions(+), 1 deletion(-)
+> Yes that was my intent, but then I realised that it is used in
+> u-boot-test-console, then wasn't sure it was a win...
+>=20
+> Perhaps I could do this in each script?
+>=20
+> . "$(dirname $0)/u-boot-test-common"
+>=20
+> and that would allow removing bin_dir. The above is pretty clear.
 
-Can we move this to using OF_UPSTREAM instead? Thanks.
+If that works, yes, otherwise just drop it from the common file.
 
 --=20
 Tom
 
---m5bXgjk8FUwlwwgT
+--JxXORuTOsq/aGaLp
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZpxh4ACgkQFHw5/5Y0
-tyy+gwv/X2u/GgXNxBoE9UdQLiDa9M9MEmTB8CkBufGJZs2MzlohPi1gBNfKKbbx
-F3qnKQ9MnEbN7YlQuc7hqCojpAAf5KCNba6C/lh6C6xvzYQeElW/2/MUmfSNw7BH
-+IfjpoI8I8E17MPd/s6k4eo698l2WR6KBuE4fAbXBtgpaUdwX5ygWKV6N1p2xX5z
-EGPV0JS8XlPzG7K1LoMxqFmNFiLgNJkIMEeXn06yq4Uymk7mZPB0n2vQFgxzh9E0
-EzQvGpatsBGssPGVwBBauMy47fWXXx8Y3wrCB7GrWlzh9oB0pourBiC74drU1X6w
-0r4iVilUMa5cXEdGsdM8saajTsm2faVYNmV93v95Gk/O5CqQOuu1Sdr/w+c0yvVF
-cmuNsJaY+ZXG662sCIYuZBaQhCkrBSpz4QparfXwivAtwkZ8WBJWw7dx7uGJstVe
-R2tQFk0FF8dIxGORJ0zUDnrPo3x0w1RW29S0EgqrYP+gopSMoTUz5wYuM+lXKHzm
-/BMAnkkb
-=p3KA
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZpxiwACgkQFHw5/5Y0
+tywY2wwAs6D77UpcvZX3nMA6aX/rIRbv4tVh94xEbp8KiMtheMUx9ABW1LOTVv5H
+hctkdFJKUXcHPpGOa6uKH/tvDbweyM9udR7AJJH/WorMZQAixsSq7aQv4bg4esAr
+eC2sUTYejqdzsYznWkR9IkQLJ7ucJyO9zRAdMS01O6yKgFrRFyngbfaL0FjYQ5Hb
+I0Xbf5tyQGigTp/L35hNqIf6741VD0DatUPIN2FFiIJwy4ofuj1Sew2/NPpSYuch
+YGyPF1FZJT+T5axlchqugbm6T8JZjeNhgGdzyuPDmMQRCBlH6ygMkjD9agoBu3Ck
+y6ek27eLdpPEgWpgqPlxG7vQZ+gSFGCWVPzz/66Trfd4dmgv2bUqh3lLGaASs/FP
+UHoBXHsYWQ4zQbeBV9HfqP9+W9vd/p0n1GDrmx4P0vF7f96CEbJfwknpJeCNpaQB
+Cx54YlQdHYqTEE8OWesX/k/4j0NYZrIVJGguYIpq8k/qWHieoT+aPt4xv5MavqCH
+Acq4y3xe
+=yzp0
 -----END PGP SIGNATURE-----
 
---m5bXgjk8FUwlwwgT--
+--JxXORuTOsq/aGaLp--
