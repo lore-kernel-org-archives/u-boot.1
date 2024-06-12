@@ -4,83 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED002C27C75
-	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 06:13:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 578D1C27C75
+	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 06:20:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3360D886DA;
-	Wed, 12 Jun 2024 08:13:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id AF8E48864F;
+	Wed, 12 Jun 2024 08:20:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="EGUDfebV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PypbjHc/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B06888791; Wed, 12 Jun 2024 08:13:39 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F050588789; Wed, 12 Jun 2024 08:20:29 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4647288373
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 08:13:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 618CD8864F
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 08:20:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1718172815; x=1718777615; i=xypron.glpk@gmx.de;
- bh=JfDNwDQad/ZgVJyVHN73UXhbUva28fe3X7X1399ojtE=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=EGUDfebViyEQDwgcr5iHdmhdSXAl47hz/KdwWXAcekUZc/jWZHJqom2W9WFzFB4G
- NrkKpFuopidM1ef3q3rU+QKIgSXGw4WicEM7A0k0a8hG+eA+56eE29zToFuTKt/mj
- uUrGD/C7Aq155zrKK70104xwocfmPNejOp/w+tmzWWmHQo60YkXzl3QcgmoV31Hwc
- JcvrI0fb907nnFB2l2SbK2KqOcmCfCUkOA7jFVPM7YLTrZ1xDVOi/QVvfJdCkM0jP
- ZTsqt1IH2ZhkRnyUzDkhqqXV21mCeXfsdVBH1DVDXYrLed+l89bkGannR/fhtAlfw
- xJilXKqcYdnPHohE2Q==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([109.42.176.212]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MA7GM-1s6mqy2od0-009EE8; Wed, 12
- Jun 2024 08:13:35 +0200
-Date: Wed, 12 Jun 2024 08:13:31 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-CC: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Marek Vasut <marex@denx.de>,
- Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>
-Subject: =?US-ASCII?Q?Re=3A_=5BRFC_PATCH_04/31=5D_lmb=3A_remove_local?=
- =?US-ASCII?Q?_instances_of_the_lmb_structure_variable?=
-User-Agent: K-9 Mail for Android
-In-Reply-To: <CAFLszTi1ZR+qeEuEbGUE2Fv3h1ahX3S_2ySBPQjgkfruiW8Xtw@mail.gmail.com>
-References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
- <20240607185240.1892031-5-sughosh.ganu@linaro.org>
- <CAFLszTjQW72_Z8Dx4g1mVx5Y=wq9xeXYVBffxLUto6sDp6CMbw@mail.gmail.com>
- <20240611210145.GM68077@bill-the-cat>
- <CAFLszTjd4Sf=_um7QbkpbLAO9=2=vX_LkHv6br=9FPAPFhbH5Q@mail.gmail.com>
- <20240611225554.GO68077@bill-the-cat>
- <CAFLszTi1ZR+qeEuEbGUE2Fv3h1ahX3S_2ySBPQjgkfruiW8Xtw@mail.gmail.com>
-Message-ID: <A4908B3E-821D-4826-AC82-A536D98B6974@gmx.de>
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-57a1fe63a96so8445704a12.0
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 23:20:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1718173227; x=1718778027; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Lq3bKo/cL+RpDSNUppw/9535SG/BevxiOMUcwuEXuIM=;
+ b=PypbjHc/CmXdMBQ/4Mq4yQUX9Kiud8LR9C9B12Pk/1x1GhO1yueKiLFkBK+lF6rw4t
+ X63wm0heEzLp3+QBaRg5pyrbNruGFjPhDjYMUUXVAYYtugDXX9iuBU3TvcQtSqbMSAOz
+ BBismVVo5V8OS5YvZSxM6zoxThlAmtYa3EG7RKFc0aCmvzXuKH8dT0e6wPmhGj0oMk12
+ SAGYML02zuw3DUdJAfHN3JEk1GQpp6c/u0XeUGGpM6aE77Z7lAXPAGnoJHUWOtSWyY/D
+ UyrOHetqF/OsWGtZiLOUZl62KizI3vLDeR7tSViVhC7dCSurd9+1VFKK5Fb3Zjvrkew2
+ O8xA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718173227; x=1718778027;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Lq3bKo/cL+RpDSNUppw/9535SG/BevxiOMUcwuEXuIM=;
+ b=WwVnl2fdLLhkRDTY7vrTYY5YExHyUhoS/hPfrZLyFxAVdh/A92J2LMG4RkBRLxcS19
+ hpIHCxCHcLZT5jyyARgUBLvQcyAmsS61qU89B5XlrltTQgOz8NmApraRADhpok58zudH
+ bOQKCbIGvsWiIjhDH+kb5wluvpSvh8NE2Gk0uD1Sxkn4HpOWKqyWSWQY/ExeGhn720OR
+ QjymC6NFM8DUqeqkMItuGV30Ta5zGRFjdZ49zGFVMDmxXlmGlyvhmMV0WxFXTFhsb12T
+ rretmNDynnBjQpPK1GGtbdFFnnlVDZvtQsDwVENaFAe2AryP9esqvKQ1uAv7YbfR6dZf
+ F4qg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV4v7F4qnp65WAlSVenhPiRkN9p8xyelvF++SWezfWtFI3v3oTUa0z1HhJj4XUszifUXpkzpU40+ZkucMXMXsPwfCjvsw==
+X-Gm-Message-State: AOJu0YxyrUDY75PI5PazRnQMB3SEr7ZaUa23eBmtIxcE/5y98OYYyu6C
+ qHd4PxIRr1P9fUSQ9FevZjnnNtlsLYXNAUd08VcOO6rgoCP8dDxYnwjrXUtStjU4M198sGtxvnS
+ xFLDcP7o25UFkiXjOuxmQ/LnUcphRHZCzNs4W6w==
+X-Google-Smtp-Source: AGHT+IFPgqWfOUy/Qfuog8OiJMX3ScN/PmOb9mG+sf1iigunQr3+dEBSvGR0SwPRZr7sOBoAaanrzW12+asXN+wBFEU=
+X-Received: by 2002:a50:96c4:0:b0:57c:aac7:105c with SMTP id
+ 4fb4d7f45d1cf-57caac7109bmr519927a12.0.1718173226762; Tue, 11 Jun 2024
+ 23:20:26 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:0AHsaOk+JLNH69gXINz0e2Q76HP7I12DvtdS1Hc+giIKrAK3tzY
- V896jVMZtGJUw4WoPRksx07PfCefKEt5SHQkq39FcBszHiDkC+5HEUisafFIpImrwV+Qse8
- sXRVpTfCJaDx4RcscCT7bjtDN6RNKEBsMoLfkFSHACefA4kcOMsRaJ3giDY3VNjf3hFAXhJ
- kx7hVz4Qz2X8JWEiyluNA==
-UI-OutboundReport: notjunk:1;M01:P0:P3BsawNNay8=;+xiYRZlocGV+GWONzHa1pX0r/t8
- Wi/ASpwDnJD3uPQ98r30K82tbskb4KjR/7KjJS2Iv6O9qTvxLjKmAcS4Ax16dQyjlhb18FnRp
- i8ZAUhyEAYuBTFZfynngjcTQfz9AXfCHWC3l4oQ0BeKNCaUOSeK3946UCSCc3pk00KIpK9w3l
- Mi3CfrO1MIF8N5UBl+8jviTF8tU6Zn2XaCk3EI+QzcNCjIYGze3vLa+3BWXRhI0lx9T3NWM0Y
- u+YtBMkG/x2tqduoxaktu+eSQ5UNJY8zrkqknmDSqHdfC7FQRPHwu0s8ALA2SwfxrFTRnID5c
- iT8poZKt/AFMop6dsY9NC+U9dkpNg3ipnL/wceeFiXZ8u1WMLV1sjs7aAHs/NYzULsjK0lF/D
- B3A5EqY/Nf5wBWxSl0+zbRGMz7MbGLBoV3R3eZKEwYbqqfnVVMG3dXTHdmwhZB7AWI/0n/j3B
- Xq4g39WDvS8l5AlD9+8HgbkALFxy7T6DVY/h9soRIn0P6LOH0X/8wuyzINI8E1OujjU9uBRZZ
- PevOs679e6fELdza87OEZv/TIQuX98VtySBYul2IZINXexCSZaNupJWww8nrgD1EeCDYsHWEH
- LlpFE9RtnGtZ85c9XnNFIxN0o+e/T8fVo0vu9D2wKgVjIJyW5GLQqbnwPUrPs5ZLM6mcaXuwZ
- EJH3kA1V1PuzMrlb0RfjUqo3bz+CvQWTDeEStAPU3R0FYz3S3kjGU2LhKHK5hvwvccXhahRLH
- F+gnFAuDODfk/Jnuv423dBleOAVYz2bd22fiqFYNwX07dA+rB66tDoXMckKigIpkC5RivkHto
- 1usjH2+/luR6i7NPSbs7E8RuJP92i3dvjyOVjWTZKbqeA=
+References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
+ <20240607185240.1892031-16-sughosh.ganu@linaro.org>
+ <50d0efab-0df6-47ef-a4e9-b0e3d6ec2556@gmx.de>
+ <20240611143635.GF68077@bill-the-cat>
+ <CAFLszTiEWw0tey4zeqjPYe2TsSWH1P4Xakn8OrOKSwqDU+EM_A@mail.gmail.com>
+ <20240611210138.GL68077@bill-the-cat>
+ <CAFLszThcanoRd=8A8wq0RWzSHerPPZxYdvyT8AjLNfH1QvyDiw@mail.gmail.com>
+ <20240611225417.GN68077@bill-the-cat>
+ <CAFLszTjm_k6DLCZcMCevf78-K7MsiqWGq5ONxowDVMpRe_XB7g@mail.gmail.com>
+ <CAC_iWjJhb4ROumTSYMzhOCgpdv-5=v=5fjuvcf8g8xUC9fsjNg@mail.gmail.com>
+In-Reply-To: <CAC_iWjJhb4ROumTSYMzhOCgpdv-5=v=5fjuvcf8g8xUC9fsjNg@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Wed, 12 Jun 2024 11:50:15 +0530
+Message-ID: <CADg8p97Pb0i2HHhRuRsgx=RbjQAkL3dyaPctJkEZddn9J-GOTg@mail.gmail.com>
+Subject: Re: [RFC PATCH 15/31] efi_memory: add an event handler to update
+ memory map
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,116 +100,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+hi Ilias,
 
+On Wed, 12 Jun 2024 at 11:19, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> [...]
+>
+> > > > > > > > > +   struct event_lmb_map_update *lmb_map = &event->data.lmb_map;
+> > > > > > > > > +
+> > > > > > > > > +   addr = (uintptr_t)map_sysmem(lmb_map->base, 0);
+> > > > > > > > > +   pages = efi_size_in_pages(lmb_map->size + (addr & EFI_PAGE_MASK));
+> > > > > > > > > +   op = lmb_map->op;
+> > > > > > > > > +   addr &= ~EFI_PAGE_MASK;
+> > > > > > > > > +
+> > > > > > > > > +   if (op != MAP_OP_RESERVE && op != MAP_OP_FREE) {
+> > > > > > > > > +           log_debug("Invalid map update op received (%d)\n", op);
+> > > > > > > > > +           return -1;
+> > > > > > > > > +   }
+> > > > > > > > > +
+> > > > > > > > > +   status = __efi_add_memory_map_pg(addr, pages,
+> > > > > > > > > +                                    op == MAP_OP_FREE ?
+> > > > > > > > > +                                    EFI_CONVENTIONAL_MEMORY :
+> > > > > > > >
+> > > > > > > > This is dangerous. LMB might turn memory that is marked as
+> > > > > > > > EfiReservedMemory which the OS must respect into EfiBootServicesData
+> > > > > > > > which the OS may discard.
+> > > > > > > >
+> > > > > > > > E.g. initr_lmb() is being called after efi_memory_init().
+> > > > > > > >
+> > > > > > > > Getting all cases of synchronization properly tested seems very hard to
+> > > > > > > > me. Everything would be much easier if we had only a single memory
+> > > > > > > > management system.
+> > > > > > >
+> > > > > > > Yes, Sughosh is working on the single memory reservation system for
+> > > > > > > everyone to use. This pairs with the single memory allocation system
+> > > > > > > (malloc) that we have. Parts of the code base that aren't keeping these
+> > > > > > > systems up to date / obeying their results need to be corrected.
+> > > > > >
+> > > > > > The EFI allocations don't happen until boot time...so why do we need
+> > > > > > to do this now? We can instead have an EFI function to scan LMB and
+> > > > > > add to its memory map.
+> > > > >
+> > > > > We're talking about reservations, not allocations. So yes, when someone
+> > > > > is making their reservation, they need to make it. I don't understand
+> > > > > your question.
+> > > >
+> > > > As I understand it, this is used to tell EFI about a memory reservation.
+> > >
+> > > This patch, or this series? This series isn't about EFI. This patch is,
+> > > yes.
+> > >
+> > > > But the EFI code can scan the LMB reservations just before booting and
+> > > > update its tables. I don't see a need to keep them in sync before the
+> > > > boot actually happens.
+> > >
+> > > But that wouldn't work. If something needs to reserve a region it needs
+> > > to do it when it starts using it. It's not about the EFI map for the OS,
+> > > it's about making sure that U-Boot doesn't scribble over a now-reserved
+> > > area.
+> >
+> > I'm not convinced of that yet. EFI does not do allocations until it
+> > starts loading images,
+>
+> It does in some cases. E.g The efi variables allocate some pages when
+> the subsystem starts, the TCG protocol allocates the EventLog once
+> it's installed and I am pretty sure we have more.
+>
+> > and it uses LMB for those (or at least it does
+> > with bootstd). I'm just trying to keep this all as simple as possible.
+>
+> Heinrich already pointed out a potential danger in the current design.
+> If an EFI allocation happens *before* LMB comes up, we might end up
+> updating the efi memory map with the wrong attributes. That would lead
+> to the OS discarding memory areas that should be preserved and we
+> won't figure that out until the OS boots and blows up.
 
-Am 12=2E Juni 2024 04:41:39 MESZ schrieb Simon Glass <sjg@chromium=2Eorg>:
->Hi Tom,
->
->On Tue, 11 Jun 2024 at 16:55, Tom Rini <trini@konsulko=2Ecom> wrote:
->>
->> On Tue, Jun 11, 2024 at 04:08:56PM -0600, Simon Glass wrote:
->> > Hi Tom,
->> >
->> > On Tue, 11 Jun 2024 at 15:01, Tom Rini <trini@konsulko=2Ecom> wrote:
->> > >
->> > > On Tue, Jun 11, 2024 at 12:52:22PM -0600, Simon Glass wrote:
->> > > > Hi Sughosh,
->> > > >
->> > > > On Fri, 7 Jun 2024 at 12:53, Sughosh Ganu <sughosh=2Eganu@linaro=
-=2Eorg> wrote:
->> > > > >
->> > > > > With the move of the LMB structure to a persistent state, there=
- is no
->> > > > > need to declare the variable locally, and pass it as part of th=
-e LMB
->> > > > > API's=2E Remove all local variable instances and change the API=
-'s
->> > > > > correspondingly=2E
->> > > > >
->> > > > > Signed-off-by: Sughosh Ganu <sughosh=2Eganu@linaro=2Eorg>
->> > > > > ---
->> > > > >  arch/arc/lib/cache=2Ec                 |   4 +-
->> > > > >  arch/arm/lib/stack=2Ec                 |   4 +-
->> > > > >  arch/arm/mach-apple/board=2Ec          |  17 ++-
->> > > > >  arch/arm/mach-snapdragon/board=2Ec     |  17 ++-
->> > > > >  arch/arm/mach-stm32mp/dram_init=2Ec    |   7 +-
->> > > > >  arch/arm/mach-stm32mp/stm32mp1/cpu=2Ec |   6 +-
->> > > > >  arch/m68k/lib/bootm=2Ec                |   7 +-
->> > > > >  arch/microblaze/lib/bootm=2Ec          |   4 +-
->> > > > >  arch/mips/lib/bootm=2Ec                |   9 +-
->> > > > >  arch/nios2/lib/bootm=2Ec               |   4 +-
->> > > > >  arch/powerpc/cpu/mpc85xx/mp=2Ec        |   4 +-
->> > > > >  arch/powerpc/include/asm/mp=2Eh        |   4 +-
->> > > > >  arch/powerpc/lib/bootm=2Ec             |  14 +-
->> > > > >  arch/riscv/lib/bootm=2Ec               |   4 +-
->> > > > >  arch/sh/lib/bootm=2Ec                  |   4 +-
->> > > > >  arch/x86/lib/bootm=2Ec                 |   4 +-
->> > > > >  arch/xtensa/lib/bootm=2Ec              |   4 +-
->> > > > >  board/xilinx/common/board=2Ec          |   7 +-
->> > > > >  boot/bootm=2Ec                         |  26 ++--
->> > > > >  boot/bootm_os=2Ec                      |   5 +-
->> > > > >  boot/image-board=2Ec                   |  32 ++---
->> > > > >  boot/image-fdt=2Ec                     |  29 ++---
->> > > > >  cmd/bdinfo=2Ec                         |   6 +-
->> > > > >  cmd/booti=2Ec                          |   2 +-
->> > > > >  cmd/bootz=2Ec                          |   2 +-
->> > > > >  cmd/load=2Ec                           |   7 +-
->> > > > >  drivers/iommu/apple_dart=2Ec           |   7 +-
->> > > > >  drivers/iommu/sandbox_iommu=2Ec        |  15 +--
->> > > > >  fs/fs=2Ec                              |   7 +-
->> > > > >  include/image=2Eh                      |  22 +---
->> > > > >  include/lmb=2Eh                        |  39 +++---
->> > > > >  lib/lmb=2Ec                            |  81 ++++++------
->> > > > >  net/tftp=2Ec                           |   5 +-
->> > > > >  net/wget=2Ec                           |   5 +-
->> > > > >  test/cmd/bdinfo=2Ec                    |   2 +-
->> > > > >  test/lib/lmb=2Ec                       | 187 +++++++++++++----=
-----------
->> > > > >  36 files changed, 270 insertions(+), 333 deletions(-)
->> > > >
->> > > > This isn't necessary=2E=2E=2Eand it will make things harder=2E Yo=
-u can have a
->> > > > global 'lmb' while still allowing passing a different pointer whe=
-n
->> > > > needed=2E
->> > >
->> > > There's only one reservation checking system and list of known
->> > > reservations, keep in mind=2E
->> >
->> > There is only one driver model, too, but we use a pointer=2E It makes
->> > tests much easier=2E
->> >
->> > In fact I see elsewhere in this series that it causes problems with
->> > tests=2E Best to use a pointer so it is easy to update=2E
->>
->> Maybe? I worry that will lead to thinking that we still, like today,
->> have many LMB lists, rather than a single LMB list that everyone must
->> use=2E
->
->Do people worry about that with driver model?
->
->Also IMO there is only really one LMB list today=2E We create it at the
->start of bootm and then it is done when we boot=2E The file-loading
->stuff is what makes all this confusing=2E=2E=2Eand with bootstd that is
->under control as well=2E
+Like I mentioned in one of the earlier replies [1], this is actually
+not an issue, as long as modules are freeing memory that was actually
+allocated/reserved by them. In case of the EFI subsystem marking some
+memory region as EfiReservedMemory, this will send a notification to
+the LMB module, and the LMB module will mark this region as reserved.
+So unless some LMB user decides on freeing up memory that was not
+reserved by it, this should be just fine.
 
-As we have a command line interface bootstd is not the only case to consid=
-er=2E We should not start making assumptions about the sequence of commands=
- entered manually=2E
+Making use of the LMB API's as the common backend for allocating
+memory is a separate thing, and I will look into that. But the above
+highlighted issue is not one, with correctly working code.
 
-Best regards
+-sughosh
 
-Heinrich
-
->
->At lot of this effort seems to be about dealing with random scripts
->which load things=2E We want to make sure we complain if something
->overlaps=2E But we should be making the bootstd case work nicely and
->doing things within that framework=2E Also EFI sort-of has its own
->thing, which it is very-much in control of=2E
->
->Overall I think this is a bit more subtle that just combining allocators=
-=2E
->
->Regards,
->Simon
+[1] - https://lists.denx.de/pipermail/u-boot/2024-June/555883.html
