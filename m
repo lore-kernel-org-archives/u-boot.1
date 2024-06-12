@@ -4,73 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 654CEC27C75
-	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 08:17:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65BB5C27C53
+	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 09:05:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72CC888527;
-	Wed, 12 Jun 2024 10:17:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id AFF1F881A1;
+	Wed, 12 Jun 2024 11:04:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="gFeV+0qH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RuYzFTVP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 895908859A; Wed, 12 Jun 2024 10:17:27 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 6DD90886B1; Wed, 12 Jun 2024 11:04:57 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29EA5883E8
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 10:17:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 4BA598818B
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 11:04:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-57c75464e77so2488607a12.0
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 01:17:25 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-57a30dbdb7fso9601042a12.3
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 02:04:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1718180244; x=1718785044;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mzGfcvXht8cMsMNWELrlsvdc7aeI0uvcORlk/LPnIhc=;
- b=gFeV+0qHwsfZ1eV0kuTtQiFZEgmIedRz7Azp/mbkd+KTLkmPYZixH3cmuhW8kZiaj9
- GqULUSEkDc43t74LM+CL5t9I80HPbAlhZwNKttjsWD5teokUddymCLyoYq1Jlx0csyIi
- cD9DDa2i5P+lYXJDxnK1Am90DlkVGgQEGcAU8=
+ d=linaro.org; s=google; t=1718183095; x=1718787895; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ern7hvwMqmGPVZennoGw4N7POWMiaatkXbmgIiWEz5o=;
+ b=RuYzFTVP8pxW4eNVQvXg4w1lsKm52j0X7UbnTJowz/Xl7wLVHyQUN77Gn/O22NMv0B
+ 5WxSzzPs4boXzewPXVDeU2Hwe9BS+gHuTL3b7h0DamgtN8UedXpOd1VqQHcfNPhhLKBe
+ 1myMuY/vOk090IVF9vPCZ7Qp8zEY3gpUarBNiIL6Ux+AUkK1YLsa/GZ1Lwpah18KzOj7
+ WIMrLK9OzlBVHoJCtRTJ4tgdJXTho8vppsWHGQkqjrRzJ5wwAAjQjsPSt2xu87zLsz8y
+ 3thKEvQNj4SGTfvxmK7vf/ZV9LA2jvTwmOLTHiFm0ondj7O/fPGIXwZ7OHNjnFwqsLnV
+ Ubzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718180244; x=1718785044;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mzGfcvXht8cMsMNWELrlsvdc7aeI0uvcORlk/LPnIhc=;
- b=pVHUFGdA+UuOk2twK26znzGAVKJTIGTUWwUBGd8LI+iqOI88Z+tIzDN5yC34m5Hz/7
- BJq3N0Hbro5XAmXvWXl2guW7qTLqwHvJqDQU3fqBeEy1HHEPrE7oroHDulH08iEviOPa
- sBFEBkMF15Jmlo8nfKkOXDRo8OLRVRFFizD6QZTQvaQohOhUGiinQatAsXzFgy786Vbf
- oHn3UzpcgMm0A+XNK60Bx9RV70ApBjlOGdR3fcKGEq7kd3wdPcl08+S0/sA8fKwxvyLd
- L3HxlwVCn+s0SMMbfqtTPIovJ78Y4W0unvy5X3aSEc9PGNxedZpXpFF957dV3i6rFqTi
- bO7g==
-X-Gm-Message-State: AOJu0Yy4SzHfj6BPRlVZz6dE7Kzs2CLNmVQk36jKHtsl1NtTL81A/4Oi
- P7qXA6iRT3ELLriG+lpcU9g5bZbcSiJzXavxMzaDck79jBOA4Re95t9Wv6leLDOUSrceDF8Yw61
- yBdV8WELocxNHmFGZnPJvU4F50qkREks3gFkEOw==
-X-Google-Smtp-Source: AGHT+IEOPIOqoUR1HTHaBAkl1KgjEZM7JMt/1NBH7u7iRo4SY2v/FFA7cebcj7nfiJMri+RkVXC4zb89w0Gcho9LFE4=
-X-Received: by 2002:a17:906:f190:b0:a6f:ea6:9534 with SMTP id
- a640c23a62f3a-a6f47f82720mr71661066b.76.1718180244324; Wed, 12 Jun 2024
- 01:17:24 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1718183095; x=1718787895;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ern7hvwMqmGPVZennoGw4N7POWMiaatkXbmgIiWEz5o=;
+ b=xUARsFvXsi7uSPwn1Z6LI/bSbsQVHsQE30A2lEkG5lnrPklvaybQVkXD2qfStA911d
+ ez5grfUPIaVy7htOhAmrVtZJEcGxJqTP5SH1iuawOFR8E2+HQbiPcY2+MO5iXykqvU6t
+ LiktGq1m46dJeRlH63aSqMS4cSYRtzeNGGGbCuiBSiXklytgsS1Yje2Lh1B1qcAzYI6O
+ nYnlI3p94ZirAzUfw0EOuxpzGl6dQ9Ys0fN3AO6cb09W9yDWzm8eSVNLIED9lMiEAjm1
+ ntIlmK3BVRO4sFD6VXhmkkHtprFQ65EMFcdHseYXnkMjh8hhAgPr3FV9DdiM0ZzHVwJy
+ P1tQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXJoSLtdA0EZcFYj0K+HoMhbm3Xyl84mOmP7IeSkUoUkO7KiaMFHoXxMHGeznh235Vj0FeMus7zX5+V/hAJP3YAL0jIMw==
+X-Gm-Message-State: AOJu0YysdAfgibUus2fLIY/f4pw9NgnkXXa1RjVZ6wdqC/bnUcq3Zmkn
+ mglhaZWXqaXke+CdpR/04gpdPWMTTp4vVFpokyZ8goff9llY7NZl/nuFWisSJco=
+X-Google-Smtp-Source: AGHT+IGcdMEWhjUOj/U3k3fMD0i2wXoy4ADBKQaUEk5LqN/rg3kx3QtgFaywmqyV/1DKzuBnhHvjwg==
+X-Received: by 2002:a50:8d54:0:b0:57c:aab2:7311 with SMTP id
+ 4fb4d7f45d1cf-57caab2794cmr927389a12.29.1718183094409; 
+ Wed, 12 Jun 2024 02:04:54 -0700 (PDT)
+Received: from ?IPV6:2a02:8109:aa0d:be00::8090? ([2a02:8109:aa0d:be00::8090])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-57aae20243esm10599003a12.68.2024.06.12.02.04.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 12 Jun 2024 02:04:54 -0700 (PDT)
+Message-ID: <548c500c-6895-4026-94a6-4258535e7591@linaro.org>
+Date: Wed, 12 Jun 2024 11:04:52 +0200
 MIME-Version: 1.0
-References: <20240603150749.507797-1-patrick.barsanti@amarulasolutions.com>
-In-Reply-To: <20240603150749.507797-1-patrick.barsanti@amarulasolutions.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Wed, 12 Jun 2024 10:17:12 +0200
-Message-ID: <CAOf5uwkjz0qNkvsWzEQ+kPy66X9Eassq0b1PMDG2r7fYv94_OQ@mail.gmail.com>
-Subject: Re: [PATCH v2] Makefile: Fix include directory for OF_UPSTREAM
-To: Patrick Barsanti <patrick.barsanti@amarulasolutions.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org, 
- xypron.glpk@gmx.de, marek.vasut+renesas@mailbox.org, sumit.garg@linaro.org, 
- afd@ti.com, bb@ti.com, mr.bossman075@gmail.com, leon@georgemail.eu
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 14/42] initcall: Correct use of relocation offset
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Dan Carpenter <dan.carpenter@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+References: <20240611200156.2245525-1-sjg@chromium.org>
+ <20240611200156.2245525-15-sjg@chromium.org>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20240611200156.2245525-15-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,118 +98,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
+Hi Simon,
 
-On Mon, Jun 3, 2024 at 5:08=E2=80=AFPM Patrick Barsanti
-<patrick.barsanti@amarulasolutions.com> wrote:
->
-> Always prioritizing u-boot includes causes problems when trying to migrat=
-e
-> boards to OF_UPSTREAM that have different local devicetree files with
-> respect to the upstream ones, if local DT headers are not dropped.
-> At the same time if local and upstream files are the same, migrations
-> can be, and have been, introduced without dropping local DT headers.
-> This also causes problems whenever upstream DTS and DT headers are patche=
-d.
->
-> For example, now migrating a board based on `imx6ul.dtsi` to OF_UPSTREAM
-> breaks it, as there are some missing defines in a local DT header file
-> (`imx6ul-clock.h`); the solution would be to drop it, which has not alway=
-s
-> been done in previous OF_UPSTREAM migration patches for other boards
-> because most of the time the two are the same. This solution is also
-> vulnerable to ABI breakage, although this has not yet happened since the
-> introduction of OF_UPSTREAM support and is unlikely.
->
-> Maintainers assure backwards compatibility for DT headers when syncing th=
-e
-> upstream folder with the kernel.
-> The problem is that, at the current state, all boards that have not dropp=
-ed
-> their local headers when migrating to OF_UPSTREAM will break once the
-> upstream devicetrees are patched, for example, to use any newly added
-> define which is not present in the local DT header file, even if those
-> changes are backwards compatible.
->
-> This patch fixes these problems by prioritizing upstream includes when
-> `CONFIG_OF_UPSTREAM=3Dy`, while keeping current prioritization when it is
-> not.
-
-Do you have some comments here? We would like to move upstream dts for
-imx6 boards
-too
-
-Michael
-
->
-> Also in case of ABI breakage in the kernel, keeping redundant header file=
-s
-> (only until strictly necessary, e.g. until all boards including them have
-> been migrated to OF_UPSTREAM) together with this selective prioritization
-> of the include folder is a solution for keeping not-yet-migrated boards
-> from breaking.
->
-> Link: https://lore.kernel.org/u-boot/20240528084224.113385-1-patrick.bars=
-anti@amarulasolutions.com/
-> Signed-off-by: Patrick Barsanti <patrick.barsanti@amarulasolutions.com>
-> Tested-by: Michael Trimarchi <michael@amarulasolutions.com>
+On 11/06/2024 22:01, Simon Glass wrote:
+> The relocation offset can change in some initcall sequences. Handle
+> this and make sure it is used for all debugging statements in
+> init_run_list()
+> 
+> Update the trace test to match.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
->
-> Changes in v2:
-> - Reword and correct the commit message following the discussion
-> with Sumit, per Michael's suggestion.
->
->  Makefile | 14 ++++++++++++++
->  1 file changed, 14 insertions(+)
->
-> diff --git a/Makefile b/Makefile
-> index 79b28c2d81..899ae664ca 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -826,6 +826,19 @@ KBUILD_HOSTCFLAGS +=3D $(if $(CONFIG_TOOLS_DEBUG),-g=
-)
->
->  # Use UBOOTINCLUDE when you must reference the include/ directory.
->  # Needed to be compatible with the O=3D option
-> +ifeq ($(CONFIG_OF_UPSTREAM),y)
-> +UBOOTINCLUDE    :=3D \
-> +       -I$(srctree)/dts/upstream/include \
-> +       -Iinclude \
-> +       $(if $(KBUILD_SRC), -I$(srctree)/include) \
-> +       $(if $(CONFIG_$(SPL_)SYS_THUMB_BUILD), \
-> +               $(if $(CONFIG_HAS_THUMB2), \
-> +                       $(if $(CONFIG_CPU_V7M), \
-> +                               -I$(srctree)/arch/arm/thumb1/include), \
-> +                       -I$(srctree)/arch/arm/thumb1/include)) \
-> +       -I$(srctree)/arch/$(ARCH)/include \
-> +       -include $(srctree)/include/linux/kconfig.h
-> +else
->  UBOOTINCLUDE    :=3D \
->         -Iinclude \
->         $(if $(KBUILD_SRC), -I$(srctree)/include) \
-> @@ -837,6 +850,7 @@ UBOOTINCLUDE    :=3D \
->         -I$(srctree)/arch/$(ARCH)/include \
->         -include $(srctree)/include/linux/kconfig.h \
->         -I$(srctree)/dts/upstream/include
-> +endif
->
->  NOSTDINC_FLAGS +=3D -nostdinc -isystem $(shell $(CC) -print-file-name=3D=
-include)
->
-> --
-> 2.45.1
->
+> 
+>   lib/initcall.c              | 6 ++++--
+>   test/py/tests/test_trace.py | 4 ++--
+>   2 files changed, 6 insertions(+), 4 deletions(-)
+> 
+> diff --git a/lib/initcall.c b/lib/initcall.c
+> index c8e2b0f6a38..2686b9aed5c 100644
+> --- a/lib/initcall.c
+> +++ b/lib/initcall.c
+> @@ -49,13 +49,14 @@ static int initcall_is_event(init_fnc_t func)
+>    */
+>   int initcall_run_list(const init_fnc_t init_sequence[])
+>   {
+> -	ulong reloc_ofs = calc_reloc_ofs();
+> +	ulong reloc_ofs;
+>   	const init_fnc_t *ptr;
+>   	enum event_t type;
+>   	init_fnc_t func;
+>   	int ret = 0;
+>   
+>   	for (ptr = init_sequence; func = *ptr, func; ptr++) {
+> +		reloc_ofs = calc_reloc_ofs();
+>   		type = initcall_is_event(func);
+>   
+>   		if (type) {
+> @@ -84,7 +85,8 @@ int initcall_run_list(const init_fnc_t init_sequence[])
+>   				sprintf(buf, "event %d/%s", type,
+>   					event_type_name(type));
+>   			} else {
+> -				sprintf(buf, "call %p", func);
+> +				sprintf(buf, "call %p",
+> +					(char *)func - reloc_ofs);
+>   			}
+>   
+>   			printf("initcall failed at %s (err=%dE)\n", buf, ret);
+> diff --git a/test/py/tests/test_trace.py b/test/py/tests/test_trace.py
+> index f41d4cf71f0..ec1e624722c 100644
+> --- a/test/py/tests/test_trace.py
+> +++ b/test/py/tests/test_trace.py
+> @@ -175,7 +175,7 @@ def check_funcgraph(cons, fname, proftool, map_fname, trace_dat):
+>       # Then look for this:
+>       #  u-boot-1     0.....   282.101375: funcgraph_exit:         0.006 us   |      }
+>       # Then check for this:
+> -    #  u-boot-1     0.....   282.101375: funcgraph_entry:        0.000 us   |    initcall_is_event();
+> +    #  u-boot-1     0.....   282.101375: funcgraph_entry:        0.000 us   |    calc_reloc_ofs();
+>   
+>       expected_indent = None
+>       found_start = False
+> @@ -199,7 +199,7 @@ def check_funcgraph(cons, fname, proftool, map_fname, trace_dat):
+>   
+>       # The next function after initf_bootstage() exits should be
+>       # initcall_is_event()
 
+This comment needs updating.
+> -    assert upto == 'initcall_is_event()'
+> +    assert upto == 'calc_reloc_ofs()'
+>   
+>       # Now look for initf_dm() and dm_timer_init() so we can check the bootstage
+>       # time
 
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
+Otherwise, this looks sensible to me.
 
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+
+-- 
+// Caleb (they/them)
