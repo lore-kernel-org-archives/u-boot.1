@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A131AC27C75
-	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 05:51:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18B61C27C53
+	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 05:55:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BC6F87DB0;
-	Wed, 12 Jun 2024 07:51:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 69286887B2;
+	Wed, 12 Jun 2024 07:55:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Yc/wg01H";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="qd7wRXr9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 399CC882BE; Wed, 12 Jun 2024 07:51:36 +0200 (CEST)
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
- [IPv6:2607:f8b0:4864:20::1036])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 84E3B887B3; Wed, 12 Jun 2024 07:55:55 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC32387702
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 07:51:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CC8F88788
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 07:55:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-2c2fe7f07c4so2898473a91.2
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 22:51:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718171492; x=1718776292; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=E064ZrXBJOZmccm2FMGhkq+XIUtogoWndzTnuFys4LM=;
- b=Yc/wg01HZIxCLyWfo4dFhQb4P6qGGGVxhvNc8mI/FmNxDKeCCi7tdxuF1yigvPmZWD
- M2IEKDPdlonoXlqbJUp1tESfqhDewJbIPc54ZClepUKkpzaVxU5ItWtKNMG6NyzlMLmy
- z4XS2Mhbs5pr/LDGx2T/40hR63BmQ/nZ1TK4f2EQ/rVUhMM86LyJqEeu0vwiOcTA2d9x
- mmqWVSDfLzxEOpWjVfKKxgDrCb75oTcN2Cf/nquA7uo6Cg9mwEhcCJruw/vsPmGDV8nI
- rUxMaxBVLuHXdRCBdlcPZomqP5jF0eBRAv2vU7jDO+z+4EPyZsD6OP0CXgksGUVDzEuC
- Ih0g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718171492; x=1718776292;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=E064ZrXBJOZmccm2FMGhkq+XIUtogoWndzTnuFys4LM=;
- b=uIHQqv3Tej8+eUWdWvOl68ZHnNxxaRgtvT7ReM2cTpfiPtLCv4l2X61/0lwDxM9sKn
- ZNYtz3KkktdmLkd14/SiF0ng0ztW4uDPUcHneauxq8c1XzquRjGsFCv+FtnBDUlw7pQO
- tjNap8iXClr02HLJUDjqP8CQ2dhlwFPUf9esKZfdCCgmuxGTQirGKN94VIEm5gU+5hmy
- 077I2k/u1Sav3K54Holdo6a6w22JP4BMGraqqhLOe6Xl8wQ42sl4H4eG/yzVbyppVAz4
- IPhSk1LIfokVv1WXGyrNlywNQbhIRrzA8TPP1oYcYFQYYzpmCAeoIdfRLBMfZy5na20w
- 5MLg==
-X-Gm-Message-State: AOJu0YxL1MJWY5rf5EwQ4igxCQKV3EEp1W7aNTsCstCV0H5qz7gkUA/w
- nDtXFwtW49fdVIp+1Wsu1Md51aZJah/fDd/Xo9WqAzC+zTja0Q9s/QJck/xPmw3bIpXMA/8SBau
- VwApnfn4KNWJnSo9zwCoYbpi3NQnGqk1qrJsb8g==
-X-Google-Smtp-Source: AGHT+IHB4KXZBFDCEcMwvFcJJKdqv0gWZc2v6yiCnu149J7mutiAsHt0FgACi9PHv7KeP9o2v+AjrmLKbce/HXUj6mw=
-X-Received: by 2002:a17:90a:3fcf:b0:2c2:c79f:976a with SMTP id
- 98e67ed59e1d1-2c4a76e103emr866876a91.32.1718171492387; Tue, 11 Jun 2024
- 22:51:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1718171749; x=1718776549; i=xypron.glpk@gmx.de;
+ bh=lmmAK+xNWNWOJobZT63hhcjrQAEiwWZl8QV4tJUzx78=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=qd7wRXr9crJw/hiH3+y5TNXoPkpBEXJHU3wjG0/JCQ7Bx5BDkZjbV13/WhEiUjN0
+ nfGP1wRoMecUyduSK0Oz+UzKarZQGg/K/FLdyPqKkS+27uGiQb467a964y8s5vq3t
+ Do98GQAISde+SJYRm9Hdn7ShqWUUk4YojPQcdkWAmS98evBbJTaqiPLozF4dpf7RL
+ HjrVhTIQc8Xx5huoQLFoOs+7+WVccWX6gr1Az87IvL32VYQQah6A0G29LrnANsx2J
+ 8GyDzW1US3Vc7eZw9Clzs9SvmVIwfMVBpM9d7q/YjjFTNTdBoXU6vVZSrVpNOOt5t
+ ylYzjZcM4f3/gcyEwQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([109.42.176.212]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M1Ycl-1sFLHq08OR-00EiyQ; Wed, 12
+ Jun 2024 07:55:49 +0200
+Date: Wed, 12 Jun 2024 07:55:47 +0200
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Simon Glass <sjg@chromium.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>
+CC: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH 01/16] lib: fdtdec: Handle multiple memory nodes
+User-Agent: K-9 Mail for Android
+In-Reply-To: <CAFLszTiU17kEPC4JGX4j-KJG7Ff=-fFnV9i2Ua0yvi-v-n6zhA@mail.gmail.com>
+References: <20240522-loongarch-v1-0-1407e0b69678@flygoat.com>
+ <20240522-loongarch-v1-1-1407e0b69678@flygoat.com>
+ <b723aa8e-1d29-4904-953d-160caf097136@gmx.de>
+ <5bd109ff-73ef-4bda-8b5b-2ab583c064d8@app.fastmail.com>
+ <CAFLszTiU17kEPC4JGX4j-KJG7Ff=-fFnV9i2Ua0yvi-v-n6zhA@mail.gmail.com>
+Message-ID: <41DBCED9-6D86-4264-83E1-9173750B63A7@gmx.de>
 MIME-Version: 1.0
-References: <20240611200156.2245525-1-sjg@chromium.org>
- <20240611200156.2245525-18-sjg@chromium.org>
-In-Reply-To: <20240611200156.2245525-18-sjg@chromium.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 12 Jun 2024 08:50:56 +0300
-Message-ID: <CAC_iWjJKYLRx18ZdfCUnnaC-iu5SotiywrfFnCm7msbff0YqVg@mail.gmail.com>
-Subject: Re: [PATCH 17/42] google: Disable TPMv2 on most Chromebooks
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Allen Martin <amartin@nvidia.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
- Martyn Welch <martyn.welch@collabora.com>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Svyatoslav Ryhel <clamor95@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Ws5JvrXfg9peOdxWxUS0nnViX/sITHINUjwsp3GqWCnjYOU5lk8
+ C2eJJ9/6hxvUhmI3OpB2qmBRCHDjiNAVmDOXoZ9SaUtiqjhLd3gC+NYLOoOkScTju3nux+s
+ 0ghq+SiGTt6FVSa6r3TrMkmA6wDYxWY2ZU6hd0m8j8HlVboMfsQoiPLyUL2H+Ji11gwrLIm
+ qEOTW9qCYxM/K+hPxpGYw==
+UI-OutboundReport: notjunk:1;M01:P0:0ynDEQjE0DQ=;elKWpXGEPfvYxIry1SGPbMmrQ9B
+ NM4g13pWyrOt3WSLEPAtuLIvMg9neWylYFrXaT4tu5gJNS32DRbcqmiOjW8Kexm1V+suoqTz9
+ Uk3x8fPL809+GBw1DYuIn/oBq3HERloOwyuBY/tBZ1hNB6WMcp8+Qz6basJCGqE4HZP597ccO
+ i6GXxhcOajfY5cr6t7j4obZ8lfTMGyrtfXI8uX3qKXyPZJeNrT8IZ0msVL9T5aJAquwroZsY7
+ 1wOZY0GclEsX/28j2jTXXyJfG9ujJSZC/78g9nJ2aMLYRH0B+OCo1ZCYxAc1Gc9u+Tmn4pvZe
+ p5+Dsyk1C2a6balh4Mb49KhSBi+TJfpxz1Tp1Aqp6FHABeeUMC3FxGpG48AAm8gYJBccGJTHD
+ /Zw//Vd35p6Ryd6DKlI1DyTi4sV7+S6re2lkbniq67vrI4A69TvWkl/4WFyWE/YtopqXvjq1Z
+ Via4dzv7sauEnZhbio0vVxhm4pWptbdz1v2nCXAY1x5FYSVud+9EwRncBNocL7sgYnbRw5A9V
+ c0CO5VSF9quwU+RnTVKlVjQIccvzDfRNQ7oEaOal+mPt18EAlzk+Gs4VWJyIoPV7ajVhquv83
+ Hd6Z8SEEvWd1qF31CXYUvR+eQmRAxz9Dusby+DHfyzDLoN4UOSrGlz0iDL5ZU3KTf5wZNzYj2
+ kZ6CXOG+XMMOpn6NRicsA4nVVM+FVSssA3itRZoPKrPe3CxjcpFOXGqXJOs2HKnyXM3jLCoYD
+ s3x9uJsR1u/fGK4iQRF2jX7ck0qkpasO8eAKl53VyUeQKAzuFHB5qtdynU/IF5Dgr5yM7ZSIf
+ N8vC6kcyCyPbtIxdCw/1FotjGq8FLmIc/3Eu3mEUsFa5k=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,113 +93,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 11 Jun 2024 at 23:02, Simon Glass <sjg@chromium.org> wrote:
->
-> This feature is not present on older Chromebooks, so disable the
-> setting.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
->  configs/chromebook_link64_defconfig    | 1 +
->  configs/chromebook_link_defconfig      | 1 +
->  configs/chromebook_samus_defconfig     | 1 +
->  configs/chromebook_samus_tpl_defconfig | 1 +
->  configs/nyan-big_defconfig             | 4 +---
->  configs/snow_defconfig                 | 1 +
->  6 files changed, 6 insertions(+), 3 deletions(-)
->
-> diff --git a/configs/chromebook_link64_defconfig b/configs/chromebook_link64_defconfig
-> index 7cf23b29e46..9583f87bf0f 100644
-> --- a/configs/chromebook_link64_defconfig
-> +++ b/configs/chromebook_link64_defconfig
-> @@ -80,6 +80,7 @@ CONFIG_SYS_NS16550=y
->  CONFIG_SYS_NS16550_PORT_MAPPED=y
->  CONFIG_SPI=y
->  CONFIG_TPM_TIS_LPC=y
-> +# CONFIG_TPM_V2 is not set
->  CONFIG_USB_STORAGE=y
->  CONFIG_USB_KEYBOARD=y
->  CONFIG_FRAMEBUFFER_SET_VESA_MODE=y
-> diff --git a/configs/chromebook_link_defconfig b/configs/chromebook_link_defconfig
-> index a9f91dd9b26..75a7a488a92 100644
-> --- a/configs/chromebook_link_defconfig
-> +++ b/configs/chromebook_link_defconfig
-> @@ -70,6 +70,7 @@ CONFIG_SYS_NS16550_PORT_MAPPED=y
->  CONFIG_SOUND=y
->  CONFIG_SPI=y
->  CONFIG_TPM_TIS_LPC=y
-> +# CONFIG_TPM_V2 is not set
->  CONFIG_USB_STORAGE=y
->  CONFIG_USB_KEYBOARD=y
->  CONFIG_VIDEO_COPY=y
-> diff --git a/configs/chromebook_samus_defconfig b/configs/chromebook_samus_defconfig
-> index 40cc449b9b3..8cdad8d2344 100644
-> --- a/configs/chromebook_samus_defconfig
-> +++ b/configs/chromebook_samus_defconfig
-> @@ -74,6 +74,7 @@ CONFIG_SOUND_I8254=y
->  CONFIG_SOUND_RT5677=y
->  CONFIG_SPI=y
->  CONFIG_TPM_TIS_LPC=y
-> +# CONFIG_TPM_V2 is not set
->  CONFIG_USB_STORAGE=y
->  CONFIG_USB_KEYBOARD=y
->  CONFIG_VIDEO_COPY=y
-> diff --git a/configs/chromebook_samus_tpl_defconfig b/configs/chromebook_samus_tpl_defconfig
-> index 3e7298f16af..1be57560f89 100644
-> --- a/configs/chromebook_samus_tpl_defconfig
-> +++ b/configs/chromebook_samus_tpl_defconfig
-> @@ -96,6 +96,7 @@ CONFIG_SOUND_RT5677=y
->  CONFIG_SPI=y
->  CONFIG_TPL_SYSRESET=y
->  CONFIG_TPM_TIS_LPC=y
-> +# CONFIG_TPM_V2 is not set
->  CONFIG_USB_STORAGE=y
->  CONFIG_USB_KEYBOARD=y
->  CONFIG_FRAMEBUFFER_SET_VESA_MODE=y
-> diff --git a/configs/nyan-big_defconfig b/configs/nyan-big_defconfig
-> index 4dec710cf8d..78fb7580da7 100644
-> --- a/configs/nyan-big_defconfig
-> +++ b/configs/nyan-big_defconfig
-> @@ -11,8 +11,6 @@ CONFIG_DEFAULT_DEVICE_TREE="tegra124-nyan-big"
->  CONFIG_SPL_TEXT_BASE=0x80108000
->  CONFIG_SPL_STACK=0x800ffffc
->  CONFIG_BOOTSTAGE_STASH_ADDR=0x83000000
-> -CONFIG_DEBUG_UART_BASE=0x70006000
-> -CONFIG_DEBUG_UART_CLOCK=408000000
->  CONFIG_TEGRA124=y
->  CONFIG_TARGET_NYAN_BIG=y
->  CONFIG_TEGRA_GPU=y
-> @@ -75,7 +73,6 @@ CONFIG_DM_REGULATOR=y
->  CONFIG_REGULATOR_AS3722=y
->  CONFIG_DM_REGULATOR_FIXED=y
->  CONFIG_PWM_TEGRA=y
-> -CONFIG_DEBUG_UART_SHIFT=2
->  CONFIG_SYS_NS16550=y
->  CONFIG_SOUND=y
->  CONFIG_I2S=y
-> @@ -83,6 +80,7 @@ CONFIG_I2S_TEGRA=y
->  CONFIG_SOUND_MAX98090=y
->  CONFIG_TEGRA114_SPI=y
->  CONFIG_TPM_TIS_INFINEON=y
-> +# CONFIG_TPM_V2 is not set
->  CONFIG_USB=y
->  CONFIG_USB_EHCI_HCD=y
->  CONFIG_USB_EHCI_TEGRA=y
-> diff --git a/configs/snow_defconfig b/configs/snow_defconfig
-> index 3a617c6cf40..2c0757194bd 100644
-> --- a/configs/snow_defconfig
-> +++ b/configs/snow_defconfig
-> @@ -88,6 +88,7 @@ CONFIG_SOUND_MAX98095=y
->  CONFIG_SOUND_WM8994=y
->  CONFIG_EXYNOS_SPI=y
->  CONFIG_TPM_TIS_INFINEON=y
-> +# CONFIG_TPM_V2 is not set
->  CONFIG_USB=y
->  CONFIG_USB_XHCI_HCD=y
->  CONFIG_USB_XHCI_DWC3=y
-> --
-> 2.34.1
->
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+Am 11=2E Juni 2024 20:51:55 MESZ schrieb Simon Glass <sjg@chromium=2Eorg>:
+>Hi Jiaxun,
+>
+>On Tue, 11 Jun 2024 at 07:48, Jiaxun Yang <jiaxun=2Eyang@flygoat=2Ecom> w=
+rote:
+>>
+>>
+>>
+>> =E5=9C=A82024=E5=B9=B46=E6=9C=8811=E6=97=A5=E5=85=AD=E6=9C=88 =E4=B8=8B=
+=E5=8D=881:26=EF=BC=8CHeinrich Schuchardt=E5=86=99=E9=81=93=EF=BC=9A
+>> Hi Heinrich,
+>>
+>> Thanks for your comments, will fix most of them in next reversion=2E
+>>
+>> [=2E=2E=2E]
+>> >> -            gd->bd->bi_dram[bank]=2Estart =3D (phys_addr_t)res=2Est=
+art;
+>> >
+>> > The conversion is superfluous=2E
+>>
+>> This is necessary as phys_addr_t can be unsigned long or unsigned long =
+long=2E
+
+In C++ you would get an error=2E
+In C an assignment to an integer type of different size does not lead to a=
+ warning=2E
+
+Best regards
+
+Heinrich
+
+
+>>
+>> >
+>> [=2E=2E=2E]
+>> >> +    __maybe_unused const char *final_name;
+>> >> +    __maybe_unused int final_reg;
+>> >
+>> > '__maybe_unused' is superfluous=2E
+>>
+>> This is necessary as when LOG_DEBUG is disabled these two variables won=
+'t
+>> be referenced=2E Compilers would complain about it=2E
+>>
+>> >
+>> >>
+>> >>      gd->ram_base =3D (unsigned long)~0;
+>> >
+>> > gd->ram_base =3D ULONG_MAX;
+>> >
+>> >>
+>> [=2E=2E=2E]
+>>
+>> Thanks
+>> --
+>
+>Can you please add a test for this function? Perhaps test/dm/fdtdec=2Ec
+>might be a good place?
+>
+>Regards,
+>Simon
+>
+>> - Jiaxun
