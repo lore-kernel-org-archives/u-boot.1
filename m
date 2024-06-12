@@ -4,110 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 805EEC27C53
-	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 09:38:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8641CC27C53
+	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 09:58:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D882688791;
-	Wed, 12 Jun 2024 11:38:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D6FBF8812C;
+	Wed, 12 Jun 2024 11:58:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sNI5KQ4n";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="V9RDpfMC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6E2E887BF; Wed, 12 Jun 2024 11:38:11 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 20BDD88763; Wed, 12 Jun 2024 11:58:49 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D96C58842C
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 11:38:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 148E681F9A
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 11:58:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-42278f3aea4so9443395e9.1
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 02:38:09 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-52bc29c79fdso5866813e87.1
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 02:58:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718185089; x=1718789889; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=VzljB8jmpcEO9vcgAPg2Nspsl2b2Y8mmxAD2e8IXtG0=;
- b=sNI5KQ4nv9IyNfJhJH/J1aqnERzUYWvdYH98CM5LiqFrw5HbkI0icuwr0oLttTk9hx
- X7CJdKLlAth8xT+jctcwtgcLHFTnJisivKi/nuiUcZ96vDMuVJzbKfLCipPJz1DK/9b4
- Zaf4jxhybdqWzEAUm9VDeInYBhOUyeIoeQNcLDwyPk/TD80ExN+1s/giv2iPNSF7h+lK
- SLVJXNUIZkffFgKaqSt2UBun9GRvDI5NFn6+iwgr34Uz/XntzADkCy9hw3sGoTBjwPIn
- e6Umj51X+BFQumHKhLd59tkf75U9Uj7g7+OZiQFXEy8FCdFD02fBNIPKY25tr6mi9jNx
- TuKw==
+ d=amarulasolutions.com; s=google; t=1718186326; x=1718791126;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ULyZZfH7lZkFprtTxQIPJ34k5l+Ovw9yOHLw4IG4yTg=;
+ b=V9RDpfMC0NCrlrnjljNHdpGhs0knprFBrRe04vqTmEs8biXMhw8kPdhkLrAjUZmVzU
+ W+8KUhoMMlnPKwt5fF4f6BdzSMQcBmX+K+yZnSbGpHyLAh8YwMuXywHFZ2Sk110uCQcV
+ 2OC3t8OMUypbI25ZUS9Wz4I14v3+8ffwPkGT0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718185089; x=1718789889;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=VzljB8jmpcEO9vcgAPg2Nspsl2b2Y8mmxAD2e8IXtG0=;
- b=FQEwC/NCwSqbKFkpd94EoXyRexTndvj79JBH4Mn0tb/oF51i6vIhoUngDzvAmtRv0t
- waOYYbKlqYPhqp5GcnW/x/t49rEp00deAHQSObNFhd2hKfIJsmdE/i86lcA5BWMfL6BM
- qzPfA7E8G036+d9GpSvma+aPuuS1wXRJGZMnuqGs01gtpY/+4FF4TurSFh5lVdmwbtK7
- ish/gTHl7A5ypocX4DqbrO9AH8eHpVJ3KTMqEPr9pmi9l32ZtRbqufGUXyofFalXMUa+
- PtjTFr13eLniDvRKkzKl2KTSkC6zotH/j3AcOcYWQIzHodPsc2u3b8DkhvqsfQ2XGkQE
- bFwg==
+ d=1e100.net; s=20230601; t=1718186326; x=1718791126;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ULyZZfH7lZkFprtTxQIPJ34k5l+Ovw9yOHLw4IG4yTg=;
+ b=TmUJoDO751MIA1o4Tg7/lotJV8Mn50TKu7aLbaTmkGISm2h3FIzfqFnJIh6oNbKAxL
+ Wwwb7cjG0hhBqJJ+bbU5+CXmVzSZTpOTLqFKeb+Ue0V0Gmrrc0joUYVv0/X4WRWaeyQo
+ pFdfc3JfKmGLHS6UM0s8L1UtGzL6H27FD/6w5wPIx0K78/Abe/yV5vBwYOUWkSdFnfvS
+ ugmOfQBLxnH+cE+oP1SvRx0ImjY+1jb+2aoWvj15gD3M4sCnIWsQ0nTqLTr/TZtj9n4K
+ n1Sqb2Bzh7s2tFelHuZTWIvVLwi9bJcEGdQB7j62K/kKGmuu1fKEyEioC5lyuczpsF1Y
+ zBMQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV/RZC+Wb6uIKfyoZpWIJx9ezzbm1crhpHQjnSjwLM5saxvWPWzwAKEF/S6eah7r0omMkeUtErKoiriejz94sFf9nFNeA==
-X-Gm-Message-State: AOJu0YzfFK8tINdLkaNMJ610bz3+YHsHTC2fNo+iML9nkiEf1fdu0jj9
- tx1RVMhqSinlPdNJ0GKayHkYatc33QZfws2bFOCWEE0Kln2ItSLsmMZRcJgA+AM=
-X-Google-Smtp-Source: AGHT+IEa9jduPgL5gzXIBcDAH5XUaC9iVf2SX3cjtGVpA/X0ZzyvVO2vj5hj7djYeBo/QKfuhbEV+A==
-X-Received: by 2002:a05:600c:4587:b0:421:7983:f1c4 with SMTP id
- 5b1f17b1804b1-422863a85bcmr11697725e9.6.1718185089242; 
- Wed, 12 Jun 2024 02:38:09 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:30bd:bf21:eed1:8aeb?
- ([2a01:e0a:982:cbb0:30bd:bf21:eed1:8aeb])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42286fe7629sm19043315e9.10.2024.06.12.02.38.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Jun 2024 02:38:08 -0700 (PDT)
-Message-ID: <37218b15-80ec-4bb5-9c64-91b94f5c2679@linaro.org>
-Date: Wed, 12 Jun 2024 11:38:08 +0200
+ AJvYcCWyH940E/9huyi596EBVf570O6y8S95sRvJa538IiEpdrxXHIX4wBVZskQfT/lNjHOuoiovm9iDRpGXNMIvdlvlyA/9jA==
+X-Gm-Message-State: AOJu0YzDy4Qa2PvmG5RpyOsbWLrkdbi+0KhJJ3akPjvxU/K0is3tR5ZJ
+ dMFTk+ZomOGiZH7BXJnYJO9NPIyi2Zzqzpaae6fGZG3bo7OLYTNOgbpZbEovIooqNvLXTSiVmYP
+ 0eaBWc4JejJ89FBfu5L0IRk3YonHJoZT77xPIcQ==
+X-Google-Smtp-Source: AGHT+IHs3V925DcEGqs/dKjHnvQu4x3c2l9YdAOIw9quEWg5rEMMzkldvE6O9zsBpJTsGS9ohExZLkcEpR/1mZjtDmI=
+X-Received: by 2002:a05:6512:3c87:b0:52c:8075:4f3 with SMTP id
+ 2adb3069b0e04-52c9a3e3cebmr1090671e87.36.1718186326184; Wed, 12 Jun 2024
+ 02:58:46 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 18/42] meson: Correct driver declaration for meson_axg_gpio
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Jerome Brunet <jbrunet@baylibre.com>,
- Peter Robinson <pbrobinson@gmail.com>, u-boot-amlogic@groups.io
-References: <20240611200156.2245525-1-sjg@chromium.org>
- <20240611200156.2245525-19-sjg@chromium.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20240611200156.2245525-19-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20240603150749.507797-1-patrick.barsanti@amarulasolutions.com>
+ <d66b2844-6e5e-455c-ae71-7d511c2b6e81@mailbox.org>
+In-Reply-To: <d66b2844-6e5e-455c-ae71-7d511c2b6e81@mailbox.org>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Wed, 12 Jun 2024 11:58:34 +0200
+Message-ID: <CAOf5uwnkDi=Q_v8iwWmc-6WrFph3+04NCOQH4K6MGHhe3mNFYQ@mail.gmail.com>
+Subject: Re: [PATCH v2] Makefile: Fix include directory for OF_UPSTREAM
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Patrick Barsanti <patrick.barsanti@amarulasolutions.com>,
+ u-boot@lists.denx.de, 
+ trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de, 
+ sumit.garg@linaro.org, afd@ti.com, bb@ti.com, mr.bossman075@gmail.com, 
+ leon@georgemail.eu
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,95 +87,66 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/06/2024 22:01, Simon Glass wrote:
-> This should use the driver macros so that the driver appears in the
-> linker list. Fix this.
-> 
-> Fixes: 8587839f19d ("pinctrl: meson: add axg support")
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
->   drivers/pinctrl/meson/pinctrl-meson-axg-pmx.c | 2 +-
->   drivers/pinctrl/meson/pinctrl-meson-axg.c     | 4 ++--
->   drivers/pinctrl/meson/pinctrl-meson-axg.h     | 2 +-
->   drivers/pinctrl/meson/pinctrl-meson-g12a.c    | 4 ++--
->   4 files changed, 6 insertions(+), 6 deletions(-)
-> 
-> diff --git a/drivers/pinctrl/meson/pinctrl-meson-axg-pmx.c b/drivers/pinctrl/meson/pinctrl-meson-axg-pmx.c
-> index 52c726cf038..15ebd574ef1 100644
-> --- a/drivers/pinctrl/meson/pinctrl-meson-axg-pmx.c
-> +++ b/drivers/pinctrl/meson/pinctrl-meson-axg-pmx.c
-> @@ -179,7 +179,7 @@ static const struct dm_gpio_ops meson_axg_gpio_ops = {
->   	.direction_output = meson_gpio_direction_output,
->   };
->   
-> -const struct driver meson_axg_gpio_driver = {
-> +U_BOOT_DRIVER(meson_axg_gpio) = {
->   	.name	= "meson-axg-gpio",
->   	.id	= UCLASS_GPIO,
->   	.probe	= meson_gpio_probe,
-> diff --git a/drivers/pinctrl/meson/pinctrl-meson-axg.c b/drivers/pinctrl/meson/pinctrl-meson-axg.c
-> index 94e09cd3f8a..ed3f92b2d75 100644
-> --- a/drivers/pinctrl/meson/pinctrl-meson-axg.c
-> +++ b/drivers/pinctrl/meson/pinctrl-meson-axg.c
-> @@ -939,7 +939,7 @@ struct meson_pinctrl_data meson_axg_periphs_pinctrl_data = {
->   	.num_groups	= ARRAY_SIZE(meson_axg_periphs_groups),
->   	.num_funcs	= ARRAY_SIZE(meson_axg_periphs_functions),
->   	.num_banks	= ARRAY_SIZE(meson_axg_periphs_banks),
-> -	.gpio_driver	= &meson_axg_gpio_driver,
-> +	.gpio_driver	= DM_DRIVER_REF(meson_axg_gpio),
->   	.pmx_data	= &meson_axg_periphs_pmx_banks_data,
->   };
->   
-> @@ -953,7 +953,7 @@ struct meson_pinctrl_data meson_axg_aobus_pinctrl_data = {
->   	.num_groups	= ARRAY_SIZE(meson_axg_aobus_groups),
->   	.num_funcs	= ARRAY_SIZE(meson_axg_aobus_functions),
->   	.num_banks	= ARRAY_SIZE(meson_axg_aobus_banks),
-> -	.gpio_driver	= &meson_axg_gpio_driver,
-> +	.gpio_driver	= DM_DRIVER_REF(meson_axg_gpio),
->   	.pmx_data	= &meson_axg_aobus_pmx_banks_data,
->   };
->   
-> diff --git a/drivers/pinctrl/meson/pinctrl-meson-axg.h b/drivers/pinctrl/meson/pinctrl-meson-axg.h
-> index c8d2b3af036..a6581bab500 100644
-> --- a/drivers/pinctrl/meson/pinctrl-meson-axg.h
-> +++ b/drivers/pinctrl/meson/pinctrl-meson-axg.h
-> @@ -61,6 +61,6 @@ struct meson_pmx_axg_data {
->   	}
->   
->   extern const struct pinctrl_ops meson_axg_pinctrl_ops;
-> -extern const struct driver meson_axg_gpio_driver;
-> +extern U_BOOT_DRIVER(meson_axg_gpio);
->   
->   #endif /* __PINCTRL_MESON_AXG_H__ */
-> diff --git a/drivers/pinctrl/meson/pinctrl-meson-g12a.c b/drivers/pinctrl/meson/pinctrl-meson-g12a.c
-> index 24f47f82558..67114df6824 100644
-> --- a/drivers/pinctrl/meson/pinctrl-meson-g12a.c
-> +++ b/drivers/pinctrl/meson/pinctrl-meson-g12a.c
-> @@ -1253,7 +1253,7 @@ static struct meson_pinctrl_data meson_g12a_periphs_pinctrl_data = {
->   	.num_groups	= ARRAY_SIZE(meson_g12a_periphs_groups),
->   	.num_funcs	= ARRAY_SIZE(meson_g12a_periphs_functions),
->   	.num_banks	= ARRAY_SIZE(meson_g12a_periphs_banks),
-> -	.gpio_driver	= &meson_axg_gpio_driver,
-> +	.gpio_driver	= DM_DRIVER_REF(meson_axg_gpio),
->   	.pmx_data	= &meson_g12a_periphs_pmx_banks_data,
->   };
->   
-> @@ -1267,7 +1267,7 @@ static struct meson_pinctrl_data meson_g12a_aobus_pinctrl_data = {
->   	.num_groups	= ARRAY_SIZE(meson_g12a_aobus_groups),
->   	.num_funcs	= ARRAY_SIZE(meson_g12a_aobus_functions),
->   	.num_banks	= ARRAY_SIZE(meson_g12a_aobus_banks),
-> -	.gpio_driver	= &meson_axg_gpio_driver,
-> +	.gpio_driver	= DM_DRIVER_REF(meson_axg_gpio),
->   	.pmx_data	= &meson_g12a_aobus_pmx_banks_data,
->   };
->   
+Hi Marek
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+On Wed, Jun 12, 2024 at 11:32=E2=80=AFAM Marek Vasut <marek.vasut@mailbox.o=
+rg> wrote:
+>
+> On 6/3/24 5:07 PM, Patrick Barsanti wrote:
+> > Always prioritizing u-boot includes causes problems when trying to migr=
+ate
+> > boards to OF_UPSTREAM that have different local devicetree files with
+> > respect to the upstream ones, if local DT headers are not dropped.
+> > At the same time if local and upstream files are the same, migrations
+> > can be, and have been, introduced without dropping local DT headers.
+> > This also causes problems whenever upstream DTS and DT headers are patc=
+hed.
+> >
+> > For example, now migrating a board based on `imx6ul.dtsi` to OF_UPSTREA=
+M
+> > breaks it, as there are some missing defines in a local DT header file
+> > (`imx6ul-clock.h`); the solution would be to drop it, which has not alw=
+ays
+> > been done in previous OF_UPSTREAM migration patches for other boards
+> > because most of the time the two are the same. This solution is also
+> > vulnerable to ABI breakage, although this has not yet happened since th=
+e
+> > introduction of OF_UPSTREAM support and is unlikely.
+> >
+> > Maintainers assure backwards compatibility for DT headers when syncing =
+the
+> > upstream folder with the kernel.
+>
+> ... upstream directory ...
+>
+> > The problem is that, at the current state, all boards that have not dro=
+pped
+> > their local headers when migrating to OF_UPSTREAM will break once the
+> > upstream devicetrees are patched, for example, to use any newly added
+> > define which is not present in the local DT header file, even if those
+> > changes are backwards compatible.
+>
+> Why not simply remove the headers ?
+>
+
+If we remove the headers then other boards that are not migrated, can
+have some problem
+on building. We should consider not only new boards but even those
+that ones are still not migrated.
+I think that is already described here
+
+> Add a WARNING if there are local duplicates .
+>
+
+Why should a WARNING help here? We would like to have some migration
+plans but not break them.
+
+Michael
+
+
+> [...]
