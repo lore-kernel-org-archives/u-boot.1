@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 280ADC27C75
-	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 20:24:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F333C27C75
+	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 20:24:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7823887C3;
-	Wed, 12 Jun 2024 22:24:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3CA8588855;
+	Wed, 12 Jun 2024 22:24:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NbfcNVKF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="k3TuooXN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F196C882FE; Wed, 12 Jun 2024 22:24:33 +0200 (CEST)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
+ id 1C5228884B; Wed, 12 Jun 2024 22:24:37 +0200 (CEST)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E16C6882B6
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 22:24:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 04F66885A4
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 22:24:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-627e3368394so3191887b3.2
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 13:24:31 -0700 (PDT)
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6b064841f81so1774036d6.1
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 13:24:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718223871; x=1718828671; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1718223874; x=1718828674; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=eBylGjEFqxvaXOym7olkucFBOL4ybFGlGYPdkscyJdY=;
- b=NbfcNVKFO27+kI5iYH96yWIFtBHGe4xTxVZrMlAXWM0tAX2rjBHpHfLu9WoSaNz4nA
- GuSMrNvz+ltygtrL2acMvor3oiL/mDGdfppPafjUcPaRgwVKgx3cBuXGKMiQiBgkg6cN
- zrwgccpya1jMsY/w48QEupqgYZjKK/Z9IB4rI=
+ bh=CkA4F487TPVQgn6by5/R9oPsR6ifkZ6uNxoBQOmV9KU=;
+ b=k3TuooXNmhloXJBpDh3OUbPUaUDibmUY4ynOqox/AN7BN5j7L9f25ZRV3G4ns6OJ4g
+ sTBPSSvLMM2tdnxm7AXNIOHfZzwKxN1Po+ql6+xDAlqWaGrVrcjtPH6amRIzdhkrH/KB
+ yELv0+DY8XbV2uTN27Ca2adPaxUOOJ9Ss0Vk0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718223871; x=1718828671;
+ d=1e100.net; s=20230601; t=1718223874; x=1718828674;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=eBylGjEFqxvaXOym7olkucFBOL4ybFGlGYPdkscyJdY=;
- b=s1qmkBsFHGjeoaNxOcFyY3LlbMnMWx76KqtobXNAqdqF6Lk+fXc+MyB6GbOSj+QIis
- 6+ChpT9aJdgV21oF78HIu+mrS6sAP6tGZPAotQ9pm7klOOY8Jkp/dKeF3QYN5fThDuHv
- FVShIi6bsbfuiCBO3zHxpa4KLRfZssJGu5b+z7ejTVXtXFaVG9Fc4zMezFJN7Jen2h1R
- 0DOAB6GEtnPq5yZzF44OpUnpkrOQoBULU+GO4ksc0f8Wi4TW6ZVEiHm5Vc2RbncQESdX
- e4xv6cVLYM6ZeVarPnt7zXNTMUmGdfUbFi1V0+/VAxIcYIei0dL9mufGbEt2BnwGZ3Bg
- p8Kg==
+ bh=CkA4F487TPVQgn6by5/R9oPsR6ifkZ6uNxoBQOmV9KU=;
+ b=b11uFnrb81rKWWjtR00ncZweeSLYjwZPkysukF8EWfLncxbgcHes2fCS9gAx51yHfv
+ fnMIXdkxBowV8OABjH93RvShrD0Vpt3Dhkzs/fohq2w5MFReFZv7MFv3VCt/XYMeSMT9
+ 4MTCk5xUfrgxtphFcwGMgsDh3fH1VM1tWkop6ieMtFfdeMWrRx9o8N/KkhTBezevHLnw
+ Te3vG9eQBdJMgOMwrs6DNgJyM/ucI+ccPNp8M2RQi2X+qNQbL/fUqrgPXf2pAdsRCRKm
+ zjtreZo7hbds8m+hqCxn8KtNZ+7S1iwqnGwv/8RFaGNO5ZW/RYRMwhLwVlwJy0lCht8T
+ kpEg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXrsN/xlhPfho5ZpNIEOWDrwPQdNTbxJI2AncvxFxTaCOSbPMzGmqL2sZQD/ciXPCCwcX+fe0+IxDI57Ov9QRG8MkUUXw==
-X-Gm-Message-State: AOJu0Yyahu+wf45Oh3+BMCAWtDfa3kvsgmO4YLRBWPudMFxNQMZa7pYs
- PQtmfTELqz6RoHxJBzw4WZrxvhyJlCgPPGc6lwS2YWeTCqkVZAUVc/mT3rMXKwfYWMZFAfvrhbt
- RBs5lqPZtGho5O1N1KETq2zGpz3IQhpnlBSVc
-X-Google-Smtp-Source: AGHT+IHIZ5fkZrqajq3Tvq4dCiMXL1BhjcpIKs05MZAgLSi1SETrAHA+qOjvVezSEOClanoVKqOICwtpfga4KG6r0RY=
-X-Received: by 2002:a25:ef50:0:b0:dfb:be1:b1d1 with SMTP id
- 3f1490d57ef6-dfe6775a306mr2822438276.35.1718223870731; Wed, 12 Jun 2024
- 13:24:30 -0700 (PDT)
+ AJvYcCVuntq7n+YSQLMZR9eS+5y5rpK17cZvfyuHOPcjuQGKQpNtd7KzXn+qlp9ZK0pJtMkp5NIo/nhs/2ry/YBjIDxpVN3yZA==
+X-Gm-Message-State: AOJu0YxtjbRJw4J6hGRfyh8JH1HvVBR7GnZ+NNPQRKiDifCMdOrfMbvi
+ wT5A5AeInHOIcdQ0LCiCF/OsnDG3dkd+hlYy0hHVDlaLD0faZJwnEo6mj41LO6vVmUtGH9jd2FP
+ 61DXH+eM9EeMlY5FpLCufXkvo6eeIznVnCgdU+6zDH/dP3Qw/xQ==
+X-Google-Smtp-Source: AGHT+IFHqK/AikyYRJb9lMcrIlgs/AwTW/BV/UdECRAQEZD4hBsPPea2EE8wWZlTfJw2Qy18bghLgFQ5Rc8VwPGjJTQ=
+X-Received: by 2002:a05:6214:3904:b0:6b0:8410:6857 with SMTP id
+ 6a1803df08f44-6b190cec4bfmr23313766d6.9.1718223873701; Wed, 12 Jun 2024
+ 13:24:33 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240612-bootflow-efi-crash-v1-0-27b71b0ff08a@cherry.de>
- <20240612-bootflow-efi-crash-v1-3-27b71b0ff08a@cherry.de>
-In-Reply-To: <20240612-bootflow-efi-crash-v1-3-27b71b0ff08a@cherry.de>
+ <20240612-bootflow-efi-crash-v1-2-27b71b0ff08a@cherry.de>
+In-Reply-To: <20240612-bootflow-efi-crash-v1-2-27b71b0ff08a@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 12 Jun 2024 14:24:20 -0600
-Message-ID: <CAFLszTgFMD-j-GzcKXrdGRUiahgmEku752CD7ftJgXA6PsztDw@mail.gmail.com>
-Subject: Re: [PATCH 3/4] doc: bootstd: fix typos
+Date: Wed, 12 Jun 2024 14:24:21 -0600
+Message-ID: <CAFLszTgk3MDyesHxVvY-zPgu+7g6Ty4V_h_KKB4_Mq2qweG16w@mail.gmail.com>
+Subject: Re: [PATCH 2/4] boot: fix typos in help text of Kconfig configs
 To: Quentin Schulz <foss+uboot@0leil.net>
 Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
  Quentin Schulz <quentin.schulz@cherry.de>
@@ -89,14 +89,11 @@ On Wed, 12 Jun 2024 at 08:58, Quentin Schulz <foss+uboot@0leil.net> wrote:
 >
 > From: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> This fixes a few syntactic issues as well as typos and grammar.
+> This fixes a handful of typos in various help texts in Kconfig configs.
 >
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 > ---
->  doc/develop/bootstd.rst | 50 ++++++++++++++++++++++++-------------------------
->  1 file changed, 25 insertions(+), 25 deletions(-)
->
-
-Thank you!
+>  boot/Kconfig | 22 +++++++++++-----------
+>  1 file changed, 11 insertions(+), 11 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
