@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32EE7C27C53
-	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 14:41:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5C69C27C53
+	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 14:41:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A04D86F6E;
+	by phobos.denx.de (Postfix) with ESMTP id DFA8B887F0;
 	Wed, 12 Jun 2024 16:41:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 69561887DD; Wed, 12 Jun 2024 16:41:10 +0200 (CEST)
+ id 97C9A86784; Wed, 12 Jun 2024 16:41:10 +0200 (CEST)
 Received: from smtp-bc09.mail.infomaniak.ch (smtp-bc09.mail.infomaniak.ch
  [45.157.188.9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 682B386784
+ by phobos.denx.de (Postfix) with ESMTPS id BB0528867D
  for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 16:41:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
@@ -25,21 +25,20 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
  [10.4.36.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4VzpBW6plMz5Gh;
- Wed, 12 Jun 2024 16:41:07 +0200 (CEST)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4VzpBX3YKhz3gC;
+ Wed, 12 Jun 2024 16:41:08 +0200 (CEST)
 Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4VzpBW386Pz7sl; Wed, 12 Jun 2024 16:41:07 +0200 (CEST)
+ id 4VzpBW6rZcz8H5; Wed, 12 Jun 2024 16:41:07 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Subject: [PATCH 0/2] rockchip: puma-rk3399/ringneck-px30: make closer to
- Jaguar/Tiger defconfigs
-Date: Wed, 12 Jun 2024 16:40:47 +0200
-Message-Id: <20240612-ringneck-bootd-v1-0-f0bc3816b822@cherry.de>
+Date: Wed, 12 Jun 2024 16:40:48 +0200
+Subject: [PATCH 1/2] rockchip: ringneck-px30: get closer to other Theobroma
+ defconfigs
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAG+zaWYC/x3MQQqAIBBA0avIrBN0CKmuEi1MJxsCDY0IpLsnL
- d/i/wqFMlOBSVTIdHPhFBt0J8DtNgaS7JsBFfbKaJSZY4jkDrmmdHlJdtRorCKtBmjRmWnj5x/
- Oy/t+T+zvIGAAAAA=
+Message-Id: <20240612-ringneck-bootd-v1-1-f0bc3816b822@cherry.de>
+References: <20240612-ringneck-bootd-v1-0-f0bc3816b822@cherry.de>
+In-Reply-To: <20240612-ringneck-bootd-v1-0-f0bc3816b822@cherry.de>
 To: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
  Klaus Goger <klaus.goger@cherry.de>
 Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>, 
@@ -62,33 +61,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-To ease maintenance, limit test scenarios and variations, let's enable a
-few things:
- - full bootstd
- - a handful of CLI commands like gpio, squashfs, erofs, pmic,
-   regulator, and the likes.
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-This also disables support for non-Linux OSes as Linux is the primary
-target, we may revisit this in the future if necessary.
+RK3588 Jaguar and Tiger, and RK3399 Puma use standard boot with the full
+feature set, so let's do that as well for PX30 Ringneck.
 
-Also disables support for zImage on Puma since those aren't supported on
-Aarch64, one is supposed to use Image.gz (or any other supported
-compression format) with booti instead.
+Disable support for unused OSes as Linux is the primary target.
+
+Enable a bunch of commands:
+ - boot/bootd
+ - erofs
+ - gpio
+ - iminfo
+ - imxtract
+ - itest
+ - pmic
+ - regulator
+ - sleep
+ - squashfs
+
+that could be useful and are also found in Jaguar and Tiger defconfigs.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
-Quentin Schulz (2):
-      rockchip: ringneck-px30: get closer to other Theobroma defconfigs
-      rockchip: puma-rk3399: get closer to other Theobroma defconfigs
-
- configs/puma-rk3399_defconfig   |  9 ++++++++-
  configs/ringneck-px30_defconfig | 16 +++++++++++-----
- 2 files changed, 19 insertions(+), 6 deletions(-)
----
-base-commit: 787eaa9c8df2660c748358eb689de916f991e22e
-change-id: 20240612-ringneck-bootd-ea9126a0e108
+ 1 file changed, 11 insertions(+), 5 deletions(-)
 
-Best regards,
+diff --git a/configs/ringneck-px30_defconfig b/configs/ringneck-px30_defconfig
+index dedf35d4347..a0c1fec0951 100644
+--- a/configs/ringneck-px30_defconfig
++++ b/configs/ringneck-px30_defconfig
+@@ -20,6 +20,7 @@ CONFIG_DEBUG_UART=y
+ CONFIG_FIT=y
+ CONFIG_FIT_VERBOSE=y
+ CONFIG_SPL_LOAD_FIT=y
++CONFIG_BOOTSTD_FULL=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/px30-ringneck-haikou.dtb"
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+@@ -34,12 +35,15 @@ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x200
+ CONFIG_SPL_ATF=y
+ # CONFIG_TPL_FRAMEWORK is not set
+ # CONFIG_TPL_SYS_MALLOC_SIMPLE is not set
+-# CONFIG_CMD_BOOTD is not set
++# CONFIG_BOOTM_NETBSD is not set
++# CONFIG_BOOTM_PLAN9 is not set
++# CONFIG_BOOTM_RTEMS is not set
++# CONFIG_CMD_VBE is not set
++# CONFIG_BOOTM_VXWORKS is not set
+ # CONFIG_CMD_ELF is not set
+-# CONFIG_CMD_IMI is not set
+-# CONFIG_CMD_XIMG is not set
+ # CONFIG_CMD_LZMADEC is not set
+ # CONFIG_CMD_UNZIP is not set
++CONFIG_CMD_GPIO=y
+ CONFIG_CMD_GPT=y
+ CONFIG_CMD_I2C=y
+ # CONFIG_CMD_LOADB is not set
+@@ -47,9 +51,11 @@ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_USB=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
+-# CONFIG_CMD_ITEST is not set
+ # CONFIG_CMD_SETEXPR is not set
+-# CONFIG_CMD_SLEEP is not set
++CONFIG_CMD_PMIC=y
++CONFIG_CMD_REGULATOR=y
++CONFIG_CMD_EROFS=y
++CONFIG_CMD_SQUASHFS=y
+ # CONFIG_SPL_DOS_PARTITION is not set
+ # CONFIG_ISO_PARTITION is not set
+ CONFIG_EFI_PARTITION_ENTRIES_NUMBERS=64
+
 -- 
-Quentin Schulz <quentin.schulz@cherry.de>
+2.45.2
 
