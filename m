@@ -4,89 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B5F5C27C53
-	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 21:40:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BE12C27C53
+	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 23:41:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2EDE6886F9;
-	Wed, 12 Jun 2024 23:40:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2C398888A1;
+	Thu, 13 Jun 2024 01:41:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QMj4L49z";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Nhnn/wKy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94B18883D3; Wed, 12 Jun 2024 23:40:09 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id 3298C88863; Wed, 12 Jun 2024 22:25:01 +0200 (CEST)
+Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
+ [IPv6:2607:f8b0:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78854885D0
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 23:40:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 62D1D8867D
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 22:24:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-6f9b5bc97baso195389a34.0
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 14:40:07 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-681ad081695so191356a12.3
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 13:24:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718228406; x=1718833206; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=9FkzPBlnrYrHFw5Kl8yb7LlXjGUKJVPCnoNkijx9QpA=;
- b=QMj4L49zwRIdmqrRnA77o9CusEmMv9H643iG+uag/SXtQsO316iuh8tgHfh2g7e8ph
- V7FtyBfZqIWff2mAMp2dWLBXh2LLYimf8iJactdzKt7/yO3MirlaqdlyX3u7GvQMymBC
- y0KTvnSqpm92BgLtcqLMLloWzu6ln96aGvjAA=
+ d=chromium.org; s=google; t=1718223897; x=1718828697; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Se1SXhKr6SLpDBmEMEFkaN7sgM8srHIXel/BHHfei9w=;
+ b=Nhnn/wKygkis9ZRzE4Voyj3UKYZvrWyW7NWk9J4ofy60OzrqdW3vIi/bR40AR2W0gY
+ 9mMu2x6YCE7PgZvXWHwtvU1aoJZnjTdgSaRvMruCZtGlw8PTbk3Rv8I4UGQy9LRWba0G
+ YVWRjSRmAyskT7+b+EezDO5+b9IUpf0Jnzqr4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718228406; x=1718833206;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9FkzPBlnrYrHFw5Kl8yb7LlXjGUKJVPCnoNkijx9QpA=;
- b=vdkqS4ksdr0NY/b+5L2tnJiUi4eftx1ne4HD737CeObsHAu8y2QiTUMsgPe4sB+D2T
- ocw3LR1u/odekxRuN9YU0XKYxCOJhn6mEt6ozfSmJ8bSiShN1uH2KqRySKufZxSBlKxT
- ugSuHyv8eWEgyb9gbpOhH2QzKGkjLUYIb4StcNlscrFwT6aiADiMhhKIyG/9LWIPe1ji
- 8NwbUaxCkd/KAAuFqP1pszDCFfxvZQ1qhjq/xhIE6Dj7o/QTQ6PH6AbXpm3voi3XthN1
- +NHCHY0wT4uptELErT2fdBDuJlO4ANmHhHpBmoVY7fJ+Tv9N1XHCLZ3bvVYAlBBvxzGd
- cQqw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU6ttNplnY+ExA7sBS556xros0ErvZGaLTYM+9+kTmcfpnVELMKxN5Ka6nx8FCjzcfx+y4QdrDrw7TDp+tX88v2VLhCag==
-X-Gm-Message-State: AOJu0YwT3ksJN0PmVKkFTos3hI1/6sT+Zg7AjfjA65RqVmPXZpCYiPAy
- mXDIHSI0YOuPyk7U0UWvvYAZ2gS6HadW2IRv00sFbnLzW8f7EuUNXHUt4QBeK8w=
-X-Google-Smtp-Source: AGHT+IEwOpfwA6V6qhjwLFuwdQ2HaO8sUCq8UdoJ+JKIuWDZYveTLtIP7y7gwlzMBwLIr7zrChA9dw==
-X-Received: by 2002:a05:6870:a2d2:b0:255:1bb8:8603 with SMTP id
- 586e51a60fabf-2551bb889a1mr2595495fac.3.1718228405912; 
- Wed, 12 Jun 2024 14:40:05 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
- [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2567a94e3dbsm26995fac.3.2024.06.12.14.40.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Jun 2024 14:40:05 -0700 (PDT)
-Date: Wed, 12 Jun 2024 15:40:01 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
- Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>
-Subject: Re: [RFC PATCH 04/31] lmb: remove local instances of the lmb
- structure variable
-Message-ID: <20240612214001.GI68077@bill-the-cat>
-References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
- <20240607185240.1892031-5-sughosh.ganu@linaro.org>
- <CAFLszTjQW72_Z8Dx4g1mVx5Y=wq9xeXYVBffxLUto6sDp6CMbw@mail.gmail.com>
- <20240611210145.GM68077@bill-the-cat>
- <CAFLszTjd4Sf=_um7QbkpbLAO9=2=vX_LkHv6br=9FPAPFhbH5Q@mail.gmail.com>
- <20240611225554.GO68077@bill-the-cat>
- <CAFLszTi1ZR+qeEuEbGUE2Fv3h1ahX3S_2ySBPQjgkfruiW8Xtw@mail.gmail.com>
- <20240612172244.GG68077@bill-the-cat>
- <CAFLszThj1wmF4zOLDjSjHX1cg8RfiHMGgpbRccJ-VJu2dtihNw@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1718223897; x=1718828697;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Se1SXhKr6SLpDBmEMEFkaN7sgM8srHIXel/BHHfei9w=;
+ b=W1rx1o9FbIjPS4k5sS1Q2caGlOEv+VGGrOl8VhwxiI7lYrRWrM+yfHutKx2u7Vs2g3
+ OuxyyFPaYWAsEPeP9RuEtK2BjlrHZrwWrwaS0xoHVOhn1CXJ2R2sBEFvnYi4gUX1jmL3
+ YkIx1CLIEJ0anwmmLs/IIepHwKX5yNyZu38fNAMkWHn5Lxh1PKJ8UdbsLaSphiE88Chj
+ OynFqqoVDqQ0+nlwkJHq6lwjO5+Y7FxGYPQz1vEqOPqyyuGAuTi7yNrfC5QihP//wWY6
+ MEPzGtKMI3cT2H497olAe1l/Q6udVZP0fvk24UVukfIGlpwmuhk8tWvQfqXiUvZf8j8P
+ xtVQ==
+X-Gm-Message-State: AOJu0YxQ+1TQqFvxD2p8AMejRBE17hZmwC7RNjTuduMoqG77tW45pl4n
+ Y/x5CDnWSAvML/QD1h+eXNPBPqypf6YSaXSy3pwABiD2nTVKgaovx0Buy1xQCFaziMRyndYT2L5
+ m5jhxXZ09tng4VEZWiWx3TTSXuX6DcMNqE63L
+X-Google-Smtp-Source: AGHT+IFmTy4fW3SQf1NiS7xl7kbYhyiHePllnbH5Sqbm5EyvdkHkSGpfFXU8wKlXlF0dtelm8HL13wBNtd+Ip+WNjfI=
+X-Received: by 2002:a05:6a20:daa2:b0:1b8:3ddc:913b with SMTP id
+ adf61e73a8af0-1b8a8dfb0ecmr3217076637.0.1718223896724; Wed, 12 Jun 2024
+ 13:24:56 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="VU9ut0uuEh9jo7p4"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThj1wmF4zOLDjSjHX1cg8RfiHMGgpbRccJ-VJu2dtihNw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240611200156.2245525-1-sjg@chromium.org>
+ <CAC_iWjKAaWnphnBUi6YTRMn1EthbX5mZtjh78YXyxWoXqmJcGw@mail.gmail.com>
+In-Reply-To: <CAC_iWjKAaWnphnBUi6YTRMn1EthbX5mZtjh78YXyxWoXqmJcGw@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 12 Jun 2024 14:24:36 -0600
+Message-ID: <CAFLszTi7BoAoDc9=+m77pwSAuGSZDQeX-MgzWc9ZJC3ZxJXwMQ@mail.gmail.com>
+Subject: Re: [PATCH 00/42] labgrid: Provide an integration with Labgrid
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Alexander Gendin <agendin@matrox.com>, 
+ Alexey Brodkin <Alexey.Brodkin@synopsys.com>, Allen Martin <amartin@nvidia.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andre Przywara <andre.przywara@arm.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, Andrew Davis <afd@ti.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
+ Christian Taedcke <christian.taedcke@weidmueller.com>, 
+ Dan Carpenter <dan.carpenter@linaro.org>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Jagan Teki <jagan@amarulasolutions.com>, Jerome Brunet <jbrunet@baylibre.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Lukas Funke <lukas.funke@weidmueller.com>, 
+ Manorit Chawdhry <m-chawdhry@ti.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
+ Martyn Welch <martyn.welch@collabora.com>,
+ =?UTF-8?Q?Michal_Such=C3=A1nek?= <msuchanek@suse.de>, 
+ Neha Malcom Francis <n-francis@ti.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Nishanth Menon <nm@ti.com>, 
+ Pavel Herrmann <morpheus.ibis@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
+ Peter Robinson <pbrobinson@gmail.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Samuel Holland <samuel@sholland.org>, Sean Anderson <seanga2@gmail.com>, 
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Trevor Woerner <twoerner@gmail.com>, Vignesh Raghavendra <vigneshr@ti.com>,
+ u-boot-amlogic@groups.io
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Thu, 13 Jun 2024 01:41:34 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,69 +113,188 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Ilias,
 
---VU9ut0uuEh9jo7p4
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Jun 12, 2024 at 02:24:25PM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Wed, 12 Jun 2024 at 11:22, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 12 Jun 2024 at 00:09, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Hi Simon
+>
+> On Tue, 11 Jun 2024 at 23:02, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > On Tue, Jun 11, 2024 at 08:41:39PM -0600, Simon Glass wrote:
+> > Labgrid provides access to a hardware lab in an automated way. It is
+> > possible to boot U-Boot on boards in the lab without physically touching
+> > them. It relies on relays, USB UARTs and SD muxes, among other things.
 > >
-> > [snip]
-> > > Also IMO there is only really one LMB list today. We create it at the
-> > > start of bootm and then it is done when we boot. The file-loading
-> > > stuff is what makes all this confusing...and with bootstd that is
-> > > under control as well.
-> > >
-> > > At lot of this effort seems to be about dealing with random scripts
-> > > which load things. We want to make sure we complain if something
-> > > overlaps. But we should be making the bootstd case work nicely and
-> > > doing things within that framework. Also EFI sort-of has its own
-> > > thing, which it is very-much in control of.
-> > >
-> > > Overall I think this is a bit more subtle that just combining allocat=
-ors.
+> > By way of background, about 4 years ago I wrong a thing called Labman[1]
+> > which allowed my lab of about 30 devices to be operated remotely, using
+> > tbot for the console and build integration. While it worked OK and I
+> > used it for many bisects, I didn't take it any further.
 > >
-> > I think this gets to the main misunderstanding. The problem isn't
-> > handling bootstd, or EFI boot, or even assorted scripts. Those are all
-> > cases where things are otherwise (sufficiently) well-defined. The
-> > problem is "security" and that a "carefully crafted payload" could do
-> > something malicious. That's why we have to do all of this stuff sooner
-> > rather than later in our boot process.
->=20
-> That's the first I have heard of this, actually, but a bit more detail
-> would help. How does the payload get loaded? I'm just not sure about
-> the overall goals. It seems that everyone else is already familiar -
-> can someone please take the time to point me to the details?
+> > It turns out that there was already an existing program, called Labgrid,
+> > which I did not know about at time (thank you Tom for telling me). It is
+> > more rounded than Labman and has a number of advantages:
+> >
+> > - does not need udev rules, mostly
+> > - has several existing users who rely on it
+> > - supports multiple machines exporting their devices
+> >
+> > It lacks a 'lab check' feature and a few other things, but these can be
+> > remedied.
+> >
+> > On and off over the past several weeks I have been experimenting with
+> > Labgrid. I have managed to create an initial U-Boot integration (this
+> > series) by adding various features to Labgrid[2] and the U-Boot test
+> > hooks.
+> >
+> > I hope that this might inspire others to set up boards and run tests
+> > automatically, rather than relying on infrequent, manual test. Perhaps
+> > it may even be possible to have a number of labs available.
+> >
+> > Included in the integration are a number of simple scripts which make it
+> > easy to connect to boards and run tests:
+> >
+> > ub-int <target>
+> >     Build and boot on a target, starting an interactive session
+> >
+> > ub-cli <target>
+> >     Build and boot on a target, ensure U-Boot starts and provide an interactive
+> >     session from there
+> >
+> > ub-smoke <target>
+> >     Smoke test U-Boot to check that it boots to a prompt on a target
+> >
+> > ub-bisect
+> >     Bisect a git tree to locate a failure on a particular target
+> >
+> > ub-pyt <target> <testspec>
+> >     Run U-Boot pytests on a target
+> >
+> > Some of these help to provide the same tbot[4] workflow which I have
+> > relied on for several years, albeit much simpler versions.
+> >
+> > The goal here is to create some sort of script which can collect
+> > patches from the mailing list, apply them and test them on a selection
+> > of boards. I suspect that script already exists, so please let me know
+> > what you suggest.
+> >
+> > I hope you find this interesting and take a look!
+>
+> Thanks this is interesting!
 
-Well, the short version I believe of the first CVE we got (and so
-started abusing LMB) was along the lines of "load an image near where
-the U-Boot stack is, smash things for fun and exploits".
+Thanks!
 
---=20
-Tom
+> I only got cc'ed on the cover letter and I'll slowly have a look on
+> the rest. A naive question -- I saw you did integrate this on gitlab
+> with your internal lab. How secure is this? Could we schedule weekly
+> builds that run on various remote labs and get results on actual
+> hardware? Or do we have to rely on users for that ?
 
---VU9ut0uuEh9jo7p4
-Content-Type: application/pgp-signature; name="signature.asc"
+I believe this could be done. My understanding is that any custodian
+can push to a tree which runs on all available runners.
 
------BEGIN PGP SIGNATURE-----
+If you have any ideas on the script I mentioned, let me know!
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZqFa4ACgkQFHw5/5Y0
-tywUPwv+JJ9SNSmgsjmu672Hhpm2p2bBpmLsXHJSwXOUFBOde781JIEpR2y6+387
-JCCtrJnrbHpL45EJDEvQD0g6R+HEps7gvj89LzmB2DgHB/D6eNgO2lfUSD0jq6Sv
-O7IkKjfbcEynTuz9iAmfxRWkvmk00ufMrvYxUtVZI+OJzrpwRmEMvhkhBnBDoaXR
-Uosd/1b24Q7p5aA7sWMmvAqFNdVrS/14sFH++s2tEYDrydx8aEIKXRN0wqBHLpHX
-qH2mF7DV9TIpjNykzxnzbEZjqiyuGKQuCDsGlwVSZ9pWoOByvazadnSMerkjRKb+
-mGmvJSrb8Kjf0lcGEOyqLYTECa3u+kjgaek/bMbPcxlW5D/ayebVD5TIwt/CuEox
-a/ovDrq9hQPzuAssyFlG5UZ1XPfJlIUln/Blpnq8fJZ/E3arKHWxehihMWtWOjmk
-McMlos/YkOcq/9+MuQ1Q35Yyt/wz/ui5Ee1eOaYRlxNeXIPFreToka6s2XTap6sC
-oKotxT/q
-=J63V
------END PGP SIGNATURE-----
+Regards,
+Simon
 
---VU9ut0uuEh9jo7p4--
+
+>
+> Thanks
+> /Ilias
+>
+> >
+> > [1] https://github.com/sjg20/u-boot/tree/lab6a
+> > [2] https://github.com/labgrid-project/labgrid/pull/1411
+> > [3] https://github.com/sjg20/uboot-test-hooks/tree/labgrid
+> > [4] https://tbot.tools/index.html
+> >
+> >
+> > Simon Glass (42):
+> >   trace: Update test to tolerate different trace-cmd version
+> >   binman: efi: Correct entry docs
+> >   binman: Regenerate nxp docs
+> >   binman: ti: Regenerate entry docs
+> >   binman: Update the entrydocs header
+> >   buildman: Make mrproper an argument to _reconfigure()
+> >   buildman: Make mrproper an argument to _config_and_build()
+> >   buildman: Make mrproper an argument to run_commit()
+> >   buildman: Avoid rebuilding when --mrproper is used
+> >   buildman: Add a flag to force mrproper on failure
+> >   buildman: Retry the build for current source
+> >   buildman: Add a way to limit the number of buildmans
+> >   dm: core: Enhance comments on bind_drivers_pass()
+> >   initcall: Correct use of relocation offset
+> >   am33xx: Provide a function to set up the debug UART
+> >   sunxi: Mark scp as optional
+> >   google: Disable TPMv2 on most Chromebooks
+> >   meson: Correct driver declaration for meson_axg_gpio
+> >   test: Allow signaling that U-Boot is ready
+> >   test: Make bootstd init run only on sandbox
+> >   test: Use a constant for the test timeout
+> >   test: Pass stderr to stdout
+> >   test: Release board after tests complete
+> >   log: Allow tests to pass with CONFIG_LOGF_FUNC_PAD set
+> >   test: Allow connecting to a running board
+> >   test: Decode exceptions only with sandbox
+> >   test: Avoid failing skipped tests
+> >   test: dm: Show failing driver name
+> >   test: Check help output
+> >   test: Create a common function to get the config
+> >   test: Introduce the concept of a role
+> >   test: Move the receive code into a function
+> >   test: Separate out the exception handling
+> >   test: Detect dead connections
+> >   test: Tidy up remaining exceptions
+> >   test: Introduce lab mode
+> >   test: Improve handling of sending commands
+> >   test: Fix mulptiplex_log typo
+> >   test: Avoid double echo when starting up
+> >   test: Try to shut down the lab console gracefully
+> >   test: Add a section for closing the connection
+> >   CI: Allow running tests on sjg lab
+> >
+> >  .gitlab-ci.yml                                | 151 +++++++++++++++++
+> >  arch/arm/dts/sunxi-u-boot.dtsi                |   1 +
+> >  arch/arm/mach-omap2/am33xx/board.c            |  18 +-
+> >  configs/chromebook_link64_defconfig           |   1 +
+> >  configs/chromebook_link_defconfig             |   1 +
+> >  configs/chromebook_samus_defconfig            |   1 +
+> >  configs/chromebook_samus_tpl_defconfig        |   1 +
+> >  configs/nyan-big_defconfig                    |   4 +-
+> >  configs/snow_defconfig                        |   1 +
+> >  drivers/core/lists.c                          |  16 ++
+> >  drivers/pinctrl/meson/pinctrl-meson-axg-pmx.c |   2 +-
+> >  drivers/pinctrl/meson/pinctrl-meson-axg.c     |   4 +-
+> >  drivers/pinctrl/meson/pinctrl-meson-axg.h     |   2 +-
+> >  drivers/pinctrl/meson/pinctrl-meson-g12a.c    |   4 +-
+> >  lib/initcall.c                                |   6 +-
+> >  test/py/conftest.py                           |  86 ++++++++--
+> >  test/py/tests/test_dm.py                      |   5 +-
+> >  test/py/tests/test_help.py                    |   6 +-
+> >  test/py/tests/test_log.py                     |  11 +-
+> >  test/py/tests/test_trace.py                   |   6 +-
+> >  test/py/tests/test_ut.py                      |   1 +
+> >  test/py/u_boot_console_base.py                | 154 ++++++++++++------
+> >  test/py/u_boot_console_exec_attach.py         |  31 +++-
+> >  test/py/u_boot_console_sandbox.py             |   2 +-
+> >  test/py/u_boot_spawn.py                       | 123 ++++++++++++--
+> >  test/test-main.c                              |  16 +-
+> >  tools/binman/entries.rst                      | 115 +++++++++----
+> >  tools/binman/entry.py                         |   2 +-
+> >  tools/binman/etype/efi_capsule.py             |  40 ++---
+> >  tools/binman/etype/efi_empty_capsule.py       |  22 +--
+> >  tools/binman/etype/ti_secure.py               |  45 ++---
+> >  tools/buildman/builder.py                     |  18 +-
+> >  tools/buildman/builderthread.py               |  44 +++--
+> >  tools/buildman/buildman.rst                   |   8 +-
+> >  tools/buildman/cmdline.py                     |   6 +-
+> >  tools/buildman/control.py                     | 141 +++++++++++++++-
+> >  tools/buildman/pyproject.toml                 |   6 +-
+> >  tools/buildman/test.py                        | 121 ++++++++++++++
+> >  tools/u_boot_pylib/terminal.py                |   7 +-
+> >  39 files changed, 1003 insertions(+), 226 deletions(-)
+> >
+> > --
+> > 2.34.1
+> >
