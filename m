@@ -4,91 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EEB3C27C79
-	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 02:35:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32593C27C78
+	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 02:41:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B53F5887EF;
-	Wed, 12 Jun 2024 04:33:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 705C1881BC;
+	Wed, 12 Jun 2024 04:41:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SK2lmO+o";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mPLOVlm5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7754288315; Wed, 12 Jun 2024 01:15:03 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id B24668872E; Wed, 12 Jun 2024 04:41:53 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 275928871C
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 01:15:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 383D5881BC
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 04:41:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-42138eadf64so14285795e9.3
- for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 16:15:01 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-627ebbe7720so65717197b3.0
+ for <u-boot@lists.denx.de>; Tue, 11 Jun 2024 19:41:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1718147700; x=1718752500; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=1SnK722UF5gQtV5gKPMHvDpazj/jDZqxf6MafxYMW7M=;
- b=SK2lmO+oS4JPxS1vNIZBHyIs7azHAmtBHp/Oqk/XRdJUanEPc3mNBRrGwtZDGDuQiV
- ek+KbreMSvAGESePzHicdoj4WD7g76gpCxZ5q8u29vs4zj9CA6IC2stU6VbARGYx4qsC
- qZwT3fmFPQpY2KAokWlRKNh0Ltxf378yLpZ5mNwGbKJ8r+yTXyjOsK1cdCCAE4iqlQr1
- A13o545/t8mX7cyjusxCn8P4bFP8E1f6fAqHj2f8vPmlxcEVY+H6ZijBjYcK7KKEpOv/
- n13NiOQZHM/agH509BCNAdSfJ5ojiw2Joauk8X/ZENZTppx8Z3dlukxfuN2js6kfU9Ku
- vhYA==
+ d=chromium.org; s=google; t=1718160110; x=1718764910; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=2JsXkKvICTl5XrqWhc8LDhKqpKTOkSsLgiHLrmDQ6No=;
+ b=mPLOVlm5SZEU4mqiE/FMK3gs0fEFmwjDcclSOJuiMHrVb5LmsqTYPxmijH8HIb2OT7
+ ft8i5fOGEWqSPAOcbbFn8LYLvAdEd1fp5aYMknK0DjyX7DebfNa1kMKa8nDuojaQ0iTS
+ RDJ/fh5Rdv7lAwQYxK0/ryZ05vZjSt/A7CqMw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718147700; x=1718752500;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1SnK722UF5gQtV5gKPMHvDpazj/jDZqxf6MafxYMW7M=;
- b=ioW0glTvogo7ZwQ3A08i+9Bo08/6cpYNUG7mdJyOhibwYh6Nyp7HA2qr0F4xdU2MeA
- Og82/vdZrgsI4ZrawQsUR7fUmjwVHMqm9oPwVvapK8vSCXLYeU0jqvw/YU7k18H0uidu
- sZ1UXNdKIE8jwWfZRLmQzTyYS+Gh5Znc96Y+PGm9fcxHNq5c/rDdQ7SUitMLm7LvgGu/
- Z2oKevGAXi9je3g1XgSWt8aMcPqou4Cdlrrbj05YhyVt5b+5CaDZiqFSma/urAGpbzvq
- /fjkRum5JfJReOUKUVsll4rHMq8JMct2y3ieWPysd9CFLJ8Ko5/NMz9F/LM11ruqLEvA
- ftHg==
+ d=1e100.net; s=20230601; t=1718160110; x=1718764910;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2JsXkKvICTl5XrqWhc8LDhKqpKTOkSsLgiHLrmDQ6No=;
+ b=Z4QXvqK60hXQIod25daHoEkXu3qAIjXKhEy/C7Rly7tUJmpzoTewMKJv5+ztwBSgyr
+ PW1yAuhTkSedjSBZug+UKy5y0Y+8D5jmkrv5zW8QBFKB6DvNKX7W1L16nRCrMcFPASFL
+ sZhp7+aS+fsbeQEiIZ+uDLE0fT7W3UlHw6svkQuSDi3K4Ngr7gr+9vGOlws7o5ikdWPu
+ RQf5iVo9x88ZYvIeBvDWSb3Aj/oDV0chL2LrJ/sLdb8c+VrWhvc+sIpzuBoH0gUP1I75
+ /7jL9ZI647OEqavotveHI3ExOv530/6flKdsb2JeGhkjfB56TNvqwHqGZ4ILzOFeczB3
+ Y7Fg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVJu2Sz/2/ZVZbFcp7iyVZRXr8VwAaOoqvV3inqEExVC8AWB5jOdI5x7yMegKnUohcLAmCL8okwFacZgU+TNvjHp9Fiug==
-X-Gm-Message-State: AOJu0YwPEcxLa7ItL/lCZ2235YOJTZXOoFqDigjNLEV2OpoV/FNGnH4Y
- /SFaVeyjrEoztjnCbQ6V5SLDTIFh6GaliOCan/r4PTtfrD4ymutm
-X-Google-Smtp-Source: AGHT+IHfolRuv6Itnb3MzBGZQ62m7ddTIWqFsiNJp9ZauEGjkISXziJ0FKuY2msyzGqxOv4+BKlVqw==
-X-Received: by 2002:a05:600c:a46:b0:422:683b:df2a with SMTP id
- 5b1f17b1804b1-422862acc15mr3790245e9.13.1718147700463; 
- Tue, 11 Jun 2024 16:15:00 -0700 (PDT)
-Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
- [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-35f231d5761sm7052096f8f.35.2024.06.11.16.14.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Jun 2024 16:15:00 -0700 (PDT)
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Arseniy Krasnov <avkrasnov@salutedevices.com>,
- Simon Glass <sjg@chromium.org>, Dmitry Dunaev <dunaev@tecon.ru>,
- Devarsh Thakkar <devarsht@ti.com>, Bin Meng <bmeng.cn@gmail.com>,
- Raymond Mao <raymond.mao@linaro.org>, Stefan Bosch <stefan_b@posteo.net>,
- Nikhil M Jain <n-jain1@ti.com>, Shiji Yang <yangshiji66@outlook.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de,
- John Crispin <john@phrozen.org>
-Subject: [PATCH v3 9/9] doc: convert README.LED to .rst documentation
-Date: Wed, 12 Jun 2024 01:14:24 +0200
-Message-ID: <20240611231435.10366-10-ansuelsmth@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240611231435.10366-1-ansuelsmth@gmail.com>
-References: <20240611231435.10366-1-ansuelsmth@gmail.com>
+ AJvYcCXYclRr12+HAAMqYKGcWRvIzkKjGqCeuyrsl2hQwW205r9UMhTea2Dk7RMH9BCitR5EumH/CPQykV/3l73lLGW3v3a65w==
+X-Gm-Message-State: AOJu0Ywr5Glbewo3vnSxGfrZ6VSTimgSE6Rd2iP3Hy6+nO/snKAfsW1D
+ 23UP+d7FZLqDUW9RKY7Bw/SVsqGCRNdFLzpDg25+Nfr3/RSmjxvYqVoSRleohShIYTTJ/EnxZHA
+ kuAvMYBqAidG1MiEI2TwPYbC7oDq4sg+Ftfsk
+X-Google-Smtp-Source: AGHT+IH3Zt+Dpsa8/ODlDCSmW0yixmnPr20HRjY8Y5+dQ6xUl9UkOQ5dxFnCgwI70RBZnJECKcl/A7AdvSoVtvO/a3M=
+X-Received: by 2002:a0d:eec2:0:b0:627:dde3:fa79 with SMTP id
+ 00721157ae682-62fbaa3cdc7mr4807067b3.22.1718160109952; Tue, 11 Jun 2024
+ 19:41:49 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 12 Jun 2024 04:33:23 +0200
+References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
+ <20240607185240.1892031-5-sughosh.ganu@linaro.org>
+ <CAFLszTjQW72_Z8Dx4g1mVx5Y=wq9xeXYVBffxLUto6sDp6CMbw@mail.gmail.com>
+ <20240611210145.GM68077@bill-the-cat>
+ <CAFLszTjd4Sf=_um7QbkpbLAO9=2=vX_LkHv6br=9FPAPFhbH5Q@mail.gmail.com>
+ <20240611225554.GO68077@bill-the-cat>
+In-Reply-To: <20240611225554.GO68077@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 11 Jun 2024 20:41:39 -0600
+Message-ID: <CAFLszTi1ZR+qeEuEbGUE2Fv3h1ahX3S_2ySBPQjgkfruiW8Xtw@mail.gmail.com>
+Subject: Re: [RFC PATCH 04/31] lmb: remove local instances of the lmb
+ structure variable
+To: Tom Rini <trini@konsulko.com>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>, 
+ Fabio Estevam <festevam@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,441 +93,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Convert README.LED to .rst documentation and include all the relevant
-documentation in the status_led.h.
+Hi Tom,
 
-Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
----
- doc/README.LED         |  77 --------------
- doc/api/index.rst      |   1 +
- doc/api/status_led.rst |  35 +++++++
- include/status_led.h   | 224 ++++++++++++++++++++++++++++++++++++++++-
- 4 files changed, 256 insertions(+), 81 deletions(-)
- delete mode 100644 doc/README.LED
- create mode 100644 doc/api/status_led.rst
+On Tue, 11 Jun 2024 at 16:55, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Tue, Jun 11, 2024 at 04:08:56PM -0600, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Tue, 11 Jun 2024 at 15:01, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Tue, Jun 11, 2024 at 12:52:22PM -0600, Simon Glass wrote:
+> > > > Hi Sughosh,
+> > > >
+> > > > On Fri, 7 Jun 2024 at 12:53, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > > >
+> > > > > With the move of the LMB structure to a persistent state, there is no
+> > > > > need to declare the variable locally, and pass it as part of the LMB
+> > > > > API's. Remove all local variable instances and change the API's
+> > > > > correspondingly.
+> > > > >
+> > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > > > ---
+> > > > >  arch/arc/lib/cache.c                 |   4 +-
+> > > > >  arch/arm/lib/stack.c                 |   4 +-
+> > > > >  arch/arm/mach-apple/board.c          |  17 ++-
+> > > > >  arch/arm/mach-snapdragon/board.c     |  17 ++-
+> > > > >  arch/arm/mach-stm32mp/dram_init.c    |   7 +-
+> > > > >  arch/arm/mach-stm32mp/stm32mp1/cpu.c |   6 +-
+> > > > >  arch/m68k/lib/bootm.c                |   7 +-
+> > > > >  arch/microblaze/lib/bootm.c          |   4 +-
+> > > > >  arch/mips/lib/bootm.c                |   9 +-
+> > > > >  arch/nios2/lib/bootm.c               |   4 +-
+> > > > >  arch/powerpc/cpu/mpc85xx/mp.c        |   4 +-
+> > > > >  arch/powerpc/include/asm/mp.h        |   4 +-
+> > > > >  arch/powerpc/lib/bootm.c             |  14 +-
+> > > > >  arch/riscv/lib/bootm.c               |   4 +-
+> > > > >  arch/sh/lib/bootm.c                  |   4 +-
+> > > > >  arch/x86/lib/bootm.c                 |   4 +-
+> > > > >  arch/xtensa/lib/bootm.c              |   4 +-
+> > > > >  board/xilinx/common/board.c          |   7 +-
+> > > > >  boot/bootm.c                         |  26 ++--
+> > > > >  boot/bootm_os.c                      |   5 +-
+> > > > >  boot/image-board.c                   |  32 ++---
+> > > > >  boot/image-fdt.c                     |  29 ++---
+> > > > >  cmd/bdinfo.c                         |   6 +-
+> > > > >  cmd/booti.c                          |   2 +-
+> > > > >  cmd/bootz.c                          |   2 +-
+> > > > >  cmd/load.c                           |   7 +-
+> > > > >  drivers/iommu/apple_dart.c           |   7 +-
+> > > > >  drivers/iommu/sandbox_iommu.c        |  15 +--
+> > > > >  fs/fs.c                              |   7 +-
+> > > > >  include/image.h                      |  22 +---
+> > > > >  include/lmb.h                        |  39 +++---
+> > > > >  lib/lmb.c                            |  81 ++++++------
+> > > > >  net/tftp.c                           |   5 +-
+> > > > >  net/wget.c                           |   5 +-
+> > > > >  test/cmd/bdinfo.c                    |   2 +-
+> > > > >  test/lib/lmb.c                       | 187 +++++++++++++--------------
+> > > > >  36 files changed, 270 insertions(+), 333 deletions(-)
+> > > >
+> > > > This isn't necessary...and it will make things harder. You can have a
+> > > > global 'lmb' while still allowing passing a different pointer when
+> > > > needed.
+> > >
+> > > There's only one reservation checking system and list of known
+> > > reservations, keep in mind.
+> >
+> > There is only one driver model, too, but we use a pointer. It makes
+> > tests much easier.
+> >
+> > In fact I see elsewhere in this series that it causes problems with
+> > tests. Best to use a pointer so it is easy to update.
+>
+> Maybe? I worry that will lead to thinking that we still, like today,
+> have many LMB lists, rather than a single LMB list that everyone must
+> use.
 
-diff --git a/doc/README.LED b/doc/README.LED
-deleted file mode 100644
-index c21c9d53ec3..00000000000
---- a/doc/README.LED
-+++ /dev/null
-@@ -1,77 +0,0 @@
--Status LED
--========================================
--
--This README describes the status LED API.
--
--The API is defined by the include file include/status_led.h
--
--The first step is to enable CONFIG_LED_STATUS in menuconfig:
--> Device Drivers > LED Support.
--
--If the LED support is only for specific board, enable
--CONFIG_LED_STATUS_BOARD_SPECIFIC in the menuconfig.
--
--Status LEDS 0 to 5 are enabled by the following configurations at menuconfig:
--CONFIG_STATUS_LED0, CONFIG_STATUS_LED1, ... CONFIG_STATUS_LED5
--
--The following should be configured for each of the enabled LEDs:
--CONFIG_STATUS_LED_BIT<n>
--CONFIG_STATUS_LED_STATE<n>
--CONFIG_STATUS_LED_FREQ<n>
--Where <n> is an integer 1 through 5 (empty for 0).
--
--CONFIG_STATUS_LED_BIT is passed into the __led_* functions to identify which LED
--is being acted on. As such, the value choose must be unique with with respect to
--the other CONFIG_STATUS_LED_BIT's. Mapping the value to a physical LED is the
--reponsiblity of the __led_* function.
--
--CONFIG_STATUS_LED_STATE is the initial state of the LED. It should be set to one
--of these values: CONFIG_LED_STATUS_OFF or CONFIG_LED_STATUS_ON.
--
--CONFIG_STATUS_LED_FREQ determines the LED blink frequency.
--Values range from 2 to 10.
--
--Some other LED macros
-----------------------
--
--CONFIG_STATUS_LED_BOOT is the LED to light when the board is booting.
--This must be a valid LED number (0-5).
--
--CONFIG_STATUS_LED_RED is the red LED. It is used to signal errors. This must be
--a valid LED number (0-5). Other similar color LED's macros are
--CONFIG_STATUS_LED_GREEN, CONFIG_STATUS_LED_YELLOW and CONFIG_STATUS_LED_BLUE.
--
--General LED functions
-----------------------
--The following functions should be defined:
--
--__led_init is called once to initialize the LED to CONFIG_STATUS_LED_STATE.
--One time start up code should be placed here.
--
--__led_set is called to change the state of the LED.
--
--__led_toggle is called to toggle the current state of the LED.
--
--Colour LED
--========================================
--
--Colour LED's are at present only used by ARM.
--
--The functions names explain their purpose.
--
--coloured_LED_init
--red_LED_on
--red_LED_off
--green_LED_on
--green_LED_off
--yellow_LED_on
--yellow_LED_off
--blue_LED_on
--blue_LED_off
--
--These are weakly defined in arch/arm/lib/board.c to noops. Where applicable, define
--these functions in the board specific source.
--
--TBD : Describe older board dependent macros similar to what is done for
--
--TBD : Describe general support via asm/status_led.h
-diff --git a/doc/api/index.rst b/doc/api/index.rst
-index 51b2013af36..d40e90801d1 100644
---- a/doc/api/index.rst
-+++ b/doc/api/index.rst
-@@ -22,6 +22,7 @@ U-Boot API documentation
-    rng
-    sandbox
-    serial
-+   status_led
-    sysreset
-    timer
-    unicode
-diff --git a/doc/api/status_led.rst b/doc/api/status_led.rst
-new file mode 100644
-index 00000000000..44bbea47157
---- /dev/null
-+++ b/doc/api/status_led.rst
-@@ -0,0 +1,35 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+Status LED
-+==========
-+
-+.. kernel-doc:: include/status_led.h
-+   :doc: Overview
-+
-+CONFIG_STATUS_LED Description
-+-----------------------------
-+
-+.. kernel-doc:: include/status_led.h
-+   :doc: CONFIG Description
-+
-+Special Status LED Configs
-+--------------------------
-+.. kernel-doc:: include/status_led.h
-+   :doc: LED Status Config
-+
-+Colour Status LED Configs
-+-------------------------
-+.. kernel-doc:: include/status_led.h
-+   :doc: LED Colour Config
-+
-+Required API
-+------------
-+
-+.. kernel-doc:: include/status_led.h
-+   :doc: Required API
-+
-+Status LED API
-+--------------
-+
-+.. kernel-doc:: include/status_led.h
-+   :internal:
-diff --git a/include/status_led.h b/include/status_led.h
-index 7de40551621..6893d1d68e0 100644
---- a/include/status_led.h
-+++ b/include/status_led.h
-@@ -4,18 +4,102 @@
-  * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
-  */
- 
--/*
-- * The purpose of this code is to signal the operational status of a
-+/**
-+ * DOC: Overview
-+ *
-+ * Status LED is a Low-Level way to handle LEDs to signal state of the
-+ * bootloader, for example boot progress, file transfer fail, activity
-+ * of some sort like tftp transfer, mtd write/erase.
-+ *
-+ * The original usage these API were to signal the operational status of a
-  * target which usually boots over the network; while running in
-  * PCBoot, a status LED is blinking. As soon as a valid BOOTP reply
-  * message has been received, the LED is turned off. The Linux
-  * kernel, once it is running, will start blinking the LED again,
-  * with another frequency.
-+ *
-+ * Status LED require support Low Level and the board to implement
-+ * the specific functions to correctly works.
-  */
- 
- #ifndef _STATUS_LED_H_
- #define	_STATUS_LED_H_
- 
-+/**
-+ * DOC: CONFIG Description
-+ *
-+ * Enable `CONFIG_LED_STATUS` to support the Status LED under
-+ * > Device Drivers > LED Support.
-+ *
-+ * The Status LED can be defined in various ways, but most of the time,
-+ * specific functions will need to be defined in the board file.
-+ * If this is the case, enable `CONFIG_LED_STATUS_BOARD_SPECIFIC`.
-+ *
-+ * If the LEDs are GPIO-driven, you can use the GPIO wrapper driver
-+ * instead of defining specific board functions.
-+ * If this is the case, enable `CONFIG_LED_STATUS_GPIO`.
-+ * (Note that `CONFIG_LED_STATUS_BOARD_SPECIFIC` is also required.)
-+ *
-+ * The Status LED allows defining up to six different LEDs, from 0 to 5,
-+ * with the following configurations:
-+ * `CONFIG_STATUS_LED`, `CONFIG_STATUS_LED1`, ..., `CONFIG_STATUS_LED5`.
-+ *
-+ * For each LED, the following options are required:
-+ *  * `CONFIG_STATUS_LED_BIT<n>`
-+ *  * `CONFIG_STATUS_LED_STATE<n>`
-+ *  * `CONFIG_STATUS_LED_FREQ<n>`
-+ *
-+ * Where `<n>` is an integer from 1 through 5. (Note that LED 0 doesn't have the
-+ * integer suffix.)
-+ *
-+ * `CONFIG_STATUS_LED_BIT` is passed into the `__led_*` functions to identify
-+ * which LED is being acted on. The value is opaque, meaning it depends on how
-+ * the low-level API handles this value. It can be an ID to reference the LED
-+ * internally, or in the case of the GPIO wrapper, it's the GPIO number of the LED.
-+ * Mapping the value to a physical LED is the responsibility of the `__led_*` function.
-+ *
-+ * `CONFIG_STATUS_LED_STATE` sets the initial state of the LED. It should be set
-+ * to one of these values: `CONFIG_LED_STATUS_OFF` or `CONFIG_LED_STATUS_ON`.
-+ *
-+ * `CONFIG_STATUS_LED_FREQ` determines the LED blink frequency.
-+ * Values range from 2 to 10.
-+ */
-+/**
-+ * DOC: LED Status Config
-+ *
-+ * The Status LED uses two special configurations for common operations:
-+ *
-+ *   * CONFIG_STATUS_LED_BOOT is the LED that lights up when the board is booting.
-+ *   * CONFIG_STATUS_LED_ACTIVITY is the LED that lights and blinks during activity
-+ *     (e.g., file transfer, flash write).
-+ *
-+ * The values set in these configurations refer to the LED ID previously set.
-+ *
-+ * - ``CONFIG_STATUS_LED_RED=0`` will refer to the option ``CONFIG_STATUS_LED_BIT``.
-+ * - ``CONFIG_STATUS_LED_RED=1`` will refer to the option ``CONFIG_STATUS_LED_BIT1``.
-+ * - ``CONFIG_STATUS_LED_RED=2`` will refer to the option ``CONFIG_STATUS_LED_BIT2``.
-+ * - ...
-+ */
-+/**
-+ * DOC: LED Colour Config
-+ *
-+ * The Status LED exposes specific configurations for LEDs of different colors.
-+ *
-+ * The values set in these configurations refer to the LED ID previously set.
-+ *
-+ * - ``CONFIG_STATUS_LED_RED=0`` will refer to the option ``CONFIG_STATUS_LED_BIT``.
-+ * - ``CONFIG_STATUS_LED_RED=1`` will refer to the option ``CONFIG_STATUS_LED_BIT1``.
-+ * - ``CONFIG_STATUS_LED_RED=2`` will refer to the option ``CONFIG_STATUS_LED_BIT2``.
-+ * - ...
-+ *
-+ * Supported colors are:
-+ *   * red
-+ *   * green
-+ *   * yellow
-+ *   * blue
-+ *   * white
-+ */
-+
- #ifdef CONFIG_LED_STATUS
- 
- #define LED_STATUS_PERIOD	(CONFIG_SYS_HZ / CONFIG_LED_STATUS_FREQ)
-@@ -35,11 +119,49 @@
- #define LED_STATUS_PERIOD5	(CONFIG_SYS_HZ / CONFIG_LED_STATUS_FREQ5)
- #endif /* CONFIG_LED_STATUS5 */
- 
-+/**
-+ * void status_led_init - Init the Status LED with all the required structs.
-+ */
- void status_led_init(void);
-+/**
-+ * void status_led_tick - Blink each LED that is currently set in blinking
-+ *   mode
-+ * @timestamp: currently unused
-+ */
- void status_led_tick(unsigned long timestamp);
-+/**
-+ * void status_led_set - Set the LED ID passed as first arg to the mode set
-+ * @led: reference to the Status LED ID
-+ * @state: state to set the LED to
-+ *
-+ * Modes for state arE:
-+ *   * CONFIG_LED_STATUS_OFF (LED off)
-+ *   * CONFIG_LED_STATUS_ON (LED on)
-+ *   * CONFIG_LED_STATUS_BLINK (LED initially on, expected to blink)
-+ */
- void status_led_set(int led, int state);
-+/**
-+ * void status_led_toggle - toggle the LED ID
-+ * @led: reference to the Status LED ID
-+ *
-+ * Toggle the LED ID passed as first arg. If it's ON became OFF, if it's
-+ * OFF became ON.
-+ */
- void status_led_toggle(int led);
-+/**
-+ * void status_led_activity_start - start a LED activity
-+ * @led: reference to the Status LED ID
-+ *
-+ * Set the Status LED ON and start the Cyclic to make the LED blink at
-+ * the configured freq.
-+ */
- void status_led_activity_start(int led);
-+/**
-+ * void status_led_activity_stop - stop a LED activity
-+ * @led: reference to the Status LED ID
-+ *
-+ * Stop and free the Cyclic and turn the LED OFF.
-+ */
- void status_led_activity_stop(int led);
- 
- /*****  MVS v1  **********************************************************/
-@@ -62,9 +184,61 @@ void status_led_activity_stop(int led);
- /* led_id_t is unsigned long mask */
- typedef unsigned long led_id_t;
- 
-+/**
-+ * DOC: Required API
-+ *
-+ * The Status LED requires the following API functions to operate correctly
-+ * and compile:
-+ *
-+ * - ``__led_toggle``: Low-level function to toggle the LED at the specified
-+ *   mask.
-+ * - ``__led_init``: Initializes the Status LED, sets up required tables, and
-+ *   configures registers.
-+ * - ``__led_set``: Low-level function to set the state of the LED at the
-+ *   specified mask.
-+ * - ``__led_blink``: Low-level function to set the LED to blink at the
-+ *   specified frequency.
-+ *
-+ * The Status LED also provides optional functions to control colored LEDs.
-+ * Each supported LED color has corresponding ``_on`` and ``_off`` functions.
-+ *
-+ * There is also support for ``coloured_LED_init`` for LEDs that provide
-+ * multiple colors. (Currently, this is only used by ARM.)
-+ *
-+ * Each function is weakly defined and should be implemented in the
-+ * board-specific source file. (This does not apply to the GPIO LED wrapper.)
-+ */
-+/**
-+ * void __led_toggle - toggle LED at @mask
-+ * @mask: opaque value to reference the LED
-+ *
-+ * Low-Level function to toggle the LED at mask.
-+ */
- extern void __led_toggle (led_id_t mask);
-+/**
-+ * void __led_init - Init the LED at @mask
-+ * @mask: opaque value to reference the LED
-+ * @state: starting state of the LED
-+ *
-+ * Init the Status LED, init required tables, setup regs...
-+ */
- extern void __led_init (led_id_t mask, int state);
-+/**
-+ * void __led_set - Set the LED at @mask
-+ * @mask: opaque value to reference the LED
-+ * @state: state to set the LED to
-+ *
-+ * Init the Status LED, init required tables, setup regs...
-+ */
- extern void __led_set (led_id_t mask, int state);
-+/**
-+ * void __led_blink - Set the LED at @mask to HW blink
-+ * @mask: opaque value to reference the LED
-+ * @freq: freq to make the LED blink at
-+ *
-+ * Low-Level function to set the LED at HW blink by the
-+ * passed freq.
-+ */
- void __led_blink(led_id_t mask, int freq);
- #else
- # error Status LED configuration missing
-@@ -77,20 +251,62 @@ void __led_blink(led_id_t mask, int freq);
- 
- #endif	/* CONFIG_LED_STATUS	*/
- 
--/*
-- * Coloured LEDs API
-+/**
-+ * DOC: Coloured LED API
-+ *
-+ * Status LED expose optional functions to control coloured LED.
-+ * Each LED color supported expose _on and _off function.
-+ *
-+ * There is also support for coloured_LED_init for LED that provide
-+ * multiple colours. (currently only used by ARM)
-+ *
-+ * Each function is weakly defined and should be defined in the board
-+ * specific source. (doesn't apply for GPIO LED wrapper)
-  */
- #ifndef	__ASSEMBLY__
-+/**
-+ * void coloured_LED_init - Init multi colour LED
-+ */
- void coloured_LED_init(void);
-+/**
-+ * void red_led_on - Turn LED Red on
-+ */
- void red_led_on(void);
-+/**
-+ * void red_led_off - Turn LED Red off
-+ */
- void red_led_off(void);
-+/**
-+ * void green_led_on - Turn LED Green on
-+ */
- void green_led_on(void);
-+/**
-+ * void green_led_off - Turn LED Green off
-+ */
- void green_led_off(void);
-+/**
-+ * void yellow_led_on - Turn LED Yellow on
-+ */
- void yellow_led_on(void);
-+/**
-+ * void yellow_led_off - Turn LED Yellow off
-+ */
- void yellow_led_off(void);
-+/**
-+ * void blue_led_on - Turn LED Blue on
-+ */
- void blue_led_on(void);
-+/**
-+ * void blue_led_off - Turn LED Blue off
-+ */
- void blue_led_off(void);
-+/**
-+ * void white_led_on - Turn LED White on
-+ */
- void white_led_on(void);
-+/**
-+ * void white_led_off - Turn LED White off
-+ */
- void white_led_off(void);
- #else
- 	.extern LED_init
--- 
-2.43.0
+Do people worry about that with driver model?
 
+Also IMO there is only really one LMB list today. We create it at the
+start of bootm and then it is done when we boot. The file-loading
+stuff is what makes all this confusing...and with bootstd that is
+under control as well.
+
+At lot of this effort seems to be about dealing with random scripts
+which load things. We want to make sure we complain if something
+overlaps. But we should be making the bootstd case work nicely and
+doing things within that framework. Also EFI sort-of has its own
+thing, which it is very-much in control of.
+
+Overall I think this is a bit more subtle that just combining allocators.
+
+Regards,
+Simon
