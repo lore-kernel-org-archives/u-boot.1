@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75E82C27C77
-	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 16:01:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E41DC27C53
+	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 16:02:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5128588852;
-	Wed, 12 Jun 2024 18:01:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BBF018884A;
+	Wed, 12 Jun 2024 18:02:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TJ7v7xfC";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FMr7Dyxo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E24128884B; Wed, 12 Jun 2024 18:01:10 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id A0FF28884B; Wed, 12 Jun 2024 18:02:36 +0200 (CEST)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C90D88881B
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 18:01:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 73327883F5
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 18:02:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-6f9c1902459so1962629a34.0
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 09:01:08 -0700 (PDT)
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-3d226c5a157so2442445b6e.2
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 09:02:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718208067; x=1718812867; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1718208153; x=1718812953; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Chm4fz7mFdcbsV9DFvdgNrWkANxJ3bphKZ8dh+f+bJs=;
- b=TJ7v7xfCoVQXXeFGtnYNu8S0ZMTPpKErJk3SJIWvKm+IO4szYR6zD9Y44UWdvT9XUC
- chjpDqiH71Oqlo3Rn1FItabtLKTPxp9ySK6ANcNp8olWCgpAr/G+Hd99hkkwM1rOVE1U
- F149MvDp2PXkMtcgzvgKhftu0YWKzE9yvEQg0=
+ bh=Qo8j1zPRr1EBQ+8HKczxEDtNHO/x/FlgnReXrAUwBlo=;
+ b=FMr7DyxoCkE4nSMDQuYuZf1oKBZj4IsSgL8kMAgTxNPp/6tFtzTM1TXrm5Xo6sszwb
+ 2XHzfExnx7T3Aqvs+hXfgwq86QgyEg8DnEk7ii8PlTGY8acHVwi/uqysOWedKQHMUN1F
+ 7ySoL9c1F0R+7r1AUonEim64bim87VaILrCvI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718208067; x=1718812867;
+ d=1e100.net; s=20230601; t=1718208153; x=1718812953;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Chm4fz7mFdcbsV9DFvdgNrWkANxJ3bphKZ8dh+f+bJs=;
- b=SxcBCrGRiPMYRECRha//G7ogUbSoPYWeMGdIysWKZDfKI7NKSewrLWb1LJ/lO/Gt3d
- H2eE28U8etTsFU/o64S3VOQitOgrZcetAmHbfUReOy/LntcFILkGLmiGbYtgVcgDy5iA
- r2medlp8WZ22tBjL9HdR53mOVYbNVXXp2Vk6N4VuK4pDn10UK9rjj/wNtDabJdHhcVhO
- Jd/rqtoHf9TeUfMzTtTULKWRD2wgjcokj0vNZRska/a9pBrBofknLBPHruaHa7Eo4kU5
- CReg78bNoExfRG+6S3UsqzWwOxRxZIkKjW0xVnhiR5aVfwsRovq3CPLFjnECtztpAXEl
- 8DzQ==
-X-Gm-Message-State: AOJu0YwvZJn1W5pog2xSKY9jGb8ZF5GS++/fiwVUUE1dgoMg0W7mECz1
- TkyBpdjicJLBN3b3eiVzUx9jqnDTJcSqS+Mtd+y7fMgdyA1hWQF8wzaboZbCERg=
-X-Google-Smtp-Source: AGHT+IGo9itYTk3tM/pEfBT7rgZhSZqiQdztkA7ePIFo/k93kxQXiuDbI6d2sOR8Mg/PyewFpvqjjQ==
-X-Received: by 2002:a9d:5e86:0:b0:6f9:8b51:c697 with SMTP id
- 46e09a7af769-6fa1c0a6030mr2370712a34.19.1718208067401; 
- Wed, 12 Jun 2024 09:01:07 -0700 (PDT)
+ bh=Qo8j1zPRr1EBQ+8HKczxEDtNHO/x/FlgnReXrAUwBlo=;
+ b=L0ESXAkrrG5XrAmyFNFVBbN9R7Xb+KAiPvwdowlaNTo0JFV0KXRiyfrj543wkBZw/+
+ X6XFCjD5MsviOG6z1MqdZTl6/4xu9kc7HIxaktFXzKsD8OJCCbhbQHAdTnB0wkckoAet
+ Iy72APx+ltPHjx4qTpk5+4NZhTO0PRqwewI2ZIVSlGDo29MBWtFq+VJYEXgJBW8jB645
+ AkeEv6K1TH/VEyaCIetL+kSEC31hlkMMbIdOxrsObOG+WvXF2NQScydxliePUrVftu+A
+ Ffna/P+b7bvd+hHc42oamiMB0WvfxPn+trP7MZJ191ttSDQTK65TuRglHOhO9UH7octz
+ wEMQ==
+X-Gm-Message-State: AOJu0YxgfFxajfE+OgyRvfYCePulHhLL/cBDw0ez/ggmU7zYc9Fn1qsR
+ iVAOjPZ5ywKVrBA7J6ObQscQUj/KTRqy7UwHOiyG86venyVVk0cTqe1TVeS6JVY=
+X-Google-Smtp-Source: AGHT+IE1r6hh9rDEha8bQ2Mmvh2mO3SiuIm5fITaa4QTSwev2eQ0Twi4de00gtLQoJ5rYnMknVvaFg==
+X-Received: by 2002:a05:6808:1b09:b0:3d2:2877:513d with SMTP id
+ 5614622812f47-3d23e0cf5a4mr2275355b6e.39.1718208152958; 
+ Wed, 12 Jun 2024 09:02:32 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
  [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-6f95aaef6bdsm2068801a34.52.2024.06.12.09.01.06
+ 5614622812f47-3d242affa88sm99435b6e.1.2024.06.12.09.02.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Jun 2024 09:01:07 -0700 (PDT)
-Date: Wed, 12 Jun 2024 10:01:04 -0600
+ Wed, 12 Jun 2024 09:02:32 -0700 (PDT)
+Date: Wed, 12 Jun 2024 10:02:30 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Jiaxun Yang <jiaxun.yang@flygoat.com>
 Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
@@ -68,15 +68,15 @@ Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Aaron Williams <awilliams@marvell.com>
-Subject: Re: [PATCH 14/20] CI: GitLab: Split build_world tasks
-Message-ID: <20240612160104.GU68077@bill-the-cat>
+Subject: Re: [PATCH 16/20] CI: Dockerfile: Bump various software version
+Message-ID: <20240612160109.GV68077@bill-the-cat>
 References: <20240611-docker-image-v1-0-51472eb70357@flygoat.com>
- <20240611-docker-image-v1-14-51472eb70357@flygoat.com>
+ <20240611-docker-image-v1-16-51472eb70357@flygoat.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="GiFQU6BO37gPxB3u"
+ protocol="application/pgp-signature"; boundary="G52XPkIqysZnJJGZ"
 Content-Disposition: inline
-In-Reply-To: <20240611-docker-image-v1-14-51472eb70357@flygoat.com>
+In-Reply-To: <20240611-docker-image-v1-16-51472eb70357@flygoat.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,48 +95,67 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---GiFQU6BO37gPxB3u
+--G52XPkIqysZnJJGZ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jun 11, 2024 at 10:04:13PM +0100, Jiaxun Yang wrote:
+On Tue, Jun 11, 2024 at 10:04:15PM +0100, Jiaxun Yang wrote:
 
-> Current build_world task runs for too long on public gitlab
-> runner.
+> Bump base OS to Ubuntu noble, grub to 2.12, QEMU to 9.0 (drop
+> cherry-pick for m68k as it's already in 9.0) and other tools
+> to latest version.
 >=20
-> Split the job as what we've done to azure pipeline.
+> Remove unsupported python2.
+>=20
+> Install some required python packages for buildman/binman.
 >=20
 > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 > ---
->  .gitlab-ci.yml | 103 +++++++++++++++++++++++++++++++++------------------=
-------
->  1 file changed, 59 insertions(+), 44 deletions(-)
+>  tools/docker/Dockerfile | 35 +++++++++++++++++------------------
+>  1 file changed, 17 insertions(+), 18 deletions(-)
+>=20
+> diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+> index 5824d371f259..e3b2c2d57555 100644
+> --- a/tools/docker/Dockerfile
+> +++ b/tools/docker/Dockerfile
+> @@ -2,7 +2,7 @@
+>  # This Dockerfile is used to build an image containing basic stuff to be=
+ used
+>  # to build U-Boot and run our test suites.
+> =20
+> -FROM ubuntu:jammy-20240227
+> +FROM ubuntu:noble
+>  MAINTAINER Tom Rini <trini@konsulko.com>
+>  LABEL Description=3D" This image is for building U-Boot inside a contain=
+er"
+> =20
 
-I don't like this. The list in Azure is because of the time limits there
-and in turn we:
-a) Have to tweak it periodically to keep things from running too long
-b) Have to tweak it to ensure that we don't miss some new SoC/etc
+For reproducibility I keep us on date-tags and not just the raw
+release tag/latest. Also, I'm not yet ready to move us past Jammy
+without a big reason. Once 24.04.1 comes out, perhaps. So it's good to
+know at least this wasn't too much work to move forward. Also, we should
+keep the bumping of various tools to their own commit, each.
 
 --=20
 Tom
 
---GiFQU6BO37gPxB3u
+--G52XPkIqysZnJJGZ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZpxkAACgkQFHw5/5Y0
-tyxgagv+Nm+upI4FCMpGOc1TW4rDyRTHSDUBIlkgGvlLvRB4WlomJ7WsvAjQDkkx
-5/LI00pnP20HhOdG7s8x+p603cwo65stWOKlTx1wIu9xbyrCeoVs+Fnd+YI7wu/z
-DlTP70+XGwrIcnmGL4MwUYRTTpcuKKUiN1mPtlM4+UH5d0S5nxoZkHfOp6Ui3YvV
-SrL0x9Ps9FH5qwGFn2NplU5llyGJ57aVHWF0Yxx66fxQVgCFtihGiTP3NAuyjyzX
-j3m8PNghcuFM0NQK3ekOdP4MzflDm1I6v0rXMz9Idc0TaDg2kPEwsZntp9S5SdZx
-YY6/tVUKCtHvRbmtNHsZuxiBqmI3DYK5PH+o2oLwc1X3/8qUgcWmTLXGY8FhntMQ
-hWYeB+Pyb5MZs1eO4xgsGGCHjuJlRYPNjIKSTMrGvdQXc6c0aEvB4osrkaoY2SFz
-HW8irqvT4a89k/PjUuo+hDvJhjHhG/gt85tNKTOFKB0kfk8DJK13Jy7VQNLfo8M2
-krqFEHPP
-=EYu/
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZpxpYACgkQFHw5/5Y0
+tywn8wv/RayG7iZ0QL4ePO81es77T/1JdlnG/tgYRv4lud1qnTp4ZUWAm426zgef
+MCHAey2g2jPbiamtfC8E96LkWtmTh5uG17mdKLzBO16cEvmedyAXTj4xGCaq/voW
+N/5R6D60xXeIhYU/EL4RwEyzUV2Ww9waCkBOlla61zKbNryXj8A2dcZfmSbp9d1D
+2j2GYYQ0K42a+sMTyNiS8poxmDCoNgOVq60eO4mMunltqbRcxyIL1ZM2ecRIasgR
+eQS+1LRGr2o/X2nI37WjpevnOhlqj4cHL27ZYgiyVQeLV4EDQW1PdEcGUDOuA77J
+oZGaRgxUrY07OvxY+B+9TE2LMP1F5V20mlmu26nbRwkVIE49i//kfbq6nd/nY+f+
+aWOzxkNKtk3fdNsG33p3DOPg29OSzV31puMJL+450OqE6i5OsEJhz8j6HocGJJsf
+4nwRB1LEPdLfFbaB/PTPY+KGua6oyLRfjOR85vGZw1VPcGoOHe+QYMfBQuAUx22J
+1LcAKMAv
+=8ooh
 -----END PGP SIGNATURE-----
 
---GiFQU6BO37gPxB3u--
+--G52XPkIqysZnJJGZ--
