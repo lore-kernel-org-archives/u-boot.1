@@ -4,84 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65BB5C27C53
-	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 09:05:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28176C27C53
+	for <u-boot@archiver.kernel.org>; Wed, 12 Jun 2024 09:09:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AFF1F881A1;
-	Wed, 12 Jun 2024 11:04:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 65AB3887BB;
+	Wed, 12 Jun 2024 11:09:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=nwl.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RuYzFTVP";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=nwl.cc header.i=@nwl.cc header.b="GSYyWeKW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DD90886B1; Wed, 12 Jun 2024 11:04:57 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1F6E18834B; Wed, 12 Jun 2024 11:09:24 +0200 (CEST)
+Received: from orbyte.nwl.cc (orbyte.nwl.cc [IPv6:2001:41d0:e:133a::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BA598818B
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 11:04:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C12A8887BB
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 11:09:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-57a30dbdb7fso9601042a12.3
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 02:04:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718183095; x=1718787895; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ern7hvwMqmGPVZennoGw4N7POWMiaatkXbmgIiWEz5o=;
- b=RuYzFTVP8pxW4eNVQvXg4w1lsKm52j0X7UbnTJowz/Xl7wLVHyQUN77Gn/O22NMv0B
- 5WxSzzPs4boXzewPXVDeU2Hwe9BS+gHuTL3b7h0DamgtN8UedXpOd1VqQHcfNPhhLKBe
- 1myMuY/vOk090IVF9vPCZ7Qp8zEY3gpUarBNiIL6Ux+AUkK1YLsa/GZ1Lwpah18KzOj7
- WIMrLK9OzlBVHoJCtRTJ4tgdJXTho8vppsWHGQkqjrRzJ5wwAAjQjsPSt2xu87zLsz8y
- 3thKEvQNj4SGTfvxmK7vf/ZV9LA2jvTwmOLTHiFm0ondj7O/fPGIXwZ7OHNjnFwqsLnV
- Ubzw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718183095; x=1718787895;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ern7hvwMqmGPVZennoGw4N7POWMiaatkXbmgIiWEz5o=;
- b=xUARsFvXsi7uSPwn1Z6LI/bSbsQVHsQE30A2lEkG5lnrPklvaybQVkXD2qfStA911d
- ez5grfUPIaVy7htOhAmrVtZJEcGxJqTP5SH1iuawOFR8E2+HQbiPcY2+MO5iXykqvU6t
- LiktGq1m46dJeRlH63aSqMS4cSYRtzeNGGGbCuiBSiXklytgsS1Yje2Lh1B1qcAzYI6O
- nYnlI3p94ZirAzUfw0EOuxpzGl6dQ9Ys0fN3AO6cb09W9yDWzm8eSVNLIED9lMiEAjm1
- ntIlmK3BVRO4sFD6VXhmkkHtprFQ65EMFcdHseYXnkMjh8hhAgPr3FV9DdiM0ZzHVwJy
- P1tQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXJoSLtdA0EZcFYj0K+HoMhbm3Xyl84mOmP7IeSkUoUkO7KiaMFHoXxMHGeznh235Vj0FeMus7zX5+V/hAJP3YAL0jIMw==
-X-Gm-Message-State: AOJu0YysdAfgibUus2fLIY/f4pw9NgnkXXa1RjVZ6wdqC/bnUcq3Zmkn
- mglhaZWXqaXke+CdpR/04gpdPWMTTp4vVFpokyZ8goff9llY7NZl/nuFWisSJco=
-X-Google-Smtp-Source: AGHT+IGcdMEWhjUOj/U3k3fMD0i2wXoy4ADBKQaUEk5LqN/rg3kx3QtgFaywmqyV/1DKzuBnhHvjwg==
-X-Received: by 2002:a50:8d54:0:b0:57c:aab2:7311 with SMTP id
- 4fb4d7f45d1cf-57caab2794cmr927389a12.29.1718183094409; 
- Wed, 12 Jun 2024 02:04:54 -0700 (PDT)
-Received: from ?IPV6:2a02:8109:aa0d:be00::8090? ([2a02:8109:aa0d:be00::8090])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-57aae20243esm10599003a12.68.2024.06.12.02.04.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Jun 2024 02:04:54 -0700 (PDT)
-Message-ID: <548c500c-6895-4026-94a6-4258535e7591@linaro.org>
-Date: Wed, 12 Jun 2024 11:04:52 +0200
+ dmarc=none (p=none dis=none) header.from=nwl.cc
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=phil@nwl.cc
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=nwl.cc;
+ s=mail2022; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=vu6JSZ7MXAsRjZwJz0oG7pDCe+Cj5doNnUvuuxnsJos=; b=GSYyWeKW+LtgiM/v2yxaDmeL1L
+ 8BO0mxAI3G8qhGlb+Vqd1kLrPFbXhvv5P8ro2RUC51Tq6zhcZ6lMpYEuJAQzWEto5p617WK8YuS07
+ Y0UeKTNMBltczvq1zk2trXiD3I+qDY1dhHDevHv+lQGhvQkusmygBB2lIe3AK60tXGX3zwpIl+I9O
+ 7Pp+RcwrUrOtorQDhic72KF2f5pJqGGiR0vrYadTmBOwU/BPZr9yyhODldZOGLJE/Cx7fDpYogIJs
+ YXmWSGLsouaFphRz470cUWUxqUi2CYWniAo4YJgEOgRkOslaTdhWaj5w/JUVqV1pQbsbLcY50X3H/
+ yFczvbHg==;
+Received: from n0-1 by orbyte.nwl.cc with local (Exim 4.97.1)
+ (envelope-from <phil@nwl.cc>) id 1sHJyp-000000000pX-3es6;
+ Wed, 12 Jun 2024 11:09:19 +0200
+Date: Wed, 12 Jun 2024 11:09:19 +0200
+From: Phil Sutter <phil@nwl.cc>
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] arm: mvebu: Enable bootstd and other modernization for
+ Synology DS414 (Armada XP) board
+Message-ID: <Zmllv6xiOREEO4TW@orbyte.nwl.cc>
+Mail-Followup-To: Phil Sutter <phil@nwl.cc>, Tony Dinh <mibodhi@gmail.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>
+References: <20240606234437.24549-1-mibodhi@gmail.com>
+ <ZmMO-yODr9n2X7yD@orbyte.nwl.cc>
+ <CAJaLiFwDHkkDKv3DY8Edk7_LE8gVHujx=d=nMfF3vu2zGmLWgA@mail.gmail.com>
+ <ZmTqJwGDQlILtlnx@orbyte.nwl.cc>
+ <CAJaLiFyrONZnDW_D50BwiJdCBF5neXs73AGkgcpwwfGqBWJ9Lw@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 14/42] initcall: Correct use of relocation offset
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Dan Carpenter <dan.carpenter@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-References: <20240611200156.2245525-1-sjg@chromium.org>
- <20240611200156.2245525-15-sjg@chromium.org>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240611200156.2245525-15-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAJaLiFyrONZnDW_D50BwiJdCBF5neXs73AGkgcpwwfGqBWJ9Lw@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,80 +76,202 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi,
 
-On 11/06/2024 22:01, Simon Glass wrote:
-> The relocation offset can change in some initcall sequences. Handle
-> this and make sure it is used for all debugging statements in
-> init_run_list()
+On Sun, Jun 09, 2024 at 01:51:34PM -0700, Tony Dinh wrote:
+> On Sat, Jun 8, 2024 at 4:32 PM Phil Sutter <phil@nwl.cc> wrote:
+> > On Fri, Jun 07, 2024 at 04:14:26PM -0700, Tony Dinh wrote:
+> > > On Fri, Jun 7, 2024 at 6:45 AM Phil Sutter <phil@nwl.cc> wrote:
+> > > > On Thu, Jun 06, 2024 at 04:44:36PM -0700, Tony Dinh wrote:
+> > > > > - Switch to standard boot (in include/configs/ds414.h and
+> > > > > configs/ds414_defconfig)
+> > > > > - Implement board_late_init() to ensure successful enumeration
+> > > > > of USB3 devices
+> > > >
+> > > > Oh, this makes the rear USB3 ports usable? I had failed to get there
+> > > > when working on DS414 support.
+> > >
+> > > Yes! There have been a lot of updates in the PCIe MVEBU area. So it
+> > > could have been a different reason why it did not work when you added
+> > > support for this board.
+> >
+> > Nice!
+> >
+> > > Still, without this board_late_init(), we would need to run "pci enum"
+> > > and then "usb start" or "usb reset" to bring up the USB3 ports. The
+> > > USB3 controller is on the PCIe bus, and MVEBU PCIe drivers don't
+> > > initialize everything when it comes up.
+> >
+> > Yeah, at some point I still had
+> > | CONFIG_PREBOOT="usb start; sf probe"
+> > in ds414_defconfig. Looking at my initial DS414 support patch from 2015,
+> > at least 'usb start' seemed to be necessary for USB to work in Linux.
+> > This might have changed later as I dropped the config symbol six years
+> > later in e471ddf0f3472 ("arm: mvebu: board/Synology: Unify legacy kernel
+> > support").
+> >
+> > > > > - Remove unnecessary misc_init_r(), since NET_RANDOM_ETHADDR is now
+> > > > > configured in
+> > > >
+> > > > So u-boot will assign random MAC addresses to the NICs instead of the
+> > > > real ones? Won't this potentially break PXE boot setups?
+> > >
+> > > I did not see any problem using a random MAC address in my test using
+> > > bootstd. Is there a setup where this board MAC address must be known
+> > > when we boot with PXE? my impression is that only ipaddr and serverip
+> > > are needed, and the MAC address could be whatever we define for the
+> > > board.
+> >
+> > I haven't played with PXE for a long time, but I assumed the DHCP daemon
+> > might send different options to different hosts identified by their MAC
+> > address. The latter being random obviously defeats such setups.
+> >
+> > Does the random MAC persist in Linux, BTW? I don't recall Linux
+> > extracting data from the vendor-specific flash storage. Unless I'm
+> > mistaken, it should be u-boot's responsibility to setup MAC addresses in
+> > the NICs (to the vendor-assigned ones).
 > 
-> Update the trace test to match.
+> Yes, it persists. Whatever was assigned to ethaddr and eth1addr are
+> passed to the Linux kernel. So the random local MAC address is
+> recognized as the hardware MAC address.
+
+Thanks for confirming. I'll try board_eth_init() in one of the next
+evenings - my DS414 needs a revamp anyway, the rootfs on that bloody
+USB stick I boot from keeps disintegrating and the box is FUBAR ATM.
+
+> As an aside, there is a bug in bootstd that "bootflow scan -l" will go
+> into a seemingly infinite loop during PXE hunting if eth1addr is not
+> defined. I've not figured out how to fix this error recovery. I might
+> just give up and send the bug report to Simon :)
+
+Fixing the bug as well as making sure eth1addr is properly set should
+not hurt. :)
+
+> > > > > - Remove unnecessary checkboard()
+> > > > > - Updated IDENT_STRING to indicate this u-boot supports both Synology
+> > > > > DS414 and DS214+ boards
+> > > > > - Add SYS_THUMB_BUILD to reduce binary size
+> > > > > - Add NET_RANDOM_ETHADDR
+> > > > > - Add CONFIG_LBA48 and CONFIG_SYS_64BIT_LBA to support >2TB HDD/SDD
+> > > > >
+> > > > > Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+> > > > > ---
+> > > > >
+> > > > >  board/Synology/ds414/ds414.c | 15 +++--------
+> > > > >  configs/ds414_defconfig      | 20 ++++++--------
+> > > > >  include/configs/ds414.h      | 51 ++++++++++++++++++++++--------------
+> > > > >  3 files changed, 42 insertions(+), 44 deletions(-)
+> > > > >
+> > > > > diff --git a/board/Synology/ds414/ds414.c b/board/Synology/ds414/ds414.c
+> > > > > index abe6f9eb5e..f0b55fa095 100644
+> > > > > --- a/board/Synology/ds414/ds414.c
+> > > > > +++ b/board/Synology/ds414/ds414.c
+> > > > > @@ -181,18 +181,9 @@ int board_init(void)
+> > > > >       return 0;
+> > > > >  }
+> > > > >
+> > > > > -int misc_init_r(void)
+> > > > > +int board_late_init(void)
+> > > > >  {
+> > > > > -     if (!env_get("ethaddr")) {
+> > > > > -             puts("Incomplete environment, populating from SPI flash\n");
+> > > > > -             do_syno_populate(0, NULL);
+> > > > > -     }
+> > > > > -     return 0;
+> > > > > -}
+> > > >
+> > > > This is useful for first boot of flashed vanilla u-boot. Can this be
+> > > > retained somehow?
+> > >
+> > > We could, but with NET_RANDOM_ETHADDR configured in, this routine will
+> > > do nothing. Perhaps the fact that the envs will show CRC errors in the
+> > > 1st boot should be an indicator that it needs to be populated?
+> >
+> > Maybe this env population approach is not the right one to begin with.
+> > Reading doc/README.enetaddr, it seems we want something like step 1 in
+> > "Correct flow of setting up the MAC address", though I'm not sure which
+> > initialize() function this is about (board_eth_init() maybe?). Also we
+> > need a working spi flash driver at that point.
+> >
+> > > With standard boot enabled in this patch, the default envs can be
+> > > scripted in /boot/boot.scr or /boot.scr on the rootfs disk storage, or
+> > > on some flash location, or on the network . So we don't even need the
+> > > full envs on SPI flash like we used to. It might still be useful but
+> > > not necessary.
+> >
+> > Maybe one could implement a translator which presents the 'vendor'
+> > partition contents as such default boot env.
 > 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
+> Are you still using the stock Linux kernel at all?
+
+No, but I still have it on flash. When working on vanilla u-boot, being
+able to boot into stock OS and having it appear to work fine was a
+criteria for me. Also it is nice if other users are able to replace the
+crappy Synology u-boot without being forced to also boot a custom OS.
+
+> > > > [...]
+> > > > > diff --git a/include/configs/ds414.h b/include/configs/ds414.h
+> > > > > index 9446acba79..bbefe632e0 100644
+> > > > > --- a/include/configs/ds414.h
+> > > > > +++ b/include/configs/ds414.h
+> > > > [...]
+> > > > > @@ -38,23 +34,38 @@
+> > > > >   * L2 cache thus cannot be used.
+> > > > >   */
+> > > > >
+> > > > > -/* SPL */
+> > > > > -/* Defines for SPL */
+> > > > > +/* Keep device tree and initrd in lower memory so the kernel can access them */
+> > > > > +#define RELOCATION_LIMITS_ENV_SETTINGS  \
+> > > > > +     "fdt_high=0x10000000\0"         \
+> > > > > +     "initrd_high=0x10000000\0"
+> > > > > +
+> > > > > +/*
+> > > > > + * mv-common.h should be defined after CMD configs since it used them
+> > > > > + * to enable certain macros
+> > > > > + */
+> > > > > +#include "mv-common.h"
+> > > > > +
+> > > > > +#ifndef CONFIG_SPL_BUILD
+> > > > >
+> > > > > -/* Default Environment */
+> > > > > +#define KERNEL_ADDR_R        __stringify(0x1000000)
+> > > > > +#define FDT_ADDR_R   __stringify(0x2000000)
+> > > > > +#define RAMDISK_ADDR_R       __stringify(0x2200000)
+> > > > > +#define SCRIPT_ADDR_R        __stringify(0x1800000)
+> > > > > +#define PXEFILE_ADDR_R       __stringify(0x1900000)
+> > > > >
+> > > > > -#define CFG_EXTRA_ENV_SETTINGS                               \
+> > > > > -     "initrd_high=0xffffffff\0"                              \
+> > > > > -     "ramdisk_addr_r=0x8000000\0"                            \
+> > > > > -     "usb0Mode=host\0usb1Mode=host\0usb2Mode=device\0"       \
+> > > > > -     "ethmtu=1500\0eth1mtu=1500\0"                           \
+> > > > > -     "update_uboot=sf probe; dhcp; "                         \
+> > > > > -             "mw.b ${loadaddr} 0x0 0xd0000; "                \
+> > > > > -             "tftpboot ${loadaddr} u-boot-with-spl.kwb; "    \
+> > > > > -             "sf update ${loadaddr} 0x0 0xd0000\0"
+> > > >
+> > > > Are these dropped or am I missing a generic spot which adds them? IIRC,
+> > > > the usb*mode and eth*mtu settings are required, is that wrong? Lastly,
+> > >
+> > > MTU is default to 1500 in mvneta.c. So the eth*mtu env is no longer necessary.
+> > >
+> > > Also, I believe usb*mode is no longer necessary with the USB driver
+> > > model. I have not come across their usage anywhere for a long time.
+> > > The USB driver model seems to handle everything pretty well.
+> >
+> > I think both are required for stock Synology Linux, see
+> > setup_board_tags() in board/Synology/common/legacy.c. One could just
+> > hard-code sane fallback values into that routine though.
 > 
->   lib/initcall.c              | 6 ++++--
->   test/py/tests/test_trace.py | 4 ++--
->   2 files changed, 6 insertions(+), 4 deletions(-)
-> 
-> diff --git a/lib/initcall.c b/lib/initcall.c
-> index c8e2b0f6a38..2686b9aed5c 100644
-> --- a/lib/initcall.c
-> +++ b/lib/initcall.c
-> @@ -49,13 +49,14 @@ static int initcall_is_event(init_fnc_t func)
->    */
->   int initcall_run_list(const init_fnc_t init_sequence[])
->   {
-> -	ulong reloc_ofs = calc_reloc_ofs();
-> +	ulong reloc_ofs;
->   	const init_fnc_t *ptr;
->   	enum event_t type;
->   	init_fnc_t func;
->   	int ret = 0;
->   
->   	for (ptr = init_sequence; func = *ptr, func; ptr++) {
-> +		reloc_ofs = calc_reloc_ofs();
->   		type = initcall_is_event(func);
->   
->   		if (type) {
-> @@ -84,7 +85,8 @@ int initcall_run_list(const init_fnc_t init_sequence[])
->   				sprintf(buf, "event %d/%s", type,
->   					event_type_name(type));
->   			} else {
-> -				sprintf(buf, "call %p", func);
-> +				sprintf(buf, "call %p",
-> +					(char *)func - reloc_ofs);
->   			}
->   
->   			printf("initcall failed at %s (err=%dE)\n", buf, ret);
-> diff --git a/test/py/tests/test_trace.py b/test/py/tests/test_trace.py
-> index f41d4cf71f0..ec1e624722c 100644
-> --- a/test/py/tests/test_trace.py
-> +++ b/test/py/tests/test_trace.py
-> @@ -175,7 +175,7 @@ def check_funcgraph(cons, fname, proftool, map_fname, trace_dat):
->       # Then look for this:
->       #  u-boot-1     0.....   282.101375: funcgraph_exit:         0.006 us   |      }
->       # Then check for this:
-> -    #  u-boot-1     0.....   282.101375: funcgraph_entry:        0.000 us   |    initcall_is_event();
-> +    #  u-boot-1     0.....   282.101375: funcgraph_entry:        0.000 us   |    calc_reloc_ofs();
->   
->       expected_indent = None
->       found_start = False
-> @@ -199,7 +199,7 @@ def check_funcgraph(cons, fname, proftool, map_fname, trace_dat):
->   
->       # The next function after initf_bootstage() exits should be
->       # initcall_is_event()
+> I see. Now I realized it's my bad that I did not consider stock OS at
+> all! The purpose of this patch is to get u-boot to use bootstd to boot
+> modern distros using a distro boot script. Should I put back these
+> envs "usb0Mode=host\0usb1Mode=host\0usb2Mode=device\0"
+> "ethmtu=1500\0eth1mtu=1500\0"  so we can support stock FW?
 
-This comment needs updating.
-> -    assert upto == 'initcall_is_event()'
-> +    assert upto == 'calc_reloc_ofs()'
->   
->       # Now look for initf_dm() and dm_timer_init() so we can check the bootstage
->       # time
+Yes, please. It's the simplest way to retain that functionality. If
+CONFIG_NET_RANDOM_ETHADDR populates eth*addr env vars, we may even keep
+that (and fetching "the real" addresses becomes merely a bonus).
 
-Otherwise, this looks sensible to me.
-
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-
--- 
-// Caleb (they/them)
+Cheers, Phil
