@@ -4,82 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F0B9C27C4F
-	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 15:22:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E9EAC27C4F
+	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 15:22:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 724098887D;
-	Thu, 13 Jun 2024 17:22:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D6D79888A9;
+	Thu, 13 Jun 2024 17:22:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="T9vnKrBt";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QgW4aLq+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0048B8892A; Thu, 13 Jun 2024 17:22:30 +0200 (CEST)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
+ id D281C888BF; Thu, 13 Jun 2024 17:22:32 +0200 (CEST)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0BEB888E8
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 17:22:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2ABC5888A9
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 17:22:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-62a087c3a92so11964357b3.2
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 08:22:26 -0700 (PDT)
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-6b064841f81so9180136d6.1
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 08:22:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718292146; x=1718896946; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1718292149; x=1718896949; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=REbDl4gRT7XbujsR8jMfpv61LmC5OdirqFUqzs79AUY=;
- b=T9vnKrBtqpDbOn5eNTA2vIkV87x+ngDPO2vPFfjbVHOc3DaVs90e/9ENuYkbVZJoWZ
- qu/pdLfHSFz7/RgVadOq+VXc5xfvkaJQWXYkhpyVJ9u57mfroPvcl3yQ8YEs44WtZrlx
- glOGB6781jP+2CI1GiNKPSUCX4lNwcQC9F/Uo=
+ bh=FeyVyFXAOSoqVri6m/j+e0m92uENKcpIYxRL9UOkxqE=;
+ b=QgW4aLq+YHCSVPXXmelo0XioairPr4QHdxxllujwcAnKOLwPGpckVe7UP2nLEFZP+r
+ MRpjweNaWpFj/ljtLv1UVRKbS4izIoO4aC6SkDhtV6DBDhfPMiqAINRJzQ2YV9jBu3Wk
+ exic3jOij2achLB6EErJYMsPNGSOcirKNoA1E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718292146; x=1718896946;
+ d=1e100.net; s=20230601; t=1718292149; x=1718896949;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=REbDl4gRT7XbujsR8jMfpv61LmC5OdirqFUqzs79AUY=;
- b=bIF6gQnmLBZxmvw497tNyTp2T4pXj2s45ih44S9Rvp4DKBfT75KjirRRrv9Np+LMTa
- 0hj2CP5sBmz57nRpZNSEB/8hfB0eYV4+v0m6apupNSfFpNBoNhum0t1vRE03RXZEi/za
- aUQD9y5Gnt2q53W2/OWdCFOseIHS/16bVpvEKEWvEJPSMfBRdNu+iDr31+c8rmQqz+/7
- BZSENnKATI7z8jPG4wMO4HDUcHxo7WRiEIGVyt67kZFRxWRXJsXeA2B6f6BF9lf45+eB
- weeZitepDDkHyadiAWvLqJMKTWFvhhKJouI1qjeRsv5igVHq1L8BNloXYMgOv0qYijZX
- AWLQ==
+ bh=FeyVyFXAOSoqVri6m/j+e0m92uENKcpIYxRL9UOkxqE=;
+ b=MCnar4WvHExC213AYlCqlOjn5+OtOA8J8ddCwvba1VXsW8LTxZhW5S8yOE4jQutnsA
+ PmkkXB6klp1FSQr5Uro9UEGCjR4sTXRMIYqklVOVND2FWxMvgJ6pyrcS1AZ8GE9jB9R8
+ Kk1qInsuzqI+T4sSo5/glecNB2Hp9G6h5if4CHsSFYbgG3HOLya4xPduI/RGgbb/mdf0
+ N0406WpHOsYIbzNzfYQppCSKuDp5n/vIMhNascflYuGqPj7ybKbh0MZysX04cgydmUai
+ 8rmwsCeF5pLd13kngPfr51YVCy3637/8dxb7H34GKTOdUA3w4+4thje1YXGpnBKNZVM1
+ 6niw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWnsMjCOcv+bgqJ45jlKP+YnKAlRyxUKqBFOFs9FGLvDgCevqQgl58BXdj9lnd4RAfAJdkyTP0pARs9SFGj855Q8La2Dg==
-X-Gm-Message-State: AOJu0YxwN/VLcfsCLxZ8YzKjPos7kIoZMW92sHtw0avri5AFvelAskYD
- cUUEZpqy6UgayusdQa/yDxyT1kNzCuVN3+DYyysYwVDwQV1dhB3vN0u+oe4iNBTQ377ggwG/1bV
- btdWHSumzd27pEU0445l4eZqmSc6Hh4ogAUZm
-X-Google-Smtp-Source: AGHT+IE0OK2ohdOA+NoS65J6r6Jid6lp4uHpEsC6IBUuGTJY53UmpiIT+zxPAVy1zAUOj9TwzT9U4yGSjxxD4X70ipo=
-X-Received: by 2002:a0d:ea91:0:b0:62d:45:4098 with SMTP id
- 00721157ae682-62fbb410118mr49098107b3.26.1718292145784; 
- Thu, 13 Jun 2024 08:22:25 -0700 (PDT)
+ AJvYcCV1M2GydHkdtQsA25eGcGrEb0QRs4YJna6UJC8mG1IbTvAi3lqglT/Wtw/JLbWqc3M3KqURXdLmB33wSinmk4Rc2r6i2g==
+X-Gm-Message-State: AOJu0YxGKEPohtZXMAbhQr0ap3Uw2ZMVo8lhIxsqQ6sRGQwPWKqU+BRQ
+ Qdfg0mNCN+8H77+xI/FGaiNk2bwwk+RboCOp1uCGmtY0vJOrlCSpVeS8DgaYHKwPmTLO6U19FBO
+ 7qiK7r5zsxtLlMrDU0NCHqy/BNr3BZLIszDM9
+X-Google-Smtp-Source: AGHT+IGyoaFmdwCnG+NPpIMO1B0UTjMLmtIRjStt4YspJ+uQknZuLxRt81SHseUhIvESmfWoefFXDMxfEdw3+6wieY0=
+X-Received: by 2002:a05:6214:4882:b0:6b0:89ac:ad3a with SMTP id
+ 6a1803df08f44-6b1a731b91dmr64332466d6.59.1718292149055; Thu, 13 Jun 2024
+ 08:22:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240607185240.1892031-1-sughosh.ganu@linaro.org>
- <20240607185240.1892031-5-sughosh.ganu@linaro.org>
- <CAFLszTjQW72_Z8Dx4g1mVx5Y=wq9xeXYVBffxLUto6sDp6CMbw@mail.gmail.com>
- <20240611210145.GM68077@bill-the-cat>
- <CAFLszTjd4Sf=_um7QbkpbLAO9=2=vX_LkHv6br=9FPAPFhbH5Q@mail.gmail.com>
- <20240611225554.GO68077@bill-the-cat>
- <CAFLszTi1ZR+qeEuEbGUE2Fv3h1ahX3S_2ySBPQjgkfruiW8Xtw@mail.gmail.com>
- <20240612172244.GG68077@bill-the-cat>
- <CAFLszThj1wmF4zOLDjSjHX1cg8RfiHMGgpbRccJ-VJu2dtihNw@mail.gmail.com>
- <20240612214001.GI68077@bill-the-cat>
-In-Reply-To: <20240612214001.GI68077@bill-the-cat>
+References: <20240613-bootmeth-android-v2-0-397f6e66eb29@baylibre.com>
+ <20240613-bootmeth-android-v2-1-397f6e66eb29@baylibre.com>
+In-Reply-To: <20240613-bootmeth-android-v2-1-397f6e66eb29@baylibre.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 13 Jun 2024 09:22:15 -0600
-Message-ID: <CAFLszTiZSu+aN53kAPd2GXosXv09Ams+jFDi2xGU0wh+faO=dg@mail.gmail.com>
-Subject: Re: [RFC PATCH 04/31] lmb: remove local instances of the lmb
- structure variable
-To: Tom Rini <trini@konsulko.com>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>, 
- Fabio Estevam <festevam@gmail.com>
+Date: Thu, 13 Jun 2024 09:22:18 -0600
+Message-ID: <CAFLszTgKMx-Jo-4-QPD3r9sjFDanLm54-6gf_B-edVPLPfsEXQ@mail.gmail.com>
+Subject: Re: [PATCH v2 1/5] boot: android: Provide vendor_bootimg_addr in
+ boot_get_fdt()
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Julien Masson <jmasson@baylibre.com>,
+ Guillaume La Roque <glaroque@baylibre.com>, 
+ Dmitrii Merkurev <dimorinny@google.com>,
+ Roman Stratiienko <r.stratiienko@gmail.com>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,53 +89,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Wed, 12 Jun 2024 at 15:40, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 13 Jun 2024 at 04:13, Mattijs Korpershoek
+<mkorpershoek@baylibre.com> wrote:
 >
-> On Wed, Jun 12, 2024 at 02:24:25PM -0600, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Wed, 12 Jun 2024 at 11:22, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Tue, Jun 11, 2024 at 08:41:39PM -0600, Simon Glass wrote:
-> > >
-> > > [snip]
-> > > > Also IMO there is only really one LMB list today. We create it at the
-> > > > start of bootm and then it is done when we boot. The file-loading
-> > > > stuff is what makes all this confusing...and with bootstd that is
-> > > > under control as well.
-> > > >
-> > > > At lot of this effort seems to be about dealing with random scripts
-> > > > which load things. We want to make sure we complain if something
-> > > > overlaps. But we should be making the bootstd case work nicely and
-> > > > doing things within that framework. Also EFI sort-of has its own
-> > > > thing, which it is very-much in control of.
-> > > >
-> > > > Overall I think this is a bit more subtle that just combining allocators.
-> > >
-> > > I think this gets to the main misunderstanding. The problem isn't
-> > > handling bootstd, or EFI boot, or even assorted scripts. Those are all
-> > > cases where things are otherwise (sufficiently) well-defined. The
-> > > problem is "security" and that a "carefully crafted payload" could do
-> > > something malicious. That's why we have to do all of this stuff sooner
-> > > rather than later in our boot process.
-> >
-> > That's the first I have heard of this, actually, but a bit more detail
-> > would help. How does the payload get loaded? I'm just not sure about
-> > the overall goals. It seems that everyone else is already familiar -
-> > can someone please take the time to point me to the details?
+> When calling android_image_get_dtb_by_index() using boot image v3+,
+> we should also pass the vendor_boot ramdisk address.
 >
-> Well, the short version I believe of the first CVE we got (and so
-> started abusing LMB) was along the lines of "load an image near where
-> the U-Boot stack is, smash things for fun and exploits".
+> Use get_avendor_bootimg_addr() to do so.
+>
+> Notes: on boot image v2, this is harmless since get_avendor_bootimg_addr()
+>        returns -1.
+>        for legacy implementations that don't have CMD_ABOOTIMG, add a weak
+>        implementation to avoid linking errors.
+>
+> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> ---
+>  boot/image-android.c | 5 +++++
+>  boot/image-fdt.c     | 2 +-
+>  2 files changed, 6 insertions(+), 1 deletion(-)
 
-OK. I am surprised that LMB does not catch that. It is supposed to add
-the stack and various other things right at the start before loading
-any file. So even if it clears the LMB each time, it should not be
-able to do that. Having said this, the code may be buggy as I don't
-think we have tests for U-Boot's overall functional behaviour in these
-situations.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
