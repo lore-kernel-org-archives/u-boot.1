@@ -4,58 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4F90C27C4F
-	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 07:49:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 534DDC27C4F
+	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 07:51:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFA048834B;
-	Thu, 13 Jun 2024 09:49:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id C24AC881A9;
+	Thu, 13 Jun 2024 09:51:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1718264955;
-	bh=98MN392AhcmuxzSemJPddLTSljNsVkVozioENg4LvX0=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=A3j6I4XVFp1jeOTT2FLy1pEgjxO+PHc3YKIAEh4eygdIWRtb4ASc9tYwFkKqbmCVV
-	 89PiNWk/53otxDcGlxU0MzosT8UnXzSEiC7UAfBM0zBrkBeIZFsY5hnr0qxXP3GWB4
-	 wL49hkiLhvSY1rQkhWLPBwLbauT2SSw7giPfP5dCdgLwx2zZMb5NE7a36QCf76+DrU
-	 UIxMCChm7PlJ4/MMyqdAnYNaHSnHMcdY86+y4HoiEFEy686/CtV3IYm2QpyhqILwtk
-	 g4L/hK3wPFTroiwiSkQt0FK8p7pxQpqB++BQSU1OUwF3MlCPIqH9H710kbMlDMc0ZH
-	 QWzi3am+ACj7w==
-Received: from [10.88.0.65] (dslb-002-207-026-217.002.207.pools.vodafone-ip.de
- [2.207.26.217])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: ch@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 3CCAC88315;
- Thu, 13 Jun 2024 09:49:13 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1718264953;
- bh=98MN392AhcmuxzSemJPddLTSljNsVkVozioENg4LvX0=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=BpNCwlSMaHo/0CNUn4MH63ENIg3dk+ulsS6oD+6AaVNnIPA3yMjcdCF3xL+AgkFtn
- o2GaJ6iif98+2vxOhelgT9LRjXW6FIROsNx++9rSf2tQP9WLQyxDvvnALBieWYnvAh
- eY1UFQmJtI+qKnDnMCEuukKXOx3y3BGcQ1FFDeXoSrm46bGLCF95hrOLIXvBrJQ7cz
- +nGJ9qxouJOVK2MckaiK3+XFl6dvBms2dws3BX9OhV+xHhDs936/OhtXyD4dEmGAlJ
- OBswnbVtmp+j59cCDUj2ekZhtiwG4mM6fq86t/ou8+7t3MMM2rvfCetppyWigfMYQY
- bEZ30EU6M/iSg==
-Message-ID: <814d2716-bc77-494a-871e-1bf3ee466d6b@denx.de>
-Date: Thu, 13 Jun 2024 09:49:12 +0200
+Authentication-Results: phobos.denx.de;
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="RjOWR+Vx";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 13A4D881A9; Thu, 13 Jun 2024 09:51:30 +0200 (CEST)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AD2787EBD
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 09:51:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=phytec.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1718265086; x=1720857086;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=9K2vFwnBTMbJvgrB3+fnhefbRXr2q52rT4lmb/iN4dc=;
+ b=RjOWR+VxzJzVe4NT3LCkKdqgGUTS/ZjyliWY6MIgQ3Fl2oYO7N+Ez0/ewr8o+/wX
+ txoVth80cHTIktHFgGvu9hxZCDIHKAxGM3Z6CQXIFc2RAypksCW/vcDCvhemqI+y
+ ZtXvftfm4vVZ1rC4CdL7CbCKtVyFQ2FcIw6cZDmC5yc=;
+X-AuditID: ac14000a-03e52700000021bc-74-666aa4fe15ad
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 3B.2F.08636.EF4AA666;
+ Thu, 13 Jun 2024 09:51:26 +0200 (CEST)
+Received: from [192.168.10.3] (172.25.0.11) by Berlix.phytec.de (172.25.0.12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Thu, 13 Jun
+ 2024 09:51:26 +0200
+Message-ID: <c636e0ec-2047-408e-9511-29e9e19a438e@phytec.de>
+Date: Thu, 13 Jun 2024 09:51:25 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: Shutting down of the git-daemon (git protocol, https and ssh
- still remain)
-To: Quentin Schulz <quentin.schulz@cherry.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marex@denx.de>, Stefano Babic <sbabic@denx.de>
-References: <323dbb9c-42bd-4664-b660-0ba24c819bec@denx.de>
- <94d1e571-6051-4a1a-b15a-ab5147ada833@cherry.de>
+Subject: Re: [PATCH 1/3] doc: board: phytec: phycore-am62x: Fix Link to
+ Documentation
+To: Daniel Schultz <d.schultz@phytec.de>, <u-boot@lists.denx.de>,
+ <trini@konsulko.com>, <upstream@lists.phytec.de>
+References: <20240612161639.2660205-1-d.schultz@phytec.de>
 Content-Language: en-US
-From: Claudius Heine <ch@denx.de>
-Organization: Denx Software Engineering
-In-Reply-To: <94d1e571-6051-4a1a-b15a-ab5147ada833@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Wadim Egorov <w.egorov@phytec.de>
+In-Reply-To: <20240612161639.2660205-1-d.schultz@phytec.de>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrALMWRmVeSWpSXmKPExsWyRpKBR/ffkqw0g41fLSymTtrMbvF2bye7
+ Rfc7dQdmj1cHVrF7nL2zg9Gjv7uFNYA5issmJTUnsyy1SN8ugStjxp78giaOijlrN7A0MD5n
+ 62Lk5JAQMJF48nQnexcjF4eQwBImiX1T/zNDOHcZJRa9vssCUsUrYCPR3vubFcRmEVCV2PCi
+ mR0iLihxcuYTsBpRAXmJ+7dmgMWFBcIlfm+YBGaLCJRI7Jh/mRnEFhKwkrh0dTFYPbOAuMSt
+ J/OZQGw2AXWJOxu+gc3nFLCWePL2GhNEjYXE4jcH2SFseYntb+dAzZGXeHFpOQvEB/IS0869
+ ZoawQyW2ftnONIFRaBaS82YhWTcLydhZSMYuYGRZxSiUm5mcnVqUma1XkFFZkpqsl5K6iREU
+ 6iIMXDsY++Z4HGJk4mA8xCjBwawkwjtrYVaaEG9KYmVValF+fFFpTmrxIUZpDhYlcd7VHcGp
+ QgLpiSWp2ampBalFMFkmDk6pBsa4GWtspPerr44/dti0x1j35/4/Et2/1DbyHfwybcLZ25fj
+ v3QIt02cfmpmcNakuv3vypWuJu2p+q6mVrR9/zcmr89qFWrbRKJmrO1Q3Wx2Zs4nD5fdt6U2
+ dtbZ5ATHrzTiay5WO26z/b/DcdZnOVlRbqm9bbM/mtULZInEdIcGx5t8lti+1keJpTgj0VCL
+ uag4EQBQSxBsYwIAAA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,89 +89,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
 
-On 2024-06-12 12:37 pm, Quentin Schulz wrote:
-> Hi Claudius,
+
+Am 12.06.24 um 18:16 schrieb Daniel Schultz:
+> We moved our documentation to another hoster and therefore the URL
+> changed. Point to the latest documentation instead of release versions
+> to not link out-dated documentation.
 > 
-> On 6/12/24 12:20 PM, Claudius Heine wrote:
->> Hi everyone,
->>
->> in the past we used cgit, which provided cloning the u-boot repo via 
->> http, https, ssh and the git protocol.
->>
->> When we migrated to gitlab, which doesn't support the git protocol, we 
->> implemented some additional service files to continue to support it 
->> for some of our git repositories.
->>
->> We just noticed that cloning via the git protocol is currently broken, 
->> likely some changes in gitlab happened and we would need to recreate 
->> the symlinks on the server to point to the right repositories again.
->>
->> Since that is another thing to maintain and keep up, we would like to 
->> just shut the git protocol down. AFAIK most projects moved to use 
->> https for cloning anyway, since there were not many reports of broken 
->> cloning.
->>
->> What are your thoughts? Is it worth the effort to keep the git 
->> protocol up?
->>
+> Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
+
+For all three patches,
+
+Reviewed-by: Wadim Egorov <w.egorov@phytec.de>
+
+> ---
+>   doc/board/phytec/phycore-am62x.rst | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> On the side of OpenEmbedded-Core, HTTPS is being used since Langdale 
-> (4.1) and the first dot release of Kirkstone (4.0.1) so only outdated 
-> layers would be impacted (provided they aren't already, but since 
-> there's a download cache system in Yocto, it's possible they're hitting 
-> their own local cache instead of fetching it from your server(s)).
-> 
-> It's never nice to see things going/breaking compatibility because it 
-> may break old builds which is always a nice trick up one's sleeve to 
-> figure out when things started to go wrong in one's image.
-
-Well, this happens all the time, but maintaining backwards compatibility 
-here should be done in a best-effort way.
-
-With old build, they likely need old compilers and systems, which will 
-probably break anyway if they use https or ssh, because obsolete crypto. 
-If people want to build old stuff, they probably have to fiddle around 
-everywhere anyway, or have a download cache.
-
-The internet, or any network, isn't nice to old systems...
-
-> Also, while I 
-> checked OE-Core, other third party/community maintained layer could be 
-> impacted. I assume this is the case of meta-amarula-engicam[1] and 
-> meta-allwinner-hx[2] for example.
-> 
-> I would suggest sending a mail to the different build systems mailing 
-> lists, I assume https://lists.openembedded.org/g/openembedded-devel and 
-> https://lists.yoctoproject.org/g/yocto for the OE-Core/YP side? Either 
-> to ask for their opinion or notify them (and specifically third party 
-> layers) it's going away or both.
-
-Not sure if I want to go through them all. Looking into all these 3rd 
-party, downstream repos and informing everyone seems to be even more 
-effort than maintaining the git protocol.
-
-And if someone uses their repo, they will notice it quickly and can 
-easily fix it.
-
-Anyway, I fixed it yesterday, and it doesn't make much sense to stop it 
-now. So I will leave it in place until it breaks again, then I just 
-remove it.
-
-thanks everyone for their input,
-Claudius
-
-> 
-> [1] 
-> https://github.com/amarula/meta-amarula-engicam/blob/master/recipes-bsp/u-boot/u-boot-common_2018.05.inc
-> [2] 
-> https://gitlab.com/dimtass/meta-allwinner-hx/blob/master/recipes-bsp/u-boot/u-boot-common.inc
-> 
-> Cheers,
-> Quentin
-
--- 
-DENX Software Engineering GmbH,        Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-54 Fax: (+49)-8142-66989-80 Email: ch@denx.de
+> diff --git a/doc/board/phytec/phycore-am62x.rst b/doc/board/phytec/phycore-am62x.rst
+> index bc6d5246694..681ac536125 100644
+> --- a/doc/board/phytec/phycore-am62x.rst
+> +++ b/doc/board/phytec/phycore-am62x.rst
+> @@ -155,4 +155,4 @@ Further Information
+>   -------------------
+>   
+>   Please see :doc:`../ti/am62x_sk` chapter for further AM62 SoC related documentation
+> -and https://docs.phytec.com/phycore-am62x for vendor documentation.
+> +and https://docs.phytec.com/projects/yocto-phycore-am62x/en/latest/ for vendor documentation.
