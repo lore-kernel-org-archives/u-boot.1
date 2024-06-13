@@ -4,80 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D033C27C4F
-	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 17:11:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 708DDC27C4F
+	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 17:27:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A30D18893C;
-	Thu, 13 Jun 2024 19:11:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D505B88865;
+	Thu, 13 Jun 2024 19:27:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nM+2TULL";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="ds28wJYk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2008288938; Thu, 13 Jun 2024 19:11:02 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AD89E88939; Thu, 13 Jun 2024 19:27:34 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF14F8892E
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 19:10:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C0AA8892B
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 19:27:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-35f18e66530so148046f8f.1
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 10:10:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1718298659; x=1718903459; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7rGpnLuzdBWiPo+CXU/EnlTq8ff3QE8grATl4MIg/8k=;
- b=nM+2TULLrK564IxQR06emlmXXOOou3TFo6Ox7tIVcFW/cJvGyxwTTnG15X54LL3+eK
- dNN+ZvRNqJO9gzImj+2UF3qKcgJgydG0XgD2eu+tzRYESwlPY2e397a2lXWwiOPoD50E
- 8hv+XFKdk0sI/5DJUY/ePZmD6xXXDqFCSRx82NmlUgv4lZcM4Qko3+C80QZBlGgwf8VL
- rhfJsZ271XSP8H3NuuWbccPubKV/cN1j1GDaQU1J4csmF5lfxIEs2l9fcIr2/+aHDWsR
- jekurLd+lcly5EyP4rwT3d+Zpjie2+adSNFIfhoUd9/o7DIeyuU6QUiuoCLn3ZWhOc0i
- CBoQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718298659; x=1718903459;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=7rGpnLuzdBWiPo+CXU/EnlTq8ff3QE8grATl4MIg/8k=;
- b=ntchZhwwX6Wej393DbsZLLQsiOKf1J2UvyK0JUh9cBjAYodpg0GOVDp5PdpWiby3dy
- 6NbTKAf4V+M+SYdnVeNqYjhzPF5QSo7298+jNCfoD4JXUV9hZhMrQ5SV3Wf29IziVlW/
- IZLWN5d87Yvarw7dcNVYgqWSRrHEz9Mtd91d3wML/e/p5Lxa98C+x4KpvPy24DKkVeFC
- su2tjsAk6D6p9OZ+ia/jCyv4dxmMfIadf1KhRXPxBOMMGBsQURujXVVX2vGO8TB7BsCo
- 035PA4mVu9npMKCAMGIr9nA25A9KC+Env4OK5yS/XL7Q7Ifx0x7rOqkAPt9Qa2wZNIHv
- 17EQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUQlmz0/t4THDD6gaMstfTxBMlvd26I7foXUf/bRoXWQVFp/FS77OtwVPohVieJmPn+ERJVpJt1NC0/IhtyWVFdhJWjqA==
-X-Gm-Message-State: AOJu0YyHBZN5wKFOK7Mq2m9KqIwqlEudT+xTUKcc4wg5/hwmSynrTymX
- /X40lQY3HIaOM6828B+tJrgtE+bOL1ifNUJxUdWpxtxeOZOp7bjvKH3KPvSPpraafkNdb8f3DIz
- SaEsQw6zSOeIzGpqrd2S6F9JrcEU=
-X-Google-Smtp-Source: AGHT+IFMwhZhVFlkOreiFqtBqPX6xpy1z7QjuU/j1WV0pjLSYV4OAK8b4NX+vTe/vDc0bCZZu/s/0KUEv9eLY4aFuRc=
-X-Received: by 2002:a5d:6c69:0:b0:35f:1f7e:892e with SMTP id
- ffacd0b85a97d-3607a78685amr199831f8f.7.1718298659154; Thu, 13 Jun 2024
- 10:10:59 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1718299649; x=1718904449; i=xypron.glpk@gmx.de;
+ bh=j1/PleMQtq2U2RiAD7u72J8Ae3yo410//nEQkz5Q4hM=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=ds28wJYknfK25xDIH4yVVTvL2gZnHA215WS3+dvGk/WWWY942OFzbfba5nAHMQAx
+ Tx6d/NEC39dnHTTuLObrDENu/x5LRaAutS9Q8CGh2WjzWPNMFRoQn5Ja/NhGwhhIp
+ zaQFm+k95DZAgS89CyqhfqTFcRFUj2D5smQD/yRhpjncDg5qDg1c+ANXI9JQEwf8a
+ 1RlTv9oHTDzwTYejGebCPxF8p/L2w15eF9uXD8kPrS66ycL7MK5lx9LmQfnecShxS
+ vPCdPUpVxfUpdzE9dkdXjfm43+Xlmmabvil+7aDbZuJzTkcHGPyYJsdnLzXbsD/Vd
+ T4/j2zEwojWDOgH9Pg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.126] ([178.202.41.25]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MRCKC-1s5nAD0Lrg-00QHQ4; Thu, 13
+ Jun 2024 19:27:29 +0200
+Message-ID: <1604c2a7-d72e-491f-806f-da29d14f0a17@gmx.de>
+Date: Thu, 13 Jun 2024 19:27:28 +0200
 MIME-Version: 1.0
-References: <20240613-bootmeth-android-v2-0-397f6e66eb29@baylibre.com>
- <20240613-bootmeth-android-v2-1-397f6e66eb29@baylibre.com>
-In-Reply-To: <20240613-bootmeth-android-v2-1-397f6e66eb29@baylibre.com>
-From: Igor Opaniuk <igor.opaniuk@gmail.com>
-Date: Thu, 13 Jun 2024 19:10:47 +0200
-Message-ID: <CAByghJYJ0ed=i79JLK_Lh217-AgeJ2eN8qjd1i8yUQcKBChkDg@mail.gmail.com>
-Subject: Re: [PATCH v2 1/5] boot: android: Provide vendor_bootimg_addr in
- boot_get_fdt()
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Simon Glass <sjg@chromium.org>, Julien Masson <jmasson@baylibre.com>, 
- Guillaume La Roque <glaroque@baylibre.com>,
- Dmitrii Merkurev <dimorinny@google.com>, 
- Roman Stratiienko <r.stratiienko@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 04/31] lmb: remove local instances of the lmb
+ structure variable
+To: Simon Glass <sjg@chromium.org>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Marek Vasut <marex@denx.de>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+References: <20240607185240.1892031-5-sughosh.ganu@linaro.org>
+ <CAFLszTjQW72_Z8Dx4g1mVx5Y=wq9xeXYVBffxLUto6sDp6CMbw@mail.gmail.com>
+ <20240611210145.GM68077@bill-the-cat>
+ <CAFLszTjd4Sf=_um7QbkpbLAO9=2=vX_LkHv6br=9FPAPFhbH5Q@mail.gmail.com>
+ <20240611225554.GO68077@bill-the-cat>
+ <CAFLszTi1ZR+qeEuEbGUE2Fv3h1ahX3S_2ySBPQjgkfruiW8Xtw@mail.gmail.com>
+ <20240612172244.GG68077@bill-the-cat>
+ <CAFLszThj1wmF4zOLDjSjHX1cg8RfiHMGgpbRccJ-VJu2dtihNw@mail.gmail.com>
+ <20240612214001.GI68077@bill-the-cat>
+ <CAFLszTiZSu+aN53kAPd2GXosXv09Ams+jFDi2xGU0wh+faO=dg@mail.gmail.com>
+ <20240613154206.GO68077@bill-the-cat>
+ <CAFLszThvhYKpxLhJOgXOkW244Cj6Au=+LqhzHTtYHtri_+tmEg@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAFLszThvhYKpxLhJOgXOkW244Cj6Au=+LqhzHTtYHtri_+tmEg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:D70R84e/rM13ug7gfcFPzL8CjOGhL1mChw1crG23GOLieP2fxuj
+ xE48XZMr1icMzcylPKjwfYmcvm25gxxleX/HIpuFSCPZ58Kykr3s9qYTIxcokteewfuVunt
+ RYTTGj90JAGE3pESW6PjkXJ5mOEw4OuPxEs2tKPIFM9S6W/tr4oZAohnz9rpiYK3noNG2Qg
+ UsqZX8WWsfwlioVJt04tw==
+UI-OutboundReport: notjunk:1;M01:P0:EOT7f3UUJao=;DHFcsoozHRT/4NgV6K7aqfFaU4Y
+ /qY7VS0ML+GN9gSwJQMM41FcVBn+bXGrB91cu+x01oQhbjs6IFst9oYAD7S1lxQuJ9f5F5yse
+ en9vwi1Qvi1UXwkHGjvUHcBQHY1cygSrur13LhdxWvqeQPQZaxHAQikIjL71Hh9VHMXEusvuo
+ CRZzkLYlW/weeqjMDyonU51KY+mNEyHAVjsGya4MFKp/ZaUVmhyGVInu0AZbrdX3BSMJ6ryHJ
+ ijyP3rDBnoAf3LByCG3Cusg4SLL7r76KyzJFnde74auQg9NHM5lMRisfXabJC4xVyfpOq+jkr
+ XlosAdRRRf1E6/QrBxPb6aCgiBhSWxwelrKa/3zVu+/SzP9K5XZaavh95yBLzWSjiQSuB5uAZ
+ 2qr5dXiLrSmVBcygHB/yrOXkhuEBoSSTLXsIawGsz6TqW6BZ4opJNty0UsJEg1eOgNxxnzssi
+ BkOdeupXXo1O4LsLP+Ofcq4dCrl1elKNu5Vc+VbjCvSgCMO2ZSvIPPGaNstUsK3/M5KfqPsbW
+ 3lmhRCcDA2fpt+jo6IR2Qj9jM2mF5OGvvX91W53Cl1RqgFQiSH5uZbiG6p81FleNp1bwQuZRL
+ uJDyrvDmG5nB9vz5DB47jB+LNGcwcgnCwVb29llJwNy6fNdez15BhRa2T69vZScNdyk3IaCep
+ rbZRE0+gSGLydD2L39lo+1AZvuwGjdmx7ia6SPM70tjqH/YhKY7NjHigWCkACzr75YBtFUGO7
+ lppNc2PFYGpnZE5PgmtQm2dKgozw1F3Kw/YHiPZbp93XvUNRHMzyivtp04JPpJO9hfyuOQ1U5
+ mnQK0+Z2AJ6qrbQ+wrywtcvoWpZYUVPuB5C9mwrG8Y8IE=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,74 +104,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jun 13, 2024 at 12:13=E2=80=AFPM Mattijs Korpershoek
-<mkorpershoek@baylibre.com> wrote:
+On 13.06.24 18:59, Simon Glass wrote:
+> Hi Tom,
 >
-> When calling android_image_get_dtb_by_index() using boot image v3+,
-> we should also pass the vendor_boot ramdisk address.
+> On Thu, 13 Jun 2024 at 09:42, Tom Rini <trini@konsulko.com> wrote:
+>>
+>> On Thu, Jun 13, 2024 at 09:22:15AM -0600, Simon Glass wrote:
+>>> Hi Tom,
+>>>
+>>> On Wed, 12 Jun 2024 at 15:40, Tom Rini <trini@konsulko.com> wrote:
+>>>>
+>>>> On Wed, Jun 12, 2024 at 02:24:25PM -0600, Simon Glass wrote:
+>>>>> Hi Tom,
+>>>>>
+>>>>> On Wed, 12 Jun 2024 at 11:22, Tom Rini <trini@konsulko.com> wrote:
+>>>>>>
+>>>>>> On Tue, Jun 11, 2024 at 08:41:39PM -0600, Simon Glass wrote:
+>>>>>>
+>>>>>> [snip]
+>>>>>>> Also IMO there is only really one LMB list today. We create it at =
+the
+>>>>>>> start of bootm and then it is done when we boot. The file-loading
+>>>>>>> stuff is what makes all this confusing...and with bootstd that is
+>>>>>>> under control as well.
+>>>>>>>
+>>>>>>> At lot of this effort seems to be about dealing with random script=
+s
+>>>>>>> which load things. We want to make sure we complain if something
+>>>>>>> overlaps. But we should be making the bootstd case work nicely and
+>>>>>>> doing things within that framework. Also EFI sort-of has its own
+>>>>>>> thing, which it is very-much in control of.
+>>>>>>>
+>>>>>>> Overall I think this is a bit more subtle that just combining allo=
+cators.
+>>>>>>
+>>>>>> I think this gets to the main misunderstanding. The problem isn't
+>>>>>> handling bootstd, or EFI boot, or even assorted scripts. Those are =
+all
+>>>>>> cases where things are otherwise (sufficiently) well-defined. The
+>>>>>> problem is "security" and that a "carefully crafted payload" could =
+do
+>>>>>> something malicious. That's why we have to do all of this stuff soo=
+ner
+>>>>>> rather than later in our boot process.
+>>>>>
+>>>>> That's the first I have heard of this, actually, but a bit more deta=
+il
+>>>>> would help. How does the payload get loaded? I'm just not sure about
+>>>>> the overall goals. It seems that everyone else is already familiar -
+>>>>> can someone please take the time to point me to the details?
+>>>>
+>>>> Well, the short version I believe of the first CVE we got (and so
+>>>> started abusing LMB) was along the lines of "load an image near where
+>>>> the U-Boot stack is, smash things for fun and exploits".
+>>>
+>>> OK. I am surprised that LMB does not catch that. It is supposed to add
+>>> the stack and various other things right at the start before loading
+>>> any file. So even if it clears the LMB each time, it should not be
+>>> able to do that. Having said this, the code may be buggy as I don't
+>>> think we have tests for U-Boot's overall functional behaviour in these
+>>> situations.
+>>
+>> Right, LMB does catch the example I gave (because we made all of the
+>> load from storage/network functions init an lmb and we always make sure
+>> a new lmb gets U-Boot stack/etc). The next thing we didn't catch was
+>> "what if EFI does the loading?" and we've kludged around that, and in
+>> turn had some of the thorny questions. Some of that is what I think
+>> you're asking about in this part of the thread, to which the answer is
+>> "EFI spec says you need to place X in memory", so we just need to
+>> reserve it when it's asked for, so that something else can't come along
+>> and smash it maliciously.
 >
-> Use get_avendor_bootimg_addr() to do so.
+> OK I see. Of course it isn't just EFI that has this issue. I believe
+> the answer (for small blocks) is to use malloc(), which I think we do
+> with a few exceptions which Ilias pointed out. For things like the TPM
+> log and ACPI tables we should probably use a bloblist, as we do on
+> x86. For large things (like loading a kernel) we should use LMB. I've
+> been thinking about how best to tie this to boot, as opposed to random
+> allocations in U-Boot itself, which would lead to fragmentation and
+> strange behaviour. I think bootstd is a great place to have a
+> persistent LMB. It can be attached to bootstd_priv.
 >
-> Notes: on boot image v2, this is harmless since get_avendor_bootimg_addr(=
-)
->        returns -1.
->        for legacy implementations that don't have CMD_ABOOTIMG, add a wea=
-k
->        implementation to avoid linking errors.
+> My hope is that EFI is just another boot method, where
+> already-allocating things are presented to the OS. Apart from the
+> Ilias exceptions, I believe this is how it works today.
 >
-> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> ---
->  boot/image-android.c | 5 +++++
->  boot/image-fdt.c     | 2 +-
->  2 files changed, 6 insertions(+), 1 deletion(-)
->
-> diff --git a/boot/image-android.c b/boot/image-android.c
-> index ee626972c114..09c7a44e058a 100644
-> --- a/boot/image-android.c
-> +++ b/boot/image-android.c
-> @@ -56,6 +56,11 @@ static ulong add_trailer(ulong bootconfig_start_addr, =
-ulong bootconfig_size)
->         return BOOTCONFIG_TRAILER_SIZE;
->  }
->
-> +__weak ulong get_avendor_bootimg_addr(void)
-> +{
-> +       return -1;
-> +}
-> +
->  static void android_boot_image_v3_v4_parse_hdr(const struct andr_boot_im=
-g_hdr_v3 *hdr,
->                                                struct andr_image_data *da=
-ta)
->  {
-> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-> index 56dd7687f51c..8332792b8e80 100644
-> --- a/boot/image-fdt.c
-> +++ b/boot/image-fdt.c
-> @@ -502,7 +502,7 @@ int boot_get_fdt(void *buf, const char *select, uint =
-arch,
->                  * Firstly check if this android boot image has dtb field=
-.
->                  */
->                 dtb_idx =3D (u32)env_get_ulong("adtb_idx", 10, 0);
-> -               if (android_image_get_dtb_by_index((ulong)hdr, 0,
-> +               if (android_image_get_dtb_by_index((ulong)hdr, get_avendo=
-r_bootimg_addr(),
->                                                    dtb_idx, &fdt_addr, &f=
-dt_size)) {
->                         fdt_blob =3D (char *)map_sysmem(fdt_addr, 0);
->                         if (fdt_check_header(fdt_blob))
->
-> --
-> 2.45.2
->
-Reviewed-by: Igor Opaniuk <igor.opaniuk@gmail.com>
+> Where I think this heads in the wrong direction is using
+> EFI-allocation functions before we are booting an EFI image. EFI has
+> no concept of what is 'in empty space' so it leads to the lmb
+> conflict, the subject of this discussion.
 
---=20
-Best regards - Atentamente - Meilleures salutations
+EFI binaries can return to the command line interface.
+EFI binaries may be drivers that stay resident and run in the background
+after returning to the command line interface. They might for instance
+provide block devices.
 
-Igor Opaniuk
+Device-paths must be created from EFI pool memory as they may be freed
+via FreePool() according to the EFI specification. And these we create
+whenever a block-device is probed.
 
-mailto: igor.opaniuk@gmail.com
-skype: igor.opanyuk
-https://www.linkedin.com/in/iopaniuk
+We should not make any assumptions that conflict with the UEFI
+specification.
+
+In our initial discussion with Ilias one idea was to merge LMB and EFI
+memory management. This merged system would have to consider the
+requirements of the UEFI specifications like a finer grained memory type
+system and page boundaries.
+
+Best regards
+
+Heinrich
+
+>
+> This is all quite subtle and probably worthy of a VC discussion.
+>
+>>
+>> But that also raised the more general problem, and why we need a
+>> persistent reservation list, of allowing boards/SoCs to say they want t=
+o
+>> reserve a block of memory for whatever, and have that obeyed, for real.
+>> For example, the mach-apple logic of "just pick some memory locations t=
+o
+>> use for kernel/dtb/initrd" isn't really as safe as it should be since
+>> those reservations aren't really seen anywhere once the function
+>> returns, it's just setting some environment variables.
+>
+> Yes, that part of it I understand. Somehow I either didn't see or
+> forgot that board_late_init() code. With the script-based boot it
+> makes some sort of sense, but with bootstd we should have allocation
+> of addresses dealt with there. I have held off on retiring
+> kernel_addr_r etc. as the scripts are still in use. But perhaps it
+> would be a good time to convert bootstd to use lmb instead?
+>
+> Regards,
+> Simon
+
