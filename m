@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF729C27C75
-	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 12:44:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1999FC27C4F
+	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 12:44:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31FDD8890F;
+	by phobos.denx.de (Postfix) with ESMTP id 8B1F188915;
 	Thu, 13 Jun 2024 14:43:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UB+nVSAU";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dnrQtP5x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6AD06888F2; Thu, 13 Jun 2024 13:10:21 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 0F01D888FA; Thu, 13 Jun 2024 13:10:24 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 799B3883D3
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 13:10:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 75BC2888D1
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 13:10:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-57c6afa1839so423931a12.2
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 04:10:19 -0700 (PDT)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a6f04afcce1so119341466b.2
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 04:10:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1718277019; x=1718881819; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1718277021; x=1718881821; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=kr80qGA8fTtmGld4Thh3XY/hn2vKZu79T8rEjD9KMoo=;
- b=UB+nVSAUMkgVN4Ye0gldVzLbJzKkNzocI9RJJO4LiuCn4RmXn5drH6UBbKaWcQmVbP
- yOwuVpYmBegbSwYbdXqbBHdzTXInEw+3Dmv6yLVZTuXQFMuCAbv/Tkg/Mp6rfB6YiFWF
- eNxBOhS1+3XSvOGM7gu9e+Zzmbr+05SvJOZZCTOKl/OkRGVsVTMFeLi96H06XKSBzFyq
- TKk46Y4t+F4vWYF5GU6JEwDoe+/PmSi8AdyNl1fnW9B8eMPQbAshAUSmzy6tEnHMs+IM
- hEx1+eGYb7QefX+Nbk/3ChRRCvQskc2/KM5COfYpiEpYk/ecSPGrESJOkGyzmHyXJoXU
- WGpQ==
+ :reply-to; bh=lbqhTC/Ts3tNK5F1WJyeiJc9XsdkXxjI9Vn5rbodR/U=;
+ b=dnrQtP5xtx5IpNq7fNkuO09UimtMRc6vxBtDDnesB+Obbgb5Z323sm0ZmuaTGzG59U
+ 7aNLOEgZf527vd2XJVugkZ30ZDpTSEjOlX47KBzYmPZ0QBtkTCkqXUzRaIHFVPTICeNo
+ ZMY3BJw+ChgwEVsnXKTTm9BpNkD952biA8RelwOxkkw85+dUlNPQZWqL4pQ3jD/5F7Ko
+ ln46NwTMr/kmYt3R0Rvxn4jrPk1ePFQ4FQpm8oJs5VTLCLt5HlcbqCEwNMHC9CNhAUeE
+ bTHp173TfOfdt5JJevvIhv8w6Bim0MlTS+HAYkkMYCsW7pfklJuGCOqezIOEBSPB5I34
+ MQng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718277019; x=1718881819;
+ d=1e100.net; s=20230601; t=1718277021; x=1718881821;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kr80qGA8fTtmGld4Thh3XY/hn2vKZu79T8rEjD9KMoo=;
- b=o26jmUBL7Sdo6CDJtN7jUlewPQJSjjOIw6y7lZXJI/apEJxo3PIjp5AXciN5/XtrMo
- lauMV3XKHVbF7hVGnsPoAfdy75xILGT+vOhfoU3rx80f+KaupnJUqPSq2lZ6xi1RUuhV
- azNOkbsyRTI1jou9MjBpS9RlYWKyAqz0l838yRFUxD5lv464ODJDJEDeOFP2+kHqnxZH
- dRL2GC4YMGczccGLpK2ThOLv4EG2PA+wqqsaZ4cM/a+wdTFKHy4TwpxQikoLVq10i/rx
- Py8S0WxTi8GMmPYUS/K16cs2pYG+0iixeJILYHT/JpPpvOHg67VHZEZXpSvrZ4RO7Uae
- dUhw==
+ bh=lbqhTC/Ts3tNK5F1WJyeiJc9XsdkXxjI9Vn5rbodR/U=;
+ b=jGuwmo2BOEI88P2B+0SLfkDWw8BQpbbReYBZ0DV4YYpM+6an/jxB6SoVEiwK6yx3Zb
+ a3DhplbHAHi6gqlEDcaAwmXUG7rmnieeQjF9aVXqEYeEuEhunYvXXWcJFFulMmC5AnD/
+ BOllPf/NAGV3jTcfzQwn6Gjkq84wcl8/1KqAWayNKGy6NaRIlTs3J3TocRkvhl0YI7ad
+ y3KWROaYIduXu/iSk8YXl6IRytKOJPi0ElD6yGKrDJnBRIKjCHNfo0z0+Ax9GyYTyGrJ
+ c59QDlZ1hpm8hOipunJq2dhqE7yXQANVhOblIJrlu+gsHOpA+LRhlJGxOARaSyV6Ap4j
+ DGYw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXqWcSprgMIzEulrtLXvuC0lWp3kXqeUtBkkn3aaZewdN1dffLiCPn3jml4K0+BdV7jSpemc3rXTdmQoFlYIDjMhC+nyA==
-X-Gm-Message-State: AOJu0Yx/qeZxKsLnSF9RhcKY9LX28vZAcvcH9n2HNSGyRhphDQZ60zKW
- giY+gbpg9IH90k5wl+RdAw+Wp2EpWBfUev4iztHdQEjttX4qyxyvn3UqCQ==
-X-Google-Smtp-Source: AGHT+IFLUlNtZIbf65wp7K+4UED37pe4u0W5JmVhFzBgf52celWvYIzkBu3i+9jcM2SkbMu/EoukWg==
-X-Received: by 2002:a50:d596:0:b0:57c:77a1:d1da with SMTP id
- 4fb4d7f45d1cf-57ca8e69171mr4009929a12.0.1718277018724; 
- Thu, 13 Jun 2024 04:10:18 -0700 (PDT)
+ AJvYcCWERE40AIKqq1t/dZWsFaKRF06R0hlrJBz6qrcbG5oVBN+Ec9YjwffManxEkw6b9qte1x1BUuSO4Tqh6FGd7W68MFUn9A==
+X-Gm-Message-State: AOJu0YzZIFJNgIP80rC49ip4jQfkytJEXwSW6uioaFmr1SOhyiw8LR3J
+ mUo7E0CuH2lG/CasVuhvHxlLJT5PWEdMTfC4ZG4YFp61MV5qZk26
+X-Google-Smtp-Source: AGHT+IHJHB+jIddf77Imz5NORsp9TLPRYGU9lI8BbC+r4wH5eJLqOXGdWGHVBuy0sMUuRENzUo7HKw==
+X-Received: by 2002:a17:907:94c1:b0:a6f:4804:d41a with SMTP id
+ a640c23a62f3a-a6f4804d4c0mr453242966b.55.1718277020627; 
+ Thu, 13 Jun 2024 04:10:20 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
  [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- a640c23a62f3a-a6f56f416dfsm60580366b.164.2024.06.13.04.10.17
+ a640c23a62f3a-a6f56f416dfsm60580366b.164.2024.06.13.04.10.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Jun 2024 04:10:18 -0700 (PDT)
+ Thu, 13 Jun 2024 04:10:20 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Ryder Lee <ryder.lee@mediatek.com>,
@@ -87,10 +87,10 @@ To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  This contributor prefers not to receive mails <noreply@example.com>,
  Stefan Roese <sr@denx.de>, Peter Robinson <pbrobinson@gmail.com>,
  Sam Shih <sam.shih@mediatek.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 04/14] net: mediatek: handle alternative name for pn_swap
- property
-Date: Thu, 13 Jun 2024 13:09:22 +0200
-Message-ID: <20240613110949.11076-5-ansuelsmth@gmail.com>
+Subject: [PATCH v2 05/14] i2c: mediatek: add support for optional arb and pmic
+ clock
+Date: Thu, 13 Jun 2024 13:09:23 +0200
+Message-ID: <20240613110949.11076-6-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240613110949.11076-1-ansuelsmth@gmail.com>
 References: <20240613110949.11076-1-ansuelsmth@gmail.com>
@@ -113,29 +113,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Handle alternative name for pn_swap property as upstream linux use
-mediatek,pnswap.
+Add support for optional arb and pmic clock for i2c provided in upstream
+linux DTSI.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- drivers/net/mtk_eth.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ drivers/i2c/mtk_i2c.c | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
 
-diff --git a/drivers/net/mtk_eth.c b/drivers/net/mtk_eth.c
-index 75e7bcf83b7..87e2e1d9cda 100644
---- a/drivers/net/mtk_eth.c
-+++ b/drivers/net/mtk_eth.c
-@@ -1965,7 +1965,9 @@ static int mtk_eth_of_to_plat(struct udevice *dev)
- 			return -ENODEV;
- 		}
+diff --git a/drivers/i2c/mtk_i2c.c b/drivers/i2c/mtk_i2c.c
+index 5592fe91817..3450177741a 100644
+--- a/drivers/i2c/mtk_i2c.c
++++ b/drivers/i2c/mtk_i2c.c
+@@ -221,6 +221,8 @@ struct mtk_i2c_priv {
+ 	void __iomem *pdmabase;		/* dma base address*/
+ 	struct clk clk_main;		/* main clock for i2c bus */
+ 	struct clk clk_dma;		/* DMA clock for i2c via DMA */
++	struct clk clk_arb;		/* DMA clock for i2c ARB */
++	struct clk clk_pmic;		/* DMA clock for i2c PMIC */
+ 	const struct mtk_i2c_soc_data *soc_data; /* Compatible data for different IC */
+ 	int op;				/* operation mode */
+ 	bool zero_len;			/* Only transfer slave address, no data */
+@@ -255,6 +257,18 @@ static int mtk_i2c_clk_enable(struct mtk_i2c_priv *priv)
+ 	if (ret)
+ 		return log_msg_ret("enable clk_dma", ret);
  
--		priv->pn_swap = ofnode_read_bool(args.node, "pn_swap");
-+		/* Upstream linux use mediatek,pnswap instead of pn_swap */
-+		priv->pn_swap = ofnode_read_bool(args.node, "pn_swap") ||
-+				ofnode_read_bool(args.node, "mediatek,pnswap");
- 	} else if (priv->phy_interface == PHY_INTERFACE_MODE_USXGMII) {
- 		/* get corresponding usxgmii phandle */
- 		ret = dev_read_phandle_with_args(dev, "mediatek,usxgmiisys",
++	if (priv->clk_arb.dev) {
++		ret = clk_enable(&priv->clk_arb);
++		if (ret)
++			return log_msg_ret("enable clk_arb", ret);
++	}
++
++	if (priv->clk_pmic.dev) {
++		ret = clk_enable(&priv->clk_pmic);
++		if (ret)
++			return log_msg_ret("enable clk_pmic", ret);
++	}
++
+ 	return 0;
+ }
+ 
+@@ -262,6 +276,18 @@ static int mtk_i2c_clk_disable(struct mtk_i2c_priv *priv)
+ {
+ 	int ret;
+ 
++	if (priv->clk_pmic.dev) {
++		ret = clk_disable(&priv->clk_pmic);
++		if (ret)
++			return log_msg_ret("disable clk_pmic", ret);
++	}
++
++	if (priv->clk_arb.dev) {
++		ret = clk_disable(&priv->clk_arb);
++		if (ret)
++			return log_msg_ret("disable clk_arb", ret);
++	}
++
+ 	ret = clk_disable(&priv->clk_dma);
+ 	if (ret)
+ 		return log_msg_ret("disable clk_dma", ret);
+@@ -748,6 +774,10 @@ static int mtk_i2c_of_to_plat(struct udevice *dev)
+ 
+ 	ret = clk_get_by_index(dev, 1, &priv->clk_dma);
+ 
++	/* optional i2c clock */
++	clk_get_by_name(dev, "arb", &priv->clk_arb);
++	clk_get_by_name(dev, "pmic", &priv->clk_pmic);
++
+ 	return ret;
+ }
+ 
 -- 
 2.43.0
 
