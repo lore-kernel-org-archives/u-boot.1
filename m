@@ -4,70 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACD70C27C53
-	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 01:15:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A295C27C53
+	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 01:15:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98BCC88872;
-	Thu, 13 Jun 2024 03:15:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 177DE88886;
+	Thu, 13 Jun 2024 03:15:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EYpxcdT/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M7giasSI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E49798887D; Thu, 13 Jun 2024 03:15:18 +0200 (CEST)
-Received: from mail-il1-x141.google.com (mail-il1-x141.google.com
- [IPv6:2607:f8b0:4864:20::141])
+ id 8ED7188702; Thu, 13 Jun 2024 03:15:19 +0200 (CEST)
+Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
+ [IPv6:2607:f8b0:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 651CC88702
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 03:15:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DE438884F
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 03:15:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x141.google.com with SMTP id
- e9e14a558f8ab-3737b47c0acso1797695ab.3
- for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 18:15:16 -0700 (PDT)
+Received: by mail-il1-x12c.google.com with SMTP id
+ e9e14a558f8ab-36dd6110186so2037645ab.0
+ for <u-boot@lists.denx.de>; Wed, 12 Jun 2024 18:15:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1718241315; x=1718846115; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=7DFydm232/adh7AjImdNLviULr3pwKwDqqWjZiTTgmU=;
- b=EYpxcdT/cP/aF3MXkJugKu0931QBjPxyyUq+n0d7aU+ewPXiRXS4UxdEz4CXtsxfGy
- HE+lQ04VlPPUcGT6X8z7oEEW5pvU+4p/SO6enmSNNBwNSCJaG/rG05TMMBK19khF3NRI
- +7uRgLEBcVv+801XV4/IyHEDPf3IEYYOjtpd4=
+ d=chromium.org; s=google; t=1718241316; x=1718846116; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jcEKIKvCx49ywHbJhjIZn4wvezS7wXX2gVsYOh1SNmY=;
+ b=M7giasSIkSU4bHudolihQs7PoM1TXaxXTu8ofO8sweK7zWOf54CTf/xW2Ax332vuoi
+ LZgUz06SpZVQjv6IJqi/MwUEE4js72CeHSyORWof/kmDqEhHufeHUr8imwDJ2fB+VPpG
+ quAMYfxVJ/pV6iVJYFGGgWjutlHyAEgrXwImM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718241315; x=1718846115;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7DFydm232/adh7AjImdNLviULr3pwKwDqqWjZiTTgmU=;
- b=GxIeUZvk8W5d7u8COi++T4KRLOLxPSP92K456CalkHdEWnx3+S30bVRi9/JffNn6SG
- h/mxdQXBhRGWv1otwcL3ba6qEMQrprJZaHqiT+dUS0vRGHmUVcm58rkVr8UxRsw+dRUE
- oMiHVgm2LjgTC+yJZVkoNsOxaz4zqIBUTaesovYiahzGkk6K38Eh7RbJAbAlRRFGecmZ
- B3pHnzPdj3Dh0csG9J7VtYouuQVaAYBdYFYMrirQVH9fl6fmDTDV8HJJD+bOOWlrt+Sk
- 1bEQM5+aNXpRM34Pflu6BSadeXNpPJ8dhU0FlRErqIxidULVoOO79uTopQ07NQGlDjyV
- oa/w==
-X-Gm-Message-State: AOJu0YwNWVeyLahqQCTqaSyjV/q2j8/4dKh5a1qlMYx0qj7VexK3q5O+
- fhXazs4dQBTFuRj9uRatN+Ua8vsFvTN/TRr72zmKqtPCBnzaCMydR3qP26ggr4rbOTBvWj1TC7n
- OF/m7
-X-Google-Smtp-Source: AGHT+IEKBJ6K+1xWsT2knVJh+606X1L/O2qlB669bBX44g1zeUxtn+nwrB5dDj5YZS4kNM1gCnnZpQ==
-X-Received: by 2002:a05:6e02:1a67:b0:374:ad98:2a2 with SMTP id
- e9e14a558f8ab-375cd12d3b1mr38982705ab.4.1718241314628; 
- Wed, 12 Jun 2024 18:15:14 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1718241316; x=1718846116;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jcEKIKvCx49ywHbJhjIZn4wvezS7wXX2gVsYOh1SNmY=;
+ b=pm+C4T6eOOIe1dsxIJbO3dO2Rl3HEpyoWsJzFRFGDxH/yaTTJscXtd648vWL7Qxifh
+ ZF8hx+lq45dzI3L/Cp5zxb0NOt8Lpf5cvZiDMpY2Y2+A3y0IZ6tdc4TdwNHar7c6kQn4
+ uEKPV04elUCKLqzE4hTqmRjbWwyWfZknTGyjEoYJJDrYsHFCbWRdMYRhhAbePakMybxg
+ mI0mzhpgUAAMmBc+Cdh5YFsHWuQToM/ElUrzQKPkNVDaFDtOaJFcrOjkKf05IdpoOeME
+ g1C91VJt1tuFClQFTN3gZMUCi+DNrCLm6D3Cog7+W8zcTjIUD0weuom1dOb7V+a4RTYi
+ uLEA==
+X-Gm-Message-State: AOJu0Yz4uJTAceqfLiCbIlt7sQtpLGtroxsyccNuRCUhOGFFNGOZkGit
+ gQQcPoafop3Rq1FN/NQRn4PPYgPnrzHlux1ez23Jocu1SbOpR40f7qEa1veDVXXxYftdpPDzMlN
+ lbA==
+X-Google-Smtp-Source: AGHT+IEqF5+64EAEptQXvmSlXXCLXahFyJQhb9APAikGz8H7FlXigiWBlhCkGp28p5LQqs5d6Fqt7g==
+X-Received: by 2002:a92:c94e:0:b0:375:cdb4:cc1b with SMTP id
+ e9e14a558f8ab-375cdb4cd04mr27237225ab.24.1718241315727; 
+ Wed, 12 Jun 2024 18:15:15 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-375d8b45208sm416445ab.81.2024.06.12.18.15.14
+ e9e14a558f8ab-375d8b45208sm416445ab.81.2024.06.12.18.15.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Jun 2024 18:15:14 -0700 (PDT)
+ Wed, 12 Jun 2024 18:15:15 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [u-boot-test-hooks PATCH v2 0/2] Add support for Labgrid
-Date: Wed, 12 Jun 2024 19:15:10 -0600
-Message-Id: <20240613011512.2476324-1-sjg@chromium.org>
+Subject: [u-boot-test-hooks PATCH v2 1/2] Create a common file for test scripts
+Date: Wed, 12 Jun 2024 19:15:11 -0600
+Message-Id: <20240613011512.2476324-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240613011512.2476324-1-sjg@chromium.org>
+References: <20240613011512.2476324-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -86,45 +89,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This adds hooks for use with Labgrid. The only existing hook that really
-does anything now is the 'console' one. There is also a new 'getrole'
-hook which looks up a role to find various things about it, such as the
-U-Boot board name.
+The top part of each of the u-boot-test-* files is common. Put it in
+a common script file to avoid duplication and to allow it to be
+replaced for the Labgrid integration.
+
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
 Changes in v2:
 - Make use of the common script (only) to set bin_dir
-- Make use of the common script (only) to set bin_dir
 
-Simon Glass (2):
-  Create a common file for test scripts
-  Provide some basic scripts for Labgrid integration
-
- README.md                    | 33 ++++++++++++++++++++++++++++
- bin/console.labgrid          | 42 ++++++++++++++++++++++++++++++++++++
- bin/ellesmere/common-labgrid | 31 ++++++++++++++++++++++++++
- bin/ellesmere/conf.all       | 24 +++++++++++++++++++++
- bin/getrole.labgrid          | 25 +++++++++++++++++++++
- bin/release.labgrid          | 22 +++++++++++++++++++
- bin/release.none             | 22 +++++++++++++++++++
- bin/u-boot-test-common       | 35 ++++++++++++++++++++++++++++++
- bin/u-boot-test-console      |  8 +------
- bin/u-boot-test-flash        |  8 +------
- bin/u-boot-test-getrole      | 38 ++++++++++++++++++++++++++++++++
- bin/u-boot-test-power-off    |  8 +------
- bin/u-boot-test-power-on     |  8 +------
- bin/u-boot-test-release      | 26 ++++++++++++++++++++++
- bin/u-boot-test-reset        |  8 +------
- 15 files changed, 303 insertions(+), 35 deletions(-)
- create mode 100644 bin/console.labgrid
- create mode 100755 bin/ellesmere/common-labgrid
- create mode 100644 bin/ellesmere/conf.all
- create mode 100644 bin/getrole.labgrid
- create mode 100644 bin/release.labgrid
- create mode 100644 bin/release.none
+ bin/u-boot-test-common    | 31 +++++++++++++++++++++++++++++++
+ bin/u-boot-test-console   |  8 +-------
+ bin/u-boot-test-flash     |  8 +-------
+ bin/u-boot-test-power-off |  8 +-------
+ bin/u-boot-test-power-on  |  8 +-------
+ bin/u-boot-test-reset     |  8 +-------
+ 6 files changed, 36 insertions(+), 35 deletions(-)
  create mode 100755 bin/u-boot-test-common
- create mode 100755 bin/u-boot-test-getrole
- create mode 100755 bin/u-boot-test-release
 
+diff --git a/bin/u-boot-test-common b/bin/u-boot-test-common
+new file mode 100755
+index 0000000..fa3ad88
+--- /dev/null
++++ b/bin/u-boot-test-common
+@@ -0,0 +1,31 @@
++#!/bin/bash
++
++# Copyright Google LLC
++# Written by Simon Glass <sjg@chromium.org>
++#
++# Permission is hereby granted, free of charge, to any person obtaining a
++# copy of this software and associated documentation files (the "Software"),
++# to deal in the Software without restriction, including without limitation
++# the rights to use, copy, modify, merge, publish, distribute, sublicense,
++# and/or sell copies of the Software, and to permit persons to whom the
++# Software is furnished to do so, subject to the following conditions:
++#
++# The above copyright notice and this permission notice shall be included in
++# all copies or substantial portions of the Software.
++#
++# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
++# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++# DEALINGS IN THE SOFTWARE.
++
++set -e
++
++bin_dir="`dirname $0`"
++board_type="$1"
++board_ident="$2"
++hostname="`hostname`"
++
++. "${bin_dir}/${hostname}/conf.${board_type}_${board_ident}"
+diff --git a/bin/u-boot-test-console b/bin/u-boot-test-console
+index 0b6b4ac..8b7377a 100755
+--- a/bin/u-boot-test-console
++++ b/bin/u-boot-test-console
+@@ -20,12 +20,6 @@
+ # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ # DEALINGS IN THE SOFTWARE.
+ 
+-set -e
+-
+-bin_dir="`dirname $0`"
+-board_type="$1"
+-board_ident="$2"
+-hostname="`hostname`"
+-. "${bin_dir}/${hostname}/conf.${board_type}_${board_ident}"
++. "$(dirname $0)/u-boot-test-common"
+ 
+ . "${bin_dir}/console.${console_impl:-picocom}"
+diff --git a/bin/u-boot-test-flash b/bin/u-boot-test-flash
+index 8dcf198..bd89a50 100755
+--- a/bin/u-boot-test-flash
++++ b/bin/u-boot-test-flash
+@@ -20,12 +20,6 @@
+ # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ # DEALINGS IN THE SOFTWARE.
+ 
+-set -e
+-
+-bin_dir="`dirname $0`"
+-board_type="$1"
+-board_ident="$2"
+-hostname="`hostname`"
+-. "${bin_dir}/${hostname}/conf.${board_type}_${board_ident}"
++. "$(dirname $0)/u-boot-test-common"
+ 
+ . "${bin_dir}/flash.${flash_impl}"
+diff --git a/bin/u-boot-test-power-off b/bin/u-boot-test-power-off
+index b59436a..83b69c0 100755
+--- a/bin/u-boot-test-power-off
++++ b/bin/u-boot-test-power-off
+@@ -20,12 +20,6 @@
+ # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ # DEALINGS IN THE SOFTWARE.
+ 
+-set -e
+-
+-bin_dir="`dirname $0`"
+-board_type="$1"
+-board_ident="$2"
+-hostname="`hostname`"
+-. "${bin_dir}/${hostname}/conf.${board_type}_${board_ident}"
++. "$(dirname $0)/u-boot-test-common"
+ 
+ . "${bin_dir}/poweroff.${power_impl}"
+diff --git a/bin/u-boot-test-power-on b/bin/u-boot-test-power-on
+index ca87477..5a41c3e 100755
+--- a/bin/u-boot-test-power-on
++++ b/bin/u-boot-test-power-on
+@@ -20,12 +20,6 @@
+ # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ # DEALINGS IN THE SOFTWARE.
+ 
+-set -e
+-
+-bin_dir="`dirname $0`"
+-board_type="$1"
+-board_ident="$2"
+-hostname="`hostname`"
+-. "${bin_dir}/${hostname}/conf.${board_type}_${board_ident}"
++. "$(dirname $0)/u-boot-test-common"
+ 
+ . "${bin_dir}/poweron.${power_impl}"
+diff --git a/bin/u-boot-test-reset b/bin/u-boot-test-reset
+index a160e0c..77e3f40 100755
+--- a/bin/u-boot-test-reset
++++ b/bin/u-boot-test-reset
+@@ -20,12 +20,6 @@
+ # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ # DEALINGS IN THE SOFTWARE.
+ 
+-set -e
+-
+-bin_dir="`dirname $0`"
+-board_type="$1"
+-board_ident="$2"
+-hostname="`hostname`"
+-. "${bin_dir}/${hostname}/conf.${board_type}_${board_ident}"
++. "$(dirname $0)/u-boot-test-common"
+ 
+ . "${bin_dir}/reset.${reset_impl}"
 -- 
 2.34.1
 
