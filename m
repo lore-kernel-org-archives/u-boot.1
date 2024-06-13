@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33EB2C27C4F
-	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 07:32:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4F90C27C4F
+	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 07:49:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79E1F87FA7;
-	Thu, 13 Jun 2024 09:32:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EFA048834B;
+	Thu, 13 Jun 2024 09:49:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1718263927;
-	bh=IP5j6GjeKagwXcmUsy6lINx6BN17VXVBeSf7Fc/o2O0=;
+	s=phobos-20191101; t=1718264955;
+	bh=98MN392AhcmuxzSemJPddLTSljNsVkVozioENg4LvX0=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=oEP96AJ3FSvBg/G4lMaVyBeIANQAnQNw2j+Kuk0qP8CzkW+if+bW8gx6V16x5YBwB
-	 10l8Kg/hg3g8eprgDGnFsYLfD2m/8USmQXRRAWw4oJ/o9/pzmbG90ZftvlICt+sB+g
-	 VbOfsQYrxe4w4bfmYnUgix0pMh1tclNPSCLzoGkQhUNky/SznXIrScakwFv7e8r2qn
-	 y2qW9/KGKzNfctn/MpUnESjcRBE6jNnYWZ9628b7B2PjHKPmC6KzLxPtrDZka0jcwt
-	 2SaiAMk0cNBhZ4Xqj61EffJVn4pmtx4upN1Lg8AGcKSnWsQ9UVrMc0WSOEiiX6mRNj
-	 L4wtoCm6ZUpIA==
+	b=A3j6I4XVFp1jeOTT2FLy1pEgjxO+PHc3YKIAEh4eygdIWRtb4ASc9tYwFkKqbmCVV
+	 89PiNWk/53otxDcGlxU0MzosT8UnXzSEiC7UAfBM0zBrkBeIZFsY5hnr0qxXP3GWB4
+	 wL49hkiLhvSY1rQkhWLPBwLbauT2SSw7giPfP5dCdgLwx2zZMb5NE7a36QCf76+DrU
+	 UIxMCChm7PlJ4/MMyqdAnYNaHSnHMcdY86+y4HoiEFEy686/CtV3IYm2QpyhqILwtk
+	 g4L/hK3wPFTroiwiSkQt0FK8p7pxQpqB++BQSU1OUwF3MlCPIqH9H710kbMlDMc0ZH
+	 QWzi3am+ACj7w==
 Received: from [10.88.0.65] (dslb-002-207-026-217.002.207.pools.vodafone-ip.de
  [2.207.26.217])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested) (Authenticated sender: ch@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 8013A87E2E;
- Thu, 13 Jun 2024 09:32:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 3CCAC88315;
+ Thu, 13 Jun 2024 09:49:13 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1718263926;
- bh=IP5j6GjeKagwXcmUsy6lINx6BN17VXVBeSf7Fc/o2O0=;
+ s=phobos-20191101; t=1718264953;
+ bh=98MN392AhcmuxzSemJPddLTSljNsVkVozioENg4LvX0=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=e4g4IoAZqDZfTNUKynJ4eFoAkrAK4MJJHH/BZHhTPLqb7tn8nI1pwjAVh7lUZnKI8
- mM7HyeH/+Ot+wVljXs3hqOmdTLTioxb8YVLhLTIkblG5ZsvNBBSqpNneNdyaMeMumd
- htSlBGUFkyqfqdinmOJFwnFwIRTvtuuEMOCzRpqARXbbjgkVpfWD22E5Mg+IEt4fQO
- Bmk87SnGZYb3Nsd2JWi63kD+yIJ8I8W9xG2wdd1xd4mrXL2PjIBoLZjTVU0Fvi3IrP
- wjej2jlQXcj7w9GCM/brShgFN6qLIOTYw1riwaP/qxG4i9IvORbAedTUfsQtAPcSTs
- u9s0fhy0Wzc6g==
-Message-ID: <fff4530f-1730-4a54-a934-c1998425eca8@denx.de>
-Date: Thu, 13 Jun 2024 09:32:03 +0200
+ b=BpNCwlSMaHo/0CNUn4MH63ENIg3dk+ulsS6oD+6AaVNnIPA3yMjcdCF3xL+AgkFtn
+ o2GaJ6iif98+2vxOhelgT9LRjXW6FIROsNx++9rSf2tQP9WLQyxDvvnALBieWYnvAh
+ eY1UFQmJtI+qKnDnMCEuukKXOx3y3BGcQ1FFDeXoSrm46bGLCF95hrOLIXvBrJQ7cz
+ +nGJ9qxouJOVK2MckaiK3+XFl6dvBms2dws3BX9OhV+xHhDs936/OhtXyD4dEmGAlJ
+ OBswnbVtmp+j59cCDUj2ekZhtiwG4mM6fq86t/ou8+7t3MMM2rvfCetppyWigfMYQY
+ bEZ30EU6M/iSg==
+Message-ID: <814d2716-bc77-494a-871e-1bf3ee466d6b@denx.de>
+Date: Thu, 13 Jun 2024 09:49:12 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: Shutting down of the git-daemon (git protocol, https and ssh
  still remain)
-To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+To: Quentin Schulz <quentin.schulz@cherry.de>,
  "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
 Cc: Marek Vasut <marex@denx.de>, Stefano Babic <sbabic@denx.de>
 References: <323dbb9c-42bd-4664-b660-0ba24c819bec@denx.de>
- <738ebfbc-aefd-478a-a49a-5763e2e24e71@prevas.dk>
+ <94d1e571-6051-4a1a-b15a-ab5147ada833@cherry.de>
 Content-Language: en-US
 From: Claudius Heine <ch@denx.de>
 Organization: Denx Software Engineering
-In-Reply-To: <738ebfbc-aefd-478a-a49a-5763e2e24e71@prevas.dk>
+In-Reply-To: <94d1e571-6051-4a1a-b15a-ab5147ada833@cherry.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -72,48 +72,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rasmus,
+Hi Quentin,
 
-On 2024-06-12 1:18 pm, Rasmus Villemoes wrote:
-> On 12/06/2024 12.20, Claudius Heine wrote:
+On 2024-06-12 12:37 pm, Quentin Schulz wrote:
+> Hi Claudius,
+> 
+> On 6/12/24 12:20 PM, Claudius Heine wrote:
 >> Hi everyone,
 >>
->> in the past we used cgit, which provided cloning the u-boot repo via
+>> in the past we used cgit, which provided cloning the u-boot repo via 
 >> http, https, ssh and the git protocol.
 >>
->> When we migrated to gitlab, which doesn't support the git protocol, we
->> implemented some additional service files to continue to support it for
->> some of our git repositories.
+>> When we migrated to gitlab, which doesn't support the git protocol, we 
+>> implemented some additional service files to continue to support it 
+>> for some of our git repositories.
 >>
->> We just noticed that cloning via the git protocol is currently broken,
->> likely some changes in gitlab happened and we would need to recreate the
->> symlinks on the server to point to the right repositories again.
+>> We just noticed that cloning via the git protocol is currently broken, 
+>> likely some changes in gitlab happened and we would need to recreate 
+>> the symlinks on the server to point to the right repositories again.
 >>
->> Since that is another thing to maintain and keep up, we would like to
->> just shut the git protocol down. AFAIK most projects moved to use https
->> for cloning anyway, since there were not many reports of broken cloning.
+>> Since that is another thing to maintain and keep up, we would like to 
+>> just shut the git protocol down. AFAIK most projects moved to use 
+>> https for cloning anyway, since there were not many reports of broken 
+>> cloning.
 >>
->> What are your thoughts? Is it worth the effort to keep the git protocol up?
+>> What are your thoughts? Is it worth the effort to keep the git 
+>> protocol up?
+>>
 > 
-> So I don't think you should necessarily keep the git:// working if it
-> means extra maintenance. I just checked a couple of my local copies of
-> u-boot.git (don't ask, it's many different customer projects) and it
-> seems to be more or less random if I added upstream with git:// or
-> https:// . I can certainly change those, and thanks for the heads up.
+> On the side of OpenEmbedded-Core, HTTPS is being used since Langdale 
+> (4.1) and the first dot release of Kirkstone (4.0.1) so only outdated 
+> layers would be impacted (provided they aren't already, but since 
+> there's a download cache system in Yocto, it's possible they're hitting 
+> their own local cache instead of fetching it from your server(s)).
 > 
-> I'm just wondering if it's possible to have the server send some message
-> to the client when the git protocol is used, for some deprecation period
-> (6 months?), so a developer doing "git remote update" will get notified.
-> He would then also have a chance to propagate that to whatever local CI
-> he's responsible for, instead of only noticing when things do start
-> breaking.
+> It's never nice to see things going/breaking compatibility because it 
+> may break old builds which is always a nice trick up one's sleeve to 
+> figure out when things started to go wrong in one's image.
 
-We are using `git-daemon` and there is a `--accept-hook` which can print 
-a single line to the requestor, but only if the request is denied.
-So there doesn't seem to be a way to implement a deprecation period.
+Well, this happens all the time, but maintaining backwards compatibility 
+here should be done in a best-effort way.
 
-regards,
+With old build, they likely need old compilers and systems, which will 
+probably break anyway if they use https or ssh, because obsolete crypto. 
+If people want to build old stuff, they probably have to fiddle around 
+everywhere anyway, or have a download cache.
+
+The internet, or any network, isn't nice to old systems...
+
+> Also, while I 
+> checked OE-Core, other third party/community maintained layer could be 
+> impacted. I assume this is the case of meta-amarula-engicam[1] and 
+> meta-allwinner-hx[2] for example.
+> 
+> I would suggest sending a mail to the different build systems mailing 
+> lists, I assume https://lists.openembedded.org/g/openembedded-devel and 
+> https://lists.yoctoproject.org/g/yocto for the OE-Core/YP side? Either 
+> to ask for their opinion or notify them (and specifically third party 
+> layers) it's going away or both.
+
+Not sure if I want to go through them all. Looking into all these 3rd 
+party, downstream repos and informing everyone seems to be even more 
+effort than maintaining the git protocol.
+
+And if someone uses their repo, they will notice it quickly and can 
+easily fix it.
+
+Anyway, I fixed it yesterday, and it doesn't make much sense to stop it 
+now. So I will leave it in place until it breaks again, then I just 
+remove it.
+
+thanks everyone for their input,
 Claudius
+
+> 
+> [1] 
+> https://github.com/amarula/meta-amarula-engicam/blob/master/recipes-bsp/u-boot/u-boot-common_2018.05.inc
+> [2] 
+> https://gitlab.com/dimtass/meta-allwinner-hx/blob/master/recipes-bsp/u-boot/u-boot-common.inc
+> 
+> Cheers,
+> Quentin
 
 -- 
 DENX Software Engineering GmbH,        Managing Director: Erika Unter
