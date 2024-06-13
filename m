@@ -4,91 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 539B0C27C4F
-	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 15:42:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFB44C27C6E
+	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 15:42:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD72387F9F;
-	Thu, 13 Jun 2024 17:42:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 31DF18826B;
+	Thu, 13 Jun 2024 17:42:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rKrHbK+q";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="2vhNbrUm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDB4D8817C; Thu, 13 Jun 2024 17:42:12 +0200 (CEST)
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
+ id 1635787D87; Thu, 13 Jun 2024 17:42:22 +0200 (CEST)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E36587D87
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 17:42:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0380488315
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 17:42:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-3cabac56b38so646383b6e.3
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 08:42:10 -0700 (PDT)
+ spf=pass smtp.mailfrom=jmasson@baylibre.com
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-35f1a7386d5so1188600f8f.3
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 08:42:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718293329; x=1718898129; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=9mdEa2G8TLu7a41ZX9pIxomBGEvIDi/S6JGgnlDPTGU=;
- b=rKrHbK+qDgr7pOAo5K3F/0YwzN42UNUmxK5v/oO9IsHK+NL4LWAVHbHGWFRKzbW0pB
- L1G3aH7PA914usRo5UB0s7FgHfNcS/o5Gp/EiUp+PKIqLV/LTLIU6P8C5UCmHxsaitup
- w69izDrg9ae3JfCnJILDOzmIsDK24/V2yPcjQ=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718293339; x=1718898139;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=1KJvrvZoEAQAVQ/Cst/cJQ1kEEQ0Pp/LCu8FRuP3Q2M=;
+ b=2vhNbrUmz3QGNKvyhVOXTXKcudMqUPzDSlJ+LrS2N8B1XDKZX8K8jxFSkqKEDAZ13F
+ I/rsOYVNCAmBq5iU9zzq/fdaIjHo/q34VZjRLVn+wIVerwpFmnqHRJ/JKvoDuv0ubyov
+ 4/V1dcI/SI4FwFNTcnYXQD/XswcRuHGW5TlcD4HNoyZh+/892bXTSEOaXrjmaoGwZwHb
+ Bt1nD67dsiC/3ZSxuzgoEOgpEBzufdhoeWZ1Iwxu6lk17+j5hh/YYTYY54HVNie4WRKc
+ 2vJVonP69uko/dT22dpjI4OAtQJqw4O7zmdThfa61SFB52myiliaJflBXuPI0XFmP4mh
+ CwLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718293329; x=1718898129;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9mdEa2G8TLu7a41ZX9pIxomBGEvIDi/S6JGgnlDPTGU=;
- b=heqa8c26Tj1WM/wX0F8brkKkg3d3iUa3n7GLil/6uAANUHYrKKqgmKl9dBQ+ViFuZb
- qgR+gCBpO4gxxvGRKql0eQGd719D5f2g/p/oX4DKLF3+zcfykPtDb3VY7mDjl9ognRiA
- 39nez/HA6ytvYZDw1DVKmuZSjVpD8SILIZsoBzOPI529fUXZuXepkZuy7+bSfVmyNCKD
- 4y3+IpiLh3NYGgQyS7wOqMIt8e04JVGdhvLH4BPwVjVIl4lmavv24rX24GoGPGWj1VCt
- UXNjTvlh5Ab++rgUe71pnNumhbrDQXhDmiSxEScI6IXwjXdVN0wr5AdUMGlK24dj3pqU
- 53Rw==
+ d=1e100.net; s=20230601; t=1718293339; x=1718898139;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=1KJvrvZoEAQAVQ/Cst/cJQ1kEEQ0Pp/LCu8FRuP3Q2M=;
+ b=a6zvnQvLggx01ZpZn0fWvDJ+Q67FhWYdlMfgnw4KJOZLpgyGQj1h4OdXAtx3U5kQ3T
+ 517Jvfh8cWldkgwiTmNfn5U622qABn5lnjm3CxToV/ZLRkdK3v5LwTNgC/P5YSmqH7zF
+ 6HwjLhs9K2Q/koq3KBCzFktV4mxEAvXJHPQYu1n1rcbqvCMTSZ9kadpurlkXMeKnW/Q/
+ hTLXmxp/zi5BeHAFkdgiCVZBiimXRIacX9MEsio5R8Oi9WB7+2PyV9xYcjBVGzf7yu/s
+ 7p1SVKmN0HXrkzE+V0si27fTZ/twtiMh+zHFw4lsjXNEoAVw1rMPE1kyJzv+EX/aEsBL
+ Dq7Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUHN1O0NzygtH9jYsRt/7Bs+s83m7Azt9sAS13bTCZ3ZGdDBxdqanYekp6YrRDl69jMAxgyqPWO02jC21Zt6tGQoCXPkQ==
-X-Gm-Message-State: AOJu0YwcykQMqfztxLRKNrKX17uhG5GqIUV/9hbka51FdO1FsF4PuF0h
- +8qBkyRXvRGC9BsuNhx1nIy31u8rgX9akPR9dItIHPsitkHhe5w90YdCSw14K8lH3+t0M2qRtkG
- n784=
-X-Google-Smtp-Source: AGHT+IGo94ihxE+qHI9OhUxoVIX6LiKqVxVoUtWfxR6Cp6SLeYXBRq047z1It2KXfZ3omU8a3Up69g==
-X-Received: by 2002:a05:6808:3096:b0:3d2:2703:2573 with SMTP id
- 5614622812f47-3d23dfb5b5amr6083960b6e.8.1718293329180; 
- Thu, 13 Jun 2024 08:42:09 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
- [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3d2475e4b37sm225102b6e.4.2024.06.13.08.42.08
+ AJvYcCWEIxPWAVfetgweNbiafujQBRAmOOOvcHv13nORmL/c+5eWTiz11SXNn4gPJxMH/oA1cl/WVzM5BUhtmyP6N922aWqJag==
+X-Gm-Message-State: AOJu0YxoQ8jABbQfAZ63bs0Ev5JOj2a++Awg9AOkcFa/BnURW8YIuzTe
+ 2S37Za+MoolDcr6Qc80uJk5kQ2HaMvNU3L+gbP/ItG5hjt7vc4It9v6tqkw3rpM=
+X-Google-Smtp-Source: AGHT+IHCnZOVlzlarph36f3ZVtfw21N8QO/tOCb+/4+V5KXLkaJ9onh2lE6xEYc3V0NQYk1PT1mO6w==
+X-Received: by 2002:adf:e948:0:b0:360:6fba:40fd with SMTP id
+ ffacd0b85a97d-3606fba419amr3112677f8f.51.1718293339308; 
+ Thu, 13 Jun 2024 08:42:19 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-36079192f17sm1279425f8f.74.2024.06.13.08.42.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Jun 2024 08:42:08 -0700 (PDT)
-Date: Thu, 13 Jun 2024 09:42:06 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
- Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>
-Subject: Re: [RFC PATCH 04/31] lmb: remove local instances of the lmb
- structure variable
-Message-ID: <20240613154206.GO68077@bill-the-cat>
-References: <20240607185240.1892031-5-sughosh.ganu@linaro.org>
- <CAFLszTjQW72_Z8Dx4g1mVx5Y=wq9xeXYVBffxLUto6sDp6CMbw@mail.gmail.com>
- <20240611210145.GM68077@bill-the-cat>
- <CAFLszTjd4Sf=_um7QbkpbLAO9=2=vX_LkHv6br=9FPAPFhbH5Q@mail.gmail.com>
- <20240611225554.GO68077@bill-the-cat>
- <CAFLszTi1ZR+qeEuEbGUE2Fv3h1ahX3S_2ySBPQjgkfruiW8Xtw@mail.gmail.com>
- <20240612172244.GG68077@bill-the-cat>
- <CAFLszThj1wmF4zOLDjSjHX1cg8RfiHMGgpbRccJ-VJu2dtihNw@mail.gmail.com>
- <20240612214001.GI68077@bill-the-cat>
- <CAFLszTiZSu+aN53kAPd2GXosXv09Ams+jFDi2xGU0wh+faO=dg@mail.gmail.com>
+ Thu, 13 Jun 2024 08:42:18 -0700 (PDT)
+From: Julien Masson <jmasson@baylibre.com>
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Simon Glass
+ <sjg@chromium.org>
+Cc: Julien Masson <jmasson@baylibre.com>, Guillaume La Roque
+ <glaroque@baylibre.com>, Dmitrii Merkurev <dimorinny@google.com>, Roman
+ Stratiienko <r.stratiienko@gmail.com>, Igor Opaniuk
+ <igor.opaniuk@gmail.com>, <u-boot@lists.denx.de>, Mattijs Korpershoek
+ <mkorpershoek@baylibre.com>
+Subject: Re: [PATCH v2 1/5] boot: android: Provide vendor_bootimg_addr in
+ boot_get_fdt()
+In-Reply-To: <20240613-bootmeth-android-v2-1-397f6e66eb29@baylibre.com>
+References: <20240613-bootmeth-android-v2-0-397f6e66eb29@baylibre.com>
+Date: Thu, 13 Jun 2024 17:42:17 +0200
+Message-ID: <878qz8n92e.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="zvpfnwZYqoMmNcoK"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTiZSu+aN53kAPd2GXosXv09Ams+jFDi2xGU0wh+faO=dg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,103 +97,58 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---zvpfnwZYqoMmNcoK
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu 13 Jun 2024 at 17:42, Mattijs Korpershoek <mkorpershoek@baylibre.com> wrote:
 
-On Thu, Jun 13, 2024 at 09:22:15AM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Wed, 12 Jun 2024 at 15:40, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Wed, Jun 12, 2024 at 02:24:25PM -0600, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Wed, 12 Jun 2024 at 11:22, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Tue, Jun 11, 2024 at 08:41:39PM -0600, Simon Glass wrote:
-> > > >
-> > > > [snip]
-> > > > > Also IMO there is only really one LMB list today. We create it at=
- the
-> > > > > start of bootm and then it is done when we boot. The file-loading
-> > > > > stuff is what makes all this confusing...and with bootstd that is
-> > > > > under control as well.
-> > > > >
-> > > > > At lot of this effort seems to be about dealing with random scrip=
-ts
-> > > > > which load things. We want to make sure we complain if something
-> > > > > overlaps. But we should be making the bootstd case work nicely and
-> > > > > doing things within that framework. Also EFI sort-of has its own
-> > > > > thing, which it is very-much in control of.
-> > > > >
-> > > > > Overall I think this is a bit more subtle that just combining all=
-ocators.
-> > > >
-> > > > I think this gets to the main misunderstanding. The problem isn't
-> > > > handling bootstd, or EFI boot, or even assorted scripts. Those are =
-all
-> > > > cases where things are otherwise (sufficiently) well-defined. The
-> > > > problem is "security" and that a "carefully crafted payload" could =
-do
-> > > > something malicious. That's why we have to do all of this stuff soo=
-ner
-> > > > rather than later in our boot process.
-> > >
-> > > That's the first I have heard of this, actually, but a bit more detail
-> > > would help. How does the payload get loaded? I'm just not sure about
-> > > the overall goals. It seems that everyone else is already familiar -
-> > > can someone please take the time to point me to the details?
-> >
-> > Well, the short version I believe of the first CVE we got (and so
-> > started abusing LMB) was along the lines of "load an image near where
-> > the U-Boot stack is, smash things for fun and exploits".
->=20
-> OK. I am surprised that LMB does not catch that. It is supposed to add
-> the stack and various other things right at the start before loading
-> any file. So even if it clears the LMB each time, it should not be
-> able to do that. Having said this, the code may be buggy as I don't
-> think we have tests for U-Boot's overall functional behaviour in these
-> situations.
+> When calling android_image_get_dtb_by_index() using boot image v3+,
+> we should also pass the vendor_boot ramdisk address.
+> 
+> Use get_avendor_bootimg_addr() to do so.
+> 
+> Notes: on boot image v2, this is harmless since get_avendor_bootimg_addr()
+>        returns -1.
+>        for legacy implementations that don't have CMD_ABOOTIMG, add a weak
+>        implementation to avoid linking errors.
+> 
+> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> ---
+>  boot/image-android.c | 5 +++++
+>  boot/image-fdt.c     | 2 +-
+>  2 files changed, 6 insertions(+), 1 deletion(-)
+> 
+> diff --git a/boot/image-android.c b/boot/image-android.c
+> index ee626972c114..09c7a44e058a 100644
+> --- a/boot/image-android.c
+> +++ b/boot/image-android.c
+> @@ -56,6 +56,11 @@ static ulong add_trailer(ulong bootconfig_start_addr, ulong bootconfig_size)
+>  	return BOOTCONFIG_TRAILER_SIZE;
+>  }
+>  
+> +__weak ulong get_avendor_bootimg_addr(void)
+> +{
+> +	return -1;
+> +}
+> +
+>  static void android_boot_image_v3_v4_parse_hdr(const struct andr_boot_img_hdr_v3 *hdr,
+>  					       struct andr_image_data *data)
+>  {
+> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+> index 56dd7687f51c..8332792b8e80 100644
+> --- a/boot/image-fdt.c
+> +++ b/boot/image-fdt.c
+> @@ -502,7 +502,7 @@ int boot_get_fdt(void *buf, const char *select, uint arch,
+>  		 * Firstly check if this android boot image has dtb field.
+>  		 */
+>  		dtb_idx = (u32)env_get_ulong("adtb_idx", 10, 0);
+> -		if (android_image_get_dtb_by_index((ulong)hdr, 0,
+> +		if (android_image_get_dtb_by_index((ulong)hdr, get_avendor_bootimg_addr(),
+>  						   dtb_idx, &fdt_addr, &fdt_size)) {
+>  			fdt_blob = (char *)map_sysmem(fdt_addr, 0);
+>  			if (fdt_check_header(fdt_blob))
+> 
+> -- 
+> 2.45.2
+> 
 
-Right, LMB does catch the example I gave (because we made all of the
-load from storage/network functions init an lmb and we always make sure
-a new lmb gets U-Boot stack/etc). The next thing we didn't catch was
-"what if EFI does the loading?" and we've kludged around that, and in
-turn had some of the thorny questions. Some of that is what I think
-you're asking about in this part of the thread, to which the answer is
-"EFI spec says you need to place X in memory", so we just need to
-reserve it when it's asked for, so that something else can't come along
-and smash it maliciously.
-
-But that also raised the more general problem, and why we need a
-persistent reservation list, of allowing boards/SoCs to say they want to
-reserve a block of memory for whatever, and have that obeyed, for real.
-For example, the mach-apple logic of "just pick some memory locations to
-use for kernel/dtb/initrd" isn't really as safe as it should be since
-those reservations aren't really seen anywhere once the function
-returns, it's just setting some environment variables.
-
---=20
-Tom
-
---zvpfnwZYqoMmNcoK
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZrE04ACgkQFHw5/5Y0
-tywGgwv/T/yyTVt/s0hYd5EN1juCEivtTk1nPcqCO/4vBr7oEv37MsZ71HqTLBGX
-9x33GuygxwyWnndDmNBBWs9tCs2nP7xhguNdddig9JJBlI9uXx3oGKE3h1qp7kgV
-1h86FX66WfoAEDBIMuYd88RRCUYNhjS0+Gbaaz8xxzdgslP+em+44Ox33hFmsBQz
-lSBhvPYFh+23//cYG6hVfUczShrouMwdFV4fXOy+ddd106j9pJGcgiG1gNMS85tZ
-q8VtdkaFECyad4lw7KI+5SSjtP66lME+lQCyinano3JeeHojkXFfo6cSZKDGurOG
-QbMUYyhI1GcWhLzGDbfkzX/2Sd2fUdk/hZpKEXQrh9g/wGyh47efOHg9U9xjBsXJ
-0wXJVrTp1ItCZ1PM9MjGrttbZzYUTo70zR94tw5CC2H4F/PS+kG9GpHTe6CtCClz
-NMsyxrlK1ekG/WMZTw14Sxb1KrveNx56bsJpWOHkG9awHj9W46QgY7i1VxIYvs3e
-6yUUVtT/
-=kcGN
------END PGP SIGNATURE-----
-
---zvpfnwZYqoMmNcoK--
+Reviewed-by: Julien Masson <jmasson@baylibre.com>
+-- 
+Julien Masson
