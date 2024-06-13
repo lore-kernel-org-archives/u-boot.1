@@ -4,76 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39E59C27C4F
-	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 19:04:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3875C27C4F
+	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 19:06:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 843D988954;
-	Thu, 13 Jun 2024 21:04:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 3262788938;
+	Thu, 13 Jun 2024 21:06:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="G3LsGKZu";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ModmOdB+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85C2A88951; Thu, 13 Jun 2024 21:04:21 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 8739E8894E; Thu, 13 Jun 2024 21:06:13 +0200 (CEST)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E9B8888BF
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 21:04:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 262E5882E0
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 21:06:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45DJ46Ai046576;
- Thu, 13 Jun 2024 14:04:06 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1718305446;
- bh=0b0FnhopbhTTfBGMkR4Q3L8t1sLdl6BmZo431eNDKWE=;
- h=From:To:CC:Subject:In-Reply-To:References:Date;
- b=G3LsGKZu8C/UOdjW9Ku+JeY6Z11pmmlDjYlkHfrlC31SiHr6TUsjMGY5OZctamYPm
- eReC1v9h4Mipx0Fp8fl8j7htjWb11OGQ9TAH+8D3VMZYjtDzymHDPTKF7AvqAiAUBj
- 7/mUQM8Dd9+YDw3Q7RmZFI7kl8VngCg/5+zgz9pM=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45DJ46I5055842
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 13 Jun 2024 14:04:06 -0500
-Received: from lewvowa02.ent.ti.com (10.180.75.80) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 13
- Jun 2024 14:04:06 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by lewvowa02.ent.ti.com
- (10.180.75.80) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2507.34; Thu, 13 Jun
- 2024 14:04:01 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 13 Jun 2024 14:04:01 -0500
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45DJ41fo101604;
- Thu, 13 Jun 2024 14:04:01 -0500
-From: Jon Humphreys <j-humphreys@ti.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-CC: Dan Carpenter <dan.carpenter@linaro.org>, Abdellatif El Khlifi
- <abdellatif.elkhlifi@arm.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Simon Glass <sjg@chromium.org>, Rasmus Villemoes
- <rasmus.villemoes@prevas.dk>, Michal Simek <michal.simek@amd.com>,
- "Wei Ming Chen" <jj251510319013@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, Tom Rini
- <trini@konsulko.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH] efi: capsule: Improve capsule update porting to new boards
-In-Reply-To: <CAC_iWj+xOh2=xq23Jy1XudiNB_ruj1j9EqgtGdq4VGmLi9+mpQ@mail.gmail.com>
-References: <20240607234358.1991568-1-j-humphreys@ti.com>
- <CAC_iWj+xOh2=xq23Jy1XudiNB_ruj1j9EqgtGdq4VGmLi9+mpQ@mail.gmail.com>
-Date: Thu, 13 Jun 2024 14:04:01 -0500
-Message-ID: <86o784is0u.fsf@udb0321960.dhcp.ti.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6ae259b1c87so21458596d6.1
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 12:06:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1718305570; x=1718910370; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=t4SyJdMZkhsOXqrYnXcAaGUuFNRC7u0Mbfeq8L+KYcY=;
+ b=ModmOdB+dX6yu772PRkPTm50CUxklOC6IPn7HMtTxEkY+46x5QDIgRPIhs/kOlk7I2
+ SALYpcETUMUdvPhfeICwxhe3OG5sWQMLm9FFwDLaJkQBcJbKpEhJoy3z25B6R7zrLb/i
+ BU6x9kQxsbq1hHPCQE/AfUj3IZPW0XphecDIw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718305570; x=1718910370;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=t4SyJdMZkhsOXqrYnXcAaGUuFNRC7u0Mbfeq8L+KYcY=;
+ b=hwtTlp79LUdbVstEEGXweiCq6cfQWsV2DgibpQmT7ULSAvd0zvGXvm9YTDq9IRNeOt
+ DsABSO1G1FjJL1LnS8cdvB+eyOE/Gv5jnGlV/GNWS/K2C/BIcEqXTG43L/Y5FHGb3+4u
+ +kgtzuHnMn1WY8eezItvOGjGqL/yQfesbQ3Nb4LP4fzd04YVy6OR6VYqj2hnoivdRZwk
+ cNA5hFSVBNMqNuBG9xBuMCyzDjl2wqdFxOTXz0wYYEGUfeRKhc4DTWo4amKzLCD3bzHC
+ 8gp+ZBZ0VsjPxF3O+sah+QOqdPwbhPortTqU89jBt2DxV2XIcLy7cSLq9qumK2mHCRkx
+ AoUg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWGJHVEC7utimWUEDwgOmW/decHXea+fU5cowsW05Vj1+hUO/P+M2xl3acDYNMaHz2K8EY/Qym4Bd0AKZWi3yM0SV0JQQ==
+X-Gm-Message-State: AOJu0YylssbZdh+9hNncAXYiOeqwdW06vYVGncYrOd6QO/03/vV9B1CN
+ SJkXqLoqj3DbWz8V1Nk2Oq4n+hRK1V17i3Ze4CRCR80JVtR9M1MzzroQ11QzD8R9r8/9HlqLbD1
+ zX7xtE7WYUoZyUVFhhYp42mPP8Y7irMKjh/tx
+X-Google-Smtp-Source: AGHT+IFxOBVpsSj55N1Df11h7Lli5owxVsaBlHUSoKzAkprQ+BNgUm8huQhN92nrYcVQ7u+GQkBW5n17+6bADTHoFPs=
+X-Received: by 2002:ad4:4bd1:0:b0:6b0:9039:bfcb with SMTP id
+ 6a1803df08f44-6b2af26efc4mr12162176d6.12.1718305569708; Thu, 13 Jun 2024
+ 12:06:09 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20240607185240.1892031-5-sughosh.ganu@linaro.org>
+ <CAFLszTjQW72_Z8Dx4g1mVx5Y=wq9xeXYVBffxLUto6sDp6CMbw@mail.gmail.com>
+ <20240611210145.GM68077@bill-the-cat>
+ <CAFLszTjd4Sf=_um7QbkpbLAO9=2=vX_LkHv6br=9FPAPFhbH5Q@mail.gmail.com>
+ <20240611225554.GO68077@bill-the-cat>
+ <CAFLszTi1ZR+qeEuEbGUE2Fv3h1ahX3S_2ySBPQjgkfruiW8Xtw@mail.gmail.com>
+ <20240612172244.GG68077@bill-the-cat>
+ <CAFLszThj1wmF4zOLDjSjHX1cg8RfiHMGgpbRccJ-VJu2dtihNw@mail.gmail.com>
+ <20240612214001.GI68077@bill-the-cat>
+ <CAFLszTiZSu+aN53kAPd2GXosXv09Ams+jFDi2xGU0wh+faO=dg@mail.gmail.com>
+ <20240613154206.GO68077@bill-the-cat>
+ <CAFLszThvhYKpxLhJOgXOkW244Cj6Au=+LqhzHTtYHtri_+tmEg@mail.gmail.com>
+ <1604c2a7-d72e-491f-806f-da29d14f0a17@gmx.de>
+In-Reply-To: <1604c2a7-d72e-491f-806f-da29d14f0a17@gmx.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 13 Jun 2024 13:05:58 -0600
+Message-ID: <CAFLszTjMnxN-pNLxe=pamC=OQpKtPRAL0Xrr17x8Sn+oU+8gQA@mail.gmail.com>
+Subject: Re: [RFC PATCH 04/31] lmb: remove local instances of the lmb
+ structure variable
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Marek Vasut <marex@denx.de>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>, 
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,151 +99,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
+Hi Heinrich,
 
-> Hi Jon,
+On Thu, 13 Jun 2024 at 11:32, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> On Sat, 8 Jun 2024 at 02:44, Jonathan Humphreys <j-humphreys@ti.com> wrote:
->>
->> Add to the capsule update porting documentation that when capsule
->> authentication is enabled (via EFI_CAPSULE_AUTHENTICATE), a public key
->> certificate corresponding to the capsule signing key must be specified.
->>
->> Also add a config (EFI_CAPSULE_BOARD_INSECURE) that is set by default and
->> causes a warning (info level) alerting a developer to consult this porting
->> section to ensure the capsule update capability is secure for the platform.
->> Once this section has been reviewed and confidence is established in the
->> security of the capsule update implementation for this board, deselecting
->> the EFI_CAPSULE_BOARD_INSECURE config will remove the warning.
->>
->> This config is to balance the desire to provide a reference implementation
->> in upstream for capsule authentication but also provide some safeguards
->> to prevent developers from overlooking the need to properly secure their
->> implementation.
->>
->> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
->> ---
->>  doc/develop/uefi/uefi.rst    | 30 +++++++++++++++++++++++-------
->>  lib/efi_loader/Kconfig       | 13 +++++++++++++
->>  lib/efi_loader/efi_capsule.c |  5 +++++
->>  3 files changed, 41 insertions(+), 7 deletions(-)
->>
->> diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
->> index 985956ab85c..1c98c6e4ab4 100644
->> --- a/doc/develop/uefi/uefi.rst
->> +++ b/doc/develop/uefi/uefi.rst
->> @@ -526,6 +526,7 @@ following command can be issued
->>        --guid c1b629f1-ce0e-4894-82bf-f0a38387e630 \
->>        optee.bin optee.capsule
->>
->> +.. _Enabling Capsule Authentication:
->>
->>  Enabling Capsule Authentication
->>  *******************************
->> @@ -631,17 +632,32 @@ where version.dtso looks like::
->>  The properties of image-type-id and image-index must match the value
->>  defined in the efi_fw_image array as image_type_id and image_index.
->>
->> -Porting Capsule Updates to new boards
->> -*************************************
->> +Porting Capsule Update to new boards
->> +************************************
->>
->>  It is important, when using a reference board as a starting point for a custom
->>  board, that certain steps are taken to properly support Capsule Updates.
->>
->> -Capsule GUIDs need to be unique for each firmware and board. That is, if two
->> -firmwares are built from the same source but result in different binaries
->> -because they are built for different boards, they should have different GUIDs.
->> -Therefore it is important when creating support for a new board, new GUIDs are
->> -defined in the board's header file.  *DO NOT* reuse capsule GUIDs.
->> +Capsule GUIDs need to be unique for each firmware and board. That is, even
->> +if two firmwares are built from the same source but result in different
->> +binaries because they are built for different boards, they should have
->> +different GUIDs. Therefore it is important when creating support for a new
->> +board, new GUIDs are defined in the board's header file. *DO NOT* reuse
->> +capsule GUIDs.
->> +
->> +When capsule authentication is enabled (via EFI_CAPSULE_AUTHENTICATE), it
->> +is also very important to set the public key certificate corresponding to
->> +the capsule signing key. See :ref:`Enabling Capsule Authentication` for
->> +more information on signing capsules. *DO NOT* reuse the certificate file
->> +from the reference board, which usually would be based on the development
->> +board keys.
->> +
->> +By default, the EFI_CAPSULE_BOARD_INSECURE config is set to true and causes
->> +a warning (info level) alerting a developer to consult this section to
->> +ensure the capsule update capability is secure for the platform. Once this
->> +section has been reviewed and confidence is established in the security of
->> +the capsule update implementation for this board, deselecting
->> +EFI_CAPSULE_BOARD_INSECURE config will remove the warning.
->>
->>  Executing the boot manager
->>  ~~~~~~~~~~~~~~~~~~~~~~~~~~
->> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
->> index 23079a5709d..f4b1a20ee40 100644
->> --- a/lib/efi_loader/Kconfig
->> +++ b/lib/efi_loader/Kconfig
->> @@ -236,6 +236,19 @@ config EFI_CAPSULE_ON_DISK_EARLY
->>           executed as part of U-Boot initialisation so that they will
->>           surely take place whatever is set to distro_bootcmd.
->>
->> +config EFI_CAPSULE_BOARD_INSECURE
->> +       bool "Permit insecure capsule-on-disk support"
->> +       depends on EFI_HAVE_CAPSULE_SUPPORT
->> +       default y
->> +       help
->> +         Permit insecure capsule update support and emit a warning (info level)
->> +         when applying capsule updates, indicating that the configuration is
->> +         insecure and including a link to the capsule update porting guide in
->> +         U-Boot docs. Disabling this option removes the warning. A developer
->> +         configuration doesn't need to be secure, but before making a product
->> +         from the configuration, the intent is to developers alert of steps that
->> +         must be taken.
->> +
->>  config EFI_CAPSULE_FIRMWARE
->>         bool
->>
->> diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
->> index 0937800e588..76ade2809d9 100644
->> --- a/lib/efi_loader/efi_capsule.c
->> +++ b/lib/efi_loader/efi_capsule.c
->> @@ -1329,6 +1329,11 @@ efi_status_t efi_launch_capsules(void)
->>         if (!nfiles)
->>                 return EFI_SUCCESS;
->>
->> +       if (IS_ENABLED(CONFIG_EFI_CAPSULE_BOARD_INSECURE)) {
->> +               log_info("WARNING: EFI Capsules might be insecure!\n");
->> +               log_info("WARNING: Please check https://docs.u-boot.org/en/latest/develop/uefi/uefi.html#porting-capsule-update-to-new-boards\n");
->> +       }
+> On 13.06.24 18:59, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Thu, 13 Jun 2024 at 09:42, Tom Rini <trini@konsulko.com> wrote:
+> >>
+> >> On Thu, Jun 13, 2024 at 09:22:15AM -0600, Simon Glass wrote:
+> >>> Hi Tom,
+> >>>
+> >>> On Wed, 12 Jun 2024 at 15:40, Tom Rini <trini@konsulko.com> wrote:
+> >>>>
+> >>>> On Wed, Jun 12, 2024 at 02:24:25PM -0600, Simon Glass wrote:
+> >>>>> Hi Tom,
+> >>>>>
+> >>>>> On Wed, 12 Jun 2024 at 11:22, Tom Rini <trini@konsulko.com> wrote:
+> >>>>>>
+> >>>>>> On Tue, Jun 11, 2024 at 08:41:39PM -0600, Simon Glass wrote:
+> >>>>>>
+> >>>>>> [snip]
+> >>>>>>> Also IMO there is only really one LMB list today. We create it at the
+> >>>>>>> start of bootm and then it is done when we boot. The file-loading
+> >>>>>>> stuff is what makes all this confusing...and with bootstd that is
+> >>>>>>> under control as well.
+> >>>>>>>
+> >>>>>>> At lot of this effort seems to be about dealing with random scripts
+> >>>>>>> which load things. We want to make sure we complain if something
+> >>>>>>> overlaps. But we should be making the bootstd case work nicely and
+> >>>>>>> doing things within that framework. Also EFI sort-of has its own
+> >>>>>>> thing, which it is very-much in control of.
+> >>>>>>>
+> >>>>>>> Overall I think this is a bit more subtle that just combining allocators.
+> >>>>>>
+> >>>>>> I think this gets to the main misunderstanding. The problem isn't
+> >>>>>> handling bootstd, or EFI boot, or even assorted scripts. Those are all
+> >>>>>> cases where things are otherwise (sufficiently) well-defined. The
+> >>>>>> problem is "security" and that a "carefully crafted payload" could do
+> >>>>>> something malicious. That's why we have to do all of this stuff sooner
+> >>>>>> rather than later in our boot process.
+> >>>>>
+> >>>>> That's the first I have heard of this, actually, but a bit more detail
+> >>>>> would help. How does the payload get loaded? I'm just not sure about
+> >>>>> the overall goals. It seems that everyone else is already familiar -
+> >>>>> can someone please take the time to point me to the details?
+> >>>>
+> >>>> Well, the short version I believe of the first CVE we got (and so
+> >>>> started abusing LMB) was along the lines of "load an image near where
+> >>>> the U-Boot stack is, smash things for fun and exploits".
+> >>>
+> >>> OK. I am surprised that LMB does not catch that. It is supposed to add
+> >>> the stack and various other things right at the start before loading
+> >>> any file. So even if it clears the LMB each time, it should not be
+> >>> able to do that. Having said this, the code may be buggy as I don't
+> >>> think we have tests for U-Boot's overall functional behaviour in these
+> >>> situations.
+> >>
+> >> Right, LMB does catch the example I gave (because we made all of the
+> >> load from storage/network functions init an lmb and we always make sure
+> >> a new lmb gets U-Boot stack/etc). The next thing we didn't catch was
+> >> "what if EFI does the loading?" and we've kludged around that, and in
+> >> turn had some of the thorny questions. Some of that is what I think
+> >> you're asking about in this part of the thread, to which the answer is
+> >> "EFI spec says you need to place X in memory", so we just need to
+> >> reserve it when it's asked for, so that something else can't come along
+> >> and smash it maliciously.
+> >
+> > OK I see. Of course it isn't just EFI that has this issue. I believe
+> > the answer (for small blocks) is to use malloc(), which I think we do
+> > with a few exceptions which Ilias pointed out. For things like the TPM
+> > log and ACPI tables we should probably use a bloblist, as we do on
+> > x86. For large things (like loading a kernel) we should use LMB. I've
+> > been thinking about how best to tie this to boot, as opposed to random
+> > allocations in U-Boot itself, which would lead to fragmentation and
+> > strange behaviour. I think bootstd is a great place to have a
+> > persistent LMB. It can be attached to bootstd_priv.
+> >
+> > My hope is that EFI is just another boot method, where
+> > already-allocating things are presented to the OS. Apart from the
+> > Ilias exceptions, I believe this is how it works today.
+> >
+> > Where I think this heads in the wrong direction is using
+> > EFI-allocation functions before we are booting an EFI image. EFI has
+> > no concept of what is 'in empty space' so it leads to the lmb
+> > conflict, the subject of this discussion.
 >
-> I am fine with adding a warning on this, but why do we have to control
-> it via a Kconfig option? We can detect the capsule-key is missing from
-> the DT and print the same warning.
+> EFI binaries can return to the command line interface.
+> EFI binaries may be drivers that stay resident and run in the background
+> after returning to the command line interface. They might for instance
+> provide block devices.
 
-Hi Ilias.
-
-The Kconfig option is not there to ensure a capsule key exists, but rather
-to make sure a developer, that is porting uboot to their board and is
-starting from a reference board in upstream, doesn't continue using the
-development board dummy key and instead creates their own (private one).
-
-The Kconfig option is used to force a board developer to acknowledge they
-have followed the board porting steps (which talks about creating your own
-key) with an explict action of disabling the config to remove the warning
-message.
-
-Hope that helps.
-
-Jon
+Hmm you mentioned that before but I'm still not quite understanding.
+Do you mean that the EFI app returns back to U-Boot, leaving the
+driver active? If so, how does U-Boot use the driver? I'm just not
+familiar with how such a construct could work in a single-threaded
+U-Boot.
 
 >
-> Regards
-> /Ilias
->> +
->>         /* Launch capsules */
->>         for (i = 0, ++index; i < nfiles; i++, index++) {
->>                 log_debug("Applying %ls\n", files[i]);
->> --
->> 2.34.1
->>
+> Device-paths must be created from EFI pool memory as they may be freed
+> via FreePool() according to the EFI specification. And these we create
+> whenever a block-device is probed.
+
+The implementation of pool memory rounds up to pages and uses that. It
+might be more efficient to use malloc()/free() instead, given that we
+mark the malloc() space as reserved when we call the EFI app.
+
+>
+> We should not make any assumptions that conflict with the UEFI
+> specification.
+
+Indeed.
+
+>
+> In our initial discussion with Ilias one idea was to merge LMB and EFI
+> memory management. This merged system would have to consider the
+> requirements of the UEFI specifications like a finer grained memory type
+> system and page boundaries.
+>
+> Best regards
+>
+> Heinrich
+>
+> >
+> > This is all quite subtle and probably worthy of a VC discussion.
+> >
+> >>
+> >> But that also raised the more general problem, and why we need a
+> >> persistent reservation list, of allowing boards/SoCs to say they want to
+> >> reserve a block of memory for whatever, and have that obeyed, for real.
+> >> For example, the mach-apple logic of "just pick some memory locations to
+> >> use for kernel/dtb/initrd" isn't really as safe as it should be since
+> >> those reservations aren't really seen anywhere once the function
+> >> returns, it's just setting some environment variables.
+> >
+> > Yes, that part of it I understand. Somehow I either didn't see or
+> > forgot that board_late_init() code. With the script-based boot it
+> > makes some sort of sense, but with bootstd we should have allocation
+> > of addresses dealt with there. I have held off on retiring
+> > kernel_addr_r etc. as the scripts are still in use. But perhaps it
+> > would be a good time to convert bootstd to use lmb instead?
+> >
+> > Regards,
+> > Simon
+>
