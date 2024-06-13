@@ -4,75 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81F66C27C4F
-	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 20:07:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16E0DC27C4F
+	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 20:11:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85908887FF;
-	Thu, 13 Jun 2024 22:07:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 373D788873;
+	Thu, 13 Jun 2024 22:11:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MSBVvLfn";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="l6UxaHud";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A4B9C8890E; Thu, 13 Jun 2024 22:07:02 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3ED8E880E5; Thu, 13 Jun 2024 22:11:28 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49F9F87DEB
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 22:07:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 20E5788861
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 22:11:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-6f361af4cb6so492292a34.3
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 13:07:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718309219; x=1718914019; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RkMM5EVPOBGa6MB7IvIXiZLDsZFbZuW1X0lHK4S2Lc0=;
- b=MSBVvLfnz7+aBM9z0k1MVrfi2ZSrGo3G3T/ggYfTwNlijoaFeLONmHOOJceseBoKnl
- NJTQ+W6wwccpCHcNJzExHbLFEsjvTdjiilae4B0IbAVXEUP+feYQ2Lbily1rZ9+wcJyE
- iVlwmQE6KnCIbYaCXBGjPxFbjsfM9cx9yV/gc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718309219; x=1718914019;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RkMM5EVPOBGa6MB7IvIXiZLDsZFbZuW1X0lHK4S2Lc0=;
- b=hTDcwDD5L5Syx0dPFRjW+XR9nrsTI6hHXdkKbFL7Wxb/KZAczmCcqLhE5djDxXkBaw
- kkkyVicYP9LMR5xo0EtgwWcuTAQGcFVRXwB8cFltR371qubyOvQBynHa/4Y2M8bHyR2K
- KKlBcR3dagpefSnVOV6O41v0+FjBgCsJ36yVYrNscggHVg/uJZ3U9785E3xxp6MP+s5c
- 1b/A1HqVcRTYQFbgg5t+8SGEZy1HmlVd2oGFvZrVMGG5/9DxK6Dw+vCf8TvoSEDmR8bB
- YS2i9GEgWn1ibqu3NnBDJvWSSlgUs8Cqa6sChztHUQ+8A5XQQ7LaJgb2hm9b4RRFiCFD
- 11HQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW5rwaXyUgLtWmmmoLCTQST7cAl1uXtIh/HmmjTqwMOwqQqsZoX8xY7JTDsZkwlOg5iLs0A8uYCgnIcWRcQiJcbfzXFDQ==
-X-Gm-Message-State: AOJu0YwzXLdRMl96QR5DiQ3t2L0v4Ok5x9rotoIrdvIiqGykZzfoLGoS
- KIfrl3mOssWl4ASzFvfPt+0YgQhNWF1FRZo+oLF1tL9AOiOpOLyUVU2gnHqu/x0=
-X-Google-Smtp-Source: AGHT+IEtMO4nOcqCbsdH1OgH040pXfKTs3+Sqny9jOKKFkx7yS1dd7eYfXwDhKN/Gqcr7IVZM6SruQ==
-X-Received: by 2002:a05:6830:1202:b0:6f9:90de:c67f with SMTP id
- 46e09a7af769-6fb937665b7mr817160a34.10.1718309218728; 
- Thu, 13 Jun 2024 13:06:58 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
- [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-6fb5b1eb6c8sm337028a34.43.2024.06.13.13.06.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Jun 2024 13:06:58 -0700 (PDT)
-Date: Thu, 13 Jun 2024 14:06:55 -0600
-From: Tom Rini <trini@konsulko.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1718309483; x=1718914283; i=xypron.glpk@gmx.de;
+ bh=AHTksP9X36IonzShG3CZ4qCet225PH8Z8Lc2NAYr9n0=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=l6UxaHud7ve8RgKCY7qbG1vUmYLBiWw0Nj/Q8YAnl5DNsTa9XyLDl7qyHYCBwpGB
+ PE53LInlA3+Wh/jMzXkx1UDs4VTtJxgufFJkQh6y/YR9YIi8GgJywD7TcgI5Rxt/m
+ Muw5pa3OpZGReRRy7qsr6/9FZHAIyShoQKB5MFFcjSiw6dsKClqMDG8c+Cb/jQKDK
+ /P6Lr1XeoWaYctdBQkeWNQLNJ80/LNXjr02CHbXg7M6ttK75U/rpo7/ARuXPfocxo
+ eKybUIjxxHC3q0vKyyqSIwiD0XAUiSgiCaHaSsfLYoj4Jb4ev9gmqGsTeg7ar0uhT
+ F08iIzYRwMxSIsh82w==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([178.202.41.25]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MWigq-1rtbnf3DQG-00JVcr; Thu, 13
+ Jun 2024 22:11:23 +0200
+Date: Thu, 13 Jun 2024 22:11:22 +0200
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 To: Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
- Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>
-Subject: Re: [RFC PATCH 04/31] lmb: remove local instances of the lmb
- structure variable
-Message-ID: <20240613200655.GP68077@bill-the-cat>
-References: <20240611210145.GM68077@bill-the-cat>
+CC: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Marek Vasut <marex@denx.de>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Fabio Estevam <festevam@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: =?US-ASCII?Q?Re=3A_=5BRFC_PATCH_04/31=5D_lmb=3A_remove_local?=
+ =?US-ASCII?Q?_instances_of_the_lmb_structure_variable?=
+User-Agent: K-9 Mail for Android
+In-Reply-To: <CAFLszTjMnxN-pNLxe=pamC=OQpKtPRAL0Xrr17x8Sn+oU+8gQA@mail.gmail.com>
+References: <20240607185240.1892031-5-sughosh.ganu@linaro.org>
+ <CAFLszTjQW72_Z8Dx4g1mVx5Y=wq9xeXYVBffxLUto6sDp6CMbw@mail.gmail.com>
+ <20240611210145.GM68077@bill-the-cat>
  <CAFLszTjd4Sf=_um7QbkpbLAO9=2=vX_LkHv6br=9FPAPFhbH5Q@mail.gmail.com>
  <20240611225554.GO68077@bill-the-cat>
  <CAFLszTi1ZR+qeEuEbGUE2Fv3h1ahX3S_2ySBPQjgkfruiW8Xtw@mail.gmail.com>
@@ -82,12 +65,30 @@ References: <20240611210145.GM68077@bill-the-cat>
  <CAFLszTiZSu+aN53kAPd2GXosXv09Ams+jFDi2xGU0wh+faO=dg@mail.gmail.com>
  <20240613154206.GO68077@bill-the-cat>
  <CAFLszThvhYKpxLhJOgXOkW244Cj6Au=+LqhzHTtYHtri_+tmEg@mail.gmail.com>
+ <1604c2a7-d72e-491f-806f-da29d14f0a17@gmx.de>
+ <CAFLszTjMnxN-pNLxe=pamC=OQpKtPRAL0Xrr17x8Sn+oU+8gQA@mail.gmail.com>
+Message-ID: <0397EEF3-D89D-45CC-BBA9-961DE973249E@gmx.de>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Z+B2SGd+lzrwWCx+"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThvhYKpxLhJOgXOkW244Cj6Au=+LqhzHTtYHtri_+tmEg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:B84Wv43LbXqm9lkh1LtxB9ezyC8snUTghB11n9sU493jT5dn8w0
+ l1VAbRJcBsNUKwt2VW9Jh/fHljey+RhtcAWHwwPgepHozAkZhs5G30JgR6SWjilIVd7r6f5
+ Y0U68HMBPuOyfyeXZJq5H3Y67QPQl+pKVJPpRAiGAiVeIi/LiSgR6azAd26ASDCL/Qhzez/
+ MxJsk38SnEK+Rwmn8VXPw==
+UI-OutboundReport: notjunk:1;M01:P0:NcmGt2V+n5Y=;4aJWgbn0Gg3/eeJsfNwx/jwxW53
+ aTURR1c8VbRoBeMMjn90A7dZUMgKZnwBZQVpPoZOEiKvSHfoHaNaAbU9Ry05rMPiQCPxkjj1w
+ hubUHXc51BjZKTT8E7pjHDbdGmOvS9Q2emXPOWrnmumVpQbjZ/LYy2rOuQ0EdgX4k9xcOTqGe
+ TG8Gah6E8TonYmf/vm/70NlXeNmhzRCOqrBoZP1FiNF8JFkvIDyK3lMHKe+exi9OiUuze3U9Q
+ 7FVpCImWVQQZGgd2SD/2pRbtDqHrK5Q1JuApsCfpNoeSbSRBrSLwp6hYTe91s4y3PlTq8+yT6
+ VtNSTgNmxfoYZ0zvnRSJL6jiQkMRUeVvS5tF+9xfyDR+fOJ+C0iWJSLFNypahwgWcl+lLOdVD
+ ysO3VgPG4eIEJH/1sb3WD/fQdo7o8vWrMZr7OTjj1fx/IIAFVN5xgdT1nEVk3ZxxHAv2zfS2v
+ KAIpEwFD8Z/G0ydpq57x9U/77jr81/0NdNQRAQOUd8VGrDQ4IDWXDLBnBKKafo1JtISVziL9E
+ 0E70iUFT2E77plTl+R9FI/UdfCg/xDgQPZi7Mnog/pzIgGDHwSrZJ5gB9SwvPQaUelApvO4Ws
+ HsjpjypzQ8xygcQ+l6V06MrI/ZST7uaXKudjzZrMxDi1S1ZR6iQ5POIPtwU2rRvhsHSYLcy4L
+ Rm8l0bUwVW5M85PAGdY+G/mp5eZPsAobWNZuP+GgGCFBW3yduUtmMvV4wkgmO+0QZ0TKqS5lb
+ rthAjrjlyA3kMaY+FJreijRimMkLjxV+4xCN2pTcTSrBLvlR9DpTx1brG/VI/XrMDptRKpZhp
+ QPxpJE1dt9UkKaGyvhFy7jGaoAXcEJgRKQLfX8ooTxknk=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,169 +106,218 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Z+B2SGd+lzrwWCx+
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jun 13, 2024 at 10:59:48AM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Thu, 13 Jun 2024 at 09:42, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Thu, Jun 13, 2024 at 09:22:15AM -0600, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Wed, 12 Jun 2024 at 15:40, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Wed, Jun 12, 2024 at 02:24:25PM -0600, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Wed, 12 Jun 2024 at 11:22, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Tue, Jun 11, 2024 at 08:41:39PM -0600, Simon Glass wrote:
-> > > > > >
-> > > > > > [snip]
-> > > > > > > Also IMO there is only really one LMB list today. We create i=
+Am 13=2E Juni 2024 21:05:58 MESZ schrieb Simon Glass <sjg@chromium=2Eorg>:
+>Hi Heinrich,
+>
+>On Thu, 13 Jun 2024 at 11:32, Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede=
+> wrote:
+>>
+>> On 13=2E06=2E24 18:59, Simon Glass wrote:
+>> > Hi Tom,
+>> >
+>> > On Thu, 13 Jun 2024 at 09:42, Tom Rini <trini@konsulko=2Ecom> wrote:
+>> >>
+>> >> On Thu, Jun 13, 2024 at 09:22:15AM -0600, Simon Glass wrote:
+>> >>> Hi Tom,
+>> >>>
+>> >>> On Wed, 12 Jun 2024 at 15:40, Tom Rini <trini@konsulko=2Ecom> wrote=
+:
+>> >>>>
+>> >>>> On Wed, Jun 12, 2024 at 02:24:25PM -0600, Simon Glass wrote:
+>> >>>>> Hi Tom,
+>> >>>>>
+>> >>>>> On Wed, 12 Jun 2024 at 11:22, Tom Rini <trini@konsulko=2Ecom> wro=
+te:
+>> >>>>>>
+>> >>>>>> On Tue, Jun 11, 2024 at 08:41:39PM -0600, Simon Glass wrote:
+>> >>>>>>
+>> >>>>>> [snip]
+>> >>>>>>> Also IMO there is only really one LMB list today=2E We create i=
 t at the
-> > > > > > > start of bootm and then it is done when we boot. The file-loa=
+>> >>>>>>> start of bootm and then it is done when we boot=2E The file-loa=
 ding
-> > > > > > > stuff is what makes all this confusing...and with bootstd tha=
-t is
-> > > > > > > under control as well.
-> > > > > > >
-> > > > > > > At lot of this effort seems to be about dealing with random s=
-cripts
-> > > > > > > which load things. We want to make sure we complain if someth=
+>> >>>>>>> stuff is what makes all this confusing=2E=2E=2Eand with bootstd=
+ that is
+>> >>>>>>> under control as well=2E
+>> >>>>>>>
+>> >>>>>>> At lot of this effort seems to be about dealing with random scr=
+ipts
+>> >>>>>>> which load things=2E We want to make sure we complain if someth=
 ing
-> > > > > > > overlaps. But we should be making the bootstd case work nicel=
+>> >>>>>>> overlaps=2E But we should be making the bootstd case work nicel=
 y and
-> > > > > > > doing things within that framework. Also EFI sort-of has its =
+>> >>>>>>> doing things within that framework=2E Also EFI sort-of has its =
 own
-> > > > > > > thing, which it is very-much in control of.
-> > > > > > >
-> > > > > > > Overall I think this is a bit more subtle that just combining=
- allocators.
-> > > > > >
-> > > > > > I think this gets to the main misunderstanding. The problem isn=
-'t
-> > > > > > handling bootstd, or EFI boot, or even assorted scripts. Those =
-are all
-> > > > > > cases where things are otherwise (sufficiently) well-defined. T=
-he
-> > > > > > problem is "security" and that a "carefully crafted payload" co=
-uld do
-> > > > > > something malicious. That's why we have to do all of this stuff=
- sooner
-> > > > > > rather than later in our boot process.
-> > > > >
-> > > > > That's the first I have heard of this, actually, but a bit more d=
+>> >>>>>>> thing, which it is very-much in control of=2E
+>> >>>>>>>
+>> >>>>>>> Overall I think this is a bit more subtle that just combining a=
+llocators=2E
+>> >>>>>>
+>> >>>>>> I think this gets to the main misunderstanding=2E The problem is=
+n't
+>> >>>>>> handling bootstd, or EFI boot, or even assorted scripts=2E Those=
+ are all
+>> >>>>>> cases where things are otherwise (sufficiently) well-defined=2E =
+The
+>> >>>>>> problem is "security" and that a "carefully crafted payload" cou=
+ld do
+>> >>>>>> something malicious=2E That's why we have to do all of this stuf=
+f sooner
+>> >>>>>> rather than later in our boot process=2E
+>> >>>>>
+>> >>>>> That's the first I have heard of this, actually, but a bit more d=
 etail
-> > > > > would help. How does the payload get loaded? I'm just not sure ab=
-out
-> > > > > the overall goals. It seems that everyone else is already familia=
-r -
-> > > > > can someone please take the time to point me to the details?
-> > > >
-> > > > Well, the short version I believe of the first CVE we got (and so
-> > > > started abusing LMB) was along the lines of "load an image near whe=
-re
-> > > > the U-Boot stack is, smash things for fun and exploits".
-> > >
-> > > OK. I am surprised that LMB does not catch that. It is supposed to add
-> > > the stack and various other things right at the start before loading
-> > > any file. So even if it clears the LMB each time, it should not be
-> > > able to do that. Having said this, the code may be buggy as I don't
-> > > think we have tests for U-Boot's overall functional behaviour in these
-> > > situations.
-> >
-> > Right, LMB does catch the example I gave (because we made all of the
-> > load from storage/network functions init an lmb and we always make sure
-> > a new lmb gets U-Boot stack/etc). The next thing we didn't catch was
-> > "what if EFI does the loading?" and we've kludged around that, and in
-> > turn had some of the thorny questions. Some of that is what I think
-> > you're asking about in this part of the thread, to which the answer is
-> > "EFI spec says you need to place X in memory", so we just need to
-> > reserve it when it's asked for, so that something else can't come along
-> > and smash it maliciously.
->=20
-> OK I see. Of course it isn't just EFI that has this issue. I believe
-> the answer (for small blocks) is to use malloc(), which I think we do
-> with a few exceptions which Ilias pointed out. For things like the TPM
-> log and ACPI tables we should probably use a bloblist, as we do on
-> x86. For large things (like loading a kernel) we should use LMB. I've
-> been thinking about how best to tie this to boot, as opposed to random
-> allocations in U-Boot itself, which would lead to fragmentation and
-> strange behaviour. I think bootstd is a great place to have a
-> persistent LMB. It can be attached to bootstd_priv.
->=20
-> My hope is that EFI is just another boot method, where
-> already-allocating things are presented to the OS. Apart from the
-> Ilias exceptions, I believe this is how it works today.
->=20
-> Where I think this heads in the wrong direction is using
-> EFI-allocation functions before we are booting an EFI image. EFI has
-> no concept of what is 'in empty space' so it leads to the lmb
-> conflict, the subject of this discussion.
->=20
-> This is all quite subtle and probably worthy of a VC discussion.
+>> >>>>> would help=2E How does the payload get loaded? I'm just not sure =
+about
+>> >>>>> the overall goals=2E It seems that everyone else is already famil=
+iar -
+>> >>>>> can someone please take the time to point me to the details?
+>> >>>>
+>> >>>> Well, the short version I believe of the first CVE we got (and so
+>> >>>> started abusing LMB) was along the lines of "load an image near wh=
+ere
+>> >>>> the U-Boot stack is, smash things for fun and exploits"=2E
+>> >>>
+>> >>> OK=2E I am surprised that LMB does not catch that=2E It is supposed=
+ to add
+>> >>> the stack and various other things right at the start before loadin=
+g
+>> >>> any file=2E So even if it clears the LMB each time, it should not b=
+e
+>> >>> able to do that=2E Having said this, the code may be buggy as I don=
+'t
+>> >>> think we have tests for U-Boot's overall functional behaviour in th=
+ese
+>> >>> situations=2E
+>> >>
+>> >> Right, LMB does catch the example I gave (because we made all of the
+>> >> load from storage/network functions init an lmb and we always make s=
+ure
+>> >> a new lmb gets U-Boot stack/etc)=2E The next thing we didn't catch w=
+as
+>> >> "what if EFI does the loading?" and we've kludged around that, and i=
+n
+>> >> turn had some of the thorny questions=2E Some of that is what I thin=
+k
+>> >> you're asking about in this part of the thread, to which the answer =
+is
+>> >> "EFI spec says you need to place X in memory", so we just need to
+>> >> reserve it when it's asked for, so that something else can't come al=
+ong
+>> >> and smash it maliciously=2E
+>> >
+>> > OK I see=2E Of course it isn't just EFI that has this issue=2E I beli=
+eve
+>> > the answer (for small blocks) is to use malloc(), which I think we do
+>> > with a few exceptions which Ilias pointed out=2E For things like the =
+TPM
+>> > log and ACPI tables we should probably use a bloblist, as we do on
+>> > x86=2E For large things (like loading a kernel) we should use LMB=2E =
+I've
+>> > been thinking about how best to tie this to boot, as opposed to rando=
+m
+>> > allocations in U-Boot itself, which would lead to fragmentation and
+>> > strange behaviour=2E I think bootstd is a great place to have a
+>> > persistent LMB=2E It can be attached to bootstd_priv=2E
+>> >
+>> > My hope is that EFI is just another boot method, where
+>> > already-allocating things are presented to the OS=2E Apart from the
+>> > Ilias exceptions, I believe this is how it works today=2E
+>> >
+>> > Where I think this heads in the wrong direction is using
+>> > EFI-allocation functions before we are booting an EFI image=2E EFI ha=
+s
+>> > no concept of what is 'in empty space' so it leads to the lmb
+>> > conflict, the subject of this discussion=2E
+>>
+>> EFI binaries can return to the command line interface=2E
+>> EFI binaries may be drivers that stay resident and run in the backgroun=
+d
+>> after returning to the command line interface=2E They might for instanc=
+e
+>> provide block devices=2E
+>
+>Hmm you mentioned that before but I'm still not quite understanding=2E
+>Do you mean that the EFI app returns back to U-Boot, leaving the
 
-But it's not tied to "boot". Again, the problems are with potential
-malicious actions. So if we're in some function that says "I need to
-claim $THIS range", it needs check in with the reservation system so
-that it can be told "Sorry, already reserved" if needed. It's not a good
-idea for $subsystem to say it needs $THIS range, but then we don't make
-the reservation until later because someone could have acted in there
-in the interim.
+There are 3 types of of EFI binaries:
 
-I see there's been further discussion between you/Heinrich/Sughosh and
-I'll otherwise leave it until the next iteration, but I want to be clear
-that I see it as important that when something says it needs $THIS
-range, we put it in the reservation system.
+* apps
+* boot time drivers
+* run time drivers
 
-> > But that also raised the more general problem, and why we need a
-> > persistent reservation list, of allowing boards/SoCs to say they want to
-> > reserve a block of memory for whatever, and have that obeyed, for real.
-> > For example, the mach-apple logic of "just pick some memory locations to
-> > use for kernel/dtb/initrd" isn't really as safe as it should be since
-> > those reservations aren't really seen anywhere once the function
-> > returns, it's just setting some environment variables.
->=20
-> Yes, that part of it I understand. Somehow I either didn't see or
-> forgot that board_late_init() code. With the script-based boot it
-> makes some sort of sense, but with bootstd we should have allocation
-> of addresses dealt with there. I have held off on retiring
-> kernel_addr_r etc. as the scripts are still in use. But perhaps it
-> would be a good time to convert bootstd to use lmb instead?
 
-I'm not sure I follow you. It's already using lmb since that's been part
-of the normal OS boot flow since forever? If you mean make it easier to
-let the system just pick where to load stuff in to memory for you, yes,
-that mach-apple functionality would be a handy fallback/default.
-Especially if done in concert with double checking on what needs to be
-done to minimize copying data around and around and around in boot
-before we start the OS, since that's where much of the hard part of
-deciding addresses is.
+>driver active? If so, how does U-Boot use the driver? I'm just not
+>familiar with how such a construct could work in a single-threaded
+>U-Boot=2E
 
---=20
-Tom
+We already have code for EFI block devices=2E See lib/efi_driver/
 
---Z+B2SGd+lzrwWCx+
-Content-Type: application/pgp-signature; name="signature.asc"
+When U-Boot reads from such a block device it may end up in an EFI driver =
+that for instance uses U-Boots network drivers exposed as EFI simple networ=
+k protocol to read from an NVMEoF or iSCSI server=2E
 
------BEGIN PGP SIGNATURE-----
+>
+>>
+>> Device-paths must be created from EFI pool memory as they may be freed
+>> via FreePool() according to the EFI specification=2E And these we creat=
+e
+>> whenever a block-device is probed=2E
+>
+>The implementation of pool memory rounds up to pages and uses that=2E It
+>might be more efficient to use malloc()/free() instead, given that we
+>mark the malloc() space as reserved when we call the EFI app=2E
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZrUVwACgkQFHw5/5Y0
-tyx4ygwAtLs1/3uFCSyTgx900IdRHyYz1PKlxBI5EyNQJYfVHr+bzA0FHkk3CWTU
-aldqdWPKiWDDh+fE3mRwRpUwyehCRCGTg1FIwhiKERMwtstcyxRI9ICzH8PshgRE
-5GJbEkhagS+cw+/dZNOzy+MGFkz3RCD+qdlxxHcfrvPA5xrOrNzMUzVIopYJ3LD9
-f7PDvXyMWDG7XZy4VhRYyuVM15BwSFgsgH9BVahwlF+DyFFsrhZIfkzRi7Uogxkf
-tqGoIp9d4JWyDLcFHfv/f6HTWt04Cmc3S3vQ31Q+bz3NC5ePHEUW4cx+e76h6k94
-C/AKXxlu+eyWMGRdSXwq1BhnSewzucYpvjwpH99d/a32Kn9N3p0HTft42Jnf1u34
-pHLsCdulcqZT21huqeba+yJjZLkjd5MkWiJs0Oqz8ZiL0GZ+fT4/nxkif21qyeLH
-q2+dJYL/eLLv8t75geeLgWQCLqmqLeHHxRzyCIv10FdgZoixiowA/RhQCH+Kq9S3
-TK6zLDRf
-=n7GG
------END PGP SIGNATURE-----
+We have requirements on which EFI allocations may reside in the same page=
+=2E See the ARM chapter in the UEFI specification=2E
 
---Z+B2SGd+lzrwWCx+--
+Best regards
+
+Heinrich
+
+>
+>>
+>> We should not make any assumptions that conflict with the UEFI
+>> specification=2E
+>
+>Indeed=2E
+>
+>>
+>> In our initial discussion with Ilias one idea was to merge LMB and EFI
+>> memory management=2E This merged system would have to consider the
+>> requirements of the UEFI specifications like a finer grained memory typ=
+e
+>> system and page boundaries=2E
+>>
+>> Best regards
+>>
+>> Heinrich
+>>
+>> >
+>> > This is all quite subtle and probably worthy of a VC discussion=2E
+>> >
+>> >>
+>> >> But that also raised the more general problem, and why we need a
+>> >> persistent reservation list, of allowing boards/SoCs to say they wan=
+t to
+>> >> reserve a block of memory for whatever, and have that obeyed, for re=
+al=2E
+>> >> For example, the mach-apple logic of "just pick some memory location=
+s to
+>> >> use for kernel/dtb/initrd" isn't really as safe as it should be sinc=
+e
+>> >> those reservations aren't really seen anywhere once the function
+>> >> returns, it's just setting some environment variables=2E
+>> >
+>> > Yes, that part of it I understand=2E Somehow I either didn't see or
+>> > forgot that board_late_init() code=2E With the script-based boot it
+>> > makes some sort of sense, but with bootstd we should have allocation
+>> > of addresses dealt with there=2E I have held off on retiring
+>> > kernel_addr_r etc=2E as the scripts are still in use=2E But perhaps i=
+t
+>> > would be a good time to convert bootstd to use lmb instead?
+>> >
+>> > Regards,
+>> > Simon
+>>
