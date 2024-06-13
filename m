@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B407FC27C75
-	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 12:44:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF729C27C75
+	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 12:44:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDAF088908;
-	Thu, 13 Jun 2024 14:43:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 31FDD8890F;
+	Thu, 13 Jun 2024 14:43:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H4xh03AJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UB+nVSAU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9814888F9; Thu, 13 Jun 2024 13:10:19 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 6AD06888F2; Thu, 13 Jun 2024 13:10:21 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4E4D888F6
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 13:10:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 799B3883D3
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 13:10:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-57cb9efd8d1so609264a12.0
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 04:10:17 -0700 (PDT)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-57c6afa1839so423931a12.2
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 04:10:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1718277017; x=1718881817; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1718277019; x=1718881819; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=f3P4MUFnz6jH8ZIpT84vFt6ekwmHdCr6I1GU5B/nij0=;
- b=H4xh03AJyjm261JpKxzFpE6WkO5AB6TEEJHRZd00JbOMX1ebXWAD1xCWfCJXNMY57o
- iJfZGsCFwWq5pF7oGRYJ77JFhYsFd7Y3CIs5zXyTL0vWrDUdPYfjUuGFVXhMt2Of2/gm
- tsjH1uV/C/25HNxb99o9h4dJFEiCufHjvGYvz136aJUnzUJiPqBDSCxeyMuOhPdTyMtz
- JU12J9qhFl90dkbYwJ0qhsVlcLDa/Kmedz6BeAY5WFMj4GdGNXXEvSI2cf/UXvw0N4W8
- pwbIWOq3GHkNhLLpFR6iEunMSqbfAIz7CPueYFUaKsoGrBOQMztC0FQDZ69aidD8sHxx
- 5M1g==
+ :reply-to; bh=kr80qGA8fTtmGld4Thh3XY/hn2vKZu79T8rEjD9KMoo=;
+ b=UB+nVSAUMkgVN4Ye0gldVzLbJzKkNzocI9RJJO4LiuCn4RmXn5drH6UBbKaWcQmVbP
+ yOwuVpYmBegbSwYbdXqbBHdzTXInEw+3Dmv6yLVZTuXQFMuCAbv/Tkg/Mp6rfB6YiFWF
+ eNxBOhS1+3XSvOGM7gu9e+Zzmbr+05SvJOZZCTOKl/OkRGVsVTMFeLi96H06XKSBzFyq
+ TKk46Y4t+F4vWYF5GU6JEwDoe+/PmSi8AdyNl1fnW9B8eMPQbAshAUSmzy6tEnHMs+IM
+ hEx1+eGYb7QefX+Nbk/3ChRRCvQskc2/KM5COfYpiEpYk/ecSPGrESJOkGyzmHyXJoXU
+ WGpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718277017; x=1718881817;
+ d=1e100.net; s=20230601; t=1718277019; x=1718881819;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=f3P4MUFnz6jH8ZIpT84vFt6ekwmHdCr6I1GU5B/nij0=;
- b=dZaZwRPxizB6FeuwtOI2KCVf9Xte0LbZmMDDmnc3I7x/7ByZvLknTDiD1e8i8+yT/7
- Rq+S4TJyoYfOp1YtCLor/1J5Strao4i/EnrQ5x/xAxRJx8Bmovlp/AqMcbo9T1N6zUu5
- aimtsrkSmuSffJA4fSAhJme8ppWYF4cbXmDZMYbohsyXc8hAr+XHMi1KML3lON094H5B
- /oLzobpJWsOACtMRc4k3spMd5c4Fwor8Imk3VXbfl0MSftf22kgY5PiomCjyKyu5G6CB
- AJG6BvN0GMP6+VHxeWjbwdkvQXRe0mIwtsfdXIHRqy/76L3qTTT2I8eGDcAnOC8O5r4G
- fDWQ==
+ bh=kr80qGA8fTtmGld4Thh3XY/hn2vKZu79T8rEjD9KMoo=;
+ b=o26jmUBL7Sdo6CDJtN7jUlewPQJSjjOIw6y7lZXJI/apEJxo3PIjp5AXciN5/XtrMo
+ lauMV3XKHVbF7hVGnsPoAfdy75xILGT+vOhfoU3rx80f+KaupnJUqPSq2lZ6xi1RUuhV
+ azNOkbsyRTI1jou9MjBpS9RlYWKyAqz0l838yRFUxD5lv464ODJDJEDeOFP2+kHqnxZH
+ dRL2GC4YMGczccGLpK2ThOLv4EG2PA+wqqsaZ4cM/a+wdTFKHy4TwpxQikoLVq10i/rx
+ Py8S0WxTi8GMmPYUS/K16cs2pYG+0iixeJILYHT/JpPpvOHg67VHZEZXpSvrZ4RO7Uae
+ dUhw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUWdFhvYPc15E7URQRp2YRoBKnnb5bA02QFYLIBQR9Psbe8PMP9arbYNgxygXOF9cG72GStQgaXifRH2OxdFzxXJ5PeRA==
-X-Gm-Message-State: AOJu0YwzYZNqLEeDdsqg8YzTSOGWiW8LI9Tl4EA9wJCQaF+k0vh8lPeU
- NyD8U2zIVPh/IHjDR9RfgM38WFpAuPRy+6RAjXPRmFamH0sgZK1N
-X-Google-Smtp-Source: AGHT+IH0EgvryHl87x83tzRJpuiBJ1rpfzdZr0Y7qNyiWnTr1QIDKSj4IifhHfhjOl5NHHvVyY8IDA==
-X-Received: by 2002:a17:906:dfe3:b0:a6f:4746:4ee7 with SMTP id
- a640c23a62f3a-a6f5240b7damr175675966b.11.1718277016897; 
- Thu, 13 Jun 2024 04:10:16 -0700 (PDT)
+ AJvYcCXqWcSprgMIzEulrtLXvuC0lWp3kXqeUtBkkn3aaZewdN1dffLiCPn3jml4K0+BdV7jSpemc3rXTdmQoFlYIDjMhC+nyA==
+X-Gm-Message-State: AOJu0Yx/qeZxKsLnSF9RhcKY9LX28vZAcvcH9n2HNSGyRhphDQZ60zKW
+ giY+gbpg9IH90k5wl+RdAw+Wp2EpWBfUev4iztHdQEjttX4qyxyvn3UqCQ==
+X-Google-Smtp-Source: AGHT+IFLUlNtZIbf65wp7K+4UED37pe4u0W5JmVhFzBgf52celWvYIzkBu3i+9jcM2SkbMu/EoukWg==
+X-Received: by 2002:a50:d596:0:b0:57c:77a1:d1da with SMTP id
+ 4fb4d7f45d1cf-57ca8e69171mr4009929a12.0.1718277018724; 
+ Thu, 13 Jun 2024 04:10:18 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
  [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- a640c23a62f3a-a6f56f416dfsm60580366b.164.2024.06.13.04.10.15
+ a640c23a62f3a-a6f56f416dfsm60580366b.164.2024.06.13.04.10.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Jun 2024 04:10:16 -0700 (PDT)
+ Thu, 13 Jun 2024 04:10:18 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Ryder Lee <ryder.lee@mediatek.com>,
@@ -87,10 +87,10 @@ To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  This contributor prefers not to receive mails <noreply@example.com>,
  Stefan Roese <sr@denx.de>, Peter Robinson <pbrobinson@gmail.com>,
  Sam Shih <sam.shih@mediatek.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 03/14] spi: mtk_spim: add support for upstream mediatek,
- spi-ipm compatible
-Date: Thu, 13 Jun 2024 13:09:21 +0200
-Message-ID: <20240613110949.11076-4-ansuelsmth@gmail.com>
+Subject: [PATCH v2 04/14] net: mediatek: handle alternative name for pn_swap
+ property
+Date: Thu, 13 Jun 2024 13:09:22 +0200
+Message-ID: <20240613110949.11076-5-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240613110949.11076-1-ansuelsmth@gmail.com>
 References: <20240613110949.11076-1-ansuelsmth@gmail.com>
@@ -113,102 +113,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Upstream kernel linux use a different compatible mediatek,spi-ipm.
-
-Add support for this compatible and add handling for the additional
-clock similar to how it's done by the upstream driver and handling for
-all the property enabled by default.
+Handle alternative name for pn_swap property as upstream linux use
+mediatek,pnswap.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- drivers/spi/mtk_spim.c | 45 ++++++++++++++++++++++++++++++++++++++++--
- 1 file changed, 43 insertions(+), 2 deletions(-)
+ drivers/net/mtk_eth.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/spi/mtk_spim.c b/drivers/spi/mtk_spim.c
-index 90f4c3cecb9..b360eca2b91 100644
---- a/drivers/spi/mtk_spim.c
-+++ b/drivers/spi/mtk_spim.c
-@@ -137,6 +137,8 @@ struct mtk_spim_capability {
-  * @state:		Controller state
-  * @sel_clk:		Pad clock
-  * @spi_clk:		Core clock
-+ * @parent_clk:		Parent clock (needed for mediatek,spi-ipm, upstream DTSI)
-+ * @hclk:		HCLK clock (needed for mediatek,spi-ipm, upstream DTSI)
-  * @pll_clk_rate:	Controller's PLL source clock rate, which is different
-  *			from SPI bus clock rate
-  * @xfer_len:		Current length of data for transfer
-@@ -151,6 +153,7 @@ struct mtk_spim_priv {
- 	void __iomem *base;
- 	u32 state;
- 	struct clk sel_clk, spi_clk;
-+	struct clk parent_clk, hclk;
- 	u32 pll_clk_rate;
- 	u32 xfer_len;
- 	struct mtk_spim_capability hw_cap;
-@@ -650,7 +653,21 @@ static int mtk_spim_probe(struct udevice *dev)
- 	if (!priv->base)
- 		return -EINVAL;
+diff --git a/drivers/net/mtk_eth.c b/drivers/net/mtk_eth.c
+index 75e7bcf83b7..87e2e1d9cda 100644
+--- a/drivers/net/mtk_eth.c
++++ b/drivers/net/mtk_eth.c
+@@ -1965,7 +1965,9 @@ static int mtk_eth_of_to_plat(struct udevice *dev)
+ 			return -ENODEV;
+ 		}
  
--	mtk_spim_get_attr(priv, dev);
-+	/*
-+	 * Upstream linux driver for ipm design enable all the modes
-+	 * and setup the calibrarion values directly in the driver with
-+	 * standard values.
-+	 */
-+	if (device_is_compatible(dev, "mediatek,spi-ipm")) {
-+		priv->hw_cap.enhance_timing = true;
-+		priv->hw_cap.dma_ext = true;
-+		priv->hw_cap.ipm_design = true;
-+		priv->hw_cap.support_quad = true;
-+		priv->sample_sel = 0;
-+		priv->tick_dly = 2;
-+	} else {
-+		mtk_spim_get_attr(priv, dev);
-+	}
- 
- 	ret = clk_get_by_name(dev, "sel-clk", &priv->sel_clk);
- 	if (ret < 0) {
-@@ -664,8 +681,31 @@ static int mtk_spim_probe(struct udevice *dev)
- 		return ret;
- 	}
- 
--	clk_enable(&priv->sel_clk);
-+	/*
-+	 * Upstream DTSI use a different compatible that provide additional
-+	 * clock instead of the assigned-clock implementation.
-+	 */
-+	if (device_is_compatible(dev, "mediatek,spi-ipm")) {
-+		ret = clk_get_by_name(dev, "parent-clk", &priv->parent_clk);
-+		if (ret < 0) {
-+			dev_err(dev, "failed to get parent-clk\n");
-+			return ret;
-+		}
-+
-+		ret = clk_get_by_name(dev, "hclk", &priv->hclk);
-+		if (ret < 0) {
-+			dev_err(dev, "failed to get hclk\n");
-+			return ret;
-+		}
-+
-+		clk_enable(&priv->parent_clk);
-+		clk_set_parent(&priv->sel_clk, &priv->parent_clk);
-+
-+		clk_enable(&priv->hclk);
-+	}
-+
- 	clk_enable(&priv->spi_clk);
-+	clk_enable(&priv->sel_clk);
- 
- 	priv->pll_clk_rate = clk_get_rate(&priv->spi_clk);
- 	if (priv->pll_clk_rate == 0)
-@@ -698,6 +738,7 @@ static const struct dm_spi_ops mtk_spim_ops = {
- 
- static const struct udevice_id mtk_spim_ids[] = {
- 	{ .compatible = "mediatek,ipm-spi" },
-+	{ .compatible = "mediatek,spi-ipm", },
- 	{}
- };
- 
+-		priv->pn_swap = ofnode_read_bool(args.node, "pn_swap");
++		/* Upstream linux use mediatek,pnswap instead of pn_swap */
++		priv->pn_swap = ofnode_read_bool(args.node, "pn_swap") ||
++				ofnode_read_bool(args.node, "mediatek,pnswap");
+ 	} else if (priv->phy_interface == PHY_INTERFACE_MODE_USXGMII) {
+ 		/* get corresponding usxgmii phandle */
+ 		ret = dev_read_phandle_with_args(dev, "mediatek,usxgmiisys",
 -- 
 2.43.0
 
