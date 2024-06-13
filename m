@@ -4,86 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0B25C27C4F
-	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 10:14:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1535EC27C4F
+	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 10:24:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96978888FB;
-	Thu, 13 Jun 2024 12:13:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 6BB95888E6;
+	Thu, 13 Jun 2024 12:24:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="rR0Y5POf";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="dg6EVDRL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B710888FE; Thu, 13 Jun 2024 12:13:40 +0200 (CEST)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id 24F17888E9; Thu, 13 Jun 2024 12:24:44 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87F84883D3
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 12:13:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-35f1bc63981so1210175f8f.1
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 03:13:37 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id A2A2C888C5
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 12:24:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=patrick.barsanti@amarulasolutions.com
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-57c7681ccf3so753771a12.2
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 03:24:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718273617; x=1718878417;
+ d=amarulasolutions.com; s=google; t=1718274281; x=1718879081;
  darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=MtGCv03v1Ot/KGRp10yzrIFQKwURzdvZZs4I/hmMfWs=;
- b=rR0Y5POfQBDnos7kImAZkNuP4k109jKfaiUlEMacy70JSgfk//c24lHKCsjB5IrgAm
- 4+lThMmLF4fOO+fYr6ZybIZSf0fF5l+GQ9MhEsNznaITahzsZlKvlUQc1mRsnw7eOerm
- XC3OLVxd7PJpsDOsBXtqi0BXbRQjnpwvmjcx8wH4tU9RKatyd2a20HdR1qYptRgAhy5j
- 5P0jcNQJ3EmUZavf0b3ulf1gdOz2PsEd+AfYsweytgttOTiAEr2isasOSeYAORcOITXZ
- unrfD2WyOgVS75XQR1cCC9oM0QLG9eIWaVggJukOBwkXo6eXpfAhnw87AchTqggoE9Nl
- 56kw==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZNJ3lPHXILz944HxYnQbdTIHTTgYYL59xPboz1/mIrM=;
+ b=dg6EVDRLdEwoY5RWspGfff0kvVJZd5ghbqkfcXxtdabXMxYJP/yxcN3A/NCbqG5UFO
+ KX1TEZO0vBINxSTv5sAJxvsXK/JQn7cYIj2JUsVxjGU2mHJp2BJjQLvRXd5VVUNoX7wj
+ WkS8xAQPc1nKj4tQixoLzoDDcgoq2FFOAfstQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718273617; x=1718878417;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=MtGCv03v1Ot/KGRp10yzrIFQKwURzdvZZs4I/hmMfWs=;
- b=oKjCWtm0J+067mKmtUZWbBS0c+ZHkHh6sODxQk/xgB1UOUZYKjnvU2a5T+1MelRus+
- ChGcD5a8hpf/WWmdqpdAwD96K9MirXVa607Sr8PqcKBZMjHitGCnIdC3tvMUAOtx1/wq
- DJsnIdca+sb4Ho7iu/KdwZeklI0U0ViQBqN/Mk+MqvbfrCAf3QFlJ2kZZhdTYptsx/Lz
- xADNgUQiksg1J399346TnOtWVJ+qN6Y4ETwWX36ww0qjp9WOZQUFJWAVQwbJNPe17ICH
- gdh5wcLPpjLEtmy9m2gQDF7NoQtc4g12KnRqwaQjuY9eeXue35XqLsLVszGIW/OMhxjt
- 20xQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUAZB17qRF7bbr88odqgVH7CTYwK9IeU0Tdqk/mYwODoq7AK7NIPO0cotlJW2K7ViG02P+t+UHuRHtVm5d5x4B6wN0PdQ==
-X-Gm-Message-State: AOJu0Yz2/fEmrh6WUvRGWRjSgsDD+TDXymK6Sk2JGoRgGmfO5frNc9OS
- ds76rJU4nPKw940V47duABsO/rgBOL2yQnThx+kRF68KMFSg3me0bbYdewlq7U8Y30dW5scEpCL
- loPs=
-X-Google-Smtp-Source: AGHT+IFnZrfH3v/8IU7Bl12XjRwbCrgp/sQil/ogqX/UxGjejf4xCVp2YR1lxnczLWX/PafadNOXCA==
-X-Received: by 2002:a5d:6e8c:0:b0:360:7761:e304 with SMTP id
- ffacd0b85a97d-3607761e376mr970874f8f.1.1718273616924; 
- Thu, 13 Jun 2024 03:13:36 -0700 (PDT)
-Received: from groot.home ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-360750f2295sm1251573f8f.82.2024.06.13.03.13.36
+ d=1e100.net; s=20230601; t=1718274281; x=1718879081;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZNJ3lPHXILz944HxYnQbdTIHTTgYYL59xPboz1/mIrM=;
+ b=gMjvamO3hg0eLOLnOBkAeOvxgA8R3M+Zd4KODPRTJdcrtVK/xPNPZOvPYkisbednlo
+ bSj9gAbemrZcPau+3dktAJtKfIPX0plzzMzS9dCqflTXdqRNjLCkgJYCcWghoK1ndwCp
+ gUfRj+LIQhCmpZQDWVLskzunflOOtCwQU1bahowUHMW7lcJmS9LRLRN9A8luuAwoSYm+
+ LpshzbVqkilVBa/lJO6m+XJ4cuPQnW1cs+sdGOcTy4JSdg5FaxF4klGtaOAogjvNAR3a
+ A6LUAW0dixKMVNnOhIeafJvf5+jbH8M04h1xFNGP4Ws+0x9/aVM++4+Rd/+eQ95aPh4w
+ kFTA==
+X-Gm-Message-State: AOJu0YyKtWZon+ArEHVc7hhMk//lbAnlFIx26A97J/LYApoWfgMdvXgq
+ Jq3BnHOTdns19tKP0ZIlc6T4jTDep6T4H7zutrdIAmT52Ta990/FciwiMD4Obd0=
+X-Google-Smtp-Source: AGHT+IFEGnGZFtDlN4I3yFa9SZAnWTdzt7KNAHQcszGq6BtG7hNxGxnpHQLQI5lTzU5MeY2vRs4HMg==
+X-Received: by 2002:a17:906:48d:b0:a6f:85:2d67 with SMTP id
+ a640c23a62f3a-a6f47ff3863mr241151966b.67.1718274280841; 
+ Thu, 13 Jun 2024 03:24:40 -0700 (PDT)
+Received: from localhost.localdomain (i116103.upc-i.chello.nl.
+ [62.195.116.103]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a6f56fa67besm55744266b.208.2024.06.13.03.24.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Jun 2024 03:13:36 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Date: Thu, 13 Jun 2024 12:13:12 +0200
-Subject: [PATCH v2 5/5] bootstd: Add test for bootmeth_android
+ Thu, 13 Jun 2024 03:24:40 -0700 (PDT)
+From: Patrick Barsanti <patrick.barsanti@amarulasolutions.com>
+To: sbabic@denx.de,
+	festevam@gmail.com,
+	uboot-imx@nxp.com
+Cc: u-boot@lists.denx.de, michael@amarulasolutions.com,
+ linux-amarula@amarulasolutions.com,
+ Patrick Barsanti <patrick.barsanti@amarulasolutions.com>
+Subject: [PATCH] arm: fsl: imx6ulz_bsh_smm_m2: Migrate to OF_UPSTREAM
+Date: Thu, 13 Jun 2024 12:24:09 +0200
+Message-ID: <20240613102409.19535-1-patrick.barsanti@amarulasolutions.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240613-bootmeth-android-v2-5-397f6e66eb29@baylibre.com>
-References: <20240613-bootmeth-android-v2-0-397f6e66eb29@baylibre.com>
-In-Reply-To: <20240613-bootmeth-android-v2-0-397f6e66eb29@baylibre.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Julien Masson <jmasson@baylibre.com>, 
- Guillaume La Roque <glaroque@baylibre.com>, 
- Dmitrii Merkurev <dimorinny@google.com>, 
- Roman Stratiienko <r.stratiienko@gmail.com>, 
- Igor Opaniuk <igor.opaniuk@gmail.com>, u-boot@lists.denx.de, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-X-Mailer: b4 0.14-dev-d4707
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,280 +90,216 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a unit test for testing the Android bootmethod.
+Migrate imx6ulz_bsh_smm_m2 board to OF_UPSTREAM.
 
-This requires another mmc image (mmc7) to contain the following partitions:
-- misc: contains the Bootloader Control Block (BCB)
-- boot_a: contains a fake generic kernel image
-- vendor_boot_a: contains a fake vendor_boot image
-
-Also add BOOTMETH_ANDROID as a dependency on sandbox so that we can test
-this with:
-
-$ ./test/py/test.py --bd sandbox --build -k test_abootimg # build bootv4.img
-$ ./test/py/test.py --bd sandbox --build -k test_ut # build the mmc7.img
-$ ./test/py/test.py --bd sandbox --build -k bootflow_android
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Signed-off-by: Patrick Barsanti <patrick.barsanti@amarulasolutions.com>
 ---
- arch/sandbox/dts/test.dts |  8 +++++
- configs/sandbox_defconfig |  2 +-
- test/boot/bootflow.c      | 65 ++++++++++++++++++++++++++++++++++++++--
- test/py/tests/test_ut.py  | 76 +++++++++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 147 insertions(+), 4 deletions(-)
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index a012f5c4c9ba..5fb5eac862ec 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -43,6 +43,7 @@
- 		mmc4 = "/mmc4";
- 		mmc5 = "/mmc5";
- 		mmc6 = "/mmc6";
-+		mmc7 = "/mmc7";
- 		pci0 = &pci0;
- 		pci1 = &pci1;
- 		pci2 = &pci2;
-@@ -1129,6 +1130,13 @@
- 		filename = "mmc6.img";
- 	};
- 
-+	/* This is used for Android tests */
-+	mmc7 {
-+		status = "disabled";
-+		compatible = "sandbox,mmc";
-+		filename = "mmc7.img";
-+	};
-+
- 	pch {
- 		compatible = "sandbox,pch";
- 	};
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index 93b52f2de5cf..bc4398f101a7 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -15,6 +15,7 @@ CONFIG_FIT=y
- CONFIG_FIT_RSASSA_PSS=y
- CONFIG_FIT_CIPHER=y
- CONFIG_FIT_VERBOSE=y
-+CONFIG_BOOTMETH_ANDROID=y
- CONFIG_LEGACY_IMAGE_FORMAT=y
- CONFIG_MEASURED_BOOT=y
- CONFIG_BOOTSTAGE=y
-@@ -40,7 +41,6 @@ CONFIG_LOG_MAX_LEVEL=9
- CONFIG_LOG_DEFAULT_LEVEL=6
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_STACKPROTECTOR=y
--CONFIG_ANDROID_AB=y
- CONFIG_CMD_CPU=y
- CONFIG_CMD_LICENSE=y
- CONFIG_CMD_SMBIOS=y
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 4511cfa7f9bf..934c4dcbad2b 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -27,6 +27,7 @@
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-+extern U_BOOT_DRIVER(bootmeth_android);
- extern U_BOOT_DRIVER(bootmeth_cros);
- extern U_BOOT_DRIVER(bootmeth_2script);
- 
-@@ -518,12 +519,12 @@ BOOTSTD_TEST(bootflow_cmd_boot, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
-  * @uts: Unit test state
-  * @mmc_dev: MMC device to use, e.g. "mmc4". Note that this must remain valid
-  *	in the caller until
-- * @bind_cros: true to bind the ChromiumOS bootmeth
-+ * @bind_cros: true to bind the ChromiumOS and Android bootmeths
-  * @old_orderp: Returns the original bootdev order, which must be restored
-  * Returns 0 on success, -ve on failure
-  */
- static int prep_mmc_bootdev(struct unit_test_state *uts, const char *mmc_dev,
--			    bool bind_cros, const char ***old_orderp)
-+			    bool bind_cros_android, const char ***old_orderp)
- {
- 	static const char *order[] = {"mmc2", "mmc1", NULL, NULL};
- 	struct udevice *dev, *bootstd;
-@@ -545,12 +546,19 @@ static int prep_mmc_bootdev(struct unit_test_state *uts, const char *mmc_dev,
- 				"bootmeth_script", 0, ofnode_null(), &dev));
- 
- 	/* Enable the cros bootmeth if needed */
--	if (IS_ENABLED(CONFIG_BOOTMETH_CROS) && bind_cros) {
-+	if (IS_ENABLED(CONFIG_BOOTMETH_CROS) && bind_cros_android) {
- 		ut_assertok(uclass_first_device_err(UCLASS_BOOTSTD, &bootstd));
- 		ut_assertok(device_bind(bootstd, DM_DRIVER_REF(bootmeth_cros),
- 					"cros", 0, ofnode_null(), &dev));
- 	}
- 
-+	/* Enable the android bootmeths if needed */
-+	if (IS_ENABLED(CONFIG_BOOTMETH_ANDROID) && bind_cros_android) {
-+		ut_assertok(uclass_first_device_err(UCLASS_BOOTSTD, &bootstd));
-+		ut_assertok(device_bind(bootstd, DM_DRIVER_REF(bootmeth_android),
-+					"android", 0, ofnode_null(), &dev));
-+	}
-+
- 	/* Change the order to include the device */
- 	std = dev_get_priv(bootstd);
- 	old_order = std->bootdev_order;
-@@ -589,6 +597,37 @@ static int scan_mmc_bootdev(struct unit_test_state *uts, const char *mmc_dev,
- 	return 0;
- }
- 
-+/**
-+ * scan_mmc_android_bootdev() - Set up an mmc bootdev so we can access other
-+ * distros. Android bootflow might print "ANDROID:*" while scanning
-+ *
-+ * @uts: Unit test state
-+ * @mmc_dev: MMC device to use, e.g. "mmc4"
-+ * Returns 0 on success, -ve on failure
-+ */
-+static int scan_mmc_android_bootdev(struct unit_test_state *uts, const char *mmc_dev)
-+{
-+	struct bootstd_priv *std;
-+	struct udevice *bootstd;
-+	const char **old_order;
-+
-+	ut_assertok(prep_mmc_bootdev(uts, mmc_dev, true, &old_order));
-+
-+	console_record_reset_enable();
-+	ut_assertok(run_command("bootflow scan", 0));
-+	/* Android bootflow might print one or two 'ANDROID:*' logs */
-+	ut_check_skipline(uts);
-+	ut_check_skipline(uts);
-+	ut_assert_console_end();
-+
-+	/* Restore the order used by the device tree */
-+	ut_assertok(uclass_first_device_err(UCLASS_BOOTSTD, &bootstd));
-+	std = dev_get_priv(bootstd);
-+	std->bootdev_order = old_order;
-+
-+	return 0;
-+}
-+
- /**
-  * scan_mmc4_bootdev() - Set up the mmc4 bootdev so we can access a fake Armbian
-  *
-@@ -1160,3 +1199,23 @@ static int bootflow_cros(struct unit_test_state *uts)
- 	return 0;
- }
- BOOTSTD_TEST(bootflow_cros, 0);
-+
-+/* Test Android bootmeth  */
-+static int bootflow_android(struct unit_test_state *uts)
-+{
-+	ut_assertok(scan_mmc_android_bootdev(uts, "mmc7"));
-+	ut_assertok(run_command("bootflow list", 0));
-+
-+	ut_assert_nextlinen("Showing all");
-+	ut_assert_nextlinen("Seq");
-+	ut_assert_nextlinen("---");
-+	ut_assert_nextlinen("  0  extlinux");
-+	ut_assert_nextlinen("  1  android      ready   mmc          0  mmc7.bootdev.whole        ");
-+	ut_assert_nextlinen("---");
-+	ut_assert_skip_to_line("(2 bootflows, 2 valid)");
-+
-+	ut_assert_console_end();
-+
-+	return 0;
-+}
-+BOOTSTD_TEST(bootflow_android, 0);
-diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
-index c169c835e38a..39e1abe02a68 100644
---- a/test/py/tests/test_ut.py
-+++ b/test/py/tests/test_ut.py
-@@ -423,6 +423,81 @@ def setup_cros_image(cons):
- 
-     return fname
- 
-+def setup_android_image(cons):
-+    """Create a 20MB disk image with Android partitions"""
-+    Partition = collections.namedtuple('part', 'start,size,name')
-+    parts = {}
-+    disk_data = None
-+
-+    def set_part_data(partnum, data):
-+        """Set the contents of a disk partition
-+
-+        This updates disk_data by putting data in the right place
-+
-+        Args:
-+            partnum (int): Partition number to set
-+            data (bytes): Data for that partition
-+        """
-+        nonlocal disk_data
-+
-+        start = parts[partnum].start * sect_size
-+        disk_data = disk_data[:start] + data + disk_data[start + len(data):]
-+
-+    mmc_dev = 7
-+    fname = os.path.join(cons.config.source_dir, f'mmc{mmc_dev}.img')
-+    u_boot_utils.run_and_log(cons, 'qemu-img create %s 20M' % fname)
-+    u_boot_utils.run_and_log(cons, f'cgpt create {fname}')
-+
-+    ptr = 40
-+
-+    # Number of sectors in 1MB
-+    sect_size = 512
-+    sect_1mb = (1 << 20) // sect_size
-+
-+    required_parts = [
-+        {'num': 1, 'label':'misc', 'size': '1M'},
-+        {'num': 2, 'label':'boot_a', 'size': '4M'},
-+        {'num': 3, 'label':'boot_b', 'size': '4M'},
-+        {'num': 4, 'label':'vendor_boot_a', 'size': '4M'},
-+        {'num': 5, 'label':'vendor_boot_b', 'size': '4M'},
-+    ]
-+
-+    for part in required_parts:
-+        size_str = part['size']
-+        if 'M' in size_str:
-+            size = int(size_str[:-1]) * sect_1mb
-+        else:
-+            size = int(size_str)
-+        u_boot_utils.run_and_log(
-+            cons,
-+            f"cgpt add -i {part['num']} -b {ptr} -s {size} -l {part['label']} -t basicdata {fname}")
-+        ptr += size
-+
-+    u_boot_utils.run_and_log(cons, f'cgpt boot -p {fname}')
-+    out = u_boot_utils.run_and_log(cons, f'cgpt show -q {fname}')
-+
-+    # Create a dict (indexed by partition number) containing the above info
-+    for line in out.splitlines():
-+        start, size, num, name = line.split(maxsplit=3)
-+        parts[int(num)] = Partition(int(start), int(size), name)
-+
-+    with open(fname, 'rb') as inf:
-+        disk_data = inf.read()
-+
-+    boot_img = os.path.join(cons.config.result_dir, 'bootv4.img')
-+    with open(boot_img, 'rb') as inf:
-+        set_part_data(2, inf.read())
-+
-+    vendor_boot_img = os.path.join(cons.config.result_dir, 'vendor_boot.img')
-+    with open(vendor_boot_img, 'rb') as inf:
-+        set_part_data(4, inf.read())
-+
-+    with open(fname, 'wb') as outf:
-+        outf.write(disk_data)
-+
-+    print('wrote to {}'.format(fname))
-+
-+    return fname
- 
- def setup_cedit_file(cons):
-     infname = os.path.join(cons.config.source_dir,
-@@ -477,6 +552,7 @@ def test_ut_dm_init_bootstd(u_boot_console):
-     setup_bootmenu_image(u_boot_console)
-     setup_cedit_file(u_boot_console)
-     setup_cros_image(u_boot_console)
-+    setup_android_image(u_boot_console)
- 
-     # Restart so that the new mmc1.img is picked up
-     u_boot_console.restart_uboot()
+This breaks compilation because upstream and local DTs are different.
+The Makefile gives priority to the local DT headers, which are missing
+a define, specifically in `imx6ul-clock.h`. As of now, upstreamed boards
+are being compiled potentially using some legacy files.
+Because of this, this patch requires patch [1] to be applied first.
 
+Links:
+- [1] https://lore.kernel.org/u-boot/20240603150749.507797-1-patrick.barsanti@amarulasolutions.com/
+
+ arch/arm/dts/Makefile               |   1 -
+ arch/arm/dts/imx6ulz-bsh-smm-m2.dts | 146 ----------------------------
+ arch/arm/mach-imx/mx6/Kconfig       |   1 +
+ configs/imx6ulz_smm_m2_defconfig    |   2 +-
+ 4 files changed, 2 insertions(+), 148 deletions(-)
+ delete mode 100644 arch/arm/dts/imx6ulz-bsh-smm-m2.dts
+
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index 1196ab040a..2c43bdbc19 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -871,7 +871,6 @@ dtb-$(CONFIG_MX6ULL) += \
+ 	imx6ull-phytec-segin-ff-rdk-emmc.dtb \
+ 	imx6ull-dart-6ul.dtb \
+ 	imx6ull-somlabs-visionsom.dtb \
+-	imx6ulz-bsh-smm-m2.dtb \
+ 	imx6ulz-14x14-evk.dtb
+ 
+ dtb-$(CONFIG_ARCH_MX6) += \
+diff --git a/arch/arm/dts/imx6ulz-bsh-smm-m2.dts b/arch/arm/dts/imx6ulz-bsh-smm-m2.dts
+deleted file mode 100644
+index 59bcfc9a6b..0000000000
+--- a/arch/arm/dts/imx6ulz-bsh-smm-m2.dts
++++ /dev/null
+@@ -1,146 +0,0 @@
+-// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+-/*
+- * Copyright (C) 2021 BSH Hausgeraete GmbH
+- */
+-
+-/dts-v1/;
+-
+-#include <dt-bindings/input/input.h>
+-#include "imx6ulz.dtsi"
+-
+-/ {
+-	model = "BSH SMM M2";
+-	compatible = "bsh,imx6ulz-bsh-smm-m2", "fsl,imx6ull", "fsl,imx6ulz";
+-
+-	chosen {
+-		stdout-path = &uart4;
+-	};
+-
+-	usdhc2_pwrseq: usdhc2-pwrseq {
+-		compatible = "mmc-pwrseq-simple";
+-		reset-gpios = <&gpio2 21 GPIO_ACTIVE_LOW>;
+-	};
+-};
+-
+-&gpmi {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_gpmi_nand>;
+-	nand-on-flash-bbt;
+-	status = "okay";
+-};
+-
+-&uart3 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_uart3>;
+-	uart-has-rtscts;
+-	status = "okay";
+-
+-	bluetooth {
+-		compatible = "brcm,bcm4330-bt";
+-		max-speed = <3000000>;
+-		shutdown-gpios = <&gpio1 1 GPIO_ACTIVE_HIGH>;
+-		device-wakeup-gpios = <&gpio2 17 GPIO_ACTIVE_HIGH>;
+-		host-wakeup-gpios = <&gpio2 13 GPIO_ACTIVE_HIGH>;
+-	};
+-};
+-
+-&uart4 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_uart4>;
+-	status = "okay";
+-};
+-
+-&usbotg1 {
+-	dr_mode = "peripheral";
+-	srp-disable;
+-	hnp-disable;
+-	adp-disable;
+-	status = "okay";
+-};
+-
+-&usbphy1 {
+-	fsl,tx-d-cal = <106>;
+-};
+-
+-&usdhc2 {
+-	#address-cells = <1>;
+-	#size-cells = <0>;
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_wlan>;
+-	bus-width = <4>;
+-	no-1-8-v;
+-	non-removable;
+-	cap-power-off-card;
+-	keep-power-in-suspend;
+-	cap-sdio-irq;
+-	mmc-pwrseq = <&usdhc2_pwrseq>;
+-	status = "okay";
+-
+-	brcmf: wifi@1 {
+-		reg = <1>;
+-		compatible = "brcm,bcm4329-fmac";
+-		interrupt-parent = <&gpio1>;
+-		interrupts = <18 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "host-wake";
+-	};
+-};
+-
+-&wdog1 {
+-	status = "okay";
+-};
+-
+-&iomuxc {
+-	pinctrl_gpmi_nand: gpmi-nand {
+-		fsl,pins = <
+-			MX6UL_PAD_NAND_CLE__RAWNAND_CLE		0xb0b1
+-			MX6UL_PAD_NAND_ALE__RAWNAND_ALE		0xb0b1
+-			MX6UL_PAD_NAND_WP_B__RAWNAND_WP_B	0xb0b1
+-			MX6UL_PAD_NAND_READY_B__RAWNAND_READY_B	0xb000
+-			MX6UL_PAD_NAND_CE0_B__RAWNAND_CE0_B	0xb0b1
+-			MX6UL_PAD_NAND_RE_B__RAWNAND_RE_B	0xb0b1
+-			MX6UL_PAD_NAND_WE_B__RAWNAND_WE_B	0xb0b1
+-			MX6UL_PAD_NAND_DATA00__RAWNAND_DATA00	0xb0b1
+-			MX6UL_PAD_NAND_DATA01__RAWNAND_DATA01	0xb0b1
+-			MX6UL_PAD_NAND_DATA02__RAWNAND_DATA02	0xb0b1
+-			MX6UL_PAD_NAND_DATA03__RAWNAND_DATA03	0xb0b1
+-			MX6UL_PAD_NAND_DATA04__RAWNAND_DATA04	0xb0b1
+-			MX6UL_PAD_NAND_DATA05__RAWNAND_DATA05	0xb0b1
+-			MX6UL_PAD_NAND_DATA06__RAWNAND_DATA06	0xb0b1
+-			MX6UL_PAD_NAND_DATA07__RAWNAND_DATA07	0xb0b1
+-		>;
+-	};
+-
+-	pinctrl_uart3: uart3grp {
+-		fsl,pins = <
+-			MX6UL_PAD_UART3_TX_DATA__UART3_DCE_TX	0x1b0b1
+-			MX6UL_PAD_UART3_RX_DATA__UART3_DCE_RX	0x1b099
+-			MX6UL_PAD_UART3_RTS_B__UART3_DCE_RTS	0x1b0b1
+-			MX6UL_PAD_UART3_CTS_B__UART3_DCE_CTS	0x1b099
+-			MX6UL_PAD_GPIO1_IO01__GPIO1_IO01	0x79		/* BT_REG_ON */
+-			MX6UL_PAD_SD1_CLK__GPIO2_IO17		0x100b1		/* BT_DEV_WAKE out */
+-			MX6UL_PAD_ENET2_TX_EN__GPIO2_IO13	0x1b0b0		/* BT_HOST_WAKE in */
+-		>;
+-	};
+-
+-	pinctrl_uart4: uart4grp {
+-		fsl,pins = <
+-			MX6UL_PAD_UART4_TX_DATA__UART4_DCE_TX	0x1b0b1
+-			MX6UL_PAD_UART4_RX_DATA__UART4_DCE_RX	0x1b0b1
+-		>;
+-	};
+-
+-	pinctrl_wlan: wlangrp {
+-		fsl,pins = <
+-			MX6UL_PAD_CSI_HSYNC__USDHC2_CMD		0x17059
+-			MX6UL_PAD_CSI_VSYNC__USDHC2_CLK		0x10059
+-			MX6UL_PAD_CSI_DATA00__USDHC2_DATA0	0x17059
+-			MX6UL_PAD_CSI_DATA01__USDHC2_DATA1	0x17059
+-			MX6UL_PAD_CSI_DATA02__USDHC2_DATA2	0x17059
+-			MX6UL_PAD_CSI_DATA03__USDHC2_DATA3	0x17059
+-			MX6UL_PAD_SD1_DATA3__GPIO2_IO21		0x79		/* WL_REG_ON */
+-			MX6UL_PAD_UART2_CTS_B__GPIO1_IO22	0x100b1		/* WL_DEV_WAKE - WiFi_GPIO_4 - WiFi FW UART */
+-			MX6UL_PAD_UART1_CTS_B__GPIO1_IO18	0x1b0b1		/* WL_HOST_WAKE - WIFI_GPIO_0 - OOB IRQ */
+-			MX6UL_PAD_ENET1_RX_EN__OSC32K_32K_OUT	0x4001b031	/* OSC 32Khz wifi clk in */
+-		>;
+-	};
+-};
+diff --git a/arch/arm/mach-imx/mx6/Kconfig b/arch/arm/mach-imx/mx6/Kconfig
+index 15ee2b933f..7800553ae8 100644
+--- a/arch/arm/mach-imx/mx6/Kconfig
++++ b/arch/arm/mach-imx/mx6/Kconfig
+@@ -481,6 +481,7 @@ config TARGET_MX6ULZ_SMM_M2
+ 	select DM_MTD
+ 	select DM_THERMAL
+ 	select SUPPORT_SPL
++	imply OF_UPSTREAM
+ 
+ config TARGET_MYS_6ULX
+ 	bool "MYiR MYS-6ULX"
+diff --git a/configs/imx6ulz_smm_m2_defconfig b/configs/imx6ulz_smm_m2_defconfig
+index 064758c48c..93ead4c373 100644
+--- a/configs/imx6ulz_smm_m2_defconfig
++++ b/configs/imx6ulz_smm_m2_defconfig
+@@ -11,7 +11,7 @@ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0x400000
+ CONFIG_MX6ULL=y
+ CONFIG_TARGET_MX6ULZ_SMM_M2=y
+-CONFIG_DEFAULT_DEVICE_TREE="imx6ulz-bsh-smm-m2"
++CONFIG_DEFAULT_DEVICE_TREE="nxp/imx/imx6ulz-bsh-smm-m2"
+ CONFIG_SPL_TEXT_BASE=0x00908000
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_BSS_START_ADDR=0x84100000
 -- 
-2.45.2
+2.45.1
 
