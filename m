@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C33AC27C4F
-	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 14:17:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BC9BC27C4F
+	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 14:19:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E55B088916;
-	Thu, 13 Jun 2024 16:17:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8511588763;
+	Thu, 13 Jun 2024 16:19:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="iMrqT9cJ";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="NpF8KRiU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7554B88917; Thu, 13 Jun 2024 16:17:01 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 889AB88919; Thu, 13 Jun 2024 16:19:06 +0200 (CEST)
+Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
+ [IPv6:2a00:1450:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 801ED888E8
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 16:16:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AEE5A8817C
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 16:19:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jmasson@baylibre.com
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-421d32fda86so12754835e9.0
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 07:16:59 -0700 (PDT)
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-2ebed33cb67so11480421fa.0
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 07:19:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718288219; x=1718893019;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718288343; x=1718893143;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=W02A8dapwExiEtrNwtygvsWOKkIZO78PL0SudxYu2OY=;
- b=iMrqT9cJdpsLUf5ThThnozC/4fEscSHat4rf8gcYBb9c1QTPZATKQeSWfiy3BilZK1
- Wrz20ric+XouOHa1Cw+k3vlai3UQlb/V5x+hsEuG/gpCccNISI1q/XYZXu9Y968nDbcP
- rLGekJymLW836QmyiN3C40vNbbO2vTf9Brii8EGqMHYEN4wmeNk/CEy9JTIdM8HTtUof
- aeTn2Zsq2ij/b2n9lVtVzXgPNgtWEZIQoYJWAuNqGUYl7Cqy4hNit+I1icWfZKoJM6BC
- Rj5FcV+2gNLNXf7fdaJBpD2vaviDkXhPkRChN6QdbaWorPUbUWNot1lkMCrTlgx7UOkf
- iH5A==
+ bh=VSBnT19H4hPpss7uW8sn/yj9aVw4JmQrYbXFJ164ruo=;
+ b=NpF8KRiUAudU9d6rKx0+uQO94ScyrNcJoNwouj2TTw0Wcnt1whvuUgkcFmbhIE2gs6
+ dt5E02uRqjtPXbzE4IQ7OmXm/IE5lZEXZfhan0AXHdUDTQcaf/rsW7XZ5pkHd3Jvh2kC
+ 5MeW3xQnkWUtPnpDRaOTWMmyJcpr9HrJF6wTfK4SIMyWuVQai7tvuJte92EGIgyjR607
+ dj8xl8zQ1ONLmucUh/B2GKz2+XvUtT6iNBzlobpPNLjcrzClK7cFVieEXS4MvYGV7ZwQ
+ RytqsOEknrZUVO/0mQE+WxTj7OvOrZzSavkFcWqTZO/eAt1/sCoSkgS1wM86be8kjAwn
+ wmZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718288219; x=1718893019;
+ d=1e100.net; s=20230601; t=1718288343; x=1718893143;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=W02A8dapwExiEtrNwtygvsWOKkIZO78PL0SudxYu2OY=;
- b=JNIeJ+Oc90rWnO6dHQt6rYnyE6XCjSDPdOMfehgSYJ9wrJQjUaSeKgapz2FxITitIN
- BM1z1sGKSRUDRs75JhcaUxqkJnjb9XxBozDJpwlS054zBiCY1t1r21DwHhfNZBTV313I
- TPnV0i6wlX4twTXgv21Yyq/k5GmambaoQmFruBgl6oHPu6cIiKaxp3zGBsThvshNjS2s
- rGKUP6d/DJwHIFAlMlc6JCWk9JJwsvTrbit/uck1iq4pS7LTEu2c9/7DahYZ5hw/XHi7
- VpCWe7FJHNhrOh3zaAlYN6UG/fDy/jVVb2T4oavKfZ0lrAewSCYAZSymKJa3n9x3O6Ni
- beNA==
+ bh=VSBnT19H4hPpss7uW8sn/yj9aVw4JmQrYbXFJ164ruo=;
+ b=lu7DxsSCi+PuEjGLgKTxgv5x9UqpGQgLWKSAwITVfvk+jcDReO4bzPeVkCC5i5YfZe
+ NE8Byy4QTkm578d5IzMnwz1ASuuWorN7wi5e+Xc9iSpWUPdlOmXVJZo4hvxADJS6XKiP
+ yjqc14Qipx8PMrYaJ6sdxGoDn057xZwQItXyBtluZ3f0kptEHHJ8HDrBm6x2UtTmYDd0
+ 8yHj20SBJFnr2CpJy+rSH/2j01ykvKnqFqIC/kx+ibU4wCjTnJgg8R8V0sFrIrcbEgud
+ jgwjeiy5N3+aO8X33QT3LSkmB6l9nobYxFw+avTbx2f1b+vXJXHlOSQb8ILc4FIkSwrz
+ WYDw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV3ZviNvql3rpl4MICS0Loo0nMb4P+O7z40iBV2qXdlFYxvCBJ1+IBVSY302UMx3s5/u5Efx0BZquOVA0Wuz/HvwhGRFQ==
-X-Gm-Message-State: AOJu0Yw6yOSGpmil7dsucn6m1fWUaTny0pdPjq077BOnkGPUxemP5b+E
- ru+CFo1lu7Tdi6gSqfTb/1DhZojf/jrUALzfb9N6MsMVJDWaTglMyjQv0j05Rns=
-X-Google-Smtp-Source: AGHT+IFRBkQg3dSuRl6KmyaVujGCGXbVHMHyvYjdOcaftDD511fPA6IsHEdEh3cEDrihlp1QjJbqHA==
-X-Received: by 2002:a05:600c:4fd5:b0:421:f04d:ebcc with SMTP id
- 5b1f17b1804b1-422864aebcamr52425005e9.24.1718288218927; 
- Thu, 13 Jun 2024 07:16:58 -0700 (PDT)
+ AJvYcCUEVMDrWbqwETHT4MJEwvdke6aoxf+epj35VsHE3Wk7gk8wVNGTb2i67xXJ6ZCLhaVZEvuGX6I3aupRARtiuy9KNBNEpA==
+X-Gm-Message-State: AOJu0YxhKFZrJZlcEjEOXfcj+z1P5pgFRwNNgYjRm317XQdphftVSz5/
+ RB9JnaJgfEdp/VjrrXemMkR4o883Xw6NKLS+Auj1RJEPTPRxEGMQsWcrTCjI/sU=
+X-Google-Smtp-Source: AGHT+IHeEulZ0+nof/YxFKy3O5a+vB514mRZPonajkdneloYAbzCLLUHVvQ6vqi5bvLkr4wQgAmpdQ==
+X-Received: by 2002:a2e:9993:0:b0:2ea:e26e:e6d6 with SMTP id
+ 38308e7fff4ca-2ebfc8d3ea8mr35847881fa.30.1718288342808; 
+ Thu, 13 Jun 2024 07:19:02 -0700 (PDT)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-422f641a64bsm26185595e9.46.2024.06.13.07.16.58
+ ffacd0b85a97d-360751037absm1823317f8f.91.2024.06.13.07.19.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Jun 2024 07:16:58 -0700 (PDT)
+ Thu, 13 Jun 2024 07:19:02 -0700 (PDT)
 From: Julien Masson <jmasson@baylibre.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Simon Glass
  <sjg@chromium.org>
@@ -72,12 +72,11 @@ Cc: Julien Masson <jmasson@baylibre.com>, Guillaume La Roque
  Stratiienko <r.stratiienko@gmail.com>, Igor Opaniuk
  <igor.opaniuk@gmail.com>, <u-boot@lists.denx.de>, Mattijs Korpershoek
  <mkorpershoek@baylibre.com>
-Subject: Re: [PATCH v2 3/5] android: boot: Add set_abootimg_addr() and
- set_avendor_bootimg_addr()
-In-Reply-To: <20240613-bootmeth-android-v2-3-397f6e66eb29@baylibre.com>
+Subject: Re: [PATCH v2 4/5] bootstd: Add a bootmeth for Android
+In-Reply-To: <20240613-bootmeth-android-v2-4-397f6e66eb29@baylibre.com>
 References: <20240613-bootmeth-android-v2-0-397f6e66eb29@baylibre.com>
-Date: Thu, 13 Jun 2024 16:16:57 +0200
-Message-ID: <87le39lyg6.fsf@baylibre.com>
+Date: Thu, 13 Jun 2024 16:19:01 +0200
+Message-ID: <87h6dxlycq.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -97,84 +96,733 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Thu 13 Jun 2024 at 16:16, Mattijs Korpershoek <mkorpershoek@baylibre.com> wrote:
+On Thu 13 Jun 2024 at 16:18, Mattijs Korpershoek <mkorpershoek@baylibre.com> wrote:
 
-> The only way to configure the load addresses for both bootimg and
-> vendor_bootimg is by using the "abootimg" command.
-> If we want to use the C API, there is no equivalent.
+> Android boot flow is a bit different than a regular Linux distro.
+> Android relies on multiple partitions in order to boot.
 > 
-> Add set_abootimg_addr() and set_avendor_bootimg_addr() so that we can
-> specify the load address from C.
+> A typical boot flow would be:
+> 1. Parse the Bootloader Control Block (BCB, misc partition)
+> 2. If BCB requested bootonce-bootloader, start fastboot and wait.
+> 3. If BCB requested recovery or normal android, run the following:
+> 3.a. Get slot (A/B) from BCB
+> 3.b. Run AVB (Android Verified Boot) on boot partitions
+> 3.c. Load boot and vendor_boot partitions
+> 3.d. Load device-tree, ramdisk and boot
 > 
-> This can be useful for implementing an Android bootmethod.
+> The AOSP documentation has more details at [1], [2], [3]
 > 
-> Reviewed-by: Igor Opaniuk <igor.opaniuk@gmail.com>
+> This has been implemented via complex boot scripts such as [4].
+> However, these boot script are neither very maintainable nor generic.
+> Moreover, DISTRO_DEFAULTS is being deprecated [5].
+> 
+> Add a generic Android bootflow implementation for bootstd.
+> For this initial version, only boot image v4 is supported.
+> 
+> [1] https://source.android.com/docs/core/architecture/bootloader
+> [2] https://source.android.com/docs/core/architecture/partitions
+> [3] https://source.android.com/docs/core/architecture/partitions/generic-boot
+> [4] https://source.denx.de/u-boot/u-boot/-/blob/master/include/configs/meson64_android.h
+> [5] https://lore.kernel.org/r/all/20230914165615.1058529-17-sjg@chromium.org/
+> 
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 > Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 > ---
->  cmd/abootimg.c  | 10 ++++++++++
->  include/image.h | 14 ++++++++++++++
->  2 files changed, 24 insertions(+)
+>  MAINTAINERS             |   7 +
+>  boot/Kconfig            |  16 ++
+>  boot/Makefile           |   2 +
+>  boot/bootmeth_android.c | 553 ++++++++++++++++++++++++++++++++++++++++++++++++
+>  boot/bootmeth_android.h |  29 +++
+>  doc/develop/bootstd.rst |   6 +
+>  6 files changed, 613 insertions(+)
 > 
-> diff --git a/cmd/abootimg.c b/cmd/abootimg.c
-> index 327712a536c0..ae7a1a7c83b0 100644
-> --- a/cmd/abootimg.c
-> +++ b/cmd/abootimg.c
-> @@ -22,6 +22,11 @@ ulong get_abootimg_addr(void)
->  	return (_abootimg_addr == -1 ? image_load_addr : _abootimg_addr);
->  }
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 66783d636e3d..6d2b87720565 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -939,6 +939,13 @@ F:	include/bootstd.h
+>  F:	net/eth_bootdevice.c
+>  F:	test/boot/
 >  
-> +void set_abootimg_addr(ulong addr)
+> +BOOTMETH_ANDROID
+> +M:	Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> +S:	Maintained
+> +T:	git https://source.denx.de/u-boot/custodians/u-boot-dfu.git
+> +F:	boot/bootmeth_android.c
+> +F:	boot/bootmeth_android.h
+> +
+>  BTRFS
+>  M:	Marek Beh.n <kabel@kernel.org>
+>  R:	Qu Wenruo <wqu@suse.com>
+> diff --git a/boot/Kconfig b/boot/Kconfig
+> index 6f3096c15a6f..88266c8d2ed3 100644
+> --- a/boot/Kconfig
+> +++ b/boot/Kconfig
+> @@ -494,6 +494,22 @@ config BOOTMETH_GLOBAL
+>  	  EFI bootmgr, since they take full control over which bootdevs are
+>  	  selected to boot.
+>  
+> +config BOOTMETH_ANDROID
+> +	bool "Bootdev support for Android"
+> +	depends on X86 || ARM || SANDBOX
+> +	select ANDROID_AB
+> +	select ANDROID_BOOT_IMAGE
+> +	select CMD_BCB
+> +	select CMD_FASTBOOT
+> +	select PARTITION_TYPE_GUID
+> +	select PARTITION_UUIDS
+> +	help
+> +	  Enables support for booting Android using bootstd. Android requires
+> +	  multiple partitions (misc, boot, vbmeta, ...) in storage for booting.
+> +
+> +	  Note that only MMC bootdevs are supported at present. This is caused
+> +	  by AVB being limited to MMC devices only.
+> +
+>  config BOOTMETH_CROS
+>  	bool "Bootdev support for Chromium OS"
+>  	depends on X86 || ARM || SANDBOX
+> diff --git a/boot/Makefile b/boot/Makefile
+> index 84ccfeaecec4..75d1cd46fabf 100644
+> --- a/boot/Makefile
+> +++ b/boot/Makefile
+> @@ -66,3 +66,5 @@ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_VBE_REQUEST) += vbe_request.o
+>  obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_VBE_SIMPLE) += vbe_simple.o
+>  obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_VBE_SIMPLE_FW) += vbe_simple_fw.o
+>  obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_VBE_SIMPLE_OS) += vbe_simple_os.o
+> +
+> +obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_ANDROID) += bootmeth_android.o
+> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
+> new file mode 100644
+> index 000000000000..6e8d3e615db0
+> --- /dev/null
+> +++ b/boot/bootmeth_android.c
+> @@ -0,0 +1,553 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Bootmeth for Android
+> + *
+> + * Copyright (C) 2024 BayLibre, SAS
+> + * Written by Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> + */
+> +#define LOG_CATEGORY UCLASS_BOOTSTD
+> +
+> +#include <android_ab.h>
+> +#include <android_image.h>
+> +#if CONFIG_IS_ENABLED(AVB_VERIFY)
+> +#include <avb_verify.h>
+> +#endif
+> +#include <bcb.h>
+> +#include <blk.h>
+> +#include <bootflow.h>
+> +#include <bootm.h>
+> +#include <bootmeth.h>
+> +#include <dm.h>
+> +#include <image.h>
+> +#include <malloc.h>
+> +#include <mapmem.h>
+> +#include <part.h>
+> +#include "bootmeth_android.h"
+> +
+> +#define BCB_FIELD_COMMAND_SZ 32
+> +#define BCB_PART_NAME "misc"
+> +#define BOOT_PART_NAME "boot"
+> +#define VENDOR_BOOT_PART_NAME "vendor_boot"
+> +
+> +/**
+> + * struct android_priv - Private data
+> + *
+> + * This is read from the disk and recorded for use when the full Android
+> + * kernel must be loaded and booted
+> + *
+> + * @boot_mode: Requested boot mode (normal, recovery, bootloader)
+> + * @slot: Nul-terminated partition slot suffix read from BCB ("a\0" or "b\0")
+> + * @header_version: Android boot image header version
+> + */
+> +struct android_priv {
+> +	enum android_boot_mode boot_mode;
+> +	char slot[2];
+> +	u32 header_version;
+> +};
+> +
+> +static int android_check(struct udevice *dev, struct bootflow_iter *iter)
 > +{
-> +	_abootimg_addr = addr;
+> +	/* This only works on mmc devices */
+> +	if (bootflow_iter_check_mmc(iter))
+> +		return log_msg_ret("mmc", -ENOTSUPP);
+> +
+> +	/*
+> +	 * This only works on whole devices, as multiple
+> +	 * partitions are needed to boot Android
+> +	 */
+> +	if (iter->part != 0)
+> +		return log_msg_ret("mmc part", -ENOTSUPP);
+> +
+> +	return 0;
 > +}
 > +
->  ulong get_ainit_bootimg_addr(void)
->  {
->  	return _ainit_bootimg_addr;
-> @@ -32,6 +37,11 @@ ulong get_avendor_bootimg_addr(void)
->  	return _avendor_bootimg_addr;
->  }
->  
-> +void set_avendor_bootimg_addr(ulong addr)
+> +static int scan_boot_part(struct udevice *blk, struct android_priv *priv)
 > +{
-> +	_avendor_bootimg_addr = addr;
+> +	struct blk_desc *desc = dev_get_uclass_plat(blk);
+> +	struct disk_partition partition;
+> +	char partname[PART_NAME_LEN];
+> +	ulong num_blks, bufsz;
+> +	char *buf;
+> +	int ret;
+> +
+> +	sprintf(partname, BOOT_PART_NAME "_%s", priv->slot);
+> +	ret = part_get_info_by_name(desc, partname, &partition);
+> +	if (ret < 0)
+> +		return log_msg_ret("part info", ret);
+> +
+> +	num_blks = DIV_ROUND_UP(sizeof(struct andr_boot_img_hdr_v0), desc->blksz);
+> +	bufsz = num_blks * desc->blksz;
+> +	buf = malloc(bufsz);
+> +	if (!buf)
+> +		return log_msg_ret("buf", -ENOMEM);
+> +
+> +	ret = blk_read(blk, partition.start, num_blks, buf);
+> +	if (ret != num_blks) {
+> +		free(buf);
+> +		return log_msg_ret("part read", -EIO);
+> +	}
+> +
+> +	if (!is_android_boot_image_header(buf)) {
+> +		free(buf);
+> +		return log_msg_ret("header", -ENOENT);
+> +	}
+> +
+> +	priv->header_version = ((struct andr_boot_img_hdr_v0 *)buf)->header_version;
+> +	free(buf);
+> +
+> +	return 0;
 > +}
 > +
->  static int abootimg_get_ver(int argc, char *const argv[])
->  {
->  	const struct andr_boot_img_hdr_v0 *hdr;
-> diff --git a/include/image.h b/include/image.h
-> index c5b288f62b44..df2decbf5c2a 100644
-> --- a/include/image.h
-> +++ b/include/image.h
-> @@ -1970,6 +1970,13 @@ bool is_android_vendor_boot_image_header(const void *vendor_boot_img);
->   */
->  ulong get_abootimg_addr(void);
->  
-> +/**
-> + * set_abootimg_addr() - Set Android boot image address
-> + *
-> + * Return: no returned results
-> + */
-> +void set_abootimg_addr(ulong addr);
+> +static int scan_vendor_boot_part(struct udevice *blk, struct android_priv *priv)
+> +{
+> +	struct blk_desc *desc = dev_get_uclass_plat(blk);
+> +	struct disk_partition partition;
+> +	char partname[PART_NAME_LEN];
+> +	ulong num_blks, bufsz;
+> +	char *buf;
+> +	int ret;
 > +
->  /**
->   * get_ainit_bootimg_addr() - Get Android init boot image address
->   *
-> @@ -1984,6 +1991,13 @@ ulong get_ainit_bootimg_addr(void);
->   */
->  ulong get_avendor_bootimg_addr(void);
->  
-> +/**
-> + * set_abootimg_addr() - Set Android vendor boot image address
-> + *
-> + * Return: no returned results
-> + */
-> +void set_avendor_bootimg_addr(ulong addr);
+> +	sprintf(partname, VENDOR_BOOT_PART_NAME "_%s", priv->slot);
+> +	ret = part_get_info_by_name(desc, partname, &partition);
+> +	if (ret < 0)
+> +		return log_msg_ret("part info", ret);
 > +
->  /**
->   * board_fit_config_name_match() - Check for a matching board name
->   *
+> +	num_blks = DIV_ROUND_UP(sizeof(struct andr_vnd_boot_img_hdr), desc->blksz);
+> +	bufsz = num_blks * desc->blksz;
+> +	buf = malloc(bufsz);
+> +	if (!buf)
+> +		return log_msg_ret("buf", -ENOMEM);
+> +
+> +	ret = blk_read(blk, partition.start, num_blks, buf);
+> +	if (ret != num_blks) {
+> +		free(buf);
+> +		return log_msg_ret("part read", -EIO);
+> +	}
+> +
+> +	if (!is_android_vendor_boot_image_header(buf)) {
+> +		free(buf);
+> +		return log_msg_ret("header", -ENOENT);
+> +	}
+> +	free(buf);
+> +
+> +	return 0;
+> +}
+> +
+> +static int android_read_slot_from_bcb(struct bootflow *bflow, bool decrement)
+> +{
+> +	struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
+> +	struct android_priv *priv = bflow->bootmeth_priv;
+> +	struct disk_partition misc;
+> +	char slot_suffix[3];
+> +	int ret;
+> +
+> +	ret = part_get_info_by_name(desc, BCB_PART_NAME, &misc);
+> +	if (ret < 0)
+> +		return log_msg_ret("part", ret);
+> +
+> +	ret = ab_select_slot(desc, &misc, decrement);
+> +	if (ret < 0)
+> +		return log_msg_ret("slot", ret);
+> +
+> +	priv->slot[0] = BOOT_SLOT_NAME(ret);
+> +	priv->slot[1] = '\0';
+> +
+> +	sprintf(slot_suffix, "_%s", priv->slot);
+> +	ret = bootflow_cmdline_set_arg(bflow, "androidboot.slot_suffix",
+> +				       slot_suffix, false);
+> +	if (ret < 0)
+> +		return log_msg_ret("cmdl", ret);
+> +
+> +	return 0;
+> +}
+> +
+> +static int configure_serialno(struct bootflow *bflow)
+> +{
+> +	char *serialno = env_get("serial#");
+> +
+> +	if (!serialno)
+> +		return log_msg_ret("serial", -ENOENT);
+> +
+> +	return bootflow_cmdline_set_arg(bflow, "androidboot.serialno", serialno, false);
+> +}
+> +
+> +static int android_read_bootflow(struct udevice *dev, struct bootflow *bflow)
+> +{
+> +	struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
+> +	struct disk_partition misc;
+> +	struct android_priv *priv;
+> +	char command[BCB_FIELD_COMMAND_SZ];
+> +	int ret;
+> +
+> +	bflow->state = BOOTFLOWST_MEDIA;
+> +
+> +	/*
+> +	 * bcb_find_partition_and_load() will print errors to stdout
+> +	 * if BCB_PART_NAME is not found. To avoid that, check if the
+> +	 * partition exists first.
+> +	 */
+> +	ret = part_get_info_by_name(desc, BCB_PART_NAME, &misc);
+> +	if (ret < 0)
+> +		return log_msg_ret("part", ret);
+> +
+> +	ret = bcb_find_partition_and_load("mmc", desc->devnum, BCB_PART_NAME);
+> +	if (ret < 0)
+> +		return log_msg_ret("bcb load", ret);
+> +
+> +	ret = bcb_get(BCB_FIELD_COMMAND, command, sizeof(command));
+> +	if (ret < 0)
+> +		return log_msg_ret("bcb read", ret);
+> +
+> +	priv = malloc(sizeof(struct android_priv));
+> +	if (!priv)
+> +		return log_msg_ret("buf", -ENOMEM);
+> +
+> +	if (!strcmp("bootonce-bootloader", command)) {
+> +		priv->boot_mode = ANDROID_BOOT_MODE_BOOTLOADER;
+> +		bflow->os_name = strdup("Android (bootloader)");
+> +	} else if (!strcmp("boot-fastboot", command)) {
+> +		priv->boot_mode = ANDROID_BOOT_MODE_RECOVERY;
+> +		bflow->os_name = strdup("Android (fastbootd)");
+> +	} else if (!strcmp("boot-recovery", command)) {
+> +		priv->boot_mode = ANDROID_BOOT_MODE_RECOVERY;
+> +		bflow->os_name = strdup("Android (recovery)");
+> +	} else {
+> +		priv->boot_mode = ANDROID_BOOT_MODE_NORMAL;
+> +		bflow->os_name = strdup("Android");
+> +	}
+> +	if (!bflow->os_name)
+> +		return log_msg_ret("os", -ENOMEM);
+> +
+> +	if (priv->boot_mode == ANDROID_BOOT_MODE_BOOTLOADER) {
+> +		/* Clear BCB */
+> +		memset(command, 0, sizeof(command));
+> +		ret = bcb_set(BCB_FIELD_COMMAND, command);
+> +		if (ret < 0) {
+> +			free(priv);
+> +			return log_msg_ret("bcb set", ret);
+> +		}
+> +		ret = bcb_store();
+> +		if (ret < 0) {
+> +			free(priv);
+> +			return log_msg_ret("bcb store", ret);
+> +		}
+> +
+> +		bflow->bootmeth_priv = priv;
+> +		bflow->state = BOOTFLOWST_READY;
+> +		return 0;
+> +	}
+> +
+> +	bflow->bootmeth_priv = priv;
+> +
+> +	/* For recovery and normal boot, we need to scan the partitions */
+> +	ret = android_read_slot_from_bcb(bflow, false);
+> +	if (ret < 0) {
+> +		log_err("read slot: %d", ret);
+> +		goto free_priv;
+> +	}
+> +
+> +	ret = scan_boot_part(bflow->blk, priv);
+> +	if (ret < 0) {
+> +		log_debug("scan boot failed: err=%d\n", ret);
+> +		goto free_priv;
+> +	}
+> +
+> +	if (priv->header_version != 4) {
+> +		log_debug("only boot.img v4 is supported %u\n", priv->header_version);
+> +		ret = -EINVAL;
+> +		goto free_priv;
+> +	}
+> +
+> +	ret = scan_vendor_boot_part(bflow->blk, priv);
+> +	if (ret < 0) {
+> +		log_debug("scan vendor_boot failed: err=%d\n", ret);
+> +		goto free_priv;
+> +	}
+> +
+> +	/* Ignoring return code: setting serial number is not mandatory for booting */
+> +	configure_serialno(bflow);
+> +
+> +	if (priv->boot_mode == ANDROID_BOOT_MODE_NORMAL) {
+> +		ret = bootflow_cmdline_set_arg(bflow, "androidboot.force_normal_boot",
+> +					       "1", false);
+> +		if (ret < 0) {
+> +			log_debug("normal_boot %d", ret);
+> +			goto free_priv;
+> +		}
+> +	}
+> +
+> +	bflow->state = BOOTFLOWST_READY;
+> +
+> +	return 0;
+> +
+> + free_priv:
+> +	free(priv);
+> +	bflow->bootmeth_priv = NULL;
+> +	return ret;
+> +}
+> +
+> +static int android_read_file(struct udevice *dev, struct bootflow *bflow,
+> +			     const char *file_path, ulong addr, ulong *sizep)
+> +{
+> +	/*
+> +	 * Reading individual files is not supported since we only
+> +	 * operate on whole mmc devices (because we require multiple partitions)
+> +	 */
+> +	return log_msg_ret("Unsupported", -ENOSYS);
+> +}
+> +
+> +/**
+> + * read_slotted_partition() - Read a partition by appending a slot suffix
+> + *
+> + * Most modern Android devices use Seamless Updates, where each partition
+> + * is duplicated. For example, the boot partition has boot_a and boot_b.
+> + * For more information, see:
+> + * https://source.android.com/docs/core/ota/ab
+> + * https://source.android.com/docs/core/ota/ab/ab_implement
+> + *
+> + * @blk: Block device to read
+> + * @name: Partition name to read
+> + * @slot: Nul-terminated slot suffixed to partition name ("a\0" or "b\0")
+> + * @addr: Address where the partition content is loaded into
+> + * Return: 0 if OK, negative errno on failure.
+> + */
+> +static int read_slotted_partition(struct blk_desc *desc, const char *const name,
+> +				  const char slot[2], ulong addr)
+> +{
+> +	struct disk_partition partition;
+> +	char partname[PART_NAME_LEN];
+> +	int ret;
+> +	u32 n;
+> +
+> +	/* Ensure name fits in partname it should be: <name>_<slot>\0 */
+> +	if (strlen(name) > (PART_NAME_LEN - 2 - 1))
+> +		return log_msg_ret("name too long", -EINVAL);
+> +
+> +	sprintf(partname, "%s_%s", name, slot);
+> +	ret = part_get_info_by_name(desc, partname, &partition);
+> +	if (ret < 0)
+> +		return log_msg_ret("part", ret);
+> +
+> +	n = blk_dread(desc, partition.start, partition.size, map_sysmem(addr, 0));
+> +	if (n < partition.size)
+> +		return log_msg_ret("part read", -EIO);
+> +
+> +	return 0;
+> +}
+> +
+> +#if CONFIG_IS_ENABLED(AVB_VERIFY)
+> +static int avb_append_commandline_arg(struct bootflow *bflow, char *arg)
+> +{
+> +	char *key = strsep(&arg, "=");
+> +	char *value = arg;
+> +	int ret;
+> +
+> +	ret = bootflow_cmdline_set_arg(bflow, key, value, false);
+> +	if (ret < 0)
+> +		return log_msg_ret("avb cmdline", ret);
+> +
+> +	return 0;
+> +}
+> +
+> +static int avb_append_commandline(struct bootflow *bflow, char *cmdline)
+> +{
+> +	char *arg = strsep(&cmdline, " ");
+> +	int ret;
+> +
+> +	while (arg) {
+> +		ret = avb_append_commandline_arg(bflow, arg);
+> +		if (ret < 0)
+> +			return ret;
+> +
+> +		arg = strsep(&cmdline, " ");
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int run_avb_verification(struct bootflow *bflow)
+> +{
+> +	struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
+> +	struct android_priv *priv = bflow->bootmeth_priv;
+> +	const char * const requested_partitions[] = {"boot", "vendor_boot"};
+> +	struct AvbOps *avb_ops;
+> +	AvbSlotVerifyResult result;
+> +	AvbSlotVerifyData *out_data;
+> +	enum avb_boot_state boot_state;
+> +	char *extra_args;
+> +	char slot_suffix[3];
+> +	bool unlocked = false;
+> +	int ret;
+> +
+> +	avb_ops = avb_ops_alloc(desc->devnum);
+> +	if (!avb_ops)
+> +		return log_msg_ret("avb ops", -ENOMEM);
+> +
+> +	sprintf(slot_suffix, "_%s", priv->slot);
+> +
+> +	ret = avb_ops->read_is_device_unlocked(avb_ops, &unlocked);
+> +	if (ret != AVB_IO_RESULT_OK)
+> +		return log_msg_ret("avb lock", -EIO);
+> +
+> +	result = avb_slot_verify(avb_ops,
+> +				 requested_partitions,
+> +				 slot_suffix,
+> +				 unlocked,
+> +				 AVB_HASHTREE_ERROR_MODE_RESTART_AND_INVALIDATE,
+> +				 &out_data);
+> +
+> +	if (result != AVB_SLOT_VERIFY_RESULT_OK) {
+> +		printf("Verification failed, reason: %s\n",
+> +		       str_avb_slot_error(result));
+> +		avb_slot_verify_data_free(out_data);
+> +		return log_msg_ret("avb verify", -EIO);
+> +	}
+> +
+> +	if (unlocked)
+> +		boot_state = AVB_ORANGE;
+> +	else
+> +		boot_state = AVB_GREEN;
+> +
+> +	extra_args = avb_set_state(avb_ops, boot_state);
+> +	if (extra_args) {
+> +		/* extra_args will be modified after this. This is fine */
+> +		ret = avb_append_commandline_arg(bflow, extra_args);
+> +		if (ret < 0)
+> +			goto free_out_data;
+> +	}
+> +
+> +	ret = avb_append_commandline(bflow, out_data->cmdline);
+> +	if (ret < 0)
+> +		goto free_out_data;
+> +
+> +	return 0;
+> +
+> + free_out_data:
+> +	if (out_data)
+> +		avb_slot_verify_data_free(out_data);
+> +
+> +	return log_msg_ret("avb cmdline", ret);
+> +}
+> +#else
+> +static int run_avb_verification(struct bootflow *bflow)
+> +{
+> +	int ret;
+> +
+> +	/* When AVB is unsupported, pass ORANGE state  */
+> +	ret = bootflow_cmdline_set_arg(bflow,
+> +				       "androidboot.verifiedbootstate",
+> +				       "orange", false);
+> +	if (ret < 0)
+> +		return log_msg_ret("avb cmdline", ret);
+> +
+> +	return 0;
+> +}
+> +#endif /* AVB_VERIFY */
+> +
+> +static int boot_android_normal(struct bootflow *bflow)
+> +{
+> +	struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
+> +	struct android_priv *priv = bflow->bootmeth_priv;
+> +	int ret;
+> +	ulong loadaddr = env_get_hex("loadaddr", 0);
+> +	ulong vloadaddr = env_get_hex("vendor_boot_comp_addr_r", 0);
+> +
+> +	ret = run_avb_verification(bflow);
+> +	if (ret < 0)
+> +		return log_msg_ret("avb", ret);
+> +
+> +	/* Read slot once more to decrement counter from BCB */
+> +	ret = android_read_slot_from_bcb(bflow, true);
+> +	if (ret < 0)
+> +		return log_msg_ret("read slot", ret);
+> +
+> +	ret = read_slotted_partition(desc, "boot", priv->slot, loadaddr);
+> +	if (ret < 0)
+> +		return log_msg_ret("read boot", ret);
+> +
+> +	ret = read_slotted_partition(desc, "vendor_boot", priv->slot, vloadaddr);
+> +	if (ret < 0)
+> +		return log_msg_ret("read vendor_boot", ret);
+> +
+> +	set_abootimg_addr(loadaddr);
+> +	set_avendor_bootimg_addr(vloadaddr);
+> +
+> +	ret = bootm_boot_start(loadaddr, bflow->cmdline);
+> +
+> +	return log_msg_ret("boot", ret);
+> +}
+> +
+> +static int boot_android_recovery(struct bootflow *bflow)
+> +{
+> +	int ret;
+> +
+> +	ret = boot_android_normal(bflow);
+> +
+> +	return log_msg_ret("boot", ret);
+> +}
+> +
+> +static int boot_android_bootloader(struct bootflow *bflow)
+> +{
+> +	int ret;
+> +
+> +	ret = run_command("fastboot usb 0", 0);
+> +	do_reset(NULL, 0, 0, NULL);
+> +
+> +	return log_msg_ret("boot", ret);
+> +}
+> +
+> +static int android_boot(struct udevice *dev, struct bootflow *bflow)
+> +{
+> +	struct android_priv *priv = bflow->bootmeth_priv;
+> +	int ret;
+> +
+> +	switch (priv->boot_mode) {
+> +	case ANDROID_BOOT_MODE_NORMAL:
+> +		ret = boot_android_normal(bflow);
+> +		break;
+> +	case ANDROID_BOOT_MODE_RECOVERY:
+> +		ret = boot_android_recovery(bflow);
+> +		break;
+> +	case ANDROID_BOOT_MODE_BOOTLOADER:
+> +		ret = boot_android_bootloader(bflow);
+> +		break;
+> +	default:
+> +		printf("ANDROID: Unknown boot mode %d. Running fastboot...\n",
+> +		       priv->boot_mode);
+> +		boot_android_bootloader(bflow);
+> +		/* Tell we failed to boot since boot mode is unknown */
+> +		ret = -EFAULT;
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+> +static int android_bootmeth_bind(struct udevice *dev)
+> +{
+> +	struct bootmeth_uc_plat *plat = dev_get_uclass_plat(dev);
+> +
+> +	plat->desc = "Android boot";
+> +	plat->flags = BOOTMETHF_ANY_PART;
+> +
+> +	return 0;
+> +}
+> +
+> +static struct bootmeth_ops android_bootmeth_ops = {
+> +	.check		= android_check,
+> +	.read_bootflow	= android_read_bootflow,
+> +	.read_file	= android_read_file,
+> +	.boot		= android_boot,
+> +};
+> +
+> +static const struct udevice_id android_bootmeth_ids[] = {
+> +	{ .compatible = "u-boot,android" },
+> +	{ }
+> +};
+> +
+> +U_BOOT_DRIVER(bootmeth_android) = {
+> +	.name		= "bootmeth_android",
+> +	.id		= UCLASS_BOOTMETH,
+> +	.of_match	= android_bootmeth_ids,
+> +	.ops		= &android_bootmeth_ops,
+> +	.bind		= android_bootmeth_bind,
+> +};
+> diff --git a/boot/bootmeth_android.h b/boot/bootmeth_android.h
+> new file mode 100644
+> index 000000000000..a57fad9f0113
+> --- /dev/null
+> +++ b/boot/bootmeth_android.h
+> @@ -0,0 +1,29 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Bootmethod for Android
+> + *
+> + * Copyright (C) 2024 BayLibre, SAS
+> + * Written by Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> + */
+> +
+> +enum android_boot_mode {
+> +	ANDROID_BOOT_MODE_NORMAL = 0,
+> +
+> +	/*
+> +	 * Android "recovery" is a special boot mode that uses another ramdisk.
+> +	 * It can be used to "factory reset" a board or to flash logical partitions
+> +	 * It operates in 2 modes: adb or fastbootd
+> +	 * To enter recovery from Android, we can do:
+> +	 * $ adb reboot recovery
+> +	 * $ adb reboot fastboot
+> +	 */
+> +	ANDROID_BOOT_MODE_RECOVERY,
+> +
+> +	/*
+> +	 * Android "bootloader" is for accessing/reflashing physical partitions
+> +	 * Typically, this will launch a fastboot process in U-Boot.
+> +	 * To enter "bootloader" from Android, we can do:
+> +	 * $ adb reboot bootloader
+> +	 */
+> +	ANDROID_BOOT_MODE_BOOTLOADER,
+> +};
+> diff --git a/doc/develop/bootstd.rst b/doc/develop/bootstd.rst
+> index a07a72581e7a..709fa9e64ff3 100644
+> --- a/doc/develop/bootstd.rst
+> +++ b/doc/develop/bootstd.rst
+> @@ -95,6 +95,7 @@ bootflows.
+>  
+>  Note: it is possible to have a bootmeth that uses a partition or a whole device
+>  directly, but it is more common to use a filesystem.
+> +For example, the Android bootmeth uses a whole device.
+>  
+>  Note that some bootmeths are 'global', meaning that they select the bootdev
+>  themselves. Examples include VBE and EFI boot manager. In this case, they
+> @@ -277,6 +278,9 @@ script_offset_f
+>  script_size_f
+>      Size of the script to load, e.g. 0x2000
+>  
+> +vendor_boot_comp_addr_r
+> +    Address to which to load the vendor_boot Android image, e.g. 0xe0000000
+> +
+>  Some variables are set by script bootmeth:
+>  
+>  devtype
+> @@ -418,6 +422,7 @@ Bootmeth drivers are provided for:
+>     - EFI boot using bootefi from disk
+>     - VBE
+>     - EFI boot using boot manager
+> +   - Android bootflow (boot image v4)
+>  
+>  
+>  Command interface
+> @@ -786,6 +791,7 @@ To do
+>  Some things that need to be done to completely replace the distro-boot scripts:
+>  
+>  - implement extensions (devicetree overlays with add-on boards)
+> +- implement legacy (boot image v2) android boot flow
+>  
+>  Other ideas:
+>  
 > 
 > -- 
 > 2.45.2
