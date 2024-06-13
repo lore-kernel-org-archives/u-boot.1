@@ -4,75 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 534DDC27C4F
-	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 07:51:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F215AC27C4F
+	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 08:06:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C24AC881A9;
-	Thu, 13 Jun 2024 09:51:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 5E8F8883CE;
+	Thu, 13 Jun 2024 10:06:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="RjOWR+Vx";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RKZz8yXF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13A4D881A9; Thu, 13 Jun 2024 09:51:30 +0200 (CEST)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ id C0B0A883F4; Thu, 13 Jun 2024 10:06:43 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AD2787EBD
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 09:51:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 97BE78820C
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 10:06:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1718265086; x=1720857086;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9K2vFwnBTMbJvgrB3+fnhefbRXr2q52rT4lmb/iN4dc=;
- b=RjOWR+VxzJzVe4NT3LCkKdqgGUTS/ZjyliWY6MIgQ3Fl2oYO7N+Ez0/ewr8o+/wX
- txoVth80cHTIktHFgGvu9hxZCDIHKAxGM3Z6CQXIFc2RAypksCW/vcDCvhemqI+y
- ZtXvftfm4vVZ1rC4CdL7CbCKtVyFQ2FcIw6cZDmC5yc=;
-X-AuditID: ac14000a-03e52700000021bc-74-666aa4fe15ad
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 3B.2F.08636.EF4AA666;
- Thu, 13 Jun 2024 09:51:26 +0200 (CEST)
-Received: from [192.168.10.3] (172.25.0.11) by Berlix.phytec.de (172.25.0.12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Thu, 13 Jun
- 2024 09:51:26 +0200
-Message-ID: <c636e0ec-2047-408e-9511-29e9e19a438e@phytec.de>
-Date: Thu, 13 Jun 2024 09:51:25 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45D86di0011928;
+ Thu, 13 Jun 2024 03:06:39 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1718265999;
+ bh=9YBIO71MxKnf4LgZFY2xV9OjGJwGrwX7P4l9OQFFsWo=;
+ h=From:To:CC:Subject:Date;
+ b=RKZz8yXF1Kkm3AJnqxiYSNmhVCrpgOrw2qF+/6M48eVMeaWyzH0h0Lc/PMmWqAg8I
+ b3DdT7CGzccL4dFbcCLacwPxqyseW92hiVPP9yigV1CstyLmF77lWsTPsOXpyPbedm
+ LF51W8vIAebcoq7JMc90SNco0u5d2HiogV/lj/MQ=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45D86cxV046881
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 13 Jun 2024 03:06:38 -0500
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 13
+ Jun 2024 03:06:38 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 13 Jun 2024 03:06:38 -0500
+Received: from dhruva.dhcp.ti.com (dhruva.dhcp.ti.com [172.24.227.68])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45D86Y7r014692;
+ Thu, 13 Jun 2024 03:06:35 -0500
+From: Dhruva Gole <d-gole@ti.com>
+To: Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Vibhore Vardhan <vibhore@ti.com>, Neha Malcom
+ Francis <n-francis@ti.com>, Nishant Menon <nm@ti.com>,
+ <c-shilwant@ti.com>, <m-chawdhry@ti.com>, <vigneshr@ti.com>,
+ Judith Mendez <jm@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
+ Dhruva Gole <d-gole@ti.com>
+Subject: [PATCH] board: beagleplay: Fix the bootpart to pick from root
+ partition
+Date: Thu, 13 Jun 2024 13:36:04 +0530
+Message-ID: <20240613080604.3828083-1-d-gole@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] doc: board: phytec: phycore-am62x: Fix Link to
- Documentation
-To: Daniel Schultz <d.schultz@phytec.de>, <u-boot@lists.denx.de>,
- <trini@konsulko.com>, <upstream@lists.phytec.de>
-References: <20240612161639.2660205-1-d.schultz@phytec.de>
-Content-Language: en-US
-From: Wadim Egorov <w.egorov@phytec.de>
-In-Reply-To: <20240612161639.2660205-1-d.schultz@phytec.de>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrALMWRmVeSWpSXmKPExsWyRpKBR/ffkqw0g41fLSymTtrMbvF2bye7
- Rfc7dQdmj1cHVrF7nL2zg9Gjv7uFNYA5issmJTUnsyy1SN8ugStjxp78giaOijlrN7A0MD5n
- 62Lk5JAQMJF48nQnexcjF4eQwBImiX1T/zNDOHcZJRa9vssCUsUrYCPR3vubFcRmEVCV2PCi
- mR0iLihxcuYTsBpRAXmJ+7dmgMWFBcIlfm+YBGaLCJRI7Jh/mRnEFhKwkrh0dTFYPbOAuMSt
- J/OZQGw2AXWJOxu+gc3nFLCWePL2GhNEjYXE4jcH2SFseYntb+dAzZGXeHFpOQvEB/IS0869
- ZoawQyW2ftnONIFRaBaS82YhWTcLydhZSMYuYGRZxSiUm5mcnVqUma1XkFFZkpqsl5K6iREU
- 6iIMXDsY++Z4HGJk4mA8xCjBwawkwjtrYVaaEG9KYmVValF+fFFpTmrxIUZpDhYlcd7VHcGp
- QgLpiSWp2ampBalFMFkmDk6pBsa4GWtspPerr44/dti0x1j35/4/Et2/1DbyHfwybcLZ25fj
- v3QIt02cfmpmcNakuv3vypWuJu2p+q6mVrR9/zcmr89qFWrbRKJmrO1Q3Wx2Zs4nD5fdt6U2
- dtbZ5ATHrzTiay5WO26z/b/DcdZnOVlRbqm9bbM/mtULZInEdIcGx5t8lti+1keJpTgj0VCL
- uag4EQBQSxBsYwIAAA==
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,30 +81,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The Kernel Image and DTB files are supposed to be picked from the rootfs
+of the SD Card, this fails in legacy boot flow because bootpart is set
+to 1:1. Fix it.
 
+Fixes: a200f428b5b21 ("board: ti: am62x: Add am62x_beagleplay_* defconfigs and env file")
+Signed-off-by: Dhruva Gole <d-gole@ti.com>
+---
+ board/beagle/beagleplay/beagleplay.env | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Am 12.06.24 um 18:16 schrieb Daniel Schultz:
-> We moved our documentation to another hoster and therefore the URL
-> changed. Point to the latest documentation instead of release versions
-> to not link out-dated documentation.
-> 
-> Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
+diff --git a/board/beagle/beagleplay/beagleplay.env b/board/beagle/beagleplay/beagleplay.env
+index bbf6b925d02c..190181c8ad0c 100644
+--- a/board/beagle/beagleplay/beagleplay.env
++++ b/board/beagle/beagleplay/beagleplay.env
+@@ -11,7 +11,7 @@ set_led_state_start_load=led led-0 on; led led-1 off;
+ 	led led-2 on; led led-3 off; led led-4 on
+ boot=mmc
+ mmcdev=1
+-bootpart=1:1
++bootpart=1:2
+ bootdir=/boot
+ boot_targets=mmc1 mmc0
+ bootmeths=script extlinux efi pxe
+-- 
+2.34.1
 
-For all three patches,
-
-Reviewed-by: Wadim Egorov <w.egorov@phytec.de>
-
-> ---
->   doc/board/phytec/phycore-am62x.rst | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/doc/board/phytec/phycore-am62x.rst b/doc/board/phytec/phycore-am62x.rst
-> index bc6d5246694..681ac536125 100644
-> --- a/doc/board/phytec/phycore-am62x.rst
-> +++ b/doc/board/phytec/phycore-am62x.rst
-> @@ -155,4 +155,4 @@ Further Information
->   -------------------
->   
->   Please see :doc:`../ti/am62x_sk` chapter for further AM62 SoC related documentation
-> -and https://docs.phytec.com/phycore-am62x for vendor documentation.
-> +and https://docs.phytec.com/projects/yocto-phycore-am62x/en/latest/ for vendor documentation.
