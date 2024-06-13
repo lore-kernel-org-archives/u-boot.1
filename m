@@ -4,72 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12197C27C4F
-	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 12:46:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C824CC27C4F
+	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 13:17:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 827D388914;
-	Thu, 13 Jun 2024 14:44:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 24848888F8;
+	Thu, 13 Jun 2024 15:17:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=opensuse.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="S12KLCES";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 882668820C; Thu, 13 Jun 2024 10:09:43 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 60668888FA; Thu, 13 Jun 2024 15:17:02 +0200 (CEST)
+Received: from eclipse.jkvinge.net (eclipse.jkvinge.net [217.170.205.109])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8755C888DD
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 10:09:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE082888F2
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 15:16:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=fail (p=none dis=none) header.from=opensuse.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=c-shilwant@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45D89crS006737;
- Thu, 13 Jun 2024 03:09:38 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1718266178;
- bh=yDkSum6twfay2ydqaLecv/jrkd+neJAECpk886Sk4WM=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=S12KLCESTvQk9yXnH6kUm3LsQ15fStSH1Mv4DUJ9O3ZkKlIx8yw8vwTVy1wuIk3s6
- hQS/bxniMfS21YN8kOxHSwNfUiiYjs3/sB0EK+69p9gcgGYqWAcCfh1eKnl8Dg5/2W
- RaTSTnUpr3atwkJZqboWpYwxqlYke6LelEimwmhA=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45D89cr0064196
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 13 Jun 2024 03:09:38 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 13
- Jun 2024 03:09:38 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 13 Jun 2024 03:09:38 -0500
-Received: from [172.24.227.238] (chirag-hp-z2-tower-g5-workstation.dhcp.ti.com
- [172.24.227.238])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45D89YmK028439;
- Thu, 13 Jun 2024 03:09:35 -0500
-Message-ID: <d6243760-fddb-4fc6-baec-56e2dc66cdf6@ti.com>
-Date: Thu, 13 Jun 2024 13:39:33 +0530
+ spf=fail smtp.mailfrom=jonaski@opensuse.org
+Received: from ni227.in.jkvinge.net (ti0116a430-0342.bb.online.no
+ [85.165.32.90]) (authenticated bits=0)
+ by eclipse.jkvinge.net (8.15.2/8.15.2/SuSE Linux 0.8) with ESMTPSA id
+ 45DDGwaR007296
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO)
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 15:16:59 +0200
+Message-ID: <6fc28b7090833e94d47ee3abfce1b1f5a75d349f.camel@opensuse.org>
+Subject: silent u-boot not working
+From: Jonas Kvinge <jonaski@opensuse.org>
+To: u-boot@lists.denx.de
+Date: Thu, 13 Jun 2024 15:16:58 +0200
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.52.2 
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] board: beagleplay: Fix the bootpart to pick from root
- partition
-To: <u-boot@lists.denx.de>
-CC: Vibhore Vardhan <vibhore@ti.com>, Neha Malcom Francis <n-francis@ti.com>, 
- Nishant Menon <nm@ti.com>, <m-chawdhry@ti.com>, <vigneshr@ti.com>, Judith
- Mendez <jm@ti.com>, Tom Rini <trini@konsulko.com>, Robert Nelson
- <robertcnelson@gmail.com>, Dhruva Gole <d-gole@ti.com>
-References: <20240613080604.3828083-1-d-gole@ti.com>
-Content-Language: en-US
-From: Chirag Shilwant <c-shilwant@ti.com>
-In-Reply-To: <20240613080604.3828083-1-d-gole@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-Mailman-Approved-At: Thu, 13 Jun 2024 14:44:27 +0200
+Received-SPF: pass (eclipse.jkvinge.net: authenticated connection)
+ receiver=eclipse.jkvinge.net; client-ip=85.165.32.90;
+ helo=ni227.in.jkvinge.net; envelope-from=jonaski@opensuse.org;
+ x-software=spfmilter 2.001 http://www.acme.com/software/spfmilter/ with
+ libspf2-1.2.10; 
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,36 +58,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dhruva,
+Hi,
 
-On 13/06/24 13:36, Dhruva Gole wrote:
-> The Kernel Image and DTB files are supposed to be picked from the rootfs
-> of the SD Card, this fails in legacy boot flow because bootpart is set
-> to 1:1. Fix it.
->
-> Fixes: a200f428b5b21 ("board: ti: am62x: Add am62x_beagleplay_* defconfigs and env file")
-> Signed-off-by: Dhruva Gole <d-gole@ti.com>
+I'm running openSUSE Tumbleweed on an RPI CM4, I'm trying to silence u-
+boot boot messages, with the default configuration there is an u-boot
+logo on the top right corner and boot text, I'd like to get rid of the
+logo and all text if possible.
+The keyboard is not working before the Linux kernel is loaded, so I can
+not interrupt u-boot and enter any commands, so where should I put "set
+env silent 1"?
 
+I've followed the guide on
+https://github.com/ARM-software/u-boot/blob/master/doc/README.silent
 
+I have built u-boot from source using `make rpi_4_defconfig`
+configuration modified the configuration with make menuconfig, and
+verified this in .config before builing.
+CONFIG_SILENT_CONSOLE=3Dy
+CONFIG_SILENT_U_BOOT_ONLY=3Dy
+CONFIG_SILENT_CONSOLE_UPDATE_ON_SET=3Dy
+CONFIG_SILENT_CONSOLE_UPDATE_ON_RELOC=3Dy
+CONFIG_SILENT_CONSOLE_UNTIL_ENV=3Dy
 
-Acked-by: Chirag Shilwant <c-shilwant@ti.com>
+Copied the binary to /boot/efi/u-boot.bin and /boot/vc/u-boot.bin
 
+I've also tried to define CONFIG_EXTRA_ENV_SETTINGS in
+include/configs/rpi.h according to:
+https://stackoverflow.com/questions/34356844/how-to-disable-serial-consolen=
+on-kernel-in-u-boot/64583919#64583919?newreg=3D0df51e20b39a448094cbb70fe356=
+e4ec
+ and rebuilt and copied to binary again, still not working.
 
+The text and logo is still present during boot, what am I doing wrong
+here?
 
-> ---
->   board/beagle/beagleplay/beagleplay.env | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/board/beagle/beagleplay/beagleplay.env b/board/beagle/beagleplay/beagleplay.env
-> index bbf6b925d02c..190181c8ad0c 100644
-> --- a/board/beagle/beagleplay/beagleplay.env
-> +++ b/board/beagle/beagleplay/beagleplay.env
-> @@ -11,7 +11,7 @@ set_led_state_start_load=led led-0 on; led led-1 off;
->   	led led-2 on; led led-3 off; led led-4 on
->   boot=mmc
->   mmcdev=1
-> -bootpart=1:1
-> +bootpart=1:2
->   bootdir=/boot
->   boot_targets=mmc1 mmc0
->   bootmeths=script extlinux efi pxe
+Jonas
+
