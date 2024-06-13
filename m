@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3D8AC27C4F
-	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 12:45:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE8B0C27C4F
+	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 12:45:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 447498891F;
+	by phobos.denx.de (Postfix) with ESMTP id 9E38D88927;
 	Thu, 13 Jun 2024 14:43:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dzVJbk33";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KWqwGRic";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A26A9888E8; Thu, 13 Jun 2024 13:10:27 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 5A693888D1; Thu, 13 Jun 2024 13:10:29 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5FDF1888FF
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 13:10:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 639A4888F8
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 13:10:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-57a31d63b6bso1067677a12.0
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 04:10:25 -0700 (PDT)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a6f1f33486eso50373266b.3
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 04:10:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1718277025; x=1718881825; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1718277027; x=1718881827; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=dkLSO2oqFmlNq+CTGLdRXojERXtEUdcRUTUSIaM8Y+w=;
- b=dzVJbk33qQZNjtyt5Za5hdfBNGHcivaLnYiYAiV4XZEHCQW9swaTFgNR55IsKGyI1M
- wMrJabCHt/7GlxTWdBvOSJxyNd7/Q4OAj6Ah76pdeM7Dvp3je/GuRcJukUnduV9NYXvj
- PUYFxOwbvjH0UoFr63yWSFQqOM8soX+KEI8RXoKc4dGFqXbPHX+mlcbo1Tf5dqEsUNmO
- 2Pc1DPZ1qDA7evoKzYKcOjRsAFuECwGH58DPtg5zxVbBlSIqiHAc4zpaf5qTr24Dn0Dq
- zaBA61TJLzbpUN174vwREP6QI2ItjX2XsKCWiteYwnEZ94xiCA7w4wZymShgw5PXA41I
- jVtA==
+ :reply-to; bh=LV+Jt19oXYiKLeTjJLpt7yR2GDuRd0rePLdFN8b780U=;
+ b=KWqwGRice96euTvGyzvu7t4SgPkYT1dj+w5z1WPV6tYWrJo9au+Qje1luIvmstQ3lN
+ G9ZmOoWXvehPUKLDmZCxtd89qnfBDC6qI5q8hUrjBi4YC+KC06hBCtYf1+YJ/FIy8Fs+
+ lEp0Tr/cCXtjZswCP5aawUTM3OVLAyPWi/eLNrDQELatf4xn6KBJsd3P5K0uYblleHvs
+ 40H6vNQLfsfOhLL93ADMbrYMqsyN28fHOcQhkqvbFiaW95Z9knRyz0wVa64zlQqqjYAU
+ ODXEZY19smQ8iaFjGq+MxEzrt6GykDHm3V0ThAc7lbEcPX+Oz2V5hwLGx6kzgm1DdIYI
+ lE2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718277025; x=1718881825;
+ d=1e100.net; s=20230601; t=1718277027; x=1718881827;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=dkLSO2oqFmlNq+CTGLdRXojERXtEUdcRUTUSIaM8Y+w=;
- b=ZH0r3fVNmGSnOjZBcXUGIebV/pHCytQaZQVCmXA/QjNdhh7gNKFtHgjr2GdVUjUFya
- bhW/Ku8fKhv+gM3EecZQGdxMF93xj9Ir4mgPT2F+da07cHgTckesLJdsnoFIepAsFlz4
- xUktcojVFdx89Q7SPS4glx4eQDJesOZjpY5Y93NbizEhq6SxDDndoMrBSYWA1trFGHzT
- 46czWi8muYlbNeO2jTrzl+J3FLPbG0OVrKbAWYoEmtMdR3SjBNGrQuX5/MG7NVCKGh81
- 0Be9jcjbZMbr43fueA+Y5jEB/Eh7lUDnLQg49pbNDWR08AdKJc4C6gilpHw/9Ze2h8ao
- HK9g==
+ bh=LV+Jt19oXYiKLeTjJLpt7yR2GDuRd0rePLdFN8b780U=;
+ b=GNFGEprFk2QZyWFNm6M5kR+l95667QC7JEE18411pNF4nG9kqZhsE+z1gLWeCdUi+l
+ vYb03UoKaFLByd3P3Jfx83/Yj1NG3L+G9M0Z+zpVKrGP2+ZqCHfv4pcX7LeMQbIjeFRs
+ BwO8Fnv4lwb8WHZoQS+P0yxBpF/TgNBfyt2eU9trT8Zgus4zJHA1R/306lzJd5kdDEad
+ LB6Sf6HxlAgHDH2QsVQ6qwz0gKn2jNgOxBiCyoQ/Gpuo25r5fK4g/7Tm5ydnhJSPcPPx
+ 2DfwYnW3kP7pKTyx0Ra40nm9qT/lqnLkEnGGP+NXDb1kR9/2DdStl9zSwgvchVCeRbUb
+ yRTQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWx2sKqDF8wHPcj7QB47NaZB3W+ke+URuvmPUu4KGaMU4MHPegZzNLpidsY0rQIfINRFdbQAZs9z1zR39cl5mFhtVY7BQ==
-X-Gm-Message-State: AOJu0YwzOcXAS2/ic5YN6ALtkM1+bKMD5JSfpgCO+hx0fQoaaZDAJPPq
- GfBrVg2L/YE5sWAsxdo/hzbeXtRn1xDQF5IzpXlhohiQM60WX4To
-X-Google-Smtp-Source: AGHT+IFrfFz/55fLJoy1oIjuN8ZsBEv3s3iY64ZQ4SEdZCJd78G+wsuvsXj5Fhcc/33251Reloy1iQ==
-X-Received: by 2002:a17:907:724a:b0:a6f:1036:98cf with SMTP id
- a640c23a62f3a-a6f4801305amr407446566b.54.1718277024659; 
- Thu, 13 Jun 2024 04:10:24 -0700 (PDT)
+ AJvYcCWt2HN3+L+Q4T/mY2yRdJL9CFdbpPTI7p0aL9pPmkdtMcGJ0NY6r7OoRD7Z5jURf3KBqXI/Z3BZTcLrzYl8sZsDY/oapA==
+X-Gm-Message-State: AOJu0Yxl23CGTNESpgoiu+hTyW3yyq/3uTYIbCGVbit4au5G+aRciwTf
+ HW7zS9i5pQZWebrqjiSylfIOlnv316OHcqbtq4AQBW3bhKEKCh0Q
+X-Google-Smtp-Source: AGHT+IHDDdFL5rRg3QPEKqEplmdCho8CtRf8hyOjMbU/oU0cD5z38IfVUFrze+TvxVGju2h6rm8eTg==
+X-Received: by 2002:a50:cd55:0:b0:57c:8e57:c3f0 with SMTP id
+ 4fb4d7f45d1cf-57caaabd37amr3757634a12.16.1718277026486; 
+ Thu, 13 Jun 2024 04:10:26 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
  [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- a640c23a62f3a-a6f56f416dfsm60580366b.164.2024.06.13.04.10.22
+ a640c23a62f3a-a6f56f416dfsm60580366b.164.2024.06.13.04.10.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Jun 2024 04:10:24 -0700 (PDT)
+ Thu, 13 Jun 2024 04:10:26 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Ryder Lee <ryder.lee@mediatek.com>,
@@ -87,10 +87,10 @@ To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  This contributor prefers not to receive mails <noreply@example.com>,
  Stefan Roese <sr@denx.de>, Peter Robinson <pbrobinson@gmail.com>,
  Sam Shih <sam.shih@mediatek.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 07/14] serial: mediatek: add special handling for highspeed
- and linux compat
-Date: Thu, 13 Jun 2024 13:09:25 +0200
-Message-ID: <20240613110949.11076-8-ansuelsmth@gmail.com>
+Subject: [PATCH v2 08/14] mmc: mediatek: add support for upstream linux clock
+ and property
+Date: Thu, 13 Jun 2024 13:09:26 +0200
+Message-ID: <20240613110949.11076-9-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240613110949.11076-1-ansuelsmth@gmail.com>
 References: <20240613110949.11076-1-ansuelsmth@gmail.com>
@@ -113,87 +113,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Upstream linux serial driver use a different logic to setup serial regs.
+Add support for upstream linux clock and map U-Boot property to the one
+use in upstream linux where supported.
 
-They have 2 interval:
-- < 115200 we use lowspeed regs and 16 * baud
-- >= 115200 we use highspeed
-
-We currently use force_highspeed property to force usage of highspeed
-regs even with low baud rate.
-
-Add special handling if the upstream compatible is used where we just
-apply the same interval with anything >= 115200 in highspeed simulating
-force_highspeed.
+Also add handling for the use_internal_cd that on upstream is hardcoded
+enabled on mt7620.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- drivers/serial/serial_mtk.c | 19 ++++++++++++-------
- 1 file changed, 12 insertions(+), 7 deletions(-)
+ drivers/mmc/mtk-sd.c | 35 +++++++++++++++++++++++++++++++----
+ 1 file changed, 31 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/serial/serial_mtk.c b/drivers/serial/serial_mtk.c
-index d34a31c9cf0..14be095653a 100644
---- a/drivers/serial/serial_mtk.c
-+++ b/drivers/serial/serial_mtk.c
-@@ -89,8 +89,8 @@ struct mtk_serial_priv {
- 	bool force_highspeed;
+diff --git a/drivers/mmc/mtk-sd.c b/drivers/mmc/mtk-sd.c
+index 296aaee7331..65b6b02e759 100644
+--- a/drivers/mmc/mtk-sd.c
++++ b/drivers/mmc/mtk-sd.c
+@@ -336,6 +336,7 @@ struct msdc_compatible {
+ 	bool enhance_rx;
+ 	bool builtin_pad_ctrl;
+ 	bool default_pad_dly;
++	bool use_internal_cd;
  };
  
--static void _mtk_serial_setbrg(struct mtk_serial_priv *priv, int baud,
--			       uint clk_rate)
-+static void _mtk_serial_setbrg(struct udevice *dev, struct mtk_serial_priv *priv,
-+			       int baud, uint clk_rate)
- {
- 	u32 quot, realbaud, samplecount = 1;
+ struct msdc_delay_phase {
+@@ -366,6 +367,10 @@ struct msdc_host {
+ 	struct clk src_clk_cg;	/* optional, MSDC source clock control gate */
+ 	struct clk h_clk;	/* MSDC core clock */
  
-@@ -113,7 +113,12 @@ static void _mtk_serial_setbrg(struct mtk_serial_priv *priv, int baud,
- 		goto set_baud;
- 	}
- 
--	if (priv->force_highspeed)
-+	/*
-+	 * Upstream linux use highspeed for anything >= 115200 and lowspeed
-+	 * for < 115200. Simulate this if we are using the upstream compatible.
-+	 */
-+	if (priv->force_highspeed ||
-+	    (device_is_compatible(dev, "mediatek,mt6577-uart") && baud >= 115200))
- 		goto use_hs3;
- 
- 	if (baud <= 115200) {
-@@ -186,7 +191,7 @@ static int mtk_serial_setbrg(struct udevice *dev, int baudrate)
- 	if (IS_ERR_VALUE(clk_rate) || clk_rate == 0)
- 		clk_rate = priv->fixed_clk_rate;
- 
--	_mtk_serial_setbrg(priv, baudrate, clk_rate);
-+	_mtk_serial_setbrg(dev, priv, baudrate, clk_rate);
- 
- 	return 0;
- }
-@@ -302,13 +307,13 @@ DECLARE_GLOBAL_DATA_PTR;
- 		writel(0, &mtk_hsuart##port.regs->ier); \
- 		writel(UART_MCRVAL, &mtk_hsuart##port.regs->mcr); \
- 		writel(UART_FCRVAL, &mtk_hsuart##port.regs->fcr); \
--		_mtk_serial_setbrg(&mtk_hsuart##port, gd->baudrate, \
-+		_mtk_serial_setbrg(NULL, &mtk_hsuart##port, gd->baudrate, \
- 				   mtk_hsuart##port.fixed_clk_rate); \
- 		return 0 ; \
- 	} \
- 	static void mtk_serial##port##_setbrg(void) \
- 	{ \
--		_mtk_serial_setbrg(&mtk_hsuart##port, gd->baudrate, \
-+		_mtk_serial_setbrg(NULL, &mtk_hsuart##port, gd->baudrate, \
- 				   mtk_hsuart##port.fixed_clk_rate); \
- 	} \
- 	static int mtk_serial##port##_getc(void) \
-@@ -456,7 +461,7 @@ static inline void _debug_uart_init(void)
- 	writel(UART_MCRVAL, &priv.regs->mcr);
- 	writel(UART_FCRVAL, &priv.regs->fcr);
- 
--	_mtk_serial_setbrg(&priv, CONFIG_BAUDRATE, priv.fixed_clk_rate);
-+	_mtk_serial_setbrg(NULL, &priv, CONFIG_BAUDRATE, priv.fixed_clk_rate);
++	/* upstream linux clock */
++	struct clk axi_cg_clk;	/* optional, AXI clock */
++	struct clk ahb_cg_clk;	/* optional, AHB clock */
++
+ 	u32 src_clk_freq;	/* source clock */
+ 	u32 mclk;		/* mmc framework required bus clock */
+ 	u32 sclk;		/* actual calculated bus clock */
+@@ -1638,6 +1643,11 @@ static void msdc_ungate_clock(struct msdc_host *host)
+ 	clk_enable(&host->h_clk);
+ 	if (host->src_clk_cg.dev)
+ 		clk_enable(&host->src_clk_cg);
++
++	if (host->axi_cg_clk.dev)
++		clk_enable(&host->axi_cg_clk);
++	if (host->ahb_cg_clk.dev)
++		clk_enable(&host->ahb_cg_clk);
  }
  
- static inline void _debug_uart_putc(int ch)
+ static int msdc_drv_probe(struct udevice *dev)
+@@ -1651,6 +1661,9 @@ static int msdc_drv_probe(struct udevice *dev)
+ 
+ 	host->dev_comp = (struct msdc_compatible *)dev_get_driver_data(dev);
+ 
++	if (host->dev_comp->use_internal_cd)
++		host->builtin_cd = 1;
++
+ 	host->src_clk_freq = clk_get_rate(&host->src_clk);
+ 
+ 	if (host->dev_comp->clk_div_bits == 8)
+@@ -1716,18 +1729,31 @@ static int msdc_of_to_plat(struct udevice *dev)
+ 
+ 	clk_get_by_name(dev, "source_cg", &host->src_clk_cg); /* optional */
+ 
++	/* upstream linux clock */
++	clk_get_by_name(dev, "axi_cg", &host->axi_cg_clk); /* optional */
++	clk_get_by_name(dev, "ahb_cg", &host->ahb_cg_clk); /* optional */
++
+ #if CONFIG_IS_ENABLED(DM_GPIO)
+ 	gpio_request_by_name(dev, "wp-gpios", 0, &host->gpio_wp, GPIOD_IS_IN);
+ 	gpio_request_by_name(dev, "cd-gpios", 0, &host->gpio_cd, GPIOD_IS_IN);
+ #endif
+ 
+ 	host->hs400_ds_delay = dev_read_u32_default(dev, "hs400-ds-delay", 0);
+-	host->hs200_cmd_int_delay =
+-			dev_read_u32_default(dev, "cmd_int_delay", 0);
++	if (dev_read_u32(dev, "mediatek,hs200-cmd-int-delay",
++			 &host->hs200_cmd_int_delay))
++		host->hs200_cmd_int_delay =
++				dev_read_u32_default(dev, "cmd_int_delay", 0);
++
+ 	host->hs200_write_int_delay =
+ 			dev_read_u32_default(dev, "write_int_delay", 0);
+-	host->latch_ck = dev_read_u32_default(dev, "latch-ck", 0);
++
++	if (dev_read_u32(dev, "mediatek,latch-ck", &host->latch_ck))
++		host->latch_ck = dev_read_u32_default(dev, "latch-ck", 0);
++
+ 	host->r_smpl = dev_read_u32_default(dev, "r_smpl", 0);
++	if (dev_read_bool(dev, "mediatek,hs400-cmd-resp-sel-rising"))
++		host->r_smpl = 1;
++
+ 	host->builtin_cd = dev_read_u32_default(dev, "builtin-cd", 0);
+ 	host->cd_active_high = dev_read_bool(dev, "cd-active-high");
+ 
+@@ -1776,6 +1802,7 @@ static const struct msdc_compatible mt7620_compat = {
+ 	.enhance_rx = false,
+ 	.builtin_pad_ctrl = true,
+ 	.default_pad_dly = true,
++	.use_internal_cd = true,
+ };
+ 
+ static const struct msdc_compatible mt7621_compat = {
+@@ -1806,7 +1833,7 @@ static const struct msdc_compatible mt7623_compat = {
+ 	.data_tune = true,
+ 	.busy_check = false,
+ 	.stop_clk_fix = false,
+-	.enhance_rx = false
++	.enhance_rx = false,
+ };
+ 
+ static const struct msdc_compatible mt7986_compat = {
 -- 
 2.43.0
 
