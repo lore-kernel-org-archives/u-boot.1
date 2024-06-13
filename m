@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 321A4C27C4F
-	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 10:14:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0596C27C75
+	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 10:14:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3230D888EF;
+	by phobos.denx.de (Postfix) with ESMTP id A8004888F5;
 	Thu, 13 Jun 2024 12:13:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="LNAlMpCG";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="dC18ICQx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3028888E2; Thu, 13 Jun 2024 12:13:36 +0200 (CEST)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id 16A5B888E9; Thu, 13 Jun 2024 12:13:37 +0200 (CEST)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E89D7888E2
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 12:13:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A514888D9
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 12:13:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-35f188e09a8so690581f8f.2
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 03:13:33 -0700 (PDT)
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-52962423ed8so1051608e87.2
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 03:13:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718273613; x=1718878413;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718273614; x=1718878414;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=pRQvsZ0Ors9/qwlPi3O7OFLnn3bRqWMAveHYmhda0g0=;
- b=LNAlMpCGN23+bME0Jn0LmlboytQVF8oszGEThJ7mGMSWemypAVagwSh8298wJ4fDtN
- AZ7wzbMQplAo6cmlmi4OMW8USyuYyHzHYD5xsPffzTXsA04CBVpevnxteSIkUxlwATki
- FzHN0V7Q1YHAsZNmGhTSrnD7c9vsoEzhu6kZDqUzbOtB8hk9Ifefgv02XbzgtHF+YYc5
- 86u+oFrbJaOL+KtKGjNpYsDeGB7KyBd//Xc7eo33bx3h6rG5QEr2hlT0+hIqW+pQK2Lb
- bnwJ390TErdwR3Ggn9gLBnLo/VgvmFFXFv6PDLK82DeCZC8hyhKrmUUvRkm62KTbqF2W
- wldQ==
+ :reply-to; bh=7zICqjiRabucE9uUo5x9KVLea6SvjoIO7CoPygjJi8o=;
+ b=dC18ICQxGEI+QV3u3G1abW5qKtQNjsohzRH0kIllXG7Hw+2j+dZ7EvQN0+L8v7LIa5
+ SAdlimfDFp7j8dy/jdpfd1NEfb61S1fxVT8O4VvoJ5dBcS+cD1srVD4nEl2Nt7oobzT7
+ oAhYkc36buNPBg4b3aDvBFpTQ0NxZISvhkc4kJ8X4nlRH3hYxaEXqddr7O1x+iZisMW6
+ WqecgjXGz3rCrgS/jurLQ1rO9q/tRMGrBJVna7P2TBbeiImA8L3skqO1swb1YyVziN77
+ eUVtcy8aOV6aVySr7qZEO23LuHHXc+FPvO3bbTMwqtw0CB3uSTLUoN19mH8Xzczb/Cox
+ 5mAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718273613; x=1718878413;
+ d=1e100.net; s=20230601; t=1718273614; x=1718878414;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pRQvsZ0Ors9/qwlPi3O7OFLnn3bRqWMAveHYmhda0g0=;
- b=E2xQwhbn5aPWlqyttsZLSL+Rw4k3RpULXjnkDzMRjNZAJI+3o+TZUrYgU0tJXq/fpQ
- svBnRtSzA9AanltbrtlHpY7jCKz/VEdTgL3RMiRHe3PUQ/r+Iu2LAuIEzmtCkFVhpST6
- /ZHxpYY5kGupEt7ogWK0jS03vc9bsbZmpzyqpoA3xXVtw81kJ7b3BNNKXBXXp+3qesTq
- /gU682SfMUm/VTcCfftQauk9m2vXxJ+41SUHpiLsyDAAsIJbupQ4cR+8wPx+PH/TUQGm
- 2DnQL/Z3YGHrvZNCCOS5pkS+15OM5KZWXKD7OcqCday8sdxbfpJ0oP+ksz+v/ndlFjXd
- sMkA==
+ bh=7zICqjiRabucE9uUo5x9KVLea6SvjoIO7CoPygjJi8o=;
+ b=MbDG3tuDQeeBLA4zOrU0jCo/LWWcpmMfKyBtTDxC1bLEcXiuqovIeNVPINEkt74DXv
+ IAZiAUPeFu2CsxqyPBKFe9yWuY/JPLfjYmCsvlYMkUmLpKSleLxQS0cyPm2KJ2RYFr5f
+ ZFQZ1ya4GFm+NwsKUuKsT6bHRRzoXDiInjZUvE3EF3iOMYc+6nBaYuM4HayUgDibphhq
+ FYc1pzAz/pBEiFx5i8IAjaMiJqf0TFjmtEEfbgBkk2nsdq2OuhU/sHohgtFejsuwE6DH
+ 85KdDJ/+zrGjyJUS85LNwl1C5eqQd4NG7EpLpw6qUZpg8+D+D5XlNvt0KFTFiBsJYqK4
+ wUAA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXwVPXKKjmySXWQNCdRAM0vwNCRRnCvoGC2sBlUg+8cjtybg8z1xqUQkbQrM03OseqEdCey6Bbd9BGPy3NF5PvZuEdIcA==
-X-Gm-Message-State: AOJu0Yxo2JFZLHb5c9aRDHNuNy1fO2M7PzT6i2TFG41p8gzmU0sJn7fE
- VVzccle/d/4RaxQPkrLMHm6f8xjGUDZYE4pgpR3liNmJHgmHCN2tRkafj+WF0SE=
-X-Google-Smtp-Source: AGHT+IFtHw3Y4hAsDMeT39a9+eC3hzW16vRGW5gpuy00/gkByQAyhRSLk1JlwZSDZNgQtZYqzP/eDQ==
-X-Received: by 2002:a05:6000:18e:b0:35f:d70:6193 with SMTP id
- ffacd0b85a97d-35fdf7adcc7mr3120507f8f.41.1718273613323; 
- Thu, 13 Jun 2024 03:13:33 -0700 (PDT)
+ AJvYcCV7gbjnEPELdsOTpgh/Uv3T0xek4kTfhml6YqtHmG7cbkTDPteRBCO3g0ctKBtzwpkQT/chrjzzVHBtr+EReKsRZ8ot8g==
+X-Gm-Message-State: AOJu0Yykchfvi3wS1kw8KMWuKdG4Swekz/zqASOkzSsb+/p94+n9YjpM
+ JJhmFR4o1Srxbp/qybl2973/9xcJH08SG1xRfvxU7fqA+6MKBsIndPFZtd0mes8=
+X-Google-Smtp-Source: AGHT+IGXZhL+fqYoqk7gl7oBeCLVmr8wPgInO4dPKHFqng8Z1yjHCXq7wIY9kYk9rXr4lJnz5HvtLQ==
+X-Received: by 2002:ac2:44b3:0:b0:52c:896f:bc3c with SMTP id
+ 2adb3069b0e04-52c9a405922mr2578440e87.67.1718273614138; 
+ Thu, 13 Jun 2024 03:13:34 -0700 (PDT)
 Received: from groot.home ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-360750f2295sm1251573f8f.82.2024.06.13.03.13.32
+ ffacd0b85a97d-360750f2295sm1251573f8f.82.2024.06.13.03.13.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Jun 2024 03:13:32 -0700 (PDT)
+ Thu, 13 Jun 2024 03:13:33 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Date: Thu, 13 Jun 2024 12:13:09 +0200
-Subject: [PATCH v2 2/5] bootstd: Add bootflow_iter_check_mmc() helper
+Date: Thu, 13 Jun 2024 12:13:10 +0200
+Subject: [PATCH v2 3/5] android: boot: Add set_abootimg_addr() and
+ set_avendor_bootimg_addr()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240613-bootmeth-android-v2-2-397f6e66eb29@baylibre.com>
+Message-Id: <20240613-bootmeth-android-v2-3-397f6e66eb29@baylibre.com>
 References: <20240613-bootmeth-android-v2-0-397f6e66eb29@baylibre.com>
 In-Reply-To: <20240613-bootmeth-android-v2-0-397f6e66eb29@baylibre.com>
 To: Simon Glass <sjg@chromium.org>
@@ -99,59 +100,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some bootflows might be able to only boot from MMC devices.
+The only way to configure the load addresses for both bootimg and
+vendor_bootimg is by using the "abootimg" command.
+If we want to use the C API, there is no equivalent.
 
-Add a helper function these bootflows can use.
+Add set_abootimg_addr() and set_avendor_bootimg_addr() so that we can
+specify the load address from C.
+
+This can be useful for implementing an Android bootmethod.
 
 Reviewed-by: Igor Opaniuk <igor.opaniuk@gmail.com>
 Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 ---
- boot/bootflow.c    | 12 ++++++++++++
- include/bootflow.h |  9 +++++++++
- 2 files changed, 21 insertions(+)
+ cmd/abootimg.c  | 10 ++++++++++
+ include/image.h | 14 ++++++++++++++
+ 2 files changed, 24 insertions(+)
 
-diff --git a/boot/bootflow.c b/boot/bootflow.c
-index 9aa3179c3881..59d77d2385f4 100644
---- a/boot/bootflow.c
-+++ b/boot/bootflow.c
-@@ -575,6 +575,18 @@ int bootflow_iter_check_blk(const struct bootflow_iter *iter)
- 	return -ENOTSUPP;
+diff --git a/cmd/abootimg.c b/cmd/abootimg.c
+index 327712a536c0..ae7a1a7c83b0 100644
+--- a/cmd/abootimg.c
++++ b/cmd/abootimg.c
+@@ -22,6 +22,11 @@ ulong get_abootimg_addr(void)
+ 	return (_abootimg_addr == -1 ? image_load_addr : _abootimg_addr);
  }
  
-+int bootflow_iter_check_mmc(const struct bootflow_iter *iter)
++void set_abootimg_addr(ulong addr)
 +{
-+	const struct udevice *media = dev_get_parent(iter->dev);
-+	enum uclass_id id = device_get_uclass_id(media);
-+
-+	log_debug("uclass %d: %s\n", id, uclass_get_name(id));
-+	if (id == UCLASS_MMC)
-+		return 0;
-+
-+	return -ENOTSUPP;
++	_abootimg_addr = addr;
 +}
 +
- int bootflow_iter_check_sf(const struct bootflow_iter *iter)
+ ulong get_ainit_bootimg_addr(void)
  {
- 	const struct udevice *media = dev_get_parent(iter->dev);
-diff --git a/include/bootflow.h b/include/bootflow.h
-index 080ee8501225..6058ddd89b16 100644
---- a/include/bootflow.h
-+++ b/include/bootflow.h
-@@ -407,6 +407,15 @@ void bootflow_remove(struct bootflow *bflow);
+ 	return _ainit_bootimg_addr;
+@@ -32,6 +37,11 @@ ulong get_avendor_bootimg_addr(void)
+ 	return _avendor_bootimg_addr;
+ }
+ 
++void set_avendor_bootimg_addr(ulong addr)
++{
++	_avendor_bootimg_addr = addr;
++}
++
+ static int abootimg_get_ver(int argc, char *const argv[])
+ {
+ 	const struct andr_boot_img_hdr_v0 *hdr;
+diff --git a/include/image.h b/include/image.h
+index c5b288f62b44..df2decbf5c2a 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -1970,6 +1970,13 @@ bool is_android_vendor_boot_image_header(const void *vendor_boot_img);
   */
- int bootflow_iter_check_blk(const struct bootflow_iter *iter);
+ ulong get_abootimg_addr(void);
  
 +/**
-+ * bootflow_iter_check_mmc() - Check that a bootflow uses a MMC device
++ * set_abootimg_addr() - Set Android boot image address
 + *
-+ * This checks the bootdev in the bootflow to make sure it uses a mmc device
-+ *
-+ * Return: 0 if OK, -ENOTSUPP if some other device is used (e.g. ethernet)
++ * Return: no returned results
 + */
-+int bootflow_iter_check_mmc(const struct bootflow_iter *iter);
++void set_abootimg_addr(ulong addr);
 +
  /**
-  * bootflow_iter_check_sf() - Check that a bootflow uses SPI FLASH
+  * get_ainit_bootimg_addr() - Get Android init boot image address
+  *
+@@ -1984,6 +1991,13 @@ ulong get_ainit_bootimg_addr(void);
+  */
+ ulong get_avendor_bootimg_addr(void);
+ 
++/**
++ * set_abootimg_addr() - Set Android vendor boot image address
++ *
++ * Return: no returned results
++ */
++void set_avendor_bootimg_addr(ulong addr);
++
+ /**
+  * board_fit_config_name_match() - Check for a matching board name
   *
 
 -- 
