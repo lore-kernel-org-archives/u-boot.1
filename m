@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81CC1C27C4F
-	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 20:30:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48F8DC27C75
+	for <u-boot@archiver.kernel.org>; Thu, 13 Jun 2024 21:48:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A6FC88963;
-	Thu, 13 Jun 2024 22:30:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7AB6888953;
+	Thu, 13 Jun 2024 23:48:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UCNp2Sfc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PhdSPU5p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9FC888953; Thu, 13 Jun 2024 22:30:17 +0200 (CEST)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
+ id 9DBE888918; Thu, 13 Jun 2024 23:48:23 +0200 (CEST)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D5B68895D
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 22:30:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4AABB8894E
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 23:48:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-3c9d70d93dbso828734b6e.3
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 13:30:15 -0700 (PDT)
+ spf=pass smtp.mailfrom=robertcnelson@gmail.com
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-6b06bedc5d1so9102006d6.0
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 14:48:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718310614; x=1718915414; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1718315300; x=1718920100; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BReW5IZZmGqbtlK5XYOCCqMlx5KujHc5iRn265dyM98=;
- b=UCNp2Sfcp+2uO9sQOMipxBlqKm48jSusQJUbxT0O9lPMgDcYtQ9I32qLSw5XpyKTAN
- DK18L6C8j9e/jBUu6Y1QuLvUXi6UjZq0GaTbqwKDzVsd2HOGCOPUrSmO8UaqXEk9YEOR
- GKiklqPmYEhcdF7cJh7CpjggFUMRgphP+yiiI=
+ bh=hmEoJy7mLL/w1IfC+zpmUSHs0MQN63NFz8Pw7IdYFZo=;
+ b=PhdSPU5p6mdJdYk3TBzXVn94CjnF/94gW3AjPLJaNPITW/uzYpaERZjEbpUdUb0dC9
+ QrCqOgwEPlxyD07XqHaNhcdM7fbkDnMYMLR3Sk7QsCw4dtqdB1zGU2tpn65KGcyiQNzD
+ B18ZPHCWhBBQcrzT3UTAFsZCdBljeevGv1Wd+ltyNm/Dzlv9sWlTxwElH4SxKcjVlZga
+ V3Yok1stnCH1ysCidLBULb23Fvmp6KPmCeJTLy+pz/SGi6PRmffMA1UHeooiEn21apFe
+ SxtUwLo1eSSIhgx6Qltdf/SqH8YFYr8w5a2Mrb4MpQj2/0hoscDWZLPnZLegihhQWB/9
+ NbPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718310614; x=1718915414;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1718315300; x=1718920100;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BReW5IZZmGqbtlK5XYOCCqMlx5KujHc5iRn265dyM98=;
- b=ZtcpOm+xi9lfPZXaF++fmEaZlOPPB9heJvn8P7Ip+75dMVnV/91wD79D96izywAOJR
- U9zN5PRLa4J3ofgN8+84QEgD+Oy3b+w2bokOoq71orTDcs/NY51o+MeBw/2jWyQTErjY
- QRUFjnL7WzAtHiD0wPovpPTFFvhE1nS+heuNOXh1ZwwBEYKbdLyV995GVy/Job89riSP
- d4CS0/icV//sJnvhR1LQT+xyC8bu4UgCW+2Mk97T3AChsC0mX6cZpLep7/5K2pta6vH5
- ha3pobWk1wr1iXsddMz+pixW0Syqch5z2GoPsqtii3djS+JuShMXk30oRMvMI9eq49KF
- 32cA==
-X-Gm-Message-State: AOJu0YyHDNYu6VIZqVupbMNUUXNz+BeJz9tvI6bBJL1QpRHvJmCZf6o3
- NUbTfDNcBpGEe4cAs47K0BLyaZAxJPFgGRf+rIQ8RiBA2D26TQszZWbuN3gwGjg=
-X-Google-Smtp-Source: AGHT+IGGUqCx5TFvFFaxEEXbC0+f0tLF6JS+vlMS2pL39qQ6rM9/9bJU+0AmHJVaiSPhexGPbt2itw==
-X-Received: by 2002:a05:6870:8a0a:b0:254:a778:6fbd with SMTP id
- 586e51a60fabf-2584288f163mr873912fac.6.1718310613969; 
- Thu, 13 Jun 2024 13:30:13 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-45.totalplay.net.
- [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-6fb5b641325sm330620a34.56.2024.06.13.13.30.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Jun 2024 13:30:13 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Jagan Teki <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>, 
- Manorit Chawdhry <m-chawdhry@ti.com>
-Cc: u-boot@lists.denx.de, Nishanth Menon <nm@ti.com>, 
- Udit Kumar <u-kumar1@ti.com>, Vaishnav Achath <vaishnav.a@ti.com>, 
- Prasanth Mantena <p-mantena@ti.com>, Jon Humphreys <j-humphreys@ti.com>, 
- Pratyush Yadav <p.yadav@ti.com>, Apurva Nandan <a-nandan@ti.com>
-In-Reply-To: <20240604-b4-upstream-j721s2-ospi-support-v3-0-738aa77d9202@ti.com>
-References: <20240604-b4-upstream-j721s2-ospi-support-v3-0-738aa77d9202@ti.com>
-Subject: Re: [PATCH v3 0/4] Enable OSPI boot for j721s2
-Message-Id: <171831061283.636971.11753895882895466393.b4-ty@konsulko.com>
-Date: Thu, 13 Jun 2024 14:30:12 -0600
+ bh=hmEoJy7mLL/w1IfC+zpmUSHs0MQN63NFz8Pw7IdYFZo=;
+ b=Oxc5GW7taJflA53xsHhpg1Egil0uMF4Xg0bTmywHWqWqRr5MIgm1sEOScwU+j2CdD+
+ ia1Ur9v2gNxRrEFtEMdoqwec/sAkYxnR8mgTd+D5EDavoJtK59ZPze3+gnsazaCQAJFg
+ yhX5+ybUDZ1ZC6AyVnC3h5p3il2AXeq0ww5o/FwrOuzY2cGoB0bzr+DerO/nyoCYt2VK
+ pVTolkYgoHzmVAYhVGYX4QJHVcLZyAzCZfiVJ7ANpB+La8DGN20i7DMpkxKcNHv6B1ym
+ U74hQKCzeFvP0MeP6Fo/NufUZqXgIDxmvHQJHvfQUnIiQFMcTEvV+zHODDdToUvO6GST
+ HU0w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWZGGnF/YgtyytNWBv5U2G1eqb4igKg53ckX0Bqpg9OepspQ+DahEUTnth/iIVLq/6Ib/83Yp1QCR/rJgJCCjv1mXqZ7w==
+X-Gm-Message-State: AOJu0Yx+svdti3yABaen4OLOhle1BEacCv0PTWnJ+MYzRPUYywrQwf5c
+ cZJ5ndo7k3Fus7Sl8VCSpmR/kIMGpRx3Hnn3GG3U49TmI5s7qcQklp7L0aSgEkXwgF/zDgraF0O
+ 7zsJT+fq5Khvp3s3LYuSmgRAd1UU=
+X-Google-Smtp-Source: AGHT+IF1WmTRs3BgG6Gy6pulsQk9ZIVm3fmibDLASHbbjLG6U1UDo+3ztk0lAAY9RC4TaafcR/F+wIDFa9n9iTn7RsU=
+X-Received: by 2002:a0c:dc88:0:b0:6b0:9479:cdc9 with SMTP id
+ 6a1803df08f44-6b2afd61676mr8469536d6.49.1718315299998; Thu, 13 Jun 2024
+ 14:48:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+References: <20240613080604.3828083-1-d-gole@ti.com>
+In-Reply-To: <20240613080604.3828083-1-d-gole@ti.com>
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Thu, 13 Jun 2024 16:47:53 -0500
+Message-ID: <CAOCHtYjAFE0sbyYRXnbsv9EohNfH99vsuVYiZbi2Ami_xdoxWw@mail.gmail.com>
+Subject: Re: [PATCH] board: beagleplay: Fix the bootpart to pick from root
+ partition
+To: Dhruva Gole <d-gole@ti.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
+ Vibhore Vardhan <vibhore@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Nishant Menon <nm@ti.com>, c-shilwant@ti.com, 
+ m-chawdhry@ti.com, vigneshr@ti.com, Judith Mendez <jm@ti.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,17 +93,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 04 Jun 2024 11:39:09 +0530, Manorit Chawdhry wrote:
+On Thu, Jun 13, 2024 at 3:06=E2=80=AFAM Dhruva Gole <d-gole@ti.com> wrote:
+>
+> The Kernel Image and DTB files are supposed to be picked from the rootfs
+> of the SD Card, this fails in legacy boot flow because bootpart is set
+> to 1:1. Fix it.
 
-> The series enables ospi boot for j721s2.
-> 
-> Test logs: https://gist.github.com/manorit2001/6bb91885c608e3a8cb0267ab2c614781
-> 
-> 
+and where is that rule defined?
 
-Applied to u-boot/next, thanks!
+Production boards ship with Kernel Image and DTB's in the 1st fat partition=
+..
 
--- 
-Tom
+Regards,
 
-
+--=20
+Robert Nelson
+https://rcn-ee.com/
