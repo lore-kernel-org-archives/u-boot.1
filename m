@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7DE7C27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 16:36:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BDEFC27C77
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 16:36:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 379D188A21;
+	by phobos.denx.de (Postfix) with ESMTP id 97E9788A48;
 	Fri, 14 Jun 2024 18:36:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="AA6hI2Ca";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="nmayboHm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6587688A30; Fri, 14 Jun 2024 18:36:08 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 6A3DD88A37; Fri, 14 Jun 2024 18:36:09 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4615388A05
+ by phobos.denx.de (Postfix) with ESMTPS id 679E988A09
  for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 18:36:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45EGZs3g058027;
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45EGZsWA058579;
  Fri, 14 Jun 2024 11:35:54 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1718382954;
- bh=xj4tuFSfavUEX0YkXbLgDvuq0KHv7H/wgXYak/EdBPw=;
+ bh=V7UqHPd1UzWtvccNC4EBC55h1l89B9bqpnfRQxhMoJs=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=AA6hI2CazdH3n57T4GMEksrNfjN3+gndovGOIyoH/EEb4QwnqOSmSy2IzYnNcLtbm
- 2hwz606AOUUnigcp2yvWVQ/LZmVsl09SZo4UfBG/9QsuLpkiK6mnbU+Rds7lK9uu/d
- In9owzQOiaD37fl3wHLsl3UT9J7BtzGkT7cVPNSE=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45EGZrk2030299
+ b=nmayboHmYNOdW4dml5upiU58pQeh9WfB3bVX9OJab+wnd8YXPyyes7r/5fgPlikGA
+ o6VD1F7DMJue++3LA9nDp9Bfo1E0m6RBYrYYDKXS/+2/vZ5UemsZuXMyHRCoClv/HR
+ F5fNPFJoPIZdwpFMacFCCHPAA36d1E0qQQ4HoShA=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45EGZsdP076561
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 14 Jun 2024 11:35:53 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 14 Jun 2024 11:35:54 -0500
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 14
  Jun 2024 11:35:53 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Fri, 14 Jun 2024 11:35:53 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45EGZrDX027186;
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45EGZrwv124105;
  Fri, 14 Jun 2024 11:35:53 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
@@ -67,10 +67,9 @@ To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ilias Apalodimas
  <ilias.apalodimas@linaro.org>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH v7 03/24] configs: ti: Create base EFI capsule configs for TI
- K3 devices
-Date: Fri, 14 Jun 2024 11:35:30 -0500
-Message-ID: <20240614163551.2610212-4-j-humphreys@ti.com>
+Subject: [PATCH v7 11/24] configs: beagleplay: Enable DFU for MMC
+Date: Fri, 14 Jun 2024 11:35:38 -0500
+Message-ID: <20240614163551.2610212-12-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240614163551.2610212-1-j-humphreys@ti.com>
 References: <20240614163551.2610212-1-j-humphreys@ti.com>
@@ -94,24 +93,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-To better scale with the number of boards, separate TI K3 EFI capsule
-configs into its own file that can be shared across TI K3 boards.  This
-will allow any platform level config changes to be done once.
+MMC DFU is required for capsule updates.
 
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- configs/k3_efi_capsule.config | 2 ++
- 1 file changed, 2 insertions(+)
- create mode 100644 configs/k3_efi_capsule.config
+ configs/am62x_beagleplay_a53_defconfig | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/configs/k3_efi_capsule.config b/configs/k3_efi_capsule.config
-new file mode 100644
-index 00000000000..e31cea37269
---- /dev/null
-+++ b/configs/k3_efi_capsule.config
-@@ -0,0 +1,2 @@
-+CONFIG_EFI_CAPSULE_ON_DISK=y
-+CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
+index ec62670d55d..dbdbaf98348 100644
+--- a/configs/am62x_beagleplay_a53_defconfig
++++ b/configs/am62x_beagleplay_a53_defconfig
+@@ -70,6 +70,9 @@ CONFIG_SPL_OF_TRANSLATE=y
+ CONFIG_CLK=y
+ CONFIG_SPL_CLK=y
+ CONFIG_CLK_TI_SCI=y
++CONFIG_DFU_MMC=y
++CONFIG_SYS_DFU_DATA_BUF_SIZE=0x40000
++CONFIG_SYS_DFU_MAX_FILE_SIZE=0x180000
+ CONFIG_DMA_CHANNELS=y
+ CONFIG_TI_K3_NAVSS_UDMA=y
+ CONFIG_TI_SCI_PROTOCOL=y
 -- 
 2.34.1
 
