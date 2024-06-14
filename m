@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BB04C27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 09:40:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DF51C27C75
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 09:40:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5951988993;
+	by phobos.denx.de (Postfix) with ESMTP id BDC3F889AB;
 	Fri, 14 Jun 2024 11:40:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="onnXuu0C";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="4kYxOJf7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 00ED7889A2; Fri, 14 Jun 2024 11:40:39 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CAA29889A7; Fri, 14 Jun 2024 11:40:38 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99E9288991
+ by phobos.denx.de (Postfix) with ESMTPS id C50F18899F
  for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 11:40:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-35f23f3da44so1816202f8f.0
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 02:40:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718358036; x=1718962836; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=a3VAu3452EYj3StLYM2MCrNVWbFfM3CFBmatFjAMTx0=;
- b=onnXuu0CRlLSeHDCBUNx7cFmIfIh9d80IPBs9xKG2iTiJ7xv2eOr6x2344/KaNMtni
- DBT4nUGMSTNcmurAaG3IqTVDltqaj4cTjyguB0KJ+jXGq2wMZoXsETJLBjb9802gRS5N
- gY2ct/4a7PQEwro1VHHKhvcmGZK435M8XRmf8MtU3utsdoH4niL938YbfcYcNfi3QrFv
- QeWn0J0+ivMkuI045Kv5sEvRp4mH8gO6K8RuPkvDKtYqHC5eyLnSxaxhNMh9okZDOMzj
- wXHlxq0El7EJKACwno+c+HYwRYc4qwBfhjhXbjKjK8FXC77b7UMi47UjAZFUfZSvKZh8
- /m2A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718358036; x=1718962836;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=a3VAu3452EYj3StLYM2MCrNVWbFfM3CFBmatFjAMTx0=;
- b=HnGocowQePHMwQXiZflLm7T3uzTZBzBSEIHGl69qWomfoRFLsjJFizxfj+hGt6s8tu
- KJH/fXanJG/8pLBEpQ8cuaypiiPuhvrM3Er+4/ucIlirqVviRkM92Db8qQihS6keyQz+
- KrrMs5mEZ81TcPN22eHM1O2C0O07SBGv547CIru29j3zGMWLX6j7blU7S9+TA+lyxGPb
- qdpofm9mkus/O4o4ZrUfJNujxiK+eB8h68Tp8SMcZSnis9QxQJAG9lS3Rq4yLMh8FkDf
- cRB7BxEW3y9OOAahEUXnBXCwUDriX30PF/OCvet1+aE0EZZt59RxgDEbMhvsQ4ddP8IE
- cHLg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWoCXYlu8sX8yFYTw12+Se760mkQWgFHuGdBjKqaZiFA//rTEXJTYVeceQgxaC9Y0jyI3fINjs7vB1Jz9aqlNGnFvKPRg==
-X-Gm-Message-State: AOJu0YwCajRkTbfNfImYyo6z7Spq0VJzs9lbTueqfQOI5yaNjRAROKIJ
- IpV5YevchJylXAljyZA9Njz8NJ/uL552Xs7OcJRQkylR58iMzs/RX1aPq2vhI0U=
-X-Google-Smtp-Source: AGHT+IGR1sbti5o1aib0DzjGNI1g7+61ZT8R583jgNX9BxCnc1iEVAssTQvIx1UhGzdt/5n+8vdGug==
-X-Received: by 2002:a05:6000:d09:b0:360:7a0b:9bd3 with SMTP id
- ffacd0b85a97d-3607a771d52mr1345713f8f.0.1718358035844; 
- Fri, 14 Jun 2024 02:40:35 -0700 (PDT)
-Received: from localhost.localdomain (ppp046103020130.access.hol.gr.
- [46.103.20.130]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-360750ad177sm3871451f8f.56.2024.06.14.02.40.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Jun 2024 02:40:35 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: heinrich.schuchardt@canonical.com
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Eddie James <eajames@linux.ibm.com>,
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- u-boot@lists.denx.de
-Subject: [PATCH] doc: describe UEFI measured boot
-Date: Fri, 14 Jun 2024 12:40:30 +0300
-Message-ID: <20240614094031.6013-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.45.1
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=6895721e93=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45E6IoPg010033;
+ Fri, 14 Jun 2024 11:39:58 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ zWfTjPZseeHvFhTzLtyiqf9pGCoGPd3saR5Mkh5TfSI=; b=4kYxOJf7Vjbx/G22
+ Zbs9T/e4kSwlBRwhzu0BnwLYL9lotiOtQuY1TOp7AGrkEa/jLM3qDIW8HTmNC3VU
+ Tkq87A3gi19LU8GoHABYmx1ek1TlyjkbcIsnueaHQxUiJ2A2ZXouZxO/xZ0ZX6zD
+ x8buOnmNmllFHlTWbrcYfqBZuiPkBvhnUC/MyGaogi+BExLe7yFw5VPwUiWTBkyI
+ AnKDkgOYQPnsvtFNHD8L1T7U4AA/Af8VfyKEzUSsT0w9zZsxyrp61ZoNGcIwGJsZ
+ U4k0Uvjggv/V813ZMiQie3xvUD1tqmxVEaUbc5/Iu0Je2RreZVg63zDhoRA1PzEx
+ 0s7Z2A==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3ypbp4fug1-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 14 Jun 2024 11:39:58 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 92BE840044;
+ Fri, 14 Jun 2024 11:39:52 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D1B432115F9;
+ Fri, 14 Jun 2024 11:39:26 +0200 (CEST)
+Received: from [10.252.18.60] (10.252.18.60) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Fri, 14 Jun
+ 2024 11:39:26 +0200
+Message-ID: <52616208-fb42-479c-a9c5-4164c11d6d2c@foss.st.com>
+Date: Fri, 14 Jun 2024 11:39:25 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] ARM: stm32: Fix livetree conversion on STM32MP15xx DHSOM
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ <u-boot@dh-electronics.com>, <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20240606130305.24563-1-marex@denx.de>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20240606130305.24563-1-marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.252.18.60]
+X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-06-13_15,2024-06-13_02,2024-05-17_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,56 +90,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We currently only describe the process to enable measured boot using
-bootm. Describe the UEFI requirements as well which predate bootm.
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- doc/usage/measured_boot.rst | 24 ++++++++++++++++++++++--
- 1 file changed, 22 insertions(+), 2 deletions(-)
 
-diff --git a/doc/usage/measured_boot.rst b/doc/usage/measured_boot.rst
-index 9691904a9d8a..1b5dd1dcc438 100644
---- a/doc/usage/measured_boot.rst
-+++ b/doc/usage/measured_boot.rst
-@@ -7,6 +7,26 @@ U-Boot can perform a measured boot, the process of hashing various components
- of the boot process, extending the results in the TPM and logging the
- component's measurement in memory for the operating system to consume.
- 
-+The functionality is available when booting via the EFI subsystem or 'bootm'
-+command.
-+
-+UEFI subsystem
-+--------------
-+The EFI subsystem implements the `EFI TCG protocol
-+<https://trustedcomputinggroup.org/resource/tcg-efi-protocol-specification/>`_
-+and the `TCG PC Client Specific Platform Firmware Profile Specification
-+<https://trustedcomputinggroup.org/resource/pc-client-specific-platform-firmware-profile-specification/>`_
-+which defines the binaries to be measured and the corresponding PCRs used.
-+
-+UEFI requirements
-+~~~~~~~~~~~~~~~~~
-+* A hardware TPM 2.0 supported by the U-Boot drivers
-+* CONFIG_EFI_TCG2_PROTOCOL=y
-+* CONFIG_EFI_TCG2_PROTOCOL_EVENTLOG_SIZE=y
-+* optional CONFIG_EFI_TCG2_PROTOCOL_MEASURE_DTB=y will measure the loaded DTB in PCR 0
-+
-+bootm
-+-----
- By default, U-Boot will measure the operating system (linux) image, the
- initrd image, and the "bootargs" environment variable. By enabling
- CONFIG_MEASURE_DEVICETREE, U-Boot will also measure the devicetree image.
-@@ -15,8 +35,8 @@ The operating system typically would verify that the hashes found in the
- TPM PCRs match the contents of the event log. This can further be checked
- against the hash results of previous boots.
- 
--Requirements
--------------
-+bootm requirements
-+~~~~~~~~~~~~~~~~~~
- 
- * A hardware TPM 2.0 supported by the U-Boot drivers
- * CONFIG_TPM=y
--- 
-2.45.1
+On 6/6/24 15:02, Marek Vasut wrote:
+> Unlike fdt_node_check_compatible() which returns 0 if node is compatible,
+> ofnode_device_is_compatible() return true which is non-zero if node is
+> compatible. The intention of the code is to exit from the function in
+> case the node is not compatible with "micrel,ks8851-mll". Add the missing
+> invert into the conditional to reinstate original behavior.
+> 
+> This exposes a follow up problem caused by conversion to DM based FMC2 EBI
+> driver, where the FMC2 EBI is not configured when accessed by this code.
+> Probe the KS8851 MAC, which also configures the FMC2 EBI as a dependency,
+> so that the KS8851 MAC CCR register can be accessed over the FMC2 EBI bus
+> and checked for EEPROM present bit.
+> 
+> Fixes: 5a605b7c8615 ("board: dhelectronics: stm32mp1: convert to livetree")
+> Signed-off-by: Marek Vasut <marex@denx.de>
+> ---
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@dh-electronics.com
+> Cc: u-boot@lists.denx.de
+> Cc: uboot-stm32@st-md-mailman.stormreply.com
+> ---
+>  board/dhelectronics/dh_stm32mp1/board.c | 15 +++++++++++++--
+>  1 file changed, 13 insertions(+), 2 deletions(-)
+> 
+> diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
+> index ebd45f9053f..4f4f537fee5 100644
+> --- a/board/dhelectronics/dh_stm32mp1/board.c
+> +++ b/board/dhelectronics/dh_stm32mp1/board.c
+> @@ -76,14 +76,25 @@
+>  
+>  static bool dh_stm32_mac_is_in_ks8851(void)
+>  {
+> -	ofnode node;
+> +	struct udevice *udev;
+>  	u32 reg, cider, ccr;
+> +	char path[256];
+> +	ofnode node;
+> +	int ret;
+>  
+>  	node = ofnode_path("ethernet1");
+>  	if (!ofnode_valid(node))
+>  		return false;
+>  
+> -	if (ofnode_device_is_compatible(node, "micrel,ks8851-mll"))
+> +	ret = ofnode_get_path(node, path, sizeof(path));
+> +	if (ret)
+> +		return false;
+> +
+> +	ret = uclass_get_device_by_of_path(UCLASS_ETH, path, &udev);
+> +	if (ret)
+> +		return false;
+> +
+> +	if (!ofnode_device_is_compatible(node, "micrel,ks8851-mll"))
+>  		return false;
+>  
+>  	/*
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
+Thanks
+Patrice
