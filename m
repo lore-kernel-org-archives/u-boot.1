@@ -4,76 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6772C27C79
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 12:35:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02993C27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 12:44:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08CF388641;
-	Fri, 14 Jun 2024 14:35:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 6563E889DB;
+	Fri, 14 Jun 2024 14:44:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="lQvr6suT";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UgQemgDD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB851888F6; Fri, 14 Jun 2024 14:35:35 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A472B889DF; Fri, 14 Jun 2024 14:44:52 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69625883F6
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 14:35:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A66A889D8
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 14:44:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1718368528; x=1718973328; i=xypron.glpk@gmx.de;
- bh=mN0nPDeHAsGZISHkg+fJIm9Jf658NniaSXHeHWlS2dc=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=lQvr6suTbsEyR9wqYvfI4pzewn0bNQJZoOop1Humo1wRsIAfe9WvsghvHWqgVMo6
- 3YTw27awrZ5GZU1jtVAaBH9akUJte5XYYdXZFDiTCFEhWlzaN1BRriz8M2VCLg6GM
- MZE3Vo/Buapk6CDadi1X0W077dXA7GM+sU0iFvRIUCEV31P+y0paPVtI60NBLDWSR
- v7FkURTGwb0Hvzrlexzoj8qmjv/9cYxqHCUqYjuecPhi6IsyeVsbev0qOvD1WfNcq
- CV3yrOvXrCbiPqWxH1cRCKqbm7fwd3p0R/YGDLO3b7Z+MR4yS+3FysIhZVGaT37CY
- /bIogggFwDCaiVFbTQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.126] ([178.202.41.25]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MgvvT-1ssmoX0Yfd-00gkfk; Fri, 14
- Jun 2024 14:35:28 +0200
-Message-ID: <b9307a87-5c4b-4ef3-b635-86879b2a9742@gmx.de>
-Date: Fri, 14 Jun 2024 14:35:27 +0200
+ spf=pass smtp.mailfrom=j-choudhary@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45ECiiZp125643;
+ Fri, 14 Jun 2024 07:44:44 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1718369084;
+ bh=2i03Ocg5klrmqfHO6dpvXGSbjONKfcL94OqEQi6eAFk=;
+ h=From:To:CC:Subject:Date;
+ b=UgQemgDD3t8gAq3ZGge1mFgQ1gJEbv6jCsYT6amA6qJ8mzC5CRWovezm+NNX8Ae4K
+ zlYx/Y5czAQhpzGmtlfF9tXfJuaAAFDSpPy0gZMPcUHHlfJOuH85PNtB+YJ/k7qB19
+ xSOprSVCli2CPZlplAkJLAG6zj0yphiI4ro9HqZA=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45ECiirK054618
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 14 Jun 2024 07:44:44 -0500
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 14
+ Jun 2024 07:44:44 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 14 Jun 2024 07:44:44 -0500
+Received: from localhost (jayesh-hp-probook-440-g8-notebook-pc.dhcp.ti.com
+ [172.24.227.55])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45ECih7h047237;
+ Fri, 14 Jun 2024 07:44:43 -0500
+From: Jayesh Choudhary <j-choudhary@ti.com>
+To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <u-kumar1@ti.com>,
+ <a-bhatia1@ti.com>, <afd@ti.com>, <j-choudhary@ti.com>
+CC: <n-francis@ti.com>, <nm@ti.com>, <joao.goncalves@toradex.com>,
+ <j-humphreys@ti.com>, <d.haller@phytec.de>, <hnagalla@ti.com>,
+ <bb@ti.com>, <seanga2@gmail.com>, <sjg@chromium.org>,
+ <clamor95@gmail.com>, <martyn.welch@collabora.com>,
+ <m-chawdhry@ti.com>, <a-limaye@ti.com>, <sebin.francis@ti.com>
+Subject: [PATCH v2 0/8] Enable QoS for DSS on J7 family of TI SoCs
+Date: Fri, 14 Jun 2024 18:14:34 +0530
+Message-ID: <20240614124442.178280-1-j-choudhary@ti.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] doc: describe UEFI measured boot
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Eddie James <eajames@linux.ibm.com>, u-boot@lists.denx.de
-References: <20240614121404.16952-1-ilias.apalodimas@linaro.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240614121404.16952-1-ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:1Yj1YBpZJUny9BsDPn4vpVqjuDlIGsXqbEaWMROZc/QUS9HHdCf
- 4Q6/spprk/EcfCH65SkX7J7MG4mQ6CbHzaYuQSm2NSxR88Gl62SPUDTVXGyD6fFXY4BTl5+
- BbaxsvcnaoTOYH1pC9K+c/1IqpXtR0IB7nVsP7dJPVUw9s04iIwSdxRN0UnQPrz+ypvGLoF
- p5Zq6e53htfW9sLzXkRlA==
-UI-OutboundReport: notjunk:1;M01:P0:mTc67++QslQ=;u/vU3uvN3q+wsoC1ElQwcJLEG5t
- 8QC/oIKZ2iuz+Q40zQofsFeLztMLA43cE5MnSlwL1hAlZOrFXMFJlGED5Xme7Zq2nIj+0ZOfl
- WLG5HGYu0P9fDnWsmERL4Aj97ifVTJsLFsXOfqU6YZxiCD4dZISTmAM9nsK47C4z+93H7utfJ
- +01M/fynIjC57IVNh33FEBruXfUvsrg889NRoOfMGgkpdL9tU5P/IfwV0iYUJ60gvlT46n896
- B3bCTXFQjldRNsdq/IqE1Pdhq2nK/1QSdrMg0RQ9GrbgAivj9bG7X7y91GLpT7eS+yfpFHgPe
- IrQBE/RqiVkonix5VQFc8q2N4QHYIG37MGkWMMzzgHIEcNGeurRbbnDjvruXMD7f4CgwfWI/P
- w/4oEBtS7CaK4htBG3l9J241jp9nFYktwJkFpr0XZfGdu0/1VD/cOU8OE1ykI6aEgXhQPs9Mh
- oClVAqTNIYh5x9UMkaaHBgZhbAy9KTOpjhjr7FmC3QQhfhgiy/eOKrAgNu3/HV7uuPSLjaqQB
- mT0PWsPXDqVBujFjtC+uIBtL1EB7eJRztqBtoenM6E2YdytPcg/I0SfTNuJRjreGMMQg4U9m9
- uw/k87KXbhYGmTCn2NF+CVB8hTKCd/mugoWECmVs33zqiWCA8qMnjesahzRtWyVW1XjpByGAU
- QqjJr8slHXLvYxBfsVXcheL/QnUrXWPgYcbH7JPQKn4PA5tul5pCrKs8NILL4wnw/2/YH+kVh
- cA3TotLFN27lpgomRM4oR3M/l7EAXF/xWIEQoK/VBre+flR1PVuhDQ7N8xB614nngLULjyYqB
- RfTml9ELit//+zXOFF6x/z8Cu1lWX4rFBWb/aetREO+nI=
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,98 +83,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 14.06.24 14:14, Ilias Apalodimas wrote:
-> We currently only describe the process to enable measured boot using
-> bootm. Describe the UEFI requirements as well which predate bootm.
->
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
-> Changes since v1:
-> - fixed remarks from Heinrich on titling and DTB measured PCR
->   doc/usage/measured_boot.rst | 28 ++++++++++++++++++++++++----
->   1 file changed, 24 insertions(+), 4 deletions(-)
->
-> diff --git a/doc/usage/measured_boot.rst b/doc/usage/measured_boot.rst
-> index 9691904a9d8a..b5f7b05aeb02 100644
-> --- a/doc/usage/measured_boot.rst
-> +++ b/doc/usage/measured_boot.rst
-> @@ -7,19 +7,39 @@ U-Boot can perform a measured boot, the process of has=
-hing various components
->   of the boot process, extending the results in the TPM and logging the
->   component's measurement in memory for the operating system to consume.
->
-> +The functionality is available when booting via the EFI subsystem or 'b=
-ootm'
-> +command.
-> +
-> +UEFI measured boot
-> +------------------
-> +The EFI subsystem implements the `EFI TCG protocol
-> +<https://trustedcomputinggroup.org/resource/tcg-efi-protocol-specificat=
-ion/>`_
-> +and the `TCG PC Client Specific Platform Firmware Profile Specification
-> +<https://trustedcomputinggroup.org/resource/pc-client-specific-platform=
--firmware-profile-specification/>`_
-> +which defines the binaries to be measured and the corresponding PCRs to=
- be used.
-> +
-> +Requirements
-> +~~~~~~~~~~~~
-> +* A hardware TPM 2.0 supported by an enabled U-Boot driver
-> +* CONFIG_EFI_TCG2_PROTOCOL=3Dy
-> +* CONFIG_EFI_TCG2_PROTOCOL_EVENTLOG_SIZE=3Dy
-> +* optional CONFIG_EFI_TCG2_PROTOCOL_MEASURE_DTB=3Dy will measure the lo=
-aded DTB in PCR 1
-> +
-> +Measured legacy boot with bootm command
-> +----------------------------------------
+Hello All,
+This series adds the QoS for DSS on J721E, J721S2 and J784S4 family of
+SoCs.
 
-nits:
-The length of the underline should match.
+Before adding the support, cleanup is done for AM62A QoS support[0]
+and common bit mask defines are moved to the common file so that they
+are not defined every time we add QoS support for a new K3 platform.
 
-All of bootm, booti, and bootz invoke bootm_run_states() which calls
-bootm_measure():
+Further, to simplify the logic, macros are used to populate the value
+of registers and values as suggested by Andrew[1]
 
-   Measured legacy boot
-   --------------------
+Before adding QoS support, we need to map the ORDERID to the traffic
+type (RT/NRT) in J7 platforms.
+On J721E, ORDERID 0-7 and 8-15 are two groups which needs to be mapped.
+We are mapping 0-7 to NRT and 8-15 ORDERID as RT for both NAVSS0_NBSS_NB0
+and NAVSS0_NBSS_NB1
+On J721S2 and J784S4, we have 3 groups, 0-3, 4-9, 10-15. Here we are
+mapping first two groups as NRT and 10-15 as RT for both NAVSS0_NBSS_NB0
+and NAVSS0_NBSS_NB1.
 
-   The commands booti, bootm, and bootz can be used for measured boot
-   using the legacy entry point of the Linux kernel.
+Changelog v1->v2:
+- Simplify the logic to populate values[1]
+- Remove ASEL type which is to be taken up separately as suggested in [2]
 
-Otherwise looks good to me.
+v1 patch link:
+<https://patchwork.ozlabs.org/project/uboot/list/?series=407729&state=%2A&archive=both>
 
-Best regards
+[0]: https://lore.kernel.org/all/20230414072725.8802-1-a-bhatia1@ti.com/
+[1]: https://patchwork.ozlabs.org/project/uboot/patch/20240522113726.302908-2-j-choudhary@ti.com/#3315446
+[2]: https://patchwork.ozlabs.org/project/uboot/patch/20240522113726.302908-3-j-choudhary@ti.com/#3315467
 
-Heinrich
 
->   By default, U-Boot will measure the operating system (linux) image, th=
-e
->   initrd image, and the "bootargs" environment variable. By enabling
-> -CONFIG_MEASURE_DEVICETREE, U-Boot will also measure the devicetree imag=
-e.
-> +CONFIG_MEASURE_DEVICETREE, U-Boot will also measure the devicetree imag=
-e in PCR1.
->
->   The operating system typically would verify that the hashes found in t=
-he
->   TPM PCRs match the contents of the event log. This can further be chec=
-ked
->   against the hash results of previous boots.
->
->   Requirements
-> -------------
-> +~~~~~~~~~~~~
->
-> -* A hardware TPM 2.0 supported by the U-Boot drivers
-> -* CONFIG_TPM=3Dy
-> +* A hardware TPM 2.0 supported by an enabled U-Boot driver
-> +* CONFIG_TPMv2=3Dy
->   * CONFIG_MEASURED_BOOT=3Dy
->   * Device-tree configuration of the TPM device to specify the memory ar=
-ea
->     for event logging. The TPM device node must either contain a phandle=
- to
-> --
-> 2.45.1
->
+Jayesh Choudhary (8):
+  arm: mach-k3: am62a_qos: Move common bit MACROS to k3_qos header file
+  arm: mach-k3: am62a: Simplify the logic for QOS reg and val
+    propagation
+  arm: mach-k3: j721e: Enable QoS for DSS
+  arm: mach-k3: j721s2: Enable QoS for DSS
+  arm: mach-k3: j784s4: Enable QoS for DSS
+  configs: j721e_evm_r5_defconfig: Enable CONFIG_K3_QOS
+  configs: j721s2_evm_r5_defconfig: Enable CONFIG_K3_QOS
+  configs: j784s4_evm_r5_defconfig: Enable CONFIG_K3_QOS
+
+ arch/arm/mach-k3/include/mach/k3-qos.h        |  20 +++
+ arch/arm/mach-k3/j721e/j721e_init.c           |  28 ++++
+ arch/arm/mach-k3/j721s2/j721s2_init.c         |  30 +++++
+ arch/arm/mach-k3/j784s4/j784s4_init.c         |  30 +++++
+ arch/arm/mach-k3/r5/am62ax/am62a_qos.h        |  74 ----------
+ arch/arm/mach-k3/r5/am62ax/am62a_qos_uboot.c  |  24 ++--
+ arch/arm/mach-k3/r5/j721e/Makefile            |   1 +
+ arch/arm/mach-k3/r5/j721e/j721e_qos.h         |  96 +++++++++++++
+ arch/arm/mach-k3/r5/j721e/j721e_qos_uboot.c   | 126 ++++++++++++++++++
+ arch/arm/mach-k3/r5/j721s2/Makefile           |   1 +
+ arch/arm/mach-k3/r5/j721s2/j721s2_qos.h       |  79 +++++++++++
+ arch/arm/mach-k3/r5/j721s2/j721s2_qos_uboot.c | 110 +++++++++++++++
+ arch/arm/mach-k3/r5/j784s4/Makefile           |   1 +
+ arch/arm/mach-k3/r5/j784s4/j784s4_qos.h       |  83 ++++++++++++
+ arch/arm/mach-k3/r5/j784s4/j784s4_qos_uboot.c | 110 +++++++++++++++
+ configs/j721e_evm_r5_defconfig                |   1 +
+ configs/j721s2_evm_r5_defconfig               |   1 +
+ configs/j784s4_evm_r5_defconfig               |   1 +
+ 18 files changed, 730 insertions(+), 86 deletions(-)
+ create mode 100644 arch/arm/mach-k3/r5/j721e/j721e_qos.h
+ create mode 100644 arch/arm/mach-k3/r5/j721e/j721e_qos_uboot.c
+ create mode 100644 arch/arm/mach-k3/r5/j721s2/j721s2_qos.h
+ create mode 100644 arch/arm/mach-k3/r5/j721s2/j721s2_qos_uboot.c
+ create mode 100644 arch/arm/mach-k3/r5/j784s4/j784s4_qos.h
+ create mode 100644 arch/arm/mach-k3/r5/j784s4/j784s4_qos_uboot.c
+
+-- 
+2.25.1
 
