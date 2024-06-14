@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DE0AC27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 11:05:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AB5AC27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 11:05:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62561889BC;
+	by phobos.denx.de (Postfix) with ESMTP id C085C889C2;
 	Fri, 14 Jun 2024 13:05:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 978C4889AA; Fri, 14 Jun 2024 13:05:10 +0200 (CEST)
-Received: from smtp-bc0c.mail.infomaniak.ch (smtp-bc0c.mail.infomaniak.ch
- [IPv6:2001:1600:4:17::bc0c])
+ id A00B8889B3; Fri, 14 Jun 2024 13:05:10 +0200 (CEST)
+Received: from smtp-8faf.mail.infomaniak.ch (smtp-8faf.mail.infomaniak.ch
+ [83.166.143.175])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18A6C889B3
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 13:05:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5BB98889B9
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 13:05:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
  [10.7.10.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4W0xJL5Z3YzxkM;
- Fri, 14 Jun 2024 13:05:06 +0200 (CEST)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4W0xJM4QZNzWT1;
+ Fri, 14 Jun 2024 13:05:07 +0200 (CEST)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4W0xJL2Tr4zRFB; Fri, 14 Jun 2024 13:05:06 +0200 (CEST)
+ id 4W0xJM1XQ9zQlp; Fri, 14 Jun 2024 13:05:07 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Fri, 14 Jun 2024 13:04:54 +0200
-Subject: [PATCH next 2/4] rockchip: ringneck-px30: enable FIT verification
- in SPL
+Date: Fri, 14 Jun 2024 13:04:56 +0200
+Subject: [PATCH next 4/4] rockchip: puma-rk3399: add button support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240614-ringneck-no-gadget-v1-2-d3bc6e5088de@cherry.de>
+Message-Id: <20240614-ringneck-no-gadget-v1-4-d3bc6e5088de@cherry.de>
 References: <20240614-ringneck-no-gadget-v1-0-d3bc6e5088de@cherry.de>
 In-Reply-To: <20240614-ringneck-no-gadget-v1-0-d3bc6e5088de@cherry.de>
 To: Klaus Goger <klaus.goger@cherry.de>, Tom Rini <trini@konsulko.com>, 
@@ -63,38 +62,28 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-This enables FIT verification in SPL for its payload (bl31, u-boot.itb,
-...). This makes PX30 Ringneck match what happens on other Theobroma
-boards.
+The Haikou Devkit exposes 4 buttons over GPIO so let's enable their
+support so their status can be queried from the `button` command from
+the CLI.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- configs/ringneck-px30_defconfig | 3 +++
- 1 file changed, 3 insertions(+)
+ configs/puma-rk3399_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/configs/ringneck-px30_defconfig b/configs/ringneck-px30_defconfig
-index 2ec5f72e47a..e7594b7a67b 100644
---- a/configs/ringneck-px30_defconfig
-+++ b/configs/ringneck-px30_defconfig
-@@ -17,8 +17,10 @@ CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART=y
- CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
- CONFIG_SPL_LOAD_FIT=y
- CONFIG_BOOTSTD_FULL=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/px30-ringneck-haikou.dtb"
- # CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
-@@ -111,6 +113,7 @@ CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_SPL_TINY_MEMSET=y
- CONFIG_TPL_TINY_MEMSET=y
-+# CONFIG_RSA is not set
- CONFIG_LZO=y
- CONFIG_ERRNO_STR=y
- # CONFIG_EFI_LOADER is not set
+diff --git a/configs/puma-rk3399_defconfig b/configs/puma-rk3399_defconfig
+index 5319239f989..bc9a79107e0 100644
+--- a/configs/puma-rk3399_defconfig
++++ b/configs/puma-rk3399_defconfig
+@@ -56,6 +56,8 @@ CONFIG_ENV_SPI_MAX_HZ=50000000
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_SYS_MMC_ENV_DEV=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
++CONFIG_BUTTON=y
++CONFIG_BUTTON_GPIO=y
+ CONFIG_GPIO_HOG=y
+ CONFIG_SPL_GPIO_HOG=y
+ CONFIG_ROCKCHIP_GPIO=y
 
 -- 
 2.45.2
