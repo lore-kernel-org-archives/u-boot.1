@@ -4,79 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BD7BC27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 14:03:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7E7CC27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 14:05:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4FA3889DF;
-	Fri, 14 Jun 2024 16:03:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 1E371889EF;
+	Fri, 14 Jun 2024 16:05:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="s/I3AnzM";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="W8cJdlYX";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="EiV8Efze";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3E18889EF; Fri, 14 Jun 2024 16:03:22 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id F0E00889FB; Fri, 14 Jun 2024 16:05:56 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C326E889D5
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 16:03:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AC6A2889D5
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 16:05:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=6895721e93=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45EClKEn024201;
- Fri, 14 Jun 2024 16:03:08 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- PvDmdYdSJueNoUDrju5J94Xhbl38hPuHF46j5VbtUs8=; b=s/I3AnzMqExqpd8q
- Lppr7bUNZ3i2WNbxKFcAELKoZworAj2ihIi2SBPGpUaIuQQXTuWChGfzHNw3KDOu
- 2POjX0DEnylh81KgNNIhD1aewjvQYu0QPBgO0JTHz17r8ij17giD1RhCyoI+3C0F
- r15qBcmWAjCyMlnsR85H7o4NnVcqvhKssb2f0b+PJ5hlEavGKbSGMJ5kJcCVDIh3
- jx8ZZ9HrWGvlTfNSE1itF5Yo9FnE4gAnErCsyT//XJDfkDWGfcb2Sq6MLwPVvF4o
- HdPCdzMqMN+wKnRSumdpc0WEHxl0Icmt1/o12QvIHjCyrdumVC3btiViitYDatNu
- OS0AGQ==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3ypbp4gvtc-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 14 Jun 2024 16:03:08 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id BBE9040044;
- Fri, 14 Jun 2024 16:03:03 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id AF74C2165F7;
- Fri, 14 Jun 2024 16:02:33 +0200 (CEST)
-Received: from [10.252.18.60] (10.252.18.60) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Fri, 14 Jun
- 2024 16:02:33 +0200
-Message-ID: <64efe66a-40d9-4df2-aad6-60e75eb3b0c4@foss.st.com>
-Date: Fri, 14 Jun 2024 16:02:32 +0200
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4W11Jy4DVCz9t0n;
+ Fri, 14 Jun 2024 16:05:54 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1718373954;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=+p9sv1uz5bN0wMpS2s+ImEsg+kmGVKaraFeN4WzaHjY=;
+ b=W8cJdlYXJ5rclYUoVuu6v4kxu7Vbp2UhJNsi/+NXIm74xp8/2UOSSBMfNjAEKIUoY58qcQ
+ FPuu5sJGPvCTQF8x3SMPoFRq+e6K3QbiOYOgjryYEAXj1ASPz8215ZrJcIBJC+H4Az0gmi
+ Tn7jN6guow9yoors5lpLPR4bZUlfzA7zlcGteqYWZHW0r1EUnpuNrjuqwq1UwGA+N3kpei
+ yWH9kL5QyA7eDTxbTOTU6Ja0PZFsbFc22Hq3AaluDXgVHNGOV9jiH6dbCIypU9gM7NSEky
+ HOJY2JgnEEUv00hd2KXKV6Y441/L76Z/bgLt77qoIqg4huUhLWbKwweOWYQlFw==
+Message-ID: <55de44ab-af24-45a2-9dcf-fbd1a61e7af5@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1718373952;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=+p9sv1uz5bN0wMpS2s+ImEsg+kmGVKaraFeN4WzaHjY=;
+ b=EiV8Efze+TYyqKBhq5+f+XLIot5eXO5k68JyUwehFYGYlG4QNi6yglPtS/ZkNLTtvMtjIX
+ cgHH5aRF3Z2UVd8akOY09W2fEd/cwA99pGk1Bpv3NaXdeY4G0WNRJNDehaxwhpaPz6QAQO
+ HHZUezjWiN/MBZiT7gnrJhDdtixf67gDCOAKOvn4qM8ESVku33W5waPRdLc7c4exIW2T/m
+ XnJen+mSOb5IO+kx3x/tBoLF/u8MdDpv5TPmztjDDgFLSq5d6brXgU2oWvTMDqvDnPA//m
+ B5UrwQX8GR4dWkIjh30NuVX/yCYnuqKHOIMMmHehoigio/aqLq42ul0KJMm4Hg==
+Date: Fri, 14 Jun 2024 16:05:49 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: stm32: Ping IWDG on exit from PSCI suspend code
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-CC: Igor Opaniuk <igor.opaniuk@foundries.io>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>, <u-boot@dh-electronics.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20240419220331.277574-1-marex@denx.de>
- <433560cb-8d8a-4db4-bc9b-d49a05da127b@foss.st.com>
- <ca3c6071-2adf-452b-b4af-574fa57443f9@denx.de>
+Subject: Re: [PATCH 00/11] usb: gadget: Introduce handle_interrupts ops to
+ USB_GADGET_GENERIC uclass
+To: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>,
+ "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: "felipe.balbi@linux.intel.com" <felipe.balbi@linux.intel.com>,
+ "nm@ti.com" <nm@ti.com>,
+ "Thinh.Nguyen@synopsys.com" <Thinh.Nguyen@synopsys.com>,
+ "sjg@chromium.org" <sjg@chromium.org>,
+ "trini@konsulko.com" <trini@konsulko.com>, "lukma@denx.de" <lukma@denx.de>,
+ "mkorpershoek@baylibre.com" <mkorpershoek@baylibre.com>
+References: <20240614005309.34433-1-marek.vasut+renesas@mailbox.org>
+ <a496bca01525cad39174aa6dfe6e1d80abc7ebea.camel@siemens.com>
 Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <ca3c6071-2adf-452b-b4af-574fa57443f9@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.252.18.60]
-X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-06-14_12,2024-06-14_03,2024-05-17_01
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <a496bca01525cad39174aa6dfe6e1d80abc7ebea.camel@siemens.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: ga9sayuaxyruxd38cko6qs7beh4xd84r
+X-MBO-RS-ID: 3608b2af23840ddaed2
+X-Rspamd-Queue-Id: 4W11Jy4DVCz9t0n
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,70 +98,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 6/14/24 12:24 PM, Sverdlin, Alexander wrote:
+> Hi Marek!
 
+Hi,
 
-On 6/14/24 15:06, Marek Vasut wrote:
-> On 6/14/24 2:00 PM, Patrice CHOTARD wrote:
+> On Fri, 2024-06-14 at 02:51 +0200, Marek Vasut wrote:
+>> Introduce .ops for USB_GADGET_GENERIC uclass. The first new ops is
+>> .handle_interrupts which must be implemented by DM capable USB gadget
+>> controller drivers and must implement interrupt handling similar to
+>> dm_usb_gadget_handle_interrupts(). For DM USB gadget drivers this is
+>> a replacement for dm_usb_gadget_handle_interrupts(). Convert the DM
+>> USB gadget drivers to this new ops instead.
 >>
->>
->> On 4/20/24 00:03, Marek Vasut wrote:
->>> Make sure the OS would not get any spurious IWDG pretimeout IRQ
->>> right after the system wakes up. This may happen in case the SoC
->>> got woken up by another source than the IWDG pretimeout and the
->>> pretimeout IRQ arrived immediately afterward, but too late to be
->>> handled by the suspend main loop. In case either of the IWDG is
->>> enabled, ping it first and then return to the OS.
->>>
->>> Signed-off-by: Marek Vasut <marex@denx.de>
->>> ---
->>> Cc: Igor Opaniuk <igor.opaniuk@foundries.io>
->>> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
->>> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
->>> Cc: Simon Glass <sjg@chromium.org>
->>> Cc: Tom Rini <trini@konsulko.com>
->>> Cc: u-boot@dh-electronics.com
->>> Cc: uboot-stm32@st-md-mailman.stormreply.com
->>> ---
->>>   arch/arm/mach-stm32mp/stm32mp1/psci.c | 21 +++++++++++++++++++++
->>>   1 file changed, 21 insertions(+)
->>>
->>> diff --git a/arch/arm/mach-stm32mp/stm32mp1/psci.c b/arch/arm/mach-stm32mp/stm32mp1/psci.c
->>> index 4f2379df45f..e99103910d9 100644
->>> --- a/arch/arm/mach-stm32mp/stm32mp1/psci.c
->>> +++ b/arch/arm/mach-stm32mp/stm32mp1/psci.c
->>> @@ -808,6 +808,27 @@ void __secure psci_system_suspend(u32 __always_unused function_id,
->>>       writel(SYSCFG_CMPENR_MPUEN, STM32_SYSCFG_BASE + SYSCFG_CMPENSETR);
->>>       clrbits_le32(STM32_SYSCFG_BASE + SYSCFG_CMPCR, SYSCFG_CMPCR_SW_CTRL);
->>>   +    /*
->>> +     * Make sure the OS would not get any spurious IWDG pretimeout IRQ
->>> +     * right after the system wakes up. This may happen in case the SoC
->>> +     * got woken up by another source than the IWDG pretimeout and the
->>> +     * pretimeout IRQ arrived immediately afterward, but too late to be
->>> +     * handled by the main loop above. In case either of the IWDG is
->>> +     * enabled, ping it first and then return to the OS.
->>> +     */
->>> +
->>> +    /* Ping IWDG1 and ACK pretimer IRQ */
->>> +    if (gic_enabled[4] & BIT(22)) {
->>> +        writel(IWDG_KR_RELOAD_KEY, STM32_IWDG1_BASE + IWDG_KR);
->>> +        writel(IWDG_EWCR_EWIC, STM32_IWDG1_BASE + IWDG_EWCR);
->>> +    }
->>> +
->>> +    /* Ping IWDG2 and ACK pretimer IRQ */
->>> +    if (gic_enabled[4] & BIT(23)) {
->>> +        writel(IWDG_KR_RELOAD_KEY, STM32_IWDG2_BASE + IWDG_KR);
->>> +        writel(IWDG_EWCR_EWIC, STM32_IWDG2_BASE + IWDG_EWCR);
->>> +    }
->>> +
->>>       /*
->>>        * The system has resumed successfully. Rewrite LR register stored
->>>        * on stack with 'ep' value, so that on return from this PSCI call,
->> Applied to u-boot-stm32/next
+>> DEPENDS: https://patchwork.ozlabs.org/project/uboot/list/?series=410150
 > 
-> This is a fix, should go into /master .
+> I've applied both the dependency and this series and tested on AM62x,
+> which I believe would cover patches 1,4,11 (32-bit SPL,
+> 64-bit SPL + U-Boot proper, booted over USB DFU):
 
-Ah yes :-( , i will send another PR for fixes on monday
-
-Thanks for pointing this
-
-PAtrice
+I appreciate the testing, thanks !
