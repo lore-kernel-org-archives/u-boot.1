@@ -4,76 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CA47C27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 11:21:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAC77C27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 11:44:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8602F88984;
-	Fri, 14 Jun 2024 13:21:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 07DE988BD1;
+	Fri, 14 Jun 2024 13:44:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oUu5LVDZ";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="alc6r4ta";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C16628867C; Fri, 14 Jun 2024 13:21:35 +0200 (CEST)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
+ id 6C02288BB5; Fri, 14 Jun 2024 13:44:23 +0200 (CEST)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83E8688984
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 13:21:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D086388A74
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 13:44:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-2c2d25b5432so1637059a91.2
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 04:21:33 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2ebeefb9a7fso20871921fa.0
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 04:44:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718364092; x=1718968892; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Z8b57N2WBHjS8UvdWioDaWnF2ckBCIwj9jZDjOdO12Q=;
- b=oUu5LVDZkLDYECFMcXX1cPBqs9MaKETYjDLOb+rD94vKYOJbQo7Oeo5W2Rj99jlHEF
- n7qunz+QzauluQQVMnlP7NOTTNyBH3B4BW+2uci2fwo9GVX4zWDsvitx1ZA8FFjB2daT
- qkbgh8VXXDhZH+KP1hoJEJxJSw6qHyCl+AA2Amu49rsXcCj832rqMFgZYrCoBSuYnKLM
- sWJPUtLpjtThwb8y1YY+8VGWLXDi3OZpTZFE9N6+EtKIiubSnuN9V6isE33nzpPHHRqq
- fMprLJea2dTj1Ni2MFgTjuzZQ9euNzJWZkEy+tm+gC5jYYfroUv6plAsHCBkJr2Jp6p+
- L6fg==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1718365454; x=1718970254;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=GwsIREMSR3J5Qczzdsjhpp/8Cftc3bbr+/x7T5/TXjA=;
+ b=alc6r4taU527Jk9ym3FfGolu1z2HskHsGCh4w0z1zfbqzf2zGx74DqNA30UrIwzyf2
+ /Ork7wbJ5UplFSNk6SsEzGQoTShQI3zs/IdnrtVViRfVxZCm4nGiKXIrimEvn9oSgMbG
+ Z6OoVq883Ttd2mRq+bq1+UQhLGHFIHtMKQumSZvDIVtn8QmsC8M76Zt0SHjuqYvwIC4i
+ z1UfSV5rF4mMsJuUhiMEspIqkJvmc8CHECcXEHfe8L4+y/sRqpLjM7m8wBJpWtTaFZN3
+ qzrcULFG5qOY5M9xzvBNl06nvYLxoo94gEUJUu4Re2qgFChkxu8OWpQMyPEcBUhYwC7d
+ SKeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718364092; x=1718968892;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Z8b57N2WBHjS8UvdWioDaWnF2ckBCIwj9jZDjOdO12Q=;
- b=rFArLJh9QgHIIe7011EwMxH7k2lqQvztDoKXeaK/5UmhRdupEbMSbXhZs+yewVOtEN
- m9rZf4jbiGD8paZNkmqwTmLgmoH19DxLXlDaPjCdp6rs6+66+X1rAjFYKPitPMVw7pN7
- yXConuB4Wx5JliAGaX1Jwlu79UI5kwJ1KUZuKv99FzsKz8Sj5vThQh9v+xKasxrDz7Qa
- I/nvr42Sfts26kcGm8FPfQgAkVy5mKMaMjpBjiv37eJJXSy8aUJ7Old6H77+ae4i/V+2
- C3HCDlI82/VMpuyfhl9TwtRehPytKHrnc4FNwxR3IbjSmJOJjFRygPl+nL5SzBClBAXM
- HleA==
+ d=1e100.net; s=20230601; t=1718365454; x=1718970254;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=GwsIREMSR3J5Qczzdsjhpp/8Cftc3bbr+/x7T5/TXjA=;
+ b=NFxIoBdxmERUbOIt8ovC3sAaxIn4RcLK5/024BASxGO1TTbW20Zy0UzkGT0bfT/w7C
+ s3pJJxslwNd6Vt4ZWa9i5H8n7JGdROO/XmmeXC/Mtxz07zZ9jyI40FEvjvMBCpDjmjHq
+ YCJVCq5eqiL92kIA8Hljh7V0Q2PXbKXrgqA5OhsT/XOvcnkVmw3ERo7J7xyUtqedEbFf
+ ojnYPmrRvcLRJN4Rfd4mEn4Jpc3jXxLQZ0T31PJpbdZDzPwvGq/zY43gf9gLhgTk/yqE
+ +DpQR/COfoQX2AQmRioqCafKfTm6c1wfmFpiGo4h4RzB3aS6TN+H0zspch0s0Mfk/FR+
+ S4Vg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWIyHiumefe7EsL764AEVyuRo14C0/86PJnZhuNL3EzfBZ0iuIBh/6rEDecq7XYtjeVUQrxNfZXuUpvtUePA4PTdh/6zQ==
-X-Gm-Message-State: AOJu0Yxcx2Dccmkk2u3BCo/IpTmpFdyi768hZY9cnzV+H326dom6008q
- p1ZDGgeB7Mebu0ARb0RTNAnQWmMYGuqoS1d0czNJv88P+gvxoaoKuqXVrJVUYIhlS445Xnv2MDV
- fqTQdmhLZKFRu7WOaYa7p3CIbxh6ibdh6QixUHA==
-X-Google-Smtp-Source: AGHT+IHDPuug6yM8CONhZnTFG56vP3V4+gZw3xF7Nsc9BYfMeRzT5uErjby3qE97MQ6YgLDqmkh9+QYxN4WaU0v1/7M=
-X-Received: by 2002:a17:90a:d158:b0:2c3:195b:dc2e with SMTP id
- 98e67ed59e1d1-2c4db129324mr2664954a91.9.1718364091966; Fri, 14 Jun 2024
- 04:21:31 -0700 (PDT)
+ AJvYcCXxmEOILAmudei8NDxfHBYGm7vyY5NSezDLgBls1PTrAvfd/T+UH5XzH7MbzNR+5LqdiN9Jkzb9M7iAsbtoJ3lJ3Tt4nw==
+X-Gm-Message-State: AOJu0YxN4beIUsAed7dGAegOKhlW5yOXTmHXOe4HiqNnjR+UCa6s2eat
+ qP+/jMp/bHjiv+L58Myw6C51CGWaLcHC53jONTNaGD5348L12cXhUjJi9y6W0tI=
+X-Google-Smtp-Source: AGHT+IEC4V6zWGD8l/9iD0cpSY2xStfrg1asvbmG6BZCsDQvFPsZq0YCV0ipsWAq6vd6gw5DB2YC1w==
+X-Received: by 2002:a2e:3c0a:0:b0:2eb:d798:ba7c with SMTP id
+ 38308e7fff4ca-2ec0e60e234mr15933721fa.52.1718365453808; 
+ Fri, 14 Jun 2024 04:44:13 -0700 (PDT)
+Received: from localhost ([2a01:cb19:95ba:5000:2b24:7f52:e3f6:e4ef])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-36075104a48sm4218266f8f.100.2024.06.14.04.44.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Jun 2024 04:44:13 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Guillaume LA ROQUE <glaroque@baylibre.com>, Simon Glass <sjg@chromium.org>
+Cc: Julien Masson <jmasson@baylibre.com>, Dmitrii Merkurev
+ <dimorinny@google.com>, Roman Stratiienko <r.stratiienko@gmail.com>, Igor
+ Opaniuk <igor.opaniuk@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 0/5] bootstd: Add Android support
+In-Reply-To: <6de699be-37f1-42fc-a38f-992e79a8e77e@baylibre.com>
+References: <20240613-bootmeth-android-v2-0-397f6e66eb29@baylibre.com>
+ <6de699be-37f1-42fc-a38f-992e79a8e77e@baylibre.com>
+Date: Fri, 14 Jun 2024 13:44:10 +0200
+Message-ID: <87jzirbvg5.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20240614094031.6013-1-ilias.apalodimas@linaro.org>
- <ab7c6516-8d03-4561-b4e7-f619799416ba@gmx.de>
-In-Reply-To: <ab7c6516-8d03-4561-b4e7-f619799416ba@gmx.de>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 14 Jun 2024 14:20:55 +0300
-Message-ID: <CAC_iWjLG5tFgd+c8DQDPQprB9jEKC+KXpXCUHKCR_6kUGU1x=g@mail.gmail.com>
-Subject: Re: [PATCH] doc: describe UEFI measured boot
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Tom Rini <trini@konsulko.com>, Eddie James <eajames@linux.ibm.com>, 
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- heinrich.schuchardt@canonical.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,29 +96,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Guillaume,
+
+Thank you for testing.
+
+On ven., juin 14, 2024 at 11:53, Guillaume LA ROQUE <glaroque@baylibre.com>=
+ wrote:
+
+> Hi,
+>
+> i apply=C2=A0 patch series with commit you give in cover letter and test =
+on=20
+> TI AM62S-SK board.
+> Android boot properly , just with a small changes in uboot eenv
+>
+> setenv vendor_boot_comp_addr_r 0xd0000000
+
+I see.
+
+Thank you for sharing this.
+
+I can confirm that this is indeed needed on next since
+da3447d09fa0 ("android: Fix ramdisk loading for bootimage v3+").
+
+Will take that into account when sending board support using bootmeth_andro=
+id
+
+>
+> this changes is need link to patch done by roman on ramdisk and vendor=20
+> boot loading.
+>
+> so you can add for this series:
+>
+> Tested-by: Guillaume La Roque <glaroque@baylibre.com>
+>
+>
+
 [...]
-
->
-> > +
-> > +UEFI requirements
-> > +~~~~~~~~~~~~~~~~~
-> > +* A hardware TPM 2.0 supported by the U-Boot drivers
->
-> by an enabled U-Boot driver.
->
-> > +* CONFIG_EFI_TCG2_PROTOCOL=y
-> > +* CONFIG_EFI_TCG2_PROTOCOL_EVENTLOG_SIZE=y
-> > +* optional CONFIG_EFI_TCG2_PROTOCOL_MEASURE_DTB=y will measure the loaded DTB in PCR 0
->
-> Why does this setting not default to yes?
->
-
-Forgot to answer this. Measuring a DTB is far too circumstantial to be
-enabled by default. People inject all kind of stuff in there -- kaslr
-seeds and random mac addresses are just prime examples. To enable it
-by default, we need to do the measurements early and make sure the
-random artifacts aren't enabled by a previous stage bootloader. As a
-result we leave the decision to measure it per board.
-
-Regards
-/Ilias
