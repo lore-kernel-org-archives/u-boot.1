@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAC3FC27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 12:13:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77B0EC27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 12:14:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68A46884CA;
-	Fri, 14 Jun 2024 14:13:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id DD08888897;
+	Fri, 14 Jun 2024 14:14:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="p1ZvcqRc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZqrcZ8nS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDCCD884CA; Fri, 14 Jun 2024 14:13:31 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 8D32F8891B; Fri, 14 Jun 2024 14:14:17 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C738F881BF
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 14:13:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2AABE881BF
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 14:14:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=6895721e93=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45EBDejH009961;
- Fri, 14 Jun 2024 14:13:18 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- oietBq9FSff6jiabmtZlMW6SqFMEY+QP+56A0SaIGYg=; b=p1ZvcqRcO0JekOtL
- udTZ8O6gkfj8tXlz++zuIcDHpbXaY0ctV/LdGKR9PIjWjqvgDCq7KQVLMOPjk/w4
- baegcyGrBNvwywuUvhakt4Ep5gP/4E4dS4qptaPO7hB8C1hUkYJ9j36yo4rZldOf
- q4R5U67uXPQj+4qJz7wl1F5t6Cxzmccf4CwzSCzGhssWPkoQpqcc3Wl8OldOb8gQ
- ykAyZehobG95zLhPm4ziBeJ4csA9RIBniAbUXOv4FV3n5vQpT/yhgCIzVB6Asec5
- sRLZ8oaZMqRq7jXTIUYVxX7i3fxVqa/OpgAzBfteQF4rTrOsBSqPe85L/dSaYChS
- +eyQAA==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3ypbp4gfcx-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 14 Jun 2024 14:13:18 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id AE86F4002D;
- Fri, 14 Jun 2024 14:13:13 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id ED6E02138E2;
- Fri, 14 Jun 2024 14:12:47 +0200 (CEST)
-Received: from [10.252.18.60] (10.252.18.60) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Fri, 14 Jun
- 2024 14:12:47 +0200
-Message-ID: <047b06a5-5eb7-4928-80ba-4579168e5145@foss.st.com>
-Date: Fri, 14 Jun 2024 14:12:46 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-4218180a122so15280655e9.1
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 05:14:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1718367254; x=1718972054; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=xK7vL0jPjFD9RiwkpQoc1PmvMEUlR7DyBTLQ20rsSc4=;
+ b=ZqrcZ8nSqaOyVAaf4vSgTZLlU5IwZVYXweZNaDYemPrGlbULsYKTw/buYa3yXTj24U
+ sX4RRJufgfDyYrti6GAyhu7jAjlv+4gOoCqR97WMbwrP411rO/FAgVupXOtR37kYOcgA
+ MTSC4Adxlzs077q6SWcuW5x+8GcyErdGlFzM/4tm+KJ5XeRH1sBK9Er9Ag/GSuefKf9v
+ WfwFHS0S6vN9bQzPJ+CTB3r3OXohWC1070qwj1Vdoi3lSdWL3FKkX4NGmZLl02L6QF1L
+ KGS9oBWPqhFH0rzSEaB2As7N8sLuf8Slxr7me7aF+BjkKKNqCdGZlBIjHdaQero8M3JH
+ t7dQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718367254; x=1718972054;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xK7vL0jPjFD9RiwkpQoc1PmvMEUlR7DyBTLQ20rsSc4=;
+ b=Z6wrNHOTeHFi3w4WnCskQIXLCZUufVb0v1DQNnxJie9+KVy+A7glufvIMz2THnW03D
+ pMzQkV1hcG4lCmA0xxtnuEYbwCE8/TW+nS0t1DzZ/ARIqX2TUB6MC21siTWdYgIrjMBX
+ LsR2T6/sTqbwlkoeQKCT0yT0RduIFY4hezv+9OytKvv/M90viWw/jppXnSvM1JjXddw+
+ chpQzgnBLujyogAKW9FfGf8TZzQbWZX7ZXF0AzOCdHE23FO+x3z/rGW+aKJWBnSQK5jF
+ FXfEc5IYW3LCeOW9ZiYKKw9hBtKVh1r+aubNHBB8y2CGbkAdBzwl4Ql9jvzsis1kZo3B
+ L/JQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUlq2gWblz/v4cFlPpeNZzIfCJ4uprlNc7lxB2+bwaCiEc6nVNXWSPJTp9WpWN6emtKNVnoIrFcGUxWfxzaV95t4r1X0Q==
+X-Gm-Message-State: AOJu0YzLsG4c1CM7y9NyosFQ2YoaCYaXNL1xaqptRKjRSpuNKklMcdwt
+ 48d5xF8v9WvIDDZvCXVATiyjAw3IVFe5s32PmZgqZZspD/KCPJBj7r6naKyb7Aw=
+X-Google-Smtp-Source: AGHT+IEc4thnlFng1pzrZ2LDXKRMjYUF/5N5q2LGSyHlHhxhokGJgu5d6+uxYeEgQJ6O5oJb9TAvRQ==
+X-Received: by 2002:a05:600c:33a2:b0:421:5597:ea27 with SMTP id
+ 5b1f17b1804b1-42304828e19mr26842485e9.22.1718367254486; 
+ Fri, 14 Jun 2024 05:14:14 -0700 (PDT)
+Received: from localhost.localdomain (ppp046103020130.access.hol.gr.
+ [46.103.20.130]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-422f61280f6sm59261255e9.27.2024.06.14.05.14.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Jun 2024 05:14:13 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: xypron.glpk@gmx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Eddie James <eajames@linux.ibm.com>, u-boot@lists.denx.de
+Subject: [PATCH v2] doc: describe UEFI measured boot
+Date: Fri, 14 Jun 2024 15:14:03 +0300
+Message-ID: <20240614121404.16952-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.45.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: dts: stm32: Auto-detect second MAC on STM32MP15xx DH
- electronics DHCOM
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- <u-boot@dh-electronics.com>, <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20240606130222.24530-1-marex@denx.de>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20240606130222.24530-1-marex@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.252.18.60]
-X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-06-14_09,2024-06-14_03,2024-05-17_01
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,143 +92,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+We currently only describe the process to enable measured boot using
+bootm. Describe the UEFI requirements as well which predate bootm.
 
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+Changes since v1:
+- fixed remarks from Heinrich on titling and DTB measured PCR
+ doc/usage/measured_boot.rst | 28 ++++++++++++++++++++++++----
+ 1 file changed, 24 insertions(+), 4 deletions(-)
 
-On 6/6/24 15:01, Marek Vasut wrote:
-> Test whether this system is compatible with STM32MP15xx DHCOM SoM,
-> if so, test whether R292 pull up is populated on pin PC3, which is
-> an indication that the second MAC chip, KS8851-16MLL, is populated.
-> Use this information to patch 'status' DT property into the second
-> ethernet MAC DT node and enable/disable the MAC on systems where
-> the chip is/isn't populated respectively.
-> 
-> Use spl_perform_fixups() to patch the U-Boot proper DT from SPL and
-> ft_board_setup() to patch Linux DT from U-Boot proper. This way both
-> software components are configured the same way.
-> 
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@dh-electronics.com
-> Cc: u-boot@lists.denx.de
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi |  1 +
->  board/dhelectronics/dh_stm32mp1/board.c    | 65 ++++++++++++++++++++++
->  2 files changed, 66 insertions(+)
-> 
-> diff --git a/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi b/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi
-> index 1b445619325..d7b78cdcfa9 100644
-> --- a/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi
-> +++ b/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi
-> @@ -26,6 +26,7 @@
->  		u-boot,error-led = "error";
->  		dh,som-coding-gpios = <&gpiof 12 0>, <&gpiof 13 0>, <&gpiof 15 0>;
->  		dh,ddr3-coding-gpios = <&gpioz 6 0>, <&gpioz 7 0>;
-> +		dh,mac-coding-gpios = <&gpioc 3 0>;
->  	};
->  };
->  
-> diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
-> index 20c9d70737e..ebd45f9053f 100644
-> --- a/board/dhelectronics/dh_stm32mp1/board.c
-> +++ b/board/dhelectronics/dh_stm32mp1/board.c
-> @@ -37,6 +37,7 @@
->  #include <power/regulator.h>
->  #include <remoteproc.h>
->  #include <reset.h>
-> +#include <spl.h>
->  #include <syscon.h>
->  #include <usb.h>
->  #include <usb/dwc2_udc.h>
-> @@ -672,12 +673,69 @@ void board_quiesce_devices(void)
->  #endif
->  }
->  
-> +static void dh_stm32_ks8851_fixup(void *blob)
-> +{
-> +	struct gpio_desc ks8851intrn;
-> +	bool compatible = false;
-> +	int ks8851intrn_value;
-> +	const char *prop;
-> +	ofnode node;
-> +	int idx = 0;
-> +	int offset;
-> +	int ret;
-> +
-> +	/* Do nothing if not STM32MP15xx DHCOM SoM */
-> +	while ((prop = fdt_stringlist_get(blob, 0, "compatible", idx++, NULL))) {
-> +		if (!strstr(prop, "dhcom-som"))
-> +			continue;
-> +		compatible = true;
-> +		break;
-> +	}
-> +
-> +	if (!compatible)
-> +		return;
-> +
-> +	/*
-> +	 * Read state of INTRN pull up resistor, if this pull up is populated,
-> +	 * KS8851-16MLL is populated as well and should be enabled, otherwise
-> +	 * it should be disabled.
-> +	 */
-> +	node = ofnode_path("/config");
-> +	if (!ofnode_valid(node))
-> +		return;
-> +
-> +	ret = gpio_request_by_name_nodev(node, "dh,mac-coding-gpios", 0,
-> +					 &ks8851intrn, GPIOD_IS_IN);
-> +	if (ret)
-> +		return;
-> +
-> +	ks8851intrn_value = dm_gpio_get_value(&ks8851intrn);
-> +
-> +	dm_gpio_free(NULL, &ks8851intrn);
-> +
-> +	/* Set the 'status' property into KS8851-16MLL DT node. */
-> +	offset = fdt_path_offset(blob, "ethernet1");
-> +	ret = fdt_node_check_compatible(blob, offset, "micrel,ks8851-mll");
-> +	if (ret)	/* Not compatible */
-> +		return;
-> +
-> +	/* Add a bit of extra space for new 'status' property */
-> +	ret = fdt_shrink_to_minimum(blob, 4096);
-> +	if (!ret)
-> +		return;
-> +
-> +	fdt_setprop_string(blob, offset, "status",
-> +			   ks8851intrn_value ? "okay" : "disabled");
-> +}
-> +
->  #if defined(CONFIG_OF_BOARD_SETUP)
->  int ft_board_setup(void *blob, struct bd_info *bd)
->  {
->  	const char *buck3path = "/soc/i2c@5c002000/stpmic@33/regulators/buck3";
->  	int buck3off, ret, uv;
->  
-> +	dh_stm32_ks8851_fixup(blob);
-> +
->  	ret = board_get_regulator_buck3_nvm_uv_av96(&uv);
->  	if (ret)	/* Not Avenger96 board, do not patch Buck3 in DT. */
->  		return 0;
-> @@ -698,6 +756,13 @@ int ft_board_setup(void *blob, struct bd_info *bd)
->  }
->  #endif
->  
-> +#if defined(CONFIG_SPL_BUILD)
-> +void spl_perform_fixups(struct spl_image_info *spl_image)
-> +{
-> +	dh_stm32_ks8851_fixup(spl_image_fdt_addr(spl_image));
-> +}
-> +#endif
-> +
->  static void board_copro_image_process(ulong fw_image, size_t fw_size)
->  {
->  	int ret, id = 0; /* Copro id fixed to 0 as only one coproc on mp1 */
-Applied to u-boot-stm32/next
+diff --git a/doc/usage/measured_boot.rst b/doc/usage/measured_boot.rst
+index 9691904a9d8a..b5f7b05aeb02 100644
+--- a/doc/usage/measured_boot.rst
++++ b/doc/usage/measured_boot.rst
+@@ -7,19 +7,39 @@ U-Boot can perform a measured boot, the process of hashing various components
+ of the boot process, extending the results in the TPM and logging the
+ component's measurement in memory for the operating system to consume.
 
-Thanks
-Patrice
++The functionality is available when booting via the EFI subsystem or 'bootm'
++command.
++
++UEFI measured boot
++------------------
++The EFI subsystem implements the `EFI TCG protocol
++<https://trustedcomputinggroup.org/resource/tcg-efi-protocol-specification/>`_
++and the `TCG PC Client Specific Platform Firmware Profile Specification
++<https://trustedcomputinggroup.org/resource/pc-client-specific-platform-firmware-profile-specification/>`_
++which defines the binaries to be measured and the corresponding PCRs to be used.
++
++Requirements
++~~~~~~~~~~~~
++* A hardware TPM 2.0 supported by an enabled U-Boot driver
++* CONFIG_EFI_TCG2_PROTOCOL=y
++* CONFIG_EFI_TCG2_PROTOCOL_EVENTLOG_SIZE=y
++* optional CONFIG_EFI_TCG2_PROTOCOL_MEASURE_DTB=y will measure the loaded DTB in PCR 1
++
++Measured legacy boot with bootm command
++----------------------------------------
+ By default, U-Boot will measure the operating system (linux) image, the
+ initrd image, and the "bootargs" environment variable. By enabling
+-CONFIG_MEASURE_DEVICETREE, U-Boot will also measure the devicetree image.
++CONFIG_MEASURE_DEVICETREE, U-Boot will also measure the devicetree image in PCR1.
+
+ The operating system typically would verify that the hashes found in the
+ TPM PCRs match the contents of the event log. This can further be checked
+ against the hash results of previous boots.
+
+ Requirements
+-------------
++~~~~~~~~~~~~
+
+-* A hardware TPM 2.0 supported by the U-Boot drivers
+-* CONFIG_TPM=y
++* A hardware TPM 2.0 supported by an enabled U-Boot driver
++* CONFIG_TPMv2=y
+ * CONFIG_MEASURED_BOOT=y
+ * Device-tree configuration of the TPM device to specify the memory area
+   for event logging. The TPM device node must either contain a phandle to
+--
+2.45.1
+
