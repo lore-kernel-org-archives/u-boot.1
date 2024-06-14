@@ -4,77 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AB48C27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 14:55:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D92F6C27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 14:55:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C5E3F88A18;
-	Fri, 14 Jun 2024 16:54:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3675788A1E;
+	Fri, 14 Jun 2024 16:54:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QgCmk3L1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HFeIV/tw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5DF388A21; Fri, 14 Jun 2024 16:54:30 +0200 (CEST)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id AA3AD88A21; Fri, 14 Jun 2024 16:54:31 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B359B88256
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 16:54:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 784E488A06
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 16:54:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-24542b8607fso1130577fac.1
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 07:54:28 -0700 (PDT)
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-25606692f1bso1047947fac.3
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 07:54:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718376867; x=1718981667; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1718376868; x=1718981668; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=19M+wFDE2RV3UKrMbRhphZmaPSevZyg1YTEssqTXMzc=;
- b=QgCmk3L1pLT/VKTt4XgRRioTJuLCFp9gskP0oa3d+g4jlwKxe3ijp/F9/IiMq5+1I1
- uO6Fo+dFRKoPPwAKwEYnkIzu3bvahL69RR0KiS6SyNJ3k5le94sC9ueJCgm+O4I29yKf
- e3P14JC+wLOEQYYqdXeNR4BOfZeqpRlxpEy5k=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=s9ZEBQ0tr9CYiqVMKUMLwvy0+HqsZNXpIKUh6BHCgRk=;
+ b=HFeIV/tw1ioHFPX2QDZvKl0LryU1DHtkvLSHmt3QHQFCvIDouI7PBrvldM44r/KZbY
+ 9CGp6YfbzRlxy/uaGZVt8JMYGn+1JZ4khygDIpZbBBx+ro/aPZ7u2gvDlHciYFRp5XF9
+ kfprUnIGuZOoz/6vR0iEC0OEGJwt3YEfZDNNk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718376867; x=1718981667;
+ d=1e100.net; s=20230601; t=1718376868; x=1718981668;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=19M+wFDE2RV3UKrMbRhphZmaPSevZyg1YTEssqTXMzc=;
- b=DIj+Fp8trgenhzJLMvBnASE1uGEBCraDSlca7i34Fy9ciyLwPMw9I3jN071NYbdbYi
- dzf91yIqeYfjYPxsp1wK+9ltpVbz6jAU8FU2pFKLOamZL+bKCEmCgimdRWikNaJ/u8M2
- 8mDoy7yclGfuSnGaa4DdEygnF3527WK3UxraGnjL0otDYm1q8CycT8UoZERWRKVs0+Y4
- VhEKeg2sU5Cdw+Cp6VOq52Ihs4vr9VARlCWzN7EVe258cyDcTgaR5Bw86jGZw29r2+es
- CCFRSk+JaROcECvEDB+OvjNlTc92EV+9b18WWSeUpHAgrE5Hep9tdRrdd3uuNFoHzTje
- rMwA==
-X-Gm-Message-State: AOJu0YzVCXhjo+C2zc1DrsT7FA4J4NrA4ApTqx/64NILN4by+la+dgxi
- gx785cRD9ztUwcW4Dp8WjtndFy9wZxVGyJa2U7IcPRtzAi/H/AlaIyKjtCeYd9Q=
-X-Google-Smtp-Source: AGHT+IGZSQROYzhPN1GAAODy/x5yHCNiLsJ44x480XqtgtQWOZzpuVGwVqE7lvl+piPXUaG/EYc9Lw==
-X-Received: by 2002:a05:6870:8a0a:b0:254:d147:f256 with SMTP id
- 586e51a60fabf-25842893a92mr3263058fac.8.1718376866848; 
- Fri, 14 Jun 2024 07:54:26 -0700 (PDT)
+ bh=s9ZEBQ0tr9CYiqVMKUMLwvy0+HqsZNXpIKUh6BHCgRk=;
+ b=lpJabyYFJxejJNm0QJkRpbl1i+6Ir831rr5q/D5cnVjMefzlSX3S7c9DJJPzOzOWMn
+ J+2CcoyKMXq4kZNLDeq8RVlBT/pLWEMTChFpUwmgUYRyKFvD673/ZKJi1AXy9q1al6f1
+ fTEAD3XFQfDdIn8fYqlKprjv/xamOnlWcuJCIm8CTeO8FLendfcfcCjsAFyr9QIoONdv
+ bgmnV1FXfreh4lHpgNe6N03NyTPjw4zdNVcyqIB3YgJVIeJRrXDhWnB76gUmKMoqY6Zf
+ TTN7dz/XqirjjMXU47+TE1Q+qnOqd0i3/rP04rJYyDYHOrlECV8jh4Kl6H5yMzdcCYmT
+ GmYQ==
+X-Gm-Message-State: AOJu0YyF1XwB+CT48i65+8fRB4MzxiC20h4C5WLuLzcvRAoKurh4vuYB
+ EmiZsvCA7JxhL+Lmusa14iv9YxkfNRDw7kky2wdnA5QozebpcnBefVoAyZtfvLceNXG2iSiPbpn
+ SnZ0/WQ==
+X-Google-Smtp-Source: AGHT+IE69hlAFrfmfabUBsVvfJkOAcdiQ2wLEfExSGYk/QK1J7eVxSUtNxzG7/lyEguo4+ACEL0mxA==
+X-Received: by 2002:a05:6870:d107:b0:254:ca65:1ed3 with SMTP id
+ 586e51a60fabf-2584288c8f8mr3123500fac.2.1718376868301; 
+ Fri, 14 Jun 2024 07:54:28 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-45.totalplay.net.
  [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2567aa2fbe8sm986898fac.28.2024.06.14.07.54.25
+ 586e51a60fabf-2567aa2fbe8sm986898fac.28.2024.06.14.07.54.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Jun 2024 07:54:26 -0700 (PDT)
+ Fri, 14 Jun 2024 07:54:28 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
- Hari Nagalla <hnagalla@ti.com>, Nishanth Menon <nm@ti.com>, 
- Andrew Davis <afd@ti.com>, Roger Quadros <rogerq@kernel.org>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
- Vignesh Raghavendra <vigneshr@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, 
- Manorit Chawdhry <m-chawdhry@ti.com>, Udit Kumar <u-kumar1@ti.com>, 
- Jonathan Humphreys <j-humphreys@ti.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20240531223241.2619357-1-j-humphreys@ti.com>
-References: <20240531223241.2619357-1-j-humphreys@ti.com>
-Subject: Re: [PATCH] configs: j784s4: Enable OSPI NOR boot
-Message-Id: <171837686581.2655592.2698509172341076052.b4-ty@konsulko.com>
-Date: Fri, 14 Jun 2024 08:54:25 -0600
+To: u-boot@lists.denx.de, Dmitry Gerasimov <di.gerasimov@gmail.com>
+In-Reply-To: <20240602152613.32338-1-di.gerasimov@gmail.com>
+References: <20240602152613.32338-1-di.gerasimov@gmail.com>
+Subject: Re: [PATCH v1] imxtract: add support for zstd-compressed images
+Message-Id: <171837686784.2655592.12478570162499827872.b4-ty@konsulko.com>
+Date: Fri, 14 Jun 2024 08:54:27 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,10 +88,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 31 May 2024 17:32:41 -0500, Jonathan Humphreys wrote:
+On Sun, 02 Jun 2024 17:25:52 +0200, Dmitry Gerasimov wrote:
 
-> Set necessary configs to enable the j784s4 device to boot from OSPI NOR
-> flash.
+> Allow extraction of zstd-compressed images from FIT using imxtract
+> command. This is especially useful when one has to load an image via
+> some interface (e.g. SPI) rather that just to the memory.
 > 
 > 
 
