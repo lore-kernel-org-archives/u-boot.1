@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B503DC27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 11:58:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22708C27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 11:58:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FA11889CE;
-	Fri, 14 Jun 2024 13:58:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id A36F9889B9;
+	Fri, 14 Jun 2024 13:58:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="P5uoTBvv";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P9DzdXXX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16AAE88985; Fri, 14 Jun 2024 13:58:24 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DF46F88926; Fri, 14 Jun 2024 13:58:52 +0200 (CEST)
+Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
+ [IPv6:2607:f8b0:4864:20::102f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7204C889C9
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 13:58:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D6FE0889EA
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 13:58:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=6895721e93=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45E7uqhC014919;
- Fri, 14 Jun 2024 13:58:06 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- +l88peJUeuUfKG6hQoVlkV6IVAUsXW5ha596kfWis2M=; b=P5uoTBvvVGbmczeW
- 0wfKLLEQv/eQL1KjEeyjTIrxgT09hho8rdyqVsmDNAsagq048Ail54eMS1SGSc5+
- aPXnte3UUdZFanhovRtg35a58o3qJawfwq/a/dOHGIa/5giE7iW3/d+QmFI+UWoE
- kxftiBHqf2NnVLoRCFl82uRzWDdyJZAmdcpDrfXsz5p9mYqDXS5/Ora4ScsbuOwQ
- TXTd9MVEYPPPDNCHDwQgb5X+cyRzi59ORl7kXKt4GAi6/1baOaV7ZP13OOVPeYRO
- SQBqg6gpUIjL963jMQVrL7+rP9WJJJaQWCv9+04CHfgoOzNpYrQ9xO5HIgzJ3PhE
- 54rjdg==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3ypbp50n8t-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 14 Jun 2024 13:58:06 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 4389E4002D;
- Fri, 14 Jun 2024 13:58:02 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 83D57211F24;
- Fri, 14 Jun 2024 13:57:40 +0200 (CEST)
-Received: from [10.252.18.60] (10.252.18.60) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Fri, 14 Jun
- 2024 13:57:39 +0200
-Message-ID: <0c5db0cd-8954-4759-8047-89c59445c83e@foss.st.com>
-Date: Fri, 14 Jun 2024 13:57:39 +0200
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-2c2c78f40acso383779a91.2
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 04:58:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1718366321; x=1718971121; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=r7Ulo6sHpW8Bbfyd/slDn4+zv/dnHKGHG1ol8izd6BM=;
+ b=P9DzdXXXMtbHBaxjrkxv0f5TAkvgz+YnD1Og14QHSiAWQkjTuSA/aAbw9ctumcfmuE
+ YXtzqC3QrQWwKhALm8ggrtQbs7VZyeZzzQ3N/nIy/bTssK+OuKzj5vOZv9sHNbvMXI1f
+ D2GoM6BgaOstOjgDAWmMMH/A2n/DNAduECo5GPLCvSn9S45yP6h7VI35iY/wijA1DIxP
+ ElbO8Al9h35I01Wfm8hXwaKL4n+VWnEFLDd7NKCHOyTGi00RyBfGKyntjcJCpTQ5OKi8
+ 8mDUp5xNzaDCwICWo43dEPcRBL6vj3/7k9XWMTq4ZgoeK3OtfG5HvmuGM09X9EvQCg69
+ N8HA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718366321; x=1718971121;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=r7Ulo6sHpW8Bbfyd/slDn4+zv/dnHKGHG1ol8izd6BM=;
+ b=QiAG4InLz3LZqMA3Jk+l7IbGfnUHmOOtikYnt55fFYwneqXSP8EEZJloUa0zDCVKql
+ E+8lNFPCmU5bpWqTo7uQ/Z6xgkHx2e7gbEwbo03Da6DRouTPSW67XqgjlztpkNpF8iX3
+ 0zWxbw91ifai8n/A+uQOk+B5OoLQkucKMzuTItCp8ull/RKfd2WFIH/UWkrUAUZjOwO+
+ dYOkZwOdZuM7JVmA2CQ09dR75pZyW0BFhp030+sjgCLec4tqrxnc8OQ7W6/ELEHG7UJ0
+ OBl99hIay4PHugaT5o9G1tiER27URQF+WwNCFKYnEInoMfnCWsbrVDOP5ukPmnOMvP6P
+ FH0A==
+X-Gm-Message-State: AOJu0YwFum+9D864kofdxu5/d38u0NlNINMONLtCNVW0q+tsPGfVLAhX
+ HV9/hAyAbYUemxW+TiQXAETdUYs1JDsMUZTpGR1YTJozvmYga/8mZMZTCNj60xDw2cYFirMN8RA
+ WwH9NT99B+siw2SZHyLaWJaUw/PPOH7q1
+X-Google-Smtp-Source: AGHT+IFUdp2CHxo4hFuoHor3xewU7NzzdbqzT/gfw+8AFOzCw7U+DsT97pKXwfJCHqRuNc3N8O47zNBOPpEaS+ut7NE=
+X-Received: by 2002:a17:90a:578e:b0:2c4:cd15:3e4b with SMTP id
+ 98e67ed59e1d1-2c4dc03a6a5mr2448963a91.4.1718366321283; Fri, 14 Jun 2024
+ 04:58:41 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] ARM: stm32: Make PWR regulator driver available on
- STM32MP13xx
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Tom Rini
- <trini@konsulko.com>, <u-boot@dh-electronics.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20240319024534.103299-1-marex@denx.de>
- <20240319024534.103299-2-marex@denx.de>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20240319024534.103299-2-marex@denx.de>
+References: <6fc28b7090833e94d47ee3abfce1b1f5a75d349f.camel@opensuse.org>
+ <ca425556-fdbd-457e-8713-5176f925cce7@seco.com>
+ <fad372cd45b13bd15fb07c10c66802b0a03b4f25.camel@opensuse.org>
+ <CAOMZO5B3krB1vyibGNYej9nrPMkOXh1+P05Boqd2Vsr1E5nmcg@mail.gmail.com>
+ <e807c90eebd0f5756de613b4773d39aec71bb064.camel@opensuse.org>
+In-Reply-To: <e807c90eebd0f5756de613b4773d39aec71bb064.camel@opensuse.org>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 14 Jun 2024 08:58:29 -0300
+Message-ID: <CAOMZO5DhJeQDQ74nvCz_q2XRBU4FzQxrDbuL9UPJ29BHzmB3rw@mail.gmail.com>
+Subject: Re: silent u-boot not working
+To: Jonas Kvinge <jonaski@opensuse.org>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.252.18.60]
-X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-06-14_09,2024-06-14_03,2024-05-17_01
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,80 +91,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, Jun 14, 2024 at 8:51=E2=80=AFAM Jonas Kvinge <jonaski@opensuse.org>=
+ wrote:
 
+> The u-boot logo in the upper right corner is still showing, is it
+> possible to disable that too?
 
-On 3/19/24 03:45, Marek Vasut wrote:
-> This patch makes STM32 PWR regulators available on stm32mp13xx.
-> This requires TFA to clear RCC_SECCFGR, is disabled by default
-> on stm32mp13xx and can only be enabled on board config level.
-> 
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@dh-electronics.com
-> Cc: u-boot@lists.denx.de
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  arch/arm/mach-stm32mp/Kconfig     | 17 +++++++++++++++++
->  arch/arm/mach-stm32mp/Kconfig.15x | 16 ----------------
->  2 files changed, 17 insertions(+), 16 deletions(-)
-> 
-> diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
-> index b9af03d57e3..d5934a92771 100644
-> --- a/arch/arm/mach-stm32mp/Kconfig
-> +++ b/arch/arm/mach-stm32mp/Kconfig
-> @@ -155,4 +155,21 @@ source "arch/arm/mach-stm32mp/Kconfig.13x"
->  source "arch/arm/mach-stm32mp/Kconfig.15x"
->  source "arch/arm/mach-stm32mp/Kconfig.25x"
->  source "arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig"
-> +
-> +config STM32MP15_PWR
-> +	bool "Enable driver for STM32MP15x PWR"
-> +	depends on DM_REGULATOR && DM_PMIC && (STM32MP13X || STM32MP15X)
-> +	default y if STM32MP15X
-> +	help
-> +		This config enables implementation of driver-model pmic and
-> +		regulator uclass features for access to STM32MP15x PWR.
-> +
-> +config SPL_STM32MP15_PWR
-> +	bool "Enable driver for STM32MP15x PWR in SPL"
-> +	depends on SPL && SPL_DM_REGULATOR && SPL_DM_PMIC && (STM32MP13X || STM32MP15X)
-> +	default y if STM32MP15X
-> +	help
-> +		This config enables implementation of driver-model pmic and
-> +		regulator uclass features for access to STM32MP15x PWR in SPL.
-> +
->  endif
-> diff --git a/arch/arm/mach-stm32mp/Kconfig.15x b/arch/arm/mach-stm32mp/Kconfig.15x
-> index 71c14eb4955..d99aa9fd694 100644
-> --- a/arch/arm/mach-stm32mp/Kconfig.15x
-> +++ b/arch/arm/mach-stm32mp/Kconfig.15x
-> @@ -77,22 +77,6 @@ config TARGET_ICORE_STM32MP1
->  
->  endchoice
->  
-> -config STM32MP15_PWR
-> -	bool "Enable driver for STM32MP15x PWR"
-> -	depends on DM_REGULATOR && DM_PMIC
-> -	default y
-> -	help
-> -		This config enables implementation of driver-model pmic and
-> -		regulator uclass features for access to STM32MP15x PWR.
-> -
-> -config SPL_STM32MP15_PWR
-> -	bool "Enable driver for STM32MP15x PWR in SPL"
-> -	depends on SPL && SPL_DM_REGULATOR && SPL_DM_PMIC
-> -	default y
-> -	help
-> -		This config enables implementation of driver-model pmic and
-> -		regulator uclass features for access to STM32MP15x PWR in SPL.
-> -
->  config TEXT_BASE
->  	default 0xC0100000
->  
-Applied to u-boot-stm32/next
-
-Thanks
-Patrice
+If you don't want the U-Boot splash to appear, you can remove the
+CONFIG_VIDEO options from configs/rpi_4_defconfig
