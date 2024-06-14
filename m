@@ -4,89 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05A3EC27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 05:59:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9958C27C77
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 06:04:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 223878890D;
-	Fri, 14 Jun 2024 07:59:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CAC508896C;
+	Fri, 14 Jun 2024 08:04:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MONrvuIY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XtGilA58";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5214882B7; Fri, 14 Jun 2024 07:58:56 +0200 (CEST)
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
- [IPv6:2607:f8b0:4864:20::52d])
+ id 1807F87DD3; Fri, 14 Jun 2024 08:04:00 +0200 (CEST)
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [IPv6:2607:f8b0:4864:20::1033])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5B258890D
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 07:58:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C9A748896C
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 08:03:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-6e57506bb2dso1459607a12.0
- for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 22:58:53 -0700 (PDT)
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-2c2d25b5432so1444325a91.2
+ for <u-boot@lists.denx.de>; Thu, 13 Jun 2024 23:03:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718344732; x=1718949532; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1718345036; x=1718949836; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=w8H1mSzSgqhrmQD9/4Prc1qKzCckXfxpQWYgOQm9GDk=;
- b=MONrvuIYtIjDGFiSlTXqVJswbWAIM/ijjesi5KfR13UtHZKHLcd3eCOI0/Jt20mT1X
- SyRmojY/FnO09Ap/w7CIwKMfapAwvydm23yCauMpX1wYWZHwiCpAAgvikMfYawqNAJAS
- n3bjDdKMwd75E8ZFOfI2QB+OPqfym4I4Qjo3tJGrLMkLV5cNddTcz0v59GwZpx/xZpIw
- qFiAm7CZxcvewbgksYuNK0Vvbapvv2rukYZwyP6nFPTxK9HnHirJR8zjetrGIaT46wzV
- DKEI8OusssTOqSeWPLpRFpOJKOZEV7Dq81SLuqKrg47mU1TbOYTzytDpjqgt33GYwFl6
- TxyA==
+ bh=NXvX3tSy7bS4bN3272Ma0e90QCgTzWRN1j+IlnKurrg=;
+ b=XtGilA58DUBHP7NLX/hfWo+bbzU3u0Stx/Coyv/zMIOF3FNQCdTngayXiarcPMp2aA
+ 4WogavT7IIWnFfqYSGFq4HPM9E3sGGUESBBm0jLIMf8Vcv651ommhhpYmZU4DnYPgXZd
+ eMT+GF1SfSe6suT88j/2Wp95l2nxa+27uDIVTqhOnB7biAj+dLbmsgPiE/wZUEbA4fQO
+ 2SMPbDKotYvSc+mRb/EtF/NeTU20IroRjRvHOJlWrYRlXYrGo7b3ygJepFQvq9kcZ8YA
+ WMXfR1YLiF5mnVOTO+TxJxWu4MrJwPYGgzDAOhZXpNK053QcWGKp230HqXVB1pEavntv
+ Hrvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718344732; x=1718949532;
+ d=1e100.net; s=20230601; t=1718345036; x=1718949836;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=w8H1mSzSgqhrmQD9/4Prc1qKzCckXfxpQWYgOQm9GDk=;
- b=ay97JqYfsxV+h+Q/W1xbCxouDxRepQQWCH1XqFaLLNlnT4S7DNYULl9V8NWuyFcZ4j
- 1u/4uIAr95Js3MT9jtIqadr46cKJyS5iZv7AP8EdRxqzYc0ihq50cTzJErcQsFX8O9tR
- FSsgPzl1fCXXNzrVxEuAjm6Jwg5OsuXifPZbfDy+RfWlHuZCHy9aymWv2NJwWXiffi8C
- kXHQEwQ+NzdbDF1S2BRcMOnKTo4QeBjOOqxhR6fjH21K75Xb/nCc/g4u+ZRytSOv2YlH
- rVjGi+yIbb1lOeK7qsFPq/NoRdhTNdxUsdR/KR9n46dxDGIuu2uzGp29CS+wixD225km
- LCRg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXfV9B0Kfqb/hDTdiT2PgbQAWofW7NenyRx0hGFdychOLft+MJ6F/FeGGW3faudehwwqyYvspdGPUa2dYlF513MdmZPTg==
-X-Gm-Message-State: AOJu0YwFkss419N7ngu6qGwNamICoiQ4V6QOLt8GHJRVMIdbFspxjkAu
- /h67KvGIJ+Bvr0QzXWFa+P4KMtL91pPEfeRucEQonvp8j9XpwtcW+w4cJ92QBa17HYUvdSxIdZg
- wRZOJ9KYrrKjVSFz3O4MjVtMchAqv9ibGM97E0g==
-X-Google-Smtp-Source: AGHT+IHds585R5ShUvNNOV3lgBm9BWMKLzY7wLDStHIqTIEY7+ZR9o2buLFSYGO/pKwqe8xpjm8/3R7ovFR0rWKCdo4=
-X-Received: by 2002:a05:6a20:7483:b0:1b8:4107:ce35 with SMTP id
- adf61e73a8af0-1bae7f0c2ddmr2021150637.28.1718344732027; Thu, 13 Jun 2024
- 22:58:52 -0700 (PDT)
+ bh=NXvX3tSy7bS4bN3272Ma0e90QCgTzWRN1j+IlnKurrg=;
+ b=UDTPTAxtvPMsKbgRvyMp6KVbHWYjJiiNg4yWDkXV5Ow9B9lKh5XCKNmZxs3H/wsRC0
+ rH2t30SKw46bDTU5vCVs0x8x7dO7B3lvlsGkFG70ClBms4NYS5ZnH6KLOSaYliFI06ME
+ I4cGJmaKlH69eMqT5GCZCxQqS6l2gXEpRLPtBH6+lOoLcRDwWCf0O1PDVJSfcPF8vYie
+ 3YfJRX7DsQhEz5QWG3gPEoctLCduc3SZCv/8HJYQqFnIVkVza9ucq9/b6cvK82+ffumQ
+ RoUC5TwOEZQ5wlhmxdpm2qJ2npdLYvJcSfSrsW2uv1HiEQHlzmkNgOfMdzy1M8eXNd1N
+ uAkg==
+X-Gm-Message-State: AOJu0YzCX66vaJ3pl4sDyE0StaXm/9Rj3T6T1oL3GijXwC4Z5w4LklP1
+ BDclJ6JwdE45Sk5Dlo6NbmSh6xBob02ABTTz6PF9xxg9fPxGwdZLp17+HfCsCvCFWlTAP/E7lZ4
+ VZtghvClL360TTtDIO7k0hMUeZs4ysjiFdCRSUg==
+X-Google-Smtp-Source: AGHT+IEQWfgTJAX7P8RZ1ThFfiiBMKufMXiQuC4uufi7BdlNhw3gNdw9lShGvHL7PhxDXOuFhXt0Jbz88MNdbjKd2+4=
+X-Received: by 2002:a17:90a:a10a:b0:2c4:e2a6:dcdc with SMTP id
+ 98e67ed59e1d1-2c4e2a6de95mr788430a91.13.1718345036149; Thu, 13 Jun 2024
+ 23:03:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240607185240.1892031-5-sughosh.ganu@linaro.org>
- <CAFLszTjQW72_Z8Dx4g1mVx5Y=wq9xeXYVBffxLUto6sDp6CMbw@mail.gmail.com>
- <20240611210145.GM68077@bill-the-cat>
- <CAFLszTjd4Sf=_um7QbkpbLAO9=2=vX_LkHv6br=9FPAPFhbH5Q@mail.gmail.com>
- <20240611225554.GO68077@bill-the-cat>
- <CAFLszTi1ZR+qeEuEbGUE2Fv3h1ahX3S_2ySBPQjgkfruiW8Xtw@mail.gmail.com>
- <20240612172244.GG68077@bill-the-cat>
- <CAFLszThj1wmF4zOLDjSjHX1cg8RfiHMGgpbRccJ-VJu2dtihNw@mail.gmail.com>
- <20240612214001.GI68077@bill-the-cat>
- <CAFLszTiZSu+aN53kAPd2GXosXv09Ams+jFDi2xGU0wh+faO=dg@mail.gmail.com>
- <20240613154206.GO68077@bill-the-cat>
- <CAFLszThvhYKpxLhJOgXOkW244Cj6Au=+LqhzHTtYHtri_+tmEg@mail.gmail.com>
- <1604c2a7-d72e-491f-806f-da29d14f0a17@gmx.de>
- <CAFLszTjMnxN-pNLxe=pamC=OQpKtPRAL0Xrr17x8Sn+oU+8gQA@mail.gmail.com>
- <0397EEF3-D89D-45CC-BBA9-961DE973249E@gmx.de>
-In-Reply-To: <0397EEF3-D89D-45CC-BBA9-961DE973249E@gmx.de>
+References: <20240610145920.3302001-1-sjg@chromium.org>
+ <20240610145920.3302001-3-sjg@chromium.org>
+In-Reply-To: <20240610145920.3302001-3-sjg@chromium.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 14 Jun 2024 08:58:15 +0300
-Message-ID: <CAC_iWjKxkQrcZ9oEfe=t21ox8eooemk3QnHsVg00zgpebTQHPQ@mail.gmail.com>
-Subject: Re: [RFC PATCH 04/31] lmb: remove local instances of the lmb
- structure variable
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de, 
- Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>, 
- Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>
+Date: Fri, 14 Jun 2024 09:03:19 +0300
+Message-ID: <CAC_iWj+fSRt2E3ZcHaXrKjC+Gz7LZu_EWgiegWG3F1MJMJrPNQ@mail.gmail.com>
+Subject: Re: [PATCH v2 2/9] tpm: Avoid code bloat when not using
+ EFI_TCG2_PROTOCOL
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Eddie James <eajames@linux.ibm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Manorit Chawdhry <m-chawdhry@ti.com>, Michal Simek <michal.simek@amd.com>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Sean Anderson <sean.anderson@seco.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,182 +93,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 13 Jun 2024 at 23:11, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
->
->
-> Am 13. Juni 2024 21:05:58 MESZ schrieb Simon Glass <sjg@chromium.org>:
-> >Hi Heinrich,
-> >
-> >On Thu, 13 Jun 2024 at 11:32, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> >>
-> >> On 13.06.24 18:59, Simon Glass wrote:
-> >> > Hi Tom,
-> >> >
-> >> > On Thu, 13 Jun 2024 at 09:42, Tom Rini <trini@konsulko.com> wrote:
-> >> >>
-> >> >> On Thu, Jun 13, 2024 at 09:22:15AM -0600, Simon Glass wrote:
-> >> >>> Hi Tom,
-> >> >>>
-> >> >>> On Wed, 12 Jun 2024 at 15:40, Tom Rini <trini@konsulko.com> wrote:
-> >> >>>>
-> >> >>>> On Wed, Jun 12, 2024 at 02:24:25PM -0600, Simon Glass wrote:
-> >> >>>>> Hi Tom,
-> >> >>>>>
-> >> >>>>> On Wed, 12 Jun 2024 at 11:22, Tom Rini <trini@konsulko.com> wrote:
-> >> >>>>>>
-> >> >>>>>> On Tue, Jun 11, 2024 at 08:41:39PM -0600, Simon Glass wrote:
-> >> >>>>>>
-> >> >>>>>> [snip]
-> >> >>>>>>> Also IMO there is only really one LMB list today. We create it at the
-> >> >>>>>>> start of bootm and then it is done when we boot. The file-loading
-> >> >>>>>>> stuff is what makes all this confusing...and with bootstd that is
-> >> >>>>>>> under control as well.
-> >> >>>>>>>
-> >> >>>>>>> At lot of this effort seems to be about dealing with random scripts
-> >> >>>>>>> which load things. We want to make sure we complain if something
-> >> >>>>>>> overlaps. But we should be making the bootstd case work nicely and
-> >> >>>>>>> doing things within that framework. Also EFI sort-of has its own
-> >> >>>>>>> thing, which it is very-much in control of.
-> >> >>>>>>>
-> >> >>>>>>> Overall I think this is a bit more subtle that just combining allocators.
-> >> >>>>>>
-> >> >>>>>> I think this gets to the main misunderstanding. The problem isn't
-> >> >>>>>> handling bootstd, or EFI boot, or even assorted scripts. Those are all
-> >> >>>>>> cases where things are otherwise (sufficiently) well-defined. The
-> >> >>>>>> problem is "security" and that a "carefully crafted payload" could do
-> >> >>>>>> something malicious. That's why we have to do all of this stuff sooner
-> >> >>>>>> rather than later in our boot process.
-> >> >>>>>
-> >> >>>>> That's the first I have heard of this, actually, but a bit more detail
-> >> >>>>> would help. How does the payload get loaded? I'm just not sure about
-> >> >>>>> the overall goals. It seems that everyone else is already familiar -
-> >> >>>>> can someone please take the time to point me to the details?
-> >> >>>>
-> >> >>>> Well, the short version I believe of the first CVE we got (and so
-> >> >>>> started abusing LMB) was along the lines of "load an image near where
-> >> >>>> the U-Boot stack is, smash things for fun and exploits".
-> >> >>>
-> >> >>> OK. I am surprised that LMB does not catch that. It is supposed to add
-> >> >>> the stack and various other things right at the start before loading
-> >> >>> any file. So even if it clears the LMB each time, it should not be
-> >> >>> able to do that. Having said this, the code may be buggy as I don't
-> >> >>> think we have tests for U-Boot's overall functional behaviour in these
-> >> >>> situations.
-> >> >>
-> >> >> Right, LMB does catch the example I gave (because we made all of the
-> >> >> load from storage/network functions init an lmb and we always make sure
-> >> >> a new lmb gets U-Boot stack/etc). The next thing we didn't catch was
-> >> >> "what if EFI does the loading?" and we've kludged around that, and in
-> >> >> turn had some of the thorny questions. Some of that is what I think
-> >> >> you're asking about in this part of the thread, to which the answer is
-> >> >> "EFI spec says you need to place X in memory", so we just need to
-> >> >> reserve it when it's asked for, so that something else can't come along
-> >> >> and smash it maliciously.
-> >> >
-> >> > OK I see. Of course it isn't just EFI that has this issue. I believe
-> >> > the answer (for small blocks) is to use malloc(), which I think we do
-> >> > with a few exceptions which Ilias pointed out. For things like the TPM
-> >> > log and ACPI tables we should probably use a bloblist, as we do on
-> >> > x86. For large things (like loading a kernel) we should use LMB. I've
-> >> > been thinking about how best to tie this to boot, as opposed to random
-> >> > allocations in U-Boot itself, which would lead to fragmentation and
-> >> > strange behaviour. I think bootstd is a great place to have a
-> >> > persistent LMB. It can be attached to bootstd_priv.
-> >> >
-> >> > My hope is that EFI is just another boot method, where
-> >> > already-allocating things are presented to the OS. Apart from the
-> >> > Ilias exceptions, I believe this is how it works today.
-> >> >
-> >> > Where I think this heads in the wrong direction is using
-> >> > EFI-allocation functions before we are booting an EFI image. EFI has
-> >> > no concept of what is 'in empty space' so it leads to the lmb
-> >> > conflict, the subject of this discussion.
-> >>
-> >> EFI binaries can return to the command line interface.
-> >> EFI binaries may be drivers that stay resident and run in the background
-> >> after returning to the command line interface. They might for instance
-> >> provide block devices.
-> >
-> >Hmm you mentioned that before but I'm still not quite understanding.
-> >Do you mean that the EFI app returns back to U-Boot, leaving the
->
-> There are 3 types of of EFI binaries:
->
-> * apps
-> * boot time drivers
-> * run time drivers
->
->
-> >driver active? If so, how does U-Boot use the driver? I'm just not
-> >familiar with how such a construct could work in a single-threaded
-> >U-Boot.
->
-> We already have code for EFI block devices. See lib/efi_driver/
->
-> When U-Boot reads from such a block device it may end up in an EFI driver that for instance uses U-Boots network drivers exposed as EFI simple network protocol to read from an NVMEoF or iSCSI server.
->
-> >
-> >>
-> >> Device-paths must be created from EFI pool memory as they may be freed
-> >> via FreePool() according to the EFI specification. And these we create
-> >> whenever a block-device is probed.
-> >
-> >The implementation of pool memory rounds up to pages and uses that. It
-> >might be more efficient to use malloc()/free() instead, given that we
-> >mark the malloc() space as reserved when we call the EFI app.
->
-> We have requirements on which EFI allocations may reside in the same page. See the ARM chapter in the UEFI specification.
+Hi Simon,
 
-And apart from all Heinrich mentioned, EFI memory has to be marked and
-preserved at runtime for runtime services and data.
-Using malloc for the variables, the eventlog etc, would just
-complicate the EFI code, as we'd have to copy those just before
-ExitBootServices is called.
+On Mon, 10 Jun 2024 at 17:59, Simon Glass <sjg@chromium.org> wrote:
+>
+> It does not make sense to enable all SHA algorithms unless they are
+> needed. It bloats the code and in this case, causes chromebook_link to
+> fail to build. That board does use the TPM, but not with measured boot,
+> nor EFI.
+>
+> Since EFI_TCG2_PROTOCOL already selects these options, we just need to
+> add them to MEASURED_BOOT as well.
+>
+> Note that the original commit combines refactoring and new features,
+> which makes it hard to see what is going on.
+>
+> Fixes: 97707f12fda tpm: Support boot measurements
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+> Changes in v2:
+> - Put the conditions under EFI_TCG2_PROTOCOL
+> - Consider MEASURED_BOOT too
+>
+>  boot/Kconfig | 4 ++++
+>  lib/Kconfig  | 4 ----
+>  2 files changed, 4 insertions(+), 4 deletions(-)
+>
+> diff --git a/boot/Kconfig b/boot/Kconfig
+> index 6f3096c15a6..b061891e109 100644
+> --- a/boot/Kconfig
+> +++ b/boot/Kconfig
+> @@ -734,6 +734,10 @@ config LEGACY_IMAGE_FORMAT
+>  config MEASURED_BOOT
+>         bool "Measure boot images and configuration when booting without EFI"
+>         depends on HASH && TPM_V2
+> +       select SHA1
+> +       select SHA256
+> +       select SHA384
+> +       select SHA512
+>         help
+>           This option enables measurement of the boot process when booting
+>           without UEFI . Measurement involves creating cryptographic hashes
+> diff --git a/lib/Kconfig b/lib/Kconfig
+> index 189e6eb31aa..568892fce44 100644
+> --- a/lib/Kconfig
+> +++ b/lib/Kconfig
+> @@ -438,10 +438,6 @@ config TPM
+>         bool "Trusted Platform Module (TPM) Support"
+>         depends on DM
+>         imply DM_RNG
+> -       select SHA1
+> -       select SHA256
+> -       select SHA384
+> -       select SHA512
+
+I am not sure this is the right way to deal with your problem.
+The TPM main functionality is to measure and extend PCRs, so shaXXXX
+is really required. To make things even worse, you don't know the PCR
+banks that are enabled beforehand. This is a runtime config of the
+TPM.
+
+ So this would make the TPM pretty useless. Can't you remove something
+that doesn't break functionality?
 
 Thanks
 /Ilias
+>         help
+>           This enables support for TPMs which can be used to provide security
+>           features for your board. The TPM can be connected via LPC or I2C
+> --
+> 2.34.1
 >
-> Best regards
->
-> Heinrich
->
-> >
-> >>
-> >> We should not make any assumptions that conflict with the UEFI
-> >> specification.
-> >
-> >Indeed.
-> >
-> >>
-> >> In our initial discussion with Ilias one idea was to merge LMB and EFI
-> >> memory management. This merged system would have to consider the
-> >> requirements of the UEFI specifications like a finer grained memory type
-> >> system and page boundaries.
-> >>
-> >> Best regards
-> >>
-> >> Heinrich
-> >>
-> >> >
-> >> > This is all quite subtle and probably worthy of a VC discussion.
-> >> >
-> >> >>
-> >> >> But that also raised the more general problem, and why we need a
-> >> >> persistent reservation list, of allowing boards/SoCs to say they want to
-> >> >> reserve a block of memory for whatever, and have that obeyed, for real.
-> >> >> For example, the mach-apple logic of "just pick some memory locations to
-> >> >> use for kernel/dtb/initrd" isn't really as safe as it should be since
-> >> >> those reservations aren't really seen anywhere once the function
-> >> >> returns, it's just setting some environment variables.
-> >> >
-> >> > Yes, that part of it I understand. Somehow I either didn't see or
-> >> > forgot that board_late_init() code. With the script-based boot it
-> >> > makes some sort of sense, but with bootstd we should have allocation
-> >> > of addresses dealt with there. I have held off on retiring
-> >> > kernel_addr_r etc. as the scripts are still in use. But perhaps it
-> >> > would be a good time to convert bootstd to use lmb instead?
-> >> >
-> >> > Regards,
-> >> > Simon
-> >>
