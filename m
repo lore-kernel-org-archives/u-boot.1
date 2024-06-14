@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59E23C27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 20:26:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA58CC27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 20:30:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58CB2889EC;
-	Fri, 14 Jun 2024 22:26:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 252AC88A04;
+	Fri, 14 Jun 2024 22:30:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="R4tYD3xn";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="OkyyRci/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sfXbCMMC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3D7188A00; Fri, 14 Jun 2024 22:26:25 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BF65488A08; Fri, 14 Jun 2024 22:30:29 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08996889EC
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 22:26:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9716B88176
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 22:30:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4W19lz6N40z9scL;
- Fri, 14 Jun 2024 22:26:23 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1718396783;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=JilIVDJcavGoyQI6dnN3FlJvSflBPQdVrdijbp1c5GM=;
- b=R4tYD3xnXAi7b4B6zyDEAHk02NcC3ZGBhSGpEFJRUwWX49uP/dn45XXxFZqUpU31oKAn+B
- x77MVXaFJ5qz15ofdy3ty/ffY2e+OHMqw3nJ8E427x2Q9Y5KaVCNyaOeqleH4gvksYgjCX
- djVeDKvF56ybfkMOISZmeT72yhgDl7ZDDgMJgN7EUL0+aQ8CQ+m7lxRiUKdKxfr/gwl4Hw
- a/i3ExF4PfC1/nYMu1661w+KZXxv4kGk+OTwXgYYwdI2PRiwUiLVYGCDi2/g0XymajmUMQ
- Zocrg+TvJFYu1Uf1TN9e4ravjg+7dFyRopRjNMv/y+Z/VnJFwNQBzUDL5Ub/ug==
-Message-ID: <663b950b-11cc-4598-bf6c-75644d613859@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1718396782;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=JilIVDJcavGoyQI6dnN3FlJvSflBPQdVrdijbp1c5GM=;
- b=OkyyRci/GXoTdd5Ob087QuB2CbrcRod/PH7WXKOtFxpF47eDo1RcfPzpkc0DK3UAk+qyqs
- MrwBPUIwUWj7U+90wdaWxMxmveVEqBUehO48nSnjjY3IfDLkruf0V9xEv4XoUwVZm6rJVV
- aSdF4iLIoCrHwk+zM1jaNVkd0HIMWUYRgJjbvqJ4zt5fQSNJeCLDZXTLn8PfvXagShbFFd
- 4s6E2Z8QudrTYxHdS2/7QP+TOpMhpI9oMZJzKwsyPhTxUUys82tmSQ3Jx0gOwmI61BHh7c
- qBkTKEXR/kXTrcwkOKCiH3/A33Q1QMyS1NQrkgoPZ+4xmskaxl35q7a/5h5yBA==
-Date: Fri, 14 Jun 2024 22:26:20 +0200
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-6f980c89db8so1394182a34.1
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 13:30:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1718397026; x=1719001826; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=wQi9tnm8TNsCUMjJWccAbOBXKAJxxOxdPdIN2vO4Hdc=;
+ b=sfXbCMMCNikEnx9EtukFdk1btjtgydFC/RAQqxxlyky3TCT60kqQ0nQ6WdmgoGHAwt
+ ZCieNjc6S4dRpCY35C29tP2edO0Kk1NyEd3st/zHRo0xwt8MOaTVY1yHZaQz8ktPsFL5
+ g7WZFrZTO8JBCT8YwSf9bLQPUEp+XD8Dqwkrc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718397026; x=1719001826;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wQi9tnm8TNsCUMjJWccAbOBXKAJxxOxdPdIN2vO4Hdc=;
+ b=V/Z2mw9hKwLT/tYHLbuwxXTy6k9uN4drF5+eyjVWjKD7c5BZYSknvu0dhw5hRm7v1H
+ uuyY3Rtj1G1Cl75a5mkcv+2U4XtRl0qeW8TmJfNMhFh9VLBXyMYsvN5MZDDS9ImirJuQ
+ kc+c6pymg2vX3gc6pjMeWdJ2HRJVh0YLFRZhwiq/5PjZtEAOq0L8X21lEUjBq2Xt3DF4
+ l05g9IJl/1Awd+cvQx/1KzuaoHhBOEPKsDiEv3DJ134H5RcnyM6LK5T6eApsh/W+H5Nm
+ H+qjGEEkvAPjQVPJ0aVYTa/CU5B8GeCm4PhX7lVUNLfcH29EjPbrQ3KHlZhQ9469mpF1
+ NY9g==
+X-Gm-Message-State: AOJu0Yz0HO9GP2lBvWQXDfpwAsCY2qlBRjKMAzZdd7BAJ2ZmKKYhU9AS
+ XlyoEDDv4K2ra1ATKRZHLJ8sQCGGvk9KJpX9UYEdmoDaDrIfrK4I/IsFYQmTiFk=
+X-Google-Smtp-Source: AGHT+IGr33qbvfvuDUnKhdh6hdQvOovKghkaog611GrhpclX3R8UxRK9PgDOV57ZnSqbuEjpFV8HZw==
+X-Received: by 2002:a05:6871:14a:b0:24c:b0ca:9650 with SMTP id
+ 586e51a60fabf-258428b6fe0mr4371502fac.1.1718397026115; 
+ Fri, 14 Jun 2024 13:30:26 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
+ [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2567a94a1d4sm1137510fac.1.2024.06.14.13.30.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Jun 2024 13:30:25 -0700 (PDT)
+Date: Fri, 14 Jun 2024 14:30:22 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>
 Subject: Re: [PATCH 1/2] net: phy: Turn default auto-negotiation timeout into
  Kconfig symbol
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>
+Message-ID: <20240614203022.GS68077@bill-the-cat>
 References: <20240531164733.192105-1-marek.vasut+renesas@mailbox.org>
  <171837686047.2655592.885719495890320459.b4-ty@konsulko.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <171837686047.2655592.885719495890320459.b4-ty@konsulko.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: e67z3qoethfao3rchq3zmcboeb55dqbr
-X-MBO-RS-ID: bafaf7fac8121f472e2
-X-Rspamd-Queue-Id: 4W19lz6N40z9scL
+ <663b950b-11cc-4598-bf6c-75644d613859@mailbox.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="m4Xzi+itj2AQWavZ"
+Content-Disposition: inline
+In-Reply-To: <663b950b-11cc-4598-bf6c-75644d613859@mailbox.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,16 +94,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/14/24 4:54 PM, Tom Rini wrote:
-> On Fri, 31 May 2024 18:47:16 +0200, Marek Vasut wrote:
-> 
->> Let users configure default auto-negotiation timeout via Kconfig
->> instead of specifying it in board configuration headers. This is
->> the first step toward converting this to Kconfig fully, so far the
->> legacy PHY_ANEG_TIMEOUT in configuration headers takes precedence.
->>
->>
-> 
-> Applied to u-boot/master, thanks!
 
-next, right ?
+--m4Xzi+itj2AQWavZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Jun 14, 2024 at 10:26:20PM +0200, Marek Vasut wrote:
+> On 6/14/24 4:54 PM, Tom Rini wrote:
+> > On Fri, 31 May 2024 18:47:16 +0200, Marek Vasut wrote:
+> >=20
+> > > Let users configure default auto-negotiation timeout via Kconfig
+> > > instead of specifying it in board configuration headers. This is
+> > > the first step toward converting this to Kconfig fully, so far the
+> > > legacy PHY_ANEG_TIMEOUT in configuration headers takes precedence.
+> > >=20
+> > >=20
+> >=20
+> > Applied to u-boot/master, thanks!
+>=20
+> next, right ?
+
+
+Yes, next, sigh, b4 was a bit funny on all of those patches since I was
+in "master" not "next" at the time.
+
+--=20
+Tom
+
+--m4Xzi+itj2AQWavZ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZsqFsACgkQFHw5/5Y0
+tyyGnQv8CfwM8dmh5LRYFNa+veMdwWVi2sqJgl9+YS2fcEognf0nEmE/li4qWIOm
+e1yAJTGWVmrAPrVfzxGH67NZX3VXii+aCYBrGV/JqpGepLmVYGoKrE6AzVbORNJD
+EjmsxfDJs+OAxoPdO7OFmm/oRDN/CGuDNGCAFoCUdhpazaU5FCn9QevvcVJrgOay
+pUjXJrRSNRLt/qwtuStDbd0YV+CrdnDgf8P+K/s8fRcpH+MXrNn6LHesTvkbPXL8
+NoXSghr6gB/OnFH9BmfRjQcC6uiD8uXWxjsABuPdwRS6lD1mnpfm4lnJ6pVYAlCE
+FQTMc8hBG9v66gM1fWF4atmIEYTXhoLRz7srs6FQuZq8dxL9ozqwJpyAlWnVAGJ6
+YGHuuFo3XRxU/Il09sPznWI8DaccXeuTRttT7OaqHLpI2DkMe0zKc8I5B6JRBVm6
+FzqecJX0ZPx8rChPz656tWmUyzTVfCpB/Su9u6UselLso2iB2Jb/cndskUUs9XxO
+6UxUujYW
+=qceU
+-----END PGP SIGNATURE-----
+
+--m4Xzi+itj2AQWavZ--
