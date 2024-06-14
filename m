@@ -4,77 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0E21C27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 11:59:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D1F8C27C79
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 12:00:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2240F87128;
-	Fri, 14 Jun 2024 13:59:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id A6B5D87F8D;
+	Fri, 14 Jun 2024 14:00:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="0Y/zQhV0";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="iYlBNbX7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 69AEF87D9B; Fri, 14 Jun 2024 13:59:45 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+ id F1BC688176; Fri, 14 Jun 2024 14:00:37 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7AEC680E9A
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 13:59:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D35FA87F8C
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 14:00:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=6895721e93=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45EAXuR0026966;
- Fri, 14 Jun 2024 13:59:32 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- xPGDTRvydhk7eDFDbiBK8koZCah5XjM60dYlNUeUoAA=; b=0Y/zQhV0STj+73Fq
- bHu5boK4ttHoP6MTwNsrw7ZlfLVM5FDcairzdcvSAfqlWiKqeL2ADJdK1wYVdYkD
- FQG+cq2968RNoNyuMdVxhu2ZJoIKXGvXqhhEJfYTGb1EdiSHy2G08Pydy+lt4l87
- iMYHng8ny+vV7mKDwldUva1zv8zml0GhyuWApcLhKD4+lt1du/E0DwFUHvq1/+WY
- i0SrK5QP1FXkYaFmy13AciRgsnPqCVad9SoCPVzX1qYvGgWB7xmiNbJUHihapYj7
- GjWLy6830X20xzf8BptPoObh+07SUwlrKyUmLql2Z1nNcVrhonjB78kk65TLbloL
- ClJSRg==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3yrfuj9muv-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 14 Jun 2024 13:59:32 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id EC1C940045;
- Fri, 14 Jun 2024 13:59:27 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id AA68F2132EF;
- Fri, 14 Jun 2024 13:58:59 +0200 (CEST)
-Received: from [10.252.18.60] (10.252.18.60) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Fri, 14 Jun
- 2024 13:58:59 +0200
-Message-ID: <89e7aad8-705a-4edd-be6b-fa8383b684ab@foss.st.com>
-Date: Fri, 14 Jun 2024 13:58:58 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45EC0Yx4059308;
+ Fri, 14 Jun 2024 07:00:34 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1718366434;
+ bh=MX6AFlEgp/jWYMcsZ7jM36O/ikjCqDBspJzgSBjenkk=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=iYlBNbX7OV3CV2PgDgNvbfN1phdtlIuS9V0Bdyv17Oiaz4rd/9Myp4wtwAA6xDEh5
+ 6iJWsHRTmZGQy2WZgvgxHzy1FpG0l9T4Abzo1CPJxPQg36qdFbbm67epKZg/YdVVIH
+ IPNgrNzRMgBJJI6zWDHLtcINK7cM11ePVWbAto6Q=
+Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45EC0Yko021009
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 14 Jun 2024 07:00:34 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 14
+ Jun 2024 07:00:33 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 14 Jun 2024 07:00:34 -0500
+Received: from [172.24.227.36]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45EC0V9W104123;
+ Fri, 14 Jun 2024 07:00:32 -0500
+Message-ID: <d9347696-e361-427b-8d49-9b8d14379937@ti.com>
+Date: Fri, 14 Jun 2024 17:30:31 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: stm32: Ping IWDG on exit from PSCI suspend code
-To: Igor Opaniuk <igor.opaniuk@foundries.io>, Marek Vasut <marex@denx.de>
-CC: <u-boot@lists.denx.de>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- <u-boot@dh-electronics.com>, <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20240419220331.277574-1-marex@denx.de>
- <CAL6CDMHFDhcUXhz5+w92SqKa0jC1TNPEiyvRS=jZ4CBqTm7=PA@mail.gmail.com>
+Subject: Re: [PATCH] arm: dts: k3-am625-beagleplay: Package TIFS Stub
+To: Dhruva Gole <d-gole@ti.com>, <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Vibhore Vardhan <vibhore@ti.com>, Nishant Menon
+ <nm@ti.com>
+References: <20240612062351.3690091-1-d-gole@ti.com>
 Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <CAL6CDMHFDhcUXhz5+w92SqKa0jC1TNPEiyvRS=jZ4CBqTm7=PA@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.252.18.60]
-X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-06-14_09,2024-06-14_03,2024-05-17_01
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20240612062351.3690091-1-d-gole@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,70 +81,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Dhruva
 
-
-On 6/10/24 10:36, Igor Opaniuk wrote:
-> On Sat, Apr 20, 2024 at 12:03 AM Marek Vasut <marex@denx.de> wrote:
->>
->> Make sure the OS would not get any spurious IWDG pretimeout IRQ
->> right after the system wakes up. This may happen in case the SoC
->> got woken up by another source than the IWDG pretimeout and the
->> pretimeout IRQ arrived immediately afterward, but too late to be
->> handled by the suspend main loop. In case either of the IWDG is
->> enabled, ping it first and then return to the OS.
->>
->> Signed-off-by: Marek Vasut <marex@denx.de>
->> ---
->> Cc: Igor Opaniuk <igor.opaniuk@foundries.io>
->> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
->> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
->> Cc: Simon Glass <sjg@chromium.org>
->> Cc: Tom Rini <trini@konsulko.com>
->> Cc: u-boot@dh-electronics.com
->> Cc: uboot-stm32@st-md-mailman.stormreply.com
->> ---
->>  arch/arm/mach-stm32mp/stm32mp1/psci.c | 21 +++++++++++++++++++++
->>  1 file changed, 21 insertions(+)
->>
->> diff --git a/arch/arm/mach-stm32mp/stm32mp1/psci.c b/arch/arm/mach-stm32mp/stm32mp1/psci.c
->> index 4f2379df45f..e99103910d9 100644
->> --- a/arch/arm/mach-stm32mp/stm32mp1/psci.c
->> +++ b/arch/arm/mach-stm32mp/stm32mp1/psci.c
->> @@ -808,6 +808,27 @@ void __secure psci_system_suspend(u32 __always_unused function_id,
->>         writel(SYSCFG_CMPENR_MPUEN, STM32_SYSCFG_BASE + SYSCFG_CMPENSETR);
->>         clrbits_le32(STM32_SYSCFG_BASE + SYSCFG_CMPCR, SYSCFG_CMPCR_SW_CTRL);
->>
->> +       /*
->> +        * Make sure the OS would not get any spurious IWDG pretimeout IRQ
->> +        * right after the system wakes up. This may happen in case the SoC
->> +        * got woken up by another source than the IWDG pretimeout and the
->> +        * pretimeout IRQ arrived immediately afterward, but too late to be
->> +        * handled by the main loop above. In case either of the IWDG is
->> +        * enabled, ping it first and then return to the OS.
->> +        */
->> +
->> +       /* Ping IWDG1 and ACK pretimer IRQ */
->> +       if (gic_enabled[4] & BIT(22)) {
->> +               writel(IWDG_KR_RELOAD_KEY, STM32_IWDG1_BASE + IWDG_KR);
->> +               writel(IWDG_EWCR_EWIC, STM32_IWDG1_BASE + IWDG_EWCR);
->> +       }
->> +
->> +       /* Ping IWDG2 and ACK pretimer IRQ */
->> +       if (gic_enabled[4] & BIT(23)) {
->> +               writel(IWDG_KR_RELOAD_KEY, STM32_IWDG2_BASE + IWDG_KR);
->> +               writel(IWDG_EWCR_EWIC, STM32_IWDG2_BASE + IWDG_EWCR);
->> +       }
->> +
->>         /*
->>          * The system has resumed successfully. Rewrite LR register stored
->>          * on stack with 'ep' value, so that on return from this PSCI call,
->> --
->> 2.43.0
->>
+On 12/06/24 11:53, Dhruva Gole wrote:
+> Add support for packaging the TIFS Stub as it's required for basic Low
+> Power Modes like Deep Sleep.
 > 
-> Reviewed-by: Igor Opaniuk <igor.opaniuk@foundries.io>
+> Signed-off-by: Dhruva Gole <d-gole@ti.com>
+> ---
+>   arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi | 33 +++++++++++++++++++-
+>   1 file changed, 32 insertions(+), 1 deletion(-)
 > 
-Applied to u-boot-stm32/next
+> diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+> index fb2032068d1c..5e2248a4a668 100644
+> --- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+> +++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+> @@ -69,6 +69,23 @@
+>   		};
+>   	};
+>   
+> +	tifsstub-gp {
+> +		filename = "tifsstub.bin_gp";
+> +		ti-secure-rom {
+> +			content = <&tifsstub_gp>;
+> +			core = "secure";
+> +			load = <0x60000>;
+> +			sw-rev = <CONFIG_K3_X509_SWRV>;
+> +			keyfile = "ti-degenerate-key.pem";
+> +			tifsstub;
+> +		};
+> +		tifsstub_gp: tifsstub-gp.bin {
+> +			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-gp.bin";
+> +			type = "blob-ext";
+> +			optional;
+> +		};
+> +	};
+> +
+>   	ti-spl_unsigned {
+>   		filename = "tispl.bin_unsigned";
+>   		pad-byte = <0xff>;
+> @@ -105,6 +122,19 @@
+>   					};
+>   				};
+>   
+> +				tifsstub-gp {
+> +					description = "tifsstub";
+> +					type = "firmware";
+> +					arch = "arm32";
+> +					compression = "none";
+> +					os = "tifsstub-gp";
+> +					load = <0x9dc00000>;
+> +					entry = <0x9dc00000>;
+> +					blob-ext {
+> +						filename = "tifsstub.bin_gp";
+> +					};
+> +				};
+> +
+>   				dm {
+>   					description = "DM binary";
+>   					type = "firmware";
+> @@ -148,7 +178,8 @@
+>   				conf-0 {
+>   					description = "k3-am625-beagleplay";
+>   					firmware = "atf";
+> -					loadables = "tee", "dm", "spl";
+> +					loadables = "tee", "dm", "spl",
+> +					"tifsstub-gp";
+>   					fdt = "fdt-0";
+>   				};
+>   			};
 
-Thanks
-Patrice
+Acked-by: Neha Malcom Francis <n-francis@ti.com>
+
+-- 
+Thanking You
+Neha Malcom Francis
