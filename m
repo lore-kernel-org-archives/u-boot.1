@@ -4,80 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A6EDC27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 14:58:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 527D6C27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 15:00:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2801588A39;
-	Fri, 14 Jun 2024 16:58:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C255B88A0F;
+	Fri, 14 Jun 2024 17:00:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nA9ppkpg";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="X1rDMQbX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB1E688A22; Fri, 14 Jun 2024 16:58:21 +0200 (CEST)
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9A73A88A14; Fri, 14 Jun 2024 17:00:02 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B76E888A1B
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 16:58:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D1A898844D
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 16:59:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-5baeab9fd60so1094297eaf.2
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 07:58:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1718377098; x=1718981898; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=rryJLI4j7bCme6Q5MSxqYwUKW7gRhHkzod58gmj+GjI=;
- b=nA9ppkpgLmUYcdNGUP3XoSDiAc8l/uP2ftgRyOT76TEZSG30h0LsdhVJY9/0Cqn3k1
- zI41FZQDGlASBbwnGk052ehZAjxJJpmqHjXhGoeJAPNkhZidsWo24g8C12uBF3Xh1Lwa
- sCBjjhKHPARTjNNLIqVHS5Uj5e4uIagD2XmDI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718377098; x=1718981898;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rryJLI4j7bCme6Q5MSxqYwUKW7gRhHkzod58gmj+GjI=;
- b=OHEajXTaI845gBZ7WRPxfIFSE521SQcf1lKynHmhZtucYJOFU64RLzCnR+EY5RlSpN
- 128ieXE3ZzZCPq0gPAL8IIcEvW71J6LU9JcjdWsUDCuz8jYDr+K3lykzv2jMKnCFFJMv
- jb3D1RI0MEAOBeSN57JKxQnql4JS4X1f2ehwkPQhCUwi42kzv7YBNp4+o+EPUN4VOMrt
- EHP61CXDZ3LHLEYCvgP4zhtvg3yIYzH+zGmN+Ibg93q1frrHAUcnxQR2NNVFnAjfHTVW
- KWI+HpfmbyqbSl6uBtUC5DuxXDzLuKu9Fq/90fU/Ac9Hc22XX8kg9w9+QMisxtg6cLXL
- 3PSg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWlBXITDh93IkWigxroFzw+njXaEc6998qO7rY224zzU68C6eCIkcyzNtYoYtxm7cW2zHkNVUXVwwH7jHChlMIhd0nK3A==
-X-Gm-Message-State: AOJu0YwC89tMsHIP3MWMJ7IzmM5Lep6pSDMA2YDxXiohIlRTHC0/kvmg
- MYSWzVlYmWAukBzu1VyJP4cj20rF8cKNWgd5a5Vv/+9OlnAZsYtI4EJjPSakyVs=
-X-Google-Smtp-Source: AGHT+IGAq4bi2fzdCH9ZKJi+nHilkBKax9RQDnm3hE8IE2chtm0LN7sFJSTLm7EpZzqrrPw1j6KMig==
-X-Received: by 2002:a05:6820:1693:b0:5b9:f2f4:6a95 with SMTP id
- 006d021491bc7-5bdadc30fecmr3048836eaf.5.1718377098444; 
- Fri, 14 Jun 2024 07:58:18 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-45.totalplay.net.
- [189.203.100.45]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5bd5f4960fasm488568eaf.32.2024.06.14.07.58.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Jun 2024 07:58:17 -0700 (PDT)
-Date: Fri, 14 Jun 2024 08:58:15 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jonathan Humphreys <j-humphreys@ti.com>
-Cc: Simon Glass <sjg@chromium.org>, Roger Quadros <rogerq@kernel.org>,
- Kamlesh Gurudasani <kamlesh@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Udit Kumar <u-kumar1@ti.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH] configs: j784s4: Enable basic EFI CMD support
-Message-ID: <20240614145815.GB2656409@bill-the-cat>
-References: <20240531223057.2619261-1-j-humphreys@ti.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45EExsJ1031897;
+ Fri, 14 Jun 2024 09:59:54 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1718377194;
+ bh=v2sz/UuOBxFjQV0ktGJlvwDSONj6mxkIeBK7DZkyb+E=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=X1rDMQbXcB7zuivbPfGmctFUqM+ykaat/vhrYbTloXKuhieFY4YCLQw/pQsjq5qAo
+ FiLi1cGDJcTJt6OemtbOCTFjQpzxH9q274Fhe7y25Ra/heVJVhZelPskjfGL7h5o5i
+ iALHghYJtTy4PtP6QjW/chI6xLJjotElrUgctyWE=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45EExs99029628
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 14 Jun 2024 09:59:54 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 14
+ Jun 2024 09:59:54 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 14 Jun 2024 09:59:54 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45EExrVQ009893;
+ Fri, 14 Jun 2024 09:59:53 -0500
+Message-ID: <d8bd3e6e-9bab-4f84-807d-4d9bc29f2372@ti.com>
+Date: Fri, 14 Jun 2024 09:59:53 -0500
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="VngASFj1+LcKSIR4"
-Content-Disposition: inline
-In-Reply-To: <20240531223057.2619261-1-j-humphreys@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/8] arm: mach-k3: j721e: Enable QoS for DSS
+To: Jayesh Choudhary <j-choudhary@ti.com>, <u-boot@lists.denx.de>,
+ <trini@konsulko.com>, <u-kumar1@ti.com>, <a-bhatia1@ti.com>
+CC: <n-francis@ti.com>, <nm@ti.com>, <joao.goncalves@toradex.com>,
+ <j-humphreys@ti.com>, <d.haller@phytec.de>, <hnagalla@ti.com>,
+ <bb@ti.com>, <seanga2@gmail.com>, <sjg@chromium.org>,
+ <clamor95@gmail.com>, <martyn.welch@collabora.com>,
+ <m-chawdhry@ti.com>, <a-limaye@ti.com>, <sebin.francis@ti.com>
+References: <20240614124442.178280-1-j-choudhary@ti.com>
+ <20240614124442.178280-4-j-choudhary@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20240614124442.178280-4-j-choudhary@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,42 +85,329 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---VngASFj1+LcKSIR4
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, May 31, 2024 at 05:30:57PM -0500, Jonathan Humphreys wrote:
-
-> Enable basic configs for EFI CMD support.
->=20
-> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
+On 6/14/24 7:44 AM, Jayesh Choudhary wrote:
+> Enable Quality of Service (QoS) blocks for Display SubSystem (DSS), by
+> servicing the DSS - DDR traffic from the Real-Time (RT) queue. This is
+> done by setting the DSS DMA orderID to greater than 7.
+> 
+> Before setting up the QoS, the ORDERID needs to be mapped to VBUSM sources
+> using setup_navss_nb() function call that sets the threadmap for NBSS
+> registers. (Section 10.2.10.1.2 "NB Parameters" in TRM[0])
+> 
+> Section 3.3.2 "Quality of Service (QoS)" in the TRM[0] provide more
+> details.
+> 
+> [0]: https://www.ti.com/lit/zip/spruil1
+> 
+> Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
 > ---
->  configs/j784s4_evm_a72_defconfig | 3 +++
->  1 file changed, 3 insertions(+)
+>   arch/arm/mach-k3/j721e/j721e_init.c         |  28 +++++
+>   arch/arm/mach-k3/r5/j721e/Makefile          |   1 +
+>   arch/arm/mach-k3/r5/j721e/j721e_qos.h       |  96 +++++++++++++++
+>   arch/arm/mach-k3/r5/j721e/j721e_qos_uboot.c | 126 ++++++++++++++++++++
+>   4 files changed, 251 insertions(+)
+>   create mode 100644 arch/arm/mach-k3/r5/j721e/j721e_qos.h
+>   create mode 100644 arch/arm/mach-k3/r5/j721e/j721e_qos_uboot.c
+> 
+> diff --git a/arch/arm/mach-k3/j721e/j721e_init.c b/arch/arm/mach-k3/j721e/j721e_init.c
+> index c2024f2500..e9ed8cb267 100644
+> --- a/arch/arm/mach-k3/j721e/j721e_init.c
+> +++ b/arch/arm/mach-k3/j721e/j721e_init.c
+> @@ -23,6 +23,22 @@
+>   #include "../sysfw-loader.h"
+>   #include "../common.h"
+>   
+> +/* NAVSS North Bridge (NB) registers */
+> +#define NAVSS0_NBSS_NB0_CFG_MMRS		0x03802000
+> +#define NAVSS0_NBSS_NB1_CFG_MMRS		0x03803000
+> +#define NAVSS0_NBSS_NB0_CFG_NB_THREADMAP	(NAVSS0_NBSS_NB0_CFG_MMRS + 0x10)
+> +#define NAVSS0_NBSS_NB1_CFG_NB_THREADMAP	(NAVSS0_NBSS_NB1_CFG_MMRS + 0x10)
+> +/*
+> + * Thread Map for North Bridge Configuration
+> + * Each bit is for each VBUSM source.
+> + * Bit[0] maps orderID 0-7 to VBUSM.C thread number
+> + * Bit[1] maps orderID 8-15 to VBUSM.C thread number
+> + * When bit has value 0: VBUSM.C thread 0 (non-real time traffic)
+> + * When bit has value 1: VBUSM.C thread 2 (real time traffic)
+> + */
+> +#define NB_THREADMAP_BIT0				BIT(0)
+> +#define NB_THREADMAP_BIT1				BIT(1)
+> +
+>   #ifdef CONFIG_K3_LOAD_SYSFW
+>   struct fwl_data cbass_hc_cfg0_fwls[] = {
+>   #if defined(CONFIG_TARGET_J721E_R5_EVM)
+> @@ -124,6 +140,13 @@ void k3_mmc_restart_clock(void)
+>   }
+>   #endif
+>   
+> +/* Setup North Bridge registers to map ORDERID 8-15 to RT traffic */
+> +static void setup_navss_nb(void)
+> +{
+> +	writel(NB_THREADMAP_BIT1, (uintptr_t)NAVSS0_NBSS_NB0_CFG_NB_THREADMAP);
+> +	writel(NB_THREADMAP_BIT1, (uintptr_t)NAVSS0_NBSS_NB1_CFG_NB_THREADMAP);
+> +}
+> +
+>   /*
+>    * This uninitialized global variable would normal end up in the .bss section,
+>    * but the .bss is cleared between writing and reading this variable, so move
+> @@ -288,6 +311,11 @@ void board_init_f(ulong dummy)
+>   		panic("DRAM init failed: %d\n", ret);
+>   #endif
+>   	spl_enable_cache();
+> +
+> +	if (IS_ENABLED(CONFIG_CPU_V7R))
+> +		setup_navss_nb();
+> +
+> +	setup_qos();
+>   }
+>   
+>   u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+> diff --git a/arch/arm/mach-k3/r5/j721e/Makefile b/arch/arm/mach-k3/r5/j721e/Makefile
+> index 78325db402..07bfb0dd93 100644
+> --- a/arch/arm/mach-k3/r5/j721e/Makefile
+> +++ b/arch/arm/mach-k3/r5/j721e/Makefile
+> @@ -3,3 +3,4 @@
+>   # Copyright (C) 2020 Texas Instruments Incorporated - https://www.ti.com/
+>   obj-y += clk-data.o
+>   obj-y += dev-data.o
+> +obj-y += j721e_qos_uboot.o
+> diff --git a/arch/arm/mach-k3/r5/j721e/j721e_qos.h b/arch/arm/mach-k3/r5/j721e/j721e_qos.h
+> new file mode 100644
+> index 0000000000..9ec0b7c630
+> --- /dev/null
+> +++ b/arch/arm/mach-k3/r5/j721e/j721e_qos.h
+> @@ -0,0 +1,96 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Keystone3 Quality of service endpoint definitions
 
-Please rebase on top of current -next, thanks.
+Our marketing folks claim it is "K3" not "Keystone3" :),
+otherwise lgtm,
 
---=20
-Tom
+Reviewed-by: Andrew Davis <afd@ti.com>
 
---VngASFj1+LcKSIR4
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmZsWocACgkQFHw5/5Y0
-tyxkfwv/cq/7dch095lU56JHWXfLl270xqgZb41N9EoSF0r0gg1o3tIxZJjfajTq
-W2U/Hw++gt7iVWhayQOqxAKfFHUDfvC6w+8vlJhKldXTj9Mjw0qchmiPLg4/Fn1G
-5o7kVt8QWWwjo56xI5s4RKYJ0Ibm5ynLAR0yCVV5J0Pn5Jl8h6vgrqPdikT95svY
-ANRYLLNBbr+IxT4/legOzKplB8AyVFucSvctJJXATkWeffWUC8yeSU1anUqsYr3Z
-3KcUsqQFOEB1NfsEvSRRFuNm4uAQFWUoW9WwCbm/ndkKGwF4HdwsWFAnjeiRGVyq
-dTdnKVZHh93exrq3gUZ4M5rZYtev3naMZGLQOiuEQ1uecBWFOg6YUA9ReN8waqlX
-m/PNrIxUSvuR0ShUi7ouAOJhxUTIyP0it/Z510ZQcYVaG1DK5fRYYynBG8SWuFXl
-XyaehlwgfiSZDKL7vu9VHodLzizQ4E7EgUi3euaqs+XpRRiUfsKHTLm0FVmvqBTs
-PcHoMO6M
-=M4x5
------END PGP SIGNATURE-----
-
---VngASFj1+LcKSIR4--
+> + * Auto generated by K3 Resource Partitioning Tool
+> + *
+> + * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
+> + */
+> +
+> +#define PULSAR_SL_MCU_0_MEMBDG_RMST0	0x45D10000
+> +#define PULSAR_SL_MCU_0_MEMBDG_WMST0	0x45D10400
+> +#define PULSAR_SL_MCU_0_CPU0_PMST	0x45D10800
+> +#define PULSAR_SL_MCU_0_MEMBDG_RMST1	0x45D11000
+> +#define PULSAR_SL_MCU_0_MEMBDG_WMST1	0x45D11400
+> +#define PULSAR_SL_MCU_0_CPU1_PMST	0x45D11800
+> +#define SA2_UL_MCU_0_CTXCACH_EXT_DMA	0x45D13000
+> +#define ICSS_G_MAIN_0_PR1_EXT_VBUSM	0x45D80000
+> +#define ICSS_G_MAIN_1_PR1_EXT_VBUSM	0x45D80400
+> +#define K3_C66_COREPAC_MAIN_0_C66_MDMA	0x45D81000
+> +#define K3_C66_COREPAC_MAIN_1_C66_MDMA	0x45D81400
+> +#define EMMCSD4SS_MAIN_0_EMMCSDSS_RD	0x45D82000
+> +#define EMMCSD4SS_MAIN_0_EMMCSDSS_WR	0x45D82400
+> +#define EMMCSD4SS_MAIN_1_EMMCSDSS_RD	0x45D82800
+> +#define EMMCSD4SS_MAIN_1_EMMCSDSS_WR	0x45D82C00
+> +#define PULSAR_SL_MAIN_0_MEMBDG_RMST0	0x45D84000
+> +#define PULSAR_SL_MAIN_0_MEMBDG_RMST1	0x45D84400
+> +#define PULSAR_SL_MAIN_0_MEMBDG_WMST0	0x45D84800
+> +#define PULSAR_SL_MAIN_0_MEMBDG_WMST1	0x45D84C00
+> +#define PULSAR_SL_MAIN_1_MEMBDG_RMST0	0x45D85000
+> +#define PULSAR_SL_MAIN_1_MEMBDG_RMST1	0x45D85400
+> +#define PULSAR_SL_MAIN_1_MEMBDG_WMST0	0x45D85800
+> +#define PULSAR_SL_MAIN_1_MEMBDG_WMST1	0x45D85C00
+> +#define COMPUTE_CLUSTER_J7ES_TB_VDC_MAIN_0_GIC_MEM_RD_VBUSM	0x45D86000
+> +#define COMPUTE_CLUSTER_J7ES_TB_VDC_MAIN_0_GIC_MEM_WR_VBUSM	0x45D86400
+> +#define K3_C66_COREPAC_MAIN_0_C66_CFG	0x45D87000
+> +#define K3_C66_COREPAC_MAIN_1_C66_CFG	0x45D87400
+> +#define SA2_UL_MAIN_0_CTXCACH_EXT_DMA	0x45D88800
+> +#define PULSAR_SL_MAIN_0_PBDG_RMST0	0x45D89800
+> +#define PULSAR_SL_MAIN_0_PBDG_RMST1	0x45D89C00
+> +#define PULSAR_SL_MAIN_0_PBDG_WMST0	0x45D8A000
+> +#define PULSAR_SL_MAIN_0_PBDG_WMST1	0x45D8A400
+> +#define PULSAR_SL_MAIN_1_PBDG_RMST0	0x45D8A800
+> +#define PULSAR_SL_MAIN_1_PBDG_RMST1	0x45D8AC00
+> +#define PULSAR_SL_MAIN_1_PBDG_WMST0	0x45D8B000
+> +#define PULSAR_SL_MAIN_1_PBDG_WMST1	0x45D8B400
+> +#define VPFE_MAIN_0_VBUSM_DMA	0x45D8C000
+> +#define VPE_MAIN_0_VPDMA_MST0	0x45D8C400
+> +#define VPE_MAIN_0_VPDMA_MST1	0x45D8C800
+> +#define PCIE_G4X2_MAIN_0_PCIE_MST_RD_HP	0x45D90000
+> +#define PCIE_G4X2_MAIN_0_PCIE_MST_RD_LP	0x45D90400
+> +#define PCIE_G4X2_MAIN_0_PCIE_MST_WR_HP	0x45D90800
+> +#define PCIE_G4X2_MAIN_0_PCIE_MST_WR_LP	0x45D90C00
+> +#define PCIE_G4X2_MAIN_1_PCIE_MST_RD_HP	0x45D91000
+> +#define PCIE_G4X2_MAIN_1_PCIE_MST_RD_LP	0x45D91400
+> +#define PCIE_G4X2_MAIN_1_PCIE_MST_WR_HP	0x45D91800
+> +#define PCIE_G4X2_MAIN_1_PCIE_MST_WR_LP	0x45D91C00
+> +#define PCIE_G4X2_MAIN_2_PCIE_MST_RD_HP	0x45D92000
+> +#define PCIE_G4X2_MAIN_2_PCIE_MST_RD_LP	0x45D92400
+> +#define PCIE_G4X2_MAIN_2_PCIE_MST_WR_HP	0x45D92800
+> +#define PCIE_G4X2_MAIN_2_PCIE_MST_WR_LP	0x45D92C00
+> +#define PCIE_G4X2_MAIN_3_PCIE_MST_RD_HP	0x45D93000
+> +#define PCIE_G4X2_MAIN_3_PCIE_MST_RD_LP	0x45D93400
+> +#define PCIE_G4X2_MAIN_3_PCIE_MST_WR_HP	0x45D93800
+> +#define PCIE_G4X2_MAIN_3_PCIE_MST_WR_LP	0x45D93C00
+> +#define USB3P0SS_16FFC_MAIN_0_MSTR0	0x45D98000
+> +#define USB3P0SS_16FFC_MAIN_0_MSTW0	0x45D98400
+> +#define USB3P0SS_16FFC_MAIN_1_MSTR0	0x45D98800
+> +#define USB3P0SS_16FFC_MAIN_1_MSTW0	0x45D98C00
+> +#define USB3P0SS_16FFC_MAIN_2_MSTR0	0x45D99000
+> +#define USB3P0SS_16FFC_MAIN_2_MSTW0	0x45D99400
+> +#define MLBSS2P0_MAIN_0_MLBSS_DMA_VBUSP	0x45D99C00
+> +#define EMMC8SS_16FFC_MAIN_0_EMMCSS_RD	0x45D9A000
+> +#define EMMC8SS_16FFC_MAIN_0_EMMCSS_WR	0x45D9A400
+> +#define UFSHCI2P1SS_16FFC_MAIN_0_UFSHCI_VBM_MST_RD	0x45D9B000
+> +#define UFSHCI2P1SS_16FFC_MAIN_0_UFSHCI_VBM_MST_WR	0x45D9B400
+> +#define UFSHCI2P1SS_16FFC_MAIN_1_UFSHCI_VBM_MST_RD	0x45D9B800
+> +#define UFSHCI2P1SS_16FFC_MAIN_1_UFSHCI_VBM_MST_WR	0x45D9BC00
+> +#define DEBUGSS_K3_WRAP_CV0_MAIN_0_VBUSMR	0x45DA0000
+> +#define DEBUGSS_K3_WRAP_CV0_MAIN_0_VBUSMW	0x45DA0400
+> +#define PULSAR_SL_MAIN_0_CPU0_PMST	0x45DA4000
+> +#define PULSAR_SL_MAIN_0_CPU1_PMST	0x45DA4400
+> +#define PULSAR_SL_MAIN_1_CPU0_PMST	0x45DA4800
+> +#define PULSAR_SL_MAIN_1_CPU1_PMST	0x45DA4C00
+> +#define DMPAC_TOP_MAIN_0_DATA_MST	0x45DC0000
+> +#define K3_D5520MP2_MAIN_0_M_VBUSM_R	0x45DC0400
+> +#define K3_D5520MP2_MAIN_0_M_VBUSM_W	0x45DC0800
+> +#define K3_VXE384MP2_MAIN_0_M_VBUSM_R	0x45DC0C00
+> +#define K3_VXE384MP2_MAIN_0_M_VBUSM_W	0x45DC1000
+> +#define VPAC_TOP_MAIN_0_DATA_MST_0	0x45DC1400
+> +#define VPAC_TOP_MAIN_0_DATA_MST_1	0x45DC1800
+> +#define VPAC_TOP_MAIN_0_LDC0_M_MST	0x45DC1C00
+> +#define K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA	0x45DC2000
+> +#define K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC	0x45DC2400
+> +#define J7_LASCAR_GPU_WRAP_MAIN_0_M0_VBUSM_R_ASYNC	0x45DC5000
+> +#define J7_LASCAR_GPU_WRAP_MAIN_0_M0_VBUSM_W_ASYNC	0x45DC5800
+> +#define J7_LASCAR_GPU_WRAP_MAIN_0_M1_VBUSM_R_ASYNC	0x45DC6000
+> +#define J7_LASCAR_GPU_WRAP_MAIN_0_M1_VBUSM_W_ASYNC	0x45DC6800
+> diff --git a/arch/arm/mach-k3/r5/j721e/j721e_qos_uboot.c b/arch/arm/mach-k3/r5/j721e/j721e_qos_uboot.c
+> new file mode 100644
+> index 0000000000..713849a41b
+> --- /dev/null
+> +++ b/arch/arm/mach-k3/r5/j721e/j721e_qos_uboot.c
+> @@ -0,0 +1,126 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * j721e Quality of Service (QoS) Configuration Data
+> + *
+> + * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
+> + */
+> +
+> +#include <asm/arch/k3-qos.h>
+> +#include "j721e_qos.h"
+> +
+> +struct k3_qos_data qos_data[] = {
+> +	/* DSS_PIPE_VID1 - 2 endpoints, 2 channels */
+> +	{
+> +		.reg = K3_QOS_REG(K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA, 0),
+> +		.val = K3_QOS_VAL(0, 15, 0, 0, 0, 0),
+> +	},
+> +	{
+> +		.reg = K3_QOS_REG(K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA, 1),
+> +		.val = K3_QOS_VAL(0, 15, 0, 0, 0, 0),
+> +	},
+> +	{
+> +		.reg = K3_QOS_REG(K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC, 0),
+> +		.val = K3_QOS_VAL(0, 15, 0, 0, 0, 0),
+> +	},
+> +	{
+> +		.reg = K3_QOS_REG(K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC, 1),
+> +		.val = K3_QOS_VAL(0, 15, 0, 0, 0, 0),
+> +	},
+> +
+> +	/* DSS_PIPE_VIDL1 - 2 endpoints, 2 channels */
+> +	{
+> +		.reg = K3_QOS_REG(K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA, 2),
+> +		.val = K3_QOS_VAL(0, 15, 0, 0, 0, 0),
+> +	},
+> +	{
+> +		.reg = K3_QOS_REG(K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA, 3),
+> +		.val = K3_QOS_VAL(0, 15, 0, 0, 0, 0),
+> +	},
+> +	{
+> +		.reg = K3_QOS_REG(K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC, 2),
+> +		.val = K3_QOS_VAL(0, 15, 0, 0, 0, 0),
+> +	},
+> +	{
+> +		.reg = K3_QOS_REG(K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC, 3),
+> +		.val = K3_QOS_VAL(0, 15, 0, 0, 0, 0),
+> +	},
+> +
+> +	/* DSS_PIPE_VID2 - 2 endpoints, 2 channels */
+> +	{
+> +		.reg = K3_QOS_REG(K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA, 4),
+> +		.val = K3_QOS_VAL(0, 15, 0, 0, 0, 0),
+> +	},
+> +	{
+> +		.reg = K3_QOS_REG(K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA, 5),
+> +		.val = K3_QOS_VAL(0, 15, 0, 0, 0, 0),
+> +	},
+> +	{
+> +		.reg = K3_QOS_REG(K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC, 4),
+> +		.val = K3_QOS_VAL(0, 15, 0, 0, 0, 0),
+> +	},
+> +	{
+> +		.reg = K3_QOS_REG(K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC, 5),
+> +		.val = K3_QOS_VAL(0, 15, 0, 0, 0, 0),
+> +	},
+> +
+> +	/* DSS_PIPE_VIDL2 - 2 endpoints, 2 channels */
+> +	{
+> +		.reg = K3_QOS_REG(K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA, 6),
+> +		.val = K3_QOS_VAL(0, 15, 0, 0, 0, 0),
+> +	},
+> +	{
+> +		.reg = K3_QOS_REG(K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA, 7),
+> +		.val = K3_QOS_VAL(0, 15, 0, 0, 0, 0),
+> +	},
+> +	{
+> +		.reg = K3_QOS_REG(K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC, 6),
+> +		.val = K3_QOS_VAL(0, 15, 0, 0, 0, 0),
+> +	},
+> +	{
+> +		.reg = K3_QOS_REG(K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC, 7),
+> +		.val = K3_QOS_VAL(0, 15, 0, 0, 0, 0),
+> +	},
+> +
+> +	/* Following registers set 1:1 mapping for orderID MAP1/MAP2
+> +	 * remap registers. orderID x is remapped to orderID x again
+> +	 * This is to ensure orderID from MAP register is unchanged
+> +	 */
+> +
+> +	/* K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA - 2 groups */
+> +	{
+> +		.reg = K3_QOS_GROUP_REG(K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA, 0),
+> +		.val = K3_QOS_GROUP_DEFAULT_VAL_LOW,
+> +	},
+> +	{
+> +		.reg = K3_QOS_GROUP_REG(K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA, 1),
+> +		.val = K3_QOS_GROUP_DEFAULT_VAL_HIGH,
+> +	},
+> +	{
+> +		.reg = K3_QOS_GROUP_REG(K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA, 2),
+> +		.val = K3_QOS_GROUP_DEFAULT_VAL_LOW,
+> +	},
+> +	{
+> +		.reg = K3_QOS_GROUP_REG(K3_DSS_MAIN_0_DSS_INST0_VBUSM_DMA, 3),
+> +		.val = K3_QOS_GROUP_DEFAULT_VAL_HIGH,
+> +	},
+> +
+> +	/* K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC - 2 groups */
+> +	{
+> +		.reg = K3_QOS_GROUP_REG(K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC, 0),
+> +		.val = K3_QOS_GROUP_DEFAULT_VAL_LOW,
+> +	},
+> +	{
+> +		.reg = K3_QOS_GROUP_REG(K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC, 1),
+> +		.val = K3_QOS_GROUP_DEFAULT_VAL_HIGH,
+> +	},
+> +	{
+> +		.reg = K3_QOS_GROUP_REG(K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC, 2),
+> +		.val = K3_QOS_GROUP_DEFAULT_VAL_LOW,
+> +	},
+> +	{
+> +		.reg = K3_QOS_GROUP_REG(K3_DSS_MAIN_0_DSS_INST0_VBUSM_FBDC, 3),
+> +		.val = K3_QOS_GROUP_DEFAULT_VAL_HIGH,
+> +	},
+> +};
+> +
+> +u32 qos_count = ARRAY_SIZE(qos_data);
