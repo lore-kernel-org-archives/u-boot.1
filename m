@@ -4,48 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0A33C27C77
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 16:55:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C463C27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 16:55:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E949788A2A;
-	Fri, 14 Jun 2024 18:54:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id 59A3488A38;
+	Fri, 14 Jun 2024 18:54:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="E4Vg6ETD";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8818E88A03; Fri, 14 Jun 2024 18:54:36 +0200 (CEST)
-Received: from smtp-190e.mail.infomaniak.ch (smtp-190e.mail.infomaniak.ch
- [185.125.25.14])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3AC55889DC; Fri, 14 Jun 2024 18:54:56 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CB7A889DC
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 18:54:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9721B889F7
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 18:54:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
- [10.7.10.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4W153X5Hf4zhvB;
- Fri, 14 Jun 2024 18:54:32 +0200 (CEST)
-Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4W153X1mywzLTl; Fri, 14 Jun 2024 18:54:32 +0200 (CEST)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Fri, 14 Jun 2024 18:54:13 +0200
-Subject: [PATCH next 2/3] rockchip: io-domain: add support for PX30
+ spf=pass smtp.mailfrom=j-humphreys@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45EGsg5f061824;
+ Fri, 14 Jun 2024 11:54:42 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1718384082;
+ bh=l4eBneDUoTa971BK4+SuX9TQkS4I84HzMfA7Y3usao4=;
+ h=From:To:CC:Subject:In-Reply-To:References:Date;
+ b=E4Vg6ETDte5gUf61lKKt1c+7xjh7MYK468dK1jzF7O4ynYuOi59WcoM+NGmCE7FC6
+ hXBENupK4xkoP4kwUvYK4fNi49shx8U6cTDCIDu6qnRFfYdy8OKT9NN19BPuYPUGT8
+ GmAid/0jDPORF+vHh6e4BvJqSlgA5B/OxZ2F2MtI=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45EGsgRr007756
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 14 Jun 2024 11:54:42 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 14
+ Jun 2024 11:54:41 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 14 Jun 2024 11:54:41 -0500
+Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45EGsfPs050703;
+ Fri, 14 Jun 2024 11:54:41 -0500
+From: Jon Humphreys <j-humphreys@ti.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+CC: Sumit Garg <sumit.garg@linaro.org>, Rasmus Villemoes
+ <rasmus.villemoes@prevas.dk>, Wei Ming Chen <jj251510319013@gmail.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Joshua Watt <jpewhacker@gmail.com>, "Caleb
+ Connolly" <caleb.connolly@linaro.org>,
+ Alexander Gendin <agendin@matrox.com>, Sean Anderson <seanga2@gmail.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Tom Rini <trini@konsulko.com>, Mario Six <mario.six@gdsys.cc>,
+ Simon Glass <sjg@chromium.org>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH v2 0/2] scripts/Makefile.lib: EFI: Use capsule CRT
+ instead of ESL
+In-Reply-To: <CAC_iWjLE05LthXeAL4o92oywjtkCmPa+T6K8DRBvV=DFqZVybA@mail.gmail.com>
+References: <20240613202753.2528889-1-j-humphreys@ti.com>
+ <CAC_iWjLE05LthXeAL4o92oywjtkCmPa+T6K8DRBvV=DFqZVybA@mail.gmail.com>
+Date: Fri, 14 Jun 2024 11:54:41 -0500
+Message-ID: <86le37ihwu.fsf@udb0321960.dhcp.ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240614-px30-io-domain-v1-2-9552966d3911@cherry.de>
-References: <20240614-px30-io-domain-v1-0-9552966d3911@cherry.de>
-In-Reply-To: <20240614-px30-io-domain-v1-0-9552966d3911@cherry.de>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, 
- Heiko Stuebner <heiko.stuebner@cherry.de>, 
- Klaus Goger <klaus.goger@cherry.de>
-Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.14-dev-a6ee3
-X-Infomaniak-Routing: alpha
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,118 +90,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
+Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
 
-Port the PX30 part of the Rockchip IO Domain driver from Linux.
+> Hi Jonathan
+>
+> On Thu, 13 Jun 2024 at 23:28, Jonathan Humphreys <j-humphreys@ti.com> wrote:
+>>
+>> Use the capsule's public key certificate rather than a prebuilt ESL
+>> generated from the certificate. The ESL is now generated as part of the
+>> build.
+>
+> Is there a reason to do this? I understand that the .crt extension
+> might be well known while the .esl is not, but OTOH the system you
+> build on after this change *needs* to have cert-to-efi-sig-list
+> installed
+>
+Hi Ilias,
 
-This differs from linux version in that the io iodomain bit is enabled
-in the write ops instead of in an init ops as in linux, this way we can
-avoid keeping a full state of all supplies that have been configured.
+In general, I am following the principle that it is better to not include
+in your source repo derived binaries that can be built at buildtime.
 
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
----
- drivers/misc/rockchip-io-domain.c | 66 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 66 insertions(+)
+As far as the need to have cert-to-efi-sig-list, it is part of efitools and
+that is already documented as a requirement for the build host ([0] and
+[1]), and our baseline Docker file also includes it.
 
-diff --git a/drivers/misc/rockchip-io-domain.c b/drivers/misc/rockchip-io-domain.c
-index 04d4d07c412..cf4f7c3984c 100644
---- a/drivers/misc/rockchip-io-domain.c
-+++ b/drivers/misc/rockchip-io-domain.c
-@@ -27,6 +27,10 @@
- #define MAX_VOLTAGE_1_8		1980000
- #define MAX_VOLTAGE_3_3		3600000
- 
-+#define PX30_IO_VSEL			0x180
-+#define PX30_IO_VSEL_VCCIO6_SRC		BIT(0)
-+#define PX30_IO_VSEL_VCCIO6_SUPPLY_NUM	1
-+
- #define RK3328_SOC_CON4			0x410
- #define RK3328_SOC_CON4_VCCIO2		BIT(7)
- #define RK3328_SOC_VCCIO2_SUPPLY_NUM	1
-@@ -99,6 +103,22 @@ static int rockchip_iodomain_write(struct regmap *grf, uint offset, int idx, int
- 	return regmap_write(grf, offset, val);
- }
- 
-+static int px30_iodomain_write(struct regmap *grf, uint offset, int idx, int uV)
-+{
-+	int ret = rockchip_iodomain_write(grf, offset, idx, uV);
-+
-+	if (!ret && idx == PX30_IO_VSEL_VCCIO6_SUPPLY_NUM) {
-+		/*
-+		 * set vccio6 iodomain to also use this framework
-+		 * instead of a special gpio.
-+		 */
-+		u32 val = PX30_IO_VSEL_VCCIO6_SRC | (PX30_IO_VSEL_VCCIO6_SRC << 16);
-+		ret = regmap_write(grf, PX30_IO_VSEL, val);
-+	}
-+
-+	return ret;
-+}
-+
- static int rk3328_iodomain_write(struct regmap *grf, uint offset, int idx, int uV)
- {
- 	int ret = rockchip_iodomain_write(grf, offset, idx, uV);
-@@ -131,6 +151,44 @@ static int rk3399_pmu_iodomain_write(struct regmap *grf, uint offset, int idx, i
- 	return ret;
- }
- 
-+static const struct rockchip_iodomain_soc_data soc_data_px30 = {
-+	.grf_offset = 0x180,
-+	.supply_names = {
-+		NULL,
-+		"vccio6-supply",
-+		"vccio1-supply",
-+		"vccio2-supply",
-+		"vccio3-supply",
-+		"vccio4-supply",
-+		"vccio5-supply",
-+		"vccio-oscgpi-supply",
-+	},
-+	.write = px30_iodomain_write,
-+};
-+
-+static const struct rockchip_iodomain_soc_data soc_data_px30_pmu = {
-+	.grf_offset = 0x100,
-+	.supply_names = {
-+		NULL,
-+		NULL,
-+		NULL,
-+		NULL,
-+		NULL,
-+		NULL,
-+		NULL,
-+		NULL,
-+		NULL,
-+		NULL,
-+		NULL,
-+		NULL,
-+		NULL,
-+		NULL,
-+		"pmuio1-supply",
-+		"pmuio2-supply",
-+	},
-+	.write = rockchip_iodomain_write,
-+};
-+
- static const struct rockchip_iodomain_soc_data soc_data_rk3328 = {
- 	.grf_offset = 0x410,
- 	.supply_names = {
-@@ -190,6 +248,14 @@ static const struct rockchip_iodomain_soc_data soc_data_rk3568_pmu = {
- };
- 
- static const struct udevice_id rockchip_iodomain_ids[] = {
-+	{
-+		.compatible = "rockchip,px30-io-voltage-domain",
-+		.data = (ulong)&soc_data_px30,
-+	},
-+	{
-+		.compatible = "rockchip,px30-pmu-io-voltage-domain",
-+		.data = (ulong)&soc_data_px30_pmu,
-+	},
- 	{
- 		.compatible = "rockchip,rk3328-io-voltage-domain",
- 		.data = (ulong)&soc_data_rk3328,
+[0] https://docs.u-boot.org/en/latest/develop/uefi/uefi.html#enabling-capsule-authentication
+[1] https://docs.u-boot.org/en/latest/develop/uefi/uefi.html#configuring-uefi-secure-boot
 
--- 
-2.45.2
+Jon
 
+> Thanks
+> /Ilias
+>>
+>> Changes from v1:
+>> - Converted the single patch to a series to include a bug fix found during
+>>   development.
+>> - Created an explicit rule for creating the ESL file for proper makefile
+>>   dependency tracking.  v1 had combined creating the ESL file and
+>>   generating the .dtsi include in a single command.
+>>
+>> Jonathan Humphreys (2):
+>>   scripts/Makefile.lib: fixes: Embed capsule public key in platform's
+>>     dtb
+>>   scripts/Makefile.lib: EFI: Use capsule CRT instead of ESL file
+>>
+>>  board/sandbox/capsule_pub_esl_good.esl | Bin 831 -> 0 bytes
+>>  configs/sandbox_defconfig              |   2 +-
+>>  configs/sandbox_flattree_defconfig     |   2 +-
+>>  doc/develop/uefi/uefi.rst              |   8 ++++----
+>>  lib/efi_loader/Kconfig                 |  12 +++++++-----
+>>  scripts/Makefile.lib                   |  24 +++++++++++++++---------
+>>  6 files changed, 28 insertions(+), 20 deletions(-)
+>>  delete mode 100644 board/sandbox/capsule_pub_esl_good.esl
+>>
+>> --
+>> 2.34.1
+>>
