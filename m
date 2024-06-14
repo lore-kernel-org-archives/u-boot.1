@@ -4,80 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D276C27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 07:02:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4255C27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 07:59:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 908B5889AF;
-	Fri, 14 Jun 2024 09:02:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2F6F1888F2;
+	Fri, 14 Jun 2024 09:59:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KBnIMepo";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="zcdy9fP9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3090889AD; Fri, 14 Jun 2024 09:02:38 +0200 (CEST)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 295DF8803E; Fri, 14 Jun 2024 09:59:28 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 931C38827A
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 09:02:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0556D88985
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 09:59:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2c1ab9e17f6so1505407a91.1
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 00:02:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718348555; x=1718953355; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LwkXC5NQ+0xEDmxmoANjEqTlM4/xKYOJ+6vnFLe76to=;
- b=KBnIMepounHLboBOgrdKNxQ5OcohxY+0ddtNW4kH/I/43r5oFfXOfbuswv/2JPIOcR
- ARRXFgHI59CbHq39uFDjlLNo4ij/D7NvfpGQhXxkw+KGfc4u3exRzc1BiWGE+f4de5ZL
- RfUpC3GcMOCWEt7Z3IbavrPGGum8O+tmpti/FQP6tIeF5cxDrM5O8pTKZLja0VKyx0rv
- cj4D1RvFwuYHdfYYDiYhBFxvGu5BlyIL4+n/2WuDjcCTkxa/l+6ehB16tQMY8TQZHgPP
- DSKl0N1sg2uGGXFabaX73wpgsBxCLmnCi6OZF2Gic5Wr/gdE931NX42sZ+PuiOE5FIN2
- yzNw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718348555; x=1718953355;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=LwkXC5NQ+0xEDmxmoANjEqTlM4/xKYOJ+6vnFLe76to=;
- b=GtQCZdmGhM+qo0SGMoF3pBfVHThdueasgUEPlkQUZEMCdf0d1n/C0u5jBYA0+XZTC/
- PsOLoasdlMzsbXWMV4T9DiEGnMJKCXE8DX6kdXI5KllAXjG6pLa8RggBpGw+6Od+dYM+
- QJWDzmpVUQmriZwpOPR/hDHe3H/DAEpvpH7jqg3hM20jXIznu3bB7ab2pvZo0pwV8fQc
- MJyfhGd6S+JZPf2+ro72dY5Ou5rZ/uugQbdsK89tHk+jxA5h0svrAAp57J24MgM2t/uO
- 5q5OrkTw74XWwG2SxNeZgvczTEOEjhaJzwwN589uDDQEXfDLUWKNbcMyeuz8kSmfiThY
- Ql0A==
-X-Gm-Message-State: AOJu0Yw+rgsWh8QTKbLk3cWeOOXx8WEljemSKkFd3N6NiJTcgi+MFnp3
- IFAEVYBtW4vL7E8f0Fasw/q095heGRqY1GuTbVicyPSa8hf8V3QtFeiXQ8PAdddGE2b5rmQgDnf
- eimrFTwwA4ZNDJlPLEnMReSfExPiwWyPs1VwyBw==
-X-Google-Smtp-Source: AGHT+IH3ObKjC7ii7MaKncv3ysjio6Rg3Ed40+XVjGW38Olgu5I5rpjBCw9NnMDgY957m79KELNSkBSdtuVow4k1oLg=
-X-Received: by 2002:a17:90a:640e:b0:2c2:97c2:1426 with SMTP id
- 98e67ed59e1d1-2c4db132d15mr1969003a91.10.1718348555043; Fri, 14 Jun 2024
- 00:02:35 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=6895de7ee8=patrick.delaunay@foss.st.com
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45E6Oor2009961;
+ Fri, 14 Jun 2024 09:59:23 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ YQ/uUrXQBve46JteH0jzmikeqPEA5+TgmM4smkDpFkI=; b=zcdy9fP9mnhFH9SP
+ 29kN87MD0of4i9hLAzUrqbToGivJGLA2hQPeJC1zGnUZzixZOZ9sbaxWNqdMAA66
+ 9Yy4HOyzR3gVwJy7BuG69efkJ79+o5YD4z/8TDVOGPgTraXdbyOAX1tV6jaaDoI1
+ CK+SCf8yNFfHMqlrzslUWncZA7bJQrFC0y0A+uZBOMpmsaO02DEEgGDErBVsIY3z
+ oorxjs9QekmX+XnavrqfVxohtkXAf2Je/GMvNObnhFGcVYdahs7sFwk26lF9Jwcj
+ FOcqDgEiqp8dCN2gFe9P2/w8wtME4Wx3BNnJfgsdni2xZIHvQNQtl8zeeIpqY/sK
+ if5NFQ==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3ypbp4fbfe-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 14 Jun 2024 09:59:23 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 275EB4002D;
+ Fri, 14 Jun 2024 09:59:19 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2ECAE20E1E9;
+ Fri, 14 Jun 2024 09:59:05 +0200 (CEST)
+Received: from [10.48.87.205] (10.48.87.205) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Fri, 14 Jun
+ 2024 09:59:04 +0200
+Message-ID: <a19faecc-1d0a-4369-b51e-428ffaf00451@foss.st.com>
+Date: Fri, 14 Jun 2024 09:59:03 +0200
 MIME-Version: 1.0
-References: <20240610145920.3302001-1-sjg@chromium.org>
- <20240610145920.3302001-3-sjg@chromium.org>
- <CAC_iWj+fSRt2E3ZcHaXrKjC+Gz7LZu_EWgiegWG3F1MJMJrPNQ@mail.gmail.com>
- <14ae7a31-757a-4220-b2a8-20204e3d7aa9@gmx.de>
-In-Reply-To: <14ae7a31-757a-4220-b2a8-20204e3d7aa9@gmx.de>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 14 Jun 2024 10:01:58 +0300
-Message-ID: <CAC_iWjKAQwLobcO8virDKKD8cQ4j7-OAzn2nriNmdGUtMRKXnw@mail.gmail.com>
-Subject: Re: [PATCH v2 2/9] tpm: Avoid code bloat when not using
- EFI_TCG2_PROTOCOL
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Eddie James <eajames@linux.ibm.com>, Manorit Chawdhry <m-chawdhry@ti.com>, 
- Michal Simek <michal.simek@amd.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
- Sean Anderson <sean.anderson@seco.com>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] stm32mp1: spl: Fix compilation warnings
+To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini
+ <trini@konsulko.com>
+References: <20240611095239.16026-1-patrice.chotard@foss.st.com>
+Content-Language: en-US
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20240611095239.16026-1-patrice.chotard@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.205]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-06-13_15,2024-06-13_02,2024-05-17_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,96 +89,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 14 Jun 2024 at 09:59, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> On 6/14/24 08:03, Ilias Apalodimas wrote:
-> > Hi Simon,
-> >
-> > On Mon, 10 Jun 2024 at 17:59, Simon Glass <sjg@chromium.org> wrote:
-> >>
-> >> It does not make sense to enable all SHA algorithms unless they are
-> >> needed. It bloats the code and in this case, causes chromebook_link to
-> >> fail to build. That board does use the TPM, but not with measured boot,
-> >> nor EFI.
-> >>
-> >> Since EFI_TCG2_PROTOCOL already selects these options, we just need to
-> >> add them to MEASURED_BOOT as well.
-> >>
-> >> Note that the original commit combines refactoring and new features,
-> >> which makes it hard to see what is going on.
-> >>
-> >> Fixes: 97707f12fda tpm: Support boot measurements
-> >> Signed-off-by: Simon Glass <sjg@chromium.org>
-> >> ---
-> >>
-> >> Changes in v2:
-> >> - Put the conditions under EFI_TCG2_PROTOCOL
-> >> - Consider MEASURED_BOOT too
-> >>
-> >>   boot/Kconfig | 4 ++++
-> >>   lib/Kconfig  | 4 ----
-> >>   2 files changed, 4 insertions(+), 4 deletions(-)
-> >>
-> >> diff --git a/boot/Kconfig b/boot/Kconfig
-> >> index 6f3096c15a6..b061891e109 100644
-> >> --- a/boot/Kconfig
-> >> +++ b/boot/Kconfig
-> >> @@ -734,6 +734,10 @@ config LEGACY_IMAGE_FORMAT
-> >>   config MEASURED_BOOT
-> >>          bool "Measure boot images and configuration when booting without EFI"
-> >>          depends on HASH && TPM_V2
-> >> +       select SHA1
-> >> +       select SHA256
-> >> +       select SHA384
-> >> +       select SHA512
-> >>          help
-> >>            This option enables measurement of the boot process when booting
-> >>            without UEFI . Measurement involves creating cryptographic hashes
-> >> diff --git a/lib/Kconfig b/lib/Kconfig
-> >> index 189e6eb31aa..568892fce44 100644
-> >> --- a/lib/Kconfig
-> >> +++ b/lib/Kconfig
-> >> @@ -438,10 +438,6 @@ config TPM
-> >>          bool "Trusted Platform Module (TPM) Support"
-> >>          depends on DM
-> >>          imply DM_RNG
-> >> -       select SHA1
-> >> -       select SHA256
-> >> -       select SHA384
-> >> -       select SHA512
-> >
-> > I am not sure this is the right way to deal with your problem.
-> > The TPM main functionality is to measure and extend PCRs, so shaXXXX
-> > is really required. To make things even worse, you don't know the PCR
-> > banks that are enabled beforehand. This is a runtime config of the
-> > TPM.
->
-> If neither MEASURED_BOOT nor EFI_TCG2_PROTOCOL is selected, U-Boot
-> cannot extend PCRs. So it seems fine to let these two select the
-> complete set of hashing algorithms. As Simon pointed out for
-> EFI_TCG2_PROTOCOL this is already done in lib/efi_loader/Kconfig.
+Hi Patrice,
 
-It can. The cmd we have can extend those pcrs -- e.g tpm2 pcr_extend 8
-0xb0000000
+On 6/11/24 11:52, Patrice Chotard wrote:
+> Fix the following compilation warnings :
+>
+> ../arch/arm/mach-stm32mp/stm32mp1/spl.c: In function 'stm32_init_tzc_for_optee':
+> ../arch/arm/mach-stm32mp/stm32mp1/spl.c:148:37: warning: 'optee_size' may be used uninitialized [-Wmaybe-uninitialized]
+>    148 |         tee_shmem_base = optee_base + optee_size - CFG_SHMEM_SIZE;
+>        |                          ~~~~~~~~~~~^~~~~~~~~~~~
+> ../arch/arm/mach-stm32mp/stm32mp1/spl.c:137:30: note: 'optee_size' was declared here
+>    137 |         uint32_t optee_base, optee_size, tee_shmem_base;
+>        |                              ^~~~~~~~~~
+> ../arch/arm/mach-stm32mp/stm32mp1/spl.c:148:37: warning: 'optee_base' may be used
+> uninitialized [-Wmaybe-uninitialized]
+>    148 |         tee_shmem_base = optee_base + optee_size - CFG_SHMEM_SIZE;
+>        |                          ~~~~~~~~~~~^~~~~~~~~~~~
+> ../arch/arm/mach-stm32mp/stm32mp1/spl.c:137:18: note: 'optee_base' was declared here
+>    137 |         uint32_t optee_base, optee_size, tee_shmem_base;
+>        |                  ^~~~~~~~~~
+>
+> Fix also the following checkpatch "check" :
+>
+> CHECK: Prefer kernel type 'u32' over 'uint32_t'
+> 37: FILE: arch/arm/mach-stm32mp/stm32mp1/spl.c:137:
+> +	uint32_t optee_base = 0, optee_size = 0, tee_shmem_base;
+>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> ---
+>
+>   arch/arm/mach-stm32mp/stm32mp1/spl.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/arch/arm/mach-stm32mp/stm32mp1/spl.c b/arch/arm/mach-stm32mp/stm32mp1/spl.c
+> index 6c79259b2c8..10abbed87f0 100644
+> --- a/arch/arm/mach-stm32mp/stm32mp1/spl.c
+> +++ b/arch/arm/mach-stm32mp/stm32mp1/spl.c
+> @@ -134,7 +134,7 @@ void stm32_init_tzc_for_optee(void)
+>   {
+>   	const uint32_t dram_size = stm32mp_get_dram_size();
+>   	const uintptr_t dram_top = STM32_DDR_BASE + (dram_size - 1);
+> -	uint32_t optee_base, optee_size, tee_shmem_base;
+> +	u32 optee_base = 0, optee_size = 0, tee_shmem_base;
+>   	const uintptr_t tzc = STM32_TZC_BASE;
+>   	int ret;
+>   
 
-Regards
-/Ilias
->
-> Even if U-Boot does not support measured boot (EFI or non-EFI) we might
-> still be using the TPMs RNG.
->
-> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
->
-> >
-> >   So this would make the TPM pretty useless. Can't you remove something
-> > that doesn't break functionality?
-> >
-> > Thanks
-> > /Ilias
-> >>          help
-> >>            This enables support for TPMs which can be used to provide security
-> >>            features for your board. The TPM can be connected via LPC or I2C
-> >> --
-> >> 2.34.1
-> >>
->
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+
+Thanks
+Patrick
+
+
