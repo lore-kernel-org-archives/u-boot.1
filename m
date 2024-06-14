@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5BDBC27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 16:40:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B277FC27C77
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 16:40:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE00C88001;
-	Fri, 14 Jun 2024 18:36:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 359BB889C0;
+	Fri, 14 Jun 2024 18:36:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dQaqK3Gs";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="sBGDhSIS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9EF0D8887A; Fri, 14 Jun 2024 18:36:18 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 7063A88A73; Fri, 14 Jun 2024 18:36:20 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E322288A5F
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 18:36:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 512BE88A2F
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 18:36:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45EGZtTt013687;
- Fri, 14 Jun 2024 11:35:55 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1718382955;
- bh=LT6qkYOCXyx21IuX5owr9ltbmH7mO2i0535QE0s9/x8=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=dQaqK3Gs2nAgQkFrn/zEfN3rHBlGYGWCxihhwc+qWGP92HJcX4FD/1qSoInp9r212
- Pxe4YgmdRaH3TYSdVmMM+jo+DwGD3lxkqXmYQljCo8ruLg4u/Z6NNhBdR0H2iyy7Xt
- jmK56XSJMybcMgoJTZamzncvPpD1K6aC2NhIT2lM=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45EGZsJu076574
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 14 Jun 2024 11:35:55 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 14
- Jun 2024 11:35:54 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 14 Jun 2024 11:35:54 -0500
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45EGZsvT027232;
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45EGZsFM008065;
  Fri, 14 Jun 2024 11:35:54 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1718382954;
+ bh=K5bfWiPhHFv7+39mexlJIPsoYS/qjCtXmr5HgZNF5KE=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=sBGDhSIShuonwsdPxWxltlwq1Bi4k1jl3YG8fPO72Bfaf3K3kNw/JbLU98moBzpd2
+ dBEPkoEapAaDYcSeJJVO4KBPAcyChm2S4IeBIBmXSg4PYmO3c9g3+ZJdkSc5UABcl6
+ OSn6ofJRj83lRUQrbHLrK190YXCmaso0kA7zTb9k=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45EGZspE030309
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 14 Jun 2024 11:35:54 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 14
+ Jun 2024 11:35:53 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 14 Jun 2024 11:35:53 -0500
+Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45EGZrLo027192;
+ Fri, 14 Jun 2024 11:35:53 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Heinrich Schuchardt
@@ -67,9 +67,9 @@ To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ilias Apalodimas
  <ilias.apalodimas@linaro.org>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH v7 24/24] doc: board: ti: j784s4: document OSPI NOR layout
-Date: Fri, 14 Jun 2024 11:35:51 -0500
-Message-ID: <20240614163551.2610212-25-j-humphreys@ti.com>
+Subject: [PATCH v7 06/24] doc: board: ti: am64x: document OSPI layout
+Date: Fri, 14 Jun 2024 11:35:33 -0500
+Message-ID: <20240614163551.2610212-7-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240614163551.2610212-1-j-humphreys@ti.com>
 References: <20240614163551.2610212-1-j-humphreys@ti.com>
@@ -93,21 +93,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Added OSPI NOR flash layout diagram, as well as example commands to flash
-firmware to it.  Added OSPI boot mode pin setting.
+Added OSPI flash layout diagram, as well as example commands to flash
+firmware to it.
 
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- doc/board/ti/img/ospi_sysfw3.svg | 802 +++++++++++++++++++++++++++++++
- doc/board/ti/j784s4_evm.rst      |  28 ++
- 2 files changed, 830 insertions(+)
- create mode 100644 doc/board/ti/img/ospi_sysfw3.svg
+ doc/board/ti/am64x_evm.rst           |  24 +
+ doc/board/ti/img/ospi_sysfw-am64.svg | 802 +++++++++++++++++++++++++++
+ 2 files changed, 826 insertions(+)
+ create mode 100644 doc/board/ti/img/ospi_sysfw-am64.svg
 
-diff --git a/doc/board/ti/img/ospi_sysfw3.svg b/doc/board/ti/img/ospi_sysfw3.svg
+diff --git a/doc/board/ti/am64x_evm.rst b/doc/board/ti/am64x_evm.rst
+index 6ae35b3fee3..88997b6a283 100644
+--- a/doc/board/ti/am64x_evm.rst
++++ b/doc/board/ti/am64x_evm.rst
+@@ -140,6 +140,30 @@ Image formats:
+ .. image:: img/nodm_tispl.bin.svg
+   :alt: tispl.bin image format
+ 
++OSPI:
++-----
++ROM supports booting from OSPI from offset 0x0.
++
++Flashing images to OSPI:
++
++Below commands can be used to download tiboot3.bin, tispl.bin, and u-boot.img,
++over tftp and then flash those to OSPI at their respective addresses.
++
++.. prompt:: bash =>
++
++  sf probe
++  tftp ${loadaddr} tiboot3.bin
++  sf update $loadaddr 0x0 $filesize
++  tftp ${loadaddr} tispl.bin
++  sf update $loadaddr 0x100000 $filesize
++  tftp ${loadaddr} u-boot.img
++  sf update $loadaddr 0x300000 $filesize
++
++Flash layout for OSPI:
++
++.. image:: img/ospi_sysfw-am64.svg
++  :alt: OSPI flash partition layout
++
+ Switch Setting for Boot Mode
+ ----------------------------
+ 
+diff --git a/doc/board/ti/img/ospi_sysfw-am64.svg b/doc/board/ti/img/ospi_sysfw-am64.svg
 new file mode 100644
-index 00000000000..382867c6f4f
+index 00000000000..f6244dce596
 --- /dev/null
-+++ b/doc/board/ti/img/ospi_sysfw3.svg
++++ b/doc/board/ti/img/ospi_sysfw-am64.svg
 @@ -0,0 +1,802 @@
 +<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 +<!--SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause-->
@@ -119,8 +154,8 @@ index 00000000000..382867c6f4f
 +   width="321px"
 +   height="336px"
 +   viewBox="-0.5 -0.5 321 336"
-+   id="svg205"
-+   sodipodi:docname="ospi_sysfw3.svg"
++   id="svg28701"
++   sodipodi:docname="ospi_sysfw-am64.svg"
 +   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
 +   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
 +   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -128,7 +163,7 @@ index 00000000000..382867c6f4f
 +   xmlns:svg="http://www.w3.org/2000/svg"
 +   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 +  <sodipodi:namedview
-+     id="namedview207"
++     id="namedview28703"
 +     pagecolor="#505050"
 +     bordercolor="#eeeeee"
 +     borderopacity="1"
@@ -136,21 +171,21 @@ index 00000000000..382867c6f4f
 +     inkscape:pageopacity="0"
 +     inkscape:pagecheckerboard="0"
 +     showgrid="false"
-+     inkscape:zoom="3.4732143"
-+     inkscape:cx="160.37018"
++     inkscape:zoom="2.5982143"
++     inkscape:cx="160.49485"
 +     inkscape:cy="168"
 +     inkscape:window-width="3370"
 +     inkscape:window-height="1376"
 +     inkscape:window-x="70"
 +     inkscape:window-y="27"
 +     inkscape:window-maximized="1"
-+     inkscape:current-layer="g203" />
++     inkscape:current-layer="g28699" />
 +  <defs
-+     id="defs9" />
++     id="defs28505" />
 +  <g
-+     id="g203">
++     id="g28699">
 +    <g
-+       id="g13">
++       id="g28509">
 +      <rect
 +         x="120"
 +         y="15"
@@ -159,15 +194,15 @@ index 00000000000..382867c6f4f
 +         fill="none"
 +         stroke="rgb(0, 0, 0)"
 +         pointer-events="all"
-+         id="rect11" />
++         id="rect28507" />
 +    </g>
 +    <g
-+       id="g21">
++       id="g28517">
 +      <g
 +         transform="translate(-0.5 -0.5)"
-+         id="g19">
++         id="g28515">
 +        <switch
-+           id="switch17">
++           id="switch28513">
 +          <foreignObject
 +             pointer-events="none"
 +             width="100%"
@@ -180,7 +215,7 @@ index 00000000000..382867c6f4f
 +                 data-drawio-colors="color: rgb(0, 0, 0); "
 +                 style="box-sizing: border-box; font-size: 0px; text-align: center;">
 +                <xhtml:div
-+                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">ospi.tiboot3(512k)</xhtml:div>
++                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">ospi.tiboot3(1M)</xhtml:div>
 +              </xhtml:div>
 +            </xhtml:div>
 +          </foreignObject>
@@ -191,12 +226,12 @@ index 00000000000..382867c6f4f
 +             font-family="Helvetica"
 +             font-size="12px"
 +             text-anchor="middle"
-+             id="text15">ospi.tiboot3(512k)</text>
++             id="text28511">ospi.tiboot3(1M)</text>
 +        </switch>
 +      </g>
 +    </g>
 +    <g
-+       id="g25">
++       id="g28521">
 +      <rect
 +         x="60"
 +         y="5"
@@ -205,15 +240,15 @@ index 00000000000..382867c6f4f
 +         fill="none"
 +         stroke="none"
 +         pointer-events="all"
-+         id="rect23" />
++         id="rect28519" />
 +    </g>
 +    <g
-+       id="g33">
++       id="g28529">
 +      <g
 +         transform="translate(-0.5 -0.5)"
-+         id="g31">
++         id="g28527">
 +        <switch
-+           id="switch29">
++           id="switch28525">
 +          <foreignObject
 +             pointer-events="none"
 +             width="100%"
@@ -240,12 +275,12 @@ index 00000000000..382867c6f4f
 +             font-family="Helvetica"
 +             font-size="12px"
 +             text-anchor="end"
-+             id="text27">0x0</text>
++             id="text28523">0x0</text>
 +        </switch>
 +      </g>
 +    </g>
 +    <g
-+       id="g37">
++       id="g28533">
 +      <rect
 +         x="120"
 +         y="55"
@@ -254,15 +289,15 @@ index 00000000000..382867c6f4f
 +         fill="none"
 +         stroke="rgb(0, 0, 0)"
 +         pointer-events="all"
-+         id="rect35" />
++         id="rect28531" />
 +    </g>
 +    <g
-+       id="g45">
++       id="g28541">
 +      <g
 +         transform="translate(-0.5 -0.5)"
-+         id="g43">
++         id="g28539">
 +        <switch
-+           id="switch41">
++           id="switch28537">
 +          <foreignObject
 +             pointer-events="none"
 +             width="100%"
@@ -286,12 +321,12 @@ index 00000000000..382867c6f4f
 +             font-family="Helvetica"
 +             font-size="12px"
 +             text-anchor="middle"
-+             id="text39">ospi.tispl(2M)</text>
++             id="text28535">ospi.tispl(2M)</text>
 +        </switch>
 +      </g>
 +    </g>
 +    <g
-+       id="g49">
++       id="g28545">
 +      <rect
 +         x="0"
 +         y="45"
@@ -300,15 +335,15 @@ index 00000000000..382867c6f4f
 +         fill="none"
 +         stroke="none"
 +         pointer-events="all"
-+         id="rect47" />
++         id="rect28543" />
 +    </g>
 +    <g
-+       id="g57">
++       id="g28553">
 +      <g
 +         transform="translate(-0.5 -0.5)"
-+         id="g55">
++         id="g28551">
 +        <switch
-+           id="switch53">
++           id="switch28549">
 +          <foreignObject
 +             pointer-events="none"
 +             width="100%"
@@ -323,7 +358,7 @@ index 00000000000..382867c6f4f
 +                <xhtml:div
 +                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
 +                  <xhtml:pre
-+                     style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, &quot;Courier New&quot;, Courier, monospace; line-height: 1.4; margin-top: 0px; margin-bottom: 0px; padding: 12px; overflow: auto; color: rgb(64, 64, 64); text-align: start;">0x80000</xhtml:pre>
++                     style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, &quot;Courier New&quot;, Courier, monospace; line-height: 1.4; margin-top: 0px; margin-bottom: 0px; padding: 12px; overflow: auto; color: rgb(64, 64, 64); text-align: start;">0x100000</xhtml:pre>
 +                </xhtml:div>
 +              </xhtml:div>
 +            </xhtml:div>
@@ -335,12 +370,12 @@ index 00000000000..382867c6f4f
 +             font-family="Helvetica"
 +             font-size="12px"
 +             text-anchor="end"
-+             id="text51">0x80000</text>
++             id="text28547">0x100000</text>
 +        </switch>
 +      </g>
 +    </g>
 +    <g
-+       id="g61">
++       id="g28557">
 +      <rect
 +         x="120"
 +         y="95"
@@ -349,15 +384,15 @@ index 00000000000..382867c6f4f
 +         fill="none"
 +         stroke="rgb(0, 0, 0)"
 +         pointer-events="all"
-+         id="rect59" />
++         id="rect28555" />
 +    </g>
 +    <g
-+       id="g69">
++       id="g28565">
 +      <g
 +         transform="translate(-0.5 -0.5)"
-+         id="g67">
++         id="g28563">
 +        <switch
-+           id="switch65">
++           id="switch28561">
 +          <foreignObject
 +             pointer-events="none"
 +             width="100%"
@@ -381,12 +416,12 @@ index 00000000000..382867c6f4f
 +             font-family="Helvetica"
 +             font-size="12px"
 +             text-anchor="middle"
-+             id="text63">ospi.u-boot(4M)</text>
++             id="text28559">ospi.u-boot(4M)</text>
 +        </switch>
 +      </g>
 +    </g>
 +    <g
-+       id="g73">
++       id="g28569">
 +      <rect
 +         x="0"
 +         y="85"
@@ -395,15 +430,15 @@ index 00000000000..382867c6f4f
 +         fill="none"
 +         stroke="none"
 +         pointer-events="all"
-+         id="rect71" />
++         id="rect28567" />
 +    </g>
 +    <g
-+       id="g81">
++       id="g28577">
 +      <g
 +         transform="translate(-0.5 -0.5)"
-+         id="g79">
++         id="g28575">
 +        <switch
-+           id="switch77">
++           id="switch28573">
 +          <foreignObject
 +             pointer-events="none"
 +             width="100%"
@@ -418,7 +453,7 @@ index 00000000000..382867c6f4f
 +                <xhtml:div
 +                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
 +                  <xhtml:pre
-+                     style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, &quot;Courier New&quot;, Courier, monospace; line-height: 1.4; margin-top: 0px; margin-bottom: 0px; padding: 12px; overflow: auto; color: rgb(64, 64, 64); text-align: start;">0x280000</xhtml:pre>
++                     style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, &quot;Courier New&quot;, Courier, monospace; line-height: 1.4; margin-top: 0px; margin-bottom: 0px; padding: 12px; overflow: auto; color: rgb(64, 64, 64); text-align: start;">0x300000</xhtml:pre>
 +                </xhtml:div>
 +              </xhtml:div>
 +            </xhtml:div>
@@ -430,12 +465,12 @@ index 00000000000..382867c6f4f
 +             font-family="Helvetica"
 +             font-size="12px"
 +             text-anchor="end"
-+             id="text75">0x280000</text>
++             id="text28571">0x300000</text>
 +        </switch>
 +      </g>
 +    </g>
 +    <g
-+       id="g85">
++       id="g28581">
 +      <rect
 +         x="120"
 +         y="135"
@@ -444,15 +479,15 @@ index 00000000000..382867c6f4f
 +         fill="none"
 +         stroke="rgb(0, 0, 0)"
 +         pointer-events="all"
-+         id="rect83" />
++         id="rect28579" />
 +    </g>
 +    <g
-+       id="g93">
++       id="g28589">
 +      <g
 +         transform="translate(-0.5 -0.5)"
-+         id="g91">
++         id="g28587">
 +        <switch
-+           id="switch89">
++           id="switch28585">
 +          <foreignObject
 +             pointer-events="none"
 +             width="100%"
@@ -476,12 +511,12 @@ index 00000000000..382867c6f4f
 +             font-family="Helvetica"
 +             font-size="12px"
 +             text-anchor="middle"
-+             id="text87">ospi.env(128K)</text>
++             id="text28583">ospi.env(128K)</text>
 +        </switch>
 +      </g>
 +    </g>
 +    <g
-+       id="g97">
++       id="g28593">
 +      <rect
 +         x="0"
 +         y="125"
@@ -490,15 +525,15 @@ index 00000000000..382867c6f4f
 +         fill="none"
 +         stroke="none"
 +         pointer-events="all"
-+         id="rect95" />
++         id="rect28591" />
 +    </g>
 +    <g
-+       id="g105">
++       id="g28601">
 +      <g
 +         transform="translate(-0.5 -0.5)"
-+         id="g103">
++         id="g28599">
 +        <switch
-+           id="switch101">
++           id="switch28597">
 +          <foreignObject
 +             pointer-events="none"
 +             width="100%"
@@ -513,7 +548,7 @@ index 00000000000..382867c6f4f
 +                <xhtml:div
 +                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
 +                  <xhtml:pre
-+                     style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, &quot;Courier New&quot;, Courier, monospace; line-height: 1.4; margin-top: 0px; margin-bottom: 0px; padding: 12px; overflow: auto; color: rgb(64, 64, 64); text-align: start;">0x680000</xhtml:pre>
++                     style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, &quot;Courier New&quot;, Courier, monospace; line-height: 1.4; margin-top: 0px; margin-bottom: 0px; padding: 12px; overflow: auto; color: rgb(64, 64, 64); text-align: start;">0x700000</xhtml:pre>
 +                </xhtml:div>
 +              </xhtml:div>
 +            </xhtml:div>
@@ -525,12 +560,12 @@ index 00000000000..382867c6f4f
 +             font-family="Helvetica"
 +             font-size="12px"
 +             text-anchor="end"
-+             id="text99">0x680000</text>
++             id="text28595">0x700000</text>
 +        </switch>
 +      </g>
 +    </g>
 +    <g
-+       id="g109">
++       id="g28605">
 +      <rect
 +         x="120"
 +         y="175"
@@ -539,15 +574,15 @@ index 00000000000..382867c6f4f
 +         fill="none"
 +         stroke="rgb(0, 0, 0)"
 +         pointer-events="all"
-+         id="rect107" />
++         id="rect28603" />
 +    </g>
 +    <g
-+       id="g117">
++       id="g28613">
 +      <g
 +         transform="translate(-0.5 -0.5)"
-+         id="g115">
++         id="g28611">
 +        <switch
-+           id="switch113">
++           id="switch28609">
 +          <foreignObject
 +             pointer-events="none"
 +             width="100%"
@@ -571,12 +606,12 @@ index 00000000000..382867c6f4f
 +             font-family="Helvetica"
 +             font-size="12px"
 +             text-anchor="middle"
-+             id="text111">ospi.env.backup(128K)</text>
++             id="text28607">ospi.env.backup(128K)</text>
 +        </switch>
 +      </g>
 +    </g>
 +    <g
-+       id="g121">
++       id="g28617">
 +      <rect
 +         x="0"
 +         y="165"
@@ -585,15 +620,15 @@ index 00000000000..382867c6f4f
 +         fill="none"
 +         stroke="none"
 +         pointer-events="all"
-+         id="rect119" />
++         id="rect28615" />
 +    </g>
 +    <g
-+       id="g129">
++       id="g28625">
 +      <g
 +         transform="translate(-0.5 -0.5)"
-+         id="g127">
++         id="g28623">
 +        <switch
-+           id="switch125">
++           id="switch28621">
 +          <foreignObject
 +             pointer-events="none"
 +             width="100%"
@@ -608,7 +643,7 @@ index 00000000000..382867c6f4f
 +                <xhtml:div
 +                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
 +                  <xhtml:pre
-+                     style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, &quot;Courier New&quot;, Courier, monospace; line-height: 1.4; margin-top: 0px; margin-bottom: 0px; padding: 12px; overflow: auto; color: rgb(64, 64, 64); text-align: start;">0x6A0000</xhtml:pre>
++                     style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, &quot;Courier New&quot;, Courier, monospace; line-height: 1.4; margin-top: 0px; margin-bottom: 0px; padding: 12px; overflow: auto; color: rgb(64, 64, 64); text-align: start;">0x720000</xhtml:pre>
 +                </xhtml:div>
 +              </xhtml:div>
 +            </xhtml:div>
@@ -620,12 +655,12 @@ index 00000000000..382867c6f4f
 +             font-family="Helvetica"
 +             font-size="12px"
 +             text-anchor="end"
-+             id="text123">0x6A0000</text>
++             id="text28619">0x720000</text>
 +        </switch>
 +      </g>
 +    </g>
 +    <g
-+       id="g133">
++       id="g28629">
 +      <rect
 +         x="120"
 +         y="215"
@@ -634,15 +669,15 @@ index 00000000000..382867c6f4f
 +         fill="none"
 +         stroke="rgb(0, 0, 0)"
 +         pointer-events="all"
-+         id="rect131" />
++         id="rect28627" />
 +    </g>
 +    <g
-+       id="g141">
++       id="g28637">
 +      <g
 +         transform="translate(-0.5 -0.5)"
-+         id="g139">
++         id="g28635">
 +        <switch
-+           id="switch137">
++           id="switch28633">
 +          <foreignObject
 +             pointer-events="none"
 +             width="100%"
@@ -655,7 +690,7 @@ index 00000000000..382867c6f4f
 +                 data-drawio-colors="color: rgb(0, 0, 0); "
 +                 style="box-sizing: border-box; font-size: 0px; text-align: center;">
 +                <xhtml:div
-+                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">padding(1280K)</xhtml:div>
++                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">padding(768K)</xhtml:div>
 +              </xhtml:div>
 +            </xhtml:div>
 +          </foreignObject>
@@ -666,12 +701,12 @@ index 00000000000..382867c6f4f
 +             font-family="Helvetica"
 +             font-size="12px"
 +             text-anchor="middle"
-+             id="text135">padding(1280K)</text>
++             id="text28631">padding(768K)</text>
 +        </switch>
 +      </g>
 +    </g>
 +    <g
-+       id="g145">
++       id="g28641">
 +      <rect
 +         x="0"
 +         y="205"
@@ -680,15 +715,15 @@ index 00000000000..382867c6f4f
 +         fill="none"
 +         stroke="none"
 +         pointer-events="all"
-+         id="rect143" />
++         id="rect28639" />
 +    </g>
 +    <g
-+       id="g153">
++       id="g28649">
 +      <g
 +         transform="translate(-0.5 -0.5)"
-+         id="g151">
++         id="g28647">
 +        <switch
-+           id="switch149">
++           id="switch28645">
 +          <foreignObject
 +             pointer-events="none"
 +             width="100%"
@@ -703,7 +738,7 @@ index 00000000000..382867c6f4f
 +                <xhtml:div
 +                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
 +                  <xhtml:pre
-+                     style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, &quot;Courier New&quot;, Courier, monospace; line-height: 1.4; margin-top: 0px; margin-bottom: 0px; padding: 12px; overflow: auto; color: rgb(64, 64, 64); text-align: start;">0x6C0000</xhtml:pre>
++                     style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, &quot;Courier New&quot;, Courier, monospace; line-height: 1.4; margin-top: 0px; margin-bottom: 0px; padding: 12px; overflow: auto; color: rgb(64, 64, 64); text-align: start;">0x740000</xhtml:pre>
 +                </xhtml:div>
 +              </xhtml:div>
 +            </xhtml:div>
@@ -715,12 +750,12 @@ index 00000000000..382867c6f4f
 +             font-family="Helvetica"
 +             font-size="12px"
 +             text-anchor="end"
-+             id="text147">0x6C0000</text>
++             id="text28643">0x740000</text>
 +        </switch>
 +      </g>
 +    </g>
 +    <g
-+       id="g157">
++       id="g28653">
 +      <rect
 +         x="120"
 +         y="255"
@@ -729,15 +764,15 @@ index 00000000000..382867c6f4f
 +         fill="none"
 +         stroke="rgb(0, 0, 0)"
 +         pointer-events="all"
-+         id="rect155" />
++         id="rect28651" />
 +    </g>
 +    <g
-+       id="g165">
++       id="g28661">
 +      <g
 +         transform="translate(-0.5 -0.5)"
-+         id="g163">
++         id="g28659">
 +        <switch
-+           id="switch161">
++           id="switch28657">
 +          <foreignObject
 +             pointer-events="none"
 +             width="100%"
@@ -761,12 +796,12 @@ index 00000000000..382867c6f4f
 +             font-family="Helvetica"
 +             font-size="12px"
 +             text-anchor="middle"
-+             id="text159">ospi.rootfs(UBIFS)</text>
++             id="text28655">ospi.rootfs(UBIFS)</text>
 +        </switch>
 +      </g>
 +    </g>
 +    <g
-+       id="g169">
++       id="g28665">
 +      <rect
 +         x="0"
 +         y="245"
@@ -775,15 +810,15 @@ index 00000000000..382867c6f4f
 +         fill="none"
 +         stroke="none"
 +         pointer-events="all"
-+         id="rect167" />
++         id="rect28663" />
 +    </g>
 +    <g
-+       id="g177">
++       id="g28673">
 +      <g
 +         transform="translate(-0.5 -0.5)"
-+         id="g175">
++         id="g28671">
 +        <switch
-+           id="switch173">
++           id="switch28669">
 +          <foreignObject
 +             pointer-events="none"
 +             width="100%"
@@ -810,12 +845,12 @@ index 00000000000..382867c6f4f
 +             font-family="Helvetica"
 +             font-size="12px"
 +             text-anchor="end"
-+             id="text171">0x800000</text>
++             id="text28667">0x800000</text>
 +        </switch>
 +      </g>
 +    </g>
 +    <g
-+       id="g181">
++       id="g28677">
 +      <rect
 +         x="120"
 +         y="295"
@@ -824,15 +859,15 @@ index 00000000000..382867c6f4f
 +         fill="none"
 +         stroke="rgb(0, 0, 0)"
 +         pointer-events="all"
-+         id="rect179" />
++         id="rect28675" />
 +    </g>
 +    <g
-+       id="g189">
++       id="g28685">
 +      <g
 +         transform="translate(-0.5 -0.5)"
-+         id="g187">
++         id="g28683">
 +        <switch
-+           id="switch185">
++           id="switch28681">
 +          <foreignObject
 +             pointer-events="none"
 +             width="100%"
@@ -856,12 +891,12 @@ index 00000000000..382867c6f4f
 +             font-family="Helvetica"
 +             font-size="12px"
 +             text-anchor="middle"
-+             id="text183">ospi.phypattern(256k)</text>
++             id="text28679">ospi.phypattern(256k)</text>
 +        </switch>
 +      </g>
 +    </g>
 +    <g
-+       id="g193">
++       id="g28689">
 +      <rect
 +         x="0"
 +         y="285"
@@ -870,15 +905,15 @@ index 00000000000..382867c6f4f
 +         fill="none"
 +         stroke="none"
 +         pointer-events="all"
-+         id="rect191" />
++         id="rect28687" />
 +    </g>
 +    <g
-+       id="g201">
++       id="g28697">
 +      <g
 +         transform="translate(-0.5 -0.5)"
-+         id="g199">
++         id="g28695">
 +        <switch
-+           id="switch197">
++           id="switch28693">
 +          <foreignObject
 +             pointer-events="none"
 +             width="100%"
@@ -905,58 +940,12 @@ index 00000000000..382867c6f4f
 +             font-family="Helvetica"
 +             font-size="12px"
 +             text-anchor="end"
-+             id="text195">0x3FC0000</text>
++             id="text28691">0x3FC0000</text>
 +        </switch>
 +      </g>
 +    </g>
 +  </g>
 +</svg>
-diff --git a/doc/board/ti/j784s4_evm.rst b/doc/board/ti/j784s4_evm.rst
-index 5c4bd2c927d..2ffec3dbd3b 100644
---- a/doc/board/ti/j784s4_evm.rst
-+++ b/doc/board/ti/j784s4_evm.rst
-@@ -153,6 +153,31 @@ Image formats
- .. image:: img/dm_tispl.bin.svg
-     :alt: tispl.bin format
- 
-+OSPI:
-+-----
-+ROM supports booting from OSPI from offset 0x0.
-+
-+Flashing images to OSPI NOR:
-+
-+Below commands can be used to download tiboot3.bin, tispl.bin, and
-+u-boot.img over tftp and then flash those to OSPI at their respective
-+addresses.
-+
-+.. prompt:: bash =>
-+
-+  sf probe
-+  tftp ${loadaddr} tiboot3.bin
-+  sf update $loadaddr 0x0 $filesize
-+  tftp ${loadaddr} tispl.bin
-+  sf update $loadaddr 0x80000 $filesize
-+  tftp ${loadaddr} u-boot.img
-+  sf update $loadaddr 0x280000 $filesize
-+
-+Flash layout for OSPI NOR:
-+
-+.. image:: img/ospi_sysfw3.svg
-+  :alt: OSPI NOR flash partition layout
-+
- R5 Memory Map
- -------------
- 
-@@ -262,6 +287,9 @@ section.
-    * - SD
-      - 0000
- 
-+   * - OSPI
-+     - 0010
-+
-    * - EMMC
-      - 0110
- 
 -- 
 2.34.1
 
