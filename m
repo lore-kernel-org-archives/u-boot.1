@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9522AC27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 16:39:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49400C27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 16:39:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0AC388A75;
-	Fri, 14 Jun 2024 18:36:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5489688A7A;
+	Fri, 14 Jun 2024 18:36:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="AFg0hmB5";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Mcx47Bch";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0DF1D88A1C; Fri, 14 Jun 2024 18:36:15 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 7661988A15; Fri, 14 Jun 2024 18:36:15 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38A9488A44
+ by phobos.denx.de (Postfix) with ESMTPS id A2AAA88A49
  for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 18:36:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45EGZsRV013683;
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45EGZsqU008073;
  Fri, 14 Jun 2024 11:35:54 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1718382954;
- bh=H1ThedY23Yjw8L7Pvg4Foa7GrtQLxOTrQ9NYtNWGolk=;
+ bh=U4LyT66MUqBqCecXgys7381WQ6a2zzwZoajImUe6fTE=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=AFg0hmB5tEv8umA5ySHmluvFD5YrocgwOeUvndXkjBiCuS/56t126mscy7+iYmmEA
- ws3T5pE/UVOK7VBVl7qWzLxrpPeyiZ0nH1emlV7T+vSfjNFOjd4GUE90c4DlcgxiO8
- TxoD4UhCDyXzM+mz9hXO0Ztjmbpht84+nnA9oP20=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45EGZsqL083872
+ b=Mcx47BchhYF7eQt6YIeiBKDtdLl7ycgIyomONjbe0gvO3HeP5a7pEJxwUW66k/RUa
+ UQyaZtUXWoLYYLTWAuc9yo/ZlWo2S64HF+iDM+asEyOhNHA5PKINEiUd+S1yrzD9lo
+ gd8iz+qRRNDxN65aKKSZs1RCJsobb9bLgSuJp5eA=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45EGZsHM083862
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Fri, 14 Jun 2024 11:35:54 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 14
- Jun 2024 11:35:54 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2024 11:35:53 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 14 Jun 2024 11:35:54 -0500
+ Frontend Transport; Fri, 14 Jun 2024 11:35:53 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45EGZski027222;
- Fri, 14 Jun 2024 11:35:54 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45EGZrAu027205;
+ Fri, 14 Jun 2024 11:35:53 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Heinrich Schuchardt
@@ -67,9 +67,9 @@ To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ilias Apalodimas
  <ilias.apalodimas@linaro.org>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH v7 20/24] configs: beagleboneai64: Enable EFI capsule update
-Date: Fri, 14 Jun 2024 11:35:47 -0500
-Message-ID: <20240614163551.2610212-21-j-humphreys@ti.com>
+Subject: [PATCH v7 12/24] configs: beagleplay: Enable EFI capsule update
+Date: Fri, 14 Jun 2024 11:35:39 -0500
+Message-ID: <20240614163551.2610212-13-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240614163551.2610212-1-j-humphreys@ti.com>
 References: <20240614163551.2610212-1-j-humphreys@ti.com>
@@ -97,19 +97,19 @@ Enable on disk, raw capsule update.
 
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- configs/j721e_beagleboneai64_a72_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
+ configs/am62x_beagleplay_a53_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/configs/j721e_beagleboneai64_a72_defconfig b/configs/j721e_beagleboneai64_a72_defconfig
-index a354876f8c2..86c565a9211 100644
---- a/configs/j721e_beagleboneai64_a72_defconfig
-+++ b/configs/j721e_beagleboneai64_a72_defconfig
-@@ -172,3 +172,5 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0x6163
- CONFIG_SPL_DFU=y
+diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
+index dbdbaf98348..18f6f8865b5 100644
+--- a/configs/am62x_beagleplay_a53_defconfig
++++ b/configs/am62x_beagleplay_a53_defconfig
+@@ -125,4 +125,5 @@ CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
  CONFIG_LZO=y
  CONFIG_EFI_SET_TIME=y
-+
+ 
 +#include <configs/k3_efi_capsule.config>
+ #include <configs/am62x_a53_usbdfu.config>
 -- 
 2.34.1
 
