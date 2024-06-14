@@ -4,73 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75F95C27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 12:56:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24CF6C27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 14:00:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6AD1889FF;
-	Fri, 14 Jun 2024 14:56:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 17589889ED;
+	Fri, 14 Jun 2024 16:00:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ZjmdX8d+";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id F20D1889F7; Fri, 14 Jun 2024 14:56:11 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1718373638;
+	bh=gGdoFSOWi/ZD8wwPN09pkI1El/Edww9RyaOk5FlLEhw=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=son0Iac8Sb85OLnxg26lOE2H9QY4yZBNKKvi+Gly9giwELmPBhK6vD9L/EFcX8I6D
+	 hxQH2YH3SdwECYtnj2eU9CwMXY7LQbRw1Q75tt8+gv+NK90t8wDu2hFF6vkgKsVVZ9
+	 nIZ8p9Z2Vd2lw/jaAva8LgFomQgHI8jROo1phhznIaaUOHVkvLKUiw1RutCJViGY4X
+	 +6oPrPNkkrLkE5qjH8X9DKlVoWCY+NpFJI09OPJyAMw+hyyVYRXADnMexF1FBtI7r9
+	 EKwpO6PFA7CN75S9o0TlD6neVw5nik4kHkX5pSB7nARrfNiRPtuTH25gVys79rJXOI
+	 ccz2ZJbUP2+Fw==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0E2988A00
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 14:56:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=6895721e93=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45E8REe3015661;
- Fri, 14 Jun 2024 14:56:08 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=selector1; bh=uBBWfijVmTi8IiEV1pe3Ua
- 722q08Ybn7fKDA13vbftA=; b=ZjmdX8d+fy75Gm40Arhun5PAqoXXen65GDif1z
- iafHDFwCRvsHJff0KOAuAA7LtsIdNROTXHvagef4tjfbKrVybN1RJOWcKl7lB9uU
- SB+opd6Eg0Cd4RPdlRayiHkYD/sVNhjEfwrAoS/ZtI8O+0zFOQajd2gecjcdiILN
- P0DBFbCAGvNuC1UarL1QB/bi/uP5SNcOkMvlpKi8RbE6472NTD/6h/I9Em94U9/Y
- /+feZImYf8JVCNvx6sI7nMnj46+B/AWRVCEZ7l+G7HwZ2uOfnvf25eNuF1G6Mxso
- t3BLU3n3H0tXnKdbW0yPTuGIGizdI1wCzY2aquNSVkMBkDWg==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3ypbp50v8n-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 14 Jun 2024 14:56:07 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id B15864002D;
- Fri, 14 Jun 2024 14:56:03 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6460921455D;
- Fri, 14 Jun 2024 14:55:51 +0200 (CEST)
-Received: from [10.252.18.60] (10.252.18.60) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Fri, 14 Jun
- 2024 14:55:50 +0200
-Message-ID: <dcc64193-dc12-4deb-9224-48e60cee887c@foss.st.com>
-Date: Fri, 14 Jun 2024 14:55:50 +0200
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id CB5D9889E1;
+ Fri, 14 Jun 2024 16:00:35 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1718373636;
+ bh=gGdoFSOWi/ZD8wwPN09pkI1El/Edww9RyaOk5FlLEhw=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=BDbV2XCQJ7kPwInzNY7RWkq1tfF/YEmlt5j++3YzdU4GluyCQBcv9DRSvVQ21BPER
+ kw9uD5dUxgjPVqfv1CfCKNzMkThDouwuWHYlR9mBwEvNyUJW1NXyarhU3UBPaRCgz+
+ x3kLqDNMqTGL3GrbZcNcMx2D+zdEURL23zMuPaqYCa7UVaG5UMXn+M8tKYEMizqeyF
+ Ukc0oNH/vZdPsYc0Op2mjWnwfD+GoUD3F5oNgEAYFzcaKUCSS7C1Rf3dnvLE/qeOG4
+ PqUy81CTonSpxJem7jfTAaiLtyF4nBkhY230xT0Oztx6rHzcjp7G+9gD1RAKzb9fK1
+ uPasCbtSkVgXw==
+Message-ID: <ca3c6071-2adf-452b-b4af-574fa57443f9@denx.de>
+Date: Fri, 14 Jun 2024 15:06:18 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] ARM: stm32: Ping IWDG on exit from PSCI suspend code
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
+Cc: Igor Opaniuk <igor.opaniuk@foundries.io>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@dh-electronics.com, uboot-stm32@st-md-mailman.stormreply.com
+References: <20240419220331.277574-1-marex@denx.de>
+ <433560cb-8d8a-4db4-bc9b-d49a05da127b@foss.st.com>
 Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Subject: [PULL] Pull request for u-boot master / v2024.07 =
- u-boot-stm32-20240614
-To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-CC: patrick DELAUNAY <patrick.delaunay@foss.st.com>, Marek Vasut
- <marex@denx.de>, <patrice.chotard@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <433560cb-8d8a-4db4-bc9b-d49a05da127b@foss.st.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.252.18.60]
-X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-06-14_10,2024-06-14_03,2024-05-17_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,37 +72,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
+On 6/14/24 2:00 PM, Patrice CHOTARD wrote:
+> 
+> 
+> On 4/20/24 00:03, Marek Vasut wrote:
+>> Make sure the OS would not get any spurious IWDG pretimeout IRQ
+>> right after the system wakes up. This may happen in case the SoC
+>> got woken up by another source than the IWDG pretimeout and the
+>> pretimeout IRQ arrived immediately afterward, but too late to be
+>> handled by the suspend main loop. In case either of the IWDG is
+>> enabled, ping it first and then return to the OS.
+>>
+>> Signed-off-by: Marek Vasut <marex@denx.de>
+>> ---
+>> Cc: Igor Opaniuk <igor.opaniuk@foundries.io>
+>> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+>> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>> Cc: Simon Glass <sjg@chromium.org>
+>> Cc: Tom Rini <trini@konsulko.com>
+>> Cc: u-boot@dh-electronics.com
+>> Cc: uboot-stm32@st-md-mailman.stormreply.com
+>> ---
+>>   arch/arm/mach-stm32mp/stm32mp1/psci.c | 21 +++++++++++++++++++++
+>>   1 file changed, 21 insertions(+)
+>>
+>> diff --git a/arch/arm/mach-stm32mp/stm32mp1/psci.c b/arch/arm/mach-stm32mp/stm32mp1/psci.c
+>> index 4f2379df45f..e99103910d9 100644
+>> --- a/arch/arm/mach-stm32mp/stm32mp1/psci.c
+>> +++ b/arch/arm/mach-stm32mp/stm32mp1/psci.c
+>> @@ -808,6 +808,27 @@ void __secure psci_system_suspend(u32 __always_unused function_id,
+>>   	writel(SYSCFG_CMPENR_MPUEN, STM32_SYSCFG_BASE + SYSCFG_CMPENSETR);
+>>   	clrbits_le32(STM32_SYSCFG_BASE + SYSCFG_CMPCR, SYSCFG_CMPCR_SW_CTRL);
+>>   
+>> +	/*
+>> +	 * Make sure the OS would not get any spurious IWDG pretimeout IRQ
+>> +	 * right after the system wakes up. This may happen in case the SoC
+>> +	 * got woken up by another source than the IWDG pretimeout and the
+>> +	 * pretimeout IRQ arrived immediately afterward, but too late to be
+>> +	 * handled by the main loop above. In case either of the IWDG is
+>> +	 * enabled, ping it first and then return to the OS.
+>> +	 */
+>> +
+>> +	/* Ping IWDG1 and ACK pretimer IRQ */
+>> +	if (gic_enabled[4] & BIT(22)) {
+>> +		writel(IWDG_KR_RELOAD_KEY, STM32_IWDG1_BASE + IWDG_KR);
+>> +		writel(IWDG_EWCR_EWIC, STM32_IWDG1_BASE + IWDG_EWCR);
+>> +	}
+>> +
+>> +	/* Ping IWDG2 and ACK pretimer IRQ */
+>> +	if (gic_enabled[4] & BIT(23)) {
+>> +		writel(IWDG_KR_RELOAD_KEY, STM32_IWDG2_BASE + IWDG_KR);
+>> +		writel(IWDG_EWCR_EWIC, STM32_IWDG2_BASE + IWDG_EWCR);
+>> +	}
+>> +
+>>   	/*
+>>   	 * The system has resumed successfully. Rewrite LR register stored
+>>   	 * on stack with 'ep' value, so that on return from this PSCI call,
+> Applied to u-boot-stm32/next
 
-Please pull the STM32 related fixes for u-boot/master, v2024.07: u-boot-stm32-20240614
-
-CI status: https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/21116
-
-The following changes since commit ca6a992e09441d6cca73439c63c3735f86b36ea4:
-
-  cmd: sound: fix help text (2024-06-13 09:31:56 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm32-20240614
-
-for you to fetch changes up to 55df13d930f4f191f458a6454f4b8e614e19c215:
-
-  ARM: stm32: Fix livetree conversion on STM32MP15xx DHSOM (2024-06-14 13:25:06 +0200)
-
-----------------------------------------------------------------
-STM32MP1:
- _ Fix spl compilation warning
- _ Fix optee_get_reserved_memory()
- _ Fix livetree conversion on STM32MP15xx DHSOM
-
-----------------------------------------------------------------
-Marek Vasut (1):
-      ARM: stm32: Fix livetree conversion on STM32MP15xx DHSOM
-
-Patrice Chotard (2):
-      stm32mp1: spl: Fix compilation warnings
-      stm32mp1: spl: Update optee_get_reserved_memory() return value
-
- arch/arm/mach-stm32mp/stm32mp1/spl.c    |  4 ++--
- board/dhelectronics/dh_stm32mp1/board.c | 15 +++++++++++++--
+This is a fix, should go into /master .
