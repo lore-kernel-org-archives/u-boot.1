@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02993C27C6E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 12:44:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6F30C27C6E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Jun 2024 12:45:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6563E889DB;
-	Fri, 14 Jun 2024 14:44:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C6BDF889E3;
+	Fri, 14 Jun 2024 14:44:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UgQemgDD";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cIBj3NT0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A472B889DF; Fri, 14 Jun 2024 14:44:52 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 31EA5889D9; Fri, 14 Jun 2024 14:44:53 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A66A889D8
- for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 14:44:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B0ACF889DA
+ for <u-boot@lists.denx.de>; Fri, 14 Jun 2024 14:44:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-choudhary@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45ECiiZp125643;
- Fri, 14 Jun 2024 07:44:44 -0500
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45ECik4t070891;
+ Fri, 14 Jun 2024 07:44:46 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1718369084;
- bh=2i03Ocg5klrmqfHO6dpvXGSbjONKfcL94OqEQi6eAFk=;
- h=From:To:CC:Subject:Date;
- b=UgQemgDD3t8gAq3ZGge1mFgQ1gJEbv6jCsYT6amA6qJ8mzC5CRWovezm+NNX8Ae4K
- zlYx/Y5czAQhpzGmtlfF9tXfJuaAAFDSpPy0gZMPcUHHlfJOuH85PNtB+YJ/k7qB19
- xSOprSVCli2CPZlplAkJLAG6zj0yphiI4ro9HqZA=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45ECiirK054618
+ s=ti-com-17Q1; t=1718369086;
+ bh=plGMdfHbCkvK/7b7g54vg/sPcDgoprYw4O4p8UR9TW4=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=cIBj3NT0QTZOmSiW783mD4r3BNvGdynbamgPze6sQLwgM4ZoKRUtb+RPmvHIkHH6+
+ Ow18EMHUOdGzvxYVv2Mm4M968YIBqggSg4vO6MHinpXG02VqkSKfzspm1kH2z9zR8d
+ aGFjd9/yTMS8DhYFILkm4fLnqmpDDYnDyX9L8SSk=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45ECijxB032510
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 14 Jun 2024 07:44:44 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 14 Jun 2024 07:44:46 -0500
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 14
- Jun 2024 07:44:44 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2024 07:44:45 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 14 Jun 2024 07:44:44 -0500
+ Frontend Transport; Fri, 14 Jun 2024 07:44:45 -0500
 Received: from localhost (jayesh-hp-probook-440-g8-notebook-pc.dhcp.ti.com
  [172.24.227.55])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45ECih7h047237;
- Fri, 14 Jun 2024 07:44:43 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45ECiiHn014635;
+ Fri, 14 Jun 2024 07:44:45 -0500
 From: Jayesh Choudhary <j-choudhary@ti.com>
 To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <u-kumar1@ti.com>,
  <a-bhatia1@ti.com>, <afd@ti.com>, <j-choudhary@ti.com>
@@ -59,10 +59,13 @@ CC: <n-francis@ti.com>, <nm@ti.com>, <joao.goncalves@toradex.com>,
  <bb@ti.com>, <seanga2@gmail.com>, <sjg@chromium.org>,
  <clamor95@gmail.com>, <martyn.welch@collabora.com>,
  <m-chawdhry@ti.com>, <a-limaye@ti.com>, <sebin.francis@ti.com>
-Subject: [PATCH v2 0/8] Enable QoS for DSS on J7 family of TI SoCs
-Date: Fri, 14 Jun 2024 18:14:34 +0530
-Message-ID: <20240614124442.178280-1-j-choudhary@ti.com>
+Subject: [PATCH v2 1/8] arm: mach-k3: am62a_qos: Move common bit MACROS to
+ k3_qos header file
+Date: Fri, 14 Jun 2024 18:14:35 +0530
+Message-ID: <20240614124442.178280-2-j-choudhary@ti.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20240614124442.178280-1-j-choudhary@ti.com>
+References: <20240614124442.178280-1-j-choudhary@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -83,75 +86,186 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello All,
-This series adds the QoS for DSS on J721E, J721S2 and J784S4 family of
-SoCs.
+QoS bit mapping are common across all K3 SoCs so move those defines
+to common header file (k3_qos.h).
+This ensures that we do not define these for each SoC.
 
-Before adding the support, cleanup is done for AM62A QoS support[0]
-and common bit mask defines are moved to the common file so that they
-are not defined every time we add QoS support for a new K3 platform.
+Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
+---
+ arch/arm/mach-k3/include/mach/k3-qos.h | 74 ++++++++++++++++++++++++++
+ arch/arm/mach-k3/r5/am62ax/am62a_qos.h | 74 --------------------------
+ 2 files changed, 74 insertions(+), 74 deletions(-)
 
-Further, to simplify the logic, macros are used to populate the value
-of registers and values as suggested by Andrew[1]
-
-Before adding QoS support, we need to map the ORDERID to the traffic
-type (RT/NRT) in J7 platforms.
-On J721E, ORDERID 0-7 and 8-15 are two groups which needs to be mapped.
-We are mapping 0-7 to NRT and 8-15 ORDERID as RT for both NAVSS0_NBSS_NB0
-and NAVSS0_NBSS_NB1
-On J721S2 and J784S4, we have 3 groups, 0-3, 4-9, 10-15. Here we are
-mapping first two groups as NRT and 10-15 as RT for both NAVSS0_NBSS_NB0
-and NAVSS0_NBSS_NB1.
-
-Changelog v1->v2:
-- Simplify the logic to populate values[1]
-- Remove ASEL type which is to be taken up separately as suggested in [2]
-
-v1 patch link:
-<https://patchwork.ozlabs.org/project/uboot/list/?series=407729&state=%2A&archive=both>
-
-[0]: https://lore.kernel.org/all/20230414072725.8802-1-a-bhatia1@ti.com/
-[1]: https://patchwork.ozlabs.org/project/uboot/patch/20240522113726.302908-2-j-choudhary@ti.com/#3315446
-[2]: https://patchwork.ozlabs.org/project/uboot/patch/20240522113726.302908-3-j-choudhary@ti.com/#3315467
-
-
-Jayesh Choudhary (8):
-  arm: mach-k3: am62a_qos: Move common bit MACROS to k3_qos header file
-  arm: mach-k3: am62a: Simplify the logic for QOS reg and val
-    propagation
-  arm: mach-k3: j721e: Enable QoS for DSS
-  arm: mach-k3: j721s2: Enable QoS for DSS
-  arm: mach-k3: j784s4: Enable QoS for DSS
-  configs: j721e_evm_r5_defconfig: Enable CONFIG_K3_QOS
-  configs: j721s2_evm_r5_defconfig: Enable CONFIG_K3_QOS
-  configs: j784s4_evm_r5_defconfig: Enable CONFIG_K3_QOS
-
- arch/arm/mach-k3/include/mach/k3-qos.h        |  20 +++
- arch/arm/mach-k3/j721e/j721e_init.c           |  28 ++++
- arch/arm/mach-k3/j721s2/j721s2_init.c         |  30 +++++
- arch/arm/mach-k3/j784s4/j784s4_init.c         |  30 +++++
- arch/arm/mach-k3/r5/am62ax/am62a_qos.h        |  74 ----------
- arch/arm/mach-k3/r5/am62ax/am62a_qos_uboot.c  |  24 ++--
- arch/arm/mach-k3/r5/j721e/Makefile            |   1 +
- arch/arm/mach-k3/r5/j721e/j721e_qos.h         |  96 +++++++++++++
- arch/arm/mach-k3/r5/j721e/j721e_qos_uboot.c   | 126 ++++++++++++++++++
- arch/arm/mach-k3/r5/j721s2/Makefile           |   1 +
- arch/arm/mach-k3/r5/j721s2/j721s2_qos.h       |  79 +++++++++++
- arch/arm/mach-k3/r5/j721s2/j721s2_qos_uboot.c | 110 +++++++++++++++
- arch/arm/mach-k3/r5/j784s4/Makefile           |   1 +
- arch/arm/mach-k3/r5/j784s4/j784s4_qos.h       |  83 ++++++++++++
- arch/arm/mach-k3/r5/j784s4/j784s4_qos_uboot.c | 110 +++++++++++++++
- configs/j721e_evm_r5_defconfig                |   1 +
- configs/j721s2_evm_r5_defconfig               |   1 +
- configs/j784s4_evm_r5_defconfig               |   1 +
- 18 files changed, 730 insertions(+), 86 deletions(-)
- create mode 100644 arch/arm/mach-k3/r5/j721e/j721e_qos.h
- create mode 100644 arch/arm/mach-k3/r5/j721e/j721e_qos_uboot.c
- create mode 100644 arch/arm/mach-k3/r5/j721s2/j721s2_qos.h
- create mode 100644 arch/arm/mach-k3/r5/j721s2/j721s2_qos_uboot.c
- create mode 100644 arch/arm/mach-k3/r5/j784s4/j784s4_qos.h
- create mode 100644 arch/arm/mach-k3/r5/j784s4/j784s4_qos_uboot.c
-
+diff --git a/arch/arm/mach-k3/include/mach/k3-qos.h b/arch/arm/mach-k3/include/mach/k3-qos.h
+index e00e1de5b9..6ed5704803 100644
+--- a/arch/arm/mach-k3/include/mach/k3-qos.h
++++ b/arch/arm/mach-k3/include/mach/k3-qos.h
+@@ -9,6 +9,80 @@
+ 
+ #include <linux/kernel.h>
+ 
++#define QOS_0	(0 << 0)
++#define QOS_1	(1 << 0)
++#define QOS_2	(2 << 0)
++#define QOS_3	(3 << 0)
++#define QOS_4	(4 << 0)
++#define QOS_5	(5 << 0)
++#define QOS_6	(6 << 0)
++#define QOS_7	(7 << 0)
++
++#define ORDERID_0	(0 << 4)
++#define ORDERID_1	(1 << 4)
++#define ORDERID_2	(2 << 4)
++#define ORDERID_3	(3 << 4)
++#define ORDERID_4	(4 << 4)
++#define ORDERID_5	(5 << 4)
++#define ORDERID_6	(6 << 4)
++#define ORDERID_7	(7 << 4)
++#define ORDERID_8	(8 << 4)
++#define ORDERID_9	(9 << 4)
++#define ORDERID_10	(10 << 4)
++#define ORDERID_11	(11 << 4)
++#define ORDERID_12	(12 << 4)
++#define ORDERID_13	(13 << 4)
++#define ORDERID_14	(14 << 4)
++#define ORDERID_15	(15 << 4)
++
++#define ASEL_0	(0 << 8)
++#define ASEL_1	(1 << 8)
++#define ASEL_2	(2 << 8)
++#define ASEL_3	(3 << 8)
++#define ASEL_4	(4 << 8)
++#define ASEL_5	(5 << 8)
++#define ASEL_6	(6 << 8)
++#define ASEL_7	(7 << 8)
++#define ASEL_8	(8 << 8)
++#define ASEL_9	(9 << 8)
++#define ASEL_10	(10 << 8)
++#define ASEL_11	(11 << 8)
++#define ASEL_12	(12 << 8)
++#define ASEL_13	(13 << 8)
++#define ASEL_14	(14 << 8)
++#define ASEL_15	(15 << 8)
++
++#define EPRIORITY_0	(0 << 12)
++#define EPRIORITY_1	(1 << 12)
++#define EPRIORITY_2	(2 << 12)
++#define EPRIORITY_3	(3 << 12)
++#define EPRIORITY_4	(4 << 12)
++#define EPRIORITY_5	(5 << 12)
++#define EPRIORITY_6	(6 << 12)
++#define EPRIORITY_7	(7 << 12)
++
++#define VIRTID_0	(0 << 16)
++#define VIRTID_1	(1 << 16)
++#define VIRTID_2	(2 << 16)
++#define VIRTID_3	(3 << 16)
++#define VIRTID_4	(4 << 16)
++#define VIRTID_5	(5 << 16)
++#define VIRTID_6	(6 << 16)
++#define VIRTID_7	(7 << 16)
++#define VIRTID_8	(8 << 16)
++#define VIRTID_9	(9 << 16)
++#define VIRTID_10	(10 << 16)
++#define VIRTID_11	(11 << 16)
++#define VIRTID_12	(12 << 16)
++#define VIRTID_13	(13 << 16)
++#define VIRTID_14	(14 << 16)
++#define VIRTID_15	(15 << 16)
++
++#define ATYPE_0	(0 << 28)
++#define ATYPE_1	(1 << 28)
++#define ATYPE_2	(2 << 28)
++#define ATYPE_3	(3 << 28)
++
+ struct k3_qos_data {
+ 	u32 reg;
+ 	u32 val;
+diff --git a/arch/arm/mach-k3/r5/am62ax/am62a_qos.h b/arch/arm/mach-k3/r5/am62ax/am62a_qos.h
+index c74d69a28f..84a6dc7240 100644
+--- a/arch/arm/mach-k3/r5/am62ax/am62a_qos.h
++++ b/arch/arm/mach-k3/r5/am62ax/am62a_qos.h
+@@ -6,80 +6,6 @@
+  * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
+  */
+ 
+-#define QOS_0	(0 << 0)
+-#define QOS_1	(1 << 0)
+-#define QOS_2	(2 << 0)
+-#define QOS_3	(3 << 0)
+-#define QOS_4	(4 << 0)
+-#define QOS_5	(5 << 0)
+-#define QOS_6	(6 << 0)
+-#define QOS_7	(7 << 0)
+-
+-#define ORDERID_0	(0 << 4)
+-#define ORDERID_1	(1 << 4)
+-#define ORDERID_2	(2 << 4)
+-#define ORDERID_3	(3 << 4)
+-#define ORDERID_4	(4 << 4)
+-#define ORDERID_5	(5 << 4)
+-#define ORDERID_6	(6 << 4)
+-#define ORDERID_7	(7 << 4)
+-#define ORDERID_8	(8 << 4)
+-#define ORDERID_9	(9 << 4)
+-#define ORDERID_10	(10 << 4)
+-#define ORDERID_11	(11 << 4)
+-#define ORDERID_12	(12 << 4)
+-#define ORDERID_13	(13 << 4)
+-#define ORDERID_14	(14 << 4)
+-#define ORDERID_15	(15 << 4)
+-
+-#define ASEL_0	(0 << 8)
+-#define ASEL_1	(1 << 8)
+-#define ASEL_2	(2 << 8)
+-#define ASEL_3	(3 << 8)
+-#define ASEL_4	(4 << 8)
+-#define ASEL_5	(5 << 8)
+-#define ASEL_6	(6 << 8)
+-#define ASEL_7	(7 << 8)
+-#define ASEL_8	(8 << 8)
+-#define ASEL_9	(9 << 8)
+-#define ASEL_10	(10 << 8)
+-#define ASEL_11	(11 << 8)
+-#define ASEL_12	(12 << 8)
+-#define ASEL_13	(13 << 8)
+-#define ASEL_14	(14 << 8)
+-#define ASEL_15	(15 << 8)
+-
+-#define EPRIORITY_0	(0 << 12)
+-#define EPRIORITY_1	(1 << 12)
+-#define EPRIORITY_2	(2 << 12)
+-#define EPRIORITY_3	(3 << 12)
+-#define EPRIORITY_4	(4 << 12)
+-#define EPRIORITY_5	(5 << 12)
+-#define EPRIORITY_6	(6 << 12)
+-#define EPRIORITY_7	(7 << 12)
+-
+-#define VIRTID_0	(0 << 16)
+-#define VIRTID_1	(1 << 16)
+-#define VIRTID_2	(2 << 16)
+-#define VIRTID_3	(3 << 16)
+-#define VIRTID_4	(4 << 16)
+-#define VIRTID_5	(5 << 16)
+-#define VIRTID_6	(6 << 16)
+-#define VIRTID_7	(7 << 16)
+-#define VIRTID_8	(8 << 16)
+-#define VIRTID_9	(9 << 16)
+-#define VIRTID_10	(10 << 16)
+-#define VIRTID_11	(11 << 16)
+-#define VIRTID_12	(12 << 16)
+-#define VIRTID_13	(13 << 16)
+-#define VIRTID_14	(14 << 16)
+-#define VIRTID_15	(15 << 16)
+-
+-#define ATYPE_0	(0 << 28)
+-#define ATYPE_1	(1 << 28)
+-#define ATYPE_2	(2 << 28)
+-#define ATYPE_3	(3 << 28)
+-
+ #define PULSAR_UL_WKUP_0_CPU0_RMST	0x45D14000
+ #define PULSAR_UL_WKUP_0_CPU0_WMST	0x45D14400
+ #define PULSAR_UL_WKUP_0_CPU0_PMST	0x45D14800
 -- 
 2.25.1
 
